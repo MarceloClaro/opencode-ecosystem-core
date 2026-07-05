@@ -611,3 +611,88 @@ class MarceloClaroOrchestrator:
         )
         manifest["folder"] = str(hub.folder)
         return manifest
+
+    # ==================================================================
+    # Ilustrações científicas (SPEC-018): Mermaid + Graphify + MIRA
+    # ==================================================================
+    def illustrate(self, production_folder: str,
+                   sections: Optional[Dict[str, str]] = None,
+                   outline: Optional[List[str]] = None) -> Dict[str, Any]:
+        """
+        Gera as ilustrações da produção científica na subpasta `ilustracoes/`:
+        diagrama Mermaid do outline (renderizado em PNG quando possível),
+        grafo de conhecimento Graphify (graph.html + GRAPH_REPORT.md) e
+        cards MIRA animados (metáforas visuais em loop perpetuo) por seção.
+        """
+        from pathlib import Path as _P
+        from illustrations import MermaidEngine, GraphifyEngine, MiraEngine
+        folder = _P(production_folder)
+        illus = folder / "ilustracoes"
+        report: Dict[str, Any] = {"folder": str(illus)}
+
+        # 1. Mermaid: estrutura lógica do manuscrito
+        me = MermaidEngine(output_dir=str(illus))
+        if outline and len(outline) >= 2:
+            fig = me.from_outline("Estrutura do Manuscrito", outline)
+            me.render(fig)
+            report["mermaid"] = fig.image_path or fig.mmd_path
+
+        # 2. Graphify: grafo de conhecimento (manuscrito + fichamentos)
+        texts: Dict[str, str] = dict(sections or {})
+        for md in list(folder.rglob("pesquisa/md/*.md"))[:6]:
+            try:
+                texts[md.stem] = md.read_text(encoding="utf-8", errors="ignore")[:20000]
+            except OSError:
+                continue
+        if texts:
+            ge = GraphifyEngine(output_dir=str(illus / "grafo"))
+            graph = ge.build(texts)
+            report["graphify"] = ge.export(graph)
+            report["graph_stats"] = {"nodes": len(graph.nodes), "edges": len(graph.edges)}
+
+        # 3. MIRA: metáforas animadas por seção
+        if sections:
+            mi = MiraEngine(output_dir=str(illus / "mira"))
+            cards = mi.illustrate_sections(sections)
+            report["mira_cards"] = [c.html_path for c in cards]
+
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"ilustrações da produção {folder.name[:60]}",
+            reflection=(
+                f"Ilustrações geradas: mermaid={bool(report.get('mermaid'))}, "
+                f"grafo={report.get('graph_stats')}, "
+                f"cards MIRA={len(report.get('mira_cards', []))}."
+            ),
+            score=0.8,
+        )
+        return report
+
+    def knowledge_graph(self, texts: Dict[str, str],
+                        output_dir: str = "ilustracoes/grafo") -> Dict[str, Any]:
+        """Constrói o grafo de conhecimento Graphify de textos arbitrários."""
+        from illustrations import GraphifyEngine
+        ge = GraphifyEngine(output_dir=output_dir)
+        graph = ge.build(texts)
+        paths = ge.export(graph)
+        return {"paths": paths, "nodes": len(graph.nodes), "edges": len(graph.edges)}
+
+    def hunt_figures(self, production_folder: str,
+                     papers_meta: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+        """
+        Extrai figuras reais dos PDFs da produção (`pesquisa/pdfs/`) para
+        `pesquisa/imagens/`, com catálogo FONTES.md (ABNT NBR 6023:2018 +
+        APA 7) e blocos LaTeX prontos com citação da fonte na legenda.
+        """
+        from research.figure_hunter import FigureHunter
+        hunter = FigureHunter()
+        figs = hunter.harvest_production(production_folder, papers_meta)
+        catalog = str(hunter.images_dir / "FONTES.md") if figs else ""
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"extração de figuras reais: {production_folder[:60]}",
+            reflection=f"{len(figs)} figuras extraídas com fonte ABNT/APA em {catalog or 'nenhuma'}.",
+            score=min(1.0, 0.5 + 0.1 * len(figs)),
+        )
+        return {"figuras": len(figs), "catalogo": catalog,
+                "imagens": [f.image_path for f in figs]}

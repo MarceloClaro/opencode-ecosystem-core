@@ -61,6 +61,7 @@ Todos os componentes e agentes do ecossistema operam estritamente sob as metodol
 - `mirofish/`: Enxame preditivo (Swarm Intelligence) e CrossValidator.
 - `publishing/`: Pipeline de pasta única (LaTeX, PDF, DOCX, ODT) e templates.
 - `research/`: Buscadores, download de PDFs, conversão PDF→MD e fichamentos ABNT/APA.
+- `illustrations/`: Geração de diagramas (Mermaid), grafos (Graphify) e animações (MIRA).
 - `specs/`: Especificações formais (SDD nativas e acervo de rastreabilidade original).
 - `agents/`: 134 agentes no total (incluindo catálogo de 130 especializados).
 - `examples/`: Scripts de demonstração end-to-end.
@@ -83,6 +84,7 @@ Veja a metacognição e a camada Transformer em ação:
 python3 examples/demo_full_ecosystem.py # Demo completa: Trust, Economy, MASWOS, Scanners, Quantum
 python3 examples/demo_publishing.py     # Demo: Pasta Única de Produção Científica (LaTeX/KDP)
 python3 examples/demo_research.py       # Demo: Busca, Extração Acadêmica e Fichamentos ABNT/APA
+python3 examples/demo_illustrations.py  # Demo: Diagramas, Grafo de Conhecimento e Cards MIRA
 python3 examples/demo_sdd_tdd.py        # Ciclo Red-Green-Refactor e Gate SDD Estrito
 python3 examples/demo_transformer.py    # Atenção, Pipeline Gerar-Revisar e HTM Memory
 python3 examples/demo_pipeline.py       # Fluxo MCI clássico (Blackboard + Reflexion)

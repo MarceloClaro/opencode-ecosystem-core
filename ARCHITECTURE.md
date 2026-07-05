@@ -40,6 +40,7 @@ graph TD
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         Publishing[Publishing<br>Modular LaTeX]
         Research[Research<br>Hub c/ OSINT]
+        Illus[Illustrations<br>Mermaid/MIRA/Graph]
     end
 
     %% Camada MCI

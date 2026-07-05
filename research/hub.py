@@ -33,6 +33,7 @@ from .downloader import PaperDownloader
 from .pdf2md import Pdf2Markdown
 from .fichamento import CitationFormatter, CriticalAnalyzer, FichamentoWriter
 from .osint import OsintLinkTree
+from .figure_hunter import FigureHunter
 
 logger = logging.getLogger("research.hub")
 
@@ -142,7 +143,10 @@ class ResearchHub:
         self._write_references(papers)
         self._write_repos(repos)
 
-        # 7. OSINT LinkTree: Analisar a "Dark Web" acadêmica das referências
+        # 7. Extração de figuras reais dos PDFs (com fonte ABNT/APA)
+        figures_report = self._hunt_figures(papers, pdf_by_key)
+
+        # 7b. OSINT LinkTree: Analisar a "Dark Web" acadêmica das referências
         refs_text = "\n".join(p.url for p in papers if p.url)
         osint_report = self.osint.analyze_references(refs_text)
         with open(self.pesquisa / "OSINT_REPORT.json", "w", encoding="utf-8") as f:
@@ -151,9 +155,32 @@ class ResearchHub:
         # 8. Manifest com checksums
         manifest = self._write_manifest(papers, repos, download_report,
                                         pdf_by_key, md_by_key,
-                                        fichamentos, resenhas)
+                                        fichamentos, resenhas,
+                                        figures_report)
         logger.info(f"[hub] pipeline concluído: {manifest['resumo']}")
         return manifest
+
+    # ------------------------------------------------------------------
+    def _hunt_figures(self, papers: List[PaperRecord],
+                      pdf_by_key: Dict[str, str]) -> Dict:
+        """Extrai figuras reais dos PDFs baixados, com fonte ABNT/APA."""
+        hunter = FigureHunter(str(self.pesquisa / "imagens"))
+        total = 0
+        for rec in papers:
+            pdf = pdf_by_key.get(rec.title)
+            if not pdf:
+                continue
+            meta = {
+                "authors": "; ".join(rec.authors) if rec.authors else "",
+                "year": rec.year or "",
+                "title": rec.title,
+                "doi": rec.doi or "",
+            }
+            figs = hunter.extract_from_pdf(pdf, meta)
+            total += len(figs)
+        catalog = hunter.write_catalog()
+        logger.info(f"[hub] {total} figuras reais extraídas → {catalog}")
+        return {"figuras_extraidas": total, "catalogo": catalog or ""}
 
     # ------------------------------------------------------------------
     def _write_references(self, papers: List[PaperRecord]) -> None:
@@ -208,7 +235,8 @@ class ResearchHub:
 
     # ------------------------------------------------------------------
     def _write_manifest(self, papers, repos, download_report,
-                        pdf_by_key, md_by_key, fichamentos, resenhas) -> Dict:
+                        pdf_by_key, md_by_key, fichamentos, resenhas,
+                        figures_report: Optional[Dict] = None) -> Dict:
         files = {}
         for p in sorted(self.pesquisa.rglob("*")):
             if p.is_file() and p.name != "RESEARCH_MANIFEST.json":
@@ -224,6 +252,7 @@ class ResearchHub:
                 "fichamentos": len(fichamentos),
                 "resenhas": len(resenhas),
                 "repositorios_datasets": len(repos),
+                "figuras_extraidas": (figures_report or {}).get("figuras_extraidas", 0),
             },
             "downloads": download_report,
             "normas": ["ABNT NBR 6023:2018", "ABNT NBR 10520:2023", "APA 7"],
