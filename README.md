@@ -1,6 +1,16 @@
 # OpenCode Ecosystem Core
 
-Bem-vindo ao **OpenCode Ecosystem Core**, uma versão limpa, portável e focada na orquestração metacognitiva do ecossistema OpenCode. Este repositório centraliza a operação no orquestrador `marceloclaro` e implementa a camada **Metacognitive Interconnect (MCI)**.
+Bem-vindo ao **OpenCode Ecosystem Core**, uma versão limpa, portável e focada na orquestração metacognitiva do ecossistema OpenCode. Este repositório centraliza a operação no orquestrador `marceloclaro` e implementa duas camadas de estado da arte: a **Metacognitive Interconnect (MCI)** e a **Transformer Layer**.
+
+## A Camada Transformer (Inspirada em Vaswani et al. e Google DeepMind)
+
+A orquestração do ecossistema mapeia conceitos da arquitetura Transformer diretamente para o fluxo multiagente. Esta camada foi inspirada nas pesquisas do [DeepMind](https://github.com/MarceloClaro/deepmind-research) e na equipe [Superhuman Reasoning](https://github.com/MarceloClaro/superhuman):
+
+- **Task Embedder**: Converte tarefas e capacidades de agentes em vetores densos (hashing de features d=64 com *positional encoding* senoidal).
+- **Attention Router (Multi-Head)**: Em vez de escolher agentes aleatoriamente, o orquestrador usa atenção com 4 "cabeças" (semântica, capacidade, confiança e carga) para rankear o agente ideal para a tarefa (inspirado no *Perceiver* e *PrediNet*).
+- **Transformer Pipeline**: Cada tarefa passa por um *encoder stack* com o ciclo **Gerar → Verificar → Revisar** (inspirado no agente *Aletheia* do DeepMind), com conexões residuais que preservam o histórico de correções.
+- **Grading Head**: Uma cabeça de avaliação que pontua saídas de 0 a 7 (inspirado no *IMO-GradingBench*).
+- **Hierarchical Memory**: Recuperação de memórias em dois níveis (atenção grossa sobre sumários de *chunks* e atenção fina sobre eventos), inspirado no *Hierarchical Transformer Memory (HTM)*.
 
 ## O que é a Metacognitive Interconnect (MCI)?
 
@@ -15,6 +25,7 @@ A MCI é composta por:
 ## Estrutura do Repositório
 
 - `marceloclaro/`: O orquestrador central e seu CLI interativo.
+- `transformer/`: A nova camada de orquestração (Attention, Pipeline, Embedder, HTM Memory).
 - `mci/`: A camada Metacognitive Interconnect (MetaBus, Blackboard, Reflexion, MCP Server).
 - `agents/`: Definições dos agentes em Markdown (com frontmatter YAML para Agent Cards).
 - `examples/`: Scripts de demonstração end-to-end.
@@ -30,11 +41,12 @@ A MCI é composta por:
 pip install -r requirements.txt
 ```
 
-### 2. Rodando o Demo End-to-End
-Veja a metacognição em ação: o orquestrador carrega os agentes, consulta a memória, delega tarefas via Blackboard, e os agentes refletem sobre os resultados.
+### 2. Rodando os Demos End-to-End
+Veja a metacognição e a camada Transformer em ação:
 
 ```bash
-python3 examples/demo_pipeline.py
+python3 examples/demo_transformer.py  # Atenção, Pipeline Gerar-Revisar e HTM Memory
+python3 examples/demo_pipeline.py     # Fluxo MCI clássico (Blackboard + Reflexion)
 ```
 
 ### 3. CLI Interativo
@@ -63,4 +75,7 @@ Para um mergulho profundo na arquitetura, consulte o [ARCHITECTURE.md](ARCHITECT
 [2] Anônimo. (2025). *Multi-User Memory Sharing in LLM Agents with Dynamic Access*. arXiv:2505.18279.  
 [3] Salemi, A., et al. (2025). *LLM-Based Multi-Agent Blackboard System for Information Discovery in Data Science*. arXiv:2510.01285.  
 [4] Ehtesham, A., et al. (2025). *A Survey of Agent Interoperability Protocols*. arXiv:2505.02279.  
-[5] Shinn, N., et al. (2023). *Reflexion: Language Agents with Verbal Reinforcement Learning*. arXiv:2303.11366.
+[5] Shinn, N., et al. (2023). *Reflexion: Language Agents with Verbal Reinforcement Learning*. arXiv:2303.11366.  
+[6] Vaswani, A., et al. (2017). *Attention Is All You Need*. arXiv:1706.03762.  
+[7] Google DeepMind. (2025). *Superhuman Reasoning Team: Aletheia & IMO-Bench*. Repositório.  
+[8] Google DeepMind. (2024). *DeepMind Research: Perceiver, HTM, PrediNet*. Repositório.

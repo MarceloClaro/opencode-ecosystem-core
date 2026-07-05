@@ -27,6 +27,9 @@ from mci.metabus import metabus
 from mci.blackboard import blackboard
 from mci.reflexion import reflexion_engine  # noqa: F401 — ativa o singleton
 from marceloclaro.agent_loader import register_all_agents, load_agent_definitions
+from transformer.attention import AttentionRouter
+from transformer.pipeline import TransformerPipeline, GradingHead
+from transformer.memory import HierarchicalMemory
 
 logger = logging.getLogger("marceloclaro")
 logger.setLevel(logging.INFO)
@@ -35,10 +38,16 @@ logger.setLevel(logging.INFO)
 class MarceloClaroOrchestrator:
     """Orquestrador central metacognitivo do ecossistema."""
 
-    def __init__(self, auto_load_agents: bool = True):
+    def __init__(self, auto_load_agents: bool = True, pipeline_layers: int = 3):
         self.id = "marceloclaro"
         self.pending_cfps: Dict[str, List[str]] = {}  # task_id -> agentes elegíveis
         self.results: Dict[str, Any] = {}
+
+        # Camada Transformer (inspiração: Vaswani 2017, Perceiver, HTM, Aletheia)
+        self.attention_router = AttentionRouter()
+        self.pipeline = TransformerPipeline(num_layers=pipeline_layers, grading_head=GradingHead())
+        self.hierarchical_memory = HierarchicalMemory(metabus.memory)
+        self._task_counter = 0  # positional encoding das tarefas
 
         # Escuta o Global Workspace
         metabus.subscribe("task.cfp", self._on_cfp)
@@ -86,9 +95,10 @@ class MarceloClaroOrchestrator:
         return task_id
 
     def _on_cfp(self, event: Dict[str, Any]):
-        """Recebe o Call for Proposals do Blackboard e decide quem executa."""
+        """Recebe o Call for Proposals e roteia via Multi-Head Attention."""
         payload = event.get("payload", {})
         task_id = payload.get("task_id")
+        description = payload.get("description", "")
         eligible = payload.get("eligible_agents", [])
         self.pending_cfps[task_id] = eligible
 
@@ -96,8 +106,17 @@ class MarceloClaroOrchestrator:
             logger.warning(f"[{self.id}] Nenhum agente elegível para {task_id}")
             return
 
-        # Seleção: o Blackboard já ordena por confidence ledger; escolhe o primeiro
-        chosen = eligible[0]
+        # Roteamento por atenção multi-cabeça (semântica × capacidade × confiança × carga)
+        task = blackboard.tasks.get(task_id)
+        required = task.required_capabilities if task else []
+        cards = [blackboard.registry[a].to_dict() for a in eligible if a in blackboard.registry]
+
+        self._task_counter += 1
+        ranking = self.attention_router.route(description, required, cards,
+                                              positional_index=self._task_counter)
+        chosen = ranking[0][0] if ranking else eligible[0]
+        logger.info(f"[{self.id}] Atenção rankeou {task_id}: {ranking[:3]}")
+
         metabus.publish("task.volunteer", {
             "task_id": task_id,
             "agent_id": chosen,
@@ -142,3 +161,35 @@ class MarceloClaroOrchestrator:
 
     def list_agents(self) -> List[Dict[str, Any]]:
         return [card.to_dict() for card in blackboard.registry.values()]
+
+    # ------------------------------------------------------------------
+    # CAMADA TRANSFORMER (inspiração: superhuman/Aletheia + deepmind-research)
+    # ------------------------------------------------------------------
+    def run_pipeline(self, task_description: str, executor_fn,
+                     context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """
+        Executa a tarefa pelo encoder stack gerar → verificar → revisar
+        (padrão Aletheia), com avaliação GradingHead (IMO-GradingBench, 0-7).
+        """
+        result = self.pipeline.run(task_description, executor_fn, context)
+        # Registra a experiência na memória metacognitiva global
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"pipeline: {task_description}",
+            reflection=(
+                f"Pipeline concluído em {result['layers_used']} camada(s) com nota "
+                f"{result['final_grade']['score']}/{result['final_grade']['max_score']}."
+            ),
+            score=result["final_grade"]["normalized"],
+        )
+        return result
+
+    def recall(self, query: str, top_entries: int = 5) -> List[Dict[str, Any]]:
+        """Recuperação hierárquica (HTM) sobre a memória episódica global."""
+        return self.hierarchical_memory.retrieve(query, top_entries=top_entries)
+
+    def explain_routing(self, description: str,
+                        required_capabilities: Optional[List[str]] = None) -> Dict[str, Any]:
+        """Auditoria transparente: scores de cada cabeça de atenção por agente."""
+        cards = [card.to_dict() for card in blackboard.registry.values()]
+        return self.attention_router.explain(description, required_capabilities or [], cards)

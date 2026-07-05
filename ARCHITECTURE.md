@@ -9,6 +9,17 @@ graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
     
+    %% Camada Transformer
+    subgraph TF [Transformer Layer]
+        Attn[AttentionRouter<br>Multi-Head]
+        Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
+        HTM[(Hierarchical<br>Memory HTM)]
+        Emb[TaskEmbedder<br>d=64]
+        
+        Attn -.->|Usa| Emb
+        HTM -.->|Usa| Emb
+    end
+    
     %% Camada MCI
     subgraph MCI [Metacognitive Interconnect]
         MB[MetaBus<br>Global Workspace]
@@ -21,9 +32,12 @@ graph TD
         Ref <--> MB
     end
     
-    %% Orquestrador interage com MCI
-    Orchestrator -->|1. Percebe lições| Mem
-    Orchestrator -->|2. Posta Tarefa| BB
+    %% Orquestrador integra as camadas
+    Orchestrator -->|1. Recuperação em 2 níveis| HTM
+    HTM -->|Lê Episódica| Mem
+    Orchestrator -->|2. Roteia Tarefa| Attn
+    Attn -->|Publica Volunteer| BB
+    Orchestrator -->|3. Executa| Pipe
     
     %% Agentes
     subgraph Agents [Agentes do Ecossistema]
@@ -45,10 +59,10 @@ graph TD
     External[External Tools / LLMs] -->|JSON-RPC| MCP
 ```
 
-## Fluxo de Vida de uma Tarefa
+## Fluxo de Vida de uma Tarefa (Arquitetura Transformer + MCI)
 
-1. **Registro (Agent Loader):** Na inicialização, o sistema lê os arquivos `agents/*.md` e extrai o *frontmatter* YAML. Cada agente é registrado no Blackboard com um **Agent Card** (Padrão A2A), declarando suas capacidades (`search`, `python`, `audit`, etc.).
-2. **Percepção (Orchestrator):** Antes de delegar qualquer tarefa, o orquestrador `marceloclaro` consulta o Global Workspace (Memória Metacognitiva) para herdar o contexto recente e as lições aprendidas em falhas anteriores.
-3. **Delegação (Blackboard):** O orquestrador posta a tarefa no Blackboard, especificando as capacidades requeridas.
-4. **Voluntariado:** O Blackboard emite um *Call for Proposals (CFP)* para os agentes elegíveis. Se houver múltiplos candidatos, o Blackboard os ordena pelo *Confidence Ledger* (um score mantido via Média Móvel Exponencial baseado no histórico de sucesso).
-5. **Execução e Reflexão:** O agente selecionado executa a tarefa. Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão sobre a abordagem utilizada, atualiza o *Confidence Ledger* do agente e persiste as lições na memória semântica.
+1. **Registro (Agent Loader):** Na inicialização, o sistema lê os arquivos `agents/*.md` e extrai o *frontmatter* YAML. Cada agente é registrado no Blackboard com um **Agent Card** (Padrão A2A).
+2. **Percepção Hierárquica (HTM):** Antes de delegar, o orquestrador consulta a memória global usando a `HierarchicalMemory`. O `TaskEmbedder` vetoriza a consulta e a atenção é feita em dois níveis: atenção grossa sobre sumários de chunks, seguida de atenção fina sobre os eventos dos melhores chunks.
+3. **Delegação via Atenção (Multi-Head Attention):** A tarefa é postada no Blackboard. Quando o *Call for Proposals (CFP)* retorna os agentes elegíveis, o `AttentionRouter` calcula scores softmax baseados em 4 cabeças: semântica (vetores d=64), cobertura de capacidade, *confidence ledger* e carga atual. O agente com maior score recebe a atribuição.
+4. **Execução (Transformer Pipeline):** A tarefa entra no *encoder stack*. O agente selecionado executa o ciclo **Gerar → Verificar → Revisar** (padrão *Aletheia*). O `GradingHead` pontua a saída de 0 a 7 (padrão *IMO-GradingBench*). Se a nota for baixa, a tarefa volta para revisão com a conexão residual preservando o contexto anterior.
+5. **Reflexão (MCI):** Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão, atualiza o *Confidence Ledger* do agente e persiste a experiência na memória semântica para futuras recuperações.
