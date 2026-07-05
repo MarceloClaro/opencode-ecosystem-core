@@ -554,3 +554,60 @@ class MarceloClaroOrchestrator:
             score=len(generated) / 4.0,
         )
         return manifest
+
+    # ------------------------------------------------------------------
+    # RESEARCH — BUSCA E EXTRAÇÃO ACADÊMICA (SPEC-017)
+    # ------------------------------------------------------------------
+    def research_search(self, topic: str, platforms: Optional[List[str]] = None,
+                        limit_per_platform: int = 5) -> List[Dict[str, Any]]:
+        """Busca federada em plataformas acadêmicas (arXiv, OpenAlex, Crossref,
+        Semantic Scholar, Europe PMC) e repositórios (GitHub, Kaggle),
+        retornando registros deduplicados ordenados por aderência ao tema."""
+        from research import MultiSearcher, CriticalAnalyzer
+        searcher = MultiSearcher(platforms=platforms)
+        analyzer = CriticalAnalyzer(topic)
+        records = searcher.search(topic, limit_per_platform=limit_per_platform)
+        ranked = sorted(records,
+                        key=lambda r: analyzer.analyze(r).aderencia_score,
+                        reverse=True)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"busca acadêmica: {topic[:80]}",
+            reflection=f"{len(ranked)} registros encontrados nas plataformas "
+                       f"{platforms or 'todas'}.",
+            score=min(1.0, len(ranked) / 10.0),
+        )
+        return [r.to_dict() for r in ranked]
+
+    def research(self, topic: str, production_folder: Optional[str] = None,
+                 max_papers: int = 8, platforms: Optional[List[str]] = None,
+                 download: bool = True, use_llm: bool = False) -> Dict[str, Any]:
+        """
+        Pipeline completo de revisão de literatura (SPEC-017):
+        busca multiplataforma → download de PDFs (scihub-cli/OA direto) →
+        conversão PDF→Markdown na subpasta `pesquisa/md/` → fichamento em três
+        camadas + resenha crítica (ABNT NBR 6023:2018/10520:2023 e APA 7) →
+        referências consolidadas (.md ABNT/APA + .bib) → manifest auditável.
+
+        Se `production_folder` for a pasta única de uma produção científica
+        existente (produce_scientific_work), a pesquisa é anexada a ela.
+        """
+        from research import ResearchHub
+        hub = ResearchHub(topic, production_folder=production_folder,
+                          platforms=platforms)
+        manifest = hub.run(max_papers=max_papers, download=download,
+                           use_llm=use_llm)
+        resumo = manifest["resumo"]
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"pipeline de pesquisa: {topic[:80]}",
+            reflection=(
+                f"Pesquisa concluída: {resumo['artigos_selecionados']} artigos, "
+                f"{resumo['pdfs_baixados']} PDFs, {resumo['convertidos_md']} MDs, "
+                f"{resumo['fichamentos']} fichamentos e {resumo['resenhas']} "
+                f"resenhas críticas em ABNT/APA na pasta {hub.folder}."
+            ),
+            score=min(1.0, resumo["fichamentos"] / max(1, max_papers)),
+        )
+        manifest["folder"] = str(hub.folder)
+        return manifest

@@ -18,6 +18,7 @@ O ecossistema integra os seguintes subsistemas avançados (portados do repositó
 
 - **MiroFish (Swarm Intelligence)**: Motor preditivo baseado em enxame ("wisdom of crowds"). Agentes com vieses distintos (otimista, pessimista, contrário) emitem previsões que convergem em um debate Delphi, triplamente validado por Teoria dos Jogos e auditoria acadêmica.
 - **Game Theory & 38 Raciocínios**: Catálogo formal de 38 tipos de raciocínio (lógica clássica, dialética, Teoria dos Jogos). Inclui solver de Equilíbrio de Nash puro, Valor de Shapley, e um `MetaReasoner` que seleciona a estratégia ideal por contexto.
+- **Busca e Extração Acadêmica (Research)**: Pipeline federado (arXiv, OpenAlex, Crossref, PubMed, GitHub, Kaggle) que faz download de PDFs, converte automaticamente para Markdown, e gera resenhas críticas e fichamentos em três camadas. Produz referências consolidadas em ABNT NBR 6023:2018 atualizada e APA 7ª edição, integrando a pesquisa diretamente à pasta única de produção científica.
 - **Produção Científica (Pasta Única)**: Pipeline de publicação que converte a fonte Markdown canônica em LaTeX (usando templates Qualis A1, abnTeX2 ou livros KDP-ready) e compila automaticamente para PDF, DOCX, MD e ODT, gerando um manifesto com checksums SHA-256 para total rastreabilidade.
 - **Trust Engine & Token Economy**: Segurança comportamental (BehavioralGate, NaturalForgetting) e mercado de agentes (staking, slashing, fee market).
 - **Scanners de Diagnóstico**: Pipeline com 5 scanners (Noológico, Teleológico, Evolutivo, Potentiality, Social Impact).
@@ -59,6 +60,7 @@ Todos os componentes e agentes do ecossistema operam estritamente sob as metodol
 - `gametheory/`: 38 tipos de raciocínio, Equilíbrio de Nash, auditoria PhD.
 - `mirofish/`: Enxame preditivo (Swarm Intelligence) e CrossValidator.
 - `publishing/`: Pipeline de pasta única (LaTeX, PDF, DOCX, ODT) e templates.
+- `research/`: Buscadores, download de PDFs, conversão PDF→MD e fichamentos ABNT/APA.
 - `specs/`: Especificações formais (SDD nativas e acervo de rastreabilidade original).
 - `agents/`: 134 agentes no total (incluindo catálogo de 130 especializados).
 - `examples/`: Scripts de demonstração end-to-end.
@@ -80,6 +82,7 @@ Veja a metacognição e a camada Transformer em ação:
 ```bash
 python3 examples/demo_full_ecosystem.py # Demo completa: Trust, Economy, MASWOS, Scanners, Quantum
 python3 examples/demo_publishing.py     # Demo: Pasta Única de Produção Científica (LaTeX/KDP)
+python3 examples/demo_research.py       # Demo: Busca, Extração Acadêmica e Fichamentos ABNT/APA
 python3 examples/demo_sdd_tdd.py        # Ciclo Red-Green-Refactor e Gate SDD Estrito
 python3 examples/demo_transformer.py    # Atenção, Pipeline Gerar-Revisar e HTM Memory
 python3 examples/demo_pipeline.py       # Fluxo MCI clássico (Blackboard + Reflexion)

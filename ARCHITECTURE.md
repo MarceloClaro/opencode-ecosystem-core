@@ -39,6 +39,7 @@ graph TD
         Reason[Reasoning<br>Quantum]
         MiroFish[MiroFish<br>Swarm Predictor]
         Publishing[Publishing<br>Pasta Única]
+        Research[Research<br>Extração Acadêmica]
     end
 
     %% Camada MCI
