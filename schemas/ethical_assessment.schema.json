@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencode-ecosystem-core/schemas/ethical_assessment.schema.json",
+  "title": "EthicalAssessment",
+  "type": "object",
+  "required": [
+    "assessment_id",
+    "principles_checked",
+    "tensions",
+    "alignment_score",
+    "risk_buckets",
+    "recommendations",
+    "decision",
+    "version"
+  ],
+  "properties": {
+    "assessment_id": { "type": "string" },
+    "principles_checked": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "tensions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "alignment_score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "risk_buckets": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "decision": { "type": "string", "enum": ["approve", "approve_with_constraints", "block"] },
+    "version": { "type": "string" }
+  },
+  "additionalProperties": false
+}

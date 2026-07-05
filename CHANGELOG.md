@@ -4,6 +4,20 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.0.2] - 2026-07-05
+
+### Adicionado
+- **Pipeline Científico com Governança (OQS + MCI + VSEE + EGS)**:
+  - Adicionado suporte a schemas JSON formais em `/schemas` para validação de dados em todas as etapas: [optimal_question.schema.json](file:///home/marceloclaro/opencode-ecosystem-core/schemas/optimal_question.schema.json), [vector_execution_decision.schema.json](file:///home/marceloclaro/opencode-ecosystem-core/schemas/vector_execution_decision.schema.json), [ethical_assessment.schema.json](file:///home/marceloclaro/opencode-ecosystem-core/schemas/ethical_assessment.schema.json) e [scientific_claim.schema.json](file:///home/marceloclaro/opencode-ecosystem-core/schemas/scientific_claim.schema.json).
+  - Implementado o módulo **OQS (Optimal Question Scanner)** (`mci/oqs/`) que avalia o poder de convergência de perguntas candidatas, mapeando lacunas conceituais e ambiguidades.
+  - Implementado o **VSEE (Vector Shortcut Execution Engine)** (`mci/vsee/`) para desviar execuções custosas para caminhos vetoriais otimizados pré-validados com fallback automático.
+  - Implementado o **EGS (Ethical Governance Scanner)** (`mci/egs/`) integrado ao TDD para triar a conformidade ética e aplicar hard-blocks em saídas sensíveis.
+  - Integrado o fluxo científico na classe `MarceloClaroOrchestrator` (`marceloclaro/orchestrator.py`) com o método `run_scientific_governance()`, gerando relatórios em LaTeX e gravando as reflexões na memória global (`metabus`).
+  - Adicionado o executável de lote em [run_research_batch.py](file:///home/marceloclaro/opencode-ecosystem-core/research/pipelines/run_research_batch.py) e o arquivo de cenários estruturados [scenario_matrix_v1.json](file:///home/marceloclaro/opencode-ecosystem-core/research/experiments/scenario_matrix_v1.json).
+  - Adicionadas suítes completas de testes automatizados unitários e de integração em [test_run_research_batch.py](file:///home/marceloclaro/opencode-ecosystem-core/tests/test_run_research_batch.py) e [test_scientific_governance_pipeline.py](file:///home/marceloclaro/opencode-ecosystem-core/tests/test_scientific_governance_pipeline.py).
+- **Utilitários do Ambiente WSL**:
+  - Instalados pacotes `xclip` e `wl-clipboard` no ambiente WSL via gerenciador de pacotes `apt-get` para dar suporte à integração transparente da área de trabalho compartilhada com comandos da CLI do OpenCode.
+
 ## [1.0.1] - 2026-07-05
 
 ### Adicionado

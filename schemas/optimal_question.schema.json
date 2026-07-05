@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencode-ecosystem-core/schemas/optimal_question.schema.json",
+  "title": "OptimalQuestionResult",
+  "type": "object",
+  "required": [
+    "problem_id",
+    "candidates",
+    "selected_question",
+    "scores",
+    "selection_rationale",
+    "discarded_with_reason",
+    "version"
+  ],
+  "properties": {
+    "problem_id": { "type": "string" },
+    "candidates": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "selected_question": { "type": "string" },
+    "scores": {
+      "type": "object",
+      "required": ["URS", "SVS", "DRI", "CCI", "CS"],
+      "properties": {
+        "URS": { "type": "number", "minimum": 0, "maximum": 1 },
+        "SVS": { "type": "number", "minimum": 0, "maximum": 1 },
+        "DRI": { "type": "number", "minimum": 0 },
+        "CCI": { "type": "number", "minimum": 0 },
+        "CS": { "type": "number" }
+      }
+    },
+    "selection_rationale": { "type": "string" },
+    "discarded_with_reason": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "reason"],
+        "properties": {
+          "question": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "version": { "type": "string" }
+  },
+  "additionalProperties": false
+}
