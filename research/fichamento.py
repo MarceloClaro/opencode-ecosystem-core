@@ -453,13 +453,24 @@ class FichamentoWriter:
 
     # ------------------------------------------------------------------
     def enrich_with_llm(self, rec: PaperRecord, fulltext: str,
-                        resenha_path: str) -> bool:
-        """Opcional: aprofunda a resenha via LLM se OPENAI_API_KEY existir."""
-        if not os.environ.get("OPENAI_API_KEY"):
-            return False
+                        resenha_path: str,
+                        provider: str = "auto",
+                        model: Optional[str] = None) -> bool:
+        """Opcional: aprofunda a resenha via LLM local (Ollama) ou nuvem.
+
+        Ordem de resolução (``provider='auto'``): Ollama local →
+        API OpenAI-compatível → desativado (pipeline segue determinístico).
+        Force um provedor com ``provider='ollama'``/``'openai'`` ou pela
+        variável de ambiente ``RESEARCH_LLM``. O modelo local padrão é
+        ``llama3.2`` (configurável via ``OLLAMA_MODEL`` ou ``model=``).
+        """
         try:
-            from openai import OpenAI  # type: ignore
-            client = OpenAI()
+            from .llm_client import LLMClient
+            client = LLMClient(provider=provider, model=model)
+            if not client.available():
+                logger.debug("enriquecimento LLM indisponível: nenhum "
+                             "provedor (Ollama/OpenAI) acessível")
+                return False
             prompt = (
                 f"Tema de pesquisa: {self.tema}\n\n"
                 f"Artigo: {rec.title} ({rec.year})\n"
@@ -470,17 +481,23 @@ class FichamentoWriter:
                 "metodológico, diálogo com a literatura e aplicabilidade ao "
                 "tema de pesquisa. Use citações no formato ABNT (Autor, ano)."
             )
-            resp = client.chat.completions.create(
-                model="gemini-2.5-flash",
-                messages=[{"role": "user", "content": prompt}],
+            extra = client.generate(
+                prompt,
+                system="Você é um pesquisador acadêmico PhD especializado "
+                       "em resenhas críticas Qualis A1.",
                 max_tokens=1200,
             )
-            extra = resp.choices[0].message.content
             if extra:
+                meta = client.describe()
+                origem = (f"modelo local `{meta['model']}` via Ollama"
+                          if meta["local"] else
+                          f"modelo `{meta['model']}` via API")
                 p = Path(resenha_path)
-                p.write_text(p.read_text(encoding="utf-8") +
-                             "\n\n## Análise aprofundada (assistida por IA)\n\n" +
-                             extra + "\n", encoding="utf-8")
+                p.write_text(
+                    p.read_text(encoding="utf-8") +
+                    "\n\n## Análise aprofundada (assistida por IA — "
+                    f"{origem})\n\n" + extra + "\n",
+                    encoding="utf-8")
                 return True
         except Exception as exc:
             logger.debug(f"enriquecimento LLM indisponível: {exc}")

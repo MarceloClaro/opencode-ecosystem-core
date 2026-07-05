@@ -83,9 +83,27 @@ class ResearchHub:
 
     # ------------------------------------------------------------------
     def run(self, max_papers: int = 8, limit_per_platform: int = 4,
-            download: bool = True, use_llm: bool = False) -> Dict:
-        """Executa o pipeline completo; retorna o manifest da pesquisa."""
+            download: bool = True, use_llm: bool = False,
+            llm_provider: str = "auto",
+            llm_model: Optional[str] = None) -> Dict:
+        """Executa o pipeline completo; retorna o manifest da pesquisa.
+
+        Com ``use_llm=True``, fichamentos e resenhas são enriquecidos por
+        LLM com prioridade para **modelos locais via Ollama** (privacidade
+        e custo zero); ``llm_provider`` aceita ``auto``/``ollama``/``openai``
+        e ``llm_model`` permite escolher o modelo (ex.: ``llama3.2``).
+        """
         logger.info(f"[hub] tema: {self.topic!r} → {self.folder}")
+
+        self._llm_enriched = 0
+        self._llm_meta = None
+        if use_llm:
+            try:
+                from .llm_client import LLMClient
+                self._llm_meta = LLMClient(provider=llm_provider,
+                                           model=llm_model).describe()
+            except Exception:  # metadados são opcionais
+                self._llm_meta = None
 
         # 1. Busca multiplataforma
         all_records = self.searcher.search(
@@ -137,7 +155,10 @@ class ResearchHub:
             resenha_path = self.writer.resenha(rec, fulltext)
             resenhas.append(resenha_path)
             if use_llm:
-                self.writer.enrich_with_llm(rec, fulltext, resenha_path)
+                enriched = self.writer.enrich_with_llm(
+                    rec, fulltext, resenha_path,
+                    provider=llm_provider, model=llm_model)
+                self._llm_enriched += 1 if enriched else 0
 
         # 6. Referências consolidadas + repositórios
         self._write_references(papers)
@@ -256,6 +277,11 @@ class ResearchHub:
             },
             "downloads": download_report,
             "normas": ["ABNT NBR 6023:2018", "ABNT NBR 10520:2023", "APA 7"],
+            "llm": {
+                "enabled": getattr(self, "_llm_meta", None) is not None,
+                "provider": getattr(self, "_llm_meta", None),
+                "resenhas_enriquecidas": getattr(self, "_llm_enriched", 0),
+            },
             "files_sha256": files,
         }
         (self.pesquisa / "RESEARCH_MANIFEST.json").write_text(

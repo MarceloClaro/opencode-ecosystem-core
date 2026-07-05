@@ -597,7 +597,9 @@ class MarceloClaroOrchestrator:
 
     def research(self, topic: str, production_folder: Optional[str] = None,
                  max_papers: int = 8, platforms: Optional[List[str]] = None,
-                 download: bool = True, use_llm: bool = False) -> Dict[str, Any]:
+                 download: bool = True, use_llm: bool = False,
+                 llm_provider: str = "auto",
+                 llm_model: Optional[str] = None) -> Dict[str, Any]:
         """
         Pipeline completo de revisão de literatura (SPEC-017):
         busca multiplataforma → download de PDFs (scihub-cli/OA direto) →
@@ -607,12 +609,17 @@ class MarceloClaroOrchestrator:
 
         Se `production_folder` for a pasta única de uma produção científica
         existente (produce_scientific_work), a pesquisa é anexada a ela.
+
+        Com ``use_llm=True``, fichamentos/resenhas são enriquecidos por LLM
+        com prioridade para **modelos locais via Ollama** (``llm_provider=
+        'auto'|'ollama'|'openai'``; ``llm_model`` ex.: ``llama3.2``).
         """
         from research import ResearchHub
         hub = ResearchHub(topic, production_folder=production_folder,
                           platforms=platforms)
         manifest = hub.run(max_papers=max_papers, download=download,
-                           use_llm=use_llm)
+                           use_llm=use_llm, llm_provider=llm_provider,
+                           llm_model=llm_model)
         resumo = manifest["resumo"]
         metabus.memory.add_reflection(
             agent_id=self.id,

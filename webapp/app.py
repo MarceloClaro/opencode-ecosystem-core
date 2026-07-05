@@ -146,7 +146,23 @@ with tabs[2]:
     st.subheader("Pipeline Completo (Download + PDF→MD + Fichamentos)")
     st.caption("Gera uma pasta de produção com PDFs, conversões e fichamentos ABNT/APA.")
     max_papers = st.slider("Máximo de papers", 1, 10, 2)
-    use_llm = st.checkbox("Usar LLM local (Ollama) para fichamentos e resenhas", value=False)
+    use_llm = st.checkbox("Enriquecer fichamentos e resenhas com LLM", value=False)
+    llm_provider, llm_model = "auto", None
+    if use_llm:
+        from research.llm_client import LLMClient
+        col_llm1, col_llm2 = st.columns(2)
+        llm_provider = col_llm1.selectbox(
+            "Provedor LLM", ["auto", "ollama", "openai"],
+            help="'auto' prioriza Ollama local (privacidade e custo zero)")
+        local_models = LLMClient.ollama_models()
+        if local_models:
+            llm_model = col_llm2.selectbox("Modelo local (Ollama)", local_models)
+            st.success(f"Ollama detectado com {len(local_models)} modelo(s) local(is)")
+        else:
+            llm_model = col_llm2.text_input("Modelo", "llama3.2")
+            st.info("Servidor Ollama não detectado em localhost:11434 — "
+                    "instale com `curl -fsSL https://ollama.com/install.sh | sh` "
+                    "e rode `ollama pull llama3.2`, ou use provedor 'openai'.")
     if st.button("📥 Executar Pesquisa Completa"):
         prod = tempfile.mkdtemp(prefix="producao_")
         with st.spinner("Executando funil de pesquisa..."):
@@ -154,7 +170,8 @@ with tabs[2]:
                 research = orch.research(
                     topic, production_folder=prod,
                     max_papers=max_papers, platforms=platforms or None,
-                    use_llm=use_llm,
+                    use_llm=use_llm, llm_provider=llm_provider,
+                    llm_model=llm_model,
                 )
                 st.success(f"Produção salva em `{prod}`")
                 show_json(research)
