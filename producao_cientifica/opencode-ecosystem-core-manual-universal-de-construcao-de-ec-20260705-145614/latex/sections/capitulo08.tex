@@ -1,0 +1,175 @@
+\chapter{Protocolo SDD/TDD e Pipeline de Qualidade para Agentes Cognitivos}
+
+\begin{quote}
+\textit{``Se você não pode medi-lo, não pode melhorá-lo.''} --- Lord Kelvin
+\end{quote}
+
+\section{Specification-Driven Development (SDD)}
+
+\subsection{O Princípio: Especificar Antes de Implementar}
+
+\textbf{SDD} inverte a prática comum de ``codar primeiro, documentar depois''. Toda tarefa começa com uma \textbf{especificação formal} (\texttt{specs/SPEC-*.md}) que define:
+
+\begin{itemize}
+    \item \textbf{Critérios de aceitação}: condições necessárias e suficientes para considerar a entrega completa;
+    \item \textbf{Interface}: assinatura de funções, schemas de entrada/saída, contratos;
+    \item \textbf{Restrições}: limites de performance, segurança, conformidade;
+    \item \textbf{Testes}: cenários de teste associados (TDD).
+\end{itemize}
+
+\begin{lstlisting}[language=Python, caption={SpecRegistry — Gerenciador de Especificações Formais}]
+class SpecRegistry:
+    """Registro central de especificações SDD."""
+    
+    def __init__(self, specs_dir="specs/"):
+        self.specs = {}
+        self._load_all(specs_dir)
+    
+    def _load_all(self, specs_dir):
+        import glob
+        for spec_file in glob.glob(f"{specs_dir}/SPEC-*.md"):
+            spec = Specification.from_markdown(spec_file)
+            self.specs[spec.spec_id] = spec
+    
+    def get(self, spec_id):
+        if spec_id not in self.specs:
+            raise SpecNotFoundError(f"SPEC {spec_id} não encontrada")
+        return self.specs[spec_id]
+    
+    def verify(self, spec_id, deliverable):
+        """Verifica se a entrega satisfaz a especificação."""
+        spec = self.get(spec_id)
+        results = []
+        for criterion in spec.acceptance_criteria:
+            passed = criterion.evaluate(deliverable)
+            results.append({'criterion': criterion.description, 'passed': passed})
+        return all(r['passed'] for r in results), results
+\end{lstlisting}
+
+\section{Test-Driven Development (TDD) para Agentes}
+
+\subsection{O Ciclo RED → GREEN → REFACTOR}
+
+Beck (2003) \cite{beck2003tdd} estabeleceu o ciclo TDD que o OpenCode aplica rigorosamente:
+
+\begin{enumerate}
+    \item \textbf{RED}: escrever um teste que falha (porque a funcionalidade ainda não existe);
+    \item \textbf{GREEN}: implementar o código mínimo para o teste passar;
+    \item \textbf{REFACTOR}: melhorar o código mantendo os testes verdes.
+\end{enumerate}
+
+Para agentes, isto se traduz em:
+\begin{itemize}
+    \item \textbf{Testes de comportamento}: verificar outputs esperados para inputs conhecidos;
+    \item \textbf{Testes de robustez}: inputs adversariais, edge cases, condições de erro;
+    \item \textbf{Testes de metacognição}: verificar se o agente reflete sobre falhas e melhora.
+\end{itemize}
+
+\subsection{PRÁXIS 8.1 — TDD para um Agente com pytest}
+
+\begin{lstlisting}[language=Python, caption={TDD: teste primeiro, implemente depois}]
+# tests/test_agent_coder.py
+import pytest
+from agents.coder import CoderAgent
+
+class TestCoderAgent:
+    """Bateria TDD para o agente Coder."""
+    
+    def setup_method(self):
+        self.agent = CoderAgent(spec_id="SPEC-006")
+    
+    def test_red_generate_function_stub(self):
+        """RED: função ainda não existe."""
+        with pytest.raises(NotImplementedError):
+            self.agent.generate("sort array", language="python")
+    
+    def test_green_implement_sort(self):
+        """GREEN: implementação mínima."""
+        self.agent.implement_sort()
+        code = self.agent.generate("sort array", language="python")
+        assert "def sort" in code
+        assert "return" in code
+    
+    def test_refactor_optimize(self):
+        """REFACTOR: otimização sem quebrar testes."""
+        code_v1 = self.agent.generate("sort array", language="python")
+        self.agent.optimize()
+        code_v2 = self.agent.generate("sort array", language="python")
+        # Mesma funcionalidade, mas mais eficiente
+        assert len(code_v2) <= len(code_v1)
+        assert "sorted(" in code_v2 or ".sort()" in code_v2
+\end{lstlisting}
+
+\section{Gate SDD + BehavioralGate: Dupla Verificação}
+
+\subsection{Arquitetura de Duplo Gate}
+
+O pipeline de qualidade do OpenCode implementa \textbf{dois gates sequenciais}:
+
+\begin{enumerate}
+    \item \textbf{Gate SDD (SpecVerifier)}: verifica se a entrega satisfaz a especificação formal (critérios de aceitação). É um gate \textbf{determinístico}: passa/falha binário.
+    
+    \item \textbf{BehavioralGate (Trust Engine)}: avalia a qualidade comportamental do agente ao longo do tempo. É um gate \textbf{probabilístico}: calcula Trust Score via EMA e decide com base em threshold.
+\end{enumerate}
+
+Uma entrega só é aceita se passar em \textbf{ambos} os gates:
+
+\begin{equation}
+\text{Accept}(\text{deliverable}) = \text{SpecVerifier}(d) \land (\text{TrustScore}(a) \geq \theta_{\text{trust}})
+\label{eq:double_gate}
+\end{equation}
+
+Onde $\theta_{\text{trust}} = 0.7$ é o threshold padrão (agentes com Trust Score $< 0.3$ exigem supervisão obrigatória).
+
+\section{Trust Engine e Confidence Ledger}
+
+\subsection{Mecanismo de Confiança Adaptativa}
+
+O \textbf{Trust Engine} (\texttt{trust/trust\_engine.py}) calcula e mantém o Trust Score de cada agente:
+
+\begin{equation}
+S_{t+1}(a) = \alpha \cdot \text{outcome}_t + (1-\alpha) \cdot S_t(a)
+\label{eq:trust_ema}
+\end{equation}
+
+Onde $\alpha = 0.3$ (30\% de peso para o resultado mais recente, 70\% para o histórico). Este é essencialmente um \textbf{filtro de média móvel exponencial} (EMA), comum em finanças e processamento de sinais.
+
+\subsection{Natural Forgetting e Decaimento}
+
+Agentes inativos sofrem \textbf{decaimento natural de confiança}:
+
+\begin{equation}
+S_{t+\Delta}(a) = S_t(a) \cdot \gamma^{\Delta}
+\label{eq:trust_decay}
+\end{equation}
+
+Onde $\gamma \in (0, 1)$ é o fator de decaimento por unidade de tempo $\Delta$. Isso evita que agentes mantenham scores altos após longos períodos sem atividade.
+
+\section{Slashing e Incentivos na Token Economy}
+
+\subsection{Curva de Penalidade Proporcional}
+
+O \textbf{slashing} é a penalidade econômica por falha, proporcional ao dano causado:
+
+\begin{equation}
+\text{slash}(a, \text{failure}) = \text{stake}(a) \cdot \min\left(\text{severity}(\text{failure}), \text{max\_slash\_ratio}\right)
+\label{eq:slashing}
+\end{equation}
+
+A severidade é calculada pelo BehavioralGate:
+\begin{itemize}
+    \item \textbf{Nível 1} (leve): output abaixo do esperado mas funcional — slash 5\%;
+    \item \textbf{Nível 2} (moderado): output incorreto ou incompleto — slash 25\%;
+    \item \textbf{Nível 3} (grave): output danoso, violação ética ou falha de segurança — slash 100\%.
+\end{itemize}
+
+\begin{thebibliography}{99}
+\bibitem{beck2003tdd} Beck, K. (2003). \textit{Test-Driven Development: By Example}. Addison-Wesley.
+\bibitem{meyer1997object} Meyer, B. (1997). \textit{Object-Oriented Software Construction} (2nd ed.). Prentice Hall.
+\bibitem{fowler2018refactoring} Fowler, M. (2018). \textit{Refactoring: Improving the Design of Existing Code} (2nd ed.). Addison-Wesley.
+\bibitem{shinn2023reflexion} Shinn, N., et al. (2023). Reflexion. \textit{NeurIPS 2023}. \doiurl{10.48550/arXiv.2303.11366}
+\bibitem{nash1950equilibrium} Nash, J. F. (1950). Equilibrium Points in N-Person Games. \textit{PNAS}, 36(1), 48--49. \doiurl{10.1073/pnas.36.1.48}
+\bibitem{buterin2014ethereum} Buterin, V. (2014). Ethereum: A Next-Generation Smart Contract Platform.
+\bibitem{voshmgir2020token} Voshmgir, S. (2020). \textit{Token Economy}. Token Kitchen.
+\bibitem{myerson1981optimal} Myerson, R. B. (1981). Optimal Auction Design. \textit{Mathematics of Operations Research}, 6(1), 58--73. \doiurl{10.1287/moor.6.1.58}
+\end{thebibliography}

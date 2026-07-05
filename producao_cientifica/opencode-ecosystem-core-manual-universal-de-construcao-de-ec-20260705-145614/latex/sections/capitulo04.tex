@@ -1,0 +1,106 @@
+\chapter{Fundamentos Estatísticos e Inferenciais para Agentes Cognitivos}
+
+\begin{quote}
+\textit{``Todos os modelos estão errados, mas alguns são úteis.''} --- George E. P. Box
+\end{quote}
+
+\section{Probabilidade Bayesiana e Inferência Causal}
+
+\subsection{Teorema de Bayes como Motor de Atualização de Crenças}
+
+O \textbf{Teorema de Bayes} (Bayes, 1763; Laplace, 1774) é o fundamento matemático da atualização racional de crenças frente a evidências:
+
+\begin{equation}
+P(\theta | D) = \frac{P(D | \theta) \cdot P(\theta)}{P(D)}
+\label{eq:bayes}
+\end{equation}
+
+No OpenCode, o \textbf{Confidence Ledger} (Capítulo 9) implementa uma atualização bayesiana simplificada via EMA (Exponential Moving Average):
+
+\begin{equation}
+C_{t+1}(a) = \alpha \cdot \text{score}_t + (1-\alpha) \cdot C_t(a)
+\label{eq:ema_confidence}
+\end{equation}
+
+Onde $C_t(a)$ é a confiança no agente $a$ no tempo $t$, $\text{score}_t$ é o resultado da tarefa mais recente, e $\alpha \in (0,1)$ controla a taxa de adaptação.
+
+\subsection{Inferência Causal e o \textit{do}-calculus}
+
+Pearl (2009) \cite{pearl2009causality} revolucionou a inferência causal com o \textbf{do-calculus}:
+
+\begin{equation}
+P(Y | do(X=x)) \neq P(Y | X=x) \quad \text{(confundimento)}
+\label{eq:do_calculus}
+\end{equation}
+
+O operador $do(X=x)$ representa uma \textbf{intervenção} — forçar $X$ ao valor $x$, quebrando as influências causais sobre $X$. Esta distinção é crucial para o \textbf{BehavioralGate}: não basta observar correlação entre ações do agente e resultados; é necessário verificar que a ação \textit{causou} o resultado.
+
+\subsection{PRÁXIS 4.1 — Motor de Inferência Bayesiana}
+
+\begin{lstlisting}[language=Python, caption={Atualização Bayesiana de confiança em agentes}]
+import numpy as np
+from scipy import stats
+
+class BayesianTrustUpdater:
+    """Atualização bayesiana da confiança usando Beta-Binomial."""
+    
+    def __init__(self, prior_alpha=2, prior_beta=2):
+        self.alpha = prior_alpha
+        self.beta = prior_beta
+    
+    def update(self, successes, failures):
+        """Atualiza distribuição posterior Beta(alpha+successes, beta+failures)."""
+        self.alpha += successes
+        self.beta += failures
+        return self.get_stats()
+    
+    def get_stats(self):
+        posterior = stats.beta(self.alpha, self.beta)
+        return {
+            'mean': posterior.mean(),
+            'std': posterior.std(),
+            'credible_95': posterior.interval(0.95),
+            'prob_better_than_05': 1 - posterior.cdf(0.5)
+        }
+
+# Uso no OpenCode: substitui EMA simples quando precisão bayesiana é necessária
+updater = BayesianTrustUpdater(prior_alpha=2, prior_beta=2)
+print("Prior (não-informativo):", updater.get_stats())
+updater.update(successes=85, failures=15)
+print("Após 100 tasks (85% sucesso):", updater.get_stats())
+\end{lstlisting}
+
+\section{Processos Estocásticos em Cadeias de Raciocínio}
+
+\subsection{Cadeias de Markov e MDPs}
+
+Uma \textbf{Cadeia de Markov} modela a transição entre estados onde o futuro depende apenas do presente:
+
+\begin{equation}
+P(S_{t+1} = s' | S_t = s, S_{t-1} = s_{t-1}, \ldots) = P(S_{t+1} = s' | S_t = s)
+\label{eq:markov}
+\end{equation}
+
+Um \textbf{MDP} (Markov Decision Process) estende isso com ações e recompensas:
+
+\begin{equation}
+V^\pi(s) = \mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t R(s_t, a_t) \mid s_0 = s, \pi\right]
+\label{eq:mdp}
+\end{equation}
+
+No OpenCode, a \textbf{Token Economy} (Capítulo 10) é essencialmente um MDP onde estados são níveis de stake dos agentes, ações são voluntariar-se para tarefas (via CFP), e recompensas são os fees recebidos (ou penalidades de slashing).
+
+\subsection{MCMC e Amostragem para Exploração de Espaços de Agentes}
+
+Métodos \textbf{MCMC} (Markov Chain Monte Carlo) — Metropolis-Hastings (1953), Hamiltonian Monte Carlo (Neal, 2011) — permitem amostrar de distribuições complexas. O OpenCode aplica estes princípios na \textbf{exploração do espaço de agentes}: quando o Attention Router precisa selecionar agentes para uma task, ele explora o espaço de agentes proporcionalmente ao Trust Score (análogo à amostragem da posterior).
+
+\begin{thebibliography}{99}
+\bibitem{pearl2009causality} Pearl, J. (2009). \textit{Causality: Models, Reasoning, and Inference} (2nd ed.). Cambridge University Press. \doiurl{10.1017/CBO9780511803161}
+\bibitem{gelman2013bayesian} Gelman, A., et al. (2013). \textit{Bayesian Data Analysis} (3rd ed.). CRC Press.
+\bibitem{wasserman2004all} Wasserman, L. (2004). \textit{All of Statistics}. Springer. \doiurl{10.1007/978-0-387-21736-9}
+\bibitem{fisher1935design} Fisher, R. A. (1935). \textit{The Design of Experiments}. Oliver and Boyd.
+\bibitem{kohavi2012online} Kohavi, R., et al. (2012). Online Controlled Experiments at Large Scale. \textit{KDD 2013}. \doiurl{10.1145/2487575.2488217}
+\bibitem{neal2011mcmc} Neal, R. M. (2011). MCMC Using Hamiltonian Dynamics. In \textit{Handbook of Markov Chain Monte Carlo}. \doiurl{10.1201/b10905-6}
+\bibitem{shannon1948mathematical} Shannon, C. E. (1948). A Mathematical Theory of Communication. \textit{Bell System Technical Journal}, 27(3), 379--423. \doiurl{10.1002/j.1538-7305.1948.tb01338.x}
+\bibitem{cover2006elements} Cover, T. M., \& Thomas, J. A. (2006). \textit{Elements of Information Theory} (2nd ed.). Wiley. \doiurl{10.1002/047174882X}
+\end{thebibliography}
