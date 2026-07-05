@@ -38,7 +38,7 @@ graph TD
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>Quantum]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
-        Publishing[Publishing<br>Modular LaTeX]
+        Publishing[Publishing<br>LaTeX & Cover Designer]
         Research[Research<br>Hub c/ OSINT]
         Illus[Illustrations<br>Mermaid/MIRA/Graph]
     end

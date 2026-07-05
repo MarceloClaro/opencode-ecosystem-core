@@ -59,7 +59,7 @@ Todos os componentes e agentes do ecossistema operam estritamente sob as metodol
 - `integrations/`: Integração com OpenCode CLI e Antigravity.
 - `gametheory/`: 38 tipos de raciocínio, Equilíbrio de Nash, auditoria PhD.
 - `mirofish/`: Enxame preditivo (Swarm Intelligence) e CrossValidator.
-- `publishing/`: Pipeline de pasta única (LaTeX, PDF, DOCX, ODT) e templates.
+- `publishing/`: Pipeline de pasta única, templates e Automated Cover Designer (capas e ilustrações internas).
 - `research/`: Buscadores, download de PDFs, conversão PDF→MD e fichamentos ABNT/APA.
 - `illustrations/`: Geração de diagramas (Mermaid), grafos (Graphify) e animações (MIRA).
 - `specs/`: Especificações formais (SDD nativas e acervo de rastreabilidade original).

@@ -306,6 +306,39 @@ class ScientificProduction:
         if not os.path.exists(self.md_path):
             raise RuntimeError("Chame write_markdown() antes de build().")
         self.prepare_latex()
+        
+        # Se for um livro, gera a capa, contracapa e ilustrações internas
+        cover_report = None
+        if self.template.startswith("livro"):
+            from .cover_designer import CoverDesigner
+            designer = CoverDesigner(os.path.join(self.latex_dir, "cover"))
+            with open(self.md_path, "r", encoding="utf-8") as f:
+                full_md = f.read()
+            cover_report = designer.design_cover(self.title, self.author,
+                                                 full_md[:1000])
+            self._log.append(f"cover: design gerado (estilo {cover_report['style']})")
+
+            # Internal Illustrator: injeta prompts de ilustração didática
+            # nos parágrafos complexos e grava a versão ilustrada
+            illustrated = designer.illustrate_internals(full_md,
+                                                        cover_report["style"])
+            n_prompts = illustrated.count("[ILUSTRAÇÃO DIDÁTICA SUGERIDA]")
+            if n_prompts > 0:
+                illustrated_path = os.path.join(self.folder,
+                                                "manuscrito_ilustrado.md")
+                with open(illustrated_path, "w", encoding="utf-8") as f:
+                    f.write(illustrated if illustrated.endswith("\n")
+                            else illustrated + "\n")
+                cover_report["illustrated_manuscript"] = illustrated_path
+                cover_report["internal_prompts"] = n_prompts
+                self._log.append(
+                    f"illustrations: {n_prompts} prompts didáticos internos "
+                    f"injetados em manuscrito_ilustrado.md")
+            else:
+                cover_report["internal_prompts"] = 0
+                self._log.append("illustrations: nenhum parágrafo complexo "
+                                 "detectado para ilustração interna")
+            
         outputs = self.compile_outputs()
 
         manifest: Dict[str, Any] = {
@@ -317,6 +350,7 @@ class ScientificProduction:
             "created_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "formats": {},
             "kdp_ready": outputs.get("odt") is not None,
+            "cover_design": cover_report,
             "log": self._log,
         }
         for fmt in FORMATS:
