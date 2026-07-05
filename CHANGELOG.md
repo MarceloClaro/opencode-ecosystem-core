@@ -4,6 +4,13 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.0.1] - 2026-07-05
+
+### Corrigido
+- **MCP `metacognitive-interconnect`**: removido código morto (`_ = blackboard`, `_ = reflexion_engine`) e import não utilizado (`reflexion_engine`) do `mci/mcp_server.py` que não tinham efeito real — os singletons já são inicializados via import.
+- **Tratamento de erros no MCP server**: o `except Exception: pass` no loop `run_stdio()` suprimia silenciosamente qualquer falha de parsing JSON ou erro de runtime. Substituído por `print(..., file=sys.stderr)` com mensagens descritivas, garantindo rastreabilidade.
+- **Inconsistência `antigravity-bridge`**: `integrations/opencode_cli.py` (builder) gerava `enabled: False` enquanto o `opencode.json` no disco tinha `enabled: True`. Sincronizado para `True` em ambas as fontes e JSON regenerado.
+
 ## [1.0.0] - 2026-07-05
 
 ### Adicionado
