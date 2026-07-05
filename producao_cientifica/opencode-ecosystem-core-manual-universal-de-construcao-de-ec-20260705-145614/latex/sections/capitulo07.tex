@@ -1,0 +1,99 @@
+\chapter{Arquitetura do OpenCode Ecosystem Core}
+
+\begin{quote}
+\textit{``A simplicidade é o último grau de sofisticação.''} --- Leonardo da Vinci
+\end{quote}
+
+\section{Visão Panorâmica: 38 Módulos, 128+ Agentes}
+
+O OpenCode Ecosystem Core é um ecossistema metacognitivo composto por 38 módulos funcionais orquestrando mais de 128 agentes especializados. A arquitetura segue o princípio de \textbf{separação de preocupações metacognitivas}:
+
+\begin{itemize}
+    \item \textbf{Camada de Percepção}: scanners (noológico, teleológico, evolutivo, potentiality, social), MetaBus;
+    \item \textbf{Camada de Especificação}: SDD engine (\texttt{sdd/}), specs (\texttt{specs/SPEC-*.md});
+    \item \textbf{Camada de Delegação}: Blackboard, Attention Router, Trust Engine;
+    \item \textbf{Camada de Execução}: 128+ agentes catalogados (\texttt{agents/catalog/}), TDD runner;
+    \item \textbf{Camada de Verificação}: BehavioralGate, SpecVerifier, testes (\texttt{tests/});
+    \item \textbf{Camada de Reflexão}: Reflexion Engine, Evolution Registry (R47+), Confidence Ledger.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=1.5cm, auto, scale=0.85]
+    % Camadas empilhadas
+    \node[draw, rectangle, minimum width=12cm, minimum height=1.2cm, fill=blue!10] (perceive) {Perceber — MetaBus, Scanners (5)};
+    \node[draw, rectangle, minimum width=12cm, minimum height=1.2cm, fill=green!10, below=0.1cm of perceive] (specify) {Especificar — SDD Engine, Specs};
+    \node[draw, rectangle, minimum width=12cm, minimum height=1.2cm, fill=yellow!10, below=0.1cm of specify] (delegate) {Delegar — Blackboard, Attention Router, Trust Engine};
+    \node[draw, rectangle, minimum width=12cm, minimum height=1.2cm, fill=orange!10, below=0.1cm of delegate] (execute) {Executar — 128+ Agentes, TDD Runner};
+    \node[draw, rectangle, minimum width=12cm, minimum height=1.2cm, fill=red!10, below=0.1cm of execute] (verify) {Verificar — BehavioralGate, SpecVerifier};
+    \node[draw, rectangle, minimum width=12cm, minimum height=1.2cm, fill=purple!10, below=0.1cm of verify] (reflect) {Refletir — Reflexion Engine, Evolution R47+};
+    
+    \draw[->, thick] (perceive.south) -- (specify.north);
+    \draw[->, thick] (specify.south) -- (delegate.north);
+    \draw[->, thick] (delegate.south) -- (execute.north);
+    \draw[->, thick] (execute.south) -- (verify.north);
+    \draw[->, thick] (verify.south) -- (reflect.north);
+    \draw[->, thick, bend right=60] (reflect.west) to node[left, font=\footnotesize] {aprendizado} (perceive.west);
+\end{tikzpicture}
+\caption{Ciclo metacognitivo do OpenCode: 6 camadas com realimentação contínua.}
+\label{fig:metacognitive_cycle}
+\end{figure}
+
+\section{O Orquestrador Central — Design Patterns}
+
+O \textbf{marceloclaro} (Orquestrador Central) implementa o ciclo metacognitivo como um padrão de design composto:
+
+\begin{itemize}
+    \item \textbf{Singleton}: uma única instância gerencia todo o ecossistema;
+    \item \textbf{Facade}: expõe interface unificada (40+ métodos) para interação com subsistemas;
+    \item \textbf{Observer}: inscreve-se no MetaBus para eventos relevantes (CFPs, resultados);
+    \item \textbf{Strategy}: roteamento dinâmico de tarefas baseado em Trust Score;
+    \item \textbf{Chain of Responsibility}: pipeline SDD → TDD → Gate → Reflexion.
+\end{itemize}
+
+O orquestrador expõe métodos como \texttt{delegate\_task()}, \texttt{research()}, \texttt{diagnose()}, \texttt{reason()}, integrando todos os subsistemas.
+
+\section{MetaBus: O Barramento de Eventos Metacognitivos}
+
+O \textbf{MetaBus} (\texttt{mci/metabus.py}) é um singleton pub/sub com persistência append-only:
+
+\begin{itemize}
+    \item \textbf{subscribe(topic, callback)}: agentes inscrevem-se em tópicos (ex: \texttt{"task.cfp"}, \texttt{"agent.register"});
+    \item \textbf{publish(topic, payload, source\_agent)}: publica evento, persiste em \texttt{.jsonl}, notifica subscribers;
+    \item \textbf{wildcard}: \texttt{"*"} recebe todos os eventos (usado pelo orquestrador);
+    \item \textbf{Memória}: \texttt{MetacognitiveMemory} (episódica + semântica) compartilhada via singleton.
+\end{itemize}
+
+\section{Blackboard: Coordenação Multiagente Descentralizada}
+
+O \textbf{Blackboard} (\texttt{mci/blackboard.py}) é o mercado de tarefas:
+
+\begin{enumerate}
+    \item \textbf{Registry}: dicionário de Agent Cards (\texttt{\{agent\_id: AgentCard\}});
+    \item \textbf{Tasks}: dicionário de BlackboardTask com estados (open, assigned, completed, failed);
+    \item \textbf{Matching}: \texttt{\_match\_task()} filtra agentes por capacidades e ordena por Trust Score;
+    \item \textbf{CFP}: emite Call for Proposals para agentes elegíveis;
+    \item \textbf{Completion}: ao finalizar, dispara \texttt{metacognition.reflect\_request} para o Reflexion Engine.
+\end{enumerate}
+
+\section{Integração MCP e Antigravity Bridge}
+
+O \textbf{Model Context Protocol} (MCP; Anthropic, 2024) é integrado via \texttt{mci/mcp\_server.py}, expondo 4 tools:
+
+\begin{itemize}
+    \item \texttt{mci\_register\_agent}: registra agente no Blackboard;
+    \item \texttt{mci\_post\_task}: publica tarefa;
+    \item \texttt{mci\_get\_memory}: consulta memória metacognitiva;
+    \item \texttt{mci\_get\_blackboard\_state}: estado atual do ecossistema.
+\end{itemize}
+
+A \textbf{Antigravity Bridge} conecta o OpenCode ao Google DeepMind, permitindo delegação de tarefas de imagem, browser, pesquisa web e subagentes paralelos com 100\% de saúde operacional.
+
+\begin{thebibliography}{99}
+\bibitem{unifiedmind2025} Claro, M., et al. (2025). Unified Mind Model: GWT for Multi-Agent Metacognition. \textit{arXiv:2503.03459}.
+\bibitem{a2a2025} Claro, M., et al. (2025). Agent-to-Agent Protocol with Metacognitive Confidence Scoring. \textit{arXiv:2505.02279}. \doiurl{10.48550/arXiv.2505.02279}
+\bibitem{baars1988cognitive} Baars, B. J. (1988). \textit{A Cognitive Theory of Consciousness}. Cambridge University Press.
+\bibitem{bengio2023gwt} Bengio, Y. (2023). GWT in AI Systems. \textit{NeurIPS 2023 Workshop}.
+\bibitem{shinn2023reflexion} Shinn, N., et al. (2023). Reflexion. \textit{NeurIPS 2023}. \doiurl{10.48550/arXiv.2303.11366}
+\bibitem{lewis2020retrieval} Lewis, P., et al. (2020). RAG. \textit{NeurIPS 2020}. \doiurl{10.48550/arXiv.2005.11401}
+\end{thebibliography}
