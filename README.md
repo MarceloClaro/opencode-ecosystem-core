@@ -67,7 +67,18 @@ Todos os componentes e agentes do ecossistema operam estritamente sob as metodol
 - `examples/`: Scripts de demonstração end-to-end.
 - `tests/`: Bateria de testes automatizados (pytest).
 
-## Quickstart
+## Instalador Automático para Windows (1-Click)
+
+Se você usa Windows 10/11, pode instalar todo o ambiente (WSL2, Ubuntu, OpenCode CLI, Antigravity, Ollama e o Ecossistema) com um único comando no **PowerShell (como Administrador)**:
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/installer/windows/Install-OpenCodeEcosystem.ps1 | iex
+```
+Isso criará atalhos na sua Área de Trabalho para abrir o OpenCode e o Antigravity já integrados ao ecossistema. Veja os [detalhes do instalador aqui](installer/windows/README.md).
+
+---
+
+## Quickstart (Manual / Linux / macOS)
 
 ### 1. Requisitos
 - Python 3.10+
