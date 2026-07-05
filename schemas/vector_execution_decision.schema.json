@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencode-ecosystem-core/schemas/vector_execution_decision.schema.json",
+  "title": "VectorExecutionDecision",
+  "type": "object",
+  "required": [
+    "request_id",
+    "chosen_path",
+    "policy_reason",
+    "risk_level",
+    "expected_gain",
+    "fallback_triggered",
+    "telemetry",
+    "version"
+  ],
+  "properties": {
+    "request_id": { "type": "string" },
+    "chosen_path": { "type": "string", "enum": ["original", "vector"] },
+    "policy_reason": { "type": "string" },
+    "risk_level": { "type": "string" },
+    "expected_gain": { "type": "number" },
+    "fallback_triggered": { "type": "boolean" },
+    "telemetry": {
+      "type": "object",
+      "required": ["EG", "TRR", "RI", "EFS"],
+      "properties": {
+        "EG": { "type": "number" },
+        "TRR": { "type": "number" },
+        "RI": { "type": "number" },
+        "EFS": { "type": "number" }
+      }
+    },
+    "version": { "type": "string" }
+  },
+  "additionalProperties": false
+}

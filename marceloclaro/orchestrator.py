@@ -26,6 +26,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from mci.metabus import metabus
 from mci.blackboard import blackboard
 from mci.reflexion import reflexion_engine  # noqa: F401 — ativa o singleton
+from mci import run_scientific_cycle, run_scientific_governance_pipeline
 from marceloclaro.agent_loader import register_all_agents, load_agent_definitions
 from transformer.attention import AttentionRouter
 from transformer.pipeline import TransformerPipeline, GradingHead
@@ -292,6 +293,31 @@ class MarceloClaroOrchestrator:
                 f"{result['final_grade']['score']}/{result['final_grade']['max_score']}."
             ),
             score=result["final_grade"]["normalized"],
+        )
+        return result
+
+    def run_scientific_governance(self, problem_text: str, executor_fn: Any = None,
+                                  context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """
+        Executa a tarefa no pipeline científico completo com governança (OQS + MCI + VSEE + EGS).
+        """
+        if executor_fn is None:
+            def default_exec(ctx):
+                return {"result_type": "original", "data": f"Executado raciocínio original para: {problem_text}"}
+            executor_fn = default_exec
+            
+        result = run_scientific_governance_pipeline(problem_text, executor_fn, context)
+        
+        # Registra a experiência na memória metacognitiva global
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"scientific_governance: {problem_text}",
+            reflection=(
+                f"Pipeline científico concluído com status {result['status']}. "
+                f"OQS: {'passou' if result['oqs']['pass'] else 'falhou'} (CS={result['oqs']['scores']['CS']}), "
+                f"EGS: decisão={result['egs']['decision']} (score={result['egs']['alignment_score']})."
+            ),
+            score=1.0 if result["pipeline_success"] else 0.0,
         )
         return result
 
