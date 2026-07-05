@@ -1,0 +1,964 @@
+[
+  {
+    "input_id": "tool.websearch",
+    "name": "Websearch",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 1",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-1-armadilha-renda-media.md"
+    ],
+    "source": "extracted:evo-1",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.academic_search",
+    "name": "Academic_Search",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 1",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-1-armadilha-renda-media.md"
+    ],
+    "source": "extracted:evo-1",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.code_runner",
+    "name": "Code Runner",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 1",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-1-armadilha-renda-media.md"
+    ],
+    "source": "extracted:evo-1",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.sequential_thinking",
+    "name": "Sequential Thinking",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 1",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-1-armadilha-renda-media.md"
+    ],
+    "source": "extracted:evo-1",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.fetch",
+    "name": "Fetch",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 1",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-1-armadilha-renda-media.md"
+    ],
+    "source": "extracted:evo-1",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.pearson",
+    "name": "Pearson",
+    "input_type": "method",
+    "description": "3. Pearson com n=10 requer interpretacao por intensidade (Cohen), nao por significancia",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-1-armadilha-renda-media.md"
+    ],
+    "source": "extracted:evo-1",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.cross_validation",
+    "name": "Cross-Validation",
+    "input_type": "method",
+    "description": "4. Cross-validation em 3 niveis (intra-amostra, entre-grupos, razao) aumenta robustez",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-1-armadilha-renda-media.md"
+    ],
+    "source": "extracted:evo-1",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.filesystem",
+    "name": "Filesystem",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 2",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-2-artigo-35-paginas.md"
+    ],
+    "source": "extracted:evo-2",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.write",
+    "name": "Write",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 2",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-2-artigo-35-paginas.md"
+    ],
+    "source": "extracted:evo-2",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.memory",
+    "name": "Memory",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 2",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-2-artigo-35-paginas.md"
+    ],
+    "source": "extracted:evo-2",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.scihub",
+    "name": "Scihub",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 3",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-3-tsac-citation-system.md"
+    ],
+    "source": "extracted:evo-3",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.pdf",
+    "name": "Pdf",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 3",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-3-tsac-citation-system.md"
+    ],
+    "source": "extracted:evo-3",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.eslint",
+    "name": "Eslint",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 3",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-3-tsac-citation-system.md"
+    ],
+    "source": "extracted:evo-3",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.sqlite",
+    "name": "Sqlite",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 3",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-5-cross-validation-engine.md"
+    ],
+    "source": "extracted:evo-3",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.python",
+    "name": "Python",
+    "input_type": "tool",
+    "description": "Ferramenta usada no ciclo evolutivo Round 3",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-5-cross-validation-engine.md"
+    ],
+    "source": "extracted:evo-3",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.agent_forum",
+    "name": "Agent Forum",
+    "input_type": "tool",
+    "description": "description: \"Skill do ecossistema OpenCode - agent-forum\"",
+    "maturity": "established",
+    "references": [
+      "skills\\agent-forum\\SKILL.md"
+    ],
+    "source": "extracted:skill-agent-forum",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.agent_node_pipeline",
+    "name": "Agent Node Pipeline",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\agent-node-pipeline\\SKILL.md"
+    ],
+    "source": "extracted:skill-agent-node-pipeline",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.aletheia_opencode_native",
+    "name": "Aletheia Opencode Native",
+    "input_type": "tool",
+    "description": "description: Aletheia Opencode Native skill for the OpenCode ecosystem",
+    "maturity": "established",
+    "references": [
+      "skills\\aletheia-opencode-native\\SKILL.md"
+    ],
+    "source": "extracted:skill-aletheia-opencode-native",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.antigravity_integration",
+    "name": "Antigravity Integration",
+    "input_type": "tool",
+    "description": "description: \"Skill de integração OpenCode ↔ Antigravity — expõe capacidades exclusivas do Google DeepMind Advanced Agentic Coding ao ecossistema OpenCode v4.2\"",
+    "maturity": "established",
+    "references": [
+      "skills\\antigravity-integration\\SKILL.md"
+    ],
+    "source": "extracted:skill-antigravity-integration",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.code_graphrag",
+    "name": "Code Graphrag",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\code-graphrag\\SKILL.md"
+    ],
+    "source": "extracted:skill-code-graphrag",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.config_generator",
+    "name": "Config Generator",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\config-generator\\SKILL.md"
+    ],
+    "source": "extracted:skill-config-generator",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.cora_debate",
+    "name": "Cora Debate",
+    "input_type": "tool",
+    "description": "description: \"Arquitetura de debate multiagente com verificacao simbolica (Cora: Cognitive ORchestrated Argumentation). Q-Score UCB1, 7 verificadores V1-V7, self-consistency K=7, temperatura adaptativ",
+    "maturity": "established",
+    "references": [
+      "skills\\cora-debate\\SKILL.md"
+    ],
+    "source": "extracted:skill-cora-debate",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.decisionnode",
+    "name": "Decisionnode",
+    "input_type": "tool",
+    "description": "description: \"DecisionNode: CLI + MCP para memória estruturada de decisões entre ferramentas de IA (Claude Code, Cursor, Windsurf, Antigravity). Permite registrar, buscar semanticamente, editar e depr",
+    "maturity": "established",
+    "references": [
+      "skills\\decisionnode\\SKILL.md"
+    ],
+    "source": "extracted:skill-decisionnode",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.docling_pdf_extraction",
+    "name": "Docling Pdf Extraction",
+    "input_type": "tool",
+    "description": "description: \"Extracao avancada de documentos via Docling (IBM Research)\"",
+    "maturity": "established",
+    "references": [
+      "skills\\docling-pdf-extraction\\SKILL.md"
+    ],
+    "source": "extracted:skill-docling-pdf-extraction",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.document_ir",
+    "name": "Document Ir",
+    "input_type": "tool",
+    "description": "description: \"Skill do ecossistema OpenCode - document-ir\"",
+    "maturity": "established",
+    "references": [
+      "skills\\document-ir\\SKILL.md"
+    ],
+    "source": "extracted:skill-document-ir",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.entity_ner_reader",
+    "name": "Entity Ner Reader",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\entity-ner-reader\\SKILL.md"
+    ],
+    "source": "extracted:skill-entity-ner-reader",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.file_ipc",
+    "name": "File Ipc",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\file-ipc\\SKILL.md"
+    ],
+    "source": "extracted:skill-file-ipc",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.fs_ipc",
+    "name": "Fs Ipc",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\fs-ipc\\SKILL.md"
+    ],
+    "source": "extracted:skill-fs-ipc",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.graph_builder_pipeline",
+    "name": "Graph Builder Pipeline",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\graph-builder-pipeline\\SKILL.md"
+    ],
+    "source": "extracted:skill-graph-builder-pipeline",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.graph_memory_updater",
+    "name": "Graph Memory Updater",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\graph-memory-updater\\SKILL.md"
+    ],
+    "source": "extracted:skill-graph-memory-updater",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.hot_reload_skills",
+    "name": "Hot Reload Skills",
+    "input_type": "tool",
+    "description": "description: Hot Reload Skills skill for the OpenCode ecosystem",
+    "maturity": "established",
+    "references": [
+      "skills\\hot-reload-skills\\SKILL.md"
+    ],
+    "source": "extracted:skill-hot-reload-skills",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.hybrid_graph_retrieval",
+    "name": "Hybrid Graph Retrieval",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\hybrid-graph-retrieval\\SKILL.md"
+    ],
+    "source": "extracted:skill-hybrid-graph-retrieval",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.machine_states",
+    "name": "Machine States",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\machine-states\\SKILL.md"
+    ],
+    "source": "extracted:skill-machine-states",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.maswos_v5_nexus",
+    "name": "Maswos V5 Nexus",
+    "input_type": "tool",
+    "description": "description: \"Referência do framework MASWOS V5 NEXUS — 130+ agentes, 9 estratégias RAG, arquitetura Transformer Network, pipeline acadêmico Qualis A1 e jurídico. Use quando mencionar 'maswos', 'trans",
+    "maturity": "established",
+    "references": [
+      "skills\\maswos-v5-nexus\\SKILL.md"
+    ],
+    "source": "extracted:skill-maswos-v5-nexus",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.mirofish_sync",
+    "name": "Mirofish Sync",
+    "input_type": "tool",
+    "description": "description: Agente de sincronização MiroFish/BettaFish ↔ OpenCode. Monitora repos upstream (666ghj/MiroFish, 666ghj/BettaFish, bytedance/deer-flow), detecta novos padrões, extrai automaticamente via ",
+    "maturity": "established",
+    "references": [
+      "skills\\mirofish-sync\\SKILL.md"
+    ],
+    "source": "extracted:skill-mirofish-sync",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.oasis_profile_gen",
+    "name": "Oasis Profile Gen",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\oasis-profile-gen\\SKILL.md"
+    ],
+    "source": "extracted:skill-oasis-profile-gen",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.ontology_generator",
+    "name": "Ontology Generator",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\ontology-generator\\SKILL.md"
+    ],
+    "source": "extracted:skill-ontology-generator",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.plan_generator",
+    "name": "Plan Generator",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\plan-generator\\SKILL.md"
+    ],
+    "source": "extracted:skill-plan-generator",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.process_lifecycle",
+    "name": "Process Lifecycle",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\process-lifecycle\\SKILL.md"
+    ],
+    "source": "extracted:skill-process-lifecycle",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.provider_factory",
+    "name": "Provider Factory",
+    "input_type": "tool",
+    "description": "description: Provider Factory skill for the OpenCode ecosystem",
+    "maturity": "established",
+    "references": [
+      "skills\\provider-factory\\SKILL.md"
+    ],
+    "source": "extracted:skill-provider-factory",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.react_agent_loop",
+    "name": "React Agent Loop",
+    "input_type": "tool",
+    "description": "description: React Agent Loop skill for the OpenCode ecosystem",
+    "maturity": "established",
+    "references": [
+      "skills\\react-agent-loop\\SKILL.md"
+    ],
+    "source": "extracted:skill-react-agent-loop",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.reasoning_orchestrator_v11",
+    "name": "Reasoning Orchestrator V11",
+    "input_type": "tool",
+    "description": "description: \"Orquestrador de Raciocinio Multiagente v11.0 — 68 tipos de raciocinio em 12 categorias. Coordena agentes especializados (Inductor, BaseCase, Contradiction, LemmaTracker, CrossRef, Stress",
+    "maturity": "established",
+    "references": [
+      "skills\\reasoning-orchestrator-v11\\SKILL.md"
+    ],
+    "source": "extracted:skill-reasoning-orchestrator-v11",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.reasoning_orchestrator_v12",
+    "name": "Reasoning Orchestrator V12",
+    "input_type": "tool",
+    "description": "description: \"Parallel Thinking Engine v12.0 — 3 camadas de paralelismo (intra-fase, inter-fase, multi-caminho), Inference-Time Scaling, 7 verificadores paralelos Cora-Debate V1-V7, síntese multi-cade",
+    "maturity": "established",
+    "references": [
+      "skills\\reasoning-orchestrator-v12\\SKILL.md"
+    ],
+    "source": "extracted:skill-reasoning-orchestrator-v12",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.report_agent_react",
+    "name": "Report Agent React",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\report-agent-react\\SKILL.md"
+    ],
+    "source": "extracted:skill-report-agent-react",
+    "validation_cts": []
+  },
+  {
+    "input_id": "tool.swarm_review",
+    "name": "Swarm Review",
+    "input_type": "tool",
+    "description": "description: >",
+    "maturity": "established",
+    "references": [
+      "skills\\swarm-review\\SKILL.md"
+    ],
+    "source": "extracted:skill-swarm-review",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.causalidade",
+    "name": "Causalidade",
+    "input_type": "concept",
+    "description": "Relação de causa e efeito entre variáveis",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.probabilidade",
+    "name": "Probabilidade",
+    "input_type": "concept",
+    "description": "Incerteza quantificada e inferência sob condições estocásticas",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.dependencia_estrutural",
+    "name": "Dependencia Estrutural",
+    "input_type": "concept",
+    "description": "Relações de pré-requisito entre capacidades cognitivas",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.abstracao",
+    "name": "Abstracao",
+    "input_type": "concept",
+    "description": "Capacidade de isolar propriedades essenciais de um fenômeno",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.transferencia_aprendizagem",
+    "name": "Transferencia Aprendizagem",
+    "input_type": "concept",
+    "description": "Aplicação de princípios de um domínio a outro",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.validacao_empirica",
+    "name": "Validacao Empirica",
+    "input_type": "concept",
+    "description": "Confirmação de hipóteses por observação sistemática",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.aderencia_estrutural",
+    "name": "Aderencia Estrutural",
+    "input_type": "concept",
+    "description": "Grau de acoplamento entre componentes de um sistema",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.inferencia",
+    "name": "Inferencia",
+    "input_type": "concept",
+    "description": "Derivação de conclusões a partir de premissas e evidências",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.estado_futuro",
+    "name": "Estado Futuro",
+    "input_type": "concept",
+    "description": "Configuração desejada de um sistema em tempo futuro",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "concept.capacidade",
+    "name": "Capacidade",
+    "input_type": "concept",
+    "description": "Habilidade cognitiva ou tecnológica construível",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.engenharia_reversa",
+    "name": "Engenharia Reversa",
+    "input_type": "method",
+    "description": "Análise de um sistema a partir de seu estado final desejado para identificar pré-requisitos",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.validacao_cruzada",
+    "name": "Validacao Cruzada",
+    "input_type": "method",
+    "description": "Verificação de resultados por múltiplos métodos independentes",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.analise_estrutural",
+    "name": "Analise Estrutural",
+    "input_type": "method",
+    "description": "Decomposição de um sistema em componentes e suas relações",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.raciocinio_comparativo",
+    "name": "Raciocinio Comparativo",
+    "input_type": "method",
+    "description": "Identificação de padrões por comparação entre sistemas",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.decomposicao_hierarquica",
+    "name": "Decomposicao Hierarquica",
+    "input_type": "method",
+    "description": "Divisão recursiva de um problema em subproblemas",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.design_fatorial",
+    "name": "Design Fatorial",
+    "input_type": "method",
+    "description": "Planejamento experimental com múltiplos fatores e níveis",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.randomizacao",
+    "name": "Randomizacao",
+    "input_type": "method",
+    "description": "Alocação aleatória para controle de vieses",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "method.analise_poder_estatistico",
+    "name": "Analise Poder Estatistico",
+    "input_type": "method",
+    "description": "Cálculo de tamanho amostral para detectar efeitos",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.neurociencia",
+    "name": "Neurociencia",
+    "input_type": "external_domain",
+    "description": "Estudo do sistema nervoso e processos cognitivos",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.biologia_evolutiva",
+    "name": "Biologia Evolutiva",
+    "input_type": "external_domain",
+    "description": "Mecanismos de variação, seleção e hereditariedade",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.linguistica",
+    "name": "Linguistica",
+    "input_type": "external_domain",
+    "description": "Estrutura, aquisição e processamento da linguagem",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.estatistica",
+    "name": "Estatistica",
+    "input_type": "external_domain",
+    "description": "Teoria e métodos de inferência a partir de dados",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.ciencia_computacao",
+    "name": "Ciencia Computacao",
+    "input_type": "external_domain",
+    "description": "Algoritmos, complexidade e sistemas computacionais",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.engenharia",
+    "name": "Engenharia",
+    "input_type": "external_domain",
+    "description": "Projeto, construção e otimização de sistemas",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.economia",
+    "name": "Economia",
+    "input_type": "external_domain",
+    "description": "Alocação de recursos escassos e mecanismos de incentivo",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.sociologia",
+    "name": "Sociologia",
+    "input_type": "external_domain",
+    "description": "Estrutura e dinâmica de sistemas sociais",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.filosofia_ciencia",
+    "name": "Filosofia Ciencia",
+    "input_type": "external_domain",
+    "description": "Fundamentos epistemológicos do conhecimento científico",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "domain.teoria_jogos",
+    "name": "Teoria Jogos",
+    "input_type": "external_domain",
+    "description": "Modelagem de interações estratégicas entre agentes",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "valid.coerencia_identificada",
+    "name": "Coerencia Identificada",
+    "input_type": "validation",
+    "description": "Capacidades identificadas formam um grafo acíclico e completo",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "valid.aderencia_estado_futuro",
+    "name": "Aderencia Estado Futuro",
+    "input_type": "validation",
+    "description": "Teleological score atinge threshold após construção",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "valid.composicao_completa",
+    "name": "Composicao Completa",
+    "input_type": "validation",
+    "description": "Toda capability tem pelo menos 1 input de cada tipo relevante",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "valid.ct_passam",
+    "name": "Ct Passam",
+    "input_type": "validation",
+    "description": "CTs associados à capability passam após construção",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "knowledge_base.artigos_cientificos",
+    "name": "Artigos Cientificos",
+    "input_type": "knowledge_base",
+    "description": "Literatura academica revisada por pares com DOIs verificaveis",
+    "maturity": "established",
+    "references": [
+      "arXiv",
+      "PubMed",
+      "OpenAlex"
+    ],
+    "source": "curated",
+    "validation_cts": [
+      "CT-NS-001"
+    ]
+  },
+  {
+    "input_id": "knowledge_base.documentacao_tecnica",
+    "name": "Documentacao Tecnica",
+    "input_type": "knowledge_base",
+    "description": "Manuais, specs, RFCs e documentacao de referencia de ferramentas e frameworks",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "knowledge_base.repositorios_codigo",
+    "name": "Repositorios de Codigo",
+    "input_type": "knowledge_base",
+    "description": "Codigo fonte em repositorios publicos (GitHub, GitLab) como base de conhecimento",
+    "maturity": "established",
+    "references": [
+      "github.com"
+    ],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "knowledge_base.normas_tecnicas",
+    "name": "Normas Tecnicas",
+    "input_type": "knowledge_base",
+    "description": "Padroes tecnicos formais (ABNT, ISO, IEEE) que regulam a qualidade do conhecimento",
+    "maturity": "established",
+    "references": [
+      "ABNT NBR 6023:2018"
+    ],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "knowledge_base.dados_empiricos",
+    "name": "Dados Empiricos",
+    "input_type": "knowledge_base",
+    "description": "Datasets, observacoes e medicoes que fundamentam afirmacoes empiricas",
+    "maturity": "established",
+    "references": [
+      "World Bank API",
+      "UNESCO",
+      "WHO"
+    ],
+    "source": "curated",
+    "validation_cts": [
+      "CT-NS-005"
+    ]
+  },
+  {
+    "input_id": "knowledge_base.conhecimento_historico",
+    "name": "Conhecimento Historico",
+    "input_type": "knowledge_base",
+    "description": "Registros de decisoes passadas, ciclos evolutivos e licoes aprendidas no ecosistema",
+    "maturity": "established",
+    "references": [
+      "evolution/evo-*.md"
+    ],
+    "source": "extracted:evo-1",
+    "validation_cts": []
+  },
+  {
+    "input_id": "knowledge_base.livros_fundamentais",
+    "name": "Livros Fundamentais",
+    "input_type": "knowledge_base",
+    "description": "Obras canonicas que estabelecem os fundamentos teoricos de um dominio",
+    "maturity": "established",
+    "references": [],
+    "source": "curated",
+    "validation_cts": []
+  },
+  {
+    "input_id": "knowledge_base.especificacoes_formais",
+    "name": "Especificacoes Formais",
+    "input_type": "knowledge_base",
+    "description": "Documentos SPEC-0xx que definem formalmente capacidades e pipelines do ecosistema",
+    "maturity": "established",
+    "references": [
+      "specs/SPEC_*.md"
+    ],
+    "source": "curated",
+    "validation_cts": [
+      "CT-COMP-003"
+    ]
+  }
+]

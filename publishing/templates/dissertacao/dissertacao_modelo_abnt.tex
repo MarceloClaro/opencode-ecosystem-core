@@ -1,0 +1,354 @@
+% =============================================================================
+% DISSERTAÇÃO/TESE MODELO — ABNT (abnTeX2)
+% =============================================================================
+% Classe: abntex2.cls v1.9.7
+% Normas: NBR 14724 (estrutura), NBR 10520:2023 (citações),
+%         NBR 6023:2018 (referências), NBR 6024 (numeração),
+%         NBR 6027 (sumário), NBR 6028:2021 (resumo)
+% =============================================================================
+\documentclass[
+  12pt,
+  openright,
+  twoside,
+  a4paper,
+  brazilian
+]{abntex2}
+
+% --- Pacotes essenciais ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage[brazilian,portuges]{babel}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[alf]{abntex2cite}
+\usepackage[algoruled,portuguese]{algorithm2e}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage{xcolor}
+
+% --- Configuração das margens (NBR 14724) ---
+% 3cm superior/esquerda, 2cm inferior/direita
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkoddpage
+\checkopenright
+\checkandfixthelayout
+
+% --- Metadados do PDF ---
+\hypersetup{
+  pdfauthor={Nome do Autor},
+  pdftitle={Título da Dissertação},
+  pdfsubject={Área de Concentração},
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black
+}
+
+% --- Dados institucionais ---
+\instituicao{Universidade Federal do Ceará (UFC)}
+
+\begin{document}
+
+% ============================================================================
+% ELEMENTOS PRÉ-TEXTUAIS
+% ============================================================================
+
+% --- Capa ---
+\titulo{Título da Dissertação: Subtítulo (se houver)}
+\autor{Nome Completo do Autor}
+\local{Fortaleza, CE}
+\data{2026}
+\orientador{Prof. Dr. Nome do Orientador}
+\coorientador{Prof. Dr. Nome do Coorientador (opcional)}
+\preambulo{Dissertação apresentada ao Programa de
+Pós-Graduação em Tecnologia Educacional da Universidade Federal do Ceará (UFC),
+como requisito parcial para a obtenção do título de Mestre em Tecnologia
+Educacional.}
+
+\imprimircapa
+
+% --- Folha de rosto ---
+\imprimirfolhaderosto
+
+% --- Ficha catalográfica ---
+% Deve ser gerada pela biblioteca da instituição e inserida como PDF
+% \include{ficha_catalografica}
+
+% --- Folha de aprovação ---
+% Deve ser inserida após a defesa. Modelo:
+% \begin{folhadeaprovacao}
+%   \begin{center}
+%     {\textbf{\imprimirautor}}\par
+%     \vspace*{\fill}
+%     \begin{center}
+%       \textbf{\imprimirtitulo}
+%     \end{center}
+%     \vspace*{\fill}
+%     \hspace{.45\textwidth}
+%     \begin{minipage}{.5\textwidth}
+%       \imprimirpreambulo
+%     \end{minipage}%
+%     \vspace*{\fill}
+%   \end{center}
+%   Trabalho aprovado. \imprimirlocal, data da defesa:
+%   \assinatura{\textbf{\imprimirorientador} \\ Orientador}
+%   \assinatura{\textbf{Convidado 1} \\ Convidado}
+%   \assinatura{\textbf{Convidado 2} \\ Convidado}
+%   \begin{center}
+%     \vfill
+%     {\imprimirlocal}\par
+%     \imprimirdata
+%   \end{center}
+% \end{folhadeaprovacao}
+
+% --- Dedicatória (opcional) ---
+\begin{dedicatoria}
+  \vspace*{\fill}
+  \centering
+  \noindent
+  \textit{Dedico este trabalho a...}
+  \vspace*{\fill}
+\end{dedicatoria}
+
+% --- Agradecimentos (opcional) ---
+\begin{agradecimentos}
+Agradeço ao meu orientador, Prof. Dr. Nome, pela orientação e apoio durante
+toda a pesquisa.
+
+Aos professores do Programa de Pós-Graduação em Tecnologia Educacional da UFC,
+pelas contribuições teóricas e metodológicas.
+
+À [Agência de Fomento], pelo apoio financeiro (Processo nº XXXX).
+
+Aos colegas de laboratório e grupo de pesquisa, pelo diálogo e colaboração.
+
+À minha família, pelo suporte incondicional.
+\end{agradecimentos}
+
+% --- Epígrafe (opcional) ---
+\begin{epigrafe}
+  \vspace*{\fill}
+  \begin{flushright}
+    \textit{``A citação que inspira o trabalho.''} \\
+    (Autor, Ano)
+  \end{flushright}
+  \vspace*{\fill}
+\end{epigrafe}
+
+% --- Resumo (português) ---
+\setlength{\absparsep}{18pt}
+\begin{resumo}
+O resumo deve apresentar objetivo, método, resultados e conclusões da
+pesquisa, em parágrafo único de 150 a 500 palavras (dissertação/tese).
+Palavras-chave representativas do conteúdo, separadas por ponto e finalizadas
+por ponto.
+\vspace{\onelineskip}
+
+\noindent
+\textbf{Palavras-chave}: Palavra-chave 1. Palavra-chave 2. Palavra-chave 3.
+Palavra-chave 4.
+\end{resumo}
+
+% --- Abstract (inglês) ---
+\begin{resumo}[Abstract]
+  \begin{otherlanguage*}{english}
+  The abstract should present objective, method, results and conclusions of
+  the research in a single paragraph of 150 to 500 words.
+  \vspace{\onelineskip}
+
+  \noindent
+  \textbf{Keywords}: Keyword 1. Keyword 2. Keyword 3. Keyword 4.
+  \end{otherlanguage*}
+\end{resumo}
+
+% --- Resumo em outras línguas (opcional) ---
+% \begin{resumo}[Résumé]
+%   \begin{otherlanguage*}{french}
+%   ... texto em francês ...
+%   \end{otherlanguage*}
+% \end{resumo}
+
+% --- Lista de ilustrações ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+% --- Lista de tabelas ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+% --- Lista de abreviaturas e siglas ---
+\begin{siglas}
+  \item[ABNT] Associação Brasileira de Normas Técnicas
+  \item[CAPES] Coordenação de Aperfeiçoamento de Pessoal de Nível Superior
+  \item[CNPq] Conselho Nacional de Desenvolvimento Científico e Tecnológico
+  \item[UFC] Universidade Federal do Ceará
+  \item[TIC] Tecnologias da Informação e Comunicação
+\end{siglas}
+
+% --- Lista de símbolos ---
+\begin{simbolos}
+  \item[$n$] Número de elementos da amostra
+  \item[$p$] Nível de significância (p-valor)
+  \item[$\sigma$] Desvio-padrão
+  \item[$\bar{x}$] Média aritmética
+\end{simbolos}
+
+% --- Sumário ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ============================================================================
+% ELEMENTOS TEXTUAIS
+% ============================================================================
+\textual
+
+% --- 1. INTRODUÇÃO ---
+\chapter[Introdução]{Introdução}
+
+A introdução deve apresentar:
+\begin{itemize}
+  \item Contexto e delimitação do tema
+  \item Problema de pesquisa (em forma de pergunta)
+  \item Hipóteses ou questões norteadoras
+  \item Objetivos (geral e específicos)
+  \item Justificativa (relevância teórica, prática e social)
+  \item Estrutura do trabalho
+\end{itemize}
+
+\section{Problema de Pesquisa}
+
+Formulação clara e delimitada do problema que se pretende investigar.
+
+\section{Objetivos}
+
+\subsection{Objetivo Geral}
+
+Síntese do que se pretende alcançar com a pesquisa.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+  \item Objetivo específico 1
+  \item Objetivo específico 2
+  \item Objetivo específico 3
+\end{itemize}
+
+% --- 2. REFERENCIAL TEÓRICO ---
+\chapter[Referencial Teórico]{Referencial Teórico}
+
+\section{Tema Central}
+
+Fundamentação teórica do constructo principal.
+
+\subsection{Subtema 1}
+
+Desenvolvimento com citações:
+
+\begin{citacao}
+A citação direta longa deve ser formatada em parágrafo independente, recuado
+4 cm da margem esquerda, em fonte 10, espaçamento simples e sem aspas,
+conforme a NBR 10520:2023. A referência (Autor, ano, p. X) deve ser indicada
+fora do bloco.
+\end{citacao}
+
+\subsection{Subtema 2}
+
+Desenvolvimento do segundo constructo.
+
+\section{Estado da Arte}
+
+Revisão sistemática ou integrativa da literatura recente sobre o tema,
+demonstrando o que já foi pesquisado e quais lacunas persistem.
+
+% --- 3. METODOLOGIA ---
+\chapter[Metodologia]{Metodologia}
+
+\section{Classificação da Pesquisa}
+
+\section{Contexto e Participantes}
+
+\section{Instrumentos e Procedimentos}
+
+\section{Procedimentos de Análise}
+
+\section{Aspectos Éticos}
+
+% --- 4. RESULTADOS ---
+\chapter[Resultados]{Resultados}
+
+\section{Análise Descritiva}
+
+\section{Análise Inferencial}
+
+\begin{table}[H]
+\centering
+\caption{Resultados da análise estatística.}
+\label{tab:resultados}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Variável} & \textbf{Pré-teste} & \textbf{Pós-teste} & \textbf{p} \\
+\midrule
+Indicador A & 45,2 $\pm$ 3,1 & 52,8 $\pm$ 2,9 & $< 0,05$ \\
+Indicador B & 78,6 $\pm$ 4,2 & 81,3 $\pm$ 3,8 & $0,12$ \\
+\bottomrule
+\end{tabular}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% --- 5. DISCUSSÃO ---
+\chapter[Discussão]{Discussão}
+
+Interpretação dos resultados à luz da literatura. Comparação com estudos
+prévios, limitações e implicações.
+
+% --- 6. CONCLUSÃO ---
+\chapter[Conclusão]{Conclusão}
+
+Síntese dos achados, contribuições, limitações e sugestões para trabalhos
+futuros.
+
+% ============================================================================
+% ELEMENTOS PÓS-TEXTUAIS
+% ============================================================================
+\postextual
+
+% --- REFERÊNCIAS ---
+\bibliography{dissertacao_modelo_abnt}
+
+% --- GLOSSÁRIO (opcional) ---
+% \begin{glossario}
+%   \item[Termo 1] Definição do termo 1.
+%   \item[Termo 2] Definição do termo 2.
+% \end{glossario}
+
+% --- APÊNDICES (opcionais) ---
+\begin{apendicesenv}
+\partapendices
+
+\chapter{Instrumento de Coleta de Dados}
+Texto do instrumento (questionário, roteiro de entrevista, etc.)
+
+\end{apendicesenv}
+
+% --- ANEXOS (opcionais) ---
+% \begin{anexosenv}
+% \partanexos
+%
+% \chapter{Documento Original}
+% Texto do documento anexado.
+%
+% \end{anexosenv}
+
+% --- ÍNDICE REMISSIVO (opcional) ---
+% \printindex
+
+\end{document}

@@ -1,0 +1,211 @@
+{
+  "_comment": "OrchestrationEngine JSON Specification — OpenCode Ecosystem v1.0.0",
+  "name": "OrchestrationEngine",
+  "version": "1.0.0",
+  "component_id": "OE",
+  "description": "Central dispatch and coordination layer for the OpenCode ecosystem. Routes tasks to 128 registered agents across 155 skills and 46 MCP servers. Provides load-balanced, fault-tolerant, multi-reasoning-aware task orchestration with full SROI telemetry integration.",
+  "ecosystem_stats": {
+    "total_agents": 128,
+    "total_skills": 155,
+    "total_mcps": 46,
+    "health_score": 96,
+    "sroi_enabled": true
+  },
+  "constants": {
+    "MAX_RETRIES": 5,
+    "DEFAULT_TIMEOUT_MS": 30000,
+    "MIN_TIMEOUT_MS": 100,
+    "MAX_TIMEOUT_MS": 3600000,
+    "MIN_PRIORITY": 1,
+    "MAX_PRIORITY": 10,
+    "CONFIDENCE_FALLBACK_THRESHOLD": 0.4,
+    "MIN_HEALTHY_AGENTS_ALERT": 10,
+    "MIN_MCP_REACHABLE_RATIO": 0.8
+  },
+  "contracts": [
+    {
+      "name": "dispatchTask",
+      "description": "Validates and dispatches a task request to the optimal available agent. Core routing contract of the orchestration layer.",
+      "preconditions": [
+        "req.task_id is a valid UUID v4 string",
+        "req.task_id does NOT already exist in active_task_ids registry",
+        "req.skill_required exists in skill_registry (155 entries)",
+        "req.priority is an integer in range [1, 10]",
+        "req.timeout_ms is in range [100, 3600000] if provided",
+        "At least one agent exists with: health_status='healthy' AND skills.includes(req.skill_required) AND load < concurrency_slots"
+      ],
+      "postconditions": [
+        "req.task_id is added to active_task_ids registry",
+        "A TaskRecord with status='running' is created",
+        "selected_agent.load is incremented by 1",
+        "A 'task_dispatched' telemetry event is emitted with task_id and agent_id",
+        "task_record.started_at is set to current UTC timestamp"
+      ],
+      "invariants": [
+        "OE-I1: |active_dispatches| <= SUM(agent.concurrency_slots) for all healthy agents",
+        "OE-I2: Every dispatched task has a corresponding TaskRecord",
+        "OE-I5: All errors carry error_code, component_id, task_id, timestamp, message"
+      ],
+      "error_cases": [
+        { "code": "NO_CAPABLE_AGENT",  "condition": "No healthy agent has the required skill",              "retryable": true  },
+        { "code": "DUPLICATE_TASK_ID", "condition": "req.task_id already in active_task_ids",              "retryable": false },
+        { "code": "SKILL_NOT_FOUND",   "condition": "req.skill_required not in skill_registry",            "retryable": false },
+        { "code": "TIMEOUT_INVALID",   "condition": "req.timeout_ms outside [100, 3600000]",              "retryable": false }
+      ]
+    },
+    {
+      "name": "selectAgent",
+      "description": "Selects the optimal agent for a given skill using multi-factor scoring: available capacity, health score, and skill affinity.",
+      "preconditions": [
+        "skill_required is a valid SkillId present in skill_registry",
+        "candidate_agents (healthy agents with required skill) is non-empty",
+        "priority is in range [1, 10]"
+      ],
+      "postconditions": [
+        "Returns exactly one AgentId",
+        "Returned agent has health_status='healthy'",
+        "Returned agent has skills.includes(skill_required)=true",
+        "Returned agent has load < concurrency_slots",
+        "Score maximization: score = (concurrency_slots - load) * health_score * skill_affinity",
+        "Tiebreak: agent with lowest task_count_total is selected"
+      ],
+      "invariants": [
+        "OE-I3: Routing table is atomically read — no partial state visible"
+      ],
+      "error_cases": [
+        { "code": "NO_CAPABLE_AGENT", "condition": "candidate_agents is empty after filtering", "retryable": true }
+      ]
+    },
+    {
+      "name": "handleAgentFailure",
+      "description": "Fault tolerance contract: retries task on failure up to MAX_RETRIES, then permanently fails the task with a structured error.",
+      "preconditions": [
+        "task_record with task_id exists in active_task_ids",
+        "task_record.status = 'running'",
+        "agent_id is registered in the agent registry",
+        "failure_reason is a non-empty string"
+      ],
+      "postconditions": [
+        "IF retry_count < 5: task_record.status = 'retrying', retry_count incremented, task re-dispatched to different agent",
+        "IF retry_count >= 5: task_record.status = 'failed', error record written with MAX_RETRIES_EXCEEDED",
+        "A telemetry event ('task_retried' or 'task_failed_permanently') is emitted",
+        "Failed agent is marked for health re-evaluation"
+      ],
+      "invariants": [
+        "OE-I2: TaskRecord always reflects current status",
+        "OE-I5: Error record carries all required fields"
+      ],
+      "error_cases": [
+        { "code": "TASK_NOT_FOUND",        "condition": "task_id not found in active_task_ids",         "retryable": false },
+        { "code": "MAX_RETRIES_EXCEEDED",  "condition": "retry_count has reached MAX_RETRIES (5)",      "retryable": false }
+      ]
+    },
+    {
+      "name": "completeTask",
+      "description": "Marks a running task as successfully completed, releases agent load, and optionally triggers SROI snapshot attachment.",
+      "preconditions": [
+        "task_record.status = 'running'",
+        "result_payload is a valid OBJECT",
+        "assigned_agent.load > 0"
+      ],
+      "postconditions": [
+        "task_record.status = 'succeeded'",
+        "task_record.completed_at = NOW()",
+        "assigned_agent.load decremented by 1",
+        "If require_sroi=true: sroi_snapshot attached to DispatchResult",
+        "Telemetry event 'task_completed' emitted"
+      ],
+      "invariants": [
+        "OE-I1: Agent load cannot go below 0",
+        "GLOBAL-1: completed_at >= started_at"
+      ],
+      "error_cases": [
+        { "code": "TASK_NOT_RUNNING", "condition": "task_record.status != 'running'", "retryable": false }
+      ]
+    },
+    {
+      "name": "cancelTask",
+      "description": "Cancels a pending or running task, freeing agent resources and updating the task registry.",
+      "preconditions": [
+        "task_record exists",
+        "task_record.status in ['pending', 'running']",
+        "cancellation_reason is a non-empty string"
+      ],
+      "postconditions": [
+        "task_record.status = 'cancelled'",
+        "If task was running: assigned_agent.load decremented by 1",
+        "Telemetry event 'task_cancelled' emitted with reason"
+      ],
+      "invariants": [
+        "OE-I1: System load constraints maintained after cancellation"
+      ],
+      "error_cases": [
+        { "code": "TASK_NOT_CANCELLABLE", "condition": "task_record.status in ['succeeded', 'failed', 'cancelled']", "retryable": false }
+      ]
+    },
+    {
+      "name": "refreshRoutingTable",
+      "description": "Atomically rebuilds the agent routing table based on current agent health, skills, and load metrics.",
+      "preconditions": [
+        "Routing table write lock is acquired (no concurrent refresh)",
+        "Agent registry is readable"
+      ],
+      "postconditions": [
+        "Routing table contains only agents with health_status='healthy'",
+        "Each entry maps skill_id to sorted list of eligible agents by score",
+        "Write lock is released",
+        "Telemetry event 'routing_table_refreshed' emitted with agent count"
+      ],
+      "invariants": [
+        "OE-I3: Table update is atomic — no partial state is visible during refresh"
+      ],
+      "error_cases": [
+        { "code": "LOCK_ACQUISITION_FAILED", "condition": "Another refresh is already in progress", "retryable": true }
+      ]
+    }
+  ],
+  "error_catalog": {
+    "NO_CAPABLE_AGENT":       { "http_analog": 503, "retryable": true,  "severity": "high"   },
+    "DUPLICATE_TASK_ID":      { "http_analog": 409, "retryable": false, "severity": "medium" },
+    "SKILL_NOT_FOUND":        { "http_analog": 404, "retryable": false, "severity": "medium" },
+    "TIMEOUT_INVALID":        { "http_analog": 400, "retryable": false, "severity": "low"    },
+    "TASK_NOT_FOUND":         { "http_analog": 404, "retryable": false, "severity": "medium" },
+    "MAX_RETRIES_EXCEEDED":   { "http_analog": 503, "retryable": false, "severity": "high"   },
+    "TASK_NOT_RUNNING":       { "http_analog": 409, "retryable": false, "severity": "low"    },
+    "TASK_NOT_CANCELLABLE":   { "http_analog": 409, "retryable": false, "severity": "low"    },
+    "LOCK_ACQUISITION_FAILED":{ "http_analog": 503, "retryable": true,  "severity": "medium" }
+  },
+  "metrics": {
+    "counters": [
+      { "name": "opencode_oe_tasks_dispatched_total",  "labels": ["skill_id", "agent_id"] },
+      { "name": "opencode_oe_tasks_completed_total",   "labels": ["status"] },
+      { "name": "opencode_oe_tasks_retried_total",     "labels": ["reason"] },
+      { "name": "opencode_oe_tasks_failed_total",      "labels": ["error_code"] },
+      { "name": "opencode_oe_agent_failures_total",    "labels": ["agent_id", "reason"] }
+    ],
+    "gauges": [
+      { "name": "opencode_oe_active_tasks",       "labels": [] },
+      { "name": "opencode_oe_healthy_agents",     "labels": [] },
+      { "name": "opencode_oe_total_agent_load",   "labels": [] },
+      { "name": "opencode_oe_health_score",       "labels": [] }
+    ],
+    "histograms": [
+      { "name": "opencode_oe_task_dispatch_latency_ms", "labels": ["skill_id"],   "buckets": [10, 50, 100, 200, 500, 1000] },
+      { "name": "opencode_oe_task_duration_ms",         "labels": ["skill_id"],   "buckets": [100, 500, 1000, 5000, 30000] },
+      { "name": "opencode_oe_agent_select_duration_ms", "labels": ["strategy"],   "buckets": [1, 5, 10, 50, 100] }
+    ],
+    "slos": {
+      "task_dispatch_latency_p99_ms": 200,
+      "agent_selection_latency_p99_ms": 50,
+      "task_success_rate_pct": 95,
+      "system_health_score_min": 90
+    }
+  },
+  "load_balancing_strategy": {
+    "algorithm": "weighted_score",
+    "score_formula": "(concurrency_slots - current_load) * health_score * skill_affinity",
+    "tiebreak": "lowest_task_count_total",
+    "rebalance_interval_ms": 5000,
+    "health_check_interval_ms": 10000
+  }
+}

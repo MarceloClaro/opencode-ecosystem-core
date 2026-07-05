@@ -1,0 +1,68 @@
+{
+  "name": "AnnyAnatomicalAdapter",
+  "version": "1.0.0",
+  "description": "Formal contract and interface specification for integrating the Anny PyTorch parametric body model into the OpenCode dentistry digital twin.",
+  "contracts": [
+    {
+      "name": "parameterizePatientShape",
+      "preconditions": [
+        "profile demographic factors are present",
+        "profile values satisfy biological thresholds"
+      ],
+      "postconditions": [
+        "patient_shape state contains updated demographics",
+        "anatomical_mesh_hash is recomputed from shape geometry parameters"
+      ],
+      "invariants": [
+        "age in [0.0, 120.0]",
+        "height_cm in [30.0, 250.0]",
+        "weight_kg in [2.0, 250.0]"
+      ]
+    },
+    {
+      "name": "animateAnatomicalPose",
+      "preconditions": [
+        "joint_id is a valid body joint identifier",
+        "rotation values are in valid float bounds"
+      ],
+      "postconditions": [
+        "joints_pose maps updated orientation coordinates for joint_id",
+        "cranial-mandibular alignment is re-evaluated"
+      ],
+      "invariants": [
+        "TMJ jaw rotation flexion <= 45.0 degrees"
+      ]
+    },
+    {
+      "name": "mapIntraoralTexture",
+      "preconditions": [
+        "mesh_vertices matches coordinate space bounds",
+        "uvs elements are valid coordinates arrays"
+      ],
+      "postconditions": [
+        "uv_coordinates stores texture mappings",
+        "textures are scaled and mapped to model mouth cavity bounds"
+      ],
+      "invariants": [
+        "uv coordinates remain in normalized [0.0, 1.0] range (ANY-I3)"
+      ]
+    }
+  ],
+  "error_catalog": [
+    {
+      "code": "INVALID_DEMOGRAPHICS",
+      "severity": "HIGH",
+      "description": "Demographic shape parameters violate the biological limits defined by WHO/MakeHuman baselines."
+    },
+    {
+      "code": "ROM_LIMIT_EXCEEDED",
+      "severity": "CRITICAL",
+      "description": "Cranial or mandibular joint rotation exceeded physiological range of motion boundaries."
+    },
+    {
+      "code": "OUT_OF_BOUNDS_UV",
+      "severity": "MEDIUM",
+      "description": "Mapping coordinate values fall outside of the normalized 2D coordinate box."
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "name": "OpenTwinsAdapter",
+  "version": "1.0.0",
+  "description": "Formal contract and interface specification for integrating OpenCode with the OpenTwins distributed/compositional digital twin framework.",
+  "contracts": [
+    {
+      "name": "registerTwin",
+      "preconditions": [
+        "twin_id is unique and not already registered",
+        "components is a non-empty array of valid component strings"
+      ],
+      "postconditions": [
+        "twin record is created in active_twins registry",
+        "initial edge_state and cloud_state are allocated"
+      ],
+      "invariants": [
+        "twin_id must be a string",
+        "active_twins map tracks all registered instances"
+      ]
+    },
+    {
+      "name": "syncTwinState",
+      "preconditions": [
+        "twin_id exists in active_twins registry",
+        "state_data is a non-null object conforming to compositional schema"
+      ],
+      "postconditions": [
+        "local edge_state is updated to match state_data",
+        "cloud_state is updated to match edge_state with timestamp <= 500ms differential"
+      ],
+      "invariants": [
+        "last_sync_timestamp matches execution timestamp",
+        "sync latency does not exceed OTW-I1 limit (500ms)"
+      ]
+    },
+    {
+      "name": "dispatchToTwinsAgent",
+      "preconditions": [
+        "twin_id exists in active_twins registry",
+        "role is one of the supported TwinsAgentRole values (monitoring, simulation, prediction, control, coordination)",
+        "task is a valid task payload"
+      ],
+      "postconditions": [
+        "task is routed and executed by mapped local agent conforming to role",
+        "telemetry event is emitted tracking agent action"
+      ],
+      "invariants": [
+        "agent selected must exist in central skill registry"
+      ]
+    }
+  ],
+  "error_catalog": [
+    {
+      "code": "DUPLICATE_TWIN",
+      "severity": "MEDIUM",
+      "description": "The specified twin_id has already been registered in the active_twins map."
+    },
+    {
+      "code": "INVALID_COMPONENTS",
+      "severity": "HIGH",
+      "description": "The components array supplied for registration is empty or contains malformed data."
+    },
+    {
+      "code": "TWIN_NOT_FOUND",
+      "severity": "HIGH",
+      "description": "The requested twin_id was not found in the active_twins registry."
+    },
+    {
+      "code": "SYNC_TIMEOUT",
+      "severity": "CRITICAL",
+      "description": "The synchronization latency between edge and cloud exceeded the allowable 500ms budget."
+    },
+    {
+      "code": "UNMAPPED_AGENT_ROLE",
+      "severity": "HIGH",
+      "description": "No active agent matches the requested TwinsAgentRole requirements."
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+\pagestyle{empty}
+
+% =================
+% Cover
+% =================
+\begin{center}
+\begin{tikzpicture}[remember picture,overlay]
+
+    % some math with golden ratio
+    \pgfmathsetmacro{\phi}{(1+sqrt(5))/2}
+    \newlength{\goldenHeight}
+    \setlength{\goldenHeight}{\paperheight/\phi}
+    \pgfmathsetmacro{\scaleFactor}{\goldenHeight/1cm/6.90}
+
+    % Black background covering the entire page    
+    %\fill[black] (current page.south west) rectangle (current page.north east);
+    \shade[bottom color=ultradarkmagenta, top color=darkmagenta]
+        (current page.south west) rectangle ($(current page.south east)!0.5!(current page.north east)$);
+    \fill[darkmagenta]
+        ($(current page.south west)!0.5!(current page.north west)$) rectangle 
+        ($(current page.south east)!0.7!(current page.north east)$);
+    \shade[bottom color=darkmagenta, top color=ultradarkmagenta]
+        ($(current page.south west)!0.7!(current page.north west)$) rectangle (current page.north east);
+
+    % Author name (top-centered, golden color)
+    \node[customgold, font=\Huge, anchor=north, text width =\linewidth, align = center] 
+        (author) at ([yshift=-64pt] current page.north) 
+        {\textcolor{white}{\scshape\large\authorname}};
+
+    % Book title (centered, below author)
+    \node[white, font=\Large, anchor=north, text width =0.9\linewidth, align = center, below=4pt of author.south] 
+        (title) {\textcolor{customgold}{\scshape\Huge\booktitle}};
+
+    % Subtitle (optional, rendered only if defined)
+    \ifx\subtitle\undefined\else
+        \if\relax\detokenize\expandafter{\subtitle}\relax\else
+            \node[white, font=\Large, text width =\linewidth, align = center, anchor=north, below=8pt of title.south] 
+                {\textcolor{gray!20}{\scshape\large\subtitle}};
+        \fi
+    \fi
+
+    % Circular pattern (background motif centered on the page)
+    \begin{scope}[remember picture, overlay, shift={(current page.center)}]
+        \pgfmathsetlengthmacro{\circleradius}{\paperwidth/14}
+        \foreach \i in {0,1,5,6} {
+          \fill[
+            line width=1.5pt,
+            fill=white,
+            fill opacity=0.2
+          ]
+          ({(\i - 3)*2*\circleradius}, 0)
+          circle (\circleradius);
+        }
+    \end{scope}    
+
+    \begin{scope}[remember picture,overlay,
+              shift={($(current page.center)$)}]
+        %\draw[line width=1.5pt,
+        %    draw=green!70,
+        %    draw opacity=0.3]
+        %   (0,0) circle ({0.77*\goldenHeight/\scaleFactor});
+        \fill[line width=1.5pt,
+            fill=white!10,
+            fill opacity=0.2]
+           (0,0) circle ({0.474*\goldenHeight/\scaleFactor});
+    \end{scope}
+
+    % flower
+    \begin{scope}[
+            remember picture,
+            overlay,
+            shift={($(current page.center)$)}, 
+            scale=\scaleFactor
+        ]
+        \tikzmath{
+          integer \nbPetals, \nbQuad;
+          \nbPetals = 8;
+          \nbQuad = 8;
+          real \a, \base, \r;
+          \a = 360/\nbPetals;  % petal's angle
+          \base = 2;           % base of the exponential definig the helix
+          \r = .35;            % scaling constant
+          function tmpR(\i) {  % integer giving a point along the helix
+            return {\r*pow(\base, 2.928*\i/\nbQuad)};
+          };
+        }
+        \tikzset{%
+          pics/petalPiece/.style 2 args={% branch number, base point number
+            code={%
+              \tikzmath{integer \b, \p; \b = #1; \p = #2;}
+              \path
+              (\p/\nbQuad*180 +\b*\a: {tmpR(\p)}) coordinate (NW)
+              ({(\p +1)/\nbQuad*180 +\b*\a}: {tmpR(\p +1)}) coordinate (NE)
+              ({(\p +2)/\nbQuad*180 +(\b -1)*\a}: {tmpR(\p +2)}) coordinate (SE)
+              ({(\p +1)/\nbQuad*180 +(\b -1)*\a}: {tmpR(\p +1)}) coordinate (SW);
+              \foreach \i in {0, .05, ..., .9}{%
+                \draw[white, thick, fill=white, opacity=.05]
+                ($(NW)!\i!(SW)$) -- ($(NE)!\i/2!(SE)$) -- (SE) -- (SW) -- cycle;
+              }
+            }
+          }
+        }
+        \foreach \l in {1, 2, ..., \nbPetals}{
+            \foreach \i in {-1, 0, 1, 2, ..., \nbQuad}{%
+              \path (0, 0) pic {petalPiece={\l}{\i}};
+            }
+          }
+    \end{scope}
+
+    % Publisher name at bottom center
+    \node[white, font=\Huge, anchor=south] 
+        (publisher) at ([yshift=18pt] current page.south) 
+        {\textcolor{gray!20}{\scshape\large\publisher}};
+
+    % Publisher logo above the publisher name
+    \node[anchor=north, above=2pt of publisher.north] 
+        {\includegraphics[width=0.07\textwidth]{frontmatter/logo-white.png}};
+
+    % Translator credit (optional)
+    \ifx\translatorname\undefined\else
+        \if\relax\detokenize\expandafter{\translatorname}\relax\else
+            \node[white, font=\Large, anchor=north, above=115pt of publisher.north] 
+                (translatedBy) {\textcolor{gray!20}{\itshape\large{Translated by}}};
+
+            \node[white, font=\Large, anchor=south, below=2pt of translatedBy.south] 
+                (translatorAuthor) {\textcolor{white}{\itshape\large\translatorname}};       
+        \fi
+    \fi        
+
+\end{tikzpicture}
+\end{center}
+
+\cleardoublepage
+
+% =================
+% Title page
+% =================
+\begin{titlepage}
+	\centering
+	\newgeometry{top=1in,bottom=1in,right=0in,left=0in}
+    \thispagestyle{empty}
+	~	
+
+    % Author name
+	\vspace{24pt}
+	{\scshape\large \authorname\par}
+
+    % Book title
+	\vspace{4pt}
+	{\scshape\Huge \booktitle\par}
+
+    % Subtitle (if defined)
+    \ifx\subtitle\undefined\else
+        \if\relax\detokenize\expandafter{\subtitle}\relax\else
+            \vspace{6pt}
+	        {\scshape\large \subtitle\par}
+	        \vspace{\stretch{1.25}}
+        \fi
+    \fi
+
+    % Translator (if defined)
+    \ifx\translatorname\undefined\else
+        \if\relax\detokenize\expandafter{\translatorname}\relax\else
+            {\vspace{18pt}\itshape\large{Translated by}\par}
+	        \vspace{6pt}
+            {\itshape\Large\translatorname\par}
+        \fi
+    \fi
+
+    % Publisher (bottom of the page)
+    \vspace{\stretch{6}}
+	{\Huge\scshape\large\publisher\par}
+\end{titlepage}

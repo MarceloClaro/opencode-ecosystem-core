@@ -1,0 +1,554 @@
+{
+  "_comment": "ScientificProductionAgent JSON Specification — OpenCode Ecosystem v1.0.0",
+  "name": "ScientificProductionAgent",
+  "version": "1.0.0",
+  "component_id": "SPA",
+  "description": "Full-lifecycle scientific production orchestrator. Manages 7 sequential pipeline stages from hypothesis formation through publication. Integrates SROI measurement, multi-mode reasoning, citation management, and integrity gating. Produces peer-reviewed, reproducible, socially-impact-quantified scientific artifacts.",
+  "constants": {
+    "MIN_CITATIONS": 5,
+    "MIN_HYPOTHESIS_LENGTH": 20,
+    "MIN_TESTABILITY_SCORE": 0.6,
+    "MIN_REASONING_CONFIDENCE": 0.5,
+    "MIN_GAP_ANALYSIS_LENGTH": 50,
+    "MIN_REPRODUCIBILITY_ITEMS": 3,
+    "MAX_P_VALUE": 0.05,
+    "MIN_WORD_COUNT": 500,
+    "MIN_ABSTRACT_LENGTH": 150,
+    "MAX_ABSTRACT_LENGTH": 350,
+    "MIN_INTEGRITY_SCORE": 0.85,
+    "MIN_ACCEPT_AGGREGATE_SCORE": 0.80,
+    "MIN_SROI_IMPACT_SUMMARY_LENGTH": 50,
+    "MAX_STAGE_RETRIES": 2
+  },
+  "pipeline": {
+    "execution_mode": "sequential",
+    "invariant_SPA_I1": "No stage may begin before its predecessor has status='passed'",
+    "invariant_SPA_I2": "Each stage transition emits a quality_gate_event",
+    "invariant_SPA_I3": "SROI snapshot computed at data_analysis is attached to all subsequent stages",
+    "invariant_SPA_I4": "citation_count >= 5 is required at writing stage",
+    "invariant_SPA_I5": "integrity_score >= 0.85 is required at publication — NO OVERRIDE PERMITTED"
+  },
+  "stages": [
+    {
+      "stage_id": 1,
+      "name": "hypothesis_formation",
+      "description": "Generates a testable scientific hypothesis and its null counterpart from domain context and research question. Uses MultiReasoningEngine (preferred mode: abductive or inductive) to formulate hypotheses grounded in prior knowledge. Outputs must meet testability and reasoning confidence thresholds.",
+      "sequence_position": 1,
+      "inputs": {
+        "domain_context": {
+          "type": "OBJECT",
+          "required": true,
+          "description": "Background knowledge, domain facts, and domain constraints"
+        },
+        "research_question": {
+          "type": "STRING",
+          "required": true,
+          "min_length": 10,
+          "description": "The primary scientific question this study aims to answer"
+        },
+        "prior_knowledge": {
+          "type": "ARRAY",
+          "required": false,
+          "description": "Optional array of prior findings, facts, or related hypotheses"
+        }
+      },
+      "outputs": {
+        "hypothesis": {
+          "type": "STRING",
+          "description": "The primary scientific hypothesis — an affirmative, testable claim"
+        },
+        "null_hypothesis": {
+          "type": "STRING",
+          "description": "The null hypothesis — the complement of the primary hypothesis"
+        },
+        "testability_score": {
+          "type": "FLOAT",
+          "range": [0.0, 1.0],
+          "description": "Estimated degree to which the hypothesis can be empirically tested"
+        },
+        "reasoning_trace": {
+          "type": "ReasoningTrace",
+          "description": "Full MRE trace used to derive the hypothesis"
+        }
+      },
+      "validation_rules": [
+        { "rule": "hypothesis.length >= 20", "error": "HYPOTHESIS_TOO_SHORT" },
+        { "rule": "testability_score >= 0.6", "error": "UNTESTABLE_HYPOTHESIS" },
+        { "rule": "reasoning_trace.confidence >= 0.5", "error": "LOW_REASONING_CONFIDENCE" },
+        { "rule": "null_hypothesis is non-empty", "error": "MISSING_NULL_HYPOTHESIS" }
+      ],
+      "quality_gates": [
+        { "check": "testability_score >= 0.6",              "blocking": true },
+        { "check": "reasoning_trace.confidence >= 0.5",     "blocking": true },
+        { "check": "hypothesis.length >= 20",               "blocking": true }
+      ],
+      "reasoning_integration": {
+        "engine": "MultiReasoningEngine",
+        "preferred_mode": "abductive",
+        "fallback_mode": "inductive",
+        "confidence_floor": 0.5
+      },
+      "error_catalog": {
+        "UNTESTABLE_HYPOTHESIS":    { "blocking": true,  "retryable": false },
+        "LOW_REASONING_CONFIDENCE": { "blocking": true,  "retryable": true  },
+        "HYPOTHESIS_TOO_SHORT":     { "blocking": true,  "retryable": false },
+        "MISSING_NULL_HYPOTHESIS":  { "blocking": true,  "retryable": false }
+      }
+    },
+    {
+      "stage_id": 2,
+      "name": "literature_review",
+      "description": "Systematically searches, retrieves, and evaluates existing literature relevant to the hypothesis. Builds a citation graph, computes relevance scores for each source, and identifies the research gap that justifies this study. Requires a minimum of 5 peer-reviewed sources.",
+      "sequence_position": 2,
+      "prerequisite_stage": "hypothesis_formation",
+      "inputs": {
+        "hypothesis": {
+          "type": "STRING",
+          "required": true,
+          "source": "stage_1.outputs.hypothesis"
+        },
+        "search_keywords": {
+          "type": "ARRAY",
+          "required": true,
+          "min_items": 1,
+          "description": "Keywords derived from hypothesis for database search"
+        },
+        "max_sources": {
+          "type": "INT",
+          "required": false,
+          "default": 50,
+          "description": "Maximum number of sources to retrieve and evaluate"
+        }
+      },
+      "outputs": {
+        "sources": {
+          "type": "ARRAY",
+          "item_schema": {
+            "doi_or_url": "STRING (required)",
+            "title": "STRING (required)",
+            "authors": "ARRAY of STRING (required)",
+            "year": "INT (required)",
+            "relevance_score": "FLOAT [0.0, 1.0]",
+            "abstract_summary": "STRING"
+          },
+          "description": "Validated list of relevant sources"
+        },
+        "gap_analysis": {
+          "type": "STRING",
+          "min_length": 50,
+          "description": "Description of the research gap this study addresses"
+        },
+        "relevance_scores": {
+          "type": "OBJECT",
+          "description": "Map of source_id to relevance_score"
+        },
+        "citation_graph": {
+          "type": "OBJECT",
+          "description": "Graph structure: nodes=papers, edges=citations between them"
+        }
+      },
+      "validation_rules": [
+        { "rule": "sources.length >= 5",                          "error": "INSUFFICIENT_LITERATURE" },
+        { "rule": "each source has doi_or_url, title, authors, year", "error": "INVALID_SOURCE_SCHEMA" },
+        { "rule": "gap_analysis.length >= 50",                    "error": "INADEQUATE_GAP_ANALYSIS" }
+      ],
+      "quality_gates": [
+        { "check": "sources.length >= 5",         "blocking": true },
+        { "check": "gap_analysis present",        "blocking": true },
+        { "check": "citation_graph constructed",  "blocking": false }
+      ],
+      "error_catalog": {
+        "INSUFFICIENT_LITERATURE": { "blocking": true,  "retryable": true  },
+        "INVALID_SOURCE_SCHEMA":   { "blocking": true,  "retryable": true  },
+        "INADEQUATE_GAP_ANALYSIS": { "blocking": true,  "retryable": false }
+      }
+    },
+    {
+      "stage_id": 3,
+      "name": "methodology_design",
+      "description": "Designs the experimental or analytical methodology, specifying measurements, controls, and statistical methods. Produces a reproducibility checklist ensuring the study can be independently replicated. Flags ethics concerns for human subjects, sensitive data, or environmental impacts.",
+      "sequence_position": 3,
+      "prerequisite_stage": "literature_review",
+      "inputs": {
+        "hypothesis": {
+          "type": "STRING",
+          "required": true,
+          "source": "stage_1.outputs.hypothesis"
+        },
+        "sources": {
+          "type": "ARRAY",
+          "required": true,
+          "source": "stage_2.outputs.sources"
+        },
+        "constraints": {
+          "type": "OBJECT",
+          "required": false,
+          "description": "Budget, timeline, resource, or ethical constraints"
+        }
+      },
+      "outputs": {
+        "methodology": {
+          "type": "STRING",
+          "description": "Detailed methodology description"
+        },
+        "metrics_to_measure": {
+          "type": "ARRAY",
+          "min_items": 1,
+          "description": "List of variables/metrics to be measured"
+        },
+        "controls": {
+          "type": "ARRAY",
+          "description": "List of control variables and their rationale"
+        },
+        "reproducibility_checklist": {
+          "type": "ARRAY",
+          "min_items": 3,
+          "item_fields": ["item", "status", "notes"],
+          "description": "Reproducibility checklist items"
+        },
+        "ethics_flags": {
+          "type": "ARRAY",
+          "description": "List of ethics concerns (empty array if none)"
+        },
+        "statistical_plan": {
+          "type": "OBJECT",
+          "description": "Statistical methods and power analysis"
+        }
+      },
+      "validation_rules": [
+        { "rule": "reproducibility_checklist.length >= 3", "error": "INSUFFICIENT_REPRODUCIBILITY" },
+        { "rule": "metrics_to_measure.length >= 1",        "error": "NO_METRICS_DEFINED" },
+        { "rule": "ethics_flags is ARRAY",                 "error": "ETHICS_EVALUATION_MISSING" }
+      ],
+      "quality_gates": [
+        { "check": "reproducibility_checklist.length >= 3", "blocking": true  },
+        { "check": "metrics_to_measure.length >= 1",        "blocking": true  },
+        { "check": "ethics_flags evaluated",                "blocking": false }
+      ],
+      "error_catalog": {
+        "INSUFFICIENT_REPRODUCIBILITY": { "blocking": true,  "retryable": false },
+        "NO_METRICS_DEFINED":           { "blocking": true,  "retryable": false },
+        "ETHICS_EVALUATION_MISSING":    { "blocking": false, "retryable": false }
+      }
+    },
+    {
+      "stage_id": 4,
+      "name": "data_analysis",
+      "description": "Applies statistical methods to raw data per the approved methodology. Computes findings, statistical summaries (p-value, effect size, sample size), confidence intervals, and anomalies. Invokes SROIScanner to attach a social impact snapshot to the findings. This is the pivotal stage where SROI enters the pipeline.",
+      "sequence_position": 4,
+      "prerequisite_stage": "methodology_design",
+      "sroi_integration": {
+        "scanner": "SROIScanner",
+        "operation": "computeSROI",
+        "trigger": "after statistical analysis completes",
+        "output_field": "sroi_snapshot",
+        "mandatory": true,
+        "invariant": "SPA-I3: sroi_snapshot must be attached to all subsequent stage outputs"
+      },
+      "inputs": {
+        "raw_data": {
+          "type": "OBJECT",
+          "required": true,
+          "description": "The dataset to be analyzed"
+        },
+        "methodology": {
+          "type": "STRING",
+          "required": true,
+          "source": "stage_3.outputs.methodology"
+        },
+        "statistical_methods": {
+          "type": "ARRAY",
+          "required": true,
+          "description": "Statistical methods to apply (e.g. t-test, ANOVA, regression)"
+        }
+      },
+      "outputs": {
+        "findings": {
+          "type": "OBJECT",
+          "description": "Structured summary of research findings"
+        },
+        "statistical_summary": {
+          "type": "OBJECT",
+          "required_fields": ["p_value", "effect_size", "sample_size"],
+          "description": "Core statistical results"
+        },
+        "sroi_snapshot": {
+          "type": "SROISnapshot",
+          "description": "Social impact measurement attached at this stage"
+        },
+        "confidence_intervals": {
+          "type": "OBJECT",
+          "description": "Confidence intervals for key metrics"
+        },
+        "anomalies": {
+          "type": "ARRAY",
+          "description": "List of anomalous data points or outliers"
+        }
+      },
+      "validation_rules": [
+        { "rule": "statistical_summary has p_value, effect_size, sample_size", "error": "INCOMPLETE_STATISTICS" },
+        { "rule": "p_value <= 0.05 OR is_exploratory = true",                  "error": "NON_SIGNIFICANT_RESULTS" },
+        { "rule": "sroi_snapshot is attached and sroi_ratio is NUMERIC",        "error": "SROI_SNAPSHOT_MISSING"  }
+      ],
+      "quality_gates": [
+        { "check": "statistical_summary complete",   "blocking": true  },
+        { "check": "sroi_snapshot attached",         "blocking": true  },
+        { "check": "p_value threshold met OR flagged","blocking": false }
+      ],
+      "error_catalog": {
+        "INCOMPLETE_STATISTICS":   { "blocking": true,  "retryable": false },
+        "SROI_SNAPSHOT_MISSING":   { "blocking": true,  "retryable": true  },
+        "NON_SIGNIFICANT_RESULTS": { "blocking": false, "retryable": false },
+        "INVALID_DATA":            { "blocking": true,  "retryable": false },
+        "STATISTICAL_FAILURE":     { "blocking": true,  "retryable": false }
+      }
+    },
+    {
+      "stage_id": 5,
+      "name": "writing",
+      "description": "Drafts the full scientific paper using findings, SROI snapshot, sources, and methodology. Enforces minimum word count, citation requirements (>= 5), and requires a dedicated SROI impact section. Generates abstract within required length bounds.",
+      "sequence_position": 5,
+      "prerequisite_stage": "data_analysis",
+      "inputs": {
+        "findings": {
+          "type": "OBJECT",
+          "required": true,
+          "source": "stage_4.outputs.findings"
+        },
+        "sroi_snapshot": {
+          "type": "SROISnapshot",
+          "required": true,
+          "source": "stage_4.outputs.sroi_snapshot"
+        },
+        "sources": {
+          "type": "ARRAY",
+          "required": true,
+          "source": "stage_2.outputs.sources"
+        },
+        "methodology": {
+          "type": "STRING",
+          "required": true,
+          "source": "stage_3.outputs.methodology"
+        },
+        "template": {
+          "type": "STRING",
+          "required": false,
+          "description": "Paper template (e.g. IEEE, APA, IMRAD)"
+        }
+      },
+      "outputs": {
+        "draft": {
+          "type": "STRING",
+          "description": "Full paper draft in requested template format"
+        },
+        "citation_count": {
+          "type": "INT",
+          "min_value": 5,
+          "description": "Number of citations included in the draft"
+        },
+        "word_count": {
+          "type": "INT",
+          "min_value": 500,
+          "description": "Total word count of the draft"
+        },
+        "abstract": {
+          "type": "STRING",
+          "min_length": 150,
+          "max_length": 350,
+          "description": "Structured abstract"
+        },
+        "sroi_section": {
+          "type": "STRING",
+          "description": "Dedicated section documenting social impact and SROI ratio"
+        }
+      },
+      "validation_rules": [
+        { "rule": "citation_count >= 5",                  "error": "INSUFFICIENT_CITATIONS" },
+        { "rule": "word_count >= 500",                    "error": "DRAFT_TOO_SHORT" },
+        { "rule": "abstract.length between 150 and 350",  "error": "ABSTRACT_LENGTH_VIOLATION" },
+        { "rule": "sroi_section is present and non-empty", "error": "SROI_SECTION_MISSING" }
+      ],
+      "quality_gates": [
+        { "check": "citation_count >= 5",    "blocking": true  },
+        { "check": "sroi_section present",   "blocking": true  },
+        { "check": "word_count >= 500",      "blocking": true  },
+        { "check": "abstract within bounds", "blocking": true  }
+      ],
+      "error_catalog": {
+        "INSUFFICIENT_CITATIONS":    { "blocking": true, "retryable": false, "invariant": "SPA-I4" },
+        "DRAFT_TOO_SHORT":           { "blocking": true, "retryable": false },
+        "ABSTRACT_LENGTH_VIOLATION": { "blocking": true, "retryable": false },
+        "SROI_SECTION_MISSING":      { "blocking": true, "retryable": false }
+      }
+    },
+    {
+      "stage_id": 6,
+      "name": "peer_review",
+      "description": "Conducts structured peer review of the draft by evaluating against review criteria. Produces aggregate scores, integrity score, revision notes, and a final recommendation (accept/revise/reject). Recommendation must be 'accept' and integrity_score >= 0.85 for pipeline to proceed to publication.",
+      "sequence_position": 6,
+      "prerequisite_stage": "writing",
+      "inputs": {
+        "draft": {
+          "type": "STRING",
+          "required": true,
+          "source": "stage_5.outputs.draft"
+        },
+        "reviewer_profiles": {
+          "type": "ARRAY",
+          "required": true,
+          "min_items": 1,
+          "description": "Array of reviewer agent profiles"
+        },
+        "review_criteria": {
+          "type": "OBJECT",
+          "required": true,
+          "description": "Criteria weights for scoring (novelty, rigor, clarity, impact, etc.)"
+        }
+      },
+      "outputs": {
+        "review_scores": {
+          "type": "OBJECT",
+          "description": "Per-criterion scores from each reviewer"
+        },
+        "aggregate_score": {
+          "type": "FLOAT",
+          "range": [0.0, 1.0],
+          "description": "Weighted aggregate of all review scores"
+        },
+        "revision_notes": {
+          "type": "ARRAY",
+          "description": "List of required revisions (empty if accepted without changes)"
+        },
+        "integrity_score": {
+          "type": "FLOAT",
+          "range": [0.0, 1.0],
+          "description": "Academic integrity assessment (plagiarism, data fabrication, methodology)"
+        },
+        "recommendation": {
+          "type": "ENUM",
+          "values": ["accept", "revise", "reject"],
+          "mapping": {
+            "accept": "aggregate_score >= 0.80",
+            "revise": "aggregate_score in [0.60, 0.80)",
+            "reject": "aggregate_score < 0.60"
+          }
+        }
+      },
+      "validation_rules": [
+        { "rule": "aggregate_score in [0.0, 1.0]",                                            "error": "INVALID_AGGREGATE_SCORE"    },
+        { "rule": "integrity_score in [0.0, 1.0]",                                            "error": "INVALID_INTEGRITY_SCORE"    },
+        { "rule": "recommendation consistent with aggregate_score",                            "error": "RECOMMENDATION_INCONSISTENT" },
+        { "rule": "integrity_score >= 0.85 for recommendation='accept'",                      "error": "INTEGRITY_GATE_BLOCKED"     }
+      ],
+      "quality_gates": [
+        { "check": "recommendation = 'accept'",   "blocking": true  },
+        { "check": "integrity_score >= 0.85",     "blocking": true  }
+      ],
+      "error_catalog": {
+        "INVALID_AGGREGATE_SCORE":    { "blocking": true,  "retryable": false },
+        "INVALID_INTEGRITY_SCORE":    { "blocking": true,  "retryable": false },
+        "RECOMMENDATION_INCONSISTENT":{ "blocking": true,  "retryable": false },
+        "INTEGRITY_GATE_BLOCKED":     { "blocking": true,  "retryable": false, "invariant": "SPA-I5" }
+      }
+    },
+    {
+      "stage_id": 7,
+      "name": "publication",
+      "description": "Publishes the peer-reviewed paper to the target venue. Assigns a DOI, records publication timestamp, and generates the SROI impact summary. This stage has an ABSOLUTE integrity gate — no override from any external caller is permitted. The SROI snapshot from stage 4 must be present.",
+      "sequence_position": 7,
+      "prerequisite_stage": "peer_review",
+      "absolute_gate": {
+        "condition": "integrity_score >= 0.85",
+        "error": "INTEGRITY_GATE_BLOCKED",
+        "invariant": "SPA-I5",
+        "override_permitted": false
+      },
+      "inputs": {
+        "draft": {
+          "type": "STRING",
+          "required": true,
+          "source": "stage_5.outputs.draft"
+        },
+        "sroi_snapshot": {
+          "type": "SROISnapshot",
+          "required": true,
+          "source": "stage_4.outputs.sroi_snapshot",
+          "invariant": "GLOBAL-5: MUST be present"
+        },
+        "review_scores": {
+          "type": "OBJECT",
+          "required": true,
+          "source": "stage_6.outputs.review_scores"
+        },
+        "publication_target": {
+          "type": "STRING",
+          "required": true,
+          "description": "Target journal, conference, or repository URL"
+        }
+      },
+      "outputs": {
+        "publication_id": {
+          "type": "STRING",
+          "description": "Unique publication record identifier"
+        },
+        "doi": {
+          "type": "STRING",
+          "pattern": "^10\\.[0-9]{4,}/[^\\s]+$",
+          "description": "Digital Object Identifier in standard format"
+        },
+        "published_at": {
+          "type": "Timestamp",
+          "description": "ISO 8601 UTC timestamp of publication"
+        },
+        "sroi_impact_summary": {
+          "type": "STRING",
+          "min_length": 50,
+          "description": "Human-readable social impact summary derived from sroi_snapshot"
+        },
+        "access_level": {
+          "type": "ENUM",
+          "values": ["open", "restricted"]
+        }
+      },
+      "validation_rules": [
+        { "rule": "doi matches pattern '^10\\.[0-9]{4,}/[^\\s]+$'",   "error": "INVALID_DOI_FORMAT"     },
+        { "rule": "published_at is valid ISO 8601",                    "error": "INVALID_TIMESTAMP"      },
+        { "rule": "sroi_impact_summary.length >= 50",                  "error": "SROI_SUMMARY_TOO_SHORT" },
+        { "rule": "sroi_snapshot is present (GLOBAL-5)",               "error": "SROI_SNAPSHOT_MISSING"  }
+      ],
+      "quality_gates": [
+        { "check": "integrity_score >= 0.85",         "blocking": true, "override_permitted": false },
+        { "check": "doi valid format",                "blocking": true  },
+        { "check": "sroi_snapshot present",           "blocking": true  },
+        { "check": "sroi_impact_summary >= 50 chars", "blocking": true  }
+      ],
+      "error_catalog": {
+        "INTEGRITY_GATE_BLOCKED": { "blocking": true, "retryable": false, "invariant": "SPA-I5", "override_permitted": false },
+        "INVALID_DOI_FORMAT":     { "blocking": true, "retryable": false },
+        "INVALID_TIMESTAMP":      { "blocking": true, "retryable": false },
+        "SROI_SUMMARY_TOO_SHORT": { "blocking": true, "retryable": false },
+        "SROI_SNAPSHOT_MISSING":  { "blocking": true, "retryable": false, "invariant": "GLOBAL-5" },
+        "PUBLICATION_FAILED":     { "blocking": true, "retryable": true  }
+      }
+    }
+  ],
+  "metrics": {
+    "counters": [
+      { "name": "opencode_spa_stage_started_total",   "labels": ["stage_name"] },
+      { "name": "opencode_spa_stage_passed_total",    "labels": ["stage_name"] },
+      { "name": "opencode_spa_stage_failed_total",    "labels": ["stage_name", "error_code"] },
+      { "name": "opencode_spa_publications_total",    "labels": ["access_level"] },
+      { "name": "opencode_spa_integrity_blocks_total","labels": [] }
+    ],
+    "histograms": [
+      { "name": "opencode_spa_stage_duration_ms",      "labels": ["stage_name"], "buckets": [1000, 5000, 30000, 300000, 3600000] },
+      { "name": "opencode_spa_pipeline_duration_ms",   "labels": [],             "buckets": [3600000, 14400000, 86400000] },
+      { "name": "opencode_spa_sroi_ratio_at_publish",  "labels": [],             "buckets": [0, 1, 2, 5, 10, 20] }
+    ],
+    "slos": {
+      "pipeline_end_to_end_max_hours": 24,
+      "stage_failure_rate_max_pct": 10,
+      "integrity_gate_pass_rate_min_pct": 90
+    }
+  }
+}
