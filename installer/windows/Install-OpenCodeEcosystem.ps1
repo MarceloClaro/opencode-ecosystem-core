@@ -35,6 +35,40 @@ function Test-Admin {
     (New-Object Security.Principal.WindowsPrincipal($id)).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
+# ---------------------------------------------------------------------------
+# Detecção robusta de distro WSL (corrige bug UTF-16 de wsl.exe -l -q)
+# wsl.exe -l -q retorna UTF-16 LE; o PowerShell lê como bytes nulos/vazio.
+# Esta função força a decodificação correta e ainda tenta fallback via
+# wsl.exe --list --verbose para garantir compatibilidade com builds mais antigos.
+# ---------------------------------------------------------------------------
+function Test-WslDistro([string]$Name) {
+    # Tentativa 1: forçar decodificação UTF-16 LE
+    try {
+        $prev = [Console]::OutputEncoding
+        [Console]::OutputEncoding = [System.Text.Encoding]::Unicode
+        $list = (wsl.exe -l -q 2>$null) -join "`n"
+        [Console]::OutputEncoding = $prev
+        if ($list -match [regex]::Escape($Name)) { return $true }
+    } catch { }
+
+    # Tentativa 2: wsl --list --verbose (disponível no WSL2 moderno)
+    try {
+        $verbose = (wsl.exe --list --verbose 2>$null) -join "`n"
+        if ($verbose -match [regex]::Escape($Name)) { return $true }
+    } catch { }
+
+    # Tentativa 3: verificar saída bruta de bytes e decodificar manualmente
+    try {
+        $raw = & wsl.exe -l -q 2>$null
+        $decoded = [System.Text.Encoding]::Unicode.GetString(
+            [System.Text.Encoding]::Default.GetBytes(($raw -join "`n"))
+        )
+        if ($decoded -match [regex]::Escape($Name)) { return $true }
+    } catch { }
+
+    return $false
+}
+
 # ----------------------------------------------------------------------------
 # 0. Pré-checagens
 # ----------------------------------------------------------------------------
@@ -106,8 +140,8 @@ try {
 } catch { $wslInstalled = $false }
 
 if ($wslInstalled) {
-    $distros = (wsl.exe -l -q 2>$null) -join "`n"
-    if ($distros -match 'Ubuntu') { $distroInstalled = $true }
+    # Usa função robusta que corrige bug de codificação UTF-16
+    $distroInstalled = Test-WslDistro -Name $Distro
 }
 
 if (-not $wslInstalled -or -not $distroInstalled) {
