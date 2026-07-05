@@ -41,6 +41,43 @@ _ROOT = os.path.dirname(_HERE)
 TEMPLATES_DIR = os.path.join(_HERE, "templates")
 DEFAULT_OUTPUT_ROOT = os.path.join(_ROOT, "producao_cientifica")
 
+# ── Atalho na Área de Trabalho ──────────────────────────────────────────
+def _detect_desktop_path() -> str:
+    """Detecta o caminho da Área de Trabalho (Linux/macOS/Windows)."""
+    home = os.path.expanduser("~")
+    candidates = [
+        os.path.join(home, "Desktop"),
+        os.path.join(home, "Área de Trabalho"),
+        os.path.join(home, "Escritorio"),
+    ]
+    for candidate in candidates:
+        if os.path.isdir(candidate):
+            return candidate
+    # Nenhum existe: cria ~/Desktop como fallback
+    fallback = os.path.join(home, "Desktop")
+    os.makedirs(fallback, exist_ok=True)
+    return fallback
+
+def _ensure_desktop_shortcut(output_root: str = DEFAULT_OUTPUT_ROOT) -> str:
+    """Garante que existe um atalho (symlink) na Área de Trabalho para a pasta de produção."""
+    desktop = _detect_desktop_path()
+    shortcut_name = "Produção Científica - OpenCode"
+    shortcut_path = os.path.join(desktop, shortcut_name)
+    
+    # Garante que a pasta de produção existe (para o symlink ter alvo válido)
+    os.makedirs(output_root, exist_ok=True)
+    
+    # Cria ou atualiza o symlink
+    if os.path.islink(shortcut_path):
+        current_target = os.readlink(shortcut_path)
+        if os.path.realpath(current_target) != os.path.realpath(output_root):
+            os.remove(shortcut_path)
+            os.symlink(output_root, shortcut_path)
+    elif not os.path.exists(shortcut_path):
+        os.symlink(output_root, shortcut_path)
+    
+    return shortcut_path
+
 TEMPLATE_MAIN = {
     "artigo": os.path.join("artigo", "artigo_modelo_qualis_a1.tex"),
     "dissertacao": os.path.join("dissertacao", "dissertacao_modelo_abnt.tex"),
@@ -94,6 +131,10 @@ class ScientificProduction:
         stamp = time.strftime("%Y%m%d-%H%M%S")
         self.slug = f"{_slugify(title)}-{stamp}"
         root = output_root or DEFAULT_OUTPUT_ROOT
+        
+        # Garante atalho na Área de Trabalho (criado uma única vez, inofensivo nas chamadas seguintes)
+        _ensure_desktop_shortcut(root)
+        
         self.folder = os.path.join(root, self.slug)
         self.latex_dir = os.path.join(self.folder, "latex")
         self.sections_dir = os.path.join(self.latex_dir, "sections")
