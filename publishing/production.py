@@ -42,41 +42,111 @@ TEMPLATES_DIR = os.path.join(_HERE, "templates")
 DEFAULT_OUTPUT_ROOT = os.path.join(_ROOT, "producao_cientifica")
 
 # ── Atalho na Área de Trabalho ──────────────────────────────────────────
+import platform as _platform
+
 def _detect_desktop_path() -> str:
-    """Detecta o caminho da Área de Trabalho (Linux/macOS/Windows)."""
-    home = os.path.expanduser("~")
-    candidates = [
-        os.path.join(home, "Desktop"),
-        os.path.join(home, "Área de Trabalho"),
-        os.path.join(home, "Escritorio"),
-    ]
+    """Detecta o caminho da Área de Trabalho (Windows/Linux/macOS)."""
+    system = _platform.system()
+
+    if system == "Windows":
+        # Windows: USERPROFILE\Desktop ou OneDrive\Desktop
+        userprofile = os.environ.get("USERPROFILE", os.path.expanduser("~"))
+        candidates = [
+            os.path.join(userprofile, "Desktop"),
+            os.path.join(userprofile, "OneDrive", "Desktop"),
+            os.path.join(userprofile, "Área de Trabalho"),
+        ]
+    else:
+        # Linux/macOS
+        home = os.path.expanduser("~")
+        candidates = [
+            os.path.join(home, "Desktop"),
+            os.path.join(home, "Área de Trabalho"),
+            os.path.join(home, "Escritorio"),
+        ]
+
     for candidate in candidates:
         if os.path.isdir(candidate):
             return candidate
-    # Nenhum existe: cria ~/Desktop como fallback
-    fallback = os.path.join(home, "Desktop")
+
+    # Nenhum existe: cria fallback
+    fallback = candidates[0]
     os.makedirs(fallback, exist_ok=True)
     return fallback
 
 def _ensure_desktop_shortcut(output_root: str = DEFAULT_OUTPUT_ROOT) -> str:
-    """Garante que existe um atalho (symlink) na Área de Trabalho para a pasta de produção."""
+    """Garante que existe um atalho na Área de Trabalho para a pasta de produção.
+    
+    Cria symlink no Linux/macOS e atalho .lnk (via PowerShell) no Windows.
+    """
     desktop = _detect_desktop_path()
     shortcut_name = "Produção Científica - OpenCode"
-    shortcut_path = os.path.join(desktop, shortcut_name)
     
-    # Garante que a pasta de produção existe (para o symlink ter alvo válido)
+    # Garante que a pasta de produção existe
     os.makedirs(output_root, exist_ok=True)
+
+    if _platform.system() == "Windows":
+        return _ensure_desktop_shortcut_windows(desktop, shortcut_name, output_root)
+    else:
+        return _ensure_desktop_shortcut_unix(desktop, shortcut_name, output_root)
+
+def _ensure_desktop_shortcut_unix(desktop: str, name: str, target: str) -> str:
+    """Symlink no Linux/macOS."""
+    shortcut_path = os.path.join(desktop, name)
     
-    # Cria ou atualiza o symlink
     if os.path.islink(shortcut_path):
         current_target = os.readlink(shortcut_path)
-        if os.path.realpath(current_target) != os.path.realpath(output_root):
+        if os.path.realpath(current_target) != os.path.realpath(target):
             os.remove(shortcut_path)
-            os.symlink(output_root, shortcut_path)
+            os.symlink(target, shortcut_path)
     elif not os.path.exists(shortcut_path):
-        os.symlink(output_root, shortcut_path)
+        os.symlink(target, shortcut_path)
     
     return shortcut_path
+
+def _ensure_desktop_shortcut_windows(desktop: str, name: str, target: str) -> str:
+    """Atalho .lnk no Windows (via PowerShell, sem dependências externas)."""
+    shortcut_path = os.path.join(desktop, name + ".lnk")
+    
+    # Se já existe e está correto, não recria
+    if os.path.exists(shortcut_path):
+        return shortcut_path
+    
+    # PowerShell script para criar atalho .lnk
+    ps_script = f'''
+$WshShell = New-Object -ComObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("{shortcut_path}")
+$Shortcut.TargetPath = "{target}"
+$Shortcut.Description = "OpenCode Ecosystem Core — Produção Científica"
+$Shortcut.Save()
+'''
+    try:
+        result = subprocess.run(
+            ["powershell", "-NoProfile", "-Command", ps_script],
+            capture_output=True, text=True, timeout=30,
+        )
+        if result.returncode != 0:
+            # Fallback: cria .url (Internet Shortcut, sempre funciona sem admin)
+            return _ensure_desktop_url_shortcut(desktop, name, target)
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        # PowerShell indisponível: cria .url
+        return _ensure_desktop_url_shortcut(desktop, name, target)
+    
+    return shortcut_path
+
+def _ensure_desktop_url_shortcut(desktop: str, name: str, target: str) -> str:
+    """Fallback: cria atalho .url (funciona em qualquer Windows, sem permissões)."""
+    url_path = os.path.join(desktop, name + ".url")
+    
+    # Formato .url (Internet Shortcut) — nativo do Windows desde 95
+    content = f"""[InternetShortcut]
+URL=file:///{target.replace(chr(92), '/')}
+IconIndex=0
+"""
+    with open(url_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    
+    return url_path
 
 TEMPLATE_MAIN = {
     "artigo": os.path.join("artigo", "artigo_modelo_qualis_a1.tex"),
