@@ -34,7 +34,7 @@ graph TD
     subgraph Core [Core Subsystems]
         Trust[Trust Engine<br>Behavioral Gate]
         Eco[Token Economy<br>Staking/Slashing]
-        Scan[Scanners<br>Diagnóstico]
+        Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>Quantum]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]

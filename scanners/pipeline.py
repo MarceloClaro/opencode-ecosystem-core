@@ -25,6 +25,8 @@ from scanners.evolutionary_pipeline import EvolutionaryRoadmap  # noqa: F401 (re
 from scanners.potentiality_scanner import PotentialityScanner
 from scanners.social_impact_scanner import SocialImpactScanner
 from scanners.reversa_scanner import ReversaScanner
+from scanners.epistemic_prioritizer import EpistemicPrioritizer
+from scanners.successor_generator import SuccessorGenerator
 
 
 class _TextAuditTrail:
@@ -50,11 +52,14 @@ class DiagnosticPipeline:
         self.potentiality = PotentialityScanner()
         self.social = SocialImpactScanner()
         self.reversa = ReversaScanner()
+        self.prioritizer = EpistemicPrioritizer()
+        self.successor_gen = SuccessorGenerator()
 
     def run(self, corpus: str, domain: str = "",
             goals: Optional[List[Dict[str, Any]]] = None,
             include_social: bool = False,
-            social_params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+            social_params: Optional[Dict[str, Any]] = None,
+            deep: bool = False) -> Dict[str, Any]:
         """Executa o pipeline completo de diagnóstico.
 
         Args:
@@ -63,6 +68,10 @@ class DiagnosticPipeline:
             goals: lista de metas [{"name":..., "description":..., "weight":...}]
             include_social: se True, roda o SocialImpactScanner
             social_params: parâmetros para analyze_research_paper
+            deep: se True, roda também o roadmap evolutivo completo
+                (Trajetórias M1–M5 + Composição Unitária + Sequenciamento),
+                a Priorização Epistemológica (erro→ausência→oportunidade)
+                e o Gerador de Sucessores Plausíveis
         """
         started = time.time()
         trail = _TextAuditTrail(corpus)
@@ -160,6 +169,11 @@ class DiagnosticPipeline:
             ),
         }
 
+        # 5.5 Modo profundo: roadmap evolutivo completo + priorização +
+        #     sucessores (Anexos 3–8 — SPEC-020)
+        if deep:
+            self._run_deep(report, trail, goal_objs if goals else [], noo, domain)
+
         # 6. Scanner de Engenharia Reversa
         try:
             rev = self.reversa.scan(corpus)
@@ -173,6 +187,74 @@ class DiagnosticPipeline:
 
         report["duration_s"] = round(time.time() - started, 3)
         return report
+
+    # ------------------------------------------------------------------
+    def _run_deep(self, report: Dict[str, Any], trail: Any,
+                  goal_objs: List[Any], noo: Dict[str, Any],
+                  domain: str) -> None:
+        """Executa a camada profunda: roadmap M1–M5, priorização
+        epistemológica e sucessores plausíveis."""
+        roadmap = None
+        analogies: List[Any] = []
+        capability_units: List[Any] = []
+
+        # a) Roadmap evolutivo completo (Trajetórias + Composição +
+        #    Sequenciamento) — requer metas
+        if goal_objs:
+            try:
+                from scanners.evolutionary_pipeline import EvolutionaryScannerPipeline
+                evo = EvolutionaryScannerPipeline()
+                roadmap = evo.scan(trail, goal_objs, domain)
+                analogies = list(getattr(roadmap, "analogies", []) or [])
+                capability_units = list(
+                    getattr(roadmap, "capability_units", []) or [])
+                seq = getattr(roadmap, "sequencing", None)
+                report["roadmap"] = {
+                    "noological_coverage": getattr(
+                        roadmap, "noological_coverage", None),
+                    "teleological_score": getattr(
+                        roadmap, "teleological_score", None),
+                    "total_gaps": getattr(roadmap, "total_gaps", 0),
+                    "quick_wins": getattr(roadmap, "quick_wins", 0),
+                    "foundations": getattr(roadmap, "foundations", 0),
+                    "frontiers": getattr(roadmap, "frontiers", 0),
+                    "bottlenecks": getattr(roadmap, "bottlenecks", []),
+                    "total_construction_cost": getattr(
+                        roadmap, "total_construction_cost", None),
+                    "logical_sequence": (getattr(seq, "logical_sequence", [])
+                                         if seq else []),
+                }
+            except Exception as exc:
+                report["roadmap"] = {"error": str(exc)}
+
+        # b) Priorização Epistemológica: erro → ausência → oportunidade
+        try:
+            opps = self.prioritizer.prioritize(
+                noo or {}, analogies=analogies,
+                capability_units=capability_units)
+            report["epistemic_opportunities"] = {
+                "total": len(opps),
+                "breakthroughs": sum(1 for o in opps
+                                     if o.tier == "breakthrough"),
+                "top": [o.to_dict() for o in opps[:8]],
+                "report_md": self.prioritizer.generate_report(opps[:15]),
+            }
+        except Exception as exc:
+            report["epistemic_opportunities"] = {"error": str(exc)}
+
+        # c) Sucessores plausíveis a partir do DNA estrutural
+        try:
+            dna = self.potentiality.extract_dna()
+            successors = self.successor_gen.generate(dna, theme=domain)
+            report["successors"] = {
+                "total": len(successors),
+                "immediate": sum(1 for s in successors
+                                 if s.tier == "imediato"),
+                "top": [s.to_dict() for s in successors[:8]],
+                "report_md": self.successor_gen.generate_report(successors),
+            }
+        except Exception as exc:
+            report["successors"] = {"error": str(exc)}
 
 
 # Singleton

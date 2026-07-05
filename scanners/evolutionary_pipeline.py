@@ -423,10 +423,10 @@ class EvolutionaryScannerPipeline:
     """Orquestrador do pipeline completo de 5 módulos."""
 
     def __init__(self):
-        from noological_scanner import NoologicalScanner
-        from teleological_scanner import TeleologicalReverseScanner
-        from cross_validation_engine import CrossValidationEngine
-        from capability_composer import CapabilityComposer, CognitiveLibrary
+        from scanners.noological_scanner import NoologicalScanner
+        from scanners.teleological_scanner import TeleologicalReverseScanner
+        from scanners.cross_validation_engine import CrossValidationEngine
+        from scanners.capability_composer import CapabilityComposer, CognitiveLibrary
         from pathlib import Path as _Path
 
         self.noological = NoologicalScanner()
@@ -441,7 +441,7 @@ class EvolutionaryScannerPipeline:
         if lib_path.exists():
             lib.load_json(lib_path)
         self.composer = CapabilityComposer(lib)
-        from optimal_question_scanner import OptimalQuestionScanner
+        from scanners.optimal_question_scanner import OptimalQuestionScanner
         self.oqs = OptimalQuestionScanner()  # SPEC-039
 
     def scan(self, audit_trail: Any, goals: list[Any],

@@ -378,16 +378,32 @@ class MarceloClaroOrchestrator:
     # SUBSISTEMAS AVANÇADOS (portados do OpenCode_Ecosystem original)
     # ------------------------------------------------------------------
     def diagnose(self, corpus: str, domain: str = "",
-                 goals: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
-        """Pipeline de diagnóstico com os 5 scanners (noológico, teleológico,
-        evolutivo, potentiality, social impact). Registra o resultado na memória."""
-        report = diagnostic_pipeline.run(corpus, domain=domain, goals=goals)
+                 goals: Optional[List[Dict[str, Any]]] = None,
+                 deep: bool = False) -> Dict[str, Any]:
+        """Pipeline de diagnóstico com os scanners (noológico, teleológico,
+        evolutivo, potentiality, social impact, reversa).
+
+        Com ``deep=True`` executa também a camada profunda (SPEC-020):
+        roadmap evolutivo M1–M5 completo (trajetórias + composição unitária +
+        sequenciamento), priorização epistemológica (erro → ausência →
+        oportunidade) e gerador de sucessores plausíveis (DNA estrutural).
+        Registra o resultado na memória metacognitiva."""
+        report = diagnostic_pipeline.run(corpus, domain=domain, goals=goals,
+                                         deep=deep)
         gaps = report.get("evolutionary", {}).get("total_gaps", 0)
+        extra = ""
+        if deep:
+            eo = report.get("epistemic_opportunities", {})
+            su = report.get("successors", {})
+            extra = (f" Camada profunda: {eo.get('total', 0)} oportunidades "
+                     f"epistemológicas ({eo.get('breakthroughs', 0)} "
+                     f"breakthroughs) e {su.get('total', 0)} sucessores "
+                     f"plausíveis ({su.get('immediate', 0)} imediatos).")
         metabus.memory.add_reflection(
             agent_id=self.id,
             task_context=f"diagnóstico do ecossistema (domínio: {domain or 'geral'})",
             reflection=f"Diagnóstico concluído: {gaps} lacunas identificadas. "
-                       f"{report['evolutionary']['recommendation']}",
+                       f"{report['evolutionary']['recommendation']}" + extra,
             score=max(0.0, 1.0 - gaps / 10.0),
         )
         return report
