@@ -6,6 +6,9 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ## [1.0.1] - 2026-07-05
 
+### Adicionado
+- **Atalho automático na Área de Trabalho**: `publishing/production.py` agora mantém um symlink persistente `~/Desktop/Produção Científica - OpenCode` → `producao_cientifica/`. Detecta automaticamente `Desktop`, `Área de Trabalho` ou `Escritorio` (Linux/macOS/Windows). O atalho é garantido a cada inicialização de `ScientificProduction`, sem duplicação.
+
 ### Corrigido
 - **MCP `metacognitive-interconnect`**: removido código morto (`_ = blackboard`, `_ = reflexion_engine`) e import não utilizado (`reflexion_engine`) do `mci/mcp_server.py` que não tinham efeito real — os singletons já são inicializados via import.
 - **Tratamento de erros no MCP server**: o `except Exception: pass` no loop `run_stdio()` suprimia silenciosamente qualquer falha de parsing JSON ou erro de runtime. Substituído por `print(..., file=sys.stderr)` com mensagens descritivas, garantindo rastreabilidade.
