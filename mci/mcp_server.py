@@ -11,7 +11,11 @@ SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 import sys
 import json
 import asyncio
+import logging
 from typing import Dict, Any, List
+
+logger = logging.getLogger("mci-mcp-server")
+logger.setLevel(logging.WARNING)
 
 # Adiciona o root do projeto ao path para imports relativos funcionarem se rodado standalone
 import os
@@ -19,7 +23,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from mci.metabus import metabus
 from mci.blackboard import blackboard
-from mci.reflexion import reflexion_engine
 
 # Simula a estrutura do MCP SDK (assumindo que será rodado no contexto do ecossistema)
 class SimpleMCPServer:
@@ -96,8 +99,12 @@ class SimpleMCPServer:
                 }
                 writer.write(json.dumps(response_obj) + "\n")
                 writer.flush()
+            except json.JSONDecodeError as e:
+                print(f"[MCP-SERVER] JSON inválido: {e}", file=sys.stderr)
+                continue
             except Exception as e:
-                pass
+                print(f"[MCP-SERVER] Erro no loop: {e}", file=sys.stderr)
+                continue
 
 # Instancia o servidor
 mci_server = SimpleMCPServer("metacognitive-interconnect")
@@ -186,8 +193,4 @@ mci_server.register_tool(
 )
 
 if __name__ == "__main__":
-    # Inicializa as instâncias globais
-    _ = blackboard
-    _ = reflexion_engine
-    
     asyncio.run(mci_server.run_stdio())
