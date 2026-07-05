@@ -48,7 +48,7 @@ graph TD
     HTM -->|Lê Episódica| Mem
     Orchestrator -->|3. Roteia Tarefa| Attn
     Attn -->|Publica Volunteer| BB
-    Orchestrator -->|4. Executa (TDD)| Pipe
+    Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     
     %% Agentes
