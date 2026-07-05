@@ -68,7 +68,101 @@ O ecossistema é dividido em 4 grandes camadas interconectadas:
 3. **Módulos Avançados:** Token Economy (Staking/Slashing), Trust Engine (Behavioral Gates) e Diagnóstico Profundo.
 4. **Catálogo de Agentes:** 134 agentes especializados em domínios que vão desde Física Quântica até Design de Capas.
 
-*(Veja o diagrama completo e detalhado no arquivo [ARCHITECTURE.md](ARCHITECTURE.md))*
+### Mapa Geral da Arquitetura
+
+```mermaid
+graph TD
+    %% Atores e Orquestrador
+    User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
+    
+    %% Camada SDD/TDD
+    subgraph SDD [SDD & TDD Engine]
+        Spec[SpecRegistry<br>Especificações]
+        Ver[SpecVerifier<br>Gate SDD]
+        TDD[TDDRunner<br>Red-Green-Refactor]
+        
+        TDD -.->|Valida| Ver
+        Ver -.->|Lê| Spec
+    end
+
+    %% Camada Transformer
+    subgraph TF [Transformer Layer]
+        Attn[AttentionRouter<br>Multi-Head]
+        Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
+        HTM[(Hierarchical<br>Memory c/ Episodic Replay)]
+        Emb[TaskEmbedder<br>d=64]
+        
+        Attn -.->|Usa| Emb
+        HTM -.->|Usa| Emb
+    end
+    
+    %% Camada Core (Novos Subsistemas)
+    subgraph Core [Core Subsystems]
+        Trust[Trust Engine<br>Behavioral Gate]
+        Eco[Token Economy<br>Staking/Slashing]
+        Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
+        Acad[MASWOS<br>Qualis A1]
+        Reason[Reasoning<br>Quantum]
+        MiroFish[MiroFish<br>Swarm c/ GraphMemory]
+        Publishing[Publishing<br>LaTeX & Cover Designer]
+        Research[Research<br>Hub c/ OSINT]
+        Illus[Illustrations<br>Mermaid/MIRA/Graph]
+    end
+
+    %% Camada MCI
+    subgraph MCI [Metacognitive Interconnect]
+        MB[MetaBus<br>Global Workspace]
+        BB[Blackboard<br>A2A Protocol]
+        Mem[(Metacognitive<br>Memory)]
+        Ref[Reflexion<br>Middleware]
+        
+        MB <--> Mem
+        BB <--> MB
+        Ref <--> MB
+    end
+    
+    %% Orquestrador integra as camadas
+    Orchestrator -->|1. Cria Spec| Spec
+    Orchestrator -->|2. Recuperação em 2 níveis| HTM
+    HTM -->|Lê Episódica| Mem
+    Orchestrator -->|3. Gate & Roteia| Trust
+    Trust -->|Libera| Attn
+    Attn -->|Publica Volunteer| BB
+    Orchestrator -->|4. Executa TDD| Pipe
+    Pipe -->|Verifica| Ver
+    Orchestrator <-->|Usa| Core
+    
+    %% Agentes
+    subgraph Agents [Catálogo de Agentes]
+        A1[Researcher]
+        A2[Coder]
+        A3[Reviewer]
+        A4[130 Especializados...]
+    end
+    
+    %% Fluxo de Agentes
+    Agents -.->|Registra Agent Card| BB
+    BB -.->|Call for Proposals| Agents
+    Agents -->|Voluntaria-se| BB
+    Agents -->|Conclui Tarefa| Ref
+```
+
+### Detalhamento Técnico das Camadas
+
+#### 1. Metacognitive Interconnect (MCI)
+A espinha dorsal do ecossistema. Baseada na **Global Workspace Theory**, o `MetaBus` atua como um quadro negro onde todos os agentes publicam e leem eventos. O protocolo **A2A (Agent-to-Agent)** permite que agentes descubram as capacidades uns dos outros dinamicamente, sem *hardcoding*. O *Reflexion Middleware* garante que toda tarefa concluída gere uma lição aprendida.
+
+#### 2. Transformer Layer
+Inspirada na arquitetura de Vaswani (2017) e nos modelos da DeepMind.
+- **TaskEmbedder:** Vetoriza tarefas e capacidades usando *feature hashing* determinístico.
+- **AttentionRouter:** Substitui o roteamento estático por **Multi-Head Attention**. Calcula scores softmax usando 4 cabeças: Semântica, Capacidade, Confiança e Carga.
+- **HierarchicalMemory:** Recuperação de memória em dois níveis (HTM) com *Episodic Replay* para treinamento offline.
+
+#### 3. Core Subsystems (Módulos Avançados)
+- **Trust Engine & Token Economy:** Agentes fazem *stake* de tokens para assumir tarefas. Se falharem no TDD, sofrem *slashing*. O *Behavioral Gate* barra agentes com histórico de alucinação.
+- **Deep Diagnose:** 5 Scanners (Noológico, Teleológico, Evolutivo, etc.) que fazem engenharia reversa de código, priorização epistemológica e geram "Sucessores Plausíveis" para o seu projeto.
+- **MiroFish & Game Theory:** Um enxame preditivo que debate usando o método Delphi e constrói um **Grafo de Conhecimento** em memória para extrair consensos matemáticos.
+- **Publishing & Research:** Automação Qualis A1. Busca artigos (Sci-Hub/OpenAlex), converte PDF para Markdown, faz fichamentos ABNT/APA, gera ilustrações didáticas (MIRA) e compila livros inteiros em LaTeX com capas geradas por IA.
 
 ---
 
