@@ -92,6 +92,55 @@ O **OpenCode Ecosystem Core** foi projetado para superar as limitações de rote
 
 ---
 
+### Fluxos de Produção: ResearchHub — Pipeline Unificado de Pesquisa Acadêmica (SPEC-017)
+
+O **ResearchHub** orquestra o fluxo completo de revisão de literatura em uma **pasta única de produção científica**, garantindo rastreabilidade total (manifest com checksums SHA-256) e conformidade com as normas ABNT NBR 6023:2018, NBR 10520:2023 e APA 7ª edição. O fluxo segue a sequência: **buscar (multiplataforma) → ranquear por aderência ao tema → baixar PDFs → converter PDF→MD → fichar → resenhar → consolidar referências**.
+
+```text
+producao_cientifica/<tema>-<timestamp>/
+└── pesquisa/
+    ├── pdfs/               # PDFs baixados (scihub-cli / direct OA)
+    ├── md/                 # PDFs convertidos em Markdown legível
+    ├── fichamentos/        # Fichamentos ABNT (bibliográfico+citação+crítico)
+    ├── resenhas/           # Resenhas críticas vinculadas ao tema
+    ├── referencias_abnt.md # Referências ABNT NBR 6023:2018 (alfabética)
+    ├── referencias_apa.md  # Referências APA 7ª edição
+    ├── referencias.bib     # BibTeX para os templates LaTeX
+    ├── repositorios.md     # Repositórios GitHub e datasets Kaggle
+    └── RESEARCH_MANIFEST.json
+```
+
+```mermaid
+flowchart LR
+    A[🔍 Busca Multiplataforma<br>arXiv · OpenAlex · Crossref<br>GitHub · Kaggle] --> B[📊 Ranqueamento<br>por aderência ao tema<br>CriticalAnalyzer]
+    B --> C[📥 Download de PDFs<br>scihub-cli / OA direto]
+    C --> D[📄 Conversão PDF → MD<br>Pdf2Markdown]
+    D --> E[🗂️ Fichamento ABNT<br>bibliográfico + citação + crítico]
+    E --> F[✍️ Resenha Crítica<br>+ enriquecimento LLM<br>Ollama local / OpenAI]
+    F --> G[📚 Referências Consolidadas<br>ABNT · APA 7 · BibTeX]
+    G --> H[🖼️ Extração de Figuras<br>FigureHunter c/ fonte]
+    H --> I[🕵️ OSINT LinkTree<br>análise das referências]
+    I --> J[✅ RESEARCH_MANIFEST.json<br>checksums SHA-256 auditáveis]
+```
+
+Cada etapa é auditável: o `RESEARCH_MANIFEST.json` registra plataformas consultadas, relatório de downloads, normas aplicadas, provedor LLM utilizado (incluindo modelos locais via **Ollama**, com privacidade total) e o hash SHA-256 de cada arquivo gerado. Com `use_llm=True`, as resenhas são aprofundadas por LLM com prioridade para modelos locais (`llm_provider='auto'|'ollama'|'openai'`, `llm_model` ex.: `llama3.2`), e o pipeline permanece 100% determinístico quando nenhum provedor está disponível.
+
+```python
+from marceloclaro.orchestrator import Orchestrator
+
+orch = Orchestrator()
+manifest = orch.research(
+    "beneficial quantum noise in variational classifiers",
+    max_papers=8,
+    use_llm=True,          # enriquecimento por LLM (opcional)
+    llm_provider="ollama",  # prioriza modelo local — privacidade e custo zero
+    llm_model="llama3.2",
+)
+print(manifest["folder"])   # pasta única de produção científica
+```
+
+---
+
 ### Mapa Geral da Arquitetura
 
 ```mermaid
