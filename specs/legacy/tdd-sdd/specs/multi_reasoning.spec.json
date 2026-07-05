@@ -1,0 +1,229 @@
+{
+  "_comment": "MultiReasoningEngine JSON Specification — OpenCode Ecosystem v1.0.0",
+  "name": "MultiReasoningEngine",
+  "version": "1.0.0",
+  "component_id": "MRE",
+  "description": "Structured, mode-aware reasoning engine providing 6 distinct reasoning modalities (deductive, inductive, abductive, analogical, causal, meta) with confidence scoring, fallback chaining, and full trace logging. Serves both OrchestrationEngine routing and ScientificProductionAgent hypothesis validation.",
+  "constants": {
+    "CONFIDENCE_FALLBACK_THRESHOLD": 0.4,
+    "MIN_CONFIDENCE": 0.0,
+    "MAX_CONFIDENCE": 1.0,
+    "MAX_CHAIN_DEPTH": 3,
+    "DEFAULT_MAX_DEPTH": 2,
+    "DEFAULT_TIMEOUT_MS": 10000,
+    "META_MODE_SYSTEM_ONLY": true,
+    "EXTERNAL_META_DOWNGRADE_TO": "deductive",
+    "HIGH_SIMILARITY_THRESHOLD": 0.5,
+    "DEFAULT_CONFIDENCE_FLOOR": 0.4
+  },
+  "reasoning_modes": [
+    {
+      "mode": "deductive",
+      "description": "Derives certain conclusions from universally accepted premises using formal logical rules. Produces the highest-confidence outputs when applicable because the conclusion is logically entailed by premises. Suitable for well-specified domains where rules are known and complete.",
+      "formal_definition": "Given premises P = {p1..pn} and rule R such that R(P) entails C, produces C with confidence proportional to rule_strength * premise_certainty.",
+      "triggers": [
+        "Problem is fully specified with known premises",
+        "A formal rule or law governs the domain",
+        "Deductive closure is computationally tractable",
+        "High certainty required and premises are reliable"
+      ],
+      "confidence_threshold": 0.7,
+      "confidence_formula": "rule_strength * AVG(premise_certainty[])",
+      "fallback_mode": "inductive",
+      "fallback_condition": "rule_strength < 0.5 OR premises incomplete",
+      "typical_domains": ["mathematics", "formal verification", "rule-based systems", "policy enforcement"],
+      "chain_position": "primary",
+      "inputs_required": ["premises", "rule_set"],
+      "outputs": ["conclusion", "proof_trace", "confidence"]
+    },
+    {
+      "mode": "inductive",
+      "description": "Generalizes from specific observed instances to form broader hypotheses or laws. Confidence scales with sample size and consistency of observations. Essential for pattern recognition, scientific hypothesis generation, and statistical inference.",
+      "formal_definition": "Given observations O = {o1..om}, produces generalized hypothesis H covering O with confidence proportional to |O| and 1 - variance(O).",
+      "triggers": [
+        "Multiple examples or data points are available",
+        "No universal rule exists but patterns are detectable",
+        "Statistical generalization is needed",
+        "Scientific hypothesis generation context"
+      ],
+      "confidence_threshold": 0.55,
+      "confidence_formula": "LOG(sample_size + 1) / LOG(100) * pattern_consistency",
+      "fallback_mode": "abductive",
+      "fallback_condition": "sample_size < 3 OR pattern_consistency < 0.4",
+      "typical_domains": ["data science", "scientific research", "machine learning", "trend analysis"],
+      "chain_position": "primary",
+      "inputs_required": ["observations", "pattern_space"],
+      "outputs": ["hypothesis", "generalization", "confidence", "sample_summary"]
+    },
+    {
+      "mode": "abductive",
+      "description": "Infers the most plausible explanation for observed evidence given a knowledge base. Applies Occam's razor to select the simplest explanation that accounts for all observations. Used in diagnostics, debugging, and causal attribution.",
+      "formal_definition": "Given observation set O and knowledge base KB, produces explanation E such that KB UNION {E} entails O, minimizing explanation complexity (Kolmogorov proxy).",
+      "triggers": [
+        "An effect is observed but the cause is unknown",
+        "Diagnostic reasoning is required",
+        "Multiple competing hypotheses need ranked selection",
+        "System debugging or anomaly explanation needed"
+      ],
+      "confidence_threshold": 0.5,
+      "confidence_formula": "explanation_coverage * (1 - complexity_penalty) * kb_alignment",
+      "fallback_mode": "analogical",
+      "fallback_condition": "no explanation found in KB with coverage > 0.4",
+      "typical_domains": ["medical diagnosis", "debugging", "forensics", "anomaly detection"],
+      "chain_position": "primary",
+      "inputs_required": ["observations", "knowledge_base"],
+      "outputs": ["best_explanation", "alternative_explanations", "confidence", "coverage_score"]
+    },
+    {
+      "mode": "analogical",
+      "description": "Transfers solutions from a structurally similar source domain to a target domain. Confidence correlates with the structural similarity between source and target. Ideal for novel problems where domain experts have solved analogous problems elsewhere.",
+      "formal_definition": "Given source domain S with known solution S_sol and target domain T with mapping M: S -> T, produces T_sol = M(S_sol) with confidence = structural_similarity(S, T).",
+      "triggers": [
+        "Novel problem with no known solution in target domain",
+        "Structural similarities to solved problems exist",
+        "Cross-domain knowledge transfer is applicable",
+        "Creative problem-solving is needed"
+      ],
+      "confidence_threshold": 0.45,
+      "confidence_formula": "structural_similarity(source, target) * transfer_fidelity",
+      "fallback_mode": "deductive",
+      "fallback_condition": "structural_similarity(source, target) < 0.5",
+      "typical_domains": ["innovation", "cross-domain research", "design thinking", "metaphorical reasoning"],
+      "chain_position": "primary",
+      "inputs_required": ["source_domain", "target_domain", "mapping_function"],
+      "outputs": ["proposed_solution", "analogy_map", "confidence", "similarity_score"]
+    },
+    {
+      "mode": "causal",
+      "description": "Traces causal pathways through an event graph to explain outcomes or predict the effects of interventions. Confidence is the product of edge probabilities along the identified causal chain. Essential for root-cause analysis and counterfactual reasoning.",
+      "formal_definition": "Given event graph G (nodes=events, edges=causal_links with probabilities), produces causal chain C explaining target outcome with confidence = PRODUCT(edge_probabilities along C).",
+      "triggers": [
+        "Root-cause analysis is required",
+        "Intervention planning needs causal model",
+        "Counterfactual reasoning is requested",
+        "Event sequence explanation is needed"
+      ],
+      "confidence_threshold": 0.5,
+      "confidence_formula": "PRODUCT(causal_edge.probability for edge in chain)",
+      "fallback_mode": "abductive",
+      "fallback_condition": "causal_graph is incomplete OR chain confidence < 0.3",
+      "typical_domains": ["root-cause analysis", "epidemiology", "policy analysis", "system failure investigation"],
+      "chain_position": "primary",
+      "inputs_required": ["event_graph", "target_outcome", "intervention_constraints"],
+      "outputs": ["causal_chain", "intervention_recommendations", "confidence", "counterfactuals"]
+    },
+    {
+      "mode": "meta",
+      "description": "System-reserved meta-reasoning mode. Activated automatically when all primary modes fail to exceed the confidence floor. Orchestrates a multi-mode synthesis chain, evaluates prior failed attempts, and produces a best-effort result by combining weighted outputs from multiple modes. Cannot be requested by external callers.",
+      "formal_definition": "Given set of failed attempts A = {a1..ak} with confidence < confidence_floor, produces revised strategy RS that runs a multi-mode ensemble and synthesizes via confidence-weighted averaging.",
+      "triggers": [
+        "SYSTEM ONLY: All primary reasoning modes fail to exceed confidence_floor",
+        "SYSTEM ONLY: Activated by MRE internal escalation logic after depth-1 fallback chain exhausted",
+        "External caller requests are silently downgraded to 'deductive' (logged as MRE_META_DOWNGRADE)"
+      ],
+      "confidence_threshold": 0.0,
+      "confidence_formula": "WEIGHTED_AVG(attempt.confidence * attempt.mode_weight for attempt in A)",
+      "fallback_mode": null,
+      "fallback_condition": "none — meta is the terminal escalation",
+      "typical_domains": ["complex multi-domain problems", "ambiguous evidence sets", "conflict resolution between reasoning modes"],
+      "chain_position": "escalation_terminal",
+      "access_control": "SYSTEM_ONLY",
+      "external_downgrade": "deductive",
+      "external_downgrade_log_event": "MRE_META_DOWNGRADE",
+      "inputs_required": ["failed_attempts", "original_context", "original_goal"],
+      "outputs": ["synthesized_answer", "mode_contributions", "confidence", "is_best_effort"]
+    }
+  ],
+  "contracts": [
+    {
+      "name": "reason",
+      "description": "Primary entry point for all reasoning requests. Validates input, selects mode, executes chain, applies fallback if confidence too low, returns full trace.",
+      "preconditions": [
+        "req.request_id is a valid UUID v4",
+        "req.context is a non-null, non-empty OBJECT",
+        "req.goal is a non-empty STRING",
+        "req.preferred_mode, if provided, is in {deductive, inductive, abductive, analogical, causal} (meta is system-only)",
+        "req.max_depth, if provided, is in [1, 3]",
+        "req.confidence_floor, if provided, is in [0.0, 1.0]"
+      ],
+      "postconditions": [
+        "Returns a complete ReasoningTrace with all fields populated",
+        "trace.confidence is in [0.0, 1.0]",
+        "trace.mode_chain is non-empty (at least one step)",
+        "trace.fallback_used reflects whether fallback was triggered",
+        "trace.duration_ms reflects actual wall-clock time",
+        "Each step in mode_chain has: step_index, mode, input, output, confidence"
+      ],
+      "invariants": [
+        "MRE-I1: confidence < 0.4 triggers fallback_mode evaluation",
+        "MRE-I2: mode_chain is append-only — no step removed or mutated after write",
+        "MRE-I3: chain depth never exceeds 3",
+        "MRE-I4: mode transitions logged with transition_reason",
+        "MRE-I5: external 'meta' requests downgraded to 'deductive'"
+      ],
+      "error_cases": [
+        { "code": "REASONING_TIMEOUT",  "condition": "Total execution exceeds req.timeout_ms",          "retryable": true  },
+        { "code": "INVALID_CONTEXT",    "condition": "req.context is null, undefined, or non-object",   "retryable": false },
+        { "code": "MAX_DEPTH_EXCEEDED", "condition": "Chain recursion would exceed req.max_depth",      "retryable": false }
+      ]
+    },
+    {
+      "name": "selectMode",
+      "description": "Internal mode selection algorithm. Maps task context signals to the most appropriate reasoning mode.",
+      "preconditions": [
+        "preferred_mode is a valid ReasoningMode or null",
+        "context is a non-null OBJECT with at least one property"
+      ],
+      "postconditions": [
+        "Returns a ReasoningMode in {deductive, inductive, abductive, analogical, causal}",
+        "If preferred_mode is provided and != 'meta': returns preferred_mode",
+        "If preferred_mode = 'meta': returns 'deductive' and logs MRE_META_DOWNGRADE",
+        "If preferred_mode is null: returns mode with highest context_signal_match score"
+      ],
+      "invariants": ["MRE-I5: meta cannot be selected by external caller"],
+      "error_cases": []
+    },
+    {
+      "name": "escalate",
+      "description": "Fallback escalation chain. Tries fallback_mode then meta if all primaries fail.",
+      "preconditions": [
+        "primary_trace.confidence < confidence_floor",
+        "chain_depth < MAX_CHAIN_DEPTH"
+      ],
+      "postconditions": [
+        "Attempts fallback_mode as defined in reasoning_modes[primary_mode].fallback_mode",
+        "If fallback confidence also < confidence_floor AND chain_depth < 3: invokes meta mode",
+        "Returns the highest-confidence trace from all attempts",
+        "All attempts are logged in the final trace's mode_chain"
+      ],
+      "invariants": ["MRE-I3: total depth <= 3"],
+      "error_cases": [
+        { "code": "MAX_DEPTH_EXCEEDED", "condition": "Escalation would push depth > 3", "retryable": false }
+      ]
+    }
+  ],
+  "error_catalog": {
+    "REASONING_TIMEOUT":  { "http_analog": 504, "retryable": true,  "severity": "medium" },
+    "INVALID_CONTEXT":    { "http_analog": 400, "retryable": false, "severity": "high"   },
+    "MAX_DEPTH_EXCEEDED": { "http_analog": 422, "retryable": false, "severity": "medium" }
+  },
+  "metrics": {
+    "counters": [
+      { "name": "opencode_mre_reasoning_requests_total",   "labels": ["preferred_mode", "selected_mode"] },
+      { "name": "opencode_mre_fallbacks_triggered_total",  "labels": ["from_mode", "to_mode"] },
+      { "name": "opencode_mre_meta_escalations_total",     "labels": [] },
+      { "name": "opencode_mre_meta_downgrades_total",      "labels": [] },
+      { "name": "opencode_mre_errors_total",               "labels": ["error_code"] }
+    ],
+    "histograms": [
+      { "name": "opencode_mre_confidence_score",     "labels": ["mode"],       "buckets": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] },
+      { "name": "opencode_mre_chain_depth",          "labels": ["final_mode"], "buckets": [1, 2, 3] },
+      { "name": "opencode_mre_duration_ms",          "labels": ["mode"],       "buckets": [50, 200, 500, 1000, 3000, 5000, 10000] }
+    ],
+    "slos": {
+      "reasoning_completion_p95_ms": 5000,
+      "confidence_floor_met_rate_pct": 85,
+      "meta_escalation_rate_max_pct": 5
+    }
+  }
+}

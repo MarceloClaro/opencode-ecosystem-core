@@ -30,6 +30,15 @@ graph TD
         HTM -.->|Usa| Emb
     end
     
+    %% Camada Core (Novos Subsistemas)
+    subgraph Core [Core Subsystems]
+        Trust[Trust Engine<br>Behavioral Gate]
+        Eco[Token Economy<br>Staking/Slashing]
+        Scan[Scanners<br>Diagnóstico]
+        Acad[MASWOS<br>Qualis A1]
+        Reason[Reasoning<br>Quantum]
+    end
+
     %% Camada MCI
     subgraph MCI [Metacognitive Interconnect]
         MB[MetaBus<br>Global Workspace]
@@ -46,18 +55,19 @@ graph TD
     Orchestrator -->|1. Cria Spec| Spec
     Orchestrator -->|2. Recuperação em 2 níveis| HTM
     HTM -->|Lê Episódica| Mem
-    Orchestrator -->|3. Roteia Tarefa| Attn
+    Orchestrator -->|3. Gate & Roteia| Trust
+    Trust -->|Libera| Attn
     Attn -->|Publica Volunteer| BB
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
+    Orchestrator <-->|Usa| Core
     
     %% Agentes
-    subgraph Agents [Agentes do Ecossistema]
+    subgraph Agents [Catálogo de Agentes]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
-        A4[Academic Writer]
-        A5[Auditor]
+        A4[130 Especializados...]
     end
     
     %% Fluxo de Agentes

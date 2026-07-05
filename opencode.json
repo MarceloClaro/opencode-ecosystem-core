@@ -1,13 +1,1385 @@
 {
-  "version": "1.0.0",
-  "orchestrator": "marceloclaro",
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "opencode",
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "agent": {
+    "marceloclaro": {
+      "description": "Orquestrador central metacognitivo do ecossistema: percebe (memória global), delega (attention routing + blackboard A2A), executa (SDD/TDD) e reflete (Reflexion). Ponto de entrada de todas as tarefas.",
+      "mode": "primary",
+      "prompt": "{file:./marceloclaro/PROMPT.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "academic_writer": {
+      "description": "Agente essencial do Core com protocolo SDD/TDD: academic_writer",
+      "mode": "subagent",
+      "prompt": "{file:./agents/academic_writer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "auditor": {
+      "description": "Agente essencial do Core com protocolo SDD/TDD: auditor",
+      "mode": "subagent",
+      "prompt": "{file:./agents/auditor.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "coder": {
+      "description": "Agente essencial do Core com protocolo SDD/TDD: coder",
+      "mode": "subagent",
+      "prompt": "{file:./agents/coder.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "researcher": {
+      "description": "Agente essencial do Core com protocolo SDD/TDD: researcher",
+      "mode": "subagent",
+      "prompt": "{file:./agents/researcher.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reviewer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reviewer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "00_editor_chefe_phd": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/00_editor_chefe_phd.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "01_agente_diagnostico_escopo": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/01_agente_diagnostico_escopo.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "02_agente_busca_curadoria": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/02_agente_busca_curadoria.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "03_agente_evidencias_citacoes": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/03_agente_evidencias_citacoes.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "04_agente_estrutura_argumentativa": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/04_agente_estrutura_argumentativa.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "05_agente_revisao_literatura_teoria": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/05_agente_revisao_literatura_teoria.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "06_agente_metodologia_reprodutibilidade": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/06_agente_metodologia_reprodutibilidade.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "07_agente_estatistica_analise": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/07_agente_estatistica_analise.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "08_agente_visualizacao_evidencia_grafica": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/08_agente_visualizacao_evidencia_grafica.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "09_agente_resultados": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/09_agente_resultados.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "10_agente_discussao_contribuicao": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/10_agente_discussao_contribuicao.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "11_agente_conclusao_coerencia_final": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/11_agente_conclusao_coerencia_final.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "12_agente_auditoria_bibliografica_abnt": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/12_agente_auditoria_bibliografica_abnt.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "13_agente_qa_qualis_a1": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/13_agente_qa_qualis_a1.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "14_agente_consistencia_interna": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/14_agente_consistencia_interna.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "15_agente_resumo_abstract_palavras_chave": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/15_agente_resumo_abstract_palavras_chave.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "16_agente_integracao_editorial_docx": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/16_agente_integracao_editorial_docx.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "17_agente_framework_reprodutivel_ambientes": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/17_agente_framework_reprodutivel_ambientes.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "18_agente_engenharia_dados_datasets_proveniencia": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/18_agente_engenharia_dados_datasets_proveniencia.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "19_agente_auditoria_codigo_documentacao_tecnica": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/19_agente_auditoria_codigo_documentacao_tecnica.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "20_agente_estatistica_avancada_inferencia": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/20_agente_estatistica_avancada_inferencia.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "21_agente_matematica_aplicada_modelagem_formal": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/21_agente_matematica_aplicada_modelagem_formal.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "22_agente_ml_dl_datamining": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/22_agente_ml_dl_datamining.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "23_agente_bioinformatica_omicas": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/23_agente_bioinformatica_omicas.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "24_agente_quimioinformatica_modelagem_molecular": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/24_agente_quimioinformatica_modelagem_molecular.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "25_agente_ciencias_sociais_linguistica_computacional": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/25_agente_ciencias_sociais_linguistica_computacional.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "26_agente_visao_computacional_multimodal": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/26_agente_visao_computacional_multimodal.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "27_agente_computacao_quantica_aplicada": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/27_agente_computacao_quantica_aplicada.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "28_agente_benchmarking_ablacao_robustez": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/28_agente_benchmarking_ablacao_robustez.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "29_agente_conformidade_internacional": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/29_agente_conformidade_internacional.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "30_agente_traducao_nativa_proofreading": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/30_agente_traducao_nativa_proofreading.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "31_agente_blind_peer_review_emulado": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/31_agente_blind_peer_review_emulado.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "32_agente_etica_open_science": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/32_agente_etica_open_science.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "33_agente_automacao_multi_norma": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/33_agente_automacao_multi_norma.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "34_agente_identificacao_conflitos_similaridade": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/34_agente_identificacao_conflitos_similaridade.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "35_agente_coleta_datasets_reais": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/35_agente_coleta_datasets_reais.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "36_agente_exportacao_latex_pdf": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/36_agente_exportacao_latex_pdf.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "37_agente_apresentacao_slides_banca": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/37_agente_apresentacao_slides_banca.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "38_agente_montagem_entrega_final": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/38_agente_montagem_entrega_final.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "39_agente_metodologia_multi_paradigma": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/39_agente_metodologia_multi_paradigma.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "40_agente_marcos_teoricos_interpretacao": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/40_agente_marcos_teoricos_interpretacao.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "41_agente_gis_geoprocessamento_cartografia": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/41_agente_gis_geoprocessamento_cartografia.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "42_agente_desenvolvedor_cientista_computacao": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/42_agente_desenvolvedor_cientista_computacao.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "43_agente_satelite_bioinformatica_omics": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/43_agente_satelite_bioinformatica_omics.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "44_agente_correcao_textual_qualis": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/44_agente_correcao_textual_qualis.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "45_agente_refinamento_argumentacao": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/45_agente_refinamento_argumentacao.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "DISPATCHER_ATIVACAO": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/DISPATCHER_ATIVACAO.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "README": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/README.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "TEMPLATE_HANDOFF": {
+      "description": "Este agente faz parte do pipeline MASWOS para producao de artigos academicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/TEMPLATE_HANDOFF.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "adr-manager": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/adr-manager.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "antigravity-orchestrator": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/antigravity-orchestrator.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "architect": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/architect.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "architecture-analyzer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/architecture-analyzer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "autoevolve": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/autoevolve.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "batch-executor": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/batch-executor.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "bernstein-orchestrator": {
+      "description": "Bernstein é o maestro do ecossistema OpenCode. Ele orquestra agentes CLI coding (Claude, Codex, Gemini, Qwen) em pipelines multi-agente com:",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/bernstein-orchestrator.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "build-agent": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/build-agent.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "code-reviewer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/code-reviewer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "codebase-analyzer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/codebase-analyzer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "codebase-locator": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/codebase-locator.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "codebase-pattern-finder": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/codebase-pattern-finder.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "coder-agent": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/coder-agent.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "context-manager": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/context-manager.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "context-retriever": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/context-retriever.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "contextscout": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/contextscout.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "contract-manager": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/contract-manager.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "copywriter": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/copywriter.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "debugger": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/debugger.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "devops-specialist": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/devops-specialist.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "docs-writer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/docs-writer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "documentation": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/documentation.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "eval-runner": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/eval-runner.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "externalscout": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/externalscout.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "frontend-specialist": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/frontend-specialist.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "git-manager": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/git-manager.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "image-specialist": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/image-specialist.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "linguistic-corrector": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/linguistic-corrector.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "master-orchestrator": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/master-orchestrator.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "openagent": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/openagent.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "opencoder": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/opencoder.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "optimizer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/optimizer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "prioritization-engine": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/prioritization-engine.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "pypi-searcher": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/pypi-searcher.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "quantum-nexus-phd": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-nexus-phd.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-agent-forum": {
+      "description": "Ao receber um request envolvendo debate multiagente:",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-agent-forum.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-anp": {
+      "description": "Você é o **Agente ANP**, especialista no padrão **Agent Node Pipeline (P16)**.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-anp.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-archaeologist": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-archaeologist.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-architect": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-architect.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-config-generator": {
+      "description": "Gerar configuracoes complexas de simulacao usando chamadas LLM step-by-step",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-config-generator.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-data-master": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-data-master.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-design-system": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-design-system.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-detective": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-detective.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-document-ir": {
+      "description": "Ao receber um request envolvendo geração de documentos:",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-document-ir.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-entity-ner": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-entity-ner.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-fileipc": {
+      "description": "Agente especializado em comunicação entre processos via filesystem.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-fileipc.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-graph-builder": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-graph-builder.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-graphrag": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-graphrag.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-hybrid-graph": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-hybrid-graph.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-memory-updater": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-memory-updater.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-oasis-profile": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-oasis-profile.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-ontology-gen": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-ontology-gen.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-planner": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-planner.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-process-lifecycle": {
+      "description": "Ao receber um request envolvendo processos background:",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-process-lifecycle.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-report-agent": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-report-agent.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-reviewer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-reviewer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-scout": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-scout.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-statemachine": {
+      "description": "Agente especializado em gerenciar o ciclo de vida do pipeline de",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-statemachine.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-swarm-review": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-swarm-review.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-synthesis": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-synthesis.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-visor": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-visor.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa-writer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa-writer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "reversa": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reversa.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "security-auditor": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/security-auditor.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "simple-responder": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/simple-responder.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "stage-orchestrator": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/stage-orchestrator.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "story-mapper": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/story-mapper.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "task-manager": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/task-manager.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "technical-writer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/technical-writer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "test-engineer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/test-engineer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "thoughts-analyzer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/thoughts-analyzer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "thoughts-locator": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/thoughts-locator.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "web-developer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/web-developer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "web-search-researcher": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/web-search-researcher.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "ws-academic-pipeline": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/ws-academic-pipeline.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "ws-coder": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/ws-coder.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "ws-researcher": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/ws-researcher.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "ws-reviewer": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/ws-reviewer.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "ws-scribe": {
+      "description": "<!--",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/ws-scribe.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    }
+  },
   "mcp": {
     "metacognitive-interconnect": {
-      "command": "python3",
-      "args": [
+      "type": "local",
+      "command": [
+        "python3",
         "mci/mcp_server.py"
       ],
       "enabled": true
+    },
+    "antigravity-bridge": {
+      "type": "local",
+      "command": [
+        "python3",
+        "integrations/antigravity/antigravity_mcp_server.py"
+      ],
+      "enabled": false
+    }
+  },
+  "command": {
+    "diagnose": {
+      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from scanners import diagnostic_pipeline; import json; print(json.dumps(diagnostic_pipeline.run(open('$ARGUMENTS').read() if '$ARGUMENTS' else 'ecosystem'), ensure_ascii=False, indent=2))\"",
+      "description": "Roda o pipeline de diagnóstico (5 scanners) sobre um arquivo"
+    },
+    "maswos": {
+      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from academic import maswos_pipeline; print(maswos_pipeline.run('$ARGUMENTS').summary())\"",
+      "description": "Executa o pipeline acadêmico MASWOS Qualis A1 para um tópico"
+    },
+    "reason": {
+      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from reasoning import multi_reasoning; r = multi_reasoning.reason('$ARGUMENTS'); print(r.engine, '->', r.conclusion)\"",
+      "description": "Raciocina sobre uma consulta com roteamento automático de motor"
+    },
+    "economy": {
+      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from economy import token_economy; import json; print(json.dumps(token_economy.report(), ensure_ascii=False, indent=2))\"",
+      "description": "Relatório da economia de tokens (staking, slashing, fees)"
     }
   }
 }

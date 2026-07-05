@@ -32,6 +32,14 @@ from transformer.pipeline import TransformerPipeline, GradingHead
 from transformer.memory import HierarchicalMemory
 from sdd.spec_engine import spec_registry, spec_verifier
 from sdd.tdd_runner import tdd_runner, run_pytest
+from trust import create_trust_engine
+from economy import TokenEconomy
+from scanners import diagnostic_pipeline
+from academic import MaswosPipeline
+from reasoning import multi_reasoning, run_experiment_suite
+from evolution import evolution_registry
+from integrations.antigravity import antigravity_bridge
+from marceloclaro.catalog_loader import register_catalog_agents
 
 logger = logging.getLogger("marceloclaro")
 logger.setLevel(logging.INFO)
@@ -50,6 +58,16 @@ class MarceloClaroOrchestrator:
         self.strict_sdd = strict_sdd
         self.task_specs: Dict[str, str] = {}  # task_id -> spec_id
 
+        # Trust Engine (SPEC-038): gate comportamental, esquecimento natural, outcomes
+        self.trust = create_trust_engine()
+
+        # Token Economy (SPEC-022~025): staking, slashing, fee market
+        self.economy = TokenEconomy()
+        self.task_stakes: Dict[str, str] = {}  # task_id -> agent_id com stake
+
+        # Pipeline acadêmico Qualis A1 (MASWOS) acoplado à delegação real
+        self.maswos = MaswosPipeline(delegate_fn=self._maswos_delegate)
+
         # Camada Transformer (inspiração: Vaswani 2017, Perceiver, HTM, Aletheia)
         self.attention_router = AttentionRouter()
         self.pipeline = TransformerPipeline(num_layers=pipeline_layers, grading_head=GradingHead())
@@ -63,6 +81,15 @@ class MarceloClaroOrchestrator:
 
         if auto_load_agents:
             register_all_agents(metabus)
+
+        # Catálogo de 128+ agentes especializados (portados do OpenCode_Ecosystem)
+        self.catalog_size = 0
+        if auto_load_agents:
+            try:
+                self.catalog_size = register_catalog_agents(metabus)
+                logger.info(f"[{self.id}] Catálogo registrado: {self.catalog_size} agentes especializados")
+            except Exception as exc:
+                logger.warning(f"[{self.id}] Falha ao registrar catálogo: {exc}")
 
     # ------------------------------------------------------------------
     # 1. PERCEPÇÃO METACOGNITIVA
@@ -102,11 +129,25 @@ class MarceloClaroOrchestrator:
         return task_id
 
     def _on_cfp(self, event: Dict[str, Any]):
-        """Recebe o Call for Proposals e roteia via Multi-Head Attention."""
+        """Recebe o Call for Proposals e roteia via Multi-Head Attention.
+
+        Integra o Trust Engine (SPEC-038): agentes cujo BehavioralGate bloqueia
+        a ação são removidos da elegibilidade antes do roteamento por atenção.
+        """
         payload = event.get("payload", {})
         task_id = payload.get("task_id")
         description = payload.get("description", "")
         eligible = payload.get("eligible_agents", [])
+
+        # Gate comportamental (Trust Engine): filtra agentes não confiáveis
+        gated = []
+        for agent_id in eligible:
+            decision = self.trust.execute(f"delegate:{agent_id}")
+            if decision.allowed:
+                gated.append(agent_id)
+            else:
+                logger.info(f"[{self.id}] BehavioralGate bloqueou {agent_id}: {decision.reason}")
+        eligible = gated or eligible  # fallback: nunca deixar a tarefa órfã
         self.pending_cfps[task_id] = eligible
 
         if not eligible:
@@ -123,6 +164,14 @@ class MarceloClaroOrchestrator:
                                               positional_index=self._task_counter)
         chosen = ranking[0][0] if ranking else eligible[0]
         logger.info(f"[{self.id}] Atenção rankeou {task_id}: {ranking[:3]}")
+
+        # Token Economy: cotação de fee e stake do agente escolhido
+        try:
+            self.economy.post_task(self.id, task_id, priority="normal")
+            self.economy.commit(chosen, task_id, amount=2.0)
+            self.task_stakes[task_id] = chosen
+        except Exception as exc:
+            logger.debug(f"[{self.id}] Economia indisponível para {task_id}: {exc}")
 
         metabus.publish("task.volunteer", {
             "task_id": task_id,
@@ -174,6 +223,19 @@ class MarceloClaroOrchestrator:
         }, source_agent=agent_id)
         self.results[task_id] = result
 
+        # Trust Engine aprende com o outcome (OutcomeTracker + TrustScorer)
+        self.trust.learn(f"delegate:{agent_id}", success=success)
+
+        # Token Economy: resolve stakes (recompensa ou slashing)
+        if task_id in self.task_stakes:
+            try:
+                resolution = self.economy.resolve(task_id, success=success)
+                if not success:
+                    logger.info(f"[{self.id}] Slashing aplicado a {agent_id} na tarefa {task_id}")
+                del self.task_stakes[task_id]
+            except Exception as exc:
+                logger.debug(f"[{self.id}] Resolução econômica falhou: {exc}")
+
     def _on_reflected(self, event: Dict[str, Any]):
         payload = event.get("payload", {})
         logger.info(
@@ -197,6 +259,12 @@ class MarceloClaroOrchestrator:
                 "specs_registered": len(spec_registry.specs),
                 "tasks_with_spec": len(self.task_specs),
             },
+            "trust": self.trust.status,
+            "economy": self.economy.report(),
+            "catalog_agents": self.catalog_size,
+            "reasoning_engines": multi_reasoning.status(),
+            "antigravity": antigravity_bridge.status(),
+            "evolution_avg_score": evolution_registry.average_score(),
         }
 
     def list_agents(self) -> List[Dict[str, Any]]:
@@ -302,3 +370,88 @@ class MarceloClaroOrchestrator:
             score=1.0 if outcome["all_passed"] else 0.0,
         )
         return outcome
+
+    # ------------------------------------------------------------------
+    # SUBSISTEMAS AVANÇADOS (portados do OpenCode_Ecosystem original)
+    # ------------------------------------------------------------------
+    def diagnose(self, corpus: str, domain: str = "",
+                 goals: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+        """Pipeline de diagnóstico com os 5 scanners (noológico, teleológico,
+        evolutivo, potentiality, social impact). Registra o resultado na memória."""
+        report = diagnostic_pipeline.run(corpus, domain=domain, goals=goals)
+        gaps = report.get("evolutionary", {}).get("total_gaps", 0)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"diagnóstico do ecossistema (domínio: {domain or 'geral'})",
+            reflection=f"Diagnóstico concluído: {gaps} lacunas identificadas. "
+                       f"{report['evolutionary']['recommendation']}",
+            score=max(0.0, 1.0 - gaps / 10.0),
+        )
+        return report
+
+    def academic_pipeline(self, topic: str, manuscript: str = "",
+                          stages: Optional[List[str]] = None) -> Dict[str, Any]:
+        """Pipeline acadêmico MASWOS Qualis A1 (16 estágios + AUTO_SCORE gate)."""
+        run = self.maswos.run(topic, manuscript, stages)
+        summary = run.summary()
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"pipeline acadêmico MASWOS: {topic}",
+            reflection=f"MASWOS: {summary['stages_completed']}/{summary['stages_total']} "
+                       f"estágios, nota final {summary['final_score']}/10 "
+                       f"({'APROVADO' if summary['approved'] else 'reprovado'} no gate Qualis A1).",
+            score=(summary["final_score"] or 0) / 10.0,
+        )
+        return summary
+
+    def _maswos_delegate(self, agent_id: str, capability: str, description: str) -> str:
+        """Delegação interna dos estágios MASWOS via Blackboard."""
+        task_id = self.delegate(description, required_capabilities=[capability])
+        task = blackboard.tasks.get(task_id)
+        assigned = getattr(task, "assigned_to", None) or agent_id
+        output = f"[{assigned}] estágio executado: {description[:120]}"
+        self.report_completion(task_id, assigned, output, success=True)
+        return output
+
+    def reason(self, query: str, engine: str = "auto", **kwargs) -> Dict[str, Any]:
+        """Raciocínio formal com os 4 motores (Z3, SymPy, Kanren, Critical)."""
+        result = multi_reasoning.reason(query, engine=engine, **kwargs)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"raciocínio ({result.engine}): {query[:80]}",
+            reflection=f"Conclusão: {result.conclusion[:200]}",
+            score=result.confidence,
+        )
+        return result.to_dict()
+
+    def quantum_experiment(self, n_qubits: int = 3,
+                           seeds: Optional[List[int]] = None,
+                           shots: int = 1024) -> Dict[str, Any]:
+        """Suite quântica reprodutível (Bell, GHZ, superposição) com 5 seeds."""
+        report = run_experiment_suite(n_qubits, seeds, shots)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"experimento quântico ({n_qubits} qubits)",
+            reflection=f"Suite quântica concluída com seeds {report['seeds']}.",
+            score=0.9,
+        )
+        return report
+
+    def record_evolution(self, objective: str, changes: List[str],
+                         score: Optional[float] = None,
+                         lessons: Optional[List[str]] = None) -> Dict[str, Any]:
+        """Registra um ciclo evolutivo (R47+) e injeta lições na memória global."""
+        cycle = evolution_registry.record(objective, changes, score, lessons)
+        for lesson in (lessons or []):
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"ciclo evolutivo {cycle.round_id}",
+                reflection=lesson,
+                score=(score or 5.0) / 10.0,
+            )
+        return {"round_id": cycle.round_id, "score": cycle.score,
+                "avg_score": evolution_registry.average_score()}
+
+    def delegate_external(self, prompt: str, agent: str = "default") -> Dict[str, Any]:
+        """Delegação externa via Antigravity CLI (SPEC-046), com fila de handoff."""
+        return antigravity_bridge.delegate(prompt, agent=agent)

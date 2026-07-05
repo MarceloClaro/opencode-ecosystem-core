@@ -56,19 +56,24 @@ def test_blackboard_full_cycle():
     # O CFP + voluntariado ocorrem sincronamente dentro do publish
     task = blackboard.tasks[task_id]
     assert task.status == "assigned"
-    assert task.assigned_to == "researcher"
+    # Com o catálogo de 128+ agentes, o attention router escolhe o melhor
+    # candidato elegível — validamos o atribuído real, não um id fixo
+    assigned = task.assigned_to
+    assert assigned is not None
 
-    orchestrator.report_completion(task_id, "researcher", "ok", success=True)
+    orchestrator.report_completion(task_id, assigned, "ok", success=True)
     assert blackboard.tasks[task_id].status == "completed"
 
-    # A reflexão deve ter atualizado a confiança do researcher
-    assert metabus.memory.confidence_ledger.get("researcher", 0) > 0.5
+    # A reflexão deve ter atualizado a confiança do agente atribuído
+    assert metabus.memory.confidence_ledger.get(assigned, 0) > 0.5
 
 
 def test_failed_task_lowers_confidence():
     orchestrator = MarceloClaroOrchestrator(auto_load_agents=True)
     task_id = orchestrator.delegate("Implementar parser", required_capabilities=["python"])
-    before = metabus.memory.confidence_ledger.get("coder", 0.5)
-    orchestrator.report_completion(task_id, "coder", "erro de sintaxe", success=False)
-    after = metabus.memory.confidence_ledger["coder"]
+    assigned = blackboard.tasks[task_id].assigned_to
+    assert assigned is not None
+    before = metabus.memory.confidence_ledger.get(assigned, 0.5)
+    orchestrator.report_completion(task_id, assigned, "erro de sintaxe", success=False)
+    after = metabus.memory.confidence_ledger[assigned]
     assert after < before

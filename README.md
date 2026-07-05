@@ -37,8 +37,15 @@ Todos os componentes e agentes do ecossistema operam estritamente sob as metodol
 - `transformer/`: A nova camada de orquestração (Attention, Pipeline, Embedder, HTM Memory).
 - `mci/`: A camada Metacognitive Interconnect (MetaBus, Blackboard, Reflexion, MCP Server).
 - `sdd/`: O motor de especificações e TDD Runner (SpecVerifier, SpecRegistry).
-- `specs/`: Especificações formais e executáveis de todos os componentes.
-- `agents/`: Definições dos agentes em Markdown (incluindo protocolos SDD/TDD obrigatórios).
+- `trust/`: Trust Engine com BehavioralGate e NaturalForgetting.
+- `economy/`: Token Economy (staking, slashing, fee market).
+- `scanners/`: Pipeline de diagnóstico (Noológico, Teleológico, Evolutivo, etc.).
+- `academic/`: Pipeline MASWOS Qualis A1 com gate AUTO_SCORE.
+- `reasoning/`: Motores de raciocínio lógico e simulador quântico.
+- `evolution/`: Registro de ciclos evolutivos.
+- `integrations/`: Integração com OpenCode CLI e Antigravity.
+- `specs/`: Especificações formais (SDD nativas e acervo de rastreabilidade original).
+- `agents/`: 134 agentes no total (incluindo catálogo de 130 especializados).
 - `examples/`: Scripts de demonstração end-to-end.
 - `tests/`: Bateria de testes automatizados (pytest).
 
@@ -56,9 +63,10 @@ pip install -r requirements.txt
 Veja a metacognição e a camada Transformer em ação:
 
 ```bash
-python3 examples/demo_sdd_tdd.py      # Ciclo Red-Green-Refactor e Gate SDD Estrito
-python3 examples/demo_transformer.py  # Atenção, Pipeline Gerar-Revisar e HTM Memory
-python3 examples/demo_pipeline.py     # Fluxo MCI clássico (Blackboard + Reflexion)
+python3 examples/demo_full_ecosystem.py # Demo completa: Trust, Economy, MASWOS, Scanners, Quantum
+python3 examples/demo_sdd_tdd.py        # Ciclo Red-Green-Refactor e Gate SDD Estrito
+python3 examples/demo_transformer.py    # Atenção, Pipeline Gerar-Revisar e HTM Memory
+python3 examples/demo_pipeline.py       # Fluxo MCI clássico (Blackboard + Reflexion)
 ```
 
 ### 3. CLI Interativo
