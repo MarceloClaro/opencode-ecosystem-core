@@ -32,6 +32,7 @@ from .searchers import MultiSearcher, PaperRecord
 from .downloader import PaperDownloader
 from .pdf2md import Pdf2Markdown
 from .fichamento import CitationFormatter, CriticalAnalyzer, FichamentoWriter
+from .osint import OsintLinkTree
 
 logger = logging.getLogger("research.hub")
 
@@ -77,6 +78,7 @@ class ResearchHub:
         self.converter = Pdf2Markdown(str(self.md_dir))
         self.writer = FichamentoWriter(str(self.fich_dir), str(self.res_dir), topic)
         self.analyzer = CriticalAnalyzer(topic)
+        self.osint = OsintLinkTree(max_depth=1)
 
     # ------------------------------------------------------------------
     def run(self, max_papers: int = 8, limit_per_platform: int = 4,
@@ -140,7 +142,13 @@ class ResearchHub:
         self._write_references(papers)
         self._write_repos(repos)
 
-        # 7. Manifest com checksums
+        # 7. OSINT LinkTree: Analisar a "Dark Web" acadêmica das referências
+        refs_text = "\n".join(p.url for p in papers if p.url)
+        osint_report = self.osint.analyze_references(refs_text)
+        with open(self.pesquisa / "OSINT_REPORT.json", "w", encoding="utf-8") as f:
+            json.dump(osint_report, f, ensure_ascii=False, indent=2)
+
+        # 8. Manifest com checksums
         manifest = self._write_manifest(papers, repos, download_report,
                                         pdf_by_key, md_by_key,
                                         fichamentos, resenhas)

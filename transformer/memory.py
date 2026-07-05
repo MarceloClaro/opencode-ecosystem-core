@@ -78,3 +78,31 @@ class HierarchicalMemory:
             {"relevance": round(score, 4), **entry}
             for score, entry in scored_entries[:top_entries]
         ]
+
+    def episodic_replay(self, batch_size: int = 5) -> List[Dict[str, Any]]:
+        """
+        DeepMind-inspired Episodic Replay: amostra eventos passados aleatoriamente
+        para consolidação de memória e treinamento offline do orquestrador.
+        Prioriza eventos com alto 'surprise' ou 'reward' se existirem.
+        """
+        all_events = self.memory.episodic
+        if not all_events:
+            return []
+        
+        # Se os eventos tiverem 'reward' ou 'surprise' no meta, fazemos amostragem ponderada
+        weights = []
+        for ev in all_events:
+            w = 1.0
+            if "reward" in ev:
+                w += abs(ev["reward"])
+            if "surprise" in ev:
+                w += ev["surprise"]
+            weights.append(w)
+            
+        import random
+        try:
+            sampled = random.choices(all_events, weights=weights, k=min(batch_size, len(all_events)))
+        except Exception:
+            sampled = random.sample(all_events, min(batch_size, len(all_events)))
+            
+        return sampled

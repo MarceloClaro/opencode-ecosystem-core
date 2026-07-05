@@ -24,6 +24,7 @@ from scanners.teleological_scanner import TeleologicalReverseScanner, Teleologic
 from scanners.evolutionary_pipeline import EvolutionaryRoadmap  # noqa: F401 (reexport)
 from scanners.potentiality_scanner import PotentialityScanner
 from scanners.social_impact_scanner import SocialImpactScanner
+from scanners.reversa_scanner import ReversaScanner
 
 
 class _TextAuditTrail:
@@ -48,6 +49,7 @@ class DiagnosticPipeline:
         self.teleological = TeleologicalReverseScanner()
         self.potentiality = PotentialityScanner()
         self.social = SocialImpactScanner()
+        self.reversa = ReversaScanner()
 
     def run(self, corpus: str, domain: str = "",
             goals: Optional[List[Dict[str, Any]]] = None,
@@ -157,6 +159,17 @@ class DiagnosticPipeline:
                 "Priorizar fechamento de lacunas críticas antes de novas features."
             ),
         }
+
+        # 6. Scanner de Engenharia Reversa
+        try:
+            rev = self.reversa.scan(corpus)
+            report["reversa"] = {
+                "score": rev.score,
+                "findings": rev.findings,
+                "recommendations": rev.recommendations
+            }
+        except Exception as exc:
+            report["reversa"] = {"error": str(exc)}
 
         report["duration_s"] = round(time.time() - started, 3)
         return report

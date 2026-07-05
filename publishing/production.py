@@ -6,7 +6,8 @@ Reproduz o padrão do OpenCode_Ecosystem original: toda produção acadêmica
 
     producao_cientifica/<slug>-<timestamp>/
     ├── latex/            fonte LaTeX (a partir do template escolhido)
-    │   └── main.tex
+    │   ├── main.tex      esqueleto que inclui as seções
+    │   └── sections/     subpasta com cada seção/capítulo em .tex separado
     ├── manuscrito.md     fonte Markdown canônica
     ├── manuscrito.pdf    compilado PDF
     ├── manuscrito.docx   compilado Word
@@ -95,8 +96,10 @@ class ScientificProduction:
         root = output_root or DEFAULT_OUTPUT_ROOT
         self.folder = os.path.join(root, self.slug)
         self.latex_dir = os.path.join(self.folder, "latex")
+        self.sections_dir = os.path.join(self.latex_dir, "sections")
         self.md_path = os.path.join(self.folder, "manuscrito.md")
         os.makedirs(self.latex_dir, exist_ok=True)
+        os.makedirs(self.sections_dir, exist_ok=True)
         self._log: List[str] = []
 
     # ── Etapa 1: fonte Markdown canônica ──
@@ -108,7 +111,29 @@ class ScientificProduction:
         self._log.append("markdown: fonte canônica gravada")
         return self.md_path
 
-    # ── Etapa 2: fonte LaTeX a partir do template ──
+    # ── Etapa 2: fonte LaTeX modularizada ──
+    def _split_markdown(self, content: str) -> Dict[str, str]:
+        """Divide o Markdown em seções baseadas em headers H1/H2."""
+        sections = {}
+        current_section = "preamble"
+        current_content = []
+        
+        for line in content.split('\n'):
+            if line.startswith('# ') or line.startswith('## '):
+                if current_content:
+                    sections[current_section] = '\n'.join(current_content)
+                title = line.replace('#', '').strip().lower()
+                title = ''.join(c if c.isalnum() else '_' for c in title)
+                current_section = title or "section"
+                current_content = [line]
+            else:
+                current_content.append(line)
+                
+        if current_content:
+            sections[current_section] = '\n'.join(current_content)
+            
+        return sections
+
     def prepare_latex(self) -> str:
         src = os.path.join(TEMPLATES_DIR, TEMPLATE_MAIN[self.template])
         if os.path.isdir(src):
@@ -129,36 +154,74 @@ class ScientificProduction:
                     shutil.copy2(s, os.path.join(self.latex_dir, item))
             self._log.append(f"latex: template '{self.template}' copiado")
 
-        # gera main.tex via pandoc (md → tex) ou fallback envelope
-        main_tex = os.path.join(self.latex_dir, "main.tex")
-        if _which("pandoc") and os.path.exists(self.md_path):
-            try:
-                subprocess.run(
-                    ["pandoc", self.md_path, "-s", "-o", main_tex,
-                     "--metadata", f"title={self.title}",
-                     "--metadata", f"author={self.author}"],
-                    check=True, capture_output=True, timeout=120,
-                )
-                self._log.append("latex: main.tex gerado via pandoc")
-                return main_tex
-            except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
-                self._log.append(f"latex: pandoc falhou ({exc}); usando fallback")
-        # fallback stdlib: envelope LaTeX mínimo com o markdown verbatim
+        # Lê o markdown para dividir
         with open(self.md_path, "r", encoding="utf-8") as f:
-            body = f.read()
-        tex = (
-            "\\documentclass[12pt,a4paper]{article}\n"
-            "\\usepackage[utf8]{inputenc}\\usepackage[T1]{fontenc}\n"
-            "\\usepackage[brazil]{babel}\\usepackage{listings}\n"
-            f"\\title{{{self.title}}}\\author{{{self.author}}}\n"
-            "\\begin{document}\\maketitle\n"
-            "\\begin{lstlisting}[breaklines=true,basicstyle=\\small]\n"
-            f"{body}\n"
-            "\\end{lstlisting}\n\\end{document}\n"
-        )
+            md_content = f.read()
+
+        sections = self._split_markdown(md_content)
+        section_files = []
+        pandoc = _which("pandoc")
+
+        # Converte cada seção para .tex
+        for sec_name, content in sections.items():
+            tmp_md = os.path.join(self.sections_dir, f"{sec_name}.md")
+            out_tex = os.path.join(self.sections_dir, f"{sec_name}.tex")
+            
+            with open(tmp_md, "w", encoding="utf-8") as f:
+                f.write(content)
+                
+            if pandoc:
+                try:
+                    subprocess.run(
+                        [pandoc, tmp_md, "-f", "markdown", "-t", "latex", "-o", out_tex],
+                        check=True, capture_output=True, timeout=60
+                    )
+                except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+                    # Fallback
+                    with open(out_tex, "w", encoding="utf-8") as f:
+                        f.write(content)
+            else:
+                with open(out_tex, "w", encoding="utf-8") as f:
+                    f.write(content)
+                    
+            os.remove(tmp_md)
+            section_files.append(f"sections/{sec_name}")
+
+        self._log.append(f"latex: {len(section_files)} seções modularizadas geradas")
+
+        # Gera main.tex
+        main_tex = os.path.join(self.latex_dir, "main.tex")
+        
+        tex_lines = [
+            "\\documentclass[12pt,a4paper]{article}",
+            "\\usepackage[utf8]{inputenc}",
+            "\\usepackage[T1]{fontenc}",
+            "\\usepackage[brazil]{babel}",
+            "\\usepackage{amsmath,amssymb}",
+            "\\usepackage{graphicx}",
+            "\\usepackage{hyperref}",
+            "",
+            f"\\title{{{self.title}}}",
+            f"\\author{{{self.author}}}",
+            "\\date{\\today}",
+            "",
+            "\\begin{document}",
+            "\\maketitle",
+            "\\tableofcontents",
+            "\\newpage",
+            ""
+        ]
+        
+        for sec in section_files:
+            tex_lines.append(f"\\input{{{sec}}}")
+            
+        tex_lines.append("")
+        tex_lines.append("\\end{document}")
+        
         with open(main_tex, "w", encoding="utf-8") as f:
-            f.write(tex)
-        self._log.append("latex: main.tex gerado via fallback stdlib")
+            f.write("\n".join(tex_lines))
+            
+        self._log.append("latex: main.tex gerado com \\input{} modulares")
         return main_tex
 
     # ── Etapa 3: compilados PDF/DOCX/ODT ──

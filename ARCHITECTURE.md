@@ -23,7 +23,7 @@ graph TD
     subgraph TF [Transformer Layer]
         Attn[AttentionRouter<br>Multi-Head]
         Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
-        HTM[(Hierarchical<br>Memory HTM)]
+        HTM[(Hierarchical<br>Memory c/ Episodic Replay)]
         Emb[TaskEmbedder<br>d=64]
         
         Attn -.->|Usa| Emb
@@ -37,9 +37,9 @@ graph TD
         Scan[Scanners<br>Diagnóstico]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>Quantum]
-        MiroFish[MiroFish<br>Swarm Predictor]
-        Publishing[Publishing<br>Pasta Única]
-        Research[Research<br>Extração Acadêmica]
+        MiroFish[MiroFish<br>Swarm c/ GraphMemory]
+        Publishing[Publishing<br>Modular LaTeX]
+        Research[Research<br>Hub c/ OSINT]
     end
 
     %% Camada MCI

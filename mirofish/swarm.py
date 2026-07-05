@@ -26,6 +26,8 @@ import uuid
 from dataclasses import dataclass, field, asdict
 from typing import Any, Callable, Dict, List, Optional
 
+from mirofish.graph_memory import GraphMemory
+
 _STATE_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".mci_state"
 )
@@ -98,6 +100,7 @@ class MiroFishSwarm:
                 reasoning=DEFAULT_REASONINGS[i % len(DEFAULT_REASONINGS)],
             ))
         self.predictions: Dict[str, Dict[str, Any]] = {}
+        self.graph = GraphMemory()   # memória de grafo (MiroFish-Offline)
         self._load_state()
 
     # ── Predição agregada ──
@@ -162,18 +165,40 @@ class MiroFishSwarm:
         """
         history: List[float] = []
         current_signal = signal
+        last_result: Optional[Dict[str, Any]] = None
         for _ in range(rounds):
             result = self.predict(question, current_signal)
             history.append(result["aggregate"])
+            last_result = result
             # ancoragem parcial na média do enxame (peso social 0.5)
             current_signal = 0.5 * current_signal + 0.5 * result["aggregate"]
+
+        # Ingestão do debate no grafo de memória (MiroFish-Offline)
+        graph_consensus = None
+        if last_result is not None:
+            opinions = [
+                {"agent": aid, "position": pos,
+                 "argument": f"{aid} ({self._bias_of(aid)}) prevê {pos:.2f} para: {question[:80]}"}
+                for aid, pos in last_result["individual"].items()
+            ]
+            self.graph.ingest_debate(question, opinions)
+            graph_consensus = self.graph.consensus_score()
+
         return {
             "question": question,
             "rounds": rounds,
             "trajectory": [round(v, 4) for v in history],
             "final": round(history[-1], 4),
             "converged": len(history) >= 2 and abs(history[-1] - history[-2]) < 0.02,
+            "graph_consensus": graph_consensus,
+            "graph_contradictions": len(self.graph.contradictions()),
         }
+
+    def _bias_of(self, agent_id: str) -> str:
+        for a in self.agents:
+            if a.agent_id == agent_id:
+                return a.bias
+        return "neutral"
 
     # ── Relatório ──
     def report(self) -> Dict[str, Any]:

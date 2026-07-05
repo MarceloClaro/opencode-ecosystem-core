@@ -10,18 +10,18 @@ A orquestração do ecossistema mapeia conceitos da arquitetura Transformer dire
 - **Attention Router (Multi-Head)**: Em vez de escolher agentes aleatoriamente, o orquestrador usa atenção com 4 "cabeças" (semântica, capacidade, confiança e carga) para rankear o agente ideal para a tarefa (inspirado no *Perceiver* e *PrediNet*).
 - **Transformer Pipeline**: Cada tarefa passa por um *encoder stack* com o ciclo **Gerar → Verificar → Revisar** (inspirado no agente *Aletheia* do DeepMind), com conexões residuais que preservam o histórico de correções.
 - **Grading Head**: Uma cabeça de avaliação que pontua saídas de 0 a 7 (inspirado no *IMO-GradingBench*).
-- **Hierarchical Memory**: Recuperação de memórias em dois níveis (atenção grossa sobre sumários de *chunks* e atenção fina sobre eventos), inspirado no *Hierarchical Transformer Memory (HTM)*.
+- **Hierarchical Memory**: Recuperação de memórias em dois níveis (atenção grossa sobre sumários de *chunks* e atenção fina sobre eventos), inspirado no *Hierarchical Transformer Memory (HTM)*. Inclui **Episodic Replay** para consolidação de memória e treinamento offline do orquestrador (DeepMind RL).
 
 ## Subsistemas Avançados
 
 O ecossistema integra os seguintes subsistemas avançados (portados do repositório OpenCode_Ecosystem original):
 
-- **MiroFish (Swarm Intelligence)**: Motor preditivo baseado em enxame ("wisdom of crowds"). Agentes com vieses distintos (otimista, pessimista, contrário) emitem previsões que convergem em um debate Delphi, triplamente validado por Teoria dos Jogos e auditoria acadêmica.
+- **MiroFish (Swarm Intelligence)**: Motor preditivo baseado em enxame ("wisdom of crowds"). Agentes com vieses distintos (otimista, pessimista, contrário) emitem previsões que convergem em um debate Delphi rastreado em uma **Graph Memory** (memória de grafo em tempo real), triplamente validado por Teoria dos Jogos e auditoria acadêmica.
 - **Game Theory & 38 Raciocínios**: Catálogo formal de 38 tipos de raciocínio (lógica clássica, dialética, Teoria dos Jogos). Inclui solver de Equilíbrio de Nash puro, Valor de Shapley, e um `MetaReasoner` que seleciona a estratégia ideal por contexto.
-- **Busca e Extração Acadêmica (Research)**: Pipeline federado (arXiv, OpenAlex, Crossref, PubMed, GitHub, Kaggle) que faz download de PDFs, converte automaticamente para Markdown, e gera resenhas críticas e fichamentos em três camadas. Produz referências consolidadas em ABNT NBR 6023:2018 atualizada e APA 7ª edição, integrando a pesquisa diretamente à pasta única de produção científica.
-- **Produção Científica (Pasta Única)**: Pipeline de publicação que converte a fonte Markdown canônica em LaTeX (usando templates Qualis A1, abnTeX2 ou livros KDP-ready) e compila automaticamente para PDF, DOCX, MD e ODT, gerando um manifesto com checksums SHA-256 para total rastreabilidade.
+- **Busca e Extração Acadêmica (Research)**: Pipeline federado (arXiv, OpenAlex, Crossref, PubMed, GitHub, Kaggle) que faz download de PDFs, converte automaticamente para Markdown, e gera resenhas críticas e fichamentos em três camadas. Produz referências consolidadas em ABNT NBR 6023:2018 atualizada e APA 7ª edição, integrando a pesquisa diretamente à pasta única de produção científica. Inclui **OSINT LinkTree** (inspirado no TorBot) para mapear a "Dark Web" acadêmica e repositórios obscuros.
+- **Produção Científica (Pasta Única)**: Pipeline de publicação que converte a fonte Markdown canônica em LaTeX (usando templates Qualis A1, abnTeX2 ou livros KDP-ready) e compila automaticamente para PDF, DOCX, MD e ODT, gerando um manifesto com checksums SHA-256 para total rastreabilidade. Inspirado no `lathex-template`, o código gerado é **modularizado**, dividindo seções e capítulos em arquivos `.tex` separados unificados pelo `main.tex`.
 - **Trust Engine & Token Economy**: Segurança comportamental (BehavioralGate, NaturalForgetting) e mercado de agentes (staking, slashing, fee market).
-- **Scanners de Diagnóstico**: Pipeline com 5 scanners (Noológico, Teleológico, Evolutivo, Potentiality, Social Impact).
+- **Scanners de Diagnóstico**: Pipeline com 6 scanners (Noológico, Teleológico, Evolutivo, Potentiality, Social Impact, e **ReversaScanner**). O ReversaScanner aplica engenharia reversa em código legado para extrair especificações (TSPECs) automaticamente.
 - **MASWOS (Qualis A1)**: Pipeline acadêmico multiagente com 16 estágios e gate de aprovação rigoroso.
 - **Motores de Raciocínio & Quantum**: Solvers lógicos (Z3, SymPy, Kanren) e simulador quântico reproduzível (Bell, GHZ).
 
