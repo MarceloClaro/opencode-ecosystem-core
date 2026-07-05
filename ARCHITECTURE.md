@@ -9,6 +9,16 @@ graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
     
+    %% Camada SDD/TDD
+    subgraph SDD [SDD & TDD Engine]
+        Spec[SpecRegistry<br>Especificações]
+        Ver[SpecVerifier<br>Gate SDD]
+        TDD[TDDRunner<br>Red-Green-Refactor]
+        
+        TDD -.->|Valida| Ver
+        Ver -.->|Lê| Spec
+    end
+
     %% Camada Transformer
     subgraph TF [Transformer Layer]
         Attn[AttentionRouter<br>Multi-Head]
@@ -33,11 +43,13 @@ graph TD
     end
     
     %% Orquestrador integra as camadas
-    Orchestrator -->|1. Recuperação em 2 níveis| HTM
+    Orchestrator -->|1. Cria Spec| Spec
+    Orchestrator -->|2. Recuperação em 2 níveis| HTM
     HTM -->|Lê Episódica| Mem
-    Orchestrator -->|2. Roteia Tarefa| Attn
+    Orchestrator -->|3. Roteia Tarefa| Attn
     Attn -->|Publica Volunteer| BB
-    Orchestrator -->|3. Executa| Pipe
+    Orchestrator -->|4. Executa (TDD)| Pipe
+    Pipe -->|Verifica| Ver
     
     %% Agentes
     subgraph Agents [Agentes do Ecossistema]
@@ -59,10 +71,11 @@ graph TD
     External[External Tools / LLMs] -->|JSON-RPC| MCP
 ```
 
-## Fluxo de Vida de uma Tarefa (Arquitetura Transformer + MCI)
+## Fluxo de Vida de uma Tarefa (Arquitetura Transformer + MCI + SDD)
 
 1. **Registro (Agent Loader):** Na inicialização, o sistema lê os arquivos `agents/*.md` e extrai o *frontmatter* YAML. Cada agente é registrado no Blackboard com um **Agent Card** (Padrão A2A).
-2. **Percepção Hierárquica (HTM):** Antes de delegar, o orquestrador consulta a memória global usando a `HierarchicalMemory`. O `TaskEmbedder` vetoriza a consulta e a atenção é feita em dois níveis: atenção grossa sobre sumários de chunks, seguida de atenção fina sobre os eventos dos melhores chunks.
+2. **Especificação (SDD):** Antes de delegar, o orquestrador cria uma Especificação (TSPEC) contendo o objetivo e critérios de aceitação verificáveis. A tarefa nasce na fase **RED**.
+3. **Percepção Hierárquica (HTM):** O orquestrador consulta a memória global usando a `HierarchicalMemory`. O `TaskEmbedder` vetoriza a consulta e a atenção é feita em dois níveis: atenção grossa sobre sumários de chunks, seguida de atenção fina sobre os eventos dos melhores chunks.
 3. **Delegação via Atenção (Multi-Head Attention):** A tarefa é postada no Blackboard. Quando o *Call for Proposals (CFP)* retorna os agentes elegíveis, o `AttentionRouter` calcula scores softmax baseados em 4 cabeças: semântica (vetores d=64), cobertura de capacidade, *confidence ledger* e carga atual. O agente com maior score recebe a atribuição.
-4. **Execução (Transformer Pipeline):** A tarefa entra no *encoder stack*. O agente selecionado executa o ciclo **Gerar → Verificar → Revisar** (padrão *Aletheia*). O `GradingHead` pontua a saída de 0 a 7 (padrão *IMO-GradingBench*). Se a nota for baixa, a tarefa volta para revisão com a conexão residual preservando o contexto anterior.
-5. **Reflexão (MCI):** Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão, atualiza o *Confidence Ledger* do agente e persiste a experiência na memória semântica para futuras recuperações.
+5. **Execução (TDD + Transformer):** A tarefa entra no *encoder stack*. O agente selecionado executa o ciclo TDD (**RED → GREEN → REFACTOR**). O `SpecVerifier` atua como *gate*: a entrega só avança se satisfizer 100% dos critérios da especificação. Se aprovada, o `GradingHead` avalia a qualidade da implementação.
+6. **Reflexão (MCI):** Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão, atualiza o *Confidence Ledger* do agente e persiste a experiência na memória semântica para futuras recuperações.

@@ -22,12 +22,23 @@ A MCI é composta por:
 - **Blackboard & Agent Cards (A2A)**: Um quadro negro dinâmico onde agentes se voluntariam para tarefas baseados em suas capacidades declaradas [3][4].
 - **Reflexion Middleware**: Um motor que força a auto-reflexão pós-execução, alimentando um *Confidence Ledger* (livro-razão de confiança) [5].
 
+## SDD e TDD: Metodologia Orientada a Especificação e Testes
+
+Todos os componentes e agentes do ecossistema operam estritamente sob as metodologias **Specification-Driven Development (SDD)** e **Test-Driven Development (TDD)**:
+
+- **SpecRegistry e SpecVerifier**: Cada componente possui uma especificação formal (arquivos `specs/SPEC-*.md`) com invariantes e critérios de aceitação verificáveis.
+- **Delegação SDD-First**: O orquestrador `marceloclaro` cria uma especificação (TSPEC) *antes* de delegar qualquer tarefa. No **modo estrito**, entregas que não satisfazem 100% dos critérios são automaticamente rejeitadas (Gate SDD).
+- **Ciclo TDD (Red-Green-Refactor)**: Os agentes executam o ciclo TDD integrado ao pipeline Transformer. Refatorações que quebram critérios estabelecidos são revertidas.
+- **Metacognição de Código**: O orquestrador roda a bateria `pytest` real do repositório e registra os resultados no Global Workspace, permitindo que os agentes aprendam com falhas estruturais.
+
 ## Estrutura do Repositório
 
 - `marceloclaro/`: O orquestrador central e seu CLI interativo.
 - `transformer/`: A nova camada de orquestração (Attention, Pipeline, Embedder, HTM Memory).
 - `mci/`: A camada Metacognitive Interconnect (MetaBus, Blackboard, Reflexion, MCP Server).
-- `agents/`: Definições dos agentes em Markdown (com frontmatter YAML para Agent Cards).
+- `sdd/`: O motor de especificações e TDD Runner (SpecVerifier, SpecRegistry).
+- `specs/`: Especificações formais e executáveis de todos os componentes.
+- `agents/`: Definições dos agentes em Markdown (incluindo protocolos SDD/TDD obrigatórios).
 - `examples/`: Scripts de demonstração end-to-end.
 - `tests/`: Bateria de testes automatizados (pytest).
 
@@ -45,6 +56,7 @@ pip install -r requirements.txt
 Veja a metacognição e a camada Transformer em ação:
 
 ```bash
+python3 examples/demo_sdd_tdd.py      # Ciclo Red-Green-Refactor e Gate SDD Estrito
 python3 examples/demo_transformer.py  # Atenção, Pipeline Gerar-Revisar e HTM Memory
 python3 examples/demo_pipeline.py     # Fluxo MCI clássico (Blackboard + Reflexion)
 ```

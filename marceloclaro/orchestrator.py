@@ -30,6 +30,8 @@ from marceloclaro.agent_loader import register_all_agents, load_agent_definition
 from transformer.attention import AttentionRouter
 from transformer.pipeline import TransformerPipeline, GradingHead
 from transformer.memory import HierarchicalMemory
+from sdd.spec_engine import spec_registry, spec_verifier
+from sdd.tdd_runner import tdd_runner, run_pytest
 
 logger = logging.getLogger("marceloclaro")
 logger.setLevel(logging.INFO)
@@ -38,10 +40,15 @@ logger.setLevel(logging.INFO)
 class MarceloClaroOrchestrator:
     """Orquestrador central metacognitivo do ecossistema."""
 
-    def __init__(self, auto_load_agents: bool = True, pipeline_layers: int = 3):
+    def __init__(self, auto_load_agents: bool = True, pipeline_layers: int = 3,
+                 strict_sdd: bool = False):
         self.id = "marceloclaro"
         self.pending_cfps: Dict[str, List[str]] = {}  # task_id -> agentes elegíveis
         self.results: Dict[str, Any] = {}
+
+        # Modo SDD estrito: nenhuma conclusão aceita sem verificação de spec (INV-006.1)
+        self.strict_sdd = strict_sdd
+        self.task_specs: Dict[str, str] = {}  # task_id -> spec_id
 
         # Camada Transformer (inspiração: Vaswani 2017, Perceiver, HTM, Aletheia)
         self.attention_router = AttentionRouter()
@@ -130,12 +137,40 @@ class MarceloClaroOrchestrator:
     # 3. CONCLUSÃO E REFLEXÃO
     # ------------------------------------------------------------------
     def report_completion(self, task_id: str, agent_id: str, result: Any, success: bool = True):
-        """Reporta a conclusão de uma tarefa (chamado pelo executor do agente)."""
+        """
+        Reporta a conclusão de uma tarefa (chamado pelo executor do agente).
+
+        Gate SDD (INV-006.1): se a tarefa possui especificação associada, a entrega
+        é verificada contra os critérios de aceitação ANTES de ser aceita. No modo
+        estrito, entregas reprovadas são registradas como falha.
+        """
+        spec_id = self.task_specs.get(task_id)
+        verification = None
+        if spec_id:
+            verification = spec_verifier.verify(spec_id, result)
+            metabus.memory.add_reflection(
+                agent_id=agent_id,
+                task_context=f"verificação SDD da tarefa {task_id} (spec {spec_id})",
+                reflection=(
+                    f"Verificação SDD: {verification['passed_count']}/"
+                    f"{verification['total_count']} critérios aprovados "
+                    f"(status: {verification['status']})."
+                ),
+                score=1.0 if verification["verified"] else 0.0,
+            )
+            if self.strict_sdd and not verification["verified"]:
+                logger.warning(
+                    f"[{self.id}] GATE SDD: entrega de {agent_id} para {task_id} "
+                    f"REPROVADA na spec {spec_id}; registrando como falha."
+                )
+                success = False
+
         metabus.publish("task.complete", {
             "task_id": task_id,
             "agent_id": agent_id,
             "status": "completed" if success else "failed",
             "result": result,
+            "sdd_verification": verification,
         }, source_agent=agent_id)
         self.results[task_id] = result
 
@@ -157,6 +192,11 @@ class MarceloClaroOrchestrator:
             "tasks": {tid: t.status for tid, t in blackboard.tasks.items()},
             "confidence_ledger": dict(metabus.memory.confidence_ledger),
             "episodic_memory_size": len(metabus.memory.episodic),
+            "sdd": {
+                "strict_mode": self.strict_sdd,
+                "specs_registered": len(spec_registry.specs),
+                "tasks_with_spec": len(self.task_specs),
+            },
         }
 
     def list_agents(self) -> List[Dict[str, Any]]:
@@ -193,3 +233,72 @@ class MarceloClaroOrchestrator:
         """Auditoria transparente: scores de cada cabeça de atenção por agente."""
         cards = [card.to_dict() for card in blackboard.registry.values()]
         return self.attention_router.explain(description, required_capabilities or [], cards)
+
+    # ------------------------------------------------------------------
+    # CAMADA SDD/TDD (Specification-Driven + Test-Driven Development)
+    # ------------------------------------------------------------------
+    def delegate_with_spec(self, description: str,
+                           required_capabilities: Optional[List[str]] = None,
+                           acceptance_criteria: Optional[List[str]] = None,
+                           context: Optional[Dict[str, Any]] = None) -> Dict[str, str]:
+        """
+        Delegação SDD-first: cria a especificação ANTES da tarefa (fase RED)
+        e injeta o spec_id no contexto para que o agente conheça os critérios.
+        """
+        spec = spec_registry.create_task_spec(
+            title=description,
+            objective=description,
+            criteria_descriptions=acceptance_criteria or ["A entrega não pode ser vazia."],
+        )
+        enriched = dict(context or {})
+        enriched["sdd"] = {
+            "spec_id": spec.spec_id,
+            "acceptance_criteria": [c.description for c in spec.criteria],
+            "protocol": "ESPECIFICAR -> RED -> GREEN -> REFACTOR -> VERIFICAR",
+        }
+        task_id = self.delegate(description, required_capabilities, enriched)
+        self.task_specs[task_id] = spec.spec_id
+        logger.info(f"[{self.id}] Delegação SDD: {task_id} vinculada à spec {spec.spec_id} (RED)")
+        return {"task_id": task_id, "spec_id": spec.spec_id}
+
+    def run_tdd_cycle(self, description: str, producer_fn,
+                      acceptance_criteria: Optional[List[Any]] = None,
+                      refactor_fn=None) -> Dict[str, Any]:
+        """
+        Executa o ciclo TDD completo (RED -> GREEN -> REFACTOR) sobre uma tarefa.
+        `acceptance_criteria` aceita strings (descrições) ou tuplas (descrição, check_fn).
+        """
+        spec = spec_registry.create_task_spec(description, description)
+        for item in (acceptance_criteria or []):
+            if isinstance(item, tuple):
+                spec.add_criterion(item[0], item[1])
+            else:
+                spec.add_criterion(str(item))
+
+        result = tdd_runner.run_cycle(spec, producer_fn, refactor_fn)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"ciclo TDD: {description}",
+            reflection=(
+                f"Ciclo TDD {'concluído (verified)' if result['success'] else 'falhou'} "
+                f"na fase {result['phase']} para a spec {spec.spec_id}."
+            ),
+            score=1.0 if result["success"] else 0.0,
+        )
+        result["spec_id"] = spec.spec_id
+        return result
+
+    def audit_specs(self) -> Dict[str, Any]:
+        """Relatório de cobertura SDD: specs formais + dinâmicas registradas."""
+        return spec_registry.coverage_report()
+
+    def run_test_suite(self) -> Dict[str, Any]:
+        """Executa a bateria pytest real e registra o resultado na memória global."""
+        outcome = run_pytest()
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="execução da bateria de testes do ecossistema (TDD)",
+            reflection=f"Bateria pytest: {outcome['summary']}",
+            score=1.0 if outcome["all_passed"] else 0.0,
+        )
+        return outcome
