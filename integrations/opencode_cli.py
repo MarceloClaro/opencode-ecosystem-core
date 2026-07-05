@@ -93,7 +93,7 @@ def build_config() -> Dict[str, Any]:
             "antigravity-bridge": {
                 "type": "local",
                 "command": ["python3", "integrations/antigravity/antigravity_mcp_server.py"],
-                "enabled": False,
+                "enabled": True,
             },
         },
         "command": {
