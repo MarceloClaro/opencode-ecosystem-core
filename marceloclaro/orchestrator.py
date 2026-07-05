@@ -68,6 +68,9 @@ class MarceloClaroOrchestrator:
         # Pipeline acadêmico Qualis A1 (MASWOS) acoplado à delegação real
         self.maswos = MaswosPipeline(delegate_fn=self._maswos_delegate)
 
+        # MiroFish (enxame preditivo) — carregamento tardio
+        self._swarm_validator = None
+
         # Camada Transformer (inspiração: Vaswani 2017, Perceiver, HTM, Aletheia)
         self.attention_router = AttentionRouter()
         self.pipeline = TransformerPipeline(num_layers=pipeline_layers, grading_head=GradingHead())
@@ -455,3 +458,99 @@ class MarceloClaroOrchestrator:
     def delegate_external(self, prompt: str, agent: str = "default") -> Dict[str, Any]:
         """Delegação externa via Antigravity CLI (SPEC-046), com fila de handoff."""
         return antigravity_bridge.delegate(prompt, agent=agent)
+
+    # ------------------------------------------------------------------
+    # MIROFISH — ENXAME PREDITIVO (inspiração: MarceloClaro/MiroFish)
+    # ------------------------------------------------------------------
+    @property
+    def swarm_validator(self):
+        """CrossValidator MiroFish com carregamento tardio (lazy)."""
+        if self._swarm_validator is None:
+            from mirofish import CrossValidator
+            self._swarm_validator = CrossValidator(n_agents=25, seed=42)
+        return self._swarm_validator
+
+    def swarm_predict(self, question: str, signal: float = 0.5) -> Dict[str, Any]:
+        """Previsão por enxame MiroFish (wisdom of crowds ponderada)."""
+        result = self.swarm_validator.swarm.debate(question, rounds=3, signal=signal)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"previsão de enxame MiroFish: {question[:80]}",
+            reflection=(
+                f"Enxame convergiu em {result['final']:.2f} "
+                f"({'convergente' if result['converged'] else 'divergente'}) "
+                f"após {result['rounds']} rodadas."
+            ),
+            score=result["final"],
+        )
+        return result
+
+    def swarm_validate(self, question: str, signal: float = 0.5) -> Dict[str, Any]:
+        """Validação cruzada tripla: enxame MiroFish × equilíbrio de Nash × Qualis."""
+        verdict = self.swarm_validator.validate_decision(question, signal=signal)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"validação cruzada MiroFish: {question[:80]}",
+            reflection=f"Veredito: {'APROVADO' if verdict['approved'] else 'reprovado'} — "
+                       f"{verdict['rationale']}.",
+            score=1.0 if verdict["approved"] else 0.3,
+        )
+        return verdict
+
+    # ------------------------------------------------------------------
+    # TEORIA DOS JOGOS — 38 RACIOCÍNIOS (agent-forum portado)
+    # ------------------------------------------------------------------
+    def meta_reason(self, topic: str) -> Dict[str, Any]:
+        """Seleciona dinamicamente os tipos de raciocínio (38) para o contexto,
+        incluindo os 10+ modelos de Teoria dos Jogos (Nash, Shapley, Tit-for-Tat...)."""
+        from gametheory import MetaReasoner
+        reasoner = MetaReasoner()
+        selected = reasoner.select_for_context({"topic": topic})
+        names = [s.name for s in selected]
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"meta-raciocínio para: {topic[:80]}",
+            reflection=f"Estratégias selecionadas: {', '.join(names[:8])}.",
+            score=0.8,
+        )
+        return {"topic": topic, "strategies": names, "count": len(names)}
+
+    def nash_analysis(self, game: str = "prisoners_dilemma", **kwargs) -> Dict[str, Any]:
+        """Análise de equilíbrio de Nash para jogos 2×2 clássicos."""
+        from gametheory import PayoffMatrix
+        factory = getattr(PayoffMatrix, game, None)
+        matrix = factory(**kwargs) if callable(factory) else PayoffMatrix.prisoners_dilemma()
+        equilibria = matrix.find_nash_equilibria()
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"análise de Nash: {game}",
+            reflection=f"Equilíbrios puros encontrados: {equilibria}.",
+            score=0.9,
+        )
+        return {"game": game, "equilibria": equilibria}
+
+    # ------------------------------------------------------------------
+    # PRODUÇÃO CIENTÍFICA — PASTA ÚNICA (LaTeX + PDF + DOCX + MD + ODT/KDP)
+    # ------------------------------------------------------------------
+    def produce_scientific_work(self, title: str, content: str,
+                                template: str = "artigo",
+                                author: str = "Prof. Marcelo Claro") -> Dict[str, Any]:
+        """
+        Gera a pasta única de produção científica com fonte LaTeX (template
+        Qualis A1/ABNT/livro) e compilados PDF, DOCX, MD e ODT (Amazon KDP),
+        com manifesto auditável (checksums SHA-256).
+        """
+        from publishing import ScientificProduction
+        production = ScientificProduction(title=title, template=template, author=author)
+        manifest = production.build(content)
+        generated = [f for f, info in manifest["formats"].items() if info]
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"produção científica: {title[:80]} (template {template})",
+            reflection=(
+                f"Pasta única gerada em {manifest['slug']} com formatos "
+                f"{', '.join(generated)}; KDP-ready: {manifest['kdp_ready']}."
+            ),
+            score=len(generated) / 4.0,
+        )
+        return manifest

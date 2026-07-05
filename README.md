@@ -12,6 +12,18 @@ A orquestração do ecossistema mapeia conceitos da arquitetura Transformer dire
 - **Grading Head**: Uma cabeça de avaliação que pontua saídas de 0 a 7 (inspirado no *IMO-GradingBench*).
 - **Hierarchical Memory**: Recuperação de memórias em dois níveis (atenção grossa sobre sumários de *chunks* e atenção fina sobre eventos), inspirado no *Hierarchical Transformer Memory (HTM)*.
 
+## Subsistemas Avançados
+
+O ecossistema integra os seguintes subsistemas avançados (portados do repositório OpenCode_Ecosystem original):
+
+- **MiroFish (Swarm Intelligence)**: Motor preditivo baseado em enxame ("wisdom of crowds"). Agentes com vieses distintos (otimista, pessimista, contrário) emitem previsões que convergem em um debate Delphi, triplamente validado por Teoria dos Jogos e auditoria acadêmica.
+- **Game Theory & 38 Raciocínios**: Catálogo formal de 38 tipos de raciocínio (lógica clássica, dialética, Teoria dos Jogos). Inclui solver de Equilíbrio de Nash puro, Valor de Shapley, e um `MetaReasoner` que seleciona a estratégia ideal por contexto.
+- **Produção Científica (Pasta Única)**: Pipeline de publicação que converte a fonte Markdown canônica em LaTeX (usando templates Qualis A1, abnTeX2 ou livros KDP-ready) e compila automaticamente para PDF, DOCX, MD e ODT, gerando um manifesto com checksums SHA-256 para total rastreabilidade.
+- **Trust Engine & Token Economy**: Segurança comportamental (BehavioralGate, NaturalForgetting) e mercado de agentes (staking, slashing, fee market).
+- **Scanners de Diagnóstico**: Pipeline com 5 scanners (Noológico, Teleológico, Evolutivo, Potentiality, Social Impact).
+- **MASWOS (Qualis A1)**: Pipeline acadêmico multiagente com 16 estágios e gate de aprovação rigoroso.
+- **Motores de Raciocínio & Quantum**: Solvers lógicos (Z3, SymPy, Kanren) e simulador quântico reproduzível (Bell, GHZ).
+
 ## O que é a Metacognitive Interconnect (MCI)?
 
 A MCI é uma camada arquitetural desenhada para resolver o problema de "metacognição em silos" em sistemas multiagentes. Baseada no estado da arte da pesquisa em IA, ela garante que a metacognição (a habilidade de pensar sobre o próprio pensamento, avaliar confiança e aprender com erros) circule entre **todos** os agentes.
@@ -44,6 +56,9 @@ Todos os componentes e agentes do ecossistema operam estritamente sob as metodol
 - `reasoning/`: Motores de raciocínio lógico e simulador quântico.
 - `evolution/`: Registro de ciclos evolutivos.
 - `integrations/`: Integração com OpenCode CLI e Antigravity.
+- `gametheory/`: 38 tipos de raciocínio, Equilíbrio de Nash, auditoria PhD.
+- `mirofish/`: Enxame preditivo (Swarm Intelligence) e CrossValidator.
+- `publishing/`: Pipeline de pasta única (LaTeX, PDF, DOCX, ODT) e templates.
 - `specs/`: Especificações formais (SDD nativas e acervo de rastreabilidade original).
 - `agents/`: 134 agentes no total (incluindo catálogo de 130 especializados).
 - `examples/`: Scripts de demonstração end-to-end.
@@ -64,6 +79,7 @@ Veja a metacognição e a camada Transformer em ação:
 
 ```bash
 python3 examples/demo_full_ecosystem.py # Demo completa: Trust, Economy, MASWOS, Scanners, Quantum
+python3 examples/demo_publishing.py     # Demo: Pasta Única de Produção Científica (LaTeX/KDP)
 python3 examples/demo_sdd_tdd.py        # Ciclo Red-Green-Refactor e Gate SDD Estrito
 python3 examples/demo_transformer.py    # Atenção, Pipeline Gerar-Revisar e HTM Memory
 python3 examples/demo_pipeline.py       # Fluxo MCI clássico (Blackboard + Reflexion)

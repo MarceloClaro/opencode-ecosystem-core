@@ -37,6 +37,8 @@ graph TD
         Scan[Scanners<br>Diagnóstico]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>Quantum]
+        MiroFish[MiroFish<br>Swarm Predictor]
+        Publishing[Publishing<br>Pasta Única]
     end
 
     %% Camada MCI
