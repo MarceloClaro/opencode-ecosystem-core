@@ -29,14 +29,11 @@ echo "==================================================================="
 
 # ---------------------------------------------------------------------------
 # 0. Garante sudo sem senha para este usuário (idempotente)
-#    Isso permite que o provision.sh rode sem interação, mesmo se o instalador
-#    PowerShell não tiver configurado o sudoers previamente.
 # ---------------------------------------------------------------------------
 CURRENT_USER="$(whoami)"
 SUDOERS_FILE="/etc/sudoers.d/opencode-ecosystem-nopasswd"
 if [ ! -f "$SUDOERS_FILE" ] || ! grep -q "$CURRENT_USER" "$SUDOERS_FILE" 2>/dev/null; then
     log "Configurando sudo NOPASSWD para '$CURRENT_USER' (necessário para instalação automática)..."
-    # Tenta escrever via sudo (pode pedir senha uma última vez aqui)
     echo "$CURRENT_USER ALL=(ALL) NOPASSWD:ALL" | sudo tee "$SUDOERS_FILE" > /dev/null 2>&1 && \
         sudo chmod 440 "$SUDOERS_FILE" && \
         ok "sudo NOPASSWD configurado. Próximas execuções não pedirão senha." || \
@@ -47,6 +44,7 @@ fi
 
 # ---------------------------------------------------------------------------
 # 1. Dependências do sistema
+#    Inclui zstd (obrigatório desde Ollama v0.4+ para extração do binário)
 # ---------------------------------------------------------------------------
 log "Etapa 1/6: Atualizando pacotes do sistema (apt)..."
 sudo apt-get update -y >>"$LOG_FILE" 2>&1
@@ -54,8 +52,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
     git curl wget unzip zip ca-certificates \
     python3 python3-pip python3-venv \
     pandoc poppler-utils \
-    build-essential >>"$LOG_FILE" 2>&1 \
-  && ok "Dependências do sistema instaladas." \
+    build-essential \
+    zstd >>"$LOG_FILE" 2>&1 \
+  && ok "Dependências do sistema instaladas (incluindo zstd)." \
   || warn "Alguns pacotes apt falharam (veja o log); prosseguindo."
 
 # Node.js (necessário para fallback npm do OpenCode e ferramentas mermaid)
@@ -104,6 +103,8 @@ fi
 
 # ---------------------------------------------------------------------------
 # 4. Ollama CLI
+#    O instalador oficial (ollama.com/install.sh) requer zstd >= v0.4.
+#    zstd já foi instalado na Etapa 1 acima.
 # ---------------------------------------------------------------------------
 log "Etapa 4/6: Instalando Ollama CLI..."
 if command -v ollama >/dev/null 2>&1; then
@@ -113,16 +114,26 @@ else
     if command -v ollama >/dev/null 2>&1; then
         ok "Ollama instalado: $(ollama --version 2>/dev/null | head -1)"
     else
-        err "Falha ao instalar Ollama (verifique o log)."
+        # Fallback: baixa o binário estático diretamente do GitHub Releases
+        warn "Instalador oficial falhou; tentando fallback via binário estático..."
+        OLLAMA_BIN="$HOME/.local/bin/ollama"
+        mkdir -p "$HOME/.local/bin"
+        OLLAMA_URL="https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64"
+        curl -fsSL "$OLLAMA_URL" -o "$OLLAMA_BIN" >>"$LOG_FILE" 2>&1 && \
+            chmod +x "$OLLAMA_BIN" && \
+            ok "Ollama instalado via binário estático: $("$OLLAMA_BIN" --version 2>/dev/null | head -1)" || \
+            err "Falha ao instalar Ollama (verifique o log)."
     fi
 fi
 
 # Garante que o serviço do Ollama esteja ativo (systemd no WSL2 moderno)
-if command -v ollama >/dev/null 2>&1; then
+if command -v ollama >/dev/null 2>&1 || [ -x "$HOME/.local/bin/ollama" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
     if command -v systemctl >/dev/null 2>&1 && systemctl is-system-running >/dev/null 2>&1; then
         sudo systemctl enable --now ollama >>"$LOG_FILE" 2>&1 || true
     fi
-    if ! pgrep -f "ollama serve" >/dev/null 2>&1 && ! (command -v systemctl >/dev/null 2>&1 && systemctl is-active --quiet ollama 2>/dev/null); then
+    if ! pgrep -f "ollama serve" >/dev/null 2>&1 && \
+       ! (command -v systemctl >/dev/null 2>&1 && systemctl is-active --quiet ollama 2>/dev/null); then
         nohup ollama serve >>"$LOG_FILE" 2>&1 &
         sleep 2
     fi
