@@ -104,7 +104,7 @@ try {
     Add-MpPreference -ExclusionProcess "wslhost.exe" -ErrorAction SilentlyContinue
     # Exclui a unidade de rede do WSL (onde os arquivos do Ubuntu ficam)
     Add-MpPreference -ExclusionPath "\\wsl.localhost\Ubuntu" -ErrorAction SilentlyContinue
-    Add-MpPreference -ExclusionPath "\\wsl$\Ubuntu" -ErrorAction SilentlyContinue
+    Add-MpPreference -ExclusionPath "\\wsl`$\Ubuntu" -ErrorAction SilentlyContinue
     Write-Ok "Exclusoes do Defender aplicadas."
 } catch {
     Write-Warn2 "Nao foi possivel adicionar exclusoes no Defender (pode estar desativado ou gerenciado por outra politica)."
@@ -113,10 +113,8 @@ try {
 # 1.2. Regras de Firewall para WSL, Ollama e MCP Servers
 try {
     Write-Host "Configurando regras de Firewall para WSL e Ollama..."
-    # Permite tráfego de entrada/saída para o WSL
     New-NetFirewallRule -DisplayName "OpenCode Ecosystem (WSL In)" -Direction Inbound -Program "$env:SystemRoot\System32\wsl.exe" -Action Allow -ErrorAction SilentlyContinue | Out-Null
     New-NetFirewallRule -DisplayName "OpenCode Ecosystem (WSL Out)" -Direction Outbound -Program "$env:SystemRoot\System32\wsl.exe" -Action Allow -ErrorAction SilentlyContinue | Out-Null
-    # Permite portas comuns de desenvolvimento e Ollama (11434)
     New-NetFirewallRule -DisplayName "OpenCode Ecosystem (Ports)" -Direction Inbound -LocalPort 11434,3000,8000,8080 -Protocol TCP -Action Allow -ErrorAction SilentlyContinue | Out-Null
     Write-Ok "Regras de Firewall aplicadas."
 } catch {
@@ -146,7 +144,6 @@ if ($wslInstalled) {
 
 if (-not $wslInstalled -or -not $distroInstalled) {
     Write-Warn2 "WSL/Ubuntu ausente. Instalando agora (isso pode demorar varios minutos)..."
-    # Agenda retomada automática após reboot
     if ($ScriptSelf) {
         $resumeCmd = "powershell.exe -NoExit -ExecutionPolicy Bypass -File `"$ScriptSelf`""
     } else {
@@ -156,7 +153,6 @@ if (-not $wslInstalled -or -not $distroInstalled) {
 
     wsl.exe --install -d $Distro
     if ($LASTEXITCODE -ne 0) {
-        # Método legado (features manuais) para Windows mais antigos
         Write-Warn2 "Instalacao direta falhou; habilitando features manualmente..."
         dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart | Out-Null
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart | Out-Null
@@ -171,7 +167,6 @@ if (-not $wslInstalled -or -not $distroInstalled) {
     exit 0
 }
 Write-Ok "WSL2 + Ubuntu ja instalados."
-# Remove marcador de retomada, se existir
 Remove-ItemProperty -Path $ResumeKey -Name $ResumeName -ErrorAction SilentlyContinue
 
 # Garante usuário default configurado (primeira execução do Ubuntu)
@@ -185,11 +180,30 @@ $wslUser = (wsl.exe -d $Distro -- whoami).Trim()
 Write-Ok "Ubuntu operacional (usuario: $wslUser)."
 
 # ----------------------------------------------------------------------------
-# 2. Provisionamento dentro do Ubuntu
+# 2.5. Configura sudoers NOPASSWD para o usuario WSL (instalacao nao-interativa)
+# ----------------------------------------------------------------------------
+Write-Host "Configurando sudo sem senha para o provisionamento automatico..." -ForegroundColor Cyan
+$sudoersLine  = "$wslUser ALL=(ALL) NOPASSWD:ALL"
+$sudoersFile  = "/etc/sudoers.d/opencode-ecosystem-nopasswd"
+# Usa 'id' para confirmar que o usuario existe antes de escrever
+$userExists = (wsl.exe -d $Distro -- id -u $wslUser 2>$null)
+if ($userExists -match '^\d+$') {
+    # Escreve o arquivo sudoers via root (wsl -u root não precisa de senha)
+    wsl.exe -d $Distro -u root -- bash -c "echo '$sudoersLine' > $sudoersFile && chmod 440 $sudoersFile"
+    if ($LASTEXITCODE -eq 0) {
+        Write-Ok "Sudo sem senha configurado para '$wslUser' (arquivo: $sudoersFile)."
+    } else {
+        Write-Warn2 "Nao foi possivel configurar sudoers automaticamente. O provisionamento pode pedir senha."
+    }
+} else {
+    Write-Warn2 "Usuario '$wslUser' nao reconhecido pelo sudo; prosseguindo sem NOPASSWD."
+}
+
+# ----------------------------------------------------------------------------
+# 3. Provisionamento dentro do Ubuntu
 # ----------------------------------------------------------------------------
 Write-Step "Etapa 3/5: Provisionando o Ubuntu (CLIs + Ecossistema)"
 
-# Obtém o provision.sh: usa cópia local (se instalador foi baixado junto) ou baixa do GitHub
 $provisionLocal = if ($ScriptSelf) { Join-Path (Split-Path $ScriptSelf) 'provision.sh' } else { $null }
 $tempProvision  = Join-Path $env:TEMP 'provision.sh'
 
@@ -202,8 +216,6 @@ if ($provisionLocal -and (Test-Path $provisionLocal)) {
     Write-Ok "provision.sh baixado."
 }
 
-# Copia para o WSL com fim-de-linha LF e executa
-$winPath = $tempProvision -replace '\\','/' -replace '^([A-Za-z]):', { "/mnt/$($_.Groups[1].Value.ToLower())" }
 # Conversão robusta do caminho Windows -> WSL
 $drive   = $tempProvision.Substring(0,1).ToLower()
 $rest    = $tempProvision.Substring(2) -replace '\\','/'
@@ -220,7 +232,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 # ----------------------------------------------------------------------------
-# 3. Atalhos na Área de Trabalho
+# 4. Atalhos na Área de Trabalho
 # ----------------------------------------------------------------------------
 Write-Step "Etapa 4/5: Criando atalhos na Area de Trabalho"
 
@@ -241,27 +253,23 @@ function New-EcoShortcut {
     Write-Ok "Atalho criado: $Name"
 }
 
-# 1 clique: OpenCode CLI aberto DENTRO do ecossistema (opencode.json nativo carrega
-# os 134 agentes e o servidor MCP metacognitivo automaticamente)
 New-EcoShortcut -Name 'OpenCode Ecosystem' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"opencode`"" `
     -Description 'OpenCode CLI com o OpenCode Ecosystem Core nativo (134 agentes + MCP)' `
     -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
 
-# 1 clique: Antigravity CLI dentro do ecossistema
 New-EcoShortcut -Name 'Antigravity CLI' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"agy`"" `
     -Description 'Google Antigravity CLI no diretorio do ecossistema' `
     -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
 
-# Bônus: CLI nativo do orquestrador marceloclaro
 New-EcoShortcut -Name 'Ecosystem (marceloclaro)' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"python3 -m marceloclaro.cli`"" `
     -Description 'CLI interativo do orquestrador metacognitivo marceloclaro' `
     -IconLocation "$env:SystemRoot\System32\cmd.exe,0"
 
 # ----------------------------------------------------------------------------
-# 4. Resumo final
+# 5. Resumo final
 # ----------------------------------------------------------------------------
 Write-Step "Etapa 5/5: Concluido!"
 Write-Host @"

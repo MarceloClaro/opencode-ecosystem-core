@@ -28,6 +28,24 @@ echo "  Log: $LOG_FILE"
 echo "==================================================================="
 
 # ---------------------------------------------------------------------------
+# 0. Garante sudo sem senha para este usuário (idempotente)
+#    Isso permite que o provision.sh rode sem interação, mesmo se o instalador
+#    PowerShell não tiver configurado o sudoers previamente.
+# ---------------------------------------------------------------------------
+CURRENT_USER="$(whoami)"
+SUDOERS_FILE="/etc/sudoers.d/opencode-ecosystem-nopasswd"
+if [ ! -f "$SUDOERS_FILE" ] || ! grep -q "$CURRENT_USER" "$SUDOERS_FILE" 2>/dev/null; then
+    log "Configurando sudo NOPASSWD para '$CURRENT_USER' (necessário para instalação automática)..."
+    # Tenta escrever via sudo (pode pedir senha uma última vez aqui)
+    echo "$CURRENT_USER ALL=(ALL) NOPASSWD:ALL" | sudo tee "$SUDOERS_FILE" > /dev/null 2>&1 && \
+        sudo chmod 440 "$SUDOERS_FILE" && \
+        ok "sudo NOPASSWD configurado. Próximas execuções não pedirão senha." || \
+        warn "Não foi possível configurar sudoers automaticamente. Sudo pode pedir senha."
+else
+    ok "sudo NOPASSWD já configurado para '$CURRENT_USER'."
+fi
+
+# ---------------------------------------------------------------------------
 # 1. Dependências do sistema
 # ---------------------------------------------------------------------------
 log "Etapa 1/6: Atualizando pacotes do sistema (apt)..."
@@ -57,7 +75,6 @@ if command -v opencode >/dev/null 2>&1; then
     ok "OpenCode CLI já instalado: $(opencode --version 2>/dev/null | head -1)"
 else
     curl -fsSL https://opencode.ai/install | bash >>"$LOG_FILE" 2>&1
-    # O instalador coloca em ~/.opencode/bin ou ~/.local/bin
     export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH"
     if command -v opencode >/dev/null 2>&1; then
         ok "OpenCode CLI instalado: $(opencode --version 2>/dev/null | head -1)"
