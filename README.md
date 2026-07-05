@@ -72,21 +72,23 @@ O ecossistema é dividido em 4 grandes camadas interconectadas:
 
 O **OpenCode Ecosystem Core** foi projetado para superar as limitações de roteamento estático e a falta de rigor acadêmico presentes nos frameworks multiagentes tradicionais.
 
-| Critério de Maturidade | OpenCode Ecosystem Core | OpenCode Ecosystem (Original) | Superhuman (DeepMind Inspired) | Microsoft AutoGen | MetaGPT |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Arquitetura de Roteamento** | **Atenção Multi-Cabeça (Transformer)**. Roteamento dinâmico via softmax [1]. | Estático / Baseado em regras simples. | Roteamento por similaridade semântica. | Conversacional / Grafos de transição estáticos [2]. | Sequencial (SOP). Cascata rígida [3]. |
-| **Metacognição e Memória** | **Hierarchical Memory (HTM)** com *Episodic Replay* e Global Workspace. | Memória de curto prazo, reflexão isolada. | Memória episódica profunda. | Memória de conversação (Chat History). | Memória baseada em documentos (PRD). |
-| **Garantia de Qualidade (QA)** | **Gate SDD Estrito + TDD Runner**. Ciclo Red-Green-Refactor obrigatório. | Revisão por pares baseada em prompt. | GradingHead heurístico (IMO-Bench). | Execução em sandbox, sem enforcement TDD. | Agente QA executa testes gerados. |
-| **Economia e Segurança** | **Token Economy (Staking/Slashing)** + Trust Engine (Behavioral Gate). | Inexistente. | Inexistente. | Inexistente. | Inexistente. |
-| **Produção Científica** | **Pipeline Qualis A1 (MASWOS)**. Fichamentos, PDF→MD, LaTeX, OSINT. | Exportação LaTeX básica. | Foco em resolução matemática. | Não possui ferramentas acadêmicas nativas. | Foco exclusivo em Engenharia de Software. |
-| **Inteligência de Enxame** | **MiroFish Swarm** com GraphMemory (consenso matemático via Teoria dos Jogos). | Debate Delphi simples (texto). | Inexistente. | GroupChat (debate não estruturado). | Inexistente. |
-| **Diagnóstico Profundo** | **Deep Diagnose (M1-M5)**. Engenharia reversa e gerador de sucessores. | Scanners isolados. | Inexistente. | Inexistente. | Inexistente. |
+| Critério de Maturidade | OpenCode Ecosystem Core | LangGraph | CrewAI | OpenDevin (OpenHands) | Microsoft AutoGen | MetaGPT |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Arquitetura de Roteamento** | ⭐⭐⭐⭐⭐<br>**Atenção Multi-Cabeça (Transformer)**. Roteamento dinâmico (Semântica, Capacidade, Confiança). | ⭐⭐⭐⭐<br>Grafos direcionados cíclicos (DAG) e StateMachines. | ⭐⭐⭐<br>Roteamento baseado em papéis (Role-based) e tarefas em série/paralelo. | ⭐⭐⭐<br>Foco em um único agente autônomo controlando sandbox/ferramentas. | ⭐⭐⭐<br>Conversacional / Grafos de transição estáticos. | ⭐⭐<br>Sequencial (SOP). Cascata rígida. |
+| **Metacognição e Memória** | ⭐⭐⭐⭐⭐<br>**Hierarchical Memory (HTM)**, *Episodic Replay* e Reflexion via Global Workspace. | ⭐⭐⭐⭐<br>Memória de estado persistente em grafos, checkpointer nativo. | ⭐⭐⭐<br>Memória de curto/longo prazo e memória de entidade via embeddings. | ⭐⭐⭐<br>Memória episódica de comandos de terminal e histórico de arquivos. | ⭐⭐<br>Memória de conversação (Chat History). | ⭐⭐<br>Memória baseada em documentos compartilhados (PRD). |
+| **Garantia de Qualidade (QA)** | ⭐⭐⭐⭐⭐<br>**Gate SDD Estrito + TDD Runner**. Ciclo Red-Green-Refactor obrigatório antes da entrega. | ⭐⭐⭐<br>Fluxos condicionais (Human-in-the-loop) para aprovação. | ⭐⭐<br>Delegação entre agentes, mas sem enforcement de TDD. | ⭐⭐⭐⭐<br>Execução em sandbox Docker, valida testes em tempo real. | ⭐⭐<br>Execução de código em sandbox, sem enforcement nativo de TDD. | ⭐⭐<br>Agente QA executa testes gerados em fluxo linear. |
+| **Economia e Segurança** | ⭐⭐⭐⭐⭐<br>**Token Economy (Staking/Slashing)** + Trust Engine (Behavioral Gate). | ⭐⭐<br>Inexistente nativamente. | ⭐⭐<br>Inexistente nativamente. | ⭐⭐⭐<br>Controle de permissões Docker, mas sem economia de tokens. | ⭐<br>Inexistente nativamente. | ⭐<br>Inexistente nativamente. |
+| **Produção Científica** | ⭐⭐⭐⭐⭐<br>**Pipeline Qualis A1 (MASWOS)**. Fichamentos ABNT, PDF→MD, LaTeX modular. | ⭐⭐<br>Pode ser programado para tal, mas não é nativo. | ⭐⭐<br>Pode ser programado para tal, mas não é nativo. | ⭐<br>Foco exclusivo em Engenharia de Software. | ⭐<br>Não possui ferramentas acadêmicas nativas. | ⭐<br>Foco exclusivo em Engenharia de Software. |
+| **Inteligência de Enxame** | ⭐⭐⭐⭐⭐<br>**MiroFish Swarm** com GraphMemory (consenso via Teoria dos Jogos). | ⭐⭐⭐<br>Suporta Multi-Agent via grafos (Multi-actor). | ⭐⭐⭐⭐<br>Forte em colaboração de equipes (Crews) com delegação de tarefas. | ⭐<br>Agente único ou par programador, não é swarm. | ⭐⭐⭐<br>GroupChat (debate não estruturado matematicamente). | ⭐<br>Inexistente. |
+| **Diagnóstico Profundo** | ⭐⭐⭐⭐⭐<br>**Deep Diagnose (M1-M5)**. Engenharia reversa e gerador de sucessores. | ⭐⭐<br>Depende de nós customizados no grafo. | ⭐⭐<br>Inexistente nativamente. | ⭐⭐⭐<br>Analisa logs de erro do terminal para se auto-corrigir. | ⭐<br>Inexistente nativamente. | ⭐<br>Inexistente nativamente. |
 
 > **Fontes para Auditoria:**
-> [1] Arquitetura baseada no artigo *Attention Is All You Need* (Vaswani et al., 2017) e em frameworks de memória hierárquica.
-> [2] **Microsoft AutoGen**: [microsoft/autogen](https://github.com/microsoft/autogen) - Foco em conversação multiagente e orquestração de mensagens.
-> [3] **MetaGPT**: [geekan/MetaGPT](https://github.com/geekan/MetaGPT) - Foco em Standard Operating Procedures (SOPs) simulando uma empresa de software.
-> *Superhuman* e *OpenCode Ecosystem (Original)* referem-se aos repositórios históricos que deram origem a este Core.
+> [1] **OpenCode Ecosystem Core**: Arquitetura baseada no artigo *Attention Is All You Need* (Vaswani et al., 2017) e Global Workspace Theory.
+> [2] **LangGraph**: [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - Framework para agentes com estado, multiatores, construído com grafos.
+> [3] **CrewAI**: [joaomdmoura/crewAI](https://github.com/joaomdmoura/crewAI) - Framework para orquestração de agentes autônomos baseados em papéis (Role-playing).
+> [4] **OpenDevin (OpenHands)**: [All-Hands-AI/OpenHands](https://github.com/All-Hands-AI/OpenHands) - Agente de engenharia de software autônomo operando em sandbox.
+> [5] **Microsoft AutoGen**: [microsoft/autogen](https://github.com/microsoft/autogen) - Foco em conversação multiagente e grafos de transição.
+> [6] **MetaGPT**: [geekan/MetaGPT](https://github.com/geekan/MetaGPT) - Foco em Standard Operating Procedures (SOPs) simulando uma empresa de software.
 
 ---
 
