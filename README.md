@@ -1,133 +1,99 @@
-# OpenCode Ecosystem Core
+<div align="center">
 
-Bem-vindo ao **OpenCode Ecosystem Core**, uma versão limpa, portável e focada na orquestração metacognitiva do ecossistema OpenCode. Este repositório centraliza a operação no orquestrador `marceloclaro` e implementa duas camadas de estado da arte: a **Metacognitive Interconnect (MCI)** e a **Transformer Layer**.
+# 🌌 OpenCode Ecosystem Core
+**O "Cérebro" Multiagente que Transforma Ideias em Software, Pesquisa e Arte**
 
-## A Camada Transformer (Inspirada em Vaswani et al. e Google DeepMind)
+[![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
+[![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 
-A orquestração do ecossistema mapeia conceitos da arquitetura Transformer diretamente para o fluxo multiagente. Esta camada foi inspirada nas pesquisas do [DeepMind](https://github.com/MarceloClaro/deepmind-research) e na equipe [Superhuman Reasoning](https://github.com/MarceloClaro/superhuman):
+*Uma arquitetura cognitiva completa que une 134 agentes especializados, Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
 
-- **Task Embedder**: Converte tarefas e capacidades de agentes em vetores densos (hashing de features d=64 com *positional encoding* senoidal).
-- **Attention Router (Multi-Head)**: Em vez de escolher agentes aleatoriamente, o orquestrador usa atenção com 4 "cabeças" (semântica, capacidade, confiança e carga) para rankear o agente ideal para a tarefa (inspirado no *Perceiver* e *PrediNet*).
-- **Transformer Pipeline**: Cada tarefa passa por um *encoder stack* com o ciclo **Gerar → Verificar → Revisar** (inspirado no agente *Aletheia* do DeepMind), com conexões residuais que preservam o histórico de correções.
-- **Grading Head**: Uma cabeça de avaliação que pontua saídas de 0 a 7 (inspirado no *IMO-GradingBench*).
-- **Hierarchical Memory**: Recuperação de memórias em dois níveis (atenção grossa sobre sumários de *chunks* e atenção fina sobre eventos), inspirado no *Hierarchical Transformer Memory (HTM)*. Inclui **Episodic Replay** para consolidação de memória e treinamento offline do orquestrador (DeepMind RL).
+---
 
-## Subsistemas Avançados
+### ☕ Apoie este Projeto!
+Se o OpenCode Ecosystem ajudou você a acelerar sua pesquisa, desenvolver software ou automatizar sua vida, considere me pagar um café! Seu apoio mantém o ecossistema evoluindo.
 
-O ecossistema integra os seguintes subsistemas avançados (portados do repositório OpenCode_Ecosystem original):
+<a href="https://buymeacoffee.com/geomaker" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
+</a>
 
-- **MiroFish (Swarm Intelligence)**: Motor preditivo baseado em enxame ("wisdom of crowds"). Agentes com vieses distintos (otimista, pessimista, contrário) emitem previsões que convergem em um debate Delphi rastreado em uma **Graph Memory** (memória de grafo em tempo real), triplamente validado por Teoria dos Jogos e auditoria acadêmica.
-- **Game Theory & 38 Raciocínios**: Catálogo formal de 38 tipos de raciocínio (lógica clássica, dialética, Teoria dos Jogos). Inclui solver de Equilíbrio de Nash puro, Valor de Shapley, e um `MetaReasoner` que seleciona a estratégia ideal por contexto.
-- **Busca e Extração Acadêmica (Research)**: Pipeline federado (arXiv, OpenAlex, Crossref, PubMed, GitHub, Kaggle) que faz download de PDFs, converte automaticamente para Markdown, e gera resenhas críticas e fichamentos em três camadas. Produz referências consolidadas em ABNT NBR 6023:2018 atualizada e APA 7ª edição, integrando a pesquisa diretamente à pasta única de produção científica. Inclui **OSINT LinkTree** (inspirado no TorBot) para mapear a "Dark Web" acadêmica e repositórios obscuros.
-- **Produção Científica (Pasta Única)**: Pipeline de publicação que converte a fonte Markdown canônica em LaTeX (usando templates Qualis A1, abnTeX2 ou livros KDP-ready) e compila automaticamente para PDF, DOCX, MD e ODT, gerando um manifesto com checksums SHA-256 para total rastreabilidade. Inspirado no `lathex-template`, o código gerado é **modularizado**, dividindo seções e capítulos em arquivos `.tex` separados unificados pelo `main.tex`.
-- **Trust Engine & Token Economy**: Segurança comportamental (BehavioralGate, NaturalForgetting) e mercado de agentes (staking, slashing, fee market).
-- **Scanners de Diagnóstico (Deep Diagnose)**: Pipeline com 6 scanners (Noológico, Teleológico, Evolutivo, Potentiality, Social Impact, e **ReversaScanner**). Com `deep=True`, o pipeline ativa a **Priorização Epistemológica** (calculando o valor de preencher cada lacuna com base em centralidade e interdisciplinaridade) e o **Gerador de Sucessores Plausíveis** (recombinando genes do DNA estrutural para propor tecnologias emergentes).
-- **MASWOS (Qualis A1)**: Pipeline acadêmico multiagente com 16 estágios e gate de aprovação rigoroso.
-- **Motores de Raciocínio & Quantum**: Solvers lógicos (Z3, SymPy, Kanren) e simulador quântico reproduzível (Bell, GHZ).
+<img src="assets/bmc_qr.png" width="150" alt="QR Code Buy Me a Coffee">
 
-## O que é a Metacognitive Interconnect (MCI)?
+</div>
 
-A MCI é uma camada arquitetural desenhada para resolver o problema de "metacognição em silos" em sistemas multiagentes. Baseada no estado da arte da pesquisa em IA, ela garante que a metacognição (a habilidade de pensar sobre o próprio pensamento, avaliar confiança e aprender com erros) circule entre **todos** os agentes.
+---
 
-A MCI é composta por:
-- **MetaBus**: Um barramento de eventos unificado baseado na *Global Workspace Theory* [1].
-- **Memória Metacognitiva Compartilhada**: Memória episódica (rastros) e semântica (lições aprendidas) acessível a todos [2].
-- **Blackboard & Agent Cards (A2A)**: Um quadro negro dinâmico onde agentes se voluntariam para tarefas baseados em suas capacidades declaradas [3][4].
-- **Reflexion Middleware**: Um motor que força a auto-reflexão pós-execução, alimentando um *Confidence Ledger* (livro-razão de confiança) [5].
+## 🚀 O que é o OpenCode Ecosystem?
 
-## SDD e TDD: Metodologia Orientada a Especificação e Testes
+### 👨‍💻 Para Leigos: A Empresa de Especialistas na sua Máquina
+Imagine que você tem uma empresa inteira de tecnologia e pesquisa científica trabalhando para você, 24 horas por dia, dentro do seu computador. 
+- Você tem um **Pesquisador** que lê milhares de artigos na internet e faz resumos.
+- Você tem um **Programador** que escreve código e testa tudo.
+- Você tem um **Revisor** (um chefe chato) que não deixa o programador entregar código com erro.
+- E você tem um **Diretor de Arte** que desenha capas de livros e cria ilustrações didáticas.
 
-Todos os componentes e agentes do ecossistema operam estritamente sob as metodologias **Specification-Driven Development (SDD)** e **Test-Driven Development (TDD)**:
+Você só precisa dar a ordem: *"Quero um aplicativo que faça X"* ou *"Quero um livro sobre o tema Y"*. O "Cérebro" (nosso Orquestrador) chama os funcionários certos, dá o orçamento (Token Economy), exige qualidade (Trust Engine) e te entrega o produto final pronto.
 
-- **SpecRegistry e SpecVerifier**: Cada componente possui uma especificação formal (arquivos `specs/SPEC-*.md`) com invariantes e critérios de aceitação verificáveis.
-- **Delegação SDD-First**: O orquestrador `marceloclaro` cria uma especificação (TSPEC) *antes* de delegar qualquer tarefa. No **modo estrito**, entregas que não satisfazem 100% dos critérios são automaticamente rejeitadas (Gate SDD).
-- **Ciclo TDD (Red-Green-Refactor)**: Os agentes executam o ciclo TDD integrado ao pipeline Transformer. Refatorações que quebram critérios estabelecidos são revertidas.
-- **Metacognição de Código**: O orquestrador roda a bateria `pytest` real do repositório e registra os resultados no Global Workspace, permitindo que os agentes aprendam com falhas estruturais.
+### 🔬 Para PhDs e Engenheiros: Arquitetura Cognitiva Multiagente
+O OpenCode Ecosystem Core é uma implementação *state-of-the-art* de sistemas multiagentes (MAS) inspirada em arquiteturas de redes neurais (Transformers) e neurociência cognitiva (Global Workspace Theory).
+- **Roteamento por Atenção:** Não usamos *if/else* para delegar tarefas. Usamos *Multi-Head Attention* para calcular scores de semântica, capacidade e confiança (Trust Ledger) de 134 agentes.
+- **MiroFish & Game Theory:** Agentes debatem soluções usando estratégias iteradas (Tit-for-Tat, Nash Equilibrium) e constroem Grafos de Conhecimento lógicos.
+- **Pipeline Científico (MASWOS):** Automação completa de revisão sistemática de literatura. Baixa PDFs (Sci-Hub/OpenAlex), converte para Markdown, extrai figuras reais, gera fichamentos (ABNT/APA) e compila o manuscrito em LaTeX (com PDF, DOCX e ODT para Amazon KDP).
+- **Metacognição Profunda:** O sistema possui 5 Scanners de diagnóstico (incluindo Engenharia Reversa de código legado) e um Gerador de Sucessores que prevê o próximo salto tecnológico do seu projeto.
 
-## Estrutura do Repositório
+---
 
-- `marceloclaro/`: O orquestrador central e seu CLI interativo.
-- `transformer/`: A nova camada de orquestração (Attention, Pipeline, Embedder, HTM Memory).
-- `mci/`: A camada Metacognitive Interconnect (MetaBus, Blackboard, Reflexion, MCP Server).
-- `sdd/`: O motor de especificações e TDD Runner (SpecVerifier, SpecRegistry).
-- `trust/`: Trust Engine com BehavioralGate e NaturalForgetting.
-- `economy/`: Token Economy (staking, slashing, fee market).
-- `scanners/`: Pipeline de diagnóstico (Noológico, Teleológico, Evolutivo, etc.).
-- `academic/`: Pipeline MASWOS Qualis A1 com gate AUTO_SCORE.
-- `reasoning/`: Motores de raciocínio lógico e simulador quântico.
-- `evolution/`: Registro de ciclos evolutivos.
-- `integrations/`: Integração com OpenCode CLI e Antigravity.
-- `gametheory/`: 38 tipos de raciocínio, Equilíbrio de Nash, auditoria PhD.
-- `mirofish/`: Enxame preditivo (Swarm Intelligence) e CrossValidator.
-- `publishing/`: Pipeline de pasta única, templates e Automated Cover Designer (capas e ilustrações internas).
-- `research/`: Buscadores, download de PDFs, conversão PDF→MD e fichamentos ABNT/APA.
-- `illustrations/`: Geração de diagramas (Mermaid), grafos (Graphify) e animações (MIRA).
-- `specs/`: Especificações formais (SDD nativas e acervo de rastreabilidade original).
-- `agents/`: 134 agentes no total (incluindo catálogo de 130 especializados).
-- `examples/`: Scripts de demonstração end-to-end.
-- `tests/`: Bateria de testes automatizados (pytest).
+## ⚡ Instalação: 1-Click no Windows
 
-## Instalador Automático para Windows (1-Click)
+Se você usa Windows 10/11, nós criamos um instalador mágico que configura **tudo** para você (WSL2, Ubuntu, Ollama, Antigravity CLI e o Ecossistema).
 
-Se você usa Windows 10/11, pode instalar todo o ambiente (WSL2, Ubuntu, OpenCode CLI, Antigravity, Ollama e o Ecossistema) com um único comando no **PowerShell (como Administrador)**:
-
+1. Abra o **PowerShell como Administrador**.
+2. Cole este comando e aperte Enter:
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/installer/windows/Install-OpenCodeEcosystem.ps1 | iex
 ```
-Isso criará atalhos na sua Área de Trabalho para abrir o OpenCode e o Antigravity já integrados ao ecossistema. Veja os [detalhes do instalador aqui](installer/windows/README.md).
+3. **Pronto!** Ele criará atalhos na sua Área de Trabalho. Basta clicar em "OpenCode Ecosystem" e começar a usar.
+
+*(Para Linux/macOS, veja o [Guia Manual](ARCHITECTURE.md))*
 
 ---
 
-## Quickstart (Manual / Linux / macOS)
+## 🏗️ Arquitetura do Sistema
 
-### 1. Requisitos
-- Python 3.10+
-- (Opcional) `pytest` para rodar a bateria de testes.
+O ecossistema é dividido em 4 grandes camadas interconectadas:
 
-```bash
-pip install -r requirements.txt
-```
+1. **Camada Metacognitiva (MCI):** O barramento de eventos (Global Workspace) onde os agentes compartilham memória episódica.
+2. **Camada Transformer:** O roteador de atenção que delega tarefas e o pipeline iterativo de *Reflexion* (Gerar → Verificar → Revisar).
+3. **Módulos Avançados:** Token Economy (Staking/Slashing), Trust Engine (Behavioral Gates) e Diagnóstico Profundo.
+4. **Catálogo de Agentes:** 134 agentes especializados em domínios que vão desde Física Quântica até Design de Capas.
 
-### 2. Rodando os Demos End-to-End
-Veja a metacognição e a camada Transformer em ação:
-
-```bash
-python3 examples/demo_full_ecosystem.py # Demo completa: Trust, Economy, MASWOS, Scanners, Quantum
-python3 examples/demo_publishing.py     # Demo: Pasta Única de Produção Científica (LaTeX/KDP)
-python3 examples/demo_research.py       # Demo: Busca, Extração Acadêmica e Fichamentos ABNT/APA
-python3 examples/demo_illustrations.py  # Demo: Diagramas, Grafo de Conhecimento e Cards MIRA
-python3 examples/demo_sdd_tdd.py        # Ciclo Red-Green-Refactor e Gate SDD Estrito
-python3 examples/demo_transformer.py    # Atenção, Pipeline Gerar-Revisar e HTM Memory
-python3 examples/demo_pipeline.py       # Fluxo MCI clássico (Blackboard + Reflexion)
-```
-
-### 3. CLI Interativo
-O ecossistema possui um menu de terminal amigável para operar o orquestrador `marceloclaro`:
-
-```bash
-python3 -m marceloclaro.cli
-```
-
-### 4. Integração MCP (Model Context Protocol)
-A camada MCI expõe um servidor MCP para que ferramentas externas (como o Antigravity ou o Claude) possam interagir com o Global Workspace.
-O arquivo `opencode.json` já está configurado. Para iniciar o servidor standalone:
-
-```bash
-python3 mci/mcp_server.py
-```
-
-## Arquitetura
-Para um mergulho profundo na arquitetura, consulte o [ARCHITECTURE.md](ARCHITECTURE.md).
+*(Veja o diagrama completo e detalhado no arquivo [ARCHITECTURE.md](ARCHITECTURE.md))*
 
 ---
 
-## Referências
+## ⚖️ Vantagens e Limitações (Transparência)
 
-[1] Baars, B. J. (1988). *A cognitive theory of consciousness*. Cambridge University Press.  
-[2] Anônimo. (2025). *Multi-User Memory Sharing in LLM Agents with Dynamic Access*. arXiv:2505.18279.  
-[3] Salemi, A., et al. (2025). *LLM-Based Multi-Agent Blackboard System for Information Discovery in Data Science*. arXiv:2510.01285.  
-[4] Ehtesham, A., et al. (2025). *A Survey of Agent Interoperability Protocols*. arXiv:2505.02279.  
-[5] Shinn, N., et al. (2023). *Reflexion: Language Agents with Verbal Reinforcement Learning*. arXiv:2303.11366.  
-[6] Vaswani, A., et al. (2017). *Attention Is All You Need*. arXiv:1706.03762.  
-[7] Google DeepMind. (2025). *Superhuman Reasoning Team: Aletheia & IMO-Bench*. Repositório.  
-[8] Google DeepMind. (2024). *DeepMind Research: Perceiver, HTM, PrediNet*. Repositório.
+| ✅ Vantagens (Por que usar?) | ⚠️ Limitações (O que ainda estamos melhorando) |
+|---|---|
+| **Autonomia Real:** O sistema não apenas gera código, ele testa (TDD), revisa as próprias falhas e tenta de novo. | **Custo Computacional:** Rodar múltiplos agentes debatendo via LLM consome muitos tokens (recomendamos Ollama local para baratear). |
+| **Rigor Acadêmico:** Único framework que gera citações ABNT/APA corretas e extrai figuras com metadados reais. | **Velocidade:** A metacognição (pensar sobre o pensar) exige tempo. Um artigo complexo pode levar minutos/horas para ser gerado. |
+| **Design Automático:** Estuda paletas de cores e gera capas e ilustrações didáticas (MIRA) sozinho. | **Dependência de APIs:** O download de PDFs depende da estabilidade do Sci-Hub e OpenAlex. |
+| **Segurança:** O Trust Engine pune agentes que "alucinam", reduzindo a taxa de erros a longo prazo. | **Setup Inicial Manual:** Fora do Windows, exige familiaridade com terminal e Python. |
+
+---
+
+## 🌍 Potencial de Aplicação e Escalabilidade
+
+O OpenCode Ecosystem não é apenas um script de terminal, é um **Motor de P&D (Pesquisa e Desenvolvimento)** escalável.
+
+- **Fábrica de Software Autônoma:** Pode ser acoplado a um repositório GitHub via CI/CD. Quando um *Issue* é aberto, o ecossistema lê, faz engenharia reversa, cria os testes (TDD), escreve o código e abre um *Pull Request*.
+- **Universidade Sintética:** Pesquisadores podem usar o sistema para processar 500 artigos do PubMed em uma noite, extraindo apenas os consensos lógicos (via MiroFish Graph Memory) para acelerar a descoberta de novos medicamentos.
+- **Editora Automatizada (KDP):** Escritores podem gerar rascunhos, solicitar ilustrações internas didáticas, diagramação LaTeX e exportação direta para a Amazon Kindle Direct Publishing.
+- **Escalabilidade Horizontal:** Como usamos a arquitetura *Blackboard* e o protocolo A2A, você pode plugar este ecossistema em clusters Kubernetes, distribuindo os 134 agentes em diferentes nós de processamento.
+
+---
+<div align="center">
+  <i>Construído com rigor metodológico, inspirado pela Teoria dos Jogos e desenhado para o futuro.</i><br>
+  <b>Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
+</div>
