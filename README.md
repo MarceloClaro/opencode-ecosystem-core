@@ -68,6 +68,28 @@ O ecossistema é dividido em 4 grandes camadas interconectadas:
 3. **Módulos Avançados:** Token Economy (Staking/Slashing), Trust Engine (Behavioral Gates) e Diagnóstico Profundo.
 4. **Catálogo de Agentes:** 134 agentes especializados em domínios que vão desde Física Quântica até Design de Capas.
 
+### Comparativo de Maturidade Técnica
+
+O **OpenCode Ecosystem Core** foi projetado para superar as limitações de roteamento estático e a falta de rigor acadêmico presentes nos frameworks multiagentes tradicionais.
+
+| Critério de Maturidade | OpenCode Ecosystem Core | OpenCode Ecosystem (Original) | Superhuman (DeepMind Inspired) | Microsoft AutoGen | MetaGPT |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Arquitetura de Roteamento** | **Atenção Multi-Cabeça (Transformer)**. Roteamento dinâmico via softmax [1]. | Estático / Baseado em regras simples. | Roteamento por similaridade semântica. | Conversacional / Grafos de transição estáticos [2]. | Sequencial (SOP). Cascata rígida [3]. |
+| **Metacognição e Memória** | **Hierarchical Memory (HTM)** com *Episodic Replay* e Global Workspace. | Memória de curto prazo, reflexão isolada. | Memória episódica profunda. | Memória de conversação (Chat History). | Memória baseada em documentos (PRD). |
+| **Garantia de Qualidade (QA)** | **Gate SDD Estrito + TDD Runner**. Ciclo Red-Green-Refactor obrigatório. | Revisão por pares baseada em prompt. | GradingHead heurístico (IMO-Bench). | Execução em sandbox, sem enforcement TDD. | Agente QA executa testes gerados. |
+| **Economia e Segurança** | **Token Economy (Staking/Slashing)** + Trust Engine (Behavioral Gate). | Inexistente. | Inexistente. | Inexistente. | Inexistente. |
+| **Produção Científica** | **Pipeline Qualis A1 (MASWOS)**. Fichamentos, PDF→MD, LaTeX, OSINT. | Exportação LaTeX básica. | Foco em resolução matemática. | Não possui ferramentas acadêmicas nativas. | Foco exclusivo em Engenharia de Software. |
+| **Inteligência de Enxame** | **MiroFish Swarm** com GraphMemory (consenso matemático via Teoria dos Jogos). | Debate Delphi simples (texto). | Inexistente. | GroupChat (debate não estruturado). | Inexistente. |
+| **Diagnóstico Profundo** | **Deep Diagnose (M1-M5)**. Engenharia reversa e gerador de sucessores. | Scanners isolados. | Inexistente. | Inexistente. | Inexistente. |
+
+> **Fontes para Auditoria:**
+> [1] Arquitetura baseada no artigo *Attention Is All You Need* (Vaswani et al., 2017) e em frameworks de memória hierárquica.
+> [2] **Microsoft AutoGen**: [microsoft/autogen](https://github.com/microsoft/autogen) - Foco em conversação multiagente e orquestração de mensagens.
+> [3] **MetaGPT**: [geekan/MetaGPT](https://github.com/geekan/MetaGPT) - Foco em Standard Operating Procedures (SOPs) simulando uma empresa de software.
+> *Superhuman* e *OpenCode Ecosystem (Original)* referem-se aos repositórios históricos que deram origem a este Core.
+
+---
+
 ### Mapa Geral da Arquitetura
 
 ```mermaid
