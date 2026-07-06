@@ -41,6 +41,16 @@ def test_scientific_governance_pipeline_architecture_is_implemented():
     assert item["mandatory_coverage_pct"] == 100
 
 
+def test_scientific_governance_tdd_plan_is_implemented():
+    from marceloclaro.inspiration_audit import audit_inspirations
+
+    report = audit_inspirations()
+    item = _item(report, "scientific_governance_tdd_plan")
+
+    assert item["status"] == "implemented"
+    assert item["mandatory_coverage_pct"] == 100
+
+
 def test_research_run_batch_is_implemented():
     from marceloclaro.inspiration_audit import audit_inspirations
 
@@ -72,15 +82,15 @@ def test_research_final_report_template_is_implemented():
     assert item["missing_paths"] == []
 
 
-def test_mira_presentation_system_is_partial():
+def test_mira_presentation_system_is_implemented():
     from marceloclaro.inspiration_audit import audit_inspirations
 
     report = audit_inspirations()
     item = _item(report, "mira_presentation_system")
 
-    assert item["status"] == "partial"
+    assert item["status"] == "implemented"
     assert any(path.endswith("illustrations/mira_engine.py") for path in item["evidence_paths"])
-    assert any("mira-" in path for path in item["missing_paths"])
+    assert item["missing_paths"] == []
 
 
 def test_markdown_report_contains_summary_and_statuses():

@@ -3,7 +3,7 @@
 ```yaml
 spec_id: SPEC-023
 title: Auditoria Determinística de Inspirações → Implementações
-version: 1.1.0
+version: 1.2.0
 status: active
 owner: marceloclaro
 depends_on: [SPEC-005, SPEC-021, SPEC-022, SPEC-024]
@@ -55,12 +55,12 @@ A auditoria deve servir como base de governança SDD/TDD para responder, com evi
 |---|---|---|
 | `superhuman_scientific_core` | Blueprint de `INSPIRAÇÃO 1.txt` para núcleo científico superhuman-like | `implemented` |
 | `scientific_governance_pipeline_architecture` | SDD do pipeline OQS→MCI→VSEE→EGS | `implemented` |
-| `scientific_governance_tdd_plan` | Plano TDD detalhado do pipeline científico | `partial` |
+| `scientific_governance_tdd_plan` | Plano TDD detalhado do pipeline científico | `implemented` |
 | `research_run_batch` | `research_pipelines_run_research_batch.py` | `implemented` |
 | `research_analyze_batch` | `research_pipelines_analyze_research_batch.py` | `implemented` |
 | `research_final_report_template` | `research_results_reports_final_report_template.md` | `implemented` |
 | `research_scenario_matrix` | `research_experiments_scenario_matrix_v1.json` | `implemented` |
-| `mira_presentation_system` | Livro/engine MIRA e superfície de comandos | `partial` |
+| `mira_presentation_system` | Livro/engine MIRA e superfície de comandos | `implemented` |
 
 ## 5. Invariantes
 
@@ -71,14 +71,14 @@ A auditoria deve servir como base de governança SDD/TDD para responder, com evi
 
 ## 6. Critérios de Aceitação
 
-- [ ] `audit_inspirations()` retorna pelo menos 8 itens canônicos.
-- [ ] `research_analyze_batch` é classificado como `implemented` na árvore atual.
-- [ ] `research_final_report_template` é classificado como `implemented` na árvore atual.
-- [ ] `mira_presentation_system` é classificado como `partial` na árvore atual.
-- [ ] `scientific_governance_pipeline_architecture` é classificado como `implemented`.
-- [ ] `research_run_batch` é classificado como `implemented`.
-- [ ] `render_inspiration_audit_markdown()` contém resumo e tabela de itens.
-- [ ] `MarceloClaroOrchestrator.audit_inspirations()` registra reflexão.
+- [x] `audit_inspirations()` retorna pelo menos 8 itens canônicos.
+- [x] `research_analyze_batch` é classificado como `implemented` na árvore atual.
+- [x] `research_final_report_template` é classificado como `implemented` na árvore atual.
+- [x] `mira_presentation_system` é classificado como `implemented` na árvore atual.
+- [x] `scientific_governance_pipeline_architecture` é classificado como `implemented`.
+- [x] `research_run_batch` é classificado como `implemented`.
+- [x] `render_inspiration_audit_markdown()` contém resumo e tabela de itens.
+- [x] `MarceloClaroOrchestrator.audit_inspirations()` registra reflexão.
 
 ## 7. TDD
 

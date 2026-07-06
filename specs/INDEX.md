@@ -22,6 +22,8 @@ Este diretório consolida a rastreabilidade completa do ecossistema, combinando 
 | SPEC-022 | Pipeline de Diagnóstico Refinado (Ecossistema) | `scanners/pipeline.py` + `scanners/noological_scanner.py` |
 | SPEC-023 | Auditoria de Inspirações | `marceloclaro/inspiration_audit.py` |
 | SPEC-024 | Análise de Batch Research + Relatório Final | `research/pipelines/analyze_research_batch.py` |
+| SPEC-025 | Hardening TDD do Scientific Governance Pipeline | `tests/test_scientific_governance_contracts.py` + `tests/fixtures/` |
+| SPEC-026 | Superfície de Comandos MIRA | `agents/catalog/mira-*.md` |
 
 ## Acervo Legado (`specs/legacy/`)
 
