@@ -220,6 +220,8 @@ def audit_inspirations() -> Dict[str, Any]:
 
         if mandatory_total > 0 and len(existing_mandatory) == mandatory_total:
             status = "implemented"
+        elif len(existing_mandatory) == 0:
+            status = "absent"
         elif evidence_paths:
             status = "partial"
         else:
@@ -274,6 +276,7 @@ def render_inspiration_audit_markdown(report: Dict[str, Any]) -> str:
         f"- Parciais: **{summary['partial']}**",
         f"- Ausentes: **{summary['absent']}**",
         f"- Cobertura integral: **{summary['coverage_pct']}%**",
+        "- Status válidos: `implemented`, `partial`, `absent`",
         "",
         "| item_id | status | cobertura mandatória | evidências | lacunas |",
         "|---|---|---:|---:|---:|",

@@ -21,6 +21,7 @@ Este diretório consolida a rastreabilidade completa do ecossistema, combinando 
 | SPEC-013 | Integrações CLI | `integrations/` |
 | SPEC-022 | Pipeline de Diagnóstico Refinado (Ecossistema) | `scanners/pipeline.py` + `scanners/noological_scanner.py` |
 | SPEC-023 | Auditoria de Inspirações | `marceloclaro/inspiration_audit.py` |
+| SPEC-024 | Análise de Batch Research + Relatório Final | `research/pipelines/analyze_research_batch.py` |
 
 ## Acervo Legado (`specs/legacy/`)
 

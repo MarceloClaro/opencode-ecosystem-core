@@ -51,25 +51,25 @@ def test_research_run_batch_is_implemented():
     assert any(path.endswith("research/pipelines/run_research_batch.py") for path in item["evidence_paths"])
 
 
-def test_research_analyze_batch_is_absent():
+def test_research_analyze_batch_is_implemented():
     from marceloclaro.inspiration_audit import audit_inspirations
 
     report = audit_inspirations()
     item = _item(report, "research_analyze_batch")
 
-    assert item["status"] == "absent"
-    assert item["mandatory_coverage_pct"] == 0
+    assert item["status"] == "implemented"
+    assert item["mandatory_coverage_pct"] == 100
 
 
-def test_research_final_report_template_is_partial():
+def test_research_final_report_template_is_implemented():
     from marceloclaro.inspiration_audit import audit_inspirations
 
     report = audit_inspirations()
     item = _item(report, "research_final_report_template")
 
-    assert item["status"] == "partial"
+    assert item["status"] == "implemented"
     assert item["evidence_paths"]
-    assert item["missing_paths"]
+    assert item["missing_paths"] == []
 
 
 def test_mira_presentation_system_is_partial():

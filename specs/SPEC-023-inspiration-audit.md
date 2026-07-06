@@ -3,10 +3,10 @@
 ```yaml
 spec_id: SPEC-023
 title: Auditoria Determinística de Inspirações → Implementações
-version: 1.0.0
+version: 1.1.0
 status: active
 owner: marceloclaro
-depends_on: [SPEC-005, SPEC-021, SPEC-022]
+depends_on: [SPEC-005, SPEC-021, SPEC-022, SPEC-024]
 origin: Diretório INSPIRAÇÕES + pedido de validação integral do usuário
 ```
 
@@ -49,16 +49,16 @@ A auditoria deve servir como base de governança SDD/TDD para responder, com evi
 | REQ-023.7 | O orquestrador DEVE expor `audit_inspirations()` e registrar reflexão no MetaBus | memória episódica cresce após auditoria |
 | REQ-023.8 | A auditoria DEVE gerar relatório Markdown consumível por humanos | `render_inspiration_audit_markdown()` retorna tabela/resumo |
 
-## 4. Catálogo Canônico Inicial
+## 4. Catálogo Canônico Validado
 
-| item_id | inspiração | status esperado inicial |
+| item_id | inspiração | status validado atual |
 |---|---|---|
 | `superhuman_scientific_core` | Blueprint de `INSPIRAÇÃO 1.txt` para núcleo científico superhuman-like | `implemented` |
 | `scientific_governance_pipeline_architecture` | SDD do pipeline OQS→MCI→VSEE→EGS | `implemented` |
 | `scientific_governance_tdd_plan` | Plano TDD detalhado do pipeline científico | `partial` |
 | `research_run_batch` | `research_pipelines_run_research_batch.py` | `implemented` |
-| `research_analyze_batch` | `research_pipelines_analyze_research_batch.py` | `absent` |
-| `research_final_report_template` | `research_results_reports_final_report_template.md` | `partial` |
+| `research_analyze_batch` | `research_pipelines_analyze_research_batch.py` | `implemented` |
+| `research_final_report_template` | `research_results_reports_final_report_template.md` | `implemented` |
 | `research_scenario_matrix` | `research_experiments_scenario_matrix_v1.json` | `implemented` |
 | `mira_presentation_system` | Livro/engine MIRA e superfície de comandos | `partial` |
 
@@ -72,7 +72,8 @@ A auditoria deve servir como base de governança SDD/TDD para responder, com evi
 ## 6. Critérios de Aceitação
 
 - [ ] `audit_inspirations()` retorna pelo menos 8 itens canônicos.
-- [ ] `research_analyze_batch` é classificado como `absent` na árvore atual.
+- [ ] `research_analyze_batch` é classificado como `implemented` na árvore atual.
+- [ ] `research_final_report_template` é classificado como `implemented` na árvore atual.
 - [ ] `mira_presentation_system` é classificado como `partial` na árvore atual.
 - [ ] `scientific_governance_pipeline_architecture` é classificado como `implemented`.
 - [ ] `research_run_batch` é classificado como `implemented`.
