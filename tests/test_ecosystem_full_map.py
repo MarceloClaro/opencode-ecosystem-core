@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*-
+
+import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+def test_build_ecosystem_map_has_nodes_and_vectors():
+    from marceloclaro.ecosystem_map import build_ecosystem_map
+
+    graph = build_ecosystem_map()
+
+    assert graph["summary"]["node_count"] >= 200
+    assert graph["summary"]["vector_count"] >= 200
+
+
+def test_build_ecosystem_map_contains_key_paths():
+    from marceloclaro.ecosystem_map import build_ecosystem_map
+
+    graph = build_ecosystem_map()
+    paths = {n.get("path") for n in graph["nodes"] if n.get("path")}
+
+    assert "marceloclaro/orchestrator.py" in paths
+    assert "mci/metabus.py" in paths
+    assert "mci/pipeline/scientific_governance_pipeline.py" in paths
+    assert "research/pipelines/analyze_research_batch.py" in paths
+    assert "agents/catalog/mira-new.md" in paths
+
+
+def test_build_ecosystem_map_contains_key_vector_kinds():
+    from marceloclaro.ecosystem_map import build_ecosystem_map
+
+    graph = build_ecosystem_map()
+    kinds = {v["kind"] for v in graph["vectors"]}
+
+    assert "contains" in kinds
+    assert "imports" in kinds
+    assert "documents" in kinds
+    assert "depends_on" in kinds
+    assert "control_flow" in kinds
+
+
+def test_full_map_artifacts_exist_and_have_core_content():
+    md = Path("MAPA_ECOSSISTEMA_COMPLETO_2026-07-06.md")
+    js = Path("maps/ecosystem_map_2026-07-06.json")
+
+    assert md.exists()
+    assert js.exists()
+
+    text = md.read_text(encoding="utf-8")
+    assert "# Mapa Completo do Ecossistema" in text
+    assert "Taxonomia de Vetores" in text
+    assert "Inventário de Nós" in text
+    assert "Inventário de Vetores" in text

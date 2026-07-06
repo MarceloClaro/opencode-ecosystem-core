@@ -1,0 +1,5730 @@
+{
+  "summary": {
+    "node_count": 336,
+    "vector_count": 502,
+    "node_kinds": {
+      "actor": 1,
+      "agent": 152,
+      "benchmark": 7,
+      "diagram": 1,
+      "doc": 5,
+      "layer": 17,
+      "module": 98,
+      "schema": 4,
+      "spec": 30,
+      "test": 21
+    },
+    "vector_kinds": {
+      "contains": 306,
+      "control_flow": 22,
+      "data_flow": 2,
+      "depends_on": 24,
+      "documents": 9,
+      "imports": 139
+    }
+  },
+  "nodes": [
+    {
+      "id": "actor_user_cli",
+      "label": "Usuário / CLI",
+      "kind": "actor",
+      "path": "",
+      "logical_group": "entrypoint",
+      "layer": "external"
+    },
+    {
+      "id": "agents_catalog_00_editor_chefe_phd_md",
+      "label": "00_editor_chefe_phd",
+      "kind": "agent",
+      "path": "agents/catalog/00_editor_chefe_phd.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_01_agente_diagnostico_escopo_md",
+      "label": "01_agente_diagnostico_escopo",
+      "kind": "agent",
+      "path": "agents/catalog/01_agente_diagnostico_escopo.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_02_agente_busca_curadoria_md",
+      "label": "02_agente_busca_curadoria",
+      "kind": "agent",
+      "path": "agents/catalog/02_agente_busca_curadoria.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_03_agente_evidencias_citacoes_md",
+      "label": "03_agente_evidencias_citacoes",
+      "kind": "agent",
+      "path": "agents/catalog/03_agente_evidencias_citacoes.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_04_agente_estrutura_argumentativa_md",
+      "label": "04_agente_estrutura_argumentativa",
+      "kind": "agent",
+      "path": "agents/catalog/04_agente_estrutura_argumentativa.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_05_agente_revisao_literatura_teoria_md",
+      "label": "05_agente_revisao_literatura_teoria",
+      "kind": "agent",
+      "path": "agents/catalog/05_agente_revisao_literatura_teoria.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_06_agente_metodologia_reprodutibilidade_md",
+      "label": "06_agente_metodologia_reprodutibilidade",
+      "kind": "agent",
+      "path": "agents/catalog/06_agente_metodologia_reprodutibilidade.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_07_agente_estatistica_analise_md",
+      "label": "07_agente_estatistica_analise",
+      "kind": "agent",
+      "path": "agents/catalog/07_agente_estatistica_analise.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_08_agente_visualizacao_evidencia_grafica_md",
+      "label": "08_agente_visualizacao_evidencia_grafica",
+      "kind": "agent",
+      "path": "agents/catalog/08_agente_visualizacao_evidencia_grafica.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_09_agente_resultados_md",
+      "label": "09_agente_resultados",
+      "kind": "agent",
+      "path": "agents/catalog/09_agente_resultados.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_10_agente_discussao_contribuicao_md",
+      "label": "10_agente_discussao_contribuicao",
+      "kind": "agent",
+      "path": "agents/catalog/10_agente_discussao_contribuicao.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_11_agente_conclusao_coerencia_final_md",
+      "label": "11_agente_conclusao_coerencia_final",
+      "kind": "agent",
+      "path": "agents/catalog/11_agente_conclusao_coerencia_final.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_12_agente_auditoria_bibliografica_abnt_md",
+      "label": "12_agente_auditoria_bibliografica_abnt",
+      "kind": "agent",
+      "path": "agents/catalog/12_agente_auditoria_bibliografica_abnt.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_13_agente_qa_qualis_a1_md",
+      "label": "13_agente_qa_qualis_a1",
+      "kind": "agent",
+      "path": "agents/catalog/13_agente_qa_qualis_a1.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_14_agente_consistencia_interna_md",
+      "label": "14_agente_consistencia_interna",
+      "kind": "agent",
+      "path": "agents/catalog/14_agente_consistencia_interna.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_15_agente_resumo_abstract_palavras_chave_md",
+      "label": "15_agente_resumo_abstract_palavras_chave",
+      "kind": "agent",
+      "path": "agents/catalog/15_agente_resumo_abstract_palavras_chave.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_16_agente_integracao_editorial_docx_md",
+      "label": "16_agente_integracao_editorial_docx",
+      "kind": "agent",
+      "path": "agents/catalog/16_agente_integracao_editorial_docx.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_17_agente_framework_reprodutivel_ambientes_md",
+      "label": "17_agente_framework_reprodutivel_ambientes",
+      "kind": "agent",
+      "path": "agents/catalog/17_agente_framework_reprodutivel_ambientes.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_18_agente_engenharia_dados_datasets_proveniencia_md",
+      "label": "18_agente_engenharia_dados_datasets_proveniencia",
+      "kind": "agent",
+      "path": "agents/catalog/18_agente_engenharia_dados_datasets_proveniencia.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_19_agente_auditoria_codigo_documentacao_tecnica_md",
+      "label": "19_agente_auditoria_codigo_documentacao_tecnica",
+      "kind": "agent",
+      "path": "agents/catalog/19_agente_auditoria_codigo_documentacao_tecnica.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_20_agente_estatistica_avancada_inferencia_md",
+      "label": "20_agente_estatistica_avancada_inferencia",
+      "kind": "agent",
+      "path": "agents/catalog/20_agente_estatistica_avancada_inferencia.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_21_agente_matematica_aplicada_modelagem_formal_md",
+      "label": "21_agente_matematica_aplicada_modelagem_formal",
+      "kind": "agent",
+      "path": "agents/catalog/21_agente_matematica_aplicada_modelagem_formal.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_22_agente_ml_dl_datamining_md",
+      "label": "22_agente_ml_dl_datamining",
+      "kind": "agent",
+      "path": "agents/catalog/22_agente_ml_dl_datamining.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_23_agente_bioinformatica_omicas_md",
+      "label": "23_agente_bioinformatica_omicas",
+      "kind": "agent",
+      "path": "agents/catalog/23_agente_bioinformatica_omicas.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_24_agente_quimioinformatica_modelagem_molecular_md",
+      "label": "24_agente_quimioinformatica_modelagem_molecular",
+      "kind": "agent",
+      "path": "agents/catalog/24_agente_quimioinformatica_modelagem_molecular.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_25_agente_ciencias_sociais_linguistica_computacional_md",
+      "label": "25_agente_ciencias_sociais_linguistica_computacional",
+      "kind": "agent",
+      "path": "agents/catalog/25_agente_ciencias_sociais_linguistica_computacional.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_26_agente_visao_computacional_multimodal_md",
+      "label": "26_agente_visao_computacional_multimodal",
+      "kind": "agent",
+      "path": "agents/catalog/26_agente_visao_computacional_multimodal.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_27_agente_computacao_quantica_aplicada_md",
+      "label": "27_agente_computacao_quantica_aplicada",
+      "kind": "agent",
+      "path": "agents/catalog/27_agente_computacao_quantica_aplicada.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_28_agente_benchmarking_ablacao_robustez_md",
+      "label": "28_agente_benchmarking_ablacao_robustez",
+      "kind": "agent",
+      "path": "agents/catalog/28_agente_benchmarking_ablacao_robustez.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_29_agente_conformidade_internacional_md",
+      "label": "29_agente_conformidade_internacional",
+      "kind": "agent",
+      "path": "agents/catalog/29_agente_conformidade_internacional.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_30_agente_traducao_nativa_proofreading_md",
+      "label": "30_agente_traducao_nativa_proofreading",
+      "kind": "agent",
+      "path": "agents/catalog/30_agente_traducao_nativa_proofreading.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_31_agente_blind_peer_review_emulado_md",
+      "label": "31_agente_blind_peer_review_emulado",
+      "kind": "agent",
+      "path": "agents/catalog/31_agente_blind_peer_review_emulado.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_32_agente_etica_open_science_md",
+      "label": "32_agente_etica_open_science",
+      "kind": "agent",
+      "path": "agents/catalog/32_agente_etica_open_science.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_33_agente_automacao_multi_norma_md",
+      "label": "33_agente_automacao_multi_norma",
+      "kind": "agent",
+      "path": "agents/catalog/33_agente_automacao_multi_norma.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_34_agente_identificacao_conflitos_similaridade_md",
+      "label": "34_agente_identificacao_conflitos_similaridade",
+      "kind": "agent",
+      "path": "agents/catalog/34_agente_identificacao_conflitos_similaridade.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_35_agente_coleta_datasets_reais_md",
+      "label": "35_agente_coleta_datasets_reais",
+      "kind": "agent",
+      "path": "agents/catalog/35_agente_coleta_datasets_reais.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_36_agente_exportacao_latex_pdf_md",
+      "label": "36_agente_exportacao_latex_pdf",
+      "kind": "agent",
+      "path": "agents/catalog/36_agente_exportacao_latex_pdf.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_37_agente_apresentacao_slides_banca_md",
+      "label": "37_agente_apresentacao_slides_banca",
+      "kind": "agent",
+      "path": "agents/catalog/37_agente_apresentacao_slides_banca.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_38_agente_montagem_entrega_final_md",
+      "label": "38_agente_montagem_entrega_final",
+      "kind": "agent",
+      "path": "agents/catalog/38_agente_montagem_entrega_final.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_39_agente_metodologia_multi_paradigma_md",
+      "label": "39_agente_metodologia_multi_paradigma",
+      "kind": "agent",
+      "path": "agents/catalog/39_agente_metodologia_multi_paradigma.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_40_agente_marcos_teoricos_interpretacao_md",
+      "label": "40_agente_marcos_teoricos_interpretacao",
+      "kind": "agent",
+      "path": "agents/catalog/40_agente_marcos_teoricos_interpretacao.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_41_agente_gis_geoprocessamento_cartografia_md",
+      "label": "41_agente_gis_geoprocessamento_cartografia",
+      "kind": "agent",
+      "path": "agents/catalog/41_agente_gis_geoprocessamento_cartografia.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_42_agente_desenvolvedor_cientista_computacao_md",
+      "label": "42_agente_desenvolvedor_cientista_computacao",
+      "kind": "agent",
+      "path": "agents/catalog/42_agente_desenvolvedor_cientista_computacao.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_43_agente_satelite_bioinformatica_omics_md",
+      "label": "43_agente_satelite_bioinformatica_omics",
+      "kind": "agent",
+      "path": "agents/catalog/43_agente_satelite_bioinformatica_omics.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_44_agente_correcao_textual_qualis_md",
+      "label": "44_agente_correcao_textual_qualis",
+      "kind": "agent",
+      "path": "agents/catalog/44_agente_correcao_textual_qualis.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_45_agente_refinamento_argumentacao_md",
+      "label": "45_agente_refinamento_argumentacao",
+      "kind": "agent",
+      "path": "agents/catalog/45_agente_refinamento_argumentacao.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_DISPATCHER_ATIVACAO_md",
+      "label": "DISPATCHER_ATIVACAO",
+      "kind": "agent",
+      "path": "agents/catalog/DISPATCHER_ATIVACAO.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_README_md",
+      "label": "README",
+      "kind": "agent",
+      "path": "agents/catalog/README.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_TEMPLATE_HANDOFF_md",
+      "label": "TEMPLATE_HANDOFF",
+      "kind": "agent",
+      "path": "agents/catalog/TEMPLATE_HANDOFF.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_adr_manager_md",
+      "label": "adr-manager",
+      "kind": "agent",
+      "path": "agents/catalog/adr-manager.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_antigravity_orchestrator_md",
+      "label": "antigravity-orchestrator",
+      "kind": "agent",
+      "path": "agents/catalog/antigravity-orchestrator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_architect_md",
+      "label": "architect",
+      "kind": "agent",
+      "path": "agents/catalog/architect.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_architecture_analyzer_md",
+      "label": "architecture-analyzer",
+      "kind": "agent",
+      "path": "agents/catalog/architecture-analyzer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_autoevolve_md",
+      "label": "autoevolve",
+      "kind": "agent",
+      "path": "agents/catalog/autoevolve.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_batch_executor_md",
+      "label": "batch-executor",
+      "kind": "agent",
+      "path": "agents/catalog/batch-executor.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_bernstein_orchestrator_md",
+      "label": "bernstein-orchestrator",
+      "kind": "agent",
+      "path": "agents/catalog/bernstein-orchestrator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_build_agent_md",
+      "label": "build-agent",
+      "kind": "agent",
+      "path": "agents/catalog/build-agent.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_code_reviewer_md",
+      "label": "code-reviewer",
+      "kind": "agent",
+      "path": "agents/catalog/code-reviewer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_codebase_analyzer_md",
+      "label": "codebase-analyzer",
+      "kind": "agent",
+      "path": "agents/catalog/codebase-analyzer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_codebase_locator_md",
+      "label": "codebase-locator",
+      "kind": "agent",
+      "path": "agents/catalog/codebase-locator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_codebase_pattern_finder_md",
+      "label": "codebase-pattern-finder",
+      "kind": "agent",
+      "path": "agents/catalog/codebase-pattern-finder.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_coder_agent_md",
+      "label": "coder-agent",
+      "kind": "agent",
+      "path": "agents/catalog/coder-agent.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_context_manager_md",
+      "label": "context-manager",
+      "kind": "agent",
+      "path": "agents/catalog/context-manager.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_context_retriever_md",
+      "label": "context-retriever",
+      "kind": "agent",
+      "path": "agents/catalog/context-retriever.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_contextscout_md",
+      "label": "contextscout",
+      "kind": "agent",
+      "path": "agents/catalog/contextscout.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_contract_manager_md",
+      "label": "contract-manager",
+      "kind": "agent",
+      "path": "agents/catalog/contract-manager.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_copywriter_md",
+      "label": "copywriter",
+      "kind": "agent",
+      "path": "agents/catalog/copywriter.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_debugger_md",
+      "label": "debugger",
+      "kind": "agent",
+      "path": "agents/catalog/debugger.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_devops_specialist_md",
+      "label": "devops-specialist",
+      "kind": "agent",
+      "path": "agents/catalog/devops-specialist.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_docs_writer_md",
+      "label": "docs-writer",
+      "kind": "agent",
+      "path": "agents/catalog/docs-writer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_documentation_md",
+      "label": "documentation",
+      "kind": "agent",
+      "path": "agents/catalog/documentation.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_eval_runner_md",
+      "label": "eval-runner",
+      "kind": "agent",
+      "path": "agents/catalog/eval-runner.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_externalscout_md",
+      "label": "externalscout",
+      "kind": "agent",
+      "path": "agents/catalog/externalscout.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_frontend_specialist_md",
+      "label": "frontend-specialist",
+      "kind": "agent",
+      "path": "agents/catalog/frontend-specialist.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_git_manager_md",
+      "label": "git-manager",
+      "kind": "agent",
+      "path": "agents/catalog/git-manager.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_image_specialist_md",
+      "label": "image-specialist",
+      "kind": "agent",
+      "path": "agents/catalog/image-specialist.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_linguistic_corrector_md",
+      "label": "linguistic-corrector",
+      "kind": "agent",
+      "path": "agents/catalog/linguistic-corrector.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_marceloclaro_md",
+      "label": "marceloclaro",
+      "kind": "agent",
+      "path": "agents/catalog/marceloclaro.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_master_orchestrator_md",
+      "label": "master-orchestrator",
+      "kind": "agent",
+      "path": "agents/catalog/master-orchestrator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_3d_md",
+      "label": "mira-3d",
+      "kind": "agent",
+      "path": "agents/catalog/mira-3d.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_animated_metaphor_md",
+      "label": "mira-animated-metaphor",
+      "kind": "agent",
+      "path": "agents/catalog/mira-animated-metaphor.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_animator_md",
+      "label": "mira-animator",
+      "kind": "agent",
+      "path": "agents/catalog/mira-animator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_builder_md",
+      "label": "mira-builder",
+      "kind": "agent",
+      "path": "agents/catalog/mira-builder.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_chart_race_md",
+      "label": "mira-chart-race",
+      "kind": "agent",
+      "path": "agents/catalog/mira-chart-race.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_chart_md",
+      "label": "mira-chart",
+      "kind": "agent",
+      "path": "agents/catalog/mira-chart.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_copywriter_md",
+      "label": "mira-copywriter",
+      "kind": "agent",
+      "path": "agents/catalog/mira-copywriter.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_extract_md",
+      "label": "mira-extract",
+      "kind": "agent",
+      "path": "agents/catalog/mira-extract.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_get_videos_md",
+      "label": "mira-get-videos",
+      "kind": "agent",
+      "path": "agents/catalog/mira-get-videos.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_image_template_md",
+      "label": "mira-image-template",
+      "kind": "agent",
+      "path": "agents/catalog/mira-image-template.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_image_md",
+      "label": "mira-image",
+      "kind": "agent",
+      "path": "agents/catalog/mira-image.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_new_md",
+      "label": "mira-new",
+      "kind": "agent",
+      "path": "agents/catalog/mira-new.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_planner_md",
+      "label": "mira-planner",
+      "kind": "agent",
+      "path": "agents/catalog/mira-planner.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_qrcode_md",
+      "label": "mira-qrcode",
+      "kind": "agent",
+      "path": "agents/catalog/mira-qrcode.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_references_md",
+      "label": "mira-references",
+      "kind": "agent",
+      "path": "agents/catalog/mira-references.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_size_animator_md",
+      "label": "mira-size-animator",
+      "kind": "agent",
+      "path": "agents/catalog/mira-size-animator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_squared_md",
+      "label": "mira-squared",
+      "kind": "agent",
+      "path": "agents/catalog/mira-squared.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_survey_md",
+      "label": "mira-survey",
+      "kind": "agent",
+      "path": "agents/catalog/mira-survey.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_thirds_md",
+      "label": "mira-thirds",
+      "kind": "agent",
+      "path": "agents/catalog/mira-thirds.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_validator_md",
+      "label": "mira-validator",
+      "kind": "agent",
+      "path": "agents/catalog/mira-validator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_vertical_md",
+      "label": "mira-vertical",
+      "kind": "agent",
+      "path": "agents/catalog/mira-vertical.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_mira_visuals_md",
+      "label": "mira-visuals",
+      "kind": "agent",
+      "path": "agents/catalog/mira-visuals.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_openagent_md",
+      "label": "openagent",
+      "kind": "agent",
+      "path": "agents/catalog/openagent.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_opencoder_md",
+      "label": "opencoder",
+      "kind": "agent",
+      "path": "agents/catalog/opencoder.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_optimizer_md",
+      "label": "optimizer",
+      "kind": "agent",
+      "path": "agents/catalog/optimizer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_prioritization_engine_md",
+      "label": "prioritization-engine",
+      "kind": "agent",
+      "path": "agents/catalog/prioritization-engine.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_pypi_searcher_md",
+      "label": "pypi-searcher",
+      "kind": "agent",
+      "path": "agents/catalog/pypi-searcher.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_quantum_nexus_phd_md",
+      "label": "quantum-nexus-phd",
+      "kind": "agent",
+      "path": "agents/catalog/quantum-nexus-phd.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_agent_forum_md",
+      "label": "reversa-agent-forum",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-agent-forum.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_anp_md",
+      "label": "reversa-anp",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-anp.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_archaeologist_md",
+      "label": "reversa-archaeologist",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-archaeologist.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_architect_md",
+      "label": "reversa-architect",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-architect.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_config_generator_md",
+      "label": "reversa-config-generator",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-config-generator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_data_master_md",
+      "label": "reversa-data-master",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-data-master.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_design_system_md",
+      "label": "reversa-design-system",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-design-system.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_detective_md",
+      "label": "reversa-detective",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-detective.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_document_ir_md",
+      "label": "reversa-document-ir",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-document-ir.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_entity_ner_md",
+      "label": "reversa-entity-ner",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-entity-ner.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_fileipc_md",
+      "label": "reversa-fileipc",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-fileipc.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_graph_builder_md",
+      "label": "reversa-graph-builder",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-graph-builder.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_graphrag_md",
+      "label": "reversa-graphrag",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-graphrag.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_hybrid_graph_md",
+      "label": "reversa-hybrid-graph",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-hybrid-graph.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_memory_updater_md",
+      "label": "reversa-memory-updater",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-memory-updater.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_oasis_profile_md",
+      "label": "reversa-oasis-profile",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-oasis-profile.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_ontology_gen_md",
+      "label": "reversa-ontology-gen",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-ontology-gen.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_planner_md",
+      "label": "reversa-planner",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-planner.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_process_lifecycle_md",
+      "label": "reversa-process-lifecycle",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-process-lifecycle.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_report_agent_md",
+      "label": "reversa-report-agent",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-report-agent.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_reviewer_md",
+      "label": "reversa-reviewer",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-reviewer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_scout_md",
+      "label": "reversa-scout",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-scout.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_statemachine_md",
+      "label": "reversa-statemachine",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-statemachine.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_swarm_review_md",
+      "label": "reversa-swarm-review",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-swarm-review.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_synthesis_md",
+      "label": "reversa-synthesis",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-synthesis.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_visor_md",
+      "label": "reversa-visor",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-visor.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_writer_md",
+      "label": "reversa-writer",
+      "kind": "agent",
+      "path": "agents/catalog/reversa-writer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reversa_md",
+      "label": "reversa",
+      "kind": "agent",
+      "path": "agents/catalog/reversa.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_reviewer_md",
+      "label": "reviewer",
+      "kind": "agent",
+      "path": "agents/catalog/reviewer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_security_auditor_md",
+      "label": "security-auditor",
+      "kind": "agent",
+      "path": "agents/catalog/security-auditor.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_simple_responder_md",
+      "label": "simple-responder",
+      "kind": "agent",
+      "path": "agents/catalog/simple-responder.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_stage_orchestrator_md",
+      "label": "stage-orchestrator",
+      "kind": "agent",
+      "path": "agents/catalog/stage-orchestrator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_story_mapper_md",
+      "label": "story-mapper",
+      "kind": "agent",
+      "path": "agents/catalog/story-mapper.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_task_manager_md",
+      "label": "task-manager",
+      "kind": "agent",
+      "path": "agents/catalog/task-manager.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_technical_writer_md",
+      "label": "technical-writer",
+      "kind": "agent",
+      "path": "agents/catalog/technical-writer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_test_engineer_md",
+      "label": "test-engineer",
+      "kind": "agent",
+      "path": "agents/catalog/test-engineer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_thoughts_analyzer_md",
+      "label": "thoughts-analyzer",
+      "kind": "agent",
+      "path": "agents/catalog/thoughts-analyzer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_thoughts_locator_md",
+      "label": "thoughts-locator",
+      "kind": "agent",
+      "path": "agents/catalog/thoughts-locator.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_web_developer_md",
+      "label": "web-developer",
+      "kind": "agent",
+      "path": "agents/catalog/web-developer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_web_search_researcher_md",
+      "label": "web-search-researcher",
+      "kind": "agent",
+      "path": "agents/catalog/web-search-researcher.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_ws_academic_pipeline_md",
+      "label": "ws-academic-pipeline",
+      "kind": "agent",
+      "path": "agents/catalog/ws-academic-pipeline.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_ws_coder_md",
+      "label": "ws-coder",
+      "kind": "agent",
+      "path": "agents/catalog/ws-coder.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_ws_researcher_md",
+      "label": "ws-researcher",
+      "kind": "agent",
+      "path": "agents/catalog/ws-researcher.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_ws_reviewer_md",
+      "label": "ws-reviewer",
+      "kind": "agent",
+      "path": "agents/catalog/ws-reviewer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_ws_scribe_md",
+      "label": "ws-scribe",
+      "kind": "agent",
+      "path": "agents/catalog/ws-scribe.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "benchmarks_scientific_reasoning_init_py",
+      "label": "__init__",
+      "kind": "benchmark",
+      "path": "benchmarks/scientific_reasoning/__init__.py",
+      "logical_group": "",
+      "layer": "benchmarks"
+    },
+    {
+      "id": "benchmarks_scientific_reasoning_bias_detection_benchmark_py",
+      "label": "bias_detection_benchmark",
+      "kind": "benchmark",
+      "path": "benchmarks/scientific_reasoning/bias_detection_benchmark.py",
+      "logical_group": "",
+      "layer": "benchmarks"
+    },
+    {
+      "id": "benchmarks_scientific_reasoning_causal_benchmark_py",
+      "label": "causal_benchmark",
+      "kind": "benchmark",
+      "path": "benchmarks/scientific_reasoning/causal_benchmark.py",
+      "logical_group": "",
+      "layer": "benchmarks"
+    },
+    {
+      "id": "benchmarks_scientific_reasoning_experimental_design_benchmark_py",
+      "label": "experimental_design_benchmark",
+      "kind": "benchmark",
+      "path": "benchmarks/scientific_reasoning/experimental_design_benchmark.py",
+      "logical_group": "",
+      "layer": "benchmarks"
+    },
+    {
+      "id": "benchmarks_scientific_reasoning_power_analysis_benchmark_py",
+      "label": "power_analysis_benchmark",
+      "kind": "benchmark",
+      "path": "benchmarks/scientific_reasoning/power_analysis_benchmark.py",
+      "logical_group": "",
+      "layer": "benchmarks"
+    },
+    {
+      "id": "benchmarks_scientific_reasoning_runner_py",
+      "label": "runner",
+      "kind": "benchmark",
+      "path": "benchmarks/scientific_reasoning/runner.py",
+      "logical_group": "",
+      "layer": "benchmarks"
+    },
+    {
+      "id": "benchmarks_scientific_reasoning_statistical_benchmark_py",
+      "label": "statistical_benchmark",
+      "kind": "benchmark",
+      "path": "benchmarks/scientific_reasoning/statistical_benchmark.py",
+      "logical_group": "",
+      "layer": "benchmarks"
+    },
+    {
+      "id": "diagram_mmd",
+      "label": "diagram",
+      "kind": "diagram",
+      "path": "diagram.mmd",
+      "logical_group": "",
+      "layer": "docs"
+    },
+    {
+      "id": "ARCHITECTURE_md",
+      "label": "ARCHITECTURE",
+      "kind": "doc",
+      "path": "ARCHITECTURE.md",
+      "logical_group": "",
+      "layer": "docs"
+    },
+    {
+      "id": "CHANGELOG_md",
+      "label": "CHANGELOG",
+      "kind": "doc",
+      "path": "CHANGELOG.md",
+      "logical_group": "",
+      "layer": "docs"
+    },
+    {
+      "id": "CHANGELOG_EXECUTIVO_2026_07_06_md",
+      "label": "CHANGELOG_EXECUTIVO_2026-07-06",
+      "kind": "doc",
+      "path": "CHANGELOG_EXECUTIVO_2026-07-06.md",
+      "logical_group": "",
+      "layer": "docs"
+    },
+    {
+      "id": "README_md",
+      "label": "README",
+      "kind": "doc",
+      "path": "README.md",
+      "logical_group": "",
+      "layer": "docs"
+    },
+    {
+      "id": "RELEASE_NOTES_md",
+      "label": "RELEASE_NOTES",
+      "kind": "doc",
+      "path": "RELEASE_NOTES.md",
+      "logical_group": "",
+      "layer": "docs"
+    },
+    {
+      "id": "layer_agents_catalog",
+      "label": "Agents Catalog",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "agents",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "layer_benchmarks",
+      "label": "Benchmarks",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "evaluation",
+      "layer": "benchmarks"
+    },
+    {
+      "id": "layer_diagnostics",
+      "label": "Diagnostics",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "analysis",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "layer_docs",
+      "label": "Docs",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "documentation",
+      "layer": "docs"
+    },
+    {
+      "id": "layer_illustrations",
+      "label": "Illustrations",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "visualization",
+      "layer": "illustrations"
+    },
+    {
+      "id": "layer_mci",
+      "label": "Metacognitive Interconnect",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "memory",
+      "layer": "mci"
+    },
+    {
+      "id": "layer_orchestration",
+      "label": "Orquestração",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "control",
+      "layer": "orchestration"
+    },
+    {
+      "id": "layer_publishing",
+      "label": "Publishing",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "publishing",
+      "layer": "publishing"
+    },
+    {
+      "id": "layer_reasoning",
+      "label": "Reasoning",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "formal_reasoning",
+      "layer": "reasoning"
+    },
+    {
+      "id": "layer_research",
+      "label": "Research",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "research",
+      "layer": "research"
+    },
+    {
+      "id": "layer_schemas",
+      "label": "Schemas",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "contracts",
+      "layer": "schemas"
+    },
+    {
+      "id": "layer_scientific_governance",
+      "label": "Scientific Governance Pipeline",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "science",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "layer_sdd_tdd",
+      "label": "SDD + TDD",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "quality",
+      "layer": "sdd_tdd"
+    },
+    {
+      "id": "layer_specs",
+      "label": "Specifications",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "documentation",
+      "layer": "specs"
+    },
+    {
+      "id": "layer_tests",
+      "label": "Tests",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "verification",
+      "layer": "tests"
+    },
+    {
+      "id": "layer_transformer",
+      "label": "Transformer Layer",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "routing",
+      "layer": "transformer"
+    },
+    {
+      "id": "layer_trust_economy",
+      "label": "Trust + Token Economy",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "governance",
+      "layer": "trust_economy"
+    },
+    {
+      "id": "academic_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "academic/__init__.py",
+      "logical_group": "",
+      "layer": "academic"
+    },
+    {
+      "id": "academic_auto_score_qualis_py",
+      "label": "auto_score_qualis",
+      "kind": "module",
+      "path": "academic/auto_score_qualis.py",
+      "logical_group": "",
+      "layer": "academic"
+    },
+    {
+      "id": "academic_maswos_py",
+      "label": "maswos",
+      "kind": "module",
+      "path": "academic/maswos.py",
+      "logical_group": "",
+      "layer": "academic"
+    },
+    {
+      "id": "academic_seeker_py",
+      "label": "seeker",
+      "kind": "module",
+      "path": "academic/seeker.py",
+      "logical_group": "",
+      "layer": "academic"
+    },
+    {
+      "id": "economy_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "economy/__init__.py",
+      "logical_group": "",
+      "layer": "trust_economy"
+    },
+    {
+      "id": "economy_token_economy_py",
+      "label": "token_economy",
+      "kind": "module",
+      "path": "economy/token_economy.py",
+      "logical_group": "",
+      "layer": "trust_economy"
+    },
+    {
+      "id": "gametheory_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "gametheory/__init__.py",
+      "logical_group": "",
+      "layer": "gametheory"
+    },
+    {
+      "id": "gametheory_debate_strategies_py",
+      "label": "debate_strategies",
+      "kind": "module",
+      "path": "gametheory/debate_strategies.py",
+      "logical_group": "",
+      "layer": "gametheory"
+    },
+    {
+      "id": "gametheory_moderator_py",
+      "label": "moderator",
+      "kind": "module",
+      "path": "gametheory/moderator.py",
+      "logical_group": "",
+      "layer": "gametheory"
+    },
+    {
+      "id": "gametheory_phd_auditor_py",
+      "label": "phd_auditor",
+      "kind": "module",
+      "path": "gametheory/phd_auditor.py",
+      "logical_group": "",
+      "layer": "gametheory"
+    },
+    {
+      "id": "illustrations_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "illustrations/__init__.py",
+      "logical_group": "",
+      "layer": "illustrations"
+    },
+    {
+      "id": "illustrations_graphify_engine_py",
+      "label": "graphify_engine",
+      "kind": "module",
+      "path": "illustrations/graphify_engine.py",
+      "logical_group": "",
+      "layer": "illustrations"
+    },
+    {
+      "id": "illustrations_mermaid_engine_py",
+      "label": "mermaid_engine",
+      "kind": "module",
+      "path": "illustrations/mermaid_engine.py",
+      "logical_group": "",
+      "layer": "illustrations"
+    },
+    {
+      "id": "illustrations_mira_engine_py",
+      "label": "mira_engine",
+      "kind": "module",
+      "path": "illustrations/mira_engine.py",
+      "logical_group": "",
+      "layer": "illustrations"
+    },
+    {
+      "id": "marceloclaro_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "marceloclaro/__init__.py",
+      "logical_group": "",
+      "layer": "orchestration"
+    },
+    {
+      "id": "marceloclaro_agent_loader_py",
+      "label": "agent_loader",
+      "kind": "module",
+      "path": "marceloclaro/agent_loader.py",
+      "logical_group": "",
+      "layer": "orchestration"
+    },
+    {
+      "id": "marceloclaro_catalog_loader_py",
+      "label": "catalog_loader",
+      "kind": "module",
+      "path": "marceloclaro/catalog_loader.py",
+      "logical_group": "",
+      "layer": "orchestration"
+    },
+    {
+      "id": "marceloclaro_cli_py",
+      "label": "cli",
+      "kind": "module",
+      "path": "marceloclaro/cli.py",
+      "logical_group": "",
+      "layer": "orchestration"
+    },
+    {
+      "id": "marceloclaro_ecosystem_map_py",
+      "label": "ecosystem_map",
+      "kind": "module",
+      "path": "marceloclaro/ecosystem_map.py",
+      "logical_group": "",
+      "layer": "orchestration"
+    },
+    {
+      "id": "marceloclaro_inspiration_audit_py",
+      "label": "inspiration_audit",
+      "kind": "module",
+      "path": "marceloclaro/inspiration_audit.py",
+      "logical_group": "",
+      "layer": "orchestration"
+    },
+    {
+      "id": "marceloclaro_orchestrator_py",
+      "label": "orchestrator",
+      "kind": "module",
+      "path": "marceloclaro/orchestrator.py",
+      "logical_group": "",
+      "layer": "orchestration"
+    },
+    {
+      "id": "mci_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "mci/__init__.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_adversarial_reviewer_py",
+      "label": "adversarial_reviewer",
+      "kind": "module",
+      "path": "mci/adversarial_reviewer.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_blackboard_py",
+      "label": "blackboard",
+      "kind": "module",
+      "path": "mci/blackboard.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_confidence_calibrator_py",
+      "label": "confidence_calibrator",
+      "kind": "module",
+      "path": "mci/confidence_calibrator.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_egs_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "mci/egs/__init__.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_egs_alignment_py",
+      "label": "alignment",
+      "kind": "module",
+      "path": "mci/egs/alignment.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_egs_explainability_py",
+      "label": "explainability",
+      "kind": "module",
+      "path": "mci/egs/explainability.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_egs_governance_analyzer_py",
+      "label": "governance_analyzer",
+      "kind": "module",
+      "path": "mci/egs/governance_analyzer.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_egs_principle_engine_py",
+      "label": "principle_engine",
+      "kind": "module",
+      "path": "mci/egs/principle_engine.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_egs_stress_test_py",
+      "label": "stress_test",
+      "kind": "module",
+      "path": "mci/egs/stress_test.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_evidence_graph_py",
+      "label": "evidence_graph",
+      "kind": "module",
+      "path": "mci/evidence_graph.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_experiment_designer_py",
+      "label": "experiment_designer",
+      "kind": "module",
+      "path": "mci/experiment_designer.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_hypothesis_engine_py",
+      "label": "hypothesis_engine",
+      "kind": "module",
+      "path": "mci/hypothesis_engine.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_mcp_server_py",
+      "label": "mcp_server",
+      "kind": "module",
+      "path": "mci/mcp_server.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_metabus_py",
+      "label": "metabus",
+      "kind": "module",
+      "path": "mci/metabus.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_oqs_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "mci/oqs/__init__.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_oqs_candidate_generator_py",
+      "label": "candidate_generator",
+      "kind": "module",
+      "path": "mci/oqs/candidate_generator.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_oqs_intake_py",
+      "label": "intake",
+      "kind": "module",
+      "path": "mci/oqs/intake.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_oqs_scoring_py",
+      "label": "scoring",
+      "kind": "module",
+      "path": "mci/oqs/scoring.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_oqs_selector_py",
+      "label": "selector",
+      "kind": "module",
+      "path": "mci/oqs/selector.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_oqs_uncertainty_scanner_py",
+      "label": "uncertainty_scanner",
+      "kind": "module",
+      "path": "mci/oqs/uncertainty_scanner.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_orchestration_py",
+      "label": "orchestration",
+      "kind": "module",
+      "path": "mci/orchestration.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_pipeline_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "mci/pipeline/__init__.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_pipeline_scientific_governance_pipeline_py",
+      "label": "scientific_governance_pipeline",
+      "kind": "module",
+      "path": "mci/pipeline/scientific_governance_pipeline.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_reflexion_py",
+      "label": "reflexion",
+      "kind": "module",
+      "path": "mci/reflexion.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_scientific_reporter_py",
+      "label": "scientific_reporter",
+      "kind": "module",
+      "path": "mci/scientific_reporter.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_statistical_validator_py",
+      "label": "statistical_validator",
+      "kind": "module",
+      "path": "mci/statistical_validator.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
+      "id": "mci_vsee_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "mci/vsee/__init__.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_vsee_executor_py",
+      "label": "executor",
+      "kind": "module",
+      "path": "mci/vsee/executor.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_vsee_fallback_py",
+      "label": "fallback",
+      "kind": "module",
+      "path": "mci/vsee/fallback.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_vsee_policy_py",
+      "label": "policy",
+      "kind": "module",
+      "path": "mci/vsee/policy.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_vsee_router_py",
+      "label": "router",
+      "kind": "module",
+      "path": "mci/vsee/router.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mci_vsee_telemetry_py",
+      "label": "telemetry",
+      "kind": "module",
+      "path": "mci/vsee/telemetry.py",
+      "logical_group": "",
+      "layer": "scientific_governance"
+    },
+    {
+      "id": "mirofish_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "mirofish/__init__.py",
+      "logical_group": "",
+      "layer": "mirofish"
+    },
+    {
+      "id": "mirofish_graph_memory_py",
+      "label": "graph_memory",
+      "kind": "module",
+      "path": "mirofish/graph_memory.py",
+      "logical_group": "",
+      "layer": "mirofish"
+    },
+    {
+      "id": "mirofish_swarm_py",
+      "label": "swarm",
+      "kind": "module",
+      "path": "mirofish/swarm.py",
+      "logical_group": "",
+      "layer": "mirofish"
+    },
+    {
+      "id": "mirofish_validator_py",
+      "label": "validator",
+      "kind": "module",
+      "path": "mirofish/validator.py",
+      "logical_group": "",
+      "layer": "mirofish"
+    },
+    {
+      "id": "publishing_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "publishing/__init__.py",
+      "logical_group": "",
+      "layer": "publishing"
+    },
+    {
+      "id": "publishing_cover_designer_py",
+      "label": "cover_designer",
+      "kind": "module",
+      "path": "publishing/cover_designer.py",
+      "logical_group": "",
+      "layer": "publishing"
+    },
+    {
+      "id": "publishing_production_py",
+      "label": "production",
+      "kind": "module",
+      "path": "publishing/production.py",
+      "logical_group": "",
+      "layer": "publishing"
+    },
+    {
+      "id": "reasoning_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "reasoning/__init__.py",
+      "logical_group": "",
+      "layer": "reasoning"
+    },
+    {
+      "id": "reasoning_engines_py",
+      "label": "engines",
+      "kind": "module",
+      "path": "reasoning/engines.py",
+      "logical_group": "",
+      "layer": "reasoning"
+    },
+    {
+      "id": "reasoning_quantum_py",
+      "label": "quantum",
+      "kind": "module",
+      "path": "reasoning/quantum.py",
+      "logical_group": "",
+      "layer": "reasoning"
+    },
+    {
+      "id": "research_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "research/__init__.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_downloader_py",
+      "label": "downloader",
+      "kind": "module",
+      "path": "research/downloader.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_fichamento_py",
+      "label": "fichamento",
+      "kind": "module",
+      "path": "research/fichamento.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_figure_hunter_py",
+      "label": "figure_hunter",
+      "kind": "module",
+      "path": "research/figure_hunter.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_hub_py",
+      "label": "hub",
+      "kind": "module",
+      "path": "research/hub.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_llm_client_py",
+      "label": "llm_client",
+      "kind": "module",
+      "path": "research/llm_client.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_osint_py",
+      "label": "osint",
+      "kind": "module",
+      "path": "research/osint.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_pdf2md_py",
+      "label": "pdf2md",
+      "kind": "module",
+      "path": "research/pdf2md.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_pipelines_analyze_research_batch_py",
+      "label": "analyze_research_batch",
+      "kind": "module",
+      "path": "research/pipelines/analyze_research_batch.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_pipelines_run_research_batch_py",
+      "label": "run_research_batch",
+      "kind": "module",
+      "path": "research/pipelines/run_research_batch.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "research_searchers_py",
+      "label": "searchers",
+      "kind": "module",
+      "path": "research/searchers.py",
+      "logical_group": "",
+      "layer": "research"
+    },
+    {
+      "id": "scanners_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "scanners/__init__.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_capability_composer_py",
+      "label": "capability_composer",
+      "kind": "module",
+      "path": "scanners/capability_composer.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_cross_validation_engine_py",
+      "label": "cross_validation_engine",
+      "kind": "module",
+      "path": "scanners/cross_validation_engine.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_epistemic_prioritizer_py",
+      "label": "epistemic_prioritizer",
+      "kind": "module",
+      "path": "scanners/epistemic_prioritizer.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_evolutionary_pipeline_py",
+      "label": "evolutionary_pipeline",
+      "kind": "module",
+      "path": "scanners/evolutionary_pipeline.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_noological_scanner_py",
+      "label": "noological_scanner",
+      "kind": "module",
+      "path": "scanners/noological_scanner.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_optimal_question_scanner_py",
+      "label": "optimal_question_scanner",
+      "kind": "module",
+      "path": "scanners/optimal_question_scanner.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_pipeline_py",
+      "label": "pipeline",
+      "kind": "module",
+      "path": "scanners/pipeline.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_potentiality_scanner_py",
+      "label": "potentiality_scanner",
+      "kind": "module",
+      "path": "scanners/potentiality_scanner.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_reversa_scanner_py",
+      "label": "reversa_scanner",
+      "kind": "module",
+      "path": "scanners/reversa_scanner.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_social_impact_scanner_py",
+      "label": "social_impact_scanner",
+      "kind": "module",
+      "path": "scanners/social_impact_scanner.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_successor_generator_py",
+      "label": "successor_generator",
+      "kind": "module",
+      "path": "scanners/successor_generator.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "scanners_teleological_scanner_py",
+      "label": "teleological_scanner",
+      "kind": "module",
+      "path": "scanners/teleological_scanner.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
+      "id": "sdd_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "sdd/__init__.py",
+      "logical_group": "",
+      "layer": "sdd_tdd"
+    },
+    {
+      "id": "sdd_spec_engine_py",
+      "label": "spec_engine",
+      "kind": "module",
+      "path": "sdd/spec_engine.py",
+      "logical_group": "",
+      "layer": "sdd_tdd"
+    },
+    {
+      "id": "sdd_tdd_runner_py",
+      "label": "tdd_runner",
+      "kind": "module",
+      "path": "sdd/tdd_runner.py",
+      "logical_group": "",
+      "layer": "sdd_tdd"
+    },
+    {
+      "id": "transformer_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "transformer/__init__.py",
+      "logical_group": "",
+      "layer": "transformer"
+    },
+    {
+      "id": "transformer_attention_py",
+      "label": "attention",
+      "kind": "module",
+      "path": "transformer/attention.py",
+      "logical_group": "",
+      "layer": "transformer"
+    },
+    {
+      "id": "transformer_embedder_py",
+      "label": "embedder",
+      "kind": "module",
+      "path": "transformer/embedder.py",
+      "logical_group": "",
+      "layer": "transformer"
+    },
+    {
+      "id": "transformer_memory_py",
+      "label": "memory",
+      "kind": "module",
+      "path": "transformer/memory.py",
+      "logical_group": "",
+      "layer": "transformer"
+    },
+    {
+      "id": "transformer_pipeline_py",
+      "label": "pipeline",
+      "kind": "module",
+      "path": "transformer/pipeline.py",
+      "logical_group": "",
+      "layer": "transformer"
+    },
+    {
+      "id": "trust_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "trust/__init__.py",
+      "logical_group": "",
+      "layer": "trust_economy"
+    },
+    {
+      "id": "trust_trust_engine_py",
+      "label": "trust_engine",
+      "kind": "module",
+      "path": "trust/trust_engine.py",
+      "logical_group": "",
+      "layer": "trust_economy"
+    },
+    {
+      "id": "schemas_ethical_assessment_schema_json",
+      "label": "ethical_assessment.schema",
+      "kind": "schema",
+      "path": "schemas/ethical_assessment.schema.json",
+      "logical_group": "",
+      "layer": "schemas"
+    },
+    {
+      "id": "schemas_optimal_question_schema_json",
+      "label": "optimal_question.schema",
+      "kind": "schema",
+      "path": "schemas/optimal_question.schema.json",
+      "logical_group": "",
+      "layer": "schemas"
+    },
+    {
+      "id": "schemas_scientific_claim_schema_json",
+      "label": "scientific_claim.schema",
+      "kind": "schema",
+      "path": "schemas/scientific_claim.schema.json",
+      "logical_group": "",
+      "layer": "schemas"
+    },
+    {
+      "id": "schemas_vector_execution_decision_schema_json",
+      "label": "vector_execution_decision.schema",
+      "kind": "schema",
+      "path": "schemas/vector_execution_decision.schema.json",
+      "logical_group": "",
+      "layer": "schemas"
+    },
+    {
+      "id": "specs_SPEC_001_metabus_md",
+      "label": "SPEC-001-metabus",
+      "kind": "spec",
+      "path": "specs/SPEC-001-metabus.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_002_blackboard_md",
+      "label": "SPEC-002-blackboard",
+      "kind": "spec",
+      "path": "specs/SPEC-002-blackboard.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_003_reflexion_md",
+      "label": "SPEC-003-reflexion",
+      "kind": "spec",
+      "path": "specs/SPEC-003-reflexion.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_004_transformer_md",
+      "label": "SPEC-004-transformer",
+      "kind": "spec",
+      "path": "specs/SPEC-004-transformer.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_005_orchestrator_md",
+      "label": "SPEC-005-orchestrator",
+      "kind": "spec",
+      "path": "specs/SPEC-005-orchestrator.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_006_agents_md",
+      "label": "SPEC-006-agents",
+      "kind": "spec",
+      "path": "specs/SPEC-006-agents.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_007_trust_engine_md",
+      "label": "SPEC-007-trust-engine",
+      "kind": "spec",
+      "path": "specs/SPEC-007-trust-engine.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_008_token_economy_md",
+      "label": "SPEC-008-token-economy",
+      "kind": "spec",
+      "path": "specs/SPEC-008-token-economy.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_009_scanners_md",
+      "label": "SPEC-009-scanners",
+      "kind": "spec",
+      "path": "specs/SPEC-009-scanners.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_010_maswos_academic_md",
+      "label": "SPEC-010-maswos-academic",
+      "kind": "spec",
+      "path": "specs/SPEC-010-maswos-academic.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_011_reasoning_quantum_md",
+      "label": "SPEC-011-reasoning-quantum",
+      "kind": "spec",
+      "path": "specs/SPEC-011-reasoning-quantum.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_012_evolution_cycles_md",
+      "label": "SPEC-012-evolution-cycles",
+      "kind": "spec",
+      "path": "specs/SPEC-012-evolution-cycles.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_013_cli_integrations_md",
+      "label": "SPEC-013-cli-integrations",
+      "kind": "spec",
+      "path": "specs/SPEC-013-cli-integrations.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_014_gametheory_md",
+      "label": "SPEC-014-gametheory",
+      "kind": "spec",
+      "path": "specs/SPEC-014-gametheory.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_014_livro_ecosystem_core_md",
+      "label": "SPEC-014-livro-ecosystem-core",
+      "kind": "spec",
+      "path": "specs/SPEC-014-livro-ecosystem-core.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_015_mirofish_md",
+      "label": "SPEC-015-mirofish",
+      "kind": "spec",
+      "path": "specs/SPEC-015-mirofish.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_016_publishing_md",
+      "label": "SPEC-016-publishing",
+      "kind": "spec",
+      "path": "specs/SPEC-016-publishing.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_017_research_md",
+      "label": "SPEC-017-research",
+      "kind": "spec",
+      "path": "specs/SPEC-017-research.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_018_illustrations_md",
+      "label": "SPEC-018-illustrations",
+      "kind": "spec",
+      "path": "specs/SPEC-018-illustrations.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_019_cover_designer_md",
+      "label": "SPEC-019-cover-designer",
+      "kind": "spec",
+      "path": "specs/SPEC-019-cover-designer.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_020_deep_diagnose_md",
+      "label": "SPEC-020-deep-diagnose",
+      "kind": "spec",
+      "path": "specs/SPEC-020-deep-diagnose.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_021_superhuman_pipeline_md",
+      "label": "SPEC-021-superhuman-pipeline",
+      "kind": "spec",
+      "path": "specs/SPEC-021-superhuman-pipeline.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_022_diagnostic_pipeline_refined_md",
+      "label": "SPEC-022-diagnostic-pipeline-refined",
+      "kind": "spec",
+      "path": "specs/SPEC-022-diagnostic-pipeline-refined.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_023_inspiration_audit_md",
+      "label": "SPEC-023-inspiration-audit",
+      "kind": "spec",
+      "path": "specs/SPEC-023-inspiration-audit.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_024_research_batch_analysis_md",
+      "label": "SPEC-024-research-batch-analysis",
+      "kind": "spec",
+      "path": "specs/SPEC-024-research-batch-analysis.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_025_scientific_governance_tdd_hardening_md",
+      "label": "SPEC-025-scientific-governance-tdd-hardening",
+      "kind": "spec",
+      "path": "specs/SPEC-025-scientific-governance-tdd-hardening.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_026_mira_command_surface_md",
+      "label": "SPEC-026-mira-command-surface",
+      "kind": "spec",
+      "path": "specs/SPEC-026-mira-command-surface.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_027_scientific_reporter_hardening_md",
+      "label": "SPEC-027-scientific-reporter-hardening",
+      "kind": "spec",
+      "path": "specs/SPEC-027-scientific-reporter-hardening.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_028_executive_changelog_artifact_md",
+      "label": "SPEC-028-executive-changelog-artifact",
+      "kind": "spec",
+      "path": "specs/SPEC-028-executive-changelog-artifact.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_029_ecosystem_full_map_md",
+      "label": "SPEC-029-ecosystem-full-map",
+      "kind": "spec",
+      "path": "specs/SPEC-029-ecosystem-full-map.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "tests_test_advanced_subsystems_py",
+      "label": "test_advanced_subsystems",
+      "kind": "test",
+      "path": "tests/test_advanced_subsystems.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_analyze_research_batch_py",
+      "label": "test_analyze_research_batch",
+      "kind": "test",
+      "path": "tests/test_analyze_research_batch.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_cover_designer_py",
+      "label": "test_cover_designer",
+      "kind": "test",
+      "path": "tests/test_cover_designer.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_deep_diagnose_py",
+      "label": "test_deep_diagnose",
+      "kind": "test",
+      "path": "tests/test_deep_diagnose.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_ecosystem_py",
+      "label": "test_ecosystem",
+      "kind": "test",
+      "path": "tests/test_ecosystem.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_ecosystem_diagnose_py",
+      "label": "test_ecosystem_diagnose",
+      "kind": "test",
+      "path": "tests/test_ecosystem_diagnose.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_ecosystem_full_map_py",
+      "label": "test_ecosystem_full_map",
+      "kind": "test",
+      "path": "tests/test_ecosystem_full_map.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_executive_changelog_artifact_py",
+      "label": "test_executive_changelog_artifact",
+      "kind": "test",
+      "path": "tests/test_executive_changelog_artifact.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_illustrations_py",
+      "label": "test_illustrations",
+      "kind": "test",
+      "path": "tests/test_illustrations.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_inspiration_audit_py",
+      "label": "test_inspiration_audit",
+      "kind": "test",
+      "path": "tests/test_inspiration_audit.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_llm_client_py",
+      "label": "test_llm_client",
+      "kind": "test",
+      "path": "tests/test_llm_client.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_mira_catalog_py",
+      "label": "test_mira_catalog",
+      "kind": "test",
+      "path": "tests/test_mira_catalog.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_mirofish_gametheory_publishing_py",
+      "label": "test_mirofish_gametheory_publishing",
+      "kind": "test",
+      "path": "tests/test_mirofish_gametheory_publishing.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_research_py",
+      "label": "test_research",
+      "kind": "test",
+      "path": "tests/test_research.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_run_research_batch_py",
+      "label": "test_run_research_batch",
+      "kind": "test",
+      "path": "tests/test_run_research_batch.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_scientific_governance_contracts_py",
+      "label": "test_scientific_governance_contracts",
+      "kind": "test",
+      "path": "tests/test_scientific_governance_contracts.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_scientific_governance_pipeline_py",
+      "label": "test_scientific_governance_pipeline",
+      "kind": "test",
+      "path": "tests/test_scientific_governance_pipeline.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_scientific_reporter_hardening_py",
+      "label": "test_scientific_reporter_hardening",
+      "kind": "test",
+      "path": "tests/test_scientific_reporter_hardening.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_scientific_superhuman_py",
+      "label": "test_scientific_superhuman",
+      "kind": "test",
+      "path": "tests/test_scientific_superhuman.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_sdd_tdd_py",
+      "label": "test_sdd_tdd",
+      "kind": "test",
+      "path": "tests/test_sdd_tdd.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_transformer_py",
+      "label": "test_transformer",
+      "kind": "test",
+      "path": "tests/test_transformer.py",
+      "logical_group": "",
+      "layer": "tests"
+    }
+  ],
+  "vectors": [
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_00_editor_chefe_phd_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/00_editor_chefe_phd.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_01_agente_diagnostico_escopo_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/01_agente_diagnostico_escopo.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_02_agente_busca_curadoria_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/02_agente_busca_curadoria.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_03_agente_evidencias_citacoes_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/03_agente_evidencias_citacoes.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_04_agente_estrutura_argumentativa_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/04_agente_estrutura_argumentativa.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_05_agente_revisao_literatura_teoria_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/05_agente_revisao_literatura_teoria.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_06_agente_metodologia_reprodutibilidade_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/06_agente_metodologia_reprodutibilidade.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_07_agente_estatistica_analise_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/07_agente_estatistica_analise.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_08_agente_visualizacao_evidencia_grafica_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/08_agente_visualizacao_evidencia_grafica.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_09_agente_resultados_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/09_agente_resultados.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_10_agente_discussao_contribuicao_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/10_agente_discussao_contribuicao.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_11_agente_conclusao_coerencia_final_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/11_agente_conclusao_coerencia_final.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_12_agente_auditoria_bibliografica_abnt_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/12_agente_auditoria_bibliografica_abnt.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_13_agente_qa_qualis_a1_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/13_agente_qa_qualis_a1.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_14_agente_consistencia_interna_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/14_agente_consistencia_interna.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_15_agente_resumo_abstract_palavras_chave_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/15_agente_resumo_abstract_palavras_chave.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_16_agente_integracao_editorial_docx_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/16_agente_integracao_editorial_docx.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_17_agente_framework_reprodutivel_ambientes_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/17_agente_framework_reprodutivel_ambientes.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_18_agente_engenharia_dados_datasets_proveniencia_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/18_agente_engenharia_dados_datasets_proveniencia.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_19_agente_auditoria_codigo_documentacao_tecnica_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/19_agente_auditoria_codigo_documentacao_tecnica.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_20_agente_estatistica_avancada_inferencia_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/20_agente_estatistica_avancada_inferencia.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_21_agente_matematica_aplicada_modelagem_formal_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/21_agente_matematica_aplicada_modelagem_formal.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_22_agente_ml_dl_datamining_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/22_agente_ml_dl_datamining.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_23_agente_bioinformatica_omicas_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/23_agente_bioinformatica_omicas.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_24_agente_quimioinformatica_modelagem_molecular_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/24_agente_quimioinformatica_modelagem_molecular.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_25_agente_ciencias_sociais_linguistica_computacional_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/25_agente_ciencias_sociais_linguistica_computacional.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_26_agente_visao_computacional_multimodal_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/26_agente_visao_computacional_multimodal.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_27_agente_computacao_quantica_aplicada_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/27_agente_computacao_quantica_aplicada.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_28_agente_benchmarking_ablacao_robustez_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/28_agente_benchmarking_ablacao_robustez.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_29_agente_conformidade_internacional_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/29_agente_conformidade_internacional.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_30_agente_traducao_nativa_proofreading_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/30_agente_traducao_nativa_proofreading.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_31_agente_blind_peer_review_emulado_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/31_agente_blind_peer_review_emulado.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_32_agente_etica_open_science_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/32_agente_etica_open_science.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_33_agente_automacao_multi_norma_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/33_agente_automacao_multi_norma.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_34_agente_identificacao_conflitos_similaridade_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/34_agente_identificacao_conflitos_similaridade.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_35_agente_coleta_datasets_reais_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/35_agente_coleta_datasets_reais.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_36_agente_exportacao_latex_pdf_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/36_agente_exportacao_latex_pdf.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_37_agente_apresentacao_slides_banca_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/37_agente_apresentacao_slides_banca.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_38_agente_montagem_entrega_final_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/38_agente_montagem_entrega_final.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_39_agente_metodologia_multi_paradigma_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/39_agente_metodologia_multi_paradigma.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_40_agente_marcos_teoricos_interpretacao_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/40_agente_marcos_teoricos_interpretacao.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_41_agente_gis_geoprocessamento_cartografia_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/41_agente_gis_geoprocessamento_cartografia.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_42_agente_desenvolvedor_cientista_computacao_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/42_agente_desenvolvedor_cientista_computacao.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_43_agente_satelite_bioinformatica_omics_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/43_agente_satelite_bioinformatica_omics.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_44_agente_correcao_textual_qualis_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/44_agente_correcao_textual_qualis.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_45_agente_refinamento_argumentacao_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/45_agente_refinamento_argumentacao.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_DISPATCHER_ATIVACAO_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/DISPATCHER_ATIVACAO.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_README_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/README.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_TEMPLATE_HANDOFF_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/TEMPLATE_HANDOFF.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_adr_manager_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/adr-manager.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_antigravity_orchestrator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/antigravity-orchestrator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_architect_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/architect.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_architecture_analyzer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/architecture-analyzer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_autoevolve_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/autoevolve.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_batch_executor_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/batch-executor.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_bernstein_orchestrator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/bernstein-orchestrator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_build_agent_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/build-agent.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_code_reviewer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/code-reviewer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_codebase_analyzer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/codebase-analyzer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_codebase_locator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/codebase-locator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_codebase_pattern_finder_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/codebase-pattern-finder.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_coder_agent_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/coder-agent.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_context_manager_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/context-manager.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_context_retriever_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/context-retriever.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_contextscout_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/contextscout.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_contract_manager_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/contract-manager.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_copywriter_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/copywriter.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_debugger_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/debugger.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_devops_specialist_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/devops-specialist.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_docs_writer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/docs-writer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_documentation_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/documentation.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_eval_runner_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/eval-runner.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_externalscout_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/externalscout.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_frontend_specialist_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/frontend-specialist.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_git_manager_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/git-manager.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_image_specialist_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/image-specialist.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_linguistic_corrector_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/linguistic-corrector.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_marceloclaro_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/marceloclaro.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_master_orchestrator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/master-orchestrator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_3d_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-3d.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_animated_metaphor_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-animated-metaphor.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_animator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-animator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_builder_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-builder.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_chart_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-chart.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_chart_race_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-chart-race.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_copywriter_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-copywriter.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_extract_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-extract.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_get_videos_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-get-videos.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_image_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-image.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_image_template_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-image-template.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_new_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-new.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_planner_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-planner.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_qrcode_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-qrcode.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_references_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-references.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_size_animator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-size-animator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_squared_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-squared.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_survey_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-survey.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_thirds_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-thirds.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_validator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-validator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_vertical_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-vertical.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_mira_visuals_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/mira-visuals.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_openagent_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/openagent.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_opencoder_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/opencoder.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_optimizer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/optimizer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_prioritization_engine_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/prioritization-engine.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_pypi_searcher_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/pypi-searcher.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_quantum_nexus_phd_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/quantum-nexus-phd.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_agent_forum_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-agent-forum.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_anp_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-anp.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_archaeologist_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-archaeologist.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_architect_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-architect.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_config_generator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-config-generator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_data_master_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-data-master.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_design_system_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-design-system.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_detective_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-detective.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_document_ir_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-document-ir.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_entity_ner_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-entity-ner.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_fileipc_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-fileipc.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_graph_builder_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-graph-builder.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_graphrag_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-graphrag.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_hybrid_graph_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-hybrid-graph.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_memory_updater_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-memory-updater.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_oasis_profile_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-oasis-profile.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_ontology_gen_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-ontology-gen.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_planner_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-planner.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_process_lifecycle_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-process-lifecycle.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_report_agent_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-report-agent.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_reviewer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-reviewer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_scout_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-scout.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_statemachine_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-statemachine.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_swarm_review_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-swarm-review.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_synthesis_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-synthesis.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_visor_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-visor.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reversa_writer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reversa-writer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_reviewer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/reviewer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_security_auditor_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/security-auditor.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_simple_responder_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/simple-responder.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_stage_orchestrator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/stage-orchestrator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_story_mapper_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/story-mapper.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_task_manager_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/task-manager.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_technical_writer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/technical-writer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_test_engineer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/test-engineer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_thoughts_analyzer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/thoughts-analyzer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_thoughts_locator_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/thoughts-locator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_web_developer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/web-developer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_web_search_researcher_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/web-search-researcher.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_ws_academic_pipeline_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/ws-academic-pipeline.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_ws_coder_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/ws-coder.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_ws_researcher_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/ws-researcher.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_ws_reviewer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/ws-reviewer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_ws_scribe_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/ws-scribe.md"
+    },
+    {
+      "source": "layer_benchmarks",
+      "target": "benchmarks_scientific_reasoning_bias_detection_benchmark_py",
+      "kind": "contains",
+      "note": "benchmarks contém benchmarks/scientific_reasoning/bias_detection_benchmark.py"
+    },
+    {
+      "source": "layer_benchmarks",
+      "target": "benchmarks_scientific_reasoning_causal_benchmark_py",
+      "kind": "contains",
+      "note": "benchmarks contém benchmarks/scientific_reasoning/causal_benchmark.py"
+    },
+    {
+      "source": "layer_benchmarks",
+      "target": "benchmarks_scientific_reasoning_experimental_design_benchmark_py",
+      "kind": "contains",
+      "note": "benchmarks contém benchmarks/scientific_reasoning/experimental_design_benchmark.py"
+    },
+    {
+      "source": "layer_benchmarks",
+      "target": "benchmarks_scientific_reasoning_init_py",
+      "kind": "contains",
+      "note": "benchmarks contém benchmarks/scientific_reasoning/__init__.py"
+    },
+    {
+      "source": "layer_benchmarks",
+      "target": "benchmarks_scientific_reasoning_power_analysis_benchmark_py",
+      "kind": "contains",
+      "note": "benchmarks contém benchmarks/scientific_reasoning/power_analysis_benchmark.py"
+    },
+    {
+      "source": "layer_benchmarks",
+      "target": "benchmarks_scientific_reasoning_runner_py",
+      "kind": "contains",
+      "note": "benchmarks contém benchmarks/scientific_reasoning/runner.py"
+    },
+    {
+      "source": "layer_benchmarks",
+      "target": "benchmarks_scientific_reasoning_statistical_benchmark_py",
+      "kind": "contains",
+      "note": "benchmarks contém benchmarks/scientific_reasoning/statistical_benchmark.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_capability_composer_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/capability_composer.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_cross_validation_engine_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/cross_validation_engine.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_epistemic_prioritizer_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/epistemic_prioritizer.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_evolutionary_pipeline_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/evolutionary_pipeline.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_init_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/__init__.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_noological_scanner_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/noological_scanner.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_optimal_question_scanner_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/optimal_question_scanner.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_pipeline_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/pipeline.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_potentiality_scanner_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/potentiality_scanner.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_reversa_scanner_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/reversa_scanner.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_social_impact_scanner_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/social_impact_scanner.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_successor_generator_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/successor_generator.py"
+    },
+    {
+      "source": "layer_diagnostics",
+      "target": "scanners_teleological_scanner_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/teleological_scanner.py"
+    },
+    {
+      "source": "layer_docs",
+      "target": "ARCHITECTURE_md",
+      "kind": "contains",
+      "note": "docs contém ARCHITECTURE.md"
+    },
+    {
+      "source": "layer_docs",
+      "target": "CHANGELOG_EXECUTIVO_2026_07_06_md",
+      "kind": "contains",
+      "note": "docs contém CHANGELOG_EXECUTIVO_2026-07-06.md"
+    },
+    {
+      "source": "layer_docs",
+      "target": "CHANGELOG_md",
+      "kind": "contains",
+      "note": "docs contém CHANGELOG.md"
+    },
+    {
+      "source": "layer_docs",
+      "target": "README_md",
+      "kind": "contains",
+      "note": "docs contém README.md"
+    },
+    {
+      "source": "layer_docs",
+      "target": "RELEASE_NOTES_md",
+      "kind": "contains",
+      "note": "docs contém RELEASE_NOTES.md"
+    },
+    {
+      "source": "layer_docs",
+      "target": "diagram_mmd",
+      "kind": "contains",
+      "note": "docs contém diagram.mmd"
+    },
+    {
+      "source": "layer_illustrations",
+      "target": "illustrations_graphify_engine_py",
+      "kind": "contains",
+      "note": "illustrations contém illustrations/graphify_engine.py"
+    },
+    {
+      "source": "layer_illustrations",
+      "target": "illustrations_init_py",
+      "kind": "contains",
+      "note": "illustrations contém illustrations/__init__.py"
+    },
+    {
+      "source": "layer_illustrations",
+      "target": "illustrations_mermaid_engine_py",
+      "kind": "contains",
+      "note": "illustrations contém illustrations/mermaid_engine.py"
+    },
+    {
+      "source": "layer_illustrations",
+      "target": "illustrations_mira_engine_py",
+      "kind": "contains",
+      "note": "illustrations contém illustrations/mira_engine.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_adversarial_reviewer_py",
+      "kind": "contains",
+      "note": "mci contém mci/adversarial_reviewer.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_blackboard_py",
+      "kind": "contains",
+      "note": "mci contém mci/blackboard.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_confidence_calibrator_py",
+      "kind": "contains",
+      "note": "mci contém mci/confidence_calibrator.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_evidence_graph_py",
+      "kind": "contains",
+      "note": "mci contém mci/evidence_graph.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_experiment_designer_py",
+      "kind": "contains",
+      "note": "mci contém mci/experiment_designer.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_hypothesis_engine_py",
+      "kind": "contains",
+      "note": "mci contém mci/hypothesis_engine.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_init_py",
+      "kind": "contains",
+      "note": "mci contém mci/__init__.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_mcp_server_py",
+      "kind": "contains",
+      "note": "mci contém mci/mcp_server.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_metabus_py",
+      "kind": "contains",
+      "note": "mci contém mci/metabus.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_orchestration_py",
+      "kind": "contains",
+      "note": "mci contém mci/orchestration.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_reflexion_py",
+      "kind": "contains",
+      "note": "mci contém mci/reflexion.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_scientific_reporter_py",
+      "kind": "contains",
+      "note": "mci contém mci/scientific_reporter.py"
+    },
+    {
+      "source": "layer_mci",
+      "target": "mci_statistical_validator_py",
+      "kind": "contains",
+      "note": "mci contém mci/statistical_validator.py"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "marceloclaro_agent_loader_py",
+      "kind": "contains",
+      "note": "orchestration contém marceloclaro/agent_loader.py"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "marceloclaro_catalog_loader_py",
+      "kind": "contains",
+      "note": "orchestration contém marceloclaro/catalog_loader.py"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "marceloclaro_cli_py",
+      "kind": "contains",
+      "note": "orchestration contém marceloclaro/cli.py"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "marceloclaro_ecosystem_map_py",
+      "kind": "contains",
+      "note": "orchestration contém marceloclaro/ecosystem_map.py"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "marceloclaro_init_py",
+      "kind": "contains",
+      "note": "orchestration contém marceloclaro/__init__.py"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "marceloclaro_inspiration_audit_py",
+      "kind": "contains",
+      "note": "orchestration contém marceloclaro/inspiration_audit.py"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "contains",
+      "note": "orchestration contém marceloclaro/orchestrator.py"
+    },
+    {
+      "source": "layer_publishing",
+      "target": "publishing_cover_designer_py",
+      "kind": "contains",
+      "note": "publishing contém publishing/cover_designer.py"
+    },
+    {
+      "source": "layer_publishing",
+      "target": "publishing_init_py",
+      "kind": "contains",
+      "note": "publishing contém publishing/__init__.py"
+    },
+    {
+      "source": "layer_publishing",
+      "target": "publishing_production_py",
+      "kind": "contains",
+      "note": "publishing contém publishing/production.py"
+    },
+    {
+      "source": "layer_reasoning",
+      "target": "reasoning_engines_py",
+      "kind": "contains",
+      "note": "reasoning contém reasoning/engines.py"
+    },
+    {
+      "source": "layer_reasoning",
+      "target": "reasoning_init_py",
+      "kind": "contains",
+      "note": "reasoning contém reasoning/__init__.py"
+    },
+    {
+      "source": "layer_reasoning",
+      "target": "reasoning_quantum_py",
+      "kind": "contains",
+      "note": "reasoning contém reasoning/quantum.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_downloader_py",
+      "kind": "contains",
+      "note": "research contém research/downloader.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_fichamento_py",
+      "kind": "contains",
+      "note": "research contém research/fichamento.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_figure_hunter_py",
+      "kind": "contains",
+      "note": "research contém research/figure_hunter.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_hub_py",
+      "kind": "contains",
+      "note": "research contém research/hub.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_init_py",
+      "kind": "contains",
+      "note": "research contém research/__init__.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_llm_client_py",
+      "kind": "contains",
+      "note": "research contém research/llm_client.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_osint_py",
+      "kind": "contains",
+      "note": "research contém research/osint.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_pdf2md_py",
+      "kind": "contains",
+      "note": "research contém research/pdf2md.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_pipelines_analyze_research_batch_py",
+      "kind": "contains",
+      "note": "research contém research/pipelines/analyze_research_batch.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_pipelines_run_research_batch_py",
+      "kind": "contains",
+      "note": "research contém research/pipelines/run_research_batch.py"
+    },
+    {
+      "source": "layer_research",
+      "target": "research_searchers_py",
+      "kind": "contains",
+      "note": "research contém research/searchers.py"
+    },
+    {
+      "source": "layer_schemas",
+      "target": "schemas_ethical_assessment_schema_json",
+      "kind": "contains",
+      "note": "schemas contém schemas/ethical_assessment.schema.json"
+    },
+    {
+      "source": "layer_schemas",
+      "target": "schemas_optimal_question_schema_json",
+      "kind": "contains",
+      "note": "schemas contém schemas/optimal_question.schema.json"
+    },
+    {
+      "source": "layer_schemas",
+      "target": "schemas_scientific_claim_schema_json",
+      "kind": "contains",
+      "note": "schemas contém schemas/scientific_claim.schema.json"
+    },
+    {
+      "source": "layer_schemas",
+      "target": "schemas_vector_execution_decision_schema_json",
+      "kind": "contains",
+      "note": "schemas contém schemas/vector_execution_decision.schema.json"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_egs_alignment_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/egs/alignment.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_egs_explainability_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/egs/explainability.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_egs_governance_analyzer_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/egs/governance_analyzer.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_egs_init_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/egs/__init__.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_egs_principle_engine_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/egs/principle_engine.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_egs_stress_test_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/egs/stress_test.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_oqs_candidate_generator_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/oqs/candidate_generator.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_oqs_init_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/oqs/__init__.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_oqs_intake_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/oqs/intake.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_oqs_scoring_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/oqs/scoring.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_oqs_selector_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/oqs/selector.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_oqs_uncertainty_scanner_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/oqs/uncertainty_scanner.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_pipeline_init_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/pipeline/__init__.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_pipeline_scientific_governance_pipeline_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/pipeline/scientific_governance_pipeline.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_vsee_executor_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/vsee/executor.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_vsee_fallback_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/vsee/fallback.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_vsee_init_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/vsee/__init__.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_vsee_policy_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/vsee/policy.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_vsee_router_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/vsee/router.py"
+    },
+    {
+      "source": "layer_scientific_governance",
+      "target": "mci_vsee_telemetry_py",
+      "kind": "contains",
+      "note": "scientific_governance contém mci/vsee/telemetry.py"
+    },
+    {
+      "source": "layer_sdd_tdd",
+      "target": "sdd_init_py",
+      "kind": "contains",
+      "note": "sdd_tdd contém sdd/__init__.py"
+    },
+    {
+      "source": "layer_sdd_tdd",
+      "target": "sdd_spec_engine_py",
+      "kind": "contains",
+      "note": "sdd_tdd contém sdd/spec_engine.py"
+    },
+    {
+      "source": "layer_sdd_tdd",
+      "target": "sdd_tdd_runner_py",
+      "kind": "contains",
+      "note": "sdd_tdd contém sdd/tdd_runner.py"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_001_metabus_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-001-metabus.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_002_blackboard_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-002-blackboard.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_003_reflexion_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-003-reflexion.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_004_transformer_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-004-transformer.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_005_orchestrator_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-005-orchestrator.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_006_agents_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-006-agents.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_007_trust_engine_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-007-trust-engine.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_008_token_economy_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-008-token-economy.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_009_scanners_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-009-scanners.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_010_maswos_academic_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-010-maswos-academic.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_011_reasoning_quantum_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-011-reasoning-quantum.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_012_evolution_cycles_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-012-evolution-cycles.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_013_cli_integrations_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-013-cli-integrations.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_014_gametheory_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-014-gametheory.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_014_livro_ecosystem_core_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-014-livro-ecosystem-core.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_015_mirofish_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-015-mirofish.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_016_publishing_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-016-publishing.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_017_research_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-017-research.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_018_illustrations_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-018-illustrations.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_019_cover_designer_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-019-cover-designer.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_020_deep_diagnose_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-020-deep-diagnose.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_021_superhuman_pipeline_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-021-superhuman-pipeline.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_022_diagnostic_pipeline_refined_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-022-diagnostic-pipeline-refined.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_023_inspiration_audit_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-023-inspiration-audit.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_024_research_batch_analysis_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-024-research-batch-analysis.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_025_scientific_governance_tdd_hardening_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-025-scientific-governance-tdd-hardening.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_026_mira_command_surface_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-026-mira-command-surface.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_027_scientific_reporter_hardening_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-027-scientific-reporter-hardening.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_028_executive_changelog_artifact_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-028-executive-changelog-artifact.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_029_ecosystem_full_map_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-029-ecosystem-full-map.md"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_advanced_subsystems_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_advanced_subsystems.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_analyze_research_batch_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_analyze_research_batch.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_cover_designer_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_cover_designer.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_deep_diagnose_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_deep_diagnose.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_ecosystem_diagnose_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_ecosystem_diagnose.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_ecosystem_full_map_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_ecosystem_full_map.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_ecosystem_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_ecosystem.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_executive_changelog_artifact_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_executive_changelog_artifact.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_illustrations_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_illustrations.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_inspiration_audit_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_inspiration_audit.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_llm_client_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_llm_client.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_mira_catalog_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_mira_catalog.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_mirofish_gametheory_publishing_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_mirofish_gametheory_publishing.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_research_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_research.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_run_research_batch_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_run_research_batch.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_scientific_governance_contracts_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_scientific_governance_contracts.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_scientific_governance_pipeline_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_scientific_governance_pipeline.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_scientific_reporter_hardening_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_scientific_reporter_hardening.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_scientific_superhuman_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_scientific_superhuman.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_sdd_tdd_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_sdd_tdd.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_transformer_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_transformer.py"
+    },
+    {
+      "source": "layer_transformer",
+      "target": "transformer_attention_py",
+      "kind": "contains",
+      "note": "transformer contém transformer/attention.py"
+    },
+    {
+      "source": "layer_transformer",
+      "target": "transformer_embedder_py",
+      "kind": "contains",
+      "note": "transformer contém transformer/embedder.py"
+    },
+    {
+      "source": "layer_transformer",
+      "target": "transformer_init_py",
+      "kind": "contains",
+      "note": "transformer contém transformer/__init__.py"
+    },
+    {
+      "source": "layer_transformer",
+      "target": "transformer_memory_py",
+      "kind": "contains",
+      "note": "transformer contém transformer/memory.py"
+    },
+    {
+      "source": "layer_transformer",
+      "target": "transformer_pipeline_py",
+      "kind": "contains",
+      "note": "transformer contém transformer/pipeline.py"
+    },
+    {
+      "source": "layer_trust_economy",
+      "target": "economy_init_py",
+      "kind": "contains",
+      "note": "trust_economy contém economy/__init__.py"
+    },
+    {
+      "source": "layer_trust_economy",
+      "target": "economy_token_economy_py",
+      "kind": "contains",
+      "note": "trust_economy contém economy/token_economy.py"
+    },
+    {
+      "source": "layer_trust_economy",
+      "target": "trust_init_py",
+      "kind": "contains",
+      "note": "trust_economy contém trust/__init__.py"
+    },
+    {
+      "source": "layer_trust_economy",
+      "target": "trust_trust_engine_py",
+      "kind": "contains",
+      "note": "trust_economy contém trust/trust_engine.py"
+    },
+    {
+      "source": "actor_user_cli",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "control_flow",
+      "note": "comandos chegam ao orquestrador"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "academic_maswos_py",
+      "kind": "control_flow",
+      "note": "pipeline acadêmico"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "economy_token_economy_py",
+      "kind": "control_flow",
+      "note": "staking/slashing"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "illustrations_mira_engine_py",
+      "kind": "control_flow",
+      "note": "ilustrações/metáforas"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "mci_blackboard_py",
+      "kind": "control_flow",
+      "note": "delegação A2A via Blackboard"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "mci_metabus_py",
+      "kind": "control_flow",
+      "note": "registra reflexões e eventos"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "mci_pipeline_scientific_governance_pipeline_py",
+      "kind": "control_flow",
+      "note": "pipeline científico com governança"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "publishing_production_py",
+      "kind": "control_flow",
+      "note": "produção científica"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "reasoning_engines_py",
+      "kind": "control_flow",
+      "note": "raciocínio formal"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "research_hub_py",
+      "kind": "control_flow",
+      "note": "pipeline de pesquisa"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "scanners_pipeline_py",
+      "kind": "control_flow",
+      "note": "diagnóstico do ecossistema"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "sdd_spec_engine_py",
+      "kind": "control_flow",
+      "note": "cria/consulta specs"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "sdd_tdd_runner_py",
+      "kind": "control_flow",
+      "note": "executa ciclo TDD"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "trust_trust_engine_py",
+      "kind": "control_flow",
+      "note": "gate comportamental"
+    },
+    {
+      "source": "mci_pipeline_scientific_governance_pipeline_py",
+      "target": "mci_egs_init_py",
+      "kind": "control_flow",
+      "note": "etapa EGS"
+    },
+    {
+      "source": "mci_pipeline_scientific_governance_pipeline_py",
+      "target": "mci_oqs_init_py",
+      "kind": "control_flow",
+      "note": "etapa OQS"
+    },
+    {
+      "source": "mci_pipeline_scientific_governance_pipeline_py",
+      "target": "mci_orchestration_py",
+      "kind": "control_flow",
+      "note": "núcleo científico"
+    },
+    {
+      "source": "mci_pipeline_scientific_governance_pipeline_py",
+      "target": "mci_vsee_router_py",
+      "kind": "control_flow",
+      "note": "etapa VSEE"
+    },
+    {
+      "source": "research_pipelines_run_research_batch_py",
+      "target": "mci_egs_init_py",
+      "kind": "control_flow",
+      "note": "runner invoca EGS"
+    },
+    {
+      "source": "research_pipelines_run_research_batch_py",
+      "target": "mci_oqs_init_py",
+      "kind": "control_flow",
+      "note": "runner invoca OQS"
+    },
+    {
+      "source": "research_pipelines_run_research_batch_py",
+      "target": "mci_orchestration_py",
+      "kind": "control_flow",
+      "note": "runner invoca núcleo científico"
+    },
+    {
+      "source": "research_pipelines_run_research_batch_py",
+      "target": "mci_vsee_router_py",
+      "kind": "control_flow",
+      "note": "runner invoca VSEE"
+    },
+    {
+      "source": "mci_orchestration_py",
+      "target": "mci_evidence_graph_py",
+      "kind": "data_flow",
+      "note": "persistência epistemológica"
+    },
+    {
+      "source": "research_pipelines_analyze_research_batch_py",
+      "target": "research_pipelines_run_research_batch_py",
+      "kind": "data_flow",
+      "note": "análise do raw/summary do runner"
+    },
+    {
+      "source": "specs_SPEC_017_research_md",
+      "target": "specs_SPEC_010_maswos_academic_md",
+      "kind": "depends_on",
+      "note": "SPEC-010"
+    },
+    {
+      "source": "specs_SPEC_017_research_md",
+      "target": "specs_SPEC_016_publishing_md",
+      "kind": "depends_on",
+      "note": "SPEC-016"
+    },
+    {
+      "source": "specs_SPEC_018_illustrations_md",
+      "target": "specs_SPEC_016_publishing_md",
+      "kind": "depends_on",
+      "note": "SPEC-016"
+    },
+    {
+      "source": "specs_SPEC_018_illustrations_md",
+      "target": "specs_SPEC_017_research_md",
+      "kind": "depends_on",
+      "note": "SPEC-017"
+    },
+    {
+      "source": "specs_SPEC_019_cover_designer_md",
+      "target": "specs_SPEC_016_publishing_md",
+      "kind": "depends_on",
+      "note": "SPEC-016"
+    },
+    {
+      "source": "specs_SPEC_020_deep_diagnose_md",
+      "target": "specs_SPEC_009_scanners_md",
+      "kind": "depends_on",
+      "note": "SPEC-009"
+    },
+    {
+      "source": "specs_SPEC_020_deep_diagnose_md",
+      "target": "specs_SPEC_012_evolution_cycles_md",
+      "kind": "depends_on",
+      "note": "SPEC-012"
+    },
+    {
+      "source": "specs_SPEC_022_diagnostic_pipeline_refined_md",
+      "target": "specs_SPEC_009_scanners_md",
+      "kind": "depends_on",
+      "note": "SPEC-009"
+    },
+    {
+      "source": "specs_SPEC_022_diagnostic_pipeline_refined_md",
+      "target": "specs_SPEC_020_deep_diagnose_md",
+      "kind": "depends_on",
+      "note": "SPEC-020"
+    },
+    {
+      "source": "specs_SPEC_023_inspiration_audit_md",
+      "target": "specs_SPEC_022_diagnostic_pipeline_refined_md",
+      "kind": "depends_on",
+      "note": "SPEC-022"
+    },
+    {
+      "source": "specs_SPEC_023_inspiration_audit_md",
+      "target": "specs_SPEC_024_research_batch_analysis_md",
+      "kind": "depends_on",
+      "note": "SPEC-024"
+    },
+    {
+      "source": "specs_SPEC_024_research_batch_analysis_md",
+      "target": "specs_SPEC_017_research_md",
+      "kind": "depends_on",
+      "note": "SPEC-017"
+    },
+    {
+      "source": "specs_SPEC_024_research_batch_analysis_md",
+      "target": "specs_SPEC_023_inspiration_audit_md",
+      "kind": "depends_on",
+      "note": "SPEC-023"
+    },
+    {
+      "source": "specs_SPEC_025_scientific_governance_tdd_hardening_md",
+      "target": "specs_SPEC_023_inspiration_audit_md",
+      "kind": "depends_on",
+      "note": "SPEC-023"
+    },
+    {
+      "source": "specs_SPEC_026_mira_command_surface_md",
+      "target": "specs_SPEC_018_illustrations_md",
+      "kind": "depends_on",
+      "note": "SPEC-018"
+    },
+    {
+      "source": "specs_SPEC_026_mira_command_surface_md",
+      "target": "specs_SPEC_023_inspiration_audit_md",
+      "kind": "depends_on",
+      "note": "SPEC-023"
+    },
+    {
+      "source": "specs_SPEC_028_executive_changelog_artifact_md",
+      "target": "specs_SPEC_022_diagnostic_pipeline_refined_md",
+      "kind": "depends_on",
+      "note": "SPEC-022"
+    },
+    {
+      "source": "specs_SPEC_028_executive_changelog_artifact_md",
+      "target": "specs_SPEC_023_inspiration_audit_md",
+      "kind": "depends_on",
+      "note": "SPEC-023"
+    },
+    {
+      "source": "specs_SPEC_028_executive_changelog_artifact_md",
+      "target": "specs_SPEC_024_research_batch_analysis_md",
+      "kind": "depends_on",
+      "note": "SPEC-024"
+    },
+    {
+      "source": "specs_SPEC_028_executive_changelog_artifact_md",
+      "target": "specs_SPEC_025_scientific_governance_tdd_hardening_md",
+      "kind": "depends_on",
+      "note": "SPEC-025"
+    },
+    {
+      "source": "specs_SPEC_028_executive_changelog_artifact_md",
+      "target": "specs_SPEC_026_mira_command_surface_md",
+      "kind": "depends_on",
+      "note": "SPEC-026"
+    },
+    {
+      "source": "specs_SPEC_028_executive_changelog_artifact_md",
+      "target": "specs_SPEC_027_scientific_reporter_hardening_md",
+      "kind": "depends_on",
+      "note": "SPEC-027"
+    },
+    {
+      "source": "specs_SPEC_029_ecosystem_full_map_md",
+      "target": "specs_SPEC_023_inspiration_audit_md",
+      "kind": "depends_on",
+      "note": "SPEC-023"
+    },
+    {
+      "source": "specs_SPEC_029_ecosystem_full_map_md",
+      "target": "specs_SPEC_028_executive_changelog_artifact_md",
+      "kind": "depends_on",
+      "note": "SPEC-028"
+    },
+    {
+      "source": "specs_SPEC_007_trust_engine_md",
+      "target": "trust_trust_engine_py",
+      "kind": "documents",
+      "note": "trust/trust_engine.py"
+    },
+    {
+      "source": "specs_SPEC_008_token_economy_md",
+      "target": "economy_token_economy_py",
+      "kind": "documents",
+      "note": "economy/token_economy.py"
+    },
+    {
+      "source": "specs_SPEC_009_scanners_md",
+      "target": "scanners_pipeline_py",
+      "kind": "documents",
+      "note": "scanners/pipeline.py"
+    },
+    {
+      "source": "specs_SPEC_010_maswos_academic_md",
+      "target": "academic_maswos_py",
+      "kind": "documents",
+      "note": "academic/maswos.py"
+    },
+    {
+      "source": "specs_SPEC_018_illustrations_md",
+      "target": "illustrations_graphify_engine_py",
+      "kind": "documents",
+      "note": "illustrations/graphify_engine.py"
+    },
+    {
+      "source": "specs_SPEC_018_illustrations_md",
+      "target": "illustrations_mermaid_engine_py",
+      "kind": "documents",
+      "note": "illustrations/mermaid_engine.py"
+    },
+    {
+      "source": "specs_SPEC_018_illustrations_md",
+      "target": "illustrations_mira_engine_py",
+      "kind": "documents",
+      "note": "illustrations/mira_engine.py"
+    },
+    {
+      "source": "specs_SPEC_018_illustrations_md",
+      "target": "research_figure_hunter_py",
+      "kind": "documents",
+      "note": "research/figure_hunter.py"
+    },
+    {
+      "source": "specs_SPEC_019_cover_designer_md",
+      "target": "publishing_cover_designer_py",
+      "kind": "documents",
+      "note": "publishing/cover_designer.py"
+    },
+    {
+      "source": "academic_init_py",
+      "target": "academic_maswos_py",
+      "kind": "imports",
+      "note": "academic.maswos"
+    },
+    {
+      "source": "academic_maswos_py",
+      "target": "academic_auto_score_qualis_py",
+      "kind": "imports",
+      "note": "academic.auto_score_qualis"
+    },
+    {
+      "source": "benchmarks_scientific_reasoning_causal_benchmark_py",
+      "target": "benchmarks_scientific_reasoning_runner_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.runner"
+    },
+    {
+      "source": "economy_init_py",
+      "target": "economy_token_economy_py",
+      "kind": "imports",
+      "note": "economy.token_economy"
+    },
+    {
+      "source": "marceloclaro_cli_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "academic_init_py",
+      "kind": "imports",
+      "note": "academic"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "economy_init_py",
+      "kind": "imports",
+      "note": "economy"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "gametheory_init_py",
+      "kind": "imports",
+      "note": "gametheory"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "illustrations_init_py",
+      "kind": "imports",
+      "note": "illustrations"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "marceloclaro_agent_loader_py",
+      "kind": "imports",
+      "note": "marceloclaro.agent_loader"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "marceloclaro_catalog_loader_py",
+      "kind": "imports",
+      "note": "marceloclaro.catalog_loader"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "marceloclaro_inspiration_audit_py",
+      "kind": "imports",
+      "note": "marceloclaro.inspiration_audit"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "mci_blackboard_py",
+      "kind": "imports",
+      "note": "mci.blackboard"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "mci_init_py",
+      "kind": "imports",
+      "note": "mci"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "mci_reflexion_py",
+      "kind": "imports",
+      "note": "mci.reflexion"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "mirofish_init_py",
+      "kind": "imports",
+      "note": "mirofish"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "publishing_init_py",
+      "kind": "imports",
+      "note": "publishing"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "reasoning_init_py",
+      "kind": "imports",
+      "note": "reasoning"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "research_figure_hunter_py",
+      "kind": "imports",
+      "note": "research.figure_hunter"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "research_init_py",
+      "kind": "imports",
+      "note": "research"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "scanners_init_py",
+      "kind": "imports",
+      "note": "scanners"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "sdd_spec_engine_py",
+      "kind": "imports",
+      "note": "sdd.spec_engine"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "sdd_tdd_runner_py",
+      "kind": "imports",
+      "note": "sdd.tdd_runner"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "transformer_attention_py",
+      "kind": "imports",
+      "note": "transformer.attention"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "transformer_memory_py",
+      "kind": "imports",
+      "note": "transformer.memory"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "transformer_pipeline_py",
+      "kind": "imports",
+      "note": "transformer.pipeline"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "trust_init_py",
+      "kind": "imports",
+      "note": "trust"
+    },
+    {
+      "source": "mci_mcp_server_py",
+      "target": "mci_blackboard_py",
+      "kind": "imports",
+      "note": "mci.blackboard"
+    },
+    {
+      "source": "mci_mcp_server_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "mci_pipeline_scientific_governance_pipeline_py",
+      "target": "mci_egs_init_py",
+      "kind": "imports",
+      "note": "mci.egs"
+    },
+    {
+      "source": "mci_pipeline_scientific_governance_pipeline_py",
+      "target": "mci_oqs_init_py",
+      "kind": "imports",
+      "note": "mci.oqs"
+    },
+    {
+      "source": "mci_pipeline_scientific_governance_pipeline_py",
+      "target": "mci_orchestration_py",
+      "kind": "imports",
+      "note": "mci.orchestration"
+    },
+    {
+      "source": "mci_pipeline_scientific_governance_pipeline_py",
+      "target": "mci_vsee_init_py",
+      "kind": "imports",
+      "note": "mci.vsee"
+    },
+    {
+      "source": "mirofish_init_py",
+      "target": "mirofish_swarm_py",
+      "kind": "imports",
+      "note": "mirofish.swarm"
+    },
+    {
+      "source": "mirofish_init_py",
+      "target": "mirofish_validator_py",
+      "kind": "imports",
+      "note": "mirofish.validator"
+    },
+    {
+      "source": "mirofish_swarm_py",
+      "target": "mirofish_graph_memory_py",
+      "kind": "imports",
+      "note": "mirofish.graph_memory"
+    },
+    {
+      "source": "mirofish_validator_py",
+      "target": "gametheory_init_py",
+      "kind": "imports",
+      "note": "gametheory"
+    },
+    {
+      "source": "mirofish_validator_py",
+      "target": "mirofish_swarm_py",
+      "kind": "imports",
+      "note": "mirofish.swarm"
+    },
+    {
+      "source": "publishing_init_py",
+      "target": "publishing_production_py",
+      "kind": "imports",
+      "note": "publishing.production"
+    },
+    {
+      "source": "reasoning_init_py",
+      "target": "reasoning_engines_py",
+      "kind": "imports",
+      "note": "reasoning.engines"
+    },
+    {
+      "source": "reasoning_init_py",
+      "target": "reasoning_quantum_py",
+      "kind": "imports",
+      "note": "reasoning.quantum"
+    },
+    {
+      "source": "research_pipelines_run_research_batch_py",
+      "target": "mci_egs_init_py",
+      "kind": "imports",
+      "note": "mci.egs"
+    },
+    {
+      "source": "research_pipelines_run_research_batch_py",
+      "target": "mci_oqs_init_py",
+      "kind": "imports",
+      "note": "mci.oqs"
+    },
+    {
+      "source": "research_pipelines_run_research_batch_py",
+      "target": "mci_orchestration_py",
+      "kind": "imports",
+      "note": "mci.orchestration"
+    },
+    {
+      "source": "research_pipelines_run_research_batch_py",
+      "target": "mci_vsee_init_py",
+      "kind": "imports",
+      "note": "mci.vsee"
+    },
+    {
+      "source": "scanners_evolutionary_pipeline_py",
+      "target": "scanners_capability_composer_py",
+      "kind": "imports",
+      "note": "scanners.capability_composer"
+    },
+    {
+      "source": "scanners_evolutionary_pipeline_py",
+      "target": "scanners_cross_validation_engine_py",
+      "kind": "imports",
+      "note": "scanners.cross_validation_engine"
+    },
+    {
+      "source": "scanners_evolutionary_pipeline_py",
+      "target": "scanners_noological_scanner_py",
+      "kind": "imports",
+      "note": "scanners.noological_scanner"
+    },
+    {
+      "source": "scanners_evolutionary_pipeline_py",
+      "target": "scanners_optimal_question_scanner_py",
+      "kind": "imports",
+      "note": "scanners.optimal_question_scanner"
+    },
+    {
+      "source": "scanners_evolutionary_pipeline_py",
+      "target": "scanners_teleological_scanner_py",
+      "kind": "imports",
+      "note": "scanners.teleological_scanner"
+    },
+    {
+      "source": "scanners_init_py",
+      "target": "scanners_pipeline_py",
+      "kind": "imports",
+      "note": "scanners.pipeline"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_epistemic_prioritizer_py",
+      "kind": "imports",
+      "note": "scanners.epistemic_prioritizer"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_evolutionary_pipeline_py",
+      "kind": "imports",
+      "note": "scanners.evolutionary_pipeline"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_noological_scanner_py",
+      "kind": "imports",
+      "note": "scanners.noological_scanner"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_potentiality_scanner_py",
+      "kind": "imports",
+      "note": "scanners.potentiality_scanner"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_reversa_scanner_py",
+      "kind": "imports",
+      "note": "scanners.reversa_scanner"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_social_impact_scanner_py",
+      "kind": "imports",
+      "note": "scanners.social_impact_scanner"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_successor_generator_py",
+      "kind": "imports",
+      "note": "scanners.successor_generator"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_teleological_scanner_py",
+      "kind": "imports",
+      "note": "scanners.teleological_scanner"
+    },
+    {
+      "source": "sdd_init_py",
+      "target": "sdd_spec_engine_py",
+      "kind": "imports",
+      "note": "sdd.spec_engine"
+    },
+    {
+      "source": "sdd_init_py",
+      "target": "sdd_tdd_runner_py",
+      "kind": "imports",
+      "note": "sdd.tdd_runner"
+    },
+    {
+      "source": "sdd_tdd_runner_py",
+      "target": "sdd_spec_engine_py",
+      "kind": "imports",
+      "note": "sdd.spec_engine"
+    },
+    {
+      "source": "tests_test_advanced_subsystems_py",
+      "target": "academic_init_py",
+      "kind": "imports",
+      "note": "academic"
+    },
+    {
+      "source": "tests_test_advanced_subsystems_py",
+      "target": "economy_init_py",
+      "kind": "imports",
+      "note": "economy"
+    },
+    {
+      "source": "tests_test_advanced_subsystems_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_advanced_subsystems_py",
+      "target": "mci_blackboard_py",
+      "kind": "imports",
+      "note": "mci.blackboard"
+    },
+    {
+      "source": "tests_test_advanced_subsystems_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "tests_test_advanced_subsystems_py",
+      "target": "reasoning_init_py",
+      "kind": "imports",
+      "note": "reasoning"
+    },
+    {
+      "source": "tests_test_advanced_subsystems_py",
+      "target": "scanners_init_py",
+      "kind": "imports",
+      "note": "scanners"
+    },
+    {
+      "source": "tests_test_advanced_subsystems_py",
+      "target": "trust_init_py",
+      "kind": "imports",
+      "note": "trust"
+    },
+    {
+      "source": "tests_test_analyze_research_batch_py",
+      "target": "research_pipelines_analyze_research_batch_py",
+      "kind": "imports",
+      "note": "research.pipelines.analyze_research_batch"
+    },
+    {
+      "source": "tests_test_cover_designer_py",
+      "target": "publishing_cover_designer_py",
+      "kind": "imports",
+      "note": "publishing.cover_designer"
+    },
+    {
+      "source": "tests_test_cover_designer_py",
+      "target": "publishing_production_py",
+      "kind": "imports",
+      "note": "publishing.production"
+    },
+    {
+      "source": "tests_test_deep_diagnose_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_deep_diagnose_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "tests_test_deep_diagnose_py",
+      "target": "scanners_epistemic_prioritizer_py",
+      "kind": "imports",
+      "note": "scanners.epistemic_prioritizer"
+    },
+    {
+      "source": "tests_test_deep_diagnose_py",
+      "target": "scanners_pipeline_py",
+      "kind": "imports",
+      "note": "scanners.pipeline"
+    },
+    {
+      "source": "tests_test_deep_diagnose_py",
+      "target": "scanners_successor_generator_py",
+      "kind": "imports",
+      "note": "scanners.successor_generator"
+    },
+    {
+      "source": "tests_test_ecosystem_diagnose_py",
+      "target": "scanners_init_py",
+      "kind": "imports",
+      "note": "scanners"
+    },
+    {
+      "source": "tests_test_ecosystem_full_map_py",
+      "target": "marceloclaro_ecosystem_map_py",
+      "kind": "imports",
+      "note": "marceloclaro.ecosystem_map"
+    },
+    {
+      "source": "tests_test_ecosystem_py",
+      "target": "marceloclaro_agent_loader_py",
+      "kind": "imports",
+      "note": "marceloclaro.agent_loader"
+    },
+    {
+      "source": "tests_test_ecosystem_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_ecosystem_py",
+      "target": "mci_blackboard_py",
+      "kind": "imports",
+      "note": "mci.blackboard"
+    },
+    {
+      "source": "tests_test_ecosystem_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "tests_test_ecosystem_py",
+      "target": "mci_reflexion_py",
+      "kind": "imports",
+      "note": "mci.reflexion"
+    },
+    {
+      "source": "tests_test_illustrations_py",
+      "target": "illustrations_init_py",
+      "kind": "imports",
+      "note": "illustrations"
+    },
+    {
+      "source": "tests_test_illustrations_py",
+      "target": "illustrations_mermaid_engine_py",
+      "kind": "imports",
+      "note": "illustrations.mermaid_engine"
+    },
+    {
+      "source": "tests_test_illustrations_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_illustrations_py",
+      "target": "research_figure_hunter_py",
+      "kind": "imports",
+      "note": "research.figure_hunter"
+    },
+    {
+      "source": "tests_test_inspiration_audit_py",
+      "target": "marceloclaro_inspiration_audit_py",
+      "kind": "imports",
+      "note": "marceloclaro.inspiration_audit"
+    },
+    {
+      "source": "tests_test_inspiration_audit_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_inspiration_audit_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "tests_test_llm_client_py",
+      "target": "research_fichamento_py",
+      "kind": "imports",
+      "note": "research.fichamento"
+    },
+    {
+      "source": "tests_test_llm_client_py",
+      "target": "research_llm_client_py",
+      "kind": "imports",
+      "note": "research.llm_client"
+    },
+    {
+      "source": "tests_test_llm_client_py",
+      "target": "research_searchers_py",
+      "kind": "imports",
+      "note": "research.searchers"
+    },
+    {
+      "source": "tests_test_mira_catalog_py",
+      "target": "marceloclaro_catalog_loader_py",
+      "kind": "imports",
+      "note": "marceloclaro.catalog_loader"
+    },
+    {
+      "source": "tests_test_mirofish_gametheory_publishing_py",
+      "target": "gametheory_init_py",
+      "kind": "imports",
+      "note": "gametheory"
+    },
+    {
+      "source": "tests_test_mirofish_gametheory_publishing_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_mirofish_gametheory_publishing_py",
+      "target": "mirofish_init_py",
+      "kind": "imports",
+      "note": "mirofish"
+    },
+    {
+      "source": "tests_test_mirofish_gametheory_publishing_py",
+      "target": "publishing_init_py",
+      "kind": "imports",
+      "note": "publishing"
+    },
+    {
+      "source": "tests_test_research_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_research_py",
+      "target": "research_downloader_py",
+      "kind": "imports",
+      "note": "research.downloader"
+    },
+    {
+      "source": "tests_test_research_py",
+      "target": "research_fichamento_py",
+      "kind": "imports",
+      "note": "research.fichamento"
+    },
+    {
+      "source": "tests_test_research_py",
+      "target": "research_hub_py",
+      "kind": "imports",
+      "note": "research.hub"
+    },
+    {
+      "source": "tests_test_research_py",
+      "target": "research_pdf2md_py",
+      "kind": "imports",
+      "note": "research.pdf2md"
+    },
+    {
+      "source": "tests_test_research_py",
+      "target": "research_searchers_py",
+      "kind": "imports",
+      "note": "research.searchers"
+    },
+    {
+      "source": "tests_test_run_research_batch_py",
+      "target": "research_pipelines_run_research_batch_py",
+      "kind": "imports",
+      "note": "research.pipelines.run_research_batch"
+    },
+    {
+      "source": "tests_test_scientific_governance_pipeline_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "benchmarks_scientific_reasoning_bias_detection_benchmark_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.bias_detection_benchmark"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "benchmarks_scientific_reasoning_causal_benchmark_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.causal_benchmark"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "benchmarks_scientific_reasoning_experimental_design_benchmark_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.experimental_design_benchmark"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "benchmarks_scientific_reasoning_power_analysis_benchmark_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.power_analysis_benchmark"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "benchmarks_scientific_reasoning_runner_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.runner"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "benchmarks_scientific_reasoning_statistical_benchmark_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.statistical_benchmark"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_adversarial_reviewer_py",
+      "kind": "imports",
+      "note": "mci.adversarial_reviewer"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_confidence_calibrator_py",
+      "kind": "imports",
+      "note": "mci.confidence_calibrator"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_egs_init_py",
+      "kind": "imports",
+      "note": "mci.egs"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_evidence_graph_py",
+      "kind": "imports",
+      "note": "mci.evidence_graph"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_experiment_designer_py",
+      "kind": "imports",
+      "note": "mci.experiment_designer"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_hypothesis_engine_py",
+      "kind": "imports",
+      "note": "mci.hypothesis_engine"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_oqs_init_py",
+      "kind": "imports",
+      "note": "mci.oqs"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_orchestration_py",
+      "kind": "imports",
+      "note": "mci.orchestration"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_pipeline_scientific_governance_pipeline_py",
+      "kind": "imports",
+      "note": "mci.pipeline.scientific_governance_pipeline"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_scientific_reporter_py",
+      "kind": "imports",
+      "note": "mci.scientific_reporter"
+    },
+    {
+      "source": "tests_test_scientific_superhuman_py",
+      "target": "mci_statistical_validator_py",
+      "kind": "imports",
+      "note": "mci.statistical_validator"
+    },
+    {
+      "source": "tests_test_sdd_tdd_py",
+      "target": "marceloclaro_agent_loader_py",
+      "kind": "imports",
+      "note": "marceloclaro.agent_loader"
+    },
+    {
+      "source": "tests_test_sdd_tdd_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_sdd_tdd_py",
+      "target": "mci_blackboard_py",
+      "kind": "imports",
+      "note": "mci.blackboard"
+    },
+    {
+      "source": "tests_test_sdd_tdd_py",
+      "target": "sdd_spec_engine_py",
+      "kind": "imports",
+      "note": "sdd.spec_engine"
+    },
+    {
+      "source": "tests_test_sdd_tdd_py",
+      "target": "sdd_tdd_runner_py",
+      "kind": "imports",
+      "note": "sdd.tdd_runner"
+    },
+    {
+      "source": "tests_test_transformer_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_transformer_py",
+      "target": "mci_blackboard_py",
+      "kind": "imports",
+      "note": "mci.blackboard"
+    },
+    {
+      "source": "tests_test_transformer_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "tests_test_transformer_py",
+      "target": "transformer_attention_py",
+      "kind": "imports",
+      "note": "transformer.attention"
+    },
+    {
+      "source": "tests_test_transformer_py",
+      "target": "transformer_embedder_py",
+      "kind": "imports",
+      "note": "transformer.embedder"
+    },
+    {
+      "source": "tests_test_transformer_py",
+      "target": "transformer_memory_py",
+      "kind": "imports",
+      "note": "transformer.memory"
+    },
+    {
+      "source": "tests_test_transformer_py",
+      "target": "transformer_pipeline_py",
+      "kind": "imports",
+      "note": "transformer.pipeline"
+    },
+    {
+      "source": "trust_init_py",
+      "target": "trust_trust_engine_py",
+      "kind": "imports",
+      "note": "trust.trust_engine"
+    }
+  ]
+}
