@@ -97,7 +97,7 @@ INSPIRATION_CATALOG: List[InspirationSpec] = [
             "schemas/vector_execution_decision.schema.json",
             "schemas/ethical_assessment.schema.json",
         ],
-        notes="O plano existe conceitualmente, mas nem todas as camadas/fixtures propostas foram portadas.",
+        notes="O plano TDD está refletido em testes, fixtures determinísticos e contract tests dos schemas centrais.",
     ),
     InspirationSpec(
         item_id="research_run_batch",
@@ -127,7 +127,7 @@ INSPIRATION_CATALOG: List[InspirationSpec] = [
         optional_evidence_paths=[
             "research/results",
         ],
-        notes="Na árvore atual não há módulo equivalente ao analisador estatístico de batch.",
+        notes="O analisador estatístico de batch foi portado para o Core com scorecard de maturidade e comparação com baseline.",
     ),
     InspirationSpec(
         item_id="research_final_report_template",
@@ -143,7 +143,7 @@ INSPIRATION_CATALOG: List[InspirationSpec] = [
             "README.md",
             "tests/test_run_research_batch.py",
         ],
-        notes="O Core gera relatórios científicos e batch reports resumidos, mas não o relatório final unificado da inspiração.",
+        notes="O Core agora inclui template final integrado e gerador de relatório consolidado para a pipeline de research.",
     ),
     InspirationSpec(
         item_id="research_scenario_matrix",
@@ -198,7 +198,7 @@ INSPIRATION_CATALOG: List[InspirationSpec] = [
             "publishing/cover_designer.py",
             "README.md",
         ],
-        notes="As regras centrais foram portadas para o motor MIRA, mas a superfície completa de comandos/agentes do livro não existe no Core.",
+        notes="As regras centrais do MIRA e a superfície de comandos/agentes descrita no livro foram portadas para o catálogo do Core.",
     ),
 ]
 
