@@ -25,6 +25,7 @@ Este diretório consolida a rastreabilidade completa do ecossistema, combinando 
 | SPEC-025 | Hardening TDD do Scientific Governance Pipeline | `tests/test_scientific_governance_contracts.py` + `tests/fixtures/` |
 | SPEC-026 | Superfície de Comandos MIRA | `agents/catalog/mira-*.md` |
 | SPEC-027 | Hardening do ScientificReporter | `mci/scientific_reporter.py` |
+| SPEC-028 | Artefato Executivo Consolidado | `CHANGELOG_EXECUTIVO_2026-07-06.md` |
 
 ## Acervo Legado (`specs/legacy/`)
 
