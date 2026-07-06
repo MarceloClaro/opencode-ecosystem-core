@@ -65,7 +65,88 @@ class KnowledgeDimension:
     density: float = 0.0  # 0.0 = vazio, 1.0 = totalmente explorado
 
 
-# Dimensões predefinidas para escaneamento
+# ─── Dimensões do Ecossistema OpenCode Core (SPEC-022) ────────────────
+# Usadas quando domain="ecosystem"
+ECOSYSTEM_DIMENSIONS: dict[str, KnowledgeDimension] = {
+    "agentes": KnowledgeDimension(
+        name="Agentes do Ecossistema",
+        categories=["orchestrator", "coder", "researcher", "auditor",
+                     "academic_writer", "bernstein_orchestrator",
+                     "antigravity_orchestrator", "reversa_agents",
+                     "ws_agents", "agent_catalog"],
+        description="Agentes disponíveis para delegação de tarefas"
+    ),
+    "mci_core": KnowledgeDimension(
+        name="Middleware de Consciência Integral (MCI)",
+        categories=["metabus", "blackboard", "reflexion", "transformer",
+                     "context_manager", "memory_updater", "graph_builder",
+                     "mcp_server", "orchestration_pipeline"],
+        description="Núcleo metacognitivo — memória, contexto e orquestração"
+    ),
+    "scanners": KnowledgeDimension(
+        name="Scanners de Diagnóstico",
+        categories=["noological_scanner", "teleological_scanner",
+                     "potentiality_scanner", "evolutionary_pipeline",
+                     "social_impact_scanner", "reversa_scanner",
+                     "epistemic_prioritizer", "successor_generator",
+                     "cross_validation_engine", "capability_composer"],
+        description="Pipeline de diagnóstico, cobertura e evolução"
+    ),
+    "trust_economy": KnowledgeDimension(
+        name="Trust & Token Economy",
+        categories=["trust_engine", "token_economy", "staking_mechanism",
+                     "slashing_mechanism", "fee_market", "behavioral_gate",
+                     "outcome_tracker", "stake_pool"],
+        description="Governança econômica e reputacional do ecossistema"
+    ),
+    "razao_logica": KnowledgeDimension(
+        name="Motores de Raciocínio",
+        categories=["z3_solver", "sympy", "kanren", "critical_reasoner",
+                     "quantum_reasoning", "bayesian_inference",
+                     "dialectical_engine", "reasoning_engines"],
+        description="Raciocínio formal, simbólico e probabilístico"
+    ),
+    "evolucao": KnowledgeDimension(
+        name="Evolução e Ciclos",
+        categories=["evolution_registry", "cycles_manager",
+                     "reflection_ledger", "trajectory_mapper",
+                     "autoevolve_pipeline", "evolutionary_roadmap",
+                     "successor_generator"],
+        description="Registro de ciclos evolutivos e auto-melhoria"
+    ),
+    "protocolos": KnowledgeDimension(
+        name="Protocolos do Ecossistema",
+        categories=["sdd_spec_first", "tdd_red_green_refactor",
+                     "a2a_blackboard", "mcp_interconnect",
+                     "bernstein_orchestration", "sdd_gate",
+                     "behavioral_gate", "reflexion_middleware"],
+        description="Protocolos formais: SDD, TDD, A2A, MCP"
+    ),
+    "integracoes": KnowledgeDimension(
+        name="Integrações Externas",
+        categories=["antigravity_bridge", "cli_integrations",
+                     "pypi_searcher", "web_search", "webfetch",
+                     "mcp_servers", "git_manager"],
+        description="Pontes com sistemas externos e APIs"
+    ),
+    "infra_dados": KnowledgeDimension(
+        name="Infraestrutura e Dados",
+        categories=["schemas_validator", "data_pipeline", "benchmarks",
+                     "notebooks", "batch_executor", "installer",
+                     "assets_media", "gametheory_models"],
+        description="Esquemas, dados, benchmarks e automação"
+    ),
+    "governanca": KnowledgeDimension(
+        name="Governança Distribuída",
+        categories=["cooperative_governance", "debate_strategies",
+                     "game_theory_analysis", "trust_scoring",
+                     "slashing_rules", "phd_auditor",
+                     "scientific_governance", "tokenomics"],
+        description="Mecanismos de governança, incentivos e auditoria"
+    ),
+}
+
+# Dimensões predefinidas para escaneamento acadêmico
 EPISTEMOLOGICAL_DIMENSIONS: dict[str, KnowledgeDimension] = {
     "paradigmas": KnowledgeDimension(
         name="Paradigmas Epistemológicos",
@@ -156,6 +237,114 @@ ENRICHED_KW: dict[str, dict[str, list[str]]] = {
     "teoria_jogos": {"soma zero":["soma zero","zero-sum","jogo de soma zero"],"equilíbrio de nash":["nash","equilibrio","estrategia dominante","nao-cooperativo","pne","equilibrio de nash"],"dilema do prisioneiro":["prisioneiro","dilema","cooperacao","traicao","payoff","prisoner"],"tit-for-tat":["tit for tat","olho por olho","reciproc","axelrod","retaliacao"],"stackelberg":["stackelberg","lider","seguidor","liderança","lideranca"],"barganha":["barganha","negociacao","negocia","nash bargaining","threat point"],"sinalização":["sinalizac","sinalizacao","signaling","sinal","screening"],"evolutivo":["evolutivo","selecao natural","smith","price","ess","evolutivamente estavel"],"bayesiano":["bayesiano","harsanyi","informacao incompleta","crenca","tipo"],"cooperativo":["cooperativo","shapley","coalizao","contribuicao marginal","nucleolo"]},
 }
 
+# ═══ ECOSYSTEM KEYWORDS (SPEC-022) ═══
+ECOSYSTEM_KEYWORDS: dict[str, dict[str, list[str]]] = {
+    "agentes": {
+        "orchestrator": ["orchestrator", "marceloclaro", "orquestrador", "master-orchestrator"],
+        "coder": ["coder", "coding", "coder-agent", "ws-coder"],
+        "researcher": ["researcher", "research", "web-search-researcher", "ws-researcher"],
+        "auditor": ["auditor", "security-auditor", "code-reviewer", "reviewer"],
+        "academic_writer": ["academic_writer", "maswos", "academic pipeline", "ws-academic"],
+        "bernstein_orchestrator": ["bernstein", "bernstein-orchestrator", "maestro"],
+        "antigravity_orchestrator": ["antigravity", "antigravity-orchestrator"],
+        "reversa_agents": ["reversa", "reversa-agent", "reversa-"],
+        "ws_agents": ["ws-coder", "ws-researcher", "ws-reviewer", "ws-scribe"],
+        "agent_catalog": ["catalog/", "agent_catalog", "catalogo"],
+    },
+    "mci_core": {
+        "metabus": ["metabus", "meta_bus", "metabus.py", "global memory"],
+        "blackboard": ["blackboard", "a2a", "blackboard.py"],
+        "reflexion": ["reflexion", "reflection", "reflexion.py"],
+        "transformer": ["transformer", "transformer/"],
+        "context_manager": ["context_manager", "context-manager", "context manager", "contextscout"],
+        "memory_updater": ["memory_updater", "memory-updater", "reversa-memory-updater"],
+        "graph_builder": ["graph_builder", "graph-builder", "reversa-graph-builder", "graphrag"],
+        "mcp_server": ["mcp_server", "mcp server", "mcp_servers", "mcp.py"],
+        "orchestration_pipeline": ["orchestration", "pipeline/", "orchestration.py", "stage-orchestrator"],
+    },
+    "scanners": {
+        "noological_scanner": ["noological", "noological_scanner", "scanner noológico"],
+        "teleological_scanner": ["teleological", "teleological_scanner", "scanner teleológico"],
+        "potentiality_scanner": ["potentiality", "potentiality_scanner"],
+        "evolutionary_pipeline": ["evolutionary", "evolutionary_pipeline", "evolutionary scanner"],
+        "social_impact_scanner": ["social_impact", "social impact scanner"],
+        "reversa_scanner": ["reversa_scanner", "reversa scanner"],
+        "epistemic_prioritizer": ["epistemic_prioritizer", "epistemic prioritizer"],
+        "successor_generator": ["successor_generator", "successor generator", "successor"],
+        "cross_validation_engine": ["cross_validation", "cross validation engine"],
+        "capability_composer": ["capability_composer", "capability composer"],
+    },
+    "trust_economy": {
+        "trust_engine": ["trust_engine", "trust engine", "trust/", "TrustEngine", "TrustScorer"],
+        "token_economy": ["token_economy", "token economy", "economy/", "tokenomics", "TokenEconomy", "TokenLedger"],
+        "staking_mechanism": ["staking", "stake", "stake pool", "StakingPool", "stake_position", "stake_release", "total_locked"],
+        "slashing_mechanism": ["slashing", "slash", "penalty", "slashing_rules", "slash_"],
+        "fee_market": ["fee market", "fee_market", "gas", "tax", "FeeMarket", "FeeQuote"],
+        "behavioral_gate": ["behavioral_gate", "behavioral gate", "behavioral", "BehavioralGate", "GateDecision"],
+        "outcome_tracker": ["outcome_tracker", "outcome tracker", "trust score", "OutcomeTracker", "TrackedOutcome"],
+        "stake_pool": ["stake pool", "stake_pool", "pool", "StakingPool", "StakePosition"],
+    },
+    "razao_logica": {
+        "z3_solver": ["z3", "z3_solver", "smt", "satisfiability", "Z3Engine", "z3_engine"],
+        "sympy": ["sympy", "symbolic", "sympy engine", "SymPyEngine"],
+        "kanren": ["kanren", "logic programming", "miniKanren", "KanrenEngine"],
+        "critical_reasoner": ["critical", "critical_reasoner", "critical reasoning", "CriticalEngine"],
+        "quantum_reasoning": ["quantum", "quantum.py", "quantum reasoning", "quantum_"],
+        "bayesian_inference": ["bayesian", "bayes", "probabilistic", "bayesian_inference"],
+        "dialectical_engine": ["dialectical", "dialetic", "thesis", "antithesis", "DialecticalEngine", "Dialectic"],
+        "reasoning_engines": ["engines.py", "reasoning engines", "reasoning/", "MultiReasoningEngine", "reasoning_result"],
+    },
+    "evolucao": {
+        "evolution_registry": ["evolution_registry", "evolution/cycles", "evolution registry", "EvolutionRegistry"],
+        "cycles_manager": ["cycles", "cycles.py", "cycles.json", "evo-", "EvolutionCycle"],
+        "reflection_ledger": ["reflection_ledger", "reflection", "reflexion ledger", "reflexion_middleware"],
+        "trajectory_mapper": ["trajectory_mapper", "trajectory mapper", "trajectory", "TrajectoryMapper"],
+        "autoevolve_pipeline": ["autoevolve", "auto_evolve", "auto-evolve", "autoevolve"],
+        "evolutionary_roadmap": ["evolutionary_roadmap", "roadmap", "evolutionary pipeline", "EvolutionaryRoadmap", "evolutionary_pipeline"],
+        "successor_generator": ["successor_generator", "successor generator", "plausible successors", "SuccessorGenerator"],
+    },
+    "protocolos": {
+        "sdd_spec_first": ["sdd", "spec-first", "spec_first", "especificação formal", "spec-", "Specification Driven"],
+        "tdd_red_green_refactor": ["tdd", "red-green-refactor", "test-first", "test driven", "RED", "GREEN", "REFACTOR", "test_"],
+        "a2a_blackboard": ["a2a", "blackboard", "agent-to-agent", "A2A blackboard", "blackboard.py"],
+        "mcp_interconnect": ["mcp", "model context protocol", "mcp_interconnect", "metacognitive", "mcp_server", "MCP interconnect"],
+        "bernstein_orchestration": ["bernstein", "orchestration", "pipeline multi-agente", "BernsteinOrchestrator"],
+        "sdd_gate": ["sdd gate", "spec verifier", "specverifier", "SDD Gate", "SpecVerifier"],
+        "behavioral_gate": ["behavioral_gate", "behavioral gate", "gate", "BehavioralGate"],
+        "reflexion_middleware": ["reflexion", "reflection middleware", "auto-reflexão", "ReflexionMiddleware"],
+    },
+    "integracoes": {
+        "antigravity_bridge": ["antigravity", "antigravity_bridge", "antigravity bridge", "deepmind", "antigravity_bridge.py"],
+        "cli_integrations": ["cli", "command line", "integrations/", "opencode_cli", "integrations"],
+        "pypi_searcher": ["pypi", "pypi_searcher", "pypi scout", "pip", "pypi-searcher"],
+        "web_search": ["web_search", "web search", "websearch", "search web", "web_search_researcher"],
+        "webfetch": ["webfetch", "fetch url", "web fetch", "webfetch_"],
+        "mcp_servers": ["mcp", "mcp server", "model context protocol", "mcp_servers"],
+        "git_manager": ["git", "git-manager", "git_manager", "github", "git-manager"],
+    },
+    "infra_dados": {
+        "schemas_validator": ["schemas", "schema", "validator", "schema/", "schema.json"],
+        "data_pipeline": ["data/", "data pipeline", "dataset", "evidence_graph"],
+        "benchmarks": ["benchmark", "benchmarks/", "scientific_reasoning"],
+        "notebooks": ["notebook", "notebooks/", "jupyter", "notebook"],
+        "batch_executor": ["batch", "batch-executor", "executor", "batch-executor"],
+        "installer": ["installer", "install/", "setup", "installer/"],
+        "assets_media": ["assets/", "illustrations", "media", "webapp", "assets"],
+        "gametheory_models": ["gametheory", "game theory", "gametheory/", "PayoffMatrix", "ShapleyValue"],
+    },
+    "governanca": {
+        "cooperative_governance": ["cooperative", "cooperative_governance", "governança", "cooperative governance"],
+        "debate_strategies": ["debate", "debate_strategies", "moderator", "DebateStrategy", "MetaReasoner"],
+        "game_theory_analysis": ["game theory", "gametheory", "teoria dos jogos", "TitForTat", "GrimTrigger", "ShapleyValue", "PayoffMatrix"],
+        "trust_scoring": ["trust score", "trust_scoring", "trust/", "TrustScorer", "ActionTrust", "TrustEngine"],
+        "slashing_rules": ["slashing", "slash", "slashing rules", "slashing_mechanism"],
+        "phd_auditor": ["phd", "phd_auditor", "doutor", "auditor acadêmico", "phd_auditor"],
+        "scientific_governance": ["scientific_governance", "governance pipeline", "scientific_governance_pipeline"],
+        "tokenomics": ["token", "token economy", "tokenomics", "economy", "TokenEconomy"],
+    },
+}
+
+
 class NoologicalScanner:
     """Scanner que identifica AUSÊNCIAS no espaço de conhecimento.
 
@@ -209,8 +398,22 @@ class NoologicalScanner:
         # Para keywords de raiz (ex: "control", "randomiz"), usa \b
         return bool(re.search(r'\b' + re.escape(keyword) + r'\w*', corpus, re.IGNORECASE))
 
-    def __init__(self, dimensions: dict[str, KnowledgeDimension] | None = None):
-        self.dimensions = dimensions or EPISTEMOLOGICAL_DIMENSIONS
+    def __init__(self, dimensions: dict[str, KnowledgeDimension] | None = None,
+                 domain: str = ""):
+        """Inicializa o scanner.
+
+        Args:
+            dimensions: dicionário de dimensões (se None, usa EPISTEMOLOGICAL_DIMENSIONS
+                        ou ECOSYSTEM_DIMENSIONS conforme domain)
+            domain: domínio de pesquisa — "ecosystem" carrega ECOSYSTEM_DIMENSIONS
+        """
+        if dimensions is not None:
+            self.dimensions = dimensions
+        elif domain == "ecosystem":
+            self.dimensions = ECOSYSTEM_DIMENSIONS
+        else:
+            self.dimensions = EPISTEMOLOGICAL_DIMENSIONS
+        self._domain = domain
         self.scan_results: dict[str, Any] = {}
         self.domain_weights: dict[str, float] = {}
         self.scan_history: list[dict[str, Any]] = []  # v2.0: historico para tendencia
@@ -224,8 +427,20 @@ class NoologicalScanner:
 
     def scan(self, audit_trail: Any, research_domain: str = "",
              text_analyzer: Any = None) -> dict[str, Any]:
-        """Varredura completa com validacao por frequencia (v2.0)."""
+        """Varredura completa com validacao por frequencia (v2.0).
+
+        Se research_domain == "ecosystem", usa ECOSYSTEM_DIMENSIONS
+        e ECOSYSTEM_KEYWORDS para detecção. Inclui análise por camadas.
+        """
         self.set_domain(research_domain)
+        # Alterna para dimensões do ecossistema se domain == "ecosystem"
+        if research_domain == "ecosystem" and self._domain != "ecosystem":
+            self.dimensions = ECOSYSTEM_DIMENSIONS
+            self._domain = "ecosystem"
+        elif research_domain != "ecosystem" and self._domain == "ecosystem":
+            self.dimensions = EPISTEMOLOGICAL_DIMENSIONS
+            self._domain = ""
+
         corpus_text = self._extract_corpus(audit_trail)
         corpus_lower = corpus_text.lower()
 
@@ -268,6 +483,11 @@ class NoologicalScanner:
         cross_corr = self._cross_correlation(dimension_results)
         recommendations = self._generate_recommendations_v2(dimension_results, comfort_zones)
 
+        # Análise por camadas do ecossistema (SPEC-022)
+        ecosystem_layers = None
+        if research_domain == "ecosystem":
+            ecosystem_layers = self._analyze_ecosystem_layers(dimension_results)
+
         self.scan_results = {
             "research_domain": research_domain,
             "timestamp": datetime.now(BRAZIL_TZ).isoformat(),
@@ -285,6 +505,8 @@ class NoologicalScanner:
             "recommendations": recommendations,
             "completeness_grade": self._grade(overall_density),
         }
+        if ecosystem_layers is not None:
+            self.scan_results["ecosystem_layers"] = ecosystem_layers
 
         self.scan_history.append(self.scan_results)
         return self.scan_results
@@ -292,6 +514,9 @@ class NoologicalScanner:
     def _extract_corpus(self, audit_trail: Any) -> str:
         """Extrai texto completo do corpus de pesquisa."""
         texts = []
+        # Suporte para _TextAuditTrail (SPEC-022) e objetos similares
+        if hasattr(audit_trail, "get_all_text"):
+            return audit_trail.get_all_text()
         if hasattr(audit_trail, "paragraphs"):
             for para in audit_trail.paragraphs.values():
                 if hasattr(para, "text"):
@@ -306,11 +531,11 @@ class NoologicalScanner:
 
     def _category_present_v2(self, category: str, corpus_lower: str,
                               dim_key: str, text_analyzer: Any = None) -> bool:
-        """Detecção enriquecida v3.0: negação → ENRICHED_KW → TextAnalyzer → keyword_map → fallback.
+        """Detecção enriquecida v3.0: negação → ECOSYSTEM_KW/ENRICHED_KW → TextAnalyzer → fallback.
 
         Pipeline de precedência:
           1. _negation_filter() — remove sentenças negadas
-          2. ENRICHED_KW — keywords enriquecidas com sinonimos e n-gramas
+          2. ECOSYSTEM_KEYWORDS (se domain="ecosystem") ou ENRICHED_KW (acadêmico)
           3. TextAnalyzer — validação por frequência de palavras
           4. _category_present() — keyword_map específico por dimensão
           5. Fallback genérico — word matching com \b boundary
@@ -318,7 +543,14 @@ class NoologicalScanner:
         cat_lower = category.lower()
         # v3.0: Remove sentencas negadas antes do matching
         clean_corpus = self._negation_filter(corpus_lower)
-        # Enriched keyword map (camada 1)
+
+        # ─── Ecossistema: ECOSYSTEM_KEYWORDS (SPEC-022) ────────────────
+        if self._domain == "ecosystem" and dim_key in ECOSYSTEM_KEYWORDS:
+            for kw_cat, keywords in ECOSYSTEM_KEYWORDS[dim_key].items():
+                if kw_cat in cat_lower:
+                    return any(self._word_boundary_match(kw, clean_corpus) for kw in keywords)
+
+        # ─── Acadêmico: ENRICHED_KW (camada 1 original) ────────────────
         if dim_key in ENRICHED_KW:
             for kw_cat, keywords in ENRICHED_KW[dim_key].items():
                 if kw_cat in cat_lower:
@@ -472,6 +704,43 @@ class NoologicalScanner:
                 if self._word_boundary_match(w, corpus_lower):
                     match_count += 1
         return match_count >= len(words) * 0.5
+
+    def _analyze_ecosystem_layers(self, dimension_results: dict[str, Any]) -> dict[str, Any]:
+        """Analisa a cobertura por camadas do ecossistema (SPEC-022).
+
+        Agrupa dimensões em camadas funcionais e calcula cobertura consolidada.
+        """
+        LAYER_MAP = {
+            "core_orchestration": ["agentes", "mci_core", "protocolos"],
+            "diagnostico_evolucao": ["scanners", "evolucao"],
+            "governanca_economia": ["trust_economy", "governanca"],
+            "raciocinio_conhecimento": ["razao_logica"],
+            "integracao_infra": ["integracoes", "infra_dados"],
+        }
+
+        layers = {}
+        for layer_name, dim_keys in LAYER_MAP.items():
+            dims_in_layer = [k for k in dim_keys if k in dimension_results]
+            if not dims_in_layer:
+                continue
+            total_cats = sum(len(dimension_results[k].get("covered", []) +
+                               dimension_results[k].get("absent", []))
+                           for k in dims_in_layer)
+            total_covered = sum(len(dimension_results[k].get("covered", []))
+                               for k in dims_in_layer)
+            covered_pct = round(total_covered / max(1, total_cats) * 100)
+            status = "boa" if covered_pct >= 50 else "parcial" if covered_pct >= 20 else "crítica"
+            layers[layer_name] = {
+                "coverage_pct": covered_pct,
+                "status": status,
+                "components_found": sum(len(dimension_results[k].get("covered", []))
+                                       for k in dims_in_layer),
+                "components_absent": sum(len(dimension_results[k].get("absent", []))
+                                        for k in dims_in_layer),
+                "dimensions": dims_in_layer,
+            }
+
+        return layers
 
     def _identify_blind_spots_v2(self, dimension_results: dict[str, Any]) -> list[dict[str, Any]]:
         """v2.0: Pontos cegos com severidade ponderada pelo peso do dominio."""

@@ -204,6 +204,104 @@ TELEOLOGICAL_MAPPINGS: dict[str, list[tuple[str, str, float, str]]] = {
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+# MAPEAMENTOS TELEOLÓGICOS DO ECOSSISTEMA (SPEC-022)
+# ═══════════════════════════════════════════════════════════════════════════
+
+ECOSYSTEM_TELEOLOGICAL_RULES: list[dict[str, Any]] = [
+    {
+        "match_any": ["spec", "verificad"],
+        "requirements": [
+            ("protocolos", "sdd_spec_first", 1.0,
+             "Specs verificadas exigem disciplina spec-first (SDD)."),
+            ("protocolos", "sdd_gate", 0.9,
+             "Verificação formal requer gate SDD / SpecVerifier."),
+            ("scanners", "teleological_scanner", 0.6,
+             "Verificação orientada a objetivos depende de scanner teleológico."),
+        ],
+    },
+    {
+        "match_any": ["trust score", "trust", "confiança"],
+        "requirements": [
+            ("trust_economy", "trust_engine", 1.0,
+             "Mensuração de confiança depende do Trust Engine."),
+            ("governanca", "trust_scoring", 0.9,
+             "Trust score requer governança explícita de reputação."),
+            ("agentes", "agent_catalog", 0.4,
+             "Trust médio de agentes pressupõe catálogo registrado."),
+        ],
+    },
+    {
+        "match_any": ["sdd/tdd", "tdd", "sdd", "gate"],
+        "requirements": [
+            ("protocolos", "tdd_red_green_refactor", 1.0,
+             "Conformidade TDD exige ciclo RED→GREEN→REFACTOR."),
+            ("protocolos", "sdd_spec_first", 1.0,
+             "Conformidade SDD exige especificação formal antes da implementação."),
+            ("protocolos", "sdd_gate", 0.9,
+             "Conformidade SDD/TDD requer gate de aprovação."),
+            ("protocolos", "behavioral_gate", 0.7,
+             "Entregas controladas requerem BehavioralGate."),
+        ],
+    },
+    {
+        "match_any": ["ciclos evolutivos", "evolutiv", "metabus", "refletid"],
+        "requirements": [
+            ("evolucao", "evolution_registry", 1.0,
+             "Registro evolutivo contínuo exige EvolutionRegistry."),
+            ("evolucao", "cycles_manager", 0.9,
+             "Ciclos documentados exigem gerenciador de rodadas."),
+            ("evolucao", "reflection_ledger", 0.8,
+             "Reflexões persistidas exigem ledger/reflexion do ecossistema."),
+            ("mci_core", "metabus", 0.8,
+             "Reflexões compartilhadas exigem MetaBus."),
+            ("mci_core", "reflexion", 0.8,
+             "Aprendizado pós-tarefa exige middleware Reflexion."),
+        ],
+    },
+    {
+        "match_any": ["tokens", "token", "slashing", "stake", "saldo"],
+        "requirements": [
+            ("trust_economy", "token_economy", 1.0,
+             "Economia saudável exige motor explícito de tokenomics."),
+            ("trust_economy", "staking_mechanism", 0.9,
+             "Controle de stake exige mecanismo de staking."),
+            ("trust_economy", "slashing_mechanism", 0.9,
+             "Falhas econômicas exigem mecanismo de slashing."),
+            ("trust_economy", "fee_market", 0.7,
+             "Priorização econômica exige fee market."),
+            ("trust_economy", "stake_pool", 0.7,
+             "Stake agregado exige pool ou estrutura equivalente."),
+        ],
+    },
+    {
+        "match_any": ["cobertura noológica", "30%", "10 dimensões", "ecossistema"],
+        "requirements": [
+            ("agentes", "orchestrator", 0.6,
+             "Cobertura mínima do ecossistema exige ponto de entrada orquestrador."),
+            ("mci_core", "metabus", 0.6,
+             "Cobertura do core exige infraestrutura metacognitiva."),
+            ("scanners", "noological_scanner", 0.6,
+             "Cobertura noológica depende do scanner noológico."),
+            ("trust_economy", "trust_engine", 0.6,
+             "Cobertura sistêmica exige mecanismos de confiança."),
+            ("razao_logica", "reasoning_engines", 0.6,
+             "Cobertura do ecossistema inclui motores de raciocínio."),
+            ("evolucao", "evolution_registry", 0.6,
+             "Cobertura do ecossistema inclui continuidade evolutiva."),
+            ("protocolos", "sdd_spec_first", 0.6,
+             "Cobertura sistêmica exige protocolos formais."),
+            ("integracoes", "cli_integrations", 0.6,
+             "Cobertura do ecossistema exige integração operacional."),
+            ("infra_dados", "schemas_validator", 0.6,
+             "Cobertura sistêmica exige validação de dados/esquemas."),
+            ("governanca", "scientific_governance", 0.6,
+             "Cobertura sistêmica exige governança explícita."),
+        ],
+    },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 # SCANNER TELEOLÓGICO REVERSO
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -240,7 +338,7 @@ class TeleologicalReverseScanner:
 
     # ─── INFERENCE ENGINE ─────────────────────────────────────────────────
 
-    def infer_requirements(self) -> list[DimensionRequirement]:
+    def infer_requirements(self, domain: str = "") -> list[DimensionRequirement]:
         """Infere requisitos teleologicos a partir dos objetivos.
 
         Para cada goal, consulta TELEOLOGICAL_MAPPINGS e gera
@@ -250,6 +348,9 @@ class TeleologicalReverseScanner:
         """
         self.requirements = []
         seen: dict[tuple[str, str], list[DimensionRequirement]] = {}
+
+        if domain == "ecosystem":
+            return self._infer_ecosystem_requirements()
 
         for goal in self.goals:
             if goal.goal_type not in TELEOLOGICAL_MAPPINGS:
@@ -289,6 +390,74 @@ class TeleologicalReverseScanner:
         self.requirements.sort(key=lambda r: r.weight, reverse=True)
         return self.requirements
 
+    def _infer_ecosystem_requirements(self) -> list[DimensionRequirement]:
+        """Infere requisitos teleológicos específicos do ecossistema.
+
+        Usa regras semânticas sobre as descrições dos objetivos para mapear
+        metas do Core em componentes reais das dimensões ECOSYSTEM_DIMENSIONS.
+        """
+        self.requirements = []
+        seen: dict[tuple[str, str], list[DimensionRequirement]] = {}
+
+        for goal in self.goals:
+            desc = goal.description.lower()
+            matched = False
+            for rule in ECOSYSTEM_TELEOLOGICAL_RULES:
+                if any(token in desc for token in rule["match_any"]):
+                    matched = True
+                    for dim_key, category, weight, rationale in rule["requirements"]:
+                        effective_weight = weight * goal.weight
+                        req = DimensionRequirement(
+                            dim_key=dim_key,
+                            category=category,
+                            weight=effective_weight,
+                            rationale=rationale,
+                            goal_description=goal.description,
+                        )
+                        key = (dim_key, category)
+                        if key not in seen:
+                            seen[key] = []
+                        seen[key].append(req)
+
+            if not matched:
+                # fallback mínimo para metas desconhecidas no domínio ecossistema
+                fallback = [
+                    ("protocolos", "sdd_spec_first", 0.5,
+                     "Metas do ecossistema assumem disciplina formal de especificação."),
+                    ("scanners", "noological_scanner", 0.4,
+                     "Metas do ecossistema exigem medição de cobertura."),
+                ]
+                for dim_key, category, weight, rationale in fallback:
+                    req = DimensionRequirement(
+                        dim_key=dim_key,
+                        category=category,
+                        weight=weight * goal.weight,
+                        rationale=rationale,
+                        goal_description=goal.description,
+                    )
+                    key = (dim_key, category)
+                    if key not in seen:
+                        seen[key] = []
+                    seen[key].append(req)
+
+        for key, reqs in seen.items():
+            if len(reqs) == 1:
+                self.requirements.append(reqs[0])
+            else:
+                total_weight = min(1.0, sum(r.weight for r in reqs))
+                combined_rationale = " | ".join(r.rationale for r in reqs)
+                combined_goals = "; ".join(r.goal_description for r in reqs)
+                self.requirements.append(DimensionRequirement(
+                    dim_key=key[0],
+                    category=key[1],
+                    weight=total_weight,
+                    rationale=combined_rationale,
+                    goal_description=combined_goals,
+                ))
+
+        self.requirements.sort(key=lambda r: r.weight, reverse=True)
+        return self.requirements
+
     # ─── GAP DETECTION ────────────────────────────────────────────────────
 
     def compare_with_scan(self, noological_results: dict[str, Any]) -> list[TeleologicalGap]:
@@ -301,8 +470,9 @@ class TeleologicalReverseScanner:
             noological_results: saida de NoologicalScanner.scan()
         """
         self._scan_results = noological_results
+        domain = noological_results.get("research_domain", "")
         if not self.requirements:
-            self.infer_requirements()
+            self.infer_requirements(domain=domain)
 
         self.gaps = []
         dims = noological_results.get("dimensions", {})

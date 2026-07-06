@@ -207,14 +207,14 @@ class TestIntegrations:
 
 # ── Integração com o orquestrador ───────────────────────────────────────
 
-class TestOrchestratorIntegration:
-    @pytest.fixture(scope="class")
-    def orchestrator(self):
-        import mci.metabus as mb
-        import mci.blackboard as bb
-        from marceloclaro.orchestrator import MarceloClaroOrchestrator
-        return MarceloClaroOrchestrator()
+@pytest.fixture(scope="class")
+def orchestrator():
+    import mci.metabus as mb  # noqa: F401
+    import mci.blackboard as bb  # noqa: F401
+    from marceloclaro.orchestrator import MarceloClaroOrchestrator
+    return MarceloClaroOrchestrator()
 
+class TestOrchestratorIntegration:
     def test_catalog_registered_on_boot(self, orchestrator):
         assert orchestrator.catalog_size >= 128
 

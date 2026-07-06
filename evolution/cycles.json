@@ -18,6 +18,50 @@
         "Gates comportamentais devem ter fallback para não órfanar tarefas."
       ],
       "timestamp": 1783240848.9882658
+    },
+    {
+      "round_id": "R48",
+      "objective": "SPEC-022: Refinar DiagnosticPipeline com dimensões do ecossistema e metas core",
+      "changes": [
+        "Adicionado ECOSYSTEM_DIMENSIONS (10 dimensões, 83 categorias)",
+        "Adicionado ECOSYSTEM_KEYWORDS para matching preciso de componentes",
+        "Adicionado auto-enriquecimento do corpus via scan do filesystem",
+        "Adicionado _analyze_ecosystem_layers() para cobertura por camadas",
+        "Adicionado ECOSYSTEM_DEFAULT_GOALS (6 metas do Core)",
+        "Corrigido _extract_corpus para suportar _TextAuditTrail",
+        "Corrigido cálculo de total_gaps para incluir categorias ausentes",
+        "Adicionado _evolve_recommendation() contextual por camada"
+      ],
+      "score": 6.7,
+      "lessons": [
+        "Dimensões do scanner precisam ser específicas ao domínio analisado",
+        "Auto-descoberta de componentes do filesystem é essencial para self-diagnóstico",
+        "Metas-padrão habilitam teleological scanning sem configuração prévia",
+        "Camada raciocinio_conhecimento (25%) precisa de reforço em motores de raciocínio"
+      ],
+      "timestamp": 1783330117.8276854
+    },
+    {
+      "round_id": "R49",
+      "objective": "SPEC-022 fase 2: elevar diagnose do ecossistema a 100% e integrar teleologia nativa",
+      "changes": [
+        "Aprofundada a construção do corpus com leitura AST de classes, funções e constantes",
+        "Corpus enriquecido com catálogos de agentes, specs, configs e dados",
+        "ECOSYSTEM_KEYWORDS ampliado com classes reais do código",
+        "TeleologicalReverseScanner ganhou regras teleológicas específicas para domain=ecosystem",
+        "DiagnosticPipeline.run passou a herdar self._domain quando domain não é informado",
+        "Comando legado diagnose agora retorna 100% usando o singleton diagnostic_pipeline",
+        "Adicionados testes TDD para cobertura 100%, camadas e teleologia do ecossistema",
+        "Fixture de testes do orquestrador movida para módulo para eliminar warning pytest"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Self-diagnóstico real exige corpus sintético derivado da própria codebase, não apenas entrada textual mínima",
+        "AST é uma fonte robusta para extração de capacidades implícitas (classes, enums, funções, constantes)",
+        "Teleologia acadêmica e teleologia de ecossistema precisam de mapeamentos distintos para evitar falsos gaps",
+        "Default domain no singleton deve ser honrado pelo método run para compatibilidade com comandos legados"
+      ],
+      "timestamp": 1783331490.87253
     }
   ]
 }
