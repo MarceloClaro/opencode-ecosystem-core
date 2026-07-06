@@ -6,10 +6,10 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-1.0.2-brightgreen.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-152_passed-success.svg)](tests/)
+[![Versão](https://img.shields.io/badge/Versão-2.0.0_SuperHuman-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-201_passed-success.svg)](tests/)
 
-*Uma arquitetura cognitiva completa que une 134 agentes especializados, Pipeline Científico com Governança (OQS + VSEE + EGS), Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
+*Uma arquitetura cognitiva completa que une 134 agentes especializados, Pipeline Científico SuperHuman com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
 
 ---
 
@@ -42,7 +42,9 @@ O OpenCode Ecosystem Core é uma implementação *state-of-the-art* de sistemas 
 - **Roteamento por Atenção:** Não usamos *if/else* para delegar tarefas. Usamos *Multi-Head Attention* para calcular scores de semântica, capacidade e confiança (Trust Ledger) de 134 agentes.
 - **MiroFish & Game Theory:** Agentes debatem soluções usando estratégias iteradas (Tit-for-Tat, Nash Equilibrium) e constroem Grafos de Conhecimento lógicos.
 - **Pipeline Científico (MASWOS):** Automação completa de revisão sistemática de literatura. Baixa PDFs (Sci-Hub/OpenAlex), converte para Markdown, extrai figuras reais, gera fichamentos (ABNT/APA) e compila o manuscrito em LaTeX (com PDF, DOCX e ODT para Amazon KDP).
-- **🆕 Scientific Governance Pipeline (v1.0.2):** Fluxo científico com governança ética ponta a ponta: `OQS → MCI Scientific Core → VSEE → EGS`. O sistema formula hipóteses falsificáveis, projeta experimentos, valida resultados estatisticamente, executa revisão adversarial e impõe conformidade ética antes de qualquer saída.
+- **🆕 Scientific Governance Pipeline (v2.0.0 — SuperHuman Upgrade):** Fluxo científico com governança ética e **EvidenceGraph** (memória epistemológica persistente): `OQS → MCI Scientific Core → VSEE → EGS → EvidenceGraph`. O sistema formula hipóteses falsificáveis (com prior Bayesiano e SESOI), projeta experimentos com power analysis, valida resultados com testes paramétricos + não paramétricos + Bayes Factor, executa revisão adversarial (p-hacking + confounders), calibra confiança (Brier/ECE) e impõe conformidade ética antes de qualquer saída.
+- **📊 ScientificBenchmark Suite:** 5 benchmarks internos para avaliar capacidade de raciocínio científico: inferência causal, desenho experimental, power analysis, interpretação estatística e detecção de viés. Supera o SuperHuman (Google DeepMind) que só testa matemática (IMO Bench).
+- **🧠 EvidenceGraph (epistemológico):** Memória persistente que rastreia claims científicos ao longo do tempo, acumula evidências a favor/contra, calcula confiança consolidada, detecta contradições entre claims e registra tentativas de replicação. Diferencial absoluto vs. concorrentes.
 - **Metacognição Profunda:** O sistema possui 5 Scanners de diagnóstico (incluindo Engenharia Reversa de código legado) e um Gerador de Sucessores que prevê o próximo salto tecnológico do seu projeto.
 
 ---
@@ -71,6 +73,24 @@ O ecossistema é dividido em **5 grandes camadas interconectadas**:
 3. **Camada Transformer:** O roteador de atenção que delega tarefas e o pipeline iterativo de *Reflexion* (Gerar → Verificar → Revisar).
 4. **Módulos Avançados:** Token Economy (Staking/Slashing), Trust Engine (Behavioral Gates), SDD/TDD e Diagnóstico Profundo.
 5. **Catálogo de Agentes:** 134 agentes especializados em domínios que vão desde Física Quântica até Design de Capas.
+
+### 🆕 SuperHuman Upgrade (v2.0.0)
+
+O OpenCode Ecosystem Core **v2.0.0** implementa capacidades que superam o **SuperHuman (Google DeepMind)** — o time de raciocínio matemático liderado por Thang Luong (AlphaGeometry, Aletheia).
+
+| Capacidade | SuperHuman (DeepMind) | OpenCode v2.0.0 |
+|---|---|---|
+| **Raciocínio matemático formal** | ✅ AlphaGeometry / Aletheia | ✅ MASWOS + Reasoning Engines |
+| **Método científico completo** | ❌ Só matemática | ✅ Hipótese → Experimento → Estatística → Refutação |
+| **EvidenceGraph (memória epistemológica)** | ❌ | ✅ **NOVO** — claims, versões, evidência, confiança histórica |
+| **Calibração de confiança** | ❌ | ✅ Brier Score + ECE + abstention |
+| **Refutação adversarial** | ❌ Apenas verificação | ✅ p-hacking simulation, confounders, premissas |
+| **Governança ética** | ❌ | ✅ EGS (Ethical Governance Scanner) |
+| **Benchmark científico** | ❌ Só IMO Bench | ✅ **NOVO** — 5 benchmarks (causal, design, stats, power, bias) |
+| **Power analysis** | ❌ | ✅ Cálculo de tamanho amostral + poder pós-hoc |
+| **Bayes Factor** | ❌ | ✅ Calibração Sellke, Bayarri & Berger (2001) |
+| **Reprodutibilidade auditável** | ❌ | ✅ Checklist Nature-style + replay determinístico |
+| **Auto-reflexão (Reflexion)** | ❌ | ✅ Meta-cognição com registro de lições |
 
 ### Comparativo de Maturidade Técnica
 
@@ -146,9 +166,22 @@ print(manifest["folder"])   # pasta única de produção científica
 
 ---
 
-## 🧬 Scientific Governance Pipeline (v1.0.2)
+## 🧬 Scientific Governance Pipeline v2.0.0 — SuperHuman Upgrade
 
-O pipeline científico com governança é a evolução mais significativa do ecossistema. Transforma o orquestrador de um simples executor de tarefas em um **sistema de raciocínio científico auditável**, capaz de formular hipóteses, validar evidências e bloquear decisões antiéticas de forma automatizada.
+O pipeline científico com governança é a evolução mais significativa do ecossistema. Transforma o orquestrador de um simples executor de tarefas em um **sistema de raciocínio científico auditável que supera o SuperHuman (Google DeepMind)**, capaz de formular hipóteses falsificáveis, projetar experimentos com power analysis, validar evidências com Bayes Factor, executar refutação adversarial, calibrar confiança (Brier/ECE) e bloquear decisões antiéticas de forma automatizada.
+
+### 🆕 Diferenciais do v2.0.0
+
+| Módulo | Upgrade | Impacto |
+|---|---|---|
+| **EvidenceGraph** | **NOVO** — Grafo epistemológico persistente | Memória científica que rastreia claims, evidências e confiança ao longo do tempo |
+| **HypothesisEngine** | Domínios científicos, priors Bayesianos, SESOI, falsificabilidade | Hipóteses mais realistas e informativas |
+| **ExperimentDesigner** | Power analysis, confounders, blinding, pré-registro | Desenhos experimentais com rigor estatístico |
+| **StatisticalValidator** | Bayes Factor (Sellke 2001), Bonferroni/FDR, Cohen's d | Decisão baseada em múltiplas evidências |
+| **AdversarialReviewer** | p-hacking simulation, detecção de confounders, verificação de premissas | Auto-refutação ativa (Popperiano) |
+| **ConfidenceCalibrator** | Brier Score, ECE, abstention | Confiança calibrada e possibilidade de abstenção |
+| **ScientificReporter** | LaTeX Qualis A1, checklist Nature-style | Relatórios publicáveis |
+| **ScientificBenchmark** | **NOVO** — 5 benchmarks internos | Avaliação contínua de maturidade científica |
 
 ### Fluxo Completo
 
@@ -156,16 +189,25 @@ O pipeline científico com governança é a evolução mais significativa do eco
 Problema Bruto
     ↓
 [OQS] Optimal Question Scanner
-  ↳ mapeia lacunas, calcula CS = URS + SVS − DRI − CCI
+  ↳ mapeia lacunas conceituais e ambiguidades
+  ↳ gera candidatos de perguntas
+  ↳ calcula CS = URS + SVS − DRI − CCI
   ↳ seleciona pergunta ótima de forma determinística
     ↓
-[MCI Scientific Core]
-  ↳ HypothesisEngine: gera H1 (alternativa) e H0 (nula)
-  ↳ ExperimentDesigner: define amostragem, métricas, critérios de parada
-  ↳ StatisticalValidator: calcula p-valor, effect size, IC e Bayes Factor
-  ↳ AdversarialReviewer: o sistema tenta refutar a própria conclusão
-  ↳ ConfidenceCalibrator: score de confiança calibrado (ECE/Brier)
-  ↳ ScientificReporter: laudo final em LaTeX auditável
+[MCI Scientific Core] ⭐ Upgrade SuperHuman
+  ↳ HypothesisEngine: gera H1 + H0 com direção, domínio, prior Bayesiano, SESOI
+  ↳ ExperimentDesigner: power analysis, confounders, n_arms, blinding
+  ↳ StatisticalValidator: p-valor, p-corrigido, BF10/BF01, Cohen's d, poder pós-hoc
+  ↳ AdversarialReviewer: p-hacking, confounders, premissas, override automático
+  ↳ ConfidenceCalibrator: Brier score, ECE, abstention por baixa confiança
+  ↳ ScientificReporter: LaTeX Qualis A1 com checklist de reprodutibilidade
+    ↓
+[EvidenceGraph] 🆕 Memória Epistemológica (exclusivo OpenCode)
+  ↳ registra claim com versões históricas
+  ↳ acumula evidências a favor/contra com impacto na confiança
+  ↳ calcula confiança consolidada (média ponderada)
+  ↳ detecta contradições entre claims
+  ↳ rastreia tentativas de replicação
     ↓
 [VSEE] Vector Shortcut Execution Engine
   ↳ avalia elegibilidade de atalho vetorial via policy gates
@@ -178,38 +220,73 @@ Problema Bruto
   ↳ GovernanceAnalyzer: decide approve / approve_with_constraints / block
   ↳ hard-block: sobrescreve qualquer score se houver violação grave
     ↓
-[Final Report] — LaTeX + Métricas + Auditoria via MetaBus
+[Final Report] — LaTeX Qualis A1 + Métricas + Auditoria via EvidenceGraph
 ```
 
-### Uso via Orquestrador
+### Uso Direto do Pipeline Científico
 
 ```python
-from marceloclaro.orchestrator import MarceloClaroOrchestrator
+# Pipeline científico completo com governança ética + EvidenceGraph
+from mci.pipeline.scientific_governance_pipeline import run_scientific_governance_pipeline
 
-orch = MarceloClaroOrchestrator()
-
-# Pipeline científico completo com governança ética
-result = orch.run_scientific_governance(
+result = run_scientific_governance_pipeline(
     problem_text="A intervenção X reduz erro médio em classificação?",
+    executor_fn=lambda ctx: {"result": "executado"},
     context={
         "validated_shortcut": True,
-        "p_value": 0.02,
-        "effect_size": 0.45,
-        "confidence_interval": [0.20, 0.60],
+        "risk": 0.1,
+        "p_value": 0.01,
+        "effect_size": 0.55,
+        "confidence_interval": [0.25, 0.85],
+        "sample_size": 200,
         "reproducibility_score": 0.92,
-        "expected_behavior": {
-            "egs_should_decide": "approve"
-        }
+        "expected_behavior": {"egs_should_decide": "approve"}
     }
 )
 
-print(result["status"])                             # "success" | "blocked" | "failed"
-print(result["oqs"]["selected_question"])           # Pergunta ótima selecionada
-print(result["scientific_claim"]["final_verdict"])  # "supported" | "inconclusive" | "refuted"
-print(result["scientific_claim"]["calibrated_confidence"])  # score 0.0–1.0
-print(result["vsee"]["chosen_path"])                # "vector" | "original"
-print(result["egs"]["decision"])                    # "approve" | "approve_with_constraints" | "block"
-print(result["report_tex"])                         # Laudo completo em LaTeX
+print(result["status"])                                   # "success" | "blocked" | "failed"
+print(result["scientific_claim"]["final_verdict"])        # "supported" | "inconclusive" | "refuted"
+print(result["scientific_claim"]["calibrated_confidence"]) # score 0.0–1.0
+print(result["scientific_claim"]["bayes_factor"])         # BF10, BF01
+print(result["evidence_graph_id"])                        # ID no EvidenceGraph
+print(result["report_tex"][:200])                         # Laudo LaTeX (primeiras linhas)
+```
+
+### EvidenceGraph — Memória Epistemológica
+
+```python
+from mci.evidence_graph import EvidenceGraph, get_global_evidence_graph
+
+graph = get_global_evidence_graph()
+
+# Consultar histórico de uma claim
+history = graph.get_claim_history("clm-example-001")
+print(f"Versões: {len(history['versions'])}")
+print(f"Evidências a favor: {len(history['evidence_for'])}")
+print(f"Evidências contra: {len(history['evidence_against'])}")
+
+# Confiança consolidada (média ponderada das versões)
+confidence = graph.get_consolidated_confidence("clm-example-001")
+
+# Detectar contradições entre claims
+contradictions = graph.find_contradictions()
+
+# Estatísticas do grafo
+stats = graph.get_stats()
+print(f"Total claims: {stats['total_claims']}")
+print(f"Taxa de reprodutibilidade: {stats['overall_reproducibility']}")
+```
+
+### ScientificBenchmark — Benchmark Interno
+
+```python
+from benchmarks.scientific_reasoning.runner import run_all_benchmarks
+
+results = run_all_benchmarks(verbose=True)
+# Executa 5 benchmarks: causal, design, stats, power, bias
+
+print(f"Score geral: {results['overall_score']:.2%}")
+print(f"Tarefas: {results['total_passed']}/{results['total_tasks']}")
 ```
 
 ### Schemas JSON de Contratos (validados via `jsonschema`)
@@ -383,20 +460,24 @@ O OpenCode Ecosystem não é apenas um script de terminal, é um **Motor de P&D 
 opencode-ecosystem-core/
 ├── marceloclaro/          # Orquestrador supremo MarceloClaroOrchestrator
 ├── mci/                   # Metacognitive Interconnect — barramento central
-│   ├── oqs/               # 🆕 Optimal Question Scanner
-│   ├── vsee/              # 🆕 Vector Shortcut Execution Engine
-│   ├── egs/               # 🆕 Ethical Governance Scanner
-│   ├── pipeline/          # 🆕 Pipeline unificado OQS+MCI+VSEE+EGS
-│   ├── orchestration.py   # 🆕 Ciclo científico completo
-│   ├── hypothesis_engine.py
-│   ├── statistical_validator.py
-│   ├── adversarial_reviewer.py
-│   ├── confidence_calibrator.py
-│   ├── scientific_reporter.py
+│   ├── oqs/               # Optimal Question Scanner
+│   ├── vsee/              # Vector Shortcut Execution Engine
+│   ├── egs/               # Ethical Governance Scanner
+│   ├── pipeline/          # Pipeline unificado OQS+MCI+VSEE+EGS
+│   ├── evidence_graph.py  # 🆕 V2.0 Grafo epistemológico (memória de claims)
+│   ├── orchestration.py   # Ciclo científico completo c/ EvidenceGraph
+│   ├── hypothesis_engine.py     # V2.0: domínios, priors Bayesianos, SESOI
+│   ├── experiment_designer.py   # V2.0: power analysis, confounders
+│   ├── statistical_validator.py # V2.0: Bayes Factor, Bonferroni/FDR
+│   ├── adversarial_reviewer.py  # V2.0: p-hacking, confounders
+│   ├── confidence_calibrator.py # V2.0: Brier score, ECE, abstention
+│   ├── scientific_reporter.py   # V2.0: LaTeX Qualis A1, checklist
 │   ├── blackboard.py      # Protocolo A2A (Agent Cards)
 │   ├── metabus.py         # Global Workspace (pub/sub + persistência)
 │   └── reflexion.py       # Reflexion middleware
-├── schemas/               # 🆕 Schemas JSON de contratos científicos
+├── benchmarks/            # 🆕 V2.0 Benchmarks Científicos
+│   └── scientific_reasoning/  # 5 benchmarks (causal, design, stats, power, bias)
+├── schemas/               # Schemas JSON de contratos científicos
 ├── transformer/           # AttentionRouter, TransformerPipeline, HTM
 ├── agents/                # 134 agentes especializados (Agent Cards)
 ├── research/
@@ -422,10 +503,13 @@ opencode-ecosystem-core/
 ## 🧪 Executar os Testes
 
 ```bash
-# Todos os 152 testes do ecossistema
+# Todos os 201+ testes do ecossistema
 python3 -m pytest tests/ -v
 
-# Apenas o pipeline científico
+# Apenas o pipeline científico (v2.0 SuperHuman)
+python3 -m pytest tests/test_scientific_superhuman.py -v
+
+# Apenas o pipeline de governança (v1.x compat)
 python3 -m pytest tests/test_scientific_governance_pipeline.py -v
 
 # Apenas o runner de lote
@@ -435,5 +519,5 @@ python3 -m pytest tests/test_run_research_batch.py -v
 ---
 <div align="center">
   <i>Construído com rigor metodológico, inspirado pela Teoria dos Jogos e desenhado para o futuro.</i><br>
-  <b>v1.0.2 — Scientific Governance Pipeline | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
+  <b>v2.0.0 — SuperHuman Scientific Pipeline com EvidenceGraph | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
 </div>

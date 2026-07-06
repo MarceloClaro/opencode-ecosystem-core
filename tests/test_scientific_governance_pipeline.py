@@ -97,8 +97,8 @@ def test_pipeline_report_contains_sections():
     
     report = result["report_tex"]
     assert "Scientific Claim Report" in report
-    assert "Hypotheses" in report
-    assert "Design" in report
-    assert "Results" in report
-    assert "Adversarial Findings" in report
-    assert "Verdict" in report
+    assert "Hip" in report  # Hip\'oteses
+    assert "Experimental" in report
+    assert "Resultados" in report
+    assert "Adversarial" in report
+    assert "Veredito" in report
