@@ -58,11 +58,11 @@ Portar para o Core o analisador estatístico de lotes de pesquisa e o template f
 
 ## 5. Critérios de Aceitação
 
-- [ ] `research/pipelines/analyze_research_batch.py` existe e é importável
-- [ ] `research/results/reports/final_report_template.md` existe
-- [ ] `tests/test_analyze_research_batch.py` passa 100%
-- [ ] `tests/test_inspiration_audit.py` passa com `research_analyze_batch == implemented`
-- [ ] `tests/test_inspiration_audit.py` passa com `research_final_report_template == implemented`
+- [x] `research/pipelines/analyze_research_batch.py` existe e é importável
+- [x] `research/results/reports/final_report_template.md` existe
+- [x] `tests/test_analyze_research_batch.py` passa 100%
+- [x] `tests/test_inspiration_audit.py` passa com `research_analyze_batch == implemented`
+- [x] `tests/test_inspiration_audit.py` passa com `research_final_report_template == implemented`
 
 ## 6. TDD
 

@@ -1,0 +1,23 @@
+{
+  "problem_id": "prob-001",
+  "candidates": [
+    "Qual hipótese é falsificável com menor custo?",
+    "Qual variável explica a maior parte da incerteza?"
+  ],
+  "selected_question": "Qual variável explica a maior parte da incerteza?",
+  "scores": {
+    "URS": 0.71,
+    "SVS": 0.68,
+    "DRI": 0.21,
+    "CCI": 0.14,
+    "CS": 1.04
+  },
+  "selection_rationale": "Maior potencial de redução de incerteza com baixa dispersão.",
+  "discarded_with_reason": [
+    {
+      "question": "Qual hipótese é falsificável com menor custo?",
+      "reason": "Menor convergência e menor valor semântico esperado."
+    }
+  ],
+  "version": "1.0.0"
+}
