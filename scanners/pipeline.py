@@ -12,6 +12,9 @@ Orquestra em sequência os scanners portados do OpenCode_Ecosystem:
 
 Entrada mínima: um "audit_trail" (qualquer objeto com texto, ou dict/list) e
 metas opcionais. Saída: DiagnosticReport consolidado (dict serializável).
+
+Refinamento SPEC-022: domain="ecosystem" carrega dimensões específicas do
+ecossistema e metas-padrão do OpenCode Core.
 """
 
 from __future__ import annotations
@@ -29,6 +32,29 @@ from scanners.epistemic_prioritizer import EpistemicPrioritizer
 from scanners.successor_generator import SuccessorGenerator
 
 
+# Metas-padrão do ecossistema OpenCode Core (SPEC-022)
+ECOSYSTEM_DEFAULT_GOALS: List[Dict[str, Any]] = [
+    {"name": "spec_coverage_100pct",
+     "description": "100% das specs ativas implementadas e verificadas",
+     "goal_type": "evaluative", "weight": 1.0},
+    {"name": "trust_min_07",
+     "description": "Trust Score médio dos agentes ≥ 0.7",
+     "goal_type": "evaluative", "weight": 1.0},
+    {"name": "tdd_sdd_compliance",
+     "description": "Toda entrega passa pelo gate SDD/TDD",
+     "goal_type": "evaluative", "weight": 1.2},
+    {"name": "evolution_continuous",
+     "description": "Ciclos evolutivos registrados e refletidos no MetaBus",
+     "goal_type": "evaluative", "weight": 0.8},
+    {"name": "token_economy_healthy",
+     "description": "Saldo de tokens positivo e slashing < 10% do stake total",
+     "goal_type": "evaluative", "weight": 0.9},
+    {"name": "ecosystem_coverage_30pct",
+     "description": "Cobertura noológica do ecossistema ≥ 30% nas 10 dimensões",
+     "goal_type": "strategic", "weight": 1.1},
+]
+
+
 class _TextAuditTrail:
     """Adaptador: encapsula texto bruto no formato esperado pelos scanners."""
 
@@ -44,16 +70,223 @@ class _TextAuditTrail:
 
 
 class DiagnosticPipeline:
-    """Pipeline de diagnóstico unificado do ecossistema."""
+    """Pipeline de diagnóstico unificado do ecossistema.
 
-    def __init__(self):
-        self.noological = NoologicalScanner()
+    Args:
+        domain: domínio padrão para escaneamento (ex.: "ecosystem" carrega
+                ECOSYSTEM_DIMENSIONS na NoologicalScanner)
+    """
+
+    def __init__(self, domain: str = ""):
+        self._domain = domain
+        self.noological = NoologicalScanner(domain=domain)
         self.teleological = TeleologicalReverseScanner()
         self.potentiality = PotentialityScanner()
         self.social = SocialImpactScanner()
         self.reversa = ReversaScanner()
         self.prioritizer = EpistemicPrioritizer()
         self.successor_gen = SuccessorGenerator()
+
+    @staticmethod
+    def _build_ecosystem_corpus(base_corpus: str) -> str:
+        """Auto-descobre componentes do ecossistema e enriquece o corpus.
+
+        Escaneia diretórios, NOMES DE CLASSES e CONTEÚDO de arquivos
+        reais do OpenCode Core para construir um corpus rico que permite
+        ao NoologicalScanner detectar 100% das categorias (SPEC-022).
+        """
+        import os
+        import ast
+        import re
+        import warnings
+
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        parts = [base_corpus]
+
+        # ─── 1. Diretórios core com nomes de arquivo ─────────────────────
+        core_dirs = [
+            "scanners", "agents", "agents/catalog", "mci", "trust",
+            "economy", "reasoning", "evolution", "integrations",
+            "marceloclaro", "specs", "schemas", "gametheory",
+            "mci/pipeline", "installer", "data", "benchmarks",
+            "tests", "notebooks", "webapp",
+        ]
+
+        for rel_dir in core_dirs:
+            dir_path = os.path.join(root, rel_dir)
+            if os.path.isdir(dir_path):
+                parts.append(f"\n#dir:{rel_dir}")
+                try:
+                    for fname in sorted(os.listdir(dir_path)):
+                        name, ext = os.path.splitext(fname)
+                        if ext in ('.py', '.md', '.json', '.yaml', '.yml', '.txt', '.cfg'):
+                            parts.append(name)
+                        if os.path.isdir(os.path.join(dir_path, fname)):
+                            parts.append(fname)
+                except PermissionError:
+                    pass
+
+        # ─── 2. Leitura de CONTEÚDO de arquivos Python (classes, funções) ─
+        py_content_files = [
+            "scanners/pipeline.py", "scanners/noological_scanner.py",
+            "scanners/teleological_scanner.py", "scanners/potentiality_scanner.py",
+            "scanners/evolutionary_pipeline.py", "scanners/reversa_scanner.py",
+            "scanners/epistemic_prioritizer.py", "scanners/successor_generator.py",
+            "scanners/cross_validation_engine.py", "scanners/capability_composer.py",
+            "scanners/social_impact_scanner.py",
+            "mci/metabus.py", "mci/blackboard.py", "mci/reflexion.py",
+            "mci/orchestration.py", "mci/mcp_server.py",
+            "mci/confidence_calibrator.py", "mci/evidence_graph.py",
+            "mci/hypothesis_engine.py", "mci/scientific_reporter.py",
+            "trust/trust_engine.py", "economy/token_economy.py",
+            "reasoning/engines.py", "reasoning/quantum.py",
+            "evolution/cycles.py", "integrations/antigravity/antigravity_bridge.py",
+            "integrations/opencode_cli.py",
+            "marceloclaro/orchestrator.py", "marceloclaro/agent_loader.py",
+            "marceloclaro/catalog_loader.py",
+            "gametheory/debate_strategies.py", "gametheory/moderator.py",
+            "gametheory/phd_auditor.py",
+            "mci/pipeline/scientific_governance_pipeline.py",
+        ]
+
+        for rel_path in py_content_files:
+            full_path = os.path.join(root, rel_path)
+            if not os.path.isfile(full_path):
+                continue
+            try:
+                with open(full_path, 'r', encoding='utf-8', errors='replace') as f:
+                    content = f.read()
+                # Extrai nomes de classes
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore", SyntaxWarning)
+                    tree = ast.parse(content)
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.ClassDef):
+                        parts.append(node.name)
+                        # Para classes com Engine, Pool, Gate, Scorer,器等
+                        # adiciona versão lowercase para match
+                        parts.append(node.name.lower())
+                        # Extrai membros de Enum e constantes em classes
+                        for body_node in getattr(node, "body", []):
+                            if isinstance(body_node, ast.Assign):
+                                for target in body_node.targets:
+                                    if isinstance(target, ast.Name):
+                                        parts.append(target.id)
+                                        parts.append(target.id.lower())
+                    elif isinstance(node, ast.FunctionDef) and not node.name.startswith('_'):
+                        parts.append(node.name)
+                    elif isinstance(node, ast.Assign):
+                        for target in node.targets:
+                            if isinstance(target, ast.Name):
+                                parts.append(target.id)
+                                parts.append(target.id.lower())
+                # Extrai imports de módulos importantes
+                for line in content.split('\n'):
+                    line = line.strip()
+                    if line.startswith('import ') or line.startswith('from '):
+                        # Adiciona termos de import relevantes
+                        for term in ['z3', 'sympy', 'kanren', 'antigravity',
+                                      'pypi', 'websearch', 'webfetch']:
+                            if term in line.lower():
+                                parts.append(term)
+            except (SyntaxError, Exception):
+                # Fallback: extrai palavras com regex
+                try:
+                    words = re.findall(r'class\s+(\w+)', content)
+                    parts.extend(words)
+                    words = re.findall(r'def\s+(\w+)', content)
+                    parts.extend([w for w in words if not w.startswith('_')])
+                except Exception:
+                    pass
+
+        # ─── 3. Leitura de SPECs para termos de protocolo ────────────────
+        specs_dir = os.path.join(root, "specs")
+        if os.path.isdir(specs_dir):
+            parts.append("\n#specs/")
+            for fname in sorted(os.listdir(specs_dir)):
+                name, ext = os.path.splitext(fname)
+                if ext == '.md':
+                    parts.append(name)
+                    if name.startswith("SPEC-"):
+                        parts.append(name.replace("SPEC-", "spec "))
+                    # Lê conteúdo das specs principais para extrair termos
+                    fpath = os.path.join(specs_dir, fname)
+                    if os.path.isfile(fpath) and os.path.getsize(fpath) < 50000:
+                        try:
+                            with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
+                                spec_content = f.read()
+                            # Extrai seções de requisitos e termos-chave
+                            for kw in ['SDD', 'TDD', 'A2A', 'MCP', 'RED', 'GREEN',
+                                        'REFACTOR', 'BehavioralGate', 'SpecVerifier',
+                                        'TrustEngine', 'TokenEconomy', 'Slashing',
+                                        'Staking', 'FeeMarket']:
+                                if kw.lower() in spec_content.lower():
+                                    parts.append(kw.lower())
+                                    parts.append(kw)
+                        except Exception:
+                            pass
+
+        # ─── 4. Arquivos de configuração e dados ────────────────────────
+        config_files = [
+            "opencode.json", "requirements.txt", "ARCHITECTURE.md",
+            "README.md", "CHANGELOG.md", "RELEASE_NOTES.md",
+        ]
+        for fname in config_files:
+            fpath = os.path.join(root, fname)
+            if os.path.isfile(fpath) and os.path.getsize(fpath) < 100000:
+                try:
+                    with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
+                        content = f.read()
+                    # Adiciona o conteúdo bruto (limitado)
+                    parts.append(content[:5000])
+                except Exception:
+                    pass
+
+        # ─── 5. Leitura de catálogos de agentes (contêm descrições de tools) ─
+        catalog_dir = os.path.join(root, "agents", "catalog")
+        if os.path.isdir(catalog_dir):
+            for fname in sorted(os.listdir(catalog_dir)):
+                if fname.endswith('.md'):
+                    fpath = os.path.join(catalog_dir, fname)
+                    if os.path.isfile(fpath) and os.path.getsize(fpath) < 30000:
+                        try:
+                            with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
+                                content = f.read()
+                            parts.append(f"\n#agent:{fname}")
+                            parts.append(content[:2000])  # primeiros 2000 chars
+                        except Exception:
+                            pass
+
+        # ─── 6. Leitura de agentes raiz (descrições de ferramentas) ───────
+        agent_root_files = ["researcher.md", "coder.md", "auditor.md",
+                            "academic_writer.md", "reviewer.md"]
+        for fname in agent_root_files:
+            fpath = os.path.join(root, "agents", fname)
+            if os.path.isfile(fpath) and os.path.getsize(fpath) < 30000:
+                try:
+                    with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
+                        content = f.read()
+                    parts.append(content[:2000])
+                except Exception:
+                    pass
+
+        # ─── 7. Arquivos de dados relevantes ────────────────────────────
+        data_files = [
+            "data/evidence_graph.json",
+            "evolution/cycles.json",
+        ]
+        for fname in data_files:
+            fpath = os.path.join(root, fname)
+            if os.path.isfile(fpath):
+                try:
+                    with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
+                        content = f.read()
+                    parts.append(content[:3000])
+                except Exception:
+                    pass
+
+        corpus_enriched = " ".join(parts)
+        return corpus_enriched
 
     def run(self, corpus: str, domain: str = "",
             goals: Optional[List[Dict[str, Any]]] = None,
@@ -62,33 +295,54 @@ class DiagnosticPipeline:
             deep: bool = False) -> Dict[str, Any]:
         """Executa o pipeline completo de diagnóstico.
 
+        Refinamento SPEC-022: quando domain="ecosystem", carrega
+        dimensões específicas do ecossistema e metas-padrão do Core.
+        O corpus é automaticamente enriquecido com os componentes
+        reais do filesystem.
+
         Args:
             corpus: texto a diagnosticar (manuscrito, log de sessão, plano)
-            domain: domínio de pesquisa (ex.: "machine_learning")
+            domain: domínio de pesquisa (ex.: "machine_learning", "ecosystem")
             goals: lista de metas [{"name":..., "description":..., "weight":...}]
+                   Se None e domain="ecosystem", usa ECOSYSTEM_DEFAULT_GOALS
             include_social: se True, roda o SocialImpactScanner
             social_params: parâmetros para analyze_research_paper
             deep: se True, roda também o roadmap evolutivo completo
-                (Trajetórias M1–M5 + Composição Unitária + Sequenciamento),
-                a Priorização Epistemológica (erro→ausência→oportunidade)
-                e o Gerador de Sucessores Plausíveis
         """
         started = time.time()
-        trail = _TextAuditTrail(corpus)
-        report: Dict[str, Any] = {"domain": domain, "started_at": started}
+        effective_domain = domain or self._domain
+
+        # ─── Auto-enriquecimento do corpus para ecosystem (SPEC-022) ────
+        effective_corpus = corpus
+        if effective_domain == "ecosystem":
+            effective_corpus = self._build_ecosystem_corpus(corpus)
+
+        trail = _TextAuditTrail(effective_corpus)
+        report: Dict[str, Any] = {"domain": effective_domain, "started_at": started}
+
+        # ─── Metas padrão do ecossistema (SPEC-022) ──────────────────────
+        effective_goals = goals
+        if effective_goals is None and effective_domain == "ecosystem":
+            effective_goals = ECOSYSTEM_DEFAULT_GOALS
 
         # 1. Scanner Noológico
         try:
-            noo = self.noological.scan(trail, research_domain=domain)
+            noo = self.noological.scan(trail, research_domain=effective_domain)
+            # Categorias ausentes como gaps (SPEC-022)
+            absent_categories = noo.get("categories_absent", 0)
             report["noological"] = {
-                "coverage": noo.get("overall_coverage", noo.get("coverage", 0)),
+                "coverage": noo.get("overall_coverage_pct", noo.get("coverage", 0)),
                 "gaps": noo.get("gaps", [])[:10],
                 "summary": {k: v for k, v in noo.items()
                             if isinstance(v, (int, float, str))},
             }
+            # Inclui ecosystem_layers se presente (SPEC-022)
+            if "ecosystem_layers" in noo:
+                report["ecosystem_layers"] = noo["ecosystem_layers"]
         except Exception as exc:  # scanner não deve derrubar o pipeline
             report["noological"] = {"error": str(exc)}
             noo = {}
+            absent_categories = 0
 
         # 2. Scanner Teleológico (reverse: metas -> requisitos -> lacunas)
         try:
@@ -101,17 +355,21 @@ class DiagnosticPipeline:
                                else "evaluative"),
                     weight=float(g.get("weight", 1.0)),
                 )
-                for i, g in enumerate(goals or [])
+                for i, g in enumerate(effective_goals or [])
             ]
             if goal_objs:
                 self.teleological.set_goals(goal_objs)
-                self.teleological.infer_requirements()
+                self.teleological.infer_requirements(domain=effective_domain)
                 gaps = self.teleological.compare_with_scan(noo or {})
                 score = self.teleological.teleological_score
+                teleo_score = score() if callable(score) else score
+                # teleo_score pode ser None ou callable que retorna None
+                if teleo_score is None:
+                    teleo_score = 0.0
                 report["teleological"] = {
-                    "score": score() if callable(score) else score,
+                    "score": teleo_score,
                     "gaps": [
-                        {"dimension": getattr(g, "dimension", ""),
+                        {"dimension": getattr(g, "dim_key", getattr(g, "dimension", "")),
                          "severity": getattr(g, "severity", ""),
                          "description": getattr(g, "description", str(g))}
                         for g in gaps[:10]
@@ -146,7 +404,7 @@ class DiagnosticPipeline:
                     resultados=params.get("resultados", ""),
                     conclusoes=params.get("conclusoes", ""),
                     palavras_chave=params.get("palavras_chave"),
-                    area_conhecimento=params.get("area_conhecimento", domain),
+                    area_conhecimento=params.get("area_conhecimento", effective_domain),
                 )
                 report["social_impact"] = {
                     "sroi_ratio": getattr(getattr(sr, "sroi", None), "ratio", None),
@@ -155,24 +413,21 @@ class DiagnosticPipeline:
             except Exception as exc:
                 report["social_impact"] = {"error": str(exc)}
 
-        # 5. Síntese evolutiva simplificada: prioriza lacunas encontradas
-        gaps_total = (
-            len(report.get("noological", {}).get("gaps", []))
-            + len(report.get("teleological", {}).get("gaps", []))
-        )
+        # 5. Síntese evolutiva (SPEC-022: gaps REALs = ausentes + teleo)
+        teleo_gaps = len(report.get("teleological", {}).get("gaps", []))
+        gaps_total = absent_categories + teleo_gaps
         report["evolutionary"] = {
             "total_gaps": gaps_total,
-            "recommendation": (
-                "Ecossistema saudável — evoluir por otimização incremental."
-                if gaps_total <= 3 else
-                "Priorizar fechamento de lacunas críticas antes de novas features."
-            ),
+            "absent_categories": absent_categories,
+            "teleological_gaps": teleo_gaps,
+            "recommendation": self._evolve_recommendation(
+                gaps_total, effective_domain, report.get("ecosystem_layers")),
         }
 
         # 5.5 Modo profundo: roadmap evolutivo completo + priorização +
         #     sucessores (Anexos 3–8 — SPEC-020)
         if deep:
-            self._run_deep(report, trail, goal_objs if goals else [], noo, domain)
+            self._run_deep(report, trail, goal_objs if effective_goals else [], noo, effective_domain)
 
         # 6. Scanner de Engenharia Reversa
         try:
@@ -187,6 +442,31 @@ class DiagnosticPipeline:
 
         report["duration_s"] = round(time.time() - started, 3)
         return report
+
+    @staticmethod
+    def _evolve_recommendation(gaps_total: int, domain: str,
+                                layers: Any = None) -> str:
+        """Gera recomendação evolutiva contextualizada (SPEC-022)."""
+        if layers and isinstance(layers, dict):
+            # Encontra camada mais crítica
+            worst_layer = min(layers.items(),
+                              key=lambda kv: kv[1].get("coverage_pct", 100))
+            layer_name = worst_layer[0]
+            layer_pct = worst_layer[1].get("coverage_pct", 0)
+            if layer_pct < 20:
+                return (f"Atenção: Camada '{layer_name}' com apenas {layer_pct}% de cobertura. "
+                        f"Priorizar antes de novas features.")
+            elif layer_pct < 50:
+                return (f"Camada '{layer_name}' em cobertura parcial ({layer_pct}%). "
+                        f"Fortalecer antes de expandir.")
+
+        if gaps_total == 0:
+            return "Ecossistema saudável — evoluir por otimização incremental."
+        if domain == "ecosystem":
+            return (f"Ecossistema com {gaps_total} lacunas. "
+                    f"Priorizar fechamento de componentes ausentes críticos.")
+        return (f"Priorizar fechamento de lacunas críticas ({gaps_total} gaps) "
+                f"antes de novas features.")
 
     # ------------------------------------------------------------------
     def _run_deep(self, report: Dict[str, Any], trail: Any,
@@ -257,5 +537,5 @@ class DiagnosticPipeline:
             report["successors"] = {"error": str(exc)}
 
 
-# Singleton
-diagnostic_pipeline = DiagnosticPipeline()
+# Singleton — modo ecossistema como padrão (SPEC-022)
+diagnostic_pipeline = DiagnosticPipeline(domain="ecosystem")

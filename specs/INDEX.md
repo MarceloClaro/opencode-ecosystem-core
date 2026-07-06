@@ -19,6 +19,7 @@ Este diretório consolida a rastreabilidade completa do ecossistema, combinando 
 | SPEC-011 | Raciocínio + Quantum | `reasoning/` |
 | SPEC-012 | Ciclos Evolutivos | `evolution/cycles.py` |
 | SPEC-013 | Integrações CLI | `integrations/` |
+| SPEC-022 | Pipeline de Diagnóstico Refinado (Ecossistema) | `scanners/pipeline.py` + `scanners/noological_scanner.py` |
 
 ## Acervo Legado (`specs/legacy/`)
 
