@@ -33,6 +33,7 @@ from transformer.pipeline import TransformerPipeline, GradingHead
 from transformer.memory import HierarchicalMemory
 from sdd.spec_engine import spec_registry, spec_verifier
 from sdd.tdd_runner import tdd_runner, run_pytest
+from marceloclaro.inspiration_audit import audit_inspirations as run_inspiration_audit
 from trust import create_trust_engine
 from economy import TokenEconomy
 from scanners import diagnostic_pipeline
@@ -388,6 +389,21 @@ class MarceloClaroOrchestrator:
     def audit_specs(self) -> Dict[str, Any]:
         """Relatório de cobertura SDD: specs formais + dinâmicas registradas."""
         return spec_registry.coverage_report()
+
+    def audit_inspirations(self) -> Dict[str, Any]:
+        """Audita a portabilidade das inspirações do diretório INSPIRAÇÕES/."""
+        report = run_inspiration_audit()
+        summary = report["summary"]
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="auditoria de inspirações do ecossistema",
+            reflection=(
+                f"Auditoria de inspirações concluída: {summary['implemented']} implementadas, "
+                f"{summary['partial']} parciais e {summary['absent']} ausentes."
+            ),
+            score=summary["implemented"] / max(1, summary["total_items"]),
+        )
+        return report
 
     def run_test_suite(self) -> Dict[str, Any]:
         """Executa a bateria pytest real e registra o resultado na memória global."""
