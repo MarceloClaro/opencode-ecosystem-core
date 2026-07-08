@@ -667,6 +667,30 @@
         "Próximo passo: validação empírica das teses com painel de professores especialistas"
       ],
       "timestamp": 1783547552.0078385
+    },
+    {
+      "round_id": "R77",
+      "objective": "Exploracao Combinatorial Guiada por Embedding + Scoring Semantico",
+      "changes": [
+        "Semantically-Guided Generation: amostragem por aceitacao-rejeicao via similaridade semantica neural",
+        "Zona otima de descoberta [0.20, 0.55]: 100% dos pares nessa faixa (vs distribuicao aleatoria)",
+        "guided_concept_sample: amostragem ponderada priorizando zona fertil interdisciplinar",
+        "should_accept_pair: aceitacao 80% na zona otima, 10-15% fora (mantem diversidade)",
+        "Novelty semantica: substitui Jaccard de sets por distancia media de embeddings entre pares",
+        "Impacto com abrangencia entre faculdades: normalizacao de acentos via NFKD",
+        "Ex: justica e loucura detectados em 2 faculdades cada -> impacto 0.667",
+        "Triplas e quadruplas com filtro de coerencia minima (0.08)",
+        "444 testes TDD passando"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "Exploracao guiada por embedding eh mais eficiente que random sampling",
+        "Zona otima [0.20, 0.55] captura o meio fertil da interdisciplinaridade",
+        "Novelty semantica explora o espaco semantico, nao apenas o lexical",
+        "NFKD essencial para lingua portuguesa (acentos)",
+        "R75+R76+R77 formam trio completo: embedding -> refinamento -> exploracao guiada"
+      ],
+      "timestamp": 1783547955.1548822
     }
   ]
 }
