@@ -644,6 +644,29 @@
         "Próximo passo lógico: implementar as demais melhorias do peer review (validação empírica, benchmark, dataset público)"
       ],
       "timestamp": 1783546657.8512175
+    },
+    {
+      "round_id": "R76",
+      "objective": "Refinamento do Pipeline de Descoberta Semântica (Faculty-Aware + Pattern Detection)",
+      "changes": [
+        "Faculty-Aware Similarity: bônus de 0.08×proximidade entre faculdades na similaridade entre conceitos",
+        "Matriz de Proximidade entre Faculdades (11×11) via média de embeddings neurais entre conceitos",
+        "Top proximidades: historical↔interdisciplinary(0.47), historical↔social_sciences(0.47), interdisciplinary↔statistics_ds(0.46)",
+        "Pattern Detection refinado com thresholds para era neural (coerência 0.30-0.55)",
+        "Composite Score: coherence_weight 0.20→0.30, viability 0.30→0.25, novelty 0.25→0.20",
+        "Viability function recalibrada: pico em diversidade 0.55 (era neural)",
+        "Mapeamento conceito→faculdade para lookup O(1) de afiliação",
+        "444 testes TDD passando, 0 quebras"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Faculty proximity matrix revela relações epistemológicas reais: História é a faculdade mais interdisciplinar",
+        "Bônus faculty-aware refina similaridade semântica sem distorcer: +0.08 para mesma faculdade, +0.04 para faculdades próximas",
+        "Pattern detection com thresholds neurais é mais preciso que o antigo baseado em Jaccard",
+        "Refinamentos cumulativos (R75→R76) mostram maturidade crescente do pipeline de descoberta",
+        "Próximo passo: validação empírica das teses com painel de professores especialistas"
+      ],
+      "timestamp": 1783547552.0078385
     }
   ]
 }

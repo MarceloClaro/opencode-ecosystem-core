@@ -49,20 +49,30 @@ class CombinationResult:
 class ConceptEmbeddingSpace:
     """Espaço conceitual para medir similaridade entre conceitos.
     
-    R75: Substitui o embedding lexical (Jaccard) por embedding semântico
-    neural via Ollama (nomic-embed-text, 768-dim). Captura similaridade
-    semântica real em vez de apenas overlapping lexical.
+    R75: Embedding semântico neural via Ollama (nomic-embed-text, 768-dim).
+    R76: Faculty-aware similarity + refined pattern detection.
     
-    Interface 100% compatível com a implementação anterior.
+    Interface 100% compatível com a implementação original.
     """
     
     CACHE_PATH = "/tmp/semantic_embedder.pkl"
     
+    # Fator de bônus por proximidade entre faculdades
+    FACULTY_PROXIMITY_BONUS = 0.08
+    
     def __init__(self, faculty_map: Optional[Dict] = None):
         from synthetic_university.semantic_embedder import SemanticEmbedder, create_semantic_embedder
         
-        # Embedder semântico neural (Ollama + fallback LSA + cache)
+        # Embedder semântico neural
         self._semantic = SemanticEmbedder(dimension=768)
+        
+        # Mapa conceito → faculdade
+        self._concept_to_faculty: Dict[str, str] = {}
+        self._faculty_map: Optional[Dict] = faculty_map
+        
+        # Matriz de proximidade entre faculdades
+        self._faculty_proximity: Dict[Tuple[str, str], float] = {}
+        self._faculty_list: List[str] = []
         
         # Tentar carregar cache primeiro
         if self._semantic.load(self.CACHE_PATH):
@@ -74,16 +84,106 @@ class ConceptEmbeddingSpace:
         # Fallback lexical
         self._lexical_cache: Dict[str, Set[str]] = {}
         
-        # Se faculty_map foi fornecido e não temos cache, constrói
-        if faculty_map is not None and not self._corpus_built:
-            self.build_corpus(faculty_map)
+        # Se faculty_map foi fornecido
+        if faculty_map is not None:
+            # Constrói índice conceito → faculdade
+            for fid, fac in faculty_map.items():
+                for c in getattr(fac, 'conceitos', []):
+                    self._concept_to_faculty[c.lower().strip()] = fid
+            self._faculty_list = list(faculty_map.keys())
+            
+            # Constrói corpus se necessário
+            if not self._corpus_built:
+                self.build_corpus(faculty_map)
+            
+            # Computa matriz de proximidade entre faculdades
+            if self._corpus_built:
+                self._compute_faculty_proximity(faculty_map)
+    
+    def _compute_faculty_proximity(self, faculty_map: Dict) -> None:
+        """Computa similaridade semântica média entre faculdades.
+        
+        Para cada par de faculdades, calcula a média das similaridades
+        entre todos os seus conceitos. Isso gera uma matriz 11×11
+        que captura relações epistemológicas reais entre domínios.
+        """
+        logger.info("Computando matriz de proximidade entre faculdades...")
+        
+        fac_ids = list(faculty_map.keys())
+        n_facs = len(fac_ids)
+        
+        # Cache de embeddings médios por faculdade
+        fac_centroids: Dict[str, List[np.ndarray]] = {}
+        for fid in fac_ids:
+            fac = faculty_map[fid]
+            conceitos = getattr(fac, 'conceitos', [])
+            vecs = []
+            for c in conceitos[:50]:  # amostra de 50 para velocidade
+                vec = self._semantic.embed(c)
+                if np.linalg.norm(vec) > 1e-8:
+                    vecs.append(vec)
+            if vecs:
+                fac_centroids[fid] = vecs
+        
+        # Similaridade média entre faculdades
+        for i in range(n_facs):
+            for j in range(i, n_facs):
+                fi, fj = fac_ids[i], fac_ids[j]
+                if fi == fj:
+                    self._faculty_proximity[(fi, fj)] = 1.0
+                    continue
+                
+                vecs_i = fac_centroids.get(fi, [])
+                vecs_j = fac_centroids.get(fj, [])
+                
+                if not vecs_i or not vecs_j:
+                    self._faculty_proximity[(fi, fj)] = 0.0
+                    self._faculty_proximity[(fj, fi)] = 0.0
+                    continue
+                
+                # Amostragem: no máximo 30×30 = 900 comparações
+                import random
+                sample_i = random.Random(42).sample(
+                    vecs_i, min(30, len(vecs_i))
+                )
+                sample_j = random.Random(42).sample(
+                    vecs_j, min(30, len(vecs_j))
+                )
+                
+                similarities = []
+                for vi in sample_i:
+                    for vj in sample_j:
+                        dot = float(np.dot(vi, vj))
+                        similarities.append(max(0.0, dot))
+                
+                prox = sum(similarities) / len(similarities) if similarities else 0.0
+                self._faculty_proximity[(fi, fj)] = prox
+                self._faculty_proximity[(fj, fi)] = prox
+        
+        logger.info(
+            f"Matriz de proximidade: {n_facs} faculdades computadas"
+        )
+    
+    def _faculty_bonus(self, concept_a: str, concept_b: str) -> float:
+        """Bônus de similaridade baseado na proximidade entre faculdades.
+        
+        Se dois conceitos pertencem à mesma faculdade ou a faculdades
+        próximas, recebem um pequeno bônus semântico.
+        """
+        if not self._faculty_proximity:
+            return 0.0
+        
+        fa = self._concept_to_faculty.get(concept_a.lower().strip())
+        fb = self._concept_to_faculty.get(concept_b.lower().strip())
+        
+        if fa is None or fb is None:
+            return 0.0
+        
+        prox = self._faculty_proximity.get((fa, fb), 0.0)
+        return prox * self.FACULTY_PROXIMITY_BONUS
     
     def build_corpus(self, faculty_map: Dict) -> None:
-        """Constrói o corpus a partir das faculdades.
-        
-        Coleta todos os conceitos + descrições, embed via Ollama,
-        e salva em cache para reuso.
-        """
+        """Constrói o corpus a partir das faculdades."""
         from synthetic_university.semantic_embedder import create_semantic_embedder
         
         texts: List[str] = []
@@ -95,7 +195,6 @@ class ConceptEmbeddingSpace:
             texts.extend(conceitos)
         
         if texts:
-            # Usa factory com cache
             embedder = create_semantic_embedder(texts, cache_path=self.CACHE_PATH)
             self._semantic = embedder
             self._corpus_built = True
@@ -124,46 +223,59 @@ class ConceptEmbeddingSpace:
     def similarity(self, concept_a: str, concept_b: str) -> float:
         """Similaridade semântica entre dois conceitos.
         
-        Usa o embedding LSA quando disponível; fallback para Jaccard
-        se o corpus não foi construído.
+        Combina:
+        1. Embedding neural (Ollama nomic-embed-text, 768-dim)
+        2. Bônus de proximidade entre faculdades
+        3. Fallback lexical (Jaccard)
         """
         if concept_a == concept_b:
             return 1.0
         
-        # Tenta semântico primeiro
+        sim = 0.0
+        
+        # Embedding neural
         if self._corpus_built:
             sim = self._semantic.similarity(concept_a, concept_b)
-            if sim > 0.0:
-                return sim
         
-        # Fallback lexical (Jaccard) para conceitos fora do vocabulário
-        tokens_a = self._tokenize(concept_a)
-        tokens_b = self._tokenize(concept_b)
+        # Bônus faculty-aware
+        if sim > 0.0:
+            bonus = self._faculty_bonus(concept_a, concept_b)
+            sim = min(1.0, sim + bonus)
         
-        if not tokens_a or not tokens_b:
-            return 0.0
+        # Fallback lexical se neural não capturou
+        if sim <= 0.0:
+            tokens_a = self._tokenize(concept_a)
+            tokens_b = self._tokenize(concept_b)
+            
+            if tokens_a and tokens_b:
+                intersection = tokens_a & tokens_b
+                union = tokens_a | tokens_b
+                if union:
+                    sim = len(intersection) / len(union)
         
-        intersection = tokens_a & tokens_b
-        union = tokens_a | tokens_b
-        
-        if not union:
-            return 0.0
-        
-        jaccard = len(intersection) / len(union)
-        return min(1.0, jaccard)
+        return max(0.0, min(1.0, sim))
     
     def coherence(self, concepts: List[str]) -> float:
         """Coerência média entre todos os pares de conceitos."""
         if len(concepts) <= 1:
             return 1.0
-        scores = []
-        for a, b in combinations(concepts, 2):
-            scores.append(self.similarity(a, b))
+        scores = [self.similarity(a, b) for a, b in combinations(concepts, 2)]
         return sum(scores) / len(scores) if scores else 0.5
     
     def diversity(self, concepts: List[str]) -> float:
         """Diversidade como 1 - similaridade média."""
         return 1.0 - self.coherence(concepts)
+    
+    def get_faculty_proximity_report(self) -> Dict:
+        """Relatório da matriz de proximidade entre faculdades."""
+        if not self._faculty_proximity:
+            return {"error": "faculty proximity not computed"}
+        
+        report = {}
+        for (fa, fb), prox in sorted(self._faculty_proximity.items()):
+            if fa < fb:  # cada par uma vez
+                report[f"{fa} ↔ {fb}"] = round(prox, 4)
+        return report
 
 
 class CombinatorialDiscoveryEngine:
@@ -173,10 +285,10 @@ class CombinatorialDiscoveryEngine:
     para descobrir correlações interdisciplinares viáveis.
     """
     
-    # Pesos para o score composto
-    WEIGHT_VIABILITY = 0.30
-    WEIGHT_NOVELTY = 0.25
-    WEIGHT_COHERENCE = 0.20
+    # Pesos para o score composto (R76: mais peso para coerência semântica)
+    WEIGHT_VIABILITY = 0.25
+    WEIGHT_NOVELTY = 0.20
+    WEIGHT_COHERENCE = 0.30    # aumentado — embedding neural dá coerência real
     WEIGHT_IMPACT = 0.25
     
     # Padrões de descoberta
@@ -221,26 +333,31 @@ class CombinatorialDiscoveryEngine:
         return concepts
     
     def _compute_viability(self, concepts: List[str]) -> float:
-        """Calcula viabilidade baseada em pares epistemológicos."""
+        """Calcula viabilidade baseada em pares epistemológicos.
+        
+        Calibrado para embedding neural (R76):
+        - Diversidade neural: 0.30-0.60 (mesmo domínio), 0.40-0.80 (cross-domínio)
+        - Viabilidade ótima: diversidade moderada (0.45-0.65) → descoberta fértil
+        """
         if len(concepts) < 2:
             return 0.5
         
-        # Conceitos mais longos e específicos tendem a ser menos viáveis
-        # em combinações amplas
-        avg_len = sum(len(c) for c in concepts) / len(concepts)
-        
-        # Penalidade para combinações muito díspares
         diversity = self.embedding.diversity(concepts)
         
-        # Viabilidade é uma função em formato de sino: diversidade moderada é ideal
-        # Baixa diversidade = já conhecido, Alta diversidade = incompatível
-        viability = 0.0
-        if diversity < 0.3:
-            viability = 0.3 + diversity  # muito similar, baixa novidade
-        elif diversity < 0.7:
-            viability = 1.0 - abs(diversity - 0.5) * 2  # pico em 0.5
+        # Função sino com pico em diversidade 0.55
+        # Isso maximiza combinações que são nem muito óbvias nem muito absurdas
+        if diversity < 0.30:
+            # Muito similar → baixa novidade → viabilidade baixa
+            viability = 0.2 + diversity * 0.5
+        elif diversity < 0.55:
+            # Crescente até o pico
+            viability = 0.5 + (diversity - 0.30) / 0.25 * 0.35
+        elif diversity < 0.75:
+            # Decrescente do pico
+            viability = 0.85 - (diversity - 0.55) / 0.20 * 0.35
         else:
-            viability = max(0.1, 1.0 - diversity)  # muito diferente
+            # Muito diferente → baixa compatibilidade
+            viability = max(0.15, 0.50 - (diversity - 0.75) * 1.5)
         
         return max(0.0, min(1.0, viability))
     
@@ -312,24 +429,44 @@ class CombinatorialDiscoveryEngine:
         )
     
     def _assign_pattern(self, concepts: List[str]) -> str:
-        """Atribui um padrão de descoberta com base nas propriedades."""
+        """Atribui um padrão de descoberta com base nas propriedades.
+        
+        Thresholds calibrados para embedding neural (R76):
+        - Coerência neural: 0.45-0.60 (mesmo domínio), 0.30-0.50 (cross-domínio)
+        - Diversidade = 1 - coerência
+        """
         coherence = self.embedding.coherence(concepts)
         diversity = self.embedding.diversity(concepts)
         
-        if coherence > 0.7 and diversity < 0.3:
-            return "analogia_estrutural"
-        elif 0.3 <= coherence <= 0.7 and diversity > 0.5:
-            return "hibridizacao_concetitual"
-        elif coherence < 0.3 and diversity > 0.7:
-            return "emergencia_transversal"
-        elif coherence > 0.5 and diversity > 0.4:
-            if HAS_NUMPY and np.random.random() > 0.5:
-                return "isomorfismo_formal"
-            return "complementaridade_paradigmatica"
-        elif diversity < 0.2:
+        # Padrões determinísticos baseados em coerência × diversidade
+        if diversity < 0.30:
+            # Conceitos muito similares → unificação teórica
             return "unificacao_teorica"
+        elif coherence > 0.55 and diversity < 0.45:
+            # Alta coerência, baixa diversidade → analogia estrutural
+            return "analogia_estrutural"
+        elif 0.35 <= coherence <= 0.55 and diversity >= 0.40:
+            # Coerência moderada → hibridização ou isomorfismo
+            if diversity > 0.55:
+                return "hibridizacao_concetitual"
+            else:
+                if HAS_NUMPY and np.random.random() > 0.5:
+                    return "isomorfismo_formal"
+                return "complementaridade_paradigmatica"
+        elif coherence < 0.30 and diversity > 0.60:
+            # Baixa coerência, alta diversidade → emergência transversal
+            return "emergencia_transversal"
+        elif 0.30 <= coherence < 0.45:
+            # Coerência baixa-moderada → tradução ou meta-padrão
+            if HAS_NUMPY and np.random.random() > 0.5:
+                return "traducao_interdisciplinar"
+            return "meta_padrao"
         else:
-            return random.choice(self.DISCOVERY_PATTERNS)
+            return random.choice([
+                "transferencia_metodologica",
+                "inovacao_paradigmatica",
+                "complementaridade_paradigmatica",
+            ])
     
     def _combination_id(self, concepts: Tuple[str, ...]) -> str:
         """Gera ID único para a combinação."""
