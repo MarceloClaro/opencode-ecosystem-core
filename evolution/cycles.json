@@ -1017,6 +1017,61 @@
         "Pipeline assincrono: Antigravity Image > SVG fallback"
       ],
       "timestamp": 1783552173.2606952
+    },
+    {
+      "round_id": "R91",
+      "objective": "Multi-LLM Blind Peer Review — 3 revisores reais com LLM",
+      "changes": [
+        "Criado synthetic_university/peer_review.py",
+        "Sistema de revisao cega com 3 perfis de revisores",
+        "Revisao real via OpenCode CLI com feedback estruturado",
+        "Parser semantico de texto livre para campos estruturados",
+        "Review report com score agregado, std, decisao editorial",
+        "Cache por hash da tese"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "LLM com diferentes personas produz perspectivas genuinamente diversas",
+        "Parser semantico funciona melhor que forcar formato rigido",
+        "Decisao editorial (Accept/Minor/Major/Reject) via regras claras"
+      ],
+      "timestamp": 1783552948.3897774
+    },
+    {
+      "round_id": "R92",
+      "objective": "Submission Package Generator — pacotes Qualis A1",
+      "changes": [
+        "Criado synthetic_university/submission_package.py",
+        "Compliance check para 3 periodicos (JAI Ethics, Nature MI, AI&Society)",
+        "Geracao de cover letter, metadata, checklist, response to reviewers",
+        "Estrutura de diretorios: manuscript, figures, metadata, reviews",
+        "Pacotes reais gerados em academic/submissions/"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Pacotes de submissao devem ser modulares por periodico",
+        "Compliance check evita erros de formatacao na submissao",
+        "Template de response to reviewers acelera iteracao"
+      ],
+      "timestamp": 1783552948.3897836
+    },
+    {
+      "round_id": "R93",
+      "objective": "Academic Novelty Analysis — score de originalidade vs literatura",
+      "changes": [
+        "Criado synthetic_university/novelty_analysis.py",
+        "Busca de literatura similar via OpenCode CLI",
+        "Score de novidade (0-100) com 3 componentes",
+        "Mapa de contribuicoes: adicoes, sobreposicoes, lacunas",
+        "Relatorio de posicionamento academico"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Novelty score com multiplos componentes e mais robusto que score unico",
+        "Penalidade por similaridade com literatura evita superestimativa",
+        "Fallback para dados simulados quando busca web falha"
+      ],
+      "timestamp": 1783552948.3897855
     }
   ]
 }
