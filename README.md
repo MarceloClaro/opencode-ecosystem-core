@@ -400,6 +400,7 @@ graph TD
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
+        Legal[Legal Reasoning<br>Subsunção·Ponderação·Precedentes]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
@@ -450,6 +451,9 @@ graph TD
     Trust -->|Outcomes e confiança| MetaEval
     SCI --> RAG
     Orchestrator -->|5. Pipeline Científico| OQS
+    Orchestrator -->|6. Raciocínio Jurídico| Legal
+    Legal -->|Subsunção + Ponderação| Reason
+    Legal -->|Interpretação Constitucional| MetaEval
     EGS -->|Reflete Resultado| MB
     
     %% Agentes
@@ -496,6 +500,7 @@ Inspirada na arquitetura de Vaswani (2017) e nos modelos da DeepMind.
 - **Trust Engine & Token Economy:** Agentes fazem *stake* de tokens para assumir tarefas. Se falharem no TDD, sofrem *slashing*. O *Behavioral Gate* barra agentes com histórico de alucinação.
 - **Deep Diagnose:** 5 Scanners (Noológico, Teleológico, Evolutivo, etc.) que fazem engenharia reversa de código, priorização epistemológica e geram "Sucessores Plausíveis" para o seu projeto.
 - **MiroFish & Game Theory:** Um enxame preditivo que debate usando o método Delphi e constrói um **Grafo de Conhecimento** em memória para extrair consensos matemáticos.
+- **Legal Reasoning (SPEC-921):** Raciocínio jurídico brasileiro especializado com 5 motores: subsunção legal (silogismo fato-norma + hierarquia + antinomia), ponderação de princípios (fórmula do peso de Alexy + proporcionalidade tripartite), análise de precedentes vinculantes (ratio decidendi, distinguishing, overruling, súmulas vinculantes), interpretação constitucional (7 métodos hermenêuticos) e scoring de argumentação jurídica (validade legal > jurisprudência > doutrina).
 - **Publishing & Research:** Automação Qualis A1. Busca artigos (Sci-Hub/OpenAlex), converte PDF para Markdown, faz fichamentos ABNT/APA, gera ilustrações didáticas (MIRA) e compila livros inteiros em LaTeX com capas geradas por IA.
 
 ---
