@@ -43,6 +43,17 @@ def test_summarize_legal_impact_section_extracts_metrics():
     assert summary["high_risk_count"] == 2
 
 
+def test_summarize_legal_domain_route_returns_specialist():
+    from webapp.legal_impact_helpers import summarize_legal_domain_route
+
+    route = summarize_legal_domain_route(
+        "dados pessoais, consentimento, controlador e incidente de segurança"
+    )
+
+    assert route["domain_id"] == "digital_lgpd"
+    assert "Especialista" in route["specialist_agent_name"]
+
+
 def test_orchestrator_diagnose_supports_legal_impact():
     from marceloclaro.orchestrator import MarceloClaroOrchestrator
 
@@ -85,3 +96,5 @@ def test_webapp_source_contains_dedicated_legal_tab():
     assert "⚖️ Visão Jurídica Dedicada" in source
     assert "⚖️ Avaliar Impacto Jurídico" in source
     assert "JSON Auditável Completo" in source
+    assert "Ramo Jurídico Provável" in source
+    assert "Agente Especialista" in source

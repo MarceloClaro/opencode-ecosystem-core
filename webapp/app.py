@@ -31,6 +31,7 @@ if ROOT not in sys.path:
 from marceloclaro.orchestrator import MarceloClaroOrchestrator  # noqa: E402
 from webapp.legal_impact_helpers import (  # noqa: E402
     build_legal_params,
+    summarize_legal_domain_route,
     summarize_legal_impact_section,
 )
 
@@ -325,6 +326,7 @@ with tabs[5]:
     )
 
     if st.button("⚖️ Avaliar Impacto Jurídico", key="legal_tab_run"):
+        domain_route = summarize_legal_domain_route(legal_corpus)
         params = build_legal_params(
             titulo=legal_title,
             corpus=legal_corpus,
@@ -342,6 +344,11 @@ with tabs[5]:
                 include_legal_impact=True,
                 legal_params=params,
             )
+
+        st.markdown("#### 🧭 Especialização Jurídica Sugerida")
+        d1, d2 = st.columns(2)
+        d1.metric("Ramo Jurídico Provável", domain_route["domain_name"])
+        d2.metric("Agente Especialista", domain_route["specialist_agent_name"])
 
         section = summarize_legal_impact_section(legal_report.get("legal_impact"))
         c1, c2, c3, c4 = st.columns(4)

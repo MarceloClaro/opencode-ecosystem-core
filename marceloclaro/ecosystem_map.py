@@ -138,6 +138,9 @@ FLOW_EDGES = [
     ("legal/argumentation.py", "legal/syllogism.py", "data_flow", "scoring valida consistência da subsunção"),
     ("legal/integration.py", "legal/datajud_client.py", "control_flow", "integração consulta API Datajud"),
     ("legal/knowledge_base.py", "legal/datajud_client.py", "data_flow", "processos do Datajud alimentam knowledge base jurídica"),
+    ("legal/specializations.py", "legal/agents.py", "control_flow", "especializações constroem agentes por ramo"),
+    ("legal/specializations.py", "legal/knowledge_base.py", "data_flow", "perfis jurídicos orientam coverage por domínio"),
+    ("legal/benchmarks.py", "legal/specializations.py", "control_flow", "benchmarks avaliam roteamento e cobertura por ramo"),
     ("legal/summarizer.py", "legal/precedents.py", "data_flow", "sumarização enriquecida por precedentes"),
     ("legal/agents.py", "mci/blackboard.py", "control_flow", "registro A2A de agentes jurídicos"),
 ]

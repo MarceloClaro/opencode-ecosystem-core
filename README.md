@@ -400,7 +400,7 @@ graph TD
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
-        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923]
+        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/927/928]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
@@ -502,8 +502,9 @@ Inspirada na arquitetura de Vaswani (2017) e nos modelos da DeepMind.
 - **Trust Engine & Token Economy:** Agentes fazem *stake* de tokens para assumir tarefas. Se falharem no TDD, sofrem *slashing*. O *Behavioral Gate* barra agentes com histórico de alucinação.
 - **Deep Diagnose:** 5 Scanners (Noológico, Teleológico, Evolutivo, etc.) que fazem engenharia reversa de código, priorização epistemológica e geram "Sucessores Plausíveis" para o seu projeto.
 - **MiroFish & Game Theory:** Um enxame preditivo que debate usando o método Delphi e constrói um **Grafo de Conhecimento** em memória para extrair consensos matemáticos.
-- **Legal Reasoning + AUXJURIS (SPEC-921/922/923):** Raciocínio jurídico brasileiro especializado com 5 motores (subsunção, ponderação, precedentes, interpretação constitucional e scoring), integração real com a **API Datajud do CNJ** (27 tribunais estaduais), **4 agentes jurídicos A2A** (assistente geral, sumarizador, redator de e-mail e pesquisador jurídico) e uma **base de conhecimento com RAG por keywords** inspirada no AUXJURIS para grounding jurídico contextual.
+- **Legal Reasoning + AUXJURIS (SPEC-921/922/923/927):** Raciocínio jurídico brasileiro especializado com 5 motores (subsunção, ponderação, precedentes, interpretação constitucional e scoring), integração real com a **API Datajud do CNJ** (27 tribunais estaduais), **4 agentes jurídicos A2A** (assistente geral, sumarizador, redator de e-mail e pesquisador jurídico), **framework de especialização por 7 ramos do direito** (penal, trabalhista, tributário, empresarial, administrativo, ambiental e digital/LGPD) e uma **base de conhecimento com RAG por keywords** inspirada no AUXJURIS para grounding jurídico contextual.
 - **Legal Impact Scanner (SPEC-924/925/926):** Scanner opcional de visão jurídica para **pesquisas e produções**. Mede proteção de dados/LGPD, propriedade intelectual, conformidade regulatória/ética, grounding jurisprudencial, responsabilidade contratual e defensibilidade de publicação. Também estima **ganho metacognitivo jurídico** em 4 eixos: awareness normativa, detecção de conflito normativo, antecipação de risco e humildade epistêmica aplicada. Agora pode ser acionado pela **interface web Streamlit** tanto no diagnóstico geral quanto em uma **aba jurídica dedicada** em `webapp/app.py`.
+- **Benchmarks Jurídicos por Ramo (SPEC-928):** Suíte conservadora de avaliação por domínio para os 7 ramos especializados. Mede acurácia de roteamento, qualidade de resposta, cobertura do domínio e classifica o sistema em tiers (`base`, `specialist`, `specialist_advanced`, `phd_candidate`, `phd_validated`). A política anti-overclaim permanece: **`phd_validated` exige validação externa**.
 - **Publishing & Research:** Automação Qualis A1. Busca artigos (Sci-Hub/OpenAlex), converte PDF para Markdown, faz fichamentos ABNT/APA, gera ilustrações didáticas (MIRA) e compila livros inteiros em LaTeX com capas geradas por IA.
 
 #### 5. Ganho Metacognitivo Jurídico (avaliação interna — SPEC-924)
