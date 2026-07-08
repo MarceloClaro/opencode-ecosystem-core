@@ -124,6 +124,22 @@ def create_base_curriculum() -> Curriculum:
         Discipline("Metaciência: a Ciência da Ciência", "interdisciplinary",
                    "Análise da produção, validação e evolução do conhecimento",
                    ["metaciência", "paradigma", "replicação", "ciência aberta"]),
+        # ========== CIÊNCIAS DA SAÚDE ==========
+        Discipline("Anatomia e Fisiologia Humana", "health_sciences",
+                   "Estudo da estrutura e funcionamento do corpo humano",
+                   ["sistema nervoso", "coração", "homeostase", "órgão"]),
+        Discipline("Psiquiatria e Saúde Mental", "health_sciences",
+                   "Transtornos mentais, diagnóstico e abordagens terapêuticas",
+                   ["depressão", "ansiedade", "esquizofrenia", "psicofármaco"]),
+        Discipline("Farmacologia Geral e Clínica", "health_sciences",
+                   "Princípios da ação de fármacos no organismo humano",
+                   ["farmacocinética", "receptor", "dose", "interação medicamentosa"]),
+        Discipline("Epidemiologia e Saúde Pública", "health_sciences",
+                   "Distribuição e determinantes de doenças na população",
+                   ["incidência", "prevalência", "fator de risco", "vigilância"]),
+        Discipline("Bioética e Medicina Legal", "health_sciences",
+                   "Princípios éticos na prática médica e perícias",
+                   ["autonomia", "beneficência", "consentimento", "sigilo médico"]),
     ]
     
     for disc in base_disciplines:
