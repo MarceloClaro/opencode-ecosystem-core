@@ -232,6 +232,27 @@
         "Argumentação jurídica forte combina norma + jurisprudência + doutrina + consistência lógica; ausência de qualquer critério reduz significativamente o score"
       ],
       "timestamp": 1783490000.0
+    },
+    {
+      "round_id": "R58",
+      "objective": "SPEC-922: Integração com API Pública Datajud do CNJ (27 tribunais estaduais)",
+      "changes": [
+        "Criada SPEC-922 para Datajud Integration",
+        "Criado legal/datajud_client.py — DatajudClient: cliente HTTP para API Datajud com suporte a 27 tribunais, API Key, cache LRU e fallback offline com dados mockados",
+        "Criado legal/integration.py — LegalDatajudIntegration: ponte entre DatajudProcess e os 5 motores de raciocínio jurídico",
+        "Adicionados conversores: process_to_precedent, process_to_legal_fact, process_to_legal_argument",
+        "Adicionada suíte TDD tests/test_datajud_integration.py com 23 testes RED→GREEN em modo offline",
+        "Gate TDD: pytest tests/test_datajud_integration.py = 23 passed",
+        "Ecosystem: 375 nós, 589 vetores (2 novos módulos: datajud_client, integration)"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "A API Datajud cobre todos os 27 TJs estaduais, mas o formato de resposta pode variar entre tribunais — necessário parser resiliente",
+        "Dados mockados (offline mode) são essenciais para testes TDD sem dependência de API externa",
+        "Cache LRU com TTL de 5 min reduz requisições repetidas durante análise de múltiplos processos",
+        "O mapeamento tribunal → competência federativa permite integração direta com LegalSyllogism para controle de constitucionalidade"
+      ],
+      "timestamp": 1783491000.0
     }
   ]
 }
