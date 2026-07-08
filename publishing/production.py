@@ -36,6 +36,8 @@ import time
 import unicodedata
 from typing import Any, Dict, List, Optional
 
+from mci.metabus import metabus
+
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _ROOT = os.path.dirname(_HERE)
 TEMPLATES_DIR = os.path.join(_HERE, "templates")
@@ -478,6 +480,27 @@ class ScientificProduction:
         with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, ensure_ascii=False, indent=2)
         manifest["manifest_path"] = manifest_path
+        metabus.publish_subsystem_event(
+            "publishing",
+            "build.completed",
+            {
+                "title": self.title,
+                "template": self.template,
+                "slug": self.slug,
+                "kdp_ready": manifest.get("kdp_ready", False),
+                "formats": [fmt for fmt, info in manifest.get("formats", {}).items() if info],
+            },
+            source_agent="publishing",
+        )
+        metabus.memory.upsert_semantic_topic(
+            "publishing.production",
+            lesson=f"Produção científica '{self.title[:80]}' gerada com template {self.template}.",
+            metadata={"last_slug": self.slug, "last_template": self.template},
+        )
+        metabus.memory.update_topic_confidence(
+            "publishing",
+            min(1.0, len([fmt for fmt, info in manifest.get("formats", {}).items() if info]) / 4.0),
+        )
         return manifest
 
 

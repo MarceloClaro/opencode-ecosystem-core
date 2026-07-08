@@ -1,7 +1,7 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **400**
-- Vetores: **661**
+- Nós: **407**
+- Vetores: **710**
 
 ## Taxonomia de Nós
 
@@ -15,19 +15,19 @@
 | layer | 20 |
 | module | 121 |
 | schema | 4 |
-| spec | 53 |
-| test | 31 |
+| spec | 57 |
+| test | 34 |
 
 ## Taxonomia de Vetores
 
 | kind | quantidade |
 |---|---:|
-| contains | 367 |
+| contains | 374 |
 | control_flow | 34 |
 | data_flow | 11 |
-| depends_on | 43 |
+| depends_on | 55 |
 | documents | 9 |
-| imports | 197 |
+| imports | 227 |
 
 ## Diagrama de Alto Nível
 
@@ -425,6 +425,10 @@ graph TD
 | specs_SPEC_927_legal_domain_specialization_md | spec | specs | specs/SPEC-927-legal-domain-specialization.md |
 | specs_SPEC_928_legal_domain_benchmarks_md | spec | specs | specs/SPEC-928-legal-domain-benchmarks.md |
 | specs_SPEC_929_legal_docs_map_sync_md | spec | specs | specs/SPEC-929-legal-docs-map-sync.md |
+| specs_SPEC_931_domain_legal_knowledge_bases_md | spec | specs | specs/SPEC-931-domain-legal-knowledge-bases.md |
+| specs_SPEC_932_webapp_domain_kb_integration_md | spec | specs | specs/SPEC-932-webapp-domain-kb-integration.md |
+| specs_SPEC_933_metabus_legal_refinement_md | spec | specs | specs/SPEC-933-metabus-legal-refinement.md |
+| specs_SPEC_934_metabus_transformer_conscious_orchestration_md | spec | specs | specs/SPEC-934-metabus-transformer-conscious-orchestration.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
 | tests_test_auxjuris_integration_py | test | tests | tests/test_auxjuris_integration.py |
@@ -432,6 +436,7 @@ graph TD
 | tests_test_cover_designer_py | test | tests | tests/test_cover_designer.py |
 | tests_test_datajud_integration_py | test | tests | tests/test_datajud_integration.py |
 | tests_test_deep_diagnose_py | test | tests | tests/test_deep_diagnose.py |
+| tests_test_domain_legal_knowledge_bases_py | test | tests | tests/test_domain_legal_knowledge_bases.py |
 | tests_test_ecosystem_py | test | tests | tests/test_ecosystem.py |
 | tests_test_ecosystem_diagnose_py | test | tests | tests/test_ecosystem_diagnose.py |
 | tests_test_ecosystem_full_map_py | test | tests | tests/test_ecosystem_full_map.py |
@@ -442,6 +447,8 @@ graph TD
 | tests_test_legal_domain_specialization_py | test | tests | tests/test_legal_domain_specialization.py |
 | tests_test_legal_impact_scanner_py | test | tests | tests/test_legal_impact_scanner.py |
 | tests_test_llm_client_py | test | tests | tests/test_llm_client.py |
+| tests_test_metabus_legal_refinement_py | test | tests | tests/test_metabus_legal_refinement.py |
+| tests_test_metabus_transversal_sync_py | test | tests | tests/test_metabus_transversal_sync.py |
 | tests_test_metacognitive_superhuman_py | test | tests | tests/test_metacognitive_superhuman.py |
 | tests_test_mira_catalog_py | test | tests | tests/test_mira_catalog.py |
 | tests_test_mirofish_gametheory_publishing_py | test | tests | tests/test_mirofish_gametheory_publishing.py |
@@ -786,6 +793,10 @@ graph TD
 | layer_specs | specs_SPEC_927_legal_domain_specialization_md | contains | specs contém specs/SPEC-927-legal-domain-specialization.md |
 | layer_specs | specs_SPEC_928_legal_domain_benchmarks_md | contains | specs contém specs/SPEC-928-legal-domain-benchmarks.md |
 | layer_specs | specs_SPEC_929_legal_docs_map_sync_md | contains | specs contém specs/SPEC-929-legal-docs-map-sync.md |
+| layer_specs | specs_SPEC_931_domain_legal_knowledge_bases_md | contains | specs contém specs/SPEC-931-domain-legal-knowledge-bases.md |
+| layer_specs | specs_SPEC_932_webapp_domain_kb_integration_md | contains | specs contém specs/SPEC-932-webapp-domain-kb-integration.md |
+| layer_specs | specs_SPEC_933_metabus_legal_refinement_md | contains | specs contém specs/SPEC-933-metabus-legal-refinement.md |
+| layer_specs | specs_SPEC_934_metabus_transformer_conscious_orchestration_md | contains | specs contém specs/SPEC-934-metabus-transformer-conscious-orchestration.md |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
 | layer_tests | tests_test_auxjuris_integration_py | contains | tests contém tests/test_auxjuris_integration.py |
@@ -793,6 +804,7 @@ graph TD
 | layer_tests | tests_test_cover_designer_py | contains | tests contém tests/test_cover_designer.py |
 | layer_tests | tests_test_datajud_integration_py | contains | tests contém tests/test_datajud_integration.py |
 | layer_tests | tests_test_deep_diagnose_py | contains | tests contém tests/test_deep_diagnose.py |
+| layer_tests | tests_test_domain_legal_knowledge_bases_py | contains | tests contém tests/test_domain_legal_knowledge_bases.py |
 | layer_tests | tests_test_ecosystem_diagnose_py | contains | tests contém tests/test_ecosystem_diagnose.py |
 | layer_tests | tests_test_ecosystem_full_map_py | contains | tests contém tests/test_ecosystem_full_map.py |
 | layer_tests | tests_test_ecosystem_py | contains | tests contém tests/test_ecosystem.py |
@@ -803,6 +815,8 @@ graph TD
 | layer_tests | tests_test_legal_domain_specialization_py | contains | tests contém tests/test_legal_domain_specialization.py |
 | layer_tests | tests_test_legal_impact_scanner_py | contains | tests contém tests/test_legal_impact_scanner.py |
 | layer_tests | tests_test_llm_client_py | contains | tests contém tests/test_llm_client.py |
+| layer_tests | tests_test_metabus_legal_refinement_py | contains | tests contém tests/test_metabus_legal_refinement.py |
+| layer_tests | tests_test_metabus_transversal_sync_py | contains | tests contém tests/test_metabus_transversal_sync.py |
 | layer_tests | tests_test_metacognitive_superhuman_py | contains | tests contém tests/test_metacognitive_superhuman.py |
 | layer_tests | tests_test_mira_catalog_py | contains | tests contém tests/test_mira_catalog.py |
 | layer_tests | tests_test_mirofish_gametheory_publishing_py | contains | tests contém tests/test_mirofish_gametheory_publishing.py |
@@ -916,6 +930,18 @@ graph TD
 | specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_926_webapp_dedicated_legal_tab_md | depends_on | SPEC-926 |
 | specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_927_legal_domain_specialization_md | depends_on | SPEC-927 |
 | specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_928_legal_domain_benchmarks_md | depends_on | SPEC-928 |
+| specs_SPEC_931_domain_legal_knowledge_bases_md | specs_SPEC_927_legal_domain_specialization_md | depends_on | SPEC-927 |
+| specs_SPEC_931_domain_legal_knowledge_bases_md | specs_SPEC_928_legal_domain_benchmarks_md | depends_on | SPEC-928 |
+| specs_SPEC_932_webapp_domain_kb_integration_md | specs_SPEC_925_webapp_legal_impact_interface_md | depends_on | SPEC-925 |
+| specs_SPEC_932_webapp_domain_kb_integration_md | specs_SPEC_926_webapp_dedicated_legal_tab_md | depends_on | SPEC-926 |
+| specs_SPEC_932_webapp_domain_kb_integration_md | specs_SPEC_927_legal_domain_specialization_md | depends_on | SPEC-927 |
+| specs_SPEC_932_webapp_domain_kb_integration_md | specs_SPEC_931_domain_legal_knowledge_bases_md | depends_on | SPEC-931 |
+| specs_SPEC_933_metabus_legal_refinement_md | specs_SPEC_924_legal_impact_scanner_md | depends_on | SPEC-924 |
+| specs_SPEC_933_metabus_legal_refinement_md | specs_SPEC_927_legal_domain_specialization_md | depends_on | SPEC-927 |
+| specs_SPEC_933_metabus_legal_refinement_md | specs_SPEC_932_webapp_domain_kb_integration_md | depends_on | SPEC-932 |
+| specs_SPEC_934_metabus_transformer_conscious_orchestration_md | specs_SPEC_009_scanners_md | depends_on | SPEC-009 |
+| specs_SPEC_934_metabus_transformer_conscious_orchestration_md | specs_SPEC_924_legal_impact_scanner_md | depends_on | SPEC-924 |
+| specs_SPEC_934_metabus_transformer_conscious_orchestration_md | specs_SPEC_933_metabus_legal_refinement_md | depends_on | SPEC-933 |
 | specs_SPEC_007_trust_engine_md | trust_trust_engine_py | documents | trust/trust_engine.py |
 | specs_SPEC_008_token_economy_md | economy_token_economy_py | documents | economy/token_economy.py |
 | specs_SPEC_009_scanners_md | scanners_pipeline_py | documents | scanners/pipeline.py |
@@ -931,7 +957,9 @@ graph TD
 | benchmarks_scientific_reasoning_init_py | benchmarks_scientific_reasoning_runner_py | imports | benchmarks.scientific_reasoning.runner |
 | benchmarks_scientific_reasoning_init_py | benchmarks_scientific_reasoning_superhuman_suite_py | imports | benchmarks.scientific_reasoning.superhuman_suite |
 | benchmarks_scientific_reasoning_superhuman_suite_py | benchmarks_scientific_reasoning_runner_py | imports | benchmarks.scientific_reasoning.runner |
+| benchmarks_scientific_reasoning_superhuman_suite_py | mci_metabus_py | imports | mci.metabus |
 | economy_init_py | economy_token_economy_py | imports | economy.token_economy |
+| gametheory_debate_strategies_py | mci_metabus_py | imports | mci.metabus |
 | legal_benchmarks_py | legal_specializations_py | imports | legal.specializations |
 | legal_init_py | legal_agents_py | imports | legal.agents |
 | legal_init_py | legal_argumentation_py | imports | legal.argumentation |
@@ -950,6 +978,7 @@ graph TD
 | legal_integration_py | legal_datajud_client_py | imports | legal.datajud_client |
 | legal_integration_py | legal_precedents_py | imports | legal.precedents |
 | legal_integration_py | legal_syllogism_py | imports | legal.syllogism |
+| legal_knowledge_base_py | legal_specializations_py | imports | legal.specializations |
 | legal_specializations_py | legal_agents_py | imports | legal.agents |
 | marceloclaro_cli_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | marceloclaro_orchestrator_py | academic_init_py | imports | academic |
@@ -975,19 +1004,27 @@ graph TD
 | marceloclaro_orchestrator_py | transformer_memory_py | imports | transformer.memory |
 | marceloclaro_orchestrator_py | transformer_pipeline_py | imports | transformer.pipeline |
 | marceloclaro_orchestrator_py | trust_init_py | imports | trust |
+| mci_egs_init_py | mci_metabus_py | imports | mci.metabus |
 | mci_mcp_server_py | mci_blackboard_py | imports | mci.blackboard |
 | mci_mcp_server_py | mci_metabus_py | imports | mci.metabus |
+| mci_metacognitive_evaluator_py | mci_metabus_py | imports | mci.metabus |
+| mci_oqs_init_py | mci_metabus_py | imports | mci.metabus |
 | mci_pipeline_scientific_governance_pipeline_py | mci_egs_init_py | imports | mci.egs |
 | mci_pipeline_scientific_governance_pipeline_py | mci_oqs_init_py | imports | mci.oqs |
 | mci_pipeline_scientific_governance_pipeline_py | mci_orchestration_py | imports | mci.orchestration |
 | mci_pipeline_scientific_governance_pipeline_py | mci_vsee_init_py | imports | mci.vsee |
+| mci_vsee_router_py | mci_metabus_py | imports | mci.metabus |
 | mirofish_init_py | mirofish_swarm_py | imports | mirofish.swarm |
 | mirofish_init_py | mirofish_validator_py | imports | mirofish.validator |
+| mirofish_swarm_py | mci_metabus_py | imports | mci.metabus |
 | mirofish_swarm_py | mirofish_graph_memory_py | imports | mirofish.graph_memory |
 | mirofish_validator_py | gametheory_init_py | imports | gametheory |
 | mirofish_validator_py | mirofish_swarm_py | imports | mirofish.swarm |
 | publishing_init_py | publishing_production_py | imports | publishing.production |
+| publishing_production_py | mci_metabus_py | imports | mci.metabus |
 | rag_init_py | rag_scientific_py | imports | rag.scientific |
+| rag_scientific_py | mci_metabus_py | imports | mci.metabus |
+| reasoning_engines_py | mci_metabus_py | imports | mci.metabus |
 | reasoning_engines_py | reasoning_quantum_py | imports | reasoning.quantum |
 | reasoning_evaluator_py | reasoning_engines_py | imports | reasoning.engines |
 | reasoning_init_py | reasoning_cache_py | imports | reasoning.cache |
@@ -997,6 +1034,7 @@ graph TD
 | reasoning_init_py | reasoning_quantum_py | imports | reasoning.quantum |
 | reasoning_init_py | reasoning_visualizer_py | imports | reasoning.visualizer |
 | reasoning_visualizer_py | reasoning_engines_py | imports | reasoning.engines |
+| research_hub_py | mci_metabus_py | imports | mci.metabus |
 | research_pipelines_run_research_batch_py | mci_egs_init_py | imports | mci.egs |
 | research_pipelines_run_research_batch_py | mci_oqs_init_py | imports | mci.oqs |
 | research_pipelines_run_research_batch_py | mci_orchestration_py | imports | mci.orchestration |
@@ -1008,6 +1046,7 @@ graph TD
 | scanners_evolutionary_pipeline_py | scanners_teleological_scanner_py | imports | scanners.teleological_scanner |
 | scanners_init_py | scanners_legal_impact_scanner_py | imports | scanners.legal_impact_scanner |
 | scanners_init_py | scanners_pipeline_py | imports | scanners.pipeline |
+| scanners_pipeline_py | mci_metabus_py | imports | mci.metabus |
 | scanners_pipeline_py | scanners_epistemic_prioritizer_py | imports | scanners.epistemic_prioritizer |
 | scanners_pipeline_py | scanners_evolutionary_pipeline_py | imports | scanners.evolutionary_pipeline |
 | scanners_pipeline_py | scanners_legal_impact_scanner_py | imports | scanners.legal_impact_scanner |
@@ -1019,6 +1058,7 @@ graph TD
 | scanners_pipeline_py | scanners_teleological_scanner_py | imports | scanners.teleological_scanner |
 | sdd_init_py | sdd_spec_engine_py | imports | sdd.spec_engine |
 | sdd_init_py | sdd_tdd_runner_py | imports | sdd.tdd_runner |
+| sdd_spec_engine_py | mci_metabus_py | imports | mci.metabus |
 | sdd_tdd_runner_py | sdd_spec_engine_py | imports | sdd.spec_engine |
 | tests_test_advanced_subsystems_py | academic_init_py | imports | academic |
 | tests_test_advanced_subsystems_py | economy_init_py | imports | economy |
@@ -1044,6 +1084,8 @@ graph TD
 | tests_test_deep_diagnose_py | scanners_epistemic_prioritizer_py | imports | scanners.epistemic_prioritizer |
 | tests_test_deep_diagnose_py | scanners_pipeline_py | imports | scanners.pipeline |
 | tests_test_deep_diagnose_py | scanners_successor_generator_py | imports | scanners.successor_generator |
+| tests_test_domain_legal_knowledge_bases_py | legal_init_py | imports | legal |
+| tests_test_domain_legal_knowledge_bases_py | legal_knowledge_base_py | imports | legal.knowledge_base |
 | tests_test_ecosystem_diagnose_py | scanners_init_py | imports | scanners |
 | tests_test_ecosystem_full_map_py | marceloclaro_ecosystem_map_py | imports | marceloclaro.ecosystem_map |
 | tests_test_ecosystem_py | marceloclaro_agent_loader_py | imports | marceloclaro.agent_loader |
@@ -1064,6 +1106,19 @@ graph TD
 | tests_test_llm_client_py | research_fichamento_py | imports | research.fichamento |
 | tests_test_llm_client_py | research_llm_client_py | imports | research.llm_client |
 | tests_test_llm_client_py | research_searchers_py | imports | research.searchers |
+| tests_test_metabus_legal_refinement_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
+| tests_test_metabus_legal_refinement_py | mci_metabus_py | imports | mci.metabus |
+| tests_test_metabus_transversal_sync_py | benchmarks_scientific_reasoning_superhuman_suite_py | imports | benchmarks.scientific_reasoning.superhuman_suite |
+| tests_test_metabus_transversal_sync_py | gametheory_init_py | imports | gametheory |
+| tests_test_metabus_transversal_sync_py | mci_egs_init_py | imports | mci.egs |
+| tests_test_metabus_transversal_sync_py | mci_metabus_py | imports | mci.metabus |
+| tests_test_metabus_transversal_sync_py | mci_oqs_init_py | imports | mci.oqs |
+| tests_test_metabus_transversal_sync_py | mci_vsee_init_py | imports | mci.vsee |
+| tests_test_metabus_transversal_sync_py | mirofish_swarm_py | imports | mirofish.swarm |
+| tests_test_metabus_transversal_sync_py | publishing_production_py | imports | publishing.production |
+| tests_test_metabus_transversal_sync_py | rag_init_py | imports | rag |
+| tests_test_metabus_transversal_sync_py | research_hub_py | imports | research.hub |
+| tests_test_metabus_transversal_sync_py | sdd_spec_engine_py | imports | sdd.spec_engine |
 | tests_test_metacognitive_superhuman_py | mci_metacognitive_evaluator_py | imports | mci.metacognitive_evaluator |
 | tests_test_mira_catalog_py | marceloclaro_catalog_loader_py | imports | marceloclaro.catalog_loader |
 | tests_test_mirofish_gametheory_publishing_py | gametheory_init_py | imports | gametheory |
@@ -1121,4 +1176,5 @@ graph TD
 | webapp_app_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | webapp_app_py | research_llm_client_py | imports | research.llm_client |
 | webapp_app_py | webapp_legal_impact_helpers_py | imports | webapp.legal_impact_helpers |
+| webapp_legal_impact_helpers_py | legal_init_py | imports | legal |
 | webapp_legal_impact_helpers_py | legal_specializations_py | imports | legal.specializations |

@@ -13,16 +13,25 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
   - Nova suíte de benchmarks jurídicos por ramo em `legal/benchmarks.py` com tiers conservadores (`base`, `specialist`, `specialist_advanced`, `phd_candidate`, `phd_validated`).
   - Nova aba `⚖️ Jurídico` na interface Streamlit para operação dedicada do scanner jurídico.
   - Novos Agent Cards jurídicos em `agents/catalog/` e roteamento por domínio em `legal/specializations.py`.
+- **Knowledge Bases Segmentadas por Ramo Jurídico (SPEC-931)**:
+  - Base de conhecimento segmentada nos 7 ramos do direito (penal, trabalhista, tributário, empresarial, administrativo, ambiental, digital/LGPD).
+  - Roteamento automático por domínio e seleção manual/automática na webapp.
+- **Integração Webapp com Knowledge Bases (SPEC-932)**:
+  - Aba jurídica exibe base de conhecimento ativa, switch manual de ramo e preview de estatutos/principles/keywords.
+- **Refinamento Jurídico via MetaBus (SPEC-933)**:
+  - Ciclo de refinamento contínuo: busca → recuperação → síntese → atualização de confiança no MetaBus.
+- **Orquestração Transversal no MetaBus (SPEC-934)**:
+  - OQS, VSEE, EGS, RAG, Superhuman Suite, MiroFish, Game Theory, Publishing, Research e SDD publicam eventos de subsistema no MetaBus.
+  - MetaBus com `publish_subsystem_event`, `search_memory`, `update_topic_confidence`, `upser_semantic_topic`.
+  - Eventos de raciocínio, predição MiroFish, Nash equilibria, produção científica e ciclo SDD rastreáveis.
 
 ### Modificado
-- **README / ARCHITECTURE / diagram.mmd** sincronizados com a expansão jurídica completa.
+- **README / ARCHITECTURE / diagram.mmd** sincronizados com a expansão jurídica e transversal completa.
 - **Mapas do ecossistema** regenerados com a nova camada `webapp`, a camada `legal` expandida e os novos vetores arquiteturais.
-- **Evolução** registrada nos ciclos `R59`, `R60`, `R61`, `R62`, `R63` e `R64`.
+- **Evolução** registrada nos ciclos `R56`, `R57`, `R58`, `R59`, `R60`, `R61`, `R62`, `R63`, `R64`, `R65`, `R66` e `R67`.
 
 ### Validação
-- `pytest tests/test_legal_domain_specialization.py -q` → 6 passed.
-- `pytest tests/test_legal_domain_benchmarks.py -q` → 6 passed.
-- `pytest tests -q` → 343 passed, 2 skipped, 1 warning.
+- Full test suite: `pytest tests -q` → 363 passed, 2 skipped.
 
 ## [2.2.0] - 2026-07-08
 

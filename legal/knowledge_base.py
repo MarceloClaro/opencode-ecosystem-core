@@ -33,6 +33,7 @@ class LegalDocument:
     source: str = "knowledge_base"    # knowledge_base, datajud, usuario
     tribunal: Optional[str] = None    # Se veio do Datajud
     precedente_id: Optional[str] = None  # Ligação com PrecedentAnalyzer
+    domains: List[str] = field(default_factory=list)  # ramos do direito relacionados
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -41,6 +42,7 @@ class LegalDocument:
             "category": self.category,
             "source": self.source,
             "tribunal": self.tribunal,
+            "domains": self.domains,
             "keywords": self.keywords,
             "content_preview": self.content[:100] + "..." if len(self.content) > 100 else self.content,
         }
@@ -63,6 +65,7 @@ DEFAULT_LEGAL_DOCUMENTS: List[LegalDocument] = [
         keywords=["contrato", "validade", "boa-fé", "obrigação", "acordo",
                    "cc", "código civil", "objeto lícito", "agente capaz"],
         category="doutrina",
+        domains=["empresarial"],
     ),
     LegalDocument(
         id="doc_responsabilidade_civil",
@@ -80,6 +83,7 @@ DEFAULT_LEGAL_DOCUMENTS: List[LegalDocument] = [
         keywords=["responsabilidade civil", "dano", "culpa", "objetiva",
                    "subjetiva", "risco", "indenização", "reparação"],
         category="doutrina",
+        domains=["empresarial", "ambiental", "digital_lgpd"],
     ),
     LegalDocument(
         id="doc_consumidor_vicio",
@@ -97,6 +101,7 @@ DEFAULT_LEGAL_DOCUMENTS: List[LegalDocument] = [
         keywords=["consumidor", "vício", "produto", "defeito", "garantia",
                    "troca", "restituição", "cdc", "fornecedor"],
         category="legislacao",
+        domains=["empresarial"],
     ),
     LegalDocument(
         id="doc_habeas_corpus",
@@ -114,6 +119,7 @@ DEFAULT_LEGAL_DOCUMENTS: List[LegalDocument] = [
         keywords=["habeas corpus", "liberdade", "prisão", "ilegalidade",
                    "constitucional", "stf", "salvo-conduto", "locomoção"],
         category="jurisprudencia",
+        domains=["penal"],
     ),
     LegalDocument(
         id="doc_precedentes_cpc",
@@ -133,6 +139,7 @@ DEFAULT_LEGAL_DOCUMENTS: List[LegalDocument] = [
                    "distinguishing", "overruling", "stf", "stj",
                    "repercussão geral", "recurso repetitivo"],
         category="legislacao",
+        domains=["penal", "trabalhista", "tributario", "empresarial", "administrativo", "ambiental", "digital_lgpd"],
     ),
     LegalDocument(
         id="doc_principios_constitucionais",
@@ -151,8 +158,105 @@ DEFAULT_LEGAL_DOCUMENTS: List[LegalDocument] = [
         keywords=["constituição", "cf/88", "princípios", "dignidade",
                    "cidadania", "soberania", "fundamentos", "objetivos"],
         category="doutrina",
+        domains=["penal", "trabalhista", "tributario", "empresarial", "administrativo", "ambiental", "digital_lgpd"],
     ),
 ]
+
+
+DOMAIN_LEGAL_DOCUMENTS: Dict[str, List[LegalDocument]] = {
+    "penal": [
+        LegalDocument(
+            id="penal_prisao_preventiva",
+            title="Prisão Preventiva e Garantias Penais",
+            content=(
+                "A prisão preventiva exige fundamentação concreta, contemporaneidade "
+                "e observância da proporcionalidade. Habeas corpus e controle de nulidades "
+                "são instrumentos centrais para tutela da liberdade no processo penal."
+            ),
+            keywords=["prisão preventiva", "habeas corpus", "nulidade", "prova ilícita", "processo penal"],
+            category="jurisprudencia",
+            domains=["penal"],
+        ),
+    ],
+    "trabalhista": [
+        LegalDocument(
+            id="trab_horas_extras_rescisao",
+            title="Horas Extras, Rescisão e Vínculo Empregatício",
+            content=(
+                "A CLT regula jornada, horas extras, verbas rescisórias e justa causa. "
+                "A primazia da realidade orienta a identificação do vínculo empregatício."
+            ),
+            keywords=["horas extras", "verbas rescisórias", "justa causa", "vínculo empregatício", "clt"],
+            category="legislacao",
+            domains=["trabalhista"],
+        ),
+    ],
+    "tributario": [
+        LegalDocument(
+            id="trib_execucao_credito",
+            title="Execução Fiscal e Crédito Tributário",
+            content=(
+                "O CTN e a Lei de Execução Fiscal disciplinam crédito tributário, "
+                "lançamento, prescrição, decadência e cobrança judicial via execução fiscal."
+            ),
+            keywords=["execução fiscal", "crédito tributário", "ctn", "prescrição", "decadência", "icms"],
+            category="legislacao",
+            domains=["tributario"],
+        ),
+    ],
+    "empresarial": [
+        LegalDocument(
+            id="emp_recuperacao_governanca",
+            title="Governança Societária e Recuperação Judicial",
+            content=(
+                "O direito empresarial envolve sociedades, governança, responsabilidade de sócios "
+                "e preservação da empresa em recuperação judicial."
+            ),
+            keywords=["sociedade", "governança", "recuperação judicial", "falência", "quotistas"],
+            category="doutrina",
+            domains=["empresarial"],
+        ),
+    ],
+    "administrativo": [
+        LegalDocument(
+            id="adm_licitacao_improbidade",
+            title="Licitações, Atos Administrativos e Improbidade",
+            content=(
+                "A atuação administrativa exige conformidade com legalidade, impessoalidade, "
+                "moralidade, publicidade e eficiência. Licitações e improbidade são eixos críticos."
+            ),
+            keywords=["licitação", "ato administrativo", "improbidade", "edital", "eficiência"],
+            category="legislacao",
+            domains=["administrativo"],
+        ),
+    ],
+    "ambiental": [
+        LegalDocument(
+            id="amb_licenciamento_dano",
+            title="Licenciamento e Responsabilidade por Dano Ambiental",
+            content=(
+                "Licenciamento ambiental, EIA/RIMA e responsabilidade objetiva por dano ambiental "
+                "são centrais no direito ambiental brasileiro."
+            ),
+            keywords=["licenciamento ambiental", "eia/rima", "dano ambiental", "responsabilidade objetiva", "ibama"],
+            category="legislacao",
+            domains=["ambiental"],
+        ),
+    ],
+    "digital_lgpd": [
+        LegalDocument(
+            id="lgpd_base_legal_incidente",
+            title="LGPD, Base Legal e Incidente de Segurança",
+            content=(
+                "A LGPD regula dados pessoais, base legal, consentimento, controlador, operador, "
+                "anonimização e resposta a incidentes de segurança."
+            ),
+            keywords=["lgpd", "dados pessoais", "base legal", "consentimento", "controlador", "operador", "incidente de segurança"],
+            category="legislacao",
+            domains=["digital_lgpd"],
+        ),
+    ],
+}
 
 
 class LegalKnowledgeBase:
@@ -166,10 +270,10 @@ class LegalKnowledgeBase:
       - Registro de fontes (doutrina, jurisprudência, legislação)
     """
 
-    def __init__(self):
+    def __init__(self, documents: Optional[List[LegalDocument]] = None):
         self._documents: Dict[str, LegalDocument] = {}
-        # Carregar documentos padrão
-        for doc in DEFAULT_LEGAL_DOCUMENTS:
+        base_docs = documents if documents is not None else DEFAULT_LEGAL_DOCUMENTS
+        for doc in base_docs:
             self._documents[doc.id] = doc
 
     def add_document(self, doc: LegalDocument) -> None:
@@ -188,13 +292,18 @@ class LegalKnowledgeBase:
             return True
         return False
 
-    def list_documents(self, category: Optional[str] = None) -> List[LegalDocument]:
+    def list_documents(self, category: Optional[str] = None,
+                       domain_id: Optional[str] = None) -> List[LegalDocument]:
         """Lista documentos, opcionalmente filtrados por categoria."""
+        docs = list(self._documents.values())
         if category:
-            return [d for d in self._documents.values() if d.category == category]
-        return list(self._documents.values())
+            docs = [d for d in docs if d.category == category]
+        if domain_id:
+            docs = [d for d in docs if domain_id in d.domains]
+        return docs
 
-    def search(self, query: str, max_results: int = 3) -> List[Tuple[LegalDocument, float]]:
+    def search(self, query: str, max_results: int = 3,
+               domain_id: Optional[str] = None) -> List[Tuple[LegalDocument, float]]:
         """Busca documentos por correspondência de keywords e conteúdo textual.
 
         Algoritmo (inspirado no AUXJURIS):
@@ -215,6 +324,8 @@ class LegalKnowledgeBase:
 
         scored: List[Tuple[LegalDocument, float]] = []
         for doc in self._documents.values():
+            if domain_id and domain_id not in doc.domains:
+                continue
             score = 0.0
             content_lower = doc.content.lower()
 
@@ -336,3 +447,28 @@ class LegalKnowledgeBase:
     def get_categories(self) -> List[str]:
         """Lista categorias disponíveis."""
         return list({d.category for d in self._documents.values()})
+
+
+def get_domain_documents(domain_id: str, include_default: bool = True) -> List[LegalDocument]:
+    docs: List[LegalDocument] = []
+    if include_default:
+        docs.extend(DEFAULT_LEGAL_DOCUMENTS)
+    docs.extend(DOMAIN_LEGAL_DOCUMENTS.get(domain_id, []))
+    # dedup por id
+    unique: Dict[str, LegalDocument] = {doc.id: doc for doc in docs}
+    return list(unique.values())
+
+
+def build_domain_knowledge_base(domain_id: str, include_default: bool = True) -> LegalKnowledgeBase:
+    return LegalKnowledgeBase(documents=get_domain_documents(domain_id, include_default=include_default))
+
+
+def route_domain_knowledge_base(query: str, include_default: bool = True) -> Dict[str, Any]:
+    from legal.specializations import route_legal_domain
+
+    profile = route_legal_domain(query)
+    kb = build_domain_knowledge_base(profile.domain_id, include_default=include_default)
+    return {
+        "domain_id": profile.domain_id,
+        "knowledge_base": kb,
+    }

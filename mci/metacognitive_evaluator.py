@@ -14,6 +14,8 @@ from collections import Counter
 from dataclasses import dataclass
 from typing import Any, Dict, Iterable, List, Optional
 
+from mci.metabus import metabus
+
 
 DIMENSION_WEIGHTS = {
     "awareness": 0.20,
@@ -334,7 +336,8 @@ class MetacognitiveBenchmarkSuite:
         ]
 
 
-def run_metacognitive_superhuman_suite(external_validation: bool = False) -> Dict[str, Any]:
+def run_metacognitive_superhuman_suite(external_validation: bool = False,
+                                       context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """Executa a suíte SPEC-920 e retorna o relatório principal."""
     suite_result = MetacognitiveBenchmarkSuite().run(external_validation=external_validation)
     report = dict(suite_result["report"])
@@ -343,4 +346,21 @@ def run_metacognitive_superhuman_suite(external_validation: bool = False) -> Dic
         "cases_passed": suite_result["cases_passed"],
         "case_details": suite_result["case_details"],
     }
+    ctx = context or {}
+    metabus.publish_subsystem_event(
+        "metacognition",
+        "suite.completed",
+        {
+            "readiness_score": report["readiness_score"],
+            "tier": report["tier"],
+            "marker": ctx.get("marker"),
+        },
+        source_agent="metacognitive_suite",
+    )
+    metabus.memory.upsert_semantic_topic(
+        "metacognition.suite",
+        lesson=f"Suite metacognitiva concluída com score {report['readiness_score']} e tier {report['tier']}.",
+        metadata={"last_readiness": report["readiness_score"], "last_tier": report["tier"]},
+    )
+    metabus.memory.update_topic_confidence("metacognition", report["readiness_score"] / 100.0)
     return report

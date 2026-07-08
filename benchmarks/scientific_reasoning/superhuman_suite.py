@@ -14,6 +14,7 @@ from __future__ import annotations
 from typing import Any, Dict, Optional
 
 from benchmarks.scientific_reasoning.runner import run_all_benchmarks
+from mci.metabus import metabus
 
 
 def classify_superhuman_tier(readiness_score: float,
@@ -30,7 +31,8 @@ def classify_superhuman_tier(readiness_score: float,
 
 def run_superhuman_suite(rag: Optional[Any] = None,
                          external_validation: bool = False,
-                         pipeline_fn=None) -> Dict[str, Any]:
+                         pipeline_fn=None,
+                         context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """Executa avaliação de readiness científico superhuman.
 
     Args:
@@ -58,8 +60,7 @@ def run_superhuman_suite(rag: Optional[Any] = None,
     )
     readiness = round(min(100.0, max(0.0, readiness)), 2)
     tier = classify_superhuman_tier(readiness, external_validation=external_validation)
-
-    return {
+    report = {
         "readiness_score": readiness,
         "tier": tier,
         "external_validation": bool(external_validation),
@@ -76,6 +77,25 @@ def run_superhuman_suite(rag: Optional[Any] = None,
             "reproducibility": {"score": round(reproducibility, 2), "basis": "benchmark details + RAG evidence trace"},
         },
     }
+    ctx = context or {}
+    metabus.publish_subsystem_event(
+        "superhuman",
+        "suite.completed",
+        {
+            "readiness_score": readiness,
+            "tier": tier,
+            "external_validation": bool(external_validation),
+            "marker": ctx.get("marker"),
+        },
+        source_agent="superhuman_suite",
+    )
+    metabus.memory.upsert_semantic_topic(
+        "superhuman.readiness",
+        lesson=f"Superhuman suite finalizada com readiness {readiness} e tier {tier}.",
+        metadata={"last_readiness": readiness, "last_tier": tier},
+    )
+    metabus.memory.update_topic_confidence("superhuman", readiness / 100.0)
+    return report
 
 
 def _evaluate_grounding(rag: Optional[Any]) -> Dict[str, Any]:

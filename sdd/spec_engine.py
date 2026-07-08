@@ -23,6 +23,8 @@ import uuid
 import logging
 from typing import Dict, List, Any, Callable, Optional
 
+from mci.metabus import metabus
+
 logger = logging.getLogger("sdd-engine")
 logger.setLevel(logging.INFO)
 
@@ -140,6 +142,12 @@ class SpecRegistry:
                 )
                 spec.status = meta.get("status", "draft")
                 self.specs[spec_id] = spec
+                metabus.publish_subsystem_event(
+                    "sdd",
+                    "spec.loaded",
+                    {"spec_id": spec_id, "title": spec.title, "status": spec.status},
+                    source_agent="spec_registry",
+                )
                 count += 1
             except Exception as e:
                 logger.error(f"Erro ao carregar spec {path}: {e}")
@@ -155,6 +163,17 @@ class SpecRegistry:
             spec.add_criterion(desc)
         spec.status = "red"  # nasce em RED: critérios definidos, entrega ainda ausente
         self.specs[spec_id] = spec
+        metabus.publish_subsystem_event(
+            "sdd",
+            "spec.created",
+            {"spec_id": spec_id, "title": title, "criteria_count": len(spec.criteria)},
+            source_agent="spec_registry",
+        )
+        metabus.memory.upsert_semantic_topic(
+            "sdd.specs",
+            lesson=f"Spec dinâmica criada: {spec_id} ({title}).",
+            metadata={"last_spec_id": spec_id},
+        )
         return spec
 
     def get(self, spec_id: str) -> Optional[Specification]:
@@ -197,7 +216,7 @@ class SpecVerifier:
         all_passed = all(r["passed"] for r in results) if results else False
         spec.status = "green" if all_passed else "red"
 
-        return {
+        result = {
             "spec_id": spec_id,
             "verified": all_passed,
             "status": spec.status,
@@ -205,6 +224,19 @@ class SpecVerifier:
             "passed_count": sum(1 for r in results if r["passed"]),
             "total_count": len(results),
         }
+        metabus.publish_subsystem_event(
+            "sdd",
+            "spec.verified",
+            {
+                "spec_id": spec_id,
+                "verified": all_passed,
+                "passed_count": result["passed_count"],
+                "total_count": result["total_count"],
+            },
+            source_agent="spec_verifier",
+        )
+        metabus.memory.update_topic_confidence("sdd", 1.0 if all_passed else 0.4)
+        return result
 
 
 # Singletons globais

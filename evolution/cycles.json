@@ -377,6 +377,66 @@
         "A política anti-overclaim deve existir também nos tiers jurídicos por ramo, assim como já existe nos tiers científicos e metacognitivos"
       ],
       "timestamp": 1783497000.0
+    },
+    {
+      "round_id": "R65",
+      "objective": "SPEC-931/932/933: knowledge bases jurídicas segmentadas por ramo + integração à webapp + refinamento jurídico do MetaBus",
+      "changes": [
+        "Criada SPEC-931 para knowledge bases jurídicas segmentadas por ramo",
+        "Criadas SPEC-932 e SPEC-933 para integração da base segmentada à webapp e refinamento jurídico do MetaBus",
+        "LegalKnowledgeBase passou a suportar documentos com domains, busca filtrada por domínio e builders de base segmentada",
+        "A aba jurídica agora suporta seleção automática/manual do ramo, base jurídica ativa e preview dos documentos mais relevantes",
+        "MetaBus passou a suportar publish_legal_event(), get_recent_events(), upsert_semantic_topic() e update_domain_confidence()",
+        "MarceloClaroOrchestrator.diagnose() com include_legal_impact=True agora publica evento jurídico e atualiza confiança por domínio",
+        "Mapa do ecossistema regenerado: 405 nós, 681 vetores"
+      ],
+      "score": 9.7,
+      "lessons": [
+        "Grounding jurídico por ramo exige não apenas roteamento, mas também bases segmentadas para reduzir ruído entre domínios legais distintos",
+        "O MetaBus fica mais útil quando passa a observar explicitamente o domínio jurídico analisado e a acumular confiança por ramo",
+        "Na interface jurídica, permitir seleção manual do ramo é tão importante quanto o roteamento automático, porque o usuário especialista às vezes já conhece o enquadramento correto"
+      ],
+      "timestamp": 1783498000.0
+    },
+    {
+      "round_id": "R66",
+      "objective": "SPEC-931/932/933: grounding jurídico segmentado por ramo e MetaBus jurídico refinado",
+      "changes": [
+        "Criada SPEC-931 para knowledge bases jurídicas segmentadas por ramo",
+        "Criadas SPEC-932 e SPEC-933 para integração da base segmentada na webapp e refinamento jurídico do MetaBus",
+        "LegalKnowledgeBase agora suporta documentos por domínio, busca filtrada por ramo e builders de bases segmentadas",
+        "A aba jurídica passou a permitir seleção automática/manual do ramo e exibir a base jurídica ativa",
+        "MetaBus ganhou eventos jurídicos especializados, memória semântica incremental por tópico e confiança por domínio jurídico",
+        "Orchestrator.diagnose() passou a publicar eventos jurídicos e atualizar confidence ledger por domínio",
+        "Mapa do ecossistema regenerado: 405 nós, 681 vetores"
+      ],
+      "score": 9.8,
+      "lessons": [
+        "Especialização jurídica confiável exige alinhamento entre roteamento, base de conhecimento e memória metacognitiva; um único desses elementos isolado não basta",
+        "Confidence ledger por domínio é mais informativo do que uma confiança jurídica genérica, porque evita mascarar fraquezas entre ramos muito diferentes",
+        "Interfaces jurídicas ficam mais úteis quando explicitam o ramo ativo e a base utilizada, reduzindo opacidade e aumentando auditabilidade"
+      ],
+      "timestamp": 1783499000.0
+    },
+    {
+      "round_id": "R67",
+      "objective": "SPEC-934: sincronização transversal de subsistemas ao MetaBus e à memória consciente do MCI",
+      "changes": [
+        "Criada SPEC-934 para integração pervasiva de reasoning, scanners, scientific RAG, suites, MiroFish, publishing, research e SDD ao MetaBus",
+        "MetaBus ganhou publish_subsystem_event(), search_memory() e confiança por tópico reutilizável",
+        "OQS, VSEE e EGS passaram a publicar eventos e enriquecer memória/telemetria no MetaBus",
+        "ScientificRAG, superhuman suite e metacognitive suite passaram a publicar eventos e atualizar confiança por tópico",
+        "MiroFish e game theory passaram a publicar eventos próprios no MetaBus",
+        "Publishing, Research e SDD passaram a emitir telemetria e memória semântica no MetaBus",
+        "Mapa do ecossistema regenerado: 407 nós, 710 vetores"
+      ],
+      "score": 9.9,
+      "lessons": [
+        "Orquestração consciente emerge quando os subsistemas deixam de ser caixas pretas e passam a emitir eventos, memória e confiança de forma homogênea",
+        "Memória pesquisável e confiança por tópico tornam o MCI mais útil do que simples logs append-only, porque habilitam recuperação e calibração operacionais",
+        "A melhor forma de superar arquiteturas opacas não é apenas adicionar mais módulos, mas conectá-los semanticamente ao mesmo workspace metacognitivo"
+      ],
+      "timestamp": 1783500000.0
     }
   ]
 }

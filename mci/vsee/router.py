@@ -5,6 +5,7 @@ import uuid
 from typing import Dict, Any, Callable
 import jsonschema
 
+from mci.metabus import metabus
 from .policy import evaluate_routing_policy
 from .fallback import execute_with_fallback
 from .telemetry import compute_telemetry
@@ -50,5 +51,24 @@ def run_vsee_router(executor_fn: Callable, context: Dict[str, Any] = None) -> Di
             schema = json.load(f)
         val_data = {k: v for k, v in result.items() if k != "result_data"}
         jsonschema.validate(instance=val_data, schema=schema)
+
+    metabus.publish_subsystem_event(
+        "vsee",
+        "routed",
+        {
+            "request_id": req_id,
+            "chosen_path": actual_path,
+            "fallback_triggered": fallback_triggered,
+            "marker": context.get("marker"),
+            "risk_level": result["risk_level"],
+        },
+        source_agent="vsee",
+    )
+    metabus.memory.upsert_semantic_topic(
+        "vsee.routing",
+        lesson=f"VSEE escolheu caminho {actual_path} com fallback={fallback_triggered}.",
+        metadata={"last_request_id": req_id, "last_path": actual_path},
+    )
+    metabus.memory.update_topic_confidence("vsee", 0.75 if not fallback_triggered else 0.55)
         
     return result

@@ -19,12 +19,51 @@ def test_build_legal_params_parses_keywords_csv():
         conclusoes="conclusões",
         palavras_chave_csv="lgpd, compliance, precedentes , risco",
         area_conhecimento="direito digital",
+        domain_id="digital_lgpd",
     )
 
     assert params["titulo"] == "Diagnóstico jurídico"
     assert params["resumo"] == "texto base"
     assert params["palavras_chave"] == ["lgpd", "compliance", "precedentes", "risco"]
     assert params["area_conhecimento"] == "direito digital"
+    assert params["domain_id"] == "digital_lgpd"
+
+
+def test_resolve_domain_knowledge_base_selection_auto_and_manual():
+    from webapp.legal_impact_helpers import resolve_domain_knowledge_base_selection
+
+    auto = resolve_domain_knowledge_base_selection(
+        query="habeas corpus e prisão preventiva",
+        mode="automatico",
+    )
+    manual = resolve_domain_knowledge_base_selection(
+        query="qualquer texto",
+        mode="manual",
+        explicit_domain_id="tributario",
+    )
+
+    assert auto["domain_id"] == "penal"
+    assert manual["domain_id"] == "tributario"
+    assert manual["knowledge_base"].count() >= 1
+
+
+def test_summarize_domain_knowledge_base_returns_preview():
+    from webapp.legal_impact_helpers import resolve_domain_knowledge_base_selection, summarize_domain_knowledge_base
+
+    routed = resolve_domain_knowledge_base_selection(
+        query="execução fiscal e crédito tributário",
+        mode="manual",
+        explicit_domain_id="tributario",
+    )
+    preview = summarize_domain_knowledge_base(
+        query="execução fiscal e crédito tributário",
+        domain_id=routed["domain_id"],
+        knowledge_base=routed["knowledge_base"],
+    )
+
+    assert preview["document_count"] >= 1
+    assert len(preview["top_titles"]) >= 1
+    assert isinstance(preview["rag_context"], str)
 
 
 def test_summarize_legal_impact_section_extracts_metrics():
@@ -98,3 +137,5 @@ def test_webapp_source_contains_dedicated_legal_tab():
     assert "JSON Auditável Completo" in source
     assert "Ramo Jurídico Provável" in source
     assert "Agente Especialista" in source
+    assert "Seleção do ramo jurídico" in source
+    assert "Base Jurídica Ativa" in source

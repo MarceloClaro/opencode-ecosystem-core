@@ -76,6 +76,10 @@ from legal.knowledge_base import (
     LegalKnowledgeBase,
     LegalDocument,
     DEFAULT_LEGAL_DOCUMENTS,
+    DOMAIN_LEGAL_DOCUMENTS,
+    get_domain_documents,
+    build_domain_knowledge_base,
+    route_domain_knowledge_base,
 )
 from legal.summarizer import (
     LegalDocumentSummarizer,
@@ -126,6 +130,8 @@ __all__ = [
     "register_legal_agents",
     # Knowledge Base
     "LegalKnowledgeBase", "LegalDocument", "DEFAULT_LEGAL_DOCUMENTS",
+    "DOMAIN_LEGAL_DOCUMENTS", "get_domain_documents",
+    "build_domain_knowledge_base", "route_domain_knowledge_base",
     # Summarizer
     "LegalDocumentSummarizer", "SummaryResult", "LegalEntities",
     # Domain specialization

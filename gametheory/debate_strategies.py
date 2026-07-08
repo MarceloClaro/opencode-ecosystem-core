@@ -19,6 +19,8 @@ from dataclasses import dataclass, field
 import random
 import math
 
+from mci.metabus import metabus
+
 
 # ═══════════════════════════════════════════════════════════════════
 # 38 ESTRATÉGIAS DE RACIOCÍNIO
@@ -520,6 +522,17 @@ class PayoffMatrix:
 
                 if p1 == best_p1 and p2 == best_p2:
                     equilibria.append((s1, s2))
+        metabus.publish_subsystem_event(
+            "gametheory",
+            "nash.computed",
+            {"equilibria": equilibria, "players": 2},
+            source_agent="gametheory",
+        )
+        metabus.memory.upsert_semantic_topic(
+            "gametheory.nash",
+            lesson=f"Equilíbrios de Nash calculados: {equilibria}.",
+            metadata={"last_equilibria": equilibria},
+        )
         return equilibria
 
 
@@ -768,4 +781,14 @@ class MetaReasoner:
             selected.append(ReasoningType.PRISONERS_DILEMMA)
             selected.append(ReasoningType.NASH_EQUILIBRIUM)
 
-        return list(dict.fromkeys(selected))  # dedup mantendo ordem
+        selected_unique = list(dict.fromkeys(selected))  # dedup mantendo ordem
+        metabus.publish_subsystem_event(
+            "gametheory",
+            "meta_reason.selected",
+            {
+                "topic": context.get("topic", ""),
+                "strategies": [s.name for s in selected_unique],
+            },
+            source_agent="gametheory",
+        )
+        return selected_unique

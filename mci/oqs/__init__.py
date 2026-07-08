@@ -4,6 +4,7 @@ import json
 from typing import Dict, Any
 import jsonschema
 
+from mci.metabus import metabus
 from .intake import normalize_problem
 from .uncertainty_scanner import scan_uncertainty
 from .candidate_generator import generate_candidates
@@ -56,5 +57,20 @@ def run_oqs_scanner(problem_text: str, context: Dict[str, Any] = None) -> Dict[s
             schema = json.load(f)
         val_data = {k: v for k, v in result.items() if k != "pass"}
         jsonschema.validate(instance=val_data, schema=schema)
+
+    payload = {
+        "problem_id": prob_id,
+        "selected_question": result["selected_question"],
+        "pass": pass_gate,
+        "marker": context.get("marker"),
+        "scores": scores,
+    }
+    metabus.publish_subsystem_event("oqs", "completed", payload, source_agent="oqs")
+    metabus.memory.upsert_semantic_topic(
+        "oqs.selection",
+        lesson=f"OQS selecionou '{result['selected_question'][:120]}' com pass={pass_gate}.",
+        metadata={"last_problem_id": prob_id, "last_pass": pass_gate},
+    )
+    metabus.memory.update_topic_confidence("oqs", 0.9 if pass_gate else 0.5)
         
     return result

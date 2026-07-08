@@ -31,6 +31,8 @@ if ROOT not in sys.path:
 from marceloclaro.orchestrator import MarceloClaroOrchestrator  # noqa: E402
 from webapp.legal_impact_helpers import (  # noqa: E402
     build_legal_params,
+    resolve_domain_knowledge_base_selection,
+    summarize_domain_knowledge_base,
     summarize_legal_domain_route,
     summarize_legal_impact_section,
 )
@@ -318,6 +320,27 @@ with tabs[5]:
         "lgpd, compliance, precedentes, responsabilidade",
         key="legal_tab_keywords",
     )
+    domain_mode = st.radio(
+        "Seleção do ramo jurídico",
+        ["automatico", "manual"],
+        horizontal=True,
+        key="legal_tab_domain_mode",
+    )
+    explicit_domain_id = ""
+    if domain_mode == "manual":
+        explicit_domain_id = st.selectbox(
+            "Ramo jurídico explícito",
+            [
+                "penal",
+                "trabalhista",
+                "tributario",
+                "empresarial",
+                "administrativo",
+                "ambiental",
+                "digital_lgpd",
+            ],
+            key="legal_tab_explicit_domain",
+        )
     legal_deep = st.checkbox(
         "Executar também diagnóstico profundo do pipeline",
         value=False,
@@ -325,8 +348,29 @@ with tabs[5]:
         help="Mantém o foco jurídico, mas pode incluir a camada profunda do diagnóstico geral.",
     )
 
+    kb_selection = resolve_domain_knowledge_base_selection(
+        query=legal_corpus,
+        mode=domain_mode,
+        explicit_domain_id=explicit_domain_id,
+    )
+    kb_preview = summarize_domain_knowledge_base(
+        query=legal_corpus,
+        domain_id=kb_selection["domain_id"],
+        knowledge_base=kb_selection["knowledge_base"],
+    )
+
+    st.markdown("#### 📚 Base Jurídica Ativa")
+    k1, k2 = st.columns(2)
+    k1.metric("Ramo Ativo", kb_selection["domain_name"])
+    k2.metric("Documentos na Base", kb_preview["document_count"])
+    if kb_preview["top_titles"]:
+        st.caption("Documentos mais relevantes: " + " | ".join(kb_preview["top_titles"]))
+
     if st.button("⚖️ Avaliar Impacto Jurídico", key="legal_tab_run"):
-        domain_route = summarize_legal_domain_route(legal_corpus)
+        domain_route = summarize_legal_domain_route(
+            legal_corpus,
+            explicit_domain_id=kb_selection["domain_id"] if domain_mode == "manual" else "",
+        )
         params = build_legal_params(
             titulo=legal_title,
             corpus=legal_corpus,
@@ -335,6 +379,7 @@ with tabs[5]:
             conclusoes=legal_conclusions,
             palavras_chave_csv=legal_keywords_csv,
             area_conhecimento=legal_area,
+            domain_id=kb_selection["domain_id"],
         )
         with st.spinner("Executando visão jurídica de impacto..."):
             legal_report = orch.diagnose(

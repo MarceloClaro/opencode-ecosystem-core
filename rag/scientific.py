@@ -20,6 +20,8 @@ import unicodedata
 from dataclasses import dataclass
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
+from mci.metabus import metabus
+
 
 @dataclass(frozen=True)
 class ScientificDocument:
@@ -134,6 +136,17 @@ class ScientificRAG:
                     tokens=tokens,
                     expanded_tokens=expanded,
                 ))
+        metabus.publish_subsystem_event(
+            "rag",
+            "index.updated",
+            {"documents": len(documents), "chunks": len(self._chunks)},
+            source_agent="scientific_rag",
+        )
+        metabus.memory.upsert_semantic_topic(
+            "rag.scientific",
+            lesson=f"ScientificRAG indexado com {len(documents)} documentos e {len(self._chunks)} chunks.",
+            metadata={"documents": len(documents), "chunks": len(self._chunks)},
+        )
 
     @property
     def size(self) -> int:
@@ -179,7 +192,7 @@ class ScientificRAG:
                     if ev.final_score >= self.min_score]
 
         if not evidence:
-            return {
+            result = {
                 "query": query,
                 "answer": "Não há evidência suficiente no índice RAG para responder com grounding.",
                 "abstained": True,
@@ -188,6 +201,14 @@ class ScientificRAG:
                 "groundedness": 0.0,
                 "citation_coverage": 0.0,
             }
+            metabus.publish_subsystem_event(
+                "rag",
+                "answer.generated",
+                {"query": query, "abstained": True, "evidence_count": 0, "groundedness": 0.0},
+                source_agent="scientific_rag",
+            )
+            metabus.memory.update_topic_confidence("rag.scientific", 0.2)
+            return result
 
         evidence_fragments = []
         for ev in evidence:
@@ -205,7 +226,7 @@ class ScientificRAG:
             "evidence": [ev.to_dict() for ev in evidence],
         })
 
-        return {
+        result = {
             "query": query,
             "answer": answer_text,
             "abstained": False,
@@ -214,6 +235,24 @@ class ScientificRAG:
             "groundedness": grounding["groundedness"],
             "citation_coverage": grounding["citation_coverage"],
         }
+        metabus.publish_subsystem_event(
+            "rag",
+            "answer.generated",
+            {
+                "query": query,
+                "abstained": False,
+                "evidence_count": len(evidence),
+                "groundedness": grounding["groundedness"],
+            },
+            source_agent="scientific_rag",
+        )
+        metabus.memory.upsert_semantic_topic(
+            "rag.answers",
+            lesson=f"RAG respondeu consulta '{query[:80]}' com {len(evidence)} evidências.",
+            metadata={"last_groundedness": grounding["groundedness"]},
+        )
+        metabus.memory.update_topic_confidence("rag.scientific", grounding["groundedness"])
+        return result
 
     # ── Scoring ──────────────────────────────────────────────────────────
 
