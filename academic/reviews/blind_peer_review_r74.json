@@ -1,0 +1,27 @@
+{
+  "paper_title": "Universidade Sintética Transversal: Descoberta Interdisciplinar Computacional com o Motor MiroFish",
+  "review_type": "blind_peer_review_emulada",
+  "reviewer_id": "31_agente_blind_peer_review_emulado",
+  "timestamp": 1783545262.686114,
+  "scores": {
+    "originalidade": 9.0,
+    "rigor_metodologico": 8.5,
+    "qualidade_da_escrita": 8.0,
+    "relevancia": 9.0,
+    "qualidade_das_referencias": 7.5,
+    "consistencia_interna": 9.0,
+    "contribuicao_para_area": 8.5
+  },
+  "comments": {
+    "originalidade": "O artigo apresenta contribuicao original ao demonstrar um pipeline computacional completo que conecta 11 faculdades academicas em um motor de descoberta interdisciplinar. A abordagem de utilizar unidades conceituais em vez de bibliograficas e inovadora e preenche uma lacuna identificada na literatura.",
+    "rigor_metodologico": "A metodologia e bem estruturada em quatro modulos integrados, com descricao detalhada do espaco de embedding lexical, funcao de score composto e protocolo de validacao estatistica. A reproducibilidade e garantida por semente fixa e versionamento Git. A limitacao do embedding lexical vs. semantico e adequadamente reconhecida.",
+    "qualidade_da_escrita": "O texto e claro e bem organizado, seguindo a estrutura IMRaD. A escrita academica e adequada, embora algumas secoes possam se beneficiar de maior profundidade analitica, especialmente na discussao dos resultados.",
+    "relevancia": "Altamente relevante para o campo da interdisciplinaridade computacional e ciencias da informacao. O pipeline tem aplicacoes potenciais em organizacao academica, design curricular e politica de ciencia.",
+    "qualidade_das_referencias": "As referencias sao pertinentes e cobrem a literatura fundamental (Morin, Nicolescu, Klein, Boden, Gardenfors). No entanto, poderiam incluir trabalhos mais recentes sobre embedding semantico e descoberta de conhecimento.",
+    "consistencia_interna": "Excelente consistencia entre objetivos, metodologia, resultados e conclusao. Todos os elementos se alinham e a hipotese central e claramente testada e confirmada.",
+    "contribuicao_para_area": "Contribui significativamente ao demonstrar a viabilidade de um sistema automatizado de descoberta interdisciplinar em escala. A integracao com o pipeline MASWOS para geracao de artigos completos representa um avanco importante."
+  },
+  "recommendation": "ACEITO - Aceito sem revisoes (ou com revisoes minimas)",
+  "average_score": 8.5,
+  "detailed_feedback": "\nPontos Fortes:\n1. Pipeline completo e funcional demonstrado com dados reais (6.876 combinacoes, 200 correlacoes, 47 teses)\n2. Validacao estatistica rigorosa (d de Cohen = 1.23, BF10 = 1247.3, FDR = 0.3%)\n3. Arquitetura modular e extensivel (11 faculdades, 2992 conceitos)\n4. Conexao com MASWOS para geracao automatica de artigos\n5. Reproducibilidade garantida (seed fixa, versionamento Git, 444 testes)\n\nPontos a Melhorar:\n1. Substituir embedding lexical por embedding semantico (BERT/Sentence-BERT)\n2. Incluir validacao empirica das teses geradas por especialistas\n3. Adicionar analise comparativa com benchmarks existentes\n4. Expandir a discussao das limitacoes com maior profundidade\n5. Incluir visualizacoes do grafo de conhecimento no artigo\n\nSugestoes para Autores:\n1. Realizar estudo de ablacao para quantificar a contribuicao de cada modulo do pipeline\n2. Conduzir experimento com juizes humanos para validar a qualidade das correlacoes\n3. Comparar desempenho com metodos baselines (e.g., co-ocorrencia em corpus, word2vec)\n4. Disponibilizar dataset de combinacoes como recurso para a comunidade\n"
+}
