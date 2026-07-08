@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+"""
+Pacote legal — Módulo de Raciocínio Jurídico Brasileiro (SPEC-921)
+====================================================================
+Implementa os principais métodos de argumentação e decisão jurídica
+do sistema jurídico brasileiro.
+
+Componentes:
+  - LegalSyllogism: subsunção legal (silogismo: norma + fato → conclusão)
+  - PrincipleBalancing: ponderação de princípios (Alexy, fórmula do peso)
+  - PrecedentAnalyzer: análise de precedentes vinculantes (CPC/2015)
+  - ConstitutionalInterpretation: métodos de interpretação constitucional
+  - LegalArgumentScorer: scoring de argumentos jurídicos
+"""
+
+from legal.syllogism import (
+    LegalSyllogism,
+    LegalNorm,
+    LegalFact,
+    SubsumpionResult,
+    NormHierarchy,
+    NormType,
+    Competence,
+)
+from legal.balancing import (
+    PrincipleBalancing,
+    Principle,
+    BalancingResult,
+)
+from legal.precedents import (
+    PrecedentAnalyzer,
+    Precedent,
+    CaseFacts,
+    PrecedentAnalysisResult,
+    PrecedentType,
+    BindingLevel,
+)
+from legal.constitutional import (
+    ConstitutionalInterpretation,
+    ConstitutionalNorm,
+    InterpretationResult,
+    InterpretationMethod,
+)
+from legal.argumentation import (
+    LegalArgumentScorer,
+    LegalArgument,
+    ArgumentScoreResult,
+    ScoreDetail,
+)
+
+__all__ = [
+    # Syllogism
+    "LegalSyllogism", "LegalNorm", "LegalFact", "SubsumpionResult",
+    "NormHierarchy", "NormType", "Competence",
+    # Balancing
+    "PrincipleBalancing", "Principle", "BalancingResult",
+    # Precedents
+    "PrecedentAnalyzer", "Precedent", "CaseFacts", "PrecedentAnalysisResult",
+    "PrecedentType", "BindingLevel",
+    # Constitutional
+    "ConstitutionalInterpretation", "ConstitutionalNorm", "InterpretationResult",
+    "InterpretationMethod",
+    # Argumentation
+    "LegalArgumentScorer", "LegalArgument", "ArgumentScoreResult", "ScoreDetail",
+]
+
+__version__ = "1.0.0"

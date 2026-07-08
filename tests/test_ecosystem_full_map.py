@@ -27,7 +27,13 @@ def test_build_ecosystem_map_contains_key_paths():
     assert "mci/pipeline/scientific_governance_pipeline.py" in paths
     assert "mci/metacognitive_evaluator.py" in paths
     assert "rag/scientific.py" in paths
+    assert "legal/syllogism.py" in paths
+    assert "legal/balancing.py" in paths
+    assert "legal/precedents.py" in paths
+    assert "legal/constitutional.py" in paths
+    assert "legal/argumentation.py" in paths
     assert "specs/SPEC-920-metacognitive-superhuman-refinement.md" in paths
+    assert "specs/SPEC-921-brazilian-legal-reasoning.md" in paths
     assert "tests/test_metacognitive_superhuman.py" in paths
     assert "research/pipelines/analyze_research_batch.py" in paths
     assert "agents/catalog/mira-new.md" in paths

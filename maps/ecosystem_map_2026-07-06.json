@@ -1,26 +1,26 @@
 {
   "summary": {
-    "node_count": 362,
-    "vector_count": 556,
+    "node_count": 371,
+    "vector_count": 575,
     "node_kinds": {
       "actor": 1,
       "agent": 152,
       "benchmark": 8,
       "diagram": 1,
       "doc": 5,
-      "layer": 18,
-      "module": 105,
+      "layer": 19,
+      "module": 111,
       "schema": 4,
-      "spec": 44,
-      "test": 24
+      "spec": 45,
+      "test": 25
     },
     "vector_kinds": {
-      "contains": 331,
-      "control_flow": 24,
-      "data_flow": 4,
+      "contains": 339,
+      "control_flow": 25,
+      "data_flow": 8,
       "depends_on": 29,
       "documents": 9,
-      "imports": 159
+      "imports": 165
     }
   },
   "nodes": [
@@ -1401,6 +1401,14 @@
       "layer": "illustrations"
     },
     {
+      "id": "layer_legal",
+      "label": "Legal Reasoning",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "legal_reasoning",
+      "layer": "legal"
+    },
+    {
       "id": "layer_mci",
       "label": "Metacognitive Interconnect",
       "kind": "layer",
@@ -1615,6 +1623,54 @@
       "path": "illustrations/mira_engine.py",
       "logical_group": "",
       "layer": "illustrations"
+    },
+    {
+      "id": "legal_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "legal/__init__.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
+      "id": "legal_argumentation_py",
+      "label": "argumentation",
+      "kind": "module",
+      "path": "legal/argumentation.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
+      "id": "legal_balancing_py",
+      "label": "balancing",
+      "kind": "module",
+      "path": "legal/balancing.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
+      "id": "legal_constitutional_py",
+      "label": "constitutional",
+      "kind": "module",
+      "path": "legal/constitutional.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
+      "id": "legal_precedents_py",
+      "label": "precedents",
+      "kind": "module",
+      "path": "legal/precedents.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
+      "id": "legal_syllogism_py",
+      "label": "syllogism",
+      "kind": "module",
+      "path": "legal/syllogism.py",
+      "logical_group": "",
+      "layer": "legal"
     },
     {
       "id": "marceloclaro_init_py",
@@ -2729,6 +2785,14 @@
       "layer": "specs"
     },
     {
+      "id": "specs_SPEC_921_brazilian_legal_reasoning_md",
+      "label": "SPEC-921-brazilian-legal-reasoning",
+      "kind": "spec",
+      "path": "specs/SPEC-921-brazilian-legal-reasoning.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
       "id": "tests_test_advanced_subsystems_py",
       "label": "test_advanced_subsystems",
       "kind": "test",
@@ -2741,6 +2805,14 @@
       "label": "test_analyze_research_batch",
       "kind": "test",
       "path": "tests/test_analyze_research_batch.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_brazilian_legal_reasoning_py",
+      "label": "test_brazilian_legal_reasoning",
+      "kind": "test",
+      "path": "tests/test_brazilian_legal_reasoning.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -4021,6 +4093,42 @@
       "note": "illustrations contém illustrations/mira_engine.py"
     },
     {
+      "source": "layer_legal",
+      "target": "legal_argumentation_py",
+      "kind": "contains",
+      "note": "legal contém legal/argumentation.py"
+    },
+    {
+      "source": "layer_legal",
+      "target": "legal_balancing_py",
+      "kind": "contains",
+      "note": "legal contém legal/balancing.py"
+    },
+    {
+      "source": "layer_legal",
+      "target": "legal_constitutional_py",
+      "kind": "contains",
+      "note": "legal contém legal/constitutional.py"
+    },
+    {
+      "source": "layer_legal",
+      "target": "legal_init_py",
+      "kind": "contains",
+      "note": "legal contém legal/__init__.py"
+    },
+    {
+      "source": "layer_legal",
+      "target": "legal_precedents_py",
+      "kind": "contains",
+      "note": "legal contém legal/precedents.py"
+    },
+    {
+      "source": "layer_legal",
+      "target": "legal_syllogism_py",
+      "kind": "contains",
+      "note": "legal contém legal/syllogism.py"
+    },
+    {
       "source": "layer_mci",
       "target": "mci_adversarial_reviewer_py",
       "kind": "contains",
@@ -4711,6 +4819,12 @@
       "note": "specs contém specs/SPEC-920-metacognitive-superhuman-refinement.md"
     },
     {
+      "source": "layer_specs",
+      "target": "specs_SPEC_921_brazilian_legal_reasoning_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-921-brazilian-legal-reasoning.md"
+    },
+    {
       "source": "layer_tests",
       "target": "tests_test_advanced_subsystems_py",
       "kind": "contains",
@@ -4721,6 +4835,12 @@
       "target": "tests_test_analyze_research_batch_py",
       "kind": "contains",
       "note": "tests contém tests/test_analyze_research_batch.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_brazilian_legal_reasoning_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_brazilian_legal_reasoning.py"
     },
     {
       "source": "layer_tests",
@@ -4934,6 +5054,12 @@
     },
     {
       "source": "marceloclaro_orchestrator_py",
+      "target": "legal_init_py",
+      "kind": "control_flow",
+      "note": "raciocínio jurídico brasileiro SPEC-921"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
       "target": "mci_blackboard_py",
       "kind": "control_flow",
       "note": "delegação A2A via Blackboard"
@@ -5051,6 +5177,30 @@
       "target": "mci_vsee_router_py",
       "kind": "control_flow",
       "note": "runner invoca VSEE"
+    },
+    {
+      "source": "legal_argumentation_py",
+      "target": "legal_syllogism_py",
+      "kind": "data_flow",
+      "note": "scoring valida consistência da subsunção"
+    },
+    {
+      "source": "legal_precedents_py",
+      "target": "legal_syllogism_py",
+      "kind": "data_flow",
+      "note": "ratio decidendi informa subsunção"
+    },
+    {
+      "source": "legal_syllogism_py",
+      "target": "legal_balancing_py",
+      "kind": "data_flow",
+      "note": "subsunção alimenta ponderação"
+    },
+    {
+      "source": "legal_syllogism_py",
+      "target": "legal_constitutional_py",
+      "kind": "data_flow",
+      "note": "controle de constitucionalidade via interpretação"
     },
     {
       "source": "mci_metabus_py",
@@ -5345,6 +5495,36 @@
       "target": "economy_token_economy_py",
       "kind": "imports",
       "note": "economy.token_economy"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_argumentation_py",
+      "kind": "imports",
+      "note": "legal.argumentation"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_balancing_py",
+      "kind": "imports",
+      "note": "legal.balancing"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_constitutional_py",
+      "kind": "imports",
+      "note": "legal.constitutional"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_precedents_py",
+      "kind": "imports",
+      "note": "legal.precedents"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_syllogism_py",
+      "kind": "imports",
+      "note": "legal.syllogism"
     },
     {
       "source": "marceloclaro_cli_py",
@@ -5801,6 +5981,12 @@
       "target": "research_pipelines_analyze_research_batch_py",
       "kind": "imports",
       "note": "research.pipelines.analyze_research_batch"
+    },
+    {
+      "source": "tests_test_brazilian_legal_reasoning_py",
+      "target": "legal_init_py",
+      "kind": "imports",
+      "note": "legal"
     },
     {
       "source": "tests_test_cover_designer_py",
