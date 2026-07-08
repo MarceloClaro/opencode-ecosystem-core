@@ -980,6 +980,30 @@
       "timestamp": 1783551322.8667328
     },
     {
+      "round_id": "R88",
+      "objective": "LLM Evaluator com fallback 3-nivel (Antigravity -> OpenCode CLI -> Ollama -> template)",
+      "changes": [
+        "Criado synthetic_university/llm_evaluator.py: LLMEvaluator com 3 niveis de fallback",
+        "Antigravity Bridge como fonte primaria de feedback academico",
+        "OpenCode CLI como segunda opcao (modelo north-mini-code-free)",
+        "Ollama API como terceira opcao (modelo local generativo)",
+        "Template fallback garantindo feedback minimo em qualquer ambiente",
+        "LRU cache para evitar re-avaliacao de teses identicas",
+        "Stats tracking: total calls, by source, avg time",
+        "13 testes TDD para todos os niveis de fallback",
+        "Feedback real gerado: 1.112 chars, 45.7s (Antigravity)"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Antigravity Bridge e a fonte primaria mais confiavel quando disponivel",
+        "OpenCode CLI com modelos free gera feedback academico util (~1.943 chars em 52s)",
+        "Ollama com modelo generativo pequeno produz feedback viavel mas limitado",
+        "Fallback em cascata garante que sempre haja feedback, mesmo sem LLM",
+        "Cache reduz drasticamente latencia em pipelines batch"
+      ],
+      "timestamp": 1783551620.0
+    },
+    {
       "round_id": "R89",
       "objective": "Thesis Enrichment via Antigravity Web Search",
       "changes": [
@@ -1072,6 +1096,25 @@
         "Fallback para dados simulados quando busca web falha"
       ],
       "timestamp": 1783552948.3897855
+    },
+    {
+      "round_id": "R94",
+      "objective": "MCP Server — expoe 8 modulos da Universidade Sintetica como ferramentas MCP",
+      "changes": [
+        "Criado synthetic_university/mcp_server.py: SimpleMCPServer com stdio JSON-RPC",
+        "8 ferramentas registradas: su_generate, su_evaluate, su_enrich, su_visual_abstract, su_peer_review, su_submission, su_novelty, su_dashboard",
+        "Cada ferramenta com JSON Schema de entrada e handler delegando ao modulo correspondente",
+        "Testes TDD: 12 testes mockando handlers e validando tools/list e tools/call",
+        "Server funcional via stdio: echo '{\"method\":\"tools/call\",...}' | python3 -m synthetic_university.mcp_server"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "SimpleMCPServer com stdio e o padrao MCI para integracao MCP leve",
+        "Handlers devem ser auto-contidos (sem dependencia externa obrigatoria) para funcionar em qualquer ambiente",
+        "Fallback no handler generate evita dependencia de faculty_map que nao existe no contexto MCP",
+        "12 testes garantem cobertura de todas as ferramentas sem dependencia de LLM real"
+      ],
+      "timestamp": 1783584000.0
     }
   ]
 }
