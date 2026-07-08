@@ -1,26 +1,26 @@
 {
   "summary": {
-    "node_count": 375,
-    "vector_count": 589,
+    "node_count": 393,
+    "vector_count": 635,
     "node_kinds": {
       "actor": 1,
-      "agent": 152,
+      "agent": 156,
       "benchmark": 8,
       "diagram": 1,
       "doc": 5,
-      "layer": 19,
-      "module": 113,
+      "layer": 20,
+      "module": 119,
       "schema": 4,
-      "spec": 46,
-      "test": 26
+      "spec": 50,
+      "test": 29
     },
     "vector_kinds": {
-      "contains": 343,
-      "control_flow": 25,
-      "data_flow": 8,
-      "depends_on": 29,
+      "contains": 360,
+      "control_flow": 32,
+      "data_flow": 10,
+      "depends_on": 34,
       "documents": 9,
-      "imports": 175
+      "imports": 190
     }
   },
   "nodes": [
@@ -461,6 +461,38 @@
       "label": "autoevolve",
       "kind": "agent",
       "path": "agents/catalog/autoevolve.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_auxjuris_document_summarizer_md",
+      "label": "auxjuris_document_summarizer",
+      "kind": "agent",
+      "path": "agents/catalog/auxjuris_document_summarizer.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_auxjuris_email_drafter_md",
+      "label": "auxjuris_email_drafter",
+      "kind": "agent",
+      "path": "agents/catalog/auxjuris_email_drafter.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_auxjuris_legal_assistant_md",
+      "label": "auxjuris_legal_assistant",
+      "kind": "agent",
+      "path": "agents/catalog/auxjuris_legal_assistant.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
+      "id": "agents_catalog_auxjuris_legal_research_md",
+      "label": "auxjuris_legal_research",
+      "kind": "agent",
+      "path": "agents/catalog/auxjuris_legal_research.md",
       "logical_group": "",
       "layer": "agents_catalog"
     },
@@ -1513,6 +1545,14 @@
       "layer": "trust_economy"
     },
     {
+      "id": "layer_webapp",
+      "label": "Web Interface",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "interaction",
+      "layer": "webapp"
+    },
+    {
       "id": "academic_init_py",
       "label": "__init__",
       "kind": "module",
@@ -1633,6 +1673,14 @@
       "layer": "legal"
     },
     {
+      "id": "legal_agents_py",
+      "label": "agents",
+      "kind": "module",
+      "path": "legal/agents.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
       "id": "legal_argumentation_py",
       "label": "argumentation",
       "kind": "module",
@@ -1673,10 +1721,26 @@
       "layer": "legal"
     },
     {
+      "id": "legal_knowledge_base_py",
+      "label": "knowledge_base",
+      "kind": "module",
+      "path": "legal/knowledge_base.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
       "id": "legal_precedents_py",
       "label": "precedents",
       "kind": "module",
       "path": "legal/precedents.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
+      "id": "legal_summarizer_py",
+      "label": "summarizer",
+      "kind": "module",
+      "path": "legal/summarizer.py",
       "logical_group": "",
       "layer": "legal"
     },
@@ -2273,6 +2337,14 @@
       "layer": "diagnostics"
     },
     {
+      "id": "scanners_legal_impact_scanner_py",
+      "label": "legal_impact_scanner",
+      "kind": "module",
+      "path": "scanners/legal_impact_scanner.py",
+      "logical_group": "",
+      "layer": "diagnostics"
+    },
+    {
       "id": "scanners_noological_scanner_py",
       "label": "noological_scanner",
       "kind": "module",
@@ -2415,6 +2487,22 @@
       "path": "trust/trust_engine.py",
       "logical_group": "",
       "layer": "trust_economy"
+    },
+    {
+      "id": "webapp_app_py",
+      "label": "app",
+      "kind": "module",
+      "path": "webapp/app.py",
+      "logical_group": "",
+      "layer": "webapp"
+    },
+    {
+      "id": "webapp_legal_impact_helpers_py",
+      "label": "legal_impact_helpers",
+      "kind": "module",
+      "path": "webapp/legal_impact_helpers.py",
+      "logical_group": "",
+      "layer": "webapp"
     },
     {
       "id": "schemas_ethical_assessment_schema_json",
@@ -2817,6 +2905,38 @@
       "layer": "specs"
     },
     {
+      "id": "specs_SPEC_923_auxjuris_integration_md",
+      "label": "SPEC-923-auxjuris-integration",
+      "kind": "spec",
+      "path": "specs/SPEC-923-auxjuris-integration.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_924_legal_impact_scanner_md",
+      "label": "SPEC-924-legal-impact-scanner",
+      "kind": "spec",
+      "path": "specs/SPEC-924-legal-impact-scanner.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_925_webapp_legal_impact_interface_md",
+      "label": "SPEC-925-webapp-legal-impact-interface",
+      "kind": "spec",
+      "path": "specs/SPEC-925-webapp-legal-impact-interface.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_926_webapp_dedicated_legal_tab_md",
+      "label": "SPEC-926-webapp-dedicated-legal-tab",
+      "kind": "spec",
+      "path": "specs/SPEC-926-webapp-dedicated-legal-tab.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
       "id": "tests_test_advanced_subsystems_py",
       "label": "test_advanced_subsystems",
       "kind": "test",
@@ -2829,6 +2949,14 @@
       "label": "test_analyze_research_batch",
       "kind": "test",
       "path": "tests/test_analyze_research_batch.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_auxjuris_integration_py",
+      "label": "test_auxjuris_integration",
+      "kind": "test",
+      "path": "tests/test_auxjuris_integration.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -2909,6 +3037,14 @@
       "label": "test_inspiration_audit",
       "kind": "test",
       "path": "tests/test_inspiration_audit.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_legal_impact_scanner_py",
+      "label": "test_legal_impact_scanner",
+      "kind": "test",
+      "path": "tests/test_legal_impact_scanner.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -3021,6 +3157,14 @@
       "label": "test_transformer",
       "kind": "test",
       "path": "tests/test_transformer.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_webapp_legal_impact_py",
+      "label": "test_webapp_legal_impact",
+      "kind": "test",
+      "path": "tests/test_webapp_legal_impact.py",
       "logical_group": "",
       "layer": "tests"
     }
@@ -3349,6 +3493,30 @@
       "target": "agents_catalog_autoevolve_md",
       "kind": "contains",
       "note": "agents_catalog contém agents/catalog/autoevolve.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_auxjuris_document_summarizer_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/auxjuris_document_summarizer.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_auxjuris_email_drafter_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/auxjuris_email_drafter.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_auxjuris_legal_assistant_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/auxjuris_legal_assistant.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_auxjuris_legal_research_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/auxjuris_legal_research.md"
     },
     {
       "source": "layer_agents_catalog",
@@ -4018,6 +4186,12 @@
     },
     {
       "source": "layer_diagnostics",
+      "target": "scanners_legal_impact_scanner_py",
+      "kind": "contains",
+      "note": "diagnostics contém scanners/legal_impact_scanner.py"
+    },
+    {
+      "source": "layer_diagnostics",
       "target": "scanners_noological_scanner_py",
       "kind": "contains",
       "note": "diagnostics contém scanners/noological_scanner.py"
@@ -4126,6 +4300,12 @@
     },
     {
       "source": "layer_legal",
+      "target": "legal_agents_py",
+      "kind": "contains",
+      "note": "legal contém legal/agents.py"
+    },
+    {
+      "source": "layer_legal",
       "target": "legal_argumentation_py",
       "kind": "contains",
       "note": "legal contém legal/argumentation.py"
@@ -4162,9 +4342,21 @@
     },
     {
       "source": "layer_legal",
+      "target": "legal_knowledge_base_py",
+      "kind": "contains",
+      "note": "legal contém legal/knowledge_base.py"
+    },
+    {
+      "source": "layer_legal",
       "target": "legal_precedents_py",
       "kind": "contains",
       "note": "legal contém legal/precedents.py"
+    },
+    {
+      "source": "layer_legal",
+      "target": "legal_summarizer_py",
+      "kind": "contains",
+      "note": "legal contém legal/summarizer.py"
     },
     {
       "source": "layer_legal",
@@ -4875,6 +5067,30 @@
       "note": "specs contém specs/SPEC-922-datajud-integration.md"
     },
     {
+      "source": "layer_specs",
+      "target": "specs_SPEC_923_auxjuris_integration_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-923-auxjuris-integration.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_924_legal_impact_scanner_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-924-legal-impact-scanner.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_925_webapp_legal_impact_interface_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-925-webapp-legal-impact-interface.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_926_webapp_dedicated_legal_tab_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-926-webapp-dedicated-legal-tab.md"
+    },
+    {
       "source": "layer_tests",
       "target": "tests_test_advanced_subsystems_py",
       "kind": "contains",
@@ -4885,6 +5101,12 @@
       "target": "tests_test_analyze_research_batch_py",
       "kind": "contains",
       "note": "tests contém tests/test_analyze_research_batch.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_auxjuris_integration_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_auxjuris_integration.py"
     },
     {
       "source": "layer_tests",
@@ -4945,6 +5167,12 @@
       "target": "tests_test_inspiration_audit_py",
       "kind": "contains",
       "note": "tests contém tests/test_inspiration_audit.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_legal_impact_scanner_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_legal_impact_scanner.py"
     },
     {
       "source": "layer_tests",
@@ -5031,6 +5259,12 @@
       "note": "tests contém tests/test_transformer.py"
     },
     {
+      "source": "layer_tests",
+      "target": "tests_test_webapp_legal_impact_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_webapp_legal_impact.py"
+    },
+    {
       "source": "layer_transformer",
       "target": "transformer_attention_py",
       "kind": "contains",
@@ -5085,10 +5319,34 @@
       "note": "trust_economy contém trust/trust_engine.py"
     },
     {
+      "source": "layer_webapp",
+      "target": "webapp_app_py",
+      "kind": "contains",
+      "note": "webapp contém webapp/app.py"
+    },
+    {
+      "source": "layer_webapp",
+      "target": "webapp_legal_impact_helpers_py",
+      "kind": "contains",
+      "note": "webapp contém webapp/legal_impact_helpers.py"
+    },
+    {
       "source": "actor_user_cli",
       "target": "marceloclaro_orchestrator_py",
       "kind": "control_flow",
       "note": "comandos chegam ao orquestrador"
+    },
+    {
+      "source": "legal_agents_py",
+      "target": "mci_blackboard_py",
+      "kind": "control_flow",
+      "note": "registro A2A de agentes jurídicos"
+    },
+    {
+      "source": "legal_integration_py",
+      "target": "legal_datajud_client_py",
+      "kind": "control_flow",
+      "note": "integração consulta API Datajud"
     },
     {
       "source": "marceloclaro_orchestrator_py",
@@ -5110,9 +5368,21 @@
     },
     {
       "source": "marceloclaro_orchestrator_py",
+      "target": "legal_agents_py",
+      "kind": "control_flow",
+      "note": "agentes jurídicos AuxJuris SPEC-923"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
       "target": "legal_init_py",
       "kind": "control_flow",
       "note": "raciocínio jurídico brasileiro SPEC-921"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "legal_integration_py",
+      "kind": "control_flow",
+      "note": "pipeline jurídico com Datajud SPEC-922"
     },
     {
       "source": "marceloclaro_orchestrator_py",
@@ -5235,16 +5505,46 @@
       "note": "runner invoca VSEE"
     },
     {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_legal_impact_scanner_py",
+      "kind": "control_flow",
+      "note": "scanner jurídico de impacto opcional SPEC-924"
+    },
+    {
+      "source": "webapp_app_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "control_flow",
+      "note": "interface web aciona orquestrador"
+    },
+    {
+      "source": "webapp_app_py",
+      "target": "webapp_legal_impact_helpers_py",
+      "kind": "control_flow",
+      "note": "interface web usa helpers jurídicos"
+    },
+    {
       "source": "legal_argumentation_py",
       "target": "legal_syllogism_py",
       "kind": "data_flow",
       "note": "scoring valida consistência da subsunção"
     },
     {
+      "source": "legal_knowledge_base_py",
+      "target": "legal_datajud_client_py",
+      "kind": "data_flow",
+      "note": "processos do Datajud alimentam knowledge base jurídica"
+    },
+    {
       "source": "legal_precedents_py",
       "target": "legal_syllogism_py",
       "kind": "data_flow",
       "note": "ratio decidendi informa subsunção"
+    },
+    {
+      "source": "legal_summarizer_py",
+      "target": "legal_precedents_py",
+      "kind": "data_flow",
+      "note": "sumarização enriquecida por precedentes"
     },
     {
       "source": "legal_syllogism_py",
@@ -5457,6 +5757,36 @@
       "note": "SPEC-019"
     },
     {
+      "source": "specs_SPEC_924_legal_impact_scanner_md",
+      "target": "specs_SPEC_009_scanners_md",
+      "kind": "depends_on",
+      "note": "SPEC-009"
+    },
+    {
+      "source": "specs_SPEC_924_legal_impact_scanner_md",
+      "target": "specs_SPEC_022_diagnostic_pipeline_refined_md",
+      "kind": "depends_on",
+      "note": "SPEC-022"
+    },
+    {
+      "source": "specs_SPEC_925_webapp_legal_impact_interface_md",
+      "target": "specs_SPEC_924_legal_impact_scanner_md",
+      "kind": "depends_on",
+      "note": "SPEC-924"
+    },
+    {
+      "source": "specs_SPEC_926_webapp_dedicated_legal_tab_md",
+      "target": "specs_SPEC_924_legal_impact_scanner_md",
+      "kind": "depends_on",
+      "note": "SPEC-924"
+    },
+    {
+      "source": "specs_SPEC_926_webapp_dedicated_legal_tab_md",
+      "target": "specs_SPEC_925_webapp_legal_impact_interface_md",
+      "kind": "depends_on",
+      "note": "SPEC-925"
+    },
+    {
       "source": "specs_SPEC_007_trust_engine_md",
       "target": "trust_trust_engine_py",
       "kind": "documents",
@@ -5554,6 +5884,12 @@
     },
     {
       "source": "legal_init_py",
+      "target": "legal_agents_py",
+      "kind": "imports",
+      "note": "legal.agents"
+    },
+    {
+      "source": "legal_init_py",
       "target": "legal_argumentation_py",
       "kind": "imports",
       "note": "legal.argumentation"
@@ -5584,9 +5920,21 @@
     },
     {
       "source": "legal_init_py",
+      "target": "legal_knowledge_base_py",
+      "kind": "imports",
+      "note": "legal.knowledge_base"
+    },
+    {
+      "source": "legal_init_py",
       "target": "legal_precedents_py",
       "kind": "imports",
       "note": "legal.precedents"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_summarizer_py",
+      "kind": "imports",
+      "note": "legal.summarizer"
     },
     {
       "source": "legal_init_py",
@@ -5956,6 +6304,12 @@
     },
     {
       "source": "scanners_init_py",
+      "target": "scanners_legal_impact_scanner_py",
+      "kind": "imports",
+      "note": "scanners.legal_impact_scanner"
+    },
+    {
+      "source": "scanners_init_py",
       "target": "scanners_pipeline_py",
       "kind": "imports",
       "note": "scanners.pipeline"
@@ -5971,6 +6325,12 @@
       "target": "scanners_evolutionary_pipeline_py",
       "kind": "imports",
       "note": "scanners.evolutionary_pipeline"
+    },
+    {
+      "source": "scanners_pipeline_py",
+      "target": "scanners_legal_impact_scanner_py",
+      "kind": "imports",
+      "note": "scanners.legal_impact_scanner"
     },
     {
       "source": "scanners_pipeline_py",
@@ -6079,6 +6439,30 @@
       "target": "research_pipelines_analyze_research_batch_py",
       "kind": "imports",
       "note": "research.pipelines.analyze_research_batch"
+    },
+    {
+      "source": "tests_test_auxjuris_integration_py",
+      "target": "legal_init_py",
+      "kind": "imports",
+      "note": "legal"
+    },
+    {
+      "source": "tests_test_auxjuris_integration_py",
+      "target": "marceloclaro_catalog_loader_py",
+      "kind": "imports",
+      "note": "marceloclaro.catalog_loader"
+    },
+    {
+      "source": "tests_test_auxjuris_integration_py",
+      "target": "mci_blackboard_py",
+      "kind": "imports",
+      "note": "mci.blackboard"
+    },
+    {
+      "source": "tests_test_auxjuris_integration_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
     },
     {
       "source": "tests_test_brazilian_legal_reasoning_py",
@@ -6229,6 +6613,12 @@
       "target": "mci_metabus_py",
       "kind": "imports",
       "note": "mci.metabus"
+    },
+    {
+      "source": "tests_test_legal_impact_scanner_py",
+      "target": "scanners_init_py",
+      "kind": "imports",
+      "note": "scanners"
     },
     {
       "source": "tests_test_llm_client_py",
@@ -6555,10 +6945,40 @@
       "note": "transformer.pipeline"
     },
     {
+      "source": "tests_test_webapp_legal_impact_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_webapp_legal_impact_py",
+      "target": "webapp_legal_impact_helpers_py",
+      "kind": "imports",
+      "note": "webapp.legal_impact_helpers"
+    },
+    {
       "source": "trust_init_py",
       "target": "trust_trust_engine_py",
       "kind": "imports",
       "note": "trust.trust_engine"
+    },
+    {
+      "source": "webapp_app_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "webapp_app_py",
+      "target": "research_llm_client_py",
+      "kind": "imports",
+      "note": "research.llm_client"
+    },
+    {
+      "source": "webapp_app_py",
+      "target": "webapp_legal_impact_helpers_py",
+      "kind": "imports",
+      "note": "webapp.legal_impact_helpers"
     }
   ]
 }

@@ -32,9 +32,26 @@ def test_build_ecosystem_map_contains_key_paths():
     assert "legal/precedents.py" in paths
     assert "legal/constitutional.py" in paths
     assert "legal/argumentation.py" in paths
+    assert "legal/datajud_client.py" in paths
+    assert "legal/integration.py" in paths
+    assert "legal/agents.py" in paths
+    assert "legal/knowledge_base.py" in paths
+    assert "legal/summarizer.py" in paths
+    assert "scanners/legal_impact_scanner.py" in paths
+    assert "webapp/app.py" in paths
+    assert "webapp/legal_impact_helpers.py" in paths
     assert "specs/SPEC-920-metacognitive-superhuman-refinement.md" in paths
     assert "specs/SPEC-921-brazilian-legal-reasoning.md" in paths
+    assert "specs/SPEC-922-datajud-integration.md" in paths
+    assert "specs/SPEC-923-auxjuris-integration.md" in paths
+    assert "specs/SPEC-924-legal-impact-scanner.md" in paths
+    assert "specs/SPEC-925-webapp-legal-impact-interface.md" in paths
+    assert "specs/SPEC-926-webapp-dedicated-legal-tab.md" in paths
     assert "tests/test_metacognitive_superhuman.py" in paths
+    assert "tests/test_datajud_integration.py" in paths
+    assert "tests/test_auxjuris_integration.py" in paths
+    assert "tests/test_legal_impact_scanner.py" in paths
+    assert "tests/test_webapp_legal_impact.py" in paths
     assert "research/pipelines/analyze_research_batch.py" in paths
     assert "agents/catalog/mira-new.md" in paths
 

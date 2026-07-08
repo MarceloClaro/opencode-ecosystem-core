@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Pacote legal — Módulo de Raciocínio Jurídico Brasileiro (SPEC-921/922)
-========================================================================
+Pacote legal — Módulo de Raciocínio Jurídico Brasileiro (SPEC-921/922/923)
+=============================================================================
 Implementa os principais métodos de argumentação e decisão jurídica
 do sistema jurídico brasileiro.
 
@@ -13,6 +13,9 @@ Componentes:
   - LegalArgumentScorer: scoring de argumentos jurídicos
   - DatajudClient: cliente para API pública Datajud do CNJ (SPEC-922)
   - LegalDatajudIntegration: ponte Datajud → motores de raciocínio
+  - LegalAgentCard: 4 agentes jurídicos A2A (SPEC-923/AUXJURIS)
+  - LegalKnowledgeBase: base de conhecimento com RAG por keywords
+  - LegalDocumentSummarizer: sumarizador de documentos jurídicos
 """
 
 from legal.syllogism import (
@@ -60,6 +63,24 @@ from legal.integration import (
     process_to_legal_fact,
     process_to_legal_argument,
 )
+from legal.agents import (
+    LegalAgentCard,
+    LEGAL_AGENTS,
+    get_legal_agent,
+    resolve_legal_agent,
+    get_all_legal_agent_cards,
+    register_legal_agents,
+)
+from legal.knowledge_base import (
+    LegalKnowledgeBase,
+    LegalDocument,
+    DEFAULT_LEGAL_DOCUMENTS,
+)
+from legal.summarizer import (
+    LegalDocumentSummarizer,
+    SummaryResult,
+    LegalEntities,
+)
 
 __all__ = [
     # Syllogism
@@ -80,6 +101,14 @@ __all__ = [
     # Integration
     "LegalDatajudIntegration",
     "process_to_precedent", "process_to_legal_fact", "process_to_legal_argument",
+    # Agents
+    "LegalAgentCard", "LEGAL_AGENTS",
+    "get_legal_agent", "resolve_legal_agent", "get_all_legal_agent_cards",
+    "register_legal_agents",
+    # Knowledge Base
+    "LegalKnowledgeBase", "LegalDocument", "DEFAULT_LEGAL_DOCUMENTS",
+    # Summarizer
+    "LegalDocumentSummarizer", "SummaryResult", "LegalEntities",
 ]
 
 __version__ = "1.0.0"

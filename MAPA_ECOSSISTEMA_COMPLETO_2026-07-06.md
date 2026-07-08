@@ -1,33 +1,33 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **375**
-- Vetores: **589**
+- Nós: **393**
+- Vetores: **635**
 
 ## Taxonomia de Nós
 
 | kind | quantidade |
 |---|---:|
 | actor | 1 |
-| agent | 152 |
+| agent | 156 |
 | benchmark | 8 |
 | diagram | 1 |
 | doc | 5 |
-| layer | 19 |
-| module | 113 |
+| layer | 20 |
+| module | 119 |
 | schema | 4 |
-| spec | 46 |
-| test | 26 |
+| spec | 50 |
+| test | 29 |
 
 ## Taxonomia de Vetores
 
 | kind | quantidade |
 |---|---:|
-| contains | 343 |
-| control_flow | 25 |
-| data_flow | 8 |
-| depends_on | 29 |
+| contains | 360 |
+| control_flow | 32 |
+| data_flow | 10 |
+| depends_on | 34 |
 | documents | 9 |
-| imports | 175 |
+| imports | 190 |
 
 ## Diagrama de Alto Nível
 
@@ -111,6 +111,10 @@ graph TD
 | agents_catalog_architect_md | agent | agents_catalog | agents/catalog/architect.md |
 | agents_catalog_architecture_analyzer_md | agent | agents_catalog | agents/catalog/architecture-analyzer.md |
 | agents_catalog_autoevolve_md | agent | agents_catalog | agents/catalog/autoevolve.md |
+| agents_catalog_auxjuris_document_summarizer_md | agent | agents_catalog | agents/catalog/auxjuris_document_summarizer.md |
+| agents_catalog_auxjuris_email_drafter_md | agent | agents_catalog | agents/catalog/auxjuris_email_drafter.md |
+| agents_catalog_auxjuris_legal_assistant_md | agent | agents_catalog | agents/catalog/auxjuris_legal_assistant.md |
+| agents_catalog_auxjuris_legal_research_md | agent | agents_catalog | agents/catalog/auxjuris_legal_research.md |
 | agents_catalog_batch_executor_md | agent | agents_catalog | agents/catalog/batch-executor.md |
 | agents_catalog_bernstein_orchestrator_md | agent | agents_catalog | agents/catalog/bernstein-orchestrator.md |
 | agents_catalog_build_agent_md | agent | agents_catalog | agents/catalog/build-agent.md |
@@ -242,6 +246,7 @@ graph TD
 | layer_tests | layer | tests | verification |
 | layer_transformer | layer | transformer | routing |
 | layer_trust_economy | layer | trust_economy | governance |
+| layer_webapp | layer | webapp | interaction |
 | academic_init_py | module | academic | academic/__init__.py |
 | academic_auto_score_qualis_py | module | academic | academic/auto_score_qualis.py |
 | academic_maswos_py | module | academic | academic/maswos.py |
@@ -257,12 +262,15 @@ graph TD
 | illustrations_mermaid_engine_py | module | illustrations | illustrations/mermaid_engine.py |
 | illustrations_mira_engine_py | module | illustrations | illustrations/mira_engine.py |
 | legal_init_py | module | legal | legal/__init__.py |
+| legal_agents_py | module | legal | legal/agents.py |
 | legal_argumentation_py | module | legal | legal/argumentation.py |
 | legal_balancing_py | module | legal | legal/balancing.py |
 | legal_constitutional_py | module | legal | legal/constitutional.py |
 | legal_datajud_client_py | module | legal | legal/datajud_client.py |
 | legal_integration_py | module | legal | legal/integration.py |
+| legal_knowledge_base_py | module | legal | legal/knowledge_base.py |
 | legal_precedents_py | module | legal | legal/precedents.py |
+| legal_summarizer_py | module | legal | legal/summarizer.py |
 | legal_syllogism_py | module | legal | legal/syllogism.py |
 | marceloclaro_init_py | module | orchestration | marceloclaro/__init__.py |
 | marceloclaro_agent_loader_py | module | orchestration | marceloclaro/agent_loader.py |
@@ -337,6 +345,7 @@ graph TD
 | scanners_cross_validation_engine_py | module | diagnostics | scanners/cross_validation_engine.py |
 | scanners_epistemic_prioritizer_py | module | diagnostics | scanners/epistemic_prioritizer.py |
 | scanners_evolutionary_pipeline_py | module | diagnostics | scanners/evolutionary_pipeline.py |
+| scanners_legal_impact_scanner_py | module | diagnostics | scanners/legal_impact_scanner.py |
 | scanners_noological_scanner_py | module | diagnostics | scanners/noological_scanner.py |
 | scanners_optimal_question_scanner_py | module | diagnostics | scanners/optimal_question_scanner.py |
 | scanners_pipeline_py | module | diagnostics | scanners/pipeline.py |
@@ -355,6 +364,8 @@ graph TD
 | transformer_pipeline_py | module | transformer | transformer/pipeline.py |
 | trust_init_py | module | trust_economy | trust/__init__.py |
 | trust_trust_engine_py | module | trust_economy | trust/trust_engine.py |
+| webapp_app_py | module | webapp | webapp/app.py |
+| webapp_legal_impact_helpers_py | module | webapp | webapp/legal_impact_helpers.py |
 | schemas_ethical_assessment_schema_json | schema | schemas | schemas/ethical_assessment.schema.json |
 | schemas_optimal_question_schema_json | schema | schemas | schemas/optimal_question.schema.json |
 | schemas_scientific_claim_schema_json | schema | schemas | schemas/scientific_claim.schema.json |
@@ -405,8 +416,13 @@ graph TD
 | specs_SPEC_920_metacognitive_superhuman_refinement_md | spec | specs | specs/SPEC-920-metacognitive-superhuman-refinement.md |
 | specs_SPEC_921_brazilian_legal_reasoning_md | spec | specs | specs/SPEC-921-brazilian-legal-reasoning.md |
 | specs_SPEC_922_datajud_integration_md | spec | specs | specs/SPEC-922-datajud-integration.md |
+| specs_SPEC_923_auxjuris_integration_md | spec | specs | specs/SPEC-923-auxjuris-integration.md |
+| specs_SPEC_924_legal_impact_scanner_md | spec | specs | specs/SPEC-924-legal-impact-scanner.md |
+| specs_SPEC_925_webapp_legal_impact_interface_md | spec | specs | specs/SPEC-925-webapp-legal-impact-interface.md |
+| specs_SPEC_926_webapp_dedicated_legal_tab_md | spec | specs | specs/SPEC-926-webapp-dedicated-legal-tab.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
+| tests_test_auxjuris_integration_py | test | tests | tests/test_auxjuris_integration.py |
 | tests_test_brazilian_legal_reasoning_py | test | tests | tests/test_brazilian_legal_reasoning.py |
 | tests_test_cover_designer_py | test | tests | tests/test_cover_designer.py |
 | tests_test_datajud_integration_py | test | tests | tests/test_datajud_integration.py |
@@ -417,6 +433,7 @@ graph TD
 | tests_test_executive_changelog_artifact_py | test | tests | tests/test_executive_changelog_artifact.py |
 | tests_test_illustrations_py | test | tests | tests/test_illustrations.py |
 | tests_test_inspiration_audit_py | test | tests | tests/test_inspiration_audit.py |
+| tests_test_legal_impact_scanner_py | test | tests | tests/test_legal_impact_scanner.py |
 | tests_test_llm_client_py | test | tests | tests/test_llm_client.py |
 | tests_test_metacognitive_superhuman_py | test | tests | tests/test_metacognitive_superhuman.py |
 | tests_test_mira_catalog_py | test | tests | tests/test_mira_catalog.py |
@@ -431,6 +448,7 @@ graph TD
 | tests_test_scientific_superhuman_py | test | tests | tests/test_scientific_superhuman.py |
 | tests_test_sdd_tdd_py | test | tests | tests/test_sdd_tdd.py |
 | tests_test_transformer_py | test | tests | tests/test_transformer.py |
+| tests_test_webapp_legal_impact_py | test | tests | tests/test_webapp_legal_impact.py |
 
 ## Inventário de Vetores
 
@@ -490,6 +508,10 @@ graph TD
 | layer_agents_catalog | agents_catalog_architect_md | contains | agents_catalog contém agents/catalog/architect.md |
 | layer_agents_catalog | agents_catalog_architecture_analyzer_md | contains | agents_catalog contém agents/catalog/architecture-analyzer.md |
 | layer_agents_catalog | agents_catalog_autoevolve_md | contains | agents_catalog contém agents/catalog/autoevolve.md |
+| layer_agents_catalog | agents_catalog_auxjuris_document_summarizer_md | contains | agents_catalog contém agents/catalog/auxjuris_document_summarizer.md |
+| layer_agents_catalog | agents_catalog_auxjuris_email_drafter_md | contains | agents_catalog contém agents/catalog/auxjuris_email_drafter.md |
+| layer_agents_catalog | agents_catalog_auxjuris_legal_assistant_md | contains | agents_catalog contém agents/catalog/auxjuris_legal_assistant.md |
+| layer_agents_catalog | agents_catalog_auxjuris_legal_research_md | contains | agents_catalog contém agents/catalog/auxjuris_legal_research.md |
 | layer_agents_catalog | agents_catalog_batch_executor_md | contains | agents_catalog contém agents/catalog/batch-executor.md |
 | layer_agents_catalog | agents_catalog_bernstein_orchestrator_md | contains | agents_catalog contém agents/catalog/bernstein-orchestrator.md |
 | layer_agents_catalog | agents_catalog_build_agent_md | contains | agents_catalog contém agents/catalog/build-agent.md |
@@ -601,6 +623,7 @@ graph TD
 | layer_diagnostics | scanners_epistemic_prioritizer_py | contains | diagnostics contém scanners/epistemic_prioritizer.py |
 | layer_diagnostics | scanners_evolutionary_pipeline_py | contains | diagnostics contém scanners/evolutionary_pipeline.py |
 | layer_diagnostics | scanners_init_py | contains | diagnostics contém scanners/__init__.py |
+| layer_diagnostics | scanners_legal_impact_scanner_py | contains | diagnostics contém scanners/legal_impact_scanner.py |
 | layer_diagnostics | scanners_noological_scanner_py | contains | diagnostics contém scanners/noological_scanner.py |
 | layer_diagnostics | scanners_optimal_question_scanner_py | contains | diagnostics contém scanners/optimal_question_scanner.py |
 | layer_diagnostics | scanners_pipeline_py | contains | diagnostics contém scanners/pipeline.py |
@@ -619,13 +642,16 @@ graph TD
 | layer_illustrations | illustrations_init_py | contains | illustrations contém illustrations/__init__.py |
 | layer_illustrations | illustrations_mermaid_engine_py | contains | illustrations contém illustrations/mermaid_engine.py |
 | layer_illustrations | illustrations_mira_engine_py | contains | illustrations contém illustrations/mira_engine.py |
+| layer_legal | legal_agents_py | contains | legal contém legal/agents.py |
 | layer_legal | legal_argumentation_py | contains | legal contém legal/argumentation.py |
 | layer_legal | legal_balancing_py | contains | legal contém legal/balancing.py |
 | layer_legal | legal_constitutional_py | contains | legal contém legal/constitutional.py |
 | layer_legal | legal_datajud_client_py | contains | legal contém legal/datajud_client.py |
 | layer_legal | legal_init_py | contains | legal contém legal/__init__.py |
 | layer_legal | legal_integration_py | contains | legal contém legal/integration.py |
+| layer_legal | legal_knowledge_base_py | contains | legal contém legal/knowledge_base.py |
 | layer_legal | legal_precedents_py | contains | legal contém legal/precedents.py |
+| layer_legal | legal_summarizer_py | contains | legal contém legal/summarizer.py |
 | layer_legal | legal_syllogism_py | contains | legal contém legal/syllogism.py |
 | layer_mci | mci_adversarial_reviewer_py | contains | mci contém mci/adversarial_reviewer.py |
 | layer_mci | mci_blackboard_py | contains | mci contém mci/blackboard.py |
@@ -744,8 +770,13 @@ graph TD
 | layer_specs | specs_SPEC_920_metacognitive_superhuman_refinement_md | contains | specs contém specs/SPEC-920-metacognitive-superhuman-refinement.md |
 | layer_specs | specs_SPEC_921_brazilian_legal_reasoning_md | contains | specs contém specs/SPEC-921-brazilian-legal-reasoning.md |
 | layer_specs | specs_SPEC_922_datajud_integration_md | contains | specs contém specs/SPEC-922-datajud-integration.md |
+| layer_specs | specs_SPEC_923_auxjuris_integration_md | contains | specs contém specs/SPEC-923-auxjuris-integration.md |
+| layer_specs | specs_SPEC_924_legal_impact_scanner_md | contains | specs contém specs/SPEC-924-legal-impact-scanner.md |
+| layer_specs | specs_SPEC_925_webapp_legal_impact_interface_md | contains | specs contém specs/SPEC-925-webapp-legal-impact-interface.md |
+| layer_specs | specs_SPEC_926_webapp_dedicated_legal_tab_md | contains | specs contém specs/SPEC-926-webapp-dedicated-legal-tab.md |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
+| layer_tests | tests_test_auxjuris_integration_py | contains | tests contém tests/test_auxjuris_integration.py |
 | layer_tests | tests_test_brazilian_legal_reasoning_py | contains | tests contém tests/test_brazilian_legal_reasoning.py |
 | layer_tests | tests_test_cover_designer_py | contains | tests contém tests/test_cover_designer.py |
 | layer_tests | tests_test_datajud_integration_py | contains | tests contém tests/test_datajud_integration.py |
@@ -756,6 +787,7 @@ graph TD
 | layer_tests | tests_test_executive_changelog_artifact_py | contains | tests contém tests/test_executive_changelog_artifact.py |
 | layer_tests | tests_test_illustrations_py | contains | tests contém tests/test_illustrations.py |
 | layer_tests | tests_test_inspiration_audit_py | contains | tests contém tests/test_inspiration_audit.py |
+| layer_tests | tests_test_legal_impact_scanner_py | contains | tests contém tests/test_legal_impact_scanner.py |
 | layer_tests | tests_test_llm_client_py | contains | tests contém tests/test_llm_client.py |
 | layer_tests | tests_test_metacognitive_superhuman_py | contains | tests contém tests/test_metacognitive_superhuman.py |
 | layer_tests | tests_test_mira_catalog_py | contains | tests contém tests/test_mira_catalog.py |
@@ -770,6 +802,7 @@ graph TD
 | layer_tests | tests_test_scientific_superhuman_py | contains | tests contém tests/test_scientific_superhuman.py |
 | layer_tests | tests_test_sdd_tdd_py | contains | tests contém tests/test_sdd_tdd.py |
 | layer_tests | tests_test_transformer_py | contains | tests contém tests/test_transformer.py |
+| layer_tests | tests_test_webapp_legal_impact_py | contains | tests contém tests/test_webapp_legal_impact.py |
 | layer_transformer | transformer_attention_py | contains | transformer contém transformer/attention.py |
 | layer_transformer | transformer_embedder_py | contains | transformer contém transformer/embedder.py |
 | layer_transformer | transformer_init_py | contains | transformer contém transformer/__init__.py |
@@ -779,11 +812,17 @@ graph TD
 | layer_trust_economy | economy_token_economy_py | contains | trust_economy contém economy/token_economy.py |
 | layer_trust_economy | trust_init_py | contains | trust_economy contém trust/__init__.py |
 | layer_trust_economy | trust_trust_engine_py | contains | trust_economy contém trust/trust_engine.py |
+| layer_webapp | webapp_app_py | contains | webapp contém webapp/app.py |
+| layer_webapp | webapp_legal_impact_helpers_py | contains | webapp contém webapp/legal_impact_helpers.py |
 | actor_user_cli | marceloclaro_orchestrator_py | control_flow | comandos chegam ao orquestrador |
+| legal_agents_py | mci_blackboard_py | control_flow | registro A2A de agentes jurídicos |
+| legal_integration_py | legal_datajud_client_py | control_flow | integração consulta API Datajud |
 | marceloclaro_orchestrator_py | academic_maswos_py | control_flow | pipeline acadêmico |
 | marceloclaro_orchestrator_py | economy_token_economy_py | control_flow | staking/slashing |
 | marceloclaro_orchestrator_py | illustrations_mira_engine_py | control_flow | ilustrações/metáforas |
+| marceloclaro_orchestrator_py | legal_agents_py | control_flow | agentes jurídicos AuxJuris SPEC-923 |
 | marceloclaro_orchestrator_py | legal_init_py | control_flow | raciocínio jurídico brasileiro SPEC-921 |
+| marceloclaro_orchestrator_py | legal_integration_py | control_flow | pipeline jurídico com Datajud SPEC-922 |
 | marceloclaro_orchestrator_py | mci_blackboard_py | control_flow | delegação A2A via Blackboard |
 | marceloclaro_orchestrator_py | mci_metabus_py | control_flow | registra reflexões e eventos |
 | marceloclaro_orchestrator_py | mci_metacognitive_evaluator_py | control_flow | benchmark metacognitivo SPEC-920 |
@@ -804,8 +843,13 @@ graph TD
 | research_pipelines_run_research_batch_py | mci_oqs_init_py | control_flow | runner invoca OQS |
 | research_pipelines_run_research_batch_py | mci_orchestration_py | control_flow | runner invoca núcleo científico |
 | research_pipelines_run_research_batch_py | mci_vsee_router_py | control_flow | runner invoca VSEE |
+| scanners_pipeline_py | scanners_legal_impact_scanner_py | control_flow | scanner jurídico de impacto opcional SPEC-924 |
+| webapp_app_py | marceloclaro_orchestrator_py | control_flow | interface web aciona orquestrador |
+| webapp_app_py | webapp_legal_impact_helpers_py | control_flow | interface web usa helpers jurídicos |
 | legal_argumentation_py | legal_syllogism_py | data_flow | scoring valida consistência da subsunção |
+| legal_knowledge_base_py | legal_datajud_client_py | data_flow | processos do Datajud alimentam knowledge base jurídica |
 | legal_precedents_py | legal_syllogism_py | data_flow | ratio decidendi informa subsunção |
+| legal_summarizer_py | legal_precedents_py | data_flow | sumarização enriquecida por precedentes |
 | legal_syllogism_py | legal_balancing_py | data_flow | subsunção alimenta ponderação |
 | legal_syllogism_py | legal_constitutional_py | data_flow | controle de constitucionalidade via interpretação |
 | mci_metabus_py | mci_metacognitive_evaluator_py | data_flow | traços e reflexões para avaliação metacognitiva |
@@ -841,6 +885,11 @@ graph TD
 | specs_SPEC_900_livro_tritemo_md | specs_SPEC_026_mira_command_surface_md | depends_on | SPEC-026 |
 | specs_SPEC_901_romance_nevoa_e_pergaminhos_md | specs_SPEC_018_illustrations_md | depends_on | SPEC-018 |
 | specs_SPEC_901_romance_nevoa_e_pergaminhos_md | specs_SPEC_019_cover_designer_md | depends_on | SPEC-019 |
+| specs_SPEC_924_legal_impact_scanner_md | specs_SPEC_009_scanners_md | depends_on | SPEC-009 |
+| specs_SPEC_924_legal_impact_scanner_md | specs_SPEC_022_diagnostic_pipeline_refined_md | depends_on | SPEC-022 |
+| specs_SPEC_925_webapp_legal_impact_interface_md | specs_SPEC_924_legal_impact_scanner_md | depends_on | SPEC-924 |
+| specs_SPEC_926_webapp_dedicated_legal_tab_md | specs_SPEC_924_legal_impact_scanner_md | depends_on | SPEC-924 |
+| specs_SPEC_926_webapp_dedicated_legal_tab_md | specs_SPEC_925_webapp_legal_impact_interface_md | depends_on | SPEC-925 |
 | specs_SPEC_007_trust_engine_md | trust_trust_engine_py | documents | trust/trust_engine.py |
 | specs_SPEC_008_token_economy_md | economy_token_economy_py | documents | economy/token_economy.py |
 | specs_SPEC_009_scanners_md | scanners_pipeline_py | documents | scanners/pipeline.py |
@@ -857,12 +906,15 @@ graph TD
 | benchmarks_scientific_reasoning_init_py | benchmarks_scientific_reasoning_superhuman_suite_py | imports | benchmarks.scientific_reasoning.superhuman_suite |
 | benchmarks_scientific_reasoning_superhuman_suite_py | benchmarks_scientific_reasoning_runner_py | imports | benchmarks.scientific_reasoning.runner |
 | economy_init_py | economy_token_economy_py | imports | economy.token_economy |
+| legal_init_py | legal_agents_py | imports | legal.agents |
 | legal_init_py | legal_argumentation_py | imports | legal.argumentation |
 | legal_init_py | legal_balancing_py | imports | legal.balancing |
 | legal_init_py | legal_constitutional_py | imports | legal.constitutional |
 | legal_init_py | legal_datajud_client_py | imports | legal.datajud_client |
 | legal_init_py | legal_integration_py | imports | legal.integration |
+| legal_init_py | legal_knowledge_base_py | imports | legal.knowledge_base |
 | legal_init_py | legal_precedents_py | imports | legal.precedents |
+| legal_init_py | legal_summarizer_py | imports | legal.summarizer |
 | legal_init_py | legal_syllogism_py | imports | legal.syllogism |
 | legal_integration_py | legal_argumentation_py | imports | legal.argumentation |
 | legal_integration_py | legal_balancing_py | imports | legal.balancing |
@@ -924,9 +976,11 @@ graph TD
 | scanners_evolutionary_pipeline_py | scanners_noological_scanner_py | imports | scanners.noological_scanner |
 | scanners_evolutionary_pipeline_py | scanners_optimal_question_scanner_py | imports | scanners.optimal_question_scanner |
 | scanners_evolutionary_pipeline_py | scanners_teleological_scanner_py | imports | scanners.teleological_scanner |
+| scanners_init_py | scanners_legal_impact_scanner_py | imports | scanners.legal_impact_scanner |
 | scanners_init_py | scanners_pipeline_py | imports | scanners.pipeline |
 | scanners_pipeline_py | scanners_epistemic_prioritizer_py | imports | scanners.epistemic_prioritizer |
 | scanners_pipeline_py | scanners_evolutionary_pipeline_py | imports | scanners.evolutionary_pipeline |
+| scanners_pipeline_py | scanners_legal_impact_scanner_py | imports | scanners.legal_impact_scanner |
 | scanners_pipeline_py | scanners_noological_scanner_py | imports | scanners.noological_scanner |
 | scanners_pipeline_py | scanners_potentiality_scanner_py | imports | scanners.potentiality_scanner |
 | scanners_pipeline_py | scanners_reversa_scanner_py | imports | scanners.reversa_scanner |
@@ -945,6 +999,10 @@ graph TD
 | tests_test_advanced_subsystems_py | scanners_init_py | imports | scanners |
 | tests_test_advanced_subsystems_py | trust_init_py | imports | trust |
 | tests_test_analyze_research_batch_py | research_pipelines_analyze_research_batch_py | imports | research.pipelines.analyze_research_batch |
+| tests_test_auxjuris_integration_py | legal_init_py | imports | legal |
+| tests_test_auxjuris_integration_py | marceloclaro_catalog_loader_py | imports | marceloclaro.catalog_loader |
+| tests_test_auxjuris_integration_py | mci_blackboard_py | imports | mci.blackboard |
+| tests_test_auxjuris_integration_py | mci_metabus_py | imports | mci.metabus |
 | tests_test_brazilian_legal_reasoning_py | legal_init_py | imports | legal |
 | tests_test_cover_designer_py | publishing_cover_designer_py | imports | publishing.cover_designer |
 | tests_test_cover_designer_py | publishing_production_py | imports | publishing.production |
@@ -970,6 +1028,7 @@ graph TD
 | tests_test_inspiration_audit_py | marceloclaro_inspiration_audit_py | imports | marceloclaro.inspiration_audit |
 | tests_test_inspiration_audit_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | tests_test_inspiration_audit_py | mci_metabus_py | imports | mci.metabus |
+| tests_test_legal_impact_scanner_py | scanners_init_py | imports | scanners |
 | tests_test_llm_client_py | research_fichamento_py | imports | research.fichamento |
 | tests_test_llm_client_py | research_llm_client_py | imports | research.llm_client |
 | tests_test_llm_client_py | research_searchers_py | imports | research.searchers |
@@ -1024,4 +1083,9 @@ graph TD
 | tests_test_transformer_py | transformer_embedder_py | imports | transformer.embedder |
 | tests_test_transformer_py | transformer_memory_py | imports | transformer.memory |
 | tests_test_transformer_py | transformer_pipeline_py | imports | transformer.pipeline |
+| tests_test_webapp_legal_impact_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
+| tests_test_webapp_legal_impact_py | webapp_legal_impact_helpers_py | imports | webapp.legal_impact_helpers |
 | trust_init_py | trust_trust_engine_py | imports | trust.trust_engine |
+| webapp_app_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
+| webapp_app_py | research_llm_client_py | imports | research.llm_client |
+| webapp_app_py | webapp_legal_impact_helpers_py | imports | webapp.legal_impact_helpers |

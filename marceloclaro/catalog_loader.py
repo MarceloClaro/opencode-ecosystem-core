@@ -69,6 +69,11 @@ NAME_HINTS = {
     "trust": ["trust", "security"],
     "reasoning": ["reasoning"],
     "raciocinio": ["reasoning"],
+    "summarizer": ["summarize", "document_analysis"],
+    "sumariz": ["summarize", "document_analysis"],
+    "email": ["drafting", "communication"],
+    "research": ["research", "search"],
+    "legal": ["legal", "juridico"],
 }
 
 

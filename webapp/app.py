@@ -13,6 +13,7 @@ Abas disponíveis:
     - Pesquisa Acadêmica: buscadores multiplataforma e pipeline de fichamentos
     - Enxame & Jogos: MiroFish swarm, meta-raciocínio e equilíbrio de Nash
     - Diagnóstico: Deep Diagnose M1-M5 sobre um corpus arbitrário
+    - Jurídico: visão jurídica dedicada (impacto, compliance, metacognição)
     - Raciocínio & Quântico: motores formais e simulador statevector
 """
 import json
@@ -28,6 +29,10 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 from marceloclaro.orchestrator import MarceloClaroOrchestrator  # noqa: E402
+from webapp.legal_impact_helpers import (  # noqa: E402
+    build_legal_params,
+    summarize_legal_impact_section,
+)
 
 st.set_page_config(
     page_title="OpenCode Ecosystem Core",
@@ -60,6 +65,7 @@ tabs = st.tabs([
     "📚 Pesquisa Acadêmica",
     "🐟 Enxame & Jogos",
     "🔬 Diagnóstico",
+    "⚖️ Jurídico",
     "🧮 Raciocínio & Quântico",
 ])
 
@@ -214,10 +220,11 @@ with tabs[3]:
 
 # -------------------------------------------------------------- Diagnóstico
 with tabs[4]:
-    st.subheader("Deep Diagnose (M1–M5)")
+    st.subheader("Deep Diagnose (M1–M5) + Visão Jurídica")
     st.caption(
         "Engenharia reversa epistemológica: varredura noológica, teleológica, "
-        "priorização epistêmica e geração de sucessores."
+        "priorização epistêmica e geração de sucessores. Opcionalmente, "
+        "avalia prontidão jurídica e ganho metacognitivo jurídico (SPEC-924)."
     )
     corpus = st.text_area(
         "Corpus a diagnosticar",
@@ -227,13 +234,132 @@ with tabs[4]:
     )
     domain = st.text_input("Domínio", "software architecture")
     deep = st.checkbox("Diagnóstico profundo (deep=True)", value=True)
+    include_legal_impact = st.checkbox(
+        "Incluir Visão Jurídica de Impacto (SPEC-924)",
+        value=False,
+        help="Avalia LGPD, licenciamento, conformidade, grounding jurisprudencial, risco contratual e ganho metacognitivo jurídico.",
+    )
+
+    legal_params = None
+    if include_legal_impact:
+        st.markdown("#### ⚖️ Parâmetros Jurídicos")
+        legal_title = st.text_input("Título jurídico da análise", "Diagnóstico Jurídico do Artefato")
+        col_l1, col_l2 = st.columns(2)
+        legal_methodology = col_l1.text_area("Metodologia", "", height=100)
+        legal_results = col_l2.text_area("Resultados", "", height=100)
+        col_l3, col_l4 = st.columns(2)
+        legal_conclusions = col_l3.text_area("Conclusões", "", height=100)
+        legal_area = col_l4.text_input("Área do conhecimento", domain or "geral")
+        legal_keywords_csv = st.text_input(
+            "Palavras-chave jurídicas (CSV)",
+            "lgpd, compliance, precedentes, responsabilidade",
+        )
+        legal_params = build_legal_params(
+            titulo=legal_title,
+            corpus=corpus,
+            metodologia=legal_methodology,
+            resultados=legal_results,
+            conclusoes=legal_conclusions,
+            palavras_chave_csv=legal_keywords_csv,
+            area_conhecimento=legal_area,
+        )
+
     if st.button("🔬 Diagnosticar"):
         with st.spinner("Executando pipeline de scanners..."):
-            diagnosis = orch.diagnose(corpus, domain=domain, deep=deep)
+            diagnosis = orch.diagnose(
+                corpus,
+                domain=domain,
+                deep=deep,
+                include_legal_impact=include_legal_impact,
+                legal_params=legal_params,
+            )
+        if include_legal_impact and "legal_impact" in diagnosis:
+            st.markdown("#### ⚖️ Resumo da Visão Jurídica")
+            legal_summary = summarize_legal_impact_section(diagnosis.get("legal_impact"))
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Score Jurídico", legal_summary["overall_score"])
+            c2.metric("Ganho Metacognitivo", legal_summary["metacognitive_gain_score"])
+            c3.metric("Readiness", legal_summary["legal_readiness"])
+            c4.metric("Flags de Alto Risco", legal_summary["high_risk_count"])
+            if legal_summary["high_risk_flags"]:
+                st.warning("Flags: " + ", ".join(legal_summary["high_risk_flags"]))
         show_json(diagnosis)
 
-# ------------------------------------------------- Raciocínio & Quântico
+# -------------------------------------------------------------- Jurídico
 with tabs[5]:
+    st.subheader("⚖️ Visão Jurídica Dedicada")
+    st.caption(
+        "Espaço dedicado para avaliar pesquisas, produções e artefatos com o "
+        "Legal Impact Scanner: LGPD, licenciamento, compliance, grounding "
+        "jurisprudencial, responsabilidade e ganho metacognitivo jurídico."
+    )
+
+    legal_corpus = st.text_area(
+        "Corpus jurídico / produção / pesquisa",
+        "Pesquisa com LGPD, consentimento, licença Creative Commons, revisão jurídica, "
+        "precedentes do STF e limitações metodológicas.",
+        height=180,
+        key="legal_tab_corpus",
+    )
+    legal_title = st.text_input(
+        "Título da análise jurídica",
+        "Diagnóstico Jurídico do Artefato",
+        key="legal_tab_title",
+    )
+    col_j1, col_j2 = st.columns(2)
+    legal_methodology = col_j1.text_area("Metodologia", "", height=100, key="legal_tab_methodology")
+    legal_results = col_j2.text_area("Resultados", "", height=100, key="legal_tab_results")
+    col_j3, col_j4 = st.columns(2)
+    legal_conclusions = col_j3.text_area("Conclusões", "", height=100, key="legal_tab_conclusions")
+    legal_area = col_j4.text_input("Área do conhecimento", "direito digital", key="legal_tab_area")
+    legal_keywords_csv = st.text_input(
+        "Palavras-chave jurídicas (CSV)",
+        "lgpd, compliance, precedentes, responsabilidade",
+        key="legal_tab_keywords",
+    )
+    legal_deep = st.checkbox(
+        "Executar também diagnóstico profundo do pipeline",
+        value=False,
+        key="legal_tab_deep",
+        help="Mantém o foco jurídico, mas pode incluir a camada profunda do diagnóstico geral.",
+    )
+
+    if st.button("⚖️ Avaliar Impacto Jurídico", key="legal_tab_run"):
+        params = build_legal_params(
+            titulo=legal_title,
+            corpus=legal_corpus,
+            metodologia=legal_methodology,
+            resultados=legal_results,
+            conclusoes=legal_conclusions,
+            palavras_chave_csv=legal_keywords_csv,
+            area_conhecimento=legal_area,
+        )
+        with st.spinner("Executando visão jurídica de impacto..."):
+            legal_report = orch.diagnose(
+                legal_corpus,
+                domain=legal_area,
+                deep=legal_deep,
+                include_legal_impact=True,
+                legal_params=params,
+            )
+
+        section = summarize_legal_impact_section(legal_report.get("legal_impact"))
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Score Jurídico", section["overall_score"])
+        c2.metric("Ganho Metacognitivo", section["metacognitive_gain_score"])
+        c3.metric("Readiness", section["legal_readiness"])
+        c4.metric("Flags de Alto Risco", section["high_risk_count"])
+
+        if section["high_risk_flags"]:
+            st.warning("Flags: " + ", ".join(section["high_risk_flags"]))
+        else:
+            st.success("Nenhuma flag crítica detectada pelo scanner jurídico.")
+
+        st.markdown("#### JSON Auditável Completo")
+        show_json(legal_report)
+
+# ------------------------------------------------- Raciocínio & Quântico
+with tabs[6]:
     st.subheader("Motores de Raciocínio Formal")
     query = st.text_input("Consulta (equação, proposição...)", "2*x + 4 = 10")
     engine = st.selectbox("Motor", ["auto", "sympy", "z3", "kanren", "critical"])
