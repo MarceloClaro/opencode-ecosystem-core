@@ -57,6 +57,7 @@ DISCOVERY_RULES = [
     ("publishing/**/*.py", "module", "publishing"),
     ("gametheory/**/*.py", "module", "gametheory"),
     ("mirofish/**/*.py", "module", "mirofish"),
+    ("synthetic_university/**/*.py", "module", "synthetic_university"),
     ("agents/catalog/*.md", "agent", "agents_catalog"),
     ("specs/SPEC-*.md", "spec", "specs"),
     ("schemas/*.json", "schema", "schemas"),
@@ -82,6 +83,7 @@ LAYER_NODES = [
     Node("layer_reasoning", "Reasoning", "layer", logical_group="formal_reasoning", layer="reasoning"),
     Node("layer_rag", "Scientific RAG", "layer", logical_group="grounding", layer="rag"),
     Node("layer_legal", "Legal Reasoning", "layer", logical_group="legal_reasoning", layer="legal"),
+    Node("layer_synthetic_university", "Synthetic University", "layer", logical_group="academic_discovery", layer="synthetic_university"),
     Node("layer_webapp", "Web Interface", "layer", logical_group="interaction", layer="webapp"),
     Node("layer_research", "Research", "layer", logical_group="research", layer="research"),
     Node("layer_benchmarks", "Benchmarks", "layer", logical_group="evaluation", layer="benchmarks"),
@@ -143,6 +145,16 @@ FLOW_EDGES = [
     ("legal/benchmarks.py", "legal/specializations.py", "control_flow", "benchmarks avaliam roteamento e cobertura por ramo"),
     ("legal/summarizer.py", "legal/precedents.py", "data_flow", "sumarização enriquecida por precedentes"),
     ("legal/agents.py", "mci/blackboard.py", "control_flow", "registro A2A de agentes jurídicos"),
+    # Synthetic University (SPEC-935)
+    ("marceloclaro/orchestrator.py", "synthetic_university/__init__.py", "control_flow", "orquestrador invoca universidade sintética SPEC-935"),
+    ("synthetic_university/__init__.py", "synthetic_university/combinatorial_engine.py", "control_flow", "motor combinatorial MiroFish 10k+ combinações"),
+    ("synthetic_university/__init__.py", "synthetic_university/correlator.py", "data_flow", "correlator descobre correlações interdisciplinares"),
+    ("synthetic_university/__init__.py", "synthetic_university/thesis_generator.py", "data_flow", "geração de teses PhD-level"),
+    ("synthetic_university/__init__.py", "synthetic_university/knowledge_graph.py", "data_flow", "grafo de conhecimento da universidade"),
+    ("synthetic_university/__init__.py", "synthetic_university/faculties.py", "data_flow", "10 faculdades com conceitos fundamentais"),
+    ("synthetic_university/__init__.py", "synthetic_university/agents/professors.py", "data_flow", "corpo docente especializado"),
+    ("synthetic_university/__init__.py", "mirofish/swarm.py", "control_flow", "MiroFish debate valida combinações promissoras"),
+    ("synthetic_university/__init__.py", "mci/metabus.py", "control_flow", "publica eventos synthetic_university.* no MetaBus"),
 ]
 
 

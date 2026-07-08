@@ -115,6 +115,7 @@ graph TD
 8. **Readiness e benchmarks:** A suíte `superhuman_suite.py` consolida benchmarks científicos, grounding, robustez, calibração e reprodutibilidade. Em paralelo, `legal/benchmarks.py` mede acurácia de roteamento, cobertura e qualidade de resposta por ramo jurídico com política anti-overclaim (`phd_candidate` vs. `phd_validated`).
 9. **Reflexão (MCI):** Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão, atualiza o *Confidence Ledger* do agente e persiste a experiência na memória semântica para futuras recuperações.
 10. **Sincronização transversal via MetaBus (SPEC-934):** wrappers de OQS, VSEE, EGS, ScientificRAG, suítes de benchmark/metacognição, MiroFish, Game Theory, Publishing, Research e SDD passam a emitir eventos de subsistema, atualizar confiança por tópico e enriquecer a memória semântica pesquisável do MCI.
+11. **Universidade Sintética Transversal (SPEC-935):** O subsistema `synthetic_university/` simula uma instituição acadêmica completa com 10 faculdades, 40+ professores especialistas, motor combinatorial que testa 10.000+ combinações de conceitos interdisciplinares usando MiroFish, correlator interdisciplinar, gerador de teses PhD-level e grafo de conhecimento navegável. O orquestrador expõe `synthetic_university()` para ciclos completos de descoberta.
 
 ## Scientific RAG + Superhuman Readiness
 

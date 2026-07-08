@@ -1,26 +1,26 @@
 {
   "summary": {
-    "node_count": 407,
-    "vector_count": 710,
+    "node_count": 422,
+    "vector_count": 761,
     "node_kinds": {
       "actor": 1,
-      "agent": 156,
+      "agent": 157,
       "benchmark": 8,
       "diagram": 1,
       "doc": 5,
-      "layer": 20,
-      "module": 121,
+      "layer": 21,
+      "module": 132,
       "schema": 4,
-      "spec": 57,
-      "test": 34
+      "spec": 58,
+      "test": 35
     },
     "vector_kinds": {
-      "contains": 374,
-      "control_flow": 34,
-      "data_flow": 11,
+      "contains": 388,
+      "control_flow": 38,
+      "data_flow": 16,
       "depends_on": 55,
       "documents": 9,
-      "imports": 227
+      "imports": 255
     }
   },
   "nodes": [
@@ -1225,6 +1225,14 @@
       "layer": "agents_catalog"
     },
     {
+      "id": "agents_catalog_university_synthetic_md",
+      "label": "university_synthetic",
+      "kind": "agent",
+      "path": "agents/catalog/university_synthetic.md",
+      "logical_group": "",
+      "layer": "agents_catalog"
+    },
+    {
       "id": "agents_catalog_web_developer_md",
       "label": "web-developer",
       "kind": "agent",
@@ -1519,6 +1527,14 @@
       "path": "",
       "logical_group": "documentation",
       "layer": "specs"
+    },
+    {
+      "id": "layer_synthetic_university",
+      "label": "Synthetic University",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "academic_discovery",
+      "layer": "synthetic_university"
     },
     {
       "id": "layer_tests",
@@ -2449,6 +2465,94 @@
       "layer": "sdd_tdd"
     },
     {
+      "id": "synthetic_university_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "synthetic_university/__init__.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_agents_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "synthetic_university/agents/__init__.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_agents_professor_base_py",
+      "label": "professor_base",
+      "kind": "module",
+      "path": "synthetic_university/agents/professor_base.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_agents_professors_py",
+      "label": "professors",
+      "kind": "module",
+      "path": "synthetic_university/agents/professors.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_combinatorial_engine_py",
+      "label": "combinatorial_engine",
+      "kind": "module",
+      "path": "synthetic_university/combinatorial_engine.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_core_py",
+      "label": "core",
+      "kind": "module",
+      "path": "synthetic_university/core.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_correlator_py",
+      "label": "correlator",
+      "kind": "module",
+      "path": "synthetic_university/correlator.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_curriculum_py",
+      "label": "curriculum",
+      "kind": "module",
+      "path": "synthetic_university/curriculum.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_faculties_py",
+      "label": "faculties",
+      "kind": "module",
+      "path": "synthetic_university/faculties.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_knowledge_graph_py",
+      "label": "knowledge_graph",
+      "kind": "module",
+      "path": "synthetic_university/knowledge_graph.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
+      "id": "synthetic_university_thesis_generator_py",
+      "label": "thesis_generator",
+      "kind": "module",
+      "path": "synthetic_university/thesis_generator.py",
+      "logical_group": "",
+      "layer": "synthetic_university"
+    },
+    {
       "id": "transformer_init_py",
       "label": "__init__",
       "kind": "module",
@@ -3009,6 +3113,14 @@
       "layer": "specs"
     },
     {
+      "id": "specs_SPEC_935_synthetic_university_md",
+      "label": "SPEC-935-synthetic-university",
+      "kind": "spec",
+      "path": "specs/SPEC-935-synthetic-university.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
       "id": "tests_test_advanced_subsystems_py",
       "label": "test_advanced_subsystems",
       "kind": "test",
@@ -3261,6 +3373,14 @@
       "label": "test_sdd_tdd",
       "kind": "test",
       "path": "tests/test_sdd_tdd.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_synthetic_university_py",
+      "label": "test_synthetic_university",
+      "kind": "test",
+      "path": "tests/test_synthetic_university.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -4175,6 +4295,12 @@
       "target": "agents_catalog_thoughts_locator_md",
       "kind": "contains",
       "note": "agents_catalog contém agents/catalog/thoughts-locator.md"
+    },
+    {
+      "source": "layer_agents_catalog",
+      "target": "agents_catalog_university_synthetic_md",
+      "kind": "contains",
+      "note": "agents_catalog contém agents/catalog/university_synthetic.md"
     },
     {
       "source": "layer_agents_catalog",
@@ -5257,6 +5383,78 @@
       "note": "specs contém specs/SPEC-934-metabus-transformer-conscious-orchestration.md"
     },
     {
+      "source": "layer_specs",
+      "target": "specs_SPEC_935_synthetic_university_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-935-synthetic-university.md"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_agents_init_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/agents/__init__.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_agents_professor_base_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/agents/professor_base.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_agents_professors_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/agents/professors.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_combinatorial_engine_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/combinatorial_engine.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_core_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/core.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_correlator_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/correlator.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_curriculum_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/curriculum.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_faculties_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/faculties.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_init_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/__init__.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_knowledge_graph_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/knowledge_graph.py"
+    },
+    {
+      "source": "layer_synthetic_university",
+      "target": "synthetic_university_thesis_generator_py",
+      "kind": "contains",
+      "note": "synthetic_university contém synthetic_university/thesis_generator.py"
+    },
+    {
       "source": "layer_tests",
       "target": "tests_test_advanced_subsystems_py",
       "kind": "contains",
@@ -5447,6 +5645,12 @@
       "target": "tests_test_sdd_tdd_py",
       "kind": "contains",
       "note": "tests contém tests/test_sdd_tdd.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_synthetic_university_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_synthetic_university.py"
     },
     {
       "source": "layer_tests",
@@ -5660,6 +5864,12 @@
     },
     {
       "source": "marceloclaro_orchestrator_py",
+      "target": "synthetic_university_init_py",
+      "kind": "control_flow",
+      "note": "orquestrador invoca universidade sintética SPEC-935"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
       "target": "trust_trust_engine_py",
       "kind": "control_flow",
       "note": "gate comportamental"
@@ -5717,6 +5927,24 @@
       "target": "scanners_legal_impact_scanner_py",
       "kind": "control_flow",
       "note": "scanner jurídico de impacto opcional SPEC-924"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "mci_metabus_py",
+      "kind": "control_flow",
+      "note": "publica eventos synthetic_university.* no MetaBus"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "mirofish_swarm_py",
+      "kind": "control_flow",
+      "note": "MiroFish debate valida combinações promissoras"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_combinatorial_engine_py",
+      "kind": "control_flow",
+      "note": "motor combinatorial MiroFish 10k+ combinações"
     },
     {
       "source": "webapp_app_py",
@@ -5795,6 +6023,36 @@
       "target": "research_pipelines_run_research_batch_py",
       "kind": "data_flow",
       "note": "análise do raw/summary do runner"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_agents_professors_py",
+      "kind": "data_flow",
+      "note": "corpo docente especializado"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_correlator_py",
+      "kind": "data_flow",
+      "note": "correlator descobre correlações interdisciplinares"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_faculties_py",
+      "kind": "data_flow",
+      "note": "10 faculdades com conceitos fundamentais"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_knowledge_graph_py",
+      "kind": "data_flow",
+      "note": "grafo de conhecimento da universidade"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_thesis_generator_py",
+      "kind": "data_flow",
+      "note": "geração de teses PhD-level"
     },
     {
       "source": "specs_SPEC_017_research_md",
@@ -6476,6 +6734,12 @@
     },
     {
       "source": "marceloclaro_orchestrator_py",
+      "target": "synthetic_university_init_py",
+      "kind": "imports",
+      "note": "synthetic_university"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
       "target": "transformer_attention_py",
       "kind": "imports",
       "note": "transformer.attention"
@@ -6833,6 +7097,120 @@
       "target": "sdd_spec_engine_py",
       "kind": "imports",
       "note": "sdd.spec_engine"
+    },
+    {
+      "source": "synthetic_university_agents_init_py",
+      "target": "synthetic_university_agents_professor_base_py",
+      "kind": "imports",
+      "note": "synthetic_university.agents.professor_base"
+    },
+    {
+      "source": "synthetic_university_agents_init_py",
+      "target": "synthetic_university_agents_professors_py",
+      "kind": "imports",
+      "note": "synthetic_university.agents.professors"
+    },
+    {
+      "source": "synthetic_university_agents_professors_py",
+      "target": "synthetic_university_agents_professor_base_py",
+      "kind": "imports",
+      "note": "synthetic_university.agents.professor_base"
+    },
+    {
+      "source": "synthetic_university_core_py",
+      "target": "synthetic_university_agents_professors_py",
+      "kind": "imports",
+      "note": "synthetic_university.agents.professors"
+    },
+    {
+      "source": "synthetic_university_core_py",
+      "target": "synthetic_university_combinatorial_engine_py",
+      "kind": "imports",
+      "note": "synthetic_university.combinatorial_engine"
+    },
+    {
+      "source": "synthetic_university_core_py",
+      "target": "synthetic_university_correlator_py",
+      "kind": "imports",
+      "note": "synthetic_university.correlator"
+    },
+    {
+      "source": "synthetic_university_core_py",
+      "target": "synthetic_university_curriculum_py",
+      "kind": "imports",
+      "note": "synthetic_university.curriculum"
+    },
+    {
+      "source": "synthetic_university_core_py",
+      "target": "synthetic_university_faculties_py",
+      "kind": "imports",
+      "note": "synthetic_university.faculties"
+    },
+    {
+      "source": "synthetic_university_core_py",
+      "target": "synthetic_university_knowledge_graph_py",
+      "kind": "imports",
+      "note": "synthetic_university.knowledge_graph"
+    },
+    {
+      "source": "synthetic_university_core_py",
+      "target": "synthetic_university_thesis_generator_py",
+      "kind": "imports",
+      "note": "synthetic_university.thesis_generator"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_agents_professor_base_py",
+      "kind": "imports",
+      "note": "synthetic_university.agents.professor_base"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_agents_professors_py",
+      "kind": "imports",
+      "note": "synthetic_university.agents.professors"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_combinatorial_engine_py",
+      "kind": "imports",
+      "note": "synthetic_university.combinatorial_engine"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_core_py",
+      "kind": "imports",
+      "note": "synthetic_university.core"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_correlator_py",
+      "kind": "imports",
+      "note": "synthetic_university.correlator"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_curriculum_py",
+      "kind": "imports",
+      "note": "synthetic_university.curriculum"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_faculties_py",
+      "kind": "imports",
+      "note": "synthetic_university.faculties"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_knowledge_graph_py",
+      "kind": "imports",
+      "note": "synthetic_university.knowledge_graph"
+    },
+    {
+      "source": "synthetic_university_init_py",
+      "target": "synthetic_university_thesis_generator_py",
+      "kind": "imports",
+      "note": "synthetic_university.thesis_generator"
     },
     {
       "source": "tests_test_advanced_subsystems_py",
@@ -7451,6 +7829,54 @@
       "target": "sdd_tdd_runner_py",
       "kind": "imports",
       "note": "sdd.tdd_runner"
+    },
+    {
+      "source": "tests_test_synthetic_university_py",
+      "target": "synthetic_university_agents_professors_py",
+      "kind": "imports",
+      "note": "synthetic_university.agents.professors"
+    },
+    {
+      "source": "tests_test_synthetic_university_py",
+      "target": "synthetic_university_combinatorial_engine_py",
+      "kind": "imports",
+      "note": "synthetic_university.combinatorial_engine"
+    },
+    {
+      "source": "tests_test_synthetic_university_py",
+      "target": "synthetic_university_core_py",
+      "kind": "imports",
+      "note": "synthetic_university.core"
+    },
+    {
+      "source": "tests_test_synthetic_university_py",
+      "target": "synthetic_university_correlator_py",
+      "kind": "imports",
+      "note": "synthetic_university.correlator"
+    },
+    {
+      "source": "tests_test_synthetic_university_py",
+      "target": "synthetic_university_curriculum_py",
+      "kind": "imports",
+      "note": "synthetic_university.curriculum"
+    },
+    {
+      "source": "tests_test_synthetic_university_py",
+      "target": "synthetic_university_faculties_py",
+      "kind": "imports",
+      "note": "synthetic_university.faculties"
+    },
+    {
+      "source": "tests_test_synthetic_university_py",
+      "target": "synthetic_university_knowledge_graph_py",
+      "kind": "imports",
+      "note": "synthetic_university.knowledge_graph"
+    },
+    {
+      "source": "tests_test_synthetic_university_py",
+      "target": "synthetic_university_thesis_generator_py",
+      "kind": "imports",
+      "note": "synthetic_university.thesis_generator"
     },
     {
       "source": "tests_test_transformer_py",

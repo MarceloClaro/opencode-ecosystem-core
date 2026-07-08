@@ -1,33 +1,33 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **407**
-- Vetores: **710**
+- Nós: **422**
+- Vetores: **761**
 
 ## Taxonomia de Nós
 
 | kind | quantidade |
 |---|---:|
 | actor | 1 |
-| agent | 156 |
+| agent | 157 |
 | benchmark | 8 |
 | diagram | 1 |
 | doc | 5 |
-| layer | 20 |
-| module | 121 |
+| layer | 21 |
+| module | 132 |
 | schema | 4 |
-| spec | 57 |
-| test | 34 |
+| spec | 58 |
+| test | 35 |
 
 ## Taxonomia de Vetores
 
 | kind | quantidade |
 |---|---:|
-| contains | 374 |
-| control_flow | 34 |
-| data_flow | 11 |
+| contains | 388 |
+| control_flow | 38 |
+| data_flow | 16 |
 | depends_on | 55 |
 | documents | 9 |
-| imports | 227 |
+| imports | 255 |
 
 ## Diagrama de Alto Nível
 
@@ -206,6 +206,7 @@ graph TD
 | agents_catalog_test_engineer_md | agent | agents_catalog | agents/catalog/test-engineer.md |
 | agents_catalog_thoughts_analyzer_md | agent | agents_catalog | agents/catalog/thoughts-analyzer.md |
 | agents_catalog_thoughts_locator_md | agent | agents_catalog | agents/catalog/thoughts-locator.md |
+| agents_catalog_university_synthetic_md | agent | agents_catalog | agents/catalog/university_synthetic.md |
 | agents_catalog_web_developer_md | agent | agents_catalog | agents/catalog/web-developer.md |
 | agents_catalog_web_search_researcher_md | agent | agents_catalog | agents/catalog/web-search-researcher.md |
 | agents_catalog_ws_academic_pipeline_md | agent | agents_catalog | agents/catalog/ws-academic-pipeline.md |
@@ -243,6 +244,7 @@ graph TD
 | layer_scientific_governance | layer | scientific_governance | science |
 | layer_sdd_tdd | layer | sdd_tdd | quality |
 | layer_specs | layer | specs | documentation |
+| layer_synthetic_university | layer | synthetic_university | academic_discovery |
 | layer_tests | layer | tests | verification |
 | layer_transformer | layer | transformer | routing |
 | layer_trust_economy | layer | trust_economy | governance |
@@ -359,6 +361,17 @@ graph TD
 | sdd_init_py | module | sdd_tdd | sdd/__init__.py |
 | sdd_spec_engine_py | module | sdd_tdd | sdd/spec_engine.py |
 | sdd_tdd_runner_py | module | sdd_tdd | sdd/tdd_runner.py |
+| synthetic_university_init_py | module | synthetic_university | synthetic_university/__init__.py |
+| synthetic_university_agents_init_py | module | synthetic_university | synthetic_university/agents/__init__.py |
+| synthetic_university_agents_professor_base_py | module | synthetic_university | synthetic_university/agents/professor_base.py |
+| synthetic_university_agents_professors_py | module | synthetic_university | synthetic_university/agents/professors.py |
+| synthetic_university_combinatorial_engine_py | module | synthetic_university | synthetic_university/combinatorial_engine.py |
+| synthetic_university_core_py | module | synthetic_university | synthetic_university/core.py |
+| synthetic_university_correlator_py | module | synthetic_university | synthetic_university/correlator.py |
+| synthetic_university_curriculum_py | module | synthetic_university | synthetic_university/curriculum.py |
+| synthetic_university_faculties_py | module | synthetic_university | synthetic_university/faculties.py |
+| synthetic_university_knowledge_graph_py | module | synthetic_university | synthetic_university/knowledge_graph.py |
+| synthetic_university_thesis_generator_py | module | synthetic_university | synthetic_university/thesis_generator.py |
 | transformer_init_py | module | transformer | transformer/__init__.py |
 | transformer_attention_py | module | transformer | transformer/attention.py |
 | transformer_embedder_py | module | transformer | transformer/embedder.py |
@@ -429,6 +442,7 @@ graph TD
 | specs_SPEC_932_webapp_domain_kb_integration_md | spec | specs | specs/SPEC-932-webapp-domain-kb-integration.md |
 | specs_SPEC_933_metabus_legal_refinement_md | spec | specs | specs/SPEC-933-metabus-legal-refinement.md |
 | specs_SPEC_934_metabus_transformer_conscious_orchestration_md | spec | specs | specs/SPEC-934-metabus-transformer-conscious-orchestration.md |
+| specs_SPEC_935_synthetic_university_md | spec | specs | specs/SPEC-935-synthetic-university.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
 | tests_test_auxjuris_integration_py | test | tests | tests/test_auxjuris_integration.py |
@@ -461,6 +475,7 @@ graph TD
 | tests_test_scientific_reporter_hardening_py | test | tests | tests/test_scientific_reporter_hardening.py |
 | tests_test_scientific_superhuman_py | test | tests | tests/test_scientific_superhuman.py |
 | tests_test_sdd_tdd_py | test | tests | tests/test_sdd_tdd.py |
+| tests_test_synthetic_university_py | test | tests | tests/test_synthetic_university.py |
 | tests_test_transformer_py | test | tests | tests/test_transformer.py |
 | tests_test_webapp_legal_impact_py | test | tests | tests/test_webapp_legal_impact.py |
 
@@ -617,6 +632,7 @@ graph TD
 | layer_agents_catalog | agents_catalog_test_engineer_md | contains | agents_catalog contém agents/catalog/test-engineer.md |
 | layer_agents_catalog | agents_catalog_thoughts_analyzer_md | contains | agents_catalog contém agents/catalog/thoughts-analyzer.md |
 | layer_agents_catalog | agents_catalog_thoughts_locator_md | contains | agents_catalog contém agents/catalog/thoughts-locator.md |
+| layer_agents_catalog | agents_catalog_university_synthetic_md | contains | agents_catalog contém agents/catalog/university_synthetic.md |
 | layer_agents_catalog | agents_catalog_web_developer_md | contains | agents_catalog contém agents/catalog/web-developer.md |
 | layer_agents_catalog | agents_catalog_web_search_researcher_md | contains | agents_catalog contém agents/catalog/web-search-researcher.md |
 | layer_agents_catalog | agents_catalog_ws_academic_pipeline_md | contains | agents_catalog contém agents/catalog/ws-academic-pipeline.md |
@@ -797,6 +813,18 @@ graph TD
 | layer_specs | specs_SPEC_932_webapp_domain_kb_integration_md | contains | specs contém specs/SPEC-932-webapp-domain-kb-integration.md |
 | layer_specs | specs_SPEC_933_metabus_legal_refinement_md | contains | specs contém specs/SPEC-933-metabus-legal-refinement.md |
 | layer_specs | specs_SPEC_934_metabus_transformer_conscious_orchestration_md | contains | specs contém specs/SPEC-934-metabus-transformer-conscious-orchestration.md |
+| layer_specs | specs_SPEC_935_synthetic_university_md | contains | specs contém specs/SPEC-935-synthetic-university.md |
+| layer_synthetic_university | synthetic_university_agents_init_py | contains | synthetic_university contém synthetic_university/agents/__init__.py |
+| layer_synthetic_university | synthetic_university_agents_professor_base_py | contains | synthetic_university contém synthetic_university/agents/professor_base.py |
+| layer_synthetic_university | synthetic_university_agents_professors_py | contains | synthetic_university contém synthetic_university/agents/professors.py |
+| layer_synthetic_university | synthetic_university_combinatorial_engine_py | contains | synthetic_university contém synthetic_university/combinatorial_engine.py |
+| layer_synthetic_university | synthetic_university_core_py | contains | synthetic_university contém synthetic_university/core.py |
+| layer_synthetic_university | synthetic_university_correlator_py | contains | synthetic_university contém synthetic_university/correlator.py |
+| layer_synthetic_university | synthetic_university_curriculum_py | contains | synthetic_university contém synthetic_university/curriculum.py |
+| layer_synthetic_university | synthetic_university_faculties_py | contains | synthetic_university contém synthetic_university/faculties.py |
+| layer_synthetic_university | synthetic_university_init_py | contains | synthetic_university contém synthetic_university/__init__.py |
+| layer_synthetic_university | synthetic_university_knowledge_graph_py | contains | synthetic_university contém synthetic_university/knowledge_graph.py |
+| layer_synthetic_university | synthetic_university_thesis_generator_py | contains | synthetic_university contém synthetic_university/thesis_generator.py |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
 | layer_tests | tests_test_auxjuris_integration_py | contains | tests contém tests/test_auxjuris_integration.py |
@@ -829,6 +857,7 @@ graph TD
 | layer_tests | tests_test_scientific_reporter_hardening_py | contains | tests contém tests/test_scientific_reporter_hardening.py |
 | layer_tests | tests_test_scientific_superhuman_py | contains | tests contém tests/test_scientific_superhuman.py |
 | layer_tests | tests_test_sdd_tdd_py | contains | tests contém tests/test_sdd_tdd.py |
+| layer_tests | tests_test_synthetic_university_py | contains | tests contém tests/test_synthetic_university.py |
 | layer_tests | tests_test_transformer_py | contains | tests contém tests/test_transformer.py |
 | layer_tests | tests_test_webapp_legal_impact_py | contains | tests contém tests/test_webapp_legal_impact.py |
 | layer_transformer | transformer_attention_py | contains | transformer contém transformer/attention.py |
@@ -864,6 +893,7 @@ graph TD
 | marceloclaro_orchestrator_py | scanners_pipeline_py | control_flow | diagnóstico do ecossistema |
 | marceloclaro_orchestrator_py | sdd_spec_engine_py | control_flow | cria/consulta specs |
 | marceloclaro_orchestrator_py | sdd_tdd_runner_py | control_flow | executa ciclo TDD |
+| marceloclaro_orchestrator_py | synthetic_university_init_py | control_flow | orquestrador invoca universidade sintética SPEC-935 |
 | marceloclaro_orchestrator_py | trust_trust_engine_py | control_flow | gate comportamental |
 | mci_pipeline_scientific_governance_pipeline_py | mci_egs_init_py | control_flow | etapa EGS |
 | mci_pipeline_scientific_governance_pipeline_py | mci_oqs_init_py | control_flow | etapa OQS |
@@ -874,6 +904,9 @@ graph TD
 | research_pipelines_run_research_batch_py | mci_orchestration_py | control_flow | runner invoca núcleo científico |
 | research_pipelines_run_research_batch_py | mci_vsee_router_py | control_flow | runner invoca VSEE |
 | scanners_pipeline_py | scanners_legal_impact_scanner_py | control_flow | scanner jurídico de impacto opcional SPEC-924 |
+| synthetic_university_init_py | mci_metabus_py | control_flow | publica eventos synthetic_university.* no MetaBus |
+| synthetic_university_init_py | mirofish_swarm_py | control_flow | MiroFish debate valida combinações promissoras |
+| synthetic_university_init_py | synthetic_university_combinatorial_engine_py | control_flow | motor combinatorial MiroFish 10k+ combinações |
 | webapp_app_py | marceloclaro_orchestrator_py | control_flow | interface web aciona orquestrador |
 | webapp_app_py | webapp_legal_impact_helpers_py | control_flow | interface web usa helpers jurídicos |
 | legal_argumentation_py | legal_syllogism_py | data_flow | scoring valida consistência da subsunção |
@@ -887,6 +920,11 @@ graph TD
 | mci_orchestration_py | mci_evidence_graph_py | data_flow | persistência epistemológica |
 | rag_scientific_py | benchmarks_scientific_reasoning_superhuman_suite_py | data_flow | grounding alimenta readiness científico |
 | research_pipelines_analyze_research_batch_py | research_pipelines_run_research_batch_py | data_flow | análise do raw/summary do runner |
+| synthetic_university_init_py | synthetic_university_agents_professors_py | data_flow | corpo docente especializado |
+| synthetic_university_init_py | synthetic_university_correlator_py | data_flow | correlator descobre correlações interdisciplinares |
+| synthetic_university_init_py | synthetic_university_faculties_py | data_flow | 10 faculdades com conceitos fundamentais |
+| synthetic_university_init_py | synthetic_university_knowledge_graph_py | data_flow | grafo de conhecimento da universidade |
+| synthetic_university_init_py | synthetic_university_thesis_generator_py | data_flow | geração de teses PhD-level |
 | specs_SPEC_017_research_md | specs_SPEC_010_maswos_academic_md | depends_on | SPEC-010 |
 | specs_SPEC_017_research_md | specs_SPEC_016_publishing_md | depends_on | SPEC-016 |
 | specs_SPEC_018_illustrations_md | specs_SPEC_016_publishing_md | depends_on | SPEC-016 |
@@ -1000,6 +1038,7 @@ graph TD
 | marceloclaro_orchestrator_py | scanners_init_py | imports | scanners |
 | marceloclaro_orchestrator_py | sdd_spec_engine_py | imports | sdd.spec_engine |
 | marceloclaro_orchestrator_py | sdd_tdd_runner_py | imports | sdd.tdd_runner |
+| marceloclaro_orchestrator_py | synthetic_university_init_py | imports | synthetic_university |
 | marceloclaro_orchestrator_py | transformer_attention_py | imports | transformer.attention |
 | marceloclaro_orchestrator_py | transformer_memory_py | imports | transformer.memory |
 | marceloclaro_orchestrator_py | transformer_pipeline_py | imports | transformer.pipeline |
@@ -1060,6 +1099,25 @@ graph TD
 | sdd_init_py | sdd_tdd_runner_py | imports | sdd.tdd_runner |
 | sdd_spec_engine_py | mci_metabus_py | imports | mci.metabus |
 | sdd_tdd_runner_py | sdd_spec_engine_py | imports | sdd.spec_engine |
+| synthetic_university_agents_init_py | synthetic_university_agents_professor_base_py | imports | synthetic_university.agents.professor_base |
+| synthetic_university_agents_init_py | synthetic_university_agents_professors_py | imports | synthetic_university.agents.professors |
+| synthetic_university_agents_professors_py | synthetic_university_agents_professor_base_py | imports | synthetic_university.agents.professor_base |
+| synthetic_university_core_py | synthetic_university_agents_professors_py | imports | synthetic_university.agents.professors |
+| synthetic_university_core_py | synthetic_university_combinatorial_engine_py | imports | synthetic_university.combinatorial_engine |
+| synthetic_university_core_py | synthetic_university_correlator_py | imports | synthetic_university.correlator |
+| synthetic_university_core_py | synthetic_university_curriculum_py | imports | synthetic_university.curriculum |
+| synthetic_university_core_py | synthetic_university_faculties_py | imports | synthetic_university.faculties |
+| synthetic_university_core_py | synthetic_university_knowledge_graph_py | imports | synthetic_university.knowledge_graph |
+| synthetic_university_core_py | synthetic_university_thesis_generator_py | imports | synthetic_university.thesis_generator |
+| synthetic_university_init_py | synthetic_university_agents_professor_base_py | imports | synthetic_university.agents.professor_base |
+| synthetic_university_init_py | synthetic_university_agents_professors_py | imports | synthetic_university.agents.professors |
+| synthetic_university_init_py | synthetic_university_combinatorial_engine_py | imports | synthetic_university.combinatorial_engine |
+| synthetic_university_init_py | synthetic_university_core_py | imports | synthetic_university.core |
+| synthetic_university_init_py | synthetic_university_correlator_py | imports | synthetic_university.correlator |
+| synthetic_university_init_py | synthetic_university_curriculum_py | imports | synthetic_university.curriculum |
+| synthetic_university_init_py | synthetic_university_faculties_py | imports | synthetic_university.faculties |
+| synthetic_university_init_py | synthetic_university_knowledge_graph_py | imports | synthetic_university.knowledge_graph |
+| synthetic_university_init_py | synthetic_university_thesis_generator_py | imports | synthetic_university.thesis_generator |
 | tests_test_advanced_subsystems_py | academic_init_py | imports | academic |
 | tests_test_advanced_subsystems_py | economy_init_py | imports | economy |
 | tests_test_advanced_subsystems_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
@@ -1163,6 +1221,14 @@ graph TD
 | tests_test_sdd_tdd_py | mci_blackboard_py | imports | mci.blackboard |
 | tests_test_sdd_tdd_py | sdd_spec_engine_py | imports | sdd.spec_engine |
 | tests_test_sdd_tdd_py | sdd_tdd_runner_py | imports | sdd.tdd_runner |
+| tests_test_synthetic_university_py | synthetic_university_agents_professors_py | imports | synthetic_university.agents.professors |
+| tests_test_synthetic_university_py | synthetic_university_combinatorial_engine_py | imports | synthetic_university.combinatorial_engine |
+| tests_test_synthetic_university_py | synthetic_university_core_py | imports | synthetic_university.core |
+| tests_test_synthetic_university_py | synthetic_university_correlator_py | imports | synthetic_university.correlator |
+| tests_test_synthetic_university_py | synthetic_university_curriculum_py | imports | synthetic_university.curriculum |
+| tests_test_synthetic_university_py | synthetic_university_faculties_py | imports | synthetic_university.faculties |
+| tests_test_synthetic_university_py | synthetic_university_knowledge_graph_py | imports | synthetic_university.knowledge_graph |
+| tests_test_synthetic_university_py | synthetic_university_thesis_generator_py | imports | synthetic_university.thesis_generator |
 | tests_test_transformer_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | tests_test_transformer_py | mci_blackboard_py | imports | mci.blackboard |
 | tests_test_transformer_py | mci_metabus_py | imports | mci.metabus |

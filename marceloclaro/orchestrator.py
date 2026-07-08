@@ -17,6 +17,7 @@ SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 """
 
 import uuid
+import time
 import logging
 from typing import Dict, List, Any, Optional
 
@@ -25,6 +26,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from mci.metabus import metabus
 from mci.blackboard import blackboard
+from synthetic_university import SyntheticUniversity
 from mci.reflexion import reflexion_engine  # noqa: F401 — ativa o singleton
 from mci import run_scientific_cycle, run_scientific_governance_pipeline
 from marceloclaro.agent_loader import register_all_agents, load_agent_definitions
@@ -801,3 +803,104 @@ class MarceloClaroOrchestrator:
         )
         return {"figuras": len(figs), "catalogo": catalog,
                 "imagens": [f.image_path for f in figs]}
+
+    def synthetic_university(
+        self,
+        target_combinations: int = 1000,
+        generate_theses: bool = True,
+    ) -> Dict[str, Any]:
+        """
+        Executa a Universidade Sintética Transversal (SPEC-935).
+
+        Usa MiroFish-powered combinatorial engine para testar 10.000+
+        combinações de conceitos entre 10 faculdades, descobrir correlações
+        interdisciplinares e gerar teses PhD-level.
+
+        Args:
+            target_combinations: Número alvo de combinações a testar.
+            generate_theses: Se deve gerar teses a partir das descobertas.
+
+        Returns:
+            Dict com summary, relatório e CV da universidade.
+        """
+        university = SyntheticUniversity(target_combinations=target_combinations)
+
+        # Conectar eventos ao MetaBus
+        def _on_university_event(event_type: str, data: dict):
+            try:
+                metabus.publish_subsystem_event(
+                    "synthetic_university", event_type, data
+                )
+                # Atualizar memória semântica
+                if event_type in ("cycle.complete", "theses.ready"):
+                    metabus.memory.upsert_semantic_topic(
+                        f"synthetic_university.{event_type}",
+                        f"{data.get('report', data).get('theses', 0)} teses geradas",
+                        {"timestamp": time.time(), "data": data},
+                    )
+            except Exception:
+                pass
+
+        university.on_event(_on_university_event)
+
+        # Registrar evolução
+        self.record_evolution(
+            objective=f"Universidade Sintética: {target_combinations} combinações",
+            changes=[
+                f"Motor combinatorial: {target_combinations} combinações",
+                "Correlações interdisciplinares" if generate_theses else "Apenas combinações",
+                "Teses PhD-level geradas" if generate_theses else "",
+            ],
+            score=9.0,
+        )
+
+        # Executar ciclo
+        report = university.run_full_cycle(
+            target_combinations=target_combinations,
+            generate_theses=generate_theses,
+        )
+
+        # Registrar reflexão
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"Universidade Sintética: {target_combinations} combinações, "
+                         f"{report.theses_generated} teses",
+            reflection=(
+                f"Ciclo completo: {report.combinations_tested} combinações testadas, "
+                f"{report.correlations_found} correlações descobertas, "
+                f"{report.theses_generated} teses geradas, "
+                f"{report.graph_nodes} nós no grafo de conhecimento. "
+                f"Duração: {report.duration_s:.1f}s."
+            ),
+            score=min(1.0, 0.5 + 0.1 * min(report.theses_generated, 5)),
+        )
+
+        return {
+            "summary": university.get_summary(),
+            "report": {
+                "combinations_tested": report.combinations_tested,
+                "correlations_found": report.correlations_found,
+                "theses_generated": report.theses_generated,
+                "graph_nodes": report.graph_nodes,
+                "graph_edges": report.graph_edges,
+                "duration_s": report.duration_s,
+            },
+            "curriculum_vitae": university.get_curriculum_vitae(),
+            "top_theses": [
+                {
+                    "title": t.title,
+                    "level": t.academic_level.value,
+                    "score": t.composite_score,
+                    "faculties": list(t.faculties_involved),
+                }
+                for t in report.top_theses[:5]
+            ],
+            "top_correlations": [
+                {
+                    "concepts": list(c.concepts),
+                    "type": c.correlation_type.value,
+                    "strength": c.strength,
+                }
+                for c in report.top_correlations[:5]
+            ],
+        }
