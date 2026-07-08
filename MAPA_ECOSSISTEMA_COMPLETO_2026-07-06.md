@@ -1,7 +1,7 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **336**
-- Vetores: **502**
+- Nós: **362**
+- Vetores: **556**
 
 ## Taxonomia de Nós
 
@@ -9,25 +9,25 @@
 |---|---:|
 | actor | 1 |
 | agent | 152 |
-| benchmark | 7 |
+| benchmark | 8 |
 | diagram | 1 |
 | doc | 5 |
-| layer | 17 |
-| module | 98 |
+| layer | 18 |
+| module | 105 |
 | schema | 4 |
-| spec | 30 |
-| test | 21 |
+| spec | 44 |
+| test | 24 |
 
 ## Taxonomia de Vetores
 
 | kind | quantidade |
 |---|---:|
-| contains | 306 |
-| control_flow | 22 |
-| data_flow | 2 |
-| depends_on | 24 |
+| contains | 331 |
+| control_flow | 24 |
+| data_flow | 4 |
+| depends_on | 29 |
 | documents | 9 |
-| imports | 139 |
+| imports | 159 |
 
 ## Diagrama de Alto Nível
 
@@ -40,12 +40,16 @@ graph TD
   orchestrator_py --> blackboard_py[mci/blackboard.py]
   orchestrator_py --> trust_engine_py[trust/trust_engine.py]
   orchestrator_py --> token_economy_py[economy/token_economy.py]
+  orchestrator_py --> metaeval_py[mci/metacognitive_evaluator.py]
+  orchestrator_py --> rag_py[rag/scientific.py]
   orchestrator_py --> sgp_py[mci/pipeline/scientific_governance_pipeline.py]
   sgp_py --> oqs_init_py[mci/oqs/__init__.py]
   sgp_py --> orchestration_py[mci/orchestration.py]
   sgp_py --> vsee_router_py[mci/vsee/router.py]
   sgp_py --> egs_init_py[mci/egs/__init__.py]
   orchestration_py --> evidence_graph_py[mci/evidence_graph.py]
+  metabus_py --> metaeval_py
+  rag_py --> superhuman_suite_py[benchmarks/scientific_reasoning/superhuman_suite.py]
 ```
 
 ## Inventário de Nós
@@ -212,6 +216,7 @@ graph TD
 | benchmarks_scientific_reasoning_power_analysis_benchmark_py | benchmark | benchmarks | benchmarks/scientific_reasoning/power_analysis_benchmark.py |
 | benchmarks_scientific_reasoning_runner_py | benchmark | benchmarks | benchmarks/scientific_reasoning/runner.py |
 | benchmarks_scientific_reasoning_statistical_benchmark_py | benchmark | benchmarks | benchmarks/scientific_reasoning/statistical_benchmark.py |
+| benchmarks_scientific_reasoning_superhuman_suite_py | benchmark | benchmarks | benchmarks/scientific_reasoning/superhuman_suite.py |
 | diagram_mmd | diagram | docs | diagram.mmd |
 | ARCHITECTURE_md | doc | docs | ARCHITECTURE.md |
 | CHANGELOG_md | doc | docs | CHANGELOG.md |
@@ -226,6 +231,7 @@ graph TD
 | layer_mci | layer | mci | memory |
 | layer_orchestration | layer | orchestration | control |
 | layer_publishing | layer | publishing | publishing |
+| layer_rag | layer | rag | grounding |
 | layer_reasoning | layer | reasoning | formal_reasoning |
 | layer_research | layer | research | research |
 | layer_schemas | layer | schemas | contracts |
@@ -271,6 +277,7 @@ graph TD
 | mci_hypothesis_engine_py | module | mci | mci/hypothesis_engine.py |
 | mci_mcp_server_py | module | mci | mci/mcp_server.py |
 | mci_metabus_py | module | mci | mci/metabus.py |
+| mci_metacognitive_evaluator_py | module | mci | mci/metacognitive_evaluator.py |
 | mci_oqs_init_py | module | scientific_governance | mci/oqs/__init__.py |
 | mci_oqs_candidate_generator_py | module | scientific_governance | mci/oqs/candidate_generator.py |
 | mci_oqs_intake_py | module | scientific_governance | mci/oqs/intake.py |
@@ -296,9 +303,15 @@ graph TD
 | publishing_init_py | module | publishing | publishing/__init__.py |
 | publishing_cover_designer_py | module | publishing | publishing/cover_designer.py |
 | publishing_production_py | module | publishing | publishing/production.py |
+| rag_init_py | module | rag | rag/__init__.py |
+| rag_scientific_py | module | rag | rag/scientific.py |
 | reasoning_init_py | module | reasoning | reasoning/__init__.py |
+| reasoning_cache_py | module | reasoning | reasoning/cache.py |
 | reasoning_engines_py | module | reasoning | reasoning/engines.py |
+| reasoning_evaluator_py | module | reasoning | reasoning/evaluator.py |
+| reasoning_parallel_py | module | reasoning | reasoning/parallel.py |
 | reasoning_quantum_py | module | reasoning | reasoning/quantum.py |
+| reasoning_visualizer_py | module | reasoning | reasoning/visualizer.py |
 | research_init_py | module | research | research/__init__.py |
 | research_downloader_py | module | research | research/downloader.py |
 | research_fichamento_py | module | research | research/fichamento.py |
@@ -367,6 +380,20 @@ graph TD
 | specs_SPEC_027_scientific_reporter_hardening_md | spec | specs | specs/SPEC-027-scientific-reporter-hardening.md |
 | specs_SPEC_028_executive_changelog_artifact_md | spec | specs | specs/SPEC-028-executive-changelog-artifact.md |
 | specs_SPEC_029_ecosystem_full_map_md | spec | specs | specs/SPEC-029-ecosystem-full-map.md |
+| specs_SPEC_900_livro_tritemo_md | spec | specs | specs/SPEC-900-livro-tritemo.md |
+| specs_SPEC_901_romance_nevoa_e_pergaminhos_md | spec | specs | specs/SPEC-901-romance-nevoa-e-pergaminhos.md |
+| specs_SPEC_902_molambudos_1260_apocalipse_md | spec | specs | specs/SPEC-902-molambudos-1260-apocalipse.md |
+| specs_SPEC_903_molambudos_fonte_igual_cabecalho_md | spec | specs | specs/SPEC-903-molambudos-fonte-igual-cabecalho.md |
+| specs_SPEC_904_molambudos_residuos_markdown_md | spec | specs | specs/SPEC-904-molambudos-residuos-markdown.md |
+| specs_SPEC_905_molambudos_tabela_paginacao_md | spec | specs | specs/SPEC-905-molambudos-tabela-paginacao.md |
+| specs_SPEC_906_molambudos_titulos_indice_lista_md | spec | specs | specs/SPEC-906-molambudos-titulos-indice-lista.md |
+| specs_SPEC_907_molambudos_titulos_fragmentos_expandidos_md | spec | specs | specs/SPEC-907-molambudos-titulos-fragmentos-expandidos.md |
+| specs_SPEC_910_polimento_literario_md | spec | specs | specs/SPEC-910-polimento-literario.md |
+| specs_SPEC_916_oferta_templates_latex_md | spec | specs | specs/SPEC-916-oferta-templates-latex.md |
+| specs_SPEC_917_evolucao_racicinios_md | spec | specs | specs/SPEC-917-evolucao-racicinios.md |
+| specs_SPEC_918_scientific_superhuman_benchmark_suite_md | spec | specs | specs/SPEC-918-scientific-superhuman-benchmark-suite.md |
+| specs_SPEC_919_scientific_rag_grounding_md | spec | specs | specs/SPEC-919-scientific-rag-grounding.md |
+| specs_SPEC_920_metacognitive_superhuman_refinement_md | spec | specs | specs/SPEC-920-metacognitive-superhuman-refinement.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
 | tests_test_cover_designer_py | test | tests | tests/test_cover_designer.py |
@@ -378,12 +405,15 @@ graph TD
 | tests_test_illustrations_py | test | tests | tests/test_illustrations.py |
 | tests_test_inspiration_audit_py | test | tests | tests/test_inspiration_audit.py |
 | tests_test_llm_client_py | test | tests | tests/test_llm_client.py |
+| tests_test_metacognitive_superhuman_py | test | tests | tests/test_metacognitive_superhuman.py |
 | tests_test_mira_catalog_py | test | tests | tests/test_mira_catalog.py |
 | tests_test_mirofish_gametheory_publishing_py | test | tests | tests/test_mirofish_gametheory_publishing.py |
+| tests_test_reasoning_evolution_py | test | tests | tests/test_reasoning_evolution.py |
 | tests_test_research_py | test | tests | tests/test_research.py |
 | tests_test_run_research_batch_py | test | tests | tests/test_run_research_batch.py |
 | tests_test_scientific_governance_contracts_py | test | tests | tests/test_scientific_governance_contracts.py |
 | tests_test_scientific_governance_pipeline_py | test | tests | tests/test_scientific_governance_pipeline.py |
+| tests_test_scientific_rag_superhuman_py | test | tests | tests/test_scientific_rag_superhuman.py |
 | tests_test_scientific_reporter_hardening_py | test | tests | tests/test_scientific_reporter_hardening.py |
 | tests_test_scientific_superhuman_py | test | tests | tests/test_scientific_superhuman.py |
 | tests_test_sdd_tdd_py | test | tests | tests/test_sdd_tdd.py |
@@ -552,6 +582,7 @@ graph TD
 | layer_benchmarks | benchmarks_scientific_reasoning_power_analysis_benchmark_py | contains | benchmarks contém benchmarks/scientific_reasoning/power_analysis_benchmark.py |
 | layer_benchmarks | benchmarks_scientific_reasoning_runner_py | contains | benchmarks contém benchmarks/scientific_reasoning/runner.py |
 | layer_benchmarks | benchmarks_scientific_reasoning_statistical_benchmark_py | contains | benchmarks contém benchmarks/scientific_reasoning/statistical_benchmark.py |
+| layer_benchmarks | benchmarks_scientific_reasoning_superhuman_suite_py | contains | benchmarks contém benchmarks/scientific_reasoning/superhuman_suite.py |
 | layer_diagnostics | scanners_capability_composer_py | contains | diagnostics contém scanners/capability_composer.py |
 | layer_diagnostics | scanners_cross_validation_engine_py | contains | diagnostics contém scanners/cross_validation_engine.py |
 | layer_diagnostics | scanners_epistemic_prioritizer_py | contains | diagnostics contém scanners/epistemic_prioritizer.py |
@@ -584,6 +615,7 @@ graph TD
 | layer_mci | mci_init_py | contains | mci contém mci/__init__.py |
 | layer_mci | mci_mcp_server_py | contains | mci contém mci/mcp_server.py |
 | layer_mci | mci_metabus_py | contains | mci contém mci/metabus.py |
+| layer_mci | mci_metacognitive_evaluator_py | contains | mci contém mci/metacognitive_evaluator.py |
 | layer_mci | mci_orchestration_py | contains | mci contém mci/orchestration.py |
 | layer_mci | mci_reflexion_py | contains | mci contém mci/reflexion.py |
 | layer_mci | mci_scientific_reporter_py | contains | mci contém mci/scientific_reporter.py |
@@ -598,9 +630,15 @@ graph TD
 | layer_publishing | publishing_cover_designer_py | contains | publishing contém publishing/cover_designer.py |
 | layer_publishing | publishing_init_py | contains | publishing contém publishing/__init__.py |
 | layer_publishing | publishing_production_py | contains | publishing contém publishing/production.py |
+| layer_rag | rag_init_py | contains | rag contém rag/__init__.py |
+| layer_rag | rag_scientific_py | contains | rag contém rag/scientific.py |
+| layer_reasoning | reasoning_cache_py | contains | reasoning contém reasoning/cache.py |
 | layer_reasoning | reasoning_engines_py | contains | reasoning contém reasoning/engines.py |
+| layer_reasoning | reasoning_evaluator_py | contains | reasoning contém reasoning/evaluator.py |
 | layer_reasoning | reasoning_init_py | contains | reasoning contém reasoning/__init__.py |
+| layer_reasoning | reasoning_parallel_py | contains | reasoning contém reasoning/parallel.py |
 | layer_reasoning | reasoning_quantum_py | contains | reasoning contém reasoning/quantum.py |
+| layer_reasoning | reasoning_visualizer_py | contains | reasoning contém reasoning/visualizer.py |
 | layer_research | research_downloader_py | contains | research contém research/downloader.py |
 | layer_research | research_fichamento_py | contains | research contém research/fichamento.py |
 | layer_research | research_figure_hunter_py | contains | research contém research/figure_hunter.py |
@@ -669,6 +707,20 @@ graph TD
 | layer_specs | specs_SPEC_027_scientific_reporter_hardening_md | contains | specs contém specs/SPEC-027-scientific-reporter-hardening.md |
 | layer_specs | specs_SPEC_028_executive_changelog_artifact_md | contains | specs contém specs/SPEC-028-executive-changelog-artifact.md |
 | layer_specs | specs_SPEC_029_ecosystem_full_map_md | contains | specs contém specs/SPEC-029-ecosystem-full-map.md |
+| layer_specs | specs_SPEC_900_livro_tritemo_md | contains | specs contém specs/SPEC-900-livro-tritemo.md |
+| layer_specs | specs_SPEC_901_romance_nevoa_e_pergaminhos_md | contains | specs contém specs/SPEC-901-romance-nevoa-e-pergaminhos.md |
+| layer_specs | specs_SPEC_902_molambudos_1260_apocalipse_md | contains | specs contém specs/SPEC-902-molambudos-1260-apocalipse.md |
+| layer_specs | specs_SPEC_903_molambudos_fonte_igual_cabecalho_md | contains | specs contém specs/SPEC-903-molambudos-fonte-igual-cabecalho.md |
+| layer_specs | specs_SPEC_904_molambudos_residuos_markdown_md | contains | specs contém specs/SPEC-904-molambudos-residuos-markdown.md |
+| layer_specs | specs_SPEC_905_molambudos_tabela_paginacao_md | contains | specs contém specs/SPEC-905-molambudos-tabela-paginacao.md |
+| layer_specs | specs_SPEC_906_molambudos_titulos_indice_lista_md | contains | specs contém specs/SPEC-906-molambudos-titulos-indice-lista.md |
+| layer_specs | specs_SPEC_907_molambudos_titulos_fragmentos_expandidos_md | contains | specs contém specs/SPEC-907-molambudos-titulos-fragmentos-expandidos.md |
+| layer_specs | specs_SPEC_910_polimento_literario_md | contains | specs contém specs/SPEC-910-polimento-literario.md |
+| layer_specs | specs_SPEC_916_oferta_templates_latex_md | contains | specs contém specs/SPEC-916-oferta-templates-latex.md |
+| layer_specs | specs_SPEC_917_evolucao_racicinios_md | contains | specs contém specs/SPEC-917-evolucao-racicinios.md |
+| layer_specs | specs_SPEC_918_scientific_superhuman_benchmark_suite_md | contains | specs contém specs/SPEC-918-scientific-superhuman-benchmark-suite.md |
+| layer_specs | specs_SPEC_919_scientific_rag_grounding_md | contains | specs contém specs/SPEC-919-scientific-rag-grounding.md |
+| layer_specs | specs_SPEC_920_metacognitive_superhuman_refinement_md | contains | specs contém specs/SPEC-920-metacognitive-superhuman-refinement.md |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
 | layer_tests | tests_test_cover_designer_py | contains | tests contém tests/test_cover_designer.py |
@@ -680,12 +732,15 @@ graph TD
 | layer_tests | tests_test_illustrations_py | contains | tests contém tests/test_illustrations.py |
 | layer_tests | tests_test_inspiration_audit_py | contains | tests contém tests/test_inspiration_audit.py |
 | layer_tests | tests_test_llm_client_py | contains | tests contém tests/test_llm_client.py |
+| layer_tests | tests_test_metacognitive_superhuman_py | contains | tests contém tests/test_metacognitive_superhuman.py |
 | layer_tests | tests_test_mira_catalog_py | contains | tests contém tests/test_mira_catalog.py |
 | layer_tests | tests_test_mirofish_gametheory_publishing_py | contains | tests contém tests/test_mirofish_gametheory_publishing.py |
+| layer_tests | tests_test_reasoning_evolution_py | contains | tests contém tests/test_reasoning_evolution.py |
 | layer_tests | tests_test_research_py | contains | tests contém tests/test_research.py |
 | layer_tests | tests_test_run_research_batch_py | contains | tests contém tests/test_run_research_batch.py |
 | layer_tests | tests_test_scientific_governance_contracts_py | contains | tests contém tests/test_scientific_governance_contracts.py |
 | layer_tests | tests_test_scientific_governance_pipeline_py | contains | tests contém tests/test_scientific_governance_pipeline.py |
+| layer_tests | tests_test_scientific_rag_superhuman_py | contains | tests contém tests/test_scientific_rag_superhuman.py |
 | layer_tests | tests_test_scientific_reporter_hardening_py | contains | tests contém tests/test_scientific_reporter_hardening.py |
 | layer_tests | tests_test_scientific_superhuman_py | contains | tests contém tests/test_scientific_superhuman.py |
 | layer_tests | tests_test_sdd_tdd_py | contains | tests contém tests/test_sdd_tdd.py |
@@ -705,8 +760,10 @@ graph TD
 | marceloclaro_orchestrator_py | illustrations_mira_engine_py | control_flow | ilustrações/metáforas |
 | marceloclaro_orchestrator_py | mci_blackboard_py | control_flow | delegação A2A via Blackboard |
 | marceloclaro_orchestrator_py | mci_metabus_py | control_flow | registra reflexões e eventos |
+| marceloclaro_orchestrator_py | mci_metacognitive_evaluator_py | control_flow | benchmark metacognitivo SPEC-920 |
 | marceloclaro_orchestrator_py | mci_pipeline_scientific_governance_pipeline_py | control_flow | pipeline científico com governança |
 | marceloclaro_orchestrator_py | publishing_production_py | control_flow | produção científica |
+| marceloclaro_orchestrator_py | rag_scientific_py | control_flow | grounding científico via RAG |
 | marceloclaro_orchestrator_py | reasoning_engines_py | control_flow | raciocínio formal |
 | marceloclaro_orchestrator_py | research_hub_py | control_flow | pipeline de pesquisa |
 | marceloclaro_orchestrator_py | scanners_pipeline_py | control_flow | diagnóstico do ecossistema |
@@ -721,7 +778,9 @@ graph TD
 | research_pipelines_run_research_batch_py | mci_oqs_init_py | control_flow | runner invoca OQS |
 | research_pipelines_run_research_batch_py | mci_orchestration_py | control_flow | runner invoca núcleo científico |
 | research_pipelines_run_research_batch_py | mci_vsee_router_py | control_flow | runner invoca VSEE |
+| mci_metabus_py | mci_metacognitive_evaluator_py | data_flow | traços e reflexões para avaliação metacognitiva |
 | mci_orchestration_py | mci_evidence_graph_py | data_flow | persistência epistemológica |
+| rag_scientific_py | benchmarks_scientific_reasoning_superhuman_suite_py | data_flow | grounding alimenta readiness científico |
 | research_pipelines_analyze_research_batch_py | research_pipelines_run_research_batch_py | data_flow | análise do raw/summary do runner |
 | specs_SPEC_017_research_md | specs_SPEC_010_maswos_academic_md | depends_on | SPEC-010 |
 | specs_SPEC_017_research_md | specs_SPEC_016_publishing_md | depends_on | SPEC-016 |
@@ -747,6 +806,11 @@ graph TD
 | specs_SPEC_028_executive_changelog_artifact_md | specs_SPEC_027_scientific_reporter_hardening_md | depends_on | SPEC-027 |
 | specs_SPEC_029_ecosystem_full_map_md | specs_SPEC_023_inspiration_audit_md | depends_on | SPEC-023 |
 | specs_SPEC_029_ecosystem_full_map_md | specs_SPEC_028_executive_changelog_artifact_md | depends_on | SPEC-028 |
+| specs_SPEC_900_livro_tritemo_md | specs_SPEC_018_illustrations_md | depends_on | SPEC-018 |
+| specs_SPEC_900_livro_tritemo_md | specs_SPEC_019_cover_designer_md | depends_on | SPEC-019 |
+| specs_SPEC_900_livro_tritemo_md | specs_SPEC_026_mira_command_surface_md | depends_on | SPEC-026 |
+| specs_SPEC_901_romance_nevoa_e_pergaminhos_md | specs_SPEC_018_illustrations_md | depends_on | SPEC-018 |
+| specs_SPEC_901_romance_nevoa_e_pergaminhos_md | specs_SPEC_019_cover_designer_md | depends_on | SPEC-019 |
 | specs_SPEC_007_trust_engine_md | trust_trust_engine_py | documents | trust/trust_engine.py |
 | specs_SPEC_008_token_economy_md | economy_token_economy_py | documents | economy/token_economy.py |
 | specs_SPEC_009_scanners_md | scanners_pipeline_py | documents | scanners/pipeline.py |
@@ -759,6 +823,9 @@ graph TD
 | academic_init_py | academic_maswos_py | imports | academic.maswos |
 | academic_maswos_py | academic_auto_score_qualis_py | imports | academic.auto_score_qualis |
 | benchmarks_scientific_reasoning_causal_benchmark_py | benchmarks_scientific_reasoning_runner_py | imports | benchmarks.scientific_reasoning.runner |
+| benchmarks_scientific_reasoning_init_py | benchmarks_scientific_reasoning_runner_py | imports | benchmarks.scientific_reasoning.runner |
+| benchmarks_scientific_reasoning_init_py | benchmarks_scientific_reasoning_superhuman_suite_py | imports | benchmarks.scientific_reasoning.superhuman_suite |
+| benchmarks_scientific_reasoning_superhuman_suite_py | benchmarks_scientific_reasoning_runner_py | imports | benchmarks.scientific_reasoning.runner |
 | economy_init_py | economy_token_economy_py | imports | economy.token_economy |
 | marceloclaro_cli_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | marceloclaro_orchestrator_py | academic_init_py | imports | academic |
@@ -796,8 +863,16 @@ graph TD
 | mirofish_validator_py | gametheory_init_py | imports | gametheory |
 | mirofish_validator_py | mirofish_swarm_py | imports | mirofish.swarm |
 | publishing_init_py | publishing_production_py | imports | publishing.production |
+| rag_init_py | rag_scientific_py | imports | rag.scientific |
+| reasoning_engines_py | reasoning_quantum_py | imports | reasoning.quantum |
+| reasoning_evaluator_py | reasoning_engines_py | imports | reasoning.engines |
+| reasoning_init_py | reasoning_cache_py | imports | reasoning.cache |
 | reasoning_init_py | reasoning_engines_py | imports | reasoning.engines |
+| reasoning_init_py | reasoning_evaluator_py | imports | reasoning.evaluator |
+| reasoning_init_py | reasoning_parallel_py | imports | reasoning.parallel |
 | reasoning_init_py | reasoning_quantum_py | imports | reasoning.quantum |
+| reasoning_init_py | reasoning_visualizer_py | imports | reasoning.visualizer |
+| reasoning_visualizer_py | reasoning_engines_py | imports | reasoning.engines |
 | research_pipelines_run_research_batch_py | mci_egs_init_py | imports | mci.egs |
 | research_pipelines_run_research_batch_py | mci_oqs_init_py | imports | mci.oqs |
 | research_pipelines_run_research_batch_py | mci_orchestration_py | imports | mci.orchestration |
@@ -852,11 +927,17 @@ graph TD
 | tests_test_llm_client_py | research_fichamento_py | imports | research.fichamento |
 | tests_test_llm_client_py | research_llm_client_py | imports | research.llm_client |
 | tests_test_llm_client_py | research_searchers_py | imports | research.searchers |
+| tests_test_metacognitive_superhuman_py | mci_metacognitive_evaluator_py | imports | mci.metacognitive_evaluator |
 | tests_test_mira_catalog_py | marceloclaro_catalog_loader_py | imports | marceloclaro.catalog_loader |
 | tests_test_mirofish_gametheory_publishing_py | gametheory_init_py | imports | gametheory |
 | tests_test_mirofish_gametheory_publishing_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | tests_test_mirofish_gametheory_publishing_py | mirofish_init_py | imports | mirofish |
 | tests_test_mirofish_gametheory_publishing_py | publishing_init_py | imports | publishing |
+| tests_test_reasoning_evolution_py | reasoning_cache_py | imports | reasoning.cache |
+| tests_test_reasoning_evolution_py | reasoning_evaluator_py | imports | reasoning.evaluator |
+| tests_test_reasoning_evolution_py | reasoning_init_py | imports | reasoning |
+| tests_test_reasoning_evolution_py | reasoning_parallel_py | imports | reasoning.parallel |
+| tests_test_reasoning_evolution_py | reasoning_visualizer_py | imports | reasoning.visualizer |
 | tests_test_research_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | tests_test_research_py | research_downloader_py | imports | research.downloader |
 | tests_test_research_py | research_fichamento_py | imports | research.fichamento |
@@ -865,6 +946,9 @@ graph TD
 | tests_test_research_py | research_searchers_py | imports | research.searchers |
 | tests_test_run_research_batch_py | research_pipelines_run_research_batch_py | imports | research.pipelines.run_research_batch |
 | tests_test_scientific_governance_pipeline_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
+| tests_test_scientific_rag_superhuman_py | benchmarks_scientific_reasoning_runner_py | imports | benchmarks.scientific_reasoning.runner |
+| tests_test_scientific_rag_superhuman_py | benchmarks_scientific_reasoning_superhuman_suite_py | imports | benchmarks.scientific_reasoning.superhuman_suite |
+| tests_test_scientific_rag_superhuman_py | rag_init_py | imports | rag |
 | tests_test_scientific_superhuman_py | benchmarks_scientific_reasoning_bias_detection_benchmark_py | imports | benchmarks.scientific_reasoning.bias_detection_benchmark |
 | tests_test_scientific_superhuman_py | benchmarks_scientific_reasoning_causal_benchmark_py | imports | benchmarks.scientific_reasoning.causal_benchmark |
 | tests_test_scientific_superhuman_py | benchmarks_scientific_reasoning_experimental_design_benchmark_py | imports | benchmarks.scientific_reasoning.experimental_design_benchmark |

@@ -1,26 +1,26 @@
 {
   "summary": {
-    "node_count": 336,
-    "vector_count": 502,
+    "node_count": 362,
+    "vector_count": 556,
     "node_kinds": {
       "actor": 1,
       "agent": 152,
-      "benchmark": 7,
+      "benchmark": 8,
       "diagram": 1,
       "doc": 5,
-      "layer": 17,
-      "module": 98,
+      "layer": 18,
+      "module": 105,
       "schema": 4,
-      "spec": 30,
-      "test": 21
+      "spec": 44,
+      "test": 24
     },
     "vector_kinds": {
-      "contains": 306,
-      "control_flow": 22,
-      "data_flow": 2,
-      "depends_on": 24,
+      "contains": 331,
+      "control_flow": 24,
+      "data_flow": 4,
+      "depends_on": 29,
       "documents": 9,
-      "imports": 139
+      "imports": 159
     }
   },
   "nodes": [
@@ -1305,6 +1305,14 @@
       "layer": "benchmarks"
     },
     {
+      "id": "benchmarks_scientific_reasoning_superhuman_suite_py",
+      "label": "superhuman_suite",
+      "kind": "benchmark",
+      "path": "benchmarks/scientific_reasoning/superhuman_suite.py",
+      "logical_group": "",
+      "layer": "benchmarks"
+    },
+    {
       "id": "diagram_mmd",
       "label": "diagram",
       "kind": "diagram",
@@ -1415,6 +1423,14 @@
       "path": "",
       "logical_group": "publishing",
       "layer": "publishing"
+    },
+    {
+      "id": "layer_rag",
+      "label": "Scientific RAG",
+      "kind": "layer",
+      "path": "",
+      "logical_group": "grounding",
+      "layer": "rag"
     },
     {
       "id": "layer_reasoning",
@@ -1777,6 +1793,14 @@
       "layer": "mci"
     },
     {
+      "id": "mci_metacognitive_evaluator_py",
+      "label": "metacognitive_evaluator",
+      "kind": "module",
+      "path": "mci/metacognitive_evaluator.py",
+      "logical_group": "",
+      "layer": "mci"
+    },
+    {
       "id": "mci_oqs_init_py",
       "label": "__init__",
       "kind": "module",
@@ -1977,10 +2001,34 @@
       "layer": "publishing"
     },
     {
+      "id": "rag_init_py",
+      "label": "__init__",
+      "kind": "module",
+      "path": "rag/__init__.py",
+      "logical_group": "",
+      "layer": "rag"
+    },
+    {
+      "id": "rag_scientific_py",
+      "label": "scientific",
+      "kind": "module",
+      "path": "rag/scientific.py",
+      "logical_group": "",
+      "layer": "rag"
+    },
+    {
       "id": "reasoning_init_py",
       "label": "__init__",
       "kind": "module",
       "path": "reasoning/__init__.py",
+      "logical_group": "",
+      "layer": "reasoning"
+    },
+    {
+      "id": "reasoning_cache_py",
+      "label": "cache",
+      "kind": "module",
+      "path": "reasoning/cache.py",
       "logical_group": "",
       "layer": "reasoning"
     },
@@ -1993,10 +2041,34 @@
       "layer": "reasoning"
     },
     {
+      "id": "reasoning_evaluator_py",
+      "label": "evaluator",
+      "kind": "module",
+      "path": "reasoning/evaluator.py",
+      "logical_group": "",
+      "layer": "reasoning"
+    },
+    {
+      "id": "reasoning_parallel_py",
+      "label": "parallel",
+      "kind": "module",
+      "path": "reasoning/parallel.py",
+      "logical_group": "",
+      "layer": "reasoning"
+    },
+    {
       "id": "reasoning_quantum_py",
       "label": "quantum",
       "kind": "module",
       "path": "reasoning/quantum.py",
+      "logical_group": "",
+      "layer": "reasoning"
+    },
+    {
+      "id": "reasoning_visualizer_py",
+      "label": "visualizer",
+      "kind": "module",
+      "path": "reasoning/visualizer.py",
       "logical_group": "",
       "layer": "reasoning"
     },
@@ -2545,6 +2617,118 @@
       "layer": "specs"
     },
     {
+      "id": "specs_SPEC_900_livro_tritemo_md",
+      "label": "SPEC-900-livro-tritemo",
+      "kind": "spec",
+      "path": "specs/SPEC-900-livro-tritemo.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_901_romance_nevoa_e_pergaminhos_md",
+      "label": "SPEC-901-romance-nevoa-e-pergaminhos",
+      "kind": "spec",
+      "path": "specs/SPEC-901-romance-nevoa-e-pergaminhos.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_902_molambudos_1260_apocalipse_md",
+      "label": "SPEC-902-molambudos-1260-apocalipse",
+      "kind": "spec",
+      "path": "specs/SPEC-902-molambudos-1260-apocalipse.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_903_molambudos_fonte_igual_cabecalho_md",
+      "label": "SPEC-903-molambudos-fonte-igual-cabecalho",
+      "kind": "spec",
+      "path": "specs/SPEC-903-molambudos-fonte-igual-cabecalho.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_904_molambudos_residuos_markdown_md",
+      "label": "SPEC-904-molambudos-residuos-markdown",
+      "kind": "spec",
+      "path": "specs/SPEC-904-molambudos-residuos-markdown.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_905_molambudos_tabela_paginacao_md",
+      "label": "SPEC-905-molambudos-tabela-paginacao",
+      "kind": "spec",
+      "path": "specs/SPEC-905-molambudos-tabela-paginacao.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_906_molambudos_titulos_indice_lista_md",
+      "label": "SPEC-906-molambudos-titulos-indice-lista",
+      "kind": "spec",
+      "path": "specs/SPEC-906-molambudos-titulos-indice-lista.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_907_molambudos_titulos_fragmentos_expandidos_md",
+      "label": "SPEC-907-molambudos-titulos-fragmentos-expandidos",
+      "kind": "spec",
+      "path": "specs/SPEC-907-molambudos-titulos-fragmentos-expandidos.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_910_polimento_literario_md",
+      "label": "SPEC-910-polimento-literario",
+      "kind": "spec",
+      "path": "specs/SPEC-910-polimento-literario.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_916_oferta_templates_latex_md",
+      "label": "SPEC-916-oferta-templates-latex",
+      "kind": "spec",
+      "path": "specs/SPEC-916-oferta-templates-latex.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_917_evolucao_racicinios_md",
+      "label": "SPEC-917-evolucao-racicinios",
+      "kind": "spec",
+      "path": "specs/SPEC-917-evolucao-racicinios.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_918_scientific_superhuman_benchmark_suite_md",
+      "label": "SPEC-918-scientific-superhuman-benchmark-suite",
+      "kind": "spec",
+      "path": "specs/SPEC-918-scientific-superhuman-benchmark-suite.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_919_scientific_rag_grounding_md",
+      "label": "SPEC-919-scientific-rag-grounding",
+      "kind": "spec",
+      "path": "specs/SPEC-919-scientific-rag-grounding.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_920_metacognitive_superhuman_refinement_md",
+      "label": "SPEC-920-metacognitive-superhuman-refinement",
+      "kind": "spec",
+      "path": "specs/SPEC-920-metacognitive-superhuman-refinement.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
       "id": "tests_test_advanced_subsystems_py",
       "label": "test_advanced_subsystems",
       "kind": "test",
@@ -2633,6 +2817,14 @@
       "layer": "tests"
     },
     {
+      "id": "tests_test_metacognitive_superhuman_py",
+      "label": "test_metacognitive_superhuman",
+      "kind": "test",
+      "path": "tests/test_metacognitive_superhuman.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
       "id": "tests_test_mira_catalog_py",
       "label": "test_mira_catalog",
       "kind": "test",
@@ -2645,6 +2837,14 @@
       "label": "test_mirofish_gametheory_publishing",
       "kind": "test",
       "path": "tests/test_mirofish_gametheory_publishing.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_reasoning_evolution_py",
+      "label": "test_reasoning_evolution",
+      "kind": "test",
+      "path": "tests/test_reasoning_evolution.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -2677,6 +2877,14 @@
       "label": "test_scientific_governance_pipeline",
       "kind": "test",
       "path": "tests/test_scientific_governance_pipeline.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_scientific_rag_superhuman_py",
+      "label": "test_scientific_rag_superhuman",
+      "kind": "test",
+      "path": "tests/test_scientific_rag_superhuman.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -3669,6 +3877,12 @@
       "note": "benchmarks contém benchmarks/scientific_reasoning/statistical_benchmark.py"
     },
     {
+      "source": "layer_benchmarks",
+      "target": "benchmarks_scientific_reasoning_superhuman_suite_py",
+      "kind": "contains",
+      "note": "benchmarks contém benchmarks/scientific_reasoning/superhuman_suite.py"
+    },
+    {
       "source": "layer_diagnostics",
       "target": "scanners_capability_composer_py",
       "kind": "contains",
@@ -3862,6 +4076,12 @@
     },
     {
       "source": "layer_mci",
+      "target": "mci_metacognitive_evaluator_py",
+      "kind": "contains",
+      "note": "mci contém mci/metacognitive_evaluator.py"
+    },
+    {
+      "source": "layer_mci",
       "target": "mci_orchestration_py",
       "kind": "contains",
       "note": "mci contém mci/orchestration.py"
@@ -3945,10 +4165,34 @@
       "note": "publishing contém publishing/production.py"
     },
     {
+      "source": "layer_rag",
+      "target": "rag_init_py",
+      "kind": "contains",
+      "note": "rag contém rag/__init__.py"
+    },
+    {
+      "source": "layer_rag",
+      "target": "rag_scientific_py",
+      "kind": "contains",
+      "note": "rag contém rag/scientific.py"
+    },
+    {
+      "source": "layer_reasoning",
+      "target": "reasoning_cache_py",
+      "kind": "contains",
+      "note": "reasoning contém reasoning/cache.py"
+    },
+    {
       "source": "layer_reasoning",
       "target": "reasoning_engines_py",
       "kind": "contains",
       "note": "reasoning contém reasoning/engines.py"
+    },
+    {
+      "source": "layer_reasoning",
+      "target": "reasoning_evaluator_py",
+      "kind": "contains",
+      "note": "reasoning contém reasoning/evaluator.py"
     },
     {
       "source": "layer_reasoning",
@@ -3958,9 +4202,21 @@
     },
     {
       "source": "layer_reasoning",
+      "target": "reasoning_parallel_py",
+      "kind": "contains",
+      "note": "reasoning contém reasoning/parallel.py"
+    },
+    {
+      "source": "layer_reasoning",
       "target": "reasoning_quantum_py",
       "kind": "contains",
       "note": "reasoning contém reasoning/quantum.py"
+    },
+    {
+      "source": "layer_reasoning",
+      "target": "reasoning_visualizer_py",
+      "kind": "contains",
+      "note": "reasoning contém reasoning/visualizer.py"
     },
     {
       "source": "layer_research",
@@ -4371,6 +4627,90 @@
       "note": "specs contém specs/SPEC-029-ecosystem-full-map.md"
     },
     {
+      "source": "layer_specs",
+      "target": "specs_SPEC_900_livro_tritemo_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-900-livro-tritemo.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_901_romance_nevoa_e_pergaminhos_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-901-romance-nevoa-e-pergaminhos.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_902_molambudos_1260_apocalipse_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-902-molambudos-1260-apocalipse.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_903_molambudos_fonte_igual_cabecalho_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-903-molambudos-fonte-igual-cabecalho.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_904_molambudos_residuos_markdown_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-904-molambudos-residuos-markdown.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_905_molambudos_tabela_paginacao_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-905-molambudos-tabela-paginacao.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_906_molambudos_titulos_indice_lista_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-906-molambudos-titulos-indice-lista.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_907_molambudos_titulos_fragmentos_expandidos_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-907-molambudos-titulos-fragmentos-expandidos.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_910_polimento_literario_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-910-polimento-literario.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_916_oferta_templates_latex_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-916-oferta-templates-latex.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_917_evolucao_racicinios_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-917-evolucao-racicinios.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_918_scientific_superhuman_benchmark_suite_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-918-scientific-superhuman-benchmark-suite.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_919_scientific_rag_grounding_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-919-scientific-rag-grounding.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_920_metacognitive_superhuman_refinement_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-920-metacognitive-superhuman-refinement.md"
+    },
+    {
       "source": "layer_tests",
       "target": "tests_test_advanced_subsystems_py",
       "kind": "contains",
@@ -4438,6 +4778,12 @@
     },
     {
       "source": "layer_tests",
+      "target": "tests_test_metacognitive_superhuman_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_metacognitive_superhuman.py"
+    },
+    {
+      "source": "layer_tests",
       "target": "tests_test_mira_catalog_py",
       "kind": "contains",
       "note": "tests contém tests/test_mira_catalog.py"
@@ -4447,6 +4793,12 @@
       "target": "tests_test_mirofish_gametheory_publishing_py",
       "kind": "contains",
       "note": "tests contém tests/test_mirofish_gametheory_publishing.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_reasoning_evolution_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_reasoning_evolution.py"
     },
     {
       "source": "layer_tests",
@@ -4471,6 +4823,12 @@
       "target": "tests_test_scientific_governance_pipeline_py",
       "kind": "contains",
       "note": "tests contém tests/test_scientific_governance_pipeline.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_scientific_rag_superhuman_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_scientific_rag_superhuman.py"
     },
     {
       "source": "layer_tests",
@@ -4588,6 +4946,12 @@
     },
     {
       "source": "marceloclaro_orchestrator_py",
+      "target": "mci_metacognitive_evaluator_py",
+      "kind": "control_flow",
+      "note": "benchmark metacognitivo SPEC-920"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
       "target": "mci_pipeline_scientific_governance_pipeline_py",
       "kind": "control_flow",
       "note": "pipeline científico com governança"
@@ -4597,6 +4961,12 @@
       "target": "publishing_production_py",
       "kind": "control_flow",
       "note": "produção científica"
+    },
+    {
+      "source": "marceloclaro_orchestrator_py",
+      "target": "rag_scientific_py",
+      "kind": "control_flow",
+      "note": "grounding científico via RAG"
     },
     {
       "source": "marceloclaro_orchestrator_py",
@@ -4683,10 +5053,22 @@
       "note": "runner invoca VSEE"
     },
     {
+      "source": "mci_metabus_py",
+      "target": "mci_metacognitive_evaluator_py",
+      "kind": "data_flow",
+      "note": "traços e reflexões para avaliação metacognitiva"
+    },
+    {
       "source": "mci_orchestration_py",
       "target": "mci_evidence_graph_py",
       "kind": "data_flow",
       "note": "persistência epistemológica"
+    },
+    {
+      "source": "rag_scientific_py",
+      "target": "benchmarks_scientific_reasoning_superhuman_suite_py",
+      "kind": "data_flow",
+      "note": "grounding alimenta readiness científico"
     },
     {
       "source": "research_pipelines_analyze_research_batch_py",
@@ -4839,6 +5221,36 @@
       "note": "SPEC-028"
     },
     {
+      "source": "specs_SPEC_900_livro_tritemo_md",
+      "target": "specs_SPEC_018_illustrations_md",
+      "kind": "depends_on",
+      "note": "SPEC-018"
+    },
+    {
+      "source": "specs_SPEC_900_livro_tritemo_md",
+      "target": "specs_SPEC_019_cover_designer_md",
+      "kind": "depends_on",
+      "note": "SPEC-019"
+    },
+    {
+      "source": "specs_SPEC_900_livro_tritemo_md",
+      "target": "specs_SPEC_026_mira_command_surface_md",
+      "kind": "depends_on",
+      "note": "SPEC-026"
+    },
+    {
+      "source": "specs_SPEC_901_romance_nevoa_e_pergaminhos_md",
+      "target": "specs_SPEC_018_illustrations_md",
+      "kind": "depends_on",
+      "note": "SPEC-018"
+    },
+    {
+      "source": "specs_SPEC_901_romance_nevoa_e_pergaminhos_md",
+      "target": "specs_SPEC_019_cover_designer_md",
+      "kind": "depends_on",
+      "note": "SPEC-019"
+    },
+    {
       "source": "specs_SPEC_007_trust_engine_md",
       "target": "trust_trust_engine_py",
       "kind": "documents",
@@ -4906,6 +5318,24 @@
     },
     {
       "source": "benchmarks_scientific_reasoning_causal_benchmark_py",
+      "target": "benchmarks_scientific_reasoning_runner_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.runner"
+    },
+    {
+      "source": "benchmarks_scientific_reasoning_init_py",
+      "target": "benchmarks_scientific_reasoning_runner_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.runner"
+    },
+    {
+      "source": "benchmarks_scientific_reasoning_init_py",
+      "target": "benchmarks_scientific_reasoning_superhuman_suite_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.superhuman_suite"
+    },
+    {
+      "source": "benchmarks_scientific_reasoning_superhuman_suite_py",
       "target": "benchmarks_scientific_reasoning_runner_py",
       "kind": "imports",
       "note": "benchmarks.scientific_reasoning.runner"
@@ -5133,6 +5563,30 @@
       "note": "publishing.production"
     },
     {
+      "source": "rag_init_py",
+      "target": "rag_scientific_py",
+      "kind": "imports",
+      "note": "rag.scientific"
+    },
+    {
+      "source": "reasoning_engines_py",
+      "target": "reasoning_quantum_py",
+      "kind": "imports",
+      "note": "reasoning.quantum"
+    },
+    {
+      "source": "reasoning_evaluator_py",
+      "target": "reasoning_engines_py",
+      "kind": "imports",
+      "note": "reasoning.engines"
+    },
+    {
+      "source": "reasoning_init_py",
+      "target": "reasoning_cache_py",
+      "kind": "imports",
+      "note": "reasoning.cache"
+    },
+    {
       "source": "reasoning_init_py",
       "target": "reasoning_engines_py",
       "kind": "imports",
@@ -5140,9 +5594,33 @@
     },
     {
       "source": "reasoning_init_py",
+      "target": "reasoning_evaluator_py",
+      "kind": "imports",
+      "note": "reasoning.evaluator"
+    },
+    {
+      "source": "reasoning_init_py",
+      "target": "reasoning_parallel_py",
+      "kind": "imports",
+      "note": "reasoning.parallel"
+    },
+    {
+      "source": "reasoning_init_py",
       "target": "reasoning_quantum_py",
       "kind": "imports",
       "note": "reasoning.quantum"
+    },
+    {
+      "source": "reasoning_init_py",
+      "target": "reasoning_visualizer_py",
+      "kind": "imports",
+      "note": "reasoning.visualizer"
+    },
+    {
+      "source": "reasoning_visualizer_py",
+      "target": "reasoning_engines_py",
+      "kind": "imports",
+      "note": "reasoning.engines"
     },
     {
       "source": "research_pipelines_run_research_batch_py",
@@ -5469,6 +5947,12 @@
       "note": "research.searchers"
     },
     {
+      "source": "tests_test_metacognitive_superhuman_py",
+      "target": "mci_metacognitive_evaluator_py",
+      "kind": "imports",
+      "note": "mci.metacognitive_evaluator"
+    },
+    {
       "source": "tests_test_mira_catalog_py",
       "target": "marceloclaro_catalog_loader_py",
       "kind": "imports",
@@ -5497,6 +5981,36 @@
       "target": "publishing_init_py",
       "kind": "imports",
       "note": "publishing"
+    },
+    {
+      "source": "tests_test_reasoning_evolution_py",
+      "target": "reasoning_cache_py",
+      "kind": "imports",
+      "note": "reasoning.cache"
+    },
+    {
+      "source": "tests_test_reasoning_evolution_py",
+      "target": "reasoning_evaluator_py",
+      "kind": "imports",
+      "note": "reasoning.evaluator"
+    },
+    {
+      "source": "tests_test_reasoning_evolution_py",
+      "target": "reasoning_init_py",
+      "kind": "imports",
+      "note": "reasoning"
+    },
+    {
+      "source": "tests_test_reasoning_evolution_py",
+      "target": "reasoning_parallel_py",
+      "kind": "imports",
+      "note": "reasoning.parallel"
+    },
+    {
+      "source": "tests_test_reasoning_evolution_py",
+      "target": "reasoning_visualizer_py",
+      "kind": "imports",
+      "note": "reasoning.visualizer"
     },
     {
       "source": "tests_test_research_py",
@@ -5545,6 +6059,24 @@
       "target": "marceloclaro_orchestrator_py",
       "kind": "imports",
       "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_scientific_rag_superhuman_py",
+      "target": "benchmarks_scientific_reasoning_runner_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.runner"
+    },
+    {
+      "source": "tests_test_scientific_rag_superhuman_py",
+      "target": "benchmarks_scientific_reasoning_superhuman_suite_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.superhuman_suite"
+    },
+    {
+      "source": "tests_test_scientific_rag_superhuman_py",
+      "target": "rag_init_py",
+      "kind": "imports",
+      "note": "rag"
     },
     {
       "source": "tests_test_scientific_superhuman_py",

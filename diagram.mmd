@@ -29,7 +29,10 @@ graph TD
         Eco[Token Economy<br>Staking/Slashing]
         Scan[Scanners<br>Diagnóstico]
         Acad[MASWOS<br>Qualis A1]
-        Reason[Reasoning<br>Quantum]
+        Reason[Reasoning<br>12 Engines + Quantum]
+        RAG[Scientific RAG<br>Grounding + Citations]
+        Bench[Superhuman Readiness<br>Benchmarks]
+        MetaEval[Metacognitive Eval<br>SPEC-920]
     end
 
     %% Camada MCI
@@ -54,6 +57,11 @@ graph TD
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
+    Acad -->|Consulta evidências| RAG
+    Reason -->|Grounding científico| RAG
+    RAG -->|Métricas| Bench
+    MB -->|Traços e reflexões| MetaEval
+    Trust -->|Outcomes e confiança| MetaEval
     
     %% Agentes
     subgraph Agents [Catálogo de Agentes]
