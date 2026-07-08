@@ -401,6 +401,8 @@ graph TD
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
         RAG[Scientific RAG<br>Grounding + Citations]
+        Bench[Superhuman Readiness<br>Benchmarks]
+        MetaEval[Metacognitive Eval<br>SPEC-920]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         Publishing[Publishing<br>LaTeX & Cover Designer]
         Research[Research<br>Hub c/ OSINT]
@@ -440,10 +442,15 @@ graph TD
     Attn --> |Publica Volunteer| BB
     Orchestrator --> |4. Executa TDD| Pipe
     Pipe --> |Verifica| Ver
-    Orchestrator <--> |Usa| Core
+    Orchestrator <-->|Usa| Core
+    Acad -->|Consulta evidências| RAG
+    Reason -->|Grounding científico| RAG
+    RAG -->|Métricas| Bench
+    MB -->|Traços e reflexões| MetaEval
+    Trust -->|Outcomes e confiança| MetaEval
     SCI --> RAG
-    Orchestrator --> |5. Pipeline Científico| OQS
-    EGS --> |Reflete Resultado| MB
+    Orchestrator -->|5. Pipeline Científico| OQS
+    EGS -->|Reflete Resultado| MB
     
     %% Agentes
     subgraph Agents [Catálogo de Agentes]
@@ -458,6 +465,10 @@ graph TD
     BB -.->|Call for Proposals| Agents
     Agents -->|Voluntaria-se| BB
     Agents -->|Conclui Tarefa| Ref
+    
+    %% MCP
+    MCP[MCP Server] -->|Expõe API| MCI
+    External[External Tools / LLMs] -->|JSON-RPC| MCP
 ```
 
 ### Detalhamento Técnico das Camadas
@@ -473,6 +484,7 @@ A nova camada que eleva o ecossistema ao padrão de raciocínio científico.
 - **EGS (Ethical Governance Scanner):** Integrado ao TDD. Roda *stress tests* éticos nas saídas, calcula *alignment score* e aplica **hard-block** irreversível em casos de violação de dignidade humana, discriminação ou ausência de supervisão em domínio crítico.
 - **Scientific RAG (SPEC-919):** Indexa evidências científicas com metadados, recupera chunks citáveis, aplica reranking científico e abstém quando não há grounding suficiente.
 - **Superhuman Readiness Suite (SPEC-918):** Consolida benchmarks, grounding, robustez, calibração e reprodutibilidade em um `readiness_score` conservador. `superhuman_verified` requer validação externa.
+- **Metacognitive Eval (SPEC-920):** Avalia o nível metacognitivo do agente em tempo real (Emergente, Analítico, Reflexivo, Superhuman) a partir de traços de execução e reflexões do MetaBus. Política anti-overclaim: o escalonamento de *tier* é conservador e exige evidência replicada em múltiplos ciclos.
 
 #### 3. Transformer Layer
 Inspirada na arquitetura de Vaswani (2017) e nos modelos da DeepMind.
