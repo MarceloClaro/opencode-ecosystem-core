@@ -17,6 +17,7 @@ from synthetic_university.faculties import (
     STATISTICS_DS,
     PROGRAMMING,
     INTERDISCIPLINARY,
+    HEALTH_SCIENCES,
     ALL_FACULTIES,
     FACULTY_MAP,
     get_faculty,
@@ -63,8 +64,8 @@ __all__ = [
     # Faculdades
     "Faculdade", "HUMAN_SCIENCES", "SOCIAL_SCIENCES", "ENGINEERING",
     "LITERARY_LINGUISTIC", "HISTORICAL", "QUANTUM", "EXACT_SCIENCES",
-    "STATISTICS_DS", "PROGRAMMING", "INTERDISCIPLINARY", "ALL_FACULTIES",
-    "FACULTY_MAP", "get_faculty", "list_all_concepts",
+    "STATISTICS_DS", "PROGRAMMING", "INTERDISCIPLINARY", "HEALTH_SCIENCES",
+    "ALL_FACULTIES", "FACULTY_MAP", "get_faculty", "list_all_concepts",
     # Core
     "SyntheticUniversity",
     # Engine

@@ -7,6 +7,7 @@ from synthetic_university.faculties import (
     ALL_FACULTIES, FACULTY_MAP, HUMAN_SCIENCES, SOCIAL_SCIENCES,
     ENGINEERING, LITERARY_LINGUISTIC, HISTORICAL, QUANTUM,
     EXACT_SCIENCES, STATISTICS_DS, PROGRAMMING, INTERDISCIPLINARY,
+    HEALTH_SCIENCES,
     get_faculty, list_all_concepts, count_total_concepts,
 )
 from synthetic_university.combinatorial_engine import (
@@ -33,9 +34,9 @@ from synthetic_university.core import SyntheticUniversity
 class TestFaculdades:
     """Testes para as 10 faculdades da universidade sintética."""
 
-    def test_dez_faculdades_existem(self):
-        """CA1: 10 faculdades definidas."""
-        assert len(ALL_FACULTIES) == 10
+    def test_onze_faculdades_existem(self):
+        """CA1: 11 faculdades definidas."""
+        assert len(ALL_FACULTIES) == 11
 
     def test_todas_faculdades_tem_id_unico(self):
         """CA1: IDs únicas e consistentes."""
@@ -46,7 +47,7 @@ class TestFaculdades:
             "human_sciences", "social_sciences", "engineering",
             "literary_linguistic", "historical", "quantum",
             "exact_sciences", "statistics_ds", "programming",
-            "interdisciplinary",
+            "interdisciplinary", "health_sciences",
         ]
         for eid in expected_ids:
             assert eid in ids, f"Faculdade {eid} não encontrada"
@@ -111,7 +112,7 @@ class TestCombinatorialEngine:
 
     def test_engine_cria(self, engine):
         """CA2: Engine é criado com as faculdades."""
-        assert len(engine.faculty_map) == 10
+        assert len(engine.faculty_map) == 11
 
     def test_embedding_similarity(self):
         """CA2: Similaridade entre conceitos."""
@@ -360,14 +361,14 @@ class TestKnowledgeGraph:
         """CA5: Consulta por tipo."""
         kg.build_from_faculties(ALL_FACULTIES)
         faculties = kg.query_by_type("faculty")
-        assert len(faculties) == 10
+        assert len(faculties) == 11
 
     def test_graph_statistics(self, kg):
         """CA5: Estatísticas do grafo."""
         kg.build_from_faculties(ALL_FACULTIES)
         stats = kg.get_statistics()
         assert stats["total_nodes"] > 0
-        assert stats["faculties"] == 10
+        assert stats["faculties"] == 11
 
     def test_serialization(self, kg):
         """CA5: Serialização para dict."""
@@ -447,8 +448,8 @@ class TestSyntheticUniversity:
 
     def test_university_cria(self, university):
         """CA6: Universidade é criada com faculdades e professores."""
-        assert len(university.faculties) == 10
-        assert len(university.professors) >= 30
+        assert len(university.faculties) == 11
+        assert len(university.professors) >= 38
 
     def test_university_full_cycle_light(self, university):
         """CA6: Ciclo completo leve (100 combinações)."""
@@ -470,8 +471,8 @@ class TestSyntheticUniversity:
     def test_university_summary(self, university):
         """CA6: Resumo da universidade."""
         summary = university.get_summary()
-        assert summary["faculties"] == 10
-        assert summary["professors"] >= 30
+        assert summary["faculties"] == 11
+        assert summary["professors"] >= 38
         assert "total_combinations_tested" in summary
 
     def test_university_events(self, university):
@@ -536,3 +537,77 @@ class TestEcosystemIntegration:
         assert facs_with_profs == expected, (
             f"Faculdades sem professores: {expected - facs_with_profs}"
         )
+
+    def test_health_sciences_exists(self):
+        """Ciências da Saúde é a 11ª faculdade."""
+        hs = HEALTH_SCIENCES
+        assert hs.id == "health_sciences"
+        assert len(hs.conceitos) >= 100
+        assert "medicina" in hs.descricao.lower()
+        assert "psiquiatria" in hs.descricao.lower()
+        assert "farmacologia" in hs.descricao.lower()
+
+    def test_health_sciences_tem_medicina_psiquiatria_farmacologia(self):
+        """Saúde: conceitos-chave de medicina, psiquiatria e farmacologia."""
+        conc_text = ' '.join(c.lower() for c in HEALTH_SCIENCES.conceitos)
+        assert "medicina" in conc_text or "clínica" in conc_text
+        assert "psiquiatria" in conc_text or "saúde mental" in conc_text
+        assert "farmacologia" in conc_text or "fármaco" in conc_text
+        assert "farmacocinética" in conc_text
+        assert "enfermagem" in conc_text
+
+    def test_exact_sciences_tem_quimica_fisica(self):
+        """Exatas incluem conceitos de Química-Física/Físico-Química."""
+        conc = set(c.lower() for c in EXACT_SCIENCES.conceitos)
+        terms = ['físico-química', 'química-física', 'cinética química',
+                 'eletroquímica', 'termodinâmica química', 'química quântica',
+                 'espectroscopia', 'fotoquímica']
+        found = [t for t in terms if t in conc]
+        assert len(found) >= 3, f"Poucos conceitos de química-física: {found}"
+
+    def test_literary_linguistic_tem_literatura_universal(self):
+        """Letras inclui Literatura Universal e autores clássicos."""
+        conc = set(c.lower() for c in LITERARY_LINGUISTIC.conceitos)
+        assert 'literatura universal' in conc
+        assert 'shakespeare' in conc or 'hamlet' in conc or 'romeu e julieta' in conc
+        assert 'dante' in conc or 'divina comédia' in conc
+        assert 'cervantes' in conc or 'dom quixote' in conc
+        assert 'machado de assis' in conc or 'dom casmurro' in conc
+        assert 'guimarães rosa' in conc or 'grande sertão' in conc
+        assert 'kafka' in conc or 'a metamorfose' in conc
+
+    def test_human_sciences_tem_comportamento_manipulacao(self):
+        """Humanas inclui comportamento humano e manipulação sensorial/psicológica."""
+        conc = set(c.lower() for c in HUMAN_SCIENCES.conceitos)
+        assert 'comportamento humano' in conc
+        assert 'manipulação psicológica' in conc or 'manipulação emocional' in conc
+        assert 'persuasão' in conc or 'propaganda' in conc
+        assert 'neuromarketing' in conc or 'economia comportamental' in conc
+        assert 'vieses cognitivos' in conc or 'viés de confirmação' in conc
+
+    def test_human_sciences_tem_psicologia_ampliada(self):
+        """Humanas inclui psicologia expandida com psicopatologia e psicoterapia."""
+        conc = set(c.lower() for c in HUMAN_SCIENCES.conceitos)
+        assert 'psicologia clínica' in conc or 'psicologia' in conc
+        assert 'psicoterapia' in conc or 'terapia cognitivo-comportamental' in conc
+        assert 'psicopatologia' in conc
+        assert 'personalidade' in conc or 'big five' in conc
+        assert 'neuropsicologia' in conc or 'neurociência cognitiva' in conc
+
+    def test_human_sciences_tem_pedagogia(self):
+        """Humanas inclui Pedagogia expandida com teorias educacionais."""
+        conc = set(c.lower() for c in HUMAN_SCIENCES.conceitos)
+        assert 'pedagogia' in conc
+        assert 'construtivismo piagetiano' in conc or 'piaget' in conc
+        assert 'sócio-construtivismo vygotskyano' in conc or 'vygotsky' in conc
+        assert 'pedagogia freireana' in conc or 'freire' in conc
+        assert 'metodologias ativas' in conc or 'sala de aula invertida' in conc
+
+    def test_health_sciences_curriculum(self):
+        """Currículo inclui disciplinas de saúde."""
+        curr = create_base_curriculum()
+        health_discs = [d for d in curr.get_disciplines() if d.faculty == 'health_sciences']
+        assert len(health_discs) >= 4
+        names = [d.name for d in health_discs]
+        assert any('Psiquiatria' in n or 'Farmacologia' in n or 'Anatomia' in n or 'Epidemiologia' in n 
+                   or 'Bioética' in n for n in names)
