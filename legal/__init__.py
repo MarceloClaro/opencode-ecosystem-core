@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Pacote legal — Módulo de Raciocínio Jurídico Brasileiro (SPEC-921)
-====================================================================
+Pacote legal — Módulo de Raciocínio Jurídico Brasileiro (SPEC-921/922)
+========================================================================
 Implementa os principais métodos de argumentação e decisão jurídica
 do sistema jurídico brasileiro.
 
@@ -11,6 +11,8 @@ Componentes:
   - PrecedentAnalyzer: análise de precedentes vinculantes (CPC/2015)
   - ConstitutionalInterpretation: métodos de interpretação constitucional
   - LegalArgumentScorer: scoring de argumentos jurídicos
+  - DatajudClient: cliente para API pública Datajud do CNJ (SPEC-922)
+  - LegalDatajudIntegration: ponte Datajud → motores de raciocínio
 """
 
 from legal.syllogism import (
@@ -47,6 +49,17 @@ from legal.argumentation import (
     ArgumentScoreResult,
     ScoreDetail,
 )
+from legal.datajud_client import (
+    DatajudClient,
+    DatajudProcess,
+    TRIBUNAIS,
+)
+from legal.integration import (
+    LegalDatajudIntegration,
+    process_to_precedent,
+    process_to_legal_fact,
+    process_to_legal_argument,
+)
 
 __all__ = [
     # Syllogism
@@ -62,6 +75,11 @@ __all__ = [
     "InterpretationMethod",
     # Argumentation
     "LegalArgumentScorer", "LegalArgument", "ArgumentScoreResult", "ScoreDetail",
+    # Datajud
+    "DatajudClient", "DatajudProcess", "TRIBUNAIS",
+    # Integration
+    "LegalDatajudIntegration",
+    "process_to_precedent", "process_to_legal_fact", "process_to_legal_argument",
 ]
 
 __version__ = "1.0.0"
