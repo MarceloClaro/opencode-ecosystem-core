@@ -1,4 +1,68 @@
-# Release Notes: OpenCode Ecosystem Core v1.0.0
+# Release Notes: OpenCode Ecosystem Core
+
+## v2.1.0 — Scientific RAG + SuperHuman Readiness
+
+Esta versão eleva o núcleo científico do ecossistema com **RAG científico auditável** e uma régua conservadora de **readiness superhuman**. O objetivo é medir progresso rumo a raciocínio científico superhuman sem claims exagerados: `superhuman_verified` só é permitido com validação externa explícita.
+
+### Destaques
+
+1. **Scientific RAG (`rag/`)**
+   - Indexação de documentos científicos com metadados.
+   - Chunking citável e recuperação top-k.
+   - Busca híbrida lexical + semantic-lite.
+   - Reranking científico com bônus para método, evidência direta e metadados.
+   - Citações auditáveis no formato `Autor (Ano), doc_id#chunk`.
+   - Abstenção quando não há evidência suficiente.
+
+2. **Grounding Evaluator**
+   - Métricas `groundedness`, `citation_coverage`, `evidence_count` e `abstention`.
+   - Política epistêmica: é melhor não responder do que inventar evidência.
+
+3. **Scientific Superhuman Benchmark Suite**
+   - Novo `readiness_score` (0–100).
+   - Tiers: `base`, `research_grade`, `superhuman_candidate`, `superhuman_verified`.
+   - `superhuman_verified` requer `external_validation=True`.
+   - Integra benchmarks científicos, RAG, robustez, calibração e reprodutibilidade.
+
+4. **Benchmarks mais rigorosos**
+   - Os 5 benchmarks científicos existentes agora avaliam `pipeline_fn` quando fornecido.
+   - Pipelines que respondem errado não passam automaticamente.
+
+### Validação
+
+```bash
+pytest tests/test_scientific_rag_superhuman.py -q
+# 8 passed
+
+pytest tests -q
+# 255 passed, 2 skipped, 1 warning
+```
+
+### Como usar
+
+```python
+from rag import ScientificDocument, ScientificRAG
+from benchmarks.scientific_reasoning import run_superhuman_suite
+
+rag = ScientificRAG(min_score=0.05)
+rag.index([
+    ScientificDocument(
+        doc_id="pearl-2009",
+        title="Causality",
+        authors=["Pearl"],
+        year=2009,
+        source="book",
+        text="Correlação não implica causalidade; inferência causal exige modelo estrutural.",
+    )
+])
+
+print(rag.answer("como distinguir correlação de causalidade?"))
+print(run_superhuman_suite(rag=rag, external_validation=False)["tier"])
+```
+
+---
+
+## v1.0.0
 
 É com imenso orgulho que anunciamos a versão **1.0.0** do **OpenCode Ecosystem Core**, o núcleo metacognitivo para orquestração de 134 agentes especializados com foco em produção científica de alto rigor (Qualis A1) e diagnóstico profundo de sistemas complexos.
 

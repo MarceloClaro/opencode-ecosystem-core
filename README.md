@@ -6,10 +6,10 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-2.0.0_SuperHuman-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-201_passed-success.svg)](tests/)
+[![Versão](https://img.shields.io/badge/Versão-2.1.0_Scientific_RAG-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-255_passed-success.svg)](tests/)
 
-*Uma arquitetura cognitiva completa que une 134 agentes especializados, Pipeline Científico SuperHuman com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
+*Uma arquitetura cognitiva completa que une 134 agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, 12 motores de raciocínio, Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
 
 ---
 
@@ -42,8 +42,9 @@ O OpenCode Ecosystem Core é uma implementação *state-of-the-art* de sistemas 
 - **Roteamento por Atenção:** Não usamos *if/else* para delegar tarefas. Usamos *Multi-Head Attention* para calcular scores de semântica, capacidade e confiança (Trust Ledger) de 134 agentes.
 - **MiroFish & Game Theory:** Agentes debatem soluções usando estratégias iteradas (Tit-for-Tat, Nash Equilibrium) e constroem Grafos de Conhecimento lógicos.
 - **Pipeline Científico (MASWOS):** Automação completa de revisão sistemática de literatura. Baixa PDFs (Sci-Hub/OpenAlex), converte para Markdown, extrai figuras reais, gera fichamentos (ABNT/APA) e compila o manuscrito em LaTeX (com PDF, DOCX e ODT para Amazon KDP).
-- **🆕 Scientific Governance Pipeline (v2.0.0 — SuperHuman Upgrade):** Fluxo científico com governança ética e **EvidenceGraph** (memória epistemológica persistente): `OQS → MCI Scientific Core → VSEE → EGS → EvidenceGraph`. O sistema formula hipóteses falsificáveis (com prior Bayesiano e SESOI), projeta experimentos com power analysis, valida resultados com testes paramétricos + não paramétricos + Bayes Factor, executa revisão adversarial (p-hacking + confounders), calibra confiança (Brier/ECE) e impõe conformidade ética antes de qualquer saída.
-- **📊 ScientificBenchmark Suite:** 5 benchmarks internos para avaliar capacidade de raciocínio científico: inferência causal, desenho experimental, power analysis, interpretação estatística e detecção de viés. Supera o SuperHuman (Google DeepMind) que só testa matemática (IMO Bench).
+- **🆕 Scientific Governance Pipeline (v2.1.0 — Scientific RAG Upgrade):** Fluxo científico com governança ética e **EvidenceGraph** (memória epistemológica persistente): `OQS → MCI Scientific Core → VSEE → EGS → EvidenceGraph`. O sistema formula hipóteses falsificáveis (com prior Bayesiano e SESOI), projeta experimentos com power analysis, valida resultados com testes paramétricos + não paramétricos + Bayes Factor, executa revisão adversarial (p-hacking + confounders), calibra confiança (Brier/ECE) e impõe conformidade ética antes de qualquer saída.
+- **📚 Scientific RAG (SPEC-919):** RAG científico determinístico com chunking citável, busca híbrida lexical + semantic-lite, reranking científico, citações auditáveis (`Autor (Ano), doc_id#chunk`) e abstenção quando não há evidência suficiente.
+- **📊 ScientificBenchmark + Superhuman Readiness (SPEC-918):** 5 benchmarks internos para inferência causal, desenho experimental, power analysis, interpretação estatística e detecção de viés, agora com avaliação real de `pipeline_fn` quando fornecido e uma suíte conservadora de readiness (`base` → `research_grade` → `superhuman_candidate` → `superhuman_verified`). O tier `superhuman_verified` exige validação externa explícita.
 - **🧠 EvidenceGraph (epistemológico):** Memória persistente que rastreia claims científicos ao longo do tempo, acumula evidências a favor/contra, calcula confiança consolidada, detecta contradições entre claims e registra tentativas de replicação. Diferencial absoluto vs. concorrentes.
 - **Metacognição Profunda:** O sistema possui 5 Scanners de diagnóstico (incluindo Engenharia Reversa de código legado) e um Gerador de Sucessores que prevê o próximo salto tecnológico do seu projeto.
 
@@ -74,11 +75,11 @@ O ecossistema é dividido em **5 grandes camadas interconectadas**:
 4. **Módulos Avançados:** Token Economy (Staking/Slashing), Trust Engine (Behavioral Gates), SDD/TDD e Diagnóstico Profundo.
 5. **Catálogo de Agentes:** 134 agentes especializados em domínios que vão desde Física Quântica até Design de Capas.
 
-### 🆕 SuperHuman Upgrade (v2.0.0)
+### 🆕 Scientific RAG + SuperHuman Readiness (v2.1.0)
 
-O OpenCode Ecosystem Core **v2.0.0** implementa capacidades que superam o **SuperHuman (Google DeepMind)** — o time de raciocínio matemático liderado por Thang Luong (AlphaGeometry, Aletheia).
+O OpenCode Ecosystem Core **v2.1.0** implementa uma rota **superhuman-candidate** para ciência automatizada: além de raciocínio formal e governança científica, agora mede grounding via RAG, avalia pipelines reais quando fornecidos e impede claims exagerados. O tier **superhuman_verified** só é emitido com `external_validation=True`.
 
-| Capacidade | SuperHuman (DeepMind) | OpenCode v2.0.0 |
+| Capacidade | SuperHuman (DeepMind) | OpenCode v2.1.0 |
 |---|---|---|
 | **Raciocínio matemático formal** | ✅ AlphaGeometry / Aletheia | ✅ MASWOS + Reasoning Engines |
 | **Método científico completo** | ❌ Só matemática | ✅ Hipótese → Experimento → Estatística → Refutação |
@@ -86,7 +87,9 @@ O OpenCode Ecosystem Core **v2.0.0** implementa capacidades que superam o **Supe
 | **Calibração de confiança** | ❌ | ✅ Brier Score + ECE + abstention |
 | **Refutação adversarial** | ❌ Apenas verificação | ✅ p-hacking simulation, confounders, premissas |
 | **Governança ética** | ❌ | ✅ EGS (Ethical Governance Scanner) |
-| **Benchmark científico** | ❌ Só IMO Bench | ✅ **NOVO** — 5 benchmarks (causal, design, stats, power, bias) |
+| **Benchmark científico** | ❌ Só IMO Bench | ✅ 5 benchmarks + `pipeline_fn` real + readiness superhuman |
+| **Scientific RAG com grounding** | ❌ | ✅ **NOVO** — citações auditáveis, reranking científico e abstenção |
+| **Política anti-claim exagerado** | ❌ | ✅ `superhuman_verified` requer validação externa explícita |
 | **Power analysis** | ❌ | ✅ Cálculo de tamanho amostral + poder pós-hoc |
 | **Bayes Factor** | ❌ | ✅ Calibração Sellke, Bayarri & Berger (2001) |
 | **Reprodutibilidade auditável** | ❌ | ✅ Checklist Nature-style + replay determinístico |
@@ -166,11 +169,11 @@ print(manifest["folder"])   # pasta única de produção científica
 
 ---
 
-## 🧬 Scientific Governance Pipeline v2.0.0 — SuperHuman Upgrade
+## 🧬 Scientific Governance Pipeline v2.1.0 — Scientific RAG Upgrade
 
-O pipeline científico com governança é a evolução mais significativa do ecossistema. Transforma o orquestrador de um simples executor de tarefas em um **sistema de raciocínio científico auditável que supera o SuperHuman (Google DeepMind)**, capaz de formular hipóteses falsificáveis, projetar experimentos com power analysis, validar evidências com Bayes Factor, executar refutação adversarial, calibrar confiança (Brier/ECE) e bloquear decisões antiéticas de forma automatizada.
+O pipeline científico com governança é a evolução mais significativa do ecossistema. Transforma o orquestrador de um simples executor de tarefas em um **sistema de raciocínio científico auditável e superhuman-candidate**, capaz de formular hipóteses falsificáveis, projetar experimentos com power analysis, validar evidências com Bayes Factor, executar refutação adversarial, calibrar confiança (Brier/ECE), recuperar evidências via Scientific RAG e bloquear decisões antiéticas de forma automatizada.
 
-### 🆕 Diferenciais do v2.0.0
+### 🆕 Diferenciais do v2.1.0
 
 | Módulo | Upgrade | Impacto |
 |---|---|---|
@@ -181,7 +184,9 @@ O pipeline científico com governança é a evolução mais significativa do eco
 | **AdversarialReviewer** | p-hacking simulation, detecção de confounders, verificação de premissas | Auto-refutação ativa (Popperiano) |
 | **ConfidenceCalibrator** | Brier Score, ECE, abstention | Confiança calibrada e possibilidade de abstenção |
 | **ScientificReporter** | LaTeX Qualis A1, checklist Nature-style | Relatórios publicáveis |
-| **ScientificBenchmark** | **NOVO** — 5 benchmarks internos | Avaliação contínua de maturidade científica |
+| **ScientificBenchmark** | 5 benchmarks internos + avaliação real de `pipeline_fn` | Avaliação contínua de maturidade científica |
+| **Scientific RAG** | **NOVO** — grounding, citações, reranking e abstenção | Respostas ancoradas em evidências recuperáveis |
+| **Superhuman Suite** | **NOVO** — readiness_score + tiers conservadores | Evita claim “superhuman verified” sem validação externa |
 
 ### Fluxo Completo
 
@@ -277,17 +282,49 @@ print(f"Total claims: {stats['total_claims']}")
 print(f"Taxa de reprodutibilidade: {stats['overall_reproducibility']}")
 ```
 
-### ScientificBenchmark — Benchmark Interno
+### Scientific RAG — Grounding com Citações (SPEC-919)
+
+```python
+from rag import ScientificDocument, ScientificRAG
+
+docs = [
+    ScientificDocument(
+        doc_id="pearl-2009",
+        title="Causality",
+        authors=["Pearl"],
+        year=2009,
+        source="book",
+        text="Correlação não implica causalidade; inferência causal exige modelo estrutural...",
+    )
+]
+
+rag = ScientificRAG(min_score=0.05)
+rag.index(docs)
+
+answer = rag.answer("como distinguir correlação de causalidade?", top_k=2)
+print(answer["abstained"])          # False quando há evidência suficiente
+print(answer["groundedness"])       # score 0.0–1.0
+print(answer["evidence"][0]["citation"])  # Pearl (2009), pearl-2009#1
+```
+
+### ScientificBenchmark + Superhuman Readiness (SPEC-918)
 
 ```python
 from benchmarks.scientific_reasoning.runner import run_all_benchmarks
+from benchmarks.scientific_reasoning import run_superhuman_suite
 
 results = run_all_benchmarks(verbose=True)
 # Executa 5 benchmarks: causal, design, stats, power, bias
 
 print(f"Score geral: {results['overall_score']:.2%}")
 print(f"Tarefas: {results['total_passed']}/{results['total_tasks']}")
+
+readiness = run_superhuman_suite(rag=rag, external_validation=False)
+print(readiness["readiness_score"])  # 0–100
+print(readiness["tier"])             # base | research_grade | superhuman_candidate
 ```
+
+> **Política de claim:** `superhuman_verified` só pode ser retornado se `external_validation=True`; sem validação externa, mesmo score alto retorna no máximo `superhuman_candidate`.
 
 ### Schemas JSON de Contratos (validados via `jsonschema`)
 
@@ -347,7 +384,8 @@ graph TD
         Eco[Token Economy<br>Staking/Slashing]
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
         Acad[MASWOS<br>Qualis A1]
-        Reason[Reasoning<br>Quantum]
+        Reason[Reasoning<br>12 Engines + Quantum]
+        RAG[Scientific RAG<br>Grounding + Citations]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         Publishing[Publishing<br>LaTeX & Cover Designer]
         Research[Research<br>Hub c/ OSINT]
@@ -388,6 +426,7 @@ graph TD
     Orchestrator --> |4. Executa TDD| Pipe
     Pipe --> |Verifica| Ver
     Orchestrator <--> |Usa| Core
+    SCI --> RAG
     Orchestrator --> |5. Pipeline Científico| OQS
     EGS --> |Reflete Resultado| MB
     
@@ -411,12 +450,14 @@ graph TD
 #### 1. Metacognitive Interconnect (MCI)
 A espinha dorsal do ecossistema. Baseada na **Global Workspace Theory**, o `MetaBus` atua como um quadro negro onde todos os agentes publicam e leem eventos. O protocolo **A2A (Agent-to-Agent)** permite que agentes descubram as capacidades uns dos outros dinamicamente, sem *hardcoding*. O *Reflexion Middleware* garante que toda tarefa concluída gere uma lição aprendida e atualize o `confidence_ledger` global.
 
-#### 🆕 2. Scientific Governance Pipeline (v1.0.2)
+#### 🆕 2. Scientific Governance Pipeline (v2.1.0)
 A nova camada que eleva o ecossistema ao padrão de raciocínio científico.
 - **OQS (Optimal Question Scanner):** Mapeia lacunas conceituais, gera candidatos de perguntas e ranqueia pelo Convergence Score ($CS = URS + SVS - DRI - CCI$) para seleção determinística da pergunta que mais reduz incerteza.
 - **MCI Scientific Core:** Motor completo de método científico: `HypothesisEngine → ExperimentDesigner → StatisticalValidator → AdversarialReviewer → ConfidenceCalibrator → ScientificReporter`. Cada ciclo termina em um laudo LaTeX auditável.
 - **VSEE (Vector Shortcut Execution Engine):** Detecta atalhos vetoriais validados e os executa quando todos os *policy gates* passam (risco, fidelidade, ganho). Fallback automático para execução original. Telemetria: EG, TRR, RI, EFS.
 - **EGS (Ethical Governance Scanner):** Integrado ao TDD. Roda *stress tests* éticos nas saídas, calcula *alignment score* e aplica **hard-block** irreversível em casos de violação de dignidade humana, discriminação ou ausência de supervisão em domínio crítico.
+- **Scientific RAG (SPEC-919):** Indexa evidências científicas com metadados, recupera chunks citáveis, aplica reranking científico e abstém quando não há grounding suficiente.
+- **Superhuman Readiness Suite (SPEC-918):** Consolida benchmarks, grounding, robustez, calibração e reprodutibilidade em um `readiness_score` conservador. `superhuman_verified` requer validação externa.
 
 #### 3. Transformer Layer
 Inspirada na arquitetura de Vaswani (2017) e nos modelos da DeepMind.
@@ -475,8 +516,9 @@ opencode-ecosystem-core/
 │   ├── blackboard.py      # Protocolo A2A (Agent Cards)
 │   ├── metabus.py         # Global Workspace (pub/sub + persistência)
 │   └── reflexion.py       # Reflexion middleware
-├── benchmarks/            # 🆕 V2.0 Benchmarks Científicos
-│   └── scientific_reasoning/  # 5 benchmarks (causal, design, stats, power, bias)
+├── benchmarks/            # Benchmarks Científicos + readiness superhuman
+│   └── scientific_reasoning/  # 5 benchmarks + superhuman_suite.py
+├── rag/                   # 🆕 Scientific RAG: grounding, citações, abstenção
 ├── schemas/               # Schemas JSON de contratos científicos
 ├── transformer/           # AttentionRouter, TransformerPipeline, HTM
 ├── agents/                # 134 agentes especializados (Agent Cards)
@@ -492,9 +534,9 @@ opencode-ecosystem-core/
 ├── illustrations/         # Mermaid, MIRA, Graphify
 ├── gametheory/            # 38 estratégias + Nash, Shapley, Tit-for-Tat
 ├── mirofish/              # CrossValidator Swarm + GraphMemory
-├── reasoning/             # Z3, SymPy, Kanren, Critical + Quantum
+├── reasoning/             # 12 motores: Z3, SymPy, Kanren, Bayesian, Causal, Quantum...
 ├── webapp/                # Interface Streamlit (6 abas)
-├── tests/                 # 152 testes automatizados (100% passando)
+├── tests/                 # 255 testes automatizados (suíte operacional verde)
 └── CHANGELOG.md
 ```
 
@@ -503,7 +545,7 @@ opencode-ecosystem-core/
 ## 🧪 Executar os Testes
 
 ```bash
-# Todos os 201+ testes do ecossistema
+# Todos os 255+ testes do ecossistema
 python3 -m pytest tests/ -v
 
 # Apenas o pipeline científico (v2.0 SuperHuman)
@@ -514,10 +556,13 @@ python3 -m pytest tests/test_scientific_governance_pipeline.py -v
 
 # Apenas o runner de lote
 python3 -m pytest tests/test_run_research_batch.py -v
+
+# Apenas Scientific RAG + Superhuman Readiness
+python3 -m pytest tests/test_scientific_rag_superhuman.py -v
 ```
 
 ---
 <div align="center">
   <i>Construído com rigor metodológico, inspirado pela Teoria dos Jogos e desenhado para o futuro.</i><br>
-  <b>v2.0.0 — SuperHuman Scientific Pipeline com EvidenceGraph | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
+  <b>v2.1.0 — Scientific RAG + SuperHuman Readiness com EvidenceGraph | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
 </div>

@@ -4,6 +4,28 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.1.0] - 2026-07-08
+
+### Adicionado
+- **Scientific RAG (SPEC-919)**:
+  - Novo pacote `rag/` com `ScientificDocument`, `ScientificRAG`, `RetrievedEvidence` e `GroundingEvaluator`.
+  - Recuperação híbrida lexical + semantic-lite, chunking citável, reranking científico e citações auditáveis (`Autor (Ano), doc_id#chunk`).
+  - Política epistêmica conservadora: abstenção automática quando não há evidência suficiente.
+- **Scientific Superhuman Benchmark Suite (SPEC-918)**:
+  - Novo `benchmarks/scientific_reasoning/superhuman_suite.py` com `readiness_score` (0–100) e tiers `base`, `research_grade`, `superhuman_candidate`, `superhuman_verified`.
+  - `superhuman_verified` exige `external_validation=True`, impedindo claim exagerado sem validação externa.
+- **Testes TDD**:
+  - Nova suíte `tests/test_scientific_rag_superhuman.py` cobrindo recuperação RAG, citações, abstenção, grounding e readiness superhuman.
+
+### Modificado
+- **Benchmarks científicos existentes** agora avaliam `pipeline_fn` quando fornecido; pipelines incorretos deixam de passar automaticamente.
+- **Documentação** atualizada em `README.md`, `ARCHITECTURE.md` e `RELEASE_NOTES.md` para refletir RAG científico, readiness conservador e 255 testes operacionais.
+- **EvolutionRegistry** atualizado com o ciclo `R55`.
+
+### Validação
+- `pytest tests/test_scientific_rag_superhuman.py -q` → 8 passed.
+- `pytest tests -q` → 255 passed, 2 skipped, 1 warning.
+
 ## [1.0.2] - 2026-07-05
 
 ### Adicionado
