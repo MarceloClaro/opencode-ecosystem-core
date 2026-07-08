@@ -1,7 +1,7 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **362**
-- Vetores: **556**
+- Nós: **371**
+- Vetores: **575**
 
 ## Taxonomia de Nós
 
@@ -12,22 +12,22 @@
 | benchmark | 8 |
 | diagram | 1 |
 | doc | 5 |
-| layer | 18 |
-| module | 105 |
+| layer | 19 |
+| module | 111 |
 | schema | 4 |
-| spec | 44 |
-| test | 24 |
+| spec | 45 |
+| test | 25 |
 
 ## Taxonomia de Vetores
 
 | kind | quantidade |
 |---|---:|
-| contains | 331 |
-| control_flow | 24 |
-| data_flow | 4 |
+| contains | 339 |
+| control_flow | 25 |
+| data_flow | 8 |
 | depends_on | 29 |
 | documents | 9 |
-| imports | 159 |
+| imports | 165 |
 
 ## Diagrama de Alto Nível
 
@@ -228,6 +228,7 @@ graph TD
 | layer_diagnostics | layer | diagnostics | analysis |
 | layer_docs | layer | docs | documentation |
 | layer_illustrations | layer | illustrations | visualization |
+| layer_legal | layer | legal | legal_reasoning |
 | layer_mci | layer | mci | memory |
 | layer_orchestration | layer | orchestration | control |
 | layer_publishing | layer | publishing | publishing |
@@ -255,6 +256,12 @@ graph TD
 | illustrations_graphify_engine_py | module | illustrations | illustrations/graphify_engine.py |
 | illustrations_mermaid_engine_py | module | illustrations | illustrations/mermaid_engine.py |
 | illustrations_mira_engine_py | module | illustrations | illustrations/mira_engine.py |
+| legal_init_py | module | legal | legal/__init__.py |
+| legal_argumentation_py | module | legal | legal/argumentation.py |
+| legal_balancing_py | module | legal | legal/balancing.py |
+| legal_constitutional_py | module | legal | legal/constitutional.py |
+| legal_precedents_py | module | legal | legal/precedents.py |
+| legal_syllogism_py | module | legal | legal/syllogism.py |
 | marceloclaro_init_py | module | orchestration | marceloclaro/__init__.py |
 | marceloclaro_agent_loader_py | module | orchestration | marceloclaro/agent_loader.py |
 | marceloclaro_catalog_loader_py | module | orchestration | marceloclaro/catalog_loader.py |
@@ -394,8 +401,10 @@ graph TD
 | specs_SPEC_918_scientific_superhuman_benchmark_suite_md | spec | specs | specs/SPEC-918-scientific-superhuman-benchmark-suite.md |
 | specs_SPEC_919_scientific_rag_grounding_md | spec | specs | specs/SPEC-919-scientific-rag-grounding.md |
 | specs_SPEC_920_metacognitive_superhuman_refinement_md | spec | specs | specs/SPEC-920-metacognitive-superhuman-refinement.md |
+| specs_SPEC_921_brazilian_legal_reasoning_md | spec | specs | specs/SPEC-921-brazilian-legal-reasoning.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
+| tests_test_brazilian_legal_reasoning_py | test | tests | tests/test_brazilian_legal_reasoning.py |
 | tests_test_cover_designer_py | test | tests | tests/test_cover_designer.py |
 | tests_test_deep_diagnose_py | test | tests | tests/test_deep_diagnose.py |
 | tests_test_ecosystem_py | test | tests | tests/test_ecosystem.py |
@@ -606,6 +615,12 @@ graph TD
 | layer_illustrations | illustrations_init_py | contains | illustrations contém illustrations/__init__.py |
 | layer_illustrations | illustrations_mermaid_engine_py | contains | illustrations contém illustrations/mermaid_engine.py |
 | layer_illustrations | illustrations_mira_engine_py | contains | illustrations contém illustrations/mira_engine.py |
+| layer_legal | legal_argumentation_py | contains | legal contém legal/argumentation.py |
+| layer_legal | legal_balancing_py | contains | legal contém legal/balancing.py |
+| layer_legal | legal_constitutional_py | contains | legal contém legal/constitutional.py |
+| layer_legal | legal_init_py | contains | legal contém legal/__init__.py |
+| layer_legal | legal_precedents_py | contains | legal contém legal/precedents.py |
+| layer_legal | legal_syllogism_py | contains | legal contém legal/syllogism.py |
 | layer_mci | mci_adversarial_reviewer_py | contains | mci contém mci/adversarial_reviewer.py |
 | layer_mci | mci_blackboard_py | contains | mci contém mci/blackboard.py |
 | layer_mci | mci_confidence_calibrator_py | contains | mci contém mci/confidence_calibrator.py |
@@ -721,8 +736,10 @@ graph TD
 | layer_specs | specs_SPEC_918_scientific_superhuman_benchmark_suite_md | contains | specs contém specs/SPEC-918-scientific-superhuman-benchmark-suite.md |
 | layer_specs | specs_SPEC_919_scientific_rag_grounding_md | contains | specs contém specs/SPEC-919-scientific-rag-grounding.md |
 | layer_specs | specs_SPEC_920_metacognitive_superhuman_refinement_md | contains | specs contém specs/SPEC-920-metacognitive-superhuman-refinement.md |
+| layer_specs | specs_SPEC_921_brazilian_legal_reasoning_md | contains | specs contém specs/SPEC-921-brazilian-legal-reasoning.md |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
+| layer_tests | tests_test_brazilian_legal_reasoning_py | contains | tests contém tests/test_brazilian_legal_reasoning.py |
 | layer_tests | tests_test_cover_designer_py | contains | tests contém tests/test_cover_designer.py |
 | layer_tests | tests_test_deep_diagnose_py | contains | tests contém tests/test_deep_diagnose.py |
 | layer_tests | tests_test_ecosystem_diagnose_py | contains | tests contém tests/test_ecosystem_diagnose.py |
@@ -758,6 +775,7 @@ graph TD
 | marceloclaro_orchestrator_py | academic_maswos_py | control_flow | pipeline acadêmico |
 | marceloclaro_orchestrator_py | economy_token_economy_py | control_flow | staking/slashing |
 | marceloclaro_orchestrator_py | illustrations_mira_engine_py | control_flow | ilustrações/metáforas |
+| marceloclaro_orchestrator_py | legal_init_py | control_flow | raciocínio jurídico brasileiro SPEC-921 |
 | marceloclaro_orchestrator_py | mci_blackboard_py | control_flow | delegação A2A via Blackboard |
 | marceloclaro_orchestrator_py | mci_metabus_py | control_flow | registra reflexões e eventos |
 | marceloclaro_orchestrator_py | mci_metacognitive_evaluator_py | control_flow | benchmark metacognitivo SPEC-920 |
@@ -778,6 +796,10 @@ graph TD
 | research_pipelines_run_research_batch_py | mci_oqs_init_py | control_flow | runner invoca OQS |
 | research_pipelines_run_research_batch_py | mci_orchestration_py | control_flow | runner invoca núcleo científico |
 | research_pipelines_run_research_batch_py | mci_vsee_router_py | control_flow | runner invoca VSEE |
+| legal_argumentation_py | legal_syllogism_py | data_flow | scoring valida consistência da subsunção |
+| legal_precedents_py | legal_syllogism_py | data_flow | ratio decidendi informa subsunção |
+| legal_syllogism_py | legal_balancing_py | data_flow | subsunção alimenta ponderação |
+| legal_syllogism_py | legal_constitutional_py | data_flow | controle de constitucionalidade via interpretação |
 | mci_metabus_py | mci_metacognitive_evaluator_py | data_flow | traços e reflexões para avaliação metacognitiva |
 | mci_orchestration_py | mci_evidence_graph_py | data_flow | persistência epistemológica |
 | rag_scientific_py | benchmarks_scientific_reasoning_superhuman_suite_py | data_flow | grounding alimenta readiness científico |
@@ -827,6 +849,11 @@ graph TD
 | benchmarks_scientific_reasoning_init_py | benchmarks_scientific_reasoning_superhuman_suite_py | imports | benchmarks.scientific_reasoning.superhuman_suite |
 | benchmarks_scientific_reasoning_superhuman_suite_py | benchmarks_scientific_reasoning_runner_py | imports | benchmarks.scientific_reasoning.runner |
 | economy_init_py | economy_token_economy_py | imports | economy.token_economy |
+| legal_init_py | legal_argumentation_py | imports | legal.argumentation |
+| legal_init_py | legal_balancing_py | imports | legal.balancing |
+| legal_init_py | legal_constitutional_py | imports | legal.constitutional |
+| legal_init_py | legal_precedents_py | imports | legal.precedents |
+| legal_init_py | legal_syllogism_py | imports | legal.syllogism |
 | marceloclaro_cli_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | marceloclaro_orchestrator_py | academic_init_py | imports | academic |
 | marceloclaro_orchestrator_py | economy_init_py | imports | economy |
@@ -903,6 +930,7 @@ graph TD
 | tests_test_advanced_subsystems_py | scanners_init_py | imports | scanners |
 | tests_test_advanced_subsystems_py | trust_init_py | imports | trust |
 | tests_test_analyze_research_batch_py | research_pipelines_analyze_research_batch_py | imports | research.pipelines.analyze_research_batch |
+| tests_test_brazilian_legal_reasoning_py | legal_init_py | imports | legal |
 | tests_test_cover_designer_py | publishing_cover_designer_py | imports | publishing.cover_designer |
 | tests_test_cover_designer_py | publishing_production_py | imports | publishing.production |
 | tests_test_deep_diagnose_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |

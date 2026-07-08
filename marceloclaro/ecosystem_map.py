@@ -49,6 +49,7 @@ DISCOVERY_RULES = [
     ("academic/**/*.py", "module", "academic"),
     ("reasoning/**/*.py", "module", "reasoning"),
     ("rag/**/*.py", "module", "rag"),
+    ("legal/**/*.py", "module", "legal"),
     ("research/**/*.py", "module", "research"),
     ("benchmarks/scientific_reasoning/**/*.py", "benchmark", "benchmarks"),
     ("illustrations/**/*.py", "module", "illustrations"),
@@ -79,6 +80,7 @@ LAYER_NODES = [
     Node("layer_diagnostics", "Diagnostics", "layer", logical_group="analysis", layer="diagnostics"),
     Node("layer_reasoning", "Reasoning", "layer", logical_group="formal_reasoning", layer="reasoning"),
     Node("layer_rag", "Scientific RAG", "layer", logical_group="grounding", layer="rag"),
+    Node("layer_legal", "Legal Reasoning", "layer", logical_group="legal_reasoning", layer="legal"),
     Node("layer_research", "Research", "layer", logical_group="research", layer="research"),
     Node("layer_benchmarks", "Benchmarks", "layer", logical_group="evaluation", layer="benchmarks"),
     Node("layer_illustrations", "Illustrations", "layer", logical_group="visualization", layer="illustrations"),
@@ -121,6 +123,12 @@ FLOW_EDGES = [
     ("research/pipelines/run_research_batch.py", "mci/egs/__init__.py", "control_flow", "runner invoca EGS"),
     ("research/pipelines/analyze_research_batch.py", "research/pipelines/run_research_batch.py", "data_flow", "análise do raw/summary do runner"),
     ("research/pipelines/analyze_research_batch.py", "research/results/reports/final_report_template.md", "data_flow", "preenche template final"),
+    # Legal reasoning module (SPEC-921)
+    ("marceloclaro/orchestrator.py", "legal/__init__.py", "control_flow", "raciocínio jurídico brasileiro SPEC-921"),
+    ("legal/syllogism.py", "legal/balancing.py", "data_flow", "subsunção alimenta ponderação"),
+    ("legal/syllogism.py", "legal/constitutional.py", "data_flow", "controle de constitucionalidade via interpretação"),
+    ("legal/precedents.py", "legal/syllogism.py", "data_flow", "ratio decidendi informa subsunção"),
+    ("legal/argumentation.py", "legal/syllogism.py", "data_flow", "scoring valida consistência da subsunção"),
 ]
 
 
@@ -244,6 +252,7 @@ def _module_path_to_target(module_path: str, node_by_path: Dict[str, str]) -> Op
             "publishing": "layer_publishing",
             "research": "layer_research",
             "rag": "layer_rag",
+            "legal": "layer_legal",
             "illustrations": "layer_illustrations",
             "schemas": "layer_schemas",
         }

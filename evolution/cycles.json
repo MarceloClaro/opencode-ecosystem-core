@@ -208,6 +208,30 @@
         "Todo ciclo amplo deve restaurar artefatos rastreados que testes possam remover antes de qualquer commit"
       ],
       "timestamp": 1783489016.416159
+    },
+    {
+      "round_id": "R57",
+      "objective": "SPEC-921: Módulo de Raciocínio Jurídico Brasileiro (subsunção, ponderação, precedentes, interpretação constitucional, scoring)",
+      "changes": [
+        "Criada SPEC-921 para Brazilian Legal Reasoning Module",
+        "Criado legal/syllogism.py — LegalSyllogism: subsunção fato-norma com hierarquia, antinomia, competência federativa e controle de constitucionalidade",
+        "Criado legal/balancing.py — PrincipleBalancing: fórmula do peso de Alexy (W = I·G·S / I_j·G_j·S_j) e teste tripartite de proporcionalidade",
+        "Criado legal/precedents.py — PrecedentAnalyzer: ratio decidendi, obiter dicta, distinguishing, overruling, súmulas vinculantes e IRDR",
+        "Criado legal/constitutional.py — ConstitutionalInterpretation: 7 métodos hermenêuticos (gramatical, histórico, sistemático, teleológico, a contrario, a simili, proporcionalidade)",
+        "Criado legal/argumentation.py — LegalArgumentScorer: scoring 0-1 com 5 critérios (validade legal > jurisprudência > doutrina > consistência > persuasão)",
+        "Criado legal/__init__.py com exportação limpa de todos os símbolos",
+        "Adicionada suíte TDD tests/test_brazilian_legal_reasoning.py com 23 testes RED→GREEN",
+        "Gate TDD específico: pytest tests/test_brazilian_legal_reasoning.py -v = 23 passed em 0.15s"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "O raciocínio jurídico brasileiro exige modelagem específica de hierarquia normativa (Kelsen adaptado), antinomia e competência federativa que motores lógicos genéricos (Z3) não capturam",
+        "A ponderação de princípios no direito brasileiro segue majoritariamente a fórmula do peso de Alexy com precedência condicionada (nunca definitiva)",
+        "Precedentes vinculantes (CPC/2015) exigem pipeline: overruling → ratio → distinguishing para correta aplicação",
+        "A interpretação constitucional no Brasil exige pluralidade metodológica — método gramatical isolado é insuficiente",
+        "Argumentação jurídica forte combina norma + jurisprudência + doutrina + consistência lógica; ausência de qualquer critério reduz significativamente o score"
+      ],
+      "timestamp": 1783490000.0
     }
   ]
 }

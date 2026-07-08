@@ -30,6 +30,7 @@ graph TD
         Scan[Scanners<br>Diagnóstico]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
+        Legal[Legal Reasoning<br>SPEC-921]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
@@ -62,6 +63,9 @@ graph TD
     RAG -->|Métricas| Bench
     MB -->|Traços e reflexões| MetaEval
     Trust -->|Outcomes e confiança| MetaEval
+    Orchestrator -->|6. Raciocínio Jurídico| Legal
+    Legal -->|Subsunção + Ponderação| Reason
+    Legal -->|Interpretação Constitucional| MetaEval
     
     %% Agentes
     subgraph Agents [Catálogo de Agentes]
