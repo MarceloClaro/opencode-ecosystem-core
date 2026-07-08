@@ -47,22 +47,71 @@ class CombinationResult:
 
 
 class ConceptEmbeddingSpace:
-    """Espaço conceitual simplificado para medir similaridade entre conceitos.
+    """Espaço conceitual para medir similaridade entre conceitos.
     
-    Usa co-ocorrência de palavras e análise de overlapping semântico
-    quando não há embeddings reais disponíveis.
+    R75: Substitui o embedding lexical (Jaccard) por embedding semântico
+    neural via Ollama (nomic-embed-text, 768-dim). Captura similaridade
+    semântica real em vez de apenas overlapping lexical.
+    
+    Interface 100% compatível com a implementação anterior.
     """
     
-    def __init__(self):
-        # Cache de análise lexical para conceitos
+    CACHE_PATH = "/tmp/semantic_embedder.pkl"
+    
+    def __init__(self, faculty_map: Optional[Dict] = None):
+        from synthetic_university.semantic_embedder import SemanticEmbedder, create_semantic_embedder
+        
+        # Embedder semântico neural (Ollama + fallback LSA + cache)
+        self._semantic = SemanticEmbedder(dimension=768)
+        
+        # Tentar carregar cache primeiro
+        if self._semantic.load(self.CACHE_PATH):
+            self._corpus_built = True
+            logger.info(f"ConceptEmbeddingSpace: embeddings carregados de cache")
+        else:
+            self._corpus_built = False
+        
+        # Fallback lexical
         self._lexical_cache: Dict[str, Set[str]] = {}
+        
+        # Se faculty_map foi fornecido e não temos cache, constrói
+        if faculty_map is not None and not self._corpus_built:
+            self.build_corpus(faculty_map)
+    
+    def build_corpus(self, faculty_map: Dict) -> None:
+        """Constrói o corpus a partir das faculdades.
+        
+        Coleta todos os conceitos + descrições, embed via Ollama,
+        e salva em cache para reuso.
+        """
+        from synthetic_university.semantic_embedder import create_semantic_embedder
+        
+        texts: List[str] = []
+        for fid, fac in faculty_map.items():
+            desc = getattr(fac, 'descricao', getattr(fac, 'description', ''))
+            if desc:
+                texts.append(desc)
+            conceitos = getattr(fac, 'conceitos', [])
+            texts.extend(conceitos)
+        
+        if texts:
+            # Usa factory com cache
+            embedder = create_semantic_embedder(texts, cache_path=self.CACHE_PATH)
+            self._semantic = embedder
+            self._corpus_built = True
+            logger.info(
+                f"ConceptEmbeddingSpace: corpus construído com "
+                f"{len(texts)} textos de {len(faculty_map)} faculdades"
+            )
+        else:
+            self._corpus_built = False
+            logger.warning("ConceptEmbeddingSpace: corpus vazio")
     
     def _tokenize(self, text: str) -> Set[str]:
         if text not in self._lexical_cache:
-            # Extrai palavras relevantes (≥3 chars, não stopwords básicas)
             tokens = set()
             for word in text.lower().split():
-                word = word.strip(".,;:!?()[]{}""''")
+                word = word.strip(".,;:!?()[]{}""''«»-–")
                 if len(word) >= 3 and word not in {
                     "que", "para", "com", "dos", "das", "uma", "mais",
                     "como", "por", "mas", "seu", "sua", "pelo", "pela",
@@ -73,10 +122,21 @@ class ConceptEmbeddingSpace:
         return self._lexical_cache[text]
     
     def similarity(self, concept_a: str, concept_b: str) -> float:
-        """Similaridade lexical simples entre dois conceitos."""
+        """Similaridade semântica entre dois conceitos.
+        
+        Usa o embedding LSA quando disponível; fallback para Jaccard
+        se o corpus não foi construído.
+        """
         if concept_a == concept_b:
             return 1.0
         
+        # Tenta semântico primeiro
+        if self._corpus_built:
+            sim = self._semantic.similarity(concept_a, concept_b)
+            if sim > 0.0:
+                return sim
+        
+        # Fallback lexical (Jaccard) para conceitos fora do vocabulário
         tokens_a = self._tokenize(concept_a)
         tokens_b = self._tokenize(concept_b)
         
@@ -89,26 +149,8 @@ class ConceptEmbeddingSpace:
         if not union:
             return 0.0
         
-        # Jaccard + bônus para bigramas compartilhados
         jaccard = len(intersection) / len(union)
-        
-        # Bônus se ambos são do mesmo "campo semântico"
-        field_markers = {
-            "quânt": {"quântica", "quântico", "quantum", "qubit"},
-            "matem": {"matemática", "matemático", "número", "equação"},
-            "lingu": {"linguagem", "linguística", "língua", "fala"},
-            "socia": {"social", "sociedade", "comunidade", "coletivo"},
-            "dados": {"dado", "dados", "informação", "dataset"},
-            "algor": {"algoritmo", "algorítmico", "programação"},
-        }
-        
-        bonus = 0.0
-        combined = tokens_a | tokens_b
-        for field, markers in field_markers.items():
-            if combined & markers:
-                bonus += 0.05
-        
-        return min(1.0, jaccard + bonus)
+        return min(1.0, jaccard)
     
     def coherence(self, concepts: List[str]) -> float:
         """Coerência média entre todos os pares de conceitos."""
@@ -153,7 +195,7 @@ class CombinatorialDiscoveryEngine:
     
     def __init__(self, faculty_map: Dict[str, 'Faculdade']):
         self.faculty_map = faculty_map
-        self.embedding = ConceptEmbeddingSpace()
+        self.embedding = ConceptEmbeddingSpace(faculty_map=faculty_map)
         
         # Cache de combinações já testadas
         self._history: List[CombinationResult] = []
