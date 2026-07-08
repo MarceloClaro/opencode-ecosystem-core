@@ -6,10 +6,10 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-2.1.0_Scientific_RAG-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-255_passed-success.svg)](tests/)
+[![Versão](https://img.shields.io/badge/Versão-2.2.0_Metacognitive_Refinement-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-263_passed-success.svg)](tests/)
 
-*Uma arquitetura cognitiva completa que une 134 agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, 12 motores de raciocínio, Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
+*Uma arquitetura cognitiva completa que une 134 agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
 
 ---
 
@@ -45,6 +45,7 @@ O OpenCode Ecosystem Core é uma implementação *state-of-the-art* de sistemas 
 - **🆕 Scientific Governance Pipeline (v2.1.0 — Scientific RAG Upgrade):** Fluxo científico com governança ética e **EvidenceGraph** (memória epistemológica persistente): `OQS → MCI Scientific Core → VSEE → EGS → EvidenceGraph`. O sistema formula hipóteses falsificáveis (com prior Bayesiano e SESOI), projeta experimentos com power analysis, valida resultados com testes paramétricos + não paramétricos + Bayes Factor, executa revisão adversarial (p-hacking + confounders), calibra confiança (Brier/ECE) e impõe conformidade ética antes de qualquer saída.
 - **📚 Scientific RAG (SPEC-919):** RAG científico determinístico com chunking citável, busca híbrida lexical + semantic-lite, reranking científico, citações auditáveis (`Autor (Ano), doc_id#chunk`) e abstenção quando não há evidência suficiente.
 - **📊 ScientificBenchmark + Superhuman Readiness (SPEC-918):** 5 benchmarks internos para inferência causal, desenho experimental, power analysis, interpretação estatística e detecção de viés, agora com avaliação real de `pipeline_fn` quando fornecido e uma suíte conservadora de readiness (`base` → `research_grade` → `superhuman_candidate` → `superhuman_verified`). O tier `superhuman_verified` exige validação externa explícita.
+- **🧭 Metacognitive Superhuman Suite (SPEC-920):** Avalia a própria capacidade do ecossistema de perceber, refletir, adaptar confiança, recuperar memória, explicar causalmente falhas e evitar overclaim. O tier `metacognitive_superhuman_verified` também exige validação externa explícita.
 - **🧠 EvidenceGraph (epistemológico):** Memória persistente que rastreia claims científicos ao longo do tempo, acumula evidências a favor/contra, calcula confiança consolidada, detecta contradições entre claims e registra tentativas de replicação. Diferencial absoluto vs. concorrentes.
 - **Metacognição Profunda:** O sistema possui 5 Scanners de diagnóstico (incluindo Engenharia Reversa de código legado) e um Gerador de Sucessores que prevê o próximo salto tecnológico do seu projeto.
 
@@ -326,6 +327,20 @@ print(readiness["tier"])             # base | research_grade | superhuman_candid
 
 > **Política de claim:** `superhuman_verified` só pode ser retornado se `external_validation=True`; sem validação externa, mesmo score alto retorna no máximo `superhuman_candidate`.
 
+### Metacognitive Superhuman Suite (SPEC-920)
+
+```python
+from mci import run_metacognitive_superhuman_suite
+
+report = run_metacognitive_superhuman_suite(external_validation=False)
+
+print(report["readiness_score"])  # 0–100
+print(report["tier"])             # reactive | reflective | research_grade | candidate
+print(report["dimensions"])       # awareness, reflection, adaptation, memory_quality...
+```
+
+> **Política de claim:** `metacognitive_superhuman_verified` só pode ser retornado se `external_validation=True`; sem validação externa, mesmo score alto retorna no máximo `metacognitive_superhuman_candidate`.
+
 ### Schemas JSON de Contratos (validados via `jsonschema`)
 
 | Schema | Propósito |
@@ -536,7 +551,7 @@ opencode-ecosystem-core/
 ├── mirofish/              # CrossValidator Swarm + GraphMemory
 ├── reasoning/             # 12 motores: Z3, SymPy, Kanren, Bayesian, Causal, Quantum...
 ├── webapp/                # Interface Streamlit (6 abas)
-├── tests/                 # 255 testes automatizados (suíte operacional verde)
+├── tests/                 # 263 testes automatizados (suíte operacional verde)
 └── CHANGELOG.md
 ```
 
@@ -545,7 +560,7 @@ opencode-ecosystem-core/
 ## 🧪 Executar os Testes
 
 ```bash
-# Todos os 255+ testes do ecossistema
+# Todos os 263+ testes do ecossistema
 python3 -m pytest tests/ -v
 
 # Apenas o pipeline científico (v2.0 SuperHuman)
@@ -559,10 +574,13 @@ python3 -m pytest tests/test_run_research_batch.py -v
 
 # Apenas Scientific RAG + Superhuman Readiness
 python3 -m pytest tests/test_scientific_rag_superhuman.py -v
+
+# Apenas Metacognitive Superhuman Suite
+python3 -m pytest tests/test_metacognitive_superhuman.py -v
 ```
 
 ---
 <div align="center">
   <i>Construído com rigor metodológico, inspirado pela Teoria dos Jogos e desenhado para o futuro.</i><br>
-  <b>v2.1.0 — Scientific RAG + SuperHuman Readiness com EvidenceGraph | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
+  <b>v2.2.0 — Metacognitive Refinement + Scientific RAG com EvidenceGraph | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
 </div>

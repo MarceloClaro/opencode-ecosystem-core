@@ -185,6 +185,29 @@
         "Testes operacionais podem gerar efeitos colaterais em artefatos locais ignorados; sempre verificar git ls-files -d após validação"
       ],
       "timestamp": 1783487768.5616
+    },
+    {
+      "round_id": "R56",
+      "objective": "SPEC-920: refino metacognitivo superhuman-candidate do ecossistema",
+      "changes": [
+        "Criada SPEC-920 para Metacognitive Superhuman Refinement Suite",
+        "Adicionado mci/metacognitive_evaluator.py com MetacognitiveTrace, MetacognitiveEvaluator e MetacognitiveBenchmarkSuite",
+        "Adicionada política classify_metacognitive_tier impedindo verified sem external_validation=True",
+        "Adicionada suíte TDD tests/test_metacognitive_superhuman.py com 8 testes RED→GREEN",
+        "Benchmark metacognitivo passou a medir awareness, reflection, adaptation, memory_quality, error_causality e epistemic_humility",
+        "Exportada API metacognitiva no pacote mci/__init__.py",
+        "Gate TDD específico: pytest tests/test_metacognitive_superhuman.py = 8 passed",
+        "Gate operacional: pytest tests -q = 263 passed, 2 skipped, 1 warning",
+        "Artefatos em producao_cientifica/ restaurados após validação, evitando deleções fora do escopo"
+      ],
+      "score": 9.6,
+      "lessons": [
+        "Metacognição superhuman deve ser medida por dimensões auditáveis, não por autoafirmação",
+        "A política anti-overclaim precisa existir também no nível metacognitivo, não apenas científico",
+        "Benchmarks metacognitivos devem testar mudança de estratégia após erro, correção de confiança e humildade epistêmica",
+        "Todo ciclo amplo deve restaurar artefatos rastreados que testes possam remover antes de qualquer commit"
+      ],
+      "timestamp": 1783489016.416159
     }
   ]
 }

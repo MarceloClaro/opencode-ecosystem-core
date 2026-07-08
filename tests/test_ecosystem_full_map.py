@@ -25,6 +25,10 @@ def test_build_ecosystem_map_contains_key_paths():
     assert "marceloclaro/orchestrator.py" in paths
     assert "mci/metabus.py" in paths
     assert "mci/pipeline/scientific_governance_pipeline.py" in paths
+    assert "mci/metacognitive_evaluator.py" in paths
+    assert "rag/scientific.py" in paths
+    assert "specs/SPEC-920-metacognitive-superhuman-refinement.md" in paths
+    assert "tests/test_metacognitive_superhuman.py" in paths
     assert "research/pipelines/analyze_research_batch.py" in paths
     assert "agents/catalog/mira-new.md" in paths
 

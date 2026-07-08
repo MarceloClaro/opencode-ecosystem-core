@@ -1,5 +1,40 @@
 # Release Notes: OpenCode Ecosystem Core
 
+## v2.2.0 — Metacognitive Superhuman Refinement
+
+Esta versão adiciona a **Metacognitive Superhuman Refinement Suite (SPEC-920)**, uma régua conservadora para avaliar se o ecossistema está apenas executando tarefas ou melhorando sua própria forma de decidir.
+
+### Destaques
+
+1. **Metacognitive Evaluator (`mci/metacognitive_evaluator.py`)**
+   - `MetacognitiveTrace` para representar ações, outcomes, confiança, estratégia, evidência e abstenção.
+   - `MetacognitiveEvaluator` para calcular maturidade metacognitiva.
+   - `MetacognitiveBenchmarkSuite` com casos determinísticos de benchmark.
+
+2. **Dimensões avaliadas**
+   - awareness;
+   - reflection;
+   - adaptation;
+   - memory_quality;
+   - error_causality;
+   - epistemic_humility.
+
+3. **Política anti-overclaim metacognitiva**
+   - `metacognitive_superhuman_verified` só é retornado com `external_validation=True`.
+   - Sem validação externa, o máximo permitido é `metacognitive_superhuman_candidate`.
+
+### Validação
+
+```bash
+pytest tests/test_metacognitive_superhuman.py -q
+# 8 passed
+
+pytest tests -q
+# 263 passed, 2 skipped, 1 warning
+```
+
+---
+
 ## v2.1.0 — Scientific RAG + SuperHuman Readiness
 
 Esta versão eleva o núcleo científico do ecossistema com **RAG científico auditável** e uma régua conservadora de **readiness superhuman**. O objetivo é medir progresso rumo a raciocínio científico superhuman sem claims exagerados: `superhuman_verified` só é permitido com validação externa explícita.

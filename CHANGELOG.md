@@ -4,6 +4,19 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.2.0] - 2026-07-08
+
+### Adicionado
+- **Metacognitive Superhuman Refinement Suite (SPEC-920)**:
+  - Novo `mci/metacognitive_evaluator.py` com `MetacognitiveTrace`, `MetacognitiveEvaluator`, `MetacognitiveBenchmarkSuite`, `classify_metacognitive_tier()` e `run_metacognitive_superhuman_suite()`.
+  - Avaliação das dimensões `awareness`, `reflection`, `adaptation`, `memory_quality`, `error_causality` e `epistemic_humility`.
+  - Política conservadora: `metacognitive_superhuman_verified` exige `external_validation=True`.
+  - Nova suíte `tests/test_metacognitive_superhuman.py` com 8 testes RED→GREEN.
+
+### Validação
+- `pytest tests/test_metacognitive_superhuman.py -q` → 8 passed.
+- `pytest tests -q` → 263 passed, 2 skipped, 1 warning.
+
 ## [2.1.0] - 2026-07-08
 
 ### Adicionado

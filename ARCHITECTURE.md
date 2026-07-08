@@ -39,6 +39,7 @@ graph TD
         Reason[Reasoning<br>12 Engines + Quantum]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks + Tiers]
+        MetaEval[Metacognitive Eval<br>SPEC-920]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         Publishing[Publishing<br>LaTeX & Cover Designer]
         Research[Research<br>Hub c/ OSINT]
@@ -70,6 +71,8 @@ graph TD
     Acad -->|Consulta evidências| RAG
     Reason -->|Grounding científico| RAG
     RAG -->|Métricas| Bench
+    MB -->|Traços e reflexões| MetaEval
+    Trust -->|Confiança e outcomes| MetaEval
     
     %% Agentes
     subgraph Agents [Catálogo de Agentes]
@@ -132,3 +135,22 @@ Tiers:
 - `research_grade`
 - `superhuman_candidate`
 - `superhuman_verified` — somente com `external_validation=True`
+
+### Metacognitive Superhuman Suite (`mci/metacognitive_evaluator.py`, SPEC-920)
+
+A suíte metacognitiva mede se o ecossistema está apenas executando tarefas ou se está melhorando sua própria forma de decidir. Ela avalia:
+
+- awareness/contexto;
+- reflexão pós-tarefa;
+- adaptação de confiança após feedback;
+- qualidade de memória;
+- causalidade de erro;
+- humildade epistêmica/anti-overclaim.
+
+Tiers conservadores:
+
+- `reactive`
+- `reflective`
+- `research_grade`
+- `metacognitive_superhuman_candidate`
+- `metacognitive_superhuman_verified` — somente com `external_validation=True`
