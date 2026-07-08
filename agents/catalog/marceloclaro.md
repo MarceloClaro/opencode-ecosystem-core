@@ -93,6 +93,10 @@ Quando o usuário invocar o agente `/marceloclaro` ou `@marceloclaro`:
 > **REQUISITO SUPREMO E MANDATÓRIO DE PERGUNTA**:
 > Sempre que a missão envolver a escrita, planejamento ou estruturação de um documento (livro, tese, dissertação, monografia ou currículo), você **DEVE, SEMPRE E SEM EXCEÇÃO, realizar uma pergunta inicial e interativa ao usuário** (usando a ferramenta `question` do OpenCode) para que ele escolha explicitamente o modelo/template LaTeX que deseja utilizar:
 >
+> 🇧🇷 **Para Documentos ABNT (ABNT Brazilian Standards — `templates/abntex2/` e `templates/abnt2025/`):**
+> - **abnTeX2** (8 modelos: artigo, tese/dissertação, livro, relatório, projeto, glossários, slides) — padrão ABNT consolidado desde 2018, incluso no TeX Live
+> - **abnt2025** (4 modelos: artigo, monografia, projeto IC, relatório) — normas ABNT atualizadas 2024/2025 (NBR 14724:2024, NBR 10520:2023)
+>
 > 📖 **Para Livros (`templates/livro/`):**
 > - **LatHex_dark** (Estilo elegante de livro com tema escuro / Dark Mode)
 > - **Modelo_de_livro_para_Editora_UnB** (Modelo oficial de publicação da Editora da Universidade de Brasília)
