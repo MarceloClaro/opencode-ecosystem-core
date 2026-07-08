@@ -1,6 +1,7 @@
 graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
+    WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
     
     %% Camada SDD/TDD
     subgraph SDD [SDD & TDD Engine]
@@ -30,7 +31,8 @@ graph TD
         Scan[Scanners<br>Diagnóstico]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
-        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/927/928]
+        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928]
+        LegalBench[Legal Benchmarks<br>SPEC-928]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
@@ -68,13 +70,15 @@ graph TD
     Legal -->|Interpretação Constitucional| MetaEval
     Legal -->|RAG jurídico + Datajud| RAG
     Legal -->|Agentes jurídicos A2A| BB
+    Legal -->|Especialização por 7 ramos| LegalBench
+    LegalBench -->|tiers conservadores| MetaEval
     
     %% Agentes
     subgraph Agents [Catálogo de Agentes]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
-        A4[130 Especializados...]
+        A4[156 Especializados...]
     end
     
     %% Fluxo de Agentes

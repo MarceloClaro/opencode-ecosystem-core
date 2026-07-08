@@ -1,7 +1,7 @@
 {
   "summary": {
-    "node_count": 399,
-    "vector_count": 654,
+    "node_count": 400,
+    "vector_count": 661,
     "node_kinds": {
       "actor": 1,
       "agent": 156,
@@ -11,14 +11,14 @@
       "layer": 20,
       "module": 121,
       "schema": 4,
-      "spec": 52,
+      "spec": 53,
       "test": 31
     },
     "vector_kinds": {
-      "contains": 366,
+      "contains": 367,
       "control_flow": 34,
       "data_flow": 11,
-      "depends_on": 37,
+      "depends_on": 43,
       "documents": 9,
       "imports": 197
     }
@@ -2969,6 +2969,14 @@
       "layer": "specs"
     },
     {
+      "id": "specs_SPEC_929_legal_docs_map_sync_md",
+      "label": "SPEC-929-legal-docs-map-sync",
+      "kind": "spec",
+      "path": "specs/SPEC-929-legal-docs-map-sync.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
       "id": "tests_test_advanced_subsystems_py",
       "label": "test_advanced_subsystems",
       "kind": "test",
@@ -5163,6 +5171,12 @@
       "note": "specs contém specs/SPEC-928-legal-domain-benchmarks.md"
     },
     {
+      "source": "layer_specs",
+      "target": "specs_SPEC_929_legal_docs_map_sync_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-929-legal-docs-map-sync.md"
+    },
+    {
       "source": "layer_tests",
       "target": "tests_test_advanced_subsystems_py",
       "kind": "contains",
@@ -5905,6 +5919,42 @@
       "target": "specs_SPEC_927_legal_domain_specialization_md",
       "kind": "depends_on",
       "note": "SPEC-927"
+    },
+    {
+      "source": "specs_SPEC_929_legal_docs_map_sync_md",
+      "target": "specs_SPEC_029_ecosystem_full_map_md",
+      "kind": "depends_on",
+      "note": "SPEC-029"
+    },
+    {
+      "source": "specs_SPEC_929_legal_docs_map_sync_md",
+      "target": "specs_SPEC_924_legal_impact_scanner_md",
+      "kind": "depends_on",
+      "note": "SPEC-924"
+    },
+    {
+      "source": "specs_SPEC_929_legal_docs_map_sync_md",
+      "target": "specs_SPEC_925_webapp_legal_impact_interface_md",
+      "kind": "depends_on",
+      "note": "SPEC-925"
+    },
+    {
+      "source": "specs_SPEC_929_legal_docs_map_sync_md",
+      "target": "specs_SPEC_926_webapp_dedicated_legal_tab_md",
+      "kind": "depends_on",
+      "note": "SPEC-926"
+    },
+    {
+      "source": "specs_SPEC_929_legal_docs_map_sync_md",
+      "target": "specs_SPEC_927_legal_domain_specialization_md",
+      "kind": "depends_on",
+      "note": "SPEC-927"
+    },
+    {
+      "source": "specs_SPEC_929_legal_docs_map_sync_md",
+      "target": "specs_SPEC_928_legal_domain_benchmarks_md",
+      "kind": "depends_on",
+      "note": "SPEC-928"
     },
     {
       "source": "specs_SPEC_007_trust_engine_md",

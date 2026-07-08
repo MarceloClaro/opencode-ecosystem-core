@@ -4,6 +4,26 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.3.0] - 2026-07-08
+
+### Adicionado
+- **Inteligência Jurídica Integrada (SPEC-921 → SPEC-928)**:
+  - Novo subsistema `legal/` com raciocínio jurídico brasileiro, integração Datajud, agentes AuxJuris, knowledge base com RAG por keywords, sumarização jurídica e especialização por 7 ramos do direito.
+  - Novo `scanners/legal_impact_scanner.py` com avaliação de impacto jurídico e ganho metacognitivo jurídico.
+  - Nova suíte de benchmarks jurídicos por ramo em `legal/benchmarks.py` com tiers conservadores (`base`, `specialist`, `specialist_advanced`, `phd_candidate`, `phd_validated`).
+  - Nova aba `⚖️ Jurídico` na interface Streamlit para operação dedicada do scanner jurídico.
+  - Novos Agent Cards jurídicos em `agents/catalog/` e roteamento por domínio em `legal/specializations.py`.
+
+### Modificado
+- **README / ARCHITECTURE / diagram.mmd** sincronizados com a expansão jurídica completa.
+- **Mapas do ecossistema** regenerados com a nova camada `webapp`, a camada `legal` expandida e os novos vetores arquiteturais.
+- **Evolução** registrada nos ciclos `R59`, `R60`, `R61`, `R62`, `R63` e `R64`.
+
+### Validação
+- `pytest tests/test_legal_domain_specialization.py -q` → 6 passed.
+- `pytest tests/test_legal_domain_benchmarks.py -q` → 6 passed.
+- `pytest tests -q` → 343 passed, 2 skipped, 1 warning.
+
 ## [2.2.0] - 2026-07-08
 
 ### Adicionado

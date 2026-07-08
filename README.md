@@ -6,10 +6,10 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-2.2.0_Metacognitive_Refinement-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-263_passed-success.svg)](tests/)
+[![Versão](https://img.shields.io/badge/Versão-2.3.0_Legal_Intelligence_Expansion-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-343_passed-success.svg)](tests/)
 
-*Uma arquitetura cognitiva completa que une 134 agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
+*Uma arquitetura cognitiva completa que une 156 agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, inteligência jurídica integrada (Datajud + AuxJuris + especialização por ramos + benchmarks jurídicos), 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
 
 ---
 
@@ -39,7 +39,7 @@ Você só precisa dar a ordem: *"Quero um aplicativo que faça X"* ou *"Quero um
 
 ### 🔬 Para PhDs e Engenheiros: Arquitetura Cognitiva Multiagente
 O OpenCode Ecosystem Core é uma implementação *state-of-the-art* de sistemas multiagentes (MAS) inspirada em arquiteturas de redes neurais (Transformers) e neurociência cognitiva (Global Workspace Theory).
-- **Roteamento por Atenção:** Não usamos *if/else* para delegar tarefas. Usamos *Multi-Head Attention* para calcular scores de semântica, capacidade e confiança (Trust Ledger) de 134 agentes.
+- **Roteamento por Atenção:** Não usamos *if/else* para delegar tarefas. Usamos *Multi-Head Attention* para calcular scores de semântica, capacidade e confiança (Trust Ledger) de 156 agentes.
 - **MiroFish & Game Theory:** Agentes debatem soluções usando estratégias iteradas (Tit-for-Tat, Nash Equilibrium) e constroem Grafos de Conhecimento lógicos.
 - **Pipeline Científico (MASWOS):** Automação completa de revisão sistemática de literatura. Baixa PDFs (Sci-Hub/OpenAlex), converte para Markdown, extrai figuras reais, gera fichamentos (ABNT/APA) e compila o manuscrito em LaTeX (com PDF, DOCX e ODT para Amazon KDP).
 - **🆕 Scientific Governance Pipeline (v2.1.0 — Scientific RAG Upgrade):** Fluxo científico com governança ética e **EvidenceGraph** (memória epistemológica persistente): `OQS → MCI Scientific Core → VSEE → EGS → EvidenceGraph`. O sistema formula hipóteses falsificáveis (com prior Bayesiano e SESOI), projeta experimentos com power analysis, valida resultados com testes paramétricos + não paramétricos + Bayes Factor, executa revisão adversarial (p-hacking + confounders), calibra confiança (Brier/ECE) e impõe conformidade ética antes de qualquer saída.
@@ -74,7 +74,7 @@ O ecossistema é dividido em **5 grandes camadas interconectadas**:
 2. **🆕 Scientific Governance Pipeline:** Fluxo obrigatório de rigor científico e governança ética: `OQS → Scientific Core → VSEE → EGS → Final Report`.
 3. **Camada Transformer:** O roteador de atenção que delega tarefas e o pipeline iterativo de *Reflexion* (Gerar → Verificar → Revisar).
 4. **Módulos Avançados:** Token Economy (Staking/Slashing), Trust Engine (Behavioral Gates), SDD/TDD e Diagnóstico Profundo.
-5. **Catálogo de Agentes:** 134 agentes especializados em domínios que vão desde Física Quântica até Design de Capas.
+5. **Catálogo de Agentes:** 156 agentes especializados em domínios que vão desde Física Quântica até Direito Digital, Compliance e Design de Capas.
 
 ### 🆕 Scientific RAG + SuperHuman Readiness (v2.1.0)
 
@@ -371,6 +371,7 @@ O resultado gera relatórios JSONL (raw), JSON agregado e Markdown auditável em
 graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
+    WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
     
     %% Camada SDD/TDD
     subgraph SDD [SDD & TDD Engine]
@@ -400,7 +401,8 @@ graph TD
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
-        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/927/928]
+        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928]
+        LegalBench[Legal Benchmarks<br>SPEC-928]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
@@ -456,6 +458,8 @@ graph TD
     Legal -->|Interpretação Constitucional| MetaEval
     Legal -->|RAG jurídico + Datajud| RAG
     Legal -->|Agentes jurídicos A2A| BB
+    Legal -->|Especialização por 7 ramos| LegalBench
+    LegalBench -->|tiers conservadores| MetaEval
     EGS -->|Reflete Resultado| MB
     
     %% Agentes
@@ -463,7 +467,7 @@ graph TD
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
-        A4[130 Especializados...]
+        A4[156 Especializados...]
     end
     
     %% Fluxo de Agentes
