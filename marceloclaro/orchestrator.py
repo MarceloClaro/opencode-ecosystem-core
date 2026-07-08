@@ -421,17 +421,25 @@ class MarceloClaroOrchestrator:
     # ------------------------------------------------------------------
     def diagnose(self, corpus: str, domain: str = "",
                  goals: Optional[List[Dict[str, Any]]] = None,
-                 deep: bool = False) -> Dict[str, Any]:
+                 deep: bool = False,
+                 include_legal_impact: bool = False,
+                 legal_params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Pipeline de diagnóstico com os scanners (noológico, teleológico,
-        evolutivo, potentiality, social impact, reversa).
+        evolutivo, potentiality, social impact, reversa e opcionalmente legal impact).
 
         Com ``deep=True`` executa também a camada profunda (SPEC-020):
         roadmap evolutivo M1–M5 completo (trajetórias + composição unitária +
         sequenciamento), priorização epistemológica (erro → ausência →
         oportunidade) e gerador de sucessores plausíveis (DNA estrutural).
         Registra o resultado na memória metacognitiva."""
-        report = diagnostic_pipeline.run(corpus, domain=domain, goals=goals,
-                                         deep=deep)
+        report = diagnostic_pipeline.run(
+            corpus,
+            domain=domain,
+            goals=goals,
+            deep=deep,
+            include_legal_impact=include_legal_impact,
+            legal_params=legal_params,
+        )
         gaps = report.get("evolutionary", {}).get("total_gaps", 0)
         extra = ""
         if deep:

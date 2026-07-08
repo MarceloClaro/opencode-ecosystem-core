@@ -253,6 +253,90 @@
         "O mapeamento tribunal → competência federativa permite integração direta com LegalSyllogism para controle de constitucionalidade"
       ],
       "timestamp": 1783491000.0
+    },
+    {
+      "round_id": "R59",
+      "objective": "SPEC-923: integração do AUXJURIS ao ecossistema (agentes jurídicos, knowledge base RAG, sumarizador)",
+      "changes": [
+        "Criada SPEC-923 para integração AUXJURIS no OpenCode Ecosystem",
+        "Criado legal/agents.py com 4 agentes jurídicos A2A: assistente geral, sumarizador, redator de e-mail e pesquisador jurídico",
+        "Adicionados 4 Agent Cards em agents/catalog/ para descoberta via Catalog Loader",
+        "Criado legal/knowledge_base.py com base de conhecimento jurídica, RAG por keywords e carga de documentos do Datajud",
+        "Criado legal/summarizer.py para resumir documentos jurídicos com extração de entidades e fundamentos",
+        "Adicionado register_legal_agents() para registro programático no Blackboard via MetaBus",
+        "Adicionada suíte TDD tests/test_auxjuris_integration.py com 11 testes RED→GREEN",
+        "Atualizados README.md e diagram.mmd para refletir Legal Reasoning + AuxJuris (SPEC-921/922/923)",
+        "Mapa do ecossistema regenerado: 384 nós, 611 vetores"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Boas ideias de produto em frontend (AUXJURIS) podem ser incorporadas como capacidades centrais do backend por meio de agentes, knowledge base e pipelines de reasoning",
+        "Agent Cards precisam respeitar exatamente o contrato do Blackboard (capabilities como lista e schema separado) para integração A2A sem fricção",
+        "RAG jurídico por keywords é um complemento útil ao RAG vetorial quando a consulta contém termos legais bem definidos como artigos, ações e precedentes",
+        "Extratores regex jurídicos precisam ser conservadores e resilientes a formas reais de citação (art. 186, CC/2002, REsp 1234/2020)",
+        "Sempre regenerar mapas e rerodar a suíte completa após adicionar novos módulos legais e agentes de catálogo"
+      ],
+      "timestamp": 1783492000.0
+    },
+    {
+      "round_id": "R60",
+      "objective": "SPEC-924: scanner de visão jurídica de impacto e avaliação de ganho metacognitivo jurídico",
+      "changes": [
+        "Criada SPEC-924 para Legal Impact Scanner focado em pesquisas e produções",
+        "Criado scanners/legal_impact_scanner.py com 6 dimensões jurídicas e 4 dimensões metacognitivas jurídicas",
+        "Integrado LegalImpactScanner ao DiagnosticPipeline via include_legal_impact=True",
+        "Atualizados README.md e documentação arquitetural com avaliação conservadora do ganho metacognitivo jurídico",
+        "Adicionada suíte TDD tests/test_legal_impact_scanner.py com 5 testes RED→GREEN",
+        "Scanner passou a medir explicitamente compliance_awareness, normative_conflict_detection, risk_anticipation e epistemic_humility_legal",
+        "Mapa do ecossistema regenerado: 387 nós, 620 vetores"
+      ],
+      "score": 9.6,
+      "lessons": [
+        "Conhecimento jurídico aumenta metacognição quando é operacionalizado como consciência de risco e não apenas como conteúdo declarativo",
+        "A maior contribuição jurídica ao ecossistema não é 'dar respostas de advogado', mas detectar precocemente riscos normativos, colisões e necessidade de revisão humana",
+        "Benchmarks internos de ganho metacognitivo devem ser reportados como heurísticos e conservadores, nunca como validação externa definitiva",
+        "Scanners opcionais preservam retrocompatibilidade do pipeline principal enquanto expandem o poder diagnóstico do ecossistema"
+      ],
+      "timestamp": 1783493000.0
+    },
+    {
+      "round_id": "R61",
+      "objective": "SPEC-925: interface web Streamlit para o Legal Impact Scanner",
+      "changes": [
+        "Criada SPEC-925 para integração do scanner jurídico à webapp",
+        "Criado webapp/legal_impact_helpers.py com helpers puros para montar legal_params e resumir métricas jurídicas",
+        "Expandido MarceloClaroOrchestrator.diagnose() com include_legal_impact e legal_params",
+        "Atualizado webapp/app.py para expor controles jurídicos e métricas de score/readiness/flags",
+        "Adicionada suíte TDD tests/test_webapp_legal_impact.py com 4 testes RED→GREEN",
+        "Mapa do ecossistema regenerado com camada webapp: 392 nós, 632 vetores"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "Interfaces web úteis para scanners complexos devem delegar a lógica a helpers puros para manter testabilidade",
+        "Expandir a assinatura do orchestrator com parâmetros opcionais preserva retrocompatibilidade e evita rotas paralelas desnecessárias",
+        "A visualização de métricas compactas (overall, gain, readiness, flags) aumenta a usabilidade sem esconder o JSON auditável completo",
+        "Adicionar a camada webapp ao mapa do ecossistema melhora a observabilidade arquitetural de features orientadas a usuário"
+      ],
+      "timestamp": 1783494000.0
+    },
+    {
+      "round_id": "R62",
+      "objective": "SPEC-926: aba jurídica dedicada na webapp para operação do Legal Impact Scanner",
+      "changes": [
+        "Criada SPEC-926 para aba jurídica dedicada na interface Streamlit",
+        "Atualizado webapp/app.py com nova aba '⚖️ Jurídico' separada do diagnóstico geral",
+        "A aba jurídica agora coleta corpus, metodologia, resultados, conclusões, palavras-chave e área do conhecimento em fluxo próprio",
+        "A aba jurídica renderiza métricas dedicadas: Score Jurídico, Ganho Metacognitivo, Readiness e Flags de Alto Risco",
+        "Adicionado teste TDD para a nova aba em tests/test_webapp_legal_impact.py",
+        "Mapa do ecossistema regenerado com camada webapp ampliada: 393 nós, 635 vetores"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Separar a operação jurídica em aba dedicada reduz carga cognitiva e evita misturar um scanner especializado com o diagnóstico técnico geral",
+        "A mesma lógica backend pode servir UXs diferentes quando encapsulada em helpers pequenos e parâmetros opcionais no orchestrator",
+        "Uma boa interface jurídica deve mostrar métricas resumidas primeiro, mas manter acesso ao JSON auditável completo para rastreabilidade"
+      ],
+      "timestamp": 1783495000.0
     }
   ]
 }

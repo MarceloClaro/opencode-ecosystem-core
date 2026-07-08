@@ -400,7 +400,7 @@ graph TD
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
-        Legal[Legal Reasoning<br>Subsunção·Ponderação·Precedentes]
+        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
@@ -454,6 +454,8 @@ graph TD
     Orchestrator -->|6. Raciocínio Jurídico| Legal
     Legal -->|Subsunção + Ponderação| Reason
     Legal -->|Interpretação Constitucional| MetaEval
+    Legal -->|RAG jurídico + Datajud| RAG
+    Legal -->|Agentes jurídicos A2A| BB
     EGS -->|Reflete Resultado| MB
     
     %% Agentes
@@ -500,8 +502,27 @@ Inspirada na arquitetura de Vaswani (2017) e nos modelos da DeepMind.
 - **Trust Engine & Token Economy:** Agentes fazem *stake* de tokens para assumir tarefas. Se falharem no TDD, sofrem *slashing*. O *Behavioral Gate* barra agentes com histórico de alucinação.
 - **Deep Diagnose:** 5 Scanners (Noológico, Teleológico, Evolutivo, etc.) que fazem engenharia reversa de código, priorização epistemológica e geram "Sucessores Plausíveis" para o seu projeto.
 - **MiroFish & Game Theory:** Um enxame preditivo que debate usando o método Delphi e constrói um **Grafo de Conhecimento** em memória para extrair consensos matemáticos.
-- **Legal Reasoning (SPEC-921):** Raciocínio jurídico brasileiro especializado com 5 motores: subsunção legal (silogismo fato-norma + hierarquia + antinomia), ponderação de princípios (fórmula do peso de Alexy + proporcionalidade tripartite), análise de precedentes vinculantes (ratio decidendi, distinguishing, overruling, súmulas vinculantes), interpretação constitucional (7 métodos hermenêuticos) e scoring de argumentação jurídica (validade legal > jurisprudência > doutrina).
+- **Legal Reasoning + AUXJURIS (SPEC-921/922/923):** Raciocínio jurídico brasileiro especializado com 5 motores (subsunção, ponderação, precedentes, interpretação constitucional e scoring), integração real com a **API Datajud do CNJ** (27 tribunais estaduais), **4 agentes jurídicos A2A** (assistente geral, sumarizador, redator de e-mail e pesquisador jurídico) e uma **base de conhecimento com RAG por keywords** inspirada no AUXJURIS para grounding jurídico contextual.
+- **Legal Impact Scanner (SPEC-924/925/926):** Scanner opcional de visão jurídica para **pesquisas e produções**. Mede proteção de dados/LGPD, propriedade intelectual, conformidade regulatória/ética, grounding jurisprudencial, responsabilidade contratual e defensibilidade de publicação. Também estima **ganho metacognitivo jurídico** em 4 eixos: awareness normativa, detecção de conflito normativo, antecipação de risco e humildade epistêmica aplicada. Agora pode ser acionado pela **interface web Streamlit** tanto no diagnóstico geral quanto em uma **aba jurídica dedicada** em `webapp/app.py`.
 - **Publishing & Research:** Automação Qualis A1. Busca artigos (Sci-Hub/OpenAlex), converte PDF para Markdown, faz fichamentos ABNT/APA, gera ilustrações didáticas (MIRA) e compila livros inteiros em LaTeX com capas geradas por IA.
+
+#### 5. Ganho Metacognitivo Jurídico (avaliação interna — SPEC-924)
+
+Sim: a incorporação do conhecimento jurídico **aumentou a performance metacognitiva do ecossistema** em uma dimensão específica e útil: a capacidade de perceber riscos normativos antes da ação.
+
+Em benchmark interno heurístico do `LegalImpactScanner`:
+
+- **artefato neutro** → `overall_score = 49.67`, `metacognitive_gain_score = 0.0`
+- **artefato juridicamente consciente** (LGPD + ética + licenças + precedentes + limitações) → `overall_score = 80.0`, `metacognitive_gain_score = 60.0`
+
+Interpretação conservadora:
+
+- o ecossistema ficou **mais consciente de compliance**;
+- ficou **melhor em antecipar litígio, privacidade e risco regulatório**;
+- ganhou **detecção de colisões normativas** (ex.: transparência × privacidade, abertura × licenciamento);
+- ficou **mais humilde epistemicamente**, porque agora reconhece melhor quando precisa de abstenção, parecer jurídico ou revisão humana.
+
+Isso não torna o sistema um “advogado autônomo”. Torna-o um ecossistema **mais prudente, auditável e defensável juridicamente**.
 
 ---
 

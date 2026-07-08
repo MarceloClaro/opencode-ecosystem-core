@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Diagnostic Pipeline — Pipeline unificado dos 5 Scanners
-=======================================================
+Diagnostic Pipeline — Pipeline unificado dos 5 Scanners + extensões opcionais
+=============================================================================
 Orquestra em sequência os scanners portados do OpenCode_Ecosystem:
 
 1. NoologicalScanner        — cobertura epistemológica (dimensões do conhecimento)
@@ -9,6 +9,9 @@ Orquestra em sequência os scanners portados do OpenCode_Ecosystem:
 3. EvolutionaryPipeline     — roadmap evolutivo (rotas de melhoria)
 4. PotentialityScanner      — potenciais latentes de componentes
 5. SocialImpactScanner      — SROI, ToC, SDG, B-Impact
+
+Extensão opcional:
+6. LegalImpactScanner       — prontidão jurídica + ganho metacognitivo jurídico
 
 Entrada mínima: um "audit_trail" (qualquer objeto com texto, ou dict/list) e
 metas opcionais. Saída: DiagnosticReport consolidado (dict serializável).
@@ -27,6 +30,7 @@ from scanners.teleological_scanner import TeleologicalReverseScanner, Teleologic
 from scanners.evolutionary_pipeline import EvolutionaryRoadmap  # noqa: F401 (reexport)
 from scanners.potentiality_scanner import PotentialityScanner
 from scanners.social_impact_scanner import SocialImpactScanner
+from scanners.legal_impact_scanner import LegalImpactScanner
 from scanners.reversa_scanner import ReversaScanner
 from scanners.epistemic_prioritizer import EpistemicPrioritizer
 from scanners.successor_generator import SuccessorGenerator
@@ -83,6 +87,7 @@ class DiagnosticPipeline:
         self.teleological = TeleologicalReverseScanner()
         self.potentiality = PotentialityScanner()
         self.social = SocialImpactScanner()
+        self.legal_impact = LegalImpactScanner()
         self.reversa = ReversaScanner()
         self.prioritizer = EpistemicPrioritizer()
         self.successor_gen = SuccessorGenerator()
@@ -107,7 +112,7 @@ class DiagnosticPipeline:
         core_dirs = [
             "scanners", "agents", "agents/catalog", "mci", "trust",
             "economy", "reasoning", "evolution", "integrations",
-            "marceloclaro", "specs", "schemas", "gametheory",
+            "marceloclaro", "legal", "specs", "schemas", "gametheory",
             "mci/pipeline", "installer", "data", "benchmarks",
             "tests", "notebooks", "webapp",
         ]
@@ -133,12 +138,15 @@ class DiagnosticPipeline:
             "scanners/evolutionary_pipeline.py", "scanners/reversa_scanner.py",
             "scanners/epistemic_prioritizer.py", "scanners/successor_generator.py",
             "scanners/cross_validation_engine.py", "scanners/capability_composer.py",
-            "scanners/social_impact_scanner.py",
+            "scanners/social_impact_scanner.py", "scanners/legal_impact_scanner.py",
             "mci/metabus.py", "mci/blackboard.py", "mci/reflexion.py",
-            "mci/orchestration.py", "mci/mcp_server.py",
-            "mci/confidence_calibrator.py", "mci/evidence_graph.py",
-            "mci/hypothesis_engine.py", "mci/scientific_reporter.py",
-            "trust/trust_engine.py", "economy/token_economy.py",
+             "mci/orchestration.py", "mci/mcp_server.py",
+             "mci/confidence_calibrator.py", "mci/evidence_graph.py",
+             "mci/hypothesis_engine.py", "mci/scientific_reporter.py",
+             "legal/agents.py", "legal/knowledge_base.py",
+             "legal/summarizer.py", "legal/datajud_client.py",
+             "legal/integration.py",
+             "trust/trust_engine.py", "economy/token_economy.py",
             "reasoning/engines.py", "reasoning/quantum.py",
             "evolution/cycles.py", "integrations/antigravity/antigravity_bridge.py",
             "integrations/opencode_cli.py",
@@ -292,6 +300,8 @@ class DiagnosticPipeline:
             goals: Optional[List[Dict[str, Any]]] = None,
             include_social: bool = False,
             social_params: Optional[Dict[str, Any]] = None,
+            include_legal_impact: bool = False,
+            legal_params: Optional[Dict[str, Any]] = None,
             deep: bool = False) -> Dict[str, Any]:
         """Executa o pipeline completo de diagnóstico.
 
@@ -307,6 +317,8 @@ class DiagnosticPipeline:
                    Se None e domain="ecosystem", usa ECOSYSTEM_DEFAULT_GOALS
             include_social: se True, roda o SocialImpactScanner
             social_params: parâmetros para analyze_research_paper
+            include_legal_impact: se True, roda o LegalImpactScanner
+            legal_params: parâmetros para análise jurídica
             deep: se True, roda também o roadmap evolutivo completo
         """
         started = time.time()
@@ -412,6 +424,29 @@ class DiagnosticPipeline:
                 }
             except Exception as exc:
                 report["social_impact"] = {"error": str(exc)}
+
+        # 4.5 Scanner de Impacto Jurídico / Metacognitivo
+        if include_legal_impact:
+            try:
+                params = legal_params or {}
+                lr = self.legal_impact.analyze_research_paper(
+                    titulo=params.get("titulo", "Diagnóstico Jurídico do Artefato"),
+                    resumo=params.get("resumo", corpus[:1200]),
+                    metodologia=params.get("metodologia", ""),
+                    resultados=params.get("resultados", ""),
+                    conclusoes=params.get("conclusoes", ""),
+                    palavras_chave=params.get("palavras_chave"),
+                    area_conhecimento=params.get("area_conhecimento", effective_domain),
+                )
+                report["legal_impact"] = {
+                    "overall_score": lr.overall_score,
+                    "legal_readiness": lr.legal_readiness,
+                    "high_risk_flags": lr.high_risk_flags,
+                    "metacognitive_gain_score": lr.metacognitive_gain_score,
+                    "summary": lr.as_dict(),
+                }
+            except Exception as exc:
+                report["legal_impact"] = {"error": str(exc)}
 
         # 5. Síntese evolutiva (SPEC-022: gaps REALs = ausentes + teleo)
         teleo_gaps = len(report.get("teleological", {}).get("gaps", []))

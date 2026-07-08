@@ -51,6 +51,7 @@ DISCOVERY_RULES = [
     ("rag/**/*.py", "module", "rag"),
     ("legal/**/*.py", "module", "legal"),
     ("research/**/*.py", "module", "research"),
+    ("webapp/**/*.py", "module", "webapp"),
     ("benchmarks/scientific_reasoning/**/*.py", "benchmark", "benchmarks"),
     ("illustrations/**/*.py", "module", "illustrations"),
     ("publishing/**/*.py", "module", "publishing"),
@@ -81,6 +82,7 @@ LAYER_NODES = [
     Node("layer_reasoning", "Reasoning", "layer", logical_group="formal_reasoning", layer="reasoning"),
     Node("layer_rag", "Scientific RAG", "layer", logical_group="grounding", layer="rag"),
     Node("layer_legal", "Legal Reasoning", "layer", logical_group="legal_reasoning", layer="legal"),
+    Node("layer_webapp", "Web Interface", "layer", logical_group="interaction", layer="webapp"),
     Node("layer_research", "Research", "layer", logical_group="research", layer="research"),
     Node("layer_benchmarks", "Benchmarks", "layer", logical_group="evaluation", layer="benchmarks"),
     Node("layer_illustrations", "Illustrations", "layer", logical_group="visualization", layer="illustrations"),
@@ -114,6 +116,7 @@ FLOW_EDGES = [
     ("mci/pipeline/scientific_governance_pipeline.py", "mci/orchestration.py", "control_flow", "núcleo científico"),
     ("mci/pipeline/scientific_governance_pipeline.py", "mci/vsee/router.py", "control_flow", "etapa VSEE"),
     ("mci/pipeline/scientific_governance_pipeline.py", "mci/egs/__init__.py", "control_flow", "etapa EGS"),
+    ("scanners/pipeline.py", "scanners/legal_impact_scanner.py", "control_flow", "scanner jurídico de impacto opcional SPEC-924"),
     ("mci/orchestration.py", "mci/evidence_graph.py", "data_flow", "persistência epistemológica"),
     ("mci/metabus.py", "mci/metacognitive_evaluator.py", "data_flow", "traços e reflexões para avaliação metacognitiva"),
     ("rag/scientific.py", "benchmarks/scientific_reasoning/superhuman_suite.py", "data_flow", "grounding alimenta readiness científico"),
@@ -125,10 +128,18 @@ FLOW_EDGES = [
     ("research/pipelines/analyze_research_batch.py", "research/results/reports/final_report_template.md", "data_flow", "preenche template final"),
     # Legal reasoning module (SPEC-921)
     ("marceloclaro/orchestrator.py", "legal/__init__.py", "control_flow", "raciocínio jurídico brasileiro SPEC-921"),
+    ("marceloclaro/orchestrator.py", "legal/integration.py", "control_flow", "pipeline jurídico com Datajud SPEC-922"),
+    ("marceloclaro/orchestrator.py", "legal/agents.py", "control_flow", "agentes jurídicos AuxJuris SPEC-923"),
+    ("webapp/app.py", "marceloclaro/orchestrator.py", "control_flow", "interface web aciona orquestrador"),
+    ("webapp/app.py", "webapp/legal_impact_helpers.py", "control_flow", "interface web usa helpers jurídicos"),
     ("legal/syllogism.py", "legal/balancing.py", "data_flow", "subsunção alimenta ponderação"),
     ("legal/syllogism.py", "legal/constitutional.py", "data_flow", "controle de constitucionalidade via interpretação"),
     ("legal/precedents.py", "legal/syllogism.py", "data_flow", "ratio decidendi informa subsunção"),
     ("legal/argumentation.py", "legal/syllogism.py", "data_flow", "scoring valida consistência da subsunção"),
+    ("legal/integration.py", "legal/datajud_client.py", "control_flow", "integração consulta API Datajud"),
+    ("legal/knowledge_base.py", "legal/datajud_client.py", "data_flow", "processos do Datajud alimentam knowledge base jurídica"),
+    ("legal/summarizer.py", "legal/precedents.py", "data_flow", "sumarização enriquecida por precedentes"),
+    ("legal/agents.py", "mci/blackboard.py", "control_flow", "registro A2A de agentes jurídicos"),
 ]
 
 
@@ -253,6 +264,7 @@ def _module_path_to_target(module_path: str, node_by_path: Dict[str, str]) -> Op
             "research": "layer_research",
             "rag": "layer_rag",
             "legal": "layer_legal",
+            "webapp": "layer_webapp",
             "illustrations": "layer_illustrations",
             "schemas": "layer_schemas",
         }
