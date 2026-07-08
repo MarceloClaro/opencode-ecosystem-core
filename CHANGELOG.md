@@ -24,14 +24,25 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
   - OQS, VSEE, EGS, RAG, Superhuman Suite, MiroFish, Game Theory, Publishing, Research e SDD publicam eventos de subsistema no MetaBus.
   - MetaBus com `publish_subsystem_event`, `search_memory`, `update_topic_confidence`, `upser_semantic_topic`.
   - Eventos de raciocínio, predição MiroFish, Nash equilibria, produção científica e ciclo SDD rastreáveis.
+- **Universidade Sintética Transversal (SPEC-935)**:
+  - Novo subsistema `synthetic_university/` com 10 faculdades (humanas, sociais, engenharia, letras, história, quântica, exatas, estatística, programação, interdisciplinar).
+  - Motor combinatorial MiroFish-powered que testa 10.000+ combinações de conceitos entre faculdades.
+  - Correlator Interdisciplinar que descobre e classifica correlações (causal, analógica, emergente, dialética, etc.).
+  - Gerador de Teses PhD-level com 5 níveis acadêmicos (especulação → hipótese → teoria → paradigma → descoberta).
+  - Grafo de Conhecimento da universidade com nós e arestas navegáveis.
+  - 40+ professores especialistas distribuídos por todas as faculdades.
+  - Currículo base com 20+ disciplinas gerado automaticamente.
+  - Integração com MetaBus (eventos `synthetic_university.*`) e orquestrador (`orchestrator.synthetic_university()`).
+  - 59 novos testes TDD (total: 422 passed).
 
 ### Modificado
-- **README / ARCHITECTURE / diagram.mmd** sincronizados com a expansão jurídica e transversal completa.
-- **Mapas do ecossistema** regenerados com a nova camada `webapp`, a camada `legal` expandida e os novos vetores arquiteturais.
-- **Evolução** registrada nos ciclos `R56`, `R57`, `R58`, `R59`, `R60`, `R61`, `R62`, `R63`, `R64`, `R65`, `R66` e `R67`.
+- **README / ARCHITECTURE / diagram.mmd** sincronizados com a expansão jurídica, transversal e universitária completa.
+- **Mapas do ecossistema** regenerados com a nova camada `synthetic_university` (10 faculdades, 40+ professores, motor combinatorial).
+- **Orquestrador MarceloClaro** estendido com método `synthetic_university()`.
+- **Evolução** registrada nos ciclos `R56` a `R68`.
 
 ### Validação
-- Full test suite: `pytest tests -q` → 363 passed, 2 skipped.
+- Full test suite: `pytest tests -q` → 422 passed, 2 skipped.
 
 ## [2.2.0] - 2026-07-08
 

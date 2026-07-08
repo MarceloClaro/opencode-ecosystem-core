@@ -7,9 +7,9 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-2.3.0_Legal_Intelligence_Expansion-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-363_passed-success.svg)](tests/)
+[![Testes](https://img.shields.io/badge/Testes-422_passed-success.svg)](tests/)
 
-*Uma arquitetura cognitiva completa que une 156 agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, inteligência jurídica integrada (Datajud + AuxJuris + especialização por ramos + benchmarks jurídicos), 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico e Publicação Científica Automatizada.*
+*Uma arquitetura cognitiva completa que une 160+ agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, inteligência jurídica integrada (Datajud + AuxJuris + especialização por ramos + benchmarks jurídicos), 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico, Universidade Sintética Transversal (SPEC-935) com 10 faculdades e testes de 10.000+ combinações via MiroFish, e Publicação Científica Automatizada.*
 
 ---
 
@@ -407,6 +407,7 @@ graph TD
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
+        SynthUniv[Synthetic University<br>SPEC-935 · 10 Faculdades]
         Publishing[Publishing<br>LaTeX & Cover Designer]
         Research[Research<br>Hub c/ OSINT]
         Illus[Illustrations<br>Mermaid/MIRA/Graph]
@@ -460,6 +461,9 @@ graph TD
     Legal -->|Agentes jurídicos A2A| BB
     Legal -->|Especialização por 7 ramos| LegalBench
     LegalBench -->|tiers conservadores| MetaEval
+    SynthUniv -->|10k+ combinações via MiroFish| MiroFish
+    SynthUniv -->|10 Faculdades 40+ Professores| Agents
+    SynthUniv -->|Publica descobertas| MB
     EGS -->|Reflete Resultado| MB
     
     %% Agentes
