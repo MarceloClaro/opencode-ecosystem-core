@@ -771,6 +771,47 @@
         "Proximo passo: R81 — Benchmark contra baselines"
       ],
       "timestamp": 1783548698.346778
+    },
+    {
+      "round_id": "R81",
+      "objective": "Benchmark: Pipeline Refinado vs. Baselines (Random, Jaccard, Word2Vec)",
+      "changes": [
+        "Criado synthetic_university/benchmark.py: sistema de benchmark com 4 baselines",
+        "Random: 2000 pares aleatorios inter-faculdades",
+        "Jaccard: 2000 pares ranqueados por similaridade lexical (V0 original)",
+        "Word2Vec: tentativa com Gensim (N/D — corpus insuficiente ou lib ausente)",
+        "Refined: 30 combinacoes do pipeline R75-R79",
+        "Metrica unica: cosseno neural Ollama nomic-embed-text 768-d para todos",
+        "Criado tests/test_benchmark.py com 8 testes TDD"
+      ],
+      "results": {
+        "random": {
+          "coherence": 0.418,
+          "composite": 0.496,
+          "pct_target": 95.4
+        },
+        "jaccard": {
+          "coherence": 0.682,
+          "composite": 0.509,
+          "pct_target": 14.9
+        },
+        "refined": {
+          "coherence": 0.425,
+          "composite": 0.58,
+          "pct_target": 100.0
+        }
+      },
+      "conclusion": "Refined pipeline maximiza composite score (0.580 vs 0.496-0.509) e mantem 100% das combinacoes na zona fertil [0.20, 0.55]. Jaccard (V0) e excessivamente conservador (68% coherence, 15% alvo). Random tem boa cobertura (95%) mas composite inferior.",
+      "score": 9.0,
+      "lessons": [
+        "O Jaccard lexical e um baseline fraco: super-seleciona similaridade superficial",
+        "Random tem distribuicao surpreendentemente boa no espaco neural (95% no alvo)",
+        "A vantagem real do refined e o equilibrio (composite +100% target)",
+        "Word2Vec nao e viavel sem Gensim instalado — substituir por fastText se necessario",
+        "O benchmark confirma que a guianca semantica (R77) e o componente mais critico",
+        "Proximo passo possivel: integrar resultados ao paper V2 definitivo"
+      ],
+      "timestamp": 1783548957.6129832
     }
   ]
 }

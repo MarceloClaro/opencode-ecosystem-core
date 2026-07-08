@@ -1,0 +1,43 @@
+{
+  "benchmark": "R81",
+  "timestamp": 1783548935.6215074,
+  "metric": "neural_embedding_cosine",
+  "embedder": "Ollama nomic-embed-text 768-d",
+  "summary": {
+    "random": {
+      "available": true,
+      "n": 2000,
+      "time_s": 2.7638773918151855,
+      "coherence_mean": 0.41776581343263386,
+      "coherence_std": 0.07548295146929619,
+      "novelty_mean": 0.5822341865673661,
+      "composite_mean": 0.4958882906716317,
+      "pct_in_target_20_55": 95.39999999999999
+    },
+    "jaccard": {
+      "available": true,
+      "n": 2000,
+      "time_s": 1.3024911880493164,
+      "coherence_mean": 0.6823497536480427,
+      "coherence_std": 0.14430624090808875,
+      "novelty_mean": 0.3176502463519573,
+      "composite_mean": 0.5091174876824021,
+      "pct_in_target_20_55": 14.95
+    },
+    "word2vec": {
+      "available": false
+    },
+    "refined": {
+      "available": true,
+      "n": 30,
+      "time_s": 0.8135926723480225,
+      "coherence_mean": 0.42464568276817416,
+      "coherence_std": 0.05962580551406981,
+      "novelty_mean": 0.6920300887787392,
+      "composite_mean": 0.5800057263366758,
+      "pct_in_target_20_55": 100.0
+    }
+  },
+  "gain_vs_random_coherence": 1.6468243964269955,
+  "gain_vs_jaccard_coherence": -37.767152329447875
+}
