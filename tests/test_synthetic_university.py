@@ -611,3 +611,151 @@ class TestEcosystemIntegration:
         names = [d.name for d in health_discs]
         assert any('Psiquiatria' in n or 'Farmacologia' in n or 'Anatomia' in n or 'Epidemiologia' in n 
                    or 'Bioética' in n for n in names)
+
+    # =====================================================================
+    # NOVOS TESTES — Expansão: Forense, Loucura, Odontologia, Agricultura,
+    # Zootecnia, Manipulação Gênica, Gêmeos Digitais, ML/DL, Quântica
+    # =====================================================================
+
+    def test_health_sciences_medicina_legal_forense(self):
+        """Saúde: Medicina Legal e ciências forenses expandidas."""
+        text = ' '.join(c.lower() for c in HEALTH_SCIENCES.conceitos)
+        assert 'criminalística' in text or 'balística forense' in text
+        assert 'documentoscopia' in text or 'papiloscopia' in text
+        assert 'toxicologia forense' in text or 'genética forense' in text
+        assert 'cadeia de custódia' in text or 'local de crime' in text
+        assert 'antropologia forense' in text or 'identificação humana' in text
+        assert 'imputabilidade' in text or 'inimputabilidade' in text
+
+    def test_health_sciences_loucura_psicose_expandida(self):
+        """Saúde: loucura e psicose expandidas com subtipos de esquizofrenia."""
+        text = ' '.join(c.lower() for c in HEALTH_SCIENCES.conceitos)
+        assert 'esquizofrenia paranóide' in text
+        assert 'esquizofrenia hebefrênica' in text or 'esquizofrenia catatônica' in text
+        assert 'psicose puerperal' in text or 'psicose pós-parto' in text
+        assert 'psicose tóxica' in text or 'psicose orgânica' in text
+        assert 'síndrome de cotard' in text or 'síndrome de capgras' in text
+        assert 'alucinação auditiva' in text or 'alucinação visual' in text
+        assert 'sintomas negativos' in text or 'embotamento afetivo' in text
+        assert 'loucura' in text and ('antipsiquiatria' in text or 'reforma psiquiátrica' in text)
+
+    def test_human_sciences_psicologia_forense_expandida(self):
+        """Humanas: psicologia forense expandida com avaliação e perícia."""
+        text = ' '.join(c.lower() for c in HUMAN_SCIENCES.conceitos)
+        assert 'avaliação psicológica forense' in text
+        assert 'perícia psicológica' in text or 'entrevista forense' in text
+        assert 'falsas memórias' in text or 'síndrome da falsa memória' in text
+        assert 'alienação parental' in text or 'SAP' in text
+        assert 'psicopatia' in text or 'transtorno antissocial' in text
+        assert 'serial killer' in text or 'assassino em série' in text
+        assert 'criminologia' in text or 'vitimologia' in text
+
+    def test_human_sciences_loucura_filosofica(self):
+        """Humanas: loucura na perspectiva histórico-filosófica."""
+        text = ' '.join(c.lower() for c in HUMAN_SCIENCES.conceitos)
+        assert 'loucura' in text
+        assert 'foucault' in text or 'história da loucura' in text
+        assert 'antipsiquiatria' in text or 'basaglia' in text
+        assert 'reforma psiquiátrica' in text or 'luta antimanicomial' in text
+        assert 'caps' in text or 'centro de atenção psicossocial' in text
+
+    def test_health_sciences_odontologia_expandida(self):
+        """Saúde: odontologia expandida com especialidades."""
+        text = ' '.join(c.lower() for c in HEALTH_SCIENCES.conceitos)
+        assert 'endodontia' in text or 'tratamento de canal' in text
+        assert 'dentística' in text or 'restauração' in text
+        assert 'odontopediatria' in text or 'odontologia infantil' in text
+        assert 'estomatologia' in text or 'DTM' in text
+        assert 'bruxismo' in text or 'halitose' in text
+        assert 'cad/cam odontológico' in text or 'laser odontológico' in text
+
+    def test_exact_sciences_agricultura(self):
+        """Exatas: agricultura e agronomia."""
+        text = ' '.join(c.lower() for c in EXACT_SCIENCES.conceitos)
+        assert 'agricultura' in text or 'agronomia' in text
+        assert 'agroecologia' in text or 'agricultura sustentável' in text
+        assert 'solo' in text or 'pedologia' in text
+        assert 'adubação' in text or 'fertilidade do solo' in text
+        assert 'plantio direto' in text or 'rotação de culturas' in text
+        assert 'irrigação' in text or 'drenagem agrícola' in text
+
+    def test_exact_sciences_zootecnia(self):
+        """Exatas: zootecnia e produção animal."""
+        text = ' '.join(c.lower() for c in EXACT_SCIENCES.conceitos)
+        assert 'zootecnia' in text or 'produção animal' in text
+        assert 'bovinocultura' in text or 'pecuária' in text
+        assert 'suinocultura' in text or 'avicultura' in text
+        assert 'nutrição animal' in text or 'pastagem' in text
+        assert 'bem-estar animal' in text or 'etologia aplicada' in text
+        assert 'medicina veterinária' in text or 'sanidade animal' in text
+
+    def test_exact_sciences_manipulacao_genica(self):
+        """Exatas: manipulação gênica e DNA expandidos."""
+        text = ' '.join(c.lower() for c in EXACT_SCIENCES.conceitos)
+        assert 'manipulação genética' in text or 'engenharia genética' in text
+        assert 'terapia gênica' in text or 'gene therapy' in text
+        assert 'crispr' in text or 'cas9' in text
+        assert 'base editing' in text or 'prime editing' in text
+        assert 'gene drive' in text or 'impulso genético' in text
+        assert 'dna recombinante' in text or 'tecnologia do dna recombinante' in text
+        assert 'biologia sintética' in text or 'genoma sintético' in text
+        assert 'epigenética' in text or 'metilação do dna' in text
+
+    def test_engineering_gemeos_digitais(self):
+        """Engenharia: gêmeos digitais."""
+        text = ' '.join(c.lower() for c in ENGINEERING.conceitos)
+        assert 'gêmeo digital' in text or 'digital twin' in text
+        assert 'réplica virtual' in text or 'simulação digital' in text
+        assert 'manutenção preditiva' in text or 'predição de falhas' in text
+        assert 'indústria 4.0' in text or 'manufatura digital' in text
+        assert 'cidade inteligente' in text or 'smart city' in text
+        assert 'sistema ciber-físico' in text or 'cyber-physical system' in text
+
+    def test_programming_gemeos_digitais_framework(self):
+        """Programação: frameworks de gêmeos digitais."""
+        text = ' '.join(c.lower() for c in PROGRAMMING.conceitos)
+        assert 'azure digital twins' in text or 'aws iot twinnaker' in text
+        assert 'mqtt' in text or 'opc-ua' in text or 'websocket' in text
+        assert 'unity' in text or 'unreal engine' in text
+        assert 'digital twin framework' in text or 'framework de gêmeo digital' in text
+
+    def test_statistics_ml_dl_expandido(self):
+        """Estatística: ML/DL expandido com transformers, LLM, diffusion models."""
+        text = ' '.join(c.lower() for c in STATISTICS_DS.conceitos)
+        assert 'large language model' in text or 'llm' in text
+        assert 'diffusion model' in text or 'stable diffusion' in text
+        assert 'self-attention' in text or 'multi-head attention' in text
+        assert 'few-shot learning' in text or 'zero-shot learning' in text
+        assert 'aprendizado federado' in text or 'federated learning' in text
+        assert 'mlops' in text or 'machine learning operations' in text
+        assert 'xai' in text or 'explainable ai' in text
+        assert 'rag' in text or 'retrieval-augmented generation' in text
+
+    def test_quantum_cozimento_quantico(self):
+        """Quântica: cozimento/recozimento quântico e QUBO."""
+        text = ' '.join(c.lower() for c in QUANTUM.conceitos)
+        assert 'cozimento quântico' in text or 'recozimento quântico' in text
+        assert 'quantum annealing' in text
+        assert 'd-wave' in text or 'd-wave advantage' in text
+        assert 'qubo' in text or 'quadratic unconstrained binary' in text
+        assert 'modelo de ising' in text or 'ising model' in text
+
+    def test_quantum_circuitos_quantico_classico(self):
+        """Quântica: circuitos quântico-clássico e computação híbrida."""
+        text = ' '.join(c.lower() for c in QUANTUM.conceitos)
+        assert 'computação híbrida' in text or 'hybrid quantum-classical' in text
+        assert 'circuito parametrizado' in text or 'parametrized quantum circuit' in text
+        assert 'ansatz' in text or 'hardware-efficient ansatz' in text
+        assert 'variational quantum eigensolver' in text or 'VQE' in text
+        assert 'quantum neural network' in text or 'QNN' in text
+        assert 'quantum kernel' in text or 'QSVM' in text
+
+    def test_quantum_simulacoes_e_ruidos(self):
+        """Quântica: simulações quânticas e ruídos expandidos."""
+        text = ' '.join(c.lower() for c in QUANTUM.conceitos)
+        assert 'simulação quântica de materiais' in text or 'simulação quântica de moléculas' in text
+        assert 'tensor networks' in text or 'dmrg' in text
+        assert 'tempo de coerência' in text or 'coherence time' in text
+        assert 'mitigação de erros' in text or 'error mitigation' in text
+        assert 'zero-noise extrapolation' in text or 'zne' in text
+        assert 'surface code' in text or 'código de superfície' in text
