@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-2.3.0_Legal_Intelligence_Expansion-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-430_passed-success.svg)](tests/)
+[![Testes](https://img.shields.io/badge/Testes-444_passed-success.svg)](tests/)
 
 *Uma arquitetura cognitiva completa que une 160+ agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, inteligência jurídica integrada (Datajud + AuxJuris + especialização por ramos + benchmarks jurídicos), 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico, Universidade Sintética Transversal (SPEC-935) com 10 faculdades e testes de 10.000+ combinações via MiroFish, e Publicação Científica Automatizada.*
 
