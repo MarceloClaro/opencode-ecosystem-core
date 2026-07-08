@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Pacote legal — Módulo de Raciocínio Jurídico Brasileiro (SPEC-921/922/923)
-=============================================================================
+Pacote legal — Módulo de Raciocínio Jurídico Brasileiro (SPEC-921/922/923/927)
+=================================================================================
 Implementa os principais métodos de argumentação e decisão jurídica
 do sistema jurídico brasileiro.
 
@@ -16,6 +16,7 @@ Componentes:
   - LegalAgentCard: 4 agentes jurídicos A2A (SPEC-923/AUXJURIS)
   - LegalKnowledgeBase: base de conhecimento com RAG por keywords
   - LegalDocumentSummarizer: sumarizador de documentos jurídicos
+  - Specializations: perfis e agentes especialistas por ramo do direito
 """
 
 from legal.syllogism import (
@@ -81,6 +82,24 @@ from legal.summarizer import (
     SummaryResult,
     LegalEntities,
 )
+from legal.specializations import (
+    LegalDomainProfile,
+    LEGAL_DOMAIN_PROFILES,
+    list_legal_domains,
+    get_legal_domain_profile,
+    route_legal_domain,
+    assess_domain_coverage,
+    build_domain_specialist_agent,
+    route_specialist_agent,
+)
+from legal.benchmarks import (
+    LegalBenchmarkCase,
+    LEGAL_BENCHMARK_CASES,
+    benchmark_router,
+    evaluate_domain_answer,
+    classify_domain_expertise_tier,
+    run_domain_benchmark_suite,
+)
 
 __all__ = [
     # Syllogism
@@ -109,6 +128,14 @@ __all__ = [
     "LegalKnowledgeBase", "LegalDocument", "DEFAULT_LEGAL_DOCUMENTS",
     # Summarizer
     "LegalDocumentSummarizer", "SummaryResult", "LegalEntities",
+    # Domain specialization
+    "LegalDomainProfile", "LEGAL_DOMAIN_PROFILES", "list_legal_domains",
+    "get_legal_domain_profile", "route_legal_domain", "assess_domain_coverage",
+    "build_domain_specialist_agent", "route_specialist_agent",
+    # Benchmarks
+    "LegalBenchmarkCase", "LEGAL_BENCHMARK_CASES", "benchmark_router",
+    "evaluate_domain_answer", "classify_domain_expertise_tier",
+    "run_domain_benchmark_suite",
 ]
 
 __version__ = "1.0.0"

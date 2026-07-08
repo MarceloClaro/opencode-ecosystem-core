@@ -1,7 +1,7 @@
 {
   "summary": {
-    "node_count": 393,
-    "vector_count": 635,
+    "node_count": 399,
+    "vector_count": 654,
     "node_kinds": {
       "actor": 1,
       "agent": 156,
@@ -9,18 +9,18 @@
       "diagram": 1,
       "doc": 5,
       "layer": 20,
-      "module": 119,
+      "module": 121,
       "schema": 4,
-      "spec": 50,
-      "test": 29
+      "spec": 52,
+      "test": 31
     },
     "vector_kinds": {
-      "contains": 360,
-      "control_flow": 32,
-      "data_flow": 10,
-      "depends_on": 34,
+      "contains": 366,
+      "control_flow": 34,
+      "data_flow": 11,
+      "depends_on": 37,
       "documents": 9,
-      "imports": 190
+      "imports": 197
     }
   },
   "nodes": [
@@ -1697,6 +1697,14 @@
       "layer": "legal"
     },
     {
+      "id": "legal_benchmarks_py",
+      "label": "benchmarks",
+      "kind": "module",
+      "path": "legal/benchmarks.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
       "id": "legal_constitutional_py",
       "label": "constitutional",
       "kind": "module",
@@ -1733,6 +1741,14 @@
       "label": "precedents",
       "kind": "module",
       "path": "legal/precedents.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
+      "id": "legal_specializations_py",
+      "label": "specializations",
+      "kind": "module",
+      "path": "legal/specializations.py",
       "logical_group": "",
       "layer": "legal"
     },
@@ -2937,6 +2953,22 @@
       "layer": "specs"
     },
     {
+      "id": "specs_SPEC_927_legal_domain_specialization_md",
+      "label": "SPEC-927-legal-domain-specialization",
+      "kind": "spec",
+      "path": "specs/SPEC-927-legal-domain-specialization.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_928_legal_domain_benchmarks_md",
+      "label": "SPEC-928-legal-domain-benchmarks",
+      "kind": "spec",
+      "path": "specs/SPEC-928-legal-domain-benchmarks.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
       "id": "tests_test_advanced_subsystems_py",
       "label": "test_advanced_subsystems",
       "kind": "test",
@@ -3037,6 +3069,22 @@
       "label": "test_inspiration_audit",
       "kind": "test",
       "path": "tests/test_inspiration_audit.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_legal_domain_benchmarks_py",
+      "label": "test_legal_domain_benchmarks",
+      "kind": "test",
+      "path": "tests/test_legal_domain_benchmarks.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_legal_domain_specialization_py",
+      "label": "test_legal_domain_specialization",
+      "kind": "test",
+      "path": "tests/test_legal_domain_specialization.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -4318,6 +4366,12 @@
     },
     {
       "source": "layer_legal",
+      "target": "legal_benchmarks_py",
+      "kind": "contains",
+      "note": "legal contém legal/benchmarks.py"
+    },
+    {
+      "source": "layer_legal",
       "target": "legal_constitutional_py",
       "kind": "contains",
       "note": "legal contém legal/constitutional.py"
@@ -4351,6 +4405,12 @@
       "target": "legal_precedents_py",
       "kind": "contains",
       "note": "legal contém legal/precedents.py"
+    },
+    {
+      "source": "layer_legal",
+      "target": "legal_specializations_py",
+      "kind": "contains",
+      "note": "legal contém legal/specializations.py"
     },
     {
       "source": "layer_legal",
@@ -5091,6 +5151,18 @@
       "note": "specs contém specs/SPEC-926-webapp-dedicated-legal-tab.md"
     },
     {
+      "source": "layer_specs",
+      "target": "specs_SPEC_927_legal_domain_specialization_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-927-legal-domain-specialization.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_928_legal_domain_benchmarks_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-928-legal-domain-benchmarks.md"
+    },
+    {
       "source": "layer_tests",
       "target": "tests_test_advanced_subsystems_py",
       "kind": "contains",
@@ -5167,6 +5239,18 @@
       "target": "tests_test_inspiration_audit_py",
       "kind": "contains",
       "note": "tests contém tests/test_inspiration_audit.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_legal_domain_benchmarks_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_legal_domain_benchmarks.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_legal_domain_specialization_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_legal_domain_specialization.py"
     },
     {
       "source": "layer_tests",
@@ -5343,10 +5427,22 @@
       "note": "registro A2A de agentes jurídicos"
     },
     {
+      "source": "legal_benchmarks_py",
+      "target": "legal_specializations_py",
+      "kind": "control_flow",
+      "note": "benchmarks avaliam roteamento e cobertura por ramo"
+    },
+    {
       "source": "legal_integration_py",
       "target": "legal_datajud_client_py",
       "kind": "control_flow",
       "note": "integração consulta API Datajud"
+    },
+    {
+      "source": "legal_specializations_py",
+      "target": "legal_agents_py",
+      "kind": "control_flow",
+      "note": "especializações constroem agentes por ramo"
     },
     {
       "source": "marceloclaro_orchestrator_py",
@@ -5539,6 +5635,12 @@
       "target": "legal_syllogism_py",
       "kind": "data_flow",
       "note": "ratio decidendi informa subsunção"
+    },
+    {
+      "source": "legal_specializations_py",
+      "target": "legal_knowledge_base_py",
+      "kind": "data_flow",
+      "note": "perfis jurídicos orientam coverage por domínio"
     },
     {
       "source": "legal_summarizer_py",
@@ -5787,6 +5889,24 @@
       "note": "SPEC-925"
     },
     {
+      "source": "specs_SPEC_927_legal_domain_specialization_md",
+      "target": "specs_SPEC_924_legal_impact_scanner_md",
+      "kind": "depends_on",
+      "note": "SPEC-924"
+    },
+    {
+      "source": "specs_SPEC_927_legal_domain_specialization_md",
+      "target": "specs_SPEC_926_webapp_dedicated_legal_tab_md",
+      "kind": "depends_on",
+      "note": "SPEC-926"
+    },
+    {
+      "source": "specs_SPEC_928_legal_domain_benchmarks_md",
+      "target": "specs_SPEC_927_legal_domain_specialization_md",
+      "kind": "depends_on",
+      "note": "SPEC-927"
+    },
+    {
       "source": "specs_SPEC_007_trust_engine_md",
       "target": "trust_trust_engine_py",
       "kind": "documents",
@@ -5883,6 +6003,12 @@
       "note": "economy.token_economy"
     },
     {
+      "source": "legal_benchmarks_py",
+      "target": "legal_specializations_py",
+      "kind": "imports",
+      "note": "legal.specializations"
+    },
+    {
       "source": "legal_init_py",
       "target": "legal_agents_py",
       "kind": "imports",
@@ -5899,6 +6025,12 @@
       "target": "legal_balancing_py",
       "kind": "imports",
       "note": "legal.balancing"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_benchmarks_py",
+      "kind": "imports",
+      "note": "legal.benchmarks"
     },
     {
       "source": "legal_init_py",
@@ -5929,6 +6061,12 @@
       "target": "legal_precedents_py",
       "kind": "imports",
       "note": "legal.precedents"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_specializations_py",
+      "kind": "imports",
+      "note": "legal.specializations"
     },
     {
       "source": "legal_init_py",
@@ -5971,6 +6109,12 @@
       "target": "legal_syllogism_py",
       "kind": "imports",
       "note": "legal.syllogism"
+    },
+    {
+      "source": "legal_specializations_py",
+      "target": "legal_agents_py",
+      "kind": "imports",
+      "note": "legal.agents"
     },
     {
       "source": "marceloclaro_cli_py",
@@ -6615,6 +6759,18 @@
       "note": "mci.metabus"
     },
     {
+      "source": "tests_test_legal_domain_benchmarks_py",
+      "target": "legal_benchmarks_py",
+      "kind": "imports",
+      "note": "legal.benchmarks"
+    },
+    {
+      "source": "tests_test_legal_domain_specialization_py",
+      "target": "legal_specializations_py",
+      "kind": "imports",
+      "note": "legal.specializations"
+    },
+    {
       "source": "tests_test_legal_impact_scanner_py",
       "target": "scanners_init_py",
       "kind": "imports",
@@ -6979,6 +7135,12 @@
       "target": "webapp_legal_impact_helpers_py",
       "kind": "imports",
       "note": "webapp.legal_impact_helpers"
+    },
+    {
+      "source": "webapp_legal_impact_helpers_py",
+      "target": "legal_specializations_py",
+      "kind": "imports",
+      "note": "legal.specializations"
     }
   ]
 }

@@ -38,4 +38,21 @@ def summarize_legal_impact_section(section: Optional[Dict[str, Any]]) -> Dict[st
     }
 
 
-__all__ = ["build_legal_params", "summarize_legal_impact_section"]
+def summarize_legal_domain_route(query: str) -> Dict[str, Any]:
+    from legal.specializations import route_legal_domain, build_domain_specialist_agent
+
+    profile = route_legal_domain(query)
+    agent = build_domain_specialist_agent(profile.domain_id)
+    return {
+        "domain_id": profile.domain_id,
+        "domain_name": profile.name,
+        "specialist_agent_id": agent.id,
+        "specialist_agent_name": agent.name,
+    }
+
+
+__all__ = [
+    "build_legal_params",
+    "summarize_legal_impact_section",
+    "summarize_legal_domain_route",
+]

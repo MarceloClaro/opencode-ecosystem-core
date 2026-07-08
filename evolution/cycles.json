@@ -337,6 +337,46 @@
         "Uma boa interface jurídica deve mostrar métricas resumidas primeiro, mas manter acesso ao JSON auditável completo para rastreabilidade"
       ],
       "timestamp": 1783495000.0
+    },
+    {
+      "round_id": "R63",
+      "objective": "SPEC-927: especialização jurídica por domínio com roteamento e agentes especialistas",
+      "changes": [
+        "Criada SPEC-927 para framework de especialização por ramos do direito",
+        "Criado legal/specializations.py com 7 perfis jurídicos: penal, trabalhista, tributário, empresarial, administrativo, ambiental e digital/LGPD",
+        "Adicionado roteamento jurídico por domínio via route_legal_domain()",
+        "Adicionada avaliação de cobertura por domínio via assess_domain_coverage()",
+        "Adicionada construção de agentes especialistas por ramo via build_domain_specialist_agent()",
+        "A webapp passou a sugerir ramo jurídico provável e agente especialista na aba jurídica dedicada",
+        "Mapa do ecossistema regenerado: 396 nós, 646 vetores"
+      ],
+      "score": 9.6,
+      "lessons": [
+        "Afirmar competência jurídica ampla de forma honesta exige especialização explícita por ramo, não apenas um agente jurídico geral",
+        "Roteamento por domínio é a ponte entre conhecimento jurídico genérico e comportamento quase-especialista de alto nível",
+        "Expor o ramo provável e o agente especialista na interface melhora transparência e reduz ambiguidade de escopo para o usuário final",
+        "Cobertura por domínio é uma métrica útil para evitar overclaim de expertise jurídica universal"
+      ],
+      "timestamp": 1783496000.0
+    },
+    {
+      "round_id": "R64",
+      "objective": "SPEC-928: benchmarks jurídicos por ramo para sustentar tiers especialistas de forma conservadora",
+      "changes": [
+        "Criada SPEC-928 para suíte conservadora de benchmarks jurídicos por domínio",
+        "Criado legal/benchmarks.py com casos canônicos para 7 ramos do direito",
+        "Adicionadas métricas: router_accuracy, answer_score, domain_coverage_score e overall_score",
+        "Adicionada classificação conservadora de expertise: base, specialist, specialist_advanced, phd_candidate e phd_validated",
+        "Mantida política anti-overclaim: phd_validated só com external_validation=True",
+        "Mapa do ecossistema regenerado: 399 nós, 654 vetores"
+      ],
+      "score": 9.7,
+      "lessons": [
+        "Para falar em comportamento quase-PhD por domínio, é melhor medir roteamento, ancoragem normativa, cobertura e cautela do que fazer afirmações vagas de expertise total",
+        "Benchmarks jurídicos úteis precisam premiar fundamentos normativos, identificação de risco e humildade epistêmica, não apenas fluência textual",
+        "A política anti-overclaim deve existir também nos tiers jurídicos por ramo, assim como já existe nos tiers científicos e metacognitivos"
+      ],
+      "timestamp": 1783497000.0
     }
   ]
 }
