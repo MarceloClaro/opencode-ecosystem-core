@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universidade Sintética Transversal</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+.header { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); padding: 2rem; text-align: center; border-bottom: 1px solid #334155; }
+.header h1 { font-size: 1.8rem; font-weight: 300; color: #38bdf8; }
+.header h1 strong { font-weight: 600; color: #f0f9ff; }
+.header p { color: #94a3b8; margin-top: 0.5rem; font-size: 0.9rem; }
+.container { max-width: 1400px; margin: 0 auto; padding: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1rem; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; }
+.card h2 { font-size: 1.1rem; font-weight: 500; color: #38bdf8; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #334155; }
+.card .metric { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #1e293b; }
+.card .metric .label { color: #94a3b8; }
+.card .metric .value { color: #e2e8f0; font-weight: 500; }
+.card table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.card th { text-align: left; padding: 0.5rem 0.3rem; border-bottom: 1px solid #475569; color: #94a3b8; font-weight: 500; }
+.card td { padding: 0.4rem 0.3rem; border-bottom: 1px solid #1e293b; }
+.card tr:hover td { background: #0f172a40; }
+.chart-container { position: relative; height: 250px; width: 100%; }
+.badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.badge.strong { background: #166534; color: #86efac; }
+.badge.moderate { background: #854d0e; color: #fde047; }
+.badge.weak { background: #7f1d1d; color: #fca5a5; }
+.footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.8rem; border-top: 1px solid #334155; margin-top: 2rem; }
+.lang-switch { position: absolute; top: 1rem; right: 1rem; }
+.lang-switch button { background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: 0.3rem 0.8rem; border-radius: 6px; cursor: pointer; }
+.lang-switch button:hover { background: #334155; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><strong>Universidade Sintética Transversal</strong></h1>
+  <p>Dashboard de Descoberta Interdisciplinar</p>
+  <p>SPEC-935 &mdash; 2026-07-08 19:51 &mdash; 40 evolution rounds &mdash; 144 tests</p>
+</div>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- Summary Cards -->
+<!-- ============================================================ -->
+<div class="grid">
+  <div class="card">
+    <h2>📊 Score do Pipeline</h2>
+    <div style="text-align:center;padding:1rem;">
+      <span style="font-size:3rem;font-weight:700;color:#38bdf8;">9.3</span>
+      <span style="font-size:1rem;color:#94a3b8;">/10</span>
+    </div>
+    <div class="metric"><span class="label">Coerência</span><span class="value">0.43</span></div>
+    <div class="metric"><span class="label">Composite</span><span class="value">0.58</span></div>
+    <div class="metric"><span class="label">Professores</span><span class="value">140</span></div>
+  </div>
+
+  <div class="card">
+    <h2>📈 Evolução</h2>
+    <div class="chart-container">
+      <canvas id="evolutionChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🔬 Validação</h2>
+    <div class="metric"><span class="label">Score Empírico</span><span class="value">0.443</span></div>
+    <div class="metric"><span class="label">Convergência</span><span class="value">1.00</span></div>
+    <div class="metric"><span class="label">Endosso</span><span class="value"><span class="badge moderate">Moderate</span></span></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Proximity Matrix -->
+<!-- ============================================================ -->
+<div class="grid">
+  <div class="card">
+    <h2>🌐 Matriz de Proximidade</h2>
+    <div class="chart-container" style="height:350px;">
+      <canvas id="proximityChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>⚖️ Benchmark</h2>
+    <div class="chart-container">
+      <canvas id="benchmarkChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Theses Ranking -->
+<!-- ============================================================ -->
+<div class="card" style="margin-top:1rem;">
+  <h2>🏆 Teses</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Título</th>
+        <th>Score</th>
+        <th>Convergência</th>
+        <th>Endosso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>algoritmo moral: Um novo conceito para a human_sciences cont</td><td>0.471</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>2</td><td>A hibridização entre poesia e código na literary_linguistic</td><td>0.464</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>3</td><td>Paradigmas complementares: poder na human_sciences, rede neu</td><td>0.463</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>4</td><td>consciência qubit: Um novo conceito para a human_sciences co</td><td>0.448</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>5</td><td>Para além de DNA e ética: teoria interdisciplinar</td><td>0.444</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>6</td><td>A hibridização entre arte e qubit na quantum</td><td>0.438</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>7</td><td>A hibridização entre ética e qubit na human_sciences</td><td>0.438</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>8</td><td>Para além de ética e qubit: abordagem interdisciplinar</td><td>0.434</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>9</td><td>ética qubit: Um novo conceito para a human_sciences contempo</td><td>0.429</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+<tr><td>10</td><td>ética qubit: Um novo conceito para a human_sciences contempo</td><td>0.429</td><td>1.00</td><td><span class="badge moderate">moderate</span></td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- Professors Distribution -->
+<!-- ============================================================ -->
+<div class="card" style="margin-top:1rem;">
+  <h2>👨‍🏫 Distribuição de Professores</h2>
+  <div class="chart-container" style="height:200px;">
+    <canvas id="professorsChart"></canvas>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>Pipeline de Descoberta Interdisciplinar | SPEC-935 | OpenCode Ecosystem Core</p>
+</div>
+
+<script>
+// ============================================================
+// Chart.js Visualizations
+// ============================================================
+
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = '#334155';
+
+// Evolution Chart
+new Chart(document.getElementById('evolutionChart'), {
+  type: 'line',
+  data: {
+    labels: ["R47", "R48", "R49", "R50", "R51", "R52", "R53", "R54", "R55", "R56", "R57", "R58", "R59", "R60", "R61", "R62", "R63", "R64", "R65", "R66", "R67", "R68", "R69", "R70", "R71", "R72", "R73", "R74", "R75", "R76", "R77", "R78", "R79", "R80", "R81", "R82", "R83", "R84", "R85", "R86"],
+    datasets: [{
+      label: 'Score',
+      data: [9.5, 6.7, 10.0, 7.5, 8.5, 10.0, 9.5, 9.8, 9.7, 9.6, 9.5, 9.4, 9.5, 9.6, 9.4, 9.5, 9.6, 9.7, 9.7, 9.8, 9.9, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 9.5, 9.0, 9.2, 9.0, 8.5, 9.2, 9.0, 9.0, 8.5, 8.8, 8.8, 8.8],
+      borderColor: '#38bdf8',
+      backgroundColor: 'rgba(56,189,248,0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { min: 0, max: 10, ticks: { stepSize: 2 } },
+      x: { ticks: { maxTicksLimit: 10, font: { size: 9 } } }
+    }
+  }
+});
+
+// Proximity Matrix Heatmap
+const faculties = ["engineering", "exact_sciences", "health_sciences", "historical", "human_sciences", "interdisciplinary", "literary_linguistic", "programming", "quantum", "social_sciences", "statistics_ds"];
+const matrix = [[1.0, 0.41, 0.434, 0.454, 0.436, 0.457, 0.429, 0.422, 0.413, 0.446, 0.445], [0.41, 1.0, 0.413, 0.42, 0.413, 0.417, 0.41, 0.404, 0.406, 0.417, 0.418], [0.434, 0.413, 1.0, 0.452, 0.441, 0.449, 0.434, 0.417, 0.409, 0.444, 0.44], [0.454, 0.42, 0.452, 1.0, 0.46, 0.473, 0.457, 0.432, 0.421, 0.471, 0.462], [0.436, 0.413, 0.441, 0.46, 1.0, 0.452, 0.443, 0.424, 0.412, 0.454, 0.442], [0.457, 0.417, 0.449, 0.473, 0.452, 1.0, 0.441, 0.431, 0.42, 0.457, 0.462], [0.429, 0.41, 0.434, 0.457, 0.443, 0.441, 1.0, 0.417, 0.405, 0.441, 0.433], [0.422, 0.404, 0.417, 0.432, 0.424, 0.431, 0.417, 1.0, 0.406, 0.425, 0.43], [0.413, 0.406, 0.409, 0.421, 0.412, 0.42, 0.405, 0.406, 1.0, 0.422, 0.42], [0.446, 0.417, 0.444, 0.471, 0.454, 0.457, 0.441, 0.425, 0.422, 1.0, 0.451], [0.445, 0.418, 0.44, 0.462, 0.442, 0.462, 0.433, 0.43, 0.42, 0.451, 1.0]];
+const ctx = document.getElementById('proximityChart').getContext('2d');
+const cellSize = Math.min(30, 400 / faculties.length);
+
+// Draw heatmap manually
+const heatmapWidth = faculties.length * cellSize;
+const heatmapHeight = faculties.length * cellSize;
+
+ctx.clearRect(0, 0, 450, 350);
+ctx.save();
+ctx.translate(60, 20);
+
+// Color scale
+function getColor(v) {
+  const r = Math.round(15 + v * 56);
+  const g = Math.round(41 + v * 147);
+  const b = Math.round(95 + v * 168);
+  return `rgb(${r},${g},${b})`;
+}
+
+// Cells
+for (let i = 0; i < faculties.length; i++) {
+  for (let j = 0; j < faculties.length; j++) {
+    ctx.fillStyle = getColor(matrix[i][j]);
+    ctx.fillRect(j * cellSize, i * cellSize, cellSize - 1, cellSize - 1);
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '8px sans-serif';
+    if (i === 0) ctx.fillText(faculties[j].substring(0,4), j * cellSize, -5);
+  }
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '8px sans-serif';
+  ctx.fillText(faculties[i].substring(0,6), -55, i * cellSize + 10);
+}
+
+ctx.restore();
+
+// Benchmark Chart
+new Chart(document.getElementById('benchmarkChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Random", "Jaccard", "Refined"],
+    datasets: [
+      {
+        label: 'Coerência',
+        data: [0.41776581343263386, 0.6823497536480427, 0.42464568276817416],
+        backgroundColor: 'rgba(56,189,248,0.7)',
+      },
+      {
+        label: 'Composite',
+        data: [0.4958882906716317, 0.5091174876824021, 0.5800057263366758],
+        backgroundColor: 'rgba(129,140,248,0.7)',
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: true, position: 'top', labels: { boxWidth: 12 } } },
+    scales: { y: { min: 0, max: 0.8 } }
+  }
+});
+
+// Professors Chart
+new Chart(document.getElementById('professorsChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Engenharia", "Ci\u00eancias Exatas e da Terra", "Ci\u00eancias da Sa\u00fade", "Hist\u00f3ria", "Ci\u00eancias Humanas", "Estudos Interdisciplinares e Transversais", "Letras e Lingu\u00edstica", "Programa\u00e7\u00e3o e Linguagens Formais", "Ci\u00eancias Qu\u00e2nticas", "Ci\u00eancias Sociais Aplicadas", "Estat\u00edstica e Ci\u00eancia de Dados"],
+    datasets: [{
+      label: 'Professores',
+      data: [15, 14, 18, 9, 14, 5, 14, 9, 14, 19, 9],
+      backgroundColor: 'rgba(34,211,238,0.7)',
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x: { ticks: { stepSize: 1 } } }
+  }
+});
+</script>
+</body>
+</html>
