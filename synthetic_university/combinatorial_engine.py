@@ -362,59 +362,98 @@ class CombinatorialDiscoveryEngine:
         return max(0.0, min(1.0, viability))
     
     def _compute_novelty(self, concepts: List[str]) -> float:
-        """Novelty: quão inédita é a combinação."""
-        # Se já testamos combinações similares, reduz novelty
-        concept_set = frozenset(concepts)
+        """Novelty: quão inédita é a combinação.
         
-        # Verificar similaridade com combinações existentes
+        R77: Usa distância semântica (embedding neural) em vez de
+        Jaccard de sets. Combinações semanticamente similares às já
+        testadas recebem menor novelty.
+        """
+        concept_set = frozenset(concepts)
         max_sim = 0.0
+        
         for existing in self._history:
             existing_set = frozenset(existing.concepts)
+            
+            # Exatamente igual → novelty zero
             if concept_set == existing_set:
                 return 0.0
             
-            # Jaccard entre sets
-            intersection = concept_set & existing_set
-            union = concept_set | existing_set
-            if union:
-                sim = len(intersection) / len(union)
-                max_sim = max(max_sim, sim)
+            # Similaridade semântica média entre todos os pares de conceitos
+            # das duas combinações
+            total_sim = 0.0
+            n_pairs = 0
+            for c in concepts:
+                for ec in existing.concepts:
+                    if c == ec:
+                        total_sim += 1.0  # mesmo conceito = similaridade máxima
+                    else:
+                        total_sim += self.embedding.similarity(c, ec)
+                    n_pairs += 1
+            
+            if n_pairs > 0:
+                avg_sim = total_sim / n_pairs
+                max_sim = max(max_sim, avg_sim)
         
-        # Quanto mais similar ao já testado, menor novelty
+        # Quanto mais semanticamente similar ao já testado, menor novelty
         base_novelty = 1.0 - max_sim
         
         # Bônus para combinações que cruzam muitas faculdades
-        faculties_in_concepts = set()
-        for c in concepts:
-            for fid, fac in self.faculty_map.items():
-                if c in fac.conceitos:
-                    faculties_in_concepts.add(fid)
-        
+        faculties_in_concepts = self._faculties_for_concepts(concepts)
         cross_bonus = min(0.3, len(faculties_in_concepts) * 0.05)
         
         return min(1.0, base_novelty + cross_bonus)
     
+    def _faculties_for_concepts(self, concepts: List[str]) -> Set[str]:
+        """Retorna as faculdades associadas a uma lista de conceitos."""
+        faculties = set()
+        for c in concepts:
+            for fid, fac in self.faculty_map.items():
+                if c in fac.conceitos:
+                    faculties.add(fid)
+        return faculties
+    
+    @staticmethod
+    def _normalize_concept(text: str) -> str:
+        """Remove acentos e normaliza para comparação."""
+        import unicodedata
+        nfkd = unicodedata.normalize('NFKD', text.lower().strip())
+        return nfkd.encode('ascii', 'ignore').decode('ascii')
+    
     def _compute_impact(self, concepts: List[str]) -> float:
-        """Impacto potencial baseado na abrangência dos conceitos."""
-        # Conceitos mais gerais/abrangentes podem ter maior impacto
-        # Usamos comprimento como proxy: conceitos curtos são mais gerais
+        """Impacto potencial baseado na abrangência semântica dos conceitos.
+        
+        R77: Usa frequência entre faculdades (normalizado por acento).
+        Conceitos que aparecem em múltiplas faculdades têm maior impacto.
+        """
         impact_scores = []
         for c in concepts:
-            # Palavras muito curtas tendem a ser muito genéricas
-            # Palavras muito longas tendem a ser muito específicas
+            c_norm = self._normalize_concept(c)
+            
+            # 1. Contagem de faculdades que contêm o conceito (sem acentos)
+            fac_count = 0
+            for fid, fac in self.faculty_map.items():
+                for fc in fac.conceitos:
+                    if self._normalize_concept(fc) == c_norm:
+                        fac_count += 1
+                        break
+            
+            breadth = min(1.0, fac_count / 3.0)
+            
+            # 2. Comprimento como proxy secundário de generalidade
             length = len(c)
             if length <= 5:
-                impact_scores.append(0.7)  # conceito geral
+                length_score = 0.7
             elif length <= 12:
-                impact_scores.append(0.5)  # médio
+                length_score = 0.5
             elif length <= 20:
-                impact_scores.append(0.3)  # específico
+                length_score = 0.3
             else:
-                impact_scores.append(0.1)  # muito específico
+                length_score = 0.1
+            
+            impact_scores.append(max(breadth, length_score * 0.5))
         
-        # Impacto também vem da diversidade da combinação
         diversity = self.embedding.diversity(concepts)
-        diversity_bonus = diversity * 0.3
+        diversity_bonus = diversity * 0.20
         
         base = sum(impact_scores) / len(impact_scores) if impact_scores else 0.5
         return min(1.0, base + diversity_bonus)
@@ -510,38 +549,147 @@ class CombinatorialDiscoveryEngine:
         
         return result
     
+    # ------------------------------------------------------------------
+    # Semantically-Guided Generation (R77)
+    # ------------------------------------------------------------------
+    
+    # Zona ótima de similaridade para descoberta interdisciplinar
+    SIM_TARGET_MIN = 0.20
+    SIM_TARGET_MAX = 0.55
+    
+    def _should_accept_pair(self, a: str, b: str, 
+                             target_min: float = None,
+                             target_max: float = None) -> bool:
+        """Aceita/rejeita par baseado na similaridade semântica.
+        
+        Usa amostragem por aceitação-rejeição para favorecer pares
+        na zona fértil de descoberta interdisciplinar:
+        - Abaixo de target_min: muito diferentes → baixa aceitação
+        - Entre target_min e target_max: zona ótima → alta aceitação
+        - Acima de target_max: muito similares → baixa aceitação
+        
+        Isso substitui o random.choice() puro por uma exploração
+        semanticamente informada do espaço combinatorial.
+        """
+        if target_min is None:
+            target_min = self.SIM_TARGET_MIN
+        if target_max is None:
+            target_max = self.SIM_TARGET_MAX
+        
+        sim = self.embedding.similarity(a, b)
+        
+        if sim < target_min:
+            # Muito diferentes: baixa probabilidade (mas não zero, para manter diversidade)
+            p = 0.10 * max(0.1, sim / target_min)
+        elif sim <= target_max:
+            # Zona ótima: alta probabilidade
+            p = 0.80
+        else:
+            # Muito similares: baixa probabilidade (já conhecido)
+            excess = (sim - target_max) / (1.0 - target_max)
+            p = 0.15 * max(0.1, 1.0 - excess)
+        
+        return random.random() < p
+    
+    def _guided_concept_sample(self, concepts: List[str], 
+                                 reference: str,
+                                 n_samples: int = 5) -> List[str]:
+        """Amostragem guiada: retorna conceitos próximos à zona ótima 
+        de similaridade com o conceito de referência."""
+        if not concepts:
+            return []
+        
+        # Pontuar cada conceito
+        scored = []
+        for c in concepts:
+            if c == reference:
+                continue
+            sim = self.embedding.similarity(c, reference)
+            # Score mais alto na zona ótima
+            if sim < self.SIM_TARGET_MIN:
+                score = sim / self.SIM_TARGET_MIN * 0.3
+            elif sim <= self.SIM_TARGET_MAX:
+                score = 0.8 + 0.2 * (1.0 - abs(sim - 0.35) / 0.15)
+            else:
+                score = 0.3 * max(0.1, 1.0 - (sim - self.SIM_TARGET_MAX))
+            scored.append((c, max(0.01, score)))
+        
+        if not scored:
+            return random.sample(concepts, min(n_samples, len(concepts)))
+        
+        # Amostragem ponderada por score
+        candidates = [s for s in scored if s[1] > 0.1]
+        if not candidates:
+            candidates = scored
+        
+        weights = [s[1] for s in candidates]
+        total = sum(weights)
+        if total <= 0:
+            weights = [1.0] * len(candidates)
+        
+        k = min(n_samples, len(candidates))
+        return [candidates[i][0] for i in 
+                random.choices(range(len(candidates)), weights=weights, k=k)]
+    
     def generate_pair_combinations(
         self, 
         faculties_a: List[str], 
         faculties_b: List[str],
         max_combinations: int = 1000,
     ) -> List[CombinationResult]:
-        """Gera combinações de pares entre dois grupos de faculdades."""
+        """Gera combinações de pares entre dois grupos de faculdades.
+        
+        R77: Usa amostragem guiada por similaridade semântica em vez de
+        random.choice() puro. Favorece pares na zona fértil de descoberta
+        interdisciplinar (similaridade 0.20-0.55).
+        """
         concepts_a = self._concepts_from_faculties(faculties_a)
         concepts_b = self._concepts_from_faculties(faculties_b)
         
         results = []
-        # Limit to max_combinations
         total_pairs = min(len(concepts_a) * len(concepts_b), max_combinations)
         
         if total_pairs <= 0:
             return results
         
-        # Amostra aleatória para manter dentro do limite
         sample_pairs = min(max_combinations, len(concepts_a) * len(concepts_b))
         count = 0
         attempts = 0
-        max_attempts = sample_pairs * 3  # evitar loop infinito
+        max_attempts = max(sample_pairs * 3, 200)
+        
+        # Para guiar a amostragem, começa com um conceito "âncora"
+        anchor = random.choice(concepts_a)
         
         while count < sample_pairs and attempts < max_attempts:
             attempts += 1
-            a = random.choice(concepts_a)
-            b = random.choice(concepts_b)
-            if a != b:
-                result = self.test_combination((a, b))
-                if result.combination_id not in {r.combination_id for r in results}:
-                    results.append(result)
-                    count += 1
+            
+            # A cada 10 tentativas, troca a âncora para manter diversidade
+            if attempts % 10 == 0:
+                anchor = random.choice(concepts_a)
+            
+            # Amostragem guiada: seleciona candidatos próximos à zona ótima
+            candidates_a = self._guided_concept_sample(
+                concepts_a, anchor, n_samples=3
+            ) or [random.choice(concepts_a)]
+            
+            candidates_b = self._guided_concept_sample(
+                concepts_b, anchor, n_samples=3
+            ) or [random.choice(concepts_b)]
+            
+            a = random.choice(candidates_a)
+            b = random.choice(candidates_b)
+            
+            if a == b:
+                continue
+            
+            # Aceitação-rejeição baseada em similaridade
+            if not self._should_accept_pair(a, b):
+                continue
+            
+            result = self.test_combination((a, b))
+            if result.combination_id not in {r.combination_id for r in results}:
+                results.append(result)
+                count += 1
         
         self.total_combinations_generated += len(results)
         results.sort(key=lambda r: r.composite_score, reverse=True)
@@ -552,7 +700,10 @@ class CombinatorialDiscoveryEngine:
         faculty_ids: List[str],
         max_combinations: int = 2000,
     ) -> List[CombinationResult]:
-        """Gera combinações triplas entre conceitos de três faculdades."""
+        """Gera combinações triplas entre conceitos de três faculdades.
+        
+        R77: Usa amostragem guiada por similaridade semântica.
+        """
         concepts_by_fac = {}
         for fid in faculty_ids:
             fac = self.faculty_map.get(fid)
@@ -566,16 +717,36 @@ class CombinatorialDiscoveryEngine:
         
         count = 0
         attempts = 0
-        max_attempts = max_combinations * 5
+        max_attempts = max(max_combinations * 5, 500)
+        anchor = random.choice(list(self.faculty_map.keys()))
         
         while count < max_combinations and attempts < max_attempts:
             attempts += 1
+            
+            if attempts % 15 == 0:
+                anchor = random.choice(list(self.faculty_map.keys()))
+            
             chosen = []
-            for cset in all_concept_sets:
-                chosen.append(random.choice(cset))
+            for i, cset in enumerate(all_concept_sets):
+                # Usa o primeiro conceito escolhido como referência
+                ref = chosen[0] if chosen else (
+                    self.faculty_map[anchor].conceitos[0]
+                    if anchor in concepts_by_fac else random.choice(cset)
+                )
+                candidates = self._guided_concept_sample(
+                    list(cset), ref, n_samples=3
+                ) or [random.choice(cset)]
+                chosen.append(random.choice(candidates))
+            
             # Remove duplicates within combination
             chosen = list(dict.fromkeys(chosen))
             if len(chosen) >= 2:
+                # Aceitação-rejeição baseada na coerência geral
+                if len(chosen) >= 3:
+                    coh = self.embedding.coherence(chosen)
+                    if coh < 0.10:
+                        continue  # muito discrepantes
+                
                 result = self.test_combination(tuple(chosen))
                 if result.combination_id not in {r.combination_id for r in results}:
                     results.append(result)
@@ -590,7 +761,10 @@ class CombinatorialDiscoveryEngine:
         faculty_ids: List[str],
         max_combinations: int = 3000,
     ) -> List[CombinationResult]:
-        """Gera combinações quádruplas entre conceitos de até 4 faculdades."""
+        """Gera combinações quádruplas entre conceitos de até 4 faculdades.
+        
+        R77: Usa amostragem guiada com coerência mínima.
+        """
         concepts_by_fac = {}
         for fid in faculty_ids:
             fac = self.faculty_map.get(fid)
@@ -604,18 +778,31 @@ class CombinatorialDiscoveryEngine:
         
         count = 0
         attempts = 0
-        max_attempts = max_combinations * 8
+        max_attempts = max(max_combinations * 8, 500)
         
         while count < max_combinations and attempts < max_attempts:
             attempts += 1
-            chosen = []
+            
             # Escolhe de 2 a 4 faculdades aleatórias
             n_facs = random.randint(2, min(4, len(all_concept_sets)))
             selected_sets = random.sample(all_concept_sets, n_facs)
+            
+            chosen = []
             for cset in selected_sets:
-                chosen.append(random.choice(cset))
+                ref = chosen[0] if chosen else random.choice(list(cset))
+                candidates = self._guided_concept_sample(
+                    list(cset), ref, n_samples=3
+                ) or [random.choice(cset)]
+                chosen.append(random.choice(candidates))
+            
             chosen = list(dict.fromkeys(chosen))
             if len(chosen) >= 2:
+                # Coerência mínima para evitar combinações absurdas
+                if len(chosen) >= 3:
+                    coh = self.embedding.coherence(chosen)
+                    if coh < 0.08:
+                        continue
+                
                 result = self.test_combination(tuple(chosen))
                 if result.combination_id not in {r.combination_id for r in results}:
                     results.append(result)
