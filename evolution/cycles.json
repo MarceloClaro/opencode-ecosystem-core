@@ -909,6 +909,51 @@
         "121 testes passando confirmam que otimizacoes nao quebraram funcionalidades existentes"
       ],
       "timestamp": 1783550477.4980354
+    },
+    {
+      "round_id": "R85",
+      "objective": "Internacionalizacao: i18n module + paper EN + pipeline bilingual",
+      "changes": [
+        "Criado synthetic_university/i18n.py: modulo de internacionalizacao EN/PT-BR",
+        "Catalogo com 30+ chaves para mensagens do pipeline",
+        "Singleton I18n com deteccao automatica de locale (LANG env)",
+        "Format string suportada (ex: i18n(\"validation.n_theses\", n=42))",
+        "Fallback para en_US quando locale nao suportado",
+        "Criado academic/papers/paper_synthetic_university_v2_en.tex (363 linhas)",
+        "10 novos testes TDD para i18n"
+      ],
+      "score": 8.8,
+      "lessons": [
+        "Locale detection via LANG env e confiavel para ambientes Linux",
+        "Chaves desconhecidas fazem fallback para propria chave (autodescritivo)",
+        "Paper EN tem mesma estrutura e qualidade que versao PT-BR",
+        "Proximo passo: R86 — integracao com arXiv, Semantic Scholar e Sci-Hub CLI"
+      ],
+      "timestamp": 1783550804.7293544
+    },
+    {
+      "round_id": "R86",
+      "objective": "Integracao Academica: arXiv API + Semantic Scholar + Sci-Hub CLI",
+      "changes": [
+        "Criado synthetic_university/academic_integration.py com 3 integracoes",
+        "arXiv API: busca de papers reais via export.arxiv.org (XML parse)",
+        "Semantic Scholar: busca com citationCount, venue, year, DOI",
+        "Sci-Hub: verificacao de disponibilidade via 4 dominios com fallback",
+        "LiteratureBacking: score unificado 0-1 combinando 3 fontes",
+        "AcademicIntegrator: orquestrador com cache, offline mode, search_thesis()",
+        "Cache interno para evitar re-busca de queries repetidas",
+        "14 novos testes TDD (com mocks para APIs externas)",
+        "arXiv live: 5 papers reais para \"quantum ethics machine learning\""
+      ],
+      "score": 8.8,
+      "lessons": [
+        "arXiv API e confiavel e simples (XML sobre HTTP)",
+        "Semantic Scholar requer API key para > 1 req/s (S2_API_KEY env)",
+        "Sci-Hub dominios mudam com frequencia — lista atualizavel",
+        "Offline mode essencial para desenvolvimento sem rede",
+        "Cache evita re-busca e reduz latencia em repeticoes"
+      ],
+      "timestamp": 1783550995.3663585
     }
   ]
 }
