@@ -1,6 +1,6 @@
 # Arquitetura: OpenCode Ecosystem Core
 
-Este documento detalha a arquitetura do núcleo do OpenCode Ecosystem, centrada no orquestrador `marceloclaro`, na camada **Metacognitive Interconnect (MCI)** e nos subsistemas científicos de governança, RAG e avaliação superhuman-candidate.
+Este documento detalha a arquitetura do núcleo do OpenCode Ecosystem, centrada no orquestrador `marceloclaro`, na camada **Metacognitive Interconnect (MCI)**, nos subsistemas científicos de governança, RAG e avaliação superhuman-candidate, e na nova **camada jurídica integrada** (Datajud + AuxJuris + especialização por ramo + benchmarks jurídicos).
 
 ## Diagrama de Arquitetura
 
@@ -8,6 +8,7 @@ Este documento detalha a arquitetura do núcleo do OpenCode Ecosystem, centrada 
 graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
+    WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
     
     %% Camada SDD/TDD
     subgraph SDD [SDD & TDD Engine]
@@ -37,6 +38,8 @@ graph TD
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
         Acad[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
+        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928]
+        LegalBench[Legal Benchmarks<br>SPEC-928]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks + Tiers]
         MetaEval[Metacognitive Eval<br>SPEC-920]
@@ -73,13 +76,20 @@ graph TD
     RAG -->|Métricas| Bench
     MB -->|Traços e reflexões| MetaEval
     Trust -->|Confiança e outcomes| MetaEval
+    Orchestrator -->|6. Raciocínio Jurídico| Legal
+    Legal -->|Subsunção + Ponderação| Reason
+    Legal -->|Interpretação Constitucional| MetaEval
+    Legal -->|RAG jurídico + Datajud| RAG
+    Legal -->|Agentes jurídicos A2A| BB
+    Legal -->|Especialização por 7 ramos| LegalBench
+    LegalBench -->|tiers conservadores| MetaEval
     
     %% Agentes
     subgraph Agents [Catálogo de Agentes]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
-        A4[130 Especializados...]
+        A4[156 Especializados...]
     end
     
     %% Fluxo de Agentes
@@ -101,8 +111,9 @@ graph TD
 4. **Delegação via Atenção (Multi-Head Attention):** A tarefa é postada no Blackboard. Quando o *Call for Proposals (CFP)* retorna os agentes elegíveis, o `AttentionRouter` calcula scores softmax baseados em 4 cabeças: semântica (vetores d=64), cobertura de capacidade, *confidence ledger* e carga atual. O agente com maior score recebe a atribuição.
 5. **Execução (TDD + Transformer):** A tarefa entra no *encoder stack*. O agente selecionado executa o ciclo TDD (**RED → GREEN → REFACTOR**). O `SpecVerifier` atua como *gate*: a entrega só avança se satisfizer 100% dos critérios da especificação. Se aprovada, o `GradingHead` avalia a qualidade da implementação.
 6. **Grounding científico (RAG):** Quando a tarefa envolve ciência, o `ScientificRAG` indexa documentos, recupera chunks citáveis, aplica reranking científico e abstém quando não há evidência suficiente.
-7. **Readiness superhuman:** A suíte `superhuman_suite.py` consolida benchmarks científicos, grounding, robustez, calibração e reprodutibilidade. O tier `superhuman_verified` só é emitido quando há validação externa explícita.
-8. **Reflexão (MCI):** Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão, atualiza o *Confidence Ledger* do agente e persiste a experiência na memória semântica para futuras recuperações.
+7. **Camada jurídica especializada:** Quando a tarefa envolve direito, o subsistema `legal/` combina raciocínio jurídico brasileiro, base de conhecimento com RAG por keywords, dados reais do Datajud, agentes jurídicos A2A, scanner jurídico de impacto e roteamento por 7 ramos especializados.
+8. **Readiness e benchmarks:** A suíte `superhuman_suite.py` consolida benchmarks científicos, grounding, robustez, calibração e reprodutibilidade. Em paralelo, `legal/benchmarks.py` mede acurácia de roteamento, cobertura e qualidade de resposta por ramo jurídico com política anti-overclaim (`phd_candidate` vs. `phd_validated`).
+9. **Reflexão (MCI):** Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão, atualiza o *Confidence Ledger* do agente e persiste a experiência na memória semântica para futuras recuperações.
 
 ## Scientific RAG + Superhuman Readiness
 
@@ -154,3 +165,16 @@ Tiers conservadores:
 - `research_grade`
 - `metacognitive_superhuman_candidate`
 - `metacognitive_superhuman_verified` — somente com `external_validation=True`
+
+## Legal Intelligence Layer (`legal/`, SPEC-921 → SPEC-928)
+
+O ecossistema agora possui uma camada jurídica integrada composta por:
+
+- **Raciocínio jurídico brasileiro**: subsunção, ponderação, precedentes, interpretação constitucional e scoring;
+- **Integração Datajud**: ingestão de dados processuais reais dos 27 tribunais estaduais;
+- **AUXJURIS**: agentes jurídicos A2A, knowledge base com RAG por keywords e sumarização jurídica;
+- **Legal Impact Scanner**: avaliação de LGPD, propriedade intelectual, compliance, grounding jurisprudencial, responsabilidade contratual e ganho metacognitivo jurídico;
+- **Especialização por ramo**: penal, trabalhista, tributário, empresarial, administrativo, ambiental e digital/LGPD;
+- **Benchmarks jurídicos por domínio**: classificação conservadora em `base`, `specialist`, `specialist_advanced`, `phd_candidate` e `phd_validated` (somente com validação externa).
+
+Isso não transforma automaticamente o ecossistema em “advogado PhD universal”; transforma-o em uma plataforma **juridicamente mais especializada, auditável e epistemicamente prudente**.

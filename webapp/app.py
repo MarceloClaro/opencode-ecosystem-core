@@ -388,7 +388,7 @@ st.sidebar.image(os.path.join(ROOT, "assets", "bmc_qr.png") if os.path.exists(
     os.path.join(ROOT, "assets", "bmc_qr.png")) else None, width=160)
 st.sidebar.markdown(
     "### OpenCode Ecosystem Core\n"
-    "Orquestrador metacognitivo com 134 agentes especializados.\n\n"
+    "Orquestrador metacognitivo com 156 agentes especializados.\n\n"
     "[☕ Buy Me a Coffee](https://buymeacoffee.com/geomaker)\n\n"
     "[📖 Documentação](https://github.com/MarceloClaro/opencode-ecosystem-core)"
 )

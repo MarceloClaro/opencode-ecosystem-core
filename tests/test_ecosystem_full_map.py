@@ -51,6 +51,7 @@ def test_build_ecosystem_map_contains_key_paths():
     assert "specs/SPEC-926-webapp-dedicated-legal-tab.md" in paths
     assert "specs/SPEC-927-legal-domain-specialization.md" in paths
     assert "specs/SPEC-928-legal-domain-benchmarks.md" in paths
+    assert "specs/SPEC-929-legal-docs-map-sync.md" in paths
     assert "tests/test_metacognitive_superhuman.py" in paths
     assert "tests/test_datajud_integration.py" in paths
     assert "tests/test_auxjuris_integration.py" in paths

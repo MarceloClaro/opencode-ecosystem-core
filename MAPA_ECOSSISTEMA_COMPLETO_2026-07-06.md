@@ -1,7 +1,7 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **399**
-- Vetores: **654**
+- Nós: **400**
+- Vetores: **661**
 
 ## Taxonomia de Nós
 
@@ -15,17 +15,17 @@
 | layer | 20 |
 | module | 121 |
 | schema | 4 |
-| spec | 52 |
+| spec | 53 |
 | test | 31 |
 
 ## Taxonomia de Vetores
 
 | kind | quantidade |
 |---|---:|
-| contains | 366 |
+| contains | 367 |
 | control_flow | 34 |
 | data_flow | 11 |
-| depends_on | 37 |
+| depends_on | 43 |
 | documents | 9 |
 | imports | 197 |
 
@@ -424,6 +424,7 @@ graph TD
 | specs_SPEC_926_webapp_dedicated_legal_tab_md | spec | specs | specs/SPEC-926-webapp-dedicated-legal-tab.md |
 | specs_SPEC_927_legal_domain_specialization_md | spec | specs | specs/SPEC-927-legal-domain-specialization.md |
 | specs_SPEC_928_legal_domain_benchmarks_md | spec | specs | specs/SPEC-928-legal-domain-benchmarks.md |
+| specs_SPEC_929_legal_docs_map_sync_md | spec | specs | specs/SPEC-929-legal-docs-map-sync.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
 | tests_test_auxjuris_integration_py | test | tests | tests/test_auxjuris_integration.py |
@@ -784,6 +785,7 @@ graph TD
 | layer_specs | specs_SPEC_926_webapp_dedicated_legal_tab_md | contains | specs contém specs/SPEC-926-webapp-dedicated-legal-tab.md |
 | layer_specs | specs_SPEC_927_legal_domain_specialization_md | contains | specs contém specs/SPEC-927-legal-domain-specialization.md |
 | layer_specs | specs_SPEC_928_legal_domain_benchmarks_md | contains | specs contém specs/SPEC-928-legal-domain-benchmarks.md |
+| layer_specs | specs_SPEC_929_legal_docs_map_sync_md | contains | specs contém specs/SPEC-929-legal-docs-map-sync.md |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
 | layer_tests | tests_test_auxjuris_integration_py | contains | tests contém tests/test_auxjuris_integration.py |
@@ -908,6 +910,12 @@ graph TD
 | specs_SPEC_927_legal_domain_specialization_md | specs_SPEC_924_legal_impact_scanner_md | depends_on | SPEC-924 |
 | specs_SPEC_927_legal_domain_specialization_md | specs_SPEC_926_webapp_dedicated_legal_tab_md | depends_on | SPEC-926 |
 | specs_SPEC_928_legal_domain_benchmarks_md | specs_SPEC_927_legal_domain_specialization_md | depends_on | SPEC-927 |
+| specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_029_ecosystem_full_map_md | depends_on | SPEC-029 |
+| specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_924_legal_impact_scanner_md | depends_on | SPEC-924 |
+| specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_925_webapp_legal_impact_interface_md | depends_on | SPEC-925 |
+| specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_926_webapp_dedicated_legal_tab_md | depends_on | SPEC-926 |
+| specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_927_legal_domain_specialization_md | depends_on | SPEC-927 |
+| specs_SPEC_929_legal_docs_map_sync_md | specs_SPEC_928_legal_domain_benchmarks_md | depends_on | SPEC-928 |
 | specs_SPEC_007_trust_engine_md | trust_trust_engine_py | documents | trust/trust_engine.py |
 | specs_SPEC_008_token_economy_md | economy_token_economy_py | documents | economy/token_economy.py |
 | specs_SPEC_009_scanners_md | scanners_pipeline_py | documents | scanners/pipeline.py |

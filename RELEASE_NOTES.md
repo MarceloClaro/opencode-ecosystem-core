@@ -1,5 +1,63 @@
 # Release Notes: OpenCode Ecosystem Core
 
+## v2.3.0 — Legal Intelligence Expansion
+
+Esta versão transforma o subsistema jurídico em uma camada estratégica do ecossistema. O OpenCode agora combina **raciocínio jurídico brasileiro**, **Datajud**, **AUXJURIS**, **scanner jurídico de impacto**, **especialização por 7 ramos do direito**, **benchmarks jurídicos conservadores por domínio** e uma **aba jurídica dedicada na webapp**.
+
+### Destaques
+
+1. **Core Jurídico (`legal/`)**
+   - Subsunção, ponderação, precedentes, interpretação constitucional e scoring.
+   - Integração com dados processuais reais da API pública Datajud do CNJ.
+   - Knowledge base com RAG por keywords e sumarização jurídica.
+
+2. **AUXJURIS integrado ao MCI**
+   - 4 agentes jurídicos A2A.
+   - Base de conhecimento jurídica integrada ao Blackboard/MetaBus.
+   - Roteamento jurídico explicável e agente especialista sugerido por ramo.
+
+3. **Legal Impact Scanner (`scanners/legal_impact_scanner.py`)**
+   - Avalia LGPD, licenciamento, compliance, grounding jurisprudencial, responsabilidade contratual e defensibilidade de publicação.
+   - Mede `compliance_awareness`, `normative_conflict_detection`, `risk_anticipation` e `epistemic_humility_legal`.
+
+4. **Especialização por ramo + benchmarks (`SPEC-927/928`)**
+   - 7 ramos: penal, trabalhista, tributário, empresarial, administrativo, ambiental e digital/LGPD.
+   - Benchmarks por ramo com tiers conservadores:
+     `base` → `specialist` → `specialist_advanced` → `phd_candidate` → `phd_validated`.
+   - `phd_validated` exige validação externa explícita.
+
+5. **Webapp jurídica dedicada (`SPEC-925/926`)**
+   - Nova aba `⚖️ Jurídico` no Streamlit.
+   - Exibe score jurídico, ganho metacognitivo, readiness, flags de alto risco, ramo provável e agente especialista.
+
+### Validação
+
+```bash
+pytest tests/test_legal_domain_specialization.py -q
+# 6 passed
+
+pytest tests/test_legal_domain_benchmarks.py -q
+# 6 passed
+
+pytest tests -q
+# 343 passed, 2 skipped, 1 warning
+```
+
+### Como usar
+
+```bash
+streamlit run webapp/app.py
+```
+
+Na aba `⚖️ Jurídico`, forneça o corpus e os campos de análise para obter:
+
+- score jurídico
+- ganho metacognitivo jurídico
+- readiness
+- flags de alto risco
+- ramo jurídico provável
+- agente especialista sugerido
+
 ## v2.2.0 — Metacognitive Superhuman Refinement
 
 Esta versão adiciona a **Metacognitive Superhuman Refinement Suite (SPEC-920)**, uma régua conservadora para avaliar se o ecossistema está apenas executando tarefas ou melhorando sua própria forma de decidir.
