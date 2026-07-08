@@ -978,6 +978,45 @@
         "Chart.js via CDN mantem dashboard funcional mesmo offline (apos cache)"
       ],
       "timestamp": 1783551322.8667328
+    },
+    {
+      "round_id": "R89",
+      "objective": "Thesis Enrichment via Antigravity Web Search",
+      "changes": [
+        "Criado synthetic_university/thesis_enricher.py",
+        "Busca web real por conceitos academicos via OpenCode CLI",
+        "Cache persistente em disco com TTL de 7 dias",
+        "Fallback com 10 dominios de conhecimento pre-definidos",
+        "Extracao de abstracts via OpenCode CLI",
+        "Enriquecimento batch de multiplas teses",
+        "33+ testes TDD passando no total"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "OpenCode CLI pode buscar dados academicos reais em vez de mockar",
+        "Cache reduz drasticamente latencia em pipelines batch",
+        "Fallback com dados semanticos e mais util que dados aleatorios"
+      ],
+      "timestamp": 1783552173.26069
+    },
+    {
+      "round_id": "R90",
+      "objective": "Visual Abstract Generation via Antigravity Image + SVG Fallback",
+      "changes": [
+        "Criado synthetic_university/visual_abstract.py",
+        "Geracao de figuras academicas conceituais (SVG) para top teses",
+        "Indice JSON mapeando todas as imagens geradas",
+        "Integracao com Antigravity Image para geracao real de imagens",
+        "Deteccao automatica de metodologia a partir da hipotese",
+        "Cache por hash SHA-256 do conteudo da tese"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "SVG e um formato robusto e leve para diagramas academicos",
+        "Hash do conteudo evita re-geracao para teses identicas",
+        "Pipeline assincrono: Antigravity Image > SVG fallback"
+      ],
+      "timestamp": 1783552173.2606952
     }
   ]
 }
