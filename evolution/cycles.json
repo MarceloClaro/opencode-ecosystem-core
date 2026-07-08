@@ -954,6 +954,30 @@
         "Cache evita re-busca e reduz latencia em repeticoes"
       ],
       "timestamp": 1783550995.3663585
+    },
+    {
+      "round_id": "R87",
+      "objective": "Discovery Dashboard: HTML interativo com visualizacoes Chart.js",
+      "changes": [
+        "Criado synthetic_university/dashboard_generator.py",
+        "Dashboard HTML auto-contido com Chart.js (CDN)",
+        "6 secoes: Score do Pipeline, Evolucao, Matriz de Proximidade, Benchmark, Teses, Professores",
+        "Heatmap manual da matriz de proximidade 11x11 (canvas API)",
+        "Grafico de evolucao (linha) dos rounds R0-R87",
+        "Grafico de benchmark (barras) Random vs Jaccard vs Refined",
+        "Tabela de teses ranqueadas com badges de endosso",
+        "Distribuicao de professores por faculdade (barras horizontais)",
+        "Geracao bilingue (EN + PT-BR) com suporte a i18n",
+        "518 testes TDD passando no total"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Canvas API para heatmap e mais flexivel que Chart.js para matriz",
+        "i18n integrado ao dashboard permite visualizacao bilingue",
+        "Dados embutidos no HTML eliminam dependencia de servidor",
+        "Chart.js via CDN mantem dashboard funcional mesmo offline (apos cache)"
+      ],
+      "timestamp": 1783551322.8667328
     }
   ]
 }
