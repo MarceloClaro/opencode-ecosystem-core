@@ -6,10 +6,10 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-2.3.0_Legal_Intelligence_Expansion-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-444_passed-success.svg)](tests/)
-[![Universidade Sintética](https://img.shields.io/badge/Conceitos-2992-blueviolet.svg)](synthetic_university/)
-[![Combinações](https://img.shields.io/badge/Combinações-6.878_por_ciclo-ff69b4.svg)](synthetic_university/)
+[![Versão](https://img.shields.io/badge/Versão-2.4.0_LLM_Peer_Review-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-549_passed-success.svg)](tests/)
+[![Universidade Sintética](https://img.shields.io/badge/Ciclos-46-blueviolet.svg)](synthetic_university/)
+[![Cobertura](https://img.shields.io/badge/Cobertura-46_ciclos_evolutivos-orange.svg)](evolution/cycles.json)
 
 *Uma arquitetura cognitiva completa que une 160+ agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, inteligência jurídica integrada (Datajud + AuxJuris + especialização por ramos + benchmarks jurídicos), 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico, Universidade Sintética Transversal (SPEC-935) com 10 faculdades e testes de 10.000+ combinações via MiroFish, e Publicação Científica Automatizada.*
 
@@ -589,6 +589,20 @@ opencode-ecosystem-core/
 ├── research/
 │   ├── experiments/       # 🆕 Matrizes de cenários de pesquisa
 │   └── pipelines/         # 🆕 Executores de lote integrados
+├── synthetic_university/  # SPEC-935 · 10 Faculdades · 46 ciclos · LLM real
+│   ├── agents/            # 140+ professores especializados
+│   ├── combinatorial_engine.py    # Geração combinatorial com embeddings
+│   ├── core.py            # Núcleo da Universidade Sintética
+│   ├── empirical_validation.py    # Validação empírica calibrada (R82)
+│   ├── i18n.py            # Internacionalização EN/PT-BR (R85)
+│   ├── academic_integration.py    # arXiv + Sem Scholar + Sci-Hub (R86)
+│   ├── dashboard_generator.py     # Dashboard HTML interativo (R87)
+│   ├── llm_evaluator.py           # LLM real via OpenCode CLI (R88)
+│   ├── thesis_enricher.py         # Enriquecimento web (R89)
+│   ├── visual_abstract.py         # Abstracts visuais SVG (R90)
+│   ├── peer_review.py             # Revisão cega multi-LLM (R91)
+│   ├── submission_package.py      # Pacote submissão Qualis A1 (R92)
+│   └── novelty_analysis.py        # Análise de novidade (R93)
 ├── sdd/                   # SpecRegistry, SpecVerifier, TDDRunner
 ├── trust/                 # Trust Engine + Behavioral Gate
 ├── economy/               # Token Economy (Staking, Slashing, Fee Market)
@@ -609,27 +623,24 @@ opencode-ecosystem-core/
 ## 🧪 Executar os Testes
 
 ```bash
-# Todos os 263+ testes do ecossistema
+# Todos os 549+ testes do ecossistema
 python3 -m pytest tests/ -v
 
-# Apenas o pipeline científico (v2.0 SuperHuman)
+# Apenas Universidade Sintética (R82-R93)
+python3 -m pytest tests/test_empirical_validation.py tests/test_i18n.py tests/test_academic_integration.py tests/test_dashboard_generator.py -v
+
+# Apenas LLM + Peer Review (R88-R93)
+python3 -m pytest tests/test_r88_llm_evaluator.py tests/test_r89_thesis_enricher.py tests/test_r90_visual_abstract.py tests/test_r91_peer_review.py tests/test_r92_submission_package.py tests/test_r93_novelty_analysis.py -v
+
+# Apenas pipeline científico (v2.0 SuperHuman)
 python3 -m pytest tests/test_scientific_superhuman.py -v
 
-# Apenas o pipeline de governança (v1.x compat)
+# Apenas pipeline de governança (v1.x compat)
 python3 -m pytest tests/test_scientific_governance_pipeline.py -v
-
-# Apenas o runner de lote
-python3 -m pytest tests/test_run_research_batch.py -v
-
-# Apenas Scientific RAG + Superhuman Readiness
-python3 -m pytest tests/test_scientific_rag_superhuman.py -v
-
-# Apenas Metacognitive Superhuman Suite
-python3 -m pytest tests/test_metacognitive_superhuman.py -v
 ```
 
 ---
 <div align="center">
   <i>Construído com rigor metodológico, inspirado pela Teoria dos Jogos e desenhado para o futuro.</i><br>
-  <b>v2.2.0 — Metacognitive Refinement + Scientific RAG com EvidenceGraph | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
+  <b>v2.4.0 — LLM Peer Review + Submission Package + Novelty Analysis | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
 </div>
