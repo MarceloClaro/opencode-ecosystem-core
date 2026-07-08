@@ -114,6 +114,7 @@ graph TD
 7. **Camada jurídica especializada:** Quando a tarefa envolve direito, o subsistema `legal/` combina raciocínio jurídico brasileiro, base de conhecimento com RAG por keywords, dados reais do Datajud, agentes jurídicos A2A, scanner jurídico de impacto e roteamento por 7 ramos especializados.
 8. **Readiness e benchmarks:** A suíte `superhuman_suite.py` consolida benchmarks científicos, grounding, robustez, calibração e reprodutibilidade. Em paralelo, `legal/benchmarks.py` mede acurácia de roteamento, cobertura e qualidade de resposta por ramo jurídico com política anti-overclaim (`phd_candidate` vs. `phd_validated`).
 9. **Reflexão (MCI):** Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão, atualiza o *Confidence Ledger* do agente e persiste a experiência na memória semântica para futuras recuperações.
+10. **Sincronização transversal via MetaBus (SPEC-934):** wrappers de OQS, VSEE, EGS, ScientificRAG, suítes de benchmark/metacognição, MiroFish, Game Theory, Publishing, Research e SDD passam a emitir eventos de subsistema, atualizar confiança por tópico e enriquecer a memória semântica pesquisável do MCI.
 
 ## Scientific RAG + Superhuman Readiness
 

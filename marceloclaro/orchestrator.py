@@ -440,6 +440,38 @@ class MarceloClaroOrchestrator:
             include_legal_impact=include_legal_impact,
             legal_params=legal_params,
         )
+        if include_legal_impact and "legal_impact" in report:
+            params = legal_params or {}
+            domain_id = params.get("domain_id", "general")
+            payload = {
+                "titulo": params.get("titulo", "Diagnóstico Jurídico"),
+                "marker": params.get("marker"),
+                "overall_score": report["legal_impact"].get("overall_score", 0.0),
+                "metacognitive_gain_score": report["legal_impact"].get("metacognitive_gain_score", 0.0),
+                "legal_readiness": report["legal_impact"].get("legal_readiness", "—"),
+                "high_risk_flags": report["legal_impact"].get("high_risk_flags", []),
+            }
+            metabus.publish_legal_event(
+                "impact_assessed",
+                domain_id=domain_id,
+                payload=payload,
+                source_agent=self.id,
+            )
+            metabus.memory.upsert_semantic_topic(
+                f"legal.domain.{domain_id}",
+                lesson=(
+                    f"Diagnóstico jurídico '{payload['titulo']}' com readiness "
+                    f"{payload['legal_readiness']} e score {payload['overall_score']}."
+                ),
+                metadata={
+                    "last_overall_score": payload["overall_score"],
+                    "last_metacognitive_gain": payload["metacognitive_gain_score"],
+                },
+            )
+            metabus.memory.update_domain_confidence(
+                domain_id,
+                float(payload["metacognitive_gain_score"] or 0.0) / 100.0,
+            )
         gaps = report.get("evolutionary", {}).get("total_gaps", 0)
         extra = ""
         if deep:

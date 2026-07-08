@@ -1,7 +1,7 @@
 {
   "summary": {
-    "node_count": 400,
-    "vector_count": 661,
+    "node_count": 407,
+    "vector_count": 710,
     "node_kinds": {
       "actor": 1,
       "agent": 156,
@@ -11,16 +11,16 @@
       "layer": 20,
       "module": 121,
       "schema": 4,
-      "spec": 53,
-      "test": 31
+      "spec": 57,
+      "test": 34
     },
     "vector_kinds": {
-      "contains": 367,
+      "contains": 374,
       "control_flow": 34,
       "data_flow": 11,
-      "depends_on": 43,
+      "depends_on": 55,
       "documents": 9,
-      "imports": 197
+      "imports": 227
     }
   },
   "nodes": [
@@ -2977,6 +2977,38 @@
       "layer": "specs"
     },
     {
+      "id": "specs_SPEC_931_domain_legal_knowledge_bases_md",
+      "label": "SPEC-931-domain-legal-knowledge-bases",
+      "kind": "spec",
+      "path": "specs/SPEC-931-domain-legal-knowledge-bases.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_932_webapp_domain_kb_integration_md",
+      "label": "SPEC-932-webapp-domain-kb-integration",
+      "kind": "spec",
+      "path": "specs/SPEC-932-webapp-domain-kb-integration.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_933_metabus_legal_refinement_md",
+      "label": "SPEC-933-metabus-legal-refinement",
+      "kind": "spec",
+      "path": "specs/SPEC-933-metabus-legal-refinement.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
+      "id": "specs_SPEC_934_metabus_transformer_conscious_orchestration_md",
+      "label": "SPEC-934-metabus-transformer-conscious-orchestration",
+      "kind": "spec",
+      "path": "specs/SPEC-934-metabus-transformer-conscious-orchestration.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
       "id": "tests_test_advanced_subsystems_py",
       "label": "test_advanced_subsystems",
       "kind": "test",
@@ -3029,6 +3061,14 @@
       "label": "test_deep_diagnose",
       "kind": "test",
       "path": "tests/test_deep_diagnose.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_domain_legal_knowledge_bases_py",
+      "label": "test_domain_legal_knowledge_bases",
+      "kind": "test",
+      "path": "tests/test_domain_legal_knowledge_bases.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -3109,6 +3149,22 @@
       "label": "test_llm_client",
       "kind": "test",
       "path": "tests/test_llm_client.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_metabus_legal_refinement_py",
+      "label": "test_metabus_legal_refinement",
+      "kind": "test",
+      "path": "tests/test_metabus_legal_refinement.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_metabus_transversal_sync_py",
+      "label": "test_metabus_transversal_sync",
+      "kind": "test",
+      "path": "tests/test_metabus_transversal_sync.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -5177,6 +5233,30 @@
       "note": "specs contém specs/SPEC-929-legal-docs-map-sync.md"
     },
     {
+      "source": "layer_specs",
+      "target": "specs_SPEC_931_domain_legal_knowledge_bases_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-931-domain-legal-knowledge-bases.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_932_webapp_domain_kb_integration_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-932-webapp-domain-kb-integration.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_933_metabus_legal_refinement_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-933-metabus-legal-refinement.md"
+    },
+    {
+      "source": "layer_specs",
+      "target": "specs_SPEC_934_metabus_transformer_conscious_orchestration_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-934-metabus-transformer-conscious-orchestration.md"
+    },
+    {
       "source": "layer_tests",
       "target": "tests_test_advanced_subsystems_py",
       "kind": "contains",
@@ -5217,6 +5297,12 @@
       "target": "tests_test_deep_diagnose_py",
       "kind": "contains",
       "note": "tests contém tests/test_deep_diagnose.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_domain_legal_knowledge_bases_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_domain_legal_knowledge_bases.py"
     },
     {
       "source": "layer_tests",
@@ -5277,6 +5363,18 @@
       "target": "tests_test_llm_client_py",
       "kind": "contains",
       "note": "tests contém tests/test_llm_client.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_metabus_legal_refinement_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_metabus_legal_refinement.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_metabus_transversal_sync_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_metabus_transversal_sync.py"
     },
     {
       "source": "layer_tests",
@@ -5957,6 +6055,78 @@
       "note": "SPEC-928"
     },
     {
+      "source": "specs_SPEC_931_domain_legal_knowledge_bases_md",
+      "target": "specs_SPEC_927_legal_domain_specialization_md",
+      "kind": "depends_on",
+      "note": "SPEC-927"
+    },
+    {
+      "source": "specs_SPEC_931_domain_legal_knowledge_bases_md",
+      "target": "specs_SPEC_928_legal_domain_benchmarks_md",
+      "kind": "depends_on",
+      "note": "SPEC-928"
+    },
+    {
+      "source": "specs_SPEC_932_webapp_domain_kb_integration_md",
+      "target": "specs_SPEC_925_webapp_legal_impact_interface_md",
+      "kind": "depends_on",
+      "note": "SPEC-925"
+    },
+    {
+      "source": "specs_SPEC_932_webapp_domain_kb_integration_md",
+      "target": "specs_SPEC_926_webapp_dedicated_legal_tab_md",
+      "kind": "depends_on",
+      "note": "SPEC-926"
+    },
+    {
+      "source": "specs_SPEC_932_webapp_domain_kb_integration_md",
+      "target": "specs_SPEC_927_legal_domain_specialization_md",
+      "kind": "depends_on",
+      "note": "SPEC-927"
+    },
+    {
+      "source": "specs_SPEC_932_webapp_domain_kb_integration_md",
+      "target": "specs_SPEC_931_domain_legal_knowledge_bases_md",
+      "kind": "depends_on",
+      "note": "SPEC-931"
+    },
+    {
+      "source": "specs_SPEC_933_metabus_legal_refinement_md",
+      "target": "specs_SPEC_924_legal_impact_scanner_md",
+      "kind": "depends_on",
+      "note": "SPEC-924"
+    },
+    {
+      "source": "specs_SPEC_933_metabus_legal_refinement_md",
+      "target": "specs_SPEC_927_legal_domain_specialization_md",
+      "kind": "depends_on",
+      "note": "SPEC-927"
+    },
+    {
+      "source": "specs_SPEC_933_metabus_legal_refinement_md",
+      "target": "specs_SPEC_932_webapp_domain_kb_integration_md",
+      "kind": "depends_on",
+      "note": "SPEC-932"
+    },
+    {
+      "source": "specs_SPEC_934_metabus_transformer_conscious_orchestration_md",
+      "target": "specs_SPEC_009_scanners_md",
+      "kind": "depends_on",
+      "note": "SPEC-009"
+    },
+    {
+      "source": "specs_SPEC_934_metabus_transformer_conscious_orchestration_md",
+      "target": "specs_SPEC_924_legal_impact_scanner_md",
+      "kind": "depends_on",
+      "note": "SPEC-924"
+    },
+    {
+      "source": "specs_SPEC_934_metabus_transformer_conscious_orchestration_md",
+      "target": "specs_SPEC_933_metabus_legal_refinement_md",
+      "kind": "depends_on",
+      "note": "SPEC-933"
+    },
+    {
       "source": "specs_SPEC_007_trust_engine_md",
       "target": "trust_trust_engine_py",
       "kind": "documents",
@@ -6047,10 +6217,22 @@
       "note": "benchmarks.scientific_reasoning.runner"
     },
     {
+      "source": "benchmarks_scientific_reasoning_superhuman_suite_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
       "source": "economy_init_py",
       "target": "economy_token_economy_py",
       "kind": "imports",
       "note": "economy.token_economy"
+    },
+    {
+      "source": "gametheory_debate_strategies_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
     },
     {
       "source": "legal_benchmarks_py",
@@ -6159,6 +6341,12 @@
       "target": "legal_syllogism_py",
       "kind": "imports",
       "note": "legal.syllogism"
+    },
+    {
+      "source": "legal_knowledge_base_py",
+      "target": "legal_specializations_py",
+      "kind": "imports",
+      "note": "legal.specializations"
     },
     {
       "source": "legal_specializations_py",
@@ -6311,6 +6499,12 @@
       "note": "trust"
     },
     {
+      "source": "mci_egs_init_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
       "source": "mci_mcp_server_py",
       "target": "mci_blackboard_py",
       "kind": "imports",
@@ -6318,6 +6512,18 @@
     },
     {
       "source": "mci_mcp_server_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "mci_metacognitive_evaluator_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "mci_oqs_init_py",
       "target": "mci_metabus_py",
       "kind": "imports",
       "note": "mci.metabus"
@@ -6347,6 +6553,12 @@
       "note": "mci.vsee"
     },
     {
+      "source": "mci_vsee_router_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
       "source": "mirofish_init_py",
       "target": "mirofish_swarm_py",
       "kind": "imports",
@@ -6357,6 +6569,12 @@
       "target": "mirofish_validator_py",
       "kind": "imports",
       "note": "mirofish.validator"
+    },
+    {
+      "source": "mirofish_swarm_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
     },
     {
       "source": "mirofish_swarm_py",
@@ -6383,10 +6601,28 @@
       "note": "publishing.production"
     },
     {
+      "source": "publishing_production_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
       "source": "rag_init_py",
       "target": "rag_scientific_py",
       "kind": "imports",
       "note": "rag.scientific"
+    },
+    {
+      "source": "rag_scientific_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "reasoning_engines_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
     },
     {
       "source": "reasoning_engines_py",
@@ -6441,6 +6677,12 @@
       "target": "reasoning_engines_py",
       "kind": "imports",
       "note": "reasoning.engines"
+    },
+    {
+      "source": "research_hub_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
     },
     {
       "source": "research_pipelines_run_research_batch_py",
@@ -6510,6 +6752,12 @@
     },
     {
       "source": "scanners_pipeline_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "scanners_pipeline_py",
       "target": "scanners_epistemic_prioritizer_py",
       "kind": "imports",
       "note": "scanners.epistemic_prioritizer"
@@ -6573,6 +6821,12 @@
       "target": "sdd_tdd_runner_py",
       "kind": "imports",
       "note": "sdd.tdd_runner"
+    },
+    {
+      "source": "sdd_spec_engine_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
     },
     {
       "source": "sdd_tdd_runner_py",
@@ -6725,6 +6979,18 @@
       "note": "scanners.successor_generator"
     },
     {
+      "source": "tests_test_domain_legal_knowledge_bases_py",
+      "target": "legal_init_py",
+      "kind": "imports",
+      "note": "legal"
+    },
+    {
+      "source": "tests_test_domain_legal_knowledge_bases_py",
+      "target": "legal_knowledge_base_py",
+      "kind": "imports",
+      "note": "legal.knowledge_base"
+    },
+    {
       "source": "tests_test_ecosystem_diagnose_py",
       "target": "scanners_init_py",
       "kind": "imports",
@@ -6843,6 +7109,84 @@
       "target": "research_searchers_py",
       "kind": "imports",
       "note": "research.searchers"
+    },
+    {
+      "source": "tests_test_metabus_legal_refinement_py",
+      "target": "marceloclaro_orchestrator_py",
+      "kind": "imports",
+      "note": "marceloclaro.orchestrator"
+    },
+    {
+      "source": "tests_test_metabus_legal_refinement_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "benchmarks_scientific_reasoning_superhuman_suite_py",
+      "kind": "imports",
+      "note": "benchmarks.scientific_reasoning.superhuman_suite"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "gametheory_init_py",
+      "kind": "imports",
+      "note": "gametheory"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "mci_egs_init_py",
+      "kind": "imports",
+      "note": "mci.egs"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "mci_metabus_py",
+      "kind": "imports",
+      "note": "mci.metabus"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "mci_oqs_init_py",
+      "kind": "imports",
+      "note": "mci.oqs"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "mci_vsee_init_py",
+      "kind": "imports",
+      "note": "mci.vsee"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "mirofish_swarm_py",
+      "kind": "imports",
+      "note": "mirofish.swarm"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "publishing_production_py",
+      "kind": "imports",
+      "note": "publishing.production"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "rag_init_py",
+      "kind": "imports",
+      "note": "rag"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "research_hub_py",
+      "kind": "imports",
+      "note": "research.hub"
+    },
+    {
+      "source": "tests_test_metabus_transversal_sync_py",
+      "target": "sdd_spec_engine_py",
+      "kind": "imports",
+      "note": "sdd.spec_engine"
     },
     {
       "source": "tests_test_metacognitive_superhuman_py",
@@ -7185,6 +7529,12 @@
       "target": "webapp_legal_impact_helpers_py",
       "kind": "imports",
       "note": "webapp.legal_impact_helpers"
+    },
+    {
+      "source": "webapp_legal_impact_helpers_py",
+      "target": "legal_init_py",
+      "kind": "imports",
+      "note": "legal"
     },
     {
       "source": "webapp_legal_impact_helpers_py",

@@ -25,6 +25,7 @@ from __future__ import annotations
 import time
 from typing import Any, Dict, List, Optional
 
+from mci.metabus import metabus
 from scanners.noological_scanner import NoologicalScanner
 from scanners.teleological_scanner import TeleologicalReverseScanner, TeleologicalGoal
 from scanners.evolutionary_pipeline import EvolutionaryRoadmap  # noqa: F401 (reexport)
@@ -351,6 +352,16 @@ class DiagnosticPipeline:
             # Inclui ecosystem_layers se presente (SPEC-022)
             if "ecosystem_layers" in noo:
                 report["ecosystem_layers"] = noo["ecosystem_layers"]
+            metabus.publish_subsystem_event(
+                "diagnostic",
+                "noological.completed",
+                {
+                    "domain": effective_domain,
+                    "coverage": report["noological"]["coverage"],
+                    "gaps_count": len(report["noological"]["gaps"]),
+                },
+                source_agent="diagnostic_pipeline",
+            )
         except Exception as exc:  # scanner não deve derrubar o pipeline
             report["noological"] = {"error": str(exc)}
             noo = {}
@@ -476,6 +487,22 @@ class DiagnosticPipeline:
             report["reversa"] = {"error": str(exc)}
 
         report["duration_s"] = round(time.time() - started, 3)
+        metabus.publish_subsystem_event(
+            "diagnostic",
+            "pipeline.completed",
+            {
+                "domain": effective_domain,
+                "duration_s": report["duration_s"],
+                "total_gaps": report.get("evolutionary", {}).get("total_gaps", 0),
+                "deep": bool(deep),
+            },
+            source_agent="diagnostic_pipeline",
+        )
+        metabus.memory.upsert_semantic_topic(
+            "diagnostic.pipeline",
+            lesson=f"Diagnóstico concluído no domínio {effective_domain or 'geral'} com {report.get('evolutionary', {}).get('total_gaps', 0)} gaps.",
+            metadata={"last_domain": effective_domain, "last_duration_s": report["duration_s"]},
+        )
         return report
 
     @staticmethod

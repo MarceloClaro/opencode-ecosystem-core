@@ -28,6 +28,7 @@ import time
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from mci.metabus import metabus
 from .searchers import MultiSearcher, PaperRecord
 from .downloader import PaperDownloader
 from .pdf2md import Pdf2Markdown
@@ -178,6 +179,27 @@ class ResearchHub:
                                         pdf_by_key, md_by_key,
                                         fichamentos, resenhas,
                                         figures_report)
+        metabus.publish_subsystem_event(
+            "research",
+            "pipeline.completed",
+            {
+                "topic": self.topic,
+                "papers": len(papers),
+                "repos": len(repos),
+                "pdfs": len(pdf_by_key),
+                "md": len(md_by_key),
+            },
+            source_agent="research_hub",
+        )
+        metabus.memory.upsert_semantic_topic(
+            "research.hub",
+            lesson=f"Pipeline de pesquisa concluído para '{self.topic[:80]}' com {len(papers)} artigos selecionados.",
+            metadata={"last_topic": self.topic, "last_papers": len(papers)},
+        )
+        metabus.memory.update_topic_confidence(
+            "research",
+            min(1.0, len(papers) / max(1, max_papers)),
+        )
         logger.info(f"[hub] pipeline concluído: {manifest['resumo']}")
         return manifest
 

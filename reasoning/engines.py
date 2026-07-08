@@ -1209,6 +1209,7 @@ class MultiReasoningEngine:
                 if getattr(eng, 'available', True)]
 
     def reason(self, query: str, engine: str = "auto", **kwargs) -> ReasoningResult:
+        requested_engine = engine
         if engine == "auto":
             engine = self._route(query)
         eng = self.engines.get(engine)
@@ -1217,7 +1218,29 @@ class MultiReasoningEngine:
                 f"motor desconhecido: {engine}. "
                 f"Opções: {list(self.engines)}"
             )
-        return eng.reason(query, **kwargs)
+        result = eng.reason(query, **kwargs)
+        try:
+            from mci.metabus import metabus
+            metabus.publish_subsystem_event(
+                "reasoning",
+                "completed",
+                {
+                    "query": query[:160],
+                    "requested_engine": requested_engine,
+                    "selected_engine": engine,
+                    "confidence": result.confidence,
+                },
+                source_agent="reasoning_engine",
+            )
+            metabus.memory.upsert_semantic_topic(
+                f"reasoning.{engine}",
+                lesson=f"Consulta roteada para {engine} com confiança {result.confidence:.2f}.",
+                metadata={"last_query": query[:120], "last_confidence": result.confidence},
+            )
+            metabus.memory.update_topic_confidence(f"reasoning:{engine}", result.confidence)
+        except Exception:
+            pass
+        return result
 
     def status(self) -> Dict[str, bool]:
         return {name: getattr(eng, 'available', True)
@@ -1239,11 +1262,22 @@ class MultiReasoningEngine:
                 results[name] = {"engine": name, "error": str(exc)[:200]}
         valid = [r for r in results.values() if "confidence" in r]
         best = max(valid, key=lambda r: r["confidence"]) if valid else None
-        return {
+        payload = {
             "query": query,
             "results": results,
             "best_engine": best["engine"] if best else None,
         }
+        try:
+            from mci.metabus import metabus
+            metabus.publish_subsystem_event(
+                "reasoning",
+                "ensemble.completed",
+                {"query": query[:160], "best_engine": payload["best_engine"], "engines": list(results.keys())},
+                source_agent="reasoning_engine",
+            )
+        except Exception:
+            pass
+        return payload
 
     @staticmethod
     def _route(query: str) -> str:

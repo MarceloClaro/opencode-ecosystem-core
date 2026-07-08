@@ -1,8 +1,8 @@
 # Release Notes: OpenCode Ecosystem Core
 
-## v2.3.0 — Legal Intelligence Expansion
+## v2.3.0 — Legal Intelligence & Transversal MetaBus Expansion
 
-Esta versão transforma o subsistema jurídico em uma camada estratégica do ecossistema. O OpenCode agora combina **raciocínio jurídico brasileiro**, **Datajud**, **AUXJURIS**, **scanner jurídico de impacto**, **especialização por 7 ramos do direito**, **benchmarks jurídicos conservadores por domínio** e uma **aba jurídica dedicada na webapp**.
+Esta versão transforma o subsistema jurídico em uma camada estratégica do ecossistema e estabelece a **orquestração transversal** de todos os subsistemas via **MetaBus**. O OpenCode agora combina **raciocínio jurídico brasileiro**, **Datajud**, **AUXJURIS**, **scanner jurídico de impacto**, **especialização por 7 ramos do direito**, **bases de conhecimento segmentadas por domínio**, **benchmarks jurídicos conservadores por domínio**, **aba jurídica dedicada na webapp** e **sincronização universal de eventos entre OQS, VSEE, EGS, RAG, Superhuman Suite, MiroFish, Game Theory, Publishing, Research e SDD**.
 
 ### Destaques
 
@@ -26,21 +26,27 @@ Esta versão transforma o subsistema jurídico em uma camada estratégica do eco
      `base` → `specialist` → `specialist_advanced` → `phd_candidate` → `phd_validated`.
    - `phd_validated` exige validação externa explícita.
 
-5. **Webapp jurídica dedicada (`SPEC-925/926`)**
-   - Nova aba `⚖️ Jurídico` no Streamlit.
-   - Exibe score jurídico, ganho metacognitivo, readiness, flags de alto risco, ramo provável e agente especialista.
+5. **Knowledge Bases Segmentadas por Ramo (`SPEC-931`)**
+   - Base de conhecimento segmentada nos 7 ramos com estatutos, princípios, keywords, issues comuns e vetores de risco.
+   - Roteamento automático por domínio e seleção manual na webapp.
+
+6. **Webapp Jurídica com KB Integration (`SPEC-932`)**
+   - Aba `⚖️ Jurídico` exibe base ativa, switch manual de ramo, preview de conteúdo e score de impacto.
+   - Gatilho para refinamento via MetaBus.
+
+7. **Refinamento Jurídico via MetaBus (`SPEC-933`)**
+   - Ciclo contínuo: busca → recuperação → síntese → atualização de confiança.
+
+8. **MetaBus — Orquestração Transversal (`SPEC-934`)**
+   - OQS, VSEE, EGS, Scientific RAG, Superhuman Suite, MiroFish, Game Theory, Publishing, Research e SDD publicam eventos no MetaBus.
+   - MetaBus com `publish_subsystem_event`, `search_memory`, `update_topic_confidence`, `upser_semantic_topic`.
+   - Rastreabilidade completa de ciclos evolutivos (R56–R67).
 
 ### Validação
 
 ```bash
-pytest tests/test_legal_domain_specialization.py -q
-# 6 passed
-
-pytest tests/test_legal_domain_benchmarks.py -q
-# 6 passed
-
 pytest tests -q
-# 343 passed, 2 skipped, 1 warning
+# 363 passed, 2 skipped
 ```
 
 ### Como usar
@@ -56,6 +62,7 @@ Na aba `⚖️ Jurídico`, forneça o corpus e os campos de análise para obter:
 - readiness
 - flags de alto risco
 - ramo jurídico provável
+- base de conhecimento ativa
 - agente especialista sugerido
 
 ## v2.2.0 — Metacognitive Superhuman Refinement

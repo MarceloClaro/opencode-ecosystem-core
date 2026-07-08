@@ -52,13 +52,20 @@ def test_build_ecosystem_map_contains_key_paths():
     assert "specs/SPEC-927-legal-domain-specialization.md" in paths
     assert "specs/SPEC-928-legal-domain-benchmarks.md" in paths
     assert "specs/SPEC-929-legal-docs-map-sync.md" in paths
+    assert "specs/SPEC-931-domain-legal-knowledge-bases.md" in paths
+    assert "specs/SPEC-932-webapp-domain-kb-integration.md" in paths
+    assert "specs/SPEC-933-metabus-legal-refinement.md" in paths
+    assert "specs/SPEC-934-metabus-transformer-conscious-orchestration.md" in paths
     assert "tests/test_metacognitive_superhuman.py" in paths
     assert "tests/test_datajud_integration.py" in paths
     assert "tests/test_auxjuris_integration.py" in paths
     assert "tests/test_legal_impact_scanner.py" in paths
     assert "tests/test_legal_domain_specialization.py" in paths
     assert "tests/test_legal_domain_benchmarks.py" in paths
+    assert "tests/test_domain_legal_knowledge_bases.py" in paths
     assert "tests/test_webapp_legal_impact.py" in paths
+    assert "tests/test_metabus_legal_refinement.py" in paths
+    assert "tests/test_metabus_transversal_sync.py" in paths
     assert "research/pipelines/analyze_research_batch.py" in paths
     assert "agents/catalog/mira-new.md" in paths
 

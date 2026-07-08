@@ -5,6 +5,7 @@ import uuid
 from typing import Dict, Any
 import jsonschema
 
+from mci.metabus import metabus
 from .principle_engine import get_principles
 from .stress_test import run_stress_test
 from .alignment import compute_alignment_score
@@ -54,5 +55,24 @@ def run_egs_scanner(output_to_check: str, context: Dict[str, Any] = None) -> Dic
             schema = json.load(f)
         val_data = {k: v for k, v in result.items() if k not in ["pass", "hard_block"]}
         jsonschema.validate(instance=val_data, schema=schema)
+
+    metabus.publish_subsystem_event(
+        "egs",
+        "assessed",
+        {
+            "assessment_id": assessment_id,
+            "decision": decision,
+            "hard_block": hard_block,
+            "alignment_score": align_score,
+            "marker": context.get("marker"),
+        },
+        source_agent="egs",
+    )
+    metabus.memory.upsert_semantic_topic(
+        "egs.governance",
+        lesson=f"EGS avaliou output com decisão={decision} e hard_block={hard_block}.",
+        metadata={"last_assessment_id": assessment_id, "last_alignment_score": align_score},
+    )
+    metabus.memory.update_topic_confidence("egs", align_score)
         
     return result

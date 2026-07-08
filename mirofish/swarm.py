@@ -26,6 +26,7 @@ import uuid
 from dataclasses import dataclass, field, asdict
 from typing import Any, Callable, Dict, List, Optional
 
+from mci.metabus import metabus
 from mirofish.graph_memory import GraphMemory
 
 _STATE_DIR = os.path.join(
@@ -138,6 +139,23 @@ class MiroFishSwarm:
         }
         self.predictions[prediction_id] = record
         self._save_state()
+        metabus.publish_subsystem_event(
+            "mirofish",
+            "prediction.created",
+            {
+                "prediction_id": prediction_id,
+                "question": question,
+                "aggregate": record["aggregate"],
+                "consensus": record["consensus"],
+            },
+            source_agent="mirofish",
+        )
+        metabus.memory.upsert_semantic_topic(
+            "mirofish.predictions",
+            lesson=f"MiroFish gerou previsão agregada {record['aggregate']} para '{question[:80]}'.",
+            metadata={"last_prediction_id": prediction_id, "last_consensus": record["consensus"]},
+        )
+        metabus.memory.update_topic_confidence("mirofish", record["consensus"])
         return record
 
     # ── Feedback (aprendizado do enxame) ──
@@ -154,6 +172,16 @@ class MiroFishSwarm:
         record["actual"] = actual
         record["swarm_error"] = round(abs(record["aggregate"] - actual), 4)
         self._save_state()
+        metabus.publish_subsystem_event(
+            "mirofish",
+            "prediction.resolved",
+            {
+                "prediction_id": prediction_id,
+                "actual": actual,
+                "swarm_error": record["swarm_error"],
+            },
+            source_agent="mirofish",
+        )
         return record
 
     # ── Simulação de debate interno (Forum simplificado) ──
@@ -184,7 +212,7 @@ class MiroFishSwarm:
             self.graph.ingest_debate(question, opinions)
             graph_consensus = self.graph.consensus_score()
 
-        return {
+        payload = {
             "question": question,
             "rounds": rounds,
             "trajectory": [round(v, 4) for v in history],
@@ -193,6 +221,18 @@ class MiroFishSwarm:
             "graph_consensus": graph_consensus,
             "graph_contradictions": len(self.graph.contradictions()),
         }
+        metabus.publish_subsystem_event(
+            "mirofish",
+            "debate.completed",
+            {
+                "question": question,
+                "final": payload["final"],
+                "converged": payload["converged"],
+                "graph_consensus": graph_consensus,
+            },
+            source_agent="mirofish",
+        )
+        return payload
 
     def _bias_of(self, agent_id: str) -> str:
         for a in self.agents:

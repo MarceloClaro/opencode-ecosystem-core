@@ -93,6 +93,84 @@ class MetacognitiveMemory:
         """Recupera contexto recente do Global Workspace."""
         return self.episodic[-limit:]
 
+    def search_memory(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
+        """Busca simples em memória episódica e semântica por substring normalizada."""
+        q = (query or "").lower().strip()
+        if not q:
+            return []
+        tokens = [t for t in q.split() if len(t) > 2]
+
+        def _matches(hay: str) -> bool:
+            hay_l = hay.lower()
+            if q in hay_l:
+                return True
+            if tokens and all(t in hay_l for t in tokens):
+                return True
+            if tokens and sum(1 for t in tokens if t in hay_l) >= max(1, min(2, len(tokens))):
+                return True
+            return False
+
+        results: List[Dict[str, Any]] = []
+
+        for entry in reversed(self.episodic):
+            hay = " ".join([
+                str(entry.get("agent_id", "")),
+                str(entry.get("context", "")),
+                str(entry.get("reflection", "")),
+            ]).lower()
+            if _matches(hay):
+                results.append({"kind": "episodic", **entry})
+                if len(results) >= limit:
+                    return results
+
+        for topic, data in self.semantic.items():
+            hay = " ".join([
+                topic,
+                " ".join(data.get("lessons", []) or []),
+                json.dumps(data.get("metadata", {}), ensure_ascii=False),
+            ]).lower()
+            if _matches(hay):
+                results.append({
+                    "kind": "semantic",
+                    "topic": topic,
+                    "lessons": data.get("lessons", []),
+                    "metadata": data.get("metadata", {}),
+                })
+                if len(results) >= limit:
+                    return results
+        return results
+
+    def upsert_semantic_topic(self, topic: str,
+                              lesson: Optional[str] = None,
+                              metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Atualiza/inicializa um tópico semântico preservando histórico de lições."""
+        entry = self.semantic.setdefault(topic, {
+            "lessons": [],
+            "metadata": {},
+            "updated_at": None,
+        })
+        if lesson and lesson not in entry["lessons"]:
+            entry["lessons"].append(lesson)
+        if metadata:
+            entry["metadata"].update(metadata)
+        entry["updated_at"] = datetime.now(timezone.utc).isoformat()
+        self._save()
+        return entry
+
+    def update_domain_confidence(self, domain_id: str, score: float) -> float:
+        """Atualiza confiança EMA para um domínio jurídico específico."""
+        key = f"legal:{domain_id}"
+        return self.update_topic_confidence(key, score)
+
+    def update_topic_confidence(self, topic_key: str, score: float) -> float:
+        """Atualiza confiança EMA para qualquer tópico/subsistema."""
+        key = topic_key
+        current_conf = self.confidence_ledger.get(key, 0.5)
+        updated = (current_conf * 0.7) + (max(0.0, min(1.0, score)) * 0.3)
+        self.confidence_ledger[key] = updated
+        self._save()
+        return updated
+
 
 class MetaBus:
     """Barramento de eventos unificado (Global Workspace Broadcast)."""
@@ -149,6 +227,53 @@ class MetaBus:
                 logger.error(f"Erro no handler do evento {topic}: {e}")
                 
         return dispatched
+
+    def publish_legal_event(self, event_name: str, domain_id: str,
+                            payload: Dict[str, Any],
+                            source_agent: str = "legal.system") -> int:
+        """Publica um evento especializado do subsistema jurídico."""
+        enriched = dict(payload or {})
+        enriched.setdefault("domain_id", domain_id)
+        return self.publish(f"legal.{event_name}", enriched, source_agent=source_agent)
+
+    def publish_subsystem_event(self, subsystem: str, event_name: str,
+                                payload: Dict[str, Any],
+                                source_agent: str = "system") -> int:
+        """Publica evento padronizado por subsistema."""
+        enriched = dict(payload or {})
+        enriched.setdefault("subsystem", subsystem)
+        return self.publish(f"{subsystem}.{event_name}", enriched, source_agent=source_agent)
+
+    def get_recent_events(self, limit: int = 20,
+                          topic_prefix: Optional[str] = None,
+                          source: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Lê eventos recentes persistidos com filtros opcionais."""
+        events: List[Dict[str, Any]] = []
+        if not os.path.exists(EVENTS_FILE):
+            return events
+        try:
+            with open(EVENTS_FILE, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        event = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    if topic_prefix and not str(event.get("topic", "")).startswith(topic_prefix):
+                        continue
+                    if source and event.get("source") != source:
+                        continue
+                    events.append(event)
+        except Exception as e:
+            logger.error(f"Erro ao ler eventos recentes: {e}")
+            return []
+        return events[-limit:]
+
+    def search_memory(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
+        """Atalho para busca metacognitiva na memória compartilhada."""
+        return self.memory.search_memory(query, limit=limit)
 
 # Instância global Singleton
 metabus = MetaBus()
