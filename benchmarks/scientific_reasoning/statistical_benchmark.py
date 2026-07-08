@@ -12,7 +12,7 @@ Testa:
 """
 
 from typing import Dict, Any, List, Optional, Callable
-from .runner import BenchmarkResult
+from .runner import BenchmarkResult, evaluate_pipeline_task
 
 
 STAT_TASKS = [
@@ -88,15 +88,21 @@ class StatisticalInterpretationBenchmark:
         passed = 0
 
         for task in self.tasks:
+            evaluation = evaluate_pipeline_task(task, pipeline_fn)
             result = {
                 "task_id": task["id"],
                 "description": task["description"],
                 "correct_answer": task["correct"],
-                "passed": True,
+                "passed": evaluation["passed"],
+                "mode": evaluation["mode"],
+                "pipeline_response": evaluation["pipeline_response"],
                 "evaluation": task["evaluation_criteria"],
             }
+            if "error" in evaluation:
+                result["error"] = evaluation["error"]
             details.append(result)
-            passed += 1
+            if evaluation["passed"]:
+                passed += 1
 
         return BenchmarkResult(
             name="Statistical Interpretation",

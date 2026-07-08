@@ -11,7 +11,7 @@ Testa a capacidade de:
 """
 
 from typing import Dict, Any, List, Optional, Callable
-from benchmarks.scientific_reasoning.runner import BenchmarkResult
+from benchmarks.scientific_reasoning.runner import BenchmarkResult, evaluate_pipeline_task
 
 
 CAUSAL_TASKS = [
@@ -93,17 +93,21 @@ class CausalInferenceBenchmark:
         passed = 0
 
         for task in self.tasks:
-            # Avaliação simplificada: verifica se a resposta corresponde à correta
-            # Em produção, pipeline_fn analisaria e responderia
+            evaluation = evaluate_pipeline_task(task, pipeline_fn)
             result = {
                 "task_id": task["id"],
                 "description": task["description"],
                 "correct_answer": task["correct"],
-                "passed": True,  # benchmark de referência
+                "passed": evaluation["passed"],
+                "mode": evaluation["mode"],
+                "pipeline_response": evaluation["pipeline_response"],
                 "evaluation": task["evaluation_criteria"],
             }
+            if "error" in evaluation:
+                result["error"] = evaluation["error"]
             details.append(result)
-            passed += 1
+            if evaluation["passed"]:
+                passed += 1
 
         return BenchmarkResult(
             name="Causal Inference",

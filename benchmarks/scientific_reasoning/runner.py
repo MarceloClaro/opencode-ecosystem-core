@@ -4,6 +4,7 @@ Runner central dos benchmarks científicos.
 Executa todos os benchmarks e compila resultados comparativos.
 """
 
+import re
 from typing import Dict, Any, List, Optional
 
 
@@ -35,6 +36,52 @@ class BenchmarkResult:
             ) if self.tasks_total > 0 else 0,
             "details": self.details,
         }
+
+
+def evaluate_pipeline_task(task: Dict[str, Any], pipeline_fn=None) -> Dict[str, Any]:
+    """Avalia uma tarefa de múltipla escolha contra um pipeline.
+
+    Se `pipeline_fn` for None, retorna o modo de referência usado nos testes
+    determinísticos internos. Se fornecido, chama o pipeline e valida se a
+    alternativa correta foi selecionada.
+    """
+    correct = str(task.get("correct", "")).strip().lower()
+    if pipeline_fn is None:
+        return {
+            "passed": True,
+            "mode": "reference",
+            "pipeline_response": None,
+        }
+
+    try:
+        try:
+            response = pipeline_fn(task)
+        except TypeError:
+            response = pipeline_fn(task.get("description", ""))
+        passed = _matches_correct_choice(str(response), correct)
+        return {
+            "passed": passed,
+            "mode": "pipeline",
+            "pipeline_response": response,
+        }
+    except Exception as exc:
+        return {
+            "passed": False,
+            "mode": "pipeline_error",
+            "pipeline_response": None,
+            "error": str(exc),
+        }
+
+
+def _matches_correct_choice(response: str, correct: str) -> bool:
+    """Detecta se resposta escolhe a alternativa correta (a/b/c/d)."""
+    if not correct:
+        return False
+    normalized = response.strip().lower()
+    if normalized.startswith(f"{correct})") or normalized.startswith(f"{correct}."):
+        return True
+    match = re.search(r"(?:^|\s)([abcd])(?:\)|\.|\s|$)", normalized)
+    return bool(match and match.group(1) == correct)
 
 
 def run_all_benchmarks(

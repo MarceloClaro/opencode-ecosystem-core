@@ -163,6 +163,28 @@
         "A validação ampla deve diferenciar suíte operacional ativa de testes legados não configurados"
       ],
       "timestamp": 1783486496.3985403
+    },
+    {
+      "round_id": "R55",
+      "objective": "SPEC-918/919: avanço rumo ao superhuman científico com RAG científico",
+      "changes": [
+        "Criada SPEC-918 para Scientific Superhuman Benchmark Suite conservadora",
+        "Criada SPEC-919 para Scientific RAG com grounding, citações, reranking e abstenção",
+        "Adicionado pacote rag/ com ScientificDocument, ScientificRAG, RetrievedEvidence e GroundingEvaluator",
+        "Adicionado benchmarks/scientific_reasoning/superhuman_suite.py com readiness_score e tiers conservadores",
+        "Benchmarks científicos existentes passaram a avaliar pipeline_fn quando fornecido, evitando autoaprovação indevida",
+        "Criada suíte TDD tests/test_scientific_rag_superhuman.py com 8 testes RED→GREEN",
+        "Validado gate operacional: pytest tests -q = 255 passed, 2 skipped, 1 warning",
+        "Restauradas deleções locais geradas por testes em producao_cientifica/ antes de qualquer commit"
+      ],
+      "score": 9.7,
+      "lessons": [
+        "Superhuman científico deve ser tratado como claim graduado e conservador, não como autoafirmação",
+        "RAG científico precisa preferir abstenção a respostas sem evidência suficiente",
+        "Benchmarks que sempre passam sem avaliar pipeline não medem superioridade; pipeline_fn deve ser realmente testado",
+        "Testes operacionais podem gerar efeitos colaterais em artefatos locais ignorados; sempre verificar git ls-files -d após validação"
+      ],
+      "timestamp": 1783487768.5616
     }
   ]
 }
