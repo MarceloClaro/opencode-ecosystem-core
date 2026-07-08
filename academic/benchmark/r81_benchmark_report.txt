@@ -1,0 +1,25 @@
+R81 — BENCHMARK: PIPELINE REFINADO vs. BASELINES
+======================================================================
+
+Métrica única: cosseno neural (Ollama nomic-embed-text 768-d)
+
+
+Random (2000 combos, 2.76s):
+  Coerência:  0.4178
+  Novelty:    0.5822
+  Composite:  0.4959
+  % [0.20-0.55]: 95.4%
+
+Jaccard (2000 combos, 1.30s):
+  Coerência:  0.6823
+  Novelty:    0.3177
+  Composite:  0.5091
+  % [0.20-0.55]: 14.9%
+
+Word2Vec: N/D
+
+Refined (30 combos, 0.81s):
+  Coerência:  0.4246
+  Novelty:    0.6920
+  Composite:  0.5800
+  % [0.20-0.55]: 100.0%
