@@ -2,8 +2,9 @@
 """
 Pacote reasoning — Motores de Raciocínio + Módulo Quântico
 ==========================================================
-4 motores (Z3, SymPy, Kanren, Critical) com fallbacks stdlib e
-simulador quântico statevector (2 a 100 qubits, 5 seeds padrão).
+SPEC-917: 11 motores de raciocínio (lógico, simbólico, relacional,
+crítico, bayesiano, causal, temporal, fuzzy, cadeia de pensamento,
+analógico e contrafactual) + simulador quântico statevector.
 """
 
 from reasoning.engines import (
@@ -13,8 +14,20 @@ from reasoning.engines import (
     SymPyEngine,
     KanrenEngine,
     CriticalEngine,
+    BayesianEngine,
+    CausalEngine,
+    TemporalEngine,
+    FuzzyReasoningEngine,
+    ChainOfThoughtEngine,
+    AnalogicalEngine,
+    CounterfactualEngine,
+    QuantumReasoningEngine,
     multi_reasoning,
 )
+from reasoning.cache import ReasoningCache, reasoning_cache
+from reasoning.visualizer import ReasoningVisualizer, reasoning_visualizer
+from reasoning.parallel import ParallelReasoning
+from reasoning.evaluator import ReasoningEvaluator, reasoning_evaluator
 from reasoning.quantum import (
     QuantumSimulator,
     bell_state,
@@ -26,7 +39,13 @@ from reasoning.quantum import (
 
 __all__ = [
     "MultiReasoningEngine", "ReasoningResult", "Z3Engine", "SymPyEngine",
-    "KanrenEngine", "CriticalEngine", "multi_reasoning",
+    "KanrenEngine", "CriticalEngine", "BayesianEngine", "CausalEngine",
+    "TemporalEngine", "FuzzyReasoningEngine", "ChainOfThoughtEngine",
+    "AnalogicalEngine", "CounterfactualEngine", "QuantumReasoningEngine",
+    "multi_reasoning",
+    "ReasoningCache", "reasoning_cache",
+    "ReasoningVisualizer", "reasoning_visualizer",
+    "ParallelReasoning", "ReasoningEvaluator", "reasoning_evaluator",
     "QuantumSimulator", "bell_state", "ghz_state", "uniform_superposition",
     "run_experiment_suite", "DEFAULT_SEEDS",
 ]

@@ -121,9 +121,10 @@ class TestMaswos:
 # ── SPEC-011: Reasoning + Quantum ───────────────────────────────────────
 
 class TestReasoning:
-    def test_all_four_engines_exist(self):
+    def test_reasoning_engines_evolved_from_four_to_eleven(self):
         from reasoning import multi_reasoning
-        assert set(multi_reasoning.engines.keys()) == {"z3", "sympy", "kanren", "critical"}
+        assert {"z3", "sympy", "kanren", "critical"}.issubset(multi_reasoning.engines.keys())
+        assert len(multi_reasoning.engines) >= 11
 
     def test_critical_engine_always_available(self):
         from reasoning import multi_reasoning
