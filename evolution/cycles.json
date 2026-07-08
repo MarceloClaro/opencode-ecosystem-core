@@ -691,6 +691,31 @@
         "R75+R76+R77 formam trio completo: embedding -> refinamento -> exploracao guiada"
       ],
       "timestamp": 1783547955.1548822
+    },
+    {
+      "round_id": "R78",
+      "objective": "Descoberta Completa com Pipeline Refinado (R75-77): 1.370 combinacoes, 10 teses",
+      "changes": [
+        "Full discovery run com pipeline refinado: guided generation + neural embedding + faculty-aware",
+        "1.370 combinacoes unicas em 79s (17 combo/s)",
+        "Coherence medio: 0.43 (vs 0.15 pre-refinamento — ganho de 187%)",
+        "Impact medio: 0.49 (vs 0.30 — ganho de 63%)",
+        "Top descobertas: loucura literatura x neuronio (0.718), estado x esfera publica x resiliencia (0.675), Planck x decisao x suicidio (0.669)",
+        "10 teses geradas das top combinacoes (nivel hipotese)",
+        "Report salvo em academic/discovery/r78_report.json",
+        "Top 100 combinacoes exportadas em academic/discovery/r78_top_100_combinations.json",
+        "Teses exportadas em academic/discovery/r78_theses.json",
+        "444 testes TDD passando"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Pipeline refinado produz combinacoes com coerencia semantica real (0.43 vs 0.15)",
+        "Guided generation e mais lenta (17 combo/s vs 87 combo/s) mas cada combinacao e mais significativa",
+        "Novelty semantico (0.57) e mais honesto que Jaccard inflado (0.85)",
+        "Top descobertas sao genuinamente interdisciplinares e interessantes",
+        "R75+R76+R77+R78 = ciclo completo de refinamento validado em escala"
+      ],
+      "timestamp": 1783548289.5775125
     }
   ]
 }
