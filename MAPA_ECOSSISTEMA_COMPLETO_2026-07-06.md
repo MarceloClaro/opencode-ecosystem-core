@@ -1,7 +1,7 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **371**
-- Vetores: **575**
+- Nós: **375**
+- Vetores: **589**
 
 ## Taxonomia de Nós
 
@@ -13,21 +13,21 @@
 | diagram | 1 |
 | doc | 5 |
 | layer | 19 |
-| module | 111 |
+| module | 113 |
 | schema | 4 |
-| spec | 45 |
-| test | 25 |
+| spec | 46 |
+| test | 26 |
 
 ## Taxonomia de Vetores
 
 | kind | quantidade |
 |---|---:|
-| contains | 339 |
+| contains | 343 |
 | control_flow | 25 |
 | data_flow | 8 |
 | depends_on | 29 |
 | documents | 9 |
-| imports | 165 |
+| imports | 175 |
 
 ## Diagrama de Alto Nível
 
@@ -260,6 +260,8 @@ graph TD
 | legal_argumentation_py | module | legal | legal/argumentation.py |
 | legal_balancing_py | module | legal | legal/balancing.py |
 | legal_constitutional_py | module | legal | legal/constitutional.py |
+| legal_datajud_client_py | module | legal | legal/datajud_client.py |
+| legal_integration_py | module | legal | legal/integration.py |
 | legal_precedents_py | module | legal | legal/precedents.py |
 | legal_syllogism_py | module | legal | legal/syllogism.py |
 | marceloclaro_init_py | module | orchestration | marceloclaro/__init__.py |
@@ -402,10 +404,12 @@ graph TD
 | specs_SPEC_919_scientific_rag_grounding_md | spec | specs | specs/SPEC-919-scientific-rag-grounding.md |
 | specs_SPEC_920_metacognitive_superhuman_refinement_md | spec | specs | specs/SPEC-920-metacognitive-superhuman-refinement.md |
 | specs_SPEC_921_brazilian_legal_reasoning_md | spec | specs | specs/SPEC-921-brazilian-legal-reasoning.md |
+| specs_SPEC_922_datajud_integration_md | spec | specs | specs/SPEC-922-datajud-integration.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
 | tests_test_brazilian_legal_reasoning_py | test | tests | tests/test_brazilian_legal_reasoning.py |
 | tests_test_cover_designer_py | test | tests | tests/test_cover_designer.py |
+| tests_test_datajud_integration_py | test | tests | tests/test_datajud_integration.py |
 | tests_test_deep_diagnose_py | test | tests | tests/test_deep_diagnose.py |
 | tests_test_ecosystem_py | test | tests | tests/test_ecosystem.py |
 | tests_test_ecosystem_diagnose_py | test | tests | tests/test_ecosystem_diagnose.py |
@@ -618,7 +622,9 @@ graph TD
 | layer_legal | legal_argumentation_py | contains | legal contém legal/argumentation.py |
 | layer_legal | legal_balancing_py | contains | legal contém legal/balancing.py |
 | layer_legal | legal_constitutional_py | contains | legal contém legal/constitutional.py |
+| layer_legal | legal_datajud_client_py | contains | legal contém legal/datajud_client.py |
 | layer_legal | legal_init_py | contains | legal contém legal/__init__.py |
+| layer_legal | legal_integration_py | contains | legal contém legal/integration.py |
 | layer_legal | legal_precedents_py | contains | legal contém legal/precedents.py |
 | layer_legal | legal_syllogism_py | contains | legal contém legal/syllogism.py |
 | layer_mci | mci_adversarial_reviewer_py | contains | mci contém mci/adversarial_reviewer.py |
@@ -737,10 +743,12 @@ graph TD
 | layer_specs | specs_SPEC_919_scientific_rag_grounding_md | contains | specs contém specs/SPEC-919-scientific-rag-grounding.md |
 | layer_specs | specs_SPEC_920_metacognitive_superhuman_refinement_md | contains | specs contém specs/SPEC-920-metacognitive-superhuman-refinement.md |
 | layer_specs | specs_SPEC_921_brazilian_legal_reasoning_md | contains | specs contém specs/SPEC-921-brazilian-legal-reasoning.md |
+| layer_specs | specs_SPEC_922_datajud_integration_md | contains | specs contém specs/SPEC-922-datajud-integration.md |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
 | layer_tests | tests_test_brazilian_legal_reasoning_py | contains | tests contém tests/test_brazilian_legal_reasoning.py |
 | layer_tests | tests_test_cover_designer_py | contains | tests contém tests/test_cover_designer.py |
+| layer_tests | tests_test_datajud_integration_py | contains | tests contém tests/test_datajud_integration.py |
 | layer_tests | tests_test_deep_diagnose_py | contains | tests contém tests/test_deep_diagnose.py |
 | layer_tests | tests_test_ecosystem_diagnose_py | contains | tests contém tests/test_ecosystem_diagnose.py |
 | layer_tests | tests_test_ecosystem_full_map_py | contains | tests contém tests/test_ecosystem_full_map.py |
@@ -852,8 +860,15 @@ graph TD
 | legal_init_py | legal_argumentation_py | imports | legal.argumentation |
 | legal_init_py | legal_balancing_py | imports | legal.balancing |
 | legal_init_py | legal_constitutional_py | imports | legal.constitutional |
+| legal_init_py | legal_datajud_client_py | imports | legal.datajud_client |
+| legal_init_py | legal_integration_py | imports | legal.integration |
 | legal_init_py | legal_precedents_py | imports | legal.precedents |
 | legal_init_py | legal_syllogism_py | imports | legal.syllogism |
+| legal_integration_py | legal_argumentation_py | imports | legal.argumentation |
+| legal_integration_py | legal_balancing_py | imports | legal.balancing |
+| legal_integration_py | legal_datajud_client_py | imports | legal.datajud_client |
+| legal_integration_py | legal_precedents_py | imports | legal.precedents |
+| legal_integration_py | legal_syllogism_py | imports | legal.syllogism |
 | marceloclaro_cli_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | marceloclaro_orchestrator_py | academic_init_py | imports | academic |
 | marceloclaro_orchestrator_py | economy_init_py | imports | economy |
@@ -933,6 +948,9 @@ graph TD
 | tests_test_brazilian_legal_reasoning_py | legal_init_py | imports | legal |
 | tests_test_cover_designer_py | publishing_cover_designer_py | imports | publishing.cover_designer |
 | tests_test_cover_designer_py | publishing_production_py | imports | publishing.production |
+| tests_test_datajud_integration_py | legal_datajud_client_py | imports | legal.datajud_client |
+| tests_test_datajud_integration_py | legal_init_py | imports | legal |
+| tests_test_datajud_integration_py | legal_integration_py | imports | legal.integration |
 | tests_test_deep_diagnose_py | marceloclaro_orchestrator_py | imports | marceloclaro.orchestrator |
 | tests_test_deep_diagnose_py | mci_metabus_py | imports | mci.metabus |
 | tests_test_deep_diagnose_py | scanners_epistemic_prioritizer_py | imports | scanners.epistemic_prioritizer |

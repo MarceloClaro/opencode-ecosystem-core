@@ -1,7 +1,7 @@
 {
   "summary": {
-    "node_count": 371,
-    "vector_count": 575,
+    "node_count": 375,
+    "vector_count": 589,
     "node_kinds": {
       "actor": 1,
       "agent": 152,
@@ -9,18 +9,18 @@
       "diagram": 1,
       "doc": 5,
       "layer": 19,
-      "module": 111,
+      "module": 113,
       "schema": 4,
-      "spec": 45,
-      "test": 25
+      "spec": 46,
+      "test": 26
     },
     "vector_kinds": {
-      "contains": 339,
+      "contains": 343,
       "control_flow": 25,
       "data_flow": 8,
       "depends_on": 29,
       "documents": 9,
-      "imports": 165
+      "imports": 175
     }
   },
   "nodes": [
@@ -1657,6 +1657,22 @@
       "layer": "legal"
     },
     {
+      "id": "legal_datajud_client_py",
+      "label": "datajud_client",
+      "kind": "module",
+      "path": "legal/datajud_client.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
+      "id": "legal_integration_py",
+      "label": "integration",
+      "kind": "module",
+      "path": "legal/integration.py",
+      "logical_group": "",
+      "layer": "legal"
+    },
+    {
       "id": "legal_precedents_py",
       "label": "precedents",
       "kind": "module",
@@ -2793,6 +2809,14 @@
       "layer": "specs"
     },
     {
+      "id": "specs_SPEC_922_datajud_integration_md",
+      "label": "SPEC-922-datajud-integration",
+      "kind": "spec",
+      "path": "specs/SPEC-922-datajud-integration.md",
+      "logical_group": "",
+      "layer": "specs"
+    },
+    {
       "id": "tests_test_advanced_subsystems_py",
       "label": "test_advanced_subsystems",
       "kind": "test",
@@ -2821,6 +2845,14 @@
       "label": "test_cover_designer",
       "kind": "test",
       "path": "tests/test_cover_designer.py",
+      "logical_group": "",
+      "layer": "tests"
+    },
+    {
+      "id": "tests_test_datajud_integration_py",
+      "label": "test_datajud_integration",
+      "kind": "test",
+      "path": "tests/test_datajud_integration.py",
       "logical_group": "",
       "layer": "tests"
     },
@@ -4112,9 +4144,21 @@
     },
     {
       "source": "layer_legal",
+      "target": "legal_datajud_client_py",
+      "kind": "contains",
+      "note": "legal contém legal/datajud_client.py"
+    },
+    {
+      "source": "layer_legal",
       "target": "legal_init_py",
       "kind": "contains",
       "note": "legal contém legal/__init__.py"
+    },
+    {
+      "source": "layer_legal",
+      "target": "legal_integration_py",
+      "kind": "contains",
+      "note": "legal contém legal/integration.py"
     },
     {
       "source": "layer_legal",
@@ -4825,6 +4869,12 @@
       "note": "specs contém specs/SPEC-921-brazilian-legal-reasoning.md"
     },
     {
+      "source": "layer_specs",
+      "target": "specs_SPEC_922_datajud_integration_md",
+      "kind": "contains",
+      "note": "specs contém specs/SPEC-922-datajud-integration.md"
+    },
+    {
       "source": "layer_tests",
       "target": "tests_test_advanced_subsystems_py",
       "kind": "contains",
@@ -4847,6 +4897,12 @@
       "target": "tests_test_cover_designer_py",
       "kind": "contains",
       "note": "tests contém tests/test_cover_designer.py"
+    },
+    {
+      "source": "layer_tests",
+      "target": "tests_test_datajud_integration_py",
+      "kind": "contains",
+      "note": "tests contém tests/test_datajud_integration.py"
     },
     {
       "source": "layer_tests",
@@ -5516,12 +5572,54 @@
     },
     {
       "source": "legal_init_py",
+      "target": "legal_datajud_client_py",
+      "kind": "imports",
+      "note": "legal.datajud_client"
+    },
+    {
+      "source": "legal_init_py",
+      "target": "legal_integration_py",
+      "kind": "imports",
+      "note": "legal.integration"
+    },
+    {
+      "source": "legal_init_py",
       "target": "legal_precedents_py",
       "kind": "imports",
       "note": "legal.precedents"
     },
     {
       "source": "legal_init_py",
+      "target": "legal_syllogism_py",
+      "kind": "imports",
+      "note": "legal.syllogism"
+    },
+    {
+      "source": "legal_integration_py",
+      "target": "legal_argumentation_py",
+      "kind": "imports",
+      "note": "legal.argumentation"
+    },
+    {
+      "source": "legal_integration_py",
+      "target": "legal_balancing_py",
+      "kind": "imports",
+      "note": "legal.balancing"
+    },
+    {
+      "source": "legal_integration_py",
+      "target": "legal_datajud_client_py",
+      "kind": "imports",
+      "note": "legal.datajud_client"
+    },
+    {
+      "source": "legal_integration_py",
+      "target": "legal_precedents_py",
+      "kind": "imports",
+      "note": "legal.precedents"
+    },
+    {
+      "source": "legal_integration_py",
       "target": "legal_syllogism_py",
       "kind": "imports",
       "note": "legal.syllogism"
@@ -5999,6 +6097,24 @@
       "target": "publishing_production_py",
       "kind": "imports",
       "note": "publishing.production"
+    },
+    {
+      "source": "tests_test_datajud_integration_py",
+      "target": "legal_datajud_client_py",
+      "kind": "imports",
+      "note": "legal.datajud_client"
+    },
+    {
+      "source": "tests_test_datajud_integration_py",
+      "target": "legal_init_py",
+      "kind": "imports",
+      "note": "legal"
+    },
+    {
+      "source": "tests_test_datajud_integration_py",
+      "target": "legal_integration_py",
+      "kind": "imports",
+      "note": "legal.integration"
     },
     {
       "source": "tests_test_deep_diagnose_py",
