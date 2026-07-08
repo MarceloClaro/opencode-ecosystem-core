@@ -1,7 +1,7 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **422**
-- Vetores: **761**
+- Nós: **443**
+- Vetores: **791**
 
 ## Taxonomia de Nós
 
@@ -372,6 +372,16 @@ graph TD
 | synthetic_university_faculties_py | module | synthetic_university | synthetic_university/faculties.py |
 | synthetic_university_knowledge_graph_py | module | synthetic_university | synthetic_university/knowledge_graph.py |
 | synthetic_university_thesis_generator_py | module | synthetic_university | synthetic_university/thesis_generator.py |
+| synthetic_university_empirical_validation_py | module | synthetic_university | synthetic_university/empirical_validation.py |
+| synthetic_university_i18n_py | module | synthetic_university | synthetic_university/i18n.py |
+| synthetic_university_academic_integration_py | module | synthetic_university | synthetic_university/academic_integration.py |
+| synthetic_university_dashboard_generator_py | module | synthetic_university | synthetic_university/dashboard_generator.py |
+| synthetic_university_llm_evaluator_py | module | synthetic_university | synthetic_university/llm_evaluator.py |
+| synthetic_university_thesis_enricher_py | module | synthetic_university | synthetic_university/thesis_enricher.py |
+| synthetic_university_visual_abstract_py | module | synthetic_university | synthetic_university/visual_abstract.py |
+| synthetic_university_peer_review_py | module | synthetic_university | synthetic_university/peer_review.py |
+| synthetic_university_submission_package_py | module | synthetic_university | synthetic_university/submission_package.py |
+| synthetic_university_novelty_analysis_py | module | synthetic_university | synthetic_university/novelty_analysis.py |
 | transformer_init_py | module | transformer | transformer/__init__.py |
 | transformer_attention_py | module | transformer | transformer/attention.py |
 | transformer_embedder_py | module | transformer | transformer/embedder.py |
@@ -443,6 +453,18 @@ graph TD
 | specs_SPEC_933_metabus_legal_refinement_md | spec | specs | specs/SPEC-933-metabus-legal-refinement.md |
 | specs_SPEC_934_metabus_transformer_conscious_orchestration_md | spec | specs | specs/SPEC-934-metabus-transformer-conscious-orchestration.md |
 | specs_SPEC_935_synthetic_university_md | spec | specs | specs/SPEC-935-synthetic-university.md |
+| specs_SPEC_935_R82_md | spec | specs | specs/SPEC-935-R82.md |
+| specs_SPEC_935_R83_md | spec | specs | specs/SPEC-935-R83.md |
+| specs_SPEC_935_R84_md | spec | specs | specs/SPEC-935-R84.md |
+| specs_SPEC_935_R85_md | spec | specs | specs/SPEC-935-R85.md |
+| specs_SPEC_935_R86_md | spec | specs | specs/SPEC-935-R86.md |
+| specs_SPEC_935_R87_md | spec | specs | specs/SPEC-935-R87.md |
+| specs_SPEC_935_R88_md | spec | specs | specs/SPEC-935-R88.md |
+| specs_SPEC_935_R89_md | spec | specs | specs/SPEC-935-R89.md |
+| specs_SPEC_935_R90_md | spec | specs | specs/SPEC-935-R90.md |
+| specs_SPEC_935_R91_md | spec | specs | specs/SPEC-935-R91.md |
+| specs_SPEC_935_R92_md | spec | specs | specs/SPEC-935-R92.md |
+| specs_SPEC_935_R93_md | spec | specs | specs/SPEC-935-R93.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
 | tests_test_auxjuris_integration_py | test | tests | tests/test_auxjuris_integration.py |
@@ -478,6 +500,12 @@ graph TD
 | tests_test_synthetic_university_py | test | tests | tests/test_synthetic_university.py |
 | tests_test_transformer_py | test | tests | tests/test_transformer.py |
 | tests_test_webapp_legal_impact_py | test | tests | tests/test_webapp_legal_impact.py |
+| tests_test_r88_llm_evaluator_py | test | tests | tests/test_r88_llm_evaluator.py |
+| tests_test_r89_thesis_enricher_py | test | tests | tests/test_r89_thesis_enricher.py |
+| tests_test_r90_visual_abstract_py | test | tests | tests/test_r90_visual_abstract.py |
+| tests_test_r91_peer_review_py | test | tests | tests/test_r91_peer_review.py |
+| tests_test_r92_submission_package_py | test | tests | tests/test_r92_submission_package.py |
+| tests_test_r93_novelty_analysis_py | test | tests | tests/test_r93_novelty_analysis.py |
 
 ## Inventário de Vetores
 
@@ -814,6 +842,18 @@ graph TD
 | layer_specs | specs_SPEC_933_metabus_legal_refinement_md | contains | specs contém specs/SPEC-933-metabus-legal-refinement.md |
 | layer_specs | specs_SPEC_934_metabus_transformer_conscious_orchestration_md | contains | specs contém specs/SPEC-934-metabus-transformer-conscious-orchestration.md |
 | layer_specs | specs_SPEC_935_synthetic_university_md | contains | specs contém specs/SPEC-935-synthetic-university.md |
+| layer_specs | specs_SPEC_935_R82_md | contains | specs contém specs/SPEC-935-R82.md |
+| layer_specs | specs_SPEC_935_R83_md | contains | specs contém specs/SPEC-935-R83.md |
+| layer_specs | specs_SPEC_935_R84_md | contains | specs contém specs/SPEC-935-R84.md |
+| layer_specs | specs_SPEC_935_R85_md | contains | specs contém specs/SPEC-935-R85.md |
+| layer_specs | specs_SPEC_935_R86_md | contains | specs contém specs/SPEC-935-R86.md |
+| layer_specs | specs_SPEC_935_R87_md | contains | specs contém specs/SPEC-935-R87.md |
+| layer_specs | specs_SPEC_935_R88_md | contains | specs contém specs/SPEC-935-R88.md |
+| layer_specs | specs_SPEC_935_R89_md | contains | specs contém specs/SPEC-935-R89.md |
+| layer_specs | specs_SPEC_935_R90_md | contains | specs contém specs/SPEC-935-R90.md |
+| layer_specs | specs_SPEC_935_R91_md | contains | specs contém specs/SPEC-935-R91.md |
+| layer_specs | specs_SPEC_935_R92_md | contains | specs contém specs/SPEC-935-R92.md |
+| layer_specs | specs_SPEC_935_R93_md | contains | specs contém specs/SPEC-935-R93.md |
 | layer_synthetic_university | synthetic_university_agents_init_py | contains | synthetic_university contém synthetic_university/agents/__init__.py |
 | layer_synthetic_university | synthetic_university_agents_professor_base_py | contains | synthetic_university contém synthetic_university/agents/professor_base.py |
 | layer_synthetic_university | synthetic_university_agents_professors_py | contains | synthetic_university contém synthetic_university/agents/professors.py |
@@ -825,6 +865,16 @@ graph TD
 | layer_synthetic_university | synthetic_university_init_py | contains | synthetic_university contém synthetic_university/__init__.py |
 | layer_synthetic_university | synthetic_university_knowledge_graph_py | contains | synthetic_university contém synthetic_university/knowledge_graph.py |
 | layer_synthetic_university | synthetic_university_thesis_generator_py | contains | synthetic_university contém synthetic_university/thesis_generator.py |
+| layer_synthetic_university | synthetic_university_empirical_validation_py | contains | synthetic_university contém synthetic_university/empirical_validation.py |
+| layer_synthetic_university | synthetic_university_i18n_py | contains | synthetic_university contém synthetic_university/i18n.py |
+| layer_synthetic_university | synthetic_university_academic_integration_py | contains | synthetic_university contém synthetic_university/academic_integration.py |
+| layer_synthetic_university | synthetic_university_dashboard_generator_py | contains | synthetic_university contém synthetic_university/dashboard_generator.py |
+| layer_synthetic_university | synthetic_university_llm_evaluator_py | contains | synthetic_university contém synthetic_university/llm_evaluator.py |
+| layer_synthetic_university | synthetic_university_thesis_enricher_py | contains | synthetic_university contém synthetic_university/thesis_enricher.py |
+| layer_synthetic_university | synthetic_university_visual_abstract_py | contains | synthetic_university contém synthetic_university/visual_abstract.py |
+| layer_synthetic_university | synthetic_university_peer_review_py | contains | synthetic_university contém synthetic_university/peer_review.py |
+| layer_synthetic_university | synthetic_university_submission_package_py | contains | synthetic_university contém synthetic_university/submission_package.py |
+| layer_synthetic_university | synthetic_university_novelty_analysis_py | contains | synthetic_university contém synthetic_university/novelty_analysis.py |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
 | layer_tests | tests_test_auxjuris_integration_py | contains | tests contém tests/test_auxjuris_integration.py |
@@ -860,6 +910,12 @@ graph TD
 | layer_tests | tests_test_synthetic_university_py | contains | tests contém tests/test_synthetic_university.py |
 | layer_tests | tests_test_transformer_py | contains | tests contém tests/test_transformer.py |
 | layer_tests | tests_test_webapp_legal_impact_py | contains | tests contém tests/test_webapp_legal_impact.py |
+| layer_tests | tests_test_r88_llm_evaluator_py | contains | tests contém tests/test_r88_llm_evaluator.py |
+| layer_tests | tests_test_r89_thesis_enricher_py | contains | tests contém tests/test_r89_thesis_enricher.py |
+| layer_tests | tests_test_r90_visual_abstract_py | contains | tests contém tests/test_r90_visual_abstract.py |
+| layer_tests | tests_test_r91_peer_review_py | contains | tests contém tests/test_r91_peer_review.py |
+| layer_tests | tests_test_r92_submission_package_py | contains | tests contém tests/test_r92_submission_package.py |
+| layer_tests | tests_test_r93_novelty_analysis_py | contains | tests contém tests/test_r93_novelty_analysis.py |
 | layer_transformer | transformer_attention_py | contains | transformer contém transformer/attention.py |
 | layer_transformer | transformer_embedder_py | contains | transformer contém transformer/embedder.py |
 | layer_transformer | transformer_init_py | contains | transformer contém transformer/__init__.py |
