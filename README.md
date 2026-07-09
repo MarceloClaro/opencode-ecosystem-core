@@ -1,659 +1,625 @@
 <div align="center">
 
-# 🌌 OpenCode Ecosystem Core
-**O "Cérebro" Multiagente que Transforma Ideias em Software, Pesquisa e Arte**
+# OpenCode Ecosystem Core
+**Arquitetura Cognitiva Multiagente — Pipeline Científico Integral + CI/CD**
 
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-2.5.0_API_Gateway-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-617_passed-success.svg)](tests/)
-[![Universidade Sintética](https://img.shields.io/badge/Ciclos-49-blueviolet.svg)](synthetic_university/)
-[![Cobertura](https://img.shields.io/badge/Cobertura-49_ciclos_evolutivos-orange.svg)](evolution/cycles.json)
-[![MCP](https://img.shields.io/badge/MCP-8_ferramentas-8A2BE2.svg)](synthetic_university/mcp_server.py)
+[![Versão](https://img.shields.io/badge/Versão-3.0.0_Agentic_Pipeline-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-1050_passed-success.svg)](tests/)
+[![Universidade Sintética](https://img.shields.io/badge/Ciclos-64_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![MCP](https://img.shields.io/badge/MCP-14_ferramentas-8A2BE2.svg)](synthetic_university/mcp_server.py)
 [![API](https://img.shields.io/badge/API-FastAPI_REST-00BFFF.svg)](synthetic_university/api_gateway.py)
+[![Agentes](https://img.shields.io/badge/Agentes-160+-orange.svg)](agents/catalog/)
+[![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que une 160+ agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, inteligência jurídica integrada (Datajud + AuxJuris + especialização por ramos + benchmarks jurídicos), 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico, Universidade Sintética Transversal (SPEC-935) com 11 faculdades e testes de 10.000+ combinações via MiroFish, Publicação Científica Automatizada, **MCP Server** com 8 ferramentas stdio (R94), **Continuous Discovery Loop** (R95) e **API Gateway REST** FastAPI (R96).*
-
----
-
-### ☕ Apoie este Projeto!
-Se o OpenCode Ecosystem ajudou você a acelerar sua pesquisa, desenvolver software ou automatizar sua vida, considere me pagar um café! Seu apoio mantém o ecossistema evoluindo.
-
-<a href="https://buymeacoffee.com/geomaker" target="_blank">
-  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
-</a>
-
-<img src="assets/bmc_qr.png" width="150" alt="QR Code Buy Me a Coffee">
+*Uma arquitetura cognitiva completa que integra 160+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD e a Universidade Sintética Transversal com 64 ciclos de evolução contínua.*
 
 </div>
 
 ---
 
-## 🚀 O que é o OpenCode Ecosystem?
+##  O que é o OpenCode Ecosystem?
 
-### 👨‍💻 Para Leigos: A Empresa de Especialistas na sua Máquina
-Imagine que você tem uma empresa inteira de tecnologia e pesquisa científica trabalhando para você, 24 horas por dia, dentro do seu computador. 
-- Você tem um **Pesquisador** que lê milhares de artigos na internet e faz resumos.
-- Você tem um **Programador** que escreve código e testa tudo.
-- Você tem um **Revisor** (um chefe chato) que não deixa o programador entregar código com erro.
-- E você tem um **Diretor de Arte** que desenha capas de livros e cria ilustrações didáticas.
+### Para Leigos: A Universidade de Pesquisadores na sua Máquina
+Imagine que você tem uma universidade inteira de pesquisa científica trabalhando 24h/dia dentro do seu computador:
+- **Pesquisador-Chefe (EvoSci):** Gera hipóteses, decompõe problemas, coordena descobertas
+- **Deep Researcher:** Explora milhares de artigos, constrói grafos de evidência, sintetiza conhecimento
+- **Revisor (Peer Review):** Avalia com rubricas multi-dimensionais, detecta fraudes, audita evidências
+- **Editor (Paper Composer):** Organiza, escreve e formata artigos completos em ABNT/APA/IEEE
+- **Revisor de Manuscrito (Revision Agent):** Aplica correções, gera cartas de rebuttal, gerencia diffs
 
-Você só precisa dar a ordem: *"Quero um aplicativo que faça X"* ou *"Quero um livro sobre o tema Y"*. O "Cérebro" (nosso Orquestrador) chama os funcionários certos, dá o orçamento (Token Economy), exige qualidade (Trust Engine) e te entrega o produto final pronto.
+Você dá uma ordem como *"Pesquise o impacto de ética quântica em IA"* e o ecossistema orquestra dezenas de agentes especializados, testa rigorosamente (TDD), audita a qualidade (SDD gates) e entrega um artigo completo com revisão por pares embutida.
 
-### 🔬 Para PhDs e Engenheiros: Arquitetura Cognitiva Multiagente
-O OpenCode Ecosystem Core é uma implementação *state-of-the-art* de sistemas multiagentes (MAS) inspirada em arquiteturas de redes neurais (Transformers) e neurociência cognitiva (Global Workspace Theory).
-- **Roteamento por Atenção:** Não usamos *if/else* para delegar tarefas. Usamos *Multi-Head Attention* para calcular scores de semântica, capacidade e confiança (Trust Ledger) de 156 agentes.
-- **MiroFish & Game Theory:** Agentes debatem soluções usando estratégias iteradas (Tit-for-Tat, Nash Equilibrium) e constroem Grafos de Conhecimento lógicos.
-- **Pipeline Científico (MASWOS):** Automação completa de revisão sistemática de literatura. Baixa PDFs (Sci-Hub/OpenAlex), converte para Markdown, extrai figuras reais, gera fichamentos (ABNT/APA) e compila o manuscrito em LaTeX (com PDF, DOCX e ODT para Amazon KDP).
-- **🆕 Scientific Governance Pipeline (v2.1.0 — Scientific RAG Upgrade):** Fluxo científico com governança ética e **EvidenceGraph** (memória epistemológica persistente): `OQS → MCI Scientific Core → VSEE → EGS → EvidenceGraph`. O sistema formula hipóteses falsificáveis (com prior Bayesiano e SESOI), projeta experimentos com power analysis, valida resultados com testes paramétricos + não paramétricos + Bayes Factor, executa revisão adversarial (p-hacking + confounders), calibra confiança (Brier/ECE) e impõe conformidade ética antes de qualquer saída.
-- **📚 Scientific RAG (SPEC-919):** RAG científico determinístico com chunking citável, busca híbrida lexical + semantic-lite, reranking científico, citações auditáveis (`Autor (Ano), doc_id#chunk`) e abstenção quando não há evidência suficiente.
-- **📊 ScientificBenchmark + Superhuman Readiness (SPEC-918):** 5 benchmarks internos para inferência causal, desenho experimental, power analysis, interpretação estatística e detecção de viés, agora com avaliação real de `pipeline_fn` quando fornecido e uma suíte conservadora de readiness (`base` → `research_grade` → `superhuman_candidate` → `superhuman_verified`). O tier `superhuman_verified` exige validação externa explícita.
-- **🧭 Metacognitive Superhuman Suite (SPEC-920):** Avalia a própria capacidade do ecossistema de perceber, refletir, adaptar confiança, recuperar memória, explicar causalmente falhas e evitar overclaim. O tier `metacognitive_superhuman_verified` também exige validação externa explícita.
-- **🧠 EvidenceGraph (epistemológico):** Memória persistente que rastreia claims científicos ao longo do tempo, acumula evidências a favor/contra, calcula confiança consolidada, detecta contradições entre claims e registra tentativas de replicação. Diferencial absoluto vs. concorrentes.
-- **Metacognição Profunda:** O sistema possui 5 Scanners de diagnóstico (incluindo Engenharia Reversa de código legado), um Gerador de Sucessores e agora sincroniza `reasoning`, `OQS`, `VSEE`, `EGS`, `ScientificRAG`, `superhuman suites`, `MiroFish`, `publishing` e `research` no **MetaBus**, com memória pesquisável, confiança por tópico e telemetria transversal.
+### Para PhDs e Engenheiros: Ecossistema Multiagente com Pipeline Científico Fechado
+O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagentes (MAS) com **metacognição, governança científica, pipeline acadêmico fechado e infraestrutura de qualidade profissional**.
+
+**Diferenciais arquiteturais:**
+- **Pipeline Científico Fechado (R101→R105):** Do problema à entrega do artigo — EvoSci (descoberta) → Deep Research (evidência) → Peer Review (avaliação) → Revision (correção) → Paper Composer (publicação)
+- **Evolutionary Memory (R97):** Memória persistente de ideias, experimentos, estagnação e reflexão periódica
+- **Evidence Graph (R102):** Grafo epistemológico de entidades, relações e evidências com proveniência
+- **MCP Security (R100):** Guard model, audit trail, vetting de comandos e rate limiting
+- **CI/CD Quality Gates (R106):** GitHub Actions com lint, matrix test e package build
 
 ---
 
-## ⚡ Instalação: 1-Click no Windows
+##  Instalação: 1-Click no Windows
 
-Se você usa Windows 10/11, nós criamos um instalador mágico que configura **tudo** para você (WSL2, Ubuntu, Ollama, Antigravity CLI e o Ecossistema).
+Se você usa Windows 10/11, o instalador configura WSL2, Ubuntu, Ollama e o ecossistema:
 
-1. Abra o **PowerShell como Administrador**.
-2. Cole este comando e aperte Enter:
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/installer/windows/Install-OpenCodeEcosystem.ps1 | iex
 ```
-3. **Pronto!** Ele criará atalhos na sua Área de Trabalho. Basta clicar em "OpenCode Ecosystem" e começar a usar.
 
 *(Para Linux/macOS, veja o [Guia Manual](ARCHITECTURE.md))*
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+##  Arquitetura do Sistema (v3.0)
 
-O ecossistema é dividido em **5 grandes camadas interconectadas**:
+O ecossistema é organizado em **6 camadas interconectadas**:
 
-1. **Camada Metacognitiva (MCI):** O barramento de eventos (Global Workspace) onde os agentes compartilham memória episódica, confiança calibrada e reflexões pós-execução.
-2. **🆕 Scientific Governance Pipeline:** Fluxo obrigatório de rigor científico e governança ética: `OQS → Scientific Core → VSEE → EGS → Final Report`.
-3. **Camada Transformer:** O roteador de atenção que delega tarefas e o pipeline iterativo de *Reflexion* (Gerar → Verificar → Revisar).
-4. **Módulos Avançados:** Token Economy (Staking/Slashing), Trust Engine (Behavioral Gates), SDD/TDD e Diagnóstico Profundo.
-5. **Catálogo de Agentes:** 156 agentes especializados em domínios que vão desde Física Quântica até Direito Digital, Compliance e Design de Capas.
+### 1. Camada Metacognitiva (MCI)
+Barramento de eventos (Global Workspace) onde agentes compartilham memória, confiança calibrada e reflexões pós-execução. Inclui MetaBus (pub/sub), Blackboard (protocolo A2A), memória hierárquica e Reflexion middleware.
 
-### 🆕 Scientific RAG + SuperHuman Readiness (v2.1.0)
+### 2. Pipeline Acadêmico Agentivo (NOVO v3.0)
+Pipeline fechado de 5 estágios que transforma um problema em artigo publicado:
 
-O OpenCode Ecosystem Core **v2.1.0** implementa uma rota **superhuman-candidate** para ciência automatizada: além de raciocínio formal e governança científica, agora mede grounding via RAG, avalia pipelines reais quando fornecidos e impede claims exagerados. O tier **superhuman_verified** só é emitido com `external_validation=True`.
-
-| Capacidade | SuperHuman (DeepMind) | OpenCode v2.1.0 |
-|---|---|---|
-| **Raciocínio matemático formal** | ✅ AlphaGeometry / Aletheia | ✅ MASWOS + Reasoning Engines |
-| **Método científico completo** | ❌ Só matemática | ✅ Hipótese → Experimento → Estatística → Refutação |
-| **EvidenceGraph (memória epistemológica)** | ❌ | ✅ **NOVO** — claims, versões, evidência, confiança histórica |
-| **Calibração de confiança** | ❌ | ✅ Brier Score + ECE + abstention |
-| **Refutação adversarial** | ❌ Apenas verificação | ✅ p-hacking simulation, confounders, premissas |
-| **Governança ética** | ❌ | ✅ EGS (Ethical Governance Scanner) |
-| **Benchmark científico** | ❌ Só IMO Bench | ✅ 5 benchmarks + `pipeline_fn` real + readiness superhuman |
-| **Scientific RAG com grounding** | ❌ | ✅ **NOVO** — citações auditáveis, reranking científico e abstenção |
-| **Política anti-claim exagerado** | ❌ | ✅ `superhuman_verified` requer validação externa explícita |
-| **Power analysis** | ❌ | ✅ Cálculo de tamanho amostral + poder pós-hoc |
-| **Bayes Factor** | ❌ | ✅ Calibração Sellke, Bayarri & Berger (2001) |
-| **Reprodutibilidade auditável** | ❌ | ✅ Checklist Nature-style + replay determinístico |
-| **Auto-reflexão (Reflexion)** | ❌ | ✅ Meta-cognição com registro de lições |
-
-### Comparativo de Maturidade Técnica
-
-O **OpenCode Ecosystem Core** foi projetado para superar as limitações de roteamento estático e a falta de rigor acadêmico presentes nos frameworks multiagentes tradicionais.
-
-| Critério de Maturidade | OpenCode Ecosystem Core | LangGraph | CrewAI | OpenDevin (OpenHands) | Microsoft AutoGen | MetaGPT |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Arquitetura de Roteamento** | ⭐⭐⭐⭐⭐<br>**Atenção Multi-Cabeça (Transformer)**. Roteamento dinâmico (Semântica, Capacidade, Confiança). | ⭐⭐⭐⭐<br>Grafos direcionados cíclicos (DAG) e StateMachines. | ⭐⭐⭐<br>Roteamento baseado em papéis (Role-based) e tarefas em série/paralelo. | ⭐⭐⭐<br>Foco em um único agente autônomo controlando sandbox/ferramentas. | ⭐⭐⭐<br>Conversacional / Grafos de transição estáticos. | ⭐⭐<br>Sequencial (SOP). Cascata rígida. |
-| **Metacognição e Memória** | ⭐⭐⭐⭐⭐<br>**Hierarchical Memory (HTM)**, *Episodic Replay* e Reflexion via Global Workspace. | ⭐⭐⭐⭐<br>Memória de estado persistente em grafos, checkpointer nativo. | ⭐⭐⭐<br>Memória de curto/longo prazo e memória de entidade via embeddings. | ⭐⭐⭐<br>Memória episódica de comandos de terminal e histórico de arquivos. | ⭐⭐<br>Memória de conversação (Chat History). | ⭐⭐<br>Memória baseada em documentos compartilhados (PRD). |
-| **Garantia de Qualidade (QA)** | ⭐⭐⭐⭐⭐<br>**Gate SDD Estrito + TDD Runner**. Ciclo Red-Green-Refactor obrigatório antes da entrega. | ⭐⭐⭐<br>Fluxos condicionais (Human-in-the-loop) para aprovação. | ⭐⭐<br>Delegação entre agentes, mas sem enforcement de TDD. | ⭐⭐⭐⭐<br>Execução em sandbox Docker, valida testes em tempo real. | ⭐⭐<br>Execução de código em sandbox, sem enforcement nativo de TDD. | ⭐⭐<br>Agente QA executa testes gerados em fluxo linear. |
-| **Economia e Segurança** | ⭐⭐⭐⭐⭐<br>**Token Economy (Staking/Slashing)** + Trust Engine (Behavioral Gate). | ⭐⭐<br>Inexistente nativamente. | ⭐⭐<br>Inexistente nativamente. | ⭐⭐⭐<br>Controle de permissões Docker, mas sem economia de tokens. | ⭐<br>Inexistente nativamente. | ⭐<br>Inexistente nativamente. |
-| **Produção Científica** | ⭐⭐⭐⭐⭐<br>**Pipeline Qualis A1 (MASWOS)**. Fichamentos ABNT, PDF→MD, LaTeX modular. | ⭐⭐<br>Pode ser programado para tal, mas não é nativo. | ⭐⭐<br>Pode ser programado para tal, mas não é nativo. | ⭐<br>Foco exclusivo em Engenharia de Software. | ⭐<br>Não possui ferramentas acadêmicas nativas. | ⭐<br>Foco exclusivo em Engenharia de Software. |
-| **🆕 Governança Científica** | ⭐⭐⭐⭐⭐<br>**OQS + VSEE + EGS nativos**. Hipóteses falsificáveis, validação estatística, hard-blocks éticos. | ⭐<br>Inexistente nativamente. | ⭐<br>Inexistente nativamente. | ⭐<br>Inexistente nativamente. | ⭐<br>Inexistente nativamente. | ⭐<br>Inexistente nativamente. |
-| **Inteligência de Enxame** | ⭐⭐⭐⭐⭐<br>**MiroFish Swarm** com GraphMemory (consenso via Teoria dos Jogos). | ⭐⭐⭐<br>Suporta Multi-Agent via grafos (Multi-actor). | ⭐⭐⭐⭐<br>Forte em colaboração de equipes (Crews) com delegação de tarefas. | ⭐<br>Agente único ou par programador, não é swarm. | ⭐⭐⭐<br>GroupChat (debate não estruturado matematicamente). | ⭐<br>Inexistente. |
-| **Diagnóstico Profundo** | ⭐⭐⭐⭐⭐<br>**Deep Diagnose (M1-M5)**. Engenharia reversa e gerador de sucessores. | ⭐⭐<br>Depende de nós customizados no grafo. | ⭐⭐<br>Inexistente nativamente. | ⭐⭐⭐<br>Analisa logs de erro do terminal para se auto-corrigir. | ⭐<br>Inexistente nativamente. | ⭐<br>Inexistente nativamente. |
-
-> **Fontes para Auditoria:**
-> [1] **OpenCode Ecosystem Core**: Arquitetura baseada no artigo *Attention Is All You Need* (Vaswani et al., 2017) e Global Workspace Theory.
-> [2] **LangGraph**: [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - Framework para agentes com estado, multiatores, construído com grafos.
-> [3] **CrewAI**: [joaomdmoura/crewAI](https://github.com/joaomdmoura/crewAI) - Framework para orquestração de agentes autônomos baseados em papéis (Role-playing).
-> [4] **OpenDevin (OpenHands)**: [All-Hands-AI/OpenHands](https://github.com/All-Hands-AI/OpenHands) - Agente de engenharia de software autônomo operando em sandbox.
-> [5] **Microsoft AutoGen**: [microsoft/autogen](https://github.com/microsoft/autogen) - Foco em conversação multiagente e grafos de transição.
-> [6] **MetaGPT**: [geekan/MetaGPT](https://github.com/geekan/MetaGPT) - Foco em Standard Operating Procedures (SOPs) simulando uma empresa de software.
-
----
-
-### Fluxos de Produção: ResearchHub — Pipeline Unificado de Pesquisa Acadêmica (SPEC-017)
-
-O **ResearchHub** orquestra o fluxo completo de revisão de literatura em uma **pasta única de produção científica**, garantindo rastreabilidade total (manifest com checksums SHA-256) e conformidade com as normas ABNT NBR 6023:2018, NBR 10520:2023 e APA 7ª edição. O fluxo segue a sequência: **buscar (multiplataforma) → ranquear por aderência ao tema → baixar PDFs → converter PDF→MD → fichar → resenhar → consolidar referências**.
-
-```text
-producao_cientifica/<tema>-<timestamp>/
-└── pesquisa/
-    ├── pdfs/               # PDFs baixados (scihub-cli / direct OA)
-    ├── md/                 # PDFs convertidos em Markdown legível
-    ├── fichamentos/        # Fichamentos ABNT (bibliográfico+citação+crítico)
-    ├── resenhas/           # Resenhas críticas vinculadas ao tema
-    ├── referencias_abnt.md # Referências ABNT NBR 6023:2018 (alfabética)
-    ├── referencias_apa.md  # Referências APA 7ª edição
-    ├── referencias.bib     # BibTeX para os templates LaTeX
-    ├── repositorios.md     # Repositórios GitHub e datasets Kaggle
-    └── RESEARCH_MANIFEST.json
 ```
-
-```mermaid
-flowchart LR
-    A[🔍 Busca Multiplataforma<br>arXiv · OpenAlex · Crossref<br>GitHub · Kaggle] --> B[📊 Ranqueamento<br>por aderência ao tema<br>CriticalAnalyzer]
-    B --> C[📥 Download de PDFs<br>scihub-cli / OA direto]
-    C --> D[📄 Conversão PDF → MD<br>Pdf2Markdown]
-    D --> E[🗂️ Fichamento ABNT<br>bibliográfico + citação + crítico]
-    E --> F[✍️ Resenha Crítica<br>+ enriquecimento LLM<br>Ollama local / OpenAI]
-    F --> G[📚 Referências Consolidadas<br>ABNT · APA 7 · BibTeX]
-    G --> H[🖼️ Extração de Figuras<br>FigureHunter c/ fonte]
-    H --> I[🕵️ OSINT LinkTree<br>análise das referências]
-    I --> J[✅ RESEARCH_MANIFEST.json<br>checksums SHA-256 auditáveis]
-```
-
-Cada etapa é auditável: o `RESEARCH_MANIFEST.json` registra plataformas consultadas, relatório de downloads, normas aplicadas, provedor LLM utilizado (incluindo modelos locais via **Ollama**, com privacidade total) e o hash SHA-256 de cada arquivo gerado. Com `use_llm=True`, as resenhas são aprofundadas por LLM com prioridade para modelos locais (`llm_provider='auto'|'ollama'|'openai'`, `llm_model` ex.: `llama3.2`), e o pipeline permanece 100% determinístico quando nenhum provedor está disponível.
-
-```python
-from marceloclaro.orchestrator import Orchestrator
-
-orch = Orchestrator()
-manifest = orch.research(
-    "beneficial quantum noise in variational classifiers",
-    max_papers=8,
-    use_llm=True,          # enriquecimento por LLM (opcional)
-    llm_provider="ollama",  # prioriza modelo local — privacidade e custo zero
-    llm_model="llama3.2",
-)
-print(manifest["folder"])   # pasta única de produção científica
-```
-
----
-
-## 🧬 Scientific Governance Pipeline v2.1.0 — Scientific RAG Upgrade
-
-O pipeline científico com governança é a evolução mais significativa do ecossistema. Transforma o orquestrador de um simples executor de tarefas em um **sistema de raciocínio científico auditável e superhuman-candidate**, capaz de formular hipóteses falsificáveis, projetar experimentos com power analysis, validar evidências com Bayes Factor, executar refutação adversarial, calibrar confiança (Brier/ECE), recuperar evidências via Scientific RAG e bloquear decisões antiéticas de forma automatizada.
-
-### 🆕 Diferenciais do v2.1.0
-
-| Módulo | Upgrade | Impacto |
-|---|---|---|
-| **EvidenceGraph** | **NOVO** — Grafo epistemológico persistente | Memória científica que rastreia claims, evidências e confiança ao longo do tempo |
-| **HypothesisEngine** | Domínios científicos, priors Bayesianos, SESOI, falsificabilidade | Hipóteses mais realistas e informativas |
-| **ExperimentDesigner** | Power analysis, confounders, blinding, pré-registro | Desenhos experimentais com rigor estatístico |
-| **StatisticalValidator** | Bayes Factor (Sellke 2001), Bonferroni/FDR, Cohen's d | Decisão baseada em múltiplas evidências |
-| **AdversarialReviewer** | p-hacking simulation, detecção de confounders, verificação de premissas | Auto-refutação ativa (Popperiano) |
-| **ConfidenceCalibrator** | Brier Score, ECE, abstention | Confiança calibrada e possibilidade de abstenção |
-| **ScientificReporter** | LaTeX Qualis A1, checklist Nature-style | Relatórios publicáveis |
-| **ScientificBenchmark** | 5 benchmarks internos + avaliação real de `pipeline_fn` | Avaliação contínua de maturidade científica |
-| **Scientific RAG** | **NOVO** — grounding, citações, reranking e abstenção | Respostas ancoradas em evidências recuperáveis |
-| **Superhuman Suite** | **NOVO** — readiness_score + tiers conservadores | Evita claim “superhuman verified” sem validação externa |
-
-### Fluxo Completo
-
-```text
-Problema Bruto
+[Problema]
     ↓
-[OQS] Optimal Question Scanner
-  ↳ mapeia lacunas conceituais e ambiguidades
-  ↳ gera candidatos de perguntas
-  ↳ calcula CS = URS + SVS − DRI − CCI
-  ↳ seleciona pergunta ótima de forma determinística
+┌─ R101: AGENTIC SCIENCE V2 (EvoSci) ─────────────────┐
+│ MentorAgent → PrimeResearcherAgent → ReviewerAgent  │
+│ → EvolutionManagerAgent → Evolutionary Engine       │
+│ (Selection → Crossover → Mutation → Inheritance)    │
+└──────────────────────────────────────────────────────┘
     ↓
-[MCI Scientific Core] ⭐ Upgrade SuperHuman
-  ↳ HypothesisEngine: gera H1 + H0 com direção, domínio, prior Bayesiano, SESOI
-  ↳ ExperimentDesigner: power analysis, confounders, n_arms, blinding
-  ↳ StatisticalValidator: p-valor, p-corrigido, BF10/BF01, Cohen's d, poder pós-hoc
-  ↳ AdversarialReviewer: p-hacking, confounders, premissas, override automático
-  ↳ ConfidenceCalibrator: Brier score, ECE, abstention por baixa confiança
-  ↳ ScientificReporter: LaTeX Qualis A1 com checklist de reprodutibilidade
+┌─ R102: DEEP RESEARCH AGENT ─────────────────────────┐
+│ EvidenceGraph (Entity/Relation/Evidence)             │
+│ BFRSAgent (exploração larga)                         │
+│ DFRSAgent (cadeias multi-hop)                        │
+│ OrchestratorAgent (planejamento + gate + síntese)    │
+└──────────────────────────────────────────────────────┘
     ↓
-[EvidenceGraph] 🆕 Memória Epistemológica (exclusivo OpenCode)
-  ↳ registra claim com versões históricas
-  ↳ acumula evidências a favor/contra com impacto na confiança
-  ↳ calcula confiança consolidada (média ponderada)
-  ↳ detecta contradições entre claims
-  ↳ rastreia tentativas de replicação
+┌─ R103: AGENTIC PEER REVIEW ─────────────────────────┐
+│ RubricEngine (8 meta-dimensões)                      │
+│ ReviewLedger (claim-evidence-risk)                   │
+│ AuditGraph (integrado R102)                          │
+│ MultiCriticReviewer (4 especialistas)                │
+└──────────────────────────────────────────────────────┘
     ↓
-[VSEE] Vector Shortcut Execution Engine
-  ↳ avalia elegibilidade de atalho vetorial via policy gates
-  ↳ executa rota vetorial OU original com fallback automático
-  ↳ telemetria: EG, TRR, RI, EFS
+┌─ R104d: AGENTIC MANUSCRIPT REVISION ────────────────┐
+│ ReviewAnalyzer → SectionMapper → ProposalGenerator   │
+│ DiffEngine (com rollback) → RebuttalLetter           │
+└──────────────────────────────────────────────────────┘
     ↓
-[EGS] Ethical Governance Scanner
-  ↳ PrincipleEngine: carrega princípios (dignidade, transparência, não maleficência...)
-  ↳ StressTest: submete saída a tensões éticas (discriminação, assimetria, manipulação)
-  ↳ GovernanceAnalyzer: decide approve / approve_with_constraints / block
-  ↳ hard-block: sobrescreve qualquer score se houver violação grave
+┌─ R105: AGENTIC PAPER COMPOSER ──────────────────────┐
+│ StructurePlanner (ABNT/APA/IEEE)                     │
+│ SectionWriter (6 seções)                             │
+│ CitationFormatter (3 estilos)                        │
+│ CrossConsistencyVerifier (5 verificações)            │
+└──────────────────────────────────────────────────────┘
     ↓
-[Final Report] — LaTeX Qualis A1 + Métricas + Auditoria via EvidenceGraph
+[Artigo Completo + MCP Tools + Skills Exportáveis]
 ```
 
-### Uso Direto do Pipeline Científico
+Cada estágio possui **spec formal (SDD)**, **testes TDD**, **gate de qualidade** e **registro no EvolutionRegistry**.
 
-```python
-# Pipeline científico completo com governança ética + EvidenceGraph
-from mci.pipeline.scientific_governance_pipeline import run_scientific_governance_pipeline
+### 3. Motor Científico com Governance (v2.x legado)
+Pipeline científico com governança ética: `OQS → HypothesisEngine → ExperimentDesigner → StatisticalValidator → AdversarialReviewer → ConfidenceCalibrator → VSEE → EGS → EvidenceGraph`. Inclui Scientific RAG com grounding, citações auditáveis e abstenção.
 
-result = run_scientific_governance_pipeline(
-    problem_text="A intervenção X reduz erro médio em classificação?",
-    executor_fn=lambda ctx: {"result": "executado"},
-    context={
-        "validated_shortcut": True,
-        "risk": 0.1,
-        "p_value": 0.01,
-        "effect_size": 0.55,
-        "confidence_interval": [0.25, 0.85],
-        "sample_size": 200,
-        "reproducibility_score": 0.92,
-        "expected_behavior": {"egs_should_decide": "approve"}
-    }
-)
+### 4. Camada Transformer
+Roteador de atenção (Multi-Head Attention com 4 cabeças: semântica, capacidade, confiança, carga), pipeline iterativo Gerar→Verificar→Revisar e memória hierárquica com Episodic Replay.
 
-print(result["status"])                                   # "success" | "blocked" | "failed"
-print(result["scientific_claim"]["final_verdict"])        # "supported" | "inconclusive" | "refuted"
-print(result["scientific_claim"]["calibrated_confidence"]) # score 0.0–1.0
-print(result["scientific_claim"]["bayes_factor"])         # BF10, BF01
-print(result["evidence_graph_id"])                        # ID no EvidenceGraph
-print(result["report_tex"][:200])                         # Laudo LaTeX (primeiras linhas)
-```
+### 5. Módulos Avançados
+- **Token Economy:** Staking/slashing para agentes
+- **Trust Engine:** Behavioral gates com confidence ledger
+- **SDD/TDD:** SpecRegistry, SpecVerifier, TDDRunner
+- **MCP Security (R100):** MCPGuard, AuditLogger, ToolVetter, RateLimiter
+- **CI/CD (R106):** GitHub Actions, quality report, coverage gate
 
-### EvidenceGraph — Memória Epistemológica
+### 6. Catálogo de Agentes
+160+ agentes especializados: Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, e especialistas jurídicos, de design e quânticos.
 
-```python
-from mci.evidence_graph import EvidenceGraph, get_global_evidence_graph
-
-graph = get_global_evidence_graph()
-
-# Consultar histórico de uma claim
-history = graph.get_claim_history("clm-example-001")
-print(f"Versões: {len(history['versions'])}")
-print(f"Evidências a favor: {len(history['evidence_for'])}")
-print(f"Evidências contra: {len(history['evidence_against'])}")
-
-# Confiança consolidada (média ponderada das versões)
-confidence = graph.get_consolidated_confidence("clm-example-001")
-
-# Detectar contradições entre claims
-contradictions = graph.find_contradictions()
-
-# Estatísticas do grafo
-stats = graph.get_stats()
-print(f"Total claims: {stats['total_claims']}")
-print(f"Taxa de reprodutibilidade: {stats['overall_reproducibility']}")
-```
-
-### Scientific RAG — Grounding com Citações (SPEC-919)
-
-```python
-from rag import ScientificDocument, ScientificRAG
-
-docs = [
-    ScientificDocument(
-        doc_id="pearl-2009",
-        title="Causality",
-        authors=["Pearl"],
-        year=2009,
-        source="book",
-        text="Correlação não implica causalidade; inferência causal exige modelo estrutural...",
-    )
-]
-
-rag = ScientificRAG(min_score=0.05)
-rag.index(docs)
-
-answer = rag.answer("como distinguir correlação de causalidade?", top_k=2)
-print(answer["abstained"])          # False quando há evidência suficiente
-print(answer["groundedness"])       # score 0.0–1.0
-print(answer["evidence"][0]["citation"])  # Pearl (2009), pearl-2009#1
-```
-
-### ScientificBenchmark + Superhuman Readiness (SPEC-918)
-
-```python
-from benchmarks.scientific_reasoning.runner import run_all_benchmarks
-from benchmarks.scientific_reasoning import run_superhuman_suite
-
-results = run_all_benchmarks(verbose=True)
-# Executa 5 benchmarks: causal, design, stats, power, bias
-
-print(f"Score geral: {results['overall_score']:.2%}")
-print(f"Tarefas: {results['total_passed']}/{results['total_tasks']}")
-
-readiness = run_superhuman_suite(rag=rag, external_validation=False)
-print(readiness["readiness_score"])  # 0–100
-print(readiness["tier"])             # base | research_grade | superhuman_candidate
-```
-
-> **Política de claim:** `superhuman_verified` só pode ser retornado se `external_validation=True`; sem validação externa, mesmo score alto retorna no máximo `superhuman_candidate`.
-
-### Metacognitive Superhuman Suite (SPEC-920)
-
-```python
-from mci import run_metacognitive_superhuman_suite
-
-report = run_metacognitive_superhuman_suite(external_validation=False)
-
-print(report["readiness_score"])  # 0–100
-print(report["tier"])             # reactive | reflective | research_grade | candidate
-print(report["dimensions"])       # awareness, reflection, adaptation, memory_quality...
-```
-
-> **Política de claim:** `metacognitive_superhuman_verified` só pode ser retornado se `external_validation=True`; sem validação externa, mesmo score alto retorna no máximo `metacognitive_superhuman_candidate`.
-
-### Schemas JSON de Contratos (validados via `jsonschema`)
-
-| Schema | Propósito |
-|---|---|
-| `schemas/scientific_claim.schema.json` | Laudo científico: hipótese, p-valor, IC, efeito, veredicto |
-| `schemas/optimal_question.schema.json` | Pergunta ótima: scores URS, SVS, DRI, CCI, CS |
-| `schemas/vector_execution_decision.schema.json` | Decisão de rota vetorial: telemetria EG, TRR, RI, EFS |
-| `schemas/ethical_assessment.schema.json` | Avaliação ética: alinhamento, tensões, decisão, hard-block |
-
-### Execução em Lote de Experimentos
-
-```bash
-# Executa a matriz de cenários (OQS + MCI + VSEE + EGS) em lote
-python3 research/pipelines/run_research_batch.py \
-  --matrix research/experiments/scenario_matrix_v1.json \
-  --results research/results \
-  --max-scenarios 20 \
-  --repetitions 2
-```
-
-O resultado gera relatórios JSONL (raw), JSON agregado e Markdown auditável em `research/results/`.
-
----
-
-### Mapa Geral da Arquitetura
+### Diagrama de Arquitetura
 
 ```mermaid
 graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
-    WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
     
     %% Camada SDD/TDD
     subgraph SDD [SDD & TDD Engine]
-        Spec[SpecRegistry<br>Especificações]
-        Ver[SpecVerifier<br>Gate SDD]
-        TDD[TDDRunner<br>Red-Green-Refactor]
-        
+        Spec[SpecRegistry]
+        Ver[SpecVerifier Gate SDD]
+        TDD[TDDRunner Red-Green-Refactor]
         TDD -.->|Valida| Ver
         Ver -.->|Lê| Spec
     end
 
     %% Camada Transformer
     subgraph TF [Transformer Layer]
-        Attn[AttentionRouter<br>Multi-Head]
-        Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
-        HTM[(Hierarchical<br>Memory c/ Episodic Replay)]
-        Emb[TaskEmbedder<br>d=64]
-        
+        Attn[AttentionRouter Multi-Head]
+        Pipe[TransformerPipeline]
+        HTM[(Hierarchical Memory)]
+        Emb[TaskEmbedder d=64]
         Attn -.->|Usa| Emb
         HTM -.->|Usa| Emb
     end
     
-    %% Camada Core (Novos Subsistemas)
-    subgraph Core [Core Subsystems]
-        Trust[Trust Engine<br>Behavioral Gate]
-        Eco[Token Economy<br>Staking/Slashing]
-        Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
-        Acad[MASWOS<br>Qualis A1]
-        Reason[Reasoning<br>12 Engines + Quantum]
-        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928/931]
-        LegalBench[Legal Benchmarks<br>SPEC-928]
-        RAG[Scientific RAG<br>Grounding + Citations]
-        Bench[Superhuman Readiness<br>Benchmarks]
-        MetaEval[Metacognitive Eval<br>SPEC-920]
-        MiroFish[MiroFish<br>Swarm c/ GraphMemory]
-        SynthUniv[Synthetic University<br>SPEC-935 · 10 Faculdades]
-        Publishing[Publishing<br>LaTeX & Cover Designer]
-        Research[Research<br>Hub c/ OSINT]
-        Illus[Illustrations<br>Mermaid/MIRA/Graph]
+    %% Pipeline Academico Agentivo (R101-R105)
+    subgraph Acad [Pipeline Academico Agentivo v3.0]
+        EvoSci[R101: EvoSci<br>Mentor+Researcher+Reviewer<br>Evolutionary Engine]
+        DeepRes[R102: Deep Research<br>Evidence Graph + BFRS/DFRS]
+        PReview[R103: Peer Review<br>Rubric 8-dim + AuditGraph]
+        Revision[R104d: Revision<br>DiffEngine + Rebuttal]
+        Composer[R105: Paper Composer<br>ABNT/APA/IEEE]
+        
+        EvoSci --> DeepRes
+        DeepRes --> PReview
+        PReview --> Revision
+        Revision --> Composer
     end
 
-    %% Camada Scientific Governance
-    subgraph SGP [Scientific Governance Pipeline]
-        OQS[OQS<br>Optimal Question Scanner]
-        SCI[MCI Scientific Core<br>Hipótese·Experimento·Estatística]
-        VSEE[VSEE<br>Vector Shortcut Engine]
-        EGS[EGS<br>Ethical Governance Scanner]
-        
-        OQS --> SCI
-        SCI --> VSEE
-        VSEE --> EGS
+    %% Camada Core
+    subgraph Core [Core Subsystems]
+        Trust[Trust Engine]
+        Eco[Token Economy]
+        Scan[Scanners M1-M5]
+        Reason[Reasoning 12 Engines]
+        MiroFish[MiroFish Swarm]
+        SynthUniv[Synthetic University<br>SPEC-935]
+        Publishing[Publishing LaTeX]
+        Research[Research Hub]
     end
 
     %% Camada MCI
     subgraph MCI [Metacognitive Interconnect]
-        MB[MetaBus<br>Global Workspace]
-        BB[Blackboard<br>A2A Protocol]
-        Mem[(Metacognitive<br>Memory)]
-        Ref[Reflexion<br>Middleware]
-        
+        MB[MetaBus Global Workspace]
+        BB[Blackboard A2A Protocol]
+        Mem[(Metacognitive Memory)]
+        Ref[Reflexion Middleware]
         MB <--> Mem
         BB <--> MB
         Ref <--> MB
     end
+
+    %% Seguranca e Qualidade
+    subgraph SQC [Security & Quality]
+        MCPSec[R100: MCP Security<br>Guard+Audit+Vetter+Limiter]
+        CICD[R106: CI/CD Pipeline<br>Lint+Test+Package+Quality Gate]
+    end
     
     %% Orquestrador integra as camadas
-    Orchestrator --> |1. Cria Spec| Spec
-    Orchestrator --> |2. Recuperação em 2 níveis| HTM
-    HTM --> |Lê Episódica| Mem
-    Orchestrator --> |3. Gate & Roteia| Trust
-    Trust --> |Libera| Attn
-    Attn --> |Publica Volunteer| BB
-    Orchestrator --> |4. Executa TDD| Pipe
-    Pipe --> |Verifica| Ver
+    Orchestrator -->|1. Cria Spec| Spec
+    Orchestrator -->|2. Recupera| HTM
+    HTM -->|Lê| Mem
+    Orchestrator -->|3. Gate| Trust
+    Trust -->|Libera| Attn
+    Attn -->|Publica| BB
+    Orchestrator -->|4. Executa TDD| Pipe
+    Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
-    Acad -->|Consulta evidências| RAG
-    Reason -->|Grounding científico| RAG
-    RAG -->|Métricas| Bench
-    MB -->|Traços e reflexões| MetaEval
-    Trust -->|Outcomes e confiança| MetaEval
-    SCI --> RAG
-    Orchestrator -->|5. Pipeline Científico| OQS
-    Orchestrator -->|6. Raciocínio Jurídico| Legal
-    Legal -->|Subsunção + Ponderação| Reason
-    Legal -->|Interpretação Constitucional| MetaEval
-    Legal -->|RAG jurídico + Datajud| RAG
-    Legal -->|Agentes jurídicos A2A| BB
-    Legal -->|Especialização por 7 ramos| LegalBench
-    LegalBench -->|tiers conservadores| MetaEval
-    SynthUniv -->|10k+ combinações via MiroFish| MiroFish
-    SynthUniv -->|10 Faculdades 40+ Professores| Agents
-    SynthUniv -->|Publica descobertas| MB
-    EGS -->|Reflete Resultado| MB
+    Orchestrator -->|5. Pipeline Academico| EvoSci
+    Orchestrator -->|6. Seguranca| MCPSec
+    Orchestrator -->|7. CI/CD| CICD
     
     %% Agentes
-    subgraph Agents [Catálogo de Agentes]
+    subgraph Agents [Catalogo de Agentes 160+]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
-        A4[156 Especializados...]
+        A4[32 MASWOS Agents]
+        A5[Academic Writer]
+        A6[Deep Research]
+        A7[Peer Review]
+        A8[Paper Composer]
     end
     
-    %% Fluxo de Agentes
     Agents -.->|Registra Agent Card| BB
     BB -.->|Call for Proposals| Agents
     Agents -->|Voluntaria-se| BB
     Agents -->|Conclui Tarefa| Ref
     
     %% MCP
-    MCP[MCP Server] -->|Expõe API| MCI
+    MCP[MCP Server 14 Tools] -->|Expoe API| MCI
     External[External Tools / LLMs] -->|JSON-RPC| MCP
+    MCPSec -.->|Protege| MCP
+    CICD -.->|Valida| Agents
 ```
 
-### Detalhamento Técnico das Camadas
+---
 
-#### 1. Metacognitive Interconnect (MCI)
-A espinha dorsal do ecossistema. Baseada na **Global Workspace Theory**, o `MetaBus` atua como um quadro negro onde todos os agentes publicam e leem eventos. O protocolo **A2A (Agent-to-Agent)** permite que agentes descubram as capacidades uns dos outros dinamicamente, sem *hardcoding*. O *Reflexion Middleware* garante que toda tarefa concluída gere uma lição aprendida e atualize o `confidence_ledger` global.
+##  Pipeline Acadêmico Agentivo (R101–R105)
 
-#### 🆕 2. Scientific Governance Pipeline (v2.1.0)
-A nova camada que eleva o ecossistema ao padrão de raciocínio científico.
-- **OQS (Optimal Question Scanner):** Mapeia lacunas conceituais, gera candidatos de perguntas e ranqueia pelo Convergence Score ($CS = URS + SVS - DRI - CCI$) para seleção determinística da pergunta que mais reduz incerteza.
-- **MCI Scientific Core:** Motor completo de método científico: `HypothesisEngine → ExperimentDesigner → StatisticalValidator → AdversarialReviewer → ConfidenceCalibrator → ScientificReporter`. Cada ciclo termina em um laudo LaTeX auditável.
-- **VSEE (Vector Shortcut Execution Engine):** Detecta atalhos vetoriais validados e os executa quando todos os *policy gates* passam (risco, fidelidade, ganho). Fallback automático para execução original. Telemetria: EG, TRR, RI, EFS.
-- **EGS (Ethical Governance Scanner):** Integrado ao TDD. Roda *stress tests* éticos nas saídas, calcula *alignment score* e aplica **hard-block** irreversível em casos de violação de dignidade humana, discriminação ou ausência de supervisão em domínio crítico.
-- **Scientific RAG (SPEC-919):** Indexa evidências científicas com metadados, recupera chunks citáveis, aplica reranking científico e abstém quando não há grounding suficiente.
-- **Superhuman Readiness Suite (SPEC-918):** Consolida benchmarks, grounding, robustez, calibração e reprodutibilidade em um `readiness_score` conservador. `superhuman_verified` requer validação externa.
-- **Metacognitive Eval (SPEC-920):** Avalia o nível metacognitivo do agente em tempo real (Emergente, Analítico, Reflexivo, Superhuman) a partir de traços de execução e reflexões do MetaBus. Política anti-overclaim: o escalonamento de *tier* é conservador e exige evidência replicada em múltiplos ciclos.
+### R101: Agentic Science V2 / EvoSci
+Framework bio-inspirado multiagente para descoberta científica autônoma baseado em EvoSci (ACL 2026), EvoScientist (arXiv 2026) e EurekAgent (arXiv 2026).
 
-#### 3. Transformer Layer
-Inspirada na arquitetura de Vaswani (2017) e nos modelos da DeepMind.
-- **TaskEmbedder:** Vetoriza tarefas e capacidades usando *feature hashing* determinístico.
-- **AttentionRouter:** Substitui o roteamento estático por **Multi-Head Attention**. Calcula scores softmax usando 4 cabeças: Semântica, Capacidade, Confiança e Carga.
-- **HierarchicalMemory:** Recuperação de memória em dois níveis (HTM) com *Episodic Replay* para treinamento offline.
+```python
+from agentic_science_v2.orchestrator import AgenticScienceV2
 
-#### 4. Core Subsystems (Módulos Avançados)
-- **Trust Engine & Token Economy:** Agentes fazem *stake* de tokens para assumir tarefas. Se falharem no TDD, sofrem *slashing*. O *Behavioral Gate* barra agentes com histórico de alucinação.
-- **Deep Diagnose:** 5 Scanners (Noológico, Teleológico, Evolutivo, etc.) que fazem engenharia reversa de código, priorização epistemológica e geram "Sucessores Plausíveis" para o seu projeto.
-- **MiroFish & Game Theory:** Um enxame preditivo que debate usando o método Delphi e constrói um **Grafo de Conhecimento** em memória para extrair consensos matemáticos.
-- **Legal Reasoning + AUXJURIS (SPEC-921/922/923/927/931):** Raciocínio jurídico brasileiro especializado com 5 motores (subsunção, ponderação, precedentes, interpretação constitucional e scoring), integração real com a **API Datajud do CNJ** (27 tribunais estaduais), **4 agentes jurídicos A2A** (assistente geral, sumarizador, redator de e-mail e pesquisador jurídico), **framework de especialização por 7 ramos do direito** (penal, trabalhista, tributário, empresarial, administrativo, ambiental e digital/LGPD) e uma **base de conhecimento com RAG por keywords segmentada por ramo** para grounding jurídico mais preciso.
-- **🆕 MCP Server (R94):** `synthetic_university/mcp_server.py` — Servidor **MCP (Model Context Protocol)** via stdio JSON-RPC expondo 8 ferramentas da Universidade Sintética como ferramentas MCP. Cada ferramenta (`su_generate`, `su_evaluate`, `su_enrich`, `su_visual_abstract`, `su_peer_review`, `su_submission`, `su_novelty`, `su_dashboard`) possui JSON Schema de entrada e handler delegando ao módulo correspondente. Uso: `echo '{"method":"tools/call","params":{"name":"su_generate","arguments":{"n_pairs":3}}}' | python3 -m synthetic_university.mcp_server`.
-- **🆕 API Gateway (R96):** `synthetic_university/api_gateway.py` — Gateway **REST FastAPI** com 10 endpoints HTTP. `GET /health` (health check), `GET /tools` (lista 8 ferramentas), `POST /tools/{generate,evaluate,enrich,visual-abstract,peer-review,submission,novelty,dashboard}` (wrappers dos handlers MCP). Import condicional de FastAPI — funciona sem a biblioteca instalada. Uso: `uvicorn synthetic_university.api_gateway:app --reload`.
-- **🆕 Continuous Discovery Loop (R95):** `synthetic_university/continuous_discovery.py` — `ContinuousDiscoveryLoop` que periodicamente gera 3-5 teses, enriquece cada uma com busca web, reavalia novidade, calcula métricas agregadas e acumula histórico. `run_cycle()` retorna metadados completos. `get_summary()` consolida todos os ciclos. `export_report()` e `export_all()` salvam relatórios JSON auditáveis.
-- **Legal Impact Scanner (SPEC-924/925/926):** Scanner opcional de visão jurídica para **pesquisas e produções**. Mede proteção de dados/LGPD, propriedade intelectual, conformidade regulatória/ética, grounding jurisprudencial, responsabilidade contratual e defensibilidade de publicação. Também estima **ganho metacognitivo jurídico** em 4 eixos: awareness normativa, detecção de conflito normativo, antecipação de risco e humildade epistêmica aplicada. Agora pode ser acionado pela **interface web Streamlit** tanto no diagnóstico geral quanto em uma **aba jurídica dedicada** em `webapp/app.py`.
-- **Benchmarks Jurídicos por Ramo (SPEC-928):** Suíte conservadora de avaliação por domínio para os 7 ramos especializados. Mede acurácia de roteamento, qualidade de resposta, cobertura do domínio e classifica o sistema em tiers (`base`, `specialist`, `specialist_advanced`, `phd_candidate`, `phd_validated`). A política anti-overclaim permanece: **`phd_validated` exige validação externa**.
-- **Publishing & Research:** Automação Qualis A1. Busca artigos (Sci-Hub/OpenAlex), converte PDF para Markdown, faz fichamentos ABNT/APA, gera ilustrações didáticas (MIRA) e compila livros inteiros em LaTeX com capas geradas por IA.
+agentic_science = AgenticScienceV2()
+result = agentic_science.run(seed_domain="quantum ethics in AI", max_rounds=5)
+print(result["best_solution"]["content"])      # Melhor hipotese/claim
+print(result["evolutionary_trajectory"])        # Trajetoria completa
+print(result["convergence_analysis"])           # Analise de convergencia
+```
 
-#### 5. Ganho Metacognitivo Jurídico (avaliação interna — SPEC-924)
+**67 testes TDD** | Score evolutivo: 9.7/10
 
-Sim: a incorporação do conhecimento jurídico **aumentou a performance metacognitiva do ecossistema** em uma dimensão específica e útil: a capacidade de perceber riscos normativos antes da ação.
+### R102: Deep Research Agent
+Sistema hierárquico de pesquisa profunda com Evidence Graph, busca em largura (BFRS) e profundidade (DFRS), e síntese multi-fontes. Inspirado em DeepEvidence (Nature MI 2026).
 
-Em benchmark interno heurístico do `LegalImpactScanner`:
+```python
+from agentic_science_v2.deep_research import OrchestratorAgent
 
-- **artefato neutro** → `overall_score = 49.67`, `metacognitive_gain_score = 0.0`
-- **artefato juridicamente consciente** (LGPD + ética + licenças + precedentes + limitações) → `overall_score = 80.0`, `metacognitive_gain_score = 60.0`
+orchestrator = OrchestratorAgent()
+report = orchestrator.run(
+    question="What is the relationship between quantum coherence and ethical AI?",
+    max_depth=3
+)
+print(report["answer"])                   # Resposta sintetizada
+print(report["evidence_subgraph"])         # Subgrafo de evidencias
+print(report["sufficiency_gate"])          # Gate de suficiencia
+```
 
-Interpretação conservadora:
+**48 testes TDD** | Score: 9.6/10
 
-- o ecossistema ficou **mais consciente de compliance**;
-- ficou **melhor em antecipar litígio, privacidade e risco regulatório**;
-- ganhou **detecção de colisões normativas** (ex.: transparência × privacidade, abertura × licenciamento);
-- ficou **mais humilde epistemicamente**, porque agora reconhece melhor quando precisa de abstenção, parecer jurídico ou revisão humana.
+### R103: Agentic Peer Review
+Revisão por pares agentiva com rubrica de 8 dimensões, ledger de claim-evidence-risk, grafo de auditoria integrado ao R102, e 4 críticos especialistas (Methodology, Results, Literature, Ethics). Inspirado em REVIEWGROUNDER (ACL 2026) e DeepReviewer 2.0 (arXiv 2026).
 
-Isso não torna o sistema um “advogado autônomo”. Torna-o um ecossistema **mais prudente, auditável e defensável juridicamente**.
+```python
+from agentic_science_v2.review_agent import OrchestratorReviewer
+
+reviewer = OrchestratorReviewer()
+review = reviewer.run(
+    title="Quantum Ethics: A Framework for Moral AI",
+    abstract="...",
+    sections={"introduction": "...", "methods": "...", ...}
+)
+print(review["meta_review"])              # Revisao consolidada
+print(review["scores"])                   # Scores por dimensao
+print(review["repair_plan"])              # Plano de correcoes priorizado
+```
+
+**44 testes TDD** | Score: 9.6/10
+
+### R104d: Agentic Manuscript Revision
+Sistema agentivo de revisão de manuscritos pós-peer-review. Analisa a revisão recebida (R103), mapeia claims para seções, gera propostas de correção e aplica diffs controlados com rollback. Gera carta de rebuttal ponto-a-ponto automaticamente.
+
+```python
+from agentic_science_v2.revision_agent import OrchestratorRevision
+
+revision = OrchestratorRevision()
+result = revision.run(review_package=review, manuscript=my_manuscript)
+print(result["revised_manuscript"])        # Manuscrito revisado
+print(result["rebuttal_letter"])           # Carta de rebuttal
+print(result["diff_stats"])               # Estatisticas do diff
+```
+
+**28 testes TDD** | Score: 9.6/10
+
+### R105: Agentic Paper Composer
+Sistema agentivo de composição de manuscritos acadêmicos. Planeja estrutura por venue (ABNT, APA, IEEE), escreve 6 seções (abstract, intro, methods, results, discussion, conclusion), formata citações em 3 estilos, verifica consistência cruzada e exporta.
+
+```python
+from agentic_science_v2.paper_composer import OrchestratorComposer
+
+composer = OrchestratorComposer()
+paper = composer.run(
+    title="Quantum Ethics in AI",
+    sections_content={...},
+    venue="abnt",              # abnt | apa | ieee
+    citations=[...]
+)
+print(paper["full_text"])                 # Texto completo formatado
+print(paper["citations_formatted"])       # Referencias formatadas
+print(paper["consistency_report"])        # Relatorio de consistencia
+```
+
+**30 testes TDD** | Score: 9.5/10
 
 ---
 
-## ⚖️ Vantagens e Limitações (Transparência)
+##  Evolutionary Memory (R97)
 
-| ✅ Vantagens (Por que usar?) | ⚠️ Limitações (O que ainda estamos melhorando) |
+Memória persistente para o pipeline de descoberta contínua. Quatro componentes:
+
+| Componente | Função |
 |---|---|
-| **Autonomia Real:** O sistema não apenas gera código, ele testa (TDD), revisa as próprias falhas e tenta de novo. | **Custo Computacional:** Rodar múltiplos agentes debatendo via LLM consome muitos tokens (recomendamos Ollama local para baratear). |
-| **Rigor Acadêmico:** Único framework que gera citações ABNT/APA corretas e extrai figuras com metadados reais. | **Velocidade:** A metacognição (pensar sobre o pensar) exige tempo. Um artigo complexo pode levar minutos/horas para ser gerado. |
-| **Design Automático:** Estuda paletas de cores e gera capas e ilustrações didáticas (MIRA) sozinho. | **Dependência de APIs:** O download de PDFs depende da estabilidade do Sci-Hub e OpenAlex. |
-| **Segurança:** O Trust Engine pune agentes que "alucinam", reduzindo a taxa de erros a longo prazo. | **Setup Inicial Manual:** Fora do Windows, exige familiaridade com terminal e Python. |
+| `IdeationMemory` | Registra direções de pesquisa, scores e estratégias |
+| `ExperimentationMemory` | Armazena outcomes de experimentos, recursos gastos |
+| `HeartbeatReflection` | Reflexão periódica a cada N ciclos |
+| `StagnationDetector` | Detecta platôs de score e sugere pivot |
+
+```python
+from synthetic_university.evolutionary_memory import EvolutionaryMemorySubstrate
+
+memory = EvolutionaryMemorySubstrate()
+memory.record_ideation(direction="Quantum Ethics", score=0.85, strategy="explore")
+memory.record_experiment(direction="Quantum Ethics", outcome="promising", resources=0.7)
+reflection = memory.reflect()
+print(reflection["stagnation_status"])  # "stable" | "plateau_detected"
+```
+
+**42 testes TDD** | Score: 9.5/10
 
 ---
 
-## 🌍 Potencial de Aplicação e Escalabilidade
+##  MCP Security (R100)
 
-O OpenCode Ecosystem não é apenas um script de terminal, é um **Motor de P&D (Pesquisa e Desenvolvimento)** escalável.
+Camada de segurança para o servidor MCP com quatro componentes:
 
-- **Fábrica de Software Autônoma:** Pode ser acoplado a um repositório GitHub via CI/CD. Quando um *Issue* é aberto, o ecossistema lê, faz engenharia reversa, cria os testes (TDD), escreve o código e abre um *Pull Request*.
-- **Universidade Sintética:** Pesquisadores podem usar o sistema para processar 500 artigos do PubMed em uma noite, extraindo apenas os consensos lógicos (via MiroFish Graph Memory) para acelerar a descoberta de novos medicamentos.
-- **Editora Automatizada (KDP):** Escritores podem gerar rascunhos, solicitar ilustrações internas didáticas, diagramação LaTeX e exportação direta para a Amazon Kindle Direct Publishing.
-- **Escalabilidade Horizontal:** Como usamos a arquitetura *Blackboard* e o protocolo A2A, você pode plugar este ecossistema em clusters Kubernetes, distribuindo os 134 agentes em diferentes nós de processamento.
+| Componente | Função |
+|---|---|
+| `MCPGuard` | Valida argumentos contra JSON Schema + wrap de handlers |
+| `AuditLogger` | Registro estruturado com timestamp, ferramenta, args, duração |
+| `ToolVetter` | Detecção de prompt injection (11 patterns), command injection, path traversal, SQLi |
+| `RateLimiter` | Token bucket por caller com configuração de max_calls/window |
+
+**23 testes TDD** | Score: 9.5/10
 
 ---
 
-## 📁 Estrutura do Repositório
+##  CI/CD Pipeline & Quality Gates (R106)
+
+Infraestrutura de qualidade profissional com GitHub Actions:
+
+### GitHub Actions (`.github/workflows/ci.yml`)
+3 jobs em pipeline:
+1. **Lint** — Ruff check + format check (Python 3.12)
+2. **Test** — Matrix Python 3.10–3.14, pytest full suite, quality report
+3. **Package** — Build & verify imports de 3 pacotes pip
+
+### Scripts de Qualidade
+- **`scripts/quality_report.py`** — Relatório consolidado com score 0–10, análise de cobertura por módulo, lint e recomendações
+- **`scripts/check_coverage.py`** — Quality gate: verifica testes passando, cobertura estimada ≥ 80%, lint ok
+- **`scripts/run_full_suite.sh`** — Script bash orquestrador com modo `--ci` e `--json`
+
+```bash
+# Executar suite completa localmente
+./scripts/run_full_suite.sh
+
+# Modo CI (para no primeiro erro)
+./scripts/run_full_suite.sh --ci
+
+# Apenas quality report rapido
+python3 scripts/quality_report.py --quick
+```
+
+**18 testes TDD** | Score: 9.2/10
+
+---
+
+##  Integration Skills & Pip Packages (R104)
+
+### Skills Exportáveis
+4 skills no formato SKILL.md + skill.py para uso em outros ecossistemas:
+
+| Skill | Comandos |
+|---|---|
+| `skills/evo-science/` | `evol` — ciclo evolutivo, `evol_agent` — agente específico |
+| `skills/deep-research/` | `deep` — pesquisa profunda, `evidence` — grafo de evidência |
+| `skills/peer-review-v2/` | `review` — revisão agentiva, `meta` — meta-revisão |
+| `skills/mcp-security/` | `guard` — validar argumento, `audit` — log de auditoria |
+
+### Pacotes Pip
+3 pacotes instaláveis para integração em outros projetos:
+
+```bash
+pip install packages/opencode-evosci/
+pip install packages/opencode-deep-research/
+pip install packages/opencode-peer-review/
+```
+
+```python
+from opencode_evosci import run_evosci_cycle
+from opencode_deep_research import run_deep_research
+from opencode_peer_review import run_peer_review_v2
+```
+
+---
+
+##  MCP Server & API Gateway
+
+### MCP Server (14 ferramentas)
+`/synthetic_university/mcp_server.py` — Servidor MCP via stdio JSON-RPC:
+
+| Ferramenta | Função | Ciclo |
+|---|---|---|
+| `su_generate` | Gera pares de conceitos | R94 |
+| `su_evaluate` | Avalia tese interdisciplinar | R94 |
+| `su_enrich` | Enriquece tese com busca web | R89/R94 |
+| `su_visual_abstract` | Gera abstract visual SVG | R90/R94 |
+| `su_peer_review` | Revisão cega multi-LLM | R91/R94 |
+| `su_submission` | Pacote de submissão Qualis A1 | R92/R94 |
+| `su_novelty` | Análise de novidade clássica | R93/R94 |
+| `su_novelty_v2` | Análise V2 com contribution points | R98/R99a |
+| `su_dashboard` | Dashboard HTML interativo | R94 |
+| `su_agentic_science` | Ciclo EvoSci completo | R101 |
+| `su_deep_research` | Pesquisa profunda multi-fontes | R102 |
+| `su_peer_review_v2` | Revisão agentiva com auditagem | R103 |
+| `su_manuscript_revision` | Revisão de manuscrito com diff | R104d |
+| `su_paper_composer` | Composição de paper ABNT/APA/IEEE | R105 |
+
+### API Gateway (FastAPI)
+`/synthetic_university/api_gateway.py` — Gateway REST com 12+ endpoints HTTP.
+
+---
+
+##  Scientific RAG Evolved (R99)
+
+O módulo `rag/evolved.py` implementa um sistema RAG científico adaptativo:
+
+| Componente | Função |
+|---|---|
+| `AdaptiveRetriever` | Análise de complexidade da query, 3 estratégias de retrieval |
+| `CitationGraph` | Grafo direcionado de citações com BFS até max_depth |
+| `OutlineSynthesizer` | Geração de outline com templates temáticos |
+| `RAGEvolved` | Roteamento automático (simple vs. structured) |
+
+```python
+from rag.evolved import RAGEvolved
+
+rag = RAGEvolved()
+answer = rag.answer("Explain the relationship between quantum decoherence and ethical AI frameworks")
+print(answer["strategy_used"])         # "simple" | "structured"
+print(answer["sections"])              # Secoes do outline (se structured)
+print(answer["citations"])             # Citacoes do grafo
+```
+
+**25 testes TDD** | Score: 9.5/10
+
+---
+
+##  Universidade Sintética Transversal (SPEC-935)
+
+Simulação de instituição acadêmica completa com:
+- **11 faculdades** (Filosofia, Física, Biologia, Computação, Direito, Economia, Medicina, Engenharia, Artes, Educação, Psicologia)
+- **40+ professores especialistas** sintéticos com h-index, faculdade e área de pesquisa
+- **Motor combinatorial** testa 10.000+ combinações de conceitos interdisciplinares via MiroFish
+- **10.000+ teses** geradas com ranqueamento por score empírico
+- **Validação empírica calibrada** (R82) com convergência e endosso
+- **Dashboard interativo** HTML com Chart.js (R87)
+- **Abstracts visuais SVG** automáticos (R90)
+
+```python
+from synthetic_university.core import SyntheticUniversity
+
+uni = SyntheticUniversity()
+result = uni.run_discovery_cycle(n_pairs=5)
+print(result["theses"][0])             # Melhor tese do ciclo
+print(result["novelty_scores"])        # Scores de novidade
+```
+
+**Ciclos de evolução: 64** (R47–R106) | **1050 testes** | Score médio: 9.4/10
+
+---
+
+##  Comparative de Maturidade Técnica
+
+| Critério | OpenCode v3.0 | LangGraph | CrewAI | AutoGen | MetaGPT |
+|---|---|---|---|---|---|
+| **Pipeline Científico Fechado** | ⭐⭐⭐⭐⭐ EvoSci→DeepRes→Review→Paper | ⭐⭐ | ⭐⭐ | ⭐ | ⭐ |
+| **Roteamento por Atenção** | ⭐⭐⭐⭐⭐ Multi-Head (4 cabeças) | ⭐⭐⭐⭐ Grafos DAG | ⭐⭐⭐ Role-based | ⭐⭐⭐ Conversacional | ⭐⭐ Sequencial |
+| **Metacognição e Memória** | ⭐⭐⭐⭐⭐ Evolution Memory + Reflexion | ⭐⭐⭐⭐ State checkpoint | ⭐⭐⭐ Short/Long term | ⭐⭐ Chat history | ⭐⭐ PRD-based |
+| **Garantia de Qualidade TDD** | ⭐⭐⭐⭐⭐ SDD Gate + TDD + CI/CD | ⭐⭐⭐ Human-in-loop | ⭐⭐ Delegation only | ⭐⭐ Sandbox exec | ⭐⭐ QA agent |
+| **Economia de Tokens** | ⭐⭐⭐⭐⭐ Staking/Slashing | ⭐⭐ | ⭐⭐ | ⭐ | ⭐ |
+| **Segurança MCP** | ⭐⭐⭐⭐⭐ Guard+Audit+Vetter+Limiter | ⭐ | ⭐ | ⭐⭐ | ⭐ |
+| **Produção Científica** | ⭐⭐⭐⭐⭐ ABNT/APA/IEEE + Revisão | ⭐⭐ | ⭐⭐ | ⭐ | ⭐ |
+| **CI/CD Nativo** | ⭐⭐⭐⭐⭐ GitHub Actions + Quality Gates | ⭐ | ⭐ | ⭐ | ⭐ |
+
+---
+
+##  Estrutura do Repositório
 
 ```text
 opencode-ecosystem-core/
-├── marceloclaro/          # Orquestrador supremo MarceloClaroOrchestrator
-├── mci/                   # Metacognitive Interconnect — barramento central
-│   ├── oqs/               # Optimal Question Scanner
-│   ├── vsee/              # Vector Shortcut Execution Engine
-│   ├── egs/               # Ethical Governance Scanner
-│   ├── pipeline/          # Pipeline unificado OQS+MCI+VSEE+EGS
-│   ├── evidence_graph.py  # 🆕 V2.0 Grafo epistemológico (memória de claims)
-│   ├── orchestration.py   # Ciclo científico completo c/ EvidenceGraph
-│   ├── hypothesis_engine.py     # V2.0: domínios, priors Bayesianos, SESOI
-│   ├── experiment_designer.py   # V2.0: power analysis, confounders
-│   ├── statistical_validator.py # V2.0: Bayes Factor, Bonferroni/FDR
-│   ├── adversarial_reviewer.py  # V2.0: p-hacking, confounders
-│   ├── confidence_calibrator.py # V2.0: Brier score, ECE, abstention
-│   ├── scientific_reporter.py   # V2.0: LaTeX Qualis A1, checklist
-│   ├── blackboard.py      # Protocolo A2A (Agent Cards)
-│   ├── metabus.py         # Global Workspace (pub/sub + persistência)
-│   └── reflexion.py       # Reflexion middleware
-├── benchmarks/            # Benchmarks Científicos + readiness superhuman
-│   └── scientific_reasoning/  # 5 benchmarks + superhuman_suite.py
-├── rag/                   # 🆕 Scientific RAG: grounding, citações, abstenção
-├── schemas/               # Schemas JSON de contratos científicos
-├── transformer/           # AttentionRouter, TransformerPipeline, HTM
-├── agents/                # 134 agentes especializados (Agent Cards)
-├── research/
-│   ├── experiments/       # 🆕 Matrizes de cenários de pesquisa
-│   └── pipelines/         # 🆕 Executores de lote integrados
-├── synthetic_university/  # SPEC-935 · 11 Faculdades · 49 ciclos · LLM real
-│   ├── agents/            # 140+ professores especializados
-│   ├── combinatorial_engine.py    # Geração combinatorial com embeddings
-│   ├── core.py            # Núcleo da Universidade Sintética
-│   ├── semantic_embedder.py       # Embedding neural Ollama (768-dim)
-│   ├── benchmark.py               # Benchmark Random × Jaccard × Refined
-│   ├── empirical_validation.py    # Validação empírica calibrada (R82)
-│   ├── i18n.py            # Internacionalização EN/PT-BR (R85)
-│   ├── academic_integration.py    # arXiv + Sem Scholar + Sci-Hub (R86)
-│   ├── dashboard_generator.py     # Dashboard HTML interativo (R87)
-│   ├── llm_evaluator.py           # LLM real via OpenCode CLI (R88)
-│   ├── thesis_enricher.py         # Enriquecimento web (R89)
-│   ├── visual_abstract.py         # Abstracts visuais SVG (R90)
-│   ├── peer_review.py             # Revisão cega multi-LLM (R91)
-│   ├── submission_package.py      # Pacote submissão Qualis A1 (R92)
-│   ├── novelty_analysis.py        # Análise de novidade (R93)
-│   ├── mcp_server.py              # 🆕 MCP Server · 8 ferramentas stdio (R94)
-│   ├── continuous_discovery.py    # 🆕 Loop contínuo de descoberta (R95)
-│   └── api_gateway.py             # 🆕 FastAPI REST · 10 endpoints (R96)
-├── sdd/                   # SpecRegistry, SpecVerifier, TDDRunner
-├── trust/                 # Trust Engine + Behavioral Gate
-├── economy/               # Token Economy (Staking, Slashing, Fee Market)
-├── scanners/              # Deep Diagnose M1-M5 + Prioritizer
-├── academic/              # MASWOS Pipeline Qualis A1
-├── publishing/            # LaTeX, PDF, DOCX, ODT, Cover Designer
-├── illustrations/         # Mermaid, MIRA, Graphify
-├── gametheory/            # 38 estratégias + Nash, Shapley, Tit-for-Tat
-├── mirofish/              # CrossValidator Swarm + GraphMemory
-├── reasoning/             # 12 motores: Z3, SymPy, Kanren, Bayesian, Causal, Quantum...
-├── webapp/                # Interface Streamlit (6 abas)
-├── tests/                 # 263 testes automatizados (suíte operacional verde)
-└── CHANGELOG.md
+├── agentic_science_v2/      # Pipeline academico agentivo (R101-R105)
+│   ├── agents.py            # MentorAgent, PrimeResearcherAgent, ReviewerAgent, EvolutionManager
+│   ├── evolutionary_engine.py # Selection → Crossover → Mutation → Inheritance
+│   ├── environment.py       # Permissions, Artifacts, Budget, HITL
+│   ├── evidence_graph.py    # Entity, Relation, Evidence, path-finding BFS
+│   ├── deep_research.py     # KBRegistry, BFRS, DFRS, OrchestratorAgent
+│   ├── review_agent.py      # RubricEngine, ReviewLedger, AuditGraph, MultiCritic
+│   ├── revision_agent.py    # ReviewAnalyzer, SectionMapper, ProposalGenerator, DiffEngine
+│   ├── paper_composer.py    # StructurePlanner, SectionWriter, CitationFormatter, CrossVerifier
+│   └── orchestrator.py      # AgenticScienceV2 orchestrator
+├── synthetic_university/    # SPEC-935 · 11 Faculdades · 64 ciclos
+│   ├── mcp_server.py        # MCP Server · 14 ferramentas stdio
+│   ├── api_gateway.py       # FastAPI REST · 12+ endpoints
+│   ├── mcp_security.py      # MCPGuard, AuditLogger, ToolVetter, RateLimiter (R100)
+│   ├── evolutionary_memory.py # IdeationMemory, ExperimentationMemory (R97)
+│   ├── novelty_v2.py        # ContributionPointExtractor, PointwiseNoveltyScorer (R98)
+│   └── ...                  # core, combinatorial_engine, empirical_validation, etc.
+├── rag/
+│   ├── evolved.py           # AdaptiveRetriever, CitationGraph, OutlineSynthesizer (R99)
+│   └── scientific.py        # Scientific RAG classico (SPEC-919)
+├── scripts/
+│   ├── quality_report.py    # Score 0-10, cobertura, lint, recomendacoes
+│   ├── check_coverage.py    # Quality gate com threshold 80%
+│   └── run_full_suite.sh    # Suite completa bash
+├── .github/workflows/
+│   └── ci.yml               # GitHub Actions: lint, test (matrix), package
+├── skills/                  # Skills exportaveis (R104a)
+│   ├── evo-science/
+│   ├── deep-research/
+│   ├── peer-review-v2/
+│   └── mcp-security/
+├── packages/                # Pacotes pip (R104b)
+│   ├── opencode-evosci/
+│   ├── opencode-deep-research/
+│   └── opencode-peer-review/
+├── specs/                   # Especificacoes SDD (R97-R106)
+├── evolution/               # Cycles registry (64 ciclos)
+├── tests/                   # 1050 testes automatizados
+├── mci/                     # Metacognitive Interconnect
+├── marceloclaro/            # Orquestrador
+├── agents/catalog/          # 160+ agent cards
+├── sdd/                     # SpecRegistry, SpecVerifier, TDDRunner
+├── trust/                   # Trust Engine
+├── economy/                 # Token Economy
+├── transformers/            # AttentionRouter, HierarchicalMemory
+├── benchmarks/              # Benchmarks cientificos
+├── publishing/              # LaTeX, KDP, Cover Designer
+├── research/                # Research Hub
+└── webapp/                  # Streamlit interface
 ```
 
 ---
 
-## 🧪 Executar os Testes
+##  Executar os Testes
 
 ```bash
-# Todos os 617+ testes do ecossistema
+# Suite completa (1050 testes)
 python3 -m pytest tests/ -v
 
-# Apenas Universidade Sintética (R82-R96)
-python3 -m pytest tests/test_r88_llm_evaluator.py tests/test_r89_thesis_enricher.py tests/test_r90_visual_abstract.py tests/test_r91_peer_review.py tests/test_r92_submission_package.py tests/test_r93_novelty_analysis.py tests/test_r94_mcp_server.py tests/test_r95_continuous_discovery.py tests/test_r96_api_gateway.py -v
+# Pipeline academico agentivo (R101-R105)
+python3 -m pytest tests/test_r101_agentic_science_v2.py tests/test_r102_deep_research.py tests/test_r103_peer_review.py tests/test_r104d_agentic_revision.py tests/test_r105_paper_composer.py -v
 
-# Apenas MCP Server (R94)
-python3 -m pytest tests/test_r94_mcp_server.py -v
+# Evolutionary Memory + Novelty V2 + RAG Evolved (R97-R99)
+python3 -m pytest tests/test_r97_evolutionary_memory.py tests/test_r98_novelty_v2.py tests/test_r99_rag_evolved.py -v
 
-# Apenas API Gateway (R96)
-python3 -m pytest tests/test_r96_api_gateway.py -v
+# MCP Security (R100)
+python3 -m pytest tests/test_r100_mcp_security.py -v
 
-# Apenas pipeline científico (v2.0 SuperHuman)
-python3 -m pytest tests/test_scientific_superhuman.py -v
+# Integration Skills + Pip Packages (R104a-b)
+python3 -m pytest tests/test_r104a_integration_skills.py tests/test_r104b_pip_packages.py -v
 
-# Apenas pipeline de governança (v1.x compat)
-python3 -m pytest tests/test_scientific_governance_pipeline.py -v
+# CI/CD Pipeline (R106)
+python3 -m pytest tests/test_r106_cicd.py -v
+
+# Quality Report
+python3 scripts/quality_report.py --quick
+
+# Quality Gate
+python3 scripts/check_coverage.py --threshold 80 --verbose
+
+# Full Suite Script
+./scripts/run_full_suite.sh
 ```
 
 ---
+
+##  Comparativo com Ecossistema Externo
+
+O ecossistema possui compatibilidade documentada com o fork `timpara/opencode-academic-research` ([docs/COMPATIBILITY_ANALYSIS.md](docs/COMPATIBILITY_ANALYSIS.md)):
+
+| Nosso Core | Fork Externo |
+|---|---|
+| Pipeline academico fechado R101-R105 | Skills avulsas para academic-writing |
+| Evolutionary Memory + Evidence Graph | Não possui |
+| MCP Security (Guard+Audit+Vetter+Limiter) | MCP basico sem seguranca |
+| CI/CD Quality Gates (R106) | Sem CI/CD |
+| 64 ciclos de evolucao | Sem evolution registry |
+| Peer Review agentivo 8-dimensoes | Revisao textual basica |
+| Paper Composer ABNT/APA/IEEE | Templates LaTeX fixos |
+
+---
+
 <div align="center">
-  <i>Construído com rigor metodológico, inspirado pela Teoria dos Jogos e desenhado para o futuro.</i><br>
-  <b>v2.5.0 — MCP Server + API Gateway + Continuous Discovery | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
+  <i>64 ciclos evolutivos · 1050 testes · 0 regressoes · Score medio 9.4/10</i><br>
+  <b>v3.0.0 — Pipeline Academico Agentivo | MCP Security | CI/CD Quality Gates</b><br>
+  <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>

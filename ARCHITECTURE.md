@@ -1,8 +1,10 @@
-# Arquitetura: OpenCode Ecosystem Core
+# Arquitetura: OpenCode Ecosystem Core v3.0
 
-Este documento detalha a arquitetura do núcleo do OpenCode Ecosystem, centrada no orquestrador `marceloclaro`, na camada **Metacognitive Interconnect (MCI)**, nos subsistemas científicos de governança, RAG e avaliação superhuman-candidate, e na nova **camada jurídica integrada** (Datajud + AuxJuris + especialização por ramo + benchmarks jurídicos).
+Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, e os subsistemas legados de governança científica e jurídica.
 
-## Diagrama de Arquitetura
+---
+
+## Diagrama de Arquitetura Completo
 
 ```mermaid
 graph TD
@@ -24,14 +26,28 @@ graph TD
     subgraph TF [Transformer Layer]
         Attn[AttentionRouter<br>Multi-Head]
         Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
-        HTM[(Hierarchical<br>Memory c/ Episodic Replay)]
+        HTM[(Hierarchical<br>Memory HTM)]
         Emb[TaskEmbedder<br>d=64]
         
         Attn -.->|Usa| Emb
         HTM -.->|Usa| Emb
     end
     
-    %% Camada Core (Novos Subsistemas)
+    %% Pipeline Academico Agentivo (R101-R105)
+    subgraph Acad ["Pipeline Academico Agentivo (R101-R105)"]
+        EvoSci["R101: EvoSci<br>MentorAgent<br>PrimeResearcherAgent<br>ReviewerAgent<br>EvolutionManagerAgent<br>EvoEngine (Selection/Crossover/Mutation/Inheritance)"]
+        DeepRes["R102: Deep Research<br>KnowledgeBaseRegistry<br>BFRSAgent<br>DFRSAgent<br>ExecutionSandbox<br>OrchestratorAgent"]
+        PReview["R103: Peer Review<br>RubricEngine (8 dim)<br>ReviewLedger<br>AuditGraph<br>MultiCriticReviewer<br>OrchestratorReviewer"]
+        Revision["R104d: Revision<br>ReviewAnalyzer<br>SectionMapper<br>ProposalGenerator<br>DiffEngine (rollback)<br>OrchestratorRevision"]
+        Composer["R105: Paper Composer<br>StructurePlanner<br>SectionWriter (6 secoes)<br>CitationFormatter (3 estilos)<br>CrossConsistencyVerifier<br>OrchestratorComposer"]
+        
+        EvoSci --> DeepRes
+        DeepRes --> PReview
+        PReview --> Revision
+        Revision --> Composer
+    end
+    
+    %% Camada Core
     subgraph Core [Core Subsystems]
         Trust[Trust Engine<br>Behavioral Gate]
         Eco[Token Economy<br>Staking/Slashing]
@@ -41,12 +57,38 @@ graph TD
         Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928]
         LegalBench[Legal Benchmarks<br>SPEC-928]
         RAG[Scientific RAG<br>Grounding + Citations]
+        RAGEvolved["Scientific RAG Evolved (R99)<br>AdaptiveRetriever<br>CitationGraph<br>OutlineSynthesizer"]
         Bench[Superhuman Readiness<br>Benchmarks + Tiers]
         MetaEval[Metacognitive Eval<br>SPEC-920]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
+        SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
         Publishing[Publishing<br>LaTeX & Cover Designer]
         Research[Research<br>Hub c/ OSINT]
         Illus[Illustrations<br>Mermaid/MIRA/Graph]
+        EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
+        NoveltyV2["Novelty V2 (R98)<br>ContributionPointExtractor<br>PointwiseLiteratureRetriever<br>PointwiseNoveltyScorer<br>HierarchicalTaxonomyBuilder"]
+    end
+
+    %% Seguranca e Qualidade
+    subgraph Security ["Seguranca & Qualidade"]
+        MCPSec["MCP Security (R100)<br>MCPGuard<br>AuditLogger<br>ToolVetter<br>RateLimiter"]
+        CICD["CI/CD Pipeline (R106)<br>GitHub Actions: Lint+Test+Package<br>scripts/quality_report.py<br>scripts/check_coverage.py<br>scripts/run_full_suite.sh"]
+        Skills["Skills Exportaveis (R104a)<br>evo-science<br>deep-research<br>peer-review-v2<br>mcp-security"]
+        PipPkg["Pip Packages (R104b)<br>opencode-evosci<br>opencode-deep-research<br>opencode-peer-review"]
+    end
+
+    %% Camada Scientific Governance (legado)
+    subgraph SGP [Scientific Governance Pipeline v2.x]
+        OQS[OQS<br>Optimal Question Scanner]
+        SCI[MCI Scientific Core<br>Hipótese·Experimento·Estatística]
+        VSEE[VSEE<br>Vector Shortcut Engine]
+        EGS[EGS<br>Ethical Governance Scanner]
+        EvidenceGraph[EvidenceGraph<br>Memória Epistemológica]
+        
+        OQS --> SCI
+        SCI --> VSEE
+        VSEE --> EGS
+        EGS -.->|Registra| EvidenceGraph
     end
 
     %% Camada MCI
@@ -71,12 +113,27 @@ graph TD
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
+    
+    %% Conexões do pipeline academico
+    Orchestrator -->|5. Pipeline Academico| EvoSci
+    EvoSci -->|Alimenta| DeepRes
+    DeepRes -->|Produz evidencia| PReview
+    PReview -->|Gera revisao| Revision
+    Revision -->|Manuscrito revisado| Composer
+    Composer -->|Artigo final| Orchestrator
+    
+    %% Conexões de suporte
     Acad -->|Consulta evidências| RAG
     Reason -->|Grounding científico| RAG
     RAG -->|Métricas| Bench
+    RAGEvolved -->|Citacoes em grafo| DeepRes
+    EvoMem -->|Memoria de direcoes| EvoSci
+    NoveltyV2 -->|Analise de novidade| EvoSci
+    
     MB -->|Traços e reflexões| MetaEval
     Trust -->|Confiança e outcomes| MetaEval
     Orchestrator -->|6. Raciocínio Jurídico| Legal
+    
     Legal -->|Subsunção + Ponderação| Reason
     Legal -->|Interpretação Constitucional| MetaEval
     Legal -->|RAG jurídico + Datajud| RAG
@@ -84,12 +141,28 @@ graph TD
     Legal -->|Especialização por 7 ramos| LegalBench
     LegalBench -->|tiers conservadores| MetaEval
     
+    %% Seguranca
+    MCPSec -.->|Protege| MB
+    CICD -.->|Valida qualidade| Pipe
+    Skills -.->|Exporta| BB
+    PipPkg -.->|Distribui| External
+    
+    SynthUniv -->|10k+ combinações via MiroFish| MiroFish
+    SynthUniv -->|Publica descobertas| MB
+    EGS -->|Reflete Resultado| MB
+    
     %% Agentes
-    subgraph Agents [Catálogo de Agentes]
+    subgraph Agents [Catálogo de Agentes 160+]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
-        A4[156 Especializados...]
+        A4[32 MASWOS Agents]
+        A5[Academic Writer]
+        A6[Deep Research]
+        A7[Peer Review]
+        A8[Paper Composer]
+        A9[Revision Agent]
+        A10[EvoSci Agent]
     end
     
     %% Fluxo de Agentes
@@ -99,84 +172,90 @@ graph TD
     Agents -->|Conclui Tarefa| Ref
     
     %% MCP
-    MCP[MCP Server] -->|Expõe API| MCI
+    MCP[MCP Server 14 Tools] -->|Expõe API| MCI
     External[External Tools / LLMs] -->|JSON-RPC| MCP
 ```
 
-## Fluxo de Vida de uma Tarefa (Arquitetura Transformer + MCI + SDD)
+---
 
-1. **Registro (Agent Loader):** Na inicialização, o sistema lê os arquivos `agents/*.md` e extrai o *frontmatter* YAML. Cada agente é registrado no Blackboard com um **Agent Card** (Padrão A2A).
-2. **Especificação (SDD):** Antes de delegar, o orquestrador cria uma Especificação (TSPEC) contendo o objetivo e critérios de aceitação verificáveis. A tarefa nasce na fase **RED**.
-3. **Percepção Hierárquica (HTM):** O orquestrador consulta a memória global usando a `HierarchicalMemory`. O `TaskEmbedder` vetoriza a consulta e a atenção é feita em dois níveis: atenção grossa sobre sumários de chunks, seguida de atenção fina sobre os eventos dos melhores chunks.
-4. **Delegação via Atenção (Multi-Head Attention):** A tarefa é postada no Blackboard. Quando o *Call for Proposals (CFP)* retorna os agentes elegíveis, o `AttentionRouter` calcula scores softmax baseados em 4 cabeças: semântica (vetores d=64), cobertura de capacidade, *confidence ledger* e carga atual. O agente com maior score recebe a atribuição.
-5. **Execução (TDD + Transformer):** A tarefa entra no *encoder stack*. O agente selecionado executa o ciclo TDD (**RED → GREEN → REFACTOR**). O `SpecVerifier` atua como *gate*: a entrega só avança se satisfizer 100% dos critérios da especificação. Se aprovada, o `GradingHead` avalia a qualidade da implementação.
-6. **Grounding científico (RAG):** Quando a tarefa envolve ciência, o `ScientificRAG` indexa documentos, recupera chunks citáveis, aplica reranking científico e abstém quando não há evidência suficiente.
-7. **Camada jurídica especializada:** Quando a tarefa envolve direito, o subsistema `legal/` combina raciocínio jurídico brasileiro, base de conhecimento com RAG por keywords, dados reais do Datajud, agentes jurídicos A2A, scanner jurídico de impacto e roteamento por 7 ramos especializados.
-8. **Readiness e benchmarks:** A suíte `superhuman_suite.py` consolida benchmarks científicos, grounding, robustez, calibração e reprodutibilidade. Em paralelo, `legal/benchmarks.py` mede acurácia de roteamento, cobertura e qualidade de resposta por ramo jurídico com política anti-overclaim (`phd_candidate` vs. `phd_validated`).
-9. **Reflexão (MCI):** Ao reportar a conclusão, o *Reflexion Middleware* intercepta o evento, gera uma auto-reflexão, atualiza o *Confidence Ledger* do agente e persiste a experiência na memória semântica para futuras recuperações.
-10. **Sincronização transversal via MetaBus (SPEC-934):** wrappers de OQS, VSEE, EGS, ScientificRAG, suítes de benchmark/metacognição, MiroFish, Game Theory, Publishing, Research e SDD passam a emitir eventos de subsistema, atualizar confiança por tópico e enriquecer a memória semântica pesquisável do MCI.
-11. **Universidade Sintética Transversal (SPEC-935):** O subsistema `synthetic_university/` simula uma instituição acadêmica completa com 10 faculdades, 40+ professores especialistas, motor combinatorial que testa 10.000+ combinações de conceitos interdisciplinares usando MiroFish, correlator interdisciplinar, gerador de teses PhD-level e grafo de conhecimento navegável. O orquestrador expõe `synthetic_university()` para ciclos completos de descoberta.
+## Fluxo de Vida de uma Tarefa no Pipeline Acadêmico
 
-## Scientific RAG + Superhuman Readiness
+### 1. Descoberta (R101 — EvoSci)
+O **MentorAgent** constrói o espaço do problema e gera direções de pesquisa. O **PrimeResearcherAgent** decompõe e gera soluções candidatas. O **ReviewerAgent** avalia com scores dimensionais. O **EvolutionManagerAgent** mantém memórias de ideação e experimentação. O **EvoEngine** executa o ciclo evolutivo: Selection → Crossover → Mutation → Inheritance, com detecção de estagnação.
 
-### Scientific RAG (`rag/`, SPEC-919)
+### 2. Pesquisa Profunda (R102 — Deep Research)
+O **KnowledgeBaseRegistry** gerencia fontes simuladas. O **BFRSAgent** explora conexões imediatas em largura. O **DFRSAgent** constrói cadeias multi-hop. O **EvidenceGraph** acumula entidades, relações e evidências com proveniência. O **OrchestratorAgent** planeja, roteia BF/DF, aplica gate de suficiência e sintetiza.
 
-O módulo `rag/` fornece uma camada leve e determinística de recuperação científica:
+### 3. Revisão por Pares (R103 — Agentic Peer Review)
+O **RubricEngine** instancia 8 meta-dimensões de avaliação. O **ReviewLedger** rastreia claims, evidências e riscos. O **AuditGraph** (integrado ao R102) ancora evidências. O **MultiCriticReviewer** executa 4 críticos em paralelo. O **OrchestratorReviewer** executa o pipeline: drafting → ledger → grounding → audit → gate → synthesis.
 
-- `ScientificDocument`: documento com metadados auditáveis;
-- `ScientificRAG`: chunking citável, busca híbrida lexical + semantic-lite e reranking científico;
-- `RetrievedEvidence`: evidência com `doc_id`, `chunk_id`, score e citação;
-- `GroundingEvaluator`: calcula `groundedness`, `citation_coverage`, `evidence_count` e `abstention`.
+### 4. Revisão de Manuscrito (R104d — Agentic Revision)
+O **ReviewAnalyzer** extrai claims, riscos e ações do pacote de revisão R103. O **SectionMapper** mapeia claims para seções. O **ProposalGenerator** gera propostas de correção com alternativas. O **DiffEngine** aplica diffs controlados com rollback. O **OrchestratorRevision** executa: analyze → map → propose → apply → verify → report.
 
-Política epistêmica: **abster é preferível a inventar evidência**. Respostas sem score mínimo retornam `abstained=True`.
+### 5. Composição Final (R105 — Paper Composer)
+O **StructurePlanner** gera outline por venue (ABNT, APA, IEEE). O **SectionWriter** escreve 6 seções com fallbacks para inputs vazios. O **CitationFormatter** formata em 3 estilos. O **CrossConsistencyVerifier** executa 5 verificações de consistência interna. O **OrchestratorComposer** executa: plan → write → format → verify → export.
 
-### Superhuman Readiness Suite (`benchmarks/scientific_reasoning/superhuman_suite.py`, SPEC-918)
+---
 
-A suíte avalia o ecossistema em cinco eixos:
+## Subsistemas de Suporte
 
-| Eixo | Peso |
-|---|---:|
-| Benchmarks científicos | 35% |
-| Grounding/RAG | 20% |
-| Robustez adversarial | 15% |
-| Calibração | 15% |
-| Reprodutibilidade | 15% |
+### Evolutionary Memory (R97)
+Memória persistente que registra direções de pesquisa, estratégias, outcomes de experimentos e detecta estagnação. Usada pelo EvoSci para evitar re-exploração de direções falhadas e sugerir pivots.
 
-Tiers:
+### Scientific RAG Evolved (R99)
+O `rag/evolved.py` fornece:
+- **AdaptiveRetriever:** analisa complexidade da query (simple/moderate/complex) com 3 estratégias
+- **CitationGraph:** grafo direcionado com BFS até max_depth
+- **OutlineSynthesizer:** gera outlines com templates temáticos
+- **RAGEvolved:** roteia automaticamente entre answer_simple e answer_structured
 
-- `base`
-- `research_grade`
-- `superhuman_candidate`
-- `superhuman_verified` — somente com `external_validation=True`
+### MCP Security (R100)
+Camada que envolve o servidor MCP com:
+- **MCPGuard:** valida argumentos contra JSON Schema
+- **AuditLogger:** registro estruturado de todas as chamadas
+- **ToolVetter:** detecta prompt injection, command injection, path traversal, SQLi
+- **RateLimiter:** token bucket por caller
 
-### Metacognitive Superhuman Suite (`mci/metacognitive_evaluator.py`, SPEC-920)
+### CI/CD Pipeline (R106)
+Infraestrutura de qualidade com:
+- **GitHub Actions:** 3 jobs (lint → test matrix → package build)
+- **quality_report.py:** score 0-10 com análise de testes, cobertura e lint
+- **check_coverage.py:** gate que bloqueia se cobertura < 80% ou testes falham
 
-A suíte metacognitiva mede se o ecossistema está apenas executando tarefas ou se está melhorando sua própria forma de decidir. Ela avalia:
+---
 
-- awareness/contexto;
-- reflexão pós-tarefa;
-- adaptação de confiança após feedback;
-- qualidade de memória;
-- causalidade de erro;
-- humildade epistêmica/anti-overclaim.
+## Especificações Formais (SDD)
 
-Tiers conservadores:
+Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 
-- `reactive`
-- `reflective`
-- `research_grade`
-- `metacognitive_superhuman_candidate`
-- `metacognitive_superhuman_verified` — somente com `external_validation=True`
+| Spec | Ciclo | Critérios |
+|---|---|---|
+| SPEC-935-R97 | Evolutionary Memory | 9 CA |
+| SPEC-935-R98 | Novelty V2 | 10 CA |
+| SPEC-935-R99 | RAG Evolved | 8 CA |
+| SPEC-935-R100 | MCP Security | 9 CA |
+| SPEC-935-R101 | Agentic Science V2 | 10 CA |
+| SPEC-935-R102 | Deep Research | 10 CA |
+| SPEC-935-R103 | Peer Review | 10 CA |
+| SPEC-935-R104a | Integration Skills | 7 CA |
+| SPEC-935-R104b | Pip Packages | 6 CA |
+| SPEC-935-R104c | Compatibility Doc | 4 CA |
+| SPEC-935-R104d | Manuscript Revision | 8 CA |
+| SPEC-935-R105 | Paper Composer | 8 CA |
+| SPEC-935-R106 | CI/CD Pipeline | 7 CA |
 
-## Legal Intelligence Layer (`legal/`, SPEC-921 → SPEC-928)
+---
 
-O ecossistema agora possui uma camada jurídica integrada composta por:
+## Métricas de Maturidade
 
-- **Raciocínio jurídico brasileiro**: subsunção, ponderação, precedentes, interpretação constitucional e scoring;
-- **Integração Datajud**: ingestão de dados processuais reais dos 27 tribunais estaduais;
-- **AUXJURIS**: agentes jurídicos A2A, knowledge base com RAG por keywords e sumarização jurídica;
-- **Legal Impact Scanner**: avaliação de LGPD, propriedade intelectual, compliance, grounding jurisprudencial, responsabilidade contratual e ganho metacognitivo jurídico;
-- **Especialização por ramo**: penal, trabalhista, tributário, empresarial, administrativo, ambiental e digital/LGPD;
-- **Benchmarks jurídicos por domínio**: classificação conservadora em `base`, `specialist`, `specialist_advanced`, `phd_candidate` e `phd_validated` (somente com validação externa).
-
-Isso não transforma automaticamente o ecossistema em “advogado PhD universal”; transforma-o em uma plataforma **juridicamente mais especializada, auditável e epistemicamente prudente**.
+| Métrica | v2.5.0 | v3.0.0 (atual) |
+|---|---|---|
+| Testes | 617 | **1050** |
+| Ciclos de evolução | 49 | **64** |
+| MCP Tools | 8 | **14** |
+| Agentes | 156 | **160+** |
+| Score médio | — | **9.4/10** |
+| Skills exportáveis | 0 | **4** |
+| Pip packages | 0 | **3** |
+| Cobertura estimada | — | **84%** |
+| CI/CD | ❌ | **GitHub Actions** |

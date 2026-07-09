@@ -24,12 +24,26 @@ graph TD
         HTM -.->|Usa| Emb
     end
     
+    %% Pipeline Academico Agentivo
+    subgraph Acad [Pipeline Academico Agentivo v3.0]
+        EvoSci["R101: EvoSci<br>MentorAgent+ResearcherAgent<br>ReviewerAgent+EvoEngine"]
+        DeepRes["R102: Deep Research<br>EvidenceGraph+BFRS+DFRS"]
+        PReview["R103: Peer Review<br>8-dim Rubric+AuditGraph"]
+        Revision["R104d: Manuscript Revision<br>DiffEngine+Rebuttal"]
+        Composer["R105: Paper Composer<br>ABNT/APA/IEEE"]
+        
+        EvoSci --> DeepRes
+        DeepRes --> PReview
+        PReview --> Revision
+        Revision --> Composer
+    end
+    
     %% Camada Core (Subsistemas)
     subgraph Core [Core Subsystems]
         Trust[Trust Engine<br>Behavioral Gate]
         Eco[Token Economy<br>Staking/Slashing]
         Scan[Scanners<br>Diagnóstico]
-        Acad[MASWOS<br>Qualis A1]
+        AcadLegacy[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
         Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928/931]
         LegalBench[Legal Benchmarks<br>SPEC-928]
@@ -38,20 +52,31 @@ graph TD
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
         Discovery[Continuous Discovery<br>R95 · Loop Automático]
+        EvoMem[Evolutionary Memory<br>R97 · Memória Persistente]
+        Novelty[Novelty V2<br>R98 · Contribution Points]
+        RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
+    end
+
+    %% Seguranca e Qualidade
+    subgraph SQC [Seguranca & Qualidade]
+        MCPSec[MCP Security R100<br>Guard+Audit+Vetter+Limiter]
+        CICD[CI/CD Pipeline R106<br>GitHub Actions+Quality Gates]
+        Skills[Skills Exportaveis R104a<br>4 Skills]
+        PipPkg[Pip Packages R104b<br>3 Pacotes]
     end
 
     %% MCP + API Gateway
     subgraph Protocols [Protocolos de Integração]
-        MCPServer[MCP Server · R94<br>8 Ferramentas via stdio]
-        APIGateway[API Gateway · R96<br>10 Endpoints FastAPI REST]
-        MCP_Gen[su_generate]
-        MCP_Eval[su_evaluate]
-        MCP_Enrich[su_enrich]
-        MCP_Visual[su_visual_abstract]
-        MCP_Review[su_peer_review]
-        MCP_Submit[su_submission]
-        MCP_Novelty[su_novelty]
-        MCP_Dash[su_dashboard]
+        MCPServer[MCP Server · R94+R100<br>14 Ferramentas via stdio]
+        APIGateway[API Gateway · R96<br>10+ Endpoints FastAPI REST]
+        MCP_Sci[su_agentic_science]
+        MCP_Deep[su_deep_research]
+        MCP_Review2[su_peer_review_v2]
+        MCP_Revision[su_manuscript_revision]
+        MCP_Composer[su_paper_composer]
+        MCP_Novelty2[su_novelty_v2]
+        MCP_Sec[su_mcp_security]
+        MCP_Classic[su_generate/evaluate/enrich/visual/peer-review/submission/novelty/dashboard]
     end
 
     %% Camada MCI
@@ -76,11 +101,26 @@ graph TD
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
-    Acad -->|Consulta evidências| RAG
+    
+    %% Pipeline academico
+    Orchestrator -->|5. Pipeline Academico| EvoSci
+    EvoSci -->|Alimenta| DeepRes
+    DeepRes -->|Produz evidencia| PReview
+    PReview -->|Gera revisao| Revision
+    Revision -->|Manuscrito revisado| Composer
+    Composer -->|Artigo final| Orchestrator
+    
+    %% Conexões de suporte
+    AcadLegacy -->|Consulta evidências| RAG
     Reason -->|Grounding científico| RAG
     RAG -->|Métricas| Bench
+    RAGEvolved -->|Citacoes em grafo| DeepRes
+    EvoMem -->|Memoria de direcoes| EvoSci
+    Novelty -->|Analise de novidade| EvoSci
     MB -->|Traços e reflexões| MetaEval
     Trust -->|Outcomes e confiança| MetaEval
+    
+    %% Jurídico
     Orchestrator -->|6. Raciocínio Jurídico| Legal
     Legal -->|Subsunção + Ponderação| Reason
     Legal -->|Interpretação Constitucional| MetaEval
@@ -88,29 +128,42 @@ graph TD
     Legal -->|Agentes jurídicos A2A| BB
     Legal -->|Especialização por 7 ramos| LegalBench
     LegalBench -->|tiers conservadores| MetaEval
+    
+    %% SynthUniv
     SynthUniv -->|Gera teses| Discovery
     Discovery -->|Enriquece + Avalia| SynthUniv
     
+    %% Seguranca e qualidade
+    MCPSec -.->|Protege| MCPServer
+    CICD -.->|Valida| Pipe
+    Skills -.->|Exporta| BB
+    PipPkg -.->|Distribui| External
+    
     %% Integração MCP / API
     SynthUniv -.->|Registra handlers| MCPServer
-    MCPServer --> MCP_Gen
-    MCPServer --> MCP_Eval
-    MCPServer --> MCP_Enrich
-    MCPServer --> MCP_Visual
-    MCPServer --> MCP_Review
-    MCPServer --> MCP_Submit
-    MCPServer --> MCP_Novelty
-    MCPServer --> MCP_Dash
+    MCPServer --> MCP_Classic
+    MCPServer --> MCP_Sci
+    MCPServer --> MCP_Deep
+    MCPServer --> MCP_Review2
+    MCPServer --> MCP_Revision
+    MCPServer --> MCP_Composer
+    MCPServer --> MCP_Novelty2
     MCPServer -->|stdio JSON-RPC| External
     APIGateway -->|Reusa handlers| MCPServer
     APIGateway -->|HTTP REST| External
     
     %% Agentes
-    subgraph Agents [Catálogo de Agentes]
+    subgraph Agents [Catálogo de Agentes 160+]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
-        A4[156 Especializados...]
+        A4[Academic Writer]
+        A5[EvoSci Agent]
+        A6[Deep Research]
+        A7[Peer Review]
+        A8[Paper Composer]
+        A9[Revision Agent]
+        A10[32 MASWOS Agents]
     end
     
     %% Fluxo de Agentes
