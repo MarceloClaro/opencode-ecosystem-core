@@ -15,50 +15,42 @@ Uso: python scripts/quality_report.py [--json] [--output report.json] [--quick]
 
 import argparse
 import json
-import os
+import re
 import subprocess
 import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+PYTEST_TIMEOUT_SECONDS = 300
+
+
+def _parse_pytest_counts(output: str) -> dict:
+    """Extrai passed/failed/skipped da saída do pytest."""
+    counts = {"passed": 0, "failed": 0, "skipped": 0}
+    for count, label in re.findall(r"(\d+)\s+(passed|failed|skipped)", output):
+        counts[label] = int(count)
+
+    total = counts["passed"] + counts["failed"] + counts["skipped"]
+    return {
+        "total": total,
+        "passed": counts["passed"],
+        "failed": counts["failed"],
+        "skipped": counts["skipped"],
+        "pass_rate": round(counts["passed"] / max(total, 1) * 100, 1),
+    }
 
 
 def run_tests() -> dict:
     """Executa pytest e captura resultados."""
     result = subprocess.run(
         [sys.executable, "-m", "pytest", "tests/", "-q", "--tb=short"],
-        capture_output=True, text=True, timeout=120,
+        capture_output=True, text=True, timeout=PYTEST_TIMEOUT_SECONDS,
         cwd=str(REPO_ROOT)
     )
     output = result.stdout + result.stderr
-
-    # Parse resultados
-    passed = 0
-    failed = 0
-    skipped = 0
-    total = 0
-
-    for line in output.split("\n"):
-        if "passed" in line and "failed" in line:
-            # Ex: "509 passed, 3 skipped, 1 warning in 23.87s"
-            parts = line.split()
-            for i, part in enumerate(parts):
-                if part == "passed":
-                    passed = int(parts[i - 1])
-                elif part == "failed":
-                    failed = int(parts[i - 1])
-                elif part == "skipped":
-                    skipped = int(parts[i - 1])
-            total = passed + failed + skipped
-
-    return {
-        "total": total,
-        "passed": passed,
-        "failed": failed,
-        "skipped": skipped,
-        "pass_rate": round(passed / max(total, 1) * 100, 1),
-        "raw_output": output[:1000],
-    }
+    parsed = _parse_pytest_counts(output)
+    parsed["raw_output"] = output[:1000]
+    return parsed
 
 
 def estimate_coverage() -> dict:

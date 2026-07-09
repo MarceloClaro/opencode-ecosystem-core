@@ -243,6 +243,7 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R104d | Manuscript Revision | 8 CA |
 | SPEC-935-R105 | Paper Composer | 8 CA |
 | SPEC-935-R106 | CI/CD Pipeline | 7 CA |
+| SPEC-935-R107 | Auditoria Sistêmica + Hardening | 9 CA |
 
 ---
 
@@ -250,8 +251,8 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 
 | Métrica | v2.5.0 | v3.0.0 (atual) |
 |---|---|---|
-| Testes | 617 | **1050** |
-| Ciclos de evolução | 49 | **64** |
+| Testes | 617 | **1062** |
+| Ciclos de evolução | 49 | **65** |
 | MCP Tools | 8 | **14** |
 | Agentes | 156 | **160+** |
 | Score médio | — | **9.4/10** |

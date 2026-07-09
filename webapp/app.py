@@ -106,8 +106,8 @@ with st.sidebar:
 
     | Metrica | Valor |
     |---|---|
-    | Testes | 1050 |
-    | Ciclos | 64 |
+    | Testes | 1062 |
+    | Ciclos | 65 |
     | MCP Tools | 14 |
     | Score Medio | 9.4/10 |
 
@@ -138,15 +138,15 @@ tabs = st.tabs([
 with tabs[0]:
     st.title("🧠 OpenCode Ecosystem Core v3.0")
     st.markdown("""
-    **Framework de Consulta e Producao Academica** — 64 ciclos evolutivos,
-    1050 testes, pipeline academico agentivo completo (R101-R105).
+    **Framework de Consulta e Producao Academica** — 65 ciclos evolutivos,
+    1062 testes, pipeline academico agentivo completo (R101-R105).
     """)
 
     # Linha de metricas principais
     c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric("Ciclos de Evolucao", EVO_STATS["count"])
     c2.metric("Score Medio", f'{EVO_STATS["avg_score"]:.1f}/10')
-    c3.metric("Testes", "1050")
+    c3.metric("Testes", "1062")
     c4.metric("MCP Tools", len(MCP_TOOLS))
     c5.metric("Licoes Registradas", EVO_STATS["total_lessons"])
 
@@ -624,7 +624,7 @@ with tabs[5]:
     st.title("🧬 Evolution Lab (R97 + R98)")
     st.markdown("""
     Navegue pelo registro evolutivo completo do ecossistema. 
-    64 ciclos (R47-R106) com scores, licoes e trajetoria.
+    65 ciclos (R47-R107) com scores, licoes e trajetoria.
     """)
 
     tab_ev_cycles, tab_ev_memory, tab_ev_novelty, tab_ev_rag = st.tabs([
@@ -924,6 +924,6 @@ with tabs[7]:
 st.divider()
 st.caption(
     "OpenCode Ecosystem Core v3.0 — Pipeline Academico Agentivo | "
-    "64 ciclos evolutivos | 1050 testes | Score medio 9.4/10 | "
+    "65 ciclos evolutivos | 1062 testes | Score medio 9.4/10 | "
     "[GitHub](https://github.com/MarceloClaro/opencode-ecosystem-core)"
 )

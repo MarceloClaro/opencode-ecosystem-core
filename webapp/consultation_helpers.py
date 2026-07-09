@@ -14,7 +14,7 @@ import os
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
@@ -96,20 +96,43 @@ def list_producoes(limit: int = 20) -> List[Dict[str, Any]]:
 # Evidence browsing
 # =========================================================================
 
-def get_evidence_graph_summary() -> Dict[str, Any]:
-    """Retorna sumario do grafo de evidencias (se existir)."""
+def get_evidence_graph_summary(graph: Optional[Any] = None) -> Dict[str, Any]:
+    """Retorna sumário do grafo de evidências usando a API pública real."""
     try:
-        from agentic_science_v2.evidence_graph import EvidenceGraph
-        g = EvidenceGraph()
+        from agentic_science_v2.evidence_graph import (
+            ENTITY_TYPES,
+            RELATION_TYPES,
+            EvidenceGraph,
+        )
+
+        g = graph or EvidenceGraph()
+        stats = g.stats()
+        active_entity_types = [
+            entity_type
+            for entity_type, count in stats.get("entity_types", {}).items()
+            if count > 0
+        ]
+        active_relation_types = [
+            relation_type
+            for relation_type, count in stats.get("relation_types", {}).items()
+            if count > 0
+        ]
         return {
-            "entity_count": len(g.entities),
-            "relation_count": len(g.relations),
-            "evidence_count": len(g.evidences),
-            "entity_types": list(g.ENTITY_TYPES),
-            "relation_types": list(g.RELATION_TYPES),
+            "entity_count": stats.get("entities", 0),
+            "relation_count": stats.get("relations", 0),
+            "evidence_count": stats.get("evidence_pieces", 0),
+            "entity_types": active_entity_types or list(ENTITY_TYPES),
+            "relation_types": active_relation_types or list(RELATION_TYPES),
         }
     except Exception as e:
-        return {"error": str(e), "entity_count": 0, "relation_count": 0, "evidence_count": 0}
+        return {
+            "error": str(e),
+            "entity_count": 0,
+            "relation_count": 0,
+            "evidence_count": 0,
+            "entity_types": [],
+            "relation_types": [],
+        }
 
 # =========================================================================
 # Academic Search (wrapper for existing research tools)

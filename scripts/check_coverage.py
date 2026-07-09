@@ -18,34 +18,35 @@ Exit codes:
 """
 
 import argparse
+import re
 import subprocess
 import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+PYTEST_TIMEOUT_SECONDS = 300
+
+
+def _parse_pytest_counts(output: str) -> dict:
+    """Extrai passed/failed/skipped da saída do pytest."""
+    counts = {"passed": 0, "failed": 0, "skipped": 0}
+    for count, label in re.findall(r"(\d+)\s+(passed|failed|skipped)", output):
+        counts[label] = int(count)
+    return counts
 
 
 def check_tests() -> tuple[bool, dict]:
     """Verifica se todos os testes passam."""
     result = subprocess.run(
         [sys.executable, "-m", "pytest", "tests/", "-q", "--tb=short"],
-        capture_output=True, text=True, timeout=120,
+        capture_output=True, text=True, timeout=PYTEST_TIMEOUT_SECONDS,
         cwd=str(REPO_ROOT)
     )
     output = result.stdout + result.stderr
-
-    passed = failed = skipped = 0
-    for line in output.split("\n"):
-        if "passed" in line and "failed" in line:
-            parts = line.split()
-            for i, part in enumerate(parts):
-                if part == "passed":
-                    passed = int(parts[i - 1])
-                elif part == "failed":
-                    failed = int(parts[i - 1])
-                elif part == "skipped":
-                    skipped = int(parts[i - 1])
-
+    parsed = _parse_pytest_counts(output)
+    passed = parsed["passed"]
+    failed = parsed["failed"]
+    skipped = parsed["skipped"]
     all_pass = failed == 0 and result.returncode == 0
     return all_pass, {"passed": passed, "failed": failed, "skipped": skipped}
 
