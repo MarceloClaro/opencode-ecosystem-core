@@ -1,0 +1,173 @@
+\ifthenelse{\equal{\CoverOption}{classic}}{
+    \newcommand\BackgroundPicCover{%
+    \put(0,0){%
+    \parbox[b][\paperheight]{\paperwidth}{%
+    \vfill
+    \centering
+    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{Figures/Theme/Cover-BG.pdf}%
+    \vfill
+    }}}
+}{
+    \newcommand\BackgroundPicCover{%
+    \put(0,0){%
+    \parbox[b][\paperheight]{\paperwidth}{%
+    \vfill
+    \centering
+    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{Figures/Theme/Front-Page-BG.pdf}%
+    \vfill
+    }}}
+}
+
+\AddToShipoutPictureBG*{\BackgroundPicCover}
+
+\newgeometry{margin=1.98cm, top=2.15cm, bottom=1.47cm}
+\begin{titlepage}
+    \latofont
+    \ifthenelse{\equal{\CoverOption}{classic}}{\color{white}}{\color{frontpagedark}}
+    \vspace*{\baselineskip}
+
+    \ifthenelse{\equal{\CoverOption}{classic}}{
+        \ifthenelse{\equal{\SchoolOption}{estg}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESTG-Logo-W.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{esad}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESAD-Logo-W.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{esslei}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESSLEI-Logo-W.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{estm}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESTM-Logo-W.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{esecs}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESECS-Logo-W.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{utnfrba}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/UTN-FRBA-Logo-W.pdf}
+            \end{figure}
+            \vspace{-1.8\baselineskip}
+        }{}
+    } {
+        \ifthenelse{\equal{\SchoolOption}{estg}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESTG-Logo-B.pdf}
+                % \includegraphics[width=0.4\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESTG-Logo-Old.png}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{esad}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESAD-Logo-B.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{esslei}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESSLEI-Logo-B.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{estm}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESTM-Logo-B.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{esecs}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/IPLeiria-ESECS-Logo-B.pdf}
+            \end{figure}
+        }{}
+        
+        \ifthenelse{\equal{\SchoolOption}{utnfrba}}{
+            \begin{figure}
+                \includegraphics[width=0.485\linewidth]{Figures/Theme/Logotypes/UTN-FRBA-Logo-B.pdf}
+            \end{figure}
+            \vspace{-1.8\baselineskip}
+        }{}
+    }
+
+    \vspace{5.5\baselineskip}
+
+    % Title.
+	\noindent
+    \makebox[\textwidth][l]{%
+        \parbox{\dimexpr\textwidth-4cm\relax}{
+            \setstretch{1.03}
+            \raggedright\bfseries\fontsize{20}{26}\selectfont\GetTitle
+        }
+    }
+
+    \vspace{0.8\baselineskip}
+
+    % Subtitle.
+    \noindent
+    \makebox[\textwidth][l]{%
+        \parbox{\dimexpr\textwidth-7cm\relax}{
+            \setstretch{1.03}
+            \raggedright\fontsize{14}{19}\selectfont\GetSubtitle
+        }
+    }
+
+    \vspace{35pt}  
+
+    % Author.
+    {\noindent\bfseries\fontsize{14}{19}\selectfont\GetFirstAuthor}
+
+    \ifdefined\GetSecondAuthor
+        \vspace{8pt}
+        {\noindent\bfseries\fontsize{14}{19}\selectfont\GetSecondAuthor}
+	\fi
+
+    \ifdefined\GetThirdAuthor
+        \vspace{8pt}
+        {\noindent\bfseries\fontsize{14}{19}\selectfont\GetThirdAuthor}
+	\fi
+ 
+	\vfill
+
+    % School.
+	{\noindent\fontsize{10}{12}\selectfont\GetSchool}
+	
+    % Department.
+	{\noindent\fontsize{10}{12}\selectfont\GetDepartment}
+
+    % Degree.
+	{\noindent\fontsize{10}{12}\selectfont\GetDegree}
+
+    % Course.
+    \ifdefined\GetCourse
+        {\noindent\fontsize{10}{12}\selectfont\GetCourse}
+	\fi
+
+    \ifthenelse{\equal{\DocStageOption}{working}}{
+        \vspace{62pt}
+        {\noindent\fontsize{10}{12}\selectfont\overwritecolor{yellow}{\GetDocumentVersion \\ \textit{\today}}} 
+        \vspace{62pt}
+    }{
+        \vspace{125pt}
+    }
+
+    % Local & Date.
+	{\noindent\fontsize{10}{12}\selectfont\GetDate}
+
+    \vspace{68pt}
+\end{titlepage}
+\restoregeometry
+\MediaOptionLogicBlank

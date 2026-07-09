@@ -1,0 +1,48 @@
+% Figura 1: Arquitetura em 3 Camadas — Layout empilhado vertical (cabe na margem ABNT)
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    node distance=0.4cm,
+    layer/.style={rectangle, draw=black, rounded corners=2pt, fill=gray!8, minimum width=13.5cm, minimum height=0.7cm, align=center, font=\footnotesize\bfseries},
+    item/.style={rectangle, draw=black, fill=white, minimum width=2.4cm, minimum height=0.65cm, align=center, font=\tiny, inner sep=1pt},
+    arrow/.style={-{Stealth[scale=0.8]}, thick}
+]
+% CAMADA 3 — Orquestração
+\node[layer, fill=blue!8] (l3) {Camada 3: Orquestra\c{c}\~ao (125 Agentes)};
+\node[item, below=0.3cm of l3, xshift=-5.0cm] (nexus) {Nexus v6.2\\(L0--L6)};
+\node[item, right=0.3cm of nexus] (forum) {Agent Forum\\(P14--P18)};
+\node[item, right=0.3cm of forum] (auto) {AutoEvolve\\(16 ciclos)};
+\node[item, right=0.3cm of auto] (maswos) {MASWOS v5.0\\(49 agentes)};
+\node[item, right=0.3cm of maswos] (reason) {Racioc\'inio\\(212 tipos)};
+
+\draw[arrow] (l3.south) -- ++(0,-0.15);
+
+% CAMADA 2 — Processamento
+\node[layer, fill=green!8, below=1.0cm of l3] (l2) {Camada 2: Processamento (106 Skills em 13 categorias)};
+\node[item, below=0.3cm of l2, xshift=-5.3cm] (sys) {Sistema\\(12)};
+\node[item, right=0.2cm of sys] (pesq) {Pesquisa\\(42)};
+\node[item, right=0.2cm of pesq] (cien) {Ci\^encias\\(38)};
+\node[item, right=0.2cm of cien] (raz) {Racioc\'inio\\(9)};
+\node[item, right=0.2cm of raz] (jur) {Jur\'idico\\(7)};
+\node[item, right=0.2cm of jur] (out) {Outras\\(119)};
+
+\draw[arrow] (l2.south) -- ++(0,-0.15);
+
+% CAMADA 1 — Infraestrutura
+\node[layer, fill=orange!8, below=1.0cm of l2] (l1) {Camada 1: Infraestrutura (41 MCPs em 7 categorias)};
+\node[item, below=0.3cm of l1, xshift=-5.3cm] (busca) {Busca\\(5)};
+\node[item, right=0.2cm of busca] (nav) {Navegador\\(2)};
+\node[item, right=0.2cm of nav] (code) {C\'odigo\\(3)};
+\node[item, right=0.2cm of code] (dados) {Dados\\(4)};
+\node[item, right=0.2cm of dados] (razao) {Racioc\'inio\\(1)};
+\node[item, right=0.2cm of razao] (qual) {Qualidade\\(5)};
+\node[item, right=0.2cm of qual] (art) {Artigos\\(5)};
+
+% Anotação abaixo
+\node[font=\footnotesize, below=0.6cm of l1] {MCPs ativos: 18 saud\'aveis + 23 com warning + 1 erro (GitHub). Densidade: 0,36 MCPs/agente.};
+\end{tikzpicture}%
+}
+\caption{Arquitetura em 3 Camadas do Ecossistema OpenCode v5.1.0. A Camada 1 (Infraestrutura) prov\^e conectividade via 41 MCPs; a Camada 2 (Processamento) cont\'em 106 skills; a Camada 3 (Orquestra\c{c}\~ao) coordena 125 agentes.}
+\label{fig:arquitetura-3camadas}
+\end{figure}

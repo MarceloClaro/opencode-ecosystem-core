@@ -1,0 +1,533 @@
+% =============================================================================
+%  APÊNDICE C: CÓDIGOS COMPLEMENTARES
+% =============================================================================
+\chapter{Códigos Complementares}
+\label{apend:codigos}
+
+Este apêndice reúne implementações completas de exemplos e componentes
+mencionados nos capítulos. Os códigos são extraídos do código-fonte real
+do \opencodeeco{} e podem ser executados diretamente.
+
+% =============================================================================
+%  SEÇÃO C.1: SCANNER PERSONALIZADO
+% =============================================================================
+\section{Exemplo de Implementação de um Scanner}
+\label{sec:cod-scanner}
+
+O código abaixo implementa um scanner epistemológico simplificado que
+identifica lacunas de capacidade no ecossistema. Corresponde ao padrão
+utilizado pelo Noological Scanner (SPEC-028).
+
+\begin{lstlisting}[caption={Scanner epistemologico simplificado},
+                   label={cod:scanner}, style=pythonstyle]
+"""
+noological_scanner_demo.py — Scanner epistemologico simplificado.
+
+Demonstra o padrao de implementacao de um scanner no OpenCode Ecosystem.
+"""
+
+from dataclasses import dataclass, field
+from typing import List, Optional
+
+
+@dataclass
+class Capability:
+    """Representa uma capacidade ou componente do ecossistema."""
+    name: str
+    category: str          # skill, mcp, agent, plugin
+    description: str
+    dependencies: List[str] = field(default_factory=list)
+    implemented: bool = True
+
+
+@dataclass
+class CapabilityGap:
+    """Representa uma lacuna de capacidade identificada."""
+    name: str
+    rationale: str
+    priority: int          # 1 (critica) a 5 (desejavel)
+    suggested_category: str
+    dependencies: List[str] = field(default_factory=list)
+
+
+class NoologicalScanner:
+    """
+    Scanner que identifica 'o que nao existe' no ecossistema.
+    """
+
+    def __init__(self, registry: List[Capability]):
+        self.registry = {c.name: c for c in registry}
+        self.gaps: List[CapabilityGap] = []
+
+    def scan(self, required: List[str]) -> List[CapabilityGap]:
+        """
+        Varre a lista de capacidades requeridas e identifica quais
+        nao estao implementadas.
+
+        Args:
+            required: Lista de nomes de capacidades requeridas.
+
+        Returns:
+            Lista de lacunas identificadas.
+        """
+        self.gaps.clear()
+        for name in required:
+            if name not in self.registry:
+                gap = CapabilityGap(
+                    name=name,
+                    rationale=f"Capacidade '{name}' requerida mas "
+                              f"nao implementada",
+                    priority=1,
+                    suggested_category="skill",
+                    dependencies=[]
+                )
+                self.gaps.append(gap)
+        return self.gaps
+
+    def suggest_implementation(self, gap: CapabilityGap) -> str:
+        """Gera esboco de implementacao para a lacuna."""
+        return (
+            f"# {gap.name}\n"
+            f"# Prioridade: {gap.priority}\n"
+            f"# Dependencias: {', '.join(gap.dependencies) or 'Nenhuma'}\n\n"
+            "class NovaSkill:\n"
+            f'    """Skill gerada pelo scanner: {gap.name}."""\n\n'
+            "    def execute(self, context):\n"
+            '        """Implementacao pendente."""\n'
+            "        raise NotImplementedError\n"
+        )
+
+
+# Exemplo de uso
+if __name__ == "__main__":
+    registry = [
+        Capability("web-search", "skill",
+                   "Busca na web via DuckDuckGo"),
+        Capability("code-runner", "skill",
+                   "Execucao de codigo Python"),
+    ]
+    scanner = NoologicalScanner(registry)
+    gaps = scanner.scan([
+        "web-search", "code-runner",
+        "academic-search", "pdf-extractor"
+    ])
+
+    for g in gaps:
+        print(f"[LACUNA] {g.name} (prioridade {g.priority})")
+        print(scanner.suggest_implementation(g))
+        print("---")
+\end{lstlisting}
+
+% =============================================================================
+%  SEÇÃO C.2: CONFIGURAÇÃO DO TRUST ENGINE
+% =============================================================================
+\section{Exemplo de Configuração do Trust Engine}
+\label{sec:cod-trust}
+
+A configuração abaixo ilustra a inicialização e uso do Trust Engine
+(SPEC-038) com todos os seus componentes.
+
+\begin{lstlisting}[caption={Configuracao do Trust Engine},
+                   label={cod:trust}, style=pythonstyle]
+"""
+trust_engine_demo.py — Configuracao do Trust Engine.
+
+Demonstra TrustScorer (blend 70/30), BehavioralGate,
+NaturalForgetting e OutcomeTracker.
+"""
+
+from enum import Enum, auto
+from dataclasses import dataclass, field
+from typing import List, Dict
+
+
+class ActionCategory(Enum):
+    """Categorias de acao para classificacao comportamental."""
+    READ = auto()
+    WRITE = auto()
+    EXECUTE = auto()
+    NETWORK = auto()
+    GOVERNANCE = auto()
+
+
+class SafetyLevel(Enum):
+    """Niveis de seguranca definidos pelo BehavioralGate."""
+    SAFE = "safe"
+    MODERATE = "moderate"
+    RISKY = "risky"
+    BLOCKED = "blocked"
+
+
+@dataclass
+class Action:
+    """Representa uma acao executada por um agente."""
+    agent_id: str
+    category: ActionCategory
+    description: str
+    timestamp: float = 0.0
+
+
+@dataclass
+class TrustScore:
+    """Pontuacao de confianca de um agente."""
+    direct_score: float = 0.85       # 70% do peso
+    network_score: float = 0.80      # 30% do peso
+    history: List[float] = field(default_factory=list)
+
+    @property
+    def blended(self) -> float:
+        """Blend 70/30 entre score direto e de rede."""
+        return 0.7 * self.direct_score + 0.3 * self.network_score
+
+
+class BehavioralGate:
+    """Barreira preventiva que classifica acoes antes da execucao."""
+
+    RULES: Dict[ActionCategory, SafetyLevel] = {
+        ActionCategory.READ: SafetyLevel.SAFE,
+        ActionCategory.WRITE: SafetyLevel.MODERATE,
+        ActionCategory.EXECUTE: SafetyLevel.RISKY,
+        ActionCategory.NETWORK: SafetyLevel.MODERATE,
+        ActionCategory.GOVERNANCE: SafetyLevel.SAFE,
+    }
+
+    def check(self, action: Action) -> SafetyLevel:
+        """
+        Verifica a seguranca de uma acao.
+
+        Args:
+            action: Acao a ser verificada.
+
+        Returns:
+            Nivel de seguranca classificado.
+        """
+        base = self.RULES.get(action.category, SafetyLevel.MODERATE)
+        return base
+
+
+class TrustEngine:
+    """
+    Motor de confianca completo: scorer + gate + forgetting + tracker.
+    """
+
+    def __init__(self):
+        self.scores: Dict[str, TrustScore] = {}
+        self.gate = BehavioralGate()
+        self.history: List[dict] = []
+
+    def register_agent(self, agent_id: str) -> None:
+        """Registra um novo agente com score inicial."""
+        self.scores[agent_id] = TrustScore()
+
+    def evaluate(self, agent_id: str,
+                 action: Action) -> tuple[SafetyLevel, float]:
+        """
+        Avalia uma acao: classifica seguranca e retorna confianca.
+
+        Args:
+            agent_id: Identificador do agente.
+            action: Acao a ser avaliada.
+
+        Returns:
+            Tupla (nivel de seguranca, confianca blendada).
+        """
+        safety = self.gate.check(action)
+        score = self.scores.get(agent_id, TrustScore())
+        self.history.append({
+            "agent": agent_id,
+            "action": action.description,
+            "safety": safety.value,
+            "trust": score.blended,
+        })
+        return safety, score.blended
+\end{lstlisting}
+
+% =============================================================================
+%  SEÇÃO C.3: AGENTE PERSONALIZADO
+% =============================================================================
+\section{Exemplo de Agente Personalizado}
+\label{sec:cod-agente}
+
+O código seguinte demonstra a criação de um agente cognitivo personalizado
+no \opencodeeco{}, incluindo definição de skill, MCP e ciclo percepção-ação.
+
+\begin{lstlisting}[caption={Agente personalizado},
+                   label={cod:agente}, style=pythonstyle]
+"""
+custom_agent_demo.py — Agente personalizado no OpenCode Ecosystem.
+
+Demonstra criacao de agente com skill, MCP e ciclo percepcao-acao.
+"""
+
+from dataclasses import dataclass
+from typing import Optional
+
+
+@dataclass
+class Context:
+    """Contexto de execucao do agente."""
+    user_input: str
+    history: list = None
+    trust_score: float = 0.85
+
+
+class Skill:
+    """Habilidade executavel por um agente."""
+
+    def __init__(self, name: str, version: str = "1.0.0"):
+        self.name = name
+        self.version = version
+
+    def execute(self, context: Context) -> str:
+        """Executa a skill no contexto fornecido."""
+        raise NotImplementedError
+
+
+class SearchSkill(Skill):
+    """Skill de busca academica."""
+
+    def __init__(self):
+        super().__init__("academic-search", "2.1.0")
+
+    def execute(self, context: Context) -> str:
+        query = context.user_input
+        return f"[Resultados da busca: '{query}' — 5 papers encontrados]"
+
+
+class CustomAgent:
+    """Agente cognitivo personalizado."""
+
+    def __init__(self, agent_id: str, skills: list[Skill]):
+        self.agent_id = agent_id
+        self.skills = {s.name: s for s in skills}
+
+    def perceive(self, context: Context) -> str:
+        """Fase de percepcao: interpreta a entrada do usuario."""
+        return f"Processando: {context.user_input}"
+
+    def reason(self, perception: str) -> str:
+        """Fase de raciocinio: decide qual skill usar."""
+        if "buscar" in perception.lower():
+            return "academic-search"
+        return "default"
+
+    def act(self, skill_name: str, context: Context) -> str:
+        """Fase de acao: executa a skill selecionada."""
+        skill = self.skills.get(skill_name)
+        if not skill:
+            return f"[Agente {self.agent_id}: skill '{skill_name}' nao encontrada]"
+        return skill.execute(context)
+
+    def run(self, user_input: str) -> str:
+        """Ciclo completo percepcao--raciocinio--acao."""
+        ctx = Context(user_input=user_input)
+        perception = self.perceive(ctx)
+        chosen = self.reason(perception)
+        result = self.act(chosen, ctx)
+        return result
+
+
+# Exemplo de uso
+if __name__ == "__main__":
+    agent = CustomAgent("agente-demo", [SearchSkill()])
+    output = agent.run("buscar algoritmos de confianca computacional")
+    print(output)
+\end{lstlisting}
+
+% =============================================================================
+%  SEÇÃO C.4: BENCHMARK CORA-EVAL
+% =============================================================================
+\section{Script de Benchmark CORA-Eval}
+\label{sec:cod-cora}
+
+O script abaixo implementa o rastreador evolutivo do benchmark CORA-Eval
+(Capítulo~7), com 150 tarefas em 10 dimensões e 4 níveis.
+
+\begin{lstlisting}[caption={CORA-Eval benchmark tracker},
+                   label={cod:cora}, style=pythonstyle]
+"""
+cora_benchmark_tracker.py — Rastreador do benchmark CORA-Eval.
+
+Avalia ecossistemas cognitivos em 150 tarefas distribuidas em
+10 dimensoes × 4 niveis (Basico, Intermediario, Avancado, Pesquisa).
+"""
+
+from dataclasses import dataclass, field
+from typing import Dict, List
+import json
+
+
+@dataclass
+class CORATask:
+    """Tarefa do benchmark CORA-Eval."""
+    id: str                   # e.g., "LOG-01"
+    dimension: str            # e.g., "Logica"
+    level: int                # 1-4 (Basico a Pesquisa)
+    description: str
+    weight: float = 1.0
+
+
+@dataclass
+class CORAResult:
+    """Resultado de avaliacao de uma tarefa."""
+    task_id: str
+    score: float              # 0.0 a 1.0
+    passed: bool
+    details: str = ""
+
+
+class CORAEvalTracker:
+    """Rastreador de benchmark com persistencia JSON."""
+
+    CORA_DIMENSIONS = [
+        "Logica", "Probabilidade", "Algebra", "Calculo",
+        "Grafos", "Aprendizado", "Raciocinio", "Agentes",
+        "Etica", "Inovacao"
+    ]
+
+    def __init__(self):
+        self.tasks: Dict[str, CORATask] = {}
+        self.results: Dict[str, CORAResult] = {}
+        self._seed_tasks()
+
+    def _seed_tasks(self) -> None:
+        """Popula as 150 tarefas do benchmark."""
+        for dim_idx, dim in enumerate(self.CORA_DIMENSIONS):
+            for level in range(1, 5):
+                count = 4 if level < 4 else 3
+                for i in range(count):
+                    tid = f"{dim[:3].upper()}-{level}{chr(65+i)}"
+                    self.tasks[tid] = CORATask(
+                        id=tid,
+                        dimension=dim,
+                        level=level,
+                        description=f"Tarefa {dim} nivel {level} #{i+1}",
+                        weight=1.0 + (level - 1) * 0.25,
+                    )
+
+    def record(self, task_id: str, score: float,
+               details: str = "") -> CORAResult:
+        """Registra o resultado de uma tarefa."""
+        result = CORAResult(
+            task_id=task_id,
+            score=score,
+            passed=score >= 0.7,
+            details=details,
+        )
+        self.results[task_id] = result
+        return result
+
+    @property
+    def cora_score(self) -> float:
+        """CORA-Score: media ponderada por nivel."""
+        if not self.results:
+            return 0.0
+        total_weight = sum(
+            self.tasks[t].weight
+            for t in self.results
+            if t in self.tasks
+        )
+        if total_weight == 0:
+            return 0.0
+        weighted = sum(
+            r.score * self.tasks[r.task_id].weight
+            for r in self.results.values()
+            if r.task_id in self.tasks
+        )
+        return weighted / total_weight
+
+    def save(self, path: str = "cora_results.json") -> None:
+        """Persiste os resultados em JSON."""
+        data = {
+            "cora_score": self.cora_score,
+            "results": [
+                {"task_id": r.task_id, "score": r.score,
+                 "passed": r.passed}
+                for r in self.results.values()
+            ]
+        }
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+# Exemplo de uso
+if __name__ == "__main__":
+    tracker = CORAEvalTracker()
+    tracker.record("LOG-1A", 0.95, "Resolvido com Z3")
+    tracker.record("PRO-2B", 0.80, "Inferencia bayesiana correta")
+    print(f"CORA-Score: {tracker.cora_score:.3f}")
+    tracker.save()
+\end{lstlisting}
+
+% =============================================================================
+%  SEÇÃO C.5: COMANDOS MAKEFILE
+% =============================================================================
+\section{Comandos Makefile}
+\label{sec:cod-makefile}
+
+O \opencodeeco{} utiliza um \texttt{Makefile} para automatizar tarefas
+recorrentes. Abaixo os principais comandos.
+
+\begin{lstlisting}[caption={Comandos Makefile do OpenCode Ecosystem},
+                   label={cod:makefile}, style=bashstyle]
+# ============================================================
+# Makefile - OpenCode Ecosystem
+# Comandos: desenvolvimento, testes e compilacao
+# ============================================================
+
+# ---- COMPILACAO DO LIVRO ----
+make livro
+
+# Compilar apenas capitulo especifico
+make capitulo CAP=08-capitulo1-mat-est
+
+# Limpar arquivos auxiliares
+make clean
+
+# ---- TESTES ----
+# Executar suite completa de testes (312 CTs)
+make test
+
+# Executar testes de um SPEC especifico
+make test-spec SPEC=SPEC-038
+
+# Executar testes com relatorio de cobertura
+make test-cov
+
+# ---- ECOSSISTEMA ----
+# Sincronizar ecossistema (descobrir e instalar skills)
+make sync
+
+# Executar scanner pipeline completo
+make scan
+
+# Atualizar componentes
+make update
+
+# ---- CORA-EVAL ----
+# Executar benchmark CORA-Eval completo
+make cora-eval
+
+# Executar benchmark por dimensao
+make cora-dim DIM=Logica
+
+# Visualizar resultados do benchmark
+make cora-report
+
+# ---- DOCUMENTACAO ----
+# Gerar documentacao do ecossistema
+make docs
+
+# Verificar SPECs e ADRs
+make validate-specs
+
+# Atualizar graficos TikZ
+make tikz
+
+# ---- LIMPEZA ----
+# Limpar completamente (incluindo PDF)
+make distclean
+
+# Limpar resultados de benchmark
+make clean-bench
+\end{lstlisting}

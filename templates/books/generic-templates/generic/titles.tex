@@ -1,0 +1,88 @@
+\usepackage{titlesec}
+
+%----------------------------------------------------------------------------------------
+%   SECTION NUMBERING IN THE MARGIN
+%----------------------------------------------------------------------------------------
+
+\newcommand{\autodot}{.} % separate title numbers with dots
+\newlength{\titlenumbermajoroffset}
+\newlength{\titlenumberminoroffset}
+\setlength{\titlenumbermajoroffset}{-17mm}
+\setlength{\titlenumberminoroffset}{-11mm}
+\newcommand{\titlenumberfontsize}{16}
+\newcommand{\majorheadnumbercolor}{bg}
+\newcommand{\majorheadnumbersize}{\titlenumberfontsize}
+\newcommand{\minorheadnumbercolor}{fg}
+\newcommand{\chapterminorheadnumbersize}{16}
+\newcommand{\sectionminorheadnumbersize}{14}
+\newcommand{\subsectionminorheadnumbersize}{10}
+\newcommand{\subsubsectionminorheadnumbersize}{8}
+\makeatletter
+\NewDocumentCommand{\formatheadnumber}{O{fg} O{\titlenumberfontsize} m}{\textcolor{#1}{\fontsize{#2}{#2}\headingfontfamily\bfseries\selectfont#3}}
+\newcommand*{\majorheadnumber}[1]{%
+  \makebox[0pt][l]{\hspace*{\titlenumbermajoroffset}\formatheadnumber[\majorheadnumbercolor][\majorheadnumbersize]{#1\autodot}}%
+}
+\newcommand*{\minorheadnumber}[2]{%
+  \if\relax\detokenize{#1}\relax
+  \else
+    \makebox[0pt][l]{\hspace*{\titlenumberminoroffset}\formatheadnumber[\minorheadnumbercolor][#2]{#1}}%
+  \fi
+}
+\newcommand*{\splitheadnumber}[2]{%
+  \def\headnumberminorsize{#2}%
+  \edef\headnumberexpanded{#1}%
+  \expandafter\splitheadnumberparts\headnumberexpanded.\@nil
+}
+\def\splitheadnumberparts#1.#2\@nil{%
+  \majorheadnumber{#1}%
+  \minorheadnumber{#2}{\headnumberminorsize}%
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%   LAYOUT
+%----------------------------------------------------------------------------------------
+
+\titlespacing*{\chapter}{0pt}{-30pt}{20pt}
+
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%----------------------------------------------------------------------------------------
+%   FORMAT
+%----------------------------------------------------------------------------------------
+
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\headingfontfamily\bfseries\selectfont\color{accent}}
+  {\splitheadnumber{\thechapter}{\chapterminorheadnumbersize}}
+  {0pt}
+  {\MakeUppercase}
+
+\titleformat{\section}
+  {\normalfont\large\headingfontfamily\bfseries\selectfont\color{fg}}
+  {\splitheadnumber{\thesection}{\sectionminorheadnumbersize}}
+  {0pt}
+  {\MakeUppercase}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\headingfontfamily\bfseries\selectfont\color{fg}}
+  {\splitheadnumber{\thesubsection}{\subsectionminorheadnumbersize}}
+  {0pt}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalfont\small\headingfontfamily\bfseries\selectfont\color{fg}}
+  {\splitheadnumber{\thesubsubsection}{\subsubsectionminorheadnumbersize}}
+  {0pt}
+  {}
+
+%----------------------------------------------------------------------------------------
+%   SPECIAL TITLE
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\paragraph}[1]{%
+  \par\vspace{3.25ex plus 1ex minus .2ex}%
+  \noindent\hspace*{-2cm}\colorbox{bgacc}{%
+    \hspace*{2cm}\normalfont\huge\headingfontfamily\selectfont\color{fgacc}\uppercase{#1}
+  }%
+  \par\nobreak\vspace{1.5ex plus .2ex}%
+}

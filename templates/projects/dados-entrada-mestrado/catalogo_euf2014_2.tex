@@ -1,0 +1,718 @@
+% ============================================================
+% CATÁLOGO EUF 2014-2 — Classificação Taxônomica (R-Codes)
+% Dataset: Exames de Pós-Graduação (Mestrado)
+% Gerado em: Maio 2026
+% ============================================================
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazilian]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm,top=2.5cm,bottom=2cm}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,longtable}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{caption}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\definecolor{azulprof}{RGB}{0,51,102}
+\definecolor{verdeexame}{RGB}{0,100,50}
+
+% Comando para destacar R-codes
+\newcommand{\rcode}[1]{\textcolor{azulprof}{\textbf{#1}}}
+\newcommand{\bloom}[1]{\textcolor{verdeexame}{\textbf{#1}}}
+
+\title{\textbf{Catálogo da EUF 2014-2:}\\
+\large Classificação Taxônomica de 10 Questões de Física\\
+segundo a Taxonomia 350 de Raciocínios Científicos}
+\author{OpenCode Ecosystem --- Análise de Dados\\
+Mestrado PPGTE/CT/UFC}
+\date{Maio 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este catálogo documenta a classificação das 10 questões do Exame Unificado
+de Física (EUF) do segundo semestre de 2014 segundo a Taxonomia 350 de
+Raciocínios Científicos. Cada questão é analisada quanto ao seu raciocínio
+primário (dominante) e secundário (complementar), área de conhecimento,
+categoria temática, nível taxonômico de Bloom e domínio conceitual.
+O catálogo inclui tabelas de distribuição por área, por tipo de raciocínio,
+por nível Bloom e um mapa de correspondência entre as questões e os 9
+códigos de raciocínio mobilizados no exame.
+\vspace{0.3cm}
+
+\noindent\textbf{Palavras-chave}: EUF 2014-2. Taxonomia 350. Raciocínio
+científico. Classificação de questões. Física.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{Visão Geral do Exame}
+% ============================================================
+
+O Exame Unificado de Física (EUF) do segundo semestre de 2014 é composto
+por 10 questões distribuídas em 6 áreas da Física:
+
+\begin{itemize}
+  \item \textbf{Eletromagnetismo} (2 questões): Q01 (Capacitor esférico),
+    Q02 (Bobinas de Helmholtz);
+  \item \textbf{Física Moderna} (2 questões): Q03 (Radiação de corpo negro),
+    Q04 (Colisão relativística inelástica);
+  \item \textbf{Termodinâmica} (1 questão): Q05 (Equação de estado e energia molar);
+  \item \textbf{Mecânica Clássica} (2 questões): Q06 (Pêndulo com suporte móvel),
+    Q07 (Átomo de trítio e decaimento beta);
+  \item \textbf{Mecânica Quântica} (2 questões): Q08 (Hamiltoniano da amônia),
+    Q09 (Oscilador harmônico 3D);
+  \item \textbf{Mecânica Estatística} (1 questão): Q10 (Gás ideal canônico).
+\end{itemize}
+
+As questões foram classificadas segundo 9 códigos distintos da Taxonomia
+350, distribuídos em 4 categorias taxonômicas.
+
+% ============================================================
+\section{Classificação das Questões}
+% ============================================================
+
+A Tabela~\ref{tab:questoes} apresenta a classificação completa das 10
+questões, incluindo: identificador, título, área primária e secundária,
+raciocínio primário e secundário (com código e descrição), categoria
+temática, subcategoria, nível de Bloom e domínio conceitual.
+
+\small
+\begin{longtable}{@{}p{1.5cm}p{2.8cm}p{2.5cm}p{2.5cm}p{5.2cm}@{}}
+\caption{Classificação completa das 10 questões da EUF 2014-2}
+\label{tab:questoes}\\
+\toprule
+\textbf{Questão} & \textbf{Título} & \textbf{R-primário} & \textbf{R-secundário} & \textbf{Domínio} \\
+\midrule
+\endfirsthead
+
+\caption[]{Classificação completa das 10 questões da EUF 2014-2 (continuação)}\\
+\toprule
+\textbf{Questão} & \textbf{Título} & \textbf{R-primário} & \textbf{R-secundário} & \textbf{Domínio} \\
+\midrule
+\endhead
+
+\bottomrule
+\endfoot
+
+Q01 & Capacitor esférico
+  & \rcode{R065} (Simetria-Conservacao)
+  & \rcode{R069} (Variacional-Principio)
+  & Capacitor esférico: Lei de Gauss, simetria esférica,
+    densidade de energia, capacitância \\
+\midrule
+
+Q02 & Bobinas de Helmholtz
+  & \rcode{R065} (Simetria-Conservacao)
+  & \rcode{R069} (Variacional-Principio)
+  & Bobinas de Helmholtz: simetria axial, condição de campo
+    uniforme, $dB/dz=0$ e $d^2B/dz^2=0$ \\
+\midrule
+
+Q03 & Radiação de corpo negro
+  & \rcode{R070} (Limite-Assintotico)
+  & \rcode{R071} (Dualidade-Transformacao)
+  & Radiação de corpo negro: limites assintóticos
+    $h\nu\ll kT$, transformação $\nu\to\lambda$, lei de
+    Stefan-Boltzmann \\
+\midrule
+
+Q04 & Colisão relativística inelástica
+  & \rcode{R071} (Dualidade-Transformacao)
+  & \rcode{R065} (Simetria-Conservacao)
+  & Colisão inelástica relativística: transformação de
+    Lorentz, conservação de 4-momento, perda de energia \\
+\midrule
+
+Q05 & Equação de estado e energia molar
+  & \rcode{R008} (Deducao-Formal-Passo-a-Passo)
+  & \rcode{R066} (Dimensional-Analitico)
+  & Equação de estado e energia molar: derivadas parciais,
+    identidade $(\partial u/\partial v)_T = T(\partial p/\partial T)_v - p$,
+    expansão livre \\
+\midrule
+
+Q06 & Pêndulo com suporte móvel
+  & \rcode{R069} (Variacional-Principio)
+  & \rcode{R054} (Otimizacao-Restrita)
+  & Pêndulo com suporte móvel: Lagrangiana, Euler-Lagrange,
+    oscilações forçadas, frequência de ressonância \\
+\midrule
+
+Q07 & Átomo de trítio e decaimento beta
+  & \rcode{R065} (Simetria-Conservacao)
+  & \rcode{R069} (Variacional-Principio)
+  & Trítio e decaimento beta: força central, conservação de
+    energia/momento angular, transição de órbita \\
+\midrule
+
+Q08 & Hamiltoniano da amônia
+  & \rcode{R109} (Espectral-Operadores)
+  & \rcode{R008} (Deducao-Formal-Passo-a-Passo)
+  & Hamiltoniano da amônia: diagonalização $2\times2$,
+    autovalores, probabilidade de transição, regra de Born \\
+\midrule
+
+Q09 & Oscilador harmônico 3D
+  & \rcode{R010} (Decomposicao-Modular)
+  & \rcode{R109} (Espectral-Operadores)
+  & Oscilador harmônico 3D: separação de variáveis,
+    equação radial, espectro, degenerescência \\
+\midrule
+
+Q10 & Gás ideal canônico
+  & \rcode{R069} (Variacional-Principio)
+  & \rcode{R070} (Limite-Assintotico)
+  & Gás ideal canônico: Hamiltoniana, integral de fase,
+    função de partição, limite termodinâmico \\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section{Mapa de Raciocínios}
+
+\subsection{Códigos Utilizados}
+
+A Tabela~\ref{tab:rcodes} lista os 9 códigos de raciocínio mobilizados
+no exame, com suas categorias taxonômicas e descrições.
+
+\begin{table}[H]
+\centering
+\caption{Códigos de raciocínio utilizados na EUF 2014-2}
+\label{tab:rcodes}
+\begin{tabular}{cllc}
+\toprule
+\textbf{Código} & \textbf{Nome} & \textbf{Categoria} & \textbf{Frequência} \\
+\midrule
+\rcode{R008} & Deducao-Formal-Passo-a-Passo
+  & I. Lógico-Dedutivos & 2 (Q05, Q08) \\
+\rcode{R010} & Decomposicao-Modular
+  & II. Analítico-Estruturais & 1 (Q09) \\
+\rcode{R054} & Otimizacao-Restrita
+  & VII. Econômico-Decisórios & 1 (Q06) \\
+\rcode{R065} & Simetria-Conservacao
+  & XIII. Físico-Matemáticos & 4 (Q01, Q02, Q04, Q07) \\
+\rcode{R066} & Dimensional-Analitico
+  & XIII. Físico-Matemáticos & 1 (Q05) \\
+\rcode{R069} & Variacional-Principio
+  & XIII. Físico-Matemáticos & 5 (Q01, Q02, Q06, Q07, Q10) \\
+\rcode{R070} & Limite-Assintotico
+  & XIII. Físico-Matemáticos & 2 (Q03, Q10) \\
+\rcode{R071} & Dualidade-Transformacao
+  & XIII. Físico-Matemáticos & 2 (Q03, Q04) \\
+\rcode{R109} & Espectral-Operadores
+  & XIV. Lógica Matemática Avançada & 2 (Q08, Q09) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Distribuição por Categoria Taxonômica}
+
+A Tabela~\ref{tab:categorias} mostra a distribuição das ocorrências de
+raciocínio (primário + secundário) pelas categorias da Taxonomia 350.
+
+\begin{table}[H]
+\centering
+\caption{Distribuição por categoria taxonômica}
+\label{tab:categorias}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Categoria} & \textbf{Ocorrências} & \textbf{Percentual} \\
+\midrule
+Categoria XIII: Físico-Matemáticos & 14 & 70\% \\
+Categoria I: Lógico-Dedutivos & 3 & 15\% \\
+Categoria XIV: Lógica Matemática Avançada & 2 & 10\% \\
+Categoria II: Analítico-Estruturais & 1 & 5\% \\
+Categoria VII: Econômico-Decisórios & 1 & 5\% \\
+\midrule
+\textbf{Total} & \textbf{20} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Distribuição por Área da Física}
+
+A Tabela~\ref{tab:areas} cruza as áreas da física com os raciocínios
+primários, revelando padrões disciplinares.
+
+\begin{table}[H]
+\centering
+\caption{Distribuição áreas $\times$ raciocínio primário}
+\label{tab:areas}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Área} & \textbf{Raciocínio Primário} & \textbf{Bloom} \\
+\midrule
+Eletromagnetismo & R065 (Simetria-Conservacao) $\times$2 & Aplicar + Analisar \\
+Física Moderna & R070 (Limite-Assintotico) + R071 (Dualidade-Transformacao) & Analisar + Aplicar \\
+Termodinâmica & R008 (Deducao-Formal-Passo-a-Passo) & Analisar \\
+Mecânica Clássica & R069 (Variacional-Principio) + R065 (Simetria-Conservacao) & Aplicar $\times$2 \\
+Mecânica Quântica & R109 (Espectral-Operadores) + R010 (Decomposicao-Modular) & Aplicar + Analisar \\
+Mecânica Estatística & R069 (Variacional-Principio) & Aplicar \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Níveis de Bloom}
+
+A Tabela~\ref{tab:bloom} apresenta a distribuição dos níveis taxonômicos
+de Bloom nos 10 enunciados.
+
+\begin{table}[H]
+\centering
+\caption{Distribuição dos níveis de Bloom}
+\label{tab:bloom}
+\begin{tabular}{lccl}
+\toprule
+\textbf{Nível} & \textbf{Questões} & \textbf{Total} & \textbf{Percentual} \\
+\midrule
+\bloom{Aplicar} & Q01, Q04, Q06, Q07, Q08, Q10 & 6 & 60\% \\
+\bloom{Analisar} & Q02, Q03, Q05, Q09 & 4 & 40\% \\
+\midrule
+\textbf{Total} & & \textbf{10} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Matriz de Incidência}
+
+A Tabela~\ref{tab:matriz} mostra a matriz de incidência Questões
+$\times$ Raciocínios, onde P = raciocínio primário e S = raciocínio
+secundário.
+
+\begin{table}[H]
+\centering
+\caption{Matriz de incidência: Questões $\times$ Raciocínios}
+\label{tab:matriz}
+\begin{tabular}{lccccccccc}
+\toprule
+\textbf{Questão} & R008 & R010 & R054 & R065 & R066 & R069 & R070 & R071 & R109 \\
+\midrule
+Q01 &   &   &   & P &   & S &   &   &   \\
+Q02 &   &   &   & P &   & S &   &   &   \\
+Q03 &   &   &   &   &   &   & P & S &   \\
+Q04 &   &   &   & S &   &   &   & P &   \\
+Q05 & P &   &   &   & S &   &   &   &   \\
+Q06 &   &   & S &   &   & P &   &   &   \\
+Q07 &   &   &   & P &   & S &   &   &   \\
+Q08 & S &   &   &   &   &   &   &   & P \\
+Q09 &   & P &   &   &   &   &   &   & S \\
+Q10 &   &   &   &   &   & P & S &   &   \\
+\midrule
+\textbf{Total} & 2 & 1 & 1 & 4 & 1 & 5 & 2 & 2 & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Análise por Questão}
+% ============================================================
+
+\subsection{Eletromagnetismo}
+
+\subsubsection{Q01 --- Capacitor Esférico (\bloom{Aplicar})}
+
+\textbf{Enunciado:} Um capacitor esférico de raios $a$ (interno) e $b$ (externo)
+é carregado com carga $Q$. Determine a capacitância, a densidade de energia
+do campo elétrico e a energia total armazenada.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R065} (Simetria-Conservacao) ---
+    Aplica a Lei de Gauss em coordenadas esféricas para determinar o campo
+    elétrico. A simetria esférica do problema reduz a integral de superfície
+    a $E(r)\cdot 4\pi r^2 = Q_{\text{int}}/\varepsilon_0$.
+  \item \textbf{Raciocínio secundário:} \rcode{R069} (Variacional-Principio) ---
+    Calcula a energia total como integral da densidade de energia
+    $u = \varepsilon_0 E^2/2$ sobre o volume entre as placas, tratando a
+    energia como funcional do campo.
+\end{itemize}
+
+\subsubsection{Q02 --- Bobinas de Helmholtz (\bloom{Analisar})}
+
+\textbf{Enunciado:} Duas bobinas idênticas de raio $R$ com $N$ espiras,
+separadas por distância $d$, são percorridas por corrente $I$ no mesmo
+sentido. Determine a condição para que o campo magnético seja máximo
+uniforme na região central.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R065} (Simetria-Conservacao) ---
+    Utiliza a simetria axial do problema para aplicar a Lei de Biot-Savart
+    ao longo do eixo $z$.
+  \item \textbf{Raciocínio secundário:} \rcode{R069} (Variacional-Principio) ---
+    Impõe as condições $dB/dz = 0$ e $d^2B/dz^2 = 0$ no ponto médio como
+    condição de campo uniforme (extremal).
+\end{itemize}
+
+\subsection{Física Moderna}
+
+\subsubsection{Q03 --- Radiação de Corpo Negro (\bloom{Analisar})}
+
+\textbf{Enunciado:} A densidade espectral de energia da radiação de corpo
+negro é dada pela Lei de Planck. Determine a constante de Stefan-Boltzmann
+a partir da integração da distribuição de Planck e discuta os limites
+clássicos.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R070} (Limite-Assintotico) ---
+    Expande a distribuição de Planck para $h\nu/kT \ll 1$, recuperando a
+    Lei de Rayleigh-Jeans, e explora o limite de Wien para $h\nu/kT \gg 1$.
+  \item \textbf{Raciocínio secundário:} \rcode{R071} (Dualidade-Transformacao) ---
+    Realiza a mudança de variável $\nu \to \lambda$ para expressar a
+    densidade espectral em termos de comprimento de onda e integra para
+    obter $u = aT^4$.
+\end{itemize}
+
+\subsubsection{Q04 --- Colisão Relativística Inelástica (\bloom{Aplicar})}
+
+\textbf{Enunciado:} Uma partícula de massa $m$ e energia $E$ colide
+inelasticamente com uma partícula idêntica em repouso. Determine a
+massa do sistema resultante e a energia perdida.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R071} (Dualidade-Transformacao) ---
+    Aplica transformações de Lorentz entre referenciais para analisar a
+    colisão em diferentes sistemas de coordenadas.
+  \item \textbf{Raciocínio secundário:} \rcode{R065} (Simetria-Conservacao) ---
+    Utiliza a conservação do 4-momento total $P^\mu$ como expressão da
+    simetria de Poincaré (invariância por translações espaço-temporais).
+\end{itemize}
+
+\subsection{Termodinâmica}
+
+\subsubsection{Q05 --- Equação de Estado e Energia Molar (\bloom{Analisar})}
+
+\textbf{Enunciado:} Para um gás real descrito por $p(v,T)$, deduza a
+relação entre a energia interna molar e as derivadas parciais da
+equação de estado. Aplique à expansão livre.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R008} (Deducao-Formal-Passo-a-Passo) ---
+    Constrói cadeia dedutiva de identidades termodinâmicas partindo da
+    primeira lei e das relações de Maxwell: $(\partial u/\partial v)_T
+    = T(\partial p/\partial T)_v - p$.
+  \item \textbf{Raciocínio secundário:} \rcode{R066} (Dimensional-Analitico) ---
+    Utiliza análise dimensional e relações entre variáveis termodinâmicas
+    ($p, v, T, u, s$) para verificar consistência das expressões.
+\end{itemize}
+
+\subsection{Mecânica Clássica}
+
+\subsubsection{Q06 --- Pêndulo com Suporte Móvel (\bloom{Aplicar})}
+
+\textbf{Enunciado:} Um pêndulo simples de comprimento $\ell$ e massa $m$
+tem seu ponto de suspensão movendo-se horizontalmente com aceleração
+$a(t)$. Determine as equações de movimento e as frequências de oscilação.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R069} (Variacional-Principio) ---
+    Constrói a Lagrangiana do sistema e aplica as equações de
+    Euler-Lagrange para obter as equações de movimento.
+  \item \textbf{Raciocínio secundário:} \rcode{R054} (Otimizacao-Restrita) ---
+    Determina a frequência de ressonância do oscilador forçado como
+    condição de máxima amplitude.
+\end{itemize}
+
+\subsubsection{Q07 --- Átomo de Trítio e Decaimento Beta (\bloom{Aplicar})}
+
+\textbf{Enunciado:} Um átomo de trítio ($^3$H) sofre decaimento beta,
+transformando-se em $^3$He$^+$. Determine a energia e o momento angular
+do elétron e analise a transição orbital.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R065} (Simetria-Conservacao) ---
+    Utiliza a conservação de energia e momento angular no campo de força
+    central coulombiano para analisar a órbita eletrônica.
+  \item \textbf{Raciocínio secundário:} \rcode{R069} (Variacional-Principio) ---
+    Calcula a energia mecânica total e a trajetória via potencial efetivo.
+\end{itemize}
+
+\subsection{Mecânica Quântica}
+
+\subsubsection{Q08 --- Hamiltoniano da Amônia (\bloom{Aplicar})}
+
+\textbf{Enunciado:} A molécula de $NH_3$ é descrita por um Hamiltoniano
+$2\times2$ com estados $|L\rangle$ e $|R\rangle$. Determine os autovalores,
+autovetores e a probabilidade de transição entre os estados.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R109} (Espectral-Operadores) ---
+    Diagonaliza o operador Hamiltoniano $2\times2$ para obter autovalores
+    e autovetores, fundamento da mecânica quântica.
+  \item \textbf{Raciocínio secundário:} \rcode{R008} (Deducao-Formal-Passo-a-Passo) ---
+    Aplica sequencialmente os postulados da MQ: operador $\to$ autovalores
+    $\to$ probabilidade (regra de Born) $\to$ evolução temporal.
+\end{itemize}
+
+\subsubsection{Q09 --- Oscilador Harmônico 3D (\bloom{Analisar})}
+
+\textbf{Enunciado:} Uma partícula de massa $m$ está sujeita ao potencial
+$V(\mathbf{r}) = \frac{1}{2}m\omega^2 r^2$. Determine os autovalores de
+energia, a degenerescência e a equação radial.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R010} (Decomposicao-Modular) ---
+    Separa a equação de Schrödinger em coordenadas cartesianas (três
+    osciladores 1D independentes) e, alternativamente, em coordenadas
+    esféricas (parte radial + harmônicos esféricos).
+  \item \textbf{Raciocínio secundário:} \rcode{R109} (Espectral-Operadores) ---
+    Determina o espectro de energia $E = \hbar\omega(n+3/2)$ com
+    degenerescência $g(n) = (n+1)(n+2)/2$.
+\end{itemize}
+
+\subsection{Mecânica Estatística}
+
+\subsubsection{Q10 --- Gás Ideal Canônico (\bloom{Aplicar})}
+
+\textbf{Enunciado:} Considere $N$ partículas de gás ideal clássico em
+contato com um reservatório térmico à temperatura $T$. Calcule a função
+de partição canônica e as propriedades termodinâmicas.
+
+\medskip
+\noindent\textbf{Classificação:}
+\begin{itemize}
+  \item \textbf{Raciocínio primário:} \rcode{R069} (Variacional-Principio) ---
+    Formula o problema via Hamiltoniana clássica e calcula a integral de
+    fase $Z = \int e^{-\beta H} d^{3N}q\,d^{3N}p$ no ensemble canônico.
+  \item \textbf{Raciocínio secundário:} \rcode{R070} (Limite-Assintotico) ---
+    Aplica o limite termodinâmico $N\to\infty$, $V\to\infty$, com
+    densidade $N/V$ constante, para obter propriedades extensivas.
+\end{itemize}
+
+% ============================================================
+\section{Distribuição Comparativa}
+% ============================================================
+
+\subsection{Comparação com os 6 Exames EUF do Dataset}
+
+A Tabela~\ref{tab:comparativo} compara a EUF 2014-2 com os demais 5
+exames EUF presentes no dataset (todas as 10 questões por exame, nas
+mesmas 6 áreas da física). Os dados revelam variações significativas
+no repertório de raciocínios mobilizados.
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre os 6 exames EUF do dataset}
+\label{tab:comparativo}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Métrica} & \textbf{2011-1} & \textbf{2012-2} & \textbf{2014-2} & \textbf{2015-1} & \textbf{2015-2} & \textbf{2016-1} \\
+\midrule
+R-codes distintos & 8 & 7 & 7 & 5 & 7 & 8 \\
+Cat. XIII (Físico-Matemáticos) & 4 & 5 & \textbf{7} & 4 & 4 & 4 \\
+Áreas & 6 & 6 & 6 & 6 & 6 & 6 \\
+R-codes da Cat. XIII & 4 & 5 & \textbf{7} & 4 & 4 & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent A EUF 2014-2 destaca-se com \textbf{7 ocorrências} de
+raciocínios Físico-Matemáticos (Cat. XIII), o maior valor entre todos
+os exames. A média dos demais 5 exames é de 4,2 ocorrências por exame,
+indicando que a EUF 2014-2 demandou substancialmente mais raciocínio
+quantitativo-matemático que a média histórica.
+
+\subsection{Comparação de Raciocínios Primários}
+
+A Tabela~\ref{tab:comparativo_rcodes} mostra todos os R-codes utilizados
+como raciocínio primário em cada exame, revelando o repertório
+taxonômico de cada prova.
+
+\small
+\begin{longtable}{lcccccc}
+\caption{R-codes primários por exame EUF}
+\label{tab:comparativo_rcodes}\\
+\toprule
+\textbf{R-código} & \textbf{2011-1} & \textbf{2012-2} & \textbf{2014-2} & \textbf{2015-1} & \textbf{2015-2} & \textbf{2016-1} \\
+\midrule
+\endfirsthead
+
+\caption[]{R-codes primários por exame EUF (continuação)}\\
+\toprule
+\textbf{R-código} & \textbf{2011-1} & \textbf{2012-2} & \textbf{2014-2} & \textbf{2015-1} & \textbf{2015-2} & \textbf{2016-1} \\
+\midrule
+\endhead
+
+\bottomrule
+\endfoot
+
+R008 (Deducao-Formal-Passo-a-Passo) & & & 1 & & & \\
+R010 (Decomposicao-Modular) & & & 1 & & & \\
+R011 (Inducao-Estrutural) & & & & & 1 & \\
+R065 (Simetria-Conservacao) & 1 & 2 & 3 & & 1 & 1 \\
+R067 (Perturbativo) & & 1 & & & & \\
+R069 (Variacional-Principio) & 1 & 1 & 2 & 2 & 1 & 1 \\
+R070 (Limite-Assintotico) & & & 1 & & & \\
+R071 (Dualidade-Transformacao) & 2 & 1 & 1 & 2 & 2 & 2 \\
+R073 (Caos-Deterministico) & 1 & & & & & \\
+R109 (Espectral-Operadores) & & & 1 & & & \\
+R117 (Monte-Carlo-MCMC) & 1 & 2 & & 2 & 2 & 2 \\
+R183 (Mecanica-Quantica-Particulas) & 3 & 2 & & 3 & 2 & 1 \\
+R201 (Superposicao-Quantica) & & & & & & 1 \\
+R202 (Emaranhamento-Quantico) & & & & & 1 & 1 \\
+R229 (Homotopia-Fundamental) & 1 & 1 & & 1 & & 1 \\
+\midrule
+\textbf{Total} & \textbf{10} & \textbf{10} & \textbf{10} & \textbf{10} & \textbf{10} & \textbf{10} \\
+\end{longtable}
+
+\normalsize
+\noindent Observa-se que:
+\begin{itemize}
+  \item \rcode{R071} (Dualidade-Transformacao) é o único R-código presente
+    em todos os 6 exames;
+  \item \rcode{R069} (Variacional-Principio) e \rcode{R065}
+    (Simetria-Conservacao) aparecem em 5 dos 6 exames, confirmando seu
+    papel central na física teórica;
+  \item A EUF 2014-2 é a única que mobiliza \rcode{R008}
+    (Deducao-Formal), \rcode{R010} (Decomposicao-Modular),
+    \rcode{R070} (Limite-Assintotico) e \rcode{R109}
+    (Espectral-Operadores);
+  \item Os exames 2015-1, 2015-2 e 2016-1 incorporam R-codes de
+    Mecânica Quântica Aplicada (R183, R201, R202), ausentes na
+    EUF 2014-2.
+\end{itemize}
+
+\subsection{Padrões Emergentes}
+
+A análise das 10 questões revela três padrões importantes:
+
+\begin{enumerate}
+  \item \textbf{Predomínio de Raciocínios Físico-Matemáticos (Cat. XIII):}
+    70\% das ocorrências pertencem a esta categoria, refletindo a natureza
+    essencialmente quantitativa e matemática da física universitária.
+    Destacam-se \rcode{R069} (Variacional-Principio) com 5 ocorrências
+    e \rcode{R065} (Simetria-Conservacao) com 4.
+
+  \item \textbf{Complementaridade R065-R069:} Em 4 questões (Q01, Q02, Q07),
+    os raciocínios de Simetria-Conservacao e Variacional-Principio
+    aparecem como par primário-secundário. Esta dupla representa o núcleo
+    metodológico da física: identificar simetrias $\to$ formular
+    funcional/variacional $\to$ extrair equações.
+
+  \item \textbf{Bloom concentrado em Aplicar (60\%):} A predominância do
+    nível ``Aplicar'' indica que a EUF 2014-2 privilegia a aplicação de
+    métodos consagrados a problemas específicos, em vez de demandar
+    análise crítica ou síntese criativa.
+\end{enumerate}
+
+% ============================================================
+\section{Conclusão do Catálogo}
+% ============================================================
+
+O catálogo aqui apresentado documenta a classificação taxonômica completa
+da EUF 2014-2, estabelecendo uma ponte entre o conteúdo programático do
+exame e a Taxonomia 350 de Raciocínios Científicos. As 10 questões
+mobilizam 9 tipos de raciocínio em 5 categorias, com forte concentração
+na Categoria XIII (Físico-Matemáticos).
+
+Esta classificação alimenta o dataset de 150 questões do projeto de
+mestrado, permitindo análises estatísticas, correlações entre áreas e
+raciocínios, e a validação do modelo taxonômico em domínios da física
+teórica.
+
+\medskip
+\noindent\textbf{Nota:} A análise completa dos 6 exames EUF e 3 exames ENA
+(totalizando 150 questões) encontra-se no relatório
+\texttt{analise\_mapa\_taxonomico.pdf}, que inclui:
+\begin{itemize}
+  \item Correlações $\chi^2$ e V de Cramer entre área, R-code e Bloom;
+  \item Comparação detalhada EUF 2014-2 vs. demais exames;
+  \item Distribuição de 32 R-codes em 5 categorias taxonômicas;
+  \item Classificação Bloom completa das 150 questões.
+\end{itemize}
+
+% ============================================================
+% APÊNDICE: GLOSSÁRIO DE R-CODES
+% ============================================================
+\newpage
+\appendix
+\section{Glossário de R-Codes da Taxonomia 350}
+
+\small
+\begin{longtable}{@{}p{2.2cm}p{3.5cm}p{2.5cm}p{5.5cm}@{}}
+\caption{Glossário dos 9 R-codes utilizados na EUF 2014-2}
+\label{tab:glossario}\\
+\toprule
+\textbf{Código} & \textbf{Nome} & \textbf{Categoria} & \textbf{Descrição} \\
+\midrule
+\endfirsthead
+
+\caption[]{Glossário (continuação)}\\
+\toprule
+\textbf{Código} & \textbf{Nome} & \textbf{Categoria} & \textbf{Descrição} \\
+\midrule
+\endhead
+
+\bottomrule
+\endfoot
+
+\rcode{R008} & Deducao-Formal-Passo-a-Passo
+  & I. Lógico-Dedutivos
+  & Encadeamento lógico-dedutivo onde cada passo segue necessariamente
+    do anterior por regras de inferência explícitas. \\
+\rcode{R010} & Decomposicao-Modular
+  & II. Analítico-Estruturais
+  & Fragmentação de um sistema complexo em subsistemas independentes
+    que podem ser analisados separadamente. \\
+\rcode{R054} & Otimizacao-Restrita
+  & VII. Econômico-Decisórios
+  & Busca por extremos (máximo/mínimo) de uma função sujeita a
+    vínculos ou restrições. \\
+\rcode{R065} & Simetria-Conservacao
+  & XIII. Físico-Matemáticos
+  & Identificação de simetrias no sistema para derivar leis de
+    conservação (teorema de Noether) e simplificar equações. \\
+\rcode{R066} & Dimensional-Analitico
+  & XIII. Físico-Matemáticos
+  & Análise de relações entre grandezas via suas dimensões físicas
+    fundamentais (massa, comprimento, tempo, etc.). \\
+\rcode{R069} & Variacional-Principio
+  & XIII. Físico-Matemáticos
+  & Formulação de problemas físicos via princípios de extremo (mínima
+    ação, Hamilton, Euler-Lagrange) e funcionais. \\
+\rcode{R070} & Limite-Assintotico
+  & XIII. Físico-Matemáticos
+  & Análise do comportamento de funções ou sistemas em regimes
+    extremos ($x\to 0$, $x\to\infty$, $N\to\infty$, etc.). \\
+\rcode{R071} & Dualidade-Transformacao
+  & XIII. Físico-Matemáticos
+  & Transformação entre representações matemáticas ou referenciais
+    (Lorentz, Fourier, coordenadas) para simplificar problemas. \\
+\rcode{R109} & Espectral-Operadores
+  & XIV. Lógica Matemática Avançada
+  & Determinação de autovalores e autovetores de operadores lineares
+    para caracterizar sistemas dinâmicos. \\
+\bottomrule
+\end{longtable}
+
+\end{document}

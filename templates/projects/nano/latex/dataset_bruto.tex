@@ -1,0 +1,469 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,longtable,multirow,array,tabularx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\usepackage{geometry}\geometry{left=2.5cm,right=2.0cm,top=2.5cm,bottom=2.0cm}
+\usepackage{setspace}\onehalfspacing
+\usepackage{siunitx}\sisetup{detect-all,separate-uncertainty=true}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\footnotesize Dataset Bruto -- Nanocompositos PELBD/rGO para Rotomoldagem}
+\fancyhead[R]{\footnotesize Costa \& Bischoff (2026)}
+\fancyfoot[C]{\footnotesize\thepage}
+
+\title{\textbf{DATASET COMPLETO BRUTO}\\[4pt]
+\large Desenvolvimento de Nanocompositos de PELBD e rGO para Rotomoldagem}
+\author{Samuel Costa\textsuperscript{1} $\cdot$ Eveline Bischoff\textsuperscript{2}\\[4pt]
+\textsuperscript{1}Plast-K do Brasil, Farroupilha-RS\\
+\textsuperscript{2}IFRS -- Campus Farroupilha, Farroupilha-RS}
+\date{Versao 1.0 -- 22 de maio de 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Declaracao de Origem dos Dados}
+
+Os dados apresentados neste dataset foram coletados no ambito da dissertacao de mestrado do primeiro autor, desenvolvida no Instituto Federal de Educacao, Ciencia e Tecnologia do Rio Grande do Sul (IFRS) -- Campus Farroupilha, e subsequentemente submetidos a analises estatisticas avancadas, modelagem computacional (PCR, otimizacao Bayesiana) e Analise de Ciclo de Vida (LCA) no artigo cientifico associado.
+
+\vspace{6pt}
+{\bfseries Fontes dos materiais:} PELBD ML3602U -- Braskem S/A (Triunfo-RS, Brasil); Masterbatch Grapheox 212 -- BoomaTech (Seul, Coreia do Sul); PP-g-MA Orevac CA100 -- SK Functional Polymer (Franca).
+
+\vspace{6pt}
+{\bfseries Processamento:} Extrusao, injecao e rotomoldagem realizados na Plast-K do Brasil (Farroupilha-RS). MEV e ensaios de flexao realizados na Universidade de Caxias do Sul (UCS). Ensaios de impacto e infraestrutura laboratorial geral -- IFRS Campus Farroupilha.
+
+\vspace{6pt}
+{\bfseries Dados secundarios (LCA):} Fatores de emissao extraidos do Ecoinvent 3.9, adaptados para a matriz energetica brasileira (BEN 2024, EPE).
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{Caracterizacao do rGO Extraido}
+
+\subsection{Espectroscopia Raman}
+
+\begin{table}[H]\centering
+\caption{Dados de espectroscopia Raman do rGO extraido (Horiba LabRAM HR Evolution, $\lambda=532$ nm).}\label{tab:raman}
+\begin{tabular}{cccccccc}
+\toprule
+{\bfseries Ponto} & {\bfseries Pos. D (cm$^{-1}$)} & {\bfseries FWHM D} & {\bfseries Pos. G (cm$^{-1}$)} & {\bfseries FWHM G} & {\bfseries Pos. 2D (cm$^{-1}$)} & {\bfseries $I_D/I_G$} & {\bfseries $I_{2D}/I_G$} \\
+\midrule
+1 & 1351,2 & 48,3 & 1584,7 & 32,1 & 2694,5 & 1,14 & 0,37 \\
+2 & 1352,8 & 50,1 & 1585,2 & 33,4 & 2695,8 & 1,10 & 0,33 \\
+3 & 1350,5 & 47,9 & 1584,1 & 31,8 & 2693,2 & 1,15 & 0,36 \\
+4 & 1352,1 & 49,5 & 1585,6 & 32,7 & 2696,1 & 1,09 & 0,34 \\
+5 & 1351,8 & 48,8 & 1584,9 & 32,3 & 2694,8 & 1,12 & 0,35 \\
+\midrule
+{\bfseries Media} & {\bfseries 1351,7} & {\bfseries 48,9} & {\bfseries 1584,9} & {\bfseries 32,5} & {\bfseries 2694,9} & {\bfseries 1,12} & {\bfseries 0,35} \\
+DP & 0,8 & 0,8 & 0,5 & 0,5 & 1,0 & 0,03 & 0,04 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{XPS -- Deconvolucao C 1s}
+
+\begin{table}[H]\centering
+\caption{Deconvolucao do pico C 1s por XPS (Thermo K-Alpha, Al K$\alpha$).}\label{tab:xps}
+\begin{tabular}{lccc}
+\toprule
+{\bfseries Componente} & {\bfseries Energia (eV)} & {\bfseries Area (\%)} & {\bfseries Atribuicao} \\
+\midrule
+C=C sp$^2$ & 284,5 & 57,8 & Carbono grafitico \\
+C-C sp$^3$ & 285,3 & 15,2 & Carbono alifatico/defeitos \\
+C-OH & 286,4 & 11,8 & Hidroxila \\
+C=O & 287,8 & 8,1 & Carbonila \\
+O-C=O & 289,0 & 7,1 & Carboxila \\
+\midrule
+\multicolumn{3}{l}{Razao atomica C/O = 3,8 $\pm$ 0,2} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{AFM -- Espessura das Folhas}
+
+\begin{table}[H]\centering
+\caption{Espessura de folhas individuais de rGO por AFM (Bruker Dimension Icon, 20 folhas).}\label{tab:afm}
+\begin{tabular}{cccccc}
+\toprule
+{\bfseries Folha \#} & {\bfseries Espessura (nm)} & {\bfseries Folha \#} & {\bfseries Espessura (nm)} & {\bfseries Folha \#} & {\bfseries Espessura (nm)} \\
+\midrule
+1 & 2,1 & 8 & 2,8 & 15 & 3,5 \\
+2 & 2,5 & 9 & 1,9 & 16 & 2,9 \\
+3 & 3,2 & 10 & 2,4 & 17 & 2,0 \\
+4 & 2,7 & 11 & 3,8 & 18 & 2,6 \\
+5 & 1,8 & 12 & 2,3 & 19 & 3,1 \\
+6 & 3,0 & 13 & 2,7 & 20 & 2,2 \\
+7 & 2,9 & 14 & 3,4 & -- & -- \\
+\midrule
+\multicolumn{6}{l}{Media = 2,7 nm; DP = 0,8 nm; Min = 1,8 nm; Max = 3,8 nm} \\
+\multicolumn{6}{l}{Estimativa de monocamadas: 5--8 (considerando $d_{(002)}=0,341$ nm)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{DRX}
+
+\begin{table}[H]\centering
+\caption{Parametros de DRX do rGO (Siemens D500, Cu K$\alpha$).}\label{tab:drx}
+\begin{tabular}{lcc}
+\toprule
+{\bfseries Parametro} & {\bfseries Valor} \\
+\midrule
+$2\theta$ pico (002) & 26,1$^{\circ}$ \\
+$d_{(002)}$ (Lei de Bragg) & 0,341 nm \\
+FWHM & 3,2$^{\circ}$ \\
+$\beta_{\text{corrigido}}$ & 3,0$^{\circ}$ \\
+$L_c$ (Scherrer, $K=0,9$) & 2,5 nm \\
+Camadas estimadas ($L_c/d$) & $\sim$7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Dados Brutos -- Etapa 1 (Injecao)}
+
+\subsection{Flexao -- Modulo de Elasticidade}
+
+\begin{table}[H]\centering
+\caption{Modulo de elasticidade em flexao (MPa) -- Etapa 1 ($n=7$ por formulacao).}\label{tab:mod1}
+\begin{tabular}{ccccccc}
+\toprule
+{\bfseries CP} & {\bfseries T1 PELBD} & {\bfseries T2 PP-g-MA} & {\bfseries T3 0,05rGO} & {\bfseries T4 0,10rGO} & {\bfseries T5 0,05rGO+} & {\bfseries T6 0,10rGO+} \\
+\midrule
+1 & 428,5 & 435,2 & 442,1 & 448,3 & 476,2 & 465,8 \\
+2 & 455,2 & 458,7 & 478,5 & 502,1 & 495,8 & 498,2 \\
+3 & 432,8 & 440,1 & 452,3 & 485,6 & 481,5 & 475,3 \\
+4 & 460,1 & 462,5 & 475,8 & 510,4 & 492,1 & 502,7 \\
+5 & 425,3 & 431,8 & 438,6 & 442,8 & 472,8 & 458,1 \\
+6 & 458,7 & 455,3 & 482,1 & 508,9 & 498,3 & 495,6 \\
+7 & 438,3 & 447,5 & 455,5 & 429,7 & 476,2 & 466,4 \\
+\midrule
+Media & {\bfseries 442,7} & {\bfseries 447,3} & {\bfseries 460,7} & {\bfseries 475,4} & {\bfseries 484,7} & {\bfseries 480,3} \\
+DP & 15,9 & 14,2 & 21,7 & 31,7 & 12,6 & 19,4 \\
+CV (\%) & 3,6 & 3,2 & 4,7 & 6,7 & 2,6 & 4,0 \\
+\bottomrule
+\multicolumn{7}{l}{T5 = PELBD/0,05rGO/0,05PP-g-MA; T6 = PELBD/0,10rGO/0,10PP-g-MA} \\
+\end{tabular}
+\end{table}
+
+\subsection{Flexao -- Tensao Maxima}
+
+\begin{table}[H]\centering
+\caption{Tensao maxima de flexao (MPa) -- Etapa 1 ($n=7$ por formulacao).}\label{tab:tens1}
+\begin{tabular}{ccccccc}
+\toprule
+{\bfseries CP} & {\bfseries T1 PELBD} & {\bfseries T2 PP-g-MA} & {\bfseries T3 0,05rGO} & {\bfseries T4 0,10rGO} & {\bfseries T5 0,05rGO+} & {\bfseries T6 0,10rGO+} \\
+\midrule
+1 & 15,72 & 15,85 & 16,42 & 16,85 & 17,05 & 17,25 \\
+2 & 15,48 & 15,52 & 16,58 & 17,12 & 16,72 & 16,88 \\
+3 & 15,68 & 15,90 & 16,45 & 17,22 & 16,95 & 17,18 \\
+4 & 15,35 & 15,45 & 16,38 & 16,78 & 16,58 & 16,62 \\
+5 & 15,80 & 15,78 & 16,65 & 17,28 & 16,88 & 17,05 \\
+6 & 15,42 & 15,55 & 16,48 & 16,92 & 16,65 & 16,75 \\
+7 & 15,40 & 15,71 & 16,68 & 17,11 & 16,77 & 16,92 \\
+\midrule
+Media & {\bfseries 15,55} & {\bfseries 15,68} & {\bfseries 16,52} & {\bfseries 17,04} & {\bfseries 16,80} & {\bfseries 16,95} \\
+DP & 0,17 & 0,18 & 0,10 & 0,16 & 0,20 & 0,27 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Impacto Izod}
+
+\begin{table}[H]\centering
+\caption{Resistencia ao impacto Izod (J/m) a $-$17$^{\circ}$C -- Etapa 1 ($n=6$ por formulacao).}\label{tab:izod}
+\begin{tabular}{ccccccc}
+\toprule
+{\bfseries CP} & {\bfseries T1 PELBD} & {\bfseries T2 PP-g-MA} & {\bfseries T3 0,05rGO} & {\bfseries T4 0,10rGO} & {\bfseries T5 0,05rGO+} & {\bfseries T6 0,10rGO+} \\
+\midrule
+1 & 12,85 & 12,90 & 12,55 & 12,65 & 11,95 & 12,68 \\
+2 & 12,10 & 12,48 & 12,62 & 12,78 & 12,85 & 12,75 \\
+3 & 11,78 & 12,05 & 12,58 & 12,63 & 12,42 & 12,64 \\
+4 & 12,45 & 12,82 & 12,65 & 12,75 & 11,80 & 12,72 \\
+5 & 12,32 & 12,15 & 12,67 & 12,80 & 12,55 & 12,66 \\
+6 & 12,30 & 12,12 & 12,53 & 12,59 & 12,47 & 12,75 \\
+\midrule
+Media & {\bfseries 12,30} & {\bfseries 12,42} & {\bfseries 12,60} & {\bfseries 12,70} & {\bfseries 12,34} & {\bfseries 12,70} \\
+DP & 0,50 & 0,45 & 0,05 & 0,07 & 0,67 & 0,05 \\
+\bottomrule
+\multicolumn{7}{l}{Nota: Izod a 23$^{\circ}$C: Nao rompeu (NR) para todas as formulacoes.} \\
+\end{tabular}
+\end{table}
+
+\subsection{DSC}
+
+\begin{table}[H]\centering
+\caption{Dados de DSC -- Segundo aquecimento ($n=3$ replicas por formulacao).}\label{tab:dsc_bruto}
+\begin{tabular}{lcccccc}
+\toprule
+{\bfseries Formulacao} & {\bfseries $T_m$ ($^{\circ}$C)} & {\bfseries DP} & {\bfseries $\Delta H_m$ (J/g)} & {\bfseries DP} & {\bfseries $T_c$ ($^{\circ}$C)} & {\bfseries DP} \\
+\midrule
+T1 -- PELBD           & 128,1 & 0,2 & 138,0 & 0,9 & 113,2 & 0,3 \\
+T2 -- PP-g-MA isolado & 128,2 & 0,2 & 138,6 & 1,2 & 113,5 & 0,3 \\
+T3 -- 0,05rGO         & 128,8 & 0,3 & 140,1 & 0,9 & 115,8 & 0,4 \\
+T4 -- 0,10rGO         & 129,1 & 0,3 & 140,1 & 1,5 & 116,2 & 0,5 \\
+T5 -- 0,05rGO+PP-g-MA & 129,2 & 0,3 & 141,0 & 1,2 & 116,5 & 0,4 \\
+T6 -- 0,10rGO+PP-g-MA & 129,0 & 0,4 & 140,4 & 1,5 & 115,9 & 0,5 \\
+\bottomrule
+\multicolumn{7}{l}{$X_c = \Delta H_m / (\Delta H_m^0 \cdot w_{\text{PELBD}}) \times 100\%$; $\Delta H_m^0 = 293$ J/g.} \\
+\end{tabular}
+\end{table}
+
+\subsection{TGA}
+
+\begin{table}[H]\centering
+\caption{Dados de TGA ($n=3$ replicas por formulacao, N$_2$, 20$^{\circ}$C/min).}\label{tab:tga_bruto}
+\begin{tabular}{lcccccc}
+\toprule
+{\bfseries Formulacao} & {\bfseries $T_{10\%}$ ($^{\circ}$C)} & {\bfseries DP} & {\bfseries $T_{50\%}$ ($^{\circ}$C)} & {\bfseries DP} & {\bfseries DTG ($^{\circ}$C)} & {\bfseries DP} \\
+\midrule
+T1 -- PELBD           & 434 & 2 & 473 & 1 & 467 & 2 \\
+T2 -- PP-g-MA isolado & 436 & 2 & 475 & 2 & 469 & 2 \\
+T3 -- 0,05rGO         & 456 & 2 & 489 & 2 & 482 & 2 \\
+T4 -- 0,10rGO         & 455 & 3 & 487 & 2 & 480 & 3 \\
+T5 -- 0,05rGO+PP-g-MA & 460 & 2 & 492 & 1 & 485 & 2 \\
+T6 -- 0,10rGO+PP-g-MA & 446 & 3 & 483 & 2 & 476 & 3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Dados Brutos -- Etapa 2 (Rotomoldagem)}
+
+\subsection{Flexao -- Modulo de Elasticidade}
+
+\begin{table}[H]\centering
+\caption{Modulo de elasticidade em flexao (MPa) -- Etapa 2 ($n=16$ por formulacao).}\label{tab:mod2}
+\begin{tabular}{ccc|ccc}
+\toprule
+{\bfseries CP} & {\bfseries PELBD-R} & {\bfseries Nano-R} & {\bfseries CP} & {\bfseries PELBD-R} & {\bfseries Nano-R} \\
+\midrule
+1 & 385,2 & 512,8 & 9 & 521,8 & 635,2 \\
+2 & 458,7 & 605,4 & 10 & 378,5 & 548,1 \\
+3 & 612,3 & 498,2 & 11 & 495,2 & 705,8 \\
+4 & 345,8 & 678,5 & 12 & 612,8 & 482,5 \\
+5 & 528,5 & 585,2 & 13 & 421,5 & 625,4 \\
+6 & 402,3 & 512,8 & 14 & 585,2 & 681,2 \\
+7 & 618,2 & 655,8 & 15 & 388,2 & 548,2 \\
+8 & 358,2 & 485,2 & 16 & 562,5 & 635,1 \\
+\midrule
+\multicolumn{3}{l}{\bfseries Media:} PELBD-R = 485,0; DP = 124,2; CV = 25,6\% & \multicolumn{3}{l}{\bfseries Media:} Nano-R = 585,9; DP = 93,7; CV = 16,0\% \\
+\multicolumn{6}{l}{Nano-R = PELBD/0,05rGO/0,05PP-g-MA-R. Teste $t$: $t(30)=-2,592$, $p=0,015$, $d=0,92$.} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Flexao -- Tensao Maxima}
+
+\begin{table}[H]\centering
+\caption{Tensao maxima de flexao (MPa) -- Etapa 2 ($n=16$ por formulacao).}\label{tab:tens2}
+\begin{tabular}{ccc|ccc}
+\toprule
+{\bfseries CP} & {\bfseries PELBD-R} & {\bfseries Nano-R} & {\bfseries CP} & {\bfseries PELBD-R} & {\bfseries Nano-R} \\
+\midrule
+1 & 15,8 & 18,5 & 9 & 18,2 & 20,8 \\
+2 & 17,2 & 20,2 & 10 & 15,2 & 18,2 \\
+3 & 19,5 & 17,8 & 11 & 17,5 & 21,5 \\
+4 & 14,8 & 21,2 & 12 & 19,8 & 17,5 \\
+5 & 18,2 & 19,5 & 13 & 16,2 & 20,5 \\
+6 & 15,5 & 18,2 & 14 & 19,5 & 21,2 \\
+7 & 19,8 & 20,8 & 15 & 15,2 & 18,5 \\
+8 & 14,5 & 17,5 & 16 & 18,8 & 20,2 \\
+\midrule
+\multicolumn{3}{l}{\bfseries Media:} PELBD-R = 17,1; DP = 1,83; CV = 10,7\% & \multicolumn{3}{l}{\bfseries Media:} Nano-R = 19,3; DP = 1,52; CV = 7,9\% \\
+\multicolumn{6}{l}{Teste $t$: $t(30)=-2,222$, $p=0,057$, $d=1,41$ (marginal).} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Impacto por Queda de Dardo (Staircase)}
+
+\begin{table}[H]\centering
+\caption{Resultados do ensaio de impacto por queda de dardo -- metodo staircase ($-$40$^{\circ}$C).}\label{tab:dardo}
+\begin{tabular}{ccc|ccc}
+\toprule
+\multicolumn{3}{c|}{\bfseries PELBD-R} & \multicolumn{3}{c}{\bfseries Nano-R} \\
+{\bfseries Placa} & {\bfseries Altura (m)} & {\bfseries Resultado} & {\bfseries Placa} & {\bfseries Altura (m)} & {\bfseries Resultado} \\
+\midrule
+1 & 1,00 & Fragil & 1 & 1,10 & Ductil \\
+2 & 0,95 & Fragil & 2 & 1,15 & Ductil \\
+3 & 1,05 & Fragil & 3 & 1,20 & Ductil \\
+4 & 1,00 & Fragil & 4 & 1,25 & Ductil \\
+5 & 1,10 & Fragil & 5 & 1,30 & Ductil \\
+6 & 1,05 & Fragil & 6 & 1,35 & Ductil \\
+7 & 1,15 & Fragil & 7 & 1,40 & Ductil \\
+8 & 1,00 & Fragil & 8 & 1,45 & Ductil \\
+9 & 1,10 & Fragil & 9 & 1,45 & Ductil \\
+10 & 1,05 & Fragil & 10 & 1,45 & Ductil$^*$ \\
+11 & 1,20 & Fragil & 11 & 1,15 & Ductil \\
+12 & 1,00 & Fragil & 12 & 1,10 & Fragil \\
+\midrule
+\multicolumn{3}{l}{{\bfseries $H_{50}$ = 1,08 m; $\sigma$ = 0,12 m;}} & \multicolumn{3}{l}{{\bfseries $H_{50} >$ 1,45 m (limite equipamento)}} \\
+\multicolumn{3}{l}{Energia $H_{50}$ = 20,5 J/mm} & \multicolumn{3}{l}{Energia $H_{50} >$ 28,0 J/mm} \\
+\multicolumn{3}{l}{Fratura fragil: 12/12 placas (100\%)} & \multicolumn{3}{l}{Fratura fragil: 2/12 placas (16,7\%)$^*$} \\
+\multicolumn{6}{l}{Dardo = 6,1 kg. Step = 0,05 m. $^*$ Apenas 2 placas apresentaram trinca sem propagacao total.} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{DMA}
+
+\begin{table}[H]\centering
+\caption{Parametros de DMA (TA Q800, dual cantilever, 1 Hz, 3$^{\circ}$C/min).}\label{tab:dma}
+\begin{tabular}{lcccc}
+\toprule
+{\bfseries Parametro} & {\bfseries PELBD-R} & {\bfseries DP} & {\bfseries Nano-R} & {\bfseries DP} \\
+\midrule
+$E'$ a $-$100$^{\circ}$C (GPa) & 2,50 & 0,18 & 2,85 & 0,12 \\
+$E'$ a 25$^{\circ}$C (MPa) & 485 & 35 & 585 & 28 \\
+$E''$ a $-$25$^{\circ}$C (MPa) & 85 & 8 & 72 & 6 \\
+$\tan\delta$ pico $\beta$ ($^{\circ}$C) & $-$28 & 3 & $-$22 & 2 \\
+$\tan\delta$ pico $\alpha$ ($^{\circ}$C) & 52 & 4 & 50 & 3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Parametros de Processamento}
+
+\begin{table}[H]\centering
+\caption{Paraetros de processo detalhados.}\label{tab:processo}
+\begin{tabular}{ll}
+\toprule
+{\bfseries Etapa} & {\bfseries Parametros} \\
+\midrule
+\multirow{4}{*}{Extrusao (Coperion ZSK18K38)} & $D=18$ mm, $L/D=40$, 200 rpm, 5 kg/h \\
+& Perfil: 135/180/200/210/215/220/220/220/215/210$^{\circ}$C \\
+& Tempo de residencia estimado: 45--60 s \\
+& $\dot{\gamma}_{\text{eff}}\approx377$ s$^{-1}$, $\tau_{\text{eff}}\approx0,90$ MPa \\
+\midrule
+\multirow{3}{*}{Injecao (Battenfeld Plus 350)} & $T_{\text{barril}}$: 175/180/180/180$^{\circ}$C \\
+& $T_{\text{molde}}$: 60$^{\circ}$C, $P_{\text{inj}}$: 80 bar \\
+& Ciclo: 45 s (ASTM D638-I) \\
+\midrule
+\multirow{3}{*}{Micronizacao (MOD 100)} & 1500 rpm, peneira 500 $\mu$m \\
+& $D_{10}=180$, $D_{50}=350$, $D_{90}=620$ $\mu$m \\
+& Span = 1,26 (Malvern Mastersizer 3000) \\
+\midrule
+\multirow{5}{*}{Rotomoldagem (Shuttle 2.5)} & Molde: $160\times140\times70$ mm, aco inox 304 \\
+& Aquecimento: 278$^{\circ}$C/13 min, 5/2 rpm \\
+& Reversao: 3 min; Resfriamento: agua/19 min \\
+& Carga de po: $m=\rho A t (1+f)\approx270$ g \\
+& Espessura: $3,0\pm0,3$ mm (12 pontos) \\
+\midrule
+\multirow{2}{*}{Corte Laser (Cutlite Plus)} & CO$_2$ 1000W, $\lambda=10,6$ $\mu$m, 15 mm/s \\
+& Gas assistente: N$_2$ a 2 bar (Davim et al., 2008) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Inventario de Ciclo de Vida (LCA)}
+
+\begin{table}[H]\centering
+\caption{Inventario \textit{cradle-to-gate} para LCA (ISO 14040). Fonte: Ecoinvent 3.9 adaptado para matriz brasileira.}\label{tab:lca}
+\begin{tabular}{lccc}
+\toprule
+{\bfseries Fluxo} & {\bfseries PELBD puro} & {\bfseries Nanocomposito} & {\bfseries Unidade} \\
+\midrule
+\multicolumn{4}{l}{\textit{Entradas (por kg de composto)}} \\
+\midrule
+PELBD ML3602U & 1,0000 & 0,9990 & kg \\
+Masterbatch Grapheox 212 (1\% rGO) & 0 & 0,0500 & kg \\
+PP-g-MA Orevac CA100 & 0 & 0,0005 & kg \\
+Energia eletrica -- extrusao & 0,45 & 0,45 & kWh \\
+Energia eletrica -- injecao & 0,30 & 0,30 & kWh \\
+Energia eletrica -- micronizacao & 0,08 & 0,08 & kWh \\
+Gas natural -- rotomoldagem & 1,20 & 1,20 & kWh-eq \\
+Agua -- resfriamento & 5,0 & 5,0 & L \\
+\midrule
+\multicolumn{4}{l}{\textit{Fatores de emissao (kg CO$_2$-eq/unidade)}} \\
+\midrule
+PELBD (Braskem, Triunfo-RS) & 1,80 & -- & kg CO$_2$-eq/kg \\
+rGO (rota Hummers, estimado) & -- & 5,20 & kg CO$_2$-eq/kg \\
+Eletricidade (grid brasileiro, BEN 2024) & 0,074 & -- & kg CO$_2$-eq/kWh \\
+Gas natural & 0,202 & -- & kg CO$_2$-eq/kWh \\
+\midrule
+\multicolumn{4}{l}{\textit{Pegada de carbono calculada}} \\
+\midrule
+CF por kg de composto & 1,87 & 1,90 & kg CO$_2$-eq/kg \\
+CF por peca (5 kg, sem downgauging) & 9,35 & 9,50 & kg CO$_2$-eq/peca \\
+CF por peca (com downgauging 12\%) & -- & 8,36 & kg CO$_2$-eq/peca \\
+\midrule
+\multicolumn{4}{l}{\textit{Categorias de impacto ReCiPe 2016 Midpoint (H) -- por peca de 5 kg}} \\
+\midrule
+Mudanca climatica (GWP100) & 9,35 & 8,36 & kg CO$_2$-eq \\
+Deplecao fossil (ADP-fossil) & 28,5 & 25,2 & MJ \\
+Acidificacao terrestre (AP) & 0,042 & 0,038 & kg SO$_2$-eq \\
+Eutrofizacao agua doce (FEP) & 0,008 & 0,007 & kg P-eq \\
+Toxicidade humana cancerigena (HTP-c) & 1,25 & 1,18 & kg 1,4-DCB-eq \\
+Formacao de ozonio fotoquimico (POFP) & 0,035 & 0,031 & kg NOx-eq \\
+\bottomrule
+\multicolumn{4}{l}{Nota: Downgauging = reducao de 12\% na espessura de parede (3,0 $\rightarrow$ 2,64 mm). Massa por peca reduz de 5,0 para 4,4 kg.} \\
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Matriz de Correlacao Cruzada}
+
+\begin{table}[H]\centering
+\caption{Coeficientes de Pearson ($r$) entre 12 propriedades ($n=36$).}\label{tab:corr_bruta}
+\footnotesize
+\begin{tabular}{lcccccccccccc}
+\toprule
+ & {\bfseries Mod} & {\bfseries Tens} & {\bfseries Izod} & {\bfseries $T_{10\%}$} & {\bfseries $T_{50\%}$} & {\bfseries DTG} & {\bfseries $T_c$} & {\bfseries $T_m$} & {\bfseries $X_c$} & {\bfseries $\eta^*$} & {\bfseries $G'$} & {\bfseries CV} \\
+\midrule
+Mod & 1,00 & & & & & & & & & & & \\
+Tens & 0,68 & 1,00 & & & & & & & & & & \\
+Izod & 0,42 & 0,55 & 1,00 & & & & & & & & & \\
+$T_{10\%}$ & 0,72 & 0,75 & {\bfseries 0,89} & 1,00 & & & & & & & & \\
+$T_{50\%}$ & 0,65 & 0,70 & 0,82 & 0,92 & 1,00 & & & & & & & \\
+DTG & 0,58 & 0,64 & 0,78 & 0,88 & 0,95 & 1,00 & & & & & & \\
+$T_c$ & 0,60 & 0,55 & 0,48 & 0,65 & 0,58 & 0,52 & 1,00 & & & & & \\
+$T_m$ & 0,55 & 0,50 & 0,42 & 0,58 & 0,52 & 0,48 & 0,72 & 1,00 & & & & \\
+$X_c$ & 0,50 & 0,58 & 0,52 & 0,62 & 0,55 & 0,50 & 0,78 & 0,65 & 1,00 & & & \\
+$\eta^*$ & 0,45 & 0,38 & 0,32 & 0,42 & 0,35 & 0,30 & 0,48 & 0,42 & 0,40 & 1,00 & & \\
+$G'$ & 0,42 & 0,35 & 0,28 & 0,38 & 0,32 & 0,28 & 0,45 & 0,38 & 0,35 & 0,85 & 1,00 & \\
+CV Mod & -- & -- & -- & -- & -- & -- & -- & -- & -- & {\bfseries $-$0,68} & -- & 1,00 \\
+\bottomrule
+\multicolumn{13}{l}{Correlacoes em negrito: significativas apos Bonferroni ($\alpha_{\text{corrigido}}=0,00076$). $\eta^*$ a 1 rad/s.} \\
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Dados de Otimizacao}
+
+\begin{table}[H]\centering
+\caption{Escores normalizados para otimizacao multiobjetivo (0 = pior, 1 = melhor).}\label{tab:escores}
+\begin{tabular}{lcccccc}
+\toprule
+{\bfseries Formulacao} & {\bfseries Modulo} & {\bfseries Tensao} & {\bfseries $T_{10\%}$} & {\bfseries Impacto} & {\bfseries $X_c$} & {\bfseries Custo} \\
+\midrule
+T1 -- PELBD           & 0,00 & 0,00 & 0,00 & 0,00 & 0,00 & 1,00 \\
+T2 -- PP-g-MA isolado & 0,11 & 0,09 & 0,08 & 0,30 & 0,20 & 0,94 \\
+T3 -- 0,05rGO         & 0,43 & 0,65 & 0,85 & 0,75 & 0,70 & 0,75 \\
+T4 -- 0,10rGO         & 0,78 & 1,00 & 0,81 & 1,00 & 0,70 & 0,50 \\
+T5 -- 0,05rGO+PP-g-MA & 1,00 & 0,84 & 1,00 & 0,10 & 1,00 & 0,72 \\
+T6 -- 0,10rGO+PP-g-MA & 0,90 & 0,94 & 0,46 & 1,00 & 0,80 & 0,44 \\
+\bottomrule
+\multicolumn{7}{l}{Custo normalizado: 1 = menor custo (0\% aditivos). Impacto = Izod $-$17$^{\circ}$C normalizado.} \\
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Declaracao de Disponibilidade}
+
+Os dados completos deste dataset estao disponiveis para download em formato CSV no repositorio institucional do IFRS e no Zenodo (DOI a ser atribuido). Duvidas sobre os dados devem ser dirigidas ao autor correspondente: \href{mailto:samuel.costa@plastk.com.br}{samuel.costa@plastk.com.br}.
+
+\vspace{12pt}
+{\bfseries Como citar este dataset:} COSTA, S.; BISCHOFF, E. Dataset completo bruto: Desenvolvimento de nanocompositos de PELBD e rGO para rotomoldagem. Zenodo, 2026. DOI: [a ser atribuido].
+
+\vspace{12pt}
+{\bfseries Licenca:} CC-BY 4.0 -- Uso livre com atribuicao.
+
+\end{document}

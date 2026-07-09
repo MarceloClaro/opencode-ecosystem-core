@@ -1,0 +1,806 @@
+% =============================================================================
+%  PROPOSTA DE FOMENTO À PESQUISA — CAPES / CNPq / FINEP / FAPESP
+%  Template LaTeX com formatação ABNT para agências brasileiras de fomento
+%  Compilar com: pdfLaTeX + biber (ou BibTeX) + pdfLaTeX × 2
+% =============================================================================
+%  ATENÇÃO: Substitua todos os campos entre [colchetes] pelos dados reais
+%  de sua proposta antes de compilar.
+% =============================================================================
+
+\documentclass[
+  12pt,
+  a4paper,
+  oneside,
+  english,      % ordem: idioma principal (último) = português
+  brazil
+]{article}
+
+% -----------------------------------------------------------------------------
+% PACOTES ESSENCIAIS — FORMATAÇÃO ABNT
+% -----------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lastpage}
+
+% Margens ABNT (3 cm superior/esquerda, 2 cm inferior/direita)
+\usepackage[
+  top=3cm,
+  bottom=2cm,
+  left=3cm,
+  right=2cm
+]{geometry}
+
+% Espaçamento 1,5 (ABNT)
+\usepackage{setspace}
+\onehalfspacing
+
+% Citações e referências no estilo ABNT
+\usepackage[alf]{abntex2cite}   % \cite{chave} → autor-data
+\usepackage{abntex2abrev}       % abreviações ABNT
+
+% Fonte Times New Roman ou similar (profissional)
+\usepackage{times}
+
+% -----------------------------------------------------------------------------
+% PACOTES DE APOIO
+% -----------------------------------------------------------------------------
+\usepackage[brazil]{babel}      % hifenização e títulos em português
+\usepackage{amsmath,amssymb}    % matemática
+\usepackage{graphicx}           % figuras
+\usepackage{color,xcolor}       % cores
+\usepackage{booktabs}           % tabelas profissionais (\toprule, \midrule…)
+\usepackage{array}              % colunas personalizadas em tabelas
+\usepackage{tabularx}           % tabelas com largura ajustável
+\usepackage{multirow}           % células que ocupam várias linhas
+\usepackage{enumitem}           % listas personalizadas
+\usepackage{hyperref}           % links internos e URLs
+\usepackage{parskip}            % espaço entre parágrafos (sem indent)
+\usepackage{float}              % posicionamento explícito [H]
+\usepackage{textcomp}           % símbolos diversos
+\usepackage{microtype}          % microtipografia
+
+% Configuração do hyperref (links pretos, sem borda)
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue,
+  breaklinks=true
+}
+
+% -----------------------------------------------------------------------------
+% COMANDOS AUXILIARES
+% -----------------------------------------------------------------------------
+\newcommand{\lorem}{%
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+  nisi ut aliquip ex ea commodo consequat.}
+
+% -----------------------------------------------------------------------------
+% INÍCIO DO DOCUMENTO
+% -----------------------------------------------------------------------------
+\begin{document}
+
+% =============================================================================
+% 1. CAPA / FOLHA DE ROSTO
+% =============================================================================
+\begin{titlepage}
+  \begin{center}
+
+    \vspace*{1.5cm}
+
+    % Logo da instituição (opcional — comente se não houver)
+    % \includegraphics[width=0.3\textwidth]{figuras/logo-instituicao.png}\\[1.5cm]
+
+    {\large\textbf{[Nome da Instituição]}}\\[0.3cm]
+    {\large\textbf{[Sigla da Instituição / Centro / Departamento]}}\\[2.0cm]
+
+    {\Large\textbf{[Nome Completo do Coordenador(a)]}}\\[0.3cm]
+    {\large[Titulação · Cargo · Programa de Pós-Graduação]}\\[2.0cm]
+
+    % TÍTULO EM PORTUGUÊS
+    \vbox{%
+      \hrule height 1.5pt
+      \vspace{0.4cm}
+      {\huge\textbf{[Título do Projeto em Português]}}\\[0.3cm]
+      {\large\textbf{[Título do Projeto em Português — subtítulo, se houver]}}
+      \vspace{0.4cm}
+      \hrule height 1.5pt
+    }
+
+    \vspace{1.0cm}
+
+    % TÍTULO EM INGLÊS
+    {\large\textit{[Project Title in English]}}\\[0.2cm]
+    {\large\textit{[Subtitle in English, if applicable]}}
+
+    \vfill
+
+    % DADOS DA CHAMADA
+    \begin{tabular}{rl}
+      \textbf{Agência de Fomento:} & [CAPES / CNPq / FINEP / FAPESP] \\
+      \textbf{Edital / Chamada:}   & [Número do Edital / Chamada] \\
+      \textbf{Linha de Pesquisa:}  & [Nome da Linha] \\
+      \textbf{Vigência:}           & [24] meses \\
+      \textbf{Valor Solicitado:}   & R\$ [XXX.XXX,XX] \\
+    \end{tabular}
+
+    \vspace{1.0cm}
+
+    % LOCAL E DATA
+    {\large[Cidade] — [UF]}\\[0.2cm]
+    {\large[Mês de 202X]}
+
+  \end{center}
+\end{titlepage}
+
+% =============================================================================
+% 2. IDENTIFICAÇÃO DO PROPONENTE E EQUIPE
+% =============================================================================
+\newpage
+\section*{Identificação do Proponente e da Equipe}
+\addcontentsline{toc}{section}{Identificação do Proponente e da Equipe}
+
+\begin{tabular}{ll}
+  \toprule
+  \textbf{Coordenador(a):} & [Nome completo] \\
+  \textbf{CPF:}            & [XXX.XXX.XXX-XX] \\
+  \textbf{Instituição:}    & [Sigla] \\
+  \textbf{Unidade:}        & [Centro / Instituto] \\
+  \textbf{Departamento:}   & [Nome do departamento] \\
+  \textbf{E-mail:}         & \href{mailto:[email@instituicao.br]}{[email@instituicao.br]} \\
+  \textbf{Telefone:}       & [+55 (XX) XXXXX-XXXX] \\
+  \textbf{ORCID:}          & \href{https://orcid.org/[XXXX-XXXX-XXXX-XXXX]}{[XXXX-XXXX-XXXX-XXXX]} \\
+  \textbf{Currículo Lattes:} & \href{http://lattes.cnpq.br/[XXXXXXXX]}{[http://lattes.cnpq.br/XXXXXXXX]} \\
+  \bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+
+\begin{tabularx}{\textwidth}{lX}
+  \toprule
+  \textbf{Equipe executora:} & \\
+  \midrule
+  [Nome do Pesquisador 1] & [Instituição] — [papel / responsabilidade] \\
+  [Nome do Pesquisador 2] & [Instituição] — [papel / responsabilidade] \\
+  [Nome do Aluno de Doutorado 1] & [Programa de PG] — [bolsista / voluntário] \\
+  [Nome do Aluno de Mestrado 1]  & [Programa de PG] — [bolsista / voluntário] \\
+  [Nome do Aluno de IC 1]  & [Curso de graduação] — [bolsista / voluntário] \\
+  % Acrescente linhas conforme necessário
+  \bottomrule
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\begin{tabularx}{\textwidth}{lX}
+  \toprule
+  \textbf{Colaboradores externos:} & \\
+  \midrule
+  [Nome do Colaborador 1] & [Instituição estrangeira ou nacional] \\
+  [Nome do Colaborador 2] & [Instituição estrangeira ou nacional] \\
+  \bottomrule
+\end{tabularx}
+
+% =============================================================================
+% 3. RESUMO (máx. 500 palavras)
+% =============================================================================
+\newpage
+\section*{Resumo}
+\addcontentsline{toc}{section}{Resumo}
+
+% --- INÍCIO DO RESUMO (PORTUGUÊS) ---
+\begin{otherlanguage}{brazil}
+\begin{abstract}
+  \noindent
+  [Redija o resumo do projeto em português, com no máximo 500 palavras.
+  O resumo deve contemplar: contextualização, problema de pesquisa,
+  objetivos, metodologia, resultados esperados e impacto.
+  Evite abreviaturas não consagradas e referências bibliográficas.]
+
+  \vspace{0.8cm}
+
+  \noindent\textbf{Palavras-chave:}
+  [palavra-chave 1]. [palavra-chave 2]. [palavra-chave 3].
+  [palavra-chave 4]. [palavra-chave 5].
+\end{abstract}
+\end{otherlanguage}
+
+% --- ABSTRACT (INGLÊS) ---
+\vspace{0.5cm}
+\begin{otherlanguage}{english}
+\begin{abstract}
+  \noindent
+  [Write the abstract in English, mirroring the Portuguese version.
+  Maximum 500 words. Include: background, research problem, objectives,
+  methodology, expected results, and impact.]
+
+  \vspace{0.8cm}
+
+  \noindent\textbf{Keywords:}
+  [keyword 1]. [keyword 2]. [keyword 3].
+  [keyword 4]. [keyword 5].
+\end{abstract}
+\end{otherlanguage}
+
+% =============================================================================
+% 4. INTRODUÇÃO E JUSTIFICATIVA
+% =============================================================================
+\newpage
+\section{Introdução e Justificativa}
+
+\subsection{Contextualização do Problema}
+
+[Descreva o contexto geral da pesquisa. Apresente o estado da arte,
+as lacunas identificadas na literatura e o problema concreto que a
+proposta pretende investigar. Cite trabalhos relevantes (atente-se
+ao formato autor-data das normas ABNT).]
+
+De acordo com \cite{autor2023}, \lorem{}
+
+\lorem{} \lorem{} Ademais, \citeonline{autor2020} demonstram que
+\lorem{}
+
+\subsection{Originalidade e Contribuição}
+
+[Explique o caráter inovador ou original da proposta. Destaque:
+\begin{itemize}
+  \item O que diferencia este projeto de estudos anteriores;
+  \item A abordagem teórico-metodológica original;
+  \item A contribuição para o avanço do conhecimento na área;
+  \item O potencial de gerar produtos, processos ou serviços inovadores.
+\end{itemize}]
+
+\subsection{Relevância Científica, Tecnológica e Social}
+
+[Discuta a relevância da pesquisa sob três dimensões:
+\begin{enumerate}[label=\textbf{\alph*)}]
+  \item \textbf{Científica:} avanço teórico, preenchimento de lacunas,
+        consolidação de linhas de pesquisa;
+  \item \textbf{Tecnológica:} inovação, patentes, transferência de
+        tecnologia, metodologias aplicáveis;
+  \item \textbf{Social:} impacto na qualidade de vida, políticas
+        públicas, formação de recursos humanos, inclusão produtiva.
+\end{enumerate}]
+
+\subsection{Alinhamento com a Chamada}
+
+[Demonstre como o projeto se alinha aos objetivos, linhas temáticas
+e prioridades do edital ao qual concorre.]
+
+% =============================================================================
+% 5. OBJETIVOS
+% =============================================================================
+\newpage
+\section{Objetivos}
+
+\subsection{Objetivo Geral}
+
+[Apresente, em um único parágrafo, o objetivo central do projeto.
+Inicie com um verbo no infinitivo: Analisar, Desenvolver, Investigar,
+Propor, Avaliar, Compreender\ldots]
+
+\begin{quote}
+  \textit{[Exemplo: Analisar o impacto da implementação de políticas
+  de economia circular na cadeia produtiva do setor de [setor] no
+  Nordeste brasileiro, propondo um modelo de avaliação multicritério
+  que integre indicadores ambientais, sociais e econômicos.]}
+\end{quote}
+
+\subsection{Objetivos Específicos}
+
+Os objetivos específicos do projeto são:
+
+\begin{enumerate}
+  \item [Primeiro objetivo específico — verbo no infinitivo];
+  \item [Segundo objetivo específico — verbo no infinitivo];
+  \item [Terceiro objetivo específico — verbo no infinitivo];
+  \item [Quarto objetivo específico — verbo no infinitivo];
+  \item [Quinto objetivo específico — verbo no infinitivo];
+  \item [Sexto objetivo específico — verbo no infinitivo].
+\end{enumerate}
+
+% =============================================================================
+% 6. METODOLOGIA
+% =============================================================================
+\newpage
+\section{Metodologia}
+
+\subsection{Classificação da Pesquisa}
+
+[Classifique a pesquisa quanto à:
+\begin{itemize}
+  \item Natureza: básica / aplicada;
+  \item Abordagem: quantitativa / qualitativa / mista;
+  \item Objetivos: exploratória / descritiva / explicativa;
+  \item Procedimentos: experimental / bibliográfica / documental /
+        estudo de caso / survey / quase-experimental / design science research.
+\end{itemize}]
+
+\subsection{Universo e Amostra}
+
+[Descreva:
+\begin{itemize}
+  \item População-alvo ou universo da pesquisa;
+  \item Critérios de inclusão e exclusão;
+  \item Técnica de amostragem e tamanho da amostra;
+  \item Cálculo do poder amostral, se aplicável.
+\end{itemize}]
+
+\subsection{Instrumentos e Procedimentos de Coleta de Dados}
+
+[Detalhe os instrumentos e procedimentos:
+
+\begin{description}
+  \item[Revisão sistemática:] bases consultadas (Scopus, Web of Science,
+        SciELO), string de busca, critérios de seleção, PRISMA.
+  \item[Experimentos:] ambientes, equipamentos, softwares, protocolos.
+  \item[Entrevistas / questionários:] roteiros, escalas validadas,
+        pré-teste, plataforma de aplicação (Google Forms, SurveyMonkey).
+  \item[Observação:] tipo (participante / não participante), registros.
+  \item[Dados secundários:] fontes (IBGE, IPEA, DataSUS, bases
+        patentárias), período de abrangência, variáveis selecionadas.
+\end{description}]
+
+\subsection{Procedimentos de Análise de Dados}
+
+[Especifique as técnicas analíticas:
+
+\begin{itemize}
+  \item \textbf{Análise quantitativa:} estatística descritiva,
+        testes de hipóteses (t de Student, ANOVA, qui-quadrado),
+        correlação (Pearson/Spearman), regressão linear/múltipla/logística,
+        análise multivariada, modelagem de equações estruturais,
+        séries temporais, machine learning (especificar algoritmo);
+  \item \textbf{Análise qualitativa:} análise de conteúdo (Bardin),
+        análise temática, análise do discurso, grounded theory,
+        softwares de apoio (NVivo, ATLAS.ti, MAXQDA);
+  \item \textbf{Análise mista:} triangulação de métodos,
+        validação cruzada.
+\end{itemize}]
+
+\subsection{Cronograma Metodológico}
+
+[Relacione cada objetivo específico à(s) técnica(s) metodológica(s)
+que serão empregadas para alcançá-lo. Vide Seção~\ref{sec:cronograma}
+para o cronograma detalhado.]
+
+\subsection{Aspectos Éticos}
+
+\begin{itemize}
+  \item \textbf{Pesquisa envolvendo seres humanos:} submissão ao Comitê
+        de Ética em Pesquisa (CEP) via Plataforma Brasil; cumprimento
+        da Resolução CNS nº 466/2012 e 510/2016;
+  \item \textbf{Pesquisa envolvendo animais:} submissão à Comissão de
+        Ética no Uso de Animais (CEUA);
+  \item \textbf{Propriedade intelectual:} observância da Lei nº
+        9.279/1996 (Propriedade Industrial) e Lei nº 10.973/2004
+        (Inovação Tecnológica);
+  \item \textbf{Confidencialidade:} garantia de anonimato dos
+        participantes, consentimento livre e esclarecido (TCLE),
+        guarda segura dos dados conforme LGPD (Lei nº 13.709/2018).
+\end{itemize}
+
+% =============================================================================
+% 7. RESULTADOS ESPERADOS E IMPACTO
+% =============================================================================
+\newpage
+\section{Resultados Esperados e Impacto}
+
+\subsection{Produtos Esperados}
+
+\begin{itemize}
+  \item \textbf{Artigos científicos:} submissão de [N] artigos a
+        periódicos indexados (Qualis A1 a B1) — estimativa de
+        publicações por ano;
+  \item \textbf{Dissertações e teses:} orientação de [N] trabalho(s)
+        de conclusão de curso (TCC), [N] dissertação(ões) de mestrado
+        e [N] tese(s) de doutorado;
+  \item \textbf{Patentes / Propriedade intelectual:} depósito de
+        pedido de patente de invenção, modelo de utilidade, registro
+        de software ou desenho industrial (especificar);
+  \item \textbf{Produtos técnico-tecnológicos:} softwares, bases de
+        dados, metodologias, protocolos, relatórios técnicos;
+  \item \textbf{Transferência de tecnologia:} acordos de cooperação,
+        licenciamento, spin-off acadêmica;
+  \item \textbf{Atividades de extensão:} cursos, workshops, eventos
+        científicos, divulgação científica (mídias sociais, blog,
+        entrevistas).
+\end{itemize}
+
+\subsection{Impacto Científico}
+
+[Descreva como os resultados contribuirão para:
+\begin{itemize}
+  \item Avanço do conhecimento teórico na área;
+  \item Formação de redes de pesquisa nacionais/internacionais;
+  \item Fortalecimento dos programas de pós-graduação envolvidos;
+  \item Aumento da produção científica qualificada.
+\end{itemize}]
+
+\subsection{Impacto Tecnológico e de Inovação}
+
+[Descreva:
+\begin{itemize}
+  \item Potencial de inovação e patenteamento;
+  \item Desenvolvimento de novas tecnologias ou processos;
+  \item Adensamento tecnológico de cadeias produtivas.
+\end{itemize}]
+
+\subsection{Impacto Social e Econômico}
+
+[Descreva os benefícios esperados para a sociedade:
+\begin{itemize}
+  \item Melhoria de indicadores sociais (saúde, educação, renda);
+  \item Subsídios para políticas públicas;
+  \item Geração de emprego e renda;
+  \item Formação de recursos humanos qualificados.
+\end{itemize}]
+
+\subsection{Indicadores de Acompanhamento e Avaliação}
+
+\begin{tabularx}{\textwidth}{lXX}
+  \toprule
+  \textbf{Indicador} & \textbf{Meta} & \textbf{Periodicidade} \\
+  \midrule
+  Artigos submetidos/publicados & [N] & Anual \\
+  Orientações concluídas        & [N] & Anual \\
+  Patentes depositadas          & [N] & Ao final \\
+  Participações em eventos      & [N] & Anual \\
+  Relatórios técnicos entregues & [N] & Semestral \\
+  \bottomrule
+\end{tabularx}
+
+% =============================================================================
+% 8. PLANO DE TRABALHO E CRONOGRAMA
+% =============================================================================
+\newpage
+\section{Plano de Trabalho e Cronograma}
+\label{sec:cronograma}
+
+\subsection{Etapas do Projeto}
+
+\begin{enumerate}
+  \item \textbf{[Etapa 1 — Exemplo: Revisão sistemática da literatura]}
+        \hfill \textit{[Meses 1–3]} \\
+        Descrição detalhada da etapa. Insumos, atividades e entregáveis
+        previstos.
+
+  \item \textbf{[Etapa 2 — Exemplo: Coleta de dados em campo]}
+        \hfill \textit{[Meses 4–10]} \\
+        Descrição detalhada da etapa. Insumos, atividades e entregáveis
+        previstos.
+
+  \item \textbf{[Etapa 3 — Exemplo: Análise dos dados]}
+        \hfill \textit{[Meses 11–16]} \\
+        Descrição detalhada da etapa. Insumos, atividades e entregáveis
+        previstos.
+
+  \item \textbf{[Etapa 4 — Exemplo: Redação e submissão de artigos]}
+        \hfill \textit{[Meses 17–22]} \\
+        Descrição detalhada da etapa. Insumos, atividades e entregáveis
+        previstos.
+
+  \item \textbf{[Etapa 5 — Exemplo: Relatório final e prestação de contas]}
+        \hfill \textit{[Meses 23–24]} \\
+        Descrição detalhada da etapa.
+\end{enumerate}
+
+\subsection{Cronograma Físico}
+
+\begin{table}[H]
+  \centering
+  \caption{Cronograma de execução do projeto (em meses).}
+  \label{tab:cronograma}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{4cm}*{12}{>{\centering\arraybackslash}p{0.9cm}}}
+    \toprule
+    \multirow{2}{*}{\textbf{Etapa / Atividade}} &
+      \multicolumn{12}{c}{\textbf{Mês}} \\
+      \cmidrule{2-13}
+      & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5}
+      & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10}
+      & \textbf{11} & \textbf{12} \\
+    \midrule
+    Etapa 1 — Revisão         & \checkmark & \checkmark & \checkmark & & & & & & & & & \\
+    Etapa 2 — Coleta          & & & & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & & \\
+    Etapa 3 — Análise         & & & & & & & & & \checkmark & \checkmark & \checkmark & \checkmark \\
+    % Adicione mais linhas para os meses 13-24 se a vigência for > 12 meses
+    \bottomrule
+  \end{tabularx}
+
+  \vspace{0.3cm}
+  {\small\textit{Nota:} O cronograma acima cobre os primeiros 12 meses.
+  O detalhamento completo (24 meses) encontra-se em anexo.}
+\end{table}
+
+% Caso prefira um cronograma completo (24 meses):
+\vspace{0.5cm}
+\begin{table}[H]
+  \centering
+  \caption{Cronograma completo (24 meses).}
+  \label{tab:cronograma-completo}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{3.5cm}*{24}{>{\centering\arraybackslash}p{0.4cm}}}
+    \toprule
+    \textbf{Atividade} &
+      \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5}
+      & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10}
+      & \textbf{11} & \textbf{12}
+      & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17}
+      & \textbf{18} & \textbf{19} & \textbf{20} & \textbf{21} & \textbf{22}
+      & \textbf{23} & \textbf{24} \\
+    \midrule
+    Revisão sist. & \checkmark & \checkmark & \checkmark & & & & & & & & & & & & & & & & & & & & & \\
+    Coleta dados  & & & & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & & & & & & & & & & & & & & \\
+    Análise       & & & & & & & & & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & & & & & & & & & \\
+    Redação arts. & & & & & & & & & & & & & & & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & & & & \\
+    Relat. final  & & & & & & & & & & & & & & & & & & & & & \checkmark & \checkmark & \checkmark & \checkmark \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+% =============================================================================
+% 9. ORÇAMENTO
+% =============================================================================
+\newpage
+\section{Orçamento}
+
+\subsection{Resumo do Orçamento}
+
+\begin{table}[H]
+  \centering
+  \caption{Resumo do orçamento solicitado por rubrica.}
+  \label{tab:resumo-orcamento}
+  \begin{tabularx}{\textwidth}{lXr}
+    \toprule
+    \textbf{Rubrica} & \textbf{Descrição} & \textbf{Valor (R\$)} \\
+    \midrule
+    Capital     & Equipamentos, material permanente         & [XX.XXX,XX] \\
+    Custeio     & Material de consumo, serviços de terceiros & [XX.XXX,XX] \\
+    Bolsas      & Bolsas de IC, Mestrado, Doutorado, Pós-Doc & [XX.XXX,XX] \\
+    Diárias     & Viagens e diárias nacionais                 & [XX.XXX,XX] \\
+    Taxas       & Taxas de publicação (APC), registro de patentes & [XX.XXX,XX] \\
+    \midrule
+    \textbf{Total} & & \textbf{R\$ [XXX.XXX,XX]} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Detalhamento — Capital}
+
+\begin{table}[H]
+  \centering
+  \caption{Detalhamento dos itens de capital.}
+  \label{tab:orcamento-capital}
+  \begin{tabularx}{\textwidth}{p{1.5cm}Xp{2cm}p{1.8cm}p{1.8cm}}
+    \toprule
+    \textbf{Item} & \textbf{Especificação} & \textbf{Justificativa} &
+    \textbf{Quant.} & \textbf{Valor unit.} \\
+    \midrule
+    1 & [Descrição do equipamento 1] & [Necessário para…] & [N] & [XX.XXX,XX] \\
+    2 & [Descrição do equipamento 2] & [Necessário para…] & [N] & [XX.XXX,XX] \\
+    3 & [Descrição do equipamento 3] & [Necessário para…] & [N] & [XX.XXX,XX] \\
+    \midrule
+    \multicolumn{4}{r}{\textbf{Subtotal — Capital}} & \textbf{[XX.XXX,XX]} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Detalhamento — Custeio}
+
+\begin{table}[H]
+  \centering
+  \caption{Detalhamento dos itens de custeio.}
+  \label{tab:orcamento-custeio}
+  \begin{tabularx}{\textwidth}{p{1.5cm}Xp{2cm}p{1.8cm}p{1.8cm}}
+    \toprule
+    \textbf{Item} & \textbf{Especificação} & \textbf{Justificativa} &
+    \textbf{Quant.} & \textbf{Valor unit.} \\
+    \midrule
+    1 & [Material de consumo 1] & [Necessário para…] & [N] & [XX.XXX,XX] \\
+    2 & [Serviço terceirizado 1] & [Necessário para…] & [N] & [XX.XXX,XX] \\
+    3 & [Passagens aéreas] & [Viagens para coleta/eventos] & [N] & [XX.XXX,XX] \\
+    4 & [Diárias] & [N diárias × valor] & [N] & [XX.XXX,XX] \\
+    \midrule
+    \multicolumn{4}{r}{\textbf{Subtotal — Custeio}} & \textbf{[XX.XXX,XX]} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Detalhamento — Bolsas}
+
+\begin{table}[H]
+  \centering
+  \caption{Solicitação de bolsas.}
+  \label{tab:orcamento-bolsas}
+  \begin{tabularx}{\textwidth}{lXp{2cm}p{1.8cm}p{1.8cm}}
+    \toprule
+    \textbf{Nível} & \textbf{Perfil} & \textbf{Duração (meses)} &
+    \textbf{Quant.} & \textbf{Valor total} \\
+    \midrule
+    Iniciação Científica & [Perfil do aluno] & [24] & [N] & [XX.XXX,XX] \\
+    Mestrado   & [Perfil do aluno] & [24] & [N] & [XX.XXX,XX] \\
+    Doutorado  & [Perfil do aluno] & [36] & [N] & [XX.XXX,XX] \\
+    Pós-Doutorado & [Perfil do bolsista] & [12] & [N] & [XX.XXX,XX] \\
+    \midrule
+    \multicolumn{4}{r}{\textbf{Subtotal — Bolsas}} & \textbf{[XX.XXX,XX]} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Plano de Aplicação}
+
+\begin{table}[H]
+  \centering
+  \caption{Distribuição do orçamento por ano.}
+  \label{tab:orcamento-anual}
+  \begin{tabularx}{\textwidth}{lXXXX}
+    \toprule
+    \textbf{Rubrica} &
+    \textbf{Ano 1 (R\$)} & \textbf{Ano 2 (R\$)} & \textbf{Total (R\$)} \\
+    \midrule
+    Capital     & [XX.XXX,XX] & [XX.XXX,XX] & [XX.XXX,XX] \\
+    Custeio     & [XX.XXX,XX] & [XX.XXX,XX] & [XX.XXX,XX] \\
+    Bolsas      & [XX.XXX,XX] & [XX.XXX,XX] & [XX.XXX,XX] \\
+    Diárias     & [XX.XXX,XX] & [XX.XXX,XX] & [XX.XXX,XX] \\
+    Taxas       & [XX.XXX,XX] & [XX.XXX,XX] & [XX.XXX,XX] \\
+    \midrule
+    \textbf{Total} & \textbf{[XX.XXX,XX]} & \textbf{[XX.XXX,XX]} &
+    \textbf{[XX.XXX,XX]} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+% =============================================================================
+% 10. EQUIPE EXECUTORA
+% =============================================================================
+\newpage
+\section{Equipe Executora}
+
+\subsection{Coordenação}
+
+\begin{tabularx}{\textwidth}{llX}
+  \toprule
+  \textbf{Nome} & \textbf{Titulação} & \textbf{Atribuição no Projeto} \\
+  \midrule
+  [Coordenador(a)] & [Dr.(a)] & Coordenação geral, orientação de
+  teses/dissertações, redação de artigos, gestão de recursos. \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Pesquisadores Colaboradores}
+
+\begin{tabularx}{\textwidth}{llX}
+  \toprule
+  \textbf{Nome} & \textbf{Instituição} & \textbf{Atribuição no Projeto} \\
+  \midrule
+  [Colaborador 1] & [Instituição] & Co-orientação, análise de dados,
+  experimentos. \\
+  [Colaborador 2] & [Instituição] & Coleta de dados, curadoria,
+  validação. \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Alunos e Bolsistas}
+
+\begin{tabularx}{\textwidth}{llX}
+  \toprule
+  \textbf{Nome} & \textbf{Nível} & \textbf{Atribuição no Projeto} \\
+  \midrule
+  [Aluno 1] & Doutorado & Tese vinculada, experimentos, análise. \\
+  [Aluno 2] & Mestrado  & Dissertação vinculada, coleta de dados. \\
+  [Aluno 3] & Iniciação Científica & Apoio técnico, tabulação. \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Infraestrutura Disponibilizada}
+
+[Liste a infraestrutura existente que será disponibilizada para o projeto:
+
+\begin{itemize}
+  \item \textbf{Laboratórios:} [nome do laboratório], [equipamentos principais];
+  \item \textbf{Equipamentos multi-usuário:} [especificar];
+  \item \textbf{Acesso a bases de dados:} Portal de Periódicos CAPES,
+        Web of Science, Scopus, SciELO;
+  \item \textbf{Oficinas / plantas piloto:} [descrever];
+  \item \textbf{Apoio administrativo:} [secretaria, núcleo de projetos].
+\end{itemize}]
+
+\subsection{Contrapartida da Instituição Proponente}
+
+[Descreva a contrapartida oferecida pela instituição, se exigida pelo
+edital: espaço físico, recursos humanos, equipamentos já adquiridos,
+isenção de taxas, etc.]
+
+% =============================================================================
+% 11. REFERÊNCIAS
+% =============================================================================
+\newpage
+\section*{Referências}
+\addcontentsline{toc}{section}{Referências}
+
+% As referências devem ser inseridas em um arquivo .bib no formato
+% padrão BibTeX. Exemplo de entrada:
+%
+% @article{autor2023,
+%   author  = {SOBRENOME, Nome and SOBRENOME2, Nome2},
+%   title   = {Título do artigo},
+%   journal = {Nome do Periódico},
+%   year    = {2023},
+%   volume  = {N},
+%   number  = {N},
+%   pages   = {XXX--XXX},
+%   doi     = {10.XXXX/xxxxx}
+% }
+%
+% @book{autor2020,
+%   author    = {SOBRENOME, Nome},
+%   title     = {Título do Livro},
+%   edition   = {N},
+%   address   = {Cidade},
+%   publisher = {Editora},
+%   year      = {2020}
+% }
+
+% Descomente as linhas abaixo e aponte para seu arquivo .bib:
+% \bibliography{referencias}
+% \bibliographystyle{abntex2-alf}   % estilo autor-data ABNT
+
+% --- Lista de referências manuais (placeholder) ---
+\begin{thebibliography}{99}
+
+\bibitem[autor2023]{autor2023}
+SOBRENOME, Nome; SOBRENOME, Nome. Título do artigo.
+\textit{Nome do Periódico}, v.~N, n.~N, p.~XXX--XXX, 2023.
+DOI: \href{https://doi.org/10.XXXX/xxxxx}{10.XXXX/xxxxx}.
+
+\bibitem[autor2020]{autor2020}
+SOBRENOME, Nome. \textbf{Título do Livro}. N. ed. Cidade: Editora, 2020.
+
+\bibitem[autor2021]{autor2021}
+NOME, Sobrenome et al. Título do capítulo. In:
+ORGANIZADOR, Nome (Org.). \textbf{Título da Coletânea}.
+Cidade: Editora, 2021. p.~XX--YY.
+
+\bibitem[autor2022]{autor2022}
+SOBRENOME, Nome. \textbf{Título da Tese}. 2022. N f.
+Tese (Doutorado em [Área]) — Universidade, Cidade, 2022.
+
+\bibitem[autorb2022]{norma2022}
+BRASIL. \textbf{Lei nº 14.133, de 1º de abril de 2021}.
+Lei de Licitações e Contratos Administrativos. Diário Oficial da
+União, Brasília, DF, 2021.
+
+% Adicione mais referências conforme necessário
+
+\end{thebibliography}
+
+% =============================================================================
+% ANEXOS (OPCIONAIS)
+% =============================================================================
+\newpage
+\appendix
+\section*{Anexos}
+\addcontentsline{toc}{section}{Anexos}
+
+\subsection*{Anexo A — Currículo Resumido do Coordenador}
+[Inclua um resumo curricular (máx. 2 páginas) destacando:
+produção científica nos últimos 5 anos, orientações concluídas,
+projetos financiados anteriormente, prêmios e distinções.]
+
+\vspace{0.5cm}
+\subsection*{Anexo B — Cartas de Anuência}
+[Cópias das cartas de anuência dos colaboradores e instituições
+coparticipantes, quando exigidas pelo edital.]
+
+\vspace{0.5cm}
+\subsection*{Anexo C — Documentação Complementar}
+[Outros documentos solicitados pelo edital: declaração de
+infraestrutura, comprovante de submissão ao CEP, comprovante de
+vínculo institucional, etc.]
+
+% =============================================================================
+% FIM DO DOCUMENTO
+% =============================================================================
+\end{document}

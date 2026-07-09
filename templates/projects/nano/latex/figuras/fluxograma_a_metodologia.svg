@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 13px; font-weight: bold; fill: #1a5276; }
+      .box { fill: white; stroke: #1a5276; stroke-width: 2; rx: 6; }
+      .box-header { fill: #1a5276; rx: 6; }
+      .box-orange { fill: #fef9e7; stroke: #e67e22; stroke-width: 2; rx: 6; }
+      .box-green { fill: #e8f8e8; stroke: #27ae60; stroke-width: 2; rx: 6; }
+      .box-gray { fill: #f0f0f0; stroke: #7f8c8d; stroke-width: 1.5; rx: 6; }
+      .flow-arrow { stroke: #1a5276; stroke-width: 2; fill: none; }
+      .data-arrow { stroke: #e67e22; stroke-width: 1.5; fill: none; stroke-dasharray: 5,3; }
+      .label { font-size: 9px; fill: #333; }
+      .label-small { font-size: 7px; fill: #555; }
+    </style>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 10,3.5 0,7" fill="#1a5276"/></marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 10,3.5 0,7" fill="#e67e22"/></marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 10,3.5 0,7" fill="#27ae60"/></marker>
+  </defs>
+  <rect width="1000" height="800" fill="white"/>
+  <text x="500" y="22" text-anchor="middle" class="title" font-size="15">Fluxograma A — Metodologia Completa (Seção 2 — Materiais e Métodos)</text>
+  <line x1="80" y1="30" x2="920" y2="30" stroke="#1a5276" stroke-width="1"/>
+  <text x="500" y="48" text-anchor="middle" font-size="8" fill="#7f8c8d">Três níveis hierárquicos: Preparação → Caracterização → Análise Estatística e Modelagem</text>
+
+  <!-- NÍVEL 1: PREPARAÇÃO -->
+  <g transform="translate(20,60)">
+    <rect x="0" y="0" width="960" height="160" rx="8" fill="#f8fcfd" stroke="#1a5276" stroke-width="2"/>
+    <rect x="0" y="0" width="960" height="28" rx="8" fill="#1a5276"/>
+    <rect x="0" y="14" width="960" height="14" fill="#1a5276"/>
+    <text x="480" y="19" text-anchor="middle" font-size="11" fill="white" font-weight="bold">NÍVEL 1: PREPARAÇÃO DE MATERIAIS E PROCESSAMENTO</text>
+
+    <!-- Materiais -->
+    <rect x="15" y="40" width="140" height="55" class="box"/>
+    <text x="85" y="58" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">MATERIAIS</text>
+    <text x="85" y="72" text-anchor="middle" font-size="6.5" fill="#333">PELBD ML3602U (Braskem)</text>
+    <text x="85" y="84" text-anchor="middle" font-size="6.5" fill="#333">Grapheox 212 (BoomaTech)</text>
+    <text x="85" y="96" text-anchor="middle" font-size="6.5" fill="#333">PP-g-MA Orevac CA100 (SK)</text>
+
+    <line x1="160" y1="67" x2="185" y2="67" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Extrusão -->
+    <rect x="190" y="40" width="150" height="55" class="box"/>
+    <text x="265" y="58" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">EXTRUSÃO</text>
+    <text x="265" y="73" text-anchor="middle" font-size="6.5" fill="#333">Coperion ZSK18K38</text>
+    <text x="265" y="85" text-anchor="middle" font-size="6.5" fill="#333">135→220°C, 200 rpm</text>
+    <text x="265" y="97" text-anchor="middle" font-size="6" fill="#7f8c8d">L/D=40, 5 kg/h, τ_res≈45-60s</text>
+
+    <line x1="345" y1="67" x2="370" y2="67" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Injeção -->
+    <rect x="375" y="40" width="145" height="55" class="box"/>
+    <text x="447" y="58" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">INJEÇÃO</text>
+    <text x="447" y="73" text-anchor="middle" font-size="6.5" fill="#333">Battenfeld Plus 350</text>
+    <text x="447" y="85" text-anchor="middle" font-size="6.5" fill="#333">175-180°C, 350 kN</text>
+    <text x="447" y="97" text-anchor="middle" font-size="6" fill="#7f8c8d">Molde 60°C, ciclo 45s</text>
+
+    <line x1="525" y1="67" x2="550" y2="67" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Micronização -->
+    <rect x="555" y="40" width="130" height="55" class="box"/>
+    <text x="620" y="58" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">MICRONIZAÇÃO</text>
+    <text x="620" y="73" text-anchor="middle" font-size="6.5" fill="#333">MOD 100 (Rotoline)</text>
+    <text x="620" y="85" text-anchor="middle" font-size="6.5" fill="#333">1500 rpm, peneira 500 μm</text>
+    <text x="620" y="97" text-anchor="middle" font-size="6" fill="#7f8c8d">D_50=350 μm, span=1,26</text>
+
+    <line x1="690" y1="67" x2="715" y2="67" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Rotomoldagem -->
+    <rect x="720" y="40" width="145" height="55" class="box-orange"/>
+    <text x="792" y="58" text-anchor="middle" font-size="8" fill="#e67e22" font-weight="bold">ROTOMOLDAGEM</text>
+    <text x="792" y="73" text-anchor="middle" font-size="6.5" fill="#333">Shuttle 2.5, aço 304</text>
+    <text x="792" y="85" text-anchor="middle" font-size="6.5" fill="#333">278°C/13min + H₂O/19min</text>
+    <text x="792" y="97" text-anchor="middle" font-size="6" fill="#7f8c8d">5/2 rpm, reversão 3min</text>
+
+    <!-- Corte laser -->
+    <line x1="792" y1="95" x2="792" y2="125" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <rect x="720" y="125" width="145" height="30" class="box-gray"/>
+    <text x="792" y="144" text-anchor="middle" font-size="7.5" fill="#555" font-weight="bold">CORTE LASER CO₂</text>
+  </g>
+
+  <!-- Seta de fluxo entre níveis -->
+  <line x1="500" y1="225" x2="500" y2="260" stroke="#27ae60" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  <text x="515" y="248" font-size="8" fill="#27ae60" font-weight="bold">→ FLUXO DE MATERIAIS</text>
+
+  <!-- NÍVEL 2: CARACTERIZAÇÃO -->
+  <g transform="translate(20,265)">
+    <rect x="0" y="0" width="960" height="170" rx="8" fill="#fcfdf8" stroke="#27ae60" stroke-width="2"/>
+    <rect x="0" y="0" width="960" height="28" rx="8" fill="#27ae60"/>
+    <rect x="0" y="14" width="960" height="14" fill="#27ae60"/>
+    <text x="480" y="19" text-anchor="middle" font-size="11" fill="white" font-weight="bold">NÍVEL 2: CARACTERIZAÇÃO MULTIMODAL (ETAPA 1 + ETAPA 2)</text>
+
+    <!-- rGO (antes do processamento) -->
+    <rect x="15" y="40" width="280" height="60" class="box-green"/>
+    <text x="155" y="58" text-anchor="middle" font-size="8" fill="#27ae60" font-weight="bold">CARACTERIZAÇÃO DO rGO</text>
+    <text x="155" y="73" text-anchor="middle" font-size="6.5" fill="#333">Raman (532nm) | FTIR | DRX (Cu Kα) | TEM (200kV)</text>
+    <text x="155" y="87" text-anchor="middle" font-size="6.5" fill="#333">AFM (tapping) | XPS (Al Kα) | TGA (N₂, 30-900°C)</text>
+
+    <line x1="300" y1="70" x2="320" y2="70" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Etapa 1 -->
+    <rect x="325" y="40" width="290" height="60" class="box"/>
+    <text x="470" y="58" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">ETAPA 1: TRIAGEM (Injeção)</text>
+    <text x="470" y="73" text-anchor="middle" font-size="6.5" fill="#333">Flexão ASTM D790 (n=12) | DSC (n=3) | TGA (n=3)</text>
+    <text x="470" y="87" text-anchor="middle" font-size="6.5" fill="#333">DMA (1Hz, −120→100°C) | MEV-FEG (criofratura)</text>
+
+    <line x1="620" y1="70" x2="640" y2="70" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Etapa 2 -->
+    <rect x="645" y="40" width="290" height="60" class="box-orange"/>
+    <text x="790" y="58" text-anchor="middle" font-size="8" fill="#e67e22" font-weight="bold">ETAPA 2: VALIDAÇÃO (Rotomoldagem)</text>
+    <text x="790" y="73" text-anchor="middle" font-size="6.5" fill="#333">Flexão (n=16) | Izod (23/–17°C, n=6)</text>
+    <text x="790" y="87" text-anchor="middle" font-size="6.5" fill="#333">Dardo (–40°C, staircase, n=12) | DMA | MEV</text>
+
+    <!-- Técnicas complementares -->
+    <line x1="155" y1="100" x2="155" y2="125" class="data-arrow" marker-end="url(#arrowOrange)"/>
+    <line x1="470" y1="100" x2="470" y2="125" class="data-arrow" marker-end="url(#arrowOrange)"/>
+    <line x1="790" y1="100" x2="790" y2="125" class="data-arrow" marker-end="url(#arrowOrange)"/>
+
+    <rect x="100" y="125" width="760" height="35" rx="5" fill="#fff9f0" stroke="#e67e22" stroke-width="1"/>
+    <text x="480" y="140" text-anchor="middle" font-size="7.5" fill="#e67e22" font-weight="bold">FLUXO DE DADOS: Propriedades medidas alimentam matriz de correlação 12×12 e modelo PCR preditivo</text>
+    <text x="480" y="155" text-anchor="middle" font-size="6.5" fill="#7f8c8d">Dados da Etapa 1 (injeção) → PCR (LOOCV) → Predição da Etapa 2 (rotomoldagem) com erro &lt; 4%</text>
+  </g>
+
+  <!-- Seta entre níveis -->
+  <line x1="500" y1="440" x2="500" y2="475" stroke="#27ae60" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  <text x="515" y="463" font-size="8" fill="#27ae60" font-weight="bold">→ FLUXO DE DADOS</text>
+
+  <!-- NÍVEL 3: ANÁLISE ESTATÍSTICA E MODELAGEM -->
+  <g transform="translate(20,480)">
+    <rect x="0" y="0" width="960" height="290" rx="8" fill="#fcf8fd" stroke="#8e44ad" stroke-width="2"/>
+    <rect x="0" y="0" width="960" height="28" rx="8" fill="#8e44ad"/>
+    <rect x="0" y="14" width="960" height="14" fill="#8e44ad"/>
+    <text x="480" y="19" text-anchor="middle" font-size="11" fill="white" font-weight="bold">NÍVEL 3: ANÁLISE ESTATÍSTICA, MODELAGEM E OTIMIZAÇÃO</text>
+
+    <!-- Coluna 1: Estatística -->
+    <rect x="15" y="40" width="210" height="100" class="box"/>
+    <text x="120" y="60" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">ESTATÍSTICA INFERENCIAL</text>
+    <text x="120" y="78" text-anchor="middle" font-size="6.5" fill="#333">ANOVA fatorial 2×3</text>
+    <text x="120" y="92" text-anchor="middle" font-size="6.5" fill="#333">Shapiro-Wilk, Levene, Brown-Forsythe</text>
+    <text x="120" y="106" text-anchor="middle" font-size="6.5" fill="#333">Bonferroni-Holm (FWER)</text>
+    <text x="120" y="120" text-anchor="middle" font-size="6.5" fill="#333">Benjamini-Hochberg (FDR, q=0,05)</text>
+    <text x="120" y="134" text-anchor="middle" font-size="6.5" fill="#7f8c8d">Kruskal-Wallis, Bootstrap B=10.000</text>
+
+    <line x1="230" y1="90" x2="255" y2="90" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Coluna 2: Correlação -->
+    <rect x="260" y="40" width="210" height="100" class="box"/>
+    <text x="365" y="60" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">MATRIZ DE CORRELAÇÃO</text>
+    <text x="365" y="78" text-anchor="middle" font-size="6.5" fill="#333">Pearson 12×12</text>
+    <text x="365" y="92" text-anchor="middle" font-size="6.5" fill="#333">α_corrigido=0,00076 (66 compar.)</text>
+    <text x="365" y="106" text-anchor="middle" font-size="6.5" fill="#e67e22">T_10%↔Impacto: r=0,89 ★</text>
+    <text x="365" y="120" text-anchor="middle" font-size="6.5" fill="#333">CV↔η*: r=−0,68</text>
+    <text x="365" y="134" text-anchor="middle" font-size="6.5" fill="#7f8c8d">Dendrograma hierárquico</text>
+
+    <line x1="475" y1="90" x2="500" y2="90" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Coluna 3: PCR -->
+    <rect x="505" y="40" width="210" height="100" class="box-orange"/>
+    <text x="610" y="60" text-anchor="middle" font-size="8" fill="#e67e22" font-weight="bold">MODELO PCR PREDITIVO</text>
+    <text x="610" y="78" text-anchor="middle" font-size="6.5" fill="#333">scikit-learn 1.4, z-score</text>
+    <text x="610" y="92" text-anchor="middle" font-size="6.5" fill="#333">SVD, 95% variância cumulativa</text>
+    <text x="610" y="106" text-anchor="middle" font-size="6.5" fill="#e67e22">R²_LOOCV = 0,93 (Módulo)</text>
+    <text x="610" y="120" text-anchor="middle" font-size="6.5" fill="#333">RMSE &lt; 4%</text>
+    <text x="610" y="134" text-anchor="middle" font-size="6.5" fill="#7f8c8d">Transferência Injeção→Rotomoldagem</text>
+
+    <line x1="720" y1="90" x2="745" y2="90" class="flow-arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- Coluna 4: Teoria dos Jogos -->
+    <rect x="750" y="40" width="195" height="100" class="box-green"/>
+    <text x="847" y="60" text-anchor="middle" font-size="8" fill="#27ae60" font-weight="bold">TEORIA DOS JOGOS</text>
+    <text x="847" y="78" text-anchor="middle" font-size="6.5" fill="#333">Pareto (3/6 eficientes)</text>
+    <text x="847" y="92" text-anchor="middle" font-size="6.5" fill="#333">Shapley (rGO 66%/PP-g-MA 34%)</text>
+    <text x="847" y="106" text-anchor="middle" font-size="6.5" fill="#333">Nash (λ∈[0,1;1,8])</text>
+    <text x="847" y="120" text-anchor="middle" font-size="6.5" fill="#333">Minimax (CV ↓37,5%)</text>
+    <text x="847" y="134" text-anchor="middle" font-size="6.5" fill="#7f8c8d">Bayesiana (EI, ξ=0,01)</text>
+
+    <!-- Seta de convergência final -->
+    <line x1="120" y1="145" x2="120" y2="170" class="flow-arrow" marker-end="url(#arrowGreen)"/>
+    <line x1="365" y1="145" x2="365" y2="170" class="flow-arrow" marker-end="url(#arrowGreen)"/>
+    <line x1="610" y1="145" x2="610" y2="170" class="flow-arrow" marker-end="url(#arrowGreen)"/>
+    <line x1="847" y1="145" x2="847" y2="170" class="flow-arrow" marker-end="url(#arrowGreen)"/>
+
+    <!-- Convergência -->
+    <rect x="200" y="172" width="560" height="45" rx="10" fill="#e67e22" opacity="0.15" stroke="#e67e22" stroke-width="3"/>
+    <text x="480" y="192" text-anchor="middle" font-size="10" fill="#e67e22" font-weight="bold">CONVERGÊNCIA MULTIOBJETIVO → T5 (0,05% rGO + 0,05% PP-g-MA)</text>
+    <text x="480" y="210" text-anchor="middle" font-size="7.5" fill="#333">VRA (CV↓37,5%) + Sinergia Não-Monotônica + Digital Twin PCR (R²=0,93)</text>
+
+    <!-- Resultados -->
+    <rect x="15" y="230" width="930" height="45" rx="6" fill="#fef9e7" stroke="#e67e22" stroke-width="1.5"/>
+    <text x="480" y="248" text-anchor="middle" font-size="8" fill="#e67e22" font-weight="bold">RESULTADOS INTEGRADOS</text>
+    <text x="480" y="264" text-anchor="middle" font-size="7" fill="#333">VRA (p=0,003) | Sinergia Não-Monotônica (K=0,032%, R²=0,94) | φ_c≈0,02% (10× abaixo previsto) | PCR R²=0,93 | T5 ótimo</text>
+  </g>
+
+  <!-- Equipamentos e métodos -->
+  <text x="500" y="795" text-anchor="middle" class="cite" font-size="7.5">
+    [Montgomery, Statistical Quality Control, 8ed. Wiley (2020)] [Davim et al., JMPT 198, 99 (2008)] [Ren et al., PES 61, 410 (2021)] [Ferrari &amp; Robertson, PRB 61, 14095 (2000)]
+  </text>
+
+</svg>

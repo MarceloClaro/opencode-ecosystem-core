@@ -1,0 +1,354 @@
+% =============================================================================
+%  LIVRO: ENGENHARIA DE ECOSSISTEMAS COGNITIVOS
+%  Uma Jornada Autodidata do Nível Zero ao PhD com o OpenCode Ecosystem
+%  Autor: Marcelo Claro Laranjeira
+%  Formato: ABNT (Associação Brasileira de Normas Técnicas)
+%  Compilação: pdflatex + bibtex + pdflatex + pdflatex + makeindex + pdflatex
+% =============================================================================
+
+\documentclass[12pt,a4paper,oneside,openright]{abntex2}
+
+% --- CODIFICAÇÃO E IDIOMA ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet} % Helvetica (Arial-like) - substitui Times New Roman
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[brazil]{babel}
+\usepackage{csquotes}
+
+% --- ÍNDICE REMISSIVO ---
+\usepackage{makeidx}
+\makeindex
+
+% --- CONTROLE DE OVERFULL BOXES E HIFENIZAÇÃO ---
+\usepackage{microtype} % Melhor microtipografia e hifenização automática
+\tolerance=2000 % Aumentado para evitar palavras saltando da margem
+\emergencystretch=3em
+\hfuzz=2pt
+
+% --- NUMERAÇÃO DE SEÇÕES E SUMÁRIO ATÉ NÍVEL 5 ---
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+% --- PADRONIZAÇÃO DE TABELAS ---
+\usepackage{etoolbox}
+\AtBeginEnvironment{tabular}{\small}
+\AtBeginEnvironment{longtable}{\small}
+\AtBeginEnvironment{tabularx}{\small}
+\hfuzz=2pt
+\widowpenalty=10000 % Evita viúvas
+\clubpenalty=10000  % Evita órfãs
+\raggedbottom
+\usepackage{seqsplit}
+\usepackage{adjustbox} % Para forçar tabelas e figuras dentro das margens
+
+% Salva o \texttt original antes de redefini-lo
+% (usado por \codigoquebravel para evitar conflito com \seqsplit)
+\let\origtexttt\texttt
+
+% \codigoquebravel usa \origtexttt para evitar conflito com \seqsplit
+\newcommand{\codigoquebravel}[1]{\seqsplit{\origtexttt{#1}}}
+
+% --- MATEMÁTICA ---
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\IfFileExists{dsfont.sty}{\usepackage{dsfont}}{}
+\providecommand{\mathds}[1]{\mathbb{#1}}
+\IfFileExists{stmaryrd.sty}{\usepackage{stmaryrd}}{}
+
+% --- GRÁFICOS E ILUSTRAÇÕES ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{positioning,shapes,arrows,fit,backgrounds,calc}
+\usetikzlibrary{decorations.pathmorphing,patterns,shadows}
+\usetikzlibrary{automata,petri,topaths}
+\usetikzlibrary{chains,scopes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+% --- TABELAS ---
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{enumitem}
+
+% --- CORES ---
+\usepackage[table]{xcolor}
+\definecolor{blueaccent}{HTML}{1A56DB}
+\definecolor{cyanaccent}{HTML}{0891B2}
+\definecolor{orangeaccent}{HTML}{EA580C}
+\definecolor{codegreen}{HTML}{059669}
+\definecolor{codegray}{HTML}{6B7280}
+\definecolor{codepurple}{HTML}{7C3AED}
+\definecolor{codeback}{HTML}{F3F4F6}
+\definecolor{codeblue}{HTML}{2563EB}
+\definecolor{fg}{HTML}{111827}
+\definecolor{bg}{HTML}{FFFFFF}
+\definecolor{bgalt}{HTML}{F3F4F6}
+\definecolor{accent}{HTML}{2563EB}
+\definecolor{highlight}{HTML}{FCD34D}
+\definecolor{fgalt}{HTML}{4B5563}
+
+% --- HIPERLINKS ---
+\usepackage[alf]{abntex2cite}
+\usepackage{hyperref}
+\usepackage{url}
+
+% Tradução de autorefs para português (evita termos em inglês como "chapter" e "table")
+\renewcommand{\chapterautorefname}{Capítulo}
+\renewcommand{\tableautorefname}{Tabela}
+\renewcommand{\partautorefname}{Parte}
+\renewcommand{\sectionautorefname}{Seção}
+\renewcommand{\subsectionautorefname}{Subseção}
+\renewcommand{\subsubsectionautorefname}{Subsubseção}
+\renewcommand{\paragraphautorefname}{Parágrafo}
+\renewcommand{\figureautorefname}{Figura}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blueaccent,
+    filecolor=magenta,
+    urlcolor=cyanaccent,
+    citecolor=blueaccent,
+    breaklinks=true,
+    pdftitle={Gêmeos Digitais Periodontais: O Framework SUS-Twin},
+    pdfauthor={Marcelo Claro Laranjeira},
+    pdfsubject={Engenharia de Software, Inteligência Artificial, Sistemas Autônomos},
+    pdfkeywords={OpenCode, metacognição, engenharia de software, IA, multiagentes}
+}
+
+% Quebra de URLs em qualquer ponto para evitar overfulls
+\def\UrlBreaks{\do\:\do\-\do\_\do\/\do\.\do\~\do\?\do\#\do\&\do\%\do\@\do\\}
+
+% --- CÓDIGO FONTE ---
+\usepackage{listings}
+\providecommand{\lstlistingautorefname}{Código}
+\usepackage{verbatim}
+
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    backgroundcolor=\color{codeback},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    postbreak=\mbox{$\hookrightarrow$\space},
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{gray!50},
+    frameround=tttt,
+    emph={self,True,False,None},
+    emphstyle=\color{magenta},
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ã}{{\~a}}1 {õ}{{\~o}}1 {Ã}{{\~A}}1 {Õ}{{\~O}}1
+             {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {â}{{\^a}}1 {ê}{{\^e}}1
+             {×}{{\ensuremath{\times}}}1 {—}{{\textemdash}}1
+}
+
+\lstdefinestyle{bashstyle}{
+    language=bash,
+    backgroundcolor=\color{codeback},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{gray!50},
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ã}{{\~a}}1 {õ}{{\~o}}1 {Ã}{{\~A}}1 {Õ}{{\~O}}1
+             {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {â}{{\^a}}1 {ê}{{\^e}}1
+             {×}{{\ensuremath{\times}}}1 {—}{{\textemdash}}1
+}
+
+\lstset{style=pythonstyle}
+
+% --- AMBIENTES TEOREMAS ---
+\theoremstyle{definition}
+\newtheorem{definicao}{Definição}[chapter]
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{lema}{Lema}[chapter]
+\newtheorem{corolario}{Corolário}[chapter]
+\newtheorem{proposicao}{Proposição}[chapter]
+\newtheorem{exemplo}{Exemplo}[chapter]
+\newtheorem{exercicio}{Exercício}[chapter]
+\newtheorem{observacao}{Observação}[chapter]
+\newtheorem{hipotese}{Hipótese}[chapter]
+
+% --- COMANDOS PERSONALIZADOS ---
+\newcommand{\codigo}[1]{\texttt{#1}}
+\usepackage{underscore}
+\newcommand{\destaque}[1]{\textbf{#1}}
+\newcommand{\opencode}{\textsc{OpenCode}}
+\newcommand{\opencodeeco}{\textsc{OpenCode Ecosystem}}
+\newcommand{\qualisA}{\textit{Qualis A1}}
+\newcommand{\tdd}{\textsc{TDD}}
+\newcommand{\sdd}{\textsc{SDD}}
+\newcommand{\doilink}[1]{\href{https://doi.org/#1}{\texttt{DOI: #1}}}
+\newcommand{\arxivlink}[1]{\href{https://arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+\newcommand{\nivelzero}{$\bigstar$}
+\newcommand{\nivelbasico}{$\bigstar\bigstar$}
+\newcommand{\nivelintermediario}{$\bigstar\bigstar\bigstar$}
+\newcommand{\nivelavancado}{$\bigstar\bigstar\bigstar\bigstar$}
+\newcommand{\nivelphd}{$\bigstar\bigstar\bigstar\bigstar\bigstar$}
+
+% Compatibilidade com comandos antigos
+\newcommand{\doi}[1]{\doilink{#1}}
+\newcommand{\arxiv}[1]{\arxivlink{#1}}
+
+% --- METADADOS ---
+\titulo{Gêmeos Digitais Periodontais:\\
+        \large O Framework SUS-Twin e a Simulação\\
+        Biomecânica Periodontal no SUS}
+\autor{Marcelo Claro Laranjeira}
+\local{Crateús, Ceará, Brasil}
+\data{2026}
+\instituicao{OpenCode Ecosystem Research Initiative}
+\tipotrabalho{Livro Técnico-Científico}
+\preambulo{Obra científica e didática para estudantes de desenvolvimento e engenharia de software em inteligência artificial, matemática e estatística aplicada, com experimentação prática no OpenCode Ecosystem.}
+
+% --- CONFIGURAÇÕES ABNT ---
+\setlength{\parindent}{1.5cm}
+\setlength{\parskip}{0.2cm}
+\SingleSpacing
+
+% --- INÍCIO ---
+\begin{document}
+
+% --- ELEMENTOS PRÉ-TEXTUAIS ---
+\include{sections/00-capa}
+\include{sections/01-folha-rosto}
+\include{sections/02-ficha-catalografica}
+%\include{sections/03-dedicatoria}
+%\include{sections/04-agradecimentos}
+%\include{sections/05-epigrafe}
+%\include{sections/06-resumo}
+%\include{sections/07-abstract}
+
+% Listas
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\pdfbookmark[0]{\lstlistlistingname}{lol}
+\begingroup
+\footnotesize
+\lstlistoflistings
+\endgroup
+\cleardoublepage
+
+% Sumário
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% --- ELEMENTOS TEXTUAIS ---
+\textual
+
+% PARTE I
+\part{Fundamentos dos Gêmeos Digitais}
+\chapter{Introdução aos Gêmeos Digitais} \label{ch:introducao}
+\input{sections/part1/introducao}
+\chapter{Fundamentos Tecnológicos} \label{ch:fundamentos}
+\input{sections/part1/fundamentos}
+\chapter{Gêmeos Digitais na Medicina} \label{ch:medicina}
+\input{sections/part1/medicina}
+
+% PARTE II
+\part{Gêmeos Digitais Periodontais}
+\chapter{Panorama Atual dos Gêmeos Digitais Periodontais} \label{ch:panorama}
+\input{sections/part2/panorama}
+\chapter{Ortodontia, Movimentação Dentária e Reação Periodontal} \label{ch:ortodontia}
+\input{sections/part2/ortodontia}
+\chapter{Análise de Estresse Periodontal em Implantodontia} \label{ch:implantodontia}
+\input{sections/part2/implantodontia}
+\chapter{Reações Periodontais em Endodontia e Prótese Dentária} \label{ch:endodontia}
+\input{sections/part2/endodontia}
+\chapter{Educação em Periodontia Baseada em Gêmeos Digitais} \label{ch:educacao}
+\input{sections/part2/educacao}
+
+% PARTE III
+\part{Ecossistemas de IA e Plataformas Abertas}
+\chapter{Orquestração de Gêmeos Periodontais no OpenCode Ecosystem} \label{ch:opencode}
+\input{sections/part3/opencode}
+\chapter{Pipeline de Reconstrução de Gêmeos Periodontais 3D} \label{ch:pipeline}
+\input{sections/part3/pipeline}
+\chapter{IA e Métodos de K-Fold na Predição Periodontal} \label{ch:ia}
+\input{sections/part3/ia}
+\chapter{Plataformas e Gateway IoT para Telemetria Periodontal} \label{ch:plataformas}
+\input{sections/part3/plataformas}
+\chapter{Práticas de Validação do Framework SUS-Twin} \label{ch:praticas}
+\input{sections/part3/praticas}
+
+% PARTE IV
+\part{Impacto Social e Perspectivas Futuras}
+\chapter{Impacto Social e Equidade: O Framework SUS-Twin} \label{ch:impacto}
+\input{sections/part4/impacto}
+\chapter{Ética, LGPD e Provas ZKP em Odontologia Coletiva} \label{ch:etica}
+\input{sections/part4/etica}
+\chapter{Desafios Biomecânicos e de Resolução na Periodontia} \label{ch:desafios}
+\input{sections/part4/desafios}
+\chapter{O Futuro da Periodontia Digital Preditiva e Prescritiva} \label{ch:futuro}
+\input{sections/part4/futuro}
+
+% --- PÓS-TEXTUAIS ---
+\postextual
+
+% Ajustes para evitar overfulls na bibliografia (ieeetr com titulos em italico)
+\pretolerance=100
+\tolerance=9999
+\emergencystretch=12em
+\rightskip=0pt plus 0.5fil
+
+\bibliography{referencias}
+
+% APÊNDICES
+\part*{Apêndices}
+\addcontentsline{toc}{part}{Apêndices}
+
+\chapter{Referências Completas com DOIs e Links}
+\input{sections/appendices/referencias}
+\chapter{Glossário de Termos Técnicos}
+\input{sections/appendices/glossario}
+\chapter{Repositórios e Recursos Open-Source}
+\input{sections/appendices/repositorios}
+
+\end{document}

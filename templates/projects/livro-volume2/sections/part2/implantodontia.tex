@@ -1,0 +1,130 @@
+% v2 -- rewritten
+% Seções:
+%   6.1 - Modelagem do implante e tecido ósseo
+%   6.2 - Simulação de cargas mastigatórias
+%   6.3 - Validação K-Fold do modelo biomecânico
+%   6.4 - Exercício prático: comparar 3 designs de implante
+\destaque{Nivel-alvo N1 -- validacao de estresse em implantes usando Periomod e validacao cruzada K-Fold, dentro do Framework SUS-Twin.}
+\label{ch:implantodontia}
+
+\section{Modelagem do implante e tecido ósseo}
+O planejamento digital de implantes dentários\footnote{Parafuso de titânio
+inserido no osso maxilar para substituir a raiz de um dente perdido.} começa
+com a CBCT, que gera um volume NIfTI. O fluxo SUS-Twin inicia com a
+segmentação por densidade Hounsfield\footnote{Unidades Hounsfield (HU): água =
+0~HU, osso cortical = 300--1000+~HU, ar = --1000~HU.} para separar osso
+cortical e trabecular.
+
+O código usa SimpleITK\footnote{Biblioteca Python de código aberto para
+processamento de imagens médicas.} para ler a CBCT e extrair o sítio.
+
+\begin{lstlisting}[language=Python,caption={Segmentação óssea com SimpleITK}]
+import SimpleITK as sitk, numpy as np
+img = sitk.ReadImage("cbct_paciente.nii")
+arr = sitk.GetArrayFromImage(img)
+cortical = np.where((arr >= 300) & (arr <= 1000), arr, 0)
+trabecular = np.where((arr >= 100) & (arr < 300), arr, 0)
+sitk.WriteImage(sitk.GetImageFromArray(cortical), "cortical.nii")
+sitk.WriteImage(sitk.GetImageFromArray(trabecular), "trabecular.nii")
+
+# Estatisticas de densidade ossea
+print(f"Cortical: {np.mean(cortical[cortical>0]):.0f} HU")
+print(f"Trabecular: {np.mean(trabecular[trabecular>0]):.0f} HU")
+\end{lstlisting}
+
+Esse mapeamento alimenta o modelo FEM no Periomod, permitindo que o SUS-Twin
+atribua propriedades mecânicas distintas a cada região óssea e calcule a
+distribuição de tensões iniciais.
+
+\section{Simulação de cargas mastigatórias}
+Definem-se dois cenários: (a) axial de 200~N simulando mastigação
+molar\footnote{200~N equivalem a ~20~kg, força típica na mastigação.}; (b)
+lateral de 50~N simulando bruxismo\footnote{Carga axial age ao longo do eixo
+do implante; lateral age perpendicularmente, gerando momento fletor.}. O
+Periomod resolve o campo de tensões por FEM.
+
+\begin{lstlisting}[language=Python,caption={Condições de contorno para FEM}]
+import numpy as np
+axial = np.array([0.0, 0.0, -200.0])
+lateral = np.array([50.0, 0.0, 0.0])
+nos_oclu = np.arange(100, 200)
+nos_base = np.arange(0, 50)
+for no in nos_oclu: aplicar_forca(no, axial)
+for no in nos_base: aplicar_restricao(no, [0, 0, 0])
+print("Condicoes de contorno aplicadas: OK")
+print(f"Forca axial: {np.linalg.norm(axial):.0f} N")
+print(f"Forca lateral: {np.linalg.norm(lateral):.0f} N")
+\end{lstlisting}
+
+As tensões de von Mises são exportadas em MPa\footnote{MPa =
+10\textsuperscript{6}~Pa; osso cortical fratura entre 100 e 200~MPa;
+trabecular até ~10~MPa.} para a validação K-Fold, completando o ciclo
+SUS-Twin de simulação biomecânica.
+
+\section{Validação K-Fold do modelo biomecânico}
+Para evitar overfitting, aplica-se K-Fold\footnote{K-Fold divide os dados em K
+partes; treina-se em K--1 e testa-se na restante, repetindo K vezes.} com K=5
+sobre os dados de CBCT. Um RandomForest\footnote{Conjunto de árvores de decisão
+cuja predição final é a média de todas, reduzindo variância.} mapeia densidade
+(HU) para tensão de pico (MPa). O SUS-Twin usa o R\textsuperscript{2} médio como métrica de
+confiança para o plano cirúrgico.
+
+\begin{lstlisting}[language=Python,caption={Validação K-Fold com RandomForest}]
+from sklearn.model_selection import KFold
+from sklearn.ensemble import RandomForestRegressor
+import numpy as np
+
+X = np.load("densidades_hu.npy")
+y = np.load("tensoes_pico.npy")
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+modelo = RandomForestRegressor(n_estimators=100, max_depth=10)
+scores = []
+
+for fold, (tr, ts) in enumerate(kf.split(X), 1):
+    modelo.fit(X[tr], y[tr])
+    score = modelo.score(X[ts], y[ts])
+    scores.append(score)
+    print(f"Fold {fold}: R² = {score:.3f}")
+
+print(f"R² medio: {np.mean(scores):.3f} ± {np.std(scores):.3f}")
+\end{lstlisting}
+
+O SUS-Twin persiste o modelo treinado e o associa ao plano cirúrgico,
+permitindo que o clínico avalie probabilisticamente o risco de falha
+mecânica antes da cirurgia.
+
+\section{Exercício prático: comparar 3 designs de implante}
+Execute a pipeline para três geometrias de implante\footnote{Cilíndrico: parede
+reta. Cônico: afinamento apical. Rosqueado: filetes helicoidais que aumentam
+o contato osso-implante.} e tabule os resultados.
+
+\begin{table}[h]
+\centering
+\caption{Métricas comparativas entre designs de implante}
+\label{tab:comparativo-implantes}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Design} & \textbf{Tensão (MPa)} & \textbf{Uniformidade (\%)} & \textbf{BIC (\%)}\\
+\midrule
+Cilíndrico & 142,3 & 62 & 38 \\
+Cônico      & 118,7 & 78 & 45 \\
+Rosqueado   & 97,2  & 84 & 52 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Procedimento:
+\begin{enumerate}
+    \item Carregue cada STL no módulo de malha do Periomod.
+    \item Atribua E: cortical 14~GPa, trabecular 1,5~GPa.
+    \item Aplique carga axial de 200~N e execute a simulação FEM.
+    \item Extraia a tensão de von Mises máxima e a distribuição.
+    \item Calcule o BIC\footnote{Bone-implant contact (BIC): fração da superfície
+    do implante em contato direto com osso; >40\% indica osseointegração.}
+    a partir da malha deformada.
+    \item Preencha a tabela e discuta o melhor compromisso no contexto
+    do SUS-Twin.
+\end{enumerate}
+
+A comparação ilustra como a geometria impacta a longevidade do implante,
+fechando o ciclo SUS-Twin de validação biomecânica baseada em evidências.

@@ -1,0 +1,18 @@
+% =============================================================================
+% SEÇÃO: Gêmeos Digitais de Identidade vs. Gêmeos Composicionais
+% =============================================================================
+\subsection{Gêmeos Digitais de Identidade e Automação de Agentes em Saúde Bucal}
+
+O conceito de gêmeo digital na saúde bucal divide-se em duas vertentes fundamentais e complementares: os gêmeos de representação anatômico-fisiológica composicional (\textit{ertis-research/opentwins})~\cite{robles2023opentwins} e os gêmeos de identidade profissional e de comunicação (\textit{Open-Twin/opentwins}). Enquanto o primeiro modela a resposta mecânica viscoelástica e o estresse periodontal do ligamento (LPD) sob carga, o segundo atua como um agente autônomo que personifica a identidade e a conduta do profissional clínico-pesquisador ou do próprio paciente no ecossistema digital.
+
+A integração desses dois paradigmas propõe um salto metodológico em direção à medicina participativa e informacional. Ao conectar a telemetria física do ligamento periodontal a um gêmeo de identidade alimentado por modelos de linguagem avançados (como o Claude via Chrome CDP), torna-se viável automatizar a disseminação científica, a triagem populacional e o monitoramento ético em plataformas de saúde pública do SUS. 
+
+No entanto, a arquitetura original exposta em plataformas como a do Open-Twin de identidade apresenta severas limitações que exigem aprimoramentos para que possam ser utilizadas sob a égide da ANVISA e das regulamentações de SaMD:
+
+\begin{enumerate}
+    \item \textbf{Adoção do Model Context Protocol (MCP)}: A arquitetura atual baseia-se em execuções monolíticas de CLI. O acoplamento de servidores MCP especializados permite que o gêmeo de identidade consulte dinamicamente dados geométricos de escaneamentos intraorais (como malhas PLY/STL) e acione solvers físicos em tempo real, enriquecendo a tomada de decisão com evidências biológicas estáveis.
+    \item \textbf{Camada de Barreiras de Segurança Clínica (Clinical Guardrails)}: Agentes autônomos em saúde não podem postar conselhos ou informações clínicas sem validação médica rígida. A inserção de filtros semânticos e verificadores de toxicidade/desinformação imuniza o sistema contra alucinações de modelos generativos que possam comprometer a integridade física do paciente.
+    \item \textbf{Assinaturas Criptográficas e Provas ZKP}: Para a proteção da privacidade nos termos da LGPD, a comunicação de gêmeos de identidade deve empregar assinaturas cegas (Zero-Knowledge Proofs). Isso garante que o desfecho clínico seja compartilhado em redes de cooperação sem vazar o Cartão Nacional de Saúde (CNS) ou outros dados pessoais sensíveis.
+\end{enumerate}
+
+Essa simbiose entre o reflexo biológico periodontal e o agente inteligente de comunicação sedimenta as bases de um ecossistema integrado que responde de forma ágil, ética e clinicamente segura às demandas da odontologia pública descentralizada.

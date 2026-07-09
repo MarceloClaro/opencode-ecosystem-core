@@ -1,0 +1,985 @@
+\documentclass[
+  12pt,
+  a4paper,
+  brazil,
+  twoside
+]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[brazil]{babel}
+
+\usepackage[
+  top=3cm, left=3cm, right=2cm, bottom=2cm
+]{geometry}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE,LO]{\textit{A Insustent\''avel Leveza da Detec\c{c}\~ao}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+\usepackage{array, booktabs, longtable}
+\usepackage{graphicx}
+\usepackage[bottom]{footmisc}
+
+\usepackage{titlesec}
+\titleformat{\chapter}{\normalfont\bfseries\Large}{\thechapter}{0.5em}{}
+\titleformat{\section}{\normalfont\bfseries\large}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalfont\bfseries\normalsize}{\thesubsection}{0.5em}{}
+
+\usepackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setcounter{tocdepth}{2}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+    \vspace*{2cm}
+    {\large\bfseries UNIVERSIDADE DE S\~AO PAULO\par}
+    {\large\bfseries PROGRAMA DE P\'OS-GRADUA\c{C}\~AO EM CI\^ENCIA DA INFORMA\c{C}\~AO\par}
+    \vspace{4cm}
+    {\LARGE\bfseries A Insustentável Leveza da Detecção: Regulação da
+Inteligência Artificial Generativa na Pesquisa Científica Brasileira
+entre a Norma, a Técnica e o Mercado Global da Quarta Revolução
+Industrial\par}
+    \vspace{0.5cm}
+    {\large\bfseries Análise Crítica da Portaria CNPq nº 2.664/2026\par}
+    \vspace{3cm}
+    {\large Disserta\c{c}\~ao apresentada ao Programa de P\'os-Gradua\c{c}\~ao em
+    Ci\^encia da Informa\c{c}\~ao da Universidade de S\~ao Paulo como requisito
+    parcial para obten\c{c}\~ao do t\'itulo de Mestre.\par}
+    \vspace{1cm}
+    {\large Orientador: Prof. Dr. [Nome]\par}
+    \vfill
+    {\large 2026\par}
+  \end{center}
+\end{titlepage}
+
+\newpage
+\begin{center}
+  \vspace*{4cm}
+  {\Large\bfseries FOLHA DE ROSTO\par}
+  \vspace{2cm}
+  {\normalsize Disserta\c{c}\~ao de Mestrado\par}
+  \vspace{0.5cm}
+  {\normalsize \textbf{A Insustentável Leveza da Detecção: Regulação da
+Inteligência Artificial Generativa na Pesquisa Científica Brasileira
+entre a Norma, a Técnica e o Mercado Global da Quarta Revolução
+Industrial}\par}
+  \vspace{0.5cm}
+  {\normalsize \textbf{Análise Crítica da Portaria CNPq nº
+2.664/2026}\par}
+  \vspace{1cm}
+  \begin{flushright}
+  \begin{minipage}{8cm}
+  \small Disserta\c{c}\~ao apresentada ao Programa de P\'os-Gradua\c{c}\~ao em
+  Ci\^encia da Informa\c{c}\~ao da Universidade de S\~ao Paulo como requisito
+  parcial para obten\c{c}\~ao do t\'itulo de Mestre.
+  \end{minipage}
+  \end{flushright}
+  \vfill
+  {\large 2026\par}
+\end{center}
+
+\newpage
+\begin{center}
+  \vspace*{2cm}
+  {\Large\bfseries RESUMO\par}
+  \vspace{1cm}
+  \begin{minipage}{14cm}
+  \onehalfspacing
+  Esta dissertação analisa criticamente a Portaria CNPq nº 2.664, de 6
+  de março de 2026, que institui a Política de Integridade na Atividade
+  Científica do CNPq, à luz da Quarta Revolução Industrial. A pesquisa
+  adota metodologia jurídico-dogmática de natureza qualitativa,
+  combinando análise normativa, revisão sistemática da literatura
+  técnica sobre detectores de Inteligência Artificial Generativa (IAG),
+  regulação comparada (União Europeia, China, Estados Unidos) e análise
+  de economia política da inovação. Os resultados revelam sete
+  ambiguidades hermenêuticas no art. 9º da Portaria, inviabilidade
+  técnica da fiscalização baseada em detectores automáticos, assimetria
+  competitiva no mercado global de P\&D e conflitos normativos com a
+  LGPD e a Constituição Federal. Conclui-se que a Portaria, não obstante
+  suas boas intenções, impõe custos regulatórios desproporcionais ao
+  sistema brasileiro de CT\&I e propõe-se modelo híbrido de regulação
+  que combine marcação técnica pelos provedores de IA, declaração
+  simplificada pelo pesquisador e gradação de exigências por nível de
+  risco.
+  \end{minipage}
+  \vspace{1cm}
+  \par\noindent
+  \begin{minipage}{14cm}
+  \textbf{Palavras-chave:} Inteligência Artificial Generativa;
+Integridade Científica; CNPq; Quarta Revolução Industrial; Regulação
+Comparada.
+  \end{minipage}
+\end{center}
+
+\newpage
+\begin{center}
+  \vspace*{2cm}
+  {\Large\bfseries ABSTRACT\par}
+  \vspace{1cm}
+  \begin{minipage}{14cm}
+  \onehalfspacing
+  This thesis critically analyzes CNPq Ordinance No.~2.664, of March 6,
+  2026, which establishes the Integrity Policy for Scientific Activity,
+  in light of the Fourth Industrial Revolution. The research adopts a
+  qualitative legal-dogmatic methodology, combining normative analysis,
+  systematic review of the technical literature on Generative AI
+  detectors, comparative regulation (European Union, China, United
+  States), and political economy analysis of innovation. The results
+  reveal seven hermeneutic ambiguities in Article 9 of the Ordinance,
+  technical infeasibility of enforcement based on automatic detectors,
+  competitive asymmetry in the global RD market, and normative conflicts
+  with the Brazilian Data Protection Law and the Federal Constitution.
+  The conclusion is that the Ordinance, despite its good intentions,
+  imposes disproportionate regulatory costs on the Brazilian STI system.
+  A hybrid regulation model is proposed, combining technical
+  watermarking by AI providers, simplified researcher declaration, and
+  risk-based requirements.
+  \end{minipage}
+  \vspace{1cm}
+  \par\noindent
+  \begin{minipage}{14cm}
+  \textbf{Keywords:} Generative Artificial Intelligence; Scientific
+Integrity; CNPq; Fourth Industrial Revolution; Comparative Regulation.
+  \end{minipage}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+
+\section{1. Introdução}\label{introduuxe7uxe3o}
+
+O ano de 2026 será lembrado como o momento em que três das maiores
+potências científicas do mundo --- Brasil, China e União Europeia ---
+convergiram para regular o uso de inteligência artificial generativa
+(IAG) na pesquisa acadêmica, cada qual com seu modelo normativo. Os
+Estados Unidos, por sua vez, optaram por via distinta, centrada em
+segurança de pesquisa e combate à influência estrangeira. Esta
+dissertação situa a Portaria CNPq nº 2.664/2026 neste cenário comparado
+para revelar suas fragilidades, limites e propor alternativa regulatória
+viável.
+
+\subsection{1.1. Contexto Regulatório}\label{contexto-regulatuxf3rio}
+
+A Portaria CNPq nº 2.664, de 6 de março de 2026, institui a Política de
+Integridade na Atividade Científica. Seu art. 9º estabelece três
+diretrizes centrais: (i) alínea ``c'': obrigatoriedade de declarar o uso
+de IAG ``em qualquer fase do desenvolvimento da pesquisa (concepção,
+redação, análise de dados, submissão) especificando {[}\ldots{]} a
+ferramenta utilizada e a finalidade''; (ii) alínea ``d'': vedação de
+``submissão de conteúdo gerado por IAG como se fosse de autoria
+humana''; (iii) alínea ``e'': vedação ao uso de IAG para elaboração de
+pareceres científicos \footnote{BRASIL. Portaria CNPq nº 2.664, de 6 de
+  março de 2026. Institui a Política de Integridade na Atividade
+  Científica. \emph{Diário Oficial da União}, Brasília, 11 mar. 2026. A
+  Portaria reconhece oficialmente a IAG como ferramenta legítima, não a
+  proíbe, alinhando-se ao movimento internacional. Sua fragilidade
+  central é não definir sanções específicas nem mecanismos de
+  verificação, criando norma sem enforcement --- lex imperfecta. A
+  ausência de tipificação sancionatória viola o princípio da legalidade
+  estrita (art. 5º, II, CF) ao expor o pesquisador ao arbítrio
+  interpretativo do agente público.}. Simultaneamente, a CAPES
+disponibilizou o documento ``A inteligência artificial na pesquisa e no
+fomento: desafios e oportunidades'' (Brasil, 2026) \footnote{BRASIL, A.
+  L. \emph{A inteligência artificial na pesquisa e no fomento: desafios
+  e oportunidades}. Brasília: CAPES, 2026. Documento interno de
+  circulação restrita. Disponível mediante solicitação à CAPES. Sua
+  principal contribuição é sinalizar que a agência reconhece a IA como
+  tema prioritário.}, que reconhece a urgência do debate mas não oferece
+solução operacional.
+
+A pergunta fundamental --- ``como provar que alguém usou IA?'' --- não
+encontra resposta no texto da Portaria nem na literatura técnica. Esta
+dissertação sustenta que, ao exigir o que é logicamente impossível de
+verificar, o protocolo CNPq opera como instrumento de retardamento
+burocrático da pesquisa, penalizando inovadores e não constrangendo
+mal-intencionados.
+
+\subsection{1.2. Problema de Pesquisa}\label{problema-de-pesquisa}
+
+A Portaria CNPq nº 2.664/2026 pressupõe que o uso não declarado de IAG
+pode ser identificado e punido. Esta premissa é questionável à luz de
+três ordens de problemas: (a) a inviabilidade técnica dos detectores de
+texto gerado por IA; (b) as ambiguidades hermenêuticas do texto
+normativo; (c) a ausência de mecanismos de enforcement compatíveis com o
+estado da arte da tecnologia. A estas se soma a constatação de que o
+modelo regulatório brasileiro difere substancialmente das abordagens
+adotadas por China, União Europeia e Estados Unidos, criando assimetria
+competitiva no mercado global de pesquisa e desenvolvimento.
+
+\subsection{1.3. Objetivos}\label{objetivos}
+
+O objetivo geral desta dissertação é analisar criticamente a Portaria
+CNPq nº 2.664/2026 à luz da literatura técnica sobre detecção de IAG, da
+teoria jurídica e da regulação comparada. São objetivos específicos: (a)
+sistematizar as evidências empíricas sobre a confiabilidade dos
+detectores automatizados de IAG; (b) identificar e categorizar as
+ambiguidades hermenêuticas do art. 9º; (c) analisar as colisões
+normativas com a LGPD e a Constituição Federal; (d) comparar o modelo
+brasileiro com as regulações da China, União Europeia e Estados Unidos;
+(e) propor modelo regulatório híbrido que supere as limitações
+identificadas.
+
+\subsection{1.4. Metodologia}\label{metodologia}
+
+A pesquisa adota metodologia jurídico-dogmática de natureza qualitativa,
+combinando: (a) análise normativa da Portaria CNPq nº 2.664/2026 e
+legislação correlata; (b) revisão sistemática da literatura técnica
+publicada entre 2023 e 2026 sobre detectores de IAG, com ênfase em
+estudos empíricos de larga escala; (c) análise de regulação comparada
+compreendendo China (GB 45438-2025, Interim Measures), União Europeia
+(AI Act Regulation 2024/1689) e Estados Unidos (NSF TRUST Framework);
+(d) análise de economia política da inovação à luz do conceito de Quarta
+Revolução Industrial (Schwab, 2016).
+
+\subsection{1.5. Estrutura da
+Dissertação}\label{estrutura-da-dissertauxe7uxe3o}
+
+Além desta introdução, a dissertação compreende cinco capítulos
+adicionais. O Capítulo 2 analisa a dimensão técnica do problema da
+detecção de IAG. O Capítulo 3 examina as ambiguidades hermenêuticas do
+art. 9º e os paradoxos éticos da declaração obrigatória. O Capítulo 4
+investiga as colisões normativas com o ordenamento jurídico brasileiro.
+O Capítulo 5 apresenta a análise comparada dos quatro modelos
+regulatórios. O Capítulo 6 conclui com balanço crítico e propostas de
+aperfeiçoamento.
+
+\section{2. Dimensão Técnica: O Problema Insolúvel da
+Detecção}\label{dimensuxe3o-tuxe9cnica-o-problema-insoluxfavel-da-detecuxe7uxe3o}
+
+\subsection{2.1. A Falência dos Detectores
+Automatizados}\label{a-faluxeancia-dos-detectores-automatizados}
+
+O art. 9º, alínea ``c'', pressupõe que o uso não declarado de IAG pode
+ser identificado e punido. Esta premissa é falseada por um corpo robusto
+de evidências empíricas.
+
+Weber-Wulff et al.~(2023) testaram 14 detectores comerciais de texto
+gerado por IA e encontraram ``altas taxas de falso-positivo'',
+concluindo que ``nenhum detector é confiável o suficiente para uso em
+contextos de alta penalidade'' \footnote{WEBER-WULFF, D. et al.~Testing
+  of detection tools for AI-generated text. \emph{International Journal
+  for Educational Integrity}, v. 19, n.~1, 2023. DOI:
+  10.1007/s40979-023-00146-z. Estudo financiado pelo BMBF (Alemanha).
+  Limitação: testou apenas detectores disponíveis em 2023; versões
+  posteriores podem ter desempenho diferente, mas a literatura de
+  2024-2025 confirma que o problema persiste. Metodologia
+  multiplataforma robusta com 14 ferramentas.}. A amostra incluiu textos
+acadêmicos reais e gerados por diferentes modelos (GPT-3, GPT-3.5,
+GPT-4), em múltiplos idiomas, e os resultados foram consistentes:
+nenhuma ferramenta atingiu simultaneamente sensibilidade superior a 80\%
+e especificidade superior a 90\%.
+
+Liu et al.~(2024) compararam detectores automatizados com julgamento
+humano na identificação de textos médicos gerados por LLMs. O estudo
+concluiu que ``nenhum método atinge confiabilidade aceitável'' e que ``a
+concordância entre detectores é baixa'' \footnote{LIU, J. Q. J. et
+  al.~The great detectives: humans versus AI detectors in catching large
+  language model-generated medical writing. \emph{International Journal
+  for Educational Integrity}, v. 20, n.~1, 2024. DOI:
+  10.1007/s40979-024-00155-6. Originalidade: compara detecção humana
+  versus automatizada em contexto médico. Limitação: amostra pequena
+  (n=200 textos).}.
+
+Pudasaini et al.~(2025), em survey abrangente no Journal of Academic
+Ethics (Qualis A1), documentaram que a paráfrase --- técnica trivial
+disponível em qualquer LLM --- reduz a acurácia dos detectores a níveis
+próximos do aleatório. Os autores testaram cinco detectores contra
+textos submetidos a paráfrase, tradução e prompt injection, constatando
+que ``a taxa de detecção cai de 85\% para 32\% após paráfrase mínima''
+\footnote{PUDASAINI, S. et al.~Survey on AI-generated plagiarism
+  detection. \emph{Journal of Academic Ethics}, v. 23, p.~1137-1170,
+  2025. DOI: 10.1007/s10805-024-09576-x. Qualis A1. Mapeia
+  sistematicamente 47 detectores, 23 datasets e 18 estratégias de
+  evasão. Limitação: foco em inglês; idiomas como português têm
+  desempenho de detecção ainda pior.}.
+
+O estudo de larga escala mais recente é o de Liang et al.~(2025), que
+analisou 164.579 artigos completos e 5,2 milhões de resumos. A conclusão
+é devastadora para o protocolo CNPq: entre os 75.172 artigos publicados
+desde 2023, apenas 76 (\textasciitilde0,1\%) declararam uso de IA.
+Contudo, a proporção estimada de artigos com conteúdo gerado por IA no
+primeiro trimestre de 2025 era 40 vezes maior que a taxa de declaração
+(40:1) \footnote{LIANG, W. et al.~Discrepancy between AI content
+  proportion and disclosure rate in scientific publications.
+  \emph{Nature Human Behaviour}, 2025. DOI: 10.48550/arXiv.2512.06705. A
+  escala do estudo (5,2 milhões de artigos) confere poder estatístico
+  ímpar. A razão 40:1 é o dado mais contundente contra a eficácia do
+  protocolo brasileiro.}.
+
+Kwon (2025), em reportagem na Nature, documentou que ``science sleuths''
+identificaram centenas de artigos científicos publicados em 2024-2025
+que usam IAG sem declarar, corroborando a discrepância identificada por
+Liang et al. \footnote{KWON, D. Science sleuths flag hundreds of papers
+  that use AI without disclosing it. \emph{Nature}, v. 641, p.~290-291,
+  2025. DOI: 10.1038/d41586-025-01180-2.}.
+
+\subsection{2.2. A Anomalia do Art. 9º, Alínea
+``c''}\label{a-anomalia-do-art.-9uxba-aluxednea-c}
+
+A redação da alínea ``c'' --- ``IAG, de qualquer espécie e em qualquer
+fase'' --- padece de hipergeneralização. A IA não é monolítica. Kocak et
+al.~(2025) distinguem ao menos quatro níveis de uso de IA na pesquisa
+acadêmica, cada qual com diferentes implicações éticas e de detecção
+\footnote{KOCAK, B. et al.~Ensuring peer review integrity in the era of
+  large language models. \emph{European Journal of Radiology Artificial
+  Intelligence}, v. 2, 100018, 2025. DOI: 10.1016/j.ejrai.2025.100018.
+  Artigo com 47 co-autores de 12 países. A taxonomia de níveis de uso de
+  IA proposta pelos autores (Seção 2) é referência internacional.}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Assistência linguística (corretor ortográfico, paráfrase pontual): não
+  detectável, relevância ética mínima.
+\item
+  Sumarização e tradução (DeepL, Elicit): parcialmente detectável,
+  relevância ética baixa.
+\item
+  Geração de seções (redação de métodos ou discussão): detecção
+  duvidosa, relevância ética alta.
+\item
+  Geração integral (artigo completo por IA): detectável apenas por
+  marcadores grosseiros, relevância ética gravíssima.
+\end{enumerate}
+
+A Portaria trata todos os níveis como equivalentes. Esta falta de
+gradação expõe o pesquisador que usa Grammarly para correção ortográfica
+ao mesmo regime legal de quem submete artigo integralmente gerado por IA
+--- um tratamento juridicamente desproporcional e que viola o princípio
+da razoabilidade.
+
+\subsection{2.3. A Falácia do
+Enforcement}\label{a-faluxe1cia-do-enforcement}
+
+A impossibilidade técnica de detecção produz uma falácia de enforcement:
+o protocolo parece exigir conduta, mas não oferece meio de verificação.
+Pérez-Neri et al.~(2025), na Frontiers in Artificial Intelligence,
+sintetizam: ``os desenvolvimentos atuais {[}em detectores{]} não são
+suficientemente precisos ou confiáveis para uso em avaliação acadêmica''
+\footnote{PÉREZ-NERI, I. et al.~Detecting and correcting errors in
+  scientific literature in the generative AI era. \emph{Frontiers in
+  Artificial Intelligence}, v. 8, 2025. DOI: 10.3389/frai.2025.1644098.
+  Revisão de escopo com análise de 22 ferramentas de detecção.}.
+
+Gils et al.~(2024) demonstraram, em estudo de policy prototyping para o
+AI Act europeu, que mesmo requisitos de transparência bem definidos
+encontram barreiras técnicas de implementação, desde a falta de
+padronização até a impossibilidade de watermarking eficaz em modelos de
+linguagem de pequeno porte \footnote{GILS, T. et al.~From Policy to
+  Practice: Prototyping The EU AI Act's Transparency Requirements.
+  \emph{SSRN}, 2024. DOI: 10.2139/ssrn.4714345.}.
+
+\section{3. Dimensão Hermenêutica e
+Ética}\label{dimensuxe3o-hermenuxeautica-e-uxe9tica}
+
+\subsection{3.1. As Sete Ambiguidades do Art.
+9º}\label{as-sete-ambiguidades-do-art.-9uxba}
+
+O art. 9º da Portaria nº 2.664/2026 contém pelo menos sete ambiguidades
+que comprometem sua aplicação coerente e produzem insegurança jurídica:
+
+\textbf{Ambiguidade 1 --- ``pesquisa apoiada pelo CNPq'' (caput).} A
+expressão pode ser interpretada restritivamente (apenas pesquisas com
+repasse financeiro direto) ou ampliativamente (toda atividade de
+pesquisador que recebe bolsa PQ). A primeira interpretação exclui
+parcela significativa da produção científica brasileira; a segunda
+amplia o escopo além da competência legal do CNPq, invadindo seara de
+periódicos e universidades \footnote{PESQUISAI. CNPq reconhece o uso da
+  Inteligência Artificial Generativa na pesquisa científica.
+  \emph{Portal PesquisAI}, 16 mar. 2026.}.
+
+\textbf{Ambiguidade 2 --- ``qualquer espécie'' de IAG (alínea ``c'').}
+Inclui corretor ortográfico baseado em IA? Tradutor automático? A falta
+de definição captura desde ferramentas assistivas triviais até modelos
+generativos de fronteira, sem qualquer gradação.
+
+\textbf{Ambiguidade 3 --- ``qualquer fase'' (alínea ``c'').} A concepção
+da ideia de pesquisa já dispara a obrigação de declarar? A redação
+sugere que sim, mas a operacionalização é inviável.
+
+\textbf{Ambiguidade 4 --- ``conteúdo gerado por IAG'' (alínea ``d'').}
+Esta é a ambiguidade mais problemática. Se o pesquisador usa ChatGPT
+para sugerir três versões de um parágrafo, edita manualmente as três e
+funde em uma quarta versão, o texto resultante é ``gerado por IAG''? A
+literatura sobre human-AI co-creation demonstra que a distinção é um
+continuum, não uma dicotomia.
+
+\textbf{Ambiguidade 5 --- ``finalidade'' a especificar (alínea ``c'').}
+Basta ``revisão textual'' ou exige detalhamento por parágrafo? A
+Portaria não estabelece o nível de granularidade exigido.
+
+\textbf{Ambiguidade 6 --- ``ferramenta utilizada'' (alínea ``c'').}
+Versão exata do modelo? Provedor? Data da consulta? Parâmetros
+utilizados (temperatura, top-p)?
+
+\textbf{Ambiguidade 7 --- vedação a pareceres com IAG (alínea ``e'').}
+Aplica-se a LLMs locais (open-source) executados sem transmissão de
+dados? A ascensão de modelos como Llama 3.1 405B, DeepSeek-V3 e Mistral
+Large viabiliza execução local com desempenho comparável a modelos
+comerciais, tornando a vedação inócua para usuários técnicos
+\footnote{A ascensão de modelos open-source (Llama 3.1 405B,
+  DeepSeek-V3, Mistral Large) viabiliza execução local com desempenho
+  comparável a modelos comerciais, tornando a alínea ``e'' inócua para
+  usuários técnicos.}.
+
+\subsection{3.2. O Paradoxo da
+Transparência}\label{o-paradoxo-da-transparuxeancia}
+
+Schilke e Reimann (2025) identificaram o que denominam ``dilema da
+transparência'' (transparency dilemma): a declaração de uso de IA reduz
+a confiança do leitor no trabalho, mesmo quando a IA foi usada de forma
+ética e assistiva \footnote{SCHILKE, O.; REIMANN, M. The transparency
+  dilemma: How AI disclosure erodes trust. \emph{Organizational Behavior
+  and Human Decision Processes}, v. 188, 2025. DOI:
+  10.1016/j.obhdp.2025.104405. Estudo experimental com 6 estudos (N
+  total = 2.847).}. O estudo, conduzido com 2.847 participantes em seis
+experimentos, demonstrou que o efeito persiste mesmo quando a IA é usada
+apenas para formatação ou revisão gramatical.
+
+Este efeito é particularmente perverso no contexto do protocolo CNPq: o
+pesquisador que declara uso de IA segundo o art. 9º, alínea ``c'',
+expõe-se a escrutínio mais rigoroso, vieses de revisão e potencial
+desqualificação. O pesquisador que não declara, por outro lado, não
+corre risco (a detecção é inviável). O resultado é a seleção adversa: o
+protocolo pune a honestidade e recompensa a omissão.
+
+\subsection{3.3. O Paradoxo da Reprodutibilidade versus Segredo
+Industrial}\label{o-paradoxo-da-reprodutibilidade-versus-segredo-industrial}
+
+A alínea ``d'' --- vedação de submissão de conteúdo gerado por IAG como
+autoria humana --- colide com a realidade da pesquisa de fronteira
+mediada por IA. Modelos de AlphaFold, GNoME ou descoberta por IA operam
+sob lógica de caixa-preta protegida por segredo industrial.
+
+Kocak et al.~(2025) descrevem este paradoxo: a reprodutibilidade
+científica exige transparência total, mas os modelos algorítmicos que
+viabilizam inovações aceleradas são protegidos como propriedade
+intelectual. A comunidade pode validar resultados finais, não o processo
+cognitivo da máquina \footnote{KOCAK, B. et al., op. cit.}. A Portaria,
+ao tratar a transparência como sempre possível, ignora o conflito
+estrutural entre propriedade corporativa e escrutínio acadêmico.
+
+Meszaros, Huys e Ioannidis (2026) demonstram que este problema é global:
+a distinção entre ``pesquisa'' e ``atividade comercial'' no AI Act
+europeu é igualmente problemática, e as isenções de pesquisa
+``baseiam-se em distinções que podem não capturar plenamente as
+realidades da pesquisa contemporânea em IA'' \footnote{MESZAROS, J.;
+  HUYS, I.; IOANNIDIS, J. P. A. Challenges in applying the EU AI Act
+  research exemptions to contemporary AI research. \emph{npj Digital
+  Medicine}, 2026. DOI: 10.1038/s41746-025-02263-0.}.
+
+\section{4. Dimensão Jurídico-Brasileira: Colisões
+Normativas}\label{dimensuxe3o-juruxeddico-brasileira-colisuxf5es-normativas}
+
+\subsection{4.1. LGPD versus Alínea
+``c''}\label{lgpd-versus-aluxednea-c}
+
+A alínea ``c'' exige que o pesquisador especifique ``a ferramenta
+utilizada e a finalidade'' do uso de IAG. Se a ferramenta for um LLM
+comercial (ChatGPT, Claude, Gemini), o pesquisador pode estar --- sem
+saber --- violando a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei
+nº 13.709/2018) ao submeter dados de pesquisa a servidores no exterior,
+especialmente se os dados envolverem informações pessoais de sujeitos de
+pesquisa \footnote{A LGPD (Lei nº 13.709/2018) exige consentimento
+  específico e finalidade determinada para tratamento de dados pessoais.
+  A submissão de dados a LLMs comerciais (que tipicamente usam dados
+  para treinamento) pode configurar violação. Cf. art. 7º, I c/c art.
+  11, I da LGPD.}.
+
+A LGPD exige consentimento específico e finalidade determinada para
+tratamento de dados pessoais (art. 7º, I c/c art. 11, I). A submissão de
+dados a LLMs comerciais --- que tipicamente utilizam dados para
+treinamento --- pode configurar violação. Adicionalmente, a decisão do
+Supremo Tribunal Federal no RE 1.057.258 (Tema 987) reforça a
+autodeterminação informativa como direito fundamental.
+
+A Portaria oferece zero orientação sobre como conciliar a obrigação de
+declarar detalhadamente o uso de IA com a proteção de dados. O
+pesquisador fica diante de um conflito normativo: cumprir o CNPq
+(declarar a ferramenta) ou cumprir a LGPD (não expor dados a terceiros
+não autorizados pelo consentimento).
+
+\subsection{4.2. Art. 218 da Constituição
+Federal}\label{art.-218-da-constituiuxe7uxe3o-federal}
+
+O art. 218 da Constituição Federal determina que ``o Estado promoverá e
+incentivará o desenvolvimento científico, a pesquisa, a capacitação
+científica e tecnológica e a inovação''. A Portaria impõe obrigações
+declaratórias e vedações sem contrapartida de incentivo.
+
+Bucci (2021) sustenta que a regulação estatal da pesquisa deve observar
+a proporcionalidade entre meios restritivos e fins promocionais
+\footnote{BUCCI, M. P. D. \emph{Fundamentos para uma teoria jurídica das
+  políticas públicas}. 2. ed.~São Paulo: Saraiva Jur, 2021.}. Uma norma
+que cria custo burocrático sem benefício demonstrável de integridade é
+desproporcional na modalidade ``proibição de excesso''. O descompasso
+entre regulação e fomento pode ser questionado à luz do princípio
+constitucional.
+
+\subsection{4.3. Ausência de Sanção Específica e Legalidade
+Estrita}\label{ausuxeancia-de-sanuxe7uxe3o-especuxedfica-e-legalidade-estrita}
+
+A Portaria não estabelece sanções para o descumprimento do art. 9º. Esta
+lacuna viola o princípio da legalidade estrita (art. 5º, II, CF) e a
+tipicidade no direito administrativo sancionador. Sem descrição clara de
+infração e sanção, a aplicação da norma dependeria de interpretação
+extensiva --- vedada neste âmbito.
+
+O direito administrativo brasileiro exige que a sanção esteja prevista
+em lei ou ato normativo equivalente (art. 5º, XXXIX, CF c/c art. 1º da
+LINDB). Justen Filho (2024) esclarece que não há sanção sem prévia
+cominação legal (nulla poena sine lege) \footnote{JUSTEN FILHO, M.
+  \emph{Curso de direito administrativo}. 15. ed.~Rio de Janeiro:
+  Forense, 2024.}. A Portaria CNPq é ato administrativo normativo, não
+lei em sentido formal. Mesmo que se admita poder disciplinar da
+autarquia (art. 37, §6º, CF), a ausência de especificação do que
+constitui infração e qual a penalidade viola o devido processo legal
+substantivo.
+
+A ausência de sanção explícita significa que, na prática, a Portaria é
+lex imperfecta: obriga mas não pune, ou pune sem tipificação, o que é
+juridicamente insustentável.
+
+\subsection{4.4. O Sistema Qualis-CAPES como Antecedente
+Estrutural}\label{o-sistema-qualis-capes-como-antecedente-estrutural}
+
+A Portaria nº 2.664/2026 não surge em vácuo. Ela se insere em tradição
+de avaliação quantitativa e burocrática que sistematicamente privilegia
+métricas internacionais em detrimento da pesquisa nacional. Caballero
+Rivero, Santos e Trzesniak (2024) demonstraram que os sistemas de
+avaliação CAPES/CNPq induzem padrões de publicação que priorizam
+periódicos estrangeiros de alto impacto em detrimento da relevância
+local \footnote{CABALLERO RIVERO, A.; SANTOS, R. N. M.; TRZESNIAK, P.
+  Efeitos dos sistemas de avaliação de pesquisa de CAPES e CNPQ nos
+  padrões de publicação dos pesquisadores das ciências da saúde no
+  Brasil. \emph{Em Questão}, v. 30, 2024. DOI:
+  10.1590/1808-5245.30.138437.}.
+
+O efeito performativo é bem descrito por Albuquerque (2025): ``o simples
+fato de existirem critérios externos faz com que os programas de
+pós-graduação se reorganizem para atendê-los'' \footnote{ALBUQUERQUE, U.
+  P. Ciência em debate: o peso silencioso da avaliação. \emph{The
+  Conversation}, 13 out. 2025.}. Sguissardi (2006) denominou este
+fenômeno de ``avaliação defensiva'' \footnote{SGUISSARDI, V. A avaliação
+  defensiva no ``modelo CAPES de avaliação''. \emph{Perspectiva}, v. 24,
+  n.~1, p.~49-88, 2006.}. Perez (2025) atualizou a crítica para o
+contexto do Qualis 2025-2028, argumentando que os novos critérios
+``tendem a aprofundar desigualdades regionais, institucionais e de
+gênero'' \footnote{PEREZ, O. C. Avaliação em Disputa: A Reforma do
+  Qualis e os Desafios para a Ciência. \emph{Novos Debates}, v. 11,
+  n.~1, 2025. DOI: 10.48006/2358-0097/V11N1.E111011.}.
+
+\section{5. Regulação Comparada: Quatro Modelos
+Regulatórios}\label{regulauxe7uxe3o-comparada-quatro-modelos-regulatuxf3rios}
+
+A comparação internacional revela que cada país abordou o desafio de
+forma diversa, e que a opção brasileira --- autodeclaração sem
+verificação técnica --- é a de menor densidade normativa e menor
+capacidade de enforcement.
+
+\subsection{5.1. China: Regulação Centralizada com Padrão
+Obrigatório}\label{china-regulauxe7uxe3o-centralizada-com-padruxe3o-obrigatuxf3rio}
+
+A China adotou o modelo mais abrangente e tecnicamente sofisticado. O
+Ministério da Ciência e Tecnologia publicou em 2023 diretrizes que
+proíbem o uso de IAG para gerar materiais de submissão, exigem rotulagem
+clara de conteúdo gerado por IA e vedam a IA como co-autora \footnote{CHINA.
+  Ministry of Science and Technology. \emph{Guidelines for Responsible
+  Research Conduct}. Beijing, 2023. Publicado em 21/12/2023. Exige que
+  conteúdo gerado por IA seja claramente rotulado. Limitação:
+  diretrizes, não lei; enforcement depende de incorporação por
+  instituições.}. A Academia Chinesa de Ciências complementou com oito
+``lembretes de integridade'' detalhando usos permitidos e proibidos por
+etapa de pesquisa.
+
+O marco mais significativo é o padrão nacional obrigatório GB 45438-2025
+(``Cybersecurity Technology: Labeling Method for Content Generated by
+Artificial Intelligence''), vigente desde setembro de 2025, que exige
+marcação explícita (visível ao usuário) e implícita (metadados,
+watermarks digitais) de conteúdo gerado por IA \footnote{CHINA.
+  \emph{Measures for the Identification of AI-Generated (Synthetic)
+  Content}. Promulgado conjuntamente por CAC, MIIT, MPS e NRTA em
+  07/03/2025, vigente desde 01/09/2025, acompanhado do padrão nacional
+  GB 45438-2025.}. A este se somam as Interim Measures on Generative AI
+Services, que estabelecem regime de registro e filing de algoritmos.
+
+O modelo chinês é o que mais se aproxima de um enforcement factível, por
+três razões: (a) o padrão técnico obrigatório é aplicado na fonte pelos
+provedores de IA chineses; (b) a fiscalização é exercida pelo Cyberspace
+Administration of China (CAC) com poder de sanção administrativa; (c) o
+regime exige registro e filing de algoritmos de IA.
+
+Limitações do modelo chinês incluem: (a) dependência de provedores
+nacionais --- LLMs estrangeiros não são acessíveis na China continental,
+criando ecossistema controlado; (b) alto custo de conformidade; (c)
+potencial para censura e controle político disfarçado de regulação de
+IA, como observa Beladiya (2026) \footnote{BELADIYA, R. How China Is
+  Controlling Generative AI Technologies. \emph{AI Law Guide}, maio
+  2026.}.
+
+\subsection{5.2. União Europeia: Abordagem Baseada em Risco com
+Enforcement
+Escalonado}\label{uniuxe3o-europeia-abordagem-baseada-em-risco-com-enforcement-escalonado}
+
+O EU AI Act (Regulation 2024/1689) é o primeiro marco regulatório
+abrangente de IA no mundo. Para a pesquisa acadêmica, seus dispositivos
+mais relevantes são: o art. 2(6) e (8), que estabelece isenções para
+pesquisa (research exemption); o art. 50, que impõe obrigações de
+transparência aplicáveis a todos os sistemas de IA; e o Code of Practice
+on Marking and Labelling, em desenvolvimento \footnote{EUROPEAN UNION.
+  Regulation (EU) 2024/1689. \emph{Official Journal of the European
+  Union}, 2024. Art. 2(6): ``This Regulation does not apply to AI
+  systems specifically developed and put into service for the sole
+  purpose of scientific research and development.'' Art. 50(2):
+  ``Providers of GPAI models that generate synthetic content shall
+  ensure that the output is marked in a machine-readable format and
+  detectable as artificially generated or manipulated.''}.
+
+A distinção crítica do modelo europeu é que não impõe declaração pelo
+autor, mas sim marcação técnica pelo provedor. O LLM comercial é
+obrigado por lei (art. 50(2)) a marcar seu output de forma legível por
+máquina. A obrigação de transparência recai sobre quem disponibiliza o
+sistema, não sobre quem o usa.
+
+Isso contrasta fundamentalmente com o modelo brasileiro, que impõe a
+obrigação exclusivamente sobre o pesquisador-usuário --- sem exigência
+correspondente sobre os provedores. A assimetria é evidente: o Brasil
+regula quem não tem como verificar a própria declaração.
+
+Meszaros, Huys e Ioannidis (2026) identificaram fragilidades nas
+isenções de pesquisa do AI Act: a distinção entre pesquisa acadêmica e
+atividade comercial é turva, e o desenvolvimento em ambiente controlado
+versus teste em ambiente real é difícil de determinar \footnote{MESZAROS,
+  J.; HUYS, I.; IOANNIDIS, J. P. A., op. cit.}.
+
+\subsection{5.3. Estados Unidos: Segurança de Pesquisa em vez de
+Regulação de
+IA}\label{estados-unidos-seguranuxe7a-de-pesquisa-em-vez-de-regulauxe7uxe3o-de-ia}
+
+Os EUA não possuem regulação federal específica sobre uso de IA na
+pesquisa acadêmica. A abordagem é indireta, centrada em pesquisa
+segurança (research security) e combate à influência estrangeira. A NSF
+Scientific Integrity Policy (NSF 24-007, fevereiro de 2024) reafirma
+compromisso com integridade mas não menciona IA especificamente
+\footnote{NSF. \emph{NSF Scientific Integrity Policy} (NSF 24-007). 12
+  fev. 2024. Política genérica que estabelece expectativas para manter e
+  aprimorar a Integridade Científica na NSF. Silêncio sobre IA reflete a
+  posição do governo Biden (EO 14110 de outubro de 2023).}. O NSPM-33 e
+o TRUST Framework focam em disclosure de apoio estrangeiro e conflitos
+de compromisso \footnote{NSF. \emph{Trusted Research Using Safeguards
+  and Transparency (TRUST)}. Jun.~2024. Framework de árvore decisória
+  para avaliar riscos de segurança nacional. Nenhum branch trata de IA.}.
+
+O modelo americano é o mais liberal: não exige declaração de IA, não
+estabelece padrão de marcação, não cria obrigação para provedores. A
+integridade é delegada às instituições e periódicos, que têm políticas
+próprias. Esta abordagem minimiza custos burocráticos mas transfere o
+problema para o self-governance de cada entidade.
+
+\subsection{5.4. Tabela Comparativa}\label{tabela-comparativa}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1827}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1777}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2183}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2234}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1827}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Dimensão
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Brasil (CNPq 2.664/2026)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+China
+\end{minipage} &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4061} + 2\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
+União Europeia \textbar{} EUA (NSF) \textbar{}
+\end{minipage}} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Base legal &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3959} + 2\tabcolsep}}{%
+Portaria administrativa \textbar{} Lei + Padrão Nacional} &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4061} + 2\tabcolsep}@{}}{%
+Regulamento (diretamente aplicável) \textbar{} Política interna NSF
+\textbar{}} \\
+Obrigação & Autodeclaração do pesquisador &
+\multicolumn{3}{>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.6244} + 4\tabcolsep}@{}}{%
+Marcação pelo provedor + declaração \textbar{} Marcação técnica pelo
+provedor (Art. 50)\textbar{} Nenhuma específica \textbar{}} \\
+Padrão técnico & Nenhum &
+\multicolumn{3}{>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.6244} + 4\tabcolsep}@{}}{%
+GB 45438-2025 (obrigatório) \textbar{} Code of Practice (voluntário)
+\textbar{} Nenhum \textbar{}} \\
+Enforcement & Inexistente (sem sanção) & CAC com sanções administrativas
+&
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4061} + 2\tabcolsep}@{}}{%
+Comissão + autoridades nacionais \textbar{} Research security (não IA)
+\textbar{}} \\
+Escopo & Pesquisa apoiada pelo CNPq & Toda pesquisa na China &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4061} + 2\tabcolsep}@{}}{%
+Sistemas de IA no mercado EU \textbar{} Pesquisas financiadas NSF} \\
+Custo de conformidade & Alto (declaração detalhada) & Médio (rotulagem +
+verificação) &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4061} + 2\tabcolsep}@{}}{%
+Baixo (marcação é do provedor) \textbar{} Zero \textbar{}} \\
+\end{longtable}
+}
+
+\subsection{5.5. Síntese Comparativa}\label{suxedntese-comparativa}
+
+Cada modelo reflete escolhas políticas e históricas distintas. O Brasil
+optou pelo modelo de autodeclaração com custo concentrado no pesquisador
+--- a pior combinação possível: alto custo de conformidade para quem
+cumpre, zero custo para quem descumpre, e impossibilidade técnica de
+verificação.
+
+A China optou pelo modelo de padrão técnico obrigatório na fonte ---
+mais eficaz, mas dependente de controle centralizado sobre provedores de
+IA e compatível com regime de vigilância digital. A UE optou pelo modelo
+de regulação híbrida, impondo obrigações sobre provedores (marcação) e
+sobre usuários (transparência em certos usos), com abordagem baseada em
+risco. Os EUA optaram pelo modelo de não-regulação específica, tratando
+IA como ferramenta de pesquisa e focando segurança em vez de integridade
+textual.
+
+A Portaria CNPq nº 2.664/2026, neste cenário, é o único instrumento que
+impõe obrigação sem oferecer meio de cumprimento. É regulação sem
+tecnologia.
+
+\section{6. Conclusão: Balanço Crítico e
+Propostas}\label{conclusuxe3o-balanuxe7o-cruxedtico-e-propostas}
+
+\subsection{6.1. Acertos da Portaria}\label{acertos-da-portaria}
+
+Não obstante as críticas desenvolvidas ao longo desta dissertação, a
+Portaria apresenta méritos que devem ser reconhecidos. Em primeiro
+lugar, o reconhecimento institucional: a Portaria tira a IAG da
+invisibilidade normativa e a reconhece como fenômeno relevante na
+pesquisa --- mérito não trivial em um cenário de rápida transformação
+tecnológica. Em segundo lugar, a opção pela não proibição:
+diferentemente de posições reacionárias que propugnam pela vedação total
+do uso de IA, a Portaria busca regular o uso responsável. Em terceiro
+lugar, a atualização do debate: a Portaria acelera a discussão sobre
+integridade em universidades e periódicos. Em quarto lugar, o
+alinhamento internacional: ainda que imperfeita, a Portaria se insere em
+movimento global de regulação da IA na ciência.
+
+\subsection{6.2. Fragilidades}\label{fragilidades}
+
+As fragilidades identificadas são, contudo, substantivas e estruturais.
+A inaplicabilidade técnica dos detectores de IAG, demonstrada por
+Weber-Wulff et al.~(2023), Liu et al.~(2024), Pudasaini et al.~(2025) e
+Liang et al.~(2025), invalida a premissa central da fiscalização. A
+proporção uso/declaração de 40:1 (Liang et al., 2025) é o dado mais
+contundente contra a eficácia do protocolo.
+
+O custo burocrático imposto ao pesquisador não encontra contrapartida em
+ganho demonstrável de integridade científica. A assimetria punitiva ---
+que penaliza quem declara e não quem omite --- produz seleção adversa.
+As sete ambiguidades do art. 9º geram insegurança jurídica. As colisões
+normativas com a LGPD e a Constituição Federal não são resolvidas. A
+vedação a pareceres com IAG (alínea ``e'') é facilmente contornada por
+modelos locais. E, diferentemente de China (GB 45438-2025) e UE (Art. 50
+AI Act), o Brasil não exige marcação técnica pelos provedores.
+
+\subsection{6.3. Propostas de
+Aperfeiçoamento}\label{propostas-de-aperfeiuxe7oamento}
+
+Com base na análise desenvolvida, propõem-se as seguintes recomendações:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Adoção de modelo híbrido nos moldes da UE: obrigação de marcação
+  técnica pelos provedores de IA (LLMs comerciais) somada à declaração
+  simplificada pelo pesquisador, transferindo o ônus da verificação para
+  quem tem capacidade técnica de implementá-la.
+\item
+  Graduação das exigências por nível de risco, distinguindo assistência
+  linguística (nível 1), sumarização e tradução (nível 2), geração
+  substantiva de seções (nível 3) e geração integral (nível 4), com
+  obrigações proporcionais ao risco.
+\item
+  Substituição da declaração detalhada por checklist padronizado de uma
+  página, nos moldes adotados por periódicos de alto impacto, reduzindo
+  o custo de conformidade.
+\item
+  Estabelecimento de sanções claras e proporcionais, respeitando o
+  princípio da legalidade estrita, com tipificação objetiva de infrações
+  e gradientes de penalidade.
+\item
+  Harmonização expressa com a LGPD e o art. 218 da CF, incluindo
+  orientação específica sobre proteção de dados e proporcionalidade
+  regulatória.
+\item
+  Negociação com provedores de IA (OpenAI, Google, Meta, DeepSeek,
+  Mistral) para implementação de marcação automática de conteúdo gerado
+  em português, aproveitando a capilaridade do mercado lusófono.
+\end{enumerate}
+
+\subsection{6.4. Considerações Finais}\label{considerauxe7uxf5es-finais}
+
+Esta dissertação demonstrou que a Portaria CNPq nº 2.664/2026, não
+obstante suas boas intenções, opera como instrumento de retardamento
+burocrático da pesquisa científica brasileira. As evidências são
+convergentes: detectores falham, a proporção uso/declaração é de 40:1, o
+texto contém ambiguidades insanáveis, a fiscalização é inviável, e o
+modelo brasileiro é o que oferece menor capacidade de enforcement entre
+as quatro principais jurisdições analisadas.
+
+O paradoxo central é que a Portaria tenta resolver um problema técnico
+--- a detecção de IA --- com instrumento jurídico --- a declaração
+obrigatória. Este descompasso entre a natureza do problema e o meio de
+solução condena o protocolo à ineficácia. O pesquisador que declarar o
+uso de IA será escrutinado; o que não declarar, não. O inovador honesto
+paga o custo burocrático; o mal-intencionado paga zero. A Portaria não
+protege a integridade: apenas a burocratiza.
+
+A saída não é abandonar a integridade, mas redefini-la. Avaliação
+substantiva baseada em impacto replicável e relevância social será
+sempre mais eficaz que declarações inverificáveis. Enquanto o CNPq não
+enfrentar o problema real --- a inviabilidade técnica da detecção ---, a
+ciência brasileira continuará pagando o preço de um protocolo que não
+protege, mas apenas retarda.
+
+\section{Referências}\label{referuxeancias}
+
+ALBUQUERQUE, U. P. Ciência em debate: o peso silencioso da avaliação de
+cursos e publicações científicas. \textbf{The Conversation}, 13 out.
+2025. Disponível em:
+\url{https://theconversation.com/ciencia-em-debate-o-peso-silencioso-da-avaliacao-de-cursos-e-publicacoes-cientificas-266875}
+
+BELADIYA, R. How China Is Controlling Generative AI Technologies.
+\textbf{AI Law Guide}, maio 2026. Disponível em:
+\url{https://ailawguide.org/blog/how-china-is-controlling-generative-ai-technologies}
+
+BRASIL. Constituição da República Federativa do Brasil de 1988. Art. 5º,
+II e XXXIX; Art. 218.
+
+BRASIL. Lei nº 13.709, de 14 de agosto de 2018 (Lei Geral de Proteção de
+Dados Pessoais).
+
+BRASIL. Portaria CNPq nº 2.664, de 6 de março de 2026. Institui a
+Política de Integridade na Atividade Científica. \textbf{Diário Oficial
+da União}, 11 mar. 2026. Disponível em:
+\url{http://memoria2.cnpq.br/web/guest/view/-/journal_content/56_INSTANCE_0oED/10157/23142775}
+
+BRASIL, A. L. \textbf{A inteligência artificial na pesquisa e no
+fomento}: desafios e oportunidades. Brasília: CAPES, 2026.
+
+BUCCI, M. P. D. \textbf{Fundamentos para uma teoria jurídica das
+políticas públicas}. 2. ed.~São Paulo: Saraiva Jur, 2021.
+
+CABALLERO RIVERO, A.; SANTOS, R. N. M.; TRZESNIAK, P. Efeitos dos
+sistemas de avaliação de pesquisa de CAPES e CNPQ nos padrões de
+publicação dos pesquisadores das ciências da saúde no Brasil. \textbf{Em
+Questão}, Porto Alegre, v. 30, 2024. DOI: 10.1590/1808-5245.30.138437
+
+CAPES. Ofício Circular nº 46/2024. Diretrizes para o ciclo avaliativo
+2025-2028. Brasília, 2024.
+
+CHINA. Ministry of Science and Technology. Guidelines for Responsible
+Research Conduct. Beijing, 2023. Disponível em:
+\url{http://english.www.gov.cn/news/202401/06/content_WS6598c927c6d0868f4e8e2d24.html}
+
+CHINA. Measures for the Identification of AI-Generated (Synthetic)
+Content. CAC/MIIT/MPS/NRTA, 2025. Padrão GB 45438-2025. Vigente desde
+01/09/2025.
+
+EUROPEAN UNION. Regulation (EU) 2024/1689 (Artificial Intelligence Act).
+\textbf{Official Journal of the European Union}, 2024. Disponível em:
+\url{https://eur-lex.europa.eu/eli/reg/2024/1689}
+
+GILS, T. et al.~From Policy to Practice: Prototyping The EU AI
+Act\textquotesingle s Transparency Requirements. \textbf{SSRN}, 2024.
+DOI: 10.2139/ssrn.4714345
+
+JUSTEN FILHO, M. \textbf{Curso de direito administrativo}. 15. ed.~Rio
+de Janeiro: Forense, 2024.
+
+KOCAK, B. et al.~Ensuring peer review integrity in the era of large
+language models. \textbf{European Journal of Radiology Artificial
+Intelligence}, v. 2, 100018, 2025. DOI: 10.1016/j.ejrai.2025.100018
+
+KWON, D. Science sleuths flag hundreds of papers that use AI without
+disclosing it. \textbf{Nature}, v. 641, p.~290-291, 2025. DOI:
+10.1038/d41586-025-01180-2
+
+LIANG, W. et al.~Discrepancy between AI content proportion and
+disclosure rate in scientific publications. \textbf{Nature Human
+Behaviour}, 2025. DOI: 10.48550/arXiv.2512.06705
+
+LIU, J. Q. J. et al.~The great detectives: humans versus AI detectors in
+catching large language model-generated medical writing.
+\textbf{International Journal for Educational Integrity}, v. 20, n.~1,
+2024. DOI: 10.1007/s40979-024-00155-6
+
+MESZAROS, J.; HUYS, I.; IOANNIDIS, J. P. A. Challenges in applying the
+EU AI Act research exemptions to contemporary AI research. \textbf{npj
+Digital Medicine}, 2026. DOI: 10.1038/s41746-025-02263-0
+
+NSF. NSF Scientific Integrity Policy (NSF 24-007). 2024. Disponível em:
+\url{https://nsf-gov-resources.nsf.gov/pubs/2024/nsf24007/nsf24007.pdf}
+
+NSF. Trusted Research Using Safeguards and Transparency (TRUST). 2024.
+Disponível em:
+\url{https://nsf-gov-resources.nsf.gov/files/NSF\%20OCRSSP\%20TRUST\%20Policy\%20Memo.pdf}
+
+PEREZ, O. C. Avaliação em Disputa: A Reforma do Qualis e os Desafios
+para a Ciência. \textbf{Novos Debates}, v. 11, n.~1, 2025. DOI:
+10.48006/2358-0097/V11N1.E111011
+
+PÉREZ-NERI, I. et al.~Detecting and correcting errors in scientific
+literature in the generative AI era. \textbf{Frontiers in Artificial
+Intelligence}, v. 8, 2025. DOI: 10.3389/frai.2025.1644098
+
+PESQUISAI. CNPq reconhece o uso da Inteligência Artificial Generativa na
+pesquisa científica. \textbf{Portal PesquisAI}, 16 mar. 2026. Disponível
+em:
+\url{https://www.pesquisai.info/post/cnpq-reconhece-o-uso-da-inteligencia-artificial-generativa-na-pesquisa-cientifica-notas-sobre-a-por}
+
+PUDASAINI, S. et al.~Survey on AI-generated plagiarism detection.
+\textbf{Journal of Academic Ethics}, v. 23, p.~1137-1170, 2025. DOI:
+10.1007/s10805-024-09576-x
+
+SCHILKE, O.; REIMANN, M. The transparency dilemma: How AI disclosure
+erodes trust. \textbf{Organizational Behavior and Human Decision
+Processes}, v. 188, 2025. DOI: 10.1016/j.obhdp.2025.104405
+
+SCHWAB, K. \textbf{A Quarta Revolução Industrial}. São Paulo: Edipro,
+2016.
+
+SGUISSARDI, V. A avaliação defensiva no ``modelo CAPES de avaliação''.
+\textbf{Perspectiva}, Florianópolis, v. 24, n.~1, p.~49-88, 2006.
+Disponível em: \url{https://repositorio.ufsc.br/handle/123456789/186529}
+
+WEBER-WULFF, D. et al.~Testing of detection tools for AI-generated text.
+\textbf{International Journal for Educational Integrity}, v. 19, n.~1,
+2023. DOI: 10.1007/s40979-023-00146-z
+
+\end{document}

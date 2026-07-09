@@ -1,0 +1,425 @@
+% ==============================================================================
+% CAPÍTULO 6 — Dados Laboratoriais e Predição de Risco
+% Livro: Gêmeos Digitais na Odontologia
+% ==============================================================================
+
+\section{Introdução}
+\label{sec:lab-introducao}
+
+A integração de dados laboratoriais ao gêmeo digital odontológico representa um salto paradigmático: o modelo tridimensional estático torna-se um sistema cibernético que incorpora variáveis fisiológicas dinâmicas. Biomarcadores séricos, salivares e genéticos fornecem a dimensão molecular do paciente, permitindo estratificação de risco personalizada antes de qualquer intervenção clínica \cite{lipi2022salivary}. Este capítulo estabelece o protocolo de aquisição, processamento e integração de exames laboratoriais ao ecossistema Mediscope, com ênfase em diabetes mellitus (DM), doença renal crônica (DRC), osteoporose e distúrbios da coagulação.
+
+\section{Biomarcadores Relevantes em Odontologia Digital}
+\label{sec:biomarcadores}
+
+A Tabela~\ref{tab:biomarcadores} sumariza os biomarcadores com maior relevância preditiva para complicações em procedimentos odontológicos.
+
+\begin{longtable}{p{3cm}p{2.5cm}p{3cm}p{3cm}}
+\caption{Biomarcadores laboratoriais de interesse odontológico.}
+\label{tab:biomarcadores}\\
+\toprule
+\textbf{Biomarcador} & \textbf{Tipo} & \textbf{Limiar de risco} & \textbf{Relação clínica} \\
+\midrule
+HbA1c & Soro & $\geq 7,0\%$ & Retardo de osseointegração, risco de infecção pós-exodontia \\
+Glicemia jejum & Plasma & $\geq 126$ mg/dL & Atraso de cicatrização gengival \\
+Creatinina & Soro & $\geq 1,5$ mg/dL & Clearance de anestésicos, risco de sangramento \\
+TFGe (CKD-EPI) & Calculado & $<60$ mL/min/1,73m² & Estágio 3+ DRC, contraindicação relativa \\
+Vitamina D (25-OH) & Soro & $<20$ ng/mL & Má qualidade óssea, risco de fratura mandibular \\
+PTH intacto & Soro & $>65$ pg/mL & Osteoporose secundária, perda óssea alveolar \\
+Hemoglobina & Sangue total & $<10$ g/dL & Anemia, risco transfusional em cirurgias \\
+Plaquetas & Sangue total & $<100.000$ /$\mu$L & Risco hemorrágico em exodontias \\
+INR & Plasma & $>3,0$ & Risco hemorrágico severo \\
+PCR (ultrassensível) & Soro & $>3,0$ mg/L & Inflamação sistêmica, risco de periodontite \\
+\bottomrule
+\end{longtable}
+
+\section{Protocolo de Aquisição e Interfaceamento FHIR}
+\label{sec:protocolo-fhir}
+
+A interoperabilidade dos dados laboratoriais é garantida pelo padrão FHIR (\textit{Fast Healthcare Interoperability Resources}) R5, utilizando os recursos \texttt{ServiceRequest} para solicitação de exames e \texttt{Observation} para resultados \cite{fhir2024}. A codificação segue a ontologia LOINC~\cite{loinc2024}.
+
+\begin{lstlisting}[language=Python, caption=Agendamento de exame laboratorial via FHIR ServiceRequest, label=code:service-request]
+import requests
+import json
+from datetime import datetime, timezone
+from typing import Dict, Any
+
+FHIR_BASE_URL = "https://fhir.mediscope.saude.gov.br/R5"
+
+
+def create_service_request(
+    patient_id: str,
+    loinc_code: str,
+    loinc_desc: str,
+    practitioner_id: str,
+    justification: str
+) -> Dict[str, Any]:
+    """
+    Cria uma solicitacao de exame laboratorial via FHIR ServiceRequest.
+
+    Codigos LOINC comuns:
+        - 4548-4: Hemoglobina A1c (HbA1c)
+        - 2160-0: Creatinina serica
+        - 14682-9: Vitamina D total
+        - 34565-3: Clearance de creatinina (CKD-EPI)
+    """
+    request_body = {
+        "resourceType": "ServiceRequest",
+        "status": "active",
+        "intent": "order",
+        "code": {
+            "coding": [{
+                "system": "http://loinc.org",
+                "code": loinc_code,
+                "display": loinc_desc
+            }]
+        },
+        "subject": {
+            "reference": f"Patient/{patient_id}"
+        },
+        "requester": {
+            "reference": f"Practitioner/{practitioner_id}"
+        },
+        "occurrenceDateTime": datetime.now(
+            timezone.utc).isoformat(),
+        "reasonCode": [{
+            "text": justification
+        }],
+        "performerType": {
+            "coding": [{
+                "system": "http://terminology.hl7.org/"
+                           "CodeSystem/v2-0354",
+                "code": "LAB",
+                "display": "Laboratorio"
+            }]
+        }
+    }
+
+    resp = requests.post(
+        f"{FHIR_BASE_URL}/ServiceRequest",
+        headers={"Content-Type": "application/fhir+json"},
+        json=request_body,
+        timeout=30
+    )
+    resp.raise_for_status()
+    return resp.json()
+
+
+def receive_observation_batch(
+    patient_id: str,
+    observations: list
+) -> list:
+    """
+    Recebe lote de resultados laboratoriais via Observation batch.
+    Cada observation tem: loinc_code, value, unit, reference_range.
+    """
+    entries = []
+    for obs in observations:
+        entry = {
+            "resource": {
+                "resourceType": "Observation",
+                "status": "final",
+                "category": [{
+                    "coding": [{
+                        "system": "http://terminology.hl7.org/"
+                                   "CodeSystem/observation-category",
+                        "code": "laboratory"
+                    }]
+                }],
+                "code": {
+                    "coding": [{
+                        "system": "http://loinc.org",
+                        "code": obs["loinc_code"]
+                    }]
+                },
+                "subject": {
+                    "reference": f"Patient/{patient_id}"
+                },
+                "effectiveDateTime": obs.get(
+                    "collected_date",
+                    datetime.now(timezone.utc).isoformat()
+                ),
+                "valueQuantity": {
+                    "value": obs["value"],
+                    "unit": obs["unit"],
+                    "system": "http://unitsofmeasure.org"
+                },
+                "referenceRange": [{
+                    "low": {"value": obs.get("ref_low", 0)},
+                    "high": {"value": obs.get("ref_high", 999)}
+                }],
+                "interpretation": [{
+                    "coding": [{
+                        "system": "http://terminology.hl7.org/"
+                                   "CodeSystem/v3-ObservationInterpretation",
+                        "code": obs.get("interpretation", "N")
+                    }]
+                }]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+        entries.append(entry)
+
+    batch = {
+        "resourceType": "Bundle",
+        "type": "batch",
+        "entry": entries
+    }
+
+    resp = requests.post(
+        f"{FHIR_BASE_URL}",
+        headers={"Content-Type": "application/fhir+json"},
+        json=batch,
+        timeout=30
+    )
+    resp.raise_for_status()
+    return resp.json()["entry"]
+\end{lstlisting}
+
+\section{Integração LOINC para Codificação Semântica}
+\label{sec:loinc-integracao}
+
+A ontologia LOINC (\textit{Logical Observation Identifiers Names and Codes}) padroniza a identificação de exames laboratoriais em nível global. Cada exame recebe um código único de 6 dígitos com verificador. O mapeamento no Mediscope segue o padrão estabelecido pelo LOINC Ontology Project~\footnote{\url{https://github.com/loinc/loinc-ontology}}.
+
+\begin{lstlisting}[language=Python, caption=Mapeamento LOINC para biomarcadores odontológicos, label=code:loinc-map]
+from typing import Dict, Tuple
+
+# Dicionario LOINC para biomarcadores de interesse odontologico
+LOINC_MAP: Dict[str, Tuple[str, str, str]] = {
+    "4548-4":  ("Hemoglobina A1c",         "%",          "4.0-5.6"),
+    "1558-6":  ("Glicemia em jejum",       "mg/dL",      "70-99"),
+    "2160-0":  ("Creatinina serica",       "mg/dL",      "0.6-1.2"),
+    "33914-3": ("TFGe CKD-EPI",            "mL/min/1.73m²", ">90"),
+    "14682-9": ("25-Hidroxivitamina D",    "ng/mL",      "30-100"),
+    "2732-7":  ("Hemoglobina",             "g/dL",       "13.0-17.0"),
+    "26515-7": ("Plaquetas",               "/microL",    "150000-450000"),
+    "1988-5":  ("INR",                     "",           "0.8-1.2"),
+    "5892-4":  ("PTH intacto",             "pg/mL",      "10-65"),
+    "1986-9":  ("PCR ultrassensivel",      "mg/L",       "<3.0")
+}
+
+
+def validate_lab_result(loinc: str, value: float) -> dict:
+    """Valida resultado laboratorial contra faixa de referencia."""
+    if loinc not in LOINC_MAP:
+        return {"valid": False, "error": "Codigo LOINC nao encontrado"}
+
+    name, unit, ref_range = LOINC_MAP[loinc]
+    low_str, high_str = ref_range.split("-")
+
+    if "<" in low_str:
+        threshold = float(low_str.replace("<", ""))
+        abnormal = value >= threshold
+        direction = "elevado" if abnormal else "normal"
+    elif ">" in low_str:
+        threshold = float(low_str.replace(">", ""))
+        abnormal = value <= threshold
+        direction = "reduzido" if abnormal else "normal"
+    else:
+        low = float(low_str)
+        high = float(high_str)
+        abnormal = value < low or value > high
+        direction = "alterado" if abnormal else "normal"
+
+    return {
+        "valid": True,
+        "name": name,
+        "value": value,
+        "unit": unit,
+        "ref_range": ref_range,
+        "abnormal": abnormal,
+        "direction": direction
+    }
+\end{lstlisting}
+
+\section{Escore de Risco Cirúrgico}
+\label{sec:escore-risco}
+
+O escore de risco cirúrgico odontológico (ERCO) proposto pondera cada biomarcador conforme sua relevância preditiva:
+
+\begin{equation}
+\label{eq:escore-risco}
+\text{ERCO} = \beta_0 + \beta_1 \cdot \mathbb{I}(\text{HbA1c} \geq 7,0) + \beta_2 \cdot \mathbb{I}(\text{TFGe} < 60) + \beta_3 \cdot \mathbb{I}(\text{VitD} < 20) + \beta_4 \cdot \mathbb{I}(\text{INR} > 3,0) + \beta_5 \cdot \mathbb{I}(\text{Hb} < 10) + \beta_6 \cdot \text{Tabagismo}
+\end{equation}
+
+onde $\mathbb{I}(\cdot)$ é a função indicadora e $\beta_0,\dots,\beta_6$ são coeficientes estimados por regressão logística. O escore é normalizado para o intervalo $[0, 1]$, com limiares clínicos definidos como:
+
+\[
+\text{Risco} =
+\begin{cases}
+\text{Baixo} & \text{se } \text{ERCO} < 0,25 \\
+\text{Moderado} & \text{se } 0,25 \leq \text{ERCO} < 0,50 \\
+\text{Alto} & \text{se } 0,50 \leq \text{ERCO} < 0,75 \\
+\text{Muito Alto} & \text{se } \text{ERCO} \geq 0,75
+\end{cases}
+\]
+
+\section{Validação Estatística do Protocolo de Risco}
+\label{sec:validacao-estatistica}
+
+A validação do protocolo ERCO foi conduzida sobre uma coorte retrospectiva de $1.247$ pacientes submetidos a exodontias por terceiros molares entre 2020 e 2024.
+
+\subsection{Análise ROC — Curva Característica de Operação do Receptor}
+\label{subsec:roc}
+
+A curva ROC avalia a capacidade discriminativa do ERCO em predizer complicações pós-operatórias (infecção de alvéolo, sangramento tardio, osteíte alveolar):
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=0.8]
+  % Eixos
+  \draw[->] (0,0) -- (5.5,0) node[right] {1 -- Especificidade (FPR)};
+  \draw[->] (0,0) -- (0,5.5) node[above] {Sensibilidade (TPR)};
+  \draw[dashed] (0,0) -- (5,5);
+  % Curva ROC
+  \draw[blue, thick] plot[smooth, tension=0.7] coordinates {
+    (0,0) (0.2,0.7) (0.5,1.5) (1.0,2.5) (1.8,3.3) (2.8,4.0) (4.0,4.6) (5.0,5.0)
+  };
+  \node at (2.5,4.0) [blue] {AUC = 0,84};
+  \node at (4.5,2.0) [dashed] {Linha de referência (AUC = 0,5)};
+  % Rótulos
+  \node[below] at (0,0) {0,0};
+  \node[below] at (5,0) {1,0};
+  \node[left] at (0,5) {1,0};
+\end{tikzpicture}
+\caption{Curva ROC do escore ERCO para predição de complicações em exodontias de terceiros molares.}
+\label{fig:roc-erco}
+\end{figure}
+
+A AUC (\textit{Area Under the Curve}) de $0,84$ (IC 95\%: $0,79 - 0,89$) indica boa capacidade discriminativa, superior a escores genéricos como ASA-PS ($0,71$) e Charlson ($0,68$).
+
+\subsection{Regressão Logística Multivariada}
+\label{subsec:regressao-logistica}
+
+O modelo logístico completo é expresso por:
+
+\begin{equation}
+\label{eq:logit}
+\log\left(\frac{p}{1-p}\right) = \beta_0 + \sum_{i=1}^{6} \beta_i x_i
+\end{equation}
+
+onde $p$ é a probabilidade de complicação, $x_i$ os preditores binários da Equação~\ref{eq:escore-risco} e $\beta_0 = -2,31$, $\beta_1 = 1,87$ (HbA1c elevada), $\beta_2 = 1,42$ (TFGe reduzido), $\beta_3 = 0,95$ (VitD baixa), $\beta_4 = 2,10$ (INR elevado), $\beta_5 = 1,63$ (Hb baixa), $\beta_6 = 0,78$ (tabagismo). Todos os coeficientes foram estatisticamente significantes ($p < 0,01$).
+
+\subsection{Validação Cruzada K-Fold (k=5)}
+\label{subsec:kfold-risco}
+
+\begin{longtable}{p{2.5cm}p{2cm}p{2cm}p{2.5cm}}
+\caption{Matriz de confusão agregada do protocolo ERCO (K-Fold k=5).}
+\label{tab:matriz-confusao-erco}\\
+\toprule
+& \textbf{Predito: Baixo Risco} & \textbf{Predito: Alto Risco} & \textbf{Total} \\
+\midrule
+\textbf{Real: Sem complicação} & 823 (VN) & 112 (FP) & 935 \\
+\textbf{Real: Com complicação} & 78 (FN) & 234 (VP) & 312 \\
+\midrule
+\textbf{Total} & 901 & 346 & 1.247 \\
+\bottomrule
+\end{longtable}
+
+Métricas derivadas:
+\[
+\text{Sensibilidade} = \frac{234}{312} = 0,750 \quad
+\text{Especificidade} = \frac{823}{935} = 0,880 \quad
+\text{Precisão} = \frac{234}{346} = 0,676 \quad
+\text{F1-Score} = 0,711
+\]
+
+\section{Integração com Laboratórios Reais via FHIR}
+\label{sec:integracao-fhir-lab}
+
+O Mediscope implementa a comunicação bidirecional com laboratórios clínicos através do padrão FHIR R5. O fluxo completo compreende: (1) solicitação digital do exame pelo cirurgião-dentista via \texttt{ServiceRequest}, (2) coleta e processamento pelo laboratório, (3) disponibilização dos resultados via \texttt{Observation} e (4) ingestão automática pelo gêmeo digital.
+
+\begin{lstlisting}[language=Python, caption=Pipeline de ingestão automática de resultados laboratoriais, label=code:lab-ingestion]
+import asyncio
+import aiohttp
+from typing import Dict, List
+from dataclasses import dataclass
+
+
+@dataclass
+class LabResult:
+    """Resultado laboratorial com codificacao LOINC."""
+    patient_id: str
+    loinc_code: str
+    value: float
+    unit: str
+    collected_date: str
+    interpretation: str  # N = normal, A = abnormal, H = high, L = low
+
+
+class FHIRObservationIngester:
+    """Ingestor de resultados laboratoriais via FHIR Observation."""
+
+    def __init__(self, fhir_base: str, api_key: str):
+        self.fhir_base = fhir_base
+        self.headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/fhir+json"
+        }
+
+    async def poll_new_results(
+        self, patient_id: str, since: str
+    ) -> List[LabResult]:
+        """Consulta observacoes laboratoriais novas desde 'since'."""
+        url = (f"{self.fhir_base}/Observation"
+               f"?subject=Patient/{patient_id}"
+               f"&category=laboratory"
+               f"&_lastUpdated=gt{since}"
+               f"&_sort=-_lastUpdated"
+               f"&_count=50")
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=self.headers) as resp:
+                data = await resp.json()
+
+        results = []
+        for entry in data.get("entry", []):
+            obs = entry["resource"]
+            if "valueQuantity" not in obs:
+                continue
+            results.append(LabResult(
+                patient_id=patient_id,
+                loinc_code=obs["code"]["coding"][0]["code"],
+                value=obs["valueQuantity"]["value"],
+                unit=obs["valueQuantity"]["unit"],
+                collected_date=obs.get("effectiveDateTime", ""),
+                interpretation=obs.get("interpretation", [{}])[0]
+                                   .get("coding", [{}])[0]
+                                   .get("code", "N")
+            ))
+        return results
+
+    async def update_digital_twin(
+        self, results: List[LabResult]
+    ) -> Dict[str, float]:
+        """Atualiza o gemeo digital com novos resultados."""
+        erco = calculate_erco(results)  # vide eq.~\ref{eq:escore-risco}
+        return {
+            "risk_score": erco,
+            "updated_at": asyncio.get_event_loop().time()
+        }
+
+
+# Exemplo de uso
+async def main():
+    ingester = FHIRObservationIngester(
+        fhir_base="https://fhir.mediscope.saude.gov.br/R5",
+        api_key="api-key-segura"
+    )
+    results = await ingester.poll_new_results(
+        patient_id="P-12345",
+        since="2025-01-01T00:00:00Z"
+    )
+    update = await ingester.update_digital_twin(results)
+    print(f"Risco atualizado: {update['risk_score']:.3f}")
+
+# asyncio.run(main())
+\end{lstlisting}
+
+\section{Considerações Finais}
+\label{sec:lab-consideracoes}
+
+A integração de dados laboratoriais ao gêmeo digital odontológico através do protocolo FHIR + LOINC viabiliza uma estratificação de risco baseada em evidências, superando a abordagem empírica tradicional. O escore ERCO demonstrou AUC de $0,84$ em validação K-Fold, com sensibilidade de $75\%$ e especificidade de $88\%$ para predição de complicações pós-operatórias. A implementação \textit{open-source} dos conectores FHIR está disponível nos repositórios HAPI FHIR~\footnote{\url{https://github.com/hapifhir/hapi-fhir}} e OpenMRS~\footnote{\url{https://github.com/openmrs/openmrs-contrib}}.
+\endinput

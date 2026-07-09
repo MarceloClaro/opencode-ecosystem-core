@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 520" font-family="Arial, sans-serif">
+  <!-- ===== COMENTÁRIO DIDÁTICO =====
+  Esta figura mostra o Loop de Correção Iterativa do MASWOS v5.0.
+  
+  COMO LER: O fluxo começa no topo (MANUSCRITO GERADO). A cada ciclo:
+  1. Cinco revisores especializados avaliam o texto sob 5 perspectivas diferentes
+  2. Se o score < 95, quatro orientadores PhD analisam as críticas e geram correções
+  3. Seis corretores implementam as mudanças (texto, citações, estilo, estrutura)
+  4. O ciclo se repete até score ≥ 95
+  
+  As setas pontilhadas vermelhas mostram o loop: rejeição → correção → reavaliação.
+  Quando o score atinge 95, o manuscrito é "congelado" como artefato final.
+  -->
+
+  <!-- Título -->
+  <text x="375" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Loop de Correção Iterativa — MASWOS v5.0</text>
+  <text x="375" y="38" text-anchor="middle" font-size="10" fill="#64748b">Simulação de revisão por pares com 15 agentes especializados em 3 camadas de correção</text>
+
+  <!-- Entrada: Manuscrito -->
+  <rect x="250" y="52" width="250" height="35" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="375" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">MANUSCRITO GERADO</text>
+  <line x1="375" y1="87" x2="375" y2="105" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Camada 1: 5 Revisores -->
+  <rect x="20" y="108" width="710" height="90" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="375" y="128" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a5f">CAMADA 1 — 5 Revisores Especializados (Agent Forum P14)</text>
+
+  <rect x="35" y="138" width="128" height="48" rx="4" fill="#fff" stroke="#93c5fd"/>
+  <text x="99" y="157" text-anchor="middle" font-size="10" font-weight="bold">Metodológico</text>
+  <text x="99" y="174" text-anchor="middle" font-size="8" fill="#64748b">Desenho • Viés</text>
+
+  <rect x="173" y="138" width="128" height="48" rx="4" fill="#fff" stroke="#93c5fd"/>
+  <text x="237" y="157" text-anchor="middle" font-size="10" font-weight="bold">Estatístico</text>
+  <text x="237" y="174" text-anchor="middle" font-size="8" fill="#64748b">Testes • Efeito</text>
+
+  <rect x="311" y="138" width="128" height="48" rx="4" fill="#fff" stroke="#93c5fd"/>
+  <text x="375" y="157" text-anchor="middle" font-size="10" font-weight="bold">Teórico</text>
+  <text x="375" y="174" text-anchor="middle" font-size="8" fill="#64748b">Conceitos • Diálogo</text>
+
+  <rect x="449" y="138" width="128" height="48" rx="4" fill="#fff" stroke="#93c5fd"/>
+  <text x="513" y="157" text-anchor="middle" font-size="10" font-weight="bold">Estrutural</text>
+  <text x="513" y="174" text-anchor="middle" font-size="8" fill="#64748b">IMRAD • Proporções</text>
+
+  <rect x="587" y="138" width="128" height="48" rx="4" fill="#fff" stroke="#93c5fd"/>
+  <text x="651" y="157" text-anchor="middle" font-size="10" font-weight="bold">Estilístico</text>
+  <text x="651" y="174" text-anchor="middle" font-size="8" fill="#64748b">ABNT • Anti-IA</text>
+
+  <!-- Condicional: Score ≥ 95? -->
+  <line x1="375" y1="198" x2="375" y2="220" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <polygon points="355,222 375,242 395,222" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="375" y="237" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">Score ≥ 95?</text>
+
+  <!-- Saída: SIM → Artefato final -->
+  <line x1="530" y1="232" x2="580" y2="270" stroke="#22c55e" stroke-width="2" marker-end="url(#g)"/>
+  <text x="555" y="248" font-size="9" fill="#16a34a" font-weight="bold">SIM</text>
+  <rect x="585" y="270" width="140" height="35" rx="5" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="655" y="285" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">ARTEFATO FINAL</text>
+  <text x="655" y="300" text-anchor="middle" font-size="9" fill="#16a34a">Congelado • Exportado</text>
+
+  <!-- Saída: NÃO → Camada 2 -->
+  <line x1="220" y1="232" x2="150" y2="270" stroke="#ef4444" stroke-width="2" marker-end="url(#r)"/>
+  <text x="192" y="248" font-size="9" fill="#dc2626" font-weight="bold">NÃO</text>
+
+  <!-- Camada 2: 4 Orientadores PhD -->
+  <rect x="20" y="312" width="710" height="65" rx="6" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="375" y="330" text-anchor="middle" font-size="11" font-weight="bold" fill="#991b1b">CAMADA 2 — 4 Orientadores PhD (Análise + Síntese de Correções)</text>
+
+  <rect x="50" y="338" width="155" height="30" rx="3" fill="#fff" stroke="#fca5a5"/>
+  <text x="128" y="357" text-anchor="middle" font-size="10">Metodológico-Chefe</text>
+  <rect x="218" y="338" width="155" height="30" rx="3" fill="#fff" stroke="#fca5a5"/>
+  <text x="296" y="357" text-anchor="middle" font-size="10">Estatístico-Chefe</text>
+  <rect x="386" y="338" width="155" height="30" rx="3" fill="#fff" stroke="#fca5a5"/>
+  <text x="464" y="357" text-anchor="middle" font-size="10">Teórico-Chefe</text>
+  <rect x="554" y="338" width="155" height="30" rx="3" fill="#fff" stroke="#fca5a5"/>
+  <text x="632" y="357" text-anchor="middle" font-size="10">Editorial-Chefe</text>
+
+  <line x1="375" y1="377" x2="375" y2="395" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Camada 3: 6 Corretores -->
+  <rect x="20" y="398" width="710" height="55" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="375" y="415" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">CAMADA 3 — 6 Corretores (Implementação das Mudanças)</text>
+
+  <rect x="35" y="422" width="108" height="25" rx="3" fill="#fff" stroke="#86efac"/>
+  <text x="89" y="439" text-anchor="middle" font-size="9">Texto • Fraseado</text>
+  <rect x="150" y="422" width="108" height="25" rx="3" fill="#fff" stroke="#86efac"/>
+  <text x="204" y="439" text-anchor="middle" font-size="9">Citações • DOI</text>
+  <rect x="265" y="422" width="108" height="25" rx="3" fill="#fff" stroke="#86efac"/>
+  <text x="319" y="439" text-anchor="middle" font-size="9">Estilo • Anti-IA</text>
+  <rect x="380" y="422" width="108" height="25" rx="3" fill="#fff" stroke="#86efac"/>
+  <text x="434" y="439" text-anchor="middle" font-size="9">Estrutura • IMRAD</text>
+  <rect x="495" y="422" width="108" height="25" rx="3" fill="#fff" stroke="#86efac"/>
+  <text x="549" y="439" text-anchor="middle" font-size="9">Formatação • ABNT</text>
+  <rect x="610" y="422" width="108" height="25" rx="3" fill="#fff" stroke="#86efac"/>
+  <text x="664" y="439" text-anchor="middle" font-size="9">Consistência • QA</text>
+
+  <!-- Loop de retorno -->
+  <path d="M130,453 L130,480 L50,480 L50,200 L700,200 L700,480 L620,480 L620,453" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="375" y="495" text-anchor="middle" font-size="10" fill="#ef4444" font-weight="bold">⟲ CICLO DE CORREÇÃO (repete até score ≥ 95)</text>
+  <text x="375" y="510" text-anchor="middle" font-size="9" fill="#dc2626">Média de 3 iterações para atingir 95/100 • Tempo total: ~2 minutos por ciclo</text>
+
+  <defs>
+    <marker id="a" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5 Z" fill="#475569"/></marker>
+    <marker id="g" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5 Z" fill="#22c55e"/></marker>
+    <marker id="r" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5 Z" fill="#ef4444"/></marker>
+  </defs>
+</svg>

@@ -1,0 +1,190 @@
+{
+  "top_corr": {
+    "aipi_total": 0.9257,
+    "educ_superior_pct": 0.8545,
+    "internet_pop_pct": 0.8406,
+    "ptf_relativa": 0.82,
+    "pib_pc_ppc": 0.7896,
+    "agricultura_pib_pct": -0.7054,
+    "complexidade_economica": 0.6394,
+    "gerd_pib_pct": 0.5907,
+    "export_tech_pct": 0.4465,
+    "gini": -0.4173,
+    "manufatura_pib_pct": 0.2019
+  },
+  "corr_insolitas": [
+    {
+      "par": "Agricultura vs Internet",
+      "r": -0.79,
+      "p": 0.0,
+      "rho": -0.7383,
+      "sig": "***"
+    },
+    {
+      "par": "Desigualdade vs Internet",
+      "r": -0.3048,
+      "p": 0.000142,
+      "rho": -0.3944,
+      "sig": "***"
+    },
+    {
+      "par": "Educacao vs Desigualdade",
+      "r": -0.2956,
+      "p": 0.000579,
+      "rho": -0.3368,
+      "sig": "***"
+    },
+    {
+      "par": "P&D vs Desigualdade",
+      "r": -0.2525,
+      "p": 0.007511,
+      "rho": -0.2894,
+      "sig": "**"
+    },
+    {
+      "par": "Export tech vs Manufatura",
+      "r": 0.0527,
+      "p": 0.485709,
+      "rho": 0.1153,
+      "sig": "ns"
+    },
+    {
+      "par": "Agricultura vs Prontidao IA",
+      "r": -0.6935,
+      "p": 0.0,
+      "rho": -0.6732,
+      "sig": "***"
+    }
+  ],
+  "k_otimo": 2,
+  "metricas": [
+    {
+      "modelo": "RandomForest",
+      "r2_teste": 0.9519,
+      "rmse": 0.0336,
+      "cv_r2": "0.9625+-0.0095"
+    },
+    {
+      "modelo": "GradientBoosting",
+      "r2_teste": 0.9484,
+      "rmse": 0.0348,
+      "cv_r2": "0.9735+-0.0040"
+    },
+    {
+      "modelo": "ElasticNet",
+      "r2_teste": 0.9983,
+      "rmse": 0.0064,
+      "cv_r2": "0.9985+-0.0005"
+    },
+    {
+      "modelo": "XGBoost",
+      "r2_teste": 0.9588,
+      "rmse": 0.0311,
+      "cv_r2": "0.9720+-0.0025"
+    },
+    {
+      "modelo": "LightGBM",
+      "r2_teste": 0.8973,
+      "rmse": 0.0491,
+      "cv_r2": "0.9127+-0.0217"
+    }
+  ],
+  "top_features": [
+    {
+      "variavel": "educ_superior_pct",
+      "importancia": 0.2510568041537612
+    },
+    {
+      "variavel": "internet_pop_pct",
+      "importancia": 0.2429964262339585
+    },
+    {
+      "variavel": "pib_pc_ppc",
+      "importancia": 0.18484738908563053
+    },
+    {
+      "variavel": "ptf_relativa",
+      "importancia": 0.1461229766228281
+    },
+    {
+      "variavel": "gerd_pib_pct",
+      "importancia": 0.11738472484008676
+    },
+    {
+      "variavel": "complexidade_economica",
+      "importancia": 0.04522980702346252
+    },
+    {
+      "variavel": "agricultura_pib_pct",
+      "importancia": 0.005949077188886381
+    },
+    {
+      "variavel": "gini",
+      "importancia": 0.0030438975158234714
+    },
+    {
+      "variavel": "manufatura_pib_pct",
+      "importancia": 0.001961745788565986
+    },
+    {
+      "variavel": "export_tech_pct",
+      "importancia": 0.0014071515469965224
+    }
+  ],
+  "rkf_mean": 0.9536,
+  "rkf_std": 0.0272,
+  "pooled_r2": 0.0118,
+  "vif": [
+    {
+      "var": "internet_pop_pct",
+      "VIF": 4.87
+    },
+    {
+      "var": "educ_superior_pct",
+      "VIF": 4.26
+    },
+    {
+      "var": "gerd_pib_pct",
+      "VIF": 1.84
+    },
+    {
+      "var": "gini",
+      "VIF": 2.38
+    }
+  ],
+  "bp_p": 0.0,
+  "anova": [
+    {
+      "var": "aipi_total",
+      "f": 31.14,
+      "p": 0.0
+    },
+    {
+      "var": "escape_arm",
+      "f": 34.5,
+      "p": 0.0
+    },
+    {
+      "var": "ptf_relativa",
+      "f": 12.3,
+      "p": 0.0
+    },
+    {
+      "var": "educ_superior_pct",
+      "f": 21.07,
+      "p": 0.0
+    },
+    {
+      "var": "internet_pop_pct",
+      "f": 33.53,
+      "p": 0.0
+    },
+    {
+      "var": "gini",
+      "f": 20.76,
+      "p": 0.0
+    }
+  ],
+  "n_paises": 202,
+  "n_features": 10
+}

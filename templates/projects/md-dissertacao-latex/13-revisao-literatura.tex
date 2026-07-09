@@ -1,0 +1,358 @@
+% ===== CAPÍTULO 2: REVISÃO DE LITERATURA (28pp, ~11.200 palavras) =====
+% 8 eixos temáticos, cada um com 3-4 seções
+
+\chapter{REVISÃO DE LITERATURA}
+\label{ch:revisao}
+
+\begin{flushright}
+\small\textit{``If I have seen further, it is by standing on the shoulders of Giants.''}\\
+--- ISAAC NEWTON, Carta a Robert Hooke (1675)
+\end{flushright}
+
+\section{Eixo 1: Sistemas Multiagentes — Fundamentos e Evolução}
+
+\subsection{Definições Canônicas e Taxonomia}
+
+Um sistema multiagente (SMA) é definido como um conjunto de entidades computacionais autônomas --- agentes --- que interagem em um ambiente compartilhado para resolver problemas que excedem a capacidade individual de cada agente (WOOLDRIDGE, 2009, p. 21). Esta definição, embora aparentemente simples, encapsula três propriedades fundamentais que distinguem SMAs de outros paradigmas de computação distribuída: (a) \textbf{autonomia}: cada agente toma decisões sem intervenção externa direta; (b) \textbf{situação}: cada agente percebe seu ambiente e age sobre ele; (c) \textbf{interação}: agentes se comunicam, cooperam e, ocasionalmente, competem.
+
+A taxonomia clássica de Wooldridge (2009) classifica os agentes em três categorias arquiteturais. Agentes \textbf{reativos} respondem diretamente a estímulos do ambiente, sem modelo interno explícito do mundo --- como um termostato que liga o aquecedor quando a temperatura cai abaixo de um limiar. Agentes \textbf{deliberativos} mantêm uma representação simbólica explícita do ambiente e raciocinam sobre ações futuras antes de executá-las --- como um jogador de xadrez que avalia múltiplos movimentos à frente. Agentes \textbf{híbridos} combinam ambas as abordagens, utilizando camadas reativas para respostas rápidas e camadas deliberativas para planejamento estratégico\footnote{
+  FERGUSON, Innes A. \textbf{TouringMachines: An Architecture for Dynamic, Rational, Mobile Agents}. 1992. Tese (Doutorado em Ciência da Computação) --- University of Cambridge, Cambridge, 1992.
+
+  \textbf{Fichamento Crítico:} A arquitetura TouringMachines de Ferguson (1992) foi pioneira na combinação de camadas reativas e deliberativas, influenciando diretamente a arquitetura em 3 camadas do OpenCode (MCP→Skill→Agent). No OpenCode, a camada MCP é puramente reativa (responde a chamadas de API), a camada Skill combina reação com processamento, e a camada Agent é majoritariamente deliberativa, utilizando o orquestrador de raciocínio v12 para planejamento multi-passo.
+}.
+
+\subsection{SMAs na Pesquisa Científica}
+
+A aplicação de SMAs à pesquisa científica é um campo emergente que ganhou tração significativa com o advento dos LLMs. Diferentemente de SMAs tradicionais em robótica ou logística --- onde os agentes controlam atuadores físicos ou otimizam rotas de entrega ---, SMAs científicos operam no domínio simbólico: buscam, leem, analisam e sintetizam informação textual e numérica.
+
+O framework \textit{Agent Laboratory} (SCHMIDGALL et al., 2024)\footnote{
+  SCHMIDGALL, Samuel et al. Agent Laboratory: Using LLM agents as research assistants. \textbf{arXiv preprint}, arXiv:2501.04227, 2024. DOI: \url{https://arxiv.org/abs/2501.04227}.
+
+  \textbf{Fichamento Crítico:} O Agent Laboratory implementa um pipeline de pesquisa completo com agentes LLM, mas com cobertura limitada de domínios científicos (foco em ML). O OpenCode estende este paradigma com cobertura de 13 categorias de skills (incluindo jurídico, ciências biológicas, raciocínio formal) e 46 conectores MCP que permitem aos agentes interagir com ferramentas especializadas (PubMed, ChEMBL, AlphaFold, Qiskit).
+} demonstrou que agentes LLM podem executar pipelines de pesquisa em machine learning do início ao fim, incluindo revisão de literatura, formulação de hipóteses, experimentação e redação de artigos. Contudo, o sistema carece de verificabilidade: as fontes citadas não são auditáveis (sem DOI obrigatório) e os experimentos não são validados por testes automatizados.
+
+O \textit{AI Scientist} (LU et al., 2024)\footnote{
+  LU, Chris et al. The AI Scientist: Towards fully automated open-ended scientific discovery. \textbf{arXiv preprint}, arXiv:2408.06292, 2024. DOI: \url{https://arxiv.org/abs/2408.06292}.
+
+  \textbf{Fichamento Crítico:} O AI Scientist propõe descoberta científica totalmente automatizada, mas seu escopo é limitado a experimentos de ML que podem ser executados em sandbox. O OpenCode adota uma abordagem complementar: em vez de automatizar a descoberta (que requer validação experimental do mundo real), foca na automatização da produção e verificação de documentos científicos --- um domínio onde a verificabilidade pode ser garantida por testes automatizados e trilhas de auditoria.
+} foi além, propondo descoberta científica totalmente automatizada --- agentes que não apenas escrevem sobre ciência, mas conduzem experimentos e geram novo conhecimento. Embora promissor, o sistema opera em um domínio restrito (otimização de hiperparâmetros em ML) e não aborda a verificabilidade cruzada dos achados.
+
+\subsection{Arquiteturas de Orquestração Multiagente}
+
+A orquestração de múltiplos agentes em um pipeline coerente é um dos desafios centrais dos SMAs. Duas arquiteturas dominam a literatura: \textbf{orquestração centralizada}, onde um agente coordenador distribui tarefas e consolida resultados (modelo `` maestro''), e \textbf{orquestração descentralizada}, onde agentes negociam entre si sem autoridade central (modelo ``mercado''). O OpenCode adota uma arquitetura híbrida: um orquestrador central (Nexus Multiagente v6.2) coordena o pipeline, mas agentes individuais podem iniciar sub-debates autônomos através do Agent Forum (P14) quando encontram divergências\footnote{
+  JENNINGS, Nicholas R. et al. Automated negotiation: Prospects, methods and challenges. \textbf{Group Decision and Negotiation}, v. 10, n. 2, p. 199--215, 2001. DOI: \url{https://doi.org/10.1023/A:1008746126376}.
+
+  \textbf{Fichamento Crítico:} Jennings et al. (2001) estabelecem os fundamentos da negociação automatizada entre agentes, incluindo protocolos de leilão, argumentação e formação de coalizões. O Agent Forum do OpenCode implementa estes protocolos através do OASIS (Open Agent Social Interaction System), com 4 estágios de debate (OPEN/DISCUSS/SYNTHESIZE/CONCLUDE) e um moderador automático que gerencia turnos de fala e detecta \textit{deadlocks}.
+}.
+
+{\small\itshape O Eixo 1 estabeleceu o que são agentes e como eles se organizam. Mas agentes não operam no vácuo — eles precisam interagir com ferramentas externas: buscadores, bancos de dados, interpretadores de código. Sem um padrão de comunicação, cada agente precisaria de um adaptador customizado para cada ferramenta — um pesadelo combinatório. O Eixo 2 examina como o Model Context Protocol resolve este problema.}
+
+\section{Eixo 2: Model Context Protocol (MCP) — Padronização de Interfaces Agente-Ferramenta}
+
+\subsection{Origens e Motivação}
+
+O Model Context Protocol (MCP), introduzido pela Anthropic em novembro de 2024, resolve um problema que afligia os sistemas de IA desde seus primórdios: a integração N×M entre modelos de linguagem e ferramentas externas. Antes do MCP, cada ferramenta (buscador web, banco de dados, interpretador de código) exigia uma integração customizada com cada modelo de IA --- resultando em uma explosão combinatória de adaptadores\footnote{
+  ANTHROPIC. \textbf{Introducing the Model Context Protocol}. 25 nov. 2024. Disponível em: \url{https://www.anthropic.com/news/model-context-protocol}.
+
+  \textbf{Fichamento Crítico:} O anúncio oficial do MCP pela Anthropic estabelece o protocolo como uma `` porta USB-C para aplicações de IA'' --- uma metáfora que captura sua ambição de padronização universal. O OpenCode é um estudo de caso desta visão: seus 46 MCPs configurados (de busca web a computação quântica) demonstram a viabilidade do protocolo para integrar ferramentas de domínios radicalmente distintos sob uma interface unificada.
+}.
+
+O MCP introduz três primitivas fundamentais: (a) \textbf{Tools} (ferramentas): funções que o modelo pode invocar, como buscar na web ou executar código; (b) \textbf{Resources} (recursos): dados estruturados que o modelo pode ler, como arquivos ou registros de banco de dados; (c) \textbf{Prompts} (modelos de interação): templates reutilizáveis que guiam a interação do modelo com ferramentas específicas. O protocolo opera sobre transporte padronizado (stdio para processos locais, HTTP+SSE para servidores remotos), permitindo que ferramentas sejam descobertas e conectadas dinamicamente.
+
+\subsection{MCPs no Ecossistema OpenCode}
+
+O OpenCode é, até onde sabemos, o ecossistema com a maior densidade de MCPs documentada na literatura aberta: 46 servidores MCP configurados, dos quais 18 estão ativos e saudáveis, 23 estão configurados mas com \textit{warnings}, e 1 está com erro (GitHub por falta de token). Esta densidade --- 0,36 MCPs por agente --- reflete a filosofia arquitetural de que agentes devem ter acesso ao maior número possível de ferramentas verificadas, mas apenas as utilizam sob demanda.
+
+A Tabela~\ref{tab:mcps} apresenta a classificação funcional dos 18 MCPs ativos:
+
+\begin{table}[H]
+\centering
+\caption{Classificação Funcional dos MCPs Ativos do Ecossistema OpenCode}
+\label{tab:mcps}
+\begin{tabular}{p{3cm}p{4cm}p{7cm}}
+\toprule
+\textbf{Categoria} & \textbf{MCPs} & \textbf{Função no Pipeline Científico} \\
+\midrule
+Busca e Recuperação & websearch, gh\_grep, context7, scihub, fetch & Localização de literatura, dados e padrões de código \\
+\addlinespace
+Navegador & playwright, chrome-devtools & Interação com interfaces web acadêmicas (buscadores, periódicos) \\
+\addlinespace
+Execução de Código & code-runner, node-sandbox, mcp-python-interpreter & Validação de análises estatísticas e pipelines de ML \\
+\addlinespace
+Dados e Persistência & sqlite, filesystem, memory, decisionnode & Armazenamento de evidências, decisões arquiteturais e estado \\
+\addlinespace
+Raciocínio & sequential-thinking & Decomposição de problemas complexos em cadeias de pensamento \\
+\addlinespace
+Qualidade & eslint, diff, pdf, time & Linting de código, comparação de versões, manipulação de documentos \\
+\bottomrule
+\end{tabular}
+\fonte{Elaborado pelos autores com base na configuração MCP do OpenCode v5.1.0 (2026).}
+\end{table}
+
+{\small\itshape Agora que sabemos como os agentes se comunicam com ferramentas (Eixo 2), precisamos de disciplina para garantir que o que eles constroem funciona. Entra a engenharia de software formal, com duas práticas que o OpenCode eleva a requisito arquitetural.}
+
+\section{Eixo 3: SDD e TDD em Pipelines Científicos}
+
+\subsection{Specification-Driven Development (SDD)}
+
+O SDD é uma disciplina de engenharia de software que inverte a relação tradicional entre especificação e implementação: em vez de documentar o sistema \textit{post hoc}, o SDD exige que cada componente seja formalmente especificado antes de sua implementação (MEYER, 1997)\footnote{
+  MEYER, Bertrand. \textbf{Object-Oriented Software Construction}. 2. ed. Upper Saddle River: Prentice Hall, 1997. ISBN: 978-0136291558.
+
+  \textbf{Fichamento Crítico:} Meyer (1997) introduz o conceito de \textit{Design by Contract} --- pré-condições, pós-condições e invariantes que definem formalmente o comportamento de cada componente de software. O OpenCode adapta este conceito para o domínio científico: cada SPEC define não apenas o comportamento esperado, mas também os critérios de validação (``como saberemos que este componente está funcionando corretamente?''), os limiares de qualidade (``qual desvio é aceitável?''), e as referências canônicas (``contra qual literatura este componente deve ser validado?'').
+}. No contexto de pipelines científicos, o SDD oferece uma vantagem crucial: transforma a documentação de um ``subproduto'' da pesquisa em sua ``infraestrutura''. Cada componente do ecossistema --- seja um agente de busca bibliográfica, um validador estatístico ou um formatador ABNT --- possui uma SPEC documentada que especifica seu comportamento esperado, suas entradas e saídas, suas dependências, e seus critérios de validação.
+
+O ecossistema OpenCode implementa SDD através de 188 documentos SPEC, organizados por prefixo de domínio: SPEC\_TOP\_* (componentes de alto nível, 30+ docs), SPEC\_SCI\_* (ciências, 36+ docs), SPEC\_AGE\_* (agentes acadêmicos, 28+ docs), SPEC\_EVO14\_* (agentes evolutivos, 28 docs), SPEC\_COR\_* (dimensões CORA, 11 docs), SPEC\_JUR\_* (skills jurídicas, 6 docs), SPEC\_REA\_* (reasoning engines, 4 docs), SPEC\_SYS\_* (sistema, 10 docs), e SPEC\_BRO\_* (framework Broomva, 12 docs). Cada SPEC segue um template de 5 dimensões: (1) objetivo do componente, (2) comportamento esperado (com pré e pós-condições), (3) interface (entradas, saídas, eventos), (4) dependências (outros componentes dos quais depende), e (5) validação (como verificar que o componente funciona).
+
+\subsection{Test-Driven Development (TDD)}
+
+O TDD, formalizado por Kent Beck (2003), estabelece um ciclo de desenvolvimento de três passos: RED (escrever um teste que falha), GREEN (implementar o código mínimo para passar no teste), REFACTOR (melhorar a estrutura do código mantendo os testes verdes). No domínio científico, o TDD oferece uma vantagem epistemológica: transforma a validação de ``confiança no pesquisador'' para ``confiança no teste executável''.
+
+O ecossistema OpenCode aplica TDD em três níveis, seguindo a pirâmide de testes clássica (COHN, 2009)\footnote{
+  COHN, Mike. \textbf{Succeeding with Agile: Software Development Using Scrum}. Boston: Addison-Wesley, 2009. ISBN: 978-0321579362.
+
+  \textbf{Fichamento Crítico:} A pirâmide de testes de Cohn (2009) --- muitos testes unitários, menos testes de integração, poucos testes E2E --- é aplicada no OpenCode com 100+ testes unitários (para funções individuais dos agentes), 10 testes de integração (para interações entre componentes), e 3 testes E2E (para pipelines completos). Esta proporção (aproximadamente 33:3:1) está alinhada com a recomendação de Cohn e garante cobertura abrangente com tempo de execução controlado.
+}:
+
+\begin{enumerate}
+  \item \textbf{Nível 1 --- Testes Unitários (100+ casos):} Validam funções atômicas como cálculo de score Qualis, formatação de referências ABNT, detecção de palavras banidas (TSAC). Exemplo: o teste \texttt{test\_d1\_matematica.py} verifica se o raciocínio matemático formal do ecossistema calcula corretamente o Teorema de Pitágoras para 50 triplas (3,4,5), (5,12,13), etc.
+
+  \item \textbf{Nível 2 --- Testes de Integração (10+ casos):} Validam interações entre componentes. Exemplo: \texttt{test\_spec019\_api\_governance.py} verifica se o registro de APIs (SPEC-019) propaga políticas de governança corretamente para o pipeline de streaming (SPEC-020).
+
+  \item \textbf{Nível 3 --- Testes End-to-End (3 casos):} Validam pipelines completos. Exemplo: o teste de geração de artigo acadêmico completo verifica se o pipeline MASWOS produz um artigo com todas as seções obrigatórias, citações com DOI, e score Qualis $\geq$ 95.
+\end{enumerate}
+
+\subsection{A Sinergia SDD+TDD}
+
+A combinação de SDD e TDD --- que o OpenCode denomina ``Pipeline SDD+\-TDD+\-Auto\-Evolve'' --- cria um ciclo de feedback de três estágios: (1) a SPEC define o comportamento esperado; (2) os testes TDD verificam se a implementação corresponde à especificação; (3) o AutoEvolve analisa as falhas detectadas pelos testes, identifica padrões, e gera correções que são incorporadas como novas versões das SPECs. Este ciclo é inspirado no conceito de \textit{Double-Loop Learning} de Argyris e Schön (1978)\footnote{
+  ARGYRIS, Chris; SCHÖN, Donald A. \textbf{Organizational Learning: A Theory of Action Perspective}. Reading: Addison-Wesley, 1978. ISBN: 978-0201001747.
+
+  \textbf{Fichamento Crítico:} O conceito de \textit{double-loop learning} --- onde um sistema não apenas corrige erros (single-loop), mas questiona e modifica as normas que governam a detecção de erros (double-loop) --- é diretamente análogo ao ciclo SDD+\-TDD+\-Auto\-Evolve. O TDD implementa single-loop (``o teste falhou, corrijo o código''), enquanto o AutoEvolve implementa double-loop (``os testes estão falhando consistentemente em X contexto; por que X contexto gera falhas? Devo modificar a SPEC para tratar X como um caso especial?'').
+}, adaptado para o domínio de engenharia de software.
+
+{\small\itshape Especificar e testar (Eixo 3) resolve o problema de \textit{como} construir. Mas ainda falta o \textit{com que} construir. Agentes de pesquisa precisam acessar conhecimento externo — artigos, bases de dados, literatura cinzenta. O Eixo 4 examina as estratégias de recuperação de informação que alimentam os agentes do OpenCode com evidências.}
+
+\section{Eixo 4: Geração Aumentada por Recuperação (RAG) em Contextos Acadêmicos}
+
+\subsection{Fundamentos do RAG}
+
+A Geração Aumentada por Recuperação (RAG, do inglês \textit{Retrieval-Augmented Generation}) é uma arquitetura que combina dois componentes: (a) um \textbf{recuperador} (\textit{retriever}) que busca documentos relevantes em uma base de conhecimento externa, e (b) um \textbf{gerador} (\textit{generator}) que produz texto condicionado tanto na consulta do usuário quanto nos documentos recuperados (LEWIS et al., 2020)\footnote{
+  LEWIS, Patrick et al. Retrieval-augmented generation for knowledge-intensive NLP tasks. \textbf{Advances in Neural Information Processing Systems}, v. 33, p. 9459--9474, 2020. DOI: \url{https://arxiv.org/abs/2005.11401}.
+
+  \textbf{Fichamento Crítico:} Lewis et al. (2020) demonstraram que RAG supera significativamente modelos puramente generativos em tarefas que exigem conhecimento factual, como resposta a perguntas e verificação de fatos. No contexto do OpenCode, o RAG é utilizado de duas formas complementares: (1) o SEEKER utiliza RAG para localizar e fundamentar evidências bibliográficas; e (2) o MASWOS utiliza RAG para garantir que cada afirmação no artigo gerado esteja ancorada em uma fonte recuperável.
+}.
+
+\subsection{As 9 Estratégias RAG do OpenCode}
+
+O ecossistema OpenCode implementa 9 estratégias RAG distintas, cada uma otimizada para um contexto específico de pesquisa científica\footnote{
+  GAO, Yunfan et al. Retrieval-augmented generation for large language models: A survey. \textbf{arXiv preprint}, arXiv:2312.10997, 2023. DOI: \url{https://arxiv.org/abs/2312.10997}.
+
+  \textbf{Fichamento Crítico:} O survey de Gao et al. (2023) cataloga dezenas de variantes de RAG e estabelece uma taxonomia em três dimensões: (1) o que recuperar, (2) quando recuperar, e (3) como usar o que foi recuperado. As 9 estratégias RAG do OpenCode cobrem sistematicamente estas três dimensões: desde o \textit{Vanilla RAG} (recuperação única antes da geração) até o \textit{GraphRAG} (recuperação em grafo de conhecimento com consultas estruturadas).
+}:
+
+\begin{enumerate}
+  \item \textbf{Vanilla RAG:} Recuperação simples de documentos por similaridade de embeddings. Utilizada para buscas exploratórias iniciais.
+  \item \textbf{Hierarchical RAG:} Recuperação em dois níveis (documento $\rightarrow$ parágrafo). Ideal para artigos longos.
+  \item \textbf{HyDE (Hypothetical Document Embeddings):} Gera um documento hipotético e busca documentos similares. Eficaz para perguntas abertas.
+  \item \textbf{CRAG (Corrective RAG):} Avalia a qualidade dos documentos recuperados e re-consulta se necessário.
+  \item \textbf{Self-RAG:} O modelo decide autonomamente se precisa recuperar documentos adicionais.
+  \item \textbf{GraphRAG:} Recuperação baseada em grafo de conhecimento. Utilizada pelo SEEKER para mapear relações entre conceitos.
+  \item \textbf{Fusion RAG:} Combina resultados de múltiplas estratégias de recuperação.
+  \item \textbf{Agentic RAG:} Agentes autônomos decidem quais fontes consultar e como combinar resultados.
+  \item \textbf{Multi-modal RAG:} Recuperação de documentos em múltiplos formatos (texto, imagem, tabela).
+\end{enumerate}
+
+{\small\itshape Os quatro primeiros eixos cobriram a espinha dorsal do OpenCode: agentes, conectividade, engenharia e recuperação de conhecimento. Os quatro eixos seguintes expandem o horizonte para domínios especializados que diferenciam o ecossistema: computação quântica, correção iterativa, auto-evolução e padrões brasileiros de qualidade.}
+
+\section{Eixo 5: Computação Quântica para Machine Learning (QML)}
+
+\subsection{Fundamentos de QML}
+
+O Aprendizado de Máquina Quântico (QML) explora fenômenos quânticos --- superposição, emaranhamento e interferência --- para processar informação de formas inacessíveis a computadores clássicos (BIAMONTE et al., 2017)\footnote{
+  BIAMONTE, Jacob et al. Quantum machine learning. \textbf{Nature}, v. 549, n. 7671, p. 195--202, 2017. DOI: \url{https://doi.org/10.1038/nature23474}.
+
+  \textbf{Fichamento Crítico:} Biamonte et al. (2017) estabelecem o programa de pesquisa de QML, identificando quatro áreas onde computadores quânticos podem oferecer vantagens: (1) álgebra linear quântica (exponencialmente mais rápida que clássica para certas operações); (2) otimização quântica (potencialmente mais eficiente para paisagens de erro não convexas); (3) kernels quânticos (mapeamento de dados para espaços de Hilbert de alta dimensionalidade); (4) amostragem quântica (geração de distribuições de probabilidade complexas). O módulo QML do OpenCode foca na terceira área, implementando um classificador quântico variacional (VQC) para imagens médicas.
+}.
+
+\subsection{O Pipeline QML HAM10000}
+
+O subsistema quântico do OpenCode implementa um pipeline completo de classificação de lesões de pele utilizando o dataset HAM10000 (TSCHANDL; ROSENDAHL; KITTLER, 2018)\footnote{
+  TSCHANDL, Philipp; ROSENDAHL, Cliff; KITTLER, Harald. The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions. \textbf{Scientific Data}, v. 5, n. 1, p. 1--9, 2018. DOI: \url{https://doi.org/10.1038/sdata.2018.161}.
+
+  \textbf{Fichamento Crítico:} O HAM10000 é o maior dataset público de imagens dermatoscópicas (10.015 imagens, 7 classes de lesões). Sua escolha para o pipeline QML do OpenCode é metodologicamente relevante porque: (1) é um benchmark estabelecido na literatura de visão computacional médica; (2) possui anotações de alta qualidade verificadas por dermatologistas; e (3) representa um problema de classificação desbalanceada (a classe ``nevo melanocítico'' domina com 67\% das amostras) --- um desafio realista para qualquer classificador.
+}. O classificador atinge 89,52\% de acurácia, com mitigação de erro quântico através de duas técnicas: ZNE (Zero-Noise Extrapolation) e PEC (Probabilistic Error Cancellation). O pipeline é executável inteiramente no simulador Qiskit Aer, permitindo validação sem hardware quântico especializado.
+
+{\small\itshape Mesmo o pipeline mais sofisticado produz erros. O Eixo 5 mostrou um domínio especializado; o Eixo 6 retorna ao problema universal: como garantir que o texto gerado por IA tenha qualidade acadêmica? A resposta do OpenCode é um loop de correção que simula o processo de revisão por pares.}
+
+\section{Eixo 6: Correção Iterativa com Validação por Pares Simulada}
+
+\subsection{O Problema da Qualidade em Textos Gerados por IA}
+
+Textos acadêmicos gerados por IA apresentam padrões estilísticos detectáveis que comprometem sua credibilidade. Liang et al. (2024)\footnote{
+  LIANG, Weixin et al. Mapping the increasing use of LLMs in scientific papers. \textbf{arXiv preprint}, arXiv:2404.01268, 2024. DOI: \url{https://arxiv.org/abs/2404.01268}.
+
+  \textbf{Fichamento Crítico:} Liang et al. (2024) analisaram milhões de artigos científicos e detectaram um aumento significativo no uso de vocabulário característico de LLMs (como ``delve'', ``intricate'', ``showcasing'', ``pivotal'') a partir de 2023. Este fenômeno --- que os autores denominam ``poluição lexical'' --- motiva o protocolo TSAC do OpenCode, que mantém uma lista de 87 palavras banidas e força os agentes de redação a utilizar vocabulário acadêmico convencional.
+} documentaram que certas palavras e construções gramaticais se tornaram marcadores de autoria por IA, criando um viés de percepção que pode levar revisores humanos a rejeitar artigos independentemente de seu mérito científico.
+
+\subsection{O Loop de Correção Iterativa do OpenCode}
+
+O loop de correção iterativa do OpenCode implementa um processo de revisão por pares simulado com 5 agentes-revisores, cada um especializado em uma dimensão de qualidade acadêmica:
+
+\begin{enumerate}
+  \item \textbf{Revisor Metodológico:} Verifica adequação do desenho experimental, tamanho amostral, controle de vieses.
+  \item \textbf{Revisor Estatístico:} Verifica pressupostos dos testes, tamanhos de efeito, correção para múltiplas comparações.
+  \item \textbf{Revisor Teórico:} Verifica fundamentação conceitual, consistência terminológica, diálogo com a literatura.
+  \item \textbf{Revisor Estrutural:} Verifica conformidade com IMRAD, proporções de seções, clareza argumentativa.
+  \item \textbf{Revisor Estilístico:} Verifica conformidade com ABNT, legibilidade, ausência de vieses de IA (protocolo TSAC).
+\end{enumerate}
+
+Os 5 revisores debatem através do Agent Forum (P14), com um moderador automático que gerencia turnos de fala e sintetiza recomendações. O ciclo se repete até que o score Qualis atinja $\geq$ 95/100\footnote{
+  CAPES. \textbf{Documento de Área --- Ciência da Computação}. Brasília: CAPES, 2019. Disponível em: \url{https://www.gov.br/capes/pt-br}.
+
+  \textbf{Fichamento Crítico:} O documento de área da CAPES para Ciência da Computação estabelece os critérios de avaliação Qualis: originalidade, relevância, rigor metodológico, clareza, e contribuição para o avanço do conhecimento. O score de 95/100 almejado pelo OpenCode corresponde ao percentil 95 de qualidade --- ou seja, o artigo gerado deve estar entre os 5\% melhores da área, um padrão que exigiria meses de trabalho humano para ser atingido.
+}.
+
+{\small\itshape Corrigir erros (Eixo 6) resolve o problema imediato. Mas o que acontece quando os mesmos erros reaparecem? A resposta está em sistemas que não apenas corrigem, mas aprendem com as correções — evoluindo seu próprio comportamento ao longo do tempo.}
+
+\section{Eixo 7: Auto-Evolução de Sistemas de Software}
+
+\subsection{Fundamentos de Sistemas Auto-Evolutivos}
+
+A capacidade de um sistema de software modificar seu próprio comportamento em resposta a feedback é um dos ``Santo Graal'' da engenharia de software. O conceito remonta aos trabalhos pioneiros de Samuel (1959) sobre aprendizado de máquina em jogos de damas e foi formalizado por Holland (1975) na teoria dos algoritmos genéticos\footnote{
+  HOLLAND, John H. \textbf{Adaptation in Natural and Artificial Systems}. Ann Arbor: University of Michigan Press, 1975. ISBN: 978-0262581110.
+
+  \textbf{Fichamento Crítico:} Holland (1975) introduziu o framework matemático dos algoritmos genéticos --- populações de soluções que evoluem através de seleção, cruzamento e mutação. Embora o AutoEvolve do OpenCode não utilize algoritmos genéticos diretamente, ele compartilha a mesma inspiração biológica: variação (detecção de falhas), seleção (priorização por impacto no score Qualis), e retenção (documentação em SPECs e ADRs). A diferença crucial é que o AutoEvolve opera no espaço de \textit{design} (modificando especificações), não no espaço de \textit{implementação} (modificando código diretamente).
+}.
+
+\subsection{O Motor AutoEvolve do OpenCode}
+
+O AutoEvolve implementa um pipeline de 5 estágios: PLAN (analisa falhas e planeja correções) $\rightarrow$ ACT (implementa as correções) $\rightarrow$ REFLECT (avalia o impacto das correções) $\rightarrow$ EXTRACT (extrai padrões generalizáveis) $\rightarrow$ EVOLVE (gera novas skills ou modifica existentes). Cada ciclo gera um documento de evolução (\texttt{evo-N.tex}) que registra: problema detectado, análise de causa-raiz, correção implementada, validação, e impacto no score.
+
+Os 16 ciclos documentados demonstram uma trajetória de melhoria consistente: de 85/100 (R1, detecção de armadilha da renda média em dados do World Bank) a 99/100 (R18, sistema de economia de tokens com tripé Governança+Economia+Auditoria). Esta progressão de +16,5\% em 18 iterações representa uma taxa de melhoria média de 0,92 pontos por ciclo\footnote{
+  SIMON, Herbert A. \textbf{The Sciences of the Artificial}. 3. ed. Cambridge: MIT Press, 1996. ISBN: 978-0262691918.
+
+  \textbf{Fichamento Crítico:} Simon (1996) argumenta que sistemas artificiais evoluem através de ``adaptação satisfatória'' (\textit{satisficing}) --- não buscam o ótimo global, mas soluções que satisfazem critérios mínimos de qualidade. A trajetória do OpenCode reflete este princípio: cada ciclo eleva o piso de qualidade (o score mínimo aceitável), mas o teto (99/100) se aproxima assintoticamente de 100 sem jamais alcançá-lo, já que sempre haverá novas falhas a corrigir.
+}.
+
+{\small\itshape Os sete eixos anteriores cobriram a dimensão técnica do ecossistema. Mas produção científica não é apenas tecnologia — é também conformidade com normas, padrões de qualidade e sistemas de avaliação. O Brasil possui um dos sistemas mais estruturados do mundo nesse aspecto, e o OpenCode foi projetado para operar dentro dele.}
+
+\section{Eixo 8: Padrões ABNT, Qualis e CNPq para Produção Científica Brasileira}
+
+\subsection{O Sistema Qualis de Avaliação}
+
+O sistema Qualis, mantido pela CAPES, classifica os veículos de publicação científica brasileiros em estratos (A1, A2, B1, B2, B3, B4, C). O estrato A1 --- reservado aos periódicos de excelência internacional --- exige que o artigo demonstre: (a) originalidade da contribuição; (b) rigor metodológico; (c) relevância para o avanço do conhecimento na área; (d) clareza e organização; (e) diálogo com a literatura internacional\footnote{
+  CAPES. \textbf{Relatório de Avaliação Quadrienal 2017-2020}. Brasília: CAPES, 2021. Disponível em: \url{https://www.gov.br/capes/pt-br}.
+
+  \textbf{Fichamento Crítico:} O relatório quadrienal da CAPES estabelece que, para a área de Ciência da Computação, artigos Qualis A1 devem demonstrar ``contribuição significativa e original ao estado da arte, com validação experimental rigorosa e discussão aprofundada dos resultados''. O pipeline MASWOS do OpenCode foi calibrado contra estes critérios: cada um dos 10 critérios do \texttt{auto\_score\_qualis.py} corresponde a um requisito explícito do documento de área.
+}.
+
+\subsection{O Formato CNPq/LaTeX}
+
+O CNPq disponibiliza templates LaTeX padronizados para relatórios e publicações científicas. Estes templates seguem a norma ABNT NBR 14724 (trabalhos acadêmicos) com adaptações específicas: margens 3/3/2/2 cm (superior/esquerda/direita/inferior), fonte Times New Roman 12pt, espaçamento 1,5, e sistema autor-data para citações (NBR 10520:2023). O pipeline de exportação acadêmica do OpenCode implementa nativamente este formato através do módulo \texttt{academic-export-abnt}, garantindo que toda dissertação gerada esteja em conformidade com os padrões brasileiros.
+
+\section{Eixo 9: Scanners Epistemológicos e Ferramentas de Auto-Análise}
+
+Os oito eixos anteriores cobriram os fundamentos técnicos e normativos do ecossistema. Este nono eixo aborda uma lacuna específica na literatura: ferramentas computacionais para análise epistemológica de textos acadêmicos.
+
+\subsection{Auditoria Epistêmica na Literatura}
+
+O conceito de auditoria epistêmica --- verificação sistemática da qualidade do conhecimento produzido por um sistema --- tem raízes na filosofia da ciência. Goldman (1999)\footnote{
+  GOLDMAN, Alvin I. \textbf{Knowledge in a Social World}. Oxford: Oxford University Press, 1999. ISBN: 978-0198238201.
+
+  \textbf{Fichamento Crítico:} Goldman propõe o conceito de ``veritistic social epistemology'' --- uma epistemologia que avalia sistemas sociais de produção de conhecimento pela sua capacidade de gerar crenças verdadeiras e evitar crenças falsas. O ecossistema OpenCode operacionaliza este conceito: seus scanners não avaliam a ``verdade'' das afirmações, mas a ``cobertura'' do espaço de conhecimento --- uma métrica mais tratável computacionalmente que mantém a orientação veritística de Goldman.
+} propôs o conceito de ``epistemologia social veritística'', que avalia sistemas de produção de conhecimento pela sua propensão a gerar crenças verdadeiras. Contudo, a implementação computacional deste conceito permaneceu majoritariamente teórica até recentemente.
+
+No domínio da ciência da computação, ferramentas como \textit{Grammarly}, \textit{Turnitin} e \textit{Writefull} realizam análise de superfície textual (ortografia, gramática, similaridade), mas nenhuma delas opera no nível de análise epistemológica --- identificação de lacunas de conhecimento, vieses paradigmáticos ou ausências metodológicas. O Scanner Noológico preenche esta lacuna ao operar em 10 dimensões epistemológicas $\times$ 92 categorias, indo além da correção gramatical para a completude do conhecimento.
+
+\subsection{Mapeamento de Conhecimento e Knowledge Graphs}
+
+A literatura sobre grafos de conhecimento (knowledge graphs) oferece fundamentos para a abordagem do CrossValidationEngine. Sistemas como o \textit{Google Knowledge Graph} (SINGHAL, 2012)\footnote{
+  SINGHAL, Amit. Introducing the Knowledge Graph: things, not strings. \textbf{Google Official Blog}, 2012. Disponível em: \url{https://blog.google/products/search/introducing-knowledge-graph-things-not/}.
+
+  \textbf{Fichamento Crítico:} Singhal introduziu o conceito de knowledge graph como uma rede de entidades e suas relações, em oposição à busca por strings de texto. O CrossValidationEngine adota a mesma filosofia: em vez de buscar strings de texto nos documentos, constrói um grafo de 92 nós (categorias de conhecimento) conectados por 73 arestas de dependência, permitindo raciocinar sobre \textit{o que deveria estar presente}, não apenas sobre \textit{o que está textualmente presente}.
+} modelam entidades e suas relações, mas são genéricos --- não foram projetados para o domínio específico da análise epistemológica de textos acadêmicos.
+
+O OpenCode inova ao combinar três elementos que a literatura trata separadamente: (a) um \textit{knowledge graph} específico para epistemologia (as 10 dimensões $\times$ 92 categorias do Scanner Noológico); (b) um motor de inferência reversa (TeleologicalReverseScanner) que parte de objetivos para inferir requisitos; e (c) um solver de otimização combinatória (MCSP) que encontra o conjunto mínimo de capacidades para fechar gaps. Esta integração de representação de conhecimento, inferência prescritiva e otimização é, até onde sabemos, inédita na literatura.
+
+\subsection{Raciocínio Abdutivo Computacional}
+
+O raciocínio abdutivo --- inferência para a melhor explicação (PEIRCE, 1931) --- tem recebido atenção crescente na inteligência artificial. Josephson e Josephson (1994)\footnote{
+  JOSEPHSON, John R.; JOSEPHSON, Susan G. \textbf{Abductive Inference: Computation, Philosophy, Technology}. Cambridge: Cambridge University Press, 1994. ISBN: 978-0521434614.
+
+  \textbf{Fichamento Crítico:} Josephson e Josephson formalizaram o raciocínio abdutivo como um processo de duas etapas: (1) gerar hipóteses que explicariam as observações, e (2) selecionar a melhor hipótese segundo critérios de simplicidade, consistência e poder explicativo. O ecossistema de scanners implementa este processo computacionalmente: o NoologicalScanner gera hipóteses (``a categoria X está ausente''), e o TeleologicalReverseScanner seleciona a melhor hipótese (``a categoria Y é a mais necessária dados os objetivos Z''), usando critérios de cascade\_impact, transferability\_score e feasibility.
+} formalizaram o processo como um ciclo de geração e seleção de hipóteses --- precisamente a estrutura do pipeline de 5 scanners.
+
+A principal limitação das implementações existentes de abdução computacional é que operam em domínios fechados (diagnóstico médico, detecção de falhas). O ecossistema OpenCode estende a abdução computacional para domínios abertos --- análise de textos acadêmicos em qualquer área do conhecimento --- usando a estrutura de 10 dimensões e 92 categorias como um ``vocabulário controlado'' que restringe o espaço de hipóteses abdutivas sem limitar a generalidade da análise.
+
+\subsection{Transferência Interdisciplinar e Polimatia Computacional}
+
+A ideia de que soluções em um domínio podem informar soluções em outro --- polimatia --- tem uma longa tradição que remonta a Da Vinci e Leibniz, mas sua implementação computacional é recente. O conceito de \textit{transfer learning} em machine learning (PAN; YANG, 2010)\footnote{
+  PAN, Sinno Jialin; YANG, Qiang. A survey on transfer learning. \textbf{IEEE Transactions on Knowledge and Data Engineering}, v. 22, n. 10, p. 1345--1359, 2010. DOI: 10.1109/TKDE.2009.191.
+
+  \textbf{Fichamento Crítico:} Pan e Yang definem transfer learning como ``a capacidade de um sistema de reconhecer e aplicar conhecimento e habilidades aprendidas em domínios anteriores para novos domínios''. O PolymathicConvergence implementa uma forma de transfer learning simbólico (não neural): em vez de transferir pesos de uma rede neural, transfere princípios abstratos entre domínios --- por exemplo, o princípio de ``inferência bayesiana'' é transferido da neurociência (onde descreve processamento cortical) para a epistemologia (onde descreve atualização de crenças sobre a qualidade de fontes).
+} oferece um paralelo técnico, mas opera no nível de features e pesos de redes neurais, não no nível de princípios abstratos transferíveis entre disciplinas.
+
+O PolymathicConvergence do OpenCode implementa uma forma de ``transferência simbólica'': para cada gap epistemológico identificado, consulta um mapeamento de 30 domínios externos e retorna princípios transferíveis com escores de transferibilidade (0--1). Esta abordagem é mais similar ao conceito de \textit{analogical reasoning} (GENTNER, 1983)\footnote{
+  GENTNER, Dedre. Structure-mapping: A theoretical framework for analogy. \textbf{Cognitive Science}, v. 7, n. 2, p. 155--170, 1983. DOI: 10.1207/s15516709cog0702\_3.
+
+  \textbf{Fichamento Crítico:} Gentner propôs que analogias operam por mapeamento estrutural: as relações entre elementos de um domínio (fonte) são mapeadas para relações correspondentes em outro domínio (alvo). O PolymathicConvergence implementa este princípio: para o gap ``raciocínio probabilístico'', mapeia a relação ``córtex realiza inferência bayesiana'' (domínio fonte: neurociência) para a relação ``scanner deve realizar inferência bayesiana'' (domínio alvo: epistemologia computacional).
+} do que ao transfer learning neural, embora ambos compartilhem o objetivo de transportar conhecimento entre domínios.
+
+\section{Eixo 10: Economia de Tokens e Governança de Ecossistemas Multiagentes}
+
+A coordenação de múltiplos agentes em um ecossistema de produção científica requer não apenas mecanismos técnicos de integração, mas também mecanismos econômicos de incentivo. Este eixo revisa a literatura sobre economias de tokens e governança de sistemas multiagentes.
+
+\subsection{Fundamentos de Token Economy}
+
+O conceito de \textit{token economy} tem raízes na economia comportamental e na psicologia operante (KAZDIN, 1982)\footnote{
+  KAZDIN, Alan E. The token economy: A decade later. \textbf{Journal of Applied Behavior Analysis}, v. 15, n. 3, p. 431--445, 1982. DOI: 10.1901/jaba.1982.15-431.
+
+  \textbf{Fichamento Crítico:} Kazdin revisa uma década de pesquisa sobre economias de tokens --- sistemas onde comportamentos desejados são reforçados com tokens que podem ser trocados por recompensas. O OpenCode adapta este conceito para o domínio computacional: ``tokens'' são unidades de orçamento computacional que agentes consomem ao executar operações; agentes que produzem outputs de alta qualidade recebem mais tokens; agentes que produzem outputs de baixa qualidade têm seu orçamento reduzido.
+}, mas sua aplicação a sistemas computacionais multiagentes é recente. No contexto de LLMs e agentes autônomos, cada interação com um modelo de linguagem consome tokens que têm custo financeiro e computacional. O OpenCode implementa uma economia de tokens em 3 níveis (Magnum/Tese: 500K tokens/sessão; Standard Paper: 200K; Short Communication: 50K), com monitoramento em tempo real via \texttt{TokenEconomyMonitor} e auditoria de gastos via \texttt{AcademicAuditTrail}.
+
+\subsection{Staking e Slashing em Sistemas de Agentes}
+
+Mecanismos de \textit{staking} (depósito de garantia) e \textit{slashing} (penalização por mau comportamento), originalmente desenvolvidos para blockchains e protocolos de proof-of-stake (BUTERIN, 2014)\footnote{
+  BUTERIN, Vitalik. Slasher: A punitive proof-of-stake algorithm. \textbf{Ethereum Blog}, 2014. Disponível em: \url{https://blog.ethereum.org/2014/01/15/slasher-a-punitive-proof-of-stake-algorithm}.
+
+  \textbf{Fichamento Crítico:} Buterin propôs o conceito de \textit{slashing} --- penalização de validadores que agem maliciosamente em protocolos de proof-of-stake. O OpenCode adapta este conceito para agentes acadêmicos: agentes que produzem afirmações não verificáveis ou citações com DOI inválido sofrem \textit{slashing} --- redução de seu orçamento de tokens e, em casos graves, remoção do ecossistema.
+}, oferecem um modelo para governança de agentes. O OpenCode implementa \textit{staking} de 7 dias (agentes devem ``depositar'' reputação antes de terem permissões elevadas) e \textit{slashing} progressivo (stake-first: a penalização começa pelo depósito, não pelo agente).
+
+\subsection{Mercado de Fees e Alocação de Recursos}
+
+O problema de alocação ótima de recursos computacionais entre agentes concorrentes pode ser modelado como um \textit{auction mechanism} (VICKREY, 1961)\footnote{
+  VICKREY, William. Counterspeculation, auctions, and competitive sealed tenders. \textbf{The Journal of Finance}, v. 16, n. 1, p. 8--37, 1961. DOI: 10.1111/j.1540-6261.1961.tb02789.x.
+
+  \textbf{Fichamento Crítico:} Vickrey demonstrou que leilões de segundo preço (Vickrey auctions) incentivam lances honestos --- cada participante revela sua verdadeira valoração do recurso. O OpenCode implementa um \textit{fee market} dinâmico onde agentes competem por orçamento de tokens revelando a prioridade e o impacto esperado de suas operações, e o sistema aloca tokens para maximizar o valor epistêmico gerado por unidade de recurso computacional.
+}. O \textit{fee market} implementado no OpenCode permite que agentes compitam por recursos oferecendo ``lances'' baseados na prioridade e no impacto esperado de suas operações. O sistema aloca tokens para maximizar o valor epistêmico por unidade de custo computacional --- uma adaptação do princípio de eficiência alocativa de Vickrey para o domínio da produção científica.
+
+\section{Eixo 11: Agentes Autônomos, Ética e o Futuro da Produção Científica}
+
+Este eixo final revisa a literatura sobre as implicações éticas e sociais da automação da produção científica, conectando o ecossistema OpenCode a debates mais amplos sobre o futuro da ciência.
+
+\subsection{Riscos de Homogeneização do Conhecimento}
+
+Um risco frequentemente negligenciado em sistemas de produção científica automatizada é a homogeneização do conhecimento. Se múltiplos pesquisadores utilizam o mesmo ecossistema de IA para gerar artigos, revisões e hipóteses, o resultado pode ser uma convergência indesejada para um ``pensamento único'' --- uma redução da diversidade epistêmica que é essencial para o progresso científico (LONGINO, 1990)\footnote{
+  LONGINO, Helen E. \textbf{Science as Social Knowledge: Values and Objectivity in Scientific Inquiry}. Princeton: Princeton University Press, 1990. ISBN: 978-0691020518.
+
+  \textbf{Fichamento Crítico:} Longino argumenta que a objetividade científica não é uma propriedade de indivíduos, mas de comunidades --- emerge da diversidade de perspectivas e do escrutínio crítico entre pares. Sistemas de IA que homogeneízam a produção científica ameaçam esta diversidade. O OpenCode mitiga este risco através de duas características arquiteturais: (a) o Scanner Noológico, ao identificar ausências, incentiva a diversificação em vez da convergência; (b) o PolymathicConvergence, ao buscar soluções em 30 domínios externos, injeta diversidade interdisciplinar no processo.
+}.
+
+O OpenCode mitiga este risco através de três características arquiteturais deliberadas: (a) o Scanner Noológico, ao identificar ausências e pontos cegos, \textit{incentiva a diversificação} do conhecimento em vez da convergência; (b) o PolymathicConvergence, ao buscar soluções em 30 domínios externos, \textit{injeta diversidade interdisciplinar} no processo de produção científica; (c) o Agent Forum (P14), ao estruturar debates entre agentes com perspectivas divergentes, \textit{preserva o dissenso} como motor de qualidade científica.
+
+\subsection{Validação Humana no Loop}
+
+A literatura sobre \textit{human-in-the-loop AI} (HITL) enfatiza que sistemas de IA de alto risco devem manter supervisão humana em pontos críticos de decisão (AMERSHI et al., 2014)\footnote{
+  AMERSHI, Saleema et al. Power to the people: The role of humans in interactive machine learning. \textbf{AI Magazine}, v. 35, n. 4, p. 105--120, 2014. DOI: 10.1609/aimag.v35i4.2513.
+
+  \textbf{Fichamento Crítico:} Amershi et al. propõem que sistemas de machine learning interativo devem manter ``humanos no loop'' não apenas para corrigir erros, mas para prover \textit{domain knowledge} que o sistema não possui. O OpenCode implementa HITL em três pontos: (a) o pesquisador define os objetivos no TeleologicalReverseScanner; (b) o pesquisador interpreta os gaps identificados pelo NoologicalScanner e decide quais aprofundar; (c) o pesquisador valida as recomendações do TrajectoryMapper antes de implementar mudanças no ecossistema.
+}. O OpenCode implementa \textit{human-in-the-loop} em três pontos críticos: (a) definição de objetivos de pesquisa no TeleologicalReverseScanner; (b) interpretação dos gaps identificados pelo NoologicalScanner; (c) validação das recomendações do TrajectoryMapper antes da implementação.
+
+\subsection{O Problema da Auto-Referencialidade}
+
+Um desafio epistemológico fundamental emerge quando o mesmo ecossistema que gera conhecimento também audita e avalia este conhecimento. Esta \textit{auto-referencialidade} --- o sistema avaliando seus próprios outputs --- introduz um risco de circularidade epistêmica análogo ao problema do critério na epistemologia (CHISHOLM, 1973)\footnote{
+  CHISHOLM, Roderick M. \textbf{The Problem of the Criterion}. Milwaukee: Marquette University Press, 1973.
+
+  \textbf{Fichamento Crítico:} O ``problema do critério'' de Chisholm questiona: como podemos saber quais fontes de conhecimento são confiáveis sem já pressupor um critério de confiabilidade? O OpenCode enfrenta este problema: como o scanner pode avaliar a cobertura epistemológica da dissertação que o descreve sem pressupor que suas próprias categorias de análise são as corretas? A resposta parcial é que o scanner não avalia \textit{correção}, apenas \textit{cobertura} --- não afirma que as categorias ausentes ``deveriam'' estar presentes, apenas reporta que não estão. Mas o problema da auto-referencialidade permanece como uma limitação reconhecida que requer validação externa por pesquisadores independentes.
+}. O OpenCode reconhece esta limitação e implementa três mitigações: (a) o scanner reporta \textit{ausências} sem julgá-las como ``erros''; (b) o TeleologicalReverseScanner permite que o pesquisador defina seus próprios critérios de avaliação; (c) a validação externa por pesquisadores independentes é parte do roadmap futuro (Seção 5.7).
+
+\newpage

@@ -1,0 +1,162 @@
+% =============================================================================
+%  LIVRO: ENGENHARIA DE ECOSSISTEMAS COGNITIVOS
+%  Uma Jornada Autodidata do Nível Zero ao PhD com o OpenCode Ecosystem
+%  Autor: Marcelo Claro Laranjeira
+%  Formato: ABNT (Associação Brasileira de Normas Técnicas)
+%  Tema: Light
+%  Compilação: pdflatex + bibtex + pdflatex + pdflatex + makeindex + pdflatex
+% =============================================================================
+
+\documentclass[12pt,a4paper,oneside,openright]{abntex2}
+
+% --- PREÂMBULO COMUM ---
+\input{preamble-common}
+
+% --- CORES (LIGHT THEME) ---
+\definecolor{blueaccent}{HTML}{1A56DB}
+\definecolor{cyanaccent}{HTML}{0891B2}
+\definecolor{orangeaccent}{HTML}{EA580C}
+\definecolor{codegreen}{HTML}{059669}
+\definecolor{codegray}{HTML}{6B7280}
+\definecolor{codepurple}{HTML}{7C3AED}
+\definecolor{codeback}{HTML}{F3F4F6}
+\definecolor{codeblue}{HTML}{2563EB}
+\definecolor{fg}{HTML}{111827}
+\definecolor{bg}{HTML}{FFFFFF}
+\definecolor{bgalt}{HTML}{F3F4F6}
+\definecolor{accent}{HTML}{2563EB}
+\definecolor{highlight}{HTML}{FCD34D}
+\definecolor{fgalt}{HTML}{4B5563}
+\definecolor{coderule}{HTML}{D1D5DB}
+
+% Hiperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blueaccent,
+    filecolor=magenta,
+    urlcolor=cyanaccent,
+    citecolor=blueaccent,
+    breaklinks=true,
+    pdftitle={Volume 2 — Gêmeos Digitais Periodontais: O Framework SUS-Twin},
+    pdfauthor={Marcelo Claro Laranjeira},
+    pdfsubject={Engenharia de Software, Inteligência Artificial, Sistemas Autônomos},
+    pdfkeywords={OpenCode, metacognição, engenharia de software, IA, multiagentes, gêmeos digitais, odontologia, SUS}
+}
+
+% --- METADADOS ---
+\titulo{Volume 2 — Gêmeos Digitais Periodontais:\\
+        \large O Framework SUS-Twin — Guia Prático de\\
+        Construção e Validação de Gêmeos Digitais no SUS}
+\autor{Marcelo Claro Laranjeira}
+\local{Crateús, Ceará, Brasil}
+\data{2026}
+\instituicao{OpenCode Ecosystem Research Initiative}
+\tipotrabalho{Livro Técnico-Científico}
+\preambulo{Volume 2 da Coleção Tecnologia na Saúde. Guia prático e progressivo para construção de Gêmeos Digitais Periodontais, do nível零 (vibe coding) ao nível PhD. Inclui 25+ ferramentas open-source reais, pipelines de segmentação 3D com MONAI e 3D Slicer, modelos de machine learning com K-Fold validação, e o Framework SUS-Twin para implementação no Sistema Único de Saúde. Consulte o Volume 1 — ``Gêmeos Digitais na Odontologia: Revolução, Impacto Social e o Papel dos Ecossistemas Abertos de IA'' — para os fundamentos conceituais.}
+
+% --- INÍCIO ---
+\begin{document}
+
+% --- ELEMENTOS PRÉ-TEXTUAIS ---
+\include{sections/00-capa}
+\include{sections/01-folha-rosto}
+\include{sections/02-ficha-catalografica}
+\include{sections/03-dedicatoria}
+\include{sections/00-prefacio}
+\include{sections/04-agradecimentos}
+\include{sections/05-epigrafe}
+\include{sections/06-resumo}
+\include{sections/07-abstract}
+
+% Listas
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\pdfbookmark[0]{\lstlistlistingname}{lol}
+\begingroup
+\footnotesize
+\lstlistoflistings
+\endgroup
+\cleardoublepage
+
+% Sumário
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% --- ELEMENTOS TEXTUAIS ---
+\textual
+
+% PARTE I — O FRAMEWORK SUS-TWIN
+\part{O Framework SUS-Twin: Conceitos e Arquitetura}
+\chapter{O Ecossistema de Ferramentas para Gêmeos Digitais} \label{ch:introducao}
+\input{sections/part1/introducao}
+\chapter{Arquitetura de Gêmeos Digitais Periodontais} \label{ch:fundamentos}
+\input{sections/part1/fundamentos}
+\chapter{Pipeline de Segmentação e Reconstrução 3D} \label{ch:medicina}
+\input{sections/part1/medicina}
+
+% PARTE II — APLICAÇÕES PRÁTICAS
+\part{Aplicações Práticas do SUS-Twin na Periodontia}
+\chapter{Mapeamento de Processos Clínicos para Gêmeos Digitais} \label{ch:panorama}
+\input{sections/part2/panorama}
+\chapter{Simulação Biomecânica com Elementos Finitos}
+\input{sections/part2/ortodontia}
+\chapter{Análise de Estresse Periodontal em Implantodontia}
+\input{sections/part2/implantodontia}
+\chapter{Gêmeos Digitais em Endodontia e Prótese} \label{ch:endodontia}
+\input{sections/part2/endodontia}
+\chapter{Ensino Prático Baseado em Gêmeos Digitais}
+\input{sections/part2/educacao}
+
+% PARTE III — ECOSSISTEMA DE VALIDAÇÃO
+\part{Ecossistema de Validação e Qualidade}
+\chapter{Orquestração de Pipelines de Validação no OpenCode}
+\input{sections/part3/opencode}
+\chapter{Reconstrução 3D e Visualização Clínica}
+\input{sections/part3/pipeline}
+\chapter{Validação Cruzada com K-Fold no SUS-Twin}
+\input{sections/part3/ia}
+\chapter{IoT, Telemetria e o Gateway SUS-Twin}
+\input{sections/part3/plataformas}
+\chapter{Práticas de Validação do Framework SUS-Twin} \label{ch:praticas}
+\input{sections/part3/praticas}
+
+% PARTE IV — IMPLEMENTAÇÃO NO SUS
+\part{Implementação no SUS e Jornada do Conhecimento}
+\chapter{Implementação do SUS-Twin no SUS} \label{ch:impacto}
+\input{sections/part4/impacto}
+\chapter{Ética, LGPD e Privacidade na Prática}
+\input{sections/part4/etica}
+\chapter{Guia Prático: Do Vibe Code ao PhD} \label{ch:desafios}
+\input{sections/part4/desafios}
+\chapter{O Futuro da Periodontia Digital Preditiva} \label{ch:futuro}
+\input{sections/part4/futuro}
+
+% --- PÓS-TEXTUAIS ---
+\postextual
+
+% Ajustes para evitar overfulls na bibliografia
+\pretolerance=100
+\tolerance=9999
+\emergencystretch=12em
+\rightskip=0pt plus 0.5fil
+
+\bibliography{referencias}
+
+% APÊNDICES
+\part*{Apêndices}
+\addcontentsline{toc}{part}{Apêndices}
+
+\chapter{Referências Completas com DOIs e Links}
+\input{sections/appendices/referencias}
+\chapter{Glossário de Termos Técnicos}
+\input{sections/appendices/glossario}
+\chapter{Repositórios e Recursos Open-Source}
+\input{sections/appendices/repositorios}
+\end{document}

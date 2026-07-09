@@ -1,0 +1,40 @@
+\usepackage{fontspec} % import new fonts
+\usepackage[english]{babel}
+
+%----------------------------------------------------------------------------------------
+%   SPACING
+%----------------------------------------------------------------------------------------
+
+\usepackage{microtype}
+
+%----------------------------------------------------------------------------------------
+%   MAIN
+%----------------------------------------------------------------------------------------
+
+\setmainfont{TeX Gyre Heros}
+\setsansfont{TeX Gyre Heros}
+
+%----------------------------------------------------------------------------------------
+%   CODE
+%----------------------------------------------------------------------------------------
+
+\setmonofont[
+    Path=template/generic/fonts/inconsolata/,
+    Extension=.otf,
+    UprightFont=Inconsolata-LGC,
+    BoldFont=Inconsolata-LGC-Bold,
+    ItalicFont=Inconsolata-LGC-Italic,
+    BoldItalicFont=Inconsolata-LGC-BoldItalic,
+    Scale=MatchLowercase
+]{Inconsolata-LGC}
+
+%----------------------------------------------------------------------------------------
+%   HEADINGS
+%----------------------------------------------------------------------------------------
+
+\newfontfamily\herosfontfamily[
+  Ligatures=TeX,
+  Scale=MatchUppercase
+]{TeX Gyre Heros}
+
+\let\headingfontfamily\herosfontfamily

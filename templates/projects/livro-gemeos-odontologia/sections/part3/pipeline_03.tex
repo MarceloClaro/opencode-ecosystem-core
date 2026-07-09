@@ -1,0 +1,31 @@
+\section{Processamento e Segmentação Semântica}
+\label{sec:processamento}
+
+Os \textit{datasets} multimodais adquiridos são subsequentemente injetados em um núcleo de processamento matricial, onde algoritmos de visão computacional e geometria diferencial operam a transição de um aglomerado bruto de dados (\textit{voxels} e \textit{point clouds}) para entidades matemáticas estruturadas e semânticas. 
+
+\subsection{Segmentação Guiada por Deep Learning}
+\label{subsec:segmentacao-pipeline}
+
+A segmentação estratifica o volume em partições anatomicamente isoladas: dentes individuais, osso cortical, osso trabecular, polpa, ligamento periodontal (LPD) e canais neurovasculares. Métodos convencionais baseados em \textit{watershed} ou limiarização de Hounsfield cedem rápido espaço para arquiteturas de \textit{Deep Learning}, em virtude do elevado tempo de processador humano demandado e da sensibilidade a ruído inerente aos métodos heurísticos.
+
+Redes neurais convolucionais volumétricas (como 3D U-Net e \textit{self-configuring} nnU-Net) estabelecem o estado da arte na segmentação dentomaxilofacial, atingindo métricas de \textit{Dice Similarity Coefficient} (DSC) reiteradamente superiores a 0,95 para tecidos duros de alto contraste \cite{elsaid2025digital}. 
+
+\destaque{O principal vetor de incerteza geométrica na segmentação reside nas interfaces periodontais e contatos interproximais. A espessura fisiológica do ligamento periodontal (0,15 a 0,38 mm) tangencia a resolução de Nyquist das tomografias convencionais, forçando o uso de \textit{priors} anatômicos em modelos de difusão geométrica para sua extrapolação computacional \cite{khoshfekr2025digital}.}
+
+Além disso, modelos generativos baseados em redes adversárias (GANs) são implementados para super-resolução local e supressão de artefatos de \textit{scattering} metálico, restaurando limites anatômicos obliterados por coroas e pinos metálicos \cite{nature2026digital}.
+
+\subsection{Registro e Alinhamento Multidimensional}
+\label{subsec:registro}
+
+A disparidade de resoluções e referências coordenadas exige o registro estrito entre a nuvem de pontos do IOS e a malha extraída da CBCT. O método \textit{Iterative Closest Point} (ICP) permanece ubíquo, minimizando a distância euclidiana média entre vértices correspondentes. Entretanto, em casos de maxilas severamente desdentadas, a carência de geometrias retentivas prejudica a convergência do algoritmo.
+
+Para mitigar mínimos locais e otimizar a robustez perante a discrepância de matrizes de transformação inicial, arquiteturas de aprendizado profundo focadas em grafos (como DCP - \textit{Deep Closest Point} e RPM-Net) estão sendo integradas. Tais aproximações inferem mapeamentos de \textit{features} topológicas antes da otimização de matrizes rígidas.
+
+Na esfera temporal, o registro longitudinal — que consolida o fator dinâmico do gêmeo digital — avalia diferenciais cinemáticos rigorosos. O cálculo de matrizes de transformação entre o estágio $T_0$ e $T_1$ mapeia vetores de extrusão e translação, fundamentais na terapia ortodôntica com alinhadores invisíveis \cite{li2024aligner}.
+
+\subsection{Retopologia e Geração Discreta}
+\label{subsec:malha}
+
+O algoritmo de \textit{Marching Cubes} engendra a isossuperfície inicial. Contudo, a hiperdensidade e as aberrações topológicas não-variedade (\textit{non-manifold}) inviabilizam seu uso direto em cálculos tenoriais. Algoritmos de retopologia procedem à decimação isotrópica e suavização Laplaciana estrita para extirpar ruídos espúrios e colapsar arestas redundantes, preservando restrições de curvatura (\textit{quadric error metrics}).
+
+Em preparo para a modelagem biomecânica, a superfície envoltória \textit{water-tight} é submetida a heurísticas de Delaunay para a geração de malhas tetraédricas sólidas volumétricas (através de bibliotecas como CGAL ou TetGen), garantindo elementos com baixo grau de degeneração (ângulo diedro estrito), vitais para prevenir o colapso numérico da matriz de rigidez em simulações \textit{Finite Element Method} (FEM).

@@ -1,0 +1,178 @@
+% Modelo de livro da série Ensino de Graduação da Editora UnB
+% Autor: Leonardo Luiz e Castro
+
+% Compile usando LuaLaTeX.
+
+\documentclass{book}
+
+% Chamadas e configurações de pacotes estão na pasta config:
+
+\input{config/texto.tex}
+\input{config/figuras.tex}
+\input{config/matematica.tex}
+\input{config/ambientes.tex}
+
+\title{Modelo de livro da série \\ Ensino de Graduação da Editora UnB}
+\author{Leonardo Luiz e Castro} % Para mais de um autor, use: \author{autor1 \\ autor2 \\ autor3}
+\date{Janeiro de 2019}
+
+% Cabeçalhos das páginas ímpares (odd), à esquerda (LO), centro (CO) e direita (RO):
+
+\makeatletter
+\fancyhead[LO]{}
+\fancyhead[CO]{\small \if@mainmatter \small \leftmark \fi}
+\fancyhead[RO]{}
+\makeatother
+
+% Cabeçalhos das páginas pares (even):
+% Obs.: caso haja mais de um autor, substitua \theauthor pelo nome do 1º autor, e coloque os outros em CE ou RE:
+
+\fancyhead[LE]{\theauthor}
+\fancyhead[CE]{}
+\fancyhead[RE]{Universidade de Brasília} 
+
+% Rodapé:
+
+\fancyfoot[C]{\small \thepage}
+%\fancyfoot[RO]{\small \nouppercase \rightmark}
+
+% Para que \mainmatter não resete a contagem de páginas (https://tex.stackexchange.com/questions/380816/prevent-frontmatter-to-reset-counting):
+
+\makeatletter
+\renewcommand\mainmatter{%
+  \cleardoublepage
+  \@mainmattertrue
+  \renewcommand{\thepage}{\arabic{page}}
+  %\pagenumbering{arabic}% Don't reset
+}
+\makeatother
+
+% Início do documento:
+
+\begin{document}
+
+% Ajustando espaços no sumário:
+
+\makeatletter
+\renewcommand{\@pnumwidth}{2.0em}
+\renewcommand{\@tocrmarg}{2.7em}
+\makeatother
+
+% Parte Pré-Textual:
+
+\frontmatter
+%\pagestyle{empty}
+
+% O código do texto está nos arquivos dentro da pasta "txt".
+% Por exemplo, o comando \include{txt/titulo} inclui o código que está no arquivo "titulo.tex" dentro da pasta txt.
+% Crie seus próprios arquivos à vontade e inclua-os aqui com o comando \include{}.
+
+\include{txt/titulo}
+\clearpage
+
+\include{txt/conselho}
+\clearpage
+
+\include{txt/titulo-autor}
+\clearpage
+
+\include{txt/equipe}
+\clearpage
+
+\include{txt/dedicatoria}
+\cleardoublepage
+
+\include{txt/agradecimentos}
+\cleardoublepage
+
+% Lista de símbolos/variáveis:
+
+\include{txt/lista-variaveis}
+\cleardoublepage
+
+% Lista de figuras:
+
+\listoffigures \thispagestyle{empty}
+\cleardoublepage
+
+% Lista de tabelas:
+
+\listoftables \thispagestyle{empty}
+\cleardoublepage
+
+% Sumário:
+
+\tableofcontents\thispagestyle{empty}
+\cleardoublepage 
+
+% Parte Textual:
+
+\mainmatter
+
+\include{txt/cap-introducao}
+\cleardoublepage
+
+\include{txt/cap-figuras}
+\clearpage
+\include{txt/txt-criandoquadros}
+\cleardoublepage
+
+\include{txt/cap-ambientes}
+\cleardoublepage
+
+\include{txt/cap-conclusao}
+\cleardoublepage
+
+% Apêndices:
+
+\renewcommand\appendixname{APÊNDICE}
+\renewcommand\appendixpagename{APÊNDICES}
+\renewcommand{\appendixtocname}{APÊNDICES}
+
+\begin{appendices}
+
+\input{config/configuracao-apendices.tex}
+
+\include{txt/cap-citacoes}
+\cleardoublepage
+
+\include{txt/cap-tabelas}
+\cleardoublepage
+
+\end{appendices}
+
+% Anexos:
+
+\renewcommand\appendixname{ANEXO}
+\renewcommand\appendixpagename{ANEXOS}
+\renewcommand{\appendixtocname}{ANEXOS}
+
+\begin{appendices}
+
+\input{config/configuracao-apendices.tex}
+
+\include{txt/cap-figurasdeexemplo}
+\cleardoublepage
+
+\include{txt/cap-logolatex}
+\cleardoublepage
+
+\end{appendices}
+
+% Parte Pós-Textual:
+\backmatter
+
+% Referências (Bibliografia):
+
+\singlespacing
+
+\bibliographystyle{abntex2-alf}
+\bibliography{main}
+\cleardoublepage
+
+% Índice Remissivo, controlado pelo comando \index{...} em meio ao texto:
+
+\phantomsection
+\printindex
+
+\end{document}

@@ -1,0 +1,167 @@
+% =============================================================================
+%  ELEMENTOS PRE-TEXTUAIS (adaptados para classe book)
+% =============================================================================
+
+% --- AGRADECIMENTOS ---
+\chapter*{Agradecimentos}
+\label{ch:agradecimentos}
+\markboth{AGRADECIMENTOS}{}
+
+Este livro é fruto de anos de pesquisa, experimentação e desenvolvimento 
+contínuo do \opencodeeco{}. Agradeço profundamente à comunidade de 
+engenharia de software e inteligência artificial que, através de décadas 
+de pesquisa aberta e colaborativa, tornou possível a construção de 
+sistemas cognitivos artificiais cada vez mais sofisticados.
+
+Agradecimentos especiais aos pesquisadores e engenheiros cujo trabalho 
+fundamenta cada capítulo desta obra: John McCarthy, Marvin Minsky, 
+Alan Turing, Claude Shannon, John von Neumann, Donald Knuth, Kent Beck, 
+Martin Fowler, Stuart Russell, Peter Norvig, Yoshua Bengio, Geoffrey 
+Hinton, Yann LeCun, Andrew Ng, e tantos outros que pavimentaram o 
+caminho da inteligência artificial e da engenharia de software.
+
+À Universidade Federal do Ceará (UFC), campus Crateús, pelo ambiente 
+acadêmico que estimula a pesquisa interdisciplinar. Ao Programa de 
+Pós-Graduação em Tecnologia e Engenharia (PPGTE), pela estrutura 
+que permitiu a validação científica dos conceitos aqui apresentados.
+
+Aos estudantes e pesquisadores que testaram, questionaram e aprimoraram 
+cada componente do \opencodeeco{} ao longo de 23 ciclos evolutivos 
+(R1 a R23), meu mais sincero reconhecimento.
+
+Finalmente, à minha família, pelo apoio incondicional durante os 
+longos períodos de imersão necessários à conclusão desta obra.
+
+% --- DEDICATORIA ---
+\chapter*{Dedicatória}
+\label{ch:dedicatoria}
+\markboth{DEDICATÓRIA}{}
+
+\vspace*{\fill}
+\begin{flushright}
+\textit{A todos os estudantes que ousam questionar,\\
+aos engenheiros que constroem o futuro\\
+e aos pesquisadores que jamais deixam de aprender.}
+\end{flushright}
+\vspace*{\fill}
+
+% --- EPIGRAFE ---
+\chapter*{Epígrafe}
+\label{ch:epigrafe}
+\markboth{EPÍGRAFE}{}
+
+\vspace*{\fill}
+\begin{flushright}
+\textit{``The most profound technologies are those that disappear.}\\
+\textit{They weave themselves into the fabric of everyday life}\\
+\textit{until they are indistinguishable from it.''}\\[0.3cm]
+--- Mark Weiser, \textit{The Computer for the 21st Century}, 1991\par
+\vspace{1cm}
+\textit{``All models are wrong, but some are useful.''}\\[0.3cm]
+--- George E. P. Box, \textit{Science and Statistics}, 1976\par
+\vspace{1cm}
+\textit{``The best way to predict the future is to invent it.''}\\[0.3cm]
+--- Alan Kay, \textit{PARC}, 1971\par
+\end{flushright}
+\vspace*{\fill}
+
+% --- RESUMO ---
+\chapter*{Resumo}
+\label{ch:resumo}
+\markboth{RESUMO}{}
+
+Este livro apresenta uma jornada autodidata e sistemática através dos fundamentos 
+matemáticos, estatísticos e computacionais que sustentam a engenharia de 
+ecossistemas cognitivos artificiais, tendo como objeto central de estudo e 
+experimentação o \opencodeeco{} (versão 5.4.0, ciclo evolutivo R23). 
+A obra estrutura-se em oito capítulos que conduzem o leitor do nível zero 
+(fundamentos básicos de matemática e lógica) ao nível PhD (validação 
+científica, produção acadêmica \qualisA{} e defesa perante banca examinadora).
+
+O Capítulo 1 estabelece a base matemática e estatística --- álgebra linear, 
+cálculo, probabilidade, inferência estatística e teoria da informação --- 
+essencial para a compreensão dos algoritmos de inteligência artificial. 
+O Capítulo 2 introduz os conceitos fundamentais de IA, aprendizado de máquina, 
+redes neurais profundas (transformers) e arquiteturas de agentes autônomos. 
+O Capítulo 3 mergulha na arquitetura do \opencodeeco, detalhando o padrão 
+três camadas (MCP $\rightarrow$ Skill $\rightarrow$ Agent), a metodologia 
+SDD+TDD, o barramento de eventos e o sistema de injeção de dependência.
+
+O Capítulo 4 explora o \textit{Pipeline de Scanners Epistemológicos} --- 
+Noológico, Teleológico, Evolutivo, Refinamento e MCSP --- e o sistema de 
+metacognição (SPEC-036) com Self-Model N0-N3 e monitor metacognitivo. 
+O Capítulo 5 apresenta o Trust Engine (SPEC-038) com Behavioral Gate, 
+Natural Forgetting (modelo Atkinson-Shiffrin) e Governança Cooperativa 
+(princípios de Ostrom). O Capítulo 6 detalha a Token Economy (SPEC-022/023/024) 
+com \textit{staking}, \textit{slashing}, mercado de taxas e trilha de auditoria.
+
+O Capítulo 7 descreve o sistema de experimentação e validação científica: 
+benchmark CORA-Eval (150 tarefas, 10 dimensões), validação Aletheia 
+(Lean 4), pipeline de produção acadêmica MASWOS com 49 agentes especializados 
+e o sistema de correção iterativa Qualis A1. O Capítulo 8, finalmente, 
+apresenta o roteiro completo para produção e defesa de dissertação: 
+metodologia PPGTE/UFC, simulação de banca com agentes, protocolo de 
+anonimato e métricas de avaliação DAP.
+
+Cada capítulo contém definições formais, ilustrações (TikZ), exemplos 
+práticos executáveis no \opencodeeco{}, exercícios progressivos (nível 0 
+ao PhD), notas de rodapé com citações verificáveis e links ativos para 
+fontes primárias.
+
+\medskip
+\noindent\textbf{Palavras-chave}: Engenharia de Software. Inteligência Artificial. 
+Sistemas Multiagentes. Metacognição. Trust Engine. OpenCode Ecosystem. 
+SDD+TDD. Qualis A1.
+
+% --- ABSTRACT ---
+\chapter*{Abstract}
+\label{ch:abstract}
+\markboth{ABSTRACT}{}
+
+\begin{otherlanguage*}{english}
+
+This book presents a self-contained and systematic journey through the 
+mathematical, statistical, and computational foundations underlying the 
+engineering of artificial cognitive ecosystems, with the \opencodeeco{} 
+(v5.4.0, evolutionary cycle R23) as the central object of study and 
+experimentation. The work is structured in eight chapters that guide the 
+reader from level zero (basic mathematics and logic) to PhD level 
+(scientific validation, \qualisA{} academic production, and defense 
+before an examining committee).
+
+Chapter 1 establishes the mathematical and statistical foundations --- 
+linear algebra, calculus, probability, statistical inference, and 
+information theory --- essential for understanding artificial intelligence 
+algorithms. Chapter 2 introduces fundamental AI concepts, machine learning, 
+deep neural networks (transformers), and autonomous agent architectures. 
+Chapter 3 delves into the \opencodeeco{} architecture, detailing the 
+three-layer pattern (MCP $\rightarrow$ Skill $\rightarrow$ Agent), the 
+SDD+TDD methodology, the event bus, and the dependency injection system.
+
+Chapter 4 explores the Epistemological Scanner Pipeline --- Noological, 
+Teleological, Evolutionary, Refinement, and MCSP --- and the metacognition 
+system (SPEC-036) with Self-Model N0-N3 and metacognitive monitoring. 
+Chapter 5 presents the Trust Engine (SPEC-038) with Behavioral Gate, 
+Natural Forgetting (Atkinson-Shiffrin model), and Cooperative Governance 
+(Ostrom's principles). Chapter 6 details the Token Economy 
+(SPEC-022/023/024) with staking, slashing, fee market, and audit trail.
+
+Chapter 7 describes the experimentation and scientific validation system: 
+CORA-Eval benchmark (150 tasks, 10 dimensions), Aletheia validation 
+(Lean 4), the MASWOS academic production pipeline with 49 specialized 
+agents, and the iterative Qualis A1 correction system. Chapter 8, 
+finally, presents a complete roadmap for dissertation production and 
+defense: PPGTE/UFC methodology, board examination simulation with agents, 
+anonymity protocol, and DAP evaluation metrics.
+
+Each chapter contains formal definitions, illustrations (TikZ), practical 
+examples executable within the \opencodeeco{}, progressive exercises 
+(levels 0 to PhD), footnotes with verifiable citations, and active links 
+to primary sources.
+
+\medskip
+\noindent\textbf{Keywords}: Software Engineering. Artificial Intelligence. 
+Multiagent Systems. Metacognition. Trust Engine. OpenCode Ecosystem. 
+SDD+TDD. Qualis A1.
+
+\end{otherlanguage*}

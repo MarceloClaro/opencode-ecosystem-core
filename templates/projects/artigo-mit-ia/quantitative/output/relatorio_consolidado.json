@@ -1,0 +1,70 @@
+{
+  "titulo": "Relatório Consolidado — Análise Quantitativa ARM-IAG",
+  "data": "2026-05-12",
+  "n_paises": 202,
+  "1_correlacoes_principais": {
+    "top_preditores_escape_arm": {
+      "aipi_total": 0.9257,
+      "educ_superior_pct": 0.8545,
+      "internet_pop_pct": 0.8406,
+      "ptf_relativa": 0.82,
+      "pib_pc_ppc": 0.7896,
+      "agricultura_pib_pct": -0.7054,
+      "complexidade_economica": 0.6394,
+      "gerd_pib_pct": 0.5907,
+      "export_tech_pct": 0.4465,
+      "gini": -0.4173,
+      "manufatura_pib_pct": 0.2019
+    },
+    "aipi_total_r": 0.9215
+  },
+  "2_data_leakage": {
+    "r2_com_leakage": 0.8841,
+    "r2_sem_leakage": 0.8924,
+    "inflacao_percentual": -0.9,
+    "diagnostico": "MODERADO"
+  },
+  "3_clusters": {
+    "k_otimo": 2,
+    "silhueta_k2": 0.455,
+    "silhueta_k3": 0.3561,
+    "bootstrap_silhueta_media": 0.4527,
+    "cluster_alta_escape": {
+      "n": 75,
+      "aipi_medio": 73.6,
+      "escape_medio": 0.733,
+      "pib_pc_medio": 42116
+    },
+    "cluster_baixa_escape": {
+      "n": 29,
+      "aipi_medio": 37.6,
+      "escape_medio": 0.38,
+      "pib_pc_medio": 5953
+    }
+  },
+  "4_modelos_preditivos": {
+    "melhor_modelo_RF_r2_teste": 0.9519,
+    "RF_sem_leakage_r2_teste": 0.8924,
+    "OLS_r2_teste": 0.8403,
+    "feature_importance_top": {
+      "pib_pc_ppc": 0.4996,
+      "aipi_humano": 0.2556,
+      "aipi_digital": 0.1905,
+      "aipi_inovacao": 0.0232,
+      "agricultura_pib_pct": 0.0131
+    }
+  },
+  "5_matriz_arm_iag": {
+    "mediana_escape": 0.569,
+    "mediana_aipi": 54.4,
+    "Q1_alta_resiliencia_n": 100,
+    "Q2_potencial_desperdicado_n": 9,
+    "Q3_vulneravel_n": 99,
+    "Q4_tradicional_estavel_n": 9
+  },
+  "6_testes_robustez": {
+    "permutation_p_value": 0.0196,
+    "subsampling_r2_medio": 0.8872,
+    "correlacao_parcial_aipi_escape": 0.8953
+  }
+}

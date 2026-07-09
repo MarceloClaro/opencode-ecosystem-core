@@ -1,0 +1,35 @@
+{
+  "permutation_test": {
+    "r2_original": 0.8935,
+    "r2_perm_medio": -0.1337,
+    "r2_perm_std": 0.1796,
+    "r2_perm_max": 0.1881,
+    "p_value": 0.0196
+  },
+  "subsampling": {
+    "r2_medio": 0.8872,
+    "r2_std": 0.0529,
+    "r2_p5": 0.8054,
+    "r2_p95": 0.9357
+  },
+  "ols": {
+    "r2_teste": 0.8403,
+    "cv_r2_medio": 0.8654,
+    "cv_r2_std": 0.0657,
+    "coeficientes": {
+      "pib_pc_ppc": 0.0,
+      "manufatura_pib_pct": 0.0019,
+      "agricultura_pib_pct": 0.0004,
+      "export_tech_pct": -0.0002,
+      "aipi_digital": 0.0028,
+      "aipi_humano": 0.0021,
+      "aipi_inovacao": 0.0045,
+      "aipi_regulacao": 0.0
+    }
+  },
+  "correlacao_parcial": {
+    "r_simples_aipi_escape": 0.9303,
+    "r_parcial_controlando_pib": 0.8953,
+    "n": 199
+  }
+}

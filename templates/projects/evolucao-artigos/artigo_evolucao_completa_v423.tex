@@ -1,0 +1,391 @@
+% ===========================================================================
+%  Evolução do OpenCode Ecosystem v4.2.3 — Documentação Técnica Completa
+%  Formato ABNT NBR 6023:2025 — Standalone (sem dependências externas)
+%  Compila em qualquer distribuição LaTeX (MiKTeX, TeX Live, Overleaf)
+%  Autor: OpenCode Ecosystem · Data: Maio 2026
+% ===========================================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ── Pacotes Padrão ─────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{times}
+\usepackage{geometry}
+\geometry{a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+
+% ── Metadados ───────────────────────────────────────────────────────────
+\title{\textbf{Evolução do OpenCode Ecosystem v4.2.3}\\[4pt]
+       \large Documentação Técnica Completa das Atualizações,\\
+       Modificações e Expansões (Rounds 1--12)}
+\author{OpenCode Ecosystem\\
+        \texttt{https://github.com/MarceloClaro/OpenCode\_Ecosystem}}
+\date{Maio de 2026}
+
+\begin{document}
+\maketitle
+
+% ── Resumo ──────────────────────────────────────────────────────────────
+\begin{abstract}
+\noindent Este artigo documenta a evolução completa do ecossistema OpenCode, da versão 3.5 à 4.2.3, abrangendo 12 rounds do pipeline de evolução autônoma \texttt{/evolve} (SENSE $\rightarrow$ DISCOVER $\rightarrow$ INSTALL $\rightarrow$ VERIFY $\rightarrow$ EVOLVE $\rightarrow$ LEARN). As principais contribuições incluem: (1) \textbf{PyPI Scout} --- ferramenta canônica de descoberta de bibliotecas Python com catálogo curado de 22+ pacotes, matriz de afinidade para 5 pipelines e CLI com 7 comandos; (2) \textbf{DataOrchestrator} --- camada universal de acesso a dados que permite consultas em linguagem natural a 8 domínios, suportada por 10 Ecosystem Hooks e 30+ bibliotecas; (3) \textbf{Sistema de Auditoria Acadêmica Caixa Branca} --- 9 componentes integrados para registro imutável de interações (JSONL com hash SHA-256), trilha de evidências (parágrafo $\rightarrow$ evidência $\rightarrow$ DOI), protocolo TSAC (87 palavras banidas) e dashboard HTML interativo; (4) \textbf{Documentação Acadêmica} --- artigo LaTeX ABNT de 12 páginas com 15 citações, 6 fluxogramas SVG e 8 arquivos de documentação atualizados. O ecossistema alcançou 106 skills, 10 hooks, 8 domínios operacionais, 30+ bibliotecas instaladas e zero vazamentos de caracteres CJK.
+\end{abstract}
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{Introdução}
+% ══════════════════════════════════════════════════════════════════════════
+
+O \textbf{OpenCode Ecosystem} constitui uma plataforma de agentes inteligentes integrados ao OpenCode CLI, operando sobre o modelo \texttt{big-pickle} (OpenCode Zen, 200K tokens de contexto, 128K tokens de saída, gratuito). Sua arquitetura atual compreende 125 agentes especializados, 106 habilidades (\textit{skills}), 41 servidores MCP, 10 Ecosystem Hooks e 9 componentes de auditoria acadêmica, totalizando aproximadamente 120.000 linhas de código Python.
+
+O pipeline de evolução autônoma \texttt{/evolve}, executado ao longo de 12 rounds, implementa o ciclo \textbf{SENSE} $\rightarrow$ \textbf{DISCOVER} $\rightarrow$ \textbf{INSTALL} $\rightarrow$ \textbf{VERIFY} $\rightarrow$ \textbf{EVOLVE} $\rightarrow$ \textbf{LEARN}, permitindo que o ecossistema detecte, instale e integre automaticamente novas bibliotecas e padrões sem intervenção manual.
+
+Este artigo documenta minuciosamente todas as alterações, modificações e expansões realizadas, fornecendo base reprodutível para expansões futuras e servindo como referência técnica para pesquisadores e desenvolvedores.
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{Histórico de Evolução (Rounds 1--12)}
+% ══════════════════════════════════════════════════════════════════════════
+
+A Tabela~\ref{tab:rounds} apresenta o histórico completo dos 12 rounds de evolução autônoma, com seus respectivos scores de qualidade.
+
+\begin{table}[H]
+  \centering
+  \caption{Histórico completo dos Rounds de Evolução (AutoEvolve)}
+  \label{tab:rounds}
+  \begin{tabular}{c c l c}
+    \toprule
+    \textbf{Round} & \textbf{Versão} & \textbf{Marco Principal} & \textbf{Score} \\
+    \midrule
+    evo-1  & v3.5   & Cross-validation + World Bank API                    & 85/100 \\
+    evo-2  & v3.5   & Pipeline artigo acadêmico 35 páginas ABNT            & 90/100 \\
+    evo-3  & v4.0   & TSAC: 46 citações auditáveis + Sci-Hub               & 92/100 \\
+    evo-4  & v4.0   & Sci-Hub MCP + arXiv multi-source                     & 88/100 \\
+    evo-5  & v4.0   & Pearson Cross-Validation (27 indicadores)             & 92/100 \\
+    evo-6  & v4.2   & Iterative Correction Loop v2.0                        & 95/100 \\
+    evo-7  & v4.2   & Sync v3.5 + detector CJK + token efficiency           & 96/100 \\
+    evo-8  & v4.2.1 & Progressive disclosure + observabilidade              & 98/100 \\
+    evo-9  & v4.2.2 & Antigravity Bridge v1.0 + SKILL indexada              & 98/100 \\
+    \textbf{evo-10} & \textbf{v4.2.3} & \textbf{PyPI Scout + Ecosystem Hooks v1.0}      & \textbf{95/100} \\
+    \textbf{evo-11} & \textbf{v4.2.3} & \textbf{DataOrchestrator + Expansão Multi-Domínio} & \textbf{97/100} \\
+    \textbf{evo-12} & \textbf{v4.2.3} & \textbf{Auditoria Caixa Branca + Refinamento UX}    & \textbf{95/100} \\
+    \bottomrule
+  \end{tabular}
+  \caption*{\footnotesize Progressão geral: 85 $\rightarrow$ 95 (+11,8\%). Média: 93/100.}
+\end{table}
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{PyPI Scout — Descoberta Inteligente de Bibliotecas (Round 8)}
+% ══════════════════════════════════════════════════════════════════════════
+
+O \textbf{PyPI Scout} (\texttt{pypi\_scout.py}, 350 linhas) substituiu o \textit{PyPISearcher v3.0} como ferramenta canônica de descoberta de bibliotecas Python no ecossistema. A migração foi motivada pelo \textit{Client Challenge} da Cloudflare implementado no PyPI em maio de 2026, que tornou o scraping HTML inviável.
+
+\subsection{Catálogo Curado}
+
+O arquivo \texttt{opencode\_catalog.json} (versão 1.0.0) cataloga 22+ bibliotecas em 6 categorias com métricas de afinidade para 5 pipelines:
+
+\begin{itemize}[itemsep=1pt]
+  \item \textbf{artigos\_academicos} (8): scihub-cn, scholarly, arxiv, semanticscholar, openalex, crossrefapi, pypdf
+  \item \textbf{dados\_mundiais} (3): wbgapi, pandas-datareader, sdg-indicators
+  \item \textbf{mcp\_ecosystem} (3): mcp, openai-agents-mcp, langchain-mcp-adapters
+  \item \textbf{dados\_cientificos} (1): biopython
+  \item \textbf{infra\_ferramentas} (3): click, rich, httpx
+  \item \textbf{alternative\_sources} (4): WHO API, UN Data, pubmed-parser, pymed
+\end{itemize}
+
+\subsection{Matriz de Afinidade}
+
+A Tabela~\ref{tab:affinity} apresenta as principais afinidades entre bibliotecas e pipelines.
+
+\begin{table}[H]
+  \centering
+  \caption{Matriz de Afinidade — Bibliotecas $\times$ Pipelines}
+  \label{tab:affinity}
+  \begin{tabular}{l c c c c c}
+    \toprule
+    \textbf{Biblioteca} & \textbf{SEEKER} & \textbf{MASWOS} & \textbf{PhD Auditor} & \textbf{Data Analysis} & \textbf{MCP Server} \\
+    \midrule
+    scholarly       & 95\% & 90\% & ---   & ---   & ---   \\
+    arxiv           & 95\% & 88\% & ---   & ---   & ---   \\
+    semanticscholar & 95\% & 90\% & 88\%  & ---   & ---   \\
+    pypdf           & ---  & 90\% & ---   & ---   & ---   \\
+    wbgapi          & ---  & 80\% & 85\%  & 95\%  & ---   \\
+    mcp             & ---  & ---  & ---   & ---   & 100\% \\
+    yfinance        & ---  & ---  & ---   & 90\%  & ---   \\
+    ccxt            & ---  & ---  & ---   & 95\%  & ---   \\
+    \bottomrule
+  \end{tabular}
+  \caption*{\footnotesize Fonte: opencode\_catalog.json (2026).}
+\end{table}
+
+\subsection{Bibliotecas Instaladas}
+
+Foram instaladas 7 bibliotecas no Round 8: wbgapi (1.0.14), scholarly (1.7.11), arxiv (3.0.0), semanticscholar (0.12.0), pypdf (6.9.1), mcp (1.26.0) e httpx (0.28.1). A biblioteca \texttt{scihub-cn} (CKEND, 2022) apresentou erro de compilação no ambiente de build isolado do pip, sendo contornada pelo fallback existente no \texttt{seeker\_scihub\_enhanced.py}.
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{DataOrchestrator — Camada Universal de Dados (Round 9)}
+% ══════════════════════════════════════════════════════════════════════════
+
+O \textbf{DataOrchestrator} (\texttt{data\_orchestrator.py}, 592 linhas) representa a camada mais abstrata do ecossistema de dados, permitindo que pesquisadores consultem qualquer fonte usando linguagem natural.
+
+\subsection{Arquitetura em 3 Camadas}
+
+\begin{enumerate}[itemsep=2pt]
+  \item \textbf{Camada de Interface} — consultas em linguagem natural, zero conhecimento técnico necessário
+  \item \textbf{Camada de Roteamento} — \texttt{QueryIntent} (80+ palavras-chave $\rightarrow$ 8 domínios), \texttt{DataSourceRegistry} (auto-discovery de 30+ bibliotecas), \texttt{FallbackChain} (fonte primária $\rightarrow$ secundária), \texttt{DataResult} (formato unificado)
+  \item \textbf{Camada de Execução} — 10 Ecosystem Hooks + 30+ bibliotecas Python
+\end{enumerate}
+
+\subsection{Domínios Operacionais}
+
+\begin{table}[H]
+  \centering
+  \caption{Domínios de dados do DataOrchestrator}
+  \label{tab:domains}
+  \begin{tabular}{l l l l}
+    \toprule
+    \textbf{Domínio} & \textbf{Hook} & \textbf{Bibliotecas} & \textbf{Fontes} \\
+    \midrule
+    Geo       & GeoAnalyzer       & geopandas, geopy   & Nominatim, IBGE \\
+    Finance   & FinanceAnalyzer   & yfinance, fredapi  & Yahoo Finance, FRED \\
+    Crypto    & MarketSpeculator  & ccxt               & 110+ exchanges \\
+    BioMed    & BioMedAnalyzer    & biopython, pysus   & PubMed, DATASUS \\
+    Academic  & SeekerMultiSource & arxiv, scholarly   & arXiv, Google Scholar \\
+    Economic  & WorldBankAnalyzer & wbgapi             & World Bank WDI \\
+    Health    & BioMedAnalyzer    & pysus, covid       & DATASUS, WHO \\
+    PDF       & PDFProcessor      & pypdf              & Extração texto \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Ecosystem Hooks (10)}
+
+O Round 8 produziu 5 hooks fundamentais: SeekerMultiSource, WorldBankAnalyzer, PDFProcessor, MCPScoutBridge e HTTPXClient. O Round 9 expandiu para 6 novos domínios com 5 hooks adicionais: GeoAnalyzer, FinanceAnalyzer, MarketSpeculator, BioMedAnalyzer e QualisDatasetHub. O arquivo \texttt{ecosystem\_hooks.py} (v2.0, $\sim$700 linhas) implementa todos os 10 hooks.
+
+Foram instaladas 5 bibliotecas adicionais: yfinance (ações), ccxt (criptomoedas), fredapi (Federal Reserve), biopython (PubMed/NCBI) e pandas-market-calendars (calendários de pregão).
+
+\subsection{Validação com Dados Reais}
+
+\begin{table}[H]
+  \centering
+  \caption{Validação do DataOrchestrator}
+  \label{tab:validation}
+  \begin{tabular}{l l l}
+    \toprule
+    \textbf{Query} & \textbf{Domínio} & \textbf{Resultado} \\
+    \midrule
+    ``preco da acao AAPL''       & finance   & Apple Inc. --- \$308,82 \\
+    ``PIB do Brasil''            & economic  & World Bank WDI \\
+    ``coordenadas de Sao Paulo'' & geo       & lat=-23,55; lon=-46,63 \\
+    ``artigos sobre deep learning'' & academic & arXiv --- 3 papers \\
+    ``top criptomoedas''         & crypto    & CCXT Binance top 5 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{Sistema de Auditoria Acadêmica Caixa Branca (Rounds 10--12)}
+% ══════════════════════════════════════════════════════════════════════════
+
+O sistema de auditoria acadêmica, implementado nos Rounds 10--12, constitui uma infraestrutura completa de rastreabilidade que registra \textbf{todas} as interações do pesquisador com o ecossistema.
+
+\subsection{Arquitetura (9 Componentes)}
+
+\begin{enumerate}[itemsep=1pt]
+  \item \textbf{InteractionLogger} (\texttt{interaction\_logger.py}, 337 linhas) --- Logger singleton, JSONL imutável com hash SHA-256, thread-safe. Registra 7 tipos de eventos: \texttt{session\_start}, \texttt{interaction}, \texttt{decision}, \texttt{artifact}, \texttt{error}, \texttt{paradigm\_set} e \texttt{session\_end}.
+  \item \textbf{AcademicAuditTrail} (\texttt{academic\_audit\_trail.py}, 311 linhas) --- Trilha de auditoria: parágrafo $\rightarrow$ evidência $\rightarrow$ fonte (DOI/arXiv). Integra protocolo TSAC (87 palavras banidas), verificação de fontes e peer review. Gera relatórios em 3 formatos (Markdown, JSON, LaTeX).
+  \item \textbf{TokenEconomyMonitor} (\texttt{token\_economy\_monitor.py}, 220 linhas) --- Monitor de consumo de tokens com 3 níveis de orçamento: Nível 1 (Magnum/Tese: 500K tokens), Nível 2 (Standard Paper: 200K), Nível 3 (Short Communication: 50K). Estima economias das 5 estratégias de otimização.
+  \item \textbf{AuditInstrumentor} (\texttt{audit\_instrumentor.py}, 293 linhas) --- Auto-instrumentação transparente do DataOrchestrator. Wrapper que intercepta todas as queries e registra automaticamente pré-execução (query, timestamp, paradigma) e pós-execução (resposta, roteamento, tokens).
+  \item \textbf{ResearcherScore} --- Score de qualidade da sessão (0--100) baseado em 6 critérios ponderados: densidade de evidências (25\%), fontes verificadas (20\%), TSAC compliance (20\%), diversidade de fontes (15\%), cobertura multi-domínio (10\%) e peer review (10\%). Grades: A ($\geq$90), B ($\geq$75), C ($\geq$60), D ($\geq$40), F ($<$40).
+  \item \textbf{BudgetAlert} --- Alertas proativos em 3 níveis (info, warning, critical) com sugestões de otimização. Dispara quando o orçamento atinge 50\% (warning), 80\% (critical) ou quando a eficiência output/input está abaixo de 0,25.
+  \item \textbf{AuditDashboard} --- Dashboard HTML interativo (5,6KB) com score de qualidade, barra de progresso de tokens (verde/amarelo/vermelho), alertas, resumo da sessão e mapa de evidências (tabela parágrafo $\rightarrow$ fonte $\rightarrow$ verificação).
+  \item \textbf{AuditSearch} --- Busca e filtro de sessões por paradigma, nível, data e score. Inclui comparação lado a lado de múltiplas sessões.
+  \item \textbf{PipelineIntegration} --- Integração automática com os pipelines SEEKER $\rightarrow$ MASWOS $\rightarrow$ Auditoria. Gera relatório Qualis A1 completo com apêndice de rastreabilidade.
+\end{enumerate}
+
+\subsection{Protocolo TSAC}
+
+O sistema detecta automaticamente 87 palavras e expressões banidas, incluindo ``crucial'', ``essencialmente'', ``notavelmente'', ``fundamentalmente'', ``intrinsecamente'', entre outras. Parágrafos com violações são marcados e relatados no dashboard.
+
+\subsection{Estratégias de Economia de Tokens}
+
+\begin{table}[H]
+  \centering
+  \caption{Estratégias de economia de tokens}
+  \label{tab:tokens}
+  \begin{tabular}{l c}
+    \toprule
+    \textbf{Estratégia} & \textbf{Economia Estimada} \\
+    \midrule
+    Contexto em chinês (+40\% densidade)          & $\sim$40\% do input \\
+    Progressive disclosure (SKILL.md $\leq$ 2.500B) & $\sim$25\% do input \\
+    MCP Lazy Init                                  & $\sim$10\% do input \\
+    Edição cirúrgica (apenas delta)                & $\sim$30\% do output \\
+    \textbf{Total estimado por sessão}             & \textbf{$\sim$75\% de redução} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{Métricas Agregadas do Ecossistema}
+% ══════════════════════════════════════════════════════════════════════════
+
+A Tabela~\ref{tab:metrics} resume a evolução das métricas do ecossistema entre as versões 4.2.2 e 4.2.3.
+
+\begin{table}[H]
+  \centering
+  \caption{Evolução das métricas do ecossistema}
+  \label{tab:metrics}
+  \begin{tabular}{l c c c}
+    \toprule
+    \textbf{Métrica} & \textbf{v4.2.2} & \textbf{v4.2.3} & \textbf{$\Delta$} \\
+    \midrule
+    Skills                 & 105  & 106  & +1 \\
+    MCPs                   & 41   & 41   & --- \\
+    Ecosystem Hooks        & 0    & 10   & +10 \\
+    Domínios de dados      & 0    & 8    & +8 \\
+    Bibliotecas instaladas & $\sim$18 & 30+ & +12 \\
+    Componentes auditoria  & 0    & 9    & +9 \\
+    Fontes Qualis A1       & 5    & 20+  & +15 \\
+    Diagramas SVG          & 10   & 16   & +6 \\
+    Artigos LaTeX          & 0    & 1    & +1 \\
+    AutoEvolve ciclos      & 9    & 12   & +3 \\
+    Linhas código Python   & 114K & 120K & +6K \\
+    CJK leaks              & 0    & 0    & --- $\checkmark$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{Documentação e Artefatos Gerados}
+% ══════════════════════════════════════════════════════════════════════════
+
+\subsection{Artigos e Relatórios}
+
+\begin{itemize}[itemsep=1pt]
+  \item \texttt{artigo\_evolucao\_standalone.tex/pdf} --- Artigo LaTeX ABNT, 12 páginas, 15 citações
+  \item \texttt{RELATORIO\_EVOLUCAO\_COMPLETO.md} --- Relatório Markdown com visão geral de todos os rounds
+  \item \texttt{.evolve/evolve-state-round-*.json} --- Estados de evolução (R8, R9, R12)
+\end{itemize}
+
+\subsection{Fluxogramas (16 SVGs)}
+
+Os fluxogramas documentam visualmente a arquitetura do ecossistema:
+
+\begin{itemize}[itemsep=1pt]
+  \item \texttt{fluxograma\_evolve\_pipeline.svg} --- Pipeline /evolve com 6 estágios
+  \item \texttt{fluxograma\_data\_orchestrator.svg} --- Arquitetura 3 camadas do DataOrchestrator
+  \item \texttt{fluxograma\_matriz\_afinidade.svg} --- Grid 13$\times$5 de afinidade bibliotecas $\times$ pipelines
+  \item \texttt{arquitetura\_completa\_v423.svg} --- Arquitetura completa 6 camadas (L1--L6)
+  \item \texttt{pipeline\_auditoria\_caixa\_branca.svg} --- Pipeline de auditoria com 9 componentes
+\end{itemize}
+
+\subsection{Documentação Atualizada (8 arquivos)}
+
+OPENCODE\_ECOSYSTEM.md, README.md, ROADMAP.md, PROJECTS.md, TUTORIALS.md, GLOSSARY.md, CONTRIBUTING.md e implementação-de-pypisearcher-2026-05-24.md foram atualizados com as novas camadas de dados e auditoria.
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{Discussão}
+% ══════════════════════════════════════════════════════════════════════════
+
+\subsection{Viabilidade do Pipeline /evolve}
+
+A evolução do ecossistema em 12 rounds demonstrou a viabilidade do pipeline \texttt{/evolve} como mecanismo de crescimento autônomo. Em apenas um dia (24 de maio de 2026), 9 commits foram realizados, totalizando 50+ arquivos novos e 8.000+ linhas de código.
+
+\subsection{Impacto do DataOrchestrator}
+
+O DataOrchestrator representa um avanço significativo ao abstrair completamente a complexidade das APIs subjacentes. Um pesquisador que necessite de ``dados do PIB do Brasil'' não precisa saber que a fonte é o World Bank WDI, nem que a biblioteca é \texttt{wbgapi}, nem que o indicador é \texttt{NY.GDP.PCAP.CD}. O sistema resolve toda a cadeia automaticamente.
+
+\subsection{Contribuição da Auditoria Caixa Branca}
+
+O sistema de auditoria preenche uma lacuna crítica na pesquisa acadêmica assistida por IA: a \textbf{rastreabilidade}. Cada afirmação em um manuscrito pode ser rastreada até sua evidência original, cada evidência até sua fonte verificável (DOI/arXiv), e cada decisão do pipeline é registrada em log imutável. Isso permite que revisores, orientadores e bancas examinadoras verifiquem a integridade do processo de pesquisa, não apenas o produto final.
+
+\subsection{Limitações e Trabalhos Futuros}
+
+O parser de intenção atual (\texttt{QueryIntent}) utiliza casamento de palavras-chave, com acurácia limitada para consultas ambíguas. A integração com um LLM local para desambiguação semântica está planejada. A biblioteca \texttt{scihub-cn} permanece não instalada devido a incompatibilidade de build com Python 3.12. A cobertura de testes (88/88 DI + 378/391 legado) deve ser expandida para incluir os novos módulos de dados e auditoria.
+
+% ══════════════════════════════════════════════════════════════════════════
+\section{Conclusão}
+% ══════════════════════════════════════════════════════════════════════════
+
+O pipeline \texttt{/evolve} (Rounds 1--12) transformou o OpenCode Ecosystem de uma plataforma de agentes especializados para uma \textbf{plataforma universal de pesquisa acadêmica}, incorporando:
+
+\begin{enumerate}[itemsep=1pt]
+  \item \textbf{Descoberta inteligente de bibliotecas} (PyPI Scout, 22+ pacotes catalogados)
+  \item \textbf{Acesso universal a dados} (DataOrchestrator, 8 domínios, linguagem natural)
+  \item \textbf{Auditoria acadêmica completa} (9 componentes, rastreabilidade fim-a-fim)
+  \item \textbf{Documentação robusta} (artigo LaTeX ABNT, 16 fluxogramas, 8 docs atualizados)
+\end{enumerate}
+
+O ecossistema alcançou 106 skills, 10 hooks, 8 domínios operacionais, 30+ bibliotecas instaladas, zero vazamentos CJK e mantém rastreabilidade completa via DecisionNode e evolve-state. A arquitetura resultante é totalmente flexível: novos domínios e componentes podem ser adicionados sem modificar a infraestrutura existente.
+
+% ══════════════════════════════════════════════════════════════════════════
+% REFERÊNCIAS (ABNT NBR 6023:2025)
+% ══════════════════════════════════════════════════════════════════════════
+\begin{thebibliography}{99}
+
+\bibitem{aroussi}
+AROUSSI, R. \textbf{yfinance}: Download market data from Yahoo! Finance's API. [S.\textit{l.}], 2024.
+Disponível em: \url{https://pypi.org/project/yfinance/}.
+
+\bibitem{anthropic}
+ANTHROPIC. \textbf{MCP Python SDK}: Model Context Protocol implementation. [S.\textit{l.}], 2024.
+Disponível em: \url{https://pypi.org/project/mcp/}.
+
+\bibitem{ckend}
+CKEND. \textbf{scihub-cn}: SciHub Downloader. [S.\textit{l.}], 2022.
+Disponível em: \url{https://pypi.org/project/scihub-cn/}.
+
+\bibitem{cock}
+COCK, P. J. A. \textit{et al.} Biopython: freely available Python tools for computational
+molecular biology and bioinformatics. \textbf{Bioinformatics}, Oxford, v. 25, n. 11,
+p. 1422--1423, 2009. DOI: \url{https://doi.org/10.1093/bioinformatics/btp163}.
+
+\bibitem{coelho}
+COELHO, F. C. \textbf{PySUS}: Tools for dealing with Brazil's Public health data (DATASUS).
+[S.\textit{l.}], 2024.
+
+\bibitem{fenniak}
+FENNIAK, M. \textbf{pypdf}: A free and open-source pure-python PDF library. [S.\textit{l.}], 2024.
+
+\bibitem{herzog}
+HERZOG, T. \textbf{wbgapi}: Modern, pythonic access to the World Bank's data API. [S.\textit{l.}], 2024.
+
+\bibitem{jordahl}
+JORDAHL, K. \textbf{GeoPandas}: Geographic pandas extensions. [S.\textit{l.}], 2024.
+
+\bibitem{kroitor}
+KROITOR, I. \textbf{CCXT}: CryptoCurrency eXchange Trading Library (110+ exchanges). [S.\textit{l.}], 2024.
+
+\bibitem{mehyar}
+MEHYAR, M. \textbf{fredapi}: Python API for FRED (Federal Reserve Economic Data). [S.\textit{l.}], 2024.
+
+\bibitem{schwab}
+SCHWAB, L. \textbf{arxiv.py}: Python wrapper for the arXiv API. [S.\textit{l.}], 2024.
+
+\bibitem{sheftel}
+SHEFTEL, R. \textbf{pandas-market-calendars}: Market calendars for trading applications. [S.\textit{l.}], 2024.
+
+\bibitem{silva}
+SILVA, D. \textbf{semanticscholar}: Unofficial Python client for Semantic Scholar APIs. [S.\textit{l.}], 2024.
+
+\bibitem{cholewiak}
+CHOLEWIAK, S. A. \textit{et al.} \textbf{scholarly}: Simple access to Google Scholar authors and citations. [S.\textit{l.}], 2024.
+
+\bibitem{opencode}
+OPENCODE ECOSYSTEM. \textbf{Ecosystem State}: Pipeline de evolução autônoma v4.2.3. [S.\textit{l.}], 2026.
+
+\end{thebibliography}
+
+\end{document}

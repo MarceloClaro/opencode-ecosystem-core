@@ -1,0 +1,439 @@
+% =============================================================================
+%  LIVRO DARK - Engenharia de Ecossistemas Cognitivos
+%  LatHex Dark Theme (apehex/CC BY-NC-SA 3.0)
+%  Compilacao: pdflatex + bibtex + pdflatex + pdflatex
+% =============================================================================
+\documentclass[11pt,fleqn,oneside]{book}
+
+% =============================================================================
+% CONTEXT (metadata)
+% =============================================================================
+\input{context}
+
+% =============================================================================
+% PACOTES ANTES DO TEMPLATE
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+\PassOptionsToPackage{table}{xcolor}
+
+% =============================================================================
+% TEMPLATE LATHEX (carrega: xcolor, geometry, fonts, hyperref, tikz, 
+%   amsmath, amssymb, amsthm, graphicx, caption, booktabs, enumitem, 
+%   listings, fancyhdr, titlesec, biblatex, tcolorbox, makeidx, etc.)
+% =============================================================================
+\input{template/book/main}
+
+% =============================================================================
+% ATIVAR TEMA DARK & BACKGROUND
+% =============================================================================
+\togglethemedark
+\backgroundbarvisibletrue
+
+% =============================================================================
+% PACOTES ADICIONAIS NAO CARREGADOS PELO TEMPLATE
+% =============================================================================
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\IfFileExists{dsfont.sty}{\usepackage{dsfont}}{}
+\providecommand{\mathds}[1]{\mathbb{#1}}
+\usepackage{setspace}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{verbatim}
+\usepackage{seqsplit}
+\newcommand{\codigoquebravel}[1]{\seqsplit{\origtexttt{#1}}}
+
+% Melhora justificação: parágrafos mais justos sem espaços excessivos
+\setlength{\parfillskip}{0pt plus 1fil}
+\raggedbottom
+
+% --- PGFPLOTS (adiciona bibliotecas ao tikz ja carregado) ---
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{
+  arrows.meta,
+  automata,
+  backgrounds,
+  calc,
+  chains,
+  decorations.pathmorphing,
+  fit,
+  math,
+  mindmap,
+  patterns,
+  petri,
+  positioning,
+  scopes,
+  shadows,
+  shapes,
+  shapes.geometric,
+  tikzmark,
+  topaths
+}
+
+% --- FLOAT ---
+\usepackage{float}
+
+% =============================================================================
+% AJUSTE DE LARGURA DE TEXTO PARA EVITAR OVERFULLS
+% =============================================================================
+% Aumenta textwidth: 210 - 3.0 - 1.0 = 206mm (vs 165mm original)
+% Margem interna 3cm, externa 1cm para tema dark
+\geometry{left=3.0cm, right=1.0cm, top=2cm, bottom=2cm, headsep=10pt}
+
+% =============================================================================
+% CONFIGURAÇÃO DE TOLERÂNCIA E QUEBRA DE LINHAS (Diagramação Global)
+% =============================================================================
+% Tolerância geral para evitar overfulls sem comprometer a legibilidade
+\tolerance=200
+\emergencystretch=2em
+% Aumenta penalidade contra linhas órfãs/viúvas
+\clubpenalty=10000
+\widowpenalty=10000
+% Permite quebra de URLs/código em mais caracteres
+\def\UrlBreaks{\do\:\do\-\do\_\do\/\do\.\do\~\do\?\do\#\do\&\do\%\do\@\do\\}
+
+
+% =============================================================================
+% AJUSTES NO HYPERREF (template ja carregou hyperref e bookmark)
+% =============================================================================
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  filecolor=accent,
+  urlcolor=accent,
+  citecolor=accent,
+  pdftitle={\TITLE},
+  pdfauthor={\AUTHOR},
+  pdfsubject={\SUBJECT}
+}
+
+% =============================================================================
+% LISTINGS (configuracoes para codigo fonte)
+% =============================================================================
+\colorlet{green}{green!60!black}
+\colorlet{orange}{orange!80!white}
+\colorlet{blue}{blue!60!white}
+\colorlet{magenta}{magenta}
+
+% --- Estilo base para listings ---
+\makeatletter
+\newcommand{\lstbreakall}{%
+  \lst@setbreakatwhitespacefalse
+  \lst@breakatwhitespacefalse
+}
+\makeatother
+
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    backgroundcolor=\color{bgalt},
+    commentstyle=\color{green},
+    keywordstyle=\color{orange},
+    numberstyle=\tiny\color{fgalt},
+    stringstyle=\color{blue},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{accent}{$\hookrightarrow$}\space},
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=3pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{borderalt},
+    frameround=tttt,
+    framexleftmargin=2pt,
+    framexrightmargin=1pt,
+    xleftmargin=0pt,
+    xrightmargin=0pt,
+    emph={self,True,False,None},
+    emphstyle=\color{magenta},
+    aboveskip=6pt,
+    belowskip=6pt,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ã}{{\~a}}1 {õ}{{\~o}}1 {Ã}{{\~A}}1 {Õ}{{\~O}}1
+             {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {â}{{\^a}}1 {ê}{{\^e}}1
+             {×}{{\ensuremath{\times}}}1 {—}{{\textemdash}}1
+}
+
+\lstdefinestyle{bashstyle}{
+    language=bash,
+    backgroundcolor=\color{bgalt},
+    commentstyle=\color{green},
+    keywordstyle=\color{orange},
+    numberstyle=\tiny\color{fgalt},
+    stringstyle=\color{blue},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{accent}{$\hookrightarrow$}\space},
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=3pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{borderalt},
+    framexleftmargin=2pt,
+    framexrightmargin=1pt,
+    xleftmargin=0pt,
+    xrightmargin=0pt,
+    aboveskip=6pt,
+    belowskip=6pt,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ã}{{\~a}}1 {õ}{{\~o}}1 {Ã}{{\~A}}1 {Õ}{{\~O}}1
+             {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {â}{{\^a}}1 {ê}{{\^e}}1
+             {×}{{\ensuremath{\times}}}1 {—}{{\textemdash}}1
+}
+
+\lstset{style=pythonstyle}
+
+% =============================================================================
+% AMBIENTES TEOREMA
+% =============================================================================
+\theoremstyle{definition}
+\newtheorem{definicao}{Definição}[chapter]
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{lema}{Lema}[chapter]
+\newtheorem{corolario}{Corolário}[chapter]
+\newtheorem{proposicao}{Proposição}[chapter]
+\newtheorem{exemplo}{Exemplo}[chapter]
+\newtheorem{exercicio}{Exercício}[chapter]
+\newtheorem{observacao}{Observação}[chapter]
+\newtheorem{hipotese}{Hipótese}[chapter]
+
+% =============================================================================
+% COMANDOS PERSONALIZADOS
+% =============================================================================
+% \codigo com quebra de linha em hífens/slashes/underscores para evitar
+% overfulls em paths e comandos longos. Configura \UrlBreaks acima.
+% \codigo usa \nolinkurl que herda as quebras de \UrlBreaks.
+\urlstyle{tt}
+\newcommand{\codigo}[1]{\nolinkurl{#1}}
+% Versão extra do \codigo que força quebra em qualquer lugar (último recurso)
+\newcommand{\codigoforce}[1]{\seqsplit{\texttt{#1}}}
+
+% Redefine \texttt para permitir quebra em hífens no modo typewriter.
+% A fonte Courier normalmente não hifeniza (hyphenchar=-1).
+% Ativa quebra no '-' (ASCII 45) para evitar overfulls em paths técnicos.
+% Preserva o funcionamento em math mode (onde \ttfamily é inválido).
+\let\origtexttt\texttt
+\protected\def\texttt#1{%
+  \ifmmode
+    \origtexttt{#1}%
+  \else
+    {\ttfamily\hyphenchar\font=45 \relax #1}%
+  \fi
+}
+\newcommand{\destaque}[1]{\textbf{#1}}
+\newcommand{\opencode}{\textsc{OpenCode}}
+\newcommand{\opencodeeco}{\textsc{OpenCode Ecosystem}}
+\newcommand{\qualisA}{\textit{Qualis A1}}
+\newcommand{\tdd}{\textsc{TDD}}
+\newcommand{\sdd}{\textsc{SDD}}
+\newcommand{\doilink}[1]{\href{https://doi.org/#1}{\texttt{DOI: #1}}}
+\newcommand{\arxivlink}[1]{\href{https://arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+\newcommand{\nivelzero}{$\bigstar$}
+\newcommand{\nivelbasico}{$\bigstar\bigstar$}
+\newcommand{\nivelintermediario}{$\bigstar\bigstar\bigstar$}
+\newcommand{\nivelavancado}{$\bigstar\bigstar\bigstar\bigstar$}
+\newcommand{\nivelphd}{$\bigstar\bigstar\bigstar\bigstar\bigstar$}
+\newcommand{\doi}[1]{\doilink{#1}}
+\newcommand{\arxiv}[1]{\arxivlink{#1}}
+
+% =============================================================================
+% CONFIG BIBLIOGRAFIA (carregada via template/book/bibliography.tex com natbib)
+% =============================================================================
+% Nada adicional necessario - natbib + ieeetr + \bibliography{...} no final
+
+% =============================================================================
+% CONTEUDO DO LIVRO
+% =============================================================================
+\begin{document}
+
+% --- CAPA (Template LatHex) ---
+\coverpage{\TITLE}{\SUBTITLE}{\AUTHOR}{\DATE}{\SUBJECT}
+
+% --- FRONT MATTER (pre-textuais numerados em romanos) ---
+\frontmatter
+
+% --- SUMARIO ---
+\newpage
+\tableofcontents
+\cleardoublepage
+
+% --- PRE-TEXTUAIS ---
+\input{pre-textuais}
+
+% --- LISTAS DE FIGURAS, TABELAS, CODIGOS ---
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\lstlistoflistings
+\cleardoublepage
+
+% =============================================================================
+% MAIN MATTER (conteúdo principal numerado em arábicos)
+% =============================================================================
+\mainmatter
+
+% =============================================================================
+% PARTE 0 - INTRODUÇÃO
+% =============================================================================
+\part{Introdução}
+\input{../capitulos/99-prefacio-genese}
+
+% =============================================================================
+% PARTE I - FUNDAMENTOS
+% =============================================================================
+\part{Fundamentos Teóricos e Epistemológicos}
+\newpage
+\chapter{Fundamentos Matemáticos e Estatísticos}
+\label{ch:fundamentos-mat}
+\input{../capitulos/08-capitulo1-mat-est}
+
+\newpage
+\chapter{Inteligência Artificial e Sistemas Multiagentes}
+\label{ch:ia-agentes}
+\input{../capitulos/09-capitulo2-ia-agentes}
+
+% =============================================================================
+% PARTE II - ARQUITETURA
+% =============================================================================
+\part{Arquitetura e Engenharia do OpenCode Ecosystem}
+\newpage
+\chapter{Arquitetura do OpenCode Ecosystem}
+\label{ch:arquitetura-opencode}
+\input{../capitulos/10-capitulo3-opencode-arquitetura}
+
+\newpage
+\chapter{Pipeline de Scanners e Metacognição}
+\label{ch:scanner-metacognicao}
+\input{../capitulos/11-capitulo4-scanner-metacognicao}
+
+\newpage
+\chapter{Trust Engine, Governança e Autonomia Comportamental}
+\label{ch:trust-governanca}
+\input{../capitulos/12-capitulo5-trust-governanca}
+
+% =============================================================================
+% PARTE III - VALIDACAO
+% =============================================================================
+\part{Economia, Experimentação e Validação Científica}
+\newpage
+\chapter{Token Economy e Sistema de Incentivos}
+\label{ch:token-economy}
+\input{../capitulos/13-capitulo6-token-economy}
+
+\newpage
+\chapter{Experimentação e Validação Científica}
+\label{ch:experimentacao-validacao}
+\input{../capitulos/14-capitulo7-experimentacao-validacao}
+
+\newpage
+\chapter{Produção e Defesa de Dissertação}
+\label{ch:dissertacao-banca}
+\input{../capitulos/15-capitulo8-dissertacao-banca}
+
+% =============================================================================
+% PARTE IV - PRÁTICA E LABORATÓRIO
+% =============================================================================
+\part{Prática e Laboratório}
+\newpage
+\chapter{Guia de Imersão: OpenCode na Prática}
+\label{ch:guia-imersao}
+\input{../capitulos/20-capitulo9-guia-imersao}
+
+\newpage
+\chapter{Laboratório: Estudos de Caso Completos}
+\label{ch:estudos-caso}
+\input{../capitulos/21-capitulo10-estudos-caso}
+
+% =============================================================================
+% PARTE V - HORIZONTES E REFLEXÕES
+% =============================================================================
+\part{Horizontes e Reflexões}
+\newpage
+\chapter{OpenCode vs. Ecossistemas Alternativos}
+\label{ch:comparacao}
+\input{../capitulos/22-capitulo11-comparacao}
+
+\newpage
+\chapter{Problemas em Aberto e Rumos Futuros}
+\label{ch:futuro}
+\input{../capitulos/23-capitulo12-futuro}
+
+% =============================================================================
+% APENDICES
+% =============================================================================
+\appendix
+\part{Apêndices}
+\newpage
+\chapter{Exercícios Propostos}
+\label{ap:exercicios}
+\input{../capitulos/16-apendice-exercicios}
+
+\newpage
+\chapter{Glossário}
+\label{ap:glossario}
+\input{../capitulos/17-apendice-glossario}
+
+\newpage
+\chapter{Códigos Completos}
+\label{ap:codigos}
+\input{../capitulos/18-apendice-codigos}
+
+\newpage
+\chapter{Índice Remissivo}
+\label{ap:indice}
+\input{../capitulos/19-apendice-indice}
+
+\newpage
+\chapter{Soluções dos Exercícios}
+\label{ap:solucoes}
+\input{../capitulos/24-apendice-solucoes}
+
+\newpage
+\chapter{Guia de Referência Rápida e Linha do Tempo}
+\label{ap:cheatsheet}
+\input{../capitulos/25-apendice-cheatsheet}
+
+% =============================================================================
+% REFERENCIAS BIBLIOGRAFICAS
+% =============================================================================
+\newpage
+% Ajustes para evitar overfulls nos entries longos da bibliografia
+\begingroup
+\parindent=0pt
+\emergencystretch=12em
+\tolerance=9999
+\hyphenpenalty=200
+\setlength{\leftskip}{0pt}
+\rightskip=0pt plus 1em plus 0.5fil
+\sloppy
+\bibliographystyle{ieeetr}
+\bibliography{../referencias/referencias-abnt}
+\endgroup
+
+\end{document}

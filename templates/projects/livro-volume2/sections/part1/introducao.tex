@@ -1,0 +1,239 @@
+% =============================================================================
+% CAPÍTULO 1: O Ecossistema de Ferramentas para Gêmeos Digitais
+% Volume 2 — Guia Prático de Construção e Validação de Gêmeos Digitais no SUS
+% =============================================================================
+\destaque{Nível-alvo N0 (Vibe Code) — sem programação. Use 3D Slicer,
+DentalSegmentator e IA generativa para visualizar seu primeiro DT.}
+% Seções:
+%   1.1 - O Ecossistema Aberto de Ferramentas para Gêmeos Digitais
+%   1.2 - As Quatro Gerações dos Gêmeos Digitais
+%   1.3 - Por que um Framework Metodológico é Necessário
+%   1.4 - Como Este Livro Está Organizado
+% Capítulo consolidado (agregador + introducao_01..04).
+
+\section{O Ecossistema Aberto de Ferramentas para Gêmeos Digitais}
+
+\subsection{A Revolução Silenciosa dos Dados Odontológicos}
+
+Se o Volume 1 estabeleceu \textit{por que} os Gêmeos Digitais (DTs)\footnote[1]{Um Gêmeo Digital é uma cópia virtual de um dente, osso ou estrutura bucal real, criada no computador a partir de exames como tomografia. Permite simular tratamentos antes de aplicá-los no paciente.} representam uma mudança de paradigma\footnote[2]{Na ciência, uma mudança de paradigma significa uma transformação completa na forma de pensar e fazer algo — neste caso, a prática da odontologia.} na odontologia, este Volume 2 responde a uma pergunta mais ambiciosa: \textbf{como construir, validar e implementar} Gêmeos Digitais Periodontais no mundo real, partindo do absoluto zero — sem conhecimento prévio de programação — até o nível de pesquisa de doutorado?
+
+A resposta, descoberta empiricamente ao longo de 23 ciclos evolutivos do OpenCode Ecosystem (R1 a R23\footnote[3]{Cada ciclo evolutivo (R1, R2, ..., R23) representa uma rodada completa de melhorias no sistema. R23 é a versão mais recente, após 23 rodadas de aperfeiçoamento contínuo.}, com 312/312 testes TDD\footnote[4]{TDD (Desenvolvimento Guiado por Testes) é uma técnica de programação onde primeiro se escreve um teste automatizado, depois o código que deve passar no teste. 312/312 significa que todos os 312 testes foram aprovados, garantindo que o sistema funciona corretamente.} aprovados), é que o ecossistema de código aberto já contém \textbf{25 ou mais ferramentas maduras, gratuitas e clinicamente validadas}\footnote[5]{Vinte e cinco ferramentas formam um ecossistema completo — significa que existe uma solução gratuita e confiável para cada etapa da construção de gêmeos digitais, da captura de imagens à validação clínica.} para cada etapa da construção de um gêmeo digital. O gargalo não é mais tecnológico, mas sim de \textbf{integração e metodologia}. Este capítulo inaugural mapeia esse ecossistema e estabelece o Framework SUS-Twin\footnote[6]{Um framework é uma estrutura organizada de métodos, regras e boas práticas que guia o trabalho do pesquisador. O SUS-Twin é este guia, específico para construir gêmeos digitais na área da saúde bucal.} como arcabouço unificador.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[font=\small,
+    node distance=1.5cm and 2cm,
+    cat/.style={draw=accent, thick, rounded corners, fill=bgalt, text=fg, align=center, minimum width=4cm, minimum height=1cm},
+    tool/.style={draw=accent!50, thin, rounded corners, fill=bg, text=fg, align=center, minimum width=3.5cm, minimum height=0.7cm, font=\footnotesize},
+    arrow/.style={->, >=latex, thick, draw=accent}
+]
+    % Background box for Framework SUS-Twin
+    \node[draw=orangeaccent, thick, dashed, rounded corners, fill=bgalt!20, 
+          minimum width=11cm, minimum height=12.5cm, 
+          label={[text=orangeaccent, font=\bfseries]above:Framework SUS-Twin}]
+          at (2.8,-5.0) {};
+
+    % Camadas do ecossistema
+    \node[cat] (aquisicao) {Camada de Aquisição};
+    \node[cat, below=1.5cm of aquisicao] (segmentacao) {Camada de Segmentação};
+    \node[cat, below=1.5cm of segmentacao] (modelagem) {Camada de Modelagem};
+    \node[cat, below=1.5cm of modelagem] (ia) {Camada de IA e Predição};
+    \node[cat, below=1.5cm of ia] (validacao) {Camada de Validação};
+    
+    % Ferramentas
+    \node[tool, right=1.5cm of aquisicao] (ios) {3Shape/iTero/CBCT};
+    
+    \node[tool, right=1.5cm of segmentacao, yshift=0.4cm] (dseg) {DentalSegmentator};
+    \node[tool, below=0.1cm of dseg] (amas) {AMASSS (3D UNETR)};
+    
+    \node[tool, right=1.5cm of modelagem, yshift=0.4cm] (slicer) {3D Slicer + FSP};
+    \node[tool, below=0.1cm of slicer] (open3d) {Open3D (malhas)};
+    
+    \node[tool, right=1.5cm of ia, yshift=0.4cm] (periomod) {Periomod + CaTGO};
+    \node[tool, below=0.1cm of periomod] (toothX) {ToothXpert (LLaVA)};
+    
+    \node[tool, right=1.5cm of validacao, yshift=0.4cm] (tdd) {TDD (312 testes)};
+    \node[tool, below=0.1cm of tdd] (fhir) {FHIR Brasil + PySUS};
+    
+    \draw[arrow] (aquisicao) -- (segmentacao);
+    \draw[arrow] (segmentacao) -- (modelagem);
+    \draw[arrow] (modelagem) -- (ia);
+    \draw[arrow] (ia) -- (validacao);
+\end{tikzpicture}
+\end{adjustbox}
+    \caption{Cinco camadas do ecossistema SUS-Twin e ferramentas open-source correspondentes.}
+    \label{fig:ecossistema_ferramentas}
+\end{figure}
+
+\subsection{As 25+ Ferramentas Open-Source Mapeadas}
+
+A tabela a seguir consolida o mapeamento sistemático realizado nos repositórios GitHub, PubMed e registeres de software open-source em 2026. Cada ferramenta foi categorizada por função, estrelas (como proxy de maturidade comunitária) e nível de conhecimento necessário.
+
+\footnotesize
+\begin{longtable}[c]{p{3.5cm}p{5cm}p{2cm}p{3cm}}
+\caption{Catálogo de Ferramentas Open-Source para Construção de Gêmeos Digitais Periodontais} \\
+\toprule
+\textbf{Ferramenta}\footnotemark[7] & \textbf{Função}\footnotemark[8] & \textbf{\begin{tabular}[c]{@{}c@{}}Stars\footnotemark[9]\\ (GitHub)\end{tabular}} & \textbf{Nível}\footnotemark[10] \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Ferramenta} & \textbf{Função} & \textbf{Stars} & \textbf{Nível} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+DentalSegmentator & Segmentação CBCT (nnU-Net\footnotemark[11]) & 35+ & Intermediário \\
+AMASSS (3D UNETR) & Segmentação multi-estrutura craniana & 15+ & Avançado \\
+SlicerCBCTToothSeg & Segmentação dentária individual (MONAI\footnotemark[12]) & 10+ & Intermediário \\
+Slicer-FSP & Planejamento cirúrgico livre & 8+ & Intermediário \\
+OralSeg & Segmentação 3D (SwinUNETR+Mamba) & 6+ & Avançado \\
+ToothXpert & Análise multimodal de OPG (LLaVA) & 6+ & Avançado \\
+GeoSapiens & Landmarks dentários em CBCT (few-shot) & 5+ & PhD \\
+\cmidrule{1-4}
+Periomod & Modelagem periodontal preditiva & 11+ & Intermediário \\
+CaTGO (Frontiers) & Transformer causal para periodontia & -- & PhD \\
+Periodontal Health Sim & Modelagem econômica em saúde & 1+ & Avançado \\
+\cmidrule{1-4}
+TumorTwin & Framework de DTs oncológicos (Python) & 20+ & Avançado \\
+Med-Real2Sim & DTs cardíacos (physics-informed SSL) & 20+ & PhD \\
+Open Foundry & Ontologia para DTs operacionais & 14+ & Avançado \\
+ResponsibleHealthTwin & DTs éticos com LLM (WHO-aligned) & 1+ & Avançado \\
+\cmidrule{1-4}
+FHIR Brasil & Toolkit FHIR R4 para o ecossistema SUS & 8+ & Intermediário \\
+PySUS & Dados DATASUS em Python (pandas) & 20+ & Iniciante \\
+DATASUS AI Search & Consultas epidemiológicas em linguagem natural & 5+ & Iniciante \\
+RareBench-BR & Benchmark de doenças raras no SUS & 4+ & Avançado \\
+medbench-brasil & Benchmark de LLMs em medicina brasileira & 3+ & Intermediário \\
+\cmidrule{1-4}
+Clinical NLP PT-BR & NER\footnotemark[13] de prontuários em português brasileiro & 2+ & Avançado \\
+Temporal Validation ML & Validação temporal\footnotemark[14] de modelos clínicos & 2+ & PhD \\
+PatientPulse & CDSS multi-agente (FHIR + wearables) & 2+ & Avançado \\
+NeuroTwin & DTs cerebrais (EEG + PyTorch) & 1+ & Avançado \\
+Auto3DSeg (MONAI) & Segmentação 3D automática (pronta) & 50+ & Intermediário \\
+\cmidrule{1-4}
+\textbf{OpenCode Ecosystem} & \textbf{Orquestração + TDD + Validação} & \textbf{---} & \textbf{Todos} \\
+\bottomrule
+\end{longtable}
+
+\footnotetext[7]{Nome da ferramenta open-source catalogada neste mapeamento.}
+\footnotetext[8]{Descrição resumida da função principal da ferramenta.}
+\footnotetext[9]{Número de estrelas no GitHub, indicador de popularidade e maturidade comunitária do projeto.}
+\footnotetext[10]{Grau de conhecimento necessário: Iniciante (nunca programou), Intermediário, Avançado ou PhD (pesquisa acadêmica).}
+\footnotetext[11]{Rede neural de segmentação automática de imagens médicas que se adapta sozinha a diferentes tipos de exame, considerada padrão-ouro na área.}
+\footnotetext[12]{Biblioteca de inteligência artificial especializada em processamento de imagens médicas, mantida por um consórcio de hospitais e universidades.}
+\footnotetext[13]{Reconhecimento de Entidades Nomeadas — técnica de IA que extrai automaticamente informações como diagnósticos, medicamentos e procedimentos de textos médicos.}
+\footnotetext[14]{Método de validação que testa o modelo com dados de um período diferente do treinamento para verificar sua confiabilidade ao longo do tempo.}
+\normalsize
+
+\subsection{O Framework SUS-Twin como Metodologia Unificadora}
+
+A simples existência dessas ferramentas não resolve o problema central da odontologia digital: a \textbf{fragmentação}. Cada ferramenta opera em seu próprio formato, paradigma e nível de abstração. O Framework SUS-Twin propõe uma metodologia em seis estágios que organiza e integra essas capacidades:
+
+\begin{enumerate}
+    \item \textbf{Aquisição e Curação de Dados} — CBCT\footnote[15]{Tomografia Computadorizada de Feixe Cônico — um tipo de raio-X 3D odontológico que gera imagens volumétricas detalhadas da boca e face.}, IOS, sensores IoT; formatos DICOM\footnote[16]{Formato universal de arquivo para imagens médicas digitais, usado por tomógrafos, ressonâncias e ultrassons em todo o mundo.}, PLY\footnote[17]{Formato de arquivo que representa objetos 3D como uma nuvem de pontos, muito usado em modelagem digital e impressão 3D.}, FHIR\footnote[18]{Padrão internacional para troca de dados de saúde entre sistemas, permitindo que hospitais, clínicas e prontuários eletrônicos se comuniquem.}. Ferramentas: PySUS, FHIR Brasil, Clinical NLP PT-BR.
+    \item \textbf{Segmentação e Reconstrução 3D} — Extração de estruturas anatômicas (dentes, maxila, mandíbula, canais mandibulares). Ferramentas: DentalSegmentator, AMASSS, OralSeg, 3D Slicer.
+    \item \textbf{Modelagem e Simulação Biomecânica} — Criação de malhas volumétricas, aplicação de condições de contorno e simulação FEM\footnote[19]{Método dos Elementos Finitos — técnica matemática que divide um objeto 3D em milhões de partes para simular forças como mastigação, apertamento ou impacto.}. Ferramentas: Open3D, Slicer-FSP, Calculix (FEM).
+    \item \textbf{Predição e Inferência Clínica} — Modelos de machine learning para predição de perda óssea, resposta a tratamento e risco de doença. Ferramentas: Periomod, CaTGO, Scikit-learn.
+    \item \textbf{Validação Cruzada e Métricas} — K-Fold, validação temporal, concordância inter-observador. Ferramentas: Temporal Validation ML, TDD (OpenCode).
+    \item \textbf{Implementação e Monitoramento no SUS} — Integração com RNDS, dashboards epidemiológicos, SROI\footnote[20]{Retorno Social sobre Investimento — método que calcula o valor social e econômico gerado por um projeto na sociedade, indo além do lucro financeiro.}. Ferramentas: FHIR Brasil, DATASUS AI Search, PySUS.
+\end{enumerate}
+
+\destaque{A inovação metodológica do SUS-Twin não está em nenhuma ferramenta isolada, mas no \textbf{encadeamento rigoroso} entre essas seis camadas, cada uma com métricas de qualidade, verificações TDD e documentação formal (SDD\footnote[21]{Desenvolvimento Guiado por Especificação — metodologia onde se documenta exatamente o que o software deve fazer antes de implementá-lo, garantindo rastreabilidade e qualidade.}).}
+
+\subsection{Jornada de Aprendizado Progressiva: Do Vibe Code ao PhD}
+
+Este volume foi estruturado para atender quatro níveis de maturidade, espelhando a jornada do autodidata:
+
+\begin{itemize}
+    \item \textbf{Nível 0 --- Vibe Coding\footnote[22]{Termo popular que descreve programar com ajuda de inteligência artificial: você descreve o que deseja em linguagem comum e a IA gera o código para você, sem exigir conhecimento técnico profundo.}} (Capítulos 1--4): O leitor nunca programou. Utiliza ferramentas gráficas (3D Slicer, DentalSegmentator) e assistentes de IA para gerar código funcionante. O foco é \textbf{ver funcionando} e compreender conceitos.
+    
+    \item \textbf{Nível 1 --- Implementação Guiada} (Capítulos 5--9): O leitor começa a modificar scripts Python existentes. Aprende a rodar pipelines de segmentação, treinar modelos simples com Periomod e interpretar métricas de validação.
+    
+    \item \textbf{Nível 2 --- Pesquisa Reprodutível} (Capítulos 10--13): O leitor projeta experimentos próprios, implementa K-Fold\footnote[23]{Técnica de validação que divide os dados em 5 ou 10 grupos, treina o modelo em 9 grupos e testa no grupo restante, repetindo até todos os grupos serem testados.} validação, calcula SROI e publica resultados seguindo diretrizes TRIPOD-AI\footnote[24]{Diretriz internacional que define como relatar estudos de predição com inteligência artificial, garantindo transparência e que outros pesquisadores possam reproduzir os resultados.} e CLAIM-AI\footnote[27]{Diretriz internacional específica para relatar pesquisas com inteligência artificial em radiologia, complementar ao TRIPOD-AI.}.
+    
+    \item \textbf{Nível 3 --- PhD e Inovação} (Capítulos 14--17): O leitor adapta o framework CaTGO, propõe novas arquiteturas de DTs, submete artigos a periódicos Qualis A1\footnote[25]{Classificação máxima de qualidade de periódicos científicos no Brasil, segundo a CAPES. Publicar em Qualis A1 significa que o artigo atingiu o mais alto padrão acadêmico de excelência.} e contribui com código para o ecossistema open-source.
+\end{itemize}
+
+\subsection{Validação Contínua como Diferencial Metodológico}
+
+Diferentemente de livros técnicos tradicionais, todo código apresentado neste volume é acompanhado de \textbf{suites de testes TDD} que validam seu comportamento. O OpenCode Ecosystem mantém 312 testes de unidade e integração (100\% de aprovação), cobrindo desde a orquestração de agentes até a conformidade regulatória SaMD (RDC 657/2022\footnote[26]{Resolução da Diretoria Colegiada da ANVISA que regulamenta softwares como dispositivos médicos no Brasil, definindo requisitos de segurança, eficácia e validação clínica.}).
+
+Ao final deste capítulo, o leitor deve ser capaz de:
+\begin{enumerate}
+    \item Identificar as 25+ ferramentas open-source disponíveis para cada etapa da construção de DTs periodontais.
+    \item Compreender a arquitetura em 6 camadas do Framework SUS-Twin.
+    \item Localizar seu nível de maturidade atual e traçar um plano de estudos progressivo.
+    \item Reproduzir o primeiro pipeline de segmentação 3D utilizando 3D Slicer e DentalSegmentator (ver Seção~\ref{ch:medicina}).
+\end{enumerate}
+
+A partir do próximo capítulo, mergulharemos na arquitetura detalhada de cada camada, começando pela infraestrutura tecnológica necessária para sustentar um Gêmeo Digital Periodontal.
+
+\section{As Quatro Gerações dos Gêmeos Digitais e o Nascimento do SUS-Twin}
+
+A maturação dos gêmeos digitais seguiu uma curva evolutiva de complexidade crescente, que culminou na necessidade de \textit{frameworks} metodológicos como o SUS-Twin. Compreender essa evolução é essencial para situar a contribuição prática deste volume.
+
+\paragraph{Primeira Geração (2002--2015): Modelagem Estática.}
+Os DTs eram modelos conceituais isolados, restritos à engenharia aeroespacial e manufatura. Na odontologia, correspondia ao fluxo CAD/CAM primitivo --- design anatômico sem capacidade preditiva.
+
+\paragraph{Segunda Geração (2015--2020): IoT e Telemetria.}
+O modelo estático ganhou conectividade com sensores intraorais e IoT~\cite{mormann2004cerec}. Scanners 3D e CBCT tornaram-se acessíveis, gerando os primeiros \textit{datasets} digitais em larga escala. Contudo, a análise algorítmica ainda era rudimentar e dependente de interpretação humana.
+
+\paragraph{Terceira Geração (2020--2024): Cognição e IA Preditiva.}
+A incorporação de \textit{Machine Learning} permitiu que DTs predissessem cenários de falha. Estudos como o de Khoshfekr Rudsari et al.~\cite{khoshfekr2025digital} documentaram saltos de precisão: previsão de fadiga em instrumentos endodônticos e colapso de cargas sobre implantes. Foi nesta fase que a \textbf{validação cruzada} (K-Fold, temporal) tornou-se o padrão-ouro para modelos clínicos.
+
+\paragraph{Quarta Geração (2024--presente): Ecossistemas Abertos e DTs Composicionais.}
+A fronteira atual integra ecossistemas multiagente, LLMs e \textit{frameworks} composicionais~\cite{robles2023opentwins}. Surge o conceito de "gêmeo digital composicional", onde sub-sistemas (ATM, arcada, periodonto) são acoplados orquestradamente. É neste contexto que o \textbf{Framework SUS-Twin} se insere: como metodologia que organiza as ferramentas da Quarta Geração em um pipeline validado, acessível e adaptado ao contexto do Sistema Único de Saúde.
+
+\destaque{O Framework SUS-Twin não é uma nova ferramenta --- é a \textbf{metodologia} que integra as 25+ ferramentas já existentes, eliminando o gargalo de integração que impedia a adoção clínica em escala.}
+
+\section{Por que um Framework Metodológico é Necessário}
+
+Se as ferramentas já existem --- e este volume catalogou 25+ delas ---, por que um framework metodológico como o SUS-Twin é necessário? A resposta está na \textbf{fragmentação} do ecossistema atual.
+
+Cada ferramenta opera em seu próprio paradigma: DentalSegmentator exige NIfTI, PySUS acessa bancos DBF do DATASUS, Periomod espera dados tabulares estruturados, o gateway IoT utiliza MQTT, e o OpenCode orquestra agentes via MCP. Conectar essas peças em um pipeline funcional exige mais do que conhecimento técnico --- exige \textbf{uma arquitetura de referência} que padronize interfaces, métricas de qualidade e validação em cada etapa.
+
+O OpenCode Ecosystem~\cite{opencode2026ecosystem} fornece a infraestrutura de orquestração, com seus mais de 600 componentes de IA validados por 312 testes TDD. O Framework SUS-Twin, por sua vez, organiza esses componentes em seis camadas funcionais com contratos formais (SDD --- System Design Document), mapeando cada ferramenta a uma etapa específica do pipeline.
+
+\subsection{O Papel dos Ecossistemas Abertos na Saúde Pública}
+
+Para a arquitetura de saúde pública no Brasil, em especial no escopo universalista do \textbf{Sistema Único de Saúde (SUS)}, a democratização representada pelo código aberto é revolucionária em três frentes:
+
+\begin{enumerate}
+    \item \textbf{Redução de custos:} Pilotos de DT no Brasil documentaram redução de até 58\% no tempo de processamento de exames~\cite{frota2025sus}. Sem custos de licenciamento, a barreira de entrada para UBS e centros de saúde é mínima.
+    
+    \item \textbf{Soberania de dados:} Ao adotar ecossistemas abertos, o SUS preserva o sigilo previsto na LGPD e mantém autonomia sobre os dados dos pacientes, sem dependência de fornecedores estrangeiros.
+    
+    \item \textbf{Aderência populacional:} Modelos treinados em dados brasileiros capturam o genótipo e fenótipo específicos da população latino-americana, mitigando o viés algorítmico de sistemas treinados em populações europeias ou norte-americanas.
+\end{enumerate}
+
+Nas seções seguintes, detalharemos como cada camada do SUS-Twin se conecta às ferramentas existentes, com instruções passo a passo e código executável.
+
+\section{Como Este Livro Está Organizado}
+
+\noindent\textbf{Nota ao leitor:} Esta obra é o \textbf{Volume 2} da Coleção Tecnologia na Saúde. Os fundamentos conceituais dos gêmeos digitais, arquiteturas de IA e panorama regulatório foram estabelecidos no \textbf{Volume 1} --- ``\textit{Gêmeos Digitais na Odontologia: Revolução, Impacto Social e o Papel dos Ecossistemas Abertos de IA}''. Recomenda-se a leitura prévia do Volume 1 para domínio completo dos pré-requisitos teóricos.
+
+\vspace{0.3cm}
+
+Este Volume 2 está estruturado como um \textbf{guia prático progressivo}, onde cada parte corresponde a um nível de maturidade na jornada de aprendizado:
+
+\begin{enumerate}
+    \item \textbf{Parte I --- O Framework SUS-Twin: Conceitos e Arquitetura (Caps. 1 a 3)}: Apresenta o ecossistema de 25+ ferramentas open-source mapeadas, a arquitetura em 6 camadas do SUS-Twin e o pipeline completo de segmentação 3D. \textbf{Nível-alvo: Vibe Code (N0) a Implementação Guiada (N1).}
+    
+    \item \textbf{Parte II --- Aplicações Práticas do SUS-Twin na Periodontia (Caps. 4 a 8)}: Traduz processos clínicos reais (ortodontia, implantodontia, endodontia) em pipelines de gêmeos digitais, com ênfase em simulação biomecânica por elementos finitos e validação de resultados. \textbf{Nível-alvo: Implementação Guiada (N1).}
+    
+    \item \textbf{Parte III --- Ecossistema de Validação e Qualidade (Caps. 9 a 13)}: Detalha a orquestração de pipelines no OpenCode Ecosystem, a reconstrução 3D avançada, a validação cruzada com K-Fold, a telemetria IoT e as práticas de validação do SUS-Twin. \textbf{Nível-alvo: Pesquisa Reprodutível (N2).}
+    
+    \item \textbf{Parte IV --- Implementação no SUS e Jornada do Conhecimento (Caps. 14 a 17)}: Aborda a implementação prática no Sistema Único de Saúde, ética e LGPD, o guia ``Do Vibe Code ao PhD'' e as perspectivas futuras. \textbf{Nível-alvo: PhD e Inovação (N3).}
+\end{enumerate}
+
+\destaque{Cada capítulo contém projetos práticos com código, validação TDD e métricas de sucesso. O leitor pode começar de qualquer nível e avançar no seu próprio ritmo.}
+
+\subsection{Convenções Utilizadas}
+
+\begin{itemize}
+    \item \textbf{Código-fonte}: Todo código Python é executável e foi testado com Python 3.11+. Listagens incluem saída esperada para validação.
+    \item \textbf{Referências cruzadas}: `\textbackslash ref\{ch:capitulo\}' remete a capítulos deste volume; citações como `\textbackslash cite\{autor2024\}' referenciam a bibliografia ao final.
+    \item \textbf{TDD}: Suítes de teste mencionadas (312 testes, 100\% aprovação) estão no repositório OpenCode Ecosystem.
+    \item \textbf{Níveis}: Cada seção é marcada com seu nível-alvo (N0 a N3) para orientação do leitor.
+\end{itemize}

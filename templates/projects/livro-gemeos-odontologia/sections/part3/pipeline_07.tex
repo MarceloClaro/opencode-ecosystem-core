@@ -1,0 +1,164 @@
+% =============================================================================
+%  PRÁTICA: MONTANDO O SEU GÊMEO DIGITAL ODONTOLÓGICO (HANDS-ON)
+% =============================================================================
+\section{Prática: Montando o Seu Gêmeo Digital Odontológico (Hands-On)}
+\label{sec:hands-on}
+
+Para decodificar as abstrações teóricas e transformá-las numa ferramenta \textbf{didática e puramente operacional}, expomos um roteiro de linha de comando simulado, estruturado sobre o ferramental nativo do OpenCode Ecosystem. O escopo abarca a instanciação preditiva de um caso de Implantodontia de precisão.
+
+\destaque{Atenção ao Paradigma Code-as-Medical-Device: As sequências abaixo ilustram \textit{scripts} que governam o destino cirúrgico. Operações de delegação sistêmica exigem dupla validação através do TrustEngine e aprovação do cirurgião principal responsável.}
+
+\subsection*{Passo 1: Injeção de Dados e Alinhamento Modal}
+A fundação inicia-se com a leitura do arquivo volumétrico (\texttt{.dcm})\footnote{DICOM (\textit{Digital Imaging and Communications in Medicine}) é o padrão global para armazenamento e comunicação de imagens médicas e odontológicas, como tomografias.} e o alinhamento de alta resolução da morfologia gengival escaneada (\texttt{.stl})\footnote{STL (\textit{Stereolithography}) é um formato de arquivo universal que descreve a geometria tridimensional da superfície de objetos (como coroas dentárias) através de triângulos interconectados.}:
+
+\begin{lstlisting}[style=bashstyle]
+> opencode run dicom-processor --input /dados/paciente_cbct.dcm
+[OK] Volume DICOM carregado. Resolução: 0.15mm isotrópico.
+
+> opencode run mesh-aligner --target cbct.obj --source scan.stl --method ICP
+[OK] Registro ICP (Iterative Closest Point) convergido. Erro RMS: 0.04mm.
+\end{lstlisting}
+
+\subsection*{Passo 2: Segmentação Neural Autónoma}
+Substituindo protocolos baseados no desenho em tela, o Agente 26 mobiliza redes convolucionais para decompor mandíbula, feixes vásculo-nervosos e bases dentárias de forma paralela:
+
+\begin{lstlisting}[style=bashstyle]
+> opencode agent invoke 26_visao_computacional \
+    --task "Segmentar mandíbula e nervo alveolar inferior" \
+    --model "nnU-Net-Dental" --gpu-accelerate
+[OK] Extração semântica concluída. Exportando malhas OBJ particionadas.
+\end{lstlisting}
+
+\subsection*{Passo 3: Engendramento da Malha Computacional (FEM)}
+A topologia inerte é convertida numa matriz hiperelástica, com adensamento vetorial focado primariamente nas lamelas da cortical óssea perimplantar:
+
+\begin{lstlisting}[style=bashstyle]
+> opencode run fem-mesher --input segmentado.obj --type tetrahedral --refine interface
+[OK] Malha discretizada gerada: 1.250.430 elementos (C3D10).
+[CHECK] Skewness métrica óssea: 0.82 (Aprovado nas barreiras de qualidade).
+\end{lstlisting}
+
+\subsection*{Passo 4: Iteração Biomecânica de Esforços Críticos}
+O gêmeo é exposto às agressões do mundo físico simulado. Uma carga vetorial extrema parametrizada é lançada contra a fixação metálica em titânio para validação da falha estrutural antes de qualquer invasão in vivo:
+
+\begin{lstlisting}[style=bashstyle]
+> opencode run biomechanics-solver \
+    --mesh malha.fem --load 300N --direction axial \
+    --material-implant Ti6Al4V
+[SIMULAÇÃO] Equacionamento matrizes esparsas... Completo.
+[RESULTADO] Tensão estática máxima cortical: 45 MPa (Seguro. Inferior ao escoamento).
+\end{lstlisting}
+
+\subsection*{Passo 5: Projeção Visual e Avaliação Definitiva}
+Os vetores numéricos são injetados de volta à interface gráfica do cirurgião, projetando isotensões vermelhas e pontos frios ao redor da fixação, municiando a equipe médica de garantias biomecânicas infalíveis à prova de sobrecarga oclusal.
+
+\begin{figure}[h!]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[font=\footnotesize, 
+        node distance=1.5cm and 2cm,
+        box/.style={draw=accent, thick, rounded corners, fill=bgalt, text=fg, align=center, minimum width=2.5cm, minimum height=1cm},
+        arrow/.style={->, >=latex, thick, draw=accent!80}
+    ]
+    \node[box] (d1) {Tomografia\\\texttt{cbct.dcm}};
+    \node[box, below=of d1] (d2) {Scanner\\\texttt{scan.stl}};
+    \node[box, right=1.5cm of d1] (ia) {IA Segmenta\\(Agente 26)};
+    \node[box, right=1.5cm of ia] (fem) {Malha Física\\(FEM)};
+    \node[box, below=of fem] (sim) {Mordida Virtual\\(Solver 300N)};
+    \node[box, left=1.5cm of sim] (ok) {\textbf{Plano Validado}};
+    
+    \draw[arrow] (d1) -- (ia);
+    \draw[arrow] (d2) -| (ia);
+    \draw[arrow] (ia) -- (fem);
+    \draw[arrow] (fem) -- (sim);
+    \draw[arrow] (sim) -- (ok);
+    \end{tikzpicture}
+\end{adjustbox}
+    \caption{Fluxograma paramétrico de construção sistêmica do Gêmeo Digital.}
+    \label{fig:hands-on}
+\end{figure}
+
+\subsection*{Implementação Prática Totalmente Reprodutível (Código Python)}
+Para que qualquer leitor — do nível zero ao doutorado — possa rodar o pipeline no próprio computador, estruturamos abaixo o \textit{script} Python completo para gerar, alinhar e testar biomecanicamente os modelos.
+
+\subsubsection*{Preparação do Ambiente de Execução}
+Abra o seu terminal de comandos (Prompt de Comando no Windows ou Terminal no Linux/macOS) e instale as dependências executando\footnote{O comando \texttt{pip} instala pacotes do ecossistema oficial do Python. \texttt{open3d} é uma biblioteca de ponta para processamento e manipulação de geometria 3D, e \texttt{numpy} gerencia matrizes matemáticas de alto desempenho.}:
+\begin{lstlisting}[style=bashstyle]
+pip install open3d numpy
+\end{lstlisting}
+
+Salve o código a seguir em um arquivo chamado \texttt{opencode\_pipeline.py} e execute-o com \texttt{python opencode\_pipeline.py}.
+
+\begin{lstlisting}[language=Python, caption={Pipeline OpenCode de Alinhamento e Análise Biomecânica Estocástica}, label={lst:pipeline_real}]
+import numpy as np
+import open3d as o3d
+import time
+
+def run_open_code_pipeline():
+    print("=== INICIANDO PIPELINE DE GEMEO DIGITAL (OPENCODE) ===")
+    
+    # 1. Geração de Geometria Sintética (Simula o Ingest de Dados)
+    # Cria o osso alveolar como um cilindro (Alvo)
+    print("Passo 1: Gerando o modelo ósseo (Target)...")
+    target_mesh = o3d.geometry.TriangleMesh.create_cylinder(radius=1.0, height=2.0)
+    target_mesh.paint_uniform_color([0.6, 0.6, 0.6]) # Pintar de cinza
+    
+    # Cria o implante/coroa como uma esfera (Origem)
+    print("Passo 2: Gerando o dente/implante (Source)...")
+    source_mesh = o3d.geometry.TriangleMesh.create_sphere(radius=0.5)
+    source_mesh.paint_uniform_color([0.2, 0.6, 0.8]) # Pintar de azul
+    
+    # Deslocamento espacial inicial (Simula o ruído de posicionamento)
+    trans_init = np.array([[1.0, 0.0, 0.0, 0.1],
+                           [0.0, 1.0, 0.0, 0.15],
+                           [0.0, 0.0, 1.0, 1.25],
+                           [0.0, 0.0, 0.0, 1.0]])
+    source_mesh.transform(trans_init)
+    
+    # 2. Alinhamento Digital via Algoritmo ICP (Iterative Closest Point)
+    print("\nPasso 3: Executando alinhamento de nuvens de pontos (ICP)...")
+    # Amostra uniformemente as superfícies para o cálculo de distância
+    source_pcd = source_mesh.sample_points_uniformly(number_of_points=3000)
+    target_pcd = target_mesh.sample_points_uniformly(number_of_points=3000)
+    
+    threshold = 0.5  # Raio máximo de busca de correspondência de pontos (mm)
+    trans_guess = np.identity(4)  # Matriz identidade inicial (sem rotação)
+    
+    t_start = time.time()
+    reg_p2p = o3d.pipelines.registration.registration_icp(
+        source_pcd, target_pcd, threshold, trans_guess,
+        o3d.pipelines.registration.TransformationEstimationPointToPoint()
+    )
+    t_end = time.time()
+    
+    print(f"Alinhamento ICP concluído em {t_end - t_start:.4f} segundos.")
+    print(f"Erro RMS de Alinhamento (Fidelidade Geométrica): {reg_p2p.inlier_rmse:.6f} mm")
+    print("Matriz de Transformação Óptica Otimizada (Alinhamento Espacial):")
+    print(reg_p2p.transformation)
+    
+    # 3. Simulação Biomecânica da Tensão (Cálculo de Tensão de von Mises Normal)
+    print("\nPasso 4: Executando simulador de forças oclusais...")
+    força_mastigatória_n = 300.0  # Carga fisiológica padrão de 300 Newtons
+    raio_implante_mm = 2.0        # Implante dentário padrão de 4mm de diâmetro (raio = 2mm)
+    área_contato_mm2 = np.pi * (raio_implante_mm ** 2)
+    
+    # Cálculo de Tensão Mecânica Normal: Sigma = Força / Área
+    tensão_normal_mpa = força_mastigatória_n / área_contato_mm2
+    
+    print(f"Força de mordida simulada: {força_mastigatória_n} N")
+    print(f"Área de contato estimada: {área_contato_mm2:.4f} mm2")
+    print(f"Tensão normal média na interface osso-implante: {tensão_normal_mpa:.2f} MPa")
+    
+    # Limite elástico de escoamento do osso cortical: ~130 MPa (Qualis A1)
+    limite_escoamento_osso = 130.0
+    fator_segurança = limite_escoamento_osso / tensão_normal_mpa
+    
+    print(f"Fator de segurança mecânico estimado: {fator_segurança:.2f}")
+    if fator_segurança > 1.5:
+        print("[APROVAÇÃO] A montagem biomecânica é segura para suporte de carga.")
+    else:
+        print("[ALERTA] Risco de reabsorção óssea perimplantar por fadiga mecânica.")
+
+if __name__ == "__main__":
+    run_open_code_pipeline()
+\end{lstlisting}

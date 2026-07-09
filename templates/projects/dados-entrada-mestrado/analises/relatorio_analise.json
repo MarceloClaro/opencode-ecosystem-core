@@ -1,0 +1,79 @@
+{
+  "metadados": {
+    "dataset": "Questoes Exames Pos-Graduacao",
+    "total_questoes": 150,
+    "seed": 42
+  },
+  "estatisticas": {
+    "total_exames": 9,
+    "total_areas": 22,
+    "questoes_por_exame": {
+      "ENA 2024": 30,
+      "ENA 2025": 30,
+      "ENA 2026": 30,
+      "EUF 2011/1": 10,
+      "EUF 2012/2": 10,
+      "EUF 2014-2": 10,
+      "EUF 2015/1": 10,
+      "EUF 2015/2": 10,
+      "EUF 2016/1": 10
+    },
+    "questoes_por_area": {
+      "Algebra": 17,
+      "Geometria Plana": 16,
+      "Mecânica Clássica": 12,
+      "Física Moderna": 12,
+      "Eletromagnetismo": 12,
+      "Mecânica Quântica": 12,
+      "Teoria dos Numeros": 8,
+      "Aritmetica": 8,
+      "Combinatoria": 8,
+      "Sequencias": 7,
+      "Algebra Linear": 6,
+      "Mecânica Estatística": 6,
+      "Termodinâmica": 6,
+      "Probabilidade": 4,
+      "Estatistica": 3,
+      "Geometria Espacial": 3,
+      "Trigonometria": 3,
+      "Logica": 3,
+      "Matematica Financeira": 1,
+      "Otimizacao": 1,
+      "Geometria": 1,
+      "Teoria dos Conjuntos": 1
+    }
+  },
+  "inferencia": {
+    "qui_quadrado_ena_area_raciocinio": {
+      "chi2": 377.99,
+      "p_valor": 0.0,
+      "gl": 165,
+      "significativo": true
+    }
+  },
+  "mca": {
+    "variancia_mca1": 0.0901,
+    "variancia_mca2": 0.0458
+  },
+  "clustering": {
+    "k_otimo": 6,
+    "cluster_sizes": {
+      "0": 33,
+      "1": 51,
+      "2": 20,
+      "3": 10,
+      "4": 16,
+      "5": 10
+    }
+  },
+  "figuras_geradas": [
+    "01_questoes_por_exame.png",
+    "02_top_areas.png",
+    "03_heatmap_exame_area.png",
+    "04_heatmap_area_raciocinio_ena.png",
+    "05_mca_raciocinio_area.png",
+    "06_top_raciocinios.png",
+    "07_pie_ena_euf.png",
+    "08_clusters.png"
+  ]
+}

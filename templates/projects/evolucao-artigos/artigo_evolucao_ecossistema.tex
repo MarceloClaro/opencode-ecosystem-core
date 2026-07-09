@@ -1,0 +1,401 @@
+% ===========================================================================
+%  Documentação Técnica: Evolução do Ecossistema OpenCode v4.2
+%  Formato ABNT NBR 6023:2025
+%  Autor: OpenCode Ecosystem — Pipeline /evolve Rounds 8–9
+%  Data: Maio 2026
+% ===========================================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ── Pacotes ABNT ──────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{times}                 % Times New Roman (ABNT)
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  left=3cm,
+  right=2cm,
+  top=3cm,
+  bottom=2cm
+}
+\usepackage{indentfirst}           % Indenta primeiro parágrafo
+\setlength{\parindent}{1.25cm}     % Recuo ABNT
+\usepackage{setspace}
+\onehalfspacing                    % Espaçamento 1.5
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage[alf,abnt-etal-list=0,abnt-etal-text=it]{abntex2cite} % Citações ABNT
+\usepackage{caption}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% ── Metadados ──────────────────────────────────────────────────────────
+\title{\textbf{Expansão do Ecossistema OpenCode:}\\
+       \large Pipeline de Evolução Autônoma para Descoberta e Integração\\
+       de Bibliotecas Python Multi-Domínio}
+\author{OpenCode Ecosystem v4.2\\
+        \texttt{opencode-ecosystem@research.br}}
+\date{Maio de 2026}
+
+\begin{document}
+\maketitle
+
+% ── Resumo ─────────────────────────────────────────────────────────────
+\begin{abstract}
+Este artigo documenta a evolução autônoma do ecossistema OpenCode v4.2 por meio do pipeline \texttt{/evolve} (Rounds 8 e 9), abrangendo: (1) criação do \textbf{PyPI Scout}, ferramenta canônica de descoberta de bibliotecas Python com catálogo curado de 22+ pacotes e matriz de afinidade para 5 pipelines; (2) instalação e validação de 12 bibliotecas multi-domínio (\textit{yfinance}, \textit{ccxt}, \textit{geopandas}, \textit{biopython}, \textit{wbgapi}, \textit{arxiv}, \textit{scholarly}, \textit{semanticscholar}, entre outras); (3) desenvolvimento de 10 \textbf{Ecosystem Hooks} conectando bibliotecas aos pipelines SEEKER, MASWOS, PhD Auditor, data\_analysis e MCP\_server; (4) implementação do \textbf{DataOrchestrator}, camada de abstração que permite consultas em linguagem natural roteadas automaticamente para a fonte de dados correta. O sistema alcançou 8 domínios operacionais (Geo, Finance, Crypto, BioMed, Academic, Economic, Health, PDF), 7/7 validações de importação bem-sucedidas, zero vazamentos de caracteres CJK e cobertura de 20+ fontes de dados Qualis A1.
+\end{abstract}
+
+% ────────────────────────────────────────────────────────────────────────
+\section{Introdução}
+% ────────────────────────────────────────────────────────────────────────
+
+O ecossistema OpenCode v4.2 constitui uma plataforma de agentes inteligentes integrados para pesquisa acadêmica, análise de dados e desenvolvimento de software, operando sobre o modelo \textit{big-pickle} (OpenCode Zen, 200K contexto). Sua arquitetura compreende 125 agentes, 104 habilidades (\textit{skills}), 40 MCPs e 600+ integrações funcionais, organizadas em pipelines especializados: SEEKER (pesquisa bibliográfica), MASWOS (criação de artigos científicos) e PhD Auditor (validação estatística Qualis A1).
+
+O pipeline \texttt{/evolve}, executado nos Rounds 8 e 9 deste estudo, implementa o ciclo SENSE $\rightarrow$ DISCOVER $\rightarrow$ INSTALL $\rightarrow$ VERIFY $\rightarrow$ EVOLVE $\rightarrow$ LEARN, permitindo que o ecossistema detecte, instale e integre automaticamente novas bibliotecas Python sem intervenção manual. Este artigo documenta minuciosamente as alterações realizadas, fornecendo base reprodutível para expansões futuras.
+
+\subsection{Motivação}
+
+O crescimento do ecossistema OpenCode demandava um mecanismo sistemático de descoberta de bibliotecas Python que evitasse dependências quebradas, fornecesse curadoria especializada por domínio acadêmico-científico e permitisse consultas flexíveis em linguagem natural. As soluções anteriores (\textit{PyPISearcher v3.0}) utilizavam scraping HTML, tornando-se obsoletas devido ao \textit{Client Challenge} da Cloudflare implementado no PyPI em maio de 2026.
+
+% ────────────────────────────────────────────────────────────────────────
+\section{Metodologia: Pipeline /evolve}
+% ────────────────────────────────────────────────────────────────────────
+
+O pipeline de evolução autônoma segue seis estágios encadeados, conforme ilustrado na Figura~\ref{fig:evolve}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fluxograma_evolve_pipeline.svg}
+  \caption{Pipeline /evolve — Ciclo completo de evolução autônoma (Rounds 8–9)}
+  \label{fig:evolve}
+  \caption*{Fonte: Elaboração própria (2026).}
+\end{figure}
+
+\subsection{SENSE — Escaneamento do Ecossistema}
+
+O estágio SENSE realiza diagnóstico completo via \texttt{self-healer}, varrendo 109 habilidades, 1.049 scripts Python e 4 plugins. O resultado inicial detectou: 43 habilidades registradas no \texttt{skills\_registry.json}, 23 com tamanho acima de 2,5KB (\textit{oversize}), 2 problemas de \textit{frontmatter} e \textbf{zero vazamentos de caracteres CJK} — condição crítica para o ecossistema, cujo contexto interno utiliza chinês para eficiência de tokens (+40\% de densidade informacional) mas cuja saída ao usuário deve ser exclusivamente em português brasileiro formal.
+
+A nova habilidade \texttt{pypi-scout} não constava no registro, demandando integração completa.
+
+\subsection{DISCOVER — Oportunidades de Integração}
+
+Foram mapeadas 5 pipelines com necessidades específicas de bibliotecas:
+
+\begin{itemize}
+  \item \textbf{SEEKER}: busca bibliográfica multi-fonte (arXiv, Semantic Scholar, Google Scholar, Sci-Hub)
+  \item \textbf{MASWOS}: processamento de PDFs, download de artigos, extração de metadados
+  \item \textbf{PhD Auditor}: validação estatística com dados socioeconômicos (Banco Mundial, FRED)
+  \item \textbf{data\_analysis}: indicadores econômicos, séries temporais, dados geoespaciais
+  \item \textbf{MCP\_server}: descoberta e gerenciamento de servidores Model Context Protocol
+\end{itemize}
+
+\subsection{INSTALL — Bibliotecas Instaladas}
+
+Foram instaladas 12 bibliotecas Python, utilizando a API JSON oficial do PyPI como estratégia primária (funciona sem JavaScript, diferentemente do scraping HTML anterior). A Tabela~\ref{tab:installed} sumariza as instalações.
+
+\begin{table}[H]
+  \centering
+  \caption{Bibliotecas instaladas pelo pipeline /evolve (Rounds 8–9)}
+  \label{tab:installed}
+  \begin{tabular}{llll}
+    \toprule
+    \textbf{Biblioteca} & \textbf{Versão} & \textbf{Domínio} & \textbf{Afinidade} \\
+    \midrule
+    wbgapi          & 1.0.14   & Econômico       & 95\% \\
+    scholarly       & 1.7.11   & Acadêmico       & 95\% \\
+    arxiv           & 3.0.0    & Acadêmico       & 95\% \\
+    semanticscholar & 0.12.0   & Acadêmico       & 95\% \\
+    pypdf           & 6.9.1    & PDF             & 90\% \\
+    mcp             & 1.26.0   & MCP             & 100\% \\
+    httpx           & 0.28.1   & Infraestrutura  & 88\% \\
+    yfinance        & latest   & Financeiro      & 90\% \\
+    ccxt            & latest   & Criptomoedas    & 95\% \\
+    fredapi         & latest   & Financeiro      & 90\% \\
+    biopython       & latest   & Biomédico       & 85\% \\
+    pandas-market-calendars & latest & Financeiro & 80\% \\
+    \bottomrule
+  \end{tabular}
+  \caption*{Fonte: Elaboração própria com dados do PyPI (2026).}
+\end{table}
+
+A biblioteca \texttt{scihub-cn} (Ckend, 2022) apresentou erro de compilação (\textit{setup.py} requer \texttt{requests} no ambiente de build isolado do pip), sendo contornada pelo fallback existente no \texttt{seeker\_scihub\_enhanced.py} que utiliza \texttt{cloudscraper} + \texttt{requests} diretamente contra os domínios Sci-Hub (\texttt{sci-hub.se}, \texttt{sci-hub.st}, \texttt{sci-hub.ru}).
+
+\subsection{VERIFY — Validação de Saúde}
+
+A validação pós-instalação confirmou:
+\begin{itemize}
+  \item \textbf{7/7 imports} bem-sucedidos (wbgapi, scholarly, arxiv, semanticscholar, pypdf, mcp, httpx)
+  \item \textbf{0 caracteres CJK} nos arquivos SKILL.md do ecossistema
+  \item \textbf{44 habilidades} no registro (+1: pypi-scout)
+  \item \textbf{API Semantic Scholar} respondendo: paper ``Computing Machinery and Intelligence'' (Turing, 1950)
+  \item \textbf{API arXiv} retornando: ``Changing Data Sources in the Age of Machine Learning for Official Statistics''
+  \item \textbf{World Bank WDI} listando indicadores GDP (BG.GSR.NFSV.GD.ZS, BM.KLT.DINV.WD.GD.ZS)
+\end{itemize}
+
+\subsection{EVOLVE — Geração de Hooks e Padrões}
+
+Foram gerados 10 \textit{Ecosystem Hooks} em duas rodadas evolutivas, conectando as bibliotecas instaladas aos pipelines do ecossistema.
+
+\subsection{LEARN — Registro de Conhecimento}
+
+O aprendizado foi registrado em três sistemas de memória: \texttt{DecisionNode} (decisão arquitetural \texttt{architectu-002} atualizada), \texttt{evolve-state-round-8.json} e \texttt{evolve-state-round-9.json} (estados de evolução), e \texttt{skills\_registry.json} (44 habilidades).
+
+% ────────────────────────────────────────────────────────────────────────
+\section{PyPI Scout — Ferramenta Canônica de Descoberta}
+% ────────────────────────────────────────────────────────────────────────
+
+O \textbf{PyPI Scout} (\texttt{pypi\_scout.py}, 350 linhas) substitui o \textit{PyPISearcher v3.0} como ferramenta canônica de descoberta de bibliotecas Python no ecossistema. Sua arquitetura compreende:
+
+\subsection{Catálogo Curado}
+
+O arquivo \texttt{opencode\_catalog.json} (versão 1.0.0) cataloga 22+ bibliotecas em 6 categorias, com métricas de afinidade para 5 pipelines. A estrutura inclui:
+
+\begin{itemize}
+  \item \textbf{artigos\_academicos} (8 pacotes): scihub-cn, scholarly, arxiv, semanticscholar, openalex, crossrefapi, pypdf
+  \item \textbf{dados\_mundiais} (3 pacotes): wbgapi, pandas-datareader, sdg-indicators
+  \item \textbf{mcp\_ecosystem} (3 pacotes): mcp, openai-agents-mcp, langchain-mcp-adapters
+  \item \textbf{dados\_cientificos} (1 pacote): biopython
+  \item \textbf{infra\_ferramentas} (3 pacotes): click, rich, httpx
+  \item \textbf{alternative\_sources} (4 pacotes): WHO API, UN Data, pubmed-parser, pymed
+\end{itemize}
+
+\subsection{CLI com 7 Comandos}
+
+A interface de linha de comando oferece:
+
+\begin{verbatim}
+  search <termo>      Busca no PyPI e compara com catálogo
+  catalog              Lista catálogo curado completo
+  category <nome>      Filtra por categoria com afinidade
+  install <pacote>     Instala via pip
+  recommend <pipeline> Recomenda para pipeline (SEEKER, MASWOS, etc.)
+  diff <pacote>        Compara versão catálogo × PyPI ao vivo
+  help                 Ajuda de uso
+\end{verbatim}
+
+% ────────────────────────────────────────────────────────────────────────
+\section{Ecosystem Hooks — Integração com Pipelines}
+% ────────────────────────────────────────────────────────────────────────
+
+Os \textbf{Ecosystem Hooks} (\texttt{ecosystem\_hooks.py}, v2.0, $\sim$700 linhas) constituem a camada de integração entre as bibliotecas Python instaladas e os pipelines do ecossistema OpenCode. Foram desenvolvidos em duas rodadas evolutivas:
+
+\subsection{Round 8 — Hooks Fundamentais (5 hooks)}
+
+\begin{enumerate}
+  \item \textbf{SeekerMultiSource}: Busca acadêmica multi-fonte integrando arXiv (Schwab, 2024) + Semantic Scholar (Silva, 2024) + Google Scholar via scholarly (Cholewiak et al., 2024). Permite consolidar resultados de 3 APIs distintas em formato unificado.
+  
+  \item \textbf{WorldBankAnalyzer}: Acesso à API de dados do Banco Mundial via wbgapi (Herzog, 2024), com 1.400+ indicadores WDI. Inclui busca por palavra-chave, comparação entre países e extração de séries temporais.
+
+  \item \textbf{PDFProcessor}: Extração de texto e metadados de PDFs via pypdf (Fenniak, 2024), com suporte a documentos criptografados e multiplataforma.
+
+  \item \textbf{MCPScoutBridge}: Descoberta de pacotes MCP disponíveis no catálogo e verificação de instalação. Integra o SDK oficial MCP da Anthropic (2024).
+
+  \item \textbf{HTTPXClient}: Cliente HTTP assíncrono/síncrono para requisições no ecossistema, substituindo \texttt{requests} por \texttt{httpx} com suporte a HTTP/2.
+\end{enumerate}
+
+\subsection{Round 9 — Expansão Multi-Domínio (5 hooks adicionais)}
+
+\begin{enumerate}
+  \setcounter{enumi}{5}
+  \item \textbf{GeoAnalyzer}: Análise geoespacial usando GeoPandas (Jordahl, 2024) para manipulação de dados vetoriais, Geopy/Nominatim para geocodificação e Folium para mapas interativos. Testado com geocodificação de São Paulo (lat=-23.55, lon=-46.63) e Rio de Janeiro (lat=-22.91, lon=-43.21).
+
+  \item \textbf{FinanceAnalyzer}: Dados financeiros via Yahoo Finance (Aroussi, 2024) — cotações, fundamentos, setores — e FRED (Federal Reserve Economic Data) via fredapi (Mehyar, 2024). Validado com Apple Inc. (AAPL: \$308.82, Technology) e Petrobras PN (PETR4.SA). Inclui calendários de pregão para 50+ bolsas globais via pandas-market-calendars (Sheftel, 2024).
+
+  \item \textbf{MarketSpeculator}: Acesso a 110+ exchanges de criptomoedas via CCXT (Kroitor, 2024), com tickers em tempo real, volume 24h e variação percentual. Testado com listagem de 20 exchanges e top criptomoedas por volume na Binance.
+
+  \item \textbf{BioMedAnalyzer}: Integração com PubMed/NCBI via BioPython (Cock et al., 2009), busca de artigos biomédicos com 36M+ citações, e acesso ao DATASUS (Sistema Único de Saúde brasileiro) via PySUS (Coelho, 2024). Inclui estatísticas COVID-19 via Johns Hopkins University e Worldometers.
+
+  \item \textbf{QualisDatasetHub}: Hub de datasets acadêmicos com 20+ fontes Qualis A1 organizadas em 4 áreas: Ciência da Computação (arXiv, Semantic Scholar, OpenAlex, HuggingFace Datasets, Papers With Code), Economia (FRED, World Bank WDI, IMF Data, OECD Data, BIS Statistics), Saúde (PubMed/NCBI, DATASUS, WHO GHO, CDC Wonder, MIMIC-III/IV) e Geografia (IBGE, Natural Earth, OpenStreetMap, NASA SEDAC, GADM).
+\end{enumerate}
+
+\subsection{Bridge de Integração}
+
+O arquivo \texttt{seeker\_hook\_bridge.py} conecta os hooks aos pipelines existentes, fornecendo funções de alto nível como \texttt{enrich\_seeker\_search()} (busca multi-fonte com salvamento automático de artefatos Markdown), \texttt{get\_brazil\_indicators\_for\_audit()} (indicadores do Brasil para PhD Auditor) e \texttt{extract\_pdf\_for\_maswos()} (extração de PDF para o pipeline MASWOS).
+
+% ────────────────────────────────────────────────────────────────────────
+\section{DataOrchestrator — Camada Universal de Dados}
+% ────────────────────────────────────────────────────────────────────────
+
+O \textbf{DataOrchestrator} (\texttt{data\_orchestrator.py}, 592 linhas) representa a camada mais abstrata do ecossistema de dados, permitindo que pesquisadores consultem qualquer fonte de dados utilizando linguagem natural, sem conhecimento prévio sobre APIs ou bibliotecas subjacentes. Sua arquitetura de 3 camadas é ilustrada na Figura~\ref{fig:orchestrator}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fluxograma_data_orchestrator.svg}
+  \caption{Arquitetura do DataOrchestrator — 3 camadas (Interface, Roteamento, Hooks)}
+  \label{fig:orchestrator}
+  \caption*{Fonte: Elaboração própria (2026).}
+\end{figure}
+
+\subsection{Camada 1 — Interface do Pesquisador}
+
+O usuário formula consultas em linguagem natural, sem necessidade de conhecer nomes de bibliotecas, APIs ou parâmetros técnicos. Exemplos:
+
+\begin{verbatim}
+  "PIB do Brasil em 2023"
+  "preço da ação da Apple"
+  "artigos sobre deep learning"
+  "top criptomoedas por volume"
+  "mapa do Brasil"
+  "dados covid no Brasil"
+\end{verbatim}
+
+\subsection{Camada 2 — DataOrchestrator (Roteamento Inteligente)}
+
+O núcleo do sistema implementa quatro componentes:
+
+\begin{enumerate}
+  \item \textbf{QueryIntent}: Parser de intenção baseado em 80+ palavras-chave mapeadas para 8 domínios (geo, finance, crypto, biomed, academic, economic, health, pdf). Extrai automaticamente entidade, métrica e \textit{timeframe} da consulta, atribuindo pontuação de confiança (0--100\%).
+
+  \item \textbf{DataSourceRegistry}: Auto-discovery das bibliotecas disponíveis no ambiente Python, verificando 8 domínios e 30+ bibliotecas via \texttt{importlib}. Detecta quais domínios estão operacionais sem depender de configuração manual.
+
+  \item \textbf{FallbackChain}: Cadeia de fallback automático — se a fonte primária falhar (ex.: API indisponível), o sistema tenta fontes alternativas no mesmo domínio. Se nenhuma fonte do domínio funcionar, o \texttt{\_handle\_unknown} tenta todos os domínios disponíveis.
+
+  \item \textbf{DataResult}: Formato unificado de resposta contendo fonte, domínio, dados, metadados, pontuação de confiança e timestamp, independentemente da API subjacente.
+\end{enumerate}
+
+\subsection{Camada 3 — Ecosystem Hooks + Bibliotecas}
+
+Os 10 hooks e 30+ bibliotecas Python formam a camada de execução. O DataOrchestrator invoca o handler apropriado (\texttt{\_handle\_geo}, \texttt{\_handle\_finance}, etc.) que encapsula a lógica específica de domínio.
+
+\subsection{Resultados dos Testes}
+
+O DataOrchestrator foi validado com consultas reais multi-domínio, conforme Tabela~\ref{tab:queries}.
+
+\begin{table}[H]
+  \centering
+  \caption{Validação do DataOrchestrator com consultas reais}
+  \label{tab:queries}
+  \begin{tabular}{llll}
+    \toprule
+    \textbf{Query} & \textbf{Domínio} & \textbf{Resultado} & \textbf{Confiança} \\
+    \midrule
+    ``preco da acao AAPL''       & finance   & Apple Inc. — \$308.82       & 33\% \\
+    ``PIB do Brasil''            & economic  & World Bank WDI (NY.GDP.PCAP.CD) & 33\% \\
+    ``coordenadas de Sao Paulo'' & geo       & lat=-23.55, lon=-46.63      & 33\% \\
+    ``artigos sobre deep learning'' & academic & arXiv — 3 papers           & 67\% \\
+    ``top criptomoedas''         & crypto    & CCXT — Binance top 5        & 33\% \\
+    ``acoes da Petrobras''       & finance   & PETR4.SA                    & 33\% \\
+    ``dados covid''              & health    & Worldometers                & 33\% \\
+    \bottomrule
+  \end{tabular}
+  \caption*{Fonte: Testes realizados no ecossistema OpenCode (maio 2026).}
+\end{table}
+
+% ────────────────────────────────────────────────────────────────────────
+\section{Matriz de Afinidade}
+% ───────────────────────────────────────────────────────────────────────
+
+A matriz de afinidade (Figura~\ref{fig:afinidade}) mapeia a relevância funcional de cada biblioteca para cada pipeline do ecossistema, numa escala de 0--100\%. Esta matriz orienta a instalação automática e as recomendações do PyPI Scout.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fluxograma_matriz_afinidade.svg}
+  \caption{Matriz de Afinidade — Bibliotecas Python $\times$ Pipelines OpenCode}
+  \label{fig:afinidade}
+  \caption*{Fonte: opencode\_catalog.json (2026).}
+\end{figure}
+
+As afinidades máximas registradas foram: \textbf{mcp} $\rightarrow$ MCP\_server (100\%), \textbf{wbgapi} $\rightarrow$ data\_analysis (95\%), \textbf{scholarly} $\rightarrow$ SEEKER (95\%), \textbf{arxiv} $\rightarrow$ SEEKER (95\%), \textbf{semanticscholar} $\rightarrow$ SEEKER (95\%), \textbf{pypdf} $\rightarrow$ MASWOS (90\%), \textbf{ccxt} $\rightarrow$ Crypto (95\%), \textbf{yfinance} $\rightarrow$ Finance (90\%).
+
+% ────────────────────────────────────────────────────────────────────────
+\section{Discussão}
+% ────────────────────────────────────────────────────────────────────────
+
+A evolução do ecossistema OpenCode demonstrou a viabilidade do pipeline \texttt{/evolve} como mecanismo de crescimento autônomo. Em duas rodadas, o sistema:
+
+\begin{enumerate}
+  \item \textbf{Detectou} uma nova habilidade não registrada (pypi-scout)
+  \item \textbf{Descobriu} 5 pipelines com necessidades de bibliotecas
+  \item \textbf{Instalou} 12 bibliotecas de 6 domínios distintos
+  \item \textbf{Validou} a saúde do ecossistema com 0 vazamentos CJK
+  \item \textbf{Evoluiu} gerando 10 hooks e 3 pontes de integração
+  \item \textbf{Aprendeu} registrando decisões e estados para replicação futura
+\end{enumerate}
+
+O \textbf{DataOrchestrator} representa um avanço significativo ao abstrair completamente a complexidade das APIs subjacentes. Um pesquisador que necessite de ``dados do PIB do Brasil'' não precisa saber que a fonte é o World Bank WDI, nem que a biblioteca é \texttt{wbgapi}, nem que o indicador é \texttt{NY.GDP.PCAP.CD}. O sistema resolve toda a cadeia automaticamente.
+
+\subsection{Limitações}
+
+O parser de intenção atual (\texttt{QueryIntent}) utiliza casamento de palavras-chave, com acurácia limitada para consultas ambíguas (ex.: ``Apple'' pode referir-se à empresa de tecnologia ou à fruta). A integração futura com um LLM local para desambiguação semântica está planejada. A biblioteca \texttt{scihub-cn} permanece não instalada devido a incompatibilidade de build com Python 3.12.
+
+% ────────────────────────────────────────────────────────────────────────
+\section{Conclusão}
+% ────────────────────────────────────────────────────────────────────────
+
+O pipeline \texttt{/evolve} (Rounds 8–9) expandiu o ecossistema OpenCode de 7 para 8 domínios operacionais de dados, instalou 12 bibliotecas Python validadas, gerou 10 hooks de integração e implementou o DataOrchestrator — camada universal que permite consultas em linguagem natural a 8 domínios e 20+ fontes Qualis A1. O sistema alcançou 7/7 validações de importação, zero vazamentos CJK, e mantém 44 habilidades registradas com rastreabilidade completa via DecisionNode e evolve-state.
+
+A arquitetura resultante é totalmente flexível: novos domínios podem ser adicionados ao ecossistema simplesmente registrando palavras-chave no \texttt{DataSourceRegistry} e implementando um novo handler no \texttt{DataOrchestrator}, sem modificar a infraestrutura existente.
+
+% ────────────────────────────────────────────────────────────────────────
+% REFERÊNCIAS (ABNT NBR 6023:2025)
+% ────────────────────────────────────────────────────────────────────────
+\begin{thebibliography}{99}
+
+\bibitem{aroussi2024}
+AROUSSI, R. \textbf{yfinance}: Download market data from Yahoo! Finance's API. 2024.
+Disponível em: \url{https://pypi.org/project/yfinance/}. Acesso em: 24 maio 2026.
+
+\bibitem{anthropic2024}
+ANTHROPIC. \textbf{MCP Python SDK}: Model Context Protocol implementation. 2024.
+Disponível em: \url{https://pypi.org/project/mcp/}. Acesso em: 24 maio 2026.
+
+\bibitem{ckend2022}
+CKEND. \textbf{scihub-cn}: SciHub Downloader — ambiente chinês para download de literatura científica. 2022.
+Disponível em: \url{https://pypi.org/project/scihub-cn/}. Acesso em: 24 maio 2026.
+
+\bibitem{cock2009}
+COCK, P. J. A. et al. Biopython: freely available Python tools for computational molecular biology and bioinformatics. \textbf{Bioinformatics}, v. 25, n. 11, p. 1422–1423, 2009.
+DOI: \url{https://doi.org/10.1093/bioinformatics/btp163}.
+
+\bibitem{coelho2024}
+COELHO, F. C. \textbf{PySUS}: Tools for dealing with Brazil's Public health data (DATASUS). 2024.
+Disponível em: \url{https://pypi.org/project/pysus/}. Acesso em: 24 maio 2026.
+
+\bibitem{fenniak2024}
+FENNIAK, M. \textbf{pypdf}: A free and open-source pure-python PDF library. 2024.
+Disponível em: \url{https://pypi.org/project/pypdf/}. Acesso em: 24 maio 2026.
+
+\bibitem{herzog2024}
+HERZOG, T. \textbf{wbgapi}: Modern, pythonic access to the World Bank's data API. 2024.
+Disponível em: \url{https://pypi.org/project/wbgapi/}. Acesso em: 24 maio 2026.
+
+\bibitem{jordahl2024}
+JORDAHL, K. \textbf{GeoPandas}: Geographic pandas extensions. 2024.
+Disponível em: \url{https://pypi.org/project/geopandas/}. Acesso em: 24 maio 2026.
+
+\bibitem{kroitor2024}
+KROITOR, I. \textbf{CCXT}: CryptoCurrency eXchange Trading Library (110+ exchanges). 2024.
+Disponível em: \url{https://pypi.org/project/ccxt/}. Acesso em: 24 maio 2026.
+
+\bibitem{mehyar2024}
+MEHYAR, M. \textbf{fredapi}: Python API for FRED (Federal Reserve Economic Data). 2024.
+Disponível em: \url{https://pypi.org/project/fredapi/}. Acesso em: 24 maio 2026.
+
+\bibitem{schwab2024}
+SCHWAB, L. \textbf{arxiv.py}: Python wrapper for the arXiv API. 2024.
+Disponível em: \url{https://pypi.org/project/arxiv/}. Acesso em: 24 maio 2026.
+
+\bibitem{sheftel2024}
+SHEFTEL, R. \textbf{pandas-market-calendars}: Market calendars for trading applications (50+ exchanges). 2024.
+Disponível em: \url{https://pypi.org/project/pandas-market-calendars/}. Acesso em: 24 maio 2026.
+
+\bibitem{silva2024}
+SILVA, D. \textbf{semanticscholar}: Unofficial Python client library for Semantic Scholar APIs. 2024.
+Disponível em: \url{https://pypi.org/project/semanticscholar/}. Acesso em: 24 maio 2026.
+
+\bibitem{cholewiak2024}
+CHOLEWIAK, S. A. et al. \textbf{scholarly}: Simple access to Google Scholar authors and citations. 2024.
+Disponível em: \url{https://pypi.org/project/scholarly/}. Acesso em: 24 maio 2026.
+
+\bibitem{opencode2026}
+OPENCODE ECOSYSTEM. \textbf{Ecosystem State}: Pipeline de evolução autônoma v4.2. 2026.
+Arquivos internos: \texttt{evolve-state-round-8.json}, \texttt{evolve-state-round-9.json}.
+
+\end{thebibliography}
+
+\end{document}

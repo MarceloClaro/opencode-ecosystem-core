@@ -1,0 +1,51 @@
+\chapter{Citações}
+
+\thispagestyle{empty} 
+
+Este modelo usa BibTeX para configurar as referências. O arquivo main.bib contém várias entradas de bibliografia como modelos \cite{article,book,booklet,inbook}. Esses modelos podem ser utilizados para incluir outras entradas e citá-las por meio do seguinte comando:
+\begin{verbatim}
+\cite{nome_da_entrada}
+\end{verbatim}
+
+Por exemplo , a entrada
+\verbatimfont{\small}
+\begin{verbatim}
+@article{greenwade93,
+    author  = "George D. Greenwade",
+    title   = "The {C}omprehensive {T}ex {A}rchive {N}etwork ({CTAN})",
+    year    = "1993",
+    journal = "TUGBoat",
+    volume  = "14",
+    number  = "3",
+    pages   = "342--351"
+}
+\end{verbatim}
+\verbatimfont{\normalfont}
+pode ser citada no texto com
+\begin{verbatim}
+\cite{greenwade93}
+\end{verbatim}
+e a citação apareceria assim: \cite{greenwade93}.
+
+Para fazer uma citação direta no formato ABNT, criamos o ambiente \verb|citacao|, que é uma simples generalização do ambiente \verb|quotation| (habilitado por padrão) com um campo específico de autor. Veja o exemplo a seguir:
+\begin{verbatim}
+\begin{citacao}{Carl Sagan}
+    Alegações extraordinárias exigem evidências extraordinárias.
+\end{citacao}
+\end{verbatim}
+Esse código gera uma citação assim:
+\begin{citacao}{Carl Sagan}
+    Alegações extraordinárias exigem evidências extraordinárias.
+\end{citacao}
+O comando \verb|\cite{...}| pode ser usado como indicação do autor:
+\begin{verbatim}
+\begin{citacao}{\cite{greenwade93}}
+TEX is a typesetting program designed for high-quality composition of material that contains a lot of mathematical and technical expressions. It has been adopted by many authors and publishers who generate technical books and papers. It was created by Professor Donald E. Knuth of Stanford University, originally for preparation of his book series ``The Art of Computer Programming''. TEX has been made freely available by Knuth.
+\end{citacao}
+\end{verbatim}
+Naturalmente, a referência \verb|grennwade93| deve estar definida no arquivo BibTeX (aqui, \verb|main.bib|). Confira o resultado:
+\begin{citacao}{\cite{greenwade93}}
+TEX is a typesetting program designed for high-quality composition of material that contains a lot of mathematical and technical expressions. It has been adopted by many authors and publishers who generate technical books and papers. It was created by Professor Donald E. Knuth of Stanford University, originally for preparation of his book series ``The Art of Computer Programming''. TEX has been made freely available by Knuth.
+\end{citacao}
+
+

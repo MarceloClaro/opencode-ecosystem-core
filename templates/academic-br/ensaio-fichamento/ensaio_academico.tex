@@ -1,0 +1,110 @@
+% =============================================================================
+% ENSAIO ACADÊMICO — MODELO ABNT
+% =============================================================================
+% Características do gênero ensaio:
+%   - Tom autoral e argumentativo
+%   - Base teórica (não é opinião pessoal)
+%   - Reflexão crítica sobre um tema
+%   - Estrutura livre mas com introdução, desenvolvimento e conclusão
+%   - Indicação de 5-15 referências (dependendo da profundidade)
+% =============================================================================
+\documentclass[
+  12pt,
+  a4paper,
+  brazilian
+]{article}
+
+% --- Pacotes ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian,portuges]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[alf]{abntex2cite}
+\usepackage{abntex2abrev}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+% --- Margens ABNT ---
+\geometry{
+  a4paper,
+  left=3cm,
+  top=3cm,
+  right=2cm,
+  bottom=2cm
+}
+
+% --- Espaçamento 1,5 ---
+\onehalfspacing
+
+% --- Citação longa recuada ---
+% Usar o ambiente \begin{citacao} ... \end{citacao}
+
+% --- Metadados ---
+\hypersetup{
+  pdfauthor={Nome do Autor},
+  pdftitle={Título do Ensaio},
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black
+}
+
+\title{Título do Ensaio: Subtítulo (se houver)}
+\author{Nome Completo do Autor \\ \small{Instituição} \\ \small{e-mail}}
+\date{2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Introdução}
+
+O ensaio acadêmico se distingue do artigo científico por seu caráter mais
+ensalístico e autoral, sem exigir coleta de dados primários ou aprovação
+em comitê de ética. Exige, contudo, rigor teórico, consistência
+argumentativa e domínio da literatura pertinente.
+
+A introdução deve apresentar o tema, sua relevância e a tese central que o
+ensaio defenderá. Deve conter também indicação da estrutura do texto.
+
+\section{Desenvolvimento — Primeiro Movimento Argumentativo}
+
+Desenvolvimento do primeiro núcleo argumentativo. Fundamentar com citações
+diretas e indiretas da literatura de referência.
+
+Segundo \cite{autor2021}, a argumentação deve ser construída com base em
+evidências teóricas sólidas.
+
+\subsection{Primeiro Subtema}
+
+Aprofundamento do aspecto específico dentro do primeiro movimento.
+
+\subsection{Segundo Subtema}
+
+Continuação com eventual contraponto ou nuance.
+
+\section{Desenvolvimento — Segundo Movimento Argumentativo}
+
+Estabelecimento da relação entre o primeiro argumento e um aspecto
+complementar ou antitético.
+
+\section{Desenvolvimento — Síntese e Proposição}
+
+Articulação dos argumentos anteriores em direção à tese central do ensaio.
+Apresentação da posição crítica do autor.
+
+\section{Considerações Finais}
+
+Retomada da tese, síntese dos argumentos, implicações e questões abertas
+para reflexão futura. Diferentemente da conclusão de um artigo, as
+considerações finais do ensaio podem ser propositivamente inconclusivas,
+convidando ao debate.
+
+\section*{Referências}
+
+\bibliographystyle{abntex2-alf}
+\bibliography{ensaio_modelo}
+
+\end{document}

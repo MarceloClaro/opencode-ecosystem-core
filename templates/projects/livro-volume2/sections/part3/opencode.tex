@@ -1,0 +1,935 @@
+% =============================================================================
+% CAPÍTULO 9: Orquestração de Pipelines de Validação no OpenCode
+% Volume 2 — Guia prático de instalação, configuração e execução
+%            de pipelines TDD/SDD com o OpenCode Ecosystem
+% =============================================================================
+\destaque{Nível-alvo N2 — Pesquisa Reprodutível: instale, configure e opere
+pipelines completos de validação de Gêmeos Digitais Periodontais usando
+agentes MCP, suítes TDD e integração contínua no OpenCode Ecosystem.}
+\label{ch:opencode}
+% Seções:
+%   9.1  - Instalação e configuração do ambiente OpenCode
+%   9.2  - Agentes MCP: catálogo e funções no SUS-Twin
+%   9.3  - Orquestração de agentes de validação
+%   9.4  - Execução de TDD/SDD no pipeline SUS-Twin
+%   9.5  - Pipeline CI/CD para validação contínua
+%   9.6  - Badge de validação e relatórios
+%   9.7  - Exercícios práticos
+
+% =============================================================================
+\section{Instalação e Configuração do Ambiente OpenCode}
+\label{sec:opencode-instalacao}
+
+O OpenCode Ecosystem\footnote{Ecossistema \textit{open-source} de orquestração
+multiagente composto por mais de 600 componentes validados, incluindo agentes
+de inteligência artificial, servidores MCP, motores de raciocínio formal e
+pipelines de validação acadêmica.} é a plataforma que materializa a
+orquestração de todos os pipelines de validação do Framework SUS-Twin. Antes
+de executar qualquer validação, é necessário preparar o ambiente computacional.
+
+\subsection{Pré-requisitos de infraestrutura}
+
+A tabela a seguir consolida os requisitos mínimos e recomendados para executar
+o ecossistema em cenários de pesquisa reprodutível:
+
+\begin{table}[ht]
+\centering
+\caption{Pré-requisitos de infraestrutura para o OpenCode Ecosystem}
+\label{tab:opencode-requisitos}
+\begin{tabular}{LCC}
+\toprule
+\thead{Componente} & \thead{Mínimo} & \thead{Recomendado} \\
+\midrule
+Sistema operacional & Windows 10 / Ubuntu 22.04 & Windows 11 / Ubuntu 24.04 \\
+Processador & 4 núcleos, 2,5~GHz & 8 núcleos, 3,5~GHz \\
+Memória RAM & 8~GB & 32~GB \\
+Armazenamento & 20~GB SSD & 100~GB NVMe \\
+Python & 3.10 & 3.12 ou 3.13 \\
+Node.js & 18 LTS & 22 LTS \\
+Git & 2.30 & 2.45 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Pipeline de instalação}
+
+O OpenCode CLI\footnote{Interface de linha de comando que gerencia a instalação,
+atualização e orquestração de todos os componentes do ecossistema.} é o ponto
+de entrada único. A instalação segue três etapas:\footnote{Execute cada bloco
+em um terminal separado ou sequencialmente, aguardando a conclusão de cada
+etapa antes de prosseguir.}
+
+\begin{lstlisting}[language=bash, caption={Instalação completa do OpenCode Ecosystem},
+label={lst:opencode-install}, style=bashstyle]
+# Etapa 1: Instalar o OpenCode CLI via npm
+npm install -g @opencode/cli
+
+# Etapa 2: Verificar a instalação
+opencode --version
+# Saída esperada: v1.14.x (ou superior)
+
+# Etapa 3: Inicializar o ecossistema no diretório de trabalho
+cd projetos/sus-twin-validador
+opencode init --ecosystem full
+
+# Saída esperada:
+#  [OK] OpenCode Ecosystem inicializado
+#  [OK] 46 MCP servers configurados
+#  [OK] 227 skills catalogadas
+#  [OK] 128 agentes registrados
+\end{lstlisting}
+
+\subsection{Arquivo de configuração central: \texttt{opencode.json}}
+
+Todo o comportamento do ecossistema é governado por um único arquivo JSON
+na raiz do projeto. O \autoref{lst:opencode-json} mostra a configuração
+mínima necessária para o pipeline SUS-Twin:
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize, caption={Configuração mínima do OpenCode para validação SUS-Twin},
+label={lst:opencode-json}]
+{
+  "$schema": "https://opencode.ai/schemas/v1.14/opencode.json",
+  "version": "1.14",
+  "ecosystem": {
+    "name": "sus-twin-validador",
+    "mode": "validation"
+  },
+  "mcp": {
+    "servers": [
+      "filesystem", "code-runner", "sequential-thinking",
+      "websearch",  "sqlite",       "github",
+      "pdf",        "scihub",       "eslint"
+    ]
+  },
+  "agents": {
+    "autoevolve":  { "enabled": true,  "interval": "daily" },
+    "code-reviewer": { "enabled": true, "strictness": "high" },
+    "test-engineer": { "enabled": true, "coverage": 90 },
+    "quantum-nexus": { "enabled": false }
+  },
+  "tdd": {
+    "suites_path": "./tdd/",
+    "auto_validate_on_commit": true,
+    "required_passed_ratio": 1.0
+  }
+}
+\end{lstlisting}
+
+\begin{highlight}
+\textbf{Dica:} após editar o \texttt{opencode.json}, execute
+\texttt{opencode validate --config} para verificar a integridade do arquivo
+antes de iniciar os pipelines.
+\end{highlight}
+
+
+% =============================================================================
+\section{Agentes MCP: Catálogo e Funções no SUS-Twin}
+\label{sec:opencode-mcp}
+
+O \textbf{MCP} (Model Context Protocol)\footnote{Protocolo padronizado que
+permite que agentes de inteligência artificial se conectem a ferramentas e
+fontes de dados externas de forma segura e estruturada, similar a um
+\textit{plug-and-play} de serviços.} é o barramento de integração do
+ecossistema. Cada servidor MCP expõe um conjunto de ferramentas que os agentes
+consomem sob demanda. No contexto do SUS-Twin, os seguintes MCPs são
+essenciais:
+
+\begin{table}[ht]
+\centering
+\caption{Agentes MCP essenciais e suas funções no pipeline SUS-Twin}
+\label{tab:opencode-mcp-sustwin}
+\begin{tabular}{LLL}
+\toprule
+\thead{MCP / Agente} & \thead{Função no SUS-Twin} & \thead{Exemplo de uso} \\
+\midrule
+\texttt{filesystem} & Gerencia arquivos de configuração
+  e resultados & Ler \texttt{objetivos.json} \\
+\texttt{code-runner} & Executa scripts Python isolados
+  em sandbox\footnotemark & Rodar \texttt{tdd\_validate.py} \\
+\texttt{sequential-thinking} & Mantém contexto de raciocínio
+  longitudinal do paciente & Coerência entre exames
+  consecutivos \\
+\texttt{websearch} & Busca evidências científicas
+  em tempo real & Validar diretrizes clínicas
+  do SUS \\
+\texttt{sqlite} & Armazena metadados dos pipelines
+  e resultados históricos & Histórico de execuções
+  TDD \\
+\texttt{github} & Versiona código, gerencia
+  pull requests e CI/CD & Gatilho de validação
+  pré-commit \\
+\texttt{pdf} & Gera relatórios de validação
+  e conformidade & Relatório SaMD
+  para ANVISA \\
+\texttt{scihub} & Acesso a artigos científicos
+  para ancorar decisões & Citação de
+  evidência clínica \\
+\midrule
+\texttt{code-reviewer} (agente) & Audita qualidade do código
+  e detecta vulnerabilidades & Revisar \texttt{pipeline.py}
+  antes do merge \\
+\texttt{test-engineer} (agente) & Executa suítes TDD e
+  gera relatórios de cobertura\footnotemark & Rodar 312 CTs
+  do SUS-Twin \\
+\bottomrule
+\end{tabular}
+\end{table}
+\footnotetext[1]{Ambiente de execução controlado que isola o código do sistema
+operacional hospitalar, prevenindo que falhas em scripts de validação
+comprometam dados de pacientes.}
+\footnotetext[2]{Cobertura de testes é a métrica que indica qual porcentagem do
+código-fonte foi exercitada pelos testes automatizados. O SUS-Twin exige
+cobertura mínima de 90\% para conformidade SaMD.}
+
+\subsection{Registro de um novo agente MCP}
+
+Para adicionar um servidor MCP personalizado ao ecossistema, utiliza-se o
+comando \texttt{opencode mcp register} seguido de um manifesto JSON:
+
+\begin{lstlisting}[language=bash, caption={Registro de um novo MCP para validação
+de segmentação CBCT}, label={lst:mcp-register}, style=bashstyle]
+opencode mcp register --manifest cbct-validator.json
+
+# Conteudo de cbct-validator.json:
+# {
+#   "name": "cbct-validator",
+#   "version": "1.0.0",
+#   "tools": [
+#     {
+#       "name": "validate_dicom",
+#       "description": "Valida metadados DICOM de tomografia CBCT",
+#       "input": { "filepath": "string" },
+#       "output": { "is_valid": "boolean", "errors": "string[]" }
+#     }
+#   ],
+#   "transport": "stdio"
+# }
+\end{lstlisting}
+
+Após o registro, o novo MCP aparece na tabela de roteamento do
+OrchestrationEngine\footnote{Motor central de distribuição de tarefas que
+escolhe o agente mais adequado para cada tipo de processamento e equilibra
+a carga entre todos os servidores MCP disponíveis.} e pode ser invocado por
+qualquer skill ou pipeline.
+
+
+% =============================================================================
+\section{Orquestração de Agentes de Validação}
+\label{sec:opencode-orquestracao}
+
+A orquestração\footnote{Coordenação automatizada de múltiplos agentes de
+software que trabalham em conjunto, como um maestro regendo uma orquestra:
+cada agente executa sua parte e o ecossistema garante que todos estejam
+sincronizados.} de validação no OpenCode segue um pipeline de três estágios
+consecutivos.
+
+\subsection{Estágio 1: Autoevolve — diagnóstico contínuo}
+
+O agente \texttt{autoevolve} varre o ecossistema diariamente em busca de
+lacunas de conhecimento ou desempenho. Ele executa o pipeline
+\texttt{PLAN~$\rightarrow$~ACT~$\rightarrow$~REFLECT~$\rightarrow$~EXTRACT~$\rightarrow$~EVOLVE}:
+
+\begin{lstlisting}[language=bash, caption={Execução do agente Autoevolve para
+diagnóstico do pipeline SUS-Twin}, label={lst:autoevolve}, style=bashstyle]
+# Executar autoevolve manualmente
+opencode agent run autoevolve --target sus-twin
+
+# Saida esperada:
+# [AUTOVOLVE] Iniciando diagnostico do escopo 'sus-twin'...
+# [PLAN]     Identificadas 3 lacunas de validacao
+# [ACT]      Gerando 2 novas skills complementares
+# [REFLECT]  Score de cobertura atual: 87% -> 94%
+# [EXTRACT]  Insights persistidos em evolution/insights.json
+# [EVOLVE]   Ecossistema atualizado com sucesso
+\end{lstlisting}
+
+\subsection{Estágio 2: Code Reviewer — auditoria estática}
+
+O agente \texttt{code-reviewer} inspeciona o código-fonte contra as regras
+definidas no SDD (System Design Document)\footnote{Documento de Especificação
+de Sistema que formaliza a arquitetura matemática do software, definindo
+entradas, saídas, pré-condições, pós-condições e invariantes que o código
+nunca pode violar.}:
+
+\begin{lstlisting}[language=bash, caption={Auditoria de código com
+Code Reviewer}, label={lst:code-reviewer}, style=bashstyle]
+# Revisar todo o diretorio de pipelines
+opencode agent run code-reviewer --path ./pipelines/ --strictness high
+
+# Saida resumida:
+# [CODE-REVIEW] Auditando 12 arquivos...
+# [PASS]        pipelines/segmentacao.py — invariante SDD-I3 respeitada
+# [FAIL]        pipelines/preditivo.py — linha 47: tipo inconsistente
+# [PASS]        pipelines/telemetria.py — cobertura >= 90%
+# Resumo: 10/12 aprovados (83%)
+
+# Corrigir automaticamente falhas simples
+opencode agent run code-reviewer --fix --path ./pipelines/preditivo.py
+\end{lstlisting}
+
+\subsection{Estágio 3: Test Engineer — validação dinâmica}
+
+O \texttt{test-engineer} executa as suítes TDD completas e gera relatórios
+estruturados:\footnote{O relatório inclui tempo de execução, cobertura de
+código, falhas detectadas e sugestões de correção, tudo exportável para
+formatos JSON e HTML.}
+
+\begin{lstlisting}[language=bash, caption={Execução da suíte TDD completa com
+Test Engineer}, label={lst:test-engineer}, style=bashstyle]
+# Executar todas as suítes TDD do SUS-Twin
+opencode agent run test-engineer --suite sus-twin --report json
+
+# Saida:
+# [TEST-ENGINEER] Carregando 15 suites (312 CTs)...
+# [RUN]   Suite 01 - OrchestrationEngine (21 CTs) ... 21/21 PASS
+# [RUN]   Suite 02 - MultiReasoningEngine (12 CTs) ... 12/12 PASS
+# [RUN]   Suite 03 - ScientificProductionAgent (10 CTs) ... 10/10 PASS
+# [RUN]   Suite 04 - SROIScanner (8 CTs) ... 8/8 PASS
+# [RUN]   Suite 05 - SaMD Compliance (10 CTs) ... 10/10 PASS
+# [RUN]   Suite 06 - Scanners Pipeline (10 CTs) ... 10/10 PASS
+# [RUN]   Suite 07-15 - Demais modulos ... 241/241 PASS
+# ============================================================
+# RESUMO: 312/312 PASS   |   Status: APROVADO
+# Cobertura: 94.2%       |   Tempo: 14.3s
+# ============================================================
+\end{lstlisting}
+
+
+% =============================================================================
+\section{Execução de TDD/SDD no Pipeline SUS-Twin}
+\label{sec:opencode-tdd}
+
+O Framework SUS-Twin adota uma disciplina binária de engenharia: todo
+componente deve ser precedido por uma \textbf{SPEC} (Specification-Driven
+Development) e validado por \textbf{testes automatizados} (Test-Driven
+Development).\footnote{Essa combinação garante que cada linha de código tenha
+uma especificação formal e um teste que prove seu correto funcionamento,
+característica essencial para softwares classificados como dispositivos
+médicos (SaMD).}
+
+\subsection{O validador central: \texttt{tdd\_validate.py}}
+
+O ecossistema disponibiliza o script \texttt{tdd\_validate.py} como ponto
+único de entrada para validação. O \autoref{lst:tdd-validate} mostra a
+implementação real que você deve usar em seus projetos:
+
+\begin{lstlisting}[language=Python, caption={Validador TDD central do
+Framework SUS-Twin}, label={lst:tdd-validate}]
+#!/usr/bin/env python3
+"""
+tdd_validate.py — Validador TDD central do Framework SUS-Twin.
+
+Uso:
+    python tdd_validate.py --suite <nome>      # Executa uma suite especifica
+    python tdd_validate.py --all               # Executa todas as suites
+    python tdd_validate.py --report json       # Relatorio em JSON
+    python tdd_validate.py --chapter 9         # Valida este capitulo
+
+Requer: Python 3.10+, opencode-cli instalado.
+"""
+import argparse
+import json
+import subprocess
+import sys
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Tuple
+
+
+# Mapeamento de suites TDD do SUS-Twin
+SUITES: Dict[str, Dict] = {
+    "orchestration": {
+        "path": "tdd/orchestration_engine/",
+        "tests": 21,
+        "description": "OrchestrationEngine (QE)"
+    },
+    "reasoning": {
+        "path": "tdd/multi_reasoning/",
+        "tests": 12,
+        "description": "MultiReasoningEngine (MRE)"
+    },
+    "scientific": {
+        "path": "tdd/scientific_production/",
+        "tests": 10,
+        "description": "ScientificProductionAgent (SPA)"
+    },
+    "sroi": {
+        "path": "tdd/sroi_scanner/",
+        "tests": 8,
+        "description": "SROIScanner (SS)"
+    },
+    "samd": {
+        "path": "tdd/samd_compliance/",
+        "tests": 10,
+        "description": "SaMD Compliance Engine"
+    },
+    "scanners": {
+        "path": "tdd/scanners_pipeline/",
+        "tests": 10,
+        "description": "Scanners Epistemologicos Pipeline"
+    },
+}
+
+
+def discover_suites(base_path: Path) -> List[Dict]:
+    """Descobre suites TDD disponiveis no diretorio."""
+    available = []
+    for name, meta in SUITES.items():
+        suite_dir = base_path / meta["path"]
+        if suite_dir.exists():
+            available.append({"name": name, **meta})
+    return available
+
+
+def run_suite(suite_dir: Path, suite_name: str) -> Tuple[int, int, str, str]:
+    """
+    Executa uma suite TDD via pytest e retorna:
+    (passed, total, status, output).
+
+    Utiliza subprocess para garantir isolamento entre suites.
+    """
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", str(suite_dir),
+         "-v", "--tb=short", "--no-header"],
+        capture_output=True, text=True, timeout=120
+    )
+    output = result.stdout + result.stderr
+
+    # Parse do resultado
+    passed = output.count("PASSED")
+    failed = output.count("FAILED") + output.count("ERROR")
+    total = passed + failed
+
+    status = "PASS" if failed == 0 else "FAIL"
+    return passed, total, status, output
+
+
+def generate_report(results: List[Dict], output_format: str = "text"):
+    """Gera relatorio formatado (texto ou JSON)."""
+    total_passed = sum(r["passed"] for r in results)
+    total_tests = sum(r["total"] for r in results)
+    timestamp = datetime.now().isoformat()
+
+    if output_format == "json":
+        report = {
+            "timestamp": timestamp,
+            "framework": "SUS-Twin TDD Validator v2.0",
+            "summary": {
+                "total_tests": total_tests,
+                "passed": total_passed,
+                "failed": total_tests - total_passed,
+                "status": "APPROVED" if total_passed == total_tests else "REJECTED"
+            },
+            "suites": results
+        }
+        return json.dumps(report, indent=2)
+
+    # Formato texto (padrao)
+    lines = [
+        "=" * 60,
+        "  SUS-Twin TDD Validation Report",
+        f"  {timestamp}",
+        "=" * 60,
+        ""
+    ]
+    for r in results:
+        status_icon = "[PASS]" if r["status"] == "PASS" else "[FAIL]"
+        lines.append(
+            f"  {status_icon} {r['description']}: "
+            f"{r['passed']}/{r['total']}"
+        )
+    lines.extend([
+        "",
+        "-" * 60,
+        f"  Total: {total_passed}/{total_tests}",
+        f"  Status: {'APROVADO' if total_passed == total_tests else 'REJEITADO'}",
+        "-" * 60
+    ])
+    return "\n".join(lines)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Validador TDD do Framework SUS-Twin"
+    )
+    parser.add_argument(
+        "--suite", type=str,
+        help="Nome da suite (orchestration, reasoning, etc.)"
+    )
+    parser.add_argument("--all", action="store_true",
+                        help="Executa todas as suites")
+    parser.add_argument("--report", choices=["text", "json"],
+                        default="text", help="Formato do relatorio")
+    parser.add_argument("--chapter", type=int,
+                        help="Valida o conteudo do capitulo especificado")
+    args = parser.parse_args()
+
+    base_path = Path(__file__).parent / "tdd"
+    if not base_path.exists():
+        print("[ERRO] Diretorio 'tdd/' nao encontrado.")
+        print("Execute 'opencode init --ecosystem validation' para criar.")
+        sys.exit(1)
+
+    available = discover_suites(base_path)
+
+    if args.all or (not args.suite and not args.chapter):
+        suites_to_run = available
+    elif args.suite:
+        suites_to_run = [s for s in available if s["name"] == args.suite]
+        if not suites_to_run:
+            print(f"[ERRO] Suite '{args.suite}' nao encontrada.")
+            sys.exit(1)
+    elif args.chapter:
+        # Mapeamento: capitulo 9 -> suites de orquestracao
+        chapter_map = {9: ["orchestration", "scanners", "samd"]}
+        suite_names = chapter_map.get(args.chapter, list(SUITES.keys()))
+        suites_to_run = [s for s in available if s["name"] in suite_names]
+
+    results = []
+    for suite in suites_to_run:
+        print(f"\n>>> Executando: {suite['description']}...")
+        passed, total, status, output = run_suite(
+            base_path / suite["path"], suite["name"]
+        )
+        results.append({
+            "name": suite["name"],
+            "description": suite["description"],
+            "passed": passed,
+            "total": total,
+            "status": status
+        })
+        if args.report == "text":
+            print(output[-500:] if len(output) > 500 else output)
+
+    report = generate_report(results, args.report)
+    print(f"\n{report}")
+
+    # Codigo de saida: 0 se aprovado, 1 se rejeitado
+    all_passed = all(r["status"] == "PASS" for r in results)
+    sys.exit(0 if all_passed else 1)
+
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+\subsection{Interpretação da saída e correção de falhas}
+
+Ao executar o validador, a saída segue o formato de relatório do
+\autoref{lst:tdd-output-example}. Cada falha deve ser tratada com o ciclo
+\textbf{Red-Green-Refactor}\footnote{Disciplina central do TDD: (1) escreva
+um teste que falha --- Red, (2) implemente o mínimo de código para passar ---
+Green, (3) melhore a qualidade sem quebrar o teste --- Refactor.}:
+
+\begin{lstlisting}[style=bashstyle, caption={Exemplo de saída do validador
+com falha e correção}, label={lst:tdd-output-example}]
+$ python tdd_validate.py --suite orchestration
+
+>>> Executando: OrchestrationEngine (QE)...
+  [PASS] TC01: Registers a healthy agent with skills
+  [PASS] TC02: Registers multiple agents and validates routing table
+  [FAIL] TC03: Unhealthy agents are excluded from routing
+  >>> Motivo: agente com health_score=0 ainda é roteado
+  >>> Correcao sugerida: adicionar filtro 'if agent.health_score > 0'
+  [PASS] TC04: Dispatches task to healthy capable agent
+  ...
+
+------------------------------------------------------------
+  Total: 20/21
+  Status: REJEITADO
+------------------------------------------------------------
+
+# Apos aplicar a correcao sugerida:
+$ python tdd_validate.py --suite orchestration
+  ...
+  [PASS] TC03: Unhealthy agents are excluded from routing
+  ...
+------------------------------------------------------------
+  Total: 21/21
+  Status: APROVADO
+------------------------------------------------------------
+\end{lstlisting}
+
+\subsection{Integração SDD: validação de invariantes}
+
+O SDD do SUS-Twin define invariantes\footnote{Regras que devem permanecer
+verdadeiras em todos os momentos de execução do sistema. Funcionam como leis
+fixas que o software nunca pode violar.} que são verificados em cada execução.
+O \autoref{lst:invariants} mostra como validar programaticamente essas regras:
+
+\begin{lstlisting}[language=Python, caption={Validação de invariantes SDD
+no pipeline de orquestração}, label={lst:invariants}]
+"""
+invariances.py — Verificacao de invariantes SDD.
+
+Cada invariante e uma funcao que retorna (nome, resultado, mensagem).
+"""
+from typing import Callable, List, Tuple
+
+InvariantCheck = Callable[[], Tuple[str, bool, str]]
+
+
+def check_oe_i1(agents: List[dict]) -> Tuple[str, bool, str]:
+    """
+    OE-I1: Para toda tarefa em execucao, a carga do agente
+    nao pode exceder sua capacidade maxima.
+    """
+    for agent in agents:
+        if agent["current_load"] > agent["max_capacity"]:
+            return (
+                "OE-I1",
+                False,
+                f"Agente {agent['id']}: carga {agent['current_load']} > "
+                f"capacidade {agent['max_capacity']}"
+            )
+    return ("OE-I1", True, "Todos os agentes dentro do limite de carga")
+
+
+def check_mre_i1(context: dict) -> Tuple[str, bool, str]:
+    """
+    MRE-I1: O nivel de confianca do raciocinio deve ser >= 0.6
+    para ativar modo dedutivo.
+    """
+    if context.get("confidence", 0) < 0.6:
+        return (
+            "MRE-I1",
+            False,
+            f"Confianca {context.get('confidence', 0)} abaixo do limiar 0.6"
+        )
+    return ("MRE-I1", True, "Confianca adequada para modo dedutivo")
+
+
+def validate_all_invariants(agents, context) -> List[Tuple[str, bool, str]]:
+    """Executa todas as verificacoes de invariante."""
+    checks = [
+        check_oe_i1(agents),
+        check_mre_i1(context),
+    ]
+    return checks
+
+
+if __name__ == "__main__":
+    # Simulacao de agentes e contexto
+    mock_agents = [
+        {"id": "agent-01", "current_load": 3, "max_capacity": 5},
+        {"id": "agent-02", "current_load": 6, "max_capacity": 5},  # violacao
+    ]
+    mock_context = {"confidence": 0.8}
+
+    results = validate_all_invariants(mock_agents, mock_context)
+    all_pass = True
+    for name, passed, msg in results:
+        status = "[PASS]" if passed else "[FAIL]"
+        print(f"  {status} {name}: {msg}")
+        if not passed:
+            all_pass = False
+
+    print(f"\nInvariantes: {'TODAS OK' if all_pass else 'FALHAS DETECTADAS'}")
+    # Saida:
+    #   [PASS] OE-I1: Agente agent-01 dentro do limite
+    #   [FAIL] OE-I1: Agente agent-02: carga 6 > capacidade 5
+    #   [PASS] MRE-I1: Confianca adequada para modo dedutivo
+    #   Invariantes: FALHAS DETECTADAS
+\end{lstlisting}
+
+
+% =============================================================================
+\section{Pipeline CI/CD para Validação Contínua}
+\label{sec:opencode-cicd}
+
+A validação não deve ser um evento pontual, mas um processo contínuo
+integrado ao fluxo de desenvolvimento. O OpenCode oferece integração nativa
+com Git hooks\footnote{Scripts que o Git executa automaticamente em eventos
+como \texttt{pre-commit} (antes de um commit) ou \texttt{pre-push} (antes de
+um push), permitindo barrar código que não passe nos testes.} e GitHub
+Actions.
+
+\subsection{Git hook de pré-commit}
+
+O hook \texttt{pre-commit} abaixo executa o validador TDD antes de cada
+commit, bloqueando alterações que quebrem os testes:
+
+\begin{lstlisting}[language=bash, caption={Git hook pre-commit para validacao
+automatica}, label={lst:pre-commit}, style=bashstyle]
+#!/bin/bash
+# .git/hooks/pre-commit — Validacao pre-commit do SUS-Twin
+
+echo "=== SUS-Twin: Validacao pre-commit ==="
+
+# Executa apenas as suites afetadas pelos arquivos modificados
+CHANGED=$(git diff --cached --name-only --diff-filter=ACM)
+
+if echo "$CHANGED" | grep -q "tdd/"; then
+    echo "Alteracoes detectadas em suites TDD. Executando validacao completa..."
+    python tdd_validate.py --all --report text
+elif [ -n "$CHANGED" ]; then
+    echo "Alteracoes em codigo fonte. Executando suites relacionadas..."
+    python tdd_validate.py --all --report text
+else
+    echo "Nenhuma alteracao relevante. Pulando validacao."
+    exit 0
+fi
+
+# Se o script retornar 0, o commit prossegue; se retornar 1, e bloqueado
+if [ $? -ne 0 ]; then
+    echo "=== VALIDACAO FALHOU: Commit BLOQUEADO ==="
+    echo "Corrija as falhas antes de commitar."
+    exit 1
+fi
+
+echo "=== VALIDACAO OK: Commit permitido ==="
+exit 0
+\end{lstlisting}
+
+\subsection{Integração com GitHub Actions}
+
+Para ambientes colaborativos, o pipeline CI/CD deve ser definido em
+\texttt{.github/workflows/validate.yml}:
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize, caption={Workflow GitHub Actions para
+validacao continua do SUS-Twin}, label={lst:github-actions}]
+name: SUS-Twin Validation Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install OpenCode CLI
+        run: npm install -g @opencode/cli
+
+      - name: Initialize Ecosystem
+        run: opencode init --ecosystem validation
+
+      - name: Run TDD Validation
+        id: tdd
+        run: |
+          python tdd_validate.py --all --report json > report.json
+          echo "status=$(python -c \
+            'import json; r=json.load(open("report.json"));
+             print(r["summary"]["status"])')" >> $GITHUB_OUTPUT
+
+      - name: Generate Validation Badge
+        if: always()
+        run: |
+          python -c "
+          import json
+          r = json.load(open('report.json'))
+          status = r['summary']['status']
+          passed = r['summary']['passed']
+          total = r['summary']['total']
+          color = 'brightgreen' if status == 'APPROVED' else 'red'
+          url = f'https://img.shields.io/badge/TDD-{passed}%2F{total}-{color}'
+          print(f'SUS-Twin TDD: {passed}/{total}')
+          with open('badge_url.txt', 'w') as f:
+              f.write(url)
+          "
+
+      - name: Upload Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tdd-report
+          path: report.json
+\end{lstlisting}
+
+
+% =============================================================================
+\section{Badge de Validação e Relatórios}
+\label{sec:opencode-badge}
+
+Ao final de cada pipeline de validação, o ecossistema gera um badge
+visual\footnote{Distintivo digital que exibe o status atual dos testes,
+similar aos badges de CI/CD (como \texttt{build passing}), usado em
+repositórios GitHub para comunicar rapidamente a saúde do projeto.} que
+pode ser inserido em README ou relatórios. O \autoref{lst:badge-gen} mostra
+como gerar programaticamente:
+
+\begin{lstlisting}[language=Python, caption={Gerador de badge de validacao
+para o Framework SUS-Twin}, label={lst:badge-gen}]
+#!/usr/bin/env python3
+"""
+badge_gen.py — Gerador de badge de validacao para SUS-Twin.
+
+Gera um badge SVG local e uma URL shields.io para README.
+"""
+import json
+from pathlib import Path
+from datetime import datetime
+
+
+def generate_badge(passed: int, total: int, output_path: Path):
+    """Gera badge de validacao no formato SVG."""
+    ratio = passed / total if total > 0 else 0
+    color = "brightgreen" if ratio == 1.0 else \
+            "yellow" if ratio >= 0.9 else "red"
+
+    label = f"SUS-Twin TDD"
+    value = f"{passed}/{total}"
+    svg = f'''<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="20">
+  <linearGradient id="b" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <rect rx="3" width="180" height="20" fill="#555"/>
+  <rect rx="3" x="85" width="95" height="20" fill="{color}"/>
+  <g fill="#fff" font-family="DejaVu Sans" font-size="11">
+    <text x="6" y="15">{label}</text>
+    <text x="95" y="15">{value}</text>
+  </g>
+</svg>'''
+    output_path.write_text(svg, encoding="utf-8")
+    print(f"[OK] Badge salvo em: {output_path}")
+
+
+def get_shields_url(passed: int, total: int) -> str:
+    """Retorna URL do badge via shields.io."""
+    ratio = passed / total if total > 0 else 0
+    color = "brightgreen" if ratio == 1.0 else \
+            "yellow" if ratio >= 0.9 else "red"
+    label = "SUS-Twin%20TDD"
+    value = f"{passed}%2F{total}"
+    return (f"https://img.shields.io/badge/{label}-{value}-{color}")
+
+
+if __name__ == "__main__":
+    report_path = Path("report.json")
+    if not report_path.exists():
+        print("[ERRO] report.json nao encontrado. Execute tdd_validate.py primeiro.")
+        exit(1)
+
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    summary = report["summary"]
+
+    # Gera badge SVG local
+    generate_badge(summary["passed"], summary["total"],
+                   Path("badge_sustwin.svg"))
+
+    # Gera URL shields.io para README
+    url = get_shields_url(summary["passed"], summary["total"])
+    print(f"[INFO] URL para README.md:")
+    print(f"  ![TDD]({url})")
+\end{lstlisting}
+
+O badge gerado pode ser inserido no README do repositório:
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize, caption={Inserção do badge no README.md},
+label={lst:badge-readme}]
+# Framework SUS-Twin
+
+![SUS-Twin TDD](https://img.shields.io/badge/SUS--Twin%20TDD-312%2F312-brightgreen)
+
+Pipeline de Gêmeos Digitais Periodontais validado pelo OpenCode Ecosystem.
+\end{lstlisting}
+
+\subsection{Badge ASCII do capítulo}
+
+Como síntese do que foi aprendido, o badge ASCII abaixo resume as
+competências adquiridas neste capítulo:
+
+\begin{highlight}
+\begin{verbatim}
++----------------------------------------------------------+
+| Badge do Capítulo                                          |
++----------------------------------------------------------+
+| Nivel-alvo: N2 — Pesquisa Reprodutivel                    |
+| Habilidades: orquestrar agentes, executar TDD,            |
+|              configurar pipeline CI/CD                    |
+| Pre-requisitos: Python 3.11+, OpenCode CLI, Git           |
+| Comando de verificacao:                                   |
+| tdd_validate.py --chapter 9                                |
++----------------------------------------------------------+
+\end{verbatim}
+\end{highlight}
+
+
+% =============================================================================
+\section{Exercícios Práticos}
+\label{sec:opencode-exercicios}
+
+Os exercícios a seguir consolidam o aprendizado prático do capítulo. Cada um
+deve ser resolvido em um terminal real com o OpenCode Ecosystem instalado.
+
+\subsection*{Exercício 1 — Configurar um agente MCP personalizado}
+
+\textbf{Objetivo:} Registrar um novo servidor MCP para validação de arquivos
+DICOM odontológicos.
+
+\begin{enumerate}
+  \item Crie o arquivo \texttt{dicom-mcp.json} com o manifesto de um MCP que
+        exponha a ferramenta \texttt{validate\_dicom} com parâmetro de entrada
+        \texttt{filepath} (string) e saída \texttt{is\_valid} (booleano).
+  \item Registre o MCP usando \texttt{opencode mcp register --manifest
+        dicom-mcp.json}.
+  \item Verifique se o MCP aparece na lista ativa com
+        \texttt{opencode mcp list}.
+  \item \textbf{Questão:} Qual a importância de ter um MCP dedicado para
+        validação DICOM no pipeline SUS-Twin? (\textit{Dica: relacione com
+        conformidade SaMD e RDC 657/2022 da ANVISA}).
+\end{enumerate}
+
+\subsection*{Exercício 2 — Executar TDD e corrigir uma falha}
+
+\textbf{Objetivo:} Simular um pipeline TDD com falha induzida e corrigi-la.
+
+\begin{enumerate}
+  \item Crie um diretório \texttt{tdd/pratica/} com dois arquivos:
+        \texttt{test\_exemplo.py} contendo um teste que espera que a função
+        \texttt{somar(2, 2)} retorne 4, e \texttt{exemplo.py} contendo uma
+        implementação de \texttt{somar} que retorna 5 (falha induzida).
+  \item Execute \texttt{python -m pytest tdd/pratica/ -v}. Observe a falha.
+  \item Corrija a função \texttt{somar} para retornar o valor correto.
+  \item Execute novamente e confirme que o teste passa.
+  \item \textbf{Questão:} Explique como o ciclo Red-Green-Refactor se aplica
+        a este exercício e por que ele é crucial para software de grau médico.
+\end{enumerate}
+
+\subsection*{Exercício 3 — Criar um badge de validação}
+
+\textbf{Objetivo:} Gerar um badge de validação a partir de um relatório TDD.
+
+\begin{enumerate}
+  \item Execute o script \autoref{lst:tdd-validate} com \texttt{--report json}
+        (ou crie um \texttt{report.json} manual com 5 suítes fictícias, todas
+        com 100\% de aprovação).
+  \item Execute o script \autoref{lst:badge-gen} para gerar o badge SVG.
+  \item Abra o arquivo \texttt{badge\_sustwin.svg} em um navegador para
+        confirmar a aparência.
+  \item \textbf{Questão:} Quais informações um badge de validação transmite
+        para a equipe de desenvolvimento e para órgãos reguladores como a
+        ANVISA? Por que o badge deve refletir dados em tempo real e não
+        estáticos?
+\end{enumerate}
+
+\subsection*{Exercício 4 (Desafio) — Pipeline CI/CD completo}
+
+\textbf{Objetivo:} Integrar todos os conceitos em um pipeline funcional.
+
+\begin{enumerate}
+  \item Crie um repositório Git local.
+  \item Configure o hook \texttt{pre-commit} do \autoref{lst:pre-commit}.
+  \item Crie uma suíte TDD com 3 testes (pode ser simples, como validação
+        de soma de números).
+  \item Faça um commit que passe nos testes e outro que falhe.
+  \item Observe o comportamento do hook em cada caso.
+  \item \textbf{Questão:} Por que a validação pré-commit é preferível à
+        validação apenas no CI/CD remoto? Cite ao menos dois motivos
+        relacionados à produtividade da equipe.
+\end{enumerate}
+
+% =============================================================================
+% FIM DO CAPÍTULO 9
+% =============================================================================

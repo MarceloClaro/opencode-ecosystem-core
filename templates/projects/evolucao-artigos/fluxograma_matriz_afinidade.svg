@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 540" width="1050" height="540" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2980b9;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#3498db;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#27ae60;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#2ecc71;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8e44ad;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#9b59b6;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d35400;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#e67e22;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#16a085;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#1abc9c;stop-opacity:0.9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Título -->
+  <text x="525" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#2c3e50">Matriz de Afinidade — Bibliotecas Python × Pipelines OpenCode</text>
+  <text x="525" y="47" text-anchor="middle" font-size="10" fill="#7f8c8d">Afinidade medida por relevância funcional ao pipeline (0%–100%)</text>
+
+  <!-- Headers dos Pipelines -->
+  <rect x="210" y="65" width="160" height="40" rx="8" fill="url(#blueGrad)"/>
+  <text x="290" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="white">SEEKER</text>
+
+  <rect x="378" y="65" width="160" height="40" rx="8" fill="url(#greenGrad)"/>
+  <text x="458" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="white">MASWOS</text>
+
+  <rect x="546" y="65" width="160" height="40" rx="8" fill="url(#purpleGrad)"/>
+  <text x="626" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="white">PhD Auditor</text>
+
+  <rect x="714" y="65" width="160" height="40" rx="8" fill="url(#orangeGrad)"/>
+  <text x="794" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Data Analysis</text>
+
+  <rect x="882" y="65" width="120" height="40" rx="8" fill="url(#tealGrad)"/>
+  <text x="942" y="90" text-anchor="middle" font-size="10" font-weight="bold" fill="white">MCP Server</text>
+
+  <!-- Labels de Bibliotecas (coluna esquerda) -->
+  <text x="15" y="133" font-size="11" font-weight="bold" fill="#2c3e50">scholarly</text>
+  <text x="15" y="163" font-size="11" font-weight="bold" fill="#2c3e50">arxiv</text>
+  <text x="15" y="193" font-size="11" font-weight="bold" fill="#2c3e50">semanticscholar</text>
+  <text x="15" y="223" font-size="11" font-weight="bold" fill="#2c3e50">scihub-cn</text>
+  <text x="15" y="253" font-size="11" font-weight="bold" fill="#2c3e50">openalex</text>
+  <text x="15" y="283" font-size="11" font-weight="bold" fill="#2c3e50">crossrefapi</text>
+  <text x="15" y="313" font-size="11" font-weight="bold" fill="#2c3e50">pypdf</text>
+  <text x="15" y="343" font-size="11" font-weight="bold" fill="#2c3e50">wbgapi</text>
+  <text x="15" y="373" font-size="11" font-weight="bold" fill="#2c3e50">pandas-datareader</text>
+  <text x="15" y="403" font-size="11" font-weight="bold" fill="#2c3e50">mcp</text>
+  <text x="15" y="433" font-size="11" font-weight="bold" fill="#2c3e50">yfinance</text>
+  <text x="15" y="463" font-size="11" font-weight="bold" fill="#2c3e50">ccxt</text>
+  <text x="15" y="493" font-size="11" font-weight="bold" fill="#2c3e50">biopython</text>
+
+  <!-- Grid de fundo -->
+  <rect x="200" y="62" width="810" height="440" rx="4" fill="none" stroke="#ecf0f1" stroke-width="1"/>
+
+  <!-- Linhas de separação horizontais -->
+  <line x1="200" y1="115" x2="1010" y2="115" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="145" x2="1010" y2="145" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="175" x2="1010" y2="175" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="205" x2="1010" y2="205" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="235" x2="1010" y2="235" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="265" x2="1010" y2="265" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="295" x2="1010" y2="295" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="325" x2="1010" y2="325" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="355" x2="1010" y2="355" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="385" x2="1010" y2="385" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="415" x2="1010" y2="415" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="445" x2="1010" y2="445" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="200" y1="475" x2="1010" y2="475" stroke="#ecf0f1" stroke-width="0.5"/>
+
+  <!-- Valores de Afinidade — SEEKER -->
+  <rect x="210" y="120" width="160" height="25" rx="4" fill="#3498db" opacity="0.95"/>
+  <text x="290" y="138" text-anchor="middle" font-size="10" fill="white" font-weight="bold">95%</text>
+
+  <rect x="210" y="150" width="160" height="25" rx="4" fill="#3498db" opacity="0.95"/>
+  <text x="290" y="168" text-anchor="middle" font-size="10" fill="white" font-weight="bold">95%</text>
+
+  <rect x="210" y="180" width="160" height="25" rx="4" fill="#3498db" opacity="0.95"/>
+  <text x="290" y="198" text-anchor="middle" font-size="10" fill="white" font-weight="bold">95%</text>
+
+  <rect x="210" y="210" width="160" height="25" rx="4" fill="#3498db" opacity="0.95"/>
+  <text x="290" y="228" text-anchor="middle" font-size="10" fill="white" font-weight="bold">95%</text>
+
+  <rect x="210" y="240" width="160" height="25" rx="4" fill="#3498db" opacity="0.92"/>
+  <text x="290" y="258" text-anchor="middle" font-size="10" fill="white" font-weight="bold">92%</text>
+
+  <rect x="210" y="270" width="160" height="25" rx="4" fill="#3498db" opacity="0.85"/>
+  <text x="290" y="288" text-anchor="middle" font-size="10" fill="white" font-weight="bold">85%</text>
+
+  <!-- Valores de Afinidade — MASWOS -->
+  <rect x="378" y="120" width="160" height="25" rx="4" fill="#27ae60" opacity="0.90"/>
+  <text x="458" y="138" text-anchor="middle" font-size="10" fill="white" font-weight="bold">90%</text>
+
+  <rect x="378" y="180" width="160" height="25" rx="4" fill="#27ae60" opacity="0.90"/>
+  <text x="458" y="198" text-anchor="middle" font-size="10" fill="white" font-weight="bold">90%</text>
+
+  <rect x="378" y="210" width="160" height="25" rx="4" fill="#27ae60" opacity="0.90"/>
+  <text x="458" y="228" text-anchor="middle" font-size="10" fill="white" font-weight="bold">90%</text>
+
+  <rect x="378" y="150" width="160" height="25" rx="4" fill="#27ae60" opacity="0.88"/>
+  <text x="458" y="168" text-anchor="middle" font-size="10" fill="white" font-weight="bold">88%</text>
+
+  <rect x="378" y="300" width="160" height="25" rx="4" fill="#27ae60" opacity="0.90"/>
+  <text x="458" y="318" text-anchor="middle" font-size="10" fill="white" font-weight="bold">90%</text>
+
+  <!-- Valores de Afinidade — PhD Auditor -->
+  <rect x="546" y="180" width="160" height="25" rx="4" fill="#8e44ad" opacity="0.88"/>
+  <text x="626" y="198" text-anchor="middle" font-size="10" fill="white" font-weight="bold">88%</text>
+
+  <rect x="546" y="240" width="160" height="25" rx="4" fill="#8e44ad" opacity="0.90"/>
+  <text x="626" y="258" text-anchor="middle" font-size="10" fill="white" font-weight="bold">90%</text>
+
+  <rect x="546" y="270" width="160" height="25" rx="4" fill="#8e44ad" opacity="0.88"/>
+  <text x="626" y="288" text-anchor="middle" font-size="10" fill="white" font-weight="bold">88%</text>
+
+  <rect x="546" y="330" width="160" height="25" rx="4" fill="#8e44ad" opacity="0.85"/>
+  <text x="626" y="348" text-anchor="middle" font-size="10" fill="white" font-weight="bold">85%</text>
+
+  <!-- Valores de Afinidade — Data Analysis -->
+  <rect x="714" y="330" width="160" height="25" rx="4" fill="#d35400" opacity="0.95"/>
+  <text x="794" y="348" text-anchor="middle" font-size="10" fill="white" font-weight="bold">95%</text>
+
+  <rect x="714" y="360" width="160" height="25" rx="4" fill="#d35400" opacity="0.95"/>
+  <text x="794" y="378" text-anchor="middle" font-size="10" fill="white" font-weight="bold">95%</text>
+
+  <!-- Valores de Afinidade — MCP Server -->
+  <rect x="882" y="390" width="120" height="25" rx="4" fill="#16a085" opacity="1.0"/>
+  <text x="942" y="408" text-anchor="middle" font-size="10" fill="white" font-weight="bold">100%</text>
+
+  <!-- Novos domínios R9 -->
+  <rect x="210" y="420" width="160" height="25" rx="4" fill="#3498db" opacity="0.7"/>
+  <text x="290" y="438" text-anchor="middle" font-size="9" fill="white">Finance (90%)*</text>
+
+  <rect x="378" y="450" width="160" height="25" rx="4" fill="#27ae60" opacity="0.7"/>
+  <text x="458" y="468" text-anchor="middle" font-size="9" fill="white">Crypto (95%)*</text>
+
+  <rect x="546" y="480" width="160" height="25" rx="4" fill="#8e44ad" opacity="0.7"/>
+  <text x="626" y="498" text-anchor="middle" font-size="9" fill="white">BioMed (85%)*</text>
+
+  <!-- Legenda -->
+  <rect x="15" y="510" width="12" height="12" fill="#3498db" opacity="0.95"/>
+  <text x="32" y="521" font-size="9" fill="#2c3e50">SEEKER</text>
+  <rect x="100" y="510" width="12" height="12" fill="#27ae60" opacity="0.90"/>
+  <text x="117" y="521" font-size="9" fill="#2c3e50">MASWOS</text>
+  <rect x="195" y="510" width="12" height="12" fill="#8e44ad" opacity="0.88"/>
+  <text x="212" y="521" font-size="9" fill="#2c3e50">PhD Auditor</text>
+  <rect x="310" y="510" width="12" height="12" fill="#d35400" opacity="0.95"/>
+  <text x="327" y="521" font-size="9" fill="#2c3e50">Data Analysis</text>
+  <rect x="430" y="510" width="12" height="12" fill="#16a085"/>
+  <text x="447" y="521" font-size="9" fill="#2c3e50">MCP Server</text>
+  <text x="570" y="521" font-size="9" fill="#95a5a6">* Novos domínios (Round 9)</text>
+
+  <!-- Rodapé -->
+  <text x="525" y="536" text-anchor="middle" font-size="8" fill="#95a5a6">openode_catalog.json — 22+ bibliotecas, 5 pipelines, afinidade medida por relevância funcional</text>
+</svg>

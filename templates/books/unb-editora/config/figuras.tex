@@ -1,0 +1,34 @@
+% Pacotes auxiliares no design da capa:
+
+\usepackage{xcoffins}
+
+%% Pacotes para usar o pacote Metapost para fazer graficos e diagramas:
+
+\usepackage{luamplib}
+\everymplib{input mpcolornames; beginfig(1);}
+\everyendmplib{endfig;}
+
+%% Pacotes para diagramas, desenhos, gráficos:
+
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,patterns}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+
+%% Pacote para ferramentas gráficas:
+
+\usepackage{graphics}
+\usepackage{graphicx} % Sem esse, alguns includegraphics não funcionam.
+
+\usepackage{threeparttable} % Para alinhar figuras e legendas com "measuredfigure".
+
+\usepackage{wrapfig} % Figuras ao lado do texto.
+
+\usepackage{picinpar}% Alteranativa para figuras ao lado de texto. http://ctan.org/pkg/picinpar
+
+\usepackage[font={small}, margin=0cm, justification=centering]{caption} % Legendas com fonte pequena.
+
+% Comando para adicionar fonte de figuras e semelhantes:
+
+\newcommand{\source}[1]{\captionsetup{singlelinecheck=false,justification=justified}\caption*{\footnotesize \noindent Fonte: {#1}}}

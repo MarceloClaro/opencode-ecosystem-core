@@ -1,0 +1,50 @@
+# Do not double-build branches and PRs from this repo
+# Do not build auto-tagged versions
+if: repo != head_repo AND tag !~ /^[\w\.]+-\d+-\w+/
+
+language: java
+dist: focal
+addons:
+  apt:
+    update: true
+    packages:
+      # LaTeX decent font processor
+      - cm-super
+      # Image processing
+      - inkscape
+      # For git latexdiff
+      - latexdiff
+      # For Minted
+      - python-pygments
+      # LaTeX
+      - texlive
+      - texlive-latex-extra
+      - texlive-publishers
+      - texlive-science
+      # Debug
+      - tree
+env:
+  global:
+    - TERM=dumb
+    - GRAVIS_REPO="https://github.com/DanySK/Gravis-CI.git"
+    - GRAVIS="$HOME/gravis"
+
+install: travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
+script: ./gradlew buildLatex
+
+before_deploy:
+  - git config --local user.name "Danilo Pianini"
+  - git config --local user.email "danilo.pianini@unibo.it"
+  - $GRAVIS/autotag
+
+deploy:
+  - provider: releases
+    edge: true
+    file: "*.pdf"
+    on:
+      all_branches: true
+      condition: true
+
+notifications:
+  email:
+    on_success: never

@@ -1,0 +1,49 @@
+{
+  "A_todas_features": {
+    "r2_treino": 0.9921,
+    "r2_teste": 0.8841,
+    "cv_r2_medio": 0.9318,
+    "cv_r2_std": 0.0306
+  },
+  "B_sem_leakage": {
+    "r2_treino": 0.9872,
+    "r2_teste": 0.8924,
+    "cv_r2_medio": 0.8975,
+    "cv_r2_std": 0.0366
+  },
+  "C1_apenas_AIPI": {
+    "r2_treino": 0.9707,
+    "r2_teste": 0.8143,
+    "cv_r2_medio": 0.7869,
+    "cv_r2_std": 0.075
+  },
+  "C2_apenas_componentes": {
+    "r2_treino": 0.9904,
+    "r2_teste": 0.8327,
+    "cv_r2_medio": 0.9089,
+    "cv_r2_std": 0.0412
+  },
+  "C3_apenas_estruturais": {
+    "r2_treino": 0.9768,
+    "r2_teste": 0.6087,
+    "cv_r2_medio": 0.7874,
+    "cv_r2_std": 0.0951
+  },
+  "feature_importance_sem_leakage": {
+    "pib_pc_ppc": 0.4996,
+    "aipi_humano": 0.2556,
+    "aipi_digital": 0.1905,
+    "aipi_inovacao": 0.0232,
+    "agricultura_pib_pct": 0.0131,
+    "densidade_pop_km2": 0.0073,
+    "manufatura_pib_pct": 0.0059,
+    "export_tech_pct": 0.0049,
+    "aipi_regulacao": 0.0
+  },
+  "resumo": {
+    "r2_com_leakage": 0.8841,
+    "r2_sem_leakage": 0.8924,
+    "inflacao_percentual": -0.9,
+    "diagnostico": "MODERADO"
+  }
+}

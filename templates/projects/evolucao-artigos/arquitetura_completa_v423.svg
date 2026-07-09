@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" width="1100" height="720" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="gL1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#1a1a2e"/><stop offset="100%" style="stop-color:#16213e"/></linearGradient>
+    <linearGradient id="gL2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#0f3460"/><stop offset="100%" style="stop-color:#1a1a6e"/></linearGradient>
+    <linearGradient id="gL3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#e94560"/><stop offset="100%" style="stop-color:#c23152"/></linearGradient>
+    <linearGradient id="gL4" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#533483"/><stop offset="100%" style="stop-color:#3d2c6e"/></linearGradient>
+    <linearGradient id="gL5" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#0a8754"/><stop offset="100%" style="stop-color:#066839"/></linearGradient>
+    <linearGradient id="gL6" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f39c12"/><stop offset="100%" style="stop-color:#d68910"/></linearGradient>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="1100" height="720" fill="#0d1117"/>
+
+  <!-- Título -->
+  <text x="550" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#58a6ff">Arquitetura Completa do Ecossistema OpenCode v4.2.3</text>
+  <text x="550" y="52" text-anchor="middle" font-size="10" fill="#8b949e">6 Camadas · 125 Agentes · 106 Skills · 41 MCPs · 10 Hooks · 9 Componentes de Auditoria</text>
+
+  <!-- L1: Infraestrutura -->
+  <rect x="20" y="68" width="1060" height="70" rx="10" fill="url(#gL1)" opacity="0.95"/>
+  <text x="550" y="92" text-anchor="middle" font-size="14" font-weight="bold" fill="#58a6ff">L1 — Infraestrutura (Node.js v25 · Bun 1.3 · Python 3.12 · Windows 11)</text>
+  <text x="550" y="112" text-anchor="middle" font-size="10" fill="#8b949e">OpenCode CLI 1.14 · 4 plugins TypeScript · 14 comandos bridge · big-pickle (200K ctx, 128K out, gratuito)</text>
+  <text x="550" y="130" text-anchor="middle" font-size="10" fill="#8b949e">Estratégias de token: chinês +40% densidade · Progressive Disclosure · Edição Cirúrgica · MCP Lazy Init</text>
+
+  <!-- L2: Dados -->
+  <rect x="20" y="148" width="1060" height="90" rx="10" fill="url(#gL2)" opacity="0.95"/>
+  <text x="550" y="172" text-anchor="middle" font-size="14" font-weight="bold" fill="#79c0ff">L2 — Camada de Dados (DataOrchestrator + 10 Ecosystem Hooks + 30+ Bibliotecas)</text>
+
+  <rect x="40" y="182" width="145" height="44" rx="6" fill="#0d419d" opacity="0.8"/>
+  <text x="112" y="200" text-anchor="middle" font-size="9" fill="#c9d1d9" font-weight="bold">GeoAnalyzer</text>
+  <text x="112" y="216" text-anchor="middle" font-size="8" fill="#8b949e">geopandas·geopy·folium</text>
+
+  <rect x="195" y="182" width="145" height="44" rx="6" fill="#0d419d" opacity="0.8"/>
+  <text x="267" y="200" text-anchor="middle" font-size="9" fill="#c9d1d9" font-weight="bold">FinanceAnalyzer</text>
+  <text x="267" y="216" text-anchor="middle" font-size="8" fill="#8b949e">yfinance·fredapi·mkt-cal</text>
+
+  <rect x="350" y="182" width="145" height="44" rx="6" fill="#0d419d" opacity="0.8"/>
+  <text x="422" y="200" text-anchor="middle" font-size="9" fill="#c9d1d9" font-weight="bold">MarketSpeculator</text>
+  <text x="422" y="216" text-anchor="middle" font-size="8" fill="#8b949e">ccxt (110+ exchanges)</text>
+
+  <rect x="505" y="182" width="145" height="44" rx="6" fill="#0d419d" opacity="0.8"/>
+  <text x="577" y="200" text-anchor="middle" font-size="9" fill="#c9d1d9" font-weight="bold">SeekerMultiSource</text>
+  <text x="577" y="216" text-anchor="middle" font-size="8" fill="#8b949e">arxiv·scholarly·semanticscholar</text>
+
+  <rect x="660" y="182" width="145" height="44" rx="6" fill="#0d419d" opacity="0.8"/>
+  <text x="732" y="200" text-anchor="middle" font-size="9" fill="#c9d1d9" font-weight="bold">WorldBankAnalyzer</text>
+  <text x="732" y="216" text-anchor="middle" font-size="8" fill="#8b949e">wbgapi·pandas-datareader</text>
+
+  <rect x="815" y="182" width="145" height="44" rx="6" fill="#0d419d" opacity="0.8"/>
+  <text x="887" y="200" text-anchor="middle" font-size="9" fill="#c9d1d9" font-weight="bold">BioMed+PDF+MCP+HTTPX</text>
+  <text x="887" y="216" text-anchor="middle" font-size="8" fill="#8b949e">biopython·pypdf·mcp·httpx</text>
+
+  <!-- L3: Auditoria -->
+  <rect x="20" y="248" width="1060" height="72" rx="10" fill="url(#gL3)" opacity="0.92"/>
+  <text x="550" y="272" text-anchor="middle" font-size="14" font-weight="bold" fill="#ff7b93">L3 — Auditoria Caixa Branca (9 Componentes)</text>
+
+  <rect x="40" y="282" width="110" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="95" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">InteractionLogger</text>
+  <rect x="158" y="282" width="110" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="213" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">AcademicAuditTrail</text>
+  <rect x="276" y="282" width="110" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="331" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">TokenEconomyMonitor</text>
+  <rect x="394" y="282" width="110" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="449" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">AuditInstrumentor</text>
+  <rect x="512" y="282" width="110" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="567" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">ResearcherScore</text>
+  <rect x="630" y="282" width="85" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="672" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">BudgetAlert</text>
+  <rect x="723" y="282" width="85" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="765" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">AuditSearch</text>
+  <rect x="816" y="282" width="85" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="858" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">Dashboard</text>
+  <rect x="909" y="282" width="85" height="30" rx="5" fill="#8b1a2b" opacity="0.8"/>
+  <text x="951" y="301" text-anchor="middle" font-size="8" fill="#ffb3c1">PipelineInt</text>
+
+  <!-- L4: Agentes -->
+  <rect x="20" y="330" width="1060" height="80" rx="10" fill="url(#gL4)" opacity="0.92"/>
+  <text x="550" y="354" text-anchor="middle" font-size="14" font-weight="bold" fill="#bc8cff">L4 — Agentes (125 especializados)</text>
+
+  <rect x="40" y="364" width="190" height="36" rx="6" fill="#2d1f5e" opacity="0.8"/>
+  <text x="135" y="380" text-anchor="middle" font-size="9" fill="#d2c5ff" font-weight="bold">Core (56 agentes)</text>
+  <text x="135" y="396" text-anchor="middle" font-size="7" fill="#8b949e">code-review·reasoning·orchestration</text>
+
+  <rect x="240" y="364" width="190" height="36" rx="6" fill="#2d1f5e" opacity="0.8"/>
+  <text x="335" y="380" text-anchor="middle" font-size="9" fill="#d2c5ff" font-weight="bold">MASWOS (49 agentes)</text>
+  <text x="335" y="396" text-anchor="middle" font-size="7" fill="#8b949e">pesquisa·escrita·revisão·formatação</text>
+
+  <rect x="440" y="364" width="190" height="36" rx="6" fill="#2d1f5e" opacity="0.8"/>
+  <text x="535" y="380" text-anchor="middle" font-size="9" fill="#d2c5ff" font-weight="bold">SEEKER (12 agentes)</text>
+  <text x="535" y="396" text-anchor="middle" font-size="7" fill="#8b949e">busca·análise·síntese evidências</text>
+
+  <rect x="640" y="364" width="190" height="36" rx="6" fill="#2d1f5e" opacity="0.8"/>
+  <text x="735" y="380" text-anchor="middle" font-size="9" fill="#d2c5ff" font-weight="bold">Reversa (7 agentes)</text>
+  <text x="735" y="396" text-anchor="middle" font-size="7" fill="#8b949e">eng.reversa·AST·documentação</text>
+
+  <rect x="840" y="364" width="110" height="36" rx="6" fill="#2d1f5e" opacity="0.8"/>
+  <text x="895" y="380" text-anchor="middle" font-size="9" fill="#d2c5ff" font-weight="bold">Corretor</text>
+  <text x="895" y="396" text-anchor="middle" font-size="7" fill="#8b949e">ptbr_corrector</text>
+
+  <!-- L5: MCPs + Skills -->
+  <rect x="20" y="420" width="1060" height="70" rx="10" fill="url(#gL5)" opacity="0.92"/>
+  <text x="550" y="444" text-anchor="middle" font-size="14" font-weight="bold" fill="#7ee787">L5 — MCPs (41) + Skills (106) + Nexus NMA v6.2</text>
+  <text x="550" y="464" text-anchor="middle" font-size="10" fill="#8b949e">MCPs: FS·DB·Web·Git·Code·SciHub·Quantum·Jurídico·RAG · Skills: 13 categorias (system·research·juridico·agent-forum·evolution·etc.)</text>
+  <text x="550" y="482" text-anchor="middle" font-size="10" fill="#8b949e">Nexus: 63 scripts Python · 120+ sync barriers · 500+ validation constraints · 38 reasoning types</text>
+
+  <!-- L6: Orquestração -->
+  <rect x="20" y="500" width="1060" height="70" rx="10" fill="url(#gL6)" opacity="0.92"/>
+  <text x="550" y="524" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffc978">L6 — Orquestração + Evolução (Container DI · /evolve · Manus Evolve · AutoEvolve)</text>
+  <text x="550" y="544" text-anchor="middle" font-size="10" fill="#8b949e">Container DI: 11 serviços (8 core + 4 plugins TS) · 88/88 testes · Bridge Python ⟷ TypeScript</text>
+  <text x="550" y="562" text-anchor="middle" font-size="10" fill="#8b949e">/evolve: SENSE→DISCOVER→INSTALL→VERIFY→EVOLVE→LEARN · 12 ciclos (score 85→97) · DecisionNode</text>
+
+  <!-- Destaques -->
+  <rect x="20" y="582" width="345" height="50" rx="8" fill="#0d419d" opacity="0.7"/>
+  <text x="192" y="604" text-anchor="middle" font-size="11" fill="#79c0ff" font-weight="bold">🎯 Qualis A1 ≥ 95/100</text>
+  <text x="192" y="622" text-anchor="middle" font-size="9" fill="#8b949e">8 estágios · 49 agentes · loop correção</text>
+
+  <rect x="375" y="582" width="345" height="50" rx="8" fill="#2d1f5e" opacity="0.7"/>
+  <text x="547" y="604" text-anchor="middle" font-size="11" fill="#bc8cff" font-weight="bold">🧠 38 Raciocínios + 10 Teoria dos Jogos</text>
+  <text x="547" y="622" text-anchor="middle" font-size="9" fill="#8b949e">Nash·Minimax·Pareto·Bayesiano·TRIZ</text>
+
+  <rect x="730" y="582" width="345" height="50" rx="8" fill="#8b1a2b" opacity="0.7"/>
+  <text x="902" y="604" text-anchor="middle" font-size="11" fill="#ff7b93" font-weight="bold">🔬 Auditoria Caixa Branca</text>
+  <text x="902" y="622" text-anchor="middle" font-size="9" fill="#8b949e">JSONL imutável · TSAC 87 palavras · Score 0-100</text>
+
+  <!-- Rodapé -->
+  <rect x="20" y="644" width="1060" height="50" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="550" y="666" text-anchor="middle" font-size="12" fill="#8b949e">120.000+ linhas Python · 30+ bibliotecas · 20+ fontes Qualis A1 · 7 commits hoje</text>
+  <text x="550" y="684" text-anchor="middle" font-size="10" fill="#484f58">OpenCode Ecosystem v4.2.3 · github.com/MarceloClaro/OpenCode_Ecosystem · Maio 2026</text>
+</svg>

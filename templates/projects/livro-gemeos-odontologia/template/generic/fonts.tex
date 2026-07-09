@@ -1,0 +1,28 @@
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{times}
+  \newcommand{\inconsolatafontfamily}{\ttfamily}
+  \newcommand{\headingfontfamily}{\ttfamily}
+\else
+  \usepackage{fontspec} % import new fonts
+  \newfontfamily\inconsolatafontfamily[
+      Path=template/generic/fonts/inconsolata/,
+      Ligatures=TeX,
+      Scale=MatchUppercase,
+      UprightFont = *.otf,
+      BoldFont = *-Bold.otf,
+      ItalicFont = *-Italic.otf,
+      BoldItalicFont = *-BoldItalic.otf
+  ]{Inconsolata-LGC}
+  \let\headingfontfamily\inconsolatafontfamily
+\fi
+\usepackage[english,brazil]{babel}
+
+%----------------------------------------------------------------------------------------
+%   SPACING
+%----------------------------------------------------------------------------------------
+
+\usepackage{microtype}
+

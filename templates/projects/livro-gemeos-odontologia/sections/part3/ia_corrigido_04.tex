@@ -1,0 +1,18 @@
+\section{IA Explicável (XAI) na Odontologia}
+\label{sec:ia-xai}
+
+O distanciamento progressivo do escrutínio humano que permeia as arquiteturas de \textit{deep learning} (as célebres "caixas pretas") conflita fundamentalmente com a práxis ética da área da saúde. A adoção de IA Explicável (\textit{Explainable AI} --- XAI) consubstancia-se como requisito indispensável e não-negociável para a legitimação científica e a aplicação jurídica da IA na odontologia clínica. Quando as escolhas diagnósticas incidem sobre a morbidade do paciente, o cirurgião-dentista não pode figurar como mero executor submisso de diretrizes sintéticas opacas.
+
+As metodologias XAI transladam pesos matemáticos inescrutáveis para inferências ontologicamente rastreáveis:
+
+\textbf{Grad-CAM (Gradient-weighted Class Activation Mapping):} Um artifício visual direto que sobrepõe mapas térmicos aos cortes tomográficos. Ao identificar uma displasia fibro-óssea, o algoritmo evidencia os contornos específicos da imagem que ativaram o neurônio responsável por essa classificação, permitindo ao patologista validar (ou refutar) se a inferência advém da textura óssea lesional ou de algum artefato metálico adjacente, mitigando falhas baseadas em vieses da base de treino.
+
+\textbf{SHAP (SHapley Additive exPlanations):} Radicada na teoria matemática dos jogos cooperativos de Lloyd Shapley, essa técnica fraciona o poder predativo global do modelo em contribuições exatas alocadas a cada variável de entrada. No prognóstico de insucesso periodontal, o cirurgião saberá precisamente a contribuição estatística percentual do tabagismo, do biofilme e do genótipo em relação à falha iminente.
+
+\textbf{LIME (Local Interpretable Model-agnostic Explanations):} Fornece explicabilidade situacional por meio da interpolação de uma fronteira de decisão interpretável ao redor da predição pontual de um caso clínico singular, traduzindo complexidade estocástica em regras lógicas condicionais simples de entender.
+
+Sob a égide regulatória da LGPD brasileira (Lei 13.709/2018) e em compasso com o escopo internacional (GDPR europeu e normas FDA), o direito civil defende explicitamente que nenhum ser humano deverá ser submetido a tomadas de decisão biomédicas 100\% sintéticas e automáticas desprovidas de revisão racional e humana \cite{aisociety2026}. No Brasil, a transição é acelerada pelo estabelecimento da norma de conformidade conceitual ABNT NBR ISO/IEC 3173 e pelas deliberações da ABINC \cite{khoshfekr2025}.
+
+\destaque{
+Módulos de auditoria contínua, inerentes a ecossistemas multiagentes robustos (como o TrustEngine e os auditores MiroFish/BettaFish), incorporam motores de raciocínio lógico-formal (como Z3) para assegurar a rastreabilidade matemática de toda decisão, promovendo uma governança rigorosa em conformidade à ética em saúde.
+}

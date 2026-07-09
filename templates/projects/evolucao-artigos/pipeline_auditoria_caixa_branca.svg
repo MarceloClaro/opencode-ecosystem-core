@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#0d1117"/><stop offset="100%" style="stop-color:#161b22"/></linearGradient>
+    <linearGradient id="logGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#238636"/><stop offset="100%" style="stop-color:#1a6e2a"/></linearGradient>
+    <linearGradient id="trailGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#1f6feb"/><stop offset="100%" style="stop-color:#1555b0"/></linearGradient>
+    <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#da3633"/><stop offset="100%" style="stop-color:#b62324"/></linearGradient>
+    <linearGradient id="dashGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#8957e5"/><stop offset="100%" style="stop-color:#6e3fb5"/></linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8b949e"/></marker>
+  </defs>
+
+  <rect width="1000" height="600" fill="url(#bgGrad)"/>
+
+  <!-- Título -->
+  <text x="500" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#58a6ff">Pipeline de Auditoria Acadêmica Caixa Branca</text>
+  <text x="500" y="52" text-anchor="middle" font-size="10" fill="#8b949e">Registro imutável de todas as interações · Parágrafo → Evidência → DOI · Score 0-100</text>
+
+  <!-- Fluxo Principal -->
+  <!-- 1. Pesquisador -->
+  <rect x="30" y="80" width="200" height="70" rx="12" fill="#0d419d" opacity="0.9"/>
+  <text x="130" y="108" text-anchor="middle" font-size="13" fill="white" font-weight="bold">👤 Pesquisador</text>
+  <text x="130" y="128" text-anchor="middle" font-size="9" fill="#c9d1d9">"PIB do Brasil"</text>
+  <text x="130" y="142" text-anchor="middle" font-size="9" fill="#c9d1d9">"artigos sobre IA"</text>
+
+  <!-- Seta -->
+  <line x1="230" y1="115" x2="270" y2="115" stroke="#8b949e" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- 2. AuditInstrumentor -->
+  <rect x="275" y="80" width="200" height="70" rx="12" fill="url(#dashGrad)" opacity="0.9"/>
+  <text x="375" y="108" text-anchor="middle" font-size="12" fill="white" font-weight="bold">📡 AuditInstrumentor</text>
+  <text x="375" y="128" text-anchor="middle" font-size="9" fill="#d2c5ff">Auto-instrumentação</text>
+  <text x="375" y="142" text-anchor="middle" font-size="9" fill="#d2c5ff">Intercepta TODAS queries</text>
+
+  <!-- Seta -->
+  <line x1="475" y1="115" x2="515" y2="115" stroke="#8b949e" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- 3. DataOrchestrator -->
+  <rect x="520" y="80" width="200" height="70" rx="12" fill="#0d419d" opacity="0.9"/>
+  <text x="620" y="108" text-anchor="middle" font-size="12" fill="white" font-weight="bold">🧠 DataOrchestrator</text>
+  <text x="620" y="128" text-anchor="middle" font-size="9" fill="#c9d1d9">Roteamento NL→8 domínios</text>
+  <text x="620" y="142" text-anchor="middle" font-size="9" fill="#c9d1d9">auto-discovery·fallback</text>
+
+  <!-- Seta -->
+  <line x1="720" y1="115" x2="760" y2="115" stroke="#8b949e" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- 4. Resultado -->
+  <rect x="765" y="80" width="200" height="70" rx="12" fill="#1a6e2a" opacity="0.9"/>
+  <text x="865" y="108" text-anchor="middle" font-size="12" fill="white" font-weight="bold">📦 DataResult</text>
+  <text x="865" y="128" text-anchor="middle" font-size="9" fill="#7ee787">source·data·meta</text>
+  <text x="865" y="142" text-anchor="middle" font-size="9" fill="#7ee787">confidence·timestamp</text>
+
+  <!-- Camada de Auditoria (abaixo) -->
+  <rect x="30" y="190" width="935" height="200" rx="12" fill="none" stroke="#30363d" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="500" y="212" text-anchor="middle" font-size="13" font-weight="bold" fill="#8b949e">CAMADA DE AUDITORIA — 9 Componentes</text>
+
+  <!-- Linha 1: Logger + Trail + Monitor -->
+  <rect x="50" y="228" width="280" height="70" rx="10" fill="url(#logGrad)" opacity="0.9"/>
+  <text x="190" y="252" text-anchor="middle" font-size="12" fill="white" font-weight="bold">📝 InteractionLogger</text>
+  <text x="190" y="270" text-anchor="middle" font-size="9" fill="#7ee787">JSONL imutável · hash SHA-256</text>
+  <text x="190" y="285" text-anchor="middle" font-size="9" fill="#7ee787">7 tipos de registro · thread-safe</text>
+
+  <rect x="350" y="228" width="280" height="70" rx="10" fill="url(#trailGrad)" opacity="0.9"/>
+  <text x="490" y="252" text-anchor="middle" font-size="12" fill="white" font-weight="bold">🔬 AcademicAuditTrail</text>
+  <text x="490" y="270" text-anchor="middle" font-size="9" fill="#79c0ff">Parágrafo→Evidência→DOI</text>
+  <text x="490" y="285" text-anchor="middle" font-size="9" fill="#79c0ff">TSAC (87 palavras) · Peer Review</text>
+
+  <rect x="650" y="228" width="280" height="70" rx="10" fill="#1f6e43" opacity="0.9"/>
+  <text x="790" y="252" text-anchor="middle" font-size="12" fill="white" font-weight="bold">💰 TokenEconomyMonitor</text>
+  <text x="790" y="270" text-anchor="middle" font-size="9" fill="#7ee787">3 níveis (500K/200K/50K)</text>
+  <text x="790" y="285" text-anchor="middle" font-size="9" fill="#7ee787">Eficiência · Economias estimadas</text>
+
+  <!-- Linha 2: Score + Alert + Search -->
+  <rect x="50" y="310" width="280" height="65" rx="10" fill="url(#scoreGrad)" opacity="0.9"/>
+  <text x="190" y="334" text-anchor="middle" font-size="12" fill="white" font-weight="bold">🎯 ResearcherScore</text>
+  <text x="190" y="352" text-anchor="middle" font-size="9" fill="#ffb3c1">6 critérios ponderados (0-100)</text>
+  <text x="190" y="367" text-anchor="middle" font-size="9" fill="#ffb3c1">Grades: A(≥90)·B(≥75)·C(≥60)</text>
+
+  <rect x="350" y="310" width="280" height="65" rx="10" fill="#b8860b" opacity="0.9"/>
+  <text x="490" y="334" text-anchor="middle" font-size="12" fill="white" font-weight="bold">⚠️ BudgetAlert</text>
+  <text x="490" y="352" text-anchor="middle" font-size="9" fill="#ffd700">Alertas info/warning/critical</text>
+  <text x="490" y="367" text-anchor="middle" font-size="9" fill="#ffd700">Sugestões proativas de otimização</text>
+
+  <rect x="650" y="310" width="280" height="65" rx="10" fill="#6e3fb5" opacity="0.9"/>
+  <text x="790" y="334" text-anchor="middle" font-size="12" fill="white" font-weight="bold">🔍 AuditSearch</text>
+  <text x="790" y="352" text-anchor="middle" font-size="9" fill="#d2c5ff">Busca/filtro por paradigma·nível·data</text>
+  <text x="790" y="367" text-anchor="middle" font-size="9" fill="#d2c5ff">Comparação multi-sessão</text>
+
+  <!-- Linha 3: Dashboard + Pipeline -->
+  <rect x="150" y="410" width="330" height="65" rx="12" fill="#8957e5" opacity="0.95"/>
+  <text x="315" y="436" text-anchor="middle" font-size="13" fill="white" font-weight="bold">📊 AuditDashboard (HTML)</text>
+  <text x="315" y="456" text-anchor="middle" font-size="9" fill="#d2c5ff">Score · Tokens · Alertas · Evidências</text>
+  <text x="315" y="470" text-anchor="middle" font-size="9" fill="#d2c5ff">Interativo · Tempo real · Responsivo</text>
+
+  <rect x="510" y="410" width="330" height="65" rx="12" fill="#58a6ff" opacity="0.9"/>
+  <text x="675" y="436" text-anchor="middle" font-size="13" fill="white" font-weight="bold">🔗 PipelineIntegration</text>
+  <text x="675" y="456" text-anchor="middle" font-size="9" fill="#c9d1d9">SEEKER→MASWOS→Auditoria</text>
+  <text x="675" y="470" text-anchor="middle" font-size="9" fill="#c9d1d9">Relatório Qualis A1 automático</text>
+
+  <!-- Persistência -->
+  <rect x="30" y="500" width="935" height="40" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="500" y="525" text-anchor="middle" font-size="11" fill="#8b949e">💾 .evolve/audit-logs/*.jsonl · .evolve/audit-trails/*.json · .evolve/token-monitor/*.md · .evolve/audit-refinements/*.html</text>
+
+  <!-- Rodapé -->
+  <text x="500" y="570" text-anchor="middle" font-size="10" fill="#484f58">OpenCode Ecosystem v4.2.3 — Academic Audit System — 9 componentes · ~1.900 linhas Python</text>
+  <text x="500" y="590" text-anchor="middle" font-size="9" fill="#30363d">skills/system/academic-audit/ · github.com/MarceloClaro/OpenCode_Ecosystem</text>
+</svg>

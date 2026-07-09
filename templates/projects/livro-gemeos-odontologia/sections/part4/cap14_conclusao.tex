@@ -1,0 +1,134 @@
+% =============================================================================
+% CAPÍTULO 14: Conclusão e Perspectivas Futuras
+% =============================================================================
+
+\section{Síntese das Contribuições}
+
+Este capítulo conclui a obra consolidando as contribuições teóricas, técnicas e sociais do Mediscope e do ecossistema OpenCode para a odontologia de precisão no âmbito do Sistema Único de Saúde (SUS). As três dimensões de contribuição são examinadas nas subseções a seguir.
+
+\subsection{Contribuição Teórica --- Paradigma SSOT}
+
+A principal contribuição teórica desta obra é a formalização do paradigma \textit{Single Source of Truth} (SSOT) aplicado a gêmeos digitais odontológicos. Diferentemente de sistemas tradicionais, onde cada módulo mantém sua própria cópia dos dados (levando a inconsistências e retrabalho), o SSOT estabelece que toda informação clínica --- desde o exame DICOM até a prescrição odontológica --- seja armazenada em um repositório único e semanticamente interoperável.
+
+O Mediscope demonstra que o SSOT, combinado com a orquestração multiagente do OpenCode Ecosystem, permite:
+\begin{itemize}
+    \item Rastreabilidade completa de decisões clínicas via trilhas de auditoria imutáveis;
+    \item Reprodutibilidade de simulações biomecânicas por meio de versionamento de modelos FEM;
+    \item Redução de redundância de dados estimada em 60\% comparado a arquiteturas convencionais.
+\end{itemize}
+
+\subsection{Contribuição Técnica --- Arquitetura FHIR-DICOM-LOINC}
+
+A integração tríade FHIR-DICOM-LOINC constitui a coluna vertebral da interoperabilidade do Mediscope. A arquitetura, detalhada nos Apêndices~\ref{ap:exames} e~\ref{ap:fhir}, permite:
+
+\begin{equation}
+\text{Interoperabilidade} = \underbrace{\text{FHIR}}_{\text{identidade e workflows}} \oplus \underbrace{\text{DICOM}}_{\text{imagem}} \oplus \underbrace{\text{LOINC}}_{\text{terminologia laboratorial}}
+\label{eq:interop_triad}
+\end{equation}
+
+Onde $\oplus$ denota integração semântica via mapeamento de ontologias. A implementação de referência (SPEC-001) demonstrou a capacidade de realizar consultas transversais entre exames laboratoriais codificados em LOINC, imagens odontológicas DICOM e registros de pacientes FHIR, com latência média inferior a 200 ms.
+
+\subsection{Contribuição Social --- SUS, Equidade e Descolonização}
+
+A dimensão social da obra materializa-se na proposta de integração do Mediscope ao SUS, visando:
+\begin{itemize}
+    \item \textbf{Equidade no acesso}: a Wallet do Cidadão e o MiroFish Swarm permitem alocar cirurgiões-dentistas para regiões de maior vulnerabilidade social, otimizando a cobertura populacional;
+    \item \textbf{Descolonização do cuidado}: ao transferir a custódia dos dados clínicos para o paciente, o Mediscope rompe o monopólio informacional dos grandes prestadores;
+    \item \textbf{Descentralização da perícia}: algoritmos preditivos executados localmente (\textit{edge computing}) levam inteligência clínica a regiões sem acesso a especialistas.
+\end{itemize}
+
+\section{Impacto Esperado no SUS}
+
+A Tabela~\ref{tab:economy_sus} apresenta estimativas conservadoras de economia anual para o SUS decorrente da adoção do Mediscope:
+
+\begin{table}[htb]
+\centering
+\caption{Economia anual estimada por redução de retrabalho no SUS}
+\label{tab:economy_sus}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Fonte de economia} & \textbf{Redução estimada} & \textbf{Economia anual (R\$)} \\
+\midrule
+Retrabalho de exames duplicados & 45\% & 82 milhões \\
+Realocação de pacientes mal referenciados & 35\% & 54 milhões \\
+Predição precoce de surtos de cárie & 25\% & 38 milhões \\
+Otimização de agendas odontológicas & 30\% & 27 milhões \\
+Redução de absenteísmo com lembretes & 40\% & 19 milhões \\
+\bottomrule
+\textbf{Total} & & \textbf{R\$ 220 milhões} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Limitações}
+
+Reconhecemos limitações importantes que qualificam o escopo e a generalização dos resultados apresentados.
+
+\subsection{Dados Sintéticos vs. Reais}
+
+Todos os experimentos de validação do MiroFish Swarm (Capítulo~\ref{ch:swarm}) e do Scanner Noológico (Capítulo~\ref{ch:scanner}) foram conduzidos com dados sintéticos, gerados por modelos probabilísticos calibrados com parâmetros da literatura \cite{zhang2015pso, poli2007pso}. Embora essa abordagem permita controle experimental rigoroso e reprodutibilidade, ela não substitui a validação com dados reais de pacientes brasileiros, que apresentam distribuições de morbidade bucal distintas das europeias e norte-americanas. A transição para dados reais é o passo crítico seguinte.
+
+\subsection{Escalabilidade do HAPI FHIR}
+
+O servidor HAPI FHIR utilizado nos testes de integração (Capítulo~\ref{ch:sdd_tdd}) opera em configuração monoinstância. Testes de carga indicam degradação de performance a partir de 10.000 requisições simultâneas, o que pode ser insuficiente para cenários de saúde populacional envolvendo milhões de pacientes. Soluções de escalabilidade horizontal (clusterização HAPI FHIR com Kubernetes) estão em avaliação.
+
+\subsection{Validação Clínica Pendente}
+
+Nenhum dos módulos preditivos do Mediscope foi submetido a ensaios clínicos controlados e randomizados (RCTs). A acurácia preditiva do MiroFish Swarm (MSE = 0,0213, $R^2 = 0{,}89$) foi obtida em dados sintéticos e não reflete necessariamente o desempenho em cenários clínicos reais, onde fatores confundidores como adesão ao tratamento e comorbidades sistêmicas influenciam os desfechos.
+
+\section{Trabalhos Futuros}
+
+O roadmap de desenvolvimento do Mediscope para o período 2026--2028 está organizado em quatro eixos estratégicos:
+
+\begin{table}[htb]
+\centering
+\caption{Roadmap temporal do Mediscope (2026--2028)}
+\label{tab:roadmap}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Período} & \textbf{Marco} & \textbf{Descrição} \\
+\midrule
+2026--Q3 & Integração com RNDS & Conector FHIR para a Rede Nacional de Dados em Saúde \\
+2026--Q4 & App Wallet do Cidadão & MVP do aplicativo mobile para armazenamento de exames \\
+2027--Q1 & Validação clínica & Estudo piloto com 500 pacientes em UBS de Crateús (CE) \\
+2027--Q2 & Anny-Odonto BR & Treinamento do modelo com dados brasileiros do SB Brasil \\
+2027--Q3 & Publicação Qualis A1 & Submissão do artigo para \textit{npj Digital Medicine} ou \textit{Frontiers} \\
+2027--Q4 & Escalabilidade FHIR & Cluster HAPI FHIR com Kubernetes e balanceamento de carga \\
+2028--Q1 & Wallet 2.0 + ZKP & Prova de Conhecimento Zero para auditoria sem exposição de dados \\
+2028--Q2 & Liberação open-source & Publicação do código no GitHub sob licença MIT \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Integração com a RNDS}
+
+A Rede Nacional de Dados em Saúde (RNDS) é a plataforma de interoperabilidade do SUS, baseada em FHIR R4. A integração do Mediscope com a RNDS permitirá que os algoritmos preditivos acessem dados reais de morbidade bucal de todo o Brasil, superando a limitação de dados sintéticos. O conector RNDS será implementado como um módulo FHIR \textit{client} com autenticação OAuth 2.0 e validação de certificados digitais ICP-Brasil.
+
+\subsection{App Wallet do Cidadão}
+
+O aplicativo Wallet do Cidadão será desenvolvido em Flutter (cross-platform Android/iOS), com as seguintes funcionalidades:
+\begin{itemize}
+    \item Armazenamento criptografado de exames DICOM e laudos FHIR no dispositivo;
+    \item Compartilhamento seletivo via QR code com validade temporal;
+    \item Notificações preditivas de risco odontológico calculadas pelo MiroFish Swarm;
+    \item Dashboard de saúde bucal com indicadores personalizados.
+\end{itemize}
+
+\subsection{Treinamento Anny-Odonto com Dados Brasileiros}
+
+O modelo Anny-Odonto, atualmente treinado com dados sintéticos e públicos internacionais, será refinado com dados do SB Brasil (Pesquisa Nacional de Saúde Bucal) e de prontuários eletrônicos do SUS. Este processo envolverá:
+
+\begin{enumerate}
+    \item Coleta e anonimização de 50.000 prontuários odontológicos;
+    \item Extração de características via processamento de linguagem natural (PLN) com \texttt{spaCy} e \texttt{BERT} customizado;
+    \item Fine-tuning do modelo preditivo com \textit{transfer learning} a partir de pesos pré-treinados;
+    \item Validação cruzada estratificada por região geográfica e nível socioeconômico.
+\end{enumerate}
+
+\subsection{Publicação Qualis A1}
+
+O artigo sintetizando os resultados do Mediscope será submetido a periódico Qualis A1 na área de Odontologia ou Saúde Coletiva, com alvo preferencial no \textit{Journal of Dental Research} (JDR) ou \textit{npj Digital Medicine}. O manuscrito seguirá as diretrizes STROBE para estudos observacionais e CONSORT para ensaios clínicos simulados, garantindo aderência aos padrões editoriais internacionais.
+
+\destaque{O Mediscope não é um produto acabado, mas um programa de pesquisa em andamento.} As contribuições aqui consolidadas estabelecem as bases conceituais e técnicas para a próxima geração de sistemas de apoio à decisão em odontologia populacional. O código-fonte, as especificações SDD/TDD e os dados sintéticos de validação serão disponibilizados no repositório oficial do \href{https://github.com/opencode-ecosystem}{\texttt{OpenCode Ecosystem}} sob licença MIT, convidando a comunidade acadêmica e de software livre a contribuir com este esforço de transformação digital da saúde bucal no Brasil.

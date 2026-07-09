@@ -1,0 +1,37 @@
+\chapter{Tabelas}
+
+\thispagestyle{empty} 
+
+A tabela \ref{tab:SI-basicas} mostra algumas unidades básicas do SI.
+
+\begin{table}
+\begin{minipage}{\hsize}
+\begin{center}
+	\caption{Algumas unidades básicas do SI.}
+	\label{tab:SI-basicas}
+	\begin{tabular}{P{0.40\hsize}|P{0.5\hsize}}
+		\hline
+		\textbf{Grandeza} & \textbf{Unidade} \\
+		\hline
+		comprimento & metro (\si{\meter}) \\
+		\hline
+		massa & quilograma (\si{\kilo\gram}) \\
+		\hline
+		tempo & segundo (\si{\second}) \\
+		\hline
+		corrente elétrica & ampère (\si{\ampere}) \\
+		\hline
+		temperatura & kelvin (\si{\kelvin}) \\
+		\hline
+		quantidade de matéria & mol (\si{\mol}) \\
+		\hline
+		intensidade luminosa & candela (\si{\candela}) \\
+		\hline
+	\end{tabular}
+	\source{adaptado do livro Física para Ciências Agrárias e Ambientais, de Leonardo Luiz e Castro e Olavo Leopoldino da Silva Filho.}
+\end{center}
+\end{minipage}
+\end{table}
+
+
+É uma boa ideia usar o pacote ``longtable'' para criar tabelas, \index{tabelas} pois assim uma mesma tabela pode ocupar várias páginas. Dê uma olhada no código da lista de símbolos, pois ela foi feita com esse pacote.

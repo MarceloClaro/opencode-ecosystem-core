@@ -1,0 +1,26 @@
+\usepackage{booktabs} % Required for nicer horizontal rules in tables
+
+%----------------------------------------------------------------------------------------
+%   LINES
+%----------------------------------------------------------------------------------------
+
+\arrayrulecolor{border}
+\setlength{\arrayrulewidth}{2pt} 
+
+%----------------------------------------------------------------------------------------
+%   LAYOUT
+%----------------------------------------------------------------------------------------
+
+% Define a new column type
+\newcolumntype{C}{>{\color{fg}\centering\arraybackslash\hspace{12pt}}c<{\hspace{12pt}}}
+\newcolumntype{L}{>{\color{fg}\raggedright\arraybackslash\hspace{12pt}}l<{\hspace{12pt}}}
+\newcolumntype{R}{>{\color{fg}\raggedleft\arraybackslash\hspace{12pt}}r<{\hspace{12pt}}}
+
+% Adjust the vertical padding
+\renewcommand{\arraystretch}{1.5}
+
+%----------------------------------------------------------------------------------------
+%   HEADERS
+%----------------------------------------------------------------------------------------
+
+\newcommand{\thead}[1]{\uppercase{#1}}

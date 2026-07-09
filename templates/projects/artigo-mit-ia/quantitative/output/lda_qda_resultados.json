@@ -1,0 +1,70 @@
+{
+  "LDA": {
+    "acuracia_teste": 0.9697,
+    "auc_roc": 0.9963,
+    "cv_acuracia_media": 0.9316,
+    "cv_acuracia_std": 0.0559,
+    "coeficientes": {
+      "aipi_digital": 20.1538,
+      "aipi_humano": -0.7855,
+      "aipi_inovacao": -0.0012,
+      "aipi_regulacao": -0.0,
+      "pib_pc_ppc": 0.0,
+      "ptf_relativa": 0.1395,
+      "educ_superior_pct": 0.8819,
+      "internet_pop_pct": -20.154,
+      "gini": -0.123,
+      "agricultura_pib_pct": 0.0391
+    },
+    "intercepto": -11.8414
+  },
+  "QDA": {
+    "acuracia_teste": 0.9697,
+    "auc_roc": 1.0,
+    "cv_acuracia_media": 0.9396,
+    "cv_acuracia_std": 0.0388
+  },
+  "RF_benchmark": {
+    "acuracia_teste": 1.0,
+    "auc_roc": 1.0,
+    "cv_acuracia_media": 0.9621,
+    "cv_acuracia_std": 0.0243,
+    "top_features": {
+      "aipi_humano": 0.1973,
+      "educ_superior_pct": 0.1851,
+      "pib_pc_ppc": 0.1661,
+      "ptf_relativa": 0.1464,
+      "internet_pop_pct": 0.1107
+    }
+  },
+  "confusao_LDA": [
+    [
+      16,
+      1
+    ],
+    [
+      0,
+      16
+    ]
+  ],
+  "confusao_QDA": [
+    [
+      16,
+      1
+    ],
+    [
+      0,
+      16
+    ]
+  ],
+  "confusao_RF": [
+    [
+      17,
+      0
+    ],
+    [
+      0,
+      16
+    ]
+  ]
+}

@@ -1,0 +1,42 @@
+\section{Cronograma de Adoção: O \textit{Gartner Hype Cycle} da Odontologia}
+
+Para visualizar a trajetória de maturação, propomos o diagrama do \textit{Gartner Hype Cycle} adaptado para a odontologia digital brasileira \cite{fortune2026digital, mdpi2025digital}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[font=\footnotesize, 
+        node distance=1.5cm,
+        box/.style={rectangle, draw=accent, thick, fill=bgalt, text=fg, align=center, rounded corners, minimum width=2.5cm, minimum height=0.8cm, font=\sffamily\scriptsize},
+        axis/.style={->, >=latex, thick, draw=fgalt}
+    ]
+    
+    % Eixos
+    \draw[axis] (0,0) -- (10,0) node[right, font=\sffamily\small] {Tempo (Anos)};
+    \draw[axis] (0,0) -- (0,5);
+    \node[rotate=90, anchor=south, font=\sffamily\small] at (-0.6,2.5) {Expectativa};
+    
+    % Curva Hype Cycle aproximada
+    \draw[thick, color=accent] (0,0.5) .. controls (1,1) and (1.5,4.5) .. (2.5,4.5) 
+                                       .. controls (3,4.5) and (4,1) .. (5,1)
+                                       .. controls (6,1) and (7,2.5) .. (9,2.5);
+                                       
+    % Nodes (Fases)
+    \node[box, anchor=south, align=center] at (1.5,2.5) {Inovação\\(2024-2026)};
+    \node[box, anchor=south] at (2.5,4.7) {Pico de Expectativas\\(2027-2029)};
+    \node[box, anchor=north] at (5,0.8) {Vale da Desilusão\\(2030-2032)};
+    \node[box, anchor=south] at (9,2.7) {Platô de Produtividade\\(2033+)};
+    
+    % Pontos na curva
+    \filldraw[accent] (1.5, 2.8) circle (2pt);
+    \filldraw[accent] (2.5, 4.5) circle (2pt);
+    \filldraw[accent] (5, 1) circle (2pt);
+    \filldraw[accent] (9, 2.5) circle (2pt);
+    
+    \end{tikzpicture}
+\end{adjustbox}
+    \caption{Curva de Adoção de Gêmeos Digitais Odontológicos (Adaptado do modelo de Gartner).}
+    \label{fig:hype-cycle}
+\end{figure}
+
+O período atual (2024 a 2026) representa a fase de \textbf{inovação laboratorial}, dominada por publicações acadêmicas de prova de conceito. O vindouro \textbf{pico de expectativas infladas} (2027-2029) testemunhará um frenesi de startups vendendo soluções prematuras. O inevitável \textbf{vale da desilusão} (2030-2032) ocorrerá quando as falhas clínicas e a ausência de interoperabilidade barrarem a escala. Somente após esta depuração, com a aprovação de ECRs robustos pela ANVISA, atingiremos o \textbf{platô de produtividade} (após 2033), onde o gêmeo digital será tão banal e onipresente em uma sala clínica quanto é, hoje, o refletor de LED.

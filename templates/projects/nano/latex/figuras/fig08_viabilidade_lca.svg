@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 13px; font-weight: bold; fill: #1a5276; }
+      .subtitle { font-size: 10px; font-weight: bold; fill: #1a5276; }
+      .label { font-size: 9px; fill: #333; }
+      .annot { font-size: 8px; fill: #e67e22; font-style: italic; }
+      .cite { font-size: 7px; fill: #7f8c8d; }
+      .box { fill: none; stroke: #7f8c8d; stroke-width: 1; }
+      .card { fill: white; stroke: #1a5276; stroke-width: 1.5; rx: 8; }
+    </style>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 10,3.5 0,7" fill="#27ae60"/></marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 10,3.5 0,7" fill="#e67e22"/></marker>
+  </defs>
+  <rect width="900" height="720" fill="white"/>
+  <text x="450" y="22" text-anchor="middle" class="title" font-size="15">Figura 8 — Infográfico de Viabilidade Industrial e Análise de Ciclo de Vida (LCA)</text>
+  <line x1="80" y1="30" x2="820" y2="30" stroke="#1a5276" stroke-width="1"/>
+
+  <!-- ====== (a) Análise de Custo ====== -->
+  <g transform="translate(20,38)">
+    <rect x="0" y="0" width="430" height="300" class="card"/>
+    <text x="215" y="20" text-anchor="middle" class="subtitle">(a) Análise de Custo Incremental</text>
+
+    <!-- Tabela de custos -->
+    <rect x="15" y="30" width="400" height="24" rx="3" fill="#1a5276"/>
+    <text x="55" y="46" font-size="8" fill="white" text-anchor="middle" font-weight="bold">Componente</text>
+    <text x="165" y="46" font-size="8" fill="white" text-anchor="middle" font-weight="bold">Preço (US$/kg)</text>
+    <text x="245" y="46" font-size="8" fill="white" text-anchor="middle" font-weight="bold">Dosagem (%)</text>
+    <text x="335" y="46" font-size="8" fill="white" text-anchor="middle" font-weight="bold">Custo (US$/kg)</text>
+
+    <rect x="15" y="56" width="400" height="20" fill="#f0f4f7"/>
+    <text x="30" y="70" font-size="7.5" fill="#333">Masterbatch rGO 1%</text>
+    <text x="165" y="70" font-size="7.5" fill="#333" text-anchor="middle">25,00</text>
+    <text x="245" y="70" font-size="7.5" fill="#333" text-anchor="middle">5,00</text>
+    <text x="335" y="70" font-size="7.5" fill="#333" text-anchor="middle">0,062</text>
+
+    <rect x="15" y="78" width="400" height="20" fill="white"/>
+    <text x="30" y="92" font-size="7.5" fill="#333">PP-g-MA (Orevac CA100)</text>
+    <text x="165" y="92" font-size="7.5" fill="#333" text-anchor="middle">8,00</text>
+    <text x="245" y="92" font-size="7.5" fill="#333" text-anchor="middle">0,05</text>
+    <text x="335" y="92" font-size="7.5" fill="#333" text-anchor="middle">0,004</text>
+
+    <rect x="15" y="100" width="400" height="20" fill="#f0f4f7"/>
+    <text x="30" y="114" font-size="7.5" fill="#333">Processamento adicional</text>
+    <text x="165" y="114" font-size="7.5" fill="#333" text-anchor="middle">—</text>
+    <text x="245" y="114" font-size="7.5" fill="#333" text-anchor="middle">—</text>
+    <text x="335" y="114" font-size="7.5" fill="#333" text-anchor="middle">0,054</text>
+
+    <!-- Total -->
+    <rect x="15" y="122" width="400" height="22" fill="#e67e22" opacity="0.2" stroke="#e67e22" stroke-width="1.5"/>
+    <text x="30" y="138" font-size="8" fill="#e67e22" font-weight="bold">CUSTO INCREMENTAL TOTAL</text>
+    <text x="335" y="138" font-size="9" fill="#e67e22" font-weight="bold" text-anchor="middle">0,12</text>
+
+    <!-- Payback -->
+    <rect x="15" y="155" width="400" height="75" rx="6" fill="#e8f8e8" stroke="#27ae60" stroke-width="1.5"/>
+    <text x="215" y="173" text-anchor="middle" font-size="9" fill="#27ae60" font-weight="bold">⚡ Payback via Downgauging (12%)</text>
+    <text x="215" y="190" text-anchor="middle" font-size="7.5" fill="#333">Custo aditivo: US$ 0,60/peça (5 kg)  |  Economia: US$ 1,50/peça</text>
+    <text x="215" y="205" text-anchor="middle" font-size="7.5" fill="#27ae60" font-weight="bold">Retorno = 2,5× o custo do aditivo  →  PAYBACK IMEDIATO</text>
+    <text x="215" y="222" text-anchor="middle" font-size="6.5" fill="#7f8c8d">(Redução de 12% na espessura mantendo propriedades equivalentes)</text>
+
+    <!-- Fornecedores -->
+    <text x="15" y="250" class="cite" font-size="7">Masterbatch: BoomaTech Grapheox 212 (Coreia) | PP-g-MA: SK Functional Polymer Orevac CA100 (França)</text>
+    <text x="15" y="264" class="cite">PELBD: Braskem ML3602U (Brasil) — IF = 5,0 g/10min | Mercado rotomoldagem: US$ 36,5 bi (CAGR 4,8%)</text>
+    <text x="15" y="280" class="cite">[ISO 14040:2006 — Environmental management — Life cycle assessment — Principles and framework]</text>
+  </g>
+
+  <!-- ====== (b) LCA Comparativa ====== -->
+  <g transform="translate(470,38)">
+    <rect x="0" y="0" width="410" height="300" class="card"/>
+    <text x="205" y="20" text-anchor="middle" class="subtitle">(b) LCA Comparativa — CO₂-eq por kg</text>
+
+    <!-- Barras de CO2 -->
+    <text x="40" y="55" font-size="8" fill="#333">kg CO₂-eq / kg</text>
+
+    <!-- Barra 1: PELBD puro -->
+    <rect x="40" y="65" width="187" height="40" rx="5" fill="#1a5276"/>
+    <text x="50" y="90" font-size="9" fill="white" font-weight="bold">1,87</text>
+    <text x="50" y="112" font-size="7" fill="#333">PELBD puro</text>
+
+    <!-- Barra 2: Nanocompósito -->
+    <rect x="40" y="125" width="190" height="40" rx="5" fill="#e67e22"/>
+    <text x="50" y="150" font-size="9" fill="white" font-weight="bold">1,90</text>
+    <text x="50" y="172" font-size="7" fill="#333">Nanocompósito (+1,6%)</text>
+
+    <!-- Barra 3: Nanocompósito com downgauging -->
+    <rect x="40" y="185" width="167" height="40" rx="5" fill="#27ae60"/>
+    <text x="50" y="210" font-size="9" fill="white" font-weight="bold">1,67</text>
+    <text x="50" y="232" font-size="7" fill="#27ae60" font-weight="bold">c/ downgauging (−10,7%)</text>
+
+    <!-- Seta de redução -->
+    <line x1="280" y1="105" x2="320" y2="105" stroke="#27ae60" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+    <text x="330" y="98" font-size="8" fill="#27ae60" font-weight="bold">−10,7%</text>
+    <text x="330" y="112" font-size="7" fill="#333">vs. puro</text>
+
+    <!-- Fórmula -->
+    <rect x="40" y="245" width="350" height="40" rx="5" fill="#e8f4f8" stroke="#1a5276" stroke-width="0.8"/>
+    <text x="60" y="258" font-size="7" fill="#333">CF = m_PELBD·e_PELBD + m_rGO·e_rGO + E_proc·e_grid</text>
+    <text x="60" y="272" font-size="6.5" fill="#7f8c8d">e_PELBD=1,80 | e_rGO≈5,2 | e_grid=0,074 kg CO₂-eq/unidade</text>
+  </g>
+
+  <!-- ====== (c) Digital Twin ====== -->
+  <g transform="translate(20,355)">
+    <rect x="0" y="0" width="860" height="150" class="card"/>
+    <text x="430" y="20" text-anchor="middle" class="subtitle">(c) Diagrama do Digital Twin — Transferência Injeção → Rotomoldagem</text>
+
+    <!-- Fluxo -->
+    <rect x="20" y="35" width="120" height="50" rx="8" fill="#e8f4f8" stroke="#1a5276" stroke-width="2"/>
+    <text x="80" y="56" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">INJEÇÃO</text>
+    <text x="80" y="72" text-anchor="middle" font-size="7" fill="#333">Corpos de prova</text>
+
+    <line x1="145" y1="60" x2="175" y2="60" stroke="#1a5276" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+
+    <rect x="180" y="35" width="130" height="50" rx="8" fill="#fef9e7" stroke="#e67e22" stroke-width="2"/>
+    <text x="245" y="56" text-anchor="middle" font-size="8" fill="#e67e22" font-weight="bold">PCR</text>
+    <text x="245" y="72" text-anchor="middle" font-size="7" fill="#333">R²_LOOCV = 0,93</text>
+
+    <line x1="315" y1="60" x2="345" y2="60" stroke="#e67e22" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+
+    <rect x="350" y="35" width="140" height="50" rx="8" fill="#e8f8e8" stroke="#27ae60" stroke-width="2"/>
+    <text x="420" y="56" text-anchor="middle" font-size="8" fill="#27ae60" font-weight="bold">PREDIÇÃO</text>
+    <text x="420" y="72" text-anchor="middle" font-size="7" fill="#333">Erro &lt; 4%</text>
+
+    <line x1="495" y1="60" x2="525" y2="60" stroke="#27ae60" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+
+    <rect x="530" y="35" width="150" height="50" rx="8" fill="#f0e6f6" stroke="#8e44ad" stroke-width="2"/>
+    <text x="605" y="56" text-anchor="middle" font-size="8" fill="#8e44ad" font-weight="bold">OTIMIZAÇÃO</text>
+    <text x="605" y="72" text-anchor="middle" font-size="7" fill="#333">Bayesiana (EI)</text>
+
+    <line x1="685" y1="60" x2="715" y2="60" stroke="#8e44ad" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+
+    <rect x="720" y="35" width="120" height="50" rx="8" fill="#1a5276"/>
+    <text x="780" y="56" text-anchor="middle" font-size="8" fill="white" font-weight="bold">ROTOMOLDAGEM</text>
+    <text x="780" y="72" text-anchor="middle" font-size="7" fill="#ddd">Peça validada</text>
+
+    <!-- Métricas -->
+    <rect x="20" y="100" width="820" height="35" rx="5" fill="#fef9e7" stroke="#e67e22" stroke-width="1"/>
+    <text x="430" y="115" text-anchor="middle" font-size="8" fill="#333">
+      <tspan font-weight="bold" fill="#e67e22">Coeficientes PCR padronizados:</tspan>
+      <tspan fill="#333">β_std(T_10%) = 0,47</tspan>
+      <tspan fill="#7f8c8d"> | </tspan>
+      <tspan fill="#333">β_std(η*) = 0,31</tspan>
+      <tspan fill="#7f8c8d"> | </tspan>
+      <tspan fill="#333">β_std(Módulo) = 0,22</tspan>
+    </text>
+    <text x="430" y="130" text-anchor="middle" font-size="6.5" fill="#7f8c8d">→ T_10% confirmada como variável-ponte entre processamento e desempenho</text>
+
+    <text x="20" y="160" class="cite">[Somberg et al., Materials &amp; Design 224, 111304 (2022). DOI: 10.1016/j.matdes.2022.111304 — Nanocompósitos PE/LCA]</text>
+  </g>
+
+  <!-- Resumo ESG -->
+  <g transform="translate(20,520)">
+    <rect x="0" y="0" width="860" height="85" rx="8" fill="#1a5276" opacity="0.05" stroke="#1a5276" stroke-width="2"/>
+    <text x="430" y="20" text-anchor="middle" class="subtitle" fill="#1a5276">Resumo de Viabilidade Industrial e ESG</text>
+
+    <rect x="15" y="32" width="195" height="42" rx="6" fill="#e8f8e8" stroke="#27ae60" stroke-width="1.2"/>
+    <text x="112" y="48" text-anchor="middle" font-size="8" fill="#27ae60" font-weight="bold">💰 Econômico</text>
+    <text x="112" y="64" text-anchor="middle" font-size="7" fill="#333">US$ 0,12/kg | Payback imediato</text>
+
+    <rect x="220" y="32" width="195" height="42" rx="6" fill="#e8f8e8" stroke="#27ae60" stroke-width="1.2"/>
+    <text x="317" y="48" text-anchor="middle" font-size="8" fill="#27ae60" font-weight="bold">🌱 Ambiental</text>
+    <text x="317" y="64" text-anchor="middle" font-size="7" fill="#333">−10,7% CO₂/peça (downgauging)</text>
+
+    <rect x="425" y="32" width="195" height="42" rx="6" fill="#e8f8e8" stroke="#27ae60" stroke-width="1.2"/>
+    <text x="522" y="48" text-anchor="middle" font-size="8" fill="#27ae60" font-weight="bold">⚙️ Técnico</text>
+    <text x="522" y="64" text-anchor="middle" font-size="7" fill="#333">PCR R²=0,93 | −80% tempo P&amp;D</text>
+
+    <rect x="630" y="32" width="215" height="42" rx="6" fill="#e8f8e8" stroke="#27ae60" stroke-width="1.2"/>
+    <text x="737" y="48" text-anchor="middle" font-size="8" fill="#27ae60" font-weight="bold">🏭 Industrial</text>
+    <text x="737" y="64" text-anchor="middle" font-size="7" fill="#333">Scale-up com Braskem (≥1 ton)</text>
+  </g>
+
+  <!-- Legenda geral -->
+  <text x="450" y="630" text-anchor="middle" class="annot" font-size="9">
+    Legenda: O custo incremental de US$ 0,12/kg é compensado por downgauging de 12% (payback imediato, 2,5× o custo do aditivo). A LCA ISO 14040 mostra redução de 10,7% na pegada de carbono por peça.
+    O digital twin (PCR com R²=0,93) reduz 80% do tempo de desenvolvimento, viabilizando transferência rápida de injeção para rotomoldagem industrial.
+  </text>
+</svg>

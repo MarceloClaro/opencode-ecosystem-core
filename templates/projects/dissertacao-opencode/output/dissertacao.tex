@@ -1,0 +1,209 @@
+\documentclass[
+  12pt,
+  a4paper,
+  brazil,
+  twoside,
+  openright
+]{report}
+
+% ===== TEMA ESCURO (DARK MODE) & PACOTES ESSENCIAIS =====
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[brazil]{babel}
+
+% Pacotes de cores e definição do tema
+\usepackage[table]{xcolor}
+\usepackage{pagecolor}
+
+\definecolor{darkbg}{HTML}{0B0E14}      % Fundo escuro (charcoal/deep blue)
+\definecolor{lightfg}{HTML}{CDD0D5}     % Texto claro (off-white)
+\definecolor{accentOrange}{HTML}{FF6B00}% Laranja Cyberpunk (capítulos, seções e acentos)
+\definecolor{accentCyan}{HTML}{00E5FF}  % Ciano Neon (subseções e links)
+\definecolor{codebg}{HTML}{1A1E2A}      % Fundo do bloco de código
+
+\pagecolor{darkbg}
+\color{lightfg}
+
+% Negrito com destaque em branco puro
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{\color{white}#1}}
+
+% Hifenização agressiva para caber nas margens ABNT
+\sloppy
+\setlength{\emergencystretch}{2em}
+\hyphenpenalty=500
+\tolerance=1000
+
+% Regras de hifenização para palavras técnicas (ABNT margens estreitas)
+\hyphenation{
+  es-pe-ci-fi-ca-ção
+  ar-qui-te-tu-ra
+  go-ver-na-nça
+  e-cos-sis-te-ma
+  mul-ti-a-gen-te
+  Or-ques-tra-ção
+  Pro-ces-sa-men-to
+  In-fra-es-tru-tu-ra
+  re-pro-du-ti-bi-li-da-de
+  e-pis-te-mo-ló-gi-co
+  me-to-do-lo-gi-a
+  bi-bli-o-grá-fi-ca
+  trans-ver-sal
+  lon-gi-tu-di-nal
+  pa-ra-dig-má-ti-ca
+  sis-tê-mi-co
+  po-pu-la-ci-o-nal
+  trans-la-ci-o-nal
+  re-gu-la-tó-ria
+  Open-Code
+  MAS-WOS
+  cor-rec-tor
+  au-to-má-ti-co
+  au-dit-á-vel
+  ite-ra-ti-va
+  ci-en-tí-fi-co
+  dis-ser-ta-ção
+  psi-co-lo-gia
+}
+
+\usepackage[
+  top=3cm,
+  left=3cm,
+  right=2cm,
+  bottom=2cm
+]{geometry}
+
+% ===== ESPAÇAMENTO E INDENTAÇÃO =====
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+% Melhor controle de margens e hifenização
+\usepackage{microtype}
+
+% ===== CABEÇALHO E RODAPÉ =====
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE,LO]{\textit{O Ecossistema OpenCode: Arquitetura, Governança e Evolução}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{{\color{accentOrange}\hrule width\headwidth height\headrulewidth}}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[LE,RO]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% ===== HIPERLINKS =====
+\usepackage[colorlinks=true, linkcolor=accentOrange, citecolor=accentCyan, urlcolor=accentCyan]{hyperref}
+
+% ===== TABELAS E FIGURAS =====
+\usepackage{array, booktabs, longtable, multirow}
+\usepackage{graphicx}
+\usepackage[labelfont=bf, textfont=normalfont, justification=centering]{caption}
+\usepackage{float}
+\usepackage{enumitem}
+\newcommand{\fonte}[1]{\vspace{4pt}\par\noindent\small\textbf{Fonte:} #1}
+
+% ===== NOTAS DE RODAPÉ =====
+\usepackage[bottom, hang, flushmargin]{footmisc}
+\setlength{\footnotesep}{6pt}
+\interfootnotelinepenalty=10000
+
+% ===== FORMATAÇÃO DE TÍTULOS =====
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]
+  {\normalfont\bfseries\Large\color{accentOrange}}
+  {\thechapter}
+  {0.5em}
+  {}
+\titleformat{\section}[hang]
+  {\normalfont\bfseries\large\color{accentOrange}}
+  {\thesection}
+  {0.5em}
+  {}
+\titleformat{\subsection}[hang]
+  {\normalfont\bfseries\normalsize\color{accentCyan}}
+  {\thesubsection}
+  {0.5em}
+  {}
+
+% ===== SUMÁRIO =====
+\usepackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setcounter{tocdepth}{2}
+
+% ===== CITAÇÕES E REFERÊNCIAS (ABNT autor-data via thebibliography) =====
+
+% ===== LISTAGENS DE CÓDIGO =====
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize\color{lightfg},
+  breaklines=true,
+  breakatwhitespace=false,
+  postbreak=\mbox{$\hookrightarrow$\space},
+  frame=single,
+  rulecolor=\color{accentOrange!50},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  captionpos=b,
+  backgroundcolor=\color{codebg}
+}
+
+% ===== MATEMÁTICA =====
+\usepackage{amsmath, amssymb, amsthm}
+\newtheorem{definicao}{Definição}[chapter]
+\newtheorem{proposicao}{Proposição}[chapter]
+
+% ===== METADADOS PDF =====
+\hypersetup{
+  pdftitle={O Ecossistema OpenCode: Arquitetura, Governança e Evolução de uma Plataforma Multiagente para Pesquisa Científica Autônoma},
+  pdfauthor={Marcelo Claro Laranjeira (ORCID: 0000-0001-8996-2887)},
+  pdfsubject={Sistemas Multiagentes, Pipelines Acadêmicos, TDD, SDD},
+  pdfkeywords={OpenCode, multiagente, SDD, TDD, Qualis A1, MCP, LaTeX, ABNT, CNPq},
+  pdfcreator={OpenCode Ecosystem v5.1.0},
+  pdfproducer={MASWOS v5.0 Pipeline}
+}
+
+\begin{document}
+
+% ===== ELEMENTOS PRÉ-TEXTUAIS =====
+\include{capitulos/00-ilustracao}
+\include{capitulos/00-capa}
+\include{capitulos/01-folha-rosto}
+\include{capitulos/02-ficha-catalografica}
+\include{capitulos/03-dedicatoria}
+\include{capitulos/04-agradecimentos}
+\include{capitulos/05-epigrafe}
+\include{capitulos/06-resumo}
+\include{capitulos/07-abstract}
+\include{capitulos/08-lista-figuras}
+\include{capitulos/09-lista-tabelas}
+\include{capitulos/10-lista-siglas}
+\include{capitulos/11-sumario}
+
+% ===== CORPO PRINCIPAL =====
+\pagenumbering{arabic}
+\include{capitulos/12-introducao}
+\include{capitulos/13-revisao-literatura}
+\include{capitulos/14-metodologia}
+\include{capitulos/15-resultados}
+\include{capitulos/16-discussao}
+\include{capitulos/17-conclusao}
+
+% ===== REFERÊNCIAS =====
+\include{capitulos/18-referencias}
+
+% ===== APÊNDICES =====
+\appendix
+\include{capitulos/19-apendice-a}
+\include{capitulos/20-apendice-b}
+\include{capitulos/21-apendice-c}
+
+\end{document}

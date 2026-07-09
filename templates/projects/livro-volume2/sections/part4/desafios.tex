@@ -1,0 +1,292 @@
+% =============================================================================
+% CAPÍTULO 16: Guia Prático — Do Vibe Code ao PhD
+% Volume 2 — Framework SUS-Twin: jornada progressiva de aprendizado
+% =============================================================================
+% Seções:
+%   16.1 - Nível 0: Vibe Code
+%   16.2 - Nível 1: Implementação Guiada
+%   16.3 - Nível 2: Pesquisa Reprodutível
+%   16.4 - Nível 3: PhD e Inovação
+
+\section{Introdução: A Jornada em Quatro Níveis}
+
+Este capítulo é o núcleo didático do Volume 2. Ele organiza a construção de Gêmeos Digitais Periodontais em quatro níveis progressivos de maturidade, cada um com projetos práticos, ferramentas específicas e validação mensurável. O leitor pode iniciar de onde estiver e avançar no seu próprio ritmo.
+
+\subsection{Nível 0 — Vibe Code\protect\footnote{Vibe Coding: termo criado por Andrej Karpathy para descrever a prática de gerar código via inteligência artificial usando linguagem natural, sem necessariamente saber programar.}: Primeiro Contato sem Programação}
+
+\textbf{Perfil}: Profissional de saúde, estudante de odontologia, curioso digital. Nunca programou.
+
+\textbf{Objetivo}: Visualizar um gêmeo digital funcional em menos de 30 minutos.
+
+\subsubsection*{Projeto 1: Segmentação CBCT com DentalSegmentator}
+
+\begin{enumerate}
+    \item Baixe o 3D Slicer (\url{https://slicer.org}) --- gratuito, multi-plataforma.
+    \item Instale a extensão DentalSegmentator via Extension Manager.
+    \item Carregue o volume de demonstração ``CBCT Dental Surgery'' (incluso).
+    \item Clique ``Apply'' no módulo DentalSegmentator.
+    \item Exporte as segmentações como malhas STL.
+\end{enumerate}
+
+\textbf{Validação}: O resultado é uma malha 3D colorida com maxila (azul), mandíbula (verde) e dentes (amarelo/vermelho). Publique uma captura de tela no fórum da comunidade.
+
+\textbf{Tempo estimado}: 20 minutos. \textbf{Ferramentas}: 3D Slicer, DentalSegmentator.
+
+\subsubsection*{Projeto 2: Primeiro Gêmeo Digital com IA Generativa\protect\footnote{IA Generativa: inteligência artificial capaz de criar conteúdo novo (texto, imagens, código) a partir de instruções em linguagem natural. Exemplos: ChatGPT, Claude, Gemini.}}
+
+\begin{enumerate}
+    \item Acesse um assistente de IA (ChatGPT, Claude, Gemini).
+    \item Peça: ``Gere um código Python que crie um modelo 3D simples de um dente molar usando Open3D\protect\footnote{Open3D: biblioteca gratuita de Python para trabalhar com modelos 3D. Permite criar, visualizar e manipular objetos tridimensionais com poucas linhas de código.}.''
+    \item Copie o código, cole em um arquivo \texttt{primeiro\_dente.py}.
+    \item Execute com \texttt{python primeiro\_dente.py}.
+    \item Visualize o resultado --- seu primeiro gêmeo digital sintético.
+\end{enumerate}
+
+\textbf{Validação}: O código executa sem erros e uma janela 3D mostra um dente. Você acabou de ``vibe codar'' seu primeiro gêmeo digital.
+
+\destaque{``Vibe Coding'' é o termo cunhado por Andrej Karpathy para descrever a prática de gerar código via IA sem necessariamente entendê-lo completamente. O Nível 0 usa essa abordagem como \textbf{porta de entrada}, não como destino final.}
+
+\subsection{Nível 1 — Implementação Guiada: Modificando Pipelines}
+
+\textbf{Perfil}: Começou a programar. Consegue modificar scripts existentes.
+
+\textbf{Objetivo}: Adaptar um pipeline de segmentação para seu próprio conjunto de dados.
+
+\subsubsection*{Projeto 3: Pipeline de Segmentação com MONAI\protect\footnote{MONAI: biblioteca gratuita da NVIDIA para processamento de imagens médicas com inteligência artificial. O nome vem de ``Medical Open Network for AI''.} e SwinUNETR\protect\footnote{SwinUNETR: modelo de inteligência artificial especializado em segmentar imagens médicas 3D (como tomografias). É um dos modelos mais avançados para essa tarefa.}}
+
+O código a seguir carrega um modelo SwinUNETR pré-treinado e monta um pipeline de pré-processamento para tomografias. O parâmetro \texttt{feature\_size} controla quantas características o modelo consegue aprender, e \texttt{out\_channels} define quantos tipos de tecido serão identificados.
+
+\begin{lstlisting}[language=Python, caption={Pipeline de segmentação 3D com MONAI}, label={lst:pipeline_monai}]
+import monai
+import torch
+from monai.networks.nets import SwinUNETR
+from monai.transforms import Compose, LoadImaged, ScaleIntensityRanged
+
+# Configuracao do modelo (SwinUNETR pre-treinado)
+model = SwinUNETR(
+    img_size=(96, 96, 96),
+    in_channels=1,
+    out_channels=5,  # 5 classes: maxila, mandibula, dentes sup, dentes inf, canal
+    feature_size=48,
+    use_checkpoint=True,
+)
+
+# Pipeline de pre-processamento
+transforms = Compose([
+    LoadImaged(keys=["image"]),
+    ScaleIntensityRanged(
+        keys=["image"], a_min=-1000, a_max=2000,
+        b_min=0.0, b_max=1.0, clip=True
+    ),
+])
+
+print(f"Modelo carregado: {sum(p.numel() for p in model.parameters()):,} parametros")
+print("Pipeline pronto para inferencia em GPU." 
+      if torch.cuda.is_available() 
+      else "Pipeline pronto para CPU (lento, mas funcional).")
+\end{lstlisting}
+
+\textbf{Variações para experimentar}:
+\begin{itemize}
+    \item Altere \texttt{feature\_size}\protect\footnote{feature\_size: parâmetro que controla quantas características o modelo consegue aprender. Valores maiores = modelo mais poderoso porém mais lento; valores menores = modelo mais leve e rápido.} de 48 para 24 (modelo mais leve, mais rápido).
+    \item Modifique \texttt{out\_channels}\protect\footnote{out\_channels: define quantas classes o modelo vai identificar. Por exemplo, 5 canais = 5 tipos de tecido diferentes (maxila, mandíbula, dentes superiores, dentes inferiores, canal mandibular).} para segmentar apenas dentes (2 classes).
+    \item Adicione \texttt{RandFlipd} e \texttt{RandRotated}\protect\footnote{RandFlipd e RandRotated: técnicas de aumento de dados que viram e rotacionam as imagens automaticamente durante o treinamento, criando versões diferentes dos mesmos dados para tornar o modelo mais robusto.} para aumento de dados\protect\footnote{Aumento de dados: técnica que cria variações artificiais dos dados existentes (virando, rotacionando, distorcendo imagens) para melhorar a capacidade do modelo de generalizar sem precisar de mais dados reais.}.
+\end{itemize}
+
+\textbf{Validação}: O script executa sem erros. Teste com 3 volumes CBCT diferentes e compare os Dice Scores\protect\footnote{Dice Scores: métrica que mede o quanto a segmentação feita pelo modelo se sobrepõe à segmentação ideal (feita por especialistas humanos). Vai de 0 (nenhuma sobreposição) a 1 (sobreposição perfeita).}.
+
+\subsubsection*{Projeto 4: Modelagem Periodontal com Periomod\protect\footnote{Periomod: pacote de Python criado especificamente para modelagem periodontal. Contém ferramentas prontas para análise de dados de periodontia.}}
+
+O comando a seguir instala o pacote Periomod usando o pip\protect\footnote{pip install: comando para instalar pacotes de Python. Pip é o gerenciador de pacotes do Python, como uma ``loja de aplicativos'' para código.} e executa um benchmark\protect\footnote{benchmark: teste padronizado para medir o desempenho de um modelo. Como uma ``prova'' que todo modelo faz para saber quão bom ele é.} com dados sintéticos. O teste mede o AUC e o F1\protect\footnote{F1: métrica que combina precisão e sensibilidade em um único número. Vai de 0 a 1, onde 1 é perfeito. Útil quando os dados estão desbalanceados.}.
+
+\begin{lstlisting}[language=bash, caption={Instalação e primeiro modelo com Periomod}, label={lst:periomod_install}]
+# Instalacao (Python 3.11 recomendado)
+pip install periomod
+
+# Benchmark rapido com dados sinteticos
+python -c "
+from periomod.benchmark import run_quick_benchmark
+results = run_quick_benchmark()
+print(f'AUC medio: {results[\"auc_mean\"]:.3f}')
+print(f'F1 medio: {results[\"f1_mean\"]:.3f}')
+"
+\end{lstlisting}
+
+\textbf{Validação}: O AUC\protect\footnote{AUC (Area Under the Curve): métrica que mede a capacidade do modelo de distinguir entre duas classes (ex: saudável vs. doente). Vai de 0 a 1, onde 0,5 é aleatório e 1,0 é perfeito. Acima de 0,8 é considerado excelente.} médio deve ser superior a 0,70. Abaixo disso, revise o pré-processamento dos dados.
+
+\subsection{Nível 2 — Pesquisa Reprodutível: Projetando Experimentos}
+
+\textbf{Perfil}: Pesquisador de mestrado ou doutorado iniciante.
+
+\textbf{Objetivo}: Publicar resultados seguindo diretrizes TRIPOD-AI\protect\footnote{TRIPOD-AI: conjunto de regras internacionais que garante que estudos sobre modelos de inteligência artificial na medicina sejam transparentes e reprodutíveis. Como um ``checklist de qualidade'' para publicações científicas.} e CLAIM-AI\protect\footnote{CLAIM-AI: checklist de diretrizes para artigos sobre inteligência artificial em radiologia e imagem médica. Garante que todos os aspectos importantes do modelo e dos dados sejam reportados.}.
+
+\subsubsection*{Projeto 5: Validação Cruzada Temporal\protect\footnote{Validação temporal: tipo de validação que respeita a ordem cronológica: treina com dados antigos e testa com dados recentes. Simula o uso real do modelo no futuro, ao contrário da validação aleatória tradicional.} com K-Fold\protect\footnote{K-Fold: técnica de validação onde os dados são divididos em K partes. O modelo treina em K-1 partes e testa na parte restante, repetindo K vezes para que todos os dados sejam usados tanto para treino quanto para teste.}}
+
+A validação temporal é o padrão-ouro para modelos clínicos, pois respeita a ordem cronológica dos atendimentos \cite{temporal_validation}\footnote{Estudo seminal sobre validação temporal em modelos preditivos clínicos, demonstrando que essa abordagem produz estimativas mais realistas que a validação aleatória tradicional.}:
+
+O código abaixo implementa uma validação temporal usando \texttt{TimeSeriesSplit}\protect\footnote{TimeSeriesSplit: função do Python que separa dados mantendo a ordem cronológica, garantindo que o modelo nunca veja dados do futuro durante o treinamento.} e \texttt{RandomForestClassifier}\protect\footnote{RandomForestClassifier: algoritmo de aprendizado de máquina que cria várias ``árvores de decisão'' e combina os resultados. É como perguntar a muitas pessoas e votar na resposta mais comum.}. O modelo é treinado com dados passados e testado com dados futuros, nunca o contrário.
+
+\begin{lstlisting}[language=Python, caption={Validacao temporal com K-Fold}, label={lst:temporal_kfold}]
+import numpy as np
+from sklearn.model_selection import TimeSeriesSplit
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import roc_auc_score
+
+def temporal_cross_validation(X, y, timestamps, n_splits=5):
+    """
+    Temporal cross-validation respecting clinical chronologic order.
+    Train: past data | Test: future data (never inverted).
+    """
+    tscv = TimeSeriesSplit(n_splits=n_splits)
+    auc_scores = []
+    
+    for fold, (train_idx, test_idx) in enumerate(tscv.split(X)):
+        X_train, X_test = X[train_idx], X[test_idx]
+        y_train, y_test = y[train_idx], y[test_idx]
+        
+        model = RandomForestClassifier(n_estimators=100)
+        model.fit(X_train, y_train)
+        
+        y_pred = model.predict_proba(X_test)[:, 1]
+        auc = roc_auc_score(y_test, y_pred)
+        auc_scores.append(auc)
+        
+        print(f"Fold {fold+1}: AUC = {auc:.3f} "
+              f"(train: {timestamps[train_idx[0]]:.0f}-{timestamps[train_idx[-1]]:.0f}, "
+              f"test: {timestamps[test_idx[0]]:.0f}-{timestamps[test_idx[-1]]:.0f})")
+    
+    print(f"\nAUC medio temporal: {np.mean(auc_scores):.3f} +/- {np.std(auc_scores):.3f}")
+    return auc_scores
+\end{lstlisting}
+
+\textbf{Critérios de aceitação para publicação}:
+\begin{itemize}
+    \item AUC $\ge$ 0,80 para modelos de predição de perda óssea.
+    \item Sensibilidade\protect\footnote{Sensibilidade: capacidade do modelo de identificar corretamente os casos positivos (pessoas que realmente têm a doença). Uma sensibilidade de 0,75 significa que o modelo detecta 75\% dos doentes.} $\ge$ 0,75 para detecção de doença periodontal.
+    \item Calibração (Brier score\protect\footnote{Brier score: métrica que mede a precisão das probabilidades previstas por um modelo. Vai de 0 (perfeito) a 1 (pior possível). Um valor de 0,15 ou menos é considerado bom para modelos clínicos.}) $\le$ 0,15\protect\footnote{Calibração: mede o quão confiáveis são as probabilidades previstas pelo modelo. Se o modelo prevê 70\% de chance de uma doença, ele deve acertar 70\% das vezes. O Brier Score quantifica o erro entre a previsão e o resultado real.}.
+    \item Validação externa\protect\footnote{Validação externa: testar o modelo em dados de outros hospitais ou centros de pesquisa, diferentes daqueles usados para criá-lo. É a prova definitiva de que o modelo funciona na prática clínica real.} em pelo menos 2 centros diferentes.
+\end{itemize}
+
+\subsubsection*{Projeto 6: Cálculo de SROI\protect\footnote{SROI (Social Return on Investment): métrica que calcula o retorno social de um investimento. Diferente do ROI financeiro, o SROI considera benefícios para a sociedade como um todo, como economia de recursos públicos e melhoria na qualidade de vida dos pacientes.} (Social Return on Investment)}
+
+O código a seguir usa \texttt{@dataclass}\protect\footnote{@dataclass: recurso do Python que cria automaticamente métodos úteis para uma classe (como \_\_init\_\_ e \_\_repr\_\_). Basta definir os campos e o Python faz o resto --- menos código para escrever e menos erros.} para definir componentes de SROI, e calcula o SROI ratio\protect\footnote{SROI ratio: relação entre o valor social gerado e o custo do investimento. Um SROI de 1,94:1 significa que para cada R\$ 1 investido, R\$ 1,94 em benefícios sociais são gerados --- o retorno social quase dobra o valor investido.} (relação entre valor social gerado e custo).
+
+\begin{lstlisting}[language=Python, caption={Framework SROI para implementaÃ§Ã£o no SUS}, label={lst:sroi_framework}]
+@dataclass
+class SROIComponent:
+    descricao: str
+    valor_anual: float        # Em R$
+    evidencia_url: str        # Fonte verificavel
+    beneficiarios: int        # Numero de pacientes impactados
+
+class SROICalculator:
+    def __init__(self):
+        self.components: list[SROIComponent] = []
+    
+    def add_component(self, component: SROIComponent):
+        # SS-I4: Componente sem evidencia tem valor zerado
+        if not component.evidencia_url.startswith("http"):
+            component.valor_anual = 0.0
+            print(f"Aviso: '{component.descricao}' sem evidencia. Valor zerado.")
+        self.components.append(component)
+    
+    def calculate(self, investment_cost: float) -> dict:
+        if investment_cost <= 0:
+            raise ValueError("Custo de investimento deve ser positivo (SS-I1)")
+        
+        total_social_value = sum(c.valor_anual for c in self.components)
+        sroi_ratio = total_social_value / investment_cost
+        
+        return {
+            "investimento": investment_cost,
+            "valor_social": total_social_value,
+            "sroi": round(sroi_ratio, 2),
+            "componentes": len(self.components),
+            "status": "viavel" if sroi_ratio > 1.0 else "inviavel"
+        }
+
+# Exemplo: implementacao do SUS-Twin em uma UBS
+calc = SROICalculator()
+calc.add_component(SROIComponent(
+    "Reducao de faltas em consultas (agendamento inteligente)",
+    45000.00, "https://datasus.saude.gov.br/sia", 1200
+))
+calc.add_component(SROIComponent(
+    "Economia com prototipagem 3D de guias cirurgicos",
+    28000.00, "https://doi.org/10.1016/j.jdent.2024.105130", 350
+))
+calc.add_component(SROIComponent(
+    "Reducao de complicacoes pos-operatorias (simulacao previa)",
+    92000.00, "https://doi.org/10.1038/s41598-024-58901-2", 180
+))
+
+resultado = calc.calculate(investment_cost=85000.00)
+print(f"SROI: R${resultado['valor_social']:.2f} / R${resultado['investimento']:.2f} "
+      f"= {resultado['sroi']}:1")
+print(f"Status: {resultado['status'].upper()}")
+# Saida esperada: SROI = 1.94:1 | Status: VIAVEL
+\end{lstlisting}
+
+\subsection{Nível 3 — PhD e Inovação: Contribuindo para o Estado da Arte}
+
+\textbf{Perfil}: Pesquisador sênior, doutorando, pós-doc.
+
+\textbf{Objetivo}: Propor novas arquiteturas, publicar em periódicos Qualis A1\protect\footnote{Qualis A1: classificação mais alta da CAPES para periódicos científicos no Brasil. Artigos publicados em revistas Qualis A1 são os mais valorizados na avaliação da pós-graduação, equivalentes ao topo do sistema de qualidade acadêmica.} e contribuir com código-fonte para o ecossistema.
+
+\subsubsection*{Projeto 7: Adaptação do CaTGO\protect\footnote{CaTGO (Causal Tooth-Graph ODE Transformer): modelo de inteligência artificial que entende as relações de causa e efeito na cicatrização periodontal, combinando informações sobre a anatomia dos dentes (grafos) e a evolução temporal do tratamento (ODEs).} para Dados Brasileiros}
+
+O Causal Tooth-Graph ODE Transformer (CaTGO) \cite{catgo2026}\footnote{Artigo original do CaTGO publicado na Frontiers em 2026, apresentando a arquitetura que integra redes neurais de grafos e equações diferenciais ordinárias para modelagem causal de cicatrização periodontal.} é o estado da arte em modelagem causal de cicatrização periodontal. Publicado na Frontiers\protect\footnote{Frontiers: editora científica que publica artigos revisados por pares em diversas áreas do conhecimento, incluindo inteligência artificial aplicada à saúde.} em 2026, o modelo integra Graph Neural Networks (GNNs)\protect\footnote{Graph Neural Networks (GNNs): redes neurais especializadas em dados estruturados como grafos. Aqui, são usadas para modelar as relações entre dentes vizinhos, já que a saúde de um dente influencia diretamente os outros.} para topologia dentária, Neural ODEs\protect\footnote{Neural ODEs (Equações Diferenciais Ordinárias Neurais): tipo de rede neural que modela processos contínuos no tempo, como a cicatrização. Diferente de modelos passo a passo, ela captura a dinâmica contínua do processo biológico.} para dinâmica temporal e inferência causal para ajuste de confundidores.
+
+Para adaptá-lo ao contexto brasileiro:
+\begin{enumerate}
+    \item Substitua a base de dados de treino por coortes do DATASUS/SIA-SIH.
+    \item Ajuste os parâmetros do Dose2Vec para refletir protocolos brasileiros de laserterapia de baixa potência (LLLT).
+    \item Valide contra desfechos reais do Sistema Único de Saúde.
+\end{enumerate}
+
+\subsubsection*{Projeto 8: Publicação com Diretrizes TRIPOD-AI}
+
+Todo modelo preditivo publicado deve seguir o checklist TRIPOD-AI \cite{tripod2024}\footnote{Documento de diretrizes TRIPOD-AI de 2024, estabelecendo os 28 itens obrigatórios para o relato transparente e completo de estudos que desenvolvem ou validam modelos de predição baseados em inteligência artificial.}:
+
+\begin{enumerate}
+    \item \textbf{Título}: Identificar como ``modelo de predição'' (exigência TRIPOD-AI 1).
+    \item \textbf{Abstract}: Estruturar com objetivo, fontes de dados, métodos, resultados e conclusão.
+    \item \textbf{Dados}: Descrever critérios de inclusão/exclusão, tamanho amostral e tratamento de dados faltantes.
+    \item \textbf{Método}: Especificar tipo de validação (interna, temporal, externa), K-Fold e métricas de desempenho.
+    \item \textbf{Resultados}: Reportar AUC, sensibilidade, especificidade\protect\footnote{Especificidade: capacidade do modelo de identificar corretamente os casos negativos (pessoas saudáveis). Uma especificidade alta significa que o modelo raramente classifica alguém saudável como doente (``falso positivo'').}, valor preditivo positivo/negativo com intervalos de confiança 95\%\protect\footnote{Intervalos de confiança 95\%: faixa de valores que temos 95\% de certeza de que contém o valor real. Por exemplo, se o intervalo de confiança do AUC é 0,75--0,85, significa que o verdadeiro valor do modelo tem 95\% de chance de estar nessa faixa.}.
+    \item \textbf{Discussão}: Limitações, generalizabilidade e implicações clínicas.
+    \item \textbf{Código e Dados}: Disponibilizar repositório público (GitHub\protect\footnote{GitHub: plataforma online para hospedar e compartilhar código-fonte. Como uma ``rede social'' para programadores, onde podem colaborar, manter histórico de versões e disponibilizar projetos publicamente.}, Zenodo\protect\footnote{Zenodo: repositório online gratuito para dados de pesquisa, criado pelo CERN. Permite que qualquer pesquisador arquive e compartilhe seus dados com DOI permanente, garantindo que sejam encontrados e citados.}) com DOI\protect\footnote{DOI (Digital Object Identifier): identificador único e permanente para artigos científicos e dados de pesquisa. Como um ``CPF'' do trabalho acadêmico --- ele nunca muda e permite encontrar o material mesmo se o site mudar de endereço. Essencial para citações acadêmicas confiáveis.}.
+\end{enumerate}
+
+\subsection{Checklist de Progressão}
+
+\begin{longtable}[c]{p{3cm}p{4cm}p{4.5cm}p{3cm}}
+\caption{Checklist de Projetos e Marcos por Nível} \\
+\toprule
+\textbf{Nível} & \textbf{Projetos Concluídos} & \textbf{Marcos} & \textbf{Tempo} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Nível} & \textbf{Projetos Concluídos} & \textbf{Marcos} & \textbf{Tempo} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+N0 - Vibe Code & 1, 2 & Primeira segmentação 3D & 1 semana \\
+N1 - Guiado & 3, 4 & Pipeline funcional com Python & 1 mês \\
+N2 - Pesquisa & 5, 6 & Artigo submetido + SROI & 3 meses \\
+N3 - PhD & 7, 8 & Publicação Qualis A1 + código & 6 meses \\
+\bottomrule
+\end{longtable}
+
+\subsection{Comunidade e Próximos Passos}
+
+Todo o código deste capítulo está disponível em repositório aberto. O leitor é incentivado a:
+\begin{itemize}
+    \item Publicar seus resultados no GitHub com licença MIT\protect\footnote{Licença MIT: tipo de licença de software que permite usar, modificar e distribuir livremente o código, desde que os créditos originais sejam mantidos. É a licença mais permissiva e comum em projetos open-source.}.
+    \item Submeter relatos de caso ao Journal of Dental Digital Twin Research.
+    \item Contribuir com traduções e adaptações para outros contextos (América Latina, África).
+    \item Participar dos ciclos de evolução do OpenCode Ecosystem (R24 em diante).
+\end{itemize}
+
+Ao final deste capítulo, o leitor terá percorrido o caminho completo: do primeiro ``vibe code'' sem programação até a publicação de pesquisa original em periódico Qualis A1, utilizando exclusivamente ferramentas open-source e o Framework SUS-Twin.

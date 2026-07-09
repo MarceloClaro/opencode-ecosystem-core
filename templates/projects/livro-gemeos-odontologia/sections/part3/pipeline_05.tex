@@ -1,0 +1,24 @@
+\section{Simulação Numérica e Fluidodinâmica}
+\label{sec:simulacao}
+
+O arcabouço computacional, plenamente preenchido com suas diretrizes constitutivas, é submetido à execução no \textit{solver}. O escopo da simulação dita a robustez e o impacto clínico da predição.
+
+\subsection{Espectro das Formulações de Simulação}
+\label{subsec:tipos-simulacao}
+
+A \textbf{simulação estática estrita} domina a investigação ortopédica tradicional. Calcula-se o campo de deslocamentos, bem como as tensões de von Mises e deformações principais sob equilíbrio estático (Soma de Forças = 0). O foco primordial repousa sobre as cascatas de distribuição de tensão na interface implante-osso cortical frente ao carregamento oclusal máximo, visando mitigar a sobrecarga mecânica que deflagra reabsorção óssea perimplantar.
+
+A \textbf{simulação mecânica dinâmica implícita/explícita} adentra a variação temporal. Ela captura com altíssima fidelidade a dissipação de energia e a resposta viscoelástica do ligamento periodontal perante a cinemática mastigatória e traumatismos de impacto (ex: exodontias complexas via torção controlada) \cite{xing2024clinical}. Modelos de elementos finitos recursivos (RFEM) lideram o estado da arte por automatizar a atualização do ligamento periodontal num ciclo biológico, prevendo milimetricamente a evolução ortodôntica \cite{zhang2024recursive}.
+
+A \textbf{simulação por fadiga (\textit{fatigue life cycle})} extrai predições empíricas a partir de curvas S-N (tensão/número de ciclos) aliadas ao critério de acúmulo de dano de Palmgren-Miner. Restaurações CAD/CAM, retentores intrarradiculares metálicos e alinhadores termoplásticos têm suas taxas de sobrevivência antecipadas de forma determinística, permitindo iterar designs resilientes à fratura \cite{liu2024fatigue}.
+
+Por outro lado, a \textbf{Fluidodinâmica Computacional (CFD)} transplanta as equações de Navier-Stokes para os microambientes orais. A simulação hidrodinâmica otimiza protocolos de irrigação endodôntica, mapeando velocidade, tensão de cisalhamento de parede (\textit{wall shear stress}) e volume apical de extrusão de hipoclorito de sódio na desinfecção de istmos canais ramificados \cite{elsaid2025digital}.
+
+\subsection{Validação Experimental e Incerteza Estocástica}
+\label{subsec:validacao}
+
+A simulação sem calibração física é mera especulação geométrica. A validação do modelo constitui um \textit{checkpoint} inviolável antes da adoção de diretrizes clínicas no Gêmeo Digital.
+
+A extensometria baseada em \textit{strain gauges} captura deslocamentos micrométricos em nós de estresse predeterminados de arcadas cadavéricas ou em modelos de resina. Adicionalmente, a Correlação de Imagem Digital (DIC - \textit{Digital Image Correlation}) rastreia o campo de deslocamento vetorial global sobre superfícies texturizadas com \textit{speckle patterns}, produzindo contraprovas visuais que devem correlacionar-se matematicamente com os \textit{outputs} do FEM.
+
+\destaque{A ontologia biológica é regida pela incerteza. A imposição de análises de sensitividade estocástica baseada em algoritmos de Monte Carlo (MCMC) e Expansão em Caos Polinomial é mandatória. Estas abordagens mapeiam margens de erro para cenários populacionais ampliados, certificando-se de que a variabilidade da densidade óssea inerente a diferentes indivíduos não corrompa as predições de sucesso dos implantes virtuais.}

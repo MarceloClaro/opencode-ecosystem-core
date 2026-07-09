@@ -1,0 +1,650 @@
+% =============================================================================
+%  APÊNDICE: SOLUÇÕES DOS EXERCÍCIOS
+%  Capítulos 1 a 8
+% =============================================================================
+\chapter{Soluções dos Exercícios}\label{ap:solucoes}
+
+Este apêndice apresenta soluções comentadas para os exercícios dos Capítulos~1
+a~8, organizadas por capítulo e seção. As soluções priorizam a didática: cada
+resposta explica o raciocínio, não apenas o resultado final.
+
+% =============================================================================
+%  CAPÍTULO 1: FUNDAMENTOS MATEMÁTICOS E ESTATÍSTICOS
+% =============================================================================
+\section*{Capítulo 1 -- Fundamentos Matemáticos e Estatísticos}
+\addcontentsline{toc}{section}{Capítulo 1}
+
+\subsection*{Exercício 1.1 (Nível 0) -- Tabela-Verdade}
+Construa a tabela-verdade de $(p \land q) \to \neg r$.
+
+\textbf{Solução:} A tabela possui $2^3 = 8$ linhas. A condicional
+$A \to B$ é falsa apenas quando $A$ é verdadeiro e $B$ é falso.
+Neste caso, $A = p \land q$ e $B = \neg r$:
+
+\[
+\begin{array}{ccc|c|c|c}
+p & q & r & p \land q & \neg r & (p \land q) \to \neg r \\ \hline
+V & V & V & V & F & F \\
+V & V & F & V & V & V \\
+V & F & V & F & F & V \\
+V & F & F & F & V & V \\
+F & V & V & F & F & V \\
+F & V & F & F & V & V \\
+F & F & V & F & F & V \\
+F & F & F & F & V & V
+\end{array}
+\]
+
+A única linha que torna a expressão falsa é $p=V$, $q=V$, $r=V$.
+
+\subsection*{Exercício 1.2 (Nível Básico) -- Lógica de Predicados}
+Traduza para lógica de predicados: ``todo agente que falha no teste de
+confiança é redirecionado para o modo shadow''.
+
+\textbf{Solução:} Seja $A(x)$ o predicado ``$x$ é um agente'', $F(x)$
+``$x$ falha no teste de confiança'' e $S(x)$ ``$x$ é redirecionado para
+o modo shadow''. A tradução é:
+
+\[
+\forall x\,[(A(x) \land F(x)) \to S(x)]
+\]
+
+Lê-se: ``para todo $x$, se $x$ é um agente e $x$ falha no teste de
+confiança, então $x$ é redirecionado para o modo shadow''.
+
+\subsection*{Exercício 1.3 (Nível Intermediário) -- Prova por Indução}
+Prove que o número de linhas de uma tabela-verdade com $n$ proposições é $2^n$.
+
+\textbf{Solução:} Demonstração por indução em $n$.
+
+\textbf{Base ($n=1$):} Com uma proposição $p$, há duas possibilidades
+($V$ ou $F$). Logo, $2^1 = 2$ linhas. $\checkmark$
+
+\textbf{Passo:} Suponha que para $n$ proposições haja $2^n$ linhas
+(hipótese de indução). Para $n+1$ proposições, fixamos a $(n+1)$-ésima
+proposição em $V$ (o que gera $2^n$ linhas para as $n$ primeiras) e
+depois em $F$ (outras $2^n$ linhas). Total: $2^n + 2^n = 2 \cdot 2^n = 2^{n+1}$.
+Portanto, a fórmula vale para todo $n \in \mathbb{N}$.
+
+\subsection*{Exercício 1.4 (Nível Avançado) -- Tabela-Verdade em Python}
+Implemente em Python uma função que recebe uma expressão booleana como
+string e retorna sua tabela-verdade.
+
+\textbf{Solução:}
+\begin{lstlisting}[style=pythonstyle]
+import itertools
+
+def tabela_verdade(expr: str, vars: list[str]) -> list[dict]:
+    resultados = []
+    for valores in itertools.product([True, False], repeat=len(vars)):
+        env = dict(zip(vars, valores))
+        resultado = eval(expr, {}, env)
+        linha = {v: env[v] for v in vars}
+        linha[expr] = resultado
+        resultados.append(linha)
+    return resultados
+
+# Teste com a expressao do Trust Engine: (a and t) or not s
+expr = "(a and t) or not s"
+vars = ["a", "t", "s"]
+for linha in tabela_verdade(expr, vars):
+    print(linha)
+\end{lstlisting}
+
+\subsection*{Exercício 1.5 (Nível Básico) -- Derivada da Sigmoide}
+Calcule a derivada de $\sigma(x) = \dfrac{1}{1 + e^{-x}}$ e mostre que
+$\sigma'(x) = \sigma(x)(1 - \sigma(x))$.
+
+\textbf{Solução:} Usando a regra da cadeia:
+
+\[
+\sigma(x) = (1 + e^{-x})^{-1}
+\]
+\[
+\sigma'(x) = -1 \cdot (1 + e^{-x})^{-2} \cdot (-e^{-x})
+= \frac{e^{-x}}{(1 + e^{-x})^2}
+\]
+
+Fatorando: $\sigma'(x) = \frac{1}{1 + e^{-x}} \cdot \frac{e^{-x}}{1 + e^{-x}}$.
+Como $\sigma(x) = \frac{1}{1 + e^{-x}}$ e $1 - \sigma(x) = \frac{e^{-x}}{1 + e^{-x}}$,
+temos $\sigma'(x) = \sigma(x)(1 - \sigma(x))$.
+
+\subsection*{Exercício 1.6 (Nível Intermediário) -- Intervalo de Confiança}
+Dada uma amostra de 30 scores do TrustScorer com média 0,74 e desvio
+padrão 0,12, construa um IC de 95\% para a média populacional.
+
+\textbf{Solução:} Para $n=30$, usamos a distribuição $t$ com $29$ graus de
+liberdade. O quantil $t_{0,025; 29} \approx 2,045$. O erro padrão é
+$EP = s / \sqrt{n} = 0,12 / \sqrt{30} \approx 0,0219$. Logo:
+
+\[
+IC_{95\%} = \bar{x} \pm t \cdot EP = 0,74 \pm 2,045 \times 0,0219
+= 0,74 \pm 0,0448 = [0,6952;\; 0,7848]
+\]
+
+Interpretação: há 95\% de confiança de que a média populacional dos scores
+do TrustScorer está entre 0,695 e 0,785.
+
+% =============================================================================
+%  CAPÍTULO 2: IA E AGENTES INTELIGENTES
+% =============================================================================
+\section*{Capítulo 2 -- Inteligência Artificial e Agentes Inteligentes}
+\addcontentsline{toc}{section}{Capítulo 2}
+
+\subsection*{Exercício 2.1 (Nível 0) -- Problema de Turing}
+Explique por que a pergunta ``esta máquina é inteligente?'' é considerada
+filosoficamente problemática segundo o argumento de Turing.
+
+\textbf{Solução:} Turing (1950) propôs substituir a pergunta ``máquinas
+pensam?'' por um teste comportamental (o Jogo da Imitação). O problema
+é: (a) não há definição consensual de ``inteligência''; (b) o Teste de
+Turing mede \emph{simulação} de comportamento humano, não consciência;
+(c) a pergunta é autorreferente --- quem julga a inteligência também
+usa seu próprio critério subjetivo. Por isso, Turing argumentou que é
+mais produtivo perguntar ``a máquina pode passar no teste?'' do que
+``a máquina é inteligente?''.
+
+\subsection*{Exercício 2.2 (Nível Básico) -- Agente Reativo Simples}
+Implemente em Python um agente reativo simples para um termostato.
+
+\textbf{Solução:}
+\begin{lstlisting}[style=pythonstyle]
+class Termostato:
+    def __init__(self, temp_alvo: float = 22.0):
+        self.temp_alvo = temp_alvo
+        self.ligado = False
+
+    def perceber(self, temp_atual: float) -> str:
+        if temp_atual < self.temp_alvo - 1.0:
+            return "frio"
+        elif temp_atual > self.temp_alvo + 1.0:
+            return "quente"
+        return "ok"
+
+    def agir(self, percepcao: str) -> str:
+        if percepcao == "frio":
+            self.ligado = True
+            return "ligar_aquecimento"
+        elif percepcao == "quente":
+            self.ligado = False
+            return "desligar_aquecimento"
+        return "manter"
+
+    def ciclo(self, temp_atual: float) -> str:
+        p = self.perceber(temp_atual)
+        return self.agir(p)
+
+t = Termostato()
+for temp in [18, 21, 23, 19, 22]:
+    acao = t.ciclo(temp)
+    print(f"Temp={temp}C -> {acao}")
+\end{lstlisting}
+
+\subsection*{Exercício 2.3 (Nível Intermediário) -- Atenção Scaled Dot-Product}
+Implemente a função de atenção por produto escalar do zero usando NumPy.
+
+\textbf{Solução:}
+\begin{lstlisting}[style=pythonstyle]
+import numpy as np
+
+def scaled_dot_product_attention(Q, K, V):
+    """Atencao scaled dot-product.\n    Q, K, V: matrizes (n x d_k), (m x d_k), (m x d_v)"""
+    d_k = Q.shape[-1]
+    scores = Q @ K.T / np.sqrt(d_k)  # (n x m)
+    pesos = np.exp(scores) / np.sum(np.exp(scores), axis=-1, keepdims=True)
+    return pesos @ V  # (n x d_v)
+
+# Teste com Q, K, V 4x8
+np.random.seed(42)
+Q = np.random.randn(4, 8)
+K = np.random.randn(4, 8)
+V = np.random.randn(4, 8)
+saida = scaled_dot_product_attention(Q, K, V)
+print(f"Saida shape: {saida.shape}")  # (4, 8)
+print(f"Saida[0]: {saida[0][:4]}...")
+\end{lstlisting}
+
+\subsection*{Exercício 2.4 (Nível Avançado) -- Z3 para Behavioral Gate}
+Usando Z3, verifique a consistência das regras do Behavioral Gate.
+
+\textbf{Solução:}
+\begin{lstlisting}[style=pythonstyle]
+from z3 import *
+
+trust = Real('trust')
+acao_permitida = Bool('acao_permitida')
+acao_bloqueada = Bool('acao_bloqueada')
+
+regras = [
+    Implies(trust >= 0.7, acao_permitida),
+    Implies(trust < 0.3, acao_bloqueada),
+    Not(And(acao_permitida, acao_bloqueada))
+]
+
+solver = Solver()
+solver.add(regras)
+
+if solver.check() == sat:
+    print("Regras consistentes. Modelo:")
+    print(solver.model())
+else:
+    print("INCONSISTENCIA: conflito entre regras!")
+\end{lstlisting}
+
+O Z3 confirma que as regras são consistentes: nunca há um estado em que
+ambas as ações (permitida e bloqueada) sejam verdadeiras simultaneamente.
+
+% =============================================================================
+%  CAPÍTULO 3: OPENCODE ARCHITECTURE
+% =============================================================================
+\section*{Capítulo 3 -- OpenCode Arquitetura}
+\addcontentsline{toc}{section}{Capítulo 3}
+
+\subsection*{Exercício 3.1 (Nível 0) -- Instalação}
+Instale o \opencodeeco{} e execute \codigo{python scripts/validate\_installation.py}.
+
+\textbf{Solução:} A instalação segue os passos:
+
+\begin{enumerate}
+\item Clone o repositório: \codigo{git clone https://github.com/MarceloClaro/OpenCode_Ecosystem.git}
+\item Acesse o diretório: \codigo{cd opencode}
+\item Instale dependências: \codigo{pip install -e .}
+\item Execute a validação:
+\begin{lstlisting}[style=pythonstyle]
+python scripts/validate_installation.py
+\end{lstlisting}
+\end{enumerate}
+
+O script verifica: (a) presença do Python 3.10+, (b) dependências
+instaladas, (c) estrutura de diretórios, (d) permissões de escrita.
+Uma saída esperada é: \codigo{Instalacao validada com sucesso! 312/312 CTs OK}.
+
+\subsection*{Exercício 3.2 (Nível Intermediário) -- SDD+TDD}
+Implemente a SPEC-039 completa seguindo o ciclo SDD+TDD.
+
+\textbf{Solução (esqueleto):} O ciclo SDD+TDD segue quatro passos:
+
+\begin{enumerate}
+\item \textbf{SDD -- Especificação:} Defina a SPEC com requisitos funcionais
+(RF01--RF05), assinaturas e invariantes.
+\item \textbf{TDD -- Teste:} Antes de implementar, escreva um CT que capture
+o comportamento esperado:
+\begin{lstlisting}[style=pythonstyle]
+def test_sumarizador_retorna_resumo():
+    s = AutoSummarizer(max_length=100)
+    resultado = s.summarize("Texto longo...")
+    assert len(resultado) <= 100
+    assert isinstance(resultado, str)
+\end{lstlisting}
+\item \textbf{Implementação:} Codifique a função mínima para passar no teste.
+\item \textbf{Refatoração:} Melhore a qualidade sem quebrar o teste.
+\end{enumerate}
+
+\subsection*{Exercício 3.3 (Nível Avançado) -- EventBus com Prioridade}
+Analise o código do \codigo{EventBus} e proponha uma extensão para
+suportar eventos com prioridade.
+
+\textbf{Solução (esboço de implementação):}
+\begin{lstlisting}[style=pythonstyle]
+import heapq
+from dataclasses import dataclass, field
+
+@dataclass(order=True)
+class EventoPrioritario:
+    prioridade: int
+    timestamp: float = field(compare=False)
+    tipo: str = field(compare=False)
+    dados: dict = field(compare=False)
+
+class EventBusComPrioridade:
+    def __init__(self):
+        self._heap = []
+        self._handlers = {}
+
+    def publish(self, tipo, dados, prioridade=0):
+        evento = EventoPrioritario(prioridade, time.time(), tipo, dados)
+        heapq.heappush(self._heap, evento)
+
+    def process(self):
+        while self._heap:
+            evento = heapq.heappop(self._heap)
+            if evento.tipo in self._handlers:
+                self._handlers[evento.tipo](evento.dados)
+\end{lstlisting}
+
+\subsection*{Exercício 3.4 (Nível PhD) -- Novo Tipo de Raciocínio}
+Implemente um novo tipo de raciocínio (raciocínio probabilístico) e
+registre-o no catálogo do Nexus.
+
+\textbf{Solução (template conceitual):}
+\begin{lstlisting}[style=pythonstyle]
+class ProbabilisticReasoning:
+    tipo = "probabilistico"
+    categoria = "decisao"
+
+    def raciocinar(self, premissas: dict) -> dict:
+        """Usa teorema de Bayes para inferencia."""
+        prob_prior = premissas.get("prior", 0.5)
+        verossimilhanca = premissas.get("likelihood", 1.0)
+        evidencia = premissas.get("evidence", 1.0)
+        prob_posterior = (verossimilhanca * prob_prior) / evidencia
+        return {"conclusao": prob_posterior, "tipo": self.tipo}
+\end{lstlisting}
+
+Registre no catálogo: \codigo{nexus.catalog.register(ProbabilisticReasoning())}.
+
+% =============================================================================
+%  CAPÍTULO 4: SCANNER E METACOGNIÇÃO
+% =============================================================================
+\section*{Capítulo 4 -- Scanner Pipeline e Metacognição}
+\addcontentsline{toc}{section}{Capítulo 4}
+
+\subsection*{Exercício 4.1 (Nível 0) -- A Analogia do ``Olho que se Vê''}
+Explique, com suas próprias palavras, a analogia do ``olho que se vê''.
+Por que um sistema de software precisa de auto-observação?
+
+\textbf{Solução:} A analogia remete ao paradoxo de um olho que tenta
+observar a si mesmo: o ato de observar já modifica o observado.
+No contexto de software, um sistema que se auto-observa pode detectar
+seus próprios padrões, identificar gargalos, pontos cegos e vícios
+epistemológicos. Um sistema sem auto-observação é como um navio sem
+instrumentos: navega, mas não sabe se está no rumo certo. A
+auto-observação (metacognição) é essencial para auto-evolução dirigida.
+
+\subsection*{Exercício 4.2 (Nível Intermediário) -- Teleological Coverage Score}
+Implemente o \emph{Teleological Coverage Score} (TCS).
+
+\textbf{Solução:}
+\begin{lstlisting}[style=pythonstyle]
+def teleological_coverage_score(
+    categorias_requeridas: dict[str, float],
+    categorias_presentes: set[str]
+) -> float:
+    """TCS = soma ponderada das categorias presentes / soma total dos pesos."""
+    total = sum(categorias_requeridas.values())
+    if total == 0:
+        return 1.0
+    coberto = sum(peso for cat, peso in categorias_requeridas.items()
+                  if cat in categorias_presentes)
+    return coberto / total
+
+# Exemplo
+requeridas = {"diagnostico": 0.5, "intervencao": 0.3, "monitoramento": 0.2}
+presentes = {"diagnostico", "monitoramento"}
+tcs = teleological_coverage_score(requeridas, presentes)
+print(f"TCS = {tcs:.2f}")  # 0.70 (70% de cobertura teleologica)
+\end{lstlisting}
+
+\subsection*{Exercício 4.3 (Nível PhD) -- Pipeline Completo}
+Execute o pipeline completo de scanners e responda aos itens do enunciado.
+
+\textbf{Solução (roteiro de execução):}
+\begin{enumerate}
+\item \textbf{Noological}: \codigo{/scan noological} --- identifica pontos cegos
+      nas 10 dimensões epistemológicas.
+\item \textbf{Teleological}: \codigo{/scan teleological --goals goals.json}
+      --- mapeia lacunas entre estado atual e desejado.
+\item \textbf{Evolutionary}: \codigo{/scan evolutionary} --- gera roadmap
+      com quick wins, foundations, frontiers e convergents.
+\item \textbf{Refinement + MCSP}: \codigo{/scan refine} --- encontra o
+      conjunto mínimo de capacidades a adquirir.
+\end{enumerate}
+
+Ao final, \codigo{/evolve} executa o roadmap e reexecuta o Noological
+Scanner para verificar a redução de lacunas.
+
+\subsection*{Exercício 4.4 (Nível PhD) -- Auto-Evolução Dialética}
+Use o DialecticalEngine para identificar uma limitação no pipeline.
+
+\textbf{Solução:} Exemplo de ciclo dialético aplicado ao pipeline:
+
+\begin{itemize}
+\item \textbf{Tese}: ``O pipeline detecta gaps epistemológicos com precisão.''
+\item \textbf{Antítese}: ``O pipeline não detecta gaps de desempenho
+computacional (latência, consumo de memória).''
+\item \textbf{Síntese (aufheben)}: ``Estender o pipeline com um scanner
+de desempenho que, a cada execução, meça latência e memória de cada
+módulo e alimente esses dados como nova dimensão para o Noological
+Scanner.''
+\end{itemize}
+
+Implementação: criar \codigo{PerformanceScanner} como módulo M6 que
+herda da interface \codigo{BaseScanner} e se insere antes do MCSP.
+
+% =============================================================================
+%  CAPÍTULO 5: TRUST ENGINE E GOVERNANÇA
+% =============================================================================
+\section*{Capítulo 5 -- Trust Engine e Governança Comportamental}
+\addcontentsline{toc}{section}{Capítulo 5}
+
+Os exercícios do Capítulo~5 envolvem a implementação e validação dos
+componentes do Trust Engine (SPEC-038). Abaixo, modelos de resposta
+para os principais tipos de exercício.
+
+\subsection*{Exercício 5.1 -- TrustScorer (Nível Intermediário)}
+Implemente o TrustScorer com blend 70/30 entre resultado imediato e
+histórico.
+
+\textbf{Solução:}
+\begin{lstlisting}[style=pythonstyle]
+from dataclasses import dataclass, field
+
+@dataclass
+class TrustScorer:
+    alpha: float = 0.7
+
+    def score(self, outcome: float, history: list[float]) -> float:
+        if not history:
+            return outcome
+        media_historica = sum(history) / len(history)
+        return self.alpha * outcome + (1 - self.alpha) * media_historica
+
+# Teste
+ts = TrustScorer()
+s = ts.score(0.85, [0.70, 0.72, 0.68])
+print(f"Trust score: {s:.2f}")  # 0.79
+\end{lstlisting}
+
+\subsection*{Exercício 5.2 -- NaturalForgetting (Nível Avançado)}
+Modele o esquecimento natural segundo Atkinson-Shiffrin.
+
+\textbf{Solução:} O modelo de Atkinson-Shiffrin tem três estágios:
+sensorial $\to$ curto prazo $\to$ longo prazo. No \opencodeeco{}:
+\begin{lstlisting}[style=pythonstyle]
+@dataclass
+class NaturalForgetting:
+    capacidade_cp: int = 7
+    taxa_esquecimento: float = 0.1
+
+    def transferir(self, item, repeticoes: int) -> bool:
+        return repeticoes >= 3  # consolida na memoria de longo prazo
+
+    def recuperar(self, item, tempo_desde_ultimo_acesso: float) -> float:
+        return exp(-self.taxa_esquecimento * tempo_desde_ultimo_acesso)
+\end{lstlisting}
+
+% =============================================================================
+%  CAPÍTULO 6: TOKEN ECONOMY
+% =============================================================================
+\section*{Capítulo 6 -- Token Economy e Sustentabilidade Econômica}
+\addcontentsline{toc}{section}{Capítulo 6}
+
+Os exercícios do Capítulo~6 exigem implementação dos componentes da
+Token Economy (SPEC-022 a SPEC-024). Seguem os modelos de solução.
+
+\subsection*{Exercício 6.1 -- Ledger (Nível Intermediário)}
+Implemente o \codigo{Ledger} congelado (frozen dataclass).
+
+\textbf{Solução:}
+\begin{lstlisting}[style=pythonstyle]
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Transacao:
+    origem: str
+    destino: str
+    valor: int
+    timestamp: float
+    hash_anterior: str
+
+    def hash(self) -> str:
+        import hashlib
+        conteudo = f"{self.origem}{self.destino}{self.valor}"
+        return hashlib.sha256(conteudo.encode()).hexdigest()
+\end{lstlisting}
+
+\subsection*{Exercício 6.2 -- Staking (Nível Avançado)}
+Implemente o staking com lock de 7 dias e slashing.
+
+\textbf{Solução:}
+\begin{lstlisting}[style=pythonstyle]
+from datetime import datetime, timedelta
+
+class StakingManager:
+    def __init__(self):
+        self.stakes = {}  # agente -> (valor, data_inicio)
+        self.PERIODO_LOCK = timedelta(days=7)
+        self.PENALIDADE_SLASH = 0.3
+
+    def staking(self, agente: str, valor: int) -> bool:
+        self.stakes[agente] = (valor, datetime.now())
+        return True
+
+    def unstaking(self, agente: str) -> int:
+        valor, inicio = self.stakes.get(agente, (0, datetime.min))
+        if datetime.now() - inicio < self.PERIODO_LOCK:
+            penalidade = int(valor * self.PENALIDADE_SLASH)
+            valor -= penalidade
+        del self.stakes[agente]
+        return max(valor, 0)
+\end{lstlisting}
+
+% =============================================================================
+%  CAPÍTULO 7: EXPERIMENTAÇÃO E VALIDAÇÃO
+% =============================================================================
+\section*{Capítulo 7 -- Experimentação, Validação Científica e Produção}
+\addcontentsline{toc}{section}{Capítulo 7}
+
+Os exercícios do Capítulo~7 envolvem o CORA-Eval, Aletheia, MASWOS v5
+e o PhD Auditor. Seguem os modelos de resposta.
+
+\subsection*{Exercício 7.1 -- CORA-Eval (Nível PhD)}
+Execute 150 tarefas do CORA-Eval e analise o CORA-Score.
+
+\textbf{Solução (roteiro):}
+\begin{lstlisting}[style=pythonstyle]
+from cora_benchmark_tracker import CORATracker
+
+tracker = CORATracker()
+resultados = tracker.executar_todas()
+cora_score = tracker.calcular_cora_score()
+cora_v_score = tracker.calcular_cora_v_score(verificadores=7)
+print(f"CORA-Score: {cora_score:.3f}")
+print(f"CORA-V-Score: {cora_v_score:.3f}")
+
+# Analise por dimensao
+for dim, score in resultados["dimensoes"].items():
+    if score < 0.5:
+        print(f"ATENCAO: Dimensao {dim} com score {score:.2f}")
+\end{lstlisting}
+
+\subsection*{Exercício 7.2 -- Iterative Correction Loop (Nível Avançado)}
+Execute o ciclo de correção iterativa até score $\geq 95$.
+
+\textbf{Solução:} O ciclo segue:
+\begin{enumerate}
+\item Gerar artigo via MASWOS v5.
+\item Avaliar com \codigo{AUTO\_SCORE\_QUALIS.py} (10 critérios).
+\item Se score $< 95$, executar: 5 revisores $\to$ 4 advisors $\to$ 6
+corretores linguísticos.
+\item Reavaliar. Repetir até score $\geq 95$.
+\item Aplicar \codigo{ptbr\_corrector.py} para remover CJK.
+\end{enumerate}
+
+% =============================================================================
+%  CAPÍTULO 8: DISSERTAÇÃO E BANCA
+% =============================================================================
+\section*{Capítulo 8 -- Dissertação, Qualis A1 e Defesa}
+\addcontentsline{toc}{section}{Capítulo 8}
+
+Os exercícios do Capítulo~8 simulam o percurso completo de produção
+acadêmica. Abaixo, guias de resposta e reflexão.
+
+\subsection*{Exercício 8.1 -- Protocolo de Anonimato (Nível Avançado)}
+Aplique o protocolo de anonimato a um anteprojeto.
+
+\textbf{Solução (checklist):}
+\begin{enumerate}
+\item \textbf{Nomes próprios}: substituir por ``[Pesquisador A]''.
+\item \textbf{Instituição}: substituir por ``[Instituição]''.
+\item \textbf{ORCID/Lattes}: remover IDs.
+\item \textbf{Orientador}: substituir por ``[Orientador]''.
+\item \textbf{Afiliações de coautores}: generalizar.
+\item \textbf{Localização geográfica}: remover referências a cidade/estado
+       específicos (exceto quando essencial para o estudo).
+\item \textbf{Agradecimentos}: remover ou generalizar.
+\end{enumerate}
+
+\subsection*{Exercício 8.2 -- Simulação de Banca (Nível PhD)}
+Simule uma banca com Agent Forum e analise as perguntas geradas.
+
+\textbf{Solução:} Configure o Agent Forum com 3 personas:
+\begin{itemize}
+\item \textbf{Arguidora 1} (Epistemológica): foca em fundamentação teórica
+e consistência metodológica.
+\item \textbf{Arguidor 2} (Técnica): questiona implementação, métricas,
+reprodutibilidade.
+\item \textbf{Arguidora 3} (Ética): avalia impacto social, privacidade,
+vieses.
+\end{itemize}
+
+Execute: \codigo{python agent-forum/forum.py --topic dissertacao --agents 3}.
+
+Analise as perguntas geradas. Exemplo de saída esperada:
+\begin{verbatim}
+[Arguidora 1] "Como voce garante que o referencial teorico adotado
+nao introduz um vies de confirmacao na sua analise?"
+[Arguidor 2] "Qual o intervalo de confianca dos resultados
+apresentados na Tabela 4?"
+[Arguidora 3] "Que salvaguardas eticas foram implementadas para
+proteger os dados dos participantes?"
+\end{verbatim}
+
+\subsection*{Exercício 8.3 -- PhD Auditor (Nível PhD)}
+Utilize o PhD Auditor para avaliar um artigo com quatro critérios.
+
+\textbf{Solução (configuração e execução):}
+\begin{lstlisting}[style=pythonstyle]
+from mirofish.phd_auditor import PhDAuditor
+from mirofish.nash_solver import NashSolver
+from mirofish.statistical_rigor import CohenAnalyzer
+from mirofish.qualis_a1 import QualisA1Auditor
+
+auditor = PhDAuditor(
+    nash=NashSolver(), cohen=CohenAnalyzer(),
+    bonferroni=True, qualis=QualisA1Auditor()
+)
+
+resultado = auditor.avaliar(artigo_path="meu_artigo.pdf")
+print(f"Score Qualis A1: {resultado.qualis_score}/100")
+print(f"Equilibrio Nash: {resultado.nash_eq}")
+print(f"Cohen Kappa: {resultado.cohen_kappa:.2f}")
+print(f"Dimensoes significativas (Bonferroni): {
+    resultado.significantes}")
+\end{lstlisting}
+
+\subsection*{Reflexão Final -- Roteiro do Nível Zero ao PhD}
+O roteiro completo percorre:
+\begin{enumerate}
+\item \textbf{Nível 0:} Compreender os fundamentos (lógica, conjuntos).
+\item \textbf{Nível Básico:} Implementar agentes reativos e regressão linear.
+\item \textbf{Nível Intermediário:} Redes neurais, transformers,
+      SDD+TDD, scanners.
+\item \textbf{Nível Avançado:} Multiagentes, Trust Engine, Token Economy,
+      CORA-Eval.
+\item \textbf{Nível PhD:} Metacognição, auto-evolução, banca simulada,
+      Qualis A1.
+\end{enumerate}
+
+Cada nível se apoia no anterior. A chave é a prática constante:
+implementar, testar, refletir e evoluir.

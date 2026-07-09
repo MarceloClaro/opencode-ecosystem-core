@@ -1,0 +1,27 @@
+\section{Plataformas Open-Source para Odontologia Digital}
+
+O desenvolvimento de gêmeos digitais de alta fidelidade fisiológica demanda um conjunto de ferramentas heterogêneo, capaz de converter volumes brutos de dados imagiológicos em modelos mecânicos solucionáveis. O ecossistema \textit{open-source} fornece essa base infraestrutural por meio de soluções consolidadas, cujas arquiteturas e propósitos descrevemos a seguir.
+
+\subsection{Processamento de Imagem: 3D Slicer, OpenCV e ITK}
+
+O primeiro estágio de virtualização no fluxo de trabalho de um gêmeo digital consiste na segmentação anatômica. O 3D Slicer estabelece-se como o padrão-ouro \textit{open-source} para a visualização, o registro e a segmentação de volumes tomográficos (CBCT). Desenvolvida sob a égide da transparência acadêmica, sua arquitetura baseada em \textit{plugins} permite aos pesquisadores integrar algoritmos customizados que atendam às singularidades da tomografia de feixe cônico odontológica, frequentemente prejudicada por artefatos metálicos.
+
+Nos bastidores computacionais do 3D Slicer -- e de vastas outras soluções -- residem a biblioteca OpenCV e o \textit{Insight Segmentation and Registration Toolkit} (ITK). O OpenCV instrumentaliza a rotina de pré-processamento radiográfico com filtros espaciais otimizados e morfologia matemática, enquanto o ITK viabiliza o cerne da segmentação multidimensional. Algoritmos matematicamente rigorosos, como os modelos deformáveis (\textit{Level Sets}) e as abordagens orientadas a fronteiras (\textit{Watershed}), propiciam a individualização de tecidos dentários e ósseos com níveis de precisão que rivalizam com softwares proprietários de alto custo. Tais etapas são indispensáveis para a construção inicial do modelo paramétrico que servirá de alicerce para simulações ortodônticas e cirúrgicas \cite{li2025impacts}.
+
+\subsection{Geometria Computacional: MeshLab e Blender}
+
+Uma vez extraídos os dados volumétricos, a manipulação das malhas tridimensionais (\textit{meshes}) exige intervenções precisas para assegurar a convergência matemática em análises de elementos finitos. O MeshLab desempenha um papel crítico neste escopo, oferecendo rotinas fundamentais para simplificação de malhas, \textit{remeshing} isotrópico e registro por \textit{Iterative Closest Point} (ICP). A adequação topológica realizada nesta fase dita o custo computacional e a confiabilidade de todas as predições biomecânicas subsequentes.
+
+Embora o Blender tenha sua origem na indústria criativa e de entretenimento, sua apropriação científica tem sido avassaladora. Sua engine de \textit{geometry nodes} institui um paradigma de modelagem paramétrica não destrutiva, provando-se um vetor poderoso para o desenvolvimento de variações anatômicas sintéticas e para a geração de visualizações em tempo real. A sinergia entre o Blender e o pipeline médico ilustra a versatilidade do software livre ao integrar estéticas ultrarrealistas à precisão milimétrica, facilitando a elaboração de protótipos de educação odontológica e a simulação de tecidos moles.
+
+\subsection{Simulação Biomecânica: Calculix e OpenFOAM}
+
+O núcleo analítico de um gêmeo digital odontológico frequentemente recai na capacidade de simular o comportamento de estresse, deformação e fluxo fluídico. O Calculix emerge como um solver de elementos finitos (FEA) de padrão industrial, completamente compatível com a sintaxe do Abaqus, mas de natureza livre. Em cenários complexos, como a mensuração de tensões corticais induzidas pela instalação de implantes dentários texturizados \cite{alshadidi2024surface} ou a expansão maxilar rápida em tratamentos ortodônticos \cite{li2024aligner}, o Calculix resolve análises estáticas não lineares e dinâmicas com elevado rigor matemático.
+
+Complementarmente, a dinâmica de fluidos computacional (CFD) tem no OpenFOAM sua principal ferramenta livre. Suas aplicações odontológicas variam desde a predição da micro-hidrodinâmica intracanal durante a irrigação endodôntica \cite{elsaid2025digital} até o mapeamento da dispersão de aerossóis na prática clínica. O acoplamento fluido-estrutura, integrando Calculix e OpenFOAM (via bibliotecas \textit{middleware} como preCICE), representa a fronteira atual para simulações fisiológicas integradas no ligamento periodontal.
+
+\subsection{Modelagem Neuromuscular: OpenSim}
+
+Originalmente forjado na Universidade Stanford para a análise da locomoção humana, o OpenSim fornece uma plataforma \textit{open-source} madura para a simulação de sistemas musculoesqueléticos. Na odontologia clínica, a articulação temporomandibular (ATM) e o sistema estomatognático demandam modelos dinâmicos que superponham as alavancas mandibulares à complexidade vetorial da musculatura mastigatória (masseter, temporal, pterigóideos).
+
+A adaptação de modelos craniomandibulares no OpenSim, abastecidos por dados cinemáticos reais e eletromiografia (EMG), viabiliza a criação de gêmeos funcionais. Em vez de estimativas estáticas artificiais, o clínico tem acesso a previsões de vetores de força oclusal temporalmente distribuídos. Esta predição dinâmica reduz os erros iatrogênicos em reabilitações completas, pavimentando o caminho para uma prática reabilitadora verdadeiramente customizada e embasada pela física computacional.

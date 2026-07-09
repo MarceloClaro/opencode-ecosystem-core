@@ -1,0 +1,309 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 13px; font-weight: bold; fill: #1a5276; }
+      .label { font-size: 8px; fill: #333; }
+      .annot { font-size: 8px; fill: #e67e22; font-style: italic; }
+      .cite { font-size: 7px; fill: #7f8c8d; }
+      .cell { stroke: white; stroke-width: 1.5; }
+      .cell-highlight { stroke: #333; stroke-width: 2; }
+      .axis-label { font-size: 8.5px; fill: #1a5276; font-weight: bold; }
+    </style>
+  </defs>
+
+  <rect width="900" height="720" fill="white"/>
+  <text x="450" y="22" text-anchor="middle" class="title" font-size="15">Figura 4 — Heatmap da Matriz de Correlação Cruzada 12×12 — Propriedades PELBD/rGO</text>
+  <line x1="60" y1="30" x2="840" y2="30" stroke="#1a5276" stroke-width="1"/>
+
+  <!-- Heatmap -->
+  <g transform="translate(250,40)">
+    <!-- Tamanho de cada célula: 38x38, 12 propriedades -->
+    <!-- Cores das células -->
+    <!-- Abordagem: preencher cada célula com a cor apropriada baseada na correlação -->
+
+    <!-- Definição das propriedades (índices 0-11):
+         0: Módulo    1: Tensão Flexão  2: T_10%    3: T_50%
+         4: Impacto Izod  5: X_c   6: CV Módulo   7: η* (1 rad/s)
+         8: T_m   9: T_c   10: DTG   11: Dardo H_50
+    -->
+
+    <!-- Escala de cor na direita -->
+    <rect x="14" y="456" width="430" height="15" rx="2"/>
+    <rect x="14" y="456" width="43" height="15" fill="#1a5276" rx="0"/>
+    <rect x="57" y="456" width="43" height="15" fill="#2980b9"/>
+    <rect x="100" y="456" width="43" height="15" fill="#85c1e9"/>
+    <rect x="143" y="456" width="43" height="15" fill="#d5d8dc"/>
+    <rect x="186" y="456" width="43" height="15" fill="#f5b7b1"/>
+    <rect x="229" y="456" width="43" height="15" fill="#e74c3c"/>
+    <rect x="272" y="456" width="43" height="15" fill="#c0392b"/>
+    <rect x="315" y="456" width="43" height="15" fill="#922b21"/>
+    <rect x="358" y="456" width="43" height="15" fill="#27ae60"/>
+    <rect x="401" y="456" width="43" height="15" fill="#27ae60"/>
+
+    <text x="14" y="472" font-size="7" fill="#333">-1.0</text>
+    <text x="135" y="472" font-size="7" fill="#333" text-anchor="middle">0.0</text>
+    <text x="272" y="472" font-size="7" fill="#333" text-anchor="middle">+1.0</text>
+
+    <!-- Labels das propriedades (rotacionados) -->
+    <text x="0" y="420" font-size="8" fill="#1a5276" transform="rotate(-45,0,420)" text-anchor="end" font-weight="bold">Módulo</text>
+    <text x="0" y="382" font-size="8" fill="#1a5276" transform="rotate(-45,0,382)" text-anchor="end" font-weight="bold">Tensão</text>
+    <text x="0" y="344" font-size="8" fill="#1a5276" transform="rotate(-45,0,344)" text-anchor="end" font-weight="bold">T_10%</text>
+    <text x="0" y="306" font-size="8" fill="#1a5276" transform="rotate(-45,0,306)" text-anchor="end" font-weight="bold">T_50%</text>
+    <text x="0" y="268" font-size="8" fill="#1a5276" transform="rotate(-45,0,268)" text-anchor="end" font-weight="bold">Impacto</text>
+    <text x="0" y="230" font-size="8" fill="#1a5276" transform="rotate(-45,0,230)" text-anchor="end" font-weight="bold">X_c</text>
+    <text x="0" y="192" font-size="8" fill="#1a5276" transform="rotate(-45,0,192)" text-anchor="end" font-weight="bold">CV Mod</text>
+    <text x="0" y="154" font-size="8" fill="#1a5276" transform="rotate(-45,0,154)" text-anchor="end" font-weight="bold">η*</text>
+    <text x="0" y="116" font-size="8" fill="#1a5276" transform="rotate(-45,0,116)" text-anchor="end" font-weight="bold">T_m</text>
+    <text x="0" y="78" font-size="8" fill="#1a5276" transform="rotate(-45,0,78)" text-anchor="end" font-weight="bold">T_c</text>
+    <text x="0" y="40" font-size="8" fill="#1a5276" transform="rotate(-45,0,40)" text-anchor="end" font-weight="bold">DTG</text>
+    <text x="0" y="2" font-size="8" fill="#1a5276" transform="rotate(-45,0,2)" text-anchor="end" font-weight="bold">Dardo</text>
+
+    <!-- Gerando a matriz de correlação real (valores do artigo) como retângulos coloridos -->
+    <!-- Linha 0: Módulo vs todos -->
+    <rect x="38" y="420" width="15" height="18" fill="#1a5276"/> <!-- 1.0 -->
+    <rect x="38" y="382" width="15" height="18" fill="#85c1e9"/> <!-- 0.72 moderado -->
+    <rect x="38" y="344" width="15" height="18" fill="#f5b7b1"/> <!-- 0.42 -->
+    <rect x="38" y="306" width="15" height="18" fill="#d5d8dc"/> <!-- 0.30 -->
+    <rect x="38" y="268" width="15" height="18" fill="#d5d8dc"/> <!-- 0.35 -->
+    <rect x="38" y="230" width="15" height="18" fill="#d5d8dc"/> <!-- 0.28 -->
+    <rect x="38" y="192" width="15" height="18" fill="#1a5276"/> <!-- 1.0 auto -->
+    <rect x="38" y="154" width="15" height="18" fill="#85c1e9"/> <!-- -0.68 -->
+    <rect x="38" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="38" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="38" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="38" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 1: Tensão -->
+    <rect x="56" y="420" width="15" height="18" fill="#85c1e9"/>
+    <rect x="56" y="382" width="15" height="18" fill="#1a5276"/> <!-- 1.0 -->
+    <rect x="56" y="344" width="15" height="18" fill="#d5d8dc"/> <!-- 0.35 -->
+    <rect x="56" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="56" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="56" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="56" y="192" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="56" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="56" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="56" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="56" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="56" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 2: T_10% -->
+    <rect x="74" y="420" width="15" height="18" fill="#85c1e9"/> <!-- 0.72 -->
+    <rect x="74" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="74" y="344" width="15" height="18" fill="#1a5276"/> <!-- 1.0 -->
+    <rect x="74" y="306" width="15" height="18" fill="#85c1e9"/> <!-- 0.65 -->
+    <rect x="74" y="268" width="15" height="18" fill="#c0392b"/> <!-- 0.89 ⭐ -->
+    <rect x="74" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="74" y="192" width="15" height="18" fill="#f5b7b1"/> <!-- -0.50 -->
+    <rect x="74" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="74" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="74" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="74" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="74" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 3: T_50% -->
+    <rect x="92" y="420" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="344" width="15" height="18" fill="#85c1e9"/>
+    <rect x="92" y="306" width="15" height="18" fill="#1a5276"/>
+    <rect x="92" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="192" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="92" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 4: Impacto Izod -->
+    <rect x="110" y="420" width="15" height="18" fill="#85c1e9"/> <!-- 0.42 -->
+    <rect x="110" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="110" y="344" width="15" height="18" fill="#c0392b"/> <!-- 0.89 ⭐ -->
+    <rect x="110" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="110" y="268" width="15" height="18" fill="#1a5276"/>
+    <rect x="110" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="110" y="192" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="110" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="110" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="110" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="110" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="110" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 5: X_c -->
+    <rect x="128" y="420" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="344" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="230" width="15" height="18" fill="#1a5276"/>
+    <rect x="128" y="192" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="78" width="15" height="18" fill="#85c1e9"/> <!-- 0.78 -->
+    <rect x="128" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="128" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 6: CV Mod -->
+    <rect x="146" y="420" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="146" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="146" y="344" width="15" height="18" fill="#f5b7b1"/>
+    <rect x="146" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="146" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="146" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="146" y="192" width="15" height="18" fill="#1a5276"/>
+    <rect x="146" y="154" width="15" height="18" fill="#85c1e9"/> <!-- -0.68 ⭐ -->
+    <rect x="146" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="146" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="146" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="146" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 7: eta* -->
+    <rect x="164" y="420" width="15" height="18" fill="#85c1e9"/>
+    <rect x="164" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="164" y="344" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="164" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="164" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="164" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="164" y="192" width="15" height="18" fill="#85c1e9"/>
+    <rect x="164" y="154" width="15" height="18" fill="#1a5276"/>
+    <rect x="164" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="164" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="164" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="164" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 8: T_m -->
+    <rect x="182" y="420" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="344" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="192" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="116" width="15" height="18" fill="#1a5276"/>
+    <rect x="182" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="182" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 9: T_c -->
+    <rect x="200" y="420" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="344" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="230" width="15" height="18" fill="#85c1e9"/> <!-- 0.78 ⭐ -->
+    <rect x="200" y="192" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="78" width="15" height="18" fill="#1a5276"/>
+    <rect x="200" y="40" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="200" y="2" width="15" height="18" fill="#d5d8dc"/>
+
+    <!-- Linha 10: DTG -->
+    <rect x="218" y="420" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="344" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="192" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="218" y="40" width="15" height="18" fill="#1a5276"/>
+    <rect x="218" y="2" width="15" height="18" fill="#c0392b"/> <!-- 0.95 -->
+
+    <!-- Linha 11: Dardo -->
+    <rect x="236" y="420" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="382" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="344" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="306" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="268" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="230" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="192" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="154" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="116" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="78" width="15" height="18" fill="#d5d8dc"/>
+    <rect x="236" y="40" width="15" height="18" fill="#c0392b"/>
+    <rect x="236" y="2" width="15" height="18" fill="#1a5276"/>
+
+    <!-- Destaques nas células de alta correlação -->
+    <rect x="74" y="268" width="15" height="18" fill="none" stroke="#e67e22" stroke-width="2.5"/>
+    <text x="100" y="283" font-size="6.5" fill="#e67e22" font-weight="bold">0,89 ★</text>
+
+    <rect x="110" y="344" width="15" height="18" fill="none" stroke="#e67e22" stroke-width="2.5"/>
+    <text x="135" y="359" font-size="6.5" fill="#e67e22" font-weight="bold">0,89 ★</text>
+
+    <rect x="38" y="382" width="15" height="18" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+    <text x="60" y="379" font-size="6" fill="#27ae60">0,72</text>
+
+    <rect x="164" y="192" width="15" height="18" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+    <rect x="146" y="154" width="15" height="18" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+    <text x="260" y="205" font-size="6" fill="#27ae60">−0,68 ★</text>
+
+    <rect x="200" y="230" width="15" height="18" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+    <text x="260" y="245" font-size="6" fill="#27ae60">0,78</text>
+
+    <rect x="218" y="2" width="15" height="18" fill="none" stroke="#7f8c8d" stroke-width="1.5"/>
+    <text x="260" y="17" font-size="6" fill="#7f8c8d">0,95 (mesma técnica)</text>
+  </g>
+
+  <!-- Dendrograma na margem direita -->
+  <g transform="translate(525,40)">
+    <text x="100" y="10" font-size="9" font-weight="bold" fill="#1a5276">Dendrograma Hierárquico</text>
+    <line x1="40" y1="20" x2="160" y2="20" stroke="#7f8c8d" stroke-width="0.8"/>
+    <text x="0" y="25" font-size="6" fill="#7f8c8d">Dissimilaridade ↑</text>
+
+    <!-- Clusters -->
+    <line x1="40" y1="35" x2="160" y2="35" stroke="#1a5276" stroke-width="1.5"/>
+    <line x1="40" y1="95" x2="160" y2="95" stroke="#1a5276" stroke-width="1.5"/>
+
+    <!-- Cluster 1: Térmicas -->
+    <text x="20" y="50" font-size="7" fill="#1a5276" font-weight="bold">Cluster 1:</text>
+    <text x="25" y="62" font-size="6.5" fill="#333">T_10%, T_50%, DTG</text>
+    <text x="25" y="74" font-size="6.5" fill="#333">(Térmicas, r>0,85)</text>
+
+    <!-- Cluster 2: Mecânicas -->
+    <text x="20" y="110" font-size="7" fill="#1a5276" font-weight="bold">Cluster 2:</text>
+    <text x="25" y="122" font-size="6.5" fill="#333">Módulo, Tensão, Impacto</text>
+    <text x="25" y="134" font-size="6.5" fill="#333">(Mecânicas, r>0,42)</text>
+
+    <!-- Cluster 3: Processo -->
+    <text x="20" y="155" font-size="7" fill="#1a5276" font-weight="bold">Cluster 3:</text>
+    <text x="25" y="167" font-size="6.5" fill="#333">CV, η*, X_c</text>
+    <text x="25" y="179" font-size="6.5" fill="#333">(Controle processo)</text>
+
+    <!-- Conexões visuais -->
+    <line x1="50" y1="95" x2="50" y2="35" stroke="#1a5276" stroke-width="0.8"/>
+    <line x1="50" y1="35" x2="50" y2="140" stroke="#1a5276" stroke-width="0.8" stroke-dasharray="2,2"/>
+    <line x1="30" y1="140" x2="70" y2="140" stroke="#1a5276" stroke-width="0.8"/>
+
+    <!-- Implicação -->
+    <rect x="10" y="200" width="210" height="80" rx="6" fill="#fef9e7" stroke="#e67e22" stroke-width="1.5"/>
+    <text x="115" y="218" font-size="7.5" fill="#e67e22" text-anchor="middle" font-weight="bold">⚡ Implicação Fundamental</text>
+    <text x="115" y="233" font-size="7" fill="#333" text-anchor="middle">T_10% (TGA) = preditor dominante</text>
+    <text x="115" y="246" font-size="7" fill="#333" text-anchor="middle">da tenacidade (r = 0,89, p&lt;0,001)</text>
+    <text x="115" y="259" font-size="7" fill="#333" text-anchor="middle">→ Triagem rápida, reduz ensaios destrutivos</text>
+    <text x="115" y="272" font-size="7" fill="#e67e22" text-anchor="middle">CV↔η*: r=−0,68 → reologia como controle</text>
+  </g>
+
+  <!-- Estatísticas -->
+  <g transform="translate(30,40)">
+    <rect x="0" y="0" width="210" height="70" rx="4" fill="white" stroke="#1a5276" stroke-width="1"/>
+    <text x="105" y="14" text-anchor="middle" font-size="8" fill="#1a5276" font-weight="bold">Parâmetros Estatísticos</text>
+    <text x="10" y="28" font-size="7" fill="#333">α_corrigido (Bonferroni): 0,00076</text>
+    <text x="10" y="41" font-size="7" fill="#333">66 comparações (12×11/2)</text>
+    <text x="10" y="54" font-size="7" fill="#333">|r| &gt; 0,7 → correlação forte (Cohen 1988)</text>
+    <text x="10" y="66" font-size="7" fill="#333">α=0,05 padrão; FWER corrigido</text>
+  </g>
+
+  <!-- Legenda geral -->
+  <text x="450" y="710" text-anchor="middle" class="cite" font-size="8">
+    Legenda: Matriz Pearson 12×12 revela T_10% como preditor dominante da tenacidade (r=0,89, p&lt;0,001). Correlação negativa CV↔η* (r=−0,68) sugere reologia como métrica de controle de processo.
+    O dendrograma identifica 3 clusters naturais: térmicas, mecânicas e de controle de processo.
+  </text>
+  <text x="450" y="723" text-anchor="middle" class="cite" font-size="7.5">
+    [Cohen, Statistical Power Analysis, 2ed. Erlbaum (1988). DOI: 10.4324/9780203771587] [Montgomery, Statistical Quality Control, 8ed. Wiley (2020)]
+  </text>
+
+</svg>

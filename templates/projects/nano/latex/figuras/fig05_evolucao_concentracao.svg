@@ -1,0 +1,254 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 13px; font-weight: bold; fill: #1a5276; }
+      .subtitle { font-size: 10px; font-weight: bold; fill: #1a5276; }
+      .label { font-size: 9px; fill: #333; }
+      .annot { font-size: 8px; fill: #e67e22; font-style: italic; }
+      .cite { font-size: 7px; fill: #7f8c8d; }
+      .axis { stroke: #333; stroke-width: 1.2; fill: none; }
+      .grid { stroke: #ddd; stroke-width: 0.5; stroke-dasharray: 3,3; fill: none; }
+      .box { fill: none; stroke: #7f8c8d; stroke-width: 1; }
+      .data-blue { stroke: #1a5276; stroke-width: 2.5; fill: none; }
+      .data-orange { stroke: #e67e22; stroke-width: 2.5; fill: none; }
+      .data-green { stroke: #27ae60; stroke-width: 2.5; fill: none; }
+    </style>
+  </defs>
+  <rect width="1000" height="680" fill="white"/>
+  <text x="500" y="22" text-anchor="middle" class="title" font-size="15">Figura 5 — Evolução das Propriedades com Concentração de rGO e PP-g-MA</text>
+  <line x1="80" y1="30" x2="920" y2="30" stroke="#1a5276" stroke-width="1"/>
+
+  <!-- ====== (a) Módulo e Tensão vs Concentração ====== -->
+  <g transform="translate(20,38)">
+    <rect x="0" y="0" width="460" height="300" class="box"/>
+    <text x="230" y="16" text-anchor="middle" class="subtitle">(a) Módulo Elástico e Tensão de Flexão vs. Concentração (Etapa 1)</text>
+
+    <!-- Eixo Y esquerdo: Módulo -->
+    <line x1="55" y1="30" x2="55" y2="270" class="axis"/>
+    <line x1="55" y1="270" x2="440" y2="270" class="axis"/>
+    <text x="30" y="155" text-anchor="middle" class="label" transform="rotate(-90,30,155)" font-size="8" fill="#1a5276">Módulo Elástico (MPa)</text>
+    <text x="245" y="292" text-anchor="middle" class="label">Concentração de rGO (%)</text>
+
+    <!-- Eixo Y direito: Tensão -->
+    <line x1="440" y1="30" x2="440" y2="270" class="axis"/>
+    <text x="460" y="155" text-anchor="middle" class="label" transform="rotate(90,460,155)" font-size="8" fill="#e67e22">Tensão de Flexão (MPa)</text>
+
+    <!-- Grid -->
+    <line x1="55" y1="80" x2="440" y2="80" class="grid"/><line x1="55" y1="140" x2="440" y2="140" class="grid"/><line x1="55" y1="200" x2="440" y2="200" class="grid"/>
+    <line x1="130" y1="30" x2="130" y2="270" class="grid"/><line x1="210" y1="30" x2="210" y2="270" class="grid"/><line x1="290" y1="30" x2="290" y2="270" class="grid"/><line x1="370" y1="30" x2="370" y2="270" class="grid"/>
+
+    <!-- Ticks -->
+    <text x="55" y="283" font-size="7" fill="#333" text-anchor="middle">0,00</text>
+    <text x="130" y="283" font-size="7" fill="#333" text-anchor="middle">0,05</text>
+    <text x="210" y="283" font-size="7" fill="#333" text-anchor="middle">0,10</text>
+    <text x="290" y="283" font-size="7" fill="#333" text-anchor="middle">0,05</text>
+    <text x="370" y="283" font-size="7" fill="#333" text-anchor="middle">0,10</text>
+    <text x="210" y="296" font-size="7" fill="#7f8c8d" text-anchor="middle">(sem PP-g-MA)</text>
+    <text x="330" y="296" font-size="7" fill="#7f8c8d" text-anchor="middle">(com PP-g-MA)</text>
+
+    <!-- Linha separadora entre grupos -->
+    <line x1="250" y1="30" x2="250" y2="270" stroke="#7f8c8d" stroke-width="1" stroke-dasharray="6,4"/>
+
+    <!-- Curva Módulo (azul) -->
+    <!-- T1: 442,7; T3: 460,7; T4: 475,4 -->
+    <line x1="55" y1="225" x2="130" y2="155" stroke="#1a5276" stroke-width="3"/>
+    <line x1="130" y1="155" x2="210" y2="95" stroke="#1a5276" stroke-width="3"/>
+    <circle cx="55" cy="225" r="5" fill="#1a5276"/>
+    <circle cx="130" cy="155" r="5" fill="#1a5276"/>
+    <circle cx="210" cy="95" r="5" fill="#1a5276"/>
+
+    <!-- T5: 484,7; T6: 480,3 -->
+    <circle cx="290" cy="60" r="6" fill="#e67e22" stroke="white" stroke-width="1.5"/>
+    <circle cx="370" cy="80" r="5" fill="#f0a050"/>
+
+    <!-- Curva Tensão (laranja) -->
+    <!-- T1: 15,55; T3: 16,52; T4: 17,04 -->
+    <line x1="55" y1="80" x2="130" y2="120" stroke="#e67e22" stroke-width="3"/>
+    <line x1="130" y1="120" x2="210" y2="50" stroke="#e67e22" stroke-width="3"/>
+    <circle cx="55" cy="80" r="5" fill="#e67e22"/>
+    <circle cx="130" cy="120" r="5" fill="#e67e22"/>
+    <circle cx="210" cy="50" r="5" fill="#e67e22"/>
+
+    <!-- Barras de erro (CV para Módulo) -->
+    <line x1="55" y1="210" x2="55" y2="235" stroke="#1a5276" stroke-width="1.5"/>
+    <line x1="130" y1="130" x2="130" y2="178" stroke="#1a5276" stroke-width="1.5"/>
+    <line x1="210" y1="60" x2="210" y2="130" stroke="#1a5276" stroke-width="1.5"/>
+    <line x1="290" y1="40" x2="290" y2="75" stroke="#e67e22" stroke-width="1.5"/>
+    <line x1="370" y1="55" x2="370" y2="105" stroke="#f0a050" stroke-width="1.5"/>
+
+    <!-- Anotação do módulo máximo -->
+    <text x="290" y="42" text-anchor="middle" font-size="7" fill="#e67e22" font-weight="bold">484,7 ± 12,6</text>
+    <text x="210" y="55" text-anchor="middle" font-size="7" fill="#1a5276">475,4 ± 31,7</text>
+    <text x="210" y="42" text-anchor="middle" font-size="6.5" fill="#7f8c8d">(alta variância!)</text>
+
+    <!-- Legenda -->
+    <rect x="55" y="42" width="150" height="35" rx="4" fill="white" stroke="#ddd" stroke-width="0.5"/>
+    <line x1="65" y1="52" x2="90" y2="52" stroke="#1a5276" stroke-width="2.5"/>
+    <text x="95" y="55" font-size="7" fill="#333">Módulo</text>
+    <line x1="65" y1="65" x2="90" y2="65" stroke="#e67e22" stroke-width="2.5"/>
+    <text x="95" y="68" font-size="7" fill="#333">Tensão</text>
+  </g>
+
+  <!-- ====== (b) T10% e T50% vs Concentração ====== -->
+  <g transform="translate(500,38)">
+    <rect x="0" y="0" width="460" height="300" class="box"/>
+    <text x="230" y="16" text-anchor="middle" class="subtitle">(b) T_10% e T_50% vs. Concentração — Anomalia a 0,10%</text>
+
+    <line x1="55" y1="30" x2="55" y2="270" class="axis"/>
+    <line x1="55" y1="270" x2="440" y2="270" class="axis"/>
+    <text x="30" y="155" text-anchor="middle" class="label" transform="rotate(-90,30,155)" font-size="8">Temperatura (°C)</text>
+    <text x="245" y="292" text-anchor="middle" class="label">Concentração de rGO (%)</text>
+
+    <line x1="55" y1="80" x2="440" y2="80" class="grid"/><line x1="55" y1="140" x2="440" y2="140" class="grid"/><line x1="55" y1="200" x2="440" y2="200" class="grid"/>
+    <line x1="130" y1="30" x2="130" y2="270" class="grid"/><line x1="210" y1="30" x2="210" y2="270" class="grid"/><line x1="290" y1="30" x2="290" y2="270" class="grid"/><line x1="370" y1="30" x2="370" y2="270" class="grid"/>
+
+    <text x="55" y="283" font-size="7" fill="#333" text-anchor="middle">0,00</text>
+    <text x="130" y="283" font-size="7" fill="#333" text-anchor="middle">0,05</text>
+    <text x="210" y="283" font-size="7" fill="#333" text-anchor="middle">0,10</text>
+    <text x="290" y="283" font-size="7" fill="#333" text-anchor="middle">0,05</text>
+    <text x="370" y="283" font-size="7" fill="#333" text-anchor="middle">0,10</text>
+    <text x="210" y="296" font-size="7" fill="#7f8c8d" text-anchor="middle">(sem PP-g-MA)</text>
+    <text x="330" y="296" font-size="7" fill="#7f8c8d" text-anchor="middle">(com PP-g-MA)</text>
+
+    <line x1="250" y1="30" x2="250" y2="270" stroke="#7f8c8d" stroke-width="1" stroke-dasharray="6,4"/>
+
+    <!-- Escala de temperatura -->
+    <text x="42" y="265" font-size="7" fill="#333" text-anchor="end">430</text>
+    <text x="42" y="215" font-size="7" fill="#333" text-anchor="end">450</text>
+    <text x="42" y="165" font-size="7" fill="#333" text-anchor="end">460</text>
+    <text x="42" y="115" font-size="7" fill="#333" text-anchor="end">480</text>
+    <text x="42" y="65" font-size="7" fill="#333" text-anchor="end">500</text>
+
+    <!-- T_10% -->
+    <polyline points="55,225 130,75 210,85 290,30 370,195" fill="none" stroke="#e67e22" stroke-width="3"/>
+    <circle cx="55" cy="225" r="5" fill="#e67e22"/>
+    <circle cx="130" cy="75" r="5" fill="#e67e22"/>
+    <circle cx="210" cy="85" r="5" fill="#e67e22"/>
+    <circle cx="290" cy="30" r="6" fill="#27ae60" stroke="white" stroke-width="1.5"/>
+    <circle cx="370" cy="195" r="5" fill="#e67e22"/>
+
+    <!-- T_50% -->
+    <polyline points="55,95 130,55 210,60 290,35 370,100" fill="none" stroke="#1a5276" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <circle cx="55" cy="95" r="5" fill="#1a5276"/>
+    <circle cx="130" cy="55" r="5" fill="#1a5276"/>
+    <circle cx="210" cy="60" r="5" fill="#1a5276"/>
+    <circle cx="290" cy="35" r="5" fill="#1a5276"/>
+    <circle cx="370" cy="100" r="5" fill="#1a5276"/>
+
+    <!-- Anomalia: regressão a 0,10% com PP-g-MA -->
+    <path d="M290,30 L290,195" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="380" y="190" font-size="7" fill="#e74c3c" font-weight="bold">REGRESSÃO</text>
+    <text x="380" y="202" font-size="6.5" fill="#e74c3c">-14°C vs. 0,05%</text>
+    <text x="380" y="214" font-size="6.5" fill="#e74c3c">(p&lt;0,001, Tukey)</text>
+
+    <!-- Anotação anomalia -->
+    <rect x="280" y="70" width="165" height="65" rx="4" fill="#fdf2f2" stroke="#e74c3c" stroke-width="1"/>
+    <text x="288" y="85" font-size="7" fill="#e74c3c" font-weight="bold">⚠ Anomalia Térmica:</text>
+    <text x="288" y="98" font-size="6.5" fill="#333">T_10% máx = +26°C a 0,05%</text>
+    <text x="288" y="110" font-size="6.5" fill="#333">Regride para +12°C a 0,10%</text>
+    <text x="288" y="122" font-size="6.5" fill="#333">φ_c ≈ 0,02% (∼10× abaixo previsto)</text>
+    <text x="288" y="134" font-size="6.5" fill="#7f8c8d">Hipótese: tunelamento de fônons</text>
+
+    <!-- Legenda -->
+    <rect x="55" y="42" width="130" height="35" rx="4" fill="white" stroke="#ddd" stroke-width="0.5"/>
+    <line x1="65" y1="52" x2="90" y2="52" stroke="#e67e22" stroke-width="2.5"/>
+    <text x="95" y="55" font-size="7" fill="#333">T_10%</text>
+    <line x1="65" y1="65" x2="90" y2="65" stroke="#1a5276" stroke-width="2.5" stroke-dasharray="4,2"/>
+    <text x="95" y="68" font-size="7" fill="#333">T_50%</text>
+  </g>
+
+  <!-- ====== (c) Índice de Sinergia S vs Concentração + Langmuir ====== -->
+  <g transform="translate(20,355)">
+    <rect x="0" y="0" width="460" height="280" class="box"/>
+    <text x="230" y="16" text-anchor="middle" class="subtitle">(c) Índice de Sinergia S vs. Concentração — Modelo Langmuir Modificado</text>
+
+    <line x1="55" y1="30" x2="55" y2="240" class="axis"/>
+    <line x1="55" y1="240" x2="440" y2="240" class="axis"/>
+    <text x="30" y="140" text-anchor="middle" class="label" transform="rotate(-90,30,140)" font-size="8">Índice de Sinergia S</text>
+    <text x="245" y="262" text-anchor="middle" class="label">Concentração de rGO (%)</text>
+
+    <line x1="55" y1="90" x2="440" y2="90" class="grid"/><line x1="55" y1="140" x2="440" y2="140" class="grid"/><line x1="55" y1="190" x2="440" y2="190" class="grid"/>
+    <line x1="130" y1="30" x2="130" y2="240" class="grid"/><line x1="210" y1="30" x2="210" y2="240" class="grid"/><line x1="290" y1="30" x2="290" y2="240" class="grid"/><line x1="370" y1="30" x2="370" y2="240" class="grid"/>
+
+    <!-- Linha zero -->
+    <line x1="55" y1="140" x2="440" y2="140" stroke="#333" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <text x="48" y="144" font-size="7" fill="#333" text-anchor="end">0</text>
+
+    <text x="55" y="253" font-size="7" fill="#333" text-anchor="middle">0,00</text>
+    <text x="130" y="253" font-size="7" fill="#333" text-anchor="middle">0,05</text>
+    <text x="210" y="253" font-size="7" fill="#333" text-anchor="middle">0,10</text>
+    <text x="290" y="253" font-size="7" fill="#333" text-anchor="middle">0,15</text>
+    <text x="370" y="253" font-size="7" fill="#333" text-anchor="middle">0,20</text>
+
+    <!-- Zonas coloridas -->
+    <rect x="55" y="30" width="350" height="38" fill="#27ae60" opacity="0.1"/>
+    <text x="230" y="52" text-anchor="middle" font-size="7" fill="#27ae60" font-weight="bold">Superaditividade (S &gt; 0)</text>
+
+    <rect x="55" y="68" width="350" height="36" fill="#f0f0f0"/>
+    <text x="230" y="90" text-anchor="middle" font-size="7" fill="#7f8c8d" font-weight="bold">Aditividade (S ≈ 0)</text>
+
+    <rect x="55" y="104" width="350" height="105" fill="#e74c3c" opacity="0.08"/>
+    <text x="230" y="125" text-anchor="middle" font-size="7" fill="#e74c3c" font-weight="bold">Antagonismo (S &lt; 0)</text>
+
+    <!-- Curva S (experimental - pontos) -->
+    <circle cx="130" cy="55" r="6" fill="#27ae60" stroke="white" stroke-width="1.5"/>
+    <text x="130" y="42" text-anchor="middle" font-size="7" fill="#27ae60" font-weight="bold">+5,4%</text>
+    <text x="130" y="32" text-anchor="middle" font-size="6" fill="#27ae60">Módulo</text>
+
+    <circle cx="210" cy="138" r="6" fill="#f0a050" stroke="white" stroke-width="1.5"/>
+    <text x="210" y="128" text-anchor="middle" font-size="7" fill="#f0a050">+0,1%</text>
+
+    <circle cx="370" cy="200" r="6" fill="#e74c3c" stroke="white" stroke-width="1.5"/>
+    <text x="370" y="215" text-anchor="middle" font-size="7" fill="#e74c3c" font-weight="bold">Antagonismo</text>
+
+    <!-- Curva de Langmuir ajustada -->
+    <path d="M55,141 Q75,132 100,90 Q115,58 130,55 Q145,65 160,90 Q185,125 210,138 Q235,150 260,165 Q310,185 350,195 Q400,210 440,218" fill="none" stroke="#1a5276" stroke-width="2.5" stroke-dasharray="5,3"/>
+
+    <!-- Equação -->
+    <rect x="250" y="35" width="195" height="90" rx="5" fill="white" stroke="#1a5276" stroke-width="1.2"/>
+    <text x="347" y="50" font-size="7.5" fill="#1a5276" text-anchor="middle" font-weight="bold">Modelo Langmuir Modificado</text>
+    <text x="255" y="65" font-size="7" fill="#333">η_c(c) = η_0 · [c/(K+c)] · e^(−γ·c)</text>
+    <text x="255" y="78" font-size="7" fill="#333">K = 0,032% (saturação)</text>
+    <text x="255" y="91" font-size="7" fill="#333">γ = 8,7 (auto-agregação)</text>
+    <text x="255" y="104" font-size="7" fill="#333">R² = 0,94 (Levenberg-Marquardt)</text>
+    <text x="255" y="117" font-size="6.5" fill="#7f8c8d">θ = c/(K+c) ≈ 0,61 @ 0,05%</text>
+
+    <!-- Analogia Ising -->
+    <text x="130" y="252" font-size="6" fill="#7f8c8d">Analogia formal com Ising (1925):</text>
+    <text x="130" y="263" font-size="6" fill="#7f8c8d">H=PP-g-MA, J=rGO-PP-g-MA, transição cooperativo→não-cooperativo</text>
+  </g>
+
+  <!-- Painel direito: legenda e contexto -->
+  <g transform="translate(500,355)">
+    <rect x="0" y="0" width="460" height="280" class="box"/>
+    <text x="230" y="16" text-anchor="middle" class="subtitle">Contexto e Interpretação</text>
+
+    <rect x="15" y="30" width="430" height="55" rx="5" fill="#fef9e7" stroke="#e67e22" stroke-width="1"/>
+    <text x="25" y="46" font-size="8" fill="#e67e22" font-weight="bold">⚡ Princípio da Não-Monotonicidade:</text>
+    <text x="25" y="60" font-size="7.5" fill="#333">A sinergia rGO×PP-g-MA atinge máximo em concentração crítica (K=0,032%),</text>
+    <text x="25" y="74" font-size="7.5" fill="#333">além da qual o excesso de compatibilizante compete pela interface → antagonismo</text>
+
+    <rect x="15" y="95" width="430" height="55" rx="5" fill="#e8f8e8" stroke="#27ae60" stroke-width="1"/>
+    <text x="25" y="111" font-size="8" fill="#27ae60" font-weight="bold">✓ Implicação Prática:</text>
+    <text x="25" y="125" font-size="7.5" fill="#333">Módulo: +9,5% a 0,05% (superaditivo) vs. +8,5% a 0,10% (colmso)</text>
+    <text x="25" y="139" font-size="7.5" fill="#333">T_10%: +26°C a 0,05% vs. apenas +12°C a 0,10% (regressão)</text>
+
+    <rect x="15" y="160" width="430" height="55" rx="5" fill="#fdf2f2" stroke="#e74c3c" stroke-width="1"/>
+    <text x="25" y="176" font-size="8" fill="#e74c3c" font-weight="bold">⚠ Anomalia de φ_c:</text>
+    <text x="25" y="190" font-size="7.5" fill="#333">φ_c ≈ 0,02% (experimental) vs. 1/α = 0,20% (teórico) — diferença de ∼10×</text>
+    <text x="25" y="204" font-size="7.5" fill="#333">Sugestivo de tunelamento de fônons ou percolação assistida por grupos polares</text>
+
+    <!-- Citações -->
+    <rect x="15" y="228" width="430" height="40" rx="4" fill="white" stroke="#7f8c8d" stroke-width="0.8"/>
+    <text x="25" y="243" font-size="6.5" fill="#7f8c8d">[Langmuir, JACS 40, 1361 (1918) — isoterma de adsorção]</text>
+    <text x="25" y="255" font-size="6.5" fill="#7f8c8d">[Ising, Z. Physik 31, 253 (1925) — transição de fase. DOI: 10.1007/BF02980577]</text>
+    <text x="25" y="267" font-size="6.5" fill="#7f8c8d">[Celzard et al., Phys. Rev. B 53, 6209 (1996) — percolação. DOI: 10.1103/PhysRevB.53.6209]</text>
+  </g>
+
+  <!-- Legenda geral -->
+  <text x="500" y="668" text-anchor="middle" class="cite" font-size="8">
+    Legenda: (a) Aumento monotônico das propriedades com rGO, porém com incremento de variância a 0,10% sem PP-g-MA.
+    (b) Anomalia térmica — T_10% máx +26°C a 0,05% regride a +12°C a 0,10%, indicando φ_c≈0,02%.
+    (c) Índice de sinergia S modelado por Langmuir modificado (R²=0,94): superaditivo→aditivo→antagônico.
+  </text>
+</svg>

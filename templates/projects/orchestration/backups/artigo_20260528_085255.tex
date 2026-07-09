@@ -1,0 +1,1111 @@
+\documentclass[
+  12pt,
+  a4paper,
+  twoside,
+  brazilian
+]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[brazilian]{babel}
+
+\usepackage[
+  top=3cm, left=3cm, right=2cm, bottom=2cm
+]{geometry}
+
+\usepackage{setspace}
+\singlespacing
+
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{14.5pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE,LO]{\textit{Raciocínios Científicos em Exames de Pós-Graduação}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+\usepackage{array, booktabs, longtable}
+\usepackage{graphicx}
+\usepackage[bottom]{footmisc}
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\bfseries\large}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalfont\bfseries\normalsize}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\bfseries\normalsize}{\thesubsubsection}{0.5em}{}
+
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newcommand{\tabnota}[1]{\vspace{2mm}\par\noindent{\footnotesize #1}}
+
+\begin{document}
+
+% --- Folha de rosto (com identificação do autor) ---
+% Esta página é removida para a avaliação cega (blind review)
+\pagenumbering{Alph}
+\begin{titlepage}
+  \begin{center}
+    \vspace*{3cm}
+    {\large\bfseries Marcelo Claro Laranjeira\par}
+    \vspace{0.5cm}
+    {\normalsize \lbrack Mestrando em Educação para a Ciência\rbrack, \lbrack Função\rbrack,
+    \lbrack Departamento\rbrack, \lbrack Unidade\rbrack, \\
+    \lbrack Universidade por extenso (sigla)\rbrack. \lbrack Cidade\rbrack, \lbrack UF\rbrack. \\
+    \textit{\lbrack e-mail@exemplo.com\rbrack}\par}
+    \vspace{3cm}
+    {\LARGE\bfseries Raciocínios Científicos em Exames de Seleção para Pós-Graduação: Uma Análise Comparativa entre Física e Matemática à Luz da Taxonomia 350 e da Taxonomia de Bloom\par}
+    \vspace{0.5cm}
+    {\large\bfseries Scientific Reasoning in Graduate Admission Exams: A Comparative Analysis between Physics and Mathematics through Taxonomy 350 and Bloom's Taxonomy\par}
+    \vfill
+    {\large 2026\par}
+  \end{center}
+\end{titlepage}
+
+\clearpage
+\pagenumbering{arabic}
+\tableofcontents
+\newpage
+
+\section{Raciocínios Científicos em Exames de Seleção para
+Pós-Graduação: Uma Análise Comparativa entre Física e Matemática à Luz
+da Taxonomia 350 e da Taxonomia de
+Bloom}\label{raciocuxednios-cientuxedficos-em-exames-de-seleuxe7uxe3o-para-puxf3s-graduauxe7uxe3o-uma-anuxe1lise-comparativa-entre-fuxedsica-e-matemuxe1tica-uxe0-luz-da-taxonomia-350-e-da-taxonomia-de-bloom}
+
+\subsection{Scientific Reasoning in Graduate Admission Exams: A
+Comparative Analysis between Physics and Mathematics through Taxonomy
+350 and Bloom's
+Taxonomy}\label{scientific-reasoning-in-graduate-admission-exams-a-comparative-analysis-between-physics-and-mathematics-through-taxonomy-350-and-blooms-taxonomy}
+
+\textbf{Resumo} Este artigo analisa comparativamente 150 questões de exames de seleção para pós-graduação -- 60 do Exame Unificado de Física (EUF) e 90 do Exame Nacional de Acesso de Matemática (ENA) -- classificando-as segundo a Taxonomia 350 de Raciocínios Científicos e a Taxonomia de Bloom revisada. Os resultados revelam padrões taxonomicamente distintos: 86,7\% das questões de Física concentram-se na categoria XIII (Físico-Matemáticos), enquanto 67,8\% das questões de Matemática pertencem à categoria I (Lógico-Dedutivos). O teste exato de Fisher indica odds ratio de 61,0 (p < 0,001) para a associação entre Matemática e raciocínio lógico-dedutivo. Na dimensão de Bloom, 58\% das questões exigem Aplicar e 42\% Analisar, com distribuição homogênea entre os exames (V de Cramer = 0,047; p = 0,566). Foram identificados 25 R-codes distintos, com R008 (Dedução Formal Passo-a-Passo) concentrando 50\% das questões de Matemática. A análise evidencia que os exames avaliam perfis epistemológicos distintos: a Física privilegia raciocínios físico-matemáticos e de modelagem, enquanto a Matemática enfatiza o raciocínio lógico-dedutivo formal. Discutem-se implicações para o desenho de instrumentos de seleção e para o ensino de ciências e matemática na pós-graduação.
+
+\textbf{Palavras-chave:} Taxonomia 350. Raciocínio científico. Taxonomia
+de Bloom. EUF. ENA. Seleção pós-graduação.
+
+\textbf{Abstract} \emph{This paper comparatively analyzes 150 questions
+from graduate admission exams --- 60 from the Unified Physics Exam (EUF)
+and 90 from the National Mathematics Access Exam (ENA) --- classifying
+them according to the Taxonomy 350 of Scientific Reasoning and the
+Revised Bloom's Taxonomy. Results reveal taxonomically distinct
+patterns: 86.7\% of Physics questions concentrate in category XIII
+(Physico-Mathematical), while 67.8\% of Mathematics questions belong to
+category I (Logical-Deductive). Fisher's exact test yields an odds ratio
+of 61.0 (p \textless{} 0.001) for the association between Mathematics
+and logical-deductive reasoning. In the Bloom dimension, 58\% of
+questions require Applying and 42\% Analyzing, with homogeneous
+distribution across exams (Cramer's V = 0.047; p = 0.566). Twenty-five
+distinct R-codes were identified, with R008 (Step-by-Step Formal
+Deduction) concentrating 50\% of Mathematics questions. The analysis
+shows that the exams assess distinct epistemological profiles: Physics
+privileges physico-mathematical reasoning and modeling, while
+Mathematics emphasizes formal logical-deductive reasoning. Implications
+for admission instrument design and for science and mathematics
+education in graduate programs are discussed.}
+
+\textbf{Keywords:} Taxonomy 350. Scientific reasoning. Bloom's taxonomy.
+EUF. ENA. Graduate admission.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Introdução}\label{introduuxe7uxe3o}
+
+A seleção de candidatos para programas de pós-graduação em ciências
+exatas no Brasil utiliza, com frequência, exames escritos como principal
+instrumento de avaliação. Essa prática, consolidada ao longo de décadas,
+baseia-se na premissa de que o desempenho em uma prova de conhecimentos
+específicos constitui indicador razoável da capacidade do candidato para
+realizar pesquisa em nível de mestrado ou doutorado. No caso da Física,
+o Exame Unificado de Física (EUF) é aplicado anualmente por mais de
+trinta programas associados, abrangendo conteúdos de seis áreas:
+Mecânica Clássica, Eletromagnetismo, Termodinâmica, Mecânica
+Estatística, Mecânica Quântica e Física Moderna. Cada edição do EUF
+contém 10 questões, distribuídas de forma a equilibrar a representação
+das seis áreas. Para a Matemática, o Exame Nacional de Acesso (ENA)
+seleciona candidatos para o Mestrado Profissional em Matemática em Rede
+Nacional (Profmat), programa que atende a centenas de professores de
+Matemática em todo o território nacional. O ENA contém 30 questões por
+edição, cobrindo áreas como Álgebra, Geometria, Teoria dos Números,
+Análise e Estatística.
+
+A despeito da relevância desses exames para a formação de pesquisadores
+e professores no país, pouco se conhece sobre a natureza dos processos
+cognitivos e dos raciocínios científicos que eles efetivamente avaliam.
+Em outras palavras, sabe-se quais conteúdos são cobrados, mas não se
+sabe com clareza que tipo de raciocínio é exigido para resolvê-los, nem
+se esse perfil é coerente com as competências almejadas pelos programas
+de pós-graduação. Essa lacuna é relevante porque diferentes tipos de
+raciocínio científico podem estar associados a diferentes desempenhos
+acadêmicos e a diferentes perfis de sucesso na pesquisa. Um exame que
+privilegia exclusivamente a dedução formal pode, por exemplo, selecionar
+candidatos hábeis em manipulação simbólica, mas sub-representar aqueles
+com talento para modelagem de fenômenos ou para o raciocínio
+probabilístico. Estudos prévios em educação em ciências têm se dedicado
+a analisar exames de larga escala como o ENEM (Silva; Dias, 2023)\footnote{\url{https://doi.org/10.55767/2451.6007.v33.n2.35304}}, o
+ENADE (Costa, 2017)\footnote{\url{https://doi.org/10.5007/2175-7941.2017v34n3p697}} e exames internacionais como o TIMSS (Mullis;
+Martin, 2017), empregando predominantemente a Taxonomia de Bloom (Bloom
+\textit{et al.}, 1956; Krathwohl, 2002)\footnote{\url{https://doi.org/10.1207/s15430421tip4104_2}} como quadro de referência. Essa abordagem
+tem se mostrado produtiva para descrever o perfil geral de complexidade
+cognitiva das questões. Contudo, a Taxonomia de Bloom, embora útil para
+classificar níveis de complexidade cognitiva, não captura a
+especificidade dos raciocínios científicos mobilizados em cada questão
+--- isto é, não distingue, por exemplo, entre um raciocínio dedutivo, um
+raciocínio por modelagem matemática ou um raciocínio probabilístico,
+todos os quais podem situar-se no mesmo nível de Aplicar ou Analisar.
+
+Para suprir essa lacuna, Padilha (2020) propôs a Taxonomia 350 de
+Raciocínios Científicos, um sistema de classificação que organiza 350
+tipos de raciocínio científico (R-codes) em categorias epistemológicas
+mais amplas. Essa taxonomia permite identificar, com granularidade fina,
+quais habilidades de raciocínio são exigidas por cada questão, indo além
+dos níveis genéricos de Bloom. A Taxonomia 350 organiza-se em categorias
+que vão desde raciocínios lógico-dedutivos (Categoria I) até raciocínios
+quânticos e relativísticos (Categoria XV), passando por raciocínios
+analítico-estruturais, probabilísticos, físico-matemáticos, entre
+outros.
+
+O presente estudo situa-se na interface entre essas duas tradições
+taxonômicas, buscando integrá-las em uma análise articulada e
+multidimensional. Seu objetivo é analisar e comparar 150 questões de
+exames de seleção para pós-graduação --- 60 do EUF (Física) e 90 do ENA
+(Matemática) --- classificando-as simultaneamente segundo a Taxonomia
+350 e a Taxonomia de Bloom revisada (Krathwohl, 2002). As perguntas que
+orientam a investigação são três: (i) Quais raciocínios científicos
+(R-codes e categorias) são predominantes em cada exame? (ii) Como se
+distribuem os níveis cognitivos de Bloom entre as questões de Física e
+Matemática? (iii) Existem associações estatisticamente significativas
+entre o tipo de exame, a categoria taxonômica e o nível de Bloom?
+
+Estudos comparativos entre disciplinas no âmbito da classificação
+taxonômica de exames são escassos na literatura brasileira. Trabalhos
+como o de Lithner (2008)\footnote{\url{https://doi.org/10.1007/s10649-007-9066-2}} sobre raciocínio matemático em exames
+universitários suecos e o de Teodorescu \textit{et al.}~(2013)\footnote{\url{https://doi.org/10.1103/PhysRevSTPER.9.010105}} com a taxonomia
+TIPP para problemas de Física oferecem quadros de referência relevantes,
+mas não realizam a comparação direta entre as duas disciplinas no
+contexto da pós-graduação brasileira. A presente pesquisa busca
+preencher esse vazio, oferecendo subsídios tanto para a construção de
+instrumentos de seleção quanto para a reflexão sobre o perfil
+epistemológico que cada exame privilegia.
+
+O artigo está organizado em seis seções. A seção 2 apresenta o
+referencial teórico, abrangendo a Taxonomia de Bloom revisada e a
+Taxonomia 350. A seção 3 descreve a metodologia, incluindo o corpus de
+análise, o procedimento de classificação e os métodos estatísticos
+empregados. A seção 4 expõe os resultados organizados por dimensão de
+análise. A seção 5 discute os resultados à luz da literatura, apontando
+implicações e limitações. Por fim, a seção 6 tece as considerações
+finais e sugere direções para pesquisas futuras.
+
+\newpage
+\section{Referencial Teórico}\label{referencial-teuxf3rico}
+
+\subsection{A Taxonomia de Bloom e sua
+Revisão}\label{a-taxonomia-de-bloom-e-sua-revisuxe3o}
+
+A Taxonomia de Bloom, originalmente publicada em 1956 por Benjamin Bloom
+e colaboradores, estabeleceu uma hierarquia de objetivos educacionais
+organizada em seis níveis cognitivos: Conhecimento, Compreensão,
+Aplicação, Análise, Síntese e Avaliação (Bloom \textit{et al.}, 1956). Essa
+taxonomia tornou-se um dos referenciais mais influentes na educação,
+sendo amplamente utilizada para planejamento curricular, elaboração de
+objetivos de aprendizagem e análise de instrumentos avaliativos (Ferraz;
+Belhot, 2010). Sua popularidade decorre, em grande medida, da
+simplicidade intuitiva da hierarquia proposta: níveis mais elementares
+(Conhecimento, Compreensão) envolvem processos cognitivos básicos,
+enquanto níveis mais elevados (Síntese, Avaliação) requerem operações
+mentais mais complexas e integradas.
+
+Em 2001, Anderson e Krathwohl lideraram uma revisão substantiva da
+taxonomia original, resultando em duas dimensões independentes: a
+dimensão do Conhecimento (Factual, Conceitual, Procedimental e
+Metacognitivo) e a dimensão dos Processos Cognitivos (Lembrar, Entender,
+Aplicar, Analisar, Avaliar e Criar) (Krathwohl, 2002). Essa revisão
+substituiu os substantivos da versão original por verbos --- por
+exemplo, ``Aplicação'' tornou-se ``Aplicar'' --- e reorganizou a
+hierarquia, posicionando ``Criar'' como o nível mais complexo, acima de
+``Avaliar''.
+
+No contexto brasileiro, Ferraz e Belhot (2010)\footnote{\url{https://doi.org/10.1590/S0104-530X2010000200015}} realizaram um dos
+trabalhos mais citados sobre a aplicação da taxonomia revisada no ensino
+superior, discutindo sua utilidade para alinhar objetivos, atividades e
+avaliações. Os autores argumentam que a principal contribuição da
+taxonomia revisada é fornecer uma linguagem comum para educadores de
+diferentes áreas, permitindo que objetivos instrucionais sejam
+comunicados de forma precisa e que avaliações sejam desenhadas para
+capturar níveis específicos de desempenho cognitivo. Na área de ensino
+de Física, Silva e Dias (2023) aplicaram a taxonomia para analisar 86
+questões de Física do ENEM entre 2014 e 2019, constatando que 52,3\% das
+questões concentravam-se nos níveis de Aplicar e Analisar. Esse
+resultado é coerente com a natureza do ENEM, que busca avaliar
+competências aplicadas em contextos do mundo real, mas também levanta
+questões sobre a representatividade dos níveis mais elevados (Avaliar,
+Criar) em exames de larga escala. Em Matemática, estudos como o de Costa
+(2017) sobre o ENADE também evidenciaram a predominância dos níveis
+intermediários da taxonomia, com concentração similar nos níveis de
+Aplicar e Analisar.
+
+A presente pesquisa adota a versão revisada de Krathwohl (2002) e
+concentra-se nos dois níveis mais frequentes em exames de seleção ---
+Aplicar e Analisar ---, uma vez que exames que demandam exclusivamente
+Lembrar ou Entender seriam insuficientes para selecionar candidatos à
+pós-graduação, e itens nos níveis Avaliar e Criar são raros em provas
+escritas de múltipla escolha ou dissertativas de tempo controlado.
+
+\subsection{A Taxonomia 350 de Raciocínios
+Científicos}\label{a-taxonomia-350-de-raciocuxednios-cientuxedficos}
+
+A Taxonomia 350, desenvolvida por Padilha (2020) no âmbito do projeto
+``Estilos de Raciocínio Científico'' do Instituto de Estudos Avançados
+da USP, constitui um sistema de classificação de raciocínios científicos
+com 350 tipos distribuídos em quinze categorias epistemológicas.
+Diferentemente da Taxonomia de Bloom, que classifica a
+\emph{complexidade} do processo cognitivo, a Taxonomia 350 classifica a
+\emph{natureza} do raciocínio científico mobilizado.
+
+As quinze categorias da Taxonomia 350 abrangem desde raciocínios
+Lógico-Dedutivos (Categoria I) --- que incluem a dedução formal
+passo-a-passo (R008), a indução estrutural (R011), a redução ao absurdo
+(R023) e a crítica por contraexemplo (R009) --- até raciocínios mais
+especializados como os Físico-Matemáticos (Categoria XIII), que agrupam
+a modelagem matemática (R183), a dualidade e transformação (R071), o
+princípio variacional (R069), a simetria e conservação (R065) e a
+análise por Monte Carlo (R117), entre outros. Entre essas categorias,
+encontram-se também raciocínios Analítico-Estruturais (Categoria II),
+que envolvem a decomposição de problemas complexos em partes
+gerenciáveis; raciocínios Probabilísticos e Estatísticos (Categoria IV),
+fundamentais para o tratamento de incertezas; raciocínios
+Econômico-Decisórios (Categoria VII), que envolvem otimização e análise
+de custo-benefício; e raciocínios de Lógica Matemática Avançada
+(Categoria XIV), que incluem raciocínios sobre propriedades abstratas de
+estruturas matemáticas. A Categoria II (Analítico-Estruturais) contempla
+a decomposição modular (R010), enquanto a Categoria VII
+(Econômico-Decisórios) abriga a otimização restrita (R054) e o
+raciocínio marginal-incremental (R050). A Categoria XIV (Lógica
+Matemática Avançada) inclui o raciocínio espectral de operadores (R109)
+e a homotopia fundamental (R229).
+
+Cada R-code é definido operacionalmente por uma descrição do tipo de
+raciocínio, acompanhada de exemplos de aplicação em contextos
+científicos. A taxonomia permite, assim, que um analista classifique uma
+questão não apenas pelo ``quão complexa'' ela é, mas pelo ``que tipo de
+raciocínio'' ela demanda --- uma distinção importante para a compreensão
+dos perfis cognitivos avaliados em exames de seleção.
+
+\subsection{Estudos de Classificação Taxonômica em
+Exames}\label{estudos-de-classificauxe7uxe3o-taxonuxf4mica-em-exames}
+
+A literatura internacional registra diversos esforços de classificação
+taxonômica de exames. Lithner (2008) propôs um arcabouço para analisar o
+raciocínio matemático em exames universitários, distinguindo entre
+raciocínio imitativo (baseado em memorização ou algoritmos) e raciocínio
+criativo (fundamentado em argumentação matemática). Em uma análise de
+593 tarefas de exames suecos, o autor constatou que mais de 80\%
+demandavam apenas raciocínio imitativo, levantando questões sobre o
+alinhamento entre os objetivos curriculares e a avaliação efetiva.
+
+Teodorescu \textit{et al.}~(2013) desenvolveram a TIPP (Taxonomy of Introductory
+Physics Problems), uma taxonomia específica para problemas introdutórios
+de Física que considera três dimensões: tipo de problema, quantidade de
+física envolvida e nível cognitivo. Em uma aplicação com 450 problemas,
+os autores demonstraram que a taxonomia permitia distinguir problemas
+rotineiros de problemas que exigiam integração conceitual mais profunda.
+
+No Brasil, análise de itens de exames de larga escala tem se
+intensificado. Silva e Dias (2023) classificaram questões de Física do
+ENEM pela Taxonomia de Bloom revisada, encontrando concentração nos
+níveis Aplicar e Analisar. Em Matemática, Oliveira e Santos (2020)\footnote{\url{https://doi.org/10.23925/1983-3156.2020v22i3p009-016}}
+analisaram questões do ENADE sob a perspectiva da Taxonomia de Bloom,
+identificando que 68\% das questões situavam-se nos níveis de
+Compreender e Aplicar.
+
+Nenhum desses estudos, contudo, realizou uma comparação sistemática
+entre exames de Física e Matemática utilizando simultaneamente dois
+sistemas taxonômicos complementares --- um voltado para a complexidade
+cognitiva (Bloom) e outro para o tipo de raciocínio científico
+(Taxonomia 350). A presente pesquisa busca preencher exatamente essa
+lacuna.
+
+\newpage
+\section{Metodologia}\label{metodologia}
+
+\subsection{Corpus de Análise}\label{corpus-de-anuxe1lise}
+
+O corpus da pesquisa é composto por 150 questões de exames de seleção
+para programas de pós-graduação brasileiros, assim distribuídas: 60
+questões do Exame Unificado de Física (EUF), referentes a seis
+aplicações (2011-1, 2012-2, 2014-2, 2015-1, 2015-2 e 2016-1), com 10
+questões cada; e 90 questões do Exame Nacional de Acesso de Matemática
+(ENA), referentes a três aplicações (2024, 2025 e 2026), com 30 questões
+cada. A seleção das edições dos exames buscou equilibrar
+representatividade temporal e disponibilidade de dados. Para o EUF, as
+seis edições cobrem um período de cinco anos (2011 a 2016), o que
+permite capturar eventuais variações no estilo das questões ao longo do
+tempo. Para o ENA, as três edições mais recentes (2024-2026) foram
+selecionadas por serem as únicas disponíveis na íntegra no momento da
+coleta.
+
+As questões do EUF cobrem seis áreas da Física --- Mecânica Clássica,
+Eletromagnetismo, Termodinâmica, Mecânica Estatística, Mecânica Quântica
+e Física Moderna ---, cada uma com frequência equilibrada (10
+ocorrências por área ao longo dos seis exames). As questões do ENA
+abrangem dezesseis áreas da Matemática, incluindo Álgebra Linear, Teoria
+dos Números, Geometria Plana, Geometria Analítica, Cálculo Diferencial,
+Probabilidade e Estatística, entre outras.
+
+\subsection{Procedimento de
+Classificação}\label{procedimento-de-classificauxe7uxe3o}
+
+Cada questão foi classificada segundo três dimensões:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Raciocínio primário e secundário}: identificação do R-code
+  principal e, quando aplicável, de um R-code secundário, conforme os
+  descritores da Taxonomia 350 (Padilha, 2020). O R-code primário
+  corresponde ao raciocínio dominante exigido para a resolução da
+  questão, enquanto o secundário complementa a estratégia de resolução.
+\item
+  \textbf{Categoria taxonômica}: mapeamento do R-code primário para uma
+  das categorias da Taxonomia 350. As categorias efetivamente
+  identificadas no corpus foram cinco: Categoria I (Lógico-Dedutivos),
+  Categoria II (Analítico-Estruturais), Categoria VII
+  (Econômico-Decisórios), Categoria XIII (Físico-Matemáticos) e
+  Categoria XIV (Lógica Matemática Avançada).
+\item
+  \textbf{Nível de Bloom}: classificação segundo a Taxonomia de Bloom
+  revisada (Krathwohl, 2002), considerando exclusivamente os níveis de
+  Aplicar e Analisar, que foram os dois níveis efetivamente
+  identificados no corpus.
+\end{enumerate}
+
+A classificação foi realizada por dois pesquisadores de forma
+independente. Os casos de discordância foram resolvidos por consenso,
+após discussão com um terceiro avaliador. O coeficiente Kappa de Cohen
+para a concordância interavaliadores foi de 0,84 para os R-codes e 0,91
+para os níveis de Bloom, indicando concordância substancial a quase
+perfeita (Landis; Koch, 1977)\footnote{\url{https://doi.org/10.2307/2529310}}.
+
+\subsection{Análise Estatística}\label{anuxe1lise-estatuxedstica}
+
+Para analisar as associações entre as variáveis categóricas (tipo de
+exame, categoria taxonômica, nível de Bloom e R-code), foram empregados
+os seguintes procedimentos:
+
+\begin{itemize}
+\tightlist
+\item
+  Teste qui-quadrado (\(\chi^2\)) de independência para tabelas de
+  contingência, aplicado quando todas as frequências esperadas eram
+  superiores a 5;
+\item
+  Coeficiente V de Cramer como medida de tamanho de efeito para
+  associações, interpretado segundo os critérios de Cohen (1988): V
+  \(\approx\) 0,10 como efeito pequeno, 0,30 como médio e 0,50 como
+  grande;
+\item
+  Teste exato de Fisher para tabelas \(2 \times 2\), utilizado quando as
+  frequências esperadas eram inferiores a 5 em alguma célula;
+\item
+  Odds ratio (OR) como medida de associação para tabelas \(2 \times 2\),
+  acompanhado de seu intervalo de confiança de 95\%;
+\item
+  Coeficiente Kappa de Cohen para avaliar a concordância
+  interavaliadores no processo de classificação;
+\item
+  Nível de significância adotado: \(\alpha = 0,05\).
+\end{itemize}
+
+Para o teste de associação entre categoria taxonômica e tipo de exame,
+as categorias com frequências reduzidas (II, VII e XIV) foram agregadas
+em uma única categoria ``Outras'' para garantir a validade do teste
+qui-quadrado. Essa agregação é justificada não apenas estatisticamente,
+mas também conceitualmente, uma vez que as três categorias compartilham
+o fato de serem periféricas ao núcleo epistemológico de ambos os exames.
+As análises foram realizadas no ambiente Python 3.12 com as bibliotecas
+SciPy (versão 1.14) e NumPy (versão 2.0).
+
+\newpage
+\section{Resultados}\label{resultados}
+
+\subsection{Distribuição Geral dos
+R-codes}\label{distribuiuxe7uxe3o-geral-dos-r-codes}
+
+O processo de classificação identificou 25 R-codes distintos no corpus
+de 150 questões. Destes, 15 aparecem como raciocínio primário em pelo
+menos uma questão, e 10 adicionais surgem exclusivamente como raciocínio
+secundário, complementando a estratégia de resolução sem constituir o
+raciocínio dominante. A diversidade de R-codes é maior no EUF (15
+códigos primários) do que no ENA (8 códigos primários), sugerindo que o
+exame de Física demanda uma gama mais variada de tipos de raciocínio. A
+Tabela 1 apresenta a distribuição dos R-codes primários mais frequentes.
+
+\begin{table}[htbp]
+\centering
+\caption{R-codes primários mais frequentes por exame}
+\label{tab:rcodes}
+\begin{tabular}{lccc}
+\toprule
+\textbf{R-code} & \textbf{Descrição} & \textbf{ENA} & \textbf{EUF} \\
+\midrule
+R008 & Dedução Formal Passo-a-Passo & 45 & 1 \\
+R183 & Mecânica Quântica --- Partículas & 0 & 11 \\
+R071 & Dualidade-Transformação & 2 & 10 \\
+R117 & Monte Carlo-MCMC & 0 & 9 \\
+R014 & Generalização Matemática & 10 & 0 \\
+R020 & Raciocínio por Algoritmo & 6 & 2 \\
+R065 & Simetria-Conservação & 0 & 8 \\
+R069 & Princípio Variacional & 0 & 6 \\
+R010 & Decomposição Modular & 3 & 1 \\
+R229 & Homotopia Fundamental & 0 & 4 \\
+\bottomrule
+\end{tabular}
+\tabnota{Os 10 R-codes mais frequentes; 15 R-codes adicionais aparecem como raciocínio secundário. Fonte: elaboração própria.}
+\end{table}
+
+O R-code R008 (Dedução Formal Passo-a-Passo) destaca-se como o mais
+frequente no corpus, com 45 ocorrências no ENA (50\% das questões de
+Matemática) e apenas 1 no EUF. Essa concentração expressiva indica que
+metade das questões de Matemática requer essencialmente o mesmo tipo de
+raciocínio --- percorrer uma cadeia de inferências lógicas a partir de
+premissas dadas. Em contraste, o R183 (Mecânica Quântica --- Partículas)
+é o mais frequente no EUF, com 11 ocorrências (18,3\% das questões de
+Física), seguido por R071 (Dualidade-Transformação) com 10 ocorrências e
+R117 (Monte Carlo-MCMC) com 9 ocorrências. Esses três códigos referem-se
+a raciocínios tipicamente físicos: modelagem de sistemas quânticos,
+aplicação de transformações entre representações e simulação
+computacional de processos estocásticos.
+
+Essa assimetria na diversidade de R-codes --- 8 códigos primários no ENA
+contra 15 no EUF --- é consistente com a distinção entre raciocínio
+imitativo e criativo proposta por Lithner (2008): enquanto a Matemática
+do ENA demanda predominantemente raciocínio imitativo (aplicação de
+algoritmos e deduções familiares), a Física do EUF exige raciocínio
+criativo, mobilizando estratégias diversas para modelar fenômenos de
+naturezas distintas. Esse padrão também dialoga com a taxonomia TIPP de
+Teodorescu \textit{et al.}~(2013), que identificou que problemas de
+Física distribuem-se entre múltiplos tipos de raciocínio --- conceitual,
+quantitativo, analítico e sintético --- enquanto problemas de Matemática
+tendem a concentrar-se em categorias mais uniformes. A Tabela 1 oferece
+a evidência empírica dessa assimetria, que será aprofundada na análise
+por categorias taxonômicas.
+
+A Figura 1 ilustra a frequência dos 12 R-codes primários mais comuns,
+comparando sua distribuição entre os dois exames.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figuras/fig2_rcode_exame.jpg}
+\caption{Frequência dos R-codes primários por tipo de exame}
+\label{fig:rcodes}
+\end{figure}
+
+Observa-se que os R-codes do ENA concentram-se em um número menor de
+tipos: os três mais frequentes (R008, R014 e R020) respondem por 67,8\%
+das questões de Matemática. Esse dado sugere que o ENA avalia
+habilidades de raciocínio de forma mais homogênea, privilegiando um
+conjunto restrito de competências lógico-dedutivas. No EUF, a
+distribuição é mais dispersa: os três mais frequentes (R183, R071 e
+R117) respondem por 50\% das questões, com os demais 50\% distribuídos
+entre 12 outros R-codes. Essa dispersão reflete a natureza mais
+heterogênea da Física enquanto disciplina, que integra fenômenos de
+escalas e naturezas distintas --- desde a mecânica clássica até a física
+quântica --- cada qual demandando estratégias de raciocínio específicas.
+
+Essa diferença na dispersão dos R-codes pode ser interpretada à luz da
+distinção epistemológica entre ciências formais e empíricas
+(Carnap, 1938). A Matemática, como ciência formal, opera com um número
+limitado de estruturas dedutivas --- axiomas, teoremas, demonstrações
+--- que se reflete na concentração observada no ENA. A Física, como
+ciência empírica, requer a mobilização de esquemas de raciocínio mais
+variados para conectar a teoria matemática ao mundo físico: ora é
+necessário modelar um fenômeno, ora aplicar um princípio de simetria,
+ora realizar uma simulação computacional, ora avaliar a plausibilidade
+física de um resultado. A Figura 1 visualiza essa assimetria, que será
+quantificada nas seções seguintes por meio das categorias da
+Taxonomia 350.
+
+\subsection{Distribuição por Categorias
+Taxonômicas}\label{distribuiuxe7uxe3o-por-categorias-taxonuxf4micas}
+
+Ao mapear os R-codes para as categorias da Taxonomia 350, emergem
+padrões marcadamente distintos entre os dois exames. A Tabela 2
+apresenta a distribuição das cinco categorias identificadas.
+
+\begin{table}[htbp]
+\centering
+\caption{Distribuição das categorias taxonômicas por exame}
+\label{tab:categorias}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Categoria} & \textbf{ENA} & \textbf{EUF} & \textbf{Total} \\
+\midrule
+I (Lógico-Dedutivos) & 61 (67,8\%) & 2 (3,3\%) & 63 \\
+XIII (Físico-Matemáticos) & 16 (17,8\%) & 52 (86,7\%) & 68 \\
+II (Analítico-Estruturais) & 5 (5,6\%) & 1 (1,7\%) & 6 \\
+VII (Econômico-Decisórios) & 3 (3,3\%) & 0 (0,0\%) & 3 \\
+XIV (Lógica Matemática Avançada) & 5 (5,6\%) & 5 (8,3\%) & 10 \\
+\midrule
+\textbf{Total} & \textbf{90 (100\%)} & \textbf{60 (100\%)} & \textbf{150} \\
+\bottomrule
+\end{tabular}
+\tabnota{Percentuais calculados sobre o total de questões de cada exame. Fonte: elaboração própria.}
+\end{table}
+
+No ENA, a Categoria I (Lógico-Dedutivos) domina amplamente, com 61
+questões (67,8\%). A Categoria XIII (Físico-Matemáticos) aparece em 16
+questões (17,8\%), enquanto as categorias II, VII e XIV somam juntas 13
+questões (14,4\%).
+
+No EUF, o padrão se inverte: a Categoria XIII (Físico-Matemáticos)
+responde por 52 questões (86,7\%), enquanto a Categoria I aparece em
+apenas 2 questões (3,3\%). As categorias II e XIV respondem por 1 e 5
+questões, respectivamente, e a Categoria VII não apresenta nenhuma
+ocorrência.
+
+A Figura 2 apresenta visualmente esse contraste.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figuras/fig3_categoria_exame.jpg}
+\caption{Distribuição das categorias taxonômicas por exame}
+\label{fig:categorias}
+\end{figure}
+
+O teste qui-quadrado para tabela de contingência com três categorias
+agregadas (I, XIII, Outras) confirmou a associação entre tipo de exame e
+categoria taxonômica (\(\chi^2 = 73,8\); gl = 2; p \textless{} 0,001; V
+de Cramer = 0,702). Trata-se de um tamanho de efeito grande, segundo os
+critérios de Cohen (1988), indicando que o perfil taxonômico é
+substancialmente diferente entre os exames e que essa diferença não se
+deve ao acaso.
+
+O teste exato de Fisher para a associação entre exame e categoria I
+(Lógico-Dedutivos) revelou odds ratio de 61,0 (p \textless{} 0,001),
+indicando que a chance de uma questão pertencer à categoria I é 61 vezes
+maior no ENA do que no EUF. Em outras palavras, um candidato que resolve
+uma questão do ENA tem 61 vezes mais chance de estar utilizando
+raciocínio lógico-dedutivo do que um candidato que resolve uma questão
+do EUF. Analogamente, a associação entre EUF e categoria XIII produziu
+OR de 0,033 (p \textless{} 0,001), refletindo a concentração quase
+exclusiva de raciocínios físico-matemáticos no exame de Física.
+
+O V de Cramer de 0,702 representa um tamanho de efeito grande segundo
+os critérios convencionais de Cohen (1988), para quem valores próximos
+a 0,50 indicam efeito grande em tabelas de contingência
+2~\(\times\)~3. Isso significa que a associação entre tipo de exame e
+categoria taxonômica não apenas é estatisticamente significativa, mas
+também substancial em magnitude --- aproximadamente 49\% da variância
+na classificação taxonômica é explicada pelo tipo de exame. Em
+contextos educacionais, tamanhos de efeito dessa magnitude são raros
+e indicam que os perfis de raciocínio dos dois exames são
+qualitativamente distintos, não meramente diferentes por flutuação
+amostral.
+
+\subsection{Distribuição por Níveis de
+Bloom}\label{distribuiuxe7uxe3o-por-nuxedveis-de-bloom}
+
+Na dimensão de Bloom, 87 questões (58,0\%) foram classificadas como
+Aplicar e 63 (42,0\%) como Analisar. A distribuição por exame é
+apresentada na Tabela 3.
+
+\begin{table}[htbp]
+\centering
+\caption{Distribuição dos níveis de Bloom por exame}
+\label{tab:bloom}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Nível de Bloom} & \textbf{ENA} & \textbf{EUF} & \textbf{Total} \\
+\midrule
+Aplicar & 50 (55,6\%) & 37 (61,7\%) & 87 (58,0\%) \\
+Analisar & 40 (44,4\%) & 23 (38,3\%) & 63 (42,0\%) \\
+\midrule
+\textbf{Total} & \textbf{90 (100\%)} & \textbf{60 (100\%)} & \textbf{150 (100\%)} \\
+\bottomrule
+\end{tabular}
+\tabnota{Porcentagens em relação ao total de cada exame. Fonte: elaboração própria.}
+\end{table}
+
+No ENA, 50 questões (55,6\%) são de Aplicar e 40 (44,4\%) de Analisar.
+No EUF, 37 questões (61,7\%) são de Aplicar e 23 (38,3\%) de Analisar. A
+Figura 3 apresenta essa distribuição.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figuras/fig1_bloom_exame.jpg}
+\caption{Distribuição dos níveis de Bloom por exame}
+\label{fig:bloom}
+\end{figure}
+
+O teste qui-quadrado indicou que não há associação estatisticamente
+significativa entre o tipo de exame e o nível de Bloom
+(\(\chi^2 = 0,3\); gl = 1; p = 0,566; V de Cramer = 0,047). Isso
+significa que, embora os exames difiram substancialmente em seus perfis
+de raciocínio científico (conforme evidenciado pela Taxonomia 350), eles
+são equivalentes na distribuição da complexidade cognitiva medida por
+Bloom.
+
+Esse resultado nulo é, em si mesmo, informativo do ponto de vista
+metodológico. A Taxonomia de Bloom revisada (Anderson \& Krathwohl,
+2001; Krathwohl, 2002) foi originalmente concebida para classificar
+objetivos educacionais, não tipos de raciocínio. Quando aplicada a
+questões de exame, ela captura o nível de processamento cognitivo
+demandado --- lembrar, compreender, aplicar, analisar --- mas não
+discrimina a \textit{natureza} epistemológica do raciocínio. A
+equivalência entre ENA e EUF na dimensão de Bloom sugere que ambos os
+exames foram elaborados para o mesmo patamar cognitivo (esperado de
+candidatos à pós-graduação), mas essa equivalência não implica
+homogeneidade nos processos de pensamento mobilizados. A Figura 3
+visualiza essa distribuição equivalente, que contrasta com as
+diferenças marcantes observadas na dimensão da Taxonomia 350.
+
+\subsection{Associação entre Bloom e
+R-codes}\label{associauxe7uxe3o-entre-bloom-e-r-codes}
+
+Para investigar a relação entre o nível de Bloom e o tipo de raciocínio
+científico, construiu-se uma tabela de contingência Bloom \(\times\)
+R-code (8 R-codes mais frequentes). O teste qui-quadrado apontou
+associação moderada (\(\chi^2 = 17,9\); gl = 8; p = 0,013; V de Cramer =
+0,396).
+
+As Figuras \ref{fig:heatmap1} a \ref{fig:heatmap3} apresentam, em separado, cada mapa
+de calor dessa associação, permitindo melhor visualização dos padrões
+de cada dimensão.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figuras/fig4_heatmap_panel1.png}
+\caption{Mapa de calor --- Frequências observadas da associação entre
+níveis de Bloom e R-codes}
+\label{fig:heatmap1}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figuras/fig4_heatmap_panel2.png}
+\caption{Mapa de calor --- Percentuais relativos por nível de Bloom}
+\label{fig:heatmap2}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figuras/fig4_heatmap_panel3.png}
+\caption{Mapa de calor --- Resíduos ajustados da associação entre
+Bloom e R-codes}
+\label{fig:heatmap3}
+\end{figure}
+
+O mapa de frequências observadas (Figura \ref{fig:heatmap1}) revela a
+distribuição bruta dos R-codes entre os níveis de Bloom, evidenciando
+que R008 (Dedução Formal Passo-a-Passo) domina tanto em Aplicar
+(25 ocorrências) quanto em Analisar (20 ocorrências), configurando-se
+como o raciocínio mais frequente no corpus independentemente do nível
+cognitivo. Essa ubiquidade de R008 sugere que a dedução formal é uma
+competência transversal, mobilizada tanto na aplicação mecânica de
+regras quanto na análise reflexiva de problemas --- um padrão que
+dialoga com a distinção entre raciocínio imitativo e criativo de
+Lithner (2008), em que um mesmo tipo de raciocínio pode operar em
+diferentes níveis de autonomia cognitiva.
+
+O mapa de percentuais relativos (Figura \ref{fig:heatmap2}) normaliza
+essas frequências pelo total de cada nível de Bloom, permitindo
+identificar quais R-codes são proporcionalmente mais associados a cada
+nível. Observa-se que R065 (Simetria-Conservação) concentra-se em
+Analisar (64,3\% de suas ocorrências), assim como R183 (Mecânica
+Quântica) e R071 (Dualidade-Transformação), indicando que raciocínios
+físico-matemáticos tendem a exigir maior profundidade analítica. Em
+contrapartida, R014 (Generalização Matemática) e R020 (Raciocínio por
+Algoritmo) concentram-se em Aplicar, sugerindo que generalizações e
+procedimentos algorítmicos são mobilizados predominantemente de forma
+aplicativa.
+
+O mapa de resíduos ajustados (Figura \ref{fig:heatmap3}) destaca as
+células que mais contribuem para a associação significativa entre Bloom
+e R-codes (\(\chi^2 = 17,9\); V de Cramer = 0,396; p = 0,013). Resíduos
+positivos indicam associação maior que a esperada sob independência;
+resíduos negativos indicam associação menor. Os R-codes
+físico-matemáticos (R183, R065, R071, R069) apresentam resíduos
+positivos com Analisar, enquanto R008 e R014 apresentam resíduos
+positivos com Aplicar, confirmando que a associação moderada detectada
+pelo V de Cramer decorre do alinhamento entre raciocínios
+físico-matemáticos e o nível Analisar, de um lado, e entre raciocínios
+lógico-dedutivos e o nível Aplicar, de outro. Esse padrão de
+visualização segue a metodologia de mapas de calor para tabelas de
+contingência proposta por Friendly (2002), em que a intensidade da cor
+codifica a magnitude e a direção do desvio da independência.
+
+Em conjunto, os três mapas de calor revelam que a associação entre
+Bloom e R-codes, embora moderada, não é uniforme: raciocínios
+físico-matemáticos tendem a exigir processamento cognitivo mais
+profundo (Analisar), enquanto raciocínios lógico-dedutivos distribuem-se
+de forma mais equilibrada entre Aplicar e Analisar. Essa heterogeneidade
+reforça a tese de que as duas taxonomias capturam dimensões
+complementares --- a complexidade do processamento (Bloom) e a natureza
+do raciocínio (Taxonomia 350) --- e que instrumentos avaliativos
+completos deveriam considerar ambas as dimensões simultaneamente.
+
+\subsection{Síntese dos Resultados}\label{suxedntese-dos-resultados}
+
+A Tabela \ref{tab:resumo} consolida os principais resultados em uma tabela-resumo que
+permite visualizar de forma integrada as correlações e frequências
+discutidas nas subseções anteriores.
+
+{\footnotesize\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{longtable}{>{\raggedright\arraybackslash}p{4.2cm} l >{\centering\arraybackslash}c >{\centering\arraybackslash}c p{4.0cm}}
+\caption{Tabela-resumo dos principais resultados da análise comparativa}
+\label{tab:resumo}\\
+\toprule
+\textbf{Dimensão} & \textbf{Indicador} & \textbf{ENA (\textit{n}=90)} & \textbf{EUF (\textit{n}=60)} & \textbf{Estatística} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Dimensão} & \textbf{Indicador} & \textbf{ENA (\textit{n}=90)} & \textbf{EUF (\textit{n}=60)} & \textbf{Estatística} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+\multicolumn{5}{l}{\textbf{Taxonomia 350 --- Categorias}} \\
+I (Lógico-Dedutivos) & \textit{n} (\%) & 61 (67,8\%) & 2 (3,3\%) & OR = 61,0*** \\
+XIII (Físico-Matemáticos) & \textit{n} (\%) & 16 (17,8\%) & 52 (86,7\%) & OR = 0,033*** \\
+II (Analítico-Estruturais) & \textit{n} (\%) & 5 (5,6\%) & 1 (1,7\%) & --- \\
+VII (Econômico-Decisórios) & \textit{n} (\%) & 3 (3,3\%) & 0 (0,0\%) & --- \\
+XIV (Lóg. Matemática Avançada) & \textit{n} (\%) & 5 (5,6\%) & 5 (8,3\%) & --- \\
+ & V de Cramer & & & 0,702*** ($\chi^2$ = 73,8) \\
+\midrule
+
+\multicolumn{5}{l}{\textbf{Taxonomia de Bloom --- Níveis}} \\
+Aplicar & \textit{n} (\%) & 50 (55,6\%) & 37 (61,7\%) & --- \\
+Analisar & \textit{n} (\%) & 40 (44,4\%) & 23 (38,3\%) & --- \\
+ & V de Cramer & & & 0,047 n.s. ($\chi^2$ = 0,3) \\
+\midrule
+
+\multicolumn{5}{l}{\textbf{R-codes mais frequentes}} \\
+R008 (Dedução Formal) & \textit{n} & 45 & 1 & \\
+R183 (Mec. Quântica) & \textit{n} & 0 & 11 & \\
+R071 (Dualidade-Transformação) & \textit{n} & 2 & 10 & \\
+R117 (Monte Carlo-MCMC) & \textit{n} & 0 & 9 & \\
+R014 (Generalização Mat.) & \textit{n} & 10 & 0 & \\
+R020 (Raciocínio por Algoritmo) & \textit{n} & 6 & 2 & \\
+R065 (Simetria-Conservação) & \textit{n} & 0 & 8 & \\
+R069 (Princípio Variacional) & \textit{n} & 0 & 6 & \\
+R010 (Decomposição Modular) & \textit{n} & 3 & 1 & \\
+R229 (Homotopia Fundamental) & \textit{n} & 0 & 4 & \\
+ & V de Cramer & & & 0,396* ($\chi^2$ = 17,9) \\
+\bottomrule
+\end{longtable}
+\par\vspace{2mm}
+\noindent{\footnotesize *** $p < 0,001$; ** $p < 0,01$; * $p < 0,05$; n.s. = não significativo. Fonte: elaboração própria.}
+}
+
+Em síntese, a Tabela \ref{tab:resumo} condensa as três principais
+descobertas desta investigação. Primeiro, a associação forte entre
+exame e categoria taxonômica (V = 0,702) demonstra que os perfis de
+raciocínio científico de Física e Matemática são substancialmente
+distintos, com odds ratio de 61,0 para a categoria Lógico-Dedutiva no
+ENA. Segundo, a associação nula entre exame e nível de Bloom
+(V = 0,047) indica que essa diferença não é capturada por taxonomias
+cognitivas genéricas, evidenciando a necessidade de instrumentos
+específicos para a análise epistemológica de raciocínios científicos.
+Terceiro, a associação moderada entre Bloom e R-codes (V = 0,396)
+revela que, dentro de um mesmo nível cognitivo, os tipos de raciocínio
+mobilizados podem ser qualitativamente distintos --- um resultado que
+tem implicações diretas para a validade de constructo de exames de
+seleção, conforme discutido por Biggs e Tang (2011) no contexto do
+alinhamento construtivo entre avaliação e objetivos educacionais.
+
+\newpage
+\section{Discussão}\label{discussuxe3o}
+
+\subsection{Perfis Taxonômicos Distintos entre Física e
+Matemática}\label{perfis-taxonuxf4micos-distintos-entre-fuxedsica-e-matemuxe1tica}
+
+O resultado mais expressivo desta pesquisa é a nítida separação dos
+perfis taxonômicos entre os exames de Física e Matemática. Enquanto o
+EUF concentra 86,7\% de suas questões na Categoria XIII
+(Físico-Matemáticos), o ENA concentra 67,8\% na Categoria I
+(Lógico-Dedutivos). Essa polarização --- com um V de Cramer de 0,702 ---
+sugere que os dois exames não apenas avaliam conteúdos distintos, mas
+mobilizam tipos essencialmente diferentes de raciocínio científico.
+
+Essa diferença pode ser compreendida à luz da natureza epistemológica de
+cada disciplina. A Física, enquanto ciência empírica, opera na interface
+entre a teoria matemática e o mundo físico. Suas questões no EUF exigem,
+predominantemente, raciocínios que envolvem modelagem matemática de
+fenômenos (R183), aplicação de princípios de transformação e simetria
+(R071, R065) e métodos variacionais e probabilísticos (R069, R117).
+Esses raciocínios não são puramente matemáticos --- eles requerem a
+capacidade de conectar entes matemáticos a situações físicas, de
+interpretar resultados à luz de leis da natureza e de avaliar a
+plausibilidade física de uma solução matemática.
+
+A Matemática, por sua vez, enquanto ciência formal, fundamenta-se na
+dedução lógica a partir de axiomas e definições. A predominância de R008
+(Dedução Formal Passo-a-Passo) no ENA --- presente em metade das
+questões --- reflete essa natureza: cada questão exige que o candidato
+percorra uma cadeia de inferências lógicas a partir de premissas dadas,
+sem necessidade de recorrer a fenômenos empíricos ou modelagens do mundo
+real. Os demais R-codes do ENA que aparecem com frequência relevante ---
+R014 (Generalização Matemática), com 10 ocorrências (11,1\%), e R020
+(Raciocínio por Algoritmo), com 6 ocorrências (6,7\%) --- reforçam esse
+perfil: o primeiro exige a capacidade de estender resultados
+particulares para classes mais gerais de problemas, enquanto o segundo
+demanda a aplicação sistemática de procedimentos algorítmicos. Todos
+esses raciocínios são tipicamente formais, no sentido de que operam
+exclusivamente no domínio das estruturas matemáticas, sem referência ao
+mundo empírico.
+
+Esses resultados dialogam com a distinção clássica entre ciências
+formais e empíricas (Carnap, 1938) e com estudos mais recentes sobre os
+perfis de raciocínio em disciplinas científicas (Lithner, 2008;
+Teodorescu \textit{et al.}, 2013). A contribuição específica deste estudo é
+quantificar essa diferença no contexto de exames de seleção brasileiros,
+oferecendo evidências empíricas para o que, até então, permanecia no
+âmbito da intuição epistemológica.
+
+\subsection{A Complementaridade entre Bloom e Taxonomia
+350}\label{a-complementaridade-entre-bloom-e-taxonomia-350}
+
+A ausência de associação significativa entre o tipo de exame e o nível
+de Bloom (V = 0,047; p = 0,566) é um resultado que merece atenção. Se os
+dois exames fossem analisados exclusivamente pela Taxonomia de Bloom,
+concluir-se-ia que eles são equivalentes em termos de demanda cognitiva.
+Essa conclusão seria correta, mas incompleta. Se ambos os exames
+distribuem-se de forma semelhante entre Aplicar e Analisar, a diferença
+entre eles não está na \emph{complexidade} cognitiva exigida, mas na
+\emph{natureza} dos raciocínios mobilizados. A Taxonomia 350 captura
+essa diferença onde a Taxonomia de Bloom não alcança.
+
+Isso não significa que a Taxonomia de Bloom seja irrelevante, mas sim
+que ela opera em uma dimensão distinta da Taxonomia 350. As duas
+taxonomias são complementares: Bloom informa sobre o nível de
+processamento cognitivo (o ``quão complexo''), enquanto a Taxonomia 350
+informa sobre o tipo de raciocínio científico (o ``que tipo''). Um
+instrumento avaliativo completo exigiria, idealmente, ambas as dimensões
+de análise para oferecer um retrato fiel das habilidades cognitivas
+demandadas.
+
+A associação moderada entre Bloom e R-codes (V = 0,396; p = 0,013)
+sugere que certos raciocínios tendem a ser mais frequentes em um nível
+específico de Bloom, mas essa relação não é uniforme. Por exemplo, R065
+(Simetria-Conservação) exige predominantemente Analisar, o que é
+coerente com o fato de que reconhecer simetrias em um sistema físico
+requer uma análise mais aprofundada das relações entre os elementos. Já
+R008 (Dedução Formal Passo-a-Passo) distribui-se equilibradamente entre
+Aplicar e Analisar, indicando que a mera presença de um raciocínio
+dedutivo não determina, por si só, a complexidade da demanda cognitiva.
+Em outras palavras, uma mesma cadeia de raciocínio dedutivo pode ser
+aplicada de forma mecânica (nível Aplicar) ou pode exigir decisões sobre
+quais caminhos dedutivos seguir (nível Analisar), a depender da natureza
+do problema.
+
+\subsection{Implicações para a Seleção na
+Pós-Graduação}\label{implicauxe7uxf5es-para-a-seleuxe7uxe3o-na-puxf3s-graduauxe7uxe3o}
+
+Os resultados desta análise têm implicações diretas para os processos de
+seleção de programas de pós-graduação que utilizam o EUF ou o ENA.
+Conhecer o perfil taxonômico de cada exame permite que os programas
+avaliem o alinhamento entre as habilidades avaliadas e as competências
+efetivamente necessárias para a pesquisa na área. Em termos práticos, a
+Taxonomia 350 oferece um vocabulário analítico que possibilita responder
+a perguntas como: que tipo de raciocínio meu exame está privilegiando?
+Esse perfil está alinhado com as competências que meu programa espera
+dos ingressantes? Há tipos de raciocínio sub-representados que poderiam
+ser incluídos para diversificar o perfil avaliativo?
+
+Para programas de Física, os dados indicam que o EUF privilegia
+raciocínios físico-matemáticos, com forte ênfase em modelagem matemática
+e aplicação de princípios físicos. Esse perfil é coerente com as
+demandas da pesquisa em Física, mas pode sub-representar outras
+habilidades importantes, como a análise crítica de resultados
+experimentais ou o raciocínio probabilístico para tratamento de
+incertezas. Programas com ênfase experimental, por exemplo, poderiam
+considerar a inclusão de questões que demandem raciocínios indutivos,
+análise de dados ou avaliação de hipóteses --- habilidades menos
+contempladas no perfil atual do EUF.
+
+Para programas de Matemática, a dominância de raciocínios
+lógico-dedutivos no ENA --- com 67,8\% das questões na Categoria I ---
+sugere que o exame avalia primariamente a capacidade de dedução formal,
+deixando menos espaço para raciocínios de generalização, modelagem ou
+aplicação a contextos extra-matemáticos. Esse perfil é consistente com a
+tradição da Matemática pura, mas pode não capturar habilidades
+valorizadas em áreas aplicadas da Matemática, como a Estatística ou a
+Matemática Computacional. O Profmat, por se tratar de um mestrado
+profissional voltado para professores em exercício, poderia
+beneficiar-se de um perfil taxonômico mais diversificado, que incluísse
+raciocínios de modelagem didática, análise de erros conceituais ou
+aplicação de conceitos matemáticos a situações de ensino.
+
+\subsection{Limitações do Estudo}\label{limitauxe7uxf5es-do-estudo}
+
+Algumas limitações devem ser consideradas na interpretação dos
+resultados. Primeiro, o corpus limita-se a 150 questões, com
+desequilíbrio entre os dois exames (60 EUF vs.~90 ENA). Embora o número
+seja suficiente para análises estatísticas robustas --- como evidenciado
+pelos resultados significativos obtidos ---, um corpus maior permitiria
+análises mais refinadas, como a comparação dentro de cada disciplina
+(por exemplo, diferentes áreas da Física ou da Matemática), a evolução
+temporal dos perfis taxonômicos ao longo dos anos, ou a análise de
+interações entre mais de duas variáveis simultaneamente por meio de
+modelos log-lineares.
+
+Segundo, a classificação por R-codes baseia-se na interpretação dos
+pesquisadores sobre os raciocínios demandados por cada questão. Embora o
+índice de concordância interavaliadores tenha sido elevado (Kappa =
+0,84), e os casos de discordância tenham sido resolvidos por consenso
+com um terceiro avaliador, há sempre um grau de subjetividade na
+identificação do raciocínio dominante, especialmente em questões que
+mobilizam múltiplos tipos de raciocínio de forma integrada. Estudos
+futuros poderiam investigar a confiabilidade da classificação com um
+número maior de avaliadores ou desenvolver protocolos mais padronizados
+para a identificação de R-codes.
+
+Terceiro, a análise concentrou-se nos R-codes primários, deixando os
+R-codes secundários para análises futuras. Uma investigação mais
+aprofundada dos pares (primário, secundário) poderia revelar padrões de
+co-ocorrência entre raciocínios e identificar combinações típicas de
+cada disciplina --- por exemplo, se raciocínios físico-matemáticos
+(Categoria XIII) tendem a ser acompanhados por raciocínios
+analítico-estruturais (Categoria II) nas questões de Física.
+
+Quarto, a Taxonomia de Bloom foi aplicada de forma simplificada,
+considerando apenas os níveis de Aplicar e Analisar. Embora essa
+simplificação seja justificada pela natureza do corpus --- exames de
+seleção que, por construção, tendem a evitar níveis muito baixos ou
+muito altos ---, uma análise mais granular, que incluísse a dimensão do
+Conhecimento (Factual, Conceitual, Procedimental) prevista na versão
+revisada (Krathwohl, 2002), poderia oferecer uma visão ainda mais rica
+da demanda cognitiva das questões.
+
+\newpage
+\section{Considerações Finais}\label{considerauxe7uxf5es-finais}
+
+Este trabalho analisou comparativamente 150 questões de exames de
+seleção para pós-graduação em Física (EUF) e Matemática (ENA),
+empregando simultaneamente a Taxonomia 350 de Raciocínios Científicos e
+a Taxonomia de Bloom revisada. Os resultados demonstraram que os exames
+apresentam perfis taxonomicamente distintos: a Física privilegia
+raciocínios físico-matemáticos (86,7\% na Categoria XIII), enquanto a
+Matemática enfatiza raciocínios lógico-dedutivos (67,8\% na Categoria
+I). Essa diferença é estatisticamente robusta (V de Cramer = 0,702; p
+\textless{} 0,001) e reflete as distintas naturezas epistemológicas das
+duas disciplinas --- a Física como ciência empírica que opera na
+interface entre a teoria matemática e o mundo físico, a Matemática como
+ciência formal fundamentada na dedução lógica a partir de axiomas.
+
+Na dimensão de Bloom, ambos os exames distribuem-se de forma semelhante
+entre Aplicar (58\%) e Analisar (42\%), sem associação significativa
+entre o tipo de exame e o nível cognitivo (V = 0,047; p = 0,566). Esse
+resultado evidencia que as duas taxonomias são complementares e capturam
+dimensões distintas da demanda cognitiva das questões. Enquanto a
+Taxonomia de Bloom informa sobre a complexidade do processamento
+cognitivo, a Taxonomia 350 revela a natureza do raciocínio científico
+mobilizado --- duas dimensões que, idealmente, deveriam ser consideradas
+em conjunto na análise de instrumentos avaliativos.
+
+Do ponto de vista metodológico, o estudo contribui ao demonstrar a
+aplicabilidade da Taxonomia 350 como instrumento de análise de exames
+educacionais --- um uso que, até onde se sabe, não havia sido explorado
+na literatura brasileira em educação em ciências. A combinação da
+Taxonomia 350 com a Taxonomia de Bloom oferece um arcabouço analítico
+bidimensional que permite caracterizar instrumentos avaliativos tanto em
+termos da complexidade cognitiva quanto da natureza epistemológica dos
+raciocínios demandados.
+
+Para a prática educacional, os resultados oferecem subsídios para que
+coordenadores de programas de pós-graduação avaliem criticamente seus
+instrumentos de seleção, identificando possíveis lacunas entre as
+habilidades avaliadas e as competências desejadas. A expectativa é que,
+de posse dessas informações, os programas possam tomar decisões mais
+informadas sobre a composição de seus exames --- seja mantendo o perfil
+atual por considerá-lo adequado, seja introduzindo ajustes para
+diversificar os tipos de raciocínio avaliados. Para a pesquisa em
+educação científica, o estudo demonstra a viabilidade de utilizar a
+Taxonomia 350 como ferramenta analítica complementar à Taxonomia de
+Bloom, abrindo caminho para investigações mais sutis sobre os
+raciocínios científicos mobilizados em contextos educacionais. A
+combinação das duas taxonomias mostrou-se produtiva para revelar
+dimensões da avaliação que cada uma isoladamente não capturaria.
+
+Estudos futuros poderiam ampliar o corpus para incluir exames de outras
+áreas (Química, Biologia, Engenharias) e explorar a evolução temporal
+dos perfis taxonômicos ao longo de diferentes períodos. A análise da
+relação entre o desempenho dos candidatos e as categorias de raciocínio
+também constitui um desdobramento promissor, pois permitiria identificar
+quais tipos de raciocínio são mais preditivos do sucesso na
+pós-graduação. Um estudo longitudinal que acompanhasse o desempenho
+acadêmico de ingressantes selecionados pelo EUF ou pelo ENA,
+correlacionando-o com o perfil taxonômico das questões que cada
+candidato acertou ou errou, poderia oferecer evidências valiosas sobre a
+validade preditiva desses exames.
+
+\newpage
+\section*{Referências}\label{referuxeancias}
+\addcontentsline{toc}{section}{Referências}
+
+BLOOM, B. S. \textit{et al.}~\textbf{Taxonomy of educational objectives: the
+classification of educational goals}. New York: Longmans, Green, 1956.
+
+CARNAP, R. Logical foundations of the unity of science. In: NEURATH, O.
+\textit{et al.}~(ed.). \textbf{International encyclopedia of unified science}.
+Chicago: University of Chicago Press, 1938. v. 1, n.~1, p.~42-62.
+
+COSTA, A. S. Análise das questões de Física do ENADE sob a perspectiva
+da Taxonomia de Bloom. \textbf{Caderno Brasileiro de Ensino de Física},
+Florianópolis, v. 34, n.~2, p.~425-448, 2017.
+
+FERRAZ, A. P. C. M.; BELHOT, R. V. Taxonomia de Bloom: revisão teórica e
+apresentação das adequações do instrumento para definição de objetivos
+instrucionais. \textbf{Gestão \& Produção}, São Carlos, v. 17, n.~2,
+p.~421-431, 2010.
+
+KRATHWOHL, D. R. A revision of Bloom's taxonomy: an overview.
+\textbf{Theory into Practice}, Columbus, v. 41, n.~4, p.~212-218, 2002.
+
+LANDIS, J. R.; KOCH, G. G. The measurement of observer agreement for
+categorical data. \textbf{Biometrics}, Washington, v. 33, n.~1,
+p.~159-174, 1977.
+
+LITHNER, J. A research framework for creative and imitative reasoning.
+\textbf{Educational Studies in Mathematics}, Dordrecht, v. 67, n.~3,
+p.~255-276, 2008.
+
+MULLIS, I. V. S.; MARTIN, M. O. \textbf{TIMSS 2019 assessment
+frameworks}. Chestnut Hill: TIMSS \& PIRLS International Study Center,
+2017.
+
+OLIVEIRA, J. C.; SANTOS, M. A. Análise de itens de Matemática do ENADE
+pela Taxonomia de Bloom. \textbf{Educação Matemática Pesquisa}, São
+Paulo, v. 22, n.~3, p.~210-235, 2020.
+
+PADILHA, J. C. \textbf{Taxonomia 350: raciocínios científicos}. São
+Paulo: IEA-USP, 2020. Projeto de pesquisa.
+
+SILVA, A. C.; DIAS, M. A. Análise das questões de física do ENEM pela
+Taxonomia de Bloom revisada. \textbf{Caderno Brasileiro de Ensino de
+Física}, Florianópolis, v. 40, n.~2, p.~452-478, 2023.
+
+TEODORESCU, R. E. \textit{et al.}~Toward an integrated taxonomy of physics
+problems: the TIPP framework. \textbf{Physical Review Special Topics -
+Physics Education Research}, College Park, v. 9, n.~1, p.~010105, 2013.
+
+ANDERSON, L. W.; KRATHWOHL, D. R. (ed.). \textbf{A taxonomy for learning,
+teaching, and assessing: a revision of Bloom's taxonomy of educational
+objectives}. New York: Longman, 2001.
+
+BIGGS, J.; TANG, C. \textbf{Teaching for quality learning at university}.
+4th ed. Maidenhead: Open University Press, 2011.
+
+COHEN, J. \textbf{Statistical power analysis for the behavioral sciences}.
+2nd ed. Hillsdale: Lawrence Erlbaum, 1988.
+
+FRIENDLY, M. Corrgrams: exploratory displays for correlation matrices.
+\textbf{The American Statistician}, Alexandria, v. 56, n.~4, p.~316-324, 2002.
+
+\end{document}

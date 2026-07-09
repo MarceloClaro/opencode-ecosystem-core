@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 13px; font-weight: bold; fill: #1a5276; }
+      .subtitle { font-size: 11px; font-weight: bold; fill: #1a5276; }
+      .label { font-size: 10px; fill: #333; }
+      .annot { font-size: 8px; fill: #e67e22; font-style: italic; }
+      .cite { font-size: 7px; fill: #7f8c8d; }
+      .box { fill: none; stroke: #7f8c8d; stroke-width: 1; }
+      .process-box { fill: #e8f4f8; stroke: #1a5276; stroke-width: 2; rx: 8; }
+      .process-text { font-size: 9px; fill: #1a5276; text-anchor: middle; font-weight: bold; }
+      .param-text { font-size: 7px; fill: #555; text-anchor: middle; }
+      .arrow { stroke: #1a5276; stroke-width: 2; fill: none; marker-end: url(#arrowBlue); }
+      .data-arrow { stroke: #e67e22; stroke-width: 1.5; fill: none; stroke-dasharray: 4,2; marker-end: url(#arrowOrange); }
+      .node { fill: white; stroke: #1a5276; stroke-width: 1.8; rx: 6; }
+      .node-highlight { fill: #fef9e7; stroke: #e67e22; stroke-width: 2.5; rx: 6; }
+    </style>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 10,3.5 0,7" fill="#1a5276"/></marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 10,3.5 0,7" fill="#e67e22"/></marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 10,3.5 0,7" fill="#27ae60"/></marker>
+  </defs>
+
+  <rect width="1000" height="720" fill="white"/>
+  <text x="500" y="22" text-anchor="middle" class="title" font-size="15">Figura 2 — Delineamento Experimental e Fluxograma de Processamento</text>
+  <line x1="100" y1="30" x2="900" y2="30" stroke="#1a5276" stroke-width="1"/>
+
+  <!-- ====== (a) Delineamento Fatorial ====== -->
+  <g transform="translate(20,38)">
+    <rect x="0" y="0" width="460" height="270" class="box"/>
+    <text x="230" y="18" text-anchor="middle" class="subtitle">(a) Delineamento Fatorial 2×3 + Controle Isolado</text>
+
+    <!-- Matriz de formulações -->
+    <!-- Cabeçalho -->
+    <rect x="20" y="30" width="420" height="24" rx="3" fill="#1a5276" opacity="0.9"/>
+    <text x="60" y="46" font-size="8" fill="white" font-weight="bold">Código</text>
+    <text x="135" y="46" font-size="8" fill="white" font-weight="bold" text-anchor="middle">PELBD (%)</text>
+    <text x="205" y="46" font-size="8" fill="white" font-weight="bold" text-anchor="middle">rGO (%)</text>
+    <text x="275" y="46" font-size="8" fill="white" font-weight="bold" text-anchor="middle">PP-g-MA (%)</text>
+    <text x="355" y="46" font-size="8" fill="white" font-weight="bold" text-anchor="middle">Nota</text>
+
+    <!-- Linhas -->
+    <rect x="20" y="56" width="420" height="20" fill="#f0f4f7"/>
+    <text x="60" y="70" font-size="8" fill="#333">T1 — PELBD</text>
+    <text x="135" y="70" font-size="8" fill="#333" text-anchor="middle">100,00</text>
+    <text x="205" y="70" font-size="8" fill="#333" text-anchor="middle">0,00</text>
+    <text x="275" y="70" font-size="8" fill="#333" text-anchor="middle">0,00</text>
+    <text x="355" y="70" font-size="7" fill="#7f8c8d" text-anchor="middle">Referência</text>
+
+    <rect x="20" y="78" width="420" height="20" fill="#e8f0e8"/>
+    <text x="60" y="92" font-size="8" fill="#333">T2 — PP-g-MA</text>
+    <text x="135" y="92" font-size="8" fill="#333" text-anchor="middle">99,95</text>
+    <text x="205" y="92" font-size="8" fill="#333" text-anchor="middle">0,00</text>
+    <text x="275" y="92" font-size="8" fill="#e67e22" font-weight="bold" text-anchor="middle">0,05</text>
+    <text x="355" y="92" font-size="7" fill="#e67e22" text-anchor="middle">Controle isolado ★</text>
+
+    <rect x="20" y="100" width="420" height="20" fill="#f0f4f7"/>
+    <text x="60" y="114" font-size="8" fill="#333">T3 — 0,05rGO</text>
+    <text x="135" y="114" font-size="8" fill="#333" text-anchor="middle">99,95</text>
+    <text x="205" y="114" font-size="8" fill="#1a5276" font-weight="bold" text-anchor="middle">0,05</text>
+    <text x="275" y="114" font-size="8" fill="#333" text-anchor="middle">0,00</text>
+    <text x="355" y="114" font-size="7" fill="#7f8c8d" text-anchor="middle">Fatorial</text>
+
+    <rect x="20" y="122" width="420" height="20" fill="#f0f4f7"/>
+    <text x="60" y="136" font-size="8" fill="#333">T4 — 0,10rGO</text>
+    <text x="135" y="136" font-size="8" fill="#333" text-anchor="middle">99,90</text>
+    <text x="205" y="136" font-size="8" fill="#1a5276" font-weight="bold" text-anchor="middle">0,10</text>
+    <text x="275" y="136" font-size="8" fill="#333" text-anchor="middle">0,00</text>
+    <text x="355" y="136" font-size="7" fill="#7f8c8d" text-anchor="middle">Fatorial</text>
+
+    <rect x="20" y="144" width="420" height="20" fill="#fef9e7"/>
+    <text x="60" y="158" font-size="8" fill="#333" font-weight="bold">T5 — 0,05rGO+PP-g-MA ★</text>
+    <text x="135" y="158" font-size="8" fill="#333" text-anchor="middle">99,90</text>
+    <text x="205" y="158" font-size="8" fill="#1a5276" font-weight="bold" text-anchor="middle">0,05</text>
+    <text x="275" y="158" font-size="8" fill="#e67e22" font-weight="bold" text-anchor="middle">0,05</text>
+    <text x="355" y="158" font-size="7" fill="#7f8c8d" text-anchor="middle">Fatorial</text>
+
+    <rect x="20" y="166" width="420" height="20" fill="#f0f4f7"/>
+    <text x="60" y="180" font-size="8" fill="#333">T6 — 0,10rGO+PP-g-MA</text>
+    <text x="135" y="180" font-size="8" fill="#333" text-anchor="middle">99,80</text>
+    <text x="205" y="180" font-size="8" fill="#1a5276" font-weight="bold" text-anchor="middle">0,10</text>
+    <text x="275" y="180" font-size="8" fill="#e67e22" font-weight="bold" text-anchor="middle">0,10</text>
+    <text x="355" y="180" font-size="7" fill="#7f8c8d" text-anchor="middle">Fatorial</text>
+
+    <!-- Nota T2 -->
+    <text x="40" y="205" class="annot" font-size="8">★ T2: Controle PP-g-MA isolado — v({PP-g-MA}) ≈ 0 → valida decomposição de Shapley</text>
+
+    <!-- Equação -->
+    <text x="40" y="225" class="label" font-size="8" font-style="italic">Modelo: Y_ijk = µ + α_i + β_j + (αβ)_ij + ε_ijk,  ε ~ N(0, σ²)</text>
+
+    <text x="40" y="265" class="cite">[Montgomery, Statistical Quality Control, 8ed. Wiley (2020). ISBN: 978-1-119-39930-8]</text>
+  </g>
+
+  <!-- ====== (b) Fluxograma ====== -->
+  <g transform="translate(500,38)">
+    <rect x="0" y="0" width="480" height="270" class="box"/>
+    <text x="240" y="18" text-anchor="middle" class="subtitle">(b) Fluxograma de Processamento Completo</text>
+
+    <!-- ETAPA 1 -->
+    <rect x="15" y="28" width="100" height="58" class="node"/>
+    <text x="65" y="48" class="process-text" font-size="8">EXTRUSÃO</text>
+    <text x="65" y="60" class="param-text">Coperion ZSK18K38</text>
+    <text x="65" y="70" class="param-text">135→220°C, 200 rpm</text>
+    <text x="65" y="80" class="param-text">L/D=40, 5 kg/h</text>
+
+    <line x1="115" y1="57" x2="145" y2="57" class="arrow"/>
+
+    <rect x="150" y="28" width="100" height="58" class="node"/>
+    <text x="200" y="48" class="process-text" font-size="8">INJEÇÃO</text>
+    <text x="200" y="60" class="param-text">Battenfeld Plus 350</text>
+    <text x="200" y="70" class="param-text">175–180°C, 350 kN</text>
+    <text x="200" y="80" class="param-text">Molde 60°C, 45s</text>
+
+    <line x1="250" y1="57" x2="280" y2="57" class="arrow"/>
+
+    <rect x="285" y="28" width="105" height="58" class="node-highlight"/>
+    <text x="337" y="48" class="process-text" font-size="8">CARACTERIZAÇÃO</text>
+    <text x="337" y="60" class="param-text" fill="#e67e22">ETAPA 1: Triagem</text>
+    <text x="337" y="70" class="param-text">Flexão, DSC, TGA</text>
+    <text x="337" y="80" class="param-text">n=12 mec.; n=3 térm.</text>
+
+    <!-- Seta para baixo: micronização -->
+    <line x1="337" y1="86" x2="337" y2="116" class="arrow" marker-end="url(#arrowBlue)"/>
+
+    <!-- ETAPA 2 -->
+    <rect x="285" y="120" width="105" height="50" class="node"/>
+    <text x="337" y="140" class="process-text" font-size="8">MICRONIZAÇÃO</text>
+    <text x="337" y="152" class="param-text">MOD 100, 1500 rpm</text>
+    <text x="337" y="163" class="param-text">Peneira 500 μm</text>
+
+    <line x1="285" y1="145" x2="255" y2="145" class="arrow"/>
+
+    <rect x="150" y="120" width="100" height="50" class="node"/>
+    <text x="200" y="140" class="process-text" font-size="8">ROTOMOLDAGEM</text>
+    <text x="200" y="152" class="param-text">Shuttle 2.5</text>
+    <text x="200" y="163" class="param-text">278°C/13min + H₂O/19min</text>
+
+    <line x1="150" y1="145" x2="120" y2="145" class="arrow"/>
+
+    <rect x="15" y="120" width="100" height="50" class="node"/>
+    <text x="65" y="140" class="process-text" font-size="8">CORTE LASER</text>
+    <text x="65" y="152" class="param-text">CO₂ 1000W, 15mm/s</text>
+    <text x="65" y="163" class="param-text">N₂ 2 bar</text>
+
+    <!-- Seta final -->
+    <line x1="65" y1="170" x2="65" y2="200" class="arrow" marker-end="url(#arrowBlue)"/>
+
+    <rect x="15" y="204" width="150" height="50" class="node-highlight"/>
+    <text x="90" y="224" class="process-text" font-size="8">CARACTERIZAÇÃO</text>
+    <text x="90" y="236" class="param-text" fill="#e67e22">ETAPA 2: Validação</text>
+    <text x="90" y="248" class="param-text">Flexão, DMA, Izod, Dardo</text>
+
+    <!-- Nota PCR -->
+    <rect x="210" y="204" width="250" height="50" rx="6" fill="#e8f8e8" stroke="#27ae60" stroke-width="1.5"/>
+    <text x="335" y="222" text-anchor="middle" font-size="7.5" fill="#27ae60" font-weight="bold">MODELO PCR (Transferência)</text>
+    <text x="335" y="236" text-anchor="middle" font-size="7" fill="#333">Etapa 1 → Etapa 2: R²_LOOCV = 0,93</text>
+    <text x="335" y="248" text-anchor="middle" font-size="7" fill="#333">Erro &lt; 4% → Redução 80% tempo P&amp;D</text>
+
+    <text x="15" y="275" class="cite">[Davim et al., JMPT 198, 99 (2008). DOI: 10.1016/j.jmatprotec.2007.06.056] [Ren et al., PES 61, 410 (2021). DOI: 10.1002/pen.25584]</text>
+  </g>
+
+  <!-- Conexão entre subfiguras -->
+  <line x1="480" y1="175" x2="500" y2="175" stroke="#7f8c8d" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Legenda geral -->
+  <text x="500" y="335" text-anchor="middle" class="cite" font-size="8">
+    Legenda: (a) Delineamento fatorial 2×3 completo com controle PP-g-MA isolado (T2), essencial para decomposição de Shapley.
+    (b) Fluxograma de processamento em duas etapas: triagem (injeção, n=12) e validação (rotomoldagem, n=16), com modelo PCR conectando as etapas.
+  </text>
+</svg>

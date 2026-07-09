@@ -1,0 +1,35 @@
+{
+  "correlacao_servicos_escape": 0.3605,
+  "correlacao_razao_serv_manuf": -0.0111,
+  "n_economias_bpo": 82,
+  "top_bpo": [
+    "Isle of Man",
+    "Hong Kong SAR, China",
+    "Bermuda",
+    "Channel Islands",
+    "Macao SAR, China",
+    "Sint Maarten (Dutch part)",
+    "Cayman Islands",
+    "Malta",
+    "Luxembourg",
+    "Sao Tome and Principe"
+  ],
+  "modelo_interacao": {
+    "params": {
+      "const": 0.124876,
+      "aipi_total": 0.007269,
+      "is_bpo": 0.076986,
+      "aipi_x_bpo": -0.001174,
+      "pib_pc_ppc": 2e-06
+    },
+    "pvalues": {
+      "const": 0.0,
+      "aipi_total": 0.0,
+      "is_bpo": 0.0144,
+      "aipi_x_bpo": 0.013,
+      "pib_pc_ppc": 0.0
+    },
+    "r2": 0.9276,
+    "n": 190
+  }
+}

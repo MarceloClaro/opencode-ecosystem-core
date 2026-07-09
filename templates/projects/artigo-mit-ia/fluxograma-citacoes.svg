@@ -1,0 +1,205 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 950" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="temaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1f6feb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="multilateralGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3fb950;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#238636;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="academicGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d2a8ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8957e5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="brasilGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffa657;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4760e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="empregoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f778ba;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#da3633;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cgvGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#79c0ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1f6feb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="metodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff7b72;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#da3633;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadowDark">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3fb950"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#d2a8ff"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ffa657"/>
+    </marker>
+    <marker id="arrowPink" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f778ba"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#58a6ff"/>
+    </marker>
+  </defs>
+
+  <!-- Fundo escuro -->
+  <rect width="1200" height="950" fill="url(#bgGrad)" rx="8"/>
+
+  <!-- Título -->
+  <rect x="250" y="15" width="700" height="40" rx="8" fill="url(#temaGrad)" filter="url(#shadowDark)"/>
+  <text x="600" y="41" text-anchor="middle" fill="white" font-size="14" font-weight="bold">FLUXOGRAMA DE CITAÇÕES — REDE DE REFERÊNCIAS</text>
+
+  <!-- Nó central: TEMA -->
+  <ellipse cx="600" cy="110" rx="140" ry="28" fill="url(#temaGrad)" filter="url(#shadowDark)"/>
+  <text x="600" y="115" text-anchor="middle" fill="white" font-size="12" font-weight="bold">ARM ∩ IAG</text>
+
+  <!-- === CAMADA 1: ORGÃOS MULILATERAIS === -->
+  <rect x="30" y="180" width="220" height="50" rx="8" fill="url(#multilateralGrad)" filter="url(#shadowDark)"/>
+  <text x="140" y="200" text-anchor="middle" fill="white" font-size="10" font-weight="bold">BANCO MUNDIAL</text>
+  <text x="140" y="218" text-anchor="middle" fill="#c6f6d5" font-size="9">WDR 2024 · WDI · Digital Report 2025</text>
+  <line x1="280" y1="130" x2="165" y2="178" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrowGreen)"/>
+  <text x="210" y="148" fill="#3fb950" font-size="8">Framework 3i</text>
+
+  <rect x="270" y="180" width="220" height="50" rx="8" fill="url(#multilateralGrad)" filter="url(#shadowDark)"/>
+  <text x="380" y="200" text-anchor="middle" fill="white" font-size="10" font-weight="bold">FMI</text>
+  <text x="380" y="218" text-anchor="middle" fill="#c6f6d5" font-size="9">AIPI · WEO · SDN 2024/001</text>
+  <line x1="520" y1="130" x2="430" y2="178" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrowGreen)"/>
+  <text x="465" y="148" fill="#3fb950" font-size="8">AIPI, exposição</text>
+
+  <rect x="510" y="180" width="200" height="50" rx="8" fill="url(#multilateralGrad)" filter="url(#shadowDark)"/>
+  <text x="610" y="200" text-anchor="middle" fill="white" font-size="10" font-weight="bold">OCDE</text>
+  <text x="610" y="218" text-anchor="middle" fill="#c6f6d5" font-size="9">AI Papers · Produtividade</text>
+  <line x1="600" y1="138" x2="605" y2="178" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrowGreen)"/>
+  <text x="620" y="158" fill="#3fb950" font-size="8">Efeitos IAG</text>
+
+  <rect x="730" y="180" width="220" height="50" rx="8" fill="url(#multilateralGrad)" filter="url(#shadowDark)"/>
+  <text x="840" y="200" text-anchor="middle" fill="white" font-size="10" font-weight="bold">OIT · UNCTAD · BIS</text>
+  <text x="840" y="218" text-anchor="middle" fill="#c6f6d5" font-size="9">Emprego · Inovação · Crescimento</text>
+  <line x1="700" y1="130" x2="810" y2="178" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrowGreen)"/>
+  <text x="770" y="148" fill="#3fb950" font-size="8">Dados setoriais</text>
+
+  <!-- Legendas das setas entre multilaterais -->
+  <line x1="250" y1="205" x2="270" y2="205" stroke="#3fb950" stroke-width="1"/>
+  <line x1="490" y1="205" x2="510" y2="205" stroke="#3fb950" stroke-width="1"/>
+  <line x1="710" y1="205" x2="730" y2="205" stroke="#3fb950" stroke-width="1"/>
+
+  <!-- === CAMADA 2: LITERATURA ACADÊMICA === -->
+  <rect x="60" y="270" width="250" height="65" rx="6" fill="url(#academicGrad)" filter="url(#shadowDark)"/>
+  <text x="185" y="290" text-anchor="middle" fill="white" font-size="10" font-weight="bold">ARM — FUNDAMENTOS</text>
+  <text x="185" y="305" text-anchor="middle" fill="#e8d5f5" font-size="9">Gill &amp; Kharas (2007) · Felipe et al. (2012)</text>
+  <text x="185" y="320" text-anchor="middle" fill="#e8d5f5" font-size="9">Glawe &amp; Wagner (2016) · Aiyar et al. (2018)</text>
+  <text x="185" y="330" text-anchor="middle" fill="#e8d5f5" font-size="9">Imam &amp; Temple (2024) · Nair (2026)</text>
+  <line x1="185" y1="295" x2="380" y2="140" stroke="#d2a8ff" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowPurple)"/>
+  <text x="260" y="175" fill="#d2a8ff" font-size="8">Origem do conceito</text>
+
+  <rect x="340" y="270" width="250" height="65" rx="6" fill="url(#academicGrad)" filter="url(#shadowDark)"/>
+  <text x="465" y="290" text-anchor="middle" fill="white" font-size="10" font-weight="bold">IAG — GPTs</text>
+  <text x="465" y="305" text-anchor="middle" fill="#e8d5f5" font-size="9">Bresnahan &amp; Trajtenberg (1995)</text>
+  <text x="465" y="320" text-anchor="middle" fill="#e8d5f5" font-size="9">Brynjolfsson et al. (2023)</text>
+  <text x="465" y="330" text-anchor="middle" fill="#e8d5f5" font-size="9">Eloundou et al. (2023)</text>
+  <line x1="465" y1="290" x2="580" y2="140" stroke="#d2a8ff" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowPurple)"/>
+  <text x="520" y="175" fill="#d2a8ff" font-size="8">GPT framework</text>
+
+  <rect x="620" y="270" width="250" height="65" rx="6" fill="url(#academicGrad)" filter="url(#shadowDark)"/>
+  <text x="745" y="290" text-anchor="middle" fill="white" font-size="10" font-weight="bold">DESIGUALDADE × TECNOLOGIA</text>
+  <text x="745" y="305" text-anchor="middle" fill="#e8d5f5" font-size="9">Autor (2022) · Acemoglu &amp; Restrepo (2019, 2022)</text>
+  <text x="745" y="320" text-anchor="middle" fill="#e8d5f5" font-size="9">Acemoglu &amp; Johnson (2023)</text>
+  <text x="745" y="330" text-anchor="middle" fill="#e8d5f5" font-size="9">Rodrik (2016, 2024)</text>
+  <line x1="745" y1="290" x2="650" y2="140" stroke="#d2a8ff" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowPurple)"/>
+  <text x="680" y="175" fill="#d2a8ff" font-size="8">Displacement × reinstatement</text>
+
+  <rect x="900" y="270" width="250" height="65" rx="6" fill="url(#academicGrad)" filter="url(#shadowDark)"/>
+  <text x="1025" y="290" text-anchor="middle" fill="white" font-size="10" font-weight="bold">HETEROGENEIDADE ARM</text>
+  <text x="1025" y="305" text-anchor="middle" fill="#e8d5f5" font-size="9">Bianchi et al. (2024) · Freytes et al. (2025)</text>
+  <text x="1025" y="320" text-anchor="middle" fill="#e8d5f5" font-size="9">Hu et al. (2023) · Paus (2020)</text>
+  <text x="1025" y="330" text-anchor="middle" fill="#e8d5f5" font-size="9">Lee (2013) · Lee &amp; Malerba (2017)</text>
+  <line x1="900" y1="290" x2="730" y2="140" stroke="#d2a8ff" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowPurple)"/>
+  <text x="820" y="175" fill="#d2a8ff" font-size="8">Clusters ARM</text>
+
+  <!-- === CAMADA 3: MERCADO DE TRABALHO E EXPOSIÇÃO === -->
+  <rect x="60" y="375" width="300" height="55" rx="6" fill="url(#empregoGrad)" filter="url(#shadowDark)"/>
+  <text x="210" y="395" text-anchor="middle" fill="white" font-size="10" font-weight="bold">EXPOSIÇÃO OCUPACIONAL</text>
+  <text x="210" y="413" text-anchor="middle" fill="#fce4ec" font-size="9">Cazzaniga et al. (2024) · Gmyrek et al. (2024)</text>
+  <text x="210" y="423" text-anchor="middle" fill="#fce4ec" font-size="9">Ciaschi et al. (2025) · Egana-delSol et al. (2025)</text>
+  <line x1="210" y1="375" x2="210" y2="335" stroke="#f778ba" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+
+  <rect x="400" y="375" width="300" height="55" rx="6" fill="url(#empregoGrad)" filter="url(#shadowDark)"/>
+  <text x="550" y="395" text-anchor="middle" fill="white" font-size="10" font-weight="bold">LEAPFROGGING E INOVAÇÃO FRUGAL</text>
+  <text x="550" y="413" text-anchor="middle" fill="#fce4ec" font-size="9">Adams et al. (2026) · Noy &amp; Zhang (2023)</text>
+  <text x="550" y="423" text-anchor="middle" fill="#fce4ec" font-size="9">McKinsey (2025) · Foster-McGregor &amp; Verspagen (2024)</text>
+  <line x1="550" y1="375" x2="550" y2="335" stroke="#f778ba" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+
+  <rect x="740" y="375" width="250" height="55" rx="6" fill="url(#empregoGrad)" filter="url(#shadowDark)"/>
+  <text x="865" y="395" text-anchor="middle" fill="white" font-size="10" font-weight="bold">BPO E CGV</text>
+  <text x="865" y="413" text-anchor="middle" fill="#fce4ec" font-size="9">Cucio (2025) · Alonso (2022)</text>
+  <text x="865" y="423" text-anchor="middle" fill="#fce4ec" font-size="9">Zhou &amp; Toshimori (2024)</text>
+  <line x1="865" y1="375" x2="865" y2="335" stroke="#f778ba" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+
+  <!-- === CAMADA 4: CASO BRASILEIRO === -->
+  <rect x="200" y="470" width="350" height="55" rx="8" fill="url(#brasilGrad)" filter="url(#shadowDeep)"/>
+  <text x="375" y="490" text-anchor="middle" fill="white" font-size="11" font-weight="bold">CASO BRASILEIRO</text>
+  <text x="375" y="508" text-anchor="middle" fill="#ffedd5" font-size="9">Fernandes (2022) · Veloso (2024)</text>
+  <text x="375" y="518" text-anchor="middle" fill="#ffedd5" font-size="9">Luzio &amp; Greenstein (1995) · Fernandes &amp; Veloso (2024)</text>
+  <line x1="375" y1="470" x2="375" y2="430" stroke="#ffa657" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+
+  <rect x="620" y="470" width="300" height="55" rx="8" fill="url(#brasilGrad)" filter="url(#shadowDeep)"/>
+  <text x="770" y="490" text-anchor="middle" fill="white" font-size="11" font-weight="bold">LIÇÕES COMPARADAS</text>
+  <text x="770" y="508" text-anchor="middle" fill="#ffedd5" font-size="9">Coreia do Sul · Polônia · Chile</text>
+  <text x="770" y="518" text-anchor="middle" fill="#ffedd5" font-size="9">Vietnã · Índia · Israel · Singapura · Estônia</text>
+  <line x1="770" y1="470" x2="770" y2="430" stroke="#ffa657" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+
+  <!-- === CAMADA 5: METODOLOGIA === -->
+  <rect x="350" y="565" width="500" height="50" rx="8" fill="url(#metodGrad)" filter="url(#shadowDeep)"/>
+  <text x="600" y="585" text-anchor="middle" fill="white" font-size="11" font-weight="bold">METODOLOGIA</text>
+  <text x="600" y="603" text-anchor="middle" fill="#fecaca" font-size="9">Snyder (2019) · Page et al. (2021) — PRISMA</text>
+  <line x1="600" y1="565" x2="600" y2="525" stroke="#ff7b72" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+
+  <!-- === CAMADA 6: OUTPUT (MATRIZ ARM-IAG) === -->
+  <rect x="250" y="655" width="700" height="65" rx="10" fill="url(#temaGrad)" filter="url(#shadowDeep)"/>
+  <text x="600" y="678" text-anchor="middle" fill="white" font-size="12" font-weight="bold">OUTPUT: MATRIZ ARM-IAG (4 TRAJETÓRIAS)</text>
+  <text x="600" y="695" text-anchor="middle" fill="#b3d9ff" font-size="10">T1: Vulnerabilidade Passiva | T2: Leapfrogging Seletivo</text>
+  <text x="600" y="710" text-anchor="middle" fill="#b3d9ff" font-size="10">T3: Armadilha Tecnológica | T4: Transição Virtuosa</text>
+  <line x1="600" y1="655" x2="600" y2="615" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- === CAMADA 7: POLICY IMPLICATIONS === -->
+  <rect x="100" y="760" width="1000" height="55" rx="8" fill="#21262d" stroke="#30363d" stroke-width="1" filter="url(#shadowDark)"/>
+  <text x="600" y="783" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="bold">IMPLICAÇÕES DE POLÍTICA</text>
+  <rect x="130" y="795" width="300" height="15" rx="4" fill="#161b22"/>
+  <text x="280" y="806" text-anchor="middle" fill="#58a6ff" font-size="9">E1: Infraestrutura digital</text>
+  <rect x="450" y="795" width="300" height="15" rx="4" fill="#161b22"/>
+  <text x="600" y="806" text-anchor="middle" fill="#3fb950" font-size="9">E2: Capital humano / requalificação</text>
+  <rect x="770" y="795" width="300" height="15" rx="4" fill="#161b22"/>
+  <text x="920" y="806" text-anchor="middle" fill="#d2a8ff" font-size="9">E3: Regulação / governança</text>
+  <line x1="600" y1="760" x2="600" y2="720" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- === CAMADA 8: AGENDA DE PESQUISA === -->
+  <rect x="250" y="850" width="700" height="40" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="600" y="870" text-anchor="middle" fill="#8b949e" font-size="9">AGENDA DE PESQUISA: 7 tópicos (CGE, IA×informalidade, economia política, impacto ambiental, desigualdade intra-país)</text>
+  <line x1="600" y1="850" x2="600" y2="815" stroke="#30363d" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrowGray)"/>
+
+  <!-- Legenda no canto -->
+  <rect x="20" y="870" width="250" height="65" rx="5" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="145" y="888" text-anchor="middle" fill="#8b949e" font-size="9" font-weight="bold">LEGENDA</text>
+  <rect x="30" y="895" width="12" height="12" fill="url(#multilateralGrad)"/>
+  <text x="48" y="905" fill="#8b949e" font-size="8">Orgãos multilaterais</text>
+  <rect x="115" y="895" width="12" height="12" fill="url(#academicGrad)"/>
+  <text x="133" y="905" fill="#8b949e" font-size="8">Literatura acadêmica</text>
+  <rect x="30" y="912" width="12" height="12" fill="url(#empregoGrad)"/>
+  <text x="48" y="922" fill="#8b949e" font-size="8">Exposição/trabalho</text>
+  <rect x="115" y="912" width="12" height="12" fill="url(#brasilGrad)"/>
+  <text x="133" y="922" fill="#8b949e" font-size="8">Caso brasileiro</text>
+</svg>

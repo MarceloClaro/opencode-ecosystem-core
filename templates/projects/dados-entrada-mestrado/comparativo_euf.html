@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Comparativo EUF — Raciocínios Científicos (Taxonomia 350)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8f9fa; padding: 40px; color: #1a1a2e; }
+.container { max-width: 1400px; margin: 0 auto; }
+h1 { font-size: 24px; color: #0a1628; margin-bottom: 4px; }
+.subtitle { color: #6c757d; margin-bottom: 32px; font-size: 14px; }
+.card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.chart-row { display: flex; flex-wrap: wrap; gap: 24px; }
+.chart-col { flex: 1; min-width: 400px; }
+.chart-box { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 24px; }
+h2 { font-size: 16px; color: #495057; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th, td { padding: 6px 10px; text-align: center; border-bottom: 1px solid #dee2e6; }
+th { background: #f1f3f5; font-weight: 600; color: #495057; position: sticky; top: 0; }
+td:first-child { text-align: left; font-weight: 500; }
+.highlight { background: #fff3cd !important; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 16px 0; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.legend-color { width: 14px; height: 14px; border-radius: 3px; }
+.kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.kpi { flex: 1; min-width: 140px; background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.kpi-value { font-size: 28px; font-weight: 700; color: #0d6efd; }
+.kpi-label { font-size: 12px; color: #6c757d; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.kpi.gold .kpi-value { color: #e6a817; }
+.kpi.green .kpi-value { color: #198754; }
+.kpi.purple .kpi-value { color: #6f42c1; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.tag-i { background: #cfe2ff; color: #084298; }
+.tag-ii { background: #f0d6ff; color: #5a189a; }
+.tag-vii { background: #d1e7dd; color: #0f5132; }
+.tag-xiii { background: #fff3cd; color: #664d03; }
+.tag-xiv { background: #f8d7da; color: #842029; }
+.scroll-table { overflow-x: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Comparativo dos 6 Exames EUF (2011–2016)</h1>
+<p class="subtitle">Distribuição de Raciocínios Científicos (Taxonomia 350) — 60 questões classificadas · Dataset Mestrado PPGTE/UFC</p>
+
+<div class="kpi-row">
+<div class="kpi"><div class="kpi-value">60</div><div class="kpi-label">Questões Classificadas</div></div>
+<div class="kpi"><div class="kpi-value">15</div><div class="kpi-label">R-Codes Primários</div></div>
+<div class="kpi gold"><div class="kpi-value">20</div><div class="kpi-label">R-Codes no Total</div></div>
+<div class="kpi green"><div class="kpi-value">6</div><div class="kpi-label">Exames no Dataset</div></div>
+<div class="kpi purple"><div class="kpi-value">5</div><div class="kpi-label">Categorias Taxonomia</div></div>
+</div>
+
+<div class="card">
+<h2>R-codes Primários por Exame (Agrupado)</h2>
+<canvas id="rcodeChart" height="400"></canvas>
+<div class="legend" id="rcodeLegend"></div>
+</div>
+
+<div class="chart-row">
+<div class="chart-col">
+<div class="chart-box">
+<h2>Categoria XIII (Físico-Matemáticos) por Exame</h2>
+<canvas id="cat13Chart" height="250"></canvas>
+</div>
+</div>
+<div class="chart-col">
+<div class="chart-box">
+<h2>Distribuição por Domínio Quântico (R183/R201/R202)</h2>
+<canvas id="quantumChart" height="250"></canvas>
+</div>
+</div>
+</div>
+
+<div class="chart-row">
+<div class="chart-col">
+<div class="chart-box">
+<h2>Nível de Bloom por Exame</h2>
+<canvas id="bloomChart" height="250"></canvas>
+</div>
+</div>
+<div class="chart-col">
+<div class="chart-box">
+<h2>Categoria Taxonômica (R-código Primário)</h2>
+<canvas id="catPieChart" height="250"></canvas>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>Classificação Taxonômica — Todos os R-codes</h2>
+<div class="scroll-table">
+<table>
+<thead>
+<tr>
+<th>R-Code</th><th>Descrição</th><th>Categoria Taxonomia</th>
+<th>2011/1</th><th>2012/2</th><th>2014-2</th><th>2015/1</th><th>2015/2</th><th>2016/1</th><th>Total</th>
+</tr>
+</thead>
+<tbody id="rcodeTableBody"></tbody>
+</table>
+</div>
+</div>
+
+<div class="card">
+<h2>Matriz Área × R-code Primário (60 questões EUF)</h2>
+<div class="scroll-table">
+<table>
+<thead>
+<tr><th>Área</th><th>R008</th><th>R010</th><th>R011</th><th>R065</th><th>R067</th><th>R069</th><th>R070</th><th>R071</th><th>R073</th><th>R109</th><th>R117</th><th>R183</th><th>R201</th><th>R202</th><th>R229</th><th>Total</th></tr>
+</thead>
+<tbody>
+<tr><td>Eletromagnetismo</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>9</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>12</td></tr>
+<tr><td>Física Moderna</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>8</td><td>0</td><td>0</td><td>0</td><td>12</td></tr>
+<tr><td>Mecânica Clássica</td><td>0</td><td>0</td><td>1</td><td>3</td><td>0</td><td>7</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>12</td></tr>
+<tr><td>Mecânica Estatística</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>6</td></tr>
+<tr><td>Mecânica Quântica</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>3</td><td>1</td><td>2</td><td>3</td><td>12</td></tr>
+<tr><td>Termodinâmica</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>5</td><td>0</td><td>0</td><td>0</td><td>0</td><td>6</td></tr>
+<tr style="font-weight:700;background:#f1f3f5"><td>Total</td><td>1</td><td>1</td><td>1</td><td>8</td><td>1</td><td>8</td><td>1</td><td>10</td><td>1</td><td>1</td><td>9</td><td>11</td><td>1</td><td>2</td><td>4</td><td>60</td></tr>
+</tbody>
+</table>
+</div>
+<p style="margin-top:12px;font-size:12px;color:#6c757d">V de Cramer = 0,770 (associação muito forte entre área e R-code)</p>
+</div>
+
+<div class="card">
+<h2>Mapa R-Codes → Taxonomia 350 (20 Códigos Mapeados)</h2>
+<div class="scroll-table">
+<table>
+<thead><tr><th>Categoria</th><th>R-Codes</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><span class="tag tag-i">Cat. I: Lógico-Dedutivos</span></td><td>R008, R011</td><td>Deducao-Formal, Inducao-Estrutural</td></tr>
+<tr><td><span class="tag tag-ii">Cat. II: Analítico-Estruturais</span></td><td>R010</td><td>Decomposicao-Modular</td></tr>
+<tr><td><span class="tag tag-vii">Cat. VII: Econômico-Decisórios</span></td><td>R054</td><td>Otimizacao-Restrita</td></tr>
+<tr><td><span class="tag tag-xiii">Cat. XIII: Físico-Matemáticos</span></td><td>R035, R065, R066, R067, R069, R070, R071, R072, R073, R114, R117, R183, R201, R202</td><td>14 códigos (70% das ocorrências)</td></tr>
+<tr><td><span class="tag tag-xiv">Cat. XIV: Lógica Matemática Avançada</span></td><td>R109, R229</td><td>Espectral-Operadores, Homotopia-Fundamental</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div style="margin-top:24px;padding:16px;background:#e8f4f8;border-radius:8px;font-size:13px;color:#0a3d5c;text-align:center">
+    <strong>Dataset completo:</strong> 150 questões (60 EUF + 90 ENA) · 
+    Análise taxonômica completa em <code>analise_mapa_taxonomico.pdf</code> · 
+    Bloom: Aplicar=87, Analisar=63
+</div>
+
+</div>
+
+<script>
+const COLORS = ['#0d6efd','#198754','#dc3545','#ffc107','#6f42c1','#fd7e14','#20c997','#e83e8c','#0dcaf0','#6610f2','#d63384','#17a2b8','#ff6b35','#4ecdc4','#7c3aed'];
+const exames = ["EUF 2011/1","EUF 2012/2","EUF 2014-2","EUF 2015/1","EUF 2015/2","EUF 2016/1"];
+const rcodes = ["R008","R010","R011","R065","R067","R069","R070","R071","R073","R109","R117","R183","R201","R202","R229"];
+const rcodeDesc = {"R065":"Simetria-Conservacao","R069":"Variacional-Principio","R183":"Mecanica-Quantica-Particulas","R073":"Caos-Deterministico","R071":"Dualidade-Transformacao","R229":"Homotopia-Fundamental","R117":"Monte-Carlo-MCMC","R067":"Perturbativo","R070":"Limite-Assintotico","R008":"Deducao-Formal-Passo-a-Passo","R109":"Espectral-Operadores","R010":"Decomposicao-Modular","R011":"Inducao-Estrutural","R202":"Emaranhamento-Quantico","R201":"Superposicao-Quantica"};
+const rcodeCat = {"R008":"I. Lógico-Dedutivos","R011":"I. Lógico-Dedutivos","R010":"II. Analítico-Estruturais","R054":"VII. Econômico-Decisórios","R065":"XIII. Físico-Matemáticos","R066":"XIII. Físico-Matemáticos","R067":"XIII. Físico-Matemáticos","R069":"XIII. Físico-Matemáticos","R070":"XIII. Físico-Matemáticos","R071":"XIII. Físico-Matemáticos","R072":"XIII. Físico-Matemáticos","R073":"XIII. Físico-Matemáticos","R035":"XIII. Físico-Matemáticos","R114":"XIII. Físico-Matemáticos","R117":"XIII. Físico-Matemáticos","R183":"XIII. Físico-Matemáticos","R201":"XIII. Físico-Matemáticos","R202":"XIII. Físico-Matemáticos","R109":"XIV. Lógica Matemática Avançada","R229":"XIV. Lógica Matemática Avançada"};
+const examRcode = {"EUF 2011/1":{"R065":1,"R069":1,"R183":3,"R073":1,"R071":2,"R229":1,"R117":1},"EUF 2012/2":{"R071":1,"R065":2,"R183":2,"R117":2,"R069":1,"R067":1,"R229":1},"EUF 2014-2":{"R065":3,"R070":1,"R071":1,"R008":1,"R069":2,"R109":1,"R010":1},"EUF 2015/1":{"R071":2,"R183":3,"R117":2,"R069":2,"R229":1},"EUF 2015/2":{"R071":2,"R065":1,"R117":2,"R183":2,"R069":1,"R011":1,"R202":1},"EUF 2016/1":{"R071":2,"R065":1,"R183":1,"R117":2,"R229":1,"R069":1,"R202":1,"R201":1}};
+const examBloom = {"EUF 2011/1":{"Analisar":4,"Aplicar":6},"EUF 2012/2":{"Aplicar":6,"Analisar":4},"EUF 2014-2":{"Aplicar":6,"Analisar":4},"EUF 2015/1":{"Aplicar":6,"Analisar":4},"EUF 2015/2":{"Aplicar":7,"Analisar":3},"EUF 2016/1":{"Analisar":4,"Aplicar":6}};
+const examCat = {"EUF 2011/1":{"XIII. Físico-Matemáticos":9,"XIV. Lógica Matemática Avançada":1},"EUF 2012/2":{"XIII. Físico-Matemáticos":9,"XIV. Lógica Matemática Avançada":1},"EUF 2014-2":{"XIII. Físico-Matemáticos":7,"I. Lógico-Dedutivos":1,"XIV. Lógica Matemática Avançada":1,"II. Analítico-Estruturais":1},"EUF 2015/1":{"XIII. Físico-Matemáticos":9,"XIV. Lógica Matemática Avançada":1},"EUF 2015/2":{"XIII. Físico-Matemáticos":9,"I. Lógico-Dedutivos":1},"EUF 2016/1":{"XIII. Físico-Matemáticos":9,"XIV. Lógica Matemática Avançada":1}};
+
+// 1. Stacked bar chart - R-codes by exam
+const ctx1 = document.getElementById('rcodeChart').getContext('2d');
+const datasets = rcodes.map((rc, i) => ({
+    label: rc + ' (' + (rcodeDesc[rc]||'') + ')',
+    data: exames.map(ex => examRcode[ex][rc] || 0),
+    backgroundColor: COLORS[i % COLORS.length],
+    borderWidth: 1
+}));
+new Chart(ctx1, {
+    type: 'bar',
+    data: { labels: exames, datasets },
+    options: {
+        responsive: true,
+        scales: {
+            x: { stacked: false, title: { display: true, text: 'Exame' } },
+            y: { stacked: false, title: { display: true, text: 'Questões' }, beginAtZero: true, max: 10 }
+        },
+        plugins: {
+            legend: { display: true, position: 'bottom' }
+        }
+    }
+});
+
+// 2. Cat XIII bar chart
+const ctx2 = document.getElementById('cat13Chart').getContext('2d');
+const cat13data = exames.map(ex => examCat[ex]['XIII. Físico-Matemáticos'] || 0);
+new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: exames,
+        datasets: [{ label: 'Cat. XIII (Físico-Matemáticos)', data: cat13data, backgroundColor: '#ffc107' }]
+    },
+    options: {
+        scales: { y: { beginAtZero: true, max: 10, title: { display: true, text: 'Ocorrências como R-primário' } } },
+        plugins: { legend: { display: false } }
+    }
+});
+
+// 3. Quantum domain chart
+const ctx3 = document.getElementById('quantumChart').getContext('2d');
+const quantumRcodes = ['R183','R201','R202'];
+const quantumData = quantumRcodes.map(rc => ({
+    label: rc + ' (' + rcodeDesc[rc] + ')',
+    data: exames.map(ex => examRcode[ex][rc] || 0),
+    backgroundColor: [0,1,2].map(i => COLORS[i+6])
+}));
+new Chart(ctx3, {
+    type: 'bar',
+    data: { labels: exames, datasets: quantumData },
+    options: {
+        scales: { y: { beginAtZero: true, title: { display: true, text: 'Questões' } } },
+        plugins: { legend: { display: true, position: 'bottom' } }
+    }
+});
+
+// 4. Bloom chart
+const ctx4 = document.getElementById('bloomChart').getContext('2d');
+new Chart(ctx4, {
+    type: 'bar',
+    data: {
+        labels: exames,
+        datasets: [
+            { label: 'Aplicar', data: exames.map(ex => examBloom[ex]['Aplicar']||0), backgroundColor: '#198754' },
+            { label: 'Analisar', data: exames.map(ex => examBloom[ex]['Analisar']||0), backgroundColor: '#dc3545' }
+        ]
+    },
+    options: {
+        scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, max: 10 } },
+        plugins: { legend: { position: 'bottom' } }
+    }
+});
+
+// 5. Category pie (aggregate)
+const ctx5 = document.getElementById('catPieChart').getContext('2d');
+const catAgg = {};
+Object.values(examCat).forEach(ex => { Object.entries(ex).forEach(([k,v]) => { catAgg[k] = (catAgg[k]||0)+v; }); });
+const catColors = {'I. Lógico-Dedutivos':'#0d6efd','II. Analítico-Estruturais':'#6f42c1','VII. Econômico-Decisórios':'#198754','XIII. Físico-Matemáticos':'#ffc107','XIV. Lógica Matemática Avançada':'#dc3545'};
+new Chart(ctx5, {
+    type: 'pie',
+    data: {
+        labels: Object.keys(catAgg).map(k => k + ' (' + catAgg[k] + ')'),
+        datasets: [{ data: Object.values(catAgg), backgroundColor: Object.keys(catAgg).map(k => catColors[k]||'#999') }]
+    },
+    options: { plugins: { legend: { position: 'bottom' } } }
+});
+
+// 6. Table
+const tbody = document.getElementById('rcodeTableBody');
+const allRcodes = [...rcodes, 'R035', 'R054', 'R066', 'R072', 'R114'];
+const allRcodesUnique = [...new Set(allRcodes)].sort();
+const totalExamRcode = {};
+exames.forEach(ex => { totalExamRcode[ex] = 0; Object.values(examRcode[ex]).forEach(v => totalExamRcode[ex] += v); });
+
+allRcodesUnique.forEach(rc => {
+    const tr = document.createElement('tr');
+    const cat = rcodeCat[rc] || 'Não mapeado';
+    const catClass = cat.includes('I.') ? 'tag-i' : cat.includes('II.') ? 'tag-ii' : cat.includes('VII.') ? 'tag-vii' : cat.includes('XIII') ? 'tag-xiii' : cat.includes('XIV') ? 'tag-xiv' : '';
+    tr.innerHTML = `
+        <td><strong>${rc}</strong></td>
+        <td>${rcodeDesc[rc]||'—'}</td>
+        <td><span class="tag ${catClass}">${cat}</span></td>
+        ${exames.map(ex => `<td>${examRcode[ex][rc]||0}</td>`).join('')}
+        <td><strong>${Object.values(examRcode).reduce((s, ex) => s + (ex[rc]||0), 0)}</strong></td>
+    `;
+    tbody.appendChild(tr);
+});
+
+// Total row
+const trTotal = document.createElement('tr');
+trTotal.style.fontWeight = '700';
+trTotal.style.background = '#f1f3f5';
+trTotal.innerHTML = `<td>TOTAL</td><td></td><td></td>${exames.map(ex => `<td>${Object.values(examRcode[ex]).reduce((a,b) => a+b, 0)}</td>`).join('')}<td>60</td>`;
+tbody.appendChild(trTotal);
+</script>
+</body>
+</html>

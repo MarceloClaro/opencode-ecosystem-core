@@ -1,0 +1,57 @@
+\section{Privacidade e Proteção de Dados}
+\label{sec:privacidade}
+
+\subsection{LGPD no Brasil e o Gêmeo Digital}
+
+A Lei Geral de Proteção de Dados Pessoais (LGPD — Lei 13.709/2018) transcende a mera exigência de um \textit{checkbox} de "li e concordo", instituindo um regime de governança que impacta profundamente a arquitetura de um gêmeo digital odontológico. Sendo uma réplica biométrica, o gêmeo digital é classificado, \textit{ipso facto}, como \textbf{dado pessoal sensível} (artigo 5º, inciso II).
+
+Os pilares da LGPD impõem fricções necessárias ao desenvolvimento:
+\begin{itemize}
+    \item \textbf{Consentimento Granular:} O consentimento (Art. 7º) deve ser inequívoco para cada finalidade. O paciente que autoriza a criação de um gêmeo digital para planejamento de cirurgia ortognática não está, tacitamente, autorizando o uso desse mesmo modelo 3D para treinar algoritmos de IA de uma startup terceirizada.
+    \item \textbf{Minimização (Necessidade):} O Artigo 6º exige que apenas os dados estritamente indispensáveis sejam coletados. Um escaneamento facial completo acoplado ao CBCT é necessário para o design do sorriso, mas representa uma coleta excessiva (\textit{over-collection}) se o objetivo for apenas a confecção de um \textit{inlay} isolado.
+    \item \textbf{O Mito da Anonimização em 3D:} O Artigo 12 exclui os dados anonimizados do escopo da lei. Entretanto, a morfologia craniofacial contida em um volume CBCT ou as rugosidades palatinas em um escaneamento intraoral (IOS) são assinaturas biométricas exclusivas. Estudos demonstram ser possível reidentificar indivíduos a partir de malhas dentárias cruzadas com outros bancos de dados. Portanto, a pseudoanonimização não exime a clínica de responsabilidades \cite{springer2026realising}.
+\end{itemize}
+
+\subsection{Criptografia e Consentimento Dinâmico}
+
+Para acomodar o ciclo de vida do gêmeo digital — que, por definição, evolui com o paciente —, o consentimento estático de papel deve ser substituído por \textbf{Smart Contracts} ou consentimentos dinâmicos baseados em \textit{blockchain}. Tais estruturas permitem que o paciente revogue permissões para finalidades secundárias a qualquer momento (Direito ao Esquecimento). A transmissão destes volumes maciços de dados exige criptografia ponta a ponta (AES-256 e TLS 1.3), garantindo que arquiteturas como o OpenCode Ecosystem preservem a confidencialidade durante a orquestração em nuvem federada.
+
+\subsection{Provas de Conhecimento Zero (ZKP) na Proteção Forense de Telemetria}
+
+A criptografia clássica de trânsito e armazenamento (como AES-256 e TLS 1.3) resolve a interceptação de pacotes, mas impõe limitações agudas quando o gêmeo digital precisa ser processado por inteligências artificiais distribuídas em nuvens terceirizadas: para calcular ou simular a resposta tecidual, o servidor deve descriptografar o volume do CBCT ou a nuvem de pontos, expondo os dados biométricos do paciente. Para sanar esse abismo de privacidade, o ecossistema incorpora protocolos de \textbf{Prova de Conhecimento Zero} (ZKP, do inglês \textit{Zero-Knowledge Proofs}), mais especificamente sistemas não interativos de argumentos de conhecimento estruturados (como zk-SNARKs ou zk-STARKs)~\cite{springer2026realising}.
+
+A modelagem matemática do protocolo de prova de conhecimento zero em telemetria biológica opera sob a definição de uma relação polinomial de NP-completude. Seja $x$ o vetor de entradas públicas de conformidade (por exemplo, a declaração de que a pressão oclusal máxima simulada está abaixo de $15\,\text{MPa}$ ou que o prontuário está assinado por um supervisor autorizado) e $w$ a testemunha privada contendo os dados sensíveis brutos (como a nuvem de pontos geométrica do paciente, as coordenadas exatas das coroas ou a telemetria salivar continuada)~\cite{cuadros2023access}.
+
+O provador (*prover*), rodando localmente no terminal seguro da clínica, gera uma prova criptográfica $\pi$ de que conhece uma testemunha $w$ tal que a relação $R(x,w) = 1$ seja satisfeita:
+\begin{equation}
+    \pi = \text{Prove}(pk, x, w)
+\end{equation}
+onde $pk$ representa a chave de prova pública do sistema. A prova resultante $\pi$, com tamanho de poucos bytes e computação em tempo sub-linear, é transmitida para a nuvem de orquestração de multiagentes. O verificador (*verifier*) na nuvem avalia a prova executando o algoritmo de checagem:
+\begin{equation}
+    \text{Verify}(vk, x, \pi) \in \{0, 1\}
+\end{equation}
+onde $vk$ é a chave de verificação pública. Se o resultado for $1$, a nuvem autentica matematicamente que o gêmeo digital é anatomicamente e clinicamente consistente e que o plano cirúrgico é seguro, \destaque{sem em momento algum descriptografar, expor ou aprender qualquer coordenada ou metadado contido na testemunha privada $w$}~\cite{techsoc2025precision}. Esta arquitetura de ZKP, integrada às operações do \textbf{Scanner Axiológico (SPEC-032)} e do \textbf{Scanner Reflexivo (SPEC-031)}, consolida uma trilha de auditoria forense imutável no prontuário eletrônico do paciente, blindando o ecossistema ciberfísico contra vazamentos cibernéticos estruturais e garantindo total soberania do paciente sobre seu DNA digital.
+
+\begin{figure}[h!]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[font=\footnotesize, 
+        node distance=2cm,
+        box/.style={rectangle, draw=accent, thick, fill=bgalt, text=fg, align=center, rounded corners, minimum width=3.5cm, minimum height=1cm, font=\sffamily\small},
+        arrow/.style={->, >=latex, thick, draw=accent!80}
+    ]
+    
+    \node[box] (consent) {1. Assinatura Digital\\(Consentimento Granular)};
+    \node[box, right=of consent] (acq) {2. Aquisição Criptografada\\(CBCT + IOS)};
+    \node[box, below=of acq] (cloud) {3. Nuvem Segura\\(Computação Federada)};
+    \node[box, left=of cloud] (delete) {4. Direito ao Esquecimento\\(Anonimização/Deleção)};
+    
+    \draw[arrow] (consent) -- (acq);
+    \draw[arrow] (acq) -- (cloud);
+    \draw[arrow] (cloud) -- node[below, font=\scriptsize, text=fgalt] {Fim do Tratamento} (delete);
+    
+    \end{tikzpicture}
+\end{adjustbox}
+    \caption{Ciclo de vida do Gêmeo Digital sob o escopo da LGPD, ilustrando a governança do dado.}
+    \label{fig:lgpd-workflow}
+\end{figure}
