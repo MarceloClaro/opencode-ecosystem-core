@@ -1115,6 +1115,50 @@
         "12 testes garantem cobertura de todas as ferramentas sem dependencia de LLM real"
       ],
       "timestamp": 1783584000.0
+    },
+    {
+      "round_id": "R95",
+      "objective": "Continuous Discovery Loop — watcher que gera, enriquece e reavalia teses ciclicamente",
+      "changes": [
+        "Criado synthetic_university/continuous_discovery.py: ContinuousDiscoveryLoop",
+        "run_cycle(): gera 3-5 teses, enriquece cada uma, reavalia novidade, calcula metricas agregadas",
+        "get_summary(): metricas acumuladas (total_cycles, avg_novelty, avg_enrichment, top_theses)",
+        "export_report() e export_all(): relatorios JSON por ciclo e consolidado",
+        "Funciona sem LLM real nem rede (fallback interno com 15 titulos e conceitos)",
+        "11 testes TDD validando ciclo unico, acumulacao historica, exportacao e robustez",
+        "SPEC-935-R95 criada com 6 criterios de aceitacao"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Loop continuo de descoberta funciona com fallback interno, sem dependencia de LLM real",
+        "Acumulacao historica permite rastrear evolucao das descobertas ao longo dos ciclos",
+        "Exportacao JSON em diretorio dedicado facilita integracao com dashboards externos",
+        "11 testes robustos garantem que o loop funciona em qualquer ambiente"
+      ],
+      "timestamp": 1783585000.0
+    },
+    {
+      "round_id": "R96",
+      "objective": "Academic API Gateway — FastAPI REST expondo todos os modulos SU como endpoints HTTP",
+      "changes": [
+        "Criado synthetic_university/api_gateway.py: FastAPI app com 10 endpoints",
+        "GET /health: health check com versao",
+        "GET /tools: lista de 8 ferramentas SU disponiveis",
+        "POST /tools/{generate,evaluate,enrich,visual-abstract,peer-review,submission,novelty,dashboard}: wrappers dos handlers MCP",
+        "Import condicional de FastAPI (funciona sem a lib instalada)",
+        "Models Pydantic para validacao de entrada em cada endpoint",
+        "CLI via python -m synthetic_university.api_gateway (uvicorn)",
+        "12 testes TDD com TestClient + handlers mockados (sem LLM real)"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "FastAPI com import condicional permite que o modulo carregue sem erros mesmo sem a dependencia",
+        "Reuso dos handlers do MCP server evita duplicacao de logica entre protocolos",
+        "TestClient do Starlette + mock de _import_handlers permite testar todos os endpoints sem chamadas reais",
+        "Pydantic models garantem validacao de entrada consistente em todos os endpoints",
+        "12 testes com 0.74s mostram que testes mockados sao rapidos e completos"
+      ],
+      "timestamp": 1783586000.0
     }
   ]
 }
