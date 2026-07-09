@@ -97,7 +97,9 @@ MCP_TOOLS = get_mcp_tools_list()
 
 # ── Sidebar ───────────────────────────────────────────────────────
 with st.sidebar:
-    st.image(str(ROOT / "assets" / "bmc_qr.png"), width=160) if (ROOT / "assets" / "bmc_qr.png").exists() else None
+    bmc_path = ROOT / "assets" / "bmc_qr.png"
+    if bmc_path.exists():
+        st.image(str(bmc_path), width=160)
     st.markdown("""
     ## OpenCode Ecosystem Core v3.0
     **Framework de Consulta e Producao**
@@ -202,7 +204,7 @@ with tabs[0]:
     st.subheader("🚀 Acoes Rapidas")
     qc1, qc2, qc3, qc4 = st.columns(4)
     if qc1.button("🔬 Pipeline Completo", use_container_width=True):
-        st.switch_page("webapp/app.py")  # Vai para tab Pipeline
+        st.info("👉 Va para a aba 'Pipeline' acima para executar o pipeline completo.")
     if qc2.button("📚 Deep Research", use_container_width=True):
         st.info("Vá para a aba 'Deep Research' para executar pesquisas profundas.")
     if qc3.button("📝 Revisao por Pares", use_container_width=True):
@@ -280,10 +282,13 @@ with tabs[1]:
         # Timeline
         st.subheader("⏱️ Timeline")
         timeline = result.get("timeline", {})
-        tl_cols = st.columns(len(timeline))
-        for i, (k, v) in enumerate(timeline.items()):
-            with tl_cols[i]:
-                st.metric(label=k, value=f"{v}s")
+        if timeline:
+            tl_cols = st.columns(len(timeline))
+            for i, (k, v) in enumerate(timeline.items()):
+                with tl_cols[i]:
+                    st.metric(label=k, value=f"{v}s")
+        else:
+            st.caption("Timeline nao disponivel.")
 
         # Resultados por estagio
         with st.expander("🔬 R101 - EvoSci (Descoberta)", expanded=True):
