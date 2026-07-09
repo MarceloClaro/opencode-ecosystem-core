@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opencode-evosci"
+version = "1.0.0"
+description = "Bio-inspired multi-agent evolutionary science framework (R101)"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+keywords = ["agentic-science", "evolutionary", "multi-agent", "research"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Repository = "https://github.com/opencode-ecosystem-core"
+Documentation = "https://github.com/opencode-ecosystem-core/docs"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["opencode_evosci*"]

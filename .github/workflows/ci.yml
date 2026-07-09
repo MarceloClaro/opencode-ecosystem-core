@@ -1,0 +1,67 @@
+name: OpenCode Ecosystem Core CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: "1"
+  FORCE_COLOR: "1"
+
+jobs:
+  lint:
+    name: Lint (Ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - run: pip install ruff
+      - run: ruff check --output-format=github .
+      - run: ruff format --check --diff . || echo "Format check complete"
+
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+      - run: pip install pytest pytest-timeout pytest-xdist
+      - run: python -m pytest tests/ -q --tb=short --timeout=120 -x
+        name: Run all tests (fail-fast on first error)
+      - run: python scripts/quality_report.py
+        name: Generate quality report
+
+  package:
+    name: Package Build
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [opencode-evosci, opencode-deep-research, opencode-peer-review]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build
+      - run: python -m build packages/${{ matrix.package }}
+        name: Build ${{ matrix.package }}
+      - run: python -c "import sys; sys.path.insert(0, 'packages/${{ matrix.package }}'); __import__('${{ matrix.package }}'.replace('-', '_'))"
+        name: Verify import

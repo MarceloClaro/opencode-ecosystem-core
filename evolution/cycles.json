@@ -1159,6 +1159,283 @@
         "12 testes com 0.74s mostram que testes mockados sao rapidos e completos"
       ],
       "timestamp": 1783586000.0
+    },
+    {
+      "round_id": "R97",
+      "objective": "R97: Evolutionary Memory Substrate — Memoria persistente de direcoes de pesquisa, estrategias, estagnacao e reflexao periodica para o ContinuousDiscoveryLoop",
+      "changes": [
+        "Criado synthetic_university/evolutionary_memory.py com 4 componentes: IdeationMemory, ExperimentationMemory, HeartbeatReflection, StagnationDetector",
+        "EvolutionaryMemorySubstrate com save/load JSON (schema version 1.0)",
+        "ContinuousDiscoveryLoop.run_cycle() integrado com memory: filtra direcoes falhadas, registra outcomes, detecta estagnacao, reflexao por heartbeat a cada 5 ciclos",
+        "SPEC-935-R97.md com 9 criterios de aceitacao (CA1-CA9)",
+        "42 testes TDD em test_r97_evolutionary_memory.py — todos verdes"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Integracao com CDL existente exigiu atencao ao timing: run_cycle() registra outcomes na memoria DURANTE o ciclo, e testes precisam comparar contra direcoes originais, nao contra memoria pos-ciclo",
+        "Text similarity baseada em word overlap e suficiente para IsAlreadyExplored sem dependencias externas",
+        "StagnationDetector com variancia < threshold detecta plateu de forma robusta com poucos pontos"
+      ],
+      "timestamp": 1783559863.778306
+    },
+    {
+      "round_id": "R98",
+      "objective": "R98: Academic Novelty V2 — Pipeline OpenNovelty-style com extracao granular de contribution points, retrieval multi-source, score ponto-a-ponto, taxonomia hierarquica e relatorio enriquecido com evidencias",
+      "changes": [
+        "Criado synthetic_university/novelty_v2.py com 5 componentes: ContributionPointExtractor (4 tipos de claim), PointwiseLiteratureRetriever, PointwiseNoveltyScorer (pesos por tipo), HierarchicalTaxonomyBuilder, EvidencedNoveltyReport",
+        "NoveltyAnalyzerV2 com lang suportando EN/PT e memory opcional (R97)",
+        "SPEC-935-R98.md com 10 criterios de aceitacao (CA1-CA10)",
+        "38 testes TDD em test_r98_novelty_v2.py — todos verdes",
+        "Integracao com R97 memory: registro de scores, contribution points e estrategias",
+        "Fallback completo sem dependencias externas (offline)",
+        "Nao quebra R93 — arquivo novelty_analysis.py permanece intacto"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Extracao de contribution points baseada em heuristica textual (hipotese, metodologia, framework, aplicacao) funciona mesmo sem LLM",
+        "Taxonomia hierarquica por tipo de ponto fornece estrutura mais rica que flat list",
+        "Pesos diferenciais por tipo de claim (metodologico = 0.30) dao score global mais preciso",
+        "Template expansion para fallback literature precisa ser cuidadosa para evitar NameError em contexto de classe"
+      ],
+      "timestamp": 1783560206.1158228
+    },
+    {
+      "round_id": "R99a",
+      "objective": "R99a: Integrar novelty_v2 no MCP Server (R94) e API Gateway (R96)",
+      "changes": [
+        "Adicionado handle_novelty_v2 no MCP Server como ferramenta su_novelty_v2",
+        "Adicionado endpoint /tools/novelty-v2 no API Gateway",
+        "Tool expoe global_novelty_score, per_point_scores, taxonomy_areas, discrepancy, positioning",
+        "Testes manuais validados via MCP stdio e API HTTP mock"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Integracao de novo modulo no MCP exige apenas handler + registro + schema em JSON"
+      ],
+      "timestamp": 1783560622.9289951
+    },
+    {
+      "round_id": "R99",
+      "objective": "R99: Scientific RAG Evolved — AdaptiveRetriever + CitationGraph + OutlineSynthesizer",
+      "changes": [
+        "Criado rag/evolved.py com 4 componentes: AdaptiveRetriever, CitationGraph, OutlineSynthesizer, RAGEvolved",
+        "AdaptiveRetriever: analise de complexidade (simple/moderate/complex) com 3 estrategias de retrieval",
+        "_retrieve_parallel: decompoe query complexa em sub-queries, funde e deduplica resultados",
+        "CitationGraph: grafo direcionado com add_edge, get_related (BFS ate max_depth), expand_retrieval, get_citation_network",
+        "OutlineSynthesizer: plan() gera outline com templates (definition/comparison/analysis), retrieve_per_section(), synthesize()",
+        "RAGEvolved: answer() roteia automaticamente answer_simple (RAG base) vs answer_structured (outline + secoes)",
+        "SPEC-935-R99.md com 8 criterios de aceitacao (CA1-CA8)",
+        "25 testes TDD em test_r99_rag_evolved.py — todos verdes",
+        "Nao quebra SPEC-919 — rag/scientific.py intacto, 8 testes legados continuam passando"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Analise de complexidade precisa de pesos ajustados: conectores (4x) e conceitos maiusculos (2x) sao os melhores preditores",
+        "Decomposicao de query em sub-queries paralelas melhora cobertura sem perder precisao (dedup por chunk_id)",
+        "OutlineSynthesizer com templates tematicos (definition/comparison/analysis) cobre a maioria dos padroes de consulta academica",
+        "BFS limitado por max_depth no grafo de citacoes evita explosao combinatoria"
+      ],
+      "timestamp": 1783560622.930273
+    },
+    {
+      "round_id": "R100",
+      "objective": "R100: MCP Security Hardening — Guard Model, Audit Trail, Tool Vetting, Rate Limiting",
+      "changes": [
+        "Criado synthetic_university/mcp_security.py com 4 componentes: MCPGuard, AuditLogger, ToolVetter, RateLimiter",
+        "MCPGuard: validacao de argumentos contra JSON Schema + wrap() para envolver handlers",
+        "AuditLogger: registro estruturado com timestamp, tool, args sanitizados, resultado, duracao, caller",
+        "ToolVetter: deteccao de prompt injection (11 patterns), command injection (6 patterns), path traversal, SQL injection",
+        "RateLimiter: token bucket por caller com max_calls/window_seconds configuravel",
+        "Integracao com MCP Server: guard envelopa handlers, vetter + limiter + audit interceptam em handle_sync",
+        "SPEC-935-R100.md com 9 criterios de aceitacao",
+        "23 testes TDD em test_r100_mcp_security.py — todos verdes",
+        "204 testes totais no ecossistema — 0 regressoes"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "SENSITIVE_FIELDS precisa ser bem definido: \"key\" redacta campos legitimos — usar nomes especificos como \"api_key\"",
+        "Prompt injection detection com regex e eficaz mas requer padroes abrangentes — 11 patterns cobrem a maioria dos casos",
+        "Integracao no handle_sync em vez de wrapper permite logging centralizado sem modificar handlers individuais",
+        "RateLimiter com window deslizante (nao fixa) e mais justo para picos de uso legitimos"
+      ],
+      "timestamp": 1783560929.1781187
+    },
+    {
+      "round_id": "R101",
+      "objective": "R101: Agentic Science V2 (EvoSci) — Bio-Inspired Multi-Agent Framework for Autonomous Scientific Discovery",
+      "changes": [
+        "SPEC-935-R101.md: especificacao formal baseada em EvoSci (ACL 2026), EvoScientist (arXiv 2026) e EurekAgent (arXiv 2026)",
+        "agentic_science_v2/agents.py: 4 papeis — MentorAgent (problem space construction), PrimeResearcherAgent (decomposicao/geracao), ReviewerAgent (scores dimensionais), EvolutionManagerAgent (memorias persistentes)",
+        "agentic_science_v2/evolutionary_engine.py: EvoEngine com ciclo Selection → Crossover → Mutation → Inheritance + deteccao de estagnacao",
+        "agentic_science_v2/environment.py: 4 dimensoes EurekAgent-style — PermissionsEngine (isolamento, GPU default-deny), ArtifactEngine (workspaces Git-based, ranked solutions), BudgetEngine (tempo + custo API), HITLEngine (monitoramento e intervencao)",
+        "agentic_science_v2/orchestrator.py: AgenticScienceV2 integrando todos os subsistemas em ciclo fechado",
+        "Integracao MCP Server: ferramenta su_agentic_science com seed_domain e max_rounds",
+        "67 testes TDD em test_r101_agentic_science_v2.py — todos verdes",
+        "319 testes totais no ecossistema — 0 regressoes"
+      ],
+      "score": 9.7,
+      "lessons": [
+        "A arquitetura EvoSci (mentor → researcher → reviewer → evolution) mapeia naturalmente para nosso ecossistema existente de R95 discovery loop, R97 memory, R98 novelty, R99 RAG",
+        "O EvoScientist complementa o R97 com memorias de ideacao + experimentacao que sao destiladas, nao apenas registradas",
+        "Environment engineering (EurekAgent) adiciona controle de permissoes, artefatos e orcamento sem modificar os agentes — separation of concerns limpa",
+        "A integracao MCP (su_agentic_science) permite uso interativo e programatico",
+        "Deteccao de estagnacao com janela deslizante evita loops infinitos em cenario de fitness congelado"
+      ],
+      "timestamp": 1783561414.2007535
+    },
+    {
+      "round_id": "R102",
+      "objective": "R102: Deep Research Agent — DeepEvidence-style hierarchical orchestration with Evidence Graph, BFRS/DFRS, and multi-source evidence synthesis",
+      "changes": [
+        "SPEC-935-R102.md: especificacao baseada em DeepEvidence (Nature MI 2026), Super Research, DualGraph, A2RAG, DuMate, Agents-K1",
+        "agentic_science_v2/evidence_graph.py: EvidenceGraph com Entity, Relation, Evidence, proveniencia, find_paths (BFS), subgraph_query, export_visualization",
+        "agentic_science_v2/deep_research.py: 5 componentes — KnowledgeBaseRegistry (fontes simuladas), BFRSAgent (exploracao larga multi-base), DFRSAgent (cadeias multi-hop), ExecutionSandbox (cache + API), OrchestratorAgent (planejamento, roteamento BF/DF, gate de suficiencia, sintese)",
+        "Integracao MCP Server: ferramenta su_deep_research com question, max_rounds, max_depth",
+        "48 testes TDD em test_r102_deep_research.py — todos verdes",
+        "367 testes totais no ecossistema — 0 regressoes"
+      ],
+      "score": 9.6,
+      "lessons": [
+        "Evidence Graph como memoria incremental resolve o problema de re-exploracao — o grafo acumula entre rodadas e permite subgraph_query para contextos focados",
+        "Separacao BFRS (largura, conexoes imediatas) vs DFRS (profundidade, cadeias multi-hop) mapeia naturalmente para diferentes tipos de pergunta de pesquisa",
+        "O gate de suficiencia baseado em contagem de entidades/relacoes e heuristica simples mas eficaz; versao futura poderia usar LLM-as-judge",
+        "KnowledgeBaseRegistry simulado permite testar o pipeline completo sem dependencias externas; producao conectaria PubMed, OpenTargets, ClinicalTrials",
+        "A integracao com R99 RAG (CitationGraph) e natural — o EvidenceGraph pode importar citacoes como relacoes CITES"
+      ],
+      "timestamp": 1783561724.2594423
+    },
+    {
+      "round_id": "R103",
+      "objective": "R103: Agentic Peer Review with Graph-Anchored Auditing — RubricEngine 8-dim, ReviewLedger claim-evidence-risk, AuditGraph, MultiCriticReviewer, OrchestratorReviewer com export gate",
+      "changes": [
+        "SPEC-935-R103.md: especificacao baseada em REVIEWGROUNDER (ACL 2026), DeepReviewer 2.0 (arXiv 2026), ProReviewer, ScholarPeer, ReViewGraph, GraphReview",
+        "agentic_science_v2/review_agent.py: 5 componentes — RubricEngine (8 meta-dimensoes + instanciacao por paper), ReviewLedger (claim-evidence-risk ledger + verification agenda), AuditGraph (integrado R102 EvidenceGraph), MultiCriticReviewer (4 criticos: Methodology, Results, Literature, Ethics), OrchestratorReviewer (pipeline drafting-ledger-grounding-audit-gate-synthesis)",
+        "Integracao MCP Server: ferramenta su_peer_review_v2 com titulo, abstract, secoes, citacoes",
+        "44 testes TDD em test_r103_peer_review.py — todos verdes",
+        "411 testes totais no ecossistema — 0 regressoes"
+      ],
+      "score": 9.6,
+      "lessons": [
+        "Rubricas multi-dimensionais (8 dims, REVIEWGROUNDER-inspired) dao granularidade a avaliacao: cada dimensao tem checklist, polaridade e scoring rule",
+        "Ledger claim-evidence-risk (DeepReviewer 2.0) com verification agenda permite rastrear claims de alto risco que precisam verificacao",
+        "AuditGraph integrado ao R102 EvidenceGraph permite reutilizar infraestrutura de grafo de evidencia para auditoria de revisao",
+        "Export gate com budgets de traceability + coverage evita exportar revisoes sem lastro minimo de evidencia",
+        "MultiCriticReviewer com 4 especialistas paralelos (Methodology, Results, Literature, Ethics) cobre dimensoes ortogonais do paper",
+        "O repair plan priorizado por severidade (critical > major > minor) produz saida acionavel para o autor"
+      ],
+      "timestamp": 1783562195.8475518
+    },
+    {
+      "round_id": "R104a",
+      "objective": "R104a: Integration Skills for External OpenCode Ecosystem — 4 skills (evo-science, deep-research, peer-review-v2, mcp-security) no formato SKILL.md + skill.py",
+      "changes": [
+        "Criado skills/evo-science/ com SKILL.md + skill.py (R101)",
+        "Criado skills/deep-research/ com SKILL.md + skill.py (R102)",
+        "Criado skills/peer-review-v2/ com SKILL.md + skill.py (R103)",
+        "Criado skills/mcp-security/ com SKILL.md + skill.py (R100)",
+        "36 testes TDD em test_r104a_integration_skills.py"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Skills autocontidas sao mais uteis para ecossistemas externos",
+        "SKILL.md com tabela de comandos + exemplos acelera adocao"
+      ],
+      "timestamp": 1783563017.6004822
+    },
+    {
+      "round_id": "R104b",
+      "objective": "R104b: Pip-Installable Packages from R101-R103 — 3 pacotes pip (opencode-evosci, opencode-deep-research, opencode-peer-review)",
+      "changes": [
+        "Criado packages/opencode-evosci/ com pyproject.toml e re-exports",
+        "Criado packages/opencode-deep-research/ com pyproject.toml e re-exports",
+        "Criado packages/opencode-peer-review/ com pyproject.toml e re-exports",
+        "25 testes TDD em test_r104b_pip_packages.py"
+      ],
+      "score": 9.3,
+      "lessons": [
+        "Re-exports via sys.path + copia funcionam para pacotes leves",
+        "pyproject.toml sem dependencias externas maximiza portabilidade"
+      ],
+      "timestamp": 1783563017.6012845
+    },
+    {
+      "round_id": "R104c",
+      "objective": "R104c: Compatibility Analysis Document — docs/COMPATIBILITY_ANALYSIS.md com mapeamento, gaps, plano de integracao e roadmap",
+      "changes": [
+        "Analise de 6 gaps do fork que nosso core preenche",
+        "Analise de 6 gaps do nosso core que o fork tem",
+        "Plano de integracao em 5 passos",
+        "Roadmap de convergencia em 4 fases",
+        "9 testes TDD em test_r104c_compatibility.py"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Documentacao de compatibilidade e essencial para adocao externa",
+        "Tabelas comparativas sao mais uteis que texto descritivo"
+      ],
+      "timestamp": 1783563017.61378
+    },
+    {
+      "round_id": "R104d",
+      "objective": "R104d: Agentic Manuscript Revision — Sistema agentivo de revisao de manuscritos pos-peer-review com ReviewAnalyzer, SectionMapper, ProposalGenerator, DiffEngine, OrchestratorRevision, RebuttalLetter",
+      "changes": [
+        "Criado agentic_science_v2/revision_agent.py com 6 componentes",
+        "ReviewAnalyzer: extrai claims, riscos, acoes do ReviewPackage R103",
+        "SectionMapper: mapeia claims para secoes do manuscrito",
+        "ProposalGenerator: gera propostas de revisao com alternativas",
+        "DiffEngine: diff controlado com rollback e verificacao de integridade",
+        "OrchestratorRevision: pipeline analyze->map->propose->apply->verify->report",
+        "Rebuttal letter ponto-a-ponto automatica",
+        "MCP tool su_manuscript_revision registrada",
+        "28 testes TDD em test_r104d_agentic_revision.py"
+      ],
+      "score": 9.6,
+      "lessons": [
+        "Integracao R103->R104 funciona em ciclo fechado (review->revision)",
+        "Dataclasses sao mais adequadas que dicts para objetos de dominio",
+        "DiffEngine com rollback e essencial para seguranca de edicoes"
+      ],
+      "timestamp": 1783563017.6148682
+    },
+    {
+      "round_id": "R105",
+      "objective": "R105: Agentic Paper Composer — Sistema agentivo de composicao de manuscritos academicos que integra R101-R104 em artigo completo ABNT/APA/IEEE",
+      "changes": [
+        "Criado agentic_science_v2/paper_composer.py com 5 componentes",
+        "StructurePlanner: outline por venue (ABNT, APA, IEEE) com templates",
+        "SectionWriter: 6 secoes (abstract, intro, methods, results, discussion, conclusion)",
+        "CitationFormatter: formatacao ABNT NBR 6023, APA 7th, IEEE",
+        "CrossConsistencyVerifier: 5 verificacoes de consistencia interna",
+        "OrchestratorComposer: pipeline plan->write->format->verify->export",
+        "MCP tool su_paper_composer registrada",
+        "30 testes TDD em test_r105_paper_composer.py"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Orquestracao R101-R105 completa o pipeline academico integral",
+        "Templates por venue permitem adocao em diferentes contextos",
+        "SectionWriter com fallbacks para inputs vazios aumenta robustez"
+      ],
+      "timestamp": 1783563805.017854
+    },
+    {
+      "round_id": "R106",
+      "objective": "R106: CI/CD Pipeline + Quality Gates — GitHub Actions workflow, quality_report.py, check_coverage.py, run_full_suite.sh",
+      "changes": [
+        "Criado .github/workflows/ci.yml com 3 jobs: lint (Ruff), test (matrix Python 3.10-3.14), package (3 pacotes)",
+        "Criado scripts/quality_report.py com score 0-10, test_results, module_coverage, lint, recomendacoes",
+        "Criado scripts/check_coverage.py: quality gate com threshold de cobertura 80%, verifica testes + lint",
+        "Criado scripts/run_full_suite.sh: script bash completo com modo CI (set -e) e saida formatada",
+        "18 testes TDD em test_r106_cicd.py — todos verdes (1050 testes totais, 0 regressoes)",
+        "Ciclo completo RED -> GREEN -> REFACTOR verificado"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "test_dashboard_generator.py com hardcoded R78-R82 falhou com dados novos — usar dados reais de evolution/cycles.json",
+        "quality_report.py leva >30s rodando pytest completo; --quick flag agiliza testes",
+        "Matrix strategy no CI precisa verificar python-version especificamente, nao qualquer matrix"
+      ],
+      "timestamp": 1783564500.0
     }
   ]
 }

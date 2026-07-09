@@ -24,7 +24,8 @@ Endpoints:
     POST /tools/visual-abstract → gera abstract visual
     POST /tools/peer-review     → executa revisão por pares
     POST /tools/submission      → gera pacote de submissão
-    POST /tools/novelty         → analisa novidade
+    POST /tools/novelty         → analisa novidade (classica)
+    POST /tools/novelty-v2      → [NOVO] analise V2 com contribution points
     POST /tools/dashboard       → gera dashboard
 
 SPEC-935-R96.
@@ -67,6 +68,7 @@ def _import_handlers():
         handle_peer_review,
         handle_submission_package,
         handle_novelty_analysis,
+        handle_novelty_v2,
         handle_dashboard,
     )
     return {
@@ -77,6 +79,7 @@ def _import_handlers():
         "peer-review": handle_peer_review,
         "submission": handle_submission_package,
         "novelty": handle_novelty_analysis,
+        "novelty-v2": handle_novelty_v2,
         "dashboard": handle_dashboard,
     }
 
@@ -89,6 +92,7 @@ TOOL_DESCRIPTIONS = {
     "peer-review": "Executa revisao cega por pares multi-LLM",
     "submission": "Gera pacote de submissao para periodico Qualis A1",
     "novelty": "Analisa a novidade academica de uma tese",
+    "novelty-v2": "[V2] Analise OpenNovelty-style com contribution points, taxonomia e discrepancia",
     "dashboard": "Gera dashboard HTML interativo",
 }
 
@@ -153,6 +157,15 @@ if HAS_FASTAPI:
         thesis_id: str
         title: str
         hypothesis: str = ""
+        concepts: list = []
+        lang: str = "en"
+
+    class NoveltyV2Request(BaseModel):
+        thesis_id: str
+        title: str
+        hypothesis: str = ""
+        abstract: str = ""
+        methodology: str = ""
         concepts: list = []
         lang: str = "en"
 
@@ -223,6 +236,12 @@ if HAS_FASTAPI:
     async def novelty(req: NoveltyRequest):
         return _call_handler(
             _import_handlers()["novelty"], req.model_dump()
+        )
+
+    @app.post("/tools/novelty-v2")
+    async def novelty_v2(req: NoveltyV2Request):
+        return _call_handler(
+            _import_handlers()["novelty-v2"], req.model_dump()
         )
 
     @app.post("/tools/dashboard")

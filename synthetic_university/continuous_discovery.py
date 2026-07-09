@@ -22,7 +22,12 @@ import json
 import logging
 import os
 import time
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
+
+if TYPE_CHECKING:
+    from synthetic_university.evolutionary_memory import (
+        EvolutionaryMemorySubstrate,
+    )
 
 logger = logging.getLogger(__name__)
 
@@ -80,6 +85,7 @@ class ContinuousDiscoveryLoop:
         interval_hours: Intervalo sugerido entre ciclos (não implementa scheduling).
         lang: Idioma (en/pt).
         cycle_history: Lista de resultados de ciclos executados.
+        memory: EvolutionaryMemorySubstrate opcional (R97).
     """
 
     def __init__(
@@ -87,11 +93,14 @@ class ContinuousDiscoveryLoop:
         output_dir: str = "academic/discovery",
         interval_hours: float = 24,
         lang: str = "en",
+        memory: Optional["EvolutionaryMemorySubstrate"] = None,
     ):
         self.output_dir = output_dir
         self.interval_hours = interval_hours
         self.lang = lang
         self.cycle_history: List[Dict[str, Any]] = []
+        self.memory = memory
+        self._cycle_count = 0
 
     # --------------------------------------------------------
     # Geração interna de teses (fallback)
@@ -154,10 +163,14 @@ class ContinuousDiscoveryLoop:
         """Executa um ciclo completo de descoberta contínua.
 
         Etapas:
-            1. Gera 3-5 teses
-            2. Enriquece cada tese
-            3. Reavalia novidade de cada tese
-            4. Calcula métricas agregadas
+            1. (Se memory) Consulta memória para evitar direções já falhadas
+            2. Gera 3-5 teses (filtrando exploradas se memory ativo)
+            3. Enriquece cada tese
+            4. Reavalia novidade de cada tese
+            5. (Se memory) Registra outcomes na memória
+            6. (Se memory) Verifica estagnação
+            7. (Se memory) Reflexão por heartbeat
+            8. Calcula métricas agregadas
 
         Returns:
             Dict com metadados do ciclo e lista de teses.
@@ -165,32 +178,111 @@ class ContinuousDiscoveryLoop:
         import random
         rng = random.Random(time.time())
         start = time.time()
+        self._cycle_count += 1
 
-        # Etapa 1: gerar teses
+        # Etapa 1: gerar teses (com filtro de memória se disponível)
         n_theses = rng.randint(3, 5)
         theses = self._generate_theses(n_theses)
+
+        # Se memory ativo, filtra teses similares a direções falhadas
+        memory_filtered = False
+        if self.memory is not None:
+            filtered = []
+            for t in theses:
+                title = t.get("title", "")
+                if not self.memory.ideation.is_already_explored(title, threshold=0.6):
+                    filtered.append(t)
+                else:
+                    memory_filtered = True
+                    logger.debug(
+                        "Memory filtered thesis similar to failed direction: '%s'",
+                        title[:60],
+                    )
+            # Se filtrarmos todas, recria com indices diferentes
+            if not filtered:
+                backup = self._generate_theses(n_theses)
+                for t in backup:
+                    title = t.get("title", "")
+                    if not self.memory.ideation.is_already_explored(title, threshold=0.6):
+                        filtered.append(t)
+                        break
+                if not filtered:
+                    filtered = backup[:1]  # fallback extremo
+            theses = filtered
 
         # Etapas 2 e 3: enriquecer e avaliar novidade
         for t in theses:
             self._enrich_thesis(t)
             self._analyze_novelty(t)
 
-        # Etapa 4: métricas
+        # Etapa 5: registrar outcomes na memória (se disponível)
+        if self.memory is not None:
+            for t in theses:
+                score = t.get("novelty_score", 50)
+                outcome = "success" if score >= 60 else "failure"
+                concepts = t.get("concepts", [])
+                self.memory.ideation.record_idea(
+                    direction=t.get("title", "Unknown"),
+                    outcome=outcome,
+                    score=score,
+                    metadata={"concepts": concepts, "cycle": self._cycle_count},
+                )
+                # Registra estratégia de geração como experimentation
+                self.memory.experimentation.record_strategy(
+                    strategy_id=f"fallback_generation_{self._cycle_count}",
+                    context=["fallback", "random"] + (concepts[:2] if concepts else []),
+                    effectiveness=score,
+                    metadata={"n_theses": len(theses), "method": "fallback"},
+                )
+
+        # Etapa 6: verificar estagnação
         novelty_scores = [t.get("novelty_score", 0) for t in theses]
+        avg_novelty = round(
+            sum(novelty_scores) / max(1, len(novelty_scores)), 1
+        )
+        stagnation_alert = None
+        if self.memory is not None:
+            self.memory.stagnation.record_novelty_score(
+                self._cycle_count, avg_novelty
+            )
+            if self.memory.stagnation.is_stagnated():
+                stagnation_alert = self.memory.stagnation.get_stagnation_report()
+                logger.info(
+                    "Stagnation detected at cycle %d: %s",
+                    self._cycle_count,
+                    stagnation_alert["recommendation"][:80],
+                )
+
+        # Etapa 7: reflexão por heartbeat
+        reflection_result = None
+        if self.memory is not None:
+            if self.memory.heartbeat.should_reflect(
+                self._cycle_count, interval=5
+            ):
+                reflection_result = self.memory.heartbeat.reflect(self.memory)
+                logger.info(
+                    "Heartbeat reflection at cycle %d: %d insights",
+                    self._cycle_count,
+                    reflection_result["insights_count"],
+                )
+
+        # Etapa 8: métricas
         enrichment_counts = [t.get("enrichment_count", 0) for t in theses]
 
         cycle_result = {
             "timestamp": start,
             "duration_seconds": round(time.time() - start, 3),
             "theses_count": len(theses),
-            "avg_novelty": round(
-                sum(novelty_scores) / max(1, len(novelty_scores)), 1
-            ),
+            "memory_filtered_count": n_theses - len(theses) if memory_filtered else 0,
+            "avg_novelty": avg_novelty,
             "avg_enrichment": round(
                 sum(enrichment_counts) / max(1, len(enrichment_counts)), 1
             ),
             "theses": theses,
             "status": "ok",
+            "stagnation_alert": stagnation_alert,
+            "reflection": reflection_result,
+            "cycle_number": self._cycle_count,
         }
 
         self.cycle_history.append(cycle_result)
