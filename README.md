@@ -7,14 +7,14 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.0.0_Agentic_Pipeline-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-1050_passed-success.svg)](tests/)
-[![Universidade Sintética](https://img.shields.io/badge/Ciclos-64_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Testes](https://img.shields.io/badge/Testes-1062_passed-success.svg)](tests/)
+[![Universidade Sintética](https://img.shields.io/badge/Ciclos-65_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-14_ferramentas-8A2BE2.svg)](synthetic_university/mcp_server.py)
 [![API](https://img.shields.io/badge/API-FastAPI_REST-00BFFF.svg)](synthetic_university/api_gateway.py)
 [![Agentes](https://img.shields.io/badge/Agentes-160+-orange.svg)](agents/catalog/)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 160+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD e a Universidade Sintética Transversal com 64 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 160+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD e a Universidade Sintética Transversal com 65 ciclos de evolução contínua.*
 
 </div>
 
@@ -664,7 +664,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **64 ciclos registrados** (R47 a R106), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **65 ciclos registrados** (R47 a R107), cada um com score, lições e timestamp.
 
 ---
 
@@ -982,7 +982,7 @@ print(result["theses"][0])             # Melhor tese do ciclo
 print(result["novelty_scores"])        # Scores de novidade
 ```
 
-**Ciclos de evolução: 64** (R47–R106) | **1050 testes** | Score médio: 9.4/10
+**Ciclos de evolução: 65** (R47–R107) | **1062 testes** | Score médio: 9.4/10
 
 ---
 
@@ -1015,7 +1015,7 @@ opencode-ecosystem-core/
 │   ├── revision_agent.py    # ReviewAnalyzer, SectionMapper, ProposalGenerator, DiffEngine
 │   ├── paper_composer.py    # StructurePlanner, SectionWriter, CitationFormatter, CrossVerifier
 │   └── orchestrator.py      # AgenticScienceV2 orchestrator
-├── synthetic_university/    # SPEC-935 · 11 Faculdades · 64 ciclos
+├── synthetic_university/    # SPEC-935 · 11 Faculdades · 65 ciclos
 │   ├── mcp_server.py        # MCP Server · 14 ferramentas stdio
 │   ├── api_gateway.py       # FastAPI REST · 12+ endpoints
 │   ├── mcp_security.py      # MCPGuard, AuditLogger, ToolVetter, RateLimiter (R100)
@@ -1040,9 +1040,9 @@ opencode-ecosystem-core/
 │   ├── opencode-evosci/
 │   ├── opencode-deep-research/
 │   └── opencode-peer-review/
-├── specs/                   # Especificacoes SDD (R97-R106)
-├── evolution/               # Cycles registry (64 ciclos)
-├── tests/                   # 1050 testes automatizados
+├── specs/                   # Especificacoes SDD (R97-R107)
+├── evolution/               # Cycles registry (65 ciclos)
+├── tests/                   # 1062 testes automatizados
 ├── mci/                     # Metacognitive Interconnect
 ├── marceloclaro/            # Orquestrador
 ├── agents/catalog/          # 160+ agent cards
@@ -1061,7 +1061,7 @@ opencode-ecosystem-core/
 ##  Executar os Testes
 
 ```bash
-# Suite completa (1050 testes)
+# Suite completa (1062 testes)
 python3 -m pytest tests/ -v
 
 # Pipeline academico agentivo (R101-R105)
@@ -1101,14 +1101,14 @@ O ecossistema possui compatibilidade documentada com o fork `timpara/opencode-ac
 | Evolutionary Memory + Evidence Graph | Não possui |
 | MCP Security (Guard+Audit+Vetter+Limiter) | MCP basico sem seguranca |
 | CI/CD Quality Gates (R106) | Sem CI/CD |
-| 64 ciclos de evolucao | Sem evolution registry |
+| 65 ciclos de evolucao | Sem evolution registry |
 | Peer Review agentivo 8-dimensoes | Revisao textual basica |
 | Paper Composer ABNT/APA/IEEE | Templates LaTeX fixos |
 
 ---
 
 <div align="center">
-  <i>64 ciclos evolutivos · 1050 testes · 0 regressoes · Score medio 9.4/10</i><br>
+  <i>65 ciclos evolutivos · 1062 testes · 0 regressoes · Score medio 9.4/10</i><br>
   <b>v3.0.0 — Pipeline Academico Agentivo | MCP Security | CI/CD Quality Gates</b><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>

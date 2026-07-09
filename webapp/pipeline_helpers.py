@@ -2,40 +2,188 @@
 """
 Helpers do Pipeline Academico Agentivo (R101-R105) para a interface web.
 
-Oferece funcoes puras de ponte entre a UI Streamlit e os modulos
-agentic_science_v2, evolution, rag, etc.
+Este módulo adapta os contratos internos reais de ``agentic_science_v2``
+para um payload estável e amigável à UI Streamlit.
 """
 
 from __future__ import annotations
 
-import json
-import os
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
-# Garante a raiz do repositorio no path
+# Garante a raiz do repositório no path
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+
+
+def _iter_payload_items(payload: Any) -> List[Dict[str, Any]]:
+    if isinstance(payload, dict):
+        return [item for item in payload.values() if isinstance(item, dict)]
+    if isinstance(payload, list):
+        return [item for item in payload if isinstance(item, dict)]
+    return []
+
+
+def _extract_best_idea(history: List[Dict[str, Any]], seed_domain: str) -> Dict[str, Any]:
+    ideas: List[Dict[str, Any]] = []
+    for cycle in history:
+        ideas.extend(cycle.get("ideas", []))
+
+    if not ideas:
+        return {
+            "title": seed_domain,
+            "content": seed_domain,
+            "methodology": "",
+            "score": 0.0,
+        }
+
+    best = max(
+        ideas,
+        key=lambda item: (item.get("scores", {}) or {}).get("overall", 0.0),
+    )
+    return {
+        "id": best.get("id", "N/A"),
+        "title": best.get("title", seed_domain),
+        "content": best.get("hypothesis") or best.get("title") or seed_domain,
+        "methodology": best.get("methodology", ""),
+        "score": round((best.get("scores", {}) or {}).get("overall", 0.0), 2),
+        "rationale": best.get("rationale", ""),
+    }
+
+
+def _build_sufficiency_gate(stats: Dict[str, Any]) -> Dict[str, Any]:
+    entities = int(stats.get("entities", 0) or 0)
+    relations = int(stats.get("relations", 0) or 0)
+    score = entities + relations
+    threshold = 6
+    gaps = []
+
+    if entities < 3:
+        gaps.append(f"Need more entities (have {entities})")
+    if relations < 3:
+        gaps.append(f"Need more relations (have {relations})")
+
+    return {
+        "status": "PASS" if not gaps else "NEEDS_MORE_EVIDENCE",
+        "score": score,
+        "threshold": threshold,
+        "gaps": gaps,
+    }
+
+
+def _coerce_review_sections(sections: Any) -> List[str]:
+    if isinstance(sections, dict):
+        return [str(name) for name in sections.keys()]
+    if isinstance(sections, list):
+        return [str(name) for name in sections]
+    return []
+
+
+def _coerce_review_package(review_package: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    if review_package and review_package.get("reviews"):
+        return review_package
+
+    normalized_reviews = []
+    for index, item in enumerate((review_package or {}).get("repair_plan", []), start=1):
+        priority = (item.get("priority") or item.get("severity") or "medium").lower()
+        risk = "high" if "critical" in priority or "major" in priority or priority == "high" else (
+            "low" if "minor" in priority or priority == "low" else "medium"
+        )
+        normalized_reviews.append({
+            "critic": item.get("reviewer", "Reviewer"),
+            "claims": [{
+                "id": f"claim-{index}",
+                "text": item.get("action") or item.get("claim") or "Review comment",
+                "risk": risk,
+                "section": item.get("area") or item.get("section") or "introduction",
+                "evidence": item.get("evidence", ""),
+            }],
+        })
+
+    if not normalized_reviews:
+        normalized_reviews = [{
+            "critic": "SyntheticReviewer",
+            "claims": [{
+                "id": "claim-1",
+                "text": "Clarify the manuscript structure and improve methodological detail.",
+                "risk": "low",
+                "section": "introduction",
+                "evidence": "Synthetic fallback review package",
+            }],
+        }]
+
+    return {"reviews": normalized_reviews}
+
+
+def _build_graph_from_export(graph_data: Optional[Dict[str, Any]]):
+    from agentic_science_v2.evidence_graph import EvidenceGraph
+
+    graph = EvidenceGraph()
+    if not graph_data:
+        return graph
+
+    id_map: Dict[str, str] = {}
+    for item in _iter_payload_items(graph_data.get("entities", {})):
+        entity = graph.add_entity(
+            name=item.get("name") or item.get("label") or item.get("title") or item.get("id") or "Entity",
+            entity_type=item.get("type") or item.get("entity_type") or item.get("group") or "concept",
+            description=item.get("description", ""),
+            aliases=item.get("aliases", []),
+        )
+        if item.get("id"):
+            id_map[item["id"]] = entity.id
+
+    for item in _iter_payload_items(graph_data.get("relations", {})):
+        source_id = id_map.get(item.get("source") or item.get("source_id") or item.get("from"))
+        target_id = id_map.get(item.get("target") or item.get("target_id") or item.get("to"))
+        if source_id and target_id:
+            graph.add_relation(
+                source_id=source_id,
+                target_id=target_id,
+                relation_type=item.get("type") or item.get("relation_type") or item.get("label") or "ASSOCIATED_WITH",
+                weight=item.get("weight", item.get("width", 1.0)) or 1.0,
+            )
+
+    return graph
+
 
 # =========================================================================
 # R101 - EvoSci
 # =========================================================================
 
 def run_evosci(seed_domain: str, max_rounds: int = 3, verbose: bool = False) -> Dict[str, Any]:
-    """Executa um ciclo EvoSci (R101) completo."""
-    from agentic_science_v2.orchestrator import AgenticScienceV2
-    engine = AgenticScienceV2(verbose=verbose)
-    result = engine.run(seed_domain=seed_domain, max_rounds=max_rounds)
+    """Executa um ciclo EvoSci (R101) completo e normaliza para a UI."""
+    from agentic_science_v2.orchestrator import run_agentic_science_v2
+
+    raw = run_agentic_science_v2(seed_domain=seed_domain, max_rounds=max_rounds)
+    history = raw.get("history", [])
+    best_solution = _extract_best_idea(history, seed_domain)
+
+    trajectory = []
+    for cycle in history:
+        trajectory.append({
+            "round": cycle.get("round", 0),
+            "cluster": (cycle.get("cluster") or {}).get("title", "N/A"),
+            "idea_count": len(cycle.get("ideas", [])),
+            "fitness": (cycle.get("fitness") or {}).get("overall", 0.0),
+            "duration": cycle.get("duration", 0.0),
+        })
+
+    if verbose:
+        trajectory.append({"note": "verbose mode requested"})
+
     return {
-        "cycle_id": result.get("cycle_id", "N/A"),
-        "best_solution": result.get("best_solution", {}),
-        "evolutionary_trajectory": result.get("evolutionary_trajectory", []),
-        "convergence_analysis": result.get("convergence_analysis", {}),
-        "rounds_executed": len(result.get("evolutionary_trajectory", [])),
+        "cycle_id": history[-1].get("id", "N/A") if history else "N/A",
+        "best_solution": best_solution,
+        "evolutionary_trajectory": trajectory,
+        "convergence_analysis": raw.get("summary", {}).get("evolution", {}),
+        "rounds_executed": len(history),
         "status": "completed",
+        "raw_summary": raw.get("summary", {}),
     }
+
 
 def explain_evosci_components() -> Dict[str, str]:
     """Retorna descricao dos componentes do EvoSci para exibicao na UI."""
@@ -47,40 +195,84 @@ def explain_evosci_components() -> Dict[str, str]:
         "EvoEngine": "Ciclo evolutivo: Selection -> Crossover -> Mutation -> Inheritance com deteccao de estagnacao.",
     }
 
+
 # =========================================================================
 # R102 - Deep Research
 # =========================================================================
 
 def run_deep_research(question: str, max_depth: int = 3, max_rounds: int = 5,
                       verbose: bool = False) -> Dict[str, Any]:
-    """Executa pesquisa profunda (R102)."""
-    from agentic_science_v2.deep_research import OrchestratorAgent
-    orchestrator = OrchestratorAgent(max_depth=max_depth, verbose=verbose)
-    report = orchestrator.run(question=question, max_rounds=max_rounds)
+    """Executa pesquisa profunda (R102) e adapta o contrato para a UI."""
+    from agentic_science_v2.deep_research import run_deep_research as run_deep_research_core
+
+    raw = run_deep_research_core(
+        question=question,
+        max_rounds=max_rounds,
+        max_depth=max_depth,
+    )
+    reports = raw.get("reports", [])
+    latest = reports[-1] if reports else {}
+    graph_data = raw.get("evidence_graph", {})
+    stats = graph_data.get("stats") or raw.get("summary", {}).get("graph", {}) or {}
+
+    sections = latest.get("sections", [])
+    synthesized_answer = latest.get("summary", "")
+    if not synthesized_answer and sections:
+        synthesized_answer = "\n\n".join(
+            section.get("content", "")
+            for section in sections
+            if isinstance(section, dict)
+        )
+
+    knowledge_sources = []
+    for citation in latest.get("citations", []):
+        if isinstance(citation, dict):
+            knowledge_sources.append(
+                citation.get("entity") or citation.get("source") or citation.get("type") or "citation"
+            )
+
+    if verbose:
+        knowledge_sources.append("verbose")
+
     return {
         "question": question,
-        "answer": report.get("answer", ""),
-        "evidence_count": len(report.get("evidence_subgraph", {}).get("evidences", [])),
-        "entity_count": len(report.get("evidence_subgraph", {}).get("entities", [])),
-        "sufficiency_gate": report.get("sufficiency_gate", {}),
-        "knowledge_sources": report.get("knowledge_sources", []),
-        "research_plan": report.get("research_plan", {}),
+        "answer": synthesized_answer,
+        "evidence_count": int(stats.get("evidence_pieces", 0) or 0),
+        "entity_count": int(stats.get("entities", 0) or 0),
+        "sufficiency_gate": _build_sufficiency_gate(stats),
+        "knowledge_sources": knowledge_sources,
+        "research_plan": (raw.get("plans") or [{}])[-1],
+        "graph_data": graph_data,
+        "raw_summary": raw.get("summary", {}),
     }
 
-def query_evidence_graph(entity: str, graph_data: Optional[Dict] = None) -> Dict[str, Any]:
-    """Consulta o grafo de evidencias por entidade."""
-    from agentic_science_v2.evidence_graph import EvidenceGraph
-    g = EvidenceGraph()
-    if graph_data:
-        g.load(graph_data)
-    results = g.subgraph_query([entity]) if entity else {"entities": [], "relations": [], "evidences": []}
+
+def query_evidence_graph(entity: str, graph_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Consulta o grafo de evidencias por nome de entidade."""
+    graph = _build_graph_from_export(graph_data)
+    entity_node = graph.find_entity_by_name(entity) if entity else None
+
+    if not entity_node:
+        return {
+            "query": entity,
+            "entities_found": 0,
+            "relations_found": 0,
+            "evidences_found": 0,
+            "subgraph": {"entities": [], "relations": [], "total_entities": 0, "total_relations": 0},
+        }
+
+    subgraph = graph.subgraph_query([entity_node.id])
+    evidences_found = sum(item.get("evidence_count", 0) for item in subgraph.get("entities", []))
+    evidences_found += sum(item.get("evidence_count", 0) for item in subgraph.get("relations", []))
+
     return {
         "query": entity,
-        "entities_found": len(results.get("entities", [])),
-        "relations_found": len(results.get("relations", [])),
-        "evidences_found": len(results.get("evidences", [])),
-        "subgraph": results,
+        "entities_found": subgraph.get("total_entities", 0),
+        "relations_found": subgraph.get("total_relations", 0),
+        "evidences_found": evidences_found,
+        "subgraph": subgraph,
     }
+
 
 # =========================================================================
 # R103 - Peer Review
@@ -89,19 +281,48 @@ def query_evidence_graph(entity: str, graph_data: Optional[Dict] = None) -> Dict
 def run_peer_review(title: str, abstract: str, sections: Dict[str, str],
                     citations: Optional[List[str]] = None,
                     verbose: bool = False) -> Dict[str, Any]:
-    """Executa revisao por pares agentiva (R103)."""
-    from agentic_science_v2.review_agent import OrchestratorReviewer
-    reviewer = OrchestratorReviewer(verbose=verbose)
-    review = reviewer.run(title=title, abstract=abstract,
-                          sections=sections, citations=citations or [])
+    """Executa revisao por pares agentiva (R103) e normaliza para a UI."""
+    from agentic_science_v2.review_agent import run_peer_review as run_peer_review_core
+
+    raw = run_peer_review_core(
+        paper_title=title,
+        paper_abstract=abstract,
+        paper_sections=_coerce_review_sections(sections),
+        citations=citations or [],
+    )
+
+    repair_plan = raw.get("repair_plan", [])
+    verification_agenda = [
+        item.get("action", "")
+        for item in repair_plan
+        if item.get("action")
+    ]
+
+    meta_review = (
+        f"Score geral: {raw.get('overall_score', 0)} | "
+        f"Rastreabilidade: {raw.get('traceability', 0)} | "
+        f"Cobertura: {raw.get('coverage', 0)} | "
+        f"Gate: {'APROVADO' if raw.get('export_gate_passed') else 'REPROVADO'}"
+    )
+    if verbose:
+        meta_review += " | verbose"
+
     return {
-        "meta_review": review.get("meta_review", ""),
-        "scores": review.get("scores", {}),
-        "repair_plan": review.get("repair_plan", []),
-        "verification_agenda": review.get("verification_agenda", []),
-        "critic_reports": review.get("critic_reports", []),
-        "gate_result": review.get("gate_result", {}),
+        "meta_review": meta_review,
+        "scores": raw.get("dimension_scores", {}),
+        "repair_plan": repair_plan,
+        "verification_agenda": verification_agenda,
+        "critic_reports": raw.get("critiques_count", 0),
+        "gate_result": {
+            "overall_score": raw.get("overall_score", 0),
+            "traceability": raw.get("traceability", 0),
+            "coverage": raw.get("coverage", 0),
+            "export_gate_passed": raw.get("export_gate_passed", False),
+        },
+        "paper_title": raw.get("paper_title", title),
+        "overall_score": raw.get("overall_score", 0),
     }
+
 
 def get_rubric_descriptions() -> List[Dict[str, Any]]:
     """Retorna as 8 dimensoes da rubrica com descricoes."""
@@ -124,38 +345,45 @@ def get_rubric_descriptions() -> List[Dict[str, Any]]:
          "weight": 0.10, "polarity": "positiva"},
     ]
 
+
 # =========================================================================
 # R104d - Manuscript Revision
 # =========================================================================
 
 def run_manuscript_revision(manuscript_text: str,
-                            review_package: Optional[Dict] = None,
+                            review_package: Optional[Dict[str, Any]] = None,
                             verbose: bool = False) -> Dict[str, Any]:
-    """Executa revisao de manuscrito (R104d)."""
-    from agentic_science_v2.revision_agent import OrchestratorRevision
-    revision = OrchestratorRevision(verbose=verbose)
-    # Se nao tiver review package, cria um sintetico basico
-    if not review_package:
-        review_package = {
-            "meta_review": "Revisao textual basica.",
-            "scores": {"Clareza": 7.0, "Metodologia": 6.5},
-            "repair_plan": [
-                {"severity": "minor", "claim": "Melhorar clareza na introducao",
-                 "evidence": "Texto confuso", "section": "introduction"}
-            ]
-        }
-    # Cria um manuscrito dict se for string
-    if isinstance(manuscript_text, str):
-        manuscript = {"full_text": manuscript_text}
-    else:
-        manuscript = manuscript_text
-    result = revision.run(review_package=review_package, manuscript=manuscript)
+    """Executa revisao de manuscrito (R104d) com adaptação de contrato."""
+    from agentic_science_v2.revision_agent import create_revision
+
+    manuscript = manuscript_text if isinstance(manuscript_text, str) else manuscript_text.get("full_text", "")
+    coerced_review_package = _coerce_review_package(review_package)
+    raw = create_revision(coerced_review_package, manuscript)
+
+    revisions = raw.get("revisions", [])
+    revised_manuscript = manuscript
+    for revision in reversed(revisions):
+        proposal = revision.get("proposal") or {}
+        if proposal.get("revised_text"):
+            revised_manuscript = proposal["revised_text"]
+            break
+
+    changes_applied = sum(1 for revision in revisions if revision.get("status") == "applied")
+    if verbose and raw.get("diff"):
+        revised_manuscript = revised_manuscript or raw.get("diff")
+
     return {
-        "revised_manuscript": result.get("revised_manuscript", ""),
-        "rebuttal_letter": result.get("rebuttal_letter", ""),
-        "diff_stats": result.get("diff_stats", {}),
-        "changes_applied": len(result.get("diff_stats", {}).get("changes", [])),
+        "revised_manuscript": revised_manuscript,
+        "rebuttal_letter": raw.get("rebuttal_letter", ""),
+        "diff_stats": {
+            "changes": revisions,
+            "integrity": raw.get("integrity", {}),
+            "diff_length": len(raw.get("diff", "")),
+        },
+        "changes_applied": changes_applied,
+        "diff": raw.get("diff", ""),
     }
+
 
 # =========================================================================
 # R105 - Paper Composer
@@ -163,20 +391,72 @@ def run_manuscript_revision(manuscript_text: str,
 
 def compose_paper(title: str, sections_content: Dict[str, str],
                   venue: str = "abnt",
-                  citations: Optional[List[Dict]] = None,
+                  citations: Optional[List[Any]] = None,
                   verbose: bool = False) -> Dict[str, Any]:
-    """Compoe paper academico completo (R105)."""
-    from agentic_science_v2.paper_composer import OrchestratorComposer
-    composer = OrchestratorComposer(verbose=verbose)
-    paper = composer.run(title=title, sections_content=sections_content,
-                         venue=venue, citations=citations or [])
-    return {
-        "full_text": paper.get("full_text", ""),
-        "citations_formatted": paper.get("citations_formatted", []),
-        "consistency_report": paper.get("consistency_report", {}),
-        "structure": paper.get("structure", {}),
-        "venue": venue,
+    """Compoe paper academico preservando o texto manual da UI."""
+    from agentic_science_v2.paper_composer import (
+        CitationFormatter,
+        CrossConsistencyVerifier,
+        StructurePlanner,
+    )
+
+    planner = StructurePlanner()
+    formatter = CitationFormatter()
+    verifier = CrossConsistencyVerifier()
+    outline = planner.plan(title, venue)
+
+    normalized_sections = {
+        "abstract": sections_content.get("abstract", ""),
+        "introduction": sections_content.get("introduction", ""),
+        "methods": sections_content.get("methods", ""),
+        "results": sections_content.get("results", ""),
+        "discussion": sections_content.get("discussion", ""),
+        "conclusion": sections_content.get("conclusion", ""),
     }
+
+    formatted_refs = []
+    for citation in citations or []:
+        if isinstance(citation, dict):
+            formatted_refs.append(formatter.format(citation, style=outline["citation_style"]))
+        else:
+            formatted_refs.append(str(citation))
+
+    normalized_sections["references"] = "\n".join(formatted_refs)
+    consistency_report = verifier.full_report(normalized_sections, discoveries=[], evidence_graph={})
+
+    heading_map = {
+        "abstract": "Abstract",
+        "introduction": "Introduction",
+        "methods": "Methods",
+        "results": "Results",
+        "discussion": "Discussion",
+        "conclusion": "Conclusion",
+        "references": "References",
+    }
+    manuscript_parts = [f"# {title}", ""]
+    for section_type in ["abstract", "introduction", "methods", "results", "discussion", "conclusion"]:
+        manuscript_parts.extend([
+            f"## {heading_map[section_type]}",
+            normalized_sections.get(section_type, ""),
+            "",
+        ])
+    manuscript_parts.extend([
+        "## References",
+        normalized_sections.get("references", "") or "References will be added later.",
+    ])
+    manuscript = "\n".join(manuscript_parts)
+
+    if verbose and not formatted_refs:
+        formatted_refs.append("verbose")
+
+    return {
+        "full_text": manuscript,
+        "citations_formatted": formatted_refs,
+        "consistency_report": consistency_report,
+        "structure": outline,
+        "venue": outline["venue"],
+    }
+
 
 # =========================================================================
 # Pipeline Completo R101 -> R105
@@ -187,6 +467,7 @@ def run_full_academic_pipeline(seed_domain: str, max_rounds: int = 3,
                                verbose: bool = False) -> Dict[str, Any]:
     """Executa o pipeline completo: EvoSci -> DeepRes -> Review -> Revision -> Composer."""
     import time
+
     timeline = {}
     t0 = time.time()
 
@@ -207,9 +488,11 @@ def run_full_academic_pipeline(seed_domain: str, max_rounds: int = 3,
     review = run_peer_review(
         title=seed_domain,
         abstract=deep.get("answer", "")[:500],
-        sections={"introduction": f"Context: {seed_domain}",
-                  "methods": "Deep Research methodology",
-                  "results": deep.get("answer", "")},
+        sections={
+            "introduction": f"Context: {seed_domain}",
+            "methods": "Deep Research methodology",
+            "results": deep.get("answer", ""),
+        },
         verbose=verbose,
     )
     timeline["R103_review"] = round(time.time() - t3, 1)

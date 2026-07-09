@@ -1436,6 +1436,25 @@
         "Matrix strategy no CI precisa verificar python-version especificamente, nao qualquer matrix"
       ],
       "timestamp": 1783564500.0
+    },
+    {
+      "round_id": "R107",
+      "objective": "R107: Auditoria Sistêmica e Hardening de Contratos — alinhamento dos wrappers da webapp com agentic_science_v2, correção do Evidence Graph e endurecimento dos scripts de qualidade",
+      "changes": [
+        "Reescrito webapp/pipeline_helpers.py como camada adaptadora estável entre UI e APIs reais de R101-R105",
+        "Corrigido webapp/consultation_helpers.py:get_evidence_graph_summary para usar a API pública real de EvidenceGraph",
+        "Corrigido parse de saída do pytest em scripts/quality_report.py e scripts/check_coverage.py",
+        "Aumentado timeout dos scripts de qualidade de 120s para 300s, compatível com a suíte atual",
+        "Adicionados 12 testes de auditoria em tests/test_r107_ecosystem_audit.py",
+        "Webapp sincronizada para 65 ciclos e 1062 testes nas métricas visíveis"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "Wrappers de UI precisam ser adapters explícitos, não espelhos ingênuos das APIs internas",
+        "Quando a suíte cresce, o quality gate também precisa evoluir seus timeouts e parsers",
+        "Testes de integração de helper são essenciais para detectar erros reais que testes textuais não capturam"
+      ],
+      "timestamp": 1783569600.0
     }
   ]
 }
