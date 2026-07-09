@@ -1,0 +1,11 @@
+set timeout -1
+spawn npx -y mira-animator install
+expect "Engines a suportar"
+send "\r"
+expect "Times de agentes a instalar"
+send "\r"
+expect "Nome do projeto de slides"
+send "livro\r"
+expect "Como os agentes devem te chamar"
+send "Marcelo\r"
+expect eof

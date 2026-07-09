@@ -1,0 +1,80 @@
+{
+  "sessions": [
+    {
+      "timestamp": "2026-05-28T08:42:00",
+      "iteration": 1,
+      "page_count": 24,
+      "issues_found": 4,
+      "fixes_applied": 0,
+      "tests_passed": false,
+      "note": "Preliminar: underfull na longtable identificado mas nao resolvido (15/16)"
+    },
+    {
+      "timestamp": "2026-05-28T08:53:07",
+      "iteration": 1,
+      "page_count": 24,
+      "issues_found": 4,
+      "fixes_applied": 1,
+      "tests_passed": true,
+      "note": "AutoEvolve: longtable p{4.2cm} → raggedright (16/16)"
+    },
+    {
+      "timestamp": "2026-05-28T10:13:11",
+      "iteration": 1,
+      "page_count": 24,
+      "issues_found": 0,
+      "fixes_applied": 0,
+      "tests_passed": true,
+      "note": "Documento limpo apos refinamentos adicionais (16/16)"
+    },
+    {
+      "timestamp": "2026-05-28T10:30:00",
+      "iteration": 2,
+      "page_count": 24,
+      "issues_found": 0,
+      "fixes_applied": 0,
+      "tests_passed": true,
+      "note": "Convergencia confirmada: 0 overfulls, 0 underfulls, 16/16"
+    }
+  ],
+  "fix_patterns": {
+    "sloppy wrapper": 1,
+    "text shortening": 3,
+    "raggedright column": 1
+  },
+  "fix_catalog": {
+    "F01": {
+      "name": "sloppy wrapper",
+      "trigger": "overfull < 3pt",
+      "action": "\\begin{sloppypar}...\\end{sloppypar}",
+      "count": 1
+    },
+    "F04": {
+      "name": "text shortening",
+      "trigger": "overfull >= 3pt",
+      "action": "remover adverbios, simplificar conectivos, contrair expressoes",
+      "count": 3,
+      "examples": [
+        "domina amplamente -> predomina (11.7pt fix)",
+        "construiu-se uma -> construiu-se (5.8pt fix)",
+        "Comparative Analysis between -> Comparing (0.45pt fix)"
+      ]
+    },
+    "F02": {
+      "name": "raggedright column",
+      "trigger": "underfull in p{} column",
+      "action": "substituir p{width} por >{\\raggedright\\arraybackslash}p{width}",
+      "count": 1,
+      "examples": [
+        "p{4.2cm} -> raggedright p{4.2cm} (badness 10000 fix)"
+      ]
+    }
+  },
+  "insights": {
+    "last_trend": "Issues decreasing: 4 -> 0",
+    "most_effective_pattern": "text shortening (3 uses)",
+    "convergence_iterations": 1,
+    "stability": "24 pages constant across all sessions",
+    "next_recommendation": "Documento limpo. Executar pipeline a cada nova revisao do .tex."
+  }
+}

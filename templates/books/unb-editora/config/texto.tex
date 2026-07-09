@@ -1,0 +1,257 @@
+% O comando abaixo pode ser necessário em documentos que usam versões antigas do pacote "fontspec". Se for começar um novo documento, deixe esse linha comentada e use caracteres Unicode.
+% \usepackage[utf8]{luainputenc}
+
+% Tamanho do papel e das margens: 
+
+\usepackage[paperheight=230mm,paperwidth=160mm,inner=20mm,outer=14mm,top=24.5mm,bottom=21mm,pdftex]{geometry}
+
+% Suporte a idiomas:
+
+\usepackage[greek,brazilian]{babel}
+
+% Para usar as variáveis \theauthor, \thetitle e \thedate (autor, título e data).
+
+\usepackage{titling}
+
+% Título de capítulo elegante:
+
+\usepackage[Lenny]{fncychap}
+
+% Pacote para estilo elegante:
+
+\usepackage{fancyhdr}
+
+% Definição de novas cores:
+
+\usepackage{xcolor}
+
+\definecolor{verde}{rgb}{0.2, 0.50, 0.25}
+\definecolor{verde_UnB}{cmyk}{1,0,1,0.2}
+\definecolor{cinza_UnB}{rgb}{0.6,0.6,0.6} % https://www.ginifab.com/feeds/pms/color_picker_from_image.php
+
+
+% Para mudar cor de títulos (https://tex.stackexchange.com/a/75670/91816):
+
+\usepackage{sectsty}
+
+\chapterfont{\color{verde_UnB}}  % sets colour of chapters
+\sectionfont{\color{verde_UnB}}  % sets colour of sections
+
+% Pacote para definir fonte de qualquer tamanho:
+
+\usepackage{fix-cm}
+
+%% Pacote para correta separação silábica de palavras com hífen;
+%% hífens devem ser escritos como \Hyphdash ou \-/ (se opção shortcuts estiver ativa)
+%% no texto; por exemplo cana\-/de\-/açúcar seria separada como
+%% cana-de- numa linha e -açúcar na linha seguinte
+%% repetindo o hífen (um hífen é da separação e outro é da palavra):
+
+\usepackage[shortcuts]{extdash}
+
+%% Definindo espacamento:
+
+\usepackage{setspace} 
+\singlespacing
+
+%% Enumerar itens:
+
+\usepackage{enumitem}
+
+%% Pacote para criar caixas:
+
+\usepackage{pbox} %  que limitam a largura de textos em células,
+%\usepackage{minibox} % que têm largura arbitrária.
+
+%% Definição das dimensões do texto:
+
+%\setlength{\textwidth}{16cm}
+%\setlength{\textheight}{22cm}
+%\setlength{\headheight}{1cm}
+%\setlength{\footheight}{1cm}
+
+\usepackage[title,titletoc]{appendix}
+
+%% Passando títulos para o português:
+
+\renewcommand{\chaptername}{Capítulo}
+\renewcommand{\bibname}{Referências}
+\renewcommand{\appendixname}{Apêndice}
+\renewcommand{\indexname}{Índice Remissivo}
+\renewcommand{\contentsname}{\bf\color{verde_UnB}Sumário}
+\renewcommand{\tablename}{Tabela}
+\renewcommand{\figurename}{\bf Fig.}
+\renewcommand{\sin}{sen}
+\def\listoffiguresname{Lista de Figuras}
+\def\listoftablesname{Lista de Tabelas}
+
+%% Definindo estilo de pagina:
+
+\pagestyle{fancy}
+
+% PACOTES DE TABELAS:
+
+%% Espaçamento de tabelas ajustado:
+
+\usepackage{booktabs}
+
+%% Pacotes de linhas e colunas multiplas:
+
+\usepackage{multirow}
+\usepackage{multicol}
+
+%% Pacotes de tabela e tabulação:
+
+%%% Tabela com caixas centralizada:
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+%%% Tabela em múltiplas páginas:
+
+\usepackage{longtable}
+
+%%% Tabela colorida:
+
+\usepackage{tabu}
+\usepackage{colortbl}
+
+%%% Mudando cor das linhas de todas as tabelas:
+
+\makeatletter
+\renewenvironment{table}
+     {\@float{table}\taburulecolor{verde_UnB}\arrayrulecolor{verde_UnB}}
+     {\end@float}
+\makeatother
+
+%%% Tabela com linhas pontilhadas:
+
+\usepackage{arydshln}
+
+% PACOTES MATEMÁTICOS:
+
+%% Pacote para não-itálico em ambiente de fórmulas:
+%\usepackage[]{mathastext}
+
+%% Pacotes matemáticos:
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+%%% Numera apenas equações usadas:
+
+\mathtoolsset{showonlyrefs=true}
+
+%%% Declarando barras para valor absoluto e norma:
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+%% Nome de equações ao lado com comando "eqname":
+
+\newcommand{\eqname}[1]{\tag*{\llap{#1}}}
+
+%% Fontes tipográficas:
+
+\usepackage{fontspec}
+%\usepackage{libertineotf}
+
+%%% Seleção da fonte UnB Pro:
+
+\setmainfont{UnB-Pro}[
+  Path = fonts/UnB_Pro_v1.0/,
+  Extension=.otf,
+  UprightFont=*_Regular,
+  ItalicFont=*_Italic,
+  BoldFont=*_Bold,
+  BoldItalicFont=*_Bold-Italic,
+]
+
+\setmonofont{Libertinus Mono}
+
+%%% Para incluir o comando \url{}:
+
+\usepackage[breaklinks=true]{hyperref}
+
+%% Configurações ABNTeX:
+
+\usepackage[hyphens,alf,abnt-and-type=e,abnt-last-names=bibtex,abnt-etal-cite=1,abnt-etal-list=1]{abntex2cite}
+
+
+% Recuo no primeiro parágrafo:
+
+\usepackage{indentfirst}
+
+% Mudando recuo de parágrafo e tamanho da fonte:
+
+\setlength{\parindent}{7mm}
+\fontsize{11pt}{13.2pt}\selectfont
+
+% Usado para evitar linhas órfãs:
+
+\usepackage{needspace}
+
+% Mudar espaçamento entre número e título de seção:
+
+%% \def\l@figure{\@dottedtocline{1}{1.5em}{2.5em}}
+
+\usepackage{tocloft}
+\setlength{\cftfignumwidth}{2.55em} 
+
+% Para escrever "Apêndices" e "Anexos":
+
+%\usepackage[titletoc]{appendix}
+
+% Elimina recuo nas notas de rodapé:
+
+\usepackage[hang,flushmargin]{footmisc}
+
+% Primeira página vazia em cada capítulo:
+
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{empty}% original style: plain
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\makeatother
+
+% Diminui chance de linhas órfãs e viúvas:
+
+\clubpenalty1000000
+\widowpenalty1000000
+
+% Comando para mudar a fonte de citação literal de código (verbatim):
+
+\makeatletter
+\newcommand{\verbatimfont}[1]{\def\verbatim@font{#1}}%
+\makeatother
+
+% Pacote para referir a capítulos pelo nome:
+\usepackage{nameref}
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+% Definições (alternativas a nameref) para se referir a capítulos e seções pelo nome:
+\let\Chaptermark\chaptermark
+\def\chaptermark#1{\def\Chaptername{#1}\Chaptermark{#1}}
+\let\Sectionmark\sectionmark
+\def\sectionmark#1{\def\Sectionname{#1}\Sectionmark{#1}}
+\let\Subsectionmark\subsectionmark
+\def\subsectionmark#1{\def\Subsectionname{#1}\Subsectionmark{#1}}
+\let\Subsubsectionmark\subsubsectionmark
+\def\subsubsectionmark#1{\def\Subsubsectionname{#1}\Subsubsectionmark{#1}}
+
+% Pacote para usar "clearpage" sem finalizar página, apenas descarregar todos os elementos já inseridos:
+
+\usepackage{afterpage}
+
+% Pacote para que páginas em branco não mostrem cabeçalhos nem rodapés:
+
+\usepackage{emptypage}
+
+% Pacote para índice Remissivo (a ser impresso por \printindex):
+
+\usepackage{makeidx}
+\makeindex

@@ -1,0 +1,89 @@
+% interactapasample.tex
+% v1.05 - August 2017
+
+\documentclass[]{interact}
+
+\usepackage{epstopdf}
+\usepackage[caption=false]{subfig}
+
+\usepackage[longnamesfirst,sort]{natbib}
+\bibpunct[, ]{(}{)}{;}{a}{,}{,}
+\renewcommand\bibfont{\fontsize{10}{12}\selectfont}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{notation}{Notation}
+
+\begin{document}
+
+\articletype{ARTICLE TEMPLATE}
+
+\title{Taylor \& Francis \LaTeX\ template for authors (\textsf{Interact} layout + American Psychological Association reference style)}
+
+\author{
+\name{A.~N. Author\textsuperscript{a}\thanks{CONTACT A.~N. Author. Email: latex.helpdesk@tandf.co.uk} and John Smith\textsuperscript{b}}
+\affil{\textsuperscript{a}Taylor \& Francis, 4 Park Square, Milton Park, Abingdon, UK; \textsuperscript{b}Institut f\"{u}r Informatik, Albert-Ludwigs-Universit\"{a}t, Freiburg, Germany}
+}
+
+\maketitle
+
+\begin{abstract}
+This template is for authors who are preparing a manuscript for a Taylor \& Francis journal using the \LaTeX\ document preparation system and the \textsf{interact} class file, which is available via selected journals' home pages on the Taylor \& Francis website.
+\end{abstract}
+
+\begin{keywords}
+Sections; lists; figures; tables; mathematics; fonts; references; appendices
+\end{keywords}
+
+\section{Introduction}
+
+In order to assist authors in the process of preparing a manuscript for a journal, the Taylor \& Francis `Interact' layout style has been implemented as a \LaTeXe\ class file based on the \textsf{article} document class. A sample bibliography is also provided in order to assist with the formatting of your references.
+
+Commands that differ from or are provided in addition to standard \LaTeXe\ are described in this document, which is \textit{not} a substitute for a \LaTeXe\ tutorial.
+
+The \texttt{interactapasample.tex} file can be used as a template for a manuscript by cutting, pasting, inserting and deleting text as appropriate, using the preamble and the \LaTeX\ environments provided (e.g.\ \texttt{\textbackslash begin\{abstract\}}, \texttt{\textbackslash begin\{keywords\}}).
+
+\subsection{The \textsf{Interact} class file}
+
+The \textsf{interact} class file preserves the standard \LaTeXe\ interface such that any document that can be produced using \textsf{article.cls} can also be produced with minimal alteration using the \textsf{interact} class file as described in this document.
+
+\section{Some {\itshape Lancet} style headings}
+
+\subsection{This is a level-2 heading}
+
+This is normal paragraph text.  This is normal paragraph text.  This is normal paragraph text.  This is normal paragraph text.
+
+\subsubsection{This is a level-3 heading}
+
+This is normal paragraph text.  This is normal paragraph text.  This is normal paragraph text.
+
+\paragraph{This is a level-4 heading}
+
+This is normal paragraph text.  This is normal paragraph text.
+
+\subparagraph{This is a level-5 heading}
+
+This is normal paragraph text.
+
+\section{Notes on the sample files and production of your manuscript}
+
+Please supply any additional macro definitions you use with your article in the preamble of your \texttt{.tex} file.
+
+\section{The references}
+
+The list of references is headed `References' and to assist in the formatting of the references a sample bibliography has been provided with this template.
+
+\bibliographystyle{apalike}
+\bibliography{interactapasample}
+
+\end{document}

@@ -1,0 +1,88 @@
+% =============================================================================
+% APÊNDICE A: Exames Laboratoriais e Valores de Referência
+% =============================================================================
+
+\section{Análise Estatística dos Valores de Referência}
+
+Os valores de referência apresentados neste apêndice seguem as diretrizes da Sociedade Brasileira de Patologia Clínica (SBPC) e da Federação Internacional de Química Clínica (IFCC). Para cada analito, são fornecidos o código LOINC (\textit{Logical Observation Identifiers Names and Codes}), o intervalo de referência, a unidade de medida e observações sobre interferências medicamentosas.
+
+\subsection{Fórmula do Clearance de Creatinina (Cockcroft-Gault)}
+
+O clearance de creatinina, utilizado para ajuste de dose de medicamentos excretados por via renal (incluindo antibióticos de uso odontológico), é calculado pela fórmula de Cockcroft-Gault:
+
+\begin{equation}
+\text{ClCr} = \frac{(140 - \text{idade}) \times \text{peso (kg)}}{72 \times \text{Cr}_{\text{sérico}} (\text{mg/dL})} \times (0{,}85 \text{ se feminino})
+\label{eq:cockcroft}
+\end{equation}
+
+Para valores em unidades SI ($\mu$mol/L), utilize:
+
+\begin{equation}
+\text{ClCr} = \frac{(140 - \text{idade}) \times \text{peso (kg)}}{0{,}814 \times \text{Cr}_{\text{sérico}} (\mu\text{mol/L})} \times (0{,}85 \text{ se feminino})
+\label{eq:cockcroft_si}
+\end{equation}
+
+A equação de Cockcroft-Gault superestima o clearance em pacientes com índice de massa corporal (IMC) extremo ($<18{,}5$ ou $>35$ kg/m$^2$). Nesses casos, recomenda-se a equação CKD-EPI \cite{levens2015ckdepi}, disponível no módulo de cálculo automático do Mediscope.
+
+\subsection{Interferências Medicamentosas}
+
+Diversos fármacos de uso odontológico podem alterar resultados laboratoriais:
+
+\begin{itemize}
+    \item \textbf{AINES} (ibuprofeno, cetoprofeno): elevam creatinina sérica (inibição da síntese de prostaglandinas renais), interferindo na avaliação da função renal;
+    \item \textbf{Antibióticos} (amoxicilina, clindamicina): podem causar eosinofilia transitória e, raramente, elevação de transaminases;
+    \item \textbf{Anestésicos locais} com vasoconstritor (lidocaína + epinefrina): elevam glicemia e pressão arterial durante o procedimento;
+    \item \textbf{Benzodiazepínicos} (midazolam, diazepam): podem reduzir o cortisol sérico.
+\end{itemize}
+
+\section{Tabela Expandida de Exames}
+
+A Tabela~\ref{tab:exames} apresenta 25 exames laboratoriais de relevância para a prática odontológica, com respectivos códigos LOINC, valores de referência e observações clínicas.
+
+\begin{longtable}[c]{cL{0.20\textwidth}L{0.16\textwidth}L{0.12\textwidth}L{0.25\textwidth}}
+\caption{Exames laboratoriais com códigos LOINC e valores de referência}
+\label{tab:exames}\\
+\toprule
+\textbf{LOINC} & \textbf{Exame} & \textbf{Valor de referência} & \textbf{Unidade} & \textbf{Observações} \\
+\midrule
+\endfirsthead
+\multicolumn{5}{c}{\tablename\ \thetable{} --- continuação} \\
+\toprule
+\textbf{LOINC} & \textbf{Exame} & \textbf{Valor de referência} & \textbf{Unidade} & \textbf{Observações} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+2160-0 & Creatinina (soro) & 0{,}6--1{,}2 & mg/dL & Ajuste de dose anestésicos \\
+2345-7 & Glicose jejum & 70--99 & mg/dL & Jejum 8h obrigatório \\
+4544-3 & Hemoglobina & 13{,}5--17{,}5 (H) / 12{,}0--15{,}5 (M) & g/dL & Anemia $\to$ contraindicacão cirurgia \\
+6690-2 & Leucócitos totais & 4.000--11.000 & /$\mu$L & Leucocitose $\to$ infecção \\
+590-2 & Plaquetas & 150.000--450.000 & /$\mu$L & Risco hemorrágico $<50.000$ \\
+1975-2 & TGO (AST) & 10--40 & U/L & Elevação $\to$ hepatotoxicidade \\
+1742-6 & TGP (ALT) & 7--56 & U/L & Monitoramento antibióticos \\
+1920-8 & Gama-GT & 8--61 & U/L & Marcador álcool/hepatopatia \\
+2324-2 & INR & 0{,}8--1{,}2 & — & Risco hemorrágico se $>3{,}5$ \\
+6301-6 & TTPA & 25--35 & s & Cirurgia segura se prolongado \\
+11031-1 & TSH & 0{,}4--4{,}0 & mUI/L & Tireoidopatias afetam metabolismo ósseo \\
+13457-7 & T4 livre & 0{,}8--1{,}8 & ng/dL & Hipertireoidismo $\to$ perda óssea \\
+3094-0 & Potássio (K) & 3{,}5--5{,}1 & mmol/L & Arritmias se $<3{,}0$ \\
+2951-2 & Sódio (Na) & 136--145 & mmol/L & Hiponatremia $\to$ sedação segura \\
+17861-6 & Cálcio iônico & 1{,}15--1{,}35 & mmol/L & Hipocalcemia $\to$ tetania pós-cirurgia \\
+18262-6 & Vitamina D (25-OH) & 30--100 & ng/mL & Deficiência $\to$ má osseointegração \\
+2276-4 & Ferro sérico & 50--180 & $\mu$g/dL & Anemia ferropriva = contraindicação cirurgia \\
+4812-9 & Ferritina & 20--300 & ng/mL & Marcador reserva férrica \\
+33914-3 & PCR ultrassensível & $<3{,}0$ & mg/L & Inflamação sistêmica $\to$ risco cirúrgico \\
+11039-6 & Hemoglobina glicada & $<5{,}7$ & \% & Diabetes $\to$ retardo cicatrização \\
+1751-7 & Albumina sérica & 3{,}5--5{,}0 & g/dL & Desnutrição $\to$ má cicatrização \\
+5905-5 & Bilirrubina total & 0{,}3--1{,}2 & mg/dL & Icterícia $\to$ hepatopatia \\
+14629-0 & Ácido úrico & 3{,}5--7{,}2 & mg/dL & Gota $\to$ lesões orais \\
+13458-5 & Magnésio & 1{,}7--2{,}2 & mg/dL & Hipomagnesemia $\to$ arritmias \\
+11041-2 & Vitamina B12 & 200--900 & pg/mL & Deficiência $\to$ glossite \\
+\bottomrule
+\end{longtable}
+
+\section{Cálculo Automático no Mediscope}
+
+O Mediscope integra calculadoras automáticas que utilizam os valores laboratoriais para gerar alertas clínicos. Por exemplo, o clearance de creatinina (Eq.~\ref{eq:cockcroft}) é calculado automaticamente sempre que um novo exame de creatinina sérica é importado via FHIR. Se $\text{ClCr} < 30$ mL/min, o sistema emite alerta contraindicando o uso de anti-inflamatórios não esteroidais (AINES) e ajustando a dose de antibióticos conforme as diretrizes da \textit{American Dental Association} (ADA).
+
+A codificação LOINC completa e os \textit{value sets} canônicos estão disponíveis em \url{https://loinc.org} e no repositório do Mediscope em \url{https://github.com/opencode-ecosystem/mediscope/tree/main/terminology}.

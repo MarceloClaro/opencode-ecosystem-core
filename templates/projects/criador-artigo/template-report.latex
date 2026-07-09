@@ -1,0 +1,129 @@
+\documentclass[
+  12pt,
+  a4paper,
+  brazil,
+  twoside
+]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[brazil]{babel}
+
+\usepackage[
+  top=3cm, left=3cm, right=2cm, bottom=2cm
+]{geometry}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE,LO]{\textit{A Insustent\''avel Leveza da Detec\c{c}\~ao}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+\usepackage{array, booktabs, longtable}
+\usepackage{graphicx}
+\usepackage[bottom]{footmisc}
+
+\usepackage{titlesec}
+\titleformat{\chapter}{\normalfont\bfseries\Large}{\thechapter}{0.5em}{}
+\titleformat{\section}{\normalfont\bfseries\large}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalfont\bfseries\normalsize}{\thesubsection}{0.5em}{}
+
+\usepackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setcounter{tocdepth}{2}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+    \vspace*{2cm}
+    {\large\bfseries UNIVERSIDADE DE S\~AO PAULO\par}
+    {\large\bfseries PROGRAMA DE P\'OS-GRADUA\c{C}\~AO EM CI\^ENCIA DA INFORMA\c{C}\~AO\par}
+    \vspace{4cm}
+    {\LARGE\bfseries $title$\par}
+    \vspace{0.5cm}
+    {\large\bfseries $subtitle$\par}
+    \vspace{3cm}
+    {\large Disserta\c{c}\~ao apresentada ao Programa de P\'os-Gradua\c{c}\~ao em
+    Ci\^encia da Informa\c{c}\~ao da Universidade de S\~ao Paulo como requisito
+    parcial para obten\c{c}\~ao do t\'itulo de Mestre.\par}
+    \vspace{1cm}
+    {\large Orientador: Prof. Dr. [Nome]\par}
+    \vfill
+    {\large $date$\par}
+  \end{center}
+\end{titlepage}
+
+\newpage
+\begin{center}
+  \vspace*{4cm}
+  {\Large\bfseries FOLHA DE ROSTO\par}
+  \vspace{2cm}
+  {\normalsize Disserta\c{c}\~ao de Mestrado\par}
+  \vspace{0.5cm}
+  {\normalsize \textbf{$title$}\par}
+  \vspace{0.5cm}
+  {\normalsize \textbf{$subtitle$}\par}
+  \vspace{1cm}
+  \begin{flushright}
+  \begin{minipage}{8cm}
+  \small Disserta\c{c}\~ao apresentada ao Programa de P\'os-Gradua\c{c}\~ao em
+  Ci\^encia da Informa\c{c}\~ao da Universidade de S\~ao Paulo como requisito
+  parcial para obten\c{c}\~ao do t\'itulo de Mestre.
+  \end{minipage}
+  \end{flushright}
+  \vfill
+  {\large $date$\par}
+\end{center}
+
+\newpage
+\begin{center}
+  \vspace*{2cm}
+  {\Large\bfseries RESUMO\par}
+  \vspace{1cm}
+  \begin{minipage}{14cm}
+  \onehalfspacing
+  $abstract$
+  \end{minipage}
+  \vspace{1cm}
+  \par\noindent
+  \begin{minipage}{14cm}
+  \textbf{Palavras-chave:} $keywords$.
+  \end{minipage}
+\end{center}
+
+\newpage
+\begin{center}
+  \vspace*{2cm}
+  {\Large\bfseries ABSTRACT\par}
+  \vspace{1cm}
+  \begin{minipage}{14cm}
+  \onehalfspacing
+  $abstract-en$
+  \end{minipage}
+  \vspace{1cm}
+  \par\noindent
+  \begin{minipage}{14cm}
+  \textbf{Keywords:} $keywords-en$.
+  \end{minipage}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+
+$body$
+
+\end{document}

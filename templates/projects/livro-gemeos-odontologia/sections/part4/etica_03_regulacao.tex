@@ -1,0 +1,29 @@
+\section{Regulação de Dispositivos Médicos e SaMD}
+\label{sec:regulacao}
+
+\subsection{A Abordagem da ANVISA}
+
+A metamorfose do software de um mero visualizador de imagens (PACS) para um agente de predição clínica o enquadra na categoria de \textit{Software as a Medical Device} (SaMD). A \textbf{Resolução RDC 657/2022} da ANVISA alinhou o Brasil às diretrizes do \textit{International Medical Device Regulators Forum} (IMDRF). Contudo, a aplicação dessas regras a gêmeos digitais revela incongruências agudas.
+
+Um gêmeo digital não possui uma classificação de risco estática:
+\begin{itemize}
+    \item \textbf{Classe I e II (Risco Baixo a Médio):} Quando atua como repositório de visualização tridimensional interativa ou segmenta estruturas anatômicas para revisão humana.
+    \item \textbf{Classe III e IV (Risco Alto a Máximo):} Quando a inteligência artificial acoplada ao modelo simula movimentos dentários, prevê a tensão sobre um implante ou sugere ativamente vias de acesso endodôntico \cite{elsaid2026digital}. A predição de risco altera a conduta clínica, exigindo do fabricante ensaios clínicos robustos para registro.
+\end{itemize}
+
+O mercado atual opera frequentemente em uma "zona cinzenta", comercializando plataformas Classe III sob registros de Classe I ou II, alegando que o sistema oferece apenas "sugestões". Esta postura transfere indevidamente o ônus do risco sistêmico para o cirurgião-dentista, configurando uma externalidade regulatória insustentável.
+
+\subsection{O Papel do CFO e a Tele-Odontologia}
+
+O Conselho Federal de Odontologia (CFO), guardião do Código de Ética Odontológica (Resolução CFO 118/2012), estipula que o profissional deve assumir plena responsabilidade pelos atos executados (Art. 5º). A delegação da tomada de decisão ao Gêmeo Digital não constitui excludente de ilicitude. Paralelamente, a \textbf{Resolução CFO 226/2020}, que regulamentou a tele-odontologia, conferiu amparo legal à troca remota de dados para planejamento (como nos \textit{clear aligners}), exigindo contudo o sigilo absoluto e a rastreabilidade do planejamento no prontuário eletrônico.
+
+\subsection{Garantia de Conformidade Regulatória (SaMD) via Scanners de Rastreabilidade}
+
+Para mitigar a volatilidade regulatória sob as exigências da RDC 657/2022 da ANVISA, o ecossistema incorpora portões de conformidade automatizados que funcionam como barreiras de verificação lógica na esteira de compilação do gêmeo digital. Essa governança de \textit{Software as a Medical Device} (SaMD) é orquestrada em tempo de execução pelas especificações da suíte de testes unitários \texttt{test\_samd\_compliance.js}.
+
+Os scanners de validação epistemológica atuam como auditores integrados de conformidade:
+\begin{itemize}
+    \item O \textbf{Scanner Reflexivo} monitora continuamente a integridade do ciclo de dados e o cumprimento das restrições regulatórias do \texttt{BehavioralGate} do \texttt{TrustEngine} (\texttt{SPEC-038}). Caso as regras de isolamento do paciente ou anonimização de malhas 3D sejam corrompidas, o scanner dispara instantaneamente exceções de conformidade, abortando a transação.
+    \item O \textbf{Scanner Axiológico} quantifica as margens éticas e os limiares de segurança clínica baseados no escore contínuo \texttt{TrustScorer}. Ele assina digitalmente a trilha forense que documenta a transição e decisões tomadas pela IA, garantindo a rastreabilidade completa e o preenchimento inquestionável das diretrizes de responsabilidade do profissional exigidas pelo CFO e pelo código civil~\cite{springer2026realising}.
+\end{itemize}
+Essa arquitetura integrada de SDD (Design Orientado a Especificações) e TDD (Desenvolvimento Orientado a Testes) assegura que o gêmeo digital odontológico transcenda o \textit{status} de "caixa-preta", instituindo-se como um dispositivo médico auditável e seguro para uso em larga escala na saúde pública e suplementar no Brasil~\cite{abinc2026brasil}.

@@ -1,0 +1,29 @@
+\section{Gêmeos Digitais em Implantodontia e Biomecânica Estrutural}
+
+\subsection{Modelagem Biomecânica de Implantes por Elementos Finitos}
+
+A modelagem biomecânica fundamentada no Método dos Elementos Finitos (MEF, ou FEM em inglês) aplicada a implantes dentários representa um dos domínios mais maduros da simulação computacional em odontologia. Diferentemente da ortodontia — onde a modelagem simula o comportamento hiperelástico do ligamento periodontal —, na implantodontia o foco recai sobre o \destaque{contato friccional não linear e a evolução mecano-biológica da interface de osseointegração}.
+
+A arquitetura FEM rigorosa de um implante requer formulações reológicas precisas e discretização espacial altamente refinada. O modelo engloba convencionalmente: o corpo do implante e o pilar protético (modelados frequentemente como Ti-6Al-4V, módulo de Young de $\approx$ 110 GPa), a coroa, o parafuso de retenção, a cortical óssea densa (comportamento ortotrópico, $\approx$ 13,7 GPa) e o osso trabecular (estrutura celular porosa modelada com módulo de Young variável entre 0,5 e 3,0 GPa)~\cite{li2025impacts}.
+
+A simulação de cargas oclusais dinâmicas precisa incorporar vetores axiais e componentes oblíquas que mimetizam a mastigação em ciclos \textit{fatigue-like} de milhões de repetições. O estudo seminal de Alshadidi et al.~\cite{alshadidi2024surface} utilizou modelos FEM avançados para dissecar o papel da macrotomografia e de \textit{coatings} híbridos na distribuição de microdeformações. Foi evidenciado matematicamente que superfícies rugosas reduzem a concentração de tensões cortantes no rebordo da crista óssea em proporções de até 30\% frente a designs usinados. 
+
+\destaque{A análise de sensibilidade paramétrica nos gêmeos digitais atesta que a qualidade óssea do hospedeiro sobrepuja consideravelmente o design macrogeométrico do implante na prevenção de perda óssea.} Este achado determina que a fiabilidade da simulação depende intimamente de algoritmos de conversão fidedignos, associando a densitometria do CBCT ao tensor de elasticidade óssea local, garantindo o princípio da \textit{Precision Dentistry}~\cite{techsoc2025precision}.
+
+\subsection{Predição Computacional da Mecanobiologia da Osseointegração}
+
+A osseointegração é um processo biológico dinâmico. Modelos mecanobiológicos de \textit{Digital Twins} procuram antecipar o \textit{turnover} e a aposição óssea utilizando o arcabouço teórico de Frost e a Lei de remodelação óssea de Wolff. 
+
+As predições baseadas em gêmeos digitais enquadram-se em três pilares. O primeiro baseia-se em fatores densitométricos e morfométricos pré-operatórios oriundos da CBCT: volume ósseo trabecular, espessura cortical e dimensão fractal. Através de regressões por \textit{Machine Learning}, esses parâmetros fornecem métricas de Área Sob a Curva (AUC) entre 0,70 e 0,82 para falha inicial do implante~\cite{khoshfekr2025digital}.
+
+O segundo pilar introduz simulações numéricas fenomenológicas atualizadas iterativamente. Consoante à teoria do Mecanostato, equações diferenciais acopladas alteram a densidade óssea da malha virtual: microdeformações entre 1500 e 3000 $\mu\varepsilon$ estimulam o espessamento das trabéculas, enquanto zonas de deformação ínfima ($< 50 \mu\varepsilon$) sofrem reabsorção por \textit{stress shielding}, e zonas além de 4000 $\mu\varepsilon$ sofrem microfraturas patológicas~\cite{zhang2024recursive}.
+
+A terceira categoria funde preditores biológicos com variáveis clínicas através de \textit{Deep Learning}. Essa agregação multimodal engloba índices de hemoglobina glicada, histórico de tabagismo, e marcadores de polimorfismo genético. Gêmeos digitais dotados dessa inferência reportam métricas de AUC excedendo 0,90 na acurácia preditiva de peri-implantite precoce~\cite{duggal2026exploring}.
+
+\subsection{Implantes Inteligentes e Nanossensores IoT}
+
+A transição da implantodontia para a era biotrônica materializa-se pelos \textit{Smart Implants}, artefatos que sinergizam a Internet das Coisas Médicas (IoMT) e a reabilitação oral~\cite{aisoc2026realising}. Estes dispositivos funcionam como nós autônomos na borda, embutindo nanossensores nos pilares ou na superfície para promover o monitoramento incessante da estabilidade peri-implantar.
+
+Destacam-se sensores piezoelétricos de deformação, microssensores de impedância elétrica para rastrear alterações no fluido sulcular, e sensores de pH para detecção de biofilmes acidogênicos. A detecção subclínica da peri-implantite é o corolário principal. Sendo a peri-implantite crônico-destrutiva e de curso silencioso, metodologias de diagnóstico clássico dependem do surgimento visível de sangramento, estágios com sequelas irreversíveis~\cite{elsaid2025digital}. 
+
+\destaque{O gêmeo digital processa as séries temporais fisiológicas de forma contínua.} Pequenos gradientes na impedância do fluido sulcular, ou variações da assinatura mecânica de fadiga, são confrontados por algoritmos preditivos com a assinatura (\textit{baseline}) de calibração. Ultrapassado o limite dinâmico de tolerância biológica, o sistema desencadeia alertas precoces~\cite{khoshfekr2025digital}. Obstáculos superlativos à implementação comercial dessas tecnologias continuam no epicentro das pesquisas translacionais atuais.

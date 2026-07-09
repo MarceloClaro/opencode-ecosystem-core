@@ -1,0 +1,288 @@
+% =============================================================================
+%  APÊNDICE A: EXERCÍCIOS RESOLVIDOS
+% =============================================================================
+\chapter{Exercícios Resolvidos}
+\label{apend:exercicios}
+
+Este apêndice apresenta soluções detalhadas para exercícios selecionados dos
+Capítulos~1~a~8. Cada solução segue o padrão \sdd{}~--~\tdd: definição do
+problema, especificação da solução, implementação e validação. Os exercícios
+estão organizados por nível de dificuldade, do zero ao PhD.
+
+% =============================================================================
+%  SEÇÃO A.1: NÍVEL ZERO
+% =============================================================================
+\section{Exercícios Nível Zero}
+\label{sec:exer-nivel-zero}
+\nivelzero
+
+\begin{exercicio}[Lógica Proposicional -- Tabela Verdade]\label{exer:resol-logic}
+Construa a tabela verdade da proposição \(P \land (Q \lor \neg R)\).
+\end{exercicio}
+
+\textbf{Solução:} A tabela verdade é construída enumerando todas as combinações
+de valores lógicos de \(P\), \(Q\) e \(R\) (8 linhas) e computando a expressão
+passo a passo:
+
+\[
+\begin{array}{ccc|c|c|c}
+P & Q & R & \neg R & Q\lor\neg R & P\land(Q\lor\neg R) \\
+\midrule
+V & V & V & F & V & V \\
+V & V & F & V & V & V \\
+V & F & V & F & F & F \\
+V & F & F & V & V & V \\
+F & V & V & F & V & F \\
+F & V & F & V & V & F \\
+F & F & V & F & F & F \\
+F & F & F & V & V & F \\
+\end{array}
+\]
+
+A proposição é verdadeira quando \(P\) é verdadeiro e ao menos uma das
+condições \(Q\) ou \(\neg R\) é verdadeira. Este resultado fundamenta a
+construção de guardas lógicas no \texttt{BehavioralGate} do Trust Engine
+(Capítulo~5).
+
+\begin{exercicio}[Teoria dos Conjuntos -- Operações]\label{exer:resol-conj}
+Dados \(A = \{1,2,3,4\}\), \(B = \{3,4,5,6\}\), calcule \(A \cup B\),
+\(A \cap B\) e \(A \setminus B\).
+\end{exercicio}
+
+\textbf{Solução:}
+\begin{align*}
+A \cup B &= \{1,2,3,4,5,6\} \\
+A \cap B &= \{3,4\} \\
+A \setminus B &= \{1,2\}
+\end{align*}
+
+A interseção \(A \cap B = \{3,4\}\) representa os elementos comuns entre
+os dois conjuntos, analogamente aos serviços compartilhados entre MCPs
+no \opencodeeco{}.
+
+% =============================================================================
+%  SEÇÃO A.2: NÍVEL BÁSICO
+% =============================================================================
+\section{Exercícios Nível Básico}
+\label{sec:exer-nivel-basico}
+\nivelbasico
+
+\begin{exercicio}[Regressão Linear Simples]\label{exer:resol-regressao}
+Dados os pontos \((1,2)\), \((2,3)\), \((3,5)\), \((4,4)\), encontre a reta
+de regressão linear \(y = \beta_0 + \beta_1 x\) pelo método dos mínimos
+quadrados.
+\end{exercicio}
+
+\textbf{Solução:} Calculamos as médias e os somatórios:
+\[
+\bar{x} = 2{,}5,\quad \bar{y} = 3{,}5,\quad
+\sum (x_i - \bar{x})(y_i - \bar{y}) = 4,\quad
+\sum (x_i - \bar{x})^2 = 5
+\]
+
+\[
+\beta_1 = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}
+       = \frac{4}{5} = 0{,}8
+\]
+\[
+\beta_0 = \bar{y} - \beta_1 \bar{x} = 3{,}5 - 0{,}8 \times 2{,}5 = 1{,}5
+\]
+
+A reta de regressão é \(\hat{y} = 1{,}5 + 0{,}8x\). Este modelo é
+equivalente ao utilizado pelo \texttt{TrustScorer} para predizer a
+confiança futura de um agente com base em seu histórico.
+
+% =============================================================================
+%  SEÇÃO A.3: NÍVEL INTERMEDIÁRIO
+% =============================================================================
+\section{Exercícios Nível Intermediário}
+\label{sec:exer-nivel-intermediario}
+\nivelintermediario
+
+\begin{exercicio}[Autovalores e Autovetores]\label{exer:resol-autoval}
+Encontre os autovalores e autovetores da matriz \(A =
+\begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}\).
+\end{exercicio}
+
+\textbf{Solução:} O polinômio característico é:
+\[
+\det(A - \lambda I) = \det\begin{pmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{pmatrix}
+= (4-\lambda)(3-\lambda) - 2 = \lambda^2 - 7\lambda + 10 = 0
+\]
+
+Os autovalores são \(\lambda_1 = 5\) e \(\lambda_2 = 2\).
+
+Para \(\lambda_1 = 5\):
+\[
+(A - 5I)v = \begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix}v = 0
+\Rightarrow v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}
+\]
+
+Para \(\lambda_2 = 2\):
+\[
+(A - 2I)v = \begin{pmatrix} 2 & 1 \\ 2 & 1 \end{pmatrix}v = 0
+\Rightarrow v_2 = \begin{pmatrix} 1 \\ -2 \end{pmatrix}
+\]
+
+Autovetores são utilizados no \opencodeeco{} para análise de componentes
+principais (PCA) na redução de dimensionalidade de embeddings de agentes.
+
+% =============================================================================
+%  SEÇÃO A.4: NÍVEL AVANÇADO
+% =============================================================================
+\section{Exercícios Nível Avançado}
+\label{sec:exer-nivel-avancado}
+\nivelavancado
+
+\begin{exercicio}[Entropia de Shannon]\label{exer:resol-entropia}
+Uma fonte emite símbolos com probabilidades \(p = [0{,}5, 0{,}25, 0{,}15,
+0{,}1]\). Calcule a entropia da fonte e o comprimento médio de um código
+de Huffman.
+\end{exercicio}
+
+\textbf{Solução:} A entropia é:
+\[
+H(X) = -\sum_{i=1}^{4} p_i \log_2 p_i
+\]
+
+\[
+H = -(0{,}5 \times \log_2 0{,}5 + 0{,}25 \times \log_2 0{,}25
+     + 0{,}15 \times \log_2 0{,}15 + 0{,}1 \times \log_2 0{,}1)
+\]
+
+\[
+H = -(0{,}5 \times (-1) + 0{,}25 \times (-2) + 0{,}15 \times (-2{,}737)
+     + 0{,}1 \times (-3{,}322)) \approx 1{,}743 \text{ bits/símbolo}
+\]
+
+Construindo a árvore de Huffman:
+\begin{enumerate}
+\item Símbolos ordenados: \([0{,}5,\; 0{,}25,\; 0{,}15,\; 0{,}1]\)
+\item Combinar \(0{,}15\) e \(0{,}1 \to 0{,}25\)
+\item Combinar \(0{,}25\) e \(0{,}25 \to 0{,}5\)
+\item Combinar \(0{,}5\) e \(0{,}5 \to 1{,}0\)
+\end{enumerate}
+
+Códigos: \(s_1: 0\) (1 bit), \(s_2: 10\) (2 bits), \(s_3: 110\) (3 bits),
+\(s_4: 111\) (3 bits). Comprimento médio:
+\[
+L = 0{,}5 \times 1 + 0{,}25 \times 2 + 0{,}15 \times 3 + 0{,}1 \times 3
+  = 1{,}75 \text{ bits/símbolo}
+\]
+
+Eficiência: \(\eta = H/L \approx 99{,}6\%\). A compressão de dados no
+\emph{Structural Noise Scanner} (SPEC-037) utiliza princípios análogos.
+
+\begin{exercicio}[Gradiente Descendente]\label{exer:resol-grad}
+Minimize a função \(f(x) = x^4 - 4x^2 + 4\) usando gradiente descendente
+com \(\alpha = 0{,}1\) e \(x_0 = 3\). Realize 3 iterações.
+\end{exercicio}
+
+\textbf{Solução:} O gradiente é \(f'(x) = 4x^3 - 8x\).
+
+Iteração 1: \(x_1 = 3 - 0{,}1 \times (4 \times 27 - 24) = 3 - 0{,}1 \times 84 = 2{,}16\)
+
+Iteração 2: \(x_2 = 2{,}16 - 0{,}1 \times (4 \times 10{,}078 - 17{,}28)
+          = 2{,}16 - 0{,}1 \times 23{,}032 \approx 1{,}857\)
+
+Iteração 3: \(x_3 = 1{,}857 - 0{,}1 \times (4 \times 6{,}403 - 14{,}856)
+          = 1{,}857 - 0{,}1 \times 10{,}756 \approx 1{,}781\)
+
+A função converge para o mínimo local em \(x = \sqrt{2} \approx 1{,}414\).
+Este método é empregado pelo \texttt{EvolutionaryTrajectoriesScanner} para
+otimizar rotas evolutivas.
+
+% =============================================================================
+%  SEÇÃO A.5: NÍVEL PhD
+% =============================================================================
+\section{Exercícios Nível PhD}
+\label{sec:exer-nivel-phd}
+\nivelphd
+
+\begin{exercicio}[Teorema de Bayes Aplicado ao Trust Engine]\label{exer:resol-bayes}
+Um agente no \opencodeeco{} é classificado como confiável (\(C\)) ou
+não-confiável (\(\neg C\)). O \texttt{TrustScorer} emite alertas (\(A\)
+quando detecta anomalias). Sabe-se que \(P(C) = 0{,}85\),
+\(P(A \mid \neg C) = 0{,}95\) e \(P(A \mid C) = 0{,}05\). Calcule
+\(P(C \mid A)\), a probabilidade de um agente ser confiável dado que
+um alerta foi emitido.
+\end{exercicio}
+
+\textbf{Solução:} Pelo Teorema de Bayes:
+\[
+P(C \mid A) = \frac{P(A \mid C)P(C)}{P(A \mid C)P(C) + P(A \mid \neg C)P(\neg C)}
+\]
+
+Substituindo:
+\[
+P(C \mid A) = \frac{0{,}05 \times 0{,}85}{0{,}05 \times 0{,}85 + 0{,}95 \times 0{,}15}
+= \frac{0{,}0425}{0{,}0425 + 0{,}1425}
+= \frac{0{,}0425}{0{,}185} \approx 0{,}2297
+\]
+
+Interpretação: quando o \texttt{TrustScorer} emite um alerta, a confiança
+no agente cai de 85\% para aproximadamente 23\%. Este cálculo fundamenta
+a política de \destaque{shadow mode}: ao detectar anomalia, o agente entra
+em modo monitorado até que a confiança seja restabelecida.
+
+\begin{exercicio}[Convergência do Modelo N3 de Auto-Consciência]\label{exer:resol-n3}
+Demonstre que o modelo N3 de auto-consciência do \opencodeeco{} é
+um ponto fixo da função de auto-observação \(f(M) = M \cup
+\texttt{Scan}(M)\), onde \(\texttt{Scan}\) é o operador de varredura
+epistemológica.
+\end{exercicio}
+
+\textbf{Solução:} Seja \(M_0\) o modelo inicial de si mesmo. Definimos:
+\[
+M_{t+1} = f(M_t) = M_t \cup \texttt{Scan}(M_t)
+\]
+
+Afirmamos que a sequência \((M_t)\) converge para um ponto fixo
+\(M^*\) tal que \(f(M^*) = M^*\).
+
+Prova: (1) \(M_t \subseteq M_{t+1}\) por construção (união monótona).
+(2) O conjunto de todos os possíveis componentes do ecossistema é
+finito (227 skills, 46 MCPs, 128 agentes, etc.). (3) Toda sequência
+crescente em um conjunto finito atinge o supremo em tempo finito.
+(4) No supremo \(M^*\), \(\texttt{Scan}(M^*) \subseteq M^*\), logo
+\(f(M^*) = M^* \cup \texttt{Scan}(M^*) = M^*\).
+
+No \opencodeeco{}, o N3 é atingido quando o \texttt{SelfModel}
+(SPEC-036) incorpora todos os componentes detectáveis pelos scanners
+epistemológicos. O Behavioral Gate (N3.5) adiciona uma barreira
+preventiva sobre este ponto fixo.
+
+\begin{exercicio}[Complexidade do MCSP]\label{exer:resol-mcsp}
+O \texttt{MCSP-Solver} (SPEC-032) precisa selecionar o conjunto mínimo
+de capacidades para implementar 5 funcionalidades. Cada capacidade
+\(c_i\) tem custo \(\text{custo}(c_i)\) e cada funcionalidade \(f_j\)
+requer um subconjunto de capacidades. Formule o problema como
+otimização inteira.
+\end{exercicio}
+
+\textbf{Solução:} Seja \(x_i \in \{0,1\}\) indicando se a capacidade
+\(c_i\) é selecionada. O problema é:
+
+\[
+\min \sum_{i=1}^{n} \text{custo}(c_i) \cdot x_i
+\]
+
+Sujeito a:
+\[
+\sum_{i: c_i \in R_j} x_i \geq 1,\quad \forall j = 1,\dots,m
+\]
+\[
+x_i \in \{0,1\}, \quad \forall i = 1,\dots,n
+\]
+
+Onde \(R_j\) é o conjunto de capacidades requeridas pela funcionalidade
+\(f_j\). Este é o problema clássico de \emph{set cover}, NP-difícil.
+O \texttt{MCSP-Solver} utiliza um algoritmo guloso com aproximação
+\(O(\ln n)\), combinado com poda por \texttt{construction\_cost} real
+e desconto por capacidades compartilhadas (SPEC-033).
+
+A solução gulosa ordena capacidades por \(\text{custo}/\text{cobertura}\)
+e seleciona iterativamente a de menor custo marginal até cobrir todas
+as funcionalidades. Para 5 funcionalidades e 8 capacidades candidatas,
+a solução ótima é encontrada por branch-and-bound com poda, tipicamente
+em menos de 100 iterações no ecossistema real.

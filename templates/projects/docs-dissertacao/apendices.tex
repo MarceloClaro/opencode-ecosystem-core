@@ -1,0 +1,234 @@
+% ═══════════════════════════════════════════════════════════════════════════
+% APÊNDICES
+% ═══════════════════════════════════════════════════════════════════════════
+\begin{apendicesenv}
+
+\chapter{Lista Completa de Módulos Python}
+
+\begin{longtable}{p{5cm}p{2cm}p{6cm}}
+\toprule
+\textbf{Módulo} & \textbf{SPEC} & \textbf{Função} \\
+\midrule
+capability\_composer.py & 033 & Decomposição de capacidades em insumos \\
+noological\_scanner.py & 028 & Scanner epistemológico (10 dims) \\
+metacognitive\_loop.py & 036 & Auto-observação + root cause causal \\
+evolutionary\_pipeline.py & 030 & Orquestrador M0$\rightarrow$M7 \\
+structural\_noise\_scanner.py & 037 & Compressão estrutural (SNS) \\
+audit\_refinements.py & — & Refinamentos de auditoria \\
+minimum\_capability\_solver.py & 032 & MCSP com construction\_cost \\
+teleological\_scanner.py & 029 & Scanner teleológico reverso \\
+trust\_engine.py & 038 & Trust Scoring + Behavioral Gate \\
+self\_model.py & 036 & Auto-representação N0-N3 \\
+cross\_validation\_engine.py & 030 & Grafo de dependências \\
+cooperative\_governance.py & 036 & Ostrom DP1-DP8 \\
+structural\_compression\_engine.py & 037b & Compressor de textos (SCE) \\
+dialectical\_engine.py & 036 & Síntese dialética (aufheben) \\
+\bottomrule
+\caption{Módulos Python do OpenCode Ecosystem (14 principais de 22)}
+\end{longtable}
+
+\chapter{Comandos de Verificação}
+
+\begin{lstlisting}[language=bash, caption={Script de verificação completa (312 CTs)}]
+cd C:\Users\marce\.config\opencode
+for f in specs/test_*.py; do python "$f"; done
+# Resultado: 312/312 PASS
+\end{lstlisting}
+
+\chapter{Glossário de Termos Técnicos}
+
+\begin{longtable}{p{3.5cm}p{9.5cm}}
+\toprule
+\textbf{Termo} & \textbf{Definição} \\
+\midrule
+ADT (ADR) & Architecture Decision Record — documento que registra uma decisão arquitetural. \\
+AGI & Artificial General Intelligence — inteligência com capacidade de generalização cross-domain. \\
+Behavioral Gate & Mecanismo de pré-execução que decide se uma ação deve ser executada. \\
+CapabilityUnit & Estrutura que decompõe uma capacidade em 6 tipos de insumos cognitivos. \\
+CognitiveInput & Unidade atômica de insumo cognitivo. \\
+CPS (Cognitive Preservation Score) & Proporção de funções preservadas após compressão. \\
+CR (Compression Ratio) & Razão entre tokens originais e comprimidos. \\
+CT (Critical Test) & Teste automatizado que valida um comportamento crítico do sistema. \\
+DG (Density Gain) & Produto de CPS por CR. \\
+DP1-DP8 & Ostrom's Design Principles — 8 princípios de governança de commons. \\
+FLI (Functional Loss Index) & Proporção de funções perdidas na compressão. \\
+GWT & Global Workspace Theory — teoria de Baars sobre consciência como broadcast global. \\
+MCSP & Minimum Capability Solver — algoritmo do conjunto mínimo de capacidades. \\
+NRR (Noise Reduction Rate) & Proporção de elementos removidos como ruído. \\
+SNS & Structural Noise Scanner — scanner de compressão estrutural. \\
+SPS & Structural Preservation Score — proporção de funções preservadas. \\
+SPEC & Specification — documento formal que define o comportamento de um módulo. \\
+TDD & Test-Driven Development — desenvolvimento orientado a testes. \\
+Trust Score & Pontuação de confiança (0-1) atribuída a cada ação do sistema. \\
+\bottomrule
+\caption{Glossário de Termos Técnicos}
+\end{longtable}
+
+
+
+\chapter{Código Fonte dos Módulos Principais}
+
+\section{TrustScorer — Cálculo de Confiança Adaptativo}
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\tiny, caption={TrustScorer — blend 70/30 com shadow mode e rollback}]
+class TrustScorer:
+    SHADOW_MODE_THRESHOLD = 5
+    ROLLBACK_RATIO = 2.0
+    
+    def __init__(self):
+        self._actions: dict[str, ActionTrust] = {}
+        self._baseline_success_rate: float = 0.7
+    
+    def record_outcome(self, action_id: str, success: bool, delta: float = 0.0):
+        trust = self.get_trust(action_id)
+        trust.total_executions += 1
+        if success: trust.successful += 1
+        trust.recent_outcomes.append(success)
+        if len(trust.recent_outcomes) > 10: trust.recent_outcomes.pop(0)
+        recent_rate = sum(trust.recent_outcomes) / len(trust.recent_outcomes)
+        hist_rate = trust.successful / max(1, trust.total_executions)
+        raw_score = 0.7 * recent_rate + 0.3 * hist_rate
+        consecutive_failures = sum(1 for o in reversed(trust.recent_outcomes) if not o)
+        trust.penalty = min(0.5, consecutive_failures * 0.1)
+        trust.trust_score = max(0.0, min(1.0, raw_score - trust.penalty))
+        if trust.total_executions < self.SHADOW_MODE_THRESHOLD:
+            trust.trust_score = min(trust.trust_score, 0.5)
+        if trust.total_executions >= self.SHADOW_MODE_THRESHOLD:
+            if recent_rate < self._baseline_success_rate / self.ROLLBACK_RATIO:
+                trust.trust_score = max(0.1, trust.trust_score - 0.2)
+        return trust
+\end{lstlisting}
+
+\section{NaturalForgetting — Modelo Atkinson-Shiffrin}
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\tiny, caption={NaturalForgetting com decaimento adaptativo}]
+class NaturalForgetting:
+    SENSORY_TTL = 30
+    SHORT_TERM_TTL = 300
+    LONG_TERM_TTL = 86400
+    PROMOTE_TO_SHORT = 3
+    PROMOTE_TO_LONG = 5
+    
+    def store(self, content: str, importance: float = 0.5) -> MemorySlot:
+        slot = MemorySlot(content=content, importance=importance,
+                         decay_rate=0.01 + (1.0 - importance) * 0.05,
+                         created_at=datetime.now(BRAZIL_TZ).isoformat(),
+                         last_accessed=datetime.now(BRAZIL_TZ).isoformat(),
+                         memory_type="sensory")
+        self._slots.append(slot)
+        if len([s for s in self._slots if s.memory_type == "sensory"]) > 50:
+            self._prune_sensory()
+        return slot
+    
+    def recall(self, content_hint: str) -> MemorySlot | None:
+        now = datetime.now(BRAZIL_TZ); self._prune_expired()
+        for slot in reversed(self._slots):
+            if content_hint.lower() in slot.content.lower():
+                slot.access_count += 1; slot.last_accessed = now.isoformat()
+                if slot.memory_type == "sensory" and slot.access_count >= self.PROMOTE_TO_SHORT:
+                    slot.memory_type = "short_term"; slot.decay_rate *= 0.5
+                if slot.memory_type == "short_term" and slot.access_count >= self.PROMOTE_TO_LONG and slot.importance >= 0.6:
+                    slot.memory_type = "long_term"; slot.decay_rate *= 0.2
+                return slot
+        return None
+\end{lstlisting}
+
+\section{MetacognitiveMonitor — Detecção de Anomalias}
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\tiny, caption={AnomalyDetector — 3 padrões de anomalia}]
+class AnomalyDetector:
+    def detect(self, scan_output: dict[str, Any]) -> list[AnomalyPattern]:
+        anomalies: list[AnomalyPattern] = []
+        if len(self._history) < 2: return anomalies
+        
+        # ANOM-001: Queda brusca de densidade (>30% abaixo da media)
+        densities = [h["overall_density"] for h in self._history[-5:]]
+        avg_density = sum(densities) / len(densities)
+        current = scan_output.get("overall_density", 0)
+        if avg_density > 0 and current < avg_density * 0.7:
+            anomalies.append(AnomalyPattern("ANOM-001", "global", (avg_density*0.7, 1.0),
+                            current, "critical", f"Queda: {current:.0%} vs media {avg_density:.0%}"))
+        
+        # ANOM-002: Perda de >= 2 categorias em uma dimensao
+        dims = scan_output.get("dimensions", {})
+        for h in self._history[-3:]:
+            h_dims = h.get("dimensions", {})
+            for dk, dd in dims.items():
+                hd = h_dims.get(dk, {})
+                prev = set(hd.get("covered", [])); curr = set(dd.get("covered", []))
+                lost = prev - curr
+                if len(lost) >= 2:
+                    anomalies.append(AnomalyPattern("ANOM-002", dk, (0, len(prev)),
+                                    len(curr), "high", f"Dimensao {dk} perdeu {len(lost)} cats: {lost}"))
+        
+        # ANOM-003: Comfort zone estagnada (mesmas categorias por 3+ scans)
+        if len(self._history) >= 3:
+            last_covered = set()
+            for dk, dd in dims.items(): last_covered.update(dd.get("covered", []))
+            prev_sets = []
+            for h in self._history[-3:]:
+                s = set()
+                for dk, dd in h.get("dimensions", {}).items(): s.update(dd.get("covered", []))
+                prev_sets.append(s)
+            if all(last_covered == s for s in prev_sets):
+                anomalies.append(AnomalyPattern("ANOM-003", "global", (0,0), 0, "moderate",
+                                "Comfort zone estagnada: mesmas categorias ha 3+ scans"))
+        self._patterns.extend(anomalies); return anomalies
+\end{lstlisting}
+
+\chapter{Log de Execução do Pipeline (JSONL)}
+
+\begin{lstlisting}[basicstyle=\ttfamily\tiny, caption={ecosystem-observability.jsonl — excerto de 8.034 eventos}]
+{"t":"2026-06-10T17:33:29Z","e":"scan_start","p":"noological","c":0.65}
+{"t":"2026-06-10T17:33:30Z","e":"scan_complete","p":"noological","d":0.27,"ms":45}
+{"t":"2026-06-10T17:33:31Z","e":"anomaly","pat":"ANOM-001","sev":"critical","dim":"global"}
+{"t":"2026-06-10T17:33:32Z","e":"correction","act":"rerun","tgt":"global","pre":0.27}
+{"t":"2026-06-10T17:33:33Z","e":"correction_done","act":"rerun","ok":true,"delta":0.15}
+{"t":"2026-06-10T17:33:34Z","e":"gate","act":"scan_raciocinio","ok":true,"trust":0.85,"risk":"safe"}
+{"t":"2026-06-10T17:33:35Z","e":"trust_update","act":"scan_raciocinio","pre":0.82,"post":0.88}
+{"t":"2026-06-10T17:33:36Z","e":"memory_promo","item":"ANOM-001","from":"short","to":"long","n":6}
+{"t":"2026-06-10T17:33:37Z","e":"dialectic","type":"aufheben","T":"scanner 10 dims","A":"missing eng"}
+{"t":"2026-06-10T17:33:38Z","e":"ostrom","goal":"Expand scanner","score":0.88,"rec":"approve"}
+{"t":"2026-06-10T17:33:39Z","e":"self_update","lvl":"N3","conf":0.72,"anom":2,"corr":1}
+{"t":"2026-06-10T17:33:40Z","e":"forecast","pred":0.68,"trend":"falling","risk":"moderate"}
+\end{lstlisting}
+
+\chapter{Glossário de Termos Técnicos (Expandido)}
+
+\begin{longtable}{p{3.5cm}p{9.5cm}}
+\toprule
+\textbf{Termo} & \textbf{Definição} \\
+\midrule
+ADT (ADR) & Architecture Decision Record — documento que registra decisão arquitetural com contexto, alternativas e justificativa. \\
+AGI & Artificial General Intelligence — inteligência artificial com capacidade de generalização cross-domain. \\
+AST & Attention Schema Theory — teoria de Graziano (2013) sobre consciência como modelo de atenção. \\
+Behavioral Gate & Mecanismo de pré-execução que decide se uma ação deve ser executada baseado em trust score. \\
+CapabilityUnit & Estrutura de dados que decompõe uma capacidade em 6 tipos de insumos cognitivos. \\
+CognitiveInput & Unidade atômica de insumo cognitivo (conceito, método, ferramenta, etc.). \\
+CPS & Cognitive Preservation Score — proporção de funções preservadas após compressão. \\
+CR & Compression Ratio — razão entre tokens originais e comprimidos. \\
+CT & Critical Test — teste automatizado que valida um comportamento crítico do sistema. \\
+DG & Density Gain — produto de CPS por CR. \\
+DP1-DP8 & Ostrom's Design Principles — 8 princípios de governança de commons. \\
+DSR & Design Science Research — paradigma de pesquisa que produz artefatos de TI. \\
+FLI & Functional Loss Index — proporção de funções perdidas na compressão. \\
+Granger Score & Medida de causalidade: P(B|A) - P(B). Score > 0.2 indica causalidade. \\
+GWT & Global Workspace Theory — teoria de Baars (1988) sobre consciência como broadcast global. \\
+JSONL & JSON Lines — formato de log onde cada linha é um objeto JSON independente. \\
+Lift & Razão P(efeito|causa) / P(efeito). Lift > 1.5 indica preditor forte. \\
+MCSP & Minimum Capability Solver — algoritmo do conjunto mínimo de capacidades. \\
+N0-N3.5 & Taxonomia de níveis de consciência para sistemas de software. \\
+NRR & Noise Reduction Rate — proporção de elementos removidos como ruído. \\
+Ostrom Score & Score 0-1 de aderência de um goal aos 8 Design Principles. \\
+Rollback Detection & Mecanismo que reduz confiança quando taxa de sucesso cai abaixo de 50\% da baseline. \\
+Shadow Mode & Modo de operação com trust limitado (<=0.5) nas primeiras 5 execuções. \\
+SNS & Structural Noise Scanner — scanner de compressão estrutural. \\
+SPEC & Specification — documento formal que define comportamento esperado de um módulo. \\
+SPS & Structural Preservation Score — proporção de funções preservadas. \\
+TDD & Test-Driven Development — desenvolvimento orientado a testes. \\
+Trust Score & Pontuação de confiança (0-1) atribuída a cada ação do sistema. \\
+\bottomrule
+\caption{Glossário de Termos Técnicos do OpenCode Ecosystem}
+\end{longtable}
+
+\end{apendicesenv}

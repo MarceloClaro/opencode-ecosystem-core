@@ -1,0 +1,124 @@
+% ===== APÊNDICE A: Lista Completa de Skills por Categoria =====
+\chapter{LISTA COMPLETA DE SKILLS POR CATEGORIA}
+\label{ap:skills}
+
+\begin{longtable}{p{4cm}p{11cm}}
+\toprule
+\textbf{Categoria} & \textbf{Skills} \\
+\midrule
+\endfirsthead
+\multicolumn{2}{c}{\textit{continuação...}} \\
+\toprule
+\textbf{Categoria} & \textbf{Skills} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+\textbf{Sistema} (12) & 
+academic-audit, code-philosophy, code-review, descobrir-e-instalar-mcp, domain-shift-camada1b, evo-10-mcpick-integration, multimodal-vision, plan-review, pypi-scout, reasoning-orchestrator, token-efficiency, self-heal \\
+\addlinespace
+
+\textbf{Pesquisa} (42) & 
+academic-export-abnt, academic-ml-pipeline, aletheia-math-research, aletheia-superhuman-integration, clinical-art-therapy, clinical-case-study, cross-validation-quantitativa, editais-br, notebooklm, qualis-target-navigator, quantum-nexus-phd, scihub-paper-downloader, world-bank-data-analysis, spec-009-d1 a spec-018-d10 \\
+\addlinespace
+
+\textbf{Ciências} (38) & 
+alphafold-database, alphagenome-single-variant, chembl-database, clinvar-database, encode-ccres-database, foldseek-structural-search, human-protein-atlas, literature-search-openalex, ncbi-sequence-fetch, pymol, pubmed-database, string-database, uniprot-database, ucsc-conservation \\
+\addlinespace
+
+\textbf{Raciocínio} (9) & 
+formal-verification (Z3), symbolic-math (SymPy), logic-programming (miniKanren), critical-reasoning, dialectical-ascent, genetic-structural, activity-theory, resurgence-analysis, substantive-generalization \\
+\addlinespace
+
+\textbf{Jurídico} (7) & 
+edicao-cirurgica, followup-advocacia, gerador-contratos, overview-juridico, pecas-juridicas-html, pesquisa-jurisprudencia, triagem-juridica \\
+\addlinespace
+
+\textbf{Agent Forum} (5) & 
+agent-forum, debate-strategies, moderator, phd-auditor, antigravity-integration \\
+\addlinespace
+
+\textbf{Agência} (26) & 
+anthropologist, geographer, historian, narratologist, psychologist, codereviewer, dboptimizer, gitworkflow, securityaudit, behavioral-nudge, product-manager, sprint-prioritizer, mcp-builder, orchestrator, workflow-architect, agent-activation, nexus-strategy \\
+\addlinespace
+
+\textbf{Outras} (88) & 
+braindump, content-engine, decision-log, deep-dive, handoff, health, make-spec, phronesis, premortem, stakeholder-update, strategy-critique, weekly-review, image-service, video-creator, opencode-skills-extra, story-to-scenes, brainstorming, executing-plans, subagent-driven-dev, systematic-debugging, test-driven-dev, writing-plans, mirofish-sync, cora-debate, decisionnode, document-ir, oasis-profile-gen, swarm-review, 8-bit-orbit-video, blog-post, dashboard, design-brief, docs-page, email-marketing, eng-runbook, finance-report, github-dashboard, html-ppt, ib-pitch-book, invoice, kanban-board, magazine-poster, meeting-notes, mobile-app, open-design-landing, pm-spec, pricing-page, replit-deck, saas-landing, simple-deck, social-carousel, social-media-dashboard, video-shortform, waitlist-page, web-prototype, wireframe-sketch, brand-icons, creative-review, launch-video (total de ~88 skills adicionais) \\
+\bottomrule
+\caption{Inventário completo das 106 skills do ecossistema OpenCode v5.1.0}\\
+\label{tab:skills-inventory}
+\end{longtable}
+
+\section{Ecossistema de Scanners Epistemológicos}
+
+Além das skills de processamento, o ecossistema OpenCode v5.1.0 inclui um subsistema de 5 scanners epistemológicos que operam como uma camada de meta-análise sobre o conhecimento produzido. A Tabela~\ref{tab:scanners-apendice} apresenta a arquitetura completa deste subsistema.
+
+\begin{longtable}{p{3cm}p{3.5cm}p{3cm}p{2cm}p{2cm}}
+\caption{Ecossistema de Scanners Epistemológicos}\\
+\label{tab:scanners-apendice}\\
+\toprule
+\textbf{Scanner} & \textbf{Pergunta} & \textbf{Arquivo} & \textbf{SPEC} & \textbf{CTs} \\
+\midrule
+\endfirsthead
+\multicolumn{5}{c}{\textit{continuação...}} \\
+\toprule
+\textbf{Scanner} & \textbf{Pergunta} & \textbf{Arquivo} & \textbf{SPEC} & \textbf{CTs} \\
+\midrule
+\endhead
+NoologicalScanner v3.0 & ``O que não existe?'' (descritivo) & \texttt{noological\_scanner.py} & 028 & 18 \\
+TeleologicalReverseScanner & ``O que deveria existir?'' (prescritivo) & \texttt{teleological\_scanner.py} & 029 & 12 \\
+CrossValidationEngine v2.0 & ``O que sustenta o quê?'' (estrutural) & \texttt{cross\_validation\_engine.py} & 030 & 6 \\
+PolymathicConvergence v2.0 & ``Quem já resolveu?'' (comparativo) & \texttt{evolutionary\_pipeline.py} & 030 & 4 \\
+TrajectoryMapper & ``Qual o melhor caminho?'' (preditivo) & \texttt{evolutionary\_pipeline.py} & 030 & 4 \\
+MinimumCapabilitySolver & ``Qual o conjunto mínimo?'' & \texttt{minimum\_capability\_solver.py} & 032 & 14 \\
+EvolutionTracker & ``Como estamos evoluindo?'' & \texttt{scanner\_refinements.py} & 031 & 4 \\
+TimelineEstimator & ``Quanto tempo levará?'' & \texttt{scanner\_refinements.py} & 031 & 4 \\
+\bottomrule
+\end{longtable}
+
+\section{Especificações TDD (SPEC-025 a SPEC-032)}
+
+A Tabela~\ref{tab:specs-tdd} lista as 8 especificações TDD que validam o ecossistema, com seus respectivos arquivos de teste e contagem de CTs.
+
+\begin{longtable}{p{2cm}p{5cm}p{5cm}p{2cm}}
+\caption{Especificações TDD do Ecossistema}\\
+\label{tab:specs-tdd}\\
+\toprule
+\textbf{SPEC} & \textbf{Nome} & \textbf{Arquivo de Teste} & \textbf{CTs} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}{\textit{continuação...}} \\
+\toprule
+\textbf{SPEC} & \textbf{Nome} & \textbf{Arquivo de Teste} & \textbf{CTs} \\
+\midrule
+\endhead
+025 & Frontmatter Validator & \texttt{test\_frontmatter\_validator.py} & 106 \\
+026 & Evolve Pipeline Review & \texttt{test\_evolve\_pipeline.py} & 10 \\
+027 & Subcommand Routing + E2E & \texttt{test\_evolve\_e2e.py} & 8 \\
+028 & Noological Scanner v3.0 & \texttt{test\_noological\_scanner.py} & 18 \\
+029 & Teleological Reverse Scanner & \texttt{test\_teleological\_scanner.py} & 12 \\
+030 & Evolutionary Scanner Pipeline & \texttt{test\_evolutionary\_scanner.py} & 16 \\
+031 & Scanner Refinement & \texttt{test\_scanner\_refinement.py} & 16 \\
+032 & MCSP Solver & \texttt{test\_minimum\_capability\_solver.py} & 14 \\
+\bottomrule
+\multicolumn{3}{r}{\textbf{Total}} & \textbf{255} \\
+\end{longtable}
+
+\section{Componentes do Diretório de Auditoria Acadêmica}
+
+O diretório \texttt{skills/system/academic-audit/} concentra 9 componentes que implementam o pipeline completo de auditoria e análise epistemológica do ecossistema:
+
+\begin{enumerate}
+  \item \texttt{noological\_scanner.py} (509 linhas) --- Scanner epistemológico descritivo. Implementa 10 dimensões $\times$ 92 categorias com filtro de negação v3.0 (6 padrões regex), word-boundary matching ($\backslash$b), e palavras-chave enriquecidas com n-gramas e sinônimos.
+  \item \texttt{teleological\_scanner.py} (320 linhas) --- Scanner prescritivo reverso. Mapeia 8 tipos de objetivo de pesquisa para requisitos epistemológicos, infere gaps teleológicos com severidade proporcional ao peso, e calcula score de alinhamento (0--1).
+  \item \texttt{cross\_validation\_engine.py} (320 linhas) --- Motor de validação cruzada. Constrói grafo de dependências com 92 nós e 73 arestas, detecta bottlenecks e ciclos, calcula impacto em cascata e matriz de co-ocorrência.
+  \item \texttt{evolutionary\_pipeline.py} (350 linhas) --- Pipeline orquestrador dos 5 scanners. Inclui PolymathicConvergence (30 domínios), TrajectoryMapper (4 cenários, 3 rotas), e EvolutionaryRoadmap com relatório Markdown.
+  \item \texttt{minimum\_capability\_solver.py} (300 linhas) --- Solver do MCSP. Implementa backward\_closure $O(|V|+|E|)$, greedy\_select $O(|V|^2 \cdot |E|)$, e topological\_order $O(|V|+|E|)$ com detecção de ciclos.
+  \item \texttt{scanner\_refinements.py} (280 linhas) --- EvolutionTracker (snapshots, delta, trend, velocity) e TimelineEstimator (4 tipos de cenário, fases, risco).
+  \item \texttt{SKILL.md} --- Documentação da skill de auditoria acadêmica, incluindo protocolo TSAC, integração com scanners, e instruções de uso.
+  \item \texttt{academic\_audit.py} --- Motor de auditoria caixa branca com rastreamento de afirmações, evidências e decisões.
+  \item \texttt{auto\_score\_qualis.py} --- Calculadora de score Qualis A1 com 10 critérios ponderados.
+\end{enumerate}
+
+\newpage

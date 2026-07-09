@@ -1,0 +1,382 @@
+{
+  "metadata": {
+    "script_hash": "806094ea5f8a",
+    "seed": 42,
+    "timestamp": "2026-05-13T05:57:19.953334",
+    "n_samples": 262,
+    "n_features": 11,
+    "n_arm_strict": 3,
+    "n_arm_relative": 29
+  },
+  "classification": {
+    "Logistic Regression": {
+      "accuracy": 0.6485,
+      "accuracy_std": 0.0405,
+      "f1": 0.2759,
+      "f1_std": 0.0706,
+      "roc_auc": 0.7071,
+      "roc_auc_std": 0.0852,
+      "precision": 0.1818,
+      "recall": 0.6207
+    },
+    "Random Forest": {
+      "accuracy": 0.8741,
+      "accuracy_std": 0.0149,
+      "f1": 0.0444,
+      "f1_std": 0.0889,
+      "roc_auc": 0.7913,
+      "roc_auc_std": 0.0718,
+      "precision": 0.1667,
+      "recall": 0.0345
+    }
+  },
+  "regression": {
+    "Linear Regression": {
+      "r2": -0.1928,
+      "r2_std": 0.1061,
+      "rmse": 4.6516,
+      "mae": 2.4262
+    },
+    "Ridge (alpha=1)": {
+      "r2": -0.189,
+      "r2_std": 0.1035,
+      "rmse": 4.6414,
+      "mae": 2.4191
+    },
+    "Random Forest": {
+      "r2": -0.6126,
+      "r2_std": 0.458,
+      "rmse": 4.9967,
+      "mae": 2.5564
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "gdp_per_capita",
+      "importance_rf": 0.19240829549795097,
+      "importance_perm": 0.050572519083969515,
+      "importance_perm_std": 0.010582573002299056
+    },
+    {
+      "feature": "rd_spending",
+      "importance_rf": 0.12174651703998822,
+      "importance_perm": 0.017366412213740523,
+      "importance_perm_std": 0.0063265589520041165
+    },
+    {
+      "feature": "internet_users",
+      "importance_rf": 0.11376884393874298,
+      "importance_perm": 0.03931297709923669,
+      "importance_perm_std": 0.007150761066868395
+    },
+    {
+      "feature": "fdi_inflows",
+      "importance_rf": 0.10671243543690395,
+      "importance_perm": 0.007442748091603085,
+      "importance_perm_std": 0.0037152523538037854
+    },
+    {
+      "feature": "services_emp",
+      "importance_rf": 0.0903243681205809,
+      "importance_perm": 0.023854961832061115,
+      "importance_perm_std": 0.007621650972410627
+    },
+    {
+      "feature": "gini",
+      "importance_rf": 0.08981943130033922,
+      "importance_perm": 0.03568702290076341,
+      "importance_perm_std": 0.008642741888720813
+    },
+    {
+      "feature": "high_tech_exp",
+      "importance_rf": 0.08175930524991132,
+      "importance_perm": 0.04026717557251913,
+      "importance_perm_std": 0.007678778449897227
+    },
+    {
+      "feature": "unemployment",
+      "importance_rf": 0.07321263695269693,
+      "importance_perm": 0.020992366412213814,
+      "importance_perm_std": 0.004596028465187905
+    },
+    {
+      "feature": "tertiary_enrollment",
+      "importance_rf": 0.066908409507384,
+      "importance_perm": 0.02213740458015274,
+      "importance_perm_std": 0.005343511450381681
+    },
+    {
+      "feature": "patent_apps",
+      "importance_rf": 0.04063645850155998,
+      "importance_perm": 0.021755725190839754,
+      "importance_perm_std": 0.00694404786208406
+    },
+    {
+      "feature": "ai_readiness",
+      "importance_rf": 0.02270329845394143,
+      "importance_perm": 0.0020992366412214023,
+      "importance_perm_std": 0.002249966817280862
+    }
+  ],
+  "feature_importance_regression": [
+    {
+      "feature": "fdi_inflows",
+      "importance": 0.2436235002834209
+    },
+    {
+      "feature": "unemployment",
+      "importance": 0.18499765032583432
+    },
+    {
+      "feature": "gdp_per_capita",
+      "importance": 0.1557696639020726
+    },
+    {
+      "feature": "services_emp",
+      "importance": 0.09813220826952775
+    },
+    {
+      "feature": "internet_users",
+      "importance": 0.07714162430794937
+    },
+    {
+      "feature": "tertiary_enrollment",
+      "importance": 0.05943240694835632
+    },
+    {
+      "feature": "high_tech_exp",
+      "importance": 0.04900123648598873
+    },
+    {
+      "feature": "gini",
+      "importance": 0.047653022879423856
+    },
+    {
+      "feature": "rd_spending",
+      "importance": 0.03809132174741059
+    },
+    {
+      "feature": "patent_apps",
+      "importance": 0.03404145467468501
+    },
+    {
+      "feature": "ai_readiness",
+      "importance": 0.012115910175330591
+    }
+  ],
+  "anomalies": {
+    "n_anomalies": 27,
+    "top_anomalies": [
+      {
+        "economy": "LIE",
+        "anomaly_score": -0.21545725155503892,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": -1.15748291975636,
+        "ai_readiness": 98.2641983
+      },
+      {
+        "economy": "LUX",
+        "anomaly_score": -0.08944857512382043,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 0.35861253942069,
+        "ai_readiness": 99.12902211
+      },
+      {
+        "economy": "WLD",
+        "anomaly_score": -0.08342935274315977,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 2.87194964204316,
+        "ai_readiness": 73.6
+      },
+      {
+        "economy": "EAS",
+        "anomaly_score": -0.07522178537007695,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 3.79010550023051,
+        "ai_readiness": 88.4
+      },
+      {
+        "economy": "CYM",
+        "anomaly_score": -0.06958820784589026,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 5.8155918263088,
+        "ai_readiness": 25.656968516087456
+      },
+      {
+        "economy": "MCO",
+        "anomaly_score": -0.06361124272656271,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 8.51053758860212,
+        "ai_readiness": 68.89262199561034
+      },
+      {
+        "economy": "KOR",
+        "anomaly_score": -0.05166910446746953,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 2.00361101838986,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "CHN",
+        "anomaly_score": -0.03676147780028527,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 4.9773565917572,
+        "ai_readiness": 91.6
+      },
+      {
+        "economy": "ISR",
+        "anomaly_score": -0.033061408330671616,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 0.871968424377442,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "SWE",
+        "anomaly_score": -0.03136074907731046,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 0.820071806703865,
+        "ai_readiness": 95.76629783
+      },
+      {
+        "economy": "SWZ",
+        "anomaly_score": -0.028664795344365834,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 2.97391075973985,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "MOZ",
+        "anomaly_score": -0.02742744380501816,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 2.14854964610538,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "HKG",
+        "anomaly_score": -0.021954501090965306,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 2.50498758466826,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "ZAF",
+        "anomaly_score": -0.020856848660354033,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 1,
+        "gdp_growth": 0.534843531905139,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "UMC",
+        "anomaly_score": -0.020491921992724205,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 4.17952127549748,
+        "ai_readiness": 88.8
+      },
+      {
+        "economy": "USA",
+        "anomaly_score": -0.02032169210058199,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 2.79300127716779,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "CHE",
+        "anomaly_score": -0.01647326514976899,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 1.30233332541106,
+        "ai_readiness": 97.32103855
+      },
+      {
+        "economy": "NAM",
+        "anomaly_score": -0.016383988632492297,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 3.71154502416731,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "DJI",
+        "anomaly_score": -0.010564654616894598,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 6.98048467276334,
+        "ai_readiness": 0.0
+      },
+      {
+        "economy": "HIC",
+        "anomaly_score": -0.008682814059250754,
+        "is_anomaly": true,
+        "arm_strict": 0,
+        "arm_relative": 0,
+        "gdp_growth": 1.95000793704469,
+        "ai_readiness": 94.2
+      }
+    ]
+  },
+  "cluster_profiles": {
+    "0": {
+      "n": 126,
+      "gdp_mean": 15435.497967631287,
+      "ai_mean": 13.794190266855242,
+      "growth_mean": 3.045180770057048,
+      "arm_count": 22
+    },
+    "1": {
+      "n": 54,
+      "gdp_mean": 43634.59558290754,
+      "ai_mean": 28.263514608644684,
+      "growth_mean": 2.590678255669295,
+      "arm_count": 0
+    },
+    "2": {
+      "n": 81,
+      "gdp_mean": 1848.9709012633373,
+      "ai_mean": 8.512382448543907,
+      "growth_mean": 3.59909871244491,
+      "arm_count": 7
+    },
+    "3": {
+      "n": 1,
+      "gdp_mean": 167187.15730982,
+      "ai_mean": 98.2641983,
+      "growth_mean": -1.15748291975636,
+      "arm_count": 0
+    }
+  }
+}

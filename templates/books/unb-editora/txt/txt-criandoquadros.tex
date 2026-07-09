@@ -1,0 +1,62 @@
+%\fancyfoot[CO,CE]{}
+\fancyfoot[LO]{\small}
+\fancyfoot[RO]{\small}
+%\fancyfoot[CE]{\Author}
+\fancyfoot[LE]{\small}
+\fancyfoot[RE]{\small}
+
+\begin{discussion}
+
+\hfill
+
+\begin{center}
+  \textsc{\large Criando quadros}\\
+\end{center}
+
+\vspace{1ex}
+
+\begin{flushright}
+  \textbf{Leonardo Luiz e Castro} \\
+  \vspace{1ex}
+  \textit{\small Instituto de Física} \\
+  \textit{\small Universidade de Brasília} \\
+\end{flushright}
+
+\addcontentsline{toc}{section}{Texto complementar -   Criando quadros (Leonardo Luiz e Castro)}
+
+\vspace{1ex}
+
+\section*{O que são quadros?}
+
+Quadros são parecidos com tabelas, com a diferença de que não contêm dados numéricos, mas sim informação textual. Aparentemente, a ABNT é pioneira no mundo em se preocupar com tal distinção.
+
+\section*{Exemplo de quadro em \LaTeX?}
+
+Preferi listar os quadros como figuras. Vi algum livro que fazia assim... Veja como a figura \ref{fig:estados-da-materia} ficou interessante! Lembre-se que só é possível inserir uma figura dentro de um ambiente como este se a opção de não flutuação ([H]) for utilizada.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{\hsize}
+		\centering
+		\taburulecolor{white}\arrayrulecolor{white}
+		\caption{Quadro de caracterização dos estados da matéria.}
+		\label{fig:estados-da-materia}
+		\begin{tabular}{| >{\centering\cellcolor{verde_UnB}\color{white}}p{0.11\hsize} | >{\centering\cellcolor{verde_UnB}\color{white}}p{0.12\hsize} | >{\centering\cellcolor{verde_UnB}\color{white}}p{0.12\hsize} | >{\centering\cellcolor{verde_UnB}\color{white}\footnotesize}p{0.11\hsize} | >{\centering\cellcolor{verde_UnB}\color{white}\footnotesize}p{0.16\hsize} | >{\centering\cellcolor{verde_UnB}\color{white}\footnotesize}p{0.17\hsize} |}
+			\hline
+			{\bf Estado} & {\bf Volume} & {\bf Forma} & {\bf É fluido?} & {\bf É matéria condensada?} & {\bf É compressível?} \tabularnewline
+			\hline
+		\end{tabular}
+		\begin{tabular}{| >{\centering\cellcolor{verde_UnB!70}\color{white}\small}p{0.11\hsize} | >{\centering\cellcolor{verde_UnB!50}\color{black}\small}p{0.12\hsize} | >{\centering\cellcolor{verde_UnB!50}\color{black}\small}p{0.12\hsize} | >{\centering\cellcolor{verde_UnB!50}\color{black}\small}p{0.11\hsize} | >{\centering\cellcolor{verde_UnB!50}\color{black}\small}p{0.16\hsize} | >{\centering\cellcolor{verde_UnB!50}\color{black}\small}p{0.17\hsize} |}
+			\hline
+			Gasoso & ajustável & ajustável & sim & não & muito \tabularnewline
+			\hline
+			Líquido & fixo & ajustável & sim & sim & pouco \tabularnewline
+			\hline
+			Sólido & fixo & fixa & não & sim & não \tabularnewline
+			\hline
+		\end{tabular}
+		\source{elaboração do autores de Física para Ciências Agrárias e Ambientais (Leonardo Castro e Olavo Filho).}
+	\end{minipage}
+\end{figure}
+
+\end{discussion}

@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#283593;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e7d32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388e3c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1976d2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e65100;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ef6c00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6a1b9a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7b1fa2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c62828;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d32f2f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00695c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00796b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f57f17;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f9a825;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <filter id="shadowDeep" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1565c0"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="1200" height="900" fill="#f5f5f5" rx="8"/>
+  <rect x="0" y="0" width="1200" height="900" fill="none" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Título -->
+  <rect x="100" y="15" width="1000" height="50" rx="8" fill="url(#titleGrad)" filter="url(#shadowDeep)"/>
+  <text x="600" y="47" text-anchor="middle" fill="white" font-size="16" font-weight="bold">FLUXOGRAMA DA PESQUISA E TESE — ARM × IAG</text>
+
+  <!-- Caixa 1: Problema Central -->
+  <rect x="350" y="85" width="500" height="55" rx="10" fill="url(#greenGrad)" filter="url(#shadow)"/>
+  <text x="600" y="108" text-anchor="middle" fill="white" font-size="13" font-weight="bold">PROBLEMA CENTRAL</text>
+  <text x="600" y="128" text-anchor="middle" fill="white" font-size="11">IAG catalisa a superação da ARM ou aprofunda assimetrias?</text>
+
+  <!-- Seta 1 -->
+  <line x1="600" y1="140" x2="600" y2="165" stroke="#1565c0" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Caixa 2: Perguntas de Pesquisa -->
+  <rect x="200" y="165" width="800" height="65" rx="8" fill="url(#blueGrad)" filter="url(#shadow)"/>
+  <text x="600" y="188" text-anchor="middle" fill="white" font-size="13" font-weight="bold">PERGUNTAS DE PESQUISA (4 EIXOS)</text>
+  <text x="600" y="207" text-anchor="middle" fill="#e3f2fd" font-size="10">(i) Fundamentos teóricos da ARM</text>
+  <text x="600" y="222" text-anchor="middle" fill="#e3f2fd" font-size="10">(ii) Canais de transmissão IAG→crescimento  (iii) Prontidão relativa  (iv) Implicações para o Brasil</text>
+
+  <!-- Ramificação para Metodologia -->
+  <line x1="600" y1="230" x2="600" y2="260" stroke="#1565c0" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Caixa 3: Metodologia -->
+  <rect x="150" y="260" width="900" height="90" rx="8" fill="url(#orangeGrad)" filter="url(#shadow)"/>
+  <text x="600" y="283" text-anchor="middle" fill="white" font-size="13" font-weight="bold">METODOLOGIA — ABORDAGEM DE MÉTODOS MISTOS</text>
+  
+  <rect x="170" y="295" width="280" height="42" rx="6" fill="#fff3e0" opacity="0.9"/>
+  <text x="310" y="313" text-anchor="middle" fill="#e65100" font-size="10" font-weight="bold">REVISÃO SISTEMÁTICA (PRISMA)</text>
+  <text x="310" y="328" text-anchor="middle" fill="#bf360c" font-size="9">387 pubs → 127 triagem → 58 síntese</text>
+
+  <rect x="460" y="295" width="280" height="42" rx="6" fill="#fff3e0" opacity="0.9"/>
+  <text x="600" y="313" text-anchor="middle" fill="#e65100" font-size="10" font-weight="bold">DADOS SECUNDÁRIOS MULTILATERAIS</text>
+  <text x="600" y="328" text-anchor="middle" fill="#bf360c" font-size="9">Banco Mundial, FMI, OCDE, OIT, BIS, UNCTAD</text>
+
+  <rect x="750" y="295" width="280" height="42" rx="6" fill="#fff3e0" opacity="0.9"/>
+  <text x="890" y="313" text-anchor="middle" fill="#e65100" font-size="10" font-weight="bold">PIPELINE ML + ECONOMETRIA</text>
+  <text x="890" y="328" text-anchor="middle" fill="#bf360c" font-size="9">6 blocos: correlação, clusters, regressão, SHAP</text>
+
+  <!-- Seta -->
+  <line x1="600" y1="350" x2="600" y2="380" stroke="#1565c0" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Caixa 4: Framework Analítico -->
+  <rect x="250" y="380" width="700" height="55" rx="8" fill="url(#purpleGrad)" filter="url(#shadow)"/>
+  <text x="600" y="403" text-anchor="middle" fill="white" font-size="13" font-weight="bold">FRAMEWORK ANALÍTICO: ESTRATÉGIA 3i × AIPI</text>
+  <text x="600" y="423" text-anchor="middle" fill="#e1bee7" font-size="11">Integração: Investment → Infusion → Innovation  +  AI Preparedness Index (4 pilares)</text>
+
+  <!-- Seta -->
+  <line x1="600" y1="435" x2="600" y2="465" stroke="#1565c0" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Caixa 5: Resultados Principais -->
+  <rect x="80" y="465" width="1040" height="130" rx="8" fill="url(#tealGrad)" filter="url(#shadow)"/>
+  <text x="600" y="488" text-anchor="middle" fill="white" font-size="13" font-weight="bold">RESULTADOS PRINCIPAIS</text>
+
+  <rect x="100" y="500" width="240" height="82" rx="6" fill="#e0f2f1" opacity="0.95"/>
+  <text x="220" y="518" text-anchor="middle" fill="#004d40" font-size="10" font-weight="bold">ASSIMETRIAS ESTRUTURAIS</text>
+  <text x="220" y="533" text-anchor="middle" fill="#00695c" font-size="9">Alta renda: AIPI=0,72</text>
+  <text x="220" y="548" text-anchor="middle" fill="#00695c" font-size="9">RM-alta: 0,48 | RM-baixa: 0,35</text>
+  <text x="220" y="563" text-anchor="middle" fill="#00695c" font-size="9">Inovação: lacuna de 0,30 ponto</text>
+  <text x="220" y="578" text-anchor="middle" fill="#00695c" font-size="9">SHAP: educação 25,1% + internet 24,3%</text>
+
+  <rect x="355" y="500" width="240" height="82" rx="6" fill="#e0f2f1" opacity="0.95"/>
+  <text x="475" y="518" text-anchor="middle" fill="#004d40" font-size="10" font-weight="bold">EFEITO THRESHOLD</text>
+  <text x="475" y="533" text-anchor="middle" fill="#00695c" font-size="9">Correlação AIPI×PIBpc:</text>
+  <text x="475" y="548" text-anchor="middle" fill="#00695c" font-size="9">Alta renda: r=0,52 (p=0,003)</text>
+  <text x="475" y="563" text-anchor="middle" fill="#00695c" font-size="9">RM-baixa: r=0,18 (p=0,214) NS</text>
+  <text x="475" y="578" text-anchor="middle" fill="#00695c" font-size="9">IA é tecnologia complementar</text>
+
+  <rect x="610" y="500" width="240" height="82" rx="6" fill="#e0f2f1" opacity="0.95"/>
+  <text x="730" y="518" text-anchor="middle" fill="#004d40" font-size="10" font-weight="bold">5 CANAIS DE TRANSMISSÃO</text>
+  <text x="730" y="533" text-anchor="middle" fill="#00695c" font-size="9">① Produtividade do trabalho</text>
+  <text x="730" y="548" text-anchor="middle" fill="#00695c" font-size="9">② Vantagens comparativas</text>
+  <text x="730" y="563" text-anchor="middle" fill="#00695c" font-size="9">③ Inovação frugal / leapfrogging</text>
+  <text x="730" y="578" text-anchor="middle" fill="#00695c" font-size="9">④ Dualização do mercado trabalho</text>
+
+  <rect x="865" y="500" width="240" height="82" rx="6" fill="#e0f2f1" opacity="0.95"/>
+  <text x="985" y="518" text-anchor="middle" fill="#004d40" font-size="10" font-weight="bold">MATRIZ ARM-IAG</text>
+  <text x="985" y="533" text-anchor="middle" fill="#00695c" font-size="9">4 trajetórias:</text>
+  <text x="985" y="548" text-anchor="middle" fill="#00695c" font-size="9">T1: Vulnerabilidade Passiva</text>
+  <text x="985" y="563" text-anchor="middle" fill="#00695c" font-size="9">T2: Leapfrogging Seletivo</text>
+  <text x="985" y="578" text-anchor="middle" fill="#00695c" font-size="9">T3: Armadilha Tecnológica</text>
+  <text x="985" y="593" text-anchor="middle" fill="#004d40" font-size="9">T4: Transição Virtuosa</text>
+
+  <!-- Seta -->
+  <line x1="600" y1="595" x2="600" y2="625" stroke="#1565c0" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Caixa 6: Discussão -->
+  <rect x="150" y="625" width="900" height="65" rx="8" fill="url(#goldGrad)" filter="url(#shadow)"/>
+  <text x="600" y="648" text-anchor="middle" fill="white" font-size="13" font-weight="bold">DISCUSSÃO — AMBIVALÊNCIA ESTRUTURAL</text>
+  <text x="600" y="665" text-anchor="middle" fill="#fff8e1" font-size="10">IAG como tecnologia enviesada que amplifica vantagens pré-existentes — desfecho depende de políticas públicas</text>
+  <text x="600" y="682" text-anchor="middle" fill="#fff8e1" font-size="10">Nova Divisão Internacional do Trabalho Cognitivo  |  Repensando a Estratégia 3i  |  Dilema Brasileiro</text>
+
+  <!-- Seta -->
+  <line x1="600" y1="690" x2="600" y2="720" stroke="#1565c0" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Caixa 7: Conclusão / Tese -->
+  <rect x="150" y="720" width="900" height="75" rx="10" fill="url(#redGrad)" filter="url(#shadowDeep)"/>
+  <text x="600" y="743" text-anchor="middle" fill="white" font-size="14" font-weight="bold">TESE CENTRAL (CONCLUSÃO)</text>
+  <text x="600" y="763" text-anchor="middle" fill="#ffcdd2" font-size="11">A IAG tem efeito AMBIVALENTE sobre a ARM: catalisador SE houver políticas deliberadas de infusão,</text>
+  <text x="600" y="780" text-anchor="middle" fill="#ffcdd2" font-size="11">capacitação e regulação; aprofundador de assimetrias NA AUSÊNCIA destas — "ARM 2.0" cognitiva.</text>
+
+  <!-- Caixa 8: Recomendações (lateral) -->
+  <rect x="30" y="625" width="100" height="170" rx="8" fill="#37474f" filter="url(#shadow)"/>
+  <text x="80" y="660" text-anchor="middle" fill="white" font-size="9" font-weight="bold">RECOMENDAÇÕES</text>
+  <text x="80" y="685" text-anchor="middle" fill="#ffccbc" font-size="8">E1: Infraestrutura</text>
+  <text x="80" y="705" text-anchor="middle" fill="#ffccbc" font-size="8">digital</text>
+  <text x="80" y="725" text-anchor="middle" fill="#ffccbc" font-size="8">E2: Capital</text>
+  <text x="80" y="745" text-anchor="middle" fill="#ffccbc" font-size="8">humano</text>
+  <text x="80" y="765" text-anchor="middle" fill="#ffccbc" font-size="8">E3: Regulação</text>
+  <text x="80" y="785" text-anchor="middle" fill="#ffccbc" font-size="8">e governança</text>
+
+  <!-- Legendas -->
+  <rect x="1070" y="720" width="110" height="50" rx="5" fill="#37474f" opacity="0.8"/>
+  <text x="1125" y="738" text-anchor="middle" fill="#aaa" font-size="8">Legenda</text>
+  <rect x="1080" y="745" width="10" height="10" fill="url(#titleGrad)"/>
+  <text x="1095" y="754" fill="#ccc" font-size="8">Problema/Tese</text>
+
+  <!-- Linha tracejada conectando resultados à seta -->
+  <line x1="750" y1="530" x2="750" y2="595" stroke="#666" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="760" y="570" fill="#666" font-size="8">5 canais</text>
+</svg>

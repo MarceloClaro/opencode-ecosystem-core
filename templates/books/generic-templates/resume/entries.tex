@@ -1,0 +1,68 @@
+% CONFIG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\entrysep}
+\newlength{\entrylinesep}
+
+\setlength{\entrysep}{1.6\baselineskip}
+\setlength{\entrylinesep}{0.4\baselineskip}
+
+\makeatletter
+
+% LINE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\entryline}{\@ifstar{\entryline@star}{\entryline@nostar}}
+
+\newcommand{\entryline@star}[1]{%
+    \par\noindent#1\par%
+}
+
+\newcommand{\entryline@nostar}[1]{%
+    \par\noindent\addvspace{\entrylinesep}#1\par%
+}
+
+% HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\entryheader}{\@ifstar{\entryheader@star}{\entryheader@nostar}}
+
+\newcommand{\entryheader@star}[3][muted]{% left content, right content
+    \entryline@star{\textcolor{ink1}{#2}\hfill{\textcolor{#1}{#3}}}%
+}
+
+\newcommand{\entryheader@nostar}[3][muted]{% left content, right content
+    \entryline@nostar{\textcolor{ink1}{#2}\hfill{\textcolor{#1}{#3}}}%
+}
+
+% COLUMNS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\entrycolumns}{\@ifstar{\entrycolumns@star}{\entrycolumns@nostar}}
+
+\newcommand{\entrycolumns@star}[3][4em]{% left width, left content, right content
+    \entryline@star{\makebox[#1][l]{\textcolor{ink1}{#2}}\hspace{0.6em}#3}%
+}
+
+\newcommand{\entrycolumns@nostar}[3][4em]{% left width, left content, right content
+    \entryline@nostar{\makebox[#1][l]{\textcolor{ink1}{#2}}\hspace{0.6em}#3}%
+}
+
+% ENTRY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{sectionentry*}[3][muted]{%
+    \par\noindent%
+    \entryheader@star[#1]{#2}{#3}%
+    \bgroup%
+    \setlength{\parskip}{0pt}%
+    \setlength{\parindent}{0pt}%
+}{%
+    \egroup%
+}
+
+\newenvironment{sectionentry}[3][muted]{%
+    \par\noindent\addvspace{\entrysep}%
+    \begin{sectionentry*}[#1]{#2}{#3}%
+}{%
+    \end{sectionentry*}%
+}
+
+% @ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatother

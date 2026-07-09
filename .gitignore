@@ -18,3 +18,35 @@ academic/submissions/
 academic/reviews/
 academic/papers/
 academic/discovery/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.lof
+*.lot
+*.lol
+*.dvi
+*.ps
+*.xdv
+*.pdf_tex
+*.run.xml
+*-blx.bib
+auto/
+
+# Large binary files in templates (template source = .tex/.sty/.cls only)
+templates/**/*.mp3
+templates/**/*.mp4
+templates/**/*.wav
+templates/**/*.avi
+templates/**/*.mkv

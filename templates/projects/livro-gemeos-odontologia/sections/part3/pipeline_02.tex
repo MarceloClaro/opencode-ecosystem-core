@@ -1,0 +1,27 @@
+\section{Aquisição de Dados}
+\label{sec:aquisicao}
+
+A aquisição de dados consubstancia o limite informacional teórico do gêmeo digital. A fidelidade do construto \textit{in silico} é assintoticamente restrita pela resolução, precisão e integridade dos dados coletados \textit{in vivo}. No contexto odontológico, o espectro de captura é inerentemente heterogêneo, aglutinando tomografias volumétricas, fotogrametria de superfície, rastreamento cinemático bidirecional e registros longitudinais de acompanhamento.
+
+\subsection{Dados de Imagem e Morfologia Geométrica}
+\label{subsec:imagem}
+
+A Tomografia Computadorizada de Feixe Cônico (CBCT) permanece o baluarte para a reconstrução de estruturas duras (tecido ósseo e dental). A seleção dos parâmetros de aquisição deve obedecer rigorosamente ao princípio ALARA (\textit{As Low As Reasonably Achievable}), mitigando a exposição à radiação ionizante sem comprometer a resolução espacial. Tamanhos de voxel variam, via de regra, entre 75~$\mu$m (para campos de visão restritos, como na Endodontia) e 400~$\mu$m (para reabilitações extensas), com doses efetivas na faixa de 11 a 674~$\mu$Sv \cite{ludlow2015dose}. A integridade da imagem é frequentemente subvertida por artefatos de \textit{beam hardening} oriundos de implantes e restaurações metálicas, demandando algoritmos de Redução de Artefatos Metálicos (MAR) pré-segmentação.
+
+O escaneamento intraoral (IOS) suprime as limitações da CBCT no tocante à resolução topológica de superfície. Ao fornecer malhas densas com precisão submilimétrica (10 a 60~$\mu$m) \cite{mangano2023accuracy}, o IOS gera artefatos nos formatos PLY ou STL que representam com alta fidelidade a topografia do esmalte e a conformação gengival. A fusão computacional (registro) dessas malhas de superfície com o arcabouço volumétrico da CBCT é condição essencial para a construção do gêmeo digital híbrido \cite{khoshfekr2025digital}.
+
+Ademais, a fotogrametria intraoral atua no mapeamento de texturas. Através de projeções calibradas por matrizes de parâmetros intrínsecos e extrínsecos da câmera, texturas fotorrealistas são acopladas à malha 3D, parametrizando não apenas propriedades ópticas para fins estéticos, mas indicadores semânticos de inflamação periodontal e higidez tecidual \cite{elsaid2025digital}.
+
+\subsection{Dados Funcionais e de Cinemática Mastigatória}
+\label{subsec:funcionais}
+
+O diferencial arquitetônico de um gêmeo digital em detrimento a um fantoma tridimensional inerte reside na sua capacidade de emular o ciclo estomatognático. Sinais eletromiográficos (EMG) de superfície capturados em músculos masseter, temporal e digástrico fornecem funções de carregamento temporal para os modelos biomecânicos. A ativação muscular transita de variável abstrata para vetor de força quantificável na simulação FEM.
+
+Dispositivos de rastreamento cinemático (axiografia óptica e sensores inerciais) registram as trajetórias 6-DoF (seis graus de liberdade) do côndilo mandibular. Estes vetores alimentam articuladores virtuais matemáticos, permitindo a personalização das trajetórias excursivas e de protrusão \cite{techsoc2025towards}. Concomitantemente, biosensores piezoelétricos quantificam a distribuição vetorial da força oclusal, fornecendo \textit{ground truth} temporal para as \textit{boundary conditions} da simulação mecânica.
+
+\subsection{Dados Temporais e Ontologia Longitudinal}
+\label{subsec:temporais}
+
+O gêmeo digital manifesta sua utilidade máxima na quarta dimensão. O monitoramento contínuo exige a indexação de dados temporais: sobreposições de escaneamentos intraorais seriados para cálculo de desgaste dentário abrasivo/erosivo ou da taxa de movimentação ortodôntica mensal. Na Implantodontia, o registro de CBCTs pré e pós-cirúrgicas avalia o \textit{remodeling} da crista óssea peri-implantar \cite{alshadidi2024surface}.
+
+A consolidação de fluxos de dados heterogêneos demanda infraestrutura de dados ontológica severa (ex: HL7 FHIR, openEHR), mitigando o fenômeno de silos de informação. Embora a convergência entre IA, IoT e gêmeos digitais prometa a automação do prontuário do paciente, a interoperabilidade técnica na odontologia ainda atinge parcelas diminutas da prática clínica padrão \cite{mdpi2025digital}.

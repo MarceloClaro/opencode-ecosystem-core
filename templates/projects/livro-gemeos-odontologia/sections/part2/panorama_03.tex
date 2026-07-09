@@ -1,0 +1,53 @@
+\section{Tecnologias Atuais}
+\label{sec:tecnologias}
+
+A materialização da clínica odontológica 4.0 repousa sobre um substrato robusto de equipamentos de altíssima precisão e hardwares com poder computacional para processamento intensivo. A seguir, dissecamos as principais modalidades tecnológicas que alicerçam este panorama.
+
+\subsection{Tomografia Computadorizada de Feixe Cônico (CBCT)}
+\label{subsec:cbct}
+
+A CBCT consolidou-se irrevogavelmente como o padrão-ouro e a modalidade de referência primária para a aquisição volumétrica na estomatologia \cite{bdj2026predictive}. Contrastando fundamentalmente com a TC \textit{multislice} ou espiral de uso hospitalar — que opera via emissão em leque (fan-beam) rotacionada helicoidalmente —, a CBCT projeta um feixe radiográfico divergente em formato cônico, englobando o volume de interesse esférico ou cilíndrico e projetando-o sobre detectores de painel plano (Flat Panel Detectors - FPD) \cite{li2025impacts}.
+
+Esta peculiaridade mecânica e algorítmica permite que a captura isotrópica global do \textit{Field of View} (FOV) transcorra com apenas uma rotação (180 a 360 graus) em um intervalo temporal reduzido (geralmente sob 20 segundos). A resolução espacial — definida pela dimensão do \textit{voxel} — é extraordinariamente minuciosa, transitando de 75 a 400 $\mu$m. FOVs restritos garantem a visualização endodôntica das redes de canais acessórios, ao passo que FOVs extensos suportam as avaliações cefalométricas 3D, volumetria de vias aéreas e ortognática complexa \cite{khoshfekr2025review}.
+
+Do ponto de vista radiobiológico, as doses efetivas oscilam entre 11 e 674 $\mu$Sv, o que viabiliza a utilização repetida da técnica desde que submetida ao crivo da justificativa clínica e ao princípio de otimização ALARA (\textit{As Low As Reasonably Achievable}). Nos ecossistemas digitais avançados, o DICOM gerado pela CBCT não é mais um arquivo inerte, mas o \textit{scaffold} (arcabouço) primário a partir do qual as matrizes biomecânicas do gêmeo digital são derivadas, perfazendo o modelo \textit{anatômico-estático} inicial \cite{katsoulakis2024digital}.
+
+\subsection{Scanner Intraoral (IOS)}
+\label{subsec:scanner}
+
+Os scanners intraorais constituem o instrumento de transdutorização por excelência, convertendo a topografia contínua da cavidade oral em nuvens de pontos discretizadas que, posteriormente, são trianguladas em malhas (meshes) de alta fidelidade topográfica. Os paradigmas ópticos vigentes empregam triangulação a laser estruturado, microscopia confocal estocástica, interferometria ou projeção multifranjal (Structured Light), combinados com o processamento acelerado em GPUs locais ou na nuvem \cite{elsaid2025digital}.
+
+\destaque{As especificações metrológicas atuais acusam uma precisão (veracidade e exatidão combinadas) situada na estreita margem de 10 a 60 $\mu$m para escaneamentos de arco total, satisfazendo amplamente o limiar aceitável para componentes sobre implantes, confecção de \textit{frameworks} passivos e alinhadores termoplásticos.}
+
+Enquanto a primeira geração exigia a aspersão de nanopartículas de dióxido de titânio para anular a reflexão e a difração do esmalte e da saliva, a instrumentação contemporânea prescinde de opacificadores biológicos, registrando matiz, croma, e valor de forma fotorrealística. Ademais, funcionalidades multiespectrais agregadas (e.g. transiluminação por infravermelho próximo - NIRI) permitem o diagnóstico de cáries interproximais ou oclusais desmineralizadas sob o esmalte, sobrepondo uma camada diagnóstica ativa sobre a captura estritamente geométrica \cite{alshadidi2024surface}. A transposição direta destes modelos de superfície (em STL, OBJ ou PLY) aos módulos de Desenho Assistido (CAD) suprimiu inteiramente as distorções inerentes à polimerização dos elastômeros e expansão de presa dos gessos especiais.
+
+\subsection{Sistemas CAD/CAM e Engenharia Reversa}
+\label{subsec:cadcam}
+
+O ecossistema CAD/CAM (\textit{Computer-Aided Design / Computer-Aided Manufacturing}) em odontologia configura-se em uma tríade operacional coesa: aquisição informacional, arquitetura computacional (Design) e subtração mecanizada (Manufatura) \cite{katsoulakis2024digital}.
+
+Na vertente CAD, os técnicos e protesistas transitam do artesanato empírico para o design paramétrico. As plataformas de mercado (como Exocad, 3Shape Dental System) oferecem algoritmos preditivos que calculam morfologia oclusal biogenérica iterando sob malhas antagonistas. Além disso, proporcionam simuladores cinemáticos do articulador virtual, onde trajetórias condilares e ângulos de Bennett são matematicamente reproduzidos para prever interferências protrusivas e laterotrusivas \textit{in silico} \cite{roy2025applications}.
+
+Na esfera CAM, blocos cerâmicos pré-sinterizados ou poliméricos de alto desempenho são condicionados à subtração mecânica controlada por comando numérico (CNC) de 4 ou 5 eixos. As margens de adaptação protética fresadas frequentemente tangenciam gaps de 20 a 80 $\mu$m, obliterando qualquer margem estatística do processo de fundição a cera perdida convencional \cite{li2025impacts}.
+
+\subsection{Manufatura Aditiva (Impressão 3D)}
+\label{subsec:impressao3d}
+
+Em contraste com a usinagem (onde material é extraído do bloco), a manufatura aditiva constrói componentes complexos iterando sobre microcamadas (layer-by-layer). A odontologia adotou primariamente tecnologias pautadas em fotopolimerização de polímeros líquidos (resinas). Entre elas, a Estereolitografia (SLA) direciona um feixe laser ultravioleta pontual, enquanto o Processamento Digital de Luz (DLP) projeta matrizes inteiras de pixels através de microespelhos, solidificando toda a camada do substrato instantaneamente, otimizando drasticamente a velocidade produtiva \cite{zhang2024recursive}.
+
+Outros arranjos de alta engenharia, como a Sinterização Seletiva a Laser (SLS) e Fusão Seletiva a Laser (SLM), são empregados para a fusão de pós de titânio (Ti-6Al-4V) ou cromo-cobalto, concebendo próteses parciais removíveis (PPRs) de alta resistência e subestruturas implanto-suportadas com módulos de elasticidade customizáveis \cite{alshadidi2024surface}.
+
+O impacto pragmático desta tecnologia estende-se a modelagens estáticas, impressão in-office de placas estabilizadoras articulares e alinhadores em \textit{shape memory polymers} \cite{li2024aligner}. Do ponto de vista regulatório, o fluxo obriga uma estreita validação biocompatível dos fotopolímeros reticulados quando em contato intracavitário prolongado (Classes II e III nas agências sanitárias).
+
+\subsection{Inteligência Artificial Algorítmica e Generativa}
+\label{subsec:ia}
+
+O amálgama do aprendizado de máquina (Machine Learning) e redes neurais profundas (Deep Learning) catalisou o rompimento definitivo das limitações heurísticas da informática tradicional na odontologia. Modelos estatísticos robustos treinados via aprendizagem supervisionada são aplicados para análise de imagens \cite{elsaid2025digital}.
+
+\begin{itemize}
+    \item \textbf{Visão Computacional e Diagnóstico:} Redes convolucionais (como variações de U-Net) efetuam a segmentação automatizada de dentes, osso trabecular, cortical e sistema de canais radiculares em tomografias volumétricas \cite{bdj2026predictive}. Além da delimitação geométrica, a IA é capaz de assinalar focos incipientes de radiolucidez correspondentes a lesões endoperiodontais.
+    \item \textbf{Automação Cefalométrica e Preditiva:} Algoritmos de localização de *landmarks* reduzem o viés inter e intra-examinador do traçado ortodôntico, classificando o dimorfismo esqueletal em milissegundos e auxiliando os vetores da cirurgia craniomaxilofacial.
+    \item \textbf{Geração de Configurações Protéticas:} Redes Generativas Adversariais (GANs) auxiliam na síntese automática de anatomia dental perfeita, transladando o conceito do sorriso ideal adaptado dinamicamente às relações intermaxilares do paciente específico \cite{roy2025applications}.
+\end{itemize}
+
+O corolário da penetração maciça da Inteligência Artificial é a gênese dos modelos cognitivos necessários ao gêmeo digital odontológico. Somente um arcabouço inteligente é capaz de processar o influxo contínuo de dados sensoriais longitudinais para prover prognósticos probabilísticos com utilidade clínica imediata \cite{katsoulakis2024digital}.

@@ -1,0 +1,402 @@
+% =============================================================================
+%  TEMPLATE USP REFINADO v1.0
+%  Dissertação/Tese — Universidade de São Paulo
+%  Baseado em abntex2, conforme diretrizes SIBi-USP
+%  Compilar: pdflatex -> pdflatex (2x)
+% =============================================================================
+\documentclass[
+    % -- opções para dissertação/tese --
+    12pt,                   % tamanho da fonte
+    a4paper,                % tamanho do papel
+    openright,              % capítulos começam em página ímpar
+    oneside,                % impressão em frente e verso
+    english,                % idioma adicional para resumo
+    brazil                  % idioma principal
+]{abntex2}
+
+% --- Pacotes fundamentais ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{times}          % Times New Roman (padrão USP)
+
+% --- Hiperlinks (ABNT exige preto para versão impressa) ---
+% abntex2 já carrega hyperref internamente
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black,
+    breaklinks=true,
+    bookmarksnumbered=true
+}
+
+% --- Citações ABNT (alfabética) ---
+\usepackage[alf]{abntex2cite}
+
+% --- Configuração de margens (ABNT NBR 14724/USP SIBi) ---
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+
+% --- Ambiente teoremas ---
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{corolario}[teorema]{Corol\'ario}
+\theoremstyle{definition}
+\newtheorem{definicao}[teorema]{Defini\c{c}\~ao}
+\theoremstyle{remark}
+\newtheorem{observacao}[teorema]{Observa\c{c}\~ao}
+
+% --- Comandos auxiliares ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+
+% =============================================================================
+\begin{document}
+
+% --- Elementos pré-textuais ---
+
+% Capa (obrigatório USP)
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \center
+    % \includegraphics[width=3cm]{usp_logo.pdf}\\[2cm]
+    \textbf{UNIVERSIDADE DE S\~AO PAULO}\\
+    \textbf{Nome do Programa de P\'os-Gradua\c{c}\~ao}\\[1cm]
+    \textbf{NOME COMPLETO DO AUTOR}\\[4cm]
+    \textbf{\large T\'ITULO DA DISSERTA\c{C}\~AO OU TESE:\\
+            SUBT\'ITULO QUANDO HOUVER}\\[3cm]
+    \vfill
+    S\~ao Paulo\\
+    2026
+  \end{capa}
+}
+
+% Folha de rosto (obrigatório USP)
+\renewcommand{\imprimirfolhaderosto}{%
+  \begin{folhaderosto}
+    \center
+    \textbf{NOME COMPLETO DO AUTOR}\\[3cm]
+    \textbf{\large T\'ITULO DA DISSERTA\c{C}\~AO OU TESE:\\
+            SUBT\'ITULO QUANDO HOUVER}\\[2cm]
+    \hspace*{\fill}\begin{minipage}{8cm}
+    \small
+    Disserta\c{c}\~ao apresentada ao Programa de
+    P\'os-Gradua\c{c}\~ao em [Nome do Programa] da
+    Universidade de S\~ao Paulo para obten\c{c}\~ao do
+    t\'itulo de Mestre em [\'Area].
+    \end{minipage}\\[2cm]
+    \vfill
+    Orientador: Prof. Dr. Nome do Orientador\\[1cm]
+    S\~ao Paulo\\
+    2026
+  \end{folhaderosto}
+}
+
+% --- Capa ---
+\imprimircapa
+
+% --- Folha de rosto ---
+\imprimirfolhaderosto
+
+% --- Ficha catalográfica (opcional, SIBi-USP gera automaticamente) ---
+\begin{fichacatalografica}
+    \vspace*{\fill}
+    \begin{center}
+    \fbox{\begin{minipage}{13cm}
+        \small
+        \textbf{FICHA CATALOGR\'AFICA}\\[0.5cm]
+        Elaborada pelo Sistema de Bibliotecas da USP\\
+        com os dados fornecidos pelo autor.
+    \end{minipage}}
+    \end{center}
+\end{fichacatalografica}
+
+% --- Folha de aprovação ---
+\begin{folhadeaprovacao}
+    \center
+    \textbf{NOME COMPLETO DO AUTOR}\\[2cm]
+    \textbf{T\'ITULO DA DISSERTA\c{C}\~AO OU TESE}\\[2cm]
+    \hspace*{\fill}\begin{minipage}{8cm}
+    \small Disserta\c{c}\~ao apresentada ao Programa de
+    P\'os-Gradua\c{c}\~ao em [Nome] para obten\c{c}\~ao do
+    t\'itulo de Mestre.
+    \end{minipage}\\[2cm]
+    \vfill
+    \textbf{Banca Examinadora}\\[1cm]
+    \rule{8cm}{0.5pt} \\ Prof. Dr. Presidente (USP) \\
+    \rule{8cm}{0.5pt} \\ Prof. Dr. Titular 1 \\
+    \rule{8cm}{0.5pt} \\ Prof. Dr. Titular 2 \\
+    \vfill
+    S\~ao Paulo, \_\_\_ de \_\_\_\_\_\_\_\_\_ de 2026.
+\end{folhadeaprovacao}
+
+% --- Dedicatória ---
+\begin{dedicatoria}
+    \vspace*{\fill}
+    \centering
+    \noindent
+    \textit{Aos meus pais, pelo apoio incondicional.}
+    \vspace*{\fill}
+\end{dedicatoria}
+
+% --- Agradecimentos ---
+\begin{agradecimentos}
+    Agrade\c{c}o ao meu orientador, Prof. Dr. Nome, pela
+    orienta\c{c}\~ao e confian\c{c}a ao longo deste trabalho.
+    \`A CAPES e ao CNPq, pelo suporte financeiro.
+    Aos colegas de laborat\'orio, pelas discuss\~oes produtivas.
+\end{agradecimentos}
+
+% --- Epígrafe ---
+\begin{epigrafe}
+    \vspace*{\fill}
+    \begin{flushright}
+        \textit{``A ci\^encia \'e o conhecimento de como\\
+        as coisas funcionam.''\\
+        Richard Feynman}
+    \end{flushright}
+    \vspace*{\fill}
+\end{epigrafe}
+
+% --- Resumo em português ---
+\begin{resumo}
+    Este trabalho apresenta um template refinado para
+    disserta\c{c}\~oes e teses da Universidade de S\~ao Paulo
+    (USP), elaborado conforme as diretrizes do Sistema
+    Integrado de Bibliotecas (SIBi-USP) e da ABNT.
+    O template inclui todos os elementos pr\'e-textuais,
+    textuais e p\'os-textuais exigidos pelo regulamento.
+
+    \textbf{Palavras-chave}: USP; abntex2; template LaTeX;
+    disserta\c{c}\~ao; tese.
+\end{resumo}
+
+% --- Abstract em inglês ---
+\begin{abstract}
+    This work presents a refined template for dissertations
+    and theses at the University of S\~ao Paulo (USP),
+    prepared according to the guidelines of the Integrated
+    Library System (SIBi-USP) and ABNT standards.
+    The template includes all pre-textual, textual, and
+    post-textual elements required by the regulations.
+
+    \textbf{Keywords}: USP; abntex2; LaTeX template;
+    dissertation; thesis.
+\end{abstract}
+
+% --- Lista de figuras ---
+\listoffigures*
+
+% --- Lista de tabelas ---
+\listoftables*
+
+% --- Lista de abreviaturas e siglas ---
+\begin{siglas}
+    \item[ABNT] Associa\c{c}\~ao Brasileira de Normas T\'ecnicas
+    \item[CAPES] Coordena\c{c}\~ao de Aperfei\c{c}oamento de
+        Pessoal de N\'ivel Superior
+    \item[CNPq] Conselho Nacional de Desenvolvimento
+        Cient\'ifico e Tecnol\'ogico
+    \item[SIBi] Sistema Integrado de Bibliotecas
+    \item[USP] Universidade de S\~ao Paulo
+\end{siglas}
+
+% --- Sumário ---
+\tableofcontents*
+
+% =============================================================================
+% --- Elementos textuais ---
+
+\textual
+
+% =============================================================================
+\chapter{Introdu\c{c}\~ao}
+\label{chap:intro}
+
+A Universidade de S\~ao Paulo (USP) exige que todas as
+disserta\c{c}\~oes e teses sigam normas espec\'ificas de
+formata\c{c}\~ao, definidas pelo Sistema Integrado de
+Bibliotecas (SIBi-USP) em conformidade com a ABNT.
+
+Este template oferece uma implementa\c{c}\~ao completa e
+refinada dessas exig\^encias, permitindo que o pesquisador
+se concentre no conte\'udo cient\'ifico.
+
+\section{Objetivos}
+
+O objetivo geral deste trabalho \'e fornecer um ponto de
+partida robusto para a elabora\c{c}\~ao de disserta\c{c}\~oes
+e teses USP em \LaTeX.
+
+\subsection{Objetivos Espec\'ificos}
+
+\begin{enumerate}
+    \item Implementar todos os elementos pr\'e-textuais
+        exigidos pelo SIBi-USP;
+    \item Oferecer estrutura completa para cap\'itulos,
+        se\c{c}\~oes e subse\c{c}\~oes;
+    \item Incluir ambientes formais (teoremas, lemas,
+        algoritmos);
+    \item Fornecer exemplos de cita\c{c}\~oes no estilo
+        ABNT (alfab\'etico).
+\end{enumerate}
+
+% =============================================================================
+\chapter{Fundamenta\c{c}\~ao Te\'orica}
+\label{chap:fund}
+
+\section{Formula\c{c}\~ao Formal}
+
+Seja $\mathcal{X} \subseteq \R^n$ um espa\c{c}o de
+configura\c{c}\~oes e $f: \mathcal{X} \to \R$ uma fun\c{c}\~ao
+objetivo. O problema geral de otimiza\c{c}\~ao pode ser
+definido como:
+
+\begin{equation}
+    x^* = \arg\min_{x \in \mathcal{X}} f(x)
+    \quad \text{s.a.} \quad g_i(x) \leq 0,\;
+    i = 1, \dots, m
+    \label{eq:otim}
+\end{equation}
+
+\begin{teorema}[Converg\^encia do Gradiente Descendente]
+\label{thm:conv}
+Sob a hip\'otese de $f$ convexa e $L$-suave, o gradiente
+descendente com passo $\eta < 2/L$ satisfaz:
+\begin{equation}
+    f(x_k) - f(x^*) \leq \frac{\|x_0 - x^*\|^2}{2\eta k}
+    \label{eq:conv}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+A demonstra\c{c}\~ao segue da $L$-suavidade e da atualiza\c{c}\~ao
+$ x_{k+1} = x_k - \eta \nabla f(x_k)$ \cite{Boyd2004Convex}.
+\end{proof}
+
+\section{Resultados Conhecidos}
+
+A Tabela~\ref{tab:comparativo} apresenta resultados
+comparativos da literatura.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparativo de m\'etodos de otimiza\c{c}\~ao}
+\label{tab:comparativo}
+\begin{tabular}{lccc}
+\toprule
+M\'etodo & Taxa & Mem\'oria & Garantia \\
+\midrule
+GD & $O(1/k)$ & $O(n)$ & Convexo \\
+AGD & $O(1/k^2)$ & $O(n)$ & Convexo \\
+Newton & Quadr\'atica & $O(n^2)$ & Fort. convexo \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+\chapter{Metodologia}
+\label{chap:metod}
+
+A metodologia proposta \'e composta por tr\^es etapas
+principais, descritas no Algoritmo~\ref{alg:metod}.
+
+\begin{algorithm}[htbp]
+\caption{Metodologia proposta}
+\label{alg:metod}
+\begin{algorithmic}[1]
+\Require Dataset $\mathcal{D}$, par\^ametros $\Theta$
+\Ensure Resultados $\mathcal{R}$
+\State $\mathcal{D}' \gets \text{Pr\'e-processamento}(\mathcal{D})$
+\State $\mathcal{M} \gets \text{Treinamento}(\mathcal{D}', \Theta)$
+\State $\mathcal{R} \gets \text{Avalia\c{c}\~ao}(\mathcal{M}, \mathcal{D}')$
+\State \Return $\mathcal{R}$
+\end{algorithmic}
+\end{algorithm}
+
+% =============================================================================
+\chapter{Resultados e Discuss\~ao}
+\label{chap:result}
+
+A Figura~\ref{fig:resultados} ilustra os resultados obtidos
+com a metodologia proposta.
+
+\begin{figure}[htbp]
+\centering
+\vspace{2cm}
+\begin{minipage}{0.7\textwidth}
+\centering
+\fbox{\parbox{\textwidth}{\centering
+    [Gr\'afico de resultados experimentais]}}
+\end{minipage}
+\caption{Resultados experimentais comparativos}
+\label{fig:resultados}
+\end{figure}
+
+% =============================================================================
+\chapter{Conclus\~ao}
+\label{chap:conc}
+
+Este template fornece uma base completa e refinada para
+disserta\c{c}\~oes e teses USP, abrangendo todos os
+elementos exigidos pelo SIBi-USP e ABNT.
+
+\section*{Trabalhos Futuros}
+
+Sugere-se como trabalhos futuros:
+\begin{enumerate}
+    \item Adapta\c{c}\~ao para diferentes programas de
+        p\'os-gradua\c{c}\~ao da USP;
+    \item Integra\c{c}\~ao com ferramentas de CI/CD para
+        compila\c{c}\~ao automatizada;
+    \item Gera\c{c}\~ao autom\'atica de ficha catalogr\'afica.
+\end{enumerate}
+
+% =============================================================================
+% --- Elementos pós-textuais ---
+
+\postextual
+
+% --- Referências (ABNT alfabético) ---
+\bibliography{usp_bibliografia}
+
+% --- Apêndices ---
+\begin{apendicesenv}
+    \chapter{C\'odigo-Fonte Complementar}
+    \label{ap:codigo}
+
+    Este ap\^endice cont\'em o c\'odigo-fonte dos
+    experimentos realizados.
+
+    \chapter{Resultados Adicionais}
+    \label{ap:res_adicionais}
+
+    Resultados complementares n\~ao inclu\'idos no corpo
+    principal do texto.
+\end{apendicesenv}
+
+% --- Anexos ---
+\begin{anexosenv}
+    \chapter{Parecer do Comit\^e de \'Etica}
+    \label{an:etica}
+
+    Documento de aprova\c{c}\~ao do Comit\^e de
+    \'Etica em Pesquisa.
+\end{anexosenv}
+
+% --- Índice remissivo ---
+\printindex
+
+\end{document}

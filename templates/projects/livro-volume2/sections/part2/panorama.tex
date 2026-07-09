@@ -1,0 +1,107 @@
+% v2 -- rewritten
+% Seções:
+%   4.1 - Mapeamento de fluxos clínicos para requisitos de DT
+%   4.2 - Coleta e estruturação de dados periodontais com PySUS
+%   4.3 - Integração com prontuário eletrônico via FHIR/RNDS
+%   4.4 - Exercício prático: mapear 3 processos clínicos
+
+\destaque{Nivel-alvo N1 (Implementacao Guiada) -- scripts Python com PySUS para extrair dados do DATASUS e estruturar o pipeline SUS-Twin.}
+
+\label{sec:panorama}
+
+\section{Mapeamento de fluxos clínicos para requisitos de DT}
+
+A construção de gêmeos digitais na periodontia exige o mapeamento sistemático de fluxos clínicos para requisitos técnicos. O Framework SUS-Twin{\footnote{SUS-Twin: plataforma de referência para gêmeos digitais no SUS}} propõe uma arquitetura em três camadas: coleta, estruturação e simulação. Na prática clínica periodontal, cada etapa do atendimento --- da anamnese ao plano terapêutico --- deve ser traduzida em variáveis mensuráveis e interoperáveis.
+
+O primeiro desafio é a padronização terminológica. Procedimentos periodontais registrados no SIA-SIH do DATASUS{\footnote{DATASUS: departamento de informática do SUS que gerencia os sistemas de informação em saúde}} utilizam códigos PROCID{\footnote{PROCID: código de procedimento no SIA-SIH, ex.: 04.01.01 para raspagem periodontal}} que nem sempre refletem a complexidade do caso. A tabela a seguir ilustra o mapeamento entre etapas clínicas, dados necessários e os componentes do pipeline SUS-Twin.
+
+\begin{longtable}{p{4cm}p{4.5cm}p{5.5cm}}
+\caption{Mapeamento de etapas clínicas para o pipeline SUS-Twin} \\
+\toprule
+\textbf{Etapa Clínica} & \textbf{Dado Necessário} & \textbf{Pipeline SUS-Twin} \\
+\midrule
+\endfirsthead
+\caption[]{continuação} \\
+\toprule
+\textbf{Etapa Clínica} & \textbf{Dado Necessário} & \textbf{Pipeline SUS-Twin} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Anamnese & Histórico do paciente, tabagismo & Extração via PySUS SIA-SIH \\
+Exame clínico & Índices periodontais (PS, NIC, SS) & Estruturação em DataFrame{\footnote{DataFrame: estrutura tabular do pandas para manipulação de dados}} \\
+Radiografia & Perda óssea, morfologia radicular & Segmentação por visão computacional \\
+Diagnóstico & CID-10{\footnote{CID-10: Classificação Estatística Internacional de Doenças}} K05.3 & Mapeamento para ontologia SUS-Twin \\
+Plano terapêutico & Procedimentos propostos & Simulação preditiva via DT \\
+\end{longtable}
+
+A correspondência entre a etapa clínica e o dado digital exige que cada profissional compreenda não apenas o código do procedimento, mas também a semântica por trás do registro, etapa fundamental para que o SUS-Twin produza simulações clinicamente relevantes.
+
+\section{Coleta e estruturação de dados periodontais com PySUS}
+
+O PySUS{\footnote{PySUS: biblioteca Python para acesso e processamento de dados do DATASUS}} é uma ferramenta open-source que simplifica o acesso aos dados do DATASUS. Para a periodontia, os arquivos do SIA-SIH contêm registros de procedimentos como raspagem periodontal, curetagem subgengival e acesso cirúrgico.
+
+O código a seguir demonstra a consulta a procedimentos periodontais no estado de São Paulo em 2023:
+
+\begin{lstlisting}[language=Python,caption={Consulta PySUS para procedimentos periodontais no SIA-SIH}]
+from pysus import SIA
+import pandas as pd
+
+sia = SIA().load(year=2023, state='SP')
+df = sia.data
+
+# Filtrar por CID-10 periodontais (K05)
+periodontal = df[
+    df['DIAG_PRIN'].str.startswith('K05', na=False)
+]
+
+# Agregar por tipo de procedimento
+agg = periodontal.groupby('PROCREA').agg(
+    total=('PROCREA', 'count'),
+    media_idade=('IDADE', 'mean')
+).reset_index()
+
+print(agg.head())
+agg.to_parquet('periodontal_sp.parquet')
+\end{lstlisting}
+
+O DataFrame{\footnote{DataFrame: estrutura tabular do pandas para manipulação de dados}} resultante permite calcular incidência de doenças periodontais por município, faixa etária e tipo de procedimento, servindo de entrada para o módulo de simulação do SUS-Twin. A exportação para Parquet reduz o tempo de leitura e preserva tipos de dados nativos.
+
+\section{Integração com prontuário eletrônico via FHIR/RNDS}
+
+A Rede Nacional de Dados em Saúde (RNDS){\footnote{RNDS: plataforma nacional de interoperabilidade em saúde baseada em FHIR}} utiliza o padrão FHIR{\footnote{FHIR: Fast Healthcare Interoperability Resources, padrão HL7 para troca de dados clínicos}} para interoperabilidade entre sistemas de prontuário eletrônico{\footnote{prontuario eletronico: sistema digital de registro de atendimento ao paciente}}. A integração do SUS-Twin com a RNDS permite que os gêmeos digitais sejam alimentados com dados clínicos reais em tempo real.
+
+O fluxo de integração envolve: (1) autenticação via certificado digital, (2) consulta a recursos Patient e Observation, (3) mapeamento dos códigos LOINC/SNOMED para procedimentos periodontais e (4) inserção no pipeline SUS-Twin. O formato JSON{\footnote{JSON: JavaScript Object Notation, formato leve de intercâmbio de dados}} dos recursos FHIR é processado diretamente pelo motor de simulação.
+
+\section{Exercício prático: mapear 3 processos clínicos}
+
+O exercício a seguir consolida os conceitos apresentados neste capítulo. O aluno deverá mapear três processos clínicos periodontais --- raspagem supragengival, curetagem subgengival e acesso cirúrgico --- para o pipeline SUS-Twin, implementando a integração via RNDS/FHIR.
+
+\begin{lstlisting}[language=Python,caption={Integração FHIR/RNDS para dados periodontais}]
+import requests
+from fhir.resources.bundle import Bundle
+
+RNDS_BASE = "https://rnds.saude.gov.br/fhir/r4"
+token = "Bearer seu_token_aqui"
+
+# Consultar observacoes periodontais
+response = requests.get(
+    f"{RNDS_BASE}/Observation",
+    headers={
+        "Authorization": token,
+        "Content-Type": "application/fhir+json"
+    },
+    params={
+        "code": "http://loinc.org|28619-5",
+        "_count": 50
+    }
+)
+
+bundle = Bundle.parse_raw(response.text)
+for entry in bundle.entry:
+    obs = entry.resource
+    print(f"Paciente: {obs.subject.reference}")
+    print(f"Valor: {obs.valueQuantity.value}")
+\end{lstlisting}
+
+Ao final, o estudante deve ser capaz de: (1) extrair dados do DATASUS com PySUS, (2) estruturar um DataFrame com indicadores periodontais, (3) mapear os dados para o modelo SUS-Twin e (4) simular a progressão da doença periodontal em um ambiente controlado. O entregável é um pipeline funcional que conecta a base do DATASUS ao protótipo do gêmeo digital periodontal.

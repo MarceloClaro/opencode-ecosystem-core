@@ -1,0 +1,60 @@
+{
+  "ols": {
+    "params": {
+      "const": 0.07816,
+      "aipi_total": 0.016433,
+      "pib_pc_ppc": 1e-06,
+      "educ_superior_pct": -0.003039,
+      "internet_pop_pct": -0.003214,
+      "gini": -0.002622,
+      "agricultura_pib_pct": -0.001363
+    },
+    "pvalues": {
+      "const": 0.0413,
+      "aipi_total": 0.0,
+      "pib_pc_ppc": 0.0,
+      "educ_superior_pct": 0.0,
+      "internet_pop_pct": 0.0,
+      "gini": 0.0,
+      "agricultura_pib_pct": 0.0062
+    },
+    "r2": 0.9874,
+    "n": 132
+  },
+  "iv_2sls": {
+    "params": {
+      "Intercept": 0.126159,
+      "pib_pc_ppc": 1e-06,
+      "educ_superior_pct": -0.00207,
+      "internet_pop_pct": -0.002282,
+      "gini": -0.002656,
+      "agricultura_pib_pct": -0.001354,
+      "aipi_total": 0.013645
+    },
+    "pvalues": {
+      "Intercept": 0.5382,
+      "pib_pc_ppc": 0.052,
+      "educ_superior_pct": 0.6109,
+      "internet_pop_pct": 0.5621,
+      "gini": 0.0,
+      "agricultura_pib_pct": 0.0019,
+      "aipi_total": 0.2459
+    },
+    "n": 132
+  },
+  "ols_restrito": {
+    "params": {
+      "const": 0.063981,
+      "aipi_total": 0.008171,
+      "pib_pc_ppc": 2e-06
+    },
+    "pvalues": {
+      "const": 0.0,
+      "aipi_total": 0.0,
+      "pib_pc_ppc": 0.0
+    },
+    "r2": 0.9737,
+    "n": 132
+  },
+  "nota_metodologica": "Dataset painel (2016-2025) sem variacao temporal. GMM-Sys substituido por IV-2SLS cross-sectional (instrumento: media regional leave-one-out de AIPI). Recomenda-se dados WDI em serie temporal real."
+}

@@ -1,0 +1,1121 @@
+% =============================================================================
+% CAPÍTULO 10: Reconstrução 3D e Visualização Clínica
+% Volume 2 — Pipeline completo: do DICOM segmentado à malha
+%            volumétrica pronta para simulação FEM
+% Versão: V2 Standalone (reescrito sem \input{})
+% Seções:
+%   10.1 - Do CBCT à Segmentação
+%   10.2 - Pós-Processamento com Open3D
+%   10.3 - Geração de Malha Volumétrica para FEM
+%   10.4 - Métricas de Validação
+%   10.5 - Visualização Clínica e Exportação para Impressão 3D
+%   10.6 - Tabela de Ferramentas, Funções e Comandos
+% =============================================================================
+
+% --- BADGE DO CAPÍTULO (N2 — Pesquisa Reprodutível) ---
+\begin{center}
+\begin{minipage}{0.85\textwidth}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{|p{0.95\textwidth}|}
+\hline
+\multicolumn{1}{|c|}{\textbf{\large Badge do Capítulo}} \\
+\hline
+\textbf{Nível-alvo:} N2 — Pesquisa Reprodutível \\
+\textbf{Habilidades:} segmentar CBCT com MONAI, auditar malhas com Open3D,
+gerar malha volumétrica com TetGen/Gmsh, calcular métricas Dice e Jaccard \\
+\textbf{Pré-requisitos:} Python 3.11+, Open3D~0.18+, MONAI~1.3+, dcm2niix,
+Gmsh~4.12+, numpy, scipy \\
+\textbf{Comando de verificação:} \verb|tdd_validate.py --chapter 10| \\
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{minipage}
+\end{center}
+
+\destaque{Nível-alvo N2 — pipeline Open3D para auditoria topológica
+de malhas, geração de malha volumétrica e validação por métricas
+Dice/Hausdorff, integrado às camadas 2 e 3 do Framework SUS-Twin.}
+
+\label{ch:pipeline}% Se houver conflito ao compilar via light.tex, remova o
+% \label{ch:pipeline} correspondente em light.tex (linha 121).
+
+% =============================================================================
+\section{Do CBCT à Segmentação}
+\label{sec:cbct-segmentacao}
+% =============================================================================
+
+A Tomografia Computadorizada de Feixe Cônico (CBCT)\footnote{CBCT
+(\textit{Cone-Beam Computed Tomography}) é um tipo de tomografia que
+utiliza um feixe de raios X em formato de cone para capturar volumes
+tridimensionais da região maxilofacial com baixa dose de radiação.} é
+a modalidade de imagem mais difundida na odontologia digital. O
+formato DICOM\footnote{DICOM (\textit{Digital Imaging and Communications
+in Medicine}) é o padrão internacional para armazenar, visualizar e
+transmitir imagens médicas digitais, incluindo tomografias e
+radiografias.} resultante precisa ser convertido para um formato
+processável por redes neurais — tipicamente NIfTI (\texttt{.nii.gz})
+ou metarquivos MHA (\texttt{.mha}).
+
+\subsection{Conversão DICOM $\rightarrow$ NIfTI com dcm2niix}
+
+A ferramenta \texttt{dcm2niix}\footnote{dcm2niix é um conversor de
+linha de comando, gratuito e de código aberto, que transforma
+arquivos DICOM de scanners de qualquer fabricante para o formato
+NIfTI compactado, amplamente utilizado em pipelines de deep
+learning.} realiza a conversão preservando metadados essenciais
+como tamanho de voxel, orientação e parâmetros de aquisição. O
+comando básico é:
+
+\begin{lstlisting}[style=bashstyle, caption={Conversão de DICOM para NIfTI com dcm2niix}, label={lst:dcm2niix}]
+dcm2niix -o ./nifti/ -z y -f paciente_001 ./dicom/
+# -o: diretorio de saida
+# -z y: compactacao gzip
+# -f: nome do arquivo de saida
+\end{lstlisting}
+
+O resultado são dois arquivos: \texttt{paciente\_001.nii.gz} (volume
+de imagem) e \texttt{paciente\_001.json} (metadados no formato
+JSON\footnote{JSON (\textit{JavaScript Object Notation}) é um formato
+leve de arquivo para armazenar informações estruturadas, como
+cabeçalhos de exames, de forma legível tanto por humanos quanto por
+máquinas.}).
+
+\subsection{Segmentação Automática com MONAI e DentalSegmentator}
+
+O \textbf{MONAI}\footnote{MONAI (\textit{Medical Open Network for AI})
+é um framework de código aberto baseado em PyTorch, desenvolvido
+especificamente para deep learning em imagens médicas.} provê a
+infraestrutura de carregamento, aumento de dados (\textit{data
+augmentation}) e inferência. O \textbf{DentalSegmentator} é um modelo
+pré-treinado de segmentação dentomaxilofacial que utiliza uma
+arquitetura 3D U-Net com \textit{self-configuring} nnU-Net.
+
+O código abaixo carrega o volume NIfTI, aplica o modelo
+pré-treinado e salva a máscara de segmentação:
+
+\begin{lstlisting}[language=Python, caption={Segmentação de CBCT com MONAI e DentalSegmentator}, label={lst:monai_seg}]
+import torch
+import monai
+from monai.transforms import (
+    LoadImage, EnsureChannelFirst, ScaleIntensity,
+    Resize, Compose
+)
+from monai.networks.nets import UNet
+from monai.inferers import sliding_window_inference
+import nibabel as nib
+import numpy as np
+
+# Configuracao do dispositivo (GPU ou CPU)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Dispositivo: {device}")
+
+# Pipeline de transformacao
+transform = Compose([
+    LoadImage(image_only=True),
+    EnsureChannelFirst(),
+    ScaleIntensity(minv=0.0, maxv=1.0),
+    Resize(spatial_size=(192, 192, 128)),
+])
+
+# Carrega e pre-processa o volume
+volume = transform("paciente_001.nii.gz")
+volume = volume.unsqueeze(0).to(device)  # (1, 1, D, H, W)
+
+# Carrega modelo pre-treinado (DentalSegmentator)
+model = UNet(
+    spatial_dims=3,
+    in_channels=1,
+    out_channels=9,  # 8 classes dentarias + fundo
+    channels=(16, 32, 64, 128, 256),
+    strides=(2, 2, 2, 2),
+    num_res_units=2,
+).to(device)
+
+# Carrega pesos (simulado: usar torch.load() com checkpoint real)
+# model.load_state_dict(torch.load("dental_segmentator.pth"))
+model.eval()
+
+# Inferencia por janela deslizante
+with torch.no_grad():
+    pred = sliding_window_inference(
+        volume, roi_size=(96, 96, 96), sw_batch_size=4,
+        predictor=model, overlap=0.5
+    )
+    pred = torch.argmax(pred, dim=1).squeeze(0).cpu().numpy()
+
+# Salva mascara como NIfTI
+nifti_mask = nib.Nifti1Image(pred.astype(np.uint8), affine=np.eye(4))
+nib.save(nifti_mask, "segmentacao_dental.nii.gz")
+print(f"Classes segmentadas: {np.unique(pred)}")
+print("Segmentacao concluida.")
+\end{lstlisting}
+
+Para uso clínico, o DentalSegmentator\footnote{DentalSegmentator é um
+modelo de aprendizado profundo pré-treinado especificamente para
+segmentar dentes, mandíbula, maxila e canais mandibulares em
+tomografias CBCT.} pré-treinado atinge Dice\footnote{Dice é uma
+métrica que mede a sobreposição entre duas segmentações, variando de
+0 (nenhuma sobreposição) a 1 (sobreposição perfeita). É a métrica
+padrão em competições de segmentação médica como o BraTS.} médio
+superior a 0,95 para maxila, 0,93 para mandíbula e 0,89 para dentes
+individualizados \cite{dot2024dental}.
+
+% =============================================================================
+\section{Pós-Processamento com Open3D}
+\label{sec:pos-processamento}
+% =============================================================================
+
+A máscara de segmentação volumétrica precisa ser convertida em uma
+malha de superfície (\textit{surface mesh}) para posterior geração de
+malha volumétrica. O algoritmo de \textbf{Marching Cubes}\footnote{O
+algoritmo de Marching Cubes extrai uma superfície poligonal a partir
+de um volume voxelizado, criando triângulos que aproximam a fronteira
+entre regiões de diferentes intensidades.} extrai a isossuperfície
+entre a classe segmentada e o fundo. A malha resultante,
+entretanto, contém artefatos que exigem pós-processamento.
+
+\subsection{Suavização Laplaciana e Fechamento de Buracos}
+
+A malha bruta do Marching Cubes apresenta degraus
+(\textit{staircase artifacts}) devido à discretização dos voxels. A
+suavização Laplaciana\footnote{A suavização Laplaciana desloca cada
+vértice da malha para a posição média dos seus vizinhos, reduzindo
+rugosidades superficiais sem alterar a topologia global.} iterativa
+atenua esses degraus sem colapsar a geometria. Buracos
+(\textit{holes}) na malha, comuns em regiões de contato
+interproximal, precisam ser fechados para garantir a estanqueidade
+(\textit{water-tightness}) necessária à simulação FEM.
+
+\begin{lstlisting}[language=Python, caption={Pós-processamento de malha com Open3D}, label={lst:open3d_post}]
+import open3d as o3d
+import numpy as np
+
+def postprocess_segmentation(
+    mask_path: str = "segmentacao_dental.nii.gz",
+    class_id: int = 1,
+    voxel_size_mm: float = 0.2,
+    smoothing_iters: int = 30,
+    output_path: str = "malha_limpa.ply"
+) -> o3d.geometry.TriangleMesh:
+    """
+    Converte mascara segmentada em malha suavizada e estanque.
+    
+    Args:
+        mask_path: Caminho para o arquivo NIfTI da mascara.
+        class_id: ID da classe a ser extraida.
+        voxel_size_mm: Tamanho do voxel em mm.
+        smoothing_iters: Iteracoes de suavizacao Laplaciana.
+        output_path: Caminho de saida para a malha PLY.
+    
+    Returns:
+        Malha triangular processada.
+    """
+    import nibabel as nib
+    
+    # Carrega mascara segmentada
+    nii = nib.load(mask_path)
+    mask = nii.get_fdata()
+    binary = (mask == class_id).astype(np.uint8)
+    print(f"Mascara carregada: {binary.shape}, classe {class_id}")
+    
+    # Marching Cubes via Open3D (scalar_field)
+    mesh, _ = o3d.geometry.TriangleMesh.create_from_point_cloud_alpha_shape(
+        o3d.geometry.PointCloud(), alpha=0.0
+    )  # Placeholder: usar scikit-image ou o3d voxel grid
+    
+    # Abordagem com scikit-image (mais robusta)
+    from skimage.measure import marching_cubes
+    verts, faces, normals, _ = marching_cubes(
+        binary, level=0.5, spacing=(voxel_size_mm,) * 3
+    )
+    
+    mesh = o3d.geometry.TriangleMesh()
+    mesh.vertices = o3d.utility.Vector3dVector(verts)
+    mesh.triangles = o3d.utility.Vector3iVector(faces)
+    mesh.compute_vertex_normals()
+    
+    print(f"Malha inicial: {len(verts)} vertices, {len(faces)} triangulos")
+    
+    # 1. Suavizacao Laplaciana
+    print(f"Aplicando suavizacao Laplaciana ({smoothing_iters} iteracoes)...")
+    mesh_smooth = mesh.filter_smooth_laplacian(
+        number_of_iterations=smoothing_iters
+    )
+    mesh_smooth.compute_vertex_normals()
+    
+    # 2. Fechamento de buracos
+    print("Fechando buracos...")
+    holes_before = len(mesh_smooth.get_non_manifold_edges())
+    mesh_filled = mesh_smooth.fill_holes()
+    holes_after = len(mesh_filled.get_non_manifold_edges())
+    print(f"Arestas nao-manifold: {holes_before} -> {holes_after}")
+    
+    # 3. Remocao de componentes desconexas (ilhas)
+    print("Removendo componentes isoladas...")
+    triangle_clusters, cluster_n_triangles, _ = (
+        mesh_filled.cluster_connected_triangles()
+    )
+    triangle_clusters = np.array(triangle_clusters)
+    n_clusters = cluster_n_triangles.shape[0]
+    
+    # Mantem apenas o maior cluster
+    largest_cluster = np.argmax(cluster_n_triangles)
+    triangles_to_keep = triangle_clusters == largest_cluster
+    mesh_filled.remove_triangles_by_mask(~triangles_to_keep)
+    mesh_filled.remove_unreferenced_vertices()
+    print(f"Componentes removidas: {n_clusters - 1}")
+    
+    # 4. Amostragem e simplificacao (se necessario)
+    if len(mesh_filled.triangles) > 500_000:
+        print(f"Simplificando malha (>{500_000} triangulos)...")
+        mesh_simp = mesh_filled.simplify_quadric_decimation(
+            target_number_of_triangles=200_000
+        )
+        mesh_simp.compute_vertex_normals()
+        o3d.io.write_triangle_mesh(output_path, mesh_simp)
+        print(f"Malha simplificada salva: {output_path}")
+        return mesh_simp
+    
+    o3d.io.write_triangle_mesh(output_path, mesh_filled)
+    print(f"Malha processada salva: {output_path}")
+    return mesh_filled
+
+
+if __name__ == "__main__":
+    mesh = postprocess_segmentation()
+\end{lstlisting}
+
+\subsection{Auditoria Topológica}
+
+Antes de avançar para a geração volumétrica, a malha precisa ser
+auditada quanto a:
+
+\begin{itemize}
+    \item \textbf{Estanqueidade}: a malha deve ser
+        \textit{water-tight}\footnote{Uma malha water-tight é
+        geometricamente fechada, sem buracos, formando um volume
+        sólido perfeito — condição indispensável para simulações
+        de elementos finitos.} — sem buracos na superfície.
+    \item \textbf{Manifold}: cada aresta deve pertencer a exatamente
+        dois triângulos.
+    \item \textbf{Orientação}: todas as normais devem apontar para
+        fora do volume.
+\end{itemize}
+
+\begin{lstlisting}[language=Python, caption={Auditoria topológica de malha 3D}, label={lst:mesh_audit}]
+def audit_mesh(mesh: o3d.geometry.TriangleMesh) -> dict:
+    """Audita a qualidade topologica de uma malha triangular."""
+    report = {}
+    
+    # 1. Estanqueidade
+    edges = mesh.get_non_manifold_edges()
+    report["watertight"] = len(edges) == 0
+    report["non_manifold_edges"] = len(edges)
+    
+    # 2. Vertices e triangulos
+    report["n_vertices"] = len(mesh.vertices)
+    report["n_triangles"] = len(mesh.triangles)
+    
+    # 3. Volume e area
+    if report["watertight"]:
+        report["volume_mm3"] = mesh.get_volume()
+        report["area_mm2"] = mesh.get_surface_area()
+    else:
+        report["volume_mm3"] = None
+        report["area_mm2"] = None
+    
+    # 4. Qualidade dos triangulos (razao aspecto)
+    aspects = []
+    tris = np.asarray(mesh.triangles)
+    verts = np.asarray(mesh.vertices)
+    for tri in tris[:1000]:  # amostra de 1000 triangulos
+        v0, v1, v2 = verts[tri]
+        a = np.linalg.norm(v1 - v0)
+        b = np.linalg.norm(v2 - v1)
+        c = np.linalg.norm(v2 - v0)
+        s = (a + b + c) / 2
+        if s > 0:
+            area = np.sqrt(s * (s-a) * (s-b) * (s-c))
+            aspect = max(a, b, c) / (area ** 0.5 + 1e-8) if area > 0 else 0
+            aspects.append(aspect)
+    
+    report["aspect_ratio_mean"] = np.mean(aspects) if aspects else 0
+    report["aspect_ratio_std"] = np.std(aspects) if aspects else 0
+    
+    # 5. Diagnostico
+    report["diagnosis"] = "APROVADA" if report["watertight"] else "REPROVADA"
+    if report["watertight"]:
+        print(f"Malha APROVADA: {report['n_vertices']} vertices, "
+              f"{report['n_triangles']} triangulos, "
+              f"volume {report['volume_mm3']:.2f} mm3")
+    else:
+        print(f"Malha REPROVADA: {report['non_manifold_edges']} "
+              f"arestas nao-manifold encontradas")
+    
+    return report
+
+# Uso:
+# mesh = o3d.io.read_triangle_mesh("malha_limpa.ply")
+# report = audit_mesh(mesh)
+\end{lstlisting}
+
+% =============================================================================
+\section{Geração de Malha Volumétrica para FEM}
+\label{sec:malha-volumetrica}
+% =============================================================================
+
+Com a malha de superfície aprovada na auditoria, o próximo passo é
+gerar a malha volumétrica de elementos tetraédricos
+(\textit{tetrahedral mesh}) necessária para simulações de Método dos
+Elementos Finitos (FEM)\footnote{FEM (\textit{Finite Element Method})
+é um método numérico que divide um objeto contínuo em milhares de
+elementos pequenos (tetraedros) para calcular tensões, deformações e
+outras propriedades físicas através de equações diferenciais.}.
+
+\subsection{Malha Tetraédrica com Gmsh}
+
+O \textbf{Gmsh}\footnote{Gmsh é um gerador de malhas tridimensionais
+de código aberto que produz elementos tetraédricos, hexaédricos e
+híbridos com controle refinado de densidade local.} é a ferramenta
+recomendada por sua flexibilidade e integração com Python via
+\texttt{pygmsh} ou API direta.
+
+\begin{lstlisting}[language=Python, caption={Geração de malha volumétrica tetraédrica com Gmsh}, label={lst:gmsh_tet}]
+import gmsh
+import numpy as np
+
+def generate_tetrahedral_mesh(
+    surface_mesh: str = "malha_limpa.ply",
+    output_msh: str = "malha_fem.msh",
+    lc_max: float = 1.0,
+    lc_min: float = 0.1,
+    refinement_regions: list = None
+):
+    """
+    Gera malha tetraedrica a partir de malha de superficie.
+    
+    Args:
+        surface_mesh: Caminho para a malha STL/PLY de superficie.
+        output_msh: Caminho de saida para o arquivo MSH.
+        lc_max: Tamanho maximo dos elementos (mm).
+        lc_min: Tamanho minimo dos elementos (mm).
+        refinement_regions: Lista de (centro, raio, lc) para refino local.
+    """
+    gmsh.initialize()
+    gmsh.model.add("modelo_dental")
+    
+    # Importa malha de superficie
+    tag = gmsh.model.occ.importShapes(surface_mesh)
+    gmsh.model.occ.synchronize()
+    
+    # Obtem dimensoes para estimar parametros de malha
+    volumes = gmsh.model.occ.getEntities(3)
+    if not volumes:
+        # Cria volume a partir da superficie fechada
+        surfaces = gmsh.model.occ.getEntities(2)
+        if surfaces:
+            surface_loop = gmsh.model.occ.addSurfaceLoop(
+                [s[1] for s in surfaces]
+            )
+            gmsh.model.occ.addVolume([surface_loop])
+    gmsh.model.occ.synchronize()
+    
+    # Configura parametros de malha
+    gmsh.option.setNumber("Mesh.MeshSizeMax", lc_max)
+    gmsh.option.setNumber("Mesh.MeshSizeMin", lc_min)
+    gmsh.option.setNumber("Mesh.Algorithm3D", 1)  # 1=Delaunay, 6=Frontal
+    gmsh.option.setNumber("Mesh.Optimize", 1)
+    gmsh.option.setNumber("Mesh.OptimizeNetgen", 1)
+    
+    # Refino local em regioes de interesse (ex: colo do implante)
+    if refinement_regions:
+        for center, radius, lc in refinement_regions:
+            p = gmsh.model.occ.addPoint(center[0], center[1], center[2])
+            gmsh.model.occ.synchronize()
+            gmsh.model.mesh.field.add("Distance", 1)
+            gmsh.model.mesh.field.setNumbers(1, "NodesList", [p])
+            gmsh.model.mesh.field.add("Threshold", 2)
+            gmsh.model.mesh.field.setNumber(2, "InField", 1)
+            gmsh.model.mesh.field.setNumber(2, "SizeMin", lc)
+            gmsh.model.mesh.field.setNumber(2, "SizeMax", lc_max)
+            gmsh.model.mesh.field.setNumber(2, "DistMin", radius * 0.5)
+            gmsh.model.mesh.field.setNumber(2, "DistMax", radius)
+            gmsh.model.mesh.field.add("Min", 3)
+            gmsh.model.mesh.field.setNumbers(3, "FieldsList", [2])
+            gmsh.model.mesh.field.setAsBackgroundMesh(3)
+    
+    # Gera malha 3D (tetraedros)
+    gmsh.model.mesh.generate(3)
+    
+    # Estatisticas
+    element_types, element_tags, _ = gmsh.model.mesh.getElements()
+    n_tets = sum(
+        len(t) for etype, t in zip(element_types, element_tags)
+        if etype == 4  # tetraedro de 4 nos
+    )
+    n_nodes = len(gmsh.model.mesh.getNodes()[0])
+    
+    print(f"Malha tetraedrica gerada:")
+    print(f"  Tetraedros: {n_tets}")
+    print(f"  Nos: {n_nodes}")
+    
+    # Metricas de qualidade
+    qual = gmsh.model.mesh.getQuality()
+    print(f"  Qualidade media: {np.mean(qual):.4f}")
+    print(f"  Qualidade min:  {np.min(qual):.4f}")
+    
+    # Salva nos formatos MSH e VTK
+    gmsh.write(output_msh)
+    gmsh.write(output_msh.replace(".msh", ".vtk"))
+    print(f"Malha salva: {output_msh}")
+    
+    gmsh.finalize()
+    return output_msh
+
+
+if __name__ == "__main__":
+    # Exemplo: refino no colo do implante (centro em mm)
+    refine = [
+        ([0.0, 0.0, 5.0], 2.0, 0.05),  # regiao de contato
+    ]
+    generate_tetrahedral_mesh(
+        surface_mesh="malha_limpa.ply",
+        output_msh="malha_fem.msh",
+        lc_max=0.5, lc_min=0.05,
+        refinement_regions=refine
+    )
+\end{lstlisting}
+
+\subsection{Parâmetros Críticos da Malha}
+
+A qualidade da malha volumétrica impacta diretamente a precisão e a
+convergência da simulação FEM. Três métricas são essenciais:
+
+\begin{table}[htb]
+\centering
+\caption{Métricas de qualidade da malha volumétrica e seus valores de referência.}
+\label{tab:qualidade-malha}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lccp{4cm}}
+\toprule
+\textbf{Métrica} & \textbf{Aceitável} & \textbf{Ideal} & \textbf{Interpretação} \\
+\midrule
+\textit{Skewness} & $<0,90$ & $<0,70$ & Distorção angular do elemento \\
+\textit{Aspect Ratio} & $<5,0$ & $<3,0$ & Proporção entre maior e menor aresta \\
+\textit{Jacobian Ratio} & $>0,3$ & $>0,6$ & Deformação do mapeamento isoparamétrico \\
+\textit{Orthogonal Quality} & $>0,1$ & $>0,3$ & Alinhamento com eixos coordenados \\
+\textit{Volume Negativo} & 0 & 0 & Elementos invertidos (tolerância zero) \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+% =============================================================================
+\section{Métricas de Validação}
+\label{sec:metricas}
+% =============================================================================
+
+A validação quantitativa da segmentação e da malha gerada é feita
+por três métricas complementares: Dice, Jaccard e distância de
+Hausdorff.
+
+\subsection{Coeficiente Dice (F1 Espacial)}
+
+O \textbf{Dice Similarity Coefficient} (DSC)\footnote{O coeficiente
+Dice, também conhecido como F1 espacial, mede a sobreposição relativa
+entre duas segmentações. Um Dice de 0,95 significa que 95\% dos
+voxels coincidem entre a segmentação automática e a manual.} é a
+métrica mais utilizada em segmentação médica:
+
+\begin{equation}
+\text{DSC}(A,B) = \frac{2|A \cap B|}{|A| + |B|}
+\label{eq:dice}
+\end{equation}
+
+onde $A$ é a segmentação automática e $B$ é a verdade terrestre
+(\textit{ground truth}).
+
+\subsection{Coeficiente Jaccard (IoU)}
+
+O \textbf{Jaccard Index} ou \textbf{Intersection over Union}
+(IoU)\footnote{O índice Jaccard mede a razão entre a interseção
+(região comum) e a união (região total coberta) de duas
+segmentações. É mais conservador que o Dice.} é definido por:
+
+\begin{equation}
+J(A,B) = \frac{|A \cap B|}{|A \cup B|}
+\label{eq:jaccard}
+\end{equation}
+
+Relação entre as métricas: $\text{DSC} = 2J/(1+J)$.
+
+\subsection{Distância de Hausdorff}
+
+A \textbf{distância de Hausdorff}\footnote{A distância de Hausdorff
+mede a maior discrepância entre duas superfícies: o máximo da menor
+distância de qualquer ponto de uma superfície à outra.} mede a
+maior distância entre as superfícies das duas segmentações:
+
+\begin{equation}
+H(A,B) = \max\left\{\sup_{a \in \partial A} \inf_{b \in \partial B}
+\|a-b\|,\ \sup_{b \in \partial B} \inf_{a \in \partial A}
+\|a-b\|\right\}
+\label{eq:hausdorff}
+\end{equation}
+
+\subsection{Código para Cálculo das Métricas}
+
+\begin{lstlisting}[language=Python, caption={Cálculo de métricas de validação entre segmentações}, label={lst:metrics}]
+import numpy as np
+from scipy.spatial.distance import directed_hausdorff
+import nibabel as nib
+
+def compute_segmentation_metrics(
+    pred_path: str = "segmentacao_dental.nii.gz",
+    gt_path: str = "ground_truth.nii.gz",
+    class_id: int = 1
+) -> dict:
+    """
+    Calcula Dice, Jaccard e Hausdorff entre segmentacao
+    predita e ground truth para uma classe especifica.
+    """
+    # Carrega volumes
+    pred_nii = nib.load(pred_path)
+    gt_nii = nib.load(gt_path)
+    
+    pred = (pred_nii.get_fdata() == class_id).astype(np.uint8)
+    gt = (gt_nii.get_fdata() == class_id).astype(np.uint8)
+    
+    # Verifica consistencia dimensional
+    assert pred.shape == gt.shape, \
+        f"Dimensoes incompativeis: {pred.shape} vs {gt.shape}"
+    
+    # --- Coeficiente Dice ---
+    intersection = np.logical_and(pred, gt).sum()
+    pred_sum = pred.sum()
+    gt_sum = gt.sum()
+    
+    dice = (2.0 * intersection) / (pred_sum + gt_sum + 1e-8)
+    
+    # --- Indice Jaccard (IoU) ---
+    union = np.logical_or(pred, gt).sum()
+    jaccard = intersection / (union + 1e-8)
+    
+    # --- Distancia de Hausdorff (95% percentil) ---
+    pred_points = np.argwhere(pred)
+    gt_points = np.argwhere(gt)
+    
+    if len(pred_points) == 0 or len(gt_points) == 0:
+        hausdorff_95 = float('inf')
+    else:
+        # Hausdorff bidirecional via scipy
+        h1 = directed_hausdorff(pred_points, gt_points)[0]
+        h2 = directed_hausdorff(gt_points, pred_points)[0]
+        
+        # Distancias ponto-a-ponto completas (amostradas)
+        from scipy.spatial import cKDTree
+        tree_pred = cKDTree(pred_points)
+        tree_gt = cKDTree(gt_points)
+        
+        d_pred_to_gt = tree_pred.query(gt_points)[0]
+        d_gt_to_pred = tree_gt.query(pred_points)[0]
+        
+        # Distancia de Hausdorff 95% percentil
+        all_dists = np.concatenate([d_pred_to_gt, d_gt_to_pred])
+        hausdorff_95 = np.percentile(all_dists, 95)
+        
+        # Hausdorff maximo
+        hausdorff_max = max(h1, h2)
+    
+    # --- Sensibilidade e Especificidade ---
+    tp = intersection
+    fp = pred_sum - intersection
+    fn = gt_sum - intersection
+    tn = pred.size - (tp + fp + fn)
+    
+    sensitivity = tp / (tp + fn + 1e-8)
+    specificity = tn / (tn + fp + 1e-8)
+    precision = tp / (tp + fp + 1e-8)
+    f1 = 2 * precision * sensitivity / (precision + sensitivity + 1e-8)
+    
+    # --- Relatorio ---
+    metrics = {
+        "class_id": class_id,
+        "dice": float(dice),
+        "jaccard": float(jaccard),
+        "hausdorff_95_mm": float(hausdorff_95),
+        "hausdorff_max_mm": float(hausdorff_max) if 'hausdorff_max' in dir() else None,
+        "sensitivity": float(sensitivity),
+        "specificity": float(specificity),
+        "precision": float(precision),
+        "f1_score": float(f1),
+        "n_voxels_pred": int(pred_sum),
+        "n_voxels_gt": int(gt_sum),
+    }
+    
+    return metrics
+
+
+def print_metrics_report(metrics: dict):
+    """Exibe relatorio formatado das metricas."""
+    print("=" * 60)
+    print(f"RELATORIO DE VALIDACAO - Classe {metrics['class_id']}")
+    print("=" * 60)
+    print(f"Coeficiente Dice:         {metrics['dice']:.4f}  "
+          f"{'EXCELENTE' if metrics['dice'] > 0.90 else 'ACEITAVEL' if metrics['dice'] > 0.80 else 'REVER'}")
+    print(f"Indice Jaccard (IoU):     {metrics['jaccard']:.4f}")
+    print(f"Hausdorff 95% (voxels):   {metrics['hausdorff_95_mm']:.4f}")
+    print(f"Sensibilidade (Recall):   {metrics['sensitivity']:.4f}")
+    print(f"Especificidade:           {metrics['specificity']:.4f}")
+    print(f"Precisao (Precision):     {metrics['precision']:.4f}")
+    print(f"F1-Score:                 {metrics['f1_score']:.4f}")
+    print(f"Voxels na predicao:       {metrics['n_voxels_pred']}")
+    print(f"Voxels no ground truth:   {metrics['n_voxels_gt']}")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    metrics = compute_segmentation_metrics(
+        pred_path="segmentacao_dental.nii.gz",
+        gt_path="ground_truth.nii.gz",
+        class_id=1  # mandibula
+    )
+    print_metrics_report(metrics)
+\end{lstlisting}
+
+\subsection{Tabela de Interpretação das Métricas}
+
+\begin{table}[htb]
+\centering
+\caption{Valores de referência e interpretação clínica das métricas de segmentação.}
+\label{tab:metricas-interpretacao}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lccp{5cm}}
+\toprule
+\textbf{Métrica} & \textbf{Excelente} & \textbf{Aceitável} & \textbf{Interpretação Clínica} \\
+\midrule
+Dice (estruturas grandes) & $>0,95$ & $0,90$--$0,95$ & Maxila, mandíbula, osso cortical \\
+Dice (dentes individuais) & $>0,90$ & $0,80$--$0,90$ & Dentes com esmalte íntegro \\
+Dice (LPD) & $>0,70$ & $0,50$--$0,70$ & Ligamento periodontal ($\approx$0,2 mm) \\
+Dice (canais) & $>0,80$ & $0,60$--$0,80$ & Canal mandibular, forame mentual \\
+Jaccard (IoU) & $>0,85$ & $0,75$--$0,85$ | Equivalente ao Dice -10\% \\
+Hausdorff 95\% & $<0,5$ mm & $0,5$--$1,0$ mm & Erro máximo de contorno \\
+Sensibilidade & $>0,95$ & $0,85$--$0,95$ & Fração de verdadeiros positivos \\
+Especificidade & $>0,95$ & $0,85$--$0,95$ & Fração de verdadeiros negativos \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+% =============================================================================
+\section{Visualização Clínica e Exportação para Impressão 3D}
+\label{sec:visualizacao}
+% =============================================================================
+
+A etapa final do pipeline é a exportação da malha para formatos
+compatíveis com visualizadores clínicos e impressoras 3D. O formato
+\textbf{STL}\footnote{STL (\textit{Stereolithography}) é o formato
+padrão da indústria para impressão 3D, representando a geometria da
+superfície como uma coleção de triângulos.} é o mais universal.
+
+\subsection{Exportação para STL e Visualização}
+
+\begin{lstlisting}[language=Python, caption={Exportação e visualização clínica da malha}, label={lst:stl_export}]
+import open3d as o3d
+import numpy as np
+
+def export_clinical_visualization(
+    mesh_path: str = "malha_fem.msh",
+    output_stl: str = "modelo_clinico.stl",
+    color_map: dict = None
+):
+    """
+    Exporta malha tetraedrica para visualizacao clinica em STL
+    com codificacao de cores por tensao (via mapa de calor).
+    
+    Args:
+        mesh_path: Caminho da malha tetraedrica (.msh ou .vtk).
+        output_stl: Caminho de saida STL.
+        color_map: Mapeamento {classe: [R, G, B]} para cores.
+    """
+    import meshio
+    
+    # Le malha com meshio (suporta MSH, VTK, etc.)
+    mesh = meshio.read(mesh_path)
+    
+    # Se for malha tetraedrica, extrai apenas superficie
+    if "tetra" in mesh.cells_dict:
+        from meshio import Mesh
+        tet_cells = mesh.cells_dict["tetra"]
+        
+        # Extrai triangulos de superficie dos tetraedros
+        # Cada tetraedro tem 4 faces triangulares
+        tri_faces = []
+        tet_verts = mesh.points
+        for tet in tet_cells:
+            i, j, k, l = tet
+            tri_faces.extend([
+                [i, j, k], [i, j, l],
+                [i, k, l], [j, k, l]
+            ])
+        
+        # Remove duplicatas (faces internas)
+        tri_faces = np.unique(np.sort(tri_faces, axis=1), axis=0)
+        
+        # Cria malha de superficie Open3D
+        tri_mesh = o3d.geometry.TriangleMesh()
+        tri_mesh.vertices = o3d.utility.Vector3dVector(tet_verts)
+        tri_mesh.triangles = o3d.utility.Vector3iVector(tri_faces)
+        tri_mesh.compute_vertex_normals()
+    else:
+        # Ja e malha de superficie
+        tri_mesh = o3d.io.read_triangle_mesh(mesh_path)
+    
+    # Aplica mapa de cores clinico (ex: por altura)
+    verts = np.asarray(tri_mesh.vertices)
+    z = verts[:, 2]
+    z_norm = (z - z.min()) / (z.max() - z.min() + 1e-8)
+    
+    # Mapa de calor: azul (base) -> verde (medio) -> vermelho (topo)
+    colors = np.zeros((len(verts), 3))
+    colors[:, 0] = z_norm       # vermelho
+    colors[:, 1] = 1 - z_norm   # verde
+    colors[:, 2] = 0.3          # azul fixo
+    tri_mesh.vertex_colors = o3d.utility.Vector3dVector(colors)
+    
+    # Exporta STL colorido (se o formato suportar) ou OBJ
+    o3d.io.write_triangle_mesh("modelo_colorido.obj", tri_mesh)
+    o3d.io.write_triangle_mesh(output_stl, tri_mesh)
+    print(f"Modelo clinico exportado: {output_stl}")
+    print(f"Modelo colorido exportado: modelo_colorido.obj")
+    
+    # Estatisticas para documentacao
+    bbox = tri_mesh.get_axis_aligned_bounding_box()
+    extent = bbox.get_extent()
+    print(f"Dimensoes (mm): {extent[0]:.1f} x {extent[1]:.1f} x {extent[2]:.1f}")
+    
+    # Visualizacao (opcional, descomentar para uso interativo)
+    # o3d.visualization.draw_geometries([tri_mesh])
+    
+    return output_stl
+
+
+if __name__ == "__main__":
+    export_clinical_visualization(
+        mesh_path="malha_fem.msh",
+        output_stl="modelo_clinico.stl",
+        color_map={1: [0.8, 0.8, 0.8], 2: [0.9, 0.7, 0.5]}
+    )
+\end{lstlisting}
+
+\subsection{Impressão 3D de Biomodelos}
+
+A malha STL exportada pode ser fisicamente materializada em
+impressoras 3D para:
+
+\begin{itemize}
+    \item \textbf{Planejamento cirúrgico}: biomodelos\footnote{Biomodelo
+        é uma réplica física impressa em 3D da anatomia do paciente,
+        usada para planejamento de cirurgias, pré-moldagem de
+        instrumentais e comunicação com a equipe cirúrgica.}
+        da arcada para pré-moldagem de guias cirúrgicos.
+    \item \textbf{Comunicação com o paciente}: modelos táteis para
+        explicação do plano de tratamento.
+    \item \textbf{Ensino}: réplicas anatômicas para treinamento
+        pré-clínico.
+\end{itemize}
+
+Parâmetros recomendados para impressão:
+
+\begin{table}[htb]
+\centering
+\caption{Parâmetros de impressão 3D para biomodelos odontológicos.}
+\label{tab:impressao3d}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Parâmetro} & \textbf{Valor} & \textbf{Observação} \\
+\midrule
+Tecnologia & SLA / DLP & Maior precisão que FDM \\
+Resolução de camada & 50 -- 100 $\mu$m & Para detalhes dentários \\
+Material & Resina bioinerte & ISO 10993 para contato mucoso \\
+Suportes & Automáticos + manuais & Em regiões de socavado (\textit{undercut}) \\
+Pós-processamento & Lavagem isopropílica + cura UV & 10 min lavagem + 30 min cura \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+% =============================================================================
+\section{Tabela de Ferramentas, Funções e Comandos}
+\label{sec:ferramentas}
+% =============================================================================
+
+A \autoref{tab:ferramentas} consolida as principais ferramentas do
+pipeline, suas funções e os comandos essenciais para execução.
+
+\begin{table}[htbp]
+\centering
+\caption{Ferramentas do pipeline de reconstrução 3D: função e comando de uso.}
+\label{tab:ferramentas}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llp{4cm}p{5cm}}
+\toprule
+\textbf{Ferramenta} & \textbf{Função} & \textbf{Comando de Uso} & \textbf{Saída Esperada} \\
+\midrule
+dcm2niix & Conversão DICOM $\rightarrow$ NIfTI &
+\texttt{dcm2niix -o ./nifti/ -z y -f pac\_001 ./dcm/} &
+Volume \texttt{.nii.gz} + metadados \texttt{.json} \\
+\midrule
+MONAI & Framework de deep learning médico &
+\texttt{python -c "import monai; print(monai.\_\_version\_\_)"} &
+Versão instalada do MONAI \\
+\midrule
+DentalSegmentator & Segmentação dentomaxilofacial com nnU-Net &
+\texttt{python infer.py --input cbct.nii --output seg.nii} &
+Máscara NIfTI multiclasse (0--8) \\
+\midrule
+scikit-image & Marching Cubes (extração de superfície) &
+\texttt{skimage.measure.marching\_cubes(volume, level=0.5)} &
+Vértices + triângulos + normais \\
+\midrule
+Open3D & Pós-processamento e auditoria de malhas &
+\texttt{open3d.io.read\_triangle\_mesh("malha.ply")} &
+Malha carregada para processamento \\
+\midrule
+Gmsh / pygmsh & Geração de malha tetraédrica volumétrica &
+\texttt{gmsh.model.mesh.generate(3)} &
+Arquivo \texttt{.msh} com tetraedros \\
+\midrule
+meshio & Leitura/escrita de malhas (multi-formato) &
+\texttt{meshio.read("malha.msh")} &
+Objeto Mesh com pontos + células \\
+\midrule
+TetGen & Geração alternativa de malha tetraédrica &
+\texttt{tetgen -pAq1.2 modelo.poly} &
+Malha \texttt{.ele} + \texttt{.node} + \texttt{.face} \\
+\midrule
+CalculiX & Solver FEM de código aberto &
+\texttt{ccx\_static -i modelo.inp} &
+Arquivo \texttt{.frd} com resultados \\
+\midrule
+ParaView & Visualização científica pós-processamento &
+\texttt{paraview malha\_fem.vtk} &
+Interface gráfica interativa 3D \\
+\midrule
+Blender & Refino manual e texturização de malhas &
+\texttt{blender --python export\_mesh.py} &
+Malha exportada em formato OBJ/STL \\
+\midrule
+Ultimaker Cura & Fatiamento para impressão 3D &
+\texttt{cura -s modelo\_clinico.stl} &
+GCode para impressão FDM/SLA \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+% =============================================================================
+\section{Exercícios Práticos}
+\label{sec:exercicios}
+% =============================================================================
+
+Os exercícios a seguir consolidam o aprendizado do pipeline completo
+de reconstrução 3D. Cada exercício inclui o código de verificação
+automática (teste TDD) e o critério de aprovação.
+
+\subsection{Exercício 1: Segmentar CBCT com MONAI}
+
+\textbf{Objetivo}: segmentar um volume CBCT simulado usando MONAI e
+extrair a máscara da mandíbula.
+
+\textbf{Instruções}:
+\begin{enumerate}
+    \item Gere ou carregue um volume CBCT sintético ($64\times64\times64$).
+    \item Aplique uma segmentação por limiar de intensidade
+        (Hounsfield $>300$ para osso).
+    \item Calcule o volume da região segmentada em mm$^3$.
+    \item Compare com o \textit{ground truth} fornecido.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python, caption={Teste TDD para segmentação CBCT (Exercício 1)}, label={lst:ex1_test}]
+import numpy as np
+import nibabel as nib
+
+def test_cbct_segmentation():
+    """
+    Teste de verificacao da segmentacao.
+    Criterio: Dice > 0,80 entre segmentacao e ground truth.
+    """
+    from exercicio1 import segmentar_mandibula
+    
+    # Gera volume sintetico: esfera de 15 voxels de raio
+    shape = (64, 64, 64)
+    cx, cy, cz = 32, 32, 32
+    r = 15
+    x, y, z = np.ogrid[:64, :64, :64]
+    gt = ((x - cx)**2 + (y - cy)**2 + (z - cz)**2 <= r**2).astype(np.uint8)
+    
+    # Simula CBCT com ruido gaussiano
+    volume = gt * 500 + np.random.normal(0, 30, shape)
+    volume = np.clip(volume, 0, 1000).astype(np.int16)
+    
+    # Executa segmentacao do aluno
+    pred = segmentar_mandibula(volume)
+    
+    # Calcula Dice
+    intersection = np.logical_and(pred, gt).sum()
+    dice = 2 * intersection / (pred.sum() + gt.sum() + 1e-8)
+    
+    print(f"Dice: {dice:.4f}")
+    assert dice > 0.80, f"Dice {dice:.4f} < 0.80 — REPROVADO"
+    print("TESTE APROVADO: Dice > 0.80")
+    return True
+\end{lstlisting}
+
+\subsection{Exercício 2: Auditar Malha com Open3D}
+
+\textbf{Objetivo}: carregar uma malha STL, auditar sua qualidade
+topológica e reportar métricas de estanqueidade.
+
+\textbf{Instruções}:
+\begin{enumerate}
+    \item Carregue a malha \texttt{modelo\_teste.stl} com Open3D.
+    \item Verifique se a malha é \textit{water-tight}.
+    \item Conte vértices, triângulos, arestas não-manifold.
+    \item Calcule volume e área da superfície.
+    \item Emita diagnóstico ``APROVADA'' ou ``REPROVADA''.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python, caption={Teste TDD para auditoria de malha (Exercício 2)}, label={lst:ex2_test}]
+import open3d as o3d
+import numpy as np
+
+def test_mesh_audit():
+    """
+    Teste de verificacao da auditoria topologica.
+    Criterio: malha deve ser water-tight (0 arestas nao-manifold).
+    """
+    from exercicio2 import auditar_malha
+    
+    # Cria malha sintetica: cubo (water-tight)
+    mesh = o3d.geometry.TriangleMesh.create_box(width=1, height=1, depth=1)
+    o3d.io.write_triangle_mesh("cubo_teste.ply", mesh)
+    
+    # Executa auditoria
+    resultado = auditar_malha("cubo_teste.ply")
+    
+    print(f"Watertight: {resultado['watertight']}")
+    print(f"Vertices: {resultado['n_vertices']}")
+    print(f"Triangulos: {resultado['n_triangles']}")
+    
+    assert resultado['watertight'] == True, "Malha deveria ser water-tight"
+    assert resultado['n_vertices'] == 8, "Cubo tem 8 vertices"
+    assert resultado['n_triangles'] == 12, "Cubo tem 12 triangulos"
+    print("TESTE APROVADO: malha water-tight com topologia correta")
+    return True
+\end{lstlisting}
+
+\subsection{Exercício 3: Calcular Dice entre Duas Segmentações}
+
+\textbf{Objetivo}: implementar o cálculo do coeficiente Dice entre
+duas máscaras NIfTI e interpretar o resultado.
+
+\textbf{Instruções}:
+\begin{enumerate}
+    \item Carregue duas máscaras NIfTI: \texttt{predicao.nii.gz} e
+        \texttt{ground\_truth.nii.gz}.
+    \item Calcule Dice, Jaccard e sensibilidade.
+    \item Classifique o resultado segundo a \autoref{tab:metricas-interpretacao}.
+    \item Salve o relatório em um arquivo \texttt{relatorio\_metricas.json}.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python, caption={Teste TDD para cálculo de Dice (Exercício 3)}, label={lst:ex3_test}]
+import numpy as np
+import json
+
+def test_dice_calculation():
+    """
+    Teste de verificacao do calculo de Dice.
+    Criterio: Dice entre mascaras identicas deve ser 1.0.
+    """
+    from exercicio3 import calcular_metricas
+    
+    # Cria duas mascaras identicas (esfera 3D)
+    shape = (32, 32, 32)
+    cx, cy, cz = 16, 16, 16
+    r = 8
+    x, y, z = np.ogrid[:32, :32, :32]
+    mask = ((x - cx)**2 + (y - cy)**2 + (z - cz)**2 <= r**2).astype(np.uint8)
+    
+    # Salva como NIfTI temporarios
+    import nibabel as nib
+    nib.save(nib.Nifti1Image(mask, np.eye(4)), "predicao.nii.gz")
+    nib.save(nib.Nifti1Image(mask, np.eye(4)), "ground_truth.nii.gz")
+    
+    # Calcula metricas
+    metrics = calcular_metricas("predicao.nii.gz", "ground_truth.nii.gz")
+    
+    print(f"Dice: {metrics['dice']:.4f}")
+    print(f"Jaccard: {metrics['jaccard']:.4f}")
+    
+    # Mascaras identicas -> Dice = 1.0, Jaccard = 1.0
+    assert abs(metrics['dice'] - 1.0) < 1e-4, \
+        f"Dice {metrics['dice']} != 1.0"
+    assert abs(metrics['jaccard'] - 1.0) < 1e-4, \
+        f"Jaccard {metrics['jaccard']} != 1.0"
+    
+    # Salva relatorio
+    with open("relatorio_metricas.json", "w") as f:
+        json.dump(metrics, f, indent=2)
+    print("Relatorio salvo: relatorio_metricas.json")
+    print("TESTE APROVADO: Dice = Jaccard = 1.0 para mascaras identicas")
+    return True
+\end{lstlisting}
+
+\subsection{Gabarito dos Exercícios}
+
+O gabarito completo está disponível no repositório do OpenCode
+Ecosystem em \texttt{opencode/gabaritos/cap10/}. Para verificar
+automaticamente todos os exercícios:
+
+\begin{lstlisting}[style=bashstyle, caption={Verificação automática dos exercícios do Capítulo 10}, label={lst:run_tests}]
+# Executa todos os testes do capitulo 10
+tdd_validate.py --chapter 10
+
+# Executa teste individual
+pytest test_exercicio1.py -v
+pytest test_exercicio2.py -v
+pytest test_exercicio3.py -v
+\end{lstlisting}
+
+% =============================================================================
+\section*{Resumo do Capítulo}
+\label{sec:resumo}
+% =============================================================================
+
+Este capítulo apresentou o pipeline completo de reconstrução 3D e
+visualização clínica, desde a conversão DICOM até a malha
+volumétrica pronta para simulação FEM. Os principais pontos são:
+
+\begin{itemize}
+    \item A conversão DICOM $\rightarrow$ NIfTI com dcm2niix é o
+        primeiro passo essencial para processamento computacional.
+    \item O MONAI com DentalSegmentator automatiza a segmentação
+        das estruturas dentomaxilofaciais com alta precisão (Dice
+        $>0,90$ para estruturas grandes).
+    \item O pós-processamento com Open3D (suavização, fechamento de
+        buracos, remoção de componentes) é indispensável para obter
+        malhas \textit{water-tight}.
+    \item A geração de malha tetraédrica com Gmsh produz o
+        insumo necessário para simulações de elementos finitos.
+    \item As métricas Dice, Jaccard e Hausdorff fornecem validação
+        quantitativa obrigatória para publicações científicas Qualis A1.
+    \item A exportação para STL viabiliza a impressão 3D de
+        biomodelos para planejamento cirúrgico e comunicação com
+        o paciente.
+\end{itemize}
+
+% =============================================================================
+% FIM DO CAPÍTULO 10
+% =============================================================================

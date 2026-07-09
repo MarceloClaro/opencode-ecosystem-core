@@ -1,0 +1,27 @@
+% Formatando como em "APÊNDICE A -- Título do apêndice":
+% Ref.: https://tex.stackexchange.com/a/479364/91816
+
+\makeatletter
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+    \refstepcounter{chapter}%
+    \typeout{\thechapter.}%
+    \addcontentsline{toc}{chapter}%
+    {\thechapter\space\textendash\space\ #1}% <-- modification
+  \else
+    \addcontentsline{toc}{chapter}{#1}%
+  \fi
+  \chaptermark{#1}%
+  \addtocontents{lof}{\protect\addvspace{10\p@}}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \if@twocolumn
+    \@topnewpage[\@makechapterhead{#2}]%
+  \else
+    \@makechapterhead{#2}%
+    \@afterheading
+  \fi}
+\makeatother
+
+% Reiniciando contador de capítulo e seção:
+
+\setcounter{chapter}{0}
+\setcounter{section}{0}

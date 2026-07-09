@@ -1,0 +1,114 @@
+% Tamanhos de fontes matemáticas em relação à fonte do texto:
+%% {tamanho do texto} {matemática} {matemática script} {matemática scriptscript}
+
+\DeclareMathSizes{10}{10}{6}{4}
+\DeclareMathSizes{9}{9}{5}{3}
+
+\usepackage{amsthm} % deve ser chamado antes de mdframed conforme dito em http://tex.stackexchange.com/questions/283763/why-dont-i-get-non-italic-normal-font-inside-theorem-environment-using-newmdth
+
+% Seleção de fontes de equações:
+
+\usepackage[math-style=french]{unicode-math} % não funciona se compilar com pdflatex, deve-se usar xelatex ou lualatex
+
+\usepackage{yfonts} % para usar caracteres góticos para algumas variaveis
+
+% Pacote para maior controle de fluxo de figuras (usado para opção [H] que fixa a posição das figuras):
+
+\usepackage{float}
+
+% Pacote usado para impedir elementos flutuantes (figuras, tabelas, etc.) de aparecerem em seção errada:
+
+\usepackage[section]{placeins}
+
+% Pacote inserido para fazer o símbolo de grau:
+
+\usepackage{gensymb}
+
+% Pacote inserido para fazer símbolos de circuito elétrico:
+
+\usepackage{marvosym}
+
+% Definição de variáveis e unidades:
+
+\newcommand{\angstrom}{\text{\normalfont\AA}}
+\newcommand{\pol}{\ensuremath{pol}}
+\newcommand{\cm}{\ensuremath{cm}}
+\newcommand{\km}{\ensuremath{km}}
+\newcommand{\hm}{\ensuremath{hm}}
+\newcommand{\dam}{\ensuremath{dam}}
+\newcommand{\dm}{\ensuremath{dm}}
+\newcommand{\mol}{\ensuremath{mol}}
+\newcommand{\mi}{\ensuremath{mi}}
+\newcommand{\h}{\ensuremath{h}}
+\newcommand{\s}{\ensuremath{s}}
+\newcommand{\Min}{\ensuremath{min}}
+\newcommand{\Pa}{\ensuremath{Pa}}
+\newcommand{\atm}{\ensuremath{atm}}
+\newcommand{\mmHg}{\ensuremath{mmHg}}
+\newcommand{\BarP}{\ensuremath{Bar}}
+\newcommand{\PsiP}{\ensuremath{PSI}}
+\newcommand{\lb}{\ensuremath{lb}}
+\newcommand{\N}{\ensuremath{N}}
+\newcommand{\kg}{\ensuremath{kg}}
+\newcommand{\kgf}{\ensuremath{kgf}}
+\newcommand{\are}{\ensuremath{a}}
+\newcommand{\litro}{\ensuremath{\ell}}
+\newcommand{\g}{\ensuremath{g}}
+
+% Símbolos de diferencial:
+
+\def\D{\mathrm{d}} %% diferencial - comando \D{}
+\def\DI{{\delta}} % diferencial inexata ``delta''
+
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+
+% Evita que equações extrapolem a margem (e permite outros recursos tipográficos avançados):
+
+\usepackage{microtype}
+
+%% Simbolos matemáticos extra:
+
+\DeclareMathSymbol{\Omega}{\mathalpha}{letters}{"0A}
+\DeclareMathSymbol{\varOmega}{\mathalpha}{operators}{"0A}
+\providecommand*{\upOmega}{\varOmega} % for siunitx
+
+%% Pacote para uso de unidades SI com distância padronizada entre valor e unidade:
+
+\usepackage{siunitx}
+\sisetup{%
+      binary-units=true,
+      group-separator={.},
+      group-digits=integer,
+      load-configurations=abbreviations,
+      load=addn,
+      per-mode=fraction,
+      output-decimal-marker={,},
+      range-phrase= --,
+      separate-uncertainty=true,
+      math-ohm = \ensuremath{\upOmega}, % senão \ohm não funciona
+      text-ohm = Ω,  % senão \ohm não funciona
+    }
+
+\DeclareSIUnit\milha{mi}
+\DeclareSIUnit\polegada{pol}
+\DeclareSIUnit\alqueire{alqueire}
+\DeclareSIUnit\inch{in}
+\DeclareSIUnit\foot{ft}
+\DeclareSIUnit\kgf{kgf}
+\DeclareSIUnit\lbf{lbf}
+\DeclareSIUnit\pound{lb}
+\DeclareSIUnit\rev{rev}
+\DeclareSIUnit\rpm{rpm}
+\DeclareSIUnit\pkt{PKT}
+\DeclareSIUnit{\calorie}{cal}
+\DeclareSIUnit{\cal}{cal}
+\DeclareSIUnit{\Cal}{Cal}
+\DeclareSIUnit{\Calorie}{\kilo\calorie}
+\DeclareSIUnit{\fahrenheit}{\degree F}
+
+\DeclareSIUnit{\nothing}{\relax} % usado para mostrar prefixos sem unidade
+
+% Equações químicas:
+
+\usepackage[version=4]{mhchem}

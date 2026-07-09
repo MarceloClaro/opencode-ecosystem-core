@@ -1,0 +1,249 @@
+% =============================================================================
+%  TEMPLATE ARXiv REFINADO v1.0
+%  Uso: submissao direta ao arXiv (http://arxiv.org)
+%  Compilar: pdflatex -> pdflatex
+% =============================================================================
+\documentclass[12pt,a4paper]{article}
+
+% --- Pacotes essenciais para arXiv ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=green!40!black,
+    urlcolor=blue!60!black,
+    breaklinks=true
+}
+% \usepackage{natbib}  % arXiv: usar thebibliography padrão
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% --- Ambiente teoremas ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corol\'ario}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Defini\c{c}\~ao}
+\newtheorem{example}[theorem]{Exemplo}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Observa\c{c}\~ao}
+
+% --- Comandos auxiliares ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+
+% =============================================================================
+\begin{document}
+
+\title{T\'itulo do Artigo --- Vers\~ao Refinada para arXiv}
+
+\author{Marcos A. Santos\thanks{Departamento de Computa\c{c}\~ao, Universidade Federal
+do Cear\'a. E-mail: marcos.santos@exemplo.com},
+        Ana C. Oliveira\thanks{Instituto de Ci\^encias Matem\'aticas,
+Universidade de S\~ao Paulo. E-mail: ana.oliveira@exemplo.com}}
+
+\date{\today}
+
+\maketitle
+
+% =============================================================================
+\begin{abstract}
+Este documento serve como template refinado para submiss\~ao ao arXiv.
+Apresenta a estrutura padr\~ao de um artigo cient\'ifico com se\c{c}\~oes
+bem definidas, ambientes matem\'aticos, tabelas, figuras, algoritmos e
+refer\^encias no formato num\'erico. O c\'odigo-fonte est\'a preparado para
+compila\c{c}\~ao direta com \texttt{pdflatex} e atende aos requisitos do
+reposit\'orio arXiv.
+\end{abstract}
+
+% =============================================================================
+\section{Introdu\c{c}\~ao}
+\label{sec:intro}
+
+A motiva\c{c}\~ao deste trabalho \'e demonstrar um template completo e
+refinado para submiss\~ao de artigos ao reposit\'orio arXiv
+\cite{arXiv2024Guide}. O arXiv aceita submiss\~oes em \LaTeX
+desde que o c\'odigo-fonte seja compat\'ivel com as classes padr\~ao
+(\texttt{article}, \texttt{amsart}, \texttt{revtex4-2}, etc.).
+
+Um aspecto fundamental \'e a reprodu\c{c}\~ao confi\'avel do documento:
+todas as fontes, pacotes e imagens devem estar inclu\'idos na submiss\~ao.
+Pacotes n\~ao padr\~ao devem ser evitados ou inclu\'idos junto ao c\'odigo
+\cite{arXivSubmitFAQ}.
+
+% =============================================================================
+\section{Fundamenta\c{c}\~ao Te\'orica}
+\label{sec:fund}
+
+\subsection{Formula\c{c}\~ao Matem\'atica}
+
+Seja $\mathcal{X} \subseteq \R^n$ um espa\c{c}o de busca e
+$f: \mathcal{X} \to \R$ uma fun\c{c}\~ao objetivo. O problema de
+otimiza\c{c}\~ao consiste em encontrar
+
+\begin{equation}
+    x^* = \arg\min_{x \in \mathcal{X}} f(x)
+    \label{eq:otim}
+\end{equation}
+
+\noindent sob um conjunto de restri\c{c}\~oes $g_i(x) \leq 0$ para
+$i = 1, \dots, m$.
+
+\begin{theorem}[Converg\^encia]
+\label{thm:conv}
+Sob as hip\'oteses de convexidade de $f$ e diferenciabilidade
+com constante de Lipschitz $L$, o m\'etodo do gradiente descendente
+com taxa de aprendizado $\eta < 2/L$ converge para o \'otimo global:
+\begin{equation}
+    \|x_{k+1} - x^*\|^2 \leq \left(1 - \frac{2\eta}{L}\right)
+    \|x_k - x^*\|^2
+    \label{eq:conv_rate}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+A prova segue diretamente da expans\~ao de Taylor de $f$ em torno de
+$x_k$ e da propriedade de Lipschitz do gradiente \cite{Boyd2004Convex}.
+\end{proof}
+
+\subsection{An\'alise Estat\'istica}
+
+Para um conjunto de $n$ observa\c{c}\~oes independentes $\{y_i\}_{i=1}^n$,
+o estimador de m\'axima verossimilhan\c{c}a \'e dado por
+
+\begin{equation}
+    \hat{\theta}_{\text{MV}} = \arg\max_{\theta \in \Theta}
+    \sum_{i=1}^n \log p(y_i \mid \theta)
+    \label{eq:mv}
+\end{equation}
+
+\begin{table}[htbp]
+\centering
+\caption{M\'etricas de desempenho para diferentes configura\c{c}\~oes}
+\label{tab:metricas}
+\begin{tabular}{lccc}
+\toprule
+Configura\c{c}\~ao & Precis\~ao (\%) & Recall (\%) & $F_1$ \\
+\midrule
+Baseline       & 82.3 $\pm$ 1.2 & 79.8 $\pm$ 1.5 & 0.810 \\
+Proposta       & 94.7 $\pm$ 0.8 & 93.1 $\pm$ 0.9 & 0.939 \\
+Estado da arte & 95.2 $\pm$ 0.6 & 94.5 $\pm$ 0.7 & 0.948 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+\section{Metodologia}
+\label{sec:metod}
+
+O pipeline proposto segue tr\^es etapas principais, conforme descrito
+no Algoritmo~\ref{alg:pipeline}.
+
+\begin{algorithm}[htbp]
+\caption{Pipeline de processamento}
+\label{alg:pipeline}
+\begin{algorithmic}[1]
+\Require Conjunto de dados $\mathcal{D}$, par\^ametros $\Theta$
+\Ensure Sa\'ida processada $\mathcal{Y}$
+\State $\mathcal{X} \gets \text{Pr\'e-processamento}(\mathcal{D})$
+\State $\mathcal{F} \gets \text{Extra\c{c}\~ao de caracter\'isticas}(\mathcal{X})$
+\For{cada amostra $x_i \in \mathcal{X}$}
+    \State $s_i \gets \text{Modelo}(\mathcal{F}_i, \Theta)$
+    \If{$s_i > \tau$}
+        \State $\mathcal{Y} \gets \mathcal{Y} \cup \{x_i\}$
+    \EndIf
+\EndFor
+\State \Return $\mathcal{Y}$
+\end{algorithmic}
+\end{algorithm}
+
+% =============================================================================
+\section{Resultados}
+\label{sec:result}
+
+Os experimentos foram conduzidos em um conjunto de 10~000 amostras
+com valida\c{c}\~ao cruzada $k$-fold ($k=5$). A Figura~\ref{fig:curva}
+ilustra a curva de aprendizado do modelo proposto.
+
+\begin{figure}[htbp]
+\centering
+% \includegraphics[width=0.7\textwidth]{curva_aprendizado.pdf}
+\vspace{3cm}
+\begin{minipage}{0.7\textwidth}
+\centering
+\fbox{\parbox{\textwidth}{\centering
+    [Gr\'afico: Curva de perda vs. \'epocas]}}
+\end{minipage}
+\caption{Curva de aprendizado do modelo proposto.}
+\label{fig:curva}
+\end{figure}
+
+% =============================================================================
+\section{Discuss\~ao}
+\label{sec:disc}
+
+Os resultados indicam uma melhoria significativa em rela\c{c}\~ao
+ao baseline (Tabela~\ref{tab:metricas}), com ganho de 12.4 p.p.
+na m\'etrica $F_1$. A abordagem proposta supera o estado da arte
+em 2 dos 3 datasets avaliados.
+
+Limita\c{c}\~oes incluem a depend\^encia do hiperpar\^ametro $\tau$
+e o custo computacional da etapa de pr\'e-processamento.
+
+% =============================================================================
+\section{Conclus\~ao}
+\label{sec:conc}
+
+Apresentamos um template refinado para submiss\~ao ao arXiv, com
+estrutura completa de artigo cient\'ifico. O c\'odigo est\'a
+preparado para compila\c{c}\~ao direta e pode ser adaptado para
+diferentes \'areas do conhecimento.
+
+Trabalhos futuros incluem a extens\~ao para m\'ultiplos datasets
+e a otimiza\c{c}\~ao dos hiperpar\^ametros de forma autom\'atica.
+
+% =============================================================================
+% A seção de agradecimentos é opcional no arXiv
+\section*{Agradecimentos}
+Os autores agradecem ao suporte da CAPES e do CNPq.
+
+% =============================================================================
+\begin{thebibliography}{99}
+
+\bibitem{arXiv2024Guide}
+arXiv.org. \textit{arXiv Submission Guidelines}, 2024.
+Dispon\'ivel em: \url{https://arxiv.org/help/submit}
+
+\bibitem{arXivSubmitFAQ}
+arXiv.org. \textit{Submission FAQ}, 2024.
+Dispon\'ivel em: \url{https://arxiv.org/help/faq/submit}
+
+\bibitem{Boyd2004Convex}
+S. Boyd and L. Vandenberghe.
+\textit{Convex Optimization}.
+Cambridge University Press, 2004.
+
+\bibitem{Goodfellow2016Deep}
+I. Goodfellow, Y. Bengio, and A. Courville.
+\textit{Deep Learning}.
+MIT Press, 2016.
+
+\end{thebibliography}
+
+\end{document}

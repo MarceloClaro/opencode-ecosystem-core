@@ -1,0 +1,50 @@
+\chapter{Figuras e gráficos}
+
+\thispagestyle{empty} 
+
+Sugiro que você guarde todas as figuras na pasta ``figs'' para que seu projeto fique mais organizado. A figura \ref{fig:logolatex} mostra como é fácil inserir uma figura com legenda e referência à fonte.
+
+\begin{figure}
+	\centering
+	\begin{minipage}{0.6\linewidth}
+		\centering
+		\caption{Logo \LaTeX.}
+		\label{fig:logolatex}
+		\includegraphics[width=\linewidth]{figs/1280px-LaTeX-logo.png}
+		\source{Wikimedia Commons \cite{wikimedia-latex}.}
+	\end{minipage}
+\end{figure}
+
+Além de figuras, \index{figuras} é possível inserir caixas de texto de diversos tipos, como axiomas, teoremas etc. Elas podem ser configuradas e novos tipos delas podem ser criados no arquivo \begin{verbatim}config/envs.tex\end{verbatim}.
+
+Existem pacotes que permitem criar figuras e gráficos no próprio código \LaTeX. Por exemplo, temos
+
+\begin{itemize}
+    \item PGFPlots \url{http://pgfplots.sourceforge.net/}
+    \item TikZ \url{http://www.texample.net/tikz/examples/all/}
+    \item Metapost \url{http://tex.loria.fr/prod-graph/zoonekynd/metapost/metapost.html}
+    \item PSTricks \url{https://tug.org/PSTricks/main.cgi?file=examples}
+\end{itemize}
+
+\begin{question}
+    Explique como Isaac Newton usaria cada um dos pacotes seguintes, se vivesse no tempo presente:
+    \begin{enumerate}[label=(\Alph*)]
+        \item Metapost
+        \item TikZ
+        \item PGFPlots
+        \item PSTricks
+    \end{enumerate}
+\end{question}
+
+\begin{solution}
+    \begin{enumerate}[label=(\Alph*)]
+        \item Para fazer figuras 3D.
+        \item Para fazer diagramas.
+        \item Para traçar gráficos.
+        \item Para fazer de um tudo.
+    \end{enumerate}
+\end{solution}
+
+\section{Soluções deste capítulo}
+
+\printsolutions

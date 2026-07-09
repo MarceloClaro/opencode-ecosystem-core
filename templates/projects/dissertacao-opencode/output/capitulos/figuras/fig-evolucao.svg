@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 380" font-family="Arial, sans-serif">
+  <!-- Fundo -->
+  <rect width="750" height="380" fill="#fff"/>
+
+  <!-- Eixos -->
+  <line x1="60" y1="30" x2="60" y2="310" stroke="#333" stroke-width="1.5"/>
+  <line x1="60" y1="310" x2="720" y2="310" stroke="#333" stroke-width="1.5"/>
+  <polygon points="720,306 728,310 720,314" fill="#333"/>
+  <polygon points="56,30 60,22 64,30" fill="#333"/>
+
+  <!-- Rótulos eixos -->
+  <text x="390" y="340" text-anchor="middle" font-size="11">Ciclo Evolutivo</text>
+  <text x="20" y="175" text-anchor="middle" font-size="11" transform="rotate(-90,20,175)">Score Qualis</text>
+
+  <!-- Grade Y -->
+  <line x1="58" y1="254" x2="720" y2="254" stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="58" y1="198" x2="720" y2="198" stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="58" y1="142" x2="720" y2="142" stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="58" y1="86"  x2="720" y2="86"  stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="58" y1="30"  x2="720" y2="30"  stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <text x="50" y="257" text-anchor="end" font-size="9" fill="#555">80</text>
+  <text x="50" y="201" text-anchor="end" font-size="9" fill="#555">85</text>
+  <text x="50" y="145" text-anchor="end" font-size="9" fill="#555">90</text>
+  <text x="50" y="89"  text-anchor="end" font-size="9" fill="#555">95</text>
+  <text x="50" y="33"  text-anchor="end" font-size="9" fill="#555">100</text>
+
+  <!-- Linha de evolução -->
+  <polyline points="
+    90,226  130,170  170,159  210,198  250,159
+    290,142  330,136  370,114  410,114  450,114
+    490,114  530,142  570,136  610,131  650,103
+    690,103  730,103
+  " fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Linha de tendência -->
+  <line x1="90" y1="226" x2="730" y2="103" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>
+
+  <!-- Marcadores de ciclos principais -->
+  <circle cx="90"  cy="226" r="4" fill="#ef4444"/>
+  <text x="90"  y="320" text-anchor="middle" font-size="9">R1</text>
+  <circle cx="170" cy="159" r="4" fill="#ef4444"/>
+  <text x="170" y="320" text-anchor="middle" font-size="9">R3</text>
+  <circle cx="290" cy="142" r="4" fill="#ef4444"/>
+  <text x="290" y="320" text-anchor="middle" font-size="9">R6</text>
+  <circle cx="410" cy="114" r="4" fill="#ef4444"/>
+  <text x="410" y="320" text-anchor="middle" font-size="9">R9</text>
+  <circle cx="570" cy="136" r="4" fill="#ef4444"/>
+  <text x="570" y="320" text-anchor="middle" font-size="9">R13</text>
+  <circle cx="730" cy="103" r="4" fill="#ef4444"/>
+  <text x="730" y="320" text-anchor="middle" font-size="9">R18</text>
+
+  <!-- Marcadores menores -->
+  <circle cx="130" cy="170" r="2" fill="#93c5fd"/>
+  <circle cx="210" cy="198" r="2" fill="#93c5fd"/>
+  <circle cx="250" cy="159" r="2" fill="#93c5fd"/>
+  <circle cx="330" cy="136" r="2" fill="#93c5fd"/>
+  <circle cx="370" cy="114" r="2" fill="#93c5fd"/>
+  <circle cx="450" cy="114" r="2" fill="#93c5fd"/>
+  <circle cx="490" cy="114" r="2" fill="#93c5fd"/>
+  <circle cx="530" cy="142" r="2" fill="#93c5fd"/>
+  <circle cx="610" cy="131" r="2" fill="#93c5fd"/>
+  <circle cx="650" cy="103" r="2" fill="#93c5fd"/>
+  <circle cx="690" cy="103" r="2" fill="#93c5fd"/>
+
+  <!-- Destaque -->
+  <rect x="240" y="48" width="270" height="50" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+  <text x="375" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">De 85 a 99 (+16,5%)</text>
+  <text x="375" y="88" text-anchor="middle" font-size="11" fill="#475569">16 ciclos documentados • Média: +0,92 pts/ciclo</text>
+
+  <!-- Rótulo tendência -->
+  <text x="735" y="95" font-size="9" fill="#ef4444">tendência</text>
+</svg>

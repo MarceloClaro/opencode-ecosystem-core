@@ -1,0 +1,549 @@
+% ============================================================
+% DISSERTAÇÃO DE MESTRADO — PPGTE/UFC
+% Metodologias Ativas: ABP e ABPr na Educação Brasileira
+% Autor: Fernando Ramos Passoni
+%
+% Compilação: pdflatex dissertacao.tex (2x)
+% ============================================================
+
+\documentclass[12pt,a4paper,twoside,openright]{book}
+
+% ============================================================
+% PACOTES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+
+% ============================================================
+% CAMPOS EDITÁVEIS (preencher antes da compilação final)
+% ============================================================
+\newcommand{\autordissertacao}{Fernando Ramos Passoni}
+\newcommand{\nomedissertacao}{Metodologias Ativas: ABP e ABPr na Educação Brasileira}
+\newcommand{\programa}{Programa de Pós-Graduação em Tecnologia e Educação (PPGTE)}
+\newcommand{\instituicao}{Universidade Federal do Ceará (UFC)}
+\newcommand{\orientador}{Prof. Dr. [Nome do Orientador]}
+\newcommand{\coorientador}{Prof. Dr. [Nome do Co-Orientador]}
+\newcommand{\cidadedefesa}{Fortaleza}
+\newcommand{\estadodefesa}{CE}
+\newcommand{\anodefesa}{2026}
+\newcommand{\mesdefesa}{Junho}
+\newcommand{\numeroparecer}{[inserir numero do parecer CEP]}
+\newcommand{\nomepai}[1]{[nome do pai]}
+\newcommand{\nomemae}[1]{[nome da mae]}
+\usepackage{geometry}
+\geometry{
+    left=3cm,
+    right=2cm,
+    top=3cm,
+    bottom=2cm,
+    headheight=15pt,
+    marginparwidth=0pt,
+    includehead=false,
+    includefoot=false
+}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\usepackage{hyperref}
+\usepackage{url}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,
+    citecolor=blue!70!black,
+    urlcolor=blue!70!black,
+    bookmarks=true,
+    bookmarksopen=true,
+    bookmarksnumbered=true,
+    pdftitle={\nomedissertacao},
+    pdfauthor={\autordissertacao},
+    pdfsubject={Dissertação de Mestrado - PPGTE/UFC},
+    pdfkeywords={Metodologias Ativas; ABP; ABPr; Educação Brasileira},
+    breaklinks=true
+}
+\usepackage{bookmark}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{referencias.bib}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tocloft}
+\usepackage{listings}
+\usepackage{alltt}
+% ============================================================
+% MICROTIPOGRAFIA E HIFENIZAÇÃO
+% ============================================================
+
+% Hifenização explícita para palavras sem acentos problemáticas (PT-BR)
+% Nota: \hyphenation{} não aceita caracteres acentuados em pdflatex;
+% palavras acentuadas são tratadas automaticamente pelo babel + microtype.
+\hyphenation{
+  me-to-do-lo-gi-as
+  me-to-do-lo-gi-a
+  de-li-ne-a-men-to
+  re-pro-du-zi-bi-li-da-de
+  ge-ren-ci-a-men-to
+  res-pon-den-tes
+  pes-qui-sa-dor
+  do-cu-men-tos
+  ca-te-go-ri-as
+  iden-ti-fi-ca-das
+  trans-ver-sal
+  bar-rei-ras
+  ta-ma-nhos
+  pro-ble-mas
+  pres-su-pos-tos
+  pro-je-tos
+  so-ci-ais
+  trans-fe-ri-bi-li-da-de
+  re-pli-ca-bi-li-da-de
+  co-la-bo-ra-ti-vo
+}
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red!80!black},
+    showstringspaces=false,
+    tabsize=2,
+    language=Python,
+    captionpos=b,
+    inputencoding=utf8,
+    literate={á}{{'a}}1 {é}{{'e}}1 {ê}{{^e}}1 {ã}{{~a}}1 {ç}{{c,}}1 {õ}{{~o}}1
+}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+\setlength{\cftbeforesecskip}{1pt}
+\setlength{\cftbeforesubsecskip}{1pt}
+
+% ============================================================
+% CABEÇALHOS E RODAPÉS
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\leftmark}
+\fancyhead[RO]{\rightmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\fancypagestyle{brief}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ============================================================
+% INÍCIO DO DOCUMENTO
+% ============================================================
+\begin{document}
+
+% ============================================================
+% PÁGINAS PRELIMINARES
+% ============================================================
+\frontmatter
+\pagestyle{brief}
+
+% Capa
+\begin{titlepage}
+\begin{center}
+\vspace*{2cm}
+
+{\Large\textbf{\MakeUppercase{\nomedissertacao}}}
+
+\vspace{2cm}
+
+{\large\textbf{\autordissertacao}}
+
+\vspace{3cm}
+
+Dissertação apresentada ao \programa{} da \instituicao{} como requisito parcial para a obtenção do título de Mestre em Tecnologia e Educação.
+
+\vspace{1cm}
+\textbf{Orientador:} \orientador{}
+
+\vspace{3cm}
+
+{\large \cidadedefesa{} --- \estadodefesa{}\\\anodefesa{}}
+
+\end{center}
+\end{titlepage}
+
+% Folha de rosto
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\large\textbf{\MakeUppercase{\nomedissertacao}}}
+
+\vspace{2cm}
+
+{\large\textbf{\autordissertacao}}
+
+\vspace{3cm}
+
+Dissertação apresentada ao \programa{} da \instituicao{} como requisito parcial para a obtenção do título de Mestre em Tecnologia e Educação.
+
+Orientador: \orientador{}
+
+\vspace{3cm}
+
+{\large \cidadedefesa{} --- \estadodefesa{}\\\anodefesa{}}
+
+\end{center}
+\newpage
+
+% Folha de aprovação
+\thispagestyle{empty}
+\vspace*{3cm}
+\begin{center}
+{\large\textbf{FOLHA DE APROVAÇÃO}}
+\end{center}
+
+\vspace{2cm}
+
+Dissertação de Mestrado intitulada ``\nomedissertacao{}'', elaborada por \textbf{\autordissertacao{}}, submetida à Banca Examinadora composta pelos seguintes professores:
+
+\vspace{1cm}
+
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+\hrulefill & \hrulefill \\
+Prof. Dr. [Nome 1] & Prof. Dr. [Nome 2] \\
+Instituição & Instituição \\
+& \\
+& \\
+\hrulefill & \hrulefill \\
+Prof. Dr. [Nome 3] & Prof. Dr. [Nome 4] \\
+Instituição & Instituição \\
+& \\
+& \\
+\end{tabular}
+
+\vspace{2cm}
+
+\begin{center}
+\cidadedefesa{}, \underline{\hspace{2cm}} de \underline{\hspace{2cm}} de \anodefesa{}.
+
+\vspace{1cm}
+\noindent\hrulefill
+
+\orientador{}
+Orientador
+\end{center}
+
+\newpage
+
+% Agradecimentos
+\thispagestyle{empty}
+\chapter*{Agradecimentos}
+\addcontentsline{toc}{chapter}{Agradecimentos}
+
+Agradeço a Deus pela vida e pelas oportunidades.
+
+Agradeço aos meus pais, \nomepai{} e \nomemae{}, pelo amor incondicional e pelo apoio em todas as etapas da minha vida.
+
+Agradeço ao meu orientador, \orientador{}, pela orientação dedicada, pelo incentivo e pela confiança depositada neste trabalho.
+
+Agradeço aos membros da banca examinadora pela disponibilidade e pelas contribuições valiosas.
+
+Agradeço aos colegas do PPGTE pela convivência enriquecedora e pelo compartilhamento de experiências.
+
+Agradeço à \instituicao{} pela oportunidade de realização deste curso de pós-graduação.
+
+Agradeço a todos que, de alguma forma, contribuíram para a concretização deste trabalho.
+
+\newpage
+
+% Resumo
+\chapter*{Resumo}
+\addcontentsline{toc}{chapter}{Resumo}
+
+Esta dissertação investiga o estado da arte, os desafios e os impactos das metodologias ativas -- em especial o Aprendizado Baseado em Problemas (ABP) e o Aprendizado Baseado em Projetos (ABPr) -- no contexto da educação brasileira. O estudo tem como objetivo geral analisar a eficácia dessas metodologias na promoção de uma aprendizagem significativa e no desenvolvimento de competências essenciais para o século XXI. A pesquisa foi desenvolvida em cinco capítulos: (1) Introdução, apresentando o contexto, os objetivos e a justificativa do estudo; (2) Aspectos Estratégicos, com análise do setor educacional com base no modelo das cinco forças de Porter e na cadeia de valor; (3) Organização do Trabalho, detalhando a metodologia de pesquisa, incluindo revisão bibliográfica, coleta e análise de dados; (4) Apresentação e Análise dos Resultados, discutindo os achados da pesquisa de campo; e (5) Considerações Finais, retomando os objetivos, apresentando limitações e perspectivas futuras. Os resultados indicam que a adoção de ABP e ABPr está associada a ganhos significativos na aprendizagem, no desenvolvimento de habilidades socioemocionais e no engajamento dos discentes. O estudo contribui para o campo da educação ao propor um modelo integrador de implementação e avaliação dessas metodologias, adaptado às realidades do sistema educacional brasileiro.
+
+\textbf{Palavras-chave:} Metodologias Ativas; Aprendizado Baseado em Problemas; Aprendizado Baseado em Projetos; Educação Brasileira; Aprendizagem Significativa.
+
+\newpage
+
+% Abstract
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+This dissertation investigates the state of the art, challenges, and impacts of active learning methodologies -- especially Problem-Based Learning (PBL) and Project-Based Learning (PjBL) -- in the context of Brazilian education. The general objective of the study is to analyze the effectiveness of these methodologies in promoting meaningful learning and developing essential 21st-century competencies. The research was developed in five chapters: (1) Introduction, presenting the context, objectives, and justification of the study; (2) Strategic Aspects, with an analysis of the educational sector based on Porter's Five Forces model and the value chain; (3) Work Organization, detailing the research methodology, including literature review, data collection and analysis; (4) Presentation and Analysis of Results, discussing the findings from the field research; and (5) Final Considerations, revisiting the objectives, presenting limitations and future perspectives. The results indicate that the adoption of PBL and PjBL is associated with significant gains in learning, development of socio-emotional skills, and student engagement. The study contributes to the field of education by proposing an integrative model for implementing and evaluating these methodologies, adapted to the realities of the Brazilian educational system.
+
+\textbf{Keywords:} Active Learning; Problem-Based Learning; Project-Based Learning; Brazilian Education; Meaningful Learning.
+
+\newpage
+
+% Lista de figuras
+\listoffigures
+\addcontentsline{toc}{chapter}{Lista de figuras}
+
+\newpage
+
+% Lista de tabelas
+\listoftables
+\addcontentsline{toc}{chapter}{Lista de tabelas}
+
+\newpage
+
+% Lista de abreviaturas e siglas
+\chapter*{Lista de abreviaturas e siglas}
+\addcontentsline{toc}{chapter}{Lista de abreviaturas e siglas}
+
+\begin{description}[style=nextline]
+\item[ABN] Aprendizagem Baseada em Necessidades
+\item[ABP] Aprendizado Baseado em Problemas (= Problem-Based Learning / PBL)
+\item[ABPr] Aprendizado Baseado em Projetos (= Project-Based Learning / PjBL)
+\item[BNCC] Base Nacional Comum Curricular
+\item[CAPES] Coordenação de Aperfeiçoamento de Pessoal de Nível Superior
+\item[CNPq] Conselho Nacional de Desenvolvimento Científico e Tecnológico
+\item[ENEM] Exame Nacional do Ensino Médio
+\item[IBGE] Instituto Brasileiro de Geografia e Estatística
+\item[MEC] Ministério da Educação
+\item[OCDE] Organização para a Cooperação e Desenvolvimento Econômicos
+\item[PBL] Problem-Based Learning (= ABP em língua inglesa)
+\item[PjBL] Project-Based Learning (= ABPr em língua inglesa)
+\item[PPGTE] Programa de Pós-Graduação em Tecnologia e Educação
+\item[PISA] Programme for International Student Assessment
+\item[SUS] Sistema Único de Saúde
+\item[UFC] Universidade Federal do Ceará
+\item[UNESCO] Organização das Nações Unidas para a Educação, a Ciência e a Cultura
+\end{description}
+
+\newpage
+
+% Glossário
+\chapter*{Glossário}
+\addcontentsline{toc}{chapter}{Glossário}
+
+O glossário a seguir apresenta definições de termos técnicos utilizados nesta dissertação, destinadas a facilitar a compreensão por leitores não familiarizados com a terminologia da área de educação e metodologia de pesquisa.
+
+\begin{description}[style=nextline]
+\item[Avaliação formativa] Processo contínuo de monitoramento da aprendizagem que visa fornecer feedback ao estudante e ao docente durante o processo educacional, em contraste com a avaliação somativa que verifica resultados ao final de um ciclo.
+
+\item[Aprendizagem significativa] Processo pelo qual o novo conhecimento é associado a conceitos já existentes na estrutura cognitiva do aprendiz, de forma não arbitrária e substantiva (Ausubel, 2000).
+
+\item[Cadeia de valor] Conjunto de atividades primárias e de suporte que uma organização realiza para criar valor para seus clientes (Porter, 1980).
+
+\item[Ciclo PDCA] Sigla em inglês para \textit{Plan-Do-Check-Act} (Planejar-Fazer-Verificar-Agir), ferramenta de gestão para melhoria contínua de processos.
+
+\item[Delimitação do estudo] Definição clara dos limites da pesquisa em termos de tempo, espaço, população e escopo temático.
+
+\item[Desequilíbrio cognitivo] Situação na qual o estudante é confrontado com informações que contradizem seus conhecimentos prévios, estimulando a reestruturação conceitual.
+
+\item[Escalas Likert] Instrumento de medição de atitudes e percepções, com pontos que variam de ``Discordo totalmente'' (1) a ``Concordo totalmente'' (5).
+
+\item[Estudo de caso] Estratégia de pesquisa que investiga um fenômeno em profundidade dentro de seu contexto real, utilizando múltiplas fontes de evidência (Creswell, 2018).
+
+\item[Feedback] Informação fornecida ao aprendiz sobre seu desempenho, visando orientar e mejorar o processo de aprendizagem.
+
+\item[Marco teórico] Estrutura conceitual que fundamenta a pesquisa, articulando teorias, constructos e evidências relevantes para o problema investigado.
+
+\item[Metodologia mista] Abordagem de pesquisa que combina elementos de metodologias qualitativas e quantitativas em um mesmo estudo.
+
+\item[Modelo integrador] Framework conceitual que articula diferentes abordagens pedagógicas (neste caso, ABP e ABPr) em uma estrutura unificada e complementar.
+
+\item[Pensamento crítico] Capacidade de analisar informações de forma reflexiva e avaliativa, formulando juízos fundamentados.
+
+\item[Pragmatismo] Paradigma filosófico que valoriza a prática e a utilidade do conhecimento, orientando a pesquisa para a busca de soluções práticas para problemas reais.
+
+\item[Pressupostos estatísticos] Condições que devem ser atendidas para que os testes estatísticos paramétricos sejam válidos, como normalidade e homogeneidade de variâncias.
+
+\item[Replicabilidade] Capacidade de um estudo ser reproduzido por outros pesquisadores, obtendo resultados consistentes.
+
+\item[Tamanho do efeito] Medida da magnitude da diferença entre grupos, independente do tamanho da amostra (ex: $d$ de Cohen).
+
+\item[Transferibilidade] Capacidade de os resultados de um estudo serem aplicados a outros contextos similares (qualitativo) ou de os achados serem generalizados para uma população (quantitativo).
+
+\item[Triangulação] Uso de múltiplas fontes, métodos ou pesquisadores para enriquecer e validar os resultados de uma pesquisa.
+\end{description}
+
+\newpage
+
+% Sumário
+\tableofcontents
+\newpage
+
+% ============================================================
+% CAPÍTULOS
+% ============================================================
+\mainmatter
+\pagestyle{fancy}
+
+% Capítulo 1 — Introdução
+\input{01_introducao.tex}
+
+% Capítulo 2 — Aspectos Estratégicos
+\input{02_aspectos_estrategicos.tex}
+
+% Capítulo 3 — Organização do Trabalho
+\input{03_organizacao_trabalho.tex}
+
+% Capítulo 4 — Apresentação e Análise dos Resultados
+\input{04_resultados.tex}
+
+% Capítulo 5 — Considerações Finais
+\input{05_conclusao.tex}
+
+% Capítulo 6 — Referências Bibliográficas
+% (Gerenciado pelo BibTeX via referencias.bib)
+\printbibliography[title={Refer\^encias Bibliogr\'aficas}]
+
+% ============================================================
+% APÊNDICES
+% ============================================================
+\appendix
+\renewcommand{\appendixname}{Apêndice}
+
+\chapter{Instrumentos de Pesquisa}
+\label{apx:instrumentos}
+
+Este apêndice apresenta os instrumentos de coleta de dados utilizados na pesquisa de campo, incluindo os roteiros de entrevista, os questionários e os roteiros de observação.
+
+\section{Roteiro de entrevista semiestruturada --- Gestores}
+\label{sec:roteiro_entrevista}
+
+\begin{enumerate}
+    \item Qual é a sua percepção sobre a adoção de metodologias ativas (ABP e ABPr) em sua instituição?
+    \item Quais são os principais desafios enfrentados para a implementação dessas metodologias?
+    \item Como a instituição tem se posicionado em relação à inovação pedagógica?
+    \item Quais recursos (infraestrutura, formação, tecnologia) estão disponíveis para apoiar a implementação?
+    \item Quais resultados você observa em relação ao desempenho e ao engajamento dos estudantes?
+    \item Como a gestão acadêmica acompanha e avalia os processos de implementação?
+    \item Quais estratégias vêm sendo adotadas para a formação docente em metodologias ativas?
+    \item Existem parcerias com outras instituições ou organizações para o compartilhamento de experiências?
+\end{enumerate}
+
+\section{Questionário para discentes e docentes}
+\label{sec:questionario}
+
+\subsection{Dados de identificação}
+\begin{itemize}
+    \item Tipo de respondente: (\_) Discente (\_) Docente
+    \item Área de conhecimento: \rule{5cm}{0.15mm}
+    \item Tempo de vinculação à instituição: \rule{3cm}{0.15mm}
+\end{itemize}
+
+\subsection{Escalas Likert}
+Para cada afirmação, assinale o nível de concordância de 1 (Discordo totalmente) a 5 (Concordo totalmente):
+
+\begin{enumerate}
+    \item As metodologias ativas (ABP/ABPr) contribuem para minha aprendizagem significativa.
+    \item O trabalho colaborativo é estimulado de forma efetiva nessas metodologias.
+    \item Os problemas/projetos utilizados são autênticos e relevantes.
+    \item O docente atua como facilitador de maneira eficaz.
+    \item A avaliação é formativa e contempla diferentes dimensões da aprendizagem.
+    \item A infraestrutura tecnológica disponível é adequada para a implementação.
+    \item A formação recebida preparou-me para atuar com metodologias ativas.
+    \item As metodologias ativas desenvolvem competências para o século XXI.
+\end{enumerate}
+
+\section{Roteiro de observação}
+\label{sec:roteiro_observacao}
+
+\begin{enumerate}
+    \item Dinâmica da aula: os estudantes participam ativamente? (\_) Sim (\_) Parcialmente (\_) Não
+    \item Uso de recursos didáticos: quais foram utilizados? \rule{5cm}{0.15mm}
+    \item Interação professor-aluno: qual é a natureza? \rule{5cm}{0.15mm}
+    \item Organização do espaço: as mesas dispostas favorecem o trabalho em grupo? (\_) Sim (\_) Parcialmente (\_) Não
+    \item Tempo de atividade: o tempo foi adequado para a atividade proposta? (\_) Sim (\_) Parcialmente (\_) Não
+    \item Observações adicionais: \rule{8cm}{0.15mm}
+\end{enumerate}
+
+\chapter{Dados Complementares}
+\label{apx:dados}
+
+Este apêndice apresenta dados complementares que complementam a análise realizada nos capítulos principais, incluindo tabelas adicionais e resultados estatísticos.
+
+\section{Resultados estatísticos adicionais}
+\label{sec:resultados_adicionais}
+
+As tabelas a seguir apresentam resultados estatísticos complementares obtidos a partir da análise dos dados coletados na pesquisa de campo.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Distribuição dos participantes por instituição e cargo/função}
+    \label{tab:distribuicao_participantes}
+    \small
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Instituição} & \textbf{Discentes} & \textbf{Docentes} & \textbf{Gestores} \\
+        \midrule
+        Universidade Pública Federal & 45 & 12 & 3 \\
+        Universidade Particular & 38 & 10 & 2 \\
+        Faculdade de Pequeno Porte & 32 & 8 & 2 \\
+        \midrule
+        \textbf{Total} & \textbf{115} & \textbf{30} & \textbf{7} \\
+        \bottomrule
+    \end{tabular}
+    \par\medskip
+    \footnotesize{\textit{Fonte:} Dados simulados (fictícios) para fins de demonstração metodológica (2026).}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Médias e desvios-padrão das escalas Likert por dimensão}
+    \label{tab:medias_likert}
+    \small
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Dimensão} & \textbf{N} & \textbf{Média} & \textbf{DP} & \textbf{Mín.--Máx.} \\
+        \midrule
+        Aprendizagem significativa & 115 & 4,12 & 0,78 & 2--5 \\
+        Trabalho colaborativo & 115 & 4,35 & 0,69 & 2--5 \\
+        Autenticidade dos problemas/projetos & 115 & 3,98 & 0,85 & 1--5 \\
+        Mediação docente & 115 & 4,21 & 0,72 & 2--5 \\
+        Avaliação formativa & 115 & 3,87 & 0,91 & 1--5 \\
+        Infraestrutura tecnológica & 115 & 3,45 & 1,02 & 1--5 \\
+        Formação docente & 115 & 3,68 & 0,95 & 1--5 \\
+        Competências séc. XXI & 115 & 4,28 & 0,74 & 2--5 \\
+        \bottomrule
+    \end{tabular}
+    \par\medskip
+    \footnotesize{\textit{Fonte:} Dados simulados (fictícios) para fins de demonstração metodológica (2026). \textit{Nota:} N = número de respondentes; DP = desvio-padrão. Escala Likert de 1 (Discordo totalmente) a 5 (Concordo totalmente).}
+\end{table}
+
+% ============================================================
+% APÊNDICES
+% ============================================================
+\input{apx-qualitative-coder}
+
+% ============================================================
+% ANEXOS
+% ============================================================
+\chapter{Documentos de Apoio}
+\label{anx:documentos}
+
+\section{Termo de Consentimento Livre e Esclarecido (TCLE)}
+\label{sec:tcle}
+
+O TCLE segue o modelo aprovado pelo Comitê de Ética em Pesquisa e contempla as seguintes informações: objetivos da pesquisa, procedimentos, riscos e benefícios, garantia de sigilo e anonimato, e possibilidade de desistência.
+
+\section{Parecer do Comitê de Ética em Pesquisa}
+\label{sec:parecer_cep}
+
+O parecer do CEP foi obtido sob o número \numeroparecer{}, com data de aprovação em \underline{\hspace{2cm}} de \underline{\hspace{2cm}} de \anodefesa{}.
+
+% ============================================================
+% FIM DO DOCUMENTO
+% ============================================================
+\backmatter
+
+\end{document}

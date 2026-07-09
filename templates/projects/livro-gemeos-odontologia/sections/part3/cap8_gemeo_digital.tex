@@ -1,0 +1,503 @@
+% ==============================================================================
+% CAPÍTULO 8 — Gêmeo Digital Composicional e Simulações
+% Livro: Gêmeos Digitais na Odontologia
+% ==============================================================================
+
+\section{Definição Formal de Gêmeo Digital Composicional}
+\label{sec:definicao-gd}
+
+O gêmeo digital odontológico transcende a representação geométrica estática ao incorporar múltiplas dimensões informacionais em uma estrutura composicional integrada. Formalmente, definimos o gêmeo digital $\mathcal{GD}$ como uma 5-upla:
+
+\begin{equation}
+\label{eq:gd-formal}
+\mathcal{GD} = \langle \mathcal{I}, \mathcal{C}, \mathcal{D}, \mathcal{L}, \mathcal{S} \rangle
+\end{equation}
+
+onde cada componente representa:
+\begin{itemize}
+  \item $\mathcal{I}$ — \textbf{Modelo de Identidade}: dados demográficos, identificação unívoca do paciente, consentimento informado e vinculação a sistemas de saúde (CPF, CNS, prontuário eletrônico).
+  \item $\mathcal{C}$ — \textbf{Modelo Clínico}: histórico odontológico, diagnósticos (CID-10), procedimentos realizados, plano de tratamento vigente e prescrições.
+  \item $\mathcal{D}$ — \textbf{Modelo Anatômico Digital}: malhas tridimensionais segmentadas (dentes, mandíbula, maxila, canais), volumes CBCT e séries de escaneamento intraoral.
+  \item $\mathcal{L}$ — \textbf{Modelo Laboratorial}: resultados de exames laboratoriais codificados em LOINC, valores seriados de biomarcadores e escore de risco cirúrgico (ERCO).
+  \item $\mathcal{S}$ — \textbf{Modelo de Simulação}: parâmetros biomecânicos, condições de contorno, propriedades de materiais e resultados de simulações numéricas (FEA, CFD, PK/PD).
+\end{itemize}
+
+A integridade do gêmeo digital exige que todos os submodelos estejam sincronizados temporalmente. Definimos o operador de consistência $\Xi$:
+
+\begin{equation}
+\label{eq:consistencia}
+\Xi(\mathcal{GD}) = \prod_{m \in \{\mathcal{I},\mathcal{C},\mathcal{D},\mathcal{L},\mathcal{S}\}} \delta(m, \text{timestamp}_{\text{global}})
+\end{equation}
+
+onde $\delta(m, t)$ é $1$ se o submodelo $m$ está atualizado até $t$ e $0$ caso contrário. Um gêmeo digital é considerado \textbf{consistente} se $\Xi(\mathcal{GD}) = 1$.
+
+\section{Agregação de Submodelos}
+\label{sec:agregacao}
+
+A arquitetura composicional segue o padrão estabelecido pelo framework OpenTwins~\cite{robles2023opentwins}, onde cada submodelo é desenvolvido e versionado independentemente, mas integrado por uma camada de orquestração.
+
+\subsection{Modelo de Identidade (MPI)}
+\label{subsec:modelo-identidade}
+
+O Modelo de Identidade segue o padrão Master Patient Index (MPI) com vinculação ao CPF e Cartão Nacional de Saúde (CNS). A unicidade é garantida por hash criptográfico SHA-256 dos identificadores:
+
+\begin{equation}
+\label{eq:hash-identidade}
+h_{\text{paciente}} = \text{SHA-256}(\text{CPF} \parallel \text{CNS} \parallel \text{data\_nascimento})
+\end{equation}
+
+\subsection{Modelo Clínico (FHIR)}
+\label{subsec:modelo-clinico}
+
+O modelo clínico é expresso em recursos FHIR R5. A interoperabilidade semântica é garantida pelo mapeamento CID-10 para procedimentos odontológicos:
+
+\begin{lstlisting}[language=Python, caption=Construcao do modelo clinico FHIR para o gemeo digital, label=code:fhir-clinico]
+import fhirclient.models.patient as p
+import fhirclient.models.condition as cond
+import fhirclient.models.procedure as proc
+from typing import List, Dict
+
+
+class ClinicalModelBuilder:
+    """Construtor do modelo clinico FHIR do paciente."""
+
+    def __init__(self, patient_id: str):
+        self.patient_id = patient_id
+        self.conditions: List[cond.Condition] = []
+        self.procedures: List[proc.Procedure] = []
+
+    def add_dental_condition(
+        self,
+        icd_code: str,
+        icd_desc: str,
+        tooth_id: str,
+        onset_date: str
+    ) -> None:
+        """Adiciona condicao odontologica (ex.: K02.1 - Caries de dentina)."""
+        condition = cond.Condition({
+            "subject": {"reference": f"Patient/{self.patient_id}"},
+            "code": {
+                "coding": [{
+                    "system": "http://hl7.org/fhir/sid/icd-10",
+                    "code": icd_code,
+                    "display": icd_desc
+                }]
+            },
+            "bodySite": [{
+                "coding": [{
+                    "system": "http://fdi.org/tooth-nomenclature",
+                    "code": tooth_id,
+                    "display": f"Dente {tooth_id} (FDI)"
+                }]
+            }],
+            "onsetDateTime": onset_date,
+            "clinicalStatus": {
+                "coding": [{
+                    "system": "http://terminology.hl7.org/"
+                               "CodeSystem/condition-clinical",
+                    "code": "active"
+                }]
+            }
+        })
+        self.conditions.append(condition)
+
+    def add_procedure(
+        self,
+        snomed_code: str,
+        snomed_desc: str,
+        tooth_id: str,
+        performed_date: str
+    ) -> None:
+        """Adiciona procedimento odontologico."""
+        procedure = proc.Procedure({
+            "subject": {"reference": f"Patient/{self.patient_id}"},
+            "code": {
+                "coding": [{
+                    "system": "http://snomed.info/sct",
+                    "code": snomed_code,
+                    "display": snomed_desc
+                }]
+            },
+            "bodySite": [{
+                "coding": [{
+                    "system": "http://fdi.org/tooth-nomenclature",
+                    "code": tooth_id
+                }]
+            }],
+            "performedDateTime": performed_date,
+            "status": "completed"
+        })
+        self.procedures.append(procedure)
+
+    def to_fhir_bundle(self) -> Dict:
+        """Gera Bundle FHIR com todos os recursos."""
+        entries = []
+
+        for c in self.conditions:
+            entries.append({
+                "resource": c.as_json(),
+                "request": {
+                    "method": "POST",
+                    "url": "Condition"
+                }
+            })
+
+        for p in self.procedures:
+            entries.append({
+                "resource": p.as_json(),
+                "request": {
+                    "method": "POST",
+                    "url": "Procedure"
+                }
+            })
+
+        return {
+            "resourceType": "Bundle",
+            "type": "transaction",
+            "entry": entries
+        }
+\end{lstlisting}
+
+\subsection{Modelo Anatômico (DICOM + Malhas)}
+\label{subsec:modelo-anatomico}
+
+O modelo anatômico digital armazena as malhas segmentadas em formato NIfTI para volumes e PLY/STL para superfícies. Cada estrutura recebe um identificador semântico único baseado na ontologia FMA (\textit{Foundational Model of Anatomy}):
+
+\begin{longtable}{p{3cm}p{3cm}p{2cm}p{3cm}}
+\caption{Identificadores anatômicos do gêmeo digital odontológico.}
+\label{tab:ids-anatomicos}\\
+\toprule
+\textbf{Estrutura} & \textbf{FMA ID} & \textbf{Formato} & \textbf{Fonte} \\
+\midrule
+Mandíbula & FMA:52738 & PLY & CBCT \\
+Maxila & FMA:52737 & PLY & CBCT \\
+Dente 11 & FMA:55700 & STL & IOS \\
+Dente 16 & FMA:55710 & STL & IOS \\
+Canal mandibular & FMA:59463 & PLY & CBCT \\
+Nervo alveolar inferior & FMA:52365 & PLY & CBCT \\
+Gengiva & FMA:59726 & PLY & IOS + cor \\
+\bottomrule
+\end{longtable}
+
+\subsection{Modelo Laboratorial (LOINC + FHIR)}
+\label{subsec:modelo-laboratorial}
+
+Conforme detalhado no Capítulo~\ref{sec:loinc-integracao}, o modelo laboratorial integra resultados de exames codificados em LOINC através do recurso FHIR Observation. A serialização temporal é crítica para análises longitudinais:
+
+\begin{equation}
+\label{eq:serie-temporal}
+\mathbf{X}_{\text{lab}} = \{(t_i, v_i, \text{LOINC}_c) \mid i=1,\dots,N\}
+\end{equation}
+
+onde $t_i$ é o timestamp da coleta, $v_i$ o valor do biomarcador e $\text{LOINC}_c$ o código do exame.
+
+\subsection{Modelo de Risco (Escore Cirúrgico)}
+\label{subsec:modelo-risco}
+
+O modelo de risco agrega o escore ERCO (Equação~\ref{eq:escore-risco}) com o histórico de complicações prévias do paciente:
+
+\begin{equation}
+\label{eq:risco-composicional}
+\text{Risco}_{\text{total}} = \alpha \cdot \text{ERCO} + (1-\alpha) \cdot \text{Histórico}_{\text{complicações}}
+\end{equation}
+
+onde $\alpha = 0,7$ é o peso atribuído ao escore laboratorial (determinado por validação empírica com AUC máxima em $k=0,7$).
+
+\section{Simulações Avançadas no Gêmeo Digital}
+\label{sec:simulacoes}
+
+O gêmeo digital permite simulações preditivas que transcendem a capacidade do exame clínico isolado. Três modalidades são particularmente relevantes: análise por elementos finitos (FEA), modelagem farmacocinética (PK/PD) e simulação de risco cirúrgico.
+
+\subsection{Análise por Elementos Finitos (FEA)}
+\label{subsec:fea}
+
+A FEA resolve o problema de elasticidade linear para predizer a distribuição de tensões na mandíbula sob cargas mastigatórias:
+
+\begin{equation}
+\label{eq:elasticidade}
+\nabla \cdot \boldsymbol{\sigma} + \mathbf{f} = \rho \ddot{\mathbf{u}}
+\end{equation}
+
+onde $\boldsymbol{\sigma}$ é o tensor de tensões de Cauchy, $\mathbf{f}$ as forças de corpo, $\rho$ a densidade e $\mathbf{u}$ o campo de deslocamentos. A relação constitutiva para osso cortical é dada pela lei de Hooke generalizada:
+
+\begin{equation}
+\label{eq:hooke}
+\boldsymbol{\sigma} = \frac{E}{1+\nu} \left( \boldsymbol{\varepsilon} + \frac{\nu}{1-2\nu} \text{tr}(\boldsymbol{\varepsilon}) \mathbf{I} \right)
+\end{equation}
+
+com $E = 14,7$ GPa (módulo de Young para osso cortical mandibular) e $\nu = 0,3$ (coeficiente de Poisson).
+
+Implementação em Python utilizando FEniCS:
+
+\begin{lstlisting}[language=Python, caption=Simulacao FEA de tensao oclusal com FEniCS, label=code:fenics-fea]
+import numpy as np
+from fenics import *
+from mshr import *
+
+# Parametros do material osseo
+E = 14.7e9   # Modulo de Young (Pa)
+nu = 0.3     # Coeficiente de Poisson
+mu = E / (2 * (1 + nu))       # Primeiro parametro de Lame
+lmbda = E * nu / ((1+nu)*(1-2*nu))  # Segundo parametro de Lame
+
+# Malha 3D da mandibula (importada de STL)
+mesh = Mesh("mandibula_registrada.xml")
+
+# Espaco de elementos finitos (P2 para deslocamento)
+V = VectorFunctionSpace(mesh, "Lagrange", 2)
+
+# Condicoes de contorno
+def borda_fixada(x, on_boundary):
+    """Regiao do condilo mandibular (fixa)."""
+    return (x[0] < 0.01 or x[0] > 0.099) and on_boundary
+
+bc = DirichletBC(V, Constant((0, 0, 0)), borda_fixada)
+
+# Definicao do problema variacional
+u = TrialFunction(V)
+v = TestFunction(V)
+
+def epsilon(u):
+    return 0.5 * (grad(u) + grad(u).T)
+
+def sigma(u):
+    return lmbda * div(u) * Identity(3) + 2 * mu * epsilon(u)
+
+# Carga oclusal: forca de 200 N no primeiro molar
+f = Constant((0, 0, 0))  # Forca de corpo nula
+T = Expression(("0", "0", "-200"), degree=0)  # Forca de superficie
+ds = Measure("ds", domain=mesh)
+
+# Forma variacional
+a = inner(sigma(u), epsilon(v)) * dx
+L = dot(f, v) * dx + dot(T, v) * ds(1)
+
+# Solucao
+u_sol = Function(V)
+solve(a == L, u_sol, bc)
+
+# Tensao de von Mises
+von_mises = project(
+    sqrt(3/2 * inner(dev(sigma(u_sol)), dev(sigma(u_sol)))),
+    FunctionSpace(mesh, "Lagrange", 1))
+
+print(f"Tensao maxima von Mises: {von_mises.vector().max()/1e6:.2f} MPa")
+
+# Exportar para VTK visualizacao
+with XDMFFile("resultados/tensao_mandibula.xdmf") as xdmf:
+    xdmf.write_checkpoint(von_mises, "tensao_vm", 0, XDMFFile.Encoding.HDF5)
+\end{lstlisting}
+
+\subsection{Farmacocinética — Modelagem PK/PD}
+\label{subsec:pkpd}
+
+A modelagem farmacocinética prediz a concentração plasmática de antibióticos e anestésicos ao longo do tempo, auxiliando na determinação de dosagem segura para pacientes com comprometimento renal (TFGe reduzido). O modelo compartimental de primeira ordem é descrito por:
+
+\begin{equation}
+\label{eq:pk}
+C_p(t) = \frac{D}{V_d} \cdot \frac{k_a}{k_a - k_e} \left( e^{-k_e t} - e^{-k_a t} \right)
+\end{equation}
+
+onde $C_p(t)$ é a concentração plasmática no tempo $t$, $D$ a dose administrada, $V_d$ o volume de distribuição, $k_a$ a constante de absorção e $k_e$ a constante de eliminação.
+
+Para pacientes com DRC (TFGe $< 60$), o fator de correção renal é aplicado:
+
+\begin{equation}
+\label{eq:correcao-renal}
+k_e^{\text{ajustado}} = k_e \cdot \left( \frac{\text{TFGe}_{\text{paciente}}}{120} \right)^{0,7}
+\end{equation}
+
+\subsection{Simulação de Risco Cirúrgico}
+\label{subsec:simulacao-risco}
+
+A simulação de risco cirúrgico utiliza regressão logística multivariada para estimar a probabilidade de complicações pós-operatórias:
+
+\begin{equation}
+\label{eq:risco-logistico}
+P(\text{complicação} \mid \mathbf{x}) = \frac{1}{1 + e^{-(\beta_0 + \boldsymbol{\beta}^T \mathbf{x})}}
+\end{equation}
+
+onde $\mathbf{x}$ é o vetor de preditores (HbA1c, TFGe, VitD, INR, Hb, tabagismo) e $\boldsymbol{\beta}$ os coeficientes estimados na Seção~\ref{subsec:regressao-logistica}.
+
+\section{Anny-Odonto: Arquitetura e Treinamento}
+\label{sec:anny-odonto}
+
+A \textbf{Anny-Odonto} é a rede neural multimodal que integra os submodelos do gêmeo digital para predizer desfechos clínicos. A arquitetura combina processamento de malhas 3D (PointNet++), séries temporais laboratoriais (LSTM) e dados clínicos tabulares (MLP).
+
+\subsection{Definição do Modelo PyTorch}
+\label{subsec:modelo-pytorch}
+
+\begin{lstlisting}[language=Python, caption=Arquitetura Anny-Odonto em PyTorch, label=code:anny-odonto]
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+class PointNetPlusPlus(nn.Module):
+    """Encoder para nuvens de pontos 3D (malhas dentarias)."""
+
+    def __init__(self, in_channels: int = 6, out_dim: int = 256):
+        super().__init__()
+        self.conv1 = nn.Conv1d(in_channels, 64, 1)
+        self.conv2 = nn.Conv1d(64, 128, 1)
+        self.conv3 = nn.Conv1d(128, out_dim, 1)
+        self.bn1 = nn.BatchNorm1d(64)
+        self.bn2 = nn.BatchNorm1d(128)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # x: (B, N, 6) - batch, pontos, caracteristicas
+        x = x.transpose(2, 1)  # (B, 6, N)
+        x = F.relu(self.bn1(self.conv1(x)))
+        x = F.relu(self.bn2(self.conv2(x)))
+        x = self.conv3(x)
+        x = x.max(dim=-1)[0]  # Max pooling global
+        return x  # (B, out_dim)
+
+
+class LSTMLabEncoder(nn.Module):
+    """Encoder de series temporais laboratoriais."""
+
+    def __init__(self, n_biomarkers: int = 10,
+                 hidden_dim: int = 128, n_layers: int = 2):
+        super().__init__()
+        self.lstm = nn.LSTM(
+            input_size=n_biomarkers,
+            hidden_size=hidden_dim,
+            num_layers=n_layers,
+            batch_first=True,
+            bidirectional=True,
+            dropout=0.2
+        )
+        self.out = nn.Linear(hidden_dim * 2, 128)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # x: (B, T, n_biomarkers)
+        _, (h_n, _) = self.lstm(x)
+        # Concatena ultimo hidden state forward + backward
+        h = torch.cat([h_n[-2], h_n[-1]], dim=-1)
+        return self.out(h)  # (B, 128)
+
+
+class AnnyOdonto(nn.Module):
+    """
+    Modelo multimodal para predicao de desfecho clinico.
+
+    Entradas:
+        - mesh_feat: (B, N, 6) nuvem de pontos
+        - lab_seq:   (B, T, 10) series temporais laboratoriais
+        - clin_feat: (B, 12)  dados clinicos tabulares
+    """
+
+    def __init__(self, n_classes: int = 3):
+        super().__init__()
+        self.mesh_encoder = PointNetPlusPlus(6, 256)
+        self.lab_encoder = LSTMLabEncoder(10, 128, 2)
+        self.clin_encoder = nn.Sequential(
+            nn.Linear(12, 64),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(64, 64)
+        )
+
+        # Fusao multimodal
+        self.fusion = nn.Sequential(
+            nn.Linear(256 + 128 + 64, 256),
+            nn.ReLU(),
+            nn.Dropout(0.4),
+            nn.Linear(256, 128),
+            nn.ReLU()
+        )
+
+        self.classifier = nn.Linear(128, n_classes)
+
+    def forward(self, mesh_feat: torch.Tensor,
+                lab_seq: torch.Tensor,
+                clin_feat: torch.Tensor) -> torch.Tensor:
+        mesh_enc = self.mesh_encoder(mesh_feat)
+        lab_enc = self.lab_encoder(lab_seq)
+        clin_enc = self.clin_encoder(clin_feat)
+
+        # Fusao
+        fused = torch.cat([mesh_enc, lab_enc, clin_enc], dim=-1)
+        fused = self.fusion(fused)
+
+        return self.classifier(fused)
+\end{lstlisting}
+
+\subsection{Função de Perda Multi-Task}
+\label{subsec:perda-multitask}
+
+A Anny-Odonto é treinada com uma função de perda multi-tarefa que combina três objetivos:
+
+\begin{equation}
+\label{eq:loss-multitask}
+\mathcal{L}_{\text{total}} = \lambda_1 \mathcal{L}_{\text{CE}}(y_{\text{risco}}, \hat{y}_{\text{risco}}) + \lambda_2 \mathcal{L}_{\text{MSE}}(y_{\text{tensão}}, \hat{y}_{\text{tensão}}) + \lambda_3 \mathcal{L}_{\text{cont}}(z_{\text{mesh}}, z_{\text{lab}})
+\end{equation}
+
+onde $\mathcal{L}_{\text{CE}}$ é a entropia cruzada para classificação de risco (baixo, moderado, alto), $\mathcal{L}_{\text{MSE}}$ o erro quadrático médio para predição de tensão máxima e $\mathcal{L}_{\text{cont}}$ a perda contrastiva que aproxima representações de malha e laboratório quando pertencem ao mesmo paciente:
+
+\[
+\mathcal{L}_{\text{cont}} = -\log \frac{\exp(\text{sim}(z_{\text{mesh}}, z_{\text{lab}})/\tau)}{\sum_{j \neq i} \exp(\text{sim}(z_{\text{mesh}}, z_{\text{lab}}^{(j)})/\tau)}
+\]
+
+com $\tau = 0,1$ (temperatura) e $\lambda_1 = 0,5$, $\lambda_2 = 0,3$, $\lambda_3 = 0,2$.
+
+\section{Arquitetura do Gêmeo Digital Composicional}
+\label{sec:arquitetura-gd}
+
+A Figura~\ref{fig:arquitetura-gd} apresenta a arquitetura em 4 camadas do gêmeo digital composicional.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[
+    layer/.style={rectangle, draw, minimum width=10cm, minimum height=0.7cm,
+                  rounded corners, font=\small\bfseries},
+    box/.style={rectangle, draw, fill=blue!10, minimum width=2.3cm,
+                minimum height=0.6cm, rounded corners, font=\scriptsize},
+    arrow/.style={->, thick, >=stealth}
+]
+
+% Camada 4: Aplicacao
+\node[layer, fill=green!15] (app) at (0,3.5) {Camada 4: Aplicações Clínicas};
+\node[box, below=0.1cm of app] (pred) {Predição de Risco};
+\node[box, right=0.1cm of pred] (plan) {Planejamento};
+\node[box, right=0.1cm of plan] (sim) {Simulação};
+\node[box, right=0.1cm of sim] (mon) {Monitoramento};
+
+% Camada 3: Integracao
+\node[layer, fill=blue!10] (int) at (0,1.8) {Camada 3: Orquestração e Integração};
+\node[box, below=0.1cm of int] (fhir) {FHIR R5};
+\node[box, right=0.1cm of fhir] (loinc) {LOINC};
+\node[box, right=0.1cm of loinc] (dicom) {DICOM};
+\node[box, right=0.1cm of dicom] (api) {API REST};
+
+% Camada 2: Modelos
+\node[layer, fill=orange!10] (mod) at (0,0.1) {Camada 2: Submodelos};
+\node[box, below=0.1cm of mod] (id) {Identidade};
+\node[box, right=0.1cm of id] (clin) {Clínico};
+\node[box, right=0.1cm of clin] (anat) {Anatômico};
+\node[box, right=0.1cm of anat] (lab) {Laboratorial};
+\node[box, right=0.1cm of lab] (risk) {Risco};
+
+% Camada 1: Dados
+\node[layer, fill=gray!10] (data) at (0,-1.6) {Camada 1: Aquisição de Dados};
+\node[box, below=0.1cm of data] (cbct) {CBCT};
+\node[box, right=0.1cm of cbct] (ios) {IOS};
+\node[box, right=0.1cm of ios] (labd) {Lab.};
+\node[box, right=0.1cm of labd] (clinr) {Reg. Clínico};
+
+% Conexoes entre camadas
+\draw[arrow] (data) -- node[right, font=\tiny] {Ingestão} (mod);
+\draw[arrow] (mod) -- node[right, font=\tiny] {Agregação} (int);
+\draw[arrow] (int) -- node[right, font=\tiny] {Orquestração} (app);
+
+\end{tikzpicture}
+\caption{Arquitetura em 4 camadas do gêmeo digital composicional odontológico.}
+\label{fig:arquitetura-gd}
+\end{figure}
+
+\section{Considerações Finais}
+\label{sec:gd-consideracoes}
+
+O gêmeo digital composicional $\mathcal{GD} = \langle \mathcal{I}, \mathcal{C}, \mathcal{D}, \mathcal{L}, \mathcal{S} \rangle$ estabelece uma estrutura formal e operacional para integração de dados multidimensionais do paciente odontológico. A camada de orquestração FHIR/LOINC garante interoperabilidade semântica, enquanto a Anny-Odonto fornece o motor de inferência multimodal. Repositórios de referência: OpenTwins~\footnote{\url{https://github.com/opentwins/opencmiss}}, OpenSim~\footnote{\url{https://github.com/opensim-org/opensim-core}} e Digital-Twin-Healthcare~\footnote{\url{https://github.com/Digital-Twin-Healthcare}}.
+\endinput

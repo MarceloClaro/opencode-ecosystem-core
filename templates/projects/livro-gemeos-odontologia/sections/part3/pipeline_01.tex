@@ -1,0 +1,33 @@
+\section{Introdução}
+\label{sec:pipeline-intro}
+
+A construção de um gêmeo digital odontológico transcende a mera modelagem geométrica; trata-se de um processo estocástico e multietapas que integra aquisição de dados multidimensionais, processamento computacional avançado, modelagem biomecânica de precisão, simulação numérica e validação sistemática rigorosa. Cada estrato deste \textit{pipeline} impõe requisitos estritos de fidelidade, tolerância a falhas e desempenho computacional. A orquestração sinérgica entre essas fases determina, em última instância, a confiabilidade clínica e a utilidade preditiva do gêmeo digital resultante.
+
+Diferentemente de modelos tridimensionais estáticos empregados primariamente para fins de visualização anatômica, o gêmeo digital odontológico requer natureza \textbf{operacional} e \textbf{dinâmica}. Ele deve ser arquitetado para assimilar atualizações em tempo real, rodar simulações preditivas baseadas em física e prover metadados acionáveis ao profissional da saúde \cite{katsoulakis2024digital}. Tal paradigma exige que o \textit{pipeline} seja projetado não apenas para a gênese isolada do modelo, mas para sua evolução e retroalimentação contínuas ao longo de todo o ciclo terapêutico do paciente.
+
+\destaque{O gêmeo digital não é uma fotografia tridimensional; é um sistema cibernético vivo que evolui simbioticamente com o estado fisiológico do paciente, demandando interoperabilidade irrestrita entre sensores, modelos matemáticos e motores de raciocínio lógico.}
+
+Este capítulo disseca estruturalmente cada etapa do \textit{pipeline} de criação de gêmeos digitais odontológicos, partindo da aquisição primária de dados brutos até a etapa de validação em malhas de simulação. A ênfase recai sobre a reprodutibilidade metodológica, automação de processos e integração ininterrupta com o OpenCode Ecosystem, conforme estabelecido no \autoref{ch:opencode}. Os fundamentos tecnológicos que alicerçam cada etapa encontram-se no \autoref{ch:fundamentos}, e as extrapolações clínicas (Ortodontia, Implantodontia, Endodontia, Prótese) estão desdobradas na Parte~\ref{ch:ortodontia} ao \autoref{ch:endodontia} \cite{duggal2026exploring}.
+
+O fluxo operacional é consolidado em cinco macrofases: aquisição de dados, processamento e segmentação, modelagem biomecânica, simulação preditiva e validação cruzada. Sobrepõe-se a essa estrutura uma malha transversal de orquestração e governança algorítmica para garantia de reprodutibilidade (\autoref{tab:pipeline-fases}).
+
+\begin{table}[htb]
+\centering
+\caption{Fases do pipeline de criação de gêmeos digitais odontológicos sob o paradigma OpenCode.}
+\label{tab:pipeline-fases}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lp{3.2cm}p{3.2cm}p{3.2cm}}
+\toprule
+\textbf{Fase} & \textbf{Insumos Primários} & \textbf{Processamento Algorítmico} & \textbf{Produtos Gerados} \\
+\midrule
+Aquisição & Paciente, sensores IoT & Tomografia (CBCT), scanner intraoral, EMG, axiografia & Volumes DICOM, nuvens de pontos, séries temporais contínuas \\
+Segmentação & Volumes voxelizados, nuvens de pontos & nnU-Net, U-Net, ICP, Marching Cubes, Z3 (validação) & Malhas segmentadas semânticas, modelos espaciais alinhados \\
+Modelagem & Malhas topológicas, literatura indexada & FEM, atribuição não-linear de materiais, Boundary Conditions (BCs) & Modelo FEM paramétrico com propriedades hiperelásticas \\
+Simulação & Modelo FEM estruturado & Solvers (estático, dinâmico, CFD) & Mapas de tensão de von Mises, deformação, fluxo crevicular \\
+Validação & Simulação numérica, ensaio experimental & Extensometria, DIC, MCMC, análise de sensibilidade & Incerteza estocástica quantificada, calibração in silico \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+A literatura contemporânea reitera que o escopo dessas aplicações se expande vertiginosamente, alcançando desde a terapia com alinhadores ortodônticos até planejamentos cirúrgicos complexos \cite{roy2025editorial}. Contudo, a transição de um artefato laboratorial para um dispositivo de saúde regulamentado requer o preenchimento de lacunas críticas que este \textit{pipeline} busca endereçar sistematicamente.

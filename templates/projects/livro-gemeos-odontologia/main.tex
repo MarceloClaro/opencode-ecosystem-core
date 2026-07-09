@@ -1,0 +1,123 @@
+\usepackage{lipsum}
+
+\begin{document}
+
+% =======================================================================================
+%                                   PREAMBLE
+% =======================================================================================
+\coverpage{\TITLE}{\SUBTITLE}{\AUTHOR}{\DATE}{\SUBJECT}
+%----------------------------------------------------------------------------------------
+\newpage
+\tableofcontents
+
+% =======================================================================================
+%                                   PART I — FUNDAMENTOS
+% =======================================================================================
+\part{Fundamentos dos Gêmeos Digitais}
+%----------------------------------------------------------------------------------------
+\newpage
+\chapter{Introdução aos Gêmeos Digitais} \label{ch:introducao}
+\input{sections/part1/introducao}
+
+\newpage
+\chapter{Fundamentos Tecnológicos} \label{ch:fundamentos}
+\input{sections/part1/fundamentos}
+
+\newpage
+\chapter{Gêmeos Digitais na Medicina} \label{ch:medicina}
+\input{sections/part1/medicina}
+
+% =======================================================================================
+%                                   PART II — ODONTOLOGIA
+% =======================================================================================
+\part{Gêmeos Digitais na Odontologia}
+%----------------------------------------------------------------------------------------
+\newpage
+\chapter{Panorama Atual da Odontologia Digital} \label{ch:panorama}
+\input{sections/part2/panorama}
+
+\newpage
+\chapter{Ortodontia e Alinhadores} \label{ch:ortodontia}
+\input{sections/part2/ortodontia}
+
+\newpage
+\chapter{Implantodontia e Cirurgia Oral} \label{ch:implantodontia}
+\input{sections/part2/implantodontia}
+
+\newpage
+\chapter{Endodontia e Prótese} \label{ch:endodontia}
+\input{sections/part2/endodontia}
+
+\newpage
+\chapter{Educação Odontológica com Gêmeos Digitais} \label{ch:educacao}
+\input{sections/part2/educacao}
+
+% =======================================================================================
+%                                   PART III — TECNOLOGIA
+% =======================================================================================
+\part{Ecossistemas de IA e Plataformas Abertas}
+%----------------------------------------------------------------------------------------
+\newpage
+\chapter{OpenCode Ecosystem: Arquitetura e Componentes} \label{ch:opencode}
+\input{sections/part3/opencode}
+
+\newpage
+\chapter{Pipeline de Criação de Gêmeos Digitais Odontológicos} \label{ch:pipeline}
+\input{sections/part3/pipeline}
+
+\newpage
+\chapter{Inteligência Artificial e Aprendizado de Máquina} \label{ch:ia}
+\input{sections/part3/ia}
+
+\newpage
+\chapter{Plataformas Open-Source para Gêmeos Digitais} \label{ch:plataformas}
+\input{sections/part3/plataformas}
+
+% =======================================================================================
+%                                   PART IV — IMPACTO SOCIAL
+% =======================================================================================
+\part{Impacto Social e Perspectivas Futuras}
+%----------------------------------------------------------------------------------------
+\newpage
+\chapter{Impacto Social no Brasil e no SUS} \label{ch:impacto}
+\input{sections/part4/impacto}
+
+\newpage
+\chapter{Ética, Privacidade e Regulação} \label{ch:etica}
+\input{sections/part4/etica}
+
+\newpage
+\chapter{Desafios e Lacunas de Pesquisa} \label{ch:desafios}
+\input{sections/part4/desafios}
+
+\newpage
+\chapter{Perspectivas Futuras e Agenda de Pesquisa} \label{ch:futuro}
+\input{sections/part4/futuro}
+
+% =======================================================================================
+%                                   APPENDICES
+% =======================================================================================
+\part{Apêndices}
+%----------------------------------------------------------------------------------------
+\newpage
+\chapter{Referências Completas com DOIs e Links} \label{ap:referencias}
+\input{sections/appendices/referencias}
+
+\newpage
+\chapter{Glossário de Termos Técnicos} \label{ap:glossario}
+\input{sections/appendices/glossario}
+
+\newpage
+\chapter{Repositórios e Recursos Open-Source} \label{ap:repositorios}
+\input{sections/appendices/repositorios}
+
+%----------------------------------------------------------------------------------------
+\newpage
+\listoffigures
+\listoftables
+%----------------------------------------------------------------------------------------
+\newpage
+\bibliographystyle{plainnat}
+\bibliography{referencias}
+
+\end{document}

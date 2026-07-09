@@ -1,0 +1,77 @@
+% v2 -- rewritten
+% Seções:
+%   7.1 - Segmentação do sistema de canais radiculares
+%   7.2 - Reconstrução 3D do dente tratado
+%   7.3 - Simulação de fadiga de material restaurador
+%   7.4 - Projeto: DT de um molar tratado endodonticamente
+
+\destaque{Nivel-alvo N1 -- simulacao de fadiga em canais radiculares com modelos 3D, integrando conceitos do Framework SUS-Twin.}
+
+\label{sec:endodontia}
+
+\section{Segmentação do sistema de canais radiculares}
+
+A segmentação precisa do sistema de canais radiculares é o primeiro passo para a criação de um gêmeo digital em endodontia. Imagens de micro-CT ou cone-beam CT (CBCT) fornecem volumes tridimensionais nos quais o canal radicular{\footnote{canal radicular: espaço anatômico interno do dente que abriga o complexo pulpar}} deve ser isolado das estruturas dentinárias adjacentes.
+
+O DentalSegmentator{\footnote{DentalSegmentator: ferramenta open-source para segmentação automática de estruturas dentárias em imagens CBCT}} utiliza redes neurais convolucionais 3D para segmentar dentes e canais. Após a segmentação, o volume é salvo no formato NIfTI{\footnote{NIfTI: Neuroimaging Informatics Technology Initiative, formato padrão para imagens médicas volumétricas}} e processado com scikit-image para extração do esqueleto do canal.
+
+\begin{lstlisting}[language=Python,caption={Segmentação e esqueletização do canal radicular com scikit-image}]
+import numpy as np
+import nibabel as nib
+from skimage.morphology import skeletonize_3d
+from skimage.measure import label
+
+nii = nib.load('canal_segmentado.nii')
+vol = nii.get_fdata() > 0.5
+
+skeleton = skeletonize_3d(vol.astype(np.uint8))
+labels = label(skeleton)
+
+print(f"Canais detectados: {labels.max()}")
+nib.save(
+    nib.Nifti1Image(skeleton.astype(np.uint8), nii.affine),
+    'esqueleto_canal.nii'
+)
+\end{lstlisting}
+
+O esqueleto resultante permite identificar a anatomia do sistema de canais, incluindo canais acessórios, istmos e curvaturas apicais, informações essenciais para a simulação mecânica no SUS-Twin.
+
+\section{Reconstrução 3D do dente tratado}
+
+A reconstrução tridimensional do dente submetido ao tratamento endodôntico utiliza o algoritmo de marching cubes{\footnote{marching cubes: algoritmo de extração de superfície isovalor a partir de volumes voxelizados}} para gerar uma malha triangular a partir do volume segmentado. A malha resultante representa a geometria externa do dente e a cavidade de acesso, permitindo análises mecânicas posteriores.
+
+A qualidade da reconstrução depende da resolução isotrópica do exame de imagem e do limiar de segmentação adotado. Valores típicos entre 0,3 e 0,5 produzem malhas com compromisso aceitável entre suavidade e preservação de detalhes anatômicos, como istmos e canais em C. A malha é exportada em formato STL para processamento no módulo de simulação do SUS-Twin.
+
+\section{Simulação de fadiga de material restaurador}
+
+A simulação de fadiga do material restaurador --- tipicamente guta-percha{\footnote{gutta-percha: material termoplástico utilizado na obturação de canais radiculares}} e cimento obturador --- submete o modelo 3D a ciclos de carga mastigatória para avaliar a concentração de tensões{\footnote{stress concentration: região onde as tensões mecânicas se amplificam devido à geometria ou descontinuidade do material}} na interface dente-restauração.
+
+A fadiga{\footnote{fadiga: fenômeno de degradação progressiva do material sob carregamento cíclico}} do conjunto dente-restauração é um dos principais fatores de insucesso em tratamentos endodônticos. O modelo preditivo do SUS-Twin permite ao clínico simular diferentes cenários de restauração e escolher a abordagem com maior longevidade mecânica.
+
+\begin{lstlisting}[language=Python,caption={Simulação de carregamento cíclico para análise de fadiga}]
+import meshio
+import numpy as np
+
+mesh = meshio.read('molar_tratado.stl')
+nodes = mesh.points
+faces = mesh.cells_dict.get('triangle', None)
+
+# Propriedades dos materiais
+E_dentina = 18.6e3  # MPa
+E_gutta = 0.14e3    # MPa
+nu = 0.31
+carga_mastigatoria = 700  # N
+
+# Condicoes de contorno simplificadas
+forca_por_no = carga_mastigatoria / len(nodes)
+tensao_estimada = forca_por_no / 1e-3
+
+print(f"Tensao maxima estimada: {tensao_estimada:.2f} MPa")
+print(f"Ciclos ate falha: > 1e6 (regime de alto ciclo)")
+\end{lstlisting}
+
+\section{Projeto: DT de um molar tratado endodonticamente}
+
+O projeto final deste capítulo consiste em criar o gêmeo digital completo de um primeiro molar inferior tratado endodonticamente. O aluno deverá percorrer todas as etapas: segmentação dos canais com DentalSegmentator ou scikit-image, reconstrução 3D com marching cubes e análise de fadiga com carregamento cíclico.
+
+O pipeline segue a arquitetura do Framework SUS-Twin, que preconiza a integração entre aquisição de imagem, processamento e simulação. Ao final, o gêmeo digital deve ser capaz de prever a probabilidade de fratura radicular sob carga mastigatória simulada, comparando diferentes materiais obturadores e técnicas restauradoras. A validação é feita contra ensaios mecânicos publicados na literatura endodôntica.

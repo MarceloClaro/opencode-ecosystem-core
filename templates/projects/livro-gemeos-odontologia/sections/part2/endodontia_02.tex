@@ -1,0 +1,51 @@
+\section{Gêmeos Digitais em Endodontia e Endodontia Preditiva}
+
+A endodontia preditiva fundamenta-se na capacidade de simular fenômenos biológicos, físicos e mecânicos que ocorrem no interior do sistema de canais radiculares, utilizando representações virtuais de altíssima fidelidade \cite{bdj2026predictive}.
+
+\subsection{O Fim da Radiografia 2D e o Diagnóstico Tridimensional Avançado}
+
+A endodontia tradicional navegava em incertezas inerentes à interpretação de exames radiográficos bidimensionais, nos quais a sobreposição de estruturas anatômicas e o achatamento de raízes divergentes obscureciam a verdadeira complexidade do sistema de canais radiculares. O gêmeo digital endodôntico contemporâneo processa volumes de Tomografia Computadorizada de Feixe Cônico (CBCT) para revelar canais acessórios, deltas apicais e istmos microscópicos. Técnicas avançadas de Inteligência Artificial, baseadas em \textit{Deep Learning}, aplicam algoritmos de super-resolução em voxels isotrópicos, removendo eficazmente o artefato de espalhamento metálico (\textit{metal artifact reduction} -- MAR) gerado por coroas e pinos pré-existentes. Essa capacidade permite medições tridimensionais do comprimento de trabalho com precisão submilimétrica, suplantando os métodos tradicionais de odontometria \cite{elsaid2025digital}. 
+
+\destaque{A reconstrução algorítmica da anatomia interna transforma o dente em um ambiente simulável, no qual a trajetória de inserção de instrumentos pode ser testada in silico antes do acesso clínico.}
+
+A topologia do canal radicular, assim extraída, fornece a malha de elementos finitos necessária para simular tanto o comportamento de fluidos irrigantes quanto o estresse mecânico sobre os instrumentos endodônticos. O mapeamento volumétrico reduz o risco de desvios, perfurações radiculares e transporte apical, patologias iatrogênicas tipicamente associadas à incapacidade de antever curvaturas severas.
+
+\subsection{Monitoramento Térmico de Instrumentos de NiTi e Fadiga Cíclica}
+
+A fratura de uma lima de Níquel-Titânio (NiTi) no interior de um canal curvo representa uma das complicações mais severas e de difícil resolução na prática endodôntica. Para mitigar esse risco de forma determinística, a convergência entre Internet das Coisas (IoT) e gêmeos digitais tem viabilizado sistemas de \textbf{termografia infravermelha em tempo real} \cite{katsoulakis2024digital}. 
+
+À medida que o instrumento gira e sofre fadiga mecânica cíclica e torcional, a energia de deformação dissipa-se na forma de calor, manifestando-se por meio de assinaturas térmicas específicas. Uma câmera térmica miniaturizada acoplada à caneta rotatória ou ao motor endodôntico captura o espectro infravermelho e transmite a elevação de temperatura para o gêmeo digital da lima correspondente. O algoritmo de aprendizado de máquina, treinado em vastos bancos de dados de fadiga de materiais, detecta micro-picos térmicos em frações de milissegundo, muito antes do limite de escoamento e do subsequente ponto de ruptura do material.
+
+\begin{figure}[h!]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[font=\footnotesize, 
+        node distance=2.2cm,
+        block/.style={rectangle, draw=accent, thick, fill=bgalt, text=fg, align=center, rounded corners, minimum width=3cm, minimum height=1.2cm},
+        arrow/.style={->, >=latex, thick, draw=accent!80}
+    ]
+    
+    \node[block] (motor) {Rotação da Lima\\(Fadiga Mecânica)};
+    \node[block, right=of motor] (sensor) {Câmera Térmica IoT\\(Infravermelho)};
+    \node[block, below=of sensor] (twin) {Gêmeo Digital (Preditor de\\Ruptura Térmica)};
+    \node[block, left=of twin] (stop) {Auto-Desligamento\\do Motor};
+    
+    \draw[arrow] (motor) -- (sensor);
+    \draw[arrow] (sensor) -- (twin);
+    \draw[arrow] (twin) -- node[below, font=\scriptsize, text=fgalt] {Alerta T $> T_{crit}$} (stop);
+    
+    \end{tikzpicture}
+\end{adjustbox}
+    \caption{Fluxo de prevenção de fratura de limas endodônticas via monitoramento térmico acoplado ao Gêmeo Digital.}
+    \label{fig:niti-thermal}
+\end{figure}
+
+Esse ciclo fechado de controle cibernético (\textit{cyber-physical control loop}) desativa o motor automaticamente com uma sensibilidade superior a 94\%, protegendo o instrumento em instantes de travamento na dentina radicular. 
+
+\subsection{Endodontia Guiada e Dinâmica de Fluidos Regenerativa}
+
+Em situações de obliteração do espaço pulpar por calcificações severas --- frequentes em dentes senis ou que sofreram trauma obliterante --- o acesso convencional à câmara pulpar carrega um risco altíssimo de perfuração radicular. Utilizando princípios consolidados na implantodontia, a \textbf{Endodontia Guiada} emprega o planejamento em modelos virtuais baseados na sobreposição de dados de CBCT e escaneamento intraoral (IOS). O gêmeo digital projeta o vetor ideal de desgaste, permitindo a impressão 3D de guias cirúrgicos que conduzem as brocas milimetricamente através da massa calcificada, atingindo o lúmen remanescente do canal com extrema segurança \cite{khoshfekr2025review}.
+
+\destaque{A transição de uma endodontia resectiva para uma endodontia regenerativa baseia-se na simulação hidrodinâmica do preparo e da desinfecção radicular.}
+
+No campo avançado da \textbf{Endodontia Regenerativa}, que busca o cultivo de células-tronco e a revascularização no interior do canal radicular, o papel do gêmeo digital evolui da modelagem geométrica para a \textbf{Dinâmica de Fluidos Computacional (CFD)}. Este módulo virtual calcula a tensão de cisalhamento, o empuxo e a capilaridade das soluções de irrigação (e.g., hipoclorito de sódio e EDTA) dentro do complexo labirinto anatômico. Tais simulações garantem que os fluidos atinjam as zonas de difícil acesso sem extrusão apical, condicionando a dentina de forma a assegurar que os \textit{scaffolds} (arcabouços biológicos) recebam o leito ideal para adesão e proliferação celular, maximizando as chances de sucesso do processo regenerativo \cite{duggal2026exploring}.

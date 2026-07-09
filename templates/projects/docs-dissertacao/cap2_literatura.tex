@@ -1,0 +1,239 @@
+% ═══════════════════════════════════════════════════════════════════════════
+% CAPÍTULO 2 — REVISÃO DA LITERATURA (EXPANSÃO COMPLETA)
+% ═══════════════════════════════════════════════════════════════════════════
+\chapter{Revisão da Literatura}
+\label{ch:literatura}
+
+Este capítulo estabelece a fundamentação teórica sobre a qual o OpenCode Ecosystem foi construído. A revisão está organizada em cinco eixos que correspondem diretamente às camadas da arquitetura do sistema: metacognição (L6-L7), teorias de consciência (L6), governança de commons (L6), engenharia de software com agentes (L1-L4), e trabalhos relacionados. Cada seção inclui fundamentação conceitual acessível ao leitor não-especialista, seguida de detalhamento técnico relevante para o especialista.
+
+\section{Metacognição: Fundamentos Teóricos}
+
+\subsection{O Que É Metacognição?}
+
+Metacognição — literalmente ``cognição sobre a cognição'' — é a capacidade de refletir sobre os próprios processos mentais. Flavell (1979)\citecrit{%
+Metacognition refers to one's knowledge concerning one's own cognitive processes and products or anything related to them. For example, I am engaging in metacognition if I notice that I am having more trouble learning A than B.}{%
+Metacognição refere-se ao conhecimento sobre os próprios processos e produtos cognitivos. Exemplo: perceber que estou tendo mais dificuldade em aprender A do que B.}{%
+Fundador. Flavell (1979) estabelece a definição canônica de metacognição que fundamenta a arquitetura do OpenCode. A distinção entre conhecimento metacognitivo (SelfModel) e regulação metacognitiva (MetacognitiveMonitor) deriva diretamente deste artigo.}{%
+\doi{10.1037/0003-066X.34.10.906}} distinguiu dois componentes formalizados como $M = M_k + M_r$ (Equação~\ref{eq:metacognicao}).
+
+\begin{equation}
+M = M_k + M_r
+\label{eq:metacognicao}
+\end{equation}
+
+Onde $M$ é a metacognição total, $M_k$ é o conhecimento metacognitivo (saber \textit{que} se sabe — implementado pelo \texttt{SelfModel}), e $M_r$ é a regulação metacognitiva (agir sobre o que se sabe — implementado pelo \texttt{MetacognitiveMonitor}). O primeiro é o \textbf{conhecimento metacognitivo}: o que sabemos sobre nosso próprio funcionamento cognitivo. Este conhecimento se divide em três categorias: conhecimento sobre pessoas (``eu sou melhor em matemática do que em poesia''), conhecimento sobre tarefas (``este problema é difícil porque envolve muitas variáveis''), e conhecimento sobre estratégias (``quando enfrento um problema complexo, faço um diagrama primeiro''). O segundo componente é a \textbf{regulação metacognitiva}: como monitoramos e controlamos ativamente nossos processos cognitivos. Isto inclui planejamento (``por onde devo começar?''), monitoramento (``estou progredindo adequadamente?''), e avaliação (``minha solução está correta? Como posso verificá-la?'').
+
+Esta distinção é fundamental para o OpenCode porque mapeia diretamente para dois módulos distintos: o \texttt{SelfModel} (Capítulo 6, Seção 6.4) implementa o equivalente computacional do conhecimento metacognitivo — mantendo um modelo explícito do estado do sistema, suas capacidades e limitações. O \texttt{MetacognitiveMonitor} (Capítulo 6, Seção 6.1) implementa a regulação metacognitiva — observando o desempenho do sistema, detectando desvios e disparando correções.
+
+\subsection{Metacognição em Inteligência Artificial}
+
+A transposição do conceito de metacognição da psicologia cognitiva para a inteligência artificial não foi imediata. Cox (2005) \doi{10.1016/j.artint.2005.10.009}, em sua revisão seminal ``Metacognition in Computation: A Selected Research Review'', argumentou que, enquanto sistemas de IA tradicionais implementam cognição — resolver problemas, processar linguagem, reconhecer padrões —, muito poucos implementam metacognição.
+
+Cox identificou que a lacuna não era tecnológica, mas arquitetural: as arquiteturas de software predominantes simplesmente não incluíam componentes dedicados à auto-observação. Um sistema que joga xadrez, por exemplo, pode calcular milhões de posições por segundo (cognição impressionante), mas não sabe \textit{quando} está jogando mal, não detecta \textit{padrões} em seus próprios erros, e não ajusta \textit{automaticamente} sua estratégia com base no desempenho recente. Estas três capacidades — monitoramento, detecção de padrões, e ajuste automático — são precisamente o que a metacognição adiciona.
+
+Cox estabeleceu três requisitos para metacognição computacional, que serviram como especificação de referência para o OpenCode:
+
+\begin{enumerate}
+    \item \textbf{Auto-monitoramento}: o sistema deve manter um modelo de seu próprio funcionamento e observar continuamente seu desempenho em relação a este modelo. Implementado no \texttt{AnomalyDetector} através da comparação entre densidade atual e média histórica (Equação~\ref{eq:anom1}).
+    \item \textbf{Auto-avaliação}: o sistema deve ser capaz de julgar a qualidade de seus próprios outputs sem depender de um oráculo externo. Implementado no \texttt{ConfidenceEstimator} através do cálculo de confiança por dimensão do scanner.
+    \item \textbf{Auto-regulação}: o sistema deve modificar seu comportamento quando a auto-avaliação detectar discrepâncias. Implementado no \texttt{CorrectionEngine} através de quatro estratégias de correção (rerun, recalibrate, expand\_keywords, adjust\_weights).
+\end{enumerate}
+
+Posteriormente, Cox e Raja (2011) propuseram uma taxonomia de arquiteturas metacognitivas em três categorias, baseada no grau de autonomia que conferem ao sistema:
+
+\begin{enumerate}
+    \item \textbf{Arquiteturas introspectivas}: sistemas que mantêm um modelo explícito de seu próprio funcionamento e podem consultar este modelo para tomar decisões, mas não podem modificá-lo. O \textit{Introspective Agent} de Schubert (2005) é o exemplo canônico.
+    \item \textbf{Arquiteturas reflexivas}: sistemas que não apenas monitoram, mas também modificam seus próprios processos com base na auto-observação. O \textit{Reflective Agent} de Maes (1987) introduziu o conceito de \textit{meta-level reasoning} — raciocinar sobre qual estratégia de raciocínio utilizar.
+    \item \textbf{Arquiteturas generativas}: sistemas que podem criar novas capacidades não previstas pelos projetistas originais. O \textit{Gödel Machine} de Schmidhuber (2007) é o exemplo mais ambicioso: um sistema formalmente verificável capaz de reescrever qualquer parte de seu próprio código, desde que possa provar que a modificação é benéfica.
+\end{enumerate}
+
+O OpenCode Ecosystem se enquadra primariamente na categoria reflexiva, com elementos de arquitetura introspectiva (via \texttt{SelfModel.source\_introspection()}) e potencial para evoluir para arquitetura generativa (SPEC-034 planejada).
+
+\subsection{A Taxonomia de Minsky: Múltiplos Níveis de Reflexão}
+
+Marvin Minsky (2006, ISBN: 978-0-7432-7663-8), co-fundador do laboratório de IA do MIT, dedicou sua obra tardia ``The Emotion Machine'' a explorar como a mente humana poderia ser compreendida como uma arquitetura de múltiplos níveis de reflexão. Embora Minsky não use o termo ``metacognição'', sua descrição de níveis de ``pensar sobre o pensar'' é essencialmente uma teoria metacognitiva.
+
+Minsky propôs seis níveis de atividade mental:
+
+\begin{enumerate}
+    \item \textbf{Nível 0 — Reativo}: respostas instintivas a estímulos ambientais. Exemplo humano: retirar a mão de uma superfície quente antes mesmo de ``perceber'' conscientemente o calor. Exemplo computacional: uma função que recebe input e retorna output sem armazenar estado.
+    \item \textbf{Nível 1 — Aprendido}: comportamentos adquiridos por experiência e automatizados. Exemplo humano: dirigir um carro enquanto conversa — a direção se torna tão automática que não requer atenção consciente. Exemplo computacional: um modelo treinado que faz predições sem ``saber'' como aprendeu.
+    \item \textbf{Nível 2 — Deliberativo}: planejamento consciente e resolução de problemas. Exemplo humano: decidir a melhor rota para o trabalho considerando trânsito, horário e clima. Exemplo computacional: o MCSP (SPEC-032) avaliando múltiplos conjuntos de capacidades antes de selecionar o ótimo.
+    \item \textbf{Nível 3 — Reflexivo}: reflexão sobre o próprio pensamento. Exemplo humano: ``estou sendo muito otimista nesta análise? Devo revisar com mais ceticismo.'' Exemplo computacional: o \texttt{MetacognitiveMonitor} detectando que o scanner está produzindo resultados anômalos e propondo correções.
+    \item \textbf{Nível 4 — Auto-consciente}: reflexão sobre a reflexão — pensar sobre como se pensa sobre o pensar. Exemplo humano: ``quando estou cansado, tendo a ser mais pessimista; devo considerar isso ao avaliar meus próprios julgamentos.'' Exemplo computacional: o \texttt{correction\_learning\_report()} analisando quais tipos de correção são mais eficazes.
+    \item \textbf{Nível 5 — Auto-idealização}: valores, ética e propósito. Exemplo humano: ``que tipo de pessoa eu quero ser?'' Exemplo computacional: o \texttt{CooperativeGovernance} auditando goals contra os 8 princípios de Ostrom.
+\end{enumerate}
+
+Esta visão hierárquica inspirou diretamente a taxonomia N0-N3.5 implementada no OpenCode (Capítulo 6, Seção 6.4). A correspondência não é exata — Minsky propôs 6 níveis, o OpenCode implementa 4.5 — mas o princípio arquitetural é o mesmo: cada nível observa e potencialmente modifica o comportamento do nível inferior.
+
+\section{Teorias de Consciência e Sua Adaptação Computacional}
+
+\subsection{Global Workspace Theory (GWT)}
+
+A Global Workspace Theory, proposta por Bernard Baars (1988) \doi{10.1017/CBO9780511551326} e expandida em trabalhos posteriores (Baars, 1997; Dehaene \& Changeux, 2011), é uma das teorias de consciência mais influentes na neurociência cognitiva contemporânea.
+
+Para compreender a GWT, Baars oferece uma metáfora poderosa: imagine um teatro. No palco, sob um holofote brilhante, está o conteúdo do qual estamos conscientes neste exato momento. Nas coxias e nos bastidores, uma multidão de especialistas (processadores inconscientes) trabalha simultaneamente — analisando sons, reconhecendo rostos, acessando memórias, planejando ações. Apenas um especialista pode ``ocupar o palco'' em cada momento, e quando o faz, sua mensagem é broadcastada para toda a audiência (o resto do cérebro).
+
+A evidência empírica para a GWT vem primariamente de estudos de neuroimagem. Dehaene e Changeux (2011), em uma revisão magistral na revista \textit{Neuron}, demonstraram que estímulos conscientes ativam uma rede distribuída de áreas cerebrais — o ``workspace global'' — enquanto estímulos subliminares (dos quais não estamos conscientes) ativam apenas áreas locais e especializadas. Esta diferença entre processamento ``global'' (consciente) e ``local'' (inconsciente) é a assinatura neural da GWT.
+
+O OpenCode Ecosystem implementa uma adaptação computacional da GWT através do módulo \texttt{GlobalWorkspace} (SPEC-036, \texttt{self\_model.py}). A adaptação preserva os três elementos centrais da teoria:
+
+\begin{enumerate}
+    \item \textbf{Competição pelo acesso}: Múltiplos módulos do ecossistema (scanners, monitores, engines, gates) geram informações continuamente. Apenas uma fração desta informação pode entrar no \texttt{GlobalWorkspace} em cada momento — tipicamente, a informação com maior prioridade ou relevância para o estado atual do sistema.
+    \item \textbf{Broadcast global}: A informação que ``vence'' a competição é broadcastada para todos os módulos que se registraram como \texttt{subscribers} do workspace. Este broadcast torna a informação ``consciente'' no sentido funcional: ela está disponível para qualquer módulo que precise dela, não apenas para o módulo que a gerou.
+    \item \textbf{Capacidade limitada}: O \texttt{AttentionBuffer}, que atua como gatekeeper do workspace, tem capacidade para exatamente 7 itens — uma implementação direta da Lei de Miller (1956) \doi{10.1037/h0043158}, que estabelece que a capacidade da memória de trabalho humana é de aproximadamente 7 $\pm$ 2 itens.
+\end{enumerate}
+
+É crucial notar que esta é uma adaptação \textit{funcional}, não uma simulação neural. O OpenCode não ``experiencia'' consciência — ele implementa um mecanismo de broadcast seletivo que produz comportamentos análogos aos que a GWT atribui à consciência humana: processamento serial de informações selecionadas, disponibilidade global para módulos especializados, e capacidade limitada de processamento consciente simultâneo.
+
+\subsection{Attention Schema Theory (AST)}
+
+Michael Graziano (2013, ISBN: 978-0-19-992864-4; 2019, ISBN: 978-0-393-65261-1), neurocientista de Princeton, propôs a Attention Schema Theory como uma alternativa à GWT. Enquanto a GWT foca em \textit{como} a informação se torna consciente (via broadcast global), a AST foca em \textit{o que} a consciência é: um modelo (schema) que o cérebro constrói para representar e controlar sua própria atenção.
+
+A metáfora de Graziano é igualmente poderosa. Quando você olha para uma maçã, você não ``vê'' a maçã diretamente. Seu cérebro constrói um modelo interno da maçã — sua forma, cor, textura, posição espacial — e é este modelo que você experiencia. A maçã real está ``lá fora''; o que você experiencia é o modelo, não a coisa em si. Da mesma forma, argumenta Graziano, quando você ``presta atenção'' a algo, seu cérebro constrói um modelo da sua própria atenção — e é este modelo, o \textit{attention schema}, que você experiencia como consciência.
+
+A implicação profunda da AST é que a consciência não requer um ``teatro'' ou um ``palco central'' (como na GWT). Requer apenas um sistema que construa e atualize continuamente um modelo de seus próprios processos atencionais. Esta implicação é particularmente relevante para a IA porque construir um modelo é algo que sistemas computacionais já sabem fazer — é o que redes neurais, sistemas de recomendação e motores de busca fazem o tempo todo.
+
+O OpenCode implementa uma versão computacional da AST através do \texttt{SelfModel} (Seção 6.4), especificamente em três capacidades:
+
+\begin{enumerate}
+    \item \textbf{Modelo de estados internos}: O \texttt{SystemState} mantém um snapshot de 10 campos que descrevem o estado atual do sistema (confiança, anomalias, goals, atenção, nível de consciência). Este é o equivalente computacional do attention schema — um modelo do que o sistema está ``prestando atenção'' e de como está funcionando.
+    \item \textbf{Forecasting preditivo}: O método \texttt{forecast\_confidence()} usa regressão linear sobre os últimos 10 snapshots para prever a confiança futura do sistema, com intervalo de $\pm 1\sigma$. Isto implementa a capacidade preditiva que Graziano atribui ao attention schema: não apenas saber o estado atual, mas antecipar estados futuros.
+    \item \textbf{Distinção self/other}: O método \texttt{self\_other\_boundary()} classifica eventos como originados internamente (self: módulos do núcleo metacognitivo), externamente (other: MCPs, ferramentas externas), ou na fronteira (boundary: plugins, extensões). Esta distinção é análoga à capacidade humana de distinguir entre sensações geradas internamente (imaginação) e externamente (percepção).
+\end{enumerate}
+
+\subsection{Atkinson-Shiffrin Memory Model}
+
+O modelo de memória de Atkinson e Shiffrin (1968) \doi{10.1016/S0079-7421(08)60422-3} propõe três estágios com transições probabilísticas:
+
+\begin{equation}
+P(\text{promoção}) = \begin{cases}
+1 - e^{-\lambda \cdot a} & \text{se } a \geq 3 \text{ (sensory} \rightarrow \text{short)} \\
+1 - e^{-\lambda \cdot a} & \text{se } a \geq 5 \text{ e } i \geq 0.6 \text{ (short} \rightarrow \text{long)}
+\end{cases}
+\label{eq:promocao_modelo}
+\end{equation}
+
+Onde $a$ é o número de acessos, $i$ é a importância do item (0-1), e $\lambda$ controla a taxa de decaimento. Publicado há mais de meio século, continua sendo ensinado em cursos introdutórios de psicologia e informa o design de sistemas de memória artificial até hoje.
+
+O modelo propõe que a memória humana opera em três estágios distintos, não como metáfora, mas como sistemas com propriedades estruturais e funcionais diferentes:
+
+\begin{enumerate}
+    \item \textbf{Memória sensorial}: O estágio mais efêmero. Retém informação por milissegundos a poucos segundos. Tem capacidade muito alta — praticamente toda a informação que atinge os sentidos é registrada brevemente. Funciona como um ``buffer'' que mantém a informação tempo suficiente para que processos atencionais decidam se ela merece processamento adicional. Se você já ``ouviu'' alguém dizer algo, pediu para repetir, e então percebeu que \textit{já sabia} o que foi dito — você experienciou a memória sensorial (especificamente, a memória ecoica).
+    
+    \item \textbf{Memória de curto prazo} (STM — Short-Term Memory): O estágio intermediário. Retém informação por segundos a minutos. Tem capacidade severamente limitada: Miller (1956) \doi{10.1037/h0043158} demonstrou que humanos conseguem manter aproximadamente 7 $\pm$ 2 itens na memória de curto prazo simultaneamente. É onde você mantém um número de telefone enquanto disca, ou onde armazena o resultado intermediário de um cálculo mental.
+    
+    \item \textbf{Memória de longo prazo} (LTM — Long-Term Memory): O estágio permanente. Retém informação por horas, dias, anos, ou décadas. Tem capacidade virtualmente ilimitada. É onde estão armazenadas suas memórias de infância, seu conhecimento de idiomas, e tudo que você aprendeu na escola. A transição de STM para LTM ocorre através de um processo chamado \textbf{consolidação}, que requer repetição e/ou associação com conhecimentos existentes.
+\end{enumerate}
+
+O OpenCode implementa este modelo através do módulo \texttt{NaturalForgetting} (SPEC-038, \texttt{trust\_engine.py}), adaptando os parâmetros temporais para o domínio computacional:
+
+\begin{itemize}
+    \item \textbf{Sensory}: TTL de 30 segundos, capacidade de 50 itens. Captura informações efêmeras que podem ou não ser promovidas a estágios superiores. A cada acesso, o contador de acessos do item é incrementado.
+    \item \textbf{Short-term}: TTL de 5 minutos, capacidade de 7 itens (Lei de Miller). Itens são promovidos de sensory para short-term após 3 acessos. A taxa de decaimento é reduzida pela metade em relação ao estágio sensory.
+    \item \textbf{Long-term}: TTL de 24 horas, capacidade ilimitada. Itens são promovidos de short-term para long-term após 5 acessos, desde que tenham importância $\geq 0.6$. A taxa de decaimento é reduzida para 20\% da taxa original.
+\end{itemize}
+
+A inovação do OpenCode em relação a implementações anteriores do modelo Atkinson-Shiffrin (como a do NEXO Brain) é o conceito de \textbf{decaimento adaptativo}: itens com alta importância ($\text{importância} \rightarrow 1$) decaem 3$\times$ mais lentamente que itens com baixa importância ($\text{importância} \rightarrow 0$). Isto implementa o princípio intuitivo de que informações relevantes devem ser retidas por mais tempo — um princípio que o modelo original de Atkinson \& Shiffrin não abordava, mas que é crucial para sistemas computacionais que processam grandes volumes de informação heterogênea.
+
+\section{Teoria dos Jogos e Governança de Commons}
+
+\subsection{Ostrom's Design Principles (DP1-DP8)}
+
+Elinor Ostrom (1933-2012) foi uma cientista política que dedicou sua carreira a desafiar um dos pressupostos mais arraigados da economia: a ``tragédia dos commons''. O conceito, popularizado por Garrett Hardin (1968) no artigo homônimo na revista \textit{Science} \doi{10.1126/science.162.3859.1243}, afirmava que recursos compartilhados (commons) inevitavelmente seriam destruídos pela ação racional de indivíduos que maximizam seu próprio benefício. Cada pastor, argumentava Hardin, tem incentivo para adicionar ``apenas mais uma'' ovelha ao pasto compartilhado — e quando todos fazem o mesmo, o pasto é destruído pelo sobrepastoreio.
+
+Hardin via apenas duas soluções: privatização (cercar o pasto) ou regulação estatal (limitar o número de ovelhas por decreto). Ostrom passou décadas documentando uma terceira via: comunidades que, sem privatização e sem regulação estatal, autogerem recursos comuns por séculos. De pescadores no Maine a irrigantes na Espanha, de florestas no Nepal a pastagens na Suíça, Ostrom encontrou padrões recorrentes nas instituições bem-sucedidas.
+
+Desta pesquisa empírica transcultural, Ostrom (1990) \doi{10.1017/CBO9780511807763} extraiu 8 Design Principles — não como prescrição normativa, mas como regularidades empíricas observadas em sistemas de governança que perduram:
+
+\begin{enumerate}[label=DP\arabic*:]
+    \item \textbf{Limites claros}: Quem tem direito de uso do recurso? Quais são os limites do recurso? Sem fronteiras bem definidas, não há como impedir que não-membros explorem o recurso (\textit{free-riding}).
+    \item \textbf{Regras proporcionais}: Os benefícios obtidos por cada usuário devem ser aproximadamente proporcionais aos custos que ele incorre. Quem contribui mais deve receber mais; quem contribui menos, menos. Regras que violam este princípio geram ressentimento e não-cooperação.
+    \item \textbf{Participação coletiva}: Os indivíduos afetados pelas regras operacionais podem participar da sua modificação. Regras impostas de cima para baixo, sem consulta aos afetados, tendem a ser burladas ou ignoradas.
+    \item \textbf{Monitoramento}: O comportamento dos usuários e o estado do recurso são ativamente monitorados. O monitoramento pode ser realizado pelos próprios usuários (rotação de responsabilidades) ou por monitores designados que prestam contas aos usuários.
+    \item \textbf{Sanções graduais}: Penalidades por violações são proporcionais à gravidade e ao contexto. Primeira infração: advertência. Reincidência: multa moderada. Violação grave ou repetida: exclusão. Sanções draconianas para infrações menores geram revolta; sanções brandas para infrações graves geram impunidade.
+    \item \textbf{Resolução de conflitos}: Mecanismos de baixo custo e rápido acesso para resolver disputas entre usuários. Se resolver um conflito exige meses de burocracia ou custos proibitivos, os usuários simplesmente deixam de reportar violações.
+    \item \textbf{Autonomia reconhecida}: O direito dos usuários de se auto-organizarem é reconhecido por autoridades externas (governo nacional, sistema legal). Sem este reconhecimento, as regras locais podem ser invalidadas por intervenção externa.
+    \item \textbf{Empreendimentos aninhados}: Para recursos que fazem parte de sistemas maiores (uma bacia hidrográfica, por exemplo), a governança opera em múltiplas camadas: local (cada comunidade gere seu trecho do rio), regional (comunidades coordenam o uso da água), e nacional (o governo estabelece diretrizes gerais).
+\end{enumerate}
+
+A evidência empírica para os princípios de Ostrom é notavelmente robusta. Cox, Arnold e Villamayor-Tomás (2010) realizaram uma meta-análise de 91 estudos empíricos e encontraram que os princípios DP1 (limites claros), DP2 (proporcionalidade) e DP4 (monitoramento) eram particularmente fortes preditores de sucesso na governança de commons. Esta evidência informou diretamente o design do OpenCode: estes três princípios recebem peso maior na auditoria de goals autônomos.
+
+O OpenCode adapta os 8 princípios para o domínio de goals autônomos (Seção 6.3). A adaptação é fundamentada na observação de que goals gerados por sistemas de IA são análogos a recursos comuns: múltiplos agentes competem por recursos computacionais limitados (tempo de CPU, memória, tokens de contexto), e sem governança adequada, a ``tragédia dos commons'' se manifesta como sobrecarga do sistema, goals conflitantes, e comportamentos indesejados.
+
+\subsection{Equilíbrio de Nash e Estratégias Evolutivamente Estáveis}
+
+\subsection{Equilíbrio de Nash e Estratégias Evolutivamente Estáveis}
+
+John Nash (1950)\citecrit{%
+Equilibrium points in n-person games. Any finite game has at least one equilibrium point.}{%
+Pontos de equilíbrio em jogos de n-pessoas. Todo jogo finito tem pelo menos um ponto de equilíbrio.}{%
+Fundacional. Nash (1950) demonstra que todo jogo finito tem equilíbrio — resultado que fundamenta o DialecticalEngine: tese e antítese convergem para um ponto onde nenhuma posição tem incentivo para mudar unilateralmente.}{%
+\doi{10.1073/pnas.36.1.48}} demonstrou que todo jogo finito tem pelo menos um ponto de equilíbrio. \doi{10.1073/pnas.36.1.48}
+
+Smith e Price (1973) \doi{10.1038/246015a0} introduziram o conceito de Estratégia Evolutivamente Estável (ESS) — uma estratégia que, se adotada por toda uma população, não pode ser invadida por nenhuma estratégia mutante. O conceito de ESS é aplicado no \texttt{correction\_learning\_report()} (Seção 6.1): o sistema mantém um portfólio de estratégias de correção, e a estratégia com maior taxa de sucesso (a ``ESS local'') é preferida. Se uma nova estratégia de correção consistentemente supera a estratégia dominante, ela a substitui — exatamente como uma mutação bem-sucedida invade uma população no modelo evolutivo.
+
+Axelrod (1984, ISBN: 978-0-465-02121-5) demonstrou, através de torneios computacionais do Dilema do Prisioneiro Iterado, que estratégias cooperativas — particularmente Tit-for-Tat (``olho por olho'': cooperar no primeiro movimento, depois copiar o movimento anterior do oponente) — podem emergir e se estabilizar mesmo em populações de agentes puramente egoístas. Este resultado tem implicações profundas para o OpenCode: sugere que a governança cooperativa (Seção 6.3) não é apenas eticamente desejável, mas pode emergir como estratégia evolutivamente estável em sistemas multi-agente.
+
+\section{Engenharia de Software com Agentes Inteligentes}
+
+\subsection{Test-Driven Development como Método Científico}
+
+Kent Beck (2003, ISBN: 978-0-321-14653-3) formalizou o Test-Driven Development como um ciclo de três etapas: Red (escrever um teste que falha), Green (implementar o código mínimo para o teste passar), Refactor (melhorar a qualidade do código sem alterar comportamento). Esta prática, inicialmente recebida com ceticismo pela comunidade de engenharia de software, acumulou evidência empírica substancial de eficácia.
+
+Janzen e Saiedian (2005) \doi{10.1109/MC.2005.314} realizaram uma das primeiras revisões sistemáticas da literatura sobre TDD, encontrando redução de defeitos entre 40\% e 90\% em comparação com desenvolvimento tradicional, embora com um aumento inicial no tempo de desenvolvimento (15-35\%) que era compensado pela redução no tempo de depuração.
+
+Uma interpretação menos explorada, mas particularmente relevante para esta dissertação, é o TDD como instância do método científico. Esta interpretação, sugerida por Janzen e Saiedian (2005) e desenvolvida aqui, fundamenta-se no falsificacionismo de Karl Popper (1959, ISBN: 978-0-415-27844-7):
+
+\begin{itemize}
+    \item \textbf{Hipótese falseável}: O Critical Test (CT) define o comportamento esperado do sistema. Se o código implementado não produz este comportamento, a hipótese (``o sistema se comporta conforme especificado'') é falseada.
+    \item \textbf{Experimentação}: A execução do CT contra o código implementado constitui o experimento que testa a hipótese.
+    \item \textbf{Refutação}: CT falha $\rightarrow$ hipótese refutada $\rightarrow$ o código não implementa corretamente a especificação $\rightarrow$ o código é corrigido.
+    \item \textbf{Corroboração}: CT passa $\rightarrow$ hipótese corroborada. Importante: corroborada não significa provada. Significa que a hipótese resistiu a esta tentativa específica de refutação. Futuras tentativas ( novos CTs, novos cenários de teste) podem refutá-la.
+\end{itemize}
+
+Esta interpretação eleva o TDD de uma prática de engenharia a uma metodologia com fundamentação epistemológica. Cada um dos 312 CTs do OpenCode representa uma hipótese falseável sobre o comportamento do sistema. O fato de todos passarem (100\%) não prova que o sistema está correto — apenas que resistiu a 312 tentativas de refutação ao longo de 23 ciclos evolutivos.
+
+\subsection{Padrões de Projeto para Sistemas Autônomos}
+
+Gamma, Helm, Johnson e Vlissides (1994, ISBN: 978-0-201-63361-0) — o ``Gang of Four'' — catalogaram 23 padrões de projeto que se tornaram a base da engenharia de software orientada a objetos. O OpenCode utiliza 8 destes padrões e introduz 4 padrões originais específicos para sistemas autônomos metacognitivos:
+
+\textbf{Padrões clássicos utilizados}:
+\begin{itemize}
+    \item \textbf{Observer} (MetacognitiveMonitor): o monitor observa execuções do pipeline sem modificar o comportamento dos módulos observados.
+    \item \textbf{Strategy} (CorrectionEngine): diferentes estratégias de correção são encapsuladas e intercambiáveis.
+    \item \textbf{Chain of Responsibility} (Pipeline M0-M7): cada módulo processa a entrada e a passa para o próximo na cadeia.
+    \item \textbf{Factory} (create\_*): funções factory criam instâncias pré-configuradas de cada módulo.
+    \item \textbf{Singleton} (CognitiveLibrary): uma única instância da biblioteca de 85 insumos é compartilhada por todos os módulos.
+    \item \textbf{Adapter} (SelfModificationAdapter): traduz sínteses dialéticas em patches de código executáveis.
+    \item \textbf{Decorator} (TrustEngine): adiciona comportamento de verificação de confiança a qualquer ação sem modificar a ação em si.
+    \item \textbf{Composite} (CapabilityUnit): agrega múltiplos CognitiveInputs em uma unidade composta que pode ser tratada como um todo.
+\end{itemize}
+
+\textbf{Padrões originais introduzidos pelo OpenCode}:
+\begin{itemize}
+    \item \textbf{Behavioral Gate} (SPEC-038): padrão de pré-execução que consulta histórico de confiança antes de autorizar ações.
+    \item \textbf{Structural Compression} (SPEC-037): padrão de processamento de corpus que classifica, verifica preservação e testa reconstrução.
+    \item \textbf{Dialectical Synthesis} (SPEC-036): padrão de resolução de contradições via tese + antítese $\rightarrow$ síntese.
+    \item \textbf{Ostrom Governance} (SPEC-036): padrão de validação de goals contra 8 princípios de governança de commons.
+\end{itemize}
+
+\section{Trabalhos Relacionados}
+
+\subsection{NEXO Brain (wazionapps/nexo)}
+
+O NEXO Brain \url{https://github.com/wazionapps/nexo} implementa um ``cérebro compartilhado'' para agentes de IA com persistência, memória semântica e — crucialmente para esta dissertação — metacognitive guard e trust scoring. Três padrões do NEXO foram adaptados para o OpenCode:
+
+\begin{enumerate}
+    \item \textbf{Trust scoring com blend 70/30}: O NEXO utiliza pesos adaptativos que aprendem com feedback real via Ridge regression. O OpenCode simplificou para um blend determinístico (70\% recente, 30\% histórico) que não requer dados de treinamento, mas adicionou shadow mode e rollback detection ausentes no NEXO.
+    \item \textbf{Behavioral gate com classificação de risco}: O NEXO implementa um ``guard'' que verifica regras comportamentais. O OpenCode estendeu o conceito para classificação em 4 níveis (safe/moderate/risky/blocked) com thresholds configuráveis.
+    \item \textbf{Natural forgetting (Atkinson-Shiffrin)}: Ambos implementam o modelo de três estágios. O OpenCode adicionou decaimento adaptativo (itens importantes decaem mais lentamente) e promoção baseada em acesso repetido.
+\end{enumerate}
+
+\subsection{Awesome Autoresearch (alvinreal/awesome-autoresearch)}
+
+O Awesome Autoresearch \url{https://github.com/alvinreal/awesome-autoresearch} cataloga sistemas de auto-melhoria inspirados no conceito de ``autoresearch'' de Karpathy. O padrão central — propor hipótese $\rightarrow$ executar experimento $\rightarrow$ avaliar resultado $\rightarrow$ aprender $\rightarrow$ repetir — inspirou o design do \texttt{OutcomeTracker} (SPEC-038), que fecha o ciclo de aprendizado registrando outcomes e atualizando trust scores.
+
+\subsection{Ruflo e Planejamento com Arquivos}
+
+O Ruflo (ruvnet/ruflo, 58.9k stars) \url{https://github.com/ruvnet/ruflo} oferece swarm intelligence com self-learning e adaptive memory. O conceito de múltiplos agentes especializados colaborando inspirou a arquitetura de 128 agentes do OpenCode. O Planning-with-files (OthmanAdi/planning-with-files, 23k stars) \url{https://github.com/OthmanAdi/planning-with-files} introduziu planejamento determinístico baseado em arquivos com completion gate — conceito que influenciou o design do pipeline M0-M7 com gate preventivo.

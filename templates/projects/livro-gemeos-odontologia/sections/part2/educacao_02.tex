@@ -1,0 +1,28 @@
+\section{Simuladores Odontológicos Baseados em Gêmeos Digitais}
+\label{sec:simuladores}
+
+Os simuladores odontológicos baseados em gêmeos digitais marcam uma ruptura ontológica com os simuladores puramente mecânicos (fantomas) que pautaram o treinamento tátil-visual ao longo do século XX. Enquanto os manequins convencionais proveem uma representação fenomenológica rígida, destituída de vascularização virtual, inervação ou variação da densidade mineral óssea, os sistemas ciber-físicos contemporâneos operam com modelos matemáticos subjacentes complexos — frequentemente utilizando o Método dos Elementos Finitos (MEF) e Dinâmica dos Fluidos Computacional (CFD) — que reagem em tempo de execução às ações instrumentais do operador~\cite{khoshfekr2025digital}.
+
+\subsection{Simuladores de Realidade Virtual com Haptometria Avançada}
+\label{subsec:rv}
+
+A eficácia do treinamento pré-clínico não repousa exclusivamente na cognição visual, mas criticamente na percepção tátil refinada e na propriocepção — a resistência friccional do esmalte sob a broca diamantada, a transição abrupta de densidade na junção amelodentinária, a sensação de "queda no vazio" ao perfurar o teto da câmara pulpar e a viscoelasticidade do tecido periodontal. Os simuladores de Realidade Virtual (RV) de alta fidelidade abordam essa exigência por meio de interfaces hápticas baseadas em admitância ou impedância, onde braços robóticos emitem forças reativas vetoriais calculadas instantaneamente contra a mão do usuário, criando uma ilusão tátil convincente~\cite{alshadidi2024surface}.
+
+\destaque{A haptometria na simulação odontológica exige taxas de atualização (\textit{update rates}) superiores a 1000 Hz para evitar a percepção de latência táctil ou instabilidade algorítmica (efeito \textit{jitter}), um desafio computacional massivo resolvido por meio de motores de colisão baseados em \textit{voxels} de alta resolução.}
+
+Sistemas de vanguarda projetam o gêmeo digital do arco dentário em espaços de trabalho imersivos, permitindo ao estudante não apenas realizar a micromobilidade dos dedos, mas também treinar a visão indireta com espelhos virtuais, ergonomia cervical, fulcro de apoio e iluminação do campo operatório. Além do manuseio mecânico, esses ambientes instanciam cenários onde o paciente virtual manifesta sinais vitais, reflexos fisiológicos (deglutição, movimento lingual, dor) e respostas sistêmicas, elevando a carga cognitiva para simular o ambiente estressor clínico de maneira controlada~\cite{olawade2026advancing}.
+
+\subsection{Simuladores Ciber-Físicos de Procedimentos Específicos}
+\label{subsec:procedimentos}
+
+A compartimentalização do aprendizado levou ao desenvolvimento de arquiteturas de gêmeos digitais altamente especializadas para domínios de competência estritos, proporcionando uma profundidade de análise inalcançável em plataformas genéricas:
+
+\begin{itemize}
+    \item \textbf{Complexidade Endodôntica Dinâmica:} A endodontia demanda navegação em anatomias não visíveis a olho nu. Gêmeos digitais construídos por algoritmos de reconstrução isomórfica a partir de microtomografias computadorizadas (micro-CT) permitem a exploração tridimensional do sistema de canais radiculares. Simuladores avaliam a adequação da forma de conveniência, desgaste compensatório, desvios apicais (zips e transportes) e respeito à constrição apical, correlacionando a cinemática das limas NiTi com a topologia do canal em tempo real~\cite{elsaid2025digital}.
+    
+    \item \textbf{Dentística Operatória e Micro-Odontologia:} Simuladores orientados a preparos cavitários avaliam volumetria, inclinação de paredes, espessura de remanescente dentinário e convergência oclusal. A superposição do preparo executado pelo aluno sobre o modelo booleano do preparo ideal (projetado por especialistas) gera mapas de calor colorimétricos, ilustrando instantaneamente áreas de sub e sobre-extensão, promovendo um refinamento motor micrométrico~\cite{xing2024clinical}.
+    
+    \item \textbf{Cirurgia Maxilofacial e Implantodontia Guiada:} A integração de arquivos CBCT (DICOM) e escaneamentos de superfície (STL/PLY) cria cenários de osteotomia virtuais. O estudante interage com texturas de osso cortical e medular, treina sequências de fresagem e torque de inserção de implantes, e é penalizado pelo sistema em casos de aquecimento ósseo simulado superior a 47°C ou violação de zonas de segurança adjacentes a nervos cranianos ou seios paranasais~\cite{menon2026innovations}.
+    
+    \item \textbf{Ortodontia Biomecânica:} Através de resolvedores algorítmicos (\textit{solvers}), os alunos modelam vetores de força e momentos, preveem centros de resistência e de rotação, e visualizam o padrão de remodelação óssea periodontal sob forças ortodônticas em lapsos temporais comprimidos. O teste com \textit{aligners} termoplásticos e elásticos intermaxilares antes da execução in vivo mitiga drasticamente os efeitos colaterais indesejáveis~\cite{li2024aligner}.
+\end{itemize}

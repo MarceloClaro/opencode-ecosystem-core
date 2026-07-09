@@ -1,0 +1,31 @@
+\section{Internet das Coisas (IoT) Médica e Convergência de Sensores}
+
+A evolução tecnológica da \textit{Internet of Medical Things} (IoMT) figura como a infraestrutura de telemetria onipresente que preenche o abismo cibernético entre um simples "modelo anatômico virtual em 3D" e um verdadeiro Gêmeo Digital orgânico~\cite{mdpi2025digital}. A telemetria contínua encarrega-se da vitalidade e da sincronia temporal (\textit{chronological coupling}) com o hospedeiro biológico. Na prática acadêmica e no horizonte clínico emergente, testemunhamos o protagonismo dos seguintes componentes cibernéticos:
+
+\begin{itemize}
+    \item \textbf{Próteses e Férulas Inteligentes (\textit{Smart Splints})}: Estruturas miorrelaxantes embutidas com redes de micro-piezoresistores e giroscópios miniaturizados. Estas férulas não apenas protegem a dentição, mas mapeiam e transmitem quantitativamente a intensidade oclusal ($N/mm^2$) e a cronometria rítmica dos episódios de bruxismo noturno, integrando essa carga aos modelos de elementos finitos.
+    \item \textbf{Smart Aligners (Alinhadores Cognitivos)}: Alinhadores ortodônticos termoplásticos dopados ou equipados com micro-biossensores (por exemplo, biopolímeros cromogênicos sensíveis à temperatura bucal e micro-alterações no pH salivar). Eles emitem metadados empíricos sobre o tempo de uso efetivo (\textit{compliance} ou adesão terapêutica) do paciente, refutando o relato clínico subjetivo.
+    \item \textbf{Motores Cirúrgicos de Implante Conectados}: Os motores de perfuração cirúrgicos de última geração atuam como emissores de dados ao vivo, transmitindo a curva de torque de inserção radicular diretamente para o nó do prontuário eletrônico do paciente (PEP) na nuvem. A integral do torque gerada serve como parâmetro audível da estabilidade primária do implante, assegurando rastreabilidade irrefutável e auditoria clínica in-silico.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[font=\footnotesize, 
+        node distance=1.8cm,
+        layer/.style={draw=accent, thick, rounded corners, fill=bgalt, text=fg, align=center, minimum width=8cm, minimum height=1cm},
+        arrow/.style={<->, >=latex, thick, draw=accent!80}
+    ]
+    \node[layer] (iot) {Camada IoT: Sensores intraorais, CBCT, EMG, Smart Splints};
+    \node[layer, below=of iot] (data) {Camada de Dados: HL7 FHIR, DICOM, openEHR, MQTT};
+    \node[layer, below=of data] (ai) {Camada Analítica (IA): nnU-Net, LLMs (BERT/Llama), FEM};
+    \node[layer, below=of ai] (ui) {Camada de Interface: XR (Realidade Estendida), Dashboards Clínicos};
+    
+    \draw[arrow] (iot) -- node[right, text=fgalt] {Telemetria Ativa} (data);
+    \draw[arrow] (data) -- node[right, text=fgalt] {Pipeline Neural} (ai);
+    \draw[arrow] (ai) -- node[right, text=fgalt] {Apoio à Decisão (CDSS)} (ui);
+    \end{tikzpicture}
+\end{adjustbox}
+    \caption{Pilha Tecnológica Holística (Tech Stack) do Gêmeo Digital Odontológico.}
+    \label{fig:tech-stack}
+\end{figure}

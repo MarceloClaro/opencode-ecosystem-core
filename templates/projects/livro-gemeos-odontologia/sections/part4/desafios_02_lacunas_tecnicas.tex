@@ -1,0 +1,19 @@
+\section{Lacunas Técnicas: O Paradoxo da Precisão Virtual}
+
+As barreiras técnicas constituem o estrato mais imediato de desafios, uma vez que envolvem a própria viabilidade arquitetural de construção, manutenção e operação de gêmeos digitais odontológicos com fidelidade suficiente (High Fidelity) para sustentar a tomada de decisão clínica. O que muitas vezes se ignora é o fenômeno do "paradoxo da precisão virtual": a modelagem tridimensional pode parecer geometricamente perfeita na tela, mas sua correspondência com a biomecânica in vivo é frequentemente frágil.
+
+\subsection{Validação Clínica Insuficiente: O Vazio de Evidências}
+
+O problema mais grave, e frequentemente negligenciado, é a profunda escassez de evidência clínica de alto nível. A robusta scoping review conduzida por Duggal et al. \cite{duggal2026exploring} revelou que, de quase 6.000 registros avaliados até 2026, a maioria absoluta consiste em relatos de caso, séries retrospectivas sem grupo controle ou simulações puramente in silico sem nenhuma validação contra desfechos clínicos reais. A completa ausência de Ensaios Clínicos Randomizados (ECRs) multicêntricos que comparem tratamentos guiados por gêmeos digitais com o planejamento convencional mantém a área em um nível de evidência (Grau IV ou V) insuficiente para justificar incorporação generalizada em diretrizes.
+
+\subsection{O Desafio da Interoperabilidade Semântica}
+
+O atual ecossistema de odontologia digital é um arquipélago de formatos fragmentados e silos de dados proprietários. Scanners intraorais exportam malhas em STL (Standard Triangle Language) ou PLY (Polygon File Format); sistemas CBCT geram arquivos DICOM volumosos; e softwares de simulação operam em formatos proprietários fechados. A inexistência de uma ontologia padronizada — capaz de encapsular não apenas a geometria, mas também o histórico do paciente, as propriedades dos tecidos e os parâmetros biológicos — obriga a uma série de conversões (\textit{mesh processing}) que degradam a fidelidade da informação. Projetos open-source como OpenTwins \cite{robles2023opentwins} e Eclipse Ditto \cite{eclipse2024ditto} oferecem frameworks valiosos, mas sua transposição para o complexo domínio bucomaxilofacial exige adaptações não triviais.
+
+\subsection{Gargalos Computacionais e Processamento de Borda}
+
+A modelagem de Elementos Finitos (Finite Element Method - FEM) não linear, essencial para prever o comportamento de estruturas heterogêneas como o ligamento periodontal e o osso alveolar, demanda uma carga computacional colossal. Um modelo maxilomandibular completo pode facilmente ultrapassar a marca de 10 milhões de elementos tetraédricos. Realizar simulações estocásticas em tempo real é inviável na infraestrutura de um consultório padrão. A necessidade de recorrer à computação em nuvem (\textit{Cloud Computing}) levanta problemas críticos de latência, disponibilidade de banda e, acima de tudo, segurança e conformidade com leis de proteção de dados.
+
+\subsection{A Tirania dos Dados Iniciais (\textit{Garbage In, Garbage Out})}
+
+A acurácia preditiva de um gêmeo digital é limitada pela qualidade da sua captação basal. Artefatos metálicos em CBCT — resultantes de restaurações de amálgama, implantes de titânio ou aparelhos ortodônticos — causam distorções de espalhamento (\textit{scattering}) que corrompem a segmentação automática. Ademais, a definição de contornos anatômicos ainda sofre com variabilidade operador-dependente acentuada. Sem algoritmos baseados em IA profunda capazes de lidar autonomamente com o ruído estrutural, a reprodutibilidade dos modelos permanece uma vulnerabilidade crítica, ameaçando a validade do planejamento.

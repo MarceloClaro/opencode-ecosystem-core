@@ -1,0 +1,52 @@
+\section{Modelagem Biomecânica Estrutural}
+\label{sec:modelagem}
+
+A abstração visual é transmutada em uma entidade física na fase de modelagem biomecânica. Através do acoplamento de tensores de deformação e formulações constitutivas não-lineares, o gêmeo digital é calibrado para responder rigorosamente sob o escopo das leis da mecânica de meios contínuos.
+
+\subsection{Atribuição Constitutiva de Materiais}
+\label{subsec:materiais}
+
+A acurácia do comportamento físico derivado do gêmeo digital repousa de forma irrevogável na parametrização dos tensores elásticos. A \autoref{tab:propriedades-materiais} expõe constantes elásticas isotrópicas lineares típicas da literatura, como módulo de Young ($E$) e coeficiente de Poisson ($\nu$).
+
+\begin{table}[htb]
+\centering
+\caption{Propriedades elásticas canônicas de tecidos e biomateriais na ontologia do gêmeo digital.}
+\label{tab:propriedades-materiais}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Domínio Estrutural} & \textbf{Módulo de Young $E$ (GPa)} & \textbf{Coeficiente de Poisson $\nu$} \\
+\midrule
+Esmalte dentário & 20,0--84,0 & 0,20--0,33 \\
+Dentina & 12,0--20,0 & 0,23--0,31 \\
+Ligamento periodontal & 0,00005--0,001 & 0,45--0,49 (incompressibilidade) \\
+Osso cortical alveolar & 10,0--20,0 & 0,26--0,36 \\
+Osso trabecular & 0,1--2,0 & 0,20--0,45 \\
+Titânio (Implantes Ti6Al4V) & 110,0--120,0 & 0,30--0,36 \\
+Cerâmica (Zircônia Y-TZP) & 200,0--220,0 & 0,30--0,32 \\
+Resina composta de incremento & 8,0--18,0 & 0,24--0,35 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+Entretanto, as simplificações elásticas lineares limitam a previsibilidade \textit{in vivo}. O ligamento periodontal exibe um comportamento viscoelástico, hiperelástico e multifásico ditado pelas taxas de deformação de fluidos intersticiais e arranjo de fibras colágenas. Para cálculos de resposta em alinhadores ortodônticos, abordagens com modelos hiperelásticos fenomenológicos (Ogden, Mooney-Rivlin) fornecem uma acurácia drasticamente superior na emulação de translações dentárias \cite{zhang2024recursive}.
+
+O osso alveolar ostenta alto grau de anisotropia e heterogeneidade espacial. A extração de unidades Hounsfield (HU) diretamente dos voxels tomográficos permite um mapeamento funcional contínuo da densidade óssea aparente para o Módulo de Young, adotando regras de potência do tipo empírico ($E = a \cdot \rho^b$).
+
+\subsection{Malha de Elementos Finitos (FEM)}
+\label{subsec:malha-fem}
+
+A malha tridimensional é formulada majoritariamente por elementos tetraédricos de alta ordem (C3D10 ou equivalentes), conferindo convergência rápida sob geometrias estomatognáticas intrincadas. A geração \textit{h-adaptative} é mandatória: a densidade da malha é concentrada em \textit{hotspots} de concentração de tensões (ex: colo de implantes, cúspides de trabalho) para minar o erro de truncamento numérico, mantendo o \textit{core} computacional gerenciável na base óssea distante.
+
+A literatura aponta malhas de resolução clínica oscilando entre 200.000 e excepcionais 5 milhões de elementos em reconstruções bimaxilares complexas \cite{roy2025editorial}. Além de \textit{solvers} proprietários clássicos, ferramentas de código aberto (FEniCS e CalculiX) despontam como plataformas programáveis essenciais para orquestração automática por IA.
+
+\subsection{Condições de Contorno e Algoritmos de Contato}
+\label{subsec:bc}
+
+A definição do estado de tensões inicial e das cargas mecânicas baliza as restrições de contorno (Boundary Conditions - BCs):
+\begin{itemize}
+    \item \textbf{Cargas Mastigatórias e Vetores Cíclicos}: Carregamentos fisiológicos de 100~N a 600~N incidentes sobre eixos oclusais e cúspides funcionais, escalonados temporalmente.
+    \item \textbf{Carregamento Ortodôntico Constante}: Magnitudes subliminares na ordem de 0,5~N a 2,0~N focadas em mecânicas de inclinação e rotação controlada. Exigem esquemas de \textit{updating} de malha recursivo para capturar a migração radicular \cite{zhang2024recursive}.
+    \item \textbf{Penalização de Contato}: Modelação do atrito não-linear de Coulomb entre alinhador e esmalte, ou fricção interproximal, onde variações infinitesimais no coeficiente de atrito suprimem ou exacerbam a transmissão da força desejada \cite{li2025impacts}.
+\end{itemize}

@@ -1,0 +1,459 @@
+{
+  "metadata": {
+    "script_hash": "4630648c6755",
+    "seed": 42,
+    "timestamp": "2026-05-14T18:08:52.867965",
+    "n_samples": 262,
+    "n_features": 14,
+    "n_features_original": 11,
+    "n_features_added": 3,
+    "n_arm_strict": 3,
+    "n_arm_relative": 29,
+    "new_features": [
+      "knowledge_complexity",
+      "export_sophistication",
+      "product_density"
+    ]
+  },
+  "classification": {
+    "Logistic Regression": {
+      "accuracy": 0.641,
+      "accuracy_std": 0.0426,
+      "f1": 0.2541,
+      "f1_std": 0.0781,
+      "roc_auc": 0.7222,
+      "roc_auc_std": 0.0565,
+      "precision": 0.1717,
+      "recall": 0.5862
+    },
+    "Random Forest": {
+      "accuracy": 0.874,
+      "accuracy_std": 0.0096,
+      "f1": 0.0727,
+      "f1_std": 0.1455,
+      "roc_auc": 0.7731,
+      "roc_auc_std": 0.0532,
+      "precision": 0.25,
+      "recall": 0.069
+    }
+  },
+  "regression": {
+    "Linear Regression": {
+      "r2": -0.1737,
+      "r2_std": 0.0919,
+      "rmse": 4.6027,
+      "mae": 2.3908
+    },
+    "Ridge (alpha=1)": {
+      "r2": -0.1715,
+      "r2_std": 0.0904,
+      "rmse": 4.5981,
+      "mae": 2.3857
+    },
+    "Random Forest": {
+      "r2": -0.6442,
+      "r2_std": 0.4925,
+      "rmse": 5.018,
+      "mae": 2.5769
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "gdp_per_capita",
+      "importance_rf": 0.1474033088205524,
+      "importance_perm": 0.04083969465648853,
+      "importance_perm_std": 0.00973843574211686
+    },
+    {
+      "feature": "product_density",
+      "importance_rf": 0.12855364370621544,
+      "importance_perm": 0.008015267175572504,
+      "importance_perm_std": 0.003984849812561277
+    },
+    {
+      "feature": "knowledge_complexity",
+      "importance_rf": 0.08879627839101782,
+      "importance_perm": 0.032251908396946555,
+      "importance_perm_std": 0.008316320064695005
+    },
+    {
+      "feature": "fdi_inflows",
+      "importance_rf": 0.08743564608269219,
+      "importance_perm": 0.003053435114503794,
+      "importance_perm_std": 0.002588675566078343
+    },
+    {
+      "feature": "internet_users",
+      "importance_rf": 0.08722636741801808,
+      "importance_perm": 0.010496183206106869,
+      "importance_perm_std": 0.005897533259680332
+    },
+    {
+      "feature": "rd_spending",
+      "importance_rf": 0.07971193692533685,
+      "importance_perm": 0.019274809160305335,
+      "importance_perm_std": 0.006663011545838205
+    },
+    {
+      "feature": "services_emp",
+      "importance_rf": 0.06928373077256987,
+      "importance_perm": 0.039885496183206096,
+      "importance_perm_std": 0.008908351158002925
+    },
+    {
+      "feature": "gini",
+      "importance_rf": 0.058733214923971454,
+      "importance_perm": 0.008587786259541963,
+      "importance_perm_std": 0.0051029549454660195
+    },
+    {
+      "feature": "high_tech_exp",
+      "importance_rf": 0.05467627435050075,
+      "importance_perm": 0.016603053435114506,
+      "importance_perm_std": 0.004052816904884606
+    },
+    {
+      "feature": "export_sophistication",
+      "importance_rf": 0.052641080166479004,
+      "importance_perm": 0.016221374045801523,
+      "importance_perm_std": 0.005897533259680321
+    },
+    {
+      "feature": "unemployment",
+      "importance_rf": 0.05179752810118085,
+      "importance_perm": -0.001145038167938961,
+      "importance_perm_std": 0.0024439405486385087
+    },
+    {
+      "feature": "tertiary_enrollment",
+      "importance_rf": 0.05151924287757759,
+      "importance_perm": 0.01717557251908397,
+      "importance_perm_std": 0.007191390718098
+    },
+    {
+      "feature": "patent_apps",
+      "importance_rf": 0.027310188199743745,
+      "importance_perm": 0.007442748091603041,
+      "importance_perm_std": 0.0035137314197561083
+    },
+    {
+      "feature": "ai_readiness",
+      "importance_rf": 0.014911559264143991,
+      "importance_perm": 0.03778625954198472,
+      "importance_perm_std": 0.008778625954198482
+    }
+  ],
+  "feature_importance_regression": [
+    {
+      "feature": "fdi_inflows",
+      "importance": 0.22255585462920827
+    },
+    {
+      "feature": "unemployment",
+      "importance": 0.1767621241922622
+    },
+    {
+      "feature": "gdp_per_capita",
+      "importance": 0.12137184899324703
+    },
+    {
+      "feature": "services_emp",
+      "importance": 0.07347825818072078
+    },
+    {
+      "feature": "product_density",
+      "importance": 0.06798109840037335
+    },
+    {
+      "feature": "knowledge_complexity",
+      "importance": 0.058494828827365924
+    },
+    {
+      "feature": "internet_users",
+      "importance": 0.057047376503307975
+    },
+    {
+      "feature": "tertiary_enrollment",
+      "importance": 0.05011455807855077
+    },
+    {
+      "feature": "high_tech_exp",
+      "importance": 0.036675362887821604
+    },
+    {
+      "feature": "rd_spending",
+      "importance": 0.0345150739538062
+    },
+    {
+      "feature": "export_sophistication",
+      "importance": 0.033274633444890095
+    },
+    {
+      "feature": "gini",
+      "importance": 0.031199177759793674
+    },
+    {
+      "feature": "patent_apps",
+      "importance": 0.025166612803901783
+    },
+    {
+      "feature": "ai_readiness",
+      "importance": 0.011363191344750527
+    }
+  ],
+  "anomalies": {
+    "n_anomalies": 27,
+    "top_anomalies": [
+      {
+        "economy": "LIE",
+        "anomaly_score": -0.15650653307188406,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": -1.15748291975636,
+        "knowledge_complexity": 2.355327338883869,
+        "product_density": 0.7630486953585175
+      },
+      {
+        "economy": "WLD",
+        "anomaly_score": -0.10960538034201711,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 2.87194964204316,
+        "knowledge_complexity": 2.9017943238915174,
+        "product_density": 0.5123316434191639
+      },
+      {
+        "economy": "LUX",
+        "anomaly_score": -0.0887884784479171,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 0.35861253942069,
+        "knowledge_complexity": 0.5377952423361678,
+        "product_density": 0.8541945169640962
+      },
+      {
+        "economy": "KOR",
+        "anomaly_score": -0.0781626164221329,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 2.00361101838986,
+        "knowledge_complexity": 2.7596433005189183,
+        "product_density": 0.8581072316461374
+      },
+      {
+        "economy": "CYM",
+        "anomaly_score": -0.07797151650829565,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 5.8155918263088,
+        "knowledge_complexity": 1.284751427808964,
+        "product_density": 0.7314468610832108
+      },
+      {
+        "economy": "USA",
+        "anomaly_score": -0.07753238414213587,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 2.79300127716779,
+        "knowledge_complexity": 1.7534157932642338,
+        "product_density": 0.9231127563091664
+      },
+      {
+        "economy": "EAS",
+        "anomaly_score": -0.07426183302256334,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 3.79010550023051,
+        "knowledge_complexity": 3.1517951055297266,
+        "product_density": 0.5711844356518483
+      },
+      {
+        "economy": "HKG",
+        "anomaly_score": -0.06625364177035303,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 2.50498758466826,
+        "knowledge_complexity": 2.1941073832374496,
+        "product_density": 0.8082810306159565
+      },
+      {
+        "economy": "MCO",
+        "anomaly_score": -0.0616844922691932,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 8.51053758860212,
+        "knowledge_complexity": 0.6306290148654254,
+        "product_density": 0.9208679390577739
+      },
+      {
+        "economy": "CHN",
+        "anomaly_score": -0.055503525584026325,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 4.9773565917572,
+        "knowledge_complexity": 2.8829443916134045,
+        "product_density": 0.5795467999792899
+      },
+      {
+        "economy": "NAC",
+        "anomaly_score": -0.05257093464232404,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 2.69993075266272,
+        "knowledge_complexity": 2.300793209355218,
+        "product_density": 0.9285606015797635
+      },
+      {
+        "economy": "HIC",
+        "anomaly_score": -0.05035522782100338,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 1.95000793704469,
+        "knowledge_complexity": 2.657160566849746,
+        "product_density": 0.7761575507302045
+      },
+      {
+        "economy": "ISR",
+        "anomaly_score": -0.042076490869008165,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 0.871968424377442,
+        "knowledge_complexity": 2.3912491075538673,
+        "product_density": 0.8202729606495536
+      },
+      {
+        "economy": "SGP",
+        "anomaly_score": -0.036894570787889436,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 4.38802362461865,
+        "knowledge_complexity": 1.8643325121320058,
+        "product_density": 0.9163873151442576
+      },
+      {
+        "economy": "UMC",
+        "anomaly_score": -0.034139537934833875,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 4.17952127549748,
+        "knowledge_complexity": 2.4418680971755142,
+        "product_density": 0.5551301874457307
+      },
+      {
+        "economy": "CHE",
+        "anomaly_score": -0.0327945197881388,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 1.30233332541106,
+        "knowledge_complexity": 2.1611280938656794,
+        "product_density": 0.9894671202978509
+      },
+      {
+        "economy": "SWE",
+        "anomaly_score": -0.022328371403274205,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 0.820071806703865,
+        "knowledge_complexity": 2.1454113827969485,
+        "product_density": 0.9049925293762828
+      },
+      {
+        "economy": "TUR",
+        "anomaly_score": -0.01818521861113176,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 3.3276230893799,
+        "knowledge_complexity": 1.360985232625043,
+        "product_density": 0.6096582179724508
+      },
+      {
+        "economy": "JPN",
+        "anomaly_score": -0.017391306684231833,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 0.104309021773304,
+        "knowledge_complexity": 1.3399047337231729,
+        "product_density": 0.8666081892046184
+      },
+      {
+        "economy": "ECS",
+        "anomaly_score": -0.012815654412031419,
+        "is_anomaly": true,
+        "arm_relative": 0,
+        "gdp_growth": 1.56624845618092,
+        "knowledge_complexity": 1.8617352446269115,
+        "product_density": 0.8047965179185147
+      }
+    ]
+  },
+  "cluster_profiles": {
+    "0": {
+      "n": 125,
+      "gdp_mean": 15713.408608596807,
+      "kci_mean": 0.057068451736982044,
+      "expy_mean": -0.10812745425793593,
+      "density_mean": 0.4871880492750201,
+      "growth_mean": 3.2397339565285597,
+      "arm_count": 21
+    },
+    "1": {
+      "n": 84,
+      "gdp_mean": 2073.8489158649327,
+      "kci_mean": -1.0248408419854063,
+      "expy_mean": -0.7595233097054016,
+      "density_mean": 0.12345093709037534,
+      "growth_mean": 3.4400174955396676,
+      "arm_count": 8
+    },
+    "2": {
+      "n": 52,
+      "gdp_mean": 44471.695449877385,
+      "kci_mean": 1.4929483056652866,
+      "expy_mean": 1.4598148090455432,
+      "density_mean": 0.826146347742248,
+      "growth_mean": 2.3305420067301084,
+      "arm_count": 0
+    },
+    "3": {
+      "n": 1,
+      "gdp_mean": 167187.15730982,
+      "kci_mean": 2.355327338883869,
+      "expy_mean": 0.8252802573517758,
+      "density_mean": 0.7630486953585175,
+      "growth_mean": -1.15748291975636,
+      "arm_count": 0
+    }
+  },
+  "new_features_v3": {
+    "knowledge_complexity": {
+      "description": "KCI proxy: PC1 de 6 features de inovacao",
+      "mean": 0.0039525380680434236,
+      "std": 1.0037861209225374
+    },
+    "export_sophistication": {
+      "description": "EXPY proxy: PIBpc ponderado por sofisticacao exportadora",
+      "mean": -0.002214654464792714,
+      "std": 1.0062021141183204
+    },
+    "product_density": {
+      "description": "Densidade produtiva: similaridade cosseno a fronteira",
+      "mean": 0.43889711317910096,
+      "std": 0.28848659733607646
+    }
+  },
+  "v3_gain_analysis": {
+    "accuracy_gain": {
+      "Logistic Regression": -0.0075,
+      "Random Forest": -0.0001
+    },
+    "auc_gain": {
+      "Logistic Regression": 0.0151,
+      "Random Forest": -0.0182
+    },
+    "regression_r2_gain": {
+      "Linear Regression": 0.0191,
+      "Ridge (alpha=1)": 0.0175,
+      "Random Forest": -0.0316
+    }
+  }
+}

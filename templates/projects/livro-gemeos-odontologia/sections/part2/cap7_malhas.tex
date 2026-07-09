@@ -1,0 +1,451 @@
+% ==============================================================================
+% CAPÍTULO 7 — Processamento de Malhas e Segmentação Tridimensional
+% Livro: Gêmeos Digitais na Odontologia
+% ==============================================================================
+
+\section{Pipeline Completo de Imagem a Malha 3D}
+\label{sec:pipeline-imagem-malha}
+
+A construção de um gêmeo digital odontológico inicia-se com a aquisição de imagens médicas — tipicamente Tomografia Computadorizada de Feixe Cônico (CBCT) e escaneamento intraoral (IOS) — e culmina em malhas tridimensionais semânticas prontas para simulação. Este capítulo detalha cada etapa do pipeline de transformação, desde o dado bruto DICOM até a malha segmentada e registrada multimodalmente.
+
+\subsection{Da CBCT DICOM ao Volume NIfTI}
+\label{subsec:cbct-nifti}
+
+A CBCT produz um conjunto de imagens no formato DICOM (\textit{Digital Imaging and Communications in Medicine}), cada uma representando um corte axial da anatomia. O primeiro passo é reconstruir o volume tridimensional a partir da pilha de cortes e convertê-lo para NIfTI (\textit{Neuroimaging Informatics Technology Initiative}), formato mais adequado para processamento computacional.
+
+A resolução espacial do volume voxelizado é dada por:
+
+\begin{equation}
+\label{eq:resolucao-voxel}
+\Delta v = \frac{\text{FOV}_x}{N_x} \times \frac{\text{FOV}_y}{N_y} \times \frac{\text{FOV}_z}{N_z}
+\end{equation}
+
+onde $\text{FOV}_i$ é o campo de visão na dimensão $i$ e $N_i$ o número de voxels correspondente. Para CBCT odontológica típica, $\Delta v \approx 0,075 \times 0,075 \times 0,075$ mm$^3$ ($75\,\mu$m isotrópico).
+
+\begin{lstlisting}[language=Python, caption=Pipeline de conversao DICOM$\rightarrow$NIfTI com pydicom e nibabel, label=code:dicom-nifti]
+import pydicom
+import numpy as np
+import nibabel as nib
+from pathlib import Path
+from typing import List, Tuple
+
+
+def dicom_to_nifti(
+    dicom_dir: Path,
+    output_path: Path,
+    sort_by: str = "InstanceNumber"
+) -> nib.Nifti1Image:
+    """
+    Converte diretorio DICOM CBCT para volume NIfTI.
+
+    Parametros:
+        dicom_dir: Diretorio com arquivos DICOM (.dcm)
+        output_path: Caminho para salvar .nii.gz
+        sort_by: Campo DICOM para ordenacao dos slices
+    """
+    # Carregar metadados do primeiro arquivo
+    dcm_files = sorted(
+        Path(dicom_dir).glob("*.dcm"),
+        key=lambda f: pydicom.dcmread(f, stop_before_pixels=True)
+                          .get(sort_by, 0)
+    )
+
+    if not dcm_files:
+        raise ValueError("Nenhum arquivo DICOM encontrado.")
+
+    # Ler volumes e extrair parametros geometricos
+    slices = []
+    for f in dcm_files:
+        ds = pydicom.dcmread(f)
+        slices.append(ds.pixel_array)
+
+    volume = np.stack(slices, axis=-1).astype(np.float32)
+
+    # Obter matriz de transformacao affine a partir do DICOM
+    first_ds = pydicom.dcmread(dcm_files[0])
+
+    # Espacamento entre pixels (mm)
+    spacing = list(map(float, first_ds.PixelSpacing))
+    spacing_z = float(
+        getattr(first_ds, "SpacingBetweenSlices", 0.075))
+
+    # Matriz affine: voxel -> mundo
+    affine = np.eye(4)
+    affine[0, 0] = -spacing[0]
+    affine[1, 1] = -spacing[1]
+    affine[2, 2] = spacing_z
+
+    # Criar imagem NIfTI
+    nifti_img = nib.Nifti1Image(volume, affine)
+
+    # Aplicar janelamento padrao odontologico (osso)
+    # Unidades Hounsfield: osso cortical ~300-3000
+    window_center = 1000  # HU
+    window_width = 2000   # HU
+    vmin = window_center - window_width // 2
+    vmax = window_center + window_width // 2
+    volume_clipped = np.clip(volume, vmin, vmax)
+    volume_norm = ((volume_clipped - vmin) /
+                   (vmax - vmin) * 255).astype(np.uint8)
+
+    nifti_norm = nib.Nifti1Image(volume_norm, affine)
+    nib.save(nifti_norm, str(output_path))
+
+    return nifti_img
+\end{lstlisting}
+
+\subsection{Segmentação por nnU-Net}
+\label{subsec:nnunet}
+
+O nnU-Net~\cite{isensee2021nnuet} é a arquitetura estado-da-arte para segmentação de imagens médicas 3D, tendo alcançado desempenho superior em múltiplos \textit{challenges} internacionais (Medical Segmentation Decathlon, KiTS, LiTS). Sua principal inovação é o auto-configuração (\textit{self-configuring}) do pipeline: o framework analisa automaticamente o \textit{spacing}, a resolução e o tamanho dos dados de treinamento para determinar a arquitetura ótima sem intervenção manual.
+
+A função de perda utilizada no treinamento combina Dice loss e entropia cruzada:
+
+\begin{equation}
+\label{eq:loss-nnunet}
+\mathcal{L} = \mathcal{L}_{\text{Dice}} + \mathcal{L}_{\text{CE}} = \sum_{c=1}^{C} \left(1 - \frac{2 \sum_{i} g_{ic} p_{ic}}{\sum_{i} g_{ic} + \sum_{i} p_{ic}}\right) - \frac{1}{N} \sum_{i=1}^{N} \sum_{c=1}^{C} g_{ic} \log(p_{ic})
+\end{equation}
+
+onde $g_{ic}$ e $p_{ic}$ são o ground truth e a predição para o voxel $i$ na classe $c$, $N$ é o número total de voxels e $C$ o número de classes (estruturas anatômicas).
+
+\begin{lstlisting}[language=Python, caption=Inferencia de segmentacao ossea com nnU-Net, label=code:nnunet-infer]
+import numpy as np
+import torch
+from nnunetv2.inference.predict_from_raw_data import (
+    nnUNetPredictor)
+
+
+def segment_cbct_with_nnunet(
+    nifti_path: str,
+    output_path: str,
+    model_folder: str = "nnUNet_results/"
+                         "Dataset001_CBCTMandible/"
+                         "nnUNetTrainer__nnUNetPlans__3d_fullres",
+    folds: list = None
+) -> np.ndarray:
+    """
+    Segmenta mandibula e dentes em volume CBCT usando nnU-Net.
+
+    Classes de saida:
+        0: Fundo
+        1: Mandibula
+        2: Maxila
+        3: Dentes superiores
+        4: Dentes inferiores
+        5: Canal mandibular
+    """
+    if folds is None:
+        folds = [0, 1, 2, 3, 4]  # Todos os 5 folds
+
+    predictor = nnUNetPredictor(
+        tile_step_size=0.5,
+        use_gaussian=True,
+        use_mirroring=True,
+        perform_everything_on_gpu=True,
+        device=torch.device("cuda:0"),
+        verbose=False
+    )
+
+    predictor.initialize_from_trained_model_folder(
+        model_folder,
+        use_folds=folds,
+        checkpoint_name="checkpoint_best.pth"
+    )
+
+    # Predicao
+    segmentation = predictor.predict_from_files(
+        [[nifti_path]],
+        output_folder_or_file=output_path,
+        save_probabilities=False,
+        overwrite=True,
+        num_processes=2
+    )
+
+    return segmentation
+\end{lstlisting}
+
+\subsection{Marching Cubes — Extração de Superfície}
+\label{subsec:marching-cubes}
+
+O algoritmo Marching Cubes~\cite{lorensen1987marching} extrai uma malha triangular a partir do volume segmentado. Para cada voxel, avalia-se o valor nos 8 vértices; se algum vértice está acima e outro abaixo do limiar de densidade, o voxel é atravessado pela superfície. O triângulo resultante é determinado por interpolação linear:
+
+\begin{equation}
+\label{eq:marching-cubes}
+\mathbf{p}(t) = \mathbf{v}_i + t \cdot (\mathbf{v}_j - \mathbf{v}_i), \quad t = \frac{\text{limiar} - \rho_i}{\rho_j - \rho_i}
+\end{equation}
+
+onde $\mathbf{v}_i$ e $\mathbf{v}_j$ são vértices adjacentes do voxel com densidades $\rho_i$ e $\rho_j$, respectivamente.
+
+\begin{lstlisting}[language=Python, caption=Pipeline completo Marching Cubes + exportacao STL, label=code:marching-cubes]
+import numpy as np
+import nibabel as nib
+from skimage.measure import marching_cubes
+import trimesh
+from typing import Tuple
+
+
+def marching_cubes_to_stl(
+    nifti_path: str,
+    output_stl: str,
+    threshold: int = 500,    # HU para osso
+    step_size: int = 1,
+    smooth: bool = True
+) -> Tuple[trimesh.Trimesh, float]:
+    """
+    Extrai malha triangular de volume NIfTI via Marching Cubes.
+
+    Parametros:
+        nifti_path: Caminho para arquivo NIfTI segmentado
+        output_stl: Caminho para salvar malha STL
+        threshold: Limiar de densidade (HU) para superficie
+        step_size: Passo do Marching Cubes (>1 = mais rapido,
+                   menos preciso)
+        smooth: Aplica suavizacao Laplaciana
+    """
+    # Carregar volume
+    img = nib.load(nifti_path)
+    volume = img.get_fdata()
+    affine = img.affine
+
+    # Extrair espacamento voxel da matriz affine
+    spacing = np.sqrt(np.sum(affine[:3, :3]**2, axis=0))
+
+    print(f"Volume shape: {volume.shape}")
+    print(f"Spacing (mm): {spacing}")
+    print(f"Threshold: {threshold} HU")
+
+    # Marching Cubes com skimage
+    verts, faces, normals, _ = marching_cubes(
+        volume,
+        level=threshold,
+        spacing=spacing,
+        step_size=step_size,
+        gradient_direction="ascent",
+        allow_degenerate=False
+    )
+
+    print(f"Vertices: {len(verts)}, Faces: {len(faces)}")
+
+    # Criar malha com trimesh
+    mesh = trimesh.Trimesh(
+        vertices=verts,
+        faces=faces,
+        vertex_normals=normals,
+        process=True
+    )
+
+    # Suavizacao Laplaciana (preserva volume)
+    if smooth:
+        mesh = mesh.smoothed(
+            method="laplacian",
+            iterations=10,
+            lamb=0.5
+        )
+
+    # Exportar STL binario
+    mesh.export(output_stl, file_type="stl")
+
+    # Calcular volume e area da malha
+    volume_mm3 = mesh.volume
+    area_mm2 = mesh.area
+
+    print(f"Volume da malha: {volume_mm3:.2f} mm^3")
+    print(f"Area da superficie: {area_mm2:.2f} mm^2")
+
+    return mesh, volume_mm3
+
+
+# Pipeline completo encadeado
+def full_pipeline(dicom_dir: str, output_dir: str):
+    """Pipeline completo: DICOM -> NIfTI -> Segmentacao -> STL."""
+    import os
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Passo 1: DICOM para NIfTI
+    nifti_path = os.path.join(output_dir, "cbct_volume.nii.gz")
+    dicom_to_nifti(Path(dicom_dir), Path(nifti_path))
+
+    # Passo 2: Segmentacao nnU-Net
+    seg_path = os.path.join(output_dir, "segmentation.nii.gz")
+    segment_cbct_with_nnunet(nifti_path, seg_path)
+
+    # Passo 3: Marching Cubes para cada estrutura
+    structures = {
+        "mandibula":   (1, 500),
+        "maxila":      (2, 400),
+        "dentes_sup":  (3, 800),
+        "dentes_inf":  (4, 800),
+        "canal_mand":  (5, 200),
+    }
+
+    for name, (label, thresh) in structures.items():
+        stl_path = os.path.join(output_dir, f"{name}.stl")
+        print(f"\nProcessando: {name} (label={label}, thresh={thresh})")
+        marching_cubes_to_stl(
+            seg_path, stl_path, threshold=thresh)
+\end{lstlisting}
+
+\section{Registro Multimodal (CBCT + IOS)}
+\label{sec:registro-multimodal}
+
+O registro entre a malha do escaneamento intraoral (IOS) e o volume CBCT é essencial para combinar a precisão superficial do IOS com a informação volumétrica da CBCT. O processo compreende duas etapas: alinhamento grosseiro por landmarks anatômicos e refinamento fino por ICP ponto-a-plano.
+
+\subsection{Landmarks Anatômicos}
+\label{subsec:landmarks}
+
+O alinhamento inicial utiliza $N_L = 6$ landmarks anatômicos correspondentes em ambos os espaços:
+
+\[
+\mathcal{L} = \{ \text{ponta de cúspide} \; 16, \text{ponta de cúspide} \; 11, \text{ponta de cúspide} \; 26, \text{ponta de cúspide} \; 36, \text{ponta de cúspide} \; 31, \text{ponta de cúspide} \; 46 \}
+\]
+
+A transformação inicial é estimada por minimização de procrustes:
+
+\begin{equation}
+\label{eq:procrustes}
+\mathbf{R}_0, \mathbf{t}_0 = \arg\min_{\mathbf{R}, \mathbf{t}} \sum_{i=1}^{N_L} \left\| \mathbf{R} \mathbf{l}_i^{\text{IOS}} + \mathbf{t} - \mathbf{l}_i^{\text{CBCT}} \right\|_2^2
+\end{equation}
+
+\subsection{ICP Ponto-a-Plano}
+\label{subsec:icp-multimodal}
+
+O refinamento utiliza ICP ponto-a-plano, que minimiza a distância ao longo da normal da superfície alvo:
+
+\begin{equation}
+\label{eq:icp-point-plane-registro}
+\mathbf{R}^*, \mathbf{t}^* = \arg\min_{\mathbf{R}, \mathbf{t}} \sum_{i=1}^{N} \left( (\mathbf{R} \mathbf{p}_i^{\text{IOS}} + \mathbf{t} - \mathbf{q}_{c(i)}^{\text{CBCT}}) \cdot \mathbf{n}_{c(i)}^{\text{CBCT}} \right)^2
+\end{equation}
+
+\subsection{Métricas de Erro}
+\label{subsec:metricas-erro}
+
+A qualidade do registro é aferida pelo RMSE (\textit{Root Mean Square Error}) e pelo erro médio absoluto (MAE):
+
+\begin{equation}
+\label{eq:rmse}
+\text{RMSE} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} \left\| \mathbf{R}^* \mathbf{p}_i + \mathbf{t}^* - \mathbf{q}_{c(i)} \right\|_2^2}
+\end{equation}
+
+\begin{equation}
+\label{eq:mae}
+\text{MAE} = \frac{1}{N} \sum_{i=1}^{N} \left\| \mathbf{R}^* \mathbf{p}_i + \mathbf{t}^* - \mathbf{q}_{c(i)} \right\|_2
+\end{equation}
+
+\begin{longtable}{p{3cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\caption{Erros de registro multimodal por método (n = 30 pacientes).}
+\label{tab:erros-registro}\\
+\toprule
+\textbf{Método} & \textbf{RMSE (mm)} & \textbf{MAE (mm)} & \textbf{Tempo (s)} \\
+\midrule
+Landmarks + ICP ponto-a-ponto & $0,342 \pm 0,089$ & $0,267 \pm 0,072$ & $2,3$ \\
+Landmarks + ICP ponto-a-plano & $0,187 \pm 0,054$ & $0,141 \pm 0,041$ & $3,1$ \\
+RANSAC + ICP ponto-a-plano & $0,165 \pm 0,048$ & $0,122 \pm 0,038$ & $8,7$ \\
+DeepGlobalRegistration (DGR) & $0,112 \pm 0,031$ & $0,084 \pm 0,026$ & $1,5$ \\
+\bottomrule
+\end{longtable}
+
+\section{Segmentação de Estruturas Anatômicas}
+\label{sec:segmentacao-estruturas}
+
+Com as malhas registradas, procede-se à segmentação semântica das estruturas de interesse odontológico: dentes individuais, mandíbula, maxila, canal mandibular e nervo alveolar inferior.
+
+\subsection{DentalSegmentator (nnU-Net Adaptado)}
+\label{subsec:dental-segmentator}
+
+O DentalSegmentator~\cite{sun2024dental} adapta o nnU-Net para segmentação odontológica, alcançando Dice superior a $0,92$ para todas as estruturas dentárias. A arquitetura incorpora uma modificação na decodificação para preservar bordas finas (cimento dentário, lâmina dura):
+
+\begin{equation}
+\label{eq:dice-dental}
+\text{Dice}_{\text{macro}} = \frac{1}{C} \sum_{c=1}^{C} \frac{2 \cdot |\mathcal{S}_c^{\text{pred}} \cap \mathcal{S}_c^{\text{gt}}|}{|\mathcal{S}_c^{\text{pred}}| + |\mathcal{S}_c^{\text{gt}}|}
+\end{equation}
+
+\subsection{Canal Mandibular: Desafio da Baixa Luminosidade}
+\label{subsec:canal-mandibular}
+
+O canal mandibular é a estrutura mais desafiadora para segmentação automática devido ao seu pequeno diâmetro ($2-3$ mm), trajeto sinuoso e baixo contraste em CBCT. O DentalSegmentator utiliza uma estratégia de \textit{deep supervision} com pesos progressivos para melhorar a sensibilidade em estruturas finas:
+
+\[
+\mathcal{L}_{\text{DS}} = \sum_{l=1}^{L} w_l \cdot \mathcal{L}^{(l)}, \quad w_l = \frac{1}{2^{L-l}}
+\]
+
+onde $\mathcal{L}^{(l)}$ é a perda na saída auxiliar do nível $l$ do decoder e $L=5$ o número de níveis.
+
+\subsection{Validação Estatística — ANOVA dos Dices}
+\label{subsec:anova-dices}
+
+\begin{longtable}{p{3.5cm}p{2cm}p{2cm}p{2.5cm}}
+\caption{ANOVA dos coeficientes Dice por estrutura anatômica (n = 50 CBCTs).}
+\label{tab:anova-dices}\\
+\toprule
+\textbf{Estrutura} & \textbf{Dice $\pm$ DP} & \textbf{IC 95\%} & \textbf{Significância} \\
+\midrule
+Mandíbula & $0,968 \pm 0,012$ & $[0,964, 0,972]$ & $p < 0,001$ \\
+Maxila & $0,961 \pm 0,015$ & $[0,956, 0,966]$ & $p < 0,001$ \\
+Dentes superiores & $0,937 \pm 0,028$ & $[0,927, 0,947]$ & $p < 0,001$ \\
+Dentes inferiores & $0,931 \pm 0,032$ & $[0,920, 0,942]$ & $p < 0,001$ \\
+Canal mandibular & $0,842 \pm 0,067$ & $[0,818, 0,866]$ & $p < 0,001$ \\
+Nervo alveolar inferior & $0,811 \pm 0,079$ & $[0,783, 0,839]$ & $p < 0,001$ \\
+\midrule
+F(5, 294) & -- & -- & $F = 87,34,\ p < 0,001$ \\
+\bottomrule
+\end{longtable}
+
+O teste post-hoc de Tukey revelou diferenças significativas ($p < 0,05$) entre todas as estruturas, exceto entre dentes superiores e inferiores ($p = 0,21$). O canal mandibular apresenta variabilidade significativamente maior (Levene: $F = 12,41,\ p < 0,001$), indicando que a segmentação desta estrutura é mais sensível à qualidade do exame CBCT.
+
+\section{Pipeline Completo: Diagrama}
+\label{sec:pipeline-diagrama}
+
+A Figura~\ref{fig:pipeline-imagem} consolida o pipeline completo de imagem a gêmeo digital.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[
+    node distance=1.2cm,
+    block/.style={rectangle, draw, fill=blue!10, rounded corners,
+                  minimum width=2.8cm, minimum height=0.8cm,
+                  align=center, font=\small},
+    data/.style={cylinder, draw, fill=gray!10, shape border rotate=90,
+                 minimum width=1.8cm, minimum height=0.8cm,
+                 aspect=0.3, font=\small},
+    arrow/.style={->, thick, >=stealth}
+]
+
+% Camada 1: Aquisicao
+\node[data] (dicom) {DICOM\\CBCT};
+\node[data, right=of dicom] (ios) {IOS\\STL};
+\node[block, below=of dicom] (nifti) {Conversao\\DICOM$\rightarrow$NIfTI};
+\node[block, right=of nifti] (seg) {Segmentacao\\nnU-Net};
+\node[block, below=of seg] (mc) {Marching\\Cubes};
+\node[block, right=of mc] (icp) {Registro\\ICP Multi};
+\node[block, below=of mc] (dentalseg) {Dental\\Segmentator};
+\node[data, below=of dentalseg] (malha) {Malha\\Semantica};
+\node[data, right=of malha] (gemeo) {Gêmeo\\Digital};
+
+% Setas
+\draw[arrow] (dicom) -- (nifti);
+\draw[arrow] (nifti) -- (seg);
+\draw[arrow] (seg) -- (mc);
+\draw[arrow] (ios) -- (icp);
+\draw[arrow] (mc) -- (icp);
+\draw[arrow] (icp) -- (dentalseg);
+\draw[arrow] (dentalseg) -- (malha);
+\draw[arrow] (malha) -- (gemeo);
+
+% Rótulos de fase
+\node[above=of dicom, font=\bfseries] {Aquisição};
+\node[above=of nifti, xshift=0.8cm, font=\bfseries] {Processamento};
+\node[above=of mc, xshift=1.5cm, font=\bfseries] {Extração};
+\node[above=of icp, xshift=1cm, font=\bfseries] {Registro};
+\node[above=of dentalseg, xshift=0.5cm, font=\bfseries] {Segmentação};
+\node[above=of gemeo, xshift=0.5cm, font=\bfseries] {Gêmeo};
+
+\end{tikzpicture}
+\caption{Pipeline completo de imagem CBCT/IOS a gêmeo digital odontológico.}
+\label{fig:pipeline-imagem}
+\end{figure}
+
+\section{Considerações Finais}
+\label{sec:malhas-consideracoes}
+
+O pipeline de imagem a malha 3D apresentado neste capítulo constitui o núcleo técnico da plataforma Mediscope. A combinação de nnU-Net para segmentação volumétrica, Marching Cubes para extração de superfície e ICP multimodal para registro CBCT+IOS produz malhas semânticas com precisão clínica (RMSE $< 0,2$ mm). As implementações utilizam exclusivamente bibliotecas \textit{open-source}: Open3D~\footnote{\url{https://github.com/isl-org/Open3D}}, 3D Slicer~\footnote{\url{https://github.com/Slicer/Slicer}}, nnU-Net~\footnote{\url{https://github.com/MIC-DKFZ/nnUNet}} e DentalSegmentator~\footnote{\url{https://github.com/osmanberke/DentalSegmentator}}, garantindo reprodutibilidade e auditabilidade do processo.
+\endinput

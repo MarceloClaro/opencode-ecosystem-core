@@ -1,0 +1,115 @@
+% Definição de ambientes exercício, solução, definição, exemplo, demonstração, etc.
+
+\usepackage{mdframed}
+
+\usepackage{environ} % usado nas definições \MakeDiscussionTopSecret, \MakeDiscussionsPublic, etc.
+
+% Exercício e solução (pacote Exsheets):
+
+\usepackage{exsheets} %[2015/02/09]
+
+% Configurações do pacote Exsheets:
+
+\SetupExSheets{
+  headings          = block-subtitle ,
+  subtitle-format   = \sc ,
+  counter-within    = {chapter} , % Contar dentro dos capítulos.
+  counter-format    = ch.qu[1] , % Formato 1.1, 1.2, 1.3, etc.
+  label-format      = ch.qu[1] , % Formato 1.1, 1.2, 1.3, etc.
+  headings-format   = \bfseries ,
+  question/pre-hook = \needspace{0.3\textheight}\vspace{1ex} ,
+  question/post-hook = \vspace{1ex} ,
+  question/pre-body-hook = {\vspace{1ex} \mdframed[backgroundcolor=verde_UnB!10, linewidth=1pt, innermargin=+0cm, outermargin=+0cm]},
+  question/post-body-hook = \endmdframed ,
+  solution/pre-hook = \needspace{0.3\textheight}\vspace{1ex},
+  solution/post-hook = \vspace{1ex},
+  solution/pre-body-hook = \vspace{1ex},
+  solution/print    = false
+}
+
+\renewcommand\thequestion{\thechapter.\arabic{question}} % Formato 1.1, 1.2, 1.3, etc., ao usar \ref{}:
+
+% Ambiente "Definição":
+
+\mdfdefinestyle{definitionSty}{backgroundcolor=gray!10, linecolor=verde_UnB, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin =0, outermargin =0, needspace={0.2\textheight}}
+\newcounter{definitionCounter}[chapter]
+\numberwithin{definitionCounter}{chapter}
+\theoremstyle{definition}
+\newmdtheoremenv[style=definitionSty]{definition}[definitionCounter]{Defini\c{c}\~{a}o}
+
+% Ambiente "Teorema":
+
+\mdfdefinestyle{theoremSty}{backgroundcolor=verde_UnB!10, linecolor=verde_UnB, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin=0, outermargin=0, needspace={0.2\textheight}}
+\newcounter{theoremCounter}[chapter] 
+\numberwithin{theoremCounter}{chapter}
+\newmdtheoremenv[style=theoremSty]{theorem}[theoremCounter]{Teorema}
+
+% Ambiente "Demonstração":
+
+\mdfdefinestyle{demonstrationSty}{backgroundcolor=gray!10, linecolor=verde_UnB, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin =0cm, outermargin =0cm, needspace={0.2\textheight}}
+\newcounter{demonstrationCounter}[chapter]
+\numberwithin{demonstrationCounter}{chapter}
+\newmdtheoremenv[style=demonstrationSty]{demonstration}[demonstrationCounter]{Demonstra\c{c}\~{a}o}
+
+% Ambiente "Axioma":
+
+\mdfdefinestyle{axiomSty}{backgroundcolor=verde_UnB!10, linecolor=verde_UnB, linewidth=1pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin=0, outermargin=0, needspace={0.1\textheight}}
+\newcounter{axiomCounter}[chapter] 
+\numberwithin{axiomCounter}{chapter}
+\newmdtheoremenv[style=axiomSty]{axiom}[axiomCounter]{Axioma}
+
+% Ambiente "Exemplo":
+
+\mdfdefinestyle{exampleSty}{backgroundcolor=gray!10, linecolor=verde_UnB, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex,  innermargin =+0cm, outermargin =+0cm, needspace={0.2\textheight}}
+\newcounter{exampleCounter}[chapter]
+\numberwithin{exampleCounter}{chapter}
+\newmdtheoremenv[style=exampleSty]{example}[exampleCounter]{Exemplo}
+
+% Ambiente "Problema":
+
+\mdfdefinestyle{problemSty}{backgroundcolor=gray!10, linecolor=black, linewidth=1pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin =+0cm, outermargin =+0cm, needspace={0.15\textheight}}
+\newcounter{problemCounter}[chapter]
+\numberwithin{problemCounter}{chapter}
+\newmdtheoremenv[style=problemSty]{problem}[problemCounter]{Problema}
+
+% Ambiente "Nota":
+
+\mdfdefinestyle{noteSty}{backgroundcolor=white, font=\small, fontcolor=verde_UnB, linecolor=verde_UnB, linewidth=1pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=2ex, innerbottommargin=2ex, innermargin =+0cm, outermargin =+0cm, needspace={0.1\textheight}}
+\newcounter{noteCounter}[chapter]
+\numberwithin{noteCounter}{chapter}
+\newmdtheoremenv[style=noteSty]{note}[noteCounter]{Nota}
+
+% Ambiente "Discussão" (texto complementar):
+
+\mdfdefinestyle{discussionSty}{backgroundcolor=white, fontcolor=verde_UnB, linecolor=verde_UnB, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=3ex, innerbottommargin=3ex, innermargin=+0cm, outermargin =+0cm, needspace={0.25\textheight}}
+\newcounter{discussionCounter}%[chapter]
+%\numberwithin{discussionCounter}{chapter}
+\newmdtheoremenv[style=discussionSty]{discussion}[discussionCounter]{Texto Complementar}
+
+% Ambiente "Dedicatória" (baseado em https://tex.stackexchange.com/a/167529/91816):
+
+\newenvironment{dedication}
+  {
+    \itshape             % the text is in italics
+    \raggedleft          % flush to the right margin
+  }
+  {
+    \par % end the paragraph
+  }
+  % space at bottom is three times that at the top
+  
+% Citação com autor:
+
+\renewenvironment{quotation}
+  {\small\list{}{\rightmargin=0.1cm \leftmargin=4cm \topsep=1.5\baselineskip}%
+   \item\relax}
+  {\endlist}
+
+\def\signed #1{{\leavevmode\unskip\nobreak\newline
+  \hbox{}\nobreak #1 %
+  \hfil\parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{citacao}[1]
+  {\savebox\mybox{#1}\begin{quotation}}
+  {\signed{\usebox\mybox}\end{quotation}}

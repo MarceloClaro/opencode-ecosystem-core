@@ -1,0 +1,197 @@
+% =============================================================================
+% PREÂMBULO COMUM — Compartilhado entre light.tex e dark.tex
+% =============================================================================
+% Codificação e Idioma
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{csquotes}
+
+% Índice Remissivo
+\usepackage{makeidx}
+\makeindex
+
+% Controle de Overfull Boxes e Hifenização
+\usepackage{microtype}
+\tolerance=2000
+\emergencystretch=3em
+\hfuzz=2pt
+
+% Numeração de Seções e Sumário até Nível 5
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+% Padronização de Tabelas
+\usepackage{etoolbox}
+\AtBeginEnvironment{tabular}{\small}
+\AtBeginEnvironment{longtable}{\small}
+\AtBeginEnvironment{tabularx}{\small}
+\hfuzz=2pt
+\widowpenalty=10000
+\clubpenalty=10000
+\raggedbottom
+\usepackage{seqsplit}
+\usepackage{adjustbox}
+
+\let\origtexttt\texttt
+
+\newcommand{\codigoquebravel}[1]{\seqsplit{\origtexttt{#1}}}
+
+% Matemática
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\IfFileExists{dsfont.sty}{\usepackage{dsfont}}{}
+\providecommand{\mathds}[1]{\mathbb{#1}}
+\IfFileExists{stmaryrd.sty}{\usepackage{stmaryrd}}{}
+
+% Gráficos e Ilustrações
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{positioning,shapes,arrows,fit,backgrounds,calc}
+\usetikzlibrary{decorations.pathmorphing,patterns,shadows}
+\usetikzlibrary{automata,petri,topaths}
+\usetikzlibrary{chains,scopes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+% Tabelas
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{enumitem}
+
+% Cores
+\usepackage[table]{xcolor}
+
+% Hiperlinks
+\usepackage[alf]{abntex2cite}
+\usepackage{hyperref}
+\usepackage{url}
+
+% Tradução de autorefs para português
+\renewcommand{\chapterautorefname}{Capítulo}
+\renewcommand{\tableautorefname}{Tabela}
+\renewcommand{\partautorefname}{Parte}
+\renewcommand{\sectionautorefname}{Seção}
+\renewcommand{\subsectionautorefname}{Subseção}
+\renewcommand{\subsubsectionautorefname}{Subsubseção}
+\renewcommand{\paragraphautorefname}{Parágrafo}
+\renewcommand{\figureautorefname}{Figura}
+
+% Quebra de URLs
+\def\UrlBreaks{\do\:\do\-\do\_\do\/\do\.\do\~\do\?\do\#\do\&\do\%\do\@\do\\}
+
+% Código Fonte
+\usepackage{listings}
+\providecommand{\lstlistingautorefname}{Código}
+\usepackage{verbatim}
+
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    backgroundcolor=\color{codeback},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    postbreak=\mbox{$\hookrightarrow$\space},
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{coderule},
+    frameround=tttt,
+    emph={self,True,False,None},
+    emphstyle=\color{magenta},
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ã}{{\~a}}1 {õ}{{\~o}}1 {Ã}{{\~A}}1 {Õ}{{\~O}}1
+             {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {â}{{\^a}}1 {ê}{{\^e}}1
+             {×}{{\ensuremath{\times}}}1 {—}{{\textemdash}}1
+}
+
+\lstdefinestyle{bashstyle}{
+    language=bash,
+    backgroundcolor=\color{codeback},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{coderule},
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ã}{{\~a}}1 {õ}{{\~o}}1 {Ã}{{\~A}}1 {Õ}{{\~O}}1
+             {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {â}{{\^a}}1 {ê}{{\^e}}1
+             {×}{{\ensuremath{\times}}}1 {—}{{\textemdash}}1
+}
+
+\lstset{style=pythonstyle}
+
+% Ambientes Teoremas
+\theoremstyle{definition}
+\newtheorem{definicao}{Definição}[chapter]
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{lema}{Lema}[chapter]
+\newtheorem{corolario}{Corolário}[chapter]
+\newtheorem{proposicao}{Proposição}[chapter]
+\newtheorem{exemplo}{Exemplo}[chapter]
+\newtheorem{exercicio}{Exercício}[chapter]
+\newtheorem{observacao}{Observação}[chapter]
+\newtheorem{hipotese}{Hipótese}[chapter]
+
+% Comandos Personalizados
+\newcommand{\codigo}[1]{\texttt{#1}}
+\usepackage{underscore}
+\newcommand{\destaque}[1]{\textbf{#1}}
+\newcommand{\opencode}{\textsc{OpenCode}}
+\newcommand{\opencodeeco}{\textsc{OpenCode Ecosystem}}
+\newcommand{\qualisA}{\textit{Qualis A1}}
+\newcommand{\tdd}{\textsc{TDD}}
+\newcommand{\sdd}{\textsc{SDD}}
+\newcommand{\doilink}[1]{\href{https://doi.org/#1}{\texttt{DOI: #1}}}
+\newcommand{\arxivlink}[1]{\href{https://arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+\newcommand{\nivelzero}{$\bigstar$}
+\newcommand{\nivelbasico}{$\bigstar\bigstar$}
+\newcommand{\nivelintermediario}{$\bigstar\bigstar\bigstar$}
+\newcommand{\nivelavancado}{$\bigstar\bigstar\bigstar\bigstar$}
+\newcommand{\nivelphd}{$\bigstar\bigstar\bigstar\bigstar\bigstar$}
+
+\newcommand{\doi}[1]{\doilink{#1}}
+\newcommand{\arxiv}[1]{\arxivlink{#1}}
+
+% Configurações ABNT
+\setlength{\parindent}{1.5cm}
+\setlength{\parskip}{0.2cm}
+\SingleSpacing

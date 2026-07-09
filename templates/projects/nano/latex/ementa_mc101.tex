@@ -1,0 +1,517 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{a4paper, top=3cm, bottom=2cm, left=3cm, right=2cm}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{tabularx}
+\usepackage{mathptmx} % Fonte Times New Roman (Padrão ABNT)
+\usepackage{microtype} % Evita Overfull \hbox e otimiza a tipografia
+
+\onehalfspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=red,
+    pdftitle={Projeto Pedagógico Exaustivo: Metodologia Científica e Ecossistemas Multiagente},
+    pdfauthor={Marcelo Claro},
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{2cm}
+        \Large{\textbf{PROJETO PEDAGÓGICO DE DISCIPLINA (PPD) - FORMATO EXPANDIDO}}\\
+        \vspace{1cm}
+        \Large{\textbf{UNIVERSIDADE FEDERAL / MINISTÉRIO DA EDUCAÇÃO}}\\
+        
+        \vspace{3cm}
+        \Huge{\textbf{Metodologia Científica e Arquitetura de Ecossistemas Multiagente}}\\
+        \vspace{1cm}
+        \Large{\textit{Uma Abordagem Constitucional, Epistemológica e Tecnológica para a Formação Cidadã na Quarta Revolução Industrial}}\\
+        
+        \vspace{4cm}
+        \textbf{Autor e Proponente:}\\
+        \textbf{Prof. Marcelo Claro}\\
+        \href{mailto:marceloclaro@gmail.com}{marceloclaro@gmail.com}\\
+        Professor -- Prefeitura de Crateús -- Ceará\\
+        
+        \vfill
+        \textbf{Crateús - CE}\\
+        \textbf{\the\year}
+    \end{center}
+\end{titlepage}
+
+% --- FOLHA DE APROVAÇÃO (BANCA EXAMINADORA) ---
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        \Large{\textbf{FOLHA DE APROVAÇÃO}}\\
+        \vspace{2cm}
+        \textbf{Prof. Marcelo Claro}\\
+        \vspace{1cm}
+        \textbf{Metodologia Científica e Arquitetura de Ecossistemas Multiagente}
+    \end{center}
+    
+    \vspace{1cm}
+    \begin{flushright}
+    \begin{minipage}{0.6\textwidth}
+    Projeto Pedagógico de Disciplina submetido à avaliação da Banca Examinadora como requisito para validação e inclusão no currículo de graduação/pós-graduação, visando a integração de Inteligência Artificial e rigor metodológico.
+    \end{minipage}
+    \end{flushright}
+    
+    \vspace{2cm}
+    \noindent Aprovado em: \rule{1cm}{0.1mm} / \rule{1cm}{0.1mm} / \the\year
+    
+    \vspace{1.5cm}
+    \begin{center}
+        \textbf{BANCA EXAMINADORA}\\
+        \vspace{1.5cm}
+        \rule{10cm}{0.1mm}\\
+        \textbf{Prof. Dr. [Nome do Presidente da Banca]}\\
+        Instituição: [Nome da Instituição] -- Presidente\\
+        \vspace{1.5cm}
+        \rule{10cm}{0.1mm}\\
+        \textbf{Prof. Dr. [Nome do Primeiro Examinador]}\\
+        Instituição: [Nome da Instituição]\\
+        \vspace{1.5cm}
+        \rule{10cm}{0.1mm}\\
+        \textbf{Prof. Dr. [Nome do Segundo Examinador]}\\
+        Instituição: [Nome da Instituição]
+    \end{center}
+\end{titlepage}
+
+% --- RESUMO ---
+\begin{abstract}
+\noindent O presente Projeto Pedagógico de Disciplina (PPD) propõe uma matriz curricular inédita que funde o rigor da Metodologia Científica tradicional com o estado da arte na Arquitetura de Ecossistemas Multiagente (Inteligência Artificial). Fundamentado no Artigo 205 da Constituição Federal, o projeto rompe a falsa dicotomia entre ensino humanístico e ensino mercadológico. Ao longo de 120 horas e 10 laboratórios práticos, o discente é capacitado a transitar dos paradigmas epistemológicos clássicos para a engenharia de \textit{software} aplicada (\textit{Model Context Protocol}, Inversão de Controle, \textit{Self-Healing} e RAG Adaptativo). O trabalho introduz, ainda, protocolos éticos rigorosos (Matriz TSAC) para prevenção de alucinação algorítmica e exige a proposição de estudos de caso para a resolução empírica de problemas em Crateús/CE. O perfil do egresso consolida a formação de um Pesquisador-Arquiteto Híbrido, preparado para a inovação acadêmica e soberania tecnológica.
+\vspace{0.5cm}\\
+\textbf{Palavras-chave:} Metodologia Científica. Ecossistemas Multiagente. Educação Superior. Inteligência Artificial. Crateús-CE.
+\end{abstract}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introdução e Contextualização Histórica}
+
+\subsection{A Crise dos Paradigmas Universitários e a Inércia Institucional}
+O cenário contemporâneo do ensino superior brasileiro e global encontra-se em uma encruzilhada epistemológica e pragmática. Historicamente, a universidade consolidou-se como o bastião da produção do conhecimento estruturado, operando sob metodologias científicas rigorosas forjadas ao longo dos séculos XIX e XX. Contudo, o advento da Inteligência Artificial Generativa e, mais especificamente, das arquiteturas de ecossistemas multiagente, impôs uma disrupção sem precedentes na velocidade, no processamento e na validação do saber. 
+
+As agências de fomento e regulação educacional brasileiras --- notadamente a Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES) e o próprio Ministério da Educação (MEC) --- enfrentam uma inércia institucional aguda. Observa-se uma protelação sistêmica no enfrentamento do debate sobre a reformulação das ementas universitárias. Os currículos de Metodologia Científica, presentes em quase todas as matrizes de graduação e pós-graduação, continuam a ser lecionados de forma puramente analógica, ignorando as ferramentas computacionais que hoje automatizam revisões sistemáticas da literatura, extrações de dados complexos e validações estatísticas. Esta obsolescência programada do currículo não representa apenas um atraso acadêmico, mas um risco à soberania tecnológica nacional.
+
+\subsection{O Mandamento Constitucional: O Falso Paradoxo entre Cidadania e Mercado}
+Frequentemente, o debate educacional no Brasil é capturado por uma falsa dicotomia: de um lado, defende-se uma educação estritamente humanista e voltada para a "cidadania"; de outro, uma educação puramente tecnicista e voltada para o "mercado de trabalho". A presente ementa rejeita categoricamente essa cisão, fundamentando-se na clareza da Constituição da República Federativa do Brasil de 1988 (CF/88).
+
+O \textbf{Artigo 205 da CF/88} estabelece o pilar fundamental desta argumentação:
+\begin{quote}
+    ``A educação, direito de todos e dever do Estado e da família, será promovida e incentivada com a colaboração da sociedade, visando ao pleno desenvolvimento da pessoa, seu preparo para o exercício da cidadania e sua qualificação para o trabalho.'' \footnote{BRASIL. Constituição da República Federativa do Brasil de 1988. Disponível em: \url{http://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm}}
+\end{quote}
+
+A Constituição não hierarquiza nem exclui; ela integra. A ``qualificação para o trabalho'' no alvorecer da Quarta Revolução Industrial exige, obrigatoriamente, a proficiência na orquestração de sistemas cognitivos e na arquitetura de Inteligência Artificial. Sem o domínio dessas ferramentas, o cidadão é relegado às margens do mercado de trabalho avançado, tornando-se refém da precarização. Simultaneamente, o ``preparo para o exercício da cidadania'' requer que o sujeito contemporâneo não seja um mero consumidor passivo de \textit{softwares} ou caixas-pretas algorítmicas, mas um arquiteto ativo capaz de auditar, compreender, refutar e estruturar ecossistemas autônomos. 
+
+Omitir o ensino da arquitetura de sistemas multiagente e integrá-la à metodologia científica é, portanto, promover uma exclusão sociotécnica que fere de morte o mandamento constitucional da educação inclusiva e emancipadora.
+
+\section{Fundamentação Epistemológica, Sociológica e Pedagógica}
+
+Para consolidar esta visão interdisciplinar, a proposta curricular ancora-se em quatro referenciais teóricos rigorosos, que conectam a educação crítica à vanguarda tecnológica.
+
+\subsection{A Pedagogia da Autonomia na Era Algorítmica}
+Paulo Freire (1996), em sua obra \textit{Pedagogia da Autonomia}, alerta que o ensino não pode se reduzir à mera transferência de dados (educação bancária). Na era dos Modelos de Linguagem de Grande Escala (LLMs), a informação tornou-se ubíqua e trivial. O verdadeiro saber crítico reside em como \textit{orquestrar} essa informação para a resolução de problemas reais. A apropriação crítica da técnica --- ensinando o aluno a programar e coordenar agentes de IA em vez de ser programado por eles --- é, na essência freiriana, um ato de libertação. A tecnologia deve estar a serviço da autonomia ontológica do sujeito.
+\footnote{FREIRE, P. \textit{Pedagogia da autonomia: Saberes necessários à prática educativa}. São Paulo: Paz e Terra, 1996.}
+
+\subsection{Cibercultura e a Inteligência Coletiva Multiagente}
+Pierre Lévy (1999) preconizou que o ciberespaço seria o vetor de emancipação por meio do que ele cunhou como ``Inteligência Coletiva''. Os ecossistemas multiagente (como o framework \textit{OpenCode}) representam a fronteira atual e a materialização dessa inteligência coletiva. Quando múltiplos agentes especializados (pesquisadores, revisores, programadores sintéticos) colaboram em rede, sob a batuta arquitetural do estudante humano, alcançamos o ápice da sinergia descrita por Lévy.
+\footnote{LÉVY, P. \textit{Cibercultura}. São Paulo: Ed. 34, 1999.}
+
+\subsection{A Quarta Revolução Industrial}
+Klaus Schwab (2016) evidencia que as inovações tecnológicas não estão apenas mudando o que fazemos, mas quem somos. A fusão de tecnologias físicas, biológicas e digitais cria um mercado de trabalho onde a vantagem competitiva pertence aos orquestradores de sistemas complexos. O currículo proposto prepara o acadêmico para liderar essa transição, unindo o rigor analítico das Ciências Clássicas com a engenharia de \textit{software} avançada.
+\footnote{SCHWAB, K. \textit{A Quarta Revolução Industrial}. Edipro, 2016.}
+
+\subsection{O Paradigma dos Agentes na Ciência}
+No campo técnico, Wooldridge e Jennings (1995) estabeleceram a base teórica dos agentes inteligentes (autonomia, reatividade, proatividade, habilidade social). Hoje, esse paradigma transcende a ciência da computação e torna-se a infraestrutura da pesquisa científica automatizada em campos como medicina, engenharias e ciências sociais, justificando a centralidade da arquitetura multiagente nesta ementa.
+\footnote{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \textit{The Knowledge Engineering Review}, v. 10, n. 2, p. 115-152, 1995.}
+
+\section{Identificação da Disciplina e Perfil do Egresso}
+
+\begin{tcolorbox}[colback=white,colframe=black,title=\textbf{Quadro 1 - Identificação Institucional da Disciplina}]
+\begin{itemize}[leftmargin=*,label=\textbf{-}]
+    \item \textbf{Código Formativo:} MC-101
+    \item \textbf{Nome da Disciplina:} Metodologia Científica e Arquitetura de Ecossistemas Multiagente
+    \item \textbf{Natureza Curricular:} Obrigatória com Trilha de Especialização Interdisciplinar
+    \item \textbf{Carga Horária Total:} 120 horas (6 créditos acadêmicos)
+    \item \textbf{Distribuição da CH:} 80 horas (Núcleo Básico) + 40 horas (Trilha de Especialização Avançada)
+    \item \textbf{Semestre Ideal:} 2º ou 3º semestre da Graduação; Ofertável também na Pós-Graduação.
+    \item \textbf{Pré-requisitos Curriculares:} Lógica Matemática, Estatística Básica e Introdução à Programação.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Ementa Curricular (Registro SIGAA/MEC)}
+\begin{tcolorbox}[colback=gray!5!white,colframe=black!75!black,title=\textbf{Texto Oficial da Ementa}]
+\noindent Fundamentos epistemológicos da ciência, falseabilidade e transições paradigmáticas. Desenho metodológico em abordagens quantitativas (pós-positivismo), qualitativas (interpretativismo) e pragmatistas (métodos mistos). Coleta de dados analógica e autônoma (\textit{APIs, Web Scraping} e Sensores IoT). Inferência estatística avançada (\textit{Cohen's d, Power Analysis}) e análise temática transversal. Arquitetura de Ecossistemas Multiagente: Padrão \textit{ReAct Loop}, \textit{Progressive Disclosure} e Orquestração em 6 camadas. Protocolo MCP (\textit{Model Context Protocol}) e Injeção de Dependência (DI). Engenharia de Sistemas de Autocura (\textit{Self-Healing}), evolução autônoma (\textit{AutoEvolve}) e engenharia reversa para documentação arquitetural. Teoria dos Jogos multiagente (Equilíbrio de Nash, \textit{NashSolver}) aplicada a debates sintéticos. Estratégias de Recuperação Aumentada por Geração (\textit{RAG Adaptativo, Graph RAG}). Ética algorítmica e auditoria de caixa-branca via restrição de \textit{prompts} sistêmicos (Matriz TSAC). Extensão e aplicação empírica de inteligência coletiva artificial para mitigação de problemas estruturais na gestão pública, saúde e educação local (Contexto: Sertão de Crateús/CE).
+\end{tcolorbox}
+
+\subsection{Currículo da Disciplina (Conteúdo Programático SIGAA)}
+\begin{tcolorbox}[colback=white,colframe=black!75!black,title=\textbf{Matriz Curricular Estrutural}]
+\begin{enumerate}
+    \item \textbf{Unidade I - Fundamentos Epistemológicos:} 1.1 Natureza do conhecimento e falseabilidade; 1.2 Transições paradigmáticas (Kuhn) e revolução algorítmica; 1.3 Paradigmas: Positivismo, Interpretativismo, Construtivismo Sociocultural e Teoria Crítica; 1.4 Classificação e taxonomia da pesquisa acadêmica.
+    \item \textbf{Unidade II - Design de Pesquisa Aplicada:} 2.1 Abordagem quantitativa (RCT, correlacional, longitudinal) e rigor de validade; 2.2 Abordagem qualitativa (Fenomenologia, Grounded Theory, Etnografia); 2.3 Análise Temática transversal; 2.4 Métodos mistos e pragmatismo investigativo.
+    \item \textbf{Unidade III - Coleta e Validação na Era Digital:} 3.1 Instrumentação clássica (Likert, entrevistas, grupos focais); 3.2 Coleta autônoma (\textit{Web Scraping}, APIs, telemetria/IoT); 3.3 Inferência quantitativa avançada (\textit{Cohen's d, Power Analysis}); 3.4 Sistematização qualitativa apoiada por software (CAQDAS/LLMs).
+    \item \textbf{Unidade IV - Arquitetura de Ecossistemas Multiagente:} 4.1 O Paradigma Agente e orquestração cognitiva (\textit{ReAct Loop}); 4.2 Arquitetura em 6 camadas (L1 a L6) do \textit{OpenCode Ecosystem}; 4.3 \textit{Model Context Protocol} (MCP) e conectividade universal; 4.4 Inversão de Controle e Container de Injeção de Dependência (DI).
+    \item \textbf{Unidade V - Autonomia Sistêmica e Engenharia Reversa:} 5.1 Protocolos de Autocura de código (\textit{Self-Healing Systems}); 5.2 Ciclo Evolutivo Autônomo e adaptação de diretrizes (\textit{AutoEvolve}); 5.3 Engenharia Reversa para documentação automatizada de arquiteturas e decisões lógicas (\textit{ADRs} e \textit{SDDs}).
+    \item \textbf{Unidade VI - Teoria dos Jogos e Recuperação Avançada:} 6.1 Matriz de 38 Tipos de Raciocínio (Lógico, Dialético, Estratégico, Inovação); 6.2 Equilíbrio de Nash e coordenação colaborativa/competitiva de \textit{Swarms}; 6.3 Ecossistemas RAG (\textit{Retrieval-Augmented Generation}) avançados; 6.4 \textit{White-Box Testing} e Matriz TSAC (Termos, Sintaxe e Construtos) anti-alucinação.
+\end{enumerate}
+\end{tcolorbox}
+
+\subsection{Perfil do Egresso e Trilhas de Carreira}
+Esta disciplina rejeita o modelo de formação em "lote". Ela foi desenhada para modular o conhecimento, preparando o egresso para três perfis de carreira altamente demandados nacional e internacionalmente:
+\begin{enumerate}
+    \item \textbf{O Pesquisador Acadêmico Aumentado:} Aquele que utilizará o conhecimento clássico das Unidades I a III aliado às ferramentas das Unidades IV e V para conduzir revisões bibliográficas em dias, em vez de meses, validando dados qualitativos e quantitativos em nível de doutorado rigoroso.
+    \item \textbf{O Arquiteto de Sistemas Cognitivos:} Profissional focado no mercado de inovação (Startups, Big Techs) que aplicará o protocolo MCP, \textit{Self-Healing} e Injeção de Dependências para construir fábricas de software automatizadas.
+    \item \textbf{O Pesquisador-Arquiteto Híbrido (O Estado da Arte):} O egresso capaz de fundir as duas pontas: criar ecossistemas robóticos e \textit{swarms} (enxames de IA) dedicados a resolver problemas metodológicos complexos, transformando a universidade em um polo de P\&D escalável.
+\end{enumerate}
+
+\section{Matriz de Competências e Habilidades}
+
+Baseando-se na Taxonomia de Bloom revisada (Lembrar, Entender, Aplicar, Analisar, Avaliar e Criar), o curso propõe a seguinte matriz de desenvolvimento:
+
+\subsection{Competências Epistemológicas e Metodológicas}
+\begin{itemize}
+    \item \textbf{Analisar} as correntes filosóficas subjacentes aos diferentes tipos de pesquisa (Positivismo vs. Construtivismo) e justificar sua adequação ao objeto de estudo.
+    \item \textbf{Avaliar} a validade interna, externa e a reprodutibilidade de desenhos experimentais e quase-experimentais em pesquisas aplicadas.
+    \item \textbf{Aplicar} frameworks de métodos mistos (Sequenciais e Convergentes) utilizando triagem computadorizada e \textit{Big Data}.
+\end{itemize}
+
+\subsection{Competências Arquiteturais e Tecnológicas}
+\begin{itemize}
+    \item \textbf{Criar} e configurar servidores locais utilizando o padrão \textit{Model Context Protocol (MCP)}, viabilizando a comunicação universal entre ferramentas do sistema operacional e Modelos de Linguagem.
+    \item \textbf{Aplicar} padrões de projeto avançados, especificamente Inversão de Controle (IoC) via Container de Injeção de Dependência (DI) em sistemas complexos.
+    \item \textbf{Entender e Avaliar} o ciclo de Autocura de software (\textit{Self-Healing}): Monitorar, Detectar, Diagnosticar, Reparar e Verificar.
+\end{itemize}
+
+\subsection{Competências Cognitivas e Estratégicas}
+\begin{itemize}
+    \item \textbf{Analisar} cenários de tomada de decisão baseando-se em uma matriz de 38 Tipos de Raciocínio (Lógico, Dialético, Teoria dos Jogos e Inovação).
+    \item \textbf{Aplicar} estratégias de Geração Aumentada por Recuperação (RAG) em bases vetoriais e grafos de conhecimento (\textit{Graph RAG}) para validação bibliográfica de alto rigor (Padrão Qualis A1).
+\end{itemize}
+
+\newpage
+\section{Ementário Analítico: Unidades I a III (O Rigor Científico)}
+
+\subsection{UNIDADE I - Fundamentos Epistemológicos da Ciência (16h)}
+\textbf{Objetivos Específicos:} Desconstruir o senso comum, mapear as transições de paradigmas científicos e estruturar a ética da falseabilidade.
+
+\textbf{Conteúdo Programático Detalhado:}
+\begin{itemize}
+    \item O que é o conhecimento? Distinções demarcatórias entre o senso comum, o pensamento teológico, as proposições filosóficas e o conhecimento científico sistemático.
+    \item A evolução do Método: Da dedução aristotélica e indução baconiana à falseabilidade de Karl Popper e os programas de pesquisa de Lakatos.
+    \item As Revoluções Científicas e a troca de paradigmas (Thomas Kuhn). Como a Inteligência Artificial configura uma nova revolução paradigmática.
+    \item Paradigmas Epistemológicos modernos: Positivismo, Pós-positivismo, Interpretativismo, Construtivismo Sociocultural, Teoria Crítico-Transformadora e o Pragmatismo instrumental de Peirce.
+    \item Classificações taxativas da pesquisa: Quanto à natureza (Básica, Aplicada, Translacional), aos objetivos (Exploratória, Descritiva, Explicativa, Preditiva) e aos procedimentos técnicos (Bibliográfica, Documental, Revisão Sistemática PRISMA, Etnografia).
+\end{itemize}
+
+\textbf{Leituras Obrigatórias para Consolidação e Seminário:}
+\begin{itemize}
+    \item POPPER, K. \textit{A lógica da pesquisa científica}. São Paulo: Cultrix, 2013. DOI/URL: \url{https://edisciplinas.usp.br/pluginfile.php/4395015/mod_resource/content/1/Popper_Logica-da-pesquisa-cientifica.pdf}
+    \item KUHN, T. S. \textit{A Estrutura das Revoluções Científicas}. Perspectiva, 1998. DOI: \url{https://doi.org/10.36311/2020.978-65-86546-87-3.p22-38}
+\end{itemize}
+
+\subsection{UNIDADE II - Paradigmas de Pesquisa em Educação e Sociedade (20h)}
+\textbf{Objetivos Específicos:} Capacitar o aluno no desenho de metodologias (Design de Pesquisa) robustas, garantindo validade interna e externa para dados ruidosos.
+
+\textbf{Conteúdo Programático Detalhado:}
+\begin{itemize}
+    \item \textbf{A Abordagem Quantitativa (Pós-Positivista):} Desenhos Experimentais (RCT), Desenhos Quase-experimentais. Desenhos Correlacionais e Longitudinais. A centralidade do Rigor: Validade (interna, externa, de construto), Confiabilidade, Poder Estatístico e Reprodutibilidade.
+    \item \textbf{A Abordagem Qualitativa (Interpretativista/Construtivista):} Fenomenologia (Husserl, Heidegger). O método \textit{Grounded Theory}. Etnografia clássica versus Netnografia (Virtual). Estudo de Caso (Yin). Pesquisa Narrativa.
+    \item \textbf{Análise Crítica de Discurso e Temática:} Análise de Discurso (Foucault), Análise de Conteúdo categorial (Bardin) e Análise Temática transversal (Braun \& Clarke).
+    \item \textbf{A Abordagem Crítica e Emancipatória:} Pesquisa-Ação participativa (Thiollent), Teoria Crítica e Teoria Racial Crítica.
+    \item \textbf{A Abordagem Mista (Pragmatista):} Design Sequencial Explanatório (QUAN $\rightarrow$ qual), Sequencial Exploratório (qual $\rightarrow$ QUAN) e Convergente Paralelo.
+\end{itemize}
+
+\textbf{Leituras Obrigatórias para Consolidação e Seminário:}
+\begin{itemize}
+    \item BRAUN, V.; CLARKE, V. Using thematic analysis in psychology. \textit{Qualitative Research in Psychology}, v. 3, n. 2, 2006. DOI: \url{https://doi.org/10.1191/1478088706qp063oa}
+    \item CRESWELL, J. W. \textit{Projeto de Pesquisa: Métodos Qualitativo, Quantitativo e Misto}. Artmed, 2010. URL: \url{https://edisciplinas.usp.br/pluginfile.php/6007886/mod_resource/content/1/Creswell.pdf}
+\end{itemize}
+
+\subsection{UNIDADE III - Técnicas de Coleta e Análise de Dados na Era Digital (16h)}
+\textbf{Objetivos Específicos:} Realizar a transição da coleta analógica para a extração digital massiva, instrumentando agentes na aquisição de variáveis empíricas.
+
+\textbf{Conteúdo Programático Detalhado:}
+\begin{itemize}
+    \item \textbf{Instrumentação Clássica:} Escalas Likert e diferenciais semânticos. Entrevistas semiestruturadas. Observação participante.
+    \item \textbf{Coleta Autônoma e Tecnológica:} Extração via APIs governamentais (Portal da Transparência, INEP). Arquitetura de \textit{Web Scraping} e Telemetria (IoT) aplicada à pesquisa social.
+    \item \textbf{Análise e Inferência Quantitativa:} Testes paramétricos (t-test, ANOVA) e não paramétricos. Análise multivariada e Regressão Múltipla. O imperativo ético do \textit{Tamanho do Efeito} (Cohen's d) e \textit{Power Analysis}.
+    \item \textbf{Sistematização Qualitativa (CAQDAS):} Codificação axial e seletiva via ATLAS.ti e NVivo, comparando-os com algoritmos \textit{customizados} de extração por LLMs.
+\end{itemize}
+
+\textbf{Leituras Obrigatórias para Consolidação e Seminário:}
+\begin{itemize}
+    \item BARDIN, L. \textit{Análise de Conteúdo}. São Paulo: Edições 70, 2011. URL: \url{https://www.icict.fiocruz.br/sites/www.icict.fiocruz.br/files/Analise%20de%20Conteudo%20-%20Laurence%20Bardin.pdf}
+    \item MITCHELL, R. \textit{Web Scraping with Python}. O'Reilly Media, 2018. DOI: \url{https://doi.org/10.1007/978-1-4842-3925-4}
+\end{itemize}
+
+\newpage
+\section{Ementário Analítico: Unidades IV a VI (A Fronteira Multiagente)}
+
+\subsection{UNIDADE IV - Arquitetura de Ecossistemas Multiagente (40h)}
+\textbf{Objetivos Específicos:} Dotar o acadêmico das hard skills necessárias para orquestrar dezenas de agentes simultâneos, rompendo os limites da pesquisa individual.
+
+\textbf{Conteúdo Programático Detalhado:}
+\begin{itemize}
+    \item \textbf{O Paradigma Agente e o ReAct Loop:} A ontologia do agente autônomo. O \textit{framework} cognitivo ReAct (THOUGHT $\rightarrow$ ACTION $\rightarrow$ OBSERVATION $\rightarrow$ REPEAT). Como estruturar \textit{Progressive Disclosure} em prompts.
+    \item \textbf{Arquitetura em 6 Camadas:} L1 (Infra e Filesystem), L2 (Dados e Quantum memórias), L3 (Skills), L4 (Camada de Rede/Protocolos), L5 (Agentes Executores) e L6 (Orquestração Meta-Granular).
+    \item \textbf{Injeção de Dependência e Design Patterns:} O princípio da Inversão de Controle (IoC). O padrão Singleton aplicado ao Container DI. O padrão \textit{Event-Bus} (Publish/Subscribe) para comunicação assíncrona. Padrão \textit{Quality Gates}.
+    \item \textbf{Model Context Protocol (MCP):} A relação Client-Host-Server via JSON-RPC. Gerenciamento de servidores Core, servidores de Busca (Sci-Hub), e Memória RAG.
+\end{itemize}
+
+\textbf{Leituras Obrigatórias para Consolidação e Seminário:}
+\begin{itemize}
+    \item YAO, S. et al. ReAct: Synergizing Reasoning and Acting in Language Models. \textit{ICLR}, 2023. DOI: \url{https://doi.org/10.48550/arXiv.2210.03629} 
+    \item CLARO, M. \textit{OpenCode Ecosystem Architecture Documentation}. Repositório OpenCode, 2024. URL: \url{https://github.com/MarceloClaro/OpenCode_Ecosystem}
+\end{itemize}
+
+\subsection{UNIDADE V - Automação, Self-Healing e Engenharia Reversa (12h)}
+\textbf{Objetivos Específicos:} Inserir ciclos autônomos de evolução sistêmica em rotinas de pesquisa e revisão de literatura.
+
+\textbf{Conteúdo Programático Detalhado:}
+\begin{itemize}
+    \item \textbf{Autocura (Self-Healing Systems):} O problema da degradação entrópica. Implementação prática do ciclo: Monitoramento, Detecção de \textit{crashes}, Diagnóstico via LLM, Reparação autônoma e Verificação de regressão.
+    \item \textbf{Evolução Autônoma (AutoEvolve):} O motor PLAN $\rightarrow$ ACT $\rightarrow$ REFLECT $\rightarrow$ EXTRACT $\rightarrow$ EVOLVE. Como a IA deduz novas ferramentas a partir de padrões de pesquisa de sucesso.
+    \item \textbf{Engenharia Reversa Automatizada:} Agentes "Detetives" para dissecar artigos complexos. Geração autônoma de \textit{Architecture Decision Records} (ADRs).
+\end{itemize}
+
+\textbf{Leituras Obrigatórias para Consolidação e Seminário:}
+\begin{itemize}
+    \item WANG, L. et al. A Survey on Large Language Model based Autonomous Agents. \textit{Frontiers of Computer Science}, 2024. DOI: \url{https://doi.org/10.48550/arXiv.2308.11432}
+    \item GHOSH, D. et al. Self-Healing Systems: Survey and Synthesis. \textit{Decision Support Systems}, 2007. DOI: \url{https://doi.org/10.1016/j.dss.2005.05.019}
+\end{itemize}
+
+\subsection{UNIDADE VI - Teoria dos Jogos e Computação Quântica Aplicada (16h)}
+\textbf{Objetivos Específicos:} Aplicar modelos matemáticos de interação estratégica e recuperação estocástica de dados.
+
+\textbf{Conteúdo Programático Detalhado:}
+\begin{itemize}
+    \item \textbf{Matriz de 38 Tipos de Raciocínio:} Categorias Lógico, Dialético, de Decisão Estratégica e Inovação.
+    \item \textbf{Teoria dos Jogos Multiagente:} A matemática do Equilíbrio de Nash. Dominância e Sinalização. Modelagem de \textit{Debates Multiagentes} com NashSolver.
+    \item \textbf{Ecossistemas RAG Avançados:} 9 Estratégias: Vanilla, Agentic, Hybrid, Graph RAG (Neo4j), CRAG e Fusion RAG.
+    \item \textbf{Computação Quântica em Machine Learning (Básico):} \textit{Variational Quantum Circuits} (VQC). Simulação de tensores e mitigações (ZNE, PEC) na otimização paramétrica de pesquisa acadêmica.
+\end{itemize}
+
+\textbf{Leituras Obrigatórias para Consolidação e Seminário:}
+\begin{itemize}
+    \item NASH, J. Equilibrium points in n-person games. \textit{Proceedings of the National Academy of Sciences}, 1950. DOI: \url{https://doi.org/10.1073/pnas.36.1.48}
+    \item LEWIS, P. et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. \textit{NeurIPS}, 2020. DOI: \url{https://doi.org/10.48550/arXiv.2005.11401}
+\end{itemize}
+
+\newpage
+\section{A Ética Algorítmica e a Matriz TSAC (Anti-Alucinação)}
+
+Uma das maiores ameaças ao uso acadêmico de inteligências artificiais é o fenômeno da alucinação de dados e a geração de textos genéricos (bovários). A disciplina propõe, de forma pioneira, a implementação compulsória do \textbf{Protocolo TSAC (Termos, Sintaxe e Construtos Anti-IA)}, uma matriz auditável para garantir a higienização lexical e a originalidade humana na orquestração dos artigos gerados pelo ecossistema.
+
+\subsection{A Matriz de Termos Interditos (Os 87 Banned Words)}
+Os agentes do \textit{OpenCode Ecosystem} criados pelos alunos serão submetidos a uma restrição de \textit{prompt} sistêmico (Negative Prompting) que bloqueia palavras recorrentes em textos gerados por LLMs comerciais. A proibição foca na erradicação de marcadores sintáticos rasos, incluindo:
+\begin{itemize}
+    \item \textbf{Substantivos e Adjetivos Genéricos:} ``teia'', ``trama'', ``sinfonia'', ``mosaico'', ``intrínseco'', ``inestimável'', ``revolucionário''.
+    \item \textbf{Conectivos e Clichês:} ``em suma'', ``não apenas... mas também'', ``é importante notar que'', ``dança complexa'', ``um testemunho de''.
+\end{itemize}
+
+\subsection{White-Box Testing e Validação Empírica (Qualis A1)}
+Além da restrição lexical, o ecossistema exigirá que toda afirmação baseada em LLM contenha a respectiva chamada de função (\textit{tool call}) logada, demonstrando a extração do dado via RAG a partir de um PDF autêntico. Este método reverte o estigma do "AI-Ghostwriter" para o "AI-Auditor", adequando os papers às exigências das publicações de altíssimo impacto (Nível Qualis A1) e protegendo os discentes contra comitês de ética conservadores.
+
+\newpage
+\section{Plano de Laboratórios Práticos Obrigatórios (60 horas)}
+
+A metodologia Hands-on desta disciplina exige a entrega de um artefato verificável e funcional por laboratório, ancorado nos princípios da Engenharia de Software.
+
+\begin{longtable}{p{0.15\textwidth} p{0.80\textwidth}}
+\toprule
+\textbf{Laboratório} & \textbf{Descrição da Atividade, Métodos e Entregáveis} \\
+\midrule
+\endfirsthead
+\textbf{Lab 01} & \textbf{O Agente Minimalista (ReAct em Markdown)} \newline \textit{Meta:} Escrever do zero as instruções de sistema de um agente de pesquisa, implementando o formato delimitado de ferramentas. \newline \textit{Entregável:} Arquivo YAML/MD limpo, validado em API. \\
+\midrule
+\textbf{Lab 02} & \textbf{Progressive Disclosure em Skills} \newline \textit{Meta:} Implementar uma \textit{Skill} que só revela complexidade após avaliar a resposta do usuário, economizando tokens. \newline \textit{Entregável:} Módulo validado em \textit{sandbox}. \\
+\midrule
+\textbf{Lab 03} & \textbf{Construção de Servidor MCP Nativo} \newline \textit{Meta:} Desenvolver servidor MCP expondo ferramentas estatísticas locais para um LLM. \newline \textit{Entregável:} Servidor JSON-RPC operando no stdio. \\
+\midrule
+\textbf{Lab 04} & \textbf{O Padrão DI (Inversão de Controle)} \newline \textit{Meta:} Programar o Container Singleton para gerenciar estado e eventos. \newline \textit{Entregável:} Script Pytest com $100\%$ de cobertura. \\
+\midrule
+\textbf{Lab 05} & \textbf{Swarms: Orquestração Multiagente} \newline \textit{Meta:} Coordenar três agentes (Analista, Matemático, Revisor) em debate isolado para refutar uma hipótese do IBGE. \newline \textit{Entregável:} Log estruturado das chamadas. \\
+\midrule
+\textbf{Lab 06} & \textbf{Autocura em SO (Self-Healing)} \newline \textit{Meta:} Corromper intencionalmente o agente; o \textit{Self-Healer} deve corrigir o arquivo YAML em tempo de execução. \newline \textit{Entregável:} Diff limpo pós-correção. \\
+\midrule
+\textbf{Lab 07} & \textbf{Bridge Interoperável} \newline \textit{Meta:} Acoplar Node.js (Playwright web scraping) com Python (Pandas/SciPy). \newline \textit{Entregável:} Integração inter-processos fluida. \\
+\midrule
+\textbf{Lab 08} & \textbf{Arquitetura RAG Adaptativa} \newline \textit{Meta:} Pipeline que ingira 10 PDFs locais, vetorize e use métrica Fusion. \newline \textit{Entregável:} Agente que cita PDFs sem alucinação. \\
+\midrule
+\textbf{Lab 09} & \textbf{Validação Estatística (Cohen's d)} \newline \textit{Meta:} Fornecer dataset ruidoso; a IA aplica Correção de Bonferroni autonomamente. \newline \textit{Entregável:} Gráficos de inferência gerados por script Python injetado via LLM. \\
+\midrule
+\textbf{Lab 10} & \textbf{Integração Final do Ecossistema} \newline \textit{Meta:} Juntar MCP, Agentes, DI, RAG, Self-healing em microssistema independente. \newline \textit{Entregável:} Repositório GitHub empacotado. \\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section{O Módulo de Nivelamento: Andaimagem Cognitiva}
+
+A fraqueza sistêmica primária no ensino de ecossistemas algorítmicos em cursos universitários heterogêneos é a tecnofobia ou o choque técnico de estudantes advindos de cursos como Pedagogia, Sociologia ou Letras. Para garantir a isonomia da turma, as duas primeiras semanas de aula consistem em um \textbf{Bootcamp Intensivo de Andaimagem Cognitiva} (fundamentado em Vygotsky).
+
+\subsection{Currículo do Módulo Zero (16 horas de Nivelamento)}
+\begin{enumerate}
+    \item \textbf{A Lógica das Caixas (Variáveis e Memória):} Como o computador aloca dados na memória e a diferença prática entre Inteiros, \textit{Strings} e JSON. Prática focada em planilhas do Excel transpostas para formatos de texto (CSV/JSON).
+    \item \textbf{Controle de Fluxo Analógico:} Estruturas de decisão (Se/Então - If/Else) aplicadas não em código complexo, mas em fluxogramas desenhados no quadro para modelagem de árvores de decisão sociológica.
+    \item \textbf{Engenharia de Prompts Estrutural:} Substituição da linguagem de programação clássica pelo "Inglês/Português como linguagem de máquina". Como instruir o modelo a pensar metodicamente (\textit{Chain-of-Thought}).
+    \item \textbf{Git e GitHub Básico:} Desmistificação do controle de versão. Como salvar um arquivo texto remotamente, o que é um \textit{commit} e como ler um \textit{Pull Request} simples.
+\end{enumerate}
+Com esta andaimagem, o estudante de Humanidades não precisa se tornar um Engenheiro de Software em 2 semanas, mas adquire fluência sintática para fazer \textit{Pair Programming} com alunos de Exatas nas fases subsequentes da disciplina.
+
+\newpage
+\section{Cronograma Físico e Analítico de Aulas (15 Semanas)}
+
+Esta seção detalha o planejamento tático do curso, dividindo as 120 horas em 15 encontros semanais de 8 horas (4h Teoria Epistemológica + 4h Laboratório Técnico).
+
+\begin{tabularx}{\textwidth}{|c|X|X|}
+\hline
+\textbf{Semana} & \textbf{Foco Teórico (Manhã - 4h)} & \textbf{Foco Prático (Tarde - 4h)} \\
+\hline
+01 e 02 & \textbf{Módulo Zero:} Andaimagem Cognitiva. Variáveis, lógica de fluxo, Git básico. & \textbf{Prática No-Code:} Fluxogramas e criação do primeiro prompt estruturado. \\
+\hline
+03 & \textbf{Unidade I:} Senso comum vs. Ciência. A Falseabilidade de Popper e Paradigmas. & \textbf{Lab 01:} Criação do Agente Minimalista e formatação de YAML/MD. \\
+\hline
+04 & \textbf{Unidade II:} Positivismo vs. Interpretativismo. Desenho Experimental e RCT. & \textbf{Lab 02:} Implementação de Progressive Disclosure em diretrizes (Skills). \\
+\hline
+05 & \textbf{Unidade II:} Métodos Mistos. A ontologia do Grounded Theory e Estudo de Caso. & Debate socrático sobre viés algorítmico na análise qualitativa temática. \\
+\hline
+06 & \textbf{Unidade III:} Coleta Digital. Web Scraping, APIs e o perigo das métricas de vaidade. & \textbf{Lab 03:} Codificação e subida de um Servidor MCP básico JSON-RPC. \\
+\hline
+07 & \textbf{Unidade III:} Validação Estatística. Cohen's D, ANOVA, Power Analysis. & \textbf{Lab 04:} Container de Injeção de Dependência (Event-bus e DI). \\
+\hline
+08 & \textbf{Unidade IV:} O ReAct Loop. Como a IA simula agência e proatividade. & \textbf{Lab 05:} Orquestração de Swarms (3 agentes debatendo estatísticas). \\
+\hline
+09 & \textbf{Unidade IV:} A Arquitetura das 6 Camadas de um Ecossistema Complexo. & Consolidação do Lab 05 e leitura de Architecture Decision Records (ADRs). \\
+\hline
+10 & \textbf{Unidade V:} Degradação de Software, Entropia e Self-Healing autônomo. & \textbf{Lab 06:} Corrompendo código e testando a Autocura do sistema em tempo real. \\
+\hline
+11 & \textbf{Unidade V:} Engenharia Reversa. Agentes como Detetives e Arqueólogos de código legado. & \textbf{Lab 07:} Bridge entre linguagens (Node.js/Playwright e Python/Pandas). \\
+\hline
+12 & \textbf{Unidade VI:} Teoria dos Jogos e o Equilíbrio de Nash em debates LLM. & \textbf{Lab 08:} Criando o Pipeline RAG (Retrieval) com PDFs indexados e injetados. \\
+\hline
+13 & \textbf{Unidade VI:} Os 38 tipos de raciocínio. Computação Quântica conceitual (VQC). & \textbf{Lab 09:} Validação Estatística autônoma. IA gerando gráficos sem erro. \\
+\hline
+14 & \textbf{Integração Sistêmica:} Revisão de todos os protocolos da matriz TSAC anti-alucinação. & \textbf{Lab 10:} Empacotamento do Ecossistema no GitHub (Health Check final). \\
+\hline
+15 & \textbf{Banca Final:} Apresentação do Projeto Integrador (Artigo + Código Fonte). & Defesa oral das escolhas epistemológicas do ecossistema voltado para Crateús. \\
+\hline
+\end{tabularx}
+
+\newpage
+\section{Análise Estratégica SWOT e Viabilidade Institucional}
+
+Para garantir a implantação sistêmica desta ementa perante os conselhos universitários e a CAPES, realizou-se uma Análise SWOT Educacional. O objetivo é diagnosticar a resiliência do projeto, mitigando vulnerabilidades antes de sua aprovação.
+
+\subsection{Forças (Strengths): Interdisciplinaridade e Construcionismo}
+A principal força desta ementa é a intersecção inédita entre o rigor filosófico e a vanguarda tecnológica. Esta força é corroborada por \textbf{Edgar Morin} em sua teoria da \textit{Complexidade}, que postula que o ensino fragmentado cega o sujeito. Ao unir Epistemologia com Ecossistemas Multiagente, o curso força o pensamento complexo e totalitário. Adicionalmente, \textbf{Seymour Papert} demonstrou que a aprendizagem atinge seu ápice quando o estudante constrói um artefato público. A força motriz aqui não é ensinar ``sobre'' IA de forma passiva, mas programar a IA, colocando o discente no controle intelectual.\footnote{MORIN, E. Introdução ao pensamento complexo. 2005 / PAPERT, S. Mindstorms. 1980.}
+
+\subsection{Fraquezas (Weaknesses) e suas Resoluções Sistêmicas}
+\textbf{Fraqueza Diagnosticada:} A curva de aprendizado técnico acentuada (tecnofobia). 
+
+\textbf{Solução (Scaffolding e Nivelamento):}
+Para neutralizar esta fraqueza, incorpora-se a teoria de \textbf{Lev Vygotsky} (Zona de Desenvolvimento Proximal) através de ações de \textit{scaffolding}: O Módulo Zero (Bootcamp Lógico), o Pair Programming Epistêmico obrigatório (Exatas + Humanas) e a disponibilização de Infraestrutura em Nuvem (\textit{Google Colab}) para mitigar a ausência de maquinário potente na base estudantil.
+
+\subsection{Oportunidades (Opportunities): Extensão e Inovação Local}
+A disciplina apresenta um formidável vetor de Extensão Universitária ao orientar o Projeto Final para problemas empíricos. Existe a oportunidade de captar financiamentos via Editais de Inovação (FUNCAP, FINEP, CAPES) incubando governança algorítmica voltada para a gestão pública municipal de Crateús.
+
+\subsection{Ameaças (Threats): Conservadorismo Acadêmico}
+\textbf{Ameaça Diagnosticada:} A resistência acadêmica que confunde automação algorítmica com plágio e desonestidade intelectual. 
+
+\textbf{Resolução Implementada:} A adoção militar da Matriz TSAC e do \textit{White-Box Testing} (logs de auditoria para cada inferência gerada) aniquila o argumento do plágio. A IA opera explicitamente como laboratório validador transparente e nunca como *Ghostwriter*.
+
+\newpage
+\section{Estudos de Caso Regionais: Ecossistemas Multiagente Aplicados a Crateús/CE}
+
+A culminância metodológica da disciplina reside em transpor a fronteira do silício para a poeira da realidade concreta. O Projeto Final exige a aplicação do ecossistema em dores empíricas da região do Sertão de Crateús. Abaixo, exemplos de \textit{casos de uso} esperados para TCCs e publicações:
+
+\subsection{Caso de Uso 1: Regulação de Filas do SUS via NashSolver}
+\textbf{O Problema:} Gargalos logísticos e superlotação nas unidades de pronto atendimento municipais. \\
+\textbf{O Ecossistema Proposto:} O aluno arquiteta 3 Agentes: um Agente de Triagem (extrai relatórios via RAG), um Agente Médico (pondera urgências clínicas) e um Agente Auditor (verifica teto de gastos). Eles interagem em um ambiente simulado pelo \textit{NashSolver} (Unidade VI) para encontrar um Equilíbrio de Nash que maximize a taxa de atendimento e minimize o custo logístico. Todo o cálculo é validado e o log é extraído para a prefeitura.
+
+\subsection{Caso de Uso 2: Monitoramento Hídrico e Previsão do Semiarido}
+\textbf{O Problema:} Insegurança climática para a agricultura familiar na bacia do Rio Poti. \\
+\textbf{O Ecossistema Proposto:} Uso do servidor MCP (Lab 03 e Lab 07) para acoplar a IA a uma API da FUNCEME. O agente realiza \textit{Web Scraping} diário dos níveis dos açudes. Quando o nível hídrico cai além da predição estatística padrão (\textit{Power Analysis}), um \textit{Self-Healing trigger} notifica a cooperativa agrícola de Crateús via webhook, sugerindo alterações de irrigação fundamentadas na literatura agronômica (lida autônoma via RAG).
+
+\subsection{Caso de Uso 3: Mitigação Sistêmica de Evasão Escolar}
+\textbf{O Problema:} Identificação tardia de vulnerabilidade em escolas da rede municipal. \\
+\textbf{O Ecossistema Proposto:} O aluno desenha um pipeline \textit{Mixed Methods} (Unidade II). Um agente analisa dados quantitativos de presença no diário eletrônico (Positivismo), enquanto outro agente faz a análise temática (Interpretativismo) das anotações qualitativas dos coordenadores escolares, gerando Alertas Prévios com precisão de Cohen's d validada, não ferindo a privacidade graças ao processamento 100\% local do ecossistema \textit{OpenCode}.
+
+\newpage
+\section{Metodologia de Avaliação e Rubricas Analíticas Extensas}
+
+Para afastar a subjetividade na avaliação, o projeto final integrador (Submissão do Artigo Qualis A1 + Repositório GitHub) será classificado rigorosamente pelas matrizes abaixo. A nota mínima para aprovação é 75.
+
+\subsection{Rubrica A: Rigor Metodológico e Epistemológico (Peso 30\%)}
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.15\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Nível} & \textbf{Descrição do Desempenho} \\
+\hline
+\textbf{Avançado (25-30 pts)} & Justificativa impecável do paradigma (ex: Pragmatista). Múltiplos testes estatísticos (Cohen's d, ANOVA) aplicados corretamente e evidenciados pela IA. Ausência total de alucinação de dados. Aplicação rígida da Matriz TSAC. \\
+\hline
+\textbf{Adequado (15-24 pts)} & O paradigma foi referenciado mas as justificativas são genéricas. Validação quantitativa básica (apenas médias). Alguns deslizes de sintaxe gerada por IA detectados mas que não invalidam a conclusão. \\
+\hline
+\textbf{Insuficiente (0-14 pts)} & Ausência de validação (IA gerou o texto sem provas matemáticas/qualitativas). Confusão paradigmática crônica e detecção de plágio/viés cognitivo extremo. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Rubrica B: Excelência Arquitetural e Código (Peso 40\%)}
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.15\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Nível} & \textbf{Descrição do Desempenho} \\
+\hline
+\textbf{Avançado (35-40 pts)} & O código \textit{Python/TS} roda de primeira no contêiner. O padrão \textit{ReAct} orquestra múltiplos agentes sem \textit{Race Condition}. A Injeção de Dependências (DI) é limpa e 100\% independente. A autocura (\textit{Self-Healing}) funcionou em teste induzido. \\
+\hline
+\textbf{Adequado (20-34 pts)} & O código roda com pequenos gargalos. A comunicação via servidor MCP apresenta \textit{timeouts} mas resolve o problema final. Falta documentação ou testes automatizados (\textit{Pytest}) falham esporadicamente. \\
+\hline
+\textbf{Insuficiente (0-19 pts)} & O ecossistema é um script monolítico (ausência de Container DI). \textit{Hardcoding} de senhas. Looping infinito do agente ou quebra estrutural massiva (Fatal Error). \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Rubrica C: Diagramação, Extensão e Formatação LaTeX (Peso 30\%)}
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.15\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Nível} & \textbf{Descrição do Desempenho} \\
+\hline
+\textbf{Avançado (25-30 pts)} & Compilação impecável em LaTeX sem \textit{Overfull hboxes} grosseiros. Bibliografia perfeita (BibTeX). Citações obrigatórias presentes e problema empírico de Crateús/CE excelentemente caracterizado. Padrão visual de publicação *Qualis A1*. \\
+\hline
+\textbf{Adequado (15-24 pts)} & Erros mínimos de compilação ou diagramação quebrada em tabelas. O texto aborda o problema regional de forma genérica. As referências não estão padronizadas completamente. \\
+\hline
+\textbf{Insuficiente (0-14 pts)} & O artigo foi feito em editores de texto WYSIWYG convencionais ao invés de LaTeX. Desorganização visual crítica e desrespeito às normas de formatação (ABNT/APA). \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+\section{Conclusão do Projeto Pedagógico}
+
+Mais do que uma ementa, o que se apresenta é um tratado de transição geracional para o ecossistema educacional e científico brasileiro. Formar pesquisadores sob as premissas deste curso significa dotar a Universidade --- e, em última instância, a Nação --- com uma vanguarda intelectual capaz não apenas de consumir a inteligência artificial desenvolvida no eixo global do norte, mas de conceber as raízes arquiteturais da próxima evolução cibernética de forma alinhada ao imperativo de soberania e cidadania previsto no Artigo 205 da Constituição da República. O estudante da MC-101 não conclui um semestre; ele forja uma chave-mestra epistemológica para o século XXI.
+
+\end{document}

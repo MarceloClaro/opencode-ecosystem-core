@@ -1,0 +1,164 @@
+% =============================================================================
+% FICHAMENTO DE LEITURA — MODELO ESTRUTURADO
+% =============================================================================
+% Características do fichamento:
+%   - Registro sistemático de leitura
+%   - Organizado por autor/obra
+%   - Combina citações diretas, paráfrases e análise crítica
+%   - Útil para revisão de literatura, dissertações e teses
+% =============================================================================
+\documentclass[
+  12pt,
+  a4paper,
+  brazilian
+]{article}
+
+% --- Pacotes ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian,portuges]{babel}
+\usepackage[alf]{abntex2cite}
+\usepackage{abntex2abrev}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{microtype}
+
+% --- Margens ---
+\geometry{
+  a4paper,
+  left=3cm,
+  top=3cm,
+  right=2cm,
+  bottom=2cm
+}
+
+\onehalfspacing
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black
+}
+
+\title{Fichamentos de Leitura}
+\author{Nome do Pesquisador}
+\date{2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instruções}
+
+Cada fichamento deve conter:
+\begin{enumerate}
+  \item \textbf{Referência completa} da obra (ABNT NBR 6023:2018)
+  \item \textbf{Palavras-chave} representativas do conteúdo fichado
+  \item \textbf{Citações diretas} transcritas com página
+  \item \textbf{Paráfrases} com indicação de página
+  \item \textbf{Comentário crítico} do pesquisador
+  \item \textbf{Conexão} com outros autores e com a própria pesquisa
+\end{enumerate}
+
+\newpage
+
+% ============================================================================
+% FICHAMENTO 1
+% ============================================================================
+\section*{Fichamento 1}
+\addcontentsline{toc}{section}{Fichamento 1 — Autor, Ano}
+
+\begin{longtable}{p{3cm} p{12cm}}
+\toprule
+\textbf{Obra} & SOBRENOME, Nome. \textit{Título do Livro}: subtítulo.
+               Edição. Cidade: Editora, Ano. \\
+\textbf{Palavras-chave} & Conceito A; Conceito B; Metodologia C \\
+\midrule
+\textbf{Citações diretas} &
+  ``A citação direta com indicação de página (Autor, ano, p. X).'' \\
+&
+  ``Outra citação direta relevante (Autor, ano, p. Y).'' \\
+\midrule
+\textbf{Paráfrases} &
+  No parágrafo que trata de [tema], o autor argumenta que... (Autor, ano, p. Z). \\
+&
+  O conceito de [conceito] é definido como... (Autor, ano, p. W). \\
+\midrule
+\textbf{Comentário crítico} &
+  \textit{Análise do pesquisador:} este conceito dialoga diretamente
+  com o referencial teórico adotado na dissertação, especialmente com
+  a noção de [conceito relacionado] desenvolvida por [outro autor]. \\
+&
+  \textit{Questão em aberto:} como operacionalizar este conceito em
+  uma pesquisa empírica com [características do contexto]? \\
+\midrule
+\textbf{Conexões} &
+  \begin{itemize}[nosep]
+    \item Dialogar com: \cite{autor2023}
+    \item Contradizer: \cite{autor2021}
+    \item Aprofundar: \cite{autor2020}
+  \end{itemize} \\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+% ============================================================================
+% FICHAMENTO 2
+% ============================================================================
+\section*{Fichamento 2}
+\addcontentsline{toc}{section}{Fichamento 2 — Autor, Ano}
+
+\begin{longtable}{p{3cm} p{12cm}}
+\toprule
+\textbf{Obra} & SOBRENOME, Nome. ``Título do artigo.'' \textit{Nome do
+               Periódico}, v. X, n. Y, p. Z--W, Ano. \\
+\textbf{Palavras-chave} & Tema A; Abordagem B; Contexto C \\
+\midrule
+\textbf{Citações diretas} &
+  ``Citação direta do artigo (Autor, ano, p. X).'' \\
+\midrule
+\textbf{Paráfrases} &
+  Síntese do argumento central do artigo (Autor, ano, p. X--Y). \\
+\midrule
+\textbf{Comentário crítico} &
+  \textit{Contribuição:} este artigo oferece uma metodologia robusta
+  para análise de [fenômeno] em [contexto]. \\
+&
+  \textit{Limitação:} a amostra restrita a [descrição] limita a
+  generalização dos resultados. \\
+\midrule
+\textbf{Conexões} &
+  \begin{itemize}[nosep]
+    \item Base metodológica para o Capítulo 3
+    \item Resultados contradizem \cite{autor2022}
+  \end{itemize} \\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\section*{Índice de Fichamentos}
+
+\begin{longtable}{lll}
+\toprule
+\textbf{\#} & \textbf{Autor (Ano)} & \textbf{Tema Central} \\
+\midrule
+1 & Sobrenome (2023) & Conceito principal \\
+2 & Sobrenome (2021) & Metodologia de análise \\
+3 & Sobrenome (2020) & Revisão teórica \\
+\bottomrule
+\end{longtable}
+
+\section*{Referências}
+
+\bibliographystyle{abntex2-alf}
+\bibliography{fichamento_bib}
+
+\end{document}

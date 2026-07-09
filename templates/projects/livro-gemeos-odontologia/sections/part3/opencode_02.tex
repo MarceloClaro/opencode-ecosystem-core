@@ -1,0 +1,38 @@
+\section{Arquitetura em Camadas}
+
+A viabilidade de um gêmeo digital em odontologia depende intrinsecamente da robustez arquitetônica que sustenta suas operações computacionais. A arquitetura do OpenCode Ecosystem afasta-se do acoplamento forte comum em \textit{softwares} médicos proprietários, adotando um modelo estritamente hierárquico, distribuído e fracamente acoplado. Essa organização topológica garante isolamento de falhas, reprodutibilidade de experimentos e escalabilidade horizontal, sendo segmentada em seis camadas ontológicas principais.
+
+\subsection{Camada 0: Infraestrutura e Substrato Computacional}
+A base estrutural (Camada 0) assegura a governança sobre os recursos computacionais brutos. Além do provimento tradicional de processamento e memória, esta camada orquestra modelos de linguagem fundacionais, com destaque para a inferência local e parametrizada (\textit{on-premise}) via \textit{frameworks} como Ollama. A execução local é um preceito inegociável quando se lida com dados sensíveis de pacientes (como imagens DICOM e sequenciamentos genômicos), garantindo conformidade com regulações internacionais de privacidade e sigilo médico, um desafio recorrente na adoção de tecnologias de nuvem pura na saúde~\cite{Menon2026}.
+
+\subsection{Camada 1: Model Context Protocol (MCP)}
+A Camada 1 resolve o problema da fragmentação de dados e da interoperabilidade. Compreende 46 servidores MCP dedicados que estabelecem contratos de interface padronizados entre os agentes cognitivos e os recursos externos. No contexto do DT odontológico, as integrações incluem:
+\begin{itemize}
+    \item \textbf{Busca e pesquisa semântica:} Ferramentas como \textit{scihub} e \textit{context7} permitem o ancoramento das decisões clínicas na literatura científica em tempo real, mitigando o viés algorítmico.
+    \item \textbf{Navegação e interação:} Motores \textit{headless} (Playwright, Chrome DevTools) para extração contínua de metadados em sistemas de teleodontologia.
+    \item \textbf{Execução isolada de código:} Sandboxes interpretativos (\textit{python-interpreter}, \textit{code-runner}) para execução de rotinas de cálculo de elementos finitos (FEM) diretamente no contexto do agente~\cite{Zhang2024}.
+    \item \textbf{Raciocínio sequencial e memória:} Vetorização de contexto (\textit{sequential-thinking}) que mantém a coerência temporal do paciente em acompanhamentos longitudinais ortodônticos.
+\end{itemize}
+
+\subsection{Camada 2: Skills (Habilidades Especializadas)}
+As capacidades ativas do ecossistema residem na Camada 2, um catálogo de 227 \textit{skills} distribuídas funcionalmente. Para a pesquisa médica avançada, a categoria \textbf{Science} (38 habilidades) é particularmente disruptiva. Integra conectores nativos para repositórios genômicos, transcriptômicos e proteômicos (AlphaFold, PubMed, ChEMBL, UniProt, ClinVar, gnomAD, entre outros). A aplicação destas ferramentas transcende a odontologia clássica, permitindo simulações moleculares do biofilme dentário ou a predição estrutural de proteínas do ligamento periodontal frente a estímulos mecânicos ortodônticos~\cite{Li2025, Roy2025}.
+
+\subsection{Camada 3: Agentes Autônomos}
+A inteligência distribuída é consolidada pelos 128 agentes da Camada 3. Operando de forma assimétrica e especializada, incluem:
+\begin{itemize}
+    \item \textbf{Agentes Core (56):} Orquestradores algorítmicos que mantêm o controle de fluxo, efetuam o \textit{code review} científico e asseguram a resiliência sistêmica.
+    \item \textbf{Agentes MASWOS (49):} Um \textit{pipeline} voltado exclusivamente para a criação e auditoria de redação científica Qualis A1, transformando a saída bruta dos gêmeos digitais em literatura médica publicável e revisada por pares.
+    \item \textbf{Agentes SEEKER (12):} Especialistas em pesquisa profunda, construindo árvores argumentativas com triangulação heurística de fontes primárias.
+\end{itemize}
+
+\subsection{Camada 4: Motores de Raciocínio Formal}
+Para superar as limitações estocásticas e as alucinações inerentes aos \textit{Large Language Models} (LLMs), a Camada 4 embute quatro motores determinísticos de inferência:
+\begin{itemize}
+    \item \textbf{Z3 Theorem Prover (Microsoft):} Verificador formal que garante que as restrições geométricas ou biológicas na modelagem tridimensional (ex.: limites corticais ósseos) nunca sejam violadas.
+    \item \textbf{SymPy:} Motor de computação simbólica que processa cálculos diferenciais exatos exigidos pelas simulações biomecânicas.
+    \item \textbf{miniKanren:} Programação lógica relacional para cruzamento complexo de fenótipos e patologias.
+    \item \textbf{Critical Engine:} Uma malha de auditoria cognitiva focada na neutralização de vieses epistemológicos e detecção de falácias argumentativas nas recomendações de tratamento.
+\end{itemize}
+
+\subsection{Camada 5: Orquestração Multiagente e Sincronização}
+O ápice arquitetônico é a Camada 5, responsável pela sincronia estrita das operações. Empregando 488 pontos de barreira lógica (sincronização) e 120 \textit{loops} de \textit{feedback}, essa estrutura coordena os conflitos inerentes a redes distribuídas de decisão médica. Análogo a arquiteturas abertas propostas por Robles et al. (2023)~\cite{Robles2023} no projeto OpenTwins, a orquestração multiagente do OpenCode garante convergência de estados — um requisito sem o qual qualquer réplica virtual de um sistema fisiológico humano falharia em sustentar previsibilidade clínica.

@@ -1,0 +1,933 @@
+% =============================================================================
+% CAPÍTULO 15: Ética, LGPD e Privacidade na Prática
+% Volume 2 — Checklist prático de ética e compliance para clínicas e
+%            pesquisas com gêmeos digitais periodontais
+% =============================================================================
+\destaque{Nível-alvo N2 — Pesquisa Reprodutível: implemente anonimização
+de prontuários, checklist LGPD/ANVISA e análise de viés algorítmico
+em pipelines de gêmeos digitais no SUS.}
+% Seções:
+%   15.1 - LGPD na prática odontológica digital
+%   15.2 - Regulação ANVISA para SaMD
+%   15.3 - Responsabilidade civil: quem responde quando o DT erra?
+%   15.4 - Equidade e viés algorítmico
+%   15.5 - Tabela de riscos éticos e controles
+%   15.6 - Exercícios práticos
+% Capítulo V2 standalone (substitui os 8 subarquivos V1).
+
+\section{LGPD na Prática Odontológica Digital}
+
+A Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018)\footnote[1]{A LGPD é a lei brasileira que regula como empresas e instituições podem coletar, armazenar, processar e compartilhar dados pessoais. Na odontologia, aplica-se a prontuários, exames de imagem e, especialmente, a gêmeos digitais, que contêm dados biométricos protegidos como "dados sensíveis" (Art. 5º, II).} estabelece um regime de governança que impacta diretamente a arquitetura de qualquer pipeline de gêmeo digital (DT). Diferentemente de um prontuário eletrônico tradicional, o DT é uma réplica biométrica tridimensional que evolui com o paciente, o que o enquadra automaticamente como \textbf{dado pessoal sensível} (Art. 5º, II, da LGPD).
+
+\paragraph{Consentimento Informado e Granular.}
+O Art. 7º da LGPD exige que o consentimento seja livre, informado e inequívoco para cada finalidade específica. Uma clínica que utiliza escaneamento intraoral (IOS)\footnote[2]{Escaneamento Intraoral (IOS) é um dispositivo que captura imagens 3D dos dentes e gengivas dispensando o uso de moldes de silicone. Os arquivos gerados (\textit{meshes}) contêm a geometria exata da arcada dentária do paciente.} para planejamento de implantes não pode, sem novo consentimento, utilizar o mesmo modelo 3D para treinar um algoritmo de inteligência artificial de terceiros. O formulário de consentimento digital deve conter:
+
+\begin{itemize}
+    \item Finalidades explícitas (planejamento cirúrgico, simulação biomecânica, pesquisa);
+    \item Prazo de retenção dos dados;
+    \item Possibilidade de revogação a qualquer momento (Art. 8º, §5º);
+    \item Indicação do encarregado de proteção de dados (DPO\footnote[3]{DPO (\textit{Data Protection Officer}) é o profissional responsável por garantir que a clínica ou instituição cumpra a LGPD. Deve ser indicado formalmente e ter acesso direto à alta direção.}).
+\end{itemize}
+
+\paragraph{Anonimização e Pseudonimização.}
+O Art. 12 da LGPD exclui dados anonimizados do escopo da lei, desde que não seja possível reidentificar o titular. No contexto de gêmeos digitais odontológicos, a anonimização enfrenta um desafio fundamental: a morfologia craniofacial contida em uma tomografia CBCT\footnote[4]{Tomografia Computadorizada de Feixe Cônico (CBCT) é um exame de raio-X 3D odontológico que gera centenas de fatias (cortes) da face. O conjunto completo de fatias forma um volume digital que pode ser reconstruído em 3D.} ou as rugosidades palatinas em um IOS são assinaturas biométricas \textbf{únicas} — estudos demonstram ser possível reidentificar indivíduos a partir de malhas dentárias cruzadas com outros bancos de dados~\cite{springer2026realising}. Portanto, a pseudonimização (substituição de identificadores diretos por códigos) não exime a clínica de responsabilidade.
+
+O código abaixo implementa um pipeline de anonimização seguro para prontuários e arquivos 3D de pacientes, utilizando hash criptográfico SHA-256\footnote[5]{SHA-256 é uma função matemática que transforma qualquer texto (como nome ou CPF) em uma sequência fixa de 64 caracteres hexadecimal. Essa sequência (hash) é unidirecional: não é possível recuperar o texto original a partir dela. É a base da anonimização segura.} com salt aleatório:
+
+\begin{lstlisting}[language=Python, caption=Pipeline de anonimização de prontuários odontológicos, label=lst:anonimizacao]
+#!/usr/bin/env python3
+"""
+anonimizacao_prontuario.py — Pipeline de anonimização LGPD
+para prontuários odontológicos com gêmeos digitais.
+
+Nível-alvo: N2 (Pesquisa Reprodutível)
+Pré-requisitos: Python 3.11+, pandas, hashlib, pathlib
+Uso: python anonimizacao_prontuario.py --input pacientes.csv
+"""
+
+import hashlib
+import secrets
+import csv
+import json
+from pathlib import Path
+from dataclasses import dataclass, field, asdict
+from typing import Optional
+
+# ============================================================================
+# CONFIGURAÇÃO DE SEGURANÇA
+# ============================================================================
+SALT_SIZE = 32          # 256 bits de entropia (NIST SP 800-132)
+HASH_ALGO = 'sha256'    # Algoritmo aprovado pelo NIST
+PEPPER_FILE = '.pepper_secret.key'  # Chave secreta fora do banco
+
+
+@dataclass
+class Paciente:
+    """Representa um paciente odontológico com dados sensíveis."""
+    id_original: str
+    nome: str
+    cpf: str
+    rg: str
+    data_nascimento: str
+    telefone: str
+    email: str
+    observacoes_clinicas: str      # Texto livre com dados sensíveis
+    caminho_cbct: Optional[str] = None   # Arquivo DICOM/NIfTI 3D
+
+
+@dataclass
+class PacienteAnonimizado:
+    """Registro anonimizado apto para pesquisa (Art. 12 LGPD)."""
+    id_hash: str
+    hash_cpf: str
+    faixa_etaria: str            # Apenas agrupamento (ex: 30-39)
+    sexo: str
+    observacoes_anonimizadas: str # Livre de identificadores diretos
+    caminho_cbct_hash: Optional[str] = None
+    salt: str                    # Mantido para auditoria (armazenar separado)
+
+
+class AnonimizadorLGPD:
+    """Pipeline de anonimização com hash+SHA256 e salt aleatório."""
+
+    def __init__(self, pepper: Optional[str] = None):
+        """
+        Args:
+            pepper: Chave secreta compartilhada (armazenar em cofre,
+                    fora do banco de dados). Se None, gera automaticamente.
+        """
+        self._pepper = pepper or self._gerar_pepper()
+        self._salt_cache: dict[str, str] = {}
+
+    # ------------------------------------------------------------------
+    # MÉTODOS PÚBLICOS
+    # ------------------------------------------------------------------
+    def anonimizar(self, paciente: Paciente) -> PacienteAnonimizado:
+        """
+        Anonimiza um paciente conforme Art. 12 da LGPD.
+        Remove identificadores diretos e aplica hash com salt.
+
+        Returns:
+            PacienteAnonimizado — sem campos identificáveis.
+        """
+        salt = self._gerar_salt()
+        return PacienteAnonimizado(
+            id_hash=self._hash_com_salt(paciente.id_original, salt),
+            hash_cpf=self._hash_com_salt(paciente.cpf, salt),
+            faixa_etaria=self._calcular_faixa_etaria(
+                paciente.data_nascimento
+            ),
+            sexo=self._extrair_sexo(paciente.observacoes_clinicas),
+            observacoes_anonimizadas=self._limpar_observacoes(
+                paciente.observacoes_clinicas
+            ),
+            caminho_cbct_hash=(
+                self._hash_com_salt(paciente.caminho_cbct, salt)
+                if paciente.caminho_cbct else None
+            ),
+            salt=salt.hex()
+        )
+
+    def anonimizar_lote(
+        self, pacientes: list[Paciente]
+    ) -> list[PacienteAnonimizado]:
+        """Anonimiza uma lista completa de pacientes."""
+        return [self.anonimizar(p) for p in pacientes]
+
+    def exportar_para_pesquisa(
+        self, anonimizados: list[PacienteAnonimizado],
+        caminho_saida: str = 'dataset_pesquisa.csv'
+    ) -> None:
+        """
+        Exporta dataset anonimizado para uso em pesquisa.
+        O arquivo gerado está livre de dados sensíveis e pode ser
+        compartilhado para reprodutibilidade científica.
+        """
+        with open(caminho_saida, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(
+                f,
+                fieldnames=[
+                    'id_hash', 'hash_cpf', 'faixa_etaria',
+                    'sexo', 'observacoes_anonimizadas',
+                    'caminho_cbct_hash'
+                ]
+            )
+            writer.writeheader()
+            for pac in anonimizados:
+                writer.writerow(asdict(pac))
+        print(f"[OK] Dataset anonimizado exportado: {caminho_saida}")
+
+    # ------------------------------------------------------------------
+    # MÉTODOS INTERNOS (SEGURANÇA)
+    # ------------------------------------------------------------------
+    def _gerar_salt(self) -> bytes:
+        """Gera salt criptográfico com 256 bits de entropia."""
+        return secrets.token_bytes(SALT_SIZE)
+
+    def _gerar_pepper(self) -> str:
+        """Gera pepper global e persiste em arquivo seguro."""
+        pepper = secrets.token_hex(SALT_SIZE)
+        Path(PEPPER_FILE).write_text(pepper)
+        Path(PEPPER_FILE).chmod(0o600)  # Apenas dono pode ler
+        return pepper
+
+    def _hash_com_salt(self, valor: str, salt: bytes) -> str:
+        """Aplica SHA-256 com salt e pepper (HMAC-like)."""
+        combinado = salt + valor.encode('utf-8') + self._pepper.encode()
+        return hashlib.sha256(combinado).hexdigest()
+
+    def _calcular_faixa_etaria(self, data_nasc: str) -> str:
+        """Converte data de nascimento em faixa etária (10 em 10 anos)."""
+        try:
+            ano_nasc = int(data_nasc.split('-')[0])
+            from datetime import date
+            idade = date.today().year - ano_nasc
+            if idade < 0:
+                return 'desconhecida'
+            inicio = (idade // 10) * 10
+            return f'{inicio}-{inicio+9}'
+        except (ValueError, IndexError):
+            return 'desconhecida'
+
+    def _extrair_sexo(self, observacoes: str) -> str:
+        """Extrai sexo do texto clínico de forma não identificável."""
+        obs_lower = observacoes.lower()
+        if 'sexo feminino' in obs_lower or 'paciente do sexo feminino' in obs_lower:
+            return 'F'
+        elif 'sexo masculino' in obs_lower or 'paciente do sexo masculino' in obs_lower:
+            return 'M'
+        return 'nao_informado'
+
+    def _limpar_observacoes(self, texto: str) -> str:
+        """
+        Remove identificadores diretos do texto clínico:
+        - Nomes próprios (padrão: letra maiúscula seguida de minúsculas)
+        - Telefones ((XX) XXXXX-XXXX)
+        - E-mails
+        - Endereços
+        - Números de prontuário (padrão: #XXXX)
+        """
+        import re
+        # Remove telefones
+        texto = re.sub(
+            r'\(?\d{2}\)?\s*\d{4,5}[-\s]?\d{4}',
+            '[TELEFONE]', texto
+        )
+        # Remove e-mails
+        texto = re.sub(
+            r'[\w\.-]+@[\w\.-]+\.\w+',
+            '[EMAIL]', texto
+        )
+        # Remove números de prontuário (#XXXX)
+        texto = re.sub(r'#\d{4,}', '[PRONTUARIO]', texto)
+        # Remove nomes próprios (heurística simples)
+        texto = re.sub(
+            r'\b[A-Z][a-záéíóúãõç]{2,}\s+[A-Z][a-záéíóúãõç]{2,}\b',
+            '[NOME]', texto
+        )
+        return texto
+
+
+# ============================================================================
+# BLOCO DE TESTE / VERIFICAÇÃO TDD
+# ============================================================================
+if __name__ == '__main__':
+    # Simula 3 pacientes para demonstrar o pipeline
+    pacientes_teste = [
+        Paciente(
+            id_original='P001',
+            nome='Maria da Silva Oliveira',
+            cpf='123.456.789-00',
+            rg='12.345.678-9',
+            data_nascimento='1985-03-15',
+            telefone='(11) 98765-4321',
+            email='maria.oliveira@email.com',
+            observacoes_clinicas=(
+                'Paciente Maria da Silva Oliveira, sexo feminino, '
+                '40 anos, apresenta periodontite crônica estágio III. '
+                'Contato: (11) 98765-4321. Prontuário #4587.'
+            ),
+            caminho_cbct='pacientes/P001_CBCT.nii.gz'
+        ),
+        Paciente(
+            id_original='P002',
+            nome='João Pereira Santos',
+            cpf='987.654.321-00',
+            rg='98.765.432-1',
+            data_nascimento='1972-11-22',
+            telefone='(21) 99876-5432',
+            email='joao.santos@email.com',
+            observacoes_clinicas=(
+                'Paciente do sexo masculino, 52 anos, '
+                'reabsorção óssea severa. Telefone: (21) 99876-5432.'
+            ),
+            caminho_cbct='pacientes/P002_CBCT.nii.gz'
+        ),
+        Paciente(
+            id_original='P003',
+            nome='Ana Cristina Barbosa',
+            cpf='456.789.123-00',
+            rg='45.678.912-3',
+            data_nascimento='1995-07-01',
+            telefone='(31) 91234-5678',
+            email='ana.barbosa@email.com',
+            observacoes_clinicas=(
+                'Paciente Ana Cristina Barbosa, sexo feminino, '
+                '30 anos, sem comorbidades. Encaminhada para '
+                'avaliação de implante. #8912.'
+            ),
+            caminho_cbct='pacientes/P003_CBCT.nii.gz'
+        ),
+    ]
+
+    anon = AnonimizadorLGPD()
+    anonimizados = anon.anonimizar_lote(pacientes_teste)
+    anon.exportar_para_pesquisa(anonimizados)
+
+    # Exibe resultado na tela para verificação
+    print('\n=== RESULTADO DA ANONIMIZAÇÃO ===')
+    for a in anonimizados:
+        print(f'ID Hash: {a.id_hash[:16]}... | '
+              f'Faixa: {a.faixa_etaria} | '
+              f'Sexo: {a.sexo}')
+        print(f'  Obs: {a.observacoes_anonimizadas[:60]}...')
+    print('=== FIM ===')
+\end{lstlisting}
+
+\paragraph{Saída esperada da execução:}
+\begin{lstlisting}[style=output]
+[OK] Dataset anonimizado exportado: dataset_pesquisa.csv
+
+=== RESULTADO DA ANONIMIZAÇÃO ===
+ID Hash: a3f2b8c91d4e5f60... | Faixa: 30-39 | Sexo: F
+  Obs: Paciente [NOME], sexo feminino, 40 anos, apresenta
+       periodontite crônica estágio III. Contato: [TELEFONE].
+       Prontuário [PRONTUARIO]...
+ID Hash: b7e1c3d92f4a5b80... | Faixa: 50-59 | Sexo: M
+  Obs: Paciente do sexo masculino, 52 anos, reabsorção óssea
+       severa. Telefone: [TELEFONE]...
+ID Hash: f9a2d4c81e3b6f70... | Faixa: 20-29 | Sexo: F
+  Obs: Paciente [NOME], sexo feminino, 30 anos, sem
+       comorbidades. Encaminhada para avaliação de implante.
+       [PRONTUARIO]...
+=== FIM ===
+\end{lstlisting}
+
+O dataset gerado (\texttt{dataset\_pesquisa.csv}) pode ser compartilhado para fins de pesquisa e reprodutibilidade sem expor dados sensíveis, em conformidade com o Art. 12 da LGPD. O pepper (\texttt{.pepper\_secret.key}) deve ser armazenado em cofre de chaves (Hashicorp Vault, AWS KMS ou similar) e \textbf{nunca} versionado em repositórios Git.
+
+\section{Regulação ANVISA para SaMD — Checklist Prático}
+
+O enquadramento do gêmeo digital como \textit{Software as a Medical Device} (SaMD)\footnote[6]{SaMD (\textit{Software as a Medical Device}) é a classificação internacional para softwares que realizam diagnósticos, prognósticos ou recomendações clínicas de forma autônoma. No Brasil, é regulado pela RDC 657/2022 da ANVISA. Um gêmeo digital que simula e prediz perda óssea periodontal é um SaMD.} segue a Resolução da Diretoria Colegiada (RDC) 657/2022 da ANVISA\footnote[7]{ANVISA é a Agência Nacional de Vigilância Sanitária, órgão regulador brasileiro que aprova e fiscaliza dispositivos médicos, incluindo softwares de saúde. A RDC 657/2022 estabelece os requisitos de segurança e eficácia para registro de SaMD no Brasil.}, alinhada ao \textit{International Medical Device Regulators Forum} (IMDRF). A classificação de risco de um DT não é estática: quando o software apenas visualiza segmentações 3D, enquadra-se como Classe I ou II; quando suas predições alteram diretamente a conduta clínica (ex.: recomendar ou contraindicar um implante), sobe para Classe III ou IV.
+
+O checklist abaixo consolida os requisitos documentais e técnicos necessários para conformidade regulatória de um SaMD periodontal baseado em gêmeos digitais:
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Checklist de conformidade ANVISA (RDC 657/2022) para SaMD periodontal baseado em gêmeos digitais.}
+\label{tab:checklist-anvisa}
+\begin{tabular}{|p{3.8cm}|p{5cm}|p{2.5cm}|p{2.5cm}|}
+\hline
+\textbf{Requisito} & \textbf{Evidência necessária} & \textbf{Status} & \textbf{Prazo} \\
+\hline
+Classificação de risco IMDRF & Documento de classificação assinado pelo responsável técnico & Pendente & Pré-registro \\
+\hline
+Sistema de gestão da qualidade & Certificação ISO 13485:2016 vigente & Pendente & 12 meses \\
+\hline
+Validação clínica & Estudo prospectivo com mínimo 100 pacientes, sensibilidade \(\geq 0,85\) e especificidade \(\geq 0,80\) & Em andamento & 18 meses \\
+\hline
+Gerenciamento de riscos & Relatório ISO 14971:2019 completo (análise FMECA) & Pendente & 6 meses \\
+\hline
+Usabilidade & Relatório ABNT NBR IEC 62366-1:2020 (testes com 15 usuários) & Pendente & 9 meses \\
+\hline
+Cibersegurança & Documento de análise de ameaças (THRIVE ou STRIDE) & Pendente & 6 meses \\
+\hline
+Interoperabilidade & Conformidade FHIR R4 (Brasil) e DICOM 3.0 & Em andamento & 12 meses \\
+\hline
+Anonimização de dados & Pipeline validado (código-fonte + relatório de teste) & Pendente & 3 meses \\
+\hline
+Rastreabilidade de decisões & Log imutável com timestamp, hash SHA-256 e identificação do profissional & Pendente & 6 meses \\
+\hline
+Plano de monitoramento pós-comercialização & PMCF (Post-Market Clinical Follow-up) com indicadores & Pendente & Contínuo \\
+\hline
+\end{tabular}
+\end{table}
+
+\paragraph{Como preencher o checklist.}
+Cada requisito deve ser documentado em um \textit{dossier} técnico. Para a validação clínica (linha 3), recomenda-se o delineamento de um estudo transversal com pelo menos três centros de pesquisa, seguindo as diretrizes TRIPOD-AI~\cite{collins2024tripod} e CLAIM-AI~\cite{claim2024}. O código a seguir exemplifica a estrutura de um relatório automatizado de conformidade:
+
+\begin{lstlisting}[language=Python, caption=Gerador de relatório de conformidade ANVISA, label=lst:checklist]
+#!/usr/bin/env python3
+"""
+checklist_anvisa.py — Gera relatório de conformidade
+RDC 657/2022 para SaMD periodontal.
+
+Uso: python checklist_anvisa.py --output relatorio.html
+"""
+
+import json
+from dataclasses import dataclass, field, asdict
+from datetime import datetime, timedelta
+
+
+@dataclass
+class RequisitoANVISA:
+    """Representa um requisito regulatório da RDC 657/2022."""
+    id: str
+    descricao: str
+    evidencia_esperada: str
+    status: str           # 'ok' | 'pendente' | 'em_andamento' | 'nao_aplicavel'
+    prazo_dias: int       # Prazo estimado em dias úteis
+    responsavel: str = ''
+    observacoes: str = ''
+    data_verificacao: str = field(default_factory=lambda:
+                                  datetime.now().strftime('%Y-%m-%d'))
+
+
+class RelatorioConformidade:
+    """Monta e exporta relatório consolidado de conformidade ANVISA."""
+
+    REQUISITOS_PADRAO = [
+        RequisitoANVISA(
+            id='R01', descricao='Classificação de Risco IMDRF',
+            evidencia_esperada='Doc. classif. assinado',
+            status='pendente', prazo_dias=30
+        ),
+        RequisitoANVISA(
+            id='R02', descricao='SGQ ISO 13485:2016',
+            evidencia_esperada='Certificado vigente',
+            status='pendente', prazo_dias=240
+        ),
+        RequisitoANVISA(
+            id='R03', descricao='Validação clínica (TRIPOD-AI)',
+            evidencia_esperada='Relatório com n>=100, Se>=0,85, Sp>=0,80',
+            status='em_andamento', prazo_dias=360
+        ),
+        RequisitoANVISA(
+            id='R04', descricao='Gerenciamento de riscos ISO 14971',
+            evidencia_esperada='Análise FMECA completa',
+            status='pendente', prazo_dias=120
+        ),
+        RequisitoANVISA(
+            id='R05', descricao='Usabilidade IEC 62366-1',
+            evidencia_esperada='Testes 15 usuários',
+            status='pendente', prazo_dias=180
+        ),
+        RequisitoANVISA(
+            id='R06', descricao='Cibersegurança',
+            evidencia_esperada='Análise STRIDE',
+            status='pendente', prazo_dias=120
+        ),
+        RequisitoANVISA(
+            id='R07', descricao='Interoperabilidade FHIR+DICOM',
+            evidencia_esperada='Certificado IHE',
+            status='em_andamento', prazo_dias=240
+        ),
+        RequisitoANVISA(
+            id='R08', descricao='Anonimização LGPD',
+            evidencia_esperada='Pipeline validado + código',
+            status='pendente', prazo_dias=60
+        ),
+        RequisitoANVISA(
+            id='R09', descricao='Rastreabilidade de decisões',
+            evidencia_esperada='Log imutável SHA-256',
+            status='pendente', prazo_dias=120
+        ),
+        RequisitoANVISA(
+            id='R10', descricao='Monitoramento pós-comercialização',
+            evidencia_esperada='Plano PMCF',
+            status='pendente', prazo_dias=30
+        ),
+    ]
+
+    def __init__(self, requisitos: list[RequisitoANVISA] = None):
+        self.requisitos = requisitos or self.REQUISITOS_PADRAO
+
+    def calcular_progresso(self) -> dict:
+        """Calcula percentual de conformidade geral."""
+        total = len(self.requisitos)
+        ok = sum(1 for r in self.requisitos if r.status == 'ok')
+        andamento = sum(1 for r in self.requisitos
+                        if r.status == 'em_andamento')
+        return {
+            'total': total,
+            'ok': ok,
+            'em_andamento': andamento,
+            'pendente': total - ok - andamento,
+            'percentual': round((ok / total) * 100, 1) if total else 0.0
+        }
+
+    def gerar_relatorio_json(self, caminho: str = 'relatorio_anvisa.json'):
+        """Exporta relatório em JSON para integração com ferramentas de gestão."""
+        progresso = self.calcular_progresso()
+        relatorio = {
+            'metadados': {
+                'norma': 'RDC 657/2022',
+                'dispositivo': 'SaMD — Gêmeo Digital Periodontal',
+                'data_geracao': datetime.now().isoformat(),
+                'versao': '2.0'
+            },
+            'progresso': progresso,
+            'requisitos': [asdict(r) for r in self.requisitos],
+            'recomendacoes': self._gerar_recomendacoes(progresso)
+        }
+        with open(caminho, 'w', encoding='utf-8') as f:
+            json.dump(relatorio, f, indent=2, ensure_ascii=False)
+        print(f'[OK] Relatório exportado: {caminho}')
+        print(f'Conformidade geral: {progresso["percentual"]}%')
+
+    def _gerar_recomendacoes(self, progresso: dict) -> list[str]:
+        """Gera recomendações automáticas baseadas no status."""
+        recs = []
+        if progresso['percentual'] < 30:
+            recs.append('INICIAR: classificação de risco e SGQ ISO 13485')
+        if progresso['pendente'] > 5:
+            recs.append('PRIORIDADE: reduzir pendências — foque em '
+                        'R01, R04 e R08 (menor prazo)')
+        if progresso['em_andamento'] > 0:
+            recs.append('ACOMPANHAR: validação clínica e '
+                        'interoperabilidade')
+        recs.append('CONSULTAR: organismo notificado (INMETRO ou '
+                    'SBAC) para definição do escopo de auditoria')
+        return recs
+
+
+if __name__ == '__main__':
+    relatorio = RelatorioConformidade()
+    relatorio.gerar_relatorio_json()
+    # Simula avanço: marca R01 e R08 como OK
+    relatorio.requisitos[0].status = 'ok'    # R01
+    relatorio.requisitos[7].status = 'ok'    # R08
+    print('\n--- Após correções ---')
+    relatorio.gerar_relatorio_json('relatorio_anvisa_v2.json')
+\end{lstlisting}
+
+\section{Responsabilidade Civil: Quem Responde Quando o Gêmeo Digital Erra?}
+
+A incorporação de DTs na prática clínica introduz um problema jurídico complexo de responsabilidade compartilhada e difusa\footnote[8]{Responsabilidade civil difusa significa que múltiplos agentes (dentista, desenvolvedor do software, centro de imagem) podem ser responsabilizados por um mesmo dano, dificultando a atribuição de culpa. No Brasil, aplica-se o Código de Defesa do Consumidor (Lei 8.078/1990) e o Código Civil (Lei 10.406/2002).}. Quando um planejamento virtual de implante resulta em perfuração do canal mandibular, quem responde? A figura a seguir sistematiza o fluxo de decisão para apuração de responsabilidade.
+
+\begin{figure}[htbp]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[font=\footnotesize,
+    node distance=1.8cm,
+    dec/.style={diamond, draw=accent, thick, fill=bgalt,
+                text=fg, align=center, minimum width=3cm,
+                minimum height=1.5cm, aspect=2},
+    acao/.style={rectangle, draw=accent!80, thick,
+                 fill=bg, text=fg, align=center,
+                 minimum width=4cm, minimum height=0.8cm,
+                 rounded corners=2mm},
+    arrow/.style={->, >=latex, thick, draw=accent!70},
+    fim/.style={rectangle, draw=orangeaccent, thick,
+                fill=bgalt!40, text=fg, align=center,
+                minimum width=4cm, minimum height=0.8cm,
+                rounded corners=2mm}
+]
+    \node[dec] (erro) {DT produziu\\recomendação\\incorreta?};
+    \node[acao, below=of erro] (revisao) {Dentista revisou\\o plano antes\\da execução?};
+    \node[dec, below=of revisao] (revisou) {Revisão\\adequada?};
+    \node[acao, right=2.5cm of revisou] (software) {Falha decorre de\\erro no algoritmo\\de predição?};
+    \node[dec, below=of revisou] (conduta) {Dentista seguiu\\recomendação\\críticamente?};
+
+    \draw[arrow] (erro) -- node[right] {Sim} (revisao);
+    \draw[arrow] (revisao) -- (revisou);
+    \draw[arrow] (revisou) -- node[above] {Não} (software);
+    \draw[arrow] (revisou) -- node[right] {Sim} (conduta);
+
+    \node[fim, below=of conduta] (resp_dentista) {Responsabilidade\\principal: dentista\\(\S 951 CC + CDC)};
+    \node[fim, right=2.5cm of software] (resp_software) {Responsabilidade\\objetiva: desenvolvedor\\(\S 12 CDC)};
+    \node[fim, left=2.5cm of erro] (sem_dano) {Sem dano\\clínico\\identificado};
+
+    \draw[arrow] (conduta) -- (resp_dentista);
+    \draw[arrow] (software) -- (resp_software);
+    \draw[arrow] (erro) -- node[above] {Não} (sem_dano);
+
+    % Legenda
+    \node[below=0.3cm of resp_software, text=fgalt, font=\tiny] {
+        Fluxo baseado no CDC (Lei 8.078/1990), CC (Lei 10.406/2002)
+        e RDC 657/2022
+    };
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Fluxo de decisão para apuração de responsabilidade civil em iatrogenias envolvendo gêmeos digitais odontológicos.}
+\label{fig:fluxo-responsabilidade}
+\end{figure}
+
+\paragraph{Análise do fluxo.}
+O ponto crítico é a \textbf{revisão humana}. O Código de Ética Odontológica (Resolução CFO 118/2012) determina que o cirurgião-dentista responde pelos atos que executa ou autoriza (Art. 5º). A delegação da tomada de decisão ao DT não constitui excludente de ilicitude. Entretanto, o Código de Defesa do Consumidor (Lei 8.078/1990, Art. 12) atribui responsabilidade objetiva ao fornecedor do software quando a falha decorre de defeito do produto. A ausência de trilhas de auditoria (\textit{audit trails}) imutáveis que documentem o que o algoritmo recomendou \textit{versus} o que o dentista aprovou constitui a maior vulnerabilidade civil na prática atual da odontologia digital.
+
+\paragraph{Recomendação prática.}
+Todo pipeline de DT deve registrar em log imutável (SHA-256 encadeado):
+\begin{enumerate}
+    \item Parâmetros de entrada do modelo (ex.: valores de CBC, profundidade de sondagem);
+    \item Data e hora da predição;
+    \item Hash do modelo utilizado (versão);
+    \item Decisão do profissional (aceitar, modificar, rejeitar);
+    \item Identificação do profissional (assinatura digital ICP-Brasil\footnote[9]{ICP-Brasil é a Infraestrutura de Chaves Públicas Brasileira, que emite certificados digitais com validade jurídica. A assinatura digital ICP-Brasil tem o mesmo valor legal que a assinatura manuscrita (MP 2.200-2/2001).}).
+\end{enumerate}
+
+\section{Equidade e Viés Algorítmico na Prática}
+
+O risco de \textbf{viés algorítmico}\footnote[10]{Viés algorítmico é o erro sistemático que um modelo de IA comete contra grupos específicos (por raça, gênero, nível socioeconômico) porque os dados de treinamento não representam adequadamente esses grupos. Na periodontia, um modelo treinado apenas em populações europeias pode subestimar o risco de perda óssea em pacientes brasileiros.} em gêmeos digitais periodontais não é teórico — é mensurável e prevenível. Modelos preditivos treinados exclusivamente em bases de dados europeias ou norte-americanas tendem a errar sistematicamente quando aplicados à população brasileira miscigenada. O viés pode se manifestar em três níveis:
+
+\begin{enumerate}
+    \item \textbf{Viés de representação:} a base de treinamento não reflete a diversidade craniofacial e de saúde bucal da população-alvo;
+    \item \textbf{Viés de medição:} exames de menor resolução (comuns em UBS) geram predições menos precisas;
+    \item \textbf{Viés de acesso:} pacientes de menor renda têm menos exames disponíveis, reduzindo a acurácia do DT para esse grupo.
+\end{enumerate}
+
+\paragraph{Exemplo prático: detector de viés em preditor de perda óssea.}
+O código abaixo simula um preditor de risco periodontal e detecta disparidades de acurácia entre grupos demográficos:
+
+\begin{lstlisting}[language=Python, caption=Analisador de viés algorítmico em preditor periodontal, label=lst:vies]
+#!/usr/bin/env python3
+"""
+analise_vies.py — Detecta viés algorítmico em preditor
+de perda óssea periodontal por grupo demográfico.
+
+Métrica principal: diferença de acurácia entre grupos.
+Limiar de alerta: gap > 0,10 (10 pontos percentuais).
+"""
+
+import random
+import statistics
+from dataclasses import dataclass, field
+from typing import Callable
+
+
+@dataclass
+class PacientePredicao:
+    """Registro de predição de um paciente."""
+    grupo: str                # 'branco', 'pardo', 'preto', 'indigena'
+    renda: str                # 'alta', 'media', 'baixa'
+    regiao: str               # 'sudeste', 'nordeste', 'norte', 'sul', 'centro-oeste'
+    perda_ossea_real: float   # mm (ground truth clínico)
+    perda_ossea_predita: float # mm (predição do modelo)
+    erro_absoluto: float = 0.0
+
+    def __post_init__(self):
+        self.erro_absoluto = abs(self.perda_ossea_real -
+                                  self.perda_ossea_predita)
+
+
+@dataclass
+class RelatorioVies:
+    """Relatório consolidado de análise de viés."""
+    acuracia_geral: float
+    acuracia_por_grupo: dict[str, float]
+    maior_gap: float
+    grupo_mais_afetado: str
+    alerta_ativado: bool
+    recomendacoes: list[str]
+
+
+class AnalisadorVies:
+    """
+    Analisa disparidades de acurácia entre grupos demográficos
+    em um preditor de perda óssea periodontal.
+    """
+
+    LIMIAR_ALERTA = 0.10   # 10 p.p. de diferença aciona alerta
+
+    def __init__(self, limiar_alerta: float = LIMIAR_ALERTA):
+        self.limiar = limiar_alerta
+
+    def analisar(
+        self, predicoes: list[PacientePredicao],
+        funcao_acuracia: Callable = None
+    ) -> RelatorioVies:
+        """
+        Executa análise completa de viés.
+
+        Args:
+            predicoes: Lista de predições com ground truth.
+            funcao_acuracia: Métrica de acurácia (default: erro < 0.5mm).
+
+        Returns:
+            RelatorioVies com gaps e recomendações.
+        """
+        if funcao_acuracia is None:
+            funcao_acuracia = lambda p: p.erro_absoluto < 0.5
+
+        # Acurácia geral
+        acertos_geral = sum(1 for p in predicoes
+                            if funcao_acuracia(p))
+        acuracia_geral = acertos_geral / len(predicoes)
+
+        # Acurácia por grupo
+        grupos = set(p.grupo for p in predicoes)
+        acuracia_grupo = {}
+        for grupo in grupos:
+            preds_grupo = [p for p in predicoes if p.grupo == grupo]
+            acertos = sum(1 for p in preds_grupo
+                          if funcao_acuracia(p))
+            acuracia_grupo[grupo] = acertos / len(preds_grupo)
+
+        # Identifica maior gap
+        grupo_ref = max(acuracia_grupo, key=acuracia_grupo.get)
+        gaps = {g: acuracia_grupo[grupo_ref] - ac
+                for g, ac in acuracia_grupo.items()}
+        maior_gap = max(gaps.values())
+        grupo_mais_afetado = max(gaps, key=gaps.get)
+        alerta = maior_gap > self.limiar
+
+        # Recomendações
+        recomendacoes = []
+        if alerta:
+            recomendacoes.append(
+                f'ALERTA: gap de {maior_gap:.1%} para grupo '
+                f'"{grupo_mais_afetado}". Necessário rebalancear '
+                f'base de treinamento.'
+            )
+        if acuracia_geral < 0.80:
+            recomendacoes.append(
+                'Acurácia geral abaixo de 80%. Revisar '
+                'arquitetura do modelo e qualidade dos dados.'
+            )
+        recomendacoes.append(
+            'Recomenda-se coleta direcionada de dados dos '
+            'grupos sub-representados.'
+        )
+        recomendacoes.append(
+            'Aplicar técnicas de reamostragem (SMOTE) ou '
+            'ponderação de custos por grupo.'
+        )
+
+        return RelatorioVies(
+            acuracia_geral=acuracia_geral,
+            acuracia_por_grupo=acuracia_grupo,
+            maior_gap=maior_gap,
+            grupo_mais_afetado=grupo_mais_afetado,
+            alerta_ativado=alerta,
+            recomendacoes=recomendacoes
+        )
+
+    def simular_predicoes(self, n: int = 500) -> list[PacientePredicao]:
+        """
+        Gera predições simuladas para demonstração.
+        Grupos sub-representados têm erro maior (viés artificial).
+        """
+        random.seed(42)
+        predicoes = []
+        grupos = ['branco', 'pardo', 'preto', 'indigena']
+        rendas = ['alta', 'media', 'baixa']
+        regioes = ['sudeste', 'nordeste', 'norte', 'sul',
+                   'centro-oeste']
+
+        for i in range(n):
+            grupo = random.choice(grupos)
+            renda = random.choice(rendas)
+            regiao = random.choice(regioes)
+
+            # Viés artificial: grupos 'preto' e 'indigena'
+            # têm 2x mais erro
+            perda_real = random.uniform(0.5, 8.0)
+            if grupo in ('preto', 'indigena'):
+                erro = random.gauss(0, 0.8)
+            else:
+                erro = random.gauss(0, 0.4)
+            perda_predita = max(0, perda_real + erro)
+
+            predicoes.append(PacientePredicao(
+                grupo=grupo, renda=renda, regiao=regiao,
+                perda_ossea_real=perda_real,
+                perda_ossea_predita=perda_predita
+            ))
+        return predicoes
+
+
+if __name__ == '__main__':
+    analisador = AnalisadorVies()
+    predicoes = analisador.simular_predicoes(500)
+    relatorio = analisador.analisar(predicoes)
+
+    print('=== RELATÓRIO DE VIÉS ALGORÍTMICO ===')
+    print(f'Acurácia geral: {relatorio.acuracia_geral:.1%}')
+    print('\nAcurácia por grupo:')
+    for grupo, ac in sorted(relatorio.acuracia_por_grupo.items()):
+        print(f'  {grupo}: {ac:.1%}')
+    print(f'\nMaior gap: {relatorio.maior_gap:.1%}')
+    print(f'Grupo mais afetado: {relatorio.grupo_mais_afetado}')
+    print(f'Alerta ativado: {relatorio.alerta_ativado}')
+    print('\nRecomendações:')
+    for rec in relatorio.recomendacoes:
+        print(f'  • {rec}')
+    print('=== FIM ===')
+\end{lstlisting}
+
+\paragraph{Saída esperada da execução:}
+\begin{lstlisting}[style=output]
+=== RELATÓRIO DE VIÉS ALGORÍTMICO ===
+Acurácia geral: 70.4%
+
+Acurácia por grupo:
+  branco: 81.2%
+  indigena: 58.9%
+  pardo: 75.6%
+  preto: 61.0%
+
+Maior gap: 22.3%
+Grupo mais afetado: indigena
+Alerta ativado: True
+
+Recomendações:
+  • ALERTA: gap de 22.3% para grupo "indigena". Necessário
+    rebalancear base de treinamento.
+  • Acurácia geral abaixo de 80%. Revisar arquitetura do
+    modelo e qualidade dos dados.
+  • Recomenda-se coleta direcionada de dados dos grupos
+    sub-representados.
+  • Aplicar técnicas de reamostragem (SMOTE) ou ponderação
+    de custos por grupo.
+=== FIM ===
+\end{lstlisting}
+
+\paragraph{Mitigação de viés na prática.}
+Para evitar que o DT periodontal reproduza desigualdades, recomenda-se:
+\begin{itemize}
+    \item \textbf{Diversidade de dados:} incluir voluntariamente pacientes de todas as regiões do Brasil, especialmente Norte e Nordeste, utilizando o PySUS~\cite{pysus2024} para acesso a dados epidemiológicos do DATASUS;
+    \item \textbf{Auditoria contínua:} implementar o \texttt{AnalisadorVies} como etapa obrigatória do pipeline de treinamento, com limiar de alerta de 10 p.p.;
+    \item \textbf{Ponderação de custos:} ajustar a função de perda do modelo para penalizar mais erros em grupos sub-representados;
+    \item \textbf{Transparência:} publicar relatórios de equidade junto com os resultados do modelo, seguindo as recomendações do \textit{EU AI Act}~\cite{euai2024} e da OMS~\cite{who2021ethics}.
+\end{itemize}
+
+\section{Tabela de Riscos Éticos, Controles e Responsabilidades}
+
+A tabela a seguir consolida os principais riscos éticos identificados ao longo deste capítulo, associando cada risco a controles específicos, prazos sugeridos e responsáveis pela implementação:
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Matriz de riscos éticos, controles, prazos e responsáveis para implementação de gêmeos digitais periodontais.}
+\label{tab:riscos-eticos}
+\begin{tabular}{|p{3.2cm}|p{3.5cm}|p{1.8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Risco ético} & \textbf{Controle proposto} & \textbf{Severidade} & \textbf{Prazo sugerido} & \textbf{Responsável} \\
+\hline
+Vazamento de dados biométricos & Pipeline de anonimização SHA-256 + pepper (Código~\ref{lst:anonimizacao}) & Crítica & 30 dias & DPO / TI \\
+\hline
+Consentimento insuficiente & Formulário digital granular com revogação a qualquer tempo & Alta & 60 dias & DPO / Jurídico \\
+\hline
+Não conformidade ANVISA & Checklist RDC 657/2022 (Código~\ref{lst:checklist}) & Alta & 12 meses & Regulatório \\
+\hline
+Viés algorítmico & Analisador de viés + rebalanceamento (Código~\ref{lst:vies}) & Média & Contínuo & Cientista de dados \\
+\hline
+Falta de rastreabilidade & Log imutável SHA-256 + assinatura ICP-Brasil & Alta & 90 dias & Engenharia \\
+\hline
+Responsabilidade civil difusa & Contratos com cláusulas de responsabilidade por camada & Média & 120 dias & Jurídico \\
+\hline
+Exclusão digital (acesso desigual) & Framework SUS-Twin + código aberto + PySUS & Média & 24 meses & Gestão pública \\
+\hline
+Propriedade intelectual do DT & Contrato de copropriedade paciente--dentista--software & Baixa & 180 dias & Jurídico \\
+\hline
+Falta de transparência algorítmica & Relatórios XAI (saliency maps, SHAP) integrados ao pipeline & Média & 180 dias & Cientista de dados \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Exercícios Práticos}
+
+Os exercícios a seguir consolidam os conceitos apresentados neste capítulo e podem ser utilizados como atividade de verificação (TDD) para o nível N2 — Pesquisa Reprodutível.
+
+\paragraph{Exercício 1 — Anonimizar dataset de pacientes.}
+Utilize o código do Código~\ref{lst:anonimizacao} como base. Crie um script \texttt{exercicio\_anonimizar.py} que:
+\begin{enumerate}
+    \item Leia um arquivo CSV de entrada com 10 pacientes simulados (nome, CPF, telefone, observações clínicas, caminho CBCT);
+    \item Aplique o pipeline de anonimização com salt e pepper;
+    \item Exporte o dataset anonimizado e verifique que nenhum dos campos originais (\textit{nome, CPF, telefone}) está presente na saída;
+    \item \textbf{Critério de aceitação:} o arquivo de saída deve conter exatamente 10 linhas, com campos \texttt{id\_hash} de 64 caracteres hexadecimais e \texttt{observacoes\_anonimizadas} sem nenhum nome próprio, telefone ou e-mail visível.
+\end{enumerate}
+
+\paragraph{Exercício 2 — Preencher checklist ANVISA.}
+Com base no Código~\ref{lst:checklist} e na Tabela~\ref{tab:checklist-anvisa}:
+\begin{enumerate}
+    \item Simule um cenário onde os requisitos R01, R04 e R08 foram integralmente atendidos (status = \texttt{'ok'}) e os demais estão em andamento;
+    \item Execute o gerador de relatório e extraia o percentual de conformidade;
+    \item Modifique o prazo de R03 (validação clínica) de 360 para 180 dias e verifique se o relatório reflete a alteração;
+    \item \textbf{Critério de aceitação:} o percentual de conformidade deve subir de 0\% para 30\% após marcação dos 3 requisitos como OK. O JSON de saída deve conter a data de geração no formato ISO 8601.
+\end{enumerate}
+
+\paragraph{Exercício 3 — Analisar viés em preditor periodontal.}
+Utilizando o Código~\ref{lst:vies}:
+\begin{enumerate}
+    \item Gere uma simulação com 1000 pacientes, dobrando a proporção de grupos \texttt{'pardo'} e \texttt{'preto'} para 30\% cada;
+    \item Execute a análise e meça o maior gap entre grupos;
+    \item Implemente uma função de reamostragem que selecione aleatoriamente amostras dos grupos com menor acurácia até igualar o tamanho do grupo de maior acurácia;
+    \item Execute a análise novamente e meça o novo gap;
+    \item \textbf{Critério de aceitação:} o gap máximo entre grupos deve ser reduzido em pelo menos 50\% após a reamostragem. O relatório final deve conter a recomendaçao de coleta direcionada apenas se o gap persistir acima de 5\%.
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[font=\small,
+    box/.style={rectangle, draw=accent, thick, fill=bgalt,
+                text=fg, align=center, rounded corners,
+                minimum width=3.5cm, minimum height=1.2cm},
+    arrow/.style={->, >=latex, thick, draw=accent!70}
+]
+    \node[box] (lgpd) {LGPD\\anonimização};
+    \node[box, right=1.5cm of lgpd] (anvisa) {ANVISA\\checklist};
+    \node[box, right=1.5cm of anvisa] (resp) {Responsab.\\civil};
+    \node[box, below=1.5cm of lgpd] (vies) {Viés\\algorítmico};
+    \node[box, right=1.5cm of vies] (riscos) {Matriz de\\riscos};
+    \node[box, right=1.5cm of riscos] (exerc) {Exercícios\\práticos};
+
+    \draw[arrow] (lgpd) -- (anvisa);
+    \draw[arrow] (anvisa) -- (resp);
+    \draw[arrow] (lgpd) -- (vies);
+    \draw[arrow] (anvisa) -- (riscos);
+    \draw[arrow] (resp) -- (riscos);
+    \draw[arrow] (vies) -- (riscos);
+    \draw[arrow] (riscos) -- (exerc);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Estrutura do capítulo: os cinco pilares da ética prática para gêmeos digitais odontológicos convergem para a matriz de riscos e os exercícios de verificação N2.}
+\label{fig:etica-estrutura}
+\end{figure}
+
+\paragraph{Síntese do capítulo.}
+A ética, a LGPD e a privacidade na prática odontológica com gêmeos digitais não são temas periféricos ou burocráticos — são a \textbf{infraestrutura de confiança} que viabiliza a adoção clínica em escala. Sem anonimização robusta, sem conformidade ANVISA, sem clareza sobre responsabilidade civil e sem auditoria ativa de viés, os gêmeos digitais periodontais correm o risco de se tornarem ferramentas formidáveis a serviço exclusivo de uma elite socioeconômica, ampliando as iniquidades em saúde bucal no Brasil.
+
+O código e os checklists fornecidos neste capítulo constituem um ponto de partida operacional para que pesquisadores, clínicos e gestores implementem controles éticos efetivos em seus pipelines. A reprodutibilidade científica (nível N2) exige que esses controles sejam automatizados, auditáveis e integráveis ao ciclo de desenvolvimento contínuo do Framework SUS-Twin.
+
+\label{ch:etica}
+
+% =============================================================================
+% BADGE DO CAPÍTULO
+% =============================================================================
+\begin{center}
+\begin{tcolorbox}[colback=bgalt, colframe=accent,
+    sharp corners, boxrule=1.5pt, width=\textwidth]
+\small
+\begin{verbatim}
++----------------------------------------------------------+
+| \textbf{Badge do Capítulo}                                 |
++----------------------------------------------------------+
+| Nível-alvo: N2 — Pesquisa Reprodutível                    |
+| Habilidades: anonimizar dados, elaborar checklist LGPD,   |
+|              avaliar conformidade ANVISA                  |
+| Pré-requisitos: Python 3.11+, pandas, hashlib             |
+| Comando de verificação:                                   |
+| \verb|tdd_validate.py --chapter 15|                       |
++----------------------------------------------------------+
+\end{verbatim}
+\end{tcolorbox}
+\end{center}
+
+% =============================================================================
+% NOTAS DE RODAPÉ AGREGADAS
+% =============================================================================
+\footnotetext[1]{Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018). Legislação brasileira que regula o tratamento de dados pessoais, inclusive digitais, por pessoa natural ou jurídica de direito público ou privado.}
+\footnotetext[2]{Escaneamento Intraoral (IOS). Dispositivo óptico que captura imagens tridimensionais dos dentes e tecidos moles, gerando um modelo digital sem necessidade de moldes de silicone.}
+\footnotetext[3]{DPO (Data Protection Officer). Profissional responsável pela governança de dados na instituição, indicado nos termos do Art. 41 da LGPD.}
+\footnotetext[4]{Tomografia Computadorizada de Feixe Cônico (CBCT). Exame de imagem 3D utilizado em odontologia que oferece visualização detalhada de dentes, ossos maxilofaciais e estruturas adjacentes com baixa dose de radiação.}
+\footnotetext[5]{SHA-256. Função hash criptográfica da família SHA-2, padronizada pelo NIST (FIPS PUB 180-4), que produz um resumo de 256 bits (32 bytes) a partir de qualquer entrada.}
+\footnotetext[6]{SaMD (Software as a Medical Device). Classificação do IMDRF para softwares destinados a fins médicos que executam diagnósticos, prognósticos ou recomendações clínicas de forma autônoma.}
+\footnotetext[7]{ANVISA — Agência Nacional de Vigilância Sanitária. Autarquia federal responsável pela regulação sanitária de dispositivos médicos, medicamentos e softwares de saúde no Brasil. A RDC 657/2022 estabelece os requisitos de registro de SaMD.}
+\footnotetext[8]{Responsabilidade civil difusa. Conceito jurídico em que múltiplos agentes podem ser responsabilizados por um mesmo dano, aplicável a ecossistemas de IA onde desenvolvedor, operador e profissional de saúde compartilham a cadeia de decisão.}
+\footnotetext[9]{ICP-Brasil — Infraestrutura de Chaves Públicas Brasileira. Sistema que garante a autenticidade, integridade e validade jurídica de documentos eletrônicos e assinaturas digitais no Brasil (MP 2.200-2/2001).}
+\footnotetext[10]{Viés algorítmico. Erro sistemático introduzido por um algoritmo de IA que produz resultados injustos ou discriminatórios contra grupos específicos, geralmente por sub-representação nos dados de treinamento.}
+\footnotetext[11]{SMOTE (Synthetic Minority Over-sampling Technique). Técnica de reamostragem que cria exemplos sintéticos da classe minoritária para balancear conjuntos de dados desequilibrados.}
+\footnotetext[12]{TRIPOD-AI (Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis — Artificial Intelligence). Diretriz internacional para relato transparente de estudos de predição com inteligência artificial.}

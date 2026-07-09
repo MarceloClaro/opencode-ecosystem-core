@@ -1,0 +1,122 @@
+% ═══════════════════════════════════════════════════════════════════════════
+% CAPÍTULO 7 — BEHAVIORAL GATE (DIDÁTICO + CITAÇÕES CRÍTICAS)
+% ═══════════════════════════════════════════════════════════════════════════
+\chapter{Behavioral Gate Preventivo (N3.5)}
+\label{ch:behavioral}
+
+\section{Do Reativo ao Preventivo}
+
+Antes da SPEC-038, o OpenCode operava exclusivamente em modo reativo: executava ações e, se algo desse errado, o MetacognitiveMonitor detectava a anomalia e o CorrectionEngine propunha correção. Este ciclo — observar $\rightarrow$ detectar $\rightarrow$ corrigir — constitui o nível N3. Entretanto, a correção reativa tem uma limitação fundamental: \textbf{o dano já foi causado}.
+
+O Behavioral Gate introduz o modo preventivo: \textbf{antes} de executar, o sistema consulta seu histórico de confiança e decide se deve prosseguir. Esta mudança é fundamentada na teoria de controle de Wiener (1948) e no modelo de dois sistemas de Kahneman (2011)\citecrit{%
+The distinction between fast and slow thinking has been explored by many psychologists over the past twenty-five years. I describe mental life by the metaphor of two agents, System 1 and System 2, which respectively produce fast and slow thinking. System 1 operates automatically and quickly, with little or no effort. System 2 allocates attention to the effortful mental activities that demand it.}{%
+A distinção entre pensamento rápido e devagar tem sido explorada por muitos psicólogos nos últimos vinte e cinco anos. Descrevo a vida mental pela metáfora de dois agentes, Sistema 1 e Sistema 2, que produzem respectivamente pensamento rápido e devagar. O Sistema 1 opera automática e rapidamente, com pouco ou nenhum esforço. O Sistema 2 aloca atenção às atividades mentais laboriosas que o demandam.}{%
+Conceitual. Kahneman (2011) fornece a metáfora dos dois sistemas que inspirou diretamente o Behavioral Gate. O Sistema 1 (rápido, automático) é o modo reativo do OpenCode (executar sem verificar). O Sistema 2 (lento, deliberativo) é o modo preventivo (consultar histórico de confiança antes de agir). O gate implementa um equivalente computacional do Sistema 2.}{%
+ISBN: 978-0-374-27563-1}: o Sistema 1 age rápido por intuição; o Sistema 2 delibera antes de agir. O Behavioral Gate implementa um Sistema 2 computacional.
+
+\section{Trust Scoring: Como Calcular Confiança}
+
+\subsection{Explicação Didática da Fórmula}
+
+O TrustScorer atribui a cada ação um número entre 0 e 1 que representa ``o quanto confiamos que esta ação terá sucesso''. Esta abordagem é inspirada no trabalho de Sutton \& Barto (2018)\citecrit{%
+Reinforcement learning is learning what to do — how to map situations to actions — so as to maximize a numerical reward signal. The learner is not told which actions to take, but instead must discover which actions yield the most reward by trying them.}{%
+Aprendizado por reforço é aprender o que fazer — como mapear situações para ações — de modo a maximizar um sinal numérico de recompensa. O aprendiz não é instruído sobre quais ações tomar, mas deve descobrir quais ações produzem mais recompensa experimentando-as.}{%
+Fundacional. Sutton \& Barto (2018) fornecem o framework de aprendizado por reforço que inspira o TrustScorer. O trust score é análogo ao value estimate de uma ação: atualizado a cada outcome (recompensa), com peso maior para experiências recentes (temporal-difference learning).}{%
+ISBN: 978-0-262-03924-6} sobre aprendizado por reforço, onde o trust score é análogo ao \textit{value estimate} de uma ação, atualizado a cada outcome. \doi{10.1007/978-1-4899-7687-1}
+
+\begin{equation}
+\tau = 0.7 \cdot r_{\text{recente}} + 0.3 \cdot r_{\text{histórico}} - \rho
+\label{eq:trust_score}
+\end{equation}
+
+Vamos decifrar cada termo:
+
+\begin{itemize}
+    \item \textbf{$\tau$ (tau — letra grega)}: É o trust score final — o número que queremos calcular. Varia de 0 a 1.
+    
+    \item \textbf{$r_{\text{recente}}$}: É a taxa de sucesso nas \textbf{últimas 10 execuções}. Se a ação foi executada 10 vezes recentemente e teve sucesso em 8 delas, $r_{\text{recente}} = 8/10 = 0.8$. Se falhou em todas as 10, $r_{\text{recente}} = 0/10 = 0$.
+    
+    \item \textbf{$r_{\text{histórico}}$}: É a taxa de sucesso em \textbf{toda a história} da ação — desde a primeira vez que foi executada. Se a ação foi executada 100 vezes no total e teve sucesso em 75, $r_{\text{histórico}} = 75/100 = 0.75$.
+    
+    \item \textbf{Por que 0.7 e 0.3?}: O desempenho recente recebe peso maior (70\%) que o histórico distante (30\%) porque o desempenho recente é mais preditivo do futuro. Se uma ação funcionava bem há 6 meses mas está falhando nas últimas 10 execuções, provavelmente algo mudou e devemos confiar mais no recente.
+    
+    \item \textbf{$\rho$ (rô — letra grega)}: É a \textbf{penalidade por falhas consecutivas}. Se a ação falhou nas últimas 3 vezes seguidas, $\rho = 3 \times 0.1 = 0.3$ (penalidade de 0.3). Se falhou 5 vezes seguidas, $\rho = 5 \times 0.1 = 0.5$ (penalidade máxima). Se a última execução foi um sucesso, $\rho = 0$ (sem penalidade). O teto de 0.5 evita que a penalidade domine completamente o score.
+\end{itemize}
+
+\subsection{Exemplo Numérico Passo a Passo}
+
+Vamos calcular o trust score para uma ação específica. Suponha que a ação ``scan\_raciocinio'' tem o seguinte histórico:
+
+\begin{itemize}
+    \item Últimas 10 execuções: 7 sucessos, 3 falhas (a última foi falha, a penúltima foi falha também — 2 falhas consecutivas).
+    \item Histórico total: 50 execuções, 40 sucessos.
+\end{itemize}
+
+\textbf{Passo 1}: Calcular $r_{\text{recente}} = 7/10 = 0.7$
+
+\textbf{Passo 2}: Calcular $r_{\text{histórico}} = 40/50 = 0.8$
+
+\textbf{Passo 3}: Calcular penalidade $\rho$. Há 2 falhas consecutivas na cauda: $\rho = 2 \times 0.1 = 0.2$
+
+\textbf{Passo 4}: Aplicar a fórmula:
+\begin{equation}
+\tau = 0.7 \times 0.7 + 0.3 \times 0.8 - 0.2 = 0.49 + 0.24 - 0.2 = 0.53
+\end{equation}
+
+O trust score é 0.53 — moderado. O sistema confia moderadamente nesta ação, mas a penalidade por falhas recentes reduziu o score.
+
+\subsection{Shadow Mode: Proteção para Ações Novas}
+
+Nas primeiras 5 execuções de uma ação, o trust score é artificialmente limitado a no máximo 0.5, independentemente dos resultados observados. A justificativa é simples: não devemos confiar em algo que mal conhecemos, mesmo que os primeiros resultados sejam promissores.
+
+\begin{equation}
+\tau_{\text{efetivo}} = \min(\tau, 0.5) \quad \text{se o número de execuções} < 5
+\label{eq:shadow}
+\end{equation}
+
+O shadow mode é análogo ao período probatório de um novo funcionário: mesmo que ele tenha um excelente primeiro dia, não lhe confiamos as chaves do cofre imediatamente.
+
+\subsection{Rollback Detection: Detectando Degradação}
+
+Se uma ação que historicamente era confiável começa a falhar consistentemente, o sistema reduz a confiança rapidamente. O mecanismo é: se a taxa de sucesso recente ($r_{\text{recente}}$) cair abaixo de 50\% da taxa histórica ($r_{\text{histórico}}$), aplicamos uma penalidade adicional de 0.2.
+
+\begin{equation}
+\tau \leftarrow \max(0.1, \tau - 0.2) \quad \text{se } r_{\text{recente}} < \frac{r_{\text{histórico}}}{2}
+\label{eq:rollback}
+\end{equation}
+
+Este mecanismo é inspirado no padrão Circuit Breaker da engenharia de software (Nygard, 2007)\citecrit{%
+Circuit breakers are a design pattern for handling failures in distributed systems. When a service begins to fail, the circuit breaker prevents cascading failures by stopping calls to the failing service.}{%
+Circuit breakers são um padrão de projeto para lidar com falhas em sistemas distribuídos. Quando um serviço começa a falhar, o circuit breaker previne falhas em cascata interrompendo chamadas ao serviço com falha.}{%
+Prático. Nygard (2007) introduz o padrão Circuit Breaker que inspira diretamente o rollback detection do OpenCode. Quando uma ação começa a falhar consistentemente (como um serviço degradado), o sistema reduz a confiança rapidamente (como abrir o circuito) para prevenir danos em cascata.}{%
+ISBN: 978-0-9787393-0-8}: quando um serviço começa a falhar, paramos de chamá-lo para evitar danos em cascata.
+
+\section{Behavioral Gate: Classificação de Risco}
+
+O BehavioralGate classifica cada ação em uma de quatro categorias, baseado exclusivamente no trust score:
+
+\begin{itemize}
+    \item $\tau \geq 0.70$: \textbf{Safe} (Seguro) — a ação tem histórico consistente de sucesso. Pode ser executada sem restrições.
+    \item $0.40 \leq \tau < 0.70$: \textbf{Moderate} (Moderado) — a ação funciona na maioria das vezes, mas há falhas ocasionais. Executar se o score estiver acima do threshold configurado.
+    \item $\text{threshold} \leq \tau < 0.40$: \textbf{Risky} (Arriscado) — a ação falha com frequência. Só executar se for absolutamente necessário, e com logging adicional.
+    \item $\tau < \text{threshold}$: \textbf{Blocked} (Bloqueado) — a ação não é confiável. Não executar.
+\end{itemize}
+
+Cada decisão do gate é registrada como um \texttt{GateDecision} imutável contendo: action\_id, allowed (booleano), trust\_score, threshold utilizado, reason (justificativa textual), e risk\_level. Estas decisões são persistidas e podem ser auditadas post-hoc.
+
+\section{Natural Forgetting: Memória com Decaimento}
+
+\doi{10.1016/S0079-7421(08)60422-3}
+
+O NaturalForgetting implementa o modelo Atkinson-Shiffrin com decaimento adaptativo. O tempo de vida de um item na memória depende de dois fatores: o nível em que ele está (sensorial $\rightarrow$ curto prazo $\rightarrow$ longo prazo) e sua importância:
+
+\begin{equation}
+\text{TTL}_{\text{efetivo}} = \frac{\text{TTL}_{\text{base}}}{1 + 2 \times \text{importância}}
+\label{eq:ttl}
+\end{equation}
+
+\textbf{Explicação}: Se um item tem importância 0 (irrelevante), o denominador é $1 + 0 = 1$, então o TTL efetivo é igual ao TTL base — ele expira no tempo normal. Se um item tem importância 1 (muito relevante), o denominador é $1 + 2 = 3$, então o TTL efetivo é 3 vezes maior — ele dura 3 vezes mais. Em outras palavras, \textbf{informação relevante é retida por mais tempo}.
+
+\section{Validação Experimental}
+
+O TrustEngine foi validado em três cenários (Seção 8.2, Caso 3). \doi{10.1007/978-1-4899-7687-1}

@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 13px; font-weight: bold; fill: #1a5276; }
+      .label { font-size: 9px; fill: #333; }
+      .annot { font-size: 8px; fill: #e67e22; font-style: italic; }
+      .cite { font-size: 7px; fill: #7f8c8d; }
+      .grid-ring { fill: none; stroke: #ddd; stroke-width: 0.8; }
+      .axis-line { fill: none; stroke: #bbb; stroke-width: 0.8; }
+      .axis-label { font-size: 9px; fill: #333; font-weight: bold; }
+    </style>
+    <marker id="optArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#e67e22"/></marker>
+  </defs>
+
+  <rect width="800" height="650" fill="white"/>
+  <text x="400" y="22" text-anchor="middle" class="title" font-size="15">Figura 3 — Gráfico Radar Multiobjetivo das 6 Formulações — PELBD/rGO/PP-g-MA</text>
+  <line x1="80" y1="30" x2="720" y2="30" stroke="#1a5276" stroke-width="1"/>
+
+  <!-- Radar chart centrado em (340, 310) com raio 220 -->
+  <g transform="translate(340,310)">
+    <!-- Anéis concêntricos (grid) -->
+    <polygon points="0,-220 190,-110 190,110 0,220 -190,110 -190,-110" class="grid-ring"/>
+    <polygon points="0,-165 143,-83 143,83 0,165 -143,83 -143,-83" class="grid-ring"/>
+    <polygon points="0,-110 95,-55 95,55 0,110 -95,55 -95,-55" class="grid-ring"/>
+    <polygon points="0,-55 48,-28 48,28 0,55 -48,28 -48,-55" class="grid-ring"/>
+
+    <!-- Eixos -->
+    <line x1="0" y1="0" x2="0" y2="-245" class="axis-line"/>
+    <line x1="0" y1="0" x2="212" y2="-122" class="axis-line"/>
+    <line x1="0" y1="0" x2="212" y2="122" class="axis-line"/>
+    <line x1="0" y1="0" x2="0" y2="245" class="axis-line"/>
+    <line x1="0" y1="0" x2="-212" y2="122" class="axis-line"/>
+    <line x1="0" y1="0" x2="-212" y2="-122" class="axis-line"/>
+
+    <!-- Labels dos eixos -->
+    <text x="0" y="-250" text-anchor="middle" class="axis-label" fill="#1a5276">MÓDULO (MPa)</text>
+    <text x="225" y="-125" text-anchor="middle" class="axis-label" fill="#1a5276">TENSÃO (MPa)</text>
+    <text x="225" y="135" text-anchor="middle" class="axis-label" fill="#1a5276">T_10% (°C)</text>
+    <text x="0" y="258" text-anchor="middle" class="axis-label" fill="#1a5276">T_50% (°C)</text>
+    <text x="-225" y="135" text-anchor="middle" class="axis-label" fill="#1a5276">IMPACTO IZOD (J/m)</text>
+    <text x="-225" y="-125" text-anchor="middle" class="axis-label" fill="#1a5276">X_C (%)</text>
+
+    <!-- Marcas de escala -->
+    <text x="0" y="-223" text-anchor="middle" class="label" font-size="7">490</text>
+    <text x="0" y="-168" text-anchor="middle" class="label" font-size="7">480</text>
+    <text x="0" y="-113" text-anchor="middle" class="label" font-size="7">470</text>
+    <text x="0" y="-58" text-anchor="middle" class="label" font-size="7">460</text>
+
+    <!-- T1 - PELBD (cinza tracejado) -->
+    <polygon points="0,-55 48,-28 95,55 0,165 -95,48 -143,-28" fill="none" stroke="#bdc3c7" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <circle cx="0" cy="-55" r="3" fill="#bdc3c7"/>
+    <text x="5" y="-58" font-size="6" fill="#bdc3c7">T1(443)</text>
+
+    <!-- T2 - PP-g-MA -->
+    <polygon points="0,-57 48,-30 100,58 0,170 -95,50 -143,-30" fill="none" stroke="#7f8c8d" stroke-width="1.5"/>
+    <circle cx="0" cy="-57" r="3" fill="#7f8c8d"/>
+
+    <!-- T3 - 0.05rGO -->
+    <polygon points="0,-140 95,-80 180,105 0,200 -120,62 -190,-75" fill="none" stroke="#3498db" stroke-width="1.8"/>
+    <circle cx="0" cy="-140" r="3" fill="#3498db"/>
+    <circle cx="95" cy="-80" r="3" fill="#3498db"/>
+    <circle cx="180" cy="105" r="3" fill="#3498db"/>
+    <circle cx="0" cy="200" r="3" fill="#3498db"/>
+    <circle cx="-120" cy="62" r="3" fill="#3498db"/>
+    <circle cx="-190" cy="-75" r="3" fill="#3498db"/>
+
+    <!-- T4 - 0.10rGO -->
+    <polygon points="0,-180 100,-115 180,85 0,195 -120,60 -200,-70" fill="none" stroke="#2980b9" stroke-width="1.8"/>
+    <circle cx="0" cy="-180" r="3" fill="#2980b9"/>
+    <circle cx="100" cy="-115" r="3" fill="#2980b9"/>
+    <circle cx="180" cy="85" r="3" fill="#2980b9"/>
+    <circle cx="0" cy="195" r="3" fill="#2980b9"/>
+    <circle cx="-120" cy="60" r="3" fill="#2980b9"/>
+    <circle cx="-200" cy="-70" r="3" fill="#2980b9"/>
+
+    <!-- T5 - 0.05rGO+PP-g-MA (DESTAQUE) -->
+    <polygon points="0,-210 115,-110 205,120 0,220 -125,70 -205,-85" fill="#e67e22" fill-opacity="0.15" stroke="#e67e22" stroke-width="3"/>
+    <circle cx="0" cy="-210" r="5" fill="#e67e22" stroke="white" stroke-width="1.5"/>
+    <circle cx="115" cy="-110" r="5" fill="#e67e22" stroke="white" stroke-width="1.5"/>
+    <circle cx="205" cy="120" r="5" fill="#e67e22" stroke="white" stroke-width="1.5"/>
+    <circle cx="0" cy="220" r="5" fill="#e67e22" stroke="white" stroke-width="1.5"/>
+    <circle cx="-125" cy="70" r="5" fill="#e67e22" stroke="white" stroke-width="1.5"/>
+    <circle cx="-205" cy="-85" r="5" fill="#e67e22" stroke="white" stroke-width="1.5"/>
+
+    <!-- T6 - 0.10rGO+PP-g-MA -->
+    <polygon points="0,-190 100,-100 170,65 0,185 -120,55 -195,-70" fill="none" stroke="#8e44ad" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <circle cx="0" cy="-190" r="3" fill="#8e44ad"/>
+  </g>
+
+  <!-- Legenda -->
+  <g transform="translate(620,80)">
+    <text x="0" y="0" font-size="10" font-weight="bold" fill="#1a5276">Formulações:</text>
+    <line x1="0" y1="15" x2="30" y2="15" stroke="#bdc3c7" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="35" y="18" font-size="8" fill="#333">T1 — PELBD puro</text>
+    <line x1="0" y1="30" x2="30" y2="30" stroke="#7f8c8d" stroke-width="1.5"/>
+    <text x="35" y="33" font-size="8" fill="#333">T2 — PP-g-MA isolado</text>
+    <line x1="0" y1="45" x2="30" y2="45" stroke="#3498db" stroke-width="1.8"/>
+    <text x="35" y="48" font-size="8" fill="#333">T3 — 0,05% rGO</text>
+    <line x1="0" y1="60" x2="30" y2="60" stroke="#2980b9" stroke-width="1.8"/>
+    <text x="35" y="63" font-size="8" fill="#333">T4 — 0,10% rGO</text>
+    <line x1="0" y1="75" x2="30" y2="75" stroke="#e67e22" stroke-width="3"/>
+    <text x="35" y="78" font-size="8" fill="#e67e22" font-weight="bold">T5 — 0,05%rGO+PP-g-MA ★ ÓTIMO</text>
+    <line x1="0" y1="90" x2="30" y2="90" stroke="#8e44ad" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="35" y="93" font-size="8" fill="#333">T6 — 0,10%rGO+PP-g-MA</text>
+  </g>
+
+  <!-- Fronteira de Pareto -->
+  <g transform="translate(620,190)">
+    <text x="0" y="0" font-size="9" font-weight="bold" fill="#27ae60">Fronteira de Pareto:</text>
+    <text x="0" y="15" font-size="8" fill="#333">3/6 formulações não-dominadas:</text>
+    <text x="5" y="30" font-size="8" fill="#27ae60">• T3: menor custo rGO</text>
+    <text x="5" y="43" font-size="8" fill="#27ae60">• T4: máx. tensão</text>
+    <text x="5" y="56" font-size="8" fill="#27ae60">• T5: máx. T_10%, T_50%, Módulo</text>
+    <text x="5" y="69" font-size="7" fill="#7f8c8d">T1 e T2 dominadas em todas dimensões</text>
+  </g>
+
+  <!-- Seta para T5 -->
+  <g>
+    <line x1="620" y1="330" x2="500" y2="200" stroke="#e67e22" stroke-width="1.5" marker-end="url(#optArrow)"/>
+    <text x="530" y="270" font-size="8" fill="#e67e22" font-weight="bold">Convergência</text>
+    <text x="530" y="282" font-size="8" fill="#e67e22">Multiobjetivo</text>
+  </g>
+
+  <!-- Legenda geral -->
+  <text x="400" y="610" text-anchor="middle" class="cite" font-size="8">
+    Legenda: T5 (0,05%rGO+PP-g-MA) domina em Módulo, T_10% e T_50% — ótimo por Pareto, Shapley, Nash e Minimax.
+    Apenas 3/6 formulações são não-dominadas (fronteira de Pareto [Pareto 1906]), confirmando a eficiência da otimização multiobjetivo.
+    O raio de cobertura de T5 é o maior entre todas as formulações.
+  </text>
+  <text x="400" y="628" text-anchor="middle" class="cite" font-size="7.5">
+    [Pareto, Manuale di Economia Politica (1906)] [Natarajan et al., Polímeros 30, e2020035 (2020). DOI: 10.1590/0104-1428.05620]
+  </text>
+
+</svg>

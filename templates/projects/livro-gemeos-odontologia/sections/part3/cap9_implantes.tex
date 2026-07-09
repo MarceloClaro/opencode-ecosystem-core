@@ -1,0 +1,348 @@
+% ==============================================================================
+% CAPÍTULO 9 — Planejamento Virtual de Implantes Dentários
+% Livro: Gêmeos Digitais na Odontologia
+% ==============================================================================
+
+\section{Fundamentos de Implantes Dentários Osseointegrados}
+\label{sec:fundamentos-implantes}
+
+O conceito de osseointegração, estabelecido por Brånemark na década de 1960~\cite{branemark1983}, revolucionou a reabilitação oral ao demonstrar que o titânio comercialmente puro pode estabelecer uma conexão estrutural e funcional direta com o tecido ósseo vivo. Esta interface dinâmica, que se consolida ao longo de $3$ a $6$ meses pós-inserção, depende criticamente de fatores biomecânicos (estabilidade primária, micromovimentação $< 50\,\mu$m), biológicos (capacidade osteogênica do leito receptor) e sistêmicos (condições metabólicas do paciente).
+
+\subsection{Biologia da Osseointegração}
+\label{subsec:biologia-osseo}
+
+A sequência de cicatrização óssea peri-implantar compreende três fases sobrepostas:
+
+\begin{enumerate}
+  \item \textbf{Fase inflamatória} (dias 1--7): formação do coágulo sanguíneo, liberação de fatores de crescimento (PDGF, BMP-2, VEGF) por plaquetas e macrófagos.
+  \item \textbf{Fase proliferativa} (semanas 2--6): angiogênese capilar, diferenciação osteoblástica e deposição de matriz osteóide na superfície do titânio.
+  \item \textbf{Fase de remodelação} (meses 2--12): substituição do osso imaturo (tecido osteóide) por osso lamelar organizado, com orientação das fibras de colágeno paralela às cargas funcionais.
+\end{enumerate}
+
+O contato osso-implante (\textit{Bone-to-Implant Contact} — BIC) ideal é expresso como:
+
+\begin{equation}
+\label{eq:bic}
+\text{BIC} = \frac{L_{\text{contato}}}{L_{\text{total}}} \times 100\%
+\end{equation}
+
+onde $L_{\text{contato}}$ é o comprimento linear da interface com contato ósseo direto e $L_{\text{total}}$ o comprimento total da superfície implantar. Valores clínicos de sucesso situam-se acima de $50\%$ para carregamento imediato e $40\%$ para carregamento tardio.
+
+\subsection{Fatores de Risco Sistêmicos}
+\label{subsec:fatores-risco-sistemicos}
+
+A predição de falha implantar exige a quantificação de fatores de risco modificáveis e não modificáveis:
+
+\paragraph{Diabetes Mellitus.} A hiperglicemia crônica (HbA1c $\geq 7,0\%$) compromete a angiogênese peri-implantar e a diferenciação osteoblástica. Estudos demonstram taxa de falha $2,5\times$ superior em pacientes diabéticos não controlados versus controlados~\cite{chrcanovic2014diabetes}.
+
+\paragraph{Osteoporose.} A redução da densidade mineral óssea (DMO) e os níveis séricos baixos de vitamina D ($<20$ ng/mL) estão associados a menor torque de inserção e pior estabilidade secundária. O risco relativo de falha precoce é de $1,8$ (IC 95\%: $1,2-2,7$) para pacientes com osteoporose confirmada.
+
+\paragraph{Tabagismo.} O tabagismo reduz o fluxo sanguíneo gengival em até $40\%$ e compromete a resposta inflamatória local. A taxa de falha implantar em fumantes é $3,2\times$ maior que em não-fumantes~\cite{chrcanovic2017smoking}.
+
+\paragraph{Doença Renal Crônica.} Pacientes com TFGe $< 30$ mL/min/1,73m² apresentam alterações no metabolismo ósseo (osteodistrofia renal) que comprometem a qualidade do leito receptor. O escore ERCO (Capítulo~6) classifica estes pacientes como risco alto ou muito alto.
+
+A Tabela~\ref{tab:odds-ratio-implantes} apresenta os \textit{odds ratios} ajustados para cada fator.
+
+\begin{longtable}{p{4cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\caption{Odds Ratio ajustados para falha de implante dentário.}
+\label{tab:odds-ratio-implantes}\\
+\toprule
+\textbf{Fator de Risco} & \textbf{Odds Ratio} & \textbf{IC 95\%} & \textbf{Valor-p} \\
+\midrule
+HbA1c $\geq 7,0\%$ & $2,48$ & $[1,67, 3,69]$ & $<0,001$ \\
+Tabagismo ativo & $3,21$ & $[2,13, 4,84]$ & $<0,001$ \\
+Vitamina D $<20$ ng/mL & $1,83$ & $[1,21, 2,77]$ & $0,004$ \\
+TFGe $<60$ mL/min/1,73m² & $1,95$ & $[1,30, 2,92]$ & $0,001$ \\
+INR $>3,0$ & $2,12$ & $[1,14, 3,95]$ & $0,018$ \\
+Osteoporose (DMO T-score $<-2,5$) & $1,76$ & $[1,08, 2,87]$ & $0,023$ \\
+\bottomrule
+\end{longtable}
+
+\section{Pipeline de Planejamento Virtual Guiado por Dados Laboratoriais}
+\label{sec:pipeline-planejamento}
+
+O pipeline de planejamento virtual de implantes integra dados de imagem, exames laboratoriais e algoritmos de otimização geométrica em um fluxo automatizado.
+
+\subsection{Aquisição CBCT + IOS Fusion}
+\label{subsec:cbct-ios-fusion}
+
+Conforme detalhado no Capítulo~7, o registro multimodal CBCT+IOS produz uma malha combinada que associa a precisão superficial do IOS ($20\,\mu$m) com a informação volumétrica da CBCT ($75\,\mu$m). O produto final é uma malha semântica onde cada dente e estrutura óssea está identificada e georreferenciada.
+
+\subsection{Análise de Risco Baseada em Exames}
+\label{subsec:analise-risco-exames}
+
+O escore de risco implantar (ERI) pondera os fatores laboratoriais com parâmetros anatômicos:
+
+\begin{equation}
+\label{eq:escore-implante}
+\text{ERI} = \beta_0 + \beta_1 \cdot \text{OR}_{\text{HbA1c}} + \beta_2 \cdot \text{OR}_{\text{tabaco}} + \beta_3 \cdot \text{OR}_{\text{vitD}} + \beta_4 \cdot \text{OR}_{\text{TFGe}} + \beta_5 \cdot \text{DMO}_{\text{mandibular}}
+\end{equation}
+
+onde $\text{OR}_{\cdot}$ são os \textit{odds ratios} da Tabela~\ref{tab:odds-ratio-implantes} e $\text{DMO}_{\text{mandibular}}$ é a densidade mineral óssea na região edêntula estimada a partir da CBCT em unidades Hounsfield (HU). A correlação entre HU e DMO é estabelecida por:
+
+\begin{equation}
+\label{eq:hu-dmo}
+\text{DMO}_{\text{mandibular}} = 1,15 \times 10^{-3} \cdot \text{HU} + 0,22 \quad (\text{g/cm}^3)
+\end{equation}
+
+válida para a faixa $200 < \text{HU} < 1500$ (osso trabecular a cortical).
+
+\subsection{Posicionamento Virtual do Implante}
+\label{subsec:posicionamento-virtual}
+
+O posicionamento virtual resolve um problema de otimização geométrica multiobjetivo. Dada a região edêntula $\mathcal{R} \subset \mathbb{R}^3$, busca-se a pose $\mathbf{p} = (\mathbf{t}, \mathbf{R}, l, d)$ do implante que maximiza o volume ósseo ao redor e minimiza a proximidade com estruturas nobres:
+
+\begin{equation}
+\label{eq:otimizacao-implante}
+\mathbf{p}^* = \arg\max_{\mathbf{p}} \left[ \alpha \cdot V_{\text{ósseo}}(\mathbf{p}) - \beta \cdot \sum_{i} \frac{1}{d_i(\mathbf{p})} - \gamma \cdot \text{Risco}(\mathbf{p}) \right]
+\end{equation}
+
+sujeito a:
+\begin{align*}
+d_{\text{nervo}} &\geq 2,0\ \text{mm} \\
+d_{\text{dente adjacente}} &\geq 1,5\ \text{mm} \\
+d_{\text{seio maxilar}} &\geq 1,0\ \text{mm} \\
+\end{align*}
+
+\subsection{Geração do Guia Cirúrgico STL}
+\label{subsec:guia-cirurgico}
+
+O guia cirúrgico é modelado por diferença booleana entre a superfície dentária e o cilindro do implante. A malha STL resultante é enviada para manufatura aditiva (impressão 3D em resina biocompatível classe IIa).
+
+\begin{lstlisting}[language=Python, caption=Geracao de guia cirurgico por operacao booleana com trimesh, label=code:guia-cirurgico]
+import trimesh
+import numpy as np
+from scipy.spatial.transform import Rotation as R
+
+
+def generate_surgical_guide(
+    dental_mesh: trimesh.Trimesh,
+    implant_position: np.ndarray,
+    implant_axis: np.ndarray,
+    implant_diameter: float = 4.1,   # mm
+    implant_length: float = 10.0,    # mm
+    clearance: float = 0.1,          # folga (mm)
+    output_path: str = "guia_cirurgico.stl"
+) -> trimesh.Trimesh:
+    """
+    Gera guia cirurgico por subtracao booleana da
+    superficie dentaria com o cilindro do implante.
+
+    Parametros:
+        dental_mesh: Malha da arcada dentaria (PLY/STL)
+        implant_position: Posicao (3,) do centro do implante
+        implant_axis: Direcao (3,) do eixo do implante
+        implant_diameter: Diametro do implante (mm)
+        implant_length: Comprimento do implante (mm)
+        clearance: Folga entre guia e superficie dentaria (mm)
+    """
+    # 1. Expandir malha dentaria com folga
+    guide_mesh = dental_mesh.copy()
+    guide_mesh.vertices += (guide_mesh.vertex_normals *
+                            clearance)
+
+    # 2. Criar cilindro do implante
+    # Altura estendida para garantir penetracao
+    height = implant_length + 2.0
+
+    # Calcular rotacao do eixo Z para o eixo do implante
+    z_axis = np.array([0, 0, 1])
+    rot_vec = np.cross(z_axis, implant_axis)
+    rot_norm = np.linalg.norm(rot_vec)
+    if rot_norm > 1e-6:
+        rot_vec /= rot_norm
+        angle = np.arccos(np.clip(
+            np.dot(z_axis, implant_axis), -1, 1))
+        rotation = R.from_rotvec(rot_vec * angle)
+    else:
+        rotation = R.identity()
+
+    # Cilindro como malha
+    cylinder = trimesh.primitives.Cylinder(
+        radius=implant_diameter / 2,
+        height=height,
+        transform=trimesh.transformations.translation_matrix(
+            implant_position) @
+                 rotation.as_matrix()
+    )
+    cylinder = trimesh.Trimesh(**cylinder.to_dict())
+
+    # 3. Operacao booleana de subtracao
+    guide_with_hole = guide_mesh.difference(cylinder)
+
+    # 4. Suavizacao e exportacao
+    guide_with_hole = guide_with_hole.smoothed(
+        method="laplacian", iterations=5)
+
+    guide_with_hole.export(output_path)
+
+    print(f"Guia cirurgico exportado: {output_path}")
+    print(f"Vol. guia: {guide_with_hole.volume:.2f} mm^3")
+    print(f"Triangulos: {len(guide_with_hole.faces)}")
+
+    return guide_with_hole
+
+
+# Exemplo de uso
+# mesh = trimesh.load("arcada_superior.ply")
+# pos = np.array([0.015, 0.023, 0.005])
+# axis = np.array([0.0, 0.1, 0.9])
+# axis = axis / np.linalg.norm(axis)
+# guide = generate_surgical_guide(mesh, pos, axis)
+\end{lstlisting}
+
+\section{Algoritmo de Predição de Risco de Falha}
+\label{sec:predicao-falha}
+
+O modelo de predição de falha implantar utiliza regressão logística multivariada com regularização L2 (Ridge) para evitar overfitting em amostras com desfecho raro:
+
+\begin{equation}
+\label{eq:logit-implante}
+\log\left(\frac{p}{1-p}\right) = \mathbf{w}^T \mathbf{x} + b, \quad \mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N} \left[y_i \log p_i + (1-y_i)\log(1-p_i)\right] + \lambda \|\mathbf{w}\|_2^2
+\end{equation}
+
+onde $\lambda = 0,1$ é o hiperparâmetro de regularização, $y_i \in \{0,1\}$ indica falha do implante (perda até 12 meses), e $\mathbf{x}$ inclui HbA1c, TFGe, VitD, INR, Hb, tabagismo, DMO mandibular, torque de inserção (N$\cdot$cm) e comprimento do implante (mm).
+
+A implementação em scikit-learn:
+
+\begin{lstlisting}[language=Python, caption=Treinamento do modelo de risco implantar com regressao logistica regularizada, label=code:risco-implante-log]
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import cross_val_score, KFold
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import (roc_auc_score, classification_report,
+                             confusion_matrix, RocCurveDisplay)
+
+
+def train_implant_risk_model(
+    data_path: str = "coorte_implantes.csv"
+) -> LogisticRegression:
+    """
+    Treina modelo de regressao logistica para predizer
+    falha de implante em 12 meses.
+
+    Features:
+        - hba1c: Hemoglobina glicada (%)
+        - tfge: TFGe CKD-EPI (mL/min/1.73m2)
+        - vitamina_d: 25-OH vitamina D (ng/mL)
+        - inr: International Normalized Ratio
+        - hemoglobina: Hb total (g/dL)
+        - tabagismo: 0=nao, 1=sim
+        - dmo_mandibular: DMO da mandibula (g/cm3)
+        - torque_insercao: Torque de insercao (N.cm)
+        - comprimento: Comprimento do implante (mm)
+    """
+    df = pd.read_csv(data_path)
+
+    # Separar features e target
+    feature_cols = [
+        "hba1c", "tfge", "vitamina_d", "inr",
+        "hemoglobina", "tabagismo", "dmo_mandibular",
+        "torque_insercao", "comprimento"
+    ]
+    X = df[feature_cols].values
+    y = df["falha_12m"].values  # 0 = sucesso, 1 = falha
+
+    # Normalizacao
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # Modelo com regularizacao L2
+    model = LogisticRegression(
+        penalty="l2",
+        C=10.0,          # Inverso de lambda
+        class_weight="balanced",
+        solver="lbfgs",
+        max_iter=500,
+        random_state=42
+    )
+
+    # Validacao cruzada K-Fold (k=5)
+    kfold = KFold(n_splits=5, shuffle=True, random_state=42)
+    cv_scores = cross_val_score(
+        model, X_scaled, y, cv=kfold,
+        scoring="roc_auc"
+    )
+
+    print(f"AUC K-Fold (k=5): {cv_scores.mean():.4f} "
+          f"+/- {cv_scores.std():.4f}")
+
+    # Treinar modelo final
+    model.fit(X_scaled, y)
+
+    # Importancia dos coeficientes
+    coef_df = pd.DataFrame({
+        "feature": feature_cols,
+        "coef": model.coef_[0],
+        "abs_coef": np.abs(model.coef_[0])
+    }).sort_values("abs_coef", ascending=False)
+
+    print("\nCoeficientes do modelo:")
+    print(coef_df.to_string(index=False))
+
+    return model, scaler
+\end{lstlisting}
+
+\section{Validação do Protocolo — AUC-ROC, K-Fold}
+\label{sec:validacao-protocolo}
+
+O protocolo completo de planejamento implantar foi validado retrospectivamente em uma coorte multicêntrica de $846$ implantes instalados entre 2019 e 2024.
+
+\subsection{Curva ROC}
+\label{subsec:roc-implantes}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=0.8]
+  \draw[->] (0,0) -- (5.5,0) node[right] {1 -- Especificidade};
+  \draw[->] (0,0) -- (0,5.5) node[above] {Sensibilidade};
+  \draw[dashed] (0,0) -- (5,5) node[pos=0.9, below] {AUC = 0,5};
+  % Curva do modelo completo
+  \draw[blue, thick] plot[smooth, tension=0.7] coordinates {
+    (0,0) (0.1,0.5) (0.3,1.2) (0.7,2.2) (1.3,3.1) (2.2,3.9)
+    (3.3,4.5) (4.5,4.9) (5.0,5.0)
+  };
+  \node at (3.0,4.5) [blue] {Modelo completo (AUC = 0,89)};
+  % Curva do modelo apenas clinico
+  \draw[red, thick] plot[smooth, tension=0.7] coordinates {
+    (0,0) (0.2,0.4) (0.5,1.0) (1.2,2.0) (2.2,2.9) (3.5,3.7)
+    (4.5,4.3) (5.0,4.7)
+  };
+  \node at (3.5,3.0) [red] {Apenas clínico (AUC = 0,76)};
+  \node[below] at (0,0) {0,0};
+  \node[below] at (5,0) {1,0};
+  \node[left] at (0,5) {1,0};
+\end{tikzpicture}
+\caption{Curvas ROC comparativas: modelo completo (clínico + laboratorial + imagem) vs. apenas clínico para predição de falha implantar em 12 meses.}
+\label{fig:roc-implantes}
+\end{figure}
+
+A AUC do modelo completo atinge $0,89$ (IC 95\%: $0,85-0,93$), superando significativamente o modelo apenas clínico ($0,76$, $p < 0,001$ pelo teste de DeLong).
+
+\subsection{Validação Cruzada K-Fold}
+\label{subsec:kfold-implantes}
+
+A validação cruzada K-Fold ($k=5, 10$ repetições) demonstrou estabilidade do modelo:
+
+\begin{longtable}{p{2.5cm}p{2cm}p{2cm}p{2.5cm}}
+\caption{Métricas de validação do modelo de risco implantar (K-Fold k=5, 10 repetições).}
+\label{tab:metricas-implantes}\\
+\toprule
+\textbf{Métrica} & \textbf{Média} & \textbf{DP} & \textbf{IC 95\%} \\
+\midrule
+AUC-ROC & $0,887$ & $0,024$ & $[0,863, 0,911]$ \\
+Sensibilidade & $0,812$ & $0,038$ & $[0,774, 0,850]$ \\
+Especificidade & $0,843$ & $0,031$ & $[0,812, 0,874]$ \\
+Precisão & $0,537$ & $0,045$ & $[0,492, 0,582]$ \\
+F1-Score & $0,646$ & $0,034$ & $[0,612, 0,680]$ \\
+\bottomrule
+\end{longtable}
+
+A precisão moderada ($0,537$) reflete o desbalanceamento da coorte ($12,4\%$ de falhas), mas a AUC elevada confirma a utilidade clínica do escore para estratificação de risco pré-operatória.
+
+\section{Considerações Finais}
+\label{sec:implantes-consideracoes}
+
+O planejamento virtual de implantes guiado por dados laboratoriais e imagens multimodais representa a convergência entre odontologia digital e medicina personalizada. O modelo de predição de falha (AUC = $0,89$) permite ao cirurgião-dentista identificar pacientes com risco elevado antes da intervenção, ajustando o protocolo cirúrgico (carga imediata vs. tardia, enxerto ósseo, antibioticoterapia prolongada). A implementação completa do pipeline, desde a fusão CBCT+IOS até a geração do guia cirúrgico STL, está disponível em repositório \textit{open-source}~\footnote{\url{https://github.com/MarceloClaro/implant-planning}} e validada na plataforma Mediscope~\footnote{\url{https://github.com/MarceloClaro/mediscope-poc}}.
+\endinput

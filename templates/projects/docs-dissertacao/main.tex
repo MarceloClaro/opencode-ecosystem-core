@@ -1,0 +1,130 @@
+\documentclass[12pt,a4paper,oneside]{abntex2}
+
+% ─── PACOTES ───
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{setspace}
+\usetikzlibrary{positioning,shapes,arrows,fit,backgrounds}
+
+% ─── HIFENIZAÇÃO E CONTROLE DE MARGENS ───
+\usepackage{microtype}
+\microtypesetup{expansion=false}
+\tolerance=500
+\emergencystretch=2em
+\hyphenpenalty=500
+\doublehyphendemerits=10000
+\hyphenation{
+eco-sys-tem ob-ser-va-bi-li-da-de me-ta-cog-ni-ti-vo
+me-ta-cog-ni-ção com-po-si-ção ar-qui-te-tu-ra
+es-tru-tu-ral con-ver-gên-cia in-te-gri-da-de
+au-to-má-ti-ca es-pe-ci-fi-ca-ção ve-ri-fi-cá-vel
+re-pro-du-zi-bi-li-da-de ras-tre-a-bi-li-da-de
+con-se-cu-ti-vos in-ter-mi-ten-te e-co-sys-tem
+mo-ni-to-ra-men-to fun-da-men-tal-men-te
+con-si-de-ra-ções dis-ser-ta-ção ca-pa-ci-da-de
+im-ple-men-ta-ção me-ta-cog-ni-ti-va au-to-no-mi-a
+ar-ma-ze-na-men-to de-sem-pe-nho com-pres-são
+pre-ser-va-ção re-cons-tru-ção con-fi-a-bil-i-da-de
+}
+
+% ─── DOI COMMAND ───
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{\texttt{DOI: #1}}}
+% ─── COMANDO DE CITAÇÃO CRÍTICA ───
+\newcommand{\citecrit}[4]{%
+\footnote{%
+\textbf{Original}: ``#1'' \\
+\textbf{Tradução}: ``#2'' \\
+\textbf{Relevância}: #3 \\
+\textbf{DOI/Ref}: #4%
+}%
+}
+
+
+% ─── METADADOS ───
+\titulo{OpenCode Ecosystem v5.4.0 R23:\\Arquitetura, Implementação e Validação de um Sistema de\\Engenharia de Software com Metacognição Funcional\\e Behavioral Gate Preventivo}
+\autor{Marcelo Claro Laranjeira}
+\local{Crateús, Ceará}
+\data{2026}
+\instituicao{OpenCode Ecosystem Research Initiative}
+\tipotrabalho{Dissertação (Pesquisa Independente)}
+
+% ─── CONFIGURAÇÕES DE CÓDIGO ───
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={OpenCode Ecosystem v5.4.0 R23},
+    pdfauthor={Marcelo Claro Laranjeira},
+    pdfsubject={Engenharia de Software, Metacognição, Sistemas Autônomos},
+    pdfkeywords={OpenCode, metacognição, behavioral gate, trust scoring, N3.5, TDD, SPEC}
+}
+
+% ─── ESPAÇAMENTO (abntex2 já fornece espaçamento padrão) ───
+% \onehalfspacing — removido: abntex2 gerencia espaçamento automaticamente
+
+\begin{document}
+
+% ─── ELEMENTOS PRÉ-TEXTUAIS ───
+\input{elementos_pretextuais.tex}
+
+% ─── CAPÍTULOS ───
+\input{cap1_introducao.tex}
+\input{cap2_literatura.tex}
+\input{cap3_metodologia.tex}
+\input{cap4_arquitetura.tex}
+\input{cap5_composicao.tex}
+\input{cap6_metacognicao.tex}
+\input{cap7_behavioral.tex}
+\input{cap8_resultados.tex}
+\input{cap9_conclusao.tex}
+\input{cap10_producao.tex}
+
+% ─── REFERÊNCIAS ───
+\input{referencias.tex}
+
+% ─── APÊNDICES ───
+\input{apendices.tex}
+
+\end{document}

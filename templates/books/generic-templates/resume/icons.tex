@@ -1,0 +1,13 @@
+\usepackage{fontawesome}
+
+% ICONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\icon}[2][ink]{%
+  \makebox[1.1em][c]{\textcolor{#1}{\csname fa#2\endcsname}}%
+}
+
+% LABEL %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\iconlabel}[3][ink]{%
+  \icon[#1]{#2}\hspace{0.6em}#3%
+}

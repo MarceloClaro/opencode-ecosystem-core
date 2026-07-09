@@ -1,0 +1,358 @@
+% =============================================================================
+% CAPÍTULO 12: IoT, Telemetria e o Gateway SUS-Twin
+% Volume 2 — Gêmeos Digitais Periodontais
+% V2 Standalone — sem \input{}
+% Seções:
+%   12.1 - Arquitetura IoT para Periodontia Digital
+%   12.2 - Gateway SUS-Twin: Processamento de Borda com MQTT
+%   12.3 - Dashboard Clínico com Grafana e InfluxDB
+%   12.4 - Projeto Prático: Monitoramento Oclusal IoT Completo
+%   12.5 - Protocolos IoT e Interoperabilidade Odontológica
+%   12.6 - Exercícios Propostos
+% =============================================================================
+\label{ch:plataformas}
+
+% --- BADGE DO CAPÍTULO ---
+\begin{highlight}
+\large\textbf{Badge do Capítulo}\\[4pt]
+\rule{\textwidth}{1pt}\\[4pt]
+\begin{tabular}{ll}
+\textbf{Nível-alvo:} & N2 --- Pesquisa Reprodutível \\
+\textbf{Habilidades:} & configurar MQTT, gateway de borda, \\
+                     & dashboard IoT em tempo real \\
+\textbf{Pré-requisitos:} & Python 3.11+, paho-mqtt, Docker \\
+\textbf{Comando de verificação:} & \texttt{tdd\_validate.py --chapter 12}
+\end{tabular}
+\end{highlight}
+
+\destaque{Nível-alvo N2 --- Pesquisa Reprodutível: ao final deste capítulo, o leitor será capaz de implementar o gateway MQTT do Framework SUS-Twin para coleta de telemetria de sensores intraorais, processar dados na borda e visualizá-los em dashboard clínico.}
+
+% =============================================================================
+\section{Arquitetura IoT para Periodontia Digital}
+% =============================================================================
+
+A Internet das Coisas\footnote{Internet das Coisas (IoT): rede de dispositivos físicos equipados com sensores, software e conectividade de rede que coletam e trocam dados. Na odontologia, sensores intraorais IoT permitem monitoramento contínuo de variáveis biomecânicas e fisiológicas.} (IoT) aplicada à periodontia digital constitui a camada sensorial do Framework SUS-Twin. Sem sensores confiáveis e uma arquitetura de comunicação robusta, o gêmeo digital periodontal é apenas uma simulação desconectada da realidade clínica. A IoT odontológica viabiliza a coleta sistemática de grandezas físicas e químicas diretamente do ambiente bucal do paciente, alimentando o modelo preditivo com dados reais e contínuos.
+
+Os sensores intraorais\footnote{Sensor: dispositivo que converte uma grandeza física (força, temperatura, pH) em um sinal elétrico mensurável. Sensores intraorais são miniaturizados para uso em próteses, alinhadores ou dispositivos retentivos.} contemporâneos operam em três domínios principais: biomecânico (força oclusal, torque, contato), térmico (temperatura intraoral) e químico (pH salivar, biomarcadores inflamatórios). A Tabela~\ref{tab:sensores-grandezas} mapeia os tipos de sensor, as grandezas mensuradas e exemplos de aplicação clínica em periodontia.
+
+\begin{table}[hbt!]
+\centering
+\caption{Sensores IoT intraorais, grandezas mensuradas e aplicações periodontais.}
+\label{tab:sensores-grandezas}
+\small
+\begin{tabular}{lllp{5.5cm}}
+\toprule
+\textbf{Tipo de Sensor} & \textbf{Grandeza} & \textbf{Exemplo Comercial} & \textbf{Aplicação Periodontal} \\
+\midrule
+Strain gauge piezoelétrico & Força oclusal (N) & T-Scan Novus (50--1000\,N) & Mapeamento de contatos prematuros em próteses sobre implantes \\
+\addlinespace
+Termopar tipo K & Temperatura (°C) & Thermochron iButton (25--50\,°C) & Monitoramento de inflamação gengival pós-cirúrgica \\
+\addlinespace
+ISFET & pH salivar & Sensirion SPS30 (0--14) & Risco de cárie e desmineralização peri-implante \\
+\addlinespace
+Acelerômetro MEMS & Movimento mandibular (mm/s) & MPU-6050 (3 eixos) & Análise de bruxismo e apertamento noturno \\
+\addlinespace
+Eletrodo seco & EMG superficial ($\mu$V) & MyoWare 2.0 & Atividade dos masseteres e temporais na ATM \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A telemetria\footnote{Telemetria: processo de coleta e transmissão remota de dados de sensores para uma central de processamento. Na odontologia, permite que o clínico acompanhe a evolução do paciente sem consultas presenciais frequentes.} odontológica impõe requisitos específicos de arquitetura: (a) baixa latência para detecção de eventos oclusais (tipicamente $<100$\,ms), (b) capacidade de operação off-line em clínicas com conectividade intermitente, e (c) segurança de dados compatível com a LGPD. O gateway SUS-Twin atende a esses três requisitos por meio de uma arquitetura de borda --- edge computing\footnote{Edge computing (computação de borda): processamento de dados realizado próximo à fonte geradora (o sensor), em vez de em servidores remotos. Reduz latência, economiza banda e preserva privacidade.} ---, onde o processamento preliminar ocorre no próprio gateway local antes da transmissão para a nuvem clínica.
+
+% =============================================================================
+\section{Gateway SUS-Twin: Processamento de Borda com MQTT}
+% =============================================================================
+
+O gateway\footnote{Gateway: dispositivo ou software que faz a ponte entre sensores locais e a infraestrutura de rede, traduzindo protocolos, agregando dados e executando processamento de borda.} SUS-Twin é o núcleo da arquitetura IoT do framework. Implementado em Python 3.11+, ele utiliza o protocolo MQTT\footnote{MQTT (Message Queuing Telemetry Transport): protocolo de mensagens publish/subscribe leve e eficiente, projetado para IoT. Opera sobre TCP/IP e requer um broker central para distribuir as mensagens entre dispositivos.} (Message Queuing Telemetry Transport) como espinha dorsal de comunicação. MQTT foi escolhido por sua eficiência em banda estreita, suporte nativo a qualidade de serviço (QoS) e modelo publish/subscribe que desacopla sensores de consumidores de dados.
+
+A Figura conceitual do gateway segue o fluxo: sensores $\rightarrow$ broker MQTT $\rightarrow$ processador de borda $\rightarrow$ InfluxDB $\rightarrow$ Grafana. O broker\footnote{Broker MQTT: servidor central que recebe mensagens publicadas por clientes (sensores) e as distribui para clientes inscritos (assinantes). Mosquitto é o broker open-source mais utilizado.} Mosquitto gerencia o roteamento das mensagens entre os componentes, permitindo que múltiplos sensores publiquem em tópicos hierárquicos como \texttt{sustwin/patient/\{id\}/occlusal}.
+
+\paragraph{Código 1: Publicador de sensor intraoral simulado.}
+
+\begin{lstlisting}[style=pythonstyle, caption=Publicador MQTT que simula sensor intraoral T-Sense Pro, label=cod:publisher]
+#!/usr/bin/env python3
+"""publicador_sensor.py — Simula sensor intraoral SUS-Twin."""
+import paho.mqtt.client as mqtt
+import json, time, random
+from datetime import datetime
+
+# Configuracoes do broker
+BROKER = "localhost"
+PORT = 1883
+TOPIC = "sustwin/patient/001/occlusal"
+CLIENT_ID = "tsense_pro_001"
+
+def on_connect(client, userdata, flags, rc):
+    print(f"[PUB] Conectado ao broker (codigo {rc})")
+
+def on_publish(client, userdata, mid):
+    print(f"[PUB] Mensagem {mid} publicada com sucesso")
+
+client = mqtt.Client(client_id=CLIENT_ID)
+client.on_connect = on_connect
+client.on_publish = on_publish
+client.connect(BROKER, PORT, 60)
+client.loop_start()
+
+try:
+    while True:
+        # Simula leitura do sensor intraoral
+        payload = {
+            "timestamp": datetime.now().isoformat(),
+            "patient_id": "001",
+            "sensor_id": CLIENT_ID,
+            "force_occlusal_N": round(random.uniform(50, 500), 2),
+            "temperature_C": round(random.uniform(33, 38), 1),
+            "ph_saliva": round(random.uniform(6.2, 7.6), 2),
+            "occlusal_contact_ms": round(random.uniform(10, 250), 1),
+            "battery_pct": round(random.uniform(60, 100), 1)
+        }
+        result = client.publish(TOPIC, json.dumps(payload), qos=1)
+        time.sleep(5)  # Publica a cada 5 segundos
+except KeyboardInterrupt:
+    print("[PUB] Encerrando publicador...")
+    client.loop_stop()
+    client.disconnect()
+\end{lstlisting}
+
+\paragraph{Código 2: Processador de borda com detecção de anomalias.}
+
+O processador de borda --- edge processor --- assina o tópico MQTT e executa análises em janela deslizante antes de persistir os dados no banco temporal.
+
+\begin{lstlisting}[style=pythonstyle, caption=Assinante MQTT com processamento de borda e detecção de anomalias, label=cod:edge]
+#!/usr/bin/env python3
+"""edge_processor.py — Processamento de borda do gateway SUS-Twin."""
+import paho.mqtt.client as mqtt
+import json
+from collections import deque
+import statistics
+
+WINDOW_SIZE = 10  # Janela deslizante de 10 amostras
+data_window = deque(maxlen=WINDOW_SIZE)
+
+def on_message(client, userdata, msg):
+    """Callback executado a cada mensagem recebida."""
+    payload = json.loads(msg.payload)
+    data_window.append(payload)
+
+    if len(data_window) >= WINDOW_SIZE:
+        forces    = [d["force_occlusal_N"] for d in data_window]
+        temps     = [d["temperature_C"]    for d in data_window]
+        contacts  = [d["occlusal_contact_ms"] for d in data_window]
+
+        # Estatisticas de borda
+        stats = {
+            "window_size":      WINDOW_SIZE,
+            "mean_force_N":     round(statistics.mean(forces), 2),
+            "max_force_N":      round(max(forces), 2),
+            "std_force_N":      round(statistics.stdev(forces), 2),
+            "mean_temp_C":      round(statistics.mean(temps), 2),
+            "contact_imbalance": max(contacts) - min(contacts),
+            "anomaly":          max(forces) > 450 or max(temps) > 37.5
+        }
+
+        print(json.dumps(stats, indent=2))
+
+        if stats["anomaly"]:
+            print("[ALERTA] Anomalia oclusal detectada!")
+            print("[ALERTA] Encaminhar para revisao clinica imediata.")
+
+# Configuracao do assinante
+client = mqtt.Client(client_id="edge_gateway_001")
+client.on_message = on_message
+client.connect("localhost", 1883, 60)
+# Assina todos os pacientes (wildcard +)
+client.subscribe("sustwin/patient/+/occlusal", qos=1)
+print("[EDGE] Gateway SUS-Twin aguardando dados...")
+client.loop_forever()
+\end{lstlisting}
+
+A detecção de anomalias na borda --- como forças oclusais acima de 450\,N ou temperatura intraoral superior a 37,5\,°C --- dispara alertas imediatos sem depender de conectividade com a nuvem, garantindo capacidade de resposta mesmo em clínicas com internet instável. Este é o princípio fundamental do design do gateway SUS-Twin: processar o máximo possível na borda para minimizar latência e dependência de infraestrutura externa.
+
+% =============================================================================
+\section{Dashboard Clínico com Grafana e InfluxDB}
+% =============================================================================
+
+O pipeline de dados completo do gateway SUS-Twin persiste as séries temporais no InfluxDB\footnote{InfluxDB: banco de dados especializado em séries temporais (time-series database), otimizado para armazenar e consultar dados de sensores ao longo do tempo. Utiliza a linguagem de consulta Flux.} e as visualiza no Grafana\footnote{Grafana: plataforma open-source de visualização e monitoramento que cria dashboards interativos a partir de múltiplas fontes de dados, incluindo InfluxDB, Prometheus e PostgreSQL.}, formando o dashboard clínico em tempo real.
+
+A configuração do InfluxDB pode ser realizada via Docker com o comando:
+
+\begin{lstlisting}[style=bashstyle, caption=Inicialização do InfluxDB e Mosquitto via Docker Compose, label=cod:docker]
+# docker-compose.yml — Infraestrutura IoT do SUS-Twin
+version: "3.8"
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  influxdb:
+    image: influxdb:2.7
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: sustwin2026
+      DOCKER_INFLUXDB_INIT_ORG: sustwin
+      DOCKER_INFLUXDB_INIT_BUCKET: telemetria_oclusal
+
+  grafana:
+    image: grafana/grafana:11.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - influxdb
+\end{lstlisting}
+
+Após a inicialização dos containers, o código a seguir escreve os dados processados no InfluxDB:
+
+\begin{lstlisting}[style=pythonstyle, caption=Escrita de dados processados no InfluxDB, label=cod:influx]
+#!/usr/bin/env python3
+"""influxdb_writer.py — Persiste telemetria no InfluxDB."""
+from influxdb_client import InfluxDBClient, Point
+from influxdb_client.client.write_api import SYNCHRONOUS
+import json, time
+
+URL     = "http://localhost:8086"
+TOKEN   = "sustwin2026"
+ORG     = "sustwin"
+BUCKET  = "telemetria_oclusal"
+
+client  = InfluxDBClient(url=URL, token=TOKEN, org=ORG)
+write_api = client.write_api(write_type=SYNCHRONOUS)
+
+def persist_telemetry(data: dict) -> None:
+    """Converte dict em Point do InfluxDB e persiste."""
+    point = Point("oclusal_reading") \
+        .tag("patient_id",  data.get("patient_id", "unknown")) \
+        .tag("sensor_id",   data.get("sensor_id", "unknown")) \
+        .field("force_N",           float(data["force_occlusal_N"])) \
+        .field("temperature_C",     float(data["temperature_C"])) \
+        .field("ph_saliva",         float(data["ph_saliva"])) \
+        .field("contact_ms",        float(data["occlusal_contact_ms"])) \
+        .field("battery_pct",       float(data["battery_pct"]))
+    write_api.write(bucket=BUCKET, record=point)
+
+# Exemplo de uso (dados simulados)
+if __name__ == "__main__":
+    sample = {
+        "timestamp": "2026-06-21T14:30:00",
+        "patient_id": "001",
+        "sensor_id": "tsense_pro_001",
+        "force_occlusal_N": 235.7,
+        "temperature_C": 35.2,
+        "ph_saliva": 6.8,
+        "occlusal_contact_ms": 120.5,
+        "battery_pct": 85.0
+    }
+    persist_telemetry(sample)
+    print("Dado persistido no InfluxDB com sucesso.")
+\end{lstlisting}
+
+O dashboard\footnote{Dashboard: painel visual que consolida indicadores-chave em tempo real, permitindo ao clínico monitorar múltiplos pacientes simultaneamente a partir de gráficos, tabelas e alertas coloridos.} Grafana pode ser configurado com consultas Flux para visualizar a evolução da força oclusal ao longo do tempo, médias diárias e detecção de padrões anômalos. Um exemplo de consulta Flux para o painel de força oclusal é:
+
+\begin{lstlisting}[style=pythonstyle, caption=Consulta Flux para dashboard Grafana, label=cod:flux]
+from(bucket: "telemetria_oclusal")
+  |> range(start: -24h)
+  |> filter(fn: (r) => r._measurement == "oclusal_reading")
+  |> filter(fn: (r) => r._field == "force_N")
+  |> aggregateWindow(every: 5m, fn: mean)
+  |> yield(name: "mean_force_5min")
+\end{lstlisting}
+
+% =============================================================================
+\section{Projeto Prático: Monitoramento Oclusal IoT Completo}
+% =============================================================================
+
+Este projeto prático integra todos os componentes do capítulo em um cenário clínico realístico. O objetivo é implementar o monitoramento oclusal contínuo de um paciente com prótese total sobre implantes, utilizando o gateway SUS-Twin.
+
+\paragraph{Cenário clínico.} Paciente 40 anos, sexo feminino, portadora de prótese total fixa inferior (protocolo Branemark). Apresenta histórico de peri-implante e queixa de desconforto oclusal no lado direito. O periodontista solicita monitoramento IoT por 48 horas para mapear os padrões de força oclusal antes de ajuste oclusal definitivo.
+
+\paragraph{Infraestrutura necessária.}
+\begin{itemize}
+    \item Docker Desktop (Windows) ou Docker Engine (Linux)
+    \item Python 3.11+ com pacotes: \texttt{paho-mqtt}, \texttt{influxdb-client}, \texttt{requests}
+    \item Navegador web para acessar Grafana (porta 3000) e InfluxDB UI (porta 8086)
+\end{itemize}
+
+\paragraph{Passos para reprodução.}
+
+\begin{enumerate}
+    \item \textbf{Inicie a infraestrutura:} execute \texttt{docker compose up -d} no diretório com o \texttt{docker-compose.yml} do Código~\ref{cod:docker}. Verifique se Mosquitto (porta 1883), InfluxDB (8086) e Grafana (3000) estão ativos.
+    \item \textbf{Execute o publicador:} em um terminal, rode \texttt{python publicador\_sensor.py} (Código~\ref{cod:publisher}). O sensor simulado publicará leituras oclusais no tópico MQTT a cada 5 segundos.
+    \item \textbf{Execute o processador de borda:} em outro terminal, rode \texttt{python edge\_processor.py} (Código~\ref{cod:edge}). Observe as estatísticas da janela deslizante e os alertas de anomalia.
+    \item \textbf{Persista os dados:} execute \texttt{python influxdb\_writer.py} (Código~\ref{cod:influx}) para registrar leituras no banco temporal.
+    \item \textbf{Configure o Grafana:} acesse \url{http://localhost:3000} (admin/admin), adicione InfluxDB como fonte de dados, importe a consulta Flux do Código~\ref{cod:flux} e crie um painel com:
+    \begin{itemize}
+        \item Gráfico de séries temporais: força oclusal (N) nas últimas 24h
+        \item Medidor de temperatura intraoral (°C)
+        \item Tabela de alertas de anomalia
+        \item Estatísticas descritivas (média, máximo, desvio padrão)
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Validação.} O projeto é considerado concluído quando o dashboard Grafana exibir dados de telemetria atualizados em tempo real, com detecção visual de picos de força oclusal e alertas configurados.
+
+% =============================================================================
+\section{Protocolos IoT e Interoperabilidade Odontológica}
+% =============================================================================
+
+A escolha do protocolo de comunicação IoT impacta diretamente a latência, o consumo energético e a confiabilidade do sistema de telemetria. A Tabela~\ref{tab:protocolos-iot} compara os principais protocolos disponíveis e sua adequação ao contexto odontológico.
+
+\begin{table}[hbt!]
+\centering
+\caption{Protocolos IoT e sua aplicação em odontologia digital.}
+\label{tab:protocolos-iot}
+\small
+\begin{tabular}{lp{2.8cm}p{1.8cm}p{4cm}p{2.5cm}}
+\toprule
+\textbf{Protocolo} & \textbf{Transporte} & \textbf{Padrão} & \textbf{Uso Odontológico} & \textbf{Limitações} \\
+\midrule
+\textbf{MQTT} & TCP/IP & Publish/Subscribe & Telemetria oclusal, sensores intraorais contínuos & Requer broker central \\
+\addlinespace
+\textbf{CoAP} & UDP & Request/Response & Sensores de baixo consumo (pilha botão) & Confiabilidade reduzida em rede instável \\
+\addlinespace
+\textbf{HTTP/2} & TCP/IP & Request/Response & Sincronização em nuvem, prontuário eletrônico & Alto overhead, não recomendado para tempo real \\
+\addlinespace
+\textbf{LwM2M} & UDP/CoAP & Gerenciamento & Provisionamento remoto de sensores clínicos & Complexidade de implementação \\
+\addlinespace
+\textbf{WebSocket} & TCP/IP & Full-duplex & Dashboard em tempo real no navegador & Consumo de memória elevado \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Para o Framework SUS-Twin, o MQTT com QoS nível 1 (garantia de entrega pelo menos uma vez) é o protocolo recomendado para a camada de sensoriamento contínuo, enquanto HTTP/2 é utilizado para a sincronização periódica com o prontuário eletrônico do paciente (e-SUS Odonto / HL7 FHIR).
+
+% =============================================================================
+\section{Exercícios Propostos}
+% =============================================================================
+
+Os exercícios a seguir consolidam os conceitos práticos do capítulo, progredindo da configuração básica até a integração completa do pipeline IoT.
+
+\paragraph{Exercício 1: Publicação de dado MQTT simulado.}
+Implemente um script Python que publique, a cada 10 segundos, dados simulados de um sensor de temperatura intraoral no tópico \texttt{sustwin/patient/002/temperature}. O payload deve conter os campos: \texttt{timestamp}, \texttt{patient\_id}, \texttt{sensor\_id}, \texttt{temperature\_C}, \texttt{battery\_pct}. Utilize o broker público \texttt{test.mosquitto.org} (porta 1883) para testar. Inclua tratamento de exceção para falhas de conexão.
+
+\paragraph{Exercício 2: Configuração de broker Mosquitto local.}
+Crie um arquivo \texttt{mosquitto.conf} completo para um broker local com as seguintes configurações:
+\begin{itemize}
+    \item Porta 1883 (MQTT padrão) e 9001 (WebSocket)
+    \item Autenticação por usuário/senha (arquivo \texttt{password.txt})
+    \item ACL (Access Control List) restringindo o tópico \texttt{sustwin/} apenas para usuários autenticados
+    \item Persistência de mensagens em arquivo (\texttt{persistence true})
+    \item Log nível \texttt{information}
+\end{itemize}
+Inicie o broker com \texttt{docker run} e valide a conexão com \texttt{mosquitto\_sub} e \texttt{mosquitto\_pub}.
+
+\paragraph{Exercício 3: Criação de dashboard Grafana completo.}
+Utilizando os dados persistidos no InfluxDB pelo Código~\ref{cod:influx}, crie um dashboard Grafana com os seguintes painéis:
+\begin{enumerate}
+    \item Série temporal da força oclusal (N) com média móvel de 15 minutos
+    \item Histograma de distribuição das forças oclusais nas últimas 6 horas
+    \item Tabela de alerta listando todos os eventos com força $>400$\,N
+    \item Medidor em gauge (\textit{single stat}) da temperatura intraoral atual
+\end{enumerate}
+Exporte o dashboard como JSON e salve em \texttt{dashboards/sustwin-oclusal.json}. O comando de verificação \texttt{tdd\_validate.py --chapter 12} deve ser capaz de importar e validar o JSON exportado.

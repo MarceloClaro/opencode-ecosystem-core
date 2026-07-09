@@ -1,0 +1,15 @@
+%----------------------------------------------------------------------------------------
+%   CONFIGURE LEFT BAR
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\leftbarcontents}{%
+  \ifbackgroundbarvisible
+    \fill[bgacc] (current page.south west) rectangle ([xshift=8mm]current page.north west);
+  \fi
+  \ifbackgroundtitlevisible
+    \node[rotate=90, fgacc, font=\huge\bfseries\headingfontfamily, anchor=west] at ([xshift=4mm,yshift=32mm]current page.south west) {\currentparttitle};
+    \begin{scope}[shift={(current page.south west)}]
+      \drawfortalogo{4mm}{16mm}{3mm}{28}{8}{18}{ultra thick, draw=black};
+    \end{scope}
+  \fi
+}

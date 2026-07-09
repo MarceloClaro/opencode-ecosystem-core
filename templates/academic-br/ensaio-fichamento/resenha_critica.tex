@@ -1,0 +1,107 @@
+% =============================================================================
+% RESENHA CRÍTICA — MODELO ABNT
+% =============================================================================
+% Características da resenha crítica:
+%   - Síntese da obra (1/3 do texto)
+%   - Análise crítica fundamentada (2/3 do texto)
+%   - Identificação completa da obra no cabeçalho
+%   - Destinada a periódico científico ou trabalho acadêmico
+% =============================================================================
+\documentclass[
+  12pt,
+  a4paper,
+  brazilian
+]{article}
+
+% --- Pacotes ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian,portuges]{babel}
+\usepackage[alf]{abntex2cite}
+\usepackage{abntex2abrev}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+% --- Margens ABNT ---
+\geometry{
+  a4paper,
+  left=3cm,
+  top=3cm,
+  right=2cm,
+  bottom=2cm
+}
+
+\onehalfspacing
+
+\hypersetup{
+  pdfauthor={Nome do Autor},
+  pdftitle={Resenha: [Título da Obra]},
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black
+}
+
+\title{Resenha de \textit{Título da Obra Resenhada}}
+\author{Nome do Resenhista \\ \small{Instituição} \\ \small{e-mail}}
+\date{2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Identificação da Obra}
+
+\begin{flushleft}
+\textbf{Obra:} Título completo da obra \\
+\textbf{Autor(es):} Nome do autor \\
+\textbf{Editora:} Nome da editora \\
+\textbf{Cidade:} Cidade de publicação \\
+\textbf{Ano:} 2026 \\
+\textbf{Número de páginas:} XXX p. \\
+\textbf{ISBN:} 978-XX-XXXX-XXX-X
+\end{flushleft}
+
+\section*{Síntese da Obra}
+
+A presente resenha tem por objetivo apresentar e analisar criticamente a
+obra \textit{Título da Obra}, de Nome do Autor. A obra está estruturada em
+[X] capítulos, distribuídos em [X] partes, nos quais o autor aborda...
+
+[Parágrafo 1: contextualização do tema e do autor]
+
+[Parágrafo 2: estrutura da obra — capítulos, seções, organização interna]
+
+[Parágrafo 3: resumo do conteúdo de cada capítulo/parte]
+
+\section*{Análise Crítica}
+
+\subsection*{Contribuições da Obra}
+
+Discussão sobre os méritos da obra: originalidade, consistência teórica,
+rigor metodológico, relevância, atualidade.
+
+\subsection*{Limites e Lacunas}
+
+Apontamento crítico de aspectos que poderiam ser aprofundados,
+controvérsias não resolvidas, limitações metodológicas ou teóricas.
+
+\subsection*{Diálogo com a Literatura}
+
+Comparação com outras obras que tratam do mesmo tema, situando a
+contribuição específica da obra resenhada.
+
+\section*{Considerações Finais}
+
+Avaliação geral da obra (recomendada ou não, para qual público, em que
+contextos), explicitando o valor da contribuição e as limitações
+identificadas.
+
+\section*{Referências}
+
+\bibliographystyle{abntex2-alf}
+\bibliography{resenha_modelo}
+
+\end{document}

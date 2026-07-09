@@ -1,0 +1,24 @@
+\section{Plataformas de Gêmeos Digitais e Repositórios Open-Source}
+
+A modelagem paramétrica isolada não configura um gêmeo digital (\textit{Digital Twin}); este exige sincronização espaço-temporal com seu correspondente físico e uma orquestração preditiva contínua. As arquiteturas \textit{open-source} modernas evoluíram de repositórios de algoritmos soltos para *frameworks* orquestradores que integram IoT, machine learning e análise multifísica \cite{katsoulakis2024digital, digital2025convergence}. 
+
+\destaque{A principal barreira tecnológica atual deixou de ser a modelagem mecânica de um dente para se tornar a capacidade de manter esse modelo vivo, sincronizado e alimentado por um fluxo ininterrupto de dados clínicos.}
+
+\subsection{Arquiteturas de Composição IoT: OpenTwins}
+O projeto OpenTwins, desenvolvido no escopo do ERTIS (Embedded Real-Time Systems), consolida a principal infraestrutura de código aberto para a criação de gêmeos digitais composicionais \cite{robles2023opentwins}. Ancorado nos protocolos industriais do \textit{Eclipse Ditto}, o OpenTwins provê abstrações padronizadas para gestão bidirecional de dispositivos. Em clínicas odontológicas, essa plataforma atua como o esqueleto nervoso conectando sensores de pressão em motores de implante, escaneamentos intraorais iterativos e sensores de oclusão digital (como o T-Scan), tudo harmonizado em um *shadow* persistente que espelha as condições bucais do paciente no tempo. Trabalhos recentes estenderam o OpenTwins incorporando a padronização FMU (\textit{Functional Mock-up Unit}), viabilizando o acoplamento profundo entre modelos neurais e físicos \cite{infante2024integrating}.
+
+\subsection{Gêmeos Híbridos Preditivos: FEniCS e SOFA}
+Quando as simulações adentram os rigores da ciência translacional Qualis A1, repositórios de equações diferenciais tornam-se incontornáveis. O projeto FEniCS é o *framework* de computação científica focado na solução de equações diferenciais parciais (EDPs) de alto desempenho via linguagem variacional declarativa. Essa flexibilidade matemática assegura que um pesquisador simule o comportamento viscoelástico do osso maxilar e a biomecânica de alinhadores invisíveis \cite{zhang2024recursive, li2024aligner} com transparência epistemológica irrestrita, garantindo reprodutibilidade, que é o calcanhar de aquiles dos softwares proprietários.
+
+Em contrapartida, para simulações que exigem realimentação háptica e taxas de atualização \textit{real-time} (críticas em cirurgia robótica e treinamento imersivo), o SOFA (\textit{Simulation Open Framework Architecture}) domina. Baseado em malhas deformáveis e grafos topológicos \textit{meshless}, o SOFA modela a deformação não-linear dos tecidos moles bucais, gengivais e linguais durante procedimentos como enxertias ósseas ou extrações de dentes retidos \cite{xing2024clinical}.
+
+\subsection{Modelos Orientados a Dados Médicos e Repositórios GitHub}
+Na confluência entre odontologia de precisão e ciência de dados, despontam arquiteturas avançadas encontradas em repositórios \textit{open-source}:
+
+\begin{itemize}
+    \item \textbf{Digital Patient (GNNs e GANs):} Estruturas como \texttt{pietrobarbiero/digital-patient} demonstram que gêmeos da saúde demandam Redes Neurais em Grafos (GNNs) para correlacionar o microbioma salivar e parâmetros sistêmicos (como HbA1c em pacientes diabéticos). Isto permite simular não apenas a perda dentária mecânica, mas sua suscetibilidade microbiológica.
+    
+    \item \textbf{Aprendizado Físico Autossupervisionado (Med-Real2Sim):} Uma inovação tectônica no modelamento preditivo é o uso do aprendizado guiado pela física (\textit{physics-informed neural networks} - PINNs), evidenciado em projetos como \texttt{vobec/Med-Real2Sim}. Em vez de submeter cada paciente a horas computacionais de FEA profundo, a rede aprende as leis da física da mastigação e infere os campos de estresse sobre restaurações protéticas quase em tempo real, mitigando a dependência de massivos *datasets* rotulados e reduzindo o impacto computacional da clínica.
+    
+    \item \textbf{BioDT e OpenWorm:} Inspirando metodologias além da escala macro, projetos fundacionais como o OpenWorm (modelo completo do nematódeo \textit{C. elegans}) e a infraestrutura BioDT estabelecem as bases para os gêmeos multiescala. Na odontologia, isso vislumbra o salto metodológico de conectar a dinâmica mecano-transdutora a nível celular (remodelação óssea ortodôntica guiada por osteoclastos/osteoblastos) aos movimentos visíveis na arcada maxilar.
+\end{itemize}

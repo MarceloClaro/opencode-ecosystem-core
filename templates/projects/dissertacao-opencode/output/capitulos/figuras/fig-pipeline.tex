@@ -1,0 +1,48 @@
+% Figura 3: Pipeline MASWOS — Layout empilhado em 2 níveis, cabe na margem ABNT
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    node distance=0.5cm,
+    stage/.style={rectangle, draw=black, rounded corners=2pt, fill=blue!5, minimum width=2.8cm, minimum height=1.5cm, align=center, font=\footnotesize\bfseries, inner sep=2pt},
+    arrow/.style={-{Stealth[scale=0.7]}, thick},
+    loop/.style={-{Stealth[scale=0.7]}, thick, dashed, red}
+]
+% Linha 1 — Estágios 0-3
+\node[stage] (s0) {E0\\Diagn\'ostico\\(Ag. 00--01)};
+\node[stage, right=0.3cm of s0] (s1) {E1\\Busca\\(Ag. 02--03)};
+\node[stage, right=0.3cm of s1] (s2) {E2\\Estrutura\\(Ag. 04--05)};
+\node[stage, right=0.3cm of s2] (s3) {E3\\M\'etodo\\(Ag. 06--07)};
+
+% Linha 2 — Estágios 4-7
+\node[stage, below=1.0cm of s0] (s4) {E4\\Reda\c{c}\~ao\\(Ag. 08--11)};
+\node[stage, right=0.3cm of s4] (s5) {E5\\Auditoria\\(Ag. 12--15)};
+\node[stage, right=0.3cm of s5] (s6) {E6\\Exporta\c{c}\~ao\\(Ag. 16--17,33,36)};
+\node[stage, right=0.3cm of s6] (s7) {E7\\Revis\~ao\\(Ag. 31,44--45)};
+
+% Setas horizontais — linha 1
+\foreach \i/\j in {s0/s1, s1/s2, s2/s3} {\draw[arrow] (\i) -- (\j);}
+% Setas horizontais — linha 2
+\foreach \i/\j in {s4/s5, s5/s6, s6/s7} {\draw[arrow] (\i) -- (\j);}
+% Setas verticais entre linhas
+\draw[arrow] (s3.south) -- ++(0,-0.5) -| (s4.north);
+\draw[arrow] (s7.south) -- ++(0,-0.5) -| (s1.south) node[pos=0.9, below, font=\tiny, red] {Loop corretivo (score $<$ 95)};
+
+% Rótulos descritivos abaixo
+\node[font=\tiny, below=0.15cm of s0, text width=2.8cm, align=center] {Escopo\\tipo doc};
+\node[font=\tiny, below=0.15cm of s1, text width=2.8cm, align=center] {10+ fontes\\Sci-Hub DOI};
+\node[font=\tiny, below=0.15cm of s2, text width=2.8cm, align=center] {IMRAD\\CARS 8 eixos};
+\node[font=\tiny, below=0.15cm of s3, text width=2.8cm, align=center] {SDD+TDD\\Cross-Val};
+
+\node[font=\tiny, below=0.15cm of s4, text width=2.8cm, align=center] {Visualiza\c{c}\~ao\\Gr\'aficos};
+\node[font=\tiny, below=0.15cm of s5, text width=2.8cm, align=center] {TSAC\\Qualis QA};
+\node[font=\tiny, below=0.15cm of s6, text width=2.8cm, align=center] {LaTeX/PDF\\DOCX/HTML};
+\node[font=\tiny, below=0.15cm of s7, text width=2.8cm, align=center] {Peer Review\\Corre\c{c}\~ao};
+
+% Anotação
+\node[font=\footnotesize, below=0.8cm of s4, xshift=5cm] {8 est\'agios $\times$ 49 agentes = pipeline completo};
+\end{tikzpicture}%
+}
+\caption{Pipeline acad\^emico MASWOS v5.0: 8 est\'agios com 49 agentes especializados. O fluxo principal avança do diagn\'ostico \`a revis\~ao por pares simulada. A seta vermelha tracejada indica o loop de corre\c{c}\~ao iterativa, que realimenta o est\'agio de busca quando o score Qualis fica abaixo de 95/100.}
+\label{fig:pipeline-maswos}
+\end{figure}

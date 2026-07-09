@@ -1,0 +1,207 @@
+% v2 -- rewritten
+% Seções:
+%   8.1 - Laboratório virtual de periodontia com SUS-Twin
+%   8.2 - Simulação de casos clínicos com DTs
+%   8.3 - Avaliação objetiva com DTs (OSCE digital)
+%   8.4 - Projeto final: criar um módulo de ensino com DT
+\destaque{Nivel-alvo N1 -- Implementacao Guiada: o estudante constroi competencias praticas em periodontia utilizando o Framework SUS-Twin como metodologia pedagogica.}
+\label{ch:educacao}
+
+O ensino da periodontia baseia-se tradicionalmente na observação clínica
+supervisionada. Com o SUS-Twin, é possível inverter essa lógica: o estudante
+manipula Gêmeos Digitais\footnote{Um Gêmeo Digital (DT) é uma réplica
+computacional de um paciente real, construída a partir de dados clínicos,
+imagens e exames, que permite simular procedimentos sem risco ao paciente.}
+de pacientes periodontais antes do contato com o caso real, acelerando o
+raciocínio clínico e reduzindo a curva de aprendizado. Este capítulo
+apresenta roteiros práticos para quatro encontros laboratoriais, todos
+suportados pelo ecossistema SUS-Twin e pela plataforma OpenCode.
+
+% =============================================================================
+\section{Laboratório virtual de periodontia com SUS-Twin}
+\label{sec:lab-virtual}
+
+O laboratório virtual\footnote{Ambiente computacional que replica a
+experiência de um laboratório didático, executado inteiramente em software,
+sem necessidade de equipamentos físicos odontológicos.} é o ponto de partida.
+Cada estação de trabalho requer Python 3.11, Jupyter Notebook\footnote{
+Plataforma interativa que combina código executável, visualizações e texto
+explicativo em um único documento, muito usada no ensino de programação
+científica.}, PySUS (consulta a dados do DATASUS) e Open3D (visualização 3D
+de tomografias). O arquivo abaixo é um modelo inicial de caderno Jupyter que
+carrega um estudo de caso em formato DT\footnote{Um estudo de caso em formato
+DT é um arquivo JSON contendo dados clínicos, exames de imagem segmentados e
+metadados do paciente, prontos para serem manipulados programaticamente.}:
+
+\begin{lstlisting}[language=Python,
+caption={modelo\_dt\_starter.ipynb -- carrega e inspeciona um DT
+periodontal}]
+# Jupyter Notebook: Periodontia com SUS-Twin
+import pysus
+import open3d as o3d
+import json, numpy as np
+
+# Carrega o caso clinico no formato DT
+with open("casos/paciente_001.json") as f:
+    caso = json.load(f)
+
+print(f"Paciente: {caso['id']} | Idade: {caso['idade']}")
+print(f"CID: {caso['cid']} | Sextantes afetados: {
+      len(caso['sextantes_afetados'])}")
+
+# Converte a CBCT segmentada para nuvem de pontos 3D
+nuvem = o3d.geometry.PointCloud()
+nuvem.points = o3d.utility.Vector3dVector(
+    np.array(caso['cbct_pontos']))
+o3d.visualization.draw_geometries([nuvem],
+    window_name="DT Periodontal -- SUS-Twin")
+\end{lstlisting}
+
+O código acima carrega um DT, exibe seus metadados clínicos e renderiza a
+tomografia computadorizada em 3D. O estudante deve executar célula a célula,
+explorando os atributos do caso. O SUS-Twin fornece uma biblioteca com 20
+casos periodontais reais anonimizados para este fim, todos acessíveis via
+repositório do Framework SUS-Twin.
+
+% =============================================================================
+\section{Simulação de casos clínicos com DTs}
+\label{sec:simulacao-casos}
+
+Cada caso a seguir foi projetado para uma sessão laboratorial de 2 horas. A
+progressão de dificuldade é intencional (A $<$ B $<$ C), sempre no contexto do
+Framework SUS-Twin.
+
+\subsection*{Caso A -- Periodontite crônica generalizada (CID K05.3)}
+
+O arquivo \texttt{casos/paciente\_A.json} contém dados de sondagem
+periodontal (SIA) de um paciente com periodontite crônica. O estudante deve
+identificar quantos sextantes\footnote{Na odontologia, a arcada dentária é
+dividida em seis sextantes: três na arcada superior (direito, anterior,
+esquerdo) e três na inferior. Cada sextante é avaliado separadamente quanto
+à presença de doença periodontal.} estão afetados (perda de inserção
+clínica $\geq$ 5~mm em dois ou mais sítios) e classificar a severidade
+segundo os critérios da AAP/CDC. Espera-se que o aluno produza um mapa
+térmico da perda de inserção utilizando matplotlib e um parágrafo de
+diagnóstico. \textbf{Rubrica:} acertar o número de sextantes (2~pts),
+classificação correta (2~pts), mapa térmico legível (1~pt).
+
+\subsection*{Caso B -- Recessão gengival + lesão de furca}
+
+O arquivo \texttt{casos/paciente\_B.json} descreve um caso de recessão
+gengival classe III de Miller associada a lesão de furca\footnote{Furca (ou
+furcação) é a região de bifurcação ou trifurcação das raízes de dentes
+multirradiculares (molares). A lesão de furca ocorre quando a doença
+periodontal atinge essa região, dificultando o tratamento e exigindo
+avaliação tridimensional.} classe II (perda óssea horizontal de 3~mm). O
+estudante deve segmentar a CBCT manualmente no Open3D e aplicar o Método dos
+Elementos Finitos (FEM) disponível no módulo \texttt{sustwin.fem} para
+simular o efeito de um enxerto gengival. A análise esperada inclui a
+distribuição de tensões antes e depois da simulação.
+\textbf{Rubrica:} segmentação correta (2~pts), FEM executado sem erros
+(2~pts), interpretação biomecânica (1~pt).
+
+\subsection*{Caso C -- Avaliação de risco de implante em paciente fumante}
+
+O arquivo \texttt{casos/paciente\_C.json} contém um DT de paciente tabagista
+(20 cigarros/dia) com indicação de implante no elemento 36. Sabe-se que o
+tabagismo\footnote{O fumo reduz a vascularização gengival, compromete a
+resposta inflamatória e diminui a taxa de osseointegração, aumentando em
+até 300\% o risco de falha precoce de implantes dentários.} reduz
+significativamente a taxa de sucesso de implantes. O estudante deve executar
+uma validação cruzada K-Fold (K=5) no modelo preditivo de risco de falha
+fornecido pelo módulo \texttt{sustwin.risk\_assessment}, comparando a
+acurácia com e sem a variável ``tabagismo''. O relatório final deve incluir
+a matriz de confusão e a curva ROC.
+\textbf{Rubrica:} K-Fold implementado corretamente (2~pts), matriz de
+confusão (1~pt), curva ROC com AUC (1~pt), discussão do impacto do
+tabagismo (1~pt).
+
+% =============================================================================
+\section{Avaliação objetiva com DTs (OSCE digital)}
+\label{sec:osce-digital}
+
+O OSCE\footnote{Objective Structured Clinical Examination: exame clínico
+objetivo e estruturado no qual o estudante percorre estações com tarefas
+específicas, cada uma avaliada por uma rubrica padronizada.} digital proposto
+utiliza quatro estações, todas executadas no ambiente SUS-Twin, com duração
+de 25 minutos cada:
+
+\begin{enumerate}
+\item \textbf{Segmentação CBCT:} o aluno recebe uma tomagem não processada e
+deve segmentar o osso alveolar e as raízes dentárias no Open3D.
+\item \textbf{Consulta DATASUS:} utilizando PySUS, o aluno deve extrair a
+taxa de mortalidade por doenças periodontais no estado de São Paulo entre
+2018--2023, gerando um gráfico de série temporal.
+\item \textbf{Simulação FEM:} o aluno executa o modelo de elementos finitos
+do Caso B (seção~\ref{sec:simulacao-casos}) com parâmetros alterados
+(força oclusal de 200~N em vez de 150~N) e reporta a nova distribuição de
+tensões.
+\item \textbf{Interpretação de resultados:} o aluno recebe três outputs do
+SUS-Twin e deve redigir um parecer clínico de 5 linhas para cada um.
+\end{enumerate}
+
+O código abaixo implementa um corretor automático\footnote{A correção
+automática (auto-grading) utiliza scripts que comparam a saída gerada pelo
+aluno com valores esperados previamente cadastrados pelo professor. O
+resultado é imediato e objetivo, embora não substitua a avaliação
+qualitativa do raciocínio clínico.} que verifica as respostas objetivas:
+
+\begin{lstlisting}[language=Python,
+caption={auto\_grader\_osce.py -- corretor automático do OSCE digital}]
+import json, numpy as np
+
+RESPOSTAS_ESPERADAS = {
+    "sextantes_afetados": 4,
+    "fem_tensao_max_pas": 12.7,
+    "auc_risco_implante": 0.89
+}
+
+def corrigir(respostas_aluno: dict) -> dict:
+    resultado = {}
+    for chave, esperado in RESPOSTAS_ESPERADAS.items():
+        obtido = respostas_aluno.get(chave)
+        if isinstance(esperado, float):
+            resultado[chave] = abs(obtido - esperado) < 0.1
+        else:
+            resultado[chave] = obtido == esperado
+    return resultado
+
+notas = corrigir(json.load(open("respostas_aluno.json")))
+print(f"Nota objetiva: {sum(notas.values())}/{len(notas)}")
+
+\end{lstlisting}
+
+O corretor pode ser integrado ao ambiente SUS-Twin para devolução imediata
+de feedback. O professor mantém a rubrica qualitativa para as questões
+discursivas, enquanto a parte técnica é avaliada automaticamente.
+
+% =============================================================================
+\section{Projeto final: criar um módulo de ensino com DT}
+\label{sec:projeto-final}
+
+Como avaliação somativa da disciplina, cada aluno (ou dupla) deve criar um
+módulo de ensino original utilizando o Framework SUS-Twin. O módulo deve
+integrar quatro componentes obrigatórios:
+
+\begin{itemize}
+\item \textbf{Caso clínico com DT:} selecionar um paciente periodontal,
+anonimizá-lo e estruturar os dados no formato DT do SUS-Twin, incluindo
+sondagem, CBCT segmentada e histórico médico.
+\item \textbf{Consulta PySUS:} associar ao caso uma consulta ao DATASUS que
+contextualize epidemiologicamente a condição do paciente (prevalência
+regional, faixa etária, comorbidades associadas).
+\item \textbf{Visualização 3D:} gerar ao menos duas visualizações com Open3D
+(ex.: nuvem de pontos da CBCT e malha FEM) que ilustrem aspectos relevantes
+do plano de tratamento.
+\item \textbf{Rubrica de validação:} elaborar uma rubrica com no mínimo 5
+critérios e 3 níveis de proficiência (Insuficiente, Proficiente, Avançado),
+cobrindo desde a corretude técnica até a clareza da exposição.
+\end{itemize}
+
+O projeto deve ser entregue como um repositório no GitHub contendo o caderno
+Jupyter, os dados do DT, o script de consulta PySUS e a rubrica em PDF. A
+avaliação final é conduzida por pares (peer review) utilizando a rubrica
+criada pelo próprio grupo, sob supervisão do docente. O ecossistema SUS-Twin
+disponibiliza templates e exemplos completos no repositório oficial do
+OpenCode para auxiliar a elaboração do módulo, consolidando a metodologia
+pedagógica do Framework SUS-Twin.

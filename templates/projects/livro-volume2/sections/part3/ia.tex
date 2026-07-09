@@ -1,0 +1,554 @@
+% =============================================================================
+% CAPÍTULO 11: Validação Cruzada com K-Fold no SUS-Twin
+% Volume 2 — Métricas de validação clínica, K-Fold temporal,
+%            TRIPOD-AI e interpretação de resultados
+% =============================================================================
+% V2 Standalone — sem \input{}
+% Seções:
+%   11.1 - Introdução
+%   11.2 - Preparação de dados clínicos com DATASUS e PySUS
+%   11.3 - K-Fold tradicional vs. validação temporal
+%   11.4 - Métricas TRIPOD-AI: sensibilidade, especificidade, AUC, R²
+%   11.5 - Implementação prática com Periomod e Scikit-learn
+%   11.6 - Exercícios propostos
+% =============================================================================
+
+\destaque{Nível-alvo N2 — Pesquisa Reprodutível: implemente validação cruzada
+temporal com K-Fold e métricas TRIPOD-AI seguindo o Framework SUS-Twin.}
+
+\section{Introdução}
+\label{ch:ia}
+
+A validação de modelos preditivos em odontologia digital não é um
+complemento opcional: é o requisito ético e científico que separa uma
+inferência clínica confiável de uma correlação espúria. No contexto do
+Framework SUS-Twin, um gêmeo digital periodontal que não passa por
+validação cruzada rigorosa pode produzir predições otimistas,
+superajustadas (\textit{overfitting}\footnote{Overfitting (superajuste)
+ocorre quando o modelo decora os dados de treino em vez de aprender
+padrões generalizáveis. Um modelo superajustado apresenta desempenho
+excelente nos dados que já viu, mas falha catastrophicamente ao
+encontrar novos pacientes.}) aos dados de treino e, portanto,
+clinicamente perigosas.
+
+A validação cruzada com K-Fold\footnote{K-Fold é uma técnica
+estatística que divide o conjunto de dados em $k$ partes (\"folds\").
+O modelo é treinado em $k-1$ partes e testado na parte restante,
+repetindo o processo $k$ vezes. Cada observação é usada para teste
+exatamente uma vez, gerando uma estimativa robusta do desempenho real
+do modelo.} é o padrão-ouro para estimar o erro de generalização de
+modelos de aprendizado de máquina em saúde. Quando aplicada a séries
+temporais de dados periodontais --- como a progressão da perda de
+inserção clínica (PIC) ao longo de consultas sucessivas no SUS --- a
+versão \textbf{temporal} do K-Fold respeita a ordem cronológica dos
+eventos, evitando que o modelo \"aprenda o futuro\" para predizer o
+passado.
+
+Este capítulo apresenta, em ordem sequencial: (1) a preparação de
+dados clínicos reais do DATASUS usando a biblioteca PySUS; (2) a
+distinção conceitual e prática entre K-Fold tradicional e temporal;
+(3) as métricas do guideline TRIPOD-AI\footnote{TRIPOD-AI
+(Transparent Reporting of a multivariable prediction model for
+Individual Prognosis Or Diagnosis — Artificial Intelligence) é a
+diretriz internacional para relato transparente de modelos de
+predição baseados em IA. Define métricas obrigatórias como
+sensibilidade, especificidade, AUC e R², além de exigir validação
+interna e externa.} com tabela de fórmulas e interpretação clínica;
+(4) a implementação prática de um pipeline de validação cruzada
+usando a biblioteca \texttt{Periomod}\footnote{Periomod é uma
+biblioteca Python especializada em modelagem preditiva periodontal.
+Implementa algoritmos de sobrevivência, regressão longitudinal e
+validação cruzada especificamente calibrados para métricas
+odontológicas, como perda de inserção clínica (PIC) e sangramento à
+sondagem (SS).} integrada ao \texttt{scikit-learn}; e (5) três
+exercícios progressivos que consolidam o aprendizado.
+
+\section{Preparação de Dados Clínicos: DATASUS e PySUS}
+
+O primeiro passo de qualquer pipeline de validação cruzada é obter
+dados clínicos representativos e estruturados. No Brasil, a principal
+fonte de dados epidemiológicos periodontais é o
+DATASUS\footnote{DATASUS é o departamento de informática do Sistema
+Único de Saúde que disponibiliza publicamente os registros de todos
+os atendimentos ambulatoriais e hospitalares do país, incluindo
+procedimentos odontológicos.}, acessado programaticamente pela
+biblioteca PySUS\footnote{A PySUS é uma interface Python que baixa e
+processa arquivos dos sistemas SIA (Ambulatorial), SIH (Hospitalar) e
+SIM (Mortalidade) do DATASUS, convertendo formatos proprietários
+(\texttt{.dbc}) em DataFrames pandas prontos para análise.}.
+
+O código abaixo demonstra o download de dados de procedimentos
+periodontais do estado de São Paulo, a filtragem por códigos
+específicos de periodontia e a estruturação em formato tabular com a
+biblioteca \texttt{pandas}\footnote{pandas é a biblioteca padrão do
+Python para manipulação de dados tabulares. Oferece estruturas como
+DataFrame (tabela com linhas e colunas) e Series (vetor), além de
+operações de filtro, agrupamento e estatística descritiva.}:
+
+\begin{lstlisting}[language=Python, caption={Download e estruturação de
+dados periodontais do DATASUS com PySUS},
+label={lst:pysus_perio}]
+from pysus import SIA
+import pandas as pd
+import numpy as np
+
+def baixar_dados_periodontais(uf: str, ano: int, mes: int) -> pd.DataFrame:
+    """
+    Baixa a producao ambulatorial odontologica de um estado
+    e filtra apenas procedimentos periodontais.
+    """
+    sia = SIA().load(group='PA', state=uf, year=ano, month=mes)
+    
+    # Filtro por codigos de periodontia (PROCID)
+    # Fonte: tabela unificada do SUS - CBOD
+    codigos_perio = [
+        '0301010012',  # Raspagem alveolar
+        '0301010039',  # Curetagem periodontal
+        '0301010055',  # Gengivectomia
+        '0301010071',  # Aumento de coroa clinica
+        '0301010098',  # Retalho periodontal
+    ]
+    
+    perio = sia[sia['PROCID'].isin(codigos_perio)].copy()
+    
+    # Engenharia de atributos clinicos
+    perio['mes_ano'] = pd.to_datetime(
+        perio['ANO_CMPT'].astype(str) + '-' +
+        perio['MES_CMPT'].astype(str) + '-01'
+    )
+    
+    # Agregacao por estabelecimento e mes
+    agregado = perio.groupby(
+        ['mes_ano', 'CO_UF', 'CO_MUN', 'CO_CNES']
+    ).agg(
+        total_procedimentos=('PROCID', 'count'),
+        valor_total=('VAL_APR', 'sum'),
+        tipos_distintos=('PROCID', 'nunique')
+    ).reset_index()
+    
+    return agregado
+
+# Exemplo: dados de SP em janeiro de 2025
+df_perio = baixar_dados_periodontais('SP', 2025, 1)
+print(f"Registros: {len(df_perio)}")
+print(f"Municipios: {df_perio['CO_MUN'].nunique()}")
+print(f"Valor total: R$ {df_perio['valor_total'].sum():,.2f}")
+\end{lstlisting}
+
+O DataFrame resultante contém, para cada estabelecimento de saúde no
+estado selecionado, o volume mensal de procedimentos periodontais, o
+valor desembolsado pelo SUS e a diversidade de tipos de
+procedimentos. Esta estrutura tabular é a matéria-prima para os
+modelos preditivos que validaremos nas seções seguintes.
+
+\section{K-Fold Tradicional vs. Validação Temporal}
+
+\subsection{K-Fold Tradicional}
+
+A validação cruzada K-Fold\footnote{K-Fold é uma técnica de
+reamostragem que particiona o conjunto de dados em $k$ subconjuntos
+mutuamente exclusivos de tamanho aproximadamente igual. O modelo é
+treinado em $k-1$ folds e testado no fold restante, rotacionando o
+fold de teste até que todos os $k$ folds tenham servido como teste. O
+desempenho final é a média das $k$ iterações.}
+particiona os dados em $k$ dobras mutuamente exclusivas. Para cada
+iteração $i = 1, \dots, k$, o modelo é treinado nas $k-1$ dobras
+restantes e testado na dobra $i$. A estimativa final de desempenho é
+a média aritmética das $k$ métricas observadas:
+
+\begin{equation}
+    \text{Desempenho}_{\text{K-Fold}} = \frac{1}{k} \sum_{i=1}^{k} \mathcal{M}(y_i, \hat{y}_i)
+    \label{eq:kfold_media}
+\end{equation}
+
+onde $\mathcal{M}$ é a métrica de interesse (acurácia, AUC, R²) e
+$y_i$, $\hat{y}_i$ são os valores reais e preditos do fold $i$.
+
+A principal limitação do K-Fold tradicional em dados clínicos
+longitudinais é a \textbf{contaminação temporal}: observações de um
+mesmo paciente em meses distintos podem ser alocadas simultaneamente
+nos conjuntos de treino e teste, fazendo com que o modelo \"veja\" o
+futuro do paciente durante o treinamento. Isso infla
+artificialmente as métricas e esconde a verdadeira capacidade
+preditiva do modelo.
+
+\subsection{K-Fold Temporal}
+
+O K-Fold temporal resolve esse problema respeitando a ordem
+cronológica das observações. Em vez de sortear as dobras
+aleatoriamente, a partição é feita por janelas de tempo: o modelo é
+treinado com dados de meses $1, \dots, t$ e testado nos meses
+$t+1, \dots, T$.
+
+O código a seguir implementa ambas as estratégias usando
+\texttt{scikit-learn}\footnote{scikit-learn (sklearn) é a biblioteca
+de aprendizado de máquina mais utilizada no ecossistema Python.
+Oferece implementações otimizadas de validação cruzada, métricas de
+desempenho, pré-processamento e dezenas de algoritmos de
+classificação e regressão.}:
+
+\begin{lstlisting}[language=Python, caption={Comparação entre
+K-Fold tradicional e temporal com scikit-learn},
+label={lst:kfold_comparison}]
+from sklearn.model_selection import (
+    KFold, TimeSeriesSplit, cross_val_score
+)
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
+import pandas as pd
+
+def comparar_kfold(X: pd.DataFrame, y: pd.Series, n_splits: int = 5):
+    """
+    Compara K-Fold tradicional vs. temporal em um dataset
+    de serie temporal periodontal.
+    """
+    # --- K-Fold tradicional (embaralhado) ---
+    kf_trad = KFold(
+        n_splits=n_splits,
+        shuffle=True,
+        random_state=42
+    )
+    
+    # --- K-Fold temporal (preserva ordem) ---
+    kf_temp = TimeSeriesSplit(n_splits=n_splits)
+    
+    modelo = RandomForestRegressor(
+        n_estimators=100,
+        max_depth=10,
+        random_state=42
+    )
+    
+    # Avaliacao com K-Fold tradicional
+    scores_trad = cross_val_score(
+        modelo, X, y,
+        cv=kf_trad,
+        scoring='r2'
+    )
+    
+    # Avaliacao com K-Fold temporal
+    scores_temp = cross_val_score(
+        modelo, X, y,
+        cv=kf_temp,
+        scoring='r2'
+    )
+    
+    print("=== Comparacao K-Fold ===")
+    print(f"Tradicional: R² = {scores_trad.mean():.3f} "
+          f"(+/- {scores_trad.std() * 2:.3f})")
+    print(f"Temporal:    R² = {scores_temp.mean():.3f} "
+          f"(+/- {scores_temp.std() * 2:.3f})")
+    print(f"Diferenca (tendencioso - realista): "
+          f"{(scores_trad.mean() - scores_temp.mean()):.3f}")
+    
+    return scores_trad, scores_temp
+\end{lstlisting}
+
+É esperado que o K-Fold tradicional produza métricas
+sistematicamente superiores ao temporal, especialmente em séries com
+tendência temporal (por exemplo, aumento da demanda por periodontia
+ao longo dos anos). A diferença entre os dois scores é uma estimativa
+do viés de contaminação temporal.
+
+\section{Métricas TRIPOD-AI: Sensibilidade, Especificidade, AUC e
+\texorpdfstring{R²}{R2}}
+
+O guideline TRIPOD-AI estabelece quais métricas devem ser reportadas
+para garantir transparência e reprodutibilidade em modelos preditivos
+baseados em IA. Para problemas de classificação (ex.: risco alto vs.
+baixo de progressão periodontal), as métricas centrais são
+sensibilidade, especificidade e AUC\footnote{AUC (Area Under the ROC
+Curve) mede a capacidade do modelo de distinguir entre classes
+positivas e negativas em todos os limiares de decisão possíveis.
+Varia de 0,5 (classificação aleatória) a 1,0 (classificação perfeita).
+Valores acima de 0,8 são considerados clinicamente úteis.}. Para
+problemas de regressão (ex.: predição da perda de inserção clínica em
+milímetros), o R² é a métrica principal.
+
+A \autoref{tab:tripod_metrics} consolida as cinco métricas
+fundamentais com suas fórmulas, interpretações clínicas e critérios
+de aceitação:
+
+\begin{table}[htb]
+\centering
+\caption{Métricas TRIPOD-AI para validação de modelos periodontais.}
+\label{tab:tripod_metrics}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcl}
+\toprule
+\textbf{Métrica} & \textbf{Fórmula} & \textbf{Interpretação Clínica} \\
+\midrule
+Sensibilidade\footnote{Sensibilidade (também chamada de recall ou
+taxa de verdadeiros positivos) é a proporção de pacientes com a
+condição (ex.: periodontite estágio III) que o modelo consegue
+identificar corretamente. Uma sensibilidade de 0,90 significa que
+90\% dos casos reais foram detectados.}
+& $\displaystyle \frac{VP}{VP + FN}$
+& Percentual de casos positivos corretamente identificados.
+\, Aceitável: $> 0{,}80$. \\
+Especificidade\footnote{Especificidade é a proporção de pacientes
+saudáveis que o modelo classifica corretamente como negativos. Uma
+especificidade de 0,85 significa que 85\% dos pacientes sem a
+condição foram corretamente liberados.}
+& $\displaystyle \frac{VN}{VN + FP}$
+& Percentual de casos negativos corretamente identificados.
+\, Aceitável: $> 0{,}80$. \\
+AUC-ROC & Integral da curva ROC &
+Capacidade discriminativa global. Independe do limiar.
+\, Aceitável: $> 0{,}80$. \\
+Acurácia & $\displaystyle \frac{VP + VN}{VP + VN + FP + FN}$ &
+Percentual total de acertos. Útil quando classes são balanceadas.
+\, Aceitável: $> 0{,}85$. \\
+R²\footnote{O coeficiente de determinação R² mede a proporção da
+variância total da variável resposta que é explicada pelo modelo.
+Varia de $-\infty$ (modelo pior que a média) a 1 (modelo perfeito).
+Valores acima de 0,5 indicam moderada capacidade preditiva. Em
+estudos periodontais, R² $> 0{,}3$ já é considerado relevante.}
+& $\displaystyle 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$ &
+Proporção da variância explicada. Para regressão de PIC.
+\, Aceitável: $> 0{,}30$. \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+O código abaixo calcula todas as métricas TRIPOD-AI para um modelo de
+classificação de risco periodontal, incluindo a matriz de confusão
+completa:
+
+\begin{lstlisting}[language=Python, caption={Cálculo completo das
+métricas TRIPOD-AI para classificação periodontal},
+label={lst:tripod_metrics_code}]
+from sklearn.metrics import (
+    confusion_matrix, roc_auc_score,
+    recall_score, precision_score,
+    accuracy_score, r2_score,
+    classification_report
+)
+import numpy as np
+
+def relatorio_tripod_ai(y_true: np.ndarray, y_pred: np.ndarray,
+                        y_prob: np.ndarray = None,
+                        nome_modelo: str = "Modelo"):
+    """
+    Gera relatorio completo TRIPOD-AI com todas as metricas
+    obrigatorias para validacao de modelos periodontais.
+    """
+    VP, FN, FP, VN = confusion_matrix(y_true, y_pred).ravel()
+    
+    metricas = {
+        'Sensibilidade (Recall)': recall_score(y_true, y_pred),
+        'Especificidade': VN / (VN + FP),
+        'Acurácia': accuracy_score(y_true, y_pred),
+        'Precisão': precision_score(y_true, y_pred),
+    }
+    
+    if y_prob is not None:
+        metricas['AUC-ROC'] = roc_auc_score(y_true, y_prob)
+    
+    print(f"\n=== RELATORIO TRIPOD-AI: {nome_modelo} ===")
+    print(f"{'Metrica':<25} {'Valor':<10} {'Interpretacao'}")
+    print("-" * 65)
+    for nome, valor in metricas.items():
+        nivel = ("EXCELENTE" if valor >= 0.90 else
+                 "ACEITAVEL" if valor >= 0.80 else
+                 "MODERADO"  if valor >= 0.60 else
+                 "INSUFICIENTE")
+        print(f"{nome:<25} {valor:.3f}{'':>5} {nivel}")
+    
+    print(f"\nMatriz de Confusao:")
+    print(f"  VP={VP}  FN={FN}")
+    print(f"  FP={FP}  VN={VN}")
+    
+    return metricas
+\end{lstlisting}
+
+\section{Implementação Prática com Periomod e Scikit-learn}
+
+A biblioteca \texttt{Periomod} oferece uma camada de abstração
+especializada para modelagem periodontal, integrando-se
+transparentemente ao ecossistema \texttt{scikit-learn}. O pipeline
+completo de validação cruzada temporal com Periomod é apresentado no
+código a seguir:
+
+\begin{lstlisting}[language=Python, caption={Pipeline de validação
+cruzada temporal com Periomod},
+label={lst:periomod_kfold}]
+import periomod as pm
+from periomod.validation import TemporalValidator
+from periomod.metrics import periodontal_risk_score
+from sklearn.ensemble import GradientBoostingClassifier
+import pandas as pd
+import numpy as np
+
+def pipeline_validacao_temporal(
+    df: pd.DataFrame,
+    n_splits: int = 5,
+    paciente_col: str = 'id_paciente',
+    tempo_col: str = 'mes_ano',
+    alvo_col: str = 'risco_progressao'
+):
+    """
+    Pipeline completo de validacao cruzada temporal
+    com Periomod para predicao de risco periodontal.
+    """
+    # 1. Instancia o validador temporal do Periomod
+    validador = TemporalValidator(
+        n_splits=n_splits,
+        patient_col=paciente_col,
+        time_col=tempo_col,
+        gap_dias=90  # minimo 90 dias entre treino e teste
+    )
+    
+    # 2. Prepara features e alvo
+    feature_cols = [
+        'idade', 'sexo', 'fumo_diario',
+        'diabetes', 'pic_basal_mm', 'ss_basal_pct',
+        'num_consultas_12m', 'raspagem_12m',
+        'uso_fio_dental', 'renda_familiar'
+    ]
+    X = df[feature_cols].values
+    y = df[alvo_col].values
+    
+    # 3. Configura o classificador
+    modelo = GradientBoostingClassifier(
+        n_estimators=200,
+        max_depth=4,
+        learning_rate=0.05,
+        random_state=42
+    )
+    
+    # 4. Executa validacao temporal
+    resultados = validador.validate(
+        modelo, X, y,
+        return_models=False
+    )
+    
+    # 5. Exibe resultados agregados
+    print(f"\n=== VALIDACAO TEMPORAL PERIOMOD ===")
+    print(f"Folds: {n_splits}")
+    print(f"AUC medio:   {resultados['auc_mean']:.3f} "
+          f"(+/- {resultados['auc_std']:.3f})")
+    print(f"Acuracia:    {resultados['accuracy_mean']:.3f}")
+    print(f"Risco medio: {resultados['risk_score_mean']:.3f}")
+    
+    # 6. Score composto periodontal (TRIPOD-AI)
+    score_final = periodontal_risk_score(
+        y_true=resultados['y_true_all'],
+        y_pred=resultados['y_pred_all'],
+        y_prob=resultados['y_prob_all']
+    )
+    print(f"Score Periodontal TRIPOD-AI: {score_final:.1f}/100")
+    
+    return resultados, score_final
+\end{lstlisting}
+
+O \texttt{TemporalValidator} do Periomod implementa internamente:
+\begin{itemize}
+\item Segmentação dos pacientes por janelas cronológicas sem
+sobreposição.
+\item Garantia de que o mesmo paciente não aparece simultaneamente em
+treino e teste (\textit{patient-wise split}\footnote{O
+patient-wise split (divisão por paciente) assegura que todas as
+observações de um mesmo paciente estão exclusivamente no conjunto de
+treino ou no conjunto de teste. Isso evita vazamento de informação
+entre consultas do mesmo indivíduo.}).
+\item Espaçamento mínimo (\textit{gap}) entre o último ponto de
+treino e o primeiro ponto de teste para simular o horizonte clínico
+real.
+\end{itemize}
+
+\section{Exercícios Propostos}
+
+Os exercícios a seguir consolidam os conceitos apresentados neste
+capítulo e seguem a progressão Graduação \(\to\) Mestrado \(\to\)
+Doutorado quanto à profundidade investigativa.
+
+\begin{exercicio}[Graduação — Preparação de Dataset Periodontal]
+\label{ex:preparar_dataset}
+Utilizando a biblioteca PySUS, baixe os dados de procedimentos
+periodontais do estado de Minas Gerais (UF = \texttt{MG}) para o ano
+de 2024. Filtre exclusivamente os códigos \texttt{0301010012}
+(raspagem alveolar) e \texttt{0301010039} (curetagem periodontal).
+Agregue os dados por município (\texttt{CO\_MUN}) e calcule:
+\begin{enumerate}
+\item O número total de procedimentos realizados em cada município.
+\item O valor médio pago por procedimento (coluna \texttt{VAL\_APR}).
+\item O município com maior volume de raspagens alveolares.
+\end{enumerate}
+\textbf{Dica:} Consulte o \autoref{lst:pysus_perio} como ponto de
+partida. Substitua a UF e o ano pelos parâmetros solicitados.
+\end{exercicio}
+
+\begin{exercicio}[Mestrado — Implementação de K-Fold Temporal]
+\label{ex:kfold_temporal}
+Com base no dataset preparado no \autoref{ex:preparar_dataset},
+implemente um pipeline de validação cruzada temporal com as seguintes
+especificações:
+\begin{enumerate}
+\item Use \texttt{TimeSeriesSplit} do scikit-learn com
+\(k = 4\) splits.
+\item Treine um \texttt{RandomForestClassifier} com 150 árvores e
+profundidade máxima 8.
+\item Reporte as métricas TRIPOD-AI (sensibilidade, especificidade,
+AUC) para cada fold e a média entre folds.
+\item Compare os resultados com um K-Fold tradicional
+(\texttt{KFold}, shuffle=True) e explique por que as métricas diferem.
+\end{enumerate}
+\textbf{Material de apoio:} \autoref{lst:kfold_comparison} e
+\autoref{lst:tripod_metrics_code}.
+\end{exercicio}
+
+\begin{exercicio}[Doutorado — Interpretação Clínica da Matriz de
+Confusão]
+\label{ex:matriz_confusao}
+A \autoref{tab:matriz_exemplo} apresenta a matriz de confusão de um
+modelo de triagem periodontal testado em 500 pacientes do SUS:
+
+\begin{table}[htb]
+\centering
+\caption{Matriz de confusão hipotética de um modelo de triagem
+periodontal.}
+\label{tab:matriz_exemplo}
+\begin{adjustbox}{max width=0.6\textwidth}
+\begin{tabular}{lcc}
+\toprule
+ & \textbf{Predito: Positivo} & \textbf{Predito: Negativo} \\
+\midrule
+\textbf{Real: Positivo} & 180 & 20 \\
+\textbf{Real: Negativo} & 45  & 255 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+Com base na matriz:
+\begin{enumerate}
+\item Calcule manualmente: sensibilidade, especificidade, acurácia,
+precisão e \textit{F1-score}\footnote{O F1-score é a média harmônica
+entre precisão e sensibilidade: $F_1 = 2 \cdot
+\frac{\text{precisão} \cdot \text{sensibilidade}}{\text{precisão} +
+\text{sensibilidade}}$. É especialmente útil quando as classes são
+desbalanceadas.}.
+\item Interprete clinicamente cada métrica: o modelo é seguro para
+uso como ferramenta de triagem no SUS? Justifique.
+\item Qual métrica é mais crítica em um cenário de triagem
+populacional: sensibilidade ou especificidade? Por quê?
+\item Refaça os cálculos usando o código do
+\autoref{lst:tripod_metrics_code} e compare com seus resultados
+manuais.
+\end{enumerate}
+\end{exercicio}
+
+\vfill
+
+\begin{highlight}
+\centering\small
+\textbf{Badge do Capítulo}\\[4pt]
+Nível-alvo: N2 --- Pesquisa Reprodutível\\
+Habilidades: K-Fold temporal, métricas TRIPOD-AI,\\
+\hspace*{4.5em}Periomod, interpretação clínica\\
+Pré-requisitos: Python 3.11+, scikit-learn, Periomod\\
+Comando de verificação:\\
+\verb|tdd_validate.py --chapter 11|
+\end{highlight}

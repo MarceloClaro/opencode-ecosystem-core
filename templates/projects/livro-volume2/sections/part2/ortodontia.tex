@@ -1,0 +1,147 @@
+% v2 -- rewritten
+% Seções:
+%   5.1 - Modelagem 3D do alinhador ortodôntico
+%   5.2 - Aplicação de cargas e simulação FEM
+%   5.3 - Validação dos resultados
+%   5.4 - Projeto prático: simular 3mm de movimentação
+\destaque{Nivel-alvo N1 â€” modifique scripts de simulacao FEM com Open3D
+para analisar tensoes ortodÃ´nticas no ambito do Framework SUS-Twin.}
+
+\label{ch:ortodontia}
+
+\section{Modelagem 3D do alinhador ortodÃ´ntico}
+
+O alinhador\footnote{Aparelho removivel transparente de polimero termoplastico
+que movimenta os dentes por meio de forcas controladas, substituto moderno do
+aparelho fixo metalico.} ortodÃ´ntico e representado por uma malha poligonal\footnote{Conjunto de poligonos (triangulos, na pratica) que formam a superficie
+externa de um objeto 3D, similar a uma ``pele digital'' do modelo fisico.}
+gerada a partir de dados de escaneamento intraoral (IOS). Cada malha contem
+vertices\footnote{Pontos no espaco 3D (coordenadas x,y,z) que definem os cantos
+dos triangulos.} e faces\footnote{Triangulos formados pela conexao de tres
+vertices; o conjunto de todas as faces compoe a superficie visivel do modelo.}
+que descrevem a geometria do dente e do alinhador. O codigo a seguir carrega
+e visualiza um arquivo STL com a biblioteca Open3D:
+
+\begin{lstlisting}[language=Python,caption={Carregamento e visualizacao de
+malha 3D de alinhador ortodÃ´ntico com Open3D}]
+import open3d as o3d
+import numpy as np
+
+# Carrega a malha do alinhador a partir de arquivo STL
+malha = o3d.io.read_triangle_mesh("alinhador.stl")
+malha.compute_vertex_normals()
+
+# Extrai vertices e faces para inspecao
+vertices = np.asarray(malha.vertices)
+faces = np.asarray(malha.triangles)
+print(f"Vertices: {len(vertices)}, Faces: {len(faces)}")
+
+# Visualizacao interativa
+o3d.visualization.draw_geometries([malha],
+    window_name="Alinhador - SUS-Twin",
+    width=800, height=600)
+\end{lstlisting}
+
+A matriz de vertices alimenta diretamente o solver de elementos finitos no
+Framework SUS-Twin, que opera sobre a mesma representacao geometrica para
+calcular deformacoes sob carga.
+
+\section{Aplicacao de cargas e simulacao FEM}
+
+O Metodo dos Elementos Finitos\footnote{Tecnica numerica que divide um objeto
+complexo em milhares de pequenas partes (elementos) para calcular, uma a uma,
+como ele se deforma sob forcas aplicadas.} (FEM) discretiza a malha em
+elementos tetraedricos e resolve equacoes de equilibrio para cada no.
+O modulo de Young\footnote{Medida de rigidez do material: quanto maior o valor,
+mais o material resiste a deformacao elastica. Acrilico dental tem ~2 GPa.}
+do polimero (PGA, ~2 GPa) e a condicao de contorno\footnote{Restricao imposta
+a uma regiao do modelo â€” neste caso, fixa-se a borda gengival do alinhador
+para simular seu encaixe real nos dentes.} (fixacao na margem gengival)
+definem o comportamento mecanico. Uma forca de 0,5~N\footnote{Equivalente ao
+peso de uma moeda de 50 centavos (7,0~g multiplicado pela gravidade);
+considerada forca ortodontica leve e biologica.} e aplicada na face vestibular:
+
+\begin{lstlisting}[language=Python,caption={Pipeline FEM conceitual para
+alinhador ortodÃ´ntico}]
+# Propriedades do material (PGA)
+E = 2.0e9         # Modulo de Young [Pa]
+nu = 0.35         # Coeficiente de Poisson
+
+# Condicao de contorno: nos da margem gengival fixos
+bc_fixos = identificar_nos_margem(malha)
+for no in bc_fixos:
+    aplicar_deslocamento_zero(no)
+
+# Forca vestibular de 0.5 N
+forca = np.array([0.0, 0.5, 0.0])  # direcao vestibulo-lingual
+nos_carga = identificar_nos_vestibulares(malha, regiao="incisivo")
+for no in nos_carga:
+    aplicar_forca(no, forca / len(nos_carga))
+
+# Chama o solver FEM (calcula deslocamentos em cada no)
+deslocamentos = solver_fem(malha, E, nu, bc_fixos, nos_carga)
+print(f"Deslocamento maximo: {np.max(np.linalg.norm(
+    deslocamentos, axis=1)):.4f} mm")
+\end{lstlisting}
+
+O Framework SUS-Twin abstrai este pipeline em uma unica chamada de API,
+permitindo iterar rapidamente entre geometria, material e condicoes de carga
+sem reescrever o solver.
+
+\section{Validacao dos resultados}
+
+A analise dos resultados compara o deslocamento simulado com valores
+esperados na literatura clinica (0,2--0,5~mm para forcas leves). A tensao de
+von Mises\footnote{Indicador unico que combina as tres direcoes de tensao em
+um numero escalar; quando ultrapassa o limite de escoamento do material, o
+objeto deforma-se permanentemente.} maxima identifica regioes de risco de
+falha estrutural do alinhador:
+
+\begin{lstlisting}[language=Python,caption={Calculo de deslocamento e tensao
+de von Mises para validacao}]
+from utils_fem import calcular_von_mises
+
+# Calcula magnitude do deslocamento por no
+mag = np.linalg.norm(deslocamentos, axis=1)
+idx_max = np.argmax(mag)
+print(f"Desloc. max.: {mag[idx_max]:.3f} mm "
+      f"no vertice {idx_max}")
+
+# Tensao de von Mises nos elementos
+tensoes = calcular_von_mises(malha, deslocamentos, E, nu)
+idx_stress = np.argmax(tensoes)
+print(f"Tensao max.: {tensoes[idx_stress]:.2f} MPa")
+\end{lstlisting}
+
+O MPa\footnote{Megapascal: unidade de pressao;
+1~MPa = 10~kgf/cmÂ².} e a unidade padrao para tensao mecanica em engenharia.
+
+Se o deslocamento calculado ficar dentro da faixa esperada e a tensao de
+von Mises nao exceder o limite de escoamento do PGA (~50~MPa), a simulacao
+e considerada validada. O Framework SUS-Twin inclui metricas automaticas de
+conformidade biomecanica para cada cenario simulado.
+
+\section{Projeto pratico: simular 3~mm de movimentacao}
+
+O projeto guiado a seguir aplica todo o pipeline do Framework SUS-Twin para
+simular 3~mm de translacao vestibular de um incisivo central:
+
+\begin{itemize}
+    \item \textbf{Obter o STL\footnote{Formato de arquivo 3D que armazena a
+    superficie do objeto como uma lista de triangulos; padrao industrial para
+    impressoras 3D e softwares CAD.}:} escaneie o modelo dental com scanner
+    intraoral ou baixe um arquivo STL de repositorio aberto.
+    \item \textbf{Definir o material:} configure modulo de Young $E = 2,0$
+    GPa, coeficiente de Poisson $\nu = 0,35$ e espessura do alinhador
+    0,6~mm (valor tipico de mercado).
+    \item \textbf{Executar a simulacao:} aplique uma sequencia de 5 cargas
+    incrementais de 0,1~N a 0,5~N, registrando o deslocamento a cada passo.
+    \item \textbf{Validar o deslocamento:} confira se a resultante e de
+    $3,0 \pm 0,3$~mm e se a tensao de von Mises maxima nao ultrapassa
+    45~MPa.
+\end{itemize}
+
+Ao final, o aluno tera executado o ciclo completo de simulacao biomecanica
+ortodontica â€” da malha bruta a validacao clinica â€” exatamente como preconizado
+pelo Framework SUS-Twin para a criacao de gemeos digitais odontologicos
+reprodutiveis e auditaveis.
