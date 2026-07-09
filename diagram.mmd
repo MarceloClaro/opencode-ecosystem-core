@@ -24,7 +24,7 @@ graph TD
         HTM -.->|Usa| Emb
     end
     
-    %% Camada Core (Novos Subsistemas)
+    %% Camada Core (Subsistemas)
     subgraph Core [Core Subsystems]
         Trust[Trust Engine<br>Behavioral Gate]
         Eco[Token Economy<br>Staking/Slashing]
@@ -33,10 +33,25 @@ graph TD
         Reason[Reasoning<br>12 Engines + Quantum]
         Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928/931]
         LegalBench[Legal Benchmarks<br>SPEC-928]
-        SynthUniv[Synthetic University<br>SPEC-935 · 10 Faculdades]
+        SynthUniv[Synthetic University<br>SPEC-935 · 11 Faculdades]
         RAG[Scientific RAG<br>Grounding + Citations]
         Bench[Superhuman Readiness<br>Benchmarks]
         MetaEval[Metacognitive Eval<br>SPEC-920]
+        Discovery[Continuous Discovery<br>R95 · Loop Automático]
+    end
+
+    %% MCP + API Gateway
+    subgraph Protocols [Protocolos de Integração]
+        MCPServer[MCP Server · R94<br>8 Ferramentas via stdio]
+        APIGateway[API Gateway · R96<br>10 Endpoints FastAPI REST]
+        MCP_Gen[su_generate]
+        MCP_Eval[su_evaluate]
+        MCP_Enrich[su_enrich]
+        MCP_Visual[su_visual_abstract]
+        MCP_Review[su_peer_review]
+        MCP_Submit[su_submission]
+        MCP_Novelty[su_novelty]
+        MCP_Dash[su_dashboard]
     end
 
     %% Camada MCI
@@ -73,6 +88,22 @@ graph TD
     Legal -->|Agentes jurídicos A2A| BB
     Legal -->|Especialização por 7 ramos| LegalBench
     LegalBench -->|tiers conservadores| MetaEval
+    SynthUniv -->|Gera teses| Discovery
+    Discovery -->|Enriquece + Avalia| SynthUniv
+    
+    %% Integração MCP / API
+    SynthUniv -.->|Registra handlers| MCPServer
+    MCPServer --> MCP_Gen
+    MCPServer --> MCP_Eval
+    MCPServer --> MCP_Enrich
+    MCPServer --> MCP_Visual
+    MCPServer --> MCP_Review
+    MCPServer --> MCP_Submit
+    MCPServer --> MCP_Novelty
+    MCPServer --> MCP_Dash
+    MCPServer -->|stdio JSON-RPC| External
+    APIGateway -->|Reusa handlers| MCPServer
+    APIGateway -->|HTTP REST| External
     
     %% Agentes
     subgraph Agents [Catálogo de Agentes]
@@ -89,5 +120,6 @@ graph TD
     Agents -->|Conclui Tarefa| Ref
     
     %% MCP
-    MCP[MCP Server] -->|Expõe API| MCI
-    External[External Tools / LLMs] -->|JSON-RPC| MCP
+    MCP_Node[MCP JSON-RPC] -->|Expõe API| MCI
+    External[External Tools / LLMs] -->|stdio ou HTTP| MCPServer
+    External -->|HTTP REST| APIGateway

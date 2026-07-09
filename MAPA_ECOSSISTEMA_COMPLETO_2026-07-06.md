@@ -1,7 +1,7 @@
 # Mapa Completo do Ecossistema — Nós e Vetores
 
-- Nós: **443**
-- Vetores: **791**
+- Nós: **455**
+- Vetores: **830**
 
 ## Taxonomia de Nós
 
@@ -13,10 +13,10 @@
 | diagram | 1 |
 | doc | 5 |
 | layer | 21 |
-| module | 132 |
+| module | 135 |
 | schema | 4 |
-| spec | 58 |
-| test | 35 |
+| spec | 61 |
+| test | 38 |
 
 ## Taxonomia de Vetores
 
@@ -50,6 +50,9 @@ graph TD
   orchestration_py --> evidence_graph_py[mci/evidence_graph.py]
   metabus_py --> metaeval_py
   rag_py --> superhuman_suite_py[benchmarks/scientific_reasoning/superhuman_suite.py]
+  synthetic_university_core_py --> mcp_server_py[synthetic_university/mcp_server.py]
+  mcp_server_py --> disc_loop_py[synthetic_university/continuous_discovery.py]
+  mcp_server_py --> api_gateway_py[synthetic_university/api_gateway.py]
 ```
 
 ## Inventário de Nós
@@ -362,6 +365,8 @@ graph TD
 | sdd_spec_engine_py | module | sdd_tdd | sdd/spec_engine.py |
 | sdd_tdd_runner_py | module | sdd_tdd | sdd/tdd_runner.py |
 | synthetic_university_init_py | module | synthetic_university | synthetic_university/__init__.py |
+| synthetic_university_semantic_embedder_py | module | synthetic_university | synthetic_university/semantic_embedder.py |
+| synthetic_university_benchmark_py | module | synthetic_university | synthetic_university/benchmark.py |
 | synthetic_university_agents_init_py | module | synthetic_university | synthetic_university/agents/__init__.py |
 | synthetic_university_agents_professor_base_py | module | synthetic_university | synthetic_university/agents/professor_base.py |
 | synthetic_university_agents_professors_py | module | synthetic_university | synthetic_university/agents/professors.py |
@@ -382,6 +387,9 @@ graph TD
 | synthetic_university_peer_review_py | module | synthetic_university | synthetic_university/peer_review.py |
 | synthetic_university_submission_package_py | module | synthetic_university | synthetic_university/submission_package.py |
 | synthetic_university_novelty_analysis_py | module | synthetic_university | synthetic_university/novelty_analysis.py |
+| synthetic_university_mcp_server_py | module | synthetic_university | synthetic_university/mcp_server.py |
+| synthetic_university_continuous_discovery_py | module | synthetic_university | synthetic_university/continuous_discovery.py |
+| synthetic_university_api_gateway_py | module | synthetic_university | synthetic_university/api_gateway.py |
 | transformer_init_py | module | transformer | transformer/__init__.py |
 | transformer_attention_py | module | transformer | transformer/attention.py |
 | transformer_embedder_py | module | transformer | transformer/embedder.py |
@@ -465,6 +473,9 @@ graph TD
 | specs_SPEC_935_R91_md | spec | specs | specs/SPEC-935-R91.md |
 | specs_SPEC_935_R92_md | spec | specs | specs/SPEC-935-R92.md |
 | specs_SPEC_935_R93_md | spec | specs | specs/SPEC-935-R93.md |
+| specs_SPEC_935_R94_md | spec | specs | specs/SPEC-935-R94.md |
+| specs_SPEC_935_R95_md | spec | specs | specs/SPEC-935-R95.md |
+| specs_SPEC_935_R96_md | spec | specs | specs/SPEC-935-R96.md |
 | tests_test_advanced_subsystems_py | test | tests | tests/test_advanced_subsystems.py |
 | tests_test_analyze_research_batch_py | test | tests | tests/test_analyze_research_batch.py |
 | tests_test_auxjuris_integration_py | test | tests | tests/test_auxjuris_integration.py |
@@ -506,6 +517,9 @@ graph TD
 | tests_test_r91_peer_review_py | test | tests | tests/test_r91_peer_review.py |
 | tests_test_r92_submission_package_py | test | tests | tests/test_r92_submission_package.py |
 | tests_test_r93_novelty_analysis_py | test | tests | tests/test_r93_novelty_analysis.py |
+| tests_test_r94_mcp_server_py | test | tests | tests/test_r94_mcp_server.py |
+| tests_test_r95_continuous_discovery_py | test | tests | tests/test_r95_continuous_discovery.py |
+| tests_test_r96_api_gateway_py | test | tests | tests/test_r96_api_gateway.py |
 
 ## Inventário de Vetores
 
@@ -854,6 +868,9 @@ graph TD
 | layer_specs | specs_SPEC_935_R91_md | contains | specs contém specs/SPEC-935-R91.md |
 | layer_specs | specs_SPEC_935_R92_md | contains | specs contém specs/SPEC-935-R92.md |
 | layer_specs | specs_SPEC_935_R93_md | contains | specs contém specs/SPEC-935-R93.md |
+| layer_specs | specs_SPEC_935_R94_md | contains | specs contém specs/SPEC-935-R94.md |
+| layer_specs | specs_SPEC_935_R95_md | contains | specs contém specs/SPEC-935-R95.md |
+| layer_specs | specs_SPEC_935_R96_md | contains | specs contém specs/SPEC-935-R96.md |
 | layer_synthetic_university | synthetic_university_agents_init_py | contains | synthetic_university contém synthetic_university/agents/__init__.py |
 | layer_synthetic_university | synthetic_university_agents_professor_base_py | contains | synthetic_university contém synthetic_university/agents/professor_base.py |
 | layer_synthetic_university | synthetic_university_agents_professors_py | contains | synthetic_university contém synthetic_university/agents/professors.py |
@@ -875,6 +892,9 @@ graph TD
 | layer_synthetic_university | synthetic_university_peer_review_py | contains | synthetic_university contém synthetic_university/peer_review.py |
 | layer_synthetic_university | synthetic_university_submission_package_py | contains | synthetic_university contém synthetic_university/submission_package.py |
 | layer_synthetic_university | synthetic_university_novelty_analysis_py | contains | synthetic_university contém synthetic_university/novelty_analysis.py |
+| layer_synthetic_university | synthetic_university_mcp_server_py | contains | synthetic_university contém synthetic_university/mcp_server.py |
+| layer_synthetic_university | synthetic_university_continuous_discovery_py | contains | synthetic_university contém synthetic_university/continuous_discovery.py |
+| layer_synthetic_university | synthetic_university_api_gateway_py | contains | synthetic_university contém synthetic_university/api_gateway.py |
 | layer_tests | tests_test_advanced_subsystems_py | contains | tests contém tests/test_advanced_subsystems.py |
 | layer_tests | tests_test_analyze_research_batch_py | contains | tests contém tests/test_analyze_research_batch.py |
 | layer_tests | tests_test_auxjuris_integration_py | contains | tests contém tests/test_auxjuris_integration.py |
@@ -916,6 +936,9 @@ graph TD
 | layer_tests | tests_test_r91_peer_review_py | contains | tests contém tests/test_r91_peer_review.py |
 | layer_tests | tests_test_r92_submission_package_py | contains | tests contém tests/test_r92_submission_package.py |
 | layer_tests | tests_test_r93_novelty_analysis_py | contains | tests contém tests/test_r93_novelty_analysis.py |
+| layer_tests | tests_test_r94_mcp_server_py | contains | tests contém tests/test_r94_mcp_server.py |
+| layer_tests | tests_test_r95_continuous_discovery_py | contains | tests contém tests/test_r95_continuous_discovery.py |
+| layer_tests | tests_test_r96_api_gateway_py | contains | tests contém tests/test_r96_api_gateway.py |
 | layer_transformer | transformer_attention_py | contains | transformer contém transformer/attention.py |
 | layer_transformer | transformer_embedder_py | contains | transformer contém transformer/embedder.py |
 | layer_transformer | transformer_init_py | contains | transformer contém transformer/__init__.py |
@@ -1300,3 +1323,15 @@ graph TD
 | webapp_app_py | webapp_legal_impact_helpers_py | imports | webapp.legal_impact_helpers |
 | webapp_legal_impact_helpers_py | legal_init_py | imports | legal |
 | webapp_legal_impact_helpers_py | legal_specializations_py | imports | legal.specializations |
+| synthetic_university_mcp_server_py | synthetic_university_combinatorial_engine_py | imports | synthetic_university.combinatorial_engine |
+| synthetic_university_mcp_server_py | synthetic_university_llm_evaluator_py | imports | synthetic_university.llm_evaluator |
+| synthetic_university_mcp_server_py | synthetic_university_thesis_enricher_py | imports | synthetic_university.thesis_enricher |
+| synthetic_university_mcp_server_py | synthetic_university_visual_abstract_py | imports | synthetic_university.visual_abstract |
+| synthetic_university_mcp_server_py | synthetic_university_peer_review_py | imports | synthetic_university.peer_review |
+| synthetic_university_mcp_server_py | synthetic_university_submission_package_py | imports | synthetic_university.submission_package |
+| synthetic_university_mcp_server_py | synthetic_university_novelty_analysis_py | imports | synthetic_university.novelty_analysis |
+| synthetic_university_mcp_server_py | synthetic_university_dashboard_generator_py | imports | synthetic_university.dashboard_generator |
+| synthetic_university_api_gateway_py | synthetic_university_mcp_server_py | imports | synthetic_university.mcp_server |
+| tests_test_r94_mcp_server_py | synthetic_university_mcp_server_py | imports | synthetic_university.mcp_server |
+| tests_test_r95_continuous_discovery_py | synthetic_university_continuous_discovery_py | imports | synthetic_university.continuous_discovery |
+| tests_test_r96_api_gateway_py | synthetic_university_api_gateway_py | imports | synthetic_university.api_gateway |

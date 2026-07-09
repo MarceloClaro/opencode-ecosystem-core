@@ -6,12 +6,14 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-2.4.0_LLM_Peer_Review-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-549_passed-success.svg)](tests/)
-[![Universidade Sintética](https://img.shields.io/badge/Ciclos-46-blueviolet.svg)](synthetic_university/)
-[![Cobertura](https://img.shields.io/badge/Cobertura-46_ciclos_evolutivos-orange.svg)](evolution/cycles.json)
+[![Versão](https://img.shields.io/badge/Versão-2.5.0_API_Gateway-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-617_passed-success.svg)](tests/)
+[![Universidade Sintética](https://img.shields.io/badge/Ciclos-49-blueviolet.svg)](synthetic_university/)
+[![Cobertura](https://img.shields.io/badge/Cobertura-49_ciclos_evolutivos-orange.svg)](evolution/cycles.json)
+[![MCP](https://img.shields.io/badge/MCP-8_ferramentas-8A2BE2.svg)](synthetic_university/mcp_server.py)
+[![API](https://img.shields.io/badge/API-FastAPI_REST-00BFFF.svg)](synthetic_university/api_gateway.py)
 
-*Uma arquitetura cognitiva completa que une 160+ agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, inteligência jurídica integrada (Datajud + AuxJuris + especialização por ramos + benchmarks jurídicos), 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico, Universidade Sintética Transversal (SPEC-935) com 10 faculdades e testes de 10.000+ combinações via MiroFish, e Publicação Científica Automatizada.*
+*Uma arquitetura cognitiva completa que une 160+ agentes especializados, Pipeline Científico SuperHuman-candidate com EvidenceGraph (OQS → MCI → VSEE → EGS + Memória Epistemológica), Scientific RAG com grounding/citações, inteligência jurídica integrada (Datajud + AuxJuris + especialização por ramos + benchmarks jurídicos), 12 motores de raciocínio, benchmark metacognitivo superhuman-candidate, Teoria dos Jogos, Raciocínio Quântico, Universidade Sintética Transversal (SPEC-935) com 11 faculdades e testes de 10.000+ combinações via MiroFish, Publicação Científica Automatizada, **MCP Server** com 8 ferramentas stdio (R94), **Continuous Discovery Loop** (R95) e **API Gateway REST** FastAPI (R96).*
 
 ---
 
@@ -513,6 +515,9 @@ Inspirada na arquitetura de Vaswani (2017) e nos modelos da DeepMind.
 - **Deep Diagnose:** 5 Scanners (Noológico, Teleológico, Evolutivo, etc.) que fazem engenharia reversa de código, priorização epistemológica e geram "Sucessores Plausíveis" para o seu projeto.
 - **MiroFish & Game Theory:** Um enxame preditivo que debate usando o método Delphi e constrói um **Grafo de Conhecimento** em memória para extrair consensos matemáticos.
 - **Legal Reasoning + AUXJURIS (SPEC-921/922/923/927/931):** Raciocínio jurídico brasileiro especializado com 5 motores (subsunção, ponderação, precedentes, interpretação constitucional e scoring), integração real com a **API Datajud do CNJ** (27 tribunais estaduais), **4 agentes jurídicos A2A** (assistente geral, sumarizador, redator de e-mail e pesquisador jurídico), **framework de especialização por 7 ramos do direito** (penal, trabalhista, tributário, empresarial, administrativo, ambiental e digital/LGPD) e uma **base de conhecimento com RAG por keywords segmentada por ramo** para grounding jurídico mais preciso.
+- **🆕 MCP Server (R94):** `synthetic_university/mcp_server.py` — Servidor **MCP (Model Context Protocol)** via stdio JSON-RPC expondo 8 ferramentas da Universidade Sintética como ferramentas MCP. Cada ferramenta (`su_generate`, `su_evaluate`, `su_enrich`, `su_visual_abstract`, `su_peer_review`, `su_submission`, `su_novelty`, `su_dashboard`) possui JSON Schema de entrada e handler delegando ao módulo correspondente. Uso: `echo '{"method":"tools/call","params":{"name":"su_generate","arguments":{"n_pairs":3}}}' | python3 -m synthetic_university.mcp_server`.
+- **🆕 API Gateway (R96):** `synthetic_university/api_gateway.py` — Gateway **REST FastAPI** com 10 endpoints HTTP. `GET /health` (health check), `GET /tools` (lista 8 ferramentas), `POST /tools/{generate,evaluate,enrich,visual-abstract,peer-review,submission,novelty,dashboard}` (wrappers dos handlers MCP). Import condicional de FastAPI — funciona sem a biblioteca instalada. Uso: `uvicorn synthetic_university.api_gateway:app --reload`.
+- **🆕 Continuous Discovery Loop (R95):** `synthetic_university/continuous_discovery.py` — `ContinuousDiscoveryLoop` que periodicamente gera 3-5 teses, enriquece cada uma com busca web, reavalia novidade, calcula métricas agregadas e acumula histórico. `run_cycle()` retorna metadados completos. `get_summary()` consolida todos os ciclos. `export_report()` e `export_all()` salvam relatórios JSON auditáveis.
 - **Legal Impact Scanner (SPEC-924/925/926):** Scanner opcional de visão jurídica para **pesquisas e produções**. Mede proteção de dados/LGPD, propriedade intelectual, conformidade regulatória/ética, grounding jurisprudencial, responsabilidade contratual e defensibilidade de publicação. Também estima **ganho metacognitivo jurídico** em 4 eixos: awareness normativa, detecção de conflito normativo, antecipação de risco e humildade epistêmica aplicada. Agora pode ser acionado pela **interface web Streamlit** tanto no diagnóstico geral quanto em uma **aba jurídica dedicada** em `webapp/app.py`.
 - **Benchmarks Jurídicos por Ramo (SPEC-928):** Suíte conservadora de avaliação por domínio para os 7 ramos especializados. Mede acurácia de roteamento, qualidade de resposta, cobertura do domínio e classifica o sistema em tiers (`base`, `specialist`, `specialist_advanced`, `phd_candidate`, `phd_validated`). A política anti-overclaim permanece: **`phd_validated` exige validação externa**.
 - **Publishing & Research:** Automação Qualis A1. Busca artigos (Sci-Hub/OpenAlex), converte PDF para Markdown, faz fichamentos ABNT/APA, gera ilustrações didáticas (MIRA) e compila livros inteiros em LaTeX com capas geradas por IA.
@@ -589,10 +594,12 @@ opencode-ecosystem-core/
 ├── research/
 │   ├── experiments/       # 🆕 Matrizes de cenários de pesquisa
 │   └── pipelines/         # 🆕 Executores de lote integrados
-├── synthetic_university/  # SPEC-935 · 10 Faculdades · 46 ciclos · LLM real
+├── synthetic_university/  # SPEC-935 · 11 Faculdades · 49 ciclos · LLM real
 │   ├── agents/            # 140+ professores especializados
 │   ├── combinatorial_engine.py    # Geração combinatorial com embeddings
 │   ├── core.py            # Núcleo da Universidade Sintética
+│   ├── semantic_embedder.py       # Embedding neural Ollama (768-dim)
+│   ├── benchmark.py               # Benchmark Random × Jaccard × Refined
 │   ├── empirical_validation.py    # Validação empírica calibrada (R82)
 │   ├── i18n.py            # Internacionalização EN/PT-BR (R85)
 │   ├── academic_integration.py    # arXiv + Sem Scholar + Sci-Hub (R86)
@@ -602,7 +609,10 @@ opencode-ecosystem-core/
 │   ├── visual_abstract.py         # Abstracts visuais SVG (R90)
 │   ├── peer_review.py             # Revisão cega multi-LLM (R91)
 │   ├── submission_package.py      # Pacote submissão Qualis A1 (R92)
-│   └── novelty_analysis.py        # Análise de novidade (R93)
+│   ├── novelty_analysis.py        # Análise de novidade (R93)
+│   ├── mcp_server.py              # 🆕 MCP Server · 8 ferramentas stdio (R94)
+│   ├── continuous_discovery.py    # 🆕 Loop contínuo de descoberta (R95)
+│   └── api_gateway.py             # 🆕 FastAPI REST · 10 endpoints (R96)
 ├── sdd/                   # SpecRegistry, SpecVerifier, TDDRunner
 ├── trust/                 # Trust Engine + Behavioral Gate
 ├── economy/               # Token Economy (Staking, Slashing, Fee Market)
@@ -623,14 +633,17 @@ opencode-ecosystem-core/
 ## 🧪 Executar os Testes
 
 ```bash
-# Todos os 549+ testes do ecossistema
+# Todos os 617+ testes do ecossistema
 python3 -m pytest tests/ -v
 
-# Apenas Universidade Sintética (R82-R93)
-python3 -m pytest tests/test_empirical_validation.py tests/test_i18n.py tests/test_academic_integration.py tests/test_dashboard_generator.py -v
+# Apenas Universidade Sintética (R82-R96)
+python3 -m pytest tests/test_r88_llm_evaluator.py tests/test_r89_thesis_enricher.py tests/test_r90_visual_abstract.py tests/test_r91_peer_review.py tests/test_r92_submission_package.py tests/test_r93_novelty_analysis.py tests/test_r94_mcp_server.py tests/test_r95_continuous_discovery.py tests/test_r96_api_gateway.py -v
 
-# Apenas LLM + Peer Review (R88-R93)
-python3 -m pytest tests/test_r88_llm_evaluator.py tests/test_r89_thesis_enricher.py tests/test_r90_visual_abstract.py tests/test_r91_peer_review.py tests/test_r92_submission_package.py tests/test_r93_novelty_analysis.py -v
+# Apenas MCP Server (R94)
+python3 -m pytest tests/test_r94_mcp_server.py -v
+
+# Apenas API Gateway (R96)
+python3 -m pytest tests/test_r96_api_gateway.py -v
 
 # Apenas pipeline científico (v2.0 SuperHuman)
 python3 -m pytest tests/test_scientific_superhuman.py -v
@@ -642,5 +655,5 @@ python3 -m pytest tests/test_scientific_governance_pipeline.py -v
 ---
 <div align="center">
   <i>Construído com rigor metodológico, inspirado pela Teoria dos Jogos e desenhado para o futuro.</i><br>
-  <b>v2.4.0 — LLM Peer Review + Submission Package + Novelty Analysis | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
+  <b>v2.5.0 — MCP Server + API Gateway + Continuous Discovery | Apoie o projeto: <a href="https://buymeacoffee.com/geomaker">buymeacoffee.com/geomaker</a></b>
 </div>
