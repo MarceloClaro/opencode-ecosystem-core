@@ -95,6 +95,7 @@ class AgenticScienceV2:
         ideas_per_round: int = 3,
         mutation_rate: float = 0.1,
         crossover_rate: float = 0.7,
+        verbose: bool = False,
     ):
         # Sub-sistemas
         self.mentor = MentorAgent(knowledge_graph=knowledge_graph)
@@ -115,6 +116,7 @@ class AgenticScienceV2:
         # Config
         self.max_rounds = max_rounds
         self.ideas_per_round = ideas_per_round
+        self.verbose = verbose
 
         # Estado
         self.current_round = 0
