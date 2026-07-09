@@ -128,108 +128,597 @@ Roteador de atenção (Multi-Head Attention com 4 cabeças: semântica, capacida
 graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
+    WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
     
     %% Camada SDD/TDD
     subgraph SDD [SDD & TDD Engine]
-        Spec[SpecRegistry]
-        Ver[SpecVerifier Gate SDD]
-        TDD[TDDRunner Red-Green-Refactor]
+        Spec[SpecRegistry<br>Especificações]
+        Ver[SpecVerifier<br>Gate SDD]
+        TDD[TDDRunner<br>Red-Green-Refactor]
+        
         TDD -.->|Valida| Ver
         Ver -.->|Lê| Spec
     end
 
     %% Camada Transformer
     subgraph TF [Transformer Layer]
-        Attn[AttentionRouter Multi-Head]
-        Pipe[TransformerPipeline]
-        HTM[(Hierarchical Memory)]
-        Emb[TaskEmbedder d=64]
+        Attn[AttentionRouter<br>Multi-Head]
+        Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
+        HTM[(Hierarchical<br>Memory HTM)]
+        Emb[TaskEmbedder<br>d=64]
+        
         Attn -.->|Usa| Emb
         HTM -.->|Usa| Emb
     end
     
-    %% Pipeline Academico Agentivo (R101-R105)
+    %% Pipeline Academico Agentivo
     subgraph Acad [Pipeline Academico Agentivo v3.0]
-        EvoSci[R101: EvoSci<br>Mentor+Researcher+Reviewer<br>Evolutionary Engine]
-        DeepRes[R102: Deep Research<br>Evidence Graph + BFRS/DFRS]
-        PReview[R103: Peer Review<br>Rubric 8-dim + AuditGraph]
-        Revision[R104d: Revision<br>DiffEngine + Rebuttal]
-        Composer[R105: Paper Composer<br>ABNT/APA/IEEE]
+        EvoSci["R101: EvoSci<br>MentorAgent+ResearcherAgent<br>ReviewerAgent+EvoEngine"]
+        DeepRes["R102: Deep Research<br>EvidenceGraph+BFRS+DFRS"]
+        PReview["R103: Peer Review<br>8-dim Rubric+AuditGraph"]
+        Revision["R104d: Manuscript Revision<br>DiffEngine+Rebuttal"]
+        Composer["R105: Paper Composer<br>ABNT/APA/IEEE"]
         
         EvoSci --> DeepRes
         DeepRes --> PReview
         PReview --> Revision
         Revision --> Composer
     end
-
-    %% Camada Core
+    
+    %% Camada Core (Subsistemas)
     subgraph Core [Core Subsystems]
-        Trust[Trust Engine]
-        Eco[Token Economy]
-        Scan[Scanners M1-M5]
-        Reason[Reasoning 12 Engines]
-        MiroFish[MiroFish Swarm]
-        SynthUniv[Synthetic University<br>SPEC-935]
-        Publishing[Publishing LaTeX]
-        Research[Research Hub]
+        Trust[Trust Engine<br>Behavioral Gate]
+        Eco[Token Economy<br>Staking/Slashing]
+        Scan[Scanners<br>Diagnóstico]
+        AcadLegacy[MASWOS<br>Qualis A1]
+        Reason[Reasoning<br>12 Engines + Quantum]
+        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928/931]
+        LegalBench[Legal Benchmarks<br>SPEC-928]
+        SynthUniv[Synthetic University<br>SPEC-935 · 11 Faculdades]
+        RAG[Scientific RAG<br>Grounding + Citations]
+        Bench[Superhuman Readiness<br>Benchmarks]
+        MetaEval[Metacognitive Eval<br>SPEC-920]
+        Discovery[Continuous Discovery<br>R95 · Loop Automático]
+        EvoMem[Evolutionary Memory<br>R97 · Memória Persistente]
+        Novelty[Novelty V2<br>R98 · Contribution Points]
+        RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
+    end
+
+    %% Seguranca e Qualidade
+    subgraph SQC [Seguranca & Qualidade]
+        MCPSec[MCP Security R100<br>Guard+Audit+Vetter+Limiter]
+        CICD[CI/CD Pipeline R106<br>GitHub Actions+Quality Gates]
+        Skills[Skills Exportaveis R104a<br>4 Skills]
+        PipPkg[Pip Packages R104b<br>3 Pacotes]
+    end
+
+    %% MCP + API Gateway
+    subgraph Protocols [Protocolos de Integração]
+        MCPServer[MCP Server · R94+R100<br>14 Ferramentas via stdio]
+        APIGateway[API Gateway · R96<br>10+ Endpoints FastAPI REST]
+        MCP_Sci[su_agentic_science]
+        MCP_Deep[su_deep_research]
+        MCP_Review2[su_peer_review_v2]
+        MCP_Revision[su_manuscript_revision]
+        MCP_Composer[su_paper_composer]
+        MCP_Novelty2[su_novelty_v2]
+        MCP_Sec[su_mcp_security]
+        MCP_Classic[su_generate/evaluate/enrich/visual/peer-review/submission/novelty/dashboard]
     end
 
     %% Camada MCI
     subgraph MCI [Metacognitive Interconnect]
-        MB[MetaBus Global Workspace]
-        BB[Blackboard A2A Protocol]
-        Mem[(Metacognitive Memory)]
-        Ref[Reflexion Middleware]
+        MB[MetaBus<br>Global Workspace]
+        BB[Blackboard<br>A2A Protocol]
+        Mem[(Metacognitive<br>Memory)]
+        Ref[Reflexion<br>Middleware]
+        
         MB <--> Mem
         BB <--> MB
         Ref <--> MB
     end
-
-    %% Seguranca e Qualidade
-    subgraph SQC [Security & Quality]
-        MCPSec[R100: MCP Security<br>Guard+Audit+Vetter+Limiter]
-        CICD[R106: CI/CD Pipeline<br>Lint+Test+Package+Quality Gate]
-    end
     
     %% Orquestrador integra as camadas
     Orchestrator -->|1. Cria Spec| Spec
-    Orchestrator -->|2. Recupera| HTM
-    HTM -->|Lê| Mem
-    Orchestrator -->|3. Gate| Trust
+    Orchestrator -->|2. Recuperação em 2 níveis| HTM
+    HTM -->|Lê Episódica| Mem
+    Orchestrator -->|3. Gate & Roteia| Trust
     Trust -->|Libera| Attn
-    Attn -->|Publica| BB
+    Attn -->|Publica Volunteer| BB
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
+    
+    %% Pipeline academico
     Orchestrator -->|5. Pipeline Academico| EvoSci
-    Orchestrator -->|6. Seguranca| MCPSec
-    Orchestrator -->|7. CI/CD| CICD
+    EvoSci -->|Alimenta| DeepRes
+    DeepRes -->|Produz evidencia| PReview
+    PReview -->|Gera revisao| Revision
+    Revision -->|Manuscrito revisado| Composer
+    Composer -->|Artigo final| Orchestrator
+    
+    %% Conexões de suporte
+    AcadLegacy -->|Consulta evidências| RAG
+    Reason -->|Grounding científico| RAG
+    RAG -->|Métricas| Bench
+    RAGEvolved -->|Citacoes em grafo| DeepRes
+    EvoMem -->|Memoria de direcoes| EvoSci
+    Novelty -->|Analise de novidade| EvoSci
+    MB -->|Traços e reflexões| MetaEval
+    Trust -->|Outcomes e confiança| MetaEval
+    
+    %% Jurídico
+    Orchestrator -->|6. Raciocínio Jurídico| Legal
+    Legal -->|Subsunção + Ponderação| Reason
+    Legal -->|Interpretação Constitucional| MetaEval
+    Legal -->|RAG jurídico + Datajud| RAG
+    Legal -->|Agentes jurídicos A2A| BB
+    Legal -->|Especialização por 7 ramos| LegalBench
+    LegalBench -->|tiers conservadores| MetaEval
+    
+    %% SynthUniv
+    SynthUniv -->|Gera teses| Discovery
+    Discovery -->|Enriquece + Avalia| SynthUniv
+    
+    %% Seguranca e qualidade
+    MCPSec -.->|Protege| MCPServer
+    CICD -.->|Valida| Pipe
+    Skills -.->|Exporta| BB
+    PipPkg -.->|Distribui| External
+    
+    %% Integração MCP / API
+    SynthUniv -.->|Registra handlers| MCPServer
+    MCPServer --> MCP_Classic
+    MCPServer --> MCP_Sci
+    MCPServer --> MCP_Deep
+    MCPServer --> MCP_Review2
+    MCPServer --> MCP_Revision
+    MCPServer --> MCP_Composer
+    MCPServer --> MCP_Novelty2
+    MCPServer -->|stdio JSON-RPC| External
+    APIGateway -->|Reusa handlers| MCPServer
+    APIGateway -->|HTTP REST| External
     
     %% Agentes
-    subgraph Agents [Catalogo de Agentes 160+]
+    subgraph Agents [Catálogo de Agentes 160+]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
-        A4[32 MASWOS Agents]
-        A5[Academic Writer]
+        A4[Academic Writer]
+        A5[EvoSci Agent]
         A6[Deep Research]
         A7[Peer Review]
         A8[Paper Composer]
+        A9[Revision Agent]
+        A10[32 MASWOS Agents]
     end
     
+    %% Fluxo de Agentes
     Agents -.->|Registra Agent Card| BB
     BB -.->|Call for Proposals| Agents
     Agents -->|Voluntaria-se| BB
     Agents -->|Conclui Tarefa| Ref
     
     %% MCP
-    MCP[MCP Server 14 Tools] -->|Expoe API| MCI
-    External[External Tools / LLMs] -->|JSON-RPC| MCP
-    MCPSec -.->|Protege| MCP
-    CICD -.->|Valida| Agents
+    MCP_Node[MCP JSON-RPC] -->|Expõe API| MCI
+    External[External Tools / LLMs] -->|stdio ou HTTP| MCPServer
+    External -->|HTTP REST| APIGateway
 ```
 
 ---
+
+### Legenda da Arquitetura
+
+#### Notação Visual
+
+| Símbolo | Significado |
+|---|---|
+| `[Texto]` | **Componente** interno do sistema (ex: `[SpecRegistry]`) |
+| `([Texto])` | **Ator externo** — usuário, CLI, ferramenta fora do ecossistema |
+| `{Texto}` | **Módulo de armazenamento** — banco de dados, cache, memória persistente |
+| `>"Texto"]` | **Entrada/Saída** — subprocesso, pipeline de dados |
+| `subgraph NOME [...] ... end` | **Agrupamento lógico** — uma camada ou subsistema |
+| `A --> B` | **Fluxo direto** — A chama/envia dados para B |
+| `A -.-> B` | **Fluxo indireto** — A influencia ou registra em B (ex: registro de handler, proteção) |
+| `A <--> B` | **Fluxo bidirecional** — troca contínua de dados entre A e B |
+| `A -->\|Rótulo\| B` | **Fluxo com descrição** — o que está sendo passado (comando, dados, controle) |
+| `A[\"<br>Texto\"]` | **Componente com múltiplas linhas** — detalhamento interno |
+
+#### Subgraphs (Camadas)
+
+| Camada | Função |
+|---|---|
+| **SDD & TDD Engine** | Motor de especificação e testes. Toda entrega nasce como spec (SDD) e só é aceita após testes verdes (TDD). |
+| **Transformer Layer** | Roteador por atenção multi-cabeça. Substitui if/else estático por scores softmax de semântica, capacidade, confiança e carga. |
+| **Pipeline Academico v3.0** | O coração do sistema. 5 estágios sequenciais que transformam um problema em artigo completo revisado e formatado. |
+| **Core Subsystems** | Subsistemas auxiliares: trust engine, economia de tokens, motores de raciocínio, RAG científico, Universidade Sintética, memória evolutiva. |
+| **Segurança & Qualidade** | Proteção MCP (guard/audit/vetter/limiter), CI/CD (GitHub Actions + quality gates), skills exportáveis e pacotes pip. |
+| **Protocolos de Integração** | Interfaces de comunicação: MCP Server (stdio JSON-RPC) e API Gateway (FastAPI REST). 14 ferramentas expostas. |
+| **Metacognitive Interconnect** | Barramento neural central. MetaBus (pub/sub global), Blackboard (protocolo A2A), memória metacognitiva e middleware de reflexão. |
+| **Catálogo de Agentes** | 160+ agentes especializados que se registram no Blackboard e competem por tarefas via Call for Proposals. |
+
+#### Legenda de Cores (conceitual)
+
+| Cor | Significado |
+|---|---|
+| Azul | Camada de **orquestração e controle** (Orquestrador, SDD, Transformer) |
+| Verde | **Pipeline acadêmico** — a cadeia de valor principal R101→R105 |
+| Laranja | **Subsistemas de suporte** — engines, RAG, memória, benchmark |
+| Vermelho | **Segurança e qualidade** — proteção, validação, CI/CD |
+| Roxo | **Protocolos de integração** — MCP, API Gateway |
+| Cinza | **Metacognição** — barramento neural, memória, reflexão |
+
+---
+
+### Como Funciona a Orquestração
+
+A orquestração é o ciclo de vida de uma tarefa pelos 7 passos do protocolo **marceloclaro**: **Perceber → Especificar → Delegar → Executar → Verificar → Refletir → Registrar**. Abaixo, cada passo é detalhado com o fluxo real no diagrama.
+
+---
+
+#### Passo 1: Perceber (Recepção da Tarefa)
+
+```
+User([Usuário]) -->|"Comandos"| Orchestrator
+```
+
+O ciclo começa quando o usuário dá um comando. O **Orquestrador `marceloclaro`** recebe a requisição — seja via CLI, webapp Streamlit ou chamada MCP.
+
+**O que acontece internamente:**
+1. O orquestrador valida a entrada (formato, segurança básica)
+2. Identifica o tipo de tarefa: pesquisa, código, artigo acadêmico, revisão, diagnóstico
+3. Consulta a **memória metacognitiva** (`Mem[(Metacognitive Memory)]`) via `HTM[(Hierarchical Memory)]` para saber se já executou tarefa similar antes e quais lições foram aprendidas
+4. Define o escopo: o que precisa ser entregue, quais critérios de sucesso
+
+**Exemplo prático:** Usuário diz: *"Produza um artigo científico sobre ética quântica em IA, no formato ABNT"*.
+O orquestrador identifica: tarefa do tipo `academic_pipeline`, formato ABNT, tópico "quantum ethics in AI".
+
+---
+
+#### Passo 2: Especificar (SDD — Spec-Driven Development)
+
+```
+Orchestrator -->|"1. Cria Spec"| Spec[SpecRegistry]
+```
+
+Antes de qualquer execução, o orquestrador cria uma **Especificação Formal (SDD)** no `SpecRegistry`.
+
+**O que contém uma spec:**
+- **Objetivo:** descrição do que será entregue
+- **Critérios de Aceitação (CA):** lista verificável de condições que a entrega deve satisfazer
+- **Recursos necessários:** agentes, ferramentas, orçamento de tokens
+- **Prazo estimado:** número de ciclos TDD
+
+**Exemplo (spec para o artigo de ética quântica):**
+```
+CA1: O artigo deve ter no mínimo 5 seções (abstract, intro, methods, results, conclusion)
+CA2: Deve conter no mínimo 3 citações formatadas em ABNT
+CA3: A revisão por pares deve atribuir score ≥ 7/10 em todas as 8 dimensões
+CA4: O manuscrito deve passar pelo DiffEngine sem erros de integridade
+```
+
+A spec fica registrada e auditável para sempre. Nada é executado sem uma spec aprovada.
+
+---
+
+#### Passo 3: Delegar (Roteamento por Atenção + Blackboard)
+
+```
+Orchestrator -->|"2. Recuperação em 2 níveis"| HTM
+HTM -->|"Lê Episódica"| Mem
+Orchestrator -->|"3. Gate & Roteia"| Trust[Trust Engine]
+Trust -->|"Libera"| Attn[AttentionRouter Multi-Head]
+Attn -->|"Publica Volunteer"| BB[Blackboard A2A]
+```
+
+Este é o passo mais sofisticado da arquitetura. Ele substitui um simples `if/else` por um sistema de **atenção multi-cabeça** inspirado em Transformers.
+
+**Sub-passo 3.1: Recuperação de Memória**
+O orquestrador consulta a **Hierarchical Memory (HTM)** em dois níveis:
+1. **Atenção grossa:** busca sumários de chunks de memória similares à tarefa atual
+2. **Atenção fina:** sobre os eventos dos melhores chunks, recupera detalhes de execuções anteriores, lições aprendidas e scores de confiança
+
+**Sub-passo 3.2: Gate Comportamental**
+O **Trust Engine** avalia:
+- O agente que executou tarefa similar anteriormente tem confiança suficiente? (confidence ledger)
+- A tarefa envolve risco alto? (ex: execução de código externo, acesso a dados sensíveis)
+- O orçamento de tokens está disponível?
+
+Se o gate falhar, a tarefa é bloqueada ou redirecionada para um agente com supervisão.
+
+**Sub-passo 3.3: Atenção Multi-Head**
+O **AttentionRouter** calcula scores softmax com 4 cabeças:
+
+| Cabeça | O que mede | Peso |
+|---|---|---|
+| **Semântica** | Similaridade entre a tarefa e as capacidades do agente (via TaskEmbedder d=64) | 35% |
+| **Capacidade** | O agente tem as ferramentas necessárias? (ex: acesso a RAG, motores de raciocínio) | 30% |
+| **Confiança** | Qual o histórico de acertos do agente? (Trust Ledger) | 25% |
+| **Carga** | O agente está disponível ou já ocupado? | 10% |
+
+O agente com maior score composto vence a disputa.
+
+**Sub-passo 3.4: Publicação no Blackboard**
+O orquestrador publica um **Call for Proposals (CFP)** no `Blackboard (A2A Protocol)`:
+- `BB -.->|"Call for Proposals"| Agents`
+- Agentes elegíveis se voluntariam: `Agents -->|"Voluntaria-se"| BB`
+- O AttentionRouter seleciona o melhor
+
+**Exemplo prático:** Para o artigo de ética quântica:
+1. HTM recupera memórias de artigos anteriores sobre ética em IA
+2. Trust Engine libera com confidence score 0.85
+3. AttentionRouter calcula: EvoSci Agent=0.91, Academic Writer=0.78, Researcher=0.65
+4. **EvoSci Agent é selecionado**
+
+---
+
+#### Passo 4: Executar (Pipeline Acadêmico 5 Estágios)
+
+```
+Orchestrator -->|"5. Pipeline Academico"| EvoSci
+EvoSci -->|"Alimenta"| DeepRes
+DeepRes -->|"Produz evidencia"| PReview
+PReview -->|"Gera revisao"| Revision
+Revision -->|"Manuscrito revisado"| Composer
+Composer -->|"Artigo final"| Orchestrator
+```
+
+O coração do ecossistema: 5 estágios em série, cada um alimentando o próximo.
+
+**Estágio 1 — R101: EvoSci (Descoberta Científica)**
+- **MentorAgent:** constrói o espaço do problema, divide em subproblemas
+- **PrimeResearcherAgent:** gera soluções candidatas para cada subproblema
+- **ReviewerAgent:** avalia cada solução em múltiplas dimensões (novidade, viabilidade, impacto)
+- **EvolutionManagerAgent:** mantém memórias de ideação e experimentação
+- **EvoEngine:** executa ciclo evolutivo: **Selection** → **Crossover** → **Mutation** → **Inheritance**
+  - *Selection:* as melhores soluções são selecionadas por fitness
+  - *Crossover:* combina características de duas soluções promissoras
+  - *Mutation:* introduz variação aleatória para explorar o espaço
+  - *Inheritance:* passa características adaptativas para a próxima geração
+- **Detecção de estagnação:** se o fitness não melhora por N gerações, o sistema faz **pivot**
+
+**Saída:** Uma hipótese refinada + direções de pesquisa + trajetória evolutiva
+
+**Estágio 2 — R102: Deep Research (Pesquisa Profunda)**
+- **KnowledgeBaseRegistry:** carrega fontes de conhecimento (PubMed, arXiv, OpenAlex simulados)
+- **BFRSAgent (Breadth-First Research Search):** explora conexões imediatas em largura
+  - Para cada entidade, encontra relações diretas
+  - Constrói um grafo de primeiro nível
+- **DFRSAgent (Depth-First Research Search):** constrói cadeias multi-hop
+  - Segue relações em profundidade (configurável até max_depth)
+  - Descobre conexões não óbvias entre conceitos distantes
+- **EvidenceGraph:** acumula entidades, relações e evidências com proveniência completa
+  - Cada `Evidence` registra: entidade origem, entidade destino, relação, timestamp, fonte
+  - Suporta `find_paths(start, end, max_depth)` via BFS
+  - Suporta `subgraph_query(entities)` para contextos focados
+- **OrchestratorAgent:** planeja a estratégia de busca, roteia entre BFRS e DFRS, aplica **gate de suficiência** (número mínimo de entidades e relações) e sintetiza o resultado
+
+**Conexões de suporte ativas:**
+- `RAGEvolved -->|"Citacoes em grafo"| DeepRes` — o RAG Evolved (R99) alimenta o grafo com citações
+- `EvoMem -->|"Memoria de direcoes"| EvoSci` — a memória evolutiva (R97) evita re-explorar direções falhadas
+- `Novelty -->|"Analise de novidade"| EvoSci` — o analisador de novidade (R98) pontua contribuições
+
+**Saída:** Um relatório de pesquisa com evidências, grafo de conhecimento e gate de suficiência
+
+**Estágio 3 — R103: Peer Review (Revisão por Pares Agentiva)**
+- **RubricEngine:** instancia 8 meta-dimensões de avaliação:
+
+| Dimensão | O que avalia | Polaridade |
+|---|---|---|
+| Originalidade | O trabalho é novo? | Positiva |
+| Metodologia | Os métodos são sólidos? | Positiva |
+| Resultados | Os resultados são convincentes? | Positiva |
+| Reprodutibilidade | Dá para reproduzir? | Positiva |
+| Clareza | A escrita é clara? | Positiva |
+| Ética | Há preocupações éticas? | Negativa (score reverso) |
+| Literature Review | A revisão de literatura é adequada? | Positiva |
+| Impacto | Qual o impacto potencial? | Positiva |
+
+- **ReviewLedger:** rastreia **claims** (afirmações do paper), **evidências** (suporte para cada claim) e **riscos** (nível de incerteza)
+  - Cada claim recebe um status: `verified`, `unsupported`, `contradicted`, `uncertain`
+  - Claims de alto risco geram automaticamente uma **verification agenda**
+- **AuditGraph:** integrado ao EvidenceGraph do R102, ancora cada evidência no grafo epistemológico
+- **MultiCriticReviewer:** 4 críticos executando em paralelo:
+
+| Crítico | Foco |
+|---|---|
+| **Methodology Critic** | Design experimental, viés, power analysis |
+| **Results Critic** | Significância estatística, efeito, robustez |
+| **Literature Critic** | Cobertura da revisão, citações ausentes |
+| **Ethics Critic** | Conformidade ética, consentimento, privacidade |
+
+- **OrchestratorReviewer:** pipeline completo:
+  1. **Drafting:** gera rascunho da revisão
+  2. **Ledgering:** constrói o ReviewLedger
+  3. **Grounding:** ancora evidências no AuditGraph
+  4. **Auditing:** executa gate de auditoria
+  5. **Synthesis:** consolida em meta-review + repair plan priorizado (critical > major > minor)
+
+**Saída:** Revisão completa com scores (0-10), repair plan, verification agenda e meta-review
+
+**Estágio 4 — R104d: Manuscript Revision (Revisão de Manuscrito)**
+- **ReviewAnalyzer:** extrai do pacote R103:
+  - Claims a serem corrigidos
+  - Riscos identificados
+  - Ações recomendadas
+- **SectionMapper:** mapeia cada claim para a seção correspondente do manuscrito (ex: "metodologia fraca" → seção "Methods")
+- **ProposalGenerator:** para cada issue, gera:
+  - Proposta principal (recomendada)
+  - Alternativas (quando aplicável)
+  - Justificativa da mudança
+- **DiffEngine:** coração do sistema de revisão:
+  - Aplica diffs controlados no manuscrito
+  - Mantém **histórico de versões** para rollback
+  - Verifica **integridade** após cada diff (estrutura do documento preservada?)
+- **OrchestratorRevision:** pipeline:
+  1. **Analyze:** processa a revisão recebida
+  2. **Map:** mapeia claims para seções
+  3. **Propose:** gera propostas de correção
+  4. **Apply:** aplica diffs (com rollback se algo falhar)
+  5. **Verify:** verifica integridade do manuscrito revisado
+  6. **Report:** gera relatório de mudanças + **carta de rebuttal ponto-a-ponto** automática
+
+**Saída:** Manuscrito revisado + carta de rebuttal + diff stats
+
+**Estágio 5 — R105: Paper Composer (Composição Final)**
+- **StructurePlanner:** gera outline baseado no venue:
+  - **ABNT:** artigo científico brasileiro (NBR 6023/10520)
+  - **APA:** American Psychological Association 7th ed.
+  - **IEEE:** Institute of Electrical and Electronics Engineers
+- **SectionWriter:** escreve 6 seções com fallback para inputs vazios:
+  1. **Abstract:** resumo com palavras-chave
+  2. **Introduction:** contexto, problema, objetivos
+  3. **Methods:** metodologia, design, procedimentos
+  4. **Results:** resultados, tabelas, figuras
+  5. **Discussion:** interpretação, limitações, trabalhos futuros
+  6. **Conclusion:** conclusão, contribuições
+- **CitationFormatter:** formata referências em 3 estilos:
+  - ABNT NBR 6023:2018 (autor-data, alfabética)
+  - APA 7th (autor-data, ordem alfabética)
+  - IEEE (numérica, ordem de aparecimento)
+- **CrossConsistencyVerifier:** 5 verificações automáticas:
+  1. Abstract cobre todas as seções? 
+  2. Citações no texto têm referências?
+  3. Terminologia consistente entre seções?
+  4. Metodologia → Resultados → Discussão coerentes?
+  5. Palavras-chave aparecem no texto?
+- **OrchestratorComposer:** pipeline:
+  1. **Plan:** gera estrutura
+  2. **Write:** escreve cada seção
+  3. **Format:** aplica formatação do venue
+  4. **Verify:** executa verificações de consistência
+  5. **Export:** gera saída final
+
+**Saída:** Artigo completo formatado + referências + relatório de consistência
+
+---
+
+#### Passo 5: Verificar (Gates de Qualidade)
+
+```
+Pipe[TransformerPipeline] -->|"Verifica"| Ver[SpecVerifier]
+```
+
+Após a execução, dois gates são aplicados em paralelo:
+
+**Gate 1 — SpecVerifier (Gate SDD):**
+- Compara a entrega contra cada Critério de Aceitação da spec
+- Se algum CA falhar, a entrega é **rejeitada** e volta para TDD (Refactor)
+- Exige 100% de aprovação
+
+**Gate 2 — CI/CD Quality Gates (R106):**
+- Executa a suite completa de testes: `CICD -.->|"Valida"| Pipe`
+- Gera relatório de qualidade: `scripts/quality_report.py`
+- Verifica cobertura: `scripts/check_coverage.py` (threshold ≥ 80%)
+- Se falhar, o agente sofre **slashing** na Token Economy
+
+**Conexões ativas:**
+- `MCPSec -.->|"Protege"| MCPServer` — MCP Security monitora tentativas de injeção
+- `Trust -->|"Outcomes e confianca"| MetaEval` — o resultado atualiza o confidence ledger
+
+---
+
+#### Passo 6: Refletir (Reflexion — Metacognição)
+
+```
+Agents -->|"Conclui Tarefa"| Ref[Reflexion Middleware]
+Ref <--> MB[MetaBus Global Workspace]
+```
+
+O **Reflexion Middleware** intercepta a tarefa concluída e executa:
+
+1. **Auto-reflexão:** o sistema gera um relatório de:
+   - O que funcionou bem?
+   - O que poderia ter sido melhor?
+   - Quais decisões foram tomadas e por quê?
+   - Houve surpresas ou desvios do plano?
+2. **Atualização do Confidence Ledger:**
+   - Se a entrega passou nos gates → confiança do agente aumenta
+   - Se falhou → confiança diminui (slashing)
+3. **Registro na Memória Metacognitiva:**
+   - A experiência é persistida em `Mem[(Metacognitive Memory)]`
+   - Fica disponível para consultas futuras do HTM
+4. **Publicação no MetaBus:**
+   - O evento de conclusão é transmitido para todos os subsistemas
+   - `MB -->|"Traços e reflexoes"| MetaEval` — a avaliação metacognitiva é atualizada
+   - `Bench[Superhuman Readiness]` pode reavaliar o readiness score
+
+---
+
+#### Passo 7: Registrar (Evolution Registry)
+
+```
+Orchestrator -->|Registra| evolution/cycles.json
+```
+
+Cada ciclo completo de execução é registrado como um **evento evolutivo** no `evolution/cycles.json`:
+
+```json
+{
+  "round_id": "R106",
+  "objective": "CI/CD Pipeline + Quality Gates",
+  "changes": ["Criado .github/workflows/ci.yml", "Criado scripts/quality_report.py"],
+  "score": 9.2,
+  "lessons": ["quality_report.py leva >30s; flag --quick agiliza"],
+  "timestamp": 1783564500.0
+}
+```
+
+Atualmente o ecossistema possui **64 ciclos registrados** (R47 a R106), cada um com score, lições e timestamp.
+
+---
+
+#### Fluxo Completo — Visão Temporal
+
+Aqui está o ciclo completo de uma tarefa típica (artigo acadêmico):
+
+```
+Tempo 00:00 — Usuário envia comando "Produza artigo sobre ética quântica em ABNT"
+Tempo 00:01 — Orquestrador recebe, consulta memória, define escopo
+Tempo 00:02 — SDD: spec criada com 6 critérios de aceitação
+Tempo 00:03 — HTM recupera 3 memórias de artigos similares
+Tempo 00:04 — Trust Engine libera (confidence 0.85)
+Tempo 00:05 — AttentionRouter seleciona EvoSci Agent (score 0.91)
+Tempo 00:06 — Blackboard publica CFP, EvoSci Agent voluntaria
+Tempo 00:10 — R101 EvoSci: Mentor constrói espaço, Researcher gera hipóteses
+                EvoEngine executa 5 gerações: Selection→Crossover→Mutation→Inheritance
+Tempo 00:45 — R101 concluído. Melhor hipótese selecionada. Score: 8.7
+Tempo 00:46 — R102 Deep Research: EvidenceGraph construído
+                BFRS explora conexões imediatas (23 entidades)
+                DFRS constrói 4 cadeias multi-hop
+                Gate de suficiência: aprovado (18 entidades ≥ 15 threshold)
+Tempo 01:30 — R102 concluído. Relatório com 18 fontes, grafo de evidência
+Tempo 01:31 — R103 Peer Review: RubricEngine instancia 8 dimensões
+                MultiCriticReviewer executa 4 críticos em paralelo
+                ReviewLedger: 12 claims identificados
+                AuditGraph ancora 15 evidências
+Tempo 02:00 — R103 concluído. Meta-review. Repair plan: 3 critical, 2 major, 1 minor
+Tempo 02:01 — R104d Revision: ReviewAnalyzer processa repair plan
+                SectionMapper: intro(1), methods(2), results(1), discussion(2)
+                DiffEngine aplica 6 diffs com rollback de segurança
+                Carta de rebuttal gerada automaticamente
+Tempo 02:20 — R104d concluído. Manuscrito revisado. 6 diffs aplicados.
+Tempo 02:21 — R105 Composer: StructurePlanner gera outline ABNT
+                SectionWriter escreve 6 seções
+                CitationFormatter: 15 referências em ABNT
+                CrossConsistencyVerifier: 5/5 verificações aprovadas
+Tempo 02:40 — R105 concluído. Artigo completo exportado.
+Tempo 02:41 — SpecVerifier: 6/6 critérios de aceitação satisfeitos ✅
+Tempo 02:42 — CI/CD Gate: quality report score 8.9/10, coverage 86% ✅
+Tempo 02:43 — Reflexion: 4 lições registradas, confidence atualizado
+Tempo 02:44 — EvolutionRegistry: ciclo registrado como novo evento evolutivo
+Tempo 02:45 — ENTREGA: artigo ABNT completo + carta de rebuttal + relatório de qualidade
+```
+
+---
+
+### Orquestração em Uma Linha
+
+> **"O usuário dá um comando → o orquestrador cria uma spec → consulta a memória → aplica gate de confiança → roteia por atenção multi-cabeça → delega via Blackboard A2A → executa o pipeline acadêmico de 5 estágios (EvoSci → Deep Research → Peer Review → Revision → Paper Composer) → verifica contra os critérios da spec e gates de qualidade → reflete sobre a execução → registra no evolution registry → entrega o resultado final."**
+
+---
+
+
 
 ##  Pipeline Acadêmico Agentivo (R101–R105)
 
