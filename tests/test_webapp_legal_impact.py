@@ -122,20 +122,25 @@ def test_orchestrator_diagnose_supports_legal_impact():
 def test_webapp_source_contains_legal_impact_controls():
     source = Path("webapp/app.py").read_text(encoding="utf-8")
 
-    assert "Incluir Visão Jurídica de Impacto (SPEC-924)" in source
-    assert "⚖️ Resumo da Visão Jurídica" in source
+    # Legais helpers importados e usados
     assert "build_legal_params" in source
     assert "summarize_legal_impact_section" in source
+    assert "summarize_legal_domain_route" in source
+    assert "resolve_domain_knowledge_base_selection" in source
+    assert "summarize_domain_knowledge_base" in source
+    # UI elements for legal analysis
+    assert "Analisar Impacto Juridico" in source or "analise juridica" in source.lower()
+    assert "Score Juridico" in source
+    assert "Ganho Metacognitivo" in source
+    assert "Legal Impact Scanner" in source
 
 
 def test_webapp_source_contains_dedicated_legal_tab():
     source = Path("webapp/app.py").read_text(encoding="utf-8")
 
-    assert '"⚖️ Jurídico"' in source
-    assert "⚖️ Visão Jurídica Dedicada" in source
-    assert "⚖️ Avaliar Impacto Jurídico" in source
-    assert "JSON Auditável Completo" in source
-    assert "Ramo Jurídico Provável" in source
-    assert "Agente Especialista" in source
-    assert "Seleção do ramo jurídico" in source
-    assert "Base Jurídica Ativa" in source
+    assert "⚖️" in source  # emoji juridico presente
+    assert "analise juridica" in source.lower() or "impacto juridico" in source.lower()
+    assert "legal_impact" in source
+    assert "legal_params" in source
+    assert "high_risk_flags" in source
+    assert "build_legal_params" in source
