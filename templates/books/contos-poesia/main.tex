@@ -1,0 +1,42 @@
+% =============================================================================
+% Contos & Poesia — template OpenCode Ecosystem Core
+% Uso: coletânea de contos e/ou poemas (cada texto é autocontido)
+% =============================================================================
+
+\documentclass[11pt,openany]{book}
+
+\usepackage[T1]{fontenc}
+
+% --- Metadados do livro (edite aqui) ---
+\newcommand{\autornome}{Nome do Autor}
+\newcommand{\titulolivro}{Título da Coletânea}
+\newcommand{\subtitulolivro}{Contos e Poemas}
+\newcommand{\editoralivro}{Edição Independente}
+\newcommand{\anoedicao}{2026}
+\newcommand{\isbnlivro}{000-0-00-000000-0}
+
+\usepackage{misc/opcoes}
+
+\begin{document}
+
+% ===== Pré-textual =====
+\frontmatter
+\input{frontmatter/folhaderosto}
+\input{frontmatter/apresentacao}
+\tableofcontents
+
+% ===== Corpo do livro =====
+\mainmatter
+\pagestyle{fancy}
+
+\part{Contos}
+\input{content/conto-01}
+
+\part{Poemas}
+\input{content/poema-01}
+
+% ===== Pós-textual =====
+\backmatter
+\input{backmatter/sobre-o-autor}
+
+\end{document}
