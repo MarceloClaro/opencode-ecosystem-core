@@ -1,7 +1,7 @@
 # Catálogo de Templates LaTeX — OpenCode Ecosystem Core
 
 > **Orquestrado pelo agente `marceloclaro`**
-> SPEC-916 — Atualizado em 2026-07-09 — 50+ templates organizados em 5 categorias
+> SPEC-916/R119 — Atualizado em 2026-07-10 — 50+ templates organizados em 5 categorias
 
 Este diretório contém a oferta completa de templates LaTeX para produção acadêmica, técnica e editorial, integrada ao ecossistema OpenCode.
 
@@ -68,6 +68,10 @@ templates/
 | **springer-volume** | 12 | 1 | 0 | 1.6M | Springer Nature — Template para edited volumes |
 | **unb-editora** | 22 | 0 | 0 | 1.3M | Editora UnB — Modelo de livro para Editora Universidade de Brasília |
 | **generic-templates** | 45 | 0 | 0 | 500K | Templates genéricos (book, forta, generic, resume) |
+| **romance-literario** ✨ | 7 | 0 | 1 | 20K | Romance/narrativa de ficção — dropcap, quebra de cena, sem aparato acadêmico |
+| **contos-poesia** ✨ | 8 | 0 | 1 | 20K | Coletânea de contos e poesia — capítulos autocontidos, ambiente `verse` |
+
+> ✨ Primeiros templates **literários/de ficção** do catálogo (R119) — os demais templates de "livro" acima são acadêmicos ou técnicos.
 
 ---
 
@@ -147,6 +151,8 @@ Os seguintes caminhos legados foram mantidos como **symlinks** para a nova estru
 | `publishing/templates/dissertacao/` | → | `templates/academic-br/dissertacao/` |
 | `publishing/templates/livro/book/` | → | `templates/books/book-simple/` |
 | `publishing/templates/livro/victoria_regia/` | → | `templates/books/victoria-regia/` |
+| `publishing/templates/livro/romance/` | → | `templates/books/romance-literario/` |
+| `publishing/templates/livro/contos/` | → | `templates/books/contos-poesia/` |
 | `template/Victoria_Regia/` | → | `templates/books/victoria-regia/` |
 
 ---
@@ -157,13 +163,13 @@ Os seguintes caminhos legados foram mantidos como **symlinks** para a nova estru
 |-----------|:---------:|:-------------:|
 | Acadêmicos BR | 11 | 72 |
 | Internacionais | 11 | 137 |
-| Livros | 6 | 145 |
+| Livros | 8 | 160 |
 | Currículos | 2 | 24 |
 | Projetos | 14 | 541 |
-| **Total** | **44** | **~919** |
+| **Total** | **46** | **~934** |
 
 **Tamanho total:** ~380 MB
-**Última atualização:** 2026-07-09
+**Última atualização:** 2026-07-10
 
 ---
 

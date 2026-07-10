@@ -1,0 +1,42 @@
+% =============================================================================
+% Romance Literário — template OpenCode Ecosystem Core
+% Uso: romance, novela ou narrativa longa de ficção (não-acadêmico)
+% =============================================================================
+
+\documentclass[12pt,openany]{book}
+
+\usepackage[T1]{fontenc}
+
+% --- Metadados do livro (edite aqui) ---
+\newcommand{\autornome}{Nome do Autor}
+\newcommand{\titulolivro}{Título do Romance}
+\newcommand{\subtitulolivro}{Um subtítulo, se houver}
+\newcommand{\editoralivro}{Edição Independente}
+\newcommand{\anoedicao}{2026}
+\newcommand{\isbnlivro}{000-0-00-000000-0}
+
+\usepackage{misc/opcoes}
+
+\begin{document}
+
+% ===== Pré-textual =====
+\frontmatter
+\input{frontmatter/folhaderosto}
+\input{frontmatter/dedicatoria}
+\input{frontmatter/epigrafe}
+\tableofcontents
+
+% ===== Corpo do livro =====
+\mainmatter
+\pagestyle{fancy}
+
+\part{Primeira Parte}
+\input{content/capitulo01}
+\input{content/capitulo02}
+
+% ===== Pós-textual =====
+\backmatter
+\input{backmatter/sobre-o-autor}
+\input{backmatter/colofao}
+
+\end{document}

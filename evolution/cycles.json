@@ -1656,6 +1656,27 @@
         "O outro servidor MCP do projeto (antigravity_mcp_server.py) ja tratava initialize corretamente — vale auditar os demais servidores MCP do ecossistema para o mesmo padrao de bug."
       ],
       "timestamp": 1783723939.6487534
+    },
+    {
+      "round_id": "R119",
+      "objective": "R119: Templates literarios/de ficcao (romance-literario, contos-poesia) + limpeza de 37 diretorios numerados residuais do catalogo de templates",
+      "changes": [
+        "Removidos templates/01_* a templates/36_* (37 diretorios legados, duplicatas confirmadas por diff e hash SHA-256 do catalogo ja organizado por SPEC-916), preservando antes 4 arquivos com conteudo unico encontrado (metadados SDD/TDD de livro-volume2, um .bib de exemplo do abntex2)",
+        "Criados os dois primeiros templates literarios/de ficcao do catalogo: templates/books/romance-literario/ (romance/narrativa, dropcap, quebra de cena, formato KDP 5.5x8.5in) e templates/books/contos-poesia/ (colecao de contos e poemas, ambiente poema proprio)",
+        "Integrados ao pipeline: publishing/production.py::TEMPLATE_MAIN ganhou livro-romance e livro-contos; symlinks publishing/templates/livro/romance e livro/contos",
+        "templates/README.md atualizado (catalogo, compatibilidade retroativa, estatisticas)",
+        "Verificacao de ponta a ponta com PDF real do usuario (romance de 341 paginas MOLAMBUDOS.pdf) via pdf2latex --template romance-literario: compilacao latexmk -pdf bem sucedida (23 paginas de saida) apos corrigir 3 bugs reais de integracao (caption sem escape de underscore em pdf2latex/latex_generator.py; option clash de babel/geometry nos .sty novos; subdiretorio misc/ nao copiado pelo template_integrator.py)",
+        "Correcoes no modulo pdf2latex/ (template_integrator.py, latex_generator.py) aplicadas e verificadas em disco mas deliberadamente NAO commitadas neste ciclo — ambos os arquivos ja tinham mudancas pendentes nao relacionadas de outra frente (SPEC-1000, pdf2latex multi-engine renderer)",
+        "tests/test_r119_templates_literarios.py: 9 testes novos (estrutura dos templates, TEMPLATE_MAIN, list_templates(), symlinks, prepare_latex() copiando a arvore incluindo misc/opcoes.sty)"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Renovar um catalogo de templates sem testar a integracao de ponta a ponta (gerar + compilar um projeto real a partir de um PDF real) deixaria passar 3 bugs de integracao reais que nenhum teste unitario de existencia de arquivo capturaria.",
+        "Um .sty pensado para ser incluido por outros main.tex (nao so o autoral do proprio template) nao pode assumir que e o unico a carregar babel/geometry — o padrao seguro e carregar sem opcoes fixas e aplicar via comando depois, ou guardar com @ifpackageloaded.",
+        "Pedidos separados do usuario (novos templates literarios; limpeza de residuos) se mostraram uma unica unidade coerente de trabalho sobre o mesmo catalogo — registrados num unico ciclo em vez de dois artificialmente separados.",
+        "Disciplina de escopo de commit mantida mesmo sob pressao de conveniencia: as correcoes uteis feitas em pdf2latex/ nao foram commitadas junto por pertencerem a uma frente de trabalho paralela (SPEC-1000) com mudancas pendentes nao relacionadas."
+      ],
+      "timestamp": 1783726913.838189
     }
   ]
 }

@@ -19,10 +19,12 @@ compila LaTeX com `latexmk`/`pdflatex` quando disponível; sempre degrada
 graciosamente registrando no manifesto o que foi ou não gerado.
 
 Templates suportados (publishing/templates/):
-- artigo       → artigo_modelo_qualis_a1.tex (Qualis A1, ABNT)
-- dissertacao  → dissertacao_modelo_abnt.tex (abnTeX2)
-- abntex2      → abntex2-modelo-trabalho-academico.tex
-- livro        → victoria_regia | book (Amazon KDP-ready)
+- artigo         → artigo_modelo_qualis_a1.tex (Qualis A1, ABNT)
+- dissertacao    → dissertacao_modelo_abnt.tex (abnTeX2)
+- abntex2        → abntex2-modelo-trabalho-academico.tex
+- livro          → victoria_regia | book (livro acadêmico/técnico, Amazon KDP-ready)
+- livro-romance  → romance literário/narrativa de ficção (KDP-ready)
+- livro-contos   → coletânea de contos e poesia (KDP-ready)
 """
 from __future__ import annotations
 
@@ -218,6 +220,8 @@ TEMPLATE_MAIN = {
     "abntex2": os.path.join("abntex2", "abntex2-modelo-trabalho-academico.tex"),
     "livro": os.path.join("livro", "victoria_regia"),
     "livro-book": os.path.join("livro", "book"),
+    "livro-romance": os.path.join("livro", "romance"),
+    "livro-contos": os.path.join("livro", "contos"),
 }
 
 FORMATS = ["pdf", "docx", "md", "odt"]
