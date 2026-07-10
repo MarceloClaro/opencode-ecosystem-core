@@ -10,9 +10,12 @@ Pipeline: Plan → Write → Format → Verify → Export
 """
 
 import json
+import logging
 import re
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional
+
+logger = logging.getLogger(__name__)
 
 
 # ── Templates de Venue ─────────────────────────────────────────────
@@ -154,7 +157,9 @@ class SectionWriter:
         ]
 
         if evidence_graph and evidence_graph.get("entities"):
-            for ent in evidence_graph["entities"][:3]:
+            entities = evidence_graph["entities"]
+            entity_list = list(entities.values()) if isinstance(entities, dict) else entities
+            for ent in entity_list[:3]:
                 if ent.get("type") == "paper":
                     lines.append(f"- {ent.get('title', 'Prior work')}")
             lines.append("")
@@ -505,7 +510,32 @@ class OrchestratorComposer:
             venue: str = "apa",
             keywords: Optional[List[str]] = None,
             references: Optional[List[Dict]] = None) -> Dict[str, Any]:
-        """Pipeline completo: plan → write → format → verify → export."""
+        """Pipeline completo: plan → write → format → verify → export.
+
+        Excecoes sao capturadas e retornadas como resultado estruturado
+        (``status: "error"``) em vez de propagar o crash para o chamador.
+        """
+        try:
+            return self._run(title, discoveries, evidence_graph, review,
+                              revisions, venue, keywords, references)
+        except Exception as exc:
+            logger.exception("Falha na composicao do paper: %s", exc)
+            return {
+                "status": "error",
+                "stage": "paper_composer.run",
+                "error": str(exc),
+                "manuscript": "",
+                "sections": {},
+            }
+
+    def _run(self, title: str = "Untitled",
+              discoveries: Optional[List[Dict]] = None,
+              evidence_graph: Optional[Dict] = None,
+              review: Optional[Dict] = None,
+              revisions: Optional[List[Dict]] = None,
+              venue: str = "apa",
+              keywords: Optional[List[str]] = None,
+              references: Optional[List[Dict]] = None) -> Dict[str, Any]:
         discoveries = discoveries or []
         evidence_graph = evidence_graph or {}
         review = review or {}

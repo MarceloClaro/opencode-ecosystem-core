@@ -507,6 +507,290 @@ class MarceloClaroOrchestrator:
         )
         return summary
 
+    # ------------------------------------------------------------------
+    # FUSAO DO PIPELINE CIENTIFICO R101-R105 (SPEC-935-R108)
+    # ------------------------------------------------------------------
+    def scientific_discovery_pipeline(self, seed_domain: str, max_rounds: int = 3,
+                                      venue: str = "abnt",
+                                      strict_gates: bool = True) -> Dict[str, Any]:
+        """
+        Funde nativamente o pipeline agentivo cientifico R101-R105 (EvoSci ->
+        Deep Research -> Peer Review -> Revision -> Paper Composer) a este
+        orquestrador, substituindo o encadeamento ad hoc que existia apenas
+        em webapp/pipeline_helpers.py.
+
+        Diferencas em relacao ao encadeamento anterior:
+          - Gate real: se ``strict_gates`` e o R103 reprovar o
+            ``export_gate_passed``, o pipeline PARA antes do R104d/R105 em
+            vez de continuar cegamente.
+          - Calibracao real de confianca (Brier score) via
+            ``mci.confidence_calibrator.calibrate_confidence`` para cada
+            estagio, em vez de confiar cegamente na heuristica bruta de
+            cada modulo.
+          - Avaliacao metacognitiva SPEC-920 sobre os tracos REAIS deste
+            run (``mci.metacognitive_evaluator``), nao mais apenas sobre o
+            benchmark sintetico estatico.
+          - Cada transicao de estagio publicada no MetaBus e registrada
+            como reflexao real na memoria metacognitiva global; outcomes
+            alimentam o Trust Engine.
+
+        Nao alega superioridade sobre nenhum sistema externo: segue a
+        mesma politica anti-overclaim ja codificada em
+        ``classify_metacognitive_tier`` (SPEC-920) — apenas relata o
+        proprio readiness_score/tier deste run.
+        """
+        from mci.confidence_calibrator import calibrate_confidence
+        from mci.metacognitive_evaluator import MetacognitiveEvaluator, MetacognitiveTrace
+
+        start = time.time()
+        timeline: Dict[str, float] = {}
+        stages: Dict[str, Any] = {}
+        calibrated_confidences: Dict[str, Any] = {}
+        traces: List[Any] = []
+
+        def _calibrate(stage: str, raw_confidence: float, succeeded: bool) -> Dict[str, Any]:
+            # Quando o estagio falha/e bloqueado, isso e um sinal adversarial
+            # real (nao fabricado) que deve puxar a confianca calibrada para
+            # baixo o suficiente para que a abstencao (should_abstain) do
+            # calibrador seja alcancavel — sem isso, a penalidade maxima de
+            # reproducibility_score sozinha nunca cruza o limiar de 0.20.
+            claim: Dict[str, Any] = {}
+            if not succeeded:
+                claim["adversarial_findings"] = [
+                    f"ALERTA: estagio {stage} nao foi bem-sucedido",
+                    f"CONFOUNDER: resultado do estagio {stage} nao atingiu o criterio de sucesso",
+                ]
+            result = calibrate_confidence(
+                claim=claim,
+                context={
+                    "reproducibility_score": max(0.0, min(1.0, raw_confidence)),
+                    "actual_outcome": 1 if succeeded else 0,
+                    "actual_verdict": "supported" if succeeded else "refuted",
+                },
+            )
+            calibrated_confidences[stage] = result
+            return result
+
+        def _trace(stage: str, outcome: str, reflection: str,
+                   before: float, after: float, evidence_count: int = 1,
+                   abstained: bool = False, error_type: Optional[str] = None) -> None:
+            traces.append(MetacognitiveTrace(
+                action_id=f"scientific_pipeline.{stage}",
+                context=f"{stage} — {seed_domain[:60]}",
+                outcome=outcome,
+                reflection=reflection,
+                confidence_before=before,
+                confidence_after=after,
+                strategy="scientific_discovery_pipeline",
+                error_type=error_type,
+                evidence_count=evidence_count,
+                abstained=abstained,
+            ))
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"{stage}: {seed_domain[:80]}",
+                reflection=reflection,
+                score=after,
+            )
+            metabus.publish_subsystem_event(
+                "scientific_pipeline", f"{stage}.completed",
+                {"outcome": outcome, "confidence": after},
+                source_agent=self.id,
+            )
+            self.trust.learn(f"scientific_pipeline:{stage}", success=(outcome == "success"))
+
+        try:
+            # ---- R101: EvoSci ----
+            t0 = time.time()
+            from agentic_science_v2.orchestrator import run_agentic_science_v2
+            r101 = run_agentic_science_v2(seed_domain=seed_domain, max_rounds=max_rounds)
+            timeline["r101"] = round(time.time() - t0, 1)
+            stages["r101"] = r101
+
+            ideas = [idea for cycle in r101.get("history", []) for idea in cycle.get("ideas", [])]
+            best_idea = max(
+                ideas, key=lambda i: (i.get("scores", {}) or {}).get("overall", 0.0)
+            ) if ideas else {}
+            best_content = best_idea.get("hypothesis") or best_idea.get("title") or seed_domain
+            r101_confidence = float((best_idea.get("scores", {}) or {}).get("overall", 0.0)) if ideas else 0.0
+            cal = _calibrate("r101", r101_confidence, succeeded=bool(ideas))
+            _trace(
+                "r101", "success" if ideas else "abstained",
+                f"EvoSci gerou {len(ideas)} ideia(s); melhor score bruto "
+                f"{r101_confidence:.2f}, calibrado {cal['calibrated_confidence']:.2f}.",
+                before=r101_confidence, after=cal["calibrated_confidence"],
+                evidence_count=len(ideas), abstained=not ideas,
+            )
+
+            # ---- R102: Deep Research ----
+            t1 = time.time()
+            from agentic_science_v2.deep_research import run_deep_research
+            r102 = run_deep_research(question=best_content, max_rounds=max_rounds, max_depth=3)
+            timeline["r102"] = round(time.time() - t1, 1)
+            stages["r102"] = r102
+
+            r102_reports = r102.get("reports", [])
+            r102_failed = r102.get("status") == "error"
+            r102_confidence = 0.0 if r102_failed else (
+                float(r102_reports[-1].get("confidence", 0.5)) if r102_reports else 0.5
+            )
+            cal = _calibrate("r102", r102_confidence, succeeded=not r102_failed)
+            _trace(
+                "r102", "failure" if r102_failed else "success",
+                f"Deep research concluida com confianca bruta {r102_confidence:.2f}, "
+                f"calibrada {cal['calibrated_confidence']:.2f}.",
+                before=r102_confidence, after=cal["calibrated_confidence"],
+                evidence_count=len(r102_reports),
+                error_type="pipeline_error" if r102_failed else None,
+            )
+
+            # ---- R103: Peer Review ----
+            t2 = time.time()
+            from agentic_science_v2.review_agent import OrchestratorReviewer
+            answer = r102_reports[-1].get("summary", "") if r102_reports else best_content
+            review_package = OrchestratorReviewer().review({
+                "title": seed_domain,
+                "abstract": answer[:500],
+                "sections": ["Introduction", "Methods", "Results", "Discussion", "Conclusion"],
+                "citations": [],
+            })
+            r103 = review_package.to_dict()
+            timeline["r103"] = round(time.time() - t2, 1)
+            stages["r103"] = r103
+
+            r103_confidence = float(r103.get("overall_score", 0.5))
+            gate_passed = bool(r103.get("export_gate_passed", False))
+            cal = _calibrate("r103", r103_confidence, succeeded=gate_passed)
+            _trace(
+                "r103", "success" if gate_passed else "blocked",
+                f"Peer review: overall_score={r103_confidence:.2f}, "
+                f"traceability={r103.get('traceability', 0)}, coverage={r103.get('coverage', 0)}, "
+                f"gate={'APROVADO' if gate_passed else 'REPROVADO'}.",
+                before=r103_confidence, after=cal["calibrated_confidence"],
+                evidence_count=r103.get("critiques_count", 0),
+                abstained=not gate_passed,
+            )
+
+            gate_decision = {
+                "passed": gate_passed,
+                "traceability": r103.get("traceability", 0),
+                "coverage": r103.get("coverage", 0),
+                "reason": "R103 export_gate_passed" if gate_passed else
+                          "R103 reprovou export_gate_passed (traceability/coverage abaixo do minimo)",
+            }
+
+            if strict_gates and not gate_passed:
+                timeline["total"] = round(time.time() - start, 1)
+                metabus.publish_subsystem_event(
+                    "scientific_pipeline", "gate.blocked",
+                    gate_decision, source_agent=self.id,
+                )
+                evaluator = MetacognitiveEvaluator()
+                metacog = evaluator.evaluate(traces)
+                return {
+                    "status": "blocked",
+                    "reason": gate_decision["reason"],
+                    "seed_domain": seed_domain,
+                    "venue": venue,
+                    "timeline": timeline,
+                    "stages": stages,
+                    "gate_decision": gate_decision,
+                    "calibrated_confidences": calibrated_confidences,
+                    "metacognitive_report": metacog,
+                }
+
+            # ---- R104d: Manuscript Revision ----
+            t3 = time.time()
+            from agentic_science_v2.revision_agent import create_revision
+            manuscript_seed = answer or f"Manuscrito gerado automaticamente para {seed_domain}."
+            r104d = create_revision(review_package.to_revision_contract(), manuscript_seed)
+            timeline["r104d"] = round(time.time() - t3, 1)
+            stages["r104d"] = r104d
+
+            r104d_failed = r104d.get("status") == "error"
+            r104d_report = r104d.get("report", {}) or {}
+            r104d_confidence = float(r104d_report.get("traceability_pct", 0)) / 100.0
+            cal = _calibrate("r104d", r104d_confidence, succeeded=not r104d_failed)
+            _trace(
+                "r104d", "failure" if r104d_failed else "success",
+                f"Revisao de manuscrito: traceability_pct={r104d_report.get('traceability_pct', 0)}, "
+                f"integridade={r104d.get('integrity', {}).get('intact')}, "
+                f"auto_rollback={r104d.get('integrity', {}).get('auto_rolled_back', False)}.",
+                before=r104d_confidence, after=cal["calibrated_confidence"],
+                evidence_count=r104d_report.get("total_claims", 0),
+                error_type="pipeline_error" if r104d_failed else None,
+            )
+
+            # ---- R105: Paper Composer ----
+            t4 = time.time()
+            from agentic_science_v2.paper_composer import compose_paper as compose_paper_core
+            revised_manuscript = manuscript_seed
+            for revision in reversed(r104d.get("revisions", [])):
+                proposal = revision.get("proposal") or {}
+                if proposal.get("revised_text"):
+                    revised_manuscript = proposal["revised_text"]
+                    break
+            r105 = compose_paper_core(
+                title=seed_domain,
+                discoveries=[best_idea] if best_idea else [],
+                evidence_graph=r102.get("evidence_graph", {}),
+                review=r103,
+                revisions=r104d.get("revisions", []),
+                venue=venue,
+            )
+            timeline["r105"] = round(time.time() - t4, 1)
+            stages["r105"] = r105
+
+            r105_failed = r105.get("status") == "error"
+            r105_confidence = 0.0 if r105_failed else float(
+                r105.get("consistency_report", {}).get("overall_score", 50)
+            ) / 100.0
+            cal = _calibrate("r105", r105_confidence, succeeded=not r105_failed)
+            _trace(
+                "r105", "failure" if r105_failed else "success",
+                f"Composicao final: consistency overall_score="
+                f"{r105.get('consistency_report', {}).get('overall_score', 'N/A')}.",
+                before=r105_confidence, after=cal["calibrated_confidence"],
+                error_type="pipeline_error" if r105_failed else None,
+            )
+
+            timeline["total"] = round(time.time() - start, 1)
+            evaluator = MetacognitiveEvaluator()
+            metacog = evaluator.evaluate(traces)
+
+            return {
+                "status": "completed",
+                "seed_domain": seed_domain,
+                "venue": venue,
+                "timeline": timeline,
+                "stages": stages,
+                "gate_decision": gate_decision,
+                "calibrated_confidences": calibrated_confidences,
+                "metacognitive_report": metacog,
+                "revised_manuscript": revised_manuscript,
+            }
+
+        except Exception as exc:
+            logger.exception(f"[{self.id}] Falha no scientific_discovery_pipeline: {exc}")
+            _trace(
+                "pipeline", "failure",
+                f"Pipeline cientifico interrompido por excecao: {exc}",
+                before=0.5, after=0.1, error_type="unhandled_exception",
+            )
+            timeline["total"] = round(time.time() - start, 1)
+            evaluator = MetacognitiveEvaluator()
+            metacog = evaluator.evaluate(traces)
+            return {
+                "status": "error",
+                "error": str(exc),
+                "seed_domain": seed_domain,
+                "venue": venue,
+                "timeline": timeline,
+                "stages": stages,
+                "calibrated_confidences": calibrated_confidences,
+                "metacognitive_report": metacog,
+            }
+
     def _maswos_delegate(self, agent_id: str, capability: str, description: str) -> str:
         """Delegação interna dos estágios MASWOS via Blackboard."""
         task_id = self.delegate(description, required_capabilities=[capability])

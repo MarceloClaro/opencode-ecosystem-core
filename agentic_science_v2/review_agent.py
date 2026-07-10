@@ -803,6 +803,49 @@ class ReviewPackage:
             "repair_plan": self.repair_plan[:3],
         }
 
+    def to_revision_contract(self) -> Dict[str, Any]:
+        """Adapta este pacote para o contrato que
+        ``agentic_science_v2.revision_agent.ReviewAnalyzer.extract_claims``
+        espera: ``{"reviews": [{"critic": ..., "claims": [...]}]}``.
+
+        Usa o repair_plan (ja priorizado por severidade) como fonte de
+        claims; cai em um revisor sintetico de baixo risco quando a
+        revisao nao gerou nenhuma acao, para o R104d nunca operar sobre
+        um pacote vazio.
+        """
+        normalized_reviews: List[Dict[str, Any]] = []
+        for index, item in enumerate(self.repair_plan, start=1):
+            priority = (item.get("priority") or "medium").lower()
+            risk = (
+                "high" if "critical" in priority or "major" in priority or priority == "high"
+                else "low" if "minor" in priority or priority == "low"
+                else "medium"
+            )
+            normalized_reviews.append({
+                "critic": item.get("reviewer", "Reviewer"),
+                "claims": [{
+                    "id": f"claim-{index}",
+                    "text": item.get("action") or "Review comment",
+                    "risk": risk,
+                    "section": item.get("area") or "introduction",
+                    "evidence": "",
+                }],
+            })
+
+        if not normalized_reviews:
+            normalized_reviews = [{
+                "critic": "SyntheticReviewer",
+                "claims": [{
+                    "id": "claim-1",
+                    "text": "Clarify the manuscript structure and improve methodological detail.",
+                    "risk": "low",
+                    "section": "introduction",
+                    "evidence": "Synthetic fallback review package",
+                }],
+            }]
+
+        return {"reviews": normalized_reviews}
+
 
 class OrchestratorReviewer:
     """Orquestrador do pipeline de revisao.
@@ -825,7 +868,29 @@ class OrchestratorReviewer:
         self.min_coverage = min_coverage
 
     def review(self, paper: Dict[str, Any]) -> ReviewPackage:
-        """Executa pipeline completo de revisao."""
+        """Executa pipeline completo de revisao.
+
+        Erros em qualquer etapa sao capturados e retornados como um
+        ReviewPackage com ``export_gate_passed=False`` em vez de propagar
+        a excecao — o R104d/R105 downstream nunca deve travar por causa
+        de uma falha aqui.
+        """
+        try:
+            return self._review(paper)
+        except Exception as exc:
+            logger.exception("Falha no pipeline de peer review: %s", exc)
+            return ReviewPackage(
+                paper_title=paper.get("title", "Untitled"),
+                export_gate_passed=False,
+                repair_plan=[{
+                    "priority": "CRITICAL",
+                    "area": "pipeline",
+                    "action": f"Peer review falhou: {exc}",
+                    "reviewer": "OrchestratorReviewer",
+                }],
+            )
+
+    def _review(self, paper: Dict[str, Any]) -> ReviewPackage:
         start = time.time()
         title = paper.get("title", "Untitled")
 
