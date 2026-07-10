@@ -1619,6 +1619,25 @@
         "Desinstaladores sao parte responsavel de qualquer instalador — confirmacao explicita para acoes destrutivas (remover WSL inteiro) evita desastres irreversiveis"
       ],
       "timestamp": 1783720266.1112802
+    },
+    {
+      "round_id": "R117",
+      "objective": "R117: Mapa interativo 3D da arquitetura + documentacao dupla-registro (leigo/PhD) completa, cobrindo todas as adicoes R107-R116 ausentes do diagrama anterior",
+      "changes": [
+        "docs/architecture_map.html: mapa interativo autocontido, sem dependencias externas, com 6 camadas arquiteturais ao redor do orquestrador central",
+        "Tratamento visual 3D real (CSS perspective + transform-style preserve-3d + translateZ), respondendo ao movimento do mouse",
+        "Alternador de registro Leigo/PhD no topo do mapa, com descricoes completas por camada e por no interno",
+        "ARCHITECTURE.md: diagrama Mermaid atualizado com os nos ausentes ate entao — Interface/Instalacao (R116), Loop Engineering (R109), GoalDriftDetector (R112), ARCHE RLT (R114), Detector de Falacias (R113), Revisao as Cegas (R115), Doctor/Helpdesk (R110), fontes de pesquisa expandidas (R111)",
+        "README.md: secoes Para Leigos/Para PhDs reescritas com cobertura completa; nova secao Mapa da Arquitetura com tabela de legenda das 6 camadas e instrucoes de leitura numeradas",
+        "MANUAL.md: referencia ao mapa interativo adicionada"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Documentacao de arquitetura tende a ficar defasada silenciosamente — o diagrama Mermaid principal nao tinha nenhum dos ~15 subsistemas adicionados em R107-R116 ate este ciclo, apesar de cada ciclo ter atualizado a tabela de specs e as metricas",
+        "Efeito 3D em CSS e mais robusto com inclinacao modesta (8-10 graus) + parallax por mouse do que com angulos isometricos extremos que exigiriam contra-rotacao de cada no filho para manter o texto legivel — dado que nao ha como renderizar/testar visualmente neste ambiente, a escolha mais conservadora foi a certa",
+        "Dois registros de leitura (leigo/PhD) funcionam melhor quando a tipografia tambem os distingue (prosa serifada para leigo, dados monoespacados para PhD), nao so o conteudo do texto"
+      ],
+      "timestamp": 1783723064.3155723
     }
   ]
 }

@@ -11,15 +11,31 @@ graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
     WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
-    
+
+    %% Camada de Interface Externa (R116)
+    subgraph Interface ["Interface & Instalação (R116)"]
+        OpenCodeCLI["OpenCode CLI<br>opencode.json · 165 agentes<br>8 comandos slash"]
+        AntigravityCLI["Antigravity CLI<br>ponte para binário agy"]
+        ClaudeCLI["Claude Code CLI<br>CLAUDE.md + AGENTS.md"]
+        Installer["Instaladores<br>Windows(WSL 1-clique)/Linux/macOS<br>+ Desinstaladores com confirmação"]
+    end
+    Installer -.->|Provisiona| OpenCodeCLI
+    Installer -.->|Provisiona| AntigravityCLI
+    Installer -.->|Provisiona| ClaudeCLI
+    OpenCodeCLI --> Orchestrator
+    AntigravityCLI --> Orchestrator
+    ClaudeCLI --> Orchestrator
+
     %% Camada SDD/TDD
     subgraph SDD [SDD & TDD Engine]
         Spec[SpecRegistry<br>Especificações]
         Ver[SpecVerifier<br>Gate SDD]
         TDD[TDDRunner<br>Red-Green-Refactor]
-        
+        LoopSpec["Loop Engineering (R109)<br>LoopSpecification<br>5 Estados Terminais Nomeados"]
+
         TDD -.->|Valida| Ver
         Ver -.->|Lê| Spec
+        LoopSpec -.->|Formaliza| Spec
     end
 
     %% Camada Transformer
@@ -37,7 +53,7 @@ graph TD
     subgraph Acad ["Pipeline Academico Agentivo (R101-R105)"]
         EvoSci["R101: EvoSci<br>MentorAgent<br>PrimeResearcherAgent<br>ReviewerAgent<br>EvolutionManagerAgent<br>EvoEngine (Selection/Crossover/Mutation/Inheritance)"]
         DeepRes["R102: Deep Research<br>KnowledgeBaseRegistry<br>BFRSAgent<br>DFRSAgent<br>ExecutionSandbox<br>OrchestratorAgent"]
-        PReview["R103: Peer Review<br>RubricEngine (8 dim)<br>ReviewLedger<br>AuditGraph<br>MultiCriticReviewer<br>OrchestratorReviewer"]
+        PReview["R103: Peer Review<br>RubricEngine (8 dim)<br>ReviewLedger<br>AuditGraph<br>MultiCriticReviewer<br>Revisão às Cegas Real (R115)<br>OrchestratorReviewer"]
         Revision["R104d: Revision<br>ReviewAnalyzer<br>SectionMapper<br>ProposalGenerator<br>DiffEngine (rollback)<br>OrchestratorRevision"]
         Composer["R105: Paper Composer<br>StructurePlanner<br>SectionWriter (6 secoes)<br>CitationFormatter (3 estilos)<br>CrossConsistencyVerifier<br>OrchestratorComposer"]
         
@@ -46,14 +62,20 @@ graph TD
         PReview --> Revision
         Revision --> Composer
     end
-    
+
+    %% Fusao real no orquestrador (R108/R109)
+    FusionLoop["scientific_discovery_pipeline() (R108)<br>+ run_scientific_discovery_loop() (R109)<br>Gate real · Calibração · Loop com estagnação"]
+    Orchestrator -->|Funde nativamente| FusionLoop
+    FusionLoop -->|Executa em cadeia| EvoSci
+    Composer -->|Retorna ao loop| FusionLoop
+
     %% Camada Core
     subgraph Core [Core Subsystems]
-        Trust[Trust Engine<br>Behavioral Gate]
+        Trust["Trust Engine<br>Behavioral Gate<br>GoalDriftDetector (R112)"]
         Eco[Token Economy<br>Staking/Slashing]
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
-        Acad[MASWOS<br>Qualis A1]
-        Reason[Reasoning<br>12 Engines + Quantum]
+        Acad[MASWOS<br>Qualis A1 - meta interna, ver Corrigendum]
+        Reason["Reasoning<br>12 Engines + Quantum<br>ARCHE RLT - 6 tipos Peirce (R114)<br>Detector de Falácias - 15+4 (R113)"]
         Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928]
         LegalBench[Legal Benchmarks<br>SPEC-928]
         RAG[Scientific RAG<br>Grounding + Citations]
@@ -63,7 +85,7 @@ graph TD
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
         Publishing[Publishing<br>LaTeX & Cover Designer]
-        Research[Research<br>Hub c/ OSINT]
+        Research["Research<br>Hub c/ OSINT<br>11 fontes: +PubMed/bioRxiv/CORE (R111)"]
         Illus[Illustrations<br>Mermaid/MIRA/Graph]
         EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
         NoveltyV2["Novelty V2 (R98)<br>ContributionPointExtractor<br>PointwiseLiteratureRetriever<br>PointwiseNoveltyScorer<br>HierarchicalTaxonomyBuilder"]
@@ -75,7 +97,10 @@ graph TD
         CICD["CI/CD Pipeline (R106)<br>GitHub Actions: Lint+Test+Package<br>scripts/quality_report.py<br>scripts/check_coverage.py<br>scripts/run_full_suite.sh"]
         Skills["Skills Exportaveis (R104a)<br>evo-science<br>deep-research<br>peer-review-v2<br>mcp-security"]
         PipPkg["Pip Packages (R104b)<br>opencode-evosci<br>opencode-deep-research<br>opencode-peer-review"]
+        DoctorNode["Doctor + Helpdesk (R110)<br>marceloclaro/doctor.py + helpdesk.py<br>+ Prática pública CORRIGENDUM.md"]
     end
+    DoctorNode -.->|Diagnostica| Orchestrator
+    DoctorNode -.->|Verifica| Spec
 
     %% Camada Scientific Governance (legado)
     subgraph SGP [Scientific Governance Pipeline v2.x]
@@ -253,6 +278,7 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R114 | ARCHE RLT: Reasoning Logic Tree (SPEC-057) | 5 CA |
 | SPEC-935-R115 | Revisão às Cegas Real (Double-Blind) no R103 | 6 CA |
 | SPEC-935-R116 | Instalação Multiplataforma, Ícone Próprio, Claude CLI e Manual/Helpdesk | 11 CA |
+| SPEC-935-R117 | Mapa Interativo da Arquitetura + Documentação Dupla-Registro | 6 CA |
 
 ---
 
@@ -303,7 +329,7 @@ envolvido. Ver `specs/SPEC-935-R109.md` e `specs/loops/scientific-discovery-loop
 | Métrica | v2.5.0 | v3.0.0 (atual) |
 |---|---|---|
 | Testes | 617 | **1260** |
-| Ciclos de evolução | 49 | **74** |
+| Ciclos de evolução | 49 | **75** |
 | MCP Tools | 8 | **14** |
 | Agentes | 156 | **160+** |
 | Score médio | — | **9.4/10** |
