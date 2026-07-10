@@ -1,6 +1,6 @@
 # Manual do OpenCode Ecosystem Core
 
-Este é o manual em linguagem simples. Para arquitetura técnica detalhada, veja [`ARCHITECTURE.md`](ARCHITECTURE.md). Para instalar, veja [`installer/README.md`](installer/README.md).
+Este é o manual em linguagem simples. Para arquitetura técnica detalhada, veja [`ARCHITECTURE.md`](ARCHITECTURE.md). Para instalar, veja [`installer/README.md`](installer/README.md). Para ver como tudo se encaixa visualmente, abra o **[mapa interativo 3D da arquitetura](docs/architecture_map.html)** — tem um alternador Leigo/PhD no topo.
 
 ## O que é isso, em uma frase
 

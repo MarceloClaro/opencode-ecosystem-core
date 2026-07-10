@@ -1,0 +1,666 @@
+<title>Mapa da Arquitetura — OpenCode Ecosystem Core</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --blueprint-ink: #0e1a2b;
+    --blueprint-ink-2: #142842;
+    --blueprint-paper: #f3f1e7;
+    --blueprint-paper-2: #e8e4d4;
+    --line-cyan: #6fd1e8;
+    --line-indigo: #1b4f8c;
+    --signal-amber: #e8a33d;
+    --signal-coral: #d9634b;
+
+    --ground: var(--blueprint-ink);
+    --ground-2: var(--blueprint-ink-2);
+    --line: var(--line-cyan);
+    --line-soft: rgba(111, 209, 232, 0.35);
+    --ink: #eef6fa;
+    --ink-dim: #9fb7c8;
+    --accent: var(--signal-amber);
+    --warn: var(--signal-coral);
+    --panel: rgba(15, 27, 43, 0.86);
+    --panel-border: rgba(111, 209, 232, 0.28);
+    --chip-shadow: rgba(0, 0, 0, 0.55);
+  }
+
+  :root[data-theme="light"] {
+    --ground: var(--blueprint-paper);
+    --ground-2: var(--blueprint-paper-2);
+    --line: var(--line-indigo);
+    --line-soft: rgba(27, 79, 140, 0.32);
+    --ink: #16233a;
+    --ink-dim: #4c5f78;
+    --accent: #b9770e;
+    --warn: #b5432c;
+    --panel: rgba(243, 241, 231, 0.92);
+    --panel-border: rgba(27, 79, 140, 0.25);
+    --chip-shadow: rgba(27, 45, 66, 0.28);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --ground: var(--blueprint-paper);
+      --ground-2: var(--blueprint-paper-2);
+      --line: var(--line-indigo);
+      --line-soft: rgba(27, 79, 140, 0.32);
+      --ink: #16233a;
+      --ink-dim: #4c5f78;
+      --accent: #b9770e;
+      --warn: #b5432c;
+      --panel: rgba(243, 241, 231, 0.92);
+      --panel-border: rgba(27, 79, 140, 0.25);
+      --chip-shadow: rgba(27, 45, 66, 0.28);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background .3s ease, color .3s ease;
+  }
+
+  .mono {
+    font-family: ui-monospace, "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  ::selection { background: var(--line-soft); }
+
+  a { color: var(--line); }
+
+  /* ---------- Header ---------- */
+  .topbar {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 2rem clamp(1rem, 4vw, 3rem) 1.25rem;
+    border-bottom: 1px solid var(--panel-border);
+  }
+
+  .kicker {
+    font-family: ui-monospace, "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--line);
+    margin: 0 0 0.5rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+    text-wrap: balance;
+    letter-spacing: 0.01em;
+  }
+
+  .subtitle {
+    margin: 0.4rem 0 0;
+    max-width: 62ch;
+    color: var(--ink-dim);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .stats {
+    display: flex;
+    gap: 1.6rem;
+    font-family: ui-monospace, "IBM Plex Mono", monospace;
+  }
+
+  .stat b {
+    display: block;
+    font-size: 1.3rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .stat span {
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Mode toggle ---------- */
+  .modeToggle {
+    display: inline-flex;
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 3px;
+    background: var(--panel);
+  }
+  .modeToggle button {
+    font-family: ui-monospace, "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: none;
+    background: transparent;
+    color: var(--ink-dim);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .25s, color .25s;
+  }
+  .modeToggle button[aria-pressed="true"] {
+    background: var(--line);
+    color: var(--ground);
+  }
+  .modeToggle button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Layout ---------- */
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+    gap: 0;
+    min-height: calc(100vh - 132px);
+  }
+  @media (max-width: 880px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- 3D stage ---------- */
+  .stage {
+    position: relative;
+    perspective: 1900px;
+    overflow: hidden;
+    padding: clamp(1.5rem, 5vw, 4rem);
+    min-height: 560px;
+    background:
+      radial-gradient(ellipse at 50% 20%, var(--line-soft), transparent 60%),
+      var(--ground);
+  }
+
+  .sheet {
+    position: relative;
+    width: 100%;
+    max-width: 920px;
+    aspect-ratio: 1 / 0.86;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    transform: rotateX(10deg) rotateZ(-2deg);
+    transition: transform .18s ease-out;
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: -6%;
+    border-radius: 18px;
+    background-color: var(--ground-2);
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 42px 42px;
+    box-shadow: 0 60px 120px -40px var(--chip-shadow), inset 0 0 0 1px var(--panel-border);
+  }
+
+  .connectors { position: absolute; inset: 0; overflow: visible; }
+  .connectors line {
+    stroke: var(--line);
+    stroke-width: 1.4;
+    stroke-dasharray: 3 4;
+    opacity: 0.55;
+  }
+  .connectors circle { fill: var(--line); opacity: 0.9; }
+
+  .node {
+    position: absolute;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .chip {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    box-shadow: 0 10px 24px -8px var(--chip-shadow);
+    transform: translateZ(0);
+    transition: transform .22s cubic-bezier(.2,.9,.3,1.2), box-shadow .22s ease, border-color .22s ease;
+    min-width: max-content;
+  }
+
+  .node:hover .chip,
+  .node:focus-visible .chip,
+  .node[data-active="true"] .chip {
+    transform: translateZ(34px) scale(1.05);
+    box-shadow: 0 30px 46px -14px var(--chip-shadow);
+    border-color: var(--accent);
+  }
+
+  .node:focus-visible .chip { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .chip .tier-eyebrow {
+    font-family: ui-monospace, "IBM Plex Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .chip .tier-name {
+    font-size: 0.92rem;
+    line-height: 1.15;
+    font-family: Georgia, serif;
+  }
+  .chip .tier-count {
+    font-family: ui-monospace, monospace;
+    font-size: 0.65rem;
+    color: var(--ink-dim);
+  }
+
+  .hub .chip {
+    background: linear-gradient(160deg, var(--line), var(--accent) 130%);
+    color: var(--ground);
+    border-color: transparent;
+    padding: 1.1rem 1.4rem;
+  }
+  .hub .chip .tier-eyebrow { color: rgba(0,0,0,0.45); }
+  .hub .chip .tier-name { font-size: 1.05rem; }
+  .hub .chip .tier-count { color: rgba(0,0,0,0.55); }
+  .hub:hover .chip, .hub[data-active="true"] .chip { transform: translateZ(52px) scale(1.06); }
+
+  /* ---------- Side panel ---------- */
+  .panel {
+    border-left: 1px solid var(--panel-border);
+    background: var(--panel);
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 132px);
+  }
+
+  .panel h2 {
+    margin: 0 0 0.2rem;
+    font-size: 1.15rem;
+    font-weight: 400;
+  }
+  .panel .eyebrow {
+    font-family: ui-monospace, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.6rem;
+  }
+  .panel p { line-height: 1.55; color: var(--ink-dim); font-size: 0.94rem; }
+  .panel .register { color: var(--ink); }
+
+  .node-list {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .node-list li {
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 0.55rem 0.7rem;
+    background: rgba(255,255,255,0.02);
+  }
+  .node-list b {
+    display: block;
+    font-size: 0.86rem;
+    margin-bottom: 0.15rem;
+  }
+  .node-list span {
+    font-size: 0.8rem;
+    color: var(--ink-dim);
+    line-height: 1.4;
+  }
+  .node-list code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: var(--line);
+  }
+
+  .empty-state { color: var(--ink-dim); font-size: 0.9rem; line-height: 1.6; }
+
+  /* ---------- Legend / instructions ---------- */
+  .legend-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.1rem;
+    padding: 1rem clamp(1rem, 4vw, 3rem);
+    border-top: 1px solid var(--panel-border);
+    font-family: ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: var(--ink-dim);
+    align-items: center;
+  }
+  .legend-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+  details.instructions {
+    padding: 1rem clamp(1rem, 4vw, 3rem) 1.5rem;
+    border-top: 1px dashed var(--panel-border);
+  }
+  details.instructions summary {
+    cursor: pointer;
+    font-family: ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--line);
+  }
+  details.instructions .instr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  details.instructions .instr-grid p { margin: 0.3rem 0 0; color: var(--ink-dim); font-size: 0.88rem; line-height: 1.5; }
+  details.instructions .instr-grid b { font-family: ui-monospace, monospace; font-size: 0.78rem; color: var(--accent); letter-spacing: .02em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sheet, .chip { transition: none !important; }
+  }
+</style>
+
+<div class="topbar">
+  <div>
+    <p class="kicker">OpenCode Ecosystem Core &middot; Mapa Vivo</p>
+    <h1>A anatomia do orquestrador <span class="mono">marceloclaro</span></h1>
+    <p class="subtitle">Todo nó, todo vetor de conexão, em dois registros de leitura. Gire, passe o mouse, clique — cada camada da mesa de desenho é uma parte real do sistema.</p>
+  </div>
+  <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.9rem;">
+    <div class="modeToggle" role="group" aria-label="Registro de leitura">
+      <button type="button" data-mode="leigo" aria-pressed="true">Leigo</button>
+      <button type="button" data-mode="phd" aria-pressed="false">PhD</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><b class="mono">1260</b><span>testes</span></div>
+      <div class="stat"><b class="mono">74</b><span>ciclos R1&ndash;R116</span></div>
+      <div class="stat"><b class="mono">160+</b><span>agent cards</span></div>
+      <div class="stat"><b class="mono">35</b><span>specs SDD</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="stage" id="stage">
+    <div class="sheet" id="sheet">
+      <div class="grid-bg"></div>
+      <svg class="connectors" id="connectors"></svg>
+      <!-- nodes injected by JS -->
+    </div>
+  </div>
+
+  <aside class="panel" id="panel">
+    <p class="empty-state">Passe o mouse ou toque num nó da mesa para ver do que ele é feito &mdash; a lista completa de componentes aparece aqui, no registro escolhido acima.</p>
+  </aside>
+</div>
+
+<div class="legend-strip" id="legend"></div>
+
+<details class="instructions">
+  <summary>Instruções de leitura do mapa</summary>
+  <div class="instr-grid">
+    <div><b>1. Escolha o registro</b><p>"Leigo" traduz cada camada em linguagem cotidiana. "PhD" mostra os nomes técnicos reais, arquivos e specs correspondentes.</p></div>
+    <div><b>2. Passe o mouse / toque</b><p>Cada bloco da mesa é uma camada arquitetural real. Ele se levanta da mesa e o painel à direita lista todos os componentes internos.</p></div>
+    <div><b>3. Mova o cursor pela cena</b><p>A mesa inteira inclina levemente seguindo o cursor — é uma perspectiva 3D real (CSS <code class="mono">perspective</code> + <code class="mono">translateZ</code>), não uma imagem estática.</p></div>
+    <div><b>4. Linhas tracejadas</b><p>Representam o fluxo real de delegação: o orquestrador central distribui trabalho para cada camada e recebe de volta reflexões que alimentam a memória metacognitiva.</p></div>
+  </div>
+</details>
+
+<script>
+(function () {
+  "use strict";
+
+  var DATA = {
+    hub: {
+      id: "hub",
+      x: 50, y: 50, z: 46,
+      eyebrow: "orquestrador supremo",
+      name: "marceloclaro",
+      count: "1 hub · 30+ métodos",
+      leigo: "O maestro do ecossistema. Toda tarefa passa por ele: ele decide quem faz o quê, acompanha se deu certo, e guarda a experiência para a próxima vez.",
+      phd: "MarceloClaroOrchestrator (marceloclaro/orchestrator.py). Percebe via MetaBus, delega via Blackboard + AttentionRouter multi-cabeça, executa sob gate SDD/TDD, reflete via Reflexion. Agente primary em opencode.json.",
+      nodes: [
+        ["percepção", "Consulta lições e confiança recentes antes de qualquer decisão (perceive())."],
+        ["delegação", "Publica a tarefa no Blackboard; agentes elegíveis se candidatam (delegate())."],
+        ["reflexão", "Registra sucesso/falha e atualiza a confiança do agente (report_completion())."],
+        ["auditoria", "status(), explain_routing(), audit_specs() — transparência total do estado."]
+      ]
+    },
+    tiers: [
+      {
+        id: "interface", x: 15, y: 14, z: 20,
+        eyebrow: "camada 1 · entrada e saída",
+        name: "Interface & Instalação",
+        count: "6 componentes",
+        leigo: "As portas de entrada: como um humano (ou outra IA) chega até o orquestrador — pelo terminal, por um painel visual, ou por um instalador de 1 clique.",
+        phd: "Superfícies de acesso externo: CLI nativo, dashboard, e as 3 CLIs de terceiros de primeira classe (OpenCode, Antigravity, Claude Code), cada uma com instalador próprio nas 3 plataformas.",
+        nodes: [
+          ["CLI marceloclaro", "marceloclaro/cli.py — menu interativo, [7] Ajuda, [8] Helpdesk, comandos diretos."],
+          ["Dashboard Streamlit", "webapp/app.py — 8 abas: Pipeline, Deep Research, Peer Review, Composer, Evolution, Consultation, System."],
+          ["OpenCode CLI", "opencode.json + integrations/opencode_cli.py — 165 agentes, 8 comandos slash, 2 servidores MCP."],
+          ["Antigravity CLI", "integrations/antigravity/ — ponte para o binário agy (Google), 8 ferramentas MCP, fila de handoff."],
+          ["Claude Code CLI", "CLAUDE.md + AGENTS.md — manual nativo lido automaticamente por este próprio assistente."],
+          ["Instaladores", "installer/ — Windows (WSL 1-clique + ícone próprio), Linux nativo, macOS best-effort, + desinstaladores com confirmação."]
+        ]
+      },
+      {
+        id: "orq", x: 50, y: 15, z: 24,
+        eyebrow: "camada 2 · governança interna",
+        name: "Orquestração & Confiança",
+        count: "5 componentes",
+        leigo: "As regras do jogo: quem pode ser confiável, quanto custa cada tarefa, e como o sistema garante que só entrega algo depois de testar de verdade.",
+        phd: "Trust Engine (BehavioralGate + GoalDriftDetector), Token Economy (staking/slashing), SDD/TDD Engine, e o Loop Engineering formal (LoopSpecification, 5 estados terminais nomeados).",
+        nodes: [
+          ["Trust Engine", "trust/ — TrustScorer, BehavioralGate, NaturalForgetting, GoalDriftDetector (R112: desvio de objetivo por sobreposição lexical)."],
+          ["Token Economy", "economy/ — staking, slashing, mercado de fees entre agentes."],
+          ["SDD/TDD Engine", "sdd/spec_engine.py + tdd_runner.py — toda entrega é verificada contra critérios de aceitação antes de aceita."],
+          ["Loop Engineering", "sdd/loop_spec.py (R109) — trigger, verificação em escada, estados terminais (success/no_op/blocked/stalled/exhausted/error)."],
+          ["Doctor + Helpdesk + Corrigendum", "marceloclaro/doctor.py, helpdesk.py, CORRIGENDUM.md (R110) — diagnóstico rápido e autocorreção pública de alegações."]
+        ]
+      },
+      {
+        id: "mci", x: 85, y: 14, z: 20,
+        eyebrow: "camada 3 · sistema nervoso",
+        name: "MCI — Interconexão Metacognitiva",
+        count: "6 componentes",
+        leigo: "A memória e os instintos compartilhados de todo o ecossistema: o que já foi tentado, o que funcionou, e um quadro de avisos onde os especialistas se candidatam às tarefas.",
+        phd: "MetaBus (Global Workspace), Blackboard (protocolo A2A), Reflexion, ConfidenceCalibrator (Brier/ECE), MetacognitiveEvaluator (SPEC-920), e o tripé de governança OQS/VSEE/EGS.",
+        nodes: [
+          ["MetaBus", "mci/metabus.py — memória episódica + semântica + ledger de confiança, persistida em .mci_state/."],
+          ["Blackboard", "mci/blackboard.py — Call for Proposals, voluntariado de agentes, Agent Cards A2A."],
+          ["Reflexion", "mci/reflexion.py — reflexão pós-tarefa (hoje template determinístico; interface pronta para LLM real)."],
+          ["Confidence Calibrator", "mci/confidence_calibrator.py — Brier Score, Expected Calibration Error, abstenção sob incerteza."],
+          ["Metacognitive Evaluator", "mci/metacognitive_evaluator.py (SPEC-920) — 6 dimensões; nunca declara \"verified\" sem validação externa."],
+          ["OQS · VSEE · EGS", "mci/oqs, mci/vsee, mci/egs — pergunta ótima, atalho vetorial, checagem ética."]
+        ]
+      },
+      {
+        id: "pipeline", x: 15, y: 55, z: 24,
+        eyebrow: "camada 4 · descoberta científica",
+        name: "Pipeline Científico Agentivo",
+        count: "5 estágios + loop real",
+        leigo: "A linha de produção de um artigo científico do zero: uma ideia vira pergunta de pesquisa, vira evidência, vira revisão por pares, vira correção, vira artigo formatado.",
+        phd: "R101&ndash;R105 fundidos nativamente no orquestrador (R108) com gate real de exportação, calibração de confiança e avaliação metacognitiva; transformado em loop real com detecção de estagnação (R109).",
+        nodes: [
+          ["EvoSci (R101)", "MentorAgent, PrimeResearcherAgent, ReviewerAgent, EvolutionManagerAgent + EvoEngine (seleção/crossover/mutação)."],
+          ["Deep Research (R102)", "BFRS + DFRS sobre 11 fontes reais (R111: +PubMed, bioRxiv, CORE) construindo um Evidence Graph."],
+          ["Peer Review (R103)", "RubricEngine (8 dimensões) + 4 críticos + Revisão às Cegas real (R115: anonimização + detecção de vazamento)."],
+          ["Revision (R104d)", "DiffEngine com rollback automático quando a integridade estrutural falha."],
+          ["Paper Composer (R105)", "Formatação ABNT/APA/IEEE + verificação de consistência cruzada."],
+          ["Fusão + Loop real", "scientific_discovery_pipeline() (R108) e run_scientific_discovery_loop() (R109) — nunca confunde erro com sucesso."]
+        ]
+      },
+      {
+        id: "reasoning", x: 50, y: 82, z: 22,
+        eyebrow: "camada 5 · raciocínio e teses",
+        name: "Núcleo de Raciocínio & Descoberta",
+        count: "10 componentes",
+        leigo: "As diferentes formas de \"pensar\" do sistema: lógica formal, teoria dos jogos, detecção de erros de argumentação, e uma universidade sintética inteira de hipóteses cruzadas.",
+        phd: "12 motores de raciocínio + ARCHE RLT (R114, 6 tipos de Peirce) + detector de falácias (R113); Game Theory com PhD Auditor; MiroFish; MASWOS; Legal Reasoning; RAG Evolved; Synthetic University.",
+        nodes: [
+          ["Reasoning Engines", "reasoning/engines.py — Z3, SymPy, Kanren, Critical, Bayesian, Causal, Temporal, Fuzzy, Chain-of-Thought, Analogical, Counterfactual, Quantum."],
+          ["ARCHE RLT", "reasoning/arche_rlt.py (R114) — árvore lógica auditável nos 6 tipos de inferência de Peirce (SPEC-057)."],
+          ["Detector de Falácias", "reasoning/fallacies.py (R113) — 15 falácias lógicas + 4 vieses cognitivos catalogados."],
+          ["Game Theory", "gametheory/ — 10 modelos clássicos + PhD Auditor (Nash, Cohen's d, Bonferroni, Qualis)."],
+          ["MiroFish", "mirofish/ — enxame preditivo com memória de grafo (wisdom of crowds ponderada)."],
+          ["Scanners & Deep Diagnose", "scanners/ — M1-M5, priorização epistemológica (erro → ausência → oportunidade)."],
+          ["MASWOS", "academic/ — pipeline de 16 estágios (meta interna Qualis A1 — ver Corrigendum)."],
+          ["Legal Reasoning", "legal/ — 7 ramos do direito + AuxJuris + RAG jurídico."],
+          ["RAG + RAG Evolved", "rag/ — grounding científico, citações, recuperação adaptativa por complexidade."],
+          ["Synthetic University", "synthetic_university/ — 11 faculdades, motor combinatorial via MiroFish."]
+        ]
+      },
+      {
+        id: "producao", x: 85, y: 55, z: 24,
+        eyebrow: "camada 6 · produção e memória",
+        name: "Produção, Segurança & Evolução",
+        count: "7 componentes",
+        leigo: "Onde o trabalho vira um produto de verdade (PDF, artigo, ilustração), com trava de segurança, e onde tudo que o sistema aprendeu fica registrado para sempre.",
+        phd: "Publishing, Research Hub, Illustrations; MCP Security + CI/CD; e o registro formal de evolução (Evolution Registry + 35 specs SDD) que sustenta toda a disciplina de auditoria deste mapa.",
+        nodes: [
+          ["Publishing", "publishing/ — pasta única com LaTeX, PDF, DOCX, ODT (KDP-ready) + manifesto com checksums."],
+          ["Research Hub", "research/ — busca federada + fichamento em 3 camadas + referências ABNT/APA."],
+          ["Illustrations", "illustrations/ — diagramas Mermaid, grafo de conhecimento Graphify, cards MIRA animados."],
+          ["MCP Security", "mci/mcp_server.py protegido por Guard + AuditLogger + ToolVetter + RateLimiter."],
+          ["CI/CD", ".github/workflows/ci.yml — lint, matriz de testes Python 3.10-3.14, build de pacotes."],
+          ["Evolution Registry", "evolution/cycles.json + evo-*.md — 74 ciclos documentados (R1 a R116), cada um com nota e lições."],
+          ["Especificações SDD", "specs/SPEC-935-R*.md — 35 especificações formais, cada uma com critérios de aceitação verificáveis."]
+        ]
+      }
+    ]
+  };
+
+  var root = document.documentElement;
+  var sheet = document.getElementById("sheet");
+  var connectors = document.getElementById("connectors");
+  var panel = document.getElementById("panel");
+  var legend = document.getElementById("legend");
+  var mode = "leigo";
+
+  function pct(v) { return v + "%"; }
+
+  function buildLegend() {
+    var items = [
+      ["Camada de entrada", "#8fd3e8"],
+      ["Governança interna", "#e8a33d"],
+      ["Sistema nervoso (MCI)", "#6fd1e8"],
+      ["Pipeline científico", "#d9634b"],
+      ["Raciocínio e teses", "#b98be0"],
+      ["Produção e evolução", "#7fd88f"]
+    ];
+    legend.innerHTML = items.map(function (it) {
+      return '<span class="legend-item"><span class="swatch" style="background:' + it[1] + '"></span>' + it[0] + '</span>';
+    }).join("") + '<span class="legend-item">┄┄ vetor de delegação/reflexão</span>';
+  }
+
+  function renderPanel(entry) {
+    var reg = mode === "leigo" ? entry.leigo : entry.phd;
+    var html = '<p class="eyebrow">' + entry.eyebrow + '</p>' +
+      '<h2>' + entry.name + '</h2>' +
+      '<p class="register">' + reg + '</p>' +
+      '<ul class="node-list">' +
+      entry.nodes.map(function (n) {
+        return '<li><b class="mono">' + n[0] + '</b><span>' + n[1] + '</span></li>';
+      }).join("") +
+      '</ul>';
+    panel.innerHTML = html;
+  }
+
+  function makeNode(entry, isHub) {
+    var el = document.createElement("div");
+    el.className = "node" + (isHub ? " hub" : "");
+    el.style.left = pct(entry.x);
+    el.style.top = pct(entry.y);
+    el.style.transform = "translate(-50%, -50%) translateZ(" + entry.z + "px)";
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-label", entry.name);
+    el.innerHTML =
+      '<div class="chip">' +
+      '<span class="tier-eyebrow mono">' + entry.eyebrow + '</span>' +
+      '<span class="tier-name">' + entry.name + '</span>' +
+      '<span class="tier-count mono">' + entry.count + '</span>' +
+      '</div>';
+
+    function activate() {
+      document.querySelectorAll(".node").forEach(function (n) { n.removeAttribute("data-active"); });
+      el.setAttribute("data-active", "true");
+      renderPanel(entry);
+    }
+    el.addEventListener("mouseenter", activate);
+    el.addEventListener("focus", activate);
+    el.addEventListener("click", activate);
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); }
+    });
+    return el;
+  }
+
+  function drawConnectors() {
+    var w = 1000, h = 860;
+    connectors.setAttribute("viewBox", "0 0 " + w + " " + h);
+    var svgParts = [];
+    DATA.tiers.forEach(function (t) {
+      var x1 = DATA.hub.x / 100 * w, y1 = DATA.hub.y / 100 * h;
+      var x2 = t.x / 100 * w, y2 = t.y / 100 * h;
+      var mx = (x1 + x2) / 2, my = (y1 + y2) / 2 - 40;
+      svgParts.push('<path d="M' + x1 + ',' + y1 + ' Q' + mx + ',' + my + ' ' + x2 + ',' + y2 + '" fill="none" />');
+    });
+    connectors.innerHTML = svgParts.join("").replace(/<path /g, '<path stroke-dasharray="3 5" stroke="var(--line)" stroke-width="1.4" opacity="0.55" ');
+  }
+
+  function render() {
+    sheet.querySelectorAll(".node").forEach(function (n) { n.remove(); });
+    sheet.appendChild(makeNode(DATA.hub, true));
+    DATA.tiers.forEach(function (t) { sheet.appendChild(makeNode(t, false)); });
+    drawConnectors();
+  }
+
+  document.querySelectorAll(".modeToggle button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      mode = btn.getAttribute("data-mode");
+      document.querySelectorAll(".modeToggle button").forEach(function (b) {
+        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+      });
+      var active = document.querySelector(".node[data-active='true']");
+      if (active) {
+        var id = active.getAttribute("aria-label");
+        var entry = DATA.hub.name === id ? DATA.hub : DATA.tiers.filter(function (t) { return t.name === id; })[0];
+        if (entry) renderPanel(entry);
+      }
+    });
+  });
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion) {
+    var stage = document.getElementById("stage");
+    stage.addEventListener("mousemove", function (e) {
+      var rect = stage.getBoundingClientRect();
+      var px = (e.clientX - rect.left) / rect.width - 0.5;
+      var py = (e.clientY - rect.top) / rect.height - 0.5;
+      sheet.style.transform = "rotateX(" + (10 - py * 10) + "deg) rotateZ(" + (-2 + px * 6) + "deg)";
+    });
+    stage.addEventListener("mouseleave", function () {
+      sheet.style.transform = "rotateX(10deg) rotateZ(-2deg)";
+    });
+  }
+
+  buildLegend();
+  render();
+})();
+</script>
