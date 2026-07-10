@@ -1638,6 +1638,24 @@
         "Dois registros de leitura (leigo/PhD) funcionam melhor quando a tipografia tambem os distingue (prosa serifada para leigo, dados monoespacados para PhD), nao so o conteudo do texto"
       ],
       "timestamp": 1783723064.3155723
+    },
+    {
+      "round_id": "R118",
+      "objective": "R118: Correcao do handshake MCP em metacognitive-interconnect — servidor nao implementava initialize, causando falha real reportada pelo usuario",
+      "changes": [
+        "mci/mcp_server.py::SimpleMCPServer.handle_request(): implementado o metodo initialize (protocolVersion/capabilities/serverInfo), obrigatorio no inicio de toda sessao MCP e ausente ate entao",
+        "Implementado tambem o metodo ping",
+        "mci/mcp_server.py::run_stdio(): requisicoes sem id (notificacoes, ex. notifications/initialized) deixam de gerar resposta JSON-RPC, conforme especificacao",
+        "Reproduzido o bug real via stdin antes da correcao (resposta isError:true/Metodo nao suportado) e confirmado o fluxo completo (initialize -> notifications/initialized -> tools/list) funcionando apos a correcao",
+        "Adicionados 6 testes de regressao em tests/test_r118_mcp_initialize_handshake.py"
+      ],
+      "score": 9.1,
+      "lessons": [
+        "Um servidor MCP customizado (SimpleMCPServer) que so trata tools/list e tools/call, sem tratar initialize, passa despercebido em testes que chamam os handlers diretamente (como os de synthetic_university/mcp_server.py) — so falha quando um cliente real de protocolo faz o handshake completo. Vale ter pelo menos um teste de handshake para cada servidor MCP do ecossistema.",
+        "Reproduzir o bug de verdade via stdin (nao so ler o codigo) foi o que confirmou a causa raiz com certeza antes de escrever a correcao.",
+        "O outro servidor MCP do projeto (antigravity_mcp_server.py) ja tratava initialize corretamente — vale auditar os demais servidores MCP do ecossistema para o mesmo padrao de bug."
+      ],
+      "timestamp": 1783723939.6487534
     }
   ]
 }
