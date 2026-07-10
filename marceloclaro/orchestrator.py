@@ -36,6 +36,7 @@ from transformer.memory import HierarchicalMemory
 from sdd.spec_engine import spec_registry, spec_verifier
 from sdd.tdd_runner import tdd_runner, run_pytest
 from sdd.loop_spec import LoopSpecification, loop_spec_registry, is_stagnant
+from marceloclaro.doctor import run_doctor
 from marceloclaro.inspiration_audit import audit_inspirations as run_inspiration_audit
 from trust import create_trust_engine
 from economy import TokenEconomy
@@ -973,6 +974,31 @@ class MarceloClaroOrchestrator:
             "final_result": final_result,
             "duration_seconds": duration,
         }
+
+    # ------------------------------------------------------------------
+    # DOCTOR — DIAGNÓSTICO DE SAÚDE DO ECOSSISTEMA (SPEC-935-R110)
+    # ------------------------------------------------------------------
+    def doctor(self) -> Dict[str, Any]:
+        """
+        Diagnóstico estrutural rápido do ecossistema (specs formais,
+        registro de evolução, loop specs, memória metacognitiva,
+        configuração do opencode.json, prática de correção pública de
+        overclaims). Complementa — não substitui — a suíte pytest
+        completa (``scripts/quality_report.py``).
+        """
+        report = run_doctor()
+        report["catalog_agents"] = self.catalog_size
+        report["trust_status"] = self.trust.status
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="diagnóstico de saúde do ecossistema (doctor)",
+            reflection=(
+                f"Doctor: {report['overall']} — {report['checks_passed']} ok, "
+                f"{report['checks_warned']} avisos, {report['checks_failed']} falhas."
+            ),
+            score={"healthy": 1.0, "degraded": 0.6, "unhealthy": 0.1}.get(report["overall"], 0.5),
+        )
+        return report
 
     def _maswos_delegate(self, agent_id: str, capability: str, description: str) -> str:
         """Delegação interna dos estágios MASWOS via Blackboard."""

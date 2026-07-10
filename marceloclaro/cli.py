@@ -29,6 +29,7 @@ MENU = """
 [3] Reportar conclusão de tarefa
 [4] Consultar memória metacognitiva (Global Workspace)
 [5] Status geral do ecossistema
+[6] Diagnóstico de saúde do ecossistema (doctor)
 [0] Sair
 """
 
@@ -43,8 +44,12 @@ def main():
             print(json.dumps(orchestrator.status(), indent=2, ensure_ascii=False))
         elif cmd == "agents":
             print(json.dumps(orchestrator.list_agents(), indent=2, ensure_ascii=False))
+        elif cmd == "doctor":
+            report = orchestrator.doctor()
+            print(json.dumps(report, indent=2, ensure_ascii=False))
+            sys.exit(0 if report["overall"] != "unhealthy" else 1)
         else:
-            print(f"Comando desconhecido: {cmd}. Use 'status' ou 'agents'.")
+            print(f"Comando desconhecido: {cmd}. Use 'status', 'agents' ou 'doctor'.")
         return
 
     # Modo interativo
@@ -77,6 +82,9 @@ def main():
 
         elif choice == "5":
             print(json.dumps(orchestrator.status(), indent=2, ensure_ascii=False))
+
+        elif choice == "6":
+            print(json.dumps(orchestrator.doctor(), indent=2, ensure_ascii=False))
 
         elif choice == "0":
             print("Encerrando o orquestrador. Até logo.")
