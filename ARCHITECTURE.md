@@ -246,6 +246,7 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R107 | Auditoria Sistêmica + Hardening | 9 CA |
 | SPEC-935-R108 | Fusão do Pipeline Científico no Orquestrador MarceloClaro | 10 CA |
 | SPEC-935-R109 | Loop Engineering: Loop Real + Especificação Formal no SDD | 7 CA |
+| SPEC-935-R110 | Doctor (Diagnóstico de Saúde) + Prática de CORRIGENDUM | 7 CA |
 
 ---
 
@@ -295,8 +296,8 @@ envolvido. Ver `specs/SPEC-935-R109.md` e `specs/loops/scientific-discovery-loop
 
 | Métrica | v2.5.0 | v3.0.0 (atual) |
 |---|---|---|
-| Testes | 617 | **1136** |
-| Ciclos de evolução | 49 | **67** |
+| Testes | 617 | **1149** |
+| Ciclos de evolução | 49 | **68** |
 | MCP Tools | 8 | **14** |
 | Agentes | 156 | **160+** |
 | Score médio | — | **9.4/10** |
@@ -304,3 +305,5 @@ envolvido. Ver `specs/SPEC-935-R109.md` e `specs/loops/scientific-discovery-loop
 | Pip packages | 0 | **3** |
 | Cobertura estimada | — | **84%** |
 | CI/CD | ❌ | **GitHub Actions** |
+
+> "Score médio" e "Agentes" têm ressalvas de leitura em [`CORRIGENDUM.md`](CORRIGENDUM.md): o primeiro é autoavaliação interna por ciclo, não benchmark externo; o segundo conta agent cards elegíveis para delegação, não processos de IA sempre ativos.

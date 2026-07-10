@@ -16,6 +16,8 @@
 
 *Uma arquitetura cognitiva completa que integra 160+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD e a Universidade Sintética Transversal com 65 ciclos de evolução contínua.*
 
+<sub>Ver [`CORRIGENDUM.md`](CORRIGENDUM.md) para ressalvas sobre "160+ agentes" (agent cards elegíveis, não processos de IA sempre ativos) e sobre "Qualis A1" (padrão de rubrica interno, não certificação obtida).</sub>
+
 </div>
 
 ---
@@ -984,9 +986,16 @@ print(result["novelty_scores"])        # Scores de novidade
 
 **Ciclos de evolução: 65** (R47–R107) | **1062 testes** | Score médio: 9.4/10
 
+> "Score médio" é autoavaliação interna por ciclo, não benchmark externo — ver [`CORRIGENDUM.md`](CORRIGENDUM.md#3-score-médio-94-10-e-ciclos-de-evolução-65-readmemd-architecturemd).
+
 ---
 
 ##  Comparative de Maturidade Técnica
+
+> ⚠️ As notas abaixo são auto-atribuídas pelo próprio projeto, sem
+> metodologia de benchmark nem execução comparativa dos frameworks
+> citados — ver [`CORRIGENDUM.md`](CORRIGENDUM.md#1-tabela-comparativa-vs-frameworks-externos-readmemd-linhas-991-1000)
+> antes de tratar esta tabela como avaliação objetiva.
 
 | Critério | OpenCode v3.0 | LangGraph | CrewAI | AutoGen | MetaGPT |
 |---|---|---|---|---|---|

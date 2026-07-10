@@ -1500,6 +1500,26 @@
         "Detector de estagnacao evita queimar o teto de orcamento quando o resultado ja parou de melhorar — em testes reais (sem mock) o readiness_score convergiu e a estagnacao disparou organicamente antes do teto de 6 iteracoes"
       ],
       "timestamp": 1783702916.8648555
+    },
+    {
+      "round_id": "R110",
+      "objective": "R110: Doctor (diagnostico de saude estrutural) + pratica de CORRIGENDUM.md, inspirados no projeto original OpenCode_Ecosystem",
+      "changes": [
+        "Novo modulo marceloclaro/doctor.py: run_doctor() com 6 checks estruturais rapidos (specs formais, evolution registry sem perda silenciosa, loop specs bem formados, memoria metacognitiva, opencode.json, presenca do CORRIGENDUM.md)",
+        "Check evolution_registry compara contagem bruta do JSON vs carregada — deteccao proativa do mesmo tipo de bug de perda de dados corrigido no R108",
+        "MarceloClaroOrchestrator.doctor(): expoe run_doctor() acrescido de catalog_agents e trust_status, registra reflexao metacognitiva",
+        "python3 -m marceloclaro.cli doctor (exit code nao-zero se unhealthy) + item [6] no menu interativo",
+        "CORRIGENDUM.md criado na raiz com 5 alegacoes identificadas: tabela comparativa com nota maxima auto-atribuida vs frameworks externos, rotulo Qualis A1 sem validacao externa, Score medio apresentado como metrica objetiva quando e autoavaliacao interna, 160+ agentes sem esclarecer que sao agent cards elegiveis nao processos sempre ativos, e nomenclatura Superhuman ja coberta por SPEC-920",
+        "Referencias cruzadas leves adicionadas em README.md e ARCHITECTURE.md apontando para o CORRIGENDUM.md junto as metricas/tabelas identificadas",
+        "Adicionados 13 testes de integracao em tests/test_r110_doctor_corrigendum.py"
+      ],
+      "score": 9.1,
+      "lessons": [
+        "Uma auditoria do projeto que originalmente inspirou o core mostrou que a maior parte do valor ja tinha sido portada — o residual real (doctor + corrigendum) era pequeno, mas genuino",
+        "A politica anti-overclaim que ja existia no codigo (SPEC-920, classify_metacognitive_tier) nunca tinha sido estendida a prosa solta do README/ARCHITECTURE — uma tabela comparativa com nota maxima auto-atribuida em 100% das categorias contra frameworks externos e exatamente o tipo de alegacao que o proprio codigo do projeto ja sabe evitar",
+        "Singletons globais (LoopSpecRegistry, MetaBus.memory) exigem isolamento explicito em testes que registram specs/loops de teste — mesmo cuidado ja identificado nos ciclos R108/R109, reincidiu aqui e foi corrigido do mesmo jeito"
+      ],
+      "timestamp": 1783704170.944544
     }
   ]
 }
