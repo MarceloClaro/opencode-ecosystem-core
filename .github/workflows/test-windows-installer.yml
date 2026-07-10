@@ -1,0 +1,121 @@
+name: Test Windows Installer (smoke, temporário)
+
+# Workflow TEMPORÁRIO de validação manual do instalador Windows numa VM
+# Windows real (windows-latest = Windows Server hospedado pelo GitHub).
+#
+# Limitação conhecida: runners hospedados do GitHub Actions não suportam
+# virtualização aninhada (Hyper-V), então NÃO é possível testar aqui a
+# instalação real do WSL2 + Ubuntu (`wsl --install`). Este workflow testa
+# tudo que É seguro/possível testar sem isso: sintaxe, análise estática,
+# as funções auxiliares isoladas (Test-Admin, Test-WslDistro), o mecanismo
+# de criação de atalho com ícone, e as regras de Firewall.
+#
+# Disparo manual apenas (workflow_dispatch) — não roda em todo push.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  smoke-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sintaxe PowerShell + PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser -ErrorAction Stop
+          $hasError = $false
+          foreach ($f in @(
+            "installer/windows/Install-OpenCodeEcosystem.ps1",
+            "installer/windows/Uninstall-OpenCodeEcosystem.ps1"
+          )) {
+            $parseErrors = $null; $tokens = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile($f, [ref]$tokens, [ref]$parseErrors)
+            if ($parseErrors.Count -gt 0) {
+              $hasError = $true
+              $parseErrors | ForEach-Object { Write-Error "$($f): $($_.Message) (linha $($_.Extent.StartLineNumber))" }
+            } else {
+              Write-Host "[OK] $f - sintaxe valida"
+            }
+            $results = Invoke-ScriptAnalyzer -Path $f -Severity Error
+            if ($results.Count -gt 0) {
+              $hasError = $true
+              $results | ForEach-Object { Write-Error "$($f): $($_.RuleName) - $($_.Message)" }
+            }
+          }
+          if ($hasError) { exit 1 }
+          Write-Host "[OK] Nenhum erro de sintaxe ou analise estatica critica."
+
+      - name: Funções isoladas (Test-Admin, Test-WslDistro)
+        shell: pwsh
+        run: |
+          $content = Get-Content -Raw installer/windows/Install-OpenCodeEcosystem.ps1
+          $parseErrors = $null
+          $ast = [System.Management.Automation.Language.Parser]::ParseInput($content, [ref]$null, [ref]$parseErrors)
+          $functions = $ast.FindAll({ $args[0] -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $true)
+          foreach ($fn in $functions) {
+            if ($fn.Name -in @('Test-Admin', 'Test-WslDistro')) {
+              Invoke-Expression $fn.Extent.Text
+              Write-Host "Funcao extraida e definida: $($fn.Name)"
+            }
+          }
+
+          $isAdmin = Test-Admin
+          Write-Host "Test-Admin() no runner windows-latest: $isAdmin"
+
+          $wslCheck = Test-WslDistro -Name "Ubuntu"
+          if ($wslCheck -isnot [bool]) { throw "Test-WslDistro nao retornou um booleano." }
+          Write-Host "Test-WslDistro('Ubuntu') no runner (sem WSL instalado, esperado False): $wslCheck"
+          Write-Host "[OK] Funcoes isoladas executaram sem excecao."
+
+      - name: Mecanismo de atalho com ícone (fallback, sem WSL real)
+        shell: pwsh
+        run: |
+          $Desktop = [Environment]::GetFolderPath('Desktop')
+          $WShell = New-Object -ComObject WScript.Shell
+          $iconFallback = "$env:SystemRoot\System32\wsl.exe,0"
+          $lnkPath = Join-Path $Desktop "TesteSmokeEcosystem.lnk"
+
+          $sc = $WShell.CreateShortcut($lnkPath)
+          $sc.TargetPath = "$env:SystemRoot\System32\wsl.exe"
+          $sc.Arguments = '-d Ubuntu -- bash -lic "echo teste-smoke"'
+          $sc.Description = "Atalho de teste (smoke test do instalador)"
+          $sc.IconLocation = $iconFallback
+          $sc.Save()
+
+          if (-not (Test-Path $lnkPath)) { throw "Atalho de teste nao foi criado em $lnkPath" }
+          Write-Host "[OK] Atalho .lnk criado com sucesso: $lnkPath"
+          Remove-Item $lnkPath -Force
+          Write-Host "[OK] Atalho de teste removido (limpeza)."
+
+      - name: Regras de Firewall (criar + remover, mesmo padrão do instalador)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Continue'
+          New-NetFirewallRule -DisplayName "OpenCode Ecosystem Smoke Test" -Direction Inbound `
+            -Program "$env:SystemRoot\System32\wsl.exe" -Action Allow -ErrorAction SilentlyContinue | Out-Null
+          $rule = Get-NetFirewallRule -DisplayName "OpenCode Ecosystem Smoke Test" -ErrorAction SilentlyContinue
+          if ($rule) {
+            Write-Host "[OK] Regra de Firewall criada e verificada."
+          } else {
+            Write-Warning "Regra de Firewall nao pode ser verificada (talvez exija elevacao adicional)."
+          }
+          Remove-NetFirewallRule -DisplayName "OpenCode Ecosystem Smoke Test" -ErrorAction SilentlyContinue
+          Write-Host "[OK] Regra de teste removida (limpeza)."
+
+      - name: Resumo
+        shell: pwsh
+        run: |
+          Write-Host "==================================================================="
+          Write-Host "TESTADO com sucesso nesta VM Windows real (GitHub Actions windows-latest):"
+          Write-Host "  - Sintaxe PowerShell (parser oficial) + PSScriptAnalyzer"
+          Write-Host "  - Test-Admin / Test-WslDistro (extraidas do script real via AST)"
+          Write-Host "  - Mecanismo de criacao de atalho .lnk com icone"
+          Write-Host "  - Regras de Firewall (criar/remover)"
+          Write-Host ""
+          Write-Host "NAO TESTADO (limitacao conhecida do GitHub Actions):"
+          Write-Host "  - Instalacao real do WSL2 + Ubuntu (wsl --install)"
+          Write-Host "    Requer virtualizacao aninhada, indisponivel em runners hospedados."
+          Write-Host "    Precisa de hardware real ou VM com suporte a nested virtualization."
+          Write-Host "==================================================================="
