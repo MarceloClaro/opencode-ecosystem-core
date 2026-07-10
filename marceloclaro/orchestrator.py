@@ -35,6 +35,7 @@ from transformer.pipeline import TransformerPipeline, GradingHead
 from transformer.memory import HierarchicalMemory
 from sdd.spec_engine import spec_registry, spec_verifier
 from sdd.tdd_runner import tdd_runner, run_pytest
+from sdd.loop_spec import LoopSpecification, loop_spec_registry, is_stagnant
 from marceloclaro.inspiration_audit import audit_inspirations as run_inspiration_audit
 from trust import create_trust_engine
 from economy import TokenEconomy
@@ -97,6 +98,48 @@ class MarceloClaroOrchestrator:
                 logger.info(f"[{self.id}] Catálogo registrado: {self.catalog_size} agentes especializados")
             except Exception as exc:
                 logger.warning(f"[{self.id}] Falha ao registrar catálogo: {exc}")
+
+        # Loop Engineering (SPEC-935-R109): registra a especificação formal
+        # do loop científico — trigger, objetivo, verificação, parada, memória
+        loop_spec_registry.register(LoopSpecification(
+            name="scientific-discovery",
+            description=(
+                "Repete o pipeline R101-R105 (scientific_discovery_pipeline) "
+                "ate atingir o gate de exportacao do R103 ou um estado "
+                "terminal de parada (no_op/blocked/stalled/exhausted/error)."
+            ),
+            use_when=(
+                "Uma unica rodada do pipeline cientifico nao atingiu o gate de "
+                "qualidade (export_gate_passed) e vale a pena tentar novas "
+                "rodadas de EvoSci/Deep Research antes de desistir."
+            ),
+            trigger="manual",
+            trigger_justification=(
+                "O resultado de cada rodada (gate passou/reprovou, "
+                "readiness_score) muda a decisao da proxima rodada (continuar, "
+                "parar por estagnacao, ou parar por orcamento) — satisfaz a "
+                "'golden rule' do loop engineering: ha feedback real entre voltas."
+            ),
+            goal="R103 aprova export_gate_passed e R104d/R105 completam com sucesso.",
+            goal_verifiable=True,
+            verification_level=1,
+            verification_description=(
+                "export_gate_passed do R103 (threshold deterministico sobre "
+                "traceability/coverage do AuditGraph) — zona autonoma da "
+                "escada de verificacao, sem juiz de modelo envolvido."
+            ),
+            architecture="solo",
+            terminal_states=["success", "no_op", "blocked", "stalled", "exhausted", "error"],
+            stagnation_window=3,
+            stagnation_threshold=0.02,
+            max_iterations=5,
+            memory_location="mci.metabus.metabus.memory (episodic + confidence_ledger, persistido em .mci_state/)",
+            guardrails=[
+                "Erro nao tratado interrompe o loop imediatamente (nao tenta mascarar como sucesso)",
+                "Estagnacao (variacao de readiness_score < limiar por 'window' rodadas) para o loop antes do teto de orcamento",
+                "R101 sem nenhuma ideia gerada e classificado como no_op, nao como falha",
+            ],
+        ))
 
     # ------------------------------------------------------------------
     # 1. PERCEPÇÃO METACOGNITIVA
@@ -790,6 +833,146 @@ class MarceloClaroOrchestrator:
                 "calibrated_confidences": calibrated_confidences,
                 "metacognitive_report": metacog,
             }
+
+    # ------------------------------------------------------------------
+    # LOOP ENGINEERING (SPEC-935-R109): scientific_discovery_pipeline
+    # como loop real, com deteccao de estagnacao e estados terminais
+    # ------------------------------------------------------------------
+    def describe_scientific_loop(self) -> Dict[str, Any]:
+        """Retorna a LoopSpecification registrada para o loop científico
+        (trigger, verificação, arquitetura, estados terminais, memória)."""
+        loop = loop_spec_registry.get("scientific-discovery")
+        return loop.to_dict() if loop else {}
+
+    def run_scientific_discovery_loop(
+        self,
+        seed_domain: str,
+        max_iterations: int = 5,
+        stagnation_window: int = 3,
+        stagnation_threshold: float = 0.02,
+        venue: str = "abnt",
+    ) -> Dict[str, Any]:
+        """
+        Transforma ``scientific_discovery_pipeline`` em um loop real
+        (SPEC-935-R109), repetindo-o até um dos cinco estados terminais
+        nomeados abaixo — nunca tratando erro ou esgotamento de orçamento
+        como sucesso:
+
+          - ``success``: uma iteração passou no gate do R103 e completou
+            R104d/R105.
+          - ``no_op``: o R101 não gerou nenhuma ideia — não há trabalho
+            genuíno a repetir.
+          - ``blocked``: o gate nunca foi aprovado e o orçamento de
+            iterações acabou (distinto de ``exhausted`` porque o motivo é
+            qualidade, não tempo/custo).
+          - ``stalled``: o readiness_score (SPEC-920) das últimas
+            ``stagnation_window`` iterações variou menos que
+            ``stagnation_threshold`` — detector de estagnação (mesmo
+            formato de ``EvoEngine.is_stagnant``), para o loop antes de
+            esgotar o orçamento.
+          - ``error``: uma iteração retornou uma exceção não tratada —
+            repetir não mudaria o resultado (nada no input muda), então o
+            loop para imediatamente em vez de queimar orçamento.
+
+        A cada iteração o ``max_rounds`` do EvoSci escala (+1), dando ao
+        próximo turno uma chance genuinamente diferente — não é só repetir
+        a mesma tentativa (o "golden rule" do loop engineering: cada
+        rodada usa o feedback da anterior).
+        """
+        loop = loop_spec_registry.get("scientific-discovery")
+        max_iterations = max_iterations if max_iterations > 0 else loop.max_iterations if loop else 5
+
+        start = time.time()
+        readiness_history: List[float] = []
+        iterations: List[Dict[str, Any]] = []
+        terminal_state = "exhausted"
+        reason = "Orçamento de iterações esgotado sem aprovar o gate."
+        final_result: Dict[str, Any] = {}
+
+        for i in range(1, max_iterations + 1):
+            result = self.scientific_discovery_pipeline(
+                seed_domain=seed_domain,
+                max_rounds=3 + (i - 1),
+                venue=venue,
+                strict_gates=True,
+            )
+            final_result = result
+            iterations.append({
+                "iteration": i,
+                "status": result.get("status"),
+                "gate_passed": result.get("gate_decision", {}).get("passed"),
+                "readiness_score": result.get("metacognitive_report", {}).get("readiness_score"),
+            })
+
+            metabus.publish_subsystem_event(
+                "scientific_pipeline_loop", "iteration.completed",
+                {"seed_domain": seed_domain, "iteration": i, "status": result.get("status")},
+                source_agent=self.id,
+            )
+
+            if result.get("status") == "error":
+                terminal_state = "error"
+                reason = f"Iteração {i} falhou com exceção não tratada: {result.get('error')}"
+                break
+
+            if result.get("status") == "completed":
+                terminal_state = "success"
+                reason = f"Gate aprovado e pipeline completo na iteração {i}."
+                break
+
+            r101_ideas = [
+                idea for cycle in result.get("stages", {}).get("r101", {}).get("history", [])
+                for idea in cycle.get("ideas", [])
+            ]
+            if not r101_ideas:
+                terminal_state = "no_op"
+                reason = f"EvoSci não gerou nenhuma ideia na iteração {i} — nenhum trabalho genuíno a repetir."
+                break
+
+            readiness = result.get("metacognitive_report", {}).get("readiness_score")
+            if readiness is not None:
+                readiness_history.append(float(readiness))
+
+            if is_stagnant(readiness_history, window=stagnation_window, threshold=stagnation_threshold):
+                terminal_state = "stalled"
+                reason = (
+                    f"readiness_score estagnado nas últimas {stagnation_window} iterações "
+                    f"(variação < {stagnation_threshold}): {readiness_history[-stagnation_window:]}."
+                )
+                break
+
+            if i == max_iterations:
+                terminal_state = "blocked"
+                reason = (
+                    f"Gate do R103 nunca foi aprovado em {max_iterations} iterações "
+                    "(orçamento esgotado por qualidade, não por estagnação)."
+                )
+
+        duration = round(time.time() - start, 1)
+
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"loop cientifico: {seed_domain[:80]}",
+            reflection=f"Loop terminou em '{terminal_state}' após {len(iterations)} iteração(ões): {reason}",
+            score={"success": 1.0, "no_op": 0.5, "blocked": 0.3, "stalled": 0.2, "error": 0.0}.get(terminal_state, 0.0),
+        )
+        metabus.publish_subsystem_event(
+            "scientific_pipeline_loop", "loop.terminal",
+            {"seed_domain": seed_domain, "terminal_state": terminal_state, "iterations": len(iterations)},
+            source_agent=self.id,
+        )
+        self.trust.learn("scientific_discovery_loop", success=(terminal_state == "success"))
+
+        return {
+            "terminal_state": terminal_state,
+            "reason": reason,
+            "iterations_used": len(iterations),
+            "max_iterations": max_iterations,
+            "readiness_history": readiness_history,
+            "iterations": iterations,
+            "final_result": final_result,
+            "duration_seconds": duration,
+        }
 
     def _maswos_delegate(self, agent_id: str, capability: str, description: str) -> str:
         """Delegação interna dos estágios MASWOS via Blackboard."""
