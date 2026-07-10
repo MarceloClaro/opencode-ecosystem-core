@@ -13,7 +13,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from research.searchers import PaperRecord, MultiSearcher, ALL_SEARCHERS
+from research.searchers import (PaperRecord, MultiSearcher, ALL_SEARCHERS,
+                                 PubMedSearcher, BiorxivSearcher, CoreSearcher)
 from research.fichamento import (CitationFormatter, CriticalAnalyzer,
                                  FichamentoWriter)
 from research.pdf2md import Pdf2Markdown
@@ -49,7 +50,8 @@ TEMA = "metacognição em sistemas multiagentes LLM"
 class TestSearchers:
     def test_plataformas_essenciais_registradas(self):
         for nome in ("arxiv", "openalex", "crossref", "semantic_scholar",
-                     "europepmc", "scielo", "github", "kaggle"):
+                     "europepmc", "scielo", "pubmed", "biorxiv", "core",
+                     "github", "kaggle"):
             assert nome in ALL_SEARCHERS, f"plataforma ausente: {nome}"
 
     def test_multisearcher_seleciona_plataformas(self):
@@ -59,6 +61,119 @@ class TestSearchers:
     def test_paper_record_identifier(self):
         assert _rec().identifier() == "10.1234/mca.2024.001"
         assert _rec(doi="", arxiv_id="2510.01285").identifier() == "2510.01285"
+
+
+# ----------------------------------------------------------------------
+# Novas fontes (R111): PubMed, bioRxiv, CORE
+# ----------------------------------------------------------------------
+class TestPubMedSearcher:
+    def test_parses_esearch_and_esummary(self, monkeypatch):
+        import research.searchers as searchers_mod
+
+        calls = []
+
+        def fake_http_get_json(url, headers=None, timeout=20):
+            calls.append(url)
+            if "esearch.fcgi" in url:
+                return {"esearchresult": {"idlist": ["111", "222"]}}
+            return {"result": {
+                "uids": ["111", "222"],
+                "111": {
+                    "title": "Gene editing in Dengue strains",
+                    "authors": [{"name": "Silva J"}, {"name": "Santos M"}],
+                    "pubdate": "2026 Jan 1",
+                    "fulljournalname": "Journal of Virology",
+                    "articleids": [{"idtype": "doi", "value": "10.1000/xyz"}],
+                },
+                "222": {"title": "", },
+            }}
+
+        monkeypatch.setattr(searchers_mod, "_http_get_json", fake_http_get_json)
+        records = PubMedSearcher().search("dengue gene editing", limit=2)
+
+        assert len(calls) == 2
+        assert any("esearch.fcgi" in c for c in calls)
+        assert any("esummary.fcgi" in c for c in calls)
+        assert len(records) == 2
+        assert records[0].title == "Gene editing in Dengue strains"
+        assert records[0].year == 2026
+        assert records[0].doi == "10.1000/xyz"
+        assert records[0].source == "pubmed"
+
+    def test_empty_search_returns_no_records(self, monkeypatch):
+        import research.searchers as searchers_mod
+        monkeypatch.setattr(searchers_mod, "_http_get_json",
+                             lambda *a, **k: {"esearchresult": {"idlist": []}})
+        assert PubMedSearcher().search("query sem resultado") == []
+
+    def test_network_failure_degrades_to_empty_list(self, monkeypatch):
+        import research.searchers as searchers_mod
+
+        def boom(*a, **k):
+            raise OSError("rede indisponível")
+
+        monkeypatch.setattr(searchers_mod, "_http_get_json", boom)
+        assert PubMedSearcher().search("qualquer coisa") == []
+
+
+class TestBiorxivSearcher:
+    def test_uses_crossref_prefix_filter(self, monkeypatch):
+        import research.searchers as searchers_mod
+
+        captured_url = {}
+
+        def fake_http_get_json(url, headers=None, timeout=20):
+            captured_url["url"] = url
+            return {"message": {"items": [{
+                "DOI": "10.1101/2026.01.01.000001",
+                "title": ["Synthetic regulatory genomics with deep learning"],
+                "author": [{"given": "Ana", "family": "Silva"}],
+                "issued": {"date-parts": [[2025]]},
+                "container-title": ["bioRxiv"],
+                "URL": "https://www.biorxiv.org/content/10.1101/2026.01.01.000001",
+            }]}}
+
+        monkeypatch.setattr(searchers_mod, "_http_get_json", fake_http_get_json)
+        records = BiorxivSearcher().search("deep learning genomics", limit=5)
+
+        assert "filter=prefix:10.1101" in captured_url["url"]
+        assert len(records) == 1
+        assert records[0].doi == "10.1101/2026.01.01.000001"
+        assert records[0].authors == ["Ana Silva"]
+        assert records[0].year == 2025
+        assert records[0].source == "biorxiv"
+
+
+class TestCoreSearcher:
+    def test_degrades_gracefully_without_api_key(self, monkeypatch):
+        monkeypatch.delenv("CORE_API_KEY", raising=False)
+        assert CoreSearcher().search("neural networks") == []
+
+    def test_uses_bearer_token_when_key_present(self, monkeypatch):
+        import research.searchers as searchers_mod
+
+        monkeypatch.setenv("CORE_API_KEY", "test-key-123")
+        captured_headers = {}
+
+        def fake_http_get_json(url, headers=None, timeout=20):
+            captured_headers.update(headers or {})
+            return {"results": [{
+                "title": "Neural Networks for Genomics",
+                "authors": [{"name": "Doe, John"}],
+                "yearPublished": 2025,
+                "doi": "10.5555/abc",
+                "downloadUrl": "https://core.ac.uk/download/123.pdf",
+                "abstract": "An abstract.",
+                "publisher": "CORE",
+            }]}
+
+        monkeypatch.setattr(searchers_mod, "_http_get_json", fake_http_get_json)
+        records = CoreSearcher().search("neural networks", limit=1)
+
+        assert captured_headers.get("Authorization") == "Bearer test-key-123"
+        assert len(records) == 1
+        assert records[0].title == "Neural Networks for Genomics"
+        assert records[0].source == "core"
 
 
 # ----------------------------------------------------------------------

@@ -247,6 +247,11 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R108 | Fusão do Pipeline Científico no Orquestrador MarceloClaro | 10 CA |
 | SPEC-935-R109 | Loop Engineering: Loop Real + Especificação Formal no SDD | 7 CA |
 | SPEC-935-R110 | Doctor (Diagnóstico de Saúde) + Prática de CORRIGENDUM | 7 CA |
+| SPEC-935-R111 | Expansão de Fontes de Pesquisa (PubMed, bioRxiv, CORE) | 6 CA |
+| SPEC-935-R112 | Goal Drift Detection no Trust Engine | 5 CA |
+| SPEC-935-R113 | Detector de Falácias Lógicas e Vieses Cognitivos | 5 CA |
+| SPEC-935-R114 | ARCHE RLT: Reasoning Logic Tree (SPEC-057) | 5 CA |
+| SPEC-935-R115 | Revisão às Cegas Real (Double-Blind) no R103 | 6 CA |
 
 ---
 
@@ -296,8 +301,8 @@ envolvido. Ver `specs/SPEC-935-R109.md` e `specs/loops/scientific-discovery-loop
 
 | Métrica | v2.5.0 | v3.0.0 (atual) |
 |---|---|---|
-| Testes | 617 | **1149** |
-| Ciclos de evolução | 49 | **68** |
+| Testes | 617 | **1228** |
+| Ciclos de evolução | 49 | **73** |
 | MCP Tools | 8 | **14** |
 | Agentes | 156 | **160+** |
 | Score médio | — | **9.4/10** |
