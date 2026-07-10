@@ -279,6 +279,7 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R115 | Revisão às Cegas Real (Double-Blind) no R103 | 6 CA |
 | SPEC-935-R116 | Instalação Multiplataforma, Ícone Próprio, Claude CLI e Manual/Helpdesk | 11 CA |
 | SPEC-935-R117 | Mapa Interativo da Arquitetura + Documentação Dupla-Registro | 6 CA |
+| SPEC-935-R118 | Correção do Handshake MCP em metacognitive-interconnect | 7 CA |
 
 ---
 
@@ -328,8 +329,8 @@ envolvido. Ver `specs/SPEC-935-R109.md` e `specs/loops/scientific-discovery-loop
 
 | Métrica | v2.5.0 | v3.0.0 (atual) |
 |---|---|---|
-| Testes | 617 | **1260** |
-| Ciclos de evolução | 49 | **75** |
+| Testes | 617 | **1266** |
+| Ciclos de evolução | 49 | **76** |
 | MCP Tools | 8 | **14** |
 | Agentes | 156 | **160+** |
 | Score médio | — | **9.4/10** |
