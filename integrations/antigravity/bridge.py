@@ -42,7 +42,10 @@ ANTIGRAVITY_CAPABILITIES = [
 class AntigravityBridge:
     """Ponte entre o orquestrador marceloclaro e o Antigravity CLI."""
 
-    def __init__(self, cli_command: str = "antigravity"):
+    def __init__(self, cli_command: str = "agy"):
+        # O binario real do Antigravity CLI (Google) se chama "agy", nao
+        # "antigravity" — com o nome errado, shutil.which() nunca encontra
+        # o binario instalado e a ponte sempre caia no fallback de fila.
         self.cli_command = cli_command
         self.available = shutil.which(cli_command) is not None
 

@@ -77,8 +77,20 @@ NAME_HINTS = {
 }
 
 
+def _strip_leading_html_comment(content: str) -> str:
+    """Remove um bloco `<!-- ... -->` no topo do arquivo, se existir.
+
+    Vários arquivos do catálogo abrem com um comentário HTML (instrução
+    de idioma/modelo) ANTES do frontmatter YAML real. Sem isso, o regex
+    de frontmatter (ancorado em ``^---``) nunca casava, e a heurística de
+    descrição acabava pegando a própria linha `<!--` como descrição.
+    """
+    return re.sub(r"^\s*<!--.*?-->\s*", "", content, count=1, flags=re.DOTALL)
+
+
 def _parse_frontmatter(content: str) -> Dict[str, str]:
     """Extrai frontmatter YAML simples (chave: valor) sem dependências externas."""
+    content = _strip_leading_html_comment(content)
     match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
     meta: Dict[str, str] = {}
     if match:
@@ -123,14 +135,17 @@ def load_catalog_definitions(catalog_dir: str = CATALOG_DIR) -> List[Dict[str, A
             continue
         meta = _parse_frontmatter(content)
         name = meta.get("name") or os.path.splitext(os.path.basename(path))[0]
-        # descrição: primeira linha não vazia após o frontmatter que não seja heading
-        body = re.sub(r"^---.*?---\s*", "", content, flags=re.DOTALL)
-        desc = ""
-        for line in body.splitlines():
-            line = line.strip()
-            if line and not line.startswith("#") and not line.startswith("**"):
-                desc = line
-                break
+        # descrição: prefere o campo `description:` autoral do frontmatter;
+        # só cai para a heurística de primeira linha do corpo quando ausente.
+        desc = meta.get("description", "").strip()
+        if not desc:
+            body = _strip_leading_html_comment(content)
+            body = re.sub(r"^---.*?---\s*", "", body, flags=re.DOTALL)
+            for line in body.splitlines():
+                line = line.strip()
+                if line and not line.startswith("#") and not line.startswith("**"):
+                    desc = line
+                    break
         definitions.append({
             "agent_id": name,
             "name": name.replace("_", " ").title(),

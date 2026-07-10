@@ -21,11 +21,21 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import time
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# CLIs externas de primeira classe do ecossistema (SPEC-935-R116) e a
+# sugestão de instalação exata para cada uma quando ausente.
+EXTERNAL_CLIS = {
+    "opencode": "curl -fsSL https://opencode.ai/install | bash",
+    "agy": "curl -fsSL https://antigravity.google/cli/install.sh | bash",
+    "claude": "npm install -g @anthropic-ai/claude-code",
+    "ollama": "curl -fsSL https://ollama.com/install.sh | sh",
+}
 
 
 @dataclass
@@ -148,6 +158,27 @@ def _check_corrigendum() -> DoctorCheck:
     return DoctorCheck("corrigendum", "pass", f"CORRIGENDUM.md presente ({size} bytes).")
 
 
+def _check_external_clis() -> DoctorCheck:
+    """Verifica se as CLIs externas de primeira classe (OpenCode, Antigravity,
+    Claude Code, Ollama) estão instaladas e no PATH. São opcionais para o
+    funcionamento do ecossistema em Python puro, por isso o resultado é
+    sempre ``warn`` (nunca ``fail``) quando alguma está ausente — cada
+    ferramenta é usada em fluxos diferentes (OpenCode CLI para o catálogo
+    de agentes, Antigravity para delegação externa, Claude Code para
+    desenvolvimento neste projeto, Ollama para modelos locais)."""
+    missing = {name: cmd for name, cmd in EXTERNAL_CLIS.items() if shutil.which(name) is None}
+    if not missing:
+        return DoctorCheck(
+            "external_clis", "pass",
+            f"Todas as {len(EXTERNAL_CLIS)} CLIs externas instaladas: {', '.join(EXTERNAL_CLIS)}.",
+        )
+    suggestions = "; ".join(f"{name} -> {cmd}" for name, cmd in missing.items())
+    return DoctorCheck(
+        "external_clis", "warn",
+        f"{len(missing)}/{len(EXTERNAL_CLIS)} CLI(s) externa(s) ausente(s): {suggestions}",
+    )
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -163,6 +194,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_metacognitive_memory(),
         _check_opencode_config(),
         _check_corrigendum(),
+        _check_external_clis(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)
