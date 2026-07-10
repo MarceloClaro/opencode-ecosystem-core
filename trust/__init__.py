@@ -15,6 +15,8 @@ from trust.trust_engine import (
     NaturalForgetting,
     OutcomeTracker,
     GateDecision,
+    GoalDriftDetector,
+    DriftCheck,
     create_trust_engine,
 )
 
@@ -25,5 +27,7 @@ __all__ = [
     "NaturalForgetting",
     "OutcomeTracker",
     "GateDecision",
+    "GoalDriftDetector",
+    "DriftCheck",
     "create_trust_engine",
 ]

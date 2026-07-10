@@ -1520,6 +1520,77 @@
         "Singletons globais (LoopSpecRegistry, MetaBus.memory) exigem isolamento explicito em testes que registram specs/loops de teste — mesmo cuidado ja identificado nos ciclos R108/R109, reincidiu aqui e foi corrigido do mesmo jeito"
       ],
       "timestamp": 1783704170.944544
+    },
+    {
+      "round_id": "R111",
+      "objective": "R111: Expansao de fontes de pesquisa (PubMed, bioRxiv, CORE) — auditoria de capacidades vs codigo real",
+      "changes": [
+        "PubMedSearcher (NCBI E-utilities esearch+esummary), BiorxivSearcher (Crossref prefix 10.1101), CoreSearcher (api.core.ac.uk com CORE_API_KEY)",
+        "research/searchers.py evolui de 8 para 11 fontes reais",
+        "Testes offline mockados para os 3 novos buscadores em tests/test_research.py"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "bioRxiv nao tem API publica de busca por palavra-chave — reaproveitar o padrao Crossref+prefix ja usado pelo ScieloSearcher e mais honesto que fingir uma busca direta"
+      ],
+      "timestamp": 1783706343.6053765
+    },
+    {
+      "round_id": "R112",
+      "objective": "R112: Goal drift detection real no Trust Engine — substitui jargao nao implementado (N3.5 consciencia operacional) por deteccao heuristica real",
+      "changes": [
+        "GoalDriftDetector em trust/trust_engine.py: sobreposicao lexical (Jaccard) numa janela deslizante entre objetivo declarado e acoes recentes",
+        "TrustEngine.set_goal()/check_drift() integrados, penalizando confianca via OutcomeTracker quando drift confirmado",
+        "6 testes novos em tests/test_advanced_subsystems.py::TestGoalDriftDetection"
+      ],
+      "score": 8.9,
+      "lessons": [
+        "Uma unica acao fora do tema nao deve disparar drift — so a media de uma janela completa evita falso-positivo"
+      ],
+      "timestamp": 1783706343.6053786
+    },
+    {
+      "round_id": "R113",
+      "objective": "R113: Detector real de 15 falacias logicas + 4 vieses cognitivos (reasoning/fallacies.py)",
+      "changes": [
+        "FallacyDetector heuristico por frases-gatilho (PT-BR + EN): Ad Hominem, Espantalho, Falso Dilema, Declive Escorregadio, Apelo a Autoridade, Bandwagon, Apelo a Emocao, Raciocinio Circular, Generalizacao Apressada, Post Hoc, Red Herring, Tu Quoque, Falsa Equivalencia, Apelo a Ignorancia, Evidencia Anedotica",
+        "4 vieses cognitivos: Confirmacao, Ancoragem, Heuristica da Disponibilidade, Excesso de Confianca",
+        "29 testes parametrizados em tests/test_r113_fallacy_detector.py"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Catalogo data-driven (dict fallacy_id -> cues) escala melhor que 15 metodos bespoke para o mesmo padrao de deteccao"
+      ],
+      "timestamp": 1783706343.6053796
+    },
+    {
+      "round_id": "R114",
+      "objective": "R114: ARCHE RLT (Reasoning Logic Tree) — primeira implementacao em codigo de SPEC-057, que existia so como spec ha varios ciclos",
+      "changes": [
+        "reasoning/arche_rlt.py: PeirceType (6 tipos: DR/DC/IC/IH/AK/AP), RLTNode, ReasoningMapper (100% cobertura dos 12 motores reais), RLTBuilder, RLTValidator (profundidade/fecho/rastreabilidade), RLTVisualizer (dict+Mermaid)",
+        "Mapeamento motor->Peirce fiel a Secao 5 da SPEC-057 (kanren->AK, critical->AP, z3->DR)",
+        "21 testes em tests/test_r114_arche_rlt.py incluindo integracao real com MultiReasoningEngine.ensemble()"
+      ],
+      "score": 9.1,
+      "lessons": [
+        "Antes de inventar uma alegacao como jargao vazio, vale checar se ja existe uma spec legada rigorosa nunca codificada — SPEC-057 ja tinha tudo definido, so faltava implementar"
+      ],
+      "timestamp": 1783706343.60538
+    },
+    {
+      "round_id": "R115",
+      "objective": "R115: Revisao as cegas real (double-blind) no R103 — substitui revisao cega apenas nominal por anonimizacao real + deteccao de vazamento + conflito de interesse",
+      "changes": [
+        "agentic_science_v2/blind_review.py: BlindReviewAnonymizer (redige nome/afiliacao do titulo/abstract/secoes ANTES dos criticos verem), detect_leaks() pos-hoc, check_conflict_of_interest()",
+        "OrchestratorReviewer.review() aceita author_names/author_affiliations/reviewer_affiliations; export_gate_passed agora tambem exige blind_review.passed",
+        "ReviewPackage.blind_review novo campo (applied, redactions_made, leaks_detected, conflicts_of_interest, passed)",
+        "17 testes em tests/test_r115_blind_review.py, incluindo nao-regressao para chamadas sem info de autor"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Adicionar um campo opcional que so muda comportamento quando o chamador fornece dados novos (author_names) e a forma mais segura de estender um contrato ja usado por outros ciclos (R108) sem quebrar nada"
+      ],
+      "timestamp": 1783706343.6053805
     }
   ]
 }
