@@ -15,9 +15,12 @@ Pipeline: analyze → map → propose → apply → verify → report
 import copy
 import difflib
 import json
+import logging
 import re
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional, Tuple
+
+logger = logging.getLogger(__name__)
 
 
 # ── Data Classes ─────────────────────────────────────────────────────
@@ -476,7 +479,27 @@ class OrchestratorRevision:
 
     def run(self, review_package: Dict[str, Any],
             manuscript: str) -> Dict[str, Any]:
-        """Pipeline completo: analyze → map → propose → apply → verify → report."""
+        """Pipeline completo: analyze → map → propose → apply → verify → report.
+
+        Excecoes sao capturadas e retornadas como resultado estruturado
+        (``status: "error"``) em vez de propagar o crash para o chamador.
+        """
+        try:
+            return self._run(review_package, manuscript)
+        except Exception as exc:
+            logger.exception("Falha no pipeline de revisao de manuscrito: %s", exc)
+            return {
+                "status": "error",
+                "stage": "revision_agent.run",
+                "error": str(exc),
+                "revisions": [],
+                "diff": "",
+                "rebuttal_letter": "",
+                "integrity": {"intact": False, "issues": [f"pipeline error: {exc}"]},
+            }
+
+    def _run(self, review_package: Dict[str, Any],
+             manuscript: str) -> Dict[str, Any]:
         # 1. Analyze
         claims = self.analyzer.extract_claims(review_package)
         actions = self.analyzer.extract_actions(review_package)
@@ -505,8 +528,22 @@ class OrchestratorRevision:
             )
             revision_states.append(state)
 
-        # 5. Verify
+        # 5. Verify — reverte automaticamente se a integridade estrutural falhar
         integrity = self.diff_engine.verify_integrity()
+        if not integrity["intact"]:
+            logger.warning(
+                "Integridade do manuscrito comprometida (%s); revertendo todas as mudancas.",
+                integrity["issues"],
+            )
+            reverted = 0
+            while self.diff_engine.rollback_last():
+                reverted += 1
+            for state in revision_states:
+                if state.status == "applied":
+                    state.status = "rejected"
+            integrity = self.diff_engine.verify_integrity()
+            integrity["auto_rolled_back"] = True
+            integrity["reverted_changes"] = reverted
 
         # 6. Report
         report = RevisionReport(

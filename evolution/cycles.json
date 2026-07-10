@@ -1455,6 +1455,29 @@
         "Testes de integração de helper são essenciais para detectar erros reais que testes textuais não capturam"
       ],
       "timestamp": 1783569600.0
+    },
+    {
+      "round_id": "R108",
+      "objective": "R108: Fusao do pipeline cientifico R101-R105 no orquestrador MarceloClaro — gate real, calibracao Brier/ECE, avaliacao SPEC-920 sobre tracos reais",
+      "changes": [
+        "Novo metodo MarceloClaroOrchestrator.scientific_discovery_pipeline() funde R101-R105 nativamente",
+        "ReviewPackage.to_revision_contract() resolve o contrato R103->R104d na origem (agentic_science_v2/review_agent.py)",
+        "Gate real: strict_gates para o pipeline antes de R104d/R105 quando R103 reprova export_gate_passed",
+        "Calibracao real de confianca (Brier/ECE) via mci/confidence_calibrator.py em cada estagio",
+        "Avaliacao metacognitiva SPEC-920 (mci/metacognitive_evaluator.py) sobre tracos reais do run, nao mais so o benchmark sintetico",
+        "Tratamento de erro estruturado + rollback automatico de integridade em agentic_science_v2/revision_agent.py",
+        "Corrigido bug pre-existente em paper_composer.py:write_introduction (slice sobre dict de entidades)",
+        "webapp/pipeline_helpers.py::run_full_academic_pipeline agora delega ao orquestrador, preservando o contrato de UI",
+        "Corrigido bug critico de perda de dados em evolution/cycles.py:EvolutionRegistry._load() (uma unica entrada com chave extra zerava todo o historico de 65 ciclos)",
+        "Adicionados 10 testes de integracao em tests/test_r108_marceloclaro_scientific_fusion.py"
+      ],
+      "score": 9.3,
+      "lessons": [
+        "agentic_science_v2 vivia isolado do MCI ha varios ciclos — dois orquestradores supremos paralelos sem se tocar e facil de nao perceber sem auditoria explicita",
+        "Calibracao generica (calibrate_confidence) precisa de um sinal adversarial explicito para alcancar o limiar de abstencao; reproducibility_score sozinho tem piso de 0.30",
+        "EvolutionRegistry._load() falhava silenciosamente (except TypeError: self.cycles = []) quando uma unica entrada tinha chave extra — qualquer record() subsequente sobrescrevia o historico inteiro; corrigido para filtrar chaves desconhecidas por entrada em vez de descartar tudo"
+      ],
+      "timestamp": 1783700869.9980032
     }
   ]
 }

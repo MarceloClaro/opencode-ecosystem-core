@@ -244,6 +244,28 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R105 | Paper Composer | 8 CA |
 | SPEC-935-R106 | CI/CD Pipeline | 7 CA |
 | SPEC-935-R107 | Auditoria Sistêmica + Hardening | 9 CA |
+| SPEC-935-R108 | Fusão do Pipeline Científico no Orquestrador MarceloClaro | 10 CA |
+
+---
+
+## Fusão do Pipeline Científico no Orquestrador (R108)
+
+A partir do R108, `MarceloClaroOrchestrator.scientific_discovery_pipeline()`
+executa o pipeline R101→R102→R103→R104d→R105 nativamente — a conexão
+`Orchestrator -->|5. Pipeline Academico| EvoSci` no diagrama acima deixou de
+ser apenas aspiracional. O pipeline agora passa por:
+
+- **Gate real** entre R103 e R104d/R105 (`export_gate_passed`), com parada
+  efetiva do pipeline em vez de continuação cega
+- **Calibração de confiança** (Brier Score) via `mci/confidence_calibrator.py`
+  em cada estágio
+- **Avaliação metacognitiva SPEC-920** sobre os traços reais de cada run
+  (`mci/metacognitive_evaluator.py`), não apenas o benchmark sintético estático
+- Eventos publicados no MetaBus e aprendizado no Trust Engine por estágio
+
+`webapp/pipeline_helpers.py::run_full_academic_pipeline` delega a esse método
+em vez de encadear os 5 estágios manualmente na camada de UI. Ver
+`specs/SPEC-935-R108.md`.
 
 ---
 
@@ -251,8 +273,8 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 
 | Métrica | v2.5.0 | v3.0.0 (atual) |
 |---|---|---|
-| Testes | 617 | **1062** |
-| Ciclos de evolução | 49 | **65** |
+| Testes | 617 | **1117** |
+| Ciclos de evolução | 49 | **66** |
 | MCP Tools | 8 | **14** |
 | Agentes | 156 | **160+** |
 | Score médio | — | **9.4/10** |
