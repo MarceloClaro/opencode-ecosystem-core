@@ -46,8 +46,63 @@ DEFAULT_OUTPUT_ROOT = os.path.join(_ROOT, "producao_cientifica")
 # ── Atalho na Área de Trabalho ──────────────────────────────────────────
 import platform as _platform
 
+def _is_wsl() -> bool:
+    """Detecta se o processo roda dentro do WSL (Windows Subsystem for Linux)."""
+    if os.environ.get("WSL_DISTRO_NAME"):
+        return True
+    try:
+        with open("/proc/version", "r", encoding="utf-8", errors="ignore") as f:
+            return "microsoft" in f.read().lower()
+    except OSError:
+        return False
+
+
+def _detect_windows_desktop_from_wsl() -> Optional[str]:
+    """Localiza a Área de Trabalho do Windows real a partir do WSL
+    (``/mnt/c/Users/<usuario>/Desktop``), sem hardcodar nenhum usuário."""
+    candidates: List[str] = []
+    winuser = ""
+    try:
+        # cmd.exe pode responder em code page do Windows (nao UTF-8,
+        # dependendo do locale) — captura bytes crus e decodifica com
+        # fallback, em vez de deixar o UnicodeDecodeError propagar.
+        result = subprocess.run(
+            ["cmd.exe", "/c", "echo %USERNAME%"],
+            capture_output=True, timeout=5,
+        )
+        for encoding in ("utf-8", "cp850", "cp1252"):
+            try:
+                winuser = result.stdout.decode(encoding).strip()
+                break
+            except UnicodeDecodeError:
+                continue
+        else:
+            winuser = result.stdout.decode("utf-8", errors="replace").strip()
+    except (OSError, subprocess.TimeoutExpired):
+        winuser = ""
+    if winuser:
+        candidates.append(f"/mnt/c/Users/{winuser}/Desktop")
+        candidates.append(f"/mnt/c/Users/{winuser}/Área de Trabalho")
+
+    users_dir = "/mnt/c/Users"
+    skip = {"Public", "Default", "Default User", "All Users"}
+    if os.path.isdir(users_dir):
+        for entry in sorted(os.listdir(users_dir)):
+            if entry in skip:
+                continue
+            for sub in ("Desktop", "Área de Trabalho"):
+                path = os.path.join(users_dir, entry, sub)
+                if os.path.isdir(path):
+                    candidates.append(path)
+
+    for candidate in candidates:
+        if os.path.isdir(candidate):
+            return candidate
+    return None
+
+
 def _detect_desktop_path() -> str:
-    """Detecta o caminho da Área de Trabalho (Windows/Linux/macOS)."""
+    """Detecta o caminho da Área de Trabalho (Windows/Linux/macOS/WSL)."""
     system = _platform.system()
 
     if system == "Windows":
@@ -59,7 +114,14 @@ def _detect_desktop_path() -> str:
             os.path.join(userprofile, "Área de Trabalho"),
         ]
     else:
-        # Linux/macOS
+        # WSL: a "Área de Trabalho" que o usuário realmente ve e a do
+        # Windows (/mnt/c/Users/<usuario>/Desktop), nao a do filesystem
+        # Linux interno do WSL.
+        if _is_wsl():
+            windows_desktop = _detect_windows_desktop_from_wsl()
+            if windows_desktop:
+                return windows_desktop
+        # Linux nativo/macOS
         home = os.path.expanduser("~")
         candidates = [
             os.path.join(home, "Desktop"),

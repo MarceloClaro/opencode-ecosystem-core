@@ -1591,6 +1591,34 @@
         "Adicionar um campo opcional que so muda comportamento quando o chamador fornece dados novos (author_names) e a forma mais segura de estender um contrato ja usado por outros ciclos (R108) sem quebrar nada"
       ],
       "timestamp": 1783706343.6053805
+    },
+    {
+      "round_id": "R116",
+      "objective": "R116: Instalacao multiplataforma (Windows/Linux/macOS), icone proprio, Claude Code CLI como opcao de primeira classe, e manual/helpdesk do marceloclaro",
+      "changes": [
+        "Corrigido AntigravityBridge: binario real e agy, nao antigravity (integracao nunca detectava disponibilidade)",
+        "Adicionada classe OpenCodeCLIIntegration em integrations/opencode_cli.py (provision.sh ja chamava essa API, que nao existia — falha silenciosa na regeneracao do opencode.json)",
+        "Criado AGENTS.md na raiz (referenciado por opencode.json.instructions, mas ausente)",
+        "Corrigido path hardcoded /mnt/c/Users/marce/Desktop em build_livro_tritemo.py — agora usa deteccao dinamica (_detect_desktop_path), incluindo deteccao real de usuario Windows a partir do WSL",
+        "Corrigido bug de extracao de descricao no catalogo de agentes: 75/160 agentes tinham descricao truncada em <!-- (comentario HTML antes do frontmatter quebrava o parser)",
+        "assets/generate_icon.py: icone proprio gerado por script (Pillow), sem depender de arte externa — icon.png/icon.ico + iconset para macOS",
+        "installer/common/install_clis.sh: logica compartilhada de instalacao de OpenCode/Antigravity/Claude Code/Ollama, reutilizada por Windows (WSL)/Linux/macOS",
+        "Claude Code CLI adicionado como CLI de primeira classe: instalacao via npm, atalho de desktop no Windows, check em doctor(), CLAUDE.md reescrito como manual real",
+        "installer/linux/install.sh (nativo, sem WSL) e installer/macos/install.sh (best-effort) criados",
+        "Desinstaladores para as 3 plataformas com confirmacao explicita (CONFIRMO) antes de acoes destrutivas (remover distro WSL, desativar WSL, remover CLIs compartilhadas, apagar repositorio)",
+        "MANUAL.md (linguagem simples) e marceloclaro/helpdesk.py (doctor + sugestoes) criados; marceloclaro/cli.py ganhou itens [7] Ajuda/[8] Helpdesk",
+        "doctor() ganhou check external_clis (opencode/agy/claude/ollama, sempre warn nunca fail)",
+        "README.md: corrigido link quebrado Guia Manual (apontava para ARCHITECTURE.md sem secao de instalacao)",
+        "Adicionados 32 testes de integracao em tests/test_r116_installer_platform_upgrade.py"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "Uma classe referenciada por um script (provision.sh) mas nunca criada e um tipo de bug silencioso dificil de notar sem rodar o script fim-a-fim — vale grep por chamadas a classes/funcoes antes de assumir que existem",
+        "75/160 (quase metade) das descricoes do catalogo de agentes estavam quebradas por um bug de parsing simples (comentario HTML antes do frontmatter) — vale auditar dados gerados, nao so o codigo que os gera",
+        "Path hardcoded a um usuario especifico (/mnt/c/Users/marce/...) e um antipadrao recorrente neste projeto (ja visto antes) — deteccao dinamica de Area de Trabalho via WSL/cmd.exe tem sua propria armadilha de encoding (code page do Windows, nao UTF-8)",
+        "Desinstaladores sao parte responsavel de qualquer instalador — confirmacao explicita para acoes destrutivas (remover WSL inteiro) evita desastres irreversiveis"
+      ],
+      "timestamp": 1783720266.1112802
     }
   ]
 }

@@ -5,9 +5,10 @@
 #   1. Instala o WSL2 + Ubuntu (se ausente), com retomada automática pós-reboot
 #   2. Provisiona o Ubuntu: OpenCode CLI, Antigravity CLI, Ollama CLI
 #   3. Instala o opencode-ecosystem-core (nativo no OpenCode CLI)
-#   4. Cria atalhos na Área de Trabalho (1 clique):
+#   4. Cria atalhos na Área de Trabalho (1 clique), com ícone próprio:
 #        - "OpenCode Ecosystem"       -> abre o OpenCode CLI dentro do ecossistema
 #        - "Antigravity CLI"          -> abre o agy dentro do ecossistema
+#        - "Claude Code (Ecosystem)"  -> abre o Claude Code dentro do ecossistema
 #        - "Ecosystem (marceloclaro)" -> abre o CLI nativo do orquestrador
 #
 # Como executar (PowerShell COMO ADMINISTRADOR):
@@ -240,6 +241,19 @@ $Desktop = [Environment]::GetFolderPath('Desktop')
 $WShell  = New-Object -ComObject WScript.Shell
 $EcoDir  = "/home/$wslUser/opencode-ecosystem-core"
 
+# Icone proprio do projeto (assets/icon.ico, gerado por
+# assets/generate_icon.py), acessado via o provedor de rede \\wsl.localhost
+# que o Explorer do Windows usa para arquivos dentro do WSL.
+$IconPath = "\\wsl.localhost\$Distro\home\$wslUser\opencode-ecosystem-core\assets\icon.ico"
+if (-not (Test-Path $IconPath)) {
+    # Fallback (builds mais antigos do Windows usam \\wsl$ em vez de \\wsl.localhost)
+    $IconPath = "\\wsl`$\$Distro\home\$wslUser\opencode-ecosystem-core\assets\icon.ico"
+}
+if (-not (Test-Path $IconPath)) {
+    Write-Warn2 "Icone proprio nao encontrado; usando icone padrao do sistema."
+    $IconPath = "$env:SystemRoot\System32\wsl.exe,0"
+}
+
 function New-EcoShortcut {
     param([string]$Name, [string]$Arguments, [string]$Description, [string]$IconLocation)
     $lnkPath = Join-Path $Desktop "$Name.lnk"
@@ -255,18 +269,23 @@ function New-EcoShortcut {
 
 New-EcoShortcut -Name 'OpenCode Ecosystem' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"opencode`"" `
-    -Description 'OpenCode CLI com o OpenCode Ecosystem Core nativo (134 agentes + MCP)' `
-    -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
+    -Description 'OpenCode CLI com o OpenCode Ecosystem Core nativo (160+ agentes + MCP)' `
+    -IconLocation $IconPath
 
 New-EcoShortcut -Name 'Antigravity CLI' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"agy`"" `
     -Description 'Google Antigravity CLI no diretorio do ecossistema' `
-    -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
+    -IconLocation $IconPath
+
+New-EcoShortcut -Name 'Claude Code (Ecosystem)' `
+    -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"claude`"" `
+    -Description 'Claude Code CLI no diretorio do ecossistema (le AGENTS.md/CLAUDE.md automaticamente)' `
+    -IconLocation $IconPath
 
 New-EcoShortcut -Name 'Ecosystem (marceloclaro)' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"python3 -m marceloclaro.cli`"" `
-    -Description 'CLI interativo do orquestrador metacognitivo marceloclaro' `
-    -IconLocation "$env:SystemRoot\System32\cmd.exe,0"
+    -Description 'CLI interativo do orquestrador metacognitivo marceloclaro (manual + helpdesk: opcao [7]/[8])' `
+    -IconLocation $IconPath
 
 # ----------------------------------------------------------------------------
 # 5. Resumo final
@@ -277,15 +296,17 @@ Write-Host @"
 ===================================================================
   INSTALACAO CONCLUIDA
 ===================================================================
-  Atalhos criados na Area de Trabalho:
+  Atalhos criados na Area de Trabalho (com icone proprio):
     [1] OpenCode Ecosystem        -> OpenCode CLI + ecossistema nativo
     [2] Antigravity CLI           -> Google Antigravity (agy)
-    [3] Ecosystem (marceloclaro)  -> CLI do orquestrador metacognitivo
+    [3] Claude Code (Ecosystem)   -> Claude Code CLI no diretorio do ecossistema
+    [4] Ecosystem (marceloclaro)  -> CLI do orquestrador (manual [7] + helpdesk [8])
 
   Observacoes:
-    - No primeiro uso do OpenCode/Antigravity, faca login quando solicitado.
+    - No primeiro uso do OpenCode/Antigravity/Claude Code, faca login quando solicitado.
     - Para modelos locais gratuitos:  wsl -d Ubuntu -- ollama pull llama3.2
     - Log de provisionamento: ~/.opencode-ecosystem-install.log (no Ubuntu)
     - Para atualizar tudo no futuro, execute novamente este instalador.
+    - Para desinstalar, veja Uninstall-OpenCodeEcosystem.ps1 (installer/windows/).
 ===================================================================
 "@ -ForegroundColor Green

@@ -48,13 +48,13 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 
 ##  Instalação: 1-Click no Windows
 
-Se você usa Windows 10/11, o instalador configura WSL2, Ubuntu, Ollama e o ecossistema:
+Se você usa Windows 10/11, o instalador configura WSL2, Ubuntu, OpenCode CLI, Antigravity CLI, Claude Code CLI, Ollama e o ecossistema — com ícone próprio e atalhos na Área de Trabalho:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/installer/windows/Install-OpenCodeEcosystem.ps1 | iex
 ```
 
-*(Para Linux/macOS, veja o [Guia Manual](ARCHITECTURE.md))*
+*(Para Linux nativo e macOS, veja o [Guia de Instalação](installer/README.md). Manual de uso: [`MANUAL.md`](MANUAL.md).)*
 
 ---
 

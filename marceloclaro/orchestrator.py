@@ -37,6 +37,7 @@ from sdd.spec_engine import spec_registry, spec_verifier
 from sdd.tdd_runner import tdd_runner, run_pytest
 from sdd.loop_spec import LoopSpecification, loop_spec_registry, is_stagnant
 from marceloclaro.doctor import run_doctor
+from marceloclaro.helpdesk import run_helpdesk
 from marceloclaro.inspiration_audit import audit_inspirations as run_inspiration_audit
 from trust import create_trust_engine
 from economy import TokenEconomy
@@ -996,6 +997,21 @@ class MarceloClaroOrchestrator:
                 f"Doctor: {report['overall']} — {report['checks_passed']} ok, "
                 f"{report['checks_warned']} avisos, {report['checks_failed']} falhas."
             ),
+            score={"healthy": 1.0, "degraded": 0.6, "unhealthy": 0.1}.get(report["overall"], 0.5),
+        )
+        return report
+
+    def helpdesk(self) -> Dict[str, Any]:
+        """
+        Diagnóstico guiado: roda ``doctor()`` e traduz cada pendência em
+        uma sugestão de correção em linguagem simples — para quem não
+        conhece o jargão interno do ecossistema. Ver ``MANUAL.md``.
+        """
+        report = run_helpdesk()
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="helpdesk (diagnóstico guiado)",
+            reflection=report["summary"],
             score={"healthy": 1.0, "degraded": 0.6, "unhealthy": 0.1}.get(report["overall"], 0.5),
         )
         return report
