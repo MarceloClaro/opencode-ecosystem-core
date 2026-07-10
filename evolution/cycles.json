@@ -1478,6 +1478,28 @@
         "EvolutionRegistry._load() falhava silenciosamente (except TypeError: self.cycles = []) quando uma unica entrada tinha chave extra — qualquer record() subsequente sobrescrevia o historico inteiro; corrigido para filtrar chaves desconhecidas por entrada em vez de descartar tudo"
       ],
       "timestamp": 1783700869.9980032
+    },
+    {
+      "round_id": "R109",
+      "objective": "R109: Loop Engineering formal no SDD (sdd/loop_spec.py) + scientific_discovery_pipeline transformado em loop real com deteccao de estagnacao e estados terminais nomeados",
+      "changes": [
+        "Novo modulo sdd/loop_spec.py: LoopSpecification (trigger, goal, verificacao em escada 5-niveis, arquitetura, estados terminais, estagnacao, memoria) inspirado em Macedo (2026) arXiv:2607.00038",
+        "LoopSpecification.validate() aplica checklist de boa-formacao: golden rule do trigger, maker-checker obrigatorio para verificador nivel>=4, estados terminais nomeados, orcamento e estagnacao configurados, memoria declarada",
+        "is_stagnant() generico replicando o formato de EvoEngine.is_stagnant (max-min de uma janela abaixo de um limiar)",
+        "LoopSpecRegistry (singleton) registra e valida loop specs, publicando no MetaBus",
+        "MarceloClaroOrchestrator.run_scientific_discovery_loop(): transforma scientific_discovery_pipeline (R108) em loop real repetido ate 5 estados terminais nomeados (success/no_op/blocked/stalled/exhausted/error)",
+        "Cada iteracao escala max_rounds do EvoSci (+1) — feedback real entre voltas, nao repeticao identica",
+        "MarceloClaroOrchestrator.describe_scientific_loop() expoe a LoopSpecification registrada",
+        "specs/loops/scientific-discovery-loop.md gerado como artefato legivel (documento formal do loop)",
+        "Adicionados 19 testes de integracao em tests/test_r109_loop_engineering.py"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "R108 tinha gate/calibracao/avaliacao mas era execucao unica — faltava a repeticao ate estado terminal que o loop engineering exige como anatomia completa",
+        "Escada de verificacao honesta (nivel 1-5) e util mesmo sem juiz de modelo: declarar explicitamente que o pipeline cientifico opera na zona autonoma (niveis 1-2) evita a tentacao de inflar a confianca do sistema",
+        "Detector de estagnacao evita queimar o teto de orcamento quando o resultado ja parou de melhorar — em testes reais (sem mock) o readiness_score convergiu e a estagnacao disparou organicamente antes do teto de 6 iteracoes"
+      ],
+      "timestamp": 1783702916.8648555
     }
   ]
 }

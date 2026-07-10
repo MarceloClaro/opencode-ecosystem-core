@@ -245,6 +245,7 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R106 | CI/CD Pipeline | 7 CA |
 | SPEC-935-R107 | Auditoria Sistêmica + Hardening | 9 CA |
 | SPEC-935-R108 | Fusão do Pipeline Científico no Orquestrador MarceloClaro | 10 CA |
+| SPEC-935-R109 | Loop Engineering: Loop Real + Especificação Formal no SDD | 7 CA |
 
 ---
 
@@ -269,12 +270,33 @@ em vez de encadear os 5 estágios manualmente na camada de UI. Ver
 
 ---
 
+## Loop Engineering (R109)
+
+Inspirado em Macedo (2026, arXiv:2607.00038), `sdd/loop_spec.py` formaliza
+o conceito de **loop specification** — distinto de uma `Specification` de
+entrega única do SDD — como um artefato com trigger justificado, objetivo
+verificável, verificação em escada de 5 níveis, arquitetura,
+estados terminais nomeados, detector de estagnação e memória persistente.
+
+`MarceloClaroOrchestrator.run_scientific_discovery_loop()` é o primeiro
+loop real do ecossistema sob essa disciplina: repete
+`scientific_discovery_pipeline` (R108) até um de cinco estados terminais
+nomeados (`success`, `no_op`, `blocked`, `stalled`, `exhausted`, `error`),
+nunca confundindo erro ou esgotamento de orçamento com sucesso, e para
+antecipadamente por estagnação do `readiness_score` (SPEC-920) quando o
+resultado para de melhorar. O trigger permanece manual (o ecossistema não
+tem scheduler); a verificação (gate do R103) opera inteiramente na zona
+autônoma da escada (nível 1, determinística), sem juiz de modelo
+envolvido. Ver `specs/SPEC-935-R109.md` e `specs/loops/scientific-discovery-loop.md`.
+
+---
+
 ## Métricas de Maturidade
 
 | Métrica | v2.5.0 | v3.0.0 (atual) |
 |---|---|---|
-| Testes | 617 | **1117** |
-| Ciclos de evolução | 49 | **66** |
+| Testes | 617 | **1136** |
+| Ciclos de evolução | 49 | **67** |
 | MCP Tools | 8 | **14** |
 | Agentes | 156 | **160+** |
 | Score médio | — | **9.4/10** |
