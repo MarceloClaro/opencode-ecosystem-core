@@ -87,7 +87,7 @@ Este ecossistema tem dezenas de subsistemas reais. Para não virar um emaranhado
 | **3. MCI — Sistema Nervoso** | ciano | A memória e os instintos compartilhados de tudo | MetaBus, Blackboard, Reflexion, ConfidenceCalibrator, MetacognitiveEvaluator (SPEC-920), OQS/VSEE/EGS |
 | **4. Pipeline Científico** | coral | A linha de produção de um artigo científico, do zero à publicação | EvoSci→DeepRes→PeerReview(+BlindReview R115)→Revision→Composer, fundidos e em loop real (R108/R109) |
 | **5. Raciocínio & Descoberta** | lilás | As diferentes formas de "pensar" do sistema | 12 motores + ARCHE RLT (R114) + Detector de Falácias (R113), Game Theory, MiroFish, MASWOS, Legal, RAG, Synthetic University |
-| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing (+templates literários R119, +capa/contracapa TikZ R124), Research Hub (+PubMed/bioRxiv/CORE R111, CLI `pesquisa` R120), Illustrations + Apresentações MIRA (deck animado R123, CLI `apresentacao` R125), MCP Security (R118), CI/CD (R121), Evolution Registry (83 ciclos), 44 Specs SDD |
+| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing (+templates literários R119, +capa/contracapa TikZ R124), Research Hub (+PubMed/bioRxiv/CORE R111, CLI `pesquisa` R120), Illustrations + Apresentações MIRA (deck animado R123, CLI `apresentacao` R125, agente delegável `mira-presenter` R126), MCP Security (R118), CI/CD (R121), Evolution Registry (85 ciclos), 46 Specs SDD |
 
 ### Instruções de leitura
 
@@ -262,7 +262,9 @@ graph TD
         ResearchHub["Research Hub<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
         Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)<br>+Capa/contracapa TikZ (R124)"]
         MiraDeck["Apresentações MIRA<br>artigo → deck animado (R123)<br>CLI: marceloclaro apresentacao (R125)"]
+        MiraAgent["Agente mira-presenter<br>executor delegável no Blackboard (R126)<br>present_task: delega+executa+reporta"]
     end
+    MiraAgent -.->|"encarna o pipeline"| MiraDeck
 
     %% Seguranca e Qualidade
     subgraph SQC [Seguranca & Qualidade]
@@ -430,6 +432,68 @@ graph TD
 | Vermelho | **Segurança e qualidade** — proteção, validação, CI/CD |
 | Roxo | **Protocolos de integração** — MCP, API Gateway |
 | Cinza | **Metacognição** — barramento neural, memória, reflexão |
+
+---
+
+### Legenda do Subsistema de Apresentações MIRA (R123–R126)
+
+O MIRA (*Metáforas Inteligentes Responsivas e Animadas*) é a peça que
+transforma um artigo/manuscrito numa **apresentação científica animada**.
+Ele vive na Camada 6 e tem quatro elementos com papéis distintos —
+abaixo, a **função de cada um** em dupla-registro.
+
+| Elemento | Para Leigos (o que é) | Para PhDs (o que faz) | Arquivo |
+|---|---|---|---|
+| **`MiraEngine`** | O ilustrador: desenha um "cartaz animado" para um conceito isolado (uma metáfora visual que se move em loop). | Gera cards HTML autocontidos (SVG + CSS `@keyframes infinite`); `pick_metaphor()` casa a dinâmica do conceito com uma cena do cotidiano do catálogo de metáforas. | `illustrations/mira_engine.py` |
+| **`MiraDeckPipeline`** | A linha de montagem: pega o texto inteiro e monta a apresentação slide a slide, do começo ao fim. | Esteira de 6 estágios com fronteiras limpas (cada posto é chamável isolado); produz um `deck.html` navegável de cards de vidro + `CONFORMIDADE.md`. | `illustrations/mira_deck.py` |
+| **`MiraPresentationAgent`** (`mira-presenter`) | O funcionário que opera a linha de montagem quando o "chefe" (orquestrador) delega o trabalho. | Agente-executor registrado no Blackboard com capacidade distintiva `apresentacao-mira`; encarna o pipeline e é delegável, sujeito a Trust Engine e Token Economy. | `illustrations/mira_agent.py` |
+| **`present()` × `present_task()`** | Dois botões: um roda a apresentação direto; o outro passa pelo "sistema de gestão" que registra quem fez e se deu certo. | `present()` = via direta (chamada de biblioteca, usada pelo CLI); `present_task()` = via delegada (posta no Blackboard, matching por atenção, `report_completion` alimenta confiança/economia). | `marceloclaro/orchestrator.py` |
+
+**Regras do método (a "alma" do MIRA), portadas do livro e do
+`sandeco/mira-animator`:**
+
+- **Regra Zero:** nenhum slide é estático — todo card entra com
+  coreografia e segue em movimento perpétuo (`infinite`). *Para o leigo:*
+  slide parado é defeito, não estilo. *Para o PhD:* invariante verificada
+  pelo estágio `validate` (presença de `@keyframes` de entrada + ao menos
+  um loop `infinite`).
+- **Título ≤ 6 palavras, sem ícone.** *Leigo:* uma ideia por tela, título
+  curto. *PhD:* clipping determinístico no estágio `copywrite`, checado no
+  `validate`.
+- **Formato do card acompanha o formato da ideia:** citação→card de
+  citação, código→card de código, itens paralelos→grade, conceito→metáfora
+  animada.
+
+---
+
+### Como Funciona a Apresentação MIRA (a linha de montagem de 6 estágios)
+
+Assim como a orquestração tem 7 passos, a geração de uma apresentação
+tem **6 estágios** com entrada/saída limpas — "a esteira para nas
+juntas" (consertar a peça, não a fábrica). Chamar
+`marceloclaro apresentacao <pasta>` (ou delegar via `present_task`) roda
+a esteira inteira sobre o `manuscrito.md` da produção.
+
+| # | Estágio | Para Leigos | Para PhDs |
+|---|---|---|---|
+| 1 | **`extract`** | Lê o texto e separa cada seção, anotando o que tem citação, código ou lista. | `Briefing` = 1 `Section` por `##`; detecta blocos `>` (citação), ``` ``` ``` (código) e listas (itens paralelos). |
+| 2 | **`plan`** | Decide a sequência de slides: capa, um por seção, encerramento — e que "tipo" cada slide terá. | `SlidePlan`: capa + 1 slide/seção (tipo inferido: `quote`/`code`/`grid`/`concept`) + encerramento; `concept` recebe a chave da metáfora. |
+| 3 | **`copywrite`** | Enxuga os títulos (no máximo 6 palavras) e escreve os subtítulos. | Clipping de título a `MAX_TITLE_WORDS=6`; subtítulos derivados dos pontos-chave (heurístico; LLM opcional em ciclo futuro). |
+| 4 | **`build`** | Monta os slides como "cartões de vidro" translúcidos, com botões e navegação por setas. | HTML único autocontido; cards com `backdrop-filter`; navegação card-a-card (teclado + botões). **Ainda sem animação** (fronteira verificável). |
+| 5 | **`animate`** | Dá vida a tudo: cada card entra com movimento e nunca fica parado; conceitos ganham sua cena animada. | Aplica a Regra Zero (entrada + loop `infinite` por card) e injeta o SVG da metáfora nos cards `concept`. |
+| 6 | **`validate`** | O inspetor final: confere se todos os slides se movem, se os títulos são curtos, se a navegação existe. | `ConformityReport`: checa Regra Zero, títulos ≤6 palavras, navegação, autocontenção; grava `CONFORMIDADE.md`. |
+
+**Exemplo prático:** um `manuscrito.md` com uma seção de citação, uma de
+código e uma lista de aplicações vira um `deck.html` com: capa animada →
+card de citação → card de código → grade de aplicações → encerramento —
+todos em loop perpétuo, navegáveis com as setas do teclado. O
+`CONFORMIDADE.md` ao lado atesta que a Regra Zero foi cumprida.
+
+**Onde isso encaixa na arquitetura:** o estágio `validate` é o análogo,
+no MIRA, do passo *Verificar* da orquestração; e `present_task()` faz a
+apresentação percorrer o mesmo governo (confiança, economia, reflexão)
+das demais tarefas do ecossistema — é por isso que o `mira-presenter`
+aparece na lista de agentes do Blackboard.
 
 ---
 
@@ -747,7 +811,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **83 ciclos registrados** (R47 a R125), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **85 ciclos registrados** (R47 a R127), cada um com score, lições e timestamp.
 
 ---
 
@@ -1065,7 +1129,7 @@ print(result["theses"][0])             # Melhor tese do ciclo
 print(result["novelty_scores"])        # Scores de novidade
 ```
 
-**Ciclos de evolução: 83** (R47–R125) | **1332 testes** | Score médio: 9.21/10
+**Ciclos de evolução: 85** (R47–R127) | **1351 testes** | Score médio: 9.18/10
 
 > "Score médio" é autoavaliação interna por ciclo, não benchmark externo — ver [`CORRIGENDUM.md`](CORRIGENDUM.md#3-score-médio-94-10-e-ciclos-de-evolução-65-readmemd-architecturemd).
 
@@ -1130,7 +1194,7 @@ opencode-ecosystem-core/
 │   ├── opencode-evosci/
 │   ├── opencode-deep-research/
 │   └── opencode-peer-review/
-├── specs/                   # Especificacoes SDD (R97-R125)
+├── specs/                   # Especificacoes SDD (R97-R127)
 ├── evolution/               # Cycles registry (79 ciclos)
 ├── tests/                   # 1288 testes automatizados
 ├── mci/                     # Metacognitive Interconnect
@@ -1198,7 +1262,7 @@ O ecossistema possui compatibilidade documentada com o fork `timpara/opencode-ac
 ---
 
 <div align="center">
-  <i>83 ciclos evolutivos · 1332 testes · 0 regressoes · Score medio 9.21/10</i><br>
+  <i>85 ciclos evolutivos · 1351 testes · 0 regressoes · Score medio 9.18/10</i><br>
   <b>v3.0.0 — Pipeline Academico Agentivo | MCP Security | CI/CD Quality Gates</b><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>

@@ -86,7 +86,7 @@ graph TD
         SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
         Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)<br>+Capa/contracapa TikZ (R124)"]
         Research["Research<br>Hub c/ OSINT<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
-        Illus["Illustrations<br>Mermaid/MIRA/Graph<br>Apresentações MIRA: deck animado (R123)<br>CLI: marceloclaro apresentacao (R125)"]
+        Illus["Illustrations<br>Mermaid/MIRA/Graph<br>Apresentações MIRA: deck animado (R123)<br>CLI: marceloclaro apresentacao (R125)<br>Agente delegável mira-presenter (R126)"]
         EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
         NoveltyV2["Novelty V2 (R98)<br>ContributionPointExtractor<br>PointwiseLiteratureRetriever<br>PointwiseNoveltyScorer<br>HierarchicalTaxonomyBuilder"]
     end
@@ -287,6 +287,44 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R123 | Pipeline MIRA de Apresentações Científicas (artigo → deck animado) | 10 CA |
 | SPEC-935-R124 | Capa e Contracapa com Arte Vetorial TikZ Real | 9 CA |
 | SPEC-935-R125 | MIRA como parte de primeira classe do ecossistema (CLI + docs) | 8 CA |
+| SPEC-935-R126 | Agente-executor MIRA de runtime (delegável pelo Blackboard) | 8 CA |
+| SPEC-935-R127 | Documentação minuciosa da arquitetura (legendas, elementos e processos, dupla-registro) | 8 CA |
+
+---
+
+## Subsistema de Apresentações MIRA (R123–R126)
+
+O MIRA converte um manuscrito científico numa apresentação HTML animada.
+É composto por quatro elementos com responsabilidades separadas:
+
+| Elemento | Papel | Arquivo |
+|---|---|---|
+| `MiraEngine` | Cards avulsos animados (metáfora por conceito, Regra Zero) | `illustrations/mira_engine.py` |
+| `MiraDeckPipeline` | Esteira de 6 estágios: `extract → plan → copywrite → build → animate → validate` | `illustrations/mira_deck.py` |
+| `MiraPresentationAgent` (`mira-presenter`) | Agente-executor delegável no Blackboard (cap. distintiva `apresentacao-mira`) | `illustrations/mira_agent.py` |
+| `present()` / `present_task()` | Via direta (biblioteca/CLI) × via delegada (runtime governado) | `marceloclaro/orchestrator.py` |
+
+**Processo (6 estágios, fronteiras limpas — "a esteira para nas juntas"):**
+
+1. **`extract`** — parseia o `manuscrito.md`: 1 `Section` por `##`,
+   detectando citações (`>`), blocos de código e listas.
+2. **`plan`** — monta o `SlidePlan`: capa + 1 slide/seção (tipo inferido:
+   `quote`/`code`/`grid`/`concept`) + encerramento.
+3. **`copywrite`** — clipa títulos a ≤6 palavras; deriva subtítulos.
+4. **`build`** — HTML autocontido de cards de vidro (`backdrop-filter`) +
+   navegação card-a-card, ainda **sem** animação (fronteira verificável).
+5. **`animate`** — Regra Zero: coreografia de entrada + loop `infinite`
+   por card; injeta o SVG da metáfora nos cards `concept`.
+6. **`validate`** — `ConformityReport` (Regra Zero, títulos, navegação,
+   autocontenção) + `CONFORMIDADE.md`.
+
+**Duas vias de execução coexistem:** `present()` roda a esteira direto
+(chamada de biblioteca, usada pelo CLI `marceloclaro apresentacao`, R125);
+`present_task()` delega a tarefa no Blackboard, deixando o matching por
+atenção escolher o `mira-presenter`, e fecha o laço com `report_completion`
+— de modo que Trust Engine e Token Economy aprendem com o resultado
+(R126). A via delegada é o que torna a apresentação uma tarefa de primeira
+classe do runtime, e não apenas uma função utilitária.
 
 ---
 
