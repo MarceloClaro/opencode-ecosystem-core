@@ -56,6 +56,17 @@ def test_arte_difere_por_estilo(tmp_out):
     assert art(capa_tec) != art(capa_fic)
 
 
+# ── fix: classificação por palavra inteira (não substring "ia") ───
+def test_ficcao_nao_confundida_por_substring_ia(tmp_out):
+    # "colônia"/"história" contêm "ia" como substring — não devem
+    # classificar um romance como tecnologia (matching por \b agora)
+    designer = CoverDesigner(tmp_out)
+    rep = designer.design_cover(
+        "O Diário da Colônia", "Autor",
+        "terror psicológico e drama histórico numa colônia isolada")
+    assert rep["style"] == "ficcao"
+
+
 # ── CA-3: lombada dimensionada pela contagem de páginas ───────────
 def test_lombada_gerada(tmp_out):
     designer = CoverDesigner(tmp_out)
