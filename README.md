@@ -7,14 +7,14 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.0.0_Agentic_Pipeline-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-1062_passed-success.svg)](tests/)
-[![Universidade Sintética](https://img.shields.io/badge/Ciclos-65_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Testes](https://img.shields.io/badge/Testes-1288_passed-success.svg)](tests/)
+[![Universidade Sintética](https://img.shields.io/badge/Ciclos-79_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-14_ferramentas-8A2BE2.svg)](synthetic_university/mcp_server.py)
 [![API](https://img.shields.io/badge/API-FastAPI_REST-00BFFF.svg)](synthetic_university/api_gateway.py)
 [![Agentes](https://img.shields.io/badge/Agentes-160+-orange.svg)](agents/catalog/)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 160+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD e a Universidade Sintética Transversal com 65 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 160+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD e a Universidade Sintética Transversal com 79 ciclos de evolução contínua.*
 
 <sub>Ver [`CORRIGENDUM.md`](CORRIGENDUM.md) para ressalvas sobre "160+ agentes" (agent cards elegíveis, não processos de IA sempre ativos) e sobre "Qualis A1" (padrão de rubrica interno, não certificação obtida).</sub>
 
@@ -62,6 +62,11 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 - **MCP Security (R100) + CI/CD (R106):** guard model, audit trail, vetting de comandos, rate limiting; GitHub Actions com lint, matrix test e package build.
 - **Instalação multiplataforma de primeira classe (R116):** Windows (WSL 1-clique + ícone próprio), Linux nativo, macOS best-effort — as 3 CLIs externas (OpenCode, Antigravity, **Claude Code**) instaladas e verificadas por `doctor()`.
 - **Autoauditoria contínua:** `marceloclaro/doctor.py` + `helpdesk.py` (R110) + `CORRIGENDUM.md` — uma prática pública de correção de alegações que a própria documentação já usou em si mesma (ver seção de ressalvas acima).
+- **Mapa interativo 3D da arquitetura (R117):** [`docs/architecture_map.html`](docs/architecture_map.html) — todo subsistema real navegável em 3D, com alternador de leitura Leigo/PhD, mantido em paridade com os dois diagramas Mermaid (README + ARCHITECTURE).
+- **Handshake MCP corrigido (R118):** `mci/mcp_server.py` passou a implementar `initialize`/`ping` e a suprimir resposta a notificações — eliminando a falha real "metacognitive-interconnect failed" relatada por clientes MCP reais (OpenCode CLI, Claude Code, Antigravity).
+- **Templates literários/de ficção (R119):** `templates/books/romance-literario` e `contos-poesia` — primeiros templates de narrativa/ficção do catálogo (os demais "livro" eram todos acadêmicos/técnicos), integrados ao pipeline (`publishing/production.py`) e verificados de ponta a ponta convertendo um romance real via `pdf2latex`.
+- **Pesquisa científica exposta no CLI (R120):** `marceloclaro pesquisa "<tema>"` (e opção `[9]` do menu) — o pipeline de 11 fontes acadêmicas (R111) que só era acessível via Python ganhou comando direto; fallback de download via `scihub-cli` documentado e verificado por `doctor()`.
+- **Isolamento real de testes (R121):** `tests/conftest.py` corrige uma falha intermitente que, por mais de 70 ciclos, corrompia silenciosamente o `confidence_ledger` de produção a cada rodada completa da suíte — causa raiz encontrada e eliminada, não apenas contornada.
 
 ---
 
@@ -80,7 +85,7 @@ Este ecossistema tem dezenas de subsistemas reais. Para não virar um emaranhado
 | **3. MCI — Sistema Nervoso** | ciano | A memória e os instintos compartilhados de tudo | MetaBus, Blackboard, Reflexion, ConfidenceCalibrator, MetacognitiveEvaluator (SPEC-920), OQS/VSEE/EGS |
 | **4. Pipeline Científico** | coral | A linha de produção de um artigo científico, do zero à publicação | EvoSci→DeepRes→PeerReview(+BlindReview R115)→Revision→Composer, fundidos e em loop real (R108/R109) |
 | **5. Raciocínio & Descoberta** | lilás | As diferentes formas de "pensar" do sistema | 12 motores + ARCHE RLT (R114) + Detector de Falácias (R113), Game Theory, MiroFish, MASWOS, Legal, RAG, Synthetic University |
-| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing, Research Hub (+PubMed/bioRxiv/CORE R111, CLI `pesquisa` R120), Illustrations, MCP Security, CI/CD, Evolution Registry (77 ciclos), 35 Specs SDD |
+| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing (+templates literários R119), Research Hub (+PubMed/bioRxiv/CORE R111, CLI `pesquisa` R120), Illustrations, MCP Security (R118), CI/CD (R121), Evolution Registry (79 ciclos), 40 Specs SDD |
 
 ### Instruções de leitura
 
@@ -253,12 +258,13 @@ graph TD
         Novelty[Novelty V2<br>R98 · Contribution Points]
         RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
         ResearchHub["Research Hub<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
+        Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)"]
     end
 
     %% Seguranca e Qualidade
     subgraph SQC [Seguranca & Qualidade]
-        MCPSec[MCP Security R100<br>Guard+Audit+Vetter+Limiter]
-        CICD[CI/CD Pipeline R106<br>GitHub Actions+Quality Gates]
+        MCPSec["MCP Security R100<br>Guard+Audit+Vetter+Limiter<br>Handshake initialize corrigido (R118)"]
+        CICD["CI/CD Pipeline R106<br>GitHub Actions+Quality Gates<br>Isolamento real do MCI em testes (R121)"]
         Skills[Skills Exportaveis R104a<br>4 Skills]
         PipPkg[Pip Packages R104b<br>3 Pacotes]
         DoctorNode["Doctor + Helpdesk (R110)<br>+ CORRIGENDUM.md público"]
@@ -738,7 +744,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **65 ciclos registrados** (R47 a R107), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **79 ciclos registrados** (R47 a R121), cada um com score, lições e timestamp.
 
 ---
 
@@ -1056,7 +1062,7 @@ print(result["theses"][0])             # Melhor tese do ciclo
 print(result["novelty_scores"])        # Scores de novidade
 ```
 
-**Ciclos de evolução: 65** (R47–R107) | **1062 testes** | Score médio: 9.4/10
+**Ciclos de evolução: 79** (R47–R121) | **1288 testes** | Score médio: 9.23/10
 
 > "Score médio" é autoavaliação interna por ciclo, não benchmark externo — ver [`CORRIGENDUM.md`](CORRIGENDUM.md#3-score-médio-94-10-e-ciclos-de-evolução-65-readmemd-architecturemd).
 
@@ -1096,7 +1102,7 @@ opencode-ecosystem-core/
 │   ├── revision_agent.py    # ReviewAnalyzer, SectionMapper, ProposalGenerator, DiffEngine
 │   ├── paper_composer.py    # StructurePlanner, SectionWriter, CitationFormatter, CrossVerifier
 │   └── orchestrator.py      # AgenticScienceV2 orchestrator
-├── synthetic_university/    # SPEC-935 · 11 Faculdades · 65 ciclos
+├── synthetic_university/    # SPEC-935 · 11 Faculdades · 79 ciclos
 │   ├── mcp_server.py        # MCP Server · 14 ferramentas stdio
 │   ├── api_gateway.py       # FastAPI REST · 12+ endpoints
 │   ├── mcp_security.py      # MCPGuard, AuditLogger, ToolVetter, RateLimiter (R100)
@@ -1121,9 +1127,9 @@ opencode-ecosystem-core/
 │   ├── opencode-evosci/
 │   ├── opencode-deep-research/
 │   └── opencode-peer-review/
-├── specs/                   # Especificacoes SDD (R97-R107)
-├── evolution/               # Cycles registry (65 ciclos)
-├── tests/                   # 1062 testes automatizados
+├── specs/                   # Especificacoes SDD (R97-R121)
+├── evolution/               # Cycles registry (79 ciclos)
+├── tests/                   # 1288 testes automatizados
 ├── mci/                     # Metacognitive Interconnect
 ├── marceloclaro/            # Orquestrador
 ├── agents/catalog/          # 160+ agent cards
@@ -1142,7 +1148,7 @@ opencode-ecosystem-core/
 ##  Executar os Testes
 
 ```bash
-# Suite completa (1062 testes)
+# Suite completa (1288 testes)
 python3 -m pytest tests/ -v
 
 # Pipeline academico agentivo (R101-R105)
@@ -1182,14 +1188,14 @@ O ecossistema possui compatibilidade documentada com o fork `timpara/opencode-ac
 | Evolutionary Memory + Evidence Graph | Não possui |
 | MCP Security (Guard+Audit+Vetter+Limiter) | MCP basico sem seguranca |
 | CI/CD Quality Gates (R106) | Sem CI/CD |
-| 65 ciclos de evolucao | Sem evolution registry |
+| 79 ciclos de evolucao | Sem evolution registry |
 | Peer Review agentivo 8-dimensoes | Revisao textual basica |
 | Paper Composer ABNT/APA/IEEE | Templates LaTeX fixos |
 
 ---
 
 <div align="center">
-  <i>65 ciclos evolutivos · 1062 testes · 0 regressoes · Score medio 9.4/10</i><br>
+  <i>79 ciclos evolutivos · 1288 testes · 0 regressoes · Score medio 9.23/10</i><br>
   <b>v3.0.0 — Pipeline Academico Agentivo | MCP Security | CI/CD Quality Gates</b><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>

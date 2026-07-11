@@ -1716,6 +1716,25 @@
         "Quando um teste depende de um valor numerico com significado (ponto fixo de uma formula EMA), ler o dado real persistido confirma ou refuta a hipotese rapidamente, sem precisar de mais experimentacao"
       ],
       "timestamp": 1783737710.858619
+    },
+    {
+      "round_id": "R122",
+      "objective": "R122: Sincronizacao de README.md, ARCHITECTURE.md e do mapa 3D interativo com os ciclos R117-R121, corrigindo numeros defasados (testes/ciclos/specs) e uma divergencia real entre os dois diagramas Mermaid",
+      "changes": [
+        "README.md e docs/architecture_map.html: numeros corrigidos (testes 1062->1288, ciclos 65->79 faixa R47-R107->R47-R121, especificacoes formais 35->40, score medio 9.4->9.23 recalculado via evolution_registry.average_score())",
+        "README.md: adicionados bullets de feature para os 5 ciclos sem nenhuma mencao na lista principal de recursos (R117 mapa 3D, R118 fix handshake MCP, R119 templates literarios, R120 CLI pesquisa, R121 isolamento real de testes)",
+        "ARCHITECTURE.md: tabela de especificacoes formais ganhou as 3 linhas faltantes (SPEC-935-R119/R120/R121)",
+        "Divergencia real encontrada e corrigida entre os dois diagramas Mermaid: no Publishing existia apenas em ARCHITECTURE.md, ausente no diagrama do README.md — adicionado tambem ao README com a mesma anotacao de R119 (templates literarios)",
+        "Nos MCPSec/CICD em ambos os diagramas Mermaid atualizados para mencionar as correcoes de R118 (handshake initialize) e R121 (isolamento MCI em testes) respectivamente",
+        "docs/architecture_map.html: no CLI marceloclaro atualizado com a opcao [9] Pesquisa (R120); nos Research Hub/MCP Security/CI-CD/Publishing/Evolution Registry/Especificacoes SDD atualizados com os ciclos recentes",
+        "Verificacao estrutural: node --check no JS do mapa 3D (OK), balanceamento de colchetes/parenteses dos 2 blocos Mermaid (README 78/78 e 20/20, ARCHITECTURE 74/74 e 38/38), suite completa de testes existente (1283 passed, 0 failed)"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Documentacao que menciona numeros vivos (contagem de testes, ciclos, specs) decai rapido — vale considerar gerar esses numeros automaticamente a partir de evolution/cycles.json/pytest --collect-only/specs/ em vez de hardcoda-los em multiplos arquivos, num ciclo futuro",
+        "A disciplina de dupla-registro instituida pelo R117 (dois diagramas Mermaid em paridade) precisa de verificacao ativa — o no Publishing divergiu silenciosamente entre os dois arquivos ate esta auditoria pontual encontra-lo; um teste automatizado comparando identificadores de no entre os dois diagramas blindaria essa invariante no futuro"
+      ],
+      "timestamp": 1783738989.2399461
     }
   ]
 }
