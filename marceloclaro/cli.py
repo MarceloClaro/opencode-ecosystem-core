@@ -110,6 +110,12 @@ def _parse_pesquisa_flags(args):
 
 
 def main():
+    # Carrega .env (protegido pelo .gitignore) para o ambiente antes de
+    # tudo — assim OPENAI_API_KEY/OLLAMA_* são reconhecidos sem exportação
+    # manual (acessibilidade). Não sobrescreve o que já está no shell.
+    from marceloclaro.env_loader import load_dotenv
+    load_dotenv()
+
     orchestrator = MarceloClaroOrchestrator()
 
     # Modo comando direto

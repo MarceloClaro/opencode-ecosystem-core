@@ -182,6 +182,54 @@ def _check_external_clis() -> DoctorCheck:
     )
 
 
+def _ollama_available() -> bool:
+    """Indica se um servidor Ollama local está acessível (best-effort)."""
+    if shutil.which("ollama") is not None:
+        return True
+    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+    try:
+        import urllib.request
+        with urllib.request.urlopen(f"{host}/api/tags", timeout=0.5) as resp:
+            return resp.status == 200
+    except Exception:
+        return False
+
+
+def _check_llm_providers() -> DoctorCheck:
+    """Reporta quais provedores LLM estão disponíveis para o enriquecimento
+    opcional do pipeline de pesquisa (fichamento/resenha).
+
+    SEGURANÇA (SPEC-935-R128): este check jamais expõe o valor de qualquer
+    chave — reporta apenas o booleano "definida/ausente". O enriquecimento
+    por LLM é opcional (o pipeline funciona sem ele), por isso o resultado
+    é ``pass`` se há ao menos um provedor e ``warn`` (nunca ``fail``) se
+    nenhum. A ordem de preferência é Ollama local (custo zero, privado) →
+    OpenAI/compatível (nuvem, custa tokens)."""
+    ollama = _ollama_available()
+    openai_key_set = bool(os.environ.get("OPENAI_API_KEY"))
+
+    disponiveis = []
+    if ollama:
+        disponiveis.append("Ollama local")
+    if openai_key_set:
+        # apenas o indicador — NUNCA o valor da chave
+        disponiveis.append("OpenAI (OPENAI_API_KEY definida)")
+
+    if disponiveis:
+        return DoctorCheck(
+            "llm_providers", "pass",
+            "Provedor(es) LLM disponível(is): " + "; ".join(disponiveis)
+            + ". Preferência: Ollama local → OpenAI.",
+        )
+    return DoctorCheck(
+        "llm_providers", "warn",
+        "Nenhum provedor LLM disponível — enriquecimento por LLM desativado "
+        "(o pipeline de pesquisa segue funcionando sem ele). Para habilitar: "
+        "rode o Ollama local, ou defina OPENAI_API_KEY no seu .env "
+        "(ver .env.example).",
+    )
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -198,6 +246,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_opencode_config(),
         _check_corrigendum(),
         _check_external_clis(),
+        _check_llm_providers(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)

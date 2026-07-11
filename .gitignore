@@ -50,3 +50,12 @@ templates/**/*.mp4
 templates/**/*.wav
 templates/**/*.avi
 templates/**/*.mkv
+
+# Segredos e variáveis de ambiente (R128) — NUNCA versionar chaves de API.
+# .env.example é o único modelo versionado (chaves vazias).
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+!.env.example
