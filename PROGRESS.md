@@ -8,9 +8,10 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R137** (reconciliação do gerador
-  opencode.json + versionamento seguro da frente cloud).
-- **Suíte:** verde (última execução completa: 1390 passed, 5 skipped).
+- **Branch:** `main` · última entrega: **R140** (exclusão do conteúdo de
+  usuário via .gitignore; fecha o ciclo de versionamento das frentes abertas).
+- **Suíte:** verde (última execução completa: 1405 passed, 5 skipped).
+- **Todas as frentes abertas foram fechadas e versionadas** (R137–R140).
 - **Ciclos recentes concluídos e commitados:**
   - R123 — Pipeline MIRA de apresentações (`illustrations/mira_deck.py`).
   - R124 — Capa/contracapa TikZ (`publishing/cover_designer.py`) + refino.
@@ -23,9 +24,28 @@
   `OPENAI_API_KEY` (600, gitignored) + `~/.bashrc` carregando o `.env`;
   Ollama local funcional (`llama3.2`, `nomic-embed-text`).
 
-## EM ANDAMENTO: fechar e versionar as 3 frentes abertas
+## ✅ CONCLUÍDO: frentes abertas fechadas e versionadas (R137–R140)
 
 Objetivo do usuário: avaliar cada frente, fechar e versionar, refinar.
+
+**Resumo do fechamento (uma frente por commit, suíte verde a cada passo):**
+- **R137** — Frente cloud: gerador `opencode.json` reconciliado (slug),
+  skip guards, `scripts/cloud/` gitignored, bug de perda de dados corrigido.
+- **R138** — SPEC-108 (OpenCode Go/Zen + ModelRouter): providers/comandos.
+- **R139** — SPEC-1000 (pdf2latex multi-engine): 15 testes de aceitação.
+- **R140** — Molambudos + conteúdo de usuário EXCLUÍDOS via `.gitignore`
+  (decisão do usuário: "só o código do ecossistema"; o trabalho Molambudos
+  permanece registrado no ledger via R130–R134, mas o livro/PDFs/pesquisa
+  ficam fora do ecosystem-core).
+
+**Dívida assumida (documentada, não escondida):**
+- Numeração de ciclos inconsistente: R130–R134 = Molambudos, R135–R136 =
+  cloud; colisão do nome `SPEC-935-R130.md`; `cycle: R108` no frontmatter da
+  SPEC-108 colide com o R108 do ledger. Não reescritos retroativamente.
+- Auditoria de licença dos 324 scripts em `scripts/cloud/` pendente.
+- Cobertura do pdf2latex é de contrato/CLI, não E2E de conversão real.
+
+### Histórico da avaliação (abaixo) — mantido para rastreabilidade
 
 ### Frente A — Integração Cloud — ✅ VERSIONADA (R137)
 - Fechada pelo ciclo **R137**: gerador `opencode.json` reconciliado
