@@ -84,9 +84,9 @@ graph TD
         MetaEval[Metacognitive Eval<br>SPEC-920]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
-        Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)"]
+        Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)<br>+Capa/contracapa TikZ (R124)"]
         Research["Research<br>Hub c/ OSINT<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
-        Illus[Illustrations<br>Mermaid/MIRA/Graph]
+        Illus["Illustrations<br>Mermaid/MIRA/Graph<br>Apresentações MIRA: deck animado (R123)<br>CLI: marceloclaro apresentacao (R125)"]
         EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
         NoveltyV2["Novelty V2 (R98)<br>ContributionPointExtractor<br>PointwiseLiteratureRetriever<br>PointwiseNoveltyScorer<br>HierarchicalTaxonomyBuilder"]
     end
@@ -283,6 +283,10 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R119 | Templates Literários/de Ficção + Limpeza de Resíduos do Catálogo | 5 CA |
 | SPEC-935-R120 | Comando `pesquisa` no CLI + Visibilidade do Fallback Sci-Hub | 7 CA |
 | SPEC-935-R121 | Isolamento Real do Estado do MCI na Suíte de Testes | 4 CA |
+| SPEC-935-R122 | Sincronização de Documentação (README, ARCHITECTURE, Mapa 3D) | 8 CA |
+| SPEC-935-R123 | Pipeline MIRA de Apresentações Científicas (artigo → deck animado) | 10 CA |
+| SPEC-935-R124 | Capa e Contracapa com Arte Vetorial TikZ Real | 9 CA |
+| SPEC-935-R125 | MIRA como parte de primeira classe do ecossistema (CLI + docs) | 8 CA |
 
 ---
 

@@ -34,6 +34,7 @@ MENU = """
 [7] Ajuda / Manual
 [8] Helpdesk (diagnóstico + sugestões em linguagem simples)
 [9] Pesquisa científica (busca em 11 fontes + fichamento ABNT/APA)
+[10] Apresentação MIRA (manuscrito → deck de slides animados)
 [0] Sair
 """
 
@@ -65,6 +66,11 @@ O que cada opção faz, em termos simples:
     scihub-cli — opcional, `pip install scihub-cli`), converte para
     Markdown e gera fichamento + resenha crítica em ABNT e APA — tudo
     numa pasta única dentro de pesquisa/.
+[10] Apresentação MIRA — transforma o manuscrito de uma produção
+    (arquivo manuscrito.md de uma pasta de produção) num deck de slides
+    animados: um HTML de cards de vidro navegável (uma ideia por tela,
+    com animação em loop perpétuo — o método MIRA). Grava
+    apresentacao/deck.html e um relatório de conformidade na mesma pasta.
 
 Manual completo (linguagem simples): MANUAL.md
 Manual técnico (arquitetura): ARCHITECTURE.md
@@ -77,6 +83,7 @@ Comandos diretos (sem menu):
     python3 -m marceloclaro.cli helpdesk
     python3 -m marceloclaro.cli ajuda
     python3 -m marceloclaro.cli pesquisa "<tema>" [--max-papers N] [--platforms a,b,c] [--no-download]
+    python3 -m marceloclaro.cli apresentacao <pasta_da_producao>
 """
 
 
@@ -127,11 +134,21 @@ def main():
             flags = _parse_pesquisa_flags(sys.argv[3:])
             manifest = orchestrator.research(topic, **flags)
             print(json.dumps(manifest, indent=2, ensure_ascii=False))
+        elif cmd in ("apresentacao", "present", "mira"):
+            if len(sys.argv) < 3:
+                print("Uso: python3 -m marceloclaro.cli apresentacao "
+                      "<pasta_da_producao>")
+                print("A pasta deve conter um arquivo manuscrito.md.")
+                sys.exit(1)
+            folder = sys.argv[2]
+            result = orchestrator.present(folder)
+            print(json.dumps(result, indent=2, ensure_ascii=False))
         elif cmd in ("ajuda", "help", "-h", "--help"):
             print(AJUDA_TEXT)
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'status', 'agents', 'doctor', 'helpdesk', 'pesquisa' ou 'ajuda'.")
+            print("Use 'status', 'agents', 'doctor', 'helpdesk', 'pesquisa', "
+                  "'apresentacao' ou 'ajuda'.")
         return
 
     # Modo interativo
@@ -193,6 +210,24 @@ def main():
                   f"{resumo['pdfs_baixados']} PDFs, {resumo['fichamentos']} fichamentos, "
                   f"{resumo['resenhas']} resenhas críticas.")
             print(f"Pasta: {manifest['folder']}")
+
+        elif choice == "10":
+            folder = input("Pasta da produção (com manuscrito.md): ").strip()
+            if not folder:
+                print("Pasta vazia, operação cancelada.")
+                continue
+            print("Montando a apresentação MIRA (extract → plan → copywrite "
+                  "→ build → animate → validate)...")
+            result = orchestrator.present(folder)
+            if result.get("ok") is False or result.get("error"):
+                print(f"Falha: {result.get('error', 'produção inválida')}")
+            else:
+                status = "CONFORME" if result.get("passed") else "COM RESSALVAS"
+                print(f"\nApresentação gerada ({status}).")
+                print(f"Deck: {result.get('deck')}")
+                print(f"Conformidade: {result.get('conformidade')}")
+                if result.get("violations"):
+                    print(f"Ressalvas: {len(result['violations'])}")
 
         elif choice == "0":
             print("Encerrando o orquestrador. Até logo.")

@@ -387,10 +387,10 @@
       <button type="button" data-mode="phd" aria-pressed="false">PhD</button>
     </div>
     <div class="stats">
-      <div class="stat"><b class="mono">1288</b><span>testes</span></div>
-      <div class="stat"><b class="mono">79</b><span>ciclos R1&ndash;R121</span></div>
+      <div class="stat"><b class="mono">1332</b><span>testes</span></div>
+      <div class="stat"><b class="mono">83</b><span>ciclos R1&ndash;R125</span></div>
       <div class="stat"><b class="mono">160+</b><span>agent cards</span></div>
-      <div class="stat"><b class="mono">40</b><span>specs SDD</span></div>
+      <div class="stat"><b class="mono">44</b><span>specs SDD</span></div>
     </div>
   </div>
 </div>
@@ -450,7 +450,7 @@
         leigo: "As portas de entrada: como um humano (ou outra IA) chega até o orquestrador — pelo terminal, por um painel visual, ou por um instalador de 1 clique.",
         phd: "Superfícies de acesso externo: CLI nativo, dashboard, e as 3 CLIs de terceiros de primeira classe (OpenCode, Antigravity, Claude Code), cada uma com instalador próprio nas 3 plataformas.",
         nodes: [
-          ["CLI marceloclaro", "marceloclaro/cli.py — menu interativo, [7] Ajuda, [8] Helpdesk, [9] Pesquisa científica (R120), comandos diretos (inclui `pesquisa \"<tema>\"`)."],
+          ["CLI marceloclaro", "marceloclaro/cli.py — menu interativo, [7] Ajuda, [8] Helpdesk, [9] Pesquisa científica (R120), [10] Apresentação MIRA (R125), comandos diretos (inclui `pesquisa \"<tema>\"` e `apresentacao <pasta>`)."],
           ["Dashboard Streamlit", "webapp/app.py — 8 abas: Pipeline, Deep Research, Peer Review, Composer, Evolution, Consultation, System."],
           ["OpenCode CLI", "opencode.json + integrations/opencode_cli.py — 165 agentes, 8 comandos slash, 2 servidores MCP."],
           ["Antigravity CLI", "integrations/antigravity/ — ponte para o binário agy (Google), 8 ferramentas MCP, fila de handoff."],
@@ -531,14 +531,14 @@
         name: "Produção, Segurança & Evolução",
         count: "7 componentes",
         leigo: "Onde o trabalho vira um produto de verdade (PDF, artigo, ilustração), com trava de segurança, e onde tudo que o sistema aprendeu fica registrado para sempre.",
-        phd: "Publishing (+ templates literários R119), Research Hub (11 fontes + CLI pesquisa R120); MCP Security (handshake initialize corrigido R118) + CI/CD (suíte isolada do estado real do MCI, R121); e o registro formal de evolução (Evolution Registry + 40 specs SDD) que sustenta toda a disciplina de auditoria deste mapa.",
+        phd: "Publishing (+ templates literários R119, + capa/contracapa TikZ R124), Research Hub (11 fontes + CLI pesquisa R120), Apresentações MIRA (artigo → deck animado R123, exposto por marceloclaro apresentacao R125); MCP Security (handshake initialize corrigido R118) + CI/CD (suíte isolada do estado real do MCI, R121); e o registro formal de evolução (Evolution Registry + 44 specs SDD) que sustenta toda a disciplina de auditoria deste mapa.",
         nodes: [
           ["Publishing", "publishing/ — pasta única com LaTeX, PDF, DOCX, ODT (KDP-ready) + manifesto com checksums; templates/books/romance-literario e contos-poesia (R119) — primeiros templates literários/de ficção do catálogo."],
           ["Research Hub", "research/ — busca federada em 11 fontes (+PubMed/bioRxiv/CORE, R111) + fichamento em 3 camadas + referências ABNT/APA; exposto no CLI via `marceloclaro pesquisa` (R120), com fallback de download via scihub-cli para artigos pagos."],
-          ["Illustrations", "illustrations/ — diagramas Mermaid, grafo de conhecimento Graphify, cards MIRA animados."],
+          ["Illustrations", "illustrations/ — diagramas Mermaid, grafo de conhecimento Graphify, cards MIRA animados e o pipeline de Apresentações MIRA (mira_deck.py: manuscrito → deck HTML animado de cards de vidro, R123), exposto por marceloclaro apresentacao (R125)."],
           ["MCP Security", "mci/mcp_server.py protegido por Guard + AuditLogger + ToolVetter + RateLimiter; handshake `initialize` do protocolo MCP corrigido (R118), eliminando a falha \"metacognitive-interconnect failed\" relatada por clientes reais."],
           ["CI/CD", ".github/workflows/ci.yml — lint, matriz de testes Python 3.10-3.14, build de pacotes; suíte isolada do estado real do MCI via tests/conftest.py (R121), corrigindo uma falha intermitente que corrompia o confidence_ledger de produção a cada execução."],
-          ["Evolution Registry", "evolution/cycles.json + evo-*.md — 79 ciclos documentados (R1 a R121), cada um com nota e lições."],
+          ["Evolution Registry", "evolution/cycles.json + evo-*.md — 83 ciclos documentados (R1 a R125), cada um com nota e lições."],
           ["Especificações SDD", "specs/SPEC-935-R*.md — 40 especificações formais, cada uma com critérios de aceitação verificáveis."]
         ]
       }
