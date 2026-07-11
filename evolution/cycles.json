@@ -1697,6 +1697,25 @@
         "Reaproveitar o padrao ja estabelecido no R116 (EXTERNAL_CLIS + _check_external_clis() generico) custou uma linha de dicionario em vez de uma funcao nova"
       ],
       "timestamp": 1783736612.0330708
+    },
+    {
+      "round_id": "R121",
+      "objective": "R121: Isolamento real do estado do MCI (MCI_STATE_DIR) na suite de testes via tests/conftest.py, corrigindo a causa raiz da falha intermitente conhecida test_failed_task_lowers_confidence",
+      "changes": [
+        "Investigada a causa raiz da falha intermitente aceita como conhecida/nao-relacionada desde o R118: mci/reflexion.py atribui score=0.2 a falhas, e a formula EMA de mci/metabus.py (novo=antigo*0.7+score*0.3) tem ponto fixo matematico em 0.2 — uma vez que a confianca de um agente cai a <=0.2, uma nova falha nao a reduz mais (por design)",
+        "Confirmado por leitura direta do confidence_ledger persistido: agentes reais com confianca a centesimos do ponto fixo (code-reviewer: 0.20000001101101042, opencoder: 0.20944999999999994)",
+        "Causa raiz da poluicao: mci/metabus.py persiste o confidence_ledger em MCI_STATE_DIR/shared_memory.json (o mesmo arquivo real usado pelo CLI de producao), carregado uma unica vez por processo Python. Quatro arquivos de teste tentavam isolar isso individualmente definindo os.environ no topo do proprio modulo, mas essa tentativa so funciona se aquele arquivo for por acaso o primeiro modulo de teste importado em toda a sessao — nunca garantido numa suite com 100+ arquivos",
+        "Consequencia: toda rodada completa da suite, ao longo de toda a historia do projeto (R47-R120), corrompia permanentemente o ledger de confianca real usado em producao, fazendo a confianca de agentes especificos convergir para perto do piso de 0.2",
+        "Criado tests/conftest.py: define MCI_STATE_DIR para um diretorio temporario antes de qualquer modulo de teste ser coletado — conftest.py e garantidamente importado pelo pytest antes de qualquer arquivo de teste, ao contrario das tentativas anteriores espalhadas e nao confiaveis",
+        "Verificado: .mci_state/shared_memory.json com mtime identico antes/depois de rodar a suite completa (arquivo real de producao nao mais tocado); suite completa 1283 passed, 5 skipped, 0 failed (falha intermitente eliminada)"
+      ],
+      "score": 9.3,
+      "lessons": [
+        "\"Falha intermitente conhecida e nao relacionada\" e uma categorizacao perigosa quando repetida por convencao entre ciclos sem reinvestigacao — mascarou um bug real de isolamento de testes corrompendo estado de producao a cada execucao da suite",
+        "Isolamento de estado global em testes precisa acontecer no ponto que o test runner garante executar primeiro (conftest.py), nunca espalhado e duplicado em multiplos arquivos que dependem silenciosamente da ordem de coleta",
+        "Quando um teste depende de um valor numerico com significado (ponto fixo de uma formula EMA), ler o dado real persistido confirma ou refuta a hipotese rapidamente, sem precisar de mais experimentacao"
+      ],
+      "timestamp": 1783737710.858619
     }
   ]
 }
