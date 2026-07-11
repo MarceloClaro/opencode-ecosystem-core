@@ -75,6 +75,21 @@ def build_config() -> Dict[str, Any]:
         "$schema": "https://opencode.ai/config.json",
         "theme": "opencode",
         "instructions": ["AGENTS.md"],
+        "model": "opencode-go/kimi-k2.7-code",
+        "provider": {
+            "opencode-go": {
+                "options": {
+                    "apiKey": "{env:OPENCODE_API_KEY}",
+                    "baseURL": "https://opencode.ai/zen/go/v1"
+                }
+            },
+            "opencode-zen": {
+                "options": {
+                    "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
+                    "baseURL": "https://opencode.ai/zen/v1"
+                }
+            }
+        },
         "agent": {
             "marceloclaro": {
                 "description": (
@@ -118,6 +133,22 @@ def build_config() -> Dict[str, Any]:
                 "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from economy import token_economy; import json; print(json.dumps(token_economy.report(), ensure_ascii=False, indent=2))\"",
                 "description": "Relatório da economia de tokens (staking, slashing, fees)",
             },
+            "models": {
+                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from integrations.model_router import model_router; import json; print(json.dumps(model_router.list_all_models(), ensure_ascii=False, indent=2))\"",
+                "description": "Lista todos os modelos disponíveis nos providers OpenCode Go e OpenCode Zen"
+            },
+            "route": {
+                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from integrations.model_router import model_router; import json; r = model_router.route('$ARGUMENTS' or 'coding'); print(json.dumps({'provider': r.provider_id, 'model': r.model_id, 'reason': r.reason, 'alternatives': [f'{p}/{m}' for p,m in r.alternatives]}, ensure_ascii=False, indent=2))\"",
+                "description": "Roteia uma tarefa para o melhor modelo (ex: /route coding, /route reasoning, /route academic)"
+            },
+            "sdd": {
+                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from sdd.spec_engine import spec_registry; import json; print(json.dumps(spec_registry.coverage_report(), ensure_ascii=False, indent=2))\"",
+                "description": "Relatório de cobertura SDD: specs formais e dinâmicas do ecossistema"
+            },
+            "tdd": {
+                "template": "python3 -m pytest '$ARGUMENTS' -v --tb=short 2>&1 | tail -40",
+                "description": "Executa a bateria de testes TDD (ex: /tdd tests/test_opencode_go_zen.py)"
+            }
         },
     }
 

@@ -2026,6 +2026,26 @@
         "324 scripts externos com licença não auditada ficam fora do repo (gitignore + pendência) — mais honesto que commit cego."
       ],
       "timestamp": "2026-07-11T10:57:51"
+    },
+    {
+      "round_id": "R138",
+      "objective": "R138: Versiona a frente SPEC-108 (providers OpenCode Go/Zen, ModelRouter, comandos e agentes go/zen no OpenCode CLI), completa e testada mas não commitada, sobre a base reconciliada do R137.",
+      "changes": [
+        "integrations/opencode_go.py (novo): OpenCodeGoProvider + catálogo de modelos Go",
+        "integrations/opencode_zen.py (novo): OpenCodeZenProvider + modelos curados",
+        "integrations/model_router.py (novo): ModelRouter com roteamento por tipo de tarefa",
+        "integrations/opencode_cli.py: bloco provider (go/zen), model padrão, comandos models/route/sdd/tdd",
+        "opencode.json regenerado com providers + 2 agentes go/zen (173 agentes, reproduzível)",
+        "agents/catalog/opencode-go-agent.md + opencode-zen-agent.md (novos)",
+        "specs/SPEC-108 + tests/test_opencode_go_zen.py (39 testes CA)"
+      ],
+      "score": 8.3,
+      "lessons": [
+        "Reconciliar a infra compartilhada primeiro (R137, slug) deixou o delta da SPEC-108 limpo: só providers/comandos.",
+        "Dívida de numeração: o frontmatter da SPEC-108 declara cycle:R108 (colide com o R108 do ledger); versionamento registrado como R138, colisão documentada.",
+        "Verificação é estrutural/CA (sem chamada de rede aos providers); não é E2E."
+      ],
+      "timestamp": "2026-07-11T11:05:14"
     }
   ]
 }
