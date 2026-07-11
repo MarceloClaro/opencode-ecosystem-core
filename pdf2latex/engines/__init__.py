@@ -17,5 +17,11 @@ try:
 except ImportError:
     pass
 
+# ocr-vision: import guardado (só stdlib no topo; deps pesadas são lazy).
+try:
+    from . import ocr_vision  # noqa: F401
+except ImportError:
+    pass
+
 # Re-exportar funções do registry
 from ..engine_registry import get_engine, list_engines, convert_with_best  # noqa: F401
