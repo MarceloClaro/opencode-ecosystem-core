@@ -56,6 +56,11 @@ PALETTES = {
     }
 }
 
+# Espessura estimada por página (mm) — papel offset 75g, impressão frente
+# e verso. Estimativa editorial comum; a lombada real depende da gráfica.
+MM_PER_PAGE = 0.0722
+
+
 class CoverDesigner:
     def __init__(self, output_dir: str):
         self.output_dir = Path(output_dir)
@@ -108,14 +113,125 @@ class CoverDesigner:
                 
         return "\n".join(new_lines)
 
-    def design_cover(self, title: str, author: str, content_sample: str,
-                     subtitle: str = "", blurb: str = "") -> Dict[str, Any]:
+    # ── Arte vetorial TikZ (R124): gradiente + formas por estilo ──
+    def _tikz_art(self, style_key: str, palette: Dict[str, str]) -> str:
+        """Corpo TikZ da arte de fundo da capa (full-bleed, por estilo).
+
+        Cada estilo tem uma composição geométrica própria sobre um
+        gradiente entre a primária e a secundária da paleta. Desenhado
+        com `remember picture, overlay` para cobrir a página inteira.
         """
-        Gera o estudo de design, os prompts de ilustração e os arquivos LaTeX
-        para a capa e contracapa.
+        p, s, a = palette["primary"], palette["secondary"], palette["accent"]
+        head = ("\\begin{tikzpicture}[remember picture, overlay]\n"
+                f"  \\definecolor{{cPrim}}{{HTML}}{{{p}}}\n"
+                f"  \\definecolor{{cSec}}{{HTML}}{{{s}}}\n"
+                f"  \\definecolor{{cAcc}}{{HTML}}{{{a}}}\n"
+                "  \\shade[top color=cPrim, bottom color=cSec]\n"
+                "    (current page.north west) rectangle (current page.south east);\n")
+
+        if style_key == "tecnologia":
+            body = (
+                "  % malha de nós conectados (orquestração/rede)\n"
+                "  \\foreach \\x in {2,5,8,11,14} {\n"
+                "    \\foreach \\y in {4,8,12,16} {\n"
+                "      \\fill[cAcc, opacity=0.35] (\\x,\\y) circle (2pt);\n"
+                "    }\n"
+                "  }\n"
+                "  \\draw[cAcc, opacity=0.25, line width=0.6pt]\n"
+                "    (2,4) -- (8,12) -- (14,8) -- (5,16) -- (11,4);\n")
+        elif style_key == "academico":
+            body = (
+                "  % colunas clássicas + arco (rigor atemporal)\n"
+                "  \\foreach \\x in {3,6,9,12} {\n"
+                "    \\fill[cAcc, opacity=0.18] (\\x,3) rectangle (\\x+0.7,15);\n"
+                "  }\n"
+                "  \\draw[cAcc, opacity=0.3, line width=1.2pt]\n"
+                "    (2.5,15) arc (180:0:5.2 and 1.6);\n")
+        elif style_key == "didatico":
+            body = (
+                "  % formas orgânicas coloridas (acessível, vibrante)\n"
+                "  \\fill[cAcc, opacity=0.30] (4,14) circle (2.6);\n"
+                "  \\fill[cSec, opacity=0.35] (12,5) circle (3.2);\n"
+                "  \\fill[cPrim, opacity=0.25, rounded corners=14pt]\n"
+                "    (9,11) rectangle (15,17);\n")
+        else:  # ficcao
+            body = (
+                "  % silhueta dramática + raio de luz (misterioso)\n"
+                "  \\fill[black, opacity=0.55]\n"
+                "    (0,0) -- (5,0) -- (7,6) -- (9,2) -- (12,9) -- (16,4)\n"
+                "    -- (16,0) -- cycle;\n"
+                "  \\draw[cAcc, opacity=0.4, line width=1.4pt]\n"
+                "    (8,20) -- (8,9);\n")
+
+        return head + body + "\\end{tikzpicture}"
+
+    def _spine_mm(self, page_count: int) -> float:
+        """Largura estimada da lombada (mm) a partir do número de páginas."""
+        return round(max(3.0, page_count * MM_PER_PAGE), 1)
+
+    def _cover_preamble(self, palette: Dict[str, str]) -> str:
+        """Pacotes necessários para os fragmentos de capa compilarem."""
+        return (
+            "% cover_preamble.tex — inclua no preambulo do livro com\n"
+            "% \\input{cover/cover_preamble} ANTES de \\begin{document}.\n"
+            "\\usepackage[dvipsnames,table,HTML]{xcolor}\n"
+            "\\usepackage{tikz}\n"
+            "\\usetikzlibrary{fadings,shadings,calc}\n"
+            "\\usepackage{eso-pic}   % util para arte full-bleed\n"
+        )
+
+    def _spine_tex(self, title: str, author: str, palette: Dict[str, str],
+                   spine_mm: float) -> str:
+        """Lombada vertical: título + autor rotacionados, largura por página."""
+        return (
+            f"% lombada.tex — largura estimada: {spine_mm} mm "
+            f"(offset 75g, ver MM_PER_PAGE)\n"
+            f"\\newlength{{\\spinewidth}}\\setlength{{\\spinewidth}}{{{spine_mm}mm}}\n"
+            "\\begin{tikzpicture}\n"
+            f"  \\definecolor{{cPrim}}{{HTML}}{{{palette['primary']}}}\n"
+            f"  \\definecolor{{cBg}}{{HTML}}{{{palette['bg']}}}\n"
+            f"  \\fill[cPrim] (0,0) rectangle ({spine_mm}mm,220mm);\n"
+            f"  \\node[rotate=90, cBg, font=\\bfseries\\large]\n"
+            f"    at ({spine_mm/2}mm,150mm) {{{title}}};\n"
+            f"  \\node[rotate=90, cBg, font=\\small]\n"
+            f"    at ({spine_mm/2}mm,60mm) {{{author}}};\n"
+            "\\end{tikzpicture}\n"
+        )
+
+    def _ficha_catalografica(self, title: str, author: str, subtitle: str,
+                             isbn: str, palette: Dict[str, str]) -> str:
+        """Ficha catalográfica no modelo CIP brasileiro (bloco monoespaçado)."""
+        isbn_line = f"ISBN {isbn}" if isbn else "ISBN 000-00-0000-000-0 (a atribuir)"
+        sub = f" : {subtitle}" if subtitle else ""
+        return (
+            "\\begin{center}\\small\n"
+            "\\fbox{\\begin{minipage}{0.82\\textwidth}\\ttfamily\\footnotesize\n"
+            "\\begin{center}Dados Internacionais de Catalogação na Publicação (CIP)\\end{center}\n"
+            "\\vspace{4pt}\\hrule\\vspace{4pt}\n"
+            f"{author}.\\\\\n"
+            f"\\hspace*{{1em}}{title}{sub} / {author}. --\\\\\n"
+            "\\hspace*{1em}1. ed. -- [S.l.]: OpenCode Ecosystem, \\the\\year{}.\\\\\n"
+            "\\vspace{4pt}\n"
+            f"\\hspace*{{1em}}{isbn_line}\\\\\n"
+            "\\vspace{4pt}\n"
+            "\\hspace*{1em}1. Título. 2. Ciência. 3. Tecnologia.\\\\\n"
+            "\\begin{flushright}CDD 001\\end{flushright}\n"
+            "\\end{minipage}}\n"
+            "\\end{center}\n"
+        )
+
+    def design_cover(self, title: str, author: str, content_sample: str,
+                     subtitle: str = "", blurb: str = "",
+                     page_count: int = 200, isbn: str = "") -> Dict[str, Any]:
+        """
+        Gera o estudo de design e os arquivos LaTeX da capa, lombada e
+        contracapa com arte vetorial TikZ real (gradiente + formas por
+        estilo), lombada dimensionada pela contagem de páginas e ficha
+        catalográfica (CIP) — compiláveis direto no PDF do livro.
         """
         style_key = self._determine_style(title, content_sample)
         palette = PALETTES[style_key]
+        spine_mm = self._spine_mm(page_count)
 
         # 1. Estudo de Design (DESIGN_STUDY.md)
         study_md = f"""# Estudo de Design Automatizado: {title}
@@ -142,19 +258,38 @@ class CoverDesigner:
 
 **Prompt Contracapa:**
 > Minimalist back cover art, subtle continuation of the front cover theme. Abstract geometric shapes, plenty of negative space for text, color palette: #{palette['primary']}, #{palette['bg']}. Elegant, editorial design --ar 2:3
+
+## 5. Arte vetorial embutida (TikZ) — R124
+A capa, a lombada e a contracapa já saem com arte vetorial **compilável
+no PDF** (gradiente + formas geométricas do estilo *{style_key}*), sem
+depender de gerador de imagem externo. Para compilar, inclua o preâmbulo
+gerado **antes** de `\\begin{{document}}`:
+
+```latex
+\\input{{cover/cover_preamble}}   % carrega tikz + xcolor(HTML)
+```
+
+- **Capa:** `cover/capa.tex` (arte full-bleed + título/autor por cima)
+- **Lombada:** `cover/lombada.tex` (largura ≈ {spine_mm} mm para {page_count} páginas)
+- **Contracapa:** `cover/contracapa.tex` (blurb + ficha catalográfica CIP)
 """
         (self.output_dir / "DESIGN_STUDY.md").write_text(study_md, encoding="utf-8")
 
-        # 2. Gerar capa.tex
+        # 2. Preâmbulo com os pacotes necessários (tikz + xcolor HTML)
+        preamble_tex = self._cover_preamble(palette)
+        (self.output_dir / "cover_preamble.tex").write_text(preamble_tex, encoding="utf-8")
+
+        # 3. Gerar capa.tex — arte vetorial TikZ + título/autor por cima
+        art = self._tikz_art(style_key, palette)
         capa_tex = f"""\\begin{{titlepage}}
 \\pagecolor[HTML]{{{palette['primary']}}}
 \\color[HTML]{{{palette['bg']}}}
+% arte vetorial de fundo (full-bleed), gerada pelo CoverDesigner (R124)
+{art}
 \\begin{{center}}
 \\vspace*{{3cm}}
 {{\\Huge \\textbf{{{title}}}}}\\\\[1cm]
 {{\\Large {subtitle}}}\\\\[3cm]
-% ESPAÇO PARA ILUSTRAÇÃO DA CAPA
-% \\includegraphics[width=0.8\\textwidth]{{ilustracoes/capa_arte.png}}\\\\[3cm]
 \\vfill
 {{\\Large \\textbf{{{author}}}}}\\\\[1cm]
 \\end{{center}}
@@ -163,12 +298,17 @@ class CoverDesigner:
 """
         (self.output_dir / "capa.tex").write_text(capa_tex, encoding="utf-8")
 
-        # 3. Gerar contracapa.tex
+        # 4. Gerar lombada.tex (spine dimensionada pela contagem de páginas)
+        lombada_tex = self._spine_tex(title, author, palette, spine_mm)
+        (self.output_dir / "lombada.tex").write_text(lombada_tex, encoding="utf-8")
+
+        # 5. Gerar contracapa.tex — blurb + ficha catalográfica CIP
+        ficha = self._ficha_catalografica(title, author, subtitle, isbn, palette)
         contracapa_tex = f"""\\newpage
 \\thispagestyle{{empty}}
 \\pagecolor[HTML]{{{palette['bg']}}}
 \\color[HTML]{{{palette['text']}}}
-\\vspace*{{5cm}}
+\\vspace*{{4cm}}
 \\begin{{center}}
 \\begin{{minipage}}{{0.8\\textwidth}}
 {{\\Large \\textbf{{Sobre o Livro}}}}\\\\[1cm]
@@ -176,20 +316,21 @@ class CoverDesigner:
 \\end{{minipage}}
 \\end{{center}}
 \\vfill
-\\begin{{center}}
-% ESPAÇO PARA ILUSTRAÇÃO DA CONTRACAPA / CÓDIGO DE BARRAS
-% \\includegraphics[width=0.4\\textwidth]{{ilustracoes/contracapa_arte.png}}
-\\end{{center}}
+{ficha}
 \\nopagecolor
 """
         (self.output_dir / "contracapa.tex").write_text(contracapa_tex, encoding="utf-8")
 
-        logger.info(f"[cover_designer] Estudo de design e capas gerados para '{title}' (Estilo: {style_key})")
+        logger.info(f"[cover_designer] Capa/lombada/contracapa TikZ gerados para '{title}' "
+                    f"(Estilo: {style_key}, lombada {spine_mm}mm)")
 
         return {
             "style": style_key,
             "palette": palette,
+            "spine_mm": spine_mm,
             "study_file": str(self.output_dir / "DESIGN_STUDY.md"),
+            "preamble_file": str(self.output_dir / "cover_preamble.tex"),
             "capa_file": str(self.output_dir / "capa.tex"),
-            "contracapa_file": str(self.output_dir / "contracapa.tex")
+            "lombada_file": str(self.output_dir / "lombada.tex"),
+            "contracapa_file": str(self.output_dir / "contracapa.tex"),
         }
