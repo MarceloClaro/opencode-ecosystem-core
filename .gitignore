@@ -51,6 +51,11 @@ templates/**/*.wav
 templates/**/*.avi
 templates/**/*.mkv
 
+# Backup externo Antigravity (R137) — 324 scripts de terceiros com
+# procedência/licença ainda não revisadas. Não versionar até a revisão.
+# Os testes de skills cloud pulam graciosamente quando ausentes.
+scripts/cloud/
+
 # Segredos e variáveis de ambiente (R128) — NUNCA versionar chaves de API.
 # .env.example é o único modelo versionado (chaves vazias).
 .env

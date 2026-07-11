@@ -34,7 +34,12 @@ def _catalog_agents() -> Dict[str, Any]:
 
     agents: Dict[str, Any] = {}
     for d in load_catalog_definitions():
-        agents[d["agent_id"]] = {
+        # Chave = slug do nome do arquivo (estável, único, reproduzível).
+        # NÃO usar d["agent_id"] (vem do frontmatter `name:`, que pode ser
+        # um nome de exibição com espaços/maiúsculas e varia entre arquivos —
+        # isso tornava o opencode.json não-reproduzível; ver SPEC-935-R137).
+        slug = os.path.splitext(os.path.basename(d["source_file"]))[0]
+        agents[slug] = {
             "description": d["description"][:200],
             "mode": "subagent",
             "prompt": "{file:./agents/catalog/" + os.path.basename(d["source_file"]) + "}",
@@ -135,6 +140,31 @@ def check_config(path: str = CONFIG_PATH) -> bool:
     n_cmd = len(config.get("command", {}))
     print(f"opencode.json OK: {n_agents} agentes, {n_mcp} MCP servers, {n_cmd} comandos")
     return n_agents > 0
+
+
+class OpenCodeCLIIntegration:
+    """Fachada orientada a objeto sobre `build_config`/`write_config`/
+    `check_config`, para uso a partir de scripts externos (ex.:
+    `installer/windows/provision.sh`, que já chamava esta classe antes
+    dela existir — o passo de regeneração do `opencode.json` durante o
+    provisionamento falhava silenciosamente por causa disso)."""
+
+    def __init__(self, root: str = "."):
+        self.root = os.path.abspath(root)
+        self.config_path = os.path.join(self.root, "opencode.json")
+
+    def build_config(self) -> Dict[str, Any]:
+        return build_config()
+
+    def generate_config(self) -> str:
+        """Gera/regrava o opencode.json e retorna o path gravado."""
+        config = build_config()
+        with open(self.config_path, "w", encoding="utf-8") as f:
+            json.dump(config, f, ensure_ascii=False, indent=2)
+        return self.config_path
+
+    def check(self) -> bool:
+        return check_config(self.config_path)
 
 
 if __name__ == "__main__":
