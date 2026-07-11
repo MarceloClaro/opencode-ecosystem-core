@@ -214,7 +214,7 @@ class LaTeXGenerator:
                 fig_cmds.append(r"\begin{figure}[h]")
                 fig_cmds.append(r"\centering")
                 fig_cmds.append(f"\\includegraphics[width=0.8\\textwidth]{{{rel_path}}}")
-                fig_cmds.append(f"\\caption{{{caption}}}")
+                fig_cmds.append(f"\\caption{{{self._escape_latex(caption)}}}")
                 fig_cmds.append(r"\label{fig:extraida_" + str(img_idx) + "}")
                 fig_cmds.append(r"\end{figure}")
                 fig_cmds.append("")
@@ -306,7 +306,8 @@ class LaTeXGenerator:
         main.append("")
         # Incluir bibliografia (se houver)
         if self.references:
-            main.append(r"\bibliographystyle{abntex2-num}")
+            # O template_integrator ajustará o estilo ao aplicar o template
+            main.append(r"\bibliographystyle{plain}")
             main.append(r"\bibliography{referencias}")
             main.append("")
 
@@ -436,19 +437,26 @@ Veja `templates/README.md` para o catálogo completo.
 
     @staticmethod
     def _escape_latex(text: str) -> str:
-        """Escapa caracteres especiais LaTeX."""
-        replacements = {
-            '&': r'\&',
-            '%': r'\%',
-            '$': r'\$',
-            '#': r'\#',
-            '_': r'\_',
-            '{': r'\{',
-            '}': r'\}',
-            '~': r'\textasciitilde{}',
-            '^': r'\^{}',
-        }
-        for old, new in replacements.items():
+        """Escapa caracteres especiais LaTeX de forma segura."""
+        # Ordem importate: fazer substituições que podem conter
+        # caracteres especiais primeiro.
+        replacements = [
+            ('\\', r'\textbackslash{}'),  # DEVE ser primeiro
+            ('&', r'\&'),
+            ('%', r'\%'),
+            ('$', r'\$'),
+            ('#', r'\#'),
+            ('_', r'\_'),
+            ('{', r'\{'),
+            ('}', r'\}'),
+            ('~', r'\textasciitilde{}'),
+            ('^', r'\^{}'),
+            ('<', r'\textless{}'),
+            ('>', r'\textgreater{}'),
+        ]
+        # Não escapar dentro de ambientes matemáticos ou código
+        # Para texto corrido, escapar tudo
+        for old, new in replacements:
             text = text.replace(old, new)
         return text
 

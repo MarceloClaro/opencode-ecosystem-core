@@ -5,9 +5,18 @@ pdf2latex — Conversão Inteligente de PDF para Projeto LaTeX
 Orquestrador principal do pipeline de conversão.
 Parte do OpenCode Ecosystem Core — SPEC-962.
 
+Suporta múltiplos engines de conversão:
+  - builtin: pdfminer + pdftotext + Tesseract (padrão, offline)
+  - docling: IBM Docling (layout avançado, alta precisão)
+  - mineru : MinerU (precisão máxima, requer GPU)
+
+Suporta múltiplos renderizadores LaTeX:
+  - builtin: LaTeXGenerator + TemplateIntegrator (sem dependências)
+  - pandoc : Pandoc + templates Lua + citeproc (alta qualidade)
+
 Uso:
     from pdf2latex import PDF2LaTeX
-    conv = PDF2LaTeX("documento.pdf")
+    conv = PDF2LaTeX("documento.pdf", engine="builtin", renderer="pandoc")
     conv.convert(output_dir="./projeto", template="abntex2")
 """
 
@@ -17,6 +26,10 @@ import logging
 from pathlib import Path
 from typing import Optional
 
+# Engine registry (auto-registro acontece ao importar engines)
+from . import engines  # noqa: F401
+from .engine_registry import get_engine, list_engines, convert_with_best
+
 from .extractor import TextExtractor
 from .image_extractor import ImageExtractor
 from .table_detector import TableDetector
@@ -24,6 +37,8 @@ from .equation_detector import EquationDetector
 from .reference_parser import ReferenceParser
 from .latex_generator import LaTeXGenerator
 from .template_integrator import TemplateIntegrator
+from .renderers import BuiltinRenderer, PandocRenderer
+from .renderers.base import RenderInput
 
 logger = logging.getLogger("pdf2latex")
 
@@ -42,6 +57,8 @@ class PDF2LaTeX:
         extract_equations: bool = True,
         extract_references: bool = True,
         extract_images: bool = True,
+        engine: str = "auto",
+        renderer: str = "builtin",
         verbose: bool = False,
     ):
         self.pdf_path = Path(pdf_path)
@@ -53,6 +70,10 @@ class PDF2LaTeX:
         self.extract_equations = extract_equations
         self.extract_references = extract_references
         self.extract_images_flag = extract_images
+        self.engine_name = engine
+        self.engine = None
+        self.renderer_name = renderer
+        self._renderer = self._init_renderer()
 
         # Configurar logging
         level = logging.DEBUG if verbose else logging.INFO
@@ -65,6 +86,9 @@ class PDF2LaTeX:
         if not self.pdf_path.exists():
             raise FileNotFoundError(f"PDF não encontrado: {pdf_path}")
 
+        # Inicializar engine
+        self._init_engine()
+
         # Estado interno
         self.text_content = ""
         self.structure = {}       # {tipo: [(titulo, nivel, texto), ...]}
@@ -74,6 +98,56 @@ class PDF2LaTeX:
         self.references = []      # [(cite_key, entry_bibtex), ...]
 
         logger.info(f"PDF2LaTeX inicializado: {pdf_path}")
+        logger.info(f"Engine: {self.engine_name} | Renderer: {self.renderer_name}")
+
+    def _init_renderer(self):
+        """Inicializa o renderizador LaTeX."""
+        if self.renderer_name == "pandoc":
+            r = PandocRenderer()
+            if r.is_available():
+                logger.info("Renderer: Pandoc (alta qualidade)")
+                return r
+            logger.warning("Pandoc não disponível. Usando builtin.")
+        return BuiltinRenderer()
+
+    def _init_engine(self):
+        """Inicializa o engine de conversão."""
+        if self.engine_name == "auto":
+            # Auto-selecionar melhor engine disponível
+            available = [e for e in list_engines() if e["available"]]
+            if not available:
+                logger.warning("Nenhum engine disponível! Usando builtin.")
+                self.engine = get_engine("builtin")
+                self.engine_name = "builtin"
+                return
+
+            # Ordem de preferência
+            preferred = ["docling", "mineru", "builtin"]
+            for name in preferred:
+                engine = get_engine(name)
+                if engine and engine.is_available():
+                    self.engine = engine
+                    self.engine_name = name
+                    logger.info(f"Engine auto-selecionado: {name}")
+                    return
+
+            # Fallback
+            self.engine = get_engine(available[0]["name"])
+            self.engine_name = available[0]["name"]
+        else:
+            self.engine = get_engine(self.engine_name)
+            if not self.engine:
+                raise ValueError(
+                    f"Engine '{self.engine_name}' não encontrado. "
+                    f"Disponíveis: {[e['name'] for e in list_engines()]}"
+                )
+            if not self.engine.is_available():
+                logger.warning(
+                    f"Engine '{self.engine_name}' não está disponível "
+                    "(dependências faltando). Usando builtin como fallback."
+                )
+                self.engine = get_engine("builtin")
+                self.engine_name = "builtin"
 
     def convert(self, output_dir: Optional[str] = None, template: Optional[str] = None):
         """Executa o pipeline completo de conversão."""
@@ -83,9 +157,55 @@ class PDF2LaTeX:
             self.template = template
 
         logger.info("=" * 60)
-        logger.info("INICIANDO PIPELINE PDF → LATEX")
+        logger.info(f"INICIANDO PIPELINE PDF → LATEX (engine: {self.engine_name})")
         logger.info("=" * 60)
 
+        if self.engine_name != "builtin":
+            # Usar engine externo (alta precisão)
+            self._convert_with_external_engine()
+        else:
+            # Usar pipeline builtin completo
+            self._convert_with_builtin()
+
+        logger.info("=" * 60)
+        logger.info(f"✅ CONVERSÃO CONCLUÍDA: {self.output_dir}")
+        logger.info("=" * 60)
+
+        return self.output_dir
+
+    def _convert_with_external_engine(self):
+        """Usa engine externo para extração de alta precisão."""
+        logger.info(f"🔧 Usando engine: {self.engine_name}")
+
+        try:
+            result = self.engine.convert(self.pdf_path, ocr=self.ocr, ocr_lang=self.ocr_lang)
+            self.text_content = result.text_content
+            self.structure = result.structure
+            self.images = result.images
+            self.tables = result.tables
+            self.equations = result.equations
+            self.references = result.references
+
+            # Se o engine não extraiu imagens, usar extrator builtin
+            if not self.images and self.extract_images_flag:
+                logger.info("→ Engine não extraiu imagens. Usando extrator builtin.")
+                extractor = ImageExtractor(self.pdf_path, self.output_dir / "figures")
+                self.images = extractor.extract()
+
+            logger.info(f"   → {len(self.text_content)} caracteres extraídos")
+            logger.info(f"   → Confiança do engine: {result.confidence:.1%}")
+
+        except Exception as e:
+            logger.error(f"Erro no engine '{self.engine_name}': {e}")
+            logger.info("→ Fallback para engine builtin...")
+            self._convert_with_builtin()
+            return
+
+        # Renderizar com o renderizador selecionado
+        self._render_project()
+
+    def _convert_with_builtin(self):
+        """Pipeline completo usando engine builtin."""
         # Etapa 1: Extrair texto e estrutura
         self.extract_text()
 
@@ -105,18 +225,8 @@ class PDF2LaTeX:
         if self.extract_references:
             self.extract_references_from_text()
 
-        # Etapa 6: Gerar projeto LaTeX
-        self.generate_latex_project()
-
-        # Etapa 7: Aplicar template
-        if self.template:
-            self.apply_template()
-
-        logger.info("=" * 60)
-        logger.info(f"✅ CONVERSÃO CONCLUÍDA: {self.output_dir}")
-        logger.info("=" * 60)
-
-        return self.output_dir
+        # Renderizar com o renderizador selecionado
+        self._render_project()
 
     def extract_text(self):
         """Etapa 1: Extrair texto com estrutura."""
@@ -155,11 +265,11 @@ class PDF2LaTeX:
         self.references = parser.parse()
         logger.info(f"   → {len(self.references)} referências extraídas")
 
-    def generate_latex_project(self):
-        """Etapa 6: Gerar projeto LaTeX completo."""
-        logger.info("📝 Etapa 6/7: Gerando projeto LaTeX...")
-        generator = LaTeXGenerator(
-            output_dir=self.output_dir,
+    def _render_project(self):
+        """Renderiza o projeto usando o renderizador selecionado."""
+        logger.info(f"📝 Renderizando LaTeX (renderer: {self.renderer_name})...")
+
+        render_input = RenderInput(
             pdf_name=self.pdf_path.stem,
             text_content=self.text_content,
             structure=self.structure,
@@ -167,19 +277,12 @@ class PDF2LaTeX:
             tables=self.tables,
             equations=self.equations,
             references=self.references,
+            template=self.template,
+            output_dir=self.output_dir,
         )
-        generator.generate()
-        logger.info(f"   → Projeto gerado em: {self.output_dir}")
 
-    def apply_template(self):
-        """Etapa 7: Aplicar template LaTeX."""
-        logger.info(f"🎨 Etapa 7/7: Aplicando template '{self.template}'...")
-        integrator = TemplateIntegrator(
-            project_dir=self.output_dir,
-            template_name=self.template,
-        )
-        integrator.apply()
-        logger.info(f"   → Template '{self.template}' aplicado com sucesso")
+        output_dir = self._renderer.render(render_input)
+        logger.info(f"   → Projeto gerado em: {output_dir}")
 
     def compile(self):
         """Compila o projeto LaTeX gerado."""
