@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from . import PDF2LaTeX
+from .engines import list_engines
 from .template_integrator import TEMPLATE_CLASS
 
 
@@ -44,14 +45,37 @@ Exemplos:
                         help="Pular extração de referências")
     parser.add_argument("--no-images", action="store_true",
                         help="Pular extração de imagens")
+    parser.add_argument("--engine", default="auto",
+                        choices=["auto", "builtin", "docling", "mineru"],
+                        help="Engine de conversão (auto seleciona o melhor)")
+    parser.add_argument("--renderer", default="builtin",
+                        choices=["builtin", "pandoc"],
+                        help="Renderer LaTeX (pandoc requer pandoc instalado)")
     parser.add_argument("--compile", action="store_true",
                         help="Compilar projeto após gerar")
     parser.add_argument("-v", "--verbose", action="store_true",
                         help="Modo verboso (debug)")
+    parser.add_argument("--list-engines", action="store_true",
+                        help="Listar engines disponíveis e sair")
     parser.add_argument("--list-templates", action="store_true",
                         help="Listar templates disponíveis e sair")
 
     args = parser.parse_args()
+
+    # Listar engines
+    if args.list_engines:
+        print("=" * 60)
+        print("⚙️  ENGINES DE CONVERSÃO DISPONÍVEIS")
+        print("=" * 60)
+        print()
+        for engine in list_engines():
+            status = "✅ Disponível" if engine["available"] else "❌ Não instalado"
+            gpu = "🔴 Requer GPU" if engine["requires_gpu"] else "🟢 CPU"
+            print(f"  {engine['name']:15s} {status:20s} {gpu:15s}")
+            print(f"  {'':15s} {engine['description']}")
+            print()
+        print("Uso: python3 -m pdf2latex documento.pdf --engine <nome>")
+        return
 
     # Listar templates
     if args.list_templates:
@@ -129,6 +153,8 @@ Exemplos:
             extract_equations=not args.no_equations,
             extract_references=not args.no_references,
             extract_images=not args.no_images,
+            engine=args.engine,
+            renderer=args.renderer,
             verbose=args.verbose,
         )
         output_dir = converter.convert()

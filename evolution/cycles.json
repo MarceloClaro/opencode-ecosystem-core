@@ -2046,6 +2046,26 @@
         "Verificação é estrutural/CA (sem chamada de rede aos providers); não é E2E."
       ],
       "timestamp": "2026-07-11T11:05:14"
+    },
+    {
+      "round_id": "R139",
+      "objective": "R139: Versiona a frente SPEC-1000 (pdf2latex multi-engine + multi-renderer), implementada mas sem testes, adicionando 15 testes de aceitação/caracterização de contrato antes de commitar.",
+      "changes": [
+        "tests/test_r139_pdf2latex_multi_engine.py (novo, 15 testes): registro/auto-seleção/fallback de engines, dataclasses de contrato, interfaces abstratas, builtin sempre disponível, templates Pandoc + .bst ABNT, CLI --list-engines",
+        "pdf2latex/engine_registry.py (novo): registro singleton de engines",
+        "pdf2latex/engines/ (base, builtin, docling_engine): adapter pattern de extração",
+        "pdf2latex/renderers/ (base, builtin_renderer, pandoc_renderer): multi-renderer",
+        "pdf2latex/pandoc-templates/ (default/abntex2/ieee .template+.lua, abnt.csl)",
+        "pdf2latex/__init__.py, cli.py, latex_generator.py, template_integrator.py: orquestrador + flags --engine/--renderer/--list-engines + suporte .bst",
+        "templates/abntex2/*.bst + .bib (CTAN abntex2, LPPL); specs/SPEC-1000 status atualizado"
+      ],
+      "score": 8.1,
+      "lessons": [
+        "Testes de caracterização são honestos para código legado não commitado: passam de imediato, mas travam o contrato antes de versionar (o evo declara que não é TDD vermelho→verde).",
+        "Testar só a superfície determinística (is_available()->bool, builtin sempre presente) evita flakiness com docling/mineru/pandoc/latexmk opcionais.",
+        "Procedência: .bst/.bib do abntex2 são CTAN/LPPL (licença aberta) — versioná-los é padrão, diferente dos scripts cloud externos não auditados."
+      ],
+      "timestamp": "2026-07-11T11:13:59"
     }
   ]
 }
