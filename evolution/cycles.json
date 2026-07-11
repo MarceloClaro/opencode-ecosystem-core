@@ -1807,6 +1807,23 @@
         "Coexistencia intencional de present() (via direta, usada pelo CLI R125) e present_task() (via delegada sob governo do runtime); a delegada nao substitui a direta, promove a apresentacao a cidada de primeira classe do Blackboard"
       ],
       "timestamp": 1783762072.807273
+    },
+    {
+      "round_id": "R127",
+      "objective": "R127: Documentacao minuciosa da arquitetura em dupla-registro (Leigo+PhD) — legenda com funcao de cada elemento e explicacao de cada processo, incluindo o subsistema de Apresentacoes MIRA (R123-R126) ausente das legendas/processos/diagramas, no README/ARCHITECTURE/mapa 3D; contagens reconciliadas da fonte.",
+      "changes": [
+        "README.md: nova Legenda do Subsistema MIRA (tabela dual-registro Leigo x PhD dos elementos) + secao de processo 'Como Funciona a Apresentacao MIRA' (6 estagios explicados um a um) + no mira-presenter no diagrama Mermaid + contagens 85 ciclos R47-R127 / 1351 testes / 46 specs / score 9.18",
+        "ARCHITECTURE.md: no Illus cita agente R126; nova secao Subsistema de Apresentacoes MIRA (elementos+processo+2 vias); tabela de specs +R126/+R127",
+        "docs/architecture_map.html: novo no Apresentacoes MIRA com legenda dual-registro e mira-presenter; stats 1351/85 R1-R127/46 specs; resumo phd e Evolution Registry reconciliados",
+        "tests/test_r127_arch_docs_meticulous.py (novo): 10 testes de conteudo (TDD de documentacao)",
+        "specs/SPEC-935-R127.md + evolution/evo-36-r127-documentacao-minuciosa.md"
+      ],
+      "score": 8.6,
+      "lessons": [
+        "Documentar um subsistema pede as duas faces em paralelo: a legenda (o que cada peca E — funcao) e o processo (como as pecas se encadeiam — fluxo); sem elas o MIRA era invisivel na arquitetura mesmo tendo codigo/testes/specs",
+        "A divida das contagens vivas hardcodadas em 3 arquivos reincidiu (defasagem em R125 apos R126); pela terceira vez (R122/R125/R127) reforca gerar os numeros da fonte — divida tecnica a pagar com um gerador em ciclo futuro"
+      ],
+      "timestamp": 1783762876.9134316
     }
   ]
 }
