@@ -7,6 +7,7 @@ prompts de ilustração baseados no tema e no estilo do leitor.
 
 import json
 import logging
+import re
 from pathlib import Path
 from typing import Dict, Any
 
@@ -67,13 +68,24 @@ class CoverDesigner:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def _determine_style(self, title: str, content_sample: str) -> str:
-        """Determina o estilo base da paleta analisando o título e o conteúdo."""
+        """Determina o estilo base da paleta analisando o título e o conteúdo.
+
+        Usa correspondência por *palavra inteira* (fronteira `\\b`) — sem
+        isso, a palavra-chave curta "ia" casava como substring dentro de
+        termos comuns (ex.: "colônia", "história") e classificava
+        indevidamente romances como "tecnologia".
+        """
         text = (title + " " + content_sample).lower()
-        if any(w in text for w in ["código", "ia", "tecnologia", "dados", "algoritmo", "software"]):
+
+        def has(words):
+            return any(re.search(r"\b" + re.escape(w) + r"\b", text) for w in words)
+
+        if has(["código", "ia", "tecnologia", "dados", "algoritmo", "software",
+                "deep learning", "machine learning", "python"]):
             return "tecnologia"
-        elif any(w in text for w in ["teorema", "análise", "estudo", "pesquisa", "qualis", "tese"]):
+        elif has(["teorema", "análise", "estudo", "pesquisa", "qualis", "tese"]):
             return "academico"
-        elif any(w in text for w in ["didático", "jovem", "aprenda", "guia", "prático", "fácil"]):
+        elif has(["didático", "jovem", "aprenda", "guia", "prático", "fácil"]):
             return "didatico"
         return "ficcao"
 
@@ -119,7 +131,11 @@ class CoverDesigner:
 
         Cada estilo tem uma composição geométrica própria sobre um
         gradiente entre a primária e a secundária da paleta. Desenhado
-        com `remember picture, overlay` para cobrir a página inteira.
+        com `remember picture, overlay` para cobrir a página inteira. As
+        formas ficam num `scope` ancorado a `current page.south west`, de
+        modo que as coordenadas em cm caem sobre a página A4 (21x29,7 cm)
+        — sem isso, com `overlay`, elas seriam posicionadas fora da folha.
+        (Requer duas passadas de compilação, como todo `remember picture`.)
         """
         p, s, a = palette["primary"], palette["secondary"], palette["accent"]
         head = ("\\begin{tikzpicture}[remember picture, overlay]\n"
@@ -127,47 +143,57 @@ class CoverDesigner:
                 f"  \\definecolor{{cSec}}{{HTML}}{{{s}}}\n"
                 f"  \\definecolor{{cAcc}}{{HTML}}{{{a}}}\n"
                 "  \\shade[top color=cPrim, bottom color=cSec]\n"
-                "    (current page.north west) rectangle (current page.south east);\n")
+                "    (current page.north west) rectangle (current page.south east);\n"
+                "  \\begin{scope}[shift={(current page.south west)}]\n")
 
         if style_key == "tecnologia":
             body = (
                 "  % malha de nós conectados (orquestração/rede)\n"
-                "  \\foreach \\x in {2,5,8,11,14} {\n"
-                "    \\foreach \\y in {4,8,12,16} {\n"
-                "      \\fill[cAcc, opacity=0.35] (\\x,\\y) circle (2pt);\n"
+                "  \\foreach \\x in {1.5,5,8.5,12,15.5,19} {\n"
+                "    \\foreach \\y in {2,7,12,17,22,27} {\n"
+                "      \\fill[cAcc, opacity=0.30] (\\x,\\y) circle (2.4pt);\n"
                 "    }\n"
                 "  }\n"
-                "  \\draw[cAcc, opacity=0.25, line width=0.6pt]\n"
-                "    (2,4) -- (8,12) -- (14,8) -- (5,16) -- (11,4);\n")
+                "  \\draw[cAcc, opacity=0.22, line width=0.6pt]\n"
+                "    (1.5,2) -- (8.5,12) -- (19,7) -- (5,22) -- (15.5,27) -- (12,2);\n")
         elif style_key == "academico":
             body = (
                 "  % colunas clássicas + arco (rigor atemporal)\n"
-                "  \\foreach \\x in {3,6,9,12} {\n"
-                "    \\fill[cAcc, opacity=0.18] (\\x,3) rectangle (\\x+0.7,15);\n"
+                "  \\foreach \\x in {2,6,10,14,18} {\n"
+                "    \\fill[cAcc, opacity=0.14] (\\x,2) rectangle (\\x+0.9,25);\n"
                 "  }\n"
-                "  \\draw[cAcc, opacity=0.3, line width=1.2pt]\n"
-                "    (2.5,15) arc (180:0:5.2 and 1.6);\n")
+                "  \\draw[cAcc, opacity=0.28, line width=1.4pt]\n"
+                "    (2,25) arc (180:0:8.5 and 2.4);\n")
         elif style_key == "didatico":
             body = (
                 "  % formas orgânicas coloridas (acessível, vibrante)\n"
-                "  \\fill[cAcc, opacity=0.30] (4,14) circle (2.6);\n"
-                "  \\fill[cSec, opacity=0.35] (12,5) circle (3.2);\n"
-                "  \\fill[cPrim, opacity=0.25, rounded corners=14pt]\n"
-                "    (9,11) rectangle (15,17);\n")
+                "  \\fill[cAcc, opacity=0.28] (4.5,23) circle (3.2);\n"
+                "  \\fill[cSec, opacity=0.32] (17,7) circle (4.0);\n"
+                "  \\fill[cPrim, opacity=0.22, rounded corners=18pt]\n"
+                "    (11,17) rectangle (20,26);\n"
+                "  \\fill[cAcc, opacity=0.20] (3,5) circle (2.2);\n")
         else:  # ficcao
             body = (
                 "  % silhueta dramática + raio de luz (misterioso)\n"
                 "  \\fill[black, opacity=0.55]\n"
                 "    (0,0) -- (5,0) -- (7,6) -- (9,2) -- (12,9) -- (16,4)\n"
-                "    -- (16,0) -- cycle;\n"
+                "    -- (21,3) -- (21,0) -- cycle;\n"
                 "  \\draw[cAcc, opacity=0.4, line width=1.4pt]\n"
-                "    (8,20) -- (8,9);\n")
+                "    (8,26) -- (8,9);\n")
 
-        return head + body + "\\end{tikzpicture}"
+        return head + body + "  \\end{scope}\n\\end{tikzpicture}"
 
     def _spine_mm(self, page_count: int) -> float:
         """Largura estimada da lombada (mm) a partir do número de páginas."""
         return round(max(3.0, page_count * MM_PER_PAGE), 1)
+
+    @staticmethod
+    def _ink_for(bg_hex: str) -> str:
+        """Escolhe a tinta legível (branco/preto) sobre um fundo hex dado,
+        pela luminância relativa — evita título escuro em capa escura."""
+        r, g, b = (int(bg_hex[i:i + 2], 16) for i in (0, 2, 4))
+        luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+        return "white" if luminance < 0.55 else "black"
 
     def _cover_preamble(self, palette: Dict[str, str]) -> str:
         """Pacotes necessários para os fragmentos de capa compilarem."""
@@ -281,9 +307,10 @@ gerado **antes** de `\\begin{{document}}`:
 
         # 3. Gerar capa.tex — arte vetorial TikZ + título/autor por cima
         art = self._tikz_art(style_key, palette)
+        ink = self._ink_for(palette['primary'])
         capa_tex = f"""\\begin{{titlepage}}
 \\pagecolor[HTML]{{{palette['primary']}}}
-\\color[HTML]{{{palette['bg']}}}
+\\color{{{ink}}}
 % arte vetorial de fundo (full-bleed), gerada pelo CoverDesigner (R124)
 {art}
 \\begin{{center}}

@@ -74,6 +74,34 @@ arte da capa passa a ser vetorial e local, não um prompt para terceiros.
    os fragmentos de capa autossuficientes e compiláveis isoladamente —
    o que permitiu a verificação de compilação real com `pdflatex`.
 
+## Refino pós-aplicação (capas reais: OdontoIA e Molambudos)
+
+Ao aplicar o R124 a dois livros reais do repositório — `livro-odontologia-ia`
+(OdontoIA, tecnologia) e `projetos/molambudos` (romance de terror,
+ficção) — e renderizar as capas com `pdflatex` (2 passadas), três
+defeitos reais apareceram e foram corrigidos:
+
+1. **Formas geométricas caíam fora da folha.** Com `remember picture,
+   overlay`, coordenadas cruas em cm não têm origem na página. Envolvi as
+   formas num `\begin{scope}[shift={(current page.south west)}]`, mapeando
+   as coordenadas sobre a A4 (21×29,7 cm), e as espalhei por toda a capa.
+   Só o gradiente aparecia antes; agora a malha de nós (tecnologia) e a
+   silhueta (ficção) renderizam de fato.
+2. **Título ilegível em capas escuras.** A tinta do texto usava
+   `palette['bg']`, que na paleta de ficção é quase preto (`#121212`) —
+   título escuro sobre fundo escuro. Novo `_ink_for(hex)` escolhe
+   branco/preto pela luminância relativa da cor primária.
+3. **Romance classificado como "tecnologia".** O quirk do `"ia"` como
+   substring (adiado como lição na entrega inicial) casava dentro de
+   "colônia"/"história". Corrigido de vez: `_determine_style` passou a
+   usar correspondência por palavra inteira (`\b...\b`), com um teste de
+   regressão dedicado. A lição virou correção.
+
+Verificação do refino: `tests/test_r124_cover_tikz.py` (agora 9 testes,
++1 de regressão) e `tests/test_cover_designer.py` verdes; ambas as capas
+recompiladas em PDF e inspecionadas visualmente (malha visível; título
+legível; estilos corretos: OdontoIA→tecnologia, Molambudos→ficção).
+
 ## Score
 
 **8.6/10**
