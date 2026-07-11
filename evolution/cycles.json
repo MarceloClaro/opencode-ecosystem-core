@@ -1824,6 +1824,25 @@
         "A divida das contagens vivas hardcodadas em 3 arquivos reincidiu (defasagem em R125 apos R126); pela terceira vez (R122/R125/R127) reforca gerar os numeros da fonte — divida tecnica a pagar com um gerador em ciclo futuro"
       ],
       "timestamp": 1783762876.9134316
+    },
+    {
+      "round_id": "R128",
+      "objective": "R128: Encanamento seguro de chaves LLM (OpenAI) via ambiente + LLM local Ollama. Habilita provedores de nuvem e local de forma segura por construcao: chave so em .env protegido (nunca versionada nem impressa), corrige risco real de .env fora do .gitignore, .env.example modelo, carregador de .env (acessibilidade) e check no doctor que reporta provedor sem vazar o valor.",
+      "changes": [
+        ".gitignore: ignora .env/.env.local/.env.*.local/*.pem/*.key, mantendo .env.example versionado (negacao !)",
+        ".env.example (novo): modelo com variaveis vazias (OPENAI_API_KEY/BASE/MODEL, OLLAMA_HOST/MODEL, OPENCODE_*), sem segredo, com preferencia Ollama->OpenAI documentada",
+        "marceloclaro/doctor.py: _ollama_available() + _check_llm_providers() (reporta so o booleano da chave, nunca o valor; pass/warn, nunca fail); ligado a run_doctor()",
+        "marceloclaro/env_loader.py (novo): carregador de .env sem dependencias, chamado em cli.main(); nao sobrescreve o shell, nao imprime valores (acessibilidade)",
+        "tests/test_r128_openai_provider.py (novo): 13 testes TDD; specs/SPEC-935-R128.md + evolution/evo-37-r128-encanamento-seguro-llm.md",
+        "ACOES LOCAIS NAO VERSIONADAS: .env com a chave de teste do usuario (600, gitignored); Ollama ja instalado v0.31.1, modelo llama3.2 baixado (padrao do ecossistema) + nomic-embed-text ja presente"
+      ],
+      "score": 8.6,
+      "lessons": [
+        "Segredo colado em chat/arquivo e comprometido: chave orientada a rotacao, nunca versionada nem impressa de volta; unico lugar e o .env local (600, gitignored). Encanamento seguro (gitignore+loader+check que nao vaza) atende acessibilidade sem abrir mao da seguranca",
+        "Suporte a um provedor existir no codigo (llm_client) nao e o mesmo que estar ativavel: faltavam protecao do segredo, modelo de config e visibilidade (doctor) — mesmo padrao motor-existe-falta-exposicao do R125/R127, agora na camada de segredo",
+        "'Gestao de tokens' com OpenAI e equivoco: a Token Economy e interna/virtual (nao billing); quem reduz custo real e o roteamento para Ollama local (custo zero), OpenAI como fallback de qualidade"
+      ],
+      "timestamp": 1783763994.691984
     }
   ]
 }
