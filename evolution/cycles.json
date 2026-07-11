@@ -1789,6 +1789,24 @@
         "Contagens vivas (testes/ciclos/specs) estavam defasadas em R121 porque R123/R124 nao fizeram doc-sync; reforca a licao do R122 de gerar numeros da fonte real; reconciliados de fato neste ciclo"
       ],
       "timestamp": 1783761243.8760593
+    },
+    {
+      "round_id": "R126",
+      "objective": "R126: Agente-executor MIRA de runtime (delegavel pelo Blackboard). Fecha o acoplamento formal entre o pipeline MIRA (R123) e o runtime multiagente: um agente-executor registrado com capacidade propria (apresentacao-mira, distintiva) que realiza o metodo quando uma tarefa e delegada, fechando o laco delegate -> match -> execute -> report_completion com Trust Engine e Token Economy aprendendo.",
+      "changes": [
+        "illustrations/mira_agent.py (novo): MiraPresentationAgent (agent_id mira-presenter, capacidade distintiva apresentacao-mira, register_payload, execute que roda MiraDeckPipeline)",
+        "illustrations/__init__.py: exporta MiraPresentationAgent/MIRA_AGENT_ID/MIRA_CAPABILITIES",
+        "marceloclaro/orchestrator.py: registro do agente na init; register_mira_agent() idempotente; present_task(folder) delega+executa+reporta, retorna task_id+agent_id+resultado",
+        "tests/test_r126_mira_agent_runtime.py (novo): 9 testes TDD",
+        "specs/SPEC-935-R126.md + evolution/evo-35-r126-agente-executor-mira.md"
+      ],
+      "score": 8.6,
+      "lessons": [
+        "metabus.publish e sincrono: ao retornar de delegate() a tarefa ja percorreu CFP->volunteer->assigned, permitindo executar+reportar na mesma chamada; depende dessa sincronia",
+        "Capacidade distintiva (apresentacao-mira, exclusiva do agente) torna a atribuicao deterministica; sem ela o matching por atencao poderia escolher outro agente e o report_completion nao casaria com task.assigned_to",
+        "Coexistencia intencional de present() (via direta, usada pelo CLI R125) e present_task() (via delegada sob governo do runtime); a delegada nao substitui a direta, promove a apresentacao a cidada de primeira classe do Blackboard"
+      ],
+      "timestamp": 1783762072.807273
     }
   ]
 }

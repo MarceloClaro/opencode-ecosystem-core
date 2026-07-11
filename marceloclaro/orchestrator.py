@@ -101,6 +101,12 @@ class MarceloClaroOrchestrator:
             except Exception as exc:
                 logger.warning(f"[{self.id}] Falha ao registrar catálogo: {exc}")
 
+        # Agente-executor MIRA (SPEC-935-R126): encarna o pipeline de
+        # apresentações e o torna delegável pelo Blackboard.
+        self._mira_agent = None
+        if auto_load_agents:
+            self.register_mira_agent()
+
         # Loop Engineering (SPEC-935-R109): registra a especificação formal
         # do loop científico — trigger, objetivo, verificação, parada, memória
         loop_spec_registry.register(LoopSpecification(
@@ -1330,6 +1336,47 @@ class MarceloClaroOrchestrator:
             "conformidade": str(out / "CONFORMIDADE.md"),
             "violations": report.violations,
         }
+
+    def register_mira_agent(self) -> str:
+        """Registra (idempotente) o agente-executor MIRA no Blackboard.
+
+        Torna 'gerar apresentação' uma capacidade de runtime visível em
+        `list_agents()`/`status()` e delegável via `present_task()`.
+        """
+        from illustrations.mira_agent import MiraPresentationAgent, MIRA_AGENT_ID
+        if MIRA_AGENT_ID in blackboard.registry:
+            if self._mira_agent is None:
+                self._mira_agent = MiraPresentationAgent()
+            return MIRA_AGENT_ID
+        self._mira_agent = MiraPresentationAgent()
+        metabus.publish("agent.register", self._mira_agent.register_payload(),
+                        source_agent=self.id)
+        return MIRA_AGENT_ID
+
+    def present_task(self, production_folder: str) -> Dict[str, Any]:
+        """
+        Via *delegada* de apresentação MIRA: posta a tarefa no Blackboard
+        (`required_capabilities=['apresentacao-mira']`), executa pelo
+        agente-executor MIRA e reporta a conclusão via `report_completion`
+        (Trust Engine e Token Economy aprendem com o resultado).
+
+        Difere de `present()` (via direta, chamada de biblioteca): aqui a
+        apresentação passa pelo laço completo do runtime multiagente.
+        Retorna o rastro `task_id` + `agent_id` + resultado da execução.
+        """
+        from pathlib import Path as _P
+        from illustrations.mira_agent import MIRA_AGENT_ID
+        self.register_mira_agent()
+
+        task_id = self.delegate(
+            f"Apresentação MIRA da produção {_P(production_folder).name[:60]}",
+            required_capabilities=["apresentacao-mira"],
+            context={"production_folder": production_folder},
+        )
+        result = self._mira_agent.execute({"production_folder": production_folder})
+        success = bool(result.get("ok")) and bool(result.get("passed", False))
+        self.report_completion(task_id, MIRA_AGENT_ID, result, success=success)
+        return {"task_id": task_id, "agent_id": MIRA_AGENT_ID, **result}
 
     def knowledge_graph(self, texts: Dict[str, str],
                         output_dir: str = "ilustracoes/grafo") -> Dict[str, Any]:

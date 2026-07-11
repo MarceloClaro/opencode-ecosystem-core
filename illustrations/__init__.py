@@ -14,6 +14,7 @@ from .mira_deck import (
     MiraDeckPipeline, Briefing, Section, SlideSpec, SlidePlan, Deck,
     ConformityReport,
 )
+from .mira_agent import MiraPresentationAgent, MIRA_AGENT_ID, MIRA_CAPABILITIES
 
 __all__ = [
     "MermaidEngine", "MermaidFigure",
@@ -21,4 +22,5 @@ __all__ = [
     "MiraEngine", "MiraCard", "MIRA_CATALOG",
     "MiraDeckPipeline", "Briefing", "Section", "SlideSpec", "SlidePlan",
     "Deck", "ConformityReport",
+    "MiraPresentationAgent", "MIRA_AGENT_ID", "MIRA_CAPABILITIES",
 ]
