@@ -84,7 +84,7 @@ graph TD
         MetaEval[Metacognitive Eval<br>SPEC-920]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
-        Publishing[Publishing<br>LaTeX & Cover Designer]
+        Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)"]
         Research["Research<br>Hub c/ OSINT<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
         Illus[Illustrations<br>Mermaid/MIRA/Graph]
         EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
@@ -93,8 +93,8 @@ graph TD
 
     %% Seguranca e Qualidade
     subgraph Security ["Seguranca & Qualidade"]
-        MCPSec["MCP Security (R100)<br>MCPGuard<br>AuditLogger<br>ToolVetter<br>RateLimiter"]
-        CICD["CI/CD Pipeline (R106)<br>GitHub Actions: Lint+Test+Package<br>scripts/quality_report.py<br>scripts/check_coverage.py<br>scripts/run_full_suite.sh"]
+        MCPSec["MCP Security (R100)<br>MCPGuard<br>AuditLogger<br>ToolVetter<br>RateLimiter<br>Handshake initialize corrigido (R118)"]
+        CICD["CI/CD Pipeline (R106)<br>GitHub Actions: Lint+Test+Package<br>scripts/quality_report.py<br>scripts/check_coverage.py<br>scripts/run_full_suite.sh<br>tests/conftest.py: isolamento real do MCI (R121)"]
         Skills["Skills Exportaveis (R104a)<br>evo-science<br>deep-research<br>peer-review-v2<br>mcp-security"]
         PipPkg["Pip Packages (R104b)<br>opencode-evosci<br>opencode-deep-research<br>opencode-peer-review"]
         DoctorNode["Doctor + Helpdesk (R110)<br>marceloclaro/doctor.py + helpdesk.py<br>+ Prática pública CORRIGENDUM.md"]
@@ -280,6 +280,9 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R116 | Instalação Multiplataforma, Ícone Próprio, Claude CLI e Manual/Helpdesk | 11 CA |
 | SPEC-935-R117 | Mapa Interativo da Arquitetura + Documentação Dupla-Registro | 6 CA |
 | SPEC-935-R118 | Correção do Handshake MCP em metacognitive-interconnect | 7 CA |
+| SPEC-935-R119 | Templates Literários/de Ficção + Limpeza de Resíduos do Catálogo | 5 CA |
+| SPEC-935-R120 | Comando `pesquisa` no CLI + Visibilidade do Fallback Sci-Hub | 7 CA |
+| SPEC-935-R121 | Isolamento Real do Estado do MCI na Suíte de Testes | 4 CA |
 
 ---
 
