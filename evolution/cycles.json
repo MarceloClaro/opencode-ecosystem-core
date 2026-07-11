@@ -2066,6 +2066,23 @@
         "Procedência: .bst/.bib do abntex2 são CTAN/LPPL (licença aberta) — versioná-los é padrão, diferente dos scripts cloud externos não auditados."
       ],
       "timestamp": "2026-07-11T11:13:59"
+    },
+    {
+      "round_id": "R140",
+      "objective": "R140: Fecha a frente Molambudos e demais conteúdo de usuário EXCLUINDO-os do ecosystem-core via .gitignore (decisão do usuário: 'só o código do ecossistema'). Trabalho Molambudos já registrado no ledger (R130-R134); só o conteúdo bruto do livro/pesquisa ficava pendente.",
+      "changes": [
+        ".gitignore: bloco 'Conteúdo de usuário' (projetos/, pesquisa/, livro-odontologia-ia/, PROJETO 1/, REVISAO_MOLAMBUDOS.md, artigos_dl_*.json, templates/livro/molambudos+ia-em-odontologia/, specs Molambudos/odontologia)",
+        ".gitignore: patterns de artefatos binários de templates (*.pdf, *.csv, outputs/, *:Zone.Identifier)",
+        "PROGRESS.md: frentes R137-R140 marcadas como concluídas, dívida documentada",
+        "evolution/evo-42-r140-*.md"
+      ],
+      "score": 7.8,
+      "lessons": [
+        "'Fechar uma frente' às vezes é decidir explicitamente NÃO versionar: Molambudos é conteúdo criativo do usuário, fora do repo de infraestrutura. Decisão confirmada, não presumida.",
+        "Procedência e propósito ditam o versionamento: scripts cloud (licença não auditada) e conteúdo de usuário ficam fora; .bst CTAN (LPPL) entra. Cada caso pelo que o artefato é.",
+        "templates/projects/ (1593 arquivos já rastreados) deixado como está — arquivos avulsos ali são de outras frentes (não misturar, por CLAUDE.md)."
+      ],
+      "timestamp": "2026-07-11T11:38:37"
     }
   ]
 }

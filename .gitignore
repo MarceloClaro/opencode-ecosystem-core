@@ -50,6 +50,27 @@ templates/**/*.mp4
 templates/**/*.wav
 templates/**/*.avi
 templates/**/*.mkv
+# Artefatos binários/gerados de templates (PDFs compilados, saídas de ML).
+# Os PDFs/CSVs legítimos já versionados permanecem; isto só ignora novos.
+templates/**/*.pdf
+templates/**/*.csv
+templates/**/outputs/
+*:Zone.Identifier
+
+# Conteúdo de usuário (livros, pesquisa, projetos) — NÃO versionar no
+# ecosystem-core (R140). É conteúdo criativo/de pesquisa, não código de
+# infraestrutura. O trabalho já está registrado no ledger (ex.: Molambudos
+# = ciclos R130–R134). Decisão do usuário: "só o código do ecossistema".
+/PROJETO 1/
+/projetos/
+/pesquisa/
+/livro-odontologia-ia/
+/REVISAO_MOLAMBUDOS.md
+/artigos_dl_odontologia.json
+templates/livro/molambudos/
+templates/livro/ia-em-odontologia/
+specs/SPEC-91[0-9]-molambudos-*.md
+specs/SPEC-950-livro-odontologia-ia.md
 
 # Backup externo Antigravity (R137) — 324 scripts de terceiros com
 # procedência/licença ainda não revisadas. Não versionar até a revisão.
