@@ -1677,6 +1677,26 @@
         "Disciplina de escopo de commit mantida mesmo sob pressao de conveniencia: as correcoes uteis feitas em pdf2latex/ nao foram commitadas junto por pertencerem a uma frente de trabalho paralela (SPEC-1000) com mudancas pendentes nao relacionadas."
       ],
       "timestamp": 1783726913.838189
+    },
+    {
+      "round_id": "R120",
+      "objective": "R120: Comando pesquisa no CLI do marceloclaro (expoe o pipeline de pesquisa cientifica de 11 fontes, ate entao so acessivel via Python) + visibilidade do fallback Sci-Hub ja existente em research/downloader.py",
+      "changes": [
+        "marceloclaro/cli.py: novo comando direto pesquisa \"<tema>\" (alias research) com flags --max-papers, --platforms, --no-download; nova opcao [9] no menu interativo com prompts guiados e resumo amigavel",
+        "_parse_pesquisa_flags() isolado para parsing testavel das flags do comando direto",
+        "AJUDA_TEXT e MENU atualizados, incluindo mencao ao fallback scihub-cli",
+        "marceloclaro/doctor.py::EXTERNAL_CLIS ganhou scihub-cli -> pip install scihub-cli, reaproveitando o _check_external_clis() ja existente do R116 (sempre warn, nunca fail)",
+        "README.md e ARCHITECTURE.md (os dois diagramas Mermaid mantidos em paridade desde o R117): no Research Hub ganhou mencao ao CLI pesquisa (R120) e ao fallback Sci-Hub",
+        "MANUAL.md: nova linha [9] na tabela do menu e nota na FAQ de CLIs opcionais sobre scihub-cli",
+        "tests/test_r120_cli_pesquisa_command.py: 13 testes novos (parsing de flags, comando direto com/sem tema/alias/flags, menu interativo opcao 9, registro e comportamento do check scihub-cli no doctor) — nenhuma chamada de rede real, orchestrator.research() sempre mockado"
+      ],
+      "score": 8.8,
+      "lessons": [
+        "Um subsistema pode estar perfeitamente integrado na cadeia de chamadas internas (orchestrator -> research hub -> searchers) e ainda assim ser invisivel para quem so usa o CLI — vale sempre checar nao so \"isso esta conectado no codigo?\" mas \"isso esta alcancavel pela interface que o usuario realmente usa?\"",
+        "\"Adicionar Sci-Hub\" ja estava parcialmente feito (fallback de download via scihub-cli ja existia em research/downloader.py) — a lacuna real era de visibilidade (documentacao, doctor()), nao de implementacao",
+        "Reaproveitar o padrao ja estabelecido no R116 (EXTERNAL_CLIS + _check_external_clis() generico) custou uma linha de dicionario em vez de uma funcao nova"
+      ],
+      "timestamp": 1783736612.0330708
     }
   ]
 }

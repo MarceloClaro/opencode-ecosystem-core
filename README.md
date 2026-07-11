@@ -80,7 +80,7 @@ Este ecossistema tem dezenas de subsistemas reais. Para não virar um emaranhado
 | **3. MCI — Sistema Nervoso** | ciano | A memória e os instintos compartilhados de tudo | MetaBus, Blackboard, Reflexion, ConfidenceCalibrator, MetacognitiveEvaluator (SPEC-920), OQS/VSEE/EGS |
 | **4. Pipeline Científico** | coral | A linha de produção de um artigo científico, do zero à publicação | EvoSci→DeepRes→PeerReview(+BlindReview R115)→Revision→Composer, fundidos e em loop real (R108/R109) |
 | **5. Raciocínio & Descoberta** | lilás | As diferentes formas de "pensar" do sistema | 12 motores + ARCHE RLT (R114) + Detector de Falácias (R113), Game Theory, MiroFish, MASWOS, Legal, RAG, Synthetic University |
-| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing, Research Hub (+PubMed/bioRxiv/CORE R111), Illustrations, MCP Security, CI/CD, Evolution Registry (74 ciclos), 35 Specs SDD |
+| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing, Research Hub (+PubMed/bioRxiv/CORE R111, CLI `pesquisa` R120), Illustrations, MCP Security, CI/CD, Evolution Registry (77 ciclos), 35 Specs SDD |
 
 ### Instruções de leitura
 
@@ -252,7 +252,7 @@ graph TD
         EvoMem[Evolutionary Memory<br>R97 · Memória Persistente]
         Novelty[Novelty V2<br>R98 · Contribution Points]
         RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
-        ResearchHub["Research Hub<br>11 fontes: +PubMed/bioRxiv/CORE (R111)"]
+        ResearchHub["Research Hub<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
     end
 
     %% Seguranca e Qualidade

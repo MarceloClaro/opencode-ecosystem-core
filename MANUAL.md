@@ -21,6 +21,7 @@ python3 -m marceloclaro.cli status      # foto geral do sistema
 python3 -m marceloclaro.cli doctor      # está tudo saudável?
 python3 -m marceloclaro.cli helpdesk    # o que está errado E como corrigir
 python3 -m marceloclaro.cli ajuda       # este resumo, no terminal
+python3 -m marceloclaro.cli pesquisa "seu tema aqui"   # pesquisa científica (11 fontes)
 ```
 
 ## O menu, explicado sem jargão
@@ -35,6 +36,7 @@ python3 -m marceloclaro.cli ajuda       # este resumo, no terminal
 | `[6]` Doctor | Checagem rápida (segundos) de saúde | Specs carregando, histórico intacto, CLIs externas instaladas |
 | `[7]` Ajuda | Este resumo | — |
 | `[8]` Helpdesk | Doctor + sugestão do que fazer para cada problema | Ex.: "CLI X ausente → rode este comando para instalar" |
+| `[9]` Pesquisa científica | Busca um tema em 11 fontes acadêmicas, baixa PDFs, converte para Markdown e gera fichamento + resenha crítica em ABNT/APA | Fontes: arXiv, Semantic Scholar, Crossref, OpenAlex, Europe PMC, SciELO, PubMed, bioRxiv/medRxiv, CORE, GitHub, Kaggle. Download via acesso aberto direto e, como último recurso para artigos pagos, `scihub-cli` (opcional) |
 
 ## Perguntas frequentes
 
@@ -44,8 +46,8 @@ São nomes técnicos internos. Na prática: o Blackboard é onde tarefas esperam
 **O `doctor` disse "degraded". É grave?**
 Não necessariamente. "Degraded" significa que há avisos (`warn`), não falhas críticas (`fail`). Rode `[8] Helpdesk` para ver exatamente o que fazer em cada caso.
 
-**Preciso instalar OpenCode, Antigravity, Claude Code E Ollama?**
-Não — todos são opcionais para o ecossistema em Python puro funcionar. Cada um serve a um uso diferente: OpenCode CLI expõe o catálogo de agentes como comandos de terminal; Antigravity permite delegar tarefas a um agente externo do Google; Claude Code é o assistente de desenvolvimento que já lê `CLAUDE.md`/`AGENTS.md` automaticamente neste projeto; Ollama roda modelos de linguagem localmente e de graça. O `doctor`/`helpdesk` avisa quando algum está faltando, mas nunca bloqueia o uso por causa disso.
+**Preciso instalar OpenCode, Antigravity, Claude Code, Ollama E scihub-cli?**
+Não — todos são opcionais para o ecossistema em Python puro funcionar. Cada um serve a um uso diferente: OpenCode CLI expõe o catálogo de agentes como comandos de terminal; Antigravity permite delegar tarefas a um agente externo do Google; Claude Code é o assistente de desenvolvimento que já lê `CLAUDE.md`/`AGENTS.md` automaticamente neste projeto; Ollama roda modelos de linguagem localmente e de graça; `scihub-cli` (`pip install scihub-cli`) é usado pela opção `[9] Pesquisa científica` como último recurso para baixar PDFs de artigos pagos quando não há versão de acesso aberto — sem ele, a pesquisa continua funcionando normalmente, só não baixa esses PDFs específicos. O `doctor`/`helpdesk` avisa quando algum está faltando, mas nunca bloqueia o uso por causa disso.
 
 **Onde ficam os atalhos depois de instalar no Windows?**
 Na Área de Trabalho, com o ícone próprio do projeto: "OpenCode Ecosystem", "Antigravity CLI", "Claude Code (Ecosystem)" e "Ecosystem (marceloclaro)".

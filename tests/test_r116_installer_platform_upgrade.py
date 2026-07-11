@@ -121,7 +121,8 @@ class TestDoctorExternalClis:
         monkeypatch.setattr(doctor_mod.shutil, "which", lambda name: None)
         check = doctor_mod._check_external_clis()
         assert check.status == "warn"  # nunca fail — CLIs sao opcionais
-        assert "4/4" in check.detail
+        n = len(doctor_mod.EXTERNAL_CLIS)
+        assert f"{n}/{n}" in check.detail  # R120 adicionou scihub-cli (5ª CLI)
 
     def test_check_external_clis_reports_pass_when_all_present(self, monkeypatch):
         from marceloclaro import doctor as doctor_mod

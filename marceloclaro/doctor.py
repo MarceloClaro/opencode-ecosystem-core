@@ -35,6 +35,7 @@ EXTERNAL_CLIS = {
     "agy": "curl -fsSL https://antigravity.google/cli/install.sh | bash",
     "claude": "npm install -g @anthropic-ai/claude-code",
     "ollama": "curl -fsSL https://ollama.com/install.sh | sh",
+    "scihub-cli": "pip install scihub-cli",
 }
 
 
@@ -160,12 +161,14 @@ def _check_corrigendum() -> DoctorCheck:
 
 def _check_external_clis() -> DoctorCheck:
     """Verifica se as CLIs externas de primeira classe (OpenCode, Antigravity,
-    Claude Code, Ollama) estão instaladas e no PATH. São opcionais para o
-    funcionamento do ecossistema em Python puro, por isso o resultado é
-    sempre ``warn`` (nunca ``fail``) quando alguma está ausente — cada
-    ferramenta é usada em fluxos diferentes (OpenCode CLI para o catálogo
-    de agentes, Antigravity para delegação externa, Claude Code para
-    desenvolvimento neste projeto, Ollama para modelos locais)."""
+    Claude Code, Ollama, scihub-cli) estão instaladas e no PATH. São
+    opcionais para o funcionamento do ecossistema em Python puro, por isso
+    o resultado é sempre ``warn`` (nunca ``fail``) quando alguma está
+    ausente — cada ferramenta é usada em fluxos diferentes (OpenCode CLI
+    para o catálogo de agentes, Antigravity para delegação externa, Claude
+    Code para desenvolvimento neste projeto, Ollama para modelos locais,
+    scihub-cli como fallback de download de PDF no pipeline de pesquisa
+    quando não há acesso open-access direto — ver `research/downloader.py`)."""
     missing = {name: cmd for name, cmd in EXTERNAL_CLIS.items() if shutil.which(name) is None}
     if not missing:
         return DoctorCheck(
