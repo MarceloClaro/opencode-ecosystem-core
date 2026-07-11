@@ -67,6 +67,8 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 - **Templates literários/de ficção (R119):** `templates/books/romance-literario` e `contos-poesia` — primeiros templates de narrativa/ficção do catálogo (os demais "livro" eram todos acadêmicos/técnicos), integrados ao pipeline (`publishing/production.py`) e verificados de ponta a ponta convertendo um romance real via `pdf2latex`.
 - **Pesquisa científica exposta no CLI (R120):** `marceloclaro pesquisa "<tema>"` (e opção `[9]` do menu) — o pipeline de 11 fontes acadêmicas (R111) que só era acessível via Python ganhou comando direto; fallback de download via `scihub-cli` documentado e verificado por `doctor()`.
 - **Isolamento real de testes (R121):** `tests/conftest.py` corrige uma falha intermitente que, por mais de 70 ciclos, corrompia silenciosamente o `confidence_ledger` de produção a cada rodada completa da suíte — causa raiz encontrada e eliminada, não apenas contornada.
+- **Apresentações MIRA (R123 + R125):** o pipeline `illustrations/mira_deck.py::MiraDeckPipeline` transforma o manuscrito de uma produção num deck HTML de cards de vidro animados (método MIRA — linha de montagem de 6 estágios `extract → plan → copywrite → build → animate → validate`, Regra Zero de loop perpétuo, navegação card-a-card), com relatório de conformidade. Exposto ao usuário via `marceloclaro apresentacao <pasta>` (e opção `[10]` do menu), conectado aos agent cards MIRA já registrados no catálogo.
+- **Capa e contracapa TikZ (R124):** o `CoverDesigner` gera arte vetorial compilável no PDF (gradiente + formas geométricas por estilo), lombada dimensionada pela contagem de páginas e ficha catalográfica (CIP) — sem depender de gerador de imagem externo.
 
 ---
 
@@ -85,7 +87,7 @@ Este ecossistema tem dezenas de subsistemas reais. Para não virar um emaranhado
 | **3. MCI — Sistema Nervoso** | ciano | A memória e os instintos compartilhados de tudo | MetaBus, Blackboard, Reflexion, ConfidenceCalibrator, MetacognitiveEvaluator (SPEC-920), OQS/VSEE/EGS |
 | **4. Pipeline Científico** | coral | A linha de produção de um artigo científico, do zero à publicação | EvoSci→DeepRes→PeerReview(+BlindReview R115)→Revision→Composer, fundidos e em loop real (R108/R109) |
 | **5. Raciocínio & Descoberta** | lilás | As diferentes formas de "pensar" do sistema | 12 motores + ARCHE RLT (R114) + Detector de Falácias (R113), Game Theory, MiroFish, MASWOS, Legal, RAG, Synthetic University |
-| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing (+templates literários R119), Research Hub (+PubMed/bioRxiv/CORE R111, CLI `pesquisa` R120), Illustrations, MCP Security (R118), CI/CD (R121), Evolution Registry (79 ciclos), 40 Specs SDD |
+| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing (+templates literários R119, +capa/contracapa TikZ R124), Research Hub (+PubMed/bioRxiv/CORE R111, CLI `pesquisa` R120), Illustrations + Apresentações MIRA (deck animado R123, CLI `apresentacao` R125), MCP Security (R118), CI/CD (R121), Evolution Registry (83 ciclos), 44 Specs SDD |
 
 ### Instruções de leitura
 
@@ -258,7 +260,8 @@ graph TD
         Novelty[Novelty V2<br>R98 · Contribution Points]
         RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
         ResearchHub["Research Hub<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
-        Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)"]
+        Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)<br>+Capa/contracapa TikZ (R124)"]
+        MiraDeck["Apresentações MIRA<br>artigo → deck animado (R123)<br>CLI: marceloclaro apresentacao (R125)"]
     end
 
     %% Seguranca e Qualidade
@@ -744,7 +747,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **79 ciclos registrados** (R47 a R121), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **83 ciclos registrados** (R47 a R125), cada um com score, lições e timestamp.
 
 ---
 
@@ -1062,7 +1065,7 @@ print(result["theses"][0])             # Melhor tese do ciclo
 print(result["novelty_scores"])        # Scores de novidade
 ```
 
-**Ciclos de evolução: 79** (R47–R121) | **1288 testes** | Score médio: 9.23/10
+**Ciclos de evolução: 83** (R47–R125) | **1332 testes** | Score médio: 9.21/10
 
 > "Score médio" é autoavaliação interna por ciclo, não benchmark externo — ver [`CORRIGENDUM.md`](CORRIGENDUM.md#3-score-médio-94-10-e-ciclos-de-evolução-65-readmemd-architecturemd).
 
@@ -1127,7 +1130,7 @@ opencode-ecosystem-core/
 │   ├── opencode-evosci/
 │   ├── opencode-deep-research/
 │   └── opencode-peer-review/
-├── specs/                   # Especificacoes SDD (R97-R121)
+├── specs/                   # Especificacoes SDD (R97-R125)
 ├── evolution/               # Cycles registry (79 ciclos)
 ├── tests/                   # 1288 testes automatizados
 ├── mci/                     # Metacognitive Interconnect
@@ -1195,7 +1198,7 @@ O ecossistema possui compatibilidade documentada com o fork `timpara/opencode-ac
 ---
 
 <div align="center">
-  <i>79 ciclos evolutivos · 1288 testes · 0 regressoes · Score medio 9.23/10</i><br>
+  <i>83 ciclos evolutivos · 1332 testes · 0 regressoes · Score medio 9.21/10</i><br>
   <b>v3.0.0 — Pipeline Academico Agentivo | MCP Security | CI/CD Quality Gates</b><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>

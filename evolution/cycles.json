@@ -1771,6 +1771,24 @@
         "Codigo de barras EAN-13 do ISBN e fontes embarcadas ficaram fora de escopo explicito — a ficha traz ISBN em texto e reserva espaco"
       ],
       "timestamp": 1783758705.3377986
+    },
+    {
+      "round_id": "R125",
+      "objective": "R125: MIRA como parte de primeira classe do ecossistema — expoe o pipeline de apresentacoes (R123, orchestrator.present) no CLI (comando direto apresentacao/present/mira + opcao de menu [10]) e documenta o subsistema no README/ARCHITECTURE/mapa 3D, conectando-o aos agent cards MIRA ja registrados no catalogo. O elo faltante era exposicao/ativacao, nao implementacao.",
+      "changes": [
+        "marceloclaro/cli.py: comando direto apresentacao (aliases present/mira) chama orchestrator.present; opcao de menu [10] com prompt de pasta; MENU/AJUDA_TEXT/dica de comando desconhecido atualizados",
+        "README.md: bullets de feature R123/R125 (deck MIRA) e R124 (capa TikZ); nos MiraDeck/Publishing no diagrama; tabela de camadas; contagens 83 ciclos R47-R125, 1332 testes, 44 specs, score 9.21",
+        "ARCHITECTURE.md: no Illus enriquecido + Publishing TikZ; tabela de specs +R122/R123/R124/R125",
+        "docs/architecture_map.html: stats 1332/83 R1-R125/44 specs; no da CLI +[10]; Illustrations/Evolution Registry/resumo phd",
+        "tests/test_r125_mira_cli_integration.py: 9 testes TDD; specs/SPEC-935-R125.md + evolution/evo-34-r125-mira-ecossistema.md"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "'Parte do ecossistema' tem duas faces: o motor (R123) e a exposicao (CLI+docs+diagramas); recurso nao alcancavel pelas portas do usuario e na pratica invisivel",
+        "Agent cards MIRA ja estavam no catalogo mas desconectados do pipeline executavel: registrar cards nao basta, precisa de caminho executavel (present) + ponto de entrada que o dispare; agente-executor do runtime acoplado ao pipeline fica para ciclo futuro",
+        "Contagens vivas (testes/ciclos/specs) estavam defasadas em R121 porque R123/R124 nao fizeram doc-sync; reforca a licao do R122 de gerar numeros da fonte real; reconciliados de fato neste ciclo"
+      ],
+      "timestamp": 1783761243.8760593
     }
   ]
 }
