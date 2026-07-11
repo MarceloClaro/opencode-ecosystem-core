@@ -3,7 +3,7 @@
 // Modelo: big-pickle (OpenCode Zen, 200K ctx, 128K out)
 
 /**
- * ANTIGRAVITY BRIDGE v1.0 — Ponte Bidirecional OpenCode ↔ Antigravity
+ * ANTIGRAVITY BRIDGE v1.1 — Ponte Bidirecional OpenCode ↔ Antigravity
  *
  * Arquitetura de orquestração que permite ao OpenCode Ecosystem delegar tarefas
  * ao Antigravity (Google DeepMind Advanced Agentic Coding) e receber resultados
@@ -63,6 +63,21 @@ interface AntiBridgeState {
     webSearch: boolean
     subagentOrchestration: boolean
     parallelExecution: boolean
+    ragSynthesis: boolean
+    // Cloud capabilities (SPEC-935-R130)
+    alloydbOperations: boolean
+    bigqueryAnalytics: boolean
+    cloudSqlPostgres: boolean
+    cloudSqlMysql: boolean
+    cloudSqlSqlServer: boolean
+    dataflowPipelines: boolean
+    composerAirflow: boolean
+    gcsSecurity: boolean
+    firestoreOps: boolean
+    spannerOps: boolean
+    pipelineOrchestration: boolean
+    dataAutocleaning: boolean
+    lakehouseFederation: boolean
   }
   orchestrationPatterns: Record<string, number>
   pendingQueue: AntiBridgeTask[]
@@ -95,6 +110,28 @@ const ANTIGRAVITY_EXCLUSIVE_CAPABILITIES = [
   "view_file_binary",
   "generate_animated_demo",
   "query_rag",
+  // === Cloud Skills (SPEC-935-R130) ===
+  "cloud_alloydb_admin",
+  "cloud_alloydb_health",
+  "cloud_alloydb_monitor",
+  "cloud_alloydb_performance",
+  "cloud_bigquery_analytics",
+  "cloud_bigquery_ml",
+  "cloud_bigquery_dts",
+  "cloud_sql_postgres_admin",
+  "cloud_sql_postgres_health",
+  "cloud_sql_postgres_vector",
+  "cloud_sql_mysql_admin",
+  "cloud_sql_sqlserver_admin",
+  "cloud_dataflow_pipelines",
+  "cloud_composer_airflow",
+  "cloud_spark_dataproc",
+  "cloud_gcs_security",
+  "cloud_firestore_crud",
+  "cloud_spanner_graph",
+  "cloud_pipeline_orchestration",
+  "cloud_data_autocleaning",
+  "cloud_lakehouse_federation",
 ]
 
 // Padrões de prompt que indicam necessidade do Antigravity
@@ -107,6 +144,14 @@ const ANTIGRAVITY_TRIGGER_PATTERNS = [
   /\b(demo|demonstração|animação|recording|gravação)\b/i,
   /\b(rag|banco vetorial|vector db|consultar base|busca semântica)\b/i,
   /\b(marceloclaro|\/marceloclaro|orquestrador supremo)\b/i,
+  // === Cloud Triggers (SPEC-935-R130) ===
+  /\b(alloydb|cloud sql|bigquery|dataflow|composer|dataproc)\b/i,
+  /\b(gcp|google cloud|cloud infrastructure|nuvem|cloud computing)\b/i,
+  /\b(pipeline de dados|data pipeline|data lake|data warehouse)\b/i,
+  /\b(cloud database|banco de dados cloud|postgres cloud|mysql cloud)\b/i,
+  /\b(cloud security|cloud migration|infraestrutura cloud)\b/i,
+  /\b(gcs|cloud storage|firestore|spanner|bigtable)\b/i,
+  /\b(terraform|iac|infrastructure as code|cloud deployment)\b/i,
 ]
 
 // ============================================================
@@ -231,6 +276,20 @@ async function loadState(directory: string): Promise<AntiBridgeState> {
       subagentOrchestration: true,
       parallelExecution: true,
       ragSynthesis: true,
+      // Cloud capabilities (SPEC-935-R130)
+      alloydbOperations: true,
+      bigqueryAnalytics: true,
+      cloudSqlPostgres: true,
+      cloudSqlMysql: true,
+      cloudSqlSqlServer: true,
+      dataflowPipelines: true,
+      composerAirflow: true,
+      gcsSecurity: true,
+      firestoreOps: true,
+      spannerOps: true,
+      pipelineOrchestration: true,
+      dataAutocleaning: true,
+      lakehouseFederation: true,
     },
     orchestrationPatterns: {},
     pendingQueue: [],
@@ -367,6 +426,17 @@ export const AntiBridgePlugin: Plugin = async ({ project, client, $, directory, 
           "marceloclaro↔master-orchestrator": 0.95,
           "marceloclaro↔stage-orchestrator": 0.95,
           "marceloclaro↔trust-engine": 0.95,
+          // Cloud agent affinities (SPEC-935-R130)
+          "antigravity↔cloud-alloydb-specialist": 0.90,
+          "antigravity↔cloud-bigquery-specialist": 0.90,
+          "antigravity↔cloud-sql-postgres-specialist": 0.85,
+          "antigravity↔cloud-sql-mysql-specialist": 0.85,
+          "antigravity↔cloud-sql-sqlserver-specialist": 0.80,
+          "antigravity↔cloud-data-pipelines-specialist": 0.90,
+          "antigravity↔cloud-security-specialist": 0.85,
+          "antigravity↔cloud-data-infra-generalist": 0.80,
+          "cloud-alloydb-specialist↔cloud-bigquery-specialist": 0.85,
+          "cloud-data-pipelines-specialist↔cloud-security-specialist": 0.80,
         }
 
         if (!ecoState.crossValidationMatrix) ecoState.crossValidationMatrix = {}

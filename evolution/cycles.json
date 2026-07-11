@@ -1859,6 +1859,173 @@
         "O ecossistema ja praticava resiliencia implicitamente (ciclos R*, commits escopados, background+wakeups); R129 apenas tornou explicita e sempre disponivel num artefato unico (PROGRESS.md) — padrao 'existe mas nao exposto' dos R125/R127/R128"
       ],
       "timestamp": 1783766094.806473
+    },
+    {
+      "round_id": "R130",
+      "objective": "Molambudos Fase 0 — viabilização editorial e pré-flight best-seller",
+      "changes": [
+        "Criada SPEC-911 com critérios de aceitação para Fase 0",
+        "Substituída licença Creative Commons por direitos reservados e ISBN pendente",
+        "Adicionada ficha catalográfica provisória ao frontmatter",
+        "Substituída quarta capa Lorem ipsum por texto comercial imersivo",
+        "Unificado nome Lúcia Menezes e corrigido CRP",
+        "Convertidas tabelas problemáticas em blocos documentais legíveis",
+        "Corrigido headheight e eliminados destinos PDF duplicados/font warnings",
+        "PDF compilado em duas passagens: 279 páginas, 0 erros fatais"
+      ],
+      "score": 8.2,
+      "lessons": [
+        "Para livro 6×9 em 14pt, tabelas tabulares amplas geram pré-flight ruim; listas documentais são mais estáveis e literárias.",
+        "Nunca avançar a revisão literária sem remover placeholders comerciais visíveis (Lorem ipsum, ISBN vazio, licença inadequada).",
+        "Frontmatter com page anchors deve ser isolado para evitar destinos duplicados em PDF com hyperref."
+      ],
+      "timestamp": 1783767623.6108985
+    },
+    {
+      "round_id": "R131",
+      "objective": "Molambudos Fase 1 — revisão literária parcial de CONT e Lúcia",
+      "changes": [
+        "Criada SPEC-912 para revisão literária estrutural",
+        "Reescrito CONT-07 como laudo ambíguo sem checklist didático",
+        "Reescrito CONT-12 como anotação marginal 3:14, sem ritual explícito",
+        "Reescrito CONT-13 como fechamento simbólico da fila, sem opções A/B/C",
+        "LUC-07 ganhou cadeia de custódia, coleta de amostras e perícia externa",
+        "LUC-08 ganhou decisão de custódia judicial e ambiguidade clínica",
+        "PDF recompilado: 275 páginas, 0 erros fatais"
+      ],
+      "score": 8.4,
+      "lessons": [
+        "A contaminação narrativa funciona melhor quando o texto deixa uma lacuna para o leitor preencher, não quando declara o diagnóstico.",
+        "Lúcia melhora dramaticamente quando tenta impedir o ciclo; a falha dela fica mais trágica porque houve escolha e resistência.",
+        "Símbolos como 3:14 devem ser indícios ambíguos, não comandos explícitos ao leitor."
+      ],
+      "timestamp": 1783767977.7203999
+    },
+    {
+      "round_id": "R132",
+      "objective": "Molambudos Fase 1B — voz documental fria em DOC-04 a DOC-07",
+      "changes": [
+        "Reescritos DOC-04 e DOC-05 como avaliações psiquiátricas com campos clínicos, conduta e nota reservada contida.",
+        "Reescrito DOC-06 como sessão interrompida com adendos administrativos, falha de cadeia de custódia e deterioração documental progressiva.",
+        "Reescrito DOC-07 como síntese diagnóstica de época, com risco institucional, manejo e ausência de assinatura original.",
+        "Preservados links finais; removida ocorrência explícita de possessão nos alvos da SPEC-913.",
+        "Compilado main.tex em duas passagens: 275 páginas, 0 erros LaTeX/fatais, 0 destinos duplicados, 0 font warnings.",
+        "Criado relatório misc/relatorio_fase1b_voz_documental.md."
+      ],
+      "score": 8.7,
+      "lessons": [
+        "Em horror documental, o efeito melhora quando a anomalia aparece como quebra de protocolo, lacuna ou cadeia de custódia falha, não como explicação explícita.",
+        "Assinaturas e cabeçalhos longos em corpo 14pt podem gerar overfull; quebrar linhas de identificação reduz ruído tipográfico sem alterar conteúdo.",
+        "Manter métricas de compilação após cada microedição evita regressão invisível em projeto LaTeX fragmentado."
+      ],
+      "timestamp": 1783768799.1061084
+    },
+    {
+      "round_id": "R133",
+      "objective": "Molambudos Fase 1C — redução de didatismo em DOC-08/LUC-10 e eliminação de overfull hbox",
+      "changes": [
+        "Criada SPEC-914 para a Fase 1C com critérios de aceitação e verificação.",
+        "Reescrito DOC-08 como parecer retrospectivo documental, removendo checklist ao leitor e autodiagnóstico direto.",
+        "Reescrito LUC-10 como autoencaminhamento para afastamento clínico, com hipóteses abertas e anomalias documentais.",
+        "Ajustados DOC-18 e CONT-07 para eliminar os overfull hbox remanescentes.",
+        "Aplicada recomendação do linguistic-corrector: paranóide -> paranoide em DOC-08.",
+        "Compilado main.tex em duas passagens: 271 páginas, 0 erros LaTeX/fatais, 0 overfull hbox, 0 destinos duplicados, 0 font warnings.",
+        "Criado relatório misc/relatorio_fase1c_doc08_luc10_overfull.md."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Interpelações diretas ao leitor perdem força quando repetidas; lacunas documentais e rasuras produzem ameaça mais elegante.",
+        "Reescritas literárias podem melhorar também a saúde tipográfica: quebrar cabeçalhos longos eliminou overfull sem sacrificar narrativa.",
+        "Revisão linguística independente é útil após reescrita: pequenos arcaísmos ortográficos podem destoar de documentos contemporâneos."
+      ],
+      "timestamp": 1783769378.1988497
+    },
+    {
+      "round_id": "R134",
+      "objective": "Molambudos Fase 1D — DOC-19 seguro e auditoria de eco vocabular",
+      "changes": [
+        "Criada SPEC-915 para remover dependência de obra externa real em DOC-19 e auditar eco vocabular.",
+        "Reescrito DOC-19 como nota arquivística ficcional/documental, removendo título de obra real, autora real, ano e alegação de transcrição autorizada.",
+        "Delegada análise de risco ao agente 34_agente_identificacao_conflitos_similaridade; recomendações aplicadas.",
+        "Delegada revisão linguística ao linguistic-corrector; DOC-19 aprovado sem termos problemáticos nem caracteres CJK.",
+        "Criada auditoria misc/auditoria_eco_vocabular_fase1d.md com contagem de motivos e recomendações de leitura linear.",
+        "Compilado main.tex em duas passagens: 273 páginas, 0 erros LaTeX/fatais, 0 overfull hbox, 0 destinos duplicados, 0 font warnings.",
+        "Criado relatório misc/relatorio_fase1d_doc19_eco_vocabular.md."
+      ],
+      "score": 9.1,
+      "lessons": [
+        "Quando um fragmento cita obra real sem licença verificável, a solução mais robusta é transformar a função histórica em documento ficcional original, não tentar ajustar a citação.",
+        "Declarações de autorização externa são risco editorial alto se não houver prova documental; devem desaparecer de manuscritos comerciais.",
+        "Auditorias quantitativas de motivos ajudam a planejar leitura linear: não substituem julgamento literário, mas revelam saturação simbólica."
+      ],
+      "timestamp": 1783769949.760874
+    },
+    {
+      "round_id": "R135",
+      "objective": "SPEC-935-R130 — Integração de Skills Cloud (Antigravity Backup)",
+      "changes": [
+        "Avaliado backup Antigravity 2026-07-11: 56 skills cloud, 269 scripts operacionais",
+        "Criada SPEC-935-R130 com inventário completo e estratégia de integração",
+        "Criado catálogo skills-cloud-antigravity.md com todas as 56 skills categorizadas",
+        "Criados 8 novos agentes cloud no catálogo (alloydb, bigquery, postgres, mysql, sqlserver, pipelines, security, infra-generalist)",
+        "Copiados 268 scripts para scripts/cloud/ com estrutura preservada",
+        "Criados 12 testes TDD (test_r130_cloud_skills.py): 12/12 passando",
+        "Catálogo expandido: 160 → 169 agentes (+9)",
+        "Licença Apache 2.0 preservada (atribuição Google)"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Backup do Antigravity continha skills cloud de altíssimo valor (AlloyDB, BigQuery, Cloud SQL, Dataflow)",
+        "56 skills preenchem lacuna crítica de infraestrutura de dados em nuvem no ecossistema",
+        "Formato SKILL.md com frontmatter YAML é consistente com padrão do ecossistema",
+        "Scripts JS MCP tools são reaproveitáveis como ferramentas de banco de dados",
+        "Integração preservou licenciamento Apache 2.0 original do Google"
+      ],
+      "timestamp": "2026-07-11T12:45:33Z"
+    },
+    {
+      "round_id": "R136",
+      "objective": "Fases 2-4 da Integração Cloud — MASWOS Cloud, AntiBridge, registro opencode.json",
+      "changes": [
+        "Registrados 8 agentes cloud no opencode.json (173 agentes totais)",
+        "Adicionada detecção de tópicos cloud no pipeline MASWOS (is_cloud_topic)",
+        "Criados 8 estágios CLOUD_STAGES no pipeline MASWOS (cloud_diagnostico a cloud_revisao_tecnicas)",
+        "Criada função run_maswos_cloud() com roteamento automático cloud vs genérico",
+        "Adicionados sinais heurísticos cloud (reprodutibilidade, métricas, segurança)",
+        "Atualizado AntiBridge (v1.1): 21 capacidades cloud, 7 novos trigger patterns",
+        "Adicionadas 11 afinidades cloud na matriz de validação cruzada do ecossistema",
+        "Criados 25 testes (R130+R131): 25/25 passando + 12 SDD/TDD = 37 verdes",
+        "Licenciamento Apache 2.0 verificado em 56/56 skills cloud"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "Agentes cloud precisam de registro duplo: catálogo + opencode.json para funcionarem no CLI",
+        "Pipeline MASWOS aceita extensão por domínio sem quebrar pipeline acadêmico existente",
+        "AntiBridge é o ponto central de integração — atualizar capacidades lá expõe skills cloud globalmente",
+        "Detecção de tópico por keyword é eficaz mas poderia usar embeddings semânticos no futuro",
+        "53/56 skills cloud usam Apache 2.0 (consistente) — as 3 restantes não declaram licença explicitamente"
+      ],
+      "timestamp": "2026-07-11T13:02:27Z"
+    },
+    {
+      "round_id": "R137",
+      "objective": "R137: Reconciliação do gerador opencode.json (chaveamento por slug, reprodutível) + versionamento seguro da frente cloud (skip guards, gitignore scripts/cloud, correção do bug de perda de dados em cycles.json).",
+      "changes": [
+        "integrations/opencode_cli.py::_catalog_agents chaveia agentes por slug do arquivo (não pelo frontmatter name:), tornando opencode.json determinístico/reproduzível",
+        "opencode.json regenerado (173 agentes, todos por slug)",
+        ".gitignore: scripts/cloud/ (324 arquivos externos não revisados) ignorado até auditoria de licença",
+        "tests/test_r130_cloud_skills.py + test_r131_cloud_integration.py: skip guards nos 6 testes que leem scripts/cloud do disco",
+        "evolution/cycles.json: R81-R84 (conclusion/results) restaurados após bug de perda de dados do EvolutionRegistry.save(); diff aditivo",
+        "tests/test_r137_opencode_config_reproducible.py (novo): trava chaveamento por slug + determinismo + reprodução exata do commitado",
+        "specs/SPEC-935-R137.md + evolution/evo-39-r137-*.md"
+      ],
+      "score": 8.6,
+      "lessons": [
+        "Reavaliar antes de 'fechar' expôs 2 defeitos silenciosos (opencode.json não-reproduzível, cycles.json com perda de dados) que o relatório cloud não mencionava.",
+        "Artefato gerado deve ser reproduzível pelo gerador; chavear por slug de arquivo (estável) em vez de nome de exibição (mutável) é a diferença entre determinístico e frágil.",
+        "324 scripts externos com licença não auditada ficam fora do repo (gitignore + pendência) — mais honesto que commit cego."
+      ],
+      "timestamp": "2026-07-11T10:57:51"
     }
   ]
 }
