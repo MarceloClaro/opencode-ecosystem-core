@@ -1735,6 +1735,24 @@
         "A disciplina de dupla-registro instituida pelo R117 (dois diagramas Mermaid em paridade) precisa de verificacao ativa — o no Publishing divergiu silenciosamente entre os dois arquivos ate esta auditoria pontual encontra-lo; um teste automatizado comparando identificadores de no entre os dois diagramas blindaria essa invariante no futuro"
       ],
       "timestamp": 1783738989.2399461
+    },
+    {
+      "round_id": "R123",
+      "objective": "R123: Pipeline MIRA de apresentacoes cientificas — linha de montagem de 6 estagios (extract->plan->copywrite->build->animate->validate) transformando manuscrito em deck HTML animado de cards de vidro (glassmorphism, Regra Zero de loop perpetuo, navegacao card-a-card), com relatorio de conformidade e orchestrator.present()",
+      "changes": [
+        "illustrations/mira_deck.py (novo): MiraDeckPipeline + dataclasses Briefing/Section/SlideSpec/SlidePlan/Deck/ConformityReport; 6 estagios chamaveis isoladamente",
+        "illustrations/__init__.py: exporta MiraDeckPipeline e dataclasses do deck",
+        "marceloclaro/orchestrator.py: metodo present(production_folder) le manuscrito.md, roda a esteira em apresentacao/, registra reflexao metacognitiva",
+        "tests/test_r123_mira_deck_pipeline.py (novo): 26 testes TDD (estagios isolados + linha completa run + present com pasta sintetica)",
+        "specs/SPEC-935-R123.md + evolution/evo-32-r123-pipeline-mira-apresentacoes.md"
+      ],
+      "score": 8.7,
+      "lessons": [
+        "MiraEngine (cards avulsos) e MiraDeckPipeline (deck navegavel) compartilham a alma (catalogo de metaforas, Regra Zero, titulo <=6 palavras) sem duplicar: o pipeline reusa pick_metaphor() e o CATALOG",
+        "Separar build (estrutura estatica) de animate (injeta loops infinite) torna a fronteira verificavel por teste — e o valor da linha de montagem: cada posto tem entrada/saida limpas (consertar a peca, nao a fabrica)",
+        "Agentes visuais avancados do cap.4 (mira-3d/qrcode/chart-race/survey), video de fundo, copywriting via LLM e aprovacao interativa estagio-a-estagio ficam para ciclos futuros — explicitos, nao escondidos"
+      ],
+      "timestamp": 1783758095.098799
     }
   ]
 }

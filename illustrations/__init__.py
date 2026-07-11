@@ -10,9 +10,15 @@ Motores:
 from .mermaid_engine import MermaidEngine, MermaidFigure
 from .graphify_engine import GraphifyEngine, KnowledgeGraph
 from .mira_engine import MiraEngine, MiraCard, CATALOG as MIRA_CATALOG
+from .mira_deck import (
+    MiraDeckPipeline, Briefing, Section, SlideSpec, SlidePlan, Deck,
+    ConformityReport,
+)
 
 __all__ = [
     "MermaidEngine", "MermaidFigure",
     "GraphifyEngine", "KnowledgeGraph",
     "MiraEngine", "MiraCard", "MIRA_CATALOG",
+    "MiraDeckPipeline", "Briefing", "Section", "SlideSpec", "SlidePlan",
+    "Deck", "ConformityReport",
 ]

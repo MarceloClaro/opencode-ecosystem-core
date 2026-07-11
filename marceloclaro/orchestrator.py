@@ -1284,6 +1284,53 @@ class MarceloClaroOrchestrator:
         )
         return report
 
+    def present(self, production_folder: str) -> Dict[str, Any]:
+        """
+        Transforma o `manuscrito.md` de uma produção científica numa
+        apresentação animada pelo método MIRA (linha de montagem de 6
+        estágios: extract → plan → copywrite → build → animate → validate).
+
+        Grava `apresentacao/deck.html` (cards de vidro animados, navegação
+        card-a-card, Regra Zero de loop perpétuo) + `apresentacao/CONFORMIDADE.md`
+        (relatório do inspetor final) e registra reflexão na memória
+        metacognitiva.
+        """
+        from pathlib import Path as _P
+        from illustrations import MiraDeckPipeline
+        folder = _P(production_folder)
+        manuscrito = folder / "manuscrito.md"
+        if not manuscrito.exists():
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"apresentação MIRA de {folder.name[:60]}",
+                reflection="manuscrito.md ausente — nada a apresentar.",
+                score=0.2,
+            )
+            return {"ok": False, "error": f"manuscrito.md não encontrado em {folder}"}
+
+        markdown = manuscrito.read_text(encoding="utf-8", errors="ignore")
+        out = folder / "apresentacao"
+        pipeline = MiraDeckPipeline()
+        report = pipeline.run(markdown, str(out))
+
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"apresentação MIRA de {folder.name[:60]}",
+            reflection=(
+                f"Deck gerado em {out}/deck.html — conformidade="
+                f"{'OK' if report.passed else 'FALHOU'}, "
+                f"{len(report.violations)} violação(ões)."
+            ),
+            score=0.85 if report.passed else 0.4,
+        )
+        return {
+            "ok": True,
+            "passed": report.passed,
+            "deck": str(out / "deck.html"),
+            "conformidade": str(out / "CONFORMIDADE.md"),
+            "violations": report.violations,
+        }
+
     def knowledge_graph(self, texts: Dict[str, str],
                         output_dir: str = "ilustracoes/grafo") -> Dict[str, Any]:
         """Constrói o grafo de conhecimento Graphify de textos arbitrários."""
