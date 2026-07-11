@@ -85,7 +85,7 @@ graph TD
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
         Publishing[Publishing<br>LaTeX & Cover Designer]
-        Research["Research<br>Hub c/ OSINT<br>11 fontes: +PubMed/bioRxiv/CORE (R111)"]
+        Research["Research<br>Hub c/ OSINT<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
         Illus[Illustrations<br>Mermaid/MIRA/Graph]
         EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
         NoveltyV2["Novelty V2 (R98)<br>ContributionPointExtractor<br>PointwiseLiteratureRetriever<br>PointwiseNoveltyScorer<br>HierarchicalTaxonomyBuilder"]
