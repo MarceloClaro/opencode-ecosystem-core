@@ -1843,6 +1843,22 @@
         "'Gestao de tokens' com OpenAI e equivoco: a Token Economy e interna/virtual (nao billing); quem reduz custo real e o roteamento para Ollama local (custo zero), OpenAI como fallback de qualidade"
       ],
       "timestamp": 1783763994.691984
+    },
+    {
+      "round_id": "R129",
+      "objective": "R129: Fluxo de trabalho resiliente/resumivel (checkpoints). Mitiga a fricca de 'o trabalho morre quando a sessao acaba' (limites de sessao/tokens do plano, nao corrigiveis por codigo) com PROGRESS.md vivo na raiz + secao de retomada no CLAUDE.md. Diagnostico honesto: settings.json do Claude Code esta limpo, nao ha ma-config de tokens; limites sao de conta/plano.",
+      "changes": [
+        "PROGRESS.md (novo, raiz): checkpoint vivo — Estado atual / Proximos passos resumiveis / Como retomar; lista frentes paralelas a nao misturar e lembrete de .env nunca versionado",
+        "CLAUDE.md: nova secao 'Retomada de trabalho (checkpoints)' — ler PROGRESS.md primeiro, quebrar em passos commitaveis, atualizar+commitar a cada passo, background para trabalho longo",
+        "tests/test_r129_resumable_workflow.py (novo): 3 testes de conteudo",
+        "specs/SPEC-935-R129.md + evolution/evo-38-r129-fluxo-resumivel.md"
+      ],
+      "score": 8.2,
+      "lessons": [
+        "Honestidade de escopo: o pedido era corrigir o limite, mas e de plano/conta — nada a mudar em settings.json (correto). Ataquei a consequencia real (perda de trabalho) com resiliencia em vez de simular correcao impossivel",
+        "O ecossistema ja praticava resiliencia implicitamente (ciclos R*, commits escopados, background+wakeups); R129 apenas tornou explicita e sempre disponivel num artefato unico (PROGRESS.md) — padrao 'existe mas nao exposto' dos R125/R127/R128"
+      ],
+      "timestamp": 1783766094.806473
     }
   ]
 }
