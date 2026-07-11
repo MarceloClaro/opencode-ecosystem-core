@@ -2083,6 +2083,23 @@
         "templates/projects/ (1593 arquivos já rastreados) deixado como está — arquivos avulsos ali são de outras frentes (não misturar, por CLAUDE.md)."
       ],
       "timestamp": "2026-07-11T11:38:37"
+    },
+    {
+      "round_id": "R141",
+      "objective": "R141: Engine opcional ocr-vision para documentos antigos (OpenCV -> remoção de assinatura -> PaddleOCR -> correção contextual por Vision LLM), encaixado no adapter pattern do SPEC-1000, com política de correção FIEL (sugere e marca, nunca reescreve cego).",
+      "changes": [
+        "specs/SPEC-1001-pdf2latex-ocr-vision-engine.md (novo): engine + política de fidelidade",
+        "tests/test_r141_ocr_vision_engine.py (novo, 12 testes TDD vermelho->verde): política de correção pura + orquestração via injeção de dependência",
+        "pdf2latex/engines/ocr_vision.py (novo): apply_correction_policy (pura, difflib) + OcrVisionEngine(BaseEngine) com injeção de dependência e deps lazy",
+        "pdf2latex/engines/__init__.py: auto-registro guardado do ocr-vision"
+      ],
+      "score": 8.4,
+      "lessons": [
+        "Fidelidade tem de ser código, não intenção: a política sugere->compara divergência->só aplica typo-level, senão marca, torna o anti-overclaim verificável (7/12 testes miram nisso).",
+        "Injeção de dependência permite testar o contrato sem a inferência (opencv/paddleocr/visão), sem flakiness — mesmo princípio do R139.",
+        "Opt-in por custo: Vision LLM por página pesa na token economy; engine fora da auto-seleção padrão (--engine ocr-vision)."
+      ],
+      "timestamp": "2026-07-11T12:00:47"
     }
   ]
 }
