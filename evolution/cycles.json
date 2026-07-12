@@ -2119,6 +2119,23 @@
         "Descoberto no ciclo: outra frente (WIP não commitado) reverteu o fix R137 em opencode_cli.py e a extração de descrição em catalog_loader.py; preservado via stash, opencode.json regenerado contra HEAD."
       ],
       "timestamp": "2026-07-12T09:26:47"
+    },
+    {
+      "round_id": "R143",
+      "objective": "Reconciliação da árvore de trabalho: descarte recuperável de um overlay de snapshot antigo (~R108–R112) que havia sido sobreposto ao HEAD, revertendo dezenas de ciclos commitados (R112 GoalDriftDetector, R116/R125/R128 menus CLI, R137 slug-keying, R138 providers SPEC-108, handshake MCP, 603 linhas do orchestrator).",
+      "changes": [
+        "git stash do overlay stale (43 arquivos rastreados; 445 ins / 3118 del eram reversões, sem trabalho novo) — recuperável em stash@{0}",
+        "árvore rastreada restaurada ao HEAD (R142); conteúdo do usuário não-rastreado preservado",
+        "opencode.json confirmado reproduzível (regenerar = no-op, 174 agentes)",
+        "test_r137 + SPEC-108 (test_opencode_go_zen) de volta ao verde"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "A árvore de trabalho pode divergir do HEAD por um snapshot antigo sobreposto (não por trabalho novo); a direção do diff (esmagadora remoção de features commitadas com comentários) e badges antigos (1062 testes/65 ciclos) revelam isso.",
+        "Descartar de forma recuperável (git stash) em vez de git checkout destrutivo: o overlay fica em stash@{0} caso algo precise ser resgatado.",
+        "Suíte na árvore principal: 1433 passed, 0 falhas — as ~90 falhas eram 100% do overlay stale, nenhuma do R142."
+      ],
+      "timestamp": "2026-07-12T09:59:19"
     }
   ]
 }
