@@ -8,28 +8,25 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R142** (Honest Evaluation Engine —
-  disciplina antioverclaim como capacidade testável; `evaluation/honest_reviewer.py`).
-- **Suíte:** verde no estado do commit R142 — **1427 passed, 11 skipped**,
-  validado em worktree isolado sobre HEAD (baseline HEAD = 1411 passed, 0 falhas).
-- **Todas as frentes abertas foram fechadas e versionadas** (R137–R142).
+- **Branch:** `main` · última entrega: **R143** (reconciliação da árvore de
+  trabalho — descarte recuperável de overlay stale que revertia dezenas de
+  ciclos commitados). Ciclo anterior: **R142** (Honest Evaluation Engine).
+- **Suíte:** **verde na árvore principal — 1433 passed, 5 skipped, 0 falhas.**
+- **Todas as frentes abertas foram fechadas e versionadas** (R137–R143).
 
-### ⚠️ ATENÇÃO — WIP não commitado de outras frentes na árvore de trabalho
-Ao entregar o R142 descobri que a árvore de trabalho tem mudanças **não
-commitadas** de outra frente (SPEC-108, WIP) que **regridem testes já
-commitados**:
-- `integrations/opencode_cli.py` — reverteu o fix do slug-keying (R137) e
-  removeu o bloco `provider`/comandos → `test_r137` fica vermelho e o
-  `opencode.json` regenera com chaves por nome de exibição.
-- `marceloclaro/catalog_loader.py` — removeu `_strip_leading_html_comment`
-  e a preferência por `description:` → 75 descrições viram `<!--`.
-- Com esse WIP restaurado, a suíte na árvore principal dá **~90 falhas**
-  (test_r131/r137/r125/etc.). **NENHUMA é do R142** — o baseline HEAD e o
-  estado do commit R142 são verdes. Essas falhas são pendência da frente
-  SPEC-108 reconciliar. **Não commitei esses dois arquivos.**
-- `evolution/cycles.json` estava **corrompido** na árvore (outra frente o
-  sobrescreveu para 3 ciclos Molambudos via `EvolutionRegistry.save()`,
-  perdendo R47–R141). **Restaurado do HEAD** antes de anexar o R142 → 100 ciclos.
+### ✅ RESOLVIDO (R143) — o que eram as ~90 falhas na árvore de trabalho
+Não era WIP de outra frente: a árvore rastreada tinha um **snapshot antigo
+(era ~R108–R112) sobreposto ao HEAD**, revertendo ciclos já commitados
+(R112 `GoalDriftDetector`, R116/R125/R128 menus do CLI, R137 slug-keying,
+R138 providers SPEC-108, handshake MCP, 603 linhas do orchestrator).
+Diffstat: 445 ins / 3118 del em 43 arquivos — só reversões, sem trabalho
+novo. **Descartado de forma recuperável via `git stash` (stash@{0})**; a
+árvore rastreada voltou ao HEAD, o conteúdo do usuário não-rastreado foi
+preservado. Detalhes e como recuperar: `evolution/evo-45-r143-*.md`.
+
+- `evolution/cycles.json` também estava **corrompido** na árvore (outra
+  ação o sobrescreveu para 3 ciclos Molambudos via `EvolutionRegistry.save()`,
+  perdendo R47–R141). **Restaurado do HEAD** no R142 → agora 101 ciclos.
 
 ### R142 — Honest Evaluation Engine (entregue)
 - `evaluation/honest_reviewer.py` + `evaluation/__init__.py`: `classify_claim`,
