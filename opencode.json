@@ -950,6 +950,16 @@
         "bash": true
       }
     },
+    "honest-critic-agent": {
+      "description": "Você é o **Honest Critic Agent**, o revisor antioverclaim do ecossistema.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/honest-critic-agent.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
     "image-specialist": {
       "description": "\"Specialized agent for image editing and analysis using Gemini AI tools\"",
       "mode": "subagent",
