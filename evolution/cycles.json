@@ -2100,6 +2100,25 @@
         "Opt-in por custo: Vision LLM por página pesa na token economy; engine fora da auto-seleção padrão (--engine ocr-vision)."
       ],
       "timestamp": "2026-07-11T12:00:47"
+    },
+    {
+      "round_id": "R142",
+      "objective": "Honest Evaluation Engine — codifica a disciplina antioverclaim (cobertura ≠ qualidade; nota de topo exige validação externa) como capacidade real e testada, reusando classify_metacognitive_tier.",
+      "changes": [
+        "evaluation/honest_reviewer.py (novo): classify_claim, detect_inflation, honest_score_band, review — reusa mci.metacognitive_evaluator.classify_metacognitive_tier",
+        "evaluation/__init__.py (novo pacote)",
+        "agents/catalog/honest-critic-agent.md (novo): agente-crítico antioverclaim, chaveado por slug no opencode.json",
+        "tests/test_r142_honest_reviewer.py (novo, TDD): 16 casos, RED→GREEN",
+        "specs/SPEC-935-R142.md (novo)",
+        "opencode.json regenerado (173→174 agentes, aditivo)"
+      ],
+      "score": 8.2,
+      "lessons": [
+        "Cobertura/processo (scanners, %) não é veredito de qualidade — a lente honest_reviewer impede confundir os dois.",
+        "Nota/rótulo de topo (best-seller, obra-prima, Qualis A1, verified, 9.5–10/10, 100%) exige validação externa; sem ela, o teto interno é limitado (8.5/10).",
+        "Descoberto no ciclo: outra frente (WIP não commitado) reverteu o fix R137 em opencode_cli.py e a extração de descrição em catalog_loader.py; preservado via stash, opencode.json regenerado contra HEAD."
+      ],
+      "timestamp": "2026-07-12T09:26:47"
     }
   ]
 }

@@ -8,10 +8,37 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R140** (exclusão do conteúdo de
-  usuário via .gitignore; fecha o ciclo de versionamento das frentes abertas).
-- **Suíte:** verde (última execução completa: 1405 passed, 5 skipped).
-- **Todas as frentes abertas foram fechadas e versionadas** (R137–R140).
+- **Branch:** `main` · última entrega: **R142** (Honest Evaluation Engine —
+  disciplina antioverclaim como capacidade testável; `evaluation/honest_reviewer.py`).
+- **Suíte:** verde no estado do commit R142 — **1427 passed, 11 skipped**,
+  validado em worktree isolado sobre HEAD (baseline HEAD = 1411 passed, 0 falhas).
+- **Todas as frentes abertas foram fechadas e versionadas** (R137–R142).
+
+### ⚠️ ATENÇÃO — WIP não commitado de outras frentes na árvore de trabalho
+Ao entregar o R142 descobri que a árvore de trabalho tem mudanças **não
+commitadas** de outra frente (SPEC-108, WIP) que **regridem testes já
+commitados**:
+- `integrations/opencode_cli.py` — reverteu o fix do slug-keying (R137) e
+  removeu o bloco `provider`/comandos → `test_r137` fica vermelho e o
+  `opencode.json` regenera com chaves por nome de exibição.
+- `marceloclaro/catalog_loader.py` — removeu `_strip_leading_html_comment`
+  e a preferência por `description:` → 75 descrições viram `<!--`.
+- Com esse WIP restaurado, a suíte na árvore principal dá **~90 falhas**
+  (test_r131/r137/r125/etc.). **NENHUMA é do R142** — o baseline HEAD e o
+  estado do commit R142 são verdes. Essas falhas são pendência da frente
+  SPEC-108 reconciliar. **Não commitei esses dois arquivos.**
+- `evolution/cycles.json` estava **corrompido** na árvore (outra frente o
+  sobrescreveu para 3 ciclos Molambudos via `EvolutionRegistry.save()`,
+  perdendo R47–R141). **Restaurado do HEAD** antes de anexar o R142 → 100 ciclos.
+
+### R142 — Honest Evaluation Engine (entregue)
+- `evaluation/honest_reviewer.py` + `evaluation/__init__.py`: `classify_claim`,
+  `detect_inflation`, `honest_score_band`, `review` (reusa
+  `classify_metacognitive_tier`). Princípio: **cobertura ≠ qualidade**; nota
+  de topo exige validação externa (teto interno 8.5/10).
+- `agents/catalog/honest-critic-agent.md` (slug no `opencode.json`, 174 agentes).
+- `tests/test_r142_honest_reviewer.py` (16 casos, TDD RED→GREEN).
+- `specs/SPEC-935-R142.md`, `evolution/evo-44-r142-*.md`.
 - **Ciclos recentes concluídos e commitados:**
   - R123 — Pipeline MIRA de apresentações (`illustrations/mira_deck.py`).
   - R124 — Capa/contracapa TikZ (`publishing/cover_designer.py`) + refino.
