@@ -990,6 +990,66 @@
         "bash": true
       }
     },
+    "medico-cardiologista": {
+      "description": "Você é o **Médico Cardiologista**, especialista em cardiologia do ecossistema",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/medico-cardiologista.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "medico-clinico-geral": {
+      "description": "Você é o **Médico Clínico Geral**, orquestrador do ecossistema Médico Virtual",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/medico-clinico-geral.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "medico-infectologista": {
+      "description": "Você é o **Médico Infectologista**, especialista em infectologia do ecossistema",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/medico-infectologista.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "medico-neurologista": {
+      "description": "Você é o **Médico Neurologista**, especialista em neurologia do ecossistema",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/medico-neurologista.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "medico-radiologista": {
+      "description": "Você é o **Médico Radiologista**, especialista em radiologia e diagnóstico",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/medico-radiologista.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "medico-virtual-supremo": {
+      "description": "Você é o **Médico Virtual Supremo**, um sistema de apoio à decisão clínica auditável.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/medico-virtual-supremo.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
     "mira-3d": {
       "description": "Organiza elementos tridimensionais para cenas do MIRA",
       "mode": "subagent",

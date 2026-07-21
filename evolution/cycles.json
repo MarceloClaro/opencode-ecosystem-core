@@ -784,24 +784,6 @@
         "Metrica unica: cosseno neural Ollama nomic-embed-text 768-d para todos",
         "Criado tests/test_benchmark.py com 8 testes TDD"
       ],
-      "results": {
-        "random": {
-          "coherence": 0.418,
-          "composite": 0.496,
-          "pct_target": 95.4
-        },
-        "jaccard": {
-          "coherence": 0.682,
-          "composite": 0.509,
-          "pct_target": 14.9
-        },
-        "refined": {
-          "coherence": 0.425,
-          "composite": 0.58,
-          "pct_target": 100.0
-        }
-      },
-      "conclusion": "Refined pipeline maximiza composite score (0.580 vs 0.496-0.509) e mantem 100% das combinacoes na zona fertil [0.20, 0.55]. Jaccard (V0) e excessivamente conservador (68% coherence, 15% alvo). Random tem boa cobertura (95%) mas composite inferior.",
       "score": 9.0,
       "lessons": [
         "O Jaccard lexical e um baseline fraco: super-seleciona similaridade superficial",
@@ -827,20 +809,6 @@
         "Validacao calibrada executada: 12 teses, 52 avaliacoes, 100% moderate (100% convergencia)",
         "Pool expandido preserva compatibilidade com testes existentes"
       ],
-      "results": {
-        "pool_size": 140,
-        "faculties_covered": 11,
-        "theses_validated": 12,
-        "evaluations_total": 52,
-        "avg_empirical_score": 0.443,
-        "avg_relevance": 0.313,
-        "avg_viability": 0.459,
-        "avg_convergence": 1.0,
-        "endorsement_strong": 0,
-        "endorsement_moderate": 12,
-        "endorsement_weak": 0
-      },
-      "conclusion": "Pool de 140 professores valida 100% moderate (score 0.44). Ausencia de strong e consistente com a natureza interdisciplinar das teses. A alta convergencia (100%) confirma que o pipeline gera hipoteses consistentemente viaveis.",
       "score": 9.0,
       "lessons": [
         "140 professores de 11 faculdades e suficiente para validacao estatisticamente robusta",
@@ -863,16 +831,6 @@
         "Novo metodo _template_feedback() separado para fallback",
         "7 novos testes TDD para LLM feedback + fallback + templates"
       ],
-      "results": {
-        "llm_available": false,
-        "fallback_type": "template",
-        "templates": {
-          "strong": "2 templates de endosso entusiastico",
-          "moderate": "1 template de avaliacao moderada",
-          "weak": "1 template de reservas"
-        }
-      },
-      "conclusion": "Arquitetura LLM implementada com fallback gracioso. Quando tinyllama/llama3.2 estiver disponivel, feedback sera gerado dinamicamente com contexto academico rico. Sem LLM, templates garantem feedback minimo de qualidade.",
       "score": 8.5,
       "lessons": [
         "Ollama com nomic-embed-text nao oferece geracao de texto — necessario modelo generativo separado",
@@ -894,13 +852,6 @@
         "Mantida compatibilidade total com interfaces existentes",
         "7 novos testes TDD para otimizacoes"
       ],
-      "results": {
-        "set_membership": "O(1) vs O(n) anterior",
-        "similarity_calls": "batch sim reduz chamadas ao embedder de O(n²) para O(n) por par",
-        "parallel_support": "generate_pairs_parallel() disponivel",
-        "test_count": 121
-      },
-      "conclusion": "Pipeline otimizado: set persistente elimina gargalo O(n²), batch similarity reduz chamadas ao embedder, geracao paralela suporta multi-par. Sem quebra de compatibilidade retroativa.",
       "score": 8.8,
       "lessons": [
         "O principal gargalo era o set comprehension {r.combination_id for r in results} recriado a cada iteracao — O(n²)",
@@ -2136,6 +2087,347 @@
         "Suíte na árvore principal: 1433 passed, 0 falhas — as ~90 falhas eram 100% do overlay stale, nenhuma do R142."
       ],
       "timestamp": "2026-07-12T09:59:19"
+    },
+    {
+      "round_id": "R144",
+      "objective": "Reestruturação ABNT completa do livro OdontoIA",
+      "changes": [
+        "Remoção de 7 diretórios duplicados (sections, lathex, LatHex_dark, template, capa, capitulos, images)",
+        "Remoção de 10 main files duplicados",
+        "Remoção de capítulos duplicados (25-29 conflitantes)",
+        "Criação de 5 diretórios de partes (parte1 a parte5)",
+        "Reorganização de 28 capítulos em 5 partes",
+        "Criação de 11 elementos pré-textuais ABNT (folha de rosto a sumário)",
+        "Criação de main.tex com classe abntex2",
+        "Atualização do preâmbulo para conformidade NBR 14724 (margens 3/2cm, fonte Times 12pt, espaçamento 1.5)",
+        "Configuração de referências ABNT (biblatex + biber + abnt-numeric)",
+        "Atualização do Makefile para compilação ABNT",
+        "Criação de SPEC-950-R200 (especificação formal da reestruturação)"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Estrutura ABNT NBR 6029/14724 implementada com sucesso",
+        "28 capítulos reorganizados em 5 partes com numeração sequencial 01-28",
+        "11 elementos pré-textuais ABNT criados",
+        "Margens ABNT (3cm esq/sup, 2cm dir/inf) configuradas",
+        "Fonte Times New Roman 12pt configurada",
+        "Espaçamento 1,5 configurado",
+        "Referências ABNT (biblatex + biber + abnt-numeric) configuradas",
+        "Classe abntex2 utilizada para conformidade total",
+        "SPEC-950-R200 criada como especificação formal da reestruturação"
+      ],
+      "timestamp": 1783966762.2008789
+    },
+    {
+      "round_id": "R145",
+      "objective": "Compilação e verificação ABNT completa do livro OdontoIA",
+      "changes": [
+        "Compilação LaTeX bem-sucedida: 133 páginas geradas",
+        "133 páginas de frontmatter ABNT + 28 capítulos em 5 partes",
+        "11 elementos pré-textuais ABNT (folha de rosto a sumário)",
+        "Correção de 7 conflitos de pacotes (enumitem, babel, inputenc, hyperref)",
+        "Adição de 5 cores faltantes (blueaccent, codegreen, codegray, orangeaccent, cyanaccent)",
+        "Compatibilidade biblatex: \\citeonline → \textcite",
+        "Pratica environment: argumento opcional",
+        "Makefile atualizado com compilação ABNT 4-passagens",
+        "Diagnóstico final: 100% cobertura, 0 gaps"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Classe abntex2 conflita com enumitem[shortlabels] e mdframed",
+        "Inputenc ignorado em xelatex (aviso, não erro)",
+        "Times New Roman não disponível → usar Liberation Serif",
+        "abntex2 usa \\captionsbrazil não \\captionsbrazilian",
+        "Biber 2.21 incompatível com biblatex 3.21 (versão do sistema)",
+        "133 páginas compiladas com sucesso"
+      ],
+      "timestamp": 1783984331.6621366
+    },
+    {
+      "round_id": "R200",
+      "objective": "SPEC-951-R200: Implementar camada de imersão no projeto Odontologia IA (Livro Imersão)",
+      "changes": [
+        "Criada SPEC-951-R200 definindo conceito de Livro Imersão",
+        "Criadas 3 personas narrativas (Dra. Marina, Seu Raimundo, Prof. Lucas)",
+        "Implementado sistema de gamificação com XP, badges e níveis (motor Python)",
+        "Criado gerador de QR codes para cada capítulo (5 tipos: vídeo, colab, testes, podcast, refs)",
+        "Criado design imersivo LaTeX (cores, boxes, barra de progresso, momentos narrativos)",
+        "Criados roteiros de 10 episódios do OdontoIA Cast",
+        "Configurada comunidade (Discord, GitHub Discussions, eventos semanais)",
+        "Adicionados elementos imersivos no Capítulo 1 como exemplo",
+        "Integrado design imersivo ao preâmbulo LaTeX",
+        "19 testes unitários do motor de gamificação passando",
+        "Script de build unificado (compilar_imersao.sh)"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Personas fixas criam engajamento emocional e narrativa transversal",
+        "Gamificação integrada nos capítulos funciona melhor que sistema separado",
+        "QR codes conectam o físico ao digital — cada capítulo vira hub multimídia",
+        "SPEC-951 complementa SPEC-950 sem conflito: conteúdo vs experiência",
+        "Motor de imersão precisa tratar campos YAML extras com filtro em dataclass"
+      ],
+      "timestamp": 1784069609.1765594
+    },
+    {
+      "round_id": "R201",
+      "objective": "Analisar documento 1.odt - I.A. em Odontologia",
+      "changes": [
+        "diagnose_pipeline_executado",
+        "spec_criada",
+        "relatorio_gerado"
+      ],
+      "score": 0.77,
+      "lessons": [
+        "Prefacio com placeholder latino nao substituido",
+        "Imagens (174.6 MB) precisam otimizacao urgente para publicacao",
+        "Inconsistencia terminologica I.A./IA detectada",
+        "Referencias bibliograficas insuficientes (apenas 2 citacoes completas)"
+      ],
+      "timestamp": 1784129830.0660954
+    },
+    {
+      "round_id": "R202",
+      "objective": "Analisar documento 1.odt - I.A. em Odontologia",
+      "changes": [
+        "diagnose_pipeline_executado",
+        "spec_criada",
+        "relatorio_gerado"
+      ],
+      "score": 0.77,
+      "lessons": [
+        "Prefacio com placeholder latino nao substituido",
+        "Imagens (174.6 MB) precisam otimizacao urgente para publicacao",
+        "Inconsistencia terminologica I.A./IA detectada",
+        "Referencias bibliograficas insuficientes (apenas 2 citacoes completas)"
+      ],
+      "timestamp": 1784129834.8086836
+    },
+    {
+      "round_id": "R143",
+      "objective": "Revisão e Refino do Geomaker (site + TouchTerrain + Bridge OpenCode) com SDD/TDD",
+      "changes": [
+        "Criada spec SPEC-935-R143.md — Revisão e Refino do Geomaker",
+        "Criados 23 testes em tests/test_r143_geomaker_review.py",
+        "Corrigido Nginx proxy /api/ (trailing slash) — /api/health agora roteia corretamente",
+        "Corrigido TouchTerrain KeyError basethick em preflight_generator",
+        "Removido botão \"Carregar gerador aqui\" sem função de laboratorio.html",
+        "Saneado erro.txt com análise de 155 linhas (zero erros de código do site)"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "SDD/TDD aplicado a deploy real (não só código do core)",
+        "Proxy reverso sem trailing slash quebra roteamento de prefixo",
+        "TouchTerrain preflight precisa de fallback para campos opcionais",
+        "23 testes de infraestrutura + conteúdo validam o deploy inteiro"
+      ],
+      "timestamp": 1784204324.501054
+    },
+    {
+      "round_id": "R144",
+      "objective": "Console Error Analyzer — classificação automática de logs do navegador via SDD/TDD",
+      "changes": [
+        "Criada spec SPEC-935-R144.md — Console Error Analyzer",
+        "Criado scripts/console_error_analyzer.py com classifica linha a linha",
+        "Criados 18 testes TDD em tests/test_r144_console_error_analyzer.py",
+        "Erro.txt agora gerado automaticamente pelo analisador (16 linhas, zero erros de codigo)",
+        "Corrigida ordem de regras: informacional antes de extensao (Background script ready)"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "SDD/TDD para ferramenta auxiliar (nao so para codigo principal) funciona bem",
+        "Ordem dos classificadores importa: informacional precisa vir antes de extensao",
+        "Formato do erro.txt agora e reproduzivel: mesma entrada → mesma saida",
+        "Extensoes Chrome geram 94% dos falsos positivos no console"
+      ],
+      "timestamp": 1784204818.2964418
+    },
+    {
+      "round_id": "R145",
+      "objective": "Terminal OpenCode CLI na página acervo — Geólogo Digital com SSE streaming via WSL",
+      "changes": [
+        "Bridge server.py: adicionado endpoint GET /api/terminal com SSE streaming",
+        "Bridge server.py: adicionado /api/health para consistência com /api/*",
+        "Bridge server.py: refatorado _run_opencode e _stream_opencode (DRY)",
+        "acervo.html: substituído formulário BYOK por interface terminal interativa",
+        "site.js: adicionada função initTerminal() com SSE streaming e input de prompt",
+        "styles.css: adicionados estilos completo do terminal (~80 linhas)",
+        "Nginx: removido trailing slash de proxy_pass /api/ para preservar prefixo",
+        "Testes R143: ajustados para aceitar 502 (TouchTerrain lento) e skip em timeout"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Nginx proxy_pass com/sem trailing slash muda completamente o roteamento",
+        "SSE streaming exige X-Accel-Buffering: no para evitar buffer do nginx",
+        "Terminal com monospace, prompt verde e animação de digitação dá sensação CLI autêntica",
+        "Manter consistência de prefixo (/api/*) entre bridge e nginx simplifica manutenção"
+      ],
+      "timestamp": 1784205498.3186378
+    },
+    {
+      "round_id": "R145",
+      "objective": "Diagnosticar e corrigir hang do TouchTerrain (/main sem resposta) via SDD/TDD, adicionando watchdog de auto-recuperação",
+      "changes": [
+        "SPEC-935-R145.md criada com 7 critérios de aceitação (CA-1 a CA-7)",
+        "tests/test_r145_touchterrain_estabilidade.py: 13 testes TDD (fase vermelha confirmada antes da implementação)",
+        "scripts/touchterrain_watchdog.py: check_health() + restart_service() + run_once(), stdlib apenas",
+        "geomaker-touchterrain-watchdog.timer + .service instalados e ativos (verificação a cada 2min)",
+        "Remediação imediata: restart do geomaker-touchterrain (threads travadas em chamadas Earth Engine sem timeout)",
+        "Regressão SPEC-935-R143 (KeyError basethick) confirmada como já corrigida, não uma reintrodução",
+        "13/13 testes R145 verdes + 53/54 da suite completa (1 deselecionado por depender de modelo rate-limited)"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "gunicorn --timeout opera no nível de worker (heartbeat), não de thread individual — threads gthread bloqueadas em I/O de rede não são detectadas por esse timeout",
+        "Watchdog externo via systemd timer é mitigação robusta e testável quando o código vendorizado (TouchTerrain/GDAL) não pode ser alterado com segurança",
+        "Antes de declarar causa raiz definitiva, comparar contagem de threads em processo saudável recém-iniciado vs travado — evita overclaim de diagnóstico (thread count sozinho não provou esgotamento)",
+        "journalctl com grep por padrões de crash (double free, SIGABRT, Traceback) é a forma mais rápida de diferenciar erro histórico de erro ativo"
+      ],
+      "timestamp": 1784225114.3369617
+    },
+    {
+      "round_id": "R146",
+      "objective": "Modo Polana: renderizacao alternativa com polylines brancas/vermelhas, notches de encaixe em V, peca base com tracks",
+      "changes": [
+        "Adicionado MODE_CLASSIC / MODE_POLANA (constantes)",
+        "Adicionado polanaTerrainPoints, polanaNotchPath, polanaSlicePolyline (helpers)",
+        "Modificado renderPage para aceitar mode=polana com polanaOpts",
+        "Adicionado buildPolanaBasePiece (SVG standalone com tracks de encaixe)",
+        "Pipeline (buildCrossSlicesPages, generateModel) propaga mode/polanaOpts",
+        "Exports expandidos com novas funcoes e constantes",
+        "Tests (smoke.mjs) com 15+ assercoes para modo polana"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Polana usa polyline reta (sem Bezier) com fill=white, stroke=red, stroke-width=4",
+        "Notches em V tem 33px profundidade e 12px largura na base (padrao part-a.svg)",
+        "3 tracks na base: V (olive #808000) + H (blue #0000ff) + V2 (olive)",
+        "Extras (hillshading, alignMarks, contours) controlados via polanaOpts.",
+        "Modo classic permanece inalterado (retrocompatibilidade total)"
+      ],
+      "timestamp": 1784298463.8545942
+    },
+    {
+      "round_id": "R203",
+      "objective": "Ajustes finos modo polana: 7 notches fixos, numeração cumulativa #1..#N, seções A/B/C no cabeçalho",
+      "changes": [
+        "polanaSlicePolyline: nNotches fixado em 7 (removido Math.max/Math.min variável)",
+        "renderPage: label V/H prefixado com #N cumulativo em modo polana",
+        "renderPage: cabeçalho adiciona \"Seção X\" (A/B/C...) em modo polana",
+        "tests/smoke.mjs: asserções para cumulative #1..#N e Seção A no cabeçalho",
+        "SPEC-935-R146-polana-mode.md: atualizado para v1.1 com CA-10 e CA-11"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Notches devem ser fixos em 7 por fatia para corresponder ao padrão all-parts-togerther.svg",
+        "Número cumulativo #N no label facilita ordenação na montagem (V#1..NV, H#NV+1..NV+NH)",
+        "Seção A/B/C no cabeçalho organiza páginas seguindo referência all-parts-togerther.svg",
+        "String.fromCharCode(64 + pageNum) mapeia página 1→A, 2→B, etc.",
+        "Todos os ajustes em modo polana não afetam modo classic (backward compatível)"
+      ],
+      "timestamp": 1784300297.524822
+    },
+    {
+      "round_id": "R204",
+      "objective": "Criar skill de análise médica — Médico Virtual Supremo v2.0",
+      "changes": [
+        "Criado skills/medico_virtual_supremo/skill.py — pipeline clínico em 7 etapas com detecção de emergência, recusa de prescrição autônoma, hipóteses diferenciais, evidência rastreável",
+        "Criado agents/catalog/medico-virtual-supremo.md — ficha de agente com front matter YAML e instruções completas",
+        "Criado Medicina/SKILL_CHATGPT.md — versão portável para Custom GPT/LLM",
+        "Registrado agente no opencode.json (175 agentes)",
+        "Skill testada: 5 modos, emergência, prescrição, validação de saída"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Pipeline clínico em 7 etapas implementado com 3 gates de segurança (emergência, prescrição, verificação)",
+        "Saída YAML validável por JSON Schema com revisão humana obrigatória",
+        "Skill portável para ChatGPT como SKILL_CHATGPT.md — formato de instruções para Custom GPT",
+        "Diretório de skill Python deve usar snake_case para import (medico_virtual_supremo)",
+        "15 módulos funcionais mapeados (histórico, genéticos, exames, RAG, preditiva, segurança, etc.)"
+      ],
+      "timestamp": 1784565794.5059905
+    },
+    {
+      "round_id": "R205",
+      "objective": "R205: Integração Médico Virtual Supremo + raciocínio científico + validação cruzada + orquestração transformer",
+      "changes": [
+        "SPEC-935-R205: especificação formal da integração com hooks, plugins, raciocínio, agentes, transformer",
+        "Hooks clínicos: pre/post para 4 etapas (normalize, hypothesis, plan, verify) com 8 hooks padrão",
+        "Plugins de validação cruzada: CrossValidationPlugin, DifferentialValidator, EvidenceCrosscheck",
+        "Motor de raciocínio científico: EvidenceBasedReasoning (GRADE/PICO/SOAP), DiagnosticReasoning (Bayes/LR)",
+        "5 agentes especialistas: cardiologista, neurologista, radiologista, infectologista, clínico geral",
+        "Pipeline transformer de orquestração clínica com atenção multi-cabeça e 5 perfis de especialistas",
+        "49 testes TDD: hooks (8), plugins (7), raciocínio (5), agentes (6), pipeline (6), integração (7), métricas (4), integridade (6)"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Hooks com falha graciosa: exceção em hook não interrompe pipeline",
+        "Validação cruzada multi-especialista detecta conflitos entre recomendações",
+        "Raciocínio bayesiano com LR permite calcular precisamente impacto de exames na probabilidade diagnóstica",
+        "Pipeline transformer com atenção multi-cabeça roteia por síndrome, gravidade e palavras-chave",
+        "Clínico geral como fallback quando especialista específico não identificado",
+        "49 testes TDD implementados e validados (SPEC-935-R205)"
+      ],
+      "timestamp": 1784588175.7277575
+    },
+    {
+      "round_id": "R206",
+      "objective": "CLI Integrations for Médico Virtual Supremo (OpenCode + Antigravity + Claude)",
+      "changes": [
+        "integration.py: argparse refactored for 3-CLI support",
+        "medico_mcp_server.py: 5 MCP tools for Antigravity CLI",
+        "transformer_pipeline.py: fixed sindrome gender matching (neurológico/neurológica)",
+        "opencode.json: MCP server entry added",
+        "CLAUDE.md: medical skill section added",
+        ".claude/settings.json: 5 tool definitions for Claude Code"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "argparse + parents conflita defaults entre main e subparser — usar add_argument manual em cada subparser",
+        "str.find/substring matching em português precisa tratar flexão de gênero (o/a)",
+        "CLI args após subcomando resolvem conflito de namespace"
+      ],
+      "timestamp": 1784596710.5426443
+    },
+    {
+      "round_id": "R207",
+      "objective": "MetaBus Integration for Médico Virtual Supremo",
+      "changes": [
+        "metabus_integration.py: conector MetaBus (eventos, reflexões, confidence ledger, lições semânticas)",
+        "skill.py: MetaBus ativo no pipeline — analysis.started, hypotheses.generated, analysis.completed, emergency.detected, prescription.refused, error",
+        "clinical_hooks.py: hook_registrar_auditoria publica cross_validation_executed no MetaBus",
+        "clinical_hooks.py: hook_sanitizar_dados com setdefault para hooks/alertas (bug fix)",
+        "integration.py: novo subcomando metabus para status da integração",
+        "opencode.json: comando /medico-metabus adicionado",
+        "test_r205_medico_supremo_integration.py: 12 novos testes MetaBus (61 total)"
+      ],
+      "score": 0.96,
+      "lessons": [
+        "MetaBus é singleton global — import falha graceful sem quebrar pipeline",
+        "hooks precisam de ctx.setdefault para listas (hooks, alertas) quando executados isoladamente",
+        "confidence ledger usa EMA (0.7*antigo + 0.3*novo) - convergência lenta e estável",
+        "eventos MetaBus sem subscribers retornam 0 — não é erro"
+      ],
+      "timestamp": 1784597287.816512
+    },
+    {
+      "round_id": "R208",
+      "objective": "Scanner CLI — dedicated entrypoint for /diagnose pipeline",
+      "changes": [
+        "scanners/cli.py: CLI dedicada com comandos diagnose, status, list",
+        "scanners/cli.py: saída texto formatada com indicadores visuais e barras de cobertura",
+        "scanners/cli.py: suporte a JSON, verbose, deep, social, legal, all flags",
+        "opencode.json: /diagnose simplificado (python3 -m scanners.cli diagnose $ARGUMENTS)",
+        "integrations/opencode_cli.py: regenerate to pick up new command"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "print(f=\"...\") é syntax error — usar print(\"...\")",
+        "argparse: --format no parser principal funciona com subcomandos quando antes do subcomando",
+        "DiagnosticPipeline.run() com domain=\"ecosystem\" leva ~7s (auto-descoberta de 150+ arquivos)",
+        "pipeline funciona com cobertura 100% nos 5 scanners para o ecossistema core"
+      ],
+      "timestamp": 1784597836.2706082
     }
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "tools": {
+    "medico-analisar": {
+      "description": "Analisa um caso clínico usando o Médico Virtual Supremo. Modos: professional_cds (profissionais), patient_education (pacientes), research (pesquisadores), simulation (treinamento).",
+      "command": "python3 -m skills.medico_virtual_supremo.integration",
+      "args": ["analisar", "$MODO", "$REQUEST", "--formato", "json"]
+    },
+    "medico-urgencia": {
+      "description": "Avalia rapidamente se há sinais de urgência/emergência em uma descrição de sintomas. Retorna orientação imediata.",
+      "command": "python3 -m skills.medico_virtual_supremo.integration",
+      "args": ["urgencia", "$REQUEST"]
+    },
+    "medico-raciocinar": {
+      "description": "Calcula probabilidade pós-teste usando raciocínio bayesiano. Útil para avaliar impacto de exames no diagnóstico.",
+      "command": "python3 -c \"from skills.medico_virtual_supremo.reasoning.diagnostic_reasoning import criar_raciocinio_padrao; m=criar_raciocinio_padrao(); import sys; r=m.avaliar_teste(sys.argv[1],float(sys.argv[2]),sys.argv[3].lower()=='true',sys.argv[4] if len(sys.argv)>4 else ''); print(f'Pré: {r.prob_pre_teste:.1%} → Pós: {r.prob_pos_teste:.1%} (LR={r.lr_aplicado}) - {r.interpretacao}')\"",
+      "args": ["$TESTE", "$PROB_PRE", "$RESULTADO", "$HIPOTESE"]
+    },
+    "medico-especialista": {
+      "description": "Roteia um caso clínico para o especialista mais adequado usando o pipeline transformer de atenção multi-cabeça.",
+      "command": "python3 -c \"from skills.medico_virtual_supremo.orchestration.transformer_pipeline import criar_pipeline_padrao; p=criar_pipeline_padrao(); import sys,json; caso=json.loads(sys.argv[1]); r=p.processar(caso); print(f'Principal: {r.especialista_principal.nome} ({r.especialista_principal.especialidade})' if r.especialista_principal else 'Sem especialista'); print(f'Justificativa: {r.justificativa}'); [print(f'  {e.nome}: {w:.3f}') for e,w in r.especialistas_ranqueados]\"",
+      "args": ["$CASO_JSON"]
+    },
+    "medico-grade": {
+      "description": "Classifica uma evidência usando o framework GRADE. Parâmetros: tipo_estudo (revisao_sistematica, ensaio_clinico_randomizado, etc), risco_ves (baixo, moderado, alto).",
+      "command": "python3 -c \"from skills.medico_virtual_supremo.reasoning.evidence_based_reasoning import EvidenceBasedReasoning, TipoEstudo; m=EvidenceBasedReasoning(); import sys; tipo=getattr(TipoEstudo,sys.argv[1].upper(),None); g=m.classificar_evidencia(tipo,consistencia=True,aplicabilidade_direta=True,risco_viés=sys.argv[2] if len(sys.argv)>2 else 'baixo'); print(f'Nível: {g.nivel.value}'); print(f'Força: {g.forca.value}'); print(f'Justificativa: {g.justificativa}')\"",
+      "args": ["$TIPO_ESTUDO", "$RISCO_VIES"]
+    }
+  }
+}

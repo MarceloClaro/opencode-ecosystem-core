@@ -4,6 +4,51 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.4.0] - 2026-07-21
+
+### Adicionado
+- **Médico Virtual Supremo — Skill de Apoio Clínico Auditável (SPEC-935-R205)**:
+  - Nova skill `skills/medico_virtual_supremo/` com pipeline clínico em 7 etapas (validação → normalização → representação → hipóteses → evidência → plano → verificação).
+  - 4 modos de operação: `professional_cds`, `patient_education`, `research`, `simulation`.
+  - Detecção de emergência com acionamento SAMU 192 e recusa de prescrição autônoma.
+  - 7 hooks clínicos (sanitização, idade, críticos, ranqueamento, linguagem, checklist, auditoria).
+  - 3 plugins de validação cruzada (consenso, diferencial, evidência).
+  - Raciocínio GRADE + PICO + SOAP e motor bayesiano com LR pré/pós-teste (6 doenças).
+  - Pipeline transformer multi-cabeça com 5 especialistas e roteamento por síndrome.
+  - 5 agentes especialistas no catálogo: cardiologista, neurologista, radiologista, infectologista, clínico geral.
+  - 61 testes TDD (49 originais + 12 MetaBus).
+- **MetaBus Integration para Skill Médica (R207)**:
+  - `metabus_integration.py`: conector que publica 7 eventos (`analysis.started`, `analysis.completed`, `emergency.detected`, `prescription.refused`, `hypotheses.generated`, `validation.cross`, `error`).
+  - Reflexões automáticas pós-análise e pós-emergência no `confidence_ledger`.
+  - Lições semânticas (`medico:skill`, `medico:safety`, `medico:sindromes_frequentes`).
+  - Comando `/medico-metabus` no OpenCode CLI.
+- **CLI Integrada para 3 Plataformas (R206)**:
+  - OpenCode CLI: `python3 -m skills.medico_virtual_supremo.integration analisar/urgencia/antigravity/claude`.
+  - Antigravity MCP Server: 5 ferramentas (`medico_analisar`, `medico_urgencia`, `medico_especialistas`, `medico_validar_cruzado`, `medico_raciocinar`).
+  - Claude Code: 5 tools em `.claude/settings.json`.
+  - Comandos `/medico`, `/medico-pro`, `/medico-urgencia`, `/medico-antigravity`, `/medico-claude`, `/medico-cardiologista`.
+- **Scanner CLI Dedicada (R208)**:
+  - `scanners/cli.py`: entrypoint dedicado com comandos `diagnose`, `status`, `list`.
+  - Saída texto formatada com indicadores visuais e barras de cobertura.
+  - Suporte a JSON, verbose, deep, social, legal e all flags.
+  - Comando `/diagnose` simplificado no OpenCode CLI.
+
+### Modificado
+- **CLAUDE.md**: documentação completa da skill médica com exemplos de uso.
+- **opencode.json**: 180 agentes, 8 comandos, 2 MCP servers (incluindo `medico-virtual-supremo`).
+- **Scanners pipeline**: cobertura 100% nas 5 camadas do ecossistema.
+- **EvolutionRegistry**: ciclos R206 (score 0.95), R207 (score 0.96), R208 (score 0.95).
+
+### Corrigido
+- **Argparse**: conflito de `parents` entre main/subparser resolvido com `_add_globais()` manual.
+- **Transformer pipeline**: matching de síndrome `neurológico` vs `neurológica` — resolvido com matching por raiz.
+- **Clinical hooks**: `ctx.setdefault("hooks", [])` para execução isolada de hooks.
+
+### Validação
+- `pytest tests/test_r205_medico_supremo_integration.py -q` → 61 passed.
+- `pytest tests/test_sdd_tdd.py -q` → 12 passed.
+- Scanners: cobertura 100% nas 5 camadas, score teleológico 1.0, 0 gaps.
+
 ## [2.3.0] - 2026-07-08
 
 ### Adicionado

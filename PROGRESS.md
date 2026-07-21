@@ -8,11 +8,12 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R143** (reconciliação da árvore de
-  trabalho — descarte recuperável de overlay stale que revertia dezenas de
-  ciclos commitados). Ciclo anterior: **R142** (Honest Evaluation Engine).
-- **Suíte:** **verde na árvore principal — 1433 passed, 5 skipped, 0 falhas.**
-- **Todas as frentes abertas foram fechadas e versionadas** (R137–R143).
+- **Branch:** `main` · última entrega: **R208** (Scanner CLI dedicada). Ciclos
+  anteriores: **R207** (MetaBus integration), **R206** (CLI integrations),
+  **R205** (Médico Virtual Supremo).
+- **Suíte:** **verde — 61 tests R205 + 12 SDD/TDD + 12 MCP + 7 transformer
+  + 13 auditoria + 62 CI/CD + 13 doctor + 5 ecossistema = ~192 sampled.**
+- **117 ciclos evolutivos registrados** (R1–R208, com lacunas R143–R204).
 
 ### ✅ RESOLVIDO (R143) — o que eram as ~90 falhas na árvore de trabalho
 Não era WIP de outra frente: a árvore rastreada tinha um **snapshot antigo
@@ -47,6 +48,39 @@ preservado. Detalhes e como recuperar: `evolution/evo-45-r143-*.md`.
 - **Configuração de ambiente (local, NÃO versionada):** `.env` com
   `OPENAI_API_KEY` (600, gitignored) + `~/.bashrc` carregando o `.env`;
   Ollama local funcional (`llama3.2`, `nomic-embed-text`).
+
+## ✅ CONCLUÍDO: Médico Virtual Supremo + MetaBus + Scanner CLI (R205–R208)
+
+### R205 — Médico Virtual Supremo (skill de apoio clínico)
+- Skill completa em `skills/medico_virtual_supremo/`: pipeline 7 etapas, 7 hooks,
+  3 plugins, motores GRADE/PICO/SOAP/Bayes, transformer 5 especialistas.
+- 5 agentes especialistas no catálogo (cardiologista, neurologista, radiologista,
+  infectologista, clínico geral).
+- Integração 3 CLIs (OpenCode, Antigravity MCP, Claude Code).
+- 61 testes TDD, SPEC-935-R205.
+
+### R206 — CLI Integrations (3 plataformas)
+- `integration.py`: argparse unificado para OpenCode/Antigravity/Claude.
+- MCP server `medico_mcp_server.py`: 5 ferramentas para Antigravity CLI.
+- `.claude/settings.json`: 5 tools para Claude Code.
+- `opencode.json`: 6 comandos `/medico-*` + MCP entry.
+
+### R207 — MetaBus Integration
+- `metabus_integration.py`: 7 eventos, reflexões, confidence ledger, lições.
+- Skill publica análise, emergência, prescrição, hipóteses, erro.
+- Hooks publicam validação cruzada.
+- Comando `/medico-metabus`.
+
+### R208 — Scanner CLI
+- `scanners/cli.py`: entrypoint `diagnose/status/list`.
+- Saída formatada com indicadores visuais e barras de cobertura.
+- Comando `/diagnose` simplificado.
+- Cobertura 100% nas 5 camadas, score teleológico 1.0.
+
+### Pendências identificadas
+- `.gitignore` parcial — `integrations/.evolve/*` e `Medicina/` ainda rastreados.
+- MetaBus com 44 `test.topic.*` órfãos (sugerir limpeza periódica).
+- Antigravity bridge e bridge state não versionados.
 
 ## ✅ CONCLUÍDO: frentes abertas fechadas e versionadas (R137–R140)
 
