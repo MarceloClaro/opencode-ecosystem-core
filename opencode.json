@@ -1819,6 +1819,16 @@
         "edit": true,
         "bash": true
       }
+    },
+    "litert-lm-agent": {
+      "description": "Agente especialista em execução de LLMs on-device via LiteRT-LM (Google AI Edge). Gerencia modelos .litertlm, chat interativo, servidor OpenAI-compatible.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/litert-lm-agent.md}",
+      "tools": {
+        "bash": true,
+        "write": true,
+        "edit": true
+      }
     }
   },
   "mcp": {
@@ -1871,6 +1881,11 @@
     "tdd": {
       "template": "python3 -m pytest '$ARGUMENTS' -v --tb=short 2>&1 | tail -40",
       "description": "Executa a bateria de testes TDD (ex: /tdd tests/test_opencode_go_zen.py)"
+    },
+    "litert-lm": {
+      "description": "CLI para modelos LiteRT-LM on-device. Subcomandos: list, run, chat, import, serve, info, delete. Ex: /litert-lm run gemma-4-E2B-it --prompt 'Olá!' | /litert-lm chat gemma-4-E2B-it",
+      "command": "litert-lm {args}",
+      "autoExec": true
     }
   }
 }

@@ -110,3 +110,74 @@ python3 -c "from skills.medico_virtual_supremo.reasoning.diagnostic_reasoning im
 ```bash
 python3 -m pytest tests/test_r205_medico_supremo_integration.py -v
 ```
+
+---
+
+## LiteRT-LM Skill — Google AI Edge On-Device LLM
+
+Skill para executar LLMs on-device via LiteRT-LM (Gemma, Llama, Phi-4, Qwen).
+
+### CLI via OpenCode
+
+```bash
+# Listar modelos disponíveis
+/litert-lm list
+
+# Executar prompt único
+/litert-lm run gemma-4-E2B-it --prompt "Qual a capital da França?"
+
+# Chat interativo
+/litert-lm chat gemma-4-E2B-it
+
+# Servidor OpenAI-compatible
+/litert-lm serve gemma-4-E2B-it --port 9379
+```
+
+### CLI direta (sem OpenCode)
+
+```bash
+# Ativar ambiente virtual com litert-lm instalado
+source /tmp/litert-venv/bin/activate
+
+# Executar via entrypoint Click
+python3 -m skills.litert_lm.cli list
+python3 -m skills.litert_lm.cli run /caminho/modelo.litertlm --prompt "Olá!"
+python3 -m skills.litert_lm.cli chat /caminho/modelo.litertlm
+```
+
+### API Python
+
+```python
+from skills.litert_lm import LiteRTLMSkill
+
+skill = LiteRTLMSkill()
+skill.list_models()
+response = skill.run("modelo.litertlm", "Olá!", backend="cpu")
+```
+
+### Chat interativo
+
+```python
+from skills.litert_lm import ChatSession
+
+with ChatSession("modelo.litertlm", temperature=0.7) as session:
+    resposta = session.send("Explique IA em termos simples")
+    print(resposta)
+```
+
+### Servidor OpenAI
+
+```python
+from skills.litert_lm.server import LiteRTOpenAIServer
+
+server = LiteRTOpenAIServer("modelo.litertlm", port=9379)
+models = server.list_models()
+response = server.chat_completion([
+    {"role": "user", "content": "Olá!"}
+])
+```
+
+### Testes da LiteRT-LM skill
+```bash
+python3 -m pytest tests/test_r209_litert_lm.py -v
+```

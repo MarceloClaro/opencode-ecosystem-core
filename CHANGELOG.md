@@ -4,6 +4,38 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.5.0] - 2026-07-21
+
+### Adicionado
+- **LiteRT-LM Skill — Google AI Edge On-Device LLM (SPEC-935-R209, ciclo R210)**:
+  - Nova skill `skills/litert_lm/` para orquestração de LLMs on-device via LiteRT-LM v0.14 (Gemma 4, Llama 4, Phi-4, Qwen).
+  - `LiteRTLMSkill`: orquestrador com 6 operações — `list_models`, `run`, `chat`, `import_model`, `serve`, `inspect`, `delete_model`.
+  - `ModelManager`: descoberta e cache local (`~/.litert-lm/models/`), download HuggingFace, deleção.
+  - `ChatSession`: sessão conversacional com streaming, histórico, tool use, multimodal, cancelamento.
+  - `LiteRTOpenAIServer`: endpoints compatíveis OpenAI (`/v1/models`, `/v1/chat/completions`).
+  - `cli.py`: CLI Click completa com 7 subcomandos e sistema de presets Python.
+  - `agents/catalog/litert-lm-agent.md`: agente especialista no catálogo.
+- **Integração OpenCode Ecosystem**:
+  - Comando `/litert-lm` no `opencode.json` (9 comandos total).
+  - Agente `litert-lm-agent` no catálogo (181 agentes total).
+  - Documentação completa em `CLAUDE.md`.
+
+### Modificado
+- **opencode.json**: 181 agentes, 9 comandos (adicionado `/litert-lm`).
+- **CLAUDE.md**: seção completa da LiteRT-LM skill com exemplos Python e CLI.
+- **EvolutionRegistry**: ciclo R210 registrado (score 0.96), total 119 ciclos.
+
+### Corrigido
+- **NPU backend**: `litert_lm.Backend.NPU()` levanta `RuntimeError` no Linux — adicionado `try/except` em `chat.py` e `server.py`.
+- **Import huggingface_hub**: função `import_from_hf()` usava `import` local que impedia mock — refatorado para referência global `_huggingface_hub`.
+- **Test mocking**: mocks de `litert_lm` ajustados para o escopo correto (`chat.litert_lm` vs `skill.litert_lm`) dado que `litert_lm` está instalado no venv.
+
+### Validação
+- `pytest tests/test_r209_litert_lm.py -q` → 39 passed em 0.53s.
+- Cobertura: ModelManager (13), LiteRTLMSkill (8), ChatSession (5), CLI (8), Server (3), Erros (3).
+- SDD: 12 critérios de aceitação cobertos.
+- Doctor: 7/8 checks passed.
+
 ## [2.4.0] - 2026-07-21
 
 ### Adicionado
