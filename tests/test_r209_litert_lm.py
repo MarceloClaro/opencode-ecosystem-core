@@ -206,8 +206,10 @@ class TestModelManager(unittest.TestCase):
         mock_download.assert_called_once()
 
     @mock.patch("skills.litert_lm.model_manager._huggingface_hub.hf_hub_download")
-    def test_import_from_hf_with_token(self, mock_download):
-        """import_from_hf aceita token opcional."""
+    @mock.patch("skills.litert_lm.model_manager._huggingface_hub.list_repo_files")
+    def test_import_from_hf_with_token(self, mock_list, mock_download):
+        """import_from_hf aceita token opcional (com auto-descoberta de filename)."""
+        mock_list.return_value = ["model.litertlm", "README.md"]
         mock_download.return_value = "/fake/path/model.litertlm"
         from skills.litert_lm.model_manager import ModelManager
         mgr = ModelManager(models_dir=self.models_dir)

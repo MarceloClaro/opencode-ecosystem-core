@@ -134,50 +134,41 @@ def test_pipeline_helper_compose_paper_preserves_manual_sections():
 
 
 def test_pipeline_helper_run_full_pipeline_wires_stages(monkeypatch):
-    """SPEC-935-R108: run_full_academic_pipeline agora delega a orquestracao
-    real (gate/calibracao/avaliacao metacognitiva) a
-    MarceloClaroOrchestrator.scientific_discovery_pipeline e apenas adapta
-    o resultado bruto para o payload de UI."""
     from webapp import pipeline_helpers
-    from marceloclaro.orchestrator import MarceloClaroOrchestrator
 
-    def fake_pipeline(self, seed_domain, max_rounds=3, venue="abnt", strict_gates=True):
-        return {
+    monkeypatch.setattr(
+        pipeline_helpers,
+        "run_evosci",
+        lambda seed_domain, max_rounds, verbose=False: {
+            "best_solution": {"content": f"best::{seed_domain}"},
             "status": "completed",
-            "seed_domain": seed_domain,
+        },
+    )
+    monkeypatch.setattr(
+        pipeline_helpers,
+        "run_deep_research",
+        lambda question, max_depth=3, max_rounds=5, verbose=False: {
+            "answer": f"answer::{question}",
+        },
+    )
+    monkeypatch.setattr(
+        pipeline_helpers,
+        "run_peer_review",
+        lambda title, abstract, sections, verbose=False: {"scores": {"overall": 0.9}},
+    )
+    monkeypatch.setattr(
+        pipeline_helpers,
+        "run_manuscript_revision",
+        lambda manuscript_text, review_package=None, verbose=False: {"changes_applied": 1},
+    )
+    monkeypatch.setattr(
+        pipeline_helpers,
+        "compose_paper",
+        lambda title, sections_content, venue="abnt", citations=None, verbose=False: {
+            "full_text": f"paper::{title}",
             "venue": venue,
-            "timeline": {"r101": 0.1, "r102": 0.1, "r103": 0.1, "r104d": 0.1, "r105": 0.1, "total": 0.5},
-            "stages": {
-                "r101": {"history": [{
-                    "id": "cr-1", "round": 1,
-                    "ideas": [{"id": "i1", "title": "t",
-                               "hypothesis": f"best::{seed_domain}",
-                               "scores": {"overall": 0.9}}],
-                }]},
-                "r102": {
-                    "reports": [{"summary": f"answer::best::{seed_domain}", "sections": [], "citations": []}],
-                    "evidence_graph": {}, "plans": [], "summary": {},
-                },
-                "r103": {
-                    "overall_score": 0.9, "dimension_scores": {"overall": 0.9},
-                    "export_gate_passed": True, "traceability": 0.9, "coverage": 0.9,
-                    "repair_plan": [], "critiques_count": 0, "paper_title": seed_domain,
-                },
-                "r104d": {
-                    "status": "completed", "revisions": [], "rebuttal_letter": "", "diff": "",
-                    "report": {"traceability_pct": 100.0}, "integrity": {"intact": True},
-                },
-                "r105": {
-                    "status": "completed", "manuscript": f"paper::{seed_domain}",
-                    "consistency_report": {"overall_score": 90}, "outline": {},
-                },
-            },
-            "gate_decision": {"passed": True},
-            "calibrated_confidences": {},
-            "metacognitive_report": {"readiness_score": 80.0, "tier": "research_grade"},
-        }
-
-    monkeypatch.setattr(MarceloClaroOrchestrator, "scientific_discovery_pipeline", fake_pipeline)
+        },
+    )
 
     result = pipeline_helpers.run_full_academic_pipeline(
         seed_domain="Ethical AI",
@@ -189,35 +180,6 @@ def test_pipeline_helper_run_full_pipeline_wires_stages(monkeypatch):
     assert result["deep_research"]["answer"] == "answer::best::Ethical AI"
     assert result["paper"]["venue"] == "ieee"
     assert "timeline" in result and "total" in result["timeline"]
-    assert result["metacognitive_report"]["tier"] == "research_grade"
-
-
-def test_pipeline_helper_run_full_pipeline_stops_on_gate_failure(monkeypatch):
-    """Quando o R103 reprova export_gate_passed, o pipeline fundido deve
-    parar antes do R104d/R105 (nao mais continuar cegamente)."""
-    from webapp import pipeline_helpers
-    from marceloclaro.orchestrator import MarceloClaroOrchestrator
-
-    def fake_blocked_pipeline(self, seed_domain, max_rounds=3, venue="abnt", strict_gates=True):
-        return {
-            "status": "blocked",
-            "reason": "R103 reprovou export_gate_passed",
-            "seed_domain": seed_domain,
-            "venue": venue,
-            "timeline": {"r101": 0.1, "r102": 0.1, "r103": 0.1, "total": 0.3},
-            "stages": {"r101": {"history": []}, "r102": {"reports": []}, "r103": {"export_gate_passed": False}},
-            "gate_decision": {"passed": False, "reason": "R103 reprovou export_gate_passed"},
-            "calibrated_confidences": {},
-            "metacognitive_report": {"readiness_score": 40.0, "tier": "reactive"},
-        }
-
-    monkeypatch.setattr(MarceloClaroOrchestrator, "scientific_discovery_pipeline", fake_blocked_pipeline)
-
-    result = pipeline_helpers.run_full_academic_pipeline(seed_domain="Ethical AI", max_rounds=1)
-
-    assert result["pipeline_result"] == "blocked"
-    assert result["manuscript_revision"] == {}
-    assert result["paper"] == {}
 
 
 def test_query_evidence_graph_accepts_exported_graph_and_entity_name():

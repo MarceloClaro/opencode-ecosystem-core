@@ -53,10 +53,11 @@ class ChatSession:
         top_p: Optional[float] = None,
         seed: Optional[int] = None,
         max_tokens: Optional[int] = None,
+        max_num_images: int = 0,
+        vision_backend: Optional[str] = None,
         cache: str = "disk",
         preset_tools: Optional[List[Callable]] = None,
         system_instruction: Optional[str] = None,
-        chat_template: Optional[str] = None,
         no_template: bool = False,
         verbose: bool = False,
     ):
@@ -71,10 +72,11 @@ class ChatSession:
             top_p: Top-P para nucleus sampling.
             seed: Seed para reprodutibilidade.
             max_tokens: Máximo de tokens de saída.
+            max_num_images: Nº máx de imagens por mensagem (0 = desligado).
+            vision_backend: Backend para encoder de visão ("cpu", "gpu", None=auto).
             cache: Modo de cache ("none", "memory", "disk").
             preset_tools: Lista de funções para tool use.
             system_instruction: Instrução de sistema para o chat.
-            chat_template: Template Jinja personalizado.
             no_template: Se True, interage sem template de prompt.
             verbose: Logs detalhados.
         """
@@ -86,10 +88,11 @@ class ChatSession:
         self.top_p = top_p
         self.seed = seed
         self.max_tokens = max_tokens
+        self.max_num_images = max_num_images
+        self.vision_backend = vision_backend
         self.cache = cache
         self.preset_tools = preset_tools or []
         self.system_instruction = system_instruction
-        self.chat_template = chat_template
         self.no_template = no_template
         self.verbose = verbose
 
@@ -147,6 +150,36 @@ class ChatSession:
                 logging.warning("NPU não suportado nesta plataforma. Usando CPU.")
             backend_obj = litert_lm.Backend.CPU()
 
+        # Define contexto do Engine (total: input + output)
+        # Se o usuário não especificou max_tokens, usa 4096 (padrão LiteRT-LM)
+        engine_context = self.max_tokens if self.max_tokens is not None else 4096
+        # Garante que o contexto mínimo é 2048 (modelos pequenos podem ter menos,
+        # mas precisamos de espaço para o input)
+        if engine_context < 2048:
+            engine_context = 2048
+
+        # Resolve vision_backend
+        # Se imagens foram solicitadas, ativa visão mesmo sem backend explícito
+        vision_backend_obj = None
+        if self.max_num_images > 0:
+            vb_spec = self.vision_backend or "cpu"
+            try:
+                vb_map = {
+                    "cpu": litert_lm.Backend.CPU(),
+                    "gpu": litert_lm.Backend.GPU(),
+                    "npu": litert_lm.Backend.NPU(),
+                }
+                vision_backend_obj = vb_map.get(
+                    vb_spec.lower(), litert_lm.Backend.CPU()
+                )
+            except RuntimeError:
+                if vb_spec.lower() == "npu":
+                    import logging
+                    logging.warning(
+                        "NPU não suportado para vision_backend. Usando CPU."
+                    )
+                vision_backend_obj = litert_lm.Backend.CPU()
+
         # Cria Engine
         cache_dir = ""
         if self.cache == "disk":
@@ -156,7 +189,9 @@ class ChatSession:
         self._engine = litert_lm.Engine(
             self.model_path,
             backend=backend_obj,
-            max_num_tokens=self.max_tokens,
+            max_num_tokens=engine_context,
+            max_num_images=self.max_num_images,
+            vision_backend=vision_backend_obj,
             cache_dir=cache_dir,
         )
         self._engine.__enter__()
@@ -166,7 +201,7 @@ class ChatSession:
             self._session = self._engine.create_session(
                 apply_prompt_template=False,
                 sampler_config=sampler_config,
-                max_output_tokens=self.max_tokens,
+                max_output_tokens=self.max_tokens,  # output limit
             )
             self._session.__enter__()
         else:
@@ -182,8 +217,7 @@ class ChatSession:
                 tools=tools,
                 messages=messages,
                 sampler_config=sampler_config,
-                max_output_tokens=self.max_tokens,
-                chat_template=self.chat_template,
+                max_output_tokens=self.max_tokens,  # output limit
             )
             self._conversation.__enter__()
 
@@ -238,24 +272,16 @@ class ChatSession:
                     })
                 if message:
                     content.append({"type": "text", "text": message})
-
-                stream = self._conversation.send_message_async({
-                    "role": "user",
-                    "content": content,
-                })
+                msg = {"role": "user", "content": content}
             else:
-                stream = self._conversation.send_message_async(message)
+                msg = message
 
             if self.stream:
-                return stream
+                return self._conversation.send_message_async(msg)
 
-            # Consome o stream
-            text = ""
-            for chunk in stream:
-                content_list = chunk.get("content", [])
-                for item in content_list:
-                    if item.get("type") == "text":
-                        text += item.get("text", "")
+            # Síncrono: send_message retorna dict completo
+            response = self._conversation.send_message(msg)
+            text = self._extract_text(response)
 
             self._history.append({"role": "user", "content": message})
             self._history.append({"role": "assistant", "content": text})
@@ -295,6 +321,18 @@ class ChatSession:
         self.close()
 
     # ── Helpers ──────────────────────────────────────────────────────────
+
+    @staticmethod
+    def _extract_text(response: Mapping[str, Any]) -> str:
+        """Extrai texto de uma resposta da Conversation."""
+        content_list = response.get("content", [])
+        if isinstance(content_list, list):
+            parts = []
+            for item in content_list:
+                if isinstance(item, dict) and item.get("type") == "text":
+                    parts.append(item.get("text", ""))
+            return "".join(parts)
+        return str(content_list)
 
     @staticmethod
     def _get_attachment_type(path: str) -> str:

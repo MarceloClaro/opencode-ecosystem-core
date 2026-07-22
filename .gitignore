@@ -1,17 +1,82 @@
+# --- Python ---
 __pycache__/
 *.pyc
+*.pyo
 .pytest_cache/
 *.egg-info/
 build/
 dist/
 *.egg
+*.so
+*.whl
+
+# --- Ambiente e secrets ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.crt
+
+# --- LaTeX build artifacts ---
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.lof
+*.lot
+*.lot
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.run.xml
+*.bcf
+*.nav
+*.snm
+*.vrb
+
+# --- PDFs (build artifacts, não fontes) ---
+*.pdf
+!**/*.md
+!**/*.py
+!**/*.ts
+!**/*.js
+!**/*.json
+!**/*.yaml
+!**/*.yml
+!**/*.toml
+!**/*.cfg
+!**/*.ini
+!**/*.sh
+!**/*.bat
+!**/*.ps1
+!**/*.tex
+!**/*.cls
+!**/*.sty
+!**/*.bib
+!**/*.bst
+!**/*.png
+!**/*.jpg
+!**/*.jpeg
+!**/*.gif
+!**/*.svg
+!**/*.webp
+!**/*.ico
+
+# --- Estado interno do ecossistema ---
 .mci_state/
-producao_cientifica/
-data/
-implementar ideias/
-*.bak
-cache/
+.mci_cache/
 opencode_logs/
+integrations/.evolve/
+agents/memory/
+
+# --- Diretórios de dados / conteúdo ---
+data/
+cache/
+producao_cientifica/
+implementar ideias/
 academic/visual_abstracts/
 academic/dashboard/
 academic/submissions/
@@ -19,69 +84,40 @@ academic/reviews/
 academic/papers/
 academic/discovery/
 
-# LaTeX build artifacts
-*.aux
-*.log
-*.out
-*.toc
-*.bbl
-*.blg
-*.fls
-*.fdb_latexmk
-*.synctex
-*.synctex.gz
-*.nav
-*.snm
-*.vrb
-*.lof
-*.lot
-*.lol
-*.dvi
-*.ps
-*.xdv
-*.pdf_tex
-*.run.xml
-*-blx.bib
-auto/
+# --- Projetos externos / grandes diretórios ---
+LiteRT-LM-main/
+LiteRT-LM-main.zip
+LiteRT-LM-main.zip:Zone.Identifier
+pesquisa/
+projetos/
+livro-odontologia-ia/
 
-# Large binary files in templates (template source = .tex/.sty/.cls only)
-templates/**/*.mp3
-templates/**/*.mp4
-templates/**/*.wav
-templates/**/*.avi
-templates/**/*.mkv
-# Artefatos binários/gerados de templates (PDFs compilados, saídas de ML).
-# Os PDFs/CSVs legítimos já versionados permanecem; isto só ignora novos.
-templates/**/*.pdf
-templates/**/*.csv
-templates/**/outputs/
-*:Zone.Identifier
+# --- Node / JavaScript ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
 
-# Conteúdo de usuário (livros, pesquisa, projetos) — NÃO versionar no
-# ecosystem-core (R140). É conteúdo criativo/de pesquisa, não código de
-# infraestrutura. O trabalho já está registrado no ledger (ex.: Molambudos
-# = ciclos R130–R134). Decisão do usuário: "só o código do ecossistema".
-/PROJETO 1/
-/projetos/
-/pesquisa/
-/livro-odontologia-ia/
-/REVISAO_MOLAMBUDOS.md
-/artigos_dl_odontologia.json
-templates/livro/molambudos/
-templates/livro/ia-em-odontologia/
-specs/SPEC-91[0-9]-molambudos-*.md
-specs/SPEC-950-livro-odontologia-ia.md
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
 
-# Backup externo Antigravity (R137) — 324 scripts de terceiros com
-# procedência/licença ainda não revisadas. Não versionar até a revisão.
-# Os testes de skills cloud pulam graciosamente quando ausentes.
-scripts/cloud/
+# --- Windows ---
+*.Zone.Identifier
 
-# Segredos e variáveis de ambiente (R128) — NUNCA versionar chaves de API.
-# .env.example é o único modelo versionado (chaves vazias).
-.env
-.env.local
-.env.*.local
-*.pem
-*.key
-!.env.example
+# --- ML Pipeline outputs (dados gerados) ---
+templates/projects/*/outputs/
+templates/projects/*/ml_pipeline/outputs/
+
+# --- CSV datasets gerados ---
+*.csv
+
+# --- Docker ---
+.docker/
+docker-compose.override.yml

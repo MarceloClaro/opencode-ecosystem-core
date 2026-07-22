@@ -709,25 +709,14 @@ def run_deep_research(
     max_rounds: int = 2,
     max_depth: int = 3,
 ) -> Dict[str, Any]:
-    """Executa pesquisa profunda completa.
-
-    Excecoes sao capturadas e retornadas como resultado estruturado
-    (``status: "error"``) em vez de propagar o crash para o chamador.
-    """
+    """Executa pesquisa profunda completa."""
     orchestrator = OrchestratorAgent(
         max_rounds=max_rounds,
         max_actions=10,
     )
-    try:
-        orchestrator.research(
-            question=question,
-            strategy="hybrid",
-            max_depth=max_depth,
-        )
-    except Exception as exc:
-        logger.exception("Falha no pipeline de deep research: %s", exc)
-        result = orchestrator.to_dict()
-        result["status"] = "error"
-        result["error"] = str(exc)
-        return result
+    report = orchestrator.research(
+        question=question,
+        strategy="hybrid",
+        max_depth=max_depth,
+    )
     return orchestrator.to_dict()

@@ -75,7 +75,7 @@ def build_config() -> Dict[str, Any]:
         "$schema": "https://opencode.ai/config.json",
         "theme": "opencode",
         "instructions": ["AGENTS.md"],
-        "model": "opencode-go/kimi-k2.7-code",
+        "model": "litert-lm/litert-community/gemma-4-E2B-it-litert-lm",
         "provider": {
             "opencode-go": {
                 "options": {
@@ -87,6 +87,28 @@ def build_config() -> Dict[str, Any]:
                 "options": {
                     "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
                     "baseURL": "https://opencode.ai/zen/v1"
+                }
+            },
+            "litert-lm": {
+                "npm": "@ai-sdk/openai-compatible",
+                "name": "LiteRT-LM (on-device)",
+                "options": {
+                    "apiKey": "sk-no-key-required",
+                    "baseURL": "http://localhost:9379/v1"
+                },
+                "models": {
+                    "litert-community/gemma-4-E2B-it-litert-lm": {
+                        "name": "Gemma 4 2B Expert (on-device)"
+                    },
+                    "litert-community/gemma-4-E4B-it-litert-lm": {
+                        "name": "Gemma 4 4B Expert (on-device)"
+                    },
+                    "litert-community/gemma-4-12B-it-litert-lm": {
+                        "name": "Gemma 4 12B (on-device)"
+                    },
+                    "litert-community/Qwen3-0.6B": {
+                        "name": "Qwen3 0.6B (on-device)"
+                    }
                 }
             }
         },
@@ -105,6 +127,18 @@ def build_config() -> Dict[str, Any]:
             **agents,
         },
         "mcp": {
+            "litert-lm": {
+                "type": "local",
+                "command": ["python3", "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/litert_lm_server.py"],
+                "enabled": True,
+                "description": "Modelos on-device LiteRT-LM (Gemma 4 2B/4B/12B, Qwen3 0.6B)"
+            },
+            "litert-lm-serve": {
+                "type": "local",
+                "command": ["litert-lm", "serve", "--port", "9379", "--cors-origin", "*"],
+                "enabled": True,
+                "description": "Servidor OpenAI-compatível LiteRT-LM"
+            },
             "metacognitive-interconnect": {
                 "type": "local",
                 "command": ["python3", "mci/mcp_server.py"],

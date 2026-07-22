@@ -36,17 +36,6 @@ from reasoning.quantum import (
     run_experiment_suite,
     DEFAULT_SEEDS,
 )
-from reasoning.fallacies import FallacyDetector, FallacyMatch, fallacy_detector
-from reasoning.arche_rlt import (
-    PeirceType,
-    RLTNode,
-    ReasoningMapper,
-    RLTBuilder,
-    RLTValidator,
-    RLTVisualizer,
-    ArcheRLT,
-    arche_rlt,
-)
 
 __all__ = [
     "MultiReasoningEngine", "ReasoningResult", "Z3Engine", "SymPyEngine",
@@ -59,7 +48,4 @@ __all__ = [
     "ParallelReasoning", "ReasoningEvaluator", "reasoning_evaluator",
     "QuantumSimulator", "bell_state", "ghz_state", "uniform_superposition",
     "run_experiment_suite", "DEFAULT_SEEDS",
-    "FallacyDetector", "FallacyMatch", "fallacy_detector",
-    "PeirceType", "RLTNode", "ReasoningMapper", "RLTBuilder",
-    "RLTValidator", "RLTVisualizer", "ArcheRLT", "arche_rlt",
 ]

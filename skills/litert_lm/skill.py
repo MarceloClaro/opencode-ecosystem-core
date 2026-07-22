@@ -104,14 +104,14 @@ class LiteRTLMSkill:
     def import_model(
         self,
         repo_id: str,
-        filename: str = "model.litertlm",
+        filename: Optional[str] = None,
         token: Optional[str] = None,
     ) -> ModelInfo:
         """Importa modelo do HuggingFace.
 
         Args:
             repo_id: Repositório HF (ex.: "litert-community/...").
-            filename: Nome do arquivo no repo.
+            filename: Nome do arquivo no repo (opcional — auto-descoberta).
             token: Token de acesso (opcional).
 
         Returns:
@@ -138,8 +138,7 @@ class LiteRTLMSkill:
         max_tokens: Optional[int] = None,
         cache: str = "disk",
         no_template: bool = False,
-        chat_template: Optional[str] = None,
-        speculative_decoding: Optional[bool] = None,
+        images: Optional[List[str]] = None,
     ) -> str:
         """Executa um prompt único em um modelo e retorna a resposta.
 
@@ -154,14 +153,16 @@ class LiteRTLMSkill:
             max_tokens: Máximo de tokens de saída.
             cache: Modo de cache.
             no_template: Ignorar template de prompt.
-            chat_template: Template Jinja personalizado.
-            speculative_decoding: Decodificação especulativa.
+            images: Lista de caminhos de imagens para anexar.
 
         Returns:
             Texto da resposta do modelo.
         """
         # Resolve o modelo
         info = self._resolve_model(model_ref)
+
+        # Define max_num_images se houver imagens
+        max_num_images = len(images) if images else 0
 
         # Cria sessão de chat com uma única troca
         with ChatSession(
@@ -173,12 +174,12 @@ class LiteRTLMSkill:
             top_p=top_p,
             seed=seed,
             max_tokens=max_tokens,
+            max_num_images=max_num_images,
             cache=cache,
             no_template=no_template,
-            chat_template=chat_template,
             verbose=self.verbose,
         ) as session:
-            return session.send(prompt)
+            return session.send(prompt, attachments=images)
 
     def chat(
         self,
@@ -193,9 +194,10 @@ class LiteRTLMSkill:
         cache: str = "disk",
         preset_tools: Optional[List[Callable]] = None,
         system_instruction: Optional[str] = None,
-        chat_template: Optional[str] = None,
         no_template: bool = False,
         stream: bool = True,
+        max_num_images: int = 0,
+        vision_backend: Optional[str] = None,
     ) -> ChatSession:
         """Inicia uma sessão de chat interativa.
 
@@ -210,9 +212,10 @@ class LiteRTLMSkill:
             cache: Modo de cache.
             preset_tools: Ferramentas para tool use.
             system_instruction: Instrução de sistema.
-            chat_template: Template Jinja personalizado.
             no_template: Ignorar template.
             stream: Se True, streaming habilitado.
+            max_num_images: Nº máx de imagens por mensagem.
+            vision_backend: Backend para visão ("cpu", "gpu").
 
         Returns:
             ChatSession pronta para uso.
@@ -228,10 +231,11 @@ class LiteRTLMSkill:
             top_p=top_p,
             seed=seed,
             max_tokens=max_tokens,
+            max_num_images=max_num_images,
+            vision_backend=vision_backend,
             cache=cache,
             preset_tools=preset_tools,
             system_instruction=system_instruction,
-            chat_template=chat_template,
             no_template=no_template,
             verbose=self.verbose,
         )

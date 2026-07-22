@@ -17,7 +17,7 @@ import json
 import os
 import re
 import time
-from dataclasses import dataclass, field, asdict, fields
+from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional
 
 EVOLUTION_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -47,11 +47,7 @@ class EvolutionRegistry:
             try:
                 with open(self.state_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                valid_fields = {f.name for f in fields(EvolutionCycle)}
-                self.cycles = [
-                    EvolutionCycle(**{k: v for k, v in c.items() if k in valid_fields})
-                    for c in data.get("cycles", [])
-                ]
+                self.cycles = [EvolutionCycle(**c) for c in data.get("cycles", [])]
             except (json.JSONDecodeError, TypeError):
                 self.cycles = []
 

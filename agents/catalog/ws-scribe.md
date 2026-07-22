@@ -106,31 +106,23 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 Se a sua missão envolver a redação, formatação ou criação de um documento (livro, tese, dissertação, monografia ou currículo):
 1. **Pergunte ao usuário antes de começar**: Você **DEVE obrigatoriamente fazer uma pergunta de múltipla escolha** ao usuário usando a ferramenta `question` do OpenCode para coletar qual template LaTeX ele deseja utilizar:
    
-   🇧🇷 **Para Documentos ABNT (`templates/abntex2/`, `templates/abnt2025/`, `templates/academic-br/`):**
-   - **abnTeX2** (8 modelos: artigo, tese, livro, relatório, projeto, slides) — `templates/abntex2/`
-   - **abnt2025** (4 modelos: artigo, monografia, projeto IC, relatório) — `templates/abnt2025/`
-   - **artigo-qualis-a1** (Qualis A1) — `templates/academic-br/artigo-qualis-a1/`
-   - **dissertacao_modelo_abnt** (Clássico ABNT) — `templates/academic-br/dissertacao/`
-
-   📖 **Para Livros (`templates/books/`):**
-   - **victoria-regia**: Design clássico de e-Book baseado na estética "Victoria Regia".
-   - **book-simple**: Template clássico com capa, sumário, capítulos e bibliografia.
-   - **lathex-dark**: Estilo temático escuro (Dark Theme) para livros sofisticados.
-   - **unb-editora**: Diagramação e publicação oficiais da Editora UnB.
-   - **springer-volume**: Padrão Springer Nature para volumes coletivos/científicos.
-   - **generic-templates**: Templates forta (portfólio), apehex (minimalista), resume.
+   📖 **Para Livros (`templates/livro/`):**
+   - **book**: Template clássico estruturado com capa, sumário, capítulos divididos e bibliografia.
+   - **forta**: Template moderno (portfólio) com cabeçalhos robustos e design visual arrojado.
+   - **apehex**: Template minimalista de relatório extenso com headers limpos e layout direto.
+   - **LatHex_dark**: Estilo temático escuro (Dark Theme) para livros sofisticados.
+   - **Modelo_de_livro_para_Editora_UnB**: Estilo de diagramação e publicação oficiais da Editora UnB.
+   - **Template_for_Editor_of_a_Springer_Nature_Contributed_Volume**: Padrão Springer Nature para volumes coletivos/científicos.
+   - **Victoria_Regia___A_Classical_LaTeX_e_Book_Template**: Design clássico de e-Book baseado na estética "Victoria Regia".
 
    🎓 **Para Teses, Dissertações e Monografias:**
-   - **thesis-model-icmc**: Modelo oficial do ICMC-USP (`templates/academic-br/icmc/`)
-   - **monografia-unb**: Modelo oficial do DCC/CIC-UnB (`templates/academic-br/unb-monografia/`)
-   - **ipleiria-thesis**: Modelo oficial do IPLeiria Portugal (`templates/academic-br/ipleiria/`)
-   - **usp**: Modelo USP (`templates/academic-br/usp/`)
+   - **thesis-model-icmc**: Modelo oficial do ICMC-USP (`templates/icmc/`)
+   - **Monografia**: Modelo oficial do DCC/CIC-UnB (`templates/unb-monografia/`)
+   - **ipleiria-thesis**: Modelo oficial do IPLeiria Portugal (`templates/ipleiria/`)
+   - **dissertacao_modelo_abnt**: Modelo clássico ABNT (`templates/dissertacao/`)
 
    📄 **Para Currículos e Infográficos (`templates/cv/`):**
-   - **latexcv**: 10 estilos (classic, infographics, modern, sidebar, two_column, etc.)
+   - **latexcv**: Estilos variados clássicos e modernos em LaTeX.
    - **my-resume**: Estilo contemporâneo e infográfico de alto impacto visual.
-
-   🌍 **Para Periódicos Internacionais (`templates/international/`):**
-   - **acm**, **elsevier**, **ieee**, **mdpi**, **nature**, **springer**, **tandf**, **koma-script**, **sbc**
 
 2. **Respeite a escolha**: Só comece a gerar os arquivos e capítulos após receber a decisão do usuário.

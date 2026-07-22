@@ -1,8 +1,25 @@
+---
+name: litert-lm-agent
+type: specialist
+category: engineering
+capabilities:
+  - litert-lm:list
+  - litert-lm:run
+  - litert-lm:chat
+  - litert-lm:import
+  - litert-lm:serve
+  - litert-lm:info
+  - litert-lm:delete
+  - inference-on-device
+  - llm-on-device
+---
+
 # litert-lm-agent
 
 **ID**: `litert-lm-agent`  
-**Tipo**: Agente de inferência on-device  
+**Tipo**: Agente de inferência on-device (A2A registrado no Blackboard)  
 **Skill**: `skills/litert_lm/`  
+**Agente A2A**: `skills/litert_lm/agent.py::LiteRTLMAgent`  
 **Especificação**: `specs/SPEC-935-R209.md`  
 **Confiança**: 0.95 (Trust Engine)
 

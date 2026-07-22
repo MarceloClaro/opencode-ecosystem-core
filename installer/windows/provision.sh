@@ -5,9 +5,8 @@
 # Executado DENTRO do Ubuntu (WSL) pelo bootstrap PowerShell, ou manualmente:
 #   bash provision.sh
 #
-# Instala: OpenCode CLI, Antigravity CLI, Claude Code CLI, Ollama CLI,
-# dependências do sistema e o repositório opencode-ecosystem-core
-# (nativo no OpenCode CLI).
+# Instala: OpenCode CLI, Antigravity CLI, Ollama CLI, dependências do sistema
+# e o repositório opencode-ecosystem-core (nativo no OpenCode CLI).
 # Idempotente: pode ser reexecutado com segurança para atualizar tudo.
 # ============================================================================
 set -uo pipefail
@@ -47,7 +46,7 @@ fi
 # 1. Dependências do sistema
 #    Inclui zstd (obrigatório desde Ollama v0.4+ para extração do binário)
 # ---------------------------------------------------------------------------
-log "Etapa 1/4: Atualizando pacotes do sistema (apt)..."
+log "Etapa 1/6: Atualizando pacotes do sistema (apt)..."
 sudo apt-get update -y >>"$LOG_FILE" 2>&1
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
     git curl wget unzip zip ca-certificates \
@@ -68,31 +67,83 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 2-4. CLIs externas: OpenCode, Antigravity (agy), Claude Code, Ollama
-#      (lógica compartilhada com installer/linux/install.sh e
-#      installer/macos/install.sh — ver installer/common/install_clis.sh)
+# 2. OpenCode CLI
 # ---------------------------------------------------------------------------
-log "Etapa 2/4: Instalando CLIs externas (OpenCode, Antigravity, Claude Code, Ollama)..."
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_LIB="$SCRIPT_DIR/../common/install_clis.sh"
-if [ ! -f "$COMMON_LIB" ]; then
-    # Executado via `bash provision.sh` isolado (sem o resto do repo ao lado)
-    COMMON_LIB="/tmp/opencode-ecosystem-install_clis.sh"
-    curl -fsSL "https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/installer/common/install_clis.sh" \
-        -o "$COMMON_LIB" 2>>"$LOG_FILE" || warn "Não foi possível baixar install_clis.sh; instalação de CLIs pode falhar."
+log "Etapa 2/6: Instalando OpenCode CLI..."
+if command -v opencode >/dev/null 2>&1; then
+    ok "OpenCode CLI já instalado: $(opencode --version 2>/dev/null | head -1)"
+else
+    curl -fsSL https://opencode.ai/install | bash >>"$LOG_FILE" 2>&1
+    export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH"
+    if command -v opencode >/dev/null 2>&1; then
+        ok "OpenCode CLI instalado: $(opencode --version 2>/dev/null | head -1)"
+    else
+        warn "Instalador oficial falhou; tentando fallback via npm..."
+        sudo npm install -g opencode-ai@latest >>"$LOG_FILE" 2>&1 \
+          && ok "OpenCode CLI instalado via npm." \
+          || err "Falha ao instalar OpenCode CLI (verifique o log)."
+    fi
 fi
-# shellcheck source=/dev/null
-source "$COMMON_LIB"
 
-install_opencode_cli
-install_antigravity_cli
-install_claude_code_cli
-install_ollama_cli
+# ---------------------------------------------------------------------------
+# 3. Antigravity CLI (agy)
+# ---------------------------------------------------------------------------
+log "Etapa 3/6: Instalando Antigravity CLI (agy)..."
+if command -v agy >/dev/null 2>&1 || [ -x "$HOME/.local/bin/agy" ]; then
+    ok "Antigravity CLI já instalado."
+else
+    curl -fsSL https://antigravity.google/cli/install.sh | bash >>"$LOG_FILE" 2>&1
+    export PATH="$HOME/.local/bin:$PATH"
+    if command -v agy >/dev/null 2>&1 || [ -x "$HOME/.local/bin/agy" ]; then
+        ok "Antigravity CLI instalado em ~/.local/bin/agy"
+    else
+        err "Falha ao instalar Antigravity CLI (verifique conectividade/log)."
+    fi
+fi
+
+# ---------------------------------------------------------------------------
+# 4. Ollama CLI
+#    O instalador oficial (ollama.com/install.sh) requer zstd >= v0.4.
+#    zstd já foi instalado na Etapa 1 acima.
+# ---------------------------------------------------------------------------
+log "Etapa 4/6: Instalando Ollama CLI..."
+if command -v ollama >/dev/null 2>&1; then
+    ok "Ollama já instalado: $(ollama --version 2>/dev/null | head -1)"
+else
+    curl -fsSL https://ollama.com/install.sh | sh >>"$LOG_FILE" 2>&1
+    if command -v ollama >/dev/null 2>&1; then
+        ok "Ollama instalado: $(ollama --version 2>/dev/null | head -1)"
+    else
+        # Fallback: baixa o binário estático diretamente do GitHub Releases
+        warn "Instalador oficial falhou; tentando fallback via binário estático..."
+        OLLAMA_BIN="$HOME/.local/bin/ollama"
+        mkdir -p "$HOME/.local/bin"
+        OLLAMA_URL="https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64"
+        curl -fsSL "$OLLAMA_URL" -o "$OLLAMA_BIN" >>"$LOG_FILE" 2>&1 && \
+            chmod +x "$OLLAMA_BIN" && \
+            ok "Ollama instalado via binário estático: $("$OLLAMA_BIN" --version 2>/dev/null | head -1)" || \
+            err "Falha ao instalar Ollama (verifique o log)."
+    fi
+fi
+
+# Garante que o serviço do Ollama esteja ativo (systemd no WSL2 moderno)
+if command -v ollama >/dev/null 2>&1 || [ -x "$HOME/.local/bin/ollama" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+    if command -v systemctl >/dev/null 2>&1 && systemctl is-system-running >/dev/null 2>&1; then
+        sudo systemctl enable --now ollama >>"$LOG_FILE" 2>&1 || true
+    fi
+    if ! pgrep -f "ollama serve" >/dev/null 2>&1 && \
+       ! (command -v systemctl >/dev/null 2>&1 && systemctl is-active --quiet ollama 2>/dev/null); then
+        nohup ollama serve >>"$LOG_FILE" 2>&1 &
+        sleep 2
+    fi
+    ok "Serviço Ollama ativo."
+fi
 
 # ---------------------------------------------------------------------------
 # 5. OpenCode Ecosystem Core (nativo)
 # ---------------------------------------------------------------------------
-log "Etapa 3/4: Instalando o OpenCode Ecosystem Core..."
+log "Etapa 5/6: Instalando o OpenCode Ecosystem Core..."
 if [ -d "$ECO_DIR/.git" ]; then
     log "Repositório já existe; atualizando (git pull)..."
     git -C "$ECO_DIR" pull --ff-only >>"$LOG_FILE" 2>&1 && ok "Ecosystem atualizado." || warn "git pull falhou; mantendo versão local."
@@ -119,7 +170,7 @@ pip3 install --user --break-system-packages -q pymupdf pymupdf4llm pypdf sympy z
 # ---------------------------------------------------------------------------
 # 6. PATH, aliases e integração nativa
 # ---------------------------------------------------------------------------
-log "Etapa 4/4: Configurando PATH, aliases e integração nativa..."
+log "Etapa 6/6: Configurando PATH, aliases e integração nativa..."
 BASHRC="$HOME/.bashrc"
 add_line() { grep -qxF "$1" "$BASHRC" 2>/dev/null || echo "$1" >> "$BASHRC"; }
 
@@ -150,7 +201,7 @@ echo "  VERIFICAÇÃO FINAL"
 echo "==================================================================="
 export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH"
 FAIL=0
-for tool in opencode agy claude ollama git python3 pandoc; do
+for tool in opencode agy ollama git python3 pandoc; do
     if command -v "$tool" >/dev/null 2>&1; then
         ok "$tool disponível."
     else

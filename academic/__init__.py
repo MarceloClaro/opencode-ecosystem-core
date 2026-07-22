@@ -7,9 +7,6 @@ datasets/fontes) e AUTO_SCORE_QUALIS (scorer de manuscritos 0-10),
 portados do OpenCode_Ecosystem original.
 """
 
-from academic.maswos import (MaswosPipeline, MaswosRun, MASWOS_STAGES,
-                              maswos_pipeline, CLOUD_STAGES, CLOUD_TOPIC_KEYWORDS,
-                              is_cloud_topic, run_maswos_cloud)
+from academic.maswos import MaswosPipeline, MaswosRun, MASWOS_STAGES, maswos_pipeline
 
-__all__ = ["MaswosPipeline", "MaswosRun", "MASWOS_STAGES", "maswos_pipeline",
-           "CLOUD_STAGES", "CLOUD_TOPIC_KEYWORDS", "is_cloud_topic", "run_maswos_cloud"]
+__all__ = ["MaswosPipeline", "MaswosRun", "MASWOS_STAGES", "maswos_pipeline"]

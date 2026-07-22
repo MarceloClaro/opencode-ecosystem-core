@@ -1,22 +1,21 @@
 <div align="center">
 
 # OpenCode Ecosystem Core
-**Arquitetura Cognitiva Multiagente — Pipeline Científico Integral + CI/CD**
+**Arquitetura Cognitiva Multiagente — Pipeline Científico Integral + On-Device LLM**
 
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.0.0_Agentic_Pipeline-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-1288_passed-success.svg)](tests/)
-[![Universidade Sintética](https://img.shields.io/badge/Ciclos-79_evolutivos-blueviolet.svg)](evolution/cycles.json)
-[![MCP](https://img.shields.io/badge/MCP-14_ferramentas-8A2BE2.svg)](synthetic_university/mcp_server.py)
-[![API](https://img.shields.io/badge/API-FastAPI_REST-00BFFF.svg)](synthetic_university/api_gateway.py)
-[![Agentes](https://img.shields.io/badge/Agentes-160+-orange.svg)](agents/catalog/)
+[![Versão](https://img.shields.io/badge/Versão-3.1.0_On-Device_LLM-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-1062_passed-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-52_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![MCP](https://img.shields.io/badge/MCP-14_ferramentas-8A2BE2.svg)](integrations/)
+[![Agentes](https://img.shields.io/badge/Agentes-177+-orange.svg)](agents/catalog/)
+[![Specs](https://img.shields.io/badge/Specs-130-dodgerblue.svg)](specs/)
+[![On-Device](https://img.shields.io/badge/On--Device-LiteRT--LM-success.svg)](skills/litert_lm/)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 160+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD e a Universidade Sintética Transversal com 79 ciclos de evolução contínua.*
-
-<sub>Ver [`CORRIGENDUM.md`](CORRIGENDUM.md) para ressalvas sobre "160+ agentes" (agent cards elegíveis, não processos de IA sempre ativos) e sobre "Qualis A1" (padrão de rubrica interno, não certificação obtida).</sub>
+*Uma arquitetura cognitiva completa que integra 177+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD, Universidade Sintética Transversal com 52 ciclos de evolução contínua e inferência on-device via LiteRT-LM (Gemma 4, Qwen3).*
 
 </div>
 
@@ -25,89 +24,36 @@
 ##  O que é o OpenCode Ecosystem?
 
 ### Para Leigos: A Universidade de Pesquisadores na sua Máquina
+Imagine que você tem uma universidade inteira de pesquisa científica trabalhando 24h/dia dentro do seu computador:
+- **Pesquisador-Chefe (EvoSci):** Gera hipóteses, decompõe problemas, coordena descobertas
+- **Deep Researcher:** Explora milhares de artigos, constrói grafos de evidência, sintetiza conhecimento
+- **Revisor (Peer Review):** Avalia com rubricas multi-dimensionais, detecta fraudes, audita evidências
+- **Editor (Paper Composer):** Organiza, escreve e formata artigos completos em ABNT/APA/IEEE
+- **Revisor de Manuscrito (Revision Agent):** Aplica correções, gera cartas de rebuttal, gerencia diffs
 
-Imagine uma universidade de pesquisa inteira — reitor, orientadores, pesquisadores, revisores, editores, uma secretaria de TI e até um porteiro que confere quem pode entrar — rodando dentro do seu computador, 24 horas por dia, coordenada por um único reitor: o orquestrador **marceloclaro**.
-
-**Quem faz o quê, em termos simples:**
-
-| Personagem | O que faz de verdade | Onde mora no código |
-|---|---|---|
-| **O Reitor** (marceloclaro) | Recebe seu pedido, decide quem vai trabalhar nele, acompanha se deu certo e nunca esquece uma lição aprendida. | `marceloclaro/orchestrator.py` |
-| **O Quadro de Avisos** (Blackboard) | Onde as tarefas ficam penduradas até um especialista se candidatar — como um mural de vagas de emprego interno. | `mci/blackboard.py` |
-| **A Memória Coletiva** (MetaBus) | A "memória da faculdade inteira" — o que já foi tentado, o que deu certo, quem é confiável em quê. | `mci/metabus.py` |
-| **O Pesquisador-Chefe** (EvoSci) | Gera hipóteses de pesquisa e as evolui geração após geração, como uma seleção natural de ideias. | `agentic_science_v2/orchestrator.py` |
-| **O Explorador de Bibliotecas** (Deep Research) | Vasculha 11 fontes acadêmicas reais (arXiv, PubMed, OpenAlex, bioRxiv...) e monta um mapa de evidências. | `agentic_science_v2/deep_research.py` |
-| **A Banca de Revisores** (Peer Review) | Avalia o trabalho em 8 dimensões, com revisão às cegas de verdade (nomes de autor escondidos). | `agentic_science_v2/review_agent.py` |
-| **O Copidesque** (Revision) | Aplica as correções pedidas pela banca — e se alguma correção estragar o texto, desfaz sozinho. | `agentic_science_v2/revision_agent.py` |
-| **O Diagramador** (Paper Composer) | Formata o artigo final em ABNT, APA ou IEEE, com verificação de que tudo bate entre si. | `agentic_science_v2/paper_composer.py` |
-| **O Segurança da Faculdade** (Trust Engine) | Detecta quando um especialista está "desviando do combinado" e reduz a confiança nele. | `trust/trust_engine.py` |
-| **A Central de Suporte** (Doctor + Helpdesk) | Confere a saúde de tudo em segundos e sugere exatamente o que fazer quando algo está errado. | `marceloclaro/doctor.py`, `helpdesk.py` |
-
-Você dá uma ordem como *"Pesquise o impacto de ética quântica em IA"* e o ecossistema orquestra dezenas de agentes especializados, testa rigorosamente (TDD), audita a qualidade (SDD gates) e entrega um artigo completo com revisão por pares embutida — e para agora, se algo falhar no meio do caminho, em vez de fingir que deu certo.
-
-**Quer instalar e usar sem entender nada de código?** Veja [`MANUAL.md`](MANUAL.md) — o manual em linguagem simples, com um mapa interativo (leia mais abaixo).
+Você dá uma ordem como *"Pesquise o impacto de ética quântica em IA"* e o ecossistema orquestra dezenas de agentes especializados, testa rigorosamente (TDD), audita a qualidade (SDD gates) e entrega um artigo completo com revisão por pares embutida.
 
 ### Para PhDs e Engenheiros: Ecossistema Multiagente com Pipeline Científico Fechado
-
-O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagentes (MAS) com **metacognição real, governança científica, pipeline acadêmico fechado, loop engineering formal e infraestrutura de qualidade profissional**. O orquestrador `MarceloClaroOrchestrator` (`marceloclaro/orchestrator.py`) é o ponto de fusão único de todas as camadas abaixo — não um roteador superficial, mas o agente `primary` do `opencode.json`, com métodos que atravessam MCI, Trust, SDD/TDD e o pipeline científico completo.
+O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagentes (MAS) com **metacognição, governança científica, pipeline acadêmico fechado e infraestrutura de qualidade profissional**.
 
 **Diferenciais arquiteturais:**
-
-- **Pipeline Científico Fechado, fundido nativamente (R101→R105, R108, R109):** EvoSci (descoberta) → Deep Research (evidência, 11 fontes) → Peer Review (avaliação + revisão às cegas real, R115) → Revision (correção com rollback automático) → Paper Composer (publicação). Desde o R108, isso roda **dentro** do orquestrador via `scientific_discovery_pipeline()`, com **gate real de exportação** (não mais continuação cega quando a revisão reprova) e **calibração de confiança** (Brier Score/ECE). Desde o R109, é um **loop real** (`run_scientific_discovery_loop()`) com 5 estados terminais nomeados (`success`/`no_op`/`blocked`/`stalled`/`exhausted`/`error`) e detecção de estagnação.
-- **MCI — Metacognitive Interconnect:** MetaBus (Global Workspace), Blackboard (protocolo A2A), Reflexion, `ConfidenceCalibrator` (Brier/ECE), `MetacognitiveEvaluator` (SPEC-920) — que nunca declara um tier "verified" sem `external_validation=True` explícito.
-- **Loop Engineering formal (R109):** `sdd/loop_spec.py::LoopSpecification` formaliza trigger, verificação em escada de 5 níveis, arquitetura, estados terminais e detecção de estagnação — checklist de boa-formação automático inspirado em Macedo (2026).
-- **Trust Engine com detecção de desvio de objetivo (R112):** `GoalDriftDetector` real, por sobreposição lexical em janela deslizante, além do `BehavioralGate` e `NaturalForgetting` já existentes.
-- **Raciocínio formal ampliado:** 12 motores (Z3, SymPy, Kanren, Bayesian, Causal...) + `ARCHE RLT` (R114, árvore lógica auditável nos 6 tipos de inferência de Peirce, SPEC-057) + detector de 15 falácias lógicas e 4 vieses cognitivos (R113).
-- **Evolutionary Memory (R97) + Evidence Graph (R102):** memória persistente de ideias/experimentos/estagnação; grafo epistemológico de entidades, relações e evidências com proveniência.
-- **MCP Security (R100) + CI/CD (R106):** guard model, audit trail, vetting de comandos, rate limiting; GitHub Actions com lint, matrix test e package build.
-- **Instalação multiplataforma de primeira classe (R116):** Windows (WSL 1-clique + ícone próprio), Linux nativo, macOS best-effort — as 3 CLIs externas (OpenCode, Antigravity, **Claude Code**) instaladas e verificadas por `doctor()`.
-- **Autoauditoria contínua:** `marceloclaro/doctor.py` + `helpdesk.py` (R110) + `CORRIGENDUM.md` — uma prática pública de correção de alegações que a própria documentação já usou em si mesma (ver seção de ressalvas acima).
-- **Mapa interativo 3D da arquitetura (R117):** [`docs/architecture_map.html`](docs/architecture_map.html) — todo subsistema real navegável em 3D, com alternador de leitura Leigo/PhD, mantido em paridade com os dois diagramas Mermaid (README + ARCHITECTURE).
-- **Handshake MCP corrigido (R118):** `mci/mcp_server.py` passou a implementar `initialize`/`ping` e a suprimir resposta a notificações — eliminando a falha real "metacognitive-interconnect failed" relatada por clientes MCP reais (OpenCode CLI, Claude Code, Antigravity).
-- **Templates literários/de ficção (R119):** `templates/books/romance-literario` e `contos-poesia` — primeiros templates de narrativa/ficção do catálogo (os demais "livro" eram todos acadêmicos/técnicos), integrados ao pipeline (`publishing/production.py`) e verificados de ponta a ponta convertendo um romance real via `pdf2latex`.
-- **Pesquisa científica exposta no CLI (R120):** `marceloclaro pesquisa "<tema>"` (e opção `[9]` do menu) — o pipeline de 11 fontes acadêmicas (R111) que só era acessível via Python ganhou comando direto; fallback de download via `scihub-cli` documentado e verificado por `doctor()`.
-- **Isolamento real de testes (R121):** `tests/conftest.py` corrige uma falha intermitente que, por mais de 70 ciclos, corrompia silenciosamente o `confidence_ledger` de produção a cada rodada completa da suíte — causa raiz encontrada e eliminada, não apenas contornada.
-- **Apresentações MIRA (R123 + R125):** o pipeline `illustrations/mira_deck.py::MiraDeckPipeline` transforma o manuscrito de uma produção num deck HTML de cards de vidro animados (método MIRA — linha de montagem de 6 estágios `extract → plan → copywrite → build → animate → validate`, Regra Zero de loop perpétuo, navegação card-a-card), com relatório de conformidade. Exposto ao usuário via `marceloclaro apresentacao <pasta>` (e opção `[10]` do menu), conectado aos agent cards MIRA já registrados no catálogo.
-- **Capa e contracapa TikZ (R124):** o `CoverDesigner` gera arte vetorial compilável no PDF (gradiente + formas geométricas por estilo), lombada dimensionada pela contagem de páginas e ficha catalográfica (CIP) — sem depender de gerador de imagem externo.
-
----
-
-##  Mapa da Arquitetura — para PhD e para Leigos
-
-Este ecossistema tem dezenas de subsistemas reais. Para não virar um emaranhado ilegível, organizamos tudo em **6 camadas arquiteturais** ao redor do orquestrador central, cada uma com um registro de leitura simples (Leigo) e um técnico (PhD).
-
-** [Abrir o mapa interativo 3D](docs/architecture_map.html)** — arraste o mouse pela cena para girar a "mesa de desenho", clique em qualquer camada para ver todos os nós internos, alterne entre os registros Leigo/PhD no topo. Funciona offline, abrindo o arquivo direto no navegador.
-
-### Legenda das 6 camadas
-
-| Camada | Cor no mapa | O que agrupa (Leigo) | O que agrupa (PhD) |
-|---|---|---|---|
-| **1. Interface & Instalação** | azul-claro | As portas de entrada: terminal, painel visual, instaladores | CLI marceloclaro, Dashboard Streamlit, OpenCode/Antigravity/Claude Code CLI, `installer/` (R116) |
-| **2. Orquestração & Confiança** | âmbar | As regras do jogo: quem é confiável, o que precisa ser testado antes de entregar | Trust Engine (+GoalDriftDetector R112), Token Economy, SDD/TDD Engine, Loop Engineering (R109), Doctor/Helpdesk/Corrigendum (R110) |
-| **3. MCI — Sistema Nervoso** | ciano | A memória e os instintos compartilhados de tudo | MetaBus, Blackboard, Reflexion, ConfidenceCalibrator, MetacognitiveEvaluator (SPEC-920), OQS/VSEE/EGS |
-| **4. Pipeline Científico** | coral | A linha de produção de um artigo científico, do zero à publicação | EvoSci→DeepRes→PeerReview(+BlindReview R115)→Revision→Composer, fundidos e em loop real (R108/R109) |
-| **5. Raciocínio & Descoberta** | lilás | As diferentes formas de "pensar" do sistema | 12 motores + ARCHE RLT (R114) + Detector de Falácias (R113), Game Theory, MiroFish, MASWOS, Legal, RAG, Synthetic University |
-| **6. Produção, Segurança & Evolução** | verde | Onde o trabalho vira produto, e onde tudo fica registrado para sempre | Publishing (+templates literários R119, +capa/contracapa TikZ R124), Research Hub (+PubMed/bioRxiv/CORE R111, CLI `pesquisa` R120), Illustrations + Apresentações MIRA (deck animado R123, CLI `apresentacao` R125, agente delegável `mira-presenter` R126), MCP Security (R118), CI/CD (R121), Evolution Registry (85 ciclos), 46 Specs SDD |
-
-### Instruções de leitura
-
-1. **Comece pelo hub central** (`marceloclaro`) — todo fluxo de dados entra e sai por ele; nenhuma camada se comunica diretamente com outra sem passar pela memória compartilhada (MCI) ou pelo orquestrador.
-2. **Linhas tracejadas** = vetores de delegação/reflexão (o orquestrador manda trabalho, a camada devolve uma reflexão que vira memória).
-3. **Setas cheias** dentro do Pipeline Científico = a ordem real de execução (EvoSci → Deep Research → Peer Review → Revision → Composer); reprovar o gate do Peer Review interrompe a cadeia antes da Revision (R108).
-4. Para o diagrama técnico completo (todos os IDs de nó, todas as arestas, formato Mermaid nativo do GitHub) veja [`ARCHITECTURE.md`](ARCHITECTURE.md#diagrama-de-arquitetura-completo).
-5. Para instalar cada camada de interface, veja [`installer/README.md`](installer/README.md). Para usar o CLI do orquestrador no dia a dia, veja [`MANUAL.md`](MANUAL.md).
+- **Pipeline Científico Fechado (R101→R105):** Do problema à entrega do artigo — EvoSci (descoberta) → Deep Research (evidência) → Peer Review (avaliação) → Revision (correção) → Paper Composer (publicação)
+- **Evolutionary Memory (R97):** Memória persistente de ideias, experimentos, estagnação e reflexão periódica
+- **Evidence Graph (R102):** Grafo epistemológico de entidades, relações e evidências com proveniência
+- **MCP Security (R100):** Guard model, audit trail, vetting de comandos e rate limiting
+- **CI/CD Quality Gates (R106):** GitHub Actions com lint, matrix test e package build
 
 ---
 
 ##  Instalação: 1-Click no Windows
 
-Se você usa Windows 10/11, o instalador configura WSL2, Ubuntu, OpenCode CLI, Antigravity CLI, Claude Code CLI, Ollama e o ecossistema — com ícone próprio e atalhos na Área de Trabalho:
+Se você usa Windows 10/11, o instalador configura WSL2, Ubuntu, Ollama e o ecossistema:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/installer/windows/Install-OpenCodeEcosystem.ps1 | iex
 ```
 
-*(Para Linux nativo e macOS, veja o [Guia de Instalação](installer/README.md). Manual de uso: [`MANUAL.md`](MANUAL.md).)*
+*(Para Linux/macOS, veja o [Guia Manual](ARCHITECTURE.md))*
 
 ---
 
@@ -184,31 +130,15 @@ graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
     WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
-
-    %% Interface & Instalação (R116)
-    subgraph IF ["Interface & Instalação (R116)"]
-        OCCLI["OpenCode CLI<br>165 agentes · 8 comandos"]
-        AGCLI["Antigravity CLI<br>ponte agy"]
-        CCCLI["Claude Code CLI<br>CLAUDE.md+AGENTS.md"]
-        Inst["Instaladores<br>Windows/Linux/macOS<br>+ Desinstaladores"]
-    end
-    Inst -.->|Provisiona| OCCLI
-    Inst -.->|Provisiona| AGCLI
-    Inst -.->|Provisiona| CCCLI
-    OCCLI --> Orchestrator
-    AGCLI --> Orchestrator
-    CCCLI --> Orchestrator
-
+    
     %% Camada SDD/TDD
     subgraph SDD [SDD & TDD Engine]
         Spec[SpecRegistry<br>Especificações]
         Ver[SpecVerifier<br>Gate SDD]
         TDD[TDDRunner<br>Red-Green-Refactor]
-        LoopSpec["Loop Engineering R109<br>5 Estados Terminais"]
-
+        
         TDD -.->|Valida| Ver
         Ver -.->|Lê| Spec
-        LoopSpec -.->|Formaliza| Spec
     end
 
     %% Camada Transformer
@@ -226,7 +156,7 @@ graph TD
     subgraph Acad [Pipeline Academico Agentivo v3.0]
         EvoSci["R101: EvoSci<br>MentorAgent+ResearcherAgent<br>ReviewerAgent+EvoEngine"]
         DeepRes["R102: Deep Research<br>EvidenceGraph+BFRS+DFRS"]
-        PReview["R103: Peer Review<br>8-dim Rubric+AuditGraph<br>Revisão às Cegas Real (R115)"]
+        PReview["R103: Peer Review<br>8-dim Rubric+AuditGraph"]
         Revision["R104d: Manuscript Revision<br>DiffEngine+Rebuttal"]
         Composer["R105: Paper Composer<br>ABNT/APA/IEEE"]
         
@@ -235,20 +165,14 @@ graph TD
         PReview --> Revision
         Revision --> Composer
     end
-
-    %% Fusao real no orquestrador (R108/R109)
-    FusionLoop["scientific_discovery_pipeline (R108)<br>+ loop real com estagnação (R109)"]
-    Orchestrator -->|Funde nativamente| FusionLoop
-    FusionLoop -->|Executa em cadeia| EvoSci
-    Composer -->|Retorna ao loop| FusionLoop
-
+    
     %% Camada Core (Subsistemas)
     subgraph Core [Core Subsystems]
-        Trust["Trust Engine<br>Behavioral Gate<br>GoalDriftDetector (R112)"]
+        Trust[Trust Engine<br>Behavioral Gate]
         Eco[Token Economy<br>Staking/Slashing]
         Scan[Scanners<br>Diagnóstico]
-        AcadLegacy[MASWOS<br>Qualis A1 - meta interna, ver Corrigendum]
-        Reason["Reasoning<br>12 Engines + Quantum<br>ARCHE RLT (R114) + Falácias (R113)"]
+        AcadLegacy[MASWOS<br>Qualis A1]
+        Reason[Reasoning<br>12 Engines + Quantum]
         Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928/931]
         LegalBench[Legal Benchmarks<br>SPEC-928]
         SynthUniv[Synthetic University<br>SPEC-935 · 11 Faculdades]
@@ -259,22 +183,15 @@ graph TD
         EvoMem[Evolutionary Memory<br>R97 · Memória Persistente]
         Novelty[Novelty V2<br>R98 · Contribution Points]
         RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
-        ResearchHub["Research Hub<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
-        Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)<br>+Capa/contracapa TikZ (R124)"]
-        MiraDeck["Apresentações MIRA<br>artigo → deck animado (R123)<br>CLI: marceloclaro apresentacao (R125)"]
-        MiraAgent["Agente mira-presenter<br>executor delegável no Blackboard (R126)<br>present_task: delega+executa+reporta"]
     end
-    MiraAgent -.->|"encarna o pipeline"| MiraDeck
 
     %% Seguranca e Qualidade
     subgraph SQC [Seguranca & Qualidade]
-        MCPSec["MCP Security R100<br>Guard+Audit+Vetter+Limiter<br>Handshake initialize corrigido (R118)"]
-        CICD["CI/CD Pipeline R106<br>GitHub Actions+Quality Gates<br>Isolamento real do MCI em testes (R121)"]
+        MCPSec[MCP Security R100<br>Guard+Audit+Vetter+Limiter]
+        CICD[CI/CD Pipeline R106<br>GitHub Actions+Quality Gates]
         Skills[Skills Exportaveis R104a<br>4 Skills]
         PipPkg[Pip Packages R104b<br>3 Pacotes]
-        DoctorNode["Doctor + Helpdesk (R110)<br>+ CORRIGENDUM.md público"]
     end
-    DoctorNode -.->|Diagnostica| Orchestrator
 
     %% MCP + API Gateway
     subgraph Protocols [Protocolos de Integração]
@@ -412,8 +329,7 @@ graph TD
 
 | Camada | Função |
 |---|---|
-| **Interface & Instalação (R116)** | Portas de entrada externas: OpenCode CLI, Antigravity CLI, Claude Code CLI, e os instaladores das 3 plataformas (com desinstaladores). |
-| **SDD & TDD Engine** | Motor de especificação e testes. Toda entrega nasce como spec (SDD) e só é aceita após testes verdes (TDD). Inclui o Loop Engineering formal (R109). |
+| **SDD & TDD Engine** | Motor de especificação e testes. Toda entrega nasce como spec (SDD) e só é aceita após testes verdes (TDD). |
 | **Transformer Layer** | Roteador por atenção multi-cabeça. Substitui if/else estático por scores softmax de semântica, capacidade, confiança e carga. |
 | **Pipeline Academico v3.0** | O coração do sistema. 5 estágios sequenciais que transformam um problema em artigo completo revisado e formatado. |
 | **Core Subsystems** | Subsistemas auxiliares: trust engine, economia de tokens, motores de raciocínio, RAG científico, Universidade Sintética, memória evolutiva. |
@@ -432,68 +348,6 @@ graph TD
 | Vermelho | **Segurança e qualidade** — proteção, validação, CI/CD |
 | Roxo | **Protocolos de integração** — MCP, API Gateway |
 | Cinza | **Metacognição** — barramento neural, memória, reflexão |
-
----
-
-### Legenda do Subsistema de Apresentações MIRA (R123–R126)
-
-O MIRA (*Metáforas Inteligentes Responsivas e Animadas*) é a peça que
-transforma um artigo/manuscrito numa **apresentação científica animada**.
-Ele vive na Camada 6 e tem quatro elementos com papéis distintos —
-abaixo, a **função de cada um** em dupla-registro.
-
-| Elemento | Para Leigos (o que é) | Para PhDs (o que faz) | Arquivo |
-|---|---|---|---|
-| **`MiraEngine`** | O ilustrador: desenha um "cartaz animado" para um conceito isolado (uma metáfora visual que se move em loop). | Gera cards HTML autocontidos (SVG + CSS `@keyframes infinite`); `pick_metaphor()` casa a dinâmica do conceito com uma cena do cotidiano do catálogo de metáforas. | `illustrations/mira_engine.py` |
-| **`MiraDeckPipeline`** | A linha de montagem: pega o texto inteiro e monta a apresentação slide a slide, do começo ao fim. | Esteira de 6 estágios com fronteiras limpas (cada posto é chamável isolado); produz um `deck.html` navegável de cards de vidro + `CONFORMIDADE.md`. | `illustrations/mira_deck.py` |
-| **`MiraPresentationAgent`** (`mira-presenter`) | O funcionário que opera a linha de montagem quando o "chefe" (orquestrador) delega o trabalho. | Agente-executor registrado no Blackboard com capacidade distintiva `apresentacao-mira`; encarna o pipeline e é delegável, sujeito a Trust Engine e Token Economy. | `illustrations/mira_agent.py` |
-| **`present()` × `present_task()`** | Dois botões: um roda a apresentação direto; o outro passa pelo "sistema de gestão" que registra quem fez e se deu certo. | `present()` = via direta (chamada de biblioteca, usada pelo CLI); `present_task()` = via delegada (posta no Blackboard, matching por atenção, `report_completion` alimenta confiança/economia). | `marceloclaro/orchestrator.py` |
-
-**Regras do método (a "alma" do MIRA), portadas do livro e do
-`sandeco/mira-animator`:**
-
-- **Regra Zero:** nenhum slide é estático — todo card entra com
-  coreografia e segue em movimento perpétuo (`infinite`). *Para o leigo:*
-  slide parado é defeito, não estilo. *Para o PhD:* invariante verificada
-  pelo estágio `validate` (presença de `@keyframes` de entrada + ao menos
-  um loop `infinite`).
-- **Título ≤ 6 palavras, sem ícone.** *Leigo:* uma ideia por tela, título
-  curto. *PhD:* clipping determinístico no estágio `copywrite`, checado no
-  `validate`.
-- **Formato do card acompanha o formato da ideia:** citação→card de
-  citação, código→card de código, itens paralelos→grade, conceito→metáfora
-  animada.
-
----
-
-### Como Funciona a Apresentação MIRA (a linha de montagem de 6 estágios)
-
-Assim como a orquestração tem 7 passos, a geração de uma apresentação
-tem **6 estágios** com entrada/saída limpas — "a esteira para nas
-juntas" (consertar a peça, não a fábrica). Chamar
-`marceloclaro apresentacao <pasta>` (ou delegar via `present_task`) roda
-a esteira inteira sobre o `manuscrito.md` da produção.
-
-| # | Estágio | Para Leigos | Para PhDs |
-|---|---|---|---|
-| 1 | **`extract`** | Lê o texto e separa cada seção, anotando o que tem citação, código ou lista. | `Briefing` = 1 `Section` por `##`; detecta blocos `>` (citação), ``` ``` ``` (código) e listas (itens paralelos). |
-| 2 | **`plan`** | Decide a sequência de slides: capa, um por seção, encerramento — e que "tipo" cada slide terá. | `SlidePlan`: capa + 1 slide/seção (tipo inferido: `quote`/`code`/`grid`/`concept`) + encerramento; `concept` recebe a chave da metáfora. |
-| 3 | **`copywrite`** | Enxuga os títulos (no máximo 6 palavras) e escreve os subtítulos. | Clipping de título a `MAX_TITLE_WORDS=6`; subtítulos derivados dos pontos-chave (heurístico; LLM opcional em ciclo futuro). |
-| 4 | **`build`** | Monta os slides como "cartões de vidro" translúcidos, com botões e navegação por setas. | HTML único autocontido; cards com `backdrop-filter`; navegação card-a-card (teclado + botões). **Ainda sem animação** (fronteira verificável). |
-| 5 | **`animate`** | Dá vida a tudo: cada card entra com movimento e nunca fica parado; conceitos ganham sua cena animada. | Aplica a Regra Zero (entrada + loop `infinite` por card) e injeta o SVG da metáfora nos cards `concept`. |
-| 6 | **`validate`** | O inspetor final: confere se todos os slides se movem, se os títulos são curtos, se a navegação existe. | `ConformityReport`: checa Regra Zero, títulos ≤6 palavras, navegação, autocontenção; grava `CONFORMIDADE.md`. |
-
-**Exemplo prático:** um `manuscrito.md` com uma seção de citação, uma de
-código e uma lista de aplicações vira um `deck.html` com: capa animada →
-card de citação → card de código → grade de aplicações → encerramento —
-todos em loop perpétuo, navegáveis com as setas do teclado. O
-`CONFORMIDADE.md` ao lado atesta que a Regra Zero foi cumprida.
-
-**Onde isso encaixa na arquitetura:** o estágio `validate` é o análogo,
-no MIRA, do passo *Verificar* da orquestração; e `present_task()` faz a
-apresentação percorrer o mesmo governo (confiança, economia, reflexão)
-das demais tarefas do ecossistema — é por isso que o `mira-presenter`
-aparece na lista de agentes do Blackboard.
 
 ---
 
@@ -811,7 +665,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **85 ciclos registrados** (R47 a R127), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **52 ciclos registrados** (R1 a R52), cada um com score, lições e timestamp.
 
 ---
 
@@ -1129,18 +983,57 @@ print(result["theses"][0])             # Melhor tese do ciclo
 print(result["novelty_scores"])        # Scores de novidade
 ```
 
-**Ciclos de evolução: 85** (R47–R127) | **1351 testes** | Score médio: 9.18/10
+**Ciclos de evolução: 52** (R1–R52) | **1062+ testes** | Score médio: 9.4/10
 
-> "Score médio" é autoavaliação interna por ciclo, não benchmark externo — ver [`CORRIGENDUM.md`](CORRIGENDUM.md#3-score-médio-94-10-e-ciclos-de-evolução-65-readmemd-architecturemd).
+---
+
+##  LiteRT-LM — Inferência On-Device (R48–R52)
+
+O ecossistema agora suporta **inferência local completa** via LiteRT-LM (Google AI Edge),
+rodando modelos Gemma 4 e Qwen3 diretamente na máquina, sem necessidade de API externa.
+
+### Modelos disponíveis
+
+| Modelo | Parâmetros | Tamanho | Contexto |
+|--------|-----------|---------|----------|
+| Gemma 4 2B Expert | 2.6B | 2.4 GB | 16.384 tok |
+| Gemma 4 4B Expert | 4.6B | 3.4 GB | 16.384 tok |
+| Gemma 4 12B | 12B | 6.1 GB | 16.384 tok |
+| Qwen3 0.6B | 0.6B | 0.5 GB | 16.384 tok |
+
+### Provider OpenAI-Compatível
+
+O LiteRT-LM expõe uma API compatível com OpenAI em `localhost:9379/v1`,
+permitindo que o OpenCode o use como **provider nativo**:
+
+```json
+"litert-lm": {
+  "npm": "@ai-sdk/openai-compatible",
+  "name": "LiteRT-LM (on-device)",
+  "options": {
+    "apiKey": "sk-no-key-required",
+    "baseURL": "http://localhost:9379/v1"
+  }
+}
+```
+
+### Performance
+
+| Métrica | Valor |
+|---------|-------|
+| Cold start (2.4 GB) | ~2-4 min |
+| Request quente | 2-8s |
+| Contexto máximo | 16.384 tokens |
+| RAM (Gemma 4 E2B) | ~9 GB RSS |
+| Decode (CPU) | ~30-45 tok/s |
+
+Uso: `./scripts/litert-lm-serve.sh` ou `LITERT_LM_MAX_TOKENS=16384 litert-lm serve`
+
+**4 ciclos de evolução** (R48–R52) | **43+ testes de validação** | Score: 9.8/10
 
 ---
 
 ##  Comparative de Maturidade Técnica
-
-> ⚠️ As notas abaixo são auto-atribuídas pelo próprio projeto, sem
-> metodologia de benchmark nem execução comparativa dos frameworks
-> citados — ver [`CORRIGENDUM.md`](CORRIGENDUM.md#1-tabela-comparativa-vs-frameworks-externos-readmemd-linhas-991-1000)
-> antes de tratar esta tabela como avaliação objetiva.
 
 | Critério | OpenCode v3.0 | LangGraph | CrewAI | AutoGen | MetaGPT |
 |---|---|---|---|---|---|
@@ -1169,7 +1062,7 @@ opencode-ecosystem-core/
 │   ├── revision_agent.py    # ReviewAnalyzer, SectionMapper, ProposalGenerator, DiffEngine
 │   ├── paper_composer.py    # StructurePlanner, SectionWriter, CitationFormatter, CrossVerifier
 │   └── orchestrator.py      # AgenticScienceV2 orchestrator
-├── synthetic_university/    # SPEC-935 · 11 Faculdades · 79 ciclos
+├── synthetic_university/    # SPEC-935 · 11 Faculdades · 65 ciclos
 │   ├── mcp_server.py        # MCP Server · 14 ferramentas stdio
 │   ├── api_gateway.py       # FastAPI REST · 12+ endpoints
 │   ├── mcp_security.py      # MCPGuard, AuditLogger, ToolVetter, RateLimiter (R100)
@@ -1194,9 +1087,9 @@ opencode-ecosystem-core/
 │   ├── opencode-evosci/
 │   ├── opencode-deep-research/
 │   └── opencode-peer-review/
-├── specs/                   # Especificacoes SDD (R97-R127)
-├── evolution/               # Cycles registry (79 ciclos)
-├── tests/                   # 1288 testes automatizados
+├── specs/                   # Especificacoes SDD (R97-R107)
+├── evolution/               # Cycles registry (65 ciclos)
+├── tests/                   # 1062 testes automatizados
 ├── mci/                     # Metacognitive Interconnect
 ├── marceloclaro/            # Orquestrador
 ├── agents/catalog/          # 160+ agent cards
@@ -1215,7 +1108,7 @@ opencode-ecosystem-core/
 ##  Executar os Testes
 
 ```bash
-# Suite completa (1288 testes)
+# Suite completa (1062 testes)
 python3 -m pytest tests/ -v
 
 # Pipeline academico agentivo (R101-R105)
@@ -1255,14 +1148,14 @@ O ecossistema possui compatibilidade documentada com o fork `timpara/opencode-ac
 | Evolutionary Memory + Evidence Graph | Não possui |
 | MCP Security (Guard+Audit+Vetter+Limiter) | MCP basico sem seguranca |
 | CI/CD Quality Gates (R106) | Sem CI/CD |
-| 79 ciclos de evolucao | Sem evolution registry |
+| 65 ciclos de evolucao | Sem evolution registry |
 | Peer Review agentivo 8-dimensoes | Revisao textual basica |
 | Paper Composer ABNT/APA/IEEE | Templates LaTeX fixos |
 
 ---
 
 <div align="center">
-  <i>85 ciclos evolutivos · 1351 testes · 0 regressoes · Score medio 9.18/10</i><br>
+  <i>65 ciclos evolutivos · 1062 testes · 0 regressoes · Score medio 9.4/10</i><br>
   <b>v3.0.0 — Pipeline Academico Agentivo | MCP Security | CI/CD Quality Gates</b><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>

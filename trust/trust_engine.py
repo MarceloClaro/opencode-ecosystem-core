@@ -71,16 +71,6 @@ class GateDecision:
     risk_level: str               # "safe" | "moderate" | "risky" | "blocked"
 
 
-@dataclass
-class DriftCheck:
-    """Resultado de uma verificacao de goal drift."""
-    session_id: str
-    similarity: float              # sobreposicao lexical acao-vs-objetivo (0-1)
-    drifted: bool
-    window: list[float] = field(default_factory=list)
-    reason: str = ""
-
-
 # ═══════════════════════════════════════════════════════════════════════════
 # 1. TRUST SCORER (Adaptive Learned Weights)
 # ═══════════════════════════════════════════════════════════════════════════
@@ -464,85 +454,6 @@ class OutcomeTracker:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# 5. GOAL DRIFT DETECTOR (R112)
-# ═══════════════════════════════════════════════════════════════════════════
-
-class GoalDriftDetector:
-    """Detecta desvio de objetivo (goal drift): compara o contexto das
-    acoes recentes de uma sessao contra o objetivo originalmente
-    declarado, usando sobreposicao lexical (Jaccard) sobre uma janela
-    deslizante — heuristico e determinístico, no mesmo espirito de outros
-    comparadores de similaridade ja usados no ecossistema (ex.:
-    ``agentic_science_v2.revision_agent.SectionMapper``, que mapeia
-    claims para secoes por overlap de palavras).
-
-    Nao e um classificador semantico/LLM — deteccao de deriva textual
-    grosseira, mas real e testavel, distinta de nao ter deteccao nenhuma.
-    """
-
-    def __init__(self, window: int = 5, drift_threshold: float = 0.15):
-        self.window = window
-        self.drift_threshold = drift_threshold
-        self._goals: dict[str, str] = {}
-        self._history: dict[str, list[float]] = defaultdict(list)
-
-    def set_goal(self, session_id: str, goal_text: str) -> None:
-        """Declara (ou redeclara) o objetivo de uma sessao, reiniciando
-        sua janela de historico de similaridade."""
-        self._goals[session_id] = goal_text
-        self._history[session_id] = []
-
-    @staticmethod
-    def _similarity(a: str, b: str) -> float:
-        """Sobreposicao lexical de Jaccard entre dois textos."""
-        wa = set(a.lower().split())
-        wb = set(b.lower().split())
-        if not wa or not wb:
-            return 0.0
-        return len(wa & wb) / len(wa | wb)
-
-    def check(self, session_id: str, action_context: str) -> DriftCheck:
-        """Verifica se a acao atual ainda esta alinhada ao objetivo
-        declarado. So classifica ``drifted=True`` depois que a janela
-        completa (``window`` acoes) mostrar similaridade media abaixo do
-        limiar — uma unica acao fora do tema nao basta."""
-        goal = self._goals.get(session_id, "")
-        sim = self._similarity(goal, action_context) if goal else 1.0
-
-        hist = self._history[session_id]
-        hist.append(sim)
-        if len(hist) > self.window:
-            hist.pop(0)
-
-        drifted = False
-        if not goal:
-            reason = "sem objetivo declarado para esta sessao — nada a comparar"
-        elif len(hist) < self.window:
-            reason = f"janela incompleta ({len(hist)}/{self.window}) — aguardando mais acoes"
-        else:
-            avg = sum(hist) / len(hist)
-            if avg < self.drift_threshold:
-                drifted = True
-                reason = (
-                    f"similaridade media com o objetivo caiu para {avg:.2f} "
-                    f"(< limiar {self.drift_threshold}) nas ultimas {self.window} acoes"
-                )
-            else:
-                reason = f"similaridade media {avg:.2f} dentro do limiar ({self.drift_threshold})"
-
-        return DriftCheck(
-            session_id=session_id, similarity=round(sim, 4),
-            drifted=drifted, window=list(hist), reason=reason,
-        )
-
-    def status(self, session_id: str) -> dict[str, Any]:
-        return {
-            "goal": self._goals.get(session_id, ""),
-            "history": list(self._history.get(session_id, [])),
-        }
-
-
-# ═══════════════════════════════════════════════════════════════════════════
 # TRUST ENGINE (Orquestrador)
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -563,7 +474,6 @@ class TrustEngine:
         self.gate = BehavioralGate(self.scorer)
         self.memory = NaturalForgetting()
         self.tracker = OutcomeTracker(self.scorer)
-        self.goal_drift = GoalDriftDetector()
 
     def execute(self, action_id: str, required_trust: float | None = None) -> GateDecision:
         """Verifica se uma acao pode ser executada (behavioral gate).
@@ -595,23 +505,6 @@ class TrustEngine:
         """Recupera memorias relevantes."""
         result = self.memory.recall(query)
         return [result.content] if result else []
-
-    def set_goal(self, session_id: str, goal_text: str) -> None:
-        """Declara o objetivo de uma sessao para deteccao de goal drift (R112)."""
-        self.goal_drift.set_goal(session_id, goal_text)
-
-    def check_drift(self, session_id: str, action_context: str) -> DriftCheck:
-        """Verifica desvio de objetivo (goal drift) para a acao atual.
-
-        Quando a deriva e confirmada (janela completa, similaridade media
-        abaixo do limiar), o outcome e registrado como falha para a acao
-        ``goal_drift:{session_id}`` — a mesma penalidade de confianca
-        aplicada a qualquer outra falha rastreada, sem mecanismo separado.
-        """
-        result = self.goal_drift.check(session_id, action_context)
-        if result.drifted:
-            self.tracker.record(f"goal_drift:{session_id}", success=False, delta=0.0)
-        return result
 
     @property
     def status(self) -> dict[str, Any]:
