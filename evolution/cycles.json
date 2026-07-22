@@ -2428,6 +2428,52 @@
         "pipeline funciona com cobertura 100% nos 5 scanners para o ecossistema core"
       ],
       "timestamp": 1784597836.2706082
+    },
+    {
+      "round_id": "R209",
+      "objective": "Implementar quality presets, parametros de notch, e gerar Corcovado Ultra 320x256",
+      "changes": [
+        "Adicionado --quality draft|normal|hd|ultra com mapeamento de parametros no CLI",
+        "Adicionado --notch-width e --notch-height no CLI propagados ate SvgTerrainBuilder.build_polylines",
+        "Adicionado --cache-only com validacao pre-chamada de rede",
+        "Corrigido Encoding::CompatibilityError no cutting_sheet.rb (section_letter .chr retornava ASCII-8BIT para valores >127, incompativel com UTF-8 do template)",
+        "Cache interpolado 320x256 usado com sucesso via --cache-only",
+        "Gerado Corcovado Ultra: 320x256, 514m pico, 86 paginas A4, notches 4pt, 4 passadas suavizacao"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Integer#chr sem argumento retorna ASCII-8BIT para valores >=128 em Ruby 3.3",
+        "SHA256 de bbox exigem coordenadas exatas (floating point) — usar --bbox com valores do cache",
+        "Open-Meteo rate-limit a cada ~7 lotes de 96 pontos (65s backoff) inviabiliza 854 lotes",
+        "Interpolacao bilinear de cache 160x128 → 320x256 funcionou sem perda significativa de qualidade"
+      ],
+      "timestamp": 1784676625.5297966
+    },
+    {
+      "round_id": "R210",
+      "objective": "R209: Integração LiteRT-LM — CLI Multi-Modelo, Chat Interativo e Servidor OpenAI-Compatible",
+      "changes": [
+        "SPEC-935-R209: especificação formal da skill LiteRT-LM",
+        "skills/litert_lm/: skill completa com LiteRTLMSkill (orquestrador)",
+        "skills/litert_lm/cli.py: CLI Click com 7 subcomandos (list/run/chat/import/serve/info/delete)",
+        "skills/litert_lm/chat.py: ChatSession com streaming, tool use, multimodal, histórico",
+        "skills/litert_lm/model_manager.py: ModelManager para descoberta, cache e import de modelos .litertlm",
+        "skills/litert_lm/server.py: LiteRTOpenAIServer (endpoints OpenAI /v1/models e /v1/chat/completions)",
+        "skills/litert_lm/presets/: sistema de presets com tool use",
+        "agents/catalog/litert-lm-agent.md: agente especialista LiteRT-LM",
+        "tests/test_r209_litert_lm.py: 39 testes TDD (ModelManager, Skill, ChatSession, CLI, Server, Erros)",
+        "Correção: NPU().__init__ levanta RuntimeError no Linux — try/except lazy backend",
+        "Correção: import huggingface_hub local vs módulo — referência global _huggingface_hub"
+      ],
+      "score": 0.96,
+      "lessons": [
+        "litert_lm.Backend.NPU() quebra no Linux — usar try/except em todo lookup de backend",
+        "Mock de módulos instalados exige patching no escopo correto (chat.litert_lm vs skill.litert_lm)",
+        "huggingface_hub pode não estar instalado — import global com fallback a None",
+        "CLI serve precisa de dry-run mode para testes (LITERT_LM_DRY_RUN=1)",
+        "LiteRT-LM v0.14 requer arquivo .litertlm válido — Engine falha em arquivo fake sem magic number"
+      ],
+      "timestamp": 1784678565.4372458
     }
   ]
 }
