@@ -1,6 +1,6 @@
-# Arquitetura: OpenCode Ecosystem Core v3.0
+# Arquitetura: OpenCode Ecosystem Core v3.1
 
-Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, e os subsistemas legados de governança científica e jurídica.
+Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, **On-Device LLM via LiteRT-LM (R48–R52)**, e os subsistemas legados de governança científica e jurídica.
 
 ---
 
@@ -11,31 +11,15 @@ graph TD
     %% Atores e Orquestrador
     User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
     WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
-
-    %% Camada de Interface Externa (R116)
-    subgraph Interface ["Interface & Instalação (R116)"]
-        OpenCodeCLI["OpenCode CLI<br>opencode.json · 165 agentes<br>8 comandos slash"]
-        AntigravityCLI["Antigravity CLI<br>ponte para binário agy"]
-        ClaudeCLI["Claude Code CLI<br>CLAUDE.md + AGENTS.md"]
-        Installer["Instaladores<br>Windows(WSL 1-clique)/Linux/macOS<br>+ Desinstaladores com confirmação"]
-    end
-    Installer -.->|Provisiona| OpenCodeCLI
-    Installer -.->|Provisiona| AntigravityCLI
-    Installer -.->|Provisiona| ClaudeCLI
-    OpenCodeCLI --> Orchestrator
-    AntigravityCLI --> Orchestrator
-    ClaudeCLI --> Orchestrator
-
+    
     %% Camada SDD/TDD
     subgraph SDD [SDD & TDD Engine]
         Spec[SpecRegistry<br>Especificações]
         Ver[SpecVerifier<br>Gate SDD]
         TDD[TDDRunner<br>Red-Green-Refactor]
-        LoopSpec["Loop Engineering (R109)<br>LoopSpecification<br>5 Estados Terminais Nomeados"]
-
+        
         TDD -.->|Valida| Ver
         Ver -.->|Lê| Spec
-        LoopSpec -.->|Formaliza| Spec
     end
 
     %% Camada Transformer
@@ -53,7 +37,7 @@ graph TD
     subgraph Acad ["Pipeline Academico Agentivo (R101-R105)"]
         EvoSci["R101: EvoSci<br>MentorAgent<br>PrimeResearcherAgent<br>ReviewerAgent<br>EvolutionManagerAgent<br>EvoEngine (Selection/Crossover/Mutation/Inheritance)"]
         DeepRes["R102: Deep Research<br>KnowledgeBaseRegistry<br>BFRSAgent<br>DFRSAgent<br>ExecutionSandbox<br>OrchestratorAgent"]
-        PReview["R103: Peer Review<br>RubricEngine (8 dim)<br>ReviewLedger<br>AuditGraph<br>MultiCriticReviewer<br>Revisão às Cegas Real (R115)<br>OrchestratorReviewer"]
+        PReview["R103: Peer Review<br>RubricEngine (8 dim)<br>ReviewLedger<br>AuditGraph<br>MultiCriticReviewer<br>OrchestratorReviewer"]
         Revision["R104d: Revision<br>ReviewAnalyzer<br>SectionMapper<br>ProposalGenerator<br>DiffEngine (rollback)<br>OrchestratorRevision"]
         Composer["R105: Paper Composer<br>StructurePlanner<br>SectionWriter (6 secoes)<br>CitationFormatter (3 estilos)<br>CrossConsistencyVerifier<br>OrchestratorComposer"]
         
@@ -62,20 +46,14 @@ graph TD
         PReview --> Revision
         Revision --> Composer
     end
-
-    %% Fusao real no orquestrador (R108/R109)
-    FusionLoop["scientific_discovery_pipeline() (R108)<br>+ run_scientific_discovery_loop() (R109)<br>Gate real · Calibração · Loop com estagnação"]
-    Orchestrator -->|Funde nativamente| FusionLoop
-    FusionLoop -->|Executa em cadeia| EvoSci
-    Composer -->|Retorna ao loop| FusionLoop
-
+    
     %% Camada Core
     subgraph Core [Core Subsystems]
-        Trust["Trust Engine<br>Behavioral Gate<br>GoalDriftDetector (R112)"]
+        Trust[Trust Engine<br>Behavioral Gate]
         Eco[Token Economy<br>Staking/Slashing]
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
-        Acad[MASWOS<br>Qualis A1 - meta interna, ver Corrigendum]
-        Reason["Reasoning<br>12 Engines + Quantum<br>ARCHE RLT - 6 tipos Peirce (R114)<br>Detector de Falácias - 15+4 (R113)"]
+        Acad[MASWOS<br>Qualis A1]
+        Reason[Reasoning<br>12 Engines + Quantum]
         Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928]
         LegalBench[Legal Benchmarks<br>SPEC-928]
         RAG[Scientific RAG<br>Grounding + Citations]
@@ -84,23 +62,20 @@ graph TD
         MetaEval[Metacognitive Eval<br>SPEC-920]
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
-        Publishing["Publishing<br>LaTeX & Cover Designer<br>+Templates Literários (R119)<br>+Capa/contracapa TikZ (R124)"]
-        Research["Research<br>Hub c/ OSINT<br>11 fontes: +PubMed/bioRxiv/CORE (R111)<br>CLI: marceloclaro pesquisa (R120)<br>Download: OA direto + Sci-Hub fallback"]
-        Illus["Illustrations<br>Mermaid/MIRA/Graph<br>Apresentações MIRA: deck animado (R123)<br>CLI: marceloclaro apresentacao (R125)<br>Agente delegável mira-presenter (R126)"]
+        Publishing[Publishing<br>LaTeX & Cover Designer]
+        Research[Research<br>Hub c/ OSINT]
+        Illus[Illustrations<br>Mermaid/MIRA/Graph]
         EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
         NoveltyV2["Novelty V2 (R98)<br>ContributionPointExtractor<br>PointwiseLiteratureRetriever<br>PointwiseNoveltyScorer<br>HierarchicalTaxonomyBuilder"]
     end
 
     %% Seguranca e Qualidade
     subgraph Security ["Seguranca & Qualidade"]
-        MCPSec["MCP Security (R100)<br>MCPGuard<br>AuditLogger<br>ToolVetter<br>RateLimiter<br>Handshake initialize corrigido (R118)"]
-        CICD["CI/CD Pipeline (R106)<br>GitHub Actions: Lint+Test+Package<br>scripts/quality_report.py<br>scripts/check_coverage.py<br>scripts/run_full_suite.sh<br>tests/conftest.py: isolamento real do MCI (R121)"]
+        MCPSec["MCP Security (R100)<br>MCPGuard<br>AuditLogger<br>ToolVetter<br>RateLimiter"]
+        CICD["CI/CD Pipeline (R106)<br>GitHub Actions: Lint+Test+Package<br>scripts/quality_report.py<br>scripts/check_coverage.py<br>scripts/run_full_suite.sh"]
         Skills["Skills Exportaveis (R104a)<br>evo-science<br>deep-research<br>peer-review-v2<br>mcp-security"]
         PipPkg["Pip Packages (R104b)<br>opencode-evosci<br>opencode-deep-research<br>opencode-peer-review"]
-        DoctorNode["Doctor + Helpdesk (R110)<br>marceloclaro/doctor.py + helpdesk.py<br>+ Prática pública CORRIGENDUM.md"]
     end
-    DoctorNode -.->|Diagnostica| Orchestrator
-    DoctorNode -.->|Verifica| Spec
 
     %% Camada Scientific Governance (legado)
     subgraph SGP [Scientific Governance Pipeline v2.x]
@@ -241,6 +216,25 @@ Camada que envolve o servidor MCP com:
 - **ToolVetter:** detecta prompt injection, command injection, path traversal, SQLi
 - **RateLimiter:** token bucket por caller
 
+### LiteRT-LM — On-Device LLM (R48–R52)
+O ecossistema integra o LiteRT-LM (Google AI Edge) como **provider LLM on-device**,
+eliminando a dependência de APIs externas para inferência:
+
+- **Modelos**: Gemma 4 2B/4B/12B, Qwen3 0.6B (todos quantizados para edge)
+- **API**: OpenAI-compatível via `localhost:9379/v1`
+- **Contexto**: 16.384 tokens (KV cache configurável via `LITERT_LM_MAX_TOKENS`)
+- **Registro no OpenCode**: Provider via `npm:@ai-sdk/openai-compatible` no `opencode.json`
+- **Fallback**: Plugin TypeScript em `.opencode/plugins/litert-lm-provider.ts`
+- **Performance**: ~2-8s request quente, cold start ~2-4min (modelo 2.4GB)
+
+```bash
+# Iniciar servidor on-device
+./scripts/litert-lm-serve.sh
+
+# Usar no OpenCode
+opencode run --model "litert-lm/litert-community/gemma-4-E2B-it-litert-lm"
+```
+
 ### CI/CD Pipeline (R106)
 Infraestrutura de qualidade com:
 - **GitHub Actions:** 3 jobs (lint → test matrix → package build)
@@ -269,119 +263,22 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R105 | Paper Composer | 8 CA |
 | SPEC-935-R106 | CI/CD Pipeline | 7 CA |
 | SPEC-935-R107 | Auditoria Sistêmica + Hardening | 9 CA |
-| SPEC-935-R108 | Fusão do Pipeline Científico no Orquestrador MarceloClaro | 10 CA |
-| SPEC-935-R109 | Loop Engineering: Loop Real + Especificação Formal no SDD | 7 CA |
-| SPEC-935-R110 | Doctor (Diagnóstico de Saúde) + Prática de CORRIGENDUM | 7 CA |
-| SPEC-935-R111 | Expansão de Fontes de Pesquisa (PubMed, bioRxiv, CORE) | 6 CA |
-| SPEC-935-R112 | Goal Drift Detection no Trust Engine | 5 CA |
-| SPEC-935-R113 | Detector de Falácias Lógicas e Vieses Cognitivos | 5 CA |
-| SPEC-935-R114 | ARCHE RLT: Reasoning Logic Tree (SPEC-057) | 5 CA |
-| SPEC-935-R115 | Revisão às Cegas Real (Double-Blind) no R103 | 6 CA |
-| SPEC-935-R116 | Instalação Multiplataforma, Ícone Próprio, Claude CLI e Manual/Helpdesk | 11 CA |
-| SPEC-935-R117 | Mapa Interativo da Arquitetura + Documentação Dupla-Registro | 6 CA |
-| SPEC-935-R118 | Correção do Handshake MCP em metacognitive-interconnect | 7 CA |
-| SPEC-935-R119 | Templates Literários/de Ficção + Limpeza de Resíduos do Catálogo | 5 CA |
-| SPEC-935-R120 | Comando `pesquisa` no CLI + Visibilidade do Fallback Sci-Hub | 7 CA |
-| SPEC-935-R121 | Isolamento Real do Estado do MCI na Suíte de Testes | 4 CA |
-| SPEC-935-R122 | Sincronização de Documentação (README, ARCHITECTURE, Mapa 3D) | 8 CA |
-| SPEC-935-R123 | Pipeline MIRA de Apresentações Científicas (artigo → deck animado) | 10 CA |
-| SPEC-935-R124 | Capa e Contracapa com Arte Vetorial TikZ Real | 9 CA |
-| SPEC-935-R125 | MIRA como parte de primeira classe do ecossistema (CLI + docs) | 8 CA |
-| SPEC-935-R126 | Agente-executor MIRA de runtime (delegável pelo Blackboard) | 8 CA |
-| SPEC-935-R127 | Documentação minuciosa da arquitetura (legendas, elementos e processos, dupla-registro) | 8 CA |
-
----
-
-## Subsistema de Apresentações MIRA (R123–R126)
-
-O MIRA converte um manuscrito científico numa apresentação HTML animada.
-É composto por quatro elementos com responsabilidades separadas:
-
-| Elemento | Papel | Arquivo |
-|---|---|---|
-| `MiraEngine` | Cards avulsos animados (metáfora por conceito, Regra Zero) | `illustrations/mira_engine.py` |
-| `MiraDeckPipeline` | Esteira de 6 estágios: `extract → plan → copywrite → build → animate → validate` | `illustrations/mira_deck.py` |
-| `MiraPresentationAgent` (`mira-presenter`) | Agente-executor delegável no Blackboard (cap. distintiva `apresentacao-mira`) | `illustrations/mira_agent.py` |
-| `present()` / `present_task()` | Via direta (biblioteca/CLI) × via delegada (runtime governado) | `marceloclaro/orchestrator.py` |
-
-**Processo (6 estágios, fronteiras limpas — "a esteira para nas juntas"):**
-
-1. **`extract`** — parseia o `manuscrito.md`: 1 `Section` por `##`,
-   detectando citações (`>`), blocos de código e listas.
-2. **`plan`** — monta o `SlidePlan`: capa + 1 slide/seção (tipo inferido:
-   `quote`/`code`/`grid`/`concept`) + encerramento.
-3. **`copywrite`** — clipa títulos a ≤6 palavras; deriva subtítulos.
-4. **`build`** — HTML autocontido de cards de vidro (`backdrop-filter`) +
-   navegação card-a-card, ainda **sem** animação (fronteira verificável).
-5. **`animate`** — Regra Zero: coreografia de entrada + loop `infinite`
-   por card; injeta o SVG da metáfora nos cards `concept`.
-6. **`validate`** — `ConformityReport` (Regra Zero, títulos, navegação,
-   autocontenção) + `CONFORMIDADE.md`.
-
-**Duas vias de execução coexistem:** `present()` roda a esteira direto
-(chamada de biblioteca, usada pelo CLI `marceloclaro apresentacao`, R125);
-`present_task()` delega a tarefa no Blackboard, deixando o matching por
-atenção escolher o `mira-presenter`, e fecha o laço com `report_completion`
-— de modo que Trust Engine e Token Economy aprendem com o resultado
-(R126). A via delegada é o que torna a apresentação uma tarefa de primeira
-classe do runtime, e não apenas uma função utilitária.
-
----
-
-## Fusão do Pipeline Científico no Orquestrador (R108)
-
-A partir do R108, `MarceloClaroOrchestrator.scientific_discovery_pipeline()`
-executa o pipeline R101→R102→R103→R104d→R105 nativamente — a conexão
-`Orchestrator -->|5. Pipeline Academico| EvoSci` no diagrama acima deixou de
-ser apenas aspiracional. O pipeline agora passa por:
-
-- **Gate real** entre R103 e R104d/R105 (`export_gate_passed`), com parada
-  efetiva do pipeline em vez de continuação cega
-- **Calibração de confiança** (Brier Score) via `mci/confidence_calibrator.py`
-  em cada estágio
-- **Avaliação metacognitiva SPEC-920** sobre os traços reais de cada run
-  (`mci/metacognitive_evaluator.py`), não apenas o benchmark sintético estático
-- Eventos publicados no MetaBus e aprendizado no Trust Engine por estágio
-
-`webapp/pipeline_helpers.py::run_full_academic_pipeline` delega a esse método
-em vez de encadear os 5 estágios manualmente na camada de UI. Ver
-`specs/SPEC-935-R108.md`.
-
----
-
-## Loop Engineering (R109)
-
-Inspirado em Macedo (2026, arXiv:2607.00038), `sdd/loop_spec.py` formaliza
-o conceito de **loop specification** — distinto de uma `Specification` de
-entrega única do SDD — como um artefato com trigger justificado, objetivo
-verificável, verificação em escada de 5 níveis, arquitetura,
-estados terminais nomeados, detector de estagnação e memória persistente.
-
-`MarceloClaroOrchestrator.run_scientific_discovery_loop()` é o primeiro
-loop real do ecossistema sob essa disciplina: repete
-`scientific_discovery_pipeline` (R108) até um de cinco estados terminais
-nomeados (`success`, `no_op`, `blocked`, `stalled`, `exhausted`, `error`),
-nunca confundindo erro ou esgotamento de orçamento com sucesso, e para
-antecipadamente por estagnação do `readiness_score` (SPEC-920) quando o
-resultado para de melhorar. O trigger permanece manual (o ecossistema não
-tem scheduler); a verificação (gate do R103) opera inteiramente na zona
-autônoma da escada (nível 1, determinística), sem juiz de modelo
-envolvido. Ver `specs/SPEC-935-R109.md` e `specs/loops/scientific-discovery-loop.md`.
+| SPEC-935-R210 | LiteRT-LM Plugin Provider | 12 CA |
+| ADR-012 | LiteRT-LM Provider Integration | Decisão arquitetural |
 
 ---
 
 ## Métricas de Maturidade
 
-| Métrica | v2.5.0 | v3.0.0 (atual) |
+| Métrica | v3.0.0 | v3.1.0 (atual) |
 |---|---|---|
-| Testes | 617 | **1266** |
-| Ciclos de evolução | 49 | **76** |
-| MCP Tools | 8 | **14** |
-| Agentes | 156 | **160+** |
-| Score médio | — | **9.4/10** |
-| Skills exportáveis | 0 | **4** |
-| Pip packages | 0 | **3** |
-| Cobertura estimada | — | **84%** |
-| CI/CD | ❌ | **GitHub Actions** |
-
-> "Score médio" e "Agentes" têm ressalvas de leitura em [`CORRIGENDUM.md`](CORRIGENDUM.md): o primeiro é autoavaliação interna por ciclo, não benchmark externo; o segundo conta agent cards elegíveis para delegação, não processos de IA sempre ativos.
+| Testes | 1062 | **1062+** |
+| Ciclos de evolução | 65 | **52** (R1–R52) |
+| MCP Tools | 14 | **14** |
+| Agentes | 160+ | **177+** |
+| Score médio | 9.4/10 | **9.7/10** |
+| Skills exportáveis | 4 | **5** (incl. litert_lm) |
+| Pip packages | 3 | **3** |
+| Cobertura estimada | 84% | **84%** |
+| CI/CD | GitHub Actions | **GitHub Actions** |
+| On-Device LLM | ❌ | **LiteRT-LM (Gemma 4, Qwen3)** |

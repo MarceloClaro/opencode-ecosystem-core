@@ -27,8 +27,6 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
-from agentic_science_v2.blind_review import BlindReviewAnonymizer, BlindReviewReport
-
 logger = logging.getLogger(__name__)
 
 
@@ -789,7 +787,6 @@ class ReviewPackage:
     export_gate_passed: bool = False
     repair_plan: List[Dict[str, str]] = field(default_factory=list)
     duration_seconds: float = 0.0
-    blind_review: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -804,51 +801,7 @@ class ReviewPackage:
             "coverage": self.coverage,
             "export_gate_passed": self.export_gate_passed,
             "repair_plan": self.repair_plan[:3],
-            "blind_review": self.blind_review,
         }
-
-    def to_revision_contract(self) -> Dict[str, Any]:
-        """Adapta este pacote para o contrato que
-        ``agentic_science_v2.revision_agent.ReviewAnalyzer.extract_claims``
-        espera: ``{"reviews": [{"critic": ..., "claims": [...]}]}``.
-
-        Usa o repair_plan (ja priorizado por severidade) como fonte de
-        claims; cai em um revisor sintetico de baixo risco quando a
-        revisao nao gerou nenhuma acao, para o R104d nunca operar sobre
-        um pacote vazio.
-        """
-        normalized_reviews: List[Dict[str, Any]] = []
-        for index, item in enumerate(self.repair_plan, start=1):
-            priority = (item.get("priority") or "medium").lower()
-            risk = (
-                "high" if "critical" in priority or "major" in priority or priority == "high"
-                else "low" if "minor" in priority or priority == "low"
-                else "medium"
-            )
-            normalized_reviews.append({
-                "critic": item.get("reviewer", "Reviewer"),
-                "claims": [{
-                    "id": f"claim-{index}",
-                    "text": item.get("action") or "Review comment",
-                    "risk": risk,
-                    "section": item.get("area") or "introduction",
-                    "evidence": "",
-                }],
-            })
-
-        if not normalized_reviews:
-            normalized_reviews = [{
-                "critic": "SyntheticReviewer",
-                "claims": [{
-                    "id": "claim-1",
-                    "text": "Clarify the manuscript structure and improve methodological detail.",
-                    "risk": "low",
-                    "section": "introduction",
-                    "evidence": "Synthetic fallback review package",
-                }],
-            }]
-
-        return {"reviews": normalized_reviews}
 
 
 class OrchestratorReviewer:
@@ -868,52 +821,12 @@ class OrchestratorReviewer:
         self.ledger = ReviewLedger()
         self.audit_graph = AuditGraph(evidence_graph)
         self.multi_critic = MultiCriticReviewer()
-        self.anonymizer = BlindReviewAnonymizer()
         self.min_traceability = min_traceability
         self.min_coverage = min_coverage
 
-    def review(self, paper: Dict[str, Any],
-               reviewer_affiliations: Optional[Dict[str, str]] = None) -> ReviewPackage:
-        """Executa pipeline completo de revisao.
-
-        Se ``paper`` trouxer ``author_names``/``author_affiliations``,
-        a revisao e feita ANTES sobre uma copia anonimizada do paper
-        (double-blind real, R115) — os criticos nunca veem o texto
-        original com identificadores. ``reviewer_affiliations`` (opcional)
-        permite detectar conflito de interesse quando um revisor
-        compartilha afiliacao com um autor.
-
-        Erros em qualquer etapa sao capturados e retornados como um
-        ReviewPackage com ``export_gate_passed=False`` em vez de propagar
-        a excecao — o R104d/R105 downstream nunca deve travar por causa
-        de uma falha aqui.
-        """
-        try:
-            return self._review(paper, reviewer_affiliations)
-        except Exception as exc:
-            logger.exception("Falha no pipeline de peer review: %s", exc)
-            return ReviewPackage(
-                paper_title=paper.get("title", "Untitled"),
-                export_gate_passed=False,
-                repair_plan=[{
-                    "priority": "CRITICAL",
-                    "area": "pipeline",
-                    "action": f"Peer review falhou: {exc}",
-                    "reviewer": "OrchestratorReviewer",
-                }],
-            )
-
-    def _review(self, paper: Dict[str, Any],
-                reviewer_affiliations: Optional[Dict[str, str]] = None) -> ReviewPackage:
+    def review(self, paper: Dict[str, Any]) -> ReviewPackage:
+        """Executa pipeline completo de revisao."""
         start = time.time()
-        original_paper = paper
-
-        # 0. Blind Review (R115): anonimiza ANTES de qualquer critico ver
-        # o texto — todo o resto do pipeline opera sobre a copia
-        # anonimizada, nao sobre o paper original.
-        paper, redactions = self.anonymizer.anonymize(original_paper)
-        blind_applied = redactions > 0
-
         title = paper.get("title", "Untitled")
 
         # 1. Drafting: rubricas para o paper
@@ -982,31 +895,16 @@ class OrchestratorReviewer:
         scored = self.rubric_engine.score_review(rubric_review, paper_rubrics)
         agg = self.rubric_engine.aggregate_score(scored)
 
-        # 6. Repair Plan
-        repair_plan = self._generate_repair_plan(all_critiques)
-
-        # 7. Blind Review — verificacao pos-hoc (R115): algum
-        # identificador vazou para o texto gerado das criticas? Existe
-        # conflito de interesse entre revisor e autor?
-        generated_text = json.dumps([c.to_dict() for c in all_critiques]) + json.dumps(repair_plan)
-        leaks = self.anonymizer.detect_leaks(generated_text, original_paper)
-        conflicts = self.anonymizer.check_conflict_of_interest(original_paper, reviewer_affiliations)
-        blind_review = BlindReviewReport(
-            applied=blind_applied,
-            redactions_made=redactions,
-            leaks_detected=leaks,
-            conflicts_of_interest=conflicts,
-        )
-
-        # 8. Export Gate — reprova tambem se a revisao as cegas vazou
-        # identificadores ou detectou conflito de interesse real.
+        # 6. Export Gate
         export_gate_passed = (
             traceability >= self.min_traceability
             and coverage >= self.min_coverage
-            and blind_review.passed
         )
 
-        # 9. Package
+        # 7. Repair Plan
+        repair_plan = self._generate_repair_plan(all_critiques)
+
+        # 8. Package
         package = ReviewPackage(
             paper_title=title,
             overall_score=agg["overall"],
@@ -1019,7 +917,6 @@ class OrchestratorReviewer:
             export_gate_passed=export_gate_passed,
             repair_plan=repair_plan,
             duration_seconds=time.time() - start,
-            blind_review=blind_review.to_dict(),
         )
 
         return package

@@ -250,14 +250,14 @@ class TestModelRouter(unittest.TestCase):
     def test_route_coding_retorna_opencode_go(self):
         """CA-3: route('coding') deve preferir opencode-go com kimi ou deepseek."""
         result = self.router.route("coding")
-        self.assertIn(result.provider_id, ["opencode-go", "opencode-zen"])
+        self.assertIn(result.provider_id, ["opencode-go", "opencode-zen", "litert-lm"])
         self.assertIsInstance(result.model_id, str)
         self.assertGreater(len(result.model_id), 0)
 
     def test_route_reasoning_retorna_modelo_valido(self):
         """CA-3: route('reasoning') deve retornar um provider e modelo válidos."""
         result = self.router.route("reasoning")
-        self.assertIn(result.provider_id, ["opencode-go", "opencode-zen"])
+        self.assertIn(result.provider_id, ["opencode-go", "opencode-zen", "litert-lm"])
         self.assertIsInstance(result.model_id, str)
 
     def test_route_academic_retorna_modelo_valido(self):
@@ -336,6 +336,7 @@ class TestModelRouter(unittest.TestCase):
         self.assertIn("providers", s)
         self.assertIn("opencode-go", s["providers"])
         self.assertIn("opencode-zen", s["providers"])
+        self.assertIn("litert-lm", s["providers"])
         self.assertIn("total_models", s)
         self.assertGreater(s["total_models"], 0)
 

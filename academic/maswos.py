@@ -23,20 +23,6 @@ from typing import Any, Callable, Dict, List, Optional
 
 from academic.auto_score_qualis import RUBRIC  # rubrica oficial de 10 critérios
 
-# ────────────────────────────────────────────────────────────────
-# Cloud Pipeline — MASWOS para artigos de infraestrutura cloud
-# ────────────────────────────────────────────────────────────────
-# Mapeamento de tópicos cloud → estágios especializados
-CLOUD_TOPIC_KEYWORDS = [
-    "alloydb", "cloud sql", "bigquery", "dataflow", "composer",
-    "dataproc", "spark", "gcp", "google cloud", "cloud infrastructure",
-    "cloud computing", "big data", "data pipeline", "cloud database",
-    "postgresql", "mysql", "sql server", "firestore", "spanner",
-    "gcs", "cloud storage", "data lake", "data warehouse",
-    "cloud migration", "cloud security", "cloud optimization",
-    "infraestrutura em nuvem", "banco de dados cloud",
-    "alloydb omni", "cloud data", "pipeline de dados",
-]
 
 # Pipeline canônico MASWOS: (estágio, agente do catálogo, capacidade)
 MASWOS_STAGES = [
@@ -175,90 +161,6 @@ class MaswosPipeline:
                 ratio = 0.5
             earned += weight * ratio
         return 10.0 * earned / total_weight
-
-
-# ────────────────────────────────────────────────────────────────
-# Cloud MASWOS — Pipeline especializado para artigos cloud
-# ────────────────────────────────────────────────────────────────
-
-CLOUD_STAGES = [
-    ("cloud_diagnostico", "cloud-data-infra-generalist", "cloud_assessment"),
-    ("cloud_arquitetura", "cloud-data-pipelines-specialist", "cloud_architecture"),
-    ("cloud_seguranca", "cloud-security-specialist", "cloud_security"),
-    ("cloud_banco_dados", "cloud-alloydb-specialist", "cloud_database"),
-    ("cloud_bigquery_analytics", "cloud-bigquery-specialist", "cloud_analytics"),
-    ("cloud_implementacao", "cloud-data-pipelines-specialist", "cloud_implementation"),
-    ("cloud_otimizacao", "cloud-sql-postgres-specialist", "cloud_optimization"),
-    ("cloud_revisao_tecnicas", "cloud-sql-mysql-specialist", "cloud_review"),
-]
-
-
-def is_cloud_topic(topic: str) -> bool:
-    """Detecta se o tópico é sobre infraestrutura cloud."""
-    t = topic.lower()
-    return any(kw in t for kw in CLOUD_TOPIC_KEYWORDS)
-
-
-def get_cloud_heuristic_signals() -> dict:
-    """Sinais adicionais para artigos cloud na rubrica AUTO_SCORE."""
-    return {
-        "rigor_academico": ["metodologia", "hipótese", "teoria", "fundament", "cloud"],
-        "densidade_citacoes": ["doi", "(20", "et al", "referênc", "acm", "ieee"],
-        "reprodutibilidade_cloud": ["terraform", "deployment", " pipeline", "docker",
-                                     "kubernetes", "iac", "infrastructure as code"],
-        "metricas_performance": ["throughput", "latência", "escalabilidade",
-                                  "benchmark", "query performance", "custo"],
-        "seguranca_cloud": ["iam", "criptografia", "rbac", "vpc", "firewall",
-                             "compliance", "auditoria"],
-        "coerencia": ["introdução", "conclusão", "objetivo", "arquitetura"],
-        "qualidade_visual": ["figura", "tabela", "gráfico", "diagrama", "arquitetura"],
-    }
-
-
-def run_maswos_cloud(topic: str, manuscript: str = "",
-                      delegate_fn=None) -> MaswosRun:
-    """Executa pipeline MASWOS com roteamento automático para cloud.
-
-    Se o tópico for identificado como cloud, usa estágios especializados
-    e sinais de qualidade adicionais. Caso contrário, usa pipeline genérico.
-    """
-    pipeline = MaswosPipeline(delegate_fn=delegate_fn)
-
-    if is_cloud_topic(topic):
-        # Usa pipeline cloud com estágios especializados
-        stages = CLOUD_STAGES
-        run = MaswosRun(topic=f"[CLOUD] {topic}")
-        accumulated = manuscript
-        for stage_name, agent_id, capability in stages:
-            started = time.time()
-            result = StageResult(stage=stage_name, agent_id=agent_id)
-            try:
-                if delegate_fn:
-                    output = delegate_fn(
-                        agent_id, capability,
-                        f"[MASWOS-CLOUD:{stage_name}] Tópico cloud: {topic}. "
-                        f"Skills de referência em scripts/cloud/. "
-                        f"Contexto: {accumulated[-2000:] if accumulated else '(início)'}"
-                    )
-                    result.output = output or ""
-                    accumulated += f"\n\n## [{stage_name}]\n{result.output}"
-                    result.status = "completed"
-                else:
-                    result.status = "skipped"
-                    result.output = f"(dry-run) delegaria a {agent_id} ({capability}) com skills cloud"
-            except Exception as exc:
-                result.status = "failed"
-                result.output = f"erro: {exc}"
-            result.duration_s = round(time.time() - started, 3)
-            run.stages.append(result)
-
-        # Quality gate adaptado para cloud
-        run.final_score = round(pipeline._heuristic_score(accumulated or topic), 2)
-        run.approved = run.final_score >= QUALITY_GATE_THRESHOLD
-        return run
-
-    # Tópico não-cloud: pipeline MASWOS padrão
-    return pipeline.run(topic, manuscript)
 
 
 # Singleton em modo standalone

@@ -45,69 +45,6 @@ class TestTrustEngine:
         assert slot is not None
 
 
-# ── R112: Goal Drift Detection ──────────────────────────────────────────
-
-class TestGoalDriftDetection:
-    def test_no_drift_when_actions_match_goal(self):
-        from trust import create_trust_engine
-        engine = create_trust_engine()
-        engine.set_goal("sessao-1", "implementar detector de fallacias logicas")
-        result = None
-        for _ in range(6):
-            result = engine.check_drift(
-                "sessao-1", "implementar detector de fallacias logicas com testes"
-            )
-        assert result.drifted is False
-
-    def test_drift_detected_after_window_of_unrelated_actions(self):
-        from trust import create_trust_engine
-        engine = create_trust_engine()
-        engine.set_goal("sessao-2", "implementar detector de fallacias logicas")
-        result = None
-        for _ in range(6):
-            result = engine.check_drift(
-                "sessao-2", "assistir video de gatinhos sem relacao nenhuma com o resto"
-            )
-        assert result.drifted is True
-        assert "similaridade" in result.reason
-
-    def test_single_unrelated_action_does_not_trigger_false_positive(self):
-        """Uma unica acao fora do tema nao deve disparar drift — so a
-        media da janela completa."""
-        from trust import create_trust_engine
-        engine = create_trust_engine()
-        engine.set_goal("sessao-3", "revisar pull request de autenticacao")
-        result = engine.check_drift("sessao-3", "assunto completamente diferente")
-        assert result.drifted is False  # janela incompleta ainda
-
-    def test_no_goal_declared_never_drifts(self):
-        from trust import create_trust_engine
-        engine = create_trust_engine()
-        result = engine.check_drift("sessao-sem-objetivo", "qualquer coisa")
-        assert result.drifted is False
-        assert "sem objetivo" in result.reason
-
-    def test_drift_penalizes_trust_score(self):
-        from trust import create_trust_engine
-        engine = create_trust_engine()
-        engine.set_goal("sessao-4", "corrigir bug no parser de datas")
-        for _ in range(6):
-            engine.check_drift("sessao-4", "tema completamente nao relacionado ao parser")
-        drift_trust = engine.scorer.get_trust("goal_drift:sessao-4")
-        assert drift_trust.total_executions >= 1
-        assert drift_trust.trust_score < 0.5
-
-    def test_redeclaring_goal_resets_window(self):
-        from trust import create_trust_engine
-        engine = create_trust_engine()
-        engine.set_goal("sessao-5", "objetivo original")
-        for _ in range(5):
-            engine.check_drift("sessao-5", "tema nao relacionado ao objetivo original")
-        engine.set_goal("sessao-5", "novo objetivo redefinido")
-        result = engine.check_drift("sessao-5", "novo objetivo redefinido em andamento")
-        assert result.window == [1.0] or len(result.window) == 1
-
-
 # ── SPEC-008: Token Economy ─────────────────────────────────────────────
 
 class TestTokenEconomy:

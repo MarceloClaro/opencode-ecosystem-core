@@ -577,10 +577,10 @@ def compile_book():
 
 # ── Step 7: Copy to Desktop / Output ─────────────────────────────────
 def copy_to_desktop():
-    """Copia artefatos para a Área de Trabalho do usuário (detectada
-    dinamicamente — Windows, Linux, macOS ou WSL — sem hardcodar usuário)."""
-    from publishing.production import _detect_desktop_path
-    desktop = Path(_detect_desktop_path())
+    """Copia artefatos para a Área de Trabalho do usuário."""
+    desktop = Path("/mnt/c/Users/marce/Desktop")
+    if not desktop.exists():
+        desktop = Path("/mnt/c/Users/marce/Área de Trabalho")
     if not desktop.exists():
         print("  ⚠ Área de Trabalho não encontrada")
         return

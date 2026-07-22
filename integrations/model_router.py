@@ -45,6 +45,14 @@ def _get_opencode_zen():
         return None, {}
 
 
+def _get_litert_lm():
+    try:
+        from integrations.litert_lm import litert_lm, MODELS as LT_MODELS
+        return litert_lm, LT_MODELS
+    except ImportError:
+        return None, {}
+
+
 # ── Perfis de modelo por tipo de tarefa ──────────────────────────────────────
 
 @dataclass
@@ -69,6 +77,7 @@ DEFAULT_PROFILES: Dict[str, ModelProfile] = {
             ("opencode-zen", "claude-sonnet-4.6"),
             ("opencode-go", "glm-5.2"),
             ("opencode-go", "qwen3.7-max"),
+            ("litert-lm", "gemma-4-E2B-it"),
         ],
         fallback=("opencode-go", "kimi-k2.7-code"),
     ),
@@ -81,6 +90,7 @@ DEFAULT_PROFILES: Dict[str, ModelProfile] = {
             ("opencode-zen", "gemini-2.5-pro"),
             ("opencode-zen", "deepseek-r2"),
             ("opencode-go", "deepseek-v4-pro"),
+            ("litert-lm", "qwen-3-30B-it"),
         ],
         fallback=("opencode-zen", "claude-sonnet-4.6"),
     ),
@@ -109,12 +119,24 @@ DEFAULT_PROFILES: Dict[str, ModelProfile] = {
         task_type="fast",
         description="Respostas rápidas, tarefas simples, alta frequência",
         preferred=[
+            ("litert-lm", "litert-community/gemma-4-E2B-it-litert-lm"),
             ("opencode-go", "deepseek-v4-flash"),
             ("opencode-zen", "gemini-2.5-flash"),
             ("opencode-zen", "claude-haiku-4"),
             ("opencode-go", "kimi-k2.5"),
         ],
         fallback=("opencode-go", "deepseek-v4-flash"),
+    ),
+    "local": ModelProfile(
+        task_type="local",
+        description="Inferência on-device via LiteRT-LM (Gemma 4, Qwen3). Sem dependência de rede. Modelos disponíveis via MCP (litert_lm_chat, litert_lm_models, litert_lm_status).",
+        preferred=[
+            ("litert-lm", "litert-community/gemma-4-E2B-it-litert-lm"),
+            ("litert-lm", "litert-community/gemma-4-E4B-it-litert-lm"),
+            ("litert-lm", "litert-community/gemma-4-12B-it-litert-lm"),
+            ("litert-lm", "litert-community/Qwen3-0.6B"),
+        ],
+        fallback=("litert-lm", "litert-community/gemma-4-E2B-it-litert-lm"),
     ),
     "math": ModelProfile(
         task_type="math",
@@ -200,11 +222,13 @@ class ModelRouter:
         self.prefer_authenticated = prefer_authenticated
         self._go_provider, self._go_models = _get_opencode_go()
         self._zen_provider, self._zen_models = _get_opencode_zen()
+        self._lt_provider, self._lt_models = _get_litert_lm()
         logger.info(
-            "ModelRouter inicializado — %d perfis, Go=%s, Zen=%s",
+            "ModelRouter inicializado — %d perfis, Go=%s, Zen=%s, LiteRT=%s",
             len(self.profiles),
             "OK" if self._go_provider else "indisponível",
             "OK" if self._zen_provider else "indisponível",
+            "OK" if self._lt_provider else "indisponível",
         )
 
     def route(
@@ -326,6 +350,8 @@ class ModelRouter:
             models.extend(self._go_provider.list_models())
         if self._zen_provider:
             models.extend(self._zen_provider.list_models())
+        if self._lt_provider:
+            models.extend(self._lt_provider.list_models(local_only=True))
         return models
 
     def list_profiles(self) -> List[Dict[str, Any]]:
@@ -355,8 +381,13 @@ class ModelRouter:
                     "authenticated": self._is_authenticated("opencode-zen"),
                     "models": len(self._zen_models),
                 },
+                "litert-lm": {
+                    "available": self._lt_provider is not None,
+                    "authenticated": self._is_authenticated("litert-lm"),
+                    "models": len(self._lt_models),
+                },
             },
-            "total_models": len(self._go_models) + len(self._zen_models),
+            "total_models": len(self._go_models) + len(self._zen_models) + len(self._lt_models),
         }
 
     # ── Privados ─────────────────────────────────────────────────────────────
@@ -400,6 +431,8 @@ class ModelRouter:
             return bool(self._go_provider._api_key)
         if provider_id == "opencode-zen" and self._zen_provider:
             return bool(self._zen_provider._api_key)
+        if provider_id == "litert-lm" and self._lt_provider:
+            return True  # servidor local, sempre autenticado
         return False
 
     def _get_provider(self, provider_id: str):
@@ -408,6 +441,8 @@ class ModelRouter:
             return self._go_provider
         if provider_id == "opencode-zen":
             return self._zen_provider
+        if provider_id == "litert-lm":
+            return self._lt_provider
         return None
 
     def _build_reason(

@@ -92,9 +92,37 @@ class ModelManager:
         """Retorna o caminho do diretório de um modelo."""
         return os.path.join(self.models_dir, self._model_id_to_dirname(model_id))
 
+    def _find_litertlm_file(self, directory: str) -> Optional[str]:
+        """Procura recursivamente por um arquivo .litertlm em ``directory``.
+
+        Retorna o caminho completo do primeiro arquivo .litertlm encontrado,
+        ou None se nenhum existir.
+        """
+        if not os.path.isdir(directory):
+            return None
+        # Varredura recursiva limitada (máx 4 níveis)
+        for root, dirs, files in os.walk(directory, topdown=True):
+            for f in sorted(files):
+                if f.endswith(".litertlm"):
+                    return os.path.join(root, f)
+            # Limita profundidade para não percorrer .cache
+            depth = root.replace(directory, "").count(os.sep)
+            if depth >= 3:
+                dirs.clear()
+        return None
+
     def _model_path(self, model_id: str) -> str:
-        """Retorna o caminho esperado para model.litertlm."""
-        return os.path.join(self._model_dir(model_id), "model.litertlm")
+        """Retorna o caminho para o arquivo .litertlm no diretório do modelo.
+
+        Tenta 'model.litertlm' primeiro; se não existir, busca recursivamente
+        por qualquer arquivo .litertlm dentro do diretório.
+        """
+        model_dir = self._model_dir(model_id)
+        expected = os.path.join(model_dir, "model.litertlm")
+        if os.path.isfile(expected):
+            return expected
+        found = self._find_litertlm_file(model_dir)
+        return found if found else expected  # fallback (vai falhar com FileNotFound)
 
     # ── CRUD ─────────────────────────────────────────────────────────────
 
@@ -102,7 +130,7 @@ class ModelManager:
         """Lista todos os modelos disponíveis localmente.
 
         Percorre o diretório models_dir procurando subpastas que contenham
-        um arquivo model.litertlm.
+        um arquivo .litertlm (busca recursiva).
 
         Returns:
             Lista de ModelInfo com os modelos encontrados.
@@ -113,15 +141,18 @@ class ModelManager:
 
         for entry in sorted(os.listdir(self.models_dir)):
             entry_path = os.path.join(self.models_dir, entry)
-            model_file = os.path.join(entry_path, "model.litertlm")
-            if os.path.isdir(entry_path) and os.path.isfile(model_file):
-                model_id = self._dirname_to_model_id(entry)
-                file_size = os.path.getsize(model_file)
-                models.append(ModelInfo(
-                    model_id=model_id,
-                    model_path=os.path.abspath(model_file),
-                    file_size_bytes=file_size,
-                ))
+            if not os.path.isdir(entry_path):
+                continue
+            found = self._find_litertlm_file(entry_path)
+            if found is None:
+                continue
+            model_id = self._dirname_to_model_id(entry)
+            file_size = os.path.getsize(found)
+            models.append(ModelInfo(
+                model_id=model_id,
+                model_path=os.path.abspath(found),
+                file_size_bytes=file_size,
+            ))
         return models
 
     def find_model(self, ref: str) -> Optional[ModelInfo]:
@@ -202,17 +233,18 @@ class ModelManager:
     def import_from_hf(
         self,
         repo_id: str,
-        filename: str = "model.litertlm",
+        filename: Optional[str] = None,
         token: Optional[str] = None,
     ) -> ModelInfo:
         """Importa um modelo do HuggingFace Hub.
 
         Usa huggingface_hub.hf_hub_download para baixar o arquivo .litertlm
-        para o diretório de modelos local.
+        para o diretório de modelos local. Se ``filename`` não for informado,
+        descobre automaticamente o primeiro arquivo .litertlm no repositório.
 
         Args:
             repo_id: ID do repositório no HuggingFace (ex.: "litert-community/...").
-            filename: Nome do arquivo no repositório.
+            filename: Nome do arquivo no repositório (opcional — auto-descoberta).
             token: Token de acesso opcional (para modelos privados/gated).
 
         Returns:
@@ -220,6 +252,7 @@ class ModelManager:
 
         Raises:
             ImportError: Se huggingface_hub não estiver instalado.
+            ValueError: Se nenhum arquivo .litertlm for encontrado no repositório.
             Exception: Erros do download.
         """
         global _huggingface_hub, _HF_AVAILABLE
@@ -228,6 +261,21 @@ class ModelManager:
                 "huggingface_hub não está instalado. "
                 "Execute: pip install huggingface-hub"
             )
+
+        # Descobre filename se não informado
+        if filename is None:
+            try:
+                files = _huggingface_hub.list_repo_files(repo_id, token=token)
+            except Exception:
+                files = []
+            litert_files = [f for f in files if f.endswith(".litertlm")]
+            if not litert_files:
+                raise ValueError(
+                    f"Nenhum arquivo .litertlm encontrado no repositório {repo_id}. "
+                    f"Arquivos disponíveis: {files[:10]}"
+                )
+            filename = litert_files[0]
+            print(f"Arquivo detectado: {filename}")
 
         # Garante que o diretório de destino existe
         dest_dir = self._model_dir(repo_id)

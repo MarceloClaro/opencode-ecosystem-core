@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 from typing import Optional
 
@@ -43,6 +44,153 @@ def _format_size(size_bytes: int) -> str:
         return f"{size_bytes / 1024:.1f} KB"
     else:
         return f"{size_bytes / (1024 * 1024):.1f} MB"
+
+
+_WINDOWS_DRIVE_RE = re.compile(r'^([A-Za-z]):[/\\]', re.ASCII)
+_WSL_PATH_RE = re.compile(r'^/mnt/([a-z])/', re.ASCII)
+_FILE_URI_RE = re.compile(r'^file:///([a-zA-Z]):/', re.ASCII)
+_IMAGE_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.gif', '.webp', '.bmp', '.tiff', '.tif'}
+
+
+def _strip_quotes(text: str) -> str:
+    """Remove aspas simples, duplas e espaços ao redor do texto."""
+    text = text.strip().strip('"').strip("'").strip()
+    return text
+
+
+def _resolve_image_path(raw_path: str) -> Optional[str]:
+    """Tenta converter qualquer formato de caminho para WSL absoluto.
+
+    Formatos aceitos:
+      - Windows:  C:\\Users\\...\\image.png
+      - Windows:  C:/Users/.../image.png
+      - WSL:      /mnt/c/Users/.../image.png
+      - URI:      file:///C:/Users/.../image.png
+      - Quoted:   "C:\\Users\\...\\image.png"
+
+    Args:
+        raw_path: Caminho bruto (pode conter aspas, file://, etc.).
+
+    Returns:
+        Caminho absoluto WSL se o arquivo existir, None caso contrário.
+    """
+    path = _strip_quotes(raw_path)
+
+    # ── Formato file:///C:/... ──
+    m = _FILE_URI_RE.match(path)
+    if m:
+        drive = m.group(1).lower()
+        rest = path[m.end():].replace('\\', '/')
+        wsl_path = f'/mnt/{drive}/{rest.lstrip("/")}'
+        if os.path.isfile(wsl_path):
+            return wsl_path
+
+    # ── Formato Windows nativo: C:\... ou C:/... ──
+    m = _WINDOWS_DRIVE_RE.match(path)
+    if m:
+        drive = m.group(1).lower()
+        rest = path[m.end():].replace('\\', '/')
+        wsl_path = f'/mnt/{drive}/{rest.lstrip("/")}'
+        if os.path.isfile(wsl_path):
+            return wsl_path
+
+    # ── Formato WSL nativo: /mnt/c/... ──
+    m = _WSL_PATH_RE.match(path)
+    if m:
+        if os.path.isfile(path):
+            return os.path.abspath(path)
+
+    # ── Caminho absoluto Unix (já convertido) ──
+    if path.startswith('/') and os.path.isfile(path):
+        return os.path.abspath(path)
+
+    return None
+
+
+def _detect_images(text: str) -> tuple:
+    """Detecta se a entrada contém caminhos de imagem arrastados/solados.
+
+    Esta função é chamada a cada input do usuário, tanto no modo
+    prompt_toolkit quanto no fallback click. Ela converte automaticamente
+    caminhos Windows (C:\\...) para WSL (/mnt/c/...) e extrai imagens
+    do texto digitado.
+
+    Returns:
+        Tupla (prompt, attachments):
+            - prompt: texto limpo (sem os caminhos de imagem).
+            - attachments: lista de caminhos WSL absolutos das imagens.
+            Se não houver imagens: (text_original, None).
+    """
+    stripped = _strip_quotes(text)
+
+    # ── Caso 1: entrada é SOMENTE um caminho de imagem ──
+    resolved = _resolve_image_path(stripped)
+    if resolved:
+        ext = os.path.splitext(stripped)[1].lower()
+        if ext in _IMAGE_EXTENSIONS:
+            click.echo(click.style(
+                f"📷 Imagem detectada: {stripped} → {resolved}", fg="cyan"
+            ), err=True)
+            return ("Descreva esta imagem.", [resolved])
+
+    # ── Caso 2: texto com possíveis caminhos embutidos ──
+    # Quebra mantendo quotes agrupadas (para paths com espaços)
+    parts = []
+    for token in stripped.split():
+        # Se o token começa com " mas não termina, junta com o próximo
+        if token.startswith('"') and not token.endswith('"'):
+            parts.append(token)
+        elif parts and parts[-1].startswith('"') and not parts[-1].endswith('"'):
+            parts[-1] += ' ' + token
+        else:
+            parts.append(token)
+
+    image_paths = []
+    text_parts = []
+    for part in parts:
+        resolved = _resolve_image_path(part)
+        if resolved and os.path.splitext(_strip_quotes(part))[1].lower() in _IMAGE_EXTENSIONS:
+            image_paths.append(resolved)
+            click.echo(click.style(
+                f"📷 Imagem detectada: {part}", fg="cyan"
+            ), err=True)
+        else:
+            text_parts.append(part)
+
+    if image_paths:
+        return (" ".join(text_parts), image_paths)
+
+    # ── Caso 3: sem imagens ──
+    return (text, None)
+
+
+def _consume_stream(response, echo=True):
+    """Consome um generator de streaming e retorna o texto completo.
+
+    Args:
+        response: Generator de chunks ou string simples.
+        echo: Se True, imprime cada chunk ao vivo.
+
+    Returns:
+        Texto completo acumulado.
+    """
+    if not hasattr(response, "__next__"):
+        return str(response)
+
+    accumulated = ""
+    for chunk in response:
+        if isinstance(chunk, dict):
+            text = chunk.get("content", [{}])[0].get("text", "")
+        elif hasattr(chunk, "texts") and chunk.texts:
+            text = chunk.texts[0]
+        else:
+            text = str(chunk)
+        accumulated += text
+        if echo:
+            click.echo(click.style(text, fg="yellow"), nl=False)
+    if echo:
+        click.echo()
+    return accumulated
 
 
 # ── Grupo Principal ───────────────────────────────────────────────────────────
@@ -101,6 +249,8 @@ def list_models(ctx: click.Context, json_output: bool):
 @litert_lm_cli.command("run")
 @click.argument("model_reference")
 @click.option("--prompt", "-p", required=True, help="Prompt a ser executado.")
+@click.option("--image", "-i", multiple=True, default=[],
+              help="Caminho(s) para imagem(s) (múltiplas permitidas).")
 @click.option("--backend", default="cpu", show_default=True,
               type=click.Choice(["cpu", "gpu", "npu"]), help="Backend de inferência.")
 @click.option("--temperature", type=float, default=None, help="Temperatura.")
@@ -114,6 +264,7 @@ def run_model(
     ctx: click.Context,
     model_reference: str,
     prompt: str,
+    image: tuple,
     backend: str,
     temperature: Optional[float],
     top_k: Optional[int],
@@ -129,6 +280,7 @@ def run_model(
         response = skill.run(
             model_reference,
             prompt=prompt,
+            images=list(image) if image else None,
             backend=backend,
             temperature=temperature,
             top_k=top_k,
@@ -155,6 +307,8 @@ def run_model(
 @litert_lm_cli.command("chat")
 @click.argument("model_reference")
 @click.option("--prompt", "-p", default=None, help="Prompt inicial (modo não-interativo).")
+@click.option("--image", "-i", multiple=True, default=[],
+              help="Caminho(s) para imagem(s) (múltiplas permitidas).")
 @click.option("--non-interactive", is_flag=True, hidden=True,
               help="Modo não-interativo para testes.")
 @click.option("--backend", default="cpu", show_default=True,
@@ -167,11 +321,15 @@ def run_model(
 @click.option("--system", "system_instruction", default=None,
               help="Instrução de sistema para o chat.")
 @click.option("--no-template", is_flag=True, help="Ignorar template de prompt.")
+@click.option("--vision-backend", default=None,
+              type=click.Choice(["cpu", "gpu"]),
+              help="Backend para encoder de visão (default: igual ao --backend).")
 @click.pass_context
 def chat_model(
     ctx: click.Context,
     model_reference: str,
     prompt: Optional[str],
+    image: tuple,
     non_interactive: bool,
     backend: str,
     temperature: Optional[float],
@@ -181,9 +339,21 @@ def chat_model(
     max_tokens: Optional[int],
     system_instruction: Optional[str],
     no_template: bool,
+    vision_backend: Optional[str],
 ):
     """Inicia chat interativo com MODEL_REFERENCE."""
     skill = _create_skill(verbose=ctx.obj["verbose"])
+
+    images = list(image) if image else None
+
+    # Em modo interativo, sempre pré-carrega o VisionExecutor
+    # (max_num_images >= 1) para aceitar imagens a qualquer momento
+    if not non_interactive and prompt is None:
+        # Chat interativo: prepara visão desde o início
+        max_num_images = max(len(images) if images else 0, 3)
+    else:
+        # Modo não-interativo: só ativa visão se houver --image
+        max_num_images = len(images) if images else 0
 
     try:
         session = skill.chat(
@@ -197,6 +367,8 @@ def chat_model(
             system_instruction=system_instruction,
             no_template=no_template,
             stream=not non_interactive,
+            max_num_images=max_num_images,
+            vision_backend=vision_backend,
         )
     except ModelNotFoundError as e:
         click.echo(click.style(f"Erro: {e}", fg="red"), err=True)
@@ -209,8 +381,16 @@ def chat_model(
     if prompt or non_interactive:
         try:
             if prompt:
-                response = session.send(prompt)
-                click.echo(click.style(response, fg="yellow"))
+                # Detecta se o --prompt é na verdade um caminho Windows
+                clean_prompt, win_images = _detect_images(prompt)
+                if win_images:
+                    all_images = (images or []) + win_images
+                    final_prompt = clean_prompt or "Descreva esta imagem."
+                else:
+                    all_images = images
+                    final_prompt = prompt
+                response = session.send(final_prompt, attachments=all_images)
+                _consume_stream(response, echo=True)
         except Exception as e:
             click.echo(click.style(f"Erro: {e}", fg="red"), err=True)
         finally:
@@ -262,6 +442,9 @@ def chat_model(
             key_bindings=kb,
         )
 
+        # Flag para anexar imagens apenas na primeira mensagem
+        _pending_images = list(images) if images else None
+
         while True:
             try:
                 user_input = prompt_session.prompt(
@@ -273,8 +456,22 @@ def chat_model(
                 if not user_input:
                     continue
 
-                response = session.send(user_input)
-                click.echo(click.style(response, fg="yellow"))
+                # Detecta caminhos Windows
+                clean_input, win_images = _detect_images(user_input)
+                if win_images:
+                    response = session.send(
+                        clean_input or "Descreva esta imagem.",
+                        attachments=win_images,
+                    )
+                    _pending_images = None
+                elif _pending_images:
+                    response = session.send(
+                        user_input, attachments=_pending_images
+                    )
+                    _pending_images = None
+                else:
+                    response = session.send(user_input)
+                _consume_stream(response, echo=True)
                 click.echo()
 
             except EOFError:
@@ -297,6 +494,7 @@ def chat_model(
             err=True,
         )
         # Fallback para input() simples
+        _pending_images = list(images) if images else None
         try:
             while True:
                 user_input = click.prompt(
@@ -306,8 +504,21 @@ def chat_model(
                 )
                 if not user_input:
                     continue
-                response = session.send(user_input)
-                click.echo(click.style(response, fg="yellow"))
+                # Detecta caminhos Windows
+                clean_input, win_images = _detect_images(user_input)
+                if win_images:
+                    response = session.send(
+                        clean_input or "Descreva esta imagem.",
+                        attachments=win_images,
+                    )
+                elif _pending_images:
+                    response = session.send(
+                        user_input, attachments=_pending_images
+                    )
+                    _pending_images = None
+                else:
+                    response = session.send(user_input)
+                _consume_stream(response, echo=True)
                 click.echo()
         except (EOFError, KeyboardInterrupt):
             pass
@@ -321,20 +532,23 @@ def chat_model(
 
 @litert_lm_cli.command("import")
 @click.argument("huggingface_repo")
-@click.option("--filename", default="model.litertlm", show_default=True,
-              help="Nome do arquivo no repositório.")
+@click.option("--filename", default=None,
+              help="Nome do arquivo no repositório (opcional — auto-descoberta).")
 @click.option("--token", default=None, help="Token HuggingFace (para modelos gated).")
 @click.pass_context
 def import_model(
     ctx: click.Context,
     huggingface_repo: str,
-    filename: str,
+    filename: Optional[str],
     token: Optional[str],
 ):
     """Importa modelo do HuggingFace (repositórios litert-community)."""
     skill = _create_skill(verbose=ctx.obj["verbose"])
 
-    click.echo(f"Baixando {huggingface_repo}/{filename}...")
+    if filename:
+        click.echo(f"Baixando {huggingface_repo}/{filename}...")
+    else:
+        click.echo(f"Descobrindo arquivo em {huggingface_repo}...")
 
     try:
         info = skill.import_model(

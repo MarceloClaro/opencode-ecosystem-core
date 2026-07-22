@@ -25,41 +25,24 @@ from mci.metabus import metabus
 from mci.blackboard import blackboard
 
 # Simula a estrutura do MCP SDK (assumindo que será rodado no contexto do ecossistema)
-PROTOCOL_VERSION = "2024-11-05"
-SERVER_VERSION = "1.0.0"
-
-
 class SimpleMCPServer:
     """Implementação leve de servidor MCP via stdio."""
-
+    
     def __init__(self, name: str):
         self.name = name
         self.tools = {}
-
+        
     def register_tool(self, name: str, description: str, schema: Dict, handler: callable):
         self.tools[name] = {
             "description": description,
             "schema": schema,
             "handler": handler
         }
-
+        
     async def handle_request(self, req: Dict) -> Dict:
         method = req.get("method")
         params = req.get("params", {})
-
-        if method == "initialize":
-            # Handshake obrigatorio do protocolo MCP — sem isso, TODO cliente
-            # MCP real (OpenCode CLI, Claude Code, etc.) considera o servidor
-            # como falho antes mesmo de chegar em tools/list.
-            return {
-                "protocolVersion": params.get("protocolVersion", PROTOCOL_VERSION),
-                "capabilities": {"tools": {}},
-                "serverInfo": {"name": self.name, "version": SERVER_VERSION},
-            }
-
-        if method == "ping":
-            return {}
-
+        
         if method == "tools/list":
             return {
                 "tools": [
@@ -106,14 +89,7 @@ class SimpleMCPServer:
                 if not line:
                     break
                 req = json.loads(line.decode('utf-8'))
-
-                # Notificacoes (ex.: "notifications/initialized") nao tem "id"
-                # e, por especificacao JSON-RPC/MCP, NAO devem receber resposta.
-                # Responder a uma notificacao confundia clientes MCP estritos.
-                if "id" not in req or req.get("id") is None:
-                    await self.handle_request(req)
-                    continue
-
+                
                 # Responde JSON-RPC
                 resp = await self.handle_request(req)
                 response_obj = {

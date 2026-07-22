@@ -4,7 +4,7 @@
   "instructions": [
     "AGENTS.md"
   ],
-  "model": "opencode-go/kimi-k2.7-code",
+  "model": "litert-lm/litert-community/gemma-4-E2B-it-litert-lm",
   "provider": {
     "opencode-go": {
       "options": {
@@ -16,6 +16,32 @@
       "options": {
         "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
         "baseURL": "https://opencode.ai/zen/v1"
+      }
+    },
+    "litert-lm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LiteRT-LM (on-device)",
+      "options": {
+        "apiKey": "sk-no-key-required",
+        "baseURL": "http://localhost:9379/v1"
+      },
+      "models": {
+        "litert-community/gemma-4-E2B-it-litert-lm": {
+          "name": "Gemma 4 2B Expert (on-device)",
+          "limit": { "context": 16384, "output": 2048 }
+        },
+        "litert-community/gemma-4-E4B-it-litert-lm": {
+          "name": "Gemma 4 4B Expert (on-device)",
+          "limit": { "context": 16384, "output": 2048 }
+        },
+        "litert-community/gemma-4-12B-it-litert-lm": {
+          "name": "Gemma 4 12B (on-device)",
+          "limit": { "context": 16384, "output": 2048 }
+        },
+        "litert-community/Qwen3-0.6B": {
+          "name": "Qwen3 0.6B (on-device)",
+          "limit": { "context": 16384, "output": 2048 }
+        }
       }
     }
   },
@@ -980,6 +1006,16 @@
         "bash": true
       }
     },
+    "litert-lm-agent": {
+      "description": "---",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/litert-lm-agent.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
     "master-orchestrator": {
       "description": "\"Orquestrador mestre e controlador de ciclo de vida (end-to-end) para o Ecossistema OpenCode e Polimata. Inicializa e finaliza as demandas do usuário, garantindo auditoria e reprodutibilidade de longo",
       "mode": "subagent",
@@ -1819,19 +1855,31 @@
         "edit": true,
         "bash": true
       }
-    },
-    "litert-lm-agent": {
-      "description": "Agente especialista em execução de LLMs on-device via LiteRT-LM (Google AI Edge). Gerencia modelos .litertlm, chat interativo, servidor OpenAI-compatible.",
-      "mode": "subagent",
-      "prompt": "{file:./agents/catalog/litert-lm-agent.md}",
-      "tools": {
-        "bash": true,
-        "write": true,
-        "edit": true
-      }
     }
   },
   "mcp": {
+    "litert-lm": {
+      "type": "local",
+      "command": [
+        "python3",
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/litert_lm_server.py"
+      ],
+      "enabled": true,
+      "description": "Modelos on-device LiteRT-LM (Gemma 4 2B/4B/12B, Qwen3 0.6B)"
+    },
+    "litert-lm-serve": {
+      "type": "local",
+      "command": [
+        "litert-lm",
+        "serve",
+        "--port",
+        "9379",
+        "--cors-origin",
+        "*"
+      ],
+      "enabled": true,
+      "description": "Servidor OpenAI-compatível LiteRT-LM"
+    },
     "metacognitive-interconnect": {
       "type": "local",
       "command": [
@@ -1881,11 +1929,6 @@
     "tdd": {
       "template": "python3 -m pytest '$ARGUMENTS' -v --tb=short 2>&1 | tail -40",
       "description": "Executa a bateria de testes TDD (ex: /tdd tests/test_opencode_go_zen.py)"
-    },
-    "litert-lm": {
-      "description": "CLI para modelos LiteRT-LM on-device. Subcomandos: list, run, chat, import, serve, info, delete. Ex: /litert-lm run gemma-4-E2B-it --prompt 'Olá!' | /litert-lm chat gemma-4-E2B-it",
-      "command": "litert-lm {args}",
-      "autoExec": true
     }
   }
 }

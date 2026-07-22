@@ -93,49 +93,28 @@ Quando o usuário invocar o agente `/marceloclaro` ou `@marceloclaro`:
 > **REQUISITO SUPREMO E MANDATÓRIO DE PERGUNTA**:
 > Sempre que a missão envolver a escrita, planejamento ou estruturação de um documento (livro, tese, dissertação, monografia ou currículo), você **DEVE, SEMPRE E SEM EXCEÇÃO, realizar uma pergunta inicial e interativa ao usuário** (usando a ferramenta `question` do OpenCode) para que ele escolha explicitamente o modelo/template LaTeX que deseja utilizar:
 >
-> 🇧🇷 **Para Documentos ABNT (ABNT Brazilian Standards — `templates/abntex2/`, `templates/abnt2025/` e `templates/academic-br/`):**
-> - **abnTeX2** (8 modelos: artigo, tese/dissertação, livro, relatório, projeto, glossários, slides) — `templates/abntex2/`
-> - **abnt2025** (4 modelos: artigo, monografia, projeto IC, relatório) — `templates/abnt2025/`
-> - **artigo-qualis-a1** (Modelo de artigo Qualis A1) — `templates/academic-br/artigo-qualis-a1/`
-> - **dissertacao_modelo_abnt** (Modelo clássico ABNT) — `templates/academic-br/dissertacao/`
-> - **capus** (Modelo CAPES) — `templates/academic-br/capes/`
-> - **ensaio-fichamento** (Ensaios, fichamentos e resenhas) — `templates/academic-br/ensaio-fichamento/`
+> 🇧🇷 **Para Documentos ABNT (ABNT Brazilian Standards — `templates/abntex2/` e `templates/abnt2025/`):**
+> - **abnTeX2** (8 modelos: artigo, tese/dissertação, livro, relatório, projeto, glossários, slides) — padrão ABNT consolidado desde 2018, incluso no TeX Live
+> - **abnt2025** (4 modelos: artigo, monografia, projeto IC, relatório) — normas ABNT atualizadas 2024/2025 (NBR 14724:2024, NBR 10520:2023)
 >
-> 📖 **Para Livros (`templates/books/`):**
-> - **victoria-regia** (Layout de e-Book clássico baseado no tema Victoria Regia)
-> - **book-simple** (Template de livro clássico com sumário, capítulos e bibliografia)
-> - **lathex-dark** (Estilo elegante de livro com tema escuro / Dark Mode)
-> - **springer-volume** (Padrão Springer Nature para volumes coletivos e científicos)
-> - **unb-editora** (Modelo oficial de publicação da Editora da Universidade de Brasília)
-> - **generic-templates** (Templates forta, apehex, resume — portfólio moderno e minimalista)
+> 📖 **Para Livros (`templates/livro/`):**
+> - **LatHex_dark** (Estilo elegante de livro com tema escuro / Dark Mode)
+> - **Modelo_de_livro_para_Editora_UnB** (Modelo oficial de publicação da Editora da Universidade de Brasília)
+> - **Victoria_Regia___A_Classical_LaTeX_e_Book_Template** (Layout de e-Book clássico e tradicional baseado no tema Victoria Regia)
+> - **book** (Template de livro clássico estruturado com sumário, capítulos divididos e bibliografia)
+> - **forta** (Template portfólio moderno com cabeçalhos robustos)
+> - **apehex** (Template minimalista de relatório extenso com headers limpos e layout direto)
+> - **Template_for_Editor_of_a_Springer_Nature_Contributed_Volume** (Padrão Springer Nature para volumes coletivos e científicos)
 >
 > 🎓 **Para Teses, Dissertações e Monografias:**
-> - **thesis-model-icmc** (Modelo oficial do ICMC-USP) — `templates/academic-br/icmc/`
-> - **monografia-unb** (Modelo oficial do DCC/CIC-UnB) — `templates/academic-br/unb-monografia/`
-> - **ipleiria-thesis** (Modelo oficial do IPLeiria Portugal) — `templates/academic-br/ipleiria/`
-> - **usp** (Modelo USP) — `templates/academic-br/usp/`
-> - **zrm** (Modelo Zermelo) — `templates/academic-br/zrm/`
+> - **thesis-model-icmc** (Modelo oficial do ICMC-USP em `templates/icmc/`)
+> - **Monografia** (Modelo oficial do DCC/CIC-UnB em `templates/unb-monografia/`)
+> - **ipleiria-thesis** (Modelo oficial do IPLeiria Portugal em `templates/ipleiria/`)
+> - **dissertacao_modelo_abnt** (Modelo clássico ABNT em `templates/dissertacao/`)
 >
 > 📄 **Para Currículos e Infográficos (`templates/cv/`):**
-> - **latexcv** (10 estilos: classic, infographics, modern, rows, sidebar, two_column, etc.)
-> - **my-resume** (Modelo de currículo infográfico contemporâneo)
->
-> 🌍 **Para Periódicos Internacionais (`templates/international/`):**
-> - **acm** (ACM — Association for Computing Machinery)
-> - **elsevier** / **elsevier-cas** (Elsevier)
-> - **ieee** (IEEE — artigos e conferências)
-> - **mdpi** (MDPI — Multidisciplinary Digital Publishing Institute)
-> - **nature** (Nature Portfolio)
-> - **springer** (Springer Nature)
-> - **tandf** (Taylor & Francis)
-> - **koma-script** (KOMA-Script — classes alemãs)
-> - **sbc** (Sociedade Brasileira de Computação)
->
-> 🏗️ **Projetos Autorais (`templates/projects/`):**
-> - **dissertacao-opencode** (62 .tex — Dissertação completa do ecossistema)
-> - **livro-opencode** (146 .tex — Livro principal do ecossistema)
-> - **livro-volume2** (79 .tex — Segundo volume)
-> - **livro-gemeos-odontologia** (187 .tex — Livro sobre odontologia)
+> - **latexcv** (Coleção de vários estilos clássicos e modernos de currículo em LaTeX)
+> - **my-resume** (Modelo de currículo infográfico contemporâneo com excelente apresentação estética)
 >
 > **Fluxo de Ação**:
 > 1. Receba a intenção de escrita do usuário.
@@ -143,37 +122,3 @@ Quando o usuário invocar o agente `/marceloclaro` ou `@marceloclaro`:
 > 3. Aguarde a resposta do usuário.
 > 4. Copie os arquivos do template correspondente da pasta do template escolhido para a área de escrita (ex: `livro-opencode/`, `tese-opencode/` ou diretório do projeto).
 > 5. Proceda com a escrita e o acionamento de subagentes.
-
----
-
-## 5. Diretiva de Conversão PDF → LaTeX
-
-> [!IMPORTANT]
-> Quando o usuário solicitar a conversão de um PDF para LaTeX, siga este protocolo:
-
-1. **Pergunte** qual template LaTeX deseja aplicar ao resultado (veja seção 4)
-2. **Execute** o pipeline via `pdf2latex`:
-   ```bash
-   python3 -m pdf2latex <arquivo.pdf> --template <nome> --output ./<projeto-saida>
-   ```
-3. **Apresente** o resumo da conversão (estrutura detectada, figuras, tabelas, etc.)
-4. **Ofereça** compilar o projeto:
-   ```bash
-   cd ./<projeto-saida> && make
-   ```
-5. **Delegue** ajustes finos ao agente `pdf2latex-agent` se necessário
-
-### Templates especialmente recomendados para PDF→LaTeX:
-| Tipo de documento | Template recomendado |
-|------------------|---------------------|
-| Artigo científico | `acm`, `ieee`, `elsevier`, `abntex2` |
-| Tese/Dissertação | `abntex2`, `abnt2025`, `icmc`, `unb-monografia` |
-| Livro | `victoria-regia`, `book-simple` |
-| Relatório técnico | `abntex2`, `springer` |
-| Currículo | `latexcv` |
-
-### Modos de conversão:
-- **Completo**: extrai texto + figuras + tabelas + equações + referências
-- **Text-only**: apenas texto e estrutura (`--no-images --no-tables --no-equations --no-references`)
-- **OCR**: para PDFs escaneados (`--ocr --ocr-lang por`)
-- **Compilar**: já gera o PDF final (`--compile`)
