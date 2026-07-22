@@ -12,7 +12,7 @@
 set -euo pipefail
 
 PORT="${1:-9379}"
-MAX_TOKENS="${LITERT_LM_MAX_TOKENS:-16384}"
+MAX_TOKENS="${LITERT_LM_MAX_TOKENS:-20480}"
 VERBOSE=""
 
 # Processar argumentos

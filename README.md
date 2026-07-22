@@ -994,12 +994,12 @@ rodando modelos Gemma 4 e Qwen3 diretamente na máquina, sem necessidade de API 
 
 ### Modelos disponíveis
 
-| Modelo | Parâmetros | Tamanho | Contexto |
-|--------|-----------|---------|----------|
-| Gemma 4 2B Expert | 2.6B | 2.4 GB | 16.384 tok |
-| Gemma 4 4B Expert | 4.6B | 3.4 GB | 16.384 tok |
-| Gemma 4 12B | 12B | 6.1 GB | 16.384 tok |
-| Qwen3 0.6B | 0.6B | 0.5 GB | 16.384 tok |
+| Modelo | Parâmetros | Tamanho | Contexto (config.) | RAM estimada |
+|--------|-----------|---------|-------------------|-------------|
+| Gemma 4 2B Expert | 2.6B | 2.4 GB | 20.480 tok | ~9-10 GB |
+| Gemma 4 4B Expert | 4.6B | 3.4 GB | 20.480 tok | ~10-11 GB |
+| Gemma 4 12B | 12B | 6.1 GB | 20.480 tok | >12 GB (GPU) |
+| Qwen3 0.6B | 0.6B | 0.5 GB | 20.480 tok | ~1.5 GB |
 
 ### Provider OpenAI-Compatível
 
@@ -1019,13 +1019,16 @@ permitindo que o OpenCode o use como **provider nativo**:
 
 ### Performance
 
-| Métrica | Valor |
-|---------|-------|
-| Cold start (2.4 GB) | ~2-4 min |
-| Request quente | 2-8s |
-| Contexto máximo | 16.384 tokens |
-| RAM (Gemma 4 E2B) | ~9 GB RSS |
-| Decode (CPU) | ~30-45 tok/s |
+| Métrica | Gemma 4 E2B | Qwen3 0.6B |
+|---------|------------|------------|
+| Cold start | ~2-4 min | ~10s |
+| Request quente | 2-60s* | 1-3s |
+| Contexto máximo | 20.480 tokens | 20.480 tokens |
+| RAM (RSS) | ~9-10 GB | ~1.5 GB |
+| Decode (CPU) | ~30-45 tok/s | ~150+ tok/s |
+
+\* *Requests quentes lentos (~60s) ocorrem quando a RAM está no limite e o sistema usa swap.
+  Para melhor performance, feche outros programas ou use Qwen3-0.6B.*
 
 Uso: `./scripts/litert-lm-serve.sh` ou `LITERT_LM_MAX_TOKENS=16384 litert-lm serve`
 
