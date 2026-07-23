@@ -18,6 +18,19 @@
         "baseURL": "https://opencode.ai/zen/v1"
       }
     },
+    "openai": {
+      "options": {
+        "apiKey": "{env:OPENAI_API_KEY}",
+        "baseURL": "https://api.openai.com/v1"
+      },
+      "models": {
+        "gpt-4o": { "name": "GPT-4o" },
+        "gpt-4o-mini": { "name": "GPT-4o Mini (rápido)" },
+        "gpt-4.1": { "name": "GPT-4.1" },
+        "o3": { "name": "o3 (raciocínio)" },
+        "o4-mini": { "name": "o4-mini (raciocínio rápido)" }
+      }
+    },
     "litert-lm": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "LiteRT-LM (on-device)",
