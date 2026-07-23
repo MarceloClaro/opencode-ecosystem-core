@@ -45,6 +45,9 @@
       }
     }
   },
+  "skills": {
+    "paths": [".opencode/skills"]
+  },
   "agent": {
     "marceloclaro": {
       "description": "Orquestrador central metacognitivo do ecossistema: percebe (memória global), delega (attention routing + blackboard A2A), executa (SDD/TDD) e reflete (Reflexion). Ponto de entrada de todas as tarefas.",
@@ -54,6 +57,20 @@
         "write": true,
         "edit": true,
         "bash": true
+      }
+    },
+    "nano-orchestrator": {
+      "description": "Agente especializado em nano-orquestração de manuscritos (30-500 laudas) com LiteRT-LM, pipeline 7 fases SPEC-935-R53, SDD+TDD estrito. Use para manuscritos grandes, teses, livros técnicos.",
+      "mode": "subagent",
+      "prompt": "{file:./.opencode/agents/nano-orchestrator.md}",
+      "temperature": 0.7,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "task": true,
+        "glob": true,
+        "grep": true
       }
     },
     "academic_writer": {
