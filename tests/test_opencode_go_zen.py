@@ -289,17 +289,22 @@ class TestModelRouter(unittest.TestCase):
         """route() com require_thinking=True deve selecionar modelo com thinking."""
         from integrations.opencode_go import MODELS as GO_MODELS
         from integrations.opencode_zen import MODELS as ZEN_MODELS
+        from integrations.litert_lm import MODELS as LT_MODELS
 
         result = self.router.route("coding", require_thinking=True)
-        # Verifica se o modelo selecionado suporta thinking
+        # Verifica se o modelo selecionado suporta thinking (qualquer provider free)
         model_meta = (
             GO_MODELS.get(result.model_id)
             or ZEN_MODELS.get(result.model_id)
+            or LT_MODELS.get(result.model_id)
             or {}
         )
-        # Se o modelo tem thinking ou é fallback, o teste passa
+        # Se o modelo tem thinking ou é fallback de qualquer provider, o teste passa
         self.assertTrue(
-            model_meta.get("thinking", False) or result.model_id in GO_MODELS or result.model_id in ZEN_MODELS
+            model_meta.get("thinking", False)
+            or result.model_id in GO_MODELS
+            or result.model_id in ZEN_MODELS
+            or result.model_id in LT_MODELS
         )
 
     # ── RouteResult ───────────────────────────────────────────────────────────

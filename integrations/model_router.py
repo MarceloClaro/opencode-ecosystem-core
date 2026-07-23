@@ -53,6 +53,14 @@ def _get_litert_lm():
         return None, {}
 
 
+def _get_openai():
+    try:
+        from integrations.openai_provider import openai_provider, MODELS as OA_MODELS
+        return openai_provider, OA_MODELS
+    except ImportError:
+        return None, {}
+
+
 # ── Perfis de modelo por tipo de tarefa ──────────────────────────────────────
 
 @dataclass
@@ -62,123 +70,164 @@ class ModelProfile:
     description: str
     # Lista ordenada de (provider_id, model_id) em ordem de preferência
     preferred: List[Tuple[str, str]] = field(default_factory=list)
-    # Modelo fallback se todos os preferidos falharem
-    fallback: Tuple[str, str] = ("opencode-go", "kimi-k2.7-code")
+    # Modelo fallback se todos os preferidos falharem (free-only)
+    fallback: Tuple[str, str] = ("litert-lm", "gemma-4-E2B-it")
 
 
 # Perfis padrão do ecossistema
 DEFAULT_PROFILES: Dict[str, ModelProfile] = {
+    # ── CODING ───────────────────────────────────────────────────────────────
+    # Token-optimized: gemma-4-E2B-it (2.5GB, standard) é o melhor custo-benefício
+    # para código. Fallbacks: qwen-3-4B-it (2.5GB), gemma-4-E4B-it (4.8GB com thinking).
     "coding": ModelProfile(
         task_type="coding",
-        description="Geração, revisão e depuração de código",
+        description="Geração, revisão e depuração de código [FREE only]",
         preferred=[
-            ("opencode-go", "kimi-k2.7-code"),
-            ("opencode-go", "deepseek-v4-pro"),
-            ("opencode-zen", "claude-sonnet-4.6"),
-            ("opencode-go", "glm-5.2"),
-            ("opencode-go", "qwen3.7-max"),
-            ("litert-lm", "gemma-4-E2B-it"),
+            ("litert-lm", "gemma-4-E2B-it"),        # 2.5GB, standard, eficiente
+            ("litert-lm", "gemma-3-4B-it"),          # 2.5GB, coding+fast
+            ("litert-lm", "qwen-3-4B-it"),           # 2.5GB, standard
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium c/ thinking
+            ("litert-lm", "gemma-4-9B-it"),          # 9GB, premium c/ thinking
+            ("litert-lm", "llama-3-8B-it"),          # 4.5GB, standard
+            ("litert-lm", "gemma-2-9B-it"),          # 5.5GB, standard
+            ("opencode-zen", "deepseek-v3"),          # FREE Zen, API-based
         ],
-        fallback=("opencode-go", "kimi-k2.7-code"),
+        fallback=("litert-lm", "gemma-4-E2B-it"),
     ),
+    # ── REASONING ────────────────────────────────────────────────────────────
+    # phi-4 (9GB, premium, thinking) tem a melhor relação qualidade/tokens
+    # para raciocínio. Alternativas maiores só se precisar de mais potência.
     "reasoning": ModelProfile(
         task_type="reasoning",
-        description="Raciocínio complexo, chain-of-thought, matemática",
+        description="Raciocínio complexo, chain-of-thought [FREE only]",
         preferred=[
-            ("opencode-zen", "claude-opus-4"),
-            ("opencode-zen", "gpt-5.5"),
-            ("opencode-zen", "gemini-2.5-pro"),
-            ("opencode-zen", "deepseek-r2"),
-            ("opencode-go", "deepseek-v4-pro"),
-            ("litert-lm", "qwen-3-30B-it"),
+            ("litert-lm", "phi-4-14B-it"),           # 9GB, premium, thinking, math+reasoning
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium c/ thinking
+            ("litert-lm", "gemma-3-27B-it"),         # 16GB, frontier c/ thinking
+            ("litert-lm", "gemma-4-12B-it"),         # 12GB, frontier c/ thinking
+            ("litert-lm", "qwen-3-30B-it"),          # 18GB, frontier
+            ("opencode-zen", "deepseek-r2"),          # FREE Zen, reasoning premium
         ],
-        fallback=("opencode-zen", "claude-sonnet-4.6"),
+        fallback=("litert-lm", "phi-4-14B-it"),
     ),
+    # ── ACADEMIC ─────────────────────────────────────────────────────────────
+    # Escrita acadêmica exige contexto longo e precisão. gemma-4-12B-it
+    # (frontier, thinking) é o ponto ótimo. deepseek-r2 como fallback cloud.
     "academic": ModelProfile(
         task_type="academic",
-        description="Escrita acadêmica, revisão por pares, MASWOS",
+        description="Escrita acadêmica, revisão por pares, MASWOS [FREE only]",
         preferred=[
-            ("opencode-zen", "claude-opus-4"),
-            ("opencode-zen", "gpt-5.5"),
-            ("opencode-go", "qwen3.7-max"),
-            ("opencode-zen", "gemini-2.5-pro"),
+            ("litert-lm", "gemma-4-12B-it"),         # 12GB, frontier, thinking
+            ("litert-lm", "qwen-3-30B-it"),          # 18GB, frontier
+            ("litert-lm", "gemma-3-27B-it"),         # 16GB, frontier, thinking
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium, thinking
+            ("litert-lm", "phi-4-14B-it"),           # 9GB, premium, thinking
+            ("opencode-zen", "deepseek-r2"),          # FREE Zen
         ],
-        fallback=("opencode-zen", "claude-opus-4"),
+        fallback=("litert-lm", "gemma-4-12B-it"),
     ),
+    # ── WRITING ──────────────────────────────────────────────────────────────
+    # Escrita criativa: modelos pequenos e rápidos são suficientes.
+    # Gemma 4 E2B (2.5GB) como padrão token-efficient.
     "writing": ModelProfile(
         task_type="writing",
-        description="Escrita criativa, edição e revisão textual",
+        description="Escrita criativa, edição e revisão textual [FREE only]",
         preferred=[
-            ("opencode-zen", "claude-opus-4"),
-            ("opencode-zen", "claude-sonnet-4.6"),
-            ("opencode-zen", "gpt-5"),
+            ("litert-lm", "gemma-4-E2B-it"),        # 2.5GB, standard
+            ("litert-lm", "qwen-3-4B-it"),           # 2.5GB, standard
+            ("litert-lm", "gemma-3-4B-it"),          # 2.5GB, standard
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium (se precisar)
+            ("opencode-zen", "deepseek-v3"),          # FREE Zen
         ],
-        fallback=("opencode-zen", "claude-sonnet-4.6"),
+        fallback=("litert-lm", "gemma-4-E2B-it"),
     ),
+    # ── FAST ─────────────────────────────────────────────────────────────────
+    # Ultra-eficiente: gemma-3-1B-it (0.5GB, 8K ctx) para respostas instantâneas.
+    # gemma-2-2B-it (1.5GB) como alternativa. deepseek-v3 via cloud.
     "fast": ModelProfile(
         task_type="fast",
-        description="Respostas rápidas, tarefas simples, alta frequência",
+        description="Respostas rápidas, tarefas simples, alta frequência [FREE only]",
         preferred=[
-            ("litert-lm", "litert-community/gemma-4-E2B-it-litert-lm"),
-            ("opencode-go", "deepseek-v4-flash"),
-            ("opencode-zen", "gemini-2.5-flash"),
-            ("opencode-zen", "claude-haiku-4"),
-            ("opencode-go", "kimi-k2.5"),
+            ("litert-lm", "gemma-3-1B-it"),          # 0.5GB, ultra-rápido
+            ("litert-lm", "gemma-2-2B-it"),          # 1.5GB, rápido
+            ("litert-lm", "gemma-3-4B-it"),          # 2.5GB, standard
+            ("litert-lm", "qwen-3-4B-it"),           # 2.5GB, standard
+            ("litert-lm", "gemma-4-E2B-it"),         # 2.5GB (fallback local)
+            ("opencode-zen", "deepseek-v3"),          # FREE Zen, API-based
         ],
-        fallback=("opencode-go", "deepseek-v4-flash"),
+        fallback=("litert-lm", "gemma-3-1B-it"),
     ),
+    # ── LOCAL ────────────────────────────────────────────────────────────────
+    # Inferência 100% on-device. Prioridade: modelos que cabem em qualquer hardware.
     "local": ModelProfile(
         task_type="local",
-        description="Inferência on-device via LiteRT-LM (Gemma 4, Qwen3). Sem dependência de rede. Modelos disponíveis via MCP (litert_lm_chat, litert_lm_models, litert_lm_status).",
+        description="Inferência on-device via LiteRT-LM [FREE only, sem rede]",
         preferred=[
-            ("litert-lm", "litert-community/gemma-4-E2B-it-litert-lm"),
-            ("litert-lm", "litert-community/gemma-4-E4B-it-litert-lm"),
-            ("litert-lm", "litert-community/gemma-4-12B-it-litert-lm"),
-            ("litert-lm", "litert-community/Qwen3-0.6B"),
+            ("litert-lm", "gemma-4-E2B-it"),         # 2.5GB, standard, universal
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium, multimodal
+            ("litert-lm", "gemma-4-12B-it"),         # 12GB, frontier
+            ("litert-lm", "gemma-3-1B-it"),          # 0.5GB, ultra-leve
         ],
-        fallback=("litert-lm", "litert-community/gemma-4-E2B-it-litert-lm"),
+        fallback=("litert-lm", "gemma-4-E2B-it"),
     ),
+    # ── MATH ─────────────────────────────────────────────────────────────────
+    # phi-4 (14B) é especializado em math+reasoning, melhor escolha gratuita.
+    # deepseek-r2 (FREE Zen) como alternativa cloud de alto nível.
     "math": ModelProfile(
         task_type="math",
-        description="Computação matemática, estatística, modelagem formal",
+        description="Computação matemática, estatística, modelagem formal [FREE only]",
         preferred=[
-            ("opencode-zen", "deepseek-r2"),
-            ("opencode-go", "deepseek-v4-pro"),
-            ("opencode-zen", "gpt-5.5"),
-            ("opencode-go", "qwen3.7-max"),
+            ("litert-lm", "phi-4-14B-it"),           # 9GB, premium, thinking, math
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium, thinking
+            ("litert-lm", "qwen-3-30B-it"),          # 18GB, frontier
+            ("opencode-zen", "deepseek-r2"),          # FREE Zen, math+reasoning
+            ("litert-lm", "gemma-3-27B-it"),         # 16GB, frontier, thinking
         ],
-        fallback=("opencode-go", "deepseek-v4-pro"),
+        fallback=("litert-lm", "phi-4-14B-it"),
     ),
+    # ── MULTIMODAL ───────────────────────────────────────────────────────────
+    # gemma-4-E4B-it (4.8GB, multimodal c/ thinking) é o mais eficiente.
+    # Alternativas maiores para visão mais complexa.
     "multimodal": ModelProfile(
         task_type="multimodal",
-        description="Análise de imagens, gráficos e conteúdo visual",
+        description="Análise de imagens, gráficos e conteúdo visual [FREE only]",
         preferred=[
-            ("opencode-zen", "gemini-2.5-pro"),
-            ("opencode-zen", "gpt-5.5"),
-            ("opencode-go", "minimax-m3"),
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium, multimodal, thinking
+            ("litert-lm", "gemma-4-9B-it"),          # 9GB, premium, multimodal, thinking
+            ("litert-lm", "llama-4-17B-it"),         # 10GB, premium, multimodal, thinking
+            ("litert-lm", "gemma-4-12B-it"),         # 12GB, frontier, multimodal, thinking
         ],
-        fallback=("opencode-zen", "gemini-2.5-pro"),
+        fallback=("litert-lm", "gemma-4-E4B-it"),
     ),
+    # ── LEGAL ────────────────────────────────────────────────────────────────
+    # Raciocínio jurídico exige contexto + precisão. deepseek-r2 é forte aqui.
     "legal": ModelProfile(
         task_type="legal",
-        description="Raciocínio jurídico, subsunção, SPEC-921/928",
+        description="Raciocínio jurídico, subsunção, SPEC-921/928 [FREE only]",
         preferred=[
-            ("opencode-zen", "claude-opus-4"),
-            ("opencode-zen", "gpt-5"),
-            ("opencode-zen", "gemini-2.5-pro"),
+            ("litert-lm", "gemma-4-12B-it"),         # 12GB, frontier, thinking
+            ("litert-lm", "phi-4-14B-it"),           # 9GB, premium, thinking
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium, thinking
+            ("litert-lm", "qwen-3-30B-it"),          # 18GB, frontier
+            ("opencode-zen", "deepseek-r2"),          # FREE Zen
         ],
-        fallback=("opencode-zen", "claude-opus-4"),
+        fallback=("litert-lm", "gemma-4-12B-it"),
     ),
+    # ── AGENTIC ──────────────────────────────────────────────────────────────
+    # Orquestração multi-agente: planejamento longo, contexto grande.
+    # deepseek-r2 como alternativa cloud gratuita de frontieir.
     "agentic": ModelProfile(
         task_type="agentic",
-        description="Orquestração multi-agente, planejamento longo",
+        description="Orquestração multi-agente, planejamento longo [FREE only]",
         preferred=[
-            ("opencode-zen", "claude-opus-4"),
-            ("opencode-go", "mimo-v2.5-pro"),
-            ("opencode-zen", "gemini-2.5-pro"),
-            ("opencode-zen", "gpt-5.5"),
+            ("litert-lm", "qwen-3-30B-it"),          # 18GB, frontier
+            ("litert-lm", "gemma-4-12B-it"),         # 12GB, frontier, thinking
+            ("litert-lm", "gemma-3-27B-it"),         # 16GB, frontier, thinking
+            ("litert-lm", "phi-4-14B-it"),           # 9GB, premium, thinking
+            ("litert-lm", "gemma-4-E4B-it"),         # 4.8GB, premium, thinking
+            ("opencode-zen", "deepseek-r2"),          # FREE Zen
         ],
-        fallback=("opencode-zen", "claude-opus-4"),
+        fallback=("litert-lm", "qwen-3-30B-it"),
     ),
 }
 
@@ -223,12 +272,14 @@ class ModelRouter:
         self._go_provider, self._go_models = _get_opencode_go()
         self._zen_provider, self._zen_models = _get_opencode_zen()
         self._lt_provider, self._lt_models = _get_litert_lm()
+        self._oa_provider, self._oa_models = _get_openai()
         logger.info(
-            "ModelRouter inicializado — %d perfis, Go=%s, Zen=%s, LiteRT=%s",
+            "ModelRouter inicializado — %d perfis, Go=%s, Zen=%s, LiteRT=%s, OpenAI=%s",
             len(self.profiles),
             "OK" if self._go_provider else "indisponível",
             "OK" if self._zen_provider else "indisponível",
             "OK" if self._lt_provider else "indisponível",
+            "OK" if self._oa_provider else "indisponível",
         )
 
     def route(
@@ -262,7 +313,7 @@ class ModelRouter:
             profile = self.profiles.get("coding", ModelProfile(
                 task_type="coding",
                 description="Fallback",
-                preferred=[("opencode-go", "kimi-k2.7-code")],
+                preferred=[("litert-lm", "gemma-4-E2B-it")],
             ))
 
         # Override forçado
@@ -332,7 +383,7 @@ class ModelRouter:
         if provider is None:
             raise RuntimeError(
                 f"Provider '{route.provider_id}' indisponível. "
-                "Verifique as importações de integrations.opencode_go / opencode_zen."
+                "Verifique as importações em integrations/."
             )
 
         return provider.complete(
@@ -352,6 +403,8 @@ class ModelRouter:
             models.extend(self._zen_provider.list_models())
         if self._lt_provider:
             models.extend(self._lt_provider.list_models(local_only=True))
+        if self._oa_provider:
+            models.extend(self._oa_provider.list_models())
         return models
 
     def list_profiles(self) -> List[Dict[str, Any]]:
@@ -386,8 +439,13 @@ class ModelRouter:
                     "authenticated": self._is_authenticated("litert-lm"),
                     "models": len(self._lt_models),
                 },
+                "openai": {
+                    "available": self._oa_provider is not None,
+                    "authenticated": self._is_authenticated("openai"),
+                    "models": len(self._oa_models),
+                },
             },
-            "total_models": len(self._go_models) + len(self._zen_models) + len(self._lt_models),
+            "total_models": len(self._go_models) + len(self._zen_models) + len(self._lt_models) + len(self._oa_models),
         }
 
     # ── Privados ─────────────────────────────────────────────────────────────
@@ -423,6 +481,8 @@ class ModelRouter:
             return self._go_models.get(model_id, {})
         if provider_id == "opencode-zen":
             return self._zen_models.get(model_id, {})
+        if provider_id == "openai":
+            return self._oa_models.get(model_id, {})
         return {}
 
     def _is_authenticated(self, provider_id: str) -> bool:
@@ -433,6 +493,8 @@ class ModelRouter:
             return bool(self._zen_provider._api_key)
         if provider_id == "litert-lm" and self._lt_provider:
             return True  # servidor local, sempre autenticado
+        if provider_id == "openai" and self._oa_provider:
+            return bool(self._oa_provider._api_key)
         return False
 
     def _get_provider(self, provider_id: str):
@@ -443,6 +505,8 @@ class ModelRouter:
             return self._zen_provider
         if provider_id == "litert-lm":
             return self._lt_provider
+        if provider_id == "openai":
+            return self._oa_provider
         return None
 
     def _build_reason(
