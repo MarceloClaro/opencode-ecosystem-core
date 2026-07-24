@@ -330,6 +330,34 @@
         "Alternativa viavel: usar json.dump() diretamente em vez de nbformat.write()"
       ],
       "timestamp": 1784913490.3563552
+    },
+    {
+      "round_id": "R215",
+      "objective": "Rebuild completo do notebook Colab (SPEC-935-R213) com string arrays",
+      "changes": [
+        "Reconstrução total do notebook orquestracao_ia_colab.ipynb",
+        "Nova abordagem: set_md/set_code com listas de strings (sem triple-quote nesting)",
+        "Fase 6 reescrita como PipelineOrquestrador reusando F3+F4+F5",
+        "Fase 7 atualizada para litert-lm run (CLI v0.14.0)",
+        "Fase 8 como conclusão com sanidade de classes",
+        "TDD: RED 3 fail → GREEN 3 pass com hasattr",
+        "Hooks: HookedOrchestrator wraps Orchestrator via composição",
+        "13/13 testes TDD passando",
+        "9/9 code cells executando sem erro",
+        "Fix: raw triple-double-quoted strings para f-strings com aspas simples",
+        "Fix: litert-lm chat → litert-lm run (CLI compatibilidade)",
+        "Fix: SpecSDD → Spec na lista de classes esperadas"
+      ],
+      "score": 0.99,
+      "lessons": [
+        "String arrays (set_md/set_code) são mais seguros que triple-quote nesting",
+        "r'''\\'=\\'*50''' em Python 3.14 gera SyntaxError em f-strings",
+        "Usar r\"\"\"{'='*50}\"\"\" resolve o problema de quotes em Python 3.14",
+        "litert-lm CLI v0.14.0 usa 'run' não 'chat'",
+        "TDD: classes stub na FASE GREEN podem coexistir com Fase 3 sem conflito via exceção",
+        "notebook sem outputs não-binários (nbformat == 4.5) é mais portável"
+      ],
+      "timestamp": 1784916841.3601406
     }
   ]
 }
