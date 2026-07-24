@@ -358,6 +358,31 @@
         "notebook sem outputs não-binários (nbformat == 4.5) é mais portável"
       ],
       "timestamp": 1784916841.3601406
+    },
+    {
+      "round_id": "R216",
+      "objective": "Fase 7: LiteRT-LM CLI → HuggingFace Transformers (experimento real com distilgpt2)",
+      "changes": [
+        "Substituição completa da Fase 7: de litert-lm CLI para HuggingFace transformers pipeline",
+        "Modelo real: distilgpt2 (82M params) carregado via AutoModel para text-generation",
+        "Prompt contextualizado com o artigo da Fase 6 (PipelineOrquestrador)",
+        "Geração com amostragem (temperature=0.7, do_sample=True)",
+        "Medição de performance: carga (3.0s) e geração (3.18s para 27 tokens)",
+        "Fallback conceitual quando transformers/torch não estão instalados",
+        "ensure_package() com pip install automático para Colab",
+        "Manchete atualizada: LiteRT-LM → HuggingFace Transformers",
+        "Testes atualizados: test_fase7_has_transformers + test_fase7_fallback",
+        "Headlines/tabelas atualizadas nas Fases 0, 8"
+      ],
+      "score": 0.99,
+      "lessons": [
+        "transformers + torch cabe em 2.6GB (tmpfs) com torch CPU-only",
+        "distilgpt2 carrega em 3s do cache HF e gera ~8 tokens/s em CPU",
+        "modelo ingles gera texto academico coerente mesmo com prompt parcial PT/EN",
+        "raw triple-double-quoted strings r\"\"\" resolvem {'OK' if cond else 'FALTA'} em Python 3.14",
+        "r\"\"\"{'='*50}\"\"\" sem escaping interno é o padrão correto para f-strings com aspas simples"
+      ],
+      "timestamp": 1784927735.8553853
     }
   ]
 }
