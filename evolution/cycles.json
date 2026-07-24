@@ -310,6 +310,26 @@
         "Toda celula de codigo precisa de imports no topo para passar no gate do test_each_code_cell_has_imports"
       ],
       "timestamp": 1784912667.9291198
+    },
+    {
+      "round_id": 214,
+      "objective": "Executar notebook end-to-end + corrigir formato source para compatibilidade nbformat",
+      "changes": [
+        "Fix: toda source de celula agora termina com \\n (nbformat v4 spec)",
+        "Fix: adicionados cell IDs (uuid) para eliminar MissingIDFieldWarning",
+        "Exec: notebook executado com sucesso - 9/9 code cells, 0 erros",
+        "TDD: Fase 2 RED 0/5 → GREEN 5/5 como esperado",
+        "Fase 8: LiteRT-LM CLI executado com sucesso",
+        "Validacao: 13/13 testes TDD passando apos execucao"
+      ],
+      "score": 0.99,
+      "lessons": [
+        "nbformat.read() usa \"\".join(source_list) - se elementos nao tem \\n trailing, o codigo vira uma linha so",
+        "Sempre garantir que cada elemento do source[] termine com \\n para compatibilidade nbformat",
+        "Nunca usar nbformat.write() sem antes verificar o formato dos sources",
+        "Alternativa viavel: usar json.dump() diretamente em vez de nbformat.write()"
+      ],
+      "timestamp": 1784913490.3563552
     }
   ]
 }
