@@ -383,6 +383,32 @@
         "r\"\"\"{'='*50}\"\"\" sem escaping interno é o padrão correto para f-strings com aspas simples"
       ],
       "timestamp": 1784927735.8553853
+    },
+    {
+      "round_id": "R217",
+      "objective": "Pipeline multi-agente REAL com LiteRT-LM Qwen3-0.6B + PDF (R217)",
+      "changes": [
+        "Fase 6 reescrita: PipelineOrquestradorReal com 3 agentes usando litert-lm CLI real",
+        "RealAgentePesquisador: inferencia real do Qwen3 para cada topico (3 chamadas)",
+        "RealAgenteEscritor: compoe artigo via inferencia real do Qwen3",
+        "RealAgenteRevisor: avalia artigo e extrai score via regex do output do modelo",
+        "Fase 7 convertida para geracao de PDF com fpdf2 + fonte DejaVu (Unicode)",
+        "PDF com: capa, corpo do artigo, metadados do experimento, score, data",
+        "Pipeline total: ~99s de inferencia real on-device (CPU)",
+        "Sanidade: 13/13 classes OK (PipelineOrquestradorReal + 3 RealAgentes)",
+        "Testes atualizados: test_fase7_has_pdf_generation, test_fase6_litertlm_inferencia",
+        "Manchete: 'Pipeline Real (LiteRT-LM Qwen3 + PDF)'"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "litert-lm run --no-template gera texto direto sem template de chat (mais rapido)",
+        "Qwen3-0.6B leva ~22s por chamada em CPU para ~40 tokens (viavel para pipeline)",
+        "re.findall(r'\\d{1,3}', texto) extrai score do output mesmo com texto ruidoso",
+        "fpdf2 + DejaVu Sans suporta Unicode completo (portugues, acentos, cedilha)",
+        "BaseAgent.__init__ aceita apenas name; agent_type deve ser setado apos super()",
+        "Pipeline real com hooks: LoggingHook monitora cada etapa com timestamps reais"
+      ],
+      "timestamp": 1784933521.2626965
     }
   ]
 }

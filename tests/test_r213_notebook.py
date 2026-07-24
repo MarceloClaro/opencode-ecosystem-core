@@ -148,7 +148,10 @@ KEY_CLASSES_SINGLE = [
     "Hook",              # Fase 4
     "HookManager",       # Fase 4
     "PromptBuilder",     # Fase 5
-    "PipelineOrquestrador", # Fase 6
+    "PipelineOrquestradorReal", # Fase 6
+    "RealAgentePesquisador", # Fase 6
+    "RealAgenteEscritor",    # Fase 6
+    "RealAgenteRevisor",     # Fase 6
 ]
 
 def test_key_classes_defined_once():
@@ -173,6 +176,7 @@ CLASSES_BY_PHASE = {
     3: ["BaseAgent", "Task", "Orchestrator", "AgentePesquisador", "AgenteEscritor", "AgenteRevisor"],
     4: ["EventType", "Hook", "LoggingHook", "MetricsHook", "HookManager", "HookedOrchestrator"],
     5: ["PromptBuilder"],
+    6: ["PipelineOrquestradorReal", "RealAgentePesquisador", "RealAgenteEscritor", "RealAgenteRevisor"],
 }
 
 def test_phase_6_does_not_redefine_previous_classes():
@@ -191,20 +195,24 @@ def test_phase_6_does_not_redefine_previous_classes():
     assert not redefinitions, \
         f"Fase 6 REDEFINE classes das Fases 1-5: {redefinitions}"
 
+    # Verifica que as classes novas da Fase 6 estao presentes
+    expected_new = {"PipelineOrquestradorReal", "RealAgentePesquisador", "RealAgenteEscritor", "RealAgenteRevisor"}
+    assert expected_new.issubset(set(classes13)), \
+        f"Fase 6 sem classes esperadas: {expected_new - set(classes13)}"
+
 
 # ═══════════════════════════════════════════════════════════════
-# TC-07: HuggingFace Transformers (experimento real)
+# TC-07: PDF Generation (fpdf2)
 # ═══════════════════════════════════════════════════════════════
 
-def test_fase7_has_transformers():
-    """Fase 7 (cell 15) deve usar transformers pipeline real."""
+def test_fase7_has_pdf_generation():
+    """Fase 7 (cell 15) deve gerar PDF com fpdf2."""
     nb = load_notebook()
     cell15 = nb["cells"][15]
     src15 = source_text(cell15)
-    assert "transformers" in src15, "Cell 15 sem import transformers"
-    assert "pipeline" in src15, "Cell 15 sem pipeline HF"
-    assert "distilgpt2" in src15 or "generation" in src15, \
-        "Cell 15 sem modelo de geracao HF"
+    assert "fpdf2" in src15 or "FPDF" in src15, "Cell 15 sem fpdf2/FPDF"
+    assert "pdf.output" in src15, "Cell 15 sem pdf.output()"
+    assert "artigo_pipeline_real.pdf" in src15, "Cell 15 sem nome do arquivo PDF"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -242,16 +250,18 @@ def test_tdd_red_green_present():
 
 
 # ═══════════════════════════════════════════════════════════════
-# TC-10: Fase 7 tem fallback para quando transformers nao esta instalado
+# TC-10: Fase 6 usa litert-lm CLI real
 # ═══════════════════════════════════════════════════════════════
 
-def test_fase7_fallback():
-    """Fase 7 (cell 15) deve ter fallback para quando faltam deps."""
+def test_fase6_litertlm_inferencia():
+    """Fase 6 (cell 13) deve chamar litert-lm CLI para inferencia real."""
     nb = load_notebook()
-    cell15 = nb["cells"][15]
-    src15 = source_text(cell15)
-    assert "ensure_package" in src15 or "ImportError" in src15 or "except" in src15, \
-        "Cell 15 sem tratamento de erro para dependencias faltando"
+    cell13 = nb["cells"][13]
+    src13 = source_text(cell13)
+    assert "litert-lm" in src13, "Cell 13 sem litert-lm CLI"
+    assert "subprocess.run" in src13, "Cell 13 sem subprocess.run()"
+    assert "inferir" in src13, "Cell 13 sem funcao inferir()"
+    assert "Qwen3" in src13 or "qwena" in src13.lower(), "Cell 13 sem modelo Qwen3"
 
 
 # ═══════════════════════════════════════════════════════════════
