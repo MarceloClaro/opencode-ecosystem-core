@@ -214,6 +214,102 @@
         "Testes TDD (76) e validação 34/34 CAs confirmam integridade após alterações"
       ],
       "timestamp": 1784765433.831991
+    },
+    {
+      "round_id": "R135",
+      "objective": "Integração cloud R131 — MASWOS Cloud e AntiBridge conforme SPEC-935-R130",
+      "changes": [
+        "academic/maswos.py: adicionada detecção determinística de tópicos cloud",
+        "academic/maswos.py: definidos 8 estágios CLOUD_STAGES com agentes do catálogo",
+        "academic/maswos.py: criado run_maswos_cloud com dry-run seguro e roteamento genérico",
+        "integrations/antigravity/antigravity-bridge.ts: atualizado para v1.1 com capacidades cloud",
+        "integrations/antigravity/antigravity-bridge.ts: adicionados triggers e afinidades cloud",
+        "Validação direcionada executada em tests/test_r131_cloud_integration.py"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "A extensão por domínio preserva o pipeline MASWOS canônico para tópicos não-cloud.",
+        "Dry-run sem delegate_fn evita chamadas externas e torna os oito estágios observáveis como skipped.",
+        "O registro foi anexado de forma aditiva para preservar integralmente os ciclos existentes."
+      ],
+      "timestamp": 1784678400.0
+    },
+    {
+      "round_id": "R211",
+      "objective": "SPEC-935-R211: reconciliar MCPs, Core, OpenCode e LiteRT-LM com segurança e contexto determinístico",
+      "changes": [
+        "Handshake MCP e notificações corrigidos em mci e Synthetic University.",
+        "Configuração OpenCode determinística com 182 agentes, 3 MCPs stdio e IDs LiteRT canônicos.",
+        "Defaults LiteRT-LM endurecidos: loopback, URLs remotas com opt-in, CORS explícito e redaction.",
+        "Contexto 20480 alinhado entre chat, servidor, provider, scripts, opencode.json e plugin.",
+        "Falhas MCP offline marcadas com isError=true; provider transmite contexto ao subprocesso.",
+        "Testes direcionados passam; suíte raiz registra apenas limitações externas/ambiente."
+      ],
+      "score": 8.8,
+      "lessons": [
+        "Não tratar um daemon HTTP OpenAI-compatible como transporte MCP stdio.",
+        "Configuração implícita remota deve ser rejeitada; somente opt-in explícito pode abrir rede.",
+        "Catálogo, plugin, scripts e runtime precisam compartilhar uma única política de contexto.",
+        "Health checks offline devem sinalizar erro MCP para não parecerem sucesso.",
+        "A suíte completa ainda depende de build executável e serviços externos; isso não é evidência de inferência real."
+      ],
+      "timestamp": 1784798759.7709756
+    },
+    {
+      "round_id": "R212",
+      "objective": "Publicar notebook Colab e artigo no GitHub",
+      "changes": [
+        "criado repositorio orquestracao_ia_colab no GitHub",
+        "notebook orquestracao_ia_colab.ipynb publicado",
+        "artigo materia-orquestracao-multiagente.html publicado",
+        "README com badges e links Colab",
+        "PDF do artigo regenerado (15 pag, 65 refs)"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "Links do artigo atualizados para apontar ao GitHub real"
+      ],
+      "timestamp": 1784900109.4121716
+    },
+    {
+      "round_id": "R213",
+      "objective": "Polir notebook Colab: trim de comentarios + Fase 8 com LiteRT-LM CLI",
+      "changes": [
+        "Removeu blocos de comentario longos (20-30 linhas) de 8 celulas de codigo",
+        "Reescreveu Fase 8: HuggingFace -> LiteRT-LM CLI real (pip install, litert-lm import, litert-lm run)",
+        "6 paineis na Fase 8: instalacao, import modelo, arXiv, inferencia, metricas, benchmark",
+        "Reducao de ~9500 chars no total do notebook",
+        "Todas as 9 celulas de codigo com sintaxe Python validada"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "Comentarios longos antes de codigo executavel sao percebidos como 'celula vazia' no Colab",
+        "Fase 8 com litert-lm CLI e mais leve, didatica e executavel que HuggingFace transformers",
+        "JSON do notebook usa source como lista de strings SEM newlines - join com chr(10)",
+        "Manter modelo Qwen3-0.6B via litert-lm import reduz dependencias (sem torch/transformers)"
+      ],
+      "timestamp": 1784910504.2521977
+    },
+    {
+      "round_id": 213,
+      "objective": "Corrigir JSON corrompido + resolver redefinicoes de classes + adicionar imports faltantes (SPEC-935-R213)",
+      "changes": [
+        "Fix: JSON corrompido em cell 13 (f-string implicit concat quebrava JSON.parse)",
+        "Fix: Removido DataProcessor da cell 13 - ja definido na cell 5",
+        "Fix: Adicionados imports faltantes na cell 9 (Fase 4): abc, enum, typing, collections",
+        "Fix: Adicionados imports faltantes na cell 11 (Fase 5): typing, json",
+        "Fix: Adicionados imports faltantes na cell 15 (Fase 7): os, sys, json, typing",
+        "Test: 13/13 testes TDD passando (antes: 0/13)",
+        "Validado: JSON integro, 0 redefinicoes de classe, 18 celulas totais"
+      ],
+      "score": 0.99,
+      "lessons": [
+        "F-strings com concatenacao implicada em JSON sao perigosas: cada linha do source[] do notebook e uma string JSON independente",
+        "Sempre usar variavel intermediaria (msg = f\"...\") em vez de concatenacao entre linhas no formato notebook",
+        "Verificar JSON integrity apos cada edicao com json.load() antes de rodar testes",
+        "Toda celula de codigo precisa de imports no topo para passar no gate do test_each_code_cell_has_imports"
+      ],
+      "timestamp": 1784912667.9291198
     }
   ]
 }
