@@ -193,17 +193,18 @@ def test_phase_6_does_not_redefine_previous_classes():
 
 
 # ═══════════════════════════════════════════════════════════════
-# TC-07: LiteRT-LM CLI commands
+# TC-07: HuggingFace Transformers (experimento real)
 # ═══════════════════════════════════════════════════════════════
 
-def test_fase7_has_litertlm_cli():
-    """Fase 7 (cell 15) deve usar LiteRT-LM CLI, não HuggingFace."""
+def test_fase7_has_transformers():
+    """Fase 7 (cell 15) deve usar transformers pipeline real."""
     nb = load_notebook()
     cell15 = nb["cells"][15]
     src15 = source_text(cell15)
-    assert "litert-lm" in src15, "Cell 15 sem litert-lm CLI"
-    assert "transformers" not in src15, "Cell 15 ainda usa HuggingFace transformers"
-    assert "subprocess" in src15, "Cell 15 deve usar subprocess para CLI"
+    assert "transformers" in src15, "Cell 15 sem import transformers"
+    assert "pipeline" in src15, "Cell 15 sem pipeline HF"
+    assert "distilgpt2" in src15 or "generation" in src15, \
+        "Cell 15 sem modelo de geracao HF"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -241,16 +242,16 @@ def test_tdd_red_green_present():
 
 
 # ═══════════════════════════════════════════════════════════════
-# TC-10: Fase 7 tem LiteRT-LM (substitui arXiv da versão anterior)
+# TC-10: Fase 7 tem fallback para quando transformers nao esta instalado
 # ═══════════════════════════════════════════════════════════════
 
-def test_fase7_litertlm_usage():
-    """Fase 7 (cell 15) deve usar subprocess com litert-lm CLI."""
+def test_fase7_fallback():
+    """Fase 7 (cell 15) deve ter fallback para quando faltam deps."""
     nb = load_notebook()
     cell15 = nb["cells"][15]
     src15 = source_text(cell15)
-    assert "litert-lm" in src15, "Cell 15 sem litert-lm CLI"
-    assert "subprocess" in src15, "Cell 15 sem subprocess para CLI"
+    assert "ensure_package" in src15 or "ImportError" in src15 or "except" in src15, \
+        "Cell 15 sem tratamento de erro para dependencias faltando"
 
 
 # ═══════════════════════════════════════════════════════════════
