@@ -47,8 +47,13 @@ class EvolutionRegistry:
             try:
                 with open(self.state_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                self.cycles = [EvolutionCycle(**c) for c in data.get("cycles", [])]
-            except (json.JSONDecodeError, TypeError):
+                allowed = {"round_id", "objective", "changes", "score", "lessons", "timestamp"}
+                self.cycles = [
+                    EvolutionCycle(**{key: value for key, value in cycle.items() if key in allowed})
+                    for cycle in data.get("cycles", [])
+                    if isinstance(cycle, dict)
+                ]
+            except (json.JSONDecodeError, TypeError, ValueError):
                 self.cycles = []
 
     def save(self) -> None:
