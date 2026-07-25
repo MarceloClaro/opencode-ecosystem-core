@@ -7,7 +7,7 @@ Este arquivo é lido automaticamente pelo Claude Code sempre que ele opera neste
 
 ## O que é este projeto
 
-Um ecossistema de orquestração multiagente (`marceloclaro/orchestrator.py::MarceloClaroOrchestrator`) que integra: MCI (MetaBus/Blackboard/Reflexion — memória metacognitiva compartilhada), Trust Engine, Token Economy, um pipeline científico agentivo (EvoSci → Deep Research → Peer Review → Revision → Paper Composer), SDD/TDD, Loop Engineering, e um catálogo de 160+ agentes especializados.
+Um ecossistema de orquestração multiagente (`marceloclaro/orchestrator.py::MarceloClaroOrchestrator`) que integra: MCI (MetaBus/Blackboard/Reflexion — memória metacognitiva compartilhada), Trust Engine, Token Economy, um pipeline científico agentivo (EvoSci → Deep Research → Peer Review → Revision → Paper Composer), SDD/TDD, Loop Engineering, LLM Reduction Layer (6 componentes determinísticos), DataKnowledgeHub (16 fontes), e um catálogo de 186+ agentes especializados.
 
 ## Comandos essenciais
 

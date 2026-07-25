@@ -22,6 +22,7 @@ python3 -m marceloclaro.cli doctor      # está tudo saudável?
 python3 -m marceloclaro.cli helpdesk    # o que está errado E como corrigir
 python3 -m marceloclaro.cli ajuda       # este resumo, no terminal
 python3 -m marceloclaro.cli pesquisa "seu tema aqui"   # pesquisa científica (11 fontes)
+python3 -m marceloclaro.cli apresentacao pasta_da_producao  # deck MIRA
 ```
 
 ## O menu, explicado sem jargão
@@ -33,10 +34,23 @@ python3 -m marceloclaro.cli pesquisa "seu tema aqui"   # pesquisa científica (1
 | `[3]` Reportar conclusão | Diz se um agente terminou com sucesso ou falhou | O sistema aprende: agentes que dão certo ganham mais confiança para tarefas futuras |
 | `[4]` Consultar memória | Mostra o que o sistema já aprendeu | A "memória metacognitiva" é compartilhada por todo o ecossistema, não presa a um agente só |
 | `[5]` Status geral | Uma foto completa: agentes, confiança, economia | Útil para ver "o que está acontecendo agora" |
-| `[6]` Doctor | Checagem rápida (segundos) de saúde | Specs carregando, histórico intacto, CLIs externas instaladas |
+| `[6]` Doctor | Checagem rápida (segundos) de saúde | Inclui novo check de redução LLM (SPEC-969) |
 | `[7]` Ajuda | Este resumo | — |
 | `[8]` Helpdesk | Doctor + sugestão do que fazer para cada problema | Ex.: "CLI X ausente → rode este comando para instalar" |
-| `[9]` Pesquisa científica | Busca um tema em 11 fontes acadêmicas, baixa PDFs, converte para Markdown e gera fichamento + resenha crítica em ABNT/APA | Fontes: arXiv, Semantic Scholar, Crossref, OpenAlex, Europe PMC, SciELO, PubMed, bioRxiv/medRxiv, CORE, GitHub, Kaggle. Download via acesso aberto direto e, como último recurso para artigos pagos, `scihub-cli` (opcional) |
+| `[9]` Pesquisa científica | Busca um tema em 11 fontes acadêmicas, baixa PDFs, converte para Markdown e gera fichamento + resenha crítica em ABNT/APA | Agora com enriquecimento opcional do DataKnowledgeHub (16 fontes) com `use_data_hub=True` |
+| `[10]` Apresentação MIRA | Transforma `manuscrito.md` em deck HTML de cards de vidro animados | Esteira `extract → plan → copywrite → build → animate → validate`, com relatório de conformidade |
+
+## Comandos avançados (OpenCode CLI)
+
+Se você usa o OpenCode CLI, estes comandos customizados estão disponíveis:
+
+| Comando | O que faz | Ciclo |
+|---|---|---|
+| `/gametheory` | Executa teoria dos jogos local (Nash, Shapley, Pareto) sem LLM | R220 |
+| `/reduction` | Estatísticas da camada de redução de LLM | R220 |
+| `/templates` ou `/template` | Lista ou renderiza templates Jinja2 | R220 |
+| `/data` ou `/domains` | Consulta o DataKnowledgeHub (16 fontes) | R221 |
+| `/metrics` | Métricas de LLM calls saved, DataHub queries e saúde | R222 |
 
 ## Perguntas frequentes
 

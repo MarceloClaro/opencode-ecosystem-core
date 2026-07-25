@@ -1,6 +1,8 @@
-# Arquitetura: OpenCode Ecosystem Core v3.1
+# Arquitetura: OpenCode Ecosystem Core v3.2 (Redução LLM)
 
-Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, **On-Device LLM via LiteRT-LM (R48–R52)**, e os subsistemas legados de governança científica e jurídica.
+Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, sua fusão e loop real (R108–R109), os subsistemas de raciocínio e revisão (R113–R115), instalação e pesquisa CLI (R116/R120), apresentações MIRA (R123–R126), **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, **On-Device LLM via LiteRT-LM (R48–R52)**, e os subsistemas legados de governança científica e jurídica.
+
+> Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
 ---
 
@@ -47,6 +49,32 @@ graph TD
         Revision --> Composer
     end
     
+    %% LLM Reduction Layer (R220-R222)
+    subgraph RED [LLM Reduction Layer]
+        Router[RuleBasedRouter<br>25 regras + DecisionTree]
+        Class[LocalClassifier<br>TF-IDF + LogReg]
+        Whoosh[Whoosh3Engine<br>BM25F local < 30ms]
+        Game[GameTheoryLocal<br>Nash/Shapley/Pareto]
+        Jinja[Jinja2Engine<br>9 templates .j2]
+        DataHub[DataKnowledgeHub<br>16 fontes · 5 domínios]
+        Valid[CrossValidator<br>Calibration + Audit]
+        AuditTrail[AuditTrail<br>hash SHA-256]
+        
+        Router --> Class
+        DataHub --> Valid
+        Valid --> AuditTrail
+    end
+    
+    %% Observabilidade (R222)
+    subgraph OBS [Observabilidade]
+        Metrics[MetricsCollector<br>LLM calls saved]
+        HTTPMetrics[MetricsHTTPServer<br>/health · /metrics]
+        DocCheck[Doctor Check<br>llm_reduction_metrics]
+        
+        Metrics --> HTTPMetrics
+        DocCheck -.->|consulta| Metrics
+    end
+
     %% Camada Core
     subgraph Core [Core Subsystems]
         Trust[Trust Engine<br>Behavioral Gate]
@@ -63,11 +91,13 @@ graph TD
         MiroFish[MiroFish<br>Swarm c/ GraphMemory]
         SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
         Publishing[Publishing<br>LaTeX & Cover Designer]
-        Research[Research<br>Hub c/ OSINT]
-        Illus[Illustrations<br>Mermaid/MIRA/Graph]
+        Research[Research<br>Hub c/ OSINT<br>CLI pesquisa R120]
+        Illus[Illustrations<br>Mermaid/MIRA/Graph<br>Apresentações MIRA R123/R125]
+        MiraAgent[Agente mira-presenter<br>executor delegável R126]
         EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
         NoveltyV2["Novelty V2 (R98)<br>ContributionPointExtractor<br>PointwiseLiteratureRetriever<br>PointwiseNoveltyScorer<br>HierarchicalTaxonomyBuilder"]
     end
+    MiraAgent -.->|encarna o pipeline| Illus
 
     %% Seguranca e Qualidade
     subgraph Security ["Seguranca & Qualidade"]
@@ -108,11 +138,18 @@ graph TD
     Orchestrator -->|2. Recuperação em 2 níveis| HTM
     HTM -->|Lê Episódica| Mem
     Orchestrator -->|3. Gate & Roteia| Trust
-    Trust -->|Libera| Attn
+    Trust -->|Libera| RED
+    RED -->|conf >= 0.85| Router
+    Router -->|skip Attn| BB
+    RED -->|conf < 0.85| Attn
     Attn -->|Publica Volunteer| BB
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
+    
+    %% Conexões de observabilidade
+    Orchestrator -->|get_reduction_stats| Metrics
+    RED -.->|alimenta| Metrics
     
     %% Conexões do pipeline academico
     Orchestrator -->|5. Pipeline Academico| EvoSci
@@ -152,7 +189,7 @@ graph TD
     EGS -->|Reflete Resultado| MB
     
     %% Agentes
-    subgraph Agents [Catálogo de Agentes 160+]
+    subgraph Agents [Catálogo de Agentes 186+]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
@@ -216,6 +253,82 @@ Camada que envolve o servidor MCP com:
 - **ToolVetter:** detecta prompt injection, command injection, path traversal, SQLi
 - **RateLimiter:** token bucket por caller
 
+### Subsistema de Apresentações MIRA (R123–R126)
+
+O MIRA possui responsabilidades separadas, preservando o contrato atual
+do pipeline científico e sem substituir as superfícies de MCP ou LiteRT:
+
+| Elemento | Responsabilidade | Arquivo |
+|---|---|---|
+| `MiraEngine` | Cards avulsos com metáforas visuais em loop. | `illustrations/mira_engine.py` |
+| `MiraDeckPipeline` | Esteira `extract → plan → copywrite → build → animate → validate`. | `illustrations/mira_deck.py` |
+| `MiraPresentationAgent` (`mira-presenter`) | Executor registrado no Blackboard com capacidade exclusiva `apresentacao-mira`. | `illustrations/mira_agent.py` |
+| `present()` / `present_task()` | Via direta do CLI e via delegada com `report_completion`. | `marceloclaro/orchestrator.py` |
+
+**Processo:** `extract` separa as seções e marcadores; `plan` escolhe
+`quote`/`code`/`grid`/`concept`; `copywrite` limita títulos a seis palavras;
+`build` produz HTML autocontido de cards de vidro; `animate` aplica a Regra
+Zero (`@keyframes` e `infinite`); e `validate` gera `ConformityReport` e
+`CONFORMIDADE.md`. O agente `mira-presenter` fecha o laço
+`delegate → execute → report_completion` sob as regras do runtime.
+
+### LLM Reduction Layer (R220 — SPEC-967)
+Camada determinística de 6 componentes que substitui chamadas de LLM para
+tarefas rotineiras de roteamento, classificação, busca, debate e geração
+de documentos:
+
+| Componente | Arquivo | Substitui | Performance |
+|---|---|---|---|
+| **Whoosh3Engine** | `skills/tooling/whoosh3_engine.py` | Busca semântica via LLM | < 30ms |
+| **RuleBasedRouter** | `skills/tooling/rule_based_router.py` | AttentionRouter (LLM) | < 2ms |
+| **LocalClassifier** | `skills/tooling/local_classifier.py` | Classificação via Ollama/OpenAI | < 10ms |
+| **GameTheoryLocal** | `skills/tooling/game_theory_local.py` | Debate_strategies.py (146x LLM) | ~3ms |
+| **Jinja2Engine** | `skills/tooling/jinja2_templates/` | Geração de docs via LLM | < 5ms |
+| **DataKnowledgeHub** | `skills/tooling/data_knowledge_hub/` | Consulta a dados externos | < 50ms |
+
+**Fluxo no orquestrador:**
+1. Toda tarefa passa primeiro pelo `RuleBasedRouter` (25 regras regex + DecisionTree)
+2. Se confiança ≥ 0.85 e agente elegível → **usa rota direta (0 LLM)**
+3. Senão → fallback para `AttentionRouter` (LLM real)
+
+### DataKnowledgeHub (R221 — SPEC-968)
+Hub de 16 fontes de dados e conhecimento com validação cruzada, calibração
+de confiança e audit trail:
+
+| Domínio | Fontes |
+|---|---|
+| **Financeiro** | yfinance, BCB/SGS, FRED, World Bank, Alpha Vantage |
+| **Oficial** | IBGE/SIDRA, IPEA/Ipeadata, dados.gov.br (CKAN) |
+| **Conhecimento** | Wikipedia (pt/en), Wikidata (SPARQL), ConceptNet, Google Scholar |
+| **Datasets** | Zenodo, DataCite, UCI, Figshare |
+
+Integrado ao `ResearchHub`: quando `use_data_hub=True`, o manifesto de
+pesquisa ganha uma seção `data_knowledge` com dados validados e confiança
+calibrada.
+
+### Observabilidade (R222 — SPEC-969)
+Sistema leve de métricas e monitoramento:
+
+- **MetricsCollector** (`marceloclaro/metrics.py`): agrega stats do orquestrador,
+  LLMReductionLayer e DataKnowledgeHub
+- **MetricsHTTPServer**: servidor HTTP em socket nativo com rotas `/health` e `/metrics`
+- **Doctor check**: `llm_reduction_metrics` exibe LLM calls saved no diagnóstico
+
+```bash
+# Ver métricas no terminal
+python3 -c "from marceloclaro.metrics import get_collector; print(get_collector().render())"
+
+# Iniciar servidor HTTP de métricas
+python3 -c "
+from marceloclaro.metrics import MetricsCollector, MetricsHTTPServer
+c = MetricsCollector()
+s = MetricsHTTPServer(c, port=9090)
+s.start()
+input('Pressione Enter para parar...')
+s.stop()
+"
+```
+
 ### LiteRT-LM — On-Device LLM (R48–R52)
 O ecossistema integra o LiteRT-LM (Google AI Edge) como **provider LLM on-device**,
 eliminando a dependência de APIs externas para inferência:
@@ -263,6 +376,24 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R105 | Paper Composer | 8 CA |
 | SPEC-935-R106 | CI/CD Pipeline | 7 CA |
 | SPEC-935-R107 | Auditoria Sistêmica + Hardening | 9 CA |
+| SPEC-935-R108 | Fusão do Pipeline Científico no Orquestrador | 10 CA |
+| SPEC-935-R109 | Loop Engineering e estados terminais nomeados | 7 CA |
+| SPEC-935-R113 | Detector de falácias e vieses | 6 CA |
+| SPEC-935-R114 | ARCHE RLT | 6 CA |
+| SPEC-935-R115 | Revisão às cegas real | 7 CA |
+| SPEC-935-R116 | Instalação multiplataforma e helpdesk | 8 CA |
+| SPEC-935-R120 | Comando pesquisa no CLI | 7 CA |
+| SPEC-935-R123 | Pipeline MIRA de apresentações | 10 CA |
+| SPEC-963 | LLM Reduction — 6 componentes determinísticos | 8 CA |
+| SPEC-964 | Jinja2Templates — 9 templates .j2 | 7 CA |
+| SPEC-965 | DataKnowledgeHub — 16 fontes integradas | 10 CA |
+| SPEC-966 | CrossValidator + CalibrationLayer + AuditTrail | 8 CA |
+| SPEC-967 | Integração LLM Reduction ao Orquestrador | 7 CA |
+| SPEC-968 | Integração DataKnowledgeHub ao ResearchHub | 7 CA |
+| SPEC-969 | Observabilidade — metrics + health endpoints | 8 CA |
+| SPEC-935-R125 | MIRA como superfície de primeira classe | 8 CA |
+| SPEC-935-R126 | Agente-executor MIRA delegável | 8 CA |
+| SPEC-935-R127 | Documentação arquitetural em dupla-registro | 8 CA |
 | SPEC-935-R210 | LiteRT-LM Plugin Provider | 12 CA |
 | ADR-012 | LiteRT-LM Provider Integration | Decisão arquitetural |
 
@@ -282,3 +413,7 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | Cobertura estimada | 84% | **84%** |
 | CI/CD | GitHub Actions | **GitHub Actions** |
 | On-Device LLM | ❌ | **LiteRT-LM (Gemma 4, Qwen3)** |
+
+> O histórico de referência R47–R127 documenta 85 ciclos; a contagem
+> operacional corrente é mantida separadamente para não sobrescrever os
+> registros R211 nem convertê-los em validação externa.

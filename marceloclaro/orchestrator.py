@@ -16,25 +16,33 @@ da camada Metacognitive Interconnect (MCI):
 SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 """
 
+import copy
+import math
 import uuid
 import time
 import logging
-from typing import Dict, List, Any, Optional
+from dataclasses import dataclass
+from typing import Dict, List, Any, Iterable, Mapping, Optional
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from mci.metabus import metabus
 from mci.blackboard import blackboard
+from mci.task_runtime import AcceptanceCriterion, NanoTaskSpec, TaskGraph, TaskRuntime
 from synthetic_university import SyntheticUniversity
 from mci.reflexion import reflexion_engine  # noqa: F401 — ativa o singleton
 from mci import run_scientific_cycle, run_scientific_governance_pipeline
 from marceloclaro.agent_loader import register_all_agents, load_agent_definitions
+from skills.tooling.llm_reduction import LLMReductionLayer
 from transformer.attention import AttentionRouter
 from transformer.pipeline import TransformerPipeline, GradingHead
 from transformer.memory import HierarchicalMemory
 from sdd.spec_engine import spec_registry, spec_verifier
 from sdd.tdd_runner import tdd_runner, run_pytest
+from sdd.loop_spec import LoopSpecification, loop_spec_registry, is_stagnant
+from marceloclaro.doctor import run_doctor
+from marceloclaro.helpdesk import run_helpdesk
 from marceloclaro.inspiration_audit import audit_inspirations as run_inspiration_audit
 from trust import create_trust_engine
 from economy import TokenEconomy
@@ -49,11 +57,27 @@ logger = logging.getLogger("marceloclaro")
 logger.setLevel(logging.INFO)
 
 
+@dataclass(frozen=True)
+class NanoTaskAssignment:
+    """Atribuição auditável vinculada ao lease concedido pelo runtime."""
+
+    graph_id: str
+    task_id: str
+    agent_id: str
+    lease_token: str
+    attempt: int
+    lease_expires_at: float
+
+
 class MarceloClaroOrchestrator:
     """Orquestrador central metacognitivo do ecossistema."""
 
+    RUNTIME_MIN_TRUST = 0.25
+    RUNTIME_MAX_LOAD = 1.0
+
     def __init__(self, auto_load_agents: bool = True, pipeline_layers: int = 3,
-                 strict_sdd: bool = False):
+                 strict_sdd: bool = True,
+                 reduction_layer: Optional[LLMReductionLayer] = None):
         self.id = "marceloclaro"
         self.pending_cfps: Dict[str, List[str]] = {}  # task_id -> agentes elegíveis
         self.results: Dict[str, Any] = {}
@@ -62,8 +86,18 @@ class MarceloClaroOrchestrator:
         self.strict_sdd = strict_sdd
         self.task_specs: Dict[str, str] = {}  # task_id -> spec_id
 
+        # LLM Reduction Layer (SPEC-967): substitui AttentionRouter para
+        # tarefas com alta confiança no roteamento determinístico.
+        self.reduction_layer = reduction_layer or LLMReductionLayer()
+        self.reduction_threshold = 0.85
+        self._llm_calls_saved = 0
+
         # Trust Engine (SPEC-038): gate comportamental, esquecimento natural, outcomes
         self.trust = create_trust_engine()
+
+        # Runtime R212: DAGs locais, leases e recuperação com orçamento finito.
+        self.task_runtime = TaskRuntime(outcome_recorder=self._record_runtime_outcome)
+        self._assignment_explanations: Dict[tuple[str, str], Dict[str, Any]] = {}
 
         # Token Economy (SPEC-022~025): staking, slashing, fee market
         self.economy = TokenEconomy()
@@ -82,9 +116,13 @@ class MarceloClaroOrchestrator:
         self._task_counter = 0  # positional encoding das tarefas
 
         # Escuta o Global Workspace
-        metabus.subscribe("task.cfp", self._on_cfp)
-        metabus.subscribe("task.assigned", self._on_assigned)
-        metabus.subscribe("metacognition.reflected", self._on_reflected)
+        metabus.subscribe("task.cfp", self._on_cfp, f"{self.id}:task.cfp")
+        metabus.subscribe("task.assigned", self._on_assigned, f"{self.id}:task.assigned")
+        metabus.subscribe(
+            "metacognition.reflected",
+            self._on_reflected,
+            f"{self.id}:metacognition.reflected",
+        )
 
         if auto_load_agents:
             register_all_agents(metabus)
@@ -97,6 +135,54 @@ class MarceloClaroOrchestrator:
                 logger.info(f"[{self.id}] Catálogo registrado: {self.catalog_size} agentes especializados")
             except Exception as exc:
                 logger.warning(f"[{self.id}] Falha ao registrar catálogo: {exc}")
+
+        # MIRA R126: o executor só é registrado no modo normal; a opção
+        # auto_load_agents=False continua útil para testes e chamadas leves.
+        self._mira_agent = None
+        if auto_load_agents:
+            self.register_mira_agent()
+
+        # Loop Engineering R109: registro idempotente e independente do
+        # carregamento do catálogo, para que describe_scientific_loop() seja
+        # utilizável também em instâncias mínimas.
+        loop_spec_registry.register(LoopSpecification(
+            name="scientific-discovery",
+            description=(
+                "Repete o pipeline R101-R105 (scientific_discovery_pipeline) "
+                "até atingir o gate de exportação do R103 ou um estado "
+                "terminal de parada (no_op/blocked/stalled/exhausted/error)."
+            ),
+            use_when=(
+                "Uma rodada do pipeline científico não atingiu o gate de qualidade "
+                "e vale a pena tentar novas rodadas antes de desistir."
+            ),
+            trigger="manual",
+            trigger_justification=(
+                "O resultado de cada rodada (gate e readiness_score) muda a "
+                "decisão da próxima rodada — há feedback real entre voltas."
+            ),
+            goal="R103 aprova export_gate_passed e R104d/R105 completam com sucesso.",
+            goal_verifiable=True,
+            verification_level=1,
+            verification_description=(
+                "export_gate_passed do R103, threshold determinístico sobre "
+                "traceability/coverage do AuditGraph."
+            ),
+            architecture="solo",
+            terminal_states=["success", "no_op", "blocked", "stalled", "exhausted", "error"],
+            stagnation_window=3,
+            stagnation_threshold=0.02,
+            max_iterations=5,
+            memory_location=(
+                "mci.metabus.metabus.memory (episodic + confidence_ledger, "
+                "persistido em .mci_state/)"
+            ),
+            guardrails=[
+                "Erro interrompe o loop imediatamente.",
+                "Estagnação para o loop antes do teto de orçamento.",
+                "R101 sem ideias é no_op, não sucesso.",
+            ],
+        ))
 
     # ------------------------------------------------------------------
     # 1. PERCEPÇÃO METACOGNITIVA
@@ -135,6 +221,328 @@ class MarceloClaroOrchestrator:
         logger.info(f"[{self.id}] Tarefa delegada: {task_id} — {description}")
         return task_id
 
+    # ------------------------------------------------------------------
+    # 2a. RUNTIME NANOGRANULAR (SPEC-935-R212)
+    # ------------------------------------------------------------------
+    def _record_runtime_outcome(self, action_id: str, success: bool) -> None:
+        """Atualiza trust sem tornar a conclusão do runtime dependente do ledger."""
+
+        try:
+            self.trust.learn(action_id, success=success)
+        except Exception as exc:
+            logger.warning(
+                "[%s] Não foi possível registrar outcome do runtime para %s: %s",
+                self.id,
+                action_id,
+                exc,
+            )
+
+    def nanogranulate(
+        self,
+        objective: str,
+        required_capabilities: Iterable[str] = (),
+        expected_artifact: Optional[str] = None,
+        acceptance_criteria: Optional[Iterable[AcceptanceCriterion]] = None,
+    ) -> TaskGraph:
+        """Decompõe um objetivo pela implementação determinística do runtime."""
+
+        return self.task_runtime.nanogranulate(
+            objective=objective,
+            required_capabilities=required_capabilities,
+            expected_artifact=expected_artifact,
+            acceptance_criteria=acceptance_criteria,
+        )
+
+    def submit_graph(self, graph: TaskGraph) -> str:
+        """Submete o DAG sem contornar as validações fail-closed do runtime."""
+
+        return self.task_runtime.submit_graph(graph)
+
+    @staticmethod
+    def _unit_metric(value: Any) -> Optional[float]:
+        """Retorna métrica finita em ``[0, 1]`` ou ``None`` se inválida."""
+
+        if isinstance(value, bool):
+            return None
+        try:
+            metric = float(value)
+        except (TypeError, ValueError):
+            return None
+        if not math.isfinite(metric) or not 0.0 <= metric <= 1.0:
+            return None
+        return metric
+
+    def _runtime_candidate_snapshot(self) -> tuple[Dict[str, Any], ...]:
+        """Converte o registry legado em candidatos explícitos e imutáveis."""
+
+        candidates: List[Dict[str, Any]] = []
+        for card in blackboard.registry.values():
+            candidate = dict(card.to_dict())
+            candidate["load"] = 0.0 if candidate.get("status") == "available" else 1.0
+            candidate["circuit_open"] = False
+            candidates.append(candidate)
+        return tuple(candidates)
+
+    def _gate_runtime_candidates(
+        self,
+        task: NanoTaskSpec,
+        candidates: Iterable[object],
+    ) -> tuple[List[Dict[str, Any]], Dict[str, List[str]], Dict[str, Dict[str, Any]]]:
+        """Aplica capability/status/trust/circuit/load antes de qualquer score."""
+
+        eligible_by_id: Dict[str, Dict[str, Any]] = {}
+        excluded: Dict[str, List[str]] = {}
+        evidence: Dict[str, Dict[str, Any]] = {}
+        seen_agent_ids: set[str] = set()
+        required = set(task.required_capabilities)
+
+        for index, raw_candidate in enumerate(candidates):
+            fallback_id = f"candidate-{index}"
+            if not isinstance(raw_candidate, Mapping):
+                excluded[fallback_id] = ["invalid_candidate"]
+                evidence[fallback_id] = {
+                    "passed": False,
+                    "reasons": ["invalid_candidate"],
+                }
+                continue
+
+            candidate = dict(raw_candidate)
+            raw_agent_id = candidate.get("agent_id")
+            if not isinstance(raw_agent_id, str) or not raw_agent_id.strip():
+                excluded[fallback_id] = ["missing_agent_id"]
+                evidence[fallback_id] = {
+                    "passed": False,
+                    "reasons": ["missing_agent_id"],
+                }
+                continue
+            agent_id = raw_agent_id.strip()
+            if agent_id in seen_agent_ids:
+                eligible_by_id.pop(agent_id, None)
+                excluded[agent_id] = ["duplicate_agent_id"]
+                evidence[agent_id] = {
+                    "passed": False,
+                    "reasons": ["duplicate_agent_id"],
+                }
+                continue
+            seen_agent_ids.add(agent_id)
+            reasons: List[str] = []
+
+            raw_capabilities = candidate.get("capabilities", ())
+            if isinstance(raw_capabilities, str):
+                capabilities = (raw_capabilities.strip(),) if raw_capabilities.strip() else ()
+            else:
+                try:
+                    declared_capabilities = tuple(raw_capabilities)
+                except TypeError:
+                    capabilities = ()
+                    reasons.append("invalid_capabilities")
+                else:
+                    if any(
+                        not isinstance(capability, str)
+                        for capability in declared_capabilities
+                    ):
+                        reasons.append("invalid_capabilities")
+                    capabilities = tuple(
+                        capability.strip()
+                        for capability in declared_capabilities
+                        if isinstance(capability, str) and capability.strip()
+                    )
+            missing = sorted(required - set(capabilities))
+            if missing:
+                reasons.append("missing_capabilities:" + ",".join(missing))
+
+            status = candidate.get("status")
+            if status != "available":
+                reasons.append("status_not_available")
+
+            raw_circuit = candidate.get("circuit_open", False)
+            if not isinstance(raw_circuit, bool):
+                circuit_open = True
+                reasons.append("invalid_circuit_state")
+            else:
+                circuit_open = raw_circuit
+                if circuit_open:
+                    reasons.append("circuit_open")
+
+            raw_load = candidate.get("load", 0.0)
+            load = self._unit_metric(raw_load)
+            if load is None:
+                load = 1.0
+                reasons.append("invalid_load")
+            elif load >= self.RUNTIME_MAX_LOAD:
+                reasons.append("load_at_capacity")
+
+            supplied_trust = "trust_score" in candidate
+            trust_score = self._unit_metric(candidate.get("trust_score"))
+            if supplied_trust and trust_score is None:
+                reasons.append("invalid_trust_score")
+
+            trust_allowed = False
+            trust_reason = "trust gate sem decisão"
+            try:
+                trust_decision = self.trust.execute(f"delegate:{agent_id}")
+                trust_allowed = bool(getattr(trust_decision, "allowed", False))
+                trust_reason = str(getattr(trust_decision, "reason", trust_reason))
+                if trust_score is None and not supplied_trust:
+                    trust_score = self._unit_metric(
+                        getattr(trust_decision, "trust_score", None)
+                    )
+            except Exception as exc:
+                trust_reason = f"trust gate indisponível: {exc}"
+                reasons.append("trust_gate_error")
+            if not trust_allowed:
+                reasons.append("trust_denied")
+            if trust_score is None:
+                trust_score = 0.5 if trust_allowed and not supplied_trust else 0.0
+            if trust_score < self.RUNTIME_MIN_TRUST:
+                reasons.append("trust_below_minimum")
+
+            live_confidence = metabus.memory.confidence_ledger.get(
+                agent_id,
+                candidate.get("confidence_score", 0.5),
+            )
+            normalized = dict(candidate)
+            normalized.update({
+                "agent_id": agent_id,
+                "capabilities": list(dict.fromkeys(capabilities)),
+                "status": status,
+                "trust_score": trust_score,
+                "confidence_score": live_confidence,
+                "load": load,
+                "circuit_open": circuit_open,
+            })
+
+            # Evita repetir uma mesma razão quando dois sinais de trust falham.
+            reasons = list(dict.fromkeys(reasons))
+            gate_evidence = {
+                "passed": not reasons,
+                "reasons": list(reasons),
+                "required_capabilities": sorted(required),
+                "declared_capabilities": list(normalized["capabilities"]),
+                "status": status,
+                "trust_score": trust_score,
+                "trust_allowed": trust_allowed,
+                "trust_reason": trust_reason,
+                "circuit_open": circuit_open,
+                "load": load,
+            }
+            evidence[agent_id] = gate_evidence
+            if reasons:
+                excluded[agent_id] = reasons
+            else:
+                eligible_by_id[agent_id] = normalized
+
+        return list(eligible_by_id.values()), excluded, evidence
+
+    def dispatch_ready(
+        self,
+        graph_id: str,
+        candidates: Optional[Iterable[Mapping[str, Any]]] = None,
+    ) -> tuple[NanoTaskAssignment, ...]:
+        """Ranqueia a fronteira pronta e concede leases somente após hard gates."""
+
+        if candidates is None:
+            candidate_snapshot: tuple[object, ...] = self._runtime_candidate_snapshot()
+        elif isinstance(candidates, Mapping):
+            candidate_snapshot = (dict(candidates),)
+        else:
+            candidate_snapshot = tuple(candidates)
+
+        assignments: List[NanoTaskAssignment] = []
+        for task in self.task_runtime.ready_tasks(graph_id):
+            eligible, excluded, gate_evidence = self._gate_runtime_candidates(
+                task,
+                candidate_snapshot,
+            )
+            routing = self.attention_router.explain(
+                task.description,
+                list(task.required_capabilities),
+                eligible,
+            )
+            for agent_id, reasons in routing["excluded"].items():
+                excluded.setdefault(agent_id, []).extend(reasons)
+
+            ranking = list(routing["ranking"])
+            ranked_ids = [agent_id for agent_id, _ in ranking]
+            ranking_weights = dict(ranking)
+            scores = {
+                agent_id: {
+                    **{
+                        head: routing["heads"][head][agent_id]
+                        for head in routing["heads"]
+                    },
+                    "utility": routing["utility"][agent_id],
+                    "ranking_weight": ranking_weights[agent_id],
+                }
+                for agent_id in ranked_ids
+            }
+            explanation: Dict[str, Any] = {
+                "graph_id": graph_id,
+                "task_id": task.task_id,
+                "selected_agent_id": None,
+                "eligible_agents": ranked_ids,
+                "excluded_agents": excluded,
+                "hard_gate_results": gate_evidence,
+                "scores": scores,
+                "weights": dict(routing["weights"]),
+                "ranking": ranking,
+                "lease": None,
+                "hard_gates": {
+                    "capabilities": "all_of",
+                    "status": "available",
+                    "minimum_trust": self.RUNTIME_MIN_TRUST,
+                    "circuit_open": False,
+                    "maximum_load_exclusive": self.RUNTIME_MAX_LOAD,
+                },
+            }
+
+            key = (graph_id, task.task_id)
+            if not ranking:
+                reason = "nenhum candidato passou por todos os hard gates"
+                self.task_runtime.block_task(graph_id, task.task_id, reason)
+                explanation["blocked_reason"] = reason
+                self._assignment_explanations[key] = copy.deepcopy(explanation)
+                continue
+
+            selected_agent_id = ranking[0][0]
+            lease = self.task_runtime.lease_task(
+                graph_id,
+                task.task_id,
+                selected_agent_id,
+            )
+            assignment = NanoTaskAssignment(
+                graph_id=graph_id,
+                task_id=task.task_id,
+                agent_id=selected_agent_id,
+                lease_token=lease.token,
+                attempt=lease.attempt,
+                lease_expires_at=lease.expires_at,
+            )
+            assignments.append(assignment)
+            explanation["selected_agent_id"] = selected_agent_id
+            explanation["lease"] = {
+                "token": lease.token,
+                "attempt": lease.attempt,
+                "issued_at": lease.issued_at,
+                "expires_at": lease.expires_at,
+            }
+            self._assignment_explanations[key] = copy.deepcopy(explanation)
+
+        return tuple(assignments)
+
+    def explain_assignment(self, graph_id: str, task_id: str) -> Dict[str, Any]:
+        """Retorna cópia da decisão persistida; nunca fabrica auditoria ausente."""
+
+        self.task_runtime.task_state(graph_id, task_id)
+        key = (graph_id, task_id)
+        try:
+            explanation = self._assignment_explanations[key]
+        except KeyError:
+            raise KeyError(
+                f"não há decisão de atribuição para {graph_id!r}/{task_id!r}"
+            ) from None
+        return copy.deepcopy(explanation)
+
     def _on_cfp(self, event: Dict[str, Any]):
         """Recebe o Call for Proposals e roteia via Multi-Head Attention.
 
@@ -146,31 +554,76 @@ class MarceloClaroOrchestrator:
         description = payload.get("description", "")
         eligible = payload.get("eligible_agents", [])
 
-        # Gate comportamental (Trust Engine): filtra agentes não confiáveis
+        # Gate comportamental (Trust Engine): qualquer erro ou negação exclui.
         gated = []
         for agent_id in eligible:
-            decision = self.trust.execute(f"delegate:{agent_id}")
-            if decision.allowed:
+            try:
+                decision = self.trust.execute(f"delegate:{agent_id}")
+            except Exception as exc:
+                logger.warning(
+                    "[%s] BehavioralGate indisponível para %s: %s",
+                    self.id,
+                    agent_id,
+                    exc,
+                )
+                continue
+            if bool(getattr(decision, "allowed", False)):
                 gated.append(agent_id)
             else:
-                logger.info(f"[{self.id}] BehavioralGate bloqueou {agent_id}: {decision.reason}")
-        eligible = gated or eligible  # fallback: nunca deixar a tarefa órfã
-        self.pending_cfps[task_id] = eligible
+                logger.info(
+                    "[%s] BehavioralGate bloqueou %s: %s",
+                    self.id,
+                    agent_id,
+                    getattr(decision, "reason", "decisão sem justificativa"),
+                )
+        eligible = gated
+        self.pending_cfps[task_id] = list(eligible)
 
         if not eligible:
             logger.warning(f"[{self.id}] Nenhum agente elegível para {task_id}")
+            task = blackboard.tasks.get(task_id)
+            if task is not None:
+                task.status = "blocked"
+                task.assigned_to = None
             return
 
-        # Roteamento por atenção multi-cabeça (semântica × capacidade × confiança × carga)
-        task = blackboard.tasks.get(task_id)
-        required = task.required_capabilities if task else []
-        cards = [blackboard.registry[a].to_dict() for a in eligible if a in blackboard.registry]
+        # ─── LLM Reduction Layer (SPEC-967): tenta roteamento determinístico ───
+        # Se a confiança for ≥ threshold e o agente sugerido for elegível,
+        # evita a chamada ao AttentionRouter (LLM real).
+        reduction_result = self.reduction_layer.route(description)
+        reduction_agent = reduction_result.get("agent", "")
+        reduction_conf = reduction_result.get("confidence", 0.0)
+        chosen: Optional[str] = None
 
-        self._task_counter += 1
-        ranking = self.attention_router.route(description, required, cards,
-                                              positional_index=self._task_counter)
-        chosen = ranking[0][0] if ranking else eligible[0]
-        logger.info(f"[{self.id}] Atenção rankeou {task_id}: {ranking[:3]}")
+        if (reduction_conf >= self.reduction_threshold
+                and reduction_agent in eligible):
+            chosen = reduction_agent
+            self._llm_calls_saved += 1
+            logger.info(
+                "[%s] Redução LLM: %s → %s (conf=%.2f, método=%s)",
+                self.id, task_id, chosen, reduction_conf,
+                reduction_result.get("method", "?"),
+            )
+        else:
+            # Fallback: roteamento por atenção multi-cabeça
+            task = blackboard.tasks.get(task_id)
+            required = task.required_capabilities if task else []
+            cards = [blackboard.registry[a].to_dict() for a in eligible if a in blackboard.registry]
+
+            self._task_counter += 1
+            ranking = self.attention_router.route(description, required, cards,
+                                                  positional_index=self._task_counter)
+            self.pending_cfps[task_id] = [agent_id for agent_id, _ in ranking]
+            if not ranking:
+                logger.warning(f"[{self.id}] Nenhum agente passou pelos hard gates para {task_id}")
+                if task is not None:
+                    task.status = "blocked"
+                    task.assigned_to = None
+                return
+            chosen = ranking[0][0]
+            logger.info(f"[{self.id}] Atenção rankeou {task_id}: {ranking[:3]}")
+
+        # chosen está definido neste ponto
 
         # Token Economy: cotação de fee e stake do agente escolhido
         try:
@@ -251,6 +704,19 @@ class MarceloClaroOrchestrator:
         )
 
     # ------------------------------------------------------------------
+    # LLM REDUCTION STATS (SPEC-967)
+    # ------------------------------------------------------------------
+    def get_reduction_stats(self) -> Dict[str, Any]:
+        """Retorna estatísticas da camada de redução de LLM."""
+        stats = dict(self.reduction_layer.stats)
+        stats["_llm_calls_saved"] = self._llm_calls_saved
+        if hasattr(self.reduction_layer, "get_stats"):
+            extra = self.reduction_layer.get_stats()
+            if isinstance(extra, dict):
+                stats["router_stats"] = extra
+        return stats
+
+    # ------------------------------------------------------------------
     # AUDITORIA
     # ------------------------------------------------------------------
     def status(self) -> Dict[str, Any]:
@@ -273,6 +739,44 @@ class MarceloClaroOrchestrator:
             "antigravity": antigravity_bridge.status(),
             "evolution_avg_score": evolution_registry.average_score(),
         }
+
+    # ------------------------------------------------------------------
+    # DOCTOR — DIAGNÓSTICO DE SAÚDE DO ECOSSISTEMA (SPEC-935-R110)
+    # ------------------------------------------------------------------
+    def doctor(self) -> Dict[str, Any]:
+        """
+        Diagnóstico estrutural rápido do ecossistema (specs formais,
+        registro de evolução, loop specs, memória metacognitiva,
+        configuração do opencode.json, prática de correção pública de
+        overclaims). Complementa — não substitui — a suíte pytest
+        completa (``scripts/quality_report.py``).
+        """
+        report = run_doctor()
+        report["catalog_agents"] = self.catalog_size
+        report["trust_status"] = self.trust.status
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="diagnóstico de saúde do ecossistema (doctor)",
+            reflection=(
+                f"Doctor: {report['overall']} — {report['checks_passed']} ok, "
+                f"{report['checks_warned']} avisos, {report['checks_failed']} falhas."
+            ),
+            score={"healthy": 1.0, "degraded": 0.6, "unhealthy": 0.1}.get(report["overall"], 0.5),
+        )
+        return report
+
+    def helpdesk(self) -> Dict[str, Any]:
+        """Executa o diagnóstico guiado e registra a reflexão resultante."""
+        report = run_helpdesk()
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="helpdesk (diagnóstico guiado)",
+            reflection=report["summary"],
+            score={"healthy": 1.0, "degraded": 0.6, "unhealthy": 0.1}.get(
+                report["overall"], 0.5,
+            ),
+        )
+        return report
 
     def list_agents(self) -> List[Dict[str, Any]]:
         return [card.to_dict() for card in blackboard.registry.values()]
@@ -506,6 +1010,422 @@ class MarceloClaroOrchestrator:
             score=(summary["final_score"] or 0) / 10.0,
         )
         return summary
+
+    # ------------------------------------------------------------------
+    # FUSÃO DO PIPELINE CIENTÍFICO R101-R105 (SPEC-935-R108)
+    # ------------------------------------------------------------------
+    def scientific_discovery_pipeline(self, seed_domain: str, max_rounds: int = 3,
+                                      venue: str = "abnt",
+                                      strict_gates: bool = True) -> Dict[str, Any]:
+        """Executa EvoSci → Deep Research → Peer Review → Revision → Composer.
+
+        A implementação mantém as fronteiras dos cinco estágios, mas faz a
+        orquestração no MarceloClaro: o gate de exportação do R103 é uma
+        barreira real, as confidências são calibradas com evidência do run e
+        a avaliação metacognitiva usa os próprios rastros da execução.
+        Erros são retornados como dados estruturados; não há alegação de
+        validação externa ou superioridade implícita.
+        """
+        from mci.confidence_calibrator import calibrate_confidence
+        from mci.metacognitive_evaluator import MetacognitiveEvaluator, MetacognitiveTrace
+
+        start = time.time()
+        timeline: Dict[str, float] = {}
+        stages: Dict[str, Any] = {}
+        calibrated_confidences: Dict[str, Any] = {}
+        traces: List[Any] = []
+
+        def _calibrate(stage: str, raw_confidence: float,
+                       succeeded: bool) -> Dict[str, Any]:
+            claim: Dict[str, Any] = {}
+            if not succeeded:
+                claim["adversarial_findings"] = [
+                    f"ALERTA: estágio {stage} não foi bem-sucedido",
+                    f"CONFOUNDER: resultado do estágio {stage} não atingiu o critério",
+                ]
+            result = calibrate_confidence(
+                claim=claim,
+                context={
+                    "reproducibility_score": max(0.0, min(1.0, raw_confidence)),
+                    "actual_outcome": 1 if succeeded else 0,
+                    "actual_verdict": "supported" if succeeded else "refuted",
+                },
+            )
+            calibrated_confidences[stage] = result
+            return result
+
+        def _trace(stage: str, outcome: str, reflection: str,
+                   before: float, after: float, evidence_count: int = 1,
+                   abstained: bool = False,
+                   error_type: Optional[str] = None) -> None:
+            traces.append(MetacognitiveTrace(
+                action_id=f"scientific_pipeline.{stage}",
+                context=f"{stage} — {seed_domain[:60]}",
+                outcome=outcome,
+                reflection=reflection,
+                confidence_before=before,
+                confidence_after=after,
+                strategy="scientific_discovery_pipeline",
+                error_type=error_type,
+                evidence_count=evidence_count,
+                abstained=abstained,
+            ))
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"{stage}: {seed_domain[:80]}",
+                reflection=reflection,
+                score=after,
+            )
+            metabus.publish_subsystem_event(
+                "scientific_pipeline", f"{stage}.completed",
+                {"outcome": outcome, "confidence": after},
+                source_agent=self.id,
+            )
+            self.trust.learn(
+                f"scientific_pipeline:{stage}", success=(outcome == "success"),
+            )
+
+        try:
+            # R101 — EvoSci
+            t0 = time.time()
+            from agentic_science_v2.orchestrator import run_agentic_science_v2
+            r101 = run_agentic_science_v2(seed_domain=seed_domain, max_rounds=max_rounds)
+            timeline["r101"] = round(time.time() - t0, 1)
+            stages["r101"] = r101
+
+            ideas = [
+                idea
+                for cycle in r101.get("history", [])
+                for idea in cycle.get("ideas", [])
+            ]
+            best_idea = max(
+                ideas,
+                key=lambda item: (item.get("scores", {}) or {}).get("overall", 0.0),
+            ) if ideas else {}
+            best_content = (
+                best_idea.get("hypothesis")
+                or best_idea.get("title")
+                or seed_domain
+            )
+            r101_confidence = float(
+                (best_idea.get("scores", {}) or {}).get("overall", 0.0)
+            ) if ideas else 0.0
+            calibration = _calibrate("r101", r101_confidence, bool(ideas))
+            _trace(
+                "r101", "success" if ideas else "abstained",
+                f"EvoSci gerou {len(ideas)} ideia(s); melhor score bruto "
+                f"{r101_confidence:.2f}, calibrado "
+                f"{calibration['calibrated_confidence']:.2f}.",
+                before=r101_confidence,
+                after=calibration["calibrated_confidence"],
+                evidence_count=len(ideas),
+                abstained=not ideas,
+            )
+
+            # R102 — Deep Research
+            t1 = time.time()
+            from agentic_science_v2.deep_research import run_deep_research
+            r102 = run_deep_research(
+                question=best_content,
+                max_rounds=max_rounds,
+                max_depth=3,
+            )
+            timeline["r102"] = round(time.time() - t1, 1)
+            stages["r102"] = r102
+            r102_reports = r102.get("reports", [])
+            r102_failed = r102.get("status") == "error"
+            r102_confidence = 0.0 if r102_failed else (
+                float(r102_reports[-1].get("confidence", 0.5))
+                if r102_reports else 0.5
+            )
+            calibration = _calibrate("r102", r102_confidence, not r102_failed)
+            _trace(
+                "r102", "failure" if r102_failed else "success",
+                f"Deep research concluída com confiança bruta {r102_confidence:.2f}, "
+                f"calibrada {calibration['calibrated_confidence']:.2f}.",
+                before=r102_confidence,
+                after=calibration["calibrated_confidence"],
+                evidence_count=len(r102_reports),
+                error_type="pipeline_error" if r102_failed else None,
+            )
+
+            # R103 — Peer Review
+            t2 = time.time()
+            from agentic_science_v2.review_agent import OrchestratorReviewer
+            answer = r102_reports[-1].get("summary", "") if r102_reports else best_content
+            review_package = OrchestratorReviewer().review({
+                "title": seed_domain,
+                "abstract": answer[:500],
+                "sections": ["Introduction", "Methods", "Results", "Discussion", "Conclusion"],
+                "citations": [],
+            })
+            r103 = review_package.to_dict()
+            timeline["r103"] = round(time.time() - t2, 1)
+            stages["r103"] = r103
+            r103_confidence = float(r103.get("overall_score", 0.5))
+            gate_passed = bool(r103.get("export_gate_passed", False))
+            calibration = _calibrate("r103", r103_confidence, gate_passed)
+            _trace(
+                "r103", "success" if gate_passed else "blocked",
+                f"Peer review: overall_score={r103_confidence:.2f}, "
+                f"traceability={r103.get('traceability', 0)}, "
+                f"coverage={r103.get('coverage', 0)}, "
+                f"gate={'APROVADO' if gate_passed else 'REPROVADO'}.",
+                before=r103_confidence,
+                after=calibration["calibrated_confidence"],
+                evidence_count=r103.get("critiques_count", 0),
+                abstained=not gate_passed,
+            )
+
+            gate_decision = {
+                "passed": gate_passed,
+                "traceability": r103.get("traceability", 0),
+                "coverage": r103.get("coverage", 0),
+                "reason": (
+                    "R103 export_gate_passed"
+                    if gate_passed
+                    else "R103 reprovou export_gate_passed (traceability/coverage abaixo do mínimo)"
+                ),
+            }
+
+            if strict_gates and not gate_passed:
+                timeline["total"] = round(time.time() - start, 1)
+                metabus.publish_subsystem_event(
+                    "scientific_pipeline", "gate.blocked",
+                    gate_decision, source_agent=self.id,
+                )
+                metacog = MetacognitiveEvaluator().evaluate(traces)
+                return {
+                    "status": "blocked",
+                    "reason": gate_decision["reason"],
+                    "seed_domain": seed_domain,
+                    "venue": venue,
+                    "timeline": timeline,
+                    "stages": stages,
+                    "gate_decision": gate_decision,
+                    "calibrated_confidences": calibrated_confidences,
+                    "metacognitive_report": metacog,
+                }
+
+            # R104d — Revision
+            t3 = time.time()
+            from agentic_science_v2.revision_agent import create_revision
+            manuscript_seed = answer or f"Manuscrito gerado automaticamente para {seed_domain}."
+            r104d = create_revision(review_package.to_revision_contract(), manuscript_seed)
+            timeline["r104d"] = round(time.time() - t3, 1)
+            stages["r104d"] = r104d
+            r104d_failed = r104d.get("status") == "error"
+            r104d_report = r104d.get("report", {}) or {}
+            r104d_confidence = float(r104d_report.get("traceability_pct", 0)) / 100.0
+            calibration = _calibrate("r104d", r104d_confidence, not r104d_failed)
+            _trace(
+                "r104d", "failure" if r104d_failed else "success",
+                f"Revisão de manuscrito: traceability_pct="
+                f"{r104d_report.get('traceability_pct', 0)}, "
+                f"integridade={r104d.get('integrity', {}).get('intact')}, "
+                f"auto_rollback={r104d.get('integrity', {}).get('auto_rolled_back', False)}.",
+                before=r104d_confidence,
+                after=calibration["calibrated_confidence"],
+                evidence_count=r104d_report.get("total_claims", 0),
+                error_type="pipeline_error" if r104d_failed else None,
+            )
+
+            # R105 — Paper Composer
+            t4 = time.time()
+            from agentic_science_v2.paper_composer import compose_paper as compose_paper_core
+            revised_manuscript = manuscript_seed
+            for revision in reversed(r104d.get("revisions", [])):
+                proposal = revision.get("proposal") or {}
+                if proposal.get("revised_text"):
+                    revised_manuscript = proposal["revised_text"]
+                    break
+            r105 = compose_paper_core(
+                title=seed_domain,
+                discoveries=[best_idea] if best_idea else [],
+                evidence_graph=r102.get("evidence_graph", {}),
+                review=r103,
+                revisions=r104d.get("revisions", []),
+                venue=venue,
+            )
+            timeline["r105"] = round(time.time() - t4, 1)
+            stages["r105"] = r105
+            r105_failed = r105.get("status") == "error"
+            r105_confidence = 0.0 if r105_failed else float(
+                r105.get("consistency_report", {}).get("overall_score", 50)
+            ) / 100.0
+            calibration = _calibrate("r105", r105_confidence, not r105_failed)
+            _trace(
+                "r105", "failure" if r105_failed else "success",
+                "Composição final: consistency "
+                f"overall_score={r105.get('consistency_report', {}).get('overall_score', 'N/A')}.",
+                before=r105_confidence,
+                after=calibration["calibrated_confidence"],
+                error_type="pipeline_error" if r105_failed else None,
+            )
+
+            timeline["total"] = round(time.time() - start, 1)
+            metacog = MetacognitiveEvaluator().evaluate(traces)
+            return {
+                "status": "completed",
+                "seed_domain": seed_domain,
+                "venue": venue,
+                "timeline": timeline,
+                "stages": stages,
+                "gate_decision": gate_decision,
+                "calibrated_confidences": calibrated_confidences,
+                "metacognitive_report": metacog,
+                "revised_manuscript": revised_manuscript,
+            }
+
+        except Exception as exc:
+            logger.exception("[%s] Falha no scientific_discovery_pipeline: %s", self.id, exc)
+            _trace(
+                "pipeline", "failure",
+                f"Pipeline científico interrompido por exceção: {exc}",
+                before=0.5,
+                after=0.1,
+                error_type="unhandled_exception",
+            )
+            timeline["total"] = round(time.time() - start, 1)
+            metacog = MetacognitiveEvaluator().evaluate(traces)
+            return {
+                "status": "error",
+                "error": str(exc),
+                "seed_domain": seed_domain,
+                "venue": venue,
+                "timeline": timeline,
+                "stages": stages,
+                "calibrated_confidences": calibrated_confidences,
+                "metacognitive_report": metacog,
+            }
+
+    # ------------------------------------------------------------------
+    # LOOP ENGINEERING (SPEC-935-R109)
+    # ------------------------------------------------------------------
+    def describe_scientific_loop(self) -> Dict[str, Any]:
+        """Expõe a especificação formal registrada para o loop científico."""
+        loop = loop_spec_registry.get("scientific-discovery")
+        return loop.to_dict() if loop else {}
+
+    def run_scientific_discovery_loop(
+        self,
+        seed_domain: str,
+        max_iterations: int = 5,
+        stagnation_window: int = 3,
+        stagnation_threshold: float = 0.02,
+        venue: str = "abnt",
+    ) -> Dict[str, Any]:
+        """Repete o pipeline até um estado terminal explicitamente nomeado."""
+        loop = loop_spec_registry.get("scientific-discovery")
+        max_iterations = (
+            max_iterations if max_iterations > 0
+            else loop.max_iterations if loop else 5
+        )
+        start = time.time()
+        readiness_history: List[float] = []
+        iterations: List[Dict[str, Any]] = []
+        terminal_state = "exhausted"
+        reason = "Orçamento de iterações esgotado sem aprovar o gate."
+        final_result: Dict[str, Any] = {}
+
+        for iteration in range(1, max_iterations + 1):
+            result = self.scientific_discovery_pipeline(
+                seed_domain=seed_domain,
+                max_rounds=3 + (iteration - 1),
+                venue=venue,
+                strict_gates=True,
+            )
+            final_result = result
+            iterations.append({
+                "iteration": iteration,
+                "status": result.get("status"),
+                "gate_passed": result.get("gate_decision", {}).get("passed"),
+                "readiness_score": result.get("metacognitive_report", {}).get("readiness_score"),
+            })
+            metabus.publish_subsystem_event(
+                "scientific_pipeline_loop", "iteration.completed",
+                {"seed_domain": seed_domain, "iteration": iteration,
+                 "status": result.get("status")},
+                source_agent=self.id,
+            )
+
+            if result.get("status") == "error":
+                terminal_state = "error"
+                reason = f"Iteração {iteration} falhou com exceção não tratada: {result.get('error')}"
+                break
+            if result.get("status") == "completed":
+                terminal_state = "success"
+                reason = f"Gate aprovado e pipeline completo na iteração {iteration}."
+                break
+
+            r101_ideas = [
+                idea
+                for cycle in result.get("stages", {}).get("r101", {}).get("history", [])
+                for idea in cycle.get("ideas", [])
+            ]
+            if not r101_ideas:
+                terminal_state = "no_op"
+                reason = (
+                    f"EvoSci não gerou nenhuma ideia na iteração {iteration} — "
+                    "nenhum trabalho genuíno a repetir."
+                )
+                break
+
+            readiness = result.get("metacognitive_report", {}).get("readiness_score")
+            if readiness is not None:
+                readiness_history.append(float(readiness))
+            if is_stagnant(
+                readiness_history,
+                window=stagnation_window,
+                threshold=stagnation_threshold,
+            ):
+                terminal_state = "stalled"
+                reason = (
+                    f"readiness_score estagnado nas últimas {stagnation_window} iterações "
+                    f"(variação < {stagnation_threshold}): "
+                    f"{readiness_history[-stagnation_window:]}."
+                )
+                break
+
+            if iteration == max_iterations:
+                terminal_state = "blocked"
+                reason = (
+                    f"Gate do R103 nunca foi aprovado em {max_iterations} iterações "
+                    "(orçamento esgotado por qualidade, não por estagnação)."
+                )
+
+        duration = round(time.time() - start, 1)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"loop científico: {seed_domain[:80]}",
+            reflection=(
+                f"Loop terminou em '{terminal_state}' após {len(iterations)} "
+                f"iteração(ões): {reason}"
+            ),
+            score={
+                "success": 1.0, "no_op": 0.5, "blocked": 0.3,
+                "stalled": 0.2, "error": 0.0,
+            }.get(terminal_state, 0.0),
+        )
+        metabus.publish_subsystem_event(
+            "scientific_pipeline_loop", "loop.terminal",
+            {"seed_domain": seed_domain, "terminal_state": terminal_state,
+             "iterations": len(iterations)},
+            source_agent=self.id,
+        )
+        self.trust.learn(
+            "scientific_discovery_loop", success=(terminal_state == "success"),
+        )
+        return {
+            "terminal_state": terminal_state,
+            "reason": reason,
+            "iterations_used": len(iterations),
+            "max_iterations": max_iterations,
+            "readiness_history": readiness_history,
+            "iterations": iterations,
+            "final_result": final_result,
+            "duration_seconds": duration,
+        }
 
     def _maswos_delegate(self, agent_id: str, capability: str, description: str) -> str:
         """Delegação interna dos estágios MASWOS via Blackboard."""
@@ -774,6 +1694,75 @@ class MarceloClaroOrchestrator:
             score=0.8,
         )
         return report
+
+    def present(self, production_folder: str) -> Dict[str, Any]:
+        """Gera a apresentação MIRA direta de ``manuscrito.md``."""
+        from pathlib import Path as _P
+        from illustrations import MiraDeckPipeline
+
+        folder = _P(production_folder)
+        manuscript = folder / "manuscrito.md"
+        if not manuscript.exists():
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"apresentação MIRA de {folder.name[:60]}",
+                reflection="manuscrito.md ausente — nada a apresentar.",
+                score=0.2,
+            )
+            return {"ok": False, "error": f"manuscrito.md não encontrado em {folder}"}
+
+        markdown = manuscript.read_text(encoding="utf-8", errors="ignore")
+        output = folder / "apresentacao"
+        report = MiraDeckPipeline().run(markdown, str(output))
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"apresentação MIRA de {folder.name[:60]}",
+            reflection=(
+                f"Deck gerado em {output}/deck.html — conformidade="
+                f"{'OK' if report.passed else 'FALHOU'}, "
+                f"{len(report.violations)} violação(ões)."
+            ),
+            score=0.85 if report.passed else 0.4,
+        )
+        return {
+            "ok": True,
+            "passed": report.passed,
+            "deck": str(output / "deck.html"),
+            "conformidade": str(output / "CONFORMIDADE.md"),
+            "violations": report.violations,
+        }
+
+    def register_mira_agent(self) -> str:
+        """Registra de forma idempotente o executor MIRA no Blackboard."""
+        from illustrations.mira_agent import MiraPresentationAgent, MIRA_AGENT_ID
+
+        if MIRA_AGENT_ID in blackboard.registry:
+            if self._mira_agent is None:
+                self._mira_agent = MiraPresentationAgent()
+            return MIRA_AGENT_ID
+        self._mira_agent = MiraPresentationAgent()
+        metabus.publish(
+            "agent.register",
+            self._mira_agent.register_payload(),
+            source_agent=self.id,
+        )
+        return MIRA_AGENT_ID
+
+    def present_task(self, production_folder: str) -> Dict[str, Any]:
+        """Executa apresentação pela via delegada do Blackboard."""
+        from pathlib import Path as _P
+        from illustrations.mira_agent import MIRA_AGENT_ID
+
+        self.register_mira_agent()
+        task_id = self.delegate(
+            f"Apresentação MIRA da produção {_P(production_folder).name[:60]}",
+            required_capabilities=["apresentacao-mira"],
+            context={"production_folder": production_folder},
+        )
+        result = self._mira_agent.execute({"production_folder": production_folder})
+        success = bool(result.get("ok")) and bool(result.get("passed", False))
+        self.report_completion(task_id, MIRA_AGENT_ID, result, success=success)
+        return {"task_id": task_id, "agent_id": MIRA_AGENT_ID, **result}
 
     def knowledge_graph(self, texts: Dict[str, str],
                         output_dir: str = "ilustracoes/grafo") -> Dict[str, Any]:

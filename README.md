@@ -6,16 +6,20 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.1.0_On-Device_LLM-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-1062_passed-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-52_evolutivos-blueviolet.svg)](evolution/cycles.json)
-[![MCP](https://img.shields.io/badge/MCP-14_ferramentas-8A2BE2.svg)](integrations/)
-[![Agentes](https://img.shields.io/badge/Agentes-177+-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-130-dodgerblue.svg)](specs/)
+[![Versão](https://img.shields.io/badge/Versão-3.2.0_Redução_LLM-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-2044_passed-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-31_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![MCP](https://img.shields.io/badge/MCP-4_servidores-8A2BE2.svg)](integrations/)
+[![Agentes](https://img.shields.io/badge/Agentes-186+-orange.svg)](agents/catalog/)
+[![Specs](https://img.shields.io/badge/Specs-141-dodgerblue.svg)](specs/)
+[![LLM Reduction](https://img.shields.io/badge/LLM_Reduction-6_componentes-green.svg)](skills/tooling/llm_reduction.py)
+[![DataHub](https://img.shields.io/badge/DataHub-16_fontes-yellow.svg)](skills/tooling/data_knowledge_hub/)
 [![On-Device](https://img.shields.io/badge/On--Device-LiteRT--LM-success.svg)](skills/litert_lm/)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 177+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD, Universidade Sintética Transversal com 52 ciclos de evolução contínua e inferência on-device via LiteRT-LM (Gemma 4, Qwen3).*
+*Uma arquitetura cognitiva completa que integra 186+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD, Universidade Sintética Transversal com 31 ciclos de evolução contínua, inferência on-device via LiteRT-LM (Gemma 4, Qwen3), **Redução de Dependência LLM** (6 componentes determinísticos) e **DataKnowledgeHub** (16 fontes com validação cruzada).*
+
+> Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
 </div>
 
@@ -38,6 +42,10 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 
 **Diferenciais arquiteturais:**
 - **Pipeline Científico Fechado (R101→R105):** Do problema à entrega do artigo — EvoSci (descoberta) → Deep Research (evidência) → Peer Review (avaliação) → Revision (correção) → Paper Composer (publicação)
+- **Fusão e loop científico (R108–R109):** `scientific_discovery_pipeline()` aplica o gate real do R103, calibra a confiança do próprio run e expõe estados terminais nomeados no loop de descoberta.
+- **Raciocínio auditável (R113–R115):** detector heurístico de falácias e vieses, ARCHE RLT com seis tipos de Peirce e revisão às cegas com anonimização, verificação de vazamento e conflito de interesse.
+- **Interfaces de produção (R116/R120):** instalação multiplataforma, helpdesk, pesquisa acadêmica no CLI e fallback opcional de download visível no diagnóstico.
+- **Apresentações MIRA (R123–R126):** manuscrito → deck HTML animado autocontido, com caminho direto, agente delegável `mira-presenter` e documentação em registros Leigo e PhD.
 - **Evolutionary Memory (R97):** Memória persistente de ideias, experimentos, estagnação e reflexão periódica
 - **Evidence Graph (R102):** Grafo epistemológico de entidades, relações e evidências com proveniência
 - **MCP Security (R100):** Guard model, audit trail, vetting de comandos e rate limiting
@@ -47,13 +55,13 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 
 ##  Instalação: 1-Click no Windows
 
-Se você usa Windows 10/11, o instalador configura WSL2, Ubuntu, Ollama e o ecossistema:
+Se você usa Windows 10/11, o instalador configura WSL2, Ubuntu, OpenCode CLI, Antigravity CLI, Claude Code CLI, Ollama e o ecossistema:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/installer/windows/Install-OpenCodeEcosystem.ps1 | iex
 ```
 
-*(Para Linux/macOS, veja o [Guia Manual](ARCHITECTURE.md))*
+*(Para Linux nativo e macOS, veja o [Guia de Instalação](installer/README.md). Manual de uso: [`MANUAL.md`](MANUAL.md).)*
 
 ---
 
@@ -121,7 +129,27 @@ Roteador de atenção (Multi-Head Attention com 4 cabeças: semântica, capacida
 - **CI/CD (R106):** GitHub Actions, quality report, coverage gate
 
 ### 6. Catálogo de Agentes
-160+ agentes especializados: Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, e especialistas jurídicos, de design e quânticos.
+186+ agentes especializados: Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, e especialistas jurídicos, de design e quânticos.
+
+### 7. Camada de Redução de Dependência LLM (NOVO R220–R222)
+Seis componentes determinísticos que substituem chamadas de LLM para tarefas rotineiras,
+integrando-se silenciosamente antes do `AttentionRouter`:
+
+| Componente | Substitui | Latência típica |
+|---|---|---|
+| **Whoosh3Engine** | Busca semântica via LLM | < 30ms |
+| **RuleBasedRouter** | Roteamento por AttentionRouter | < 2ms |
+| **LocalClassifier** | Classificação de intenção via LLM | < 10ms |
+| **GameTheoryLocal** | Debates estratégicos via LLM (Nash/Shapley) | ~3ms |
+| **Jinja2Engine** | Geração de documentos via LLM | < 5ms |
+| **DataKnowledgeHub** | Consulta a dados externos via LLM | < 50ms (cache) |
+
+**Integrações:**
+- **R220**: `RuleBasedRouter` + `LocalClassifier` testados antes do `AttentionRouter` no orquestrador (threshold 0.85)
+- **R221**: `DataKnowledgeHub` enriquece manifesto do `ResearchHub` com dados validados
+- **R222**: `MetricsCollector` expõe LLM calls saved via `/health`, `/metrics` e no Doctor
+
+**Métrica:** `orch.get_reduction_stats()` → `total_llm_calls_saved`
 
 ### Diagrama de Arquitetura
 
@@ -150,6 +178,31 @@ graph TD
         
         Attn -.->|Usa| Emb
         HTM -.->|Usa| Emb
+    end
+    
+    %% LLM Reduction Layer (R220-R222)
+    subgraph RED [LLM Reduction Layer]
+        Router[RuleBasedRouter<br>25 regras + DecisionTree]
+        Class[LocalClassifier<br>TF-IDF + LogReg<br>threshold 0.15]
+        Whoosh[Whoosh3Engine<br>Busca BM25F local]
+        Game[GameTheoryLocal<br>Nash/Shapley/Pareto]
+        Jinja[Jinja2Engine<br>9 templates]
+        DataHub[DataKnowledgeHub<br>16 fontes · 5 domínios]
+        Valid[CrossValidator<br>Calibration + Audit]
+        
+        Router --> Class
+        Class --> Whoosh
+        DataHub --> Valid
+    end
+    
+    %% Observabilidade (R222)
+    subgraph OBS [Observabilidade]
+        Metrics[MetricsCollector<br>/health · /metrics]
+        DocMetrics[Doctor Check<br>llm_reduction_metrics]
+        HTTP[MetricsHTTPServer<br>porta 9090]
+        
+        Metrics --> HTTP
+        DocMetrics -.->|consulta| Metrics
     end
     
     %% Pipeline Academico Agentivo
@@ -183,7 +236,11 @@ graph TD
         EvoMem[Evolutionary Memory<br>R97 · Memória Persistente]
         Novelty[Novelty V2<br>R98 · Contribution Points]
         RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
+        ResearchHub[Research Hub<br>PubMed · bioRxiv · CORE<br>CLI pesquisa R120]
+        MiraDeck[Apresentações MIRA<br>manuscrito → deck animado R123]
+        MiraAgent[Agente mira-presenter<br>executor delegável R126]
     end
+    MiraAgent -.->|encarna o pipeline| MiraDeck
 
     %% Seguranca e Qualidade
     subgraph SQC [Seguranca & Qualidade]
@@ -224,11 +281,18 @@ graph TD
     Orchestrator -->|2. Recuperação em 2 níveis| HTM
     HTM -->|Lê Episódica| Mem
     Orchestrator -->|3. Gate & Roteia| Trust
-    Trust -->|Libera| Attn
+    Trust -->|Libera| RED
+    RED -->|conf >= 0.85| Router
+    Router -->|skip Attn| BB
+    RED -->|conf < 0.85| Attn
     Attn -->|Publica Volunteer| BB
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
+    
+    %% Conexões de observabilidade
+    Orchestrator -->|get_reduction_stats| Metrics
+    RED -.->|alimenta| Metrics
     
     %% Pipeline academico
     Orchestrator -->|5. Pipeline Academico| EvoSci
@@ -308,6 +372,33 @@ graph TD
 
 ---
 
+### Legenda do Subsistema de Apresentações MIRA (R123–R126)
+
+O MIRA transforma um artigo ou manuscrito em uma apresentação científica
+animada. O registro **leigo** explica a finalidade; o registro **PhD**
+identifica contratos, arquivos e invariantes verificáveis.
+
+| Elemento | Registro leigo | Registro PhD | Arquivo |
+|---|---|---|---|
+| `MiraEngine` | Ilustrador de um conceito isolado, com metáfora visual em movimento. | Seleciona metáforas do catálogo e produz cards SVG/CSS autocontidos. | `illustrations/mira_engine.py` |
+| `MiraDeckPipeline` | Linha de montagem que transforma o texto inteiro em slides. | Esteira com seis estágios e `ConformityReport`. | `illustrations/mira_deck.py` |
+| `MiraPresentationAgent` / `mira-presenter` | Funcionário que executa a linha quando o trabalho é delegado. | Agent Card com capacidade exclusiva `apresentacao-mira`, sujeito ao Blackboard, Trust Engine e Token Economy. | `illustrations/mira_agent.py` |
+| `present()` e `present_task()` | Botão direto e botão governado pelo sistema de tarefas. | Chamada direta para o CLI e caminho `delegate → execute → report_completion`. | `marceloclaro/orchestrator.py` |
+
+### Como Funciona a Apresentação MIRA (a linha de montagem de 6 estágios)
+
+1. **`extract`** — lê `manuscrito.md`, cria uma `Section` por `##` e detecta citações, código e listas.
+2. **`plan`** — monta capa, um slide por seção e encerramento; o tipo acompanha a ideia (`quote`, `code`, `grid` ou `concept`).
+3. **`copywrite`** — reduz cada título a no máximo seis palavras e enxuga os subtítulos.
+4. **`build`** — cria um HTML autocontido de cards de vidro com `backdrop-filter` e navegação por teclado e botões, ainda sem animação.
+5. **`animate`** — aplica a Regra Zero: coreografia de entrada e loop `infinite`; conceitos recebem o SVG da metáfora.
+6. **`validate`** — verifica animação, títulos, navegação, autocontenção e emite `CONFORMIDADE.md`.
+
+Para leigos, um slide parado é um defeito de montagem; para PhDs, a
+Regra Zero é uma invariante testada pela presença de `@keyframes` e
+`infinite`. A documentação descreve o contrato do componente, não uma
+validação externa do conteúdo científico.
+
 ### Legenda da Arquitetura
 
 #### Notação Visual
@@ -334,9 +425,11 @@ graph TD
 | **Pipeline Academico v3.0** | O coração do sistema. 5 estágios sequenciais que transformam um problema em artigo completo revisado e formatado. |
 | **Core Subsystems** | Subsistemas auxiliares: trust engine, economia de tokens, motores de raciocínio, RAG científico, Universidade Sintética, memória evolutiva. |
 | **Segurança & Qualidade** | Proteção MCP (guard/audit/vetter/limiter), CI/CD (GitHub Actions + quality gates), skills exportáveis e pacotes pip. |
-| **Protocolos de Integração** | Interfaces de comunicação: MCP Server (stdio JSON-RPC) e API Gateway (FastAPI REST). 14 ferramentas expostas. |
+| **Protocolos de Integração** | Interfaces de comunicação: MCP Server (stdio JSON-RPC) e API Gateway (FastAPI REST). 4 servidores MCP ativos. |
 | **Metacognitive Interconnect** | Barramento neural central. MetaBus (pub/sub global), Blackboard (protocolo A2A), memória metacognitiva e middleware de reflexão. |
-| **Catálogo de Agentes** | 160+ agentes especializados que se registram no Blackboard e competem por tarefas via Call for Proposals. |
+| **Catálogo de Agentes** | 186+ agentes especializados que se registram no Blackboard e competem por tarefas via Call for Proposals. |
+| **LLM Reduction Layer** | 6 componentes determinísticos (Whoosh3Engine, RuleBasedRouter, LocalClassifier, GameTheoryLocal, Jinja2Engine, DataKnowledgeHub) que substituem LLM em tarefas com confiança ≥ 0.85. |
+| **Observabilidade** | MetricsCollector com servidor HTTP (/health, /metrics), integrado ao Doctor como check llm_reduction_metrics. |
 
 #### Legenda de Cores (conceitual)
 
@@ -427,8 +520,18 @@ O **Trust Engine** avalia:
 
 Se o gate falhar, a tarefa é bloqueada ou redirecionada para um agente com supervisão.
 
-**Sub-passo 3.3: Atenção Multi-Head**
-O **AttentionRouter** calcula scores softmax com 4 cabeças:
+**Sub-passo 3.3: LLM Reduction Layer (NOVO R220)**
+Antes de chamar o `AttentionRouter` (LLM real), o orquestrador tenta a
+**LLM Reduction Layer**:
+1. `RuleBasedRouter` tenta 25 regras regex + DecisionTreeClassifier para determinar o melhor agente
+2. Se a confiança for **≥ 0.85** e o agente estiver elegível, o `AttentionRouter` é **pulado**
+3. Estatísticas são acumuladas: LLM calls saved, rotas processadas
+
+**Resultado:** tarefas comuns (roteamento de código, documentação, pesquisa) são
+processadas sem qualquer chamada de LLM, com latência < 5ms.
+
+**Sub-passo 3.4: Atenção Multi-Head (fallback)**
+Se a LLM Reduction Layer não tiver confiança suficiente, o **AttentionRouter** calcula scores softmax com 4 cabeças:
 
 | Cabeça | O que mede | Peso |
 |---|---|---|
@@ -439,8 +542,9 @@ O **AttentionRouter** calcula scores softmax com 4 cabeças:
 
 O agente com maior score composto vence a disputa.
 
-**Sub-passo 3.4: Publicação no Blackboard**
-O orquestrador publica um **Call for Proposals (CFP)** no `Blackboard (A2A Protocol)`:
+**Sub-passo 3.5: Publicação no Blackboard (quando necessário)**
+Se o `AttentionRouter` foi chamado (fallback por baixa confiança na redução),
+o orquestrador publica um **Call for Proposals (CFP)** no `Blackboard (A2A Protocol)`:
 - `BB -.->|"Call for Proposals"| Agents`
 - Agentes elegíveis se voluntariam: `Agents -->|"Voluntaria-se"| BB`
 - O AttentionRouter seleciona o melhor
@@ -867,6 +971,24 @@ Infraestrutura de qualidade profissional com GitHub Actions:
 - **`scripts/check_coverage.py`** — Quality gate: verifica testes passando, cobertura estimada ≥ 80%, lint ok
 - **`scripts/run_full_suite.sh`** — Script bash orquestrador com modo `--ci` e `--json`
 
+### Ambiente de desenvolvimento e empacotamento
+
+As dependências adicionais de desenvolvimento ficam em
+`requirements-dev.txt`, incluindo o frontend oficial `build` do PEP 517/518.
+Use um ambiente virtual antes de instalar as dependências:
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+python -m build --sdist packages/opencode-evosci
+```
+
+`import build` isoladamente não valida a disponibilidade do frontend executável:
+um namespace homônimo fornecido por outra distribuição pode ser importável sem
+possuir `build.__main__`. A verificação reprodutível é executar `python -m build`
+com o interpretador do ambiente virtual.
+
 ```bash
 # Executar suite completa localmente
 ./scripts/run_full_suite.sh
@@ -1156,6 +1278,14 @@ O ecossistema possui compatibilidade documentada com o fork `timpara/opencode-ac
 | Paper Composer ABNT/APA/IEEE | Templates LaTeX fixos |
 
 ---
+
+### Histórico de evolução restaurado
+
+As funcionalidades documentadas nos ciclos **R47–R127** correspondem a
+85 ciclos no registro histórico de referência. O arquivo operacional
+`evolution/cycles.json` permanece sob a gestão da linha atual (R211), sem
+substituição cega de seu estado nem mistura de métricas históricas com
+validação externa.
 
 <div align="center">
   <i>65 ciclos evolutivos · 1062 testes · 0 regressoes · Score medio 9.4/10</i><br>
