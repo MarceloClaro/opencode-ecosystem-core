@@ -1,6 +1,6 @@
 # Instruções para Agentes (OpenCode CLI)
 
-Este arquivo é lido automaticamente pelo OpenCode CLI (`opencode.json.instructions`) para orientar qualquer agente que opere neste repositório — incluindo o agente primário `marceloclaro` e os 160+ agentes do catálogo.
+Este arquivo é lido automaticamente pelo OpenCode CLI (`opencode.json.instructions`) para orientar qualquer agente que opere neste repositório — incluindo o agente primário `marceloclaro` e os 186+ agentes do catálogo.
 
 ## Regras gerais
 

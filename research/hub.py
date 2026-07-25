@@ -35,6 +35,7 @@ from .pdf2md import Pdf2Markdown
 from .fichamento import CitationFormatter, CriticalAnalyzer, FichamentoWriter
 from .osint import OsintLinkTree
 from .figure_hunter import FigureHunter
+from skills.tooling.data_knowledge_hub import DataKnowledgeHub
 
 logger = logging.getLogger("research.hub")
 
@@ -60,8 +61,11 @@ class ResearchHub:
                  production_folder: Optional[str] = None,
                  output_root: str = "producao_cientifica",
                  platforms: Optional[List[str]] = None,
-                 email: Optional[str] = None):
+                 email: Optional[str] = None,
+                 data_hub: Optional[DataKnowledgeHub] = None):
         self.topic = topic
+        # DataKnowledgeHub (SPEC-968): enriquece pesquisa com dados validados
+        self.data_hub = data_hub or DataKnowledgeHub()
         if production_folder:
             self.folder = Path(production_folder)
         else:
@@ -86,13 +90,18 @@ class ResearchHub:
     def run(self, max_papers: int = 8, limit_per_platform: int = 4,
             download: bool = True, use_llm: bool = False,
             llm_provider: str = "auto",
-            llm_model: Optional[str] = None) -> Dict:
+            llm_model: Optional[str] = None,
+            use_data_hub: bool = False) -> Dict:
         """Executa o pipeline completo; retorna o manifest da pesquisa.
 
         Com ``use_llm=True``, fichamentos e resenhas são enriquecidos por
         LLM com prioridade para **modelos locais via Ollama** (privacidade
         e custo zero); ``llm_provider`` aceita ``auto``/``ollama``/``openai``
         e ``llm_model`` permite escolher o modelo (ex.: ``llama3.2``).
+
+        Com ``use_data_hub=True``, enriquece o manifesto com dados de
+        contexto do DataKnowledgeHub (16 fontes, validação cruzada,
+        calibração de confiança).
         """
         logger.info(f"[hub] tema: {self.topic!r} → {self.folder}")
 
@@ -174,11 +183,37 @@ class ResearchHub:
         with open(self.pesquisa / "OSINT_REPORT.json", "w", encoding="utf-8") as f:
             json.dump(osint_report, f, ensure_ascii=False, indent=2)
 
-        # 8. Manifest com checksums
-        manifest = self._write_manifest(papers, repos, download_report,
-                                        pdf_by_key, md_by_key,
-                                        fichamentos, resenhas,
-                                        figures_report)
+        # 8. DataKnowledgeHub (SPEC-968): enriquecer com dados de contexto
+        data_knowledge = None
+        if use_data_hub:
+            try:
+                dk_result = self.data_hub.search(self.topic)
+                data_knowledge = {
+                    "domain": dk_result.get("domain", "generico"),
+                    "source": dk_result.get("source", "unknown"),
+                    "results": dk_result.get("results", []),
+                    "count": dk_result.get("count", 0),
+                    "confidence": dk_result.get("confidence", 0.0),
+                    "audit_id": dk_result.get("audit_id"),
+                    "cross_validated": dk_result.get("cross_validated", False),
+                }
+                logger.info(
+                    "[hub] DataKnowledgeHub: %d resultados (conf=%.2f, domínio=%s)",
+                    data_knowledge["count"],
+                    data_knowledge["confidence"],
+                    data_knowledge["domain"],
+                )
+            except Exception as exc:
+                logger.warning("[hub] DataKnowledgeHub indisponível: %s", exc)
+
+        # 9. Manifest com checksums
+        manifest = self._write_manifest(
+            papers, repos, download_report,
+            pdf_by_key, md_by_key,
+            fichamentos, resenhas,
+            figures_report,
+            data_knowledge=data_knowledge,
+        )
         metabus.publish_subsystem_event(
             "research",
             "pipeline.completed",
@@ -279,7 +314,8 @@ class ResearchHub:
     # ------------------------------------------------------------------
     def _write_manifest(self, papers, repos, download_report,
                         pdf_by_key, md_by_key, fichamentos, resenhas,
-                        figures_report: Optional[Dict] = None) -> Dict:
+                        figures_report: Optional[Dict] = None,
+                        data_knowledge: Optional[Dict] = None) -> Dict:
         files = {}
         for p in sorted(self.pesquisa.rglob("*")):
             if p.is_file() and p.name != "RESEARCH_MANIFEST.json":
@@ -306,6 +342,8 @@ class ResearchHub:
             },
             "files_sha256": files,
         }
+        if data_knowledge:
+            manifest["data_knowledge"] = data_knowledge
         (self.pesquisa / "RESEARCH_MANIFEST.json").write_text(
             json.dumps(manifest, indent=2, ensure_ascii=False),
             encoding="utf-8")

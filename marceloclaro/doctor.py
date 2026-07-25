@@ -26,6 +26,14 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+# Marcador para saber se o módulo de métricas está disponível
+_METRICS_AVAILABLE = False
+try:
+    from marceloclaro.metrics import MetricsCollector
+    _METRICS_AVAILABLE = True
+except ImportError:
+    pass
+
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # CLIs externas de primeira classe do ecossistema (SPEC-935-R116) e a
@@ -230,6 +238,75 @@ def _check_llm_providers() -> DoctorCheck:
     )
 
 
+def _check_litert_lm() -> DoctorCheck:
+    """Projeta o estado do supervisor sem confundi-lo com uma inferência.
+
+    O endpoint ``/v1/models`` demonstra apenas readiness do daemon HTTP. Uma
+    indisponibilidade local degrada recursos on-device, mas não invalida o core
+    Python nem autoriza ecoar detalhes potencialmente sensíveis de exceções.
+    """
+    try:
+        # Import local mantém o doctor carregável em instalações mínimas e deixa
+        # o ponto de integração substituível por doubles nos testes.
+        try:
+            supervisor_class = LiteRTSupervisor  # type: ignore[name-defined]
+        except NameError:
+            from integrations.litert_lm_supervisor import LiteRTSupervisor
+
+            supervisor_class = LiteRTSupervisor
+        status = supervisor_class().status()
+        state = getattr(status, "state", "unavailable")
+        state_value = getattr(state, "value", state)
+        normalized = str(state_value).strip().lower()
+        pid = getattr(status, "pid", None)
+        failures = getattr(status, "failure_count", 0)
+        if normalized == "ready":
+            return DoctorCheck(
+                "litert_lm",
+                "pass",
+                f"ready: daemon HTTP local respondeu ao health check "
+                f"(pid={pid or 'externo'}); readiness não valida geração de texto.",
+            )
+        return DoctorCheck(
+            "litert_lm",
+            "warn",
+            f"{normalized or 'unavailable'}: daemon on-device sem readiness; "
+            f"falhas registradas={failures}.",
+        )
+    except Exception:
+        # Falha fechada e redigida: valores da exceção podem conter URLs,
+        # tokens ou cabeçalhos de autorização vindos do ambiente.
+        return DoctorCheck(
+            "litert_lm",
+            "warn",
+            "unavailable: não foi possível consultar o supervisor local.",
+        )
+
+
+def _check_llm_reduction_metrics() -> DoctorCheck:
+    """Verifica se as métricas de redução LLM estão disponíveis."""
+    if not _METRICS_AVAILABLE:
+        return DoctorCheck("llm_reduction_metrics", "warn",
+                           "Módulo de métricas (marceloclaro.metrics) não disponível.")
+
+    try:
+        from marceloclaro.orchestrator import MarceloClaroOrchestrator
+        orch = MarceloClaroOrchestrator(auto_load_agents=False)
+        collector = MetricsCollector()
+        collector.collect_from_orchestrator(orch)
+        stats = orch.get_reduction_stats()
+        saved = stats.get("total_llm_calls_saved", 0)
+        routes = stats.get("route_calls", 0)
+        return DoctorCheck(
+            "llm_reduction_metrics", "pass",
+            f"Redução LLM ativa: {saved} chamadas evitadas, {routes} rotas processadas. "
+            f"Threshold: {orch.reduction_threshold}.",
+        )
+    except Exception as exc:
+        return DoctorCheck("llm_reduction_metrics", "warn",
+                           f"Métricas de redução LLM: {exc}")
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -247,6 +324,8 @@ def run_doctor() -> Dict[str, Any]:
         _check_corrigendum(),
         _check_external_clis(),
         _check_llm_providers(),
+        _check_litert_lm(),
+        _check_llm_reduction_metrics(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)
