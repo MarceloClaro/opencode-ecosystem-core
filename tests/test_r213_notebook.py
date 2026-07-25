@@ -7,8 +7,8 @@ Valida: não-redundância, estrutura, consistência e execução do notebook Col
 import json, re, sys, os, ast
 
 NOTEBOOK = os.path.join(os.path.dirname(__file__), "..", "orquestracao_ia_colab.ipynb")
-EXPECTED_CODE_CELLS = 9
-EXPECTED_CELLS_TOTAL = 18
+EXPECTED_CODE_CELLS = 10
+EXPECTED_CELLS_TOTAL = 20
 
 # ── HELPERS ──
 
@@ -101,8 +101,10 @@ def test_no_class_redefinition():
         classes = extract_classes(src)
         for cls in classes:
             if cls in classes_seen:
-                # Exceção TDD: stub simples → BaseAgent herdado
+                # Exceção TDD: stub simples → implementação real
                 if cls.startswith("Agente") and classes_seen[cls] == 5 and i == 7:
+                    continue
+                if cls in ("CacheInferencia", "OrquestradorAdaptativo") and classes_seen[cls] == 5 and i == 19:
                     continue
                 violations.append(
                     f"'{cls}' redefinida nas cells {classes_seen[cls]} e {i}"
@@ -154,6 +156,8 @@ KEY_CLASSES_SINGLE = [
     "RealAgenteRevisor",     # Fase 6
     "RealAgenteValidador",   # Fase 6
     "RealAgenteTradutor",    # Fase 6
+    "CacheInferencia",       # Fase 9
+    "OrquestradorAdaptativo",# Fase 9
 ]
 
 def test_key_classes_defined_once():
@@ -164,8 +168,10 @@ def test_key_classes_defined_once():
     for cls_name in KEY_CLASSES_SINGLE:
         pattern = rf'^\s*class\s+{cls_name}\s*[:\(]'
         matches = re.findall(pattern, src_total, re.MULTILINE)
-        assert len(matches) == 1, \
-            f"{cls_name}: esperado 1 definição, obtido {len(matches)}"
+        # TDD stubs permitem 2 definições (cell 5 stub + cell N real)
+        allowed = 2 if cls_name in ("CacheInferencia", "OrquestradorAdaptativo") else 1
+        assert len(matches) in (allowed,), \
+            f"{cls_name}: esperado {allowed} definição(ões), obtido {len(matches)}"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -249,6 +255,8 @@ def test_tdd_red_green_present():
         "Cell 5 sem testes RED"
     assert "test_validador" in src5 and "test_tradutor" in src5 and "test_export_latex" in src5, \
         "Cell 5 sem novos testes RED"
+    assert "test_cache" in src5 and "test_adaptativo" in src5, \
+        "Cell 5 sem testes de Cache/Adaptativo"
     assert "hasattr(AgentePesquisador" in src5 or "hasattr(AgenteRevisor" in src5, \
         "Cell 5 sem verificacao via hasattr"
 
