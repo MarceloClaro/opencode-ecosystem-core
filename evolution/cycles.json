@@ -409,6 +409,34 @@
         "Pipeline real com hooks: LoggingHook monitora cada etapa com timestamps reais"
       ],
       "timestamp": 1784933521.2626965
+    },
+    {
+      "round_id": "R218",
+      "objective": "Pipeline multi-agente REAL EXPANDIDO: 5 agentes + PDF/LaTeX/HTML (R218)",
+      "changes": [
+        "Fase 6 expandida: 2 novos agentes reais (RealAgenteValidador + RealAgenteTradutor)",
+        "RealAgenteValidador: valida qualidade e consistencia do artigo via Qwen3 (SPEC-104)",
+        "RealAgenteTradutor: traduz artigo para ingles via Qwen3 (SPEC-105)",
+        "Pipeline expandido: Pesquisador > Escritor > Revisor > Validador > Tradutor (5 etapas)",
+        "SPEC-104 a SPEC-107 registradas (Agente Validador, Tradutor, Exportador LaTeX, Exportador HTML)",
+        "TDD expandido: 7 testes GREEN (AgenteValidador, AgenteTradutor, ExportadorLaTeX, ExportadorHTML)",
+        "Fase 7 convertida para exportacao multi-formato: PDF + LaTeX + HTML",
+        "ExportadorLaTeX (SPEC-106): gera .tex compilavel com preambulo completo + abstract EN",
+        "ExportadorHTML (SPEC-107): gera pagina responsiva com CSS embutido + metadados",
+        "Sanidade: 15/15 classes OK, 13/13 testes TDD, 7 specs",
+        "Pipeline total: ~303s de inferencia real on-device (7 chamadas Qwen3-0.6B)",
+        "Headline: 'Pipeline Real Expandido (5 Agentes + PDF/LaTeX/HTML)'"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "litert-lm com no-template funciona para validacao e traducao (alem de pesquisa/escrita/revisao)",
+        "Validador Qwen3 tende a ser conservador (rejeita artigos curtos - esperado para 47 palavras)",
+        "Tradutor Qwen3 produz abstract coerente mesmo com artigo curto (300 chars em 57s)",
+        "Rebuild script exige cuidado com f-strings: nunca usar variaveis do notebook como f-string no build",
+        "Multiplos formatos de saida (PDF+LaTeX+HTML) aumentam significativamente o valor pratico do pipeline",
+        "Pipeline com 5 agentes + 3 formatos = ~5min total de processamento real (viavel para CPU on-device)"
+      ],
+      "timestamp": 1784938350.4247968
     }
   ]
 }

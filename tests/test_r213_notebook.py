@@ -152,6 +152,8 @@ KEY_CLASSES_SINGLE = [
     "RealAgentePesquisador", # Fase 6
     "RealAgenteEscritor",    # Fase 6
     "RealAgenteRevisor",     # Fase 6
+    "RealAgenteValidador",   # Fase 6
+    "RealAgenteTradutor",    # Fase 6
 ]
 
 def test_key_classes_defined_once():
@@ -176,7 +178,7 @@ CLASSES_BY_PHASE = {
     3: ["BaseAgent", "Task", "Orchestrator", "AgentePesquisador", "AgenteEscritor", "AgenteRevisor"],
     4: ["EventType", "Hook", "LoggingHook", "MetricsHook", "HookManager", "HookedOrchestrator"],
     5: ["PromptBuilder"],
-    6: ["PipelineOrquestradorReal", "RealAgentePesquisador", "RealAgenteEscritor", "RealAgenteRevisor"],
+     6: ["PipelineOrquestradorReal", "RealAgentePesquisador", "RealAgenteEscritor", "RealAgenteRevisor", "RealAgenteValidador", "RealAgenteTradutor"],
 }
 
 def test_phase_6_does_not_redefine_previous_classes():
@@ -196,7 +198,7 @@ def test_phase_6_does_not_redefine_previous_classes():
         f"Fase 6 REDEFINE classes das Fases 1-5: {redefinitions}"
 
     # Verifica que as classes novas da Fase 6 estao presentes
-    expected_new = {"PipelineOrquestradorReal", "RealAgentePesquisador", "RealAgenteEscritor", "RealAgenteRevisor"}
+    expected_new = {"PipelineOrquestradorReal", "RealAgentePesquisador", "RealAgenteEscritor", "RealAgenteRevisor", "RealAgenteValidador", "RealAgenteTradutor"}
     assert expected_new.issubset(set(classes13)), \
         f"Fase 6 sem classes esperadas: {expected_new - set(classes13)}"
 
@@ -212,7 +214,7 @@ def test_fase7_has_pdf_generation():
     src15 = source_text(cell15)
     assert "fpdf2" in src15 or "FPDF" in src15, "Cell 15 sem fpdf2/FPDF"
     assert "pdf.output" in src15, "Cell 15 sem pdf.output()"
-    assert "artigo_pipeline_real.pdf" in src15, "Cell 15 sem nome do arquivo PDF"
+    assert "PDF_PATH" in src15 or "artigo_pipeline_real" in src15, "Cell 15 sem nome/caminho do arquivo PDF"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -245,6 +247,8 @@ def test_tdd_red_green_present():
     assert "FASE GREEN" in src5, "Cell 5 sem FASE GREEN"
     assert "test_pesquisador" in src5 and "test_escritor" in src5 and "test_revisor" in src5, \
         "Cell 5 sem testes RED"
+    assert "test_validador" in src5 and "test_tradutor" in src5 and "test_export_latex" in src5, \
+        "Cell 5 sem novos testes RED"
     assert "hasattr(AgentePesquisador" in src5 or "hasattr(AgenteRevisor" in src5, \
         "Cell 5 sem verificacao via hasattr"
 
