@@ -254,7 +254,8 @@ class TestLiteRTLMSkill(unittest.TestCase):
 
     # ── CA2: Skill.run ────────────────────────────────────────────────────
 
-    @mock.patch("skills.litert_lm.chat.litert_lm")
+    @mock.patch("skills.litert_lm.chat.litert_lm", create=True)
+    @mock.patch("skills.litert_lm.chat._LITERT_AVAILABLE", True)
     def test_skill_run_single_prompt(self, mock_litert):
         """Skill.run executa prompt único com Engine."""
         mock_litert.Engine = mock.MagicMock(return_value=_make_mock_engine())
@@ -268,7 +269,8 @@ class TestLiteRTLMSkill(unittest.TestCase):
         result = skill.run("gemma/test", "Olá!")
         self.assertIn("Gemma", result)
 
-    @mock.patch("skills.litert_lm.chat.litert_lm")
+    @mock.patch("skills.litert_lm.chat.litert_lm", create=True)
+    @mock.patch("skills.litert_lm.chat._LITERT_AVAILABLE", True)
     def test_skill_run_with_kwargs(self, mock_litert):
         """Skill.run propaga SamplerConfig para o Engine."""
         mock_litert.Engine = mock.MagicMock(return_value=_make_mock_engine())
@@ -283,7 +285,8 @@ class TestLiteRTLMSkill(unittest.TestCase):
 
     # ── CA3: Skill.chat ───────────────────────────────────────────────────
 
-    @mock.patch("skills.litert_lm.chat.litert_lm")
+    @mock.patch("skills.litert_lm.chat.litert_lm", create=True)
+    @mock.patch("skills.litert_lm.chat._LITERT_AVAILABLE", True)
     def test_skill_chat_session(self, mock_litert):
         """Skill.chat retorna ChatSession."""
         mock_litert.Engine = mock.MagicMock(return_value=_make_mock_engine())
@@ -346,8 +349,14 @@ class TestChatSession(unittest.TestCase):
         self.model_path = os.path.join(self.tmpdir, "model.litertlm")
         with open(self.model_path, "wb") as f:
             f.write(b"MOCK_LITERTLM_MODEL")
+        # Ensure chat module believes litert_lm is available
+        self._litert_patcher = mock.patch(
+            "skills.litert_lm.chat._LITERT_AVAILABLE", True
+        )
+        self._litert_patcher.start()
 
     def tearDown(self):
+        self._litert_patcher.stop()
         import shutil
         shutil.rmtree(self.tmpdir, ignore_errors=True)
 
@@ -592,14 +601,8 @@ class TestOpenAIServer(unittest.TestCase):
         self.assertEqual(server.host, "0.0.0.0")
         self.assertEqual(server.port, 9379)
 
-    @mock.patch("skills.litert_lm.server.litert_lm.Engine")
-    def test_server_model_listing(self, mock_engine):
-        """Servidor lista modelos via /v1/models."""
-        mock_engine_instance = mock.MagicMock()
-        mock_engine_instance.__enter__ = mock.MagicMock(return_value=mock_engine_instance)
-        mock_engine_instance.__exit__ = mock.MagicMock(return_value=None)
-        mock_engine.return_value = mock_engine_instance
-
+    def test_server_model_listing(self):
+        """Servidor lista modelos via /v1/models (não precisa de Engine)."""
         from skills.litert_lm.server import LiteRTOpenAIServer
         server = LiteRTOpenAIServer(
             model_path="/fake/model.litertlm",
@@ -608,20 +611,8 @@ class TestOpenAIServer(unittest.TestCase):
         self.assertIsInstance(models, list)
         self.assertGreater(len(models), 0)
 
-    @mock.patch("skills.litert_lm.server.litert_lm.Engine")
-    def test_server_chat_completion(self, mock_engine):
-        """Servidor processa /v1/chat/completions."""
-        mock_conv = mock.MagicMock()
-        mock_conv.__enter__ = mock.MagicMock(return_value=mock_conv)
-        mock_conv.__exit__ = mock.MagicMock(return_value=None)
-        mock_conv.send_message.return_value = MOCK_CHAT_RESPONSE
-
-        mock_engine_instance = mock.MagicMock()
-        mock_engine_instance.__enter__ = mock.MagicMock(return_value=mock_engine_instance)
-        mock_engine_instance.__exit__ = mock.MagicMock(return_value=None)
-        mock_engine_instance.create_conversation.return_value = mock_conv
-        mock_engine.return_value = mock_engine_instance
-
+    def test_server_chat_completion(self):
+        """Servidor processa /v1/chat/completions com mock fallback."""
         from skills.litert_lm.server import LiteRTOpenAIServer
         server = LiteRTOpenAIServer(model_path="/fake/model.litertlm")
         response = server.chat_completion([
@@ -650,10 +641,11 @@ class TestSkillErrorHandling(unittest.TestCase):
         # Verifica que a exceção existe
         self.assertTrue(issubclass(ModelNotFoundError, Exception))
 
-    @mock.patch("skills.litert_lm.chat.litert_lm.Engine")
-    def test_engine_error_wraps_gracefully(self, mock_engine_cls):
+    @mock.patch("skills.litert_lm.chat._LITERT_AVAILABLE", True)
+    @mock.patch("skills.litert_lm.chat.litert_lm", create=True)
+    def test_engine_error_wraps_gracefully(self, mock_litert):
         """Erro do Engine é capturado e relatado."""
-        mock_engine_cls.side_effect = RuntimeError("Falha no Engine")
+        mock_litert.Engine.side_effect = RuntimeError("Falha no Engine")
         from skills.litert_lm.chat import ChatSession
         session = ChatSession(self.model_path)
         with self.assertRaises(RuntimeError):

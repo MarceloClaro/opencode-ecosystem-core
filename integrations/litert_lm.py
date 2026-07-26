@@ -31,16 +31,66 @@ import os
 import logging
 import time
 from dataclasses import dataclass, field
+from ipaddress import ip_address
 from typing import Any, Dict, List, Optional
+from urllib.parse import urlsplit
+
+from integrations.litert_lm_provider import (
+    CANONICAL_MODEL_IDS,
+    MODELS as CANONICAL_MODELS,
+    MODEL_ALIASES,
+    canonical_model_id,
+    redact_exception,
+    redact_url,
+)
 
 logger = logging.getLogger("litert-lm-provider")
 
 # ── Constantes ──────────────────────────────────────────────────────────────
 
 PROVIDER_ID = "litert-lm"
-BASE_URL = "http://localhost:9379/v1"
+BASE_URL = "http://127.0.0.1:9379/v1"
 ENV_KEY = "LITERT_LM_BASE_URL"
 ENV_KEY_FALLBACK = "LITERT_LM_API_KEY"
+BASE_URL_ENV = ENV_KEY
+
+
+def _is_loopback_url(value: str) -> bool:
+    """Verifica se uma URL possui host HTTP(S) de loopback."""
+    try:
+        parsed = urlsplit(value.strip())
+        hostname = parsed.hostname
+        if parsed.scheme not in {"http", "https"} or not hostname:
+            return False
+        if hostname.lower() == "localhost":
+            return True
+        return ip_address(hostname).is_loopback
+    except (TypeError, ValueError):
+        return False
+
+
+def _configured_base_url(base_url: Optional[str] = None) -> str:
+    """Usa URL explícita ou mantém a variável de ambiente em loopback.
+
+    A URL explícita é uma injeção deliberada de dependência e pode apontar para
+    um endpoint remoto em mocks/testes. A variável de ambiente é implícita e
+    remota não recebe confiança por padrão.
+    """
+    if base_url is not None:
+        explicit = str(base_url).strip()
+        if explicit:
+            return explicit.rstrip("/")
+
+    configured = os.environ.get(ENV_KEY)
+    if configured and configured.strip():
+        candidate = configured.strip().rstrip("/")
+        if _is_loopback_url(candidate):
+            return candidate
+        logger.warning(
+            "%s remoto ignorado por padrão; usando endpoint de loopback",
+            ENV_KEY,
+        )
+    return BASE_URL.rstrip("/")
 
 # Catálogo de modelos suportados pelo LiteRT-LM (Google AI Edge)
 # Para consultar os modelos atualmente servidos, use o endpoint /v1/models
@@ -274,7 +324,44 @@ MODELS: Dict[str, Dict[str, Any]] = {
     },
 }
 
-DEFAULT_MODEL = "gemma-4-E2B-it"
+# Mantém os nomes históricos disponíveis para consumidores que importam o
+# catálogo diretamente, mas expõe os quatro IDs anunciados como catálogo
+# operacional. A metadata legada é mesclada somente para que filtros do router
+# (por exemplo, ``require_thinking``) continuem informativos.
+LEGACY_MODELS = MODELS
+_CANONICAL_COMPAT_MODELS: Dict[str, Dict[str, Any]] = {
+    model_id: dict(metadata)
+    for model_id, metadata in CANONICAL_MODELS.items()
+}
+for _legacy_id, _canonical_id in MODEL_ALIASES.items():
+    _legacy_metadata = LEGACY_MODELS.get(_legacy_id)
+    if not _legacy_metadata:
+        continue
+    _canonical_metadata = _CANONICAL_COMPAT_MODELS[_canonical_id]
+    for _field_name in (
+        "family",
+        "strengths",
+        "thinking",
+        "context_window",
+        "free",
+    ):
+        if _field_name not in _legacy_metadata:
+            continue
+        if _field_name == "strengths":
+            existing = set(_canonical_metadata.get(_field_name, []))
+            existing.update(_legacy_metadata[_field_name])
+            _canonical_metadata[_field_name] = sorted(existing)
+        elif _field_name == "thinking":
+            _canonical_metadata[_field_name] = bool(
+                _canonical_metadata.get(_field_name, False)
+                or _legacy_metadata[_field_name]
+            )
+        else:
+            _canonical_metadata.setdefault(_field_name, _legacy_metadata[_field_name])
+
+MODELS = {**LEGACY_MODELS, **_CANONICAL_COMPAT_MODELS}
+
+DEFAULT_MODEL = "litert-community/gemma-4-E2B-it-litert-lm"
 
 
 # ── Exceções ─────────────────────────────────────────────────────────────────
@@ -342,13 +429,13 @@ class LiteRTLMProvider:
         base_url: Optional[str] = None,
         api_key: str = "sk-no-key-required",
     ):
-        self.base_url = (base_url or os.environ.get(ENV_KEY, BASE_URL)).rstrip("/")
+        self.base_url = _configured_base_url(base_url)
         self._api_key = api_key
         self._sdd_enabled = True
         self._cached_remote_models: Optional[List[Dict[str, Any]]] = None
         logger.info(
             "LiteRTLMProvider inicializado — %d modelos no catálogo, base_url=%s",
-            len(MODELS), self.base_url,
+            len(CANONICAL_MODEL_IDS), redact_url(self.base_url),
         )
 
     # ── Modelos ───────────────────────────────────────────────────────────────
@@ -374,7 +461,11 @@ class LiteRTLMProvider:
             if remote:
                 return remote
 
-        return [{"model_id": mid, **meta} for mid, meta in MODELS.items()]
+        return [
+            {"model_id": mid, **meta}
+            for mid, meta in MODELS.items()
+            if mid in CANONICAL_MODEL_IDS
+        ]
 
     def _fetch_remote_models(self) -> Optional[List[Dict[str, Any]]]:
         """Consulta /v1/models do servidor OpenAI-compatible local."""
@@ -399,9 +490,9 @@ class LiteRTLMProvider:
             # Enriquece com metadados do catálogo local
             enriched = []
             for rm in remote_models:
-                mid = rm.get("id", "")
+                mid = canonical_model_id(rm.get("id", ""))
                 local_meta = MODELS.get(mid, {})
-                enriched.append({
+                enriched_model = {
                     "model_id": mid,
                     "name": local_meta.get("name", mid),
                     "provider": PROVIDER_ID,
@@ -414,14 +505,18 @@ class LiteRTLMProvider:
                     "size_gb": local_meta.get("size_gb", 0),
                     "remote": True,
                     "server_status": "online",
-                    **rm,
-                })
+                }
+                enriched_model.update(rm)
+                enriched_model["model_id"] = mid
+                enriched.append(enriched_model)
 
             # Se o servidor retornou modelos, adiciona também os do catálogo
             # que podem não estar servidos mas são compatíveis
             if enriched:
                 served_ids = {m["model_id"] for m in enriched}
                 for mid, meta in MODELS.items():
+                    if mid not in CANONICAL_MODEL_IDS:
+                        continue
                     if mid not in served_ids:
                         enriched.append({
                             "model_id": mid,
@@ -436,7 +531,7 @@ class LiteRTLMProvider:
         except Exception as exc:
             logger.debug(
                 "Servidor LiteRT-LM não acessível em %s: %s",
-                self.base_url, exc,
+                redact_url(self.base_url), redact_exception(exc),
             )
 
         return None
@@ -459,22 +554,27 @@ class LiteRTLMProvider:
         Raises:
             ModelNotFoundError: Se o modelo não existir.
         """
+        normalized_model_id = canonical_model_id(model_id)
+
         # Tenta remote primeiro se disponível
         if refresh_remote or self._cached_remote_models is None:
             self._fetch_remote_models()
 
         if self._cached_remote_models:
             for m in self._cached_remote_models:
-                if m.get("model_id") == model_id:
+                if m.get("model_id") == normalized_model_id:
                     return m
 
         # Fallback para catálogo local
-        if model_id in MODELS:
-            return {"model_id": model_id, **MODELS[model_id]}
+        if normalized_model_id in CANONICAL_MODEL_IDS:
+            return {
+                "model_id": normalized_model_id,
+                **MODELS[normalized_model_id],
+            }
 
         raise ModelNotFoundError(
             f"Modelo '{model_id}' não encontrado no catálogo LiteRT-LM. "
-            f"Modelos disponíveis: {list(MODELS.keys())}"
+            f"Modelos disponíveis: {list(CANONICAL_MODEL_IDS)}"
         )
 
     def best_model_for(
@@ -521,7 +621,7 @@ class LiteRTLMProvider:
             )
 
         candidates.sort(key=score, reverse=True)
-        return candidates[0][0]
+        return canonical_model_id(candidates[0][0])
 
     # ── Completion ────────────────────────────────────────────────────────────
 
@@ -563,10 +663,13 @@ class LiteRTLMProvider:
         return self._execute(req)
 
     def _execute(self, req: CompletionRequest) -> CompletionResponse:
+        normalized_model_id = canonical_model_id(req.model)
+        if normalized_model_id in CANONICAL_MODEL_IDS:
+            req.model = normalized_model_id
         if req.model not in MODELS:
             raise ModelNotFoundError(
                 f"Modelo desconhecido no LiteRT-LM: '{req.model}'. "
-                f"Disponíveis: {list(MODELS.keys())}"
+                f"Disponíveis: {list(CANONICAL_MODEL_IDS)}"
             )
 
         active_spec_id = req.spec_id
@@ -687,7 +790,8 @@ class LiteRTLMProvider:
 
         except Exception as exc:
             logger.warning(
-                "Servidor LiteRT-LM não acessível (%s). Usando mock.", exc
+                "Servidor LiteRT-LM não acessível (%s). Usando mock.",
+                redact_exception(exc),
             )
             return self._mock_response(req)
 
@@ -753,6 +857,10 @@ class LiteRTLMProvider:
         Returns:
             Dicionário com status do servidor.
         """
+        safe_base_url = redact_url(self.base_url)
+        api_key = str(self._api_key) if self._api_key else ""
+        if api_key:
+            safe_base_url = safe_base_url.replace(api_key, "***REDACTED***")
         try:
             import urllib.request
 
@@ -767,27 +875,48 @@ class LiteRTLMProvider:
             with urllib.request.urlopen(req, timeout=3) as resp:
                 body = json.loads(resp.read().decode("utf-8"))
                 models = body.get("data", [])
+                model_names = [
+                    canonical_model_id(m.get("id") or "")
+                    for m in models
+                ]
+                if api_key:
+                    model_names = [
+                        name.replace(api_key, "***REDACTED***")
+                        for name in model_names
+                    ]
                 return {
                     "online": True,
-                    "base_url": self.base_url,
+                    "base_url": safe_base_url,
                     "models_served": len(models),
-                    "model_names": [m.get("id") for m in models],
+                    "model_names": model_names,
                 }
         except Exception as exc:
+            safe_error = redact_exception(exc)
+            if api_key:
+                safe_error = safe_error.replace(api_key, "***REDACTED***")
             return {
                 "online": False,
-                "base_url": self.base_url,
-                "error": str(exc),
+                "base_url": safe_base_url,
+                "error": safe_error,
                 "hint": "Inicie o servidor com: litert-lm serve <modelo> --port 9379",
             }
 
     def provider_info(self) -> Dict[str, Any]:
         """Informações resumidas do provider."""
+        safe_base_url = redact_url(self.base_url)
+        if self._api_key:
+            safe_base_url = safe_base_url.replace(
+                str(self._api_key), "***REDACTED***"
+            )
         return {
             "provider_id": PROVIDER_ID,
-            "base_url": self.base_url,
-            "total_models": len(MODELS),
-            "families": list({m["family"] for m in MODELS.values()}),
+            "base_url": safe_base_url,
+            "total_models": len(CANONICAL_MODEL_IDS),
+            "families": list({
+                m.get("family", "unknown")
+                for model_id, m in MODELS.items()
+                if model_id in CANONICAL_MODEL_IDS
+            }),
             "authenticated": bool(self._api_key),
             "sdd_enabled": self._sdd_enabled,
             "default_model": DEFAULT_MODEL,

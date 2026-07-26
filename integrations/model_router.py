@@ -27,6 +27,27 @@ from typing import Dict, List, Optional, Any, Tuple
 
 logger = logging.getLogger("model-router")
 
+# A configuração OpenCode possui uma única fonte de IDs LiteRT canônicos. O
+# router reexporta a normalização para que agentes não precisem conhecer qual
+# fachada (legada ou atual) atende a requisição.
+try:
+    from integrations.litert_lm_provider import (
+        CANONICAL_MODEL_IDS as CANONICAL_LITERT_MODEL_IDS,
+        MODEL_ALIASES,
+        canonical_model_id as _canonical_litert_model_id,
+    )
+except ImportError:  # pragma: no cover - compatibilidade de instalação parcial
+    CANONICAL_LITERT_MODEL_IDS = frozenset()
+    MODEL_ALIASES = {}
+
+    def _canonical_litert_model_id(model_id: str) -> str:
+        return model_id
+
+
+def canonical_model_id(model_id: str) -> str:
+    """Normaliza IDs LiteRT legados para os IDs publicados pelo provider."""
+    return _canonical_litert_model_id(model_id)
+
 # ── Imports opcionais de providers ────────────────────────────────────────────
 
 def _get_opencode_go():
@@ -71,7 +92,10 @@ class ModelProfile:
     # Lista ordenada de (provider_id, model_id) em ordem de preferência
     preferred: List[Tuple[str, str]] = field(default_factory=list)
     # Modelo fallback se todos os preferidos falharem (free-only)
-    fallback: Tuple[str, str] = ("litert-lm", "gemma-4-E2B-it")
+    fallback: Tuple[str, str] = (
+        "litert-lm",
+        "litert-community/gemma-4-E2B-it-litert-lm",
+    )
 
 
 # Perfis padrão do ecossistema
@@ -262,6 +286,9 @@ class ModelRouter:
       - Suporte a override de perfil por agente
     """
 
+    # API de classe para consumidores que já possuem uma instância do router.
+    MODEL_ALIASES = MODEL_ALIASES
+
     def __init__(
         self,
         profiles: Optional[Dict[str, ModelProfile]] = None,
@@ -313,17 +340,25 @@ class ModelRouter:
             profile = self.profiles.get("coding", ModelProfile(
                 task_type="coding",
                 description="Fallback",
-                preferred=[("litert-lm", "gemma-4-E2B-it")],
+                preferred=[(
+                    "litert-lm",
+                    "litert-community/gemma-4-E2B-it-litert-lm",
+                )],
             ))
 
         # Override forçado
         if force_provider and force_model:
+            selected_model = self._normalize_model_for_provider(
+                force_provider,
+                force_model,
+                strict=force_provider == "litert-lm",
+            )
             return RouteResult(
                 task_type=task_type,
                 provider_id=force_provider,
-                model_id=force_model,
+                model_id=selected_model,
                 profile=profile,
-                reason=f"Override forçado: {force_provider}/{force_model}",
+                reason=f"Override forçado: {force_provider}/{selected_model}",
                 alternatives=[],
                 authenticated=self._is_authenticated(force_provider),
                 mock_mode=not self._is_authenticated(force_provider),
@@ -342,19 +377,38 @@ class ModelRouter:
             alternatives = candidates[1:]
         else:
             # Fallback
-            provider_id, model_id = profile.fallback
+            if force_provider == "litert-lm":
+                provider_id = "litert-lm"
+                model_id = self._default_litert_model_id()
+            else:
+                provider_id, model_id = profile.fallback
+                model_id = self._normalize_model_for_provider(
+                    provider_id, model_id, strict=provider_id == "litert-lm"
+                )
             alternatives = []
 
         authenticated = self._is_authenticated(provider_id)
         result = RouteResult(
             task_type=task_type,
             provider_id=provider_id,
-            model_id=model_id,
+            model_id=self._normalize_model_for_provider(
+                provider_id, model_id, strict=provider_id == "litert-lm"
+            ),
             profile=profile,
             reason=self._build_reason(
                 task_type, provider_id, model_id, require_thinking, authenticated
             ),
-            alternatives=alternatives[:3],
+            alternatives=[
+                (
+                    alternative_provider,
+                    self._normalize_model_for_provider(
+                        alternative_provider,
+                        alternative_model,
+                        strict=alternative_provider == "litert-lm",
+                    ),
+                )
+                for alternative_provider, alternative_model in alternatives[:3]
+            ],
             authenticated=authenticated,
             mock_mode=not authenticated,
         )
@@ -386,12 +440,16 @@ class ModelRouter:
                 "Verifique as importações em integrations/."
             )
 
+        completion_kwargs = {
+            "prompt": prompt,
+            "model": route.model_id,
+            "system": system,
+            "spec_id": spec_id,
+        }
+        if route.provider_id != "litert-lm":
+            completion_kwargs["thinking"] = thinking
         return provider.complete(
-            prompt=prompt,
-            model=route.model_id,
-            system=system,
-            thinking=thinking,
-            spec_id=spec_id,
+            **completion_kwargs,
         )
 
     def list_all_models(self) -> List[Dict[str, Any]]:
@@ -414,7 +472,7 @@ class ModelRouter:
                 "task_type": p.task_type,
                 "description": p.description,
                 "preferred_count": len(p.preferred),
-                "top_model": f"{p.preferred[0][0]}/{p.preferred[0][1]}" if p.preferred else None,
+                "top_model": self._profile_top_model(p),
             }
             for p in self.profiles.values()
         ]
@@ -437,7 +495,11 @@ class ModelRouter:
                 "litert-lm": {
                     "available": self._lt_provider is not None,
                     "authenticated": self._is_authenticated("litert-lm"),
-                    "models": len(self._lt_models),
+                    "models": (
+                        len(CANONICAL_LITERT_MODEL_IDS)
+                        if self._lt_provider
+                        else 0
+                    ),
                 },
                 "openai": {
                     "available": self._oa_provider is not None,
@@ -445,10 +507,50 @@ class ModelRouter:
                     "models": len(self._oa_models),
                 },
             },
-            "total_models": len(self._go_models) + len(self._zen_models) + len(self._lt_models) + len(self._oa_models),
+            "total_models": (
+                len(self._go_models)
+                + len(self._zen_models)
+                + (len(CANONICAL_LITERT_MODEL_IDS) if self._lt_provider else 0)
+                + len(self._oa_models)
+            ),
         }
 
     # ── Privados ─────────────────────────────────────────────────────────────
+
+    def _profile_top_model(self, profile: ModelProfile) -> Optional[str]:
+        """Formata o primeiro modelo do perfil sem expor alias LiteRT."""
+        if not profile.preferred:
+            return None
+        provider_id, model_id = profile.preferred[0]
+        normalized_model_id = self._normalize_model_for_provider(
+            provider_id,
+            model_id,
+            strict=provider_id == "litert-lm",
+        )
+        return f"{provider_id}/{normalized_model_id}"
+
+    @staticmethod
+    def _default_litert_model_id() -> str:
+        """Retorna o default LiteRT já convertido para o catálogo publicado."""
+        return canonical_model_id("gemma-4-E2B-it")
+
+    @staticmethod
+    def _normalize_model_for_provider(
+        provider_id: str,
+        model_id: str,
+        strict: bool = False,
+    ) -> str:
+        """Normaliza somente LiteRT e rejeita IDs locais órfãos quando pedido."""
+        if provider_id != "litert-lm":
+            return model_id
+
+        normalized = canonical_model_id(model_id)
+        if strict and normalized not in CANONICAL_LITERT_MODEL_IDS:
+            raise ValueError(
+                f"Modelo LiteRT não anunciado: {model_id!r}. "
+                f"Use um dos IDs canônicos: {sorted(CANONICAL_LITERT_MODEL_IDS)}"
+            )
+        return normalized
 
     def _filter_candidates(
         self,
@@ -459,10 +561,25 @@ class ModelRouter:
     ) -> List[Tuple[str, str]]:
         """Filtra e ordena candidatos com base nas restrições."""
         result = []
+        seen = set()
         for provider_id, model_id in preferred:
             if force_provider and provider_id != force_provider:
                 continue
-            model_meta = self._get_model_meta(provider_id, model_id)
+            normalized_model_id = self._normalize_model_for_provider(
+                provider_id, model_id
+            )
+            if (
+                provider_id == "litert-lm"
+                and normalized_model_id not in CANONICAL_LITERT_MODEL_IDS
+            ):
+                # Perfis antigos podem sobreviver a uma atualização parcial;
+                # um ID local desconhecido não pode virar uma rota órfã.
+                continue
+            candidate_key = (provider_id, normalized_model_id)
+            if candidate_key in seen:
+                continue
+            seen.add(candidate_key)
+            model_meta = self._get_model_meta(provider_id, normalized_model_id)
             if require_thinking and not model_meta.get("thinking", False):
                 continue
             authenticated = self._is_authenticated(provider_id)
@@ -471,7 +588,7 @@ class ModelRouter:
                 int(self.prefer_authenticated and authenticated),
                 int(prefer_free and model_meta.get("free", False)),
             )
-            result.append((priority, provider_id, model_id))
+            result.append((priority, provider_id, normalized_model_id))
         result.sort(key=lambda x: x[0], reverse=True)
         return [(pid, mid) for _, pid, mid in result]
 
@@ -481,6 +598,13 @@ class ModelRouter:
             return self._go_models.get(model_id, {})
         if provider_id == "opencode-zen":
             return self._zen_models.get(model_id, {})
+        if provider_id == "litert-lm":
+            normalized_model_id = canonical_model_id(model_id)
+            return (
+                self._lt_models.get(normalized_model_id)
+                or self._lt_models.get(model_id)
+                or {}
+            )
         if provider_id == "openai":
             return self._oa_models.get(model_id, {})
         return {}

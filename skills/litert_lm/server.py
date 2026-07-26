@@ -29,6 +29,43 @@ except ImportError:
     _LITERT_AVAILABLE = False
 
 
+DEFAULT_CONTEXT_TOKENS = 20_480
+CONTEXT_TOKENS_ENV = "LITERT_LM_CONTEXT_TOKENS"
+
+
+def _resolve_context_tokens(context_tokens: Optional[int]) -> int:
+    """Resolve o contexto total do Engine, separado do output máximo."""
+    if context_tokens is not None:
+        if context_tokens <= 0:
+            raise ValueError("context_tokens deve ser um inteiro positivo")
+        return context_tokens
+
+    raw_value = os.environ.get(CONTEXT_TOKENS_ENV)
+    if raw_value is None:
+        return DEFAULT_CONTEXT_TOKENS
+
+    try:
+        configured = int(raw_value)
+    except (TypeError, ValueError):
+        return DEFAULT_CONTEXT_TOKENS
+    return configured if configured > 0 else DEFAULT_CONTEXT_TOKENS
+
+
+def _create_backend(litert_module: Any, backend: str) -> Any:
+    """Cria somente o backend escolhido, sem fallback implícito."""
+    normalized = backend.lower()
+    if normalized == "cpu":
+        return litert_module.Backend.CPU()
+    if normalized == "gpu":
+        return litert_module.Backend.GPU()
+    if normalized == "npu":
+        return litert_module.Backend.NPU()
+    raise ValueError(
+        f"Backend LiteRT-LM inválido: {backend!r}. "
+        "Use 'cpu', 'gpu' ou 'npu'."
+    )
+
+
 # ── LiteRTOpenAIServer ────────────────────────────────────────────────────────
 
 
@@ -51,12 +88,13 @@ class LiteRTOpenAIServer:
         self,
         model_path: str,
         model_name: Optional[str] = None,
-        host: str = "0.0.0.0",
+        host: str = "127.0.0.1",
         port: int = 9379,
         backend: str = "cpu",
         cors_origins: Optional[List[str]] = None,
         max_tokens: int = 4096,
         temperature: float = 0.7,
+        context_tokens: Optional[int] = None,
     ):
         """Inicializa o servidor.
 
@@ -67,8 +105,10 @@ class LiteRTOpenAIServer:
             port: Porta para escutar.
             backend: Backend de inferência.
             cors_origins: Origens CORS permitidas.
-            max_tokens: Máximo de tokens na resposta.
+            max_tokens: Máximo de tokens na resposta (output).
             temperature: Temperatura padrão.
+            context_tokens: Tamanho total do contexto do Engine. Se None,
+                usa ``LITERT_LM_CONTEXT_TOKENS`` ou 20480.
         """
         self.model_path = model_path
         self.model_name = model_name or os.path.basename(
@@ -77,9 +117,16 @@ class LiteRTOpenAIServer:
         self.host = host
         self.port = port
         self.backend = backend
-        self.cors_origins = cors_origins or ["*"]
+        # CORS permanece desabilitado por padrão; uma origem só é liberada
+        # quando foi fornecida explicitamente pelo chamador.
+        self.cors_origins = [
+            origin.strip()
+            for origin in (cors_origins or [])
+            if isinstance(origin, str) and origin.strip()
+        ]
         self.max_tokens = max_tokens
         self.temperature = temperature
+        self.context_tokens = _resolve_context_tokens(context_tokens)
 
         self._engine = None
         self._lock = threading.Lock()
@@ -109,6 +156,7 @@ class LiteRTOpenAIServer:
         stream: bool = False,
         temperature: Optional[float] = None,
         max_tokens: Optional[int] = None,
+        max_completion_tokens: Optional[int] = None,
     ) -> Dict[str, Any]:
         """POST /v1/chat/completions — Gera resposta do modelo.
 
@@ -116,7 +164,9 @@ class LiteRTOpenAIServer:
             messages: Lista de mensagens no formato OpenAI.
             stream: Se True, retorna resposta para streaming (ainda não implementado).
             temperature: Temperatura para esta requisição (opcional).
-            max_tokens: Máximo de tokens para esta requisição (opcional).
+            max_tokens: Campo legado para o máximo de tokens (opcional).
+            max_completion_tokens: Campo OpenAI para o máximo de tokens de
+                saída (opcional). Tem precedência sobre ``max_tokens``.
 
         Returns:
             Dicionário no formato OpenAI ChatCompletion response.
@@ -128,7 +178,13 @@ class LiteRTOpenAIServer:
             return self._make_mock_response(messages)
 
         temp = temperature if temperature is not None else self.temperature
-        max_out = max_tokens if max_tokens is not None else self.max_tokens
+        # ``max_completion_tokens`` é o campo atual da API OpenAI-compatible;
+        # ``max_tokens`` permanece como fallback para clientes antigos.
+        max_out = (
+            max_completion_tokens
+            if max_completion_tokens is not None
+            else max_tokens if max_tokens is not None else self.max_tokens
+        )
 
         with self._lock:
             if self._engine is None:
@@ -183,19 +239,14 @@ class LiteRTOpenAIServer:
 
     def _init_engine(self):
         """Inicializa o LiteRT-LM Engine (thread-safe)."""
-        try:
-            backend_map = {
-                "cpu": litert_lm.Backend.CPU(),
-                "gpu": litert_lm.Backend.GPU(),
-                "npu": litert_lm.Backend.NPU(),
-            }
-            backend_obj = backend_map.get(self.backend.lower(), litert_lm.Backend.CPU())
-        except RuntimeError:
-            backend_obj = litert_lm.Backend.CPU()
+        # A fábrica do backend é chamada somente depois da seleção. Qualquer
+        # RuntimeError do hardware solicitado deve ser observável pelo usuário.
+        backend_obj = _create_backend(litert_lm, self.backend)
 
         self._engine = litert_lm.Engine(
             self.model_path,
             backend=backend_obj,
+            max_num_tokens=self.context_tokens,
         )
         self._engine.__enter__()
 

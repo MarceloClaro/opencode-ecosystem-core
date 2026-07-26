@@ -76,6 +76,7 @@ class LiteRTLMAgent:
                 "temperature": "float — temperatura de amostragem (opcional)",
                 "max_tokens": "int — máx. tokens de saída (opcional)",
                 "repo_id": "str — repositório HuggingFace (obrigatório em import)",
+                "confirm": "bool — deve ser true para autorizar delete",
                 "port": "int — porta do servidor (opcional, default 9379)",
             },
         }
@@ -204,7 +205,7 @@ class LiteRTLMAgent:
             return {"ok": False, "error": "'model_ref' é obrigatório para serve"}
         server = self.skill.serve(
             model_ref,
-            host=ctx.get("host", "0.0.0.0"),
+            host=ctx.get("host", "127.0.0.1"),
             port=ctx.get("port", 9379),
             backend=ctx.get("backend", "cpu"),
             max_tokens=ctx.get("max_tokens", 4096),
@@ -228,5 +229,10 @@ class LiteRTLMAgent:
         model_ref = ctx.get("model_ref")
         if not model_ref:
             return {"ok": False, "error": "'model_ref' é obrigatório para delete"}
+        if ctx.get("confirm") is not True:
+            return {
+                "ok": False,
+                "error": "'confirm' deve ser True para autorizar delete",
+            }
         removed = self.skill.delete_model(model_ref)
         return {"ok": True, "removed": removed, "model": model_ref}
