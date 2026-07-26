@@ -114,8 +114,16 @@ if [ -f "$ECO_DIR/requirements.txt" ]; then
     ok "Dependências Python do ecossistema instaladas."
 fi
 
+# Compilação do motor Colibri MoE em C (nativamente)
+if [ -d "$ECO_DIR/colibri/c" ]; then
+    log "Compilando motor C do Colibri MoE (olmoe)..."
+    (cd "$ECO_DIR/colibri/c" && (make >>"$LOG_FILE" 2>&1 || gcc -O3 -o olmoe main.c -lm >>"$LOG_FILE" 2>&1)) \
+        && ok "Binário Colibri MoE (olmoe) compilado com sucesso." \
+        || warn "Falha ao compilar binário Colibri C (usará fallback se disponível)."
+fi
+
 # Pacotes Python extras usados pelos subsistemas (best-effort)
-pip3 install --user --break-system-packages -q pymupdf pymupdf4llm pypdf sympy z3-solver >>"$LOG_FILE" 2>&1 || true
+pip3 install --user --break-system-packages -q pymupdf pymupdf4llm pypdf sympy z3-solver mcp >>"$LOG_FILE" 2>&1 || true
 
 # ---------------------------------------------------------------------------
 # 6. PATH, aliases e integração nativa
