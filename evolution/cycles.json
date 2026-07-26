@@ -1026,6 +1026,20 @@
         "Expandir os servidores MCP para incluir o Colibri e a suíte de scanners permite a qualquer cliente externo como Claude Code ou Antigravity invocar auditorias rigorosas"
       ],
       "timestamp": 1785037514.3152554
+    },
+    {
+      "round_id": "R243",
+      "objective": "Benchmark Comparativo de Eficiencia Plugins vs MCP (SPEC-935-R230)",
+      "changes": [
+        "Criada especificacao specs/SPEC-935-R230-plugin-vs-mcp-benchmark.md",
+        "Implementado benchmarks/plugin_vs_mcp_eval.py com comparacao empirica de latencia, consumo de memoria e isolamento de falhas",
+        "Criada suite de testes unitarios tests/test_r230_plugin_vs_mcp_eval.py com 100% de aprovacao (3/3 passed)"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Plugins embutidos tem latencia bruta menor por estarem no mesmo processo mas MCP oferece resiliencia superior contra falhas e suporte multilinguagem sem travar o orquestrador"
+      ],
+      "timestamp": 1785037647.9990041
     }
   ]
 }
