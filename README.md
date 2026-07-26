@@ -8,20 +8,43 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.5.0_Colibri_MoE-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-338%2B_passed-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-50%2B_evolutivos-blueviolet.svg)](evolution/cycles.json)
-[![MCP](https://img.shields.io/badge/MCP-5_servidores-8A2BE2.svg)](integrations/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-55_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-187+-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-30%2B-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-28-dodgerblue.svg)](specs/)
 [![LLM Reduction](https://img.shields.io/badge/LLM_Reduction-6_componentes-green.svg)](skills/tooling/llm_reduction.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 187+ agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Lazy Agent Catalog**, **Vectorized Goal Drift Detector**, **Agent Evaluation & Trajectory Harness**, inferência on-device via LiteRT-LM (Gemma 4, Qwen3), runtime MoE em C (Colibri/OLMoE) e 50+ ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 187+ agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (8 Scanners)**, 6 Servidores MCP e 55 ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
 </div>
+
+---
+
+## 📖 Presentation On Storytelling — A Jornada do OpenCode Ecosystem Core
+
+> *"A verdadeira ciência não nasce do acerto fortuito, mas da capacidade inabalável de colocar hipóteses à prova, autocorrigir falhas em circuito fechado e provar a integridade de cada linha de código com rigor imutável."*
+
+### Act I — A Ilha de Agentes e a Busca pela Governança
+No início, o mundo dos agentes autônomos era fragmentado. Dezenas de agentes atuavam de forma isolada, gerando código e pesquisas sem alinhamento epistemológico ou garantias de reprodutibilidade. O desafio era monumental: **Como construir um ecossistema inteligente em que 187+ agentes trabalhem em harmonia, com governança metacognitiva e custo zero de tokens locais?**
+
+### Act II — A Emergência do Orquestrador MarceloClaro e do Colibri MoE
+Dessa necessidade nasceu o orquestrador primário **`MarceloClaroOrchestrator`** e o motor de inferência local **Colibri Engine** (baseado em OLMoE 1B/7B em C nativo com otimização CIL e Lazy Auto-Start na porta 8090). O ecossistema passou a operar com autonomia local, reduzindo a dependência de APIs externas e realizando roteamento inteligente de modelos via `ModelRouter`.
+
+### Act III — O Rito da Autocorreção e os Scanners de Rigor
+Para eliminar alucinações e alegações infundadas, o ecossistema evoluiu com a **Regra Anti-Overclaim** (Regra 4 do `AGENTS.md`) e introduziu o **`SelfCorrectionEngine`** (Diagnóstico → Correção → Validação RED-GREEN via `SpecVerifier` → Registro transparente no `CORRIGENDUM.md`). Em seguida, nasceu o **`SuperRigorPipeline`**, unificando 8 scanners rigorosos (Falsificabilidade Popperiana, Análise de Falácias Epistemológicas, Viés Social, Requisitos Regulatórios e Cobertura Epistemológica).
+
+### Act IV — A Selagem Criptográfica: Merkle Tree e o Harness Auditável
+Para garantir que a integridade do ecossistema não fosse apenas declarativa, mas matematicamente comprovável, foram criados o **`MerkleIntegrityGuard`** (gerando a Merkle Root SHA-256 de todos os arquivos do código-fonte) e o **`InternalAuditHarness`** (emitindo certificados digitais imutáveis). Agora, o agente orquestrador `/marceloclaro` audita, valida e certifica qualquer entrega com um único comando (`audit_and_certify()`).
+
+### Act V — A Fronteira Universal: 6 Servidores MCP
+Hoje, o OpenCode Ecosystem Core é uma fortaleza de rigor acadêmico e tecnológico, totalmente interoperável através de **6 Servidores MCP** (`litert-lm`, `metacognitive-interconnect`, `antigravity-bridge`, `pypi-search`, `colibri-mcp` e `scanners-mcp`). Ele se conecta ao Claude Code, Antigravity CLI, VS Code e terminais remotos, servindo como uma verdadeira **Universidade de Pesquisa Autônoma e Auditável** rodando localmente na sua máquina.
+
+---
 
 ---
 

@@ -23,6 +23,7 @@ python3 -m marceloclaro.cli helpdesk    # o que está errado E como corrigir
 python3 -m marceloclaro.cli ajuda       # este resumo, no terminal
 python3 -m marceloclaro.cli pesquisa "seu tema aqui"   # pesquisa científica (11 fontes)
 python3 -m marceloclaro.cli apresentacao pasta_da_producao  # deck MIRA
+python3 -m marceloclaro.cli audit        # auditoria auditável SHA-256 e Merkle Tree
 ```
 
 ## O menu, explicado sem jargão
@@ -34,10 +35,11 @@ python3 -m marceloclaro.cli apresentacao pasta_da_producao  # deck MIRA
 | `[3]` Reportar conclusão | Diz se um agente terminou com sucesso ou falhou | O sistema aprende: agentes que dão certo ganham mais confiança para tarefas futuras |
 | `[4]` Consultar memória | Mostra o que o sistema já aprendeu | A "memória metacognitiva" é compartilhada por todo o ecossistema, não presa a um agente só |
 | `[5]` Status geral | Uma foto completa: agentes, confiança, economia | Útil para ver "o que está acontecendo agora" |
-| `[6]` Doctor | Checagem rápida (segundos) de saúde | Inclui novo check de redução LLM (SPEC-969) |
+| `[6]` Doctor | Checagem rápida (segundos) de saúde | Inclui verificações de specs, ciclos, Colibri MoE e servidores MCP |
 | `[7]` Ajuda | Este resumo | — |
 | `[8]` Helpdesk | Doctor + sugestão do que fazer para cada problema | Ex.: "CLI X ausente → rode este comando para instalar" |
 | `[9]` Pesquisa científica | Busca um tema em 11 fontes acadêmicas, baixa PDFs, converte para Markdown e gera fichamento + resenha crítica em ABNT/APA | Agora com enriquecimento opcional do DataKnowledgeHub (16 fontes) com `use_data_hub=True` |
+| `[10]` Auditoria & Merkle Tree | Executa os 8 scanners, calcula a Merkle Root do código e emite certificado digital SHA-256 | Garante a integridade e o rigor científico imutável do ecossistema |
 | `[10]` Apresentação MIRA | Transforma `manuscrito.md` em deck HTML de cards de vidro animados | Esteira `extract → plan → copywrite → build → animate → validate`, com relatório de conformidade |
 
 ## Comandos avançados (OpenCode CLI)
