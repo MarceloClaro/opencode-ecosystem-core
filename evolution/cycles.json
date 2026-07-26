@@ -1056,6 +1056,38 @@
         "Documentar a evolucao arquitetural sob uma narrativa de storytelling engaja os usuarios e transmite o rigor cientifico imutavel do ecossistema"
       ],
       "timestamp": 1785059412.3313842
+    },
+    {
+      "round_id": "R245",
+      "objective": "Corrigir servidores MCP colibri-mcp e scanners-mcp que estavam com erro Connection closed (MCP error -32000)",
+      "changes": [
+        "Reescreveu colibri/colibri_mcp_server.py com protocolo MCP real usando mcp SDK 1.28.1, Server/stdio_server, @app.list_tools, @app.call_tool",
+        "Reescreveu scanners/scanners_mcp_server.py com protocolo MCP real usando mcp SDK 1.28.1, Server/stdio_server, @app.list_tools, @app.call_tool",
+        "Adicionou sys.path.insert com project root em ambos para resolver imports",
+        "Removeu classes obsoletas (ColibriMcpServer, ScannersMcpServer) que não implementavam o protocolo MCP"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Servidores MCP precisam implementar o protocolo JSON-RPC 2.0 sobre stdio: initialize, tools/list, tools/call + responder no stdout",
+        "Sempre adicionar sys.path.insert(0, PROJECT_ROOT) em servidores locais para resolver imports do ecossistema",
+        "O SDK oficial mcp (Server, stdio_server, Tool, TextContent) é o padrão a ser seguido em todos os MCPs do ecossistema"
+      ],
+      "timestamp": 1785059636.645178
+    },
+    {
+      "round_id": "R246",
+      "objective": "Fortalecimento do Protocolo MCP SDK em scanners_mcp_server e colibri_mcp_server (SPEC-935-R232)",
+      "changes": [
+        "Criada especificacao specs/SPEC-935-R232-mcp-server-hardening.md",
+        "Atualizado scanners/scanners_mcp_server.py com handlers assincronos list_tools e call_tool via mcp.server.Server e transporte stdio",
+        "Atualizado colibri/colibri_mcp_server.py com suporte MCP SDK oficial e wrapper de compatibilidade",
+        "Criada suite de testes unitarios tests/test_r232_mcp_server_hardening.py com 100% de aprovacao (4/4 passed)"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Implementar o MCP SDK oficial mcp.server.Server com app.run(read_stream, write_stream) garante compatibilidade total com o protocolo MCP padronizado"
+      ],
+      "timestamp": 1785059665.2116828
     }
   ]
 }
