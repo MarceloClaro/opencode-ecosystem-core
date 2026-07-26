@@ -193,7 +193,7 @@ flowchart TD
     LoopRefine --> Orquestrador
 ```
 
-#### 2. Arquitetura Técnica Multilateral Completa (Para Desenvolvedores & Engenheiros DE IA)
+#### 2. Arquitetura Técnica Multilateral Completa (Para Desenvolvedores & Engenheiros de IA)
 
 ```mermaid
 graph TD
@@ -278,6 +278,91 @@ sequenceDiagram
         Test-->>Audit: 7. Validação Concluída com Sucesso (GREEN)
     end
 ```
+
+#### 4. Mapa da Arquitetura Completa (v3.6.0)
+
+```mermaid
+graph TD
+    %% Atores e Orquestrador
+    User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
+    WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
+    
+    %% Camada SDD/TDD
+    subgraph SDD [SDD & TDD Engine]
+        Spec[SpecRegistry<br>Especificações]
+        Ver[SpecVerifier<br>Gate SDD]
+        TDD[TDDRunner<br>Red-Green-Refactor]
+        
+        TDD -.->|Valida| Ver
+        Ver -.->|Lê| Spec
+    end
+
+    %% Camada Transformer
+    subgraph TF [Transformer Layer]
+        Attn[AttentionRouter<br>Multi-Head]
+        Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
+        HTM[(Hierarchical<br>Memory HTM)]
+        Emb[TaskEmbedder<br>d=64]
+        
+        Attn -.->|Usa| Emb
+        HTM -.->|Usa| Emb
+    end
+    
+    %% LLM Reduction Layer (R220-R222)
+    subgraph RED [LLM Reduction Layer]
+        Router[RuleBasedRouter<br>25 regras + DecisionTree]
+        Class[LocalClassifier<br>TF-IDF + LogReg<br>threshold 0.15]
+        Whoosh[Whoosh3Engine<br>Busca BM25F local]
+        Game[GameTheoryLocal<br>Nash/Shapley/Pareto]
+        Jinja[Jinja2Engine<br>9 templates]
+        DataHub[DataKnowledgeHub<br>16 fontes · 5 domínios]
+        Valid[CrossValidator<br>Calibration + Audit]
+        
+        Router --> Class
+        Class --> Whoosh
+        DataHub --> Valid
+    end
+    
+    %% Observabilidade (R222)
+    subgraph OBS [Observabilidade]
+        Metrics[MetricsCollector<br>/health · /metrics]
+        DocMetrics[Doctor Check<br>llm_reduction_metrics]
+        HTTP[MetricsHTTPServer<br>porta 9090]
+        
+        Metrics --> HTTP
+        DocMetrics -.->|consulta| Metrics
+    end
+    
+    %% Pipeline Academico Agentivo
+    subgraph Acad [Pipeline Academico Agentivo v3.0]
+        EvoSci["R101: EvoSci<br>MentorAgent+ResearcherAgent<br>ReviewerAgent+EvoEngine"]
+        DeepRes["R102: Deep Research<br>EvidenceGraph+BFRS+DFRS"]
+        PReview["R103: Peer Review<br>8-dim Rubric+AuditGraph"]
+        Revision["R104d: Manuscript Revision<br>DiffEngine+Rebuttal"]
+        Composer["R105: Paper Composer<br>ABNT/APA/IEEE"]
+        
+        EvoSci --> DeepRes
+        DeepRes --> PReview
+        PReview --> Revision
+        Revision --> Composer
+    end
+    
+    %% Camada Core (Subsistemas)
+    subgraph Core [Core Subsystems]
+        Trust[Trust Engine<br>Behavioral Gate]
+        Eco[Token Economy<br>Staking/Slashing]
+        Scan[Scanners<br>Diagnóstico]
+        AcadLegacy[MASWOS<br>Qualis A1]
+        Reason[Reasoning<br>12 Engines + Quantum]
+        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928/931]
+        LegalBench[Legal Benchmarks<br>SPEC-928]
+        SynthUniv[Synthetic University<br>SPEC-935 · 11 Faculdades]
+        RAG[Scientific RAG<br>Grounding + Citations]
+        Bench[Superhuman Readiness<br>Benchmarks]
+        MetaEval[Metacognitive Eval<br>SPEC-920]
+        Discovery[Continuous Discovery<br>R95 · Loop Automático]
+        EvoMem[Evolutionary Memory<br>R97 · Memória Persistente]
+        Novelty[Novelty V2<br>R98 · Contribution Points]
         RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
         ResearchHub[Research Hub<br>PubMed · bioRxiv · CORE<br>CLI pesquisa R120]
         MiraDeck[Apresentações MIRA<br>manuscrito → deck animado R123]
@@ -388,7 +473,7 @@ sequenceDiagram
     APIGateway -->|HTTP REST| External
     
     %% Agentes
-    subgraph Agents [Catálogo de Agentes 160+]
+    subgraph Agents [Catálogo de Agentes 187+]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
@@ -399,6 +484,7 @@ sequenceDiagram
         A8[Paper Composer]
         A9[Revision Agent]
         A10[32 MASWOS Agents]
+        A11[mira-presenter Agent]
     end
     
     %% Fluxo de Agentes
