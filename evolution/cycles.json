@@ -1131,6 +1131,21 @@
         "Garantir zero ilhas de isolamento e atualizacao continua do instalador 1-Click assegura integridade completa do ecossistema em qualquer plataforma"
       ],
       "timestamp": 1785061253.3135078
+    },
+    {
+      "round_id": "R250",
+      "objective": "Atualizacao da Documentacao Completa, Diagramas Mermaid e Storytelling (SPEC-935-R236)",
+      "changes": [
+        "Criada especificacao specs/SPEC-935-R236-docs-diagrams-and-storytelling.md",
+        "Adicionados 3 fluxogramas visuais completos em Mermaid no README.md (Visao Intuitiva para Leigos, Arquitetura Multilateral para Devs e Ciclo de Vida SDD/TDD/Autocorrecao RED-GREEN)",
+        "Regenerado opencode.json com 187 agentes, 6 servidores MCP e 9 comandos",
+        "Criada suite de testes unitarios tests/test_r236_docs_diagrams_and_storytelling.py com 100% de aprovacao (3/3 passed)"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Documentacao visual rica com fluxogramas em Mermaid em multiplos niveis de abstracao facilita a compreensao tanto para desenvolvedores quanto para leigos"
+      ],
+      "timestamp": 1785062210.7637496
     }
   ]
 }
