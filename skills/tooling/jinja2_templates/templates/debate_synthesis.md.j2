@@ -1,0 +1,69 @@
+# Síntese de Debate Multi-Agente
+
+**Tópico:** {{ topico }}
+**Data:** {{ data | format_date }}
+**Agentes Participantes:** {{ agentes | join(", ") }}
+
+---
+
+## Resumo do Debate
+
+{{ resumo }}
+
+---
+
+## Posições dos Agentes
+
+{% for agente in posicoes %}
+### {{ agente.nome }}
+
+**Posição:** {{ agente.posicao }}
+
+**Argumentos:**
+{% for arg in agente.argumentos %}
+- {{ arg }}
+{% endfor %}
+
+**Confiança:** {{ agente.confianca | pct }}
+
+{% endfor %}
+
+---
+
+## Análise de Consenso
+
+{% if consenso %}
+### Pontos de Consenso
+{% for ponto in consenso %}
+- {{ ponto }}
+{% endfor %}
+{% endif %}
+
+{% if divergencia %}
+### Pontos de Divergência
+{% for ponto in divergencia %}
+- {{ ponto }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Equilíbrio de Nash Identificado
+
+{% if nash_equilibrio %}
+| Estratégia A | Estratégia B | Payoff A | Payoff B |
+|---|---|---|---|
+{% for eq in nash_equilibrio %}
+| {{ eq.strategy_a }} | {{ eq.strategy_b }} | {{ eq.payoff_a }} | {{ eq.payoff_b }} |
+{% endfor %}
+{% endif %}
+
+---
+
+## Recomendação
+
+{{ recomendacao }}
+
+---
+
+*Síntese gerada pelo GameTheoryLocal (0 chamadas LLM).*

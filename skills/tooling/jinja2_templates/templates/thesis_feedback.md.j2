@@ -1,0 +1,55 @@
+# Feedback de Tese: {{ titulo_tese }}
+
+**Avaliador:** {{ avaliador }}
+**Data:** {{ data | format_date }}
+**Nota Geral:** {{ nota_geral }}/10
+
+---
+
+## Critérios Avaliados
+
+| Critério | Nota | Peso |
+|---|---|---|
+{% for criterio in criterios %}
+| {{ criterio.nome }} | {{ criterio.nota }}/10 | {{ criterio.peso }} |
+{% endfor %}
+
+**Média Ponderada:** {{ media_ponderada }}/10
+
+---
+
+## Comentários
+
+### Pontos Fortes
+
+{% for ponto in pontos_fortes %}
+- {{ ponto }}
+{% endfor %}
+
+### Pontos a Melhorar
+
+{% for ponto in pontos_melhoria %}
+- {{ ponto }}
+{% endfor %}
+
+### Sugestões
+
+{% for sugestao in sugestoes %}
+- {{ sugestao }}
+{% endfor %}
+
+---
+
+## Recomendação Final
+
+**{{ recomendacao }}**
+
+---
+
+## Resumo para o Autor
+
+{{ resumo_autor }}
+
+---
+
+*Feedback gerado pelo avaliador {{ avaliador }}.*

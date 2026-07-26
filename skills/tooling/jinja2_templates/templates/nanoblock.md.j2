@@ -1,0 +1,21 @@
+## {{ secao }} (Bloco {{ id_bloco }}/{{ total_blocos }})
+
+{{ conteudo }}
+
+{% if evidencias %}
+**Evidências:**
+{% for ev in evidencias %}
+- {{ ev }}
+{% endfor %}
+{% endif %}
+
+{% if citacoes_chave %}
+**Citações-chave:**
+{% for cit in citacoes_chave %}
+- {{ cit.autor }} ({{ cit.ano }}): "{{ cit.texto }}"
+{% endfor %}
+{% endif %}
+
+---
+
+*Nanoblocos: {{ contexto }} — Word count: {{ conteudo.split() | length }}*

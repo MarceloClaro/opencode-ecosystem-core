@@ -1,0 +1,67 @@
+# Manifesto de Pesquisa: {{ titulo }}
+
+**Autor:** {{ autor }}
+**Data:** {{ data | format_date }}
+**Versão:** {{ versao }}
+
+---
+
+## Tema
+
+{{ tema }}
+
+## Questão de Pesquisa
+
+{{ questao_pesquisa }}
+
+---
+
+## Objetivos
+
+{% if objetivos_gerais %}
+### Gerais
+{% for obj in objetivos_gerais %}
+- {{ obj }}
+{% endfor %}
+{% endif %}
+
+{% if objetivos_especificos %}
+### Específicos
+{% for obj in objetivos_especificos %}
+- {{ obj }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Justificativa
+
+{{ justificativa }}
+
+---
+
+## Metodologia Proposta
+
+{{ metodologia }}
+
+---
+
+## Referências-chave
+
+{% if referencias %}
+{% for ref in referencias %}
+- {{ ref.autor }}, *{{ ref.titulo }}*, {{ ref.ano }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Cronograma
+
+{% if cronograma %}
+| Fase | Início | Fim | Entregável |
+|---|---|---|---|
+{% for fase in cronograma %}
+| {{ fase.nome }} | {{ fase.inicio }} | {{ fase.fim }} | {{ fase.entregavel }} |
+{% endfor %}
+{% endif %}

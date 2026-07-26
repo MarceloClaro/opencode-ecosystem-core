@@ -1,0 +1,80 @@
+# {{ titulo }}
+
+**Autores:** {{ autores | join(", ") }}
+**Ano:** {{ ano }}
+**Palavras-chave:** {{ palavras_chave | join(", ") }}
+
+{% if doi %}
+**DOI:** {{ doi }}
+{% endif %}
+
+---
+
+## Resumo
+
+{{ resumo }}
+
+---
+
+## Análise Crítica
+
+{% if pontos_positivos %}
+### Pontos Positivos
+{% for ponto in pontos_positivos %}
+- {{ ponto }}
+{% endfor %}
+{% endif %}
+
+{% if pontos_negativos %}
+### Pontos Negativos
+{% for ponto in pontos_negativos %}
+- {{ ponto }}
+{% endfor %}
+{% endif %}
+
+{% if contribuicoes %}
+### Principais Contribuições
+{% for contrib in contribuicoes %}
+- {{ contrib }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Metodologia
+
+{% if metodologia %}
+{{ metodologia }}
+{% else %}
+*(não especificada)*
+{% endif %}
+
+## Resultados Principais
+
+{% if resultados %}
+{% for res in resultados %}
+- {{ res }}
+{% endfor %}
+{% else %}
+*(não informados)*
+{% endif %}
+
+---
+
+## Citações Relevantes
+
+{% if citacoes %}
+{% for cit in citacoes %}
+> {{ cit }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Referência ABNT
+
+```
+{{ autores | map('abnt_author') | join("; ") }}.
+{{ titulo }}.
+{{ ano }}.
+```

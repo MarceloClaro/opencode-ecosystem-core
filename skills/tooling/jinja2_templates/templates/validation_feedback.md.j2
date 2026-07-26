@@ -1,0 +1,58 @@
+# Feedback de Validação: {{ titulo_projeto }}
+
+**Validado por:** {{ validador }}
+**Data:** {{ data | format_date }}
+**Status:** {{ status }}
+
+---
+
+## Resumo da Validação
+
+{{ resumo }}
+
+---
+
+## Critérios
+
+{% if criterios %}
+| Critério | Resultado | Observação |
+|---|---|---|
+{% for crit in criterios %}
+| {{ crit.nome }} | {{ crit.resultado }} | {{ crit.observacao }} |
+{% endfor %}
+{% endif %}
+
+---
+
+## Evidências
+
+{% if evidencias %}
+{% for ev in evidencias %}
+### {{ ev.titulo }}
+
+{{ ev.descricao }}
+
+**Fonte:** {{ ev.fonte }}
+
+{% endfor %}
+{% endif %}
+
+---
+
+## Recomendações
+
+{% if recomendacoes %}
+{% for rec in recomendacoes %}
+- **{{ rec.prioridade | upper }}**: {{ rec.texto }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Anexos
+
+{% if anexos %}
+{% for anexo in anexos %}
+- [{{ anexo.nome }}]({{ anexo.path }})
+{% endfor %}
+{% endif %}

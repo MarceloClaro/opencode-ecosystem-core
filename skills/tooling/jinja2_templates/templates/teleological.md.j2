@@ -1,0 +1,37 @@
+# Scanner Teleológico: {{ titulo }}
+
+**Score:** {{ score | pct }}
+**Status:** {{ status | upper }}
+**Data:** {{ data | format_date }}
+
+---
+
+## Resumo
+
+{{ resumo }}
+
+---
+
+## Detalhes
+
+{% if detalhes %}
+| Nome | Status | Observação |
+|---|---|---|
+{% for det in detalhes %}
+| {{ det.nome }} | {{ det.status }} | {{ det.observacao }} |
+{% endfor %}
+{% endif %}
+
+---
+
+## Recomendações
+
+{% if recomendacoes %}
+{% for rec in recomendacoes %}
+- {{ rec }}
+{% endfor %}
+{% endif %}
+
+---
+
+*Gerado pelo OpenCode Ecosystem Core — Scanner Teleológico.*
