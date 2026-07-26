@@ -37,8 +37,7 @@ from scanners.evolutionary_pipeline import EvolutionaryRoadmap  # noqa: F401 (re
 from scanners.potentiality_scanner import PotentialityScanner
 from scanners.social_impact_scanner import SocialImpactScanner
 from scanners.legal_impact_scanner import LegalImpactScanner
-from scanners.reversa_scanner import ReversaScanner
-from scanners.epistemic_prioritizer import EpistemicPrioritizer
+from scanners.scientific_reasoning_scanner import ScientificReasoningScanner
 from scanners.successor_generator import SuccessorGenerator
 
 
@@ -779,3 +778,39 @@ class DiagnosticPipeline:
 
 # Singleton — modo ecossistema como padrão (SPEC-022)
 diagnostic_pipeline = DiagnosticPipeline(domain="ecosystem")
+
+
+class SuperRigorPipeline:
+    """Pipeline de auditoria de rigor e excelência consolidado."""
+
+    def __init__(self):
+        self.scientific_scanner = ScientificReasoningScanner()
+
+    def audit_production(self, text: str, goals: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+        """Audita rigorosamente o texto de produção através de múltiplos scanners."""
+        diag = diagnostic_pipeline.run(corpus=text, goals=goals)
+        scientific = self.scientific_scanner.scan_text(text)
+
+        sri = scientific.get("sri_score", 0.0)
+        noological_cov = diag.get("noological", {}).get("total_coverage_pct", 50.0)
+        teleo_gaps = diag.get("teleological", {}).get("total_gaps", 0)
+
+        # Excellence score (EXS 0-100)
+        exs = round((sri * 0.50) + (noological_cov * 0.50) - (teleo_gaps * 5.0), 2)
+        exs = max(0.0, min(100.0, exs))
+
+        passed = exs >= 75.0
+        return {
+            "excellence_score": exs,
+            "passed": passed,
+            "scientific_rigor": scientific,
+            "diagnostic_summary": {
+                "noological_coverage_pct": noological_cov,
+                "teleological_gaps": teleo_gaps,
+            },
+            "status": "approved_for_excellence" if passed else "requires_refinement",
+            "recommendations": scientific.get("recommendations", []),
+        }
+
+
+super_rigor_pipeline = SuperRigorPipeline()
