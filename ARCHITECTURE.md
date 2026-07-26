@@ -99,19 +99,35 @@ graph TD
     end
     MiraAgent -.->|encarna o pipeline| Illus
 
-    %% Motor Colibri MoE & Autocorreção (R214-R221)
-    subgraph EngineMoE ["Colibri MoE & Self-Correction (R214-R221)"]
+    %% Motor Colibri MoE, Autocorreção e Integridade Criptográfica (R214-R230)
+    subgraph EngineMoE ["Colibri MoE, Self-Correction & Merkle Integrity Guard (R214-R230)"]
         ColibriEngine["Colibri MoE C Engine<br>OLMoE 1B/7B int4<br>colibri/c/olmoe"]
         ColibriProv["ColibriProvider<br>Porta 8090 · OpenAI API<br>Lazy Auto-Start"]
         SelfCorrection["SelfCorrectionEngine<br>Diagnóstico → Correção<br>Validação RED-GREEN → CORRIGENDUM"]
         LazyCatalog["LazyAgentCatalog<br>187+ agentes · @lru_cache"]
         VecDrift["VectorizedGoalDriftDetector<br>N-gram L2 Cosseno"]
         AgentEval["AgentEvalHarness<br>TSR + Tool Accuracy + Percentis"]
-        
+        MerkleGuard["MerkleIntegrityGuard<br>Merkle Root SHA-256<br>Imutabilidade do Código"]
+        InternalAudit["InternalAuditHarness<br>Certificados Digitais Imutáveis"]
+        ExtValidation["ExternalValidationHarness<br>Provas Criptográficas 3rd Party"]
+        SuperRigor["SuperRigorPipeline<br>8 Scanners de Excelência (EXS 0-100)"]
+
         ColibriProv --> ColibriEngine
         SelfCorrection --> Ver
         SelfCorrection --> AuditTrail
         AgentEval --> Metrics
+        MerkleGuard --> InternalAudit
+        SuperRigor --> InternalAudit
+    end
+
+    %% Servidores MCP Interoperáveis (R229)
+    subgraph MCPServers ["Servidores MCP Interoperáveis (6 Servers)"]
+        MCPLiteRT["litert-lm<br>LiteRT-LM On-Device"]
+        MCPMCI["metacognitive-interconnect<br>Memória Episódica & MetaBus"]
+        MCPAntigrav["antigravity-bridge<br>Integração Antigravity CLI"]
+        MCPPyPI["pypi-search<br>Busca de Pacotes PyPI"]
+        MCPColibri["colibri-mcp<br>Inferência Colibri MoE"]
+        MCPScanners["scanners-mcp<br>Auditoria & Merkle Tree"]
     end
 
     %% Seguranca e Qualidade
