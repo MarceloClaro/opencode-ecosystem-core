@@ -1,33 +1,49 @@
 # -*- coding: utf-8 -*-
-"""
-Attention Router — Multi-Head Attention para Roteamento de Tarefas
-==================================================================
-Analogia Transformer: a tarefa é a *query* (Q), os Agent Cards são as *keys* (K)
-e os próprios agentes são os *values* (V). O roteamento calcula
-softmax(Q·K / sqrt(d)) e seleciona o agente com maior peso de atenção.
+"""Roteamento multicritério inspirado em atenção Transformer.
 
-Quatro cabeças de atenção (multi-head), cada uma com um critério:
-- head_semantic:  similaridade semântica tarefa × agente (embeddings)
-- head_capability: cobertura exata das capacidades requeridas
-- head_confidence: confidence ledger metacognitivo (histórico de sucesso)
-- head_load:       disponibilidade/carga atual do agente
-
-Inspiração:
-- Multi-Head Attention (Vaswani et al. 2017)
-- Perceiver (deepmind-research): cross-attention latente × entradas
-- PrediNet (deepmind-research): atenção relacional para raciocínio
-
-SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
+A implementação é uma heurística determinística e auditável, não uma camada
+neural treinada. Capacidades obrigatórias e disponibilidade são *hard gates*;
+somente os candidatos elegíveis recebem scores normalizados e pesos softmax.
 """
 
 import math
-from typing import Dict, List, Tuple, Any
+from typing import Any, Dict, List, Tuple
 
-from .embedder import TaskEmbedder, D_MODEL
+from .embedder import TaskEmbedder
 
 
 def _dot(a: List[float], b: List[float]) -> float:
-    return sum(x * y for x, y in zip(a, b))
+    return math.fsum(x * y for x, y in zip(a, b))
+
+
+def _unit_score(value: Any, default: float = 0.0) -> float:
+    """Converte um valor numérico em score finito no intervalo ``[0, 1]``."""
+
+    if isinstance(value, bool):
+        return default
+    try:
+        score = float(value)
+    except (TypeError, ValueError):
+        return default
+    if not math.isfinite(score):
+        return default
+    return max(0.0, min(1.0, score))
+
+
+def _cosine_unit_interval(a: List[float], b: List[float]) -> float:
+    """Mapeia similaridade cosseno de ``[-1, 1]`` para ``[0, 1]``."""
+
+    norm_a = math.sqrt(_dot(a, a))
+    norm_b = math.sqrt(_dot(b, b))
+    if not math.isfinite(norm_a) or not math.isfinite(norm_b):
+        return 0.5
+    if norm_a == 0.0 or norm_b == 0.0:
+        return 0.5
+    cosine = _dot(a, b) / (norm_a * norm_b)
+    if not math.isfinite(cosine):
+        return 0.5
+    cosine = max(-1.0, min(1.0, cosine))
+    return (cosine + 1.0) / 2.0
 
 
 def _softmax(scores: List[float]) -> List[float]:
@@ -35,14 +51,14 @@ def _softmax(scores: List[float]) -> List[float]:
         return []
     m = max(scores)
     exps = [math.exp(s - m) for s in scores]
-    total = sum(exps) or 1.0
+    total = math.fsum(exps) or 1.0
     return [e / total for e in exps]
 
 
 class AttentionRouter:
-    """Roteador multi-cabeça: decide qual agente atende cada tarefa."""
+    """Ranqueia agentes elegíveis por quatro critérios normalizados."""
 
-    # Pesos de combinação das cabeças (aprendíveis no futuro; fixos por ora)
+    _HEAD_NAMES = ("semantic", "capability", "confidence", "load")
     HEAD_WEIGHTS = {
         "semantic": 0.30,
         "capability": 0.35,
@@ -51,90 +67,191 @@ class AttentionRouter:
     }
 
     def __init__(self):
+        self._head_weights = self._validated_weights(self.HEAD_WEIGHTS)
         self.embedder = TaskEmbedder()
+
+    @classmethod
+    def _validated_weights(cls, weights: Dict[str, float]) -> Dict[str, float]:
+        """Exige uma combinação convexa completa para evitar scores ambíguos."""
+
+        if set(weights) != set(cls._HEAD_NAMES):
+            raise ValueError("HEAD_WEIGHTS deve conter exatamente as quatro cabeças")
+        normalized: Dict[str, float] = {}
+        for name in cls._HEAD_NAMES:
+            value = weights[name]
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                raise ValueError(f"peso inválido para a cabeça {name!r}")
+            score = float(value)
+            if not math.isfinite(score) or not 0.0 <= score <= 1.0:
+                raise ValueError(f"peso fora de [0, 1] para a cabeça {name!r}")
+            normalized[name] = score
+        if not math.isclose(math.fsum(normalized.values()), 1.0, abs_tol=1e-12):
+            raise ValueError("HEAD_WEIGHTS deve somar 1")
+        return normalized
 
     # ------------------------------------------------------------------
     # Cabeças de atenção
     # ------------------------------------------------------------------
     def _head_semantic(self, task_vec: List[float], cards: List[Dict]) -> List[float]:
-        """Q·K / sqrt(d) sobre embeddings semânticos."""
-        scale = math.sqrt(D_MODEL)
+        """Similaridade semântica cosseno normalizada."""
+
         return [
-            _dot(task_vec, self.embedder.embed_agent(card)) * 10.0 / scale * D_MODEL ** 0.5
+            _cosine_unit_interval(task_vec, self.embedder.embed_agent(card))
             for card in cards
         ]
 
     def _head_capability(self, required: List[str], cards: List[Dict]) -> List[float]:
-        """Cobertura das capacidades requeridas (Jaccard direcionado)."""
+        """Cobertura direcionada das capacidades obrigatórias."""
+
+        required_set = set(required)
         scores = []
         for card in cards:
             caps = set(card.get("capabilities", []))
-            if not required:
-                scores.append(0.5)
+            if not required_set:
+                scores.append(1.0)
                 continue
-            overlap = len(caps & set(required)) / len(set(required))
-            scores.append(overlap * 4.0)  # amplifica para dominar o softmax
+            scores.append(len(caps & required_set) / len(required_set))
         return scores
 
     def _head_confidence(self, cards: List[Dict]) -> List[float]:
         """Confiança metacognitiva histórica (confidence ledger)."""
-        return [card.get("confidence_score", 0.5) * 2.0 for card in cards]
+
+        return [_unit_score(card.get("confidence_score", 0.5), 0.5) for card in cards]
 
     def _head_load(self, cards: List[Dict]) -> List[float]:
-        """Disponibilidade: penaliza agentes ocupados."""
-        return [1.0 if card.get("status") == "available" else -2.0 for card in cards]
+        """Capacidade livre declarada; ausência de carga equivale a livre."""
+
+        return [1.0 - _unit_score(card.get("load", 0.0), 1.0) for card in cards]
+
+    @staticmethod
+    def _hard_gate_reasons(required: List[str], card: Dict[str, Any]) -> List[str]:
+        """Explica por que um cartão falhou nos gates não negociáveis."""
+
+        reasons: List[str] = []
+        if card.get("status") != "available":
+            reasons.append("status_not_available")
+        capabilities = card.get("capabilities", ())
+        if isinstance(capabilities, str):
+            capabilities = (capabilities,)
+        try:
+            capability_set = set(capabilities)
+        except TypeError:
+            capability_set = set()
+            reasons.append("invalid_capabilities")
+        missing = sorted(set(required) - capability_set)
+        if missing:
+            reasons.append("missing_capabilities:" + ",".join(missing))
+        return reasons
+
+    def _partition_cards(
+        self,
+        required: List[str],
+        cards: List[Dict],
+    ) -> Tuple[List[Dict], Dict[str, List[str]]]:
+        eligible_by_id: Dict[str, Dict] = {}
+        excluded: Dict[str, List[str]] = {}
+        seen: set[str] = set()
+        for index, card in enumerate(cards):
+            if not isinstance(card, dict):
+                excluded[f"candidate-{index}"] = ["invalid_card"]
+                continue
+            raw_agent_id = card.get("agent_id")
+            if not isinstance(raw_agent_id, str) or not raw_agent_id.strip():
+                excluded[f"candidate-{index}"] = ["missing_agent_id"]
+                continue
+            agent_id = raw_agent_id.strip()
+            if agent_id in seen:
+                eligible_by_id.pop(agent_id, None)
+                excluded[agent_id] = ["duplicate_agent_id"]
+                continue
+            seen.add(agent_id)
+            reasons = self._hard_gate_reasons(required, card)
+            if reasons:
+                excluded[agent_id] = reasons
+            else:
+                normalized = dict(card)
+                normalized["agent_id"] = agent_id
+                eligible_by_id[agent_id] = normalized
+        return list(eligible_by_id.values()), excluded
+
+    def _evaluate(
+        self,
+        description: str,
+        required_capabilities: List[str],
+        cards: List[Dict],
+    ) -> Dict[str, Any]:
+        """Executa gates, cabeças, utilidade convexa e ranking uma única vez."""
+
+        if isinstance(required_capabilities, str):
+            required = [required_capabilities]
+        else:
+            required = list(dict.fromkeys(required_capabilities))
+        eligible, excluded = self._partition_cards(required, cards)
+        agent_ids = [str(card["agent_id"]) for card in eligible]
+
+        empty_heads = {name: {} for name in self._HEAD_NAMES}
+        if not eligible:
+            return {
+                "eligible": [],
+                "excluded": excluded,
+                "heads": empty_heads,
+                "utility": {},
+                "weights": dict(self._head_weights),
+                "ranking": [],
+            }
+
+        # O índice global de tarefas não pode alterar uma decisão idêntica.
+        task_vec = self.embedder.embed_task(description, required, positional_index=0)
+        scores_by_head = {
+            "semantic": self._head_semantic(task_vec, eligible),
+            "capability": self._head_capability(required, eligible),
+            "confidence": self._head_confidence(eligible),
+            "load": self._head_load(eligible),
+        }
+        heads = {
+            name: dict(zip(agent_ids, scores_by_head[name]))
+            for name in self._HEAD_NAMES
+        }
+        utility = {
+            agent_id: math.fsum(
+                self._head_weights[name] * heads[name][agent_id]
+                for name in self._HEAD_NAMES
+            )
+            for agent_id in agent_ids
+        }
+        final_weights = dict(zip(agent_ids, _softmax([utility[item] for item in agent_ids])))
+        ranking = sorted(
+            final_weights.items(),
+            key=lambda item: (-item[1], item[0]),
+        )
+        return {
+            "eligible": [agent_id for agent_id, _ in ranking],
+            "excluded": excluded,
+            "heads": heads,
+            "utility": utility,
+            "weights": dict(self._head_weights),
+            "ranking": ranking,
+        }
 
     # ------------------------------------------------------------------
     # Atenção combinada
     # ------------------------------------------------------------------
     def route(self, description: str, required_capabilities: List[str],
-              cards: List[Dict], positional_index: int = 0) -> List[Tuple[str, float]]:
+               cards: List[Dict], positional_index: int = 0) -> List[Tuple[str, float]]:
         """
         Retorna ranking [(agent_id, attention_weight)] ordenado do melhor
         para o pior, com pesos softmax somando 1.
         """
-        if not cards:
-            return []
-
-        task_vec = self.embedder.embed_task(description, required_capabilities, positional_index)
-
-        heads = {
-            "semantic": self._head_semantic(task_vec, cards),
-            "capability": self._head_capability(required_capabilities, cards),
-            "confidence": self._head_confidence(cards),
-            "load": self._head_load(cards),
-        }
-
-        # Combinação linear das cabeças (projeção W_O do multi-head)
-        combined = [0.0] * len(cards)
-        for name, scores in heads.items():
-            w = self.HEAD_WEIGHTS[name]
-            for i, s in enumerate(scores):
-                combined[i] += w * s
-
-        weights = _softmax(combined)
-        ranking = sorted(
-            zip([c["agent_id"] for c in cards], weights),
-            key=lambda x: x[1],
-            reverse=True,
-        )
-        return ranking
+        del positional_index  # compatibilidade de API; deliberadamente não participa do score
+        return self._evaluate(description, required_capabilities, cards)["ranking"]
 
     def explain(self, description: str, required_capabilities: List[str],
-                cards: List[Dict]) -> Dict[str, Any]:
-        """Auditoria: expõe os scores por cabeça para transparência total."""
-        task_vec = self.embedder.embed_task(description, required_capabilities)
+                 cards: List[Dict]) -> Dict[str, Any]:
+        """Expõe gates, scores, utilidade, pesos e ranking da heurística."""
+
+        explanation = self._evaluate(description, required_capabilities, cards)
         return {
             "task": description,
-            "heads": {
-                "semantic": dict(zip([c["agent_id"] for c in cards],
-                                     self._head_semantic(task_vec, cards))),
-                "capability": dict(zip([c["agent_id"] for c in cards],
-                                       self._head_capability(required_capabilities, cards))),
-                "confidence": dict(zip([c["agent_id"] for c in cards],
-                                       self._head_confidence(cards))),
-                "load": dict(zip([c["agent_id"] for c in cards],
-                                 self._head_load(cards))),
-            },
-            "ranking": self.route(description, required_capabilities, cards),
+            "required_capabilities": list(required_capabilities),
+            **explanation,
         }

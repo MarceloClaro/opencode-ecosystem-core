@@ -21,6 +21,7 @@ Inspiração: scihub-cli e paper-download-mcp (Oxidane-bot).
 
 import json
 import logging
+import os
 import shutil
 import subprocess
 import urllib.parse
@@ -300,6 +301,120 @@ class ScieloSearcher(BaseSearcher):
         return records
 
 
+class PubMedSearcher(BaseSearcher):
+    """Busca no PubMed via NCBI E-utilities (esearch + esummary, 2 chamadas)."""
+    name = "pubmed"
+    BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+
+    def _search(self, query: str, limit: int) -> List[PaperRecord]:
+        search_url = (f"{self.BASE}/esearch.fcgi?db=pubmed&term="
+                      f"{urllib.parse.quote(query)}&retmax={limit}&retmode=json")
+        search_data = _http_get_json(search_url)
+        pmids = search_data.get("esearchresult", {}).get("idlist", [])
+        if not pmids:
+            return []
+
+        summary_url = (f"{self.BASE}/esummary.fcgi?db=pubmed&id="
+                       f"{','.join(pmids)}&retmode=json")
+        summary_data = _http_get_json(summary_url)
+        result = summary_data.get("result", {})
+
+        records = []
+        for pmid in result.get("uids", []):
+            doc = result.get(pmid, {})
+            if not doc:
+                continue
+            authors = [a.get("name", "") for a in doc.get("authors", []) if a.get("name")]
+            year = None
+            pubdate = doc.get("pubdate") or doc.get("sortpubdate") or ""
+            if pubdate[:4].isdigit():
+                year = int(pubdate[:4])
+            doi = next(
+                (item.get("value") for item in doc.get("articleids", [])
+                 if item.get("idtype") == "doi"),
+                None,
+            )
+            records.append(PaperRecord(
+                title=doc.get("title") or "",
+                authors=authors,
+                year=year,
+                doi=doi,
+                url=f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
+                venue=doc.get("fulljournalname") or doc.get("source") or "",
+                source=self.name,
+                extra={"pmid": pmid},
+            ))
+        return records
+
+
+class BiorxivSearcher(BaseSearcher):
+    """Busca preprints bioRxiv/medRxiv via Crossref e o prefixo DOI 10.1101."""
+    name = "biorxiv"
+
+    def _search(self, query: str, limit: int) -> List[PaperRecord]:
+        url = ("https://api.crossref.org/works?"
+               f"query={urllib.parse.quote(query)}&filter=prefix:10.1101"
+               f"&rows={limit}&select=DOI,title,author,issued,container-title,URL")
+        data = _http_get_json(url)
+        records = []
+        for item in data.get("message", {}).get("items", []):
+            year = None
+            issued = item.get("issued", {}).get("date-parts", [[None]])
+            if issued and issued[0] and issued[0][0]:
+                year = issued[0][0]
+            authors = []
+            for author in item.get("author", []) or []:
+                name = " ".join(x for x in [author.get("given"), author.get("family")] if x)
+                if name:
+                    authors.append(name)
+            records.append(PaperRecord(
+                title=(item.get("title") or [""])[0],
+                authors=authors,
+                year=year,
+                doi=item.get("DOI"),
+                url=item.get("URL"),
+                venue=(item.get("container-title") or ["bioRxiv/medRxiv"])[0],
+                source=self.name,
+            ))
+        return records
+
+
+class CoreSearcher(BaseSearcher):
+    """Busca no CORE; sem ``CORE_API_KEY`` degrada graciosamente para vazio."""
+    name = "core"
+    ENV_KEY = "CORE_API_KEY"
+
+    def _search(self, query: str, limit: int) -> List[PaperRecord]:
+        api_key = os.environ.get(self.ENV_KEY)
+        if not api_key:
+            logger.info(
+                "[core] CORE_API_KEY não configurada; obtenha uma chave gratuita em "
+                "https://core.ac.uk/services/api e exporte CORE_API_KEY."
+            )
+            return []
+
+        url = (f"https://api.core.ac.uk/v3/search/works?q={urllib.parse.quote(query)}"
+               f"&limit={limit}")
+        data = _http_get_json(url, headers={"Authorization": f"Bearer {api_key}"})
+
+        records = []
+        for item in data.get("results", []):
+            authors = [a.get("name", "") for a in item.get("authors", []) if a.get("name")]
+            source_urls = item.get("sourceFulltextUrls") or []
+            records.append(PaperRecord(
+                title=item.get("title") or "",
+                authors=authors,
+                year=item.get("yearPublished"),
+                doi=item.get("doi"),
+                url=item.get("downloadUrl") or (source_urls[0] if source_urls else None),
+                pdf_url=item.get("downloadUrl"),
+                abstract=item.get("abstract") or "",
+                venue=item.get("publisher") or "",
+                source=self.name,
+            ))
+        return records
+
+
 class GitHubSearcher(BaseSearcher):
     """Busca repositórios no GitHub (gh CLI se autenticado, senão API pública)."""
     name = "github"
@@ -390,6 +505,9 @@ ALL_SEARCHERS = {
     "openalex": OpenAlexSearcher,
     "europepmc": EuropePmcSearcher,
     "scielo": ScieloSearcher,
+    "pubmed": PubMedSearcher,
+    "biorxiv": BiorxivSearcher,
+    "core": CoreSearcher,
     "github": GitHubSearcher,
     "kaggle": KaggleSearcher,
 }

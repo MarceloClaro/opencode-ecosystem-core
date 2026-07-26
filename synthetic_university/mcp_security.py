@@ -33,8 +33,13 @@ logger = logging.getLogger(__name__)
 # Campos sensiveis que devem ser sanitizados nos logs
 SENSITIVE_FIELDS = {
     "password", "passwd", "secret", "token", "api_key", "apikey",
+    "passwords", "tokens", "access_token", "client_secret",
     "key", "auth", "authorization", "credential", "private",
 }
+
+# Marcador interno para que o servidor MCP não serialize uma falha de
+# validação como se fosse o resultado bem-sucedido de uma ferramenta.
+MCP_ERROR_MARKER = "_mcp_error"
 
 
 # ============================================================
@@ -60,6 +65,14 @@ class MCPGuard:
         Returns:
             Dict com valid (bool), errors (list), tool, args.
         """
+        if not isinstance(args, dict):
+            return {
+                "valid": False,
+                "errors": ["Arguments must be a JSON object"],
+                "tool": tool_name,
+                "args": args,
+            }
+
         if schema is None:
             return {"valid": True, "errors": [], "tool": tool_name, "args": args}
 
@@ -126,6 +139,7 @@ class MCPGuard:
             validation = self.validate(tool_name, args, schema)
             if not validation["valid"]:
                 return {
+                    MCP_ERROR_MARKER: True,
                     "error": True,
                     "message": f"Validation failed for '{tool_name}': {'; '.join(validation['errors'])}",
                     "validation_errors": validation["errors"],
@@ -191,7 +205,9 @@ class AuditLogger:
         """
         entry_id = uuid.uuid4().hex[:12]
         sanitized = self._sanitize(args)
-        result_summary = json.dumps(result, ensure_ascii=False)[:200]
+        result_summary = json.dumps(
+            self._sanitize(result), ensure_ascii=False, default=str
+        )[:200]
 
         entry = AuditEntry(
             timestamp=time.time(),
@@ -248,17 +264,33 @@ class AuditLogger:
             "timespan_seconds": round(timespan, 2),
         }
 
-    def _sanitize(self, args: Dict[str, Any]) -> Dict[str, Any]:
-        """Sanitiza argumentos removendo campos sensiveis."""
-        sanitized = {}
-        for k, v in args.items():
-            if k.lower() in SENSITIVE_FIELDS:
-                sanitized[k] = "***REDACTED***"
-            elif isinstance(v, str) and len(v) > 200:
-                sanitized[k] = v[:200] + "..."
-            else:
-                sanitized[k] = v
-        return sanitized
+    @staticmethod
+    def _is_sensitive_field(name: Any) -> bool:
+        """Retorna se um nome de campo identifica uma credencial."""
+        normalized = str(name).strip().lower().replace("-", "_")
+        compact = normalized.replace("_", "")
+        sensitive_compact = {field.replace("_", "") for field in SENSITIVE_FIELDS}
+        return normalized in SENSITIVE_FIELDS or compact in sensitive_compact
+
+    def _sanitize(self, value: Any) -> Any:
+        """Sanitiza recursivamente dicts/listas sem destruir dados públicos."""
+        if isinstance(value, dict):
+            return {
+                key: (
+                    "***REDACTED***"
+                    if self._is_sensitive_field(key)
+                    else self._sanitize(nested_value)
+                )
+                for key, nested_value in value.items()
+            }
+
+        if isinstance(value, list):
+            return [self._sanitize(item) for item in value]
+
+        if isinstance(value, str) and len(value) > 200:
+            return value[:200] + "..."
+
+        return value
 
 
 # ============================================================
@@ -354,40 +386,70 @@ class ToolVetter:
             "length": len(text),
         }
 
-    def scan_args(self, args: Dict[str, Any]) -> Dict[str, Any]:
-        """Escaneia todos os campos de um dict de argumentos.
+    def scan_args(self, args: Any) -> Dict[str, Any]:
+        """Escaneia recursivamente strings em dicts e listas de argumentos.
 
         Args:
-            args: Dict de argumentos.
+            args: Dict ou lista de argumentos.
 
         Returns:
             Dict com suspicious (bool), flagged_fields (list),
-            total_score (int), details (dict).
+            total_score (int), details (dict) e flags (list) agregadas.
         """
-        if not isinstance(args, dict):
-            return {"suspicious": False, "flagged_fields": [], "total_score": 0, "details": {}}
+        empty_result = {
+            "suspicious": False,
+            "flagged_fields": [],
+            "total_score": 0,
+            "details": {},
+            "flags": [],
+        }
+        if not isinstance(args, (dict, list)):
+            return empty_result
 
         flagged_fields = []
+        flags = []
         total_score = 0
         details = {}
 
-        for key, value in args.items():
+        def scan_value(value: Any, path: str) -> None:
+            nonlocal total_score
+
             if isinstance(value, str):
                 result = self.check(value)
-                if result["suspicious"]:
-                    flagged_fields.append(key)
-                    total_score += result["score"]
-                    details[key] = {
-                        "flags": result["flags"],
-                        "score": result["score"],
-                        "preview": value[:80],
-                    }
+                if not result["suspicious"]:
+                    return
+
+                flagged_fields.append(path)
+                total_score += result["score"]
+                details[path] = {
+                    "flags": list(result["flags"]),
+                    "score": result["score"],
+                    "preview": value[:80],
+                }
+                for flag in result["flags"]:
+                    if flag not in flags:
+                        flags.append(flag)
+                return
+
+            if isinstance(value, dict):
+                for key, nested_value in value.items():
+                    nested_path = f"{path}.{key}" if path else str(key)
+                    scan_value(nested_value, nested_path)
+                return
+
+            if isinstance(value, list):
+                for index, nested_value in enumerate(value):
+                    nested_path = f"{path}[{index}]" if path else f"[{index}]"
+                    scan_value(nested_value, nested_path)
+
+        scan_value(args, "")
 
         return {
             "suspicious": len(flagged_fields) > 0,
             "flagged_fields": flagged_fields,
             "total_score": min(100, total_score),
             "details": details,
+            "flags": flags,
         }
 
 

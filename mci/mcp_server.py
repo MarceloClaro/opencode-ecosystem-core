@@ -25,24 +25,71 @@ from mci.metabus import metabus
 from mci.blackboard import blackboard
 
 # Simula a estrutura do MCP SDK (assumindo que será rodado no contexto do ecossistema)
+MCP_PROTOCOL_VERSION = "2024-11-05"
+MCP_SERVER_VERSION = "1.0.0"
+
+
 class SimpleMCPServer:
     """Implementação leve de servidor MCP via stdio."""
-    
-    def __init__(self, name: str):
+
+    def __init__(self, name: str, version: str = MCP_SERVER_VERSION):
         self.name = name
+        self.version = version
         self.tools = {}
-        
+
     def register_tool(self, name: str, description: str, schema: Dict, handler: callable):
         self.tools[name] = {
             "description": description,
             "schema": schema,
             "handler": handler
         }
-        
+
+    @staticmethod
+    def _error(message: str, code: int) -> Dict[str, Any]:
+        """Cria um erro de resultado MCP sem lançar exceções ao transporte."""
+        return {
+            "isError": True,
+            "error": {"code": code, "message": message},
+            "content": [{"type": "text", "text": message}],
+        }
+
+    def _initialize(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Retorna o handshake mínimo esperado por clientes MCP."""
+        return {
+            "protocolVersion": params.get("protocolVersion", MCP_PROTOCOL_VERSION),
+            "capabilities": {"tools": {}},
+            "serverInfo": {"name": self.name, "version": self.version},
+        }
+
     async def handle_request(self, req: Dict) -> Dict:
+        """Processa uma requisição MCP e retorna somente o resultado da operação.
+
+        O envelope JSON-RPC é responsabilidade de :meth:`run_stdio`, mantendo
+        a compatibilidade histórica deste método assíncrono com os testes e
+        consumidores internos do MCI.
+        """
+        if not isinstance(req, dict):
+            return self._error(
+                "A requisição MCP deve ser um objeto JSON.",
+                -32600,
+            )
+
         method = req.get("method")
         params = req.get("params", {})
-        
+        if params is None:
+            params = {}
+        if not isinstance(params, dict):
+            return self._error(
+                "Os parâmetros da requisição MCP devem ser um objeto JSON.",
+                -32602,
+            )
+
+        if method == "initialize":
+            return self._initialize(params)
+
+        if method == "ping":
+            return {}
+
         if method == "tools/list":
             return {
                 "tools": [
@@ -54,57 +101,115 @@ class SimpleMCPServer:
                     for name, info in self.tools.items()
                 ]
             }
-        elif method == "tools/call":
+
+        if method == "tools/call":
             tool_name = params.get("name")
             tool_args = params.get("arguments", {})
-            
-            if tool_name in self.tools:
-                try:
-                    # Executa de forma síncrona para simplificar, em prod seria await
-                    result = self.tools[tool_name]["handler"](tool_args)
-                    return {
-                        "content": [
-                            {"type": "text", "text": json.dumps(result, indent=2)}
-                        ]
-                    }
-                except Exception as e:
-                    return {
-                        "isError": True,
-                        "content": [{"type": "text", "text": f"Erro na execução da tool: {str(e)}"}]
-                    }
-            return {"isError": True, "content": [{"type": "text", "text": "Tool não encontrada"}]}
-            
-        return {"isError": True, "content": [{"type": "text", "text": "Método não suportado"}]}
+
+            if not isinstance(tool_name, str) or not tool_name:
+                return self._error(
+                    "O nome da ferramenta deve ser uma string não vazia.",
+                    -32602,
+                )
+            if not isinstance(tool_args, dict):
+                return self._error(
+                    "Os argumentos da ferramenta devem ser um objeto JSON.",
+                    -32602,
+                )
+
+            info = self.tools.get(tool_name)
+            if info is None:
+                return self._error("Tool não encontrada", -32602)
+
+            try:
+                # Executa de forma síncrona para simplificar; handlers assíncronos
+                # também são aceitos sem alterar o contrato síncrono existente.
+                result = info["handler"](tool_args)
+                if hasattr(result, "__await__"):
+                    result = await result
+                if isinstance(result, dict) and result.get("_mcp_error") is True:
+                    message = result.get("message", "Erro na execução da tool")
+                    return self._error(str(message), -32602)
+                return {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": json.dumps(result, indent=2, ensure_ascii=False),
+                        }
+                    ]
+                }
+            except Exception as e:
+                return self._error(f"Erro na execução da tool: {str(e)}", -32000)
+
+        return self._error(f"Método não suportado: {method}", -32601)
 
     async def run_stdio(self):
-        loop = asyncio.get_event_loop()
+        """Executa o transporte JSON-RPC stdio sem responder notificações.
+
+        Linhas inválidas ou valores JSON que não sejam objetos são descartados
+        com aviso no stderr, pois não possuem um ``id`` ao qual responder.
+        O retorno normal ao encontrar EOF mantém o código de saída zero.
+        """
+        loop = asyncio.get_running_loop()
         reader = asyncio.StreamReader()
         protocol = asyncio.StreamReaderProtocol(reader)
-        await loop.connect_read_pipe(lambda: protocol, sys.stdin)
-        writer = sys.stdout
-        
+        try:
+            await loop.connect_read_pipe(lambda: protocol, sys.stdin)
+        except (OSError, RuntimeError) as exc:
+            logger.warning("Não foi possível conectar o stdin do MCP: %s", exc)
+            return
+
         while True:
             try:
                 line = await reader.readline()
                 if not line:
                     break
-                req = json.loads(line.decode('utf-8'))
-                
-                # Responde JSON-RPC
+                raw_line = line.decode("utf-8") if isinstance(line, bytes) else line
+                raw_line = raw_line.strip()
+                if not raw_line:
+                    continue
+                req = json.loads(raw_line)
+            except (json.JSONDecodeError, UnicodeDecodeError) as e:
+                logger.warning("JSON inválido recebido no MCP: %s", e)
+                continue
+            except Exception as e:
+                logger.warning("Erro ao ler a entrada MCP: %s", e)
+                continue
+
+            if not isinstance(req, dict):
+                logger.warning("Entrada MCP ignorada: esperava-se um objeto JSON")
+                continue
+
+            # Uma notificação não tem resposta JSON-RPC, inclusive quando id é
+            # explicitamente nulo. Requests com id 0 ou string vazia são válidas.
+            if "id" not in req or req.get("id") is None:
+                continue
+
+            request_id = req["id"]
+            try:
                 resp = await self.handle_request(req)
                 response_obj = {
                     "jsonrpc": "2.0",
-                    "id": req.get("id"),
-                    "result": resp
+                    "id": request_id,
+                    "result": resp,
                 }
-                writer.write(json.dumps(response_obj) + "\n")
-                writer.flush()
-            except json.JSONDecodeError as e:
-                print(f"[MCP-SERVER] JSON inválido: {e}", file=sys.stderr)
-                continue
-            except Exception as e:
-                print(f"[MCP-SERVER] Erro no loop: {e}", file=sys.stderr)
-                continue
+            except Exception as exc:
+                # O loop não deve vazar rastreamento de pilha para uma falha
+                # inesperada de handler; preserve a resposta da request.
+                logger.warning("Erro ao processar request MCP: %s", exc)
+                response_obj = {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "error": {"code": -32603, "message": str(exc)},
+                }
+
+            try:
+                sys.stdout.write(
+                    json.dumps(response_obj, ensure_ascii=False) + "\n"
+                )
+                sys.stdout.flush()
+            except (BrokenPipeError, OSError):
+                return
 
 # Instancia o servidor
 mci_server = SimpleMCPServer("metacognitive-interconnect")

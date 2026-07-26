@@ -135,8 +135,18 @@ def cmd_diagnose(args: argparse.Namespace) -> None:
         corpus = "ecosystem"
         domain = args.domain or "ecosystem"
 
-    # Constrói pipeline
+    # Determina número de runs (benchmark mode)
+    benchmark_runs = args.benchmark or 1
+    if benchmark_runs < 1:
+        benchmark_runs = 1
+
+    # Constrói pipeline (uma vez, reuso entre runs)
     pipeline = DiagnosticPipeline(domain=domain)
+
+    if args.format == "texto" and benchmark_runs > 1:
+        print(f"\n📊 Benchmark mode — {benchmark_runs} runs")
+        print(f"{'='*65}")
+
     t0 = time.time()
 
     if args.format == "texto":
@@ -147,13 +157,51 @@ def cmd_diagnose(args: argparse.Namespace) -> None:
         print("=" * 65)
 
     try:
-        result = pipeline.run(
-            corpus=corpus,
-            domain=domain,
-            deep=args.deep,
-            include_social=args.social or args.all,
-            include_legal_impact=args.legal or args.all,
-        )
+        if benchmark_runs > 1:
+            # Benchmark: múltiplas runs, coleta estatísticas
+            durations = []
+            timings_samples: list[dict] = []
+            for i in range(benchmark_runs):
+                run_t0 = time.time()
+                result = pipeline.run(
+                    corpus=corpus,
+                    domain=domain,
+                    deep=args.deep,
+                    include_social=args.social or args.all,
+                    include_legal_impact=args.legal or args.all,
+                )
+                run_dur = time.time() - run_t0
+                durations.append(run_dur)
+                timings_samples.append(result.get("timings", {}))
+                if args.format == "texto":
+                    print(f"   Run {i+1:2d}/{benchmark_runs}: {run_dur:.3f}s")
+            import statistics
+            avg = statistics.mean(durations)
+            stdev = statistics.stdev(durations) if len(durations) > 1 else 0
+            print(f"\n{'='*65}")
+            print(f"📊 Benchmark: {benchmark_runs} runs")
+            print(f"   Média: {avg:.3f}s | Desvio: {stdev:.3f}s | "
+                  f"Min: {min(durations):.3f}s | Max: {max(durations):.3f}s")
+            # Média dos timings por scanner
+            if timings_samples:
+                keys = set()
+                for s in timings_samples:
+                    keys.update(s.keys())
+                print(f"\n   Timing médio por scanner:")
+                for k in sorted(keys):
+                    vals = [s.get(k, 0) for s in timings_samples]
+                    avg_k = statistics.mean(vals)
+                    pct = avg_k / avg * 100 if avg > 0 else 0
+                    print(f"     {k:20s}: {avg_k:.3f}s ({pct:.0f}%)")
+            print(f"{'='*65}\n")
+        else:
+            result = pipeline.run(
+                corpus=corpus,
+                domain=domain,
+                deep=args.deep,
+                include_social=args.social or args.all,
+                include_legal_impact=args.legal or args.all,
+            )
     except Exception as e:
         print(f"❌ Erro no pipeline: {e}", file=sys.stderr)
         sys.exit(1)
@@ -165,7 +213,18 @@ def cmd_diagnose(args: argparse.Namespace) -> None:
         return
 
     # ── Formato texto (resumido) ───────────────────────────────────────────
-    print(f"\n⏱  Duração: {duracao:.2f}s")
+    duracao_total = result.get("duration_s", duracao)
+    print(f"\n⏱  Duração total: {duracao_total:.2f}s")
+    timings = result.get("timings", {})
+    if timings:
+        timing_items = sorted(timings.items(), key=lambda x: x[1], reverse=True)
+        parts = []
+        for name, t in timing_items:
+            if t >= 0.01:
+                pct = (t / duracao_total * 100) if duracao_total > 0 else 0
+                parts.append(f"{name}: {t:.2f}s ({pct:.0f}%)")
+        if parts:
+            print(f"   └─ {' | '.join(parts)}")
     print("=" * 65)
 
     noo = result.get("noological", {})
@@ -173,20 +232,23 @@ def cmd_diagnose(args: argparse.Namespace) -> None:
     evol = result.get("evolutionary", {})
     pot = result.get("potentiality", {})
     rev = result.get("reversa", {})
+    rdmp = result.get("roadmap", {})
+    epist = result.get("epistemic_opportunities", {})
+    succ = result.get("successors", {})
 
-    # 1. Scanner Noológico
+    # ── 1. Scanner Noológico ──────────────────────────────────────────────
     if "error" in noo:
-        print(f"\n❌ Scanner Noológico: erro — {noo['error']}")
+        print(f"\n❌ Noológico: erro — {noo['error']}")
     else:
         coverage = noo.get("coverage", 0)
         gaps = noo.get("gaps", [])
-        status_cobertura = "✅" if coverage >= 80 else ("⚠️" if coverage >= 40 else "❌")
-        print(f"\n{status_cobertura} Noológico — Cobertura: {coverage}% | {len(gaps)} gaps")
+        status_c = "✅" if coverage >= 80 else ("⚠️" if coverage >= 40 else "❌")
+        print(f"\n{status_c} Noológico — Cobertura: {coverage}% | {len(gaps)} gaps")
         if gaps and args.verbose:
             for g in gaps[:5]:
                 print(f"     • {g}")
 
-    # 2. Scanner Teleológico
+    # ── 2. Scanner Teleológico ────────────────────────────────────────────
     if "error" in teleo:
         print(f"❌ Teleológico: erro — {teleo['error']}")
     elif "skipped" in teleo:
@@ -195,7 +257,7 @@ def cmd_diagnose(args: argparse.Namespace) -> None:
         score = teleo.get("score", 0)
         gaps_t = teleo.get("gaps", [])
         status_t = "✅" if score >= 0.8 else ("⚠️" if score >= 0.4 else "❌")
-        print(f"{status_t} Teleológico — Score: {score:.2f} | {len(gaps_t)} gaps teleológicos")
+        print(f"{status_t} Teleológico — Score: {score:.2f} | {len(gaps_t)} gaps")
         if gaps_t and args.verbose:
             for g in gaps_t[:5]:
                 dim = g.get("dimension", g.get("dim_key", "?"))
@@ -203,29 +265,41 @@ def cmd_diagnose(args: argparse.Namespace) -> None:
                 desc = g.get("description", "")[:80]
                 print(f"     • [{sev}] {dim}: {desc}")
 
-    # 3. Potencialidade
+    # ── 3. Potencialidade ─────────────────────────────────────────────────
     if "error" in pot:
         print(f"❌ Potencialidade: erro — {pot['error']}")
     else:
+        comps = pot.get("total_components", 0)
+        caps = pot.get("total_capabilities", 0)
+        core = pot.get("core_count", 0)
+        miss = pot.get("missing_count", 0)
         tops = pot.get("top_latent", [])
-        print(f"🔮 Potencialidade — {len(tops)} potenciais latentes detectados")
+        print(f"🔮 Potencialidade — {comps} componentes · {caps} capacidades · {core} core · {miss} lacunas")
         if tops and args.verbose:
-            for t in tops[:3]:
-                print(f"     • {str(t)[:80]}")
+            for t in tops[:5]:
+                cap = t.get("capability", str(t))
+                prio = t.get("priority", "")
+                print(f"     • {cap} [{prio}]")
 
-    # 4. Evolutivo
-    print(f"🧬 Evolutivo — {evol.get('total_gaps', 0)} gaps totais")
+    # ── 4. Evolutivo ──────────────────────────────────────────────────────
+    gaps_total = evol.get("total_gaps", 0)
+    absents = evol.get("absent_categories", 0)
+    teleo_gaps = evol.get("teleological_gaps", 0)
+    print(f"🧬 Evolutivo — {gaps_total} gaps totais (noológicos: {absents}, teleológicos: {teleo_gaps})")
     rec = evol.get("recommendation", "")
-    if rec and args.verbose:
-        print(f"     Recomendação: {rec[:120]}")
+    if rec:
+        print(f"     → {rec[:150]}")
 
-    # 5. Engenharia Reversa
+    # ── 5. Engenharia Reversa ─────────────────────────────────────────────
     if "error" in rev:
         print(f"❌ Eng. Reversa: erro — {rev['error']}")
     else:
-        print(f"🔍 Eng. Reversa — Score: {rev.get('score', 'N/A')}")
+        rscore = rev.get("score", "N/A")
+        rfindings = rev.get("findings", [])
+        rrecs = rev.get("recommendations", [])
+        print(f"🔍 Eng. Reversa — Score: {rscore} | {len(rfindings)} achados | {len(rrecs)} recomendações")
 
-    # 6. Impacto Social (se executado)
+    # ── 6. Impacto Social (se executado) ──────────────────────────────────
     if "social_impact" in result:
         si = result["social_impact"]
         if "error" in si:
@@ -233,25 +307,64 @@ def cmd_diagnose(args: argparse.Namespace) -> None:
         else:
             print(f"🌍 Impacto Social — SROI: {si.get('sroi_ratio', 'N/A')}")
 
-    # 7. Impacto Jurídico (se executado)
+    # ── 7. Impacto Jurídico (se executado) ────────────────────────────────
     if "legal_impact" in result:
         li = result["legal_impact"]
         if "error" in li:
             print(f"❌ Impacto Jurídico: {li['error']}")
         else:
-            print(f"⚖️  Impacto Jurídico — Prontidão: {li.get('legal_readiness', 'N/A')}")
+            lr = li.get("legal_readiness", "N/A")
+            mg = li.get("metacognitive_gain_score", "N/A")
+            print(f"⚖️  Impacto Jurídico — Prontidão: {lr} | Ganho metacognitivo: {mg}")
 
-    # 8. Camadas do ecossistema (se disponível)
+    # ── 8. Camadas do ecossistema (se disponível) ─────────────────────────
     if "ecosystem_layers" in result:
         layers = result["ecosystem_layers"]
         print(f"\n📐 Camadas do Ecossistema ({len(layers)}):")
-        for name, data in sorted(layers.items())[:8]:
+        for name, data in sorted(layers.items())[:10]:
             pct = data.get("coverage_pct", 0)
             bar = "█" * (pct // 10) + "░" * (10 - pct // 10)
             print(f"     {bar} {name}: {pct}%")
 
+    # ── 9. Roadmap Evolutivo (modo deep) ──────────────────────────────────
+    if rdmp and "error" not in rdmp:
+        print(f"\n🧭 Roadmap Evolutivo:")
+        print(f"     Quick wins: {rdmp.get('quick_wins', 'N/A')} | "
+              f"Fundações: {rdmp.get('foundations', 'N/A')} | "
+              f"Fronteiras: {rdmp.get('frontiers', 'N/A')}")
+        bns = rdmp.get("bottlenecks", [])
+        if bns:
+            print(f"     Gargalos ({len(bns)}):")
+            for b in bns[:5]:
+                print(f"       • {str(b)[:100]}")
+        seq = rdmp.get("logical_sequence", [])
+        if seq and args.verbose:
+            print(f"     Sequência lógica ({len(seq)} passos):")
+            for s in seq[:8]:
+                print(f"       → {s}")
+
+    # ── 10. Oportunidades Epistêmicas (modo deep) ─────────────────────────
+    if epist and "error" not in epist:
+        total_opps = epist.get("total", 0)
+        bts = epist.get("breakthroughs", 0)
+        print(f"\n💡 Oportunidades Epistêmicas: {total_opps} total | {bts} breakthrough")
+        top_opps = epist.get("top", [])
+        if top_opps and args.verbose:
+            for opp in top_opps[:5]:
+                print(f"     • {opp.get('label', opp.get('dimension', str(opp)))[:80]}")
+
+    # ── 11. Sucessores (modo deep) ────────────────────────────────────────
+    if succ and "error" not in succ:
+        total_succ = succ.get("total", 0)
+        imm = succ.get("immediate", 0)
+        print(f"🔗 Sucessores: {total_succ} total | {imm} imediatos")
+        top_succ = succ.get("top", [])
+        if top_succ and args.verbose:
+            for s in top_succ[:5]:
+                print(f"     • {s.get('label', s.get('name', str(s)))[:80]}")
+
     print(f"\n{'=' * 65}")
-    print(f"🔬 Diagnóstico concluído em {duracao:.2f}s")
+    print(f"🔬 Diagnóstico concluído em {duracao_total:.2f}s")
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -291,6 +404,9 @@ Exemplos:
                         help="Incluir scanner de impacto social")
     p_diag.add_argument("--legal", action="store_true",
                         help="Incluir scanner de impacto jurídico")
+    p_diag.add_argument("--benchmark", "-b", type=int, default=0, nargs="?",
+                        const=5, metavar="N",
+                        help="Modo benchmark: executa N runs (padrão: 5) e mostra média/desvio")
     p_diag.add_argument("--all", action="store_true",
                         help="Incluir todos os scanners opcionais (social, legal)")
 

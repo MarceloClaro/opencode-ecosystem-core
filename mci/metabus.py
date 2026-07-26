@@ -24,6 +24,20 @@ from datetime import datetime, timezone
 logger = logging.getLogger("mci-metabus")
 logger.setLevel(logging.INFO)
 
+
+class _LogicalSubscription:
+    """Callback substituível identificado pelo papel lógico do assinante."""
+
+    __slots__ = ("identity", "callback")
+
+    def __init__(self, identity: str, callback: Callable):
+        self.identity = identity
+        self.callback = callback
+
+    def __call__(self, event: Dict[str, Any]):
+        return self.callback(event)
+
+
 # Caminho para persistência da memória metacognitiva
 MCI_DIR = os.path.dirname(os.path.abspath(__file__))
 ECOSYSTEM_ROOT = os.path.dirname(MCI_DIR)
@@ -32,6 +46,7 @@ os.makedirs(STATE_DIR, exist_ok=True)
 
 MEMORY_FILE = os.path.join(STATE_DIR, "shared_memory.json")
 EVENTS_FILE = os.path.join(STATE_DIR, "metabus_events.jsonl")
+
 
 class MetacognitiveMemory:
     """Memória episódica e semântica compartilhada entre agentes."""
@@ -190,11 +205,35 @@ class MetaBus:
         self.memory = MetacognitiveMemory()
         self._initialized = True
         
-    def subscribe(self, topic: str, callback: Callable):
-        """Inscreve um handler em um tópico metacognitivo."""
+    def subscribe(self, topic: str, callback: Callable,
+                  logical_identity: Optional[str] = None):
+        """Inscreve um handler, opcionalmente idempotente por identidade lógica.
+
+        Chamadas legadas sem ``logical_identity`` preservam a semântica de
+        anexação. Quando a identidade é fornecida, uma nova instância lógica
+        substitui o callback anterior no mesmo tópico, sem efeito duplicado.
+        """
+        if not callable(callback):
+            raise TypeError("callback deve ser chamável")
         if topic not in self.subscribers:
             self.subscribers[topic] = []
-        self.subscribers[topic].append(callback)
+        handlers = self.subscribers[topic]
+        if logical_identity is None:
+            handlers.append(callback)
+        else:
+            identity = str(logical_identity).strip()
+            if not identity:
+                raise ValueError("logical_identity não pode ser vazia")
+            replacement = _LogicalSubscription(identity, callback)
+            for index, registered in enumerate(handlers):
+                if (
+                    isinstance(registered, _LogicalSubscription)
+                    and registered.identity == identity
+                ):
+                    handlers[index] = replacement
+                    break
+            else:
+                handlers.append(replacement)
         logger.info(f"Subscribed to topic: {topic}")
         
     def publish(self, topic: str, payload: Dict[str, Any], source_agent: str = "system"):
@@ -215,8 +254,11 @@ class MetaBus:
             logger.error(f"Erro ao persistir evento: {e}")
             
         # Roteamento
-        handlers = self.subscribers.get(topic, [])
-        handlers.extend(self.subscribers.get("*", [])) # Wildcard
+        # Copiar impede que o wildcard seja anexado permanentemente à lista do
+        # tópico a cada publicação.
+        handlers = list(self.subscribers.get(topic, []))
+        if topic != "*":
+            handlers.extend(list(self.subscribers.get("*", []))) # Wildcard
         
         dispatched = 0
         for handler in handlers:

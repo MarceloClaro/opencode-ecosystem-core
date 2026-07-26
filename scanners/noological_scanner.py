@@ -33,6 +33,7 @@ v3.0: Marcelo Claro Laranjeira — refinado com SPEC-028 (SDD+TDD, 14 CTs)
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -345,6 +346,121 @@ ECOSYSTEM_KEYWORDS: dict[str, dict[str, list[str]]] = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════════════════
+# keyword_map_builtin (v4.0) — Constante de módulo extraída de _category_present
+# ═══════════════════════════════════════════════════════════════════════════
+keyword_map_builtin: dict[str, dict[str, list[str]]] = {
+    "paradigmas": {
+        "positivista": ["positiv", "quantitativ", "experimental", "hipotese", "mensura"],
+        "interpretativista": ["interpretativ", "qualitativ", "fenomenolog", "compreens"],
+        "crítico": ["critic", "transformador", "emancip", "dialetic"],
+        "pragmatista": ["pragmat", "misto", "multimetod", "triangul"],
+        "construtivista": ["construtiv", "construcion", "significado"],
+        "pós-estruturalista": ["estrutural", "desconst", "foucault", "derrida"],
+        "complexo": ["complex", "sistem", "emerg", "holistic", "caos"],
+    },
+    "metodos": {
+        "quantitativo experimental": ["experiment", "randomiz", "control", "ensaio clinico"],
+        "quantitativo correlacional": ["correla", "regress", "associac", "preditor"],
+        "qualitativo": ["qualitativ", "entrevista", "analise tematica", "fenomenolog"],
+        "grounded theory": ["grounded", "teoria fundamentada"],
+        "misto": ["misto", "multimetod", "triangul"],
+        "revisão sistemática": ["revisao sistematica", "systematic review", "prisma"],
+        "meta-análise": ["meta-analise", "meta analise", "tamanho de efeito"],
+        "estudo de caso": ["estudo de caso", "case study", "caso clinico", "caso unico"],
+        "pesquisa-ação": ["pesquisa-acao", "pesquisa acao", "action research"],
+    },
+    "teorias": {
+        "cognitivo-comportamental": ["cognitiv", "comportamental", "tcc", "beck", "pensamento automatico"],
+        "psicanalítico": ["psicanal", "freud", "inconscient", "transferenc"],
+        "humanista": ["humanist", "roger", "centrado na pessoa", "auto-atualiz"],
+        "sistêmico": ["sistemic", "familia", "cibernet", "padrao relacional"],
+        "neurobiológico": ["neurobiolog", "neurocien", "amigdala", "cortex", "pre-frontal"],
+        "evolucionista": ["evolucion", "adaptativ", "selecao natural"],
+        "social-crítico": ["social critic", "critic social", "desiguald", "opress"],
+        "fenomenológico-existencial": ["existencial", "heidegger", "sartre", "sentido da vida"],
+        "comportamental": ["comportament", "skinner", "condicion", "reforc"],
+        "integrativo": ["integrat", "transdiagnost", "unificad", "ecletic"],
+    },
+    "raciocinio": {
+        "dedutivo": ["dedut", "premissa", "conclusao necessaria"],
+        "indutivo": ["indut", "generaliz", "padrao", "regularidad"],
+        "abdutivo": ["abdut", "hipotese", "melhor explicacao"],
+        "dialético": ["dialet", "tese", "antitese", "sintes", "contradic"],
+        "sistêmico": ["sistemic", "interconex", "retroaliment", "emergenc"],
+        "probabilístico": ["probabil", "bayes", "incerteza", "estatistic"],
+        "contrafactual": ["contrafactual", "se", "cenario alternativ"],
+        "metacognitivo": ["metacognit", "pensar sobre", "auto-regul"],
+        "teleológico": ["teleolog", "proposit", "finalidad", "objetivo"],
+        "pragmático": ["pragmat", "aplic", "util", "pratico", "funcional"],
+    },
+    "niveis_analise": {
+        "individual": ["individu", "intrapsiquic", "sujeito", "self", "autoconsci"],
+        "interpessoal": ["interpessoal", "relacional", "vincul", "terapeut"],
+        "grupal": ["grupal", "organizacional", "equipe", "grupo", "coletiv"],
+        "comunitário": ["comunitari", "comunidade", "territor", "local"],
+        "sistêmico": ["politic", "governanc", "politica publica", "legislac"],
+        "neurobiológico": ["neurobiolog", "neurocien", "amigdala", "cortex"],
+        "evolutivo": ["evolutiv", "filogenet", "selecao natural", "ancestral", "adaptac"],
+        "cultural": ["cultur", "antropolog", "etnograf", "intercultur"],
+    },
+    "temporalidade": {
+        "transversal": ["transversal", "cross-sectional", "amostra unica"],
+        "longitudinal": ["follow-up", "pre-post", "pre post", "seguimento", "curto prazo", "curtoprazo"],
+        "longitudinal longo": ["longitudinal", "coorte", "prospectiv", "acompanhamento", "longo prazo", "longoprazo"],
+        "histórico": ["retrospectiv", "histor", "arquiv", "documental", "passado"],
+        "prospectivo": ["preditiv", "prognost", "futuro", "previs"],
+        "desenvolvimental": ["desenvolviment", "ciclo de vida", "life span", "life-span"],
+    },
+    "populacao": {
+        "adultos": ["adult", "meia-idade", "meia idade"],
+        "idosos": ["idos", "envelhec", "geriatri"],
+        "adolescentes": ["adolesc", "juven", "jovem"],
+        "infância": ["infanc", "crianc", "infantil", "pre-escolar"],
+        "gênero feminino": ["mulher", "feminin", "genero feminin"],
+        "gênero masculino": ["homem", "masculin", "genero masculin"],
+        "diversidade": ["lgbt", "diversidade", "genero nao", "transgener"],
+        "contexto clínico": ["paciente", "clinic", "hospital", "ambulatori"],
+        "contexto comunitário": ["comunitari", "comunidade", "atencao primaria"],
+        "brasil": ["brasil", "latino-americ", "latino americ", "latam"],
+    },
+    "dados": {
+        "clínicos": ["escala", "inventari", "questionari", "bdi", "ham", "scl"],
+        "neurobiológicos": ["eeg", "fmri", "mri", "neuroimag", "biomarcador"],
+        "qualitativos": ["entrevista", "grupo focal", "discurso", "narrativa"],
+        "observacionais": ["observac", "naturalist", "etnograf"],
+        "epidemiológicos": ["epidemiolog", "prevalenc", "incidencia", "comorbid"],
+        "longitudinais": ["longitudinal", "follow-up", "onda", "wave", "painel"],
+        "comparativos": ["cross-cultural", "transcultural", "cross national"],
+        "metadados": ["meta-analise", "revisao sistematica", "metanalise"],
+    },
+    "dominios": {
+        "psicologia clínica": ["psicologi", "clinic", "psicopatolog", "psicoterap"],
+        "neurociências": ["neurocien", "neurobiolog", "neuroimag", "cerebr"],
+        "sociologia": ["sociolog", "estratificac", "desiguald", "capital social"],
+        "antropologia": ["antropolog", "etnograf", "cultur", "ritual"],
+        "economia comportamental": ["economi", "comportamental", "nudge", "vies"],
+        "filosofia da mente": ["filosof", "conscienc", "mente", "fenomenolog"],
+        "psicofarmacologia": ["farmac", "medicac", "antidepress", "psicofarmac"],
+        "saúde pública": ["saude publica", "sus", "promocao saude", "prevenc"],
+        "educação": ["educac", "ensino", "aprendizag", "escolar"],
+        "ia tecnologia": ["inteligencia artificial", "machine learning", "deep learning", "ia", "chatbot"],
+    },
+    "teoria_jogos": {
+        "equilíbrio de nash": ["nash", "equilibrio de nash", "pne", "estrategia dominante"],
+        "dilema do prisioneiro": ["prisioneiro", "dilema do prisioneiro", "cooperacao", "payoff"],
+        "soma zero": ["soma zero", "zero-sum", "jogo de soma zero"],
+        "tit-for-tat": ["tit for tat", "reciprocidade", "olho por olho"],
+        "stackelberg": ["stackelberg", "lider", "seguidor"],
+        "barganha": ["barganha", "negociacao", "bargaining"],
+        "sinalização": ["sinalizac", "signaling", "screening"],
+        "evolutivo": ["evolutivamente estavel", "ess", "selecao natural", "evolutiv"],
+        "bayesiano": ["bayesiano", "harsanyi", "informacao incompleta"],
+        "cooperativo": ["cooperativo", "shapley", "coalizao", "nucleolo"],
+    },
+}
+
+
 class NoologicalScanner:
     """Scanner que identifica AUSÊNCIAS no espaço de conhecimento.
 
@@ -369,12 +485,16 @@ class NoologicalScanner:
     ]
 
     @staticmethod
+    @lru_cache(maxsize=8)
     def _negation_filter(corpus: str) -> str:
         """Remove do corpus sentencas com padrões de negacao (v3.0).
 
         Evita falsos positivos como:
           "sem grupo controle" -> "controle" detectado
           "ausencia de randomizacao" -> "randomiz" detectado
+
+        v4.0 (R225): @lru_cache(maxsize=8) evita re-filter em múltiplos scans
+        com o mesmo corpus (ex: diagnóstico + re-diagnóstico).
         """
         import re
         filtered = corpus
@@ -398,6 +518,23 @@ class NoologicalScanner:
         # Para keywords de raiz (ex: "control", "randomiz"), usa \b
         return bool(re.search(r'\b' + re.escape(keyword) + r'\w*', corpus, re.IGNORECASE))
 
+    @staticmethod
+    def _word_boundary_match_any(keywords: list[str], corpus: str) -> bool:
+        """v4.0 (R225): any() generator — busca qualquer match em lote.
+
+        Substitui loop explícito `for kw in keywords: if _wb_match(kw): return True`
+        por generator expression com any(), reduzindo overhead de interpreter loop.
+        """
+        import re
+        multi_word = [kw for kw in keywords if ' ' in kw]
+        if multi_word and any(kw in corpus for kw in multi_word):
+            return True
+        # Palavras simples com \b boundary
+        return any(
+            re.search(r'\b' + re.escape(kw) + r'\w*', corpus, re.IGNORECASE)
+            for kw in keywords if ' ' not in kw
+        )
+
     def __init__(self, dimensions: dict[str, KnowledgeDimension] | None = None,
                  domain: str = ""):
         """Inicializa o scanner.
@@ -406,6 +543,11 @@ class NoologicalScanner:
             dimensions: dicionário de dimensões (se None, usa EPISTEMOLOGICAL_DIMENSIONS
                         ou ECOSYSTEM_DIMENSIONS conforme domain)
             domain: domínio de pesquisa — "ecosystem" carrega ECOSYSTEM_DIMENSIONS
+
+        Performance v4.0 (R223):
+            - Cache de regex compilados por dimensão (evita re.compile por chamada)
+            - Cache do corpus com negação filtrada (evita refiltrar 100x)
+            - _compiled_keywords: dict dim_key → list de (kw_lower, pattern)
         """
         if dimensions is not None:
             self.dimensions = dimensions
@@ -417,6 +559,59 @@ class NoologicalScanner:
         self.scan_results: dict[str, Any] = {}
         self.domain_weights: dict[str, float] = {}
         self.scan_history: list[dict[str, Any]] = []  # v2.0: historico para tendencia
+
+        # Cache de regex compilados (v4.0)
+        self._compiled_ecosystem: dict[str, list[tuple[str, Any]]] = {}
+        self._compiled_enriched: dict[str, list[tuple[str, Any]]] = {}
+        self._compiled_keyword_map: dict[str, list[tuple[str, Any]]] = {}
+        self._cached_clean_corpus: str = ""
+
+    def _compile_dimension_patterns(self, dim_key: str) -> None:
+        """Pré-compila regex patterns para uma dimensão (v4.0)."""
+        import re as _re
+
+        # Compila ECOSYSTEM_KEYWORDS
+        if dim_key in ECOSYSTEM_KEYWORDS:
+            patterns = []
+            for kw_cat, keywords in ECOSYSTEM_KEYWORDS[dim_key].items():
+                for kw in keywords:
+                    if ' ' in kw:
+                        patterns.append((kw_cat, _re.compile(_re.escape(kw), _re.IGNORECASE)))
+                    else:
+                        patterns.append((kw_cat, _re.compile(r'\b' + _re.escape(kw) + r'\w*', _re.IGNORECASE)))
+            self._compiled_ecosystem[dim_key] = patterns
+
+        # Compila ENRICHED_KW
+        if dim_key in ENRICHED_KW:
+            patterns = []
+            for kw_cat, keywords in ENRICHED_KW[dim_key].items():
+                for kw in keywords:
+                    if ' ' in kw:
+                        patterns.append((kw_cat, _re.compile(_re.escape(kw), _re.IGNORECASE)))
+                    else:
+                        patterns.append((kw_cat, _re.compile(r'\b' + _re.escape(kw) + r'\w*', _re.IGNORECASE)))
+            self._compiled_enriched[dim_key] = patterns
+
+        # Compila keyword_map interno
+        from scanners.noological_scanner import keyword_map_builtin
+        if dim_key in keyword_map_builtin:
+            patterns = []
+            for kw_cat, keywords in keyword_map_builtin[dim_key].items():
+                for kw in keywords:
+                    if ' ' in kw:
+                        patterns.append((kw_cat, _re.compile(_re.escape(kw), _re.IGNORECASE)))
+                    else:
+                        patterns.append((kw_cat, _re.compile(r'\b' + _re.escape(kw) + r'\w*', _re.IGNORECASE)))
+            self._compiled_keyword_map[dim_key] = patterns
+
+    def _match_compiled(self, patterns: list[tuple[str, Any]], cat_lower: str,
+                         corpus: str) -> bool:
+        """Busca em patterns compilados (v4.0)."""
+        for kw_cat, pattern in patterns:
+            if kw_cat in cat_lower:
+                if pattern.search(corpus):
+                    return True
+        return False
 
     def set_domain(self, domain: str):
         """Aplica pesos adaptativos ao dominio de pesquisa (v2.0)."""
@@ -443,6 +638,9 @@ class NoologicalScanner:
 
         corpus_text = self._extract_corpus(audit_trail)
         corpus_lower = corpus_text.lower()
+        # v4.0: Pré-computa e cacheia corpus limpo para evitar re-filter em ~100 categorias
+        self._cached_raw_corpus = corpus_lower
+        self._cached_clean_corpus = self._negation_filter(corpus_lower)
 
         dimension_results = {}
         total_covered = 0
@@ -531,178 +729,78 @@ class NoologicalScanner:
 
     def _category_present_v2(self, category: str, corpus_lower: str,
                               dim_key: str, text_analyzer: Any = None) -> bool:
-        """Detecção enriquecida v3.0: negação → ECOSYSTEM_KW/ENRICHED_KW → TextAnalyzer → fallback.
+        """Detecção enriquecida v4.0: negação → compiled patterns → TextAnalyzer → fallback.
 
         Pipeline de precedência:
-          1. _negation_filter() — remove sentenças negadas
-          2. ECOSYSTEM_KEYWORDS (se domain="ecosystem") ou ENRICHED_KW (acadêmico)
+          1. _negation_filter() — remove sentenças negadas (cacheado em _cached_clean_corpus)
+          2. Patterns compilados para ECOSYSTEM_KW / ENRICHED_KW / keyword_map_builtin
           3. TextAnalyzer — validação por frequência de palavras
-          4. _category_present() — keyword_map específico por dimensão
-          5. Fallback genérico — word matching com \b boundary
+          4. Fallback genérico — word matching com \b boundary
+
+        Performance v4.0 (R223):
+          - Regex compilados pré-calculados em _compile_dimension_patterns()
+          - Evita re.search() por chamada individual (~100 chamadas → 1 busca compilada)
         """
         cat_lower = category.lower()
-        # v3.0: Remove sentencas negadas antes do matching
-        clean_corpus = self._negation_filter(corpus_lower)
+        # v4.0: Usa cache do clean corpus se disponível (evita re-filter em ~100 chamadas)
+        if hasattr(self, '_cached_clean_corpus') and self._cached_raw_corpus == corpus_lower:
+            clean_corpus = self._cached_clean_corpus
+        else:
+            clean_corpus = self._negation_filter(corpus_lower)
 
-        # ─── Ecossistema: ECOSYSTEM_KEYWORDS (SPEC-022) ────────────────
-        if self._domain == "ecosystem" and dim_key in ECOSYSTEM_KEYWORDS:
-            for kw_cat, keywords in ECOSYSTEM_KEYWORDS[dim_key].items():
-                if kw_cat in cat_lower:
-                    return any(self._word_boundary_match(kw, clean_corpus) for kw in keywords)
+        # ─── Ecossistema: patterns compilados (v4.0) ───────────────────
+        if self._domain == "ecosystem":
+            pats = self._compiled_ecosystem.get(dim_key)
+            if pats is not None:
+                return self._match_compiled(pats, cat_lower, clean_corpus)
 
-        # ─── Acadêmico: ENRICHED_KW (camada 1 original) ────────────────
-        if dim_key in ENRICHED_KW:
-            for kw_cat, keywords in ENRICHED_KW[dim_key].items():
-                if kw_cat in cat_lower:
-                    # v3.0: word-boundary matching
-                    return any(self._word_boundary_match(kw, clean_corpus) for kw in keywords)
+        # ─── Acadêmico: ENRICHED_KW compilado (v4.0) ───────────────────
+        pats = self._compiled_enriched.get(dim_key)
+        if pats is not None:
+            return self._match_compiled(pats, cat_lower, clean_corpus)
+
         # TextAnalyzer frequency validation (camada 2)
         if text_analyzer and hasattr(text_analyzer, "word_counts"):
             words = cat_lower.split()
             found = sum(1 for w in words if len(w) > 3 and w in text_analyzer.word_counts)
-            return found >= len(words) * 0.4
-        # Fallback: original keyword matching (camada 3)
-        return self._category_present(category, clean_corpus, dim_key)
+            if found >= len(words) * 0.4:
+                return True
+
+        # ─── Fallback: keyword_map_builtin compilado (v4.0) ────────────
+        pats = self._compiled_keyword_map.get(dim_key)
+        if pats is not None:
+            return self._match_compiled(pats, cat_lower, clean_corpus)
+
+        # Fallback genérico v4.0 (R225): word matching com any() generator
+        words = [w for w in cat_lower.split() if len(w) > 3]
+        if not words:
+            return False
+        match_count = sum(1 for w in words if self._word_boundary_match(w, clean_corpus))
+        return match_count >= len(words) * 0.5
 
     def _category_present(self, category: str, corpus_lower: str, dim_key: str) -> bool:
-        """v3.0: Keyword matching com word-boundary (\\b) + 5 novas dimensoes.
+        """v4.0: Keyword matching via keyword_map_builtin (constante de módulo).
 
         Usa casamento semantico por palavras-chave especificas de cada dimensao.
-        v3.0: Adicionadas keywords para niveis_analise, temporalidade, populacao,
-        dados, dominios (antes caiam no fallback generico).
+        v4.0 (R223): keyword_map extraído para constante de módulo keyword_map_builtin
+        para reuso entre _category_present, _category_present_v2 e compilação.
         """
         cat_lower = category.lower()
 
-        # Palavras-chave por dimensão (v3.0: expandido para 10 dimensoes)
-        keyword_map: dict[str, dict[str, list[str]]] = {
-            "paradigmas": {
-                "positivista": ["positiv", "quantitativ", "experimental", "hipotese", "mensura"],
-                "interpretativista": ["interpretativ", "qualitativ", "fenomenolog", "compreens"],
-                "crítico": ["critic", "transformador", "emancip", "dialetic"],
-                "pragmatista": ["pragmat", "misto", "multimetod", "triangul"],
-                "construtivista": ["construtiv", "construcion", "significado"],
-                "pós-estruturalista": ["estrutural", "desconst", "foucault", "derrida"],
-                "complexo": ["complex", "sistem", "emerg", "holistic", "caos"],
-            },
-            "metodos": {
-                "quantitativo experimental": ["experiment", "randomiz", "control", "ensaio clinico"],
-                "quantitativo correlacional": ["correla", "regress", "associac", "preditor"],
-                "qualitativo": ["qualitativ", "entrevista", "analise tematica", "fenomenolog"],
-                "grounded theory": ["grounded", "teoria fundamentada"],
-                "misto": ["misto", "multimetod", "triangul"],
-                "revisão sistemática": ["revisao sistematica", "systematic review", "prisma"],
-                "meta-análise": ["meta-analise", "meta analise", "tamanho de efeito"],
-                "estudo de caso": ["estudo de caso", "case study", "caso clinico", "caso unico"],
-                "pesquisa-ação": ["pesquisa-acao", "pesquisa acao", "action research"],
-            },
-            "teorias": {
-                "cognitivo-comportamental": ["cognitiv", "comportamental", "tcc", "beck", "pensamento automatico"],
-                "psicanalítico": ["psicanal", "freud", "inconscient", "transferenc"],
-                "humanista": ["humanist", "roger", "centrado na pessoa", "auto-atualiz"],
-                "sistêmico": ["sistemic", "familia", "cibernet", "padrao relacional"],
-                "neurobiológico": ["neurobiolog", "neurocien", "amigdala", "cortex", "pre-frontal"],
-                "evolucionista": ["evolucion", "adaptativ", "selecao natural"],
-                "social-crítico": ["social critic", "critic social", "desiguald", "opress"],
-                "fenomenológico-existencial": ["existencial", "heidegger", "sartre", "sentido da vida"],
-                "comportamental": ["comportament", "skinner", "condicion", "reforc"],
-                "integrativo": ["integrat", "transdiagnost", "unificad", "ecletic"],
-            },
-            "raciocinio": {
-                "dedutivo": ["dedut", "premissa", "conclusao necessaria"],
-                "indutivo": ["indut", "generaliz", "padrao", "regularidad"],
-                "abdutivo": ["abdut", "hipotese", "melhor explicacao"],
-                "dialético": ["dialet", "tese", "antitese", "sintes", "contradic"],
-                "sistêmico": ["sistemic", "interconex", "retroaliment", "emergenc"],
-                "probabilístico": ["probabil", "bayes", "incerteza", "estatistic"],
-                "contrafactual": ["contrafactual", "se", "cenario alternativ"],
-                "metacognitivo": ["metacognit", "pensar sobre", "auto-regul"],
-                "teleológico": ["teleolog", "proposit", "finalidad", "objetivo"],
-                "pragmático": ["pragmat", "aplic", "util", "pratico", "funcional"],
-            },
-            # ─── v3.0: novas dimensões com keywords específicas ───────
-            "niveis_analise": {
-                "individual": ["individu", "intrapsiquic", "sujeito", "self", "autoconsci"],
-                "interpessoal": ["interpessoal", "relacional", "vincul", "terapeut"],
-                "grupal": ["grupal", "organizacional", "equipe", "grupo", "coletiv"],
-                "comunitário": ["comunitari", "comunidade", "territor", "local"],
-                "sistêmico": ["politic", "governanc", "politica publica", "legislac"],
-                "neurobiológico": ["neurobiolog", "neurocien", "amigdala", "cortex"],
-                "evolutivo": ["evolutiv", "filogenet", "selecao natural", "ancestral", "adaptac"],
-                "cultural": ["cultur", "antropolog", "etnograf", "intercultur"],
-            },
-            "temporalidade": {
-                "transversal": ["transversal", "cross-sectional", "amostra unica"],
-                "longitudinal": ["follow-up", "pre-post", "pre post", "seguimento", "curto prazo", "curtoprazo"],
-                "longitudinal longo": ["longitudinal", "coorte", "prospectiv", "acompanhamento", "longo prazo", "longoprazo"],
-                "histórico": ["retrospectiv", "histor", "arquiv", "documental", "passado"],
-                "prospectivo": ["preditiv", "prognost", "futuro", "previs"],
-                "desenvolvimental": ["desenvolviment", "ciclo de vida", "life span", "life-span"],
-            },
-            "populacao": {
-                "adultos": ["adult", "meia-idade", "meia idade"],
-                "idosos": ["idos", "envelhec", "geriatri"],
-                "adolescentes": ["adolesc", "juven", "jovem"],
-                "infância": ["infanc", "crianc", "infantil", "pre-escolar"],
-                "gênero feminino": ["mulher", "feminin", "genero feminin"],
-                "gênero masculino": ["homem", "masculin", "genero masculin"],
-                "diversidade": ["lgbt", "diversidade", "genero nao", "transgener"],
-                "contexto clínico": ["paciente", "clinic", "hospital", "ambulatori"],
-                "contexto comunitário": ["comunitari", "comunidade", "atencao primaria"],
-                "brasil": ["brasil", "latino-americ", "latino americ", "latam"],
-            },
-            "dados": {
-                "clínicos": ["escala", "inventari", "questionari", "bdi", "ham", "scl"],
-                "neurobiológicos": ["eeg", "fmri", "mri", "neuroimag", "biomarcador"],
-                "qualitativos": ["entrevista", "grupo focal", "discurso", "narrativa"],
-                "observacionais": ["observac", "naturalist", "etnograf"],
-                "epidemiológicos": ["epidemiolog", "prevalenc", "incidencia", "comorbid"],
-                "longitudinais": ["longitudinal", "follow-up", "onda", "wave", "painel"],
-                "comparativos": ["cross-cultural", "transcultural", "cross national"],
-                "metadados": ["meta-analise", "revisao sistematica", "metanalise"],
-            },
-            "dominios": {
-                "psicologia clínica": ["psicologi", "clinic", "psicopatolog", "psicoterap"],
-                "neurociências": ["neurocien", "neurobiolog", "neuroimag", "cerebr"],
-                "sociologia": ["sociolog", "estratificac", "desiguald", "capital social"],
-                "antropologia": ["antropolog", "etnograf", "cultur", "ritual"],
-                "economia comportamental": ["economi", "comportamental", "nudge", "vies"],
-                "filosofia da mente": ["filosof", "conscienc", "mente", "fenomenolog"],
-                "psicofarmacologia": ["farmac", "medicac", "antidepress", "psicofarmac"],
-                "saúde pública": ["saude publica", "sus", "promocao saude", "prevenc"],
-                "educação": ["educac", "ensino", "aprendizag", "escolar"],
-                "ia tecnologia": ["inteligencia artificial", "machine learning", "deep learning", "ia", "chatbot"],
-            },
-            "teoria_jogos": {
-                "equilíbrio de nash": ["nash", "equilibrio de nash", "pne", "estrategia dominante"],
-                "dilema do prisioneiro": ["prisioneiro", "dilema do prisioneiro", "cooperacao", "payoff"],
-                "soma zero": ["soma zero", "zero-sum", "jogo de soma zero"],
-                "tit-for-tat": ["tit for tat", "reciprocidade", "olho por olho"],
-                "stackelberg": ["stackelberg", "lider", "seguidor"],
-                "barganha": ["barganha", "negociacao", "bargaining"],
-                "sinalização": ["sinalizac", "signaling", "screening"],
-                "evolutivo": ["evolutivamente estavel", "ess", "selecao natural", "evolutiv"],
-                "bayesiano": ["bayesiano", "harsanyi", "informacao incompleta"],
-                "cooperativo": ["cooperativo", "shapley", "coalizao", "nucleolo"],
-            },
-        }
-
-        # Buscar keywords específicas da dimensão
-        if dim_key in keyword_map:
-            for kw_category, keywords in keyword_map[dim_key].items():
+        # Buscar keywords específicas via keyword_map_builtin (v4.0)
+        from scanners.noological_scanner import keyword_map_builtin
+        if dim_key in keyword_map_builtin:
+            for kw_category, keywords in keyword_map_builtin[dim_key].items():
                 if kw_category in cat_lower:
-                    # v3.0: word-boundary matching
-                    for kw in keywords:
-                        if self._word_boundary_match(kw, corpus_lower):
-                            return True
+                    if self._word_boundary_match_any(keywords, corpus_lower):
+                        return True
                     return False  # Categoria específica não encontrada
 
-        # Fallback: busca genérica com word-boundary
-        words = cat_lower.split()
-        match_count = 0
-        for w in words:
-            if len(w) > 3:
-                if self._word_boundary_match(w, corpus_lower):
-                    match_count += 1
+        # Fallback v4.0 (R225): word matching com any() generator
+        words = [w for w in cat_lower.split() if len(w) > 3]
+        if not words:
+            return False
+        match_count = sum(1 for w in words if self._word_boundary_match(w, corpus_lower))
         return match_count >= len(words) * 0.5
 
     def _analyze_ecosystem_layers(self, dimension_results: dict[str, Any]) -> dict[str, Any]:
