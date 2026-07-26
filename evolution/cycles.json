@@ -1010,6 +1010,22 @@
         "Capacitar o orquestrador primario marceloclaro a emitir certicados digitais de rigor e integridade eleva a governanca do ecossistema ao nivel maximo"
       ],
       "timestamp": 1785035255.202553
+    },
+    {
+      "round_id": "R242",
+      "objective": "Expansao e Fortalecimento dos Servidores MCP (SPEC-935-R229)",
+      "changes": [
+        "Criada especificacao specs/SPEC-935-R229-mcp-expansion-and-hardening.md",
+        "Implementado colibri/colibri_mcp_server.py expor ferramentas do Colibri MoE via MCP",
+        "Implementado scanners/scanners_mcp_server.py expor SuperRigorPipeline e MerkleIntegrityGuard via MCP",
+        "Atualizado integrations/opencode_cli.py registrando 6 MCP servers em opencode.json",
+        "Criada suite de testes unitarios tests/test_r229_mcp_expansion.py com 100% de aprovacao (4/4 passed)"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Expandir os servidores MCP para incluir o Colibri e a suíte de scanners permite a qualquer cliente externo como Claude Code ou Antigravity invocar auditorias rigorosas"
+      ],
+      "timestamp": 1785037514.3152554
     }
   ]
 }

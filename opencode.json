@@ -2404,6 +2404,22 @@
         "skills/tooling/pypi_mcp_server.py"
       ],
       "enabled": true
+    },
+    "colibri-mcp": {
+      "type": "local",
+      "command": [
+        "python3",
+        "colibri/colibri_mcp_server.py"
+      ],
+      "enabled": true
+    },
+    "scanners-mcp": {
+      "type": "local",
+      "command": [
+        "python3",
+        "scanners/scanners_mcp_server.py"
+      ],
+      "enabled": true
     }
   },
   "command": {
