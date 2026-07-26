@@ -982,6 +982,20 @@
         "O ecossistema e simultaneamente um ambiente de execucao e um Harness Interno Auditavel com prova digital imutavel"
       ],
       "timestamp": 1785034547.9184828
+    },
+    {
+      "round_id": "R240",
+      "objective": "Guardiao de Integridade Merkle Tree (SPEC-935-R227)",
+      "changes": [
+        "Criada especificacao specs/SPEC-935-R227-merkle-integrity-guard.md",
+        "Implementado benchmarks/merkle_integrity_guard.py com calculo dinamico da Merkle Root dos modulos de codigo do ecossistema",
+        "Criada suite de testes unitarios tests/test_r227_merkle_integrity_guard.py com 100% de aprovacao (5/5 passed)"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Integrar uma Arvore de Merkle ao harness interno garante detecção instantanea de alteracoes nao autorizadas no codigo-fonte"
+      ],
+      "timestamp": 1785034865.2675216
     }
   ]
 }
