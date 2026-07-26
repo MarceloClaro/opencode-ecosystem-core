@@ -6,18 +6,18 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.2.0_Redução_LLM-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-2044_passed-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-31_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Versão](https://img.shields.io/badge/Versão-3.5.0_Colibri_MoE-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-31_passed-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-45_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-4_servidores-8A2BE2.svg)](integrations/)
-[![Agentes](https://img.shields.io/badge/Agentes-186+-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-141-dodgerblue.svg)](specs/)
+[![Agentes](https://img.shields.io/badge/Agentes-187+-orange.svg)](agents/catalog/)
+[![Specs](https://img.shields.io/badge/Specs-18-dodgerblue.svg)](specs/)
 [![LLM Reduction](https://img.shields.io/badge/LLM_Reduction-6_componentes-green.svg)](skills/tooling/llm_reduction.py)
-[![DataHub](https://img.shields.io/badge/DataHub-16_fontes-yellow.svg)](skills/tooling/data_knowledge_hub/)
-[![On-Device](https://img.shields.io/badge/On--Device-LiteRT--LM-success.svg)](skills/litert_lm/)
+[![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_C_Engine-success.svg)](colibri/)
+[![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 186+ agentes especializados, Pipeline Científico Agentivo (EvoSci + Deep Research + Peer Review + Revision + Paper Composer), Scientific RAG adaptativo, Evolutionary Memory, MCP Security, GitHub Actions CI/CD, Universidade Sintética Transversal com 31 ciclos de evolução contínua, inferência on-device via LiteRT-LM (Gemma 4, Qwen3), **Redução de Dependência LLM** (6 componentes determinísticos) e **DataKnowledgeHub** (16 fontes com validação cruzada).*
+*Uma arquitetura cognitiva completa que integra 187+ agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Lazy Agent Catalog**, **Vectorized Goal Drift Detector**, **Agent Evaluation & Trajectory Harness**, inferência on-device via LiteRT-LM (Gemma 4, Qwen3) e 45 ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 

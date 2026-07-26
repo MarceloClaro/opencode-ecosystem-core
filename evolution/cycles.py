@@ -40,6 +40,8 @@ class EvolutionRegistry:
     def __init__(self, state_path: str = STATE_PATH):
         self.state_path = state_path
         self.cycles: List[EvolutionCycle] = []
+        self._total_score: float = 0.0
+        self._scored_count: int = 0
         self._load()
 
     def _load(self) -> None:
@@ -55,6 +57,12 @@ class EvolutionRegistry:
                 ]
             except (json.JSONDecodeError, TypeError, ValueError):
                 self.cycles = []
+        self._recompute_stats()
+
+    def _recompute_stats(self) -> None:
+        scored = [c.score for c in self.cycles if c.score is not None]
+        self._total_score = sum(scored)
+        self._scored_count = len(scored)
 
     def save(self) -> None:
         with open(self.state_path, "w", encoding="utf-8") as f:
@@ -79,6 +87,9 @@ class EvolutionRegistry:
             score=score, lessons=lessons or [],
         )
         self.cycles.append(cycle)
+        if score is not None:
+            self._total_score += score
+            self._scored_count += 1
         self.save()
         return cycle
 
@@ -86,8 +97,9 @@ class EvolutionRegistry:
         return [asdict(c) for c in self.cycles[-limit:]]
 
     def average_score(self) -> Optional[float]:
-        scored = [c.score for c in self.cycles if c.score is not None]
-        return round(sum(scored) / len(scored), 2) if scored else None
+        if self._scored_count > 0:
+            return round(self._total_score / self._scored_count, 2)
+        return None
 
     def load_documented_cycles(self) -> List[Dict[str, str]]:
         """Indexa os ciclos documentados em evolution/evo-*.md (portados do original)."""
