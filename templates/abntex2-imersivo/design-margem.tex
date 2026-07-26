@@ -1,0 +1,36 @@
+%==============================================================================
+% design-margem.tex — Geometria do miolo (Tufte) + notas laterais + hooks
+%==============================================================================
+% Geometria do miolo textual: bloco de texto + coluna externa para notas
+\newcommand{\miologeometry}{%
+  \newgeometry{a4paper, inner=3cm, outer=5.5cm, top=3cm, bottom=2cm,
+    marginparwidth=4cm, marginparsep=0.5cm}%
+  % marginnote congela \marginnotetextwidth em \AtBeginDocument (com a
+  % geometria ABNT original); sem resincronizar aqui, as notas laterais
+  % calculam a posição x usando o \textwidth antigo (mais largo) e saem
+  % cortadas na borda da página. Resincroniza após cada troca de geometria.
+  \edef\marginnotetextwidth{\the\textwidth}%
+}
+
+% Hooks: pré/pós-textuais em Liberation Serif (ABNT); miolo em Noto Serif
+% + geometria larga. (main font padrão já é Noto Serif — Task 2.)
+\apptocmd{\pretextual}{\setmainfont{Liberation Serif}[Ligatures=TeX]}{}{}
+\apptocmd{\textual}{\miologeometry\setmainfont{Noto Serif}[Ligatures=TeX]}{}{}
+\apptocmd{\postextual}{\restoregeometry\edef\marginnotetextwidth{\the\textwidth}\setmainfont{Liberation Serif}[Ligatures=TeX]}{}{}
+
+%------------------------------------------------------------------
+% Comandos de margem
+%------------------------------------------------------------------
+% Nota lateral (texto marginal, sem numeração pesada)
+\newcommand{\notalateral}[1]{%
+  \marginnote{\sffamily\footnotesize\color{corMargem}#1}}
+
+% Citação DOI na margem (usa biblatex; gera entrada na bibliografia)
+\newcommand{\citdoi}[2]{%
+  \sidenote{\footnotesize\textcite{#1}\par\url{https://doi.org/#2}}}
+
+% Figura pequena na margem
+\newcommand{\figmargem}[2]{%
+  \marginnote{\centering
+    \includegraphics[width=\marginparwidth]{#1}\par
+    {\sffamily\scriptsize #2}}}

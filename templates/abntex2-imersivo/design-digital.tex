@@ -1,0 +1,19 @@
+%==============================================================================
+% design-digital.tex — Ponte físico→digital (QR + links)
+%==============================================================================
+% Caixa digital genérica: \caixaqr{ícone}{título}{url}
+\newcommand{\caixaqr}[3]{%
+  \begin{tcolorbox}[enhanced, breakable, arc=2pt, boxrule=0.6pt,
+    colframe=corDigital, colback=corDigital!6,
+    left=8pt, right=8pt, top=6pt, bottom=6pt]
+    \begin{minipage}[c]{2.4cm}\qrcode[height=2cm]{#3}\end{minipage}%
+    \hfill
+    \begin{minipage}[c]{\dimexpr\linewidth-2.9cm\relax}
+      {\sffamily\bfseries\color{corDigital}#1~#2}\par\smallskip
+      {\footnotesize\url{#3}}
+    \end{minipage}
+  \end{tcolorbox}}
+
+\newcommand{\colab}[1]{\caixaqr{\faGoogle}{Abrir no Google Colab}{#1}}
+\newcommand{\repo}[1]{\caixaqr{\faGithub}{Repositório no GitHub}{#1}}
+\newcommand{\dataset}[2]{\caixaqr{\faDatabase}{Dataset: #2}{#1}}

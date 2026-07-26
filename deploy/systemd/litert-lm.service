@@ -1,0 +1,21 @@
+[Unit]
+Description=LiteRT-LM local OpenAI-compatible daemon
+StartLimitIntervalSec=15min
+StartLimitBurst=3
+
+[Service]
+Type=simple
+Environment=LITERT_LM_CONTEXT_TOKENS=20480
+Environment=LITERT_LM_MAX_TOKENS=20480
+ExecStart=%h/.local/bin/litert-lm serve --host 127.0.0.1 --port 9379
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=15s
+KillMode=control-group
+TasksMax=16
+MemoryMax=8G
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

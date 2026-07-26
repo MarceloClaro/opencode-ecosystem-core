@@ -148,6 +148,24 @@ noticia-*.pdf
 # --- Caches de ferramentas ---
 skills/tooling/.cache/
 
+# --- Assets pessoais ---
+assets/*.png
+assets/*.jpg
+assets/*.jpeg
+
+# --- Embedded git repos (externos) ---
+colibri/
+
+# --- Scripts de geração avulsa (não-nucleares) ---
+enriquecer_notebook*.py
+regenerar_figuras*.py
+update_notebook.py
+gerar_fichamento_pdf.py
+
+# --- Node / OpenCode lock ---
+.opencode/package-lock.json
+.opencode/.gitignore
+
 # --- Configuração local ---
 .claude/settings.local.json
 

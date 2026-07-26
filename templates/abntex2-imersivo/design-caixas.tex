@@ -1,0 +1,64 @@
+%==============================================================================
+% design-caixas.tex — Caixas pedagógicas (tcolorbox) + retrocompatibilidade
+%==============================================================================
+% Estilo base comum
+\tcbset{
+  caixapedag/.style={
+    enhanced, breakable, arc=2pt, boxrule=0.6pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fonttitle=\sffamily\bfseries\color{white},
+    coltext=black
+  }
+}
+
+% Fábrica: \novacaixa{ambiente}{cor}{ícone}{Título}
+\newcommand{\novacaixa}[4]{%
+  \newtcolorbox{#1}{caixapedag, colframe=#2, colback=#2!6,
+    colbacktitle=#2, title={#3~#4}}%
+}
+
+\novacaixa{objetivos}{corObjetivo}{\faBullseye}{Objetivos de aprendizagem}
+% NOTA: abntex2 já define o ambiente `resumo` (resumo/abstract da obra).
+% Para não quebrar a retrocompatibilidade (o livro usa \begin{resumo} em
+% prefacio/06-resumo.tex e 07-abstract.tex), a caixa pedagógica de síntese
+% de capítulo usa o nome `resumocap`.
+\novacaixa{resumocap}{corResumo}{\faListUl}{Resumo \& checklist}
+\novacaixa{atencao}{corAtencao}{\faExclamationTriangle}{Atenção}
+\novacaixa{dica}{corDica}{\faLightbulb}{Dica}
+\novacaixa{errocomum}{corErro}{\faBug}{Erro comum}
+\novacaixa{pareepense}{corPensar}{\faQuestionCircle}{Pare e pense}
+\novacaixa{exercicio}{corExercicio}{\faPencilRuler}{Exercício}
+\novacaixa{analogia}{corAnalogia}{\faProjectDiagram}{Analogia}
+
+%------------------------------------------------------------------
+% Retrocompatibilidade: comandos legados no novo visual
+%------------------------------------------------------------------
+\renewcommand{\spec}[1]{%
+  \begin{tcolorbox}[caixapedag, colframe=corPrimaria, colback=corPrimaria!6,
+    colbacktitle=corPrimaria, title={\faFileContract~SDD — Especificação}]%
+  #1
+  \end{tcolorbox}}
+
+\renewcommand{\teste}[1]{%
+  \begin{tcolorbox}[caixapedag, colframe=corTesteSucesso, colback=corTesteSucesso!6,
+    colbacktitle=corTesteSucesso, title={\faCheckCircle~Teste TDD}]%
+  #1
+  \end{tcolorbox}}
+
+\renewcommand{\testefalha}[1]{%
+  \begin{tcolorbox}[caixapedag, colframe=corTesteFalha, colback=corTesteFalha!6,
+    colbacktitle=corTesteFalha, title={\faTimesCircle~Teste TDD falhou}]%
+  #1
+  \end{tcolorbox}}
+
+\renewcommand{\destaque}[1]{%
+  \begin{tcolorbox}[caixapedag, colframe=corDestaque, colback=corDestaque!6,
+    colbacktitle=corDestaque, title={\faStar~Destaque}]%
+  #1
+  \end{tcolorbox}}
+
+\renewenvironment{pratica}[1][]{%
+  \begin{tcolorbox}[caixapedag, colframe=corSecundaria, colback=corSecundaria!6,
+    colbacktitle=corSecundaria, title={\faFlask~Prática: #1}]%
+}{%
+  \end{tcolorbox}}

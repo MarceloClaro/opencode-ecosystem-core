@@ -1,0 +1,10 @@
+[Unit]
+Description=TouchTerrain Watchdog - liveness local com limiar e cooldown (SPEC-935-R212)
+After=geomaker-touchterrain.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/libexec/opencode-ecosystem/touchterrain_watchdog.py --url http://127.0.0.1:8081/healthz --service geomaker-touchterrain --timeout 3 --failure-threshold 3 --cooldown-seconds 900
+User=root
+NoNewPrivileges=true
+PrivateTmp=true

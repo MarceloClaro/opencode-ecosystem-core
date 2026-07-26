@@ -1,0 +1,58 @@
+%==============================================================================
+% preamble-imersivo.tex — Kit de integração do MODELO LATEX IMERSIVO (híbrido ABNT)
+% Carregue este arquivo no preâmbulo, DEPOIS de \documentclass{abntex2} e de
+% fontspec/babel, e ANTES de \begin{document}.
+%
+% Engine: XeLaTeX + Biber (nunca pdflatex).
+%
+% Caminho dos componentes: por padrão procura os design-*.tex no diretório
+% atual / input path. Para apontar outra pasta, antes de carregar este arquivo:
+%   \newcommand{\imersivocfg}{caminho/para/abntex2-imersivo/}
+%==============================================================================
+\providecommand{\imersivocfg}{}
+
+% --- Pacotes exigidos pela camada imersiva ---------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning, calc, decorations.pathreplacing}
+\usepackage[export]{adjustbox}   % \resizebox p/ figuras largas no miolo estreito
+\usepackage{lettrine}            % letra capitular (\capitular)
+\usepackage[most]{tcolorbox}     % caixas pedagógicas
+\usepackage{fontawesome5}        % ícones
+\usepackage{qrcode}              % elementos digitais (\colab/\repo/\dataset)
+
+% --- Compatibilidade sidenotes x abntex2/memoir ----------------------------
+% sidenotes exige changepage[strict]; abntex2/memoir "emula" changepage sem
+% opções e predefine \sidecaption/marginfigure/margintable. Resolvemos o
+% choque ANTES de carregar sidenotes (nenhum desses comandos do memoir é
+% usado; sidenotes assume o papel deles).
+\PassOptionsToPackage{strict}{changepage}
+\makeatletter
+\let\sidecaption\undefined
+\let\marginfigure\undefined
+\let\endmarginfigure\undefined
+\let\margintable\undefined
+\let\endmargintable\undefined
+\makeatother
+\usepackage{sidenotes}           % puxa marginnote
+
+% --- Cores base e de nível exigidas pelos componentes ----------------------
+% (\providecolor: não sobrescreve se o seu projeto já as define)
+\providecolor{corPrimaria}{HTML}{1A5276}
+\providecolor{corSecundaria}{HTML}{2E86C1}
+\providecolor{corDestaque}{HTML}{E67E22}
+\providecolor{corTesteSucesso}{HTML}{27AE60}
+\providecolor{corTesteFalha}{HTML}{C0392B}
+\providecolor{corNivelFacil}{HTML}{2ECC71}
+\providecolor{corNivelMedio}{HTML}{F39C12}
+\providecolor{corNivelDificil}{HTML}{E67E22}
+\providecolor{corNivelAvancado}{HTML}{E74C3C}
+\providecolor{corNivelPhD}{HTML}{8E44AD}
+
+% --- Componentes do modelo (ordem importa: cores → fontes → resto) ---------
+\input{\imersivocfg design-cores}      % paleta semântica + \cornivel/\rotulonivel
+\input{\imersivocfg design-fontes}     % Noto Serif/Inter/DejaVu + \capitular
+\input{\imersivocfg design-caixas}     % caixas tcolorbox + retrocompat legados
+\input{\imersivocfg design-margem}     % notas laterais Tufte + geometria do miolo
+\input{\imersivocfg design-aberturas}  % \aberturaparte/\aberturacap + trilha nível
+\input{\imersivocfg design-digital}    % \colab/\repo/\dataset com QR
+%==============================================================================
