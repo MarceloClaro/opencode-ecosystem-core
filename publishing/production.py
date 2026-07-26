@@ -46,8 +46,57 @@ DEFAULT_OUTPUT_ROOT = os.path.join(_ROOT, "producao_cientifica")
 # ── Atalho na Área de Trabalho ──────────────────────────────────────────
 import platform as _platform
 
+def _is_wsl() -> bool:
+    """Detecta se o processo roda no Windows Subsystem for Linux."""
+    if os.environ.get("WSL_DISTRO_NAME"):
+        return True
+    try:
+        with open("/proc/version", "r", encoding="utf-8", errors="ignore") as f:
+            return "microsoft" in f.read().lower()
+    except OSError:
+        return False
+
+
+def _detect_windows_desktop_from_wsl() -> Optional[str]:
+    """Localiza a Área de Trabalho do Windows sem fixar um usuário."""
+    candidates: List[str] = []
+    winuser = ""
+    try:
+        result = subprocess.run(
+            ["cmd.exe", "/c", "echo %USERNAME%"],
+            capture_output=True,
+            timeout=5,
+        )
+        for encoding in ("utf-8", "cp850", "cp1252"):
+            try:
+                winuser = result.stdout.decode(encoding).strip()
+                break
+            except UnicodeDecodeError:
+                continue
+        else:
+            winuser = result.stdout.decode("utf-8", errors="replace").strip()
+    except (OSError, subprocess.TimeoutExpired):
+        winuser = ""
+
+    if winuser:
+        candidates.extend([
+            f"/mnt/c/Users/{winuser}/Desktop",
+            f"/mnt/c/Users/{winuser}/Área de Trabalho",
+        ])
+
+    users_dir = "/mnt/c/Users"
+    if os.path.isdir(users_dir):
+        for entry in sorted(os.listdir(users_dir)):
+            if entry in {"Public", "Default", "Default User", "All Users"}:
+                continue
+            for subdir in ("Desktop", "Área de Trabalho"):
+                candidates.append(os.path.join(users_dir, entry, subdir))
+
+    return next((path for path in candidates if os.path.isdir(path)), None)
+
+
 def _detect_desktop_path() -> str:
-    """Detecta o caminho da Área de Trabalho (Windows/Linux/macOS)."""
+    """Detecta o caminho da Área de Trabalho (Windows/Linux/macOS/WSL)."""
     system = _platform.system()
 
     if system == "Windows":
@@ -59,6 +108,10 @@ def _detect_desktop_path() -> str:
             os.path.join(userprofile, "Área de Trabalho"),
         ]
     else:
+        if _is_wsl():
+            windows_desktop = _detect_windows_desktop_from_wsl()
+            if windows_desktop:
+                return windows_desktop
         # Linux/macOS
         home = os.path.expanduser("~")
         candidates = [
@@ -156,6 +209,10 @@ TEMPLATE_MAIN = {
     "abntex2": os.path.join("abntex2", "abntex2-modelo-trabalho-academico.tex"),
     "livro": os.path.join("livro", "victoria_regia"),
     "livro-book": os.path.join("livro", "book"),
+    # Templates literários R119, mantidos via symlinks de compatibilidade
+    # em publishing/templates/livro/{romance,contos}.
+    "livro-romance": os.path.join("livro", "romance"),
+    "livro-contos": os.path.join("livro", "contos"),
 }
 
 FORMATS = ["pdf", "docx", "md", "odt"]

@@ -23,6 +23,18 @@ from typing import Any, Callable, Dict, List, Optional
 
 from academic.auto_score_qualis import RUBRIC  # rubrica oficial de 10 critérios
 
+# Palavras-chave para roteamento de artigos sobre infraestrutura cloud.
+CLOUD_TOPIC_KEYWORDS = [
+    "alloydb", "cloud sql", "bigquery", "dataflow", "composer",
+    "dataproc", "spark", "gcp", "google cloud", "cloud infrastructure",
+    "cloud computing", "big data", "data pipeline", "cloud database",
+    "postgresql", "mysql", "sql server", "firestore", "spanner",
+    "gcs", "cloud storage", "data lake", "data warehouse",
+    "cloud migration", "cloud security", "cloud optimization",
+    "infraestrutura em nuvem", "banco de dados cloud",
+    "alloydb omni", "cloud data", "pipeline de dados",
+]
+
 
 # Pipeline canônico MASWOS: (estágio, agente do catálogo, capacidade)
 MASWOS_STAGES = [
@@ -161,6 +173,76 @@ class MaswosPipeline:
                 ratio = 0.5
             earned += weight * ratio
         return 10.0 * earned / total_weight
+
+
+# Pipeline especializado para artigos de infraestrutura cloud.
+CLOUD_STAGES = [
+    ("cloud_diagnostico", "cloud-data-infra-generalist", "cloud_assessment"),
+    ("cloud_arquitetura", "cloud-data-pipelines-specialist", "cloud_architecture"),
+    ("cloud_seguranca", "cloud-security-specialist", "cloud_security"),
+    ("cloud_banco_dados", "cloud-alloydb-specialist", "cloud_database"),
+    ("cloud_bigquery_analytics", "cloud-bigquery-specialist", "cloud_analytics"),
+    ("cloud_implementacao", "cloud-data-pipelines-specialist", "cloud_implementation"),
+    ("cloud_otimizacao", "cloud-sql-postgres-specialist", "cloud_optimization"),
+    ("cloud_revisao_tecnicas", "cloud-sql-mysql-specialist", "cloud_review"),
+]
+
+
+def is_cloud_topic(topic: str) -> bool:
+    """Retorna se o tópico contém sinais de infraestrutura cloud."""
+    normalized_topic = topic.casefold()
+    return any(keyword in normalized_topic for keyword in CLOUD_TOPIC_KEYWORDS)
+
+
+def run_maswos_cloud(
+    topic: str,
+    manuscript: str = "",
+    delegate_fn: Optional[Callable[[str, str, str], str]] = None,
+) -> MaswosRun:
+    """Executa o pipeline cloud ou delega ao MASWOS padrão.
+
+    Sem ``delegate_fn``, nenhum agente externo é chamado: os oito estágios
+    cloud são marcados como ``skipped`` para manter o dry-run seguro.
+    Tópicos não-cloud seguem exatamente o pipeline canônico, sem prefixo no
+    tópico.
+    """
+    pipeline = MaswosPipeline(delegate_fn=delegate_fn)
+
+    if not is_cloud_topic(topic):
+        return pipeline.run(topic, manuscript)
+
+    run = MaswosRun(topic=f"[CLOUD] {topic}")
+    accumulated = manuscript
+    for stage_name, agent_id, capability in CLOUD_STAGES:
+        started = time.time()
+        result = StageResult(stage=stage_name, agent_id=agent_id)
+        try:
+            if delegate_fn:
+                output = delegate_fn(
+                    agent_id,
+                    capability,
+                    f"[MASWOS-CLOUD:{stage_name}] Tópico cloud: {topic}. "
+                    f"Skills de referência em scripts/cloud/. "
+                    f"Contexto: {accumulated[-2000:] if accumulated else '(início)'}",
+                )
+                result.output = output or ""
+                accumulated += f"\n\n## [{stage_name}]\n{result.output}"
+                result.status = "completed"
+            else:
+                result.status = "skipped"
+                result.output = (
+                    f"(dry-run) delegaria a {agent_id} ({capability}) "
+                    "com skills cloud"
+                )
+        except Exception as exc:
+            result.status = "failed"
+            result.output = f"erro: {exc}"
+        result.duration_s = round(time.time() - started, 3)
+        run.stages.append(result)
+
+    run.final_score = round(pipeline.score_fn(accumulated or topic), 2)
+    run.approved = run.final_score >= QUALITY_GATE_THRESHOLD
+    return run
 
 
 # Singleton em modo standalone
