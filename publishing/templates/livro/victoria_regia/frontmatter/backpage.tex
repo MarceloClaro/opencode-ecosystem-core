@@ -1,0 +1,103 @@
+\pagestyle{empty}  % Disable headers and footers on this page
+
+\cleardoublepage    % Ensure the following content starts on a right-hand page in double-sided layouts
+
+% =================
+% Back cover design
+% =================
+\begin{center}
+\begin{tikzpicture}[remember picture,overlay]
+
+    % some math with golden ratio
+    \pgfmathsetmacro{\phi}{(1+sqrt(5))/2}
+    \setlength{\goldenHeight}{\paperheight/\phi}
+    \pgfmathsetmacro{\scaleFactor}{\goldenHeight/1cm/6.90}
+    
+    % Full black background
+    %\fill[black] (current page.south west) rectangle (current page.north east);    
+    \shade[bottom color=ultradarkmagenta, top color=darkmagenta]
+        (current page.south west) rectangle ($(current page.south east)!0.5!(current page.north east)$);
+    \fill[darkmagenta]
+        ($(current page.south west)!0.5!(current page.north west)$) rectangle 
+        ($(current page.south east)!0.7!(current page.north east)$);
+    \shade[bottom color=darkmagenta, top color=ultradarkmagenta]
+        ($(current page.south west)!0.7!(current page.north west)$) rectangle (current page.north east);
+
+    \begin{scope}[remember picture, overlay, shift={(current page.center)}]
+        \pgfmathsetlengthmacro{\circleradius}{\paperwidth/14}
+        \foreach \i in {0,1,5,6} {
+          \fill[
+            line width=1.5pt,
+            fill=white,
+            fill opacity=0.2
+          ]
+          ({(\i - 3)*2*\circleradius}, 0)
+          circle (\circleradius);
+        }
+    \end{scope}
+
+    \begin{scope}[remember picture,overlay,
+              shift={($(current page.center)$)}]
+        %\draw[line width=1.5pt,
+        %    draw=green!70,
+        %    draw opacity=0.3]
+        %   (0,0) circle ({0.77*\goldenHeight/\scaleFactor});
+        \fill[line width=1.5pt,
+            fill=white!10,
+            fill opacity=0.2]
+           (0,0) circle ({0.474*\goldenHeight/\scaleFactor});
+    \end{scope}
+
+    % flower
+    \begin{scope}[
+            remember picture,
+            overlay,
+            shift={($(current page.center)$)}, 
+            scale=\scaleFactor
+        ]
+        \tikzmath{
+          integer \nbPetals, \nbQuad;
+          \nbPetals = 8;
+          \nbQuad = 8;
+          real \a, \base, \r;
+          \a = 360/\nbPetals;  % petal's angle
+          \base = 2;           % base of the exponential definig the helix
+          \r = .35;            % scaling constant
+          function tmpR(\i) {  % integer giving a point along the helix
+            return {\r*pow(\base, 2.637*\i/\nbQuad)};
+          };
+        }
+        \tikzset{%
+          pics/petalPiece/.style 2 args={% branch number, base point number
+            code={%
+              \tikzmath{integer \b, \p; \b = #1; \p = #2;}
+              \path
+              (\p/\nbQuad*180 +\b*\a: {tmpR(\p)}) coordinate (NW)
+              ({(\p +1)/\nbQuad*180 +\b*\a}: {tmpR(\p +1)}) coordinate (NE)
+              ({(\p +2)/\nbQuad*180 +(\b -1)*\a}: {tmpR(\p +2)}) coordinate (SE)
+              ({(\p +1)/\nbQuad*180 +(\b -1)*\a}: {tmpR(\p +1)}) coordinate (SW);
+              \foreach \i in {0, .05, ..., .9}{%
+                \draw[white, thick, fill=white, opacity=.05]
+                ($(NW)!\i!(SW)$) -- ($(NE)!\i/2!(SE)$) -- (SE) -- (SW) -- cycle;
+              }
+            }
+          }
+        }
+        \foreach \l in {1, 2, ..., \nbPetals}{
+            \foreach \i in {-1, 0, 1, 2, ..., \nbQuad}{%
+              \path (0, 0) pic {petalPiece={\l}{\i}};
+            }
+          }
+    \end{scope}
+
+    % Back cover description (title or synopsis in small caps)
+    \node[white, anchor=north, text width=0.9\linewidth, align=justify] 
+        at ([yshift=-48pt] current page.north) 
+        {\scshape{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisis sem. Nullam nec mi et neque pharetra sollicitudin. Praesent imperdiet mi nec ante. Donec ullamcorper, felis non sodales commodo, lectus velit ultrices augue, a dignissim nibh lectus placerat pede. Vivamus nunc nunc, molestie ut, ultricies vel, semper in, velit.}};
+
+    % Publisher logo centered near the top
+    \node[anchor=north, above=4pt of publisher.north] 
+        {\includegraphics[width=0.07\textwidth]{frontmatter/logo-white.png}};
+
+\end{tikzpicture}
+\end{center}

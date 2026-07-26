@@ -1,0 +1,23 @@
+%==============================================================================
+% design-cores.tex — Paleta semântica do modelo imersivo
+% (cores de nível corNivel* já definidas em config/pacotes.tex)
+%==============================================================================
+\definecolor{corObjetivo}{HTML}{1A5276}
+\definecolor{corResumo}{HTML}{117A65}
+\definecolor{corAtencao}{HTML}{B9770E}
+\definecolor{corDica}{HTML}{1F8A70}
+\definecolor{corErro}{HTML}{C0392B}
+\definecolor{corPensar}{HTML}{6C3483}
+\definecolor{corExercicio}{HTML}{2874A6}
+\definecolor{corAnalogia}{HTML}{7D6608}
+\definecolor{corDigital}{HTML}{0E6655}
+\definecolor{corMargem}{HTML}{566573}
+
+% Mapa nível(0..5) → nome de cor (usado pela trilha e pela letra capitular)
+\newcommand{\cornivel}[1]{%
+  \ifcase#1 corNivelFacil\or corNivelFacil\or corNivelMedio\or
+  corNivelDificil\or corNivelAvancado\else corNivelPhD\fi}
+
+% Mapa nível(0..5) → rótulo
+\newcommand{\rotulonivel}[1]{%
+  \ifcase#1 0\or 1\or 2\or 3\or 4\else PhD\fi}

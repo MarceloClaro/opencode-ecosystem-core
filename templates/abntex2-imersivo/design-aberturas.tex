@@ -1,0 +1,53 @@
+%==============================================================================
+% design-aberturas.tex — Trilha de nível + aberturas de capítulo/parte
+% (\cornivel e \rotulonivel vêm de config/design-cores.tex — Task 1)
+%==============================================================================
+% Trilha de nível: preenche pílulas de 0 até #1 (0..5)
+\newcommand{\trilhanivel}[1]{%
+  \begin{tikzpicture}[baseline=-0.6ex]
+    \foreach \i in {0,...,5} {
+      \pgfmathtruncatemacro{\ativo}{\i<=#1 ? 1 : 0}
+      \edef\cor{\ifnum\ativo=1 \cornivel{\i}\else lightgray\fi}
+      \node[draw=none, fill=\cor, rounded corners=3pt, minimum width=0.9cm,
+            minimum height=0.5cm, font=\sffamily\bfseries\scriptsize\color{white}]
+           at (\i*1.05,0) {\rotulonivel{\i}};
+    }
+  \end{tikzpicture}%
+}
+
+% Abertura de capítulo (após \chapter{...}):
+% #1 epígrafe  #2 autor-epígrafe  #3 nível(0-5)  #4 tempo  #5 pré-requisitos
+% #6 objetivos (conteúdo de itemize)
+\newcommand{\aberturacap}[6]{%
+  \begin{flushright}\itshape\small #1\par\upshape\textmd{--- #2}\end{flushright}
+  \medskip
+  \noindent\trilhanivel{#3}\hfill{\sffamily\small\faClock~#4}\par
+  \smallskip
+  {\sffamily\small\textbf{Pré-requisitos:} #5}\par
+  \medskip
+  \begin{tcolorbox}[caixapedag, colframe=corObjetivo, colback=corObjetivo!6,
+    colbacktitle=corObjetivo, title={\faBullseye~Neste capítulo você vai\ldots}]
+    \begin{itemize}#6\end{itemize}
+  \end{tcolorbox}
+  \bigskip
+}
+
+% Abertura de parte (usar no lugar de \part{...}):
+% #1 romano  #2 TÍTULO  #3 epígrafe  #4 faixa de níveis (texto)
+\newcommand{\aberturaparte}[4]{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \refstepcounter{part}%
+  \phantomsection
+  \addcontentsline{toc}{part}{#2}%
+  \vspace*{\fill}
+  \begin{center}
+    {\tituloface\Huge\bfseries\textcolor{corPrimaria}{PARTE #1}}\par\smallskip
+    {\color{corPrimaria}\rule{0.35\linewidth}{1.2pt}}\par\bigskip
+    {\tituloface\LARGE\bfseries #2}\par\bigskip\bigskip
+    {\itshape\large #3}\par\bigskip\bigskip
+    {\sffamily\small\textcolor{corMargem}{Faixa de nível: #4}}
+  \end{center}
+  \vspace*{\fill}
+  \clearpage
+}
