@@ -1893,3 +1893,33 @@ class MarceloClaroOrchestrator:
                 for c in report.top_correlations[:5]
             ],
         }
+
+    def audit_and_certify(self, text: str = "Produção do Ecossistema OpenCode Core") -> Dict[str, Any]:
+        """Audita, certifica e registra a integridade e excelência de uma produção."""
+        from scanners.pipeline import super_rigor_pipeline
+        from benchmarks.internal_audit_harness import internal_audit_harness
+        from benchmarks.merkle_integrity_guard import merkle_integrity_guard
+
+        rigor = super_rigor_pipeline.audit_production(text)
+        cert = internal_audit_harness.generate_audit_certificate(text)
+        merkle = merkle_integrity_guard.compute_merkle_root()
+
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"auditoria super-rigor: {text[:60]}",
+            reflection=(
+                f"Auditoria concluída com EXS {rigor['excellence_score']:.1f} e "
+                f"Certificado {cert['certificate_id']}. Merkle Root: {merkle['merkle_root'][:12]}..."
+            ),
+            score=rigor["excellence_score"] / 100.0,
+        )
+
+        return {
+            "orchestrator_id": self.id,
+            "excellence_score": rigor["excellence_score"],
+            "passed": rigor["passed"],
+            "rigor_audit": rigor,
+            "certificate": cert,
+            "merkle_root": merkle["merkle_root"],
+            "status": "certified_by_marceloclaro" if rigor["passed"] else "refinement_requested",
+        }
