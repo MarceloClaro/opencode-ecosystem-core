@@ -1,0 +1,41 @@
+# Relatório de Qualidade: {{ projeto }}
+
+**Data:** {{ data | format_date }}
+**Cobertura de Testes:** {{ cobertura }}%
+
+---
+
+## Resumo
+
+| Métrica | Valor |
+|---|---|
+| Testes Passando | {{ testes_passando }} |
+| Testes Falhando | {{ testes_falhando }} |
+| Total de Testes | {{ testes_passando + testes_falhando }} |
+| Taxa de Sucesso | {{ (testes_passando / (testes_passando + testes_falhando)) * 100 if (testes_passando + testes_falhando) > 0 else 0 }}% |
+
+{% if metricas_por_modulo %}
+## Módulos
+
+| Módulo | Cobertura | Status |
+|---|---|---|
+{% for mod in metricas_por_modulo %}
+| {{ mod.nome }} | {{ mod.cobertura }}% | {{ mod.status }} |
+{% endfor %}
+{% endif %}
+
+---
+
+## Recomendações
+
+{% if recomendacoes %}
+{% for rec in recomendacoes %}
+1. **{{ rec.titulo }}**: {{ rec.descricao }} (prioridade: {{ rec.prioridade }})
+{% endfor %}
+{% else %}
+- Manter qualidade atual.
+{% endif %}
+
+---
+
+*Relatório gerado automaticamente pelo OpenCode Ecosystem Core.*
