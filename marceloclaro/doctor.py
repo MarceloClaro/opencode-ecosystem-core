@@ -283,6 +283,44 @@ def _check_litert_lm() -> DoctorCheck:
         )
 
 
+def _check_colibri() -> DoctorCheck:
+    """Verifica se os runtimes Colibri (GLM-5.2 e/ou OLMoE) estão disponíveis.
+
+    Colibri é um motor de inferência em C puro que executa modelos MoE
+    localmente: GLM-5.2 (744B) via ``./coli serve``, OLMoE (1B-7B) via
+    ``./olmoe`` (já compilado e convertido no ecossistema).
+    Opcional — o ecossistema funciona sem ele.
+    """
+    try:
+        from integrations.colibri import ColibriBridge
+        bridge = ColibriBridge()
+
+        parts = []
+        if bridge.olmoe_available:
+            parts.append(f"OLMoE OK (bin={bridge.olmoe_bin}, snap={bridge.olmoe_snap})")
+
+        if bridge.available:
+            info = bridge.get_info()
+            status = info.get("status", "error")
+            if status == "ok":
+                parts.append(f"GLM-5.2 OK (bin={bridge.coli_bin})")
+            else:
+                parts.append(f"GLM-5.2 encontrado mas status={status}")
+
+        if parts:
+            return DoctorCheck("colibri", "pass", " | ".join(parts))
+
+        return DoctorCheck(
+            "colibri", "warn",
+            "Nenhum runtime Colibri disponível. "
+            "OLMoE: make -C colibri/c olmoe && export SNAP=~/models/olmoe_merged. "
+            "GLM-5.2: git clone https://github.com/MarceloClaro/colibri && cd colibri/c && ./setup.sh",
+        )
+    except Exception:
+        return DoctorCheck("colibri", "warn",
+                           "unavailable: não foi possível consultar o runtime Colibri.")
+
+
 def _check_llm_reduction_metrics() -> DoctorCheck:
     """Verifica se as métricas de redução LLM estão disponíveis."""
     if not _METRICS_AVAILABLE:
@@ -325,6 +363,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_external_clis(),
         _check_llm_providers(),
         _check_litert_lm(),
+        _check_colibri(),
         _check_llm_reduction_metrics(),
     ]
 

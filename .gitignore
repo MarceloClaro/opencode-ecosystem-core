@@ -1,5 +1,6 @@
 # --- Python ---
 __pycache__/
+.venv/
 *.pyc
 *.pyo
 .pytest_cache/
@@ -117,6 +118,38 @@ templates/projects/*/ml_pipeline/outputs/
 
 # --- CSV datasets gerados ---
 *.csv
+
+# --- Runtime / checkpoints / patches ---
+checkpoints/
+patches/
+ref.json
+pytest.ini
+opencode.json.tui-migration.bak
+*.bak
+
+# --- Conteúdo pessoal / projetos externos ---
+PROJETO 1/
+REVISAO_MOLAMBUDOS.md
+artigos_dl_odontologia.json
+templates/livro/
+templates/projects/
+template/Victoria_Regia/
+llm-agent-quantization/
+
+# --- Figuras e assets gerados ---
+assets/figures/
+
+# --- Matérias e notícias geradas (HTML/PDF avulsos na raiz) ---
+materia-*.html
+materia-*.pdf
+noticia-*.html
+noticia-*.pdf
+
+# --- Caches de ferramentas ---
+skills/tooling/.cache/
+
+# --- Configuração local ---
+.claude/settings.local.json
 
 # --- Docker ---
 .docker/
