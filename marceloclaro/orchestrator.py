@@ -1895,21 +1895,26 @@ class MarceloClaroOrchestrator:
         }
 
     def audit_and_certify(self, text: str = "Produção do Ecossistema OpenCode Core") -> Dict[str, Any]:
-        """Audita, certifica e registra a integridade e excelência de uma produção."""
+        """Audita, certifica e registra a integridade, orquestração e excelência de uma produção."""
         from scanners.pipeline import super_rigor_pipeline
         from benchmarks.internal_audit_harness import internal_audit_harness
         from benchmarks.merkle_integrity_guard import merkle_integrity_guard
+        from integrations.cli_ecosystem_bridge import cli_ecosystem_bridge
+        from benchmarks.standalone_readiness_eval import standalone_readiness_eval
 
         rigor = super_rigor_pipeline.audit_production(text)
         cert = internal_audit_harness.generate_audit_certificate(text)
         merkle = merkle_integrity_guard.compute_merkle_root()
+        cli_status = cli_ecosystem_bridge.get_unified_status()
+        standalone_status = standalone_readiness_eval.eval_standalone_readiness()
 
         metabus.memory.add_reflection(
             agent_id=self.id,
             task_context=f"auditoria super-rigor: {text[:60]}",
             reflection=(
                 f"Auditoria concluída com EXS {rigor['excellence_score']:.1f} e "
-                f"Certificado {cert['certificate_id']}. Merkle Root: {merkle['merkle_root'][:12]}..."
+                f"Certificado {cert['certificate_id']}. Merkle Root: {merkle['merkle_root'][:12]}... "
+                f"Autonomia Standalone: {standalone_status['standalone_score']:.0f}%."
             ),
             score=rigor["excellence_score"] / 100.0,
         )
@@ -1921,5 +1926,7 @@ class MarceloClaroOrchestrator:
             "rigor_audit": rigor,
             "certificate": cert,
             "merkle_root": merkle["merkle_root"],
+            "cli_ecosystem_bridge": cli_status,
+            "standalone_readiness": standalone_status,
             "status": "certified_by_marceloclaro" if rigor["passed"] else "refinement_requested",
         }
