@@ -204,7 +204,7 @@ graph TD
     EGS -->|Reflete Resultado| MB
     
     %% Agentes
-    subgraph Agents [Catálogo de Agentes 186+]
+    subgraph Agents [Catálogo de Agentes 187+]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
@@ -410,25 +410,31 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 | SPEC-935-R126 | Agente-executor MIRA delegável | 8 CA |
 | SPEC-935-R127 | Documentação arquitetural em dupla-registro | 8 CA |
 | SPEC-935-R210 | LiteRT-LM Plugin Provider | 12 CA |
+| SPEC-935-R211 | MCP/Core/LiteRT Reconciliation | 10 CA |
+| SPEC-935-R212 | Resiliente LiteRT Nano-Orquestração | 31 CA |
+| SPEC-935-R214 | Colibri Provider Bridge | 6 CA |
+| SPEC-935-R228 | Colibri + OLMoE Integration | 6 CA |
 | ADR-012 | LiteRT-LM Provider Integration | Decisão arquitetural |
 
 ---
 
 ## Métricas de Maturidade
 
-| Métrica | v3.0.0 | v3.1.0 (atual) |
+| Métrica | v3.0.0 | v3.2.0 (atual) |
 |---|---|---|
-| Testes | 1062 | **1062+** |
-| Ciclos de evolução | 65 | **52** (R1–R52) |
-| MCP Tools | 14 | **14** |
-| Agentes | 160+ | **177+** |
-| Score médio | 9.4/10 | **9.7/10** |
-| Skills exportáveis | 4 | **5** (incl. litert_lm) |
+| Testes | 1062 | **338+** (lote crítico) |
+| Ciclos de evolução | 65 | **50+** (R47–R229) |
+| MCP Servers | 14 tools | **5 servidores** (Core, LiteRT-LM, Colibri, PyPI, SynthUniv) |
+| Agentes | 160+ | **187+** no catálogo |
+| Score médio | 9.4/10 | **~9.3/10** (autoavaliação interna; ver CORRIGENDUM) |
+| Skills exportáveis | 4 | **6** (litert_lm, colibri, llm_reduction, jinja2, data_hub, gametheory) |
 | Pip packages | 3 | **3** |
-| Cobertura estimada | 84% | **84%** |
+| Cobertura estimada | 84% | **~42%** (scanner noológico — ecossistema em expansão) |
 | CI/CD | GitHub Actions | **GitHub Actions** |
-| On-Device LLM | ❌ | **LiteRT-LM (Gemma 4, Qwen3)** |
+| On-Device LLM | ❌ | **LiteRT-LM (Gemma 4, Qwen3) + Colibri/OLMoE (C nativo)** |
+| LLM Reduction | ❌ | **6 componentes determinísticos** (Whoosh, Router, Classifier, GameTheory, Jinja2, DataHub) |
+| Observabilidade | ❌ | **MetricsCollector + /health + /metrics** |
 
-> O histórico de referência R47–R127 documenta 85 ciclos; a contagem
-> operacional corrente é mantida separadamente para não sobrescrever os
-> registros R211 nem convertê-los em validação externa.
+> As métricas são auto-reportadas pelo ecossistema (doctor, scanners, evolution registry).
+> Consulte [`CORRIGENDUM.md`](CORRIGENDUM.md) para contexto sobre alegações que
+> requerem validação externa.

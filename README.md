@@ -7,17 +7,17 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.5.0_Colibri_MoE-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-31_passed-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-45_evolutivos-blueviolet.svg)](evolution/cycles.json)
-[![MCP](https://img.shields.io/badge/MCP-4_servidores-8A2BE2.svg)](integrations/)
+[![Testes](https://img.shields.io/badge/Testes-338%2B_passed-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-50%2B_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![MCP](https://img.shields.io/badge/MCP-5_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-187+-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-18-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-30%2B-dodgerblue.svg)](specs/)
 [![LLM Reduction](https://img.shields.io/badge/LLM_Reduction-6_componentes-green.svg)](skills/tooling/llm_reduction.py)
-[![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_C_Engine-success.svg)](colibri/)
+[![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 187+ agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Lazy Agent Catalog**, **Vectorized Goal Drift Detector**, **Agent Evaluation & Trajectory Harness**, inferência on-device via LiteRT-LM (Gemma 4, Qwen3) e 45 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 187+ agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Lazy Agent Catalog**, **Vectorized Goal Drift Detector**, **Agent Evaluation & Trajectory Harness**, inferência on-device via LiteRT-LM (Gemma 4, Qwen3), runtime MoE em C (Colibri/OLMoE) e 50+ ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
@@ -129,7 +129,7 @@ Roteador de atenção (Multi-Head Attention com 4 cabeças: semântica, capacida
 - **CI/CD (R106):** GitHub Actions, quality report, coverage gate
 
 ### 6. Catálogo de Agentes
-186+ agentes especializados: Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, e especialistas jurídicos, de design e quânticos.
+187+ agentes especializados: Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, LLM Reduction, Colibri/OLMoE, GameTheory, Jinja2, DataKnowledgeHub, e especialistas jurídicos, de design e quânticos.
 
 ### 7. Camada de Redução de Dependência LLM (NOVO R220–R222)
 Seis componentes determinísticos que substituem chamadas de LLM para tarefas rotineiras,
@@ -425,9 +425,9 @@ validação externa do conteúdo científico.
 | **Pipeline Academico v3.0** | O coração do sistema. 5 estágios sequenciais que transformam um problema em artigo completo revisado e formatado. |
 | **Core Subsystems** | Subsistemas auxiliares: trust engine, economia de tokens, motores de raciocínio, RAG científico, Universidade Sintética, memória evolutiva. |
 | **Segurança & Qualidade** | Proteção MCP (guard/audit/vetter/limiter), CI/CD (GitHub Actions + quality gates), skills exportáveis e pacotes pip. |
-| **Protocolos de Integração** | Interfaces de comunicação: MCP Server (stdio JSON-RPC) e API Gateway (FastAPI REST). 4 servidores MCP ativos. |
+| **Protocolos de Integração** | Interfaces de comunicação: MCP Server (stdio JSON-RPC) e API Gateway (FastAPI REST). 5 servidores MCP ativos (Core, LiteRT-LM, Colibri/OLMoE, PyPI, Synthetic University). |
 | **Metacognitive Interconnect** | Barramento neural central. MetaBus (pub/sub global), Blackboard (protocolo A2A), memória metacognitiva e middleware de reflexão. |
-| **Catálogo de Agentes** | 186+ agentes especializados que se registram no Blackboard e competem por tarefas via Call for Proposals. |
+| **Catálogo de Agentes** | 187+ agentes especializados que se registram no Blackboard e competem por tarefas via Call for Proposals. |
 | **LLM Reduction Layer** | 6 componentes determinísticos (Whoosh3Engine, RuleBasedRouter, LocalClassifier, GameTheoryLocal, Jinja2Engine, DataKnowledgeHub) que substituem LLM em tarefas com confiança ≥ 0.85. |
 | **Observabilidade** | MetricsCollector com servidor HTTP (/health, /metrics), integrado ao Doctor como check llm_reduction_metrics. |
 
@@ -1109,10 +1109,49 @@ print(result["novelty_scores"])        # Scores de novidade
 
 ---
 
-##  LiteRT-LM — Inferência On-Device (R48–R52)
+##  Colibri + OLMoE — Runtime MoE On-Device em C Nativo (R228)
 
-O ecossistema agora suporta **inferência local completa** via LiteRT-LM (Google AI Edge),
+Motor de inferência **C puro** (OpenMP, zero deps) para modelos MoE, executando
+o **OLMoE-1B-7B** (Allen AI, 64 experts, 8 ativos/token) em CPU:
+
+| Métrica | Valor |
+|---|---|
+| **Engine** | `colibri/c/olmoe` — C nativo, sem Python, CPU-only |
+| **Modelo** | OLMoE-1B-7B-0125-Instruct (6.5 GB int8) |
+| **Correspondência de tokens** | 12/12 (100% validado) |
+| **Cache hit rate (LRU)** | 62.4% |
+| **Pico RSS** | 4.79 GB |
+| **Decode (CPU cold)** | 0.11 tok/s (bottleneck: I/O de disco) |
+| **Bridge** | `integrations/colibri/bridge.py` — `olmoe_complete()`, `olmoe_validate()` |
+| **MCP** | `colibri_mcp_server.py` — tools `colibri:olmoe:complete`, `colibri:olmoe:validate` |
+| **Provider** | `integrations/colibri_provider.py` — fallback on-device na LLM Reduction |
+
+```bash
+# Baixar e compilar
+python3 scripts/download_colibri_model.py
+make -C colibri/c olmoe
+
+# Validar
+python3 -c "from integrations.colibri import ColibriBridge; b=ColibriBridge(); print(b.olmoe_validate())"
+```
+
+> ⚠️ 0.11 tok/s em CPU cold. GPU e cache quente melhoram drasticamente.
+
+##  LiteRT-LM — Inferência On-Device (R48–R52 + R210–R214)
+
+O ecossistema suporta **inferência local completa** via LiteRT-LM (Google AI Edge),
 rodando modelos Gemma 4 e Qwen3 diretamente na máquina, sem necessidade de API externa.
+
+### Supervisor Resiliente (R212)
+O LiteRT-LM agora conta com um **supervisor de processos** que gerencia o ciclo
+de vida do daemon on-device:
+
+- **Lock interprocesso (flock):** impede execuções concorrentes
+- **Circuit breaker:** após 3 falhas consecutivas, suprime tentativas por 60s
+- **CLI canônico:** `litert-lm-supervisor start|stop|status|restart`
+- **Plugin TypeScript:** bootstrap non-blocking do supervisor via `.opencode/plugins/`
+- **Runtime nanogranular:** DAG de tarefas com leases e idempotência
+- **ModelManager:** validação anti-travessia de diretório
 
 ### Modelos disponíveis
 
@@ -1154,7 +1193,7 @@ permitindo que o OpenCode o use como **provider nativo**:
 
 Uso: `./scripts/litert-lm-serve.sh` ou `LITERT_LM_MAX_TOKENS=16384 litert-lm serve`
 
-**4 ciclos de evolução** (R48–R52) | **43+ testes de validação** | Score: 9.8/10
+**10+ ciclos de evolução** (R48–R52 + R210–R214) | **150+ testes de validação**
 
 ---
 

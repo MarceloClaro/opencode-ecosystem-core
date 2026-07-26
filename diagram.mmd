@@ -24,6 +24,44 @@ graph TD
         HTM -.->|Usa| Emb
     end
     
+    %% LLM Reduction Layer (R220-R222)
+    subgraph RED [LLM Reduction Layer]
+        RouterRR[RuleBasedRouter<br>25 regras + DecisionTree]
+        Class[LocalClassifier<br>TF-IDF + LogReg]
+        Whoosh[Whoosh3Engine<br>BM25F local &lt; 30ms]
+        Game[GameTheoryLocal<br>Nash/Shapley/Pareto]
+        Jinja[Jinja2Engine<br>9 templates .j2]
+        DataHub[DataKnowledgeHub<br>16 fontes · 5 domínios]
+        Valid[CrossValidator<br>Calibration + Audit]
+        AuditTrail[AuditTrail<br>hash SHA-256]
+        
+        RouterRR --> Class
+        DataHub --> Valid
+        Valid --> AuditTrail
+    end
+    
+    %% Observabilidade (R222)
+    subgraph OBS [Observabilidade]
+        Metrics[MetricsCollector<br>LLM calls saved]
+        HTTPMetrics[MetricsHTTPServer<br>/health · /metrics]
+        DocCheck[Doctor Check<br>llm_reduction_metrics]
+        
+        Metrics --> HTTPMetrics
+        DocCheck -.->|consulta| Metrics
+    end
+    
+    %% Colibri MoE Engine (R228)
+    subgraph COLIBRI [Colibri OLMoE Engine]
+        Olmoe[OLMoE 1B-7B<br>64 experts · C nativo]
+        ColibriBridge[ColibriBridge<br>olmoe_complete]
+        ColibriMCP[Colibri MCP Server<br>colibri:olmoe]
+        ColibriProv[ColibriProvider<br>LLM Reduction fallback]
+        
+        ColibriBridge --> Olmoe
+        ColibriMCP --> ColibriBridge
+        ColibriProv --> ColibriBridge
+    end
+    
     %% Pipeline Academico Agentivo
     subgraph Acad [Pipeline Academico Agentivo v3.0]
         EvoSci["R101: EvoSci<br>MentorAgent+ResearcherAgent<br>ReviewerAgent+EvoEngine"]
@@ -96,11 +134,18 @@ graph TD
     Orchestrator -->|2. Recuperação em 2 níveis| HTM
     HTM -->|Lê Episódica| Mem
     Orchestrator -->|3. Gate & Roteia| Trust
-    Trust -->|Libera| Attn
+    Trust -->|Libera| RED
+    RED -->|conf &gt;= 0.85| RouterRR
+    RouterRR -->|skip Attn| BB
+    RED -->|conf &lt; 0.85| Attn
     Attn -->|Publica Volunteer| BB
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
+    
+    %% Conexões de observabilidade
+    Orchestrator -->|get_reduction_stats| Metrics
+    RED -.->|alimenta| Metrics
     
     %% Pipeline academico
     Orchestrator -->|5. Pipeline Academico| EvoSci
@@ -153,7 +198,7 @@ graph TD
     APIGateway -->|HTTP REST| External
     
     %% Agentes
-    subgraph Agents [Catálogo de Agentes 160+]
+    subgraph Agents [Catálogo de Agentes 187+]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
