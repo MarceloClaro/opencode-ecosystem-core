@@ -33,6 +33,9 @@ logger.setLevel(logging.WARNING)
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+MCP_PROTOCOL_VERSION = "2024-11-05"
+MCP_SERVER_VERSION = "1.0.0"
+
 
 class SimpleMCPServer:
     """Servidor MCP leve via stdio — mesmo padrao do mci/mcp_server.py.
@@ -43,8 +46,14 @@ class SimpleMCPServer:
         security: Dict opcional com componentes de seguranca (R100).
     """
 
-    def __init__(self, name: str, security: Optional[Dict[str, Any]] = None):
+    def __init__(
+        self,
+        name: str,
+        security: Optional[Dict[str, Any]] = None,
+        version: str = MCP_SERVER_VERSION,
+    ):
         self.name = name
+        self.version = version
         self.tools = {}
         self.security = security or {}
 
@@ -60,10 +69,49 @@ class SimpleMCPServer:
             "handler": handler,
         }
 
+    @staticmethod
+    def _error(message: str, code: int, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Cria um resultado de erro estruturado para o contrato MCP."""
+        error: Dict[str, Any] = {"code": code, "message": message}
+        if data is not None:
+            error["data"] = data
+        return {
+            "isError": True,
+            "error": error,
+            "content": [{"type": "text", "text": message}],
+        }
+
+    def _initialize(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Retorna o handshake MCP mínimo, preservando a versão solicitada."""
+        return {
+            "protocolVersion": params.get("protocolVersion", MCP_PROTOCOL_VERSION),
+            "capabilities": {"tools": {}},
+            "serverInfo": {"name": self.name, "version": self.version},
+        }
+
     def handle_sync(self, req: Dict) -> Dict:
         """Processa uma requisicao JSON-RPC síncrona."""
+        if not isinstance(req, dict):
+            return self._error(
+                "A requisição MCP deve ser um objeto JSON.",
+                -32600,
+            )
+
         method = req.get("method")
         params = req.get("params", {})
+        if params is None:
+            params = {}
+        if not isinstance(params, dict):
+            return self._error(
+                "Os parâmetros da requisição MCP devem ser um objeto JSON.",
+                -32602,
+            )
+
+        if method == "initialize":
+            return self._initialize(params)
+
+        if method == "ping":
+            return {}
 
         if method == "tools/list":
             return {
@@ -77,10 +125,25 @@ class SimpleMCPServer:
                 ]
             }
 
-        elif method == "tools/call":
+        if method == "tools/call":
             tool_name = params.get("name")
             tool_args = params.get("arguments", {})
             caller = params.get("caller", "unknown")
+
+            if not isinstance(tool_name, str) or not tool_name:
+                return self._error(
+                    "O nome da ferramenta deve ser uma string não vazia.",
+                    -32602,
+                )
+            if not isinstance(tool_args, dict):
+                return self._error(
+                    "Os argumentos da ferramenta devem ser um objeto JSON.",
+                    -32602,
+                )
+            try:
+                hash(caller)
+            except TypeError:
+                caller = str(caller)
             start = time.time()
 
             # Security checks (R100)
@@ -102,65 +165,97 @@ class SimpleMCPServer:
             if vetter:
                 vetter_result = vetter.scan_args(tool_args)
                 if vetter_result["suspicious"]:
+                    flags = vetter_result.get("flags", [])
                     audit and audit.log(tool_name, tool_args,
                                         {"error": "suspicious_input",
-                                         "flags": vetter_result["flags"]},
+                                         "flags": flags},
                                         time.time() - start, caller)
-                    return {
-                        "isError": True,
-                        "content": [{"type": "text",
-                                    "text": f"Input rejected: suspicious patterns detected "
-                                            f"({', '.join(vetter_result['flags'])})"}],
-                    }
+                    return self._error(
+                        "Input rejected: suspicious patterns detected "
+                        f"({', '.join(str(flag) for flag in flags)})",
+                        -32602,
+                        data=vetter_result,
+                    )
 
-            if tool_name in self.tools:
-                try:
-                    result = self.tools[tool_name]["handler"](tool_args)
+            info = self.tools.get(tool_name)
+            if info is None:
+                return self._error(
+                    f"Tool '{tool_name}' nao encontrada",
+                    -32602,
+                )
+
+            try:
+                result = info["handler"](tool_args)
+                if isinstance(result, dict) and result.get(MCP_ERROR_MARKER) is True:
+                    message = str(result.get("message", "Erro de validação da ferramenta"))
                     audit and audit.log(tool_name, tool_args, result,
                                         time.time() - start, caller)
-                    return {
-                        "content": [
-                            {"type": "text", "text": json.dumps(result, indent=2)}
-                        ]
-                    }
-                except Exception as e:
-                    audit and audit.log(tool_name, tool_args,
-                                        {"error": str(e)}, time.time() - start, caller)
-                    return {
-                        "isError": True,
-                        "content": [{"type": "text", "text": f"Erro: {str(e)}"}],
-                    }
-            return {"isError": True, "content": [{"type": "text", "text": f"Tool '{tool_name}' nao encontrada"}]}
+                    return self._error(message, -32602, data=result)
 
-        return {"isError": True, "content": [{"type": "text", "text": f"Metodo '{method}' nao suportado"}]}
+                audit and audit.log(tool_name, tool_args, result,
+                                    time.time() - start, caller)
+                return {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": json.dumps(result, indent=2, ensure_ascii=False),
+                        }
+                    ]
+                }
+            except Exception as e:
+                error_result = {"error": str(e)}
+                audit and audit.log(tool_name, tool_args,
+                                    error_result, time.time() - start, caller)
+                return self._error(f"Erro: {str(e)}", -32000)
+
+        return self._error(f"Metodo '{method}' nao suportado", -32601)
 
     def run_stdio(self):
-        """Loop principal de leitura/escrita via stdio (JSON-RPC)."""
+        """Loop principal de leitura/escrita via stdio (JSON-RPC).
+
+        Notificações e entradas sem um ``id`` não recebem resposta. JSON
+        inválido e valores que não sejam objetos são ignorados com aviso no
+        stderr, mantendo o processo saudável até o EOF.
+        """
         for line in sys.stdin:
             line = line.strip()
             if not line:
                 continue
             try:
                 req = json.loads(line)
+            except json.JSONDecodeError as exc:
+                logger.warning("JSON inválido recebido no MCP: %s", exc)
+                continue
+
+            if not isinstance(req, dict):
+                logger.warning("Entrada MCP ignorada: esperava-se um objeto JSON")
+                continue
+
+            # Uma notificação não tem resposta. Preserve ids válidos como 0 ou
+            # string vazia; somente ausência e null são tratados como sem id.
+            if "id" not in req or req.get("id") is None:
+                continue
+
+            request_id = req["id"]
+            try:
                 resp = self.handle_sync(req)
                 response_obj = {
                     "jsonrpc": "2.0",
-                    "id": req.get("id"),
+                    "id": request_id,
                     "result": resp,
                 }
-                print(json.dumps(response_obj), flush=True)
-            except json.JSONDecodeError:
-                print(json.dumps({
-                    "jsonrpc": "2.0",
-                    "id": None,
-                    "error": {"code": -32700, "message": "Parse error"},
-                }), flush=True)
             except Exception as e:
-                print(json.dumps({
+                logger.warning("Erro ao processar request MCP: %s", e)
+                response_obj = {
                     "jsonrpc": "2.0",
-                    "id": req.get("id") if 'req' in dir() else None,
+                    "id": request_id,
                     "error": {"code": -32603, "message": str(e)},
-                }), flush=True)
+                }
+
+            try:
+                print(json.dumps(response_obj, ensure_ascii=False), flush=True)
+            except BrokenPipeError:
+                return
 
 
 # ============================================================
@@ -418,7 +513,13 @@ def handle_dashboard(args: Dict[str, Any]) -> Dict[str, Any]:
 # ============================================================
 
 # Security components (R100)
-from synthetic_university.mcp_security import MCPGuard, AuditLogger, ToolVetter, RateLimiter
+from synthetic_university.mcp_security import (
+    MCPGuard,
+    AuditLogger,
+    ToolVetter,
+    RateLimiter,
+    MCP_ERROR_MARKER,
+)
 
 _security = {
     "guard": MCPGuard(),

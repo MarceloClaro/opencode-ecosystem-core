@@ -71,6 +71,16 @@ class GateDecision:
     risk_level: str               # "safe" | "moderate" | "risky" | "blocked"
 
 
+@dataclass
+class DriftCheck:
+    """Resultado de uma verificação de desvio de objetivo."""
+    session_id: str
+    similarity: float
+    drifted: bool
+    window: list[float] = field(default_factory=list)
+    reason: str = ""
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # 1. TRUST SCORER (Adaptive Learned Weights)
 # ═══════════════════════════════════════════════════════════════════════════
@@ -454,6 +464,76 @@ class OutcomeTracker:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+# 5. GOAL DRIFT DETECTOR (R112)
+# ═══════════════════════════════════════════════════════════════════════════
+
+class GoalDriftDetector:
+    """Detecta deriva textual do objetivo em uma janela de ações recentes.
+
+    A heurística é deliberadamente determinística: compara a sobreposição
+    lexical de Jaccard e só acusa deriva quando a janela inteira permanece
+    abaixo do limiar. Isso evita transformar uma ação isolada fora do tema
+    em um bloqueio indevido.
+    """
+
+    def __init__(self, window: int = 5, drift_threshold: float = 0.15):
+        self.window = window
+        self.drift_threshold = drift_threshold
+        self._goals: dict[str, str] = {}
+        self._history: dict[str, list[float]] = defaultdict(list)
+
+    def set_goal(self, session_id: str, goal_text: str) -> None:
+        self._goals[session_id] = goal_text
+        self._history[session_id] = []
+
+    @staticmethod
+    def _similarity(a: str, b: str) -> float:
+        words_a = set(a.lower().split())
+        words_b = set(b.lower().split())
+        if not words_a or not words_b:
+            return 0.0
+        return len(words_a & words_b) / len(words_a | words_b)
+
+    def check(self, session_id: str, action_context: str) -> DriftCheck:
+        goal = self._goals.get(session_id, "")
+        similarity = self._similarity(goal, action_context) if goal else 1.0
+        history = self._history[session_id]
+        history.append(similarity)
+        if len(history) > self.window:
+            history.pop(0)
+
+        drifted = False
+        if not goal:
+            reason = "sem objetivo declarado para esta sessão — nada a comparar"
+        elif len(history) < self.window:
+            reason = f"janela incompleta ({len(history)}/{self.window}) — aguardando mais ações"
+        else:
+            average = sum(history) / len(history)
+            if average < self.drift_threshold:
+                drifted = True
+                reason = (
+                    f"similaridade média com o objetivo caiu para {average:.2f} "
+                    f"(< limiar {self.drift_threshold}) nas últimas {self.window} ações"
+                )
+            else:
+                reason = f"similaridade média {average:.2f} dentro do limiar ({self.drift_threshold})"
+
+        return DriftCheck(
+            session_id=session_id,
+            similarity=round(similarity, 4),
+            drifted=drifted,
+            window=list(history),
+            reason=reason,
+        )
+
+    def status(self, session_id: str) -> dict[str, Any]:
+        return {
+            "goal": self._goals.get(session_id, ""),
+            "history": list(self._history.get(session_id, [])),
+        }
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 # TRUST ENGINE (Orquestrador)
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -474,6 +554,7 @@ class TrustEngine:
         self.gate = BehavioralGate(self.scorer)
         self.memory = NaturalForgetting()
         self.tracker = OutcomeTracker(self.scorer)
+        self.goal_drift = GoalDriftDetector()
 
     def execute(self, action_id: str, required_trust: float | None = None) -> GateDecision:
         """Verifica se uma acao pode ser executada (behavioral gate).
@@ -505,6 +586,17 @@ class TrustEngine:
         """Recupera memorias relevantes."""
         result = self.memory.recall(query)
         return [result.content] if result else []
+
+    def set_goal(self, session_id: str, goal_text: str) -> None:
+        """Declara o objetivo de uma sessão para detecção de deriva."""
+        self.goal_drift.set_goal(session_id, goal_text)
+
+    def check_drift(self, session_id: str, action_context: str) -> DriftCheck:
+        """Verifica deriva e registra uma falha de confiança quando confirmada."""
+        result = self.goal_drift.check(session_id, action_context)
+        if result.drifted:
+            self.tracker.record(f"goal_drift:{session_id}", success=False, delta=0.0)
+        return result
 
     @property
     def status(self) -> dict[str, Any]:

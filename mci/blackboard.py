@@ -16,6 +16,7 @@ import os
 import json
 import uuid
 import logging
+import math
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timezone
 
@@ -23,6 +24,22 @@ from .metabus import metabus
 
 logger = logging.getLogger("mci-blackboard")
 logger.setLevel(logging.INFO)
+
+
+def _live_confidence(agent_id: str) -> float:
+    """Lê e normaliza a confiança atual, sem reutilizar snapshot do cartão."""
+
+    value = metabus.memory.confidence_ledger.get(agent_id, 0.5)
+    if isinstance(value, bool):
+        return 0.5
+    try:
+        score = float(value)
+    except (TypeError, ValueError):
+        return 0.5
+    if not math.isfinite(score):
+        return 0.5
+    return max(0.0, min(1.0, score))
+
 
 class AgentCard:
     """Representa as capacidades de um agente (Padrão A2A Protocol)."""
@@ -36,6 +53,9 @@ class AgentCard:
         self.confidence_score = metabus.memory.confidence_ledger.get(agent_id, 0.5)
 
     def to_dict(self):
+        # O ledger é a fonte viva; ``confidence_score`` permanece apenas como
+        # atributo compatível com consumidores legados do AgentCard.
+        self.confidence_score = _live_confidence(self.agent_id)
         return {
             "agent_id": self.agent_id,
             "name": self.name,
@@ -45,6 +65,7 @@ class AgentCard:
             "confidence_score": self.confidence_score
         }
 
+
 class BlackboardTask:
     """Uma tarefa postada no Blackboard."""
     def __init__(self, task_id: str, description: str, required_capabilities: List[str], context: Dict[str, Any]):
@@ -52,11 +73,12 @@ class BlackboardTask:
         self.description = description
         self.required_capabilities = required_capabilities
         self.context = context
-        self.status = "open" # open, assigned, completed, failed
+        self.status = "open" # open, assigned, completed, failed, blocked
         self.assigned_to: Optional[str] = None
         self.result: Optional[Any] = None
         self.created_at = datetime.now(timezone.utc).isoformat()
-        
+
+
 class Blackboard:
     """O quadro negro central para coordenação multi-agente."""
     
@@ -110,16 +132,19 @@ class Blackboard:
     def _match_task(self, task: BlackboardTask):
         """Busca agentes elegíveis e emite Call for Proposals (CFP)."""
         eligible = []
+        required = set(task.required_capabilities)
         for agent_id, card in self.registry.items():
             if card.status != "available":
                 continue
-            # Verifica se o agente tem alguma das capacidades requeridas
-            if any(cap in card.capabilities for cap in task.required_capabilities) or not task.required_capabilities:
+            # Capacidades obrigatórias têm semântica all_of, nunca any_of.
+            if required.issubset(set(card.capabilities)):
                 eligible.append(card)
                 
         if eligible:
-            # Ordena por score de confiança metacognitiva
-            eligible.sort(key=lambda x: x.confidence_score, reverse=True)
+            # Consulta o ledger no instante da decisão e desempata por ID.
+            for card in eligible:
+                card.confidence_score = _live_confidence(card.agent_id)
+            eligible.sort(key=lambda card: (-card.confidence_score, card.agent_id))
             metabus.publish("task.cfp", {
                 "task_id": task.task_id,
                 "description": task.description,

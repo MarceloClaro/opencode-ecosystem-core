@@ -315,8 +315,33 @@ class PotentialityScanner:
         }
 
     def scan(self) -> Dict[str, Any]:
-        """Executa a varredura completa de potenciais latentes (DNA Extractor)."""
-        return self.extract_dna()
+        """Executa a varredura completa de potenciais latentes (DNA Extractor).
+
+        Retorno inclui:
+            - capability_map: dict de skills → capacidades
+            - core_capabilities: lista de capacidades centrais
+            - redundant_capabilities: lista de capacidades redundantes
+            - missing_capabilities: lista de lacunas (roadmap futuro)
+            - potentials / latent_potentials: capacidades ausentes como
+              oportunidades latentes (compatibilidade com pipeline)
+            - total_components: número de componentes mapeados
+            - total_capabilities: capacidades distintas identificadas
+            - core_count: quantas capacidades centrais
+            - missing_count: quantas lacunas
+        """
+        dna = self.extract_dna()
+        missing = dna.get("missing_capabilities", [])
+        # potentials = capacidades ausentes = oportunidades latentes
+        dna["potentials"] = missing
+        dna["latent_potentials"] = [
+            {"capability": cap, "status": "ausente", "priority": "alta" if i < 3 else "media"}
+            for i, cap in enumerate(missing)
+        ]
+        dna["total_components"] = len(dna.get("capability_map", {}))
+        dna["total_capabilities"] = len(dna.get("frequencies", {}))
+        dna["core_count"] = len(dna.get("core_capabilities", []))
+        dna["missing_count"] = len(missing)
+        return dna
 
     def save_report(self, report_data: Dict[str, Any], output_path: str | Path) -> None:
         """Gera e salva um relatório formatado em markdown."""

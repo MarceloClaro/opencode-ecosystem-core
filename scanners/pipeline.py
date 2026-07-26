@@ -22,7 +22,12 @@ ecossistema e metas-padrão do OpenCode Core.
 
 from __future__ import annotations
 
+import hashlib
+import json
+import os
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import lru_cache
 from typing import Any, Dict, List, Optional
 
 from mci.metabus import metabus
@@ -80,33 +85,147 @@ class DiagnosticPipeline:
     Args:
         domain: domínio padrão para escaneamento (ex.: "ecosystem" carrega
                 ECOSYSTEM_DIMENSIONS na NoologicalScanner)
+
+    Melhorias v4.0 (R223):
+        - Lazy initialization: scanners só são instanciados quando usados
+        - Corpus caching: SHA-256 dos arquivos rastreados invalida cache
+        - Leitura paralela de arquivos via ThreadPoolExecutor
+        - Extração robusta de potentials no PotentialityScanner
     """
 
     def __init__(self, domain: str = ""):
         self._domain = domain
-        self.noological = NoologicalScanner(domain=domain)
-        self.teleological = TeleologicalReverseScanner()
-        self.potentiality = PotentialityScanner()
-        self.social = SocialImpactScanner()
-        self.legal_impact = LegalImpactScanner()
-        self.reversa = ReversaScanner()
-        self.prioritizer = EpistemicPrioritizer()
-        self.successor_gen = SuccessorGenerator()
+        # Lazy: scanners são None até serem acessados
+        self._noological: Optional[NoologicalScanner] = None
+        self._teleological: Optional[TeleologicalReverseScanner] = None
+        self._potentiality: Optional[PotentialityScanner] = None
+        self._social: Optional[SocialImpactScanner] = None
+        self._legal_impact: Optional[LegalImpactScanner] = None
+        self._reversa: Optional[ReversaScanner] = None
+        self._prioritizer: Optional[EpistemicPrioritizer] = None
+        self._successor_gen: Optional[SuccessorGenerator] = None
+        # Cache do corpus (válido enquanto os hashes dos arquivos baterem)
+        self._cached_corpus: Optional[str] = None
+        self._cached_hash: Optional[str] = None
 
-    @staticmethod
-    def _build_ecosystem_corpus(base_corpus: str) -> str:
+    # ── Propriedades lazy ─────────────────────────────────────────────
+
+    @property
+    def noological(self) -> NoologicalScanner:
+        if self._noological is None:
+            self._noological = NoologicalScanner(domain=self._domain)
+        return self._noological
+
+    @property
+    def teleological(self) -> TeleologicalReverseScanner:
+        if self._teleological is None:
+            self._teleological = TeleologicalReverseScanner()
+        return self._teleological
+
+    @property
+    def potentiality(self) -> PotentialityScanner:
+        if self._potentiality is None:
+            self._potentiality = PotentialityScanner()
+        return self._potentiality
+
+    @property
+    def social(self) -> SocialImpactScanner:
+        if self._social is None:
+            self._social = SocialImpactScanner()
+        return self._social
+
+    @property
+    def legal_impact(self) -> LegalImpactScanner:
+        if self._legal_impact is None:
+            self._legal_impact = LegalImpactScanner()
+        return self._legal_impact
+
+    @property
+    def reversa(self) -> ReversaScanner:
+        if self._reversa is None:
+            self._reversa = ReversaScanner()
+        return self._reversa
+
+    @property
+    def prioritizer(self) -> EpistemicPrioritizer:
+        if self._prioritizer is None:
+            self._prioritizer = EpistemicPrioritizer()
+        return self._prioritizer
+
+    @property
+    def successor_gen(self) -> SuccessorGenerator:
+        if self._successor_gen is None:
+            self._successor_gen = SuccessorGenerator()
+        return self._successor_gen
+
+    # ── Cache do corpus ────────────────────────────────────────────────
+
+    def _compute_corpus_hash(self, root: str, tracked_files: List[str]) -> str:
+        """Calcula SHA-256 dos arquivos rastreados para invalidar cache."""
+        hasher = hashlib.sha256()
+        for rel_path in sorted(tracked_files):
+            fpath = os.path.join(root, rel_path)
+            if os.path.isfile(fpath):
+                try:
+                    with open(fpath, 'rb') as f:
+                        hasher.update(f.read(8192))  # primeiros 8KB
+                    hasher.update(str(os.path.getsize(fpath)).encode())
+                    hasher.update(str(os.path.getmtime(fpath)).encode())
+                except Exception:
+                    pass
+        return hasher.hexdigest()
+
+    @lru_cache(maxsize=4)
+    def _read_file_content(self, path: str) -> str:
+        """Lê conteúdo de arquivo com cache LRU (reduz I/O repetido)."""
+        try:
+            with open(path, 'r', encoding='utf-8', errors='replace') as f:
+                return f.read()
+        except Exception:
+            return ""
+
+    # Lista de arquivos rastreados para hash de cache
+    TRACKED_FILES: List[str] = [
+        "scanners/pipeline.py",
+        "scanners/noological_scanner.py",
+        "scanners/teleological_scanner.py",
+        "scanners/potentiality_scanner.py",
+        "scanners/evolutionary_pipeline.py",
+        "scanners/epistemic_prioritizer.py",
+        "scanners/successor_generator.py",
+        "scanners/cross_validation_engine.py",
+        "scanners/capability_composer.py",
+        "mci/metabus.py", "mci/blackboard.py", "mci/reflexion.py",
+        "marceloclaro/orchestrator.py", "marceloclaro/agent_loader.py",
+        "trust/trust_engine.py", "economy/token_economy.py",
+        "reasoning/engines.py",
+        "evolution/cycles.py",
+        "opencode.json", "ARCHITECTURE.md", "README.md",
+    ]
+
+    def _build_ecosystem_corpus(self, base_corpus: str) -> str:
         """Auto-descobre componentes do ecossistema e enriquece o corpus.
 
         Escaneia diretórios, NOMES DE CLASSES e CONTEÚDO de arquivos
         reais do OpenCode Core para construir um corpus rico que permite
         ao NoologicalScanner detectar 100% das categorias (SPEC-022).
+
+        Performance v4.0:
+            - Cache SHA-256 invalidado por mudança nos arquivos rastreados
+            - Leitura paralela de arquivos via ThreadPoolExecutor (4 workers)
+            - LRU cache para leituras repetidas de arquivo
         """
-        import os
         import ast
         import re
         import warnings
 
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        # ── Verificação de cache ─────────────────────────────────────
+        current_hash = self._compute_corpus_hash(root, self.TRACKED_FILES)
+        if self._cached_corpus is not None and self._cached_hash == current_hash:
+            return self._cached_corpus
+
         parts = [base_corpus]
 
         # ─── 1. Diretórios core com nomes de arquivo ─────────────────────
@@ -132,7 +251,7 @@ class DiagnosticPipeline:
                 except PermissionError:
                     pass
 
-        # ─── 2. Leitura de CONTEÚDO de arquivos Python (classes, funções) ─
+        # ─── 2. Leitura de CONTEÚDO de arquivos Python — PARALELA ─────
         py_content_files = [
             "scanners/pipeline.py", "scanners/noological_scanner.py",
             "scanners/teleological_scanner.py", "scanners/potentiality_scanner.py",
@@ -141,13 +260,13 @@ class DiagnosticPipeline:
             "scanners/cross_validation_engine.py", "scanners/capability_composer.py",
             "scanners/social_impact_scanner.py", "scanners/legal_impact_scanner.py",
             "mci/metabus.py", "mci/blackboard.py", "mci/reflexion.py",
-             "mci/orchestration.py", "mci/mcp_server.py",
-             "mci/confidence_calibrator.py", "mci/evidence_graph.py",
-             "mci/hypothesis_engine.py", "mci/scientific_reporter.py",
-             "legal/agents.py", "legal/knowledge_base.py",
-             "legal/summarizer.py", "legal/datajud_client.py",
-             "legal/integration.py",
-             "trust/trust_engine.py", "economy/token_economy.py",
+            "mci/orchestration.py", "mci/mcp_server.py",
+            "mci/confidence_calibrator.py", "mci/evidence_graph.py",
+            "mci/hypothesis_engine.py", "mci/scientific_reporter.py",
+            "legal/agents.py", "legal/knowledge_base.py",
+            "legal/summarizer.py", "legal/datajud_client.py",
+            "legal/integration.py",
+            "trust/trust_engine.py", "economy/token_economy.py",
             "reasoning/engines.py", "reasoning/quantum.py",
             "evolution/cycles.py", "integrations/antigravity/antigravity_bridge.py",
             "integrations/opencode_cli.py",
@@ -158,143 +277,185 @@ class DiagnosticPipeline:
             "mci/pipeline/scientific_governance_pipeline.py",
         ]
 
-        for rel_path in py_content_files:
-            full_path = os.path.join(root, rel_path)
-            if not os.path.isfile(full_path):
-                continue
+        def _extract_py_terms(rel_path: str) -> List[str]:
+            """Extrai nomes de classes, funções e imports de um .py."""
+            fpath = os.path.join(root, rel_path)
+            if not os.path.isfile(fpath):
+                return []
+            content = self._read_file_content(fpath)
+            if not content:
+                return []
+            local_parts: List[str] = []
             try:
-                with open(full_path, 'r', encoding='utf-8', errors='replace') as f:
-                    content = f.read()
-                # Extrai nomes de classes
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore", SyntaxWarning)
                     tree = ast.parse(content)
                 for node in ast.walk(tree):
                     if isinstance(node, ast.ClassDef):
-                        parts.append(node.name)
-                        # Para classes com Engine, Pool, Gate, Scorer,器等
-                        # adiciona versão lowercase para match
-                        parts.append(node.name.lower())
-                        # Extrai membros de Enum e constantes em classes
+                        local_parts.append(node.name)
+                        local_parts.append(node.name.lower())
                         for body_node in getattr(node, "body", []):
                             if isinstance(body_node, ast.Assign):
                                 for target in body_node.targets:
                                     if isinstance(target, ast.Name):
-                                        parts.append(target.id)
-                                        parts.append(target.id.lower())
+                                        local_parts.append(target.id)
+                                        local_parts.append(target.id.lower())
                     elif isinstance(node, ast.FunctionDef) and not node.name.startswith('_'):
-                        parts.append(node.name)
+                        local_parts.append(node.name)
                     elif isinstance(node, ast.Assign):
                         for target in node.targets:
                             if isinstance(target, ast.Name):
-                                parts.append(target.id)
-                                parts.append(target.id.lower())
-                # Extrai imports de módulos importantes
+                                local_parts.append(target.id)
+                                local_parts.append(target.id.lower())
                 for line in content.split('\n'):
                     line = line.strip()
                     if line.startswith('import ') or line.startswith('from '):
-                        # Adiciona termos de import relevantes
                         for term in ['z3', 'sympy', 'kanren', 'antigravity',
                                       'pypi', 'websearch', 'webfetch']:
                             if term in line.lower():
-                                parts.append(term)
+                                local_parts.append(term)
             except (SyntaxError, Exception):
-                # Fallback: extrai palavras com regex
                 try:
                     words = re.findall(r'class\s+(\w+)', content)
-                    parts.extend(words)
+                    local_parts.extend(words)
                     words = re.findall(r'def\s+(\w+)', content)
-                    parts.extend([w for w in words if not w.startswith('_')])
+                    local_parts.extend([w for w in words if not w.startswith('_')])
+                except Exception:
+                    pass
+            return local_parts
+
+        # Processa arquivos Python em paralelo (ThreadPoolExecutor)
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            futures = {executor.submit(_extract_py_terms, rp): rp for rp in py_content_files}
+            for future in as_completed(futures):
+                try:
+                    result = future.result()
+                    parts.extend(result)
                 except Exception:
                     pass
 
-        # ─── 3. Leitura de SPECs para termos de protocolo ────────────────
+        # ─── 3. Leitura de SPECs para termos de protocolo (paralelo) ──
         specs_dir = os.path.join(root, "specs")
         if os.path.isdir(specs_dir):
             parts.append("\n#specs/")
-            for fname in sorted(os.listdir(specs_dir)):
-                name, ext = os.path.splitext(fname)
-                if ext == '.md':
-                    parts.append(name)
-                    if name.startswith("SPEC-"):
-                        parts.append(name.replace("SPEC-", "spec "))
-                    # Lê conteúdo das specs principais para extrair termos
-                    fpath = os.path.join(specs_dir, fname)
-                    if os.path.isfile(fpath) and os.path.getsize(fpath) < 50000:
-                        try:
-                            with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
-                                spec_content = f.read()
-                            # Extrai seções de requisitos e termos-chave
-                            for kw in ['SDD', 'TDD', 'A2A', 'MCP', 'RED', 'GREEN',
-                                        'REFACTOR', 'BehavioralGate', 'SpecVerifier',
-                                        'TrustEngine', 'TokenEconomy', 'Slashing',
-                                        'Staking', 'FeeMarket']:
-                                if kw.lower() in spec_content.lower():
-                                    parts.append(kw.lower())
-                                    parts.append(kw)
-                        except Exception:
-                            pass
 
-        # ─── 4. Arquivos de configuração e dados ────────────────────────
+            def _extract_spec_terms(fname: str) -> List[str]:
+                local_parts: List[str] = []
+                name, ext = os.path.splitext(fname)
+                if ext != '.md':
+                    return local_parts
+                local_parts.append(name)
+                if name.startswith("SPEC-"):
+                    local_parts.append(name.replace("SPEC-", "spec "))
+                fpath = os.path.join(specs_dir, fname)
+                if not os.path.isfile(fpath) or os.path.getsize(fpath) >= 50000:
+                    return local_parts
+                spec_content = self._read_file_content(fpath)
+                if not spec_content:
+                    return local_parts
+                for kw in ['SDD', 'TDD', 'A2A', 'MCP', 'RED', 'GREEN',
+                            'REFACTOR', 'BehavioralGate', 'SpecVerifier',
+                            'TrustEngine', 'TokenEconomy', 'Slashing',
+                            'Staking', 'FeeMarket']:
+                    if kw.lower() in spec_content.lower():
+                        local_parts.append(kw.lower())
+                        local_parts.append(kw)
+                return local_parts
+
+            spec_files = sorted(os.listdir(specs_dir))
+            with ThreadPoolExecutor(max_workers=4) as executor:
+                futures = {executor.submit(_extract_spec_terms, sf): sf for sf in spec_files}
+                for future in as_completed(futures):
+                    try:
+                        parts.extend(future.result())
+                    except Exception:
+                        pass
+
+        # ─── 4. Arquivos de configuração e dados (paralelo) ──────────
         config_files = [
             "opencode.json", "requirements.txt", "ARCHITECTURE.md",
             "README.md", "CHANGELOG.md", "RELEASE_NOTES.md",
+            "data/evidence_graph.json", "evolution/cycles.json",
         ]
-        for fname in config_files:
-            fpath = os.path.join(root, fname)
-            if os.path.isfile(fpath) and os.path.getsize(fpath) < 100000:
+
+        def _read_config_snippet(rel_path: str) -> str:
+            fpath = os.path.join(root, rel_path)
+            if not os.path.isfile(fpath):
+                return ""
+            try:
+                with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
+                    return f.read(5000)
+            except Exception:
+                return ""
+
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            futures = {executor.submit(_read_config_snippet, cf): cf for cf in config_files}
+            for future in as_completed(futures):
                 try:
-                    with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
-                        content = f.read()
-                    # Adiciona o conteúdo bruto (limitado)
-                    parts.append(content[:5000])
+                    content = future.result()
+                    if content:
+                        parts.append(content)
                 except Exception:
                     pass
 
-        # ─── 5. Leitura de catálogos de agentes (contêm descrições de tools) ─
+        # ─── 5. Leitura de catálogos de agentes (paralelo) ──────────
         catalog_dir = os.path.join(root, "agents", "catalog")
         if os.path.isdir(catalog_dir):
-            for fname in sorted(os.listdir(catalog_dir)):
-                if fname.endswith('.md'):
-                    fpath = os.path.join(catalog_dir, fname)
-                    if os.path.isfile(fpath) and os.path.getsize(fpath) < 30000:
-                        try:
-                            with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
-                                content = f.read()
-                            parts.append(f"\n#agent:{fname}")
-                            parts.append(content[:2000])  # primeiros 2000 chars
-                        except Exception:
-                            pass
 
-        # ─── 6. Leitura de agentes raiz (descrições de ferramentas) ───────
+            def _read_agent_catalog(fname: str) -> str:
+                if not fname.endswith('.md'):
+                    return ""
+                fpath = os.path.join(catalog_dir, fname)
+                if not os.path.isfile(fpath) or os.path.getsize(fpath) >= 30000:
+                    return ""
+                try:
+                    with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
+                        content = f.read(2000)
+                    return f"\n#agent:{fname}\n{content}"
+                except Exception:
+                    return ""
+
+            agent_files = sorted(os.listdir(catalog_dir))
+            with ThreadPoolExecutor(max_workers=4) as executor:
+                futures = {executor.submit(_read_agent_catalog, af): af for af in agent_files}
+                for future in as_completed(futures):
+                    try:
+                        content = future.result()
+                        if content:
+                            parts.append(content)
+                    except Exception:
+                        pass
+
+        # ─── 6. Leitura de agentes raiz (paralelo) ──────────────────
         agent_root_files = ["researcher.md", "coder.md", "auditor.md",
                             "academic_writer.md", "reviewer.md"]
-        for fname in agent_root_files:
-            fpath = os.path.join(root, "agents", fname)
-            if os.path.isfile(fpath) and os.path.getsize(fpath) < 30000:
-                try:
-                    with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
-                        content = f.read()
-                    parts.append(content[:2000])
-                except Exception:
-                    pass
 
-        # ─── 7. Arquivos de dados relevantes ────────────────────────────
-        data_files = [
-            "data/evidence_graph.json",
-            "evolution/cycles.json",
-        ]
-        for fname in data_files:
-            fpath = os.path.join(root, fname)
-            if os.path.isfile(fpath):
+        def _read_agent_root(fname: str) -> str:
+            fpath = os.path.join(root, "agents", fname)
+            if not os.path.isfile(fpath) or os.path.getsize(fpath) >= 30000:
+                return ""
+            try:
+                with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
+                    return f.read(2000)
+            except Exception:
+                return ""
+
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            futures = {executor.submit(_read_agent_root, af): af for af in agent_root_files}
+            for future in as_completed(futures):
                 try:
-                    with open(fpath, 'r', encoding='utf-8', errors='replace') as f:
-                        content = f.read()
-                    parts.append(content[:3000])
+                    content = future.result()
+                    if content:
+                        parts.append(content)
                 except Exception:
                     pass
 
         corpus_enriched = " ".join(parts)
+
+        # ── Salva no cache ──────────────────────────────────────────
+        self._cached_corpus = corpus_enriched
+        self._cached_hash = current_hash
+
         return corpus_enriched
 
     def run(self, corpus: str, domain: str = "",
@@ -338,7 +499,10 @@ class DiagnosticPipeline:
         if effective_goals is None and effective_domain == "ecosystem":
             effective_goals = ECOSYSTEM_DEFAULT_GOALS
 
+        timings: dict[str, float] = {}
+
         # 1. Scanner Noológico
+        t1 = time.time()
         try:
             noo = self.noological.scan(trail, research_domain=effective_domain)
             # Categorias ausentes como gaps (SPEC-022)
@@ -362,12 +526,15 @@ class DiagnosticPipeline:
                 },
                 source_agent="diagnostic_pipeline",
             )
+            timings["noological"] = round(time.time() - t1, 3)
         except Exception as exc:  # scanner não deve derrubar o pipeline
             report["noological"] = {"error": str(exc)}
             noo = {}
             absent_categories = 0
+            timings["noological"] = round(time.time() - t1, 3)
 
         # 2. Scanner Teleológico (reverse: metas -> requisitos -> lacunas)
+        t2 = time.time()
         try:
             valid_types = {"causal", "evaluative", "exploratory", "strategic",
                            "comparative", "predictive", "integrative", "critical"}
@@ -400,10 +567,13 @@ class DiagnosticPipeline:
                 }
             else:
                 report["teleological"] = {"skipped": "sem metas definidas"}
+            timings["teleological"] = round(time.time() - t2, 3)
         except Exception as exc:
             report["teleological"] = {"error": str(exc)}
+            timings["teleological"] = round(time.time() - t2, 3)
 
         # 3. Scanner de Potencialidade (capacidades latentes do ecossistema)
+        t3 = time.time()
         try:
             pot = self.potentiality.scan()
             report["potentiality"] = {
@@ -413,8 +583,10 @@ class DiagnosticPipeline:
             latent = pot.get("latent_potentials") or pot.get("potentials") or []
             if isinstance(latent, list):
                 report["potentiality"]["top_latent"] = latent[:5]
+            timings["potentiality"] = round(time.time() - t3, 3)
         except Exception as exc:
             report["potentiality"] = {"error": str(exc)}
+            timings["potentiality"] = round(time.time() - t3, 3)
 
         # 4. Scanner de Impacto Social (opcional — requer parâmetros de pesquisa)
         if include_social:
@@ -470,12 +642,15 @@ class DiagnosticPipeline:
                 gaps_total, effective_domain, report.get("ecosystem_layers")),
         }
 
+        timings["evolutionary"] = round(time.time() - t2, 3)  # ~instantâneo após teleo
+
         # 5.5 Modo profundo: roadmap evolutivo completo + priorização +
         #     sucessores (Anexos 3–8 — SPEC-020)
         if deep:
             self._run_deep(report, trail, goal_objs if effective_goals else [], noo, effective_domain)
 
         # 6. Scanner de Engenharia Reversa
+        t6 = time.time()
         try:
             rev = self.reversa.scan(corpus)
             report["reversa"] = {
@@ -483,10 +658,13 @@ class DiagnosticPipeline:
                 "findings": rev.findings,
                 "recommendations": rev.recommendations
             }
+            timings["reversa"] = round(time.time() - t6, 3)
         except Exception as exc:
             report["reversa"] = {"error": str(exc)}
+            timings["reversa"] = round(time.time() - t6, 3)
 
         report["duration_s"] = round(time.time() - started, 3)
+        report["timings"] = timings
         metabus.publish_subsystem_event(
             "diagnostic",
             "pipeline.completed",
