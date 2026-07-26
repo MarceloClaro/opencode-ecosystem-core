@@ -429,6 +429,16 @@ def build_config() -> Dict[str, Any]:
                 "command": ["python3", "skills/tooling/pypi_mcp_server.py"],
                 "enabled": True,
             },
+            "colibri-mcp": {
+                "type": "local",
+                "command": ["python3", "colibri/colibri_mcp_server.py"],
+                "enabled": True,
+            },
+            "scanners-mcp": {
+                "type": "local",
+                "command": ["python3", "scanners/scanners_mcp_server.py"],
+                "enabled": True,
+            },
         },
         "command": {
             "diagnose": {
