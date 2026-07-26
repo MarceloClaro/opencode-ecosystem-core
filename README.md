@@ -6,18 +6,18 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.5.0_Colibri_MoE-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-338%2B_passed-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-55_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Versão](https://img.shields.io/badge/Versão-3.6.0_Colibri_MoE-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-370%2B_passed-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-60_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-187+-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-28-dodgerblue.svg)](specs/)
-[![LLM Reduction](https://img.shields.io/badge/LLM_Reduction-6_componentes-green.svg)](skills/tooling/llm_reduction.py)
+[![Specs](https://img.shields.io/badge/Specs-33-dodgerblue.svg)](specs/)
+[![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 187+ agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (8 Scanners)**, 6 Servidores MCP e 55 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 187+ agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (8 Scanners)**, 6 Servidores MCP e 60 ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
@@ -174,90 +174,110 @@ integrando-se silenciosamente antes do `AttentionRouter`:
 
 **Métrica:** `orch.get_reduction_stats()` → `total_llm_calls_saved`
 
-### Diagrama de Arquitetura
+### 🎨 Diagramas e Fluxogramas Visuais da Arquitetura
+
+#### 1. Fluxograma Intuitivo de Alto Nível (Para Leigos & Usuários Gerais)
+
+```mermaid
+flowchart TD
+    User([👤 Usuário / Pesquisador]) -->|Comando / Pergunta| Orquestrador[👑 Orquestrador Primário marceloclaro]
+
+    Orquestrador -->|1. Pesquisa Bibliográfica| Research[📚 ResearchHub: PubMed / bioRxiv / CORE]
+    Orquestrador -->|2. Decomposição de Problema| EvoSci[🧪 EvoSci Engine: Geração de Hipóteses]
+    Orquestrador -->|3. Produção do Manuscrito| Composer[✍️ Paper Composer: Formatação ABNT / APA]
+    Orquestrador -->|4. Apresentação Interativa| Mira[📊 Mira Presenter: Manuscrito → Slides Animados]
+
+    Composer --> Auditoria{🛡️ Auditoria Super-Rigor & Integridade}
+    Auditoria -->|Aprovado| Output([📄 Manuscrito Certificado + Decks MIRA + Certificado SHA-256])
+    Auditoria -->|Refinamento Necessário| LoopRefine[🔄 Autocorreção RED-GREEN]
+    LoopRefine --> Orquestrador
+```
+
+#### 2. Arquitetura Técnica Multilateral Completa (Para Desenvolvedores & Engenheiros DE IA)
 
 ```mermaid
 graph TD
-    %% Atores e Orquestrador
-    User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
-    WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
-    
-    %% Camada SDD/TDD
-    subgraph SDD [SDD & TDD Engine]
-        Spec[SpecRegistry<br>Especificações]
-        Ver[SpecVerifier<br>Gate SDD]
-        TDD[TDDRunner<br>Red-Green-Refactor]
-        
-        TDD -.->|Valida| Ver
-        Ver -.->|Lê| Spec
+    %% Entradas & Clientes
+    subgraph Clients [Pontes Multilaterais & Interfaces CLI]
+        OpenCodeCLI([OpenCode CLI / Codex])
+        ClaudeCLI([Claude Code CLI])
+        AntigravityCLI([Antigravity CLI agy])
+        Bridge[CliEcosystemBridge<br>Unificação de Agentes e Skills]
+
+        OpenCodeCLI --> Bridge
+        ClaudeCLI --> Bridge
+        AntigravityCLI --> Bridge
     end
 
-    %% Camada Transformer
-    subgraph TF [Transformer Layer]
-        Attn[AttentionRouter<br>Multi-Head]
-        Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
-        HTM[(Hierarchical<br>Memory HTM)]
-        Emb[TaskEmbedder<br>d=64]
-        
-        Attn -.->|Usa| Emb
-        HTM -.->|Usa| Emb
+    Bridge --> Orchestrator[Orquestrador Central: marceloclaro]
+
+    %% Servidores MCP
+    subgraph MCPServers [6 Servidores MCP Nativos]
+        mcp1[litert-lm-mcp]
+        mcp2[metacognitive-mcp]
+        mcp3[antigravity-bridge-mcp]
+        mcp4[pypi-search-mcp]
+        mcp5[colibri-mcp]
+        mcp6[scanners-mcp]
     end
-    
-    %% LLM Reduction Layer (R220-R222)
-    subgraph RED [LLM Reduction Layer]
-        Router[RuleBasedRouter<br>25 regras + DecisionTree]
-        Class[LocalClassifier<br>TF-IDF + LogReg<br>threshold 0.15]
-        Whoosh[Whoosh3Engine<br>Busca BM25F local]
-        Game[GameTheoryLocal<br>Nash/Shapley/Pareto]
-        Jinja[Jinja2Engine<br>9 templates]
-        DataHub[DataKnowledgeHub<br>16 fontes · 5 domínios]
-        Valid[CrossValidator<br>Calibration + Audit]
-        
-        Router --> Class
-        Class --> Whoosh
-        DataHub --> Valid
+
+    Orchestrator <--> MCPServers
+
+    %% Motores de Inferência
+    subgraph Engines [Motores de Inferência Local Zero-Token]
+        ColibriEngine[Colibri MoE Engine<br>OLMoE 1B/7B C Binary :8090]
+        LiteRTEngine[LiteRT-LM On-Device<br>Gemma 4 & Qwen3]
     end
-    
-    %% Observabilidade (R222)
-    subgraph OBS [Observabilidade]
-        Metrics[MetricsCollector<br>/health · /metrics]
-        DocMetrics[Doctor Check<br>llm_reduction_metrics]
-        HTTP[MetricsHTTPServer<br>porta 9090]
-        
-        Metrics --> HTTP
-        DocMetrics -.->|consulta| Metrics
+
+    Orchestrator --> ColibriEngine
+    Orchestrator --> LiteRTEngine
+
+    %% Governança SDD, TDD e Selagem Criptográfica
+    subgraph Governance [Governança, Selagem & Autocorreção]
+        SpecReg[SpecRegistry<br>33 SPECs Formais]
+        SpecVer[SpecVerifier<br>Portões SDD]
+        SelfCorr[SelfCorrectionEngine<br>Diagnóstico RED-GREEN]
+        SuperRigor[SuperRigorPipeline<br>8 Scanners Epistemológicos]
+        Merkle[MerkleIntegrityGuard<br>SHA-256 Merkle Root]
+        AuditCert[InternalAuditHarness<br>Certificados Imutáveis]
+
+        SpecVer -.-> SpecReg
+        SelfCorr --> SpecVer
+        SuperRigor --> Merkle
+        Merkle --> AuditCert
     end
-    
-    %% Pipeline Academico Agentivo
-    subgraph Acad [Pipeline Academico Agentivo v3.0]
-        EvoSci["R101: EvoSci<br>MentorAgent+ResearcherAgent<br>ReviewerAgent+EvoEngine"]
-        DeepRes["R102: Deep Research<br>EvidenceGraph+BFRS+DFRS"]
-        PReview["R103: Peer Review<br>8-dim Rubric+AuditGraph"]
-        Revision["R104d: Manuscript Revision<br>DiffEngine+Rebuttal"]
-        Composer["R105: Paper Composer<br>ABNT/APA/IEEE"]
-        
-        EvoSci --> DeepRes
-        DeepRes --> PReview
-        PReview --> Revision
-        Revision --> Composer
+
+    Orchestrator --> Governance
+
+    %% Saída Certificada
+    AuditCert --> CertOutput([🚀 Produção Certificada com Assinatura SHA-256])
+```
+
+#### 3. Ciclo de Vida SDD / TDD & Autocorreção RED-GREEN
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Orquestrador / Dev
+    participant Spec as SpecRegistry (SDD)
+    participant Code as Código / Agentes
+    participant Test as Pytest (TDDRunner)
+    participant SelfCorr as SelfCorrectionEngine
+    participant Audit as Merkle & Audit Certificate
+
+    Dev->>Spec: 1. Carrega Especificação Formal (SPEC-935-R*)
+    Dev->>Code: 2. Implementa Módulo ou Agente
+    Dev->>Test: 3. Executa Suíte de Testes TDD
+    alt Testes Passaram (GREEN)
+        Test-->>Audit: 4. Emite Certificado SHA-256 & Calcula Merkle Root
+        Audit-->>Dev: 5. Concluído e Registrado em evolution/cycles.json
+    else Testes Falharam (RED)
+        Test-->>SelfCorr: 4. Dispara Diagnóstico de Falha
+        SelfCorr->>Code: 5. Aplica Correção de Código em Circuito Fechado
+        SelfCorr->>Test: 6. Reexecuta Suíte de Testes
+        Test-->>Audit: 7. Validação Concluída com Sucesso (GREEN)
     end
-    
-    %% Camada Core (Subsistemas)
-    subgraph Core [Core Subsystems]
-        Trust[Trust Engine<br>Behavioral Gate]
-        Eco[Token Economy<br>Staking/Slashing]
-        Scan[Scanners<br>Diagnóstico]
-        AcadLegacy[MASWOS<br>Qualis A1]
-        Reason[Reasoning<br>12 Engines + Quantum]
-        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928/931]
-        LegalBench[Legal Benchmarks<br>SPEC-928]
-        SynthUniv[Synthetic University<br>SPEC-935 · 11 Faculdades]
-        RAG[Scientific RAG<br>Grounding + Citations]
-        Bench[Superhuman Readiness<br>Benchmarks]
-        MetaEval[Metacognitive Eval<br>SPEC-920]
-        Discovery[Continuous Discovery<br>R95 · Loop Automático]
-        EvoMem[Evolutionary Memory<br>R97 · Memória Persistente]
-        Novelty[Novelty V2<br>R98 · Contribution Points]
+```
         RAGEvolved[RAG Evolved<br>R99 · Adaptive+CitationGraph]
         ResearchHub[Research Hub<br>PubMed · bioRxiv · CORE<br>CLI pesquisa R120]
         MiraDeck[Apresentações MIRA<br>manuscrito → deck animado R123]
