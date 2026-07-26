@@ -109,8 +109,9 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# --- Windows ---
+# --- Windows / NTFS streams ---
 *.Zone.Identifier
+*:Zone.Identifier
 
 # --- ML Pipeline outputs (dados gerados) ---
 templates/projects/*/outputs/
