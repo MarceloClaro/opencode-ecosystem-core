@@ -664,6 +664,183 @@
         "Servidor HTTP em socket nativo é leve o suficiente para portáteis"
       ],
       "timestamp": 1785000682.7371912
+    },
+    {
+      "round_id": "R223",
+      "objective": "evo-28-pypi-mcp-reconciliation",
+      "changes": {
+        "id": "evo-28-pypi-mcp-reconciliation",
+        "spec": "SPEC-935-R214",
+        "title": "Reconciliação do MCP PyPI — protocolo, ping, isError e configuração",
+        "timestamp": "2026-07-25T18:46:48.457246+00:00",
+        "score": 9.0,
+        "changes": [
+          "Corrigido nomes de métodos MCP: list_tools → tools/list, call_tool → tools/call",
+          "Adicionado método ping (health check)",
+          "Alterado protocolVersion para ecoar versão do cliente (default 2024-11-05)",
+          "Adicionado isError=true em respostas de erro de ferramentas",
+          "Adicionado _tool_result e _tool_error_result para formato MCP padrão com content array",
+          "Corrigido description truncada do agente pypi-searcher em opencode.json",
+          "Corrigido parsing do --json no comando /pypi (não mais engolido pelo query)"
+        ],
+        "lessons": [
+          "MCP servers custom precisam implementar tools/list e tools/call (não list_tools/call_tool)",
+          "O protocolVersion deve ecoar o valor do cliente para compatibilidade",
+          "Erros em tools/call devem usar isError=true no result, não JSON-RPC error",
+          "A flag de saída (--json) não pode ser passada dentro do template  sem parsing"
+        ],
+        "category": "mcp"
+      },
+      "score": null,
+      "lessons": [],
+      "timestamp": 1785005208.4577758
+    },
+    {
+      "round_id": "R224",
+      "objective": "R224 — Otimização NoologicalScanner v4.0: regex compilados, constantes de módulo, cache de corpus",
+      "changes": [
+        "keyword_map_builtin: constante de módulo extraída de _category_present() (~110 linhas de dict salvo)",
+        "_compile_dimension_patterns(): pré-compila regex para ECOSYSTEM_KW, ENRICHED_KW e keyword_map_builtin",
+        "_match_compiled(): busca compilada única vs ~100 chamadas de re.search()",
+        "Cache de clean_corpus em scan(): _negation_filter() executado 1x em vez de ~100x",
+        "_category_present_v2() refatorada: usa patterns compilados + clean_corpus cacheado",
+        "_category_present() refatorada: referencia keyword_map_builtin (elimina dict inline de 110 linhas)"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Extrair constantes de módulo de métodos de instância reduz duplicação (~3KB de dict)",
+        "Compilar regex uma vez em vez de re.compile/re.search por chamada reduz 28s→4s",
+        "Cache de _negation_filter() em scan() elimina maior fonte de O(n²) no pipeline",
+        "word_boundary_match() ainda pode ser otimizado com any() em generator expression"
+      ],
+      "timestamp": 1785008922.9239347
+    },
+    {
+      "round_id": "R225",
+      "objective": "R225 — Otimizações finais NoologicalScanner v4.0: generator any(), lru_cache, timings CLI",
+      "changes": [
+        "_word_boundary_match_any(): método estático com any() generator — substitui loop explícito em lote",
+        "_category_present_v2(): fallback genérico refatorado com sum(1 for w in words if match)",
+        "_category_present(): usa _word_boundary_match_any() no loop de keyword_map + fallback generator",
+        "_negation_filter(): @lru_cache(maxsize=8) — cache entre múltiplos scans",
+        "DiagnosticPipeline.run(): timings por scanner (noological, teleological, potentiality, reversa)",
+        "CLI diagnose: exibe breakdown de tempo por scanner (ex: noological: 1.77s (53%))"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "any() com generator expression reduz overhead de interpreter loop em 2-5% em hot paths",
+        "sum(1 for w in words if cond) é mais idiomático e ligeiramente mais rápido que for explícito",
+        "lru_cache em _negation_filter é redundante com cache manual em scan(), mas garante proteção cross-scan",
+        "Timings por scanner no CLI são cruciais para identificar bottlenecks sem profiling externo",
+        "Pipeline caiu de 28s -> 3.38s (~88% de redução) — bottleneck principal resolvido",
+        "Noological ainda consome 53% do tempo (1.77s) — o restante é overhead de 4 outros scanners"
+      ],
+      "timestamp": 1785009246.3457885
+    },
+    {
+      "round_id": "R226",
+      "objective": "R226 — Benchmark mode CLI e investigação Colibri (GLM-5.2 744B MoE engine)",
+      "changes": [
+        "CLI: --benchmark/-b N runs — executa pipeline N vezes com média/desvio/min/max",
+        "CLI: timing médio por scanner no benchmark (ex: noological: 1.518s (69%))",
+        "Investigação completa do repositório Colibri (fork JustVugg/colibri)",
+        "Documentação da integração potencial entre Colibri e OpenCode Ecosystem"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Benchmark revelou que run 1 é 2.5× mais lenta que runs 2+ (cold vs warm fs cache)",
+        "Warm pipeline médio é ~1.46s — Noological é 69% do tempo, corpus build é o restante",
+        "Colibri viabiliza inferência local de GLM-5.2 (744B MoE) em hardware consumer (25GB RAM)",
+        "Colibri é em C puro, zero deps — ideal para runtime on-device do OpenCode",
+        "Integração: Colibri como backend de inferência local substituto ao LiteRT-LM",
+        "Colibri original tem 19k+ estrelas — ecossistema maduro e ativo"
+      ],
+      "timestamp": 1785009562.2375448
+    },
+    {
+      "round_id": "R227",
+      "objective": "Instalação do repositório Colibri",
+      "changes": [
+        "Clonado https://github.com/MarceloClaro/colibri em /colibri",
+        "Instalado colibri-engine v1.1.1 em ambiente virtual .venv"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Uso de --no-build-isolation para instalação offline/sandbox no ambiente .venv"
+      ],
+      "timestamp": 1785012287.7108188
+    },
+    {
+      "round_id": "R228",
+      "objective": "Download, conversão e execução do OLMoE (olmoe_merged)",
+      "changes": [
+        "Pausado download do GLM-5.2",
+        "Instalado PyTorch/Safetensors no .venv com TMPDIR estendido",
+        "Convertido allenai/OLMoE-1B-7B-0125-Instruct para o formato olmoe_merged (6.5 GB)",
+        "Compilado motor C olmoe.c",
+        "Executada inferência com 12/12 tokens idênticos ao oráculo de referência"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Para evitar estouro de tmpfs (/tmp de 5.8GB) durante instalação de grandes wheels (PyTorch/CUDA), utilizar TMPDIR em diretório com mais espaço"
+      ],
+      "timestamp": 1785023953.1053333
+    },
+    {
+      "round_id": "R227",
+      "objective": "R227 — Integração Colibri: bridge, MCP server, agente, doctor check",
+      "changes": [
+        "integrations/colibri/bridge.py: ColibriBridge — detecção, start/stop server, chat/complete API",
+        "integrations/colibri/colibri_mcp_server.py: servidor MCP com 4 tools (chat, complete, status, info)",
+        "agents/catalog/colibri-agent.md: descriptor com capacidades, requisitos, performance esperada",
+        "opencode.json: registro do MCP server (colibri) + agente colibri-agent (187 agentes)",
+        "marceloclaro/doctor.py: _check_colibri() — verifica disponibilidade do runtime no PATH",
+        "integrations/colibri/__init__.py: export público do bridge"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Colibri é o único runtime que viabiliza GLM-5.2 (744B) em 25GB RAM via streaming de especialistas",
+        "API compatível com OpenAI permite integração sem dependências adicionais (httplib nativo)",
+        "Engine C puro, zero deps — ideal para runtime on-device do OpenCode",
+        "Doctor check colibri é warn (não fail) — runtime é opcional, ecossistema funciona sem ele",
+        "MCP server registrado em opencode.json permite uso como ferramenta no OpenCode CLI",
+        "Próximo passo: criar SPEC formal e testes de integração completos"
+      ],
+      "timestamp": 1785024686.7581596
+    },
+    {
+      "round_id": "R229",
+      "objective": "Integrar ColibriProvider no opencode-ecosystem-core (SPEC-935-R214)",
+      "changes": [
+        "Criada especificação specs/SPEC-935-R214-colibri-provider.md",
+        "Implementado integrations/colibri_provider.py com suporte a porta 8090 customizada e endpoints OpenAI",
+        "Criada suíte de testes unitários tests/test_r214.py com 100% de aprovação (7/7 passed)"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Permitir portas customizáveis (ex.: 8090 via COLIBRI_PORT) evita conflitos de binding com a porta padrão 8080 do opencode-ecosystem-core"
+      ],
+      "timestamp": 1785024714.7714148
+    },
+    {
+      "round_id": "R228",
+      "objective": "R228 — Integração OLMoE completa via Colibri: bridge, validação, doctor pass",
+      "changes": [
+        "integrations/colibri/bridge.py: suporte OLMoE — _find_olmoe_bin(), _find_olmoe_snap(), olmoe_complete(), olmoe_validate()",
+        "integrations/colibri/colibri_mcp_server.py: tools colibri:olmoe:complete e colibri:olmoe:validate",
+        "agents/catalog/colibri-agent.md: atualizado com OLMoE (64 experts, 8 ativos, 6.5GB, 100% token match)",
+        "marceloclaro/doctor.py: _check_colibri() agora detecta OLMoE automaticamente",
+        "Validação: 12/12 tokens correspondem, 62.4% cache hit, 4.79 GB RSS pico"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "OLMoE 1B-7B MoE roda em CPU consumer com 4.79 GB RSS — muito abaixo dos 25 GB do GLM-5.2",
+        "Engine C nativo com OpenMP: 62.4% cache hit rate com LRU + HOT=4",
+        "Inferência lenta (0.11 tok/s) — bottleneck é I/O de disco no streaming de especialistas",
+        "Doctor colibri agora passa (green!) — primeiro runtime on-device funcional do ecossistema",
+        "Próximo passo natural: wrapper que integra OLMoE como provider na LLM Reduction"
+      ],
+      "timestamp": 1785025994.331696
     }
   ]
 }
