@@ -27,6 +27,8 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
+from agentic_science_v2.blind_review import BlindReviewAnonymizer, BlindReviewReport
+
 logger = logging.getLogger(__name__)
 
 
@@ -787,6 +789,7 @@ class ReviewPackage:
     export_gate_passed: bool = False
     repair_plan: List[Dict[str, str]] = field(default_factory=list)
     duration_seconds: float = 0.0
+    blind_review: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -801,7 +804,42 @@ class ReviewPackage:
             "coverage": self.coverage,
             "export_gate_passed": self.export_gate_passed,
             "repair_plan": self.repair_plan[:3],
+            "blind_review": self.blind_review,
         }
+
+    def to_revision_contract(self) -> Dict[str, Any]:
+        """Adapta o pacote para o contrato consumido pelo R104d."""
+        normalized_reviews: List[Dict[str, Any]] = []
+        for index, item in enumerate(self.repair_plan, start=1):
+            priority = (item.get("priority") or "medium").lower()
+            risk = (
+                "high" if "critical" in priority or "major" in priority or priority == "high"
+                else "low" if "minor" in priority or priority == "low"
+                else "medium"
+            )
+            normalized_reviews.append({
+                "critic": item.get("reviewer", "Reviewer"),
+                "claims": [{
+                    "id": f"claim-{index}",
+                    "text": item.get("action") or "Review comment",
+                    "risk": risk,
+                    "section": item.get("area") or "introduction",
+                    "evidence": "",
+                }],
+            })
+
+        if not normalized_reviews:
+            normalized_reviews = [{
+                "critic": "SyntheticReviewer",
+                "claims": [{
+                    "id": "claim-1",
+                    "text": "Clarify the manuscript structure and improve methodological detail.",
+                    "risk": "low",
+                    "section": "introduction",
+                    "evidence": "Synthetic fallback review package",
+                }],
+            }]
+        return {"reviews": normalized_reviews}
 
 
 class OrchestratorReviewer:
@@ -824,9 +862,33 @@ class OrchestratorReviewer:
         self.min_traceability = min_traceability
         self.min_coverage = min_coverage
 
-    def review(self, paper: Dict[str, Any]) -> ReviewPackage:
-        """Executa pipeline completo de revisao."""
+    def review(self, paper: Dict[str, Any],
+               reviewer_affiliations: Optional[Dict[str, str]] = None) -> ReviewPackage:
+        """Executa revisão completa com anonimização opcional e isolamento de erros."""
+        try:
+            return self._review(paper, reviewer_affiliations)
+        except Exception as exc:
+            logger.exception("Falha no pipeline de peer review: %s", exc)
+            return ReviewPackage(
+                paper_title=paper.get("title", "Untitled"),
+                export_gate_passed=False,
+                repair_plan=[{
+                    "priority": "CRITICAL",
+                    "area": "pipeline",
+                    "action": f"Peer review falhou: {exc}",
+                    "reviewer": "OrchestratorReviewer",
+                }],
+            )
+
+    def _review(self, paper: Dict[str, Any],
+                reviewer_affiliations: Optional[Dict[str, str]] = None) -> ReviewPackage:
         start = time.time()
+        original_paper = paper
+
+        # R115: os críticos recebem somente a cópia anonimizada.
+        anonymizer = BlindReviewAnonymizer()
+        paper, redactions = anonymizer.anonymize(original_paper)
+        blind_applied = redactions > 0
         title = paper.get("title", "Untitled")
 
         # 1. Drafting: rubricas para o paper
@@ -895,16 +957,28 @@ class OrchestratorReviewer:
         scored = self.rubric_engine.score_review(rubric_review, paper_rubrics)
         agg = self.rubric_engine.aggregate_score(scored)
 
-        # 6. Export Gate
+        # 6. Plano de reparos
+        repair_plan = self._generate_repair_plan(all_critiques)
+
+        # 7. Verificação pós-hoc da revisão às cegas.
+        generated_text = json.dumps([c.to_dict() for c in all_critiques]) + json.dumps(repair_plan)
+        blind_review = BlindReviewReport(
+            applied=blind_applied,
+            redactions_made=redactions,
+            leaks_detected=anonymizer.detect_leaks(generated_text, original_paper),
+            conflicts_of_interest=anonymizer.check_conflict_of_interest(
+                original_paper, reviewer_affiliations,
+            ),
+        )
+
+        # 8. Export Gate: qualidade e integridade da revisão cega.
         export_gate_passed = (
             traceability >= self.min_traceability
             and coverage >= self.min_coverage
+            and blind_review.passed
         )
 
-        # 7. Repair Plan
-        repair_plan = self._generate_repair_plan(all_critiques)
-
-        # 8. Package
+        # 9. Pacote
         package = ReviewPackage(
             paper_title=title,
             overall_score=agg["overall"],
@@ -917,6 +991,7 @@ class OrchestratorReviewer:
             export_gate_passed=export_gate_passed,
             repair_plan=repair_plan,
             duration_seconds=time.time() - start,
+            blind_review=blind_review.to_dict(),
         )
 
         return package
