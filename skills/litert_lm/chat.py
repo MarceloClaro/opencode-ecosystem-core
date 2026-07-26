@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import os
 import sys
-from typing import Any, Callable, Dict, Iterator, List, Optional, Union
+from typing import Any, Callable, Dict, Iterator, List, Mapping, Optional, Union
 
 from .model_manager import ModelNotFoundError
 
@@ -23,6 +23,48 @@ try:
     _LITERT_AVAILABLE = True
 except ImportError:
     _LITERT_AVAILABLE = False
+
+
+DEFAULT_CONTEXT_TOKENS = 20_480
+CONTEXT_TOKENS_ENV = "LITERT_LM_CONTEXT_TOKENS"
+
+
+def _resolve_context_tokens(context_tokens: Optional[int]) -> int:
+    """Resolve o contexto total sem misturá-lo ao limite de saída."""
+    if context_tokens is not None:
+        if context_tokens <= 0:
+            raise ValueError("context_tokens deve ser um inteiro positivo")
+        return context_tokens
+
+    raw_value = os.environ.get(CONTEXT_TOKENS_ENV)
+    if raw_value is None:
+        return DEFAULT_CONTEXT_TOKENS
+
+    try:
+        configured = int(raw_value)
+    except (TypeError, ValueError):
+        return DEFAULT_CONTEXT_TOKENS
+    return configured if configured > 0 else DEFAULT_CONTEXT_TOKENS
+
+
+def _create_backend(litert_module: Any, backend: str) -> Any:
+    """Cria exclusivamente o backend solicitado.
+
+    As fábricas são chamadas dentro de cada ramo, em vez de serem avaliadas
+    previamente em um mapa. Isso evita inicializar hardware não selecionado e
+    deixa ``RuntimeError`` do backend escolhido chegar ao chamador.
+    """
+    normalized = backend.lower()
+    if normalized == "cpu":
+        return litert_module.Backend.CPU()
+    if normalized == "gpu":
+        return litert_module.Backend.GPU()
+    if normalized == "npu":
+        return litert_module.Backend.NPU()
+    raise ValueError(
+        f"Backend LiteRT-LM inválido: {backend!r}. "
+        "Use 'cpu', 'gpu' ou 'npu'."
+    )
 
 
 # ── ChatSession ───────────────────────────────────────────────────────────────
@@ -53,6 +95,7 @@ class ChatSession:
         top_p: Optional[float] = None,
         seed: Optional[int] = None,
         max_tokens: Optional[int] = None,
+        context_tokens: Optional[int] = None,
         max_num_images: int = 0,
         vision_backend: Optional[str] = None,
         cache: str = "disk",
@@ -72,6 +115,8 @@ class ChatSession:
             top_p: Top-P para nucleus sampling.
             seed: Seed para reprodutibilidade.
             max_tokens: Máximo de tokens de saída.
+            context_tokens: Tamanho total do contexto do Engine. Se None,
+                usa ``LITERT_LM_CONTEXT_TOKENS`` ou 20480.
             max_num_images: Nº máx de imagens por mensagem (0 = desligado).
             vision_backend: Backend para encoder de visão ("cpu", "gpu", None=auto).
             cache: Modo de cache ("none", "memory", "disk").
@@ -88,6 +133,7 @@ class ChatSession:
         self.top_p = top_p
         self.seed = seed
         self.max_tokens = max_tokens
+        self.context_tokens = _resolve_context_tokens(context_tokens)
         self.max_num_images = max_num_images
         self.vision_backend = vision_backend
         self.cache = cache
@@ -136,49 +182,16 @@ class ChatSession:
                 seed=self.seed,
             )
 
-        # Resolve backend (com fallback para CPU se NPU não for suportado)
-        try:
-            backend_map = {
-                "cpu": litert_lm.Backend.CPU(),
-                "gpu": litert_lm.Backend.GPU(),
-                "npu": litert_lm.Backend.NPU(),
-            }
-            backend_obj = backend_map.get(self.backend.lower(), litert_lm.Backend.CPU())
-        except RuntimeError:
-            if self.backend.lower() == "npu":
-                import logging
-                logging.warning("NPU não suportado nesta plataforma. Usando CPU.")
-            backend_obj = litert_lm.Backend.CPU()
-
-        # Define contexto do Engine (total: input + output)
-        # Se o usuário não especificou max_tokens, usa 4096 (padrão LiteRT-LM)
-        engine_context = self.max_tokens if self.max_tokens is not None else 4096
-        # Garante que o contexto mínimo é 2048 (modelos pequenos podem ter menos,
-        # mas precisamos de espaço para o input)
-        if engine_context < 2048:
-            engine_context = 2048
+        # Resolve somente o backend solicitado. Falhas explícitas não são
+        # convertidas silenciosamente em CPU.
+        backend_obj = _create_backend(litert_lm, self.backend)
 
         # Resolve vision_backend
         # Se imagens foram solicitadas, ativa visão mesmo sem backend explícito
         vision_backend_obj = None
         if self.max_num_images > 0:
             vb_spec = self.vision_backend or "cpu"
-            try:
-                vb_map = {
-                    "cpu": litert_lm.Backend.CPU(),
-                    "gpu": litert_lm.Backend.GPU(),
-                    "npu": litert_lm.Backend.NPU(),
-                }
-                vision_backend_obj = vb_map.get(
-                    vb_spec.lower(), litert_lm.Backend.CPU()
-                )
-            except RuntimeError:
-                if vb_spec.lower() == "npu":
-                    import logging
-                    logging.warning(
-                        "NPU não suportado para vision_backend. Usando CPU."
-                    )
-                vision_backend_obj = litert_lm.Backend.CPU()
+            vision_backend_obj = _create_backend(litert_lm, vb_spec)
 
         # Cria Engine
         cache_dir = ""
@@ -189,7 +202,7 @@ class ChatSession:
         self._engine = litert_lm.Engine(
             self.model_path,
             backend=backend_obj,
-            max_num_tokens=engine_context,
+            max_num_tokens=self.context_tokens,
             max_num_images=self.max_num_images,
             vision_backend=vision_backend_obj,
             cache_dir=cache_dir,
@@ -329,7 +342,7 @@ class ChatSession:
         if isinstance(content_list, list):
             parts = []
             for item in content_list:
-                if isinstance(item, dict) and item.get("type") == "text":
+                if isinstance(item, Mapping) and item.get("type") == "text":
                     parts.append(item.get("text", ""))
             return "".join(parts)
         return str(content_list)

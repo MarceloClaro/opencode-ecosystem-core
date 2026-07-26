@@ -574,7 +574,7 @@ def import_model(
 
 @litert_lm_cli.command("serve")
 @click.argument("model_reference")
-@click.option("--host", default="0.0.0.0", show_default=True, help="Host.")
+@click.option("--host", default="127.0.0.1", show_default=True, help="Host.")
 @click.option("--port", default=9379, show_default=True, type=int, help="Porta.")
 @click.option("--backend", default="cpu", show_default=True,
               type=click.Choice(["cpu", "gpu", "npu"]), help="Backend.")
@@ -596,7 +596,8 @@ def serve_model(
     """Inicia servidor OpenAI-compatible com MODEL_REFERENCE."""
     skill = _create_skill(verbose=ctx.obj["verbose"])
 
-    cors_list = list(cors_origin) if cors_origin else ["*"]
+    # CORS só é habilitado quando o usuário informa uma origem explicitamente.
+    cors_list = list(cors_origin)
 
     try:
         server = skill.serve(
@@ -634,14 +635,35 @@ def serve_model(
                 self.server_ref = server
                 super().__init__(*args, **kwargs)
 
+            def _allowed_cors_origin(self) -> Optional[str]:
+                """Retorna a origem autorizada para esta requisição, se houver."""
+                origin = self.headers.get("Origin")
+                configured_origins = self.server_ref.cors_origins
+                if not origin or not configured_origins:
+                    return None
+                if "*" in configured_origins:
+                    return "*"
+                if origin in configured_origins:
+                    return origin
+                return None
+
             def _send_json(self, data, status=200):
                 self.send_response(status)
                 self.send_header("Content-Type", "application/json")
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.send_header("Access-Control-Allow-Methods",
-                                 "GET, POST, OPTIONS")
-                self.send_header("Access-Control-Allow-Headers",
-                                 "Content-Type, Authorization")
+                allowed_origin = self._allowed_cors_origin()
+                if allowed_origin is not None:
+                    self.send_header(
+                        "Access-Control-Allow-Origin", allowed_origin
+                    )
+                    if allowed_origin != "*":
+                        self.send_header("Vary", "Origin")
+                    self.send_header(
+                        "Access-Control-Allow-Methods", "GET, POST, OPTIONS"
+                    )
+                    self.send_header(
+                        "Access-Control-Allow-Headers",
+                        "Content-Type, Authorization",
+                    )
                 self.end_headers()
                 self.wfile.write(json_module.dumps(data).encode("utf-8"))
 
@@ -650,7 +672,7 @@ def serve_model(
 
             def do_GET(self):
                 if self.path == "/v1/models":
-                    models = server.list_models()
+                    models = self.server_ref.list_models()
                     self._send_json({
                         "object": "list",
                         "data": models,
@@ -670,14 +692,24 @@ def serve_model(
 
                     messages = request.get("messages", [])
                     stream = request.get("stream", False)
-                    temperature = request.get("temperature", 0.7)
-                    max_tokens = request.get("max_tokens", 4096)
+                    temperature = request.get(
+                        "temperature", self.server_ref.temperature
+                    )
+                    max_completion_tokens = request.get(
+                        "max_completion_tokens"
+                    )
+                    if max_completion_tokens is None:
+                        # Compatibilidade com clientes que ainda enviam o
+                        # campo legado da API Chat Completions.
+                        max_completion_tokens = request.get(
+                            "max_tokens", self.server_ref.max_tokens
+                        )
 
-                    response = server.chat_completion(
+                    response = self.server_ref.chat_completion(
                         messages,
                         stream=stream,
                         temperature=temperature,
-                        max_tokens=max_tokens,
+                        max_completion_tokens=max_completion_tokens,
                     )
                     self._send_json(response)
                 else:

@@ -11,9 +11,10 @@ Requisitos:
 """
 
 import importlib
-import os
+import shutil
 import subprocess
 import sys
+from importlib.util import find_spec
 from pathlib import Path
 
 import pytest
@@ -103,21 +104,42 @@ class TestPackageInstallation:
             if d in sys.path:
                 sys.path.remove(str(d))
 
-    def test_pip_build(self, pkg_name):
-        """python -m build funciona (opcional, so testa se build disponivel)."""
+    def test_pip_build(self, pkg_name, tmp_path):
+        """SPEC R212 CA10: PyPA build gera um sdist fora da árvore do pacote."""
+        # Arrange
         d = PACKAGES_DIR / pkg_name
         if not d.exists():
             pytest.skip("Package dir nao existe")
         try:
-            import build
-        except ImportError:
-            pytest.skip("build package nao instalado")
-        # So verifica se nao crasha
+            build_main_spec = find_spec("build.__main__")
+        except (ImportError, ModuleNotFoundError):
+            build_main_spec = None
+        if build_main_spec is None:
+            pytest.skip("frontend PyPA build nao instalado")
+
+        source_dir = tmp_path / pkg_name
+        output_dir = tmp_path / "dist"
+        shutil.copytree(d, source_dir)
+
+        # Act
         result = subprocess.run(
-            [sys.executable, "-m", "build", "--sdist", str(d)],
+            [
+                sys.executable,
+                "-m",
+                "build",
+                "--sdist",
+                "--no-isolation",
+                "--outdir",
+                str(output_dir),
+                str(source_dir),
+            ],
             capture_output=True, text=True, timeout=60
         )
+
+        # Assert
         assert result.returncode == 0, f"Build falhou: {result.stderr}"
+        artifacts = list(output_dir.glob("*.tar.gz"))
+        assert len(artifacts) == 1, f"Esperado um sdist, encontrados: {artifacts}"
 
 
 # ── Testes de conteudo ─────────────────────────────────────────────

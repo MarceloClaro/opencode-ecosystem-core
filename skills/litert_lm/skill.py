@@ -243,7 +243,7 @@ class LiteRTLMSkill:
     def serve(
         self,
         model_ref: str,
-        host: str = "0.0.0.0",
+        host: str = "127.0.0.1",
         port: int = 9379,
         backend: str = "cpu",
         cors_origins: Optional[List[str]] = None,

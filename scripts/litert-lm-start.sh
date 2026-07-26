@@ -1,155 +1,55 @@
-#!/bin/bash
-# ============================================================================
-# LiteRT-LM Auto-Start Script
-# ============================================================================
-# Inicia o servidor litert-lm serve em background se não estiver rodando.
-# Uso:
-#   ./scripts/litert-lm-start.sh          # Inicia (se necessário) e sai
-#   ./scripts/litert-lm-start.sh --status  # Mostra status
-#   ./scripts/litert-lm-start.sh --stop    # Para o servidor
-#   ./scripts/litert-lm-start.sh --log     # Mostra log
-#
-# Instalação como serviço (systemd --user):
-#   mkdir -p ~/.config/systemd/user/
-#   cat > ~/.config/systemd/user/litert-lm.service << 'SERVICE'
-#   [Unit]
-#   Description=LiteRT-LM Server (Gemma 4 on-device)
-#   After=network-online.target
-#
-#   [Service]
-#   Type=simple
-#   ExecStart=%h/opencode-ecosystem-core/scripts/litert-lm-start.sh
-#   Restart=on-failure
-#   RestartSec=10
-#
-#   [Install]
-#   WantedBy=default.target
-#   SERVICE
-#   systemctl --user daemon-reload
-#   systemctl --user enable --now litert-lm.service
-# ============================================================================
+#!/usr/bin/env bash
+# LiteRT-LM lifecycle compatibility wrapper — SPEC-935-R212.
+# A fonte de verdade é integrations.litert_lm_supervisor; este arquivo não
+# executa check→spawn próprio e, portanto, não pode duplicar o daemon.
 
-PORT=9379
-LOG_DIR="$HOME/.litert-lm"
-LOG_FILE="$LOG_DIR/server.log"
-PID_FILE="$LOG_DIR/server.pid"
+set -euo pipefail
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+SUPERVISOR=("$PYTHON_BIN" -m integrations.litert_lm_supervisor)
 
-mkdir -p "$LOG_DIR"
-
-# ── Detectar processo existente ────────────────────────────────────────────
-
-check_pid() {
-    if [ -f "$PID_FILE" ]; then
-        local pid=$(cat "$PID_FILE")
-        if kill -0 "$pid" 2>/dev/null; then
-            # Verifica se é realmente um processo litert-lm
-            if ps -p "$pid" -o cmd= 2>/dev/null | grep -q "litert-lm.*serve"; then
-                return 0
-            fi
-        fi
-        rm -f "$PID_FILE"
-    fi
-    
-    # Procura por processo órfão
-    local pid=$(pgrep -f "litert-lm.*serve.*--port $PORT" 2>/dev/null | head -1)
-    if [ -n "$pid" ]; then
-        echo "$pid" > "$PID_FILE"
-        return 0
-    fi
-    
-    return 1
+run_supervisor() {
+    PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}" \
+        "${SUPERVISOR[@]}" "$@"
 }
 
-check_http() {
-    curl -s -o /dev/null -w "%{http_code}" "http://localhost:$PORT/v1/models" 2>/dev/null | grep -q 200
-}
-
-# ── Comandos ───────────────────────────────────────────────────────────────
-
-case "${1:-}" in
-    --status)
-        if check_pid; then
-            echo "LiteRT-LM: RUNNING (PID $(cat $PID_FILE))"
-            if check_http; then
-                echo "  HTTP: OK (port $PORT)"
-                echo "  Models:"
-                curl -s "http://localhost:$PORT/v1/models" | python3 -m json.tool 2>/dev/null | grep '"id"' | sed 's/.*"id": "//;s/".*//' | sed 's/^/    - /'
-            else
-                echo "  HTTP: NOT RESPONDING"
-            fi
-        else
-            echo "LiteRT-LM: STOPPED"
-        fi
-        exit 0
+case "${1:-ensure}" in
+    --status|status)
+        exec env PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}" \
+            "${SUPERVISOR[@]}" status --json
         ;;
-    
-    --stop)
-        if check_pid; then
-            local pid=$(cat "$PID_FILE")
-            echo "Parando LiteRT-LM (PID $pid)..."
-            kill "$pid" 2>/dev/null
-            sleep 2
-            if kill -0 "$pid" 2>/dev/null; then
-                kill -9 "$pid" 2>/dev/null
-            fi
-            rm -f "$PID_FILE"
-            echo "OK."
-        else
-            echo "LiteRT-LM não está rodando."
-        fi
-        exit 0
+    --stop|stop)
+        exec env PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}" \
+            "${SUPERVISOR[@]}" stop --json
         ;;
-    
-    --log)
-        if [ -f "$LOG_FILE" ]; then
-            tail -50 "$LOG_FILE"
-        else
-            echo "Log file not found: $LOG_FILE"
-        fi
-        exit 0
+    --restart|restart)
+        run_supervisor stop --json
+        exec env PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}" \
+            "${SUPERVISOR[@]}" ensure --json
         ;;
-    
-    --restart)
-        "$0" --stop
-        sleep 1
-        "$0"
-        exit $?
+    --non-blocking)
+        exec env PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}" \
+            "${SUPERVISOR[@]}" ensure --non-blocking --json
+        ;;
+    --log|log)
+        if systemctl --user cat litert-lm.service >/dev/null 2>&1; then
+            exec journalctl --user -u litert-lm.service -n 50 --no-pager
+        fi
+        echo "Unit litert-lm.service não instalada; consulte o journal/processo supervisor." >&2
+        exit 1
+        ;;
+    ensure|start|"")
+        exec env PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}" \
+            "${SUPERVISOR[@]}" ensure --json
+        ;;
+    -h|--help)
+        printf '%s\n' \
+            "Uso: $0 [ensure|--non-blocking|--status|--stop|--restart|--log]"
+        ;;
+    *)
+        echo "Opção desconhecida: $1" >&2
+        exit 2
         ;;
 esac
-
-# ── Auto-start ─────────────────────────────────────────────────────────────
-
-if check_pid; then
-    echo "LiteRT-LM já está rodando (PID $(cat $PID_FILE))."
-    exit 0
-fi
-
-if check_http; then
-    # Servidor respondendo mas sem PID registrado
-    echo "LiteRT-LM está respondendo na porta $PORT (órfão)."
-    local pid=$(pgrep -f "litert-lm.*serve.*--port $PORT" 2>/dev/null | head -1)
-    echo "$pid" > "$PID_FILE"
-    exit 0
-fi
-
-echo "Iniciando LiteRT-LM na porta $PORT..."
-nohup litert-lm serve --port "$PORT" --cors-origin "*" > "$LOG_FILE" 2>&1 &
-PID=$!
-echo "$PID" > "$PID_FILE"
-
-echo "Aguardando servidor ficar pronto..."
-for i in $(seq 1 60); do
-    if check_http; then
-        echo "LiteRT-LM pronto! (PID $PID, ${i}s)"
-        echo "Log: $LOG_FILE"
-        exit 0
-    fi
-    sleep 2
-done
-
-echo "Timeout: LiteRT-LM não iniciou em 120s."
-echo "Verifique o log: $LOG_FILE"
-rm -f "$PID_FILE"
-exit 1
