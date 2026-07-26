@@ -162,3 +162,11 @@ projeto.
 - Este documento não substitui a correção do texto original quando
   viável; ver referências cruzadas adicionadas em `README.md` e
   `ARCHITECTURE.md` junto às métricas citadas.
+
+- **[Autocorreção Circuito Fechado - 2026-07-25 23:04:18]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.002s)
+
+- **[Autocorreção Circuito Fechado - 2026-07-25 23:04:24]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.002s)
+
+- **[Autocorreção Circuito Fechado - 2026-07-25 23:11:22]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-07-25 23:15:31]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.02s)

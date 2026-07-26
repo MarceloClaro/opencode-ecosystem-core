@@ -82,6 +82,14 @@ def _get_openai():
         return None, {}
 
 
+def _get_colibri():
+    try:
+        from integrations.colibri_provider import colibri_provider, MODELS as COLI_MODELS
+        return colibri_provider, COLI_MODELS
+    except ImportError:
+        return None, {}
+
+
 # ── Perfis de modelo por tipo de tarefa ──────────────────────────────────────
 
 @dataclass
@@ -107,6 +115,7 @@ DEFAULT_PROFILES: Dict[str, ModelProfile] = {
         task_type="coding",
         description="Geração, revisão e depuração de código [FREE only]",
         preferred=[
+            ("colibri", "olmoe-1b-7b"),               # Local MoE ultra-rápido
             ("litert-lm", "gemma-4-E2B-it"),        # 2.5GB, standard, eficiente
             ("litert-lm", "gemma-3-4B-it"),          # 2.5GB, coding+fast
             ("litert-lm", "qwen-3-4B-it"),           # 2.5GB, standard
@@ -116,7 +125,7 @@ DEFAULT_PROFILES: Dict[str, ModelProfile] = {
             ("litert-lm", "gemma-2-9B-it"),          # 5.5GB, standard
             ("opencode-zen", "deepseek-v3"),          # FREE Zen, API-based
         ],
-        fallback=("litert-lm", "gemma-4-E2B-it"),
+        fallback=("colibri", "olmoe-1b-7b"),
     ),
     # ── REASONING ────────────────────────────────────────────────────────────
     # phi-4 (9GB, premium, thinking) tem a melhor relação qualidade/tokens

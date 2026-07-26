@@ -99,6 +99,21 @@ graph TD
     end
     MiraAgent -.->|encarna o pipeline| Illus
 
+    %% Motor Colibri MoE & Autocorreção (R214-R221)
+    subgraph EngineMoE ["Colibri MoE & Self-Correction (R214-R221)"]
+        ColibriEngine["Colibri MoE C Engine<br>OLMoE 1B/7B int4<br>colibri/c/olmoe"]
+        ColibriProv["ColibriProvider<br>Porta 8090 · OpenAI API<br>Lazy Auto-Start"]
+        SelfCorrection["SelfCorrectionEngine<br>Diagnóstico → Correção<br>Validação RED-GREEN → CORRIGENDUM"]
+        LazyCatalog["LazyAgentCatalog<br>187+ agentes · @lru_cache"]
+        VecDrift["VectorizedGoalDriftDetector<br>N-gram L2 Cosseno"]
+        AgentEval["AgentEvalHarness<br>TSR + Tool Accuracy + Percentis"]
+        
+        ColibriProv --> ColibriEngine
+        SelfCorrection --> Ver
+        SelfCorrection --> AuditTrail
+        AgentEval --> Metrics
+    end
+
     %% Seguranca e Qualidade
     subgraph Security ["Seguranca & Qualidade"]
         MCPSec["MCP Security (R100)<br>MCPGuard<br>AuditLogger<br>ToolVetter<br>RateLimiter"]
