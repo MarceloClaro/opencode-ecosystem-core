@@ -1146,6 +1146,20 @@
         "Documentacao visual rica com fluxogramas em Mermaid em multiplos niveis de abstracao facilita a compreensao tanto para desenvolvedores quanto para leigos"
       ],
       "timestamp": 1785062210.7637496
+    },
+    {
+      "round_id": "R251",
+      "objective": "Reparo e Expansao dos Fluxogramas Mermaid e Mapa da Arquitetura Completa (SPEC-935-R237)",
+      "changes": [
+        "Criada especificacao specs/SPEC-935-R237-diagrams-and-architecture-map-repair.md",
+        "Corrigidos e integrados 4 diagramas visuais completos em Mermaid no README.md sem linhas orfas (Visao Leiga, Arquitetura Multilateral CLI/MCP, Diagrama de Sequencia SDD/TDD/Autocorrecao RED-GREEN e Mapa Geral da Arquitetura v3.6.0 com 11 subgrafos completos)",
+        "Criada suite de testes unitarios tests/test_r237_diagrams_repair.py com 100% de aprovacao (3/3 passed)"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Eliminar trechos orfaos e validar o fechamento estrito de blocos Mermaid garante que a documentacao visual seja renderizada perfeitamente em todas as plataformas"
+      ],
+      "timestamp": 1785063980.9690754
     }
   ]
 }
