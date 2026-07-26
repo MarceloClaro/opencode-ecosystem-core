@@ -78,7 +78,7 @@ def get_professor_counts() -> Dict[str, int]:
 def build_evolution_chart_data(cycles: List[Dict]) -> Dict:
     """Extrai dados de scores ao longo dos ciclos."""
     labels = [c['round_id'] for c in cycles]
-    scores = [c.get('score', 0) for c in cycles]
+    scores = [c.get('score', 0) if c.get('score') is not None else 0 for c in cycles]
     return {'labels': labels, 'scores': scores}
 
 
@@ -497,7 +497,7 @@ class DashboardGenerator:
             prof_counts_list.append(prof_counts[fid])
         
         # Metrics
-        avg_score = sum(c.get('score', 0) for c in cycles) / max(len(cycles), 1)
+        avg_score = sum(c.get('score', 0) if c.get('score') is not None else 0 for c in cycles) / max(len(cycles), 1)
         coherence = 0.43  # valor do pipeline refinado
         composite = 0.58  # valor do benchmark
         n_profs = sum(prof_counts_list) if prof_counts_list else 0
