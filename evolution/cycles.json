@@ -912,6 +912,20 @@
         "Integrar o circuito fechado de autocorrecao diretamente ao SpecVerifier e ao CORRIGENDUM.md garante rastreabilidade total sem falso positivo"
       ],
       "timestamp": 1785031480.9493747
+    },
+    {
+      "round_id": "R235",
+      "objective": "Unificacao do ResearchHub e Integracao com Blackboard/MetaBus (SPEC-935-R222)",
+      "changes": [
+        "Criada especificacao specs/SPEC-935-R222-research-hub-integration.md",
+        "Implementado research/hub_router_bridge.py conectando ResearchHub ao Blackboard A2A e MetaBus",
+        "Criada suite de testes unitarios tests/test_r222_research_hub_integration.py com 100% de aprovacao (3/3 passed)"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Integrar o ResearchHub ao Blackboard A2A elimina ilhas de dados e disponibiliza automaticamente achados academicos para todos os 187 agentes do catalogo"
+      ],
+      "timestamp": 1785032848.2300887
     }
   ]
 }
