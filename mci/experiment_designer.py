@@ -139,6 +139,27 @@ def design_experiment(
         _suggest_confounders(domain, claim.get("hypothesis", ""))
     )
 
+    # Pré-registro (SPEC-935-R372): corrige bug de overclaim onde
+    # "pre_registered" tinha default True sem qualquer verificação. Agora
+    # só é True quando um protocolo real (mci.preregistration_protocol)
+    # foi registrado ANTES da análise e verificado como honrado.
+    registered_protocol = context.get("registered_protocol")
+    protocol_verification = None
+    if registered_protocol is not None and all(
+        k in context for k in ("actual_hypothesis", "actual_method", "actual_alpha")
+    ):
+        from mci.preregistration_protocol import verify_protocol
+
+        protocol_verification = verify_protocol(
+            registered_protocol,
+            actual_hypothesis=context["actual_hypothesis"],
+            actual_method=context["actual_method"],
+            actual_alpha=context["actual_alpha"],
+        )
+        pre_registered = protocol_verification["honored"]
+    else:
+        pre_registered = False
+
     # Enriquece o desenho
     design.update({
         "n_arms": n_arms,
@@ -150,7 +171,7 @@ def design_experiment(
         "confounders_controlled": confounders,
         "randomization_unit": context.get("randomization_unit", "individual"),
         "blinding": context.get("blinding", "double_blind"),
-        "pre_registered": context.get("pre_registered", True),
+        "pre_registered": pre_registered,
         "analysis_plan": context.get("analysis_plan", [
             "Descriptive statistics (média, desvio padrão, distribuição)",
             "Primary analysis: teste estatístico principal",
@@ -158,8 +179,19 @@ def design_experiment(
             "Subgroup analysis: análise de subgrupos (se aplicável)",
         ]),
     })
+    if protocol_verification is not None:
+        design["protocol_verification"] = protocol_verification
 
     claim["experimental_design"] = design
+
+    if not pre_registered:
+        claim.setdefault("limitations", []).append(
+            "Pré-registro não declarado; nenhum protocolo formal foi "
+            "verificado antes da análise."
+            if registered_protocol is None else
+            "Protocolo pré-registrado apresentou desvio na verificação "
+            "(ver protocol_verification)."
+        )
 
     # Limitações atualizadas
     if "power" not in str(claim.get("limitations", "")):

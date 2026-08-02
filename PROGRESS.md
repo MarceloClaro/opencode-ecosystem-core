@@ -5,7 +5,20 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R371** (triangulação multidisciplinar)
+- **Branch:** `main` · última entrega: **R372** (protocolo de pré-registro + correção de bug real)
+- **R372 (2026-08-02):** BUG REAL CORRIGIDO em `mci/experiment_designer.py`:
+  `"pre_registered": context.get("pre_registered", True)` dava o selo de graça
+  sem verificação alguma — confirmado reproduzindo o bug antes de corrigir.
+  `mci/preregistration_protocol.py` novo: `register_protocol`/`verify_protocol`
+  (comparação textual exata, protege contra HARKing). `pre_registered` agora
+  `False` por padrão; só `True` com protocolo registrado E honrado. Gate real
+  no R103 (`verify_preregistered_claim`, mesmo padrão de R370/R371). 17 testes
+  TDD verdes; 193 testes de regressão verdes; 2473 testes coletados sem erro
+  em toda a suíte (checagem rápida de import-time em todo o repo).
+  **Com R370+R371+R372, a trinca "estatística severa + validação cruzada +
+  contraprovas + multidisciplinar + pré-registro" está completa na camada de
+  infraestrutura/gate.** Doctor: 9/12 pass, 3 warn (ambiente: loop_specs vazio,
+  scihub-cli ausente, litert-lm daemon parado — nenhum é bug de código).
 - **R371 (2026-08-02):** `mci/multidisciplinary_triangulation.py` — segunda metade
   do pedido "estatística severa + cruzar informações multidisciplinares" fechado.
   `triangulated=True` só com >=2 domínios independentes concordantes E zero
