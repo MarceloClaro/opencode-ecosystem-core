@@ -6,18 +6,18 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.6.0_Colibri_MoE-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-370%2B_passed-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-60_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Versão](https://img.shields.io/badge/Versão-3.7.0_Episteme_%2B_Cultural_Guards-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-2.417_coletados-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-186_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
-[![Agentes](https://img.shields.io/badge/Agentes-187+-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-33-dodgerblue.svg)](specs/)
+[![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
+[![Specs](https://img.shields.io/badge/Specs-217-dodgerblue.svg)](specs/)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 187+ agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (8 Scanners)**, 6 Servidores MCP e 60 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 205 agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (scanners epistemológicos)**, 6 Servidores MCP, **Camada Epistêmica de Roteamento** e **Guardas de Tradução Cultural** (R363–R369), e 186 ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
@@ -30,7 +30,7 @@
 > *"A verdadeira ciência não nasce do acerto fortuito, mas da capacidade inabalável de colocar hipóteses à prova, autocorrigir falhas em circuito fechado e provar a integridade de cada linha de código com rigor imutável."*
 
 ### Act I — A Ilha de Agentes e a Busca pela Governança
-No início, o mundo dos agentes autônomos era fragmentado. Dezenas de agentes atuavam de forma isolada, gerando código e pesquisas sem alinhamento epistemológico ou garantias de reprodutibilidade. O desafio era monumental: **Como construir um ecossistema inteligente em que 187+ agentes trabalhem em harmonia, com governança metacognitiva e custo zero de tokens locais?**
+No início, o mundo dos agentes autônomos era fragmentado. Dezenas de agentes atuavam de forma isolada, gerando código e pesquisas sem alinhamento epistemológico ou garantias de reprodutibilidade. O desafio era monumental: **Como construir um ecossistema inteligente em que 205 agentes trabalhem em harmonia, com governança metacognitiva e custo zero de tokens locais?**
 
 ### Act II — A Emergência do Orquestrador MarceloClaro e do Colibri MoE
 Dessa necessidade nasceu o orquestrador primário **`MarceloClaroOrchestrator`** e o motor de inferência local **Colibri Engine** (baseado em OLMoE 1B/7B em C nativo com otimização CIL e Lazy Auto-Start na porta 8090). O ecossistema passou a operar com autonomia local, reduzindo a dependência de APIs externas e realizando roteamento inteligente de modelos via `ModelRouter`.
@@ -43,6 +43,11 @@ Para garantir que a integridade do ecossistema não fosse apenas declarativa, ma
 
 ### Act V — A Fronteira Universal: 6 Servidores MCP
 Hoje, o OpenCode Ecosystem Core é uma fortaleza de rigor acadêmico e tecnológico, totalmente interoperável através de **6 Servidores MCP** (`litert-lm`, `metacognitive-interconnect`, `antigravity-bridge`, `pypi-search`, `colibri-mcp` e `scanners-mcp`). Ele se conecta ao Claude Code, Antigravity CLI, VS Code e terminais remotos, servindo como uma verdadeira **Universidade de Pesquisa Autônoma e Auditável** rodando localmente na sua máquina.
+
+> Os 6 servidores estão registrados em `opencode.json` (chave `mcp`) com esses nomes exatos — verificável com `python3 -c "import json; print(list(json.load(open('opencode.json'))['mcp']))"`.
+
+### Act VI — A Camada Epistêmica e os Guardas de Tradução Cultural (R363–R369)
+A última fronteira foi ensinar o roteamento a reconhecer **o tipo de conhecimento** por trás de cada tarefa — 6 regimes epistemológicos que dão peso brando ao match agente↔tarefa sem nunca excluir um candidato — e a **vigiar honestamente** a internacionalização editorial: um grafo terminológico que só humanos aprovam, um guardião da voz autoral, um verificador de retrotradução e um benchmark medido em corpus interno (nunca uma meta anunciada). Nasceu também a ponte entre os motores de raciocínio e a produção de artigos e obras literárias: toda alegação de "inédito" ou "inovador" agora exige ancoradouro de comparação na mesma frase — novidade se argumenta, não se decreta.
 
 ---
 
@@ -615,7 +620,7 @@ validação externa do conteúdo científico.
 | **Segurança & Qualidade** | Proteção MCP (guard/audit/vetter/limiter), CI/CD (GitHub Actions + quality gates), skills exportáveis e pacotes pip. |
 | **Protocolos de Integração** | Interfaces de comunicação: MCP Server (stdio JSON-RPC) e API Gateway (FastAPI REST). 5 servidores MCP ativos (Core, LiteRT-LM, Colibri/OLMoE, PyPI, Synthetic University). |
 | **Metacognitive Interconnect** | Barramento neural central. MetaBus (pub/sub global), Blackboard (protocolo A2A), memória metacognitiva e middleware de reflexão. |
-| **Catálogo de Agentes** | 187+ agentes especializados que se registram no Blackboard e competem por tarefas via Call for Proposals. |
+| **Catálogo de Agentes** | 205 agentes especializados que se registram no Blackboard e competem por tarefas via Call for Proposals. |
 | **LLM Reduction Layer** | 6 componentes determinísticos (Whoosh3Engine, RuleBasedRouter, LocalClassifier, GameTheoryLocal, Jinja2Engine, DataKnowledgeHub) que substituem LLM em tarefas com confiança ≥ 0.85. |
 | **Observabilidade** | MetricsCollector com servidor HTTP (/health, /metrics), integrado ao Doctor como check llm_reduction_metrics. |
 
@@ -1572,7 +1577,9 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>65 ciclos evolutivos · 1062 testes · 0 regressoes · Score medio 9.4/10</i><br>
-  <b>v3.0.0 — Pipeline Academico Agentivo | MCP Security | CI/CD Quality Gates</b><br>
+  <i>186 ciclos evolutivos (R1–R369) · 2.417 testes coletados · 205 agentes · 217 specs formais</i><br>
+  <b>v3.7.0 — Pipeline Acadêmico Agentivo | Camada Epistêmica | Guardas de Tradução Cultural | MCP Security | CI/CD</b><br>
+  <sub>Números medidos em 2026-08-02 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
+  contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>
