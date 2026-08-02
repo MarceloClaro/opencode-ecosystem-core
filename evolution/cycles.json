@@ -3259,6 +3259,22 @@
         "Verificar números nas duas direções (perdidos E surgidos) captura fabricação na retrotradução, não só omissão"
       ],
       "timestamp": "2026-08-02T09:22:34.455383+00:00"
+    },
+    {
+      "round_id": "R367",
+      "objective": "SPEC-935-R367 — benchmark cultural medido: substituir a meta não medida de 'consistência ≥98%' do plano OpenCode Books Global por medição real em corpus interno rotulado",
+      "changes": [
+        "validacao_externa/cultural_episteme/benchmark_corpus_r367.json: 18 casos rotulados (6 por módulo), com 4 negativos e 2 limitações conhecidas deliberadas",
+        "scripts/benchmark_r367_cultural.py: runner determinístico sobre os módulos reais R364/R365/R366; precisão/recall/F1 por código + micro",
+        "Resultado medido nesta data: precisão micro 1.00, recall micro 0.86 — os dois casos de limitação conhecida (plural flexionado e intensidade coloquial fora do perfil) aparecem como falsos negativos",
+        "Relatórios versionados (json+md) com disclaimer obrigatório: corpus interno, sem validação externa, sem promessa de desempenho",
+        "tests/test_r367_cultural_benchmark.py: 10 testes, incluindo verificação de que recall<1.0 e de que o relatório versionado corresponde ao código atual"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Incluir casos que as regras sabidamente não detectam transforma o benchmark de vitrine em instrumento: recall 0.86 é um número defensável comercialmente; 98% inventado não é"
+      ],
+      "timestamp": "2026-08-02T09:26:58.525428+00:00"
     }
   ]
 }

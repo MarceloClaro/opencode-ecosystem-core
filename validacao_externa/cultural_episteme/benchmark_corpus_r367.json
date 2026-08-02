@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0.0",
+  "claim": "internal-fixture-benchmark",
+  "description": "Corpus interno rotulado para medir os guardas de tradução R364/R365/R366. Inclui casos de limitação conhecida para que o recall reflita a realidade das regras.",
+  "cases": [
+    {
+      "case_id": "T1-forbidden-translation",
+      "module": "terminology",
+      "input": {
+        "source_text": "O retirante caminhou.",
+        "translated_text": "The migrant walked.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["TERM_CONFLICT"]
+    },
+    {
+      "case_id": "T2-preserve-missing",
+      "module": "terminology",
+      "input": {
+        "source_text": "O retirante caminhou.",
+        "translated_text": "The traveler walked on.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["TERM_CONFLICT"]
+    },
+    {
+      "case_id": "T3-symbol-drift",
+      "module": "terminology",
+      "input": {
+        "source_text": "O olho na parede vigiava.",
+        "translated_text": "The gaze on the wall watched.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["SYMBOL_DRIFT"]
+    },
+    {
+      "case_id": "T4-clean-consistent",
+      "module": "terminology",
+      "input": {
+        "source_text": "O retirante viu o olho.",
+        "translated_text": "The retirante saw the eye.",
+        "target_language": "en-US"
+      },
+      "expected_codes": []
+    },
+    {
+      "case_id": "T5-inflected-plural-miss",
+      "module": "terminology",
+      "input": {
+        "source_text": "Os retirantes caminharam.",
+        "translated_text": "The migrants walked.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["TERM_CONFLICT"],
+      "known_limitation": true,
+      "note": "Flexão plural escapa ao casamento por fronteira de palavra; a regra atual não detecta."
+    },
+    {
+      "case_id": "T6-no-terms-negative",
+      "module": "terminology",
+      "input": {
+        "source_text": "A noite caiu sobre a estrada.",
+        "translated_text": "Night fell over the road.",
+        "target_language": "en-US"
+      },
+      "expected_codes": []
+    },
+    {
+      "case_id": "V1-preserve-erased",
+      "module": "voice",
+      "input": {
+        "source_text": "O retirante chegou cansado.",
+        "translated_text": "The migrant arrived tired.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["VOICE_SHIFT"]
+    },
+    {
+      "case_id": "V2-forbidden-modernism",
+      "module": "voice",
+      "input": {
+        "source_text": "Ele anotou tudo no caderno.",
+        "translated_text": "He noted everything, feeling the stress.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["ANACHRONISM"]
+    },
+    {
+      "case_id": "V3-pragmatic-flattening",
+      "module": "voice",
+      "input": {
+        "source_text": "Você vai voltar?! Não vá...",
+        "translated_text": "You will come back. Do not go.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["REGISTER_SHIFT"]
+    },
+    {
+      "case_id": "V4-faithful-segment",
+      "module": "voice",
+      "input": {
+        "source_text": "O retirante foi aos Currais do Governo.",
+        "translated_text": "The retirante went to the Government Corrals.",
+        "target_language": "en-US"
+      },
+      "expected_codes": []
+    },
+    {
+      "case_id": "V5-adapt-unapproved",
+      "module": "voice",
+      "input": {
+        "source_text": "Levaram todos aos Currais do Governo.",
+        "translated_text": "They took everyone to the state pens.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["VOICE_SHIFT"]
+    },
+    {
+      "case_id": "V6-colloquial-intensity-miss",
+      "module": "voice",
+      "input": {
+        "source_text": "A fome era danada de braba.",
+        "translated_text": "The hunger was quite severe.",
+        "target_language": "en-US"
+      },
+      "expected_codes": ["VOICE_SHIFT"],
+      "known_limitation": true,
+      "note": "Intensidade coloquial ('danada de braba') não está no perfil de marcadores; a regra atual não detecta o achatamento."
+    },
+    {
+      "case_id": "B1-number-lost",
+      "module": "backtranslation",
+      "input": {
+        "source_text": "Em 1915, Joaquim viu a vala. Não esqueceu nunca.",
+        "back_translated_text": "Joaquim viu a vala. Não esqueceu nunca."
+      },
+      "expected_codes": ["CULTURAL_LOSS"]
+    },
+    {
+      "case_id": "B2-entity-lost",
+      "module": "backtranslation",
+      "input": {
+        "source_text": "Em 1915, Joaquim viu a vala. Não esqueceu nunca.",
+        "back_translated_text": "Em 1915, o menino viu a vala. Não esqueceu nunca."
+      },
+      "expected_codes": ["CULTURAL_LOSS"]
+    },
+    {
+      "case_id": "B3-negation-flip",
+      "module": "backtranslation",
+      "input": {
+        "source_text": "Em 1915, Joaquim viu a vala. Não esqueceu nunca.",
+        "back_translated_text": "Em 1915, Joaquim viu a vala. Esqueceu depois."
+      },
+      "expected_codes": ["PRAGMATIC_FAILURE"]
+    },
+    {
+      "case_id": "B4-pragmatic-marks",
+      "module": "backtranslation",
+      "input": {
+        "source_text": "Você viu?! Não vá...",
+        "back_translated_text": "Você viu. Não vá."
+      },
+      "expected_codes": ["PRAGMATIC_FAILURE"]
+    },
+    {
+      "case_id": "B5-preserved-term-lost",
+      "module": "backtranslation",
+      "input": {
+        "source_text": "O retirante não parou em 1915.",
+        "back_translated_text": "O migrante não parou em 1915."
+      },
+      "expected_codes": ["TERM_CONFLICT"]
+    },
+    {
+      "case_id": "B6-clean-cycle",
+      "module": "backtranslation",
+      "input": {
+        "source_text": "Em 1915, Joaquim viu a vala. Não esqueceu nunca.",
+        "back_translated_text": "Em 1915, Joaquim viu a vala. Não esqueceu nunca."
+      },
+      "expected_codes": []
+    }
+  ]
+}
