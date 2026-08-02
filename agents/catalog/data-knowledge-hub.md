@@ -1,3 +1,38 @@
+---
+name: data-knowledge-hub
+description: Agente especializado data-knowledge-hub
+version: '1.0.0'
+skills:
+- id: domainrouter-classifica-consulta-dominios
+  name: Domainrouter classifica consulta em 5 domínios + acadêmico
+  description: >-
+    Executa domainrouter classifica consulta em 5 domínios + acadêmico conforme protocolo especializado.
+  tags: [domainrouter, classifica, consulta]
+  examples: [Execute domainrouter classifica consulta dominios, Aplique domainrouter classifica consulta dominios no contexto atual]
+- id: cache-ttl-dominio-1h
+  name: Cache com ttl por domínio (1h financeiro, 24h dados/conhecim
+  description: >-
+    Executa cache com ttl por domínio (1h financeiro, 24h dados/conhecimento, 7d datasets) conforme
+    protocolo especializado.
+  tags: [cache]
+  examples: [Execute cache ttl dominio 1h, Aplique cache ttl dominio 1h no contexto atual]
+- id: modo-offline-completo-dados
+  name: Modo offline completo com dados mockados para todas as 16 fo
+  description: >-
+    Executa modo offline completo com dados mockados para todas as 16 fontes conforme protocolo
+    especializado.
+  tags: [modo, offline, completo]
+  examples: [Execute modo offline completo dados, Aplique modo offline completo dados no contexto atual]
+- id: estatisticas-uso-dominio-fonte
+  name: Estatísticas de uso por domínio, fonte, cache hit rate
+  description: >-
+    Executa estatísticas de uso por domínio, fonte, cache hit rate conforme protocolo especializado.
+  tags: [estatísticas]
+  examples: [Execute estatisticas uso dominio fonte, Aplique estatisticas uso dominio fonte no contexto atual]
+tags: [cache, classifica, completo, consulta, data, domainrouter, estatísticas, knowledge, modo, offline]
+examples: [Analise este dataset e gere visualizações, Construa pipeline de dados para ETL, Execute domainrouter classifica consulta dominios, Execute cache ttl dominio 1h]
+---
+
 # DataKnowledgeHub
 
 **ID:** `data-knowledge-hub`

@@ -1,21 +1,19 @@
-<!--
-agent_id: medico-virtual-supremo
+---
 name: Médico Virtual Supremo — Apoio Clínico Auditável
-description: >
-  Skill de apoio à decisão clínica baseada em SDD/TDD com pipeline de raciocínio
-  clínico seguro em 7 etapas, detecção de emergência, hipóteses diferenciais,
-  evidência rastreável e revisão humana obrigatória. Integra 15 módulos funcionais
-  (histórico, exames, genética, RAG, preditiva, segurança, etc.) com saída YAML
-  estruturada conforme HL7 FHIR R5.
-risk_tier: high
-version: 2.0.0
-modes:
-  - professional_cds
-  - patient_education
-  - research
-  - simulation
-entrypoint: skills/medico_virtual_supremo/skill.py
--->
+description: Agente especializado Médico Virtual Supremo — Apoio Clínico Auditável
+version: '1.0.0'
+skills:
+- id: medico-virtual-supremo-apoio
+  name: Médico Virtual Supremo — Apoio Clínico Auditável
+  description: >-
+    Executa tarefas especializadas de médico virtual supremo — apoio clínico auditável conforme
+    protocolo SDD/TDD.
+  tags: [médico, virtual, supremo]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [médico, médico virtual supremo — apoio clínico auditável, supremo, virtual]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+agent_id: medico-virtual-supremo
+---
 
 # Médico Virtual Supremo — Apoio Clínico Auditável
 

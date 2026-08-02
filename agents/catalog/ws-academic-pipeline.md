@@ -7,7 +7,23 @@
 
 ---
 name: ws-academic-pipeline
-description: Pipeline acadêmico LaTeX — compilação, fichamentos, cotejo, status e registro de aprendizado
+description: >-
+  Pipeline acadêmico LaTeX — compilação, fichamentos, cotejo, status e registro de aprendizado
+version: '1.0.0'
+skills:
+- id: pipeline-academico-latex-compilacao
+  name: Pipeline acadêmico latex — compilação, fichamentos, cotejo, status
+  description: >-
+    Capacidade especializada em pipeline acadêmico latex — compilação, fichamentos, cotejo, status
+  tags: [pipeline, acadêmico, latex, compilação]
+  examples: [Aplique pipeline academico latex compilacao neste contexto, Avalie usando pipeline academico latex compilacao]
+- id: registro-aprendizado
+  name: Registro de aprendizado
+  description: Capacidade especializada em registro de aprendizado
+  tags: [registro, aprendizado]
+  examples: [Aplique registro aprendizado neste contexto, Avalie usando registro aprendizado]
+tags: [acad, academic, acadêmico, aprendizado, compila, compilação, cotejo, fichamentos, latex, mico]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Aplique pipeline academico latex compilacao neste contexto, Aplique registro aprendizado neste contexto]
 mode: subagent
 tools:
   read: true

@@ -7,7 +7,28 @@
 
 ---
 name: reversa-scout
-description: Mapeia a superfície do projeto legado — estrutura de pastas, linguagens, frameworks, dependências e entry points. Use no início de uma análise de engenharia reversa para criar o inventário inicial do projeto.
+description: >-
+  Mapeia a superfície do projeto legado — estrutura de pastas, linguagens, frameworks, dependências e
+  entry points. Use no início de uma análise de engenharia reversa para criar o inventário inicial do
+  projeto.
+version: '1.0.0'
+skills:
+- id: mapeia-superficie-projeto-legado
+  name: Mapeia a superfície do projeto legado — estrutura de pastas, linguagen
+  description: >-
+    Capacidade especializada em mapeia a superfície do projeto legado — estrutura de pastas, linguagens,
+    framewo.
+  tags: [mapeia, superfície, projeto, legado]
+  examples: [Aplique mapeia superficie projeto legado neste contexto, Avalie usando mapeia superficie projeto legado]
+- id: use-no-inicio-analise
+  name: Use no início de uma análise de engenharia reversa para criar o invent
+  description: >-
+    Capacidade especializada em use no início de uma análise de engenharia reversa para criar o
+    inventário inici.
+  tags: [início, análise, engenharia, reversa]
+  examples: [Aplique use no inicio analise neste contexto, Avalie usando use no inicio analise]
+tags: [análise, criar, depend, engenharia, entry, estrutura, frameworks, inicial, invent, início]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique mapeia superficie projeto legado neste contexto, Aplique use no inicio analise neste contexto]
 mode: subagent
 tools:
   read: true

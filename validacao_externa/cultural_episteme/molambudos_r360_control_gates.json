@@ -1,0 +1,329 @@
+{
+  "spec_id": "SPEC-935-R360",
+  "generated_at": "2026-08-01",
+  "external_validation": false,
+  "sdd_gate": {
+    "spec_id": "SPEC-935-R360",
+    "verified": true,
+    "status": "green",
+    "criteria_results": [
+      {
+        "criterion_id": "SPEC-935-R360-AC1",
+        "description": "Doze pareceres runtime",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R360-AC2",
+        "description": "Contratos runtime revalidados",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R360-AC3",
+        "description": "Release permanece bloqueado",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R360-AC4",
+        "description": "Nenhuma edição automática",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R360-AC5",
+        "description": "Sem validação externa alegada",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R360-AC6",
+        "description": "Deltas permanecem propostos",
+        "passed": true
+      }
+    ],
+    "passed_count": 6,
+    "total_count": 6
+  },
+  "behavioral_gate": {
+    "action_id": "r360_finalize_internal_dossier",
+    "allowed": true,
+    "trust_score": 0.5,
+    "threshold": 0.4,
+    "reason": "Trust 50% moderate. Allowed (threshold=40%) [SHADOW MODE: limited trust]",
+    "risk_level": "moderate"
+  },
+  "trust_outcome": {
+    "action_id": "r360_finalize_internal_dossier",
+    "success": true,
+    "delta": 0.1,
+    "timestamp": "2026-08-01T17:23:44.210964+00:00",
+    "trust_before": 0.5,
+    "trust_after": 0.5
+  },
+  "trust_status": {
+    "gate_health": {
+      "threshold": 0.25,
+      "total_decisions": 1,
+      "block_rate": 0.0,
+      "safe_actions": 0,
+      "blocked_actions": 0
+    },
+    "memory_stats": {
+      "sensory": 1,
+      "total": 1
+    },
+    "recent_success_rate": 1.0,
+    "total_improvement": 0.1,
+    "trusted_actions": [
+      [
+        "r360_finalize_internal_dossier",
+        0.5
+      ]
+    ],
+    "low_trust_actions": []
+  },
+  "token_economy": {
+    "slash_rate": 0.5,
+    "failures": [
+      {
+        "task_id": "r360-generator-import-path",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-93eed8c5",
+            "agent_id": "marceloclaro",
+            "task_id": "r360-generator-import-path",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785605024.211327,
+            "resolved_at": 1785605024.2113483
+          }
+        ]
+      },
+      {
+        "task_id": "r360-generator-concern-arity",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-6fc7550c",
+            "agent_id": "marceloclaro",
+            "task_id": "r360-generator-concern-arity",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785605024.2113955,
+            "resolved_at": 1785605024.2114093
+          }
+        ]
+      },
+      {
+        "task_id": "ses_041c58ee0ffe1rdzZRje394SWa-invalid-delta",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-375b0c33",
+            "agent_id": "cultural-episteme-agent",
+            "task_id": "ses_041c58ee0ffe1rdzZRje394SWa-invalid-delta",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785605024.2114403,
+            "resolved_at": 1785605024.211448
+          }
+        ]
+      },
+      {
+        "task_id": "ses_041c58d74ffeRVhN4opcWtY3bh-invalid-delta",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-79cb9d95",
+            "agent_id": "cultural-episteme-agent",
+            "task_id": "ses_041c58d74ffeRVhN4opcWtY3bh-invalid-delta",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785605024.2114708,
+            "resolved_at": 1785605024.2114775
+          }
+        ]
+      }
+    ],
+    "successes": [
+      {
+        "task_id": "ses_041c58ee0ffe1rdzZRje394SWa-corrected",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-29479823",
+            "agent_id": "cultural-episteme-agent",
+            "task_id": "ses_041c58ee0ffe1rdzZRje394SWa-corrected",
+            "amount": 1.0,
+            "status": "released",
+            "created_at": 1785605024.2114964,
+            "resolved_at": 1785605024.211507
+          }
+        ]
+      },
+      {
+        "task_id": "ses_041c58d74ffeRVhN4opcWtY3bh-corrected",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-390c03da",
+            "agent_id": "cultural-episteme-agent",
+            "task_id": "ses_041c58d74ffeRVhN4opcWtY3bh-corrected",
+            "amount": 1.0,
+            "status": "released",
+            "created_at": 1785605024.2115269,
+            "resolved_at": 1785605024.211536
+          }
+        ]
+      },
+      {
+        "task_id": "SPEC-935-R360-final-gates",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-5b3cdff2",
+            "agent_id": "marceloclaro",
+            "task_id": "SPEC-935-R360-final-gates",
+            "amount": 2.0,
+            "status": "released",
+            "created_at": 1785605024.211553,
+            "resolved_at": 1785605024.2115586
+          }
+        ]
+      }
+    ],
+    "report": {
+      "balances": {
+        "cultural-episteme-agent": 99.4,
+        "marceloclaro": 99.4
+      },
+      "total_locked": 0,
+      "open_tasks": 0,
+      "transactions": 16,
+      "stakes": {
+        "locked": 0,
+        "released": 3,
+        "slashed": 4
+      }
+    },
+    "balances": {
+      "marceloclaro": 99.4,
+      "cultural-episteme-agent": 99.4
+    },
+    "audit_trail": [
+      {
+        "kind": "genesis",
+        "subject": "marceloclaro",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785605024.2112794
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r360-generator-import-path",
+        "timestamp": 1785605024.211288
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r360-generator-import-path)",
+        "timestamp": 1785605024.2113466
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r360-generator-concern-arity",
+        "timestamp": 1785605024.2113793
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r360-generator-concern-arity)",
+        "timestamp": 1785605024.2114077
+      },
+      {
+        "kind": "genesis",
+        "subject": "cultural-episteme-agent",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785605024.2114272
+      },
+      {
+        "kind": "debit",
+        "subject": "cultural-episteme-agent",
+        "amount": 1.0,
+        "reason": "stake para ses_041c58ee0ffe1rdzZRje394SWa-invalid-delta",
+        "timestamp": 1785605024.2114298
+      },
+      {
+        "kind": "credit",
+        "subject": "cultural-episteme-agent",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (ses_041c58ee0ffe1rdzZRje394SWa-invalid-delta)",
+        "timestamp": 1785605024.211447
+      },
+      {
+        "kind": "debit",
+        "subject": "cultural-episteme-agent",
+        "amount": 1.0,
+        "reason": "stake para ses_041c58d74ffeRVhN4opcWtY3bh-invalid-delta",
+        "timestamp": 1785605024.2114604
+      },
+      {
+        "kind": "credit",
+        "subject": "cultural-episteme-agent",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (ses_041c58d74ffeRVhN4opcWtY3bh-invalid-delta)",
+        "timestamp": 1785605024.2114768
+      },
+      {
+        "kind": "debit",
+        "subject": "cultural-episteme-agent",
+        "amount": 1.0,
+        "reason": "stake para ses_041c58ee0ffe1rdzZRje394SWa-corrected",
+        "timestamp": 1785605024.2114894
+      },
+      {
+        "kind": "credit",
+        "subject": "cultural-episteme-agent",
+        "amount": 1.2,
+        "reason": "stake liberado + recompensa (ses_041c58ee0ffe1rdzZRje394SWa-corrected)",
+        "timestamp": 1785605024.2115057
+      },
+      {
+        "kind": "debit",
+        "subject": "cultural-episteme-agent",
+        "amount": 1.0,
+        "reason": "stake para ses_041c58d74ffeRVhN4opcWtY3bh-corrected",
+        "timestamp": 1785605024.2115195
+      },
+      {
+        "kind": "credit",
+        "subject": "cultural-episteme-agent",
+        "amount": 1.2,
+        "reason": "stake liberado + recompensa (ses_041c58d74ffeRVhN4opcWtY3bh-corrected)",
+        "timestamp": 1785605024.2115343
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 2.0,
+        "reason": "stake para SPEC-935-R360-final-gates",
+        "timestamp": 1785605024.211547
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 2.4,
+        "reason": "stake liberado + recompensa (SPEC-935-R360-final-gates)",
+        "timestamp": 1785605024.2115579
+      }
+    ]
+  },
+  "release_gate": "blocked",
+  "human_review_required": true,
+  "safe_claim": "Os gates internos de processo passaram após slashing das falhas recuperáveis; isso não valida equivalência cultural, história ou qualidade literária."
+}

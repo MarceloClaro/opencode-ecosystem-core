@@ -1,8 +1,18 @@
 ---
 name: 22_agente_ml_dl_datamining
+description: Agente especializado 22_agente_ml_dl_datamining
+version: '1.0.0'
+skills:
+- id: 22-agente-ml-dl
+  name: 22 Agente Ml Dl Datamining
+  description: >-
+    Executa tarefas especializadas de 22 agente ml dl datamining conforme protocolo SDD/TDD.
+  tags: [22, agente, ml]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, datamining, maswos-agent]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\22_agente_ml_dl_datamining.md
 ---
 
 # 22 Agente Ml Dl Datamining

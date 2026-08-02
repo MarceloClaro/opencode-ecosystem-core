@@ -7,7 +7,29 @@
 
 ---
 name: codebase-pattern-finder
-description: codebase-pattern-finder is a useful subagent_type for finding similar implementations, usage examples, or existing patterns that can be modeled after. It will give you concrete code examples based on what you're looking for! It's sorta like codebase-locator, but it will not only tell you the location of files, it will also give you code details!
+description: >-
+  codebase-pattern-finder is a useful subagent_type for finding similar implementations, usage
+  examples, or existing patterns that can be modeled after. It will give you concrete code examples
+  based on what you're looking for! It's sorta like codebase-locator, but it will not only tell you
+  the location of files, it will also give you code details!
+version: '1.0.0'
+skills:
+- id: codebase-pattern-finder-is
+  name: Codebase-pattern-finder is a useful subagent_type for finding similar
+  description: >-
+    Capacidade especializada em codebase-pattern-finder is a useful subagent_type for finding similar
+    implementa.
+  tags: [codebase-pattern-finder, useful, subagent_type, finding]
+  examples: [Aplique codebase pattern finder is neste contexto, Avalie usando codebase pattern finder is]
+- id: it-will-give-you
+  name: It will give you concrete code examples based on what you're looking f
+  description: >-
+    Capacidade especializada em it will give you concrete code examples based on what you're looking
+    for! it's s.
+  tags: [will, give, concrete, code]
+  examples: [Aplique it will give you neste contexto, Avalie usando it will give you]
+tags: [after, also, based, code, codebase, codebase-locator, codebase-pattern-finder, concrete, details, examples]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique codebase pattern finder is neste contexto, Aplique it will give you neste contexto]
 mode: subagent
 temperature: 0.1
 tools:

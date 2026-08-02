@@ -166,6 +166,41 @@ def _frontmatter_policy_sections(path: str) -> Dict[str, Any]:
     return sections
 
 
+def _frontmatter_scalars(path: str) -> Dict[str, Any]:
+    """Lê escalares simples do frontmatter para campos OpenCode opcionais.
+
+    Mantém o parser sem dependência YAML e ignora seções aninhadas como
+    ``tools``/``permission`` para não confundir chaves internas com campos de
+    agente. Usado para propagar, por exemplo, ``model: openai/gpt-4.1`` de
+    agentes autorais do catálogo para o ``opencode.json`` gerado.
+    """
+    try:
+        with open(path, "r", encoding="utf-8") as source:
+            content = _strip_leading_html_comment(source.read())
+    except OSError:
+        return {}
+
+    match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
+    if match is None:
+        return {}
+
+    scalars: Dict[str, Any] = {}
+    for raw_line in match.group(1).splitlines():
+        if not raw_line.strip() or raw_line.lstrip().startswith("#"):
+            continue
+        indentation = len(raw_line) - len(raw_line.lstrip(" "))
+        if indentation != 0:
+            continue
+        entry = _split_yaml_entry(raw_line.strip())
+        if entry is None:
+            continue
+        raw_key, raw_value = entry
+        if not raw_value.strip():
+            continue
+        scalars[str(_yaml_scalar(raw_key.strip()))] = _yaml_scalar(raw_value)
+    return scalars
+
+
 def _permission_action(value: Any) -> str | None:
     """Converte booleanos legados e ações textuais ao formato OpenCode 1.18.4."""
     if isinstance(value, bool):
@@ -264,12 +299,17 @@ def _catalog_agents() -> Dict[str, Any]:
         # um nome de exibição com espaços/maiúsculas e varia entre arquivos —
         # isso tornava o opencode.json não-reproduzível; ver SPEC-935-R137).
         slug = os.path.splitext(os.path.basename(d["source_file"]))[0]
-        agents[slug] = {
+        source_file = str(d["source_file"])
+        agent = {
             "description": d["description"][:200],
             "mode": "subagent",
             "prompt": "{file:./agents/catalog/" + os.path.basename(d["source_file"]) + "}",
-            "permission": _agent_permissions(str(d["source_file"])),
+            "permission": _agent_permissions(source_file),
         }
+        frontmatter = _frontmatter_scalars(source_file)
+        if frontmatter.get("model"):
+            agent["model"] = str(frontmatter["model"])
+        agents[slug] = agent
     return agents
 
 

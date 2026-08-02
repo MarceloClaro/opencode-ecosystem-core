@@ -1,0 +1,690 @@
+{
+  "spec_id": "SPEC-935-R362",
+  "predecessor_spec_id": "SPEC-935-R361",
+  "generated_at": "2026-08-01",
+  "predecessor_artifact_mutated": false,
+  "predecessor_integrity_scope": "âncora interna capturada na R362; sem notarização externa",
+  "external_validation": false,
+  "human_review_required": true,
+  "release_gate": "blocked",
+  "quality_verdict_allowed": false,
+  "predecessor_artifacts": [
+    {
+      "path": "validacao_externa/cultural_episteme/molambudos_r361_decision_matrix.json",
+      "sha256": "6a0aa759e233a237c7b6b6ef2dfa657529ed199ed7ad02682f734a3b5975ccfe"
+    },
+    {
+      "path": "validacao_externa/cultural_episteme/molambudos_r361_provenance_drift.json",
+      "sha256": "e854c6d08d68ce2303923dc37966f4f409a4ad4bc6b4823379520718980b646a"
+    },
+    {
+      "path": "validacao_externa/cultural_episteme/molambudos_r361_sources.json",
+      "sha256": "aeda709c15fd880318d9073a6e628731d9865bc9197335782a30081fe6c8e30a"
+    },
+    {
+      "path": "validacao_externa/cultural_episteme/molambudos_r361_control_gates.json",
+      "sha256": "37e40ba2fc1d9202bce60441edbee894eb279b00d8a13f6d075e47d42d62730b"
+    },
+    {
+      "path": "validacao_externa/cultural_episteme/molambudos_r360_reviews.json",
+      "sha256": "00928a454faf859b940f2ab2edadbdfcaacd8c4de207a2c7fc1d8c0084417457"
+    }
+  ],
+  "predecessor_artifact_merkle_sha256": "ae96420685422a23912d14f7b0790a5149b944ef2acb3cab572920215ec3cd03",
+  "records": [
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-06.tex",
+      "change_class": "route_a_historical_rewrite_after_r361",
+      "old_sha256": "84eaa695aad062b6ab03e1511a2fb1cd5afa50f5eef63993dafa35fc363069a2",
+      "new_sha256": "5a49d8e4d6a5dc612c5170e585adeab33a7344c95444e5d949be66e030733f27",
+      "baseline_source": "molambudos_r361_provenance_drift.json::records[].new_sha256",
+      "predecessor_change_class": "restore_metric_unit",
+      "snapshot_preserved": true,
+      "scope": "hash integral alterado pela rota A; o snapshot e o parecer R361 não foram reatribuídos ao corpus R362"
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-06.tex",
+      "change_class": "route_a_historical_rewrite_after_r361",
+      "old_sha256": "3d1e65f5dd335e8d4379df2fc2fc99c2ef0f2fbac2f2de8dc018f2d7cec0db86",
+      "new_sha256": "58d8e5bbc385df90b14737a03652e06ccb6cc494207c8b443ef53dc95b37c06b",
+      "baseline_source": "molambudos_r361_provenance_drift.json::records[].new_sha256",
+      "predecessor_change_class": "restore_barbed_wire_semantics",
+      "snapshot_preserved": true,
+      "scope": "hash integral alterado pela rota A; o snapshot e o parecer R361 não foram reatribuídos ao corpus R362"
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-17.tex",
+      "change_class": "route_a_historical_rewrite_after_r361",
+      "old_sha256": "bf8bb62773bb2f6b373def9fce74fe9bd502992cbe5ed75acf511598c427bf0f",
+      "new_sha256": "c6a20c25de726e2586799e7ea9e8ddb1b979e29c30de2b6c4520b9f3aa7c0dcb",
+      "baseline_source": "molambudos_r361_provenance_drift.json::records[].new_sha256",
+      "predecessor_change_class": "repair_english_duration_grammar",
+      "snapshot_preserved": true,
+      "scope": "hash integral alterado pela rota A; o snapshot e o parecer R361 não foram reatribuídos ao corpus R362"
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex",
+      "change_class": "route_a_historical_rewrite_after_inherited_r360_snapshot",
+      "old_sha256": "05fbc88c3b4a2511946e6911433fd2ae011bb9f07fca26001bfe7373638d7b38",
+      "new_sha256": "9f1bdbe8c6905c4b3cb3d4f5b9c01cba9482d135374cbed55e1e37de81ea2fe8",
+      "baseline_source": "molambudos_r360_reviews.json::reviews[].source_locators (inalterado pela R361)",
+      "snapshot_preserved": true,
+      "scope": "a R361 limitou edições mecânicas a outros três caminhos; este digest R360 foi herdado como baseline R361",
+      "affected_reviews": [
+        {
+          "review_id": "r360-retirantes-en-us",
+          "locator_role": "source"
+        },
+        {
+          "review_id": "r360-retirantes-zh-cn",
+          "locator_role": "source"
+        }
+      ]
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex",
+      "change_class": "route_a_historical_rewrite_after_inherited_r360_snapshot",
+      "old_sha256": "0535d2653f670b1f04372663d884b79c40eafd04653674c5f93cdbc1b340fe6d",
+      "new_sha256": "bfb4ef382e90056d78b858958e185e3829f969abf32fceda42c1c6ac75be81a1",
+      "baseline_source": "molambudos_r360_reviews.json::reviews[].source_locators (inalterado pela R361)",
+      "snapshot_preserved": true,
+      "scope": "a R361 limitou edições mecânicas a outros três caminhos; este digest R360 foi herdado como baseline R361",
+      "affected_reviews": [
+        {
+          "review_id": "r360-curral_do_governo-en-us",
+          "locator_role": "source"
+        },
+        {
+          "review_id": "r360-curral_do_governo-zh-cn",
+          "locator_role": "source"
+        },
+        {
+          "review_id": "r360-molambudos-en-us",
+          "locator_role": "source"
+        },
+        {
+          "review_id": "r360-molambudos-zh-cn",
+          "locator_role": "source"
+        }
+      ]
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-17.tex",
+      "change_class": "route_a_historical_rewrite_after_inherited_r360_snapshot",
+      "old_sha256": "2e8e49123588ebe81aa02f6475f26da4db206344ca3ea101b62f2d12b8d3af0b",
+      "new_sha256": "1c8050cb561dea910325510c005f052bf946826ad269437858bc12f2183445b3",
+      "baseline_source": "molambudos_r360_reviews.json::reviews[].source_locators (inalterado pela R361)",
+      "snapshot_preserved": true,
+      "scope": "a R361 limitou edições mecânicas a outros três caminhos; este digest R360 foi herdado como baseline R361",
+      "affected_reviews": [
+        {
+          "review_id": "r360-retirantes-zh-cn",
+          "locator_role": "target"
+        }
+      ]
+    }
+  ],
+  "unhashed_change_inventory": [
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-02.tex",
+      "current_sha256": "1b3dcfc36c016247c44b76c4b3d0978e5e0800293e9df4e025ae29c0670c0e4c",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-04.tex",
+      "current_sha256": "d9f1db503fc577bc8b9c3e8cbc71150e7c112d1d6734e748a7e5618351c91274",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-02.tex",
+      "current_sha256": "078362c01568318282c70a022f74e8b6c9365898cedded8c01dfabd6a42f1c1b",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-05.tex",
+      "current_sha256": "34030539ff541fa1398f3c4e30a953aa1977cf33ea94c320fde1371f7f0c718b",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-08.tex",
+      "current_sha256": "679f602efa85561092007463b437c3d7beeda059d0830e731e750413889154b4",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-15.tex",
+      "current_sha256": "a5af897089048346cacb5dabc0cadb473e92d8bcbc2f3b081cd67ba2ca2772c7",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-18.tex",
+      "current_sha256": "a9662961a9332c93fc2fa52c4ae47dc3d0697c11154e5712a6eb7c98d07447bd",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-10.tex",
+      "current_sha256": "00aebb37154133236751a61023b8c254082360541905193596b3e7cbdd292362",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-02.tex",
+      "current_sha256": "95d994c3ac9e6af721c25b7ed04634c4c7ca70d5a242acd76a0be9007e7dbf9c",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-04.tex",
+      "current_sha256": "f5e0e3bf73fbcea671572facbf9ace8c2c3309f44c1e625d663ad0fef626a3a3",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-02.tex",
+      "current_sha256": "e4979b1ce4e159216cefe3fb28bd94c45c7be20c247ab90d29a912c889c8ca6e",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-05.tex",
+      "current_sha256": "cda68855908a1fa5f87710020222fa9410df0a400fc63da6a6677e4232e706e4",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-08.tex",
+      "current_sha256": "3ad338188f76d0057e2f8d897455553a501114789c191f08b565168bff967097",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-15.tex",
+      "current_sha256": "789743b4266e6344d5d950ec18c50b08547e3563a3abff940f18e535f0d35e3f",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-18.tex",
+      "current_sha256": "507b75a5aff6fa8a2916c86825a3cc40325db56c3421922f35607ec0843f9df1",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/luc/LUC-10.tex",
+      "current_sha256": "118bb141496a80679520312aa8fdd47e730e27aca22d1926e96f18ac3fb7a096",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-02.tex",
+      "current_sha256": "cfcf281aa6c3720c822cf7f920a089a0bf190033bf34972dfaef31ca3041d0ee",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-04.tex",
+      "current_sha256": "3e9bbc380e5b058a80380025d1766be8ea8fd4248cb69a5f138f649bd2149910",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-02.tex",
+      "current_sha256": "f1904f054db2409ed108c87222e82984cdb52fe95be7a0ae63a0b39553f88502",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-05.tex",
+      "current_sha256": "90b010e09be68ea99414e1af8b8b60ab9ddc38c14a244d1b3fbbf4b62330a941",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-08.tex",
+      "current_sha256": "dad21b52ce641fa053f38246def23220f8b6e398613dcc5ac82f8eb4bbe2d789",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-15.tex",
+      "current_sha256": "5719cd36336d9c3babfc4710a783ed6a5bda3151157d3cd70824df3cebb8f543",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-18.tex",
+      "current_sha256": "535c5972c3c2d0b9c141f0c20b0d8a984a3ab0e7658665a5282eada10956e720",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/luc/LUC-10.tex",
+      "current_sha256": "a9c4459d0170d60c0495cb681ed16c2b9a1cc680d131b5ff6216729e659e97a1",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/glossario_historico.tex",
+      "current_sha256": "e37cfbf7fcfadc6440484b6f9fc79ba4ad8a93435508bf73930b87c9d89f9f19",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/frontmatter/glossario_historico.tex",
+      "current_sha256": "9e843589c73f08754f552ad3c59d929552795295bcdc65ecfa1455c7e527753c",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/frontmatter/glossario_historico.tex",
+      "current_sha256": "ba2abb97aafb8b6ed8cfc4d4494a0608b8902c4d2998a1ed4f3b0969b3cfd6aa",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/tri/frontmatter/glossario.tex",
+      "current_sha256": "a2071dc36b35bc6706baa6e1cd38ca5c88049bbac6d40bc1b2e02be785ce53eb",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/nota_historica.tex",
+      "current_sha256": "5901d3a10f78612ab8b15b353f4d32bfc989cc96736b083fdf38903e36937ab2",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/frontmatter/nota_historica.tex",
+      "current_sha256": "266eb703735cf2858e6849f45306549cf1b2047e012cb7e2b21bc3d802540cff",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/frontmatter/nota_historica.tex",
+      "current_sha256": "718bd6cf4a6000f441e30a2d126afbc11d95bb8c0d3ebd834dc54337a91fd2bb",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/tri/frontmatter/nota_historica.tex",
+      "current_sha256": "992d35b9ddd81bb8d3dcfae1b21c472bcd56242c72da94e13f7a3a5954b66e03",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/main.tex",
+      "current_sha256": "54f1630b4d4a4379429685bde644245a4bb3cae8d9e12b42029b2b209f34e48c",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/main_en.tex",
+      "current_sha256": "00d984f636ba069d776a21d600780feb574e044cf4d9f6c62fbc6033099a4668",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/main_zh.tex",
+      "current_sha256": "fe9a208f1eb231f4c9384a4c818f5b53c222334d41497f6b4ad7af22c7609cdd",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/tri/main_tri.tex",
+      "current_sha256": "2f4d6961657fee5db9a22f13b47d45a15ea590fd831d3bec395c9e13e8713c0a",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/titlepage.tex",
+      "current_sha256": "ff4e7ae99d166fac8d381a3ee71c7451d01001785d85cc25542fefa37feacd9d",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/frontmatter/titlepage.tex",
+      "current_sha256": "6bb8023b26170ff6d8cebe45b99a15e00168042e35b481d1d05521006b2f864a",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/frontmatter/titlepage.tex",
+      "current_sha256": "d7cf2329851e53887ae78fd06a688094ec55a3e5bd6af620a239b2dedb8e46a2",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/tri/frontmatter/titlepage.tex",
+      "current_sha256": "371bc94a82cec441abd0347d82aa676619d2b265de1f4f2ff52a0875a7f34400",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/cuidado.tex",
+      "current_sha256": "fa5cc7195385d956b058468fa875bea5245cb2f3e52edb1e23c87c435cf19a9c",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/frontmatter/cuidado.tex",
+      "current_sha256": "46b24ee733384b4c3b1bad8bdf0e1bf10e4d4193627885ea04b986701a27b3c1",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/frontmatter/cuidado.tex",
+      "current_sha256": "701f99902d99622288c88df957b29f7ea50167f93a361273be57a9679dc625fc",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/tri/frontmatter/cuidado.tex",
+      "current_sha256": "abaf1d2c80e7c3b8d85a864e92202602cb5386619a2b2443d0ef9cddb6fdd2c7",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/misc/options.sty",
+      "current_sha256": "20839ff89b1966d61c9fd58720769c942f732e0e0c4682abe6b185bdb896291d",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/misc/options_zh.sty",
+      "current_sha256": "44f7ce8b67f8196c4fd0263c2589fcaf915ca89abcc0f7f037d2fbd3e35053e9",
+      "baseline_sha256_available": false,
+      "reason": "R361 não publicou hash integral deste arquivo; nenhum hash antigo foi fabricado."
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "patu_1915_chronology",
+      "status": "implemented_pending_external_review",
+      "claim_type": "documented_fact_conflict",
+      "documented_conflict": "Fontes lidas situam Alagadiço/Fortaleza em 1915 e Patu/Senador Pompeu em 1932–1933; o corpus situa Senador Pompeu/Patu em 1915–1917.",
+      "source_ids": [
+        "S01-fapesp-seca-pt",
+        "S02-ufmg-patu",
+        "S03-fapesp-seca-en"
+      ],
+      "evidence_basis": [
+        "external_source_fact",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-10.tex:27",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-02.tex:21",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-05.tex:28",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-08.tex:33",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-18.tex:8-44",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-02.tex:8-10",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:100",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/frontmatter/glossario_historico.tex:22",
+        "homólogos EN-US/ZH-CN dos fragmentos acima"
+      ],
+      "author_options": [
+        "Manter 1915 e transferir o campo para Alagadiço/Fortaleza, revisando geografia e números.",
+        "Manter Senador Pompeu/Patu e deslocar a cronologia para 1932–1933, recalculando toda a linha de vida de Joaquim.",
+        "Assumir história alternativa explicitamente e retirar alegações de corroboração factual específica."
+      ],
+      "automatic_change_applied": true,
+      "author_decision": "route_a",
+      "external_review_pending": true,
+      "release_conferred": false
+    },
+    {
+      "blocker_id": "hospital_closed_1980",
+      "status": "blocked_author_decision",
+      "claim_type": "documented_fact_conflict",
+      "documented_conflict": "O corpus afirma fechamento em 1980; a FHEMIG registra reestruturação nos anos 1980, desospitalização posterior e continuidade como CHPB.",
+      "source_ids": [
+        "S11-fhemig-chpb",
+        "S13-tribuna-corpos-negociados"
+      ],
+      "evidence_basis": [
+        "external_source_fact",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-03.tex:14",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-25.tex:68",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/luc/LUC-03.tex:14",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-25.tex:67",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/luc/LUC-03.tex:14",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-25.tex:70"
+      ],
+      "author_options": [
+        "Substituir fechamento por reestruturação/desospitalização historicamente delimitada após pesquisa adicional.",
+        "Remover a data e manter apenas que o modelo manicomial foi transformado.",
+        "Assumir fechamento ficcional e marcar explicitamente a divergência da instituição histórica."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "rasga_mortalha_beak_etiology",
+      "status": "blocked_author_decision",
+      "claim_type": "limited_source_support_gap",
+      "documented_conflict": "Fontes sustentam nome, som semelhante a tecido rasgado e prenúncio de morte; não sustentam, no material lido, a narrativa do bico rasgando a mortalha para libertar a alma.",
+      "source_ids": [
+        "S06-ufersa-suinadara",
+        "S07-etnobiologia-rasga"
+      ],
+      "evidence_basis": [
+        "limited_external_source_set",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex:50",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-12.tex:50",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-12.tex:50"
+      ],
+      "author_options": [
+        "Manter como crença específica de Seu Nonô ou variante ficcional, sem alegar etimologia externa comprovada.",
+        "Pesquisar documentação folclórica regional adicional antes de apresentar como tradição.",
+        "Reduzir a explicação ao som de tecido rasgado e ao agouro, mediante decisão autoral."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "molambudo_absolute_neologism",
+      "status": "blocked_author_decision",
+      "claim_type": "lexical_attestation_scope_uncertainty",
+      "documented_conflict": "Dicionários atuais atestam molambudo/mulambudo como derivado de molambo; isso torna a invenção absoluta não demonstrada, mas não data a primeira ocorrência nem comprova o uso por soldados em 1915.",
+      "source_ids": [
+        "S08-aulete-molambudo",
+        "S09-michaelis-molambudo",
+        "S10-aulete-molambo"
+      ],
+      "evidence_basis": [
+        "current_lexicographic_attestation",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-07.tex:20",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-07.tex:20",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-07.tex:20",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/TRADUTOR_NOTES.md:9",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:22",
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/glossario_historico.tex:23"
+      ],
+      "author_options": [
+        "Manter neologismo como diagnóstico ficcional do uso existencial idiossincrático.",
+        "Trocar a descrição paratextual por ressignificação lexical ou uso idiossincrático, após decisão autoral.",
+        "Explicitar que o vocábulo é atestado e que a obra inova na função narrativa."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "victim_count_category_drift",
+      "status": "blocked_author_decision",
+      "claim_type": "documented_category_conflict_and_source_gap",
+      "documented_conflict": "O corpus alterna 60 mil mortos, internados, corpos enterrados, desaparecidos e 1.853 exumados. A fonte S13 sustenta 1.853 corpos negociados com faculdades, não 1.853 exumações.",
+      "source_ids": [
+        "S11-fhemig-chpb",
+        "S13-tribuna-corpos-negociados"
+      ],
+      "evidence_basis": [
+        "external_source_fact",
+        "internal_claim_inventory"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/nota_arquivista.tex:41",
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/nota_ao_leitor.tex:12",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex:29",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-04.tex:87",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-19.tex:8-25",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-18.tex:8,22-32",
+        "homólogos EN-US/ZH-CN e paratextos TRI"
+      ],
+      "author_options": [
+        "Auditar cada número por categoria, período, fonte e grau de incerteza antes de qualquer reescrita.",
+        "Atribuir estimativas à fonte e remover conversões entre mortos, corpos, exumados e vendidos.",
+        "Suspender todos os números não sustentados até revisão histórica e arquivística independente."
+      ],
+      "automatic_change_applied": false,
+      "publication_reach_audit_required": true
+    },
+    {
+      "blocker_id": "pseudoarchive_authenticity",
+      "status": "blocked_author_decision",
+      "claim_type": "ethical_authenticity_risk",
+      "documented_conflict": "Documentos ficcionais se apresentam como peças do Arquivo Público do Ceará, Arquivo Nacional, Arquivo Público Mineiro e transcrição autorizada, sem proveniência ou permissão demonstrada no pacote R361.",
+      "source_ids": [],
+      "evidence_basis": [
+        "internal_corpus_and_paratext_analysis"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex:8-27",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-18.tex:8-44",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-19.tex:8-25",
+        "homólogos EN-US/ZH-CN e referências ao Arquivo Público Mineiro"
+      ],
+      "author_options": [
+        "Marcar cada pseudoarquivo inequivocamente como construção ficcional.",
+        "Comprovar citações, permissões, proveniência e estatuto de reprodução antes de manter nomes reais.",
+        "Substituir instituições reais por arquivo ficcional claramente declarado."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "fictional_victim_insertion",
+      "status": "blocked_author_decision",
+      "claim_type": "ethical_memory_boundary_risk",
+      "documented_conflict": "Joaquim é declarado personagem ficcional, mas DOC-19 o chama de um dos 60 mil e notas tratam seu testemunho como corroboração de fatos históricos.",
+      "source_ids": [
+        "S13-tribuna-corpos-negociados"
+      ],
+      "evidence_basis": [
+        "internal_fiction_reality_boundary_analysis"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-19.tex:19-25",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:96",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-07.tex:80",
+        "homólogos EN-US/ZH-CN"
+      ],
+      "author_options": [
+        "Separar explicitamente o personagem de qualquer contagem de vítimas reais.",
+        "Remover linguagem de corroboração testemunhal atribuída ao personagem ficcional.",
+        "Submeter a estratégia memorial a revisão de sobreviventes, familiares e especialistas em ética do testemunho."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "living_memory_erasure",
+      "status": "blocked_author_decision",
+      "claim_type": "documented_fact_conflict_and_memory_risk",
+      "documented_conflict": "O corpus descreve Patu como desaparecido/esquecido e o Hospital como ruína fechada; S01 registra ruínas tombadas, romaria e memória comunitária, enquanto S11/S13 registram continuidade, museu, reforma e última cela até 1993.",
+      "source_ids": [
+        "S01-fapesp-seca-pt",
+        "S11-fhemig-chpb",
+        "S13-tribuna-corpos-negociados"
+      ],
+      "evidence_basis": [
+        "external_source_fact",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-15.tex:19-31",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-03.tex:14-16",
+        "homólogos EN-US/ZH-CN e paratextos históricos"
+      ],
+      "author_options": [
+        "Reconhecer práticas vivas de memória e distinguir abandono parcial de apagamento total.",
+        "Reescrever apenas após consulta a comunidades de memória de Patu e Barbacena.",
+        "Assumir cenário alternativo ficcional sem reivindicar descrição factual contemporânea."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "psychiatric_stigma_horror",
+      "status": "blocked_author_decision",
+      "claim_type": "ethical_representation_risk",
+      "documented_conflict": "A combinação entre diagnóstico, violência, possessão e contágio pode reforçar estigma; S14 documenta a existência geral de estigma e violações, mas não mede o efeito desta obra.",
+      "source_ids": [
+        "S14-who-mental-disorders-stigma"
+      ],
+      "evidence_basis": [
+        "external_general_context",
+        "internal_representation_analysis"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-07.tex:18-51",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-08.tex:26-113",
+        "arquitetura paciente–criatura–contaminação em PT/EN/ZH"
+      ],
+      "author_options": [
+        "Submeter a obra a leitura de sensibilidade em saúde mental e movimento antimanicomial.",
+        "Separar explicitamente transtorno psíquico, violência e mecanismo sobrenatural.",
+        "Reavaliar a arquitetura de contágio sem instrumentalizar pacientes reais ou ficcionais."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "reader_consent_visual_provenance",
+      "status": "blocked_author_decision",
+      "claim_type": "ethical_consent_and_provenance_gap",
+      "documented_conflict": "O pacote R361 não demonstra cobertura integral dos avisos para violência sexual, consumo de cadáveres e ameaça, nem proveniência, direitos e marcação ficcional inequívoca de todas as imagens pseudoarquivísticas.",
+      "source_ids": [],
+      "evidence_basis": [
+        "internal_content_warning_and_visual_asset_audit_gap"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/aviso_ao_leitor.tex",
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/copyrightpage.tex:28-39",
+        "projetos/molambudos/Molambudos_VictoriaRegia/figures/",
+        "homólogos EN-US/ZH-CN/TRI"
+      ],
+      "author_options": [
+        "Auditar avisos de conteúdo por idioma e por rota antes de publicação.",
+        "Criar ledger visual com origem, licença, consentimento e estatuto ficcional de cada imagem.",
+        "Remover ativos e chamadas promocionais sem proveniência ou adequação ética demonstrada."
+      ],
+      "automatic_change_applied": false
+    }
+  ],
+  "route_a_contract": {
+    "origin": "Senador Pompeu, Ceará, 1915",
+    "displacement": "retirada em direção a Fortaleza",
+    "confinement": "Campo do Alagadiço, Fortaleza, 1915",
+    "patu_historical_period": "1932--1933",
+    "fictional_transfer": "1917; sem alegar funcionamento contínuo do Alagadiço",
+    "status": "implemented_pending_external_review"
+  },
+  "safe_claim": "A decisão autoral da rota A foi implementada internamente e permanece pendente de revisão externa. Os outros nove bloqueios R361 continuam fechados e impedem o release.",
+  "provenance_validation": {
+    "passed": true,
+    "errors": [],
+    "validated_record_count": 6,
+    "validated_unhashed_inventory_count": 46,
+    "validated_predecessor_artifact_count": 5,
+    "externally_notarized": false,
+    "scope": "âncora criptográfica interna; não substitui assinatura, commit ou notarização externa"
+  }
+}

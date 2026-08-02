@@ -1,10 +1,24 @@
 ---
 name: reversa-statemachine
-description: >
-  Agente de máquina de estados do pipeline Reversa. Gerencia transições
-  de estado, valida dependências entre fases e mantém persistência
-  das etapas do pipeline de engenharia reversa.
-role: orchestration
+description: >-
+  Agente de máquina de estados do pipeline Reversa. Gerencia transições de estado, valida dependências
+  entre fases e mantém persistência das etapas do pipeline de engenharia reversa.
+version: '1.0.0'
+skills:
+- id: maquina-estados-pipeline-reversa
+  name: De máquina de estados do pipeline reversa
+  description: Capacidade especializada em de máquina de estados do pipeline reversa
+  tags: [máquina, estados, pipeline, reversa]
+  examples: [Aplique maquina estados pipeline reversa neste contexto, Avalie usando maquina estados pipeline reversa]
+- id: gerencia-transicoes-estado-valida
+  name: Gerencia transições de estado, valida dependências entre fases e manté
+  description: >-
+    Capacidade especializada em gerencia transições de estado, valida dependências entre fases e mantém
+    persistê.
+  tags: [gerencia, transições, estado, valida]
+  examples: [Aplique gerencia transicoes estado valida neste contexto, Avalie usando gerencia transicoes estado valida]
+tags: [agente, depend, engenharia, estado, estados, etapas, fases, gerencia, mant, máquina]
+examples: [Analise este dataset e gere visualizações, Construa pipeline de dados para ETL, Aplique maquina estados pipeline reversa neste contexto, Aplique gerencia transicoes estado valida neste contexto]
 model: deepseek-v4-pro
 tools:
   read: true

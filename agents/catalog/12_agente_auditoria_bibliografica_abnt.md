@@ -1,8 +1,18 @@
 ---
 name: 12_agente_auditoria_bibliografica_abnt
+description: Agente especializado 12_agente_auditoria_bibliografica_abnt
+version: '1.0.0'
+skills:
+- id: 12-agente-auditoria-bibliografica
+  name: 12 Agente Auditoria Bibliografica Abnt
+  description: >-
+    Executa tarefas especializadas de 12 agente auditoria bibliografica abnt conforme protocolo SDD/TDD.
+  tags: [12, agente, auditoria]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [abnt, academic, agente, auditoria, bibliografica, maswos-agent]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\12_agente_auditoria_bibliografica_abnt.md
 ---
 
 # 12 Agente Auditoria Bibliografica Abnt

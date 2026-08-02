@@ -7,7 +7,27 @@
 
 ---
 name: autoevolve
-description: AutoEvolve — engine de evolução autônoma do ecossistema OpenCode v5.1. Roteia subcomandos (/evolve status|discover|install|verify|update|learn), executa pipeline SENSE→DISCOVER→INSTALL→VERIFY→EVOLVE→LEARN, integra SPEC-025+SPEC-026+SPEC-027.
+description: >-
+  AutoEvolve — engine de evolução autônoma do ecossistema OpenCode v5.1. Roteia subcomandos (/evolve
+  status|discover|install|verify|update|learn), executa pipeline
+  SENSE→DISCOVER→INSTALL→VERIFY→EVOLVE→LEARN, integra SPEC-025+SPEC-026+SPEC-027.
+version: '1.0.0'
+skills:
+- id: autoevolve-engine-evolucao-autonoma
+  name: Autoevolve — engine de evolução autônoma do ecossistema opencode v5
+  description: >-
+    Capacidade especializada em autoevolve — engine de evolução autônoma do ecossistema opencode v5
+  tags: [autoevolve, engine, evolução, autônoma]
+  examples: [Aplique autoevolve engine evolucao autonoma neste contexto, Avalie usando autoevolve engine evolucao autonoma]
+- id: roteia-subcomandos-evolve-status
+  name: Roteia subcomandos (/evolve status|discover|install|verify|update|lear
+  description: >-
+    Capacidade especializada em roteia subcomandos (/evolve
+    status|discover|install|verify|update|learn), execut.
+  tags: [roteia, subcomandos, /evolve, status|discover|install|verify|update|learn]
+  examples: [Aplique roteia subcomandos evolve status neste contexto, Avalie usando roteia subcomandos evolve status]
+tags: [/evolve, autoevolve, autônoma, discover, ecossistema, engine, evolu, evolução, evolve, executa]
+examples: [Analise este dataset e gere visualizações, Construa pipeline de dados para ETL, Aplique autoevolve engine evolucao autonoma neste contexto, Aplique roteia subcomandos evolve status neste contexto]
 mode: subagent
 tools:
   read: true

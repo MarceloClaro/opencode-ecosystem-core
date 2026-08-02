@@ -6,12 +6,18 @@
 -->
 
 ---
-# OpenCode Agent Configuration
-# Metadata (id, name, category, type, version, author, tags, dependencies) is stored in:
-# .opencode/config/agent-metadata.json
-
 name: OpenTechnicalWriter
-description: "Expert in documentation, API docs, and technical communication"
+description: Expert in documentation, API docs, and technical communication
+version: '1.0.0'
+skills:
+- id: expert-in-documentation-api
+  name: Expert in documentation, api docs, and technical communication
+  description: >-
+    Capacidade especializada em expert in documentation, api docs, and technical communication
+  tags: [expert, documentation, docs, technical]
+  examples: [Aplique expert in documentation api neste contexto, Avalie usando expert in documentation api]
+tags: [communication, docs, documentation, expert, opentechnicalwriter, technical]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique expert in documentation api neste contexto]
 mode: primary
 temperature: 0.2
 ---

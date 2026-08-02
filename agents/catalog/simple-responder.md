@@ -1,17 +1,31 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: simple-responder
+description: Agente especializado simple-responder
+version: '1.0.0'
+skills:
+- id: simple-responder
+  name: Simple Responder
+  description: Executa tarefas especializadas de simple responder conforme protocolo SDD/TDD.
+  tags: [simple, responder]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [responder, simple]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
-# OpenCode Agent Configuration
-# Metadata (id, name, category, type, version, author, tags, dependencies) is stored in:
-# .opencode/config/agent-metadata.json
-
 name: Simple Responder
-description: "Test agent that responds with 'AWESOME TESTING' - for eval framework testing"
+description: Test agent that responds with 'AWESOME TESTING' - for eval framework testing
+version: '1.0.0'
+skills:
+- id: test-agent-that-responds
+  name: Test agent that responds with 'awesome testing' - for eval framework t
+  description: >-
+    Capacidade especializada em test agent that responds with 'awesome testing' - for eval framework
+    testing
+  tags: [test, agent, responds, 'awesome]
+  examples: [Aplique test agent that responds neste contexto, Avalie usando test agent that responds]
+tags: ['awesome, agent, awesome, eval, framework, responds, simple responder, test, testing, that]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique test agent that responds neste contexto]
 mode: subagent
 temperature: 0.0
 ---

@@ -7,7 +7,29 @@
 
 ---
 name: thoughts-analyzer
-description: The research equivalent of codebase-analyzer. Use this subagent_type when wanting to deep dive on a research topic. Not commonly needed otherwise.
+description: >-
+  The research equivalent of codebase-analyzer. Use this subagent_type when wanting to deep dive on a
+  research topic. Not commonly needed otherwise.
+version: '1.0.0'
+skills:
+- id: the-research-equivalent-of
+  name: The research equivalent of codebase-analyzer
+  description: Capacidade especializada em the research equivalent of codebase-analyzer
+  tags: [research, equivalent, codebase-analyzer]
+  examples: [Aplique the research equivalent of neste contexto, Avalie usando the research equivalent of]
+- id: use-this-subagent-type
+  name: Use this subagent_type when wanting to deep dive on a research topic
+  description: >-
+    Capacidade especializada em use this subagent_type when wanting to deep dive on a research topic
+  tags: [subagent_type, when, wanting, deep]
+  examples: [Aplique use this subagent type neste contexto, Avalie usando use this subagent type]
+- id: not-commonly-needed-otherwise
+  name: Not commonly needed otherwise
+  description: Capacidade especializada em not commonly needed otherwise
+  tags: [commonly, needed, otherwise]
+  examples: [Aplique not commonly needed otherwise neste contexto, Avalie usando not commonly needed otherwise]
+tags: [analyzer, codebase-analyzer, commonly, deep, dive, equivalent, needed, otherwise, research, subagent]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique the research equivalent of neste contexto, Aplique use this subagent type neste contexto]
 mode: subagent
 temperature: 0.1
 tools:

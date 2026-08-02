@@ -8,13 +8,30 @@
 ---
 name: PyPISearcher
 description: >-
-  Agente especializado em buscar, analisar e recomendar bibliotecas Python
-  no PyPI para o ecossistema OpenCode. Utiliza scraping + API JSON oficial,
-  valida compatibilidade, analisa saúde do pacote e registra decisões
-  arquiteturais no DecisionNode.
+  Agente especializado em buscar, analisar e recomendar bibliotecas Python no PyPI para o ecossistema
+  OpenCode. Utiliza scraping + API JSON oficial, valida compatibilidade, analisa saúde do pacote e
+  registra decisões arquiteturais no DecisionNode.
+version: '1.0.0'
+skills:
+- id: especializado-buscar-analisar-recomendar
+  name: Especializado em buscar, analisar e recomendar bibliotecas python no p
+  description: >-
+    Capacidade especializada em especializado em buscar, analisar e recomendar bibliotecas python no
+    pypi para o.
+  tags: [especializado, buscar, analisar, recomendar]
+  examples: [Aplique especializado buscar analisar recomendar neste contexto, Avalie usando especializado buscar analisar recomendar]
+- id: utiliza-scraping-api-json
+  name: Utiliza scraping + api json oficial, valida compatibilidade, analisa s
+  description: >-
+    Capacidade especializada em utiliza scraping + api json oficial, valida compatibilidade, analisa
+    saúde do pa.
+  tags: [utiliza, scraping, json, oficial]
+  examples: [Aplique utiliza scraping api json neste contexto, Avalie usando utiliza scraping api json]
+tags: [agente, analisa, analisar, arquiteturais, bibliotecas, buscar, compatibilidade, decis, decisionnode, ecossistema]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique especializado buscar analisar recomendar neste contexto, Aplique utiliza scraping api json neste contexto]
 mode: subagent
-category: research
 temperature: 0.1
+category: research
 tools:
   bash: true
   read: true
@@ -22,14 +39,6 @@ tools:
   write: true
   decisionnode_add_decision: true
   decisionnode_search_decisions: true
-affinity:
-  - code-reviewer: 0.70
-  - architect: 0.85
-  - coder-agent: 0.65
-  - security-auditor: 0.60
-  - decisionnode: 0.90
-  - build-agent: 0.55
-ecosystem_version: "4.2"
 ---
 
 # PyPISearcher — Agente de Pesquisa e Recomendação de Bibliotecas Python

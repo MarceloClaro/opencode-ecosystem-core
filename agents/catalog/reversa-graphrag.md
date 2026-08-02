@@ -1,17 +1,58 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Inspirado pelo GraphRAG + Zep Cloud do MiroFish.
--->
+---
+name: reversa-graphrag
+description: Agente especializado reversa-graphrag
+version: '1.0.0'
+skills:
+- id: reversa-graphrag
+  name: Reversa Graphrag
+  description: Executa tarefas especializadas de reversa graphrag conforme protocolo SDD/TDD.
+  tags: [reversa, graphrag]
+  examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema]
+tags: [graphrag, reversa]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Analise a arquitetura deste sistema legado]
+---
 
 ---
 name: reversa-graphrag
-description: >
-  Agente de conhecimento que constrói e consulta o grafo de dependências
-  do ecossistema OpenCode. Inspirado pelo GraphRAG + Zep Cloud do MiroFish
-  (graph_builder.py, zep_tools.py). Usa SQLite para persistência com busca
-  estrutural e semântica.
-  Use via: "grafo", "graph", "dependências", "knowledge graph", /graphrag.
+description: >-
+  Agente de conhecimento que constrói e consulta o grafo de dependências do ecossistema OpenCode.
+  Inspirado pelo GraphRAG + Zep Cloud do MiroFish (graph_builder.py, zep_tools.py). Usa SQLite para
+  persistência com busca estrutural e semântica. Use via: "grafo", "graph", "dependências", "knowledge
+  graph", /graphrag.
+version: '1.0.0'
+skills:
+- id: conhecimento-constroi-consulta-grafo
+  name: De conhecimento que constrói e consulta o grafo de dependências do eco
+  description: >-
+    Capacidade especializada em de conhecimento que constrói e consulta o grafo de dependências do
+    ecossistema o.
+  tags: [conhecimento, constrói, consulta, grafo]
+  examples: [Aplique conhecimento constroi consulta grafo neste contexto, Avalie usando conhecimento constroi consulta grafo]
+- id: inspirado-pelo-graphrag-zep
+  name: Inspirado pelo graphrag + zep cloud do mirofish (graph_builder
+  description: >-
+    Capacidade especializada em inspirado pelo graphrag + zep cloud do mirofish (graph_builder
+  tags: [inspirado, pelo, graphrag, cloud]
+  examples: [Aplique inspirado pelo graphrag zep neste contexto, Avalie usando inspirado pelo graphrag zep]
+- id: py-zep-tools
+  name: Py, zep_tools
+  description: Capacidade especializada em py, zep_tools
+  tags: [zep_tools]
+  examples: [Aplique py zep tools neste contexto, Avalie usando py zep tools]
+- id: usa-sqlite-persistencia-busca
+  name: Usa sqlite para persistência com busca estrutural e semântica
+  description: >-
+    Capacidade especializada em usa sqlite para persistência com busca estrutural e semântica
+  tags: [sqlite, persistência, busca, estrutural]
+  examples: [Aplique usa sqlite persistencia busca neste contexto, Avalie usando usa sqlite persistencia busca]
+- id: use-grafo-graph-dependencias
+  name: Use via: "grafo", "graph", "dependências", "knowledge graph", /graphra
+  description: >-
+    Capacidade especializada em use via: "grafo", "graph", "dependências", "knowledge graph", /graphrag
+  tags: ["grafo", "graph", "dependências", "knowledge]
+  examples: [Aplique use grafo graph dependencias neste contexto, Avalie usando use grafo graph dependencias]
+tags: ["dependências", "grafo", "graph", "knowledge, agente, builder, busca, cloud, conhecimento, constr]
+examples: [Configure o banco de dados Cloud SQL, Otimize a query BigQuery para este dataset, Aplique conhecimento constroi consulta grafo neste contexto, Aplique inspirado pelo graphrag zep neste contexto]
 mode: subagent
 tools:
   read: true

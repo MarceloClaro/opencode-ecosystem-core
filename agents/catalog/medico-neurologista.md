@@ -1,13 +1,157 @@
-<!--
-agent_id: medico-neurologista
+---
+name: Médico Neurologista
+description: >-
+  --- name: Médico Neurologista description: >- --- name: Médico Neurologista — Especialista em
+  Neurologia description: Agente especializado Médico Neurologista — Especialista em Neurologia
+  version:
+version: '1.0.0'
+skills:
+- id: name-medico-neurologista-description
+  name: ---
+name: médico neurologista
+description: >-
+  --- name: médico neuro
+  description: >-
+    Capacidade especializada em --- name: médico neurologista description: >- --- name: médico
+    neurologista — .
+  tags: [name, médico, neurologista, description]
+  examples: [Aplique name medico neurologista description neste contexto, Avalie usando name medico neurologista description]
+- id: neurologia-description-agente-especializado
+  name: Neurologia description: agente especializado médico
+  neurologista — e
+  description: >-
+    Capacidade especializada em neurologia description: agente especializado médico neurologista —
+    especialist.
+  tags: [neurologia, description, agente, especializado]
+  examples: [Aplique neurologia description agente especializado neste contexto, Avalie usando neurologia description agente especializado]
+- id: neurologia-version
+  name: Neurologia version:
+  description: Capacidade especializada em neurologia version:
+  tags: [neurologia, version]
+  examples: [Aplique neurologia version neste contexto, Avalie usando neurologia version]
+- id: avc-ave-isquemico-hemorragico
+  name: Avc/ave: isquêmico, hemorrágico, ait, janela terapêutica
+  description: >-
+    Executa avc/ave: isquêmico, hemorrágico, ait, janela terapêutica conforme protocolo especializado.
+  tags: ['avc/ave:', isquêmico, hemorrágico]
+  examples: [Execute avc ave isquemico hemorragico, Aplique avc ave isquemico hemorragico no contexto atual]
+- id: cefaleias-enxaqueca-cefaleia-tensional
+  name: Cefaleias: enxaqueca, cefaleia tensional, cefaleia em salvas
+  description: >-
+    Executa cefaleias: enxaqueca, cefaleia tensional, cefaleia em salvas conforme protocolo
+    especializado.
+  tags: ['cefaleias:', enxaqueca, cefaleia]
+  examples: [Execute cefaleias enxaqueca cefaleia tensional, Aplique cefaleias enxaqueca cefaleia tensional no contexto atual]
+- id: epilepsia-tipos-crise-status
+  name: Epilepsia: tipos de crise, status epilepticus, ajuste de ant
+  description: >-
+    Executa epilepsia: tipos de crise, status epilepticus, ajuste de anticonvulsivantes conforme
+    protocolo especializado.
+  tags: ['epilepsia:', tipos]
+  examples: [Execute epilepsia tipos crise status, Aplique epilepsia tipos crise status no contexto atual]
+- id: demencias-alzheimer-demencia-vascular
+  name: Demências: alzheimer, demência vascular, lewy, frontotempora
+  description: >-
+    Executa demências: alzheimer, demência vascular, lewy, frontotemporal conforme protocolo
+    especializado.
+  tags: ['demências:', alzheimer, demência]
+  examples: [Execute demencias alzheimer demencia vascular, Aplique demencias alzheimer demencia vascular no contexto atual]
+tags: [agente, alzheimer, 'avc/ave:', cefaleia, 'cefaleias:', demência, 'demências:', description, dico, enxaqueca]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique name medico neurologista description neste contexto, Aplique neurologia description agente especializado neste contexto]
+---
+
+---
+name: Médico Neurologista
+description: >-
+  --- name: Médico Neurologista — Especialista em Neurologia description: Agente especializado Médico
+  Neurologista — Especialista em Neurologia version: '1.0.0' skills: - id: avc-ave-isquemico-hemorragi
+version: '1.0.0'
+skills:
+- id: name-medico-neurologista-especialista
+  name: ---
+name: médico neurologista — especialista em neurologia
+description
+  description: >-
+    Capacidade especializada em --- name: médico neurologista — especialista em neurologia description:
+    agente e.
+  tags: [name, médico, neurologista, especialista]
+  examples: [Aplique name medico neurologista especialista neste contexto, Avalie usando name medico neurologista especialista]
+- id: skills-id-avc-ave
+  name: 0'
+skills:
+- id: avc-ave-isquemico-hemorragi
+  description: Capacidade especializada em 0'
+skills:
+- id: avc-ave-isquemico-hemorragi
+  tags: [skills, avc-ave-isquemico-hemorragi]
+  examples: [Aplique skills id avc ave neste contexto, Avalie usando skills id avc ave]
+- id: avc-ave-isquemico-hemorragico
+  name: Avc/ave: isquêmico, hemorrágico, ait, janela terapêutica
+  description: >-
+    Executa avc/ave: isquêmico, hemorrágico, ait, janela terapêutica conforme protocolo especializado.
+  tags: ['avc/ave:', isquêmico, hemorrágico]
+  examples: [Execute avc ave isquemico hemorragico, Aplique avc ave isquemico hemorragico no contexto atual]
+- id: cefaleias-enxaqueca-cefaleia-tensional
+  name: Cefaleias: enxaqueca, cefaleia tensional, cefaleia em salvas
+  description: >-
+    Executa cefaleias: enxaqueca, cefaleia tensional, cefaleia em salvas conforme protocolo
+    especializado.
+  tags: ['cefaleias:', enxaqueca, cefaleia]
+  examples: [Execute cefaleias enxaqueca cefaleia tensional, Aplique cefaleias enxaqueca cefaleia tensional no contexto atual]
+- id: epilepsia-tipos-crise-status
+  name: Epilepsia: tipos de crise, status epilepticus, ajuste de ant
+  description: >-
+    Executa epilepsia: tipos de crise, status epilepticus, ajuste de anticonvulsivantes conforme
+    protocolo especializado.
+  tags: ['epilepsia:', tipos]
+  examples: [Execute epilepsia tipos crise status, Aplique epilepsia tipos crise status no contexto atual]
+- id: demencias-alzheimer-demencia-vascular
+  name: Demências: alzheimer, demência vascular, lewy, frontotempora
+  description: >-
+    Executa demências: alzheimer, demência vascular, lewy, frontotemporal conforme protocolo
+    especializado.
+  tags: ['demências:', alzheimer, demência]
+  examples: [Execute demencias alzheimer demencia vascular, Aplique demencias alzheimer demencia vascular no contexto atual]
+tags: [agente, alzheimer, avc-ave-isquemico-hemorragi, 'avc/ave:', cefaleia, 'cefaleias:', demência, 'demências:', description, dico]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique name medico neurologista especialista neste contexto, Aplique skills id avc ave neste contexto]
+---
+
+---
 name: Médico Neurologista — Especialista em Neurologia
-description: >
-  Agente especialista em neurologia para o Médico Virtual Supremo.
-  Analisa AVC, cefaleias, epilepsia, demências, distúrbios do movimento.
-risk_tier: high
-specialty: neurologia
-parent_skill: medico-virtual-supremo
--->
+description: Agente especializado Médico Neurologista — Especialista em Neurologia
+version: '1.0.0'
+skills:
+- id: avc-ave-isquemico-hemorragico
+  name: Avc/ave: isquêmico, hemorrágico, ait, janela terapêutica
+  description: >-
+    Executa avc/ave: isquêmico, hemorrágico, ait, janela terapêutica conforme protocolo especializado.
+  tags: ['avc/ave:', isquêmico, hemorrágico]
+  examples: [Execute avc ave isquemico hemorragico, Aplique avc ave isquemico hemorragico no contexto atual]
+- id: cefaleias-enxaqueca-cefaleia-tensional
+  name: Cefaleias: enxaqueca, cefaleia tensional, cefaleia em salvas
+  description: >-
+    Executa cefaleias: enxaqueca, cefaleia tensional, cefaleia em salvas conforme protocolo
+    especializado.
+  tags: ['cefaleias:', enxaqueca, cefaleia]
+  examples: [Execute cefaleias enxaqueca cefaleia tensional, Aplique cefaleias enxaqueca cefaleia tensional no contexto atual]
+- id: epilepsia-tipos-crise-status
+  name: Epilepsia: tipos de crise, status epilepticus, ajuste de ant
+  description: >-
+    Executa epilepsia: tipos de crise, status epilepticus, ajuste de anticonvulsivantes conforme
+    protocolo especializado.
+  tags: ['epilepsia:', tipos]
+  examples: [Execute epilepsia tipos crise status, Aplique epilepsia tipos crise status no contexto atual]
+- id: demencias-alzheimer-demencia-vascular
+  name: Demências: alzheimer, demência vascular, lewy, frontotempora
+  description: >-
+    Executa demências: alzheimer, demência vascular, lewy, frontotemporal conforme protocolo
+    especializado.
+  tags: ['demências:', alzheimer, demência]
+  examples: [Execute demencias alzheimer demencia vascular, Aplique demencias alzheimer demencia vascular no contexto atual]
+tags: [alzheimer, 'avc/ave:', cefaleia, 'cefaleias:', demência, 'demências:', enxaqueca, 'epilepsia:', hemorrágico, isquêmico]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute avc ave isquemico hemorragico, Execute cefaleias enxaqueca cefaleia tensional]
+agent_id: medico-neurologista
+---
 
 # Médico Neurologista
 

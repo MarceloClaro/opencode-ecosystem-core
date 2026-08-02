@@ -1,0 +1,102 @@
+{
+  "spec_id": "SPEC-935-R359",
+  "contract_id": "OCB-CULTURAL-EPISTEME-001",
+  "runtime_after_restart": true,
+  "task_id": "ses_041d300ecffehsjv6GDy7O1OT5",
+  "request": {
+    "schema_version": "1.0.0",
+    "review_id": "r359-runtime-smoke-001",
+    "segment_id": "SMOKE-PTEN-001",
+    "source_language": "pt-BR",
+    "target_language": "en-US",
+    "source_text": "A fome tira a gente da barraca à noite.",
+    "translated_text": "Hunger takes us out of the tent at night.",
+    "author_voice_profile": {
+      "narrator_age": "criança",
+      "region": "Sertão do Ceará",
+      "register": "oral, memorialístico e popular"
+    }
+  },
+  "agent_output": {
+    "analysis_status": "complete",
+    "candidate_concerns": [
+      {
+        "code": "LITERALISM",
+        "severity": "medium",
+        "evidence_strength": "strong",
+        "source_span": [7, 30],
+        "target_span": [7, 31],
+        "rationale": "A construção-alvo sugere decalque e pode acionar sentidos não pretendidos de take someone out."
+      },
+      {
+        "code": "VOICE_SHIFT",
+        "severity": "low",
+        "evidence_strength": "weak",
+        "source_span": [12, 19],
+        "target_span": [7, 31],
+        "rationale": "Indício provisório de cadência traduzida; um segmento isolado não determina estabilidade da voz."
+      }
+    ],
+    "alternatives": [
+      {
+        "text": "Hunger drives us out of the tent at night.",
+        "rationale": "Mantém a fome como agente coercivo.",
+        "risks": [
+          "drives pode intensificar tira",
+          "tent depende da confirmação do referente histórico de barraca"
+        ]
+      },
+      {
+        "text": "Hunger makes us leave the tent at night.",
+        "rationale": "Emprega sintaxe simples.",
+        "risks": [
+          "pode atenuar a personificação e a violência condensada"
+        ]
+      }
+    ],
+    "conditional_preference": {
+      "text": "Hunger drives us out of the tent at night.",
+      "conditions": [
+        "confirmar o referente de barraca",
+        "comparar segmentos vizinhos",
+        "revisão bilíngue literária",
+        "revisão histórica temática"
+      ]
+    },
+    "heuristic_signals": {
+      "symbol_consistency": 0.82,
+      "cultural_fidelity": 0.58,
+      "author_voice_similarity": 0.55
+    },
+    "process_checks": {
+      "critical_omissions_identified": 1,
+      "unresolved_term_conflicts": 0,
+      "back_translation_used": false
+    },
+    "evidence_sufficiency": "partial",
+    "human_review_required": true,
+    "release_gate": "blocked",
+    "limits": [
+      "instrumento heurístico aplicado somente ao segmento fornecido",
+      "sem validação externa",
+      "sinais numéricos não demonstram qualidade"
+    ]
+  },
+  "independent_validation": {
+    "contract_valid": true,
+    "preflight_codes": [
+      "LITERALISM"
+    ],
+    "gate": {
+      "decision": "revise",
+      "release_gate": "blocked",
+      "human_review_required": true,
+      "reasons": [
+        "há indícios, sinais baixos ou checks não resolvidos"
+      ],
+      "scores_are_non_authoritative": true
+    }
+  },
+  "safe_claim": "O slug carregou após reinício e produziu uma saída não vazia aceita pelo contrato no caso controlado; isso não valida competência cultural ampla.",
+  "external_validation": false
+}

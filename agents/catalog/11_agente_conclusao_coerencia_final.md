@@ -1,8 +1,18 @@
 ---
 name: 11_agente_conclusao_coerencia_final
+description: Agente especializado 11_agente_conclusao_coerencia_final
+version: '1.0.0'
+skills:
+- id: 11-agente-conclusao-coerencia
+  name: 11 Agente Conclusao Coerencia Final
+  description: >-
+    Executa tarefas especializadas de 11 agente conclusao coerencia final conforme protocolo SDD/TDD.
+  tags: [11, agente, conclusao]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, coerencia, conclusao, final, maswos-agent]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\11_agente_conclusao_coerencia_final.md
 ---
 
 # 11 Agente Conclusao Coerencia Final

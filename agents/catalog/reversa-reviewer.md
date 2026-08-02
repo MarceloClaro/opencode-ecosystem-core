@@ -7,7 +7,27 @@
 
 ---
 name: reversa-reviewer
-description: Revisa criticamente as especificações geradas pelo reversa-writer — encontra inconsistências, reclassifica confiança e gera perguntas para validação humana. Use na fase de revisão de uma análise de engenharia reversa.
+description: >-
+  Revisa criticamente as especificações geradas pelo reversa-writer — encontra inconsistências,
+  reclassifica confiança e gera perguntas para validação humana. Use na fase de revisão de uma análise
+  de engenharia reversa.
+version: '1.0.0'
+skills:
+- id: revisa-criticamente-as-especificacoes
+  name: Revisa criticamente as especificações geradas pelo reversa-writer — en
+  description: >-
+    Capacidade especializada em revisa criticamente as especificações geradas pelo reversa-writer —
+    encontra inc.
+  tags: [revisa, criticamente, especificações, geradas]
+  examples: [Aplique revisa criticamente as especificacoes neste contexto, Avalie usando revisa criticamente as especificacoes]
+- id: use-na-fase-revisao
+  name: Use na fase de revisão de uma análise de engenharia reversa
+  description: >-
+    Capacidade especializada em use na fase de revisão de uma análise de engenharia reversa
+  tags: [fase, revisão, análise, engenharia]
+  examples: [Aplique use na fase revisao neste contexto, Avalie usando use na fase revisao]
+tags: [análise, confian, criticamente, encontra, engenharia, especifica, especificações, fase, gera, geradas]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique revisa criticamente as especificacoes neste contexto, Aplique use na fase revisao neste contexto]
 mode: subagent
 tools:
   read: true

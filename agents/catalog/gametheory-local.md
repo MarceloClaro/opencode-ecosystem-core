@@ -1,3 +1,17 @@
+---
+name: gametheory-local
+description: Agente especializado gametheory-local
+version: '1.0.0'
+skills:
+- id: gametheory-local
+  name: Gametheory Local
+  description: Executa tarefas especializadas de gametheory local conforme protocolo SDD/TDD.
+  tags: [gametheory, local]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [gametheory, local]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
+
 # GameTheoryLocal
 
 **ID:** `gametheory-local`

@@ -35,7 +35,15 @@ def _hash_token(token: str, dim: int = D_MODEL) -> List[float]:
 
 
 def _tokenize(text: str) -> List[str]:
-    return re.findall(r"[a-zA-Zà-úÀ-Ú0-9_]+", text.lower())
+    """Tokenização multilingue com quebra de snake_case e camelCase.
+
+    Antes: 'cloudsql_postgres_ad' → ['cloudsql_postgres_ad'] (1 token)
+    Depois: → ['cloudsql', 'postgres', 'ad'] (3 tokens)
+    """
+    text = text.replace("_", " ")
+    text = re.sub(r"([a-z])([A-Z])", r"\1 \2", text)
+    text = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1 \2", text)
+    return re.findall(r"[a-zA-Zà-úÀ-Ú0-9]+", text.lower())
 
 
 def _normalize(vec: List[float]) -> List[float]:

@@ -58,6 +58,16 @@ SCANNER_INFO = {
         "desc": "SROI, Teoria da Mudança, ODS, B-Impact Score",
         "arquivo": "scanners/social_impact_scanner.py",
     },
+    "literary": {
+        "name": "Suíte de Scanners Literários",
+        "desc": "8 visões literárias: narrativa, personagem, estilo, símbolos, teoria, leitor, ética e inovação",
+        "arquivo": "scanners/literary_scanners.py",
+    },
+    "literary_research": {
+        "name": "Suíte de Pesquisa Literária Internacional",
+        "desc": "4 scanners: bibliografia, corpus comparativo, teoria e rigor internacional",
+        "arquivo": "scanners/literary_research_scanners.py",
+    },
 }
 
 SCANNERS_ADICIONAIS = {
@@ -316,6 +326,34 @@ def cmd_diagnose(args: argparse.Namespace) -> None:
             lr = li.get("legal_readiness", "N/A")
             mg = li.get("metacognitive_gain_score", "N/A")
             print(f"⚖️  Impacto Jurídico — Prontidão: {lr} | Ganho metacognitivo: {mg}")
+
+    # ── 7.5 Scanners Literários (domain=literary ou include_literary) ─────
+    if "literary" in result:
+        lit = result["literary"]
+        if "error" in lit:
+            print(f"❌ Literário: {lit['error']}")
+        else:
+            score = lit.get("literary_excellence_score", 0)
+            grade = lit.get("grade", "N/A")
+            count = lit.get("scanner_count", 0)
+            print(f"📚 Literário — {count} scanners · Score: {score}/100 · Grau: {grade}")
+            if args.verbose:
+                for sid, payload in list(lit.get("results", {}).items())[:8]:
+                    print(f"     • {sid}: {payload.get('score', 0)}/100 ({payload.get('grade', 'N/A')})")
+
+    # ── 7.6 Pesquisa Literária Internacional ──────────────────────────────
+    if "literary_research" in result:
+        lrs = result["literary_research"]
+        if "error" in lrs:
+            print(f"❌ Pesquisa Literária: {lrs['error']}")
+        else:
+            score = lrs.get("international_research_rigor_score", 0)
+            grade = lrs.get("grade", "N/A")
+            count = lrs.get("scanner_count", 0)
+            print(f"📖 Pesquisa Literária — {count} scanners · Rigor internacional: {score}/100 · Grau: {grade}")
+            if args.verbose:
+                for sid, payload in list(lrs.get("results", {}).items())[:4]:
+                    print(f"     • {sid}: {payload.get('score', 0)}/100 ({payload.get('grade', 'N/A')})")
 
     # ── 8. Camadas do ecossistema (se disponível) ─────────────────────────
     if "ecosystem_layers" in result:

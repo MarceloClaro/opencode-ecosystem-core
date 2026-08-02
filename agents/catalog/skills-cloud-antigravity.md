@@ -1,15 +1,25 @@
 ---
-id: skills-cloud-antigravity
 name: Catálogo de Skills Cloud (Antigravity Backup)
-description: >
-  56 skills de infraestrutura Google Cloud Platform (AlloyDB, Cloud SQL, BigQuery,
-  Dataflow, Cloud Composer, GCS Security, Firestore, Spanner) com 269 scripts operacionais
-  importados do backup Antigravity 2026-07-11. Licença Apache 2.0 (Google).
-source: C:\Users\marce\Desktop\antigravity-backup-2026-07-11\config\skills\
-license: Apache-2.0
-skills_total: 56
-scripts_total: 269
-integration_date: 2026-07-11
+description: >-
+  56 skills de infraestrutura Google Cloud Platform (AlloyDB, Cloud SQL, BigQuery, Dataflow, Cloud
+  Composer, GCS Security, Firestore, Spanner) com 269 scripts operacionais importados do backup
+  Antigravity 2026-07-11. Licença Apache 2.0 (Google).
+version: '1.0.0'
+skills:
+- id: 56-skills-infraestrutura-google
+  name: 56 skills de infraestrutura google cloud platform (alloydb, cloud sql,
+  description: >-
+    Capacidade especializada em 56 skills de infraestrutura google cloud platform (alloydb, cloud sql,
+    bigquery.
+  tags: [skills, infraestrutura, google, cloud]
+  examples: [Aplique 56 skills infraestrutura google neste contexto, Avalie usando 56 skills infraestrutura google]
+- id: licenca-apache
+  name: Licença apache 2
+  description: Capacidade especializada em licença apache 2
+  tags: [licença, apache]
+  examples: [Aplique licenca apache neste contexto, Avalie usando licenca apache]
+tags: [alloydb, antigravity, apache, backup, bigquery, catálogo de skills cloud (antigravity backup), cloud, composer, dataflow, firestore]
+examples: [Configure o banco de dados Cloud SQL, Otimize a query BigQuery para este dataset, Aplique 56 skills infraestrutura google neste contexto, Aplique licenca apache neste contexto]
 ---
 
 # Catálogo de Skills Cloud (Antigravity Backup)

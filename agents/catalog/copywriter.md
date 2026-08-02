@@ -6,12 +6,18 @@
 -->
 
 ---
-# OpenCode Agent Configuration
-# Metadata (id, name, category, type, version, author, tags, dependencies) is stored in:
-# .opencode/config/agent-metadata.json
-
 name: OpenCopywriter
-description: "Expert in persuasive writing, marketing copy, and brand messaging"
+description: Expert in persuasive writing, marketing copy, and brand messaging
+version: '1.0.0'
+skills:
+- id: expert-in-persuasive-writing
+  name: Expert in persuasive writing, marketing copy, and brand messaging
+  description: >-
+    Capacidade especializada em expert in persuasive writing, marketing copy, and brand messaging
+  tags: [expert, persuasive, writing, marketing]
+  examples: [Aplique expert in persuasive writing neste contexto, Avalie usando expert in persuasive writing]
+tags: [brand, copy, expert, marketing, messaging, opencopywriter, persuasive, writing]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique expert in persuasive writing neste contexto]
 mode: primary
 temperature: 0.3
 ---

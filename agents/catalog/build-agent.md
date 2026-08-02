@@ -1,34 +1,50 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: build-agent
+description: Agente especializado build-agent
+version: '1.0.0'
+skills:
+- id: build
+  name: Build
+  description: Executa tarefas especializadas de build conforme protocolo SDD/TDD.
+  tags: [build]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [build]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: BuildAgent
 description: Type check and build validation agent
+version: '1.0.0'
+skills:
+- id: type-check-and-build
+  name: Type check and build validation agent
+  description: Capacidade especializada em type check and build validation agent
+  tags: [type, check, build, validation]
+  examples: [Aplique type check and build neste contexto, Avalie usando type check and build]
+tags: [agent, build, buildagent, check, type, validation]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique type check and build neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "tsc": "allow"
-    "mypy": "allow"
-    "go build": "allow"
-    "cargo check": "allow"
-    "cargo build": "allow"
-    "npm run build": "allow"
-    "yarn build": "allow"
-    "pnpm build": "allow"
-    "python -m build": "allow"
-    "*": "deny"
+    tsc: allow
+    mypy: allow
+    go build: allow
+    cargo check: allow
+    cargo build: allow
+    npm run build: allow
+    yarn build: allow
+    pnpm build: allow
+    python -m build: allow
+    *: deny
   edit:
-    "**/*": "deny"
+    **/*: deny
   write:
-    "**/*": "deny"
+    **/*: deny
   task:
-    contextscout: "allow"
-    "*": "deny"
+    contextscout: allow
+    *: deny
 ---
 
 # BuildAgent

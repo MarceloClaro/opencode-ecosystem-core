@@ -7,7 +7,36 @@
 
 ---
 name: thoughts-locator
-description: Discovers relevant documents in thoughts/ directory (We use this for all sorts of metadata storage!). This is really only relevant/needed when you're in a reseaching mood and need to figure out if we have random thoughts written down that are relevant to your current research task. Based on the name, I imagine you can guess this is the `thoughts` equivilent of `codebase-locator`
+description: >-
+  Discovers relevant documents in thoughts/ directory (We use this for all sorts of metadata
+  storage!). This is really only relevant/needed when you're in a reseaching mood and need to figure
+  out if we have random thoughts written down that are relevant to your current research task. Based
+  on the name, I imagine you can guess this is the `thoughts` equivilent of `codebase-locator`
+version: '1.0.0'
+skills:
+- id: discovers-relevant-documents-in
+  name: Discovers relevant documents in thoughts/ directory (we use this for a
+  description: >-
+    Capacidade especializada em discovers relevant documents in thoughts/ directory (we use this for all
+    sorts o.
+  tags: [discovers, relevant, documents, thoughts/]
+  examples: [Aplique discovers relevant documents in neste contexto, Avalie usando discovers relevant documents in]
+- id: this-is-really-only
+  name: This is really only relevant/needed when you're in a reseaching mood a
+  description: >-
+    Capacidade especializada em this is really only relevant/needed when you're in a reseaching mood and
+    need to.
+  tags: [really, only, relevant/needed, when]
+  examples: [Aplique this is really only neste contexto, Avalie usando this is really only]
+- id: based-on-the-name
+  name: Based on the name, i imagine you can guess this is the thoughts equivi
+  description: >-
+    Capacidade especializada em based on the name, i imagine you can guess this is the thoughts
+    equivilent of co.
+  tags: [based, name, imagine, guess]
+  examples: [Aplique based on the name neste contexto, Avalie usando based on the name]
+tags: [based, codebase-locator, current, directory, discovers, documents, down, equivilent, figure, guess]
+examples: [Analise este dataset e gere visualizações, Construa pipeline de dados para ETL, Aplique discovers relevant documents in neste contexto, Aplique this is really only neste contexto]
 mode: subagent
 temperature: 0.1
 tools:

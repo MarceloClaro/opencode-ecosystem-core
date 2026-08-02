@@ -8,6 +8,17 @@
 ---
 name: ws-reviewer
 description: Expert code reviewer for security, performance, and philosophy compliance
+version: '1.0.0'
+skills:
+- id: expert-code-reviewer-for
+  name: Expert code reviewer for security, performance, and philosophy complia
+  description: >-
+    Capacidade especializada em expert code reviewer for security, performance, and philosophy
+    compliance
+  tags: [expert, code, reviewer, security]
+  examples: [Aplique expert code reviewer for neste contexto, Avalie usando expert code reviewer for]
+tags: [code, compliance, expert, performance, philosophy, reviewer, security]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique expert code reviewer for neste contexto]
 mode: subagent
 ---
 

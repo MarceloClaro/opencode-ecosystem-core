@@ -1,8 +1,18 @@
 ---
 name: 35_agente_coleta_datasets_reais
+description: Agente especializado 35_agente_coleta_datasets_reais
+version: '1.0.0'
+skills:
+- id: 35-agente-coleta-datasets
+  name: 35 Agente Coleta Datasets Reais
+  description: >-
+    Executa tarefas especializadas de 35 agente coleta datasets reais conforme protocolo SDD/TDD.
+  tags: [35, agente, coleta]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, coleta, datasets, maswos-agent, reais]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\35_agente_coleta_datasets_reais.md
 ---
 
 # 35 Agente Coleta Datasets Reais

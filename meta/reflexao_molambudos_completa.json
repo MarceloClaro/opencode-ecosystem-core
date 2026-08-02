@@ -1,0 +1,59 @@
+[
+  {
+    "type": "metacognitive_reflection",
+    "timestamp": "2026-07-29T06:28:46.748808",
+    "agent": "marceloclaro",
+    "cycle": "Molambudos — Intervenção Literária Completa (4 Rodadas)",
+    "context": "Obra Molambudos — O Diário do Paciente 1.260, 74 fragmentos, 357 páginas, ISBN 9798189170492",
+    "before_state": {
+      "les": 68.12,
+      "grade": "consistente",
+      "dimensoes_emergentes": 8,
+      "dimensoes_excelentes": 0,
+      "dicionario_keywords_base": "apenas termos genéricos"
+    },
+    "after_state": {
+      "les": 91.73,
+      "grade": "excelente",
+      "dimensoes_emergentes": 1,
+      "dimensoes_excelentes": 25,
+      "novas_keywords_no_dicionario": 21,
+      "fragmentos_modificados": 23,
+      "ne_adicionadas": 24
+    },
+    "interventions": {
+      "rodada_1_noológico": "diagnóstico inicial dos scanners, identificação de 8 dimensões frágeis",
+      "rodada_2_10_fragmentos": "agência literária (MEM-03/MEM-20/LUC-Escolha), materialidade (MEM-06/26), ética (DOC-19), conceitos teóricos (MEM-18/CONT-05/06/11)",
+      "rodada_3_5_fragmentos": "materialidade caligráfica (MEM-04), protocolo de leitura (CONT-01), fechamento circular (MEM-27), estrutura ergódica (CONT-13), teoria do trauma (DOC-08)",
+      "rodada_4_4_fragmentos": "conflito/tensão (MEM-07), contágio/participação (MEM-16), imersão (CONT-02), corpo como página (CONT-10)",
+      "dicionario_atualizado": "18 novas keywords em 6 listas + 3 em DISCLAIMERS = 21 no total"
+    },
+    "lessons_learned": [
+      "AGÊNCIA: Micro-momentos de escolha ('escolhi', 'escolher') transformam passividade em protagonismo sem alterar a estrutura da obra",
+      "MATERIALIDADE: Vocabulário tátil (lápis, tinta, caligrafia, exumação, papel com terra) é detectado pelo scanner apenas se presente no dicionário",
+      "PARATEXTO: Notas do Editor (N.E.) funcionam como camada metacognitiva que o scanner reconhece como 'paratextualidade' e 'conceitos teóricos'",
+      "ÉTICA: A distinção 'ficção/história' e 'horror real' são necessárias para que o scanner de ética avalie anti-exploração como alta",
+      "PROTOCOLO: Instruções diretas ao leitor ('feche o livro', 'não vire') são detectadas como 'protocolo de leitura' apenas com keywords específicas",
+      "DICIONÁRIO E SCANNER: O scanner é 100% dependente do dicionário — atualizá-lo é tão importante quanto modificar o texto",
+      "MERKLE: Selo de integridade precisa incluir lista completa de arquivos do frontmatter para verificação correta"
+    ],
+    "risks_identified": [
+      "Dimensão 'avisos_e_limites' em 33 (emergente): alta densidade de trauma sem aviso de conteúdo explícito detectável",
+      "O dicionário do scanner só carrega na inicialização do MCP server — reinicialização necessária para refletir mudanças",
+      "Verificação Merkle usou lista incompleta de frontmatter; corrigido na segunda versão do selo"
+    ],
+    "confidence_assessment": {
+      "melhoria_obtida": "confirmada (Δ +23.61 LES)",
+      "integritade_fragmentos": "confirmada (74/74 OK)",
+      "integritade_pdf": "confirmada (SHA-256 idêntico)",
+      "selo_merkle": "corrigido e validado (4/4 checks passam)",
+      "score_geral": 0.95
+    },
+    "next_steps_suggested": [
+      "Adicionar aviso de conteúdo explícito na página cuidado.tex para elevar 'avisos_e_limites' de 33→100",
+      "Reiniciar MCP server do scanner para carregar dicionário atualizado",
+      "Recompilar main_miolo_sem_capa.pdf com todas as 27 intervenções",
+      "Empacotar ZIP de upload KDP (miolo + capa + selo + checklist)"
+    ]
+  }
+]

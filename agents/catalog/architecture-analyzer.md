@@ -1,32 +1,53 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: architecture-analyzer
+description: Agente especializado architecture-analyzer
+version: '1.0.0'
+skills:
+- id: architecture-analyzer
+  name: Architecture Analyzer
+  description: >-
+    Executa tarefas especializadas de architecture analyzer conforme protocolo SDD/TDD.
+  tags: [architecture, analyzer]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [analyzer, architecture]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: ArchitectureAnalyzer
-description: DDD-driven architecture analyzer identifying bounded contexts, module boundaries, and domain relationships for multi-stage orchestration
+description: >-
+  DDD-driven architecture analyzer identifying bounded contexts, module boundaries, and domain
+  relationships for multi-stage orchestration
+version: '1.0.0'
+skills:
+- id: ddd-driven-architecture-analyzer
+  name: Ddd-driven architecture analyzer identifying bounded contexts, module
+  description: >-
+    Capacidade especializada em ddd-driven architecture analyzer identifying bounded contexts, module
+    boundaries.
+  tags: [ddd-driven, architecture, analyzer, identifying]
+  examples: [Aplique ddd driven architecture analyzer neste contexto, Avalie usando ddd driven architecture analyzer]
+tags: [analyzer, architecture, architectureanalyzer, boundaries, bounded, contexts, ddd-driven, domain, identifying, module]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique ddd driven architecture analyzer neste contexto]
 mode: subagent
 temperature: 0.2
 permission:
   bash:
-    "*": "deny"
-    "mkdir -p .tmp/architecture*": "allow"
-    "mkdir -p .tmp/tasks/*/module-briefs*": "allow"
+    *: deny
+    mkdir -p .tmp/architecture*: allow
+    mkdir -p .tmp/tasks/*/module-briefs*: allow
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    .git/**: deny
   task:
-    contextscout: "allow"
-    externalscout: "allow"
-    "*": "deny"
+    contextscout: allow
+    externalscout: allow
+    *: deny
   skill:
-    "*": "deny"
+    *: deny
 ---
 
 # ArchitectureAnalyzer

@@ -1,13 +1,52 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: quantum-nexus-phd
+description: Agente especializado quantum-nexus-phd
+version: '1.0.0'
+skills:
+- id: quantum-nexus
+  name: Quantum Nexus
+  description: Executa tarefas especializadas de quantum nexus conforme protocolo SDD/TDD.
+  tags: [quantum, nexus]
+  examples: [Produza artigo acadêmico com metodologia Qualis A1, Analise os dados estatísticos do experimento]
+tags: [nexus, quantum]
+examples: [Produza artigo acadêmico com metodologia Qualis A1, Analise os dados estatísticos do experimento, Produza artigo acadêmico com metodologia Qualis A1]
+---
 
 ---
 name: quantum-nexus-phd
-description: "Super-Habilidade v7.2: Pesquisa quântica end-to-end com Qiskit+PennyLane, QML médico em HAM10000 (89.52%), 50 qubits MPS, Grad-CAM, error mitigation (ZNE/PEC/DD), validação matemática, artigos Qualis A1, dashboards React. Orquestra agentes sob arquitetura Nexus Transformer v4.0."
+description: >-
+  Super-Habilidade v7.2: Pesquisa quântica end-to-end com Qiskit+PennyLane, QML médico em HAM10000
+  (89.52%), 50 qubits MPS, Grad-CAM, error mitigation (ZNE/PEC/DD), validação matemática, artigos
+  Qualis A1, dashboards React. Orquestra agentes sob arquitetura Nexus Transformer v4.0.
+version: '1.0.0'
+skills:
+- id: super-habilidade-v7
+  name: Super-habilidade v7
+  description: Capacidade especializada em super-habilidade v7
+  tags: [super-habilidade]
+  examples: [Aplique super habilidade v7 neste contexto, Avalie usando super habilidade v7]
+- id: pesquisa-quantica-end-to
+  name: 2: pesquisa quântica end-to-end com qiskit+pennylane, qml médico em ha
+  description: >-
+    Capacidade especializada em 2: pesquisa quântica end-to-end com qiskit+pennylane, qml médico em
+    ham10000 (89
+  tags: [pesquisa, quântica, end-to-end, qiskit+pennylane]
+  examples: [Aplique pesquisa quantica end to neste contexto, Avalie usando pesquisa quantica end to]
+- id: 52-50-qubits-mps
+  name: 52%), 50 qubits mps, grad-cam, error mitigation (zne/pec/dd), validaçã
+  description: >-
+    Capacidade especializada em 52%), 50 qubits mps, grad-cam, error mitigation (zne/pec/dd), validação
+    matemáti.
+  tags: [52%, qubits, mps, grad-cam]
+  examples: [Aplique 52 50 qubits mps neste contexto, Avalie usando 52 50 qubits mps]
+- id: orquestra-agentes-sob-arquitetura
+  name: Orquestra agentes sob arquitetura nexus transformer v4
+  description: >-
+    Capacidade especializada em orquestra agentes sob arquitetura nexus transformer v4
+  tags: [orquestra, agentes, arquitetura, nexus]
+  examples: [Aplique orquestra agentes sob arquitetura neste contexto, Avalie usando orquestra agentes sob arquitetura]
+tags: [52%, agentes, arquitetura, artigos, dashboards, dico, end-to-end, error, grad-cam, matem]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Aplique super habilidade v7 neste contexto, Aplique pesquisa quantica end to neste contexto]
 mode: subagent
 tools:
   read: true

@@ -1,27 +1,43 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: documentation
+description: Agente especializado documentation
+version: '1.0.0'
+skills:
+- id: documentation
+  name: Documentation
+  description: Executa tarefas especializadas de documentation conforme protocolo SDD/TDD.
+  tags: [documentation]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [documentation]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: DocWriter
 description: Documentation authoring agent
+version: '1.0.0'
+skills:
+- id: documentation-authoring-agent
+  name: Documentation authoring agent
+  description: Capacidade especializada em documentation authoring agent
+  tags: [documentation, authoring, agent]
+  examples: [Aplique documentation authoring agent neste contexto, Avalie usando documentation authoring agent]
+tags: [agent, authoring, documentation, docwriter]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique documentation authoring agent neste contexto]
 mode: subagent
 temperature: 0.2
 permission:
   bash:
-    "*": "deny"
+    *: deny
   edit:
-    "plan/**/*.md": "allow"
-    "**/*.md": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
+    plan/**/*.md: allow
+    **/*.md: allow
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
   task:
-    contextscout: "allow"
-    "*": "deny"
+    contextscout: allow
+    *: deny
 ---
 
 # DocWriter

@@ -1,11 +1,92 @@
 ---
+name: Agente Reversa: Process Lifecycle Manager
+description: >-
+  --- name: Agente Reversa: Process Lifecycle Manager description: >- --- name:
+  reversa-process-lifecycle description: >- Agente gerenciador de ciclo de vida de processos
+  background. Inspirado pelo
+version: '1.0.0'
+skills:
+- id: name-agente-reversa-process
+  name: ---
+name: agente reversa: process lifecycle manager
+description: >-
+  description: >-
+    Capacidade especializada em --- name: agente reversa: process lifecycle manager description: >- ---
+    name: .
+  tags: [name, agente, reversa, process]
+  examples: [Aplique name agente reversa process neste contexto, Avalie usando name agente reversa process]
+- id: inspirado-pelo
+  name: Inspirado pelo
+  description: Capacidade especializada em inspirado pelo
+  tags: [inspirado, pelo]
+  examples: [Aplique inspirado pelo neste contexto, Avalie usando inspirado pelo]
+tags: [agente, 'agente reversa: process lifecycle manager', background, ciclo, description, gerenciador, inspirado, lifecycle, manager, name]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique name agente reversa process neste contexto, Aplique inspirado pelo neste contexto]
+---
+
+---
+name: Agente Reversa: Process Lifecycle Manager
+description: >-
+  --- name: reversa-process-lifecycle description: >- Agente gerenciador de ciclo de vida de processos
+  background. Inspirado pelo SimulationRunner do MiroFish-Offline (simulation_runner.py). Inicia,
+version: '1.0.0'
+skills:
+- id: name-reversa-process-lifecycle
+  name: ---
 name: reversa-process-lifecycle
-description: >
-  Agente gerenciador de ciclo de vida de processos background. Inspirado
-  pelo SimulationRunner do MiroFish-Offline (simulation_runner.py).
-  Inicia, monitora, pausa, retoma e finaliza processos com tracking
-  cross-platform e ingestão de logs em tempo real.
-  Use via: "processo", "runner", "background", /process-lifecycle.
+description: >-
+  agente gerenciad
+  description: >-
+    Capacidade especializada em --- name: reversa-process-lifecycle description: >- agente gerenciador
+    de cicl.
+  tags: [name, reversa-process-lifecycle, description, agente]
+  examples: [Aplique name reversa process lifecycle neste contexto, Avalie usando name reversa process lifecycle]
+- id: inspirado-pelo-simulationrunner-mirofish
+  name: Inspirado pelo simulationrunner do
+  mirofish-offline (simulation_runn
+  description: >-
+    Capacidade especializada em inspirado pelo simulationrunner do mirofish-offline (simulation_runner
+  tags: [inspirado, pelo, simulationrunner, mirofish-offline]
+  examples: [Aplique inspirado pelo simulationrunner mirofish neste contexto, Avalie usando inspirado pelo simulationrunner mirofish]
+tags: [agente, 'agente reversa: process lifecycle manager', background, ciclo, description, gerenciador, inicia, inspirado, mirofish-offline, name]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique name reversa process lifecycle neste contexto, Aplique inspirado pelo simulationrunner mirofish neste contexto]
+---
+
+---
+name: reversa-process-lifecycle
+description: >-
+  Agente gerenciador de ciclo de vida de processos background. Inspirado pelo SimulationRunner do
+  MiroFish-Offline (simulation_runner.py). Inicia, monitora, pausa, retoma e finaliza processos com
+  tracking cross-platform e ingestão de logs em tempo real. Use via: "processo", "runner",
+  "background", /process-lifecycle.
+version: '1.0.0'
+skills:
+- id: gerenciador-ciclo-vida-processos
+  name: Gerenciador de ciclo de vida de processos background
+  description: Capacidade especializada em gerenciador de ciclo de vida de processos background
+  tags: [gerenciador, ciclo, vida, processos]
+  examples: [Aplique gerenciador ciclo vida processos neste contexto, Avalie usando gerenciador ciclo vida processos]
+- id: inspirado-pelo-simulationrunner-mirofish
+  name: Inspirado pelo simulationrunner do mirofish-offline (simulation_runner
+  description: >-
+    Capacidade especializada em inspirado pelo simulationrunner do mirofish-offline (simulation_runner
+  tags: [inspirado, pelo, simulationrunner, mirofish-offline]
+  examples: [Aplique inspirado pelo simulationrunner mirofish neste contexto, Avalie usando inspirado pelo simulationrunner mirofish]
+- id: inicia-monitora-pausa-retoma
+  name: Inicia, monitora, pausa, retoma e finaliza processos com tracking cros
+  description: >-
+    Capacidade especializada em inicia, monitora, pausa, retoma e finaliza processos com tracking
+    cross-platform.
+  tags: [inicia, monitora, pausa, retoma]
+  examples: [Aplique inicia monitora pausa retoma neste contexto, Avalie usando inicia monitora pausa retoma]
+- id: use-processo-runner-background
+  name: Use via: "processo", "runner", "background", /process-lifecycle
+  description: >-
+    Capacidade especializada em use via: "processo", "runner", "background", /process-lifecycle
+  tags: ["processo", "runner", "background", /process-lifecycle]
+  examples: [Aplique use processo runner background neste contexto, Avalie usando use processo runner background]
+tags: ["background", "processo", "runner", /process-lifecycle, agente, background, ciclo, cross-platform, finaliza, gerenciador]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique gerenciador ciclo vida processos neste contexto, Aplique inspirado pelo simulationrunner mirofish neste contexto]
 mode: subagent
 tools:
   read: true
@@ -13,7 +94,6 @@ tools:
   glob: true
   bash: true
   write: true
-allowed-tools: Read, Grep, Glob, Bash, Write
 ---
 
 # Agente Reversa: Process Lifecycle Manager

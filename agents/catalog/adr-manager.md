@@ -1,27 +1,47 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: adr-manager
+description: Agente especializado adr-manager
+version: '1.0.0'
+skills:
+- id: adr-manager
+  name: Adr Manager
+  description: Executa tarefas especializadas de adr manager conforme protocolo SDD/TDD.
+  tags: [adr, manager]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [adr, manager]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: ADRManager
-description: Architecture Decision Record specialist capturing decisions, context, alternatives, and consequences in lightweight ADR format
+description: >-
+  Architecture Decision Record specialist capturing decisions, context, alternatives, and consequences
+  in lightweight ADR format
+version: '1.0.0'
+skills:
+- id: architecture-decision-record-specialist
+  name: Architecture decision record specialist capturing decisions, context,
+  description: >-
+    Capacidade especializada em architecture decision record specialist capturing decisions, context,
+    alternativ.
+  tags: [architecture, decision, record, specialist]
+  examples: [Aplique architecture decision record specialist neste contexto, Avalie usando architecture decision record specialist]
+tags: [adrmanager, alternatives, architecture, capturing, consequences, context, decision, decisions, format, lightweight]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique architecture decision record specialist neste contexto]
 mode: subagent
 temperature: 0.2
 permission:
   bash:
-    "*": "deny"
-    "mkdir -p docs/adr*": "allow"
+    *: deny
+    mkdir -p docs/adr*: allow
   edit:
-    "docs/adr/**/*.md": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
+    docs/adr/**/*.md: allow
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
   task:
-    contextscout: "allow"
-    "*": "deny"
+    contextscout: allow
+    *: deny
 ---
 
 # ADRManager

@@ -7,7 +7,30 @@
 
 ---
 name: reversa-design-system
-description: Extrai e documenta o sistema de design do projeto legado — paleta de cores, tipografia, espaçamentos, tokens e componentes a partir de CSS, arquivos de tema e screenshots.
+description: >-
+  Extrai e documenta o sistema de design do projeto legado — paleta de cores, tipografia,
+  espaçamentos, tokens e componentes a partir de CSS, arquivos de tema e screenshots.
+version: '1.0.0'
+skills:
+- id: documenta-sistema-design-projeto
+  name: Documenta o sistema de design do projeto legado — paleta de cores, tip
+  description: >-
+    Capacidade especializada em documenta o sistema de design do projeto legado — paleta de cores,
+    tipografia, e.
+  tags: [documenta, sistema, design, projeto]
+  examples: [Aplique documenta sistema design projeto neste contexto, Avalie usando documenta sistema design projeto]
+- id: componentes-partir-css-arquivos
+  name: Componentes a partir de css, arquivos de tema
+  description: Capacidade especializada em componentes a partir de css, arquivos de tema
+  tags: [componentes, partir, css, arquivos]
+  examples: [Aplique componentes partir css arquivos neste contexto, Avalie usando componentes partir css arquivos]
+- id: screenshots
+  name: Screenshots
+  description: Capacidade especializada em screenshots
+  tags: [screenshots]
+  examples: [Aplique screenshots neste contexto, Avalie usando screenshots]
+tags: [amentos, arquivos, componentes, cores, css, design, documenta, espa, extrai, legado]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique documenta sistema design projeto neste contexto, Aplique componentes partir css arquivos neste contexto]
 mode: subagent
 tools:
   read: true

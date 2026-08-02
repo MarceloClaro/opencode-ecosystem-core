@@ -1,22 +1,52 @@
 ---
-id: cloud-bigquery-specialist
 name: Cloud BigQuery Specialist
-description: >
-  Especialista em BigQuery — SQL, ML/AI, BigFrames, Graph Analytics,
-  Data Transfer Service, Dataform e dbt. Baseado em 4 skills do 
-  Antigravity Backup (SPEC-935-R130).
-capabilities:
-  - bigquery-sql
-  - bigquery-ml-ai
-  - bigquery-bigframes
-  - bigquery-graph
-  - bigquery-dts
-  - dataform
-  - dbt
-  - query-optimization
-trust_score: 0.85
-source: antigravity-backup-2026-07-11
-license: Apache-2.0
+description: >-
+  Especialista em BigQuery — SQL, ML/AI, BigFrames, Graph Analytics, Data Transfer Service, Dataform e
+  dbt. Baseado em 4 skills do Antigravity Backup (SPEC-935-R130).
+version: '1.0.0'
+skills:
+- id: bigquery-sql
+  name: Bigquery Sql
+  description: Capacidade especializada em bigquery sql.
+  tags: [bigquery, bigquery-sql]
+  examples: [Aplique bigquery sql, Execute operação de bigquery sql]
+- id: bigquery-ml-ai
+  name: Bigquery Ml Ai
+  description: Capacidade especializada em bigquery ml ai.
+  tags: [bigquery, bigquery-ml-ai]
+  examples: [Aplique bigquery ml ai, Execute operação de bigquery ml ai]
+- id: bigquery-bigframes
+  name: Bigquery Bigframes
+  description: Capacidade especializada em bigquery bigframes.
+  tags: [bigquery, bigquery-bigframes]
+  examples: [Aplique bigquery bigframes, Execute operação de bigquery bigframes]
+- id: bigquery-graph
+  name: Bigquery Graph
+  description: Capacidade especializada em bigquery graph.
+  tags: [bigquery, bigquery-graph]
+  examples: [Aplique bigquery graph, Execute operação de bigquery graph]
+- id: bigquery-dts
+  name: Bigquery Dts
+  description: Capacidade especializada em bigquery dts.
+  tags: [bigquery, bigquery-dts]
+  examples: [Aplique bigquery dts, Execute operação de bigquery dts]
+- id: dataform
+  name: Dataform
+  description: Capacidade especializada em dataform.
+  tags: [dataform, dataform]
+  examples: [Aplique dataform, Execute operação de dataform]
+- id: dbt
+  name: Dbt
+  description: Capacidade especializada em dbt.
+  tags: [dbt, dbt]
+  examples: [Aplique dbt, Execute operação de dbt]
+- id: query-optimization
+  name: Query Optimization
+  description: Capacidade especializada em query optimization.
+  tags: [query, query-optimization]
+  examples: [Aplique query optimization, Execute operação de query optimization]
+tags: [analytics, antigravity, backup, baseado, bigframes, bigquery, bigquery-bigframes, bigquery-dts, bigquery-graph, bigquery-ml-ai]
+examples: [Configure o banco de dados Cloud SQL, Otimize a query BigQuery para este dataset, Aplique bigquery sql, Aplique bigquery ml ai]
 ---
 
 # Cloud BigQuery Specialist

@@ -1,3 +1,17 @@
+---
+name: llm-reduction
+description: Agente especializado llm-reduction
+version: '1.0.0'
+skills:
+- id: llm-reduction
+  name: Llm Reduction
+  description: Executa tarefas especializadas de llm reduction conforme protocolo SDD/TDD.
+  tags: [llm, reduction]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [llm, reduction]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
+
 # LLM Reduction Layer
 
 **ID:** `llm-reduction`

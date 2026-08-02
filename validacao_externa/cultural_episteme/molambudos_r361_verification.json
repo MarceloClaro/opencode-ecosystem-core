@@ -1,0 +1,108 @@
+{
+  "spec_id": "SPEC-935-R361",
+  "generated_at": "2026-08-01",
+  "verification": {
+    "quote_normalizer_pending": 0,
+    "routes": {
+      "valid": 540,
+      "total": 540,
+      "missing": 0,
+      "divergent": 0,
+      "by_language": {
+        "pt-BR": 180,
+        "en-US": 180,
+        "zh-CN": 180
+      },
+      "legacy_numeric_routes": 462
+    },
+    "builds": {
+      "pt": {
+        "passed": true,
+        "engine": "pdfLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main.log",
+        "pages": 395,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      },
+      "en": {
+        "passed": true,
+        "engine": "pdfLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_en.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main_en.log",
+        "pages": 401,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      },
+      "zh": {
+        "passed": true,
+        "engine": "XeLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_zh.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main_zh.log",
+        "pages": 387,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      },
+      "tri": {
+        "passed": true,
+        "engine": "XeLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_tri.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main_tri.log",
+        "pages": 1039,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      },
+      "kdp_tri": {
+        "passed": true,
+        "engine": "XeLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_kdp_print_160x230mm.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main_kdp_print_160x230mm.log",
+        "pages": 1091,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      }
+    },
+    "pagination_comparison": {
+      "basis": "último resultado R358 reportado na sessão",
+      "previous": {
+        "pt": 395,
+        "en": 401,
+        "zh": 387,
+        "tri": 1037,
+        "kdp_tri": 1089
+      },
+      "current": {
+        "pt": 395,
+        "en": 401,
+        "zh": 387,
+        "tri": 1039,
+        "kdp_tri": 1091
+      },
+      "note": "TRI e KDP TRI ganharam duas páginas por recomposição; nenhuma rota ficou ausente ou divergente."
+    },
+    "regression": {
+      "passed": 46,
+      "failed": 0,
+      "total": 46,
+      "pre_gate_observation": "44 testes passaram antes do autogate; após o gate SDD/Behavioral, a bateria completa concluiu 46/46."
+    },
+    "non_blocking_log_notes": [
+      "Persistem avisos tipográficos de caixas underfull/overfull, substituição de formas de fonte e destinos PDF duplicados.",
+      "O texput.log antigo contém Emergency stop, mas não pertence aos cinco logs produzidos e auditados nesta rodada."
+    ]
+  },
+  "external_validation": false,
+  "human_review_required": true,
+  "release_gate": "blocked",
+  "quality_verdict_allowed": false
+}

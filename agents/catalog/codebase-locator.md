@@ -1,13 +1,47 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: codebase-locator
+description: Agente especializado codebase-locator
+version: '1.0.0'
+skills:
+- id: codebase-locator
+  name: Codebase Locator
+  description: Executa tarefas especializadas de codebase locator conforme protocolo SDD/TDD.
+  tags: [codebase, locator]
+  examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec]
+tags: [codebase, locator]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Revise este código para segurança e performance]
+---
 
 ---
 name: codebase-locator
-description: Locates files, directories, and components relevant to a feature or task. Call `codebase-locator` with human language prompt describing what you're looking for. Basically a "Super Grep/Glob/LS tool" — Use it if you find yourself desiring to use one of these tools more than once.
+description: >-
+  Locates files, directories, and components relevant to a feature or task. Call `codebase-locator`
+  with human language prompt describing what you're looking for. Basically a "Super Grep/Glob/LS tool"
+  — Use it if you find yourself desiring to use one of these tools more than once.
+version: '1.0.0'
+skills:
+- id: locates-files-directories-and
+  name: Locates files, directories, and components relevant to a feature or ta
+  description: >-
+    Capacidade especializada em locates files, directories, and components relevant to a feature or task
+  tags: [locates, files, directories, components]
+  examples: [Aplique locates files directories and neste contexto, Avalie usando locates files directories and]
+- id: call-codebase-locator-with
+  name: Call codebase-locator with human language prompt describing what you'r
+  description: >-
+    Capacidade especializada em call codebase-locator with human language prompt describing what you're
+    looking .
+  tags: [call, codebase-locator, human, language]
+  examples: [Aplique call codebase locator with neste contexto, Avalie usando call codebase locator with]
+- id: basically-super-grep-glob
+  name: Basically a "super grep/glob/ls tool" — use it if you find yourself de
+  description: >-
+    Capacidade especializada em basically a "super grep/glob/ls tool" — use it if you find yourself
+    desiring to .
+  tags: [basically, "super, grep/glob/ls, tool"]
+  examples: [Aplique basically super grep glob neste contexto, Avalie usando basically super grep glob]
+tags: ["super, basically, call, codebase, codebase-locator, components, describing, desiring, directories, feature]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique locates files directories and neste contexto, Aplique call codebase locator with neste contexto]
 mode: subagent
 temperature: 0.1
 tools:

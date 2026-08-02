@@ -1,21 +1,52 @@
 ---
 name: colibri-agent
+description: Agente especializado colibri-agent
+version: '1.0.0'
+skills:
+- id: colibri-chat
+  name: Colibri:Chat
+  description: Capacidade especializada em colibri:chat.
+  tags: [colibri, colibri-chat]
+  examples: [Aplique colibri chat, Execute operação de colibri chat]
+- id: colibri-complete
+  name: Colibri:Complete
+  description: Capacidade especializada em colibri:complete.
+  tags: [colibri, colibri-complete]
+  examples: [Aplique colibri complete, Execute operação de colibri complete]
+- id: colibri-olmoe-complete
+  name: Colibri:Olmoe:Complete
+  description: Capacidade especializada em colibri:olmoe:complete.
+  tags: [colibri, colibri-olmoe-comple]
+  examples: [Aplique colibri olmoe complete, Execute operação de colibri olmoe complete]
+- id: colibri-olmoe-validate
+  name: Colibri:Olmoe:Validate
+  description: Capacidade especializada em colibri:olmoe:validate.
+  tags: [colibri, colibri-olmoe-valida]
+  examples: [Aplique colibri olmoe validate, Execute operação de colibri olmoe validate]
+- id: colibri-status
+  name: Colibri:Status
+  description: Capacidade especializada em colibri:status.
+  tags: [colibri, colibri-status]
+  examples: [Aplique colibri status, Execute operação de colibri status]
+- id: colibri-info
+  name: Colibri:Info
+  description: Capacidade especializada em colibri:info.
+  tags: [colibri, colibri-info]
+  examples: [Aplique colibri info, Execute operação de colibri info]
+- id: inference-on-device
+  name: Inference On Device
+  description: Capacidade especializada em inference on device.
+  tags: [inference, inference-on-device]
+  examples: [Aplique inference on device, Execute operação de inference on device]
+- id: glm-5.2
+  name: Glm 5.2
+  description: Capacidade especializada em glm 5.2.
+  tags: [glm, glm-5.2]
+  examples: [Aplique glm 5.2, Execute operação de glm 5.2]
+tags: [colibri, colibri-chat, colibri-complete, colibri-info, colibri-olmoe-comple, colibri-olmoe-valida, colibri-status, glm, glm-5.2, inference]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique colibri chat, Aplique colibri complete]
 type: specialist
 category: inference
-capabilities:
-  - colibri:chat
-  - colibri:complete
-  - colibri:olmoe:complete
-  - colibri:olmoe:validate
-  - colibri:status
-  - colibri:info
-  - inference-on-device
-  - glm-5.2
-  - olmoe
-  - moe-744b
-  - expert-streaming
-  - openai-compatible-api
-  - local-llm
 ---
 
 # colibri-agent

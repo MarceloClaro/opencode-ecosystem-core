@@ -1,0 +1,1437 @@
+{
+  "spec_id": "SPEC-935-R361",
+  "generated_at": "2026-08-01",
+  "external_validation": false,
+  "human_review_required": true,
+  "release_gate": "blocked",
+  "quality_verdict_allowed": false,
+  "decision_status": "pending_human",
+  "manuscript_cultural_edits_applied": false,
+  "concepts": [
+    "curral_do_governo",
+    "retirantes",
+    "rasga_mortalha",
+    "molambudos",
+    "hospital_colonia"
+  ],
+  "decisions": [
+    {
+      "decision_id": "D01-curral-en",
+      "concept_id": "curral_do_governo",
+      "target_language": "en-US",
+      "current_form": "Government Pen",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "Government Pen, with one contextual classification as a concentration camp",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "preserva curral–gado e a voz infantil"
+          ],
+          "losses": [
+            "instituição segue parcialmente opaca"
+          ],
+          "risks": [
+            "maiúsculas podem simular nome oficial"
+          ],
+          "evidence_source_ids": [
+            "S01-fapesp-seca-pt",
+            "S02-ufmg-patu",
+            "S03-fapesp-seca-en"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S01-fapesp-seca-pt",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S02-ufmg-patu",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S03-fapesp-seca-en",
+              "support_scope": "target_usage_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "Alagadiço/Patu concentration camp",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "espera-se explicitar a categoria histórica"
+          ],
+          "losses": [
+            "apaga a repetição animalizante"
+          ],
+          "risks": [
+            "exige resolver primeiro 1915 versus 1932"
+          ],
+          "evidence_source_ids": [
+            "S01-fapesp-seca-pt",
+            "S02-ufmg-patu",
+            "S03-fapesp-seca-en"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S01-fapesp-seca-pt",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S02-ufmg-patu",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S03-fapesp-seca-en",
+              "support_scope": "target_usage_only"
+            }
+          ]
+        },
+        {
+          "option_id": "C",
+          "text": "curral do governo, with a first-use gloss",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "espera-se favorecer a rastreabilidade cultural"
+          ],
+          "losses": [
+            "maior carga explicativa"
+          ],
+          "risks": [
+            "estrangeirização e excesso de paratexto"
+          ],
+          "evidence_source_ids": [
+            "S01-fapesp-seca-pt",
+            "S03-fapesp-seca-en"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S01-fapesp-seca-pt",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S03-fapesp-seca-en",
+              "support_scope": "target_usage_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "resolver o bloqueio Patu/1915",
+          "revisão histórica do Ceará",
+          "revisão literária EN-US"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A, B ou C após decidir a cronologia e a geografia do campo.",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D02-curral-zh",
+      "concept_id": "curral_do_governo",
+      "target_language": "zh-CN",
+      "current_form": "政府牲畜圈",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "“政府牲畜圈”，首现附“旱灾集中营”说明",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "conserva metáfora pecuária"
+          ],
+          "losses": [
+            "expressão longa e marcada"
+          ],
+          "risks": [
+            "pode parecer nome oficial literal"
+          ],
+          "evidence_source_ids": [
+            "S01-fapesp-seca-pt",
+            "S02-ufmg-patu"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S01-fapesp-seca-pt",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S02-ufmg-patu",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "阿拉加迪索集中营或帕图集中营；牲畜圈仅保留在隐喻中",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "separa instituição e animalização"
+          ],
+          "losses": [
+            "reduz repetição lexical"
+          ],
+          "risks": [
+            "depende da escolha 1915/1932 e de revisor nativo"
+          ],
+          "evidence_source_ids": [
+            "S01-fapesp-seca-pt",
+            "S02-ufmg-patu"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S01-fapesp-seca-pt",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S02-ufmg-patu",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "B",
+        "status": "conditional",
+        "conditions": [
+          "resolver Patu/1915",
+          "confirmar transliterações",
+          "revisão ZH-CN"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (repetição literal) ou B (separação entre nome institucional e metáfora).",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D03-retirantes-en",
+      "concept_id": "retirantes",
+      "target_language": "en-US",
+      "current_form": "retirante(s)",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "retirantes (drought refugees), once; retirantes thereafter",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "preserva categoria regional e segue uso editorial publicado"
+          ],
+          "losses": [
+            "opacidade inicial"
+          ],
+          "risks": [
+            "refugees não deve ser lido como estatuto jurídico automático"
+          ],
+          "evidence_source_ids": [
+            "S03-fapesp-seca-en",
+            "S04-michaelis-retirante",
+            "S05-ufpr-retirantes"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S03-fapesp-seca-en",
+              "support_scope": "target_usage_only"
+            },
+            {
+              "source_id": "S04-michaelis-retirante",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S05-ufpr-retirantes",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "drought-displaced people/families",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "espera-se facilitar a compreensão sem pressupor fronteira"
+          ],
+          "losses": [
+            "apaga a categoria histórica"
+          ],
+          "risks": [
+            "registro humanitário contemporâneo"
+          ],
+          "evidence_source_ids": [
+            "S04-michaelis-retirante",
+            "S05-ufpr-retirantes"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S04-michaelis-retirante",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S05-ufpr-retirantes",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "glosa acessível em todas as rotas",
+          "sem itálico reiterado",
+          "revisão EN-US"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (reter o brasileirismo) ou B (descrição integral em inglês).",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D04-retirantes-zh",
+      "concept_id": "retirantes",
+      "target_language": "zh-CN",
+      "current_form": "逃荒者",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "逃荒者，首现说明为塞阿拉旱灾中的被迫迁徙者",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "conciso e ligado a fome/escassez"
+          ],
+          "losses": [
+            "não lexicaliza Ceará"
+          ],
+          "risks": [
+            "domesticação por repertório histórico chinês"
+          ],
+          "evidence_source_ids": [
+            "S04-michaelis-retirante",
+            "S05-ufpr-retirantes"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S04-michaelis-retirante",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S05-ufpr-retirantes",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "因旱灾流离失所者",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "explicita causa e deslocamento"
+          ],
+          "losses": [
+            "perde nominalidade regional e oralidade"
+          ],
+          "risks": [
+            "tom burocrático contemporâneo"
+          ],
+          "evidence_source_ids": [
+            "S04-michaelis-retirante",
+            "S05-ufpr-retirantes"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S04-michaelis-retirante",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S05-ufpr-retirantes",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "glosa única",
+          "revisão de falante ZH-CN",
+          "não converter em categoria jurídica"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (manter 逃荒者) ou B (explicitar sempre deslocamento pela seca).",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D05-rasga-en",
+      "concept_id": "rasga_mortalha",
+      "target_language": "en-US",
+      "current_form": "Shroud-Ripper",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "Rasga-Mortalha",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "preserva o nome popular brasileiro e a recorrência"
+          ],
+          "losses": [
+            "significado inicialmente opaco"
+          ],
+          "risks": [
+            "estrangeirização sem mediação"
+          ],
+          "evidence_source_ids": [
+            "S06-ufersa-suinadara",
+            "S07-etnobiologia-rasga"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S06-ufersa-suinadara",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S07-etnobiologia-rasga",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "Shroud-Ripper / the shroud-ripper owl",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "espera-se tornar a etimologia mais legível"
+          ],
+          "losses": [
+            "apaga a forma cultural"
+          ],
+          "risks": [
+            "pode parecer criatura gótica inventada"
+          ],
+          "evidence_source_ids": [
+            "S06-ufersa-suinadara",
+            "S07-etnobiologia-rasga"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S06-ufersa-suinadara",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S07-etnobiologia-rasga",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "a cena continua explicando coruja e agouro",
+          "cotejo de todas as recorrências",
+          "revisão EN-US"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (Rasga-Mortalha) ou B (Shroud-Ripper).",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D06-rasga-zh",
+      "concept_id": "rasga_mortalha",
+      "target_language": "zh-CN",
+      "current_form": "裹尸布撕裂者",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "裹尸布撕裂者（报丧猫头鹰），仅首现加注",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "conserva etimologia e esclarece ave/agouro"
+          ],
+          "losses": [
+            "primeira ocorrência pesada"
+          ],
+          "risks": [
+            "pode soar como entidade fantástica"
+          ],
+          "evidence_source_ids": [
+            "S06-ufersa-suinadara",
+            "S07-etnobiologia-rasga"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S06-ufersa-suinadara",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S07-etnobiologia-rasga",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "Rasga-Mortalha 的音译并加释义",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "preserva identidade brasileira"
+          ],
+          "losses": [
+            "baixa transparência e extensão"
+          ],
+          "risks": [
+            "transliteração ainda não validada"
+          ],
+          "evidence_source_ids": [
+            "S06-ufersa-suinadara",
+            "S07-etnobiologia-rasga"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S06-ufersa-suinadara",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S07-etnobiologia-rasga",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "C",
+          "text": "报丧猫头鹰",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "espera-se explicitar a função de agouro"
+          ],
+          "losses": [
+            "elimina a mortalha rasgada"
+          ],
+          "risks": [
+            "domesticação excessiva"
+          ],
+          "evidence_source_ids": [
+            "S06-ufersa-suinadara",
+            "S07-etnobiologia-rasga"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S06-ufersa-suinadara",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S07-etnobiologia-rasga",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "glosa uma única vez",
+          "repetição consistente",
+          "revisão ZH-CN e folclórica"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (calque com glosa), B (retenção/transliteração) ou C (nome funcional).",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D07-molambudos-en",
+      "concept_id": "molambudos",
+      "target_language": "en-US",
+      "current_form": "molambudo(s)",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "molambudos—rag-clad people, once; molambudos thereafter",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "mantém título, insulto e recorrência"
+          ],
+          "losses": [
+            "glosa não reproduz toda a carga"
+          ],
+          "risks": [
+            "pode parecer equivalência total"
+          ],
+          "evidence_source_ids": [
+            "S08-aulete-molambudo",
+            "S09-michaelis-molambudo",
+            "S10-aulete-molambo"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S08-aulete-molambudo",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S09-michaelis-molambudo",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S10-aulete-molambo",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "the ragged ones",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "espera-se facilitar a compreensão e o tom depreciativo"
+          ],
+          "losses": [
+            "perde raiz e elo com o título"
+          ],
+          "risks": [
+            "reduz categoria imposta a descrição visual"
+          ],
+          "evidence_source_ids": [
+            "S08-aulete-molambudo",
+            "S10-aulete-molambo"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S08-aulete-molambudo",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S10-aulete-molambo",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "não alegar invenção absoluta do vocábulo",
+          "glosa única",
+          "revisão EN-US"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (preservar molambudos) ou B (traduzir todas as ocorrências).",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D08-molambudos-zh",
+      "concept_id": "molambudos",
+      "target_language": "zh-CN",
+      "current_form": "莫兰布多斯 / 破衣人",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "莫兰布多斯 nas recorrências centrais; 破衣人 somente como glosa",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "mantém cadeia insulto–praga–categoria–título"
+          ],
+          "losses": [
+            "transliteração opaca"
+          ],
+          "risks": [
+            "pode parecer etnônimo"
+          ],
+          "evidence_source_ids": [
+            "S08-aulete-molambudo",
+            "S09-michaelis-molambudo",
+            "S10-aulete-molambo"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S08-aulete-molambudo",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S09-michaelis-molambudo",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S10-aulete-molambo",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "破衣人 em todas as ocorrências",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "insulto visual transparente"
+          ],
+          "losses": [
+            "perde neologização e identidade do título"
+          ],
+          "risks": [
+            "redução a roupa rasgada"
+          ],
+          "evidence_source_ids": [
+            "S08-aulete-molambudo",
+            "S10-aulete-molambo"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S08-aulete-molambudo",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S10-aulete-molambo",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "revisor ZH-CN confirma força pragmática",
+          "glosa acessível",
+          "cotejo de rotas"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (莫兰布多斯 central) ou B (破衣人 em todas as ocorrências).",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D09-hospital-en",
+      "concept_id": "hospital_colonia",
+      "target_language": "en-US",
+      "current_form": "Hospital-Colony of Barbacena / the Colony",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "Hospital Colônia de Barbacena; historical psychiatric institution on first use",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "preserva nome e rastreabilidade"
+          ],
+          "losses": [
+            "exige mediação inicial"
+          ],
+          "risks": [
+            "maior presença do português"
+          ],
+          "evidence_source_ids": [
+            "S11-fhemig-chpb",
+            "S12-puc-hospital-colonia"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S11-fhemig-chpb",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S12-puc-hospital-colonia",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "Barbacena psychiatric hospital (Hospital Colônia de Barbacena)",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "espera-se explicitar a natureza institucional"
+          ],
+          "losses": [
+            "nome próprio perde primeiro plano"
+          ],
+          "risks": [
+            "pode confundir instituição histórica e CHPB atual"
+          ],
+          "evidence_source_ids": [
+            "S11-fhemig-chpb",
+            "S12-puc-hospital-colonia"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S11-fhemig-chpb",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S12-puc-hospital-colonia",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "C",
+          "text": "Hospital-Colony of Barbacena",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "reproduz componentes do nome"
+          ],
+          "losses": [
+            "soa como calque"
+          ],
+          "risks": [
+            "sugere hospital de colônia territorial; uso oficial não localizado"
+          ],
+          "evidence_source_ids": [
+            "S11-fhemig-chpb",
+            "S12-puc-hospital-colonia"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S11-fhemig-chpb",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S12-puc-hospital-colonia",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "resolver o claim de fechamento em 1980",
+          "distinguir período histórico do CHPB atual",
+          "revisão EN-US"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (nome português), B (descrição inglesa) ou C (calque atual).",
+      "target_equivalence_evidence": "none"
+    },
+    {
+      "decision_id": "D10-hospital-zh",
+      "concept_id": "hospital_colonia",
+      "target_language": "zh-CN",
+      "current_form": "巴尔巴塞纳收容医院 / 收容院",
+      "status": "pending_human",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "巴尔巴塞纳科洛尼亚医院〔Hospital Colônia de Barbacena〕",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "preserva identidade e rastreabilidade"
+          ],
+          "losses": [
+            "expressão longa"
+          ],
+          "risks": [
+            "科洛尼亚 é proposta, não nome oficial chinês comprovado"
+          ],
+          "evidence_source_ids": [
+            "S11-fhemig-chpb",
+            "S12-puc-hospital-colonia"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S11-fhemig-chpb",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S12-puc-hospital-colonia",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "B",
+          "text": "巴尔巴塞纳精神病院（历史上的 Hospital Colônia de Barbacena）",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "espera-se explicitar a função psiquiátrica"
+          ],
+          "losses": [
+            "reduz especificidade de Colônia"
+          ],
+          "risks": [
+            "pode confundir períodos institucionais"
+          ],
+          "evidence_source_ids": [
+            "S11-fhemig-chpb",
+            "S12-puc-hospital-colonia"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S11-fhemig-chpb",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S12-puc-hospital-colonia",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        },
+        {
+          "option_id": "C",
+          "text": "收容院",
+          "claim_type": "translation_hypothesis",
+          "assessment_claim_type": "editorial_inference",
+          "gains": [
+            "conciso"
+          ],
+          "losses": [
+            "transforma nome próprio em categoria genérica"
+          ],
+          "risks": [
+            "conotações de abrigo/asilo não equivalentes"
+          ],
+          "evidence_source_ids": [
+            "S11-fhemig-chpb",
+            "S12-puc-hospital-colonia"
+          ],
+          "evidence_refs": [
+            {
+              "source_id": "S11-fhemig-chpb",
+              "support_scope": "referent_or_lexical_context_only"
+            },
+            {
+              "source_id": "S12-puc-hospital-colonia",
+              "support_scope": "referent_or_lexical_context_only"
+            }
+          ]
+        }
+      ],
+      "conditional_preference": {
+        "option_id": "A",
+        "status": "conditional",
+        "conditions": [
+          "revisor ZH-CN valida transliteração",
+          "resolver fechamento/continuidade",
+          "distinguir referência histórica e atual"
+        ],
+        "claim_type": "editorial_inference"
+      },
+      "human_question": "Escolher A (nome rastreável), B (descrição funcional) ou C (forma genérica atual).",
+      "target_equivalence_evidence": "none"
+    }
+  ],
+  "historical_blockers": [
+    {
+      "blocker_id": "patu_1915_chronology",
+      "status": "blocked_author_decision",
+      "claim_type": "documented_fact_conflict",
+      "documented_conflict": "Fontes lidas situam Alagadiço/Fortaleza em 1915 e Patu/Senador Pompeu em 1932–1933; o corpus situa Senador Pompeu/Patu em 1915–1917.",
+      "source_ids": [
+        "S01-fapesp-seca-pt",
+        "S02-ufmg-patu",
+        "S03-fapesp-seca-en"
+      ],
+      "evidence_basis": [
+        "external_source_fact",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-10.tex:27",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-02.tex:21",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-05.tex:28",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-08.tex:33",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-18.tex:8-44",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-02.tex:8-10",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:100",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/frontmatter/glossario_historico.tex:22",
+        "homólogos EN-US/ZH-CN dos fragmentos acima"
+      ],
+      "author_options": [
+        "Manter 1915 e transferir o campo para Alagadiço/Fortaleza, revisando geografia e números.",
+        "Manter Senador Pompeu/Patu e deslocar a cronologia para 1932–1933, recalculando toda a linha de vida de Joaquim.",
+        "Assumir história alternativa explicitamente e retirar alegações de corroboração factual específica."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "hospital_closed_1980",
+      "status": "blocked_author_decision",
+      "claim_type": "documented_fact_conflict",
+      "documented_conflict": "O corpus afirma fechamento em 1980; a FHEMIG registra reestruturação nos anos 1980, desospitalização posterior e continuidade como CHPB.",
+      "source_ids": [
+        "S11-fhemig-chpb",
+        "S13-tribuna-corpos-negociados"
+      ],
+      "evidence_basis": [
+        "external_source_fact",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-03.tex:14",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-25.tex:68",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/luc/LUC-03.tex:14",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-25.tex:67",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/luc/LUC-03.tex:14",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-25.tex:70"
+      ],
+      "author_options": [
+        "Substituir fechamento por reestruturação/desospitalização historicamente delimitada após pesquisa adicional.",
+        "Remover a data e manter apenas que o modelo manicomial foi transformado.",
+        "Assumir fechamento ficcional e marcar explicitamente a divergência da instituição histórica."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "rasga_mortalha_beak_etiology",
+      "status": "blocked_author_decision",
+      "claim_type": "limited_source_support_gap",
+      "documented_conflict": "Fontes sustentam nome, som semelhante a tecido rasgado e prenúncio de morte; não sustentam, no material lido, a narrativa do bico rasgando a mortalha para libertar a alma.",
+      "source_ids": [
+        "S06-ufersa-suinadara",
+        "S07-etnobiologia-rasga"
+      ],
+      "evidence_basis": [
+        "limited_external_source_set",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex:50",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-12.tex:50",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-12.tex:50"
+      ],
+      "author_options": [
+        "Manter como crença específica de Seu Nonô ou variante ficcional, sem alegar etimologia externa comprovada.",
+        "Pesquisar documentação folclórica regional adicional antes de apresentar como tradição.",
+        "Reduzir a explicação ao som de tecido rasgado e ao agouro, mediante decisão autoral."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "molambudo_absolute_neologism",
+      "status": "blocked_author_decision",
+      "claim_type": "lexical_attestation_scope_uncertainty",
+      "documented_conflict": "Dicionários atuais atestam molambudo/mulambudo como derivado de molambo; isso torna a invenção absoluta não demonstrada, mas não data a primeira ocorrência nem comprova o uso por soldados em 1915.",
+      "source_ids": [
+        "S08-aulete-molambudo",
+        "S09-michaelis-molambudo",
+        "S10-aulete-molambo"
+      ],
+      "evidence_basis": [
+        "current_lexicographic_attestation",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-07.tex:20",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-07.tex:20",
+        "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-07.tex:20",
+        "projetos/molambudos/Molambudos_VictoriaRegia/en/TRADUTOR_NOTES.md:9",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:22",
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/glossario_historico.tex:23"
+      ],
+      "author_options": [
+        "Manter neologismo como diagnóstico ficcional do uso existencial idiossincrático.",
+        "Trocar a descrição paratextual por ressignificação lexical ou uso idiossincrático, após decisão autoral.",
+        "Explicitar que o vocábulo é atestado e que a obra inova na função narrativa."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "victim_count_category_drift",
+      "status": "blocked_author_decision",
+      "claim_type": "documented_category_conflict_and_source_gap",
+      "documented_conflict": "O corpus alterna 60 mil mortos, internados, corpos enterrados, desaparecidos e 1.853 exumados. A fonte S13 sustenta 1.853 corpos negociados com faculdades, não 1.853 exumações.",
+      "source_ids": [
+        "S11-fhemig-chpb",
+        "S13-tribuna-corpos-negociados"
+      ],
+      "evidence_basis": [
+        "external_source_fact",
+        "internal_claim_inventory"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/nota_arquivista.tex:41",
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/nota_ao_leitor.tex:12",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex:29",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-04.tex:87",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-19.tex:8-25",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-18.tex:8,22-32",
+        "homólogos EN-US/ZH-CN e paratextos TRI"
+      ],
+      "author_options": [
+        "Auditar cada número por categoria, período, fonte e grau de incerteza antes de qualquer reescrita.",
+        "Atribuir estimativas à fonte e remover conversões entre mortos, corpos, exumados e vendidos.",
+        "Suspender todos os números não sustentados até revisão histórica e arquivística independente."
+      ],
+      "automatic_change_applied": false,
+      "publication_reach_audit_required": true
+    },
+    {
+      "blocker_id": "pseudoarchive_authenticity",
+      "status": "blocked_author_decision",
+      "claim_type": "ethical_authenticity_risk",
+      "documented_conflict": "Documentos ficcionais se apresentam como peças do Arquivo Público do Ceará, Arquivo Nacional, Arquivo Público Mineiro e transcrição autorizada, sem proveniência ou permissão demonstrada no pacote R361.",
+      "source_ids": [],
+      "evidence_basis": [
+        "internal_corpus_and_paratext_analysis"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex:8-27",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-18.tex:8-44",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-19.tex:8-25",
+        "homólogos EN-US/ZH-CN e referências ao Arquivo Público Mineiro"
+      ],
+      "author_options": [
+        "Marcar cada pseudoarquivo inequivocamente como construção ficcional.",
+        "Comprovar citações, permissões, proveniência e estatuto de reprodução antes de manter nomes reais.",
+        "Substituir instituições reais por arquivo ficcional claramente declarado."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "fictional_victim_insertion",
+      "status": "blocked_author_decision",
+      "claim_type": "ethical_memory_boundary_risk",
+      "documented_conflict": "Joaquim é declarado personagem ficcional, mas DOC-19 o chama de um dos 60 mil e notas tratam seu testemunho como corroboração de fatos históricos.",
+      "source_ids": [
+        "S13-tribuna-corpos-negociados"
+      ],
+      "evidence_basis": [
+        "internal_fiction_reality_boundary_analysis"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-19.tex:19-25",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:96",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-07.tex:80",
+        "homólogos EN-US/ZH-CN"
+      ],
+      "author_options": [
+        "Separar explicitamente o personagem de qualquer contagem de vítimas reais.",
+        "Remover linguagem de corroboração testemunhal atribuída ao personagem ficcional.",
+        "Submeter a estratégia memorial a revisão de sobreviventes, familiares e especialistas em ética do testemunho."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "living_memory_erasure",
+      "status": "blocked_author_decision",
+      "claim_type": "documented_fact_conflict_and_memory_risk",
+      "documented_conflict": "O corpus descreve Patu como desaparecido/esquecido e o Hospital como ruína fechada; S01 registra ruínas tombadas, romaria e memória comunitária, enquanto S11/S13 registram continuidade, museu, reforma e última cela até 1993.",
+      "source_ids": [
+        "S01-fapesp-seca-pt",
+        "S11-fhemig-chpb",
+        "S13-tribuna-corpos-negociados"
+      ],
+      "evidence_basis": [
+        "external_source_fact",
+        "internal_corpus_comparison"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-15.tex:19-31",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-03.tex:14-16",
+        "homólogos EN-US/ZH-CN e paratextos históricos"
+      ],
+      "author_options": [
+        "Reconhecer práticas vivas de memória e distinguir abandono parcial de apagamento total.",
+        "Reescrever apenas após consulta a comunidades de memória de Patu e Barbacena.",
+        "Assumir cenário alternativo ficcional sem reivindicar descrição factual contemporânea."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "psychiatric_stigma_horror",
+      "status": "blocked_author_decision",
+      "claim_type": "ethical_representation_risk",
+      "documented_conflict": "A combinação entre diagnóstico, violência, possessão e contágio pode reforçar estigma; S14 documenta a existência geral de estigma e violações, mas não mede o efeito desta obra.",
+      "source_ids": [
+        "S14-who-mental-disorders-stigma"
+      ],
+      "evidence_basis": [
+        "external_general_context",
+        "internal_representation_analysis"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-07.tex:18-51",
+        "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-08.tex:26-113",
+        "arquitetura paciente–criatura–contaminação em PT/EN/ZH"
+      ],
+      "author_options": [
+        "Submeter a obra a leitura de sensibilidade em saúde mental e movimento antimanicomial.",
+        "Separar explicitamente transtorno psíquico, violência e mecanismo sobrenatural.",
+        "Reavaliar a arquitetura de contágio sem instrumentalizar pacientes reais ou ficcionais."
+      ],
+      "automatic_change_applied": false
+    },
+    {
+      "blocker_id": "reader_consent_visual_provenance",
+      "status": "blocked_author_decision",
+      "claim_type": "ethical_consent_and_provenance_gap",
+      "documented_conflict": "O pacote R361 não demonstra cobertura integral dos avisos para violência sexual, consumo de cadáveres e ameaça, nem proveniência, direitos e marcação ficcional inequívoca de todas as imagens pseudoarquivísticas.",
+      "source_ids": [],
+      "evidence_basis": [
+        "internal_content_warning_and_visual_asset_audit_gap"
+      ],
+      "affected_occurrences": [
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/aviso_ao_leitor.tex",
+        "projetos/molambudos/Molambudos_VictoriaRegia/frontmatter/copyrightpage.tex:28-39",
+        "projetos/molambudos/Molambudos_VictoriaRegia/figures/",
+        "homólogos EN-US/ZH-CN/TRI"
+      ],
+      "author_options": [
+        "Auditar avisos de conteúdo por idioma e por rota antes de publicação.",
+        "Criar ledger visual com origem, licença, consentimento e estatuto ficcional de cada imagem.",
+        "Remover ativos e chamadas promocionais sem proveniência ou adequação ética demonstrada."
+      ],
+      "automatic_change_applied": false
+    }
+  ],
+  "mechanical_changes": [
+    {
+      "change_class": "restore_metric_unit",
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-06.tex",
+      "before": "about two hundred yards wide and perhaps three hundred long",
+      "after": "about two hundred meters wide and perhaps three hundred meters long",
+      "rationale": "A fonte usa metros; os mesmos números não podiam ser rotulados como jardas.",
+      "risk_level": "low",
+      "applied": true
+    },
+    {
+      "change_class": "repair_english_duration_grammar",
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-17.tex",
+      "before": "People who walked days without food or water",
+      "after": "People who walked for days without food or water",
+      "rationale": "Correção gramatical sem alteração cultural ou factual.",
+      "risk_level": "low",
+      "applied": true
+    },
+    {
+      "change_class": "restore_barbed_wire_semantics",
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-06.tex",
+      "before": "用铁丝网围起来的区域",
+      "after": "用带刺铁丝网围起来的区域",
+      "rationale": "带刺 restaura o traço material explícito de arame farpado.",
+      "risk_level": "low",
+      "applied": true
+    }
+  ],
+  "protected_cultural_terms": [
+    {
+      "term": "Government Pen",
+      "language": "en-US",
+      "changed": false
+    },
+    {
+      "term": "政府牲畜圈",
+      "language": "zh-CN",
+      "changed": false
+    },
+    {
+      "term": "retirantes",
+      "language": "en-US",
+      "changed": false
+    },
+    {
+      "term": "逃荒者",
+      "language": "zh-CN",
+      "changed": false
+    },
+    {
+      "term": "Shroud-Ripper",
+      "language": "en-US",
+      "changed": false
+    },
+    {
+      "term": "裹尸布撕裂者",
+      "language": "zh-CN",
+      "changed": false
+    },
+    {
+      "term": "molambudos",
+      "language": "en-US",
+      "changed": false
+    },
+    {
+      "term": "莫兰布多斯 / 破衣人",
+      "language": "zh-CN",
+      "changed": false
+    },
+    {
+      "term": "Hospital-Colony / the Colony",
+      "language": "en-US",
+      "changed": false
+    },
+    {
+      "term": "收容医院 / 收容院",
+      "language": "zh-CN",
+      "changed": false
+    }
+  ],
+  "provenance_drift_manifest": "validacao_externa/cultural_episteme/molambudos_r361_provenance_drift.json",
+  "source_evidence_summary": {
+    "record_count": 14,
+    "independent_group_count": 11,
+    "substantive_independent_groups_by_concept": {
+      "curral_do_governo": [
+        "G01-fapesp-memorias-seca",
+        "G02-ufmg-patu"
+      ],
+      "retirantes": [
+        "G01-fapesp-memorias-seca",
+        "G03-michaelis-dictionary",
+        "G04-ufpr-retirantes"
+      ],
+      "rasga_mortalha": [
+        "G05-ufersa-suindara",
+        "G06-etnobiologia-rasga"
+      ],
+      "molambudos": [
+        "G03-michaelis-dictionary",
+        "G07-aulete-dictionary"
+      ],
+      "hospital_colonia": [
+        "G08-fhemig-chpb",
+        "G10-tribuna-daniela-arbex",
+        "G11-who-mental-health"
+      ]
+    },
+    "target_usage_count": 1,
+    "target_equivalence_count": 0,
+    "zh_cn_target_evidence_count": 0,
+    "records_coverage_passed": true,
+    "target_equivalence_gate_passed": false,
+    "release_allowed": false,
+    "status": "sufficient_for_triage_only_insufficient_for_target_equivalence"
+  },
+  "verification": {
+    "quote_normalizer_pending": 0,
+    "routes": {
+      "valid": 540,
+      "total": 540,
+      "missing": 0,
+      "divergent": 0,
+      "by_language": {
+        "pt-BR": 180,
+        "en-US": 180,
+        "zh-CN": 180
+      },
+      "legacy_numeric_routes": 462
+    },
+    "builds": {
+      "pt": {
+        "passed": true,
+        "engine": "pdfLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main.log",
+        "pages": 395,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      },
+      "en": {
+        "passed": true,
+        "engine": "pdfLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_en.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main_en.log",
+        "pages": 401,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      },
+      "zh": {
+        "passed": true,
+        "engine": "XeLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_zh.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main_zh.log",
+        "pages": 387,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      },
+      "tri": {
+        "passed": true,
+        "engine": "XeLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_tri.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main_tri.log",
+        "pages": 1039,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      },
+      "kdp_tri": {
+        "passed": true,
+        "engine": "XeLaTeX",
+        "passes": 2,
+        "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_kdp_print_160x230mm.pdf",
+        "log": "projetos/molambudos/Molambudos_VictoriaRegia/main_kdp_print_160x230mm.log",
+        "pages": 1091,
+        "fatal_errors": 0,
+        "undefined_references": 0,
+        "missing_characters": 0
+      }
+    },
+    "pagination_comparison": {
+      "basis": "último resultado R358 reportado na sessão",
+      "previous": {
+        "pt": 395,
+        "en": 401,
+        "zh": 387,
+        "tri": 1037,
+        "kdp_tri": 1089
+      },
+      "current": {
+        "pt": 395,
+        "en": 401,
+        "zh": 387,
+        "tri": 1039,
+        "kdp_tri": 1091
+      },
+      "note": "TRI e KDP TRI ganharam duas páginas por recomposição; nenhuma rota ficou ausente ou divergente."
+    },
+    "regression": {
+      "passed": 46,
+      "failed": 0,
+      "total": 46,
+      "pre_gate_observation": "44 testes passaram antes do autogate; após o gate SDD/Behavioral, a bateria completa concluiu 46/46."
+    },
+    "non_blocking_log_notes": [
+      "Persistem avisos tipográficos de caixas underfull/overfull, substituição de formas de fonte e destinos PDF duplicados.",
+      "O texput.log antigo contém Emergency stop, mas não pertence aos cinco logs produzidos e auditados nesta rodada."
+    ]
+  },
+  "claim_classes": {
+    "documented_fact": "afirmação delimitada pelas fontes lidas",
+    "editorial_inference": "síntese do efeito provável; exige decisão humana",
+    "translation_hypothesis": "opção candidata; não é equivalência comprovada"
+  },
+  "safe_claim": "A R361 organiza internamente dez decisões tradutórias provisórias e registra duas divergências factuais preliminares, lacunas documentais e riscos ético-memoriais ainda não resolvidos. As fontes servem para triagem e perguntas, não para equivalência cultural, aceitabilidade EN-US/ZH-CN, consenso histórico, qualidade literária ou validação externa. O release permanece bloqueado."
+}

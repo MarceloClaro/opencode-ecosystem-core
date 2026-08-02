@@ -1,0 +1,84 @@
+{
+  "spec_id": "SPEC-935-R361",
+  "predecessor_spec_id": "SPEC-935-R360",
+  "generated_at": "2026-08-01",
+  "predecessor_artifact_mutated": false,
+  "external_validation": false,
+  "human_review_required": true,
+  "release_gate": "blocked",
+  "quality_verdict_allowed": false,
+  "records": [
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-06.tex",
+      "change_class": "restore_metric_unit",
+      "old_sha256": "722edb54755e119d4325e3cdb46a5ffd6598ab5a66328875f6f7b804f7d93fba",
+      "new_sha256": "84eaa695aad062b6ab03e1511a2fb1cd5afa50f5eef63993dafa35fc363069a2",
+      "before": "two hundred yards wide and perhaps three hundred long",
+      "after": "two hundred meters wide and perhaps three hundred meters long",
+      "cultural_terms_changed": false,
+      "snapshot_preserved": true,
+      "affected_reviews": [
+        {
+          "review_id": "r360-curral_do_governo-en-us",
+          "locator_role": "target",
+          "reviewed_segment_changed": true,
+          "status": "mechanical_segment_rechecked",
+          "recheck_scope": "unidade métrica apenas; parecer cultural permanece snapshot R360"
+        },
+        {
+          "review_id": "r360-molambudos-en-us",
+          "locator_role": "target",
+          "reviewed_segment_changed": false,
+          "status": "snapshot_segment_unchanged",
+          "recheck_scope": "hash integral mudou em linha anterior; trecho molambudos não mudou"
+        }
+      ]
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-06.tex",
+      "change_class": "restore_barbed_wire_semantics",
+      "old_sha256": "13f42d7e0e4aa6c48545281bb5fa3706bdc24e25a1247b16db8ad55acfdb0948",
+      "new_sha256": "3d1e65f5dd335e8d4379df2fc2fc99c2ef0f2fbac2f2de8dc018f2d7cec0db86",
+      "before": "用铁丝网围起来的区域",
+      "after": "用带刺铁丝网围起来的区域",
+      "cultural_terms_changed": false,
+      "snapshot_preserved": true,
+      "affected_reviews": [
+        {
+          "review_id": "r360-curral_do_governo-zh-cn",
+          "locator_role": "target",
+          "reviewed_segment_changed": true,
+          "status": "mechanical_segment_rechecked",
+          "recheck_scope": "materialidade da farpa apenas; termo 政府牲畜圈 preservado"
+        },
+        {
+          "review_id": "r360-molambudos-zh-cn",
+          "locator_role": "target",
+          "reviewed_segment_changed": false,
+          "status": "snapshot_segment_unchanged",
+          "recheck_scope": "hash integral mudou em linha anterior; trecho molambudos não mudou"
+        }
+      ]
+    },
+    {
+      "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-17.tex",
+      "change_class": "repair_english_duration_grammar",
+      "old_sha256": "c5d59f538dcda2f08790e62be215980d56eff5e34b83673ab191dffe115d6f33",
+      "new_sha256": "bf8bb62773bb2f6b373def9fce74fe9bd502992cbe5ed75acf511598c427bf0f",
+      "before": "People who walked days without food or water",
+      "after": "People who walked for days without food or water",
+      "cultural_terms_changed": false,
+      "snapshot_preserved": true,
+      "affected_reviews": [
+        {
+          "review_id": "r360-retirantes-en-us",
+          "locator_role": "target",
+          "reviewed_segment_changed": true,
+          "status": "mechanical_segment_rechecked",
+          "recheck_scope": "gramática de duração apenas; retirantes preservado"
+        }
+      ]
+    }
+  ],
+  "safe_claim": "Os hashes R360 continuam representando o snapshot revisado; R361 registra três derivações mecânicas sem reatribuir os pareceres antigos ao corpus novo."
+}

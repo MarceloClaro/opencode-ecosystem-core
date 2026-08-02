@@ -1,16 +1,53 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Inspirado pelo GraphToolsService do MiroFish-Offline (graph_tools.py).
--->
+---
+name: reversa-hybrid-graph
+description: Agente especializado reversa-hybrid-graph
+version: '1.0.0'
+skills:
+- id: reversa-hybrid-graph
+  name: Reversa Hybrid Graph
+  description: >-
+    Executa tarefas especializadas de reversa hybrid graph conforme protocolo SDD/TDD.
+  tags: [reversa, hybrid, graph]
+  examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema]
+tags: [graph, hybrid, reversa]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Analise a arquitetura deste sistema legado]
+---
 
 ---
 name: reversa-hybrid-graph
-description: >
-  Agente de busca híbrida em grafo de conhecimento. Oferece 3 estratégias
-  complementares: InsightForge (análise profunda), PanoramaSearch (visão
-  panorâmica), QuickSearch (busca rápida). Inspirado pelo GraphToolsService
-  do MiroFish-Offline. Use via: "busca", "graph", "grafo", "pesquisa",
-  "insight", "panorama", "quick", /hybrid-graph.
+description: >-
+  Agente de busca híbrida em grafo de conhecimento. Oferece 3 estratégias complementares: InsightForge
+  (análise profunda), PanoramaSearch (visão panorâmica), QuickSearch (busca rápida). Inspirado pelo
+  GraphToolsService do MiroFish-Offline. Use via: "busca", "graph", "grafo", "pesquisa", "insight",
+  "panorama", "quick", /hybrid-graph.
+version: '1.0.0'
+skills:
+- id: busca-hibrida-grafo-conhecimento
+  name: De busca híbrida em grafo de conhecimento
+  description: Capacidade especializada em de busca híbrida em grafo de conhecimento
+  tags: [busca, híbrida, grafo, conhecimento]
+  examples: [Aplique busca hibrida grafo conhecimento neste contexto, Avalie usando busca hibrida grafo conhecimento]
+- id: oferece-estrategias-complementares
+  name: Oferece 3 estratégias complementares: insightforge (análise profunda),
+  description: >-
+    Capacidade especializada em oferece 3 estratégias complementares: insightforge (análise profunda),
+    panoramas.
+  tags: [oferece, estratégias, complementares, insightforge]
+  examples: [Aplique oferece estrategias complementares neste contexto, Avalie usando oferece estrategias complementares]
+- id: inspirado-pelo-graphtoolsservice-mirofish
+  name: Inspirado pelo graphtoolsservice do mirofish-offline
+  description: Capacidade especializada em inspirado pelo graphtoolsservice do mirofish-offline
+  tags: [inspirado, pelo, graphtoolsservice, mirofish-offline]
+  examples: [Aplique inspirado pelo graphtoolsservice mirofish neste contexto, Avalie usando inspirado pelo graphtoolsservice mirofish]
+- id: use-busca-graph-grafo
+  name: Use via: "busca", "graph", "grafo", "pesquisa", "insight", "panorama",
+  description: >-
+    Capacidade especializada em use via: "busca", "graph", "grafo", "pesquisa", "insight", "panorama",
+    "quick", .
+  tags: ["busca", "graph", "grafo", "pesquisa"]
+  examples: [Aplique use busca graph grafo neste contexto, Avalie usando use busca graph grafo]
+tags: ["busca", "grafo", "graph", "pesquisa", agente, brida, busca, complementares, conhecimento, estrat]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Aplique busca hibrida grafo conhecimento neste contexto, Aplique oferece estrategias complementares neste contexto]
 mode: subagent
 tools:
   read: true

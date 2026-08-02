@@ -1,31 +1,55 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: externalscout
+description: Agente especializado externalscout
+version: '1.0.0'
+skills:
+- id: externalscout
+  name: Externalscout
+  description: Executa tarefas especializadas de externalscout conforme protocolo SDD/TDD.
+  tags: [externalscout]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [externalscout]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: ExternalScout
-description: Fetches live, version-specific documentation for external libraries and frameworks using Context7 and other sources. Filters, sorts, and returns relevant documentation.
+description: >-
+  Fetches live, version-specific documentation for external libraries and frameworks using Context7
+  and other sources. Filters, sorts, and returns relevant documentation.
+version: '1.0.0'
+skills:
+- id: fetches-live-version-specific
+  name: Fetches live, version-specific documentation for external libraries an
+  description: >-
+    Capacidade especializada em fetches live, version-specific documentation for external libraries and
+    framewor.
+  tags: [fetches, live, version-specific, documentation]
+  examples: [Aplique fetches live version specific neste contexto, Avalie usando fetches live version specific]
+- id: filters-sorts-and-returns
+  name: Filters, sorts, and returns relevant documentation
+  description: Capacidade especializada em filters, sorts, and returns relevant documentation
+  tags: [filters, sorts, returns, relevant]
+  examples: [Aplique filters sorts and returns neste contexto, Avalie usando filters sorts and returns]
+tags: [context, documentation, external, externalscout, fetches, filters, frameworks, libraries, live, other]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique fetches live version specific neste contexto, Aplique filters sorts and returns neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   read:
-    "**/*": "deny"
-    ".opencode/skills/context7/**": "allow"
-    ".tmp/external-context/**": "allow"
+    **/*: deny
+    .opencode/skills/context7/**: allow
+    .tmp/external-context/**: allow
   bash:
-    "*": "deny"
-    "curl -s https://context7.com/*": "allow"
-    "jq *": "allow"
+    *: deny
+    curl -s https://context7.com/*: allow
+    jq *: allow
   skill:
-    "*": "deny"
-    "*context7*": "allow"
+    *: deny
+    *context7*: allow
   task:
-    "*": "deny"
+    *: deny
 ---
-
 
 # ExternalScout
 
@@ -324,4 +348,3 @@ You succeed when ALL of these are complete:
 # OpenCode Agent Configuration
 # Metadata (id, name, category, type, version, author, tags, dependencies) is stored in:
 # .opencode/config/agent-metadata.json
-

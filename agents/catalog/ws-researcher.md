@@ -8,6 +8,16 @@
 ---
 name: ws-researcher
 description: Knowledge architect for external research and documentation
+version: '1.0.0'
+skills:
+- id: knowledge-architect-for-external
+  name: Knowledge architect for external research and documentation
+  description: >-
+    Capacidade especializada em knowledge architect for external research and documentation
+  tags: [knowledge, architect, external, research]
+  examples: [Aplique knowledge architect for external neste contexto, Avalie usando knowledge architect for external]
+tags: [architect, documentation, external, knowledge, research, researcher]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique knowledge architect for external neste contexto]
 mode: subagent
 ---
 

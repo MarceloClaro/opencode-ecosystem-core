@@ -1,8 +1,18 @@
 ---
 name: 29_agente_conformidade_internacional
+description: Agente especializado 29_agente_conformidade_internacional
+version: '1.0.0'
+skills:
+- id: 29-agente-conformidade-internacional
+  name: 29 Agente Conformidade Internacional
+  description: >-
+    Executa tarefas especializadas de 29 agente conformidade internacional conforme protocolo SDD/TDD.
+  tags: [29, agente, conformidade]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, conformidade, internacional, maswos-agent]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\29_agente_conformidade_internacional.md
 ---
 
 # 29 Agente Conformidade Internacional

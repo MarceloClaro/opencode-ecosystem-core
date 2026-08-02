@@ -1,8 +1,18 @@
 ---
 name: 30_agente_traducao_nativa_proofreading
+description: Agente especializado 30_agente_traducao_nativa_proofreading
+version: '1.0.0'
+skills:
+- id: 30-agente-traducao-nativa
+  name: 30 Agente Traducao Nativa Proofreading
+  description: >-
+    Executa tarefas especializadas de 30 agente traducao nativa proofreading conforme protocolo SDD/TDD.
+  tags: [30, agente, traducao]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, maswos-agent, nativa, proofreading, traducao]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\30_agente_traducao_nativa_proofreading.md
 ---
 
 # 30 Agente Traducao Nativa Proofreading

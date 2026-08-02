@@ -7,6 +7,17 @@
 
 ---
 name: linguistic-corrector
+description: Agente especializado linguistic-corrector
+version: '1.0.0'
+skills:
+- id: linguistic-corrector
+  name: Linguistic Corrector
+  description: >-
+    Executa tarefas especializadas de linguistic corrector conforme protocolo SDD/TDD.
+  tags: [linguistic, corrector]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [corrector, linguistic]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
 ---
 
 # Agente Corretor Linguistico — PT-BR Output Corrector

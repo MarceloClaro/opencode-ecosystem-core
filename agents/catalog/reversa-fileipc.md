@@ -1,10 +1,24 @@
 ---
 name: reversa-fileipc
-description: >
-  Agente de comunicação via filesystem do ecossistema Reversa. Orquestra
-  a troca de mensagens entre processos usando o protocolo File IPC,
-  permitindo comunicação assíncrona sem dependências externas.
-role: communication
+description: >-
+  Agente de comunicação via filesystem do ecossistema Reversa. Orquestra a troca de mensagens entre
+  processos usando o protocolo File IPC, permitindo comunicação assíncrona sem dependências externas.
+version: '1.0.0'
+skills:
+- id: comunicacao-filesystem-ecossistema-reversa
+  name: De comunicação via filesystem do ecossistema reversa
+  description: Capacidade especializada em de comunicação via filesystem do ecossistema reversa
+  tags: [comunicação, filesystem, ecossistema, reversa]
+  examples: [Aplique comunicacao filesystem ecossistema reversa neste contexto, Avalie usando comunicacao filesystem ecossistema reversa]
+- id: orquestra-troca-mensagens-entre
+  name: Orquestra a troca de mensagens entre processos usando o protocolo file
+  description: >-
+    Capacidade especializada em orquestra a troca de mensagens entre processos usando o protocolo file
+    ipc, perm.
+  tags: [orquestra, troca, mensagens, processos]
+  examples: [Aplique orquestra troca mensagens entre neste contexto, Avalie usando orquestra troca mensagens entre]
+tags: [agente, comunica, comunicação, depend, ecossistema, externas, file, fileipc, filesystem, mensagens]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique comunicacao filesystem ecossistema reversa neste contexto, Aplique orquestra troca mensagens entre neste contexto]
 model: deepseek-v4-pro
 tools:
   read: true

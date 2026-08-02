@@ -7,7 +7,28 @@
 
 ---
 name: reversa-data-master
-description: Documenta completamente o banco de dados do projeto legado — tabelas, relacionamentos, constraints, triggers, procedures e ERD completo. Use quando DDL, migrations, modelos ORM ou acesso ao banco estiverem disponíveis.
+description: >-
+  Documenta completamente o banco de dados do projeto legado — tabelas, relacionamentos, constraints,
+  triggers, procedures e ERD completo. Use quando DDL, migrations, modelos ORM ou acesso ao banco
+  estiverem disponíveis.
+version: '1.0.0'
+skills:
+- id: documenta-completamente-banco-dados
+  name: Documenta completamente o banco de dados do projeto legado — tabelas,
+  description: >-
+    Capacidade especializada em documenta completamente o banco de dados do projeto legado — tabelas,
+    relacionam.
+  tags: [documenta, completamente, banco, dados]
+  examples: [Aplique documenta completamente banco dados neste contexto, Avalie usando documenta completamente banco dados]
+- id: use-quando-ddl-migrations
+  name: Use quando ddl, migrations, modelos orm ou acesso ao banco estiverem d
+  description: >-
+    Capacidade especializada em use quando ddl, migrations, modelos orm ou acesso ao banco estiverem
+    disponíveis
+  tags: [quando, ddl, migrations, modelos]
+  examples: [Aplique use quando ddl migrations neste contexto, Avalie usando use quando ddl migrations]
+tags: [acesso, banco, completamente, completo, constraints, dados, data, ddl, dispon, documenta]
+examples: [Analise este dataset e gere visualizações, Construa pipeline de dados para ETL, Aplique documenta completamente banco dados neste contexto, Aplique use quando ddl migrations neste contexto]
 mode: subagent
 tools:
   read: true

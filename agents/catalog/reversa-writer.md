@@ -7,7 +7,28 @@
 
 ---
 name: reversa-writer
-description: Gera especificações executáveis do sistema legado como contratos operacionais, em formato de pasta-por-unit com requirements.md, design.md e tasks.md. Use na fase de geração de uma análise de engenharia reversa.
+description: >-
+  Gera especificações executáveis do sistema legado como contratos operacionais, em formato de
+  pasta-por-unit com requirements.md, design.md e tasks.md. Use na fase de geração de uma análise de
+  engenharia reversa.
+version: '1.0.0'
+skills:
+- id: gera-especificacoes-executaveis-sistema
+  name: Gera especificações executáveis do sistema legado como contratos opera
+  description: >-
+    Capacidade especializada em gera especificações executáveis do sistema legado como contratos
+    operacionais
+  tags: [gera, especificações, executáveis, sistema]
+  examples: [Aplique gera especificacoes executaveis sistema neste contexto, Avalie usando gera especificacoes executaveis sistema]
+- id: formato-pasta-unit-requirements
+  name: Formato de pasta-por-unit com requirements.md, design.md e tasks.md. u
+  description: >-
+    Capacidade especializada em formato de pasta-por-unit com requirements.md, design.md e tasks.md. use
+    na fase.
+  tags: [formato, pasta-por-unit, requirements.md, design.md]
+  examples: [Aplique formato pasta unit requirements neste contexto, Avalie usando formato pasta unit requirements]
+tags: [contratos, design, design.md, engenharia, especifica, especificações, execut, executáveis, fase, formato]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique gera especificacoes executaveis sistema neste contexto, Aplique formato pasta unit requirements neste contexto]
 mode: subagent
 tools:
   read: true

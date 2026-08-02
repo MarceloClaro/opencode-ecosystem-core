@@ -1,16 +1,53 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Inspirado pelo ReportAgent do MiroFish-Offline (report_agent.py).
--->
+---
+name: reversa-report-agent
+description: Agente especializado reversa-report-agent
+version: '1.0.0'
+skills:
+- id: reversa-report
+  name: Reversa Report
+  description: Executa tarefas especializadas de reversa report conforme protocolo SDD/TDD.
+  tags: [reversa, report]
+  examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema]
+tags: [report, reversa]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Analise a arquitetura deste sistema legado]
+---
 
 ---
 name: reversa-report-agent
-description: >
-  Agente de relatório com cadeia ReACT (Reasoning + Acting) e reflexão
-  em 3 dimensões. Inspirado pelo ReportAgent do MiroFish-Offline.
-  Gera relatórios estruturados seção por seção usando ciclo multi-turno
-  de pensamento-ferramenta-observação-reflexão.
-  Use via: "relatório", "report", "react", "reflexão", /report-agent.
+description: >-
+  Agente de relatório com cadeia ReACT (Reasoning + Acting) e reflexão em 3 dimensões. Inspirado pelo
+  ReportAgent do MiroFish-Offline. Gera relatórios estruturados seção por seção usando ciclo
+  multi-turno de pensamento-ferramenta-observação-reflexão. Use via: "relatório", "report", "react",
+  "reflexão", /report-agent.
+version: '1.0.0'
+skills:
+- id: relatorio-cadeia-react-reasoning
+  name: De relatório com cadeia react (reasoning + acting) e reflexão em 3 dim
+  description: >-
+    Capacidade especializada em de relatório com cadeia react (reasoning + acting) e reflexão em 3
+    dimensões
+  tags: [relatório, cadeia, react, reasoning]
+  examples: [Aplique relatorio cadeia react reasoning neste contexto, Avalie usando relatorio cadeia react reasoning]
+- id: inspirado-pelo-reportagent-mirofish
+  name: Inspirado pelo reportagent do mirofish-offline
+  description: Capacidade especializada em inspirado pelo reportagent do mirofish-offline
+  tags: [inspirado, pelo, reportagent, mirofish-offline]
+  examples: [Aplique inspirado pelo reportagent mirofish neste contexto, Avalie usando inspirado pelo reportagent mirofish]
+- id: gera-relatorios-estruturados-secao
+  name: Gera relatórios estruturados seção por seção usando ciclo multi-turno
+  description: >-
+    Capacidade especializada em gera relatórios estruturados seção por seção usando ciclo multi-turno de
+    pensame.
+  tags: [gera, relatórios, estruturados, seção]
+  examples: [Aplique gera relatorios estruturados secao neste contexto, Avalie usando gera relatorios estruturados secao]
+- id: use-relatorio-report-react
+  name: Use via: "relatório", "report", "react", "reflexão", /report-agent
+  description: >-
+    Capacidade especializada em use via: "relatório", "report", "react", "reflexão", /report-agent
+  tags: ["relatório", "report", "react", "reflexão"]
+  examples: [Aplique use relatorio report react neste contexto, Avalie usando use relatorio report react]
+tags: ["react", "reflexão", "relatório", "report", acting, agente, cadeia, ciclo, dimens, estruturados]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique relatorio cadeia react reasoning neste contexto, Aplique inspirado pelo reportagent mirofish neste contexto]
 mode: subagent
 tools:
   read: true

@@ -1,0 +1,3782 @@
+{
+  "spec_id": "SPEC-935-R360",
+  "contract_id": "OCB-CULTURAL-EPISTEME-001",
+  "generated_at": "2026-08-01",
+  "external_validation": false,
+  "manuscript_edits_applied": false,
+  "scope": {
+    "source_language": "pt-BR",
+    "target_languages": [
+      "en-US",
+      "zh-CN"
+    ],
+    "units": [
+      "curral_do_governo",
+      "retirantes",
+      "rasga_mortalha",
+      "molambudos",
+      "hospital_colonia",
+      "ameaca_proximo"
+    ],
+    "runtime_reviews": 12
+  },
+  "reviews": [
+    {
+      "review_id": "r360-curral_do_governo-en-us",
+      "unit_id": "curral_do_governo",
+      "label": "Curral do Governo",
+      "target_language": "en-US",
+      "editorial_classification": "high_risk_human_decision",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex",
+          "line_start": 14,
+          "line_end": 18,
+          "sha256": "0535d2653f670b1f04372663d884b79c40eafd04653674c5f93cdbc1b340fe6d"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-06.tex",
+          "line_start": 14,
+          "line_end": 18,
+          "sha256": "722edb54755e119d4325e3cdb46a5ffd6598ab5a66328875f6f7b804f7d93fba"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58f80ffexxPfy8pXv1CJ9A",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-curral_do_governo-en-us",
+        "segment_id": "MEM-06:14-18",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_text": "O governo chamava de “currais”. A palavra certa. A gente era gado. O Curral do Governo em Senador Pompeu era uma área cercada de arame farpado, com uns duzentos metros de largura por talvez trezentos de comprimento. Não tinha cobertura. Não tinha parede. Não tinha nada além de terra batida, sol, e o cheiro de gente acumulada.",
+        "translated_text": "The government called them “pens”. The right word. We were cattle. The Government Pen in Senador Pompeu was an area fenced with barbed wire, about two hundred yards wide and perhaps three hundred long. No roof. No walls. Nothing but packed earth, sun, and the smell of people piled up.",
+        "author_voice_profile": {
+          "narrator_age": "child",
+          "region": "Senador Pompeu, Ceará",
+          "register": "oral, memorialístico, fragmentário e testemunhal"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "Curral do Governo",
+              "entity_type": "historical_institution_and_dehumanization_metaphor",
+              "preferred_en": "Government Pen",
+              "preferred_zh_cn": "政府牲畜圈",
+              "candidate_en": "Government Concentration Camp",
+              "candidate_zh_cn": "政府集中收容营",
+              "forbidden_translations": [
+                "Government Cattle Pen",
+                "Government Corral"
+              ]
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1915",
+          "region": "Senador Pompeu, Ceará",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:14-18",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "English (United States)",
+          "document_type": "memória ficcional infantil",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-06.tex:14-18",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "Curral do Governo",
+            "target_term": "Government Pen",
+            "symbolic": false,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_excerpt": "O governo chamava de “currais”. A palavra certa. A gente era gado. O Curral do Governo em Senador Pompeu era uma área cercada de arame farpado, com uns duzentos metros de largura por talvez trezentos de comprimento. Não tinha cobertura. Não tinha parede. Não tinha nada além de terra batida, sol, e o cheiro de gente acumulada.",
+        "translated_excerpt": "The government called them “pens”. The right word. We were cattle. The Government Pen in Senador Pompeu was an area fenced with barbed wire, about two hundred yards wide and perhaps three hundred long. No roof. No walls. Nothing but packed earth, sun, and the smell of people piled up.",
+        "candidate_concerns": [
+          {
+            "code": "TERM_CONFLICT",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              69,
+              86
+            ],
+            "target_span": [
+              71,
+              85
+            ],
+            "detector": "agent",
+            "evidence": "R355 fixa Government Pen, enquanto R359 registra Government Concentration Camp como candidata ainda não aprovada.",
+            "rationale": "A primeira forma preserva currais–gado; a segunda explicita a instituição, mas quebra a cadeia metafórica e eleva o registro."
+          },
+          {
+            "code": "OVERLOCALIZATION",
+            "severity": "medium",
+            "evidence_strength": "strong",
+            "source_span": [
+              152,
+              167
+            ],
+            "target_span": [
+              147,
+              164
+            ],
+            "detector": "agent",
+            "evidence": "Os números foram mantidos após a troca silenciosa de metros por jardas.",
+            "rationale": "A medida aumenta cerca de 9% e altera o quadro métrico da memória."
+          },
+          {
+            "code": "HISTORICAL_SOURCE_GAP",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              69,
+              86
+            ],
+            "target_span": [
+              71,
+              85
+            ],
+            "detector": "agent",
+            "evidence": "Não foi fornecida nomenclatura inglesa historicamente documentada.",
+            "rationale": "Nome narrativo, classificação histórica e nome institucional precisam ser distinguidos por revisão temática."
+          }
+        ],
+        "cultural_context": {
+          "region": "Senador Pompeu, Ceará",
+          "period": "1915",
+          "narrator_profile": "child",
+          "register": "oral, memorialístico, fragmentário e testemunhal",
+          "document_type": "memória ficcional infantil",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "The Government Pen in Senador Pompeu—a concentration camp—was an area fenced in with barbed wire, about two hundred meters wide and maybe three hundred meters long.",
+            "rationale": "Mantém a metáfora e acrescenta classificação histórica explícita.",
+            "risks": [
+              "explicitação ausente da frase-fonte",
+              "interrupção do ritmo infantil"
+            ]
+          },
+          {
+            "text": "The Government Pen in Senador Pompeu was an area fenced in with barbed wire, about two hundred meters wide and maybe three hundred meters long.",
+            "rationale": "Preserva a cadeia lexical e corrige a unidade de medida.",
+            "risks": [
+              "a instituição histórica pode permanecer opaca"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "The Government Pen in Senador Pompeu—a concentration camp—was an area fenced in with barbed wire, about two hundred meters wide and maybe three hundred meters long.",
+          "rationale": "Preferência condicionada que tenta conservar metáfora e categoria histórica; não é aprovação.",
+          "conditions": [
+            "arbitragem humana R355/R359",
+            "revisão histórica do Ceará",
+            "revisão bilíngue EN-US"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.84,
+          "cultural_fidelity": 0.54,
+          "author_voice_similarity": 0.78
+        },
+        "process_checks": {
+          "critical_omissions_identified": 1,
+          "unresolved_term_conflicts": 1,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "forma inglesa historicamente documentada",
+          "decisão autoral sobre explicitação"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-81e9a7dde70b6acab50becd2",
+            "idempotency_key": "ced-81e9a7dde70b6acab50becd2",
+            "schema_version": "1.0.0",
+            "review_id": "r360-curral_do_governo-en-us",
+            "segment_id": "MEM-06:14-18",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "Curral do Governo",
+            "entity_type": "historical_institution_and_dehumanization_metaphor",
+            "preferred_en": "Government Pen, com contextualização histórica aprovada",
+            "preferred_zh_cn": null,
+            "preserve_portuguese": false,
+            "first_occurrence_note": true,
+            "forbidden_translations": [
+              "Government Cattle Pen",
+              "Government Corral"
+            ],
+            "historical_context": {
+              "period": "1915",
+              "region": "Senador Pompeu, Ceará"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:14-18",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "forma inglesa historicamente documentada",
+          "decisão autoral sobre explicitação"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-curral_do_governo-zh-cn",
+      "unit_id": "curral_do_governo",
+      "label": "Curral do Governo",
+      "target_language": "zh-CN",
+      "editorial_classification": "high_risk_human_decision",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex",
+          "line_start": 14,
+          "line_end": 18,
+          "sha256": "0535d2653f670b1f04372663d884b79c40eafd04653674c5f93cdbc1b340fe6d"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-06.tex",
+          "line_start": 14,
+          "line_end": 18,
+          "sha256": "13f42d7e0e4aa6c48545281bb5fa3706bdc24e25a1247b16db8ad55acfdb0948"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58f4affez18ObsmAVlAYvm",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-curral_do_governo-zh-cn",
+        "segment_id": "MEM-06:14-18",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_text": "O governo chamava de “currais”. A palavra certa. A gente era gado. O Curral do Governo em Senador Pompeu era uma área cercada de arame farpado, com uns duzentos metros de largura por talvez trezentos de comprimento. Não tinha cobertura. Não tinha parede. Não tinha nada além de terra batida, sol, e o cheiro de gente acumulada.",
+        "translated_text": "政府管它们叫“牲畜圈”。这名字很准确。我们就是牲口。塞纳多尔·蓬佩乌的政府牲畜圈是一片用铁丝网围起来的区域，大约两百米宽、三百米长。没有顶棚。没有墙。除了踩实了的泥土、太阳和人群积聚的气味，什么都没有。",
+        "author_voice_profile": {
+          "narrator_age": "child",
+          "region": "Senador Pompeu, Ceará",
+          "register": "oral, memorialístico, fragmentário e testemunhal"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "Curral do Governo",
+              "entity_type": "historical_institution_and_dehumanization_metaphor",
+              "preferred_en": "Government Pen",
+              "preferred_zh_cn": "政府牲畜圈",
+              "candidate_en": "Government Concentration Camp",
+              "candidate_zh_cn": "政府集中收容营",
+              "forbidden_translations": [
+                "Government Cattle Pen",
+                "Government Corral"
+              ]
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1915",
+          "region": "Senador Pompeu, Ceará",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:14-18",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "简体中文（中国大陆）",
+          "document_type": "memória ficcional infantil",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-06.tex:14-18",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "Curral do Governo",
+            "target_term": "政府牲畜圈",
+            "symbolic": false,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_excerpt": "O governo chamava de “currais”. A palavra certa. A gente era gado. O Curral do Governo em Senador Pompeu era uma área cercada de arame farpado, com uns duzentos metros de largura por talvez trezentos de comprimento. Não tinha cobertura. Não tinha parede. Não tinha nada além de terra batida, sol, e o cheiro de gente acumulada.",
+        "translated_excerpt": "政府管它们叫“牲畜圈”。这名字很准确。我们就是牲口。塞纳多尔·蓬佩乌的政府牲畜圈是一片用铁丝网围起来的区域，大约两百米宽、三百米长。没有顶棚。没有墙。除了踩实了的泥土、太阳和人群积聚的气味，什么都没有。",
+        "candidate_concerns": [
+          {
+            "code": "TERM_CONFLICT",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              69,
+              86
+            ],
+            "target_span": [
+              35,
+              40
+            ],
+            "detector": "agent",
+            "evidence": "R356 fixa 政府牲畜圈 e R359 propõe 政府集中收容营 sem aprovação.",
+            "rationale": "A substituição institucional isolada apagaria a cadeia currais/gado; a forma literal isolada pode ocultar a instituição."
+          },
+          {
+            "code": "CULTURAL_LOSS",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              129,
+              142
+            ],
+            "target_span": [
+              44,
+              47
+            ],
+            "detector": "agent",
+            "evidence": "铁丝网 não explicita que o arame possui farpas.",
+            "rationale": "A omissão enfraquece um elemento material da coerção; 带刺铁丝网 é candidata."
+          },
+          {
+            "code": "VOICE_SHIFT",
+            "severity": "medium",
+            "evidence_strength": "strong",
+            "source_span": [
+              32,
+              47
+            ],
+            "target_span": [
+              12,
+              18
+            ],
+            "detector": "agent",
+            "evidence": "O fragmento seco vira uma oração analítica completa.",
+            "rationale": "A voz perde parte da compressão oral e acusatória."
+          }
+        ],
+        "cultural_context": {
+          "region": "Senador Pompeu, Ceará",
+          "period": "1915",
+          "narrator_profile": "child",
+          "register": "oral, memorialístico, fragmentário e testemunhal",
+          "document_type": "memória ficcional infantil",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "政府把那些地方叫作“牲畜圈”。这词没错。我们就是牲口。塞纳多尔·蓬佩乌的“政府牲畜圈”是一块用带刺铁丝网围起来的地方。",
+            "rationale": "Preserva a metáfora e recupera farpas e ritmo mais oral.",
+            "risks": [
+              "a função institucional ainda requer contexto",
+              "那些地方 depende do cotexto"
+            ]
+          },
+          {
+            "text": "“政府牲畜圈”（Curral do Governo）",
+            "rationale": "Sinaliza nome histórico e metáfora em uma primeira ocorrência.",
+            "risks": [
+              "paratexto intrusivo",
+              "possível exotização"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "政府把那些地方叫作“牲畜圈”。这词没错。我们就是牲口。塞纳多尔·蓬佩乌的“政府牲畜圈”是一块用带刺铁丝网围起来的地方。",
+          "rationale": "Preferência condicionada que conserva R356 e a metáfora; a camada institucional deve ser mediada separadamente.",
+          "conditions": [
+            "revisão PT-BR/ZH-CN",
+            "glosa histórica aprovada",
+            "decisão humana R356/R359"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.84,
+          "cultural_fidelity": 0.66,
+          "author_voice_similarity": 0.63
+        },
+        "process_checks": {
+          "critical_omissions_identified": 1,
+          "unresolved_term_conflicts": 1,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "parecer histórico sobre a denominação",
+          "cotexto para o antecedente de 它们"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-5ea12e7e729b34cea52f0ea1",
+            "idempotency_key": "ced-5ea12e7e729b34cea52f0ea1",
+            "schema_version": "1.0.0",
+            "review_id": "r360-curral_do_governo-zh-cn",
+            "segment_id": "MEM-06:14-18",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "Curral do Governo",
+            "entity_type": "historical_institution_and_dehumanization_metaphor",
+            "preferred_en": null,
+            "preferred_zh_cn": "政府牲畜圈（首次出现附历史说明）",
+            "preserve_portuguese": false,
+            "first_occurrence_note": true,
+            "forbidden_translations": [
+              "Government Cattle Pen",
+              "Government Corral"
+            ],
+            "historical_context": {
+              "period": "1915",
+              "region": "Senador Pompeu, Ceará"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:14-18",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "parecer histórico sobre a denominação",
+          "cotexto para o antecedente de 它们"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [
+        {
+          "code": "PRAGMATIC_FAILURE",
+          "severity": "medium",
+          "evidence_strength": "moderate",
+          "source_span": [
+            183,
+            189
+          ],
+          "target_span": [
+            0,
+            101
+          ],
+          "detector": "rule",
+          "evidence": "marcador de hipótese/metáfora presente na fonte e ausente no alvo",
+          "rationale": "a tradução pode ter convertido sugestão em afirmação"
+        }
+      ],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-retirantes-en-us",
+      "unit_id": "retirantes",
+      "label": "Retirantes",
+      "target_language": "en-US",
+      "editorial_classification": "contextual_human_review",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex",
+          "line_start": 25,
+          "line_end": 25,
+          "sha256": "05fbc88c3b4a2511946e6911433fd2ae011bb9f07fca26001bfe7373638d7b38"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-17.tex",
+          "line_start": 25,
+          "line_end": 25,
+          "sha256": "c5d59f538dcda2f08790e62be215980d56eff5e34b83673ab191dffe115d6f33"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58f0fffey6pWdzr08GMsyN",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-retirantes-en-us",
+        "segment_id": "DOC-17:25",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_text": "Todo dia chegam mais retirantes. Famílias inteiras. Gente que andou dias sem comida nem água. As crianças chegam com os olhos fundos e a barriga inchada. As mulheres, quando chegam, são separadas e levadas para “realocação”. Eu sei o que isso significa. Todos sabem.",
+        "translated_text": "Every day more retirantes arrive. Whole families. People who walked days without food or water. The children arrive with sunken eyes and swollen bellies. The women, when they arrive, are separated and taken for “relocation”. I know what that means. Everyone knows.",
+        "author_voice_profile": {
+          "narrator_age": "adult",
+          "region": "Ceará",
+          "register": "carta concisa de soldado, burocracia e culpa moral"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "retirantes",
+              "entity_type": "historical_regional_displacement_category",
+              "preferred_en": "retirantes",
+              "preferred_zh_cn": "逃荒者",
+              "forbidden_translations": []
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1915",
+          "region": "Ceará",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex:25-25",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "English (United States)",
+          "document_type": "carta ficcional de soldado",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/doc/DOC-17.tex:25-25",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "retirantes",
+            "target_term": "retirantes",
+            "symbolic": false,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_excerpt": "Todo dia chegam mais retirantes. Famílias inteiras. Gente que andou dias sem comida nem água. As crianças chegam com os olhos fundos e a barriga inchada. As mulheres, quando chegam, são separadas e levadas para “realocação”. Eu sei o que isso significa. Todos sabem.",
+        "translated_excerpt": "Every day more retirantes arrive. Whole families. People who walked days without food or water. The children arrive with sunken eyes and swollen bellies. The women, when they arrive, are separated and taken for “relocation”. I know what that means. Everyone knows.",
+        "candidate_concerns": [
+          {
+            "code": "TERM_CONFLICT",
+            "severity": "high",
+            "evidence_strength": "moderate",
+            "source_span": [
+              21,
+              31
+            ],
+            "target_span": [
+              15,
+              25
+            ],
+            "detector": "agent",
+            "evidence": "R355 exige retenção na primeira ocorrência e refugees depois; a posição desta ocorrência nas rotas não foi comprovada.",
+            "rationale": "O ramo terminológico aplicável não pode ser escolhido sem mapa de primeira exposição."
+          },
+          {
+            "code": "UNDERLOCALIZATION",
+            "severity": "medium",
+            "evidence_strength": "moderate",
+            "source_span": [
+              21,
+              31
+            ],
+            "target_span": [
+              15,
+              25
+            ],
+            "detector": "agent",
+            "evidence": "O termo permanece sem glosa no excerto isolado.",
+            "rationale": "A retenção evita falsa equivalência jurídica, mas pode ocultar seca, fome e categoria regional."
+          },
+          {
+            "code": "LITERALISM",
+            "severity": "low",
+            "evidence_strength": "moderate",
+            "source_span": [
+              62,
+              72
+            ],
+            "target_span": [
+              61,
+              72
+            ],
+            "detector": "agent",
+            "evidence": "Walked days omite a preposição esperada em EN-US.",
+            "rationale": "Walked for days preserva concisão e reduz a aparência de decalque."
+          }
+        ],
+        "cultural_context": {
+          "region": "Ceará",
+          "period": "1915",
+          "narrator_profile": "adult",
+          "register": "carta concisa de soldado, burocracia e culpa moral",
+          "document_type": "carta ficcional de soldado",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "Every day more *retirantes* arrive. Whole families. People who walked for days without food or water.",
+            "rationale": "Retém a categoria e corrige o decalque; glosa sóbria deve ocorrer em ponto acessível.",
+            "risks": [
+              "opacidade se a glosa não estiver acessível",
+              "itálico reiterado pode alterizar"
+            ]
+          },
+          {
+            "text": "Every day more drought-displaced people arrive.",
+            "rationale": "Explicita causa sem afirmar estatuto jurídico.",
+            "risks": [
+              "registro humanitário contemporâneo",
+              "perda da categoria histórica"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "Every day more *retirantes* arrive. Whole families. People who walked for days without food or water.",
+          "rationale": "Retenção condicionada a glosa única fora da voz do soldado.",
+          "conditions": [
+            "mapear a primeira ocorrência",
+            "revisão histórica e jurídico-terminológica",
+            "revisão EN-US"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.95,
+          "cultural_fidelity": 0.75,
+          "author_voice_similarity": 0.9
+        },
+        "process_checks": {
+          "critical_omissions_identified": 0,
+          "unresolved_term_conflicts": 1,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "mapa das rotas e primeira ocorrência",
+          "parecer histórico sobre a categoria"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-85582f6c155e1993c442f7ef",
+            "idempotency_key": "ced-85582f6c155e1993c442f7ef",
+            "schema_version": "1.0.0",
+            "review_id": "r360-retirantes-en-us",
+            "segment_id": "DOC-17:25",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "retirantes",
+            "entity_type": "historical_regional_displacement_category",
+            "preferred_en": "retirantes, com glosa inicial contextual",
+            "preferred_zh_cn": null,
+            "preserve_portuguese": true,
+            "first_occurrence_note": true,
+            "forbidden_translations": [],
+            "historical_context": {
+              "period": "1915",
+              "region": "Ceará"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex:25-25",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "mapa das rotas e primeira ocorrência",
+          "parecer histórico sobre a categoria"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-retirantes-zh-cn",
+      "unit_id": "retirantes",
+      "label": "Retirantes",
+      "target_language": "zh-CN",
+      "editorial_classification": "contextual_human_review",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex",
+          "line_start": 25,
+          "line_end": 25,
+          "sha256": "05fbc88c3b4a2511946e6911433fd2ae011bb9f07fca26001bfe7373638d7b38"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-17.tex",
+          "line_start": 25,
+          "line_end": 25,
+          "sha256": "2e8e49123588ebe81aa02f6475f26da4db206344ca3ea101b62f2d12b8d3af0b"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58ee0ffe1rdzZRje394SWa",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 2,
+        "corrected_by_same_runtime_session": true,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-retirantes-zh-cn",
+        "segment_id": "DOC-17:25",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_text": "Todo dia chegam mais retirantes. Famílias inteiras. Gente que andou dias sem comida nem água. As crianças chegam com os olhos fundos e a barriga inchada. As mulheres, quando chegam, são separadas e levadas para “realocação”. Eu sei o que isso significa. Todos sabem.",
+        "translated_text": "每天都有更多的逃荒者到来。整个整个的家庭。走了好几天、没有食物没有水的人。孩子们到达时眼窝深陷，肚子鼓胀。女人们一到就被分开，送去“重新安置”。我知道那意味着什么。所有人都知道。",
+        "author_voice_profile": {
+          "narrator_age": "adult",
+          "region": "Ceará",
+          "register": "carta concisa de soldado, burocracia e culpa moral"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "retirantes",
+              "entity_type": "historical_regional_displacement_category",
+              "preferred_en": "retirantes",
+              "preferred_zh_cn": "逃荒者",
+              "forbidden_translations": []
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1915",
+          "region": "Ceará",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex:25-25",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "简体中文（中国大陆）",
+          "document_type": "carta ficcional de soldado",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/doc/DOC-17.tex:25-25",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "retirantes",
+            "target_term": "逃荒者",
+            "symbolic": false,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_excerpt": "Todo dia chegam mais retirantes. Famílias inteiras. Gente que andou dias sem comida nem água. As crianças chegam com os olhos fundos e a barriga inchada. As mulheres, quando chegam, são separadas e levadas para “realocação”. Eu sei o que isso significa. Todos sabem.",
+        "translated_excerpt": "每天都有更多的逃荒者到来。整个整个的家庭。走了好几天、没有食物没有水的人。孩子们到达时眼窝深陷，肚子鼓胀。女人们一到就被分开，送去“重新安置”。我知道那意味着什么。所有人都知道。",
+        "candidate_concerns": [
+          {
+            "code": "CULTURAL_LOSS",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              21,
+              31
+            ],
+            "target_span": [
+              7,
+              10
+            ],
+            "detector": "agent",
+            "evidence": "逃荒者 preserva fuga por escassez, mas não lexicaliza a seca nem a categoria social cearense.",
+            "rationale": "A equivalência é funcionalmente parcial e pode domesticar o referente pela história chinesa de 逃荒."
+          },
+          {
+            "code": "TARGET_VARIETY_USAGE_RISK",
+            "severity": "medium",
+            "evidence_strength": "strong",
+            "source_span": [
+              33,
+              50
+            ],
+            "target_span": [
+              13,
+              20
+            ],
+            "detector": "agent",
+            "evidence": "整个整个 apresenta forte aparência de decalque.",
+            "rationale": "全家老小 é mais idiomático, mas acrescenta oposição etária."
+          },
+          {
+            "code": "LITERALISM",
+            "severity": "medium",
+            "evidence_strength": "strong",
+            "source_span": [
+              52,
+              92
+            ],
+            "target_span": [
+              21,
+              36
+            ],
+            "detector": "agent",
+            "evidence": "A ordem e a repetição seguem rigidamente a fonte.",
+            "rationale": "A fragmentação pode ser mantida com sintaxe chinesa menos transferida."
+          }
+        ],
+        "cultural_context": {
+          "region": "Ceará",
+          "period": "1915",
+          "narrator_profile": "adult",
+          "register": "carta concisa de soldado, burocracia e culpa moral",
+          "document_type": "carta ficcional de soldado",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "每天都有更多逃荒者来。全家老小。有人走了好几天，没吃的，也没水喝。",
+            "rationale": "Conserva 逃荒者 e reduz decalques.",
+            "risks": [
+              "a seca continua implícita",
+              "全家老小 acrescenta recorte etário"
+            ]
+          },
+          {
+            "text": "每天都有更多因旱灾逃荒的人来。",
+            "rationale": "Explicita a seca sem usar categoria jurídica moderna.",
+            "risks": [
+              "perde a densidade nominal de retirantes",
+              "acrescenta explicitação"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "每天都有更多逃荒者来。全家老小。有人走了好几天，没吃的，也没水喝。",
+          "rationale": "Mantém R356 e reduz interferência sintática; continua dependente de nota de escopo.",
+          "conditions": [
+            "revisão literária ZH-CN",
+            "nota de escopo sobre seca e Ceará",
+            "revisão de 重新安置"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.72,
+          "cultural_fidelity": 0.56,
+          "author_voice_similarity": 0.6
+        },
+        "process_checks": {
+          "critical_omissions_identified": 2,
+          "unresolved_term_conflicts": 1,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "fontes históricas da terminologia",
+          "parecer ZH-CN independente"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-96b0b4ce288a91f77291b221",
+            "idempotency_key": "ced-96b0b4ce288a91f77291b221",
+            "schema_version": "1.0.0",
+            "review_id": "r360-retirantes-zh-cn",
+            "segment_id": "DOC-17:25",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "retirantes",
+            "entity_type": "historical_regional_displacement_category",
+            "preferred_en": null,
+            "preferred_zh_cn": "逃荒者（限定于塞阿拉旱灾语境）",
+            "preserve_portuguese": false,
+            "first_occurrence_note": true,
+            "forbidden_translations": [],
+            "historical_context": {
+              "period": "1915",
+              "region": "Ceará"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex:25-25",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "fontes históricas da terminologia",
+          "parecer ZH-CN independente"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-rasga_mortalha-en-us",
+      "unit_id": "rasga_mortalha",
+      "label": "Rasga Mortalha",
+      "target_language": "en-US",
+      "editorial_classification": "high_risk_human_decision",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex",
+          "line_start": 24,
+          "line_end": 50,
+          "sha256": "66e29b56691db157657280dfa762531fbc34171effc53e056293dab9fc06fb3d"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-12.tex",
+          "line_start": 24,
+          "line_end": 50,
+          "sha256": "ff677cdd087b61d0e29c7d4507f6cd73b2489d22dfda6363e5360c759fc1e259"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58eb7ffekeLqjqGhOezfLH",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-rasga_mortalha-en-us",
+        "segment_id": "MEM-12:24-50",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_text": "A Rasga Mortalha apareceu num inverno. Fino. Agudo. Um canto que subia e descia como uma mulher chorando muito longe. “Rasga mortalha...”, alguém sussurrou. No batente da janela, havia uma coruja. “Rasga mortalha”, repetiu Seu Nonô. “Quando ela canta, alguém morre. Ela rasga a mortalha do finado com o bico pra alma poder sair. Por isso o nome.”",
+        "translated_text": "The Shroud-Ripper appeared one winter. Thin. High-pitched. A song that rose and fell like a woman weeping very far away. “Shroud-ripper...”, someone whispered. On the windowsill, there was an owl. “Shroud-ripper,” Seu Nonô repeated. “When she sings, someone dies. She rips the dead man's shroud with her beak so the soul can get out. That's where the name comes from.”",
+        "author_voice_profile": {
+          "narrator_age": "adult recalling childhood",
+          "region": "Brasil",
+          "register": "oral-popular, religioso e ominoso"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "Rasga Mortalha",
+              "entity_type": "recurring_folkloric_symbol",
+              "preferred_en": "Shroud-Ripper",
+              "preferred_zh_cn": "裹尸布撕裂者",
+              "forbidden_translations": []
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1945",
+          "region": "Brasil",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex:24-50",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "English (United States)",
+          "document_type": "memória ficcional e fala de personagem",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-12.tex:24-50",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "Rasga Mortalha",
+            "target_term": "Shroud-Ripper",
+            "symbolic": true,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_excerpt": "A Rasga Mortalha apareceu num inverno. Fino. Agudo. Um canto que subia e descia como uma mulher chorando muito longe. “Rasga mortalha...”, alguém sussurrou. No batente da janela, havia uma coruja. “Rasga mortalha”, repetiu Seu Nonô. “Quando ela canta, alguém morre. Ela rasga a mortalha do finado com o bico pra alma poder sair. Por isso o nome.”",
+        "translated_excerpt": "The Shroud-Ripper appeared one winter. Thin. High-pitched. A song that rose and fell like a woman weeping very far away. “Shroud-ripper...”, someone whispered. On the windowsill, there was an owl. “Shroud-ripper,” Seu Nonô repeated. “When she sings, someone dies. She rips the dead man's shroud with her beak so the soul can get out. That's where the name comes from.”",
+        "candidate_concerns": [
+          {
+            "code": "LITERALISM",
+            "severity": "medium",
+            "evidence_strength": "strong",
+            "source_span": [
+              2,
+              16
+            ],
+            "target_span": [
+              4,
+              17
+            ],
+            "detector": "agent",
+            "evidence": "O calque preserva a morfologia, mas pode soar como epíteto fantástico inventado.",
+            "rationale": "A explicação intratextual ajuda, porém não preserva sozinha a ancoragem brasileira."
+          },
+          {
+            "code": "SYMBOL_DRIFT",
+            "severity": "high",
+            "evidence_strength": "moderate",
+            "source_span": [
+              2,
+              16
+            ],
+            "target_span": [
+              4,
+              17
+            ],
+            "detector": "agent",
+            "evidence": "A recorrência enfatiza a ação gótica de rasgar a mortalha.",
+            "rationale": "O símbolo pode deslocar-se de ave agourenta popular para entidade nomeada de bestiário."
+          },
+          {
+            "code": "DOMESTICATION_ERASURE_RISK",
+            "severity": "medium",
+            "evidence_strength": "strong",
+            "source_span": [
+              2,
+              16
+            ],
+            "target_span": [
+              4,
+              17
+            ],
+            "detector": "agent",
+            "evidence": "A forma portuguesa desaparece.",
+            "rationale": "A etimologia fica acessível, mas o marcador cultural brasileiro é apagado."
+          }
+        ],
+        "cultural_context": {
+          "region": "Brasil",
+          "period": "1945",
+          "narrator_profile": "adult recalling childhood",
+          "register": "oral-popular, religioso e ominoso",
+          "document_type": "memória ficcional e fala de personagem",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "The Rasga-Mortalha appeared one winter.",
+            "rationale": "Retém o nome e deixa a cena explicar coruja, presságio e etimologia.",
+            "risks": [
+              "opacidade temporária",
+              "conflito com R355"
+            ]
+          },
+          {
+            "text": "The Rasga-Mortalha—the “shroud-ripper”—appeared one winter.",
+            "rationale": "Combina retenção e glosa.",
+            "risks": [
+              "antecipa a explicação",
+              "pode folclorizar"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "The Rasga-Mortalha appeared one winter.",
+          "rationale": "Retenção sem itálico, condicionada à comparação de todas as recorrências.",
+          "conditions": [
+            "revisão de folclore brasileiro",
+            "cotejo global do símbolo",
+            "revisão EN-US"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.84,
+          "cultural_fidelity": 0.69,
+          "author_voice_similarity": 0.86
+        },
+        "process_checks": {
+          "critical_omissions_identified": 0,
+          "unresolved_term_conflicts": 0,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "fontes folclóricas externas",
+          "mapa global das ocorrências"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-3de1e54d7c8db9d81258d062",
+            "idempotency_key": "ced-3de1e54d7c8db9d81258d062",
+            "schema_version": "1.0.0",
+            "review_id": "r360-rasga_mortalha-en-us",
+            "segment_id": "MEM-12:24-50",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "Rasga Mortalha",
+            "entity_type": "recurring_folkloric_symbol",
+            "preferred_en": "Rasga-Mortalha, com mediação intratextual",
+            "preferred_zh_cn": null,
+            "preserve_portuguese": true,
+            "first_occurrence_note": true,
+            "forbidden_translations": [],
+            "historical_context": {
+              "period": "1945",
+              "region": "Brasil"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex:24-50",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "fontes folclóricas externas",
+          "mapa global das ocorrências"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-rasga_mortalha-zh-cn",
+      "unit_id": "rasga_mortalha",
+      "label": "Rasga Mortalha",
+      "target_language": "zh-CN",
+      "editorial_classification": "high_risk_human_decision",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex",
+          "line_start": 24,
+          "line_end": 50,
+          "sha256": "66e29b56691db157657280dfa762531fbc34171effc53e056293dab9fc06fb3d"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-12.tex",
+          "line_start": 24,
+          "line_end": 50,
+          "sha256": "8014be9657435a99dde6f5bdcb1aace8e2978ca969fa422775f71ce7da90569f"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58e83ffe5sn0Y3nIHKLDqj",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-rasga_mortalha-zh-cn",
+        "segment_id": "MEM-12:24-50",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_text": "A Rasga Mortalha apareceu num inverno. Fino. Agudo. Um canto que subia e descia como uma mulher chorando muito longe. “Rasga mortalha...”, alguém sussurrou. No batente da janela, havia uma coruja. “Rasga mortalha”, repetiu Seu Nonô. “Quando ela canta, alguém morre. Ela rasga a mortalha do finado com o bico pra alma poder sair. Por isso o nome.”",
+        "translated_text": "裹尸布撕裂者在一个冬天出现。纤细。尖锐。像很远的地方一个女人哭泣的声音，时高时低。“裹尸布撕裂者……”我身旁有人低语。窗台上，站着一只猫头鹰。“裹尸布撕裂者，”诺诺老爹重复道，“它一唱，就有人要死。它用喙撕开死者的裹尸布，让灵魂能出来。所以叫这个名字。”",
+        "author_voice_profile": {
+          "narrator_age": "adult recalling childhood",
+          "region": "Brasil",
+          "register": "oral-popular, religioso e ominoso"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "Rasga Mortalha",
+              "entity_type": "recurring_folkloric_symbol",
+              "preferred_en": "Shroud-Ripper",
+              "preferred_zh_cn": "裹尸布撕裂者",
+              "forbidden_translations": []
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1945",
+          "region": "Brasil",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex:24-50",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "简体中文（中国大陆）",
+          "document_type": "memória ficcional e fala de personagem",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-12.tex:24-50",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "Rasga Mortalha",
+            "target_term": "裹尸布撕裂者",
+            "symbolic": true,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_excerpt": "A Rasga Mortalha apareceu num inverno. Fino. Agudo. Um canto que subia e descia como uma mulher chorando muito longe. “Rasga mortalha...”, alguém sussurrou. No batente da janela, havia uma coruja. “Rasga mortalha”, repetiu Seu Nonô. “Quando ela canta, alguém morre. Ela rasga a mortalha do finado com o bico pra alma poder sair. Por isso o nome.”",
+        "translated_excerpt": "裹尸布撕裂者在一个冬天出现。纤细。尖锐。像很远的地方一个女人哭泣的声音，时高时低。“裹尸布撕裂者……”我身旁有人低语。窗台上，站着一只猫头鹰。“裹尸布撕裂者，”诺诺老爹重复道，“它一唱，就有人要死。它用喙撕开死者的裹尸布，让灵魂能出来。所以叫这个名字。”",
+        "candidate_concerns": [
+          {
+            "code": "TERM_CONFLICT",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              2,
+              16
+            ],
+            "target_span": [
+              0,
+              6
+            ],
+            "detector": "agent",
+            "evidence": "R356 exige glosa 报丧鸟 na primeira ocorrência, ausente no recorte.",
+            "rationale": "Inseri-la automaticamente pode antecipar a revelação; local e forma exigem decisão humana."
+          },
+          {
+            "code": "LITERALISM",
+            "severity": "medium",
+            "evidence_strength": "moderate",
+            "source_span": [
+              2,
+              16
+            ],
+            "target_span": [
+              0,
+              6
+            ],
+            "detector": "agent",
+            "evidence": "O composto é literalmente analisável e pesado nas repetições.",
+            "rationale": "Pode soar como epíteto de criatura, embora preserve a etimologia."
+          },
+          {
+            "code": "REGISTER_SHIFT",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              290,
+              296
+            ],
+            "target_span": [
+              104,
+              106
+            ],
+            "detector": "agent",
+            "evidence": "Finado, bico, pra e alma tornam-se formas mais escritas como 死者, 喙 e 灵魂.",
+            "rationale": "A fala popular de Seu Nonô adquire registro expositivo."
+          }
+        ],
+        "cultural_context": {
+          "region": "Brasil",
+          "period": "1945",
+          "narrator_profile": "adult recalling childhood",
+          "register": "oral-popular, religioso e ominoso",
+          "document_type": "memória ficcional e fala de personagem",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "“裹尸布撕裂者”（报丧鸟）是在一个冬天出现的。",
+            "rationale": "Mantém o termo e realiza a glosa uma vez.",
+            "risks": [
+              "antecipa o agouro",
+              "pesa a abertura"
+            ]
+          },
+          {
+            "text": "“裹尸布撕裂者”¹在一个冬天出现。〔注1：报丧鸟。〕",
+            "rationale": "Desloca a mediação para o paratexto.",
+            "risks": [
+              "interrompe a leitura",
+              "exige decisão tipográfica"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "首次出现保留“裹尸布撕裂者”，并以括注或脚注补“报丧鸟”；后续完整重复“裹尸布撕裂者”。",
+          "rationale": "Preserva R356, etimologia e repetição; posição da glosa continua aberta.",
+          "conditions": [
+            "definir primeira ocorrência",
+            "revisão PT-BR/ZH-CN",
+            "revisão folclórica",
+            "cotejo de todas as recorrências"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.93,
+          "cultural_fidelity": 0.62,
+          "author_voice_similarity": 0.57
+        },
+        "process_checks": {
+          "critical_omissions_identified": 1,
+          "unresolved_term_conflicts": 1,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "contested",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "posição editorial da glosa",
+          "parecer bilíngue e cultural"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-c7bbced6d456d363ea1fb983",
+            "idempotency_key": "ced-c7bbced6d456d363ea1fb983",
+            "schema_version": "1.0.0",
+            "review_id": "r360-rasga_mortalha-zh-cn",
+            "segment_id": "MEM-12:24-50",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "Rasga Mortalha",
+            "entity_type": "recurring_folkloric_symbol",
+            "preferred_en": null,
+            "preferred_zh_cn": "裹尸布撕裂者（首现以报丧鸟作候选注释）",
+            "preserve_portuguese": false,
+            "first_occurrence_note": true,
+            "forbidden_translations": [],
+            "historical_context": {
+              "period": "1945",
+              "region": "Brasil"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex:24-50",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "posição editorial da glosa",
+          "parecer bilíngue e cultural"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [
+        {
+          "code": "PRAGMATIC_FAILURE",
+          "severity": "medium",
+          "evidence_strength": "moderate",
+          "source_span": [
+            18,
+            24
+          ],
+          "target_span": [
+            0,
+            127
+          ],
+          "detector": "rule",
+          "evidence": "marcador de hipótese/metáfora presente na fonte e ausente no alvo",
+          "rationale": "a tradução pode ter convertido sugestão em afirmação"
+        }
+      ],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-molambudos-en-us",
+      "unit_id": "molambudos",
+      "label": "Molambudos",
+      "target_language": "en-US",
+      "editorial_classification": "high_risk_human_decision",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex",
+          "line_start": 22,
+          "line_end": 28,
+          "sha256": "0535d2653f670b1f04372663d884b79c40eafd04653674c5f93cdbc1b340fe6d"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-06.tex",
+          "line_start": 22,
+          "line_end": 28,
+          "sha256": "722edb54755e119d4325e3cdb46a5ffd6598ab5a66328875f6f7b804f7d93fba"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58e51ffeiptwO2UIgaHhzx",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-molambudos-en-us",
+        "segment_id": "MEM-06:22-28",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_text": "Todo dia chegavam soldados com mais retirantes. Eles vinham de toda parte. Os soldados chamavam a gente de “molambudos”. A palavra saía da boca deles como se fosse o nome de uma praga. “Lá vem mais molambudos.” “Molambudo, sai daí.” “Dá comida pra esses molambudos antes que morram tudo.”",
+        "translated_text": "Every day soldiers arrived with more retirantes. They came from everywhere. The soldiers called us “molambudos”. The word came out of their mouths as if it were the name of a plague. “Here come more molambudos.” “Molambudo, get out of there.” “Give food to these molambudos before they all die.”",
+        "author_voice_profile": {
+          "narrator_age": "child",
+          "region": "Ceará",
+          "register": "oralidade infantil e fala humilhante de soldados"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "molambudos",
+              "entity_type": "recurring_neologism_social_slur_and_title",
+              "preferred_en": "molambudos",
+              "preferred_zh_cn": "莫兰布多斯",
+              "forbidden_translations": []
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1915",
+          "region": "Ceará",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:22-28",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "English (United States)",
+          "document_type": "memória ficcional com discurso direto",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-06.tex:22-28",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "molambudos",
+            "target_term": "molambudos",
+            "symbolic": true,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_excerpt": "Todo dia chegavam soldados com mais retirantes. Eles vinham de toda parte. Os soldados chamavam a gente de “molambudos”. A palavra saía da boca deles como se fosse o nome de uma praga. “Lá vem mais molambudos.” “Molambudo, sai daí.” “Dá comida pra esses molambudos antes que morram tudo.”",
+        "translated_excerpt": "Every day soldiers arrived with more retirantes. They came from everywhere. The soldiers called us “molambudos”. The word came out of their mouths as if it were the name of a plague. “Here come more molambudos.” “Molambudo, get out of there.” “Give food to these molambudos before they all die.”",
+        "candidate_concerns": [
+          {
+            "code": "TERM_CONFLICT",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              108,
+              118
+            ],
+            "target_span": [
+              100,
+              110
+            ],
+            "detector": "agent",
+            "evidence": "R355 prevê retenção com glosa contextual rag-people; a glosa não aparece neste recorte.",
+            "rationale": "A retenção preserva título e categoria, mas pode ocultar a materialidade do insulto."
+          },
+          {
+            "code": "PRAGMATIC_FAILURE",
+            "severity": "medium",
+            "evidence_strength": "moderate",
+            "source_span": [
+              108,
+              118
+            ],
+            "target_span": [
+              100,
+              110
+            ],
+            "detector": "agent",
+            "evidence": "O termo pode permanecer semanticamente opaco ao público EN-US.",
+            "rationale": "A hostilidade sobrevive pelos imperativos, mas a categoria social imposta pode enfraquecer."
+          },
+          {
+            "code": "REGISTER_SHIFT",
+            "severity": "medium",
+            "evidence_strength": "strong",
+            "source_span": [
+              275,
+              286
+            ],
+            "target_span": [
+              281,
+              293
+            ],
+            "detector": "agent",
+            "evidence": "A concordância oral marcada vira inglês padrão.",
+            "rationale": "Não se deve compensar com eye dialect ou dialeto estereotipado."
+          }
+        ],
+        "cultural_context": {
+          "region": "Ceará",
+          "period": "1915",
+          "narrator_profile": "child",
+          "register": "oralidade infantil e fala humilhante de soldados",
+          "document_type": "memória ficcional com discurso direto",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "The soldiers called us “molambudos”—rag-people.",
+            "rationale": "Acrescenta uma glosa única e mantém a repetição posterior.",
+            "risks": [
+              "rag-people pode parecer equivalência total",
+              "muda a cadência"
+            ]
+          },
+          {
+            "text": "The soldiers called us “molambudos”.",
+            "rationale": "Retenção pura, se a glosa já estiver acessível em todas as rotas.",
+            "risks": [
+              "opacidade e sublocalização"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "The soldiers called us “molambudos”—rag-people.",
+          "rationale": "Intervenção mínima condicionada ao mapa de primeira exposição; não substituir globalmente o termo.",
+          "conditions": [
+            "mapa das rotas",
+            "glosa única",
+            "revisão EN-US",
+            "não usar eye dialect"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.97,
+          "cultural_fidelity": 0.74,
+          "author_voice_similarity": 0.85
+        },
+        "process_checks": {
+          "critical_omissions_identified": 1,
+          "unresolved_term_conflicts": 1,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "mapa das primeiras ocorrências",
+          "decisão tipográfica"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-6fee7ea394704615363b0f86",
+            "idempotency_key": "ced-6fee7ea394704615363b0f86",
+            "schema_version": "1.0.0",
+            "review_id": "r360-molambudos-en-us",
+            "segment_id": "MEM-06:22-28",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "molambudos",
+            "entity_type": "recurring_neologism_social_slur_and_title",
+            "preferred_en": "molambudo(s), com glosa contextual única rag-people",
+            "preferred_zh_cn": null,
+            "preserve_portuguese": false,
+            "first_occurrence_note": true,
+            "forbidden_translations": [],
+            "historical_context": {
+              "period": "1915",
+              "region": "Ceará"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:22-28",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "mapa das primeiras ocorrências",
+          "decisão tipográfica"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-molambudos-zh-cn",
+      "unit_id": "molambudos",
+      "label": "Molambudos",
+      "target_language": "zh-CN",
+      "editorial_classification": "high_risk_human_decision",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex",
+          "line_start": 22,
+          "line_end": 28,
+          "sha256": "0535d2653f670b1f04372663d884b79c40eafd04653674c5f93cdbc1b340fe6d"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-06.tex",
+          "line_start": 22,
+          "line_end": 28,
+          "sha256": "13f42d7e0e4aa6c48545281bb5fa3706bdc24e25a1247b16db8ad55acfdb0948"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58dfbffeTI31oDYwOereUs",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-molambudos-zh-cn",
+        "segment_id": "MEM-06:22-28",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_text": "Todo dia chegavam soldados com mais retirantes. Eles vinham de toda parte. Os soldados chamavam a gente de “molambudos”. A palavra saía da boca deles como se fosse o nome de uma praga. “Lá vem mais molambudos.” “Molambudo, sai daí.” “Dá comida pra esses molambudos antes que morram tudo.”",
+        "translated_text": "每天都有士兵押着更多的逃荒者到来。他们来自四面八方。士兵们叫我们“莫兰布多斯”。这个词从他们嘴里说出来，仿佛是一种瘟疫的名字。“又来了一群破衣人。”“破衣人，滚开。”“给这些破衣人点吃的，别让他们全死光了。”",
+        "author_voice_profile": {
+          "narrator_age": "child",
+          "region": "Ceará",
+          "register": "oralidade infantil e fala humilhante de soldados"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "molambudos",
+              "entity_type": "recurring_neologism_social_slur_and_title",
+              "preferred_en": "molambudos",
+              "preferred_zh_cn": "莫兰布多斯",
+              "forbidden_translations": []
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1915",
+          "region": "Ceará",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:22-28",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "简体中文（中国大陆）",
+          "document_type": "memória ficcional com discurso direto",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-06.tex:22-28",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "molambudos",
+            "target_term": "莫兰布多斯 / 破衣人",
+            "symbolic": true,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_excerpt": "Todo dia chegavam soldados com mais retirantes. Eles vinham de toda parte. Os soldados chamavam a gente de “molambudos”. A palavra saía da boca deles como se fosse o nome de uma praga. “Lá vem mais molambudos.” “Molambudo, sai daí.” “Dá comida pra esses molambudos antes que morram tudo.”",
+        "translated_excerpt": "每天都有士兵押着更多的逃荒者到来。他们来自四面八方。士兵们叫我们“莫兰布多斯”。这个词从他们嘴里说出来，仿佛是一种瘟疫的名字。“又来了一群破衣人。”“破衣人，滚开。”“给这些破衣人点吃的，别让他们全死光了。”",
+        "candidate_concerns": [
+          {
+            "code": "TERM_CONFLICT",
+            "severity": "high",
+            "evidence_strength": "moderate",
+            "source_span": [
+              108,
+              118
+            ],
+            "target_span": [
+              33,
+              38
+            ],
+            "detector": "agent",
+            "evidence": "A narração usa 莫兰布多斯, mas as três falas usam 破衣人.",
+            "rationale": "O glossário contém ambas as formas sem delimitar a alternância dentro da mesma cena."
+          },
+          {
+            "code": "SYMBOL_DRIFT",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              108,
+              118
+            ],
+            "target_span": [
+              69,
+              72
+            ],
+            "detector": "agent",
+            "evidence": "A repetição do neologismo-título desaparece das falas.",
+            "rationale": "Enfraquece a cadeia entre insulto, praga, categoria social e título."
+          },
+          {
+            "code": "DOMESTICATION_ERASURE_RISK",
+            "severity": "high",
+            "evidence_strength": "moderate",
+            "source_span": [
+              108,
+              118
+            ],
+            "target_span": [
+              69,
+              72
+            ],
+            "detector": "agent",
+            "evidence": "破衣人 é transparente como descrição de roupa.",
+            "rationale": "A solução pode apagar a estranheza autoral e reduzir o neologismo a descrição comum."
+          }
+        ],
+        "cultural_context": {
+          "region": "Ceará",
+          "period": "1915",
+          "narrator_profile": "child",
+          "register": "oralidade infantil e fala humilhante de soldados",
+          "document_type": "memória ficcional com discurso direto",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "“又来了一群莫兰布多斯。”“莫兰布多斯，滚开。”“给这些莫兰布多斯点吃的，别让他们全死光了。”",
+            "rationale": "Prioriza recorrência do neologismo depois de glosa acessível.",
+            "risks": [
+              "pode soar como nome próprio",
+              "vocativo singular não se distingue"
+            ]
+          },
+          {
+            "text": "“又来了一群破衣人。”“破衣人，滚开。”",
+            "rationale": "Mantém transparência atual se a alternância for deliberadamente documentada.",
+            "risks": [
+              "quebra a repetição simbólica"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "“又来了一群莫兰布多斯。”“莫兰布多斯，滚开。”“给这些莫兰布多斯点吃的，别让他们全死光了。”",
+          "rationale": "Preferência condicionada à existência de glosa acessível e à força pragmática em ZH-CN.",
+          "conditions": [
+            "verificar rotas",
+            "revisão pragmática ZH-CN",
+            "registrar política de alternância"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.58,
+          "cultural_fidelity": 0.74,
+          "author_voice_similarity": 0.82
+        },
+        "process_checks": {
+          "critical_omissions_identified": 1,
+          "unresolved_term_conflicts": 1,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "snapshot completo do grafo",
+          "parecer pragmático bilíngue"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-284f988ce0b3fab9d292fab4",
+            "idempotency_key": "ced-284f988ce0b3fab9d292fab4",
+            "schema_version": "1.0.0",
+            "review_id": "r360-molambudos-zh-cn",
+            "segment_id": "MEM-06:22-28",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "molambudos",
+            "entity_type": "recurring_neologism_social_slur_and_title",
+            "preferred_en": null,
+            "preferred_zh_cn": "莫兰布多斯 nas recorrências simbolicamente centrais; 破衣人 apenas como glosa",
+            "preserve_portuguese": false,
+            "first_occurrence_note": true,
+            "forbidden_translations": [],
+            "historical_context": {
+              "period": "1915",
+              "region": "Ceará"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:22-28",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "snapshot completo do grafo",
+          "parecer pragmático bilíngue"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [
+        {
+          "code": "PRAGMATIC_FAILURE",
+          "severity": "medium",
+          "evidence_strength": "moderate",
+          "source_span": [
+            150,
+            157
+          ],
+          "target_span": [
+            0,
+            104
+          ],
+          "detector": "rule",
+          "evidence": "marcador de hipótese/metáfora presente na fonte e ausente no alvo",
+          "rationale": "a tradução pode ter convertido sugestão em afirmação"
+        },
+        {
+          "code": "SYMBOL_DRIFT",
+          "severity": "high",
+          "evidence_strength": "strong",
+          "source_span": [
+            108,
+            118
+          ],
+          "target_span": [
+            0,
+            104
+          ],
+          "detector": "rule",
+          "evidence": "símbolo aprovado molambudos não usa 莫兰布多斯 / 破衣人 no alvo",
+          "rationale": "a recorrência simbólica diverge da decisão humana anterior"
+        }
+      ],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-hospital_colonia-en-us",
+      "unit_id": "hospital_colonia",
+      "label": "Hospital Colônia",
+      "target_language": "en-US",
+      "editorial_classification": "high_risk_human_decision",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex",
+          "line_start": 20,
+          "line_end": 29,
+          "sha256": "a022e5d4737be484f13ce0302ce25a1f1c179623ecb4c399cd5401992b3c833e"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/luc/LUC-01.tex",
+          "line_start": 20,
+          "line_end": 29,
+          "sha256": "4a76bd1c1d138092a69c3e4f0125cde4e52f3ed05cbc8dab84c536b6cea5721a"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58dc4ffew5hXH6W50EoxNN",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-hospital_colonia-en-us",
+        "segment_id": "LUC-01:20,29",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_text": "Conforme conversamos em janeiro, localizamos o prontuário completo do Paciente 1.260 (Hospital Colônia de Barbacena) e os anexos mencionados. O caso do Colônia era famoso na psiquiatria forense brasileira: sessenta mil mortos em oitenta anos, pacientes enterrados vivos, diagnósticos fabricados.",
+        "translated_text": "As we discussed in January, we have located the complete medical record of Patient 1,260 (Hospital-Colony of Barbacena) and the attachments mentioned. The Colony case was famous in Brazilian forensic psychiatry: sixty thousand dead in eighty years, patients buried alive, manufactured diagnoses.",
+        "author_voice_profile": {
+          "narrator_age": "adult",
+          "region": "Barbacena",
+          "register": "investigação acadêmica contemporânea"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "Hospital Colônia de Barbacena",
+              "entity_type": "historical_institution_proper_name",
+              "preferred_en": "the Colony",
+              "preferred_zh_cn": "收容院",
+              "forbidden_translations": []
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "2026 sobre instituição histórica",
+          "region": "Barbacena",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex:20-29",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "English (United States)",
+          "document_type": "e-mail ficcional e narração investigativa",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/luc/LUC-01.tex:20-29",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "Hospital Colônia de Barbacena",
+            "target_term": "Hospital-Colony of Barbacena / the Colony",
+            "symbolic": false,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "insufficient_context",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_excerpt": "Conforme conversamos em janeiro, localizamos o prontuário completo do Paciente 1.260 (Hospital Colônia de Barbacena) e os anexos mencionados. O caso do Colônia era famoso na psiquiatria forense brasileira: sessenta mil mortos em oitenta anos, pacientes enterrados vivos, diagnósticos fabricados.",
+        "translated_excerpt": "As we discussed in January, we have located the complete medical record of Patient 1,260 (Hospital-Colony of Barbacena) and the attachments mentioned. The Colony case was famous in Brazilian forensic psychiatry: sixty thousand dead in eighty years, patients buried alive, manufactured diagnoses.",
+        "candidate_concerns": [
+          {
+            "code": "LITERALISM",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              86,
+              115
+            ],
+            "target_span": [
+              90,
+              118
+            ],
+            "detector": "agent",
+            "evidence": "O composto hifenizado reproduz literalmente o nome.",
+            "rationale": "Pode sugerir colônia territorial e não está documentado como denominação inglesa reconhecida."
+          },
+          {
+            "code": "TERM_CONFLICT",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              95,
+              102
+            ],
+            "target_span": [
+              151,
+              161
+            ],
+            "detector": "agent",
+            "evidence": "O corpo alterna Hospital-Colony e the Colony; R355 também contém Santa Maria Colony.",
+            "rationale": "A correferência e o escopo das três formas não estão reconciliados."
+          },
+          {
+            "code": "HISTORICAL_SOURCE_GAP",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              206,
+              225
+            ],
+            "target_span": [
+              212,
+              231
+            ],
+            "detector": "agent",
+            "evidence": "As alegações históricas aparecem sem fontes no recorte.",
+            "rationale": "Não se pode acrescentar ou retirar modalização factual sem examinar a proveniência."
+          }
+        ],
+        "cultural_context": {
+          "region": "Barbacena",
+          "period": "2026 sobre instituição histórica",
+          "narrator_profile": "adult",
+          "register": "investigação acadêmica contemporânea",
+          "document_type": "e-mail ficcional e narração investigativa",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "Hospital Colônia de Barbacena, the psychiatric institution hereafter referred to as “the Colony”",
+            "rationale": "Retém o nome brasileiro e desambigua a forma curta.",
+            "risks": [
+              "glosa intrusiva",
+              "descrição institucional ainda exige revisão"
+            ]
+          },
+          {
+            "text": "Hospital Colônia de Barbacena",
+            "rationale": "Preserva rastreabilidade nominal.",
+            "risks": [
+              "público pode não inferir a natureza institucional"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "Hospital Colônia de Barbacena, the psychiatric institution hereafter referred to as “the Colony”",
+          "rationale": "Preferência estritamente condicionada; fontes e nome reconhecido continuam ausentes.",
+          "conditions": [
+            "revisão histórica",
+            "reconciliação R355",
+            "revisão EN-US",
+            "fontes das alegações"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.6,
+          "cultural_fidelity": 0.5,
+          "author_voice_similarity": 0.8
+        },
+        "process_checks": {
+          "critical_omissions_identified": 2,
+          "unresolved_term_conflicts": 1,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "denominação inglesa documentada",
+          "fontes das alegações",
+          "escopo de Santa Maria Colony"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-b60aa532e8aeb95752f35d46",
+            "idempotency_key": "ced-b60aa532e8aeb95752f35d46",
+            "schema_version": "1.0.0",
+            "review_id": "r360-hospital_colonia-en-us",
+            "segment_id": "LUC-01:20,29",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "Hospital Colônia de Barbacena",
+            "entity_type": "historical_institution_proper_name",
+            "preferred_en": "Hospital Colônia de Barbacena, com forma curta definida após primeira ocorrência",
+            "preferred_zh_cn": null,
+            "preserve_portuguese": true,
+            "first_occurrence_note": true,
+            "forbidden_translations": [],
+            "historical_context": {
+              "period": "2026 sobre instituição histórica",
+              "region": "Barbacena"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex:20-29",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "denominação inglesa documentada",
+          "fontes das alegações",
+          "escopo de Santa Maria Colony"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "insufficient_context",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "análise incompleta ou saída inválida"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-hospital_colonia-zh-cn",
+      "unit_id": "hospital_colonia",
+      "label": "Hospital Colônia",
+      "target_language": "zh-CN",
+      "editorial_classification": "high_risk_human_decision",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex",
+          "line_start": 20,
+          "line_end": 29,
+          "sha256": "a022e5d4737be484f13ce0302ce25a1f1c179623ecb4c399cd5401992b3c833e"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/luc/LUC-01.tex",
+          "line_start": 20,
+          "line_end": 29,
+          "sha256": "2c0e2eff627fc98a0805ac29a83b9e8c57a1a7d1e92bf219513444a572a509f5"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58d74ffeRVhN4opcWtY3bh",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 2,
+        "corrected_by_same_runtime_session": true,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-hospital_colonia-zh-cn",
+        "segment_id": "LUC-01:20,29",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_text": "Conforme conversamos em janeiro, localizamos o prontuário completo do Paciente 1.260 (Hospital Colônia de Barbacena) e os anexos mencionados. O caso do Colônia era famoso na psiquiatria forense brasileira: sessenta mil mortos em oitenta anos, pacientes enterrados vivos, diagnósticos fabricados.",
+        "translated_text": "按照我们一月份的约定，我们已找到患者1,260（巴尔巴塞纳收容医院）的完整病历及所提及的附件。收容院的案子在巴西法医精神病学界很有名：八十年间六万人死亡，患者被活埋，诊断被伪造。",
+        "author_voice_profile": {
+          "narrator_age": "adult",
+          "region": "Barbacena",
+          "register": "investigação acadêmica contemporânea"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "Hospital Colônia de Barbacena",
+              "entity_type": "historical_institution_proper_name",
+              "preferred_en": "the Colony",
+              "preferred_zh_cn": "收容院",
+              "forbidden_translations": []
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "2026 sobre instituição histórica",
+          "region": "Barbacena",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex:20-29",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "简体中文（中国大陆）",
+          "document_type": "e-mail ficcional e narração investigativa",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/luc/LUC-01.tex:20-29",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "Hospital Colônia de Barbacena",
+            "target_term": "巴尔巴塞纳收容医院 / 收容院",
+            "symbolic": false,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_excerpt": "Conforme conversamos em janeiro, localizamos o prontuário completo do Paciente 1.260 (Hospital Colônia de Barbacena) e os anexos mencionados. O caso do Colônia era famoso na psiquiatria forense brasileira: sessenta mil mortos em oitenta anos, pacientes enterrados vivos, diagnósticos fabricados.",
+        "translated_excerpt": "按照我们一月份的约定，我们已找到患者1,260（巴尔巴塞纳收容医院）的完整病历及所提及的附件。收容院的案子在巴西法医精神病学界很有名：八十年间六万人死亡，患者被活埋，诊断被伪造。",
+        "candidate_concerns": [
+          {
+            "code": "TERM_CONFLICT",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              86,
+              115
+            ],
+            "target_span": [
+              24,
+              33
+            ],
+            "detector": "agent",
+            "evidence": "O nome completo e a forma curta usam 收容医院/收容院, enquanto R356 também fixa 圣玛丽亚收容院.",
+            "rationale": "A identidade institucional não permanece estável e a correferência não foi comprovada."
+          },
+          {
+            "code": "DOMESTICATION_ERASURE_RISK",
+            "severity": "high",
+            "evidence_strength": "strong",
+            "source_span": [
+              95,
+              102
+            ],
+            "target_span": [
+              47,
+              50
+            ],
+            "detector": "agent",
+            "evidence": "O nome próprio vira categoria institucional genérica.",
+            "rationale": "Pode apagar a memória nominal e privilegiar conotações de abrigo ou asilo."
+          },
+          {
+            "code": "PRAGMATIC_FAILURE",
+            "severity": "medium",
+            "evidence_strength": "strong",
+            "source_span": [
+              9,
+              20
+            ],
+            "target_span": [
+              8,
+              10
+            ],
+            "detector": "agent",
+            "evidence": "约定 acrescenta acordo ou compromisso prévio.",
+            "rationale": "A relação documental entre remetente e destinatária é alterada."
+          },
+          {
+            "code": "HISTORICAL_SOURCE_GAP",
+            "severity": "high",
+            "evidence_strength": "moderate",
+            "source_span": [
+              206,
+              225
+            ],
+            "target_span": [
+              71,
+              76
+            ],
+            "detector": "agent",
+            "evidence": "As alegações históricas não vêm acompanhadas de rastreabilidade no recorte.",
+            "rationale": "O alerta não conclui falsidade nem consenso."
+          }
+        ],
+        "cultural_context": {
+          "region": "Barbacena",
+          "period": "2026 sobre instituição histórica",
+          "narrator_profile": "adult",
+          "register": "investigação acadêmica contemporânea",
+          "document_type": "e-mail ficcional e narração investigativa",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "巴尔巴塞纳科洛尼亚医院〔Hospital Colônia de Barbacena〕",
+            "rationale": "Conserva identidade nominal e a torna rastreável.",
+            "risks": [
+              "transliteração proposta, não nome oficial comprovado",
+              "carga de leitura"
+            ]
+          },
+          {
+            "text": "Hospital Colônia de Barbacena；下文简称“Colônia”",
+            "rationale": "Retém integralmente o nome e define a forma curta.",
+            "risks": [
+              "exige glosa discreta",
+              "pode reduzir fluidez"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "巴尔巴塞纳科洛尼亚医院〔Hospital Colônia de Barbacena〕",
+          "rationale": "Evita reduzir o nome a 收容院, mas permanece apenas candidata editorial.",
+          "conditions": [
+            "revisão ZH-CN",
+            "revisão histórica",
+            "conciliação R356",
+            "fontes das alegações"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.35,
+          "cultural_fidelity": 0.52,
+          "author_voice_similarity": 0.72
+        },
+        "process_checks": {
+          "critical_omissions_identified": 1,
+          "unresolved_term_conflicts": 2,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "denominação chinesa documentada",
+          "fontes históricas",
+          "decisão sobre retenção/transliteração"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-e7095707b4e6fec51231ee8e",
+            "idempotency_key": "ced-e7095707b4e6fec51231ee8e",
+            "schema_version": "1.0.0",
+            "review_id": "r360-hospital_colonia-zh-cn",
+            "segment_id": "LUC-01:20,29",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "Hospital Colônia de Barbacena",
+            "entity_type": "historical_institution_proper_name",
+            "preferred_en": null,
+            "preferred_zh_cn": "巴尔巴塞纳科洛尼亚医院〔Hospital Colônia de Barbacena〕",
+            "preserve_portuguese": true,
+            "first_occurrence_note": true,
+            "forbidden_translations": [],
+            "historical_context": {
+              "period": "2026 sobre instituição histórica",
+              "region": "Barbacena"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex:20-29",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "denominação chinesa documentada",
+          "fontes históricas",
+          "decisão sobre retenção/transliteração"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "alerta histórico, ético ou de alta severidade"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-ameaca_proximo-en-us",
+      "unit_id": "ameaca_proximo",
+      "label": "Você é o próximo",
+      "target_language": "en-US",
+      "editorial_classification": "conditional_retention_candidate",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-26.tex",
+          "line_start": 20,
+          "line_end": 28,
+          "sha256": "ee6ab0b6c73731180204ac29c10e0147fc3442236b44b65dbbc0f79af98a0e50"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-26.tex",
+          "line_start": 20,
+          "line_end": 28,
+          "sha256": "8a797bd29d01e836583ba03cffef0e15075425b37f3d9c49bc6bf386fee52be7"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58d3dffen1L4h81q2G2EtY",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-ameaca_proximo-en-us",
+        "segment_id": "MEM-26:20-28",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_text": "Quem ler isto: você é o próximo. Eu carreguei a criatura por 62 anos. Ela entrou em mim quando eu era criança, numa vala, no meio de um campo de concentração. Ela me comeu por dentro. Mas ela também me manteve vivo. Ela precisa de hospedeiro. Quando eu morrer, ela vai procurar outro. Não um corpo. Um leitor. Você vai ler este diário. Enquanto lê, ela vai passar para você.",
+        "translated_text": "Whoever reads this: you are next. I carried the creature for 62 years. She entered me when I was a child, in a trench, in the middle of a concentration camp. She ate me from the inside. But she also kept me alive. She needs a host. When I die, she will look for another. Not a body. A reader. You will read this diary. As you read, she will pass into you.",
+        "author_voice_profile": {
+          "narrator_age": "adult",
+          "region": "Ceará",
+          "register": "testamentário, ameaçador, fragmentário e metanarrativo"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "você é o próximo",
+              "entity_type": "pragmatic_threat_formula",
+              "preferred_en": "you are next",
+              "preferred_zh_cn": "你就是下一个",
+              "forbidden_translations": [
+                "you may be next",
+                "you might be next"
+              ]
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1979",
+          "region": "Ceará",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-26.tex:20-28",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "English (United States)",
+          "document_type": "última página ficcional de diário",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/en/fragmentos/mem/MEM-26.tex:20-28",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "você é o próximo",
+            "target_term": "you are next",
+            "symbolic": true,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "en-US",
+        "source_excerpt": "Quem ler isto: você é o próximo. Eu carreguei a criatura por 62 anos. Ela entrou em mim quando eu era criança, numa vala, no meio de um campo de concentração. Ela me comeu por dentro. Mas ela também me manteve vivo. Ela precisa de hospedeiro. Quando eu morrer, ela vai procurar outro. Não um corpo. Um leitor. Você vai ler este diário. Enquanto lê, ela vai passar para você.",
+        "translated_excerpt": "Whoever reads this: you are next. I carried the creature for 62 years. She entered me when I was a child, in a trench, in the middle of a concentration camp. She ate me from the inside. But she also kept me alive. She needs a host. When I die, she will look for another. Not a body. A reader. You will read this diary. As you read, she will pass into you.",
+        "candidate_concerns": [],
+        "cultural_context": {
+          "region": "Ceará",
+          "period": "1979",
+          "narrator_profile": "adult",
+          "register": "testamentário, ameaçador, fragmentário e metanarrativo",
+          "document_type": "última página ficcional de diário",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "Whoever reads this: you are next. I carried the creature for 62 years.",
+            "rationale": "Mantém ameaça direta, solenidade e ausência de atenuadores.",
+            "risks": [
+              "she precisa ser cotejado com o sistema pronominal global"
+            ]
+          },
+          {
+            "text": "Whoever reads this: you're next. I've carried the creature for 62 years.",
+            "rationale": "Aumenta oralidade e continuidade temporal.",
+            "risks": [
+              "perde solenidade",
+              "explicita aspecto não marcado na fonte"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "Whoever reads this: you are next. I carried the creature for 62 years.",
+          "rationale": "Retenção condicionada: o recorte preserva interpelação, ritmo e força categórica.",
+          "conditions": [
+            "confirmar she/it no corpus",
+            "revisão EN-US de horror",
+            "revisão histórica de concentration camp"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.98,
+          "cultural_fidelity": 0.92,
+          "author_voice_similarity": 0.95
+        },
+        "process_checks": {
+          "critical_omissions_identified": 0,
+          "unresolved_term_conflicts": 0,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "decisão global she/it",
+          "parecer humano de recepção"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-f2e2fb13066776b4c2cedb31",
+            "idempotency_key": "ced-f2e2fb13066776b4c2cedb31",
+            "schema_version": "1.0.0",
+            "review_id": "r360-ameaca_proximo-en-us",
+            "segment_id": "MEM-26:20-28",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "você é o próximo",
+            "entity_type": "pragmatic_threat_formula",
+            "preferred_en": "you are next, sem modalização",
+            "preferred_zh_cn": null,
+            "preserve_portuguese": false,
+            "first_occurrence_note": false,
+            "forbidden_translations": [
+              "you may be next",
+              "you might be next"
+            ],
+            "historical_context": {
+              "period": "1979",
+              "region": "Ceará"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-26.tex:20-28",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "decisão global she/it",
+          "parecer humano de recepção"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "candidate_for_human_review",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "nenhum indício detectado no escopo; revisão humana continua obrigatória"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    },
+    {
+      "review_id": "r360-ameaca_proximo-zh-cn",
+      "unit_id": "ameaca_proximo",
+      "label": "Você é o próximo",
+      "target_language": "zh-CN",
+      "editorial_classification": "conditional_retention_candidate",
+      "source_locators": {
+        "source": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-26.tex",
+          "line_start": 20,
+          "line_end": 28,
+          "sha256": "ee6ab0b6c73731180204ac29c10e0147fc3442236b44b65dbbc0f79af98a0e50"
+        },
+        "target": {
+          "path": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-26.tex",
+          "line_start": 20,
+          "line_end": 28,
+          "sha256": "39378a9be2f36b8b68f182b0145260a51aa6cf639ed5cb410883f73030e7fbec"
+        }
+      },
+      "agent_runtime": {
+        "agent_slug": "cultural-episteme-agent",
+        "task_id": "ses_041c58d07ffeaGy2ZvSx6f0HD8",
+        "output_non_empty": true,
+        "raw_contract_valid": true,
+        "contract_valid": true,
+        "attempts": 1,
+        "corrected_by_same_runtime_session": false,
+        "normalization": "compactação contratual fiel às conclusões centrais; saída integral permanece identificada pela sessão runtime"
+      },
+      "request": {
+        "schema_version": "1.0.0",
+        "review_id": "r360-ameaca_proximo-zh-cn",
+        "segment_id": "MEM-26:20-28",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_text": "Quem ler isto: você é o próximo. Eu carreguei a criatura por 62 anos. Ela entrou em mim quando eu era criança, numa vala, no meio de um campo de concentração. Ela me comeu por dentro. Mas ela também me manteve vivo. Ela precisa de hospedeiro. Quando eu morrer, ela vai procurar outro. Não um corpo. Um leitor. Você vai ler este diário. Enquanto lê, ela vai passar para você.",
+        "translated_text": "读到这段话的人：你就是下一个。我背负怪物六十二年。它在我还是个孩子时进入我体内，在一个乱葬坑里，在一座集中营中间。它从里面吃我。但它也让我活了下来。它需要宿主。我死的时候，它会寻找下一个。不是一个身体。是一个读者。你会读这本日记。你读的时候，它会进入你。",
+        "author_voice_profile": {
+          "narrator_age": "adult",
+          "region": "Ceará",
+          "register": "testamentário, ameaçador, fragmentário e metanarrativo"
+        },
+        "terminology_graph": {
+          "graph_id": "molambudos-terms",
+          "revision": "r360-pilot-1",
+          "concepts": [
+            {
+              "source_term": "você é o próximo",
+              "entity_type": "pragmatic_threat_formula",
+              "preferred_en": "you are next",
+              "preferred_zh_cn": "你就是下一个",
+              "forbidden_translations": [
+                "you may be next",
+                "you might be next"
+              ]
+            }
+          ]
+        },
+        "historical_context": {
+          "period": "1979",
+          "region": "Ceará",
+          "support_status": "internal_editorial_sources",
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-26.tex:20-28",
+              "date": "2026-08-01",
+              "limitations": "corpus literário interno; não é validação histórica externa"
+            },
+            {
+              "source": "SPEC-935-R355/R356 e glossários editoriais",
+              "date": "2026-08-01",
+              "limitations": "decisões internas sujeitas a revisão humana e temática"
+            }
+          ]
+        },
+        "cultural_dossier": {
+          "target_variety": "简体中文（中国大陆）",
+          "document_type": "última página ficcional de diário",
+          "anachronism_markers": [],
+          "provenance": [
+            {
+              "source": "projetos/molambudos/Molambudos_VictoriaRegia/zh/fragmentos/mem/MEM-26.tex:20-28",
+              "date": "2026-08-01",
+              "limitations": "tradução editorial interna ainda sem revisão cultural externa"
+            },
+            {
+              "source": "SPEC-935-R360",
+              "date": "2026-08-01",
+              "limitations": "piloto heurístico de escopo reduzido"
+            }
+          ]
+        },
+        "previous_translation_decisions": [
+          {
+            "source_term": "você é o próximo",
+            "target_term": "你就是下一个",
+            "symbolic": true,
+            "status": "fixed_in_internal_glossary_pending_external_review"
+          }
+        ]
+      },
+      "assessment": {
+        "schema_version": "1.0.0",
+        "analysis_status": "complete",
+        "source_language": "pt-BR",
+        "target_language": "zh-CN",
+        "source_excerpt": "Quem ler isto: você é o próximo. Eu carreguei a criatura por 62 anos. Ela entrou em mim quando eu era criança, numa vala, no meio de um campo de concentração. Ela me comeu por dentro. Mas ela também me manteve vivo. Ela precisa de hospedeiro. Quando eu morrer, ela vai procurar outro. Não um corpo. Um leitor. Você vai ler este diário. Enquanto lê, ela vai passar para você.",
+        "translated_excerpt": "读到这段话的人：你就是下一个。我背负怪物六十二年。它在我还是个孩子时进入我体内，在一个乱葬坑里，在一座集中营中间。它从里面吃我。但它也让我活了下来。它需要宿主。我死的时候，它会寻找下一个。不是一个身体。是一个读者。你会读这本日记。你读的时候，它会进入你。",
+        "candidate_concerns": [
+          {
+            "code": "TARGET_VARIETY_USAGE_RISK",
+            "severity": "medium",
+            "evidence_strength": "moderate",
+            "source_span": [
+              111,
+              157
+            ],
+            "target_span": [
+              40,
+              56
+            ],
+            "detector": "agent",
+            "evidence": "Dois locativos encadeados e 中间 podem soar marcados.",
+            "rationale": "Reorganizar o locativo melhora uso-alvo, mas reduz a ênfase espacial."
+          },
+          {
+            "code": "LITERALISM",
+            "severity": "medium",
+            "evidence_strength": "moderate",
+            "source_span": [
+              163,
+              182
+            ],
+            "target_span": [
+              57,
+              63
+            ],
+            "detector": "agent",
+            "evidence": "A construção reproduz diretamente a superfície da fonte.",
+            "rationale": "啃噬 pode soar mais fluido, mas especifica a ação."
+          },
+          {
+            "code": "SYMBOL_DRIFT",
+            "severity": "medium",
+            "evidence_strength": "moderate",
+            "source_span": [
+              357,
+              373
+            ],
+            "target_span": [
+              123,
+              126
+            ],
+            "detector": "agent",
+            "evidence": "A transmissão entre hospedeiros vira entrada ou invasão.",
+            "rationale": "O desvio pode ser deliberado e ecoar 进入我体内; depende da continuação espiritual."
+          }
+        ],
+        "cultural_context": {
+          "region": "Ceará",
+          "period": "1979",
+          "narrator_profile": "adult",
+          "register": "testamentário, ameaçador, fragmentário e metanarrativo",
+          "document_type": "última página ficcional de diário",
+          "provenance_status": "internal_documented_external_unvalidated"
+        },
+        "alternatives": [
+          {
+            "text": "读到这段话的人：你就是下一个。这个怪物，我已经背负了六十二年。",
+            "rationale": "Mantém ameaça e reduz parte da sintaxe marcada.",
+            "risks": [
+              "已经 torna a cadência menos seca"
+            ]
+          },
+          {
+            "text": "读到这里的人：你就是下一个。",
+            "rationale": "É mais compacto e direto.",
+            "risks": [
+              "muda isto para quem chegou até aqui"
+            ]
+          }
+        ],
+        "conditional_preference": {
+          "text": "读到这段话的人：你就是下一个。",
+          "rationale": "A ameaça e 你 estão preservados; ajustes posteriores dependem do motivo de transmissão.",
+          "conditions": [
+            "revisão PT-BR/ZH-CN",
+            "cotejo com Não fisicamente. Espiritualmente.",
+            "manter distinção contextual 你/您"
+          ]
+        },
+        "heuristic_signals": {
+          "symbol_consistency": 0.91,
+          "cultural_fidelity": 0.92,
+          "author_voice_similarity": 0.86
+        },
+        "process_checks": {
+          "critical_omissions_identified": 0,
+          "unresolved_term_conflicts": 0,
+          "back_translation_used": false
+        },
+        "evidence_sufficiency": "partial",
+        "uncertainty_reasons": [
+          "Parecer runtime de escopo segmental; não houve validação humana externa.",
+          "mapa global de 你/您",
+          "decisão sobre transmissão versus invasão"
+        ],
+        "terminology_graph_updates": [
+          {
+            "delta_id": "ced-325ef61bf67af6c3b66dbbf7",
+            "idempotency_key": "ced-325ef61bf67af6c3b66dbbf7",
+            "schema_version": "1.0.0",
+            "review_id": "r360-ameaca_proximo-zh-cn",
+            "segment_id": "MEM-26:20-28",
+            "base_graph_id": "molambudos-terms",
+            "base_revision": "r360-pilot-1",
+            "operation": "propose_upsert",
+            "approval_state": "proposed",
+            "source_term": "você é o próximo",
+            "entity_type": "pragmatic_threat_formula",
+            "preferred_en": null,
+            "preferred_zh_cn": "你就是下一个 no assalto metanarrativo ao leitor",
+            "preserve_portuguese": false,
+            "first_occurrence_note": false,
+            "forbidden_translations": [
+              "you may be next",
+              "you might be next"
+            ],
+            "historical_context": {
+              "period": "1979",
+              "region": "Ceará"
+            },
+            "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+            "provenance": [
+              {
+                "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-26.tex:20-28",
+                "date": "2026-08-01",
+                "limitations": "corpus literário interno; não é validação histórica externa"
+              },
+              {
+                "source": "SPEC-935-R355/R356 e glossários editoriais",
+                "date": "2026-08-01",
+                "limitations": "decisões internas sujeitas a revisão humana e temática"
+              }
+            ]
+          }
+        ],
+        "human_review_required": true,
+        "release_gate": "blocked",
+        "missing_data": [
+          "mapa global de 你/您",
+          "decisão sobre transmissão versus invasão"
+        ],
+        "limits": [
+          "instrumento heurístico; sem validação externa",
+          "compactação contratual das conclusões centrais da sessão runtime",
+          "sinais numéricos internos e não autoritativos",
+          "nenhuma edição ou aprovação automática"
+        ]
+      },
+      "preflight": [],
+      "gate": {
+        "decision": "revise",
+        "release_gate": "blocked",
+        "human_review_required": true,
+        "reasons": [
+          "há indícios, sinais baixos ou checks não resolvidos"
+        ],
+        "scores_are_non_authoritative": true
+      }
+    }
+  ],
+  "aggregate": {
+    "gate_decisions": {
+      "candidate_for_human_review": 1,
+      "human_review": 9,
+      "insufficient_context": 1,
+      "revise": 1
+    },
+    "concern_codes": {
+      "CULTURAL_LOSS": 2,
+      "DOMESTICATION_ERASURE_RISK": 3,
+      "HISTORICAL_SOURCE_GAP": 3,
+      "LITERALISM": 6,
+      "OVERLOCALIZATION": 1,
+      "PRAGMATIC_FAILURE": 5,
+      "REGISTER_SHIFT": 2,
+      "SYMBOL_DRIFT": 4,
+      "TARGET_VARIETY_USAGE_RISK": 2,
+      "TERM_CONFLICT": 8,
+      "UNDERLOCALIZATION": 1,
+      "VOICE_SHIFT": 1
+    },
+    "proposed_terminology_deltas": [
+      {
+        "delta_id": "ced-81e9a7dde70b6acab50becd2",
+        "idempotency_key": "ced-81e9a7dde70b6acab50becd2",
+        "schema_version": "1.0.0",
+        "review_id": "r360-curral_do_governo-en-us",
+        "segment_id": "MEM-06:14-18",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "Curral do Governo",
+        "entity_type": "historical_institution_and_dehumanization_metaphor",
+        "preferred_en": "Government Pen, com contextualização histórica aprovada",
+        "preferred_zh_cn": null,
+        "preserve_portuguese": false,
+        "first_occurrence_note": true,
+        "forbidden_translations": [
+          "Government Cattle Pen",
+          "Government Corral"
+        ],
+        "historical_context": {
+          "period": "1915",
+          "region": "Senador Pompeu, Ceará"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:14-18",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-5ea12e7e729b34cea52f0ea1",
+        "idempotency_key": "ced-5ea12e7e729b34cea52f0ea1",
+        "schema_version": "1.0.0",
+        "review_id": "r360-curral_do_governo-zh-cn",
+        "segment_id": "MEM-06:14-18",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "Curral do Governo",
+        "entity_type": "historical_institution_and_dehumanization_metaphor",
+        "preferred_en": null,
+        "preferred_zh_cn": "政府牲畜圈（首次出现附历史说明）",
+        "preserve_portuguese": false,
+        "first_occurrence_note": true,
+        "forbidden_translations": [
+          "Government Cattle Pen",
+          "Government Corral"
+        ],
+        "historical_context": {
+          "period": "1915",
+          "region": "Senador Pompeu, Ceará"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:14-18",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-85582f6c155e1993c442f7ef",
+        "idempotency_key": "ced-85582f6c155e1993c442f7ef",
+        "schema_version": "1.0.0",
+        "review_id": "r360-retirantes-en-us",
+        "segment_id": "DOC-17:25",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "retirantes",
+        "entity_type": "historical_regional_displacement_category",
+        "preferred_en": "retirantes, com glosa inicial contextual",
+        "preferred_zh_cn": null,
+        "preserve_portuguese": true,
+        "first_occurrence_note": true,
+        "forbidden_translations": [],
+        "historical_context": {
+          "period": "1915",
+          "region": "Ceará"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex:25-25",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-96b0b4ce288a91f77291b221",
+        "idempotency_key": "ced-96b0b4ce288a91f77291b221",
+        "schema_version": "1.0.0",
+        "review_id": "r360-retirantes-zh-cn",
+        "segment_id": "DOC-17:25",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "retirantes",
+        "entity_type": "historical_regional_displacement_category",
+        "preferred_en": null,
+        "preferred_zh_cn": "逃荒者（限定于塞阿拉旱灾语境）",
+        "preserve_portuguese": false,
+        "first_occurrence_note": true,
+        "forbidden_translations": [],
+        "historical_context": {
+          "period": "1915",
+          "region": "Ceará"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/doc/DOC-17.tex:25-25",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-3de1e54d7c8db9d81258d062",
+        "idempotency_key": "ced-3de1e54d7c8db9d81258d062",
+        "schema_version": "1.0.0",
+        "review_id": "r360-rasga_mortalha-en-us",
+        "segment_id": "MEM-12:24-50",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "Rasga Mortalha",
+        "entity_type": "recurring_folkloric_symbol",
+        "preferred_en": "Rasga-Mortalha, com mediação intratextual",
+        "preferred_zh_cn": null,
+        "preserve_portuguese": true,
+        "first_occurrence_note": true,
+        "forbidden_translations": [],
+        "historical_context": {
+          "period": "1945",
+          "region": "Brasil"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex:24-50",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-c7bbced6d456d363ea1fb983",
+        "idempotency_key": "ced-c7bbced6d456d363ea1fb983",
+        "schema_version": "1.0.0",
+        "review_id": "r360-rasga_mortalha-zh-cn",
+        "segment_id": "MEM-12:24-50",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "Rasga Mortalha",
+        "entity_type": "recurring_folkloric_symbol",
+        "preferred_en": null,
+        "preferred_zh_cn": "裹尸布撕裂者（首现以报丧鸟作候选注释）",
+        "preserve_portuguese": false,
+        "first_occurrence_note": true,
+        "forbidden_translations": [],
+        "historical_context": {
+          "period": "1945",
+          "region": "Brasil"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-12.tex:24-50",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-6fee7ea394704615363b0f86",
+        "idempotency_key": "ced-6fee7ea394704615363b0f86",
+        "schema_version": "1.0.0",
+        "review_id": "r360-molambudos-en-us",
+        "segment_id": "MEM-06:22-28",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "molambudos",
+        "entity_type": "recurring_neologism_social_slur_and_title",
+        "preferred_en": "molambudo(s), com glosa contextual única rag-people",
+        "preferred_zh_cn": null,
+        "preserve_portuguese": false,
+        "first_occurrence_note": true,
+        "forbidden_translations": [],
+        "historical_context": {
+          "period": "1915",
+          "region": "Ceará"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:22-28",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-284f988ce0b3fab9d292fab4",
+        "idempotency_key": "ced-284f988ce0b3fab9d292fab4",
+        "schema_version": "1.0.0",
+        "review_id": "r360-molambudos-zh-cn",
+        "segment_id": "MEM-06:22-28",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "molambudos",
+        "entity_type": "recurring_neologism_social_slur_and_title",
+        "preferred_en": null,
+        "preferred_zh_cn": "莫兰布多斯 nas recorrências simbolicamente centrais; 破衣人 apenas como glosa",
+        "preserve_portuguese": false,
+        "first_occurrence_note": true,
+        "forbidden_translations": [],
+        "historical_context": {
+          "period": "1915",
+          "region": "Ceará"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-06.tex:22-28",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-b60aa532e8aeb95752f35d46",
+        "idempotency_key": "ced-b60aa532e8aeb95752f35d46",
+        "schema_version": "1.0.0",
+        "review_id": "r360-hospital_colonia-en-us",
+        "segment_id": "LUC-01:20,29",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "Hospital Colônia de Barbacena",
+        "entity_type": "historical_institution_proper_name",
+        "preferred_en": "Hospital Colônia de Barbacena, com forma curta definida após primeira ocorrência",
+        "preferred_zh_cn": null,
+        "preserve_portuguese": true,
+        "first_occurrence_note": true,
+        "forbidden_translations": [],
+        "historical_context": {
+          "period": "2026 sobre instituição histórica",
+          "region": "Barbacena"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex:20-29",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-e7095707b4e6fec51231ee8e",
+        "idempotency_key": "ced-e7095707b4e6fec51231ee8e",
+        "schema_version": "1.0.0",
+        "review_id": "r360-hospital_colonia-zh-cn",
+        "segment_id": "LUC-01:20,29",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "Hospital Colônia de Barbacena",
+        "entity_type": "historical_institution_proper_name",
+        "preferred_en": null,
+        "preferred_zh_cn": "巴尔巴塞纳科洛尼亚医院〔Hospital Colônia de Barbacena〕",
+        "preserve_portuguese": true,
+        "first_occurrence_note": true,
+        "forbidden_translations": [],
+        "historical_context": {
+          "period": "2026 sobre instituição histórica",
+          "region": "Barbacena"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/luc/LUC-01.tex:20-29",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-f2e2fb13066776b4c2cedb31",
+        "idempotency_key": "ced-f2e2fb13066776b4c2cedb31",
+        "schema_version": "1.0.0",
+        "review_id": "r360-ameaca_proximo-en-us",
+        "segment_id": "MEM-26:20-28",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "você é o próximo",
+        "entity_type": "pragmatic_threat_formula",
+        "preferred_en": "you are next, sem modalização",
+        "preferred_zh_cn": null,
+        "preserve_portuguese": false,
+        "first_occurrence_note": false,
+        "forbidden_translations": [
+          "you may be next",
+          "you might be next"
+        ],
+        "historical_context": {
+          "period": "1979",
+          "region": "Ceará"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-26.tex:20-28",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      },
+      {
+        "delta_id": "ced-325ef61bf67af6c3b66dbbf7",
+        "idempotency_key": "ced-325ef61bf67af6c3b66dbbf7",
+        "schema_version": "1.0.0",
+        "review_id": "r360-ameaca_proximo-zh-cn",
+        "segment_id": "MEM-26:20-28",
+        "base_graph_id": "molambudos-terms",
+        "base_revision": "r360-pilot-1",
+        "operation": "propose_upsert",
+        "approval_state": "proposed",
+        "source_term": "você é o próximo",
+        "entity_type": "pragmatic_threat_formula",
+        "preferred_en": null,
+        "preferred_zh_cn": "你就是下一个 no assalto metanarrativo ao leitor",
+        "preserve_portuguese": false,
+        "first_occurrence_note": false,
+        "forbidden_translations": [
+          "you may be next",
+          "you might be next"
+        ],
+        "historical_context": {
+          "period": "1979",
+          "region": "Ceará"
+        },
+        "rationale": "Síntese de proposta emitida no parecer runtime; requer decisão humana e não foi aplicada.",
+        "provenance": [
+          {
+            "source": "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos/mem/MEM-26.tex:20-28",
+            "date": "2026-08-01",
+            "limitations": "corpus literário interno; não é validação histórica externa"
+          },
+          {
+            "source": "SPEC-935-R355/R356 e glossários editoriais",
+            "date": "2026-08-01",
+            "limitations": "decisões internas sujeitas a revisão humana e temática"
+          }
+        ]
+      }
+    ],
+    "automatic_changes": [],
+    "runtime_contract_corrections": [
+      {
+        "task_id": "ses_041c58ee0ffe1rdzZRje394SWa",
+        "reason": "delta_id divergente de idempotency_key",
+        "outcome": "corrigido pela mesma sessão; release permaneceu bloqueado"
+      },
+      {
+        "task_id": "ses_041c58d74ffeRVhN4opcWtY3bh",
+        "reason": "delta_id divergente de idempotency_key",
+        "outcome": "corrigido pela mesma sessão; release permaneceu bloqueado"
+      }
+    ],
+    "human_decisions_required": [
+      "arbitrar a estratégia dupla de Curral do Governo sem apagar instituição nem metáfora",
+      "definir retenção, glosa e usos posteriores de retirantes",
+      "decidir retenção/calque/glosa de Rasga Mortalha nas recorrências",
+      "definir o escopo de 莫兰布多斯 versus 破衣人",
+      "fixar o nome histórico Hospital Colônia e suas formas curtas em EN/ZH",
+      "confirmar por revisão nativa a manutenção da ameaça e do motivo de transmissão"
+    ]
+  },
+  "safe_claim": "Doze execuções runtime produziram pareceres não vazios, revalidados em envelopes compactos e mantidos com release bloqueado; isso não demonstra equivalência cultural nem prontidão editorial."
+}

@@ -1,3 +1,17 @@
+---
+name: jinja2-templates
+description: Agente especializado jinja2-templates
+version: '1.0.0'
+skills:
+- id: jinja2-templates
+  name: Jinja2 Templates
+  description: Executa tarefas especializadas de jinja2 templates conforme protocolo SDD/TDD.
+  tags: [jinja2, templates]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [jinja2, templates]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
+
 # Jinja2Templates
 
 **ID:** `jinja2-templates`

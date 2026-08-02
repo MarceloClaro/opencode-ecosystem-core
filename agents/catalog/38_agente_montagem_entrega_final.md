@@ -1,8 +1,18 @@
 ---
 name: 38_agente_montagem_entrega_final
+description: Agente especializado 38_agente_montagem_entrega_final
+version: '1.0.0'
+skills:
+- id: 38-agente-montagem-entrega
+  name: 38 Agente Montagem Entrega Final
+  description: >-
+    Executa tarefas especializadas de 38 agente montagem entrega final conforme protocolo SDD/TDD.
+  tags: [38, agente, montagem]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, entrega, final, maswos-agent, montagem]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\38_agente_montagem_entrega_final.md
 ---
 
 # 38 Agente Montagem Entrega Final

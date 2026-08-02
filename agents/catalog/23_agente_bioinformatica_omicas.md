@@ -1,8 +1,18 @@
 ---
 name: 23_agente_bioinformatica_omicas
+description: Agente especializado 23_agente_bioinformatica_omicas
+version: '1.0.0'
+skills:
+- id: 23-agente-bioinformatica-omicas
+  name: 23 Agente Bioinformatica Omicas
+  description: >-
+    Executa tarefas especializadas de 23 agente bioinformatica omicas conforme protocolo SDD/TDD.
+  tags: [23, agente, bioinformatica]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, bioinformatica, maswos-agent, omicas]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\23_agente_bioinformatica_omicas.md
 ---
 
 # 23 Agente Bioinformatica Omicas
