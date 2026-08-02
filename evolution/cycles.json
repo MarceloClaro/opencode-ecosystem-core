@@ -3211,6 +3211,23 @@
         "Exigir mínimo de 2 ocorrências de sinais evita que uma palavra genérica isolada classifique o regime (nunca chutar)"
       ],
       "timestamp": "2026-08-02T07:02:01.145596+00:00"
+    },
+    {
+      "round_id": "R364",
+      "objective": "SPEC-935-R364 — TerminologyGraphAgent: grafo terminológico trilíngue que consome os deltas do CulturalEpistemeAgent (gap apontado na análise do plano de negócios OpenCode Books Global)",
+      "changes": [
+        "translation/terminology_graph.py: revisão monotônica, idempotência por delta_id, concorrência otimista, aprovação humana obrigatória por termo",
+        "check_segment detecta TERM_CONFLICT (tradução proibida ou preserve_portuguese ausente) e SYMBOL_DRIFT (símbolo sem tradução preferida); termos proposed não têm autoridade",
+        "consistency_report devolve apenas números medidos (claim: internal-fixture-measurement); release_gate fail-closed até revisão humana",
+        "agents/catalog/terminology-graph-agent.md com episteme explícita hermeneutico_interpretativo (primeiro uso do frontmatter R363)",
+        "tests/test_r364_terminology_graph.py: 21 testes TDD, incluindo delta real de build_terminology_delta"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Reutilizar o validador de contrato do produtor (cultural_episteme._validate_terminology_delta) elimina divergência de schema entre agentes",
+        "Gate fail-closed com razões nominais (termo e motivo) torna o bloqueio auditável no dossiê editorial"
+      ],
+      "timestamp": "2026-08-02T09:17:26.437145+00:00"
     }
   ]
 }
