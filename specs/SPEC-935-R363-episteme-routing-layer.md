@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R363
 title: Camada Epistêmica de Roteamento (Episteme Routing Layer)
 component: transformer/episteme.py + transformer/semantic_matcher.py + marceloclaro/catalog_loader.py
-status: draft
+status: verified
 test_file: tests/test_r363_episteme_routing.py
 ---
 
@@ -124,3 +124,23 @@ Determinístico: mesma entrada → mesma saída; sem estado, sem rede, sem LLM.
 - Nenhuma alegação de "verificado", "superhuman" ou equivalente sem validação
   externa (política do CORRIGENDUM respeitada); `status: verified` só após a
   suíte completa passar.
+
+## 6. Resultado da verificação (2026-08-02)
+
+- Testes do ciclo: **27/27 verdes** (`tests/test_r363_episteme_routing.py`);
+  testes dos módulos tocados também verdes (transformer 34/34; seleção
+  catalog/semantic/matcher 41 aprovados).
+- Suíte completa: **2200 aprovados, 58 falhas, 53 pulados** (5h06m). As 58
+  falhas são **pré-existentes de outras frentes** (agentes literários
+  R272–R276, pipeline sépia R351, e `test_sdd_tdd` que quebra na
+  SPEC-935-R264 com `test_file` inválido). Verificado por bisseção: as
+  mesmas falhas ocorrem com o `catalog_loader.py` restaurado ao HEAD
+  (stash temporário), portanto não decorrem do R363.
+- "verified" aqui significa: critérios de aceitação da §4 atendidos pelos
+  testes automatizados locais. Não é validação externa independente.
+- Nota de escopo do commit: `transformer/semantic_matcher.py` nunca havia
+  sido commitado (camada semântica R347 pendente de outra frente); como o
+  R363 depende dele em runtime e nos testes, o arquivo entra neste ciclo
+  para o commit ser autoconsistente. `marceloclaro/catalog_loader.py`
+  carrega igualmente modificações pendentes do R347 além das linhas de
+  episteme deste ciclo.

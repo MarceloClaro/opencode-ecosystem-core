@@ -5,8 +5,18 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R229** (Catálogo, CLI, Academic Pipeline)
-- **Working tree:** ✅ **Limpa** — todos os 50+ arquivos modificados foram commitados
+- **Branch:** `main` · última entrega: **R363** (Camada Epistêmica de Roteamento)
+- **R363 (2026-08-02):** SPEC-935-R363 verified; `transformer/episteme.py` (6 regimes,
+  inferência determinística), peso brando ±10% no `SkillHandbook.match` (fail-open),
+  frontmatter opcional `episteme:` no catalog_loader; 27 testes TDD verdes.
+  Suíte completa: 2200 pass / 58 falhas **pré-existentes de outras frentes**
+  (literárias R272-R276, sépia R351, SPEC-R264 no test_sdd_tdd) — ver §6 da spec.
+- **Working tree:** ⚠️ ainda há muito trabalho pendente de outras frentes
+  (agents/catalog/*.md, Molambudos, etc.) — não misturar em commits do R363.
+- **Trabalho avulso (sem ciclo):** capa trilíngue Molambudos corrigida
+  (PT/EN/ZH recompostos em fonte vetorial sobre a arte, 4x upscale) —
+  entregue em `~/Downloads/Molambudos_capa_trilingue_4x_TEXTO_CORRIGIDO.png`;
+  script reprodutível no scratchpad da sessão (`recompose.py`).
 - **Últimos commits (6):**
 
 | Commit | Descrição |
