@@ -3346,6 +3346,23 @@
         "Reaproveitar o padrão exato de integração do R370 (verify_*_claim(claim_id, ..., ledger)) no R103 manteve a superfície de API do OrchestratorReviewer previsível para quem já usa o gate estatístico"
       ],
       "timestamp": "2026-08-02T12:53:14.434184+00:00"
+    },
+    {
+      "round_id": "R372",
+      "objective": "SPEC-935-R372 — Protocolo de Pré-registro: corrige bug real de overclaim em mci/experiment_designer.py e fecha o item descartado no brainstorming do R370",
+      "changes": [
+        "BUG REAL CORRIGIDO: mci/experiment_designer.py::design_experiment() tinha \"pre_registered\": context.get(\"pre_registered\", True) — default True sem qualquer verificação; qualquer chamador ganhava o selo 'pré-registrado' de graça. Confirmado com reprodução antes da correção",
+        "mci/preregistration_protocol.py: register_protocol (hipótese/método/critério de falsificação/alpha, protocol_id determinístico via hash do conteúdo normalizado) + verify_protocol (honored=True só se hipótese/método/alpha efetivamente usados coincidem com o declarado; comparação textual exata normalizada, não tolerante a reformulação — HARKing se disfarça de 'só forma diferente')",
+        "design_experiment() corrigido: pre_registered agora é False por padrão (sem protocolo verificado), True apenas com protocolo registrado E honrado; protocol_verification anexado ao design quando presente",
+        "OrchestratorReviewer.verify_preregistered_claim (R103): mesmo padrão de verify_statistical_claim/verify_multidisciplinary_claim (R370/R371)",
+        "tests/test_r372_preregistration_protocol.py: 17 testes TDD incluindo regressão explícita do bug antigo; 193 testes de regressão verdes; 2473 testes coletados sem erro em toda a suíte"
+      ],
+      "score": 8.8,
+      "lessons": [
+        "Ler o código vizinho antes de construir em cima dele pagou: o experiment_designer.py já 'prometia' pré-registro no docstring desde antes, mas a implementação era um freebie context.get(default=True) — exatamente o padrão de overclaim que o CORRIGENDUM existe para prevenir, e só apareceu ao ler a função linha por linha, não ao confiar no docstring",
+        "Comparação textual exata (não semântica/tolerante) para hipótese/método é a escolha certa aqui: tolerância a 'reformulação' é precisamente o disfarce do HARKing"
+      ],
+      "timestamp": "2026-08-02T13:03:58.276216+00:00"
     }
   ]
 }

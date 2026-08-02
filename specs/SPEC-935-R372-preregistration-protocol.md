@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R372
 title: Protocolo de Pré-registro — declaração prévia + verificação de desvio
 component: mci/preregistration_protocol.py + mci/experiment_designer.py + agentic_science_v2/review_agent.py
-status: draft
+status: verified
 test_file: tests/test_r372_preregistration_protocol.py
 ---
 

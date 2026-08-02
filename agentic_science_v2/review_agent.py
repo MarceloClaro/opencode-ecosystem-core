@@ -966,6 +966,46 @@ class OrchestratorReviewer:
                 })
         return report
 
+    def verify_preregistered_claim(
+        self,
+        claim_id: str,
+        protocol: Dict[str, Any],
+        actual_hypothesis: str,
+        actual_method: str,
+        actual_alpha: float,
+        ledger: Optional["ReviewLedger"] = None,
+    ) -> Dict[str, Any]:
+        """Verifica uma claim contra o protocolo pré-registrado (SPEC-935-R372):
+        só marca como verificada quando hipótese/método/alpha efetivamente
+        usados coincidem com o que foi declarado antes da análise (protege
+        contra HARKing — mudança silenciosa após ver os dados)."""
+        from mci.preregistration_protocol import verify_protocol
+
+        target_ledger = ledger if ledger is not None else self.ledger
+        report = verify_protocol(protocol, actual_hypothesis, actual_method, actual_alpha)
+
+        if report["honored"]:
+            target_ledger.verify_claim(
+                claim_id,
+                notes=(
+                    f"Pré-registro honrado (SPEC-935-R372): "
+                    f"protocol_id={report['protocol_id']}."
+                ),
+            )
+        else:
+            fields = [f["detail"] for f in report["findings"]]
+            note = "Desvio de protocolo pré-registrado: " + "; ".join(fields)
+            if claim_id in target_ledger.claims and claim_id not in {
+                item["claim_id"] for item in target_ledger.verification_agenda
+            }:
+                target_ledger.verification_agenda.append({
+                    "claim_id": claim_id,
+                    "action": note,
+                    "priority": "high",
+                    "status": "pending",
+                })
+        return report
+
     def review(self, paper: Dict[str, Any],
                reviewer_affiliations: Optional[Dict[str, str]] = None) -> ReviewPackage:
         """Executa revisão completa com anonimização opcional e isolamento de erros."""

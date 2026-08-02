@@ -95,7 +95,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercont
 
 ##  Arquitetura do Sistema (v3.7)
 
-O ecossistema é organizado em **12 camadas interconectadas**:
+O ecossistema é organizado em **13 camadas interconectadas**:
 
 ### 1. Camada Metacognitiva (MCI)
 Barramento de eventos (Global Workspace) onde agentes compartilham memória, confiança calibrada e reflexões pós-execução. Inclui MetaBus (pub/sub), Blackboard (protocolo A2A), memória hierárquica e Reflexion middleware.
@@ -263,6 +263,21 @@ o domínio dissidente). Esconder controvérsia real seria o overclaim mais
 perigoso possível aqui. Mesmo gate real no R103:
 `OrchestratorReviewer.verify_multidisciplinary_claim()` só verifica a
 claim no `ReviewLedger` quando há triangulação.
+
+
+### 13. Protocolo de Pré-registro (R372)
+`mci/preregistration_protocol.py` **corrige um bug real de overclaim**
+encontrado ao ler o `mci/experiment_designer.py` já existente: a linha
+`"pre_registered": context.get("pre_registered", True)` dava o selo
+"pré-registrado" de graça a qualquer chamador, sem verificação alguma.
+Corrigido: `pre_registered` agora é `False` por padrão, e só vira `True`
+quando um protocolo real foi registrado **antes** da análise
+(`register_protocol(hypothesis, method, falsification_criterion, alpha)`)
+e depois **verificado** contra o que foi efetivamente usado
+(`verify_protocol`) — comparação textual exata, porque reformular a
+hipótese "só de forma" depois de ver os dados é como HARKing
+(Hypothesizing After Results are Known) se disfarça. Mesmo gate real no
+R103: `OrchestratorReviewer.verify_preregistered_claim()`.
 
 
 ### 🎨 Diagramas e Fluxogramas Visuais da Arquitetura
