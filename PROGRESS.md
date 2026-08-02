@@ -5,7 +5,16 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R364–R367** (guardas de tradução do plano OpenCode Books Global)
+- **Branch:** `main` · última entrega: **R368** (reavaliação de gaps: cobertura epistêmica + higiene SDD)
+- **R368 (2026-08-02):** cobertura epistêmica do catálogo 32%→**65%** (léxico pt/en em 2
+  rodadas curadas; invariante de sinais disjuntos; `catalog_episteme_coverage()`;
+  12º check do doctor `episteme_coverage` com números medidos). Higiene SDD: 6 specs
+  (R264–R279) apontavam para validações fantasmas → testes de regressão reais criados,
+  `test_sdd_tdd` 12/12; 15 dirs `mci_test_state_*` removidos/ignorados.
+  **Pendência documentada (frente literária):** falhas R272–R276 (~17) existem também
+  no HEAD (verificado com stash do catálogo) — cards `literary-*` fora de contrato
+  (ex.: `literary-ethics-trauma-phd` sem termo obrigatório "limites") e relatório R276
+  ausente; corrigir na frente literária, não misturar aqui.
 - **R364–R367 (2026-08-02):** implementados os três agentes que eram só interface no R359 +
   benchmark medido: TerminologyGraphAgent (`translation/terminology_graph.py`),
   AuthorVoiceGuardian (`translation/author_voice.py`), BackTranslationVerifier
