@@ -37,6 +37,16 @@ EPISTEMES: Dict[str, Dict[str, object]] = {
             "empirico", "regression", "regressao", "sample", "amostra",
             "amostragem", "anova", "measurement", "medicao", "correlacao",
             "correlation", "quantitativo", "quantitative",
+            "resultados", "evidencia", "evidencias", "visualizacao",
+            "datamining", "mining", "learning", "ml", "dl", "data",
+            "medico", "medical", "clinico", "clinica", "clinical",
+            "saude", "health", "cardiologista", "infectologista",
+            "neurologista", "radiologista", "bioinformatica",
+            "bioinformatics", "omicas", "omics", "genomica", "genomics",
+            "vision", "visao", "multimodal", "image", "imagem",
+            "benchmarking", "ablacao", "ablation", "robustez",
+            "robustness", "gis", "geoprocessamento", "cartografia",
+            "satelite", "satellite", "metodologia", "methodology",
         ],
     },
     "formal_dedutivo": {
@@ -51,6 +61,7 @@ EPISTEMES: Dict[str, Dict[str, object]] = {
             "theorem", "logica", "logic", "dedutivo", "deduction",
             "algebra", "axioma", "axiom", "quantica", "quantum",
             "otimizacao", "optimization", "algoritmo", "algorithm",
+            "gametheory",
         ],
     },
     "hermeneutico_interpretativo": {
@@ -66,6 +77,9 @@ EPISTEMES: Dict[str, Dict[str, object]] = {
             "interpretation", "hermeneutica", "linguistica", "linguistics",
             "narrativa", "narrative", "discurso", "discourse", "semiotica",
             "episteme", "epistemes", "proofreading", "idiomatic",
+            "resumo", "abstract", "escrita", "redacao", "textual",
+            "summarizer", "summarization", "sumarizacao", "copywriter",
+            "copywriting", "linguistic",
         ],
     },
     "critico_reflexivo": {
@@ -80,6 +94,9 @@ EPISTEMES: Dict[str, Dict[str, object]] = {
             "critico", "reflexao", "reflexivo", "integridade", "integrity",
             "auditoria", "audit", "transparencia", "transparency",
             "openscience", "retraction",
+            "editor", "editorial", "revisao", "consistencia", "coerencia",
+            "qualidade", "argumentativa", "argumentacao", "discussao",
+            "contribuicao",
         ],
     },
     "pragmatico_tecnico": {
@@ -95,6 +112,13 @@ EPISTEMES: Dict[str, Dict[str, object]] = {
             "operacao", "operations", "pipeline", "instalador",
             "installer", "docker", "api", "sdk", "orchestration",
             "orquestracao", "reprodutibilidade", "reproducibility",
+            "docx", "latex", "framework", "ambientes", "workflow",
+            "cloud", "sql", "postgres", "postgresql", "database",
+            "build", "debug", "debugger", "debugging", "git", "coder",
+            "coding", "codebase", "frontend", "backend", "developer",
+            "desenvolvedor", "kdp", "preflight", "architecture",
+            "arquitetura", "architect", "documentation", "documentacao",
+            "docs", "llm", "jinja2",
         ],
     },
     "regulatorio_normativo": {
@@ -110,6 +134,8 @@ EPISTEMES: Dict[str, Dict[str, object]] = {
             "formatting", "bibliografica", "bibliografico", "citacao",
             "citacoes", "citations", "referencias", "references",
             "qualis", "iso",
+            "normalizacao", "padronizacao", "diretrizes", "legal",
+            "juridico", "direito", "auxjuris",
         ],
     },
 }
@@ -240,3 +266,46 @@ def episteme_affinity(a: str, b: str) -> float:
     if a == b:
         return 1.0
     return AFFINITY.get(tuple(sorted((a, b))), _NEUTRAL_AFFINITY)
+
+
+def catalog_episteme_coverage(definitions: List[Dict]) -> Dict:
+    """Mede a cobertura epistêmica de definições de catálogo já carregadas.
+
+    Função pura (sem I/O): recebe a saída de load_catalog_definitions() e
+    conta quantos agentes têm episteme explícita (frontmatter), inferida
+    (léxico) ou nenhuma. Números medidos, nunca metas.
+    """
+    explicit = inferred = uncovered = 0
+    uncovered_ids: List[str] = []
+    for definition in definitions:
+        if definition.get("episteme"):
+            explicit += 1
+            continue
+        tags = [
+            tag
+            for skill in definition.get("skills", [])
+            for tag in skill.get("tags", [])
+        ]
+        profile = infer_agent_episteme(
+            category=definition.get("category", ""),
+            agent_type=definition.get("type", ""),
+            tags=tags,
+            name=definition.get("agent_id", ""),
+            description=definition.get("description", ""),
+        )
+        if profile:
+            inferred += 1
+        else:
+            uncovered += 1
+            uncovered_ids.append(definition.get("agent_id", "?"))
+    total = len(definitions)
+    covered = explicit + inferred
+    return {
+        "measured": True,
+        "total": total,
+        "explicit": explicit,
+        "inferred": inferred,
+        "uncovered": uncovered,
+        "uncovered_ids": uncovered_ids,
+        "coverage_ratio": (covered / total) if total else None,
+    }

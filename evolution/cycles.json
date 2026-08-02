@@ -3275,6 +3275,25 @@
         "Incluir casos que as regras sabidamente não detectam transforma o benchmark de vitrine em instrumento: recall 0.86 é um número defensável comercialmente; 98% inventado não é"
       ],
       "timestamp": "2026-08-02T09:26:58.525428+00:00"
+    },
+    {
+      "round_id": "R368",
+      "objective": "SPEC-935-R368 — reavaliação de gaps do ecossistema: cobertura epistêmica do catálogo (32%→65%) + check no doctor + higiene SDD",
+      "changes": [
+        "Léxico epistêmico ampliado em duas rodadas curadas com sinais pt/en do catálogo real (medicina, bioinformática, visão computacional, GIS, dev/cloud, KDP, jurídico, sumarização); ambíguos deliberadamente fora",
+        "Invariante nova testada: sinais disjuntos entre regimes",
+        "transformer/episteme.py: catalog_episteme_coverage() pura; cobertura medida 133/205 (65%) — número descritivo, não meta",
+        "marceloclaro/doctor.py: check episteme_coverage (12º check) com contagens medidas; warn abaixo de 50%",
+        "Higiene SDD: 6 specs (R264-R279) deixaram de apontar para validações fantasmas; test_sdd_tdd voltou a 12/12; 2 testes de regressão de entregáveis criados",
+        "15 diretórios mci_test_state_* órfãos removidos e ignorados no git",
+        "Falhas literárias R272-R276 confirmadas também no HEAD (não são só das modificações pendentes) — documentadas como pendência da frente literária, não corrigidas às cegas"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Medir cobertura antes de ampliar léxico transforma curadoria em engenharia: as duas rodadas foram guiadas pela lista real de agentes descobertos",
+        "Specs 'verified' apontando para testes que nunca existiram são o overclaim mais silencioso: o registro SDD só o pega se o test_file for validado como caminho"
+      ],
+      "timestamp": "2026-08-02T09:42:26.574843+00:00"
     }
   ]
 }

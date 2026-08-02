@@ -345,6 +345,34 @@ def _check_llm_reduction_metrics() -> DoctorCheck:
                            f"Métricas de redução LLM: {exc}")
 
 
+def _check_episteme_coverage() -> DoctorCheck:
+    """Cobertura da camada epistêmica de roteamento (SPEC-935-R368).
+
+    Reporta números medidos no catálogo atual; warn abaixo de 50% porque
+    nessa faixa o peso epistêmico fica inerte para a maioria dos agentes.
+    """
+    try:
+        from marceloclaro.catalog_loader import load_catalog_definitions
+        from transformer.episteme import catalog_episteme_coverage
+
+        coverage = catalog_episteme_coverage(load_catalog_definitions())
+        total = coverage["total"]
+        if not total:
+            return DoctorCheck(
+                "episteme_coverage", "warn", "Catálogo vazio; nada a medir."
+            )
+        ratio = coverage["coverage_ratio"]
+        detail = (
+            f"{coverage['explicit'] + coverage['inferred']}/{total} agentes com "
+            f"episteme ({ratio:.0%}): {coverage['explicit']} explícita(s), "
+            f"{coverage['inferred']} inferida(s), {coverage['uncovered']} sem sinais."
+        )
+        status = "pass" if ratio >= 0.5 else "warn"
+        return DoctorCheck("episteme_coverage", status, detail)
+    except Exception as exc:
+        return DoctorCheck("episteme_coverage", "fail", f"Erro ao medir cobertura: {exc}")
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -365,6 +393,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_litert_lm(),
         _check_colibri(),
         _check_llm_reduction_metrics(),
+        _check_episteme_coverage(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)
