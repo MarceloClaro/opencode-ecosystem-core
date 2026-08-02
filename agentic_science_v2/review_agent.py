@@ -862,6 +862,59 @@ class OrchestratorReviewer:
         self.min_traceability = min_traceability
         self.min_coverage = min_coverage
 
+    def verify_statistical_claim(
+        self,
+        claim_id: str,
+        group_a: List[float],
+        group_b: List[float],
+        ledger: Optional["ReviewLedger"] = None,
+        seed: int = 935370,
+    ) -> Dict[str, Any]:
+        """Verifica uma claim estatística no ledger via validade convergente
+        (SPEC-935-R370): só marca como verificada quando Welch-t e
+        Mann-Whitney concordam em significância E o IC bootstrap do effect
+        size exclui zero. Caso contrário, mantém pendente com nota
+        explicando qual teste discordou — não lança exceção para
+        convergent=False, é um resultado válido do processo de revisão.
+        """
+        from mci.rigorous_validation import convergent_validity_report
+
+        target_ledger = ledger if ledger is not None else self.ledger
+        report = convergent_validity_report(group_a, group_b, seed=seed)
+
+        welch_p = report["tests"]["welch_t"]["p_value"]
+        mw_p = report["tests"]["mann_whitney"]["p_value"]
+
+        if report["convergent"]:
+            target_ledger.verify_claim(
+                claim_id,
+                notes=(
+                    f"Convergência estatística (SPEC-935-R370): "
+                    f"Welch-t p={welch_p:.4f}, Mann-Whitney p={mw_p:.4f}, "
+                    f"Cohen's d={report['tests']['cohens_d']:.3f} "
+                    f"(IC95 {report['tests']['cohens_d_ci_95']})."
+                ),
+            )
+        else:
+            reasons = []
+            if not report["welch_significant"]:
+                reasons.append(f"Welch-t não significante (p={welch_p:.4f})")
+            if not report["mann_whitney_significant"]:
+                reasons.append(f"Mann-Whitney não significante (p={mw_p:.4f})")
+            if not report["ci_excludes_zero"]:
+                reasons.append("IC do effect size contém zero")
+            note = "Sem convergência: " + "; ".join(reasons)
+            if claim_id in target_ledger.claims and claim_id not in {
+                item["claim_id"] for item in target_ledger.verification_agenda
+            }:
+                target_ledger.verification_agenda.append({
+                    "claim_id": claim_id,
+                    "action": note,
+                    "priority": "high",
+                    "status": "pending",
+                })
+        return report
+
     def review(self, paper: Dict[str, Any],
                reviewer_affiliations: Optional[Dict[str, str]] = None) -> ReviewPackage:
         """Executa revisão completa com anonimização opcional e isolamento de erros."""

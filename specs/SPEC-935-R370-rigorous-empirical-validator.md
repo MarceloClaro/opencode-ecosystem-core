@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R370
 title: RigorousEmpiricalValidator — estatística computada de dados brutos + contraprovas por permutação
 component: mci/rigorous_validation.py + agentic_science_v2/review_agent.py
-status: draft
+status: verified
 test_file: tests/test_r370_rigorous_validation.py
 ---
 
@@ -45,8 +45,15 @@ Motor de contraprova genérico e reutilizável:
    iterações: embaralha `pooled` com o `Random(seed)` local, reparte nos
    tamanhos originais de `group_a`/`group_b`, recalcula `statistic_fn` na
    partição embaralhada.
-3. `p_value = (1 + count(|permuted| >= |observed|)) / (n_permutations + 1)`
-   (correção +1 padrão para nunca reportar p=0).
+3. Teste bilateral **centrado pela própria distribuição nula**: calcula
+   `null_mean = média(null_stats)` e `p_value = (1 + count(|s - null_mean| >=
+   |observed - null_mean|, para s em null_stats)) / (n_permutations + 1)`
+   (correção +1 padrão para nunca reportar p=0). Centrar pela média da
+   distribuição nula — em vez de comparar `|observado|` contra `|permutado|`
+   diretamente — é necessário porque estatísticas assimétricas como
+   Mann-Whitney U não são centradas em zero sob H0 (ao contrário de
+   Welch-t); comparar contra zero fixo subestimaria a extremidade da
+   estatística observada nesses casos.
 4. Retorna `{observed_statistic, p_value, n_permutations, seed, null_distribution_summary}`
    — `null_distribution_summary` traz min/max/mean/stdev da distribuição nula
    gerada (não a lista inteira, para não inchar o relatório).

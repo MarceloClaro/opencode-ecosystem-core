@@ -5,7 +5,21 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R369** (andaimes de raciocínio produtivo científico-literário)
+- **Branch:** `main` · última entrega: **R370** (motor de validação empírica rigorosa)
+- **R370 (2026-08-02):** `mci/rigorous_validation.py` — estatística COMPUTADA de dados
+  brutos (não só validação de números já dados): contraprova por permutação
+  (centrada pela própria distribuição nula — corrige viés para estatísticas
+  assimétricas como Mann-Whitney U), Welch-t + Mann-Whitney + Cohen's d com IC
+  bootstrap, k-fold CV genérico (partição exaustiva/disjunta, guarda contra
+  denominador ~zero), `convergent_validity_report` (reaproveita
+  `validate_statistics()` existente). Gate real no R103:
+  `OrchestratorReviewer.verify_statistical_claim()` só verifica claim quando
+  convergente. 23 testes TDD verdes; zero regressão (R103: 51 verdes,
+  scientific_superhuman: 45 verdes). Bug real pego em TDD e documentado na
+  spec: comparar `|observado|` vs `|permutado|` direto assume distribuição
+  nula centrada em zero — falso para U de Mann-Whitney.
+  **Pendência (R371, não feita ainda):** triangulação multidisciplinar via
+  EvidenceGraph/DataKnowledgeHub (exigir ≥2 fontes/disciplinas concordantes).
 - **R369 (2026-08-02):** `reasoning/production_scaffolds.py` — ponte entre os motores de
   raciocínio (SPEC-917/ARCHE) e a produção editorial: 8 movimentos científicos auditáveis
   com engine_hints; auditoria de novidade (`UNSUPPORTED_NOVELTY_CLAIM` quando "inédito/
