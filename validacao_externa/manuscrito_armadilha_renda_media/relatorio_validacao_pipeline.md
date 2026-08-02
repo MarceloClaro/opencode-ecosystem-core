@@ -146,15 +146,23 @@ alerta sobre cointegração e recomenda correção que "reduz substancialmente
 as magnitudes observadas" (ou seja, aumenta o p). **Nenhuma das 5
 correlações verificáveis infla artificialmente sua significância.**
 
-**Duas correlações (GDP×PISA, GDP×Insegurança Alimentar) não têm `n`
-declarado em lugar nenhum do texto**, apesar de a legenda da Tabela 2 do
-manuscrito definir explicitamente "n = número de observações na série
-temporal" — a tabela não tem uma coluna de `n` por linha. Esta é uma
-**lacuna de transparência real do artigo-fonte**, não corrigida no
-manuscrito adaptado (preservação fiel da fonte, conforme a nota de
-proveniência no cabeçalho do manuscrito) — mas registrada aqui como
-recomendação: a Tabela 2 deveria incluir uma coluna `n` explícita por
-linha.
+**Duas correlações (GDP×PISA, GDP×Insegurança Alimentar) não tinham `n`
+declarado em lugar nenhum do texto-fonte**, apesar de a legenda da Tabela 2
+do artigo original definir "n = número de observações na série temporal"
+— a tabela não tinha uma coluna de `n` por linha.
+
+**Correção aplicada (2026-08-02, a pedido do autor):** a Tabela 2 do
+manuscrito adaptado agora tem uma coluna `n` explícita para as 7
+correlações, com três graus de confiança distinguidos textualmente —
+**declarado** (5 correlações, valor citado em algum ponto do texto-fonte),
+**inferido** (GDP×PISA: n=8, justificado pelo número de edições do PISA
+entre 2000 e 2022 — fato externo verificável, não confirmado pelo autor
+original) e **não declarado** (GDP×Insegurança Alimentar: marcado
+honestamente como "n.d.", sem valor fabricado, com nota explicando por que
+o tamanho amostral não pôde ser inferido com confiança a partir da
+periodicidade das janelas móveis do FAO/SOFI). Nenhum número foi
+inventado; a distinção entre os três graus é explícita no próprio
+manuscrito (Tabela 2 e notas 1–2) e na Seção 6.2 de Limitações.
 
 **Design da contraverificação — por que assimétrica:** uma verificação
 simétrica (sinalizar qualquer `p_reportado ≠ p_ingênuo`) teria produzido
@@ -177,7 +185,7 @@ legítima.
 | R370 (estatística de dados brutos) | Inaplicável a manuscritos publicados (gap real) | Gap documentado; complementado pelo R373 |
 | R371 (triangulação multidisciplinar) | Funcional de primeira | `triangulated=True`, 3 domínios concordantes |
 | R372 (pré-registro) | Funcional de primeira | `pre_registered=False` (correto para estudo retrospectivo) |
-| R373 (contraverificação — novo) | Não existia | 5/5 correlações reais não inflam significância; 2/7 sem `n` declarado (lacuna do artigo-fonte, documentada) |
+| R373 (contraverificação — novo) | Não existia | 5/5 correlações reais não inflam significância; 2/7 sem `n` declarado na fonte — **corrigido no manuscrito** com coluna `n` explícita (declarado/inferido/n.d.), sem fabricar dados |
 
 **Conclusão:** o pipeline científico do ecossistema, após a correção do
 falso positivo do R369 e a adição do R373, é funcional para validar um
