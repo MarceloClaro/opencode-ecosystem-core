@@ -3329,6 +3329,23 @@
         "Reaproveitar validate_statistics() existente em vez de duplicar a lógica de veredito (Bayes factor, evidence_strength) manteve o módulo novo pequeno e evitou duas fontes de verdade para o mesmo cálculo"
       ],
       "timestamp": "2026-08-02T11:28:10.715784+00:00"
+    },
+    {
+      "round_id": "R371",
+      "objective": "SPEC-935-R371 — Triangulação Multidisciplinar: segunda metade do pedido original (cruzar informações relevantes e multidisciplinares), gate de convergência entre domínios independentes",
+      "changes": [
+        "mci/multidisciplinary_triangulation.py: agrupa evidências por domínio normalizado, calcula veredito por domínio (supports/contradicts/mixed/neutral), triangulated=True apenas com >=2 domínios concordantes E zero contestadores",
+        "Contestação de qualquer domínio bloqueia a triangulação inteira — nunca resolvida por maioria de votos (design deliberado: esconder controvérsia real seria o overclaim mais perigoso aqui)",
+        "Design aditivo: não modifica EvidenceGraph (R102) nem DataKnowledgeHub (R52/R55), ambos fundacionais — contrato de entrada é lista simples {source, domain, stance} que qualquer chamador popula",
+        "OrchestratorReviewer.verify_multidisciplinary_claim (R103): mesmo padrão do verify_statistical_claim (R370) — só verifica claim no ledger quando triangulated=True",
+        "tests/test_r371_multidisciplinary_triangulation.py: 16 testes TDD; zero regressão em R102 (115 testes combinados R102+R103+R370 verdes)"
+      ],
+      "score": 8.6,
+      "lessons": [
+        "Domínio 'mixed' (mesmo domínio com evidência a favor E contra) tratado como contestador, não como 'meio a favor' — evita que uma disciplina internamente dividida seja contada como corroboração",
+        "Reaproveitar o padrão exato de integração do R370 (verify_*_claim(claim_id, ..., ledger)) no R103 manteve a superfície de API do OrchestratorReviewer previsível para quem já usa o gate estatístico"
+      ],
+      "timestamp": "2026-08-02T12:53:14.434184+00:00"
     }
   ]
 }
