@@ -1,0 +1,515 @@
+{
+  "spec_id": "SPEC-935-R362",
+  "generated_at": "2026-08-01",
+  "external_validation": false,
+  "human_review_required": true,
+  "release_gate": "blocked",
+  "quality_verdict_allowed": false,
+  "spec_lifecycle_status": "green",
+  "communicable_status": "internal_spec_checks_passed_release_blocked",
+  "preflight_sha256": "529199fe3a79a5c82854d7e09397e8bea08a5071d4552da0a8cc722d3442d56a",
+  "change_manifest_sha256": "c52a2189aaa9c9f36528d9b641832e0a688bbd1958d0be08c2015b1ef748764e",
+  "regression_contract": {
+    "bootstrap_expected": 61,
+    "final_expected": 62,
+    "skips_allowed": 0,
+    "xfails_allowed": 0
+  },
+  "regression": {
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_r358_molambudos_polimento_cultural.py",
+      "tests/test_r359_cultural_episteme_agent.py",
+      "tests/test_r360_cultural_episteme_pilot.py",
+      "tests/test_r361_molambudos_cultural_decision_matrix.py",
+      "tests/test_r362_molambudos_route_a_pagination_preflight.py",
+      "-k",
+      "not test_r362_control_gate_never_opens_release_or_claims_external_validation",
+      "--junitxml=/home/marceloclaro/opencode-ecosystem-core/validacao_externa/cultural_episteme/.molambudos_r362_regression_bootstrap.xml.l2hoe4_1.tmp"
+    ],
+    "returncode": 0,
+    "expected_test_count": 61,
+    "passed": true,
+    "passed_count": 61,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "total": 61,
+    "junit_path": "validacao_externa/cultural_episteme/molambudos_r362_regression_bootstrap.xml",
+    "junit_sha256": "016ed893622dcdeaf6da0f8279ac227801c985b324ef0a810bfd1d2f24726bf9",
+    "output_tail": ".............................................................            [100%]\n61 passed, 1 deselected in 11.05s\n",
+    "excluded_bootstrap_test": "test_r362_control_gate_never_opens_release_or_claims_external_validation"
+  },
+  "artifact_freshness_gate": {
+    "passed": true,
+    "errors": [],
+    "validated_edition_count": 5,
+    "build_receipts_sha256": "08431e8ec7137e08ec8e5767e56a7cf5b675859118c5578eb0fe4e03d6cc02ee"
+  },
+  "provenance_gate": {
+    "passed": true,
+    "errors": [],
+    "validated_record_count": 6,
+    "validated_unhashed_inventory_count": 46,
+    "validated_predecessor_artifact_count": 5,
+    "externally_notarized": false,
+    "scope": "âncora criptográfica interna; não substitui assinatura, commit ou notarização externa"
+  },
+  "sdd_gate": {
+    "spec_id": "SPEC-935-R362",
+    "verified": true,
+    "status": "green",
+    "criteria_results": [
+      {
+        "criterion_id": "SPEC-935-R362-AC1",
+        "description": "Nenhum arquivo ativo associa Senador Pompeu/Patu ao campo de 1915--1917",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC2",
+        "description": "Rota A trilíngue implementa origem, deslocamento e confinamento",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC3",
+        "description": "Números não sustentados e pseudoarquivos afetados foram tratados",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC4",
+        "description": "Paginação romana e arábica é válida nas cinco edições",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC5",
+        "description": "Cinco builds em duas passadas e logs bloqueantes limpos",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC6",
+        "description": "Auditor PDF não encontra conteúdo não permitido fora das caixas",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC7",
+        "description": "Exceções full bleed são identificadas e justificadas",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC8",
+        "description": "Rotas trilíngues concluem 540/540 sem ausências ou divergências",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC9",
+        "description": "Correções tipográficas são locais e preservam a narrativa global",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC10",
+        "description": "Regressão R358--R362 e encadeamento de proveniência passam",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC11",
+        "description": "Somente patu_1915_chronology avança e nove bloqueios permanecem",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R362-AC12",
+        "description": "Anti-overclaim e release bloqueado em todos os artefatos",
+        "passed": true
+      }
+    ],
+    "passed_count": 12,
+    "total_count": 12,
+    "verifier": "SpecVerifier",
+    "verification_scope": "internal_spec_conformance",
+    "status_scope": "sdd_tdd",
+    "external_validation_conferred": false,
+    "release_conferred": false
+  },
+  "behavioral_gate": {
+    "action_id": "r362_finalize_route_a_preflight",
+    "allowed": true,
+    "trust_score": 0.5,
+    "threshold": 0.4,
+    "reason": "Trust 50% moderate. Allowed (threshold=40%) [SHADOW MODE: limited trust]",
+    "risk_level": "moderate",
+    "opens_release": false
+  },
+  "trust_outcome": {
+    "action_id": "r362_finalize_route_a_preflight",
+    "success": true,
+    "delta": 0.1,
+    "timestamp": "2026-08-02T02:55:03.226004+00:00",
+    "trust_before": 0.5,
+    "trust_after": 0.5
+  },
+  "trust_status": {
+    "gate_health": {
+      "threshold": 0.25,
+      "total_decisions": 1,
+      "block_rate": 0.0,
+      "safe_actions": 0,
+      "blocked_actions": 0
+    },
+    "memory_stats": {
+      "sensory": 1,
+      "total": 1
+    },
+    "recent_success_rate": 1.0,
+    "total_improvement": 0.1,
+    "trusted_actions": [
+      [
+        "r362_finalize_route_a_preflight",
+        0.5
+      ]
+    ],
+    "low_trust_actions": []
+  },
+  "token_economy": {
+    "slash_rate": 0.5,
+    "failures": [
+      {
+        "task_id": "r362-sequential-build-interrupted-before-artifact",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-23d9b2c4",
+            "agent_id": "marceloclaro",
+            "task_id": "r362-sequential-build-interrupted-before-artifact",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785639303.377464,
+            "resolved_at": 1785639303.3774939
+          }
+        ]
+      },
+      {
+        "task_id": "r362-route-validator-import-path",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-f1ac4cfb",
+            "agent_id": "marceloclaro",
+            "task_id": "r362-route-validator-import-path",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785639303.377554,
+            "resolved_at": 1785639303.377571
+          }
+        ]
+      },
+      {
+        "task_id": "r362-provenance-regression-chain",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-804cb6bb",
+            "agent_id": "marceloclaro",
+            "task_id": "r362-provenance-regression-chain",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785639303.3776038,
+            "resolved_at": 1785639303.3776128
+          }
+        ]
+      },
+      {
+        "task_id": "r362-premature-green-before-adversarial-review",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-d3625e71",
+            "agent_id": "marceloclaro",
+            "task_id": "r362-premature-green-before-adversarial-review",
+            "amount": 2.0,
+            "status": "slashed",
+            "created_at": 1785639303.3776374,
+            "resolved_at": 1785639303.3776448
+          }
+        ]
+      },
+      {
+        "task_id": "r362-provenance-subtask-cancelled",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-ffb1141f",
+            "agent_id": "18_agente_engenharia_dados_datasets_proveniencia",
+            "task_id": "r362-provenance-subtask-cancelled",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785639303.377675,
+            "resolved_at": 1785639303.3776832
+          }
+        ]
+      }
+    ],
+    "successes": [
+      {
+        "task_id": "ses_0411935acffevuOw5rUnk9lBz4",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-e3142331",
+            "agent_id": "codebase-analyzer",
+            "task_id": "ses_0411935acffevuOw5rUnk9lBz4",
+            "amount": 1.5,
+            "status": "released",
+            "created_at": 1785639303.3777127,
+            "resolved_at": 1785639303.3777256
+          }
+        ]
+      },
+      {
+        "task_id": "ses_040419cefffe6MIIVVsllUyQiF",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-a27ed1cc",
+            "agent_id": "code-reviewer",
+            "task_id": "ses_040419cefffe6MIIVVsllUyQiF",
+            "amount": 1.5,
+            "status": "released",
+            "created_at": 1785639303.3777533,
+            "resolved_at": 1785639303.3777633
+          }
+        ]
+      },
+      {
+        "task_id": "SPEC-935-R362-final-gates",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-96605fc2",
+            "agent_id": "marceloclaro",
+            "task_id": "SPEC-935-R362-final-gates",
+            "amount": 2.0,
+            "status": "released",
+            "created_at": 1785639303.3777869,
+            "resolved_at": 1785639303.3777952
+          }
+        ]
+      }
+    ],
+    "report": {
+      "balances": {
+        "18_agente_engenharia_dados_datasets_proveniencia": 99.5,
+        "code-reviewer": 100.3,
+        "codebase-analyzer": 100.3,
+        "marceloclaro": 97.9
+      },
+      "total_locked": 0,
+      "open_tasks": 0,
+      "transactions": 20,
+      "stakes": {
+        "locked": 0,
+        "released": 3,
+        "slashed": 5
+      }
+    },
+    "audit_trail": [
+      {
+        "kind": "genesis",
+        "subject": "marceloclaro",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785639303.3774009
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r362-sequential-build-interrupted-before-artifact",
+        "timestamp": 1785639303.377411
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r362-sequential-build-interrupted-before-artifact)",
+        "timestamp": 1785639303.3774908
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r362-route-validator-import-path",
+        "timestamp": 1785639303.3775325
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r362-route-validator-import-path)",
+        "timestamp": 1785639303.3775692
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r362-provenance-regression-chain",
+        "timestamp": 1785639303.3775916
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r362-provenance-regression-chain)",
+        "timestamp": 1785639303.3776119
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 2.0,
+        "reason": "stake para r362-premature-green-before-adversarial-review",
+        "timestamp": 1785639303.3776286
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "reembolso parcial pós-slashing (r362-premature-green-before-adversarial-review)",
+        "timestamp": 1785639303.3776436
+      },
+      {
+        "kind": "genesis",
+        "subject": "18_agente_engenharia_dados_datasets_proveniencia",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785639303.3776612
+      },
+      {
+        "kind": "debit",
+        "subject": "18_agente_engenharia_dados_datasets_proveniencia",
+        "amount": 1.0,
+        "reason": "stake para r362-provenance-subtask-cancelled",
+        "timestamp": 1785639303.377664
+      },
+      {
+        "kind": "credit",
+        "subject": "18_agente_engenharia_dados_datasets_proveniencia",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r362-provenance-subtask-cancelled)",
+        "timestamp": 1785639303.377682
+      },
+      {
+        "kind": "genesis",
+        "subject": "codebase-analyzer",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785639303.3776999
+      },
+      {
+        "kind": "debit",
+        "subject": "codebase-analyzer",
+        "amount": 1.5,
+        "reason": "stake para ses_0411935acffevuOw5rUnk9lBz4",
+        "timestamp": 1785639303.377703
+      },
+      {
+        "kind": "credit",
+        "subject": "codebase-analyzer",
+        "amount": 1.8,
+        "reason": "stake liberado + recompensa (ses_0411935acffevuOw5rUnk9lBz4)",
+        "timestamp": 1785639303.377724
+      },
+      {
+        "kind": "genesis",
+        "subject": "code-reviewer",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785639303.3777416
+      },
+      {
+        "kind": "debit",
+        "subject": "code-reviewer",
+        "amount": 1.5,
+        "reason": "stake para ses_040419cefffe6MIIVVsllUyQiF",
+        "timestamp": 1785639303.377744
+      },
+      {
+        "kind": "credit",
+        "subject": "code-reviewer",
+        "amount": 1.8,
+        "reason": "stake liberado + recompensa (ses_040419cefffe6MIIVVsllUyQiF)",
+        "timestamp": 1785639303.377762
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 2.0,
+        "reason": "stake para SPEC-935-R362-final-gates",
+        "timestamp": 1785639303.3777785
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 2.4,
+        "reason": "stake liberado + recompensa (SPEC-935-R362-final-gates)",
+        "timestamp": 1785639303.3777945
+      }
+    ]
+  },
+  "publication_constraints": {
+    "release_allowed": false,
+    "kdp_tri_page_count": 1095,
+    "kdp_assumed_max_page_count": 828,
+    "kdp_page_limit_passed": false,
+    "kdp_pages_over_assumed_limit": 267,
+    "note": "O limite depende da configuração comercial final e não foi validado externamente nesta rodada; o release permanece bloqueado."
+  },
+  "adversarial_review_gate": {
+    "review_task_id": "ses_040419cefffe6MIIVVsllUyQiF",
+    "initial_status": "FAIL_WITH_INTERNAL_BLOCKERS",
+    "remediation_status": "implemented_pending_final_adversarial_review",
+    "opens_release": false
+  },
+  "safe_claim": "Os critérios internos SDD/TDD da R362 passaram no candidato atômico. Isso não confere validação externa, qualidade literária ou autorização de publicação; nove bloqueios R361 e a restrição KDP permanecem.",
+  "post_control_regression": {
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_r358_molambudos_polimento_cultural.py",
+      "tests/test_r359_cultural_episteme_agent.py",
+      "tests/test_r360_cultural_episteme_pilot.py",
+      "tests/test_r361_molambudos_cultural_decision_matrix.py",
+      "tests/test_r362_molambudos_route_a_pagination_preflight.py",
+      "--junitxml=/home/marceloclaro/opencode-ecosystem-core/validacao_externa/cultural_episteme/.molambudos_r362_regression_final.xml.hbn1tkh0.tmp"
+    ],
+    "returncode": 0,
+    "expected_test_count": 62,
+    "passed": true,
+    "passed_count": 62,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "total": 62,
+    "junit_path": "validacao_externa/cultural_episteme/molambudos_r362_regression_final.xml",
+    "junit_sha256": "c75aa58f96db2f6be63bd710930a16dd71c9f8e5a9138a6d3ddb3f7ef7519ecb",
+    "output_tail": "..............................................................           [100%]\n62 passed in 10.69s\n",
+    "excluded_bootstrap_test": null
+  },
+  "post_regression_freshness_gate": {
+    "passed": true,
+    "errors": [],
+    "validated_edition_count": 5,
+    "build_receipts_sha256": "08431e8ec7137e08ec8e5767e56a7cf5b675859118c5578eb0fe4e03d6cc02ee"
+  },
+  "post_regression_provenance_gate": {
+    "passed": true,
+    "errors": [],
+    "validated_record_count": 6,
+    "validated_unhashed_inventory_count": 46,
+    "validated_predecessor_artifact_count": 5,
+    "externally_notarized": false,
+    "scope": "âncora criptográfica interna; não substitui assinatura, commit ou notarização externa"
+  }
+}

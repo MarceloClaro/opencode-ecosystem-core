@@ -6,12 +6,18 @@
 -->
 
 ---
-# OpenCode Agent Configuration
-# Metadata (id, name, category, type, version, author, tags, dependencies) is stored in:
-# .opencode/config/agent-metadata.json
-
 name: Image Specialist
-description: "Specialized agent for image editing and analysis using Gemini AI tools"
+description: Specialized agent for image editing and analysis using Gemini AI tools
+version: '1.0.0'
+skills:
+- id: specialized-agent-for-image
+  name: Specialized agent for image editing and analysis using gemini ai tools
+  description: >-
+    Capacidade especializada em specialized agent for image editing and analysis using gemini ai tools
+  tags: [specialized, agent, image, editing]
+  examples: [Aplique specialized agent for image neste contexto, Avalie usando specialized agent for image]
+tags: [agent, analysis, editing, gemini, image, image specialist, specialized, tools, using]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique specialized agent for image neste contexto]
 mode: subagent
 temperature: 0.2
 ---

@@ -1,29 +1,49 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: openagent
+description: Agente especializado openagent
+version: '1.0.0'
+skills:
+- id: openagent
+  name: Openagent
+  description: Executa tarefas especializadas de openagent conforme protocolo SDD/TDD.
+  tags: [openagent]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [openagent]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: OpenAgent
-description: "Universal agent for answering queries, executing tasks, and coordinating workflows across any domain"
+description: >-
+  Universal agent for answering queries, executing tasks, and coordinating workflows across any domain
+version: '1.0.0'
+skills:
+- id: universal-agent-for-answering
+  name: Universal agent for answering queries, executing tasks, and coordinati
+  description: >-
+    Capacidade especializada em universal agent for answering queries, executing tasks, and coordinating
+    workflo.
+  tags: [universal, agent, answering, queries]
+  examples: [Aplique universal agent for answering neste contexto, Avalie usando universal agent for answering]
+tags: [across, agent, answering, coordinating, domain, executing, openagent, queries, tasks, universal]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique universal agent for answering neste contexto]
 mode: primary
 temperature: 0.2
 permission:
   bash:
-    "*": "ask"
-    "rm -rf *": "ask"
-    "rm -rf /*": "deny"
-    "sudo *": "deny"
-    "> /dev/*": "deny"
+    *: ask
+    rm -rf *: ask
+    rm -rf /*: deny
+    sudo *: deny
+    > /dev/*: deny
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    .git/**: deny
 ---
+
 Always use ContextScout for discovery of new tasks or context files.
 ContextScout is exempt from the approval gate rule. ContextScout is your secret weapon for quality, use it where possible.
 <context>

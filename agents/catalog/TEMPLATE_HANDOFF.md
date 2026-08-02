@@ -1,8 +1,17 @@
 ---
 name: TEMPLATE_HANDOFF
+description: Agente especializado TEMPLATE_HANDOFF
+version: '1.0.0'
+skills:
+- id: template-handoff
+  name: Template Handoff
+  description: Executa tarefas especializadas de template handoff conforme protocolo SDD/TDD.
+  tags: [template, handoff]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, handoff, maswos-agent, template]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\TEMPLATE_HANDOFF.md
 ---
 
 # Template Handoff

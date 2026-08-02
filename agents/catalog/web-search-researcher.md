@@ -7,7 +7,19 @@
 
 ---
 name: web-search-researcher
-description: Used to perform web searches from a URL and analyze the contents based on a query.
+description: >-
+  Used to perform web searches from a URL and analyze the contents based on a query.
+version: '1.0.0'
+skills:
+- id: used-to-perform-web
+  name: Used to perform web searches from a url and analyze the contents based
+  description: >-
+    Capacidade especializada em used to perform web searches from a url and analyze the contents based
+    on a quer.
+  tags: [used, perform, searches, from]
+  examples: [Aplique used to perform web neste contexto, Avalie usando used to perform web]
+tags: [analyze, based, contents, from, perform, query, researcher, search, searches, used]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique used to perform web neste contexto]
 mode: subagent
 temperature: 0.1
 tools:

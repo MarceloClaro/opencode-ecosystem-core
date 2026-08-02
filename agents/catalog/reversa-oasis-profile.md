@@ -1,19 +1,60 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Inspirado pelo OASIS Profile Generator do MiroFish-Offline
-  (oasis_profile_generator.py, simulation_config_generator.py).
--->
+---
+name: reversa-oasis-profile
+description: Agente especializado reversa-oasis-profile
+version: '1.0.0'
+skills:
+- id: reversa-oasis-profile
+  name: Reversa Oasis Profile
+  description: >-
+    Executa tarefas especializadas de reversa oasis profile conforme protocolo SDD/TDD.
+  tags: [reversa, oasis, profile]
+  examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema]
+tags: [oasis, profile, reversa]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Analise a arquitetura deste sistema legado]
+---
 
 ---
 name: reversa-oasis-profile
-description: >
-  Agente gerador de perfis OASIS. Converte entidades de grafos de
-  conhecimento em personas detalhadas de agente para simulação.
-  Inspirado pelo OASIS Profile Generator do MiroFish-Offline.
-  Gera bio, persona, interesses, MBTI, tópicos, estilo de fala e
-  comportamentos por plataforma (Twitter/Reddit).
+description: >-
+  Agente gerador de perfis OASIS. Converte entidades de grafos de conhecimento em personas detalhadas
+  de agente para simulação. Inspirado pelo OASIS Profile Generator do MiroFish-Offline. Gera bio,
+  persona, interesses, MBTI, tópicos, estilo de fala e comportamentos por plataforma (Twitter/Reddit).
   Use via: "perfil", "persona", "profile", "oasis", /oasis-profile.
+version: '1.0.0'
+skills:
+- id: gerador-perfis-oasis
+  name: Gerador de perfis oasis
+  description: Capacidade especializada em gerador de perfis oasis
+  tags: [gerador, perfis, oasis]
+  examples: [Aplique gerador perfis oasis neste contexto, Avalie usando gerador perfis oasis]
+- id: converte-entidades-grafos-conhecimento
+  name: Converte entidades de grafos de conhecimento em personas detalhadas de
+  description: >-
+    Capacidade especializada em converte entidades de grafos de conhecimento em personas detalhadas de
+    agente pa.
+  tags: [converte, entidades, grafos, conhecimento]
+  examples: [Aplique converte entidades grafos conhecimento neste contexto, Avalie usando converte entidades grafos conhecimento]
+- id: inspirado-pelo-oasis-profile
+  name: Inspirado pelo oasis profile generator do mirofish-offline
+  description: >-
+    Capacidade especializada em inspirado pelo oasis profile generator do mirofish-offline
+  tags: [inspirado, pelo, oasis, profile]
+  examples: [Aplique inspirado pelo oasis profile neste contexto, Avalie usando inspirado pelo oasis profile]
+- id: gera-bio-persona-interesses
+  name: Gera bio, persona, interesses, mbti, tópicos, estilo de fala e comport
+  description: >-
+    Capacidade especializada em gera bio, persona, interesses, mbti, tópicos, estilo de fala e
+    comportamentos po.
+  tags: [gera, bio, persona, interesses]
+  examples: [Aplique gera bio persona interesses neste contexto, Avalie usando gera bio persona interesses]
+- id: use-perfil-persona-profile
+  name: Use via: "perfil", "persona", "profile", "oasis", /oasis-profile
+  description: >-
+    Capacidade especializada em use via: "perfil", "persona", "profile", "oasis", /oasis-profile
+  tags: ["perfil", "persona", "profile", "oasis"]
+  examples: [Aplique use perfil persona profile neste contexto, Avalie usando use perfil persona profile]
+tags: ["oasis", "perfil", "persona", "profile", agente, bio, comportamentos, conhecimento, converte, detalhadas]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique gerador perfis oasis neste contexto, Aplique converte entidades grafos conhecimento neste contexto]
 mode: subagent
 tools:
   read: true

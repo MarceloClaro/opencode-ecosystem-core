@@ -1,32 +1,50 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: opencoder
+description: Agente especializado opencoder
+version: '1.0.0'
+skills:
+- id: opencoder
+  name: Opencoder
+  description: Executa tarefas especializadas de opencoder conforme protocolo SDD/TDD.
+  tags: [opencoder]
+  examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec]
+tags: [opencoder]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Revise este código para segurança e performance]
+---
 
 ---
 name: OpenCoder
-description: "Orchestration agent for complex coding, architecture, and multi-file refactoring"
+description: Orchestration agent for complex coding, architecture, and multi-file refactoring
+version: '1.0.0'
+skills:
+- id: orchestration-agent-for-complex
+  name: Orchestration agent for complex coding, architecture, and multi-file r
+  description: >-
+    Capacidade especializada em orchestration agent for complex coding, architecture, and multi-file
+    refactoring
+  tags: [orchestration, agent, complex, coding]
+  examples: [Aplique orchestration agent for complex neste contexto, Avalie usando orchestration agent for complex]
+tags: [agent, architecture, coding, complex, multi-file, opencoder, orchestration, refactoring]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique orchestration agent for complex neste contexto]
 mode: primary
 temperature: 0.1
 permission:
   bash:
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "chmod *": "ask"
-    "curl *": "ask"
-    "wget *": "ask"
-    "docker *": "ask"
-    "kubectl *": "ask"
+    rm -rf *: ask
+    sudo *: deny
+    chmod *: ask
+    curl *: ask
+    wget *: ask
+    docker *: ask
+    kubectl *: ask
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    "**/__pycache__/**": "deny"
-    "**/*.pyc": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    **/__pycache__/**: deny
+    **/*.pyc: deny
+    .git/**: deny
 ---
 
 # Development Agent
@@ -504,5 +522,3 @@ Code Standards
   
   If you find yourself violating these rules, STOP and correct course.
 </constraints>
-
-

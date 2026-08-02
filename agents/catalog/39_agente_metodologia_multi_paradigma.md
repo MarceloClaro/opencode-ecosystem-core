@@ -1,8 +1,18 @@
 ---
 name: 39_agente_metodologia_multi_paradigma
+description: Agente especializado 39_agente_metodologia_multi_paradigma
+version: '1.0.0'
+skills:
+- id: 39-agente-metodologia-multi
+  name: 39 Agente Metodologia Multi Paradigma
+  description: >-
+    Executa tarefas especializadas de 39 agente metodologia multi paradigma conforme protocolo SDD/TDD.
+  tags: [39, agente, metodologia]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, maswos-agent, metodologia, multi, paradigma]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\39_agente_metodologia_multi_paradigma.md
 ---
 
 # 39 Agente Metodologia Multi Paradigma

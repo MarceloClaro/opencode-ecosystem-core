@@ -1,30 +1,47 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: coder-agent
+description: Agente especializado coder-agent
+version: '1.0.0'
+skills:
+- id: coder
+  name: Coder
+  description: Executa tarefas especializadas de coder conforme protocolo SDD/TDD.
+  tags: [coder]
+  examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec]
+tags: [coder]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Revise este código para segurança e performance]
+---
 
 ---
 name: CoderAgent
 description: Executes coding subtasks in sequence, ensuring completion as specified
+version: '1.0.0'
+skills:
+- id: executes-coding-subtasks-in
+  name: Executes coding subtasks in sequence, ensuring completion as specified
+  description: >-
+    Capacidade especializada em executes coding subtasks in sequence, ensuring completion as specified
+  tags: [executes, coding, subtasks, sequence]
+  examples: [Aplique executes coding subtasks in neste contexto, Avalie usando executes coding subtasks in]
+tags: [coderagent, coding, completion, ensuring, executes, sequence, specified, subtasks]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique executes coding subtasks in neste contexto]
 mode: subagent
 temperature: 0
 permission:
   bash:
-    "*": "deny"
-    "bash .opencode/skills/task-management/router.sh complete*": "allow"
-    "bash .opencode/skills/task-management/router.sh status*": "allow"
+    *: deny
+    bash .opencode/skills/task-management/router.sh complete*: allow
+    bash .opencode/skills/task-management/router.sh status*: allow
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    .git/**: deny
   task:
-    contextscout: "allow"
-    externalscout: "allow"
-    TestEngineer: "allow"
+    contextscout: allow
+    externalscout: allow
+    TestEngineer: allow
 ---
 
 # CoderAgent

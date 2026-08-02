@@ -1,8 +1,17 @@
 ---
 name: README
+description: Agente especializado README
+version: '1.0.0'
+skills:
+- id: readme
+  name: Readme
+  description: Executa tarefas especializadas de readme conforme protocolo SDD/TDD.
+  tags: [readme]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, maswos-agent, readme]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\README.md
 ---
 
 # Readme

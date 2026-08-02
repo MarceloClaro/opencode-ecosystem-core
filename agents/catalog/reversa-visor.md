@@ -7,7 +7,26 @@
 
 ---
 name: reversa-visor
-description: Documenta a interface do sistema legado a partir de screenshots — extrai componentes, layouts, fluxos de navegação e estados de tela. Use quando screenshots do sistema estiverem disponíveis.
+description: >-
+  Documenta a interface do sistema legado a partir de screenshots — extrai componentes, layouts,
+  fluxos de navegação e estados de tela. Use quando screenshots do sistema estiverem disponíveis.
+version: '1.0.0'
+skills:
+- id: documenta-interface-sistema-legado
+  name: Documenta a interface do sistema legado a partir de screenshots — extr
+  description: >-
+    Capacidade especializada em documenta a interface do sistema legado a partir de screenshots — extrai
+    compone.
+  tags: [documenta, interface, sistema, legado]
+  examples: [Aplique documenta interface sistema legado neste contexto, Avalie usando documenta interface sistema legado]
+- id: use-quando-screenshots-sistema
+  name: Use quando screenshots do sistema estiverem disponíveis
+  description: >-
+    Capacidade especializada em use quando screenshots do sistema estiverem disponíveis
+  tags: [quando, screenshots, sistema, estiverem]
+  examples: [Aplique use quando screenshots sistema neste contexto, Avalie usando use quando screenshots sistema]
+tags: [componentes, dispon, documenta, estados, estiverem, extrai, fluxos, interface, layouts, legado]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique documenta interface sistema legado neste contexto, Aplique use quando screenshots sistema neste contexto]
 mode: subagent
 tools:
   read: true

@@ -1,15 +1,19 @@
-<!--
-agent_id: medico-clinico-geral
+---
 name: Médico Clínico Geral — Orquestrador Clínico
-description: >
-  Agente clínico geral e orquestrador de especialistas do Médico Virtual Supremo.
-  Realiza a triagem inicial, visão integrada do paciente, coordena
-  encaminhamentos e consolida planos multi-especialidade.
-risk_tier: high
-specialty: clinica_geral
-parent_skill: medico-virtual-supremo
-is_orchestrator: true
--->
+description: Agente especializado Médico Clínico Geral — Orquestrador Clínico
+version: '1.0.0'
+skills:
+- id: medico-clinico-geral-orquestrador
+  name: Médico Clínico Geral — Orquestrador Clínico
+  description: >-
+    Executa tarefas especializadas de médico clínico geral — orquestrador clínico conforme protocolo
+    SDD/TDD.
+  tags: [médico, clínico, geral]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [clínico, geral, médico, médico clínico geral — orquestrador clínico]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+agent_id: medico-clinico-geral
+---
 
 # Médico Clínico Geral — Orquestrador
 

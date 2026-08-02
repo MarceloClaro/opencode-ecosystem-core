@@ -1,8 +1,18 @@
 ---
 name: 14_agente_consistencia_interna
+description: Agente especializado 14_agente_consistencia_interna
+version: '1.0.0'
+skills:
+- id: 14-agente-consistencia-interna
+  name: 14 Agente Consistencia Interna
+  description: >-
+    Executa tarefas especializadas de 14 agente consistencia interna conforme protocolo SDD/TDD.
+  tags: [14, agente, consistencia]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, consistencia, interna, maswos-agent]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\14_agente_consistencia_interna.md
 ---
 
 # 14 Agente Consistencia Interna

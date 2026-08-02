@@ -6,16 +6,22 @@
 -->
 
 ---
-# OpenCode Agent Configuration
-id: eval-runner
 name: Eval Runner
-description: "Test harness for evaluation framework - DO NOT USE DIRECTLY"
-category: testing
-type: utility
-version: 1.0.0
-author: opencode
+description: Test harness for evaluation framework - DO NOT USE DIRECTLY
+version: '1.0.0'
+skills:
+- id: test-harness-for-evaluation
+  name: Test harness for evaluation framework - do not use directly
+  description: >-
+    Capacidade especializada em test harness for evaluation framework - do not use directly
+  tags: [test, harness, evaluation, framework]
+  examples: [Aplique test harness for evaluation neste contexto, Avalie usando test harness for evaluation]
+tags: [directly, eval runner, evaluation, framework, harness, test, testing, utility]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique test harness for evaluation neste contexto]
 mode: subagent
 temperature: 0.2
+type: utility
+category: testing
 ---
 
 # Eval Runner - Test Harness
@@ -38,4 +44,3 @@ This file is **dynamically replaced** during test runs:
 - **Status**: Template - will be overwritten during test runs
 
 If you see this prompt during a test run, something went wrong with the test setup.
-

@@ -28,6 +28,8 @@ if REPO_ROOT not in sys.path:
 
 from scanners.pipeline import super_rigor_pipeline
 from scanners.scientific_reasoning_scanner import scientific_reasoning_scanner
+from scanners.literary_scanners import run_literary_scanner_suite
+from scanners.literary_research_scanners import run_literary_research_scanner_suite
 from benchmarks.merkle_integrity_guard import merkle_integrity_guard
 
 from mcp.server import Server
@@ -109,12 +111,36 @@ async def list_tools() -> list[Tool]:
                 "properties": {},
             },
         ),
+        Tool(
+            name="literary_scanner_suite",
+            description="Executa 8 scanners literários: narrativa, personagem, estilo, símbolos, teoria, leitor, ética e inovação",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "text": {"type": "string", "description": "Texto literário a analisar"},
+                    "metadata": {"type": "object", "description": "Metadados opcionais"},
+                },
+                "required": ["text"],
+            },
+        ),
+        Tool(
+            name="literary_research_scanner_suite",
+            description="Executa 4 scanners de pesquisa literária internacional: bibliografia, corpus comparativo, teoria e rigor",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "text": {"type": "string", "description": "Plano, ficha ou pesquisa literária a analisar"},
+                    "metadata": {"type": "object", "description": "Metadados opcionais"},
+                },
+                "required": ["text"],
+            },
+        ),
     ]
 
 
 @app.call_tool()
 async def call_tool(name: str, arguments: dict) -> CallToolResult | list[TextContent]:
-    supported_tools = {"super_rigor_audit", "scientific_reasoning_scan", "merkle_integrity_check"}
+    supported_tools = {"super_rigor_audit", "scientific_reasoning_scan", "merkle_integrity_check", "literary_scanner_suite", "literary_research_scanner_suite"}
     if not isinstance(name, str) or name not in supported_tools:
         return _mcp_error(f"Ferramenta desconhecida: {name}")
     if not isinstance(arguments, Mapping):
@@ -150,6 +176,34 @@ async def call_tool(name: str, arguments: dict) -> CallToolResult | list[TextCon
             logger.debug("Falha no merkle_integrity_check: %s", exc, exc_info=True)
             return _mcp_error(f"Falha no check: {type(exc).__name__}.")
 
+    if name == "literary_scanner_suite":
+        text = arguments.get("text", "")
+        metadata = arguments.get("metadata", {})
+        if not isinstance(text, str):
+            return _mcp_error("Payload inválido: 'text' deve ser uma string.")
+        if not isinstance(metadata, Mapping):
+            return _mcp_error("Payload inválido: 'metadata' deve ser um objeto.")
+        try:
+            result = run_literary_scanner_suite(text, metadata=metadata)
+            return _call_tool_result({"ok": True, "result": result})
+        except Exception as exc:
+            logger.debug("Falha no literary_scanner_suite: %s", exc, exc_info=True)
+            return _mcp_error(f"Falha no scan literário: {type(exc).__name__}.")
+
+    if name == "literary_research_scanner_suite":
+        text = arguments.get("text", "")
+        metadata = arguments.get("metadata", {})
+        if not isinstance(text, str):
+            return _mcp_error("Payload inválido: 'text' deve ser uma string.")
+        if not isinstance(metadata, Mapping):
+            return _mcp_error("Payload inválido: 'metadata' deve ser um objeto.")
+        try:
+            result = run_literary_research_scanner_suite(text, metadata=metadata)
+            return _call_tool_result({"ok": True, "result": result})
+        except Exception as exc:
+            logger.debug("Falha no literary_research_scanner_suite: %s", exc, exc_info=True)
+            return _mcp_error(f"Falha no scan de pesquisa literária: {type(exc).__name__}.")
+
     return _mcp_error(f"Ferramenta desconhecida: {name}")
 
 
@@ -170,6 +224,14 @@ class ScannersMcpServer:
                 "description": "Verifica a integridade criptográfica SHA-256 do código-fonte",
                 "parameters": {},
             },
+            "literary_scanner_suite": {
+                "description": "Executa 8 scanners literários rigorosos",
+                "parameters": {"text": "Texto literário", "metadata": "Metadados opcionais"},
+            },
+            "literary_research_scanner_suite": {
+                "description": "Executa 4 scanners de pesquisa literária internacional",
+                "parameters": {"text": "Pesquisa literária", "metadata": "Metadados opcionais"},
+            },
         }
 
     def call_tool(self, name: str, args: Dict[str, Any]) -> Dict[str, Any]:
@@ -181,6 +243,14 @@ class ScannersMcpServer:
             return {"ok": True, "result": scientific_reasoning_scanner.scan_text(text)}
         elif name == "merkle_integrity_check":
             return {"ok": True, "result": merkle_integrity_guard.compute_merkle_root()}
+        elif name == "literary_scanner_suite":
+            text = args.get("text", "")
+            metadata = args.get("metadata", {})
+            return {"ok": True, "result": run_literary_scanner_suite(text, metadata=metadata)}
+        elif name == "literary_research_scanner_suite":
+            text = args.get("text", "")
+            metadata = args.get("metadata", {})
+            return {"ok": True, "result": run_literary_research_scanner_suite(text, metadata=metadata)}
         else:
             return {"ok": False, "error": f"Ferramenta desconhecida: {name}"}
 

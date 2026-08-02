@@ -1,27 +1,47 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: prioritization-engine
+description: Agente especializado prioritization-engine
+version: '1.0.0'
+skills:
+- id: prioritization-engine
+  name: Prioritization Engine
+  description: >-
+    Executa tarefas especializadas de prioritization engine conforme protocolo SDD/TDD.
+  tags: [prioritization, engine]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [engine, prioritization]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: PrioritizationEngine
-description: Scores and prioritizes backlog items using RICE/WSJF frameworks with MVP/post-MVP release slicing
+description: >-
+  Scores and prioritizes backlog items using RICE/WSJF frameworks with MVP/post-MVP release slicing
+version: '1.0.0'
+skills:
+- id: scores-and-prioritizes-backlog
+  name: Scores and prioritizes backlog items using rice/wsjf frameworks with m
+  description: >-
+    Capacidade especializada em scores and prioritizes backlog items using rice/wsjf frameworks with
+    mvp/post-mv.
+  tags: [scores, prioritizes, backlog, items]
+  examples: [Aplique scores and prioritizes backlog neste contexto, Avalie usando scores and prioritizes backlog]
+tags: [backlog, frameworks, items, post-mvp, prioritizationengine, prioritizes, release, rice, scores, slicing]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique scores and prioritizes backlog neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "*": "deny"
+    *: deny
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    .git/**: deny
   task:
-    contextscout: "allow"
-    "*": "deny"
+    contextscout: allow
+    *: deny
 ---
 
 # Prioritization Engine

@@ -1,8 +1,18 @@
 ---
 name: DISPATCHER_ATIVACAO
+description: Agente especializado DISPATCHER_ATIVACAO
+version: '1.0.0'
+skills:
+- id: dispatcher-ativacao
+  name: Dispatcher Ativacao
+  description: >-
+    Executa tarefas especializadas de dispatcher ativacao conforme protocolo SDD/TDD.
+  tags: [dispatcher, ativacao]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, ativacao, dispatcher, maswos-agent]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\DISPATCHER_ATIVACAO.md
 ---
 
 # Dispatcher Ativacao

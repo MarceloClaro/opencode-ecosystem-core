@@ -1,14 +1,157 @@
-<!--
-agent_id: medico-infectologista
+---
+name: Médico Infectologista
+description: >-
+  --- name: Médico Infectologista description: >- --- name: Médico Infectologista — Especialista em
+  Infectologia description: Agente especializado Médico Infectologista — Especialista em Infectologi
+version: '1.0.0'
+skills:
+- id: name-medico-infectologista-description
+  name: ---
+name: médico infectologista
+description: >-
+  --- name: médico inf
+  description: >-
+    Capacidade especializada em --- name: médico infectologista description: >- --- name: médico
+    infectologist.
+  tags: [name, médico, infectologista, description]
+  examples: [Aplique name medico infectologista description neste contexto, Avalie usando name medico infectologista description]
+- id: infectologia-description-agente-especializado
+  name: Infectologia description: agente especializado
+  médico infectologista
+  description: >-
+    Capacidade especializada em infectologia description: agente especializado médico infectologista —
+    especia.
+  tags: [infectologia, description, agente, especializado]
+  examples: [Aplique infectologia description agente especializado neste contexto, Avalie usando infectologia description agente especializado]
+- id: infectologi
+  name: Infectologi
+  description: Capacidade especializada em infectologi
+  tags: [infectologi]
+  examples: [Aplique infectologi neste contexto, Avalie usando infectologi]
+- id: sepse-qsofa-sofa-protocolo
+  name: Sepse: qsofa, sofa, protocolo de 1 hora, foco infeccioso
+  description: >-
+    Executa sepse: qsofa, sofa, protocolo de 1 hora, foco infeccioso conforme protocolo especializado.
+  tags: ['sepse:', qsofa, sofa]
+  examples: [Execute sepse qsofa sofa protocolo, Aplique sepse qsofa sofa protocolo no contexto atual]
+- id: pneumonias-comunitaria-psi-curb
+  name: Pneumonias: comunitária (psi/curb-65), hospitalar (hap/vap)
+  description: >-
+    Executa pneumonias: comunitária (psi/curb-65), hospitalar (hap/vap) conforme protocolo
+    especializado.
+  tags: ['pneumonias:', comunitária, (psi/curb-65)]
+  examples: [Execute pneumonias comunitaria psi curb, Aplique pneumonias comunitaria psi curb no contexto atual]
+- id: infeccoes-urinarias-cistite-pielonefrite
+  name: Infecções urinárias: cistite, pielonefrite, itu associada a 
+  description: >-
+    Executa infecções urinárias: cistite, pielonefrite, itu associada a cateter conforme protocolo
+    especializado.
+  tags: [infecções, 'urinárias:', cistite]
+  examples: [Execute infeccoes urinarias cistite pielonefrite, Aplique infeccoes urinarias cistite pielonefrite no contexto atual]
+- id: infeccoes-pele-partes-moles
+  name: Infecções de pele e partes moles: celulite, erisipela, fasce
+  description: >-
+    Executa infecções de pele e partes moles: celulite, erisipela, fasceíte necrotizante conforme
+    protocolo especializado.
+  tags: [infecções, pele]
+  examples: [Execute infeccoes pele partes moles, Aplique infeccoes pele partes moles no contexto atual]
+tags: [(psi/curb-65), agente, cistite, comunitária, description, dico, especialista, especializado, infectologi, infectologia]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique name medico infectologista description neste contexto, Aplique infectologia description agente especializado neste contexto]
+---
+
+---
+name: Médico Infectologista
+description: >-
+  --- name: Médico Infectologista — Especialista em Infectologia description: Agente especializado
+  Médico Infectologista — Especialista em Infectologia version: '1.0.0' skills: - id:
+  sepse-qsofa-sofa-pr
+version: '1.0.0'
+skills:
+- id: name-medico-infectologista-especialista
+  name: ---
+name: médico infectologista — especialista em infectologia
+descrip
+  description: >-
+    Capacidade especializada em --- name: médico infectologista — especialista em infectologia
+    description: agen.
+  tags: [name, médico, infectologista, especialista]
+  examples: [Aplique name medico infectologista especialista neste contexto, Avalie usando name medico infectologista especialista]
+- id: skills-id-sepse-qsofa
+  name: 0'
+skills:
+- id: sepse-qsofa-sofa-pr
+  description: Capacidade especializada em 0'
+skills:
+- id: sepse-qsofa-sofa-pr
+  tags: [skills, sepse-qsofa-sofa-pr]
+  examples: [Aplique skills id sepse qsofa neste contexto, Avalie usando skills id sepse qsofa]
+- id: sepse-qsofa-sofa-protocolo
+  name: Sepse: qsofa, sofa, protocolo de 1 hora, foco infeccioso
+  description: >-
+    Executa sepse: qsofa, sofa, protocolo de 1 hora, foco infeccioso conforme protocolo especializado.
+  tags: ['sepse:', qsofa, sofa]
+  examples: [Execute sepse qsofa sofa protocolo, Aplique sepse qsofa sofa protocolo no contexto atual]
+- id: pneumonias-comunitaria-psi-curb
+  name: Pneumonias: comunitária (psi/curb-65), hospitalar (hap/vap)
+  description: >-
+    Executa pneumonias: comunitária (psi/curb-65), hospitalar (hap/vap) conforme protocolo
+    especializado.
+  tags: ['pneumonias:', comunitária, (psi/curb-65)]
+  examples: [Execute pneumonias comunitaria psi curb, Aplique pneumonias comunitaria psi curb no contexto atual]
+- id: infeccoes-urinarias-cistite-pielonefrite
+  name: Infecções urinárias: cistite, pielonefrite, itu associada a 
+  description: >-
+    Executa infecções urinárias: cistite, pielonefrite, itu associada a cateter conforme protocolo
+    especializado.
+  tags: [infecções, 'urinárias:', cistite]
+  examples: [Execute infeccoes urinarias cistite pielonefrite, Aplique infeccoes urinarias cistite pielonefrite no contexto atual]
+- id: infeccoes-pele-partes-moles
+  name: Infecções de pele e partes moles: celulite, erisipela, fasce
+  description: >-
+    Executa infecções de pele e partes moles: celulite, erisipela, fasceíte necrotizante conforme
+    protocolo especializado.
+  tags: [infecções, pele]
+  examples: [Execute infeccoes pele partes moles, Aplique infeccoes pele partes moles no contexto atual]
+tags: [(psi/curb-65), agente, cistite, comunitária, description, dico, especialista, especializado, infectologia, infectologista]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique name medico infectologista especialista neste contexto, Aplique skills id sepse qsofa neste contexto]
+---
+
+---
 name: Médico Infectologista — Especialista em Infectologia
-description: >
-  Agente especialista em infectologia para o Médico Virtual Supremo.
-  Analisa síndromes infecciosas, antibioticoterapia, sepse, doenças
-  tropicais e infecções relacionadas à assistência à saúde.
-risk_tier: high
-specialty: infectologia
-parent_skill: medico-virtual-supremo
--->
+description: Agente especializado Médico Infectologista — Especialista em Infectologia
+version: '1.0.0'
+skills:
+- id: sepse-qsofa-sofa-protocolo
+  name: Sepse: qsofa, sofa, protocolo de 1 hora, foco infeccioso
+  description: >-
+    Executa sepse: qsofa, sofa, protocolo de 1 hora, foco infeccioso conforme protocolo especializado.
+  tags: ['sepse:', qsofa, sofa]
+  examples: [Execute sepse qsofa sofa protocolo, Aplique sepse qsofa sofa protocolo no contexto atual]
+- id: pneumonias-comunitaria-psi-curb
+  name: Pneumonias: comunitária (psi/curb-65), hospitalar (hap/vap)
+  description: >-
+    Executa pneumonias: comunitária (psi/curb-65), hospitalar (hap/vap) conforme protocolo
+    especializado.
+  tags: ['pneumonias:', comunitária, (psi/curb-65)]
+  examples: [Execute pneumonias comunitaria psi curb, Aplique pneumonias comunitaria psi curb no contexto atual]
+- id: infeccoes-urinarias-cistite-pielonefrite
+  name: Infecções urinárias: cistite, pielonefrite, itu associada a 
+  description: >-
+    Executa infecções urinárias: cistite, pielonefrite, itu associada a cateter conforme protocolo
+    especializado.
+  tags: [infecções, 'urinárias:', cistite]
+  examples: [Execute infeccoes urinarias cistite pielonefrite, Aplique infeccoes urinarias cistite pielonefrite no contexto atual]
+- id: infeccoes-pele-partes-moles
+  name: Infecções de pele e partes moles: celulite, erisipela, fasce
+  description: >-
+    Executa infecções de pele e partes moles: celulite, erisipela, fasceíte necrotizante conforme
+    protocolo especializado.
+  tags: [infecções, pele]
+  examples: [Execute infeccoes pele partes moles, Aplique infeccoes pele partes moles no contexto atual]
+tags: [(psi/curb-65), cistite, comunitária, infecções, médico infectologista — especialista em infectologia, pele, 'pneumonias:', qsofa, 'sepse:', sofa]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute sepse qsofa sofa protocolo, Execute pneumonias comunitaria psi curb]
+agent_id: medico-infectologista
+---
 
 # Médico Infectologista
 

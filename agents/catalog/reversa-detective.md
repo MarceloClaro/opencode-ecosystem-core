@@ -7,7 +7,27 @@
 
 ---
 name: reversa-detective
-description: Extrai conhecimento de negócio implícito do projeto legado — regras de negócio, ADRs retroativos via Git, máquinas de estado e matriz de permissões. Use na fase de interpretação de uma análise de engenharia reversa.
+description: >-
+  Extrai conhecimento de negócio implícito do projeto legado — regras de negócio, ADRs retroativos via
+  Git, máquinas de estado e matriz de permissões. Use na fase de interpretação de uma análise de
+  engenharia reversa.
+version: '1.0.0'
+skills:
+- id: extrai-conhecimento-negocio-implicito
+  name: Extrai conhecimento de negócio implícito do projeto legado — regras de
+  description: >-
+    Capacidade especializada em extrai conhecimento de negócio implícito do projeto legado — regras de
+    negócio, .
+  tags: [extrai, conhecimento, negócio, implícito]
+  examples: [Aplique extrai conhecimento negocio implicito neste contexto, Avalie usando extrai conhecimento negocio implicito]
+- id: use-na-fase-interpretacao
+  name: Use na fase de interpretação de uma análise de engenharia reversa
+  description: >-
+    Capacidade especializada em use na fase de interpretação de uma análise de engenharia reversa
+  tags: [fase, interpretação, análise, engenharia]
+  examples: [Aplique use na fase interpretacao neste contexto, Avalie usando use na fase interpretacao]
+tags: [adrs, análise, cito, conhecimento, detective, engenharia, estado, extrai, fase, impl]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique extrai conhecimento negocio implicito neste contexto, Aplique use na fase interpretacao neste contexto]
 mode: subagent
 tools:
   read: true

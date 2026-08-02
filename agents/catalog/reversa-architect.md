@@ -7,7 +7,27 @@
 
 ---
 name: reversa-architect
-description: Sintetiza a análise do projeto legado em documentação arquitetural completa — diagramas C4, ERD completo, mapa de integrações e Spec Impact Matrix. Use na fase de interpretação após o reversa-detective.
+description: >-
+  Sintetiza a análise do projeto legado em documentação arquitetural completa — diagramas C4, ERD
+  completo, mapa de integrações e Spec Impact Matrix. Use na fase de interpretação após o
+  reversa-detective.
+version: '1.0.0'
+skills:
+- id: sintetiza-analise-projeto-legado
+  name: Sintetiza a análise do projeto legado em documentação arquitetural com
+  description: >-
+    Capacidade especializada em sintetiza a análise do projeto legado em documentação arquitetural
+    completa — di.
+  tags: [sintetiza, análise, projeto, legado]
+  examples: [Aplique sintetiza analise projeto legado neste contexto, Avalie usando sintetiza analise projeto legado]
+- id: use-na-fase-interpretacao
+  name: Use na fase de interpretação após o reversa-detective
+  description: >-
+    Capacidade especializada em use na fase de interpretação após o reversa-detective
+  tags: [fase, interpretação, após, reversa-detective]
+  examples: [Aplique use na fase interpretacao neste contexto, Avalie usando use na fase interpretacao]
+tags: [análise, após, architect, arquitetural, completa, completo, diagramas, documenta, fase, impact]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique sintetiza analise projeto legado neste contexto, Aplique use na fase interpretacao neste contexto]
 mode: subagent
 tools:
   read: true

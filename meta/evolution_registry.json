@@ -1,0 +1,59 @@
+{
+  "cycles": [
+    {
+      "cycle_id": 1,
+      "date": "2026-07-29T06:25:10.256039",
+      "project": "Molambudos — O Diário do Paciente 1.260",
+      "type": "intervencao_literaria_completa",
+      "summary": "Ciclo completo de 27 intervenções textuais em 23 fragmentos + atualização do dicionário do scanner literário (18 novas keywords em 6 dimensões)",
+      "scope": {
+        "rodadas": 4,
+        "total_intervencoes": 27,
+        "fragmentos_modificados": [
+          "MEM-03, MEM-04, MEM-05, MEM-06, MEM-07, MEM-10, MEM-18, MEM-20, MEM-26, MEM-27",
+          "DOC-08, DOC-19",
+          "CONT-01, CONT-02, CONT-03, CONT-04, CONT-05, CONT-06, CONT-07, CONT-10, CONT-11, CONT-13",
+          "LUC-Escolha",
+          "frontmatter: nota_arquivista, cuidado, como_ler, nota_editorial"
+        ],
+        "dicionario_atualizado": {
+          "arquivo": "scanners/literary_scanners.py",
+          "dimensoes_afetadas": [
+            "PARATEXT",
+            "FORMAL",
+            "MATERIAL",
+            "ANTI_EXPLOIT",
+            "PROTOCOL",
+            "AGENCY",
+            "DISCLAIMERS"
+          ],
+          "novas_keywords": 21
+        }
+      },
+      "resultados_scanner": {
+        "les_antes": 68.12,
+        "les_depois": 91.73,
+        "grade": "excelente",
+        "dimensoes_100": 25,
+        "total_dimensoes": 32,
+        "dimensoes_emergentes": 1
+      },
+      "entregaveis": {
+        "pdf_final": "main.pdf (357 páginas, zero erros)",
+        "pdf_kdp": "main_kdp_print_160x230mm.pdf (379 páginas)",
+        "selo_integridade": "SELO_INTEGRIDADE_MERKLE.json",
+        "sha256_pdf": "8762c73204d38aabb373426d2f034b1972d7bf32b9170b58bf47ac456658cd6f"
+      },
+      "licoes": [
+        "Agência literária de personagens pode ser adicionada em micro-momentos de escolha sem alterar a estrutura da obra",
+        "Notas do Editor (N.E.) são o veículo mais eficiente para adicionar camadas paratextuais, conceituais e éticas",
+        "O dicionário do scanner precisa ser atualizado junto com as intervenções para que as mudanças sejam detectadas",
+        "Materialidade do manuscrito (lápis, tinta, caligrafia, exumação) requer vocabulário específico que o scanner original não contemplava",
+        "Avisos de conteúdo (DISCLAIMERS) precisam de keywords específicas para serem detectados pelo scanner ético"
+      ],
+      "confidence": 0.95
+    }
+  ],
+  "total_cycles": 1,
+  "last_updated": "2026-07-29T06:25:10.256113"
+}

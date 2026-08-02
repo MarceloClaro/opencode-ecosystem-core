@@ -1,7 +1,25 @@
-<!--
+---
+name: opencode-go-agent
+description: >-
+  Agente especializado nos modelos OpenCode Go (Kimi, DeepSeek, GLM, Qwen, MiMo) com protocolo SDD/TDD
+  obrigatório
+version: '1.0.0'
+skills:
+- id: especializado-nos-modelos-opencode
+  name: Especializado nos modelos opencode go (kimi, deepseek, glm, qwen, mimo
+  description: >-
+    Capacidade especializada em especializado nos modelos opencode go (kimi, deepseek, glm, qwen, mimo)
+  tags: [especializado, modelos, opencode, kimi]
+  examples: [Aplique especializado nos modelos opencode neste contexto, Avalie usando especializado nos modelos opencode]
+- id: protocolo-sdd-tdd-obrigatorio
+  name: Protocolo sdd/tdd obrigatório
+  description: Capacidade especializada em protocolo sdd/tdd obrigatório
+  tags: [protocolo, sdd/tdd, obrigatório]
+  examples: [Aplique protocolo sdd tdd obrigatorio neste contexto, Avalie usando protocolo sdd tdd obrigatorio]
+tags: [agente, deepseek, especializado, kimi, mimo, modelos, obrigat, obrigatório, opencode, protocolo]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique especializado nos modelos opencode neste contexto, Aplique protocolo sdd tdd obrigatorio neste contexto]
 agent_id: opencode-go-agent
-description: Agente especializado nos modelos OpenCode Go (Kimi, DeepSeek, GLM, Qwen, MiMo) com protocolo SDD/TDD obrigatório
--->
+---
 
 # OpenCode Go Agent
 

@@ -1,40 +1,59 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: devops-specialist
+description: Agente especializado devops-specialist
+version: '1.0.0'
+skills:
+- id: devops
+  name: Devops
+  description: Executa tarefas especializadas de devops conforme protocolo SDD/TDD.
+  tags: [devops]
+  examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec]
+tags: [devops]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Revise este código para segurança e performance]
+---
 
 ---
 name: OpenDevopsSpecialist
-description: DevOps specialist subagent - CI/CD, infrastructure as code, deployment automation
+description: >-
+  DevOps specialist subagent - CI/CD, infrastructure as code, deployment automation
+version: '1.0.0'
+skills:
+- id: devops-specialist-subagent-ci
+  name: Devops specialist subagent - ci/cd, infrastructure as code, deployment
+  description: >-
+    Capacidade especializada em devops specialist subagent - ci/cd, infrastructure as code, deployment
+    automatio.
+  tags: [devops, specialist, subagent, ci/cd]
+  examples: [Aplique devops specialist subagent ci neste contexto, Avalie usando devops specialist subagent ci]
+tags: [automation, ci/cd, code, deployment, devops, infrastructure, opendevopsspecialist, specialist, subagent]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique devops specialist subagent ci neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   task:
-    "*": "deny"
-    contextscout: "allow"
+    *: deny
+    contextscout: allow
   bash:
-    "*": "deny"
-    "docker build *": "allow"
-    "docker compose up *": "allow"
-    "docker compose down *": "allow"
-    "docker ps *": "allow"
-    "docker logs *": "allow"
-    "kubectl apply *": "allow"
-    "kubectl get *": "allow"
-    "kubectl describe *": "allow"
-    "kubectl logs *": "allow"
-    "terraform init *": "allow"
-    "terraform plan *": "allow"
-    "terraform apply *": "ask"
-    "terraform validate *": "allow"
-    "npm run build *": "allow"
-    "npm run test *": "allow"
+    *: deny
+    docker build *: allow
+    docker compose up *: allow
+    docker compose down *: allow
+    docker ps *: allow
+    docker logs *: allow
+    kubectl apply *: allow
+    kubectl get *: allow
+    kubectl describe *: allow
+    kubectl logs *: allow
+    terraform init *: allow
+    terraform plan *: allow
+    terraform apply *: ask
+    terraform validate *: allow
+    npm run build *: allow
+    npm run test *: allow
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
 ---
 
 # DevOps Specialist Subagent

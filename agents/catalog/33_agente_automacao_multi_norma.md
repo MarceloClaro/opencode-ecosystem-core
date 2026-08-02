@@ -1,8 +1,18 @@
 ---
 name: 33_agente_automacao_multi_norma
+description: Agente especializado 33_agente_automacao_multi_norma
+version: '1.0.0'
+skills:
+- id: 33-agente-automacao-multi
+  name: 33 Agente Automacao Multi Norma
+  description: >-
+    Executa tarefas especializadas de 33 agente automacao multi norma conforme protocolo SDD/TDD.
+  tags: [33, agente, automacao]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, automacao, maswos-agent, multi, norma]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\33_agente_automacao_multi_norma.md
 ---
 
 # 33 Agente Automacao Multi Norma

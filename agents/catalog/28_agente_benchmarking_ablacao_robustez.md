@@ -1,8 +1,19 @@
 ---
 name: 28_agente_benchmarking_ablacao_robustez
+description: Agente especializado 28_agente_benchmarking_ablacao_robustez
+version: '1.0.0'
+skills:
+- id: 28-agente-benchmarking-ablacao
+  name: 28 Agente Benchmarking Ablacao Robustez
+  description: >-
+    Executa tarefas especializadas de 28 agente benchmarking ablacao robustez conforme protocolo
+    SDD/TDD.
+  tags: [28, agente, benchmarking]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [ablacao, academic, agente, benchmarking, maswos-agent, robustez]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\28_agente_benchmarking_ablacao_robustez.md
 ---
 
 # 28 Agente Benchmarking Ablacao Robustez

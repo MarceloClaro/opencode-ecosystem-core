@@ -7,7 +7,25 @@
 
 ---
 name: codebase-analyzer
-description: Analyzes codebase implementation details. Call the codebase-analyzer agent when you need to find detailed information about specific components.
+description: >-
+  Analyzes codebase implementation details. Call the codebase-analyzer agent when you need to find
+  detailed information about specific components.
+version: '1.0.0'
+skills:
+- id: analyzes-codebase-implementation-details
+  name: Analyzes codebase implementation details
+  description: Capacidade especializada em analyzes codebase implementation details
+  tags: [analyzes, codebase, implementation, details]
+  examples: [Aplique analyzes codebase implementation details neste contexto, Avalie usando analyzes codebase implementation details]
+- id: call-the-codebase-analyzer
+  name: Call the codebase-analyzer agent when you need to find detailed inform
+  description: >-
+    Capacidade especializada em call the codebase-analyzer agent when you need to find detailed
+    information abou.
+  tags: [call, codebase-analyzer, agent, when]
+  examples: [Aplique call the codebase analyzer neste contexto, Avalie usando call the codebase analyzer]
+tags: [about, agent, analyzer, analyzes, call, codebase, codebase-analyzer, components, detailed, details]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique analyzes codebase implementation details neste contexto, Aplique call the codebase analyzer neste contexto]
 mode: subagent
 temperature: 0.1
 tools:

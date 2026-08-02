@@ -1,37 +1,53 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: test-engineer
+description: Agente especializado test-engineer
+version: '1.0.0'
+skills:
+- id: test-engineer
+  name: Test Engineer
+  description: Executa tarefas especializadas de test engineer conforme protocolo SDD/TDD.
+  tags: [test, engineer]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [engineer, test]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: TestEngineer
 description: Test authoring and TDD agent
+version: '1.0.0'
+skills:
+- id: test-authoring-and-tdd
+  name: Test authoring and tdd agent
+  description: Capacidade especializada em test authoring and tdd agent
+  tags: [test, authoring, agent]
+  examples: [Aplique test authoring and tdd neste contexto, Avalie usando test authoring and tdd]
+tags: [agent, authoring, test, testengineer]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique test authoring and tdd neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "npx vitest *": "allow"
-    "npx jest *": "allow"
-    "pytest *": "allow"
-    "npm test *": "allow"
-    "npm run test *": "allow"
-    "yarn test *": "allow"
-    "pnpm test *": "allow"
-    "bun test *": "allow"
-    "go test *": "allow"
-    "cargo test *": "allow"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
+    npx vitest *: allow
+    npx jest *: allow
+    pytest *: allow
+    npm test *: allow
+    npm run test *: allow
+    yarn test *: allow
+    pnpm test *: allow
+    bun test *: allow
+    go test *: allow
+    cargo test *: allow
+    rm -rf *: ask
+    sudo *: deny
+    *: deny
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
   task:
-    contextscout: "allow"
-    externalscout: "allow"
+    contextscout: allow
+    externalscout: allow
 ---
 
 # TestEngineer

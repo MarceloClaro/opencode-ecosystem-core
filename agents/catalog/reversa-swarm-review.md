@@ -1,17 +1,50 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Inspirado pelo motor de simulação multi-agente OASIS do MiroFish (60.9K ★ GitHub).
--->
+---
+name: reversa-swarm-review
+description: Agente especializado reversa-swarm-review
+version: '1.0.0'
+skills:
+- id: reversa-swarm-review
+  name: Reversa Swarm Review
+  description: >-
+    Executa tarefas especializadas de reversa swarm review conforme protocolo SDD/TDD.
+  tags: [reversa, swarm, review]
+  examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema]
+tags: [reversa, review, swarm]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Analise a arquitetura deste sistema legado]
+---
 
 ---
 name: reversa-swarm-review
-description: >
-  Orquestra revisão de código por enxame de agentes especializados (Segurança,
-  Performance, Arquitetura), inspirado no padrão de simulação multi-agente do
-  MiroFish. Cada agente analisa independentemente, debate divergências e produz
-  relatório consolidado com múltiplas perspectivas.
+description: >-
+  Orquestra revisão de código por enxame de agentes especializados (Segurança, Performance,
+  Arquitetura), inspirado no padrão de simulação multi-agente do MiroFish. Cada agente analisa
+  independentemente, debate divergências e produz relatório consolidado com múltiplas perspectivas.
   Use via: "swarm review", "revisão em enxame", ou ativado pelo comando /swarm-review.
+version: '1.0.0'
+skills:
+- id: orquestra-revisao-codigo-enxame
+  name: Orquestra revisão de código por enxame de agentes especializados (segu
+  description: >-
+    Capacidade especializada em orquestra revisão de código por enxame de agentes especializados
+    (segurança, per.
+  tags: [orquestra, revisão, código, enxame]
+  examples: [Aplique orquestra revisao codigo enxame neste contexto, Avalie usando orquestra revisao codigo enxame]
+- id: cada-agente-analisa-independentemente
+  name: Cada agente analisa independentemente, debate divergências e produz re
+  description: >-
+    Capacidade especializada em cada agente analisa independentemente, debate divergências e produz
+    relatório co.
+  tags: [cada, agente, analisa, independentemente]
+  examples: [Aplique cada agente analisa independentemente neste contexto, Avalie usando cada agente analisa independentemente]
+- id: use-swarm-review-revisao
+  name: Use via: "swarm review", "revisão em enxame", ou ativado pelo comando
+  description: >-
+    Capacidade especializada em use via: "swarm review", "revisão em enxame", ou ativado pelo comando
+    /swarm-rev.
+  tags: ["swarm, review", "revisão, enxame"]
+  examples: [Aplique use swarm review revisao neste contexto, Avalie usando use swarm review revisao]
+tags: ["revisão, "swarm, agente, agentes, analisa, arquitetura, ativado, cada, comando, consolidado]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique orquestra revisao codigo enxame neste contexto, Aplique cada agente analisa independentemente neste contexto]
 mode: subagent
 tools:
   read: true

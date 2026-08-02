@@ -1,30 +1,59 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: contextscout
+description: Agente especializado contextscout
+version: '1.0.0'
+skills:
+- id: contextscout
+  name: Contextscout
+  description: Executa tarefas especializadas de contextscout conforme protocolo SDD/TDD.
+  tags: [contextscout]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [contextscout]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: ContextScout
-description: Discovers and recommends context files from .opencode/context/ ranked by priority. Suggests ExternalScout when a framework/library is mentioned but not found internally.
+description: >-
+  Discovers and recommends context files from .opencode/context/ ranked by priority. Suggests
+  ExternalScout when a framework/library is mentioned but not found internally.
+version: '1.0.0'
+skills:
+- id: discovers-and-recommends-context
+  name: Discovers and recommends context files from
+  description: Capacidade especializada em discovers and recommends context files from
+  tags: [discovers, recommends, context, files]
+  examples: [Aplique discovers and recommends context neste contexto, Avalie usando discovers and recommends context]
+- id: opencode-context-ranked-by
+  name: Opencode/context/ ranked by priority
+  description: Capacidade especializada em opencode/context/ ranked by priority
+  tags: [opencode/context/, ranked, priority]
+  examples: [Aplique opencode context ranked by neste contexto, Avalie usando opencode context ranked by]
+- id: suggests-externalscout-when-framework
+  name: Suggests externalscout when a framework/library is mentioned but not f
+  description: >-
+    Capacidade especializada em suggests externalscout when a framework/library is mentioned but not
+    found inter.
+  tags: [suggests, externalscout, when, framework/library]
+  examples: [Aplique suggests externalscout when framework neste contexto, Avalie usando suggests externalscout when framework]
+tags: [context, contextscout, discovers, externalscout, files, found, framework, framework/library, from, internally]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique discovers and recommends context neste contexto, Aplique opencode context ranked by neste contexto]
 mode: subagent
 permission:
   read:
-    "*": "allow"
+    *: allow
   grep:
-    "*": "allow"
+    *: allow
   glob:
-    "*": "allow"
+    *: allow
   bash:
-    "*": "deny"
+    *: deny
   edit:
-    "*": "deny"
+    *: deny
   write:
-    "*": "deny"
+    *: deny
   task:
-    "*": "deny"
-
+    *: deny
 ---
 
 # ContextScout

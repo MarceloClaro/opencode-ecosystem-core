@@ -1,34 +1,54 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: task-manager
+description: Agente especializado task-manager
+version: '1.0.0'
+skills:
+- id: task-manager
+  name: Task Manager
+  description: Executa tarefas especializadas de task manager conforme protocolo SDD/TDD.
+  tags: [task, manager]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [manager, task]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: TaskManager
-description: JSON-driven task breakdown specialist transforming complex features into atomic, verifiable subtasks with dependency tracking and CLI integration
+description: >-
+  JSON-driven task breakdown specialist transforming complex features into atomic, verifiable subtasks
+  with dependency tracking and CLI integration
+version: '1.0.0'
+skills:
+- id: json-driven-task-breakdown
+  name: Json-driven task breakdown specialist transforming complex features in
+  description: >-
+    Capacidade especializada em json-driven task breakdown specialist transforming complex features into
+    atomic.
+  tags: [json-driven, task, breakdown, specialist]
+  examples: [Aplique json driven task breakdown neste contexto, Avalie usando json driven task breakdown]
+tags: [atomic, breakdown, complex, dependency, features, integration, into, json-driven, specialist, subtasks]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique json driven task breakdown neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "*": "deny"
-    "npx ts-node*task-cli*": "allow"
-    "mkdir -p .tmp/tasks*": "allow"
-    "mv .tmp/tasks*": "allow"
+    *: deny
+    npx ts-node*task-cli*: allow
+    mkdir -p .tmp/tasks*: allow
+    mv .tmp/tasks*: allow
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    .git/**: deny
   task:
-    contextscout: "allow"
-    externalscout: "allow"
-    "*": "deny"
+    contextscout: allow
+    externalscout: allow
+    *: deny
   skill:
-    "*": "deny"
-    "task-management": "allow"
+    *: deny
+    task-management: allow
 ---
 
 <context>
@@ -48,7 +68,6 @@ BEFORE starting task breakdown, ALWAYS:
   2. Check existing tasks: Run `task-cli.ts status` to see current state
   3. If context file is provided in prompt or exists at `.tmp/sessions/{session-id}/context.md`, load it
   4. If context is missing or unclear, delegate discovery to ContextScout and capture relevant context file paths
-
 
 WHY THIS MATTERS:
 - Tasks without project context → Wrong patterns, incompatible approaches

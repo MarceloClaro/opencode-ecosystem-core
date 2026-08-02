@@ -164,3 +164,9 @@ projeto.
   `ARCHITECTURE.md` junto às métricas citadas.
 
 - **[Autocorreção - 2026-07-26]**: Working tree estabilizada — 50+ arquivos em 6 commits. PROGRESS.md reescrito para R229. README/ARCHITECTURE.md atualizados com Colibri, LiteRT-LM supervisor, LLM Reduction.
+
+- **[Autocorreção Circuito Fechado - 2026-07-26 06:55:48]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.003s)
+
+- **[Autocorreção Circuito Fechado - 2026-07-26 07:00:20]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.002s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-02 03:54:06]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)

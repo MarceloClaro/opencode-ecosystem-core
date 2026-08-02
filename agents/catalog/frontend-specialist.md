@@ -1,33 +1,51 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: frontend-specialist
+description: Agente especializado frontend-specialist
+version: '1.0.0'
+skills:
+- id: frontend
+  name: Frontend
+  description: Executa tarefas especializadas de frontend conforme protocolo SDD/TDD.
+  tags: [frontend]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [frontend]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: OpenFrontendSpecialist
 description: Frontend UI design specialist - subagent for design systems, themes, animations
+version: '1.0.0'
+skills:
+- id: frontend-ui-design-specialist
+  name: Frontend ui design specialist - subagent for design systems, themes, a
+  description: >-
+    Capacidade especializada em frontend ui design specialist - subagent for design systems, themes,
+    animations
+  tags: [frontend, design, specialist, subagent]
+  examples: [Aplique frontend ui design specialist neste contexto, Avalie usando frontend ui design specialist]
+tags: [animations, design, frontend, openfrontendspecialist, specialist, subagent, systems, themes]
+examples: [Gere apresentação MIRA sobre este tópico, Crie animação central para o slide de abertura, Aplique frontend ui design specialist neste contexto]
 mode: subagent
 temperature: 0.2
 permission:
   task:
-    "*": "deny"
-    contextscout: "allow"
-    externalscout: "allow"
+    *: deny
+    contextscout: allow
+    externalscout: allow
   write:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "**/*.ts": "deny"
-    "**/*.js": "deny"
-    "**/*.py": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    **/*.ts: deny
+    **/*.js: deny
+    **/*.py: deny
   edit:
-    "design_iterations/**/*.html": "allow"
-    "design_iterations/**/*.css": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
+    design_iterations/**/*.html: allow
+    design_iterations/**/*.css: allow
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
 ---
 
 # Frontend Design Subagent

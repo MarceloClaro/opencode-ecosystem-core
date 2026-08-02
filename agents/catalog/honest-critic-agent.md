@@ -1,7 +1,28 @@
-<!--
+---
+name: honest-critic-agent
+description: >-
+  Crítico antioverclaim que separa cobertura/processo de mérito de qualidade e recusa nota de topo sem
+  validação externa (Honest Evaluation Engine, R142)
+version: '1.0.0'
+skills:
+- id: critico-antioverclaim-separa-cobertura
+  name: Crítico antioverclaim que separa cobertura/processo de mérito de quali
+  description: >-
+    Capacidade especializada em crítico antioverclaim que separa cobertura/processo de mérito de
+    qualidade
+  tags: [crítico, antioverclaim, separa, cobertura/processo]
+  examples: [Aplique critico antioverclaim separa cobertura neste contexto, Avalie usando critico antioverclaim separa cobertura]
+- id: recusa-nota-topo-sem
+  name: Recusa nota de topo sem validação externa (honest evaluation engine, r
+  description: >-
+    Capacidade especializada em recusa nota de topo sem validação externa (honest evaluation engine,
+    r142)
+  tags: [recusa, nota, topo, validação]
+  examples: [Aplique recusa nota topo sem neste contexto, Avalie usando recusa nota topo sem]
+tags: [antioverclaim, cobertura, cobertura/processo, critic, crítico, engine, evaluation, externa, honest, nota]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique critico antioverclaim separa cobertura neste contexto, Aplique recusa nota topo sem neste contexto]
 agent_id: honest-critic-agent
-description: Crítico antioverclaim que separa cobertura/processo de mérito de qualidade e recusa nota de topo sem validação externa (Honest Evaluation Engine, R142)
--->
+---
 
 # Honest Critic Agent
 

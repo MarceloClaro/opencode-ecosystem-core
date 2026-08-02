@@ -1,0 +1,545 @@
+{
+  "spec_id": "SPEC-935-R361",
+  "generated_at": "2026-08-01",
+  "external_validation": false,
+  "human_review_required": true,
+  "release_gate": "blocked",
+  "quality_verdict_allowed": false,
+  "spec_lifecycle_status": "green",
+  "communicable_status": "internal_spec_checks_passed",
+  "sdd_gate": {
+    "spec_id": "SPEC-935-R361",
+    "verified": true,
+    "status": "green",
+    "criteria_results": [
+      {
+        "criterion_id": "SPEC-935-R361-AC1",
+        "description": "Cinco conceitos e dez decisões",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R361-AC2",
+        "description": "Decisões humanas condicionais",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R361-AC3",
+        "description": "Registros substantivos e grupos independentes explicitados",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R361-AC4",
+        "description": "Ausência de equivalência-alvo mantém gate fechado",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R361-AC5",
+        "description": "Dez bloqueios históricos e éticos sem alteração automática",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R361-AC6",
+        "description": "Somente três correções mecânicas",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R361-AC7",
+        "description": "Deriva R360 explicitamente encadeada",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R361-AC8",
+        "description": "Verificação operacional completa",
+        "passed": true
+      },
+      {
+        "criterion_id": "SPEC-935-R361-AC9",
+        "description": "Release e claims permanecem bloqueados",
+        "passed": true
+      }
+    ],
+    "passed_count": 9,
+    "total_count": 9,
+    "verifier": "SpecVerifier",
+    "verification_scope": "internal_spec_conformance",
+    "status_scope": "sdd_tdd",
+    "external_validation_conferred": false,
+    "release_conferred": false
+  },
+  "source_evidence_gate": {
+    "record_count": 14,
+    "independent_group_count": 11,
+    "substantive_independent_groups_by_concept": {
+      "curral_do_governo": [
+        "G01-fapesp-memorias-seca",
+        "G02-ufmg-patu"
+      ],
+      "retirantes": [
+        "G01-fapesp-memorias-seca",
+        "G03-michaelis-dictionary",
+        "G04-ufpr-retirantes"
+      ],
+      "rasga_mortalha": [
+        "G05-ufersa-suindara",
+        "G06-etnobiologia-rasga"
+      ],
+      "molambudos": [
+        "G03-michaelis-dictionary",
+        "G07-aulete-dictionary"
+      ],
+      "hospital_colonia": [
+        "G08-fhemig-chpb",
+        "G10-tribuna-daniela-arbex",
+        "G11-who-mental-health"
+      ]
+    },
+    "target_usage_count": 1,
+    "target_equivalence_count": 0,
+    "zh_cn_target_evidence_count": 0,
+    "records_coverage_passed": true,
+    "target_equivalence_gate_passed": false,
+    "release_allowed": false,
+    "status": "sufficient_for_triage_only_insufficient_for_target_equivalence"
+  },
+  "adversarial_review_gate": {
+    "anti_overclaim": {
+      "task_id": "ses_0416f48e3ffekBtIj4mhAI8Zxa",
+      "initial_status": "FAIL_WITH_BLOCKERS",
+      "final_status": "PASS_INTERNAL_PROCESS",
+      "scope": "processo interno; não qualidade nem validação externa"
+    },
+    "ethics": {
+      "task_id": "ses_0416f4865ffeVhI7tPdMPiefO4",
+      "final_status": "PASS_AS_BLOCKING_DOSSIER",
+      "scope": "suficiente para bloquear; não autoriza mudança ou publicação"
+    },
+    "release_allowed": false
+  },
+  "behavioral_gate": {
+    "action_id": "r361_finalize_cultural_decision_matrix",
+    "allowed": true,
+    "trust_score": 0.5,
+    "threshold": 0.4,
+    "reason": "Trust 50% moderate. Allowed (threshold=40%) [SHADOW MODE: limited trust]",
+    "risk_level": "moderate",
+    "opens_release": false
+  },
+  "trust_outcome": {
+    "action_id": "r361_finalize_cultural_decision_matrix",
+    "success": true,
+    "delta": 0.1,
+    "timestamp": "2026-08-01T18:56:52.751970+00:00",
+    "trust_before": 0.5,
+    "trust_after": 0.5
+  },
+  "trust_status": {
+    "gate_health": {
+      "threshold": 0.25,
+      "total_decisions": 1,
+      "block_rate": 0.0,
+      "safe_actions": 0,
+      "blocked_actions": 0
+    },
+    "memory_stats": {
+      "sensory": 1,
+      "total": 1
+    },
+    "recent_success_rate": 1.0,
+    "total_improvement": 0.1,
+    "trusted_actions": [
+      [
+        "r361_finalize_cultural_decision_matrix",
+        0.5
+      ]
+    ],
+    "low_trust_actions": []
+  },
+  "token_economy": {
+    "slash_rate": 0.5,
+    "failures": [
+      {
+        "task_id": "r361-antigravity-pending-batch",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-f051424c",
+            "agent_id": "antigravity-bridge",
+            "task_id": "r361-antigravity-pending-batch",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785610612.7522748,
+            "resolved_at": 1785610612.752294
+          }
+        ]
+      },
+      {
+        "task_id": "r361-ufpr-doi-http-429",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-19a17977",
+            "agent_id": "marceloclaro",
+            "task_id": "r361-ufpr-doi-http-429",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785610612.7523382,
+            "resolved_at": 1785610612.7523508
+          }
+        ]
+      },
+      {
+        "task_id": "r361-puc-presumed-url-http-404",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-c90fcf74",
+            "agent_id": "marceloclaro",
+            "task_id": "r361-puc-presumed-url-http-404",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785610612.7523777,
+            "resolved_at": 1785610612.7523842
+          }
+        ]
+      },
+      {
+        "task_id": "r361-r360-provenance-regression",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-9ec90e6b",
+            "agent_id": "marceloclaro",
+            "task_id": "r361-r360-provenance-regression",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785610612.7524002,
+            "resolved_at": 1785610612.752404
+          }
+        ]
+      },
+      {
+        "task_id": "r361-premature-internal-gate-overclaim",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-864169e9",
+            "agent_id": "marceloclaro",
+            "task_id": "r361-premature-internal-gate-overclaim",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785610612.7524157,
+            "resolved_at": 1785610612.7524195
+          }
+        ]
+      },
+      {
+        "task_id": "r361-incomplete-ethical-blocker-inventory",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-96fde62b",
+            "agent_id": "marceloclaro",
+            "task_id": "r361-incomplete-ethical-blocker-inventory",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785610612.7524383,
+            "resolved_at": 1785610612.7524462
+          }
+        ]
+      },
+      {
+        "task_id": "r361-lancet-http-403",
+        "success": false,
+        "positions": [
+          {
+            "stake_id": "stk-6971bfde",
+            "agent_id": "marceloclaro",
+            "task_id": "r361-lancet-http-403",
+            "amount": 1.0,
+            "status": "slashed",
+            "created_at": 1785610612.7524588,
+            "resolved_at": 1785610612.752463
+          }
+        ]
+      }
+    ],
+    "successes": [
+      {
+        "task_id": "ses_0419bf052ffesbTFEHQ0bQeD7S",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-9f2e7e03",
+            "agent_id": "literary-research-scholar-phd",
+            "task_id": "ses_0419bf052ffesbTFEHQ0bQeD7S",
+            "amount": 1.5,
+            "status": "released",
+            "created_at": 1785610612.7524798,
+            "resolved_at": 1785610612.7524881
+          }
+        ]
+      },
+      {
+        "task_id": "ses_0416f48e3ffekBtIj4mhAI8Zxa",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-3c63f5b9",
+            "agent_id": "honest-critic-agent",
+            "task_id": "ses_0416f48e3ffekBtIj4mhAI8Zxa",
+            "amount": 1.5,
+            "status": "released",
+            "created_at": 1785610612.7525055,
+            "resolved_at": 1785610612.7525125
+          }
+        ]
+      },
+      {
+        "task_id": "ses_0416f4865ffeVhI7tPdMPiefO4",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-7ef9d211",
+            "agent_id": "literary-ethics-trauma-phd",
+            "task_id": "ses_0416f4865ffeVhI7tPdMPiefO4",
+            "amount": 1.5,
+            "status": "released",
+            "created_at": 1785610612.752527,
+            "resolved_at": 1785610612.752532
+          }
+        ]
+      },
+      {
+        "task_id": "SPEC-935-R361-final-gates",
+        "success": true,
+        "positions": [
+          {
+            "stake_id": "stk-aa205321",
+            "agent_id": "marceloclaro",
+            "task_id": "SPEC-935-R361-final-gates",
+            "amount": 2.0,
+            "status": "released",
+            "created_at": 1785610612.7525454,
+            "resolved_at": 1785610612.7525506
+          }
+        ]
+      }
+    ],
+    "report": {
+      "balances": {
+        "antigravity-bridge": 99.5,
+        "honest-critic-agent": 100.3,
+        "literary-ethics-trauma-phd": 100.3,
+        "literary-research-scholar-phd": 100.3,
+        "marceloclaro": 97.4
+      },
+      "total_locked": 0,
+      "open_tasks": 0,
+      "transactions": 27,
+      "stakes": {
+        "locked": 0,
+        "released": 4,
+        "slashed": 7
+      }
+    },
+    "balances": {
+      "antigravity-bridge": 99.5,
+      "marceloclaro": 97.4,
+      "literary-research-scholar-phd": 100.3,
+      "honest-critic-agent": 100.3,
+      "literary-ethics-trauma-phd": 100.3
+    },
+    "audit_trail": [
+      {
+        "kind": "genesis",
+        "subject": "antigravity-bridge",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785610612.7522256
+      },
+      {
+        "kind": "debit",
+        "subject": "antigravity-bridge",
+        "amount": 1.0,
+        "reason": "stake para r361-antigravity-pending-batch",
+        "timestamp": 1785610612.752232
+      },
+      {
+        "kind": "credit",
+        "subject": "antigravity-bridge",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r361-antigravity-pending-batch)",
+        "timestamp": 1785610612.7522924
+      },
+      {
+        "kind": "genesis",
+        "subject": "marceloclaro",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785610612.75232
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r361-ufpr-doi-http-429",
+        "timestamp": 1785610612.7523236
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r361-ufpr-doi-http-429)",
+        "timestamp": 1785610612.7523494
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r361-puc-presumed-url-http-404",
+        "timestamp": 1785610612.7523682
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r361-puc-presumed-url-http-404)",
+        "timestamp": 1785610612.7523837
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r361-r360-provenance-regression",
+        "timestamp": 1785610612.7523944
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r361-r360-provenance-regression)",
+        "timestamp": 1785610612.7524035
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r361-premature-internal-gate-overclaim",
+        "timestamp": 1785610612.7524116
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r361-premature-internal-gate-overclaim)",
+        "timestamp": 1785610612.7524188
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r361-incomplete-ethical-blocker-inventory",
+        "timestamp": 1785610612.7524333
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r361-incomplete-ethical-blocker-inventory)",
+        "timestamp": 1785610612.7524452
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 1.0,
+        "reason": "stake para r361-lancet-http-403",
+        "timestamp": 1785610612.7524536
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 0.5,
+        "reason": "reembolso parcial pós-slashing (r361-lancet-http-403)",
+        "timestamp": 1785610612.7524624
+      },
+      {
+        "kind": "genesis",
+        "subject": "literary-research-scholar-phd",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785610612.752472
+      },
+      {
+        "kind": "debit",
+        "subject": "literary-research-scholar-phd",
+        "amount": 1.5,
+        "reason": "stake para ses_0419bf052ffesbTFEHQ0bQeD7S",
+        "timestamp": 1785610612.752474
+      },
+      {
+        "kind": "credit",
+        "subject": "literary-research-scholar-phd",
+        "amount": 1.8,
+        "reason": "stake liberado + recompensa (ses_0419bf052ffesbTFEHQ0bQeD7S)",
+        "timestamp": 1785610612.7524872
+      },
+      {
+        "kind": "genesis",
+        "subject": "honest-critic-agent",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785610612.7524989
+      },
+      {
+        "kind": "debit",
+        "subject": "honest-critic-agent",
+        "amount": 1.5,
+        "reason": "stake para ses_0416f48e3ffekBtIj4mhAI8Zxa",
+        "timestamp": 1785610612.7525005
+      },
+      {
+        "kind": "credit",
+        "subject": "honest-critic-agent",
+        "amount": 1.8,
+        "reason": "stake liberado + recompensa (ses_0416f48e3ffekBtIj4mhAI8Zxa)",
+        "timestamp": 1785610612.7525115
+      },
+      {
+        "kind": "genesis",
+        "subject": "literary-ethics-trauma-phd",
+        "amount": 100.0,
+        "reason": "Saldo inicial",
+        "timestamp": 1785610612.7525208
+      },
+      {
+        "kind": "debit",
+        "subject": "literary-ethics-trauma-phd",
+        "amount": 1.5,
+        "reason": "stake para ses_0416f4865ffeVhI7tPdMPiefO4",
+        "timestamp": 1785610612.7525222
+      },
+      {
+        "kind": "credit",
+        "subject": "literary-ethics-trauma-phd",
+        "amount": 1.8,
+        "reason": "stake liberado + recompensa (ses_0416f4865ffeVhI7tPdMPiefO4)",
+        "timestamp": 1785610612.7525313
+      },
+      {
+        "kind": "debit",
+        "subject": "marceloclaro",
+        "amount": 2.0,
+        "reason": "stake para SPEC-935-R361-final-gates",
+        "timestamp": 1785610612.7525403
+      },
+      {
+        "kind": "credit",
+        "subject": "marceloclaro",
+        "amount": 2.4,
+        "reason": "stake liberado + recompensa (SPEC-935-R361-final-gates)",
+        "timestamp": 1785610612.7525504
+      }
+    ]
+  },
+  "safe_claim": "Checagens processuais internas passaram, mas não conferem validação externa, qualidade ou equivalência-alvo. Dez bloqueios e dez decisões humanas mantêm o release bloqueado."
+}

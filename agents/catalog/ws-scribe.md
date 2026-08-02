@@ -8,6 +8,16 @@
 ---
 name: ws-scribe
 description: Human-facing content specialist for documentation and prose
+version: '1.0.0'
+skills:
+- id: human-facing-content-specialist
+  name: Human-facing content specialist for documentation and prose
+  description: >-
+    Capacidade especializada em human-facing content specialist for documentation and prose
+  tags: [human-facing, content, specialist, documentation]
+  examples: [Aplique human facing content specialist neste contexto, Avalie usando human facing content specialist]
+tags: [content, documentation, human-facing, prose, scribe, specialist]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique human facing content specialist neste contexto]
 mode: subagent
 ---
 

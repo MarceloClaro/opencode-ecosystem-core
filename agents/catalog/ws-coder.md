@@ -8,6 +8,16 @@
 ---
 name: ws-coder
 description: Technical implementation specialist for writing and modifying code
+version: '1.0.0'
+skills:
+- id: technical-implementation-specialist-for
+  name: Technical implementation specialist for writing and modifying code
+  description: >-
+    Capacidade especializada em technical implementation specialist for writing and modifying code
+  tags: [technical, implementation, specialist, writing]
+  examples: [Aplique technical implementation specialist for neste contexto, Avalie usando technical implementation specialist for]
+tags: [code, coder, implementation, modifying, specialist, technical, writing]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique technical implementation specialist for neste contexto]
 mode: subagent
 ---
 

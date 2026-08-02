@@ -1,32 +1,52 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: batch-executor
+description: Agente especializado batch-executor
+version: '1.0.0'
+skills:
+- id: batch-executor
+  name: Batch Executor
+  description: Executa tarefas especializadas de batch executor conforme protocolo SDD/TDD.
+  tags: [batch, executor]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [batch, executor]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: BatchExecutor
-description: Execute multiple tasks in parallel batches, managing simultaneous CoderAgent delegations and tracking batch completion
+description: >-
+  Execute multiple tasks in parallel batches, managing simultaneous CoderAgent delegations and
+  tracking batch completion
+version: '1.0.0'
+skills:
+- id: execute-multiple-tasks-in
+  name: Execute multiple tasks in parallel batches, managing simultaneous code
+  description: >-
+    Capacidade especializada em execute multiple tasks in parallel batches, managing simultaneous
+    coderagent del.
+  tags: [execute, multiple, tasks, parallel]
+  examples: [Aplique execute multiple tasks in neste contexto, Avalie usando execute multiple tasks in]
+tags: [batch, batches, batchexecutor, coderagent, completion, delegations, execute, managing, multiple, parallel]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique execute multiple tasks in neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "*": "deny"
-    "npx ts-node*task-cli*": "allow"
-    "bash .opencode/skills/task-management/router.sh*": "allow"
+    *: deny
+    npx ts-node*task-cli*: allow
+    bash .opencode/skills/task-management/router.sh*: allow
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    .git/**: deny
   task:
-    "*": "deny"
-    contextscout: "allow"
-    externalscout: "allow"
-    coderagent: "allow"
-    OpenFrontendSpecialist: "allow"
+    *: deny
+    contextscout: allow
+    externalscout: allow
+    coderagent: allow
+    OpenFrontendSpecialist: allow
 ---
 
 # BatchExecutor

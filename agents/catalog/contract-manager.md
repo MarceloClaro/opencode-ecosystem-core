@@ -1,31 +1,51 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: contract-manager
+description: Agente especializado contract-manager
+version: '1.0.0'
+skills:
+- id: contract-manager
+  name: Contract Manager
+  description: Executa tarefas especializadas de contract manager conforme protocolo SDD/TDD.
+  tags: [contract, manager]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [contract, manager]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: ContractManager
-description: API contract management specialist enabling parallel development through contract-first design with OpenAPI/Swagger support
+description: >-
+  API contract management specialist enabling parallel development through contract-first design with
+  OpenAPI/Swagger support
+version: '1.0.0'
+skills:
+- id: api-contract-management-specialist
+  name: Api contract management specialist enabling parallel development throu
+  description: >-
+    Capacidade especializada em api contract management specialist enabling parallel development through
+    contrac.
+  tags: [contract, management, specialist, enabling]
+  examples: [Aplique api contract management specialist neste contexto, Avalie usando api contract management specialist]
+tags: [contract, contract-first, contractmanager, design, development, enabling, management, openapi, parallel, specialist]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique api contract management specialist neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "*": "deny"
-    "mkdir -p .tmp/contracts*": "allow"
+    *: deny
+    mkdir -p .tmp/contracts*: allow
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    .git/**: deny
   task:
-    contextscout: "allow"
-    externalscout: "allow"
-    "*": "deny"
+    contextscout: allow
+    externalscout: allow
+    *: deny
   skill:
-    "*": "deny"
+    *: deny
 ---
 
 <context>

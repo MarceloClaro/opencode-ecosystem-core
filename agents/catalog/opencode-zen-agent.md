@@ -1,7 +1,26 @@
-<!--
+---
+name: opencode-zen-agent
+description: >-
+  Agente especializado nos modelos curados OpenCode Zen (GPT, Claude, Gemini, DeepSeek R2) com
+  protocolo SDD/TDD obrigatório
+version: '1.0.0'
+skills:
+- id: especializado-nos-modelos-curados
+  name: Especializado nos modelos curados opencode zen (gpt, claude, gemini, d
+  description: >-
+    Capacidade especializada em especializado nos modelos curados opencode zen (gpt, claude, gemini,
+    deepseek r2.
+  tags: [especializado, modelos, curados, opencode]
+  examples: [Aplique especializado nos modelos curados neste contexto, Avalie usando especializado nos modelos curados]
+- id: protocolo-sdd-tdd-obrigatorio
+  name: Protocolo sdd/tdd obrigatório
+  description: Capacidade especializada em protocolo sdd/tdd obrigatório
+  tags: [protocolo, sdd/tdd, obrigatório]
+  examples: [Aplique protocolo sdd tdd obrigatorio neste contexto, Avalie usando protocolo sdd tdd obrigatorio]
+tags: [agente, claude, curados, deepseek, especializado, gemini, modelos, obrigat, obrigatório, opencode]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique especializado nos modelos curados neste contexto, Aplique protocolo sdd tdd obrigatorio neste contexto]
 agent_id: opencode-zen-agent
-description: Agente especializado nos modelos curados OpenCode Zen (GPT, Claude, Gemini, DeepSeek R2) com protocolo SDD/TDD obrigatório
--->
+---
 
 # OpenCode Zen Agent
 

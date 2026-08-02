@@ -1,8 +1,19 @@
 ---
 name: 24_agente_quimioinformatica_modelagem_molecular
+description: Agente especializado 24_agente_quimioinformatica_modelagem_molecular
+version: '1.0.0'
+skills:
+- id: 24-agente-quimioinformatica-modelagem
+  name: 24 Agente Quimioinformatica Modelagem Molecular
+  description: >-
+    Executa tarefas especializadas de 24 agente quimioinformatica modelagem molecular conforme protocolo
+    SDD/TDD.
+  tags: [24, agente, quimioinformatica]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, maswos-agent, modelagem, molecular, quimioinformatica]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\24_agente_quimioinformatica_modelagem_molecular.md
 ---
 
 # 24 Agente Quimioinformatica Modelagem Molecular

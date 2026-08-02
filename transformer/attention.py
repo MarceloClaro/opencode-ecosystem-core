@@ -56,7 +56,16 @@ def _softmax(scores: List[float]) -> List[float]:
 
 
 class AttentionRouter:
-    """Ranqueia agentes elegíveis por quatro critérios normalizados."""
+    """Ranqueia agentes elegíveis por quatro critérios normalizados.
+
+    Melhoria R347 — Semantic Matching + Skill Handbook:
+      - A cabeça 'semantic' usa agora o SemanticMatcher (embeddings semânticos
+        via LiteRT-LM/Colibri com fallback hash) em vez de feature hashing puro.
+      - A cabeça 'confidence' usa o SkillHandbook (confiança per-skill) quando
+        disponível, em vez de confidence ledger genérico.
+      - Fallback automático para o comportamento legado se SemanticMatcher
+        não estiver disponível.
+    """
 
     _HEAD_NAMES = ("semantic", "capability", "confidence", "load")
     HEAD_WEIGHTS = {
@@ -69,6 +78,19 @@ class AttentionRouter:
     def __init__(self):
         self._head_weights = self._validated_weights(self.HEAD_WEIGHTS)
         self.embedder = TaskEmbedder()
+
+        # SemanticMatcher (Melhoria #2) — carregamento lazy
+        self._semantic_matcher = None
+
+    @property
+    def semantic_matcher(self):
+        if self._semantic_matcher is None:
+            try:
+                from transformer.semantic_matcher import semantic_matcher
+                self._semantic_matcher = semantic_matcher
+            except Exception:
+                self._semantic_matcher = False  # False = falhou
+        return self._semantic_matcher if self._semantic_matcher else None
 
     @classmethod
     def _validated_weights(cls, weights: Dict[str, float]) -> Dict[str, float]:
@@ -92,9 +114,46 @@ class AttentionRouter:
     # ------------------------------------------------------------------
     # Cabeças de atenção
     # ------------------------------------------------------------------
-    def _head_semantic(self, task_vec: List[float], cards: List[Dict]) -> List[float]:
-        """Similaridade semântica cosseno normalizada."""
+    def _head_semantic(self, task_vec: List[float], cards: List[Dict],
+                       description: str = "", required: Optional[List[str]] = None) -> List[float]:
+        """Similaridade semântica: SemanticMatcher > feature hashing legado.
 
+        Se o SemanticMatcher estiver disponível, usa matching semântico
+        por skills. Caso contrário, usa feature hashing (comportamento legado).
+        """
+        matcher = self.semantic_matcher
+
+        # Tenta matching semântico por skills primeiro
+        if matcher and description:
+            try:
+                # Busca no Handbook por skills que correspondem à descrição
+                matches = matcher.match_capabilities(
+                    task_description=description,
+                    required_capabilities=required or [],
+                    top_k=20,  # busca ampla
+                )
+                # Constrói score baseado nos matches
+                match_scores = {}
+                for m in matches:
+                    aid = m["agent_id"]
+                    if aid not in match_scores or m["score"] > match_scores[aid]:
+                        match_scores[aid] = m["score"]
+
+                result = []
+                for card in cards:
+                    agent_id = card.get("agent_id", "")
+                    if agent_id in match_scores:
+                        result.append(match_scores[agent_id])
+                    else:
+                        # Agente sem match semântico — usa legado como fallback
+                        result.append(
+                            _cosine_unit_interval(task_vec, self.embedder.embed_agent(card))
+                        )
+                return result
+            except Exception:
+                pass
+
+        # Fallback: feature hashing legado
         return [
             _cosine_unit_interval(task_vec, self.embedder.embed_agent(card))
             for card in cards
@@ -113,9 +172,42 @@ class AttentionRouter:
             scores.append(len(caps & required_set) / len(required_set))
         return scores
 
-    def _head_confidence(self, cards: List[Dict]) -> List[float]:
-        """Confiança metacognitiva histórica (confidence ledger)."""
+    def _head_confidence(self, cards: List[Dict],
+                         description: str = "") -> List[float]:
+        """Confiança: SkillHandbook per-skill > confidence ledger genérico.
 
+        Se o SemanticMatcher/SkillHandbook estiver disponível, usa a
+        confiança média das skills do agente que correspondem à tarefa.
+        Caso contrário, usa o confidence ledger (comportamento legado).
+        """
+        matcher = self.semantic_matcher
+
+        # Tenta confidence per-skill primeiro
+        if matcher and description:
+            try:
+                matches = matcher.match_capabilities(
+                    task_description=description,
+                    top_k=50,
+                )
+                # Constrói confidence score por agente baseado nas skills
+                agent_confidences: Dict[str, List[float]] = {}
+                for m in matches:
+                    aid = m["agent_id"]
+                    agent_confidences.setdefault(aid, []).append(m["confidence"])
+
+                result = []
+                for card in cards:
+                    agent_id = card.get("agent_id", "")
+                    if agent_id in agent_confidences:
+                        confs = agent_confidences[agent_id]
+                        result.append(sum(confs) / len(confs))  # média
+                    else:
+                        result.append(_unit_score(card.get("confidence_score", 0.5), 0.5))
+                return result
+            except Exception:
+                pass
+
+        # Fallback: confidence ledger genérico
         return [_unit_score(card.get("confidence_score", 0.5), 0.5) for card in cards]
 
     def _head_load(self, cards: List[Dict]) -> List[float]:
@@ -203,9 +295,9 @@ class AttentionRouter:
         # O índice global de tarefas não pode alterar uma decisão idêntica.
         task_vec = self.embedder.embed_task(description, required, positional_index=0)
         scores_by_head = {
-            "semantic": self._head_semantic(task_vec, eligible),
+            "semantic": self._head_semantic(task_vec, eligible, description, required),
             "capability": self._head_capability(required, eligible),
-            "confidence": self._head_confidence(eligible),
+            "confidence": self._head_confidence(eligible, description),
             "load": self._head_load(eligible),
         }
         heads = {

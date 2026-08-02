@@ -39,6 +39,8 @@ from scanners.social_impact_scanner import SocialImpactScanner
 from scanners.legal_impact_scanner import LegalImpactScanner
 from scanners.scientific_reasoning_scanner import ScientificReasoningScanner
 from scanners.successor_generator import SuccessorGenerator
+from scanners.literary_scanners import run_literary_scanner_suite
+from scanners.literary_research_scanners import run_literary_research_scanner_suite
 
 
 # Metas-padrão do ecossistema OpenCode Core (SPEC-022)
@@ -463,6 +465,10 @@ class DiagnosticPipeline:
             social_params: Optional[Dict[str, Any]] = None,
             include_legal_impact: bool = False,
             legal_params: Optional[Dict[str, Any]] = None,
+            include_literary: bool = False,
+            literary_params: Optional[Dict[str, Any]] = None,
+            include_literary_research: bool = False,
+            literary_research_params: Optional[Dict[str, Any]] = None,
             deep: bool = False) -> Dict[str, Any]:
         """Executa o pipeline completo de diagnóstico.
 
@@ -480,6 +486,12 @@ class DiagnosticPipeline:
             social_params: parâmetros para analyze_research_paper
             include_legal_impact: se True, roda o LegalImpactScanner
             legal_params: parâmetros para análise jurídica
+            include_literary: se True, roda os 8 scanners literários (também
+                habilitado automaticamente para domain="literary"/"literatura")
+            literary_params: metadados opcionais para a suíte literária
+            include_literary_research: se True, roda scanners de pesquisa literária
+                (também habilitado para domain="literary_research")
+            literary_research_params: metadados opcionais da pesquisa literária
             deep: se True, roda também o roadmap evolutivo completo
         """
         started = time.time()
@@ -629,6 +641,40 @@ class DiagnosticPipeline:
                 }
             except Exception as exc:
                 report["legal_impact"] = {"error": str(exc)}
+
+        # 4.6 Scanners literários (R267) — calibrados para ficção/estudo literário.
+        literary_domains = {"literary", "literatura", "fiction", "ficcao", "ficção", "editorial_literary"}
+        if include_literary or effective_domain in literary_domains:
+            t_lit = time.time()
+            try:
+                report["literary"] = run_literary_scanner_suite(
+                    effective_corpus,
+                    metadata={
+                        "domain": effective_domain,
+                        **(literary_params or {}),
+                    },
+                )
+                timings["literary"] = round(time.time() - t_lit, 3)
+            except Exception as exc:
+                report["literary"] = {"error": str(exc)}
+                timings["literary"] = round(time.time() - t_lit, 3)
+
+        # 4.7 Scanners de pesquisa literária internacional (R268)
+        literary_research_domains = {"literary_research", "pesquisa_literaria", "pesquisa_literária", "literary-scholarship"}
+        if include_literary_research or effective_domain in literary_research_domains:
+            t_lit_research = time.time()
+            try:
+                report["literary_research"] = run_literary_research_scanner_suite(
+                    effective_corpus,
+                    metadata={
+                        "domain": effective_domain,
+                        **(literary_research_params or {}),
+                    },
+                )
+                timings["literary_research"] = round(time.time() - t_lit_research, 3)
+            except Exception as exc:
+                report["literary_research"] = {"error": str(exc)}
+                timings["literary_research"] = round(time.time() - t_lit_research, 3)
 
         # 5. Síntese evolutiva (SPEC-022: gaps REALs = ausentes + teleo)
         teleo_gaps = len(report.get("teleological", {}).get("gaps", []))

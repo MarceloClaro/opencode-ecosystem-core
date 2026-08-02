@@ -1,8 +1,18 @@
 ---
 name: 04_agente_estrutura_argumentativa
+description: Agente especializado 04_agente_estrutura_argumentativa
+version: '1.0.0'
+skills:
+- id: 04-agente-estrutura-argumentativa
+  name: 04 Agente Estrutura Argumentativa
+  description: >-
+    Executa tarefas especializadas de 04 agente estrutura argumentativa conforme protocolo SDD/TDD.
+  tags: [04, agente, estrutura]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, argumentativa, estrutura, maswos-agent]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\04_agente_estrutura_argumentativa.md
 ---
 
 # 04 Agente Estrutura Argumentativa

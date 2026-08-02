@@ -1,43 +1,63 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: context-manager
+description: Agente especializado context-manager
+version: '1.0.0'
+skills:
+- id: context-manager
+  name: Context Manager
+  description: Executa tarefas especializadas de context manager conforme protocolo SDD/TDD.
+  tags: [context, manager]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [context, manager]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: ContextManager
-description: Context organization and lifecycle management specialist - discovers, catalogs, validates, and maintains project context structure with dependency tracking
+description: >-
+  Context organization and lifecycle management specialist - discovers, catalogs, validates, and
+  maintains project context structure with dependency tracking
+version: '1.0.0'
+skills:
+- id: context-organization-and-lifecycle
+  name: Context organization and lifecycle management specialist - discovers,
+  description: >-
+    Capacidade especializada em context organization and lifecycle management specialist - discovers,
+    catalogs, .
+  tags: [context, organization, lifecycle, management]
+  examples: [Aplique context organization and lifecycle neste contexto, Avalie usando context organization and lifecycle]
+tags: [catalogs, context, contextmanager, dependency, discovers, lifecycle, maintains, management, organization, project]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique context organization and lifecycle neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   read:
-    "*": "allow"
+    *: allow
   grep:
-    "*": "allow"
+    *: allow
   glob:
-    "*": "allow"
+    *: allow
   bash:
-    "find .opencode/context*": "allow"
-    "ls -la .opencode/context*": "allow"
-    "mkdir -p .opencode/context*": "allow"
-    "mv .opencode/context*": "allow"
-    "*": "deny"
+    find .opencode/context*: allow
+    ls -la .opencode/context*: allow
+    mkdir -p .opencode/context*: allow
+    mv .opencode/context*: allow
+    *: deny
   edit:
-    ".opencode/context/**/*.md": "allow"
-    ".opencode/context/**/*.json": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
+    .opencode/context/**/*.md: allow
+    .opencode/context/**/*.json: allow
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
   write:
-    ".opencode/context/**/*.md": "allow"
-    ".opencode/context/**/*.json": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
+    .opencode/context/**/*.md: allow
+    .opencode/context/**/*.json: allow
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
   task:
-    "*": "deny"
-    "contextscout": "allow"
+    *: deny
+    contextscout: allow
 ---
 
 # ContextManager

@@ -1,20 +1,28 @@
 ---
 name: reversa-config-generator
-description: >
-  Subagente especializado em geracao de configuracoes complexas usando LLM
-  em multiplas etapas com fallback heuristico. Conhece o padrao P13
-  (Step-by-step LLM Config Generator) e suas 4 etapas: tempo, eventos,
-  agentes em lote e plataforma.
-model: opencode/deepseek-v4-pro
+description: >-
+  Subagente especializado em geracao de configuracoes complexas usando LLM em multiplas etapas com
+  fallback heuristico. Conhece o padrao P13 (Step-by-step LLM Config Generator) e suas 4 etapas:
+  tempo, eventos, agentes em lote e plataforma.
+version: '1.0.0'
 skills:
-  - config-generator
-  - python-pro
-  - debugging-and-error-recovery
-metadata:
-  version: "1.0.0"
-  domain: simulation
-  pattern: P13
-  inspired-by: MiroFish-Offline SimulationConfigGenerator
+- id: subagente-especializado-geracao-configuracoes
+  name: Subagente especializado em geracao de configuracoes complexas usando l
+  description: >-
+    Capacidade especializada em subagente especializado em geracao de configuracoes complexas usando llm
+    em mult.
+  tags: [subagente, especializado, geracao, configuracoes]
+  examples: [Aplique subagente especializado geracao configuracoes neste contexto, Avalie usando subagente especializado geracao configuracoes]
+- id: conhece-padrao-p13-step
+  name: Conhece o padrao p13 (step-by-step llm config generator) e suas 4 etap
+  description: >-
+    Capacidade especializada em conhece o padrao p13 (step-by-step llm config generator) e suas 4
+    etapas: tempo.
+  tags: [conhece, padrao, step-by-step, config]
+  examples: [Aplique conhece padrao p13 step neste contexto, Avalie usando conhece padrao p13 step]
+tags: [agentes, complexas, config, configuracoes, conhece, especializado, etapas, eventos, fallback, generator]
+examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique subagente especializado geracao configuracoes neste contexto, Aplique conhece padrao p13 step neste contexto]
+model: opencode/deepseek-v4-pro
 ---
 
 # Reversa Config Generator

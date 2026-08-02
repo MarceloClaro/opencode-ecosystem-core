@@ -1,34 +1,50 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: story-mapper
+description: Agente especializado story-mapper
+version: '1.0.0'
+skills:
+- id: story-mapper
+  name: Story Mapper
+  description: Executa tarefas especializadas de story mapper conforme protocolo SDD/TDD.
+  tags: [story, mapper]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [mapper, story]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
-# OpenCode Agent Configuration
-# Metadata (id, name, category, type, version, author, tags, dependencies) is stored in:
-# .opencode/config/agent-metadata.json
-
 name: StoryMapper
-description: "User journey mapping specialist transforming user needs into epics, stories, and vertical slices with bounded context alignment"
+description: >-
+  User journey mapping specialist transforming user needs into epics, stories, and vertical slices
+  with bounded context alignment
+version: '1.0.0'
+skills:
+- id: user-journey-mapping-specialist
+  name: User journey mapping specialist transforming user needs into epics, st
+  description: >-
+    Capacidade especializada em user journey mapping specialist transforming user needs into epics,
+    stories, and.
+  tags: [user, journey, mapping, specialist]
+  examples: [Aplique user journey mapping specialist neste contexto, Avalie usando user journey mapping specialist]
+tags: [alignment, bounded, context, epics, into, journey, mapping, needs, slices, specialist]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique user journey mapping specialist neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "*": "deny"
+    *: deny
   edit:
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
+    **/*.env*: deny
+    **/*.key: deny
+    **/*.secret: deny
+    node_modules/**: deny
+    .git/**: deny
   task:
-    contextscout: "allow"
-    externalscout: "allow"
-    "*": "deny"
+    contextscout: allow
+    externalscout: allow
+    *: deny
   skill:
-    "*": "deny"
+    *: deny
 ---
 
 # StoryMapper

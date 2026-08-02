@@ -1,3 +1,17 @@
+---
+name: pdf2latex-agent
+description: Agente especializado pdf2latex-agent
+version: '1.0.0'
+skills:
+- id: pdf2latex
+  name: Pdf2Latex
+  description: Executa tarefas especializadas de pdf2latex conforme protocolo SDD/TDD.
+  tags: [pdf2latex]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [pdf2latex]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
+
 # pdf2latex-agent — Agente de Conversão PDF → LaTeX
 
 **Parte do OpenCode Ecosystem Core**

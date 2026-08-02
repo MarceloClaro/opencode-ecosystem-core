@@ -1,8 +1,19 @@
 ---
 name: 20_agente_estatistica_avancada_inferencia
+description: Agente especializado 20_agente_estatistica_avancada_inferencia
+version: '1.0.0'
+skills:
+- id: 20-agente-estatistica-avancada
+  name: 20 Agente Estatistica Avancada Inferencia
+  description: >-
+    Executa tarefas especializadas de 20 agente estatistica avancada inferencia conforme protocolo
+    SDD/TDD.
+  tags: [20, agente, estatistica]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, avancada, estatistica, inferencia, maswos-agent]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\20_agente_estatistica_avancada_inferencia.md
 ---
 
 # 20 Agente Estatistica Avancada Inferencia

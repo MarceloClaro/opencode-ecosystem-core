@@ -1,24 +1,40 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: reviewer
+description: Agente especializado reviewer
+version: '1.0.0'
+skills:
+- id: reviewer
+  name: Reviewer
+  description: Executa tarefas especializadas de reviewer conforme protocolo SDD/TDD.
+  tags: [reviewer]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [reviewer]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: CodeReviewer
 description: Code review, security, and quality assurance agent
+version: '1.0.0'
+skills:
+- id: code-review-security-and
+  name: Code review, security, and quality assurance agent
+  description: Capacidade especializada em code review, security, and quality assurance agent
+  tags: [code, review, security, quality]
+  examples: [Aplique code review security and neste contexto, Avalie usando code review security and]
+tags: [agent, assurance, code, codereviewer, quality, review, security]
+examples: [Revise este código para segurança e performance, Implemente a funcionalidade descrita na spec, Aplique code review security and neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "*": "deny"
+    *: deny
   edit:
-    "**/*": "deny"
+    **/*: deny
   write:
-    "**/*": "deny"
+    **/*: deny
   task:
-    contextscout: "allow"
+    contextscout: allow
 ---
 
 # CodeReviewer

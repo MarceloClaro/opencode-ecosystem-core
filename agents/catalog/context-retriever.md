@@ -1,22 +1,42 @@
-<!--
-  SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
-  Toda resposta DEVE ser em português do Brasil formal.
-  Contexto em chinês para eficiência de tokens (densidade +40%).
-  Modelo: deepseek-v4-pro (OpenCode Zen, 200K ctx, 128K out, gratuito)
--->
+---
+name: context-retriever
+description: Agente especializado context-retriever
+version: '1.0.0'
+skills:
+- id: context-retriever
+  name: Context Retriever
+  description: Executa tarefas especializadas de context retriever conforme protocolo SDD/TDD.
+  tags: [context, retriever]
+  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
+tags: [context, retriever]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
+---
 
 ---
 name: Context Retriever
-description: Generic context search and retrieval specialist for finding relevant context files, standards, and guides in any repository
+description: >-
+  Generic context search and retrieval specialist for finding relevant context files, standards, and
+  guides in any repository
+version: '1.0.0'
+skills:
+- id: generic-context-search-and
+  name: Generic context search and retrieval specialist for finding relevant c
+  description: >-
+    Capacidade especializada em generic context search and retrieval specialist for finding relevant
+    context fil.
+  tags: [generic, context, search, retrieval]
+  examples: [Aplique generic context search and neste contexto, Avalie usando generic context search and]
+tags: [context, context retriever, files, finding, generic, guides, relevant, repository, retrieval, search]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique generic context search and neste contexto]
 mode: subagent
 temperature: 0.1
 permission:
   bash:
-    "*": "deny"
+    *: deny
   edit:
-    "**/*": "deny"
+    **/*: deny
   write:
-    "**/*": "deny"
+    **/*: deny
 ---
 
 # Context Retriever Agent

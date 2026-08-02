@@ -1,8 +1,18 @@
 ---
 name: 09_agente_resultados
+description: Agente especializado 09_agente_resultados
+version: '1.0.0'
+skills:
+- id: 09-agente-resultados
+  name: 09 Agente Resultados
+  description: >-
+    Executa tarefas especializadas de 09 agente resultados conforme protocolo SDD/TDD.
+  tags: [09, agente, resultados]
+  examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema]
+tags: [academic, agente, maswos-agent, resultados]
+examples: [Execute o pipeline MASWOS para este tópico, Pesquise literatura acadêmica sobre este tema, Execute o pipeline MASWOS para este tópico]
 type: maswos-agent
 category: academic
-location: criador-artigo\agents\09_agente_resultados.md
 ---
 
 # 09 Agente Resultados

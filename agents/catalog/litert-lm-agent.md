@@ -1,17 +1,52 @@
 ---
 name: litert-lm-agent
+description: Agente especializado litert-lm-agent
+version: '1.0.0'
+skills:
+- id: litert-lm-list
+  name: Litert Lm:List
+  description: Capacidade especializada em litert lm:list.
+  tags: [litert, litert-lm-list]
+  examples: [Aplique litert lm list, Execute operação de litert lm list]
+- id: litert-lm-run
+  name: Litert Lm:Run
+  description: Capacidade especializada em litert lm:run.
+  tags: [litert, litert-lm-run]
+  examples: [Aplique litert lm run, Execute operação de litert lm run]
+- id: litert-lm-chat
+  name: Litert Lm:Chat
+  description: Capacidade especializada em litert lm:chat.
+  tags: [litert, litert-lm-chat]
+  examples: [Aplique litert lm chat, Execute operação de litert lm chat]
+- id: litert-lm-import
+  name: Litert Lm:Import
+  description: Capacidade especializada em litert lm:import.
+  tags: [litert, litert-lm-import]
+  examples: [Aplique litert lm import, Execute operação de litert lm import]
+- id: litert-lm-serve
+  name: Litert Lm:Serve
+  description: Capacidade especializada em litert lm:serve.
+  tags: [litert, litert-lm-serve]
+  examples: [Aplique litert lm serve, Execute operação de litert lm serve]
+- id: litert-lm-info
+  name: Litert Lm:Info
+  description: Capacidade especializada em litert lm:info.
+  tags: [litert, litert-lm-info]
+  examples: [Aplique litert lm info, Execute operação de litert lm info]
+- id: litert-lm-delete
+  name: Litert Lm:Delete
+  description: Capacidade especializada em litert lm:delete.
+  tags: [litert, litert-lm-delete]
+  examples: [Aplique litert lm delete, Execute operação de litert lm delete]
+- id: inference-on-device
+  name: Inference On Device
+  description: Capacidade especializada em inference on device.
+  tags: [inference, inference-on-device]
+  examples: [Aplique inference on device, Execute operação de inference on device]
+tags: [engineering, inference, inference-on-device, litert, litert-lm-chat, litert-lm-delete, litert-lm-import, litert-lm-info, litert-lm-list, litert-lm-run]
+examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Aplique litert lm list, Aplique litert lm run]
 type: specialist
 category: engineering
-capabilities:
-  - litert-lm:list
-  - litert-lm:run
-  - litert-lm:chat
-  - litert-lm:import
-  - litert-lm:serve
-  - litert-lm:info
-  - litert-lm:delete
-  - inference-on-device
-  - llm-on-device
 ---
 
 # litert-lm-agent
