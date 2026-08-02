@@ -5,7 +5,26 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **auditoria ABNT + 53 referências do manuscrito USP** (2026-08-02, sem novo ciclo R — trabalho de conteúdo, não de código)
+- **Branch:** `main` · última entrega: **diagramas Mermaid do README com cores reais** (2026-08-02)
+- **Suíte completa pós-sync (2026-08-02, 5h05m):** 61 falhas, 2387 aprovados, 53
+  pulados. **Zero regressão dos ciclos R363-R373** (206 testes próprios rodados
+  isolados = 100% verde). As 61 falhas são pré-existentes, expostas pela
+  primeira vez porque esta foi a 1ª suíte completa desde o commit `47821bb`
+  (sync de 309 arquivos de outras frentes: literária, KDP, Molambudos).
+  Diagnosticadas 4 amostras para confirmar o padrão antes de concluir:
+  `test_r213_notebook.py` (notebook com célula sem import, de R219, não-meu),
+  `test_auxjuris_integration.py` (mesmo bug já isolado por bisseção no R363),
+  `test_r262_kdp_agents.py` (cards KDP do sync, nunca testados),
+  `test_deep_diagnose.py` (`NameError: EpistemicPrioritizer` num scanner).
+  Lista completa dos 28 arquivos afetados no log de
+  `/tmp/.../tasks/bfh1lg1hd.output` (efêmero — recapturar rodando a suíte de
+  novo se precisar). **Pendência para quem pegar a frente literária/KDP/
+  Molambudos**: essas ~61 falhas precisam de triagem própria; não são bloqueio
+  para o trabalho de infraestrutura (R363-R373) que está fechado e testado.
+- **Diagramas Mermaid (2026-08-02):** paleta de 7 cores real (classDef/class)
+  nos diagramas 1/2/4, blocos `rect` RED/GREEN no diagrama 3 (sequência),
+  validados renderizando de verdade com `@mermaid-js/mermaid-cli` (zero erro
+  de sintaxe). Números obsoletos corrigidos (33→66+ SPECs, 65→190+ ciclos).
 - **Auditoria de referências (2026-08-02):** manuscrito reformatado para ABNT
   NBR 6023:2018/10520 (citação autor-data no corpo, lista alfabética). As 53
   referências verificadas individualmente via WebFetch/busca: 19 ativas
