@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R364
 title: TerminologyGraphAgent — grafo terminológico trilíngue
 component: translation/terminology_graph.py + agents/catalog/terminology-graph-agent.md
-status: draft
+status: verified
 test_file: tests/test_r364_terminology_graph.py
 ---
 

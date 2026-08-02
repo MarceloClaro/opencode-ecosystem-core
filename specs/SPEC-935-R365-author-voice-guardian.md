@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R365
 title: AuthorVoiceGuardian — guarda de voz autoral em tradução
 component: translation/author_voice.py + agents/catalog/author-voice-guardian.md
-status: draft
+status: verified
 test_file: tests/test_r365_author_voice_guardian.py
 ---
 

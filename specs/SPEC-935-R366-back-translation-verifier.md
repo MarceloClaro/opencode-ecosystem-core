@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R366
 title: BackTranslationVerifier — verificação determinística de retrotradução
 component: translation/back_translation.py + agents/catalog/back-translation-verifier.md
-status: draft
+status: verified
 test_file: tests/test_r366_back_translation_verifier.py
 ---
 

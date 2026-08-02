@@ -1,0 +1,269 @@
+{
+  "cases": [
+    {
+      "case_id": "T1-forbidden-translation",
+      "expected": [
+        "TERM_CONFLICT"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "terminology",
+      "predicted": [
+        "TERM_CONFLICT"
+      ]
+    },
+    {
+      "case_id": "T2-preserve-missing",
+      "expected": [
+        "TERM_CONFLICT"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "terminology",
+      "predicted": [
+        "TERM_CONFLICT"
+      ]
+    },
+    {
+      "case_id": "T3-symbol-drift",
+      "expected": [
+        "SYMBOL_DRIFT"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "terminology",
+      "predicted": [
+        "SYMBOL_DRIFT"
+      ]
+    },
+    {
+      "case_id": "T4-clean-consistent",
+      "expected": [],
+      "known_limitation": false,
+      "match": true,
+      "module": "terminology",
+      "predicted": []
+    },
+    {
+      "case_id": "T5-inflected-plural-miss",
+      "expected": [
+        "TERM_CONFLICT"
+      ],
+      "known_limitation": true,
+      "match": false,
+      "module": "terminology",
+      "predicted": []
+    },
+    {
+      "case_id": "T6-no-terms-negative",
+      "expected": [],
+      "known_limitation": false,
+      "match": true,
+      "module": "terminology",
+      "predicted": []
+    },
+    {
+      "case_id": "V1-preserve-erased",
+      "expected": [
+        "VOICE_SHIFT"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "voice",
+      "predicted": [
+        "VOICE_SHIFT"
+      ]
+    },
+    {
+      "case_id": "V2-forbidden-modernism",
+      "expected": [
+        "ANACHRONISM"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "voice",
+      "predicted": [
+        "ANACHRONISM"
+      ]
+    },
+    {
+      "case_id": "V3-pragmatic-flattening",
+      "expected": [
+        "REGISTER_SHIFT"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "voice",
+      "predicted": [
+        "REGISTER_SHIFT"
+      ]
+    },
+    {
+      "case_id": "V4-faithful-segment",
+      "expected": [],
+      "known_limitation": false,
+      "match": true,
+      "module": "voice",
+      "predicted": []
+    },
+    {
+      "case_id": "V5-adapt-unapproved",
+      "expected": [
+        "VOICE_SHIFT"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "voice",
+      "predicted": [
+        "VOICE_SHIFT"
+      ]
+    },
+    {
+      "case_id": "V6-colloquial-intensity-miss",
+      "expected": [
+        "VOICE_SHIFT"
+      ],
+      "known_limitation": true,
+      "match": false,
+      "module": "voice",
+      "predicted": []
+    },
+    {
+      "case_id": "B1-number-lost",
+      "expected": [
+        "CULTURAL_LOSS"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "backtranslation",
+      "predicted": [
+        "CULTURAL_LOSS"
+      ]
+    },
+    {
+      "case_id": "B2-entity-lost",
+      "expected": [
+        "CULTURAL_LOSS"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "backtranslation",
+      "predicted": [
+        "CULTURAL_LOSS"
+      ]
+    },
+    {
+      "case_id": "B3-negation-flip",
+      "expected": [
+        "PRAGMATIC_FAILURE"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "backtranslation",
+      "predicted": [
+        "PRAGMATIC_FAILURE"
+      ]
+    },
+    {
+      "case_id": "B4-pragmatic-marks",
+      "expected": [
+        "PRAGMATIC_FAILURE"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "backtranslation",
+      "predicted": [
+        "PRAGMATIC_FAILURE"
+      ]
+    },
+    {
+      "case_id": "B5-preserved-term-lost",
+      "expected": [
+        "TERM_CONFLICT"
+      ],
+      "known_limitation": false,
+      "match": true,
+      "module": "backtranslation",
+      "predicted": [
+        "TERM_CONFLICT"
+      ]
+    },
+    {
+      "case_id": "B6-clean-cycle",
+      "expected": [],
+      "known_limitation": false,
+      "match": true,
+      "module": "backtranslation",
+      "predicted": []
+    }
+  ],
+  "claim": "internal-fixture-benchmark",
+  "corpus_size": 18,
+  "disclaimer": "Números medidos em corpus interno rotulado, pequeno e construído pela própria equipe; NÃO constituem validação externa, benchmark independente nem promessa de desempenho em obras reais. Servem para acompanhar a evolução das regras e documentar limitações conhecidas.",
+  "generated_at": "2026-08-02T09:26:03.084101+00:00",
+  "measured": true,
+  "micro": {
+    "precision": 1.0,
+    "recall": 0.8571428571428571
+  },
+  "per_code": {
+    "ANACHRONISM": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 1
+    },
+    "CULTURAL_LOSS": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 2
+    },
+    "PRAGMATIC_FAILURE": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 2
+    },
+    "REGISTER_SHIFT": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 1
+    },
+    "SYMBOL_DRIFT": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 1
+    },
+    "TERM_CONFLICT": {
+      "f1": 0.8571428571428571,
+      "fn": 1,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 0.75,
+      "tp": 3
+    },
+    "VOICE_SHIFT": {
+      "f1": 0.8,
+      "fn": 1,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "tp": 2
+    }
+  },
+  "schema_version": "1.0.0",
+  "spec": "SPEC-935-R367"
+}
