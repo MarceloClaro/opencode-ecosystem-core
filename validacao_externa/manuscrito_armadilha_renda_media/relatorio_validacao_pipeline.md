@@ -199,3 +199,70 @@ qualquer decisão final, como declarado em cada disclaimer.
 **Testes:** 6 arquivos de teste novos/atualizados (R369 fix + R373),
 50 testes TDD entre os dois, 194 testes de regressão verdes, 2501 testes
 coletados sem erro em toda a suíte do repositório.
+
+## 6. Auditoria de rigor ABNT e validação das 53 referências (2026-08-02)
+
+A pedido do autor, o manuscrito foi elevado ao padrão de formatação e
+rigor de citação exigido por periódicos Qualis A1: citações no corpo
+convertidas de `[n]` para o sistema autor-data (ABNT NBR 10520), lista de
+referências reformatada em ABNT NBR 6023:2018 (ordem alfabética,
+"Disponível em"/"Acesso em" para fontes web), e **cada uma das 53
+referências originais verificada individualmente** via `WebFetch`/busca
+nesta sessão.
+
+**Resultado da verificação:**
+
+| Situação | Quantidade |
+|---|---|
+| Confirmadas ativas sem alteração | 19 |
+| Corrigidas (link morto, redirecionado, ou URL genérica trocada por específica) | 20 |
+| Não verificáveis por automação (bloqueio anti-bot em domínios grandes — IBGE, Gartner, IMF, ONU) | 12 |
+| Monografias sem URL/DOI (citação padrão, sem necessidade de link) | 2 |
+
+**Erros factuais reais corrigidos** (não apenas links — dados da própria
+citação estavam errados):
+
+1. **DOI incorreto** — Gakidou et al. (2010): o DOI original
+   (`10.1016/S0140-6736(10)61235-3`) resultava em erro 404. O DOI correto
+   (`...61257-3`) foi confirmado por busca cruzada.
+2. **Ano de publicação incorreto** — Banco Mundial "Um Ajuste Justo":
+   citado como 2021; o relatório foi lançado em novembro de 2017
+   (confirmado por três fontes independentes: Banco Mundial, Agência
+   Brasil, ONU Brasil).
+3. **Ano de publicação incorreto** — Veloso et al., "Armadilha da Renda
+   Média": citado como 2020; a obra (2 volumes, FGV/IBRE) foi publicada em
+   2013.
+4. **Ano provavelmente incorreto** — UNESCO, Global Education Monitoring
+   Report sobre tecnologia na educação: citado como edição 2025; a edição
+   com esse foco temático específico localizada foi a de 2023. Não foi
+   encontrada uma edição 2025 com o mesmo tema — mantida com ressalva para
+   confirmação humana.
+5. **Referência genérica demais para citação real** — "Nature Index,
+   2024" apontava para uma página institucional bloqueada por
+   autenticação, sem conteúdo específico verificável. Substituída por um
+   preprint aberto e citável (arXiv:2404.01268) sobre o mesmo achado (uso
+   crescente de LLMs em artigos científicos).
+
+**Transparência sobre os limites desta auditoria:** "Qualis A1" é uma
+classificação atribuída pela CAPES ao periódico/veículo, não ao
+manuscrito isoladamente — nenhum documento "é" Qualis A1 por si só; isso
+só se define na submissão a um periódico já classificado. O que esta
+auditoria garante é rigor de formatação ABNT e validação real (não
+alegada) de cada referência, com toda incerteza remanescente marcada
+explicitamente no próprio manuscrito (`[não verificável por automação]`),
+nunca silenciada. As 12 referências não verificáveis e a referência de
+Menezes-Filho/Kirschbaum (edição exata incerta) devem ser confirmadas
+manualmente em navegador antes da submissão final.
+
+**Achado adicional sobre o próprio pipeline:** durante a reformatação,
+uma nova instância do falso positivo corrigido no R369 (SPEC-935-R373)
+apareceu: a frase "um `n` foi inferido para a primeira a partir de..."
+disparou `UNSUPPORTED_NOVELTY_CLAIM` porque a frase de prioridade
+"a primeira a" (adicionada para pegar alegações genuínas como "a primeira
+a demonstrar") também casa com usos ordinais comuns ("a primeira, a
+partir de..."). Corrigido nesta sessão por reformulação da frase do
+manuscrito (nomeando "GDP×PISA" em vez de "a primeira"); o léxico do
+detector em `reasoning/production_scaffolds.py` permanece com essa
+ambiguidade residual — candidato a um refinamento futuro (exigir verbo de
+alegação logo após a frase, ex.: "a primeira a demonstrar/mostrar/propor")
+caso o padrão recorra em textos futuros.

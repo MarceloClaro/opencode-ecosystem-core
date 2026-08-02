@@ -5,7 +5,25 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R373** (validação fim-a-fim com manuscrito real + fixes)
+- **Branch:** `main` · última entrega: **auditoria ABNT + 53 referências do manuscrito USP** (2026-08-02, sem novo ciclo R — trabalho de conteúdo, não de código)
+- **Auditoria de referências (2026-08-02):** manuscrito reformatado para ABNT
+  NBR 6023:2018/10520 (citação autor-data no corpo, lista alfabética). As 53
+  referências verificadas individualmente via WebFetch/busca: 19 ativas
+  sem alteração, 20 corrigidas (link morto/redirecionado/genérico demais),
+  12 não verificáveis por bloqueio anti-bot (IBGE/Gartner/IMF/ONU — não
+  necessariamente mortas), 2 monografias sem URL. **Erros factuais reais
+  corrigidos**: DOI errado (Gakidou), 2 anos de publicação errados (Banco
+  Mundial "Um Ajuste Justo" 2021→2017; Veloso FGV/IBRE 2020→2013), 1
+  referência trocada por ser genérica demais (Nature Index → arXiv
+  2404.01268). Relatório completo:
+  `validacao_externa/manuscrito_armadilha_renda_media/relatorio_validacao_pipeline.md`
+  (seção 6). DOCX/PDF recompilados (14 páginas). Nota honesta preservada:
+  "Qualis A1" é classificação do periódico, não do manuscrito — não
+  certificável por software.
+  **Achado residual não corrigido no código**: o léxico de novidade do R369
+  (`_NOVELTY_PRIORITY_PHRASES`) ainda tem ambiguidade em "a primeira a"
+  (ordinal vs. alegação de prioridade) — candidato a refinamento futuro
+  (exigir verbo logo após a frase).
 - **R373 (2026-08-02):** validação real (não sintética) dos gates R369-R372 sobre
   manuscrito USP construído a partir de dossiê existente (53 refs, 7 correlações
   reais) — `academic/papers/manuscrito_educacao_armadilha_renda_media_usp.md`.
