@@ -3228,6 +3228,21 @@
         "Gate fail-closed com razões nominais (termo e motivo) torna o bloqueio auditável no dossiê editorial"
       ],
       "timestamp": "2026-08-02T09:17:26.437145+00:00"
+    },
+    {
+      "round_id": "R365",
+      "objective": "SPEC-935-R365 — AuthorVoiceGuardian: guarda de voz autoral referenciada no plano OpenCode Books Global e até então apenas interface externa no R359",
+      "changes": [
+        "translation/author_voice.py: contrato de perfil de voz (marcadores preserve/gloss/adapt, modernismos proibidos, proveniência) com validação fail-closed",
+        "review_segment detecta VOICE_SHIFT (3 padrões), ANACHRONISM e REGISTER_SHIFT pragmático com números observados; human_gate=required para severidade alta",
+        "agents/catalog/author-voice-guardian.md com episteme hermeneutico_interpretativo",
+        "tests/test_r365_author_voice_guardian.py: 17 testes TDD (contrato, 5 padrões de achado, fail-closed, determinismo, card)"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Estratégias explícitas por marcador (preserve/gloss/adapt com renderings aprovados) transformam 'preservar a voz' de promessa vaga em regra verificável"
+      ],
+      "timestamp": "2026-08-02T09:19:50.240491+00:00"
     }
   ]
 }
