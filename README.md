@@ -322,6 +322,19 @@ flowchart TD
     Auditoria -->|Aprovado| Output([📄 Manuscrito Certificado + Decks MIRA + Certificado SHA-256])
     Auditoria -->|Refinamento Necessário| LoopRefine[🔄 Autocorreção RED-GREEN]
     LoopRefine --> Orquestrador
+
+    classDef blueNode fill:#cfe2ff,stroke:#3b6fb6,stroke-width:1.5px,color:#0d2b4e
+    classDef greenNode fill:#d4edda,stroke:#3c8f5c,stroke-width:1.5px,color:#0f3d24
+    classDef orangeNode fill:#ffe5cc,stroke:#d17a22,stroke-width:1.5px,color:#5c3400
+    classDef redNode fill:#f8d7da,stroke:#c0392b,stroke-width:1.5px,color:#5c1010
+    classDef purpleNode fill:#e6d9f5,stroke:#7d3c98,stroke-width:1.5px,color:#3a1a54
+    classDef grayNode fill:#e2e3e5,stroke:#6c757d,stroke-width:1.5px,color:#2b2e33
+    classDef tealNode fill:#d1f2eb,stroke:#0e8074,stroke-width:1.5px,color:#053b35
+    class User,Orquestrador blueNode
+    class Research,EvoSci,Composer,Mira greenNode
+    class Auditoria redNode
+    class Output greenNode
+    class LoopRefine orangeNode
 ```
 
 #### 2. Arquitetura Técnica Multilateral Completa (Para Desenvolvedores & Engenheiros de IA)
@@ -365,7 +378,7 @@ graph TD
 
     %% Governança SDD, TDD e Selagem Criptográfica
     subgraph Governance [Governança, Selagem & Autocorreção]
-        SpecReg[SpecRegistry<br>33 SPECs Formais]
+        SpecReg[SpecRegistry<br>66+ SPECs Formais]
         SpecVer[SpecVerifier<br>Portões SDD]
         SelfCorr[SelfCorrectionEngine<br>Diagnóstico RED-GREEN]
         SuperRigor[SuperRigorPipeline<br>8 Scanners Epistemológicos]
@@ -382,6 +395,17 @@ graph TD
 
     %% Saída Certificada
     AuditCert --> CertOutput([🚀 Produção Certificada com Assinatura SHA-256])
+
+    classDef blueNode fill:#cfe2ff,stroke:#3b6fb6,stroke-width:1.5px,color:#0d2b4e
+    classDef greenNode fill:#d4edda,stroke:#3c8f5c,stroke-width:1.5px,color:#0f3d24
+    classDef orangeNode fill:#ffe5cc,stroke:#d17a22,stroke-width:1.5px,color:#5c3400
+    classDef redNode fill:#f8d7da,stroke:#c0392b,stroke-width:1.5px,color:#5c1010
+    classDef purpleNode fill:#e6d9f5,stroke:#7d3c98,stroke-width:1.5px,color:#3a1a54
+    class OpenCodeCLI,ClaudeCLI,AntigravityCLI,Bridge,Orchestrator blueNode
+    class mcp1,mcp2,mcp3,mcp4,mcp5,mcp6 purpleNode
+    class ColibriEngine,LiteRTEngine orangeNode
+    class SpecReg,SpecVer,SelfCorr,SuperRigor,Merkle,AuditCert redNode
+    class CertOutput greenNode
 ```
 
 #### 3. Ciclo de Vida SDD / TDD & Autocorreção RED-GREEN
@@ -400,13 +424,17 @@ sequenceDiagram
     Dev->>Code: 2. Implementa Módulo ou Agente
     Dev->>Test: 3. Executa Suíte de Testes TDD
     alt Testes Passaram (GREEN)
+        rect rgb(212, 237, 218)
         Test-->>Audit: 4. Emite Certificado SHA-256 & Calcula Merkle Root
         Audit-->>Dev: 5. Concluído e Registrado em evolution/cycles.json
+        end
     else Testes Falharam (RED)
+        rect rgb(248, 215, 218)
         Test-->>SelfCorr: 4. Dispara Diagnóstico de Falha
         SelfCorr->>Code: 5. Aplica Correção de Código em Circuito Fechado
         SelfCorr->>Test: 6. Reexecuta Suíte de Testes
         Test-->>Audit: 7. Validação Concluída com Sucesso (GREEN)
+        end
     end
 ```
 
@@ -644,6 +672,32 @@ graph TD
     MCP_Node[MCP JSON-RPC] -->|Expõe API| MCI
     External[External Tools / LLMs] -->|stdio ou HTTP| MCPServer
     External -->|HTTP REST| APIGateway
+
+    %% ═══ Paleta de cores (bate com a Legenda de Cores abaixo) ═══
+    classDef blueNode fill:#cfe2ff,stroke:#3b6fb6,stroke-width:1.5px,color:#0d2b4e
+    classDef greenNode fill:#d4edda,stroke:#3c8f5c,stroke-width:1.5px,color:#0f3d24
+    classDef orangeNode fill:#ffe5cc,stroke:#d17a22,stroke-width:1.5px,color:#5c3400
+    classDef redNode fill:#f8d7da,stroke:#c0392b,stroke-width:1.5px,color:#5c1010
+    classDef purpleNode fill:#e6d9f5,stroke:#7d3c98,stroke-width:1.5px,color:#3a1a54
+    classDef grayNode fill:#e2e3e5,stroke:#6c757d,stroke-width:1.5px,color:#2b2e33
+    classDef tealNode fill:#d1f2eb,stroke:#0e8074,stroke-width:1.5px,color:#053b35
+
+    %% Azul — Orquestração e controle
+    class User,WebUI,Orchestrator,Spec,Ver,TDD,Attn,Pipe,HTM,Emb blueNode
+    %% Verde — Pipeline acadêmico (a cadeia de valor R101→R105)
+    class EvoSci,DeepRes,PReview,Revision,Composer greenNode
+    %% Laranja — Subsistemas de suporte (engines, RAG, memória, benchmark, catálogo)
+    class Router,Class,Whoosh,Game,Jinja,DataHub,Valid,Metrics,DocMetrics,HTTP orangeNode
+    class Trust,Eco,Scan,AcadLegacy,Reason,Legal,LegalBench,SynthUniv,RAG,Bench,MetaEval,Discovery,EvoMem,Novelty,RAGEvolved,ResearchHub,MiraDeck,MiraAgent orangeNode
+    class A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11 orangeNode
+    %% Vermelho — Segurança e qualidade
+    class MCPSec,CICD,Skills,PipPkg redNode
+    %% Roxo — Protocolos de integração
+    class MCPServer,APIGateway,MCP_Sci,MCP_Deep,MCP_Review2,MCP_Revision,MCP_Composer,MCP_Novelty2,MCP_Sec,MCP_Classic,MCP_Node,External purpleNode
+    %% Cinza — Metacognição (barramento neural, memória, reflexão)
+    class MB,BB,Mem,Ref grayNode
+    %% Teal — Camada Epistêmica & Guardas Culturais (R363-R373, a mais nova)
+    class EP1,EP2,EP3,EP4,EP5,EP6,EP7 tealNode
 ```
 
 ---
@@ -707,16 +761,25 @@ validação externa do conteúdo científico.
 | **LLM Reduction Layer** | 6 componentes determinísticos (Whoosh3Engine, RuleBasedRouter, LocalClassifier, GameTheoryLocal, Jinja2Engine, DataKnowledgeHub) que substituem LLM em tarefas com confiança ≥ 0.85. |
 | **Observabilidade** | MetricsCollector com servidor HTTP (/health, /metrics), integrado ao Doctor como check llm_reduction_metrics. |
 
-#### Legenda de Cores (conceitual)
+#### Legenda de Cores
+
+As cores abaixo são **renderizadas de verdade** nos diagramas 1, 2 e 4 desta
+seção (via `classDef`/`class` do Mermaid — não é só descrição em texto):
 
 | Cor | Significado |
 |---|---|
-| Azul | Camada de **orquestração e controle** (Orquestrador, SDD, Transformer) |
-| Verde | **Pipeline acadêmico** — a cadeia de valor principal R101→R105 |
-| Laranja | **Subsistemas de suporte** — engines, RAG, memória, benchmark |
-| Vermelho | **Segurança e qualidade** — proteção, validação, CI/CD |
-| Roxo | **Protocolos de integração** — MCP, API Gateway |
-| Cinza | **Metacognição** — barramento neural, memória, reflexão |
+| 🔵 Azul | Camada de **orquestração e controle** (Orquestrador, SDD, Transformer) |
+| 🟢 Verde | **Pipeline acadêmico** — a cadeia de valor principal R101→R105 |
+| 🟠 Laranja | **Subsistemas de suporte** — engines, RAG, memória, benchmark, catálogo de agentes |
+| 🔴 Vermelho | **Segurança e qualidade** — proteção, validação, CI/CD |
+| 🟣 Roxo | **Protocolos de integração** — MCP, API Gateway |
+| ⚪ Cinza | **Metacognição** — barramento neural, memória, reflexão |
+| 🟦 Teal | **Camada Epistêmica & Guardas Culturais** (R363–R373) — a camada mais nova |
+
+No diagrama 3 (sequência SDD/TDD), os blocos `rect` coloridos marcam
+visualmente o ramo **GREEN** (verde-claro, testes passaram) e o ramo
+**RED** (vermelho-claro, testes falharam e entram em autocorreção) —
+reforçando a própria terminologia RED-GREEN do TDD.
 
 ---
 
@@ -1554,7 +1617,7 @@ opencode-ecosystem-core/
 │   ├── revision_agent.py    # ReviewAnalyzer, SectionMapper, ProposalGenerator, DiffEngine
 │   ├── paper_composer.py    # StructurePlanner, SectionWriter, CitationFormatter, CrossVerifier
 │   └── orchestrator.py      # AgenticScienceV2 orchestrator
-├── synthetic_university/    # SPEC-935 · 11 Faculdades · 65 ciclos
+├── synthetic_university/    # SPEC-935 · 11 Faculdades
 │   ├── mcp_server.py        # MCP Server · 14 ferramentas stdio
 │   ├── api_gateway.py       # FastAPI REST · 12+ endpoints
 │   ├── mcp_security.py      # MCPGuard, AuditLogger, ToolVetter, RateLimiter (R100)
@@ -1585,7 +1648,7 @@ opencode-ecosystem-core/
 ├── transformer/             # SemanticMatcher/SkillHandbook + episteme.py (R363/R368)
 ├── validacao_externa/       # Benchmark cultural medido (R367) + dossiês
 ├── specs/                   # Especificacoes SDD (R97-R369)
-├── evolution/               # Cycles registry (65 ciclos)
+├── evolution/               # Cycles registry (190+ ciclos)
 ├── tests/                   # 2.200+ testes automatizados
 ├── mci/                     # Metacognitive Interconnect
 ├── marceloclaro/            # Orquestrador
@@ -1645,7 +1708,7 @@ O ecossistema possui compatibilidade documentada com o fork `timpara/opencode-ac
 | Evolutionary Memory + Evidence Graph | Não possui |
 | MCP Security (Guard+Audit+Vetter+Limiter) | MCP basico sem seguranca |
 | CI/CD Quality Gates (R106) | Sem CI/CD |
-| 65 ciclos de evolucao | Sem evolution registry |
+| 190+ ciclos de evolucao | Sem evolution registry |
 | Peer Review agentivo 8-dimensoes | Revisao textual basica |
 | Paper Composer ABNT/APA/IEEE | Templates LaTeX fixos |
 
