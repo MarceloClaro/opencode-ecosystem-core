@@ -5,7 +5,21 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R370** (motor de validação empírica rigorosa)
+- **Branch:** `main` · última entrega: **R371** (triangulação multidisciplinar)
+- **R371 (2026-08-02):** `mci/multidisciplinary_triangulation.py` — segunda metade
+  do pedido "estatística severa + cruzar informações multidisciplinares" fechado.
+  `triangulated=True` só com >=2 domínios independentes concordantes E zero
+  contestadores; contestação de qualquer domínio bloqueia (nunca maioria de
+  votos). Design aditivo — não toca EvidenceGraph (R102) nem DataKnowledgeHub
+  (R52/R55). Gate real no R103: `verify_multidisciplinary_claim()`, mesmo padrão
+  do `verify_statistical_claim` do R370. 16 testes TDD verdes; zero regressão
+  (115 testes combinados R102+R103+R370 verdes).
+  **Com R370+R371, o pedido do usuário ("estatística severa, validação cruzada,
+  contraprovas, cruzar informações multidisciplinares") está coberto no nível
+  de infraestrutura de gate — falta ainda: uso real em produção (rodar o
+  pipeline R101-R105 fim-a-fim com esses gates ativos num caso real) e o
+  pré-registro de protocolo (opção descartada no brainstorming do R370, fica
+  como R372+ se o usuário quiser).
 - **R370 (2026-08-02):** `mci/rigorous_validation.py` — estatística COMPUTADA de dados
   brutos (não só validação de números já dados): contraprova por permutação
   (centrada pela própria distribuição nula — corrige viés para estatísticas
@@ -18,8 +32,8 @@
   scientific_superhuman: 45 verdes). Bug real pego em TDD e documentado na
   spec: comparar `|observado|` vs `|permutado|` direto assume distribuição
   nula centrada em zero — falso para U de Mann-Whitney.
-  **Pendência (R371, não feita ainda):** triangulação multidisciplinar via
-  EvidenceGraph/DataKnowledgeHub (exigir ≥2 fontes/disciplinas concordantes).
+  Triangulação multidisciplinar (então pendente) foi feita no ciclo R371,
+  logo acima.
 - **R369 (2026-08-02):** `reasoning/production_scaffolds.py` — ponte entre os motores de
   raciocínio (SPEC-917/ARCHE) e a produção editorial: 8 movimentos científicos auditáveis
   com engine_hints; auditoria de novidade (`UNSUPPORTED_NOVELTY_CLAIM` quando "inédito/

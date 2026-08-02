@@ -915,6 +915,57 @@ class OrchestratorReviewer:
                 })
         return report
 
+    def verify_multidisciplinary_claim(
+        self,
+        claim_id: str,
+        evidence_items: List[Dict[str, str]],
+        ledger: Optional["ReviewLedger"] = None,
+    ) -> Dict[str, Any]:
+        """Verifica uma claim no ledger via triangulação multidisciplinar
+        (SPEC-935-R371): só marca como verificada quando >= 2 domínios
+        independentes concordam e nenhum domínio contesta. Contestação de
+        qualquer domínio bloqueia — nunca resolvida por maioria de votos.
+        """
+        from mci.multidisciplinary_triangulation import multidisciplinary_triangulation
+
+        target_ledger = ledger if ledger is not None else self.ledger
+        claim_text = (
+            target_ledger.claims[claim_id].text if claim_id in target_ledger.claims
+            else ""
+        )
+        report = multidisciplinary_triangulation(claim_text, evidence_items)
+
+        if report["triangulated"]:
+            target_ledger.verify_claim(
+                claim_id,
+                notes=(
+                    f"Triangulação multidisciplinar (SPEC-935-R371): "
+                    f"domínios concordantes = {report['supporting_domains']}."
+                ),
+            )
+        else:
+            if report["contesting_domains"]:
+                note = (
+                    "Sem triangulação: domínio(s) contestador(es) = "
+                    f"{report['contesting_domains']}"
+                )
+            else:
+                note = (
+                    "Sem triangulação: apenas domínio(s) "
+                    f"{report['supporting_domains']} favorável(is) — "
+                    "corroboração multidisciplinar exige >= 2 domínios"
+                )
+            if claim_id in target_ledger.claims and claim_id not in {
+                item["claim_id"] for item in target_ledger.verification_agenda
+            }:
+                target_ledger.verification_agenda.append({
+                    "claim_id": claim_id,
+                    "action": note,
+                    "priority": "high",
+                    "status": "pending",
+                })
+        return report
+
     def review(self, paper: Dict[str, Any],
                reviewer_affiliations: Optional[Dict[str, str]] = None) -> ReviewPackage:
         """Executa revisão completa com anonimização opcional e isolamento de erros."""

@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R371
 title: Triangulação Multidisciplinar — gate de convergência entre domínios independentes
 component: mci/multidisciplinary_triangulation.py + agentic_science_v2/review_agent.py
-status: draft
+status: verified
 test_file: tests/test_r371_multidisciplinary_triangulation.py
 ---
 

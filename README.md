@@ -95,7 +95,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercont
 
 ##  Arquitetura do Sistema (v3.7)
 
-O ecossistema é organizado em **11 camadas interconectadas**:
+O ecossistema é organizado em **12 camadas interconectadas**:
 
 ### 1. Camada Metacognitiva (MCI)
 Barramento de eventos (Global Workspace) onde agentes compartilham memória, confiança calibrada e reflexões pós-execução. Inclui MetaBus (pub/sub), Blackboard (protocolo A2A), memória hierárquica e Reflexion middleware.
@@ -246,6 +246,23 @@ agora o ecossistema também **computa** estatística a partir de dados brutos:
 Disclaimer obrigatório em todo relatório: convergência **não prova** a
 hipótese — significa que ela resistiu a tentativas independentes de
 falsificação; interpretação final é sempre humana.
+
+### 12. Triangulação Multidisciplinar (R371)
+`mci/multidisciplinary_triangulation.py` fecha a segunda metade do pedido
+"cruzar informações relevantes e multidisciplinares": uma alegação só é
+`triangulated=True` quando **≥2 domínios/disciplinas independentes**
+concordam **e nenhum** domínio a contesta. Design aditivo — não modifica
+`EvidenceGraph` (R102) nem `DataKnowledgeHub` (R52/R55), que permanecem
+fundacionais; o contrato de entrada (`{source, domain, stance}`) é uma
+lista simples que qualquer chamador popula.
+
+Regra central: **contestação de qualquer domínio bloqueia** — nunca
+resolvida por maioria de votos (3 domínios a favor + 1 contra continua
+`triangulated=False`, com achado `CONTESTED_MULTIDISCIPLINARY` nomeando
+o domínio dissidente). Esconder controvérsia real seria o overclaim mais
+perigoso possível aqui. Mesmo gate real no R103:
+`OrchestratorReviewer.verify_multidisciplinary_claim()` só verifica a
+claim no `ReviewLedger` quando há triangulação.
 
 
 ### 🎨 Diagramas e Fluxogramas Visuais da Arquitetura
