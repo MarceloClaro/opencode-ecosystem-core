@@ -134,6 +134,37 @@ class TestNoveltyClaims:
         assert [f for f in out["findings"]
                 if f["code"] == "UNSUPPORTED_NOVELTY_CLAIM"]
 
+    def test_primeira_diferenca_termo_econometrico_nao_e_falso_positivo(self):
+        """Regressão: achado real na validação do manuscrito USP (R373).
+
+        'Primeiras diferenças' é termo econométrico padrão (first
+        differences), não alegação de novidade sobre o próprio trabalho.
+        'primeiro/primeira' bruto como gatilho causava falso positivo em
+        qualquer uso ordinal comum do português ('primeira diferença',
+        'primeiro trimestre', 'primeira vista', 'primeiro passo').
+        """
+        out = self._audit_text(
+            "Primeiras diferenças ou modelos VECM reduziriam as magnitudes "
+            "observadas neste primeiro trimestre da série."
+        )
+        assert not [f for f in out["findings"]
+                    if f["code"] == "UNSUPPORTED_NOVELTY_CLAIM"]
+
+    def test_pela_primeira_vez_continua_flagrado(self):
+        """Contraste: alegação de prioridade genuína ainda deve ser pega."""
+        out = self._audit_text(
+            "Pela primeira vez, mostramos essa relação em dados brasileiros."
+        )
+        assert [f for f in out["findings"]
+                if f["code"] == "UNSUPPORTED_NOVELTY_CLAIM"]
+
+    def test_primeiro_estudo_a_continua_flagrado(self):
+        out = self._audit_text(
+            "Este é o primeiro estudo a integrar as seis dimensões analisadas."
+        )
+        assert [f for f in out["findings"]
+                if f["code"] == "UNSUPPORTED_NOVELTY_CLAIM"]
+
 
 # ═══════════════════════════════════════════════════════════════════════
 # 3. Plano literário contratual

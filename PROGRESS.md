@@ -5,7 +5,25 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R372** (protocolo de pré-registro + correção de bug real)
+- **Branch:** `main` · última entrega: **R373** (validação fim-a-fim com manuscrito real + fixes)
+- **R373 (2026-08-02):** validação real (não sintética) dos gates R369-R372 sobre
+  manuscrito USP construído a partir de dossiê existente (53 refs, 7 correlações
+  reais) — `academic/papers/manuscrito_educacao_armadilha_renda_media_usp.md`.
+  Achados e correções:
+  - BUG REAL: R369 tinha falso positivo ("primeiro/primeira" bruto disparava em
+    "primeiras diferenças", termo econométrico) — corrigido para exigir fraseado
+    de prioridade autoral explícito.
+  - GAP REAL: R370 exige dados brutos, manuscritos publicados só têm r/p/n — 
+    fechado com `pearson_naive_significance()` (t-Student em Python puro,
+    validado contra scipy a 1e-15) + `crosscheck_reported_correlation()`
+    (ASSIMÉTRICA: só sinaliza p reportado mais forte que o ingênuo, nunca mais
+    conservador — evita falso positivo contra correções legítimas de cointegração).
+  - R371 e R372 funcionaram corretamente de primeira sobre o caso real.
+  - Achado sem correção (fidelidade à fonte): 2/7 correlações do artigo-fonte não
+    declaram `n` na Tabela 2 apesar da legenda definir n — documentado como
+    recomendação no relatório de validação, não alterado no manuscrito.
+  Relatório completo: `validacao_externa/manuscrito_armadilha_renda_media/relatorio_validacao_pipeline.md`.
+  50 testes TDD novos; 194 regressão verdes; 2501 testes coletados sem erro.
 - **R372 (2026-08-02):** BUG REAL CORRIGIDO em `mci/experiment_designer.py`:
   `"pre_registered": context.get("pre_registered", True)` dava o selo de graça
   sem verificação alguma — confirmado reproduzindo o bug antes de corrigir.

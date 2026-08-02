@@ -98,8 +98,19 @@ SCIENTIFIC_MOVES: Dict[str, Dict[str, Any]] = {
 
 _NOVELTY_TERMS = (
     "inedito", "inedita", "inovador", "inovadora", "pioneiro", "pioneira",
-    "primeiro", "primeira", "novel", "unprecedented", "state-of-the-art",
-    "disruptivo", "disruptiva",
+    "novel", "unprecedented", "state-of-the-art", "disruptivo", "disruptiva",
+)
+
+# 'primeiro'/'primeira' isolados são ordinais comuns do português ('primeira
+# diferença', 'primeiro trimestre', 'primeira vista') e geravam falso
+# positivo nesse detector. Só contam como alegação de novidade quando em
+# fraseado de prioridade autoral explícita (achado real na validação do
+# manuscrito USP — R373).
+_NOVELTY_PRIORITY_PHRASES = (
+    "pela primeira vez", "for the first time",
+    "primeiro estudo a", "primeiro trabalho a", "primeira pesquisa a",
+    "primeiro artigo a", "first study to", "first work to", "first paper to",
+    "o primeiro a", "a primeira a", "the first to",
 )
 
 _ANCHOR_PATTERNS = (
@@ -170,6 +181,7 @@ def audit_scientific_manuscript(sections: Mapping[str, str]) -> Dict[str, Any]:
         for sentence in _split_sentences(text):
             norm = _normalize(sentence)
             claimed = [t for t in _NOVELTY_TERMS if t in norm]
+            claimed += [p for p in _NOVELTY_PRIORITY_PHRASES if p in norm]
             if not claimed:
                 continue
             anchored = (

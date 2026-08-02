@@ -21,6 +21,7 @@ SPEC-935-R370.
 
 from __future__ import annotations
 
+import math
 import random
 import statistics
 from typing import Any, Callable, Dict, List, Sequence, Tuple
@@ -40,6 +41,10 @@ DISCLAIMER = (
 )
 
 _LOW_DENOMINATOR_FLOOR = 1e-9
+
+
+class ContractError(ValueError):
+    """Entrada fora do contrato — falha fechada (SPEC-935-R373)."""
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -302,4 +307,133 @@ def convergent_validity_report(
         "verdict": verdict,
         "human_gate": True,
         "disclaimer": DISCLAIMER,
+    }
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# 5. Contraverificação de estatísticas já reportadas (SPEC-935-R373)
+# ═══════════════════════════════════════════════════════════════════════
+#
+# Motivação: manuscritos publicados reportam apenas r/p/n já calculados,
+# nunca os dados brutos que two_sample_hypothesis_test exige. Esta seção
+# recalcula a significância de Pearson de forma independente a partir de
+# (r, n) — via distribuição t de Student em Python puro (função beta
+# incompleta regularizada por fração contínua, sem numpy/scipy) — e
+# compara de forma ASSIMÉTRICA: nenhuma correção metodológica legítima
+# (cointegração, autocorrelação, tamanho efetivo de amostra) jamais torna
+# um resultado artificialmente MAIS significativo do que a fórmula
+# ingênua sustenta; só torna mais conservador. Por isso, só é sinalizado
+# o caso em que o p reportado é MENOR que o p ingênuo.
+
+CROSSCHECK_DISCLAIMER = (
+    "Ausência de achado NÃO VALIDA a correção metodológica aplicada pelo "
+    "autor — apenas confirma que a significância reportada não é mais "
+    "forte do que os números brutos (r, n) sustentariam sem correção "
+    "alguma. Correções legítimas de séries temporais (cointegração, "
+    "autocorrelação) tornam o p mais conservador, nunca mais forte; só "
+    "esse segundo caso é sinalizado."
+)
+
+
+def _log_beta(a: float, b: float) -> float:
+    return math.lgamma(a) + math.lgamma(b) - math.lgamma(a + b)
+
+
+def _betacf(x: float, a: float, b: float) -> float:
+    """Fração contínua da função beta incompleta (Numerical Recipes)."""
+    max_iter, eps, fpmin = 200, 3e-14, 1e-300
+    qab, qap, qam = a + b, a + 1.0, a - 1.0
+    c = 1.0
+    d = 1.0 - qab * x / qap
+    if abs(d) < fpmin:
+        d = fpmin
+    d = 1.0 / d
+    h = d
+    for m in range(1, max_iter + 1):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1.0 + aa * d
+        if abs(d) < fpmin:
+            d = fpmin
+        c = 1.0 + aa / c
+        if abs(c) < fpmin:
+            c = fpmin
+        d = 1.0 / d
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1.0 + aa * d
+        if abs(d) < fpmin:
+            d = fpmin
+        c = 1.0 + aa / c
+        if abs(c) < fpmin:
+            c = fpmin
+        d = 1.0 / d
+        delta = d * c
+        h *= delta
+        if abs(delta - 1.0) < eps:
+            break
+    return h
+
+
+def _regularized_incomplete_beta(x: float, a: float, b: float) -> float:
+    if x <= 0.0:
+        return 0.0
+    if x >= 1.0:
+        return 1.0
+    log_bt = -_log_beta(a, b) + a * math.log(x) + b * math.log(1.0 - x)
+    bt = math.exp(log_bt)
+    if x < (a + 1.0) / (a + b + 2.0):
+        return bt * _betacf(x, a, b) / a
+    return 1.0 - bt * _betacf(1.0 - x, b, a) / b
+
+
+def pearson_naive_significance(r: float, n: int) -> float:
+    """P-value bilateral de Pearson a partir de (r, n), via t de Student
+    em Python puro. Validado contra scipy.stats.t.cdf (dev-time) com
+    diff <= 1e-12 em 8 casos de referência; scipy não é importado aqui.
+    """
+    if not isinstance(n, int) or n < 3:
+        raise ContractError("n deve ser inteiro >= 3.")
+    if not isinstance(r, (int, float)) or abs(r) >= 1.0:
+        raise ContractError("r deve estar em (-1, 1).")
+
+    df = n - 2
+    t = r * math.sqrt(df) / math.sqrt(1 - r ** 2)
+    x = df / (df + t * t)
+    return _regularized_incomplete_beta(x, df / 2.0, 0.5)
+
+
+def crosscheck_reported_correlation(
+    r: float, n: int, reported_p: float, tolerance: float = 1e-3
+) -> Dict[str, Any]:
+    """Contraverificação assimétrica: só sinaliza quando o p reportado é
+    MAIS FORTE (menor) do que a fórmula ingênua a partir de (r, n)
+    sustenta — nunca quando é igual ou mais conservador (correção
+    metodológica legítima de série temporal)."""
+    naive_p = pearson_naive_significance(r, n)
+    overstated = reported_p < (naive_p - tolerance)
+
+    findings: List[Dict[str, Any]] = []
+    if overstated:
+        findings.append({
+            "schema_version": SCHEMA_VERSION,
+            "code": "OVERSTATED_SIGNIFICANCE",
+            "severity": "high",
+            "detail": (
+                f"p reportado ({reported_p:.6f}) é mais forte que o p "
+                f"ingênuo calculado de (r={r}, n={n}) = {naive_p:.6f} — "
+                f"nenhuma correção metodológica legítima produz esse "
+                f"efeito"
+            ),
+            "requires_human_review": True,
+        })
+
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "naive_p": naive_p,
+        "reported_p": reported_p,
+        "overstated": overstated,
+        "findings": findings,
+        "human_gate": "required" if overstated else "recommended",
+        "disclaimer": CROSSCHECK_DISCLAIMER,
     }

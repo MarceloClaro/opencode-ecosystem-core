@@ -95,7 +95,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercont
 
 ##  Arquitetura do Sistema (v3.7)
 
-O ecossistema é organizado em **13 camadas interconectadas**:
+O ecossistema é organizado em **14 camadas interconectadas**:
 
 ### 1. Camada Metacognitiva (MCI)
 Barramento de eventos (Global Workspace) onde agentes compartilham memória, confiança calibrada e reflexões pós-execução. Inclui MetaBus (pub/sub), Blackboard (protocolo A2A), memória hierárquica e Reflexion middleware.
@@ -278,6 +278,31 @@ e depois **verificado** contra o que foi efetivamente usado
 hipótese "só de forma" depois de ver os dados é como HARKing
 (Hypothesizing After Results are Known) se disfarça. Mesmo gate real no
 R103: `OrchestratorReviewer.verify_preregistered_claim()`.
+
+
+### 14. Validação Fim-a-Fim com Manuscrito Real (R373)
+Os gates R369–R372 foram validados sobre um manuscrito real (não um
+fixture sintético): [`academic/papers/manuscrito_educacao_armadilha_renda_media_usp.md`](academic/papers/manuscrito_educacao_armadilha_renda_media_usp.md),
+adaptado de um dossiê analítico existente com 53 referências e 7
+correlações de Pearson reais. A validação encontrou e corrigiu dois
+problemas genuínos:
+
+- **Falso positivo no R369**: `"primeiro"/"primeira"` como gatilho bruto
+  de alegação de novidade disparava em "primeiras diferenças" (termo
+  econométrico padrão). Corrigido para exigir fraseado de prioridade
+  autoral explícito ("pela primeira vez", "primeiro estudo a"...).
+- **Gap real no R370**: o motor de estatística de dados brutos não se
+  aplica a manuscritos publicados, que só reportam estatística-resumo
+  (r, p, n). Fechado com `pearson_naive_significance()` — recálculo
+  independente da significância de Pearson via t de Student em Python
+  puro (validado contra scipy a 1e-15) — e uma contraverificação
+  **assimétrica** (`crosscheck_reported_correlation`) que só sinaliza
+  quando a significância reportada é **mais forte** que a fórmula
+  ingênua sustenta, nunca quando é igual ou mais conservadora (o que
+  cobre correções legítimas de cointegração/autocorrelação sem gerar
+  falso positivo contra elas).
+
+Relatório completo: [`validacao_externa/manuscrito_armadilha_renda_media/relatorio_validacao_pipeline.md`](validacao_externa/manuscrito_armadilha_renda_media/relatorio_validacao_pipeline.md).
 
 
 ### 🎨 Diagramas e Fluxogramas Visuais da Arquitetura

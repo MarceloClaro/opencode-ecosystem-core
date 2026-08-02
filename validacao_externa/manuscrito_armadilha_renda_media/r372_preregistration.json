@@ -1,0 +1,27 @@
+{
+  "experimental_design": {
+    "n_arms": 2,
+    "n_per_group": 175,
+    "total_sample_size": 350,
+    "min_effect_size_detectable": 0.3,
+    "power_level": 0.8,
+    "alpha": 0.05,
+    "confounders_controlled": [
+      "Confounders não medidos (unknown unknowns)"
+    ],
+    "randomization_unit": "individual",
+    "blinding": "double_blind",
+    "pre_registered": false,
+    "analysis_plan": [
+      "Descriptive statistics (média, desvio padrão, distribuição)",
+      "Primary analysis: teste estatístico principal",
+      "Sensitivity analysis: análise de sensibilidade",
+      "Subgroup analysis: análise de subgrupos (se aplicável)"
+    ]
+  },
+  "limitations": [
+    "Pré-registro não declarado; nenhum protocolo formal foi verificado antes da análise.",
+    "Tamanho amostral de 175 por grupo (350 total) pode ser insuficiente para efeitos menores que d=0.3.",
+    "Foram identificados 1 confounders potenciais no domínio economia_educacao."
+  ]
+}
