@@ -85,3 +85,29 @@ Não cegamente — veja [`CORRIGENDUM.md`](CORRIGENDUM.md), um documento públic
 | Import `MarceloClaroOrchestrator` falha | Rode `pip3 install -r requirements.txt` dentro da pasta do projeto |
 
 Se nada disso resolver, `python3 -m marceloclaro.cli helpdesk` é sempre o primeiro passo — ele já roda todos os checks acima automaticamente.
+
+## Tradução cultural, roteamento por tipo de conhecimento e produção de obras (R363–R369)
+
+Em linguagem simples, o ecossistema agora também sabe:
+
+1. **Escolher o agente certo pelo tipo de conhecimento** que a tarefa pede
+   (estatística? tradução literária? norma ABNT?). Isso é a "camada
+   epistêmica". Se ele não tiver certeza, não adivinha — segue como antes.
+2. **Vigiar traduções** de livros e artigos: um grafo de termos que só um
+   humano pode aprovar, um guarda da voz do autor (para o texto não perder o
+   sotaque e a força), e um verificador de retrotradução (traduz de volta e
+   confere números, nomes e negações). Nada disso "aprova" tradução — eles
+   apontam problemas e mandam para revisão humana.
+3. **Exigir honestidade científica**: se um texto diz "inédito" ou
+   "inovador" sem citar com quem está se comparando, o sistema marca a frase
+   e trava até um humano decidir.
+4. **Medir (sem julgar) a distintividade de textos literários**: repetições,
+   ritmo e clichês ("frio na espinha"...) são contados e mostrados — o
+   veredito de qualidade continua sendo humano.
+
+Comandos úteis:
+
+```bash
+python3 -m marceloclaro.cli doctor          # inclui o check episteme_coverage
+python3 scripts/benchmark_r367_cultural.py  # regenera o benchmark cultural medido
+```

@@ -454,3 +454,70 @@ Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
 > As métricas são auto-reportadas pelo ecossistema (doctor, scanners, evolution registry).
 > Consulte [`CORRIGENDUM.md`](CORRIGENDUM.md) para contexto sobre alegações que
 > requerem validação externa.
+
+---
+
+## Camadas R363–R369 — Epistêmica, Guardas Culturais e Andaimes Produtivos (2026-08-02)
+
+### Camada Epistêmica de Roteamento (SPEC-935-R363 + R368)
+
+```mermaid
+graph LR
+    Task[Descrição da tarefa] --> Inf[infer_task_episteme<br>léxico determinístico pt/en]
+    Card[Agent Card<br>frontmatter episteme: opcional] --> Reg[register_skill<br>override ou inferência]
+    Inf --> Match[SkillHandbook.match]
+    Reg --> Match
+    Match -->|"score × (1 + 0.20×(afinidade−0.5))<br>±10% máx, fail-open"| Rank[Ranking de agentes]
+    Doctor[doctor: episteme_coverage] -.->|mede 133/205 = 65%| Card
+```
+
+- 6 regimes: `empirico_analitico`, `formal_dedutivo`,
+  `hermeneutico_interpretativo`, `critico_reflexivo`, `pragmatico_tecnico`,
+  `regulatorio_normativo`; matriz de afinidade simétrica explícita.
+- Inferência exige ≥ 2 sinais ("nunca chuta"); sinais disjuntos entre
+  regimes (invariante testada); sem episteme em qualquer ponta, o score do
+  matcher é numericamente idêntico ao anterior (fail-open).
+
+### Guardas de Tradução Cultural (SPEC-935-R359, R364–R367)
+
+```mermaid
+graph TD
+    Man[Manuscrito congelado] --> AVG[AuthorVoiceGuardian R365<br>VOICE_SHIFT/ANACHRONISM/REGISTER_SHIFT]
+    AVG --> TR[Tradução preliminar]
+    TR --> CEA[CulturalEpistemeAgent R359<br>21 códigos de risco]
+    CEA -->|delta propose_upsert| TG[TerminologyGraph R364<br>aprovação humana por termo<br>gate fail-closed]
+    TR --> BTV[BackTranslationVerifier R366<br>6 verificações determinísticas]
+    TG --> Human{Revisão humana<br>obrigatória em alto risco}
+    BTV --> Human
+    Bench[Benchmark R367<br>corpus rotulado 18 casos<br>precisão 1.00 / recall 0.86] -.->|mede| CEA
+```
+
+Princípios compartilhados: contratos fail-closed (`ContractError`), códigos
+exclusivamente de `cultural_episteme.ISSUE_CODES`, `requires_human_review`
+em todo achado, determinismo bit a bit, e relatórios com números **medidos**
+(`claim: internal-fixture-*`) — nunca metas anunciadas.
+
+### Andaimes de Raciocínio Produtivo (SPEC-935-R369)
+
+`reasoning/production_scaffolds.py` conecta os 11 motores (SPEC-917) e a
+árvore ARCHE/Peirce à produção editorial:
+
+| Função | Contrato |
+|---|---|
+| `audit_scientific_manuscript` | 8 movimentos obrigatórios com `engine_hints`; `MISSING_MOVE` high para método/evidência/limitação |
+| auditoria de novidade | `UNSUPPORTED_NOVELTY_CLAIM` quando "inédito/inovador/state-of-the-art" não tem citação/comparação na mesma frase |
+| `validate_literary_plan` | voz, conflito, símbolos e estratégia de estranhamento obrigatórios antes da escrita |
+| `literary_distinctiveness_report` | medição descritiva (type-token, ritmo, 22 clichês pt); nunca veredito |
+| `select_scaffold` | roteia científico/literário pela episteme da tarefa; `indeterminate` sem sinais |
+
+### Specs do bloco
+
+| Spec | Título | Testes |
+|---|---|---|
+| SPEC-935-R363 | Camada epistêmica de roteamento | 27 |
+| SPEC-935-R364 | TerminologyGraphAgent | 21 |
+| SPEC-935-R365 | AuthorVoiceGuardian | 17 |
+| SPEC-935-R366 | BackTranslationVerifier | 14 |
+| SPEC-935-R367 | Benchmark cultural medido | 10 |
+| SPEC-935-R368 | Cobertura epistêmica + doctor | 12 |
+| SPEC-935-R369 | Andaimes de raciocínio produtivo | 21 |
