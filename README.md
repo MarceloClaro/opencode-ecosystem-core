@@ -95,7 +95,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercont
 
 ##  Arquitetura do Sistema (v3.7)
 
-O ecossistema é organizado em **10 camadas interconectadas**:
+O ecossistema é organizado em **11 camadas interconectadas**:
 
 ### 1. Camada Metacognitiva (MCI)
 Barramento de eventos (Global Workspace) onde agentes compartilham memória, confiança calibrada e reflexões pós-execução. Inclui MetaBus (pub/sub), Blackboard (protocolo A2A), memória hierárquica e Reflexion middleware.
@@ -220,6 +220,32 @@ e a produção editorial (`reasoning/production_scaffolds.py`):
   números descritivos, nunca veredito de qualidade;
 - **Seleção por episteme**: `select_scaffold()` roteia científico/literário
   pela camada 8; sem sinais → `indeterminate` (nunca chuta).
+
+### 11. Motor de Validação Empírica Rigorosa (R370)
+`mci/rigorous_validation.py` fecha um gap real: `statistical_validator.py`
+(pré-existente) já validava p-values e effect sizes **já fornecidos** —
+agora o ecossistema também **computa** estatística a partir de dados brutos:
+- **Contraprova por permutação**: embaralha rótulos milhares de vezes
+  (seed fixo, determinístico) e recalcula a estatística sob H0 — uma
+  tentativa de falsificação real, não um número decorado. Corrige o viés
+  de estatísticas assimétricas (Mann-Whitney U) centrando pela própria
+  distribuição nula gerada, não por zero fixo;
+- **Duas lentes independentes**: Welch-t (paramétrica) + Mann-Whitney
+  (não-paramétrica), mais Cohen's d com IC 95% via bootstrap;
+- **Validação cruzada k-fold genérica**: partição exaustiva/disjunta;
+  `stable=False` quando a variância entre folds é alta — um resultado só
+  é aceito se generalizar, não só numa amostra;
+- **Validade convergente**: `convergent=True` somente quando as duas
+  famílias de teste concordam em significância E o IC do effect size
+  exclui zero — reaproveita `validate_statistics()` para o veredito
+  (Bayes factor) sem duplicar lógica;
+- **Gate real no R103**: `OrchestratorReviewer.verify_statistical_claim()`
+  só verifica uma claim no `ReviewLedger` quando há convergência; caso
+  contrário permanece pendente com a nota de qual teste discordou.
+
+Disclaimer obrigatório em todo relatório: convergência **não prova** a
+hipótese — significa que ela resistiu a tentativas independentes de
+falsificação; interpretação final é sempre humana.
 
 
 ### 🎨 Diagramas e Fluxogramas Visuais da Arquitetura

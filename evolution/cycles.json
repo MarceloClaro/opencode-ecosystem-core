@@ -3312,6 +3312,23 @@
         "Um marcador lexical legítimo em outra seção (protocolo) derruba fixture ingênuo: auditoria por manuscrito inteiro exige fixtures desenhados por movimento"
       ],
       "timestamp": "2026-08-02T09:55:04.498288+00:00"
+    },
+    {
+      "round_id": "R370",
+      "objective": "SPEC-935-R370 — RigorousEmpiricalValidator: motor estatístico que COMPUTA de dados brutos (não só valida números já dados), com contraprova por permutação, k-fold CV e validade convergente; gate real no R103 Peer Review",
+      "changes": [
+        "mci/rigorous_validation.py: permutation_counter_proof (ataque de falsificação por permutação, centrado pela própria distribuição nula — corrige viés para estatísticas assimétricas como Mann-Whitney U), two_sample_hypothesis_test (Welch-t + Mann-Whitney + Cohen's d com IC bootstrap), k_fold_cross_validate (partição exaustiva/disjunta, stable=False sob alta variância, guarda contra denominador ~zero), convergent_validity_report (reaproveita mci.statistical_validator.validate_statistics para o veredito final sem duplicar lógica)",
+        "convergent=True exige Welch-t E Mann-Whitney significantes E IC do effect size excluindo zero — convergência entre lentes independentes, nunca 'prova'; disclaimer e human_gate=True sempre presentes",
+        "OrchestratorReviewer.verify_statistical_claim (R103): só verifica a claim no ReviewLedger quando convergent=True; caso contrário mantém pendente na agenda com nota de qual teste discordou",
+        "Zero dependência de numpy/scipy (stdlib pura), seguindo convenção do statistical_validator.py existente",
+        "tests/test_r370_rigorous_validation.py: 23 testes TDD; zero regressão em test_r103_peer_review (51 verdes) e test_scientific_superhuman (45 verdes)"
+      ],
+      "score": 8.7,
+      "lessons": [
+        "Bug real descoberto em TDD: comparar |estatística observada| contra |estatística permutada| assume distribuição nula centrada em zero — verdade para Welch-t, falso para Mann-Whitney U (centrada em n_a*n_b/2). Corrigido centrando pela média da própria distribuição nula gerada, tornando o motor de permutação genuinamente genérico para qualquer statistic_fn",
+        "Reaproveitar validate_statistics() existente em vez de duplicar a lógica de veredito (Bayes factor, evidence_strength) manteve o módulo novo pequeno e evitou duas fontes de verdade para o mesmo cálculo"
+      ],
+      "timestamp": "2026-08-02T11:28:10.715784+00:00"
     }
   ]
 }
