@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R373
 title: Contraverificação de estatísticas reportadas + correção de falso positivo no R369
 component: mci/rigorous_validation.py + reasoning/production_scaffolds.py
-status: draft
+status: verified
 test_file: tests/test_r373_reported_statistics_crosscheck.py
 ---
 

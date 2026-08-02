@@ -3363,6 +3363,26 @@
         "Comparação textual exata (não semântica/tolerante) para hipótese/método é a escolha certa aqui: tolerância a 'reformulação' é precisamente o disfarce do HARKing"
       ],
       "timestamp": "2026-08-02T13:03:58.276216+00:00"
+    },
+    {
+      "round_id": "R373",
+      "objective": "SPEC-935-R373 — validação fim-a-fim real dos gates R369/R370/R371/R372 sobre um manuscrito USP construído a partir de um dossiê analítico existente; corrigir o que a validação revelasse",
+      "changes": [
+        "Manuscrito real produzido: academic/papers/manuscrito_educacao_armadilha_renda_media_usp.md, adaptado do dossiê 'A Educação como Fator de Ruptura da Armadilha da Renda Média no Brasil' preservando as 53 referências e todas as correlações/ANOVA originais",
+        "BUG REAL CORRIGIDO (achado pela validação): reasoning/production_scaffolds.py tinha 'primeiro'/'primeira' como gatilhos brutos de UNSUPPORTED_NOVELTY_CLAIM, disparando falso positivo em 'primeiras diferenças' (termo econométrico padrão). Substituído por fraseado de prioridade autoral explícita ('pela primeira vez', 'primeiro estudo a'...)",
+        "GAP REAL DOCUMENTADO E FECHADO: R370 exige amostras brutas, mas manuscritos publicados só reportam estatística-resumo (r, p, n). mci/rigorous_validation.py ganhou pearson_naive_significance (t de Student em Python puro, validado contra scipy a 1e-15 em 8 casos de referência) e crosscheck_reported_correlation — verificação ASSIMÉTRICA que só sinaliza quando o p reportado é mais forte que o ingênuo sustenta (correções legítimas de série temporal tornam o p mais conservador, nunca mais forte)",
+        "Descoberta durante o diagnóstico: 2 das 7 correlações do artigo original não têm 'n' declarado em nenhum lugar do texto, apesar da legenda da Tabela 2 definir n — lacuna de transparência real, documentada no relatório de validação, não corrigida no manuscrito (preservação fiel da fonte)",
+        "OrchestratorReviewer.verify_reported_correlation (R103): mesmo padrão dos 3 gates anteriores",
+        "Rodados sobre o manuscrito real: R369 (0 achados após fix, 8/8 movimentos), R370 (ValueError correto — sem dados brutos disponíveis), R371 (triangulated=True, 3 domínios independentes concordantes), R372 (pre_registered=False, corretamente — estudo observacional retrospectivo), R373 (5/5 correlações reais não inflam significância)",
+        "tests/test_r373_reported_statistics_crosscheck.py: 25 testes TDD; 194 testes de regressão verdes; 2501 testes coletados sem erro em toda a suíte"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Validação fim-a-fim com dado real (não fixture sintético) encontrou um bug genuíno (falso positivo do R369) que nenhum teste unitário anterior tinha coberto — 'primeiro/primeira' como palavras comuns do português é exatamente o tipo de ambiguidade que só aparece com texto real",
+        "A tentação de construir uma contraverificação SIMÉTRICA (flagar qualquer divergência p_reportado != p_ingênuo) teria gerado falso positivo sistemático contra a correção de cointegração que o próprio manuscrito já disclosa — o design assimétrico (só sinalizar quando reportado < ingênuo) é o que evita esse overclaim",
+        "Rodar scipy apenas como oráculo de validação em tempo de desenvolvimento (nunca importado no módulo entregue) permite validar uma implementação pura sem violar a convenção de zero dependência pesada do projeto"
+      ],
+      "timestamp": "2026-08-02T13:33:40.895398+00:00"
     }
   ]
 }

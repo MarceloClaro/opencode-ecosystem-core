@@ -1006,6 +1006,50 @@ class OrchestratorReviewer:
                 })
         return report
 
+    def verify_reported_correlation(
+        self,
+        claim_id: str,
+        r: float,
+        n: int,
+        reported_p: float,
+        ledger: Optional["ReviewLedger"] = None,
+        tolerance: float = 1e-3,
+    ) -> Dict[str, Any]:
+        """Contraverifica uma correlação já reportada (SPEC-935-R373):
+        recalcula o p-value ingênuo a partir de (r, n) e só bloqueia
+        quando o p reportado é MAIS FORTE que o ingênuo sustenta — nunca
+        quando é igual ou mais conservador (correção legítima de série
+        temporal)."""
+        from mci.rigorous_validation import crosscheck_reported_correlation
+
+        target_ledger = ledger if ledger is not None else self.ledger
+        report = crosscheck_reported_correlation(r, n, reported_p, tolerance=tolerance)
+
+        if not report["overstated"]:
+            target_ledger.verify_claim(
+                claim_id,
+                notes=(
+                    f"Contraverificação de correlação (SPEC-935-R373): "
+                    f"p reportado={reported_p:.6f} não excede o p ingênuo "
+                    f"={report['naive_p']:.6f} calculado de (r={r}, n={n})."
+                ),
+            )
+        else:
+            note = (
+                f"Significância reportada ({reported_p:.6f}) mais forte "
+                f"que o ingênuo (r={r}, n={n}) sustenta: {report['naive_p']:.6f}"
+            )
+            if claim_id in target_ledger.claims and claim_id not in {
+                item["claim_id"] for item in target_ledger.verification_agenda
+            }:
+                target_ledger.verification_agenda.append({
+                    "claim_id": claim_id,
+                    "action": note,
+                    "priority": "high",
+                    "status": "pending",
+                })
+        return report
+
     def review(self, paper: Dict[str, Any],
                reviewer_affiliations: Optional[Dict[str, str]] = None) -> ReviewPackage:
         """Executa revisão completa com anonimização opcional e isolamento de erros."""
