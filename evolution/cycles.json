@@ -3243,6 +3243,22 @@
         "Estratégias explícitas por marcador (preserve/gloss/adapt com renderings aprovados) transformam 'preservar a voz' de promessa vaga em regra verificável"
       ],
       "timestamp": "2026-08-02T09:19:50.240491+00:00"
+    },
+    {
+      "round_id": "R366",
+      "objective": "SPEC-935-R366 — BackTranslationVerifier: etapa 9 do pipeline do plano OpenCode Books Global (retrotradução), antes apenas interface externa",
+      "changes": [
+        "translation/back_translation.py: seis verificações determinísticas (números bidirecionais, entidades declaradas, negação ±1, pragmática, razão de comprimento, termos preserve_portuguese)",
+        "Disclaimer nega explicitamente que retrotradução limpa prove equivalência; human_gate=required em severidade alta",
+        "glossary_terms compatível com o TerminologyGraph (R364)",
+        "agents/catalog/back-translation-verifier.md com episteme hermeneutico_interpretativo",
+        "tests/test_r366_back_translation_verifier.py: 14 testes TDD"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Verificar números nas duas direções (perdidos E surgidos) captura fabricação na retrotradução, não só omissão"
+      ],
+      "timestamp": "2026-08-02T09:22:34.455383+00:00"
     }
   ]
 }
