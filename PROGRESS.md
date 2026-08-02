@@ -5,7 +5,17 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R363** (Camada Epistêmica de Roteamento)
+- **Branch:** `main` · última entrega: **R364–R367** (guardas de tradução do plano OpenCode Books Global)
+- **R364–R367 (2026-08-02):** implementados os três agentes que eram só interface no R359 +
+  benchmark medido: TerminologyGraphAgent (`translation/terminology_graph.py`),
+  AuthorVoiceGuardian (`translation/author_voice.py`), BackTranslationVerifier
+  (`translation/back_translation.py`) — todos fail-closed, com gate humano, agent cards
+  com `episteme:` explícita — e benchmark cultural medido
+  (`scripts/benchmark_r367_cultural.py`: precisão micro 1.00, recall 0.86 em corpus
+  interno de 18 casos; substitui o "98%" não medido do plano). 62 testes novos verdes.
+  Pendências honestas: API/white label segue inexistente (só CLI local); validação
+  externa do agente cultural continua não feita; opencode.json regenerado mas não
+  commitado (mistura pendências de outra frente).
 - **R363 (2026-08-02):** SPEC-935-R363 verified; `transformer/episteme.py` (6 regimes,
   inferência determinística), peso brando ±10% no `SkillHandbook.match` (fail-open),
   frontmatter opcional `episteme:` no catalog_loader; 27 testes TDD verdes.
