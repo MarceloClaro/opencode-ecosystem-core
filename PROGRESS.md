@@ -5,7 +5,13 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R368** (reavaliação de gaps: cobertura epistêmica + higiene SDD)
+- **Branch:** `main` · última entrega: **R369** (andaimes de raciocínio produtivo científico-literário)
+- **R369 (2026-08-02):** `reasoning/production_scaffolds.py` — ponte entre os motores de
+  raciocínio (SPEC-917/ARCHE) e a produção editorial: 8 movimentos científicos auditáveis
+  com engine_hints; auditoria de novidade (`UNSUPPORTED_NOVELTY_CLAIM` quando "inédito/
+  inovador" não tem citação/comparação na mesma frase); plano literário contratual
+  (voz/conflito/símbolos/estranhamento); relatório medido de distintividade (léxico de
+  22 clichês pt); `select_scaffold` via episteme da tarefa. 21 testes TDD verdes.
 - **R368 (2026-08-02):** cobertura epistêmica do catálogo 32%→**65%** (léxico pt/en em 2
   rodadas curadas; invariante de sinais disjuntos; `catalog_episteme_coverage()`;
   12º check do doctor `episteme_coverage` com números medidos). Higiene SDD: 6 specs
