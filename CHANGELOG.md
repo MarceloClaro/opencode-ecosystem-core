@@ -4,6 +4,26 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.4.0] - 2026-08-02
+
+### Adicionado
+- **Camada Epistêmica de Roteamento (SPEC-935-R363)**: `transformer/episteme.py` com 6 regimes epistemológicos, léxico determinístico pt/en, matriz de afinidade e inferência que nunca chuta; `SkillHandbook.match()` aplica afinidade tarefa↔agente como peso brando (±10% máx., fail-open); frontmatter opcional `episteme:` nos agent cards.
+- **Guardas de Tradução Cultural (SPEC-935-R364/R365/R366)** — os três agentes que eram só interface no R359:
+  - `translation/terminology_graph.py`: grafo terminológico trilíngue versionado, idempotente, com aprovação humana obrigatória por termo, detecção de `TERM_CONFLICT`/`SYMBOL_DRIFT` e gate de release fail-closed;
+  - `translation/author_voice.py`: perfil de voz autoral contratual (preserve/gloss/adapt, modernismos proibidos) com `VOICE_SHIFT`/`ANACHRONISM`/`REGISTER_SHIFT`;
+  - `translation/back_translation.py`: 6 verificações determinísticas de retrotradução; nunca aprova equivalência.
+- **Benchmark Cultural Medido (SPEC-935-R367)**: corpus interno rotulado de 18 casos (com limitações conhecidas deliberadas) + runner determinístico; resultado datado: precisão micro 1.00, recall micro 0.86; relatórios versionados com disclaimer de não-validação-externa.
+- **Cobertura Epistêmica (SPEC-935-R368)**: léxico ampliado em 2 rodadas curadas (32%→65% do catálogo de 205 agentes), invariante de sinais disjuntos, `catalog_episteme_coverage()` e 12º check do doctor (`episteme_coverage`).
+- **Andaimes de Raciocínio Produtivo (SPEC-935-R369)**: `reasoning/production_scaffolds.py` — 8 movimentos científicos auditáveis com `engine_hints` (SPEC-917/ARCHE), auditoria de novidade (`UNSUPPORTED_NOVELTY_CLAIM` sem citação/comparação na mesma frase), plano literário contratual (voz/conflito/símbolos/estranhamento), relatório medido de distintividade (22 clichês pt) e `select_scaffold()` via episteme.
+- 122 testes novos (TDD estrito, RED verificado antes de cada implementação).
+
+### Corrigido
+- **Higiene SDD**: 6 specs (R264–R266, R277–R279) apontavam para "validações inline" ou arquivos de teste que nunca existiram no git; agora referenciam testes de regressão reais dos entregáveis (`test_sdd_tdd` de volta a 12/12).
+- 15 diretórios `mci_test_state_*` órfãos removidos e ignorados no `.gitignore`.
+
+### Documentado
+- Falhas pré-existentes da frente literária (R272–R276) confirmadas também no HEAD e registradas como pendência nominal em `PROGRESS.md` (não corrigidas às cegas para não misturar frentes).
+
 ## [2.3.0] - 2026-07-08
 
 ### Adicionado

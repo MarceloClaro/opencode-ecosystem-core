@@ -88,9 +88,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercont
 
 ---
 
-##  Arquitetura do Sistema (v3.0)
+##  Arquitetura do Sistema (v3.7)
 
-O ecossistema é organizado em **6 camadas interconectadas**:
+O ecossistema é organizado em **10 camadas interconectadas**:
 
 ### 1. Camada Metacognitiva (MCI)
 Barramento de eventos (Global Workspace) onde agentes compartilham memória, confiança calibrada e reflexões pós-execução. Inclui MetaBus (pub/sub), Blackboard (protocolo A2A), memória hierárquica e Reflexion middleware.
@@ -152,7 +152,7 @@ Roteador de atenção (Multi-Head Attention com 4 cabeças: semântica, capacida
 - **CI/CD (R106):** GitHub Actions, quality report, coverage gate
 
 ### 6. Catálogo de Agentes
-187+ agentes especializados: Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, LLM Reduction, Colibri/OLMoE, GameTheory, Jinja2, DataKnowledgeHub, e especialistas jurídicos, de design e quânticos.
+205 agentes especializados (contagem medida pelo doctor em 2026-08-02): Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, LLM Reduction, Colibri/OLMoE, GameTheory, Jinja2, DataKnowledgeHub, e especialistas jurídicos, de design e quânticos.
 
 ### 7. Camada de Redução de Dependência LLM (NOVO R220–R222)
 Seis componentes determinísticos que substituem chamadas de LLM para tarefas rotineiras,
@@ -173,6 +173,49 @@ integrando-se silenciosamente antes do `AttentionRouter`:
 - **R222**: `MetricsCollector` expõe LLM calls saved via `/health`, `/metrics` e no Doctor
 
 **Métrica:** `orch.get_reduction_stats()` → `total_llm_calls_saved`
+
+### 8. Camada Epistêmica de Roteamento (R363 + R368)
+Cada agente/skill do catálogo é associado a um de **6 regimes epistemológicos**
+(empírico-analítico, formal-dedutivo, hermenêutico-interpretativo,
+crítico-reflexivo, pragmático-técnico, regulatório-normativo) por inferência
+determinística sobre metadados (`transformer/episteme.py`) ou frontmatter
+explícito `episteme:` no agent card. O `SkillHandbook.match()` aplica a
+afinidade epistêmica tarefa↔agente como **peso brando** (±10% máx.,
+fail-open: sem episteme, o score é idêntico ao anterior). Cobertura medida
+pelo 12º check do doctor (`episteme_coverage`): 133/205 agentes (65%) em
+2026-08-02.
+
+### 9. Guardas de Tradução Cultural — OpenCode Books (R359 + R364–R367)
+Stack contratual fail-closed para internacionalização editorial PT-BR/EN/ZH-CN:
+
+| Módulo | Papel | Contrato |
+|---|---|---|
+| `translation/cultural_episteme.py` | Gate de equivalência cultural (21 códigos de risco) | OCB-CULTURAL-EPISTEME-001 |
+| `translation/terminology_graph.py` | Grafo terminológico versionado; aprovação humana por termo; TERM_CONFLICT/SYMBOL_DRIFT | OCB-TERMINOLOGY-GRAPH-001 |
+| `translation/author_voice.py` | Perfil de voz autoral (preserve/gloss/adapt); VOICE_SHIFT/ANACHRONISM/REGISTER_SHIFT | OCB-AUTHOR-VOICE-001 |
+| `translation/back_translation.py` | 6 verificações determinísticas de retrotradução; nunca aprova equivalência | OCB-BACK-TRANSLATION-001 |
+| `scripts/benchmark_r367_cultural.py` | Benchmark **medido** em corpus interno rotulado (18 casos) | SPEC-935-R367 |
+
+Resultado medido em 2026-08-02: precisão micro 1.00, recall micro 0.86 —
+com casos de limitação conhecida deliberados (corpus interno ≠ validação
+externa; ver disclaimer no relatório versionado).
+
+### 10. Andaimes de Raciocínio Produtivo (R369)
+Ponte contratual entre os 11 motores de raciocínio (SPEC-917/ARCHE-Peirce)
+e a produção editorial (`reasoning/production_scaffolds.py`):
+- **Andaime científico**: 8 movimentos de raciocínio auditáveis
+  (problema→lacuna→hipótese→método→evidência→contra-argumento→limitação→
+  contribuição), cada um com `engine_hints` para os motores existentes;
+- **Auditoria de novidade**: "inédito/inovador/state-of-the-art" sem citação
+  ou comparação na mesma frase → `UNSUPPORTED_NOVELTY_CLAIM` (gate humano) —
+  novidade se argumenta, não se decreta;
+- **Plano literário contratual**: voz, conflito, símbolos e estratégia de
+  estranhamento explícitos antes da escrita;
+- **Distintividade medida**: type-token, ritmo, léxico de 22 clichês pt —
+  números descritivos, nunca veredito de qualidade;
+- **Seleção por episteme**: `select_scaffold()` roteia científico/literário
+  pela camada 8; sem sinais → `indeterminate` (nunca chuta).
+
 
 ### 🎨 Diagramas e Fluxogramas Visuais da Arquitetura
 
@@ -279,7 +322,7 @@ sequenceDiagram
     end
 ```
 
-#### 4. Mapa da Arquitetura Completa (v3.6.0)
+#### 4. Mapa da Arquitetura Completa (v3.7.0)
 
 ```mermaid
 graph TD
@@ -473,7 +516,7 @@ graph TD
     APIGateway -->|HTTP REST| External
     
     %% Agentes
-    subgraph Agents [Catálogo de Agentes 187+]
+    subgraph Agents [Catálogo de Agentes 205]
         A1[Researcher]
         A2[Coder]
         A3[Reviewer]
@@ -487,6 +530,22 @@ graph TD
         A11[mira-presenter Agent]
     end
     
+    %% Camada Epistêmica e Guardas Culturais (R363-R369)
+    subgraph Epist [Camada Epistêmica & Guardas Culturais R363-R369]
+        EP1[episteme.py<br>6 regimes + léxico determinístico]
+        EP2[SkillHandbook<br>peso brando ±10% fail-open]
+        EP3[TerminologyGraph<br>aprovação humana por termo]
+        EP4[AuthorVoiceGuardian<br>preserve/gloss/adapt]
+        EP5[BackTranslationVerifier<br>6 verificações]
+        EP6[CulturalEpistemeAgent<br>21 códigos de risco]
+        EP7[ProductionScaffolds<br>8 movimentos + novidade ancorada]
+    end
+    EP1 --> EP2
+    EP2 -->|roteia| Agents
+    EP6 -->|delta propose_upsert| EP3
+    EP7 -->|select_scaffold| EP1
+    Orchestrator -->|match semântico+epistêmico| EP2
+
     %% Fluxo de Agentes
     Agents -.->|Registra Agent Card| BB
     BB -.->|Call for Proposals| Agents
@@ -1326,6 +1385,58 @@ Uso: `./scripts/litert-lm-serve.sh` ou `LITERT_LM_MAX_TOKENS=16384 litert-lm ser
 
 ---
 
+##  Camadas Epistêmica, Guardas Culturais e Andaimes (R363–R369) — Reprodução
+
+Tudo abaixo é determinístico (sem LLM, sem rede) e roda em segundos:
+
+```bash
+# 1. Camada epistêmica de roteamento (R363) + cobertura do catálogo (R368)
+python3 -m pytest tests/test_r363_episteme_routing.py tests/test_r368_episteme_coverage.py -q
+
+# 2. Guardas de tradução cultural (R364-R366)
+python3 -m pytest tests/test_r364_terminology_graph.py \
+                  tests/test_r365_author_voice_guardian.py \
+                  tests/test_r366_back_translation_verifier.py -q
+
+# 3. Benchmark cultural medido (R367) — regenera os relatórios versionados
+python3 scripts/benchmark_r367_cultural.py
+python3 -m pytest tests/test_r367_cultural_benchmark.py -q
+
+# 4. Andaimes de raciocínio produtivo (R369)
+python3 -m pytest tests/test_r369_production_scaffolds.py -q
+
+# 5. Cobertura epistêmica no diagnóstico (12º check)
+python3 -m marceloclaro.cli doctor | grep -A2 episteme_coverage
+```
+
+Uso mínimo em Python:
+
+```python
+from transformer.episteme import infer_task_episteme, episteme_affinity
+from reasoning.production_scaffolds import (
+    select_scaffold, audit_scientific_manuscript,
+    validate_literary_plan, literary_distinctiveness_report,
+)
+from translation.terminology_graph import TerminologyGraph
+from translation.author_voice import review_segment
+from translation.back_translation import verify
+
+# Roteia a tarefa pelo regime epistemológico
+select_scaffold("análise estatística com regressão")   # -> "scientific"
+select_scaffold("tradução literária preservando a voz") # -> "literary"
+
+# Audita um manuscrito: movimentos de raciocínio + alegações de novidade
+resultado = audit_scientific_manuscript({"introducao": "...", "metodo": "..."})
+# resultado["findings"] -> MISSING_MOVE / UNSUPPORTED_NOVELTY_CLAIM
+```
+
+**Política de honestidade (CORRIGENDUM):** todos os números destas camadas
+são medidos e datados (nunca metas); os guardas apontam indícios e exigem
+revisão humana em alto risco; nenhum módulo atesta relevância científica,
+equivalência cultural ou qualidade literária.
+
+---
+
 ##  Comparative de Maturidade Técnica
 
 | Critério | OpenCode v3.0 | LangGraph | CrewAI | AutoGen | MetaGPT |
@@ -1380,12 +1491,17 @@ opencode-ecosystem-core/
 │   ├── opencode-evosci/
 │   ├── opencode-deep-research/
 │   └── opencode-peer-review/
-├── specs/                   # Especificacoes SDD (R97-R107)
+├── translation/             # Guardas culturais: cultural_episteme, terminology_graph,
+│                            #   author_voice, back_translation (R359, R364-R366)
+├── reasoning/               # 11 motores (SPEC-917) + ARCHE RLT + production_scaffolds (R369)
+├── transformer/             # SemanticMatcher/SkillHandbook + episteme.py (R363/R368)
+├── validacao_externa/       # Benchmark cultural medido (R367) + dossiês
+├── specs/                   # Especificacoes SDD (R97-R369)
 ├── evolution/               # Cycles registry (65 ciclos)
-├── tests/                   # 1062 testes automatizados
+├── tests/                   # 2.200+ testes automatizados
 ├── mci/                     # Metacognitive Interconnect
 ├── marceloclaro/            # Orquestrador
-├── agents/catalog/          # 160+ agent cards
+├── agents/catalog/          # 205 agent cards (com frontmatter opcional episteme:)
 ├── sdd/                     # SpecRegistry, SpecVerifier, TDDRunner
 ├── trust/                   # Trust Engine
 ├── economy/                 # Token Economy
@@ -1401,7 +1517,7 @@ opencode-ecosystem-core/
 ##  Executar os Testes
 
 ```bash
-# Suite completa (1062 testes)
+# Suite completa (2.200+ testes; ~5h — rode em background)
 python3 -m pytest tests/ -v
 
 # Pipeline academico agentivo (R101-R105)
