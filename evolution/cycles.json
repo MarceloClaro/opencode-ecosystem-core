@@ -3294,6 +3294,24 @@
         "Specs 'verified' apontando para testes que nunca existiram são o overclaim mais silencioso: o registro SDD só o pega se o test_file for validado como caminho"
       ],
       "timestamp": "2026-08-02T09:42:26.574843+00:00"
+    },
+    {
+      "round_id": "R369",
+      "objective": "SPEC-935-R369 — andaimes de raciocínio produtivo: ponte contratual entre os motores de raciocínio (SPEC-917/ARCHE) e a produção de artigos/teses/dissertações e obras literárias",
+      "changes": [
+        "reasoning/production_scaffolds.py: andaime científico com 8 movimentos de raciocínio obrigatórios (problema→contribuição), cada um com engine_hints mapeados aos motores existentes e aos tipos de Peirce",
+        "audit_scientific_manuscript: MISSING_MOVE (high para método/evidência/limitação) + auditoria de novidade — 'inédito/inovador/state-of-the-art' sem citação ou comparação na mesma frase vira UNSUPPORTED_NOVELTY_CLAIM (high, gate humano)",
+        "validate_literary_plan: plano de obra contratual (voz, conflito, símbolos, estratégia de estranhamento, clichês a evitar) fail-closed",
+        "literary_distinctiveness_report: medição descritiva (type-token, ritmo, léxico de 22 clichês pt, símbolos recorrentes) com disclaimer de que distintividade medida não é veredito de qualidade/disrupção",
+        "select_scaffold: seleção do andaime pela episteme da tarefa (R363/R368); sem sinais → indeterminate, nunca chuta",
+        "tests/test_r369_production_scaffolds.py: 21 testes TDD"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "'Relevante e inovador' não é promessa executável — mas 'toda alegação de novidade tem ancoradouro de comparação na mesma frase' é, e desloca o ônus da prova para dentro do manuscrito",
+        "Um marcador lexical legítimo em outra seção (protocolo) derruba fixture ingênuo: auditoria por manuscrito inteiro exige fixtures desenhados por movimento"
+      ],
+      "timestamp": "2026-08-02T09:55:04.498288+00:00"
     }
   ]
 }
