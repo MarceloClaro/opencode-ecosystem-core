@@ -140,6 +140,12 @@ def inline_md_to_latex(text):
     # § → \S
     text = text.replace('§', r'\S{}')
 
+    # ╳ (glifo decorativo de "cruz/apagado") não existe nas fontes usadas
+    # (EB Garamond/pdflatex): pdflatex trava com "Unicode character not set
+    # up for use"; xelatex silencia com "Missing character" (glifo some sem
+    # erro). $\times$ é seguro nos dois engines e preserva a leitura visual.
+    text = text.replace('╳', r'$\times$')
+
     return text.strip()
 
 

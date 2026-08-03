@@ -1104,12 +1104,22 @@ def _route_report() -> dict[str, Any]:
         by_language = {language: tri["by_language"].get(language, 0) for language in ("pt", "en", "zh")}
         missing = len(tri["missing"])
         divergent = len(tri["divergences"])
+        # O corpus cresce entre ciclos (novos fragmentos, novos \rota{} restaurados
+        # em rotas antes só em texto puro) — fixar 180/540 como número mágico
+        # reproduziria o mesmo problema já corrigido no R358 para a contagem de
+        # fragmentos. A invariante real e estável é: PT/EN/ZH devem ter sempre a
+        # mesma contagem de rotas entre si (paridade trilíngue), e o total deve
+        # bater com essa contagem × 3.
+        language_counts = set(by_language.values())
+        languages_match = len(language_counts) == 1 and next(iter(language_counts)) > 0
+        expected_total = by_language["pt"] * 3
         passed = bool(
             all(item["passed"] for item in editions.values())
-            and by_language == {"pt": 180, "en": 180, "zh": 180}
+            and languages_match
+            and tri["total"] == expected_total
         )
         return {
-            "expected": 540,
+            "expected": expected_total,
             "total": tri["total"],
             "valid": tri["valid"],
             "by_language": by_language,
