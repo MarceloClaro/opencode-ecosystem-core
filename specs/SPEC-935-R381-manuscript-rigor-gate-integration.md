@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R381
 title: Integração do gate de rigor de manuscrito (R369) ao pipeline científico principal
 component: marceloclaro/orchestrator.py::scientific_discovery_pipeline
-status: draft
+status: verified
 test_file: tests/test_r381_manuscript_rigor_gate_integration.py
 ---
 
