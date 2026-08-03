@@ -234,7 +234,14 @@ def parse_fragments(md_content):
 # === .TEX GENERATION ===
 
 def extract_fragment_content(frag):
-    """Extract the actual content (paragraphs) from a fragment, excluding links section."""
+    """Extract the actual content (paragraphs) from a fragment, excluding links section.
+
+    A linha "↪ Links:" só é tratada como elemento à parte (reposicionado ao
+    fim do .tex) quando ela de fato é o último conteúdo do fragmento. Alguns
+    fragmentos (ex.: CONT-07) têm um epílogo real depois da linha de Links
+    — nesse caso a linha permanece no corpo, em sua posição original, para
+    não descartar conteúdo narrativo genuíno.
+    """
     lines = frag['lines']
 
     # Find where links section starts
@@ -244,11 +251,17 @@ def extract_fragment_content(frag):
             links_idx = i
             break
 
-    # Also check for "↪ Links:" as last item
-    content_lines = lines[:links_idx] if links_idx is not None else lines
-    links_line = lines[links_idx] if links_idx is not None else ''
+    if links_idx is None:
+        return '\n'.join(lines).strip(), ''
 
-    # Clean up content: remove the duplicate header (second ## or first line)
+    trailing = [l for l in lines[links_idx + 1:] if l.strip() and l.strip() != '---']
+    if trailing:
+        # Há conteúdo real depois da linha de Links — mantém tudo no corpo,
+        # na ordem original, em vez de reposicionar a linha para o fim.
+        return '\n'.join(lines).strip(), ''
+
+    content_lines = lines[:links_idx]
+    links_line = lines[links_idx]
     content = '\n'.join(content_lines)
     return content.strip(), links_line.strip()
 
