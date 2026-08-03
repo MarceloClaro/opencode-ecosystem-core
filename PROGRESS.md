@@ -5,7 +5,39 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R380 — enriquecimento MASWOS** (2026-08-02)
+- **Branch:** `main` · última entrega: **R381 — gate de rigor de manuscrito no pipeline principal** (2026-08-02)
+- **R381 (2026-08-02) — unificação real, não apenas testes isolados:** ao
+  investigar se as camadas R363-R373 estão de fato conectadas ao orquestrador
+  principal (pedido do usuário: "unifique... sendo um ecossistema metacognitivo
+  superior"), confirmei que a Camada Epistêmica (R363) já está viva via
+  `AttentionRouter.semantic_matcher`, mas `scientific_discovery_pipeline()`
+  **nunca chamava** `audit_scientific_manuscript()` (R369) apesar do R105 já
+  produzir `sections: Dict[str,str]` real no formato exato esperado pelo
+  auditor. Corrigido: novo estágio `r106_rigor`, consultivo (não bloqueia,
+  como R104d/R105), com calibração de confiança + traço metacognitivo no
+  mesmo padrão dos demais estágios, e novo campo de conveniência
+  `result["manuscript_rigor_gate"]`. **Fora de escopo, documentado, não
+  fabricado:** R370 (estatística), R371 (triangulação) e R372 (pré-registro)
+  continuam opt-in via `OrchestratorReviewer` — exigem dados brutos que só o
+  chamador tem; candidatos a R382+ se houver caso de uso real. Ver
+  `specs/SPEC-935-R381-manuscript-rigor-gate-integration.md` (7 critérios de
+  aceitação) e `tests/test_r381_manuscript_rigor_gate_integration.py` (7
+  testes, TDD real, GREEN). Zero regressão: `test_r108` 10/10, `doctor`
+  12/12 sem falha nova.
+- **Achado colateral do R381 (não é regressão, documentado para triagem
+  futura):** `tests/test_nano_orchestration.py::TestIntegration` (3 testes:
+  `test_end_to_end_orchestration`, `test_planner_to_sdd_to_writer`,
+  `test_writer_to_quality_to_coherence`) **trava indefinidamente** ao rodar a
+  suíte completa — isolado por bissecção: o arquivo inteiro trava, mas um
+  teste unitário isolado da mesma classe (`test_nano_block_with_type`) passa
+  em <0.1s; a suspeita é instabilidade do daemon LiteRT-LM, que o `doctor` já
+  reporta como `warn` ("unavailable... falhas registradas=25"). Não é código
+  meu (não importa nada de `marceloclaro`), não é regressão deste ciclo — mas
+  precisa de triagem própria por quem cuida de `nano_orchestration/`. Suíte
+  completa rodada com esses 3 testes deselecionados: **65 falhas, 2574
+  aprovados, 53 pulados** — mesmo padrão de falhas pré-existentes já
+  documentado no R380 (61 falhas), nenhuma delas tocando `orchestrator.py`,
+  `r381`, `r108` ou `r369-r373`.
 - **⚠️ Concorrência real detectada (2026-08-02):** durante o R380, encontrei
   `evolution/cycles.json` já contendo ciclos R374–R379 de uma **frente
   concorrente trabalhando ao vivo no mesmo checkout** (Molambudos:

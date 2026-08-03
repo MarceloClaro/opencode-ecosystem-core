@@ -49,6 +49,8 @@ from economy import TokenEconomy
 from scanners import diagnostic_pipeline
 from academic import MaswosPipeline
 from reasoning import multi_reasoning, run_experiment_suite
+from reasoning.production_scaffolds import audit_scientific_manuscript
+from agentic_science_v2.paper_composer import compose_paper as compose_paper_core
 from evolution import evolution_registry
 from integrations.antigravity import antigravity_bridge
 from marceloclaro.catalog_loader import register_catalog_agents
@@ -1232,7 +1234,6 @@ class MarceloClaroOrchestrator:
 
             # R105 — Paper Composer
             t4 = time.time()
-            from agentic_science_v2.paper_composer import compose_paper as compose_paper_core
             revised_manuscript = manuscript_seed
             for revision in reversed(r104d.get("revisions", [])):
                 proposal = revision.get("proposal") or {}
@@ -1263,9 +1264,52 @@ class MarceloClaroOrchestrator:
                 error_type="pipeline_error" if r105_failed else None,
             )
 
+            # R106 — Auditoria de Rigor do Manuscrito (SPEC-935-R381)
+            t5 = time.time()
+            r105_sections = r105.get("sections") if not r105_failed else None
+            manuscript_rigor_gate: Optional[Dict[str, Any]] = None
+            if r105_sections:
+                r106 = audit_scientific_manuscript(r105_sections)
+                r106_high = any(
+                    f.get("severity") == "high" for f in r106.get("findings", [])
+                )
+                r106_confidence = 0.0 if r106_high else 1.0
+                calibration = _calibrate("r106_rigor", r106_confidence, not r106_high)
+                _trace(
+                    "r106_rigor", "failure" if r106_high else "success",
+                    f"Auditoria de rigor (R369): {len(r106.get('moves_presentes', []))} "
+                    f"movimentos presentes, {len(r106.get('findings', []))} achados, "
+                    f"human_gate={r106.get('human_gate')}. Não bloqueia o pipeline "
+                    "(consultivo, como R104d/R105).",
+                    before=r106_confidence,
+                    after=calibration["calibrated_confidence"],
+                    evidence_count=len(r106.get("findings", [])),
+                )
+                manuscript_rigor_gate = {
+                    "human_gate": r106.get("human_gate"),
+                    "high_severity_findings": sum(
+                        1 for f in r106.get("findings", []) if f.get("severity") == "high"
+                    ),
+                    "moves_ausentes": [
+                        f["move"] for f in r106.get("findings", [])
+                        if f.get("code") == "MISSING_MOVE" and f.get("move")
+                    ],
+                }
+            else:
+                r106 = {
+                    "status": "skipped",
+                    "reason": (
+                        "R105 falhou ou não produziu seções compostas "
+                        "(sections vazio/ausente) — auditoria de rigor não "
+                        "fabricada sobre dado inexistente."
+                    ),
+                }
+            timeline["r106_rigor"] = round(time.time() - t5, 1)
+            stages["r106_rigor"] = r106
+
             timeline["total"] = round(time.time() - start, 1)
             metacog = MetacognitiveEvaluator().evaluate(traces)
-            return {
+            result = {
                 "status": "completed",
                 "seed_domain": seed_domain,
                 "venue": venue,
@@ -1276,6 +1320,9 @@ class MarceloClaroOrchestrator:
                 "metacognitive_report": metacog,
                 "revised_manuscript": revised_manuscript,
             }
+            if manuscript_rigor_gate is not None:
+                result["manuscript_rigor_gate"] = manuscript_rigor_gate
+            return result
 
         except Exception as exc:
             logger.exception("[%s] Falha no scientific_discovery_pipeline: %s", self.id, exc)
