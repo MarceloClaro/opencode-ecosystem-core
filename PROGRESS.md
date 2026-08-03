@@ -5,7 +5,30 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R385 — scanners de imersão psicológica (indução, ritmo frenético, sensorialidade, manipulação narrativa) + correção MSTTR** (2026-08-03)
+- **Branch:** `main` · última entrega: **R386 — restaura contrato dos agentes literários + aprimoramento de prosa em CONT-01/CONT-02** (2026-08-03)
+- **R386 (2026-08-03) — as duas pendências do R385 resolvidas em
+  sequência, a pedido do usuário:** (b) infraestrutura: 6 testes
+  (R270,271,273,274,275,276) corrigidos para apontar para
+  `_archive/relatorios/` (arquivamento em lote deliberado de 2026-07-30,
+  respeitado, não desfeito); 9 cards `agents/catalog/literary-*.md`
+  restaurados (`name:` para slug exato, `temperature:`, seção "Contrato
+  de Saída Obrigatório" + "Guarda Anti-Overclaim" referenciando os
+  scanners Python reais); `opencode.json` regenerado, corrigindo 2
+  falhas pré-existentes não relacionadas como efeito colateral honesto.
+  Resultado: **30/30 testes das 7 suítes R270-R276 passam** (eram 27
+  falhas). (a) prosa: verificado programaticamente que nenhum fragmento
+  `CONT-*` está travado por hash de proveniência (só DOC-17/LUC-01/
+  MEM-06/MEM-12/MEM-26, já tratado); backup manual criado; edições
+  cirúrgicas em CONT-01 e CONT-02 (cruzamento sensorial + comandos
+  diretos de 2ª pessoa), medidas antes/depois com os scanners
+  (`sensory_immersion` sobe 25.56→61.06 em CONT-01). **Bug real
+  encontrado na própria validação** (não escondido): o scanner de
+  manipulação psicológica não detectava imperativo no início de
+  parágrafo (parágrafos LaTeX começam com `\noindent`, não pontuação) —
+  bug sistemático, corrigido com teste de regressão; recontagem real no
+  livro inteiro sobe de 22 para 28 ocorrências. Suíte completa: **34
+  falhas (era 64), zero regressão nova, 30 corrigidas**. Ver
+  `specs/SPEC-935-R386-literary-agents-contract-restore-and-prose-enhancement.md`.
 - **R385 (2026-08-03) — diagnóstico literário de Molambudos + ferramentas
   novas:** pedido do usuário para revisar a obra com scanners e avaliar se
   é "hipnótica, terror psicológico visceral e frenético, imersiva,
@@ -33,15 +56,9 @@
   qualitativa completa entregue ao usuário na conversa (não persistida
   como arquivo — refazer chamando as 3 funções de scanner se precisar
   reproduzir).
-- **Achado de infraestrutura documentado, não corrigido (fora de escopo
-  deste ciclo):** relatórios dos ciclos R270-R276 foram movidos de
-  `Molambudos_VictoriaRegia/relatorios/` para `_archive/relatorios/` sem
-  atualizar os 5 testes que ainda apontam para o caminho antigo
-  (`FileNotFoundError`). Além disso, os 11 cards `agents/catalog/
-  literary-*.md` foram sobrescritos por um template genérico no commit
-  `47821bb`, perdendo `temperature:`, `name:` em slug e texto de contrato
-  exigido pelos testes R272/R276 — regressão conhecida, já documentada
-  anteriormente neste arquivo, não é nova.
+- **Achado de infraestrutura do R385, resolvido no R386 (ver acima):**
+  relatórios R270-R276 movidos + 9 cards `literary-*.md` com contrato
+  perdido — ambos corrigidos.
 - **R384 (2026-08-03) — o achado "fora de escopo" do R383, resolvido a
   pedido do usuário ("prossiga"):** antes de regenerar, verifiquei em
   memória e descobri que a divergência era **maior** do que eu tinha

@@ -162,6 +162,25 @@ class TestPsychologicalManipulationScanner:
         result = PsychologicalManipulationScanner().scan(HYPNOTIC_TEXT)
         assert result["dimensions"]["quebra_da_quarta_parede"]["score"] > 0
 
+    def test_detects_imperative_at_paragraph_start_not_only_after_punctuation(self):
+        """Achado real ao editar fragmentos do Molambudos: parágrafos em
+        LaTeX começam com \\noindent (não com pontuação), então um comando
+        imperativo logo no início do parágrafo não era capturado pelo regex
+        original (que só olhava início-de-string ou depois de .!?)."""
+        from scanners.psychological_immersion_scanners import (
+            PsychologicalManipulationScanner,
+        )
+
+        text = (
+            "\\noindent Você apoiou o livro no colo. Sinta o peso.\n\n"
+            "\\noindent Sinta o pulso na garganta. A respiração ficou curta."
+        )
+        result = PsychologicalManipulationScanner().scan(text)
+        assert result["dimensions"]["comando_direto_2a_pessoa"]["score"] > 0
+        assert "2 comandos imperativos" in (
+            result["dimensions"]["comando_direto_2a_pessoa"]["evidence"][0]
+        )
+
     def test_warns_it_is_technique_not_clinical_effect(self):
         from scanners.psychological_immersion_scanners import (
             PsychologicalManipulationScanner,

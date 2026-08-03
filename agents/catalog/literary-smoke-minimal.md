@@ -1,5 +1,5 @@
 ---
-name: Literary Smoke Minimal
+name: literary-smoke-minimal
 description: "Agente mínimo de smoke test literário para isolar falhas de runtime, slug, model routing e registry dos agentes literary-*."
 version: '1.0.0'
 skills:
@@ -22,6 +22,9 @@ examples:
 - Execute tarefa de literary conforme especificação
 - Analise e reporte os resultados
 mode: subagent
+temperature: 0.1
+type: literary-agent
+category: literary
 agent_id: literary-smoke-minimal
 ---
 
@@ -35,3 +38,19 @@ Agente de smoke test para o subsistema literário do OpenCode Ecosystem.
 2. Validar roteamento de tarefas para o agente correto
 3. Confirmar que o registry contém todos os agentes literários
 4. Reportar falhas de forma isolada (qual agente, qual erro)
+
+## Contrato de Saída Obrigatório
+
+A resposta deste agente **nunca pode ser vazia**. Deve sempre conter, no
+mínimo, os campos abaixo (JSON ou seções equivalentes em Markdown):
+
+```json
+{
+  "veredito": "resumo de 1 frase do resultado do smoke test",
+  "strengths": ["agente(s) que carregaram e rotearam corretamente"],
+  "risks": ["agente(s) com falha de runtime, slug ou registry"],
+  "recommendations": ["ação concreta para cada falha isolada"],
+  "safe_claim": "formulação seca do que foi de fato verificado nesta execução",
+  "limites": "smoke test verifica carregamento/roteamento, não qualidade da análise literária"
+}
+```

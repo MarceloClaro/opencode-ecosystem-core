@@ -373,9 +373,17 @@ class PsychologicalManipulationScanner(LiteraryScannerBase):
         low = _lower(text)
         words = _words(text)
 
+        # Frases (não só depois de .!? — cada parágrafo em LaTeX começa com
+        # \noindent, não com pontuação, então tratar cada frase isoladamente
+        # evita subcontar imperativos no início de parágrafo.
         imperative_hits = 0
-        for verb in self.SECOND_PERSON_COMMAND_VERBS:
-            imperative_hits += len(re.findall(rf"(?:^|[.!?]\s*)\s*{re.escape(verb)}\b", low))
+        for sentence in _sentences(text):
+            s_words = _words(sentence)
+            idx = 0
+            while idx < len(s_words) and s_words[idx] in ("noindent", "textit", "textbf"):
+                idx += 1
+            if idx < len(s_words) and s_words[idx] in self.SECOND_PERSON_COMMAND_VERBS:
+                imperative_hits += 1
 
         complicity_hits = _term_frequency(low, self.COMPLICITY)
         double_bind_pattern_hits = len(re.findall(

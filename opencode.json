@@ -169,7 +169,7 @@
       }
     },
     "00_editor_chefe_phd": {
-      "description": "Agente especializado 00_editor_chefe_phd",
+      "description": "`Editor-Chefe PhD / Gerente de Qualis A1`.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/00_editor_chefe_phd.md}",
       "permission": {
@@ -178,7 +178,7 @@
       }
     },
     "01_agente_diagnostico_escopo": {
-      "description": "Agente especializado 01_agente_diagnostico_escopo",
+      "description": "Transformar o tema do usuario em um problema de pesquisa claro, delimitado, auditavel e planejavel.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/01_agente_diagnostico_escopo.md}",
       "permission": {
@@ -187,7 +187,7 @@
       }
     },
     "02_agente_busca_curadoria": {
-      "description": "Agente especializado 02_agente_busca_curadoria",
+      "description": "Executar busca multipla, auditavel e suficientemente ampla para sustentar um artigo de alto nivel.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/02_agente_busca_curadoria.md}",
       "permission": {
@@ -196,7 +196,7 @@
       }
     },
     "03_agente_evidencias_citacoes": {
-      "description": "Agente especializado 03_agente_evidencias_citacoes",
+      "description": "Converter fontes em evidencias localizadas, com funcao argumentativa e limites de uso explicitados.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/03_agente_evidencias_citacoes.md}",
       "permission": {
@@ -205,7 +205,7 @@
       }
     },
     "04_agente_estrutura_argumentativa": {
-      "description": "Agente especializado 04_agente_estrutura_argumentativa",
+      "description": "Projetar a espinha argumentativa do artigo para que cada secao execute uma funcao precisa.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/04_agente_estrutura_argumentativa.md}",
       "permission": {
@@ -214,7 +214,7 @@
       }
     },
     "05_agente_revisao_literatura_teoria": {
-      "description": "Agente especializado 05_agente_revisao_literatura_teoria",
+      "description": "Construir uma revisao critica, dialogica e densa, em vez de uma lista de autores.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/05_agente_revisao_literatura_teoria.md}",
       "permission": {
@@ -223,7 +223,7 @@
       }
     },
     "06_agente_metodologia_reprodutibilidade": {
-      "description": "Agente especializado 06_agente_metodologia_reprodutibilidade",
+      "description": "Escrever uma metodologia replicavel, justificada e auditavel.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/06_agente_metodologia_reprodutibilidade.md}",
       "permission": {
@@ -232,7 +232,7 @@
       }
     },
     "07_agente_estatistica_analise": {
-      "description": "Agente especializado 07_agente_estatistica_analise",
+      "description": "Validar a adequacao dos testes, a completude dos reportes e o limite inferencial do manuscrito.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/07_agente_estatistica_analise.md}",
       "permission": {
@@ -241,7 +241,7 @@
       }
     },
     "08_agente_visualizacao_evidencia_grafica": {
-      "description": "Agente especializado 08_agente_visualizacao_evidencia_grafica",
+      "description": "Transformar resultados, metodo e comparacoes em visualizacoes com funcao argumentativa explicita.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/08_agente_visualizacao_evidencia_grafica.md}",
       "permission": {
@@ -250,7 +250,7 @@
       }
     },
     "09_agente_resultados": {
-      "description": "Agente especializado 09_agente_resultados",
+      "description": "Redigir os achados com precisao, ordem logica e neutralidade interpretativa.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/09_agente_resultados.md}",
       "permission": {
@@ -259,7 +259,7 @@
       }
     },
     "10_agente_discussao_contribuicao": {
-      "description": "Agente especializado 10_agente_discussao_contribuicao",
+      "description": "Interpretar os achados em dialogo real com a literatura, explicando significado, limite e contribuicao.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/10_agente_discussao_contribuicao.md}",
       "permission": {
@@ -268,7 +268,7 @@
       }
     },
     "11_agente_conclusao_coerencia_final": {
-      "description": "Agente especializado 11_agente_conclusao_coerencia_final",
+      "description": "Fechar o artigo respondendo a pergunta central, aos objetivos e as hipoteses sem introduzir nada novo.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/11_agente_conclusao_coerencia_final.md}",
       "permission": {
@@ -277,7 +277,7 @@
       }
     },
     "12_agente_auditoria_bibliografica_abnt": {
-      "description": "Agente especializado 12_agente_auditoria_bibliografica_abnt",
+      "description": "Garantir consistencia total entre citacao no corpo, nota de rodape, referencia final e norma ABNT.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/12_agente_auditoria_bibliografica_abnt.md}",
       "permission": {
@@ -286,7 +286,7 @@
       }
     },
     "13_agente_qa_qualis_a1": {
-      "description": "Agente especializado 13_agente_qa_qualis_a1",
+      "description": "Avaliar se o manuscrito atende rigorosamente ao padrão **MASWOS**, o que significa EXIGIR",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/13_agente_qa_qualis_a1.md}",
       "permission": {
@@ -295,7 +295,7 @@
       }
     },
     "14_agente_consistencia_interna": {
-      "description": "Agente especializado 14_agente_consistencia_interna",
+      "description": "Monitorar não apenas o contorno geral do artigo, mas aplicar auditoria micro e macro textual implacável (Padrão 10/10 MASWOS)",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/14_agente_consistencia_interna.md}",
       "permission": {
@@ -304,7 +304,7 @@
       }
     },
     "15_agente_resumo_abstract_palavras_chave": {
-      "description": "Agente especializado 15_agente_resumo_abstract_palavras_chave",
+      "description": "Produzir resumo em portugues, abstract em ingles e palavras-chave que sintetizem fielmente o manuscrito completo, sem inventar nada e sem perder densidade informativa.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/15_agente_resumo_abstract_palavras_chave.md}",
       "permission": {
@@ -313,7 +313,7 @@
       }
     },
     "16_agente_integracao_editorial_docx": {
-      "description": "Agente especializado 16_agente_integracao_editorial_docx",
+      "description": "Integrar todos os capitulos, apendices, figuras, referencias, resumo e metadados em um pacote editorial final coerente, pronto para revisao derradeira e conversao em DOCX.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/16_agente_integracao_editorial_docx.md}",
       "permission": {
@@ -322,7 +322,7 @@
       }
     },
     "17_agente_framework_reprodutivel_ambientes": {
-      "description": "Agente especializado 17_agente_framework_reprodutivel_ambientes",
+      "description": "Transformar a parte computacional do artigo em um pacote reexecutavel, auditavel e explicito quanto a ambiente, dependencia, seed, fluxo e restricoes.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/17_agente_framework_reprodutivel_ambientes.md}",
       "permission": {
@@ -331,7 +331,7 @@
       }
     },
     "18_agente_engenharia_dados_datasets_proveniencia": {
-      "description": "Agente especializado 18_agente_engenharia_dados_datasets_proveniencia",
+      "description": "Garantir que todo dado usado pelo artigo tenha origem, versao, papel analitico, restricao de uso e esquema documentalmente fechados.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/18_agente_engenharia_dados_datasets_proveniencia.md}",
       "permission": {
@@ -340,7 +340,7 @@
       }
     },
     "19_agente_auditoria_codigo_documentacao_tecnica": {
-      "description": "Agente especializado 19_agente_auditoria_codigo_documentacao_tecnica",
+      "description": "Verificar se o codigo, os snippets, as bibliotecas e os pipelines tecnicos realmente correspondem ao que o artigo afirma e se estao ancorados em documentacao confiavel.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/19_agente_auditoria_codigo_documentacao_tecnica.md}",
       "permission": {
@@ -349,7 +349,7 @@
       }
     },
     "20_agente_estatistica_avancada_inferencia": {
-      "description": "Agente especializado 20_agente_estatistica_avancada_inferencia",
+      "description": "Dar suporte inferencial de alto nivel a estudos quantitativos, incluindo cenarios frequentistas, bayesianos, causais, multilevel, temporais, espaciais, multivariados e de dados faltantes.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/20_agente_estatistica_avancada_inferencia.md}",
       "permission": {
@@ -358,7 +358,7 @@
       }
     },
     "21_agente_matematica_aplicada_modelagem_formal": {
-      "description": "Agente especializado 21_agente_matematica_aplicada_modelagem_formal",
+      "description": "Formalizar, derivar, verificar e delimitar modelos matematicos, equacoes, algoritmos numericos e estruturas simbolicas usadas no artigo.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/21_agente_matematica_aplicada_modelagem_formal.md}",
       "permission": {
@@ -367,7 +367,7 @@
       }
     },
     "22_agente_ml_dl_datamining": {
-      "description": "Agente especializado 22_agente_ml_dl_datamining",
+      "description": "Projetar, auditar e comparar pipelines de aprendizado de maquina e mineracao de dados com rigor de baseline, generalizacao, interpretabilidade e reproducibilidade.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/22_agente_ml_dl_datamining.md}",
       "permission": {
@@ -376,7 +376,7 @@
       }
     },
     "23_agente_bioinformatica_omicas": {
-      "description": "Agente especializado 23_agente_bioinformatica_omicas",
+      "description": "Dar suporte especializado a pipelines de DNA, RNA, epigenomica, proteomica, metabolomica, single-cell e multiomicas com foco em rastreabilidade, normalizacao, controle de qualidade e interpretacao pru",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/23_agente_bioinformatica_omicas.md}",
       "permission": {
@@ -385,7 +385,7 @@
       }
     },
     "24_agente_quimioinformatica_modelagem_molecular": {
-      "description": "Agente especializado 24_agente_quimioinformatica_modelagem_molecular",
+      "description": "Auditar e estruturar pipelines de chemometrics, descritores, QSAR/QSPR, docking, dinamica molecular, espectrometria e modelagem molecular aplicada ao artigo.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/24_agente_quimioinformatica_modelagem_molecular.md}",
       "permission": {
@@ -394,7 +394,7 @@
       }
     },
     "25_agente_ciencias_sociais_linguistica_computacional": {
-      "description": "Agente especializado 25_agente_ciencias_sociais_linguistica_computacional",
+      "description": "Dar suporte granular a estudos com surveys, psicometria, corpora, redes, NLP, estilometria, analise de discurso quantitativa e desenho observacional em ciencias sociais.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/25_agente_ciencias_sociais_linguistica_computacional.md}",
       "permission": {
@@ -403,7 +403,7 @@
       }
     },
     "26_agente_visao_computacional_multimodal": {
-      "description": "Agente especializado 26_agente_visao_computacional_multimodal",
+      "description": "Estruturar e auditar pipelines de imagem, video, OCR, segmentacao, deteccao, classificacao visual e modelos multimodais com forte controle de dataset, pre-processamento e erro.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/26_agente_visao_computacional_multimodal.md}",
       "permission": {
@@ -412,7 +412,7 @@
       }
     },
     "27_agente_computacao_quantica_aplicada": {
-      "description": "Agente especializado 27_agente_computacao_quantica_aplicada",
+      "description": "Dar suporte especializado a artigos com circuitos quanticos, simuladores, modelos hibridos, kernels quanticos, variational algorithms e stacks como Qiskit, Cirq e PennyLane.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/27_agente_computacao_quantica_aplicada.md}",
       "permission": {
@@ -421,7 +421,7 @@
       }
     },
     "28_agente_benchmarking_ablacao_robustez": {
-      "description": "Agente especializado 28_agente_benchmarking_ablacao_robustez",
+      "description": "Verificar se o resultado computacional ou quantitativo resiste a comparacoes justas, seeds diferentes, ablations, sensibilidade, erro e cenarios adversos plausiveis.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/28_agente_benchmarking_ablacao_robustez.md}",
       "permission": {
@@ -430,7 +430,7 @@
       }
     },
     "29_agente_conformidade_internacional": {
-      "description": "Agente especializado 29_agente_conformidade_internacional",
+      "description": "Garantir que o manuscrito cumpra rigorosamente as diretrizes internacionais exigidas por periódicos top-tier globais (Nature, Science, Lancet, IEEE, etc.) dependendo do tipo de estudo (revisão sistemá",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/29_agente_conformidade_internacional.md}",
       "permission": {
@@ -439,7 +439,7 @@
       }
     },
     "30_agente_traducao_nativa_proofreading": {
-      "description": "Agente especializado 30_agente_traducao_nativa_proofreading",
+      "description": "Prover fluência e estilo em língua inglesa no limite máximo exigido por bancas editoriais internacionais Tier-1.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/30_agente_traducao_nativa_proofreading.md}",
       "permission": {
@@ -448,7 +448,7 @@
       }
     },
     "31_agente_blind_peer_review_emulado": {
-      "description": "Agente especializado 31_agente_blind_peer_review_emulado",
+      "description": "Atuar como revisores contundentes (Reviewers 1, 2 e 3) e gerar comentários severos sobre falhas conceituais, metodológicas ou de interpretação antes de submeter ao periódico.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/31_agente_blind_peer_review_emulado.md}",
       "permission": {
@@ -457,7 +457,7 @@
       }
     },
     "32_agente_etica_open_science": {
-      "description": "Agente especializado 32_agente_etica_open_science",
+      "description": "Proteger legalmente e moralmente o estudo, além de submeter a coleta e guarda de dados aos Princípios FAIR (Findable, Accessible, Interoperable, and Reusable) e a anonimização estrita em conformidade ",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/32_agente_etica_open_science.md}",
       "permission": {
@@ -466,7 +466,7 @@
       }
     },
     "33_agente_automacao_multi_norma": {
-      "description": "Agente especializado 33_agente_automacao_multi_norma",
+      "description": "Transmutar qualquer citação (seja via UUID, bibtex ou harvard style brutas) para o estilo exato e minucioso da norma global requerida pelo periódico.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/33_agente_automacao_multi_norma.md}",
       "permission": {
@@ -475,7 +475,7 @@
       }
     },
     "34_agente_identificacao_conflitos_similaridade": {
-      "description": "Agente especializado 34_agente_identificacao_conflitos_similaridade",
+      "description": "Emular o relatório frio, robótico e inexorável de sistemas de verificação léxica como iThenticate, Turnitin ou CrossCheck.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/34_agente_identificacao_conflitos_similaridade.md}",
       "permission": {
@@ -484,7 +484,7 @@
       }
     },
     "35_agente_coleta_datasets_reais": {
-      "description": "Agente especializado 35_agente_coleta_datasets_reais",
+      "description": "Substituir absolutamente qualquer dataset sintético ou simulado por dados primários reais, coletados diretamente de APIs públicas oficiais, downloads de repositórios especializados, scraping estrutura",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/35_agente_coleta_datasets_reais.md}",
       "permission": {
@@ -493,7 +493,7 @@
       }
     },
     "36_agente_exportacao_latex_pdf": {
-      "description": "Agente especializado 36_agente_exportacao_latex_pdf",
+      "description": "Converter o manuscrito consolidado em formatos de submissão profissional: **LaTeX** (com classe adequada ao periódico), **PDF** compilado e **DOCX**.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/36_agente_exportacao_latex_pdf.md}",
       "permission": {
@@ -502,7 +502,7 @@
       }
     },
     "37_agente_apresentacao_slides_banca": {
-      "description": "Agente especializado 37_agente_apresentacao_slides_banca",
+      "description": "Produzir uma apresentação acadêmica de altíssimo nível visual e argumentativo, pronta para defesa perante banca Qualis A1 ou conferência internacional, extraindo cirurgicamente os pontos-chave do manu",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/37_agente_apresentacao_slides_banca.md}",
       "permission": {
@@ -511,7 +511,7 @@
       }
     },
     "38_agente_montagem_entrega_final": {
-      "description": "Agente especializado 38_agente_montagem_entrega_final",
+      "description": "Montar automaticamente, a partir dos fragmentos aprovados (`manuscrito_secoes/00` a `07`), um **documento completo, contínuo e pronto para submissão/defesa** em múltiplos formatos.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/38_agente_montagem_entrega_final.md}",
       "permission": {
@@ -520,7 +520,7 @@
       }
     },
     "39_agente_metodologia_multi_paradigma": {
-      "description": "Agente especializado 39_agente_metodologia_multi_paradigma",
+      "description": "Garantir que a fundamentação e a execução metodológica do estudo estejam rigorosamente alinhadas ao paradigma epistemológico correto — seja ele quantitativo, qualitativo, misto, fenomenológico, etnogr",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/39_agente_metodologia_multi_paradigma.md}",
       "permission": {
@@ -529,7 +529,7 @@
       }
     },
     "40_agente_marcos_teoricos_interpretacao": {
-      "description": "Agente especializado 40_agente_marcos_teoricos_interpretacao",
+      "description": "Garantir que o artigo/TCC esteja ancorado em um marco teórico coerente, que a interpretação de resultados siga os cânones da corrente adotada, e que a discussão dialogue com os teóricos corretos.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/40_agente_marcos_teoricos_interpretacao.md}",
       "permission": {
@@ -538,7 +538,7 @@
       }
     },
     "41_agente_gis_geoprocessamento_cartografia": {
-      "description": "Agente especializado 41_agente_gis_geoprocessamento_cartografia",
+      "description": "Produzir, auditar e integrar elementos geoespaciais de alta qualidade ao manuscrito: mapas temáticos, cartas, plantas, modelos digitais de terreno, análise espacial, geovisualização e cartografia conf",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/41_agente_gis_geoprocessamento_cartografia.md}",
       "permission": {
@@ -547,7 +547,7 @@
       }
     },
     "42_agente_desenvolvedor_cientista_computacao": {
-      "description": "Agente especializado 42_agente_desenvolvedor_cientista_computacao",
+      "description": "Projetar, gerar, auditar e otimizar TODO o código utilizado no manuscrito — desde scripts de coleta de dados até pipelines de ML, análise estatística, simulação e visualização.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/42_agente_desenvolvedor_cientista_computacao.md}",
       "permission": {
@@ -556,7 +556,7 @@
       }
     },
     "43_agente_satelite_bioinformatica_omics": {
-      "description": "Agente especializado 43_agente_satelite_bioinformatica_omics",
+      "description": "Coletar, tratar, processar e analisar dados de sensoriamento remoto (satélite, radar, LiDAR), dados biológicos (DNA, RNA, microarray, proteômica, metabolômica) e datasets de fontes especializadas — in",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/43_agente_satelite_bioinformatica_omics.md}",
       "permission": {
@@ -565,7 +565,7 @@
       }
     },
     "44_agente_correcao_textual_qualis": {
-      "description": "Agente especializado 44_agente_correcao_textual_qualis",
+      "description": "Recebe textos reprovados ou com ressalvas dos agentes de validação (A13, A14) e os reescreve ativamente para atingir a nota 10/10.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/44_agente_correcao_textual_qualis.md}",
       "permission": {
@@ -574,7 +574,7 @@
       }
     },
     "45_agente_refinamento_argumentacao": {
-      "description": "Agente especializado 45_agente_refinamento_argumentacao",
+      "description": "Eleva a nota do critério 'Diálogo Crítico e Contribuição' (I2 e B1 da rubrica) para 10/10.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/45_agente_refinamento_argumentacao.md}",
       "permission": {
