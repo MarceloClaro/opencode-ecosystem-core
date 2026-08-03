@@ -3565,6 +3565,26 @@
         "Testes com docstring dizendo '(dry-run)' mas construindo um componente sem passar a flag sao um sinal de alerta especifico — o docstring documentava a INTENCAO, o codigo nao a implementava.",
         "Resultado medido, nao estimado: suite completa foi de 'trava indefinidamente / precisa de --deselect em 3 testes' para '343s, 64 falhas / 2578 aprovados / 53 pulados, zero deselecoes' — 76/76 testes do proprio arquivo em 1.27s (antes: nunca terminava)."
       ]
+    },
+    {
+      "round_id": "R383",
+      "objective": "Concluir as pendencias da frente Molambudos deixadas intocadas desde o R380 (CORRIGENDUM.md, scripts/clean_headers_and_lettrines.py, scripts/regenerate_vic_cont_r376.py) a pedido explicito do usuario: 'corrija-o' e, apos confirmacao informada sobre o risco, 'rodar os dois scripts e commitar tudo'.",
+      "changes": [
+        "Causa raiz achada ANTES de executar destrutivamente (nao suposta): scripts/build_miolo.py::extract_fragment_content() cortava todo o conteudo do fragmento na primeira linha '↪ Links:', assumindo que ela e sempre o ultimo elemento. Varredura completa de molambudos.md achou 4 fragmentos com conteudo real depois da linha de Links (CONT-03, CONT-07, MEM-27, LUC-Escolha) que seriam apagados se o regenerador rodasse sem correcao. De fato, 3 desses 4 (CONT-03, MEM-27, LUC-Escolha) JA estavam sem o epilogo no .tex publicado -- um gap de conteudo real pre-existente, documentado separadamente (fora de escopo, decisao do usuario).",
+        "scripts/build_miolo.py: extract_fragment_content() corrigido -- a linha de Links so e extraida/reposicionada quando de fato e o ultimo elemento; quando ha conteudo real depois, permanece no corpo em sua posicao original (perde formatacao especial da linha de Links nesse caso raro, mas nao descarta narrativa).",
+        "tests/test_r383_build_miolo_links_epilogue_fix.py: 6 testes TDD reais provando o fix (fragmentos sinteticos + varredura do molambudos.md real).",
+        "Executado de verdade (autorizado explicitamente pelo usuario, apos aviso do risco): scripts/regenerate_vic_cont_r376.py regenera CONT-05..13 -- 8/9 identicos ao estado anterior, CONT-07 recupera o epilogo perdido. scripts/clean_headers_and_lettrines.py higieniza 84 fragmentos (linhas duplicadas consecutivas + blocos de 3+ linhas em branco); verificado por comparacao de conjunto de palavras (>=6 caracteres) contra backup manual: zero palavras perdidas em qualquer um dos 84.",
+        "Rede de seguranca manual criada antes de executar (projetos/ esta inteiramente no .gitignore, sem historico git): backup completo em projetos/molambudos/Molambudos_VictoriaRegia/_archive/backup_R383_pre_clean_headers/ (158 arquivos .tex).",
+        "Regressao real encontrada e corrigida durante a validacao: 5 arquivos tocados por clean_headers_and_lettrines.py quebravam cadeias de proveniencia imutaveis de ciclos ja fechados -- DOC-17.tex e MEM-06.tex (manifesto R362) e MEM-12.tex, LUC-01.tex, MEM-26.tex (dossie de revisao R360, sem entrada em nenhum manifesto de drift). Restaurados ao estado anterior (do backup); as 3 cadeias de proveniencia (R360 reviews -> R361 drift -> R362 change manifest) verificadas programaticamente com zero problemas.",
+        "specs/SPEC-935-R383-molambudos-build-miolo-links-epilogue-fix.md: spec formal com causa raiz, correcao, execucao autorizada e a regressao de proveniencia encontrada+corrigida."
+      ],
+      "score": 8.5,
+      "lessons": [
+        "A hipotese inicial sobre uma divergencia ('deve ser edicao manual pos-geracao') estava errada -- investigar o parser antes de assumir revelou um bug real de perda de conteudo silenciosa, afetando 4 fragmentos, 3 dos quais ja tinham conteudo real faltando no .tex publicado ha tempos. Nunca executar um 'regenerador' contra conteudo real sem primeiro comparar a saida em memoria contra o estado commitado.",
+        "Numa arvore de conteudo sem git (projetos/ no .gitignore), a unica rede de seguranca e um backup manual explicito ANTES de qualquer escrita em lote -- afirmar 'ha rede de seguranca do git' sem checar o .gitignore primeiro foi um erro real cometido e corrigido na mesma sessao.",
+        "Multiplas cadeias de proveniencia sobrepostas (R359->R360->R361-> R362, cada uma podendo fixar hashes de arquivos diferentes) significam que uma varredura ampla precisa ser verificada contra TODOS os manifestos conhecidos, nao so o mais obvio -- filtrar testes por '-k molambudos' quase deixou passar a quebra do R360, cujo arquivo de teste nao tem 'molambudos' no nome.",
+        "Uma falha nova observada na suite completa (test_r211_litert_mcp_security) nao era regressao de conteudo -- era o circuit breaker do LiteRT-LM (state.json fora do repo, em /run/user/1000/) abrindo apos multiplas execucoes da suite completa nesta sessao; transiente, auto-resolve em 15min, documentado sem perseguir."
+      ]
     }
   ]
 }

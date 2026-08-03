@@ -5,7 +5,43 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R382 — corrige travamento real do nano_orchestration + falha pré-existente do test_r237** (2026-08-03)
+- **Branch:** `main` · última entrega: **R383 — conclui pendências Molambudos (bug real de perda de conteúdo + execução autorizada dos 2 scripts)** (2026-08-03)
+- **R383 (2026-08-03) — os 3 arquivos pendentes da frente Molambudos
+  (`CORRIGENDUM.md`, `scripts/clean_headers_and_lettrines.py`,
+  `scripts/regenerate_vic_cont_r376.py`) finalmente resolvidos, a pedido
+  explícito do usuário:** antes de executar qualquer coisa, verifiquei o
+  regenerador comparando sua saída em memória (sem sobrescrever nada)
+  contra os fragmentos já commitados — achei que minha primeira hipótese
+  ("alguém editou manualmente depois da geração") **estava errada**: o
+  parser real `scripts/build_miolo.py::extract_fragment_content()` corta
+  todo o conteúdo na primeira linha `"↪ Links:"`, um bug real que já
+  apagava silenciosamente o epílogo de **4 fragmentos** (`CONT-03`,
+  `CONT-07`, `MEM-27`, `LUC-Escolha`) — 3 deles **já estavam sem esse
+  conteúdo no `.tex` publicado**, há tempos (achado à parte, fora de
+  escopo, ver abaixo). Corrigido `extract_fragment_content()` (preserva
+  conteúdo pós-Links quando ele existe de verdade), com 6 testes TDD.
+  Após o usuário confirmar explicitamente que queria "rodar os dois
+  scripts e commitar tudo" mesmo sabendo do risco, executei de verdade:
+  regenerador (`CONT-05..13`, 8/9 idênticos, `CONT-07` recupera o
+  epílogo) e `clean_headers_and_lettrines.py` (84 fragmentos, zero
+  palavras perdidas, verificado por comparação contra backup manual —
+  `projetos/` está inteiramente no `.gitignore`, sem rede de segurança
+  do git, então criei um backup manual real antes de escrever).
+  **Regressão real encontrada e corrigida durante a validação**: 5
+  arquivos (`DOC-17.tex`, `MEM-06.tex` — manifesto R362; `MEM-12.tex`,
+  `LUC-01.tex`, `MEM-26.tex` — dossiê R360, sem entrada em nenhum
+  manifesto de drift) quebravam cadeias de proveniência imutáveis de
+  ciclos já fechados; restaurados do backup. As 3 cadeias
+  (R360→R361→R362) verificadas programaticamente: zero problemas.
+  Conjunto de falhas Molambudos idêntico ao baseline do R382. Ver
+  `specs/SPEC-935-R383-molambudos-build-miolo-links-epilogue-fix.md`.
+- **Achado fora de escopo, não corrigido (decisão do usuário
+  necessária):** `CONT-03`, `MEM-27` e `LUC-Escolha` têm conteúdo real em
+  `molambudos.md` que nunca chegou ao `.tex` publicado (mesmo bug do
+  R383, mas fora do alcance dos 2 scripts autorizados, que só cobrem
+  `CONT-05..13`). Corrigir exigiria estender o regenerador para esses 3
+  IDs — pode envolver conteúdo já publicado externamente (KDP).
+  Reportado ao usuário para decisão explícita.
 - **R382 (2026-08-03) — causa raiz achada e corrigida (não era o daemon, era o código):** o achado colateral do R381 (`TestIntegration` travando) foi investigado a fundo por bissecção: `QualityChecker` **nunca soube de `dry_run`** e sempre tentava reescrever via rede real (`LiteRTMClient.chat`, até 3 tentativas × 120s) quando o conteúdo simulado do dry-run reprovava nos critérios semânticos — o que acontece quase sempre. Sem o daemon LiteRT-LM respondendo, cada bloco travava até o timeout de conexão; com 30 blocos, a suíte travava por dezenas de minutos. Corrigido: `QualityChecker(dry_run=...)` propagado de `NanoOrchestrator`, `rewrite_block()` retorna `None` imediatamente em dry-run sem nunca abrir socket. Também corrigido `tests/test_r237_diagrams_repair.py` (esperava `"v3.6.0"` no README, que já fora atualizado para `v3.7.0` num commit anterior a esta sessão — teste desatualizado, não o README). **Resultado medido:** `test_nano_orchestration.py` 76/76 em 1.27s (antes: nunca terminava); suíte completa **343s, 64 falhas / 2578 aprovados / 53 pulados, zero `--deselect`** (antes: precisava excluir 3 testes manualmente ou não terminava dentro de 1500s). Ver `specs/SPEC-935-R382-nano-orchestration-dry-run-hang-fix.md`.
 - **Pós-R381 (2026-08-03) — nomenclatura + documentação:** durante a
   atualização do README, achei que a chave de estágio `r106_rigor` colidia

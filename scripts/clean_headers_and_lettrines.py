@@ -21,10 +21,10 @@ def main():
         content = f.read_text(encoding='utf-8')
         lines = content.splitlines()
         
-        # 1. Remove duplicate date headers (e.g., 1915 Ceára line in MEM-01)
+        # 1. Remove duplicate consecutive date headers (e.g., repeated "1915 --- ..." lines)
         new_lines = []
         for i, l in enumerate(lines):
-            if 'Ceára, município' in l:
+            if l.strip() and new_lines and l.strip() == new_lines[-1].strip():
                 continue
             new_lines.append(l)
             
