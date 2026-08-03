@@ -791,8 +791,8 @@ class TestIntegration(unittest.TestCase):
         pool = NanoWriterPool(config=config)
         plan.blocks = pool.write_blocks_batch(plan.blocks, plan)
 
-        # Quality
-        checker = QualityChecker()
+        # Quality (dry-run: nunca toca rede, mesmo se o score simulado falhar)
+        checker = QualityChecker(dry_run=True)
         for block in plan.blocks:
             block, _ = checker.verify_and_fix(block, plan)
 

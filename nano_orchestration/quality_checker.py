@@ -49,8 +49,10 @@ class QualityChecker:
     - Reescrita com escalonamento de modelo
     """
 
-    def __init__(self, client: Optional[LiteRTMClient] = None):
+    def __init__(self, client: Optional[LiteRTMClient] = None,
+                 dry_run: bool = False):
         self.client = client or LiteRTMClient()
+        self.dry_run = dry_run
 
     def check_block(self, block: NanoBlock, plan: NanoPlan) -> QualityReport:
         """Valida um nanobloco contra seus critérios.
@@ -262,6 +264,13 @@ class QualityChecker:
         Returns:
             Bloco reescrito ou None se falhar.
         """
+        if self.dry_run:
+            logger.info(
+                f"Bloco {block.index}: dry-run, pulando reescrita via rede "
+                "(conteúdo simulado não é reescrito por modelo real)."
+            )
+            return None
+
         for model in REWRITE_MODELS[:MAX_RETRIES]:
             try:
                 prompt = self._build_rewrite_prompt(block, plan, issues)
