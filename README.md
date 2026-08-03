@@ -165,7 +165,7 @@ Esta tabela é gerada a partir do catálogo real (`marceloclaro.catalog_loader.l
 
 **Transparência sobre os números:** dos 205 registros carregados, **3 são artefatos não-agente** (ver último grupo da tabela-resumo) — o catálogo real de agentes funcionais é **202**. A camada epistêmica cobre **133/205 (65%)** — os **72 restantes (35%) aparecem como `—`** porque a heurística lexical não encontrou sinal suficiente nos metadados; isso não significa que o agente seja pior, só que a inferência automática não tem base para classificá-lo (ver Seção 8 para o critério exato).
 
-**Achado adicional desta auditoria:** 103 dos 205 registros (50%) não têm descrição autoral no card-fonte — o campo `description` do frontmatter é um placeholder mecânico ("Agente especializado NOME") e o corpo do arquivo aponta para um caminho Windows externo (`criador-artigo\agents\...`) que não existe neste checkout — provavelmente arquivos-stub gerados em lote a partir de um catálogo original ainda não migrado por completo. Para esses casos, a coluna `Descrição` traz um **rótulo derivado mecanicamente do identificador** (nunca uma descrição inventada), marcado explicitamente. Isso afeta sobretudo o grupo *Catálogo Acadêmico MASWOS* — um candidato real a ciclo futuro de enriquecimento de metadados.
+**Achado de auditoria e correção aplicada (SPEC-935-R380):** ao gerar esta tabela pela primeira vez, 103 dos 205 registros (50%) tinham `description` placeholder mecânico ("Agente especializado NOME") com corpo apontando para um caminho Windows externo inexistente neste checkout. Os **46 agentes do grupo Catálogo Acadêmico MASWOS** (00–53) já foram corrigidos: conteúdo real (missão, entradas, saídas, workflow) portado de um repositório-fonte confirmado, nunca fabricado — ver `specs/SPEC-935-R380-maswos-catalog-enrichment.md`. **57 registros ainda têm o placeholder** (família `reversa-*` com fonte real localizada mas ainda não portada, `auxjuris_*`, ferramental de desenvolvimento genérico, médicos, e os 3 artefatos não-agente) — candidatos a um ciclo futuro (R375+). Para esses casos, a coluna `Descrição` traz um **rótulo derivado mecanicamente do identificador** (nunca uma descrição inventada), marcado explicitamente.
 
 #### Visão geral por grupo temático
 
@@ -194,52 +194,52 @@ Abaixo, a lista completa dos 205 agentes por grupo (clique para expandir cada um
 
 | Agente | Descrição (função) | Camada |
 |---|---|---|
-| `00_editor_chefe_phd` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Editor Chefe Phd** | Crítico-reflexivo |
-| `01_agente_diagnostico_escopo` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Diagnostico Escopo** | — |
-| `02_agente_busca_curadoria` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Busca Curadoria** | — |
-| `03_agente_evidencias_citacoes` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Evidencias Citacoes** | Empírico-analítico |
-| `04_agente_estrutura_argumentativa` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Estrutura Argumentativa** | Crítico-reflexivo |
-| `05_agente_revisao_literatura_teoria` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Revisao Literatura Teoria** | Crítico-reflexivo |
-| `06_agente_metodologia_reprodutibilidade` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Metodologia Reprodutibilidade** | Empírico-analítico |
-| `07_agente_estatistica_analise` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Estatistica Analise** | Empírico-analítico |
-| `08_agente_visualizacao_evidencia_grafica` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Visualizacao Evidencia Grafica** | Empírico-analítico |
-| `09_agente_resultados` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Resultados** | Empírico-analítico |
-| `10_agente_discussao_contribuicao` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Discussao Contribuicao** | Crítico-reflexivo |
-| `11_agente_conclusao_coerencia_final` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Conclusao Coerencia Final** | Crítico-reflexivo |
-| `12_agente_auditoria_bibliografica_abnt` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Auditoria Bibliografica Abnt** | Regulatório-normativo |
-| `13_agente_qa_qualis_a1` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Qa Qualis A1** | Regulatório-normativo |
-| `14_agente_consistencia_interna` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Consistencia Interna** | Crítico-reflexivo |
-| `15_agente_resumo_abstract_palavras_chave` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Resumo Abstract Palavras Chave** | Hermenêutico-interpretativo |
-| `16_agente_integracao_editorial_docx` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Integracao Editorial Docx** | Pragmático-técnico |
-| `17_agente_framework_reprodutivel_ambientes` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Framework Reprodutivel Ambientes** | Pragmático-técnico |
-| `18_agente_engenharia_dados_datasets_proveniencia` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Engenharia Dados Datasets Proveniencia** | Empírico-analítico |
-| `19_agente_auditoria_codigo_documentacao_tecnica` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Auditoria Codigo Documentacao Tecnica** | Crítico-reflexivo |
-| `20_agente_estatistica_avancada_inferencia` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Estatistica Avancada Inferencia** | Empírico-analítico |
-| `21_agente_matematica_aplicada_modelagem_formal` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Matematica Aplicada Modelagem Formal** | Formal-dedutivo |
-| `22_agente_ml_dl_datamining` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Ml Dl Datamining** | Empírico-analítico |
-| `23_agente_bioinformatica_omicas` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Bioinformatica Omicas** | Empírico-analítico |
-| `24_agente_quimioinformatica_modelagem_molecular` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Quimioinformatica Modelagem Molecular** | Formal-dedutivo |
-| `25_agente_ciencias_sociais_linguistica_computacional` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Ciencias Sociais Linguistica Computacional** | Hermenêutico-interpretativo |
-| `26_agente_visao_computacional_multimodal` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Visao Computacional Multimodal** | Empírico-analítico |
-| `27_agente_computacao_quantica_aplicada` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Computacao Quantica Aplicada** | Formal-dedutivo |
-| `28_agente_benchmarking_ablacao_robustez` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Benchmarking Ablacao Robustez** | Empírico-analítico |
-| `29_agente_conformidade_internacional` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Conformidade Internacional** | Regulatório-normativo |
-| `30_agente_traducao_nativa_proofreading` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Traducao Nativa Proofreading** | Hermenêutico-interpretativo |
-| `31_agente_blind_peer_review_emulado` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Blind Peer Review Emulado** | Crítico-reflexivo |
-| `32_agente_etica_open_science` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Etica Open Science** | Crítico-reflexivo |
-| `33_agente_automacao_multi_norma` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Automacao Multi Norma** | Pragmático-técnico |
-| `34_agente_identificacao_conflitos_similaridade` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Identificacao Conflitos Similaridade** | — |
-| `35_agente_coleta_datasets_reais` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Coleta Datasets Reais** | Empírico-analítico |
-| `36_agente_exportacao_latex_pdf` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Exportacao Latex Pdf** | Pragmático-técnico |
-| `37_agente_apresentacao_slides_banca` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Apresentacao Slides Banca** | — |
-| `38_agente_montagem_entrega_final` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Montagem Entrega Final** | — |
-| `39_agente_metodologia_multi_paradigma` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Metodologia Multi Paradigma** | Empírico-analítico |
-| `40_agente_marcos_teoricos_interpretacao` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Marcos Teoricos Interpretacao** | Hermenêutico-interpretativo |
-| `41_agente_gis_geoprocessamento_cartografia` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Gis Geoprocessamento Cartografia** | Empírico-analítico |
-| `42_agente_desenvolvedor_cientista_computacao` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Desenvolvedor Cientista Computacao** | Pragmático-técnico |
-| `43_agente_satelite_bioinformatica_omics` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Satelite Bioinformatica Omics** | Empírico-analítico |
-| `44_agente_correcao_textual_qualis` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Correcao Textual Qualis** | Hermenêutico-interpretativo |
-| `45_agente_refinamento_argumentacao` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Refinamento Argumentacao** | Crítico-reflexivo |
+| `00_editor_chefe_phd` | `Editor-Chefe PhD / Gerente de Qualis A1`. | Crítico-reflexivo |
+| `01_agente_diagnostico_escopo` | Transformar o tema do usuario em um problema de pesquisa claro, delimitado, auditavel e planejavel. | — |
+| `02_agente_busca_curadoria` | Executar busca multipla, auditavel e suficientemente ampla para sustentar um artigo de alto nivel. | — |
+| `03_agente_evidencias_citacoes` | Converter fontes em evidencias localizadas, com funcao argumentativa e limites de uso explicitados. | Empírico-analítico |
+| `04_agente_estrutura_argumentativa` | Projetar a espinha argumentativa do artigo para que cada secao execute uma funcao precisa. | Crítico-reflexivo |
+| `05_agente_revisao_literatura_teoria` | Construir uma revisao critica, dialogica e densa, em vez de uma lista de autores. | Crítico-reflexivo |
+| `06_agente_metodologia_reprodutibilidade` | Escrever uma metodologia replicavel, justificada e auditavel. | Empírico-analítico |
+| `07_agente_estatistica_analise` | Validar a adequacao dos testes, a completude dos reportes e o limite inferencial do manuscrito. | Empírico-analítico |
+| `08_agente_visualizacao_evidencia_grafica` | Transformar resultados, metodo e comparacoes em visualizacoes com funcao argumentativa explicita. | Empírico-analítico |
+| `09_agente_resultados` | Redigir os achados com precisao, ordem logica e neutralidade interpretativa. | Empírico-analítico |
+| `10_agente_discussao_contribuicao` | Interpretar os achados em dialogo real com a literatura, explicando significado, limite e contribuicao. | Crítico-reflexivo |
+| `11_agente_conclusao_coerencia_final` | Fechar o artigo respondendo a pergunta central, aos objetivos e as hipoteses sem introduzir nada novo. | — |
+| `12_agente_auditoria_bibliografica_abnt` | Garantir consistencia total entre citacao no corpo, nota de rodape, referencia final e norma ABNT. | Regulatório-normativo |
+| `13_agente_qa_qualis_a1` | Avaliar se o manuscrito atende rigorosamente ao padrão **MASWOS**, o que significa EXIGIR | — |
+| `14_agente_consistencia_interna` | Monitorar não apenas o contorno geral do artigo, mas aplicar auditoria micro e macro textual implacável (Padrão 10/10 MASWOS) | Crítico-reflexivo |
+| `15_agente_resumo_abstract_palavras_chave` | Produzir resumo em portugues, abstract em ingles e palavras-chave que sintetizem fielmente o manuscrito completo, sem inventar... | Hermenêutico-interpretativo |
+| `16_agente_integracao_editorial_docx` | Integrar todos os capitulos, apendices, figuras, referencias, resumo e metadados em um pacote editorial final coerente, pronto... | Pragmático-técnico |
+| `17_agente_framework_reprodutivel_ambientes` | Transformar a parte computacional do artigo em um pacote reexecutavel, auditavel e explicito quanto a ambiente, dependencia,... | Pragmático-técnico |
+| `18_agente_engenharia_dados_datasets_proveniencia` | Garantir que todo dado usado pelo artigo tenha origem, versao, papel analitico, restricao de uso e esquema documentalmente... | Empírico-analítico |
+| `19_agente_auditoria_codigo_documentacao_tecnica` | Verificar se o codigo, os snippets, as bibliotecas e os pipelines tecnicos realmente correspondem ao que o artigo afirma e se... | Crítico-reflexivo |
+| `20_agente_estatistica_avancada_inferencia` | Dar suporte inferencial de alto nivel a estudos quantitativos, incluindo cenarios frequentistas, bayesianos, causais,... | Empírico-analítico |
+| `21_agente_matematica_aplicada_modelagem_formal` | Formalizar, derivar, verificar e delimitar modelos matematicos, equacoes, algoritmos numericos e estruturas simbolicas usadas... | Formal-dedutivo |
+| `22_agente_ml_dl_datamining` | Projetar, auditar e comparar pipelines de aprendizado de maquina e mineracao de dados com rigor de baseline, generalizacao,... | Empírico-analítico |
+| `23_agente_bioinformatica_omicas` | Dar suporte especializado a pipelines de DNA, RNA, epigenomica, proteomica, metabolomica, single-cell e multiomicas com foco... | Empírico-analítico |
+| `24_agente_quimioinformatica_modelagem_molecular` | Auditar e estruturar pipelines de chemometrics, descritores, QSAR/QSPR, docking, dinamica molecular, espectrometria e... | Formal-dedutivo |
+| `25_agente_ciencias_sociais_linguistica_computacional` | Dar suporte granular a estudos com surveys, psicometria, corpora, redes, NLP, estilometria, analise de discurso quantitativa e... | Hermenêutico-interpretativo |
+| `26_agente_visao_computacional_multimodal` | Estruturar e auditar pipelines de imagem, video, OCR, segmentacao, deteccao, classificacao visual e modelos multimodais com... | Empírico-analítico |
+| `27_agente_computacao_quantica_aplicada` | Dar suporte especializado a artigos com circuitos quanticos, simuladores, modelos hibridos, kernels quanticos, variational... | — |
+| `28_agente_benchmarking_ablacao_robustez` | Verificar se o resultado computacional ou quantitativo resiste a comparacoes justas, seeds diferentes, ablations,... | Empírico-analítico |
+| `29_agente_conformidade_internacional` | Garantir que o manuscrito cumpra rigorosamente as diretrizes internacionais exigidas por periódicos top-tier globais (Nature,... | Regulatório-normativo |
+| `30_agente_traducao_nativa_proofreading` | Prover fluência e estilo em língua inglesa no limite máximo exigido por bancas editoriais internacionais Tier-1. | Hermenêutico-interpretativo |
+| `31_agente_blind_peer_review_emulado` | Atuar como revisores contundentes (Reviewers 1, 2 e 3) e gerar comentários severos sobre falhas conceituais, metodológicas ou... | Crítico-reflexivo |
+| `32_agente_etica_open_science` | Proteger legalmente e moralmente o estudo, além de submeter a coleta e guarda de dados aos Princípios FAIR (Findable,... | Crítico-reflexivo |
+| `33_agente_automacao_multi_norma` | Transmutar qualquer citação (seja via UUID, bibtex ou harvard style brutas) para o estilo exato e minucioso da norma global... | Regulatório-normativo |
+| `34_agente_identificacao_conflitos_similaridade` | Emular o relatório frio, robótico e inexorável de sistemas de verificação léxica como iThenticate, Turnitin ou CrossCheck. | — |
+| `35_agente_coleta_datasets_reais` | Substituir absolutamente qualquer dataset sintético ou simulado por dados primários reais, coletados diretamente de APIs... | Empírico-analítico |
+| `36_agente_exportacao_latex_pdf` | Converter o manuscrito consolidado em formatos de submissão profissional: **LaTeX** (com classe adequada ao periódico),... | Pragmático-técnico |
+| `37_agente_apresentacao_slides_banca` | Produzir uma apresentação acadêmica de altíssimo nível visual e argumentativo, pronta para defesa perante banca Qualis A1 ou... | — |
+| `38_agente_montagem_entrega_final` | Montar automaticamente, a partir dos fragmentos aprovados (`manuscrito_secoes/00` a `07`), um **documento completo, contínuo e... | — |
+| `39_agente_metodologia_multi_paradigma` | Garantir que a fundamentação e a execução metodológica do estudo estejam rigorosamente alinhadas ao paradigma epistemológico... | Empírico-analítico |
+| `40_agente_marcos_teoricos_interpretacao` | Garantir que o artigo/TCC esteja ancorado em um marco teórico coerente, que a interpretação de resultados siga os cânones da... | Hermenêutico-interpretativo |
+| `41_agente_gis_geoprocessamento_cartografia` | Produzir, auditar e integrar elementos geoespaciais de alta qualidade ao manuscrito: mapas temáticos, cartas, plantas, modelos... | Empírico-analítico |
+| `42_agente_desenvolvedor_cientista_computacao` | Projetar, gerar, auditar e otimizar TODO o código utilizado no manuscrito — desde scripts de coleta de dados até pipelines de... | Empírico-analítico |
+| `43_agente_satelite_bioinformatica_omics` | Coletar, tratar, processar e analisar dados de sensoriamento remoto (satélite, radar, LiDAR), dados biológicos (DNA, RNA,... | Empírico-analítico |
+| `44_agente_correcao_textual_qualis` | Recebe textos reprovados ou com ressalvas dos agentes de validação (A13, A14) e os reescreve ativamente para atingir a nota 10/10. | — |
+| `45_agente_refinamento_argumentacao` | Eleva a nota do critério 'Diálogo Crítico e Contribuição' (I2 e B1 da rubrica) para 10/10. | Crítico-reflexivo |
 
 </details>
 
@@ -513,7 +513,6 @@ Abaixo, a lista completa dos 205 agentes por grupo (clique para expandir cada um
 | `TEMPLATE_HANDOFF` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Template Handoff** | — |
 
 </details>
-
 
 ### 7. Camada de Redução de Dependência LLM (NOVO R220–R222)
 Seis componentes determinísticos que substituem chamadas de LLM para tarefas rotineiras,

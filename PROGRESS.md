@@ -5,7 +5,28 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **diagramas Mermaid do README com cores reais** (2026-08-02)
+- **Branch:** `main` · última entrega: **R380 — enriquecimento MASWOS** (2026-08-02)
+- **⚠️ Concorrência real detectada (2026-08-02):** durante o R380, encontrei
+  `evolution/cycles.json` já contendo ciclos R374–R379 de uma **frente
+  concorrente trabalhando ao vivo no mesmo checkout** (Molambudos:
+  `projetos/molambudos`, `scripts/clean_headers_and_lettrines.py`,
+  `scripts/regenerate_vic_cont_r376.py`, `CORRIGENDUM.md` — todos
+  modificados/criados, não commitados). Meu primeiro append como "R374"
+  foi perdido (sobrescrito pelo `save()` completo da outra sessão).
+  Renomeei meu ciclo para **R380** (spec, teste, provenance notes) e
+  **não toquei nos arquivos da frente Molambudos** (deixados como
+  encontrados — trabalho em andamento de outra sessão). Se você estiver
+  coordenando as duas frentes: os arquivos do Molambudos seguem
+  pendentes de commit por aquela sessão, não pela desta.
+- **R380 (2026-08-02):** 46 agentes MASWOS (00–53) enriquecidos —
+  description placeholder + corpo apontando para caminho externo
+  inexistente, substituídos por conteúdo real (missão, entradas, saídas,
+  workflow) portado de `~/OpenCode_Ecosystem-main/OpenCode_Ecosystem-main/
+  criador-artigo/agents/` (repositório-fonte confirmado, nunca fabricado).
+  187 testes de regressão verdes. README Seção 6.1 atualizada: 103→57
+  registros com placeholder restante (família `reversa-*` com fonte já
+  localizada mas não portada, `auxjuris_*`, ferramental genérico, médicos
+  — candidatos a R381+).
 - **Suíte completa pós-sync (2026-08-02, 5h05m):** 61 falhas, 2387 aprovados, 53
   pulados. **Zero regressão dos ciclos R363-R373** (206 testes próprios rodados
   isolados = 100% verde). As 61 falhas são pré-existentes, expostas pela
