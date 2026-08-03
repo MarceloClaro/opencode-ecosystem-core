@@ -5,7 +5,20 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R381 — gate de rigor de manuscrito no pipeline principal** (2026-08-02)
+- **Branch:** `main` · última entrega: **R381 — gate de rigor de manuscrito no pipeline principal + docs unificadas** (2026-08-03)
+- **Pós-R381 (2026-08-03) — nomenclatura + documentação:** durante a
+  atualização do README, achei que a chave de estágio `r106_rigor` colidia
+  com `specs/SPEC-935-R106.md` (CI/CD Pipeline + Quality Gates, spec real
+  não relacionado). Renomeada para `r381` em código/teste/spec/PROGRESS/
+  evolution (17/17 testes verdes após o rename). Em seguida, README.md
+  ganhou o Ato VII (R370-R381) e a Seção 15 (integração R381), diagrama
+  de arquitetura atualizado com a aresta real `Composer -> EP7
+  (ProductionScaffolds)` — antes ausente até no próprio diagrama —, e
+  todos os números obsoletos corrigidos para o estado medido agora (198
+  ciclos, 2.695 testes, 222 specs, 129/205 episteme). CHANGELOG.md ganhou
+  a entrada [2.5.0] cobrindo R370-R381 (nunca haviam sido registrados lá).
+  4 diagramas Mermaid validados via `mmdc` real. Pushed: commits `71c4ec3`
+  (R381), `0c64cd0` (rename), `713c918` (docs).
 - **R381 (2026-08-02) — unificação real, não apenas testes isolados:** ao
   investigar se as camadas R363-R373 estão de fato conectadas ao orquestrador
   principal (pedido do usuário: "unifique... sendo um ecossistema metacognitivo
