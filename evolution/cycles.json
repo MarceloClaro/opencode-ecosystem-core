@@ -3383,6 +3383,150 @@
         "Rodar scipy apenas como oráculo de validação em tempo de desenvolvimento (nunca importado no módulo entregue) permite validar uma implementação pura sem violar a convenção de zero dependência pesada do projeto"
       ],
       "timestamp": "2026-08-02T13:33:40.895398+00:00"
+    },
+    {
+      "round_id": "R374",
+      "objective": "Correção de consistência interna da obra Molambudos (projetos/molambudos): alinhamento geográfico ao canônico publicado (Campo do Alagadiço/Fortaleza), datas de vida de Joaquim (1907-1979), data da vala (1915) e alinhamento do molambudos.md à edição publicada",
+      "changes": [
+        "molambudos.md: falas e descrições do campo de concentração corrigidas de \"Curral do Governo em Senador Pompeu\" para \"Campo do Alagadiço, perto/nos arredores de Fortaleza\" (MEM-04, MEM-06, DOC-02, DOC-05, DOC-08, DOC-15, DOC-17, DOC-18, LUC-10)",
+        "molambudos.md MEM-06: passagem histórica reescrita conforme edição publicada (criação do Alagadiço em 1915, sem fixar totais de internados/mortos)",
+        "molambudos.md DOC-18: alinhado ao publicado — título \"Relatório Oficial do Curral\", cabeçalho \"Reconstituição ficcional\", Campo: Alagadiço, capacidade/óbitos não indicados, nota editorial anti-overclaim substitui nota do arquivista",
+        "molambudos.md DOC-17: carta reclassificada como reconstituição ficcional (sem equivalente arquivístico)",
+        "molambudos.md DOC-15: localização da pesquisa atualizada para limites do antigo Alagadiço; velho de 90 anos agora em Fortaleza (não Quixeramobim)",
+        "molambudos.md DOC-02: procedência corrigida para \"Retirante saído de Senador Pompeu em 1915 e confinado no Campo do Alagadiço\"",
+        "molambudos.md DOC-05: caminhada corrigida para \"de Senador Pompeu em direção a Fortaleza\" + confinamento no Alagadiço",
+        "molambudos.md LUC-10: vala de corpos no Campo do Alagadiço (1915)",
+        "Datas de vida de Joaquim corrigidas de 1917-1979 para 1907-1979 (nascimento ≈1907 confirmado por DOC-02 ficha, DOC-07 10 anos em 1917, MEM-04 8 anos em 1915, MEM-16 72 anos em 1979): MEM-27 (md + PT/EN/ZH .tex), CONT-07 lista de pacientes (md)",
+        "Data da vala corrigida de 1917 para 1915 (consistente com LUC-10, MEM-04 8 anos, DOC-08): MEM-27 (md + PT/EN/ZH .tex)",
+        "LUC-Entrevista: \"Desde 1917\" → \"Desde 1915\" (md + PT/EN/ZH .tex)",
+        "5 PDFs rebuildados (pdflatex PT/EN, xelatex ZH/TRI/KDP) com exit=0 e verificação fitz: 0 ocorrências de Ceára, 0 de vala 1917, 0 de Desde 1917, MEM-27 1907--1979 presente; Senador Pompeu restante apenas em rota/origem/glossário (Campo do Patu 1932)",
+        "Mantidos intencionalmente: DOC-01 exumação \"Pelo mapa, 1917\" + \"caderno enterrado com um paciente em 1917, sessenta e dois anos depois\" (1917+62=1979, mistério sobrenatural da obra); DOC-25 primeira página do diário 1917 (admissão no Colônia); tabela de vozes 1917-1979 (período de internamento, 62 anos)"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "O molambudos.md era a fonte canônica de build, mas a edição publicada (fragmentos .tex) continha revisões editoriais não propagadas de volta ao md; a fonte de verdade factual é a edição publicada",
+        "Datas aparentemente inconsistentes podem ser intencionais na narrativa (mistério sobrenatural DOC-01); antes de corrigir, verificar se o padrão cria significado (1917+62=1979)",
+        "Falas de personagens (LUC-Entrevista \"Desde 1917\") também precisam obedecer à cronologia canônica do mundo (vala 1915)",
+        "Alinhamento md ↔ .tex exige verificação por grep em PT/EN/ZH + verificação nos PDFs compilados (PyMuPDF), pois o texto extraído do PDF pode diferir do fonte (ex: ZH)"
+      ],
+      "timestamp": "2026-08-02T15:55:51.138056+00:00"
+    },
+    {
+      "round_id": "R375",
+      "objective": "Resolução das pendências R374 da obra Molambudos: (1) mutismo de Joaquim reclassificado de completo/absoluto para seletivo, resolvendo a contradição com MEM-19 (1950, visita materna) e MEM-22 (1952, criatura) e alinhando DOC-02/DOC-07 ao DOC-08 que já usava \"seletivo\"; (2) correção da CONTAGEM do CONT-05 publicado (PT/EN/ZH) de 1917-1979 para 1907-1979",
+      "changes": [
+        "Pesquisa histórica concluída: os dois campos são reais e distintos — Campo do Alagadiço (1915, Fortaleza, seca de 1915) e Campo do Patu (1932-1933, Senador Pompeu, seca de 1932); fontes: ANPUR st06-13 (2023), Neves 1995, Rios 2014, Melo 2015; o glossário publicado já distingue os dois; a obra narra o de 1915 (Alagadiço) e a menção a Senador Pompeu em rota/origem é correta",
+        "Mutismo: DOC-02 (md L1200 + PT/EN/ZH .tex L49) \"Mutismo completo (7 anos sem falar)\" → \"Mutismo seletivo (7 anos sem falar com a equipe)\"",
+        "Mutismo: DOC-07 (md L3359 + PT/EN/ZH .tex L45) \"mutismo absoluto (chegou a ficar 7 anos sem falar)\" → \"mutismo seletivo (recusava-se a falar com a equipe; chegou a ficar 7 anos sem dirigir a palavra a funcionários — de 1949 a 1956)\"",
+        "Justificativa: DOC-08 (md L4756 + PT/EN/ZH .tex L56) já registrava \"Mutismo seletivo por 7 anos (1949-1956)\"; a reclassificação elimina a contradição com MEM-19 (1950, diálogo com a mãe Maria do Rosário) e MEM-22 (1952, diálogo com a criatura) sem alterar datas nem os fragmentos",
+        "CONTAGEM: fragmentos/cont/CONT-05.tex L105 + en L105 + zh L105 — \"Joaquim Antônio Correia (1917-1979)\" → \"(1907-1979)\" na lista do capítulo IV A CONTAGEM (publicado no CONT-05; o md tinha no CONT-07, já corrigido em R374)",
+        "Verificação: restam apenas \"1917–1979\" institucionais corretos (partopeners Colônia e glossário, período do Hospital Colônia de Barbacena); nenhuma ocorrência associada a Joaquim",
+        "5 PDFs rebuildados exit=0 (pdflatex: main, main_en; xelatex: main_zh, main_tri; KDP 2ª passada ok) e verificação fitz: 1907-1979 presente em todos; mutismo seletivo presente em todos; mutismo completo/absoluto = 0 ocorrências em todos os PDFs",
+        "Pendência aberta para decisão autoral: divergência estrutural CONT entre md (CONT-05 Laudo 1.261, CONT-06 Você Leu Esta Linha Três Vezes, CONT-07 Diagnóstico Final, CONT-11 O Número, CONT-13 A Fila) e publicado (CONT-05 Diagnóstico Final, CONT-06 O Espelho e a Ferida, CONT-07 O Número, a Hora e a Fila) — requer escolha de canônico/regeneração via build_miolo.py"
+      ],
+      "score": 0.92,
+      "lições": [
+        "Antes de classificar um fato como contraditório, procurar na própria obra se já existe a classificação correta (DOC-08 já dizia \"seletivo\") — a menor edição é a que alinha o divergente ao que a obra já decidiu",
+        "Os .tex publicados não são regenerados pelo build (pdflatex apenas compila); correções de conteúdo que existem no md precisam ser propagadas manualmente aos .tex das 3 línguas (fragmentos) — auditar .tex diretamente, não só o md",
+        "A ponte Antigravity MCP está degradada (0/251 tarefas concluídas, status crítico); não depender dela para pesquisas — usar websearch local"
+      ],
+      "timestamp": "2026-08-02T16:31:57.502838Z"
+    },
+    {
+      "round_id": "R376",
+      "objective": "Decisão autoral (a): o molambudos.md é a nova edição — regenerar os .tex da edição VictoriaRegia a partir do md, propagando a reestruturação dos fragmentos CONT-05..13",
+      "changes": [
+        "Mapeamento da divergência concluído: md expandiu a Parte Contaminação de 7 para 13 fragmentos (CONT-05 Laudo de Avaliação Clínica e CONT-06 Você Leu Esta Linha Três Vezes são novos; CONT-07 O Diagnóstico Final absorve o antigo CONT-05; CONT-08/09/10 dividem o antigo CONT-06 O Espelho e a Ferida em Você Leu Isto Antes / O Espelho / A Ferida; CONT-11/12/13 dividem o antigo CONT-07 em O Número / 3:14 / A Fila)",
+        "scripts/regenerate_vic_cont_r376.py (novo): driver que usa o motor do build_miolo.py (parse_fragments + fragment_to_tex) e pós-processa: ### headers → \\subsection*, {{Placeholder}} → Placeholder; regenerou fragmentos/cont/CONT-05..13 da VictoriaRegia",
+        "CONT-07.tex: incluída a seção ESCALA DE CONTAMINAÇÃO — ATUALIZAÇÃO 3 (estava no md após o bloco ↪ Links e era perdida pelo extract_fragment_content do build_miolo) — com tabela de ciclos, fiel ao md",
+        "main.tex VictoriaRegia: Parte 5 atualizada de 7 para 13 fragmentos (fraglinks com títulos novos + \\input de CONT-08..13); cabeçalho do template atualizado para CONT-01 a CONT-13",
+        "Verificações: CONTAGEM no CONT-07 conserva (1907-1979) propagada do md (correção R374); mutismo seletivo (R375) e Campo do Alagadiço (R374) preservados nos fragmentos não regenerados",
+        "main.pdf (PT) recompilado exit=0, 411 páginas; main_kdp_print_160x230mm.pdf recompilado exit=0, 433 páginas; verificação fitz: 13/13 checks PASS (Laudo, Três Vezes, Diagnóstico Final, Você Leu Isto Antes, Espelho, Ferida, Número, 3:14, Fila, ATUALIZAÇÃO 3, 1907-1979)",
+        "Backup dos .tex anteriores em Molambudos_VictoriaRegia/_archive/backup_R376/ (cont_old/, main.tex, main_en/main_zh/main_tri)",
+        "NÃO alterados: en/, zh/, tri/ (mantêm a edição anterior CONT-01..07, consistentes entre si) — a nova estrutura PT exige tradução dos 9 fragmentos CONT-05..13 para EN/ZH antes de propagar; pendência aberta"
+      ],
+      "score": 0.93,
+      "lições": [
+        "O build_miolo.py corta todo conteúdo após o bloco ↪ Links de cada fragmento; seções finais do md após os links (ex.: ESCALA ATUALIZAÇÃO 3) são silenciosamente perdidas — auditar o fim de cada fragmento gerado",
+        "O build_miolo.py puro não converte ### em \\subsection* nem resolve {{placeholders}} — a edição VictoriaRegia dependia de pós-processamento manual; o driver novo formaliza esse pós-processamento",
+        "Os .tex EN/ZH/TRI são traduções de uma edição anterior: propagar reestruturação do PT exige pipeline de tradução antes, senão o PDF trilíngue mistura estruturas diferentes"
+      ],
+      "timestamp": "2026-08-02T19:28:39.669654+00:00"
+    },
+    {
+      "round_id": "R377",
+      "objective": "Executar a decisão autoral (i): traduzir os 9 fragmentos CONT-05..13 da nova edição para EN e ZH (com revisão), reestruturando main_en/main_zh/main_tri para 13 fragmentos e recompilando os PDFs",
+      "changes": [
+        "EN: tradução integral dos 9 fragmentos da nova edição em en/fragmentos/cont/CONT-05..13.tex — CONT-05 Clinical Assessment Report (novo, criado do zero), CONT-06 You Read This Line Three Times (novo, do zero), CONT-07 The Final Diagnosis (reuso do antigo CONT-05 EN com VI renumerado e sem as seções YOUR NAME/QUESTION THAT REMAINS), CONT-08 You Have Read This Before, CONT-09 The Mirror, CONT-10 The Wound (com \\NE sobre examinadores de prova conferindo o braço direito), CONT-11 The Number (1,260 x3 + \\NE do lápis de 1979), CONT-12 3:14, CONT-13 The Line (com \\NE da estrutura A/B/C ergódica)",
+        "ZH: tradução integral dos 9 fragmentos em zh/fragmentos/cont/CONT-05..13.tex — CONT-07 最终诊断 (reuso do antigo CONT-05 ZH renumerado, com \\NE do ICD + ATUALIZAÇÃO 3), CONT-08 您以前读过这一切, CONT-09 镜子, CONT-10 印记 (\\NE braço direito), CONT-11 数字 (\\NE lápis), CONT-12 3:14, CONT-13 队列 (\\NE A/B/C), CONT-05 临床评估报告 e CONT-06 您已经读过这一行三遍 (novos do zero)",
+        "Notas \\NE editoriais preservadas e reatribuídas na nova numeração (4 notas: anti-overclaim ICD no CONT-07; braço direito no CONT-10; lápis 1979 no CONT-11; estrutura A/B/C ergódica no CONT-13)",
+        "main_en.tex: fraglinks da Parte 5 atualizados para 13 fragmentos com títulos novos; inputs CONT-08..13 adicionados",
+        "main_zh.tex: fraglinks atualizados (13) e inputs CONT-08..13 adicionados; TODO-R356 da Parte 5 removido (comentário de tradução pendente obsoleto)",
+        "main_tri.tex: triinput CONT-08..13 adicionados (o tribody já resolve os 3 idiomas; caminhos relativos à raiz VictoriaRegia)",
+        "PDFs recompilados: main_en.pdf (pdflatex, 2 passagens, 417 páginas, exit=0), main_zh.pdf (xelatex, 399 páginas, exit=0), main_tri.pdf (xelatex, 1077 páginas, exit=0)",
+        "Verificação fitz 3 PDFs: 36/36 checks PASS — títulos novos presentes em EN/ZH/TRI, 1907-1979 e mutismo seletivo conservados, títulos antigos (The Mirror and the Wound, The Number, the Hour, and the Line, 镜子与伤口, 数字、时刻与队列) ausentes, ATUALIZAÇÃO 3/UPDATE 3/更新3 presente",
+        "Correção pontual: erro de digitação 'unknowneven' → 'unlearned' no CONT-05 EN antes da compilação"
+      ],
+      "score": 0.95,
+      "lições": [
+        "Verificar macros \\rota/\\rotasep/\\NE antes de usar em traduções — nesta sessão existiam em main_en/main_zh (verificado via grep antes de compilar), evitando erro de undefined control sequence",
+        "Nos checks fitz, usar a string exata do PDF (caixa alta real: 'UPDATE 3' e não 'Update 3') — primeiro FAIL foi falso positivo do próprio check",
+        "A reestruturação md → 13 CONTs é agora consistente nas 4 versões (PT/EN/ZH/TRI); o trilíngue depende dos 3 idiomas alinhados — traduzir primeiro, depois ligar inputs"
+      ],
+      "timestamp": "2026-08-02T20:05:00.000000Z"
+    },
+    {
+      "round_id": "R378",
+      "objective": "Auditoria final do checklist de consistência (geografia Alagadiço, MEM-27, DOC-01, idades/mutismo/datas) e rebuild final dos 5 PDFs + KDP trilíngue",
+      "changes": [
+        "Auditoria item a item: (1) Campo do Alagadiço canônico — confirmado em md (L323/718/800/943/1000) e DOC-02/DOC-18 PT/EN/ZH (feito em R374); (2) MEM-27 — confirmado 1907--1979 e vala 1915 em PT/EN/ZH .tex (feito em R374); (3) DOC-01/lista de pacientes — nenhum '(1917-1979)' restante como período de vida; CONTAGEM em CONT-07 usa (1907-1979); partopener Colônia (1917--1979) refere-se à internação, não à vida",
+        "Varredura exaustiva de inconsistências: 75 ocorrências de '1917' nos .tex auditadas — todas coerentes (internação em 1917, exame 12/nov/1917, foto da chegada, 62 anos de registro 1917→1979); idades 72 anos (MEM-16, MEM-05, DOC-13, DOC-03) = 1907→1979 ✓; 'aos 10 anos' em 1917 ✓; mutismo seletivo sem resíduos de absoluto/completo ✓; cronologia LUC Inverno→Setembro/2026 sem quebras ✓; 1.261 Heitor Oliveira (1979) / 1.262 Lúcia (2026) / 1.263 você ✓",
+        "Correção de infraestrutura: o build anterior do TRI KDP (R377) rodou sem -output-directory, gravando auxiliares (.toc/.aux/.log) na raiz VictoriaRegia e sobrescrevendo o PT KDP — o .toc poluído com chinês (档/档案员按语) quebrava o pdflatex do wrapper PT",
+        "Rebuilds: main.pdf (411p), main_kdp_print_160x230mm.pdf PT (433p) — pdflatex 2 passagens exit=0; main_en (417p), main_zh (399p), main_tri (1077p) — R377 intactos; tri/main_kdp_print_160x230mm.pdf TRI KDP (1135p) recompilado com -output-directory=tri (xelatex 2 passagens exit=0), auxiliares agora corretos em tri/",
+        "Verificação final fitz 6 PDFs: 38/38 checks PASS — títulos novos presentes (13 CONTs), 1907-1979 e mutismo seletivo conservados nas 4 línguas, títulos antigos ausentes, ATUALIZAÇÃO 3/UPDATE 3/更新3 presentes"
+      ],
+      "score": 0.96,
+      "lições": [
+        "Ao compilar wrappers em subdiretórios (tri/main_kdp_print_160x230mm.tex), SEMPRE usar -output-directory=<subdir> para não poluir a raiz com auxiliares e não sobrescrever PDFs de mesmo jobname (PT KDP vs TRI KDP compartilham o nome main_kdp_print_160x230mm)",
+        "Um .toc poluído com caracteres fora do encoding (ex.: chinês em build pdflatex) causa erro fatal na passada seguinte e mascara o problema real — limpar auxiliares antes de recompilar",
+        "Auditoria de datas: distinguir período de vida (1907-1979) de período de internação (1917-1979) — o partopener Colônia (1917--1979) e a legenda MEM 1917–1979 estão CORRETOS pois referem-se ao internamento"
+      ],
+      "timestamp": "2026-08-02T21:30:00.000000Z"
+    },
+    {
+      "round_id": "R379",
+      "objective": "Correção do roteamento trilíngue de rotas na edição TRI (o leitor PT/EN/ZH deve ser levado ao bloco do fragmento na SUA língua, e não sempre ao bloco PT)",
+      "changes": [
+        "Diagnóstico: no tri/main_tri.tex, o \\tribody criava âncoras apenas para fragen: (EN) e fragzh: (ZH) explicitamente; para PT só existia a âncora 'MEM-XX' (do \\fragdef) SEM o prefixo frag: — os links \\rota do bloco PT apontavam para frag:#1 que não existia (dpage=None, link morto), e o índice \\fraglinktri usava \\hyperlink{#1} (âncora simples = bloco PT), então TODOS os cliques do índice/rotas caíam no bloco português",
+        "Correção 1: adicionado '\\hypertarget{frag:#1}{}' no \\tribody (bloco PT) para que \\rota e o índice resolvam a âncora frag:",
+        "Correção 2: \\fraglinktri reescrito em 3 links independentes — 'MEM-01 (PT)' → frag:, 'p. X' → frag:, 'p. Y' → fragen:, 'p. Z' → fragzh: — o leitor escolhe a língua e cai no bloco correspondente",
+        "Recompilados main_tri.pdf (1079p) e tri/main_kdp_print_160x230mm.pdf (1135p): verificação por extração PyMuPDF confirma 0 erros — PT→frag:, EN→fragen:, ZH→fragzh: em todos os 84 fragmentos"
+      ],
+      "lessons": [
+        "No modelo trilíngue NUNCA usar âncora simples (#1) para links que devem ser específicos da língua — sempre fragmentar as âncoras por bloco (frag:, fragen:, fragzh:) e criar explicitamente TODOS os prefixos no tribody, inclusive o frag: do bloco PT (o \fragdef não cria esse prefixo sozinho)",
+        "PyMuPDF é a ferramenta certa para auditar links: dest='frag:X' com dpage=None indica âncora inexistente; dpage resolvido com a página correta do bloco confirma o roteamento"
+      ],
+      "timestamp": "2026-08-02T22:15:00+00:00"
+    },
+    {
+      "round_id": "R380",
+      "objective": "SPEC-935-R380 — enriquecimento do catálogo MASWOS: 46 agentes com description placeholder + corpo apontando para caminho externo inexistente, corrigidos com conteúdo real portado de repositório-fonte confirmado (renumerado de R374 por colisão de round_id com trabalho concorrente da frente Molambudos)",
+      "changes": [
+        "Achado colateral da Seção 6.1 do README (tabela de 205 agentes): 103/205 (50%) tinham description='Agente especializado NOME' e corpo apontando para 'criador-artigo\\\\agents\\\\...' (caminho Windows externo, inexistente neste checkout)",
+        "Fonte real localizada: diretório irmão ~/OpenCode_Ecosystem-main/OpenCode_Ecosystem-main/criador-artigo/agents/ com os 46 arquivos originais completos (missão, entradas, saídas, workflow)",
+        "Script determinístico (não-LLM) migrou os 46 agentes MASWOS (00-53): extrai título+missão real via regex de heading, deriva description da primeira frase real (nunca inventada), reconstrói corpo mantendo todo conteúdo autoral e descartando só seções que apontavam para arquivos de referência externos não migrados",
+        "187 testes de regressão (test_r380): YAML válido nos 46, sem description placeholder, nota de proveniência presente, sem caminho externo pendurado, catálogo continua carregando 205 registros",
+        "README Seção 6.1 atualizada: 103->57 registros com placeholder restante, com nota clara do que foi corrigido e do que falta (família reversa-*, auxjuris_*, etc. -- candidato a R381+)",
+        "NOTA DE CONCORRÊNCIA: este ciclo foi originalmente registrado como R374, mas uma sessão concorrente (frente Molambudos) usou R374-R379 para outro trabalho no mesmo intervalo, causando perda do primeiro append (sobrescrita por save() completo do arquivo). Renomeado para R380 (spec, teste e provenance notes nos 46 arquivos) após detecção via reconferência do total de ciclos antes de reanexar."
+      ],
+      "score": 8.5,
+      "lessons": [
+        "evolution/cycles.json é um recurso compartilhado entre sessões concorrentes; um append feito via json.load/json.dump pode ser perdido se outra sessão salvar o arquivo inteiro depois -- sempre reconferir o total de ciclos e o último round_id imediatamente antes de escrever, e estar pronto para renumerar",
+        "Migração de conteúdo real (não fabricado) exige localizar a fonte-verdade antes de qualquer coisa -- o achado só virou correção porque encontrei o diretório irmão com os arquivos originais",
+        "Script de extração por regex de heading precisa de casamento flexível (prefixo + variantes 'Missao e Diretrizes Absolutas', headings numerados '1. Perfil e Escopo') -- casamento exato por chave falha silenciosamente em ~10% dos casos reais",
+        "Nomear a lista de IDs a testar de memória (em vez de copiar da fonte real gerada) introduziu erros de teste que pareciam falhas de produto -- sempre gerar listas de teste programaticamente quando a fonte de verdade já existe em arquivo"
+      ],
+      "timestamp": "2026-08-03T01:13:07.300158+00:00"
     }
   ]
 }
