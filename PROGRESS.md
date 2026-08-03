@@ -5,7 +5,8 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R381 — gate de rigor de manuscrito no pipeline principal + docs unificadas** (2026-08-03)
+- **Branch:** `main` · última entrega: **R382 — corrige travamento real do nano_orchestration + falha pré-existente do test_r237** (2026-08-03)
+- **R382 (2026-08-03) — causa raiz achada e corrigida (não era o daemon, era o código):** o achado colateral do R381 (`TestIntegration` travando) foi investigado a fundo por bissecção: `QualityChecker` **nunca soube de `dry_run`** e sempre tentava reescrever via rede real (`LiteRTMClient.chat`, até 3 tentativas × 120s) quando o conteúdo simulado do dry-run reprovava nos critérios semânticos — o que acontece quase sempre. Sem o daemon LiteRT-LM respondendo, cada bloco travava até o timeout de conexão; com 30 blocos, a suíte travava por dezenas de minutos. Corrigido: `QualityChecker(dry_run=...)` propagado de `NanoOrchestrator`, `rewrite_block()` retorna `None` imediatamente em dry-run sem nunca abrir socket. Também corrigido `tests/test_r237_diagrams_repair.py` (esperava `"v3.6.0"` no README, que já fora atualizado para `v3.7.0` num commit anterior a esta sessão — teste desatualizado, não o README). **Resultado medido:** `test_nano_orchestration.py` 76/76 em 1.27s (antes: nunca terminava); suíte completa **343s, 64 falhas / 2578 aprovados / 53 pulados, zero `--deselect`** (antes: precisava excluir 3 testes manualmente ou não terminava dentro de 1500s). Ver `specs/SPEC-935-R382-nano-orchestration-dry-run-hang-fix.md`.
 - **Pós-R381 (2026-08-03) — nomenclatura + documentação:** durante a
   atualização do README, achei que a chave de estágio `r106_rigor` colidia
   com `specs/SPEC-935-R106.md` (CI/CD Pipeline + Quality Gates, spec real
@@ -37,20 +38,12 @@
   aceitação) e `tests/test_r381_manuscript_rigor_gate_integration.py` (7
   testes, TDD real, GREEN). Zero regressão: `test_r108` 10/10, `doctor`
   12/12 sem falha nova.
-- **Achado colateral do R381 (não é regressão, documentado para triagem
-  futura):** `tests/test_nano_orchestration.py::TestIntegration` (3 testes:
-  `test_end_to_end_orchestration`, `test_planner_to_sdd_to_writer`,
-  `test_writer_to_quality_to_coherence`) **trava indefinidamente** ao rodar a
-  suíte completa — isolado por bissecção: o arquivo inteiro trava, mas um
-  teste unitário isolado da mesma classe (`test_nano_block_with_type`) passa
-  em <0.1s; a suspeita é instabilidade do daemon LiteRT-LM, que o `doctor` já
-  reporta como `warn` ("unavailable... falhas registradas=25"). Não é código
-  meu (não importa nada de `marceloclaro`), não é regressão deste ciclo — mas
-  precisa de triagem própria por quem cuida de `nano_orchestration/`. Suíte
-  completa rodada com esses 3 testes deselecionados: **65 falhas, 2574
-  aprovados, 53 pulados** — mesmo padrão de falhas pré-existentes já
-  documentado no R380 (61 falhas), nenhuma delas tocando `orchestrator.py`,
-  `r381`, `r108` ou `r369-r373`.
+- **Achado colateral do R381, resolvido no R382:** `tests/
+  test_nano_orchestration.py::TestIntegration` travava indefinidamente
+  (documentado como "não é regressão, precisa de triagem futura" no R381).
+  Causa raiz achada e corrigida no R382 (ver acima) — não era o daemon
+  LiteRT-LM em si, era `QualityChecker` chamando rede real sem checar
+  `dry_run`.
 - **⚠️ Concorrência real detectada (2026-08-02):** durante o R380, encontrei
   `evolution/cycles.json` já contendo ciclos R374–R379 de uma **frente
   concorrente trabalhando ao vivo no mesmo checkout** (Molambudos:

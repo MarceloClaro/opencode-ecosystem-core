@@ -111,7 +111,7 @@ class NanoOrchestrator:
         self.planner = NanoPlanner()
         self.sdd_engine = NanoSDDEngine()
         self.writer_pool = NanoWriterPool(self.client, pool_config)
-        self.quality_checker = QualityChecker(self.client)
+        self.quality_checker = QualityChecker(self.client, dry_run=dry_run)
         self.coherence_engine = CoherenceEngine()
         self.cross_validator = CrossValidator()
 

@@ -3546,6 +3546,25 @@
         "Travamento real descoberto durante a corrida da suite completa (tests/test_nano_orchestration.py::TestIntegration, 3 testes) e um problema ambiental pre-existente (daemon LiteRT-LM), nao uma regressao deste ciclo — isolado por bissecao (arquivo sozinho trava, teste unitario isolado da mesma classe passa em <0.1s), documentado para triagem futura em vez de mascarado ou ignorado.",
         "Colisao de nomenclatura pega antes do push de documentacao: a chave de estagio escolhida inicialmente ('r106_rigor') colidia com specs/SPEC-935-R106.md (CI/CD Pipeline + Quality Gates), um spec real ja existente e nao relacionado. Renomeada para 'r381' (alinhando com a convencao real do codigo: cada chave de estagio = seu spec_id, ex. r101->SPEC-935-R101, r105->SPEC-935-R105) antes de propagar o nome errado para o README."
       ]
+    },
+    {
+      "round_id": "R382",
+      "objective": "Corrigir o travamento indefinido de tests/test_nano_orchestration.py::TestIntegration (achado colateral documentado no ciclo R381) e a falha pre-existente de test_r237_diagrams_repair.py (versao desatualizada no teste), com o objetivo explicito do usuario de superar o desempenho anterior (suite completa sem travar e sem precisar de --deselect).",
+      "changes": [
+        "Causa raiz achada por bissecao (nao suposta): QualityChecker nao tinha nocao de dry_run e sempre tentava reescrita via rede real (LiteRTMClient.chat, ate 3 tentativas x 120s cada) quando o score do conteudo simulado do dry-run ficava abaixo de 7.0 — o que acontece quase sempre, ja que o texto placeholder falha criterios semanticos. Sem daemon LiteRT-LM respondendo (doctor ja reportava warn), cada bloco reprovado travava ate o timeout de conexao; com 30 blocos num plano tipico, a suite inteira travava por dezenas de minutos.",
+        "nano_orchestration/quality_checker.py: QualityChecker.__init__ ganha parametro dry_run=False; rewrite_block() retorna None imediatamente em dry-run, sem nunca abrir socket de rede (check_block continua honesto, nao fabrica aprovacao).",
+        "nano_orchestration/orchestrator.py: NanoOrchestrator agora propaga dry_run para QualityChecker(self.client, dry_run=dry_run) — antes construia QualityChecker(self.client) sem o parametro.",
+        "tests/test_nano_orchestration.py: TestIntegration.test_writer_to_quality_to_coherence corrigido para instanciar QualityChecker(dry_run=True) (bug de teste: o docstring ja dizia '(dry-run)' mas o codigo nao propagava a flag).",
+        "tests/test_r237_diagrams_repair.py: string esperada corrigida de 'v3.6.0' para 'v3.7.0' (o README ja fora atualizado deliberadamente no commit 5c061a5, antes desta sessao; o teste que estava desatualizado, nao o README).",
+        "specs/SPEC-935-R382-nano-orchestration-dry-run-hang-fix.md: spec formal com causa raiz, correcao e 5 criterios de aceitacao."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Um 'achado colateral nao-regressivo' documentado no PROGRESS.md nao significa 'nao vale a pena corrigir' — bissecao real (isolar arquivo, depois classe, depois metodo, com timeout curto e log -u sem buffer) achou a causa exata em minutos: QualityChecker ignorava dry_run e chamava rede real. Suposicao inicial ('deve ser o daemon LiteRT-LM') era so meio-verdadeira: o daemon de fato nao responde, mas o bug real era o codigo tentar chama-lo quando nao deveria (dry-run).",
+        "dry_run como conceito precisa ser propagado por TODA a cadeia de componentes que podem tocar rede, nao so no componente mais obvio (o Writer). QualityChecker.rewrite_block() era um segundo ponto de chamada de rede que ninguem tinha auditado.",
+        "Testes com docstring dizendo '(dry-run)' mas construindo um componente sem passar a flag sao um sinal de alerta especifico — o docstring documentava a INTENCAO, o codigo nao a implementava.",
+        "Resultado medido, nao estimado: suite completa foi de 'trava indefinidamente / precisa de --deselect em 3 testes' para '343s, 64 falhas / 2578 aprovados / 53 pulados, zero deselecoes' — 76/76 testes do proprio arquivo em 1.27s (antes: nunca terminava)."
+      ]
     }
   ]
 }

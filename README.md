@@ -8,16 +8,16 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.7.0_Episteme_%2B_Cultural_Guards-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.695_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-198_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-199_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-222-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-223-dodgerblue.svg)](specs/)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 205 agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (scanners epistemológicos)**, 6 Servidores MCP, **Camada Epistêmica de Roteamento** e **Guardas de Tradução Cultural** (R363–R381), e 198 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 205 agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (scanners epistemológicos)**, 6 Servidores MCP, **Camada Epistêmica de Roteamento** e **Guardas de Tradução Cultural** (R363–R381), e 199 ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
@@ -1500,7 +1500,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **198 ciclos registrados** (R1 a R381, com sub-etapas como R104a–R104d), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **199 ciclos registrados** (R1 a R382, com sub-etapas como R104a–R104d), cada um com score, lições e timestamp.
 
 ---
 
@@ -2115,7 +2115,7 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>198 ciclos evolutivos (R1–R381) · 2.695 testes coletados · 205 agentes · 222 specs formais</i><br>
+  <i>199 ciclos evolutivos (R1–R382) · 2.695 testes coletados · 205 agentes · 223 specs formais</i><br>
   <b>v3.7.0 — Pipeline Acadêmico Agentivo | Camada Epistêmica | Guardas de Tradução Cultural | MCP Security | CI/CD</b><br>
   <sub>Números medidos em 2026-08-03 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
   contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
