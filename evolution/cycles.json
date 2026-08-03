@@ -3585,6 +3585,26 @@
         "Multiplas cadeias de proveniencia sobrepostas (R359->R360->R361-> R362, cada uma podendo fixar hashes de arquivos diferentes) significam que uma varredura ampla precisa ser verificada contra TODOS os manifestos conhecidos, nao so o mais obvio -- filtrar testes por '-k molambudos' quase deixou passar a quebra do R360, cujo arquivo de teste nao tem 'molambudos' no nome.",
         "Uma falha nova observada na suite completa (test_r211_litert_mcp_security) nao era regressao de conteudo -- era o circuit breaker do LiteRT-LM (state.json fora do repo, em /run/user/1000/) abrindo apos multiplas execucoes da suite completa nesta sessao; transiente, auto-resolve em 15min, documentado sem perseguir."
       ]
+    },
+    {
+      "round_id": "R384",
+      "objective": "Estender a regeneracao de fragmentos Molambudos (fix do R383) para CONT-03, MEM-27 e LUC-Escolha -- o achado documentado como 'fora de escopo' no R383, a pedido do usuario ('prossiga').",
+      "changes": [
+        "Verificacao em memoria (antes de escrever) revelou que a divergencia era MAIOR do que reportado no R383: nao era so o epilogo cortado, era um .tex publicado desatualizado em relacao a uma revisao mais extensa do molambudos.md (CONT-03: 8 palavras perdidas/65 novas; MEM-27: 43->61 linhas; LUC-Escolha: 69->86 linhas). Reportado ao usuario antes de agir, pois era maior do que o comunicado inicialmente.",
+        "Achado adicional (direcao oposta): o .tex publicado tinha 2 notas editoriais (\\NE{...} em CONT-03 e MEM-27) e um paragrafo narrativo inteiro (LUC-Escolha, 'havia uma quarta opcao...') que NUNCA existiram no molambudos.md -- confirmado via grep no .md. Regenerar sem cuidado apagaria esse conteudo real.",
+        "Usuario perguntado explicitamente (AskUserQuestion, 3 opcoes) -- escolheu regenerar preservando as notas/paragrafo.",
+        "Backup manual criado antes de escrever (_archive/backup_R384_pre_extend_regen/, projetos/ nao tem git).",
+        "Regeneracao executada para os 3 IDs; reinsercao manual das 2 notas e do paragrafo na posicao textual original exata (ancoras verificadas por assert antes de inserir). Verificacao de conjunto de palavras (>=6 caracteres): zero palavras reais perdidas em qualquer um dos 3 (so artefatos cosmeticos de macro LaTeX: rotasep, textquotedblleft/right, harmonizados para o estilo ja adotado em CONT-05..13 desde o R376).",
+        "9 testes TDD reais (tests/test_r384_molambudos_extended_regen_editorial_notes.py): notas/paragrafo preservados, conteudo recuperado presente, espelho canonico identico, 3 cadeias de proveniencia (R360/R361/R362) verificadas programaticamente com zero problemas.",
+        "specs/SPEC-935-R384-molambudos-extend-regen-cont03-mem27-luc-escolha.md: spec formal com o achado maior-que-esperado, a decisao do usuario, e os 6 criterios de aceitacao.",
+        "Regressao verificada: suite completa 64 falhas / 2593 aprovados / 53 pulados -- identica ao baseline do R382/R383, zero regressao nova. Conjunto de falhas Molambudos idem."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Ao estender um fix ja aplicado (R383) para arquivos adicionais, SEMPRE reverificar em memoria antes de escrever -- a suposicao de que 'e o mesmo bug, mesmo escopo' estava errada: a divergencia real era ordens de grandeza maior que o comunicado inicialmente ao usuario. Reportar o achado maior ANTES de agir, mesmo depois de ja ter autorizacao para 'o mesmo tipo de correcao', evita aplicar uma mudanca maior do que o usuario decidiu.",
+        "Divergencia entre .tex publicado e .md fonte pode ir nas DUAS direcoes: conteudo que existe no .md e falta no .tex (perda silenciosa, corrigivel por regeneracao), e conteudo que existe so no .tex e nao no .md (edicao/nota editorial adicionada direto no LaTeX, nunca 'devolvida' a fonte -- regenerar cegamente apaga isso). Verificar as DUAS direcoes antes de decidir a acao.",
+        "Reinsercao manual de conteudo preservado deve usar ancora de texto verificada por assert (nao um offset de linha fixo) -- garante que a insercao falhe ruidosamente se o texto-alvo nao estiver mais la, em vez de inserir silenciosamente no lugar errado."
+      ]
     }
   ]
 }

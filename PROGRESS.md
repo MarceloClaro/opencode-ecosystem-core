@@ -5,7 +5,31 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R383 — conclui pendências Molambudos (bug real de perda de conteúdo + execução autorizada dos 2 scripts)** (2026-08-03)
+- **Branch:** `main` · última entrega: **R384 — estende regeneração a CONT-03/MEM-27/LUC-Escolha preservando notas editoriais exclusivas do .tex** (2026-08-03)
+- **R384 (2026-08-03) — o achado "fora de escopo" do R383, resolvido a
+  pedido do usuário ("prossiga"):** antes de regenerar, verifiquei em
+  memória e descobri que a divergência era **maior** do que eu tinha
+  comunicado — não era só o epílogo cortado, era um `.tex` publicado
+  desatualizado em relação a uma revisão bem mais extensa do
+  `molambudos.md` (`CONT-03` ganhou 65 palavras novas; `MEM-27` foi de
+  43→61 linhas; `LUC-Escolha` de 69→86). Reportei o achado maior ao
+  usuário antes de agir. Achado adicional, na direção oposta: o `.tex`
+  publicado tinha **2 notas editoriais** (`\NE{...}` em `CONT-03` e
+  `MEM-27`) e **1 parágrafo narrativo inteiro** em `LUC-Escolha` ("havia
+  uma quarta opção...") que **nunca existiram no `.md`** — confirmado
+  via `grep`. Perguntei ao usuário como proceder (3 opções); escolheu
+  regenerar preservando esse conteúdo. Feito: backup manual, regeneração
+  dos 3, reinserção manual das notas/parágrafo na posição exata (com
+  âncora de texto verificada, não offset fixo), zero palavras reais
+  perdidas (só artefatos cosméticos de macro LaTeX). 9 testes TDD. As 3
+  cadeias de proveniência (R360/R361/R362) reverificadas
+  programaticamente: zero problemas. Suíte completa: 64 falhas / 2593
+  aprovados / 53 pulados — idêntica ao baseline, zero regressão nova. Ver
+  `specs/SPEC-935-R384-molambudos-extend-regen-cont03-mem27-luc-escolha.md`.
+  **Pendência Molambudos agora fechada** — os 3 arquivos originais
+  (`CORRIGENDUM.md`, `clean_headers_and_lettrines.py`,
+  `regenerate_vic_cont_r376.py`) e os 3 fragmentos com gap de conteúdo
+  estão todos resolvidos e commitados.
 - **R383 (2026-08-03) — os 3 arquivos pendentes da frente Molambudos
   (`CORRIGENDUM.md`, `scripts/clean_headers_and_lettrines.py`,
   `scripts/regenerate_vic_cont_r376.py`) finalmente resolvidos, a pedido
@@ -35,13 +59,6 @@
   (R360→R361→R362) verificadas programaticamente: zero problemas.
   Conjunto de falhas Molambudos idêntico ao baseline do R382. Ver
   `specs/SPEC-935-R383-molambudos-build-miolo-links-epilogue-fix.md`.
-- **Achado fora de escopo, não corrigido (decisão do usuário
-  necessária):** `CONT-03`, `MEM-27` e `LUC-Escolha` têm conteúdo real em
-  `molambudos.md` que nunca chegou ao `.tex` publicado (mesmo bug do
-  R383, mas fora do alcance dos 2 scripts autorizados, que só cobrem
-  `CONT-05..13`). Corrigir exigiria estender o regenerador para esses 3
-  IDs — pode envolver conteúdo já publicado externamente (KDP).
-  Reportado ao usuário para decisão explícita.
 - **R382 (2026-08-03) — causa raiz achada e corrigida (não era o daemon, era o código):** o achado colateral do R381 (`TestIntegration` travando) foi investigado a fundo por bissecção: `QualityChecker` **nunca soube de `dry_run`** e sempre tentava reescrever via rede real (`LiteRTMClient.chat`, até 3 tentativas × 120s) quando o conteúdo simulado do dry-run reprovava nos critérios semânticos — o que acontece quase sempre. Sem o daemon LiteRT-LM respondendo, cada bloco travava até o timeout de conexão; com 30 blocos, a suíte travava por dezenas de minutos. Corrigido: `QualityChecker(dry_run=...)` propagado de `NanoOrchestrator`, `rewrite_block()` retorna `None` imediatamente em dry-run sem nunca abrir socket. Também corrigido `tests/test_r237_diagrams_repair.py` (esperava `"v3.6.0"` no README, que já fora atualizado para `v3.7.0` num commit anterior a esta sessão — teste desatualizado, não o README). **Resultado medido:** `test_nano_orchestration.py` 76/76 em 1.27s (antes: nunca terminava); suíte completa **343s, 64 falhas / 2578 aprovados / 53 pulados, zero `--deselect`** (antes: precisava excluir 3 testes manualmente ou não terminava dentro de 1500s). Ver `specs/SPEC-935-R382-nano-orchestration-dry-run-hang-fix.md`.
 - **Pós-R381 (2026-08-03) — nomenclatura + documentação:** durante a
   atualização do README, achei que a chave de estágio `r106_rigor` colidia
