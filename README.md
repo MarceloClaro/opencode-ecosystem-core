@@ -7,17 +7,17 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.7.0_Episteme_%2B_Cultural_Guards-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-2.417_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-186_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Testes](https://img.shields.io/badge/Testes-2.695_coletados-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-198_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-217-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-222-dodgerblue.svg)](specs/)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 205 agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (scanners epistemológicos)**, 6 Servidores MCP, **Camada Epistêmica de Roteamento** e **Guardas de Tradução Cultural** (R363–R369), e 186 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 205 agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (scanners epistemológicos)**, 6 Servidores MCP, **Camada Epistêmica de Roteamento** e **Guardas de Tradução Cultural** (R363–R381), e 198 ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
@@ -49,6 +49,24 @@ Hoje, o OpenCode Ecosystem Core é uma fortaleza de rigor acadêmico e tecnológ
 ### Act VI — A Camada Epistêmica e os Guardas de Tradução Cultural (R363–R369)
 A última fronteira foi ensinar o roteamento a reconhecer **o tipo de conhecimento** por trás de cada tarefa — 6 regimes epistemológicos que dão peso brando ao match agente↔tarefa sem nunca excluir um candidato — e a **vigiar honestamente** a internacionalização editorial: um grafo terminológico que só humanos aprovam, um guardião da voz autoral, um verificador de retrotradução e um benchmark medido em corpus interno (nunca uma meta anunciada). Nasceu também a ponte entre os motores de raciocínio e a produção de artigos e obras literárias: toda alegação de "inédito" ou "inovador" agora exige ancoradouro de comparação na mesma frase — novidade se argumenta, não se decreta.
 
+### Act VII — Rigor Estatístico, Triangulação e a Unificação Real do Pipeline (R370–R381)
+Testar um gate isoladamente não prova que ele protege ninguém — só prova
+que a função funciona quando alguém a chama. O ecossistema ganhou motores
+reais de validação empírica (contraprova por permutação, k-fold, validade
+convergente), triangulação multidisciplinar que **nunca** aceita maioria
+de votos sobre uma disciplina dissidente, e um protocolo de pré-registro
+que corrigiu um overcloim real (`pre_registered=True` por padrão, sem
+verificação). Mas a auditoria de unificação encontrou o gap inverso do
+usual: o andaime de rigor científico (R369) estava testado, pronto — e
+**nunca era chamado** pelo pipeline principal, mesmo o Paper Composer já
+produzindo exatamente o texto que ele espera auditar. R381 fecha essa
+última milha: o gate de rigor agora roda de verdade a cada composição de
+artigo, de forma consultiva (nunca bloqueia, nunca fabrica um resultado
+quando não há manuscrito para auditar). Os gates que exigem dados brutos
+do próprio chamador (estatística, triangulação, pré-registro) permanecem
+deliberadamente opt-in — unificar não significa fabricar dados sintéticos
+só para acionar uma assinatura de função.
+
 ---
 
 ---
@@ -70,6 +88,7 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 
 **Diferenciais arquiteturais:**
 - **Pipeline Científico Fechado (R101→R105):** Do problema à entrega do artigo — EvoSci (descoberta) → Deep Research (evidência) → Peer Review (avaliação) → Revision (correção) → Paper Composer (publicação)
+- **Gate de rigor consultivo pós-composição (R381):** após o Paper Composer, `scientific_discovery_pipeline()` audita as seções compostas de verdade contra os 8 movimentos de raciocínio do R369 — não bloqueia (achados ficam em `stages["r381"]` e no resumo `manuscript_rigor_gate`), mas deixa de ser função de biblioteca sem chamador.
 - **Fusão e loop científico (R108–R109):** `scientific_discovery_pipeline()` aplica o gate real do R103, calibra a confiança do próprio run e expõe estados terminais nomeados no loop de descoberta.
 - **Raciocínio auditável (R113–R115):** detector heurístico de falácias e vieses, ARCHE RLT com seis tipos de Peirce e revisão às cegas com anonimização, verificação de vazamento e conflito de interesse.
 - **Interfaces de produção (R116/R120):** instalação multiplataforma, helpdesk, pesquisa acadêmica no CLI e fallback opcional de download visível no diagnóstico.
@@ -138,10 +157,16 @@ Pipeline fechado de 5 estágios que transforma um problema em artigo publicado:
 │ CrossConsistencyVerifier (5 verificações)            │
 └──────────────────────────────────────────────────────┘
     ↓
+┌─ r381: AUDITORIA DE RIGOR (consultiva) ─────────────┐
+│ audit_scientific_manuscript() sobre as seções reais  │
+│ 8 movimentos de raciocínio + novidade ancorada (R369)│
+│ NÃO bloqueia — achados vão para manuscript_rigor_gate│
+└──────────────────────────────────────────────────────┘
+    ↓
 [Artigo Completo + MCP Tools + Skills Exportáveis]
 ```
 
-Cada estágio possui **spec formal (SDD)**, **testes TDD**, **gate de qualidade** e **registro no EvolutionRegistry**.
+Cada estágio possui **spec formal (SDD)**, **testes TDD**, **gate de qualidade** e **registro no EvolutionRegistry**. O último estágio (`r381`) é consultivo: nunca bloqueia a entrega, mas reporta achados para revisão humana.
 
 ### 3. Motor Científico com Governance (v2.x legado)
 Pipeline científico com governança ética: `OQS → HypothesisEngine → ExperimentDesigner → StatisticalValidator → AdversarialReviewer → ConfidenceCalibrator → VSEE → EGS → EvidenceGraph`. Inclui Scientific RAG com grounding, citações auditáveis e abstenção.
@@ -163,7 +188,7 @@ Roteador de atenção (Multi-Head Attention com 4 cabeças: semântica, capacida
 
 Esta tabela é gerada a partir do catálogo real (`marceloclaro.catalog_loader.load_catalog_definitions()`), não é uma lista escrita à mão — toda `Descrição` vem do próprio *agent card*, e toda `Camada` vem da **Camada Epistêmica de Roteamento** já implementada (R363/R368: `transformer/episteme.py`), que classifica cada agente em um de 6 regimes epistemológicos por inferência determinística sobre `category`/`type`/`tags`/nome — **nunca chuta**: sem sinal lexical suficiente, a camada fica em branco (`—`).
 
-**Transparência sobre os números:** dos 205 registros carregados, **3 são artefatos não-agente** (ver último grupo da tabela-resumo) — o catálogo real de agentes funcionais é **202**. A camada epistêmica cobre **133/205 (65%)** — os **72 restantes (35%) aparecem como `—`** porque a heurística lexical não encontrou sinal suficiente nos metadados; isso não significa que o agente seja pior, só que a inferência automática não tem base para classificá-lo (ver Seção 8 para o critério exato).
+**Transparência sobre os números:** dos 205 registros carregados, **3 são artefatos não-agente** (ver último grupo da tabela-resumo) — o catálogo real de agentes funcionais é **202**. A camada epistêmica cobre **129/205 (63%)** — os **76 restantes (37%) aparecem como `—`** porque a heurística lexical não encontrou sinal suficiente nos metadados; isso não significa que o agente seja pior, só que a inferência automática não tem base para classificá-lo (ver Seção 8 para o critério exato). Número medido via `python3 -m marceloclaro.cli doctor` (check `episteme_coverage`) — varia levemente conforme o catálogo cresce/muda entre ciclos.
 
 **Achado de auditoria e correção aplicada (SPEC-935-R380):** ao gerar esta tabela pela primeira vez, 103 dos 205 registros (50%) tinham `description` placeholder mecânico ("Agente especializado NOME") com corpo apontando para um caminho Windows externo inexistente neste checkout. Os **46 agentes do grupo Catálogo Acadêmico MASWOS** (00–53) já foram corrigidos: conteúdo real (missão, entradas, saídas, workflow) portado de um repositório-fonte confirmado, nunca fabricado — ver `specs/SPEC-935-R380-maswos-catalog-enrichment.md`. **57 registros ainda têm o placeholder** (família `reversa-*` com fonte real localizada mas ainda não portada, `auxjuris_*`, ferramental de desenvolvimento genérico, médicos, e os 3 artefatos não-agente) — candidatos a um ciclo futuro (R375+). Para esses casos, a coluna `Descrição` traz um **rótulo derivado mecanicamente do identificador** (nunca uma descrição inventada), marcado explicitamente.
 
@@ -542,8 +567,8 @@ determinística sobre metadados (`transformer/episteme.py`) ou frontmatter
 explícito `episteme:` no agent card. O `SkillHandbook.match()` aplica a
 afinidade epistêmica tarefa↔agente como **peso brando** (±10% máx.,
 fail-open: sem episteme, o score é idêntico ao anterior). Cobertura medida
-pelo 12º check do doctor (`episteme_coverage`): 133/205 agentes (65%) em
-2026-08-02.
+pelo 12º check do doctor (`episteme_coverage`): 129/205 agentes (63%) em
+2026-08-03.
 
 ### 9. Guardas de Tradução Cultural — OpenCode Books (R359 + R364–R367)
 Stack contratual fail-closed para internacionalização editorial PT-BR/EN/ZH-CN:
@@ -659,6 +684,17 @@ problemas genuínos:
 
 Relatório completo: [`validacao_externa/manuscrito_armadilha_renda_media/relatorio_validacao_pipeline.md`](validacao_externa/manuscrito_armadilha_renda_media/relatorio_validacao_pipeline.md).
 
+### 15. Unificação Real: o Gate de Rigor Entra no Pipeline Principal (R381)
+Todo o trabalho das seções 10–14 tinha um problema silencioso: `audit_scientific_manuscript()` (R369) era testado, validado sobre manuscrito real (R373) — mas **nenhum caminho do orquestrador principal o chamava**. Uma auditoria de unificação (percorrer o dado de ponta a ponta, não só ler a assinatura das funções) encontrou o gap: `marceloclaro.orchestrator.py::scientific_discovery_pipeline()` já produzia, no estágio R105 (Paper Composer), `sections: Dict[str, str]` com texto real — exatamente o formato que o auditor espera — e simplesmente nunca o repassava adiante.
+
+**O que mudou:**
+- Novo estágio `stages["r381"]`, executado logo após o R105, chamando `audit_scientific_manuscript(r105["sections"])` com as seções *de verdade* (verificado por spy em teste, não fabricação).
+- Quando não há seções (R105 falhou ou não produziu nada), o pipeline registra `{"status": "skipped", "reason": ...}` — nunca fabrica um audit sobre dado inexistente.
+- **Consultivo, não bloqueante:** ao contrário do gate obrigatório do R103, o R381 nunca reverte o `status` do pipeline para `"blocked"` — o manuscrito já foi composto; descartá-lo pós-hoc seria pior que reportar o achado. Resumo de conveniência em `result["manuscript_rigor_gate"]`.
+- **Deliberadamente fora de escopo:** R370 (estatística), R371 (triangulação) e R372 (pré-registro) continuam **opt-in** via `OrchestratorReviewer` — exigem amostras brutas, pares r/n ou protocolo que só o chamador possui. Acioná-los automaticamente significaria inventar dados sintéticos só para preencher uma assinatura, o que violaria a própria disciplina anti-fabricação do projeto.
+- **Achado colateral de nomenclatura corrigido no mesmo ciclo:** a chave de estágio escolhida inicialmente (`r106_rigor`) colidia com um spec real e não relacionado (`specs/SPEC-935-R106.md`, CI/CD Pipeline + Quality Gates). Renomeada para `r381`, seguindo a convenção real do código (chave de estágio = `spec_id`).
+
+Spec formal: [`specs/SPEC-935-R381-manuscript-rigor-gate-integration.md`](specs/SPEC-935-R381-manuscript-rigor-gate-integration.md) (7 critérios de aceitação). Testes: [`tests/test_r381_manuscript_rigor_gate_integration.py`](tests/test_r381_manuscript_rigor_gate_integration.py) (7 testes, TDD real). Zero regressão: `test_r108_marceloclaro_scientific_fusion.py` (10/10) e `doctor` (12/12 sem falha nova).
 
 ### 🎨 Diagramas e Fluxogramas Visuais da Arquitetura
 
@@ -1001,20 +1037,21 @@ graph TD
         A11[mira-presenter Agent]
     end
     
-    %% Camada Epistêmica e Guardas Culturais (R363-R369)
-    subgraph Epist [Camada Epistêmica & Guardas Culturais R363-R369]
+    %% Camada Epistêmica e Guardas Culturais (R363-R381)
+    subgraph Epist [Camada Epistêmica & Guardas Culturais R363-R381]
         EP1[episteme.py<br>6 regimes + léxico determinístico]
         EP2[SkillHandbook<br>peso brando ±10% fail-open]
         EP3[TerminologyGraph<br>aprovação humana por termo]
         EP4[AuthorVoiceGuardian<br>preserve/gloss/adapt]
         EP5[BackTranslationVerifier<br>6 verificações]
         EP6[CulturalEpistemeAgent<br>21 códigos de risco]
-        EP7[ProductionScaffolds<br>8 movimentos + novidade ancorada]
+        EP7[ProductionScaffolds<br>8 movimentos + novidade ancorada<br>wired ao pipeline via r381]
     end
     EP1 --> EP2
     EP2 -->|roteia| Agents
     EP6 -->|delta propose_upsert| EP3
     EP7 -->|select_scaffold| EP1
+    Composer -->|"6. audita rigor (r381, consultivo)"| EP7
     Orchestrator -->|match semântico+epistêmico| EP2
 
     %% Fluxo de Agentes
@@ -1051,7 +1088,7 @@ graph TD
     class MCPServer,APIGateway,MCP_Sci,MCP_Deep,MCP_Review2,MCP_Revision,MCP_Composer,MCP_Novelty2,MCP_Sec,MCP_Classic,MCP_Node,External purpleNode
     %% Cinza — Metacognição (barramento neural, memória, reflexão)
     class MB,BB,Mem,Ref grayNode
-    %% Teal — Camada Epistêmica & Guardas Culturais (R363-R373, a mais nova)
+    %% Teal — Camada Epistêmica & Guardas Culturais (R363-R381, a mais nova)
     class EP1,EP2,EP3,EP4,EP5,EP6,EP7 tealNode
 ```
 
@@ -1129,7 +1166,7 @@ seção (via `classDef`/`class` do Mermaid — não é só descrição em texto)
 | 🔴 Vermelho | **Segurança e qualidade** — proteção, validação, CI/CD |
 | 🟣 Roxo | **Protocolos de integração** — MCP, API Gateway |
 | ⚪ Cinza | **Metacognição** — barramento neural, memória, reflexão |
-| 🟦 Teal | **Camada Epistêmica & Guardas Culturais** (R363–R373) — a camada mais nova |
+| 🟦 Teal | **Camada Epistêmica & Guardas Culturais** (R363–R381) — inclui o gate de rigor (R369) agora **wired** ao Composer via `r381` |
 
 No diagrama 3 (sequência SDD/TDD), os blocos `rect` coloridos marcam
 visualmente o ramo **GREEN** (verde-claro, testes passaram) e o ramo
@@ -1463,7 +1500,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **52 ciclos registrados** (R1 a R52), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **198 ciclos registrados** (R1 a R381, com sub-etapas como R104a–R104d), cada um com score, lições e timestamp.
 
 ---
 
@@ -2078,9 +2115,9 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>186 ciclos evolutivos (R1–R369) · 2.417 testes coletados · 205 agentes · 217 specs formais</i><br>
+  <i>198 ciclos evolutivos (R1–R381) · 2.695 testes coletados · 205 agentes · 222 specs formais</i><br>
   <b>v3.7.0 — Pipeline Acadêmico Agentivo | Camada Epistêmica | Guardas de Tradução Cultural | MCP Security | CI/CD</b><br>
-  <sub>Números medidos em 2026-08-02 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
+  <sub>Números medidos em 2026-08-03 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
   contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>
