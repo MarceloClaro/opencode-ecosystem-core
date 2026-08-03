@@ -3644,6 +3644,22 @@
         "Ao medir o efeito de uma edicao de prosa com um scanner proprio, sempre desconfiar de um numero que NAO mudou quando deveria -- isso revelou um bug real no scanner (fronteira de paragrafo em LaTeX), nao apenas confirmou que a edicao funcionou. O habito de medir antes/depois (nao so aplicar e seguir) e o que pega esse tipo de falso negativo.",
         "Antes de editar conteudo criativo protegido por cadeia de proveniencia, verificar programaticamente (nao supor) quais arquivos especificos estao de fato travados por hash -- 'esta referenciado em algum manifesto' e uma pergunta diferente de 'esta travado por hash pinado', e confundir as duas quase levou a evitar edicoes seguras (CONT-*) por excesso de cautela."
       ]
+    },
+    {
+      "round_id": "R387",
+      "objective": "Continuacao do R386 a pedido do usuario ('prossiga'): estender o aprimoramento ciruergico de prosa (cruzamento sensorial, interocepcao, comando direto de 2a pessoa) para mais 3 fragmentos CONT-* curtos e com baixa densidade sensorial na varredura R385.",
+      "changes": [
+        "Verificacao previa (mesma disciplina do R386): nenhum dos 3 fragmentos-alvo (CONT-10, CONT-11, CONT-13) esta travado por hash nos manifestos de proveniencia. Backup manual adicionado ao mesmo diretorio do R386.",
+        "Edicoes aplicadas: CONT-10 (cruzamento tatil+interoceptivo + comando 'Olhe de novo.'), CONT-11 (interocepcao no ponto de maior repeticao obsessiva + comando 'Sinta agora.'), CONT-13 (cruzamento tatil+termico+interoceptivo ancorado na metafora da chave ja existente).",
+        "Medido por fragmento (nao estimado): sensory_immersion sobe em todos os 3 (35.9->67.38, 7.96->50.22, 9.39->18.62); hypnotic_induction tambem sobe nos 3; psychological_manipulation sobe em 2 (0->25 em ambos, ja estava presente no CONT-13).",
+        "Achado metodologico transparente: molambudos.md (fonte) e o corpus .tex real de Molambudos_VictoriaRegia/fragmentos/ divergem, ja que as edicoes de prosa (deste e do ciclo anterior) foram aplicadas diretamente ao .tex, seguindo o precedente do R384 (notas editoriais/paragrafo que so existem no .tex). Nao fabricado um numero unico de 'livro inteiro antes/depois' porque os dois corpora nao sao diretamente comparaveis (ruido de marcacao LaTeX no .tex dilui densidade de palavra-chave) -- o sinal confiavel e o comparativo por fragmento, mesmo tipo de arquivo antes e depois.",
+        "specs/SPEC-935-R387-prose-enhancement-batch-2.md: spec formal com as medicoes e a nota metodologica sobre divergencia md/tex.",
+        "Zero regressao: 18/18 em test_r385, cadeias de proveniencia (R360/R361/R362) verificadas com zero problemas apos as edicoes, as 2 falhas de test_r358 sao pre-existentes (contagem de fragmentos, nao relacionadas)."
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Ao medir efeito agregado apos varias rodadas de edicao em arquivos .tex, sempre verificar se o corpus de medicao (molambudos.md) ainda reflete o estado real do que foi editado -- achei que nao refletia (edicoes foram no .tex, nao no .md) so porque o numero agregado nao mudou quando deveria. Preferir reportar 'nao comparavel, aqui esta o motivo' a forcar um numero unico que misturaria dois corpora diferentes."
+      ]
     }
   ]
 }

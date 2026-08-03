@@ -5,7 +5,19 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R386 — restaura contrato dos agentes literários + aprimoramento de prosa em CONT-01/CONT-02** (2026-08-03)
+- **Branch:** `main` · última entrega: **R387 — segunda leva de prosa (CONT-10/CONT-11/CONT-13)** (2026-08-03)
+- **R387 (2026-08-03) — continuação do R386 ("prossiga"):** mesmas 3
+  técnicas aplicadas a mais 3 fragmentos curtos com baixa densidade
+  sensorial (CONT-10, CONT-11, CONT-13), mesma disciplina de verificação
+  prévia de proveniência + backup manual. Melhoria mensurável em todos
+  (ex.: `sensory_immersion` 7.96→50.22 em CONT-11). **Achado
+  metodológico transparente**: `molambudos.md` (fonte) e o corpus `.tex`
+  real divergem (edições de prosa vão direto no `.tex`, seguindo
+  precedente do R384) — não fabriquei um número único de "livro inteiro
+  antes/depois" porque os dois corpora não são comparáveis diretamente;
+  o comparativo confiável é por fragmento, mesmo tipo de arquivo.
+  Zero regressão (18/18 `test_r385`, proveniência limpa). Ver
+  `specs/SPEC-935-R387-prose-enhancement-batch-2.md`.
 - **R386 (2026-08-03) — as duas pendências do R385 resolvidas em
   sequência, a pedido do usuário:** (b) infraestrutura: 6 testes
   (R270,271,273,274,275,276) corrigidos para apontar para
