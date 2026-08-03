@@ -3605,6 +3605,24 @@
         "Divergencia entre .tex publicado e .md fonte pode ir nas DUAS direcoes: conteudo que existe no .md e falta no .tex (perda silenciosa, corrigivel por regeneracao), e conteudo que existe so no .tex e nao no .md (edicao/nota editorial adicionada direto no LaTeX, nunca 'devolvida' a fonte -- regenerar cegamente apaga isso). Verificar as DUAS direcoes antes de decidir a acao.",
         "Reinsercao manual de conteudo preservado deve usar ancora de texto verificada por assert (nao um offset de linha fixo) -- garante que a insercao falhe ruidosamente se o texto-alvo nao estiver mais la, em vez de inserir silenciosamente no lugar errado."
       ]
+    },
+    {
+      "round_id": "R385",
+      "objective": "A pedido do usuario, criar scanners deterministicos reais para as dimensoes que faltavam na avaliacao literaria (inducao hipnotica, ritmo frenetico/dinamico, imersao sensorial, manipulacao psicologica narrativa) e melhorar os scanners existentes, para gerar um diagnostico rigoroso sobre a obra Molambudos.",
+      "changes": [
+        "Reconhecimento previo (agente Explore) confirmou: os 8 scanners de literary_scanners.py nao medem inducao/hipnose, dinamica de ritmo, densidade sensorial detalhada ou manipulacao narrativa; o unico artefato que promete isso (agente literary-neurolinguistic-engineering-phd.md) e so prompt de LLM, sem codigo por tras.",
+        "scanners/psychological_immersion_scanners.py (novo): 4 scanners deterministicos seguindo o mesmo padrao LiteraryScannerBase -- HypnoticInductionScanner (repeticao/anafora, pressuposicao, comando incorporado, ancoragem temporal), FreneticPacingScanner (aceleracao sentencial via medias moveis, fragmentacao visceral, escalada de pontuacao, variancia de paragrafo), SensoryImmersionScanner (densidade multissensorial, interocepcao corporal, cruzamento sensorial, amplitude de canais), PsychologicalManipulationScanner (comando direto 2a pessoa, cumplicidade/culpa, dupla vinculacao, quebra da quarta parede). Funcao de entrada run_psychological_immersion_scanner_suite(), overclaim_guard proprio (marcadores linguisticos nao provam efeito psicologico real).",
+        "scanners/literary_scanners.py: riqueza_lexical corrigida de TTR global (penalizava textos longos pela lei de Heaps/Herdan) para MSTTR (Mean Segmental TTR, janelas de 1000 palavras) -- metrica padrao de linguistica de corpus para comparar textos de tamanhos diferentes. Achado real: molambudos.md (~40k palavras) tinha score 30.27 'fragil' com TTR global; com MSTTR sobe para 100.0 (MSTTR bruto 0.423, no valor de referencia). Funcao morta _lexical_variety_score removida (sem outros usos no repo).",
+        "Achado e correcao de recall durante a validacao: PsychologicalManipulationScanner.dupla_vinculacao dava 0 sobre molambudos.md apesar do texto conter dupla vinculacao inequivoca ('Nao ha tratamento. Nao ha cura. Nao ha como fechar o livro e esquecer.' -- fragmento CONT-07). Causa: lista de frases exatas estreita demais. Corrigido com regex complementar antes de finalizar (nao depois) -- captura 5 ocorrencias reais.",
+        "17 testes TDD novos (tests/test_r385_psychological_immersion_scanners.py). Zero regressao em test_r267_literary_scanners.py (8/8) e no restante da suite (64 falhas / 2610 aprovados / 53 pulados -- identico ao baseline).",
+        "specs/SPEC-935-R385-psychological-immersion-scanners.md: spec formal com motivacao, os 4 scanners novos, a correcao MSTTR, o achado de recall e 7 criterios de aceitacao."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Antes de aceitar um score baixo de scanner como achado real, verificar se a metrica em si e justa para o tamanho/tipo do texto -- TTR global e conhecido na linguistica de corpus por penalizar textos longos estruturalmente (lei de Heaps), nao por vocabulario pobre de fato. MSTTR (media de TTR em janelas fixas) e a correcao padrao. Um scanner 'rigoroso' que usa uma metrica metodologicamente injusta produz um falso negativo silencioso.",
+        "Ao criar um scanner novo baseado em lista de frases exatas, verificar contra pelo menos um trecho real conhecido do corpus-alvo ANTES de declarar pronto -- achei um recall de 0 (deveria ser >0) porque ja tinha lido uma passagem que contradizia o resultado do scanner ('nao ha cura/tratamento/como fechar'), e a lista de frases exatas nao cobria essa variacao. Corrigido com regex de padrao antes do commit, nao como pendencia futura.",
+        "Contagem de marcadores linguisticos de inducao/hipnose/manipulacao e uma aproximacao heuristica da TECNICA narrativa (o que o texto faz), nunca prova do efeito psicologico real sobre um leitor -- isso e uma linha que precisa ficar explicita no overclaim_guard de qualquer scanner dessa familia, dado o pedido do usuario ser sobre 'manipulacao psicologica' (termo que pode soar como alegacao de efeito real se nao delimitado como termo tecnico-narrativo)."
+      ]
     }
   ]
 }

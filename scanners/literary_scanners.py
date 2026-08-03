@@ -15,6 +15,7 @@ SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 from __future__ import annotations
 
 import re
+import statistics
 from collections import Counter
 from dataclasses import dataclass
 from typing import Any, ClassVar, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple, Type
@@ -68,12 +69,32 @@ def _term_frequency(text_lower: str, keywords: Iterable[str]) -> int:
     return total
 
 
-def _lexical_variety_score(words: Sequence[str]) -> float:
-    if not words:
+def _mean_segmental_ttr(words: Sequence[str], window: int = 1000) -> float:
+    """MSTTR (Mean Segmental Type-Token Ratio): TTR calculado em janelas fixas
+    e depois calculado a média entre elas. Ao contrário do TTR global, não
+    penaliza textos longos apenas por serem longos (Heaps'/Herdan's law faz o
+    TTR bruto cair conforme o texto cresce, mesmo com vocabulário rico e
+    estável) — é a métrica padrão em linguística de corpus para comparar
+    riqueza lexical entre textos de tamanhos diferentes."""
+    if not words or window <= 0:
         return 0.0
-    unique_ratio = len(set(words)) / max(1, len(words))
-    # Em textos longos, TTR naturalmente cai; a curva abaixo evita punir demais.
-    return _clamp((unique_ratio / 0.42) * 100.0)
+    ratios = []
+    for i in range(0, len(words), window):
+        chunk = words[i:i + window]
+        if len(chunk) < window // 2 and ratios:
+            # última janela incompleta demais: descarta em vez de distorcer a média
+            continue
+        if chunk:
+            ratios.append(len(set(chunk)) / len(chunk))
+    return statistics.mean(ratios) if ratios else (len(set(words)) / max(1, len(words)))
+
+
+def _lexical_variety_score_msttr(words: Sequence[str], window: int = 1000) -> Tuple[float, float]:
+    """Retorna (score 0-100, msttr bruto) usando MSTTR em vez de TTR global."""
+    msttr = _mean_segmental_ttr(words, window=window)
+    # calibrado sobre o mesmo alvo de referência (~0.42) usado no TTR global,
+    # mas agora comparável entre textos curtos e longos
+    return _clamp((msttr / 0.42) * 100.0), msttr
 
 
 def _grade(score: float) -> str:
@@ -245,8 +266,9 @@ class StyleVoiceScanner(LiteraryScannerBase):
         rhythm_score = _clamp(45.0 + min(35.0, variation * 2.0) + (20.0 if 6 <= avg_len <= 28 else 0.0))
         low = _lower(text)
         quote_marks = len(re.findall(r"[\"“”‘’—]", text))
+        lex_score, msttr = _lexical_variety_score_msttr(ws)
         dims = [
-            DimensionSpec("riqueza_lexical", _lexical_variety_score(ws), [f"{len(set(ws))} vocábulos únicos em {len(ws)} palavras"], "Variedade lexical ajustada para texto literário."),
+            DimensionSpec("riqueza_lexical", lex_score, [f"{len(set(ws))} vocábulos únicos em {len(ws)} palavras", f"MSTTR (janelas de 1000 palavras): {msttr:.3f}"], "Variedade lexical medida por MSTTR (janelas de 1000 palavras) — comparável entre textos curtos e longos, ao contrário do TTR global."),
             DimensionSpec("ritmo_sintatico", rhythm_score, [f"média de {avg_len:.1f} palavras/frase", f"variação sintática {variation}"], "Alternância de frases curtas e longas, útil para voz e cadência."),
             DimensionSpec("sensorialidade", _presence_score(_count_keywords(low, self.SENSORY), 5), _keyword_hits(low, self.SENSORY), "Marcas sensoriais e imagéticas que dão corpo à voz."),
             DimensionSpec("variedade_discursiva", _clamp((_presence_score(_count_keywords(low, self.DISCOURSE), 4) * 0.75) + (_presence_score(quote_marks, 4) * 0.25)), _keyword_hits(low, self.DISCOURSE) + ([f"{quote_marks} marcas de citação/travessão"] if quote_marks else []), "Variação de registros, documentos e vozes."),

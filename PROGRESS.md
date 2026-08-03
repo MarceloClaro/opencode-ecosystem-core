@@ -5,7 +5,43 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R384 — estende regeneração a CONT-03/MEM-27/LUC-Escolha preservando notas editoriais exclusivas do .tex** (2026-08-03)
+- **Branch:** `main` · última entrega: **R385 — scanners de imersão psicológica (indução, ritmo frenético, sensorialidade, manipulação narrativa) + correção MSTTR** (2026-08-03)
+- **R385 (2026-08-03) — diagnóstico literário de Molambudos + ferramentas
+  novas:** pedido do usuário para revisar a obra com scanners e avaliar se
+  é "hipnótica, terror psicológico visceral e frenético, imersiva,
+  sensorial" com "mentalismo e indução". Reconhecimento (agente Explore)
+  confirmou: os 8 scanners existentes (`scanners/literary_scanners.py`)
+  não medem indução, dinâmica de ritmo, densidade sensorial detalhada ou
+  manipulação narrativa — o único artefato que promete isso
+  (`literary-neurolinguistic-engineering-phd.md`) é só prompt de LLM, sem
+  código. Usuário pediu para melhorar os scanners e criar novos. Feito:
+  novo módulo `scanners/psychological_immersion_scanners.py` (4 scanners:
+  indução hipnótica, ritmo frenético dinâmico, imersão sensorial,
+  manipulação psicológica narrativa); correção metodológica em
+  `StyleVoiceScanner.riqueza_lexical` (TTR global → MSTTR, corrigindo
+  penalização injusta de textos longos — `molambudos.md` subiu de 30.27
+  "frágil" para 100.0); achado e correção de recall (`dupla_vinculacao`
+  dava 0 apesar de texto real com dupla vinculação inequívoca — regex
+  complementar corrigiu). 17 testes TDD novos, zero regressão (64 falhas
+  / 2610 aprovados / 53 pulados, idêntico ao baseline). Ver
+  `specs/SPEC-935-R385-psychological-immersion-scanners.md`.
+- **Diagnóstico rodado sobre `molambudos.md` (244.801 caracteres, ~40k
+  palavras):** suíte literária 99.38/100 "excelente"; suíte de imersão
+  psicológica (nova) 59.81/100 "consistente" (indução hipnótica 81.32
+  "forte", ritmo frenético 66.78 "consistente", imersão sensorial 47.67
+  "emergente", manipulação psicológica 43.48 "emergente"). Revisão
+  qualitativa completa entregue ao usuário na conversa (não persistida
+  como arquivo — refazer chamando as 3 funções de scanner se precisar
+  reproduzir).
+- **Achado de infraestrutura documentado, não corrigido (fora de escopo
+  deste ciclo):** relatórios dos ciclos R270-R276 foram movidos de
+  `Molambudos_VictoriaRegia/relatorios/` para `_archive/relatorios/` sem
+  atualizar os 5 testes que ainda apontam para o caminho antigo
+  (`FileNotFoundError`). Além disso, os 11 cards `agents/catalog/
+  literary-*.md` foram sobrescritos por um template genérico no commit
+  `47821bb`, perdendo `temperature:`, `name:` em slug e texto de contrato
+  exigido pelos testes R272/R276 — regressão conhecida, já documentada
+  anteriormente neste arquivo, não é nova.
 - **R384 (2026-08-03) — o achado "fora de escopo" do R383, resolvido a
   pedido do usuário ("prossiga"):** antes de regenerar, verifiquei em
   memória e descobri que a divergência era **maior** do que eu tinha
