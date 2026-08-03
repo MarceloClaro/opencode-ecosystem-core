@@ -159,6 +159,362 @@ Roteador de atenção (Multi-Head Attention com 4 cabeças: semântica, capacida
 ### 6. Catálogo de Agentes
 205 agentes especializados (contagem medida pelo doctor em 2026-08-02): Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, LLM Reduction, Colibri/OLMoE, GameTheory, Jinja2, DataKnowledgeHub, e especialistas jurídicos, de design e quânticos.
 
+### 6.1 Tabela Completa dos 205 Agentes — Função e Camada
+
+Esta tabela é gerada a partir do catálogo real (`marceloclaro.catalog_loader.load_catalog_definitions()`), não é uma lista escrita à mão — toda `Descrição` vem do próprio *agent card*, e toda `Camada` vem da **Camada Epistêmica de Roteamento** já implementada (R363/R368: `transformer/episteme.py`), que classifica cada agente em um de 6 regimes epistemológicos por inferência determinística sobre `category`/`type`/`tags`/nome — **nunca chuta**: sem sinal lexical suficiente, a camada fica em branco (`—`).
+
+**Transparência sobre os números:** dos 205 registros carregados, **3 são artefatos não-agente** (ver último grupo da tabela-resumo) — o catálogo real de agentes funcionais é **202**. A camada epistêmica cobre **133/205 (65%)** — os **72 restantes (35%) aparecem como `—`** porque a heurística lexical não encontrou sinal suficiente nos metadados; isso não significa que o agente seja pior, só que a inferência automática não tem base para classificá-lo (ver Seção 8 para o critério exato).
+
+**Achado adicional desta auditoria:** 103 dos 205 registros (50%) não têm descrição autoral no card-fonte — o campo `description` do frontmatter é um placeholder mecânico ("Agente especializado NOME") e o corpo do arquivo aponta para um caminho Windows externo (`criador-artigo\agents\...`) que não existe neste checkout — provavelmente arquivos-stub gerados em lote a partir de um catálogo original ainda não migrado por completo. Para esses casos, a coluna `Descrição` traz um **rótulo derivado mecanicamente do identificador** (nunca uma descrição inventada), marcado explicitamente. Isso afeta sobretudo o grupo *Catálogo Acadêmico MASWOS* — um candidato real a ciclo futuro de enriquecimento de metadados.
+
+#### Visão geral por grupo temático
+
+| Grupo | Quantidade | Camada predominante | Propósito |
+|---|---|---|---|
+| **Catálogo Acadêmico MASWOS (00–53)** | 46 | Empírico-analítico | Pipeline completo de redação científica: diagnóstico, busca, escrita, estatística, revisão cega e submissão Qualis A1 — um agente por etapa do método científico. |
+| **Reversa (Engenharia Reversa de Sistemas Legados)** | 28 | Pragmático-técnico | Analisa um sistema de software legado e gera especificações executáveis por IA — do código nu ao contrato reproduzível. |
+| **Engenharia & Ferramental de Desenvolvimento** | 28 | Pragmático-técnico | Suporte a desenvolvimento de software: arquitetura, revisão de código, debugging, DevOps, CI/CD e gestão de tarefas. |
+| **Apresentações MIRA (R123–R126)** | 22 | Pragmático-técnico | Transforma um manuscrito em deck de slides animado autocontido — da extração de seções à validação de conformidade. |
+| **Ferramentas Determinísticas & Inferência Local** | 16 | Pragmático-técnico | Motores zero-token (Colibri/OLMoE, LiteRT-LM, redução de LLM) e utilitários determinísticos que substituem chamadas de LLM quando possível. |
+| **Pesquisa & Redação (Workspace agents)** | 12 | Pragmático-técnico | Busca, localiza e sintetiza informação — de código-fonte a literatura externa — para alimentar outros agentes com contexto verificado. |
+| **Literário (Molambudos / OpenCode Books)** | 11 | Hermenêutico-interpretativo | Especialistas em voz autoral, psicologia de personagem, simbolismo, ética da representação e trauma para obras literárias. |
+| **Cloud & Infraestrutura de Dados** | 8 | Pragmático-técnico | Especialistas em bancos de dados gerenciados (BigQuery, AlloyDB, Cloud SQL) e pipelines de dados na nuvem. |
+| **Publicação KDP / Editorial** | 7 | Pragmático-técnico | Prepara um manuscrito para publicação real na Amazon KDP: capa, miolo, metadados/ISBN, preflight e QA final. |
+| **Guardas de Tradução Cultural (R359, R364-R366)** | 4 | Hermenêutico-interpretativo | Gate fail-closed de internacionalização editorial PT-BR/EN/ZH-CN — equivalência cultural, terminologia, voz autoral e retrotradução. |
+| **Orquestradores Meta** | 6 | Pragmático-técnico | Camada de controle de mais alto nível — coordenam outros agentes/orquestradores (o próprio `/marceloclaro` está aqui). |
+| **Médico Virtual Supremo** | 6 | Empírico-analítico | Apoio clínico auditável multi-especialidade (clínico geral, cardiologia, infectologia, neurologia, radiologia) — nunca substitui médico humano. |
+| **Jurídico (AuxJuris)** | 4 | Regulatório-normativo | Assistência jurídica auditável: pesquisa, resumo de documentos, redação de e-mails e assistência legal geral. |
+| **Outros / Utilitários** | 4 | Pragmático-técnico | Agentes que não se encaixam nos grupos acima — utilitários pontuais e o orquestrador da Universidade Sintética. |
+| **Artefato não-agente (excluir da contagem funcional)** | 3 | — (sem sinal suficiente) | **Achado da auditoria desta tabela**: 3 arquivos não-agente (README, template de handoff, um dispatcher de ativação) do próprio diretório `agents/catalog/` foram varridos por um gerador automático de cards e ganharam frontmatter de agente — não são agentes funcionais. |
+
+Abaixo, a lista completa dos 205 agentes por grupo (clique para expandir cada um):
+
+<details>
+<summary><b>Catálogo Acadêmico MASWOS (00–53)</b> (46 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `00_editor_chefe_phd` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Editor Chefe Phd** | Crítico-reflexivo |
+| `01_agente_diagnostico_escopo` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Diagnostico Escopo** | — |
+| `02_agente_busca_curadoria` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Busca Curadoria** | — |
+| `03_agente_evidencias_citacoes` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Evidencias Citacoes** | Empírico-analítico |
+| `04_agente_estrutura_argumentativa` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Estrutura Argumentativa** | Crítico-reflexivo |
+| `05_agente_revisao_literatura_teoria` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Revisao Literatura Teoria** | Crítico-reflexivo |
+| `06_agente_metodologia_reprodutibilidade` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Metodologia Reprodutibilidade** | Empírico-analítico |
+| `07_agente_estatistica_analise` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Estatistica Analise** | Empírico-analítico |
+| `08_agente_visualizacao_evidencia_grafica` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Visualizacao Evidencia Grafica** | Empírico-analítico |
+| `09_agente_resultados` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Resultados** | Empírico-analítico |
+| `10_agente_discussao_contribuicao` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Discussao Contribuicao** | Crítico-reflexivo |
+| `11_agente_conclusao_coerencia_final` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Conclusao Coerencia Final** | Crítico-reflexivo |
+| `12_agente_auditoria_bibliografica_abnt` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Auditoria Bibliografica Abnt** | Regulatório-normativo |
+| `13_agente_qa_qualis_a1` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Qa Qualis A1** | Regulatório-normativo |
+| `14_agente_consistencia_interna` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Consistencia Interna** | Crítico-reflexivo |
+| `15_agente_resumo_abstract_palavras_chave` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Resumo Abstract Palavras Chave** | Hermenêutico-interpretativo |
+| `16_agente_integracao_editorial_docx` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Integracao Editorial Docx** | Pragmático-técnico |
+| `17_agente_framework_reprodutivel_ambientes` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Framework Reprodutivel Ambientes** | Pragmático-técnico |
+| `18_agente_engenharia_dados_datasets_proveniencia` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Engenharia Dados Datasets Proveniencia** | Empírico-analítico |
+| `19_agente_auditoria_codigo_documentacao_tecnica` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Auditoria Codigo Documentacao Tecnica** | Crítico-reflexivo |
+| `20_agente_estatistica_avancada_inferencia` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Estatistica Avancada Inferencia** | Empírico-analítico |
+| `21_agente_matematica_aplicada_modelagem_formal` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Matematica Aplicada Modelagem Formal** | Formal-dedutivo |
+| `22_agente_ml_dl_datamining` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Ml Dl Datamining** | Empírico-analítico |
+| `23_agente_bioinformatica_omicas` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Bioinformatica Omicas** | Empírico-analítico |
+| `24_agente_quimioinformatica_modelagem_molecular` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Quimioinformatica Modelagem Molecular** | Formal-dedutivo |
+| `25_agente_ciencias_sociais_linguistica_computacional` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Ciencias Sociais Linguistica Computacional** | Hermenêutico-interpretativo |
+| `26_agente_visao_computacional_multimodal` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Visao Computacional Multimodal** | Empírico-analítico |
+| `27_agente_computacao_quantica_aplicada` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Computacao Quantica Aplicada** | Formal-dedutivo |
+| `28_agente_benchmarking_ablacao_robustez` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Benchmarking Ablacao Robustez** | Empírico-analítico |
+| `29_agente_conformidade_internacional` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Conformidade Internacional** | Regulatório-normativo |
+| `30_agente_traducao_nativa_proofreading` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Traducao Nativa Proofreading** | Hermenêutico-interpretativo |
+| `31_agente_blind_peer_review_emulado` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Blind Peer Review Emulado** | Crítico-reflexivo |
+| `32_agente_etica_open_science` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Etica Open Science** | Crítico-reflexivo |
+| `33_agente_automacao_multi_norma` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Automacao Multi Norma** | Pragmático-técnico |
+| `34_agente_identificacao_conflitos_similaridade` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Identificacao Conflitos Similaridade** | — |
+| `35_agente_coleta_datasets_reais` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Coleta Datasets Reais** | Empírico-analítico |
+| `36_agente_exportacao_latex_pdf` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Exportacao Latex Pdf** | Pragmático-técnico |
+| `37_agente_apresentacao_slides_banca` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Apresentacao Slides Banca** | — |
+| `38_agente_montagem_entrega_final` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Montagem Entrega Final** | — |
+| `39_agente_metodologia_multi_paradigma` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Metodologia Multi Paradigma** | Empírico-analítico |
+| `40_agente_marcos_teoricos_interpretacao` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Marcos Teoricos Interpretacao** | Hermenêutico-interpretativo |
+| `41_agente_gis_geoprocessamento_cartografia` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Gis Geoprocessamento Cartografia** | Empírico-analítico |
+| `42_agente_desenvolvedor_cientista_computacao` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Desenvolvedor Cientista Computacao** | Pragmático-técnico |
+| `43_agente_satelite_bioinformatica_omics` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Satelite Bioinformatica Omics** | Empírico-analítico |
+| `44_agente_correcao_textual_qualis` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Correcao Textual Qualis** | Hermenêutico-interpretativo |
+| `45_agente_refinamento_argumentacao` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Refinamento Argumentacao** | Crítico-reflexivo |
+
+</details>
+
+<details>
+<summary><b>Reversa (Engenharia Reversa de Sistemas Legados)</b> (28 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `reversa` | Ponto de entrada principal do Reversa. Orquestra a análise completa de um sistema legado, gerando especificações executáveis... | — |
+| `reversa-agent-forum` | name: Agente Reversa: Agent Forum / Debate Moderator description: >- --- name: | — |
+| `reversa-anp` | name: reversa-anp description: >- --- name: reversa-anp description: >- Agente especialista em | — |
+| `reversa-archaeologist` | Analisa profundamente o código do projeto legado módulo a módulo — extrai algoritmos, fluxos de controle, estruturas de dados... | Empírico-analítico |
+| `reversa-architect` | Sintetiza a análise do projeto legado em documentação arquitetural completa — diagramas C4, ERD completo, mapa de integrações... | Hermenêutico-interpretativo |
+| `reversa-config-generator` | Subagente especializado em geracao de configuracoes complexas usando LLM em multiplas etapas com fallback heuristico. Conhece... | Pragmático-técnico |
+| `reversa-data-master` | Documenta completamente o banco de dados do projeto legado — tabelas, relacionamentos, constraints, triggers, procedures e ERD... | Empírico-analítico |
+| `reversa-design-system` | Extrai e documenta o sistema de design do projeto legado — paleta de cores, tipografia, espaçamentos, tokens e componentes a... | — |
+| `reversa-detective` | Extrai conhecimento de negócio implícito do projeto legado — regras de negócio, ADRs retroativos via Git, máquinas de estado e... | Pragmático-técnico |
+| `reversa-document-ir` | name: Agente Reversa: Document IR Report Pipeline description: >- --- name: reversa-document-ir | — |
+| `reversa-entity-ner` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Entity Ner** | — |
+| `reversa-fileipc` | Agente de comunicação via filesystem do ecossistema Reversa. Orquestra a troca de mensagens entre processos usando o protocolo... | — |
+| `reversa-graph-builder` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Graph Builder** | — |
+| `reversa-graphrag` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Graphrag** | — |
+| `reversa-hybrid-graph` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Hybrid Graph** | — |
+| `reversa-memory-updater` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Memory Updater** | — |
+| `reversa-oasis-profile` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Oasis Profile** | — |
+| `reversa-ontology-gen` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Ontology Gen** | — |
+| `reversa-planner` | Gera planos de engenharia reversa em etapas (Scope → Modules → Tasks → Dependencies → Resources), inspirado pelo... | — |
+| `reversa-process-lifecycle` | name: Agente Reversa: Process Lifecycle Manager description: >- --- name: | — |
+| `reversa-report-agent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Report Agent** | — |
+| `reversa-reviewer` | Revisa criticamente as especificações geradas pelo reversa-writer — encontra inconsistências, reclassifica confiança e gera... | Crítico-reflexivo |
+| `reversa-scout` | Mapeia a superfície do projeto legado — estrutura de pastas, linguagens, frameworks, dependências e entry points. Use no... | Pragmático-técnico |
+| `reversa-statemachine` | Agente de máquina de estados do pipeline Reversa. Gerencia transições de estado, valida dependências entre fases e mantém... | Pragmático-técnico |
+| `reversa-swarm-review` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reversa Swarm Review** | Crítico-reflexivo |
+| `reversa-synthesis` | Meta-agente sintetizador que coleta outputs de múltiplos agentes Reversa, cruza referências, identifica lacunas e produz... | — |
+| `reversa-visor` | Documenta a interface do sistema legado a partir de screenshots — extrai componentes, layouts, fluxos de navegação e estados... | — |
+| `reversa-writer` | Gera especificações executáveis do sistema legado como contratos operacionais, em formato de pasta-por-unit com... | — |
+
+</details>
+
+<details>
+<summary><b>Engenharia & Ferramental de Desenvolvimento</b> (28 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `adr-manager` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Adr Manager** | — |
+| `architect` | Projeta arquitetura de software e toma decisoes de design | Pragmático-técnico |
+| `architecture-analyzer` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Architecture Analyzer** | Pragmático-técnico |
+| `batch-executor` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Batch Executor** | — |
+| `build-agent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Build Agent** | Pragmático-técnico |
+| `code-reviewer` | Revisa codigo para qualidade, seguranca e melhores praticas | Crítico-reflexivo |
+| `codebase-analyzer` | Analyzes codebase implementation details. Call the codebase-analyzer agent when you need to find detailed information about... | Pragmático-técnico |
+| `codebase-locator` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Codebase Locator** | Pragmático-técnico |
+| `codebase-pattern-finder` | codebase-pattern-finder is a useful subagent_type for finding similar implementations, usage examples, or existing patterns... | Pragmático-técnico |
+| `context-manager` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Context Manager** | — |
+| `context-retriever` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Context Retriever** | — |
+| `contract-manager` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Contract Manager** | — |
+| `debugger` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Debugger** | Pragmático-técnico |
+| `devops-specialist` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Devops Specialist** | Pragmático-técnico |
+| `frontend-specialist` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Frontend Specialist** | Pragmático-técnico |
+| `git-manager` | Gerencia git - commits atomicos, PRs, mensagens convencionais | Pragmático-técnico |
+| `openagent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Openagent** | — |
+| `opencode-go-agent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Opencode Go Agent** | — |
+| `opencode-zen-agent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Opencode Zen Agent** | — |
+| `opencoder` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Opencoder** | — |
+| `optimizer` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Optimizer** | — |
+| `prioritization-engine` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Prioritization Engine** | — |
+| `reviewer` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Reviewer** | Crítico-reflexivo |
+| `security-auditor` | Realiza auditorias de seguranca e identifica vulnerabilidades | — |
+| `simple-responder` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Simple Responder** | — |
+| `task-manager` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Task Manager** | — |
+| `test-engineer` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Test Engineer** | — |
+| `web-developer` | Develops Web UI components. | — |
+
+</details>
+
+<details>
+<summary><b>Apresentações MIRA (R123–R126)</b> (22 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `mira-3d` | Organiza elementos tridimensionais para cenas do MIRA | — |
+| `mira-animated-metaphor` | Reexpressa conceitos como metáforas animadas MIRA | — |
+| `mira-animator` | Gera animações centrais em loop para slides MIRA | — |
+| `mira-builder` | Monta o deck MIRA em cards e seções navegáveis | — |
+| `mira-chart` | Gera gráficos a partir de dados para apresentações MIRA | Empírico-analítico |
+| `mira-chart-race` | Constrói corridas de gráfico e visualizações temporais MIRA | — |
+| `mira-copywriter` | Refina textos e mensagens visuais do deck MIRA | — |
+| `mira-extract` | Extrai briefing e estrutura inicial a partir das fontes do MIRA | — |
+| `mira-get-videos` | Seleciona e organiza fundos em vídeo para apresentações MIRA | — |
+| `mira-image` | Incorpora imagens existentes ao pipeline MIRA | Pragmático-técnico |
+| `mira-image-template` | Cria templates MIRA a partir de imagens-base | — |
+| `mira-new` | Porta de entrada conversacional do pipeline MIRA | Pragmático-técnico |
+| `mira-planner` | Planeja a sequência de slides do deck MIRA | — |
+| `mira-qrcode` | Insere QR codes escaneáveis em slides do MIRA | — |
+| `mira-references` | Vincula fontes e referências ao tema do deck MIRA | Regulatório-normativo |
+| `mira-size-animator` | Ajusta percepção de escala e tamanho nas animações MIRA | — |
+| `mira-squared` | Gera versão quadrada 1:1 do deck MIRA | — |
+| `mira-survey` | Cria enquetes e interações ao vivo no MIRA | — |
+| `mira-thirds` | Reorganiza slides MIRA pela regra dos terços | — |
+| `mira-validator` | Valida conformidade e consistência final do deck MIRA | Crítico-reflexivo |
+| `mira-vertical` | Gera versão vertical 9:16 do deck MIRA | — |
+| `mira-visuals` | Gera painéis e infográficos estáticos para o MIRA | — |
+
+</details>
+
+<details>
+<summary><b>Ferramentas Determinísticas & Inferência Local</b> (16 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `autoevolve` | AutoEvolve — engine de evolução autônoma do ecossistema OpenCode v5.1. Roteia subcomandos (/evolve... | — |
+| `colibri-agent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Colibri Agent** | Empírico-analítico |
+| `data-knowledge-hub` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Data Knowledge Hub** | Empírico-analítico |
+| `docs-writer` | Escreve e mantem documentacao do projeto | Pragmático-técnico |
+| `documentation` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Documentation** | Pragmático-técnico |
+| `gametheory-local` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Gametheory Local** | Formal-dedutivo |
+| `Image Specialist` | Specialized agent for image editing and analysis using Gemini AI tools | Empírico-analítico |
+| `jinja2-templates` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Jinja2 Templates** | Pragmático-técnico |
+| `linguistic-corrector` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Linguistic Corrector** | Hermenêutico-interpretativo |
+| `litert-lm-agent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Litert Lm Agent** | Empírico-analítico |
+| `llm-reduction` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Llm Reduction** | Pragmático-técnico |
+| `OpenCopywriter` | Expert in persuasive writing, marketing copy, and brand messaging | — |
+| `OpenTechnicalWriter` | Expert in documentation, API docs, and technical communication | Pragmático-técnico |
+| `pdf2latex-agent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Pdf2Latex Agent** | — |
+| `PyPISearcher` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Pypisearcher** | — |
+| `quantum-nexus-phd` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Quantum Nexus Phd** | Formal-dedutivo |
+
+</details>
+
+<details>
+<summary><b>Pesquisa & Redação (Workspace agents)</b> (12 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `contextscout` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Contextscout** | — |
+| `externalscout` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Externalscout** | — |
+| `honest-critic-agent` | Crítico antioverclaim que separa cobertura/processo de mérito de qualidade e recusa nota de topo sem validação externa (Honest... | Crítico-reflexivo |
+| `story-mapper` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Story Mapper** | — |
+| `thoughts-analyzer` | The research equivalent of codebase-analyzer. Use this subagent_type when wanting to deep dive on a research topic. Not... | Pragmático-técnico |
+| `thoughts-locator` | Discovers relevant documents in thoughts/ directory (We use this for all sorts of metadata storage!). This is really only... | — |
+| `web-search-researcher` | Used to perform web searches from a URL and analyze the contents based on a query. | — |
+| `ws-academic-pipeline` | Pipeline acadêmico LaTeX — compilação, fichamentos, cotejo, status e registro de aprendizado | Pragmático-técnico |
+| `ws-coder` | Technical implementation specialist for writing and modifying code | — |
+| `ws-researcher` | Knowledge architect for external research and documentation | Pragmático-técnico |
+| `ws-reviewer` | Expert code reviewer for security, performance, and philosophy compliance | Crítico-reflexivo |
+| `ws-scribe` | Human-facing content specialist for documentation and prose | Pragmático-técnico |
+
+</details>
+
+<details>
+<summary><b>Literário (Molambudos / OpenCode Books)</b> (11 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `Literary Character Psychology PhD` | Especialista PhD em personagens literários, psicologia narrativa, agência, desejo, conflito interno, transformação e relações... | Hermenêutico-interpretativo |
+| `Literary Ethics & Trauma PhD` | Especialista PhD em ética literária da representação, trauma, alteridade, violência institucional, memória histórica e... | Hermenêutico-interpretativo |
+| `Literary Image Sepia` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Literary Image Sepia** | Hermenêutico-interpretativo |
+| `Literary Innovation & Editorial PhD` | Especialista PhD em inovação formal literária, materialidade editorial, paratextos, hipertexto impresso, design narrativo e... | Hermenêutico-interpretativo |
+| `Literary Narratology Architect PhD` | Especialista PhD em narratologia para arquitetura narrativa, enredo, temporalidade, focalização, rotas, partes e coerência... | Hermenêutico-interpretativo |
+| `Literary Neurolinguistic Engineering PhD` | Especialista em engenharia neurolinguística literária — aplica padrões de hipnose ericksoniana, sugestão indireta e ancoragem... | Hermenêutico-interpretativo |
+| `Literary Orchestrator PhD` | Orquestrador PhD de projetos literários para coordenar criação, estudo, crítica, scanners, pesquisa, revisão ética e... | Crítico-reflexivo |
+| `Literary Research Scholar PhD` | Pesquisador PhD de busca e pesquisa literária para corpus comparativo, bibliografia, teoria, fontes, citações, lacunas e rigor... | Regulatório-normativo |
+| `Literary Smoke Minimal` | Agente mínimo de smoke test literário para isolar falhas de runtime, slug, model routing e registry dos agentes literary-*. | Hermenêutico-interpretativo |
+| `Literary Style & Voice PhD` | Especialista PhD em estilo literário, voz, ritmo, léxico, registro, dicção, musicalidade, revisão de prosa e assinatura... | Hermenêutico-interpretativo |
+| `Literary Symbolic Imagery PhD` | Especialista PhD em símbolos, motivos recorrentes, imagens, campos sensoriais, metáforas, arquétipos e coesão simbólica literária. | Hermenêutico-interpretativo |
+
+</details>
+
+<details>
+<summary><b>Cloud & Infraestrutura de Dados</b> (8 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `Cloud AlloyDB Specialist` | Especialista em AlloyDB Omni e AlloyDB PostgreSQL — administração, saúde, monitoramento, otimização, performance, replicação e... | Pragmático-técnico |
+| `Cloud BigQuery Specialist` | Especialista em BigQuery — SQL, ML/AI, BigFrames, Graph Analytics, Data Transfer Service, Dataform e dbt. Baseado em 4 skills... | Empírico-analítico |
+| `Cloud Data Infra Generalist` | Generalista em infraestrutura de dados GCP — Firestore, Spanner, descoberta de assets, building data apps, ML best practices,... | Empírico-analítico |
+| `Cloud Data Pipelines Specialist` | Especialista em pipelines de dados GCP — Dataflow, Cloud Composer/Airflow, Dataproc/Spark, orquestração de pipelines,... | Pragmático-técnico |
+| `Cloud Security Specialist` | Especialista em segurança GCP — avaliação de postura GCS, prevenção de perda de dados, verificação de autenticação e análise... | Empírico-analítico |
+| `Cloud SQL MySQL Specialist` | Especialista em Cloud SQL MySQL — administração, dados, ciclo de vida e monitoramento. Baseado em 4 skills do Antigravity... | Pragmático-técnico |
+| `Cloud SQL PostgreSQL Specialist` | Especialista em Cloud SQL PostgreSQL — administração, dados, saúde, ciclo de vida, monitoramento, replicação, vector assist e... | Pragmático-técnico |
+| `Cloud SQL SQL Server Specialist` | Especialista em Cloud SQL SQL Server — administração, dados, ciclo de vida e monitoramento. Baseado em 4 skills do Antigravity... | Pragmático-técnico |
+
+</details>
+
+<details>
+<summary><b>Publicação KDP / Editorial</b> (7 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `KDP Cover Engineer PhD` | Especialista PhD Amazon KDP em capa completa, contracapa, lombada, wrap, bleed, template, barcode e PDF de capa. | Pragmático-técnico |
+| `KDP eBook ePub PhD` | Especialista PhD Amazon KDP em ePub, Kindle, KPF, sumário navegável, metadados digitais e conversão LaTeX/Markdown. | Pragmático-técnico |
+| `KDP Final QA PhD` | Gate PhD Amazon KDP de QA final para pacote de upload, checklist, evidências, riscos residuais e instruções finais. | Pragmático-técnico |
+| `KDP Interior Layout PhD` | Especialista PhD Amazon KDP em miolo, trim size, margens internas/externas, sangria, LaTeX e PDF pronto para impressão. | Pragmático-técnico |
+| `KDP Metadata & ISBN PhD` | Especialista PhD Amazon KDP em ISBN, copyright, ficha catalográfica, metadados bibliográficos e consistência editorial. | Pragmático-técnico |
+| `KDP Orchestrator PhD` | Orquestrador PhD Amazon KDP para coordenar miolo, capa, ePub, metadados, preflight e QA final de livros físicos e digitais. | Pragmático-técnico |
+| `KDP Preflight Auditor PhD` | Auditor PhD Amazon KDP de preflight PDF para MediaBox, CropBox, fontes, imagens, hyperlinks, anotações e texto fora das margens. | Pragmático-técnico |
+
+</details>
+
+<details>
+<summary><b>Guardas de Tradução Cultural (R359, R364-R366)</b> (4 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `author-voice-guardian` | Guarda de voz autoral que audita traduções contra o perfil de voz da obra — marcadores regionais e orais, modernismos... | Hermenêutico-interpretativo |
+| `back-translation-verifier` | Verificador determinístico de retrotradução que compara original e retrotradução quanto a números, entidades, negação,... | Hermenêutico-interpretativo |
+| `cultural-episteme-agent` | Agente de Epistemes Culturais e Equivalência Interpretativa que audita traduções literárias quanto a voz, história,... | Hermenêutico-interpretativo |
+| `terminology-graph-agent` | Grafo terminológico trilíngue (PT-BR/EN/ZH-CN) que consome deltas do CulturalEpistemeAgent, exige aprovação humana por termo e... | Hermenêutico-interpretativo |
+
+</details>
+
+<details>
+<summary><b>Orquestradores Meta</b> (6 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `AntigravityOrchestrator` | Orquestrador especializado que delega tarefas ao Antigravity (Google DeepMind Advanced Agentic Coding), expondo e coordenando... | Pragmático-técnico |
+| `bernstein-orchestrator` | Bernstein é o maestro do ecossistema OpenCode. Ele orquestra agentes CLI coding (Claude, Codex, Gemini, Qwen) em pipelines... | Pragmático-técnico |
+| `marceloclaro` | Avatar de Marcelo Claro: Controle Supremo, Criador e Orquestrador Central de todo o OpenCode e OpenCode Ecosystem. | — |
+| `MasterOrchestrator` | Orquestrador mestre e controlador de ciclo de vida (end-to-end) para o Ecossistema OpenCode e Polimata. Inicializa e finaliza... | Pragmático-técnico |
+| `Nano Orchestrator` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Nano Orchestrator** | Pragmático-técnico |
+| `StageOrchestrator` | Multi-stage workflow orchestrator managing stage transitions, gating rules, validation, and rollback for complex feature... | Pragmático-técnico |
+
+</details>
+
+<details>
+<summary><b>Médico Virtual Supremo</b> (6 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `medico-cardiologista` | name: Médico Cardiologista description: >- --- name: Médico Cardiologista — Especialista em | Empírico-analítico |
+| `medico-infectologista` | name: Médico Infectologista description: >- --- name: Médico Infectologista — Especialista em | Empírico-analítico |
+| `medico-neurologista` | name: Médico Neurologista description: >- --- name: Médico Neurologista — Especialista em | Empírico-analítico |
+| `medico-radiologista` | name: Médico Radiologista description: >- --- name: Médico Radiologista — Especialista em | Empírico-analítico |
+| `Médico Clínico Geral — Orquestrador Clínico` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Médico Clínico Geral — Orquestrador Clínico** | Empírico-analítico |
+| `Médico Virtual Supremo — Apoio Clínico Auditável` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Médico Virtual Supremo — Apoio Clínico Auditável** | Empírico-analítico |
+
+</details>
+
+<details>
+<summary><b>Jurídico (AuxJuris)</b> (4 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `auxjuris_document_summarizer` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Auxjuris Document Summarizer** | Regulatório-normativo |
+| `auxjuris_email_drafter` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Auxjuris Email Drafter** | Regulatório-normativo |
+| `auxjuris_legal_assistant` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Auxjuris Legal Assistant** | Regulatório-normativo |
+| `auxjuris_legal_research` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Auxjuris Legal Research** | Regulatório-normativo |
+
+</details>
+
+<details>
+<summary><b>Outros / Utilitários</b> (4 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `Catálogo de Skills Cloud (Antigravity Backup)` | 56 skills de infraestrutura Google Cloud Platform (AlloyDB, Cloud SQL, BigQuery, Dataflow, Cloud Composer, GCS Security,... | Pragmático-técnico |
+| `coder-agent` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Coder Agent** | Pragmático-técnico |
+| `Eval Runner` | Test harness for evaluation framework - DO NOT USE DIRECTLY | Pragmático-técnico |
+| `Synthetic University — Orquestrador Acadêmico Transversal` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Synthetic University — Orquestrador Acadêmico Transversal** | — |
+
+</details>
+
+<details>
+<summary><b>Artefato não-agente (excluir da contagem funcional)</b> (3 agentes) — clique para expandir</summary>
+
+| Agente | Descrição (função) | Camada |
+|---|---|---|
+| `DISPATCHER_ATIVACAO` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Dispatcher Ativacao** | — |
+| `README` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Readme** | — |
+| `TEMPLATE_HANDOFF` | *(sem descrição autoral no card — rótulo derivado do identificador)* **Template Handoff** | — |
+
+</details>
+
+
 ### 7. Camada de Redução de Dependência LLM (NOVO R220–R222)
 Seis componentes determinísticos que substituem chamadas de LLM para tarefas rotineiras,
 integrando-se silenciosamente antes do `AttentionRouter`:
