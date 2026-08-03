@@ -3623,6 +3623,27 @@
         "Ao criar um scanner novo baseado em lista de frases exatas, verificar contra pelo menos um trecho real conhecido do corpus-alvo ANTES de declarar pronto -- achei um recall de 0 (deveria ser >0) porque ja tinha lido uma passagem que contradizia o resultado do scanner ('nao ha cura/tratamento/como fechar'), e a lista de frases exatas nao cobria essa variacao. Corrigido com regex de padrao antes do commit, nao como pendencia futura.",
         "Contagem de marcadores linguisticos de inducao/hipnose/manipulacao e uma aproximacao heuristica da TECNICA narrativa (o que o texto faz), nunca prova do efeito psicologico real sobre um leitor -- isso e uma linha que precisa ficar explicita no overclaim_guard de qualquer scanner dessa familia, dado o pedido do usuario ser sobre 'manipulacao psicologica' (termo que pode soar como alegacao de efeito real se nao delimitado como termo tecnico-narrativo)."
       ]
+    },
+    {
+      "round_id": "R386",
+      "objective": "A pedido do usuario ('prossiga os dois em sequencia'), corrigir a pendencia de infraestrutura achada no diagnostico R385 (caminho de relatorios movido + 11 agentes literary-* com contrato perdido) e aplicar os 3 ajustes de maior retorno (interocepcao, cruzamento sensorial, comando direto de 2a pessoa) em fragmentos especificos de Molambudos.",
+      "changes": [
+        "6 testes (R270,271,273,274,275,276 -- o R276 nao estava na lista original de 5, achado durante a correcao) corrigidos para apontar para _archive/relatorios/, respeitando um arquivamento em lote deliberado de 2026-07-30 (nao desfeito).",
+        "9 cards agents/catalog/literary-*.md restaurados: name: corrigido para slug exato (3 tinham agent_id interno errado com '-and-'), temperature/type/category adicionados, secao 'Contrato de Saida Obrigatorio' + 'Guarda Anti-Overclaim' nova em cada um, referenciando os scanners Python reais (literary_scanners.py + psychological_immersion_scanners.py do R385) como piso quantitativo. literary-orchestrator-phd e literary-research-scholar-phd ganharam secoes extras (deteccao de retorno vazio de subagente / separacao evidencia interna-externa).",
+        "opencode.json regenerado (instrucao do CLAUDE.md apos mudanca em agents/catalog/*.md) -- corrigiu 2 falhas pre-existentes nao relacionadas como efeito colateral honesto (config commitado estava desatualizado antes desta sessao).",
+        "Resultado: 30/30 testes das 7 suites R270-R276 passam (27 falhas corrigidas + 3 ja passavam).",
+        "Verificacao programatica ANTES de editar prosa: nenhum fragmento CONT-* esta travado por hash nos manifestos de proveniencia (R360/R361/R362) -- conjunto travado e so DOC-17/LUC-01/MEM-06/MEM-12/MEM-26, ja tratado no R383/R384. Backup manual criado antes de escrever.",
+        "Edicoes ciruergicas em CONT-01 e CONT-02 (2 fragmentos), preservando voz/registro: cruzamento sensorial olfativo+interoceptivo e tatil+interoceptivo, comandos diretos de 2a pessoa ('Sinta...', 'Nao se mexa.'). Medido antes/depois com os scanners: sensory_immersion sobe 25.56->61.06 (CONT-01) e 25.70->45.92 (CONT-02); hypnotic_induction sobe tambem nos dois. Trade-off honesto registrado: frenetic_pacing caiu levemente em CONT-01 (frases acrescentadas nao sao rajadas curtas).",
+        "Bug real encontrado durante a propria validacao (nao escondido): PsychologicalManipulationScanner nao detectava imperativo no inicio de paragrafo (cada paragrafo LaTeX comeca com \\noindent, nao com pontuacao) -- bug sistematico, nao especifico das minhas edicoes, provavelmente subcontando no livro inteiro. Corrigido (deteccao por frase via _sentences(), ignorando ruido LaTeX). Recontagem real: comando_direto_2a_pessoa sobe de 22 para 28 ocorrencias no livro inteiro (score 27.56->35.08).",
+        "1 teste de regressao dedicado para o bug de fronteira de paragrafo, adicionado a tests/test_r385_psychological_immersion_scanners.py (18/18 verdes).",
+        "specs/SPEC-935-R386-literary-agents-contract-restore-and-prose-enhancement.md: spec formal com as duas frentes, medicoes reais e o bug encontrado."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Ao corrigir um caminho de arquivo movido, verificar TODOS os testes que usam o padrao (nao so os reportados inicialmente) -- o teste R276 usava o mesmo caminho antigo mas nao tinha sido listado no diagnostico original, so apareceu ao rodar o conjunto completo apos a primeira correcao.",
+        "Ao medir o efeito de uma edicao de prosa com um scanner proprio, sempre desconfiar de um numero que NAO mudou quando deveria -- isso revelou um bug real no scanner (fronteira de paragrafo em LaTeX), nao apenas confirmou que a edicao funcionou. O habito de medir antes/depois (nao so aplicar e seguir) e o que pega esse tipo de falso negativo.",
+        "Antes de editar conteudo criativo protegido por cadeia de proveniencia, verificar programaticamente (nao supor) quais arquivos especificos estao de fato travados por hash -- 'esta referenciado em algum manifesto' e uma pergunta diferente de 'esta travado por hash pinado', e confundir as duas quase levou a evitar edicoes seguras (CONT-*) por excesso de cautela."
+      ]
     }
   ]
 }

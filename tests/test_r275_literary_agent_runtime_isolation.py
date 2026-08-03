@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 CATALOG = ROOT / "agents" / "catalog"
-REPORT_DIR = ROOT / "projetos" / "molambudos" / "Molambudos_VictoriaRegia" / "relatorios"
+REPORT_DIR = ROOT / "projetos" / "molambudos" / "Molambudos_VictoriaRegia" / "_archive" / "relatorios"
 JSON_REPORT = REPORT_DIR / "literary_agent_runtime_isolation_R275.json"
 MD_REPORT = REPORT_DIR / "literary_agent_runtime_isolation_R275.md"
 MINIMAL_AGENT = CATALOG / "literary-smoke-minimal.md"

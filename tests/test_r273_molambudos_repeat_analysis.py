@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "projetos" / "molambudos" / "Molambudos_VictoriaRegia"
-REPORT_DIR = PROJECT / "relatorios"
+REPORT_DIR = PROJECT / "_archive" / "relatorios"
 JSON_REPORT = REPORT_DIR / "molambudos_repeat_analysis_R273.json"
 MD_REPORT = REPORT_DIR / "molambudos_repeat_analysis_R273.md"
 
