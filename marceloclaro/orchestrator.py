@@ -1264,39 +1264,39 @@ class MarceloClaroOrchestrator:
                 error_type="pipeline_error" if r105_failed else None,
             )
 
-            # R106 — Auditoria de Rigor do Manuscrito (SPEC-935-R381)
+            # Auditoria de Rigor do Manuscrito (SPEC-935-R381)
             t5 = time.time()
             r105_sections = r105.get("sections") if not r105_failed else None
             manuscript_rigor_gate: Optional[Dict[str, Any]] = None
             if r105_sections:
-                r106 = audit_scientific_manuscript(r105_sections)
-                r106_high = any(
-                    f.get("severity") == "high" for f in r106.get("findings", [])
+                r381 = audit_scientific_manuscript(r105_sections)
+                r381_high = any(
+                    f.get("severity") == "high" for f in r381.get("findings", [])
                 )
-                r106_confidence = 0.0 if r106_high else 1.0
-                calibration = _calibrate("r106_rigor", r106_confidence, not r106_high)
+                r381_confidence = 0.0 if r381_high else 1.0
+                calibration = _calibrate("r381", r381_confidence, not r381_high)
                 _trace(
-                    "r106_rigor", "failure" if r106_high else "success",
-                    f"Auditoria de rigor (R369): {len(r106.get('moves_presentes', []))} "
-                    f"movimentos presentes, {len(r106.get('findings', []))} achados, "
-                    f"human_gate={r106.get('human_gate')}. Não bloqueia o pipeline "
+                    "r381", "failure" if r381_high else "success",
+                    f"Auditoria de rigor (R369): {len(r381.get('moves_presentes', []))} "
+                    f"movimentos presentes, {len(r381.get('findings', []))} achados, "
+                    f"human_gate={r381.get('human_gate')}. Não bloqueia o pipeline "
                     "(consultivo, como R104d/R105).",
-                    before=r106_confidence,
+                    before=r381_confidence,
                     after=calibration["calibrated_confidence"],
-                    evidence_count=len(r106.get("findings", [])),
+                    evidence_count=len(r381.get("findings", [])),
                 )
                 manuscript_rigor_gate = {
-                    "human_gate": r106.get("human_gate"),
+                    "human_gate": r381.get("human_gate"),
                     "high_severity_findings": sum(
-                        1 for f in r106.get("findings", []) if f.get("severity") == "high"
+                        1 for f in r381.get("findings", []) if f.get("severity") == "high"
                     ),
                     "moves_ausentes": [
-                        f["move"] for f in r106.get("findings", [])
+                        f["move"] for f in r381.get("findings", [])
                         if f.get("code") == "MISSING_MOVE" and f.get("move")
                     ],
                 }
             else:
-                r106 = {
+                r381 = {
                     "status": "skipped",
                     "reason": (
                         "R105 falhou ou não produziu seções compostas "
@@ -1304,8 +1304,8 @@ class MarceloClaroOrchestrator:
                         "fabricada sobre dado inexistente."
                     ),
                 }
-            timeline["r106_rigor"] = round(time.time() - t5, 1)
-            stages["r106_rigor"] = r106
+            timeline["r381"] = round(time.time() - t5, 1)
+            stages["r381"] = r381
 
             timeline["total"] = round(time.time() - start, 1)
             metacog = MetacognitiveEvaluator().evaluate(traces)
