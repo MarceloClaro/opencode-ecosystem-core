@@ -13,7 +13,7 @@
   `AttentionRouter.semantic_matcher`, mas `scientific_discovery_pipeline()`
   **nunca chamava** `audit_scientific_manuscript()` (R369) apesar do R105 já
   produzir `sections: Dict[str,str]` real no formato exato esperado pelo
-  auditor. Corrigido: novo estágio `r106_rigor`, consultivo (não bloqueia,
+  auditor. Corrigido: novo estágio `r381`, consultivo (não bloqueia,
   como R104d/R105), com calibração de confiança + traço metacognitivo no
   mesmo padrão dos demais estágios, e novo campo de conveniência
   `result["manuscript_rigor_gate"]`. **Fora de escopo, documentado, não

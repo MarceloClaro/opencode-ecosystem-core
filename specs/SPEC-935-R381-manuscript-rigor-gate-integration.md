@@ -36,7 +36,7 @@ significaria inventar dados sintéticos só para preencher a assinatura, o
 que violaria a própria disciplina anti-fabricação do projeto. Ficam como
 capacidades **opt-in** para quem tiver dados reais (ver Seção 4).
 
-## 1. Novo estágio R106 — Auditoria de Rigor do Manuscrito
+## 1. Novo estágio `r381` — Auditoria de Rigor do Manuscrito
 
 Após o estágio R105 (Paper Composer) em `scientific_discovery_pipeline()`:
 
@@ -44,50 +44,50 @@ Após o estágio R105 (Paper Composer) em `scientific_discovery_pipeline()`:
    `audit_scientific_manuscript(r105["sections"])`.
 2. Se `r105` falhou (`status == "error"`) ou `sections` vazio/ausente:
    **não fabrica um audit vazio** — registra
-   `stages["r106_rigor"] = {"status": "skipped", "reason": "..."}`
+   `stages["r381"] = {"status": "skipped", "reason": "..."}`
    explicitamente, sem levantar exceção (o auditor exige mapeamento não
    vazio — `ContractError` seria incorreto aqui, pois a ausência de seções
    é um estado válido de pipeline, não um erro de chamada).
-3. Resultado do audit (quando executado) entra em `stages["r106_rigor"]`
+3. Resultado do audit (quando executado) entra em `stages["r381"]`
    integralmente (findings, moves_presentes, human_gate, disclaimer).
 4. Confiança calibrada via `mci.confidence_calibrator.calibrate_confidence`
    (mesmo padrão dos demais estágios): `succeeded = not high_severity`
    (nenhum achado `severity="high"`).
 5. Traço metacognitivo (`_trace`) registrado como os demais estágios.
-6. **Não bloqueia o pipeline** (diferente do gate R103): o resultado já
+6. **Não bloqueia o pipeline** (diferente do gate R103 obrigatório): o resultado já
    foi composto; descartá-lo pós-hoc seria pior que reportar o achado.
    Isso é consistente com R104d/R105, que também não bloqueiam.
 7. Campo de conveniência no retorno de nível superior:
    `result["manuscript_rigor_gate"]` — resumo
    `{"human_gate", "high_severity_findings", "moves_ausentes"}` para quem
-   não quiser navegar `stages["r106_rigor"]["findings"]`.
+   não quiser navegar `stages["r381"]["findings"]`.
 
 ## 2. Contrato de saída (adição, não quebra)
 
 Todos os campos hoje retornados por `scientific_discovery_pipeline`
 permanecem inalterados. Adiciona-se apenas:
-- `stages["r106_rigor"]` (novo).
-- `calibrated_confidences["r106_rigor"]` (novo, mesmo padrão dos demais).
+- `stages["r381"]` (novo).
+- `calibrated_confidences["r381"]` (novo, mesmo padrão dos demais).
 - `result["manuscript_rigor_gate"]` (novo, resumo de conveniência,
   presente apenas quando `status == "completed"`).
 
 ## 3. Critérios de aceitação
 
 1. Pipeline real (não mockado) com `max_rounds=1`: quando completa com
-   sucesso, `stages["r106_rigor"]` existe e tem a forma de
+   sucesso, `stages["r381"]` existe e tem a forma de
    `audit_scientific_manuscript` (schema_version, moves_presentes,
    findings, human_gate, disclaimer).
 2. `audit_scientific_manuscript` é chamado com exatamente
    `r105["sections"]` (verificado via spy/monkeypatch — não fabricação
    de conteúdo alternativo).
 3. R105 com `sections` vazio ou pipeline com `status="blocked"`/`"error"`
-   antes de R105: `stages["r106_rigor"] = {"status": "skipped", ...}`,
+   antes de R105: `stages["r381"] = {"status": "skipped", ...}`,
    sem exceção.
 4. `result["manuscript_rigor_gate"]` presente e coerente com
-   `stages["r106_rigor"]["human_gate"]` quando o pipeline completa.
-5. Pipeline nunca é bloqueado pelo R106 (`status` permanece `"completed"`
+   `stages["r381"]["human_gate"]` quando o pipeline completa.
+5. Pipeline nunca é bloqueado pelo estágio `r381` (`status` permanece `"completed"`
    mesmo com achados `high`).
-6. Traço metacognitivo do estágio `r106_rigor` presente em
+6. Traço metacognitivo do estágio `r381` presente em
    `metacognitive_report` quando o audit roda.
 7. Zero regressão em `test_r108_marceloclaro_scientific_fusion.py` e no
    restante da suíte.

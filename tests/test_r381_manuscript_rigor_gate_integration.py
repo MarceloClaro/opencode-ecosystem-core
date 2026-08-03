@@ -56,19 +56,19 @@ def _fake_r103_package(export_gate_passed: bool = True):
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# 1. Estágio R106 presente em execução real (não mockada) do pipeline
+# 1. Estágio r381 presente em execução real (não mockada) do pipeline
 # ═══════════════════════════════════════════════════════════════════════
 
 class TestEstagioR106Real:
-    def test_r106_rigor_presente_apos_pipeline_completo(self):
+    def test_r381_presente_apos_pipeline_completo(self):
         orch = _make_orchestrator()
         result = orch.scientific_discovery_pipeline(
             "dominio de teste rigor manuscrito", max_rounds=1, strict_gates=False
         )
         assert result["status"] in ("completed", "error")
         if result["status"] == "completed":
-            assert "r106_rigor" in result["stages"]
-            audit = result["stages"]["r106_rigor"]
+            assert "r381" in result["stages"]
+            audit = result["stages"]["r381"]
             if audit.get("status") != "skipped":
                 assert audit["schema_version"] == "1.0.0"
                 assert "moves_presentes" in audit
@@ -143,7 +143,7 @@ class TestSemFabricacao:
             "dominio de teste r105 falho", max_rounds=1, strict_gates=False
         )
         if result["status"] == "completed":
-            audit = result["stages"]["r106_rigor"]
+            audit = result["stages"]["r381"]
             assert audit.get("status") == "skipped"
             assert "reason" in audit
 
@@ -160,11 +160,11 @@ class TestSemFabricacao:
             "dominio de teste bloqueado", max_rounds=1, strict_gates=True
         )
         assert result["status"] == "blocked"
-        assert "r106_rigor" not in result["stages"]
+        assert "r381" not in result["stages"]
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# 4. R106 nunca bloqueia o pipeline, mesmo com achados de severidade alta
+# 4. O estágio r381 nunca bloqueia o pipeline, mesmo com achados de severidade alta
 # ═══════════════════════════════════════════════════════════════════════
 
 class TestNaoBloqueante:
@@ -193,7 +193,7 @@ class TestNaoBloqueante:
         )
         if result["status"] == "completed" and result["stages"].get("r105", {}).get("sections"):
             assert result["status"] == "completed"
-            assert result["stages"]["r106_rigor"]["human_gate"] == "required"
+            assert result["stages"]["r381"]["human_gate"] == "required"
             assert result["manuscript_rigor_gate"]["human_gate"] == "required"
 
 
