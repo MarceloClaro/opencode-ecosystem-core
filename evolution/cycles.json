@@ -3660,6 +3660,27 @@
       "lessons": [
         "Ao medir efeito agregado apos varias rodadas de edicao em arquivos .tex, sempre verificar se o corpus de medicao (molambudos.md) ainda reflete o estado real do que foi editado -- achei que nao refletia (edicoes foram no .tex, nao no .md) so porque o numero agregado nao mudou quando deveria. Preferir reportar 'nao comparavel, aqui esta o motivo' a forcar um numero unico que misturaria dois corpora diferentes."
       ]
+    },
+    {
+      "round_id": "R388",
+      "objective": "A pedido explicito do usuario ('corrija e limpe para nao ter dualidades no projeto literario'), eliminar a divergencia real entre molambudos.md (fonte nominal desde R376) e o corpus .tex publicado, achada ao investigar o achado de sensory_immersion baixo no diagnostico R385/R386.",
+      "changes": [
+        "Levantamento completo (74 fragmentos, nao apenas amostra) ANTES de editar: comparacao sistematica via regeneracao em memoria mostrou 68/74 fragmentos com alguma divergencia lexical; apos filtrar ruido cosmetico (estilo de aspas, formato antigo de rotas), 31 fragmentos com divergencia de conteudo real.",
+        "Achado que mudou o plano original: a hipotese inicial ('so notas a mais no .tex') era falsa para varios casos -- CONT-04 teve uma cena inteira ('Noite 3') reescrita e reestruturada; MEM-02 teve a morte do pai reescrita para ficar mais ambigua; MEM-04/MEM-02 tinham a correcao geografica dos ciclos R374/R375 nunca propagada ao .md; MEM-05/MEM-10 tinham cenas inteiras novas (a coruja; o enfermeiro e o menino) so no .tex; DOC-02/DOC-17/DOC-07/DOC-18 tinham correcoes ANTI-OVERCLAIM reais ja aplicadas no .tex (removendo alegacoes que soavam como documento historico genuino) que nunca chegaram ao .md.",
+        "Usuario consultado explicitamente (AskUserQuestion) sobre a direcao da correcao dado o risco real de transcricao em obra de terceiro -- escolheu transcrever tudo do .tex (mais maduro) para o .md, fragmento a fragmento, com verificacao apos cada um.",
+        "26 fragmentos com divergencia de prosa real sincronizados (CONT-01/02/03/04/10/11/13, MEM-02/03/04/05/06/07/10/16/18/20/26/27, DOC-01/02/07/08/17/18/19, LUC-Escolha). Convencao nova documentada para \\NE{} (nota de rodape do editor, sem equivalente previo em markdown): novo paragrafo 'Nota do Editor:'.",
+        "Cada fragmento verificado individualmente por regeneracao em memoria + comparacao de conjunto de palavras (>=5 caracteres, ignorando ruido cosmetico conhecido) -- zero divergencia real restante nos 26.",
+        "Exceçoes estruturais documentadas explicitamente, nao ignoradas silenciosamente: LUC-02/04/12 e DOC-03/09 tem inclusao de imagem LaTeX (\\includegraphics, legendas com nome de arquivo de foto) nao representavel como prosa em markdown puro -- o texto ao redor ja esta sincronizado, so a marcacao de imagem em si permanece exclusiva do .tex.",
+        "NENHUM arquivo .tex foi tocado nesta correcao -- so molambudos.md. Consequencia: as cadeias de proveniencia (R360/R361/R362, que fixam hash de arquivos .tex) ficam inteiramente nao afetadas, verificado programaticamente (manifesto R362: 0 problemas).",
+        "specs/SPEC-935-R388-molambudos-md-tex-content-sync.md: spec formal com o levantamento completo, a convencao de transcricao, e 7 criterios de aceitacao.",
+        "Zero regressao: 30/30 testes das suites R270-R276 (ja restauradas no R386), suite completa identica ao baseline pos-R386 (34 falhas, mesmo conjunto, zero nova)."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Um achado que parece pequeno ('umas notas do editor faltando') pode esconder um achado muito maior -- so descobri a real escala (reescrita de cenas inteiras, correcoes geograficas de ciclos anteriores nunca propagadas, correcoes anti-overclaim reais) porque fiz o levantamento COMPLETO (74 fragmentos) antes de comecar a corrigir, em vez de corrigir os primeiros casos e generalizar a partir deles.",
+        "Quando a escala e a direcao de uma correcao mudam a meio caminho (descobri que era .tex->.md, nao .md->.tex, e que era reescrita de cena, nao so nota editorial), parar e reportar ao usuario ANTES de continuar -- mesmo tendo autorizacao geral para 'corrigir e limpar' -- e a escolha certa quando ha risco real de erro de transcricao numa obra de terceiro e mais de uma direcao plausivel de correcao.",
+        "Verificar por fragmento (nao so no agregado) pega erros que a media esconde -- um numero agregado 'zero divergencia' so e confiavel se cada um dos 26 fragmentos foi checado individualmente, o que revelou 2 casos residuais (DOC-17, DOC-07) que ficariam escondidos numa checagem so agregada."
+      ]
     }
   ]
 }

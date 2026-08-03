@@ -5,7 +5,29 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R387 — segunda leva de prosa (CONT-10/CONT-11/CONT-13)** (2026-08-03)
+- **Branch:** `main` · última entrega: **R388 — elimina dualidade molambudos.md × corpus .tex publicado** (2026-08-03)
+- **R388 (2026-08-03) — "corrija e limpe para não ter dualidades":**
+  levantamento completo (74 fragmentos, não amostra) mostrou 31 com
+  divergência de conteúdo real entre `molambudos.md` (fonte nominal
+  desde o R376) e o `.tex` publicado. **Achado que mudou o plano**: não
+  era "notas a mais no `.tex`" — era reescrita real de cena (CONT-04:
+  "Noite 3" inteira reestruturada; MEM-02: morte do pai reescrita para
+  ficar mais ambígua), correção geográfica dos ciclos R374/R375 nunca
+  propagada (MEM-04/02: "sertão de Quixeramobim" → "rota de Senador
+  Pompeu a Fortaleza"), cenas inteiras novas só no `.tex` (MEM-05: a
+  coruja; MEM-10: o enfermeiro e o menino), e **3 correções
+  anti-overclaim reais** (DOC-02/17/07/18: o `.tex` já havia trocado
+  alegações que soavam como documento histórico genuíno por linguagem
+  que deixa claro ser reconstituição ficcional — nunca propagado ao
+  `.md`). Perguntei ao usuário a direção da correção antes de agir
+  (`.tex`→`.md`, direção oposta ao esperado, dado que o `.tex` está mais
+  maduro); escolheu transcrever tudo. 26 fragmentos sincronizados,
+  verificados individualmente por regeneração+comparação de palavras
+  (zero divergência real restante). Nenhum `.tex` tocado — proveniência
+  R360/R361/R362 inteiramente não afetada (verificado). Exceções
+  estruturais (fotos/figuras em LUC-02/04/12, DOC-03/09) documentadas,
+  não ignoradas. Zero regressão (34 falhas, idêntico ao baseline
+  pós-R386). Ver `specs/SPEC-935-R388-molambudos-md-tex-content-sync.md`.
 - **R387 (2026-08-03) — continuação do R386 ("prossiga"):** mesmas 3
   técnicas aplicadas a mais 3 fragmentos curtos com baixa densidade
   sensorial (CONT-10, CONT-11, CONT-13), mesma disciplina de verificação
