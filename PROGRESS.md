@@ -5,7 +5,40 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R388 — elimina dualidade molambudos.md × corpus .tex publicado** (2026-08-03)
+- **Branch:** `main` · última entrega: **R389 — prontidão técnica da edição trilíngue (3 bugs reais de build corrigidos)** (2026-08-03)
+- **R389 (2026-08-03) — "prepare a obra trilíngue pronta para publicação
+  literária, prossiga":** primeira vez que o pipeline `scripts/audit_r362_
+  pdf_layout.py --build` rodou de fim a fim desde as edições de prosa dos
+  ciclos R386/R387/R388 — nenhum dos 5 PDFs publicados refletia o texto
+  atual até este ciclo. Revelou **3 bugs reais de compilação nunca antes
+  detectados**: (1) glifo Unicode `╳` (U+2573) em `MEM-27.tex` travava
+  pdfLaTeX com erro fatal (PT) e desaparecia silenciosamente sob XeLaTeX
+  (edição `tri`) — corrigido para `$\times$` no fragmento e no gerador
+  `build_miolo.py`; (2) 5 tabelas de 2 colunas sem quebra de linha
+  (`CONT-03`, `LUC-Escolha`, `CONT-07` PT/EN/ZH) estouravam a página —
+  novo ambiente `moltabletwo` criado seguindo o precedente já
+  estabelecido (`moltablethree/four/five/six`); (3) **12 fragmentos PT**
+  (`CONT-03/05/06/07/08/09/10/11/12/13`, `MEM-27`, `LUC-Escolha`) usavam
+  links de navegação em texto puro em vez do macro `\rota{}` — o leitor
+  de PT perdia hyperlink clicável + número de página nessas 12 passagens
+  (EN/ZH já corretos), e o pipeline de auditoria as contava como
+  inexistentes (PT=167 rotas vs EN=ZH=192). Corrigido preservando os
+  alvos de rota já existentes em cada arquivo PT (não copiados do EN).
+  **Incidente transparente durante a correção**: uma primeira tentativa
+  via `re.sub()` com `\n`/`\t`/`\r` literais na substituição corrompeu os
+  12 arquivos (bug clássico do Python) — detectado imediatamente pelo
+  mesmo verificador de balanceamento de chaves do R358, corrigido antes
+  de prosseguir. Mesmo padrão de número mágico do R358 (contagem de
+  fragmentos) reapareceu na contagem de rotas — trocado por invariante
+  de paridade entre idiomas. Duplicidade de build
+  `main_kdp_print_160x230mm.pdf` (raiz vs `tri/`, órfão de ciclo
+  anterior) resolvida via recompilação completa + limpeza do artefato
+  órfão. Resultado: **`overall_internal_spec_passed: true`** no
+  preflight R362 (5 edições, 2 passadas, 0 erros, 0 violações de
+  layout); `test_r362` 16/16, `test_r384` 9/9; suíte completa sem nova
+  regressão. `release_gate` continua `"blocked"` por design — prontidão
+  **técnica**, não editorial/histórica/de publicação. Ver
+  `specs/SPEC-935-R389-molambudos-trilingual-build-readiness.md`.
 - **R388 (2026-08-03) — "corrija e limpe para não ter dualidades":**
   levantamento completo (74 fragmentos, não amostra) mostrou 31 com
   divergência de conteúdo real entre `molambudos.md` (fonte nominal

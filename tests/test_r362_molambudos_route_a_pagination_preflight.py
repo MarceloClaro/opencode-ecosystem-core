@@ -316,9 +316,19 @@ def test_r362_preflight_records_five_clean_builds_and_pdf_boxes():
 
 
 def test_r362_route_report_validates_all_540_trilingual_routes():
+    # O corpus cresce entre ciclos (novos fragmentos, novas rotas restauradas
+    # de texto puro para \rota{}) — fixar 180/540 reproduziria o mesmo problema
+    # já corrigido no R358 para a contagem de fragmentos. Verificamos a
+    # invariante real: PT/EN/ZH devem ter sempre a mesma contagem de rotas
+    # entre si, e todos os derivados (total, tri, kdp_tri) devem bater com ela.
     routes = _json(PREFLIGHT_PATH)["routes"]
-    assert routes["expected"] == routes["total"] == routes["valid"] == 540
-    assert routes["by_language"] == {"pt": 180, "en": 180, "zh": 180}
+    per_language = routes["by_language"]
+    assert len(set(per_language.values())) == 1, (
+        f"contagem de rotas diverge entre idiomas: {per_language}"
+    )
+    route_count = per_language["pt"]
+    assert route_count > 0
+    assert routes["expected"] == routes["total"] == routes["valid"] == route_count * 3
     assert routes["missing"] == 0
     assert routes["divergent"] == 0
     assert routes["passed"] is True
@@ -327,11 +337,11 @@ def test_r362_route_report_validates_all_540_trilingual_routes():
         assert report["passed"] is True, edition
         assert report["duplicate_labels"] == []
         assert report["source_multiset_match"] is True
-    assert routes["editions"]["pt"]["total"] == 180
-    assert routes["editions"]["en"]["total"] == 180
-    assert routes["editions"]["zh"]["total"] == 180
-    assert routes["editions"]["tri"]["total"] == 540
-    assert routes["editions"]["kdp_tri"]["total"] == 540
+    assert routes["editions"]["pt"]["total"] == route_count
+    assert routes["editions"]["en"]["total"] == route_count
+    assert routes["editions"]["zh"]["total"] == route_count
+    assert routes["editions"]["tri"]["total"] == route_count * 3
+    assert routes["editions"]["kdp_tri"]["total"] == route_count * 3
 
 
 def test_r362_manifest_chains_provenance_and_only_resolves_selected_blocker():

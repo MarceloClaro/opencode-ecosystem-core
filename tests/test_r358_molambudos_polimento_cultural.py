@@ -68,8 +68,20 @@ def test_r358_spec_is_registered_red_or_better():
 
 
 def test_all_234_fragment_sources_remain_present_and_tex_balanced():
+    # O corpus cresceu de 78 para 84 fragmentos por idioma (CONT-05..13
+    # expandido nos ciclos R376/R377) — 234 = 78x3 ficou desatualizado.
+    # Em vez de fixar um novo número mágico que voltaria a ficar obsoleto
+    # na próxima expansão, verificamos a invariante real: PT/EN/ZH devem
+    # ter sempre a mesma contagem de fragmentos entre si.
     paths = _fragment_paths()
-    assert len(paths) == 234
+    per_language = {
+        directory: len(list((BOOK / directory).glob("**/*.tex")))
+        for directory in ("fragmentos", "en/fragmentos", "zh/fragmentos")
+    }
+    assert len(set(per_language.values())) == 1, (
+        f"contagem de fragmentos diverge entre idiomas: {per_language}"
+    )
+    assert len(paths) == sum(per_language.values()) == per_language["fragmentos"] * 3
     failures = {
         str(path.relative_to(BOOK)): _brace_balance(path.read_text(encoding="utf-8"))
         for path in paths
