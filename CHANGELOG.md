@@ -4,6 +4,22 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.5.0] - 2026-08-03
+
+### Adicionado
+- **Motor de Validação Empírica Rigorosa (SPEC-935-R370)**: `mci/rigorous_validation.py` — computa estatística a partir de dados brutos (não só valida números já fornecidos): contraprova por permutação (seed fixo, determinística), duas lentes independentes (Welch-t + Mann-Whitney), validação cruzada k-fold genérica, validade convergente, e gate real no R103 (`OrchestratorReviewer.verify_statistical_claim()`).
+- **Triangulação Multidisciplinar (SPEC-935-R371)**: `mci/multidisciplinary_triangulation.py` — uma alegação só é `triangulated=True` com ≥2 domínios independentes concordantes **e** nenhum domínio contestando (contestação de qualquer domínio bloqueia, nunca resolvida por maioria de votos); gate real no R103.
+- **Protocolo de Pré-registro (SPEC-935-R372)**: `mci/preregistration_protocol.py` — `register_protocol()`/`verify_protocol()`; corrige um overclaim real em `mci/experiment_designer.py` (`pre_registered` defaultava para `True` sem qualquer verificação).
+- **Enriquecimento do Catálogo MASWOS (SPEC-935-R380)**: 46 agent cards (00–53) com `description` placeholder e corpo apontando para caminho externo inexistente substituídos por conteúdo real (missão, entradas, saídas, workflow) portado de repositório-fonte confirmado, nunca fabricado.
+- **Integração do Gate de Rigor ao Pipeline Principal (SPEC-935-R381)**: `scientific_discovery_pipeline()` agora chama de verdade `audit_scientific_manuscript()` (R369) sobre as seções reais compostas pelo R105 — antes uma função de biblioteca testada mas sem chamador. Novo estágio consultivo `stages["r381"]` (nunca bloqueia) e resumo `result["manuscript_rigor_gate"]`. R370–R372 permanecem deliberadamente opt-in (exigem dados brutos do chamador).
+
+### Corrigido
+- **Validação fim-a-fim com manuscrito real (SPEC-935-R373)**: os gates R369–R372 rodados sobre um manuscrito USP real revelaram e corrigiram 2 problemas genuínos — falso positivo de novidade em `production_scaffolds.py` ("primeiras diferenças" disparava `UNSUPPORTED_NOVELTY_CLAIM`) e gap de significância estatística para manuscritos que só reportam resumo (r, p, n), fechado com `pearson_naive_significance()` + `crosscheck_reported_correlation()` assimétrico.
+- **Colisão de nomenclatura no R381**: a chave de estágio inicial (`r106_rigor`) colidia com `specs/SPEC-935-R106.md` (CI/CD Pipeline + Quality Gates, spec real não relacionado); renomeada para `r381`.
+
+### Documentado
+- README.md: novo Ato VII (rigor estatístico + unificação real do pipeline), nova Seção 15 (integração R381), diagrama de arquitetura completo com a aresta real `Composer → ProductionScaffolds` (antes ausente), números atualizados (198 ciclos, 2.695 testes, 222 specs, 129/205 agentes com episteme).
+
 ## [2.4.0] - 2026-08-02
 
 ### Adicionado
