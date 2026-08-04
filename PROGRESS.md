@@ -5,7 +5,26 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R391 — triagem e correção das 31 falhas pré-existentes da suíte** (2026-08-03)
+- **Branch:** `main` · última entrega: **R392 — cabeça "load" do AttentionRouter deixa de ser constante morta** (2026-08-03)
+- **R392 (2026-08-03) — "funciona com uma rede transformer sem ser uma
+  cascata vazia?" → "tem como implementa?":** investigação ao vivo
+  (`AttentionRouter.explain()` sobre os 210 agentes reais do Blackboard)
+  confirmou 3 das 4 cabeças com sinal real e diferenciado (`confidence` com
+  20 valores distintos reais, `semantic` escolhendo corretamente o agente
+  certo para uma tarefa KDP de teste) — mas a cabeça `load` (10% do peso)
+  retornava **1.0 para os 210 agentes, sempre, sem exceção**. Causa raiz:
+  `AgentCard.to_dict()` nunca publicava a chave `load`; o default silencioso
+  de `_head_load()` mascarava a ausência. **Descartei a correção óbvia**
+  (usar status busy/available) porque o `AttentionRouter` já exclui
+  agentes ocupados nos hard gates *antes* da pontuação — um sinal binário
+  não diferenciaria nada entre os candidatos elegíveis (todos já
+  disponíveis por construção). Implementado `_live_load()`: carga real
+  contada a partir de tarefas de fato atribuídas no Blackboard, normalizada
+  em `[0, 1]`. TDD (RED→GREEN), verificado também com o orquestrador real
+  (atribuí 4 tarefas reais a um agente ao vivo — `load` foi de `1.0`
+  idêntico para todos a `0.8` vs `0.0`, diferenciando de verdade). Suíte
+  completa: **2674 aprovados (+2), 0 falhas** — zero regressão. Ver
+  `specs/SPEC-935-R392-attention-router-real-load-head.md`.
 - **R391 (2026-08-03) — "liste as 31 falhas e corrija":** cada falha
   investigada individualmente antes de corrigir (bug real vs. teste
   desatualizado por evolução legítima vs. overclaim histórico já

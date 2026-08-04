@@ -41,6 +41,29 @@ def _live_confidence(agent_id: str) -> float:
     return max(0.0, min(1.0, score))
 
 
+_LOAD_REFERENCE_CAPACITY = 5
+
+
+def _live_load(agent_id: str) -> float:
+    """Carga real em [0, 1]: tarefas hoje atribuídas a este agente sobre uma
+    capacidade de referência (não apenas "ocupado agora" — agentes ocupados
+    já são excluídos antes da fase de pontuação pelos hard gates do
+    AttentionRouter, então diferenciar só por status "busy"/"available"
+    não daria sinal algum entre os elegíveis). Sem isso, ``AgentCard.
+    to_dict()`` nunca publicava a chave ``load``, e ``_head_load`` caía
+    sempre no mesmo valor constante para todo agente, tornando 10% do peso
+    da decisão de roteamento por atenção pura constante sem diferenciação."""
+
+    active = sum(
+        1
+        for task in blackboard.tasks.values()
+        if task.assigned_to == agent_id and task.status in ("assigned", "completed", "failed")
+    )
+    if _LOAD_REFERENCE_CAPACITY <= 0:
+        return 0.0
+    return max(0.0, min(1.0, active / _LOAD_REFERENCE_CAPACITY))
+
+
 class AgentCard:
     """Representa as capacidades de um agente (Padrão A2A Protocol)."""
     def __init__(self, agent_id: str, name: str, description: str, capabilities: List[str], schema: Dict[str, Any]):
@@ -62,7 +85,8 @@ class AgentCard:
             "description": self.description,
             "capabilities": self.capabilities,
             "status": self.status,
-            "confidence_score": self.confidence_score
+            "confidence_score": self.confidence_score,
+            "load": _live_load(self.agent_id),
         }
 
 

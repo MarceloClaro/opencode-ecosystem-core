@@ -3746,6 +3746,25 @@
         "'Corrigir o teste' e 'corrigir o codigo' sao ambos respostas legitimas a uma falha -- a discriminacao correta exige investigar a causa raiz de cada uma individualmente (bug real vs. requisito superado por evolucao legitima do corpus vs. overclaim historico ja documentado e corrigido em outro lugar), nunca aplicar uma unica heuristica para todas as 31 falhas de uma vez.",
         "Um bug de teste as vezes esconde um bug de producao mais serio: test_r351 parecia pedir so um arquivo ausente, mas investigar a fundo revelou que catalog_loader.py ignorava silenciosamente agent_id: explicito em qualquer card do catalogo inteiro cujo name: nao fosse ja um slug -- um bug que afetava producao, nao so o teste."
       ]
+    },
+    {
+      "round_id": "R392",
+      "objective": "Usuario perguntou se o roteamento por atencao multi-cabeca funciona de verdade ou e uma 'cascata vazia'; depois pediu para implementar a correcao do que fosse encontrado morto.",
+      "changes": [
+        "Investigacao ao vivo com AttentionRouter.explain() sobre os 210 agentes reais do Blackboard: 3 das 4 cabecas (semantic, capability, confidence) tem sinal real e diferenciado (ex.: confidence com 20 valores distintos reais de 0.118 a 1.0 entre os agentes). A quarta (load, 10% do peso) retornava 1.0 para os 210 agentes, sempre, sem excecao.",
+        "Causa raiz: AgentCard.to_dict() (mci/blackboard.py) nunca publicava a chave 'load'. _head_load() em transformer/attention.py le card.get('load', 0.0) -- com a chave sempre ausente, o default 0.0 virava 1.0 - 0.0 = 1.0 universalmente. 10% do peso da decisao de roteamento nunca diferenciava nada.",
+        "Descartada a opcao obvia (usar status busy/available): o AttentionRouter ja exclui agentes status != available nos hard gates ANTES da fase de pontuacao -- nenhum agente ocupado agora chega a ser pontuado, entao um sinal binario nao geraria diferenciacao alguma entre os candidatos elegiveis (todos ja available por construcao).",
+        "Implementado mci/blackboard.py::_live_load(agent_id): conta tarefas do Blackboard com assigned_to==agent_id e status em (assigned, completed, failed), normaliza por capacidade de referencia (5), retorna [0,1]. AgentCard.to_dict() passa a incluir load real. _head_load nao foi alterado -- ja fazia 1.0-load corretamente, so precisava de um valor real.",
+        "TDD: tests/test_r212_attention_blackboard.py::TestR212LoadHeadIsLive (2 testes novos) -- RED confirmado antes da correcao (load_scores identicos e iguais a 1.0 para agente ocioso e agente ocupado), GREEN depois.",
+        "Verificacao end-to-end com o orquestrador REAL, nao so teste isolado: atribuidas 4 tarefas reais a um agente no Blackboard ao vivo -- to_dict()['load'] passou a reportar 0.8 para ele contra 0.0 para os demais agentes amostrados.",
+        "Suite completa: 2674 aprovados (2672 + 2 novos), 0 falhas, 56 pulados -- zero regressao. Correcao estritamente aditiva, nenhuma outra cabeca alterada.",
+        "specs/SPEC-935-R392-attention-router-real-load-head.md: spec formal com a causa raiz, a justificativa de por que status busy/available nao serviria, a correcao e os criterios de aceitacao."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "'Funciona' e 'todas as partes tem sinal real' sao perguntas diferentes -- um sistema pode estar genuinamente integrado (todo agente registrado, MetaBus/Trust/Reflexion ativos) e ainda ter um componente interno morto (10% do peso de uma decisao sempre constante) que so aparece ao rodar com dados reais e inspecionar as cabecas individualmente, nao so o ranking final agregado.",
+        "A correcao obvia (status busy/available) teria sido inutil por causa de uma interacao com outra parte do sistema (hard gates ja filtram por status antes da pontuacao) -- vale sempre checar como um sinal proposto interage com o resto do pipeline antes de implementar, nao so se ele faz sentido isoladamente."
+      ]
     }
   ]
 }
