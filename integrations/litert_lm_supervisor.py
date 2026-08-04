@@ -126,6 +126,10 @@ class SupervisorConfig:
     def pid_path(self) -> Path:
         return self.runtime_dir / "litert-lm.pid"
 
+    @property
+    def log_path(self) -> Path:
+        return self.runtime_dir / "litert-lm.log"
+
 
 @dataclass(frozen=True, slots=True)
 class SupervisorStatus:
@@ -510,36 +514,50 @@ class LiteRTSupervisor:
 
     def _spawn_locked(self, previous: _PersistedState) -> _PersistedState:
         process: Any | None = None
+        # stdout/stderr do filho iam para DEVNULL: quando o litert-lm real
+        # morre logo após o spawn (ex.: "Address already in use" por uma
+        # porta ocupada por um processo travado/órfão de uma sessão
+        # anterior), esse diagnóstico era descartado -- o supervisor só via
+        # "processo morreu, falha N", sem nenhuma pista da causa real.
+        # Redireciona para um arquivo real no runtime_dir (append, para não
+        # truncar diagnósticos de tentativas anteriores na mesma sessão).
+        log_file = open(self.config.log_path, "ab")
         try:
-            process = self._process_factory(
-                list(LITERT_COMMAND),
-                cwd=str(PROJECT_ROOT),
-                env=self._child_environment(),
-                stdin=subprocess.DEVNULL,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                shell=False,
-                close_fds=True,
-                start_new_session=True,
-            )
-            pid = getattr(process, "pid", None)
-            if isinstance(pid, bool) or not isinstance(pid, int) or pid <= 0:
-                raise RuntimeError("process_factory retornou PID inválido")
-            self._register_process(process, pid)
-            starting = _PersistedState(
-                state=SupervisorState.STARTING,
-                ready=False,
-                pid=pid,
-                failure_count=previous.failure_count,
-                circuit_open_until=None,
-                updated_at=self._clock(),
-            )
-            self._persist_state_locked(starting)
-            return starting
-        except Exception:
-            if process is not None:
-                self._terminate_process(process)
-            return self._record_failure_locked(previous)
+            try:
+                process = self._process_factory(
+                    list(LITERT_COMMAND),
+                    cwd=str(PROJECT_ROOT),
+                    env=self._child_environment(),
+                    stdin=subprocess.DEVNULL,
+                    stdout=log_file,
+                    stderr=log_file,
+                    shell=False,
+                    close_fds=True,
+                    start_new_session=True,
+                )
+                pid = getattr(process, "pid", None)
+                if isinstance(pid, bool) or not isinstance(pid, int) or pid <= 0:
+                    raise RuntimeError("process_factory retornou PID inválido")
+                self._register_process(process, pid)
+                starting = _PersistedState(
+                    state=SupervisorState.STARTING,
+                    ready=False,
+                    pid=pid,
+                    failure_count=previous.failure_count,
+                    circuit_open_until=None,
+                    updated_at=self._clock(),
+                )
+                self._persist_state_locked(starting)
+                return starting
+            except Exception:
+                if process is not None:
+                    self._terminate_process(process)
+                return self._record_failure_locked(previous)
+        finally:
+            # O filho herdou seu próprio descritor via close_fds/duplicação
+            # do subprocess; a cópia do pai pode (e deve) ser fechada aqui
+            # sem afetar a escrita contínua do processo filho no arquivo.
+            log_file.close()
 
     def status(self) -> SupervisorStatus:
         """Reconcilia readiness, PID e circuito sem iniciar um processo."""

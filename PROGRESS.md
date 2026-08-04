@@ -5,7 +5,31 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R394 — auditoria real do OpenCode CLI (2 bugs corrigidos, 2 limitações operacionais documentadas)** (2026-08-03)
+- **Branch:** `main` · última entrega: **R395 — daemon LiteRT-LM travado (não offline) reiniciado; diagnóstico de spawn deixa de ser descartado** (2026-08-03)
+- **R395 (2026-08-03) — "corrija" (as 2 limitações do R394):** investigação
+  real revelou que o LiteRT-LM, documentado como "offline" há vários
+  ciclos, tinha na verdade um processo **vivo desde 24 de julho** (11+
+  dias) — travado, não offline: aceitava conexão TCP e nunca respondia
+  na camada HTTP. O supervisor detectava corretamente a não-resposta e
+  acumulava `failure_count` (chegou a 41), mas nunca encerrava o zumbi.
+  **Ação imediata**: processo encerrado, daemon novo e saudável
+  confirmado com inferência real (chat completion coerente em
+  português) e `doctor` mudando de `warn` para `pass`. **Bug real de
+  diagnóstico corrigido**: `_spawn_locked()` descartava `stdout`/`stderr`
+  do processo filho (`DEVNULL`) — quando o `litert-lm` morre logo após o
+  spawn (ex.: `Address already in use`, reproduzido ao vivo), essa
+  mensagem real era perdida, forçando reprodução manual fora do
+  supervisor para diagnosticar. Corrigido: novo `SupervisorConfig.
+  log_path`, spawn redireciona para arquivo real; `litert-lm-start.sh
+  --log` agora mostra esse log quando não há unidade systemd. TDD
+  (RED→GREEN), 19/19 no arquivo do supervisor. **Limitação restante
+  documentada, não escondida**: cold-start do modelo padrão (2.4GB) ainda
+  excede 120s neste hardware sem GPU — não é mais travamento permanente,
+  mas continua lento; trocar o modelo padrão é decisão editorial, fora
+  de escopo. Subagentes continuam não invocáveis via `opencode run
+  --agent <nome>` — comportamento do binário externo, não controlável
+  por este código. Suíte completa: **2694 aprovados (+1), 0 falhas**. Ver
+  `specs/SPEC-935-R395-litert-lm-zombie-daemon-and-diagnostics.md`.
 - **R394 (2026-08-03) — "revise o opencode cli":** testado com o binário
   real (`opencode` v1.18.11), não só lendo código, no mesmo espírito da
   auditoria do R393. **Confirmado funcional**: `agent list` carrega 216
