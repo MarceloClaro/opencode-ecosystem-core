@@ -5,7 +5,21 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R395 — daemon LiteRT-LM travado (não offline) reiniciado; diagnóstico de spawn deixa de ser descartado** (2026-08-03)
+- **Branch:** `main` · última entrega: **R396 — README.md e ARCHITECTURE.md sincronizados com o trabalho real de R389–R395** (2026-08-04)
+- **R396 (2026-08-04) — "faça e atualize o readme,md e suas arquiteturas":**
+  documentação pura, sem mudança de código. `README.md`: badges (versão
+  3.7.0→3.8.0, testes 2695→2750, ciclos 199→212, specs 223→237), novo
+  "Act VIII" narrativo (R382–R395), nova seção técnica "16. Auditoria Real
+  dos Três CLIs Externos e do Daemon Local (R391–R395)", contagem de
+  placeholders corrigida (57→56) e bloco de estatísticas do rodapé
+  atualizado. `ARCHITECTURE.md`: cabeçalho/intro atualizados para v3.8 e
+  nova seção final com 2 diagramas mermaid (cabeça `load` do
+  AttentionRouter; ciclo de vida do spawn do supervisor LiteRT-LM) e
+  tabelas das correções reais nas pontes de CLI (Antigravity bridge,
+  cli_ecosystem_bridge, scanners/pipeline, /pypi) e specs do bloco
+  R391–R395. Tabela histórica "Métricas de Maturidade" (v3.0.0 vs v3.2.0)
+  deliberadamente não reescrita — snapshot congelado de um marco anterior,
+  fora de escopo. Ver ciclo de evolução R396 em `evolution/cycles.json`.
 - **R395 (2026-08-03) — "corrija" (as 2 limitações do R394):** investigação
   real revelou que o LiteRT-LM, documentado como "offline" há vários
   ciclos, tinha na verdade um processo **vivo desde 24 de julho** (11+

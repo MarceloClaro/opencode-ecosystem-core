@@ -1,6 +1,6 @@
-# Arquitetura: OpenCode Ecosystem Core v3.2 (Redução LLM)
+# Arquitetura: OpenCode Ecosystem Core v3.8 (Triagem Real de CLIs Externos)
 
-Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, sua fusão e loop real (R108–R109), os subsistemas de raciocínio e revisão (R113–R115), instalação e pesquisa CLI (R116/R120), apresentações MIRA (R123–R126), **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, **On-Device LLM via LiteRT-LM (R48–R52)**, e os subsistemas legados de governança científica e jurídica.
+Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, sua fusão e loop real (R108–R109), os subsistemas de raciocínio e revisão (R113–R115), instalação e pesquisa CLI (R116/R120), apresentações MIRA (R123–R126), **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, **On-Device LLM via LiteRT-LM (R48–R52)**, a **Camada Epistêmica e Guardas de Tradução Cultural (R363–R369)**, e a **auditoria real dos três CLIs externos e do supervisor LiteRT-LM (R391–R395)** — ver última seção deste documento. Para a narrativa completa por ciclo (incluindo R370–R390, rigor estatístico/triangulação/pré-registro e a preparação editorial trilíngue do projeto Molambudos), ver [`README.md`](README.md).
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
@@ -521,3 +521,82 @@ em todo achado, determinismo bit a bit, e relatórios com números **medidos**
 | SPEC-935-R367 | Benchmark cultural medido | 10 |
 | SPEC-935-R368 | Cobertura epistêmica + doctor | 12 |
 | SPEC-935-R369 | Andaimes de raciocínio produtivo | 21 |
+
+---
+
+## Auditoria Real de Fim-a-Fim: CLIs Externos e Supervisor LiteRT-LM (R391–R395)
+
+Diferente das seções anteriores (que descrevem componentes desenhados e
+testados isoladamente), este bloco documenta correções que só apareceram
+ao **rodar o binário real** de cada integração — não ao reler a assinatura
+das funções que os invocam.
+
+### Roteamento por Atenção — a cabeça `load` deixa de ser constante (R392)
+
+```mermaid
+graph LR
+    Task[Descrição da tarefa] --> Router[AttentionRouter._evaluate]
+    Router --> Sem[Cabeça semantic<br>embedding real]
+    Router --> Cap[Cabeça capability<br>interseção de conjuntos]
+    Router --> Conf[Cabeça confidence<br>ledger real, 20 valores distintos]
+    Router --> Load["Cabeça load<br>ANTES: sempre 1.0 (constante)<br>DEPOIS: _live_load() real"]
+    Load -.->|conta| Tasks[(Blackboard.tasks<br>assigned/completed/failed)]
+```
+
+`mci/blackboard.py::AgentCard.to_dict()` nunca publicava a chave `"load"`;
+`_head_load()` caía sempre no mesmo default silencioso
+(`card.get("load", 0.0)` → `1.0 - 0.0 = 1.0` para todo agente). Nova função
+`_live_load(agent_id)` conta tarefas reais atribuídas no Blackboard,
+normalizadas por uma capacidade de referência — 10% do peso da decisão de
+roteamento passou a diferenciar de fato entre um agente ocioso e um com
+backlog real.
+
+### Pontes de CLI Externo — sintaxe real, não assumida (R393–R394)
+
+| Integração | Bug real encontrado | Correção |
+|---|---|---|
+| `integrations/antigravity/bridge.py` | Comando `agy run --agent X --prompt Y` — subcomando/flag inexistentes no binário real (v1.1.8); falha real saía com `returncode == 0`, reportando `"completed"` sem fazer nada | Sintaxe real `--agent`/`--print`/`--output-format`; detecção de prefixos de erro conhecidos mesmo com código de saída zero |
+| `integrations/cli_ecosystem_bridge.py` | `antigravity_cli.active` checava a existência de `AGENTS.md` (documentação do próprio OpenCode CLI); `get_unified_status()` retornava `"fully_synchronized"` como string fixa, nunca computada | `shutil.which("agy")` como sinal real; `unified_status` computado a partir de `discover_cli_capabilities()` |
+| `scanners/pipeline.py` | `ReversaScanner` usado sem import — todo `/diagnose` real reportava `NameError` disfarçado de resultado de scanner | Import adicionado (mesma classe de bug do `EpistemicPrioritizer`, corrigido antes no mesmo arquivo) |
+| `integrations/opencode_cli.py` (`/pypi`) | Fallback de argumento vazio chamava `search('*', ...)` — a busca não trata `'*'` como coringa, sempre retornava zero resultados | Fallback imprime instrução de uso em vez de rodar busca que sabidamente não retorna nada |
+
+Novo teste genérico (`tests/test_r394_opencode_cli_commands_real_execution.py`)
+executa o comando shell real de cada uma das 9 entradas de
+`build_config()["command"]` — não só importa o módulo Python — e falha se
+aparecer `Traceback`/`NameError`/`ImportError` na saída combinada.
+
+### Supervisor LiteRT-LM — travado não é offline (R395)
+
+```mermaid
+graph TD
+    Ensure[LiteRTSupervisor.ensure] --> Probe{_probe_ready?}
+    Probe -->|"sim"| Ready[state: READY]
+    Probe -->|"não, pid vivo"| Starting[state: STARTING]
+    Probe -->|"não, pid morto"| Spawn[_spawn_locked]
+    Spawn -->|"ANTES: stdout/stderr → DEVNULL"| Blind["Falha real descartada<br>(ex.: Address already in use)"]
+    Spawn -->|"DEPOIS: stdout/stderr → log_path"| Log[(litert-lm.log<br>runtime_dir real)]
+```
+
+Um processo `litert-lm serve` vivo desde 24 de julho (11+ dias) — travado,
+aceitando conexão TCP mas nunca respondendo na camada HTTP — mantinha o
+circuit breaker do supervisor aberto indefinidamente (`failure_count`
+chegou a 41). `_spawn_locked()` redirecionava `stdout`/`stderr` do
+processo filho para `subprocess.DEVNULL`; a mensagem real de erro de
+qualquer tentativa de spawn subsequente (`OSError: Address already in
+use`, pela porta ainda ocupada pelo zumbi) era descartada, exigindo
+reprodução manual fora do supervisor para diagnosticar.
+
+Novo `SupervisorConfig.log_path` (`<runtime_dir>/litert-lm.log`);
+`scripts/litert-lm-start.sh --log` mostra esse arquivo real quando não há
+unidade `systemd --user` instalada. Verificado com inferência real após o
+reinício (chat completion coerente via modelo local).
+
+### Specs do bloco
+
+| Spec | Título | Testes |
+|---|---|---|
+| SPEC-935-R391 | Triagem das 31 falhas pré-existentes da suíte | — |
+| SPEC-935-R392 | Cabeça `load` do AttentionRouter deixa de ser constante | 2 |
+| SPEC-935-R393 | Bridge do Antigravity CLI — sintaxe real | 5 |
+| SPEC-935-R394 | Auditoria real do OpenCode CLI | 11 |
+| SPEC-935-R395 | Daemon LiteRT-LM travado + diagnóstico de spawn | 1 |

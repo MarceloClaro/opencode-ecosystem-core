@@ -6,18 +6,18 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.7.0_Episteme_%2B_Cultural_Guards-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-2.695_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-199_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Versão](https://img.shields.io/badge/Versão-3.8.0_Triagem_Real_%2B_Multi--CLI-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-2.750_coletados-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-212_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-223-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-237-dodgerblue.svg)](specs/)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 205 agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (scanners epistemológicos)**, 6 Servidores MCP, **Camada Epistêmica de Roteamento** e **Guardas de Tradução Cultural** (R363–R381), e 199 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 205 agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado** (Diagnóstico → Correção → Validação RED-GREEN → CORRIGENDUM.md), **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline (scanners epistemológicos)**, 6 Servidores MCP, **Camada Epistêmica de Roteamento**, **Guardas de Tradução Cultural** (R363–R381) e uma **triagem real, testada ao vivo, dos três CLIs externos (OpenCode/Antigravity/Claude Code) e do daemon local LiteRT-LM** (R389–R395), e 212 ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
@@ -66,6 +66,63 @@ quando não há manuscrito para auditar). Os gates que exigem dados brutos
 do próprio chamador (estatística, triangulação, pré-registro) permanecem
 deliberadamente opt-in — unificar não significa fabricar dados sintéticos
 só para acionar uma assinatura de função.
+
+### Act VIII — A Prova de Fogo: Rodar de Verdade, Não Só Ler o Código (R382–R395)
+Todo o rigor dos Atos anteriores prova que uma função funciona quando
+alguém a chama isoladamente em teste. Este Ato nasceu de uma pergunta
+diferente: **o ecossistema inteiro funciona quando você de fato o usa —
+compila o livro, chama o CLI externo, fala com o daemon local?** A
+resposta, repetidas vezes, foi "quase" — e cada "quase" virou um bug real
+corrigido, nunca escondido atrás de um número inflado.
+
+Primeiro, um teste que travava por minutos revelou que `QualityChecker`
+nunca soube da existência de `dry_run` e insistia em abrir sockets reais
+(R382). Depois, compilar de fato as cinco edições do livro trilíngue
+*Molambudos* — pela primeira vez desde os ciclos de prosa anteriores —
+expôs três bugs que nenhuma leitura de código teria pego: um glifo
+Unicode que travava o pdfLaTeX e desaparecia em silêncio sob XeLaTeX,
+tabelas de duas colunas que estouravam a página, e doze fragmentos cuja
+navegação nunca chegou a usar o macro real de hyperlink (R389). A mesma
+disciplina se estendeu ao próprio corpus literário: um levantamento
+completo (não amostral) das divergências entre a fonte markdown e o
+`.tex` publicado (R383–R388), seguido de um pedido do usuário para medir
+a obra com os scanners — o que revelou que medir o livro inteiro como um
+único bloco de texto satura os scanners em 100/100 (artefato de escala,
+não excelência real); a correção certa foi agregar por fragmento, e um
+pedido explícito de "forçar 100/100" foi recusado com justificativa
+(Goodhart's law), não executado cegamente (R390).
+
+Pedido o usuário para "listar e corrigir as falhas pré-existentes", a
+triagem de 31 falhas da suíte completa distinguiu três categorias em cada
+caso — bug real, teste desatualizado por evolução legítima do projeto, ou
+overclaim histórico já documentado — e achou, no meio do caminho, que
+`catalog_loader.py` ignorava silenciosamente um `agent_id` explícito de
+frontmatter sempre que o `name` não era já um slug: um bug de produção,
+não só de teste (R391). Perguntado se o roteamento por atenção
+multi-cabeça era real ou uma "cascata vazia", a resposta exigiu rodar o
+roteador com os 210 agentes reais do Blackboard — três das quatro cabeças
+tinham sinal genuíno, mas a cabeça de carga (`load`) retornava a mesma
+constante para todo agente, sempre, porque `AgentCard.to_dict()` nunca
+publicava essa chave (R392).
+
+A pergunta final — "os três CLIs (OpenCode, Antigravity, Claude Code)
+funcionam de verdade?" — só podia ser respondida testando os binários
+reais instalados, não relendo o código Python que os invoca. O
+Antigravity revelou dois bugs: uma sintaxe de comando que nunca existiu
+no binário real, e uma falha que saía com `returncode == 0`, fazendo toda
+delegação reportar sucesso mesmo sem fazer nada (R393). A mesma auditoria
+no próprio OpenCode CLI achou dois bugs simétricos — um `NameError`
+disfarçado de resultado de scanner no comando `/diagnose`, e um `/pypi`
+sem argumento que sempre retornava zero resultados (R394). E investigar
+por que o daemon local LiteRT-LM estava marcado como "offline" há vários
+ciclos revelou que ele não estava offline — estava **travado**, um
+processo vivo desde 24 de julho que nunca respondia, com o supervisor
+descartando silenciosamente (`DEVNULL`) o diagnóstico que teria explicado
+por quê (R395).
+
+Nenhuma dessas descobertas veio de ler código com mais atenção. Vieram de
+rodar o binário real, compilar o PDF real, chamar a API real e olhar para
+a resposta — ou para o silêncio.
 
 ---
 
@@ -190,7 +247,7 @@ Esta tabela é gerada a partir do catálogo real (`marceloclaro.catalog_loader.l
 
 **Transparência sobre os números:** dos 205 registros carregados, **3 são artefatos não-agente** (ver último grupo da tabela-resumo) — o catálogo real de agentes funcionais é **202**. A camada epistêmica cobre **129/205 (63%)** — os **76 restantes (37%) aparecem como `—`** porque a heurística lexical não encontrou sinal suficiente nos metadados; isso não significa que o agente seja pior, só que a inferência automática não tem base para classificá-lo (ver Seção 8 para o critério exato). Número medido via `python3 -m marceloclaro.cli doctor` (check `episteme_coverage`) — varia levemente conforme o catálogo cresce/muda entre ciclos.
 
-**Achado de auditoria e correção aplicada (SPEC-935-R380):** ao gerar esta tabela pela primeira vez, 103 dos 205 registros (50%) tinham `description` placeholder mecânico ("Agente especializado NOME") com corpo apontando para um caminho Windows externo inexistente neste checkout. Os **46 agentes do grupo Catálogo Acadêmico MASWOS** (00–53) já foram corrigidos: conteúdo real (missão, entradas, saídas, workflow) portado de um repositório-fonte confirmado, nunca fabricado — ver `specs/SPEC-935-R380-maswos-catalog-enrichment.md`. **57 registros ainda têm o placeholder** (família `reversa-*` com fonte real localizada mas ainda não portada, `auxjuris_*`, ferramental de desenvolvimento genérico, médicos, e os 3 artefatos não-agente) — candidatos a um ciclo futuro (R375+). Para esses casos, a coluna `Descrição` traz um **rótulo derivado mecanicamente do identificador** (nunca uma descrição inventada), marcado explicitamente.
+**Achado de auditoria e correção aplicada (SPEC-935-R380):** ao gerar esta tabela pela primeira vez, 103 dos 205 registros (50%) tinham `description` placeholder mecânico ("Agente especializado NOME") com corpo apontando para um caminho Windows externo inexistente neste checkout. Os **46 agentes do grupo Catálogo Acadêmico MASWOS** (00–53) já foram corrigidos: conteúdo real (missão, entradas, saídas, workflow) portado de um repositório-fonte confirmado, nunca fabricado — ver `specs/SPEC-935-R380-maswos-catalog-enrichment.md`. **56 registros ainda têm o placeholder** (família `reversa-*` com fonte real localizada mas ainda não portada, `auxjuris_*`, ferramental de desenvolvimento genérico, médicos, e os 3 artefatos não-agente) — candidatos a um ciclo futuro. Um caso adicional (`contextscout`) foi corrigido no R391: tinha dois blocos de frontmatter YAML empilhados no mesmo arquivo, um placeholder genérico cobrindo o card real (que já existia, mais abaixo, com sua permissão real de `write/edit: deny`) — o parser só lê o primeiro bloco, então a declaração real nunca chegava ao `opencode.json` gerado. Para esses casos, a coluna `Descrição` traz um **rótulo derivado mecanicamente do identificador** (nunca uma descrição inventada), marcado explicitamente.
 
 #### Visão geral por grupo temático
 
@@ -695,6 +752,21 @@ Todo o trabalho das seções 10–14 tinha um problema silencioso: `audit_scient
 - **Achado colateral de nomenclatura corrigido no mesmo ciclo:** a chave de estágio escolhida inicialmente (`r106_rigor`) colidia com um spec real e não relacionado (`specs/SPEC-935-R106.md`, CI/CD Pipeline + Quality Gates). Renomeada para `r381`, seguindo a convenção real do código (chave de estágio = `spec_id`).
 
 Spec formal: [`specs/SPEC-935-R381-manuscript-rigor-gate-integration.md`](specs/SPEC-935-R381-manuscript-rigor-gate-integration.md) (7 critérios de aceitação). Testes: [`tests/test_r381_manuscript_rigor_gate_integration.py`](tests/test_r381_manuscript_rigor_gate_integration.py) (7 testes, TDD real). Zero regressão: `test_r108_marceloclaro_scientific_fusion.py` (10/10) e `doctor` (12/12 sem falha nova).
+
+### 16. Auditoria Real dos Três CLIs Externos e do Daemon Local (R391–R395)
+Todas as seções anteriores validam componentes internos com testes que os chamam diretamente. Esta rodada perguntou algo diferente: **o ecossistema entrega de verdade quando alcançado pelas ferramentas externas que o usuário realmente usa** — `opencode`, `agy` (Antigravity) e `claude`? A resposta exigiu instalar e rodar os três binários reais, não reler o código Python que os integra.
+
+**Bug de produção real, não só de teste (R391):** `marceloclaro/catalog_loader.py::load_catalog_definitions()` sempre derivava `agent_id` do campo `name:` do frontmatter — mas vários cards têm `name` em Title Case legível (`"KDP Orchestrator PhD"`), não um slug. Qualquer consumidor do campo `agent_id` para esses cards recebia um identificador errado. Corrigido para priorizar um `agent_id:` explícito, com fallback seguro para o nome do arquivo (nunca para `name:`).
+
+**Antigravity CLI (R393):** `integrations/antigravity/bridge.py::delegate()` montava um comando (`agy run --agent X --prompt Y`) que **nunca existiu** no binário real instalado (v1.1.8) — reproduzido ao vivo, o binário tenta abrir uma sessão de terminal interativa e falha. Mais grave: essa falha sai com `returncode == 0`, então toda delegação, sempre, reportava `"status": "completed"` mesmo sem ter feito nada. Corrigido: sintaxe real (`--agent`/`--print`/`--output-format`) + detecção de prefixos de erro conhecidos mesmo com código de saída zero. Verificado com uma delegação real, ponta a ponta, retornando resposta genuína de modelo.
+
+**OpenCode CLI (R394):** confirmado funcional de verdade (216 agentes carregados pelo binário real, 6/6 servidores MCP conectados, 5 credenciais reais configuradas) — mas dois bugs reais no caminho: `scanners/pipeline.py` usava `ReversaScanner` sem importá-lo (todo `/diagnose` real reportava um `NameError` disfarçado de resultado de scanner, mesma classe de bug do `EpistemicPrioritizer`); e o comando `/pypi` sem argumento chamava `search('*', ...)`, que não trata `'*'` como coringa — a invocação mais simples e comum sempre retornava zero resultados, sem erro nem aviso. Um novo teste genérico executa o comando shell real de cada uma das 9 entradas do `opencode.json` (não só importa o módulo Python), pego automaticamente qualquer regressão futura da mesma classe.
+
+**Daemon local LiteRT-LM (R395):** documentado como "offline" há vários ciclos — investigação real revelou um processo vivo **desde 24 de julho** (11+ dias), escutando na porta mas nunca respondendo na camada HTTP. O supervisor detectava corretamente a não-resposta e acumulava `failure_count` (chegou a 41), mas `stdout`/`stderr` do processo filho eram descartados (`DEVNULL`) — a mensagem real de erro (`Address already in use`, ao tentar um segundo spawn com a porta ainda ocupada pelo zumbi) era invisível, exigindo reprodução manual fora do supervisor. Corrigido: processo zumbi encerrado, novo `SupervisorConfig.log_path` grava o diagnóstico real em arquivo. `doctor` mudou de `warn` para `pass`; inferência real confirmada (chat completion coerente em português via modelo local).
+
+**O que continua fora do controle deste código, documentado e não escondido:** subagentes do catálogo não são invocáveis diretamente via `opencode run --agent <nome>` (o binário externo cai para o agente primário `build`); o modelo local padrão (2.4 GB) ainda leva bem mais de 2 minutos para a primeira resposta neste hardware sem GPU — não é mais travamento permanente, mas continua lento o suficiente para não ser interativo.
+
+Specs formais: [`SPEC-935-R391`](specs/SPEC-935-R391-pre-existing-suite-failures-triage.md), [`SPEC-935-R392`](specs/SPEC-935-R392-attention-router-real-load-head.md), [`SPEC-935-R393`](specs/SPEC-935-R393-antigravity-bridge-real-cli-syntax.md), [`SPEC-935-R394`](specs/SPEC-935-R394-opencode-cli-real-audit.md), [`SPEC-935-R395`](specs/SPEC-935-R395-litert-lm-zombie-daemon-and-diagnostics.md). Zero regressão em toda a sequência: suíte completa de 2.644 para 2.694 aprovados, sempre 0 falhas.
 
 ### 🎨 Diagramas e Fluxogramas Visuais da Arquitetura
 
@@ -1500,7 +1572,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **199 ciclos registrados** (R1 a R382, com sub-etapas como R104a–R104d), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **212 ciclos registrados** (R1 a R395, com sub-etapas como R104a–R104d), cada um com score, lições e timestamp.
 
 ---
 
@@ -2115,9 +2187,9 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>199 ciclos evolutivos (R1–R382) · 2.695 testes coletados · 205 agentes · 223 specs formais</i><br>
-  <b>v3.7.0 — Pipeline Acadêmico Agentivo | Camada Epistêmica | Guardas de Tradução Cultural | MCP Security | CI/CD</b><br>
-  <sub>Números medidos em 2026-08-03 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
+  <i>212 ciclos evolutivos (R1–R395) · 2.750 testes coletados · 205 agentes · 237 specs formais</i><br>
+  <b>v3.8.0 — Pipeline Acadêmico Agentivo | Camada Epistêmica | Guardas de Tradução Cultural | Triagem Real de CLIs Externos | MCP Security | CI/CD</b><br>
+  <sub>Números medidos em 2026-08-04 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
   contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>
