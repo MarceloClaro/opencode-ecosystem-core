@@ -319,11 +319,16 @@ def test_provider_nao_aceita_host_de_ambiente_nao_local(
 
 
 def test_provider_start_padrao_nao_usa_bind_global_nem_cors_curinga(
-    monkeypatch: pytest.MonkeyPatch,
+    monkeypatch: pytest.MonkeyPatch, tmp_path,
 ):
     """O comando padrão de start deve evitar wildcard de rede e CORS global."""
 
     # Arrange: readiness, HTTP implícito e processo são totalmente simulados.
+    # XDG_RUNTIME_DIR isolado: o supervisor persiste estado de circuit breaker
+    # em disco (~/.../opencode/litert-lm/state.json); sem isolar o diretório,
+    # falhas reais acumuladas de outras execuções (daemon indisponível neste
+    # ambiente) deixam o circuito aberto e suprimem o start_server() deste teste.
+    monkeypatch.setenv("XDG_RUNTIME_DIR", str(tmp_path))
     provider_module = importlib.import_module("integrations.litert_lm_provider")
     popen = mock.Mock(name="Popen")
     monkeypatch.setattr(provider_module, "_server_ready", False)
@@ -353,11 +358,14 @@ def test_provider_start_padrao_nao_usa_bind_global_nem_cors_curinga(
 
 
 def test_provider_start_padrao_envia_limites_ca10_ao_subprocesso(
-    monkeypatch: pytest.MonkeyPatch,
+    monkeypatch: pytest.MonkeyPatch, tmp_path,
 ):
     """CA10: o subprocesso recebe contexto e saída padrão de 20480 tokens."""
 
     # Arrange: readiness, processo, globals e ambiente são isolados pelo teste.
+    # XDG_RUNTIME_DIR isolado (mesmo motivo do teste acima: circuit breaker
+    # persistido em disco não deve vazar entre testes/execuções).
+    monkeypatch.setenv("XDG_RUNTIME_DIR", str(tmp_path))
     provider_module = importlib.import_module("integrations.litert_lm_provider")
     readiness = mock.Mock(name="is_server_running", return_value=False)
     popen = mock.Mock(name="Popen")

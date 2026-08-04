@@ -3,7 +3,7 @@ spec_id: SPEC-935-R388
 title: Elimina dualidade de conteúdo entre molambudos.md e o corpus .tex publicado
 component: projetos/molambudos/molambudos.md
 status: verified
-test_file: tests/test_r270_molambudos_full_literary_scan.py..test_r276_literary_agents_model_fallback.py
+test_file: tests/test_r270_molambudos_full_literary_scan.py
 ---
 
 # SPEC-935-R388 — Elimina Dualidade `.md` × `.tex`

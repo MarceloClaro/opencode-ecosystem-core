@@ -72,3 +72,7 @@ deste agente substitui **revisão de sensibilidade humana** especializada
 em trauma e representação. Toda leitura é hipótese sujeita a **crítica humana**,
 **corpus comparativo** e **validação externa** — nunca certificação de
 adequação ética definitiva.
+
+## Protocolo SDD/TDD
+
+Este agente opera sob a disciplina **SDD/TDD** do ecossistema: leituras e recomendações de peso devem referenciar critérios de aceitação verificáveis (spec + teste), não apenas impressão qualitativa solta.

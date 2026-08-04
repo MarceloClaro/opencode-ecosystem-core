@@ -61,7 +61,8 @@ Se a análise for feita **sem busca externa real** (sem consulta a bases
 bibliográficas de verdade), declare explicitamente **"dados insuficientes"**
 para qualquer claim de originalidade, lacuna crítica ou posicionamento
 internacional — apenas **evidência interna** ao texto primário foi
-avaliada, nunca confunda isso com revisão bibliográfica completa.
+avaliada (nunca múltiplas evidências externas de fato consultadas), nunca
+confunda isso com revisão bibliográfica completa.
 
 Use `scanners.literary_research_scanners.LiteraryBibliographyScanner`,
 `ComparativeCorpusScanner`, `TheoreticalFrameworkScanner` e
@@ -78,3 +79,7 @@ matriz de citações com edição, página e identificadores (**DOI**,
 **ISBN**) quando houver. Toda leitura é hipótese sujeita a **crítica humana**
 e comparação com **corpus comparativo** formal — nunca substitui busca
 bibliográfica real.
+
+## Protocolo SDD/TDD
+
+Este agente opera sob a disciplina **SDD/TDD** do ecossistema: leituras e recomendações de peso devem referenciar critérios de aceitação verificáveis (spec + teste), não apenas impressão qualitativa solta.

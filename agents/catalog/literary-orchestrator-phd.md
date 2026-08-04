@@ -108,3 +108,7 @@ apresente o parecer consolidado como unânime ou definitivo sem antes
 confirmar que todos os subagentes esperados de fato responderam. Toda
 consolidação é hipótese sujeita a **crítica humana**, **corpus comparativo**
 e **validação externa** — nunca substitui parecer editorial profissional.
+
+## Protocolo SDD/TDD
+
+Este agente opera sob a disciplina **SDD/TDD** do ecossistema: leituras e recomendações de peso devem referenciar critérios de aceitação verificáveis (spec + teste), não apenas impressão qualitativa solta.

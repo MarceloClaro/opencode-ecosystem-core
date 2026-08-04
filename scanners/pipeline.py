@@ -39,6 +39,7 @@ from scanners.social_impact_scanner import SocialImpactScanner
 from scanners.legal_impact_scanner import LegalImpactScanner
 from scanners.scientific_reasoning_scanner import ScientificReasoningScanner
 from scanners.successor_generator import SuccessorGenerator
+from scanners.epistemic_prioritizer import EpistemicPrioritizer, EpistemicOpportunity  # noqa: F401 (reexport)
 from scanners.literary_scanners import run_literary_scanner_suite
 from scanners.literary_research_scanners import run_literary_research_scanner_suite
 
