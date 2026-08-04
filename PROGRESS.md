@@ -5,7 +5,30 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R389 — prontidão técnica da edição trilíngue (3 bugs reais de build corrigidos)** (2026-08-03)
+- **Branch:** `main` · última entrega: **R390 — pass editorial guiado por scanner (livro inteiro, não só fragmentos)** (2026-08-03)
+- **R390 (2026-08-03) — "os scanners fizeram as análises?" → "quero o
+  livro inteiro" → "corrija para deixar 100/100":** medir o livro
+  inteiro como um blob único (via `pdftotext` do `main.pdf`) satura o
+  scanner literário em 100/100 em quase todas as dimensões — artefato
+  de escala, não sinal real (mesmo padrão já presente no relatório
+  R270, anterior a esta sessão). Corrigido escaneando os 84 fragmentos
+  individualmente e agregando — sinal real e diferenciado. Pedido do
+  usuário de "otimizar até 100/100" **recusado como objetivo literal**
+  (Goodhart's law + registro apropriado varia por tipo de fragmento);
+  ofereci e o usuário aceitou via `AskUserQuestion` a alternativa:
+  edição editorial nos fragmentos genuinamente fracos. De 27 candidatos
+  estatisticamente fracos, só **12 receberam edição real** após leitura
+  humana individual — os outros 15 foram deixados intocados de
+  propósito (11 já eram excelentes, falso negativo do scanner; `DOC-18`
+  por razão ética, genérico de propósito sobre um campo de concentração
+  histórico real; `DOC-17`/`MEM-26` por trava de proveniência). Média
+  do livro: excelência literária 44.63→45.34, imersão psicológica
+  31.53→32.55 — movimento pequeno e honesto (nunca 100/100), com 2
+  quedas pequenas mantidas sem forçar correção. Recompilação completa
+  após o pass: `overall_internal_spec_passed: true`, rotas
+  PT=EN=ZH=192, zero violação de layout, zero regressão na suíte
+  completa (31 falhas pré-existentes, mesmo conjunto do R389). Ver
+  `specs/SPEC-935-R390-molambudos-scanner-guided-editorial-pass.md`.
 - **R389 (2026-08-03) — "prepare a obra trilíngue pronta para publicação
   literária, prossiga":** primeira vez que o pipeline `scripts/audit_r362_
   pdf_layout.py --build` rodou de fim a fim desde as edições de prosa dos
