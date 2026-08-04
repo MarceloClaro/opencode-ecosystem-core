@@ -5,7 +5,32 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R393 — bridge do Antigravity CLI corrigido (sintaxe real + falha silenciosa)** (2026-08-03)
+- **Branch:** `main` · última entrega: **R394 — auditoria real do OpenCode CLI (2 bugs corrigidos, 2 limitações operacionais documentadas)** (2026-08-03)
+- **R394 (2026-08-03) — "revise o opencode cli":** testado com o binário
+  real (`opencode` v1.18.11), não só lendo código, no mesmo espírito da
+  auditoria do R393. **Confirmado funcional**: `agent list` carrega 216
+  agentes reais; `mcp list` conecta 6/6 servers; `providers list` mostra
+  5 credenciais reais; `run --agent X --model opencode/claude-sonnet-5`
+  retornou um erro real e específico (`Insufficient balance`) em vez de
+  travar — prova que a integração é genuína até a fronteira da chamada de
+  API. **2 bugs reais achados e corrigidos**: (1) `scanners/pipeline.py`
+  usava `ReversaScanner` sem importá-lo — mesma classe de bug do
+  `EpistemicPrioritizer` (R391) — todo `/diagnose` real reportava um
+  `NameError` disfarçado de resultado de scanner; (2) o template do
+  `/pypi` chamava `search('*', limit=5)` como fallback de argumento
+  vazio, mas a busca não trata `'*'` como coringa — `/pypi` sem argumento
+  (a invocação mais simples) sempre retornava zero resultados, sem erro
+  nem aviso. Corrigido para imprimir instrução de uso em vez de rodar
+  busca que sabidamente não retorna nada. **Limitações operacionais reais
+  documentadas, não escondidas**: modelo padrão do `opencode.json` aponta
+  para o daemon LiteRT-LM offline (qualquer `opencode run` sem `--model`
+  explícito trava neste ambiente); subagentes do catálogo não são
+  invocáveis diretamente via `opencode run --agent <nome>` — o binário
+  real cai de volta para o agente primário `build` (comportamento do
+  próprio CLI externo). Novo teste genérico que executa o comando shell
+  real de cada uma das 9 entradas do `opencode.json` — teria pego os 2
+  bugs automaticamente. Suíte completa: **2693 aprovados (+11), 0
+  falhas**. Ver `specs/SPEC-935-R394-opencode-cli-real-audit.md`.
 - **R393 (2026-08-03) — "todos estão funcional nos cli (opencode,
   antigravity, claude)?":** testados os 3 binários reais instalados
   (`opencode` v1.18.11, `agy` v1.1.8, `claude`). **OpenCode CLI: funciona
