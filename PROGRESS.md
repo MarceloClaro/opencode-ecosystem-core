@@ -5,7 +5,78 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R396 — README.md e ARCHITECTURE.md sincronizados com o trabalho real de R389–R395** (2026-08-04)
+- **Branch:** `main` · última entrega: **R398 — deduplicação de fragmentos concatenados por engano e coerência factual de personagem** (2026-08-04)
+- **R398 (2026-08-04) — "polimento, 160×230mm, incoerências/redundâncias/loops"
+  + "remova redundância e repetições" + "psiquiatra forense":** a redundância
+  **não era autoral** — DOC-24/DOC-25/DOC-27 carregavam, colados após seu fim
+  natural, cópias de cenas da Parte 4 (LUC-11; LUC-03+04+05; LUC-08+09). Prova
+  de acidente: o trecho colado no DOC-24 abre com `úcia sabia que...`, o "L"
+  comido no corte (mesmo padrão em LUC-08: `la marcou uma sessão`). Em ordem
+  linear DOC-25 vem **16 fragmentos antes** de LUC-03, e LUC-03 era 94%
+  idêntico ao já lido, LUC-05 89%, LUC-04 67% — a Parte 4, que é a aceleração
+  da obra, virava reprise. **Descoberta que inverteu o plano**: a cauda colada
+  era a versão *melhor* (as edições de prosa do R386 chegaram ao DOC-25 e nunca
+  aos LUC: *"a **fome** não quer que eu conte"*, *"apodrece com ele por
+  dentro"*, *"não respirava: era respirada"*). Migrada a versão polida para os
+  LUC e truncados os documentos no fim real → **70 → 0 frases duplicadas**,
+  perda zero verificada parágrafo a parágrafo nos 9 casos documento×idioma.
+  **Erro cometido e corrigido**: o primeiro corte do DOC-27 varreu junto o
+  registro clínico de julho (tem `itemize`), espalhando `\item` soltos e
+  quebrando o build; restaurado e refeito. **Coerência factual**: Lúcia tinha
+  **4 registros profissionais** diferentes e profissão oscilante — levado ao
+  autor, que decidiu *psiquiatra forense*; 43 ocorrências alinhadas em PT/EN/ZH
+  com `CRM-MG 28.391`, preservando as referências à Dra. Regina, que é
+  psicóloga de fato. "Três meses depois" → "Sete meses depois" (Lúcia assina
+  documento em 28/jul, é fotografada em 3/set e tem carta em 15/out). CRM de
+  Oliveira alinhado entre edições. Cronologia central (1907→1917→62 anos→†1979
+  aos 72→Colônia fecha 1980) **verificada íntegra e não alterada**. Árvore
+  canônica `projetos/molambudos/fragmentos` sincronizada (34→0/84; 5
+  divergências eram pré-existentes e ela era a cópia *mais velha*).
+  **Consolidação das notas `\NE` implementada e REVERTIDA**: MEM-06/MEM-26
+  estão sob cadeia de proveniência SHA-256 num artefato **selado** do R362
+  (`external_validation`, `human_review_required`); fazê-la passar exigiria
+  reescrever um `new_sha256` de outro ciclo — falsificar auditoria, o mesmo
+  defeito que o R397 apontou no selo Merkle. Fica como ciclo próprio de
+  re-baseline. `aviso_ao_leitor.tex` **mantida** (paratexto antes da ficção,
+  custo zero de imersão; sustenta a distinção da ficção com Barbacena e a linha
+  do CVV). Suíte **2706, 0 falhas**; preflight `overall_internal_spec_passed=True`,
+  rotas 576/576. Paginação: PT 415, EN 411, ZH 387, tri 1061, KDP 160×230mm 1115.
+  Ver `specs/SPEC-935-R398-molambudos-deduplicacao-e-coerencia-factual.md`.
+- **R397 (2026-08-04) — "avalie o ecossistema corrigindo a obra literária":**
+  avaliação feita **lendo a obra**, não a documentação sobre ela. Diagnóstico
+  central: as 20 guardas existentes validam a camada *mecânica* (compila,
+  geometria, aspas, datas, paridade de rotas) e **nenhuma** valida se o
+  arquivo contradiz a si mesmo — que é o que quebra imersão num livro cujo
+  dispositivo é um arquivo forense confiável. **4 defeitos reais corrigidos**:
+  (1) **crítico** — CONT-04/CONT-05/DOC-09 chamavam o leitor de "paciente
+  1.261", número que DOC-16 já dera ao Dr. Oliveira; na leitura linear o
+  leitor via "O paciente 1.261 é você" (clímax, p.633) 42 páginas depois de
+  "O paciente 1.261 sou eu" (p.585), e a "Rota do Terror" curada terminava
+  no número errado. Cânone (LUC-12, DOC-24, CONT-09, Epílogo, `como_ler`,
+  `ficha_paciente_1263`): leitor = **1.263**. 26 linhas corrigidas em PT/EN/ZH,
+  preservando os 1.261 legítimos (Oliveira se identificando). (2) o protocolo
+  mandava procurar "↪ Links:" mas os 84 fragmentos usam "↪ Rotas:/Routes:/路线:"
+  — **divergência criada pelo próprio R389** desta sessão. (3) o livro contava
+  a si mesmo errado: "78 fragmentos" (reais 84), "180 rotas" (reais 192), "três
+  formas distintas" seguido de 4 itens. (4) **147 grupos LaTeX vazados** em 8
+  arquivos (`\textquotedblleft{` que devia ser `{}`), compensados despejando
+  até 52 chaves numa linha no EOF: o saldo dava 0, o auditor passava, e o PDF
+  renderizava com ênfase alternando errado até o fim do fragmento — a guarda
+  media o **proxy** (saldo líquido) em vez da **propriedade** (cada grupo fecha
+  onde abre). **Guarda nova**: `tests/test_r397_molambudos_coerencia_diegetica.py`,
+  28 testes em 4 eixos (cadeia de pacientes, protocolo×realidade, autocontagem,
+  integridade de grupos) — pegou um erro meu durante a implementação (85 vs 84:
+  o 85º `\fragdef` é o `Epilogo`, capítulo inline). **Documentado e NÃO
+  corrigido** (decisão autoral, não mecânica): as 3 edições divergem
+  estruturalmente em 12 fragmentos (DOC-25 ZH tem 395 linhas vs 236 PT/EN;
+  CONT-05 ZH tem 63 vs 163) — maior obstáculo restante à alegação de "obra de
+  referência internacional"; as `\NE{}` de CONT-03/CONT-04 desinflam a indução
+  no pico (sugerida realocação para "Nota Clínica" ao final); o selo
+  `SELO_INTEGRIDADE_MERKLE.json` declara 74 fragmentos e hashes que não
+  conferem, e **nada no ecossistema o confere ou regenera**; e o corpus inteiro
+  (302 `.tex`) está sob `.gitignore` — zero commits, sem histórico nem rollback
+  (por isso o backup manual em `_archive/backup_R397_pre_coerencia_diegetica/`).
+  Ver `specs/SPEC-935-R397-molambudos-coerencia-diegetica.md`.
 - **R396 (2026-08-04) — "faça e atualize o readme,md e suas arquiteturas":**
   documentação pura, sem mudança de código. `README.md`: badges (versão
   3.7.0→3.8.0, testes 2695→2750, ciclos 199→212, specs 223→237), novo
