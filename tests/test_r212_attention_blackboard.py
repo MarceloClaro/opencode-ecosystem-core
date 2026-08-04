@@ -461,6 +461,54 @@ class TestR212DeterministicRanking:
         assert first == after_other_tasks
 
 
+class TestR212LoadHeadIsLive:
+    """CA-load: a cabeça 'load' do AttentionRouter deixa de ser sempre 1.0.
+
+    Antes desta correção, ``AgentCard.to_dict()`` nunca incluía a chave
+    ``load``; ``_head_load`` caía no default ``card.get("load", 0.0)`` ->
+    ``_unit_score(0.0, 1.0)`` -> ``1.0 - 0.0 = 1.0`` para todo agente,
+    sempre, independente de quantas tarefas estivessem de fato atribuídas
+    a ele -- 10% do peso da decisão de roteamento não diferenciava nada.
+    """
+
+    def test_agent_card_reports_real_load_from_assigned_tasks(self):
+        # Arrange: um agente ocioso e um agente com tarefas atribuídas.
+        idle = _register_card("idle-agent", ["python"])
+        busy = _register_card("busy-agent", ["python"])
+        for index in range(3):
+            task = BlackboardTask(f"task-{index}", "implementar", [], {})
+            task.status = "assigned"
+            task.assigned_to = "busy-agent"
+            blackboard.tasks[task.task_id] = task
+
+        # Act
+        idle_dict = idle.to_dict()
+        busy_dict = busy.to_dict()
+
+        # Assert
+        assert idle_dict["load"] == 0.0
+        assert busy_dict["load"] > idle_dict["load"]
+
+    def test_load_head_prefers_less_loaded_agent_at_equal_other_scores(self):
+        # Arrange: dois agentes idênticos em tudo, exceto tarefas atribuídas.
+        idle = _register_card("idle-agent", ["python"], confidence=0.6)
+        busy = _register_card("busy-agent", ["python"], confidence=0.6)
+        for index in range(5):
+            task = BlackboardTask(f"task-{index}", "implementar", [], {})
+            task.status = "assigned"
+            task.assigned_to = "busy-agent"
+            blackboard.tasks[task.task_id] = task
+        router = AttentionRouter()
+        cards = [idle.to_dict(), busy.to_dict()]
+
+        # Act
+        explanation = router.explain("implementar", [], cards)
+
+        # Assert: a cabeça load não pode mais ser idêntica para os dois.
+        load_scores = explanation["heads"]["load"]
+        assert load_scores["idle-agent"] > load_scores["busy-agent"]
+
+
 class TestR212ExplainContract:
     """CA16: a auditoria torna gates e cálculo da decisão observáveis."""
 
