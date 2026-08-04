@@ -59,6 +59,17 @@ def test_deep_roadmap(deep_report):
     assert len(rm["logical_sequence"]) > 0, "sequenciamento vazio"
 
 
+# ---------------------------------------------------------------- R1b
+def test_reversa_scanner_runs_without_nameerror(shallow_report):
+    """SPEC-935-R394: scanners/pipeline.py::DiagnosticPipeline.reversa usava
+    ReversaScanner sem importá-lo -- todo diagnóstico (inclusive o comando
+    /diagnose real do opencode.json) reportava um NameError disfarçado de
+    resultado de scanner (``report["reversa"] = {"error": "name
+    'ReversaScanner' is not defined"}``)."""
+    rev = shallow_report.get("reversa", {})
+    assert "error" not in rev, f"reversa com erro: {rev.get('error')}"
+
+
 # ---------------------------------------------------------------- R2
 def test_prioritizer(deep_report):
     """R2: modo deep produz oportunidades epistemológicas com tiers."""

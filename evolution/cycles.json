@@ -3787,6 +3787,25 @@
         "Um bug de deteccao de falha (returncode==0 mas saida e erro) e mais perigoso que o bug de sintaxe em si: o codigo rodava, nao lancava excecao, e reportava 'completed' -- um sistema que consumisse esse resultado confiaria numa delegacao que nunca aconteceu. Vale sempre checar o CONTEUDO da saida, nao so o codigo de saida, quando a ferramenta externa e conhecida por as vezes sair 0 em erro.",
         "Uma string de status fixa ('fully_synchronized') e um overclaim de baixo esforco para introduzir e alto custo para descobrir -- so apareceu ao testar os 3 CLIs individualmente com binarios reais, nao ao ler a funcao isoladamente."
       ]
+    },
+    {
+      "round_id": "R394",
+      "objective": "Usuario pediu para revisar o OpenCode CLI a fundo, no mesmo espirito da auditoria ja feita para o Antigravity CLI (R393).",
+      "changes": [
+        "Testado com o binario real (opencode v1.18.11), nao so lendo codigo: agent list carrega 216 agentes reais (209 do catalogo + built-ins); mcp list conecta 6/6 servers de verdade; providers list mostra 5 credenciais reais configuradas; models lista modelos validos reais (confirma opencode/deepseek-v4-pro, usado nos cartoes kdp-*-phd do R391); run --agent X --model opencode/claude-sonnet-5 retornou um erro real e especifico (Insufficient balance) em vez de travar ou lancar excecao Python -- prova que a integracao e genuina ate a fronteira da chamada de API.",
+        "Bug real #1: scanners/pipeline.py::DiagnosticPipeline usava ReversaScanner sem importa-lo -- mesma classe de bug do EpistemicPrioritizer ja corrigida no R391. Toda execucao (inclusive o comando real /diagnose do opencode.json) produzia report['reversa']={'error': \"name 'ReversaScanner' is not defined\"} silenciosamente. Corrigido com o import faltante.",
+        "Bug real #2: o template do comando /pypi chamava search('*', limit=5) como fallback de argumento vazio -- pypi_search.search() nao trata '*' como coringa (busca literal), entao /pypi sem argumento (a invocacao mais simples e comum) sempre retornava zero resultados sem erro nem aviso. Corrigido: fallback agora imprime mensagem de uso clara em vez de rodar uma busca que sabidamente nao retorna nada -- sem inventar um modo 'populares/tendencia' que nao existia e nao foi pedido.",
+        "Limitacoes operacionais reais documentadas, nao escondidas: (1) modelo padrao do opencode.json aponta para o daemon LiteRT-LM offline -- confirmado que qualquer 'opencode run' sem --model explicito trava neste ambiente por tentar alcancar um daemon que nao esta rodando (pendencia ja conhecida, decisao editorial trocar o padrao, fora de escopo deste ciclo); (2) subagentes do catalogo nao sao invocaveis diretamente via 'opencode run --agent <nome>' -- o binario real cai de volta para o agente primario 'build' com um aviso, comportamento do proprio CLI externo, nao controlavel por este repositorio.",
+        "Novo teste generico tests/test_r394_opencode_cli_commands_real_execution.py: executa o comando shell REAL de cada uma das 9 entradas de comando (nao so importa o modulo Python), falha se aparecer Traceback/NameError/ImportError/ModuleNotFoundError/AttributeError na saida ou codigo de saida != 0 -- teria pego os 2 bugs reais desta auditoria automaticamente. Mais 2 testes de regressao direta para os bugs especificos, e 1 teste novo em test_deep_diagnose.py no mesmo padrao do test_prioritizer ja existente.",
+        "opencode.json regenerado apos a correcao do template /pypi.",
+        "Suite completa: 2693 aprovados (+11), 0 falhas, 56 pulados -- zero regressao."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "O mesmo padrao de bug (classe usada sem import) ja tinha aparecido uma vez neste projeto (EpistemicPrioritizer, R391) e reapareceu de forma independente em ReversaScanner no mesmo arquivo -- um teste generico que executa TODOS os comandos reais do opencode.json (nao so os que alguem lembrou de testar manualmente) e uma rede de seguranca mais forte que corrigir cada ocorrencia isoladamente quando aparece.",
+        "Um comando que 'roda sem erro' nao e o mesmo que um comando que 'faz o que deveria' -- /pypi sem argumento saia com codigo 0 e imprimia uma saida formatada normal ('0 encontrados, 0 exibidos'), nunca lancava excecao. So apareceu como bug ao testar deliberadamente o caso de uso mais simples (invocacao sem argumento), nao ao so verificar ausencia de erro.",
+        "Distinguir 'trava porque a chamada de API teve erro real de saldo' de 'trava porque o codigo esta quebrado' exige efetivamente fazer a chamada com credenciais reais -- um erro de billing claro e, paradoxalmente, uma confirmacao POSITIVA de que a integracao funciona ate aquele ponto, nao uma falha a corrigir."
+      ]
     }
   ]
 }
