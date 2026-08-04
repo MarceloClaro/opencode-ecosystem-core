@@ -3806,6 +3806,25 @@
         "Um comando que 'roda sem erro' nao e o mesmo que um comando que 'faz o que deveria' -- /pypi sem argumento saia com codigo 0 e imprimia uma saida formatada normal ('0 encontrados, 0 exibidos'), nunca lancava excecao. So apareceu como bug ao testar deliberadamente o caso de uso mais simples (invocacao sem argumento), nao ao so verificar ausencia de erro.",
         "Distinguir 'trava porque a chamada de API teve erro real de saldo' de 'trava porque o codigo esta quebrado' exige efetivamente fazer a chamada com credenciais reais -- um erro de billing claro e, paradoxalmente, uma confirmacao POSITIVA de que a integracao funciona ate aquele ponto, nao uma falha a corrigir."
       ]
+    },
+    {
+      "round_id": "R395",
+      "objective": "Usuario pediu para corrigir as 2 limitacoes documentadas no R394 (opencode run trava sem --model; subagentes nao invocaveis via --agent).",
+      "changes": [
+        "Investigacao real (nao so leitura de state.json) revelou que o LiteRT-LM, documentado como 'offline' ha varios ciclos, na verdade tinha um processo vivo desde 24 de julho (11+ dias) -- travado, nao offline: aceitava conexao TCP mas nunca respondia na camada HTTP (confirmado com curl real e uso de CPU perto de 0%). integrations/litert_lm_provider.py detectava corretamente a nao-resposta e acumulava failure_count (chegou a 41), abrindo o circuit breaker repetidamente -- o sistema de protecao funcionava, o zumbi nunca foi encerrado.",
+        "Acao corretiva imediata: processo zumbi encerrado (kill -9), porta liberada, state.json/pid obsoletos removidos, supervisor iniciou daemon novo e saudavel. Confirmado com inferencia real (chat/completions contra Qwen3-0.6B retornou resposta coerente em portugues) e doctor mudando de warn para pass no check litert_lm.",
+        "Bug real de diagnostico corrigido, causa raiz do PROXIMO zumbi seria igualmente invisivel: integrations/litert_lm_supervisor.py::_spawn_locked() redirecionava stdout/stderr do processo filho para subprocess.DEVNULL. Quando o litert-lm real morre logo apos o spawn (ex.: OSError Address already in use, reproduzido ao vivo tentando iniciar um segundo daemon com a porta ainda ocupada pelo zumbi), essa mensagem de erro real e especifica era descartada -- o supervisor so via 'PID morreu, falha N', sem pista nenhuma. Diagnosticar exigiu reproducao manual fora do supervisor.",
+        "Correcao: SupervisorConfig.log_path novo (<runtime_dir>/litert-lm.log); _spawn_locked() abre esse arquivo em append e redireciona stdout/stderr do filho para ele em vez de DEVNULL. scripts/litert-lm-start.sh --log atualizado: quando nao ha unidade systemd --user instalada (caso comum neste ambiente), mostra as ultimas 50 linhas desse arquivo real em vez de so reportar 'consulte o journal' sem alternativa concreta.",
+        "TDD: novo teste tests/test_r212_litert_supervisor.py::test_spawn_redireciona_stdout_stderr_para_arquivo_de_log_nao_devnull (RED antes, GREEN depois), 19/19 no arquivo (era 18).",
+        "Limitacoes genuinamente fora do controle deste codigo, documentadas e nao escondidas: (1) latencia real de cold-start do modelo padrao (gemma-4-E2B, 2.4GB) excede 120s neste hardware sem GPU mesmo com o daemon saudavel -- nao e mais travamento permanente, mas continua lento; trocar o modelo padrao e decisao editorial, fora de escopo; (2) subagentes nao invocaveis via 'opencode run --agent <nome>' -- comportamento do binario externo opencode (cai para o agente primario build), nada em codigo deste repositorio controla isso.",
+        "Suite completa: 2694 aprovados (+1), 0 falhas, 56 pulados -- zero regressao."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "'Offline' e 'travado' sao estados muito diferentes e exigem diagnosticos muito diferentes -- um processo vivo mas nao-responsivo pode acumular failure_count indefinidamente sem que ninguem nunca o mate, porque o supervisor so sabe verificar responsividade, nao tem (nem deveria ter sem cuidado extra) autoridade para matar processos que nao criou nesta sessao.",
+        "DEVNULL em stdout/stderr de um processo filho e uma escolha de design que parece inofensiva (menos ruido) mas apaga exatamente a informacao necessaria para diagnosticar por que um processo morreu -- o custo de guardar esses logs (um arquivo pequeno, sobrescrito/append) e muito menor que o custo de precisar reproduzir manualmente uma falha fora do sistema que deveria te-la capturado.",
+        "Nem toda 'correcao' pedida e corrigivel em codigo -- a segunda limitacao (subagentes via --agent) e comportamento intencional de uma ferramenta externa, e a resposta honesta e diferenciar 'corrigi a causa real' de 'documentei por que isso nao e meu para corrigir', nao fingir uma correcao que nao existe."
+      ]
     }
   ]
 }

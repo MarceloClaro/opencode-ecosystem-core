@@ -490,6 +490,32 @@ def test_spawn_ignora_overrides_e_mantem_argv_fixo_em_loopback(tmp_path: Path):
     assert Path(second_kwargs["cwd"]).resolve() == PROJECT_ROOT
 
 
+def test_spawn_redireciona_stdout_stderr_para_arquivo_de_log_nao_devnull(tmp_path: Path):
+    """SPEC-935-R395: antes desta correção, stdout/stderr do processo filho
+    eram descartados (DEVNULL). Quando o litert-lm real morria logo após o
+    spawn (ex.: 'Address already in use' por uma porta ocupada por um
+    processo travado/órfão), esse diagnóstico era perdido e o supervisor só
+    via 'processo morreu, falha N', sem nenhuma pista da causa real --
+    exigindo reprodução manual fora do supervisor para descobrir o motivo."""
+
+    api = _load_supervisor_api()
+    process_factory = mock.Mock(return_value=FakeProcess(pid=505))
+    supervisor = _new_supervisor(
+        api,
+        tmp_path,
+        process_factory=process_factory,
+        readiness_probe=mock.Mock(return_value=False),
+    )
+
+    supervisor.ensure(non_blocking=True)
+
+    _argv, kwargs = _spawn_call(process_factory)
+    assert kwargs.get("stdout") != subprocess.DEVNULL, "stdout não pode mais ser descartado"
+    assert kwargs.get("stderr") != subprocess.DEVNULL, "stderr não pode mais ser descartado"
+    log_path = tmp_path / "litert-lm.log"
+    assert log_path.exists(), "spawn deve criar/abrir um arquivo de log real no runtime_dir"
+
+
 # ── CA4: circuit breaker ───────────────────────────────────────────────────────
 
 

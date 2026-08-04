@@ -37,7 +37,12 @@ case "${1:-ensure}" in
         if systemctl --user cat litert-lm.service >/dev/null 2>&1; then
             exec journalctl --user -u litert-lm.service -n 50 --no-pager
         fi
-        echo "Unit litert-lm.service não instalada; consulte o journal/processo supervisor." >&2
+        LOG_PATH="$(env PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}" "$PYTHON_BIN" -c \
+            'from integrations.litert_lm_supervisor import SupervisorConfig; print(SupervisorConfig().log_path)')"
+        if [ -s "$LOG_PATH" ]; then
+            exec tail -n 50 "$LOG_PATH"
+        fi
+        echo "Unit litert-lm.service não instalada e $LOG_PATH ainda vazio/ausente — nenhum spawn real registrado ainda." >&2
         exit 1
         ;;
     ensure|start|"")
