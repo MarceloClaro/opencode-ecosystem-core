@@ -3765,6 +3765,28 @@
         "'Funciona' e 'todas as partes tem sinal real' sao perguntas diferentes -- um sistema pode estar genuinamente integrado (todo agente registrado, MetaBus/Trust/Reflexion ativos) e ainda ter um componente interno morto (10% do peso de uma decisao sempre constante) que so aparece ao rodar com dados reais e inspecionar as cabecas individualmente, nao so o ranking final agregado.",
         "A correcao obvia (status busy/available) teria sido inutil por causa de uma interacao com outra parte do sistema (hard gates ja filtram por status antes da pontuacao) -- vale sempre checar como um sinal proposto interage com o resto do pipeline antes de implementar, nao so se ele faz sentido isoladamente."
       ]
+    },
+    {
+      "round_id": "R393",
+      "objective": "Usuario perguntou se os 3 CLIs (OpenCode, Antigravity, Claude Code) estao todos funcionais; apos investigacao ao vivo achar 2 bugs reais no bridge do Antigravity, usuario pediu para corrigir.",
+      "changes": [
+        "Testados os 3 binarios reais instalados neste ambiente (opencode v1.18.11, agy v1.1.8, claude). OpenCode CLI carregou de verdade 216 agentes incluindo o catalogo custom deste ecossistema, com a correcao de permissao do contextscout (R391) propagada corretamente.",
+        "Bug real #1 em integrations/antigravity/bridge.py::delegate(): montava [agy, 'run', '--agent', X, '--prompt', Y] -- o binario real agy nao tem subcomando run nem flag --prompt nesse formato (confirmado via agy --help). O comando antigo faz o agy tentar abrir uma sessao TUI interativa, que falha com 'bubbletea: error opening TTY'.",
+        "Bug real #2 (mais grave): esse erro sai com returncode==0. delegate() so checava returncode para decidir status completed -- toda delegacao, sempre, reportava sucesso mesmo nao tendo feito nada util. Confirmado ao vivo rodando o bridge real antes da correcao.",
+        "Corrigido: delegate() agora monta [agy, '--agent', X, '--print', Y, '--output-format', 'text'] (sintaxe real confirmada via testes manuais diretos do binario). Mesmo com returncode==0, se stdout comecar com 'CLI error:' ou 'Error:' (prefixos reais observados em duas classes de erro testadas -- TTY e modelo invalido), status vira failed.",
+        "Bug real #3 em integrations/cli_ecosystem_bridge.py: antigravity_cli.active checava a existencia de AGENTS.md -- que e documentacao do OpenCode CLI (conforme sua propria primeira linha), sem relacao com Antigravity. Trocado por shutil.which('agy'), o sinal real.",
+        "Bug real #4: get_unified_status() retornava unified_status='fully_synchronized' como STRING FIXA, independente de qualquer verificacao real. Passa a ser computado a partir de discover_cli_capabilities() -- so fully_synchronized quando os 3 ecossistemas estao de fato ativos, senao partially_synchronized com lista real de ausentes.",
+        "TDD: tests/test_r393_antigravity_bridge_delegate_fix.py (5 testes, incluindo 1 de integracao real contra o binario agy, pulado automaticamente se ausente) + 2 testes novos e 2 corrigidos em tests/test_r233_cli_ecosystem_unification.py (que antes travava a asserção na string fixa incorreta).",
+        "Verificacao end-to-end real (nao so mock): AntigravityBridge().delegate('responda apenas: bridge corrigido', ...) retornou {status: completed, stdout: 'bridge corrigido'} -- delegacao real, resposta real de modelo via agy.",
+        "Lacuna remanescente documentada, nao escondida: agy agents continua retornando zero agentes -- nenhum dos 205+ agentes do catalogo esta descoberto pelo Antigravity CLI como agente selecionavel via --agent. Corrigir a sintaxe nao resolve essa integracao mais profunda. Claude Code CLI tambem continua sem .claude/agents/ -- seu mecanismo nativo de subagentes nao enxerga o catalogo.",
+        "Suite completa: 2682 aprovados (+8), 0 falhas, 55 pulados -- zero regressao."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Perguntar 'funciona de verdade?' sobre uma integracao com ferramenta externa exige testar o binario real, nao so ler o codigo Python que o invoca -- o codigo parecia razoavel (subprocess.run com args plausiveis) mas usava uma sintaxe de CLI que nunca existiu na ferramenta real instalada.",
+        "Um bug de deteccao de falha (returncode==0 mas saida e erro) e mais perigoso que o bug de sintaxe em si: o codigo rodava, nao lancava excecao, e reportava 'completed' -- um sistema que consumisse esse resultado confiaria numa delegacao que nunca aconteceu. Vale sempre checar o CONTEUDO da saida, nao so o codigo de saida, quando a ferramenta externa e conhecida por as vezes sair 0 em erro.",
+        "Uma string de status fixa ('fully_synchronized') e um overclaim de baixo esforco para introduzir e alto custo para descobrir -- so apareceu ao testar os 3 CLIs individualmente com binarios reais, nao ao ler a funcao isoladamente."
+      ]
     }
   ]
 }

@@ -49,7 +49,17 @@ class AntigravityBridge:
 
     def delegate(self, prompt: str, agent: str = "default",
                  timeout: int = 300) -> Dict[str, Any]:
-        """Delega uma tarefa ao Antigravity CLI (modo síncrono)."""
+        """Delega uma tarefa ao Antigravity CLI (modo síncrono).
+
+        A CLI real (``agy``) não tem subcomando ``run`` nem flag
+        ``--prompt``: o modo não-interativo é ``--print`` (alias ``-p``),
+        combinado com ``--agent`` e ``--output-format``. Usar a sintaxe
+        errada faz o ``agy`` tentar abrir uma sessão de TUI interativa,
+        que falha com ``bubbletea: error opening TTY`` e ainda assim sai
+        com ``returncode == 0`` — por isso a saída também é inspecionada
+        por esse prefixo de erro conhecido, mesmo quando o código de saída
+        sozinho sugeriria sucesso.
+        """
         if not self.available:
             handoff = self.enqueue_handoff({"prompt": prompt, "agent": agent})
             return {
@@ -59,12 +69,20 @@ class AntigravityBridge:
             }
         try:
             proc = subprocess.run(
-                [self.cli_command, "run", "--agent", agent, "--prompt", prompt],
+                [
+                    self.cli_command,
+                    "--agent", agent,
+                    "--print", prompt,
+                    "--output-format", "text",
+                ],
                 capture_output=True, text=True, timeout=timeout,
             )
+            stdout = proc.stdout[-4000:]
+            silent_cli_failure = proc.stdout.lstrip().startswith(("CLI error:", "Error:"))
+            status = "completed" if proc.returncode == 0 and not silent_cli_failure else "failed"
             return {
-                "status": "completed" if proc.returncode == 0 else "failed",
-                "stdout": proc.stdout[-4000:],
+                "status": status,
+                "stdout": stdout,
                 "stderr": proc.stderr[-1000:],
                 "returncode": proc.returncode,
             }

@@ -11,6 +11,7 @@ SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 from __future__ import annotations
 
 import os
+import shutil
 import sys
 import json
 import logging
@@ -40,7 +41,11 @@ class CliEcosystemBridge:
 
         has_opencode = os.path.exists(opencode_json)
         has_claude = os.path.exists(claude_md)
-        has_antigravity = os.path.exists(agents_md)
+        # AGENTS.md é documentação do OpenCode CLI (ver sua própria primeira
+        # linha), não um artefato do Antigravity CLI -- checar sua existência
+        # não diz nada sobre o Antigravity estar instalado. O sinal real é o
+        # binário ``agy`` (SPEC-935-R393).
+        has_antigravity = shutil.which("agy") is not None
 
         agents_count = len(lazy_agent_catalog.list_agents())
         specs_count = len(spec_registry.specs)
@@ -92,13 +97,24 @@ class CliEcosystemBridge:
         }
 
     def get_unified_status(self) -> Dict[str, Any]:
-        """Retorna o relatório consolidado de prontidão dos 3 ecossistemas CLI."""
+        """Retorna o relatório consolidado de prontidão dos 3 ecossistemas CLI.
+
+        ``unified_status`` é computado a partir de ``discover_cli_capabilities()``
+        -- nunca uma string fixa reportada independentemente do que foi de
+        fato verificado (SPEC-935-R393). "fully_synchronized" só é honesto
+        quando os três binários/artefatos de configuração estão presentes;
+        caso contrário, reporta "partially_synchronized" e lista quais
+        ecossistemas estão ausentes.
+        """
         caps = self.discover_cli_capabilities()
         claude_sync = self.export_agent_cards_to_claude()
         agy_sync = self.export_skills_to_antigravity()
 
+        missing = [name for name, info in caps.items() if not info["active"]]
+
         return {
-            "unified_status": "fully_synchronized",
+            "unified_status": "fully_synchronized" if not missing else "partially_synchronized",
+            "missing": missing,
             "ecosystems": caps,
             "claude_integration": claude_sync,
             "antigravity_integration": agy_sync,
