@@ -142,9 +142,16 @@ def test_doc21_open_a_uses_language_appropriate_quotes_without_umlaut():
 
 
 def test_doc25_preserves_two_distinct_utterances_in_all_languages():
-    pt = _text("fragmentos/doc/DOC-25.tex")
-    en = _text("en/fragmentos/doc/DOC-25.tex")
-    zh = _text("zh/fragmentos/doc/DOC-25.tex")
+    # R398: a cena onde esta fala ocorre (a consulta médica de Lúcia) vivia
+    # duplicada — uma vez em LUC-05 e outra na cauda de DOC-25, que carregava
+    # uma cópia inteira de LUC-03/04/05 colada após sua "Nota final". A cauda
+    # foi removida e a versão polida migrou para os fragmentos LUC, que são o
+    # lugar estrutural da investigação (Parte 4). A invariante que este teste
+    # protege — duas falas distintas separadas por narração — continua valendo,
+    # agora no fragmento correto.
+    pt = _text("fragmentos/luc/LUC-05.tex")
+    en = _text("en/fragmentos/luc/LUC-05.tex")
+    zh = _text("zh/fragmentos/luc/LUC-05.tex")
     assert (
         r"\textquotedblleft{\textit{Estranho.\textquotedblright{}} "
         r"Ele anotou algo no prontuário. }\textquotedblleft{\textit{Vou pedir "
@@ -155,9 +162,13 @@ def test_doc25_preserves_two_distinct_utterances_in_all_languages():
         r"He wrote something in the chart. }\textquotedblleft{\textit{I will order "
         in en
     )
+    # A edição ZH guarda a mesma cena na forma bem-construída (grupos vazios
+    # `{}` após o comando de aspas, em vez do grupo espúrio `{` que a cauda de
+    # DOC-25 carregava). O invariante protegido é o mesmo: duas falas
+    # distintas separadas por narração.
     assert (
-        r"\textquotedblleft{奇怪。\textquotedblright{}}他在病历上记了什么。"
-        r"\textquotedblleft{我开一些检查。只是为了保险。\textquotedblright{}}"
+        r"\textquotedblleft{}奇怪。\textquotedblright{}他在病历上记了什么。"
+        r"\textquotedblleft{}我开一些检查。只是为了保险。\textquotedblright{}"
         in zh
     )
 

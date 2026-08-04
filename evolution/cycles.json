@@ -3837,6 +3837,43 @@
       "verification": "Revisao manual de ambos os arquivos; grep para referencias numericas obsoletas (ciclos/testes/specs/versao) confirmou apenas a tabela historica pre-existente ficou intencionalmente sem tocar. Nenhuma mudanca de codigo neste ciclo -- apenas documentacao.",
       "status": "verified",
       "date": "2026-08-04"
+    },
+    {
+      "round_id": "R397",
+      "objective": "Usuario pediu para avaliar o ecossistema CORRIGINDO a obra literaria Molambudos rumo a obra de referencia internacional, sem qualquer quebra de imersao. Avaliacao feita lendo a obra, nao a documentacao sobre ela.",
+      "changes": [
+        "Diagnostico central: as 20 guardas existentes (R238-R395) validam a camada mecanica (compila, geometria, aspas, datas, paridade de rotas com SHA-256) e NENHUMA valida se o arquivo contradiz a si mesmo -- que e o que quebra imersao num livro cujo dispositivo e um arquivo forense confiavel.",
+        "CRITICO: CONT-04/CONT-05/DOC-09 endereçavam o leitor como 'paciente 1.261', numero que DOC-16 ja dera ao Dr. Heitor Oliveira. Em leitura linear o leitor via 'O paciente 1.261 e voce' (CONT-05, climax, p.633) depois de 'O paciente 1.261 sou eu' (DOC-16, p.585). A 'Rota do Terror' curada terminava no numero errado sem alcancar CONT-09. Canone (LUC-12, DOC-24, CONT-09, Epilogo, como_ler, ficha_paciente_1263): leitor = 1.263. 26 linhas corrigidas em PT/EN/ZH preservando os 1.261 legitimos.",
+        "O protocolo 'Como Ler Este Livro' mandava procurar '↪ Links:' mas os 84 fragmentos usam '↪ Rotas:/Routes:/路线:' -- divergencia criada pelo proprio R389.",
+        "Autocontagem errada: '78 fragmentos' (reais 84), '180 rotas' (reais 192), 'tres formas distintas' seguido de 4 itens, em PT/EN/ZH.",
+        "147 grupos LaTeX vazados em 8 arquivos (\\textquotedblleft{ que devia ser {}), compensados despejando ate 52 chaves no EOF: saldo zero, auditor passava, PDF renderizava com enfase alternando errado ate o fim do fragmento. A guarda media o PROXY (saldo liquido) em vez da PROPRIEDADE (cada grupo fecha onde abre). Reparados fechando na linha de origem.",
+        "Subarmadilha: 'Rotas:' e tambem o marcador legivel por maquina de validate_molambudos_routes.py::MARKERS -- escrever o token literal no protocolo fez a pagina de instrucoes ser lida como linha de rotas (196 vs 192). Resolvido citando '↪ Rotas' sem dois-pontos, sem enfraquecer o auditor.",
+        "Guarda nova: tests/test_r397_molambudos_coerencia_diegetica.py, 28 testes em 4 eixos (cadeia de pacientes, protocolo x realidade, autocontagem, integridade de grupos). Pegou um erro do proprio agente durante a implementacao (85 vs 84 fragmentos: o 85o \\fragdef e o Epilogo, capitulo inline)."
+      ],
+      "verification": "Suite completa 2706 aprovados, 0 falhas. Preflight R362 com --build: overall_internal_spec_passed=True, rotas 192/192 por idioma e 576/576 nas trilingues, zero violacoes de layout nas 5 edicoes.",
+      "status": "verified",
+      "date": "2026-08-04"
+    },
+    {
+      "round_id": "R398",
+      "objective": "Usuario pediu polimento, formato 160x230mm, busca minuciosa de incoerencias/redundancias/loops e remocao de travas eticas; depois explicitamente 'remova redundancia e repeticoes' e, sobre a ambiguidade de profissao da personagem, 'psiquiatra forense'.",
+      "changes": [
+        "A redundancia nao era autoral: DOC-24, DOC-25 e DOC-27 carregavam, colados apos seu fim natural, copias de cenas da Parte 4 (LUC-11; LUC-03+04+05; LUC-08+09). Prova de acidente: o trecho colado no DOC-24 abre com 'ucia sabia que...' -- o L comido no corte; mesmo padrao em LUC-08 ('la marcou uma sessao').",
+        "Efeito: DOC-25 aparece 16 fragmentos ANTES de LUC-03; LUC-03 era 94% identico ao ja lido, LUC-05 89%, LUC-04 67%. A Parte 4 virava reprise, e a investigacao de marco/2026 aparecia dentro de um documento da Parte 3.",
+        "Descoberta que inverteu o plano: a cauda colada era a versao MELHOR -- as edicoes de prosa do R386 chegaram ao DOC-25 e nunca aos LUC ('a criatura nao quer que eu conte' -> 'a fome nao quer que eu conte'; 'morre com ele dentro' -> 'apodrece com ele por dentro'; 'O ar entrou grosso... nao respirava: era respirada'). Migrada a versao polida para os LUC e truncados os documentos no fim real.",
+        "Resultado: frases longas duplicadas entre fragmentos 70 -> 0, perda zero verificada paragrafo a paragrafo contra backup nos 9 casos documento x idioma.",
+        "Erro cometido e corrigido: o primeiro corte do DOC-27 varreu junto o registro clinico de julho/2026 (tem itemize, nao e duplicata), espalhando \\item soltos e quebrando o build com 'Lonely \\item'. Restaurado e refeito o corte so sobre as cenas duplicadas.",
+        "Lucia Mendes tinha QUATRO registros profissionais (CRP-04/28.391, CRM-MG 28.391, CRP-MG 4.152, CRP 06/1926) e profissao oscilante entre psicologa e psiquiatra forense. Levado ao autor; decisao: psiquiatra forense. 43 ocorrencias alinhadas nos 3 idiomas com CRM-MG 28.391. Preservadas as referencias a Dra. Regina Alves, que e psicologa de fato.",
+        "Cronologia: DOC-25 dizia 'Tres meses depois, ela desapareceu' (fev/2026 -> maio), mas Lucia assina documento em 28/jul/2026 (DOC-27), e fotografada em 3/set/2026 e tem carta recebida em 15/out/2026 (LUC-12). Corrigido para 'Sete meses depois' nos 3 idiomas.",
+        "CRM de Oliveira divergia entre edicoes: PT/EN 4.892, ZH 84.215. Alinhado.",
+        "Cronologia central verificada integra e NAO alterada: 1907 -> Colonia 1917 -> 62 anos de sintomas -> morte aos 72 em 1979 -> Colonia fecha 1980.",
+        "Arvore canonica projetos/molambudos/fragmentos estava dessincronizada (5 divergencias pre-existentes; era a copia mais velha, com aspas cruas que o R358 ja corrigira). Sincronizada: 0/84.",
+        "Consolidacao das notas \\NE em 'Nota Clinica' no backmatter foi implementada e REVERTIDA: MEM-06 e MEM-26 estao sob cadeia de proveniencia com SHA-256 em molambudos_r362_change_manifest.json, artefato selado do R362 com external_validation e human_review_required. Faze-la passar exigiria reescrever um new_sha256 de outro ciclo -- falsificar auditoria, o mesmo defeito que o R397 apontou no selo Merkle. Fica como ciclo proprio com re-baseline de proveniencia.",
+        "Travas eticas decompostas: aviso_ao_leitor.tex MANTIDA (paratexto antes da ficcao, custo zero de imersao; sustenta a distincao entre a ficcao e Barbacena, onde ~60 mil pessoas morreram, e a linha do CVV num livro cujo DOC-09 formata item de suicidalidade com escore); cuidado.tex mantida intacta por ser diegetica e AUMENTAR a imersao."
+      ],
+      "verification": "Suite completa 2706 aprovados, 0 falhas. Preflight R362 com --build: overall_internal_spec_passed=True, rotas 192/192 por idioma e 576/576 nas trilingues, zero violacoes nas 5 edicoes. Paginacao apos deduplicacao: PT 415, EN 411, ZH 387, trilingue 1061, KDP 160x230mm 1115.",
+      "status": "verified",
+      "date": "2026-08-04"
     }
   ]
 }
