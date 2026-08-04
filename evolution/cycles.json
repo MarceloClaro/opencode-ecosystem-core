@@ -3825,6 +3825,18 @@
         "DEVNULL em stdout/stderr de um processo filho e uma escolha de design que parece inofensiva (menos ruido) mas apaga exatamente a informacao necessaria para diagnosticar por que um processo morreu -- o custo de guardar esses logs (um arquivo pequeno, sobrescrito/append) e muito menor que o custo de precisar reproduzir manualmente uma falha fora do sistema que deveria te-la capturado.",
         "Nem toda 'correcao' pedida e corrigivel em codigo -- a segunda limitacao (subagentes via --agent) e comportamento intencional de uma ferramenta externa, e a resposta honesta e diferenciar 'corrigi a causa real' de 'documentei por que isso nao e meu para corrigir', nao fingir uma correcao que nao existe."
       ]
+    },
+    {
+      "round_id": "R396",
+      "objective": "Usuario pediu: 'faca e atualize o readme,md e suas arquiteturas' -- sincronizar README.md e ARCHITECTURE.md com o trabalho real do ciclo R389-R395 (build trilingue Molambudos, cabeca load do AttentionRouter, correcoes reais nas 3 CLIs externas, diagnostico do supervisor LiteRT-LM).",
+      "changes": [
+        "README.md: badges atualizados (versao 3.7.0->3.8.0, testes 2695->2750, ciclos 199->212, specs 223->237); paragrafo intro estendido; nova secao narrativa 'Act VIII' (R382-R395); contagem de placeholders corrigida (57->56, com explicacao do contextscout); nova secao tecnica '16. Auditoria Real dos Tres CLIs Externos e do Daemon Local (R391-R395)'; linha de contagem de ciclos e bloco de estatisticas do rodape atualizados para 212 ciclos / 2.750 testes / 205 agentes / 237 specs, versao v3.8.0.",
+        "ARCHITECTURE.md: cabecalho e paragrafo intro atualizados para v3.8 mencionando a auditoria real dos 3 CLIs e do supervisor LiteRT-LM; nova secao final 'Auditoria Real de Fim-a-Fim: CLIs Externos e Supervisor LiteRT-LM (R391-R395)' com 2 diagramas mermaid (AttentionRouter cabeca load; ciclo de vida do spawn do supervisor) e tabela das 4 pontes de CLI corrigidas (Antigravity bridge, cli_ecosystem_bridge, scanners/pipeline ReversaScanner, /pypi) e tabela de specs do bloco (R391-R395).",
+        "Tabela historica 'Metricas de Maturidade' (v3.0.0 vs v3.2.0) deliberadamente NAO reescrita -- e um snapshot congelado de um marco anterior, fora do escopo desta atualizacao de documentacao (seria um trabalho maior e separado de reconstruir todo o historico de metricas)."
+      ],
+      "verification": "Revisao manual de ambos os arquivos; grep para referencias numericas obsoletas (ciclos/testes/specs/versao) confirmou apenas a tabela historica pre-existente ficou intencionalmente sem tocar. Nenhuma mudanca de codigo neste ciclo -- apenas documentacao.",
+      "status": "verified",
+      "date": "2026-08-04"
     }
   ]
 }
