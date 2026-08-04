@@ -5,7 +5,32 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R392 — cabeça "load" do AttentionRouter deixa de ser constante morta** (2026-08-03)
+- **Branch:** `main` · última entrega: **R393 — bridge do Antigravity CLI corrigido (sintaxe real + falha silenciosa)** (2026-08-03)
+- **R393 (2026-08-03) — "todos estão funcional nos cli (opencode,
+  antigravity, claude)?":** testados os 3 binários reais instalados
+  (`opencode` v1.18.11, `agy` v1.1.8, `claude`). **OpenCode CLI: funciona
+  de verdade** — carrega 216 agentes reais, inclusive a correção de
+  permissão do `contextscout` (R391) propagada corretamente. **Antigravity:
+  2 bugs reais achados e corrigidos.** `AntigravityBridge.delegate()`
+  montava `agy run --agent X --prompt Y` — o binário real não tem
+  subcomando `run` nem essa flag; a sintaxe real é `--agent`/`--print`/
+  `--output-format`. Pior: o erro resultante (`bubbletea: error opening
+  TTY`) saía com `returncode == 0`, e `delegate()` só checava o código de
+  saída — **toda delegação, sempre, reportava sucesso mesmo não tendo
+  feito nada**. Corrigido: sintaxe real + detecção de prefixos de erro
+  conhecidos mesmo com `returncode == 0`. Também corrigido
+  `cli_ecosystem_bridge.py`: `antigravity_cli.active` checava a
+  existência de `AGENTS.md` (que é documentação do *OpenCode* CLI, não
+  tem relação com Antigravity) — trocado por `shutil.which("agy")`; e
+  `get_unified_status()` retornava `"fully_synchronized"` como **string
+  fixa**, independente de qualquer verificação — agora é computado de
+  verdade. Verificação end-to-end real (não só mock): delegação via `agy`
+  completou com resposta real de modelo. **Lacuna documentada, não
+  escondida**: `agy agents` continua sem nenhum dos 205+ agentes do
+  catálogo — corrigir a sintaxe não resolveu essa integração mais
+  profunda; Claude Code CLI também segue sem `.claude/agents/`. Suíte
+  completa: **2682 aprovados (+8), 0 falhas**. Ver
+  `specs/SPEC-935-R393-antigravity-bridge-real-cli-syntax.md`.
 - **R392 (2026-08-03) — "funciona com uma rede transformer sem ser uma
   cascata vazia?" → "tem como implementa?":** investigação ao vivo
   (`AttentionRouter.explain()` sobre os 210 agentes reais do Blackboard)
