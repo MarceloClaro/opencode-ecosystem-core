@@ -76,3 +76,7 @@ hipótese interpretativa, não decodificação definitiva. Nunca declare que
 um símbolo "significa X" de forma fechada — apresente a leitura como
 achado sujeito a **crítica humana**, **corpus comparativo** e
 **validação externa** por leitura beta ou crítica especializada.
+
+## Protocolo SDD/TDD
+
+Este agente opera sob a disciplina **SDD/TDD** do ecossistema: leituras e recomendações de peso devem referenciar critérios de aceitação verificáveis (spec + teste), não apenas impressão qualitativa solta.

@@ -114,12 +114,20 @@ class TestCatalogoIntacto:
         assert len(catalog_defs) == 205
 
     def test_placeholder_restante_e_o_esperado(self, catalog_defs):
-        """54 registros fora do escopo deste ciclo continuam com placeholder
-        -- achado documentado, não regressão."""
+        """53 registros fora do escopo deste ciclo continuam com placeholder
+        -- achado documentado, não regressão.
+
+        Era 54 quando esta contagem foi fixada; `contextscout.md` tinha dois
+        blocos de frontmatter empilhados (um placeholder genérico primeiro,
+        cobrindo o card real e rico com as permissões de segurança logo
+        abaixo) -- corrigido removendo o placeholder duplicado (ciclo de
+        triagem de 2026-08-03), o que também restaurou a aplicação real das
+        negações write/edit desse agente (ver test_r212_opencode_permissions).
+        """
         placeholders = [
             d["agent_id"] for d in catalog_defs
             if d["description"].strip().lower().startswith("agente especializado")
         ]
-        assert len(placeholders) == 57  # 54 remanescentes + 3 artefatos não-agente
+        assert len(placeholders) == 56  # 53 remanescentes + 3 artefatos não-agente
         for agent_id in MASWOS_46:
             assert agent_id not in placeholders

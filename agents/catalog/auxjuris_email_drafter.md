@@ -7,7 +7,7 @@ skills:
   name: Auxjuris Email Drafter
   description: >-
     Executa tarefas especializadas de auxjuris email drafter conforme protocolo SDD/TDD.
-  tags: [auxjuris, email, drafter]
+  tags: [auxjuris, email, drafter, legal]
   examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
 tags: [auxjuris, drafter, email, legal, specialist-agent]
 examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]

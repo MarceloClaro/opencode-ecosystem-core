@@ -7,7 +7,7 @@ skills:
   name: Auxjuris Document Summarizer
   description: >-
     Executa tarefas especializadas de auxjuris document summarizer conforme protocolo SDD/TDD.
-  tags: [auxjuris, document, summarizer]
+  tags: [auxjuris, document, summarizer, legal]
   examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
 tags: [auxjuris, document, legal, specialist-agent, summarizer]
 examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]

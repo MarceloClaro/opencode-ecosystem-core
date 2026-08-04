@@ -3,7 +3,7 @@ spec_id: SPEC-935-R380
 title: Enriquecimento do catálogo MASWOS — descrições reais em vez de placeholder
 component: agents/catalog/*.md (46 arquivos MASWOS)
 status: verified
-test_file: tests/test_r374_maswos_catalog_enrichment.py
+test_file: tests/test_r380_maswos_catalog_enrichment.py
 ---
 
 # SPEC-935-R380 — Enriquecimento do Catálogo MASWOS

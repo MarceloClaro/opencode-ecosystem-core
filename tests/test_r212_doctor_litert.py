@@ -31,6 +31,13 @@ _OTHER_DOCTOR_CHECKS = (
     ("_check_corrigendum", "corrigendum"),
     ("_check_external_clis", "external_clis"),
     ("_check_llm_providers", "llm_providers"),
+    # Checks adicionados a run_doctor() em ciclos posteriores ao R212
+    # (Colibri/OLMoE, LLM Reduction Layer, cobertura de episteme do R368) —
+    # sem isolá-los aqui, rodam de verdade e podem chamar time.time(),
+    # estourando o relógio falso de 2 valores usado por este teste.
+    ("_check_colibri", "colibri"),
+    ("_check_llm_reduction_metrics", "llm_reduction_metrics"),
+    ("_check_episteme_coverage", "episteme_coverage"),
 )
 
 _AFFIRMATIVE_INFERENCE_CLAIMS = (

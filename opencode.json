@@ -916,12 +916,28 @@
       }
     },
     "contextscout": {
-      "description": "Agente especializado contextscout",
+      "description": "> **Mission**: Discover and recommend context files from `.opencode/context/` (or custom_dir from paths.json) ranked by priority. Suggest ExternalScout when a framework/library has no internal coverag",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/contextscout.md}",
       "permission": {
-        "edit": "deny",
-        "bash": "deny"
+        "read": {
+          "*": "allow"
+        },
+        "grep": {
+          "*": "allow"
+        },
+        "glob": {
+          "*": "allow"
+        },
+        "bash": {
+          "*": "deny"
+        },
+        "edit": {
+          "*": "deny"
+        },
+        "task": {
+          "*": "deny"
+        }
       }
     },
     "contract-manager": {
@@ -1081,7 +1097,8 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
-      }
+      },
+      "model": "opencode/deepseek-v4-pro"
     },
     "kdp-ebook-epub-phd": {
       "description": "Especialista PhD Amazon KDP em ePub, Kindle, KPF, sumário navegável, metadados digitais e conversão LaTeX/Markdown.",
@@ -1090,7 +1107,8 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
-      }
+      },
+      "model": "opencode/deepseek-v4-pro"
     },
     "kdp-final-qa-phd": {
       "description": "Gate PhD Amazon KDP de QA final para pacote de upload, checklist, evidências, riscos residuais e instruções finais.",
@@ -1099,7 +1117,8 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
-      }
+      },
+      "model": "opencode/deepseek-v4-pro"
     },
     "kdp-interior-layout-phd": {
       "description": "Especialista PhD Amazon KDP em miolo, trim size, margens internas/externas, sangria, LaTeX e PDF pronto para impressão.",
@@ -1108,7 +1127,8 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
-      }
+      },
+      "model": "opencode/deepseek-v4-pro"
     },
     "kdp-metadata-isbn-phd": {
       "description": "Especialista PhD Amazon KDP em ISBN, copyright, ficha catalográfica, metadados bibliográficos e consistência editorial.",
@@ -1117,7 +1137,8 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
-      }
+      },
+      "model": "opencode/deepseek-v4-pro"
     },
     "kdp-orchestrator-phd": {
       "description": "Orquestrador PhD Amazon KDP para coordenar miolo, capa, ePub, metadados, preflight e QA final de livros físicos e digitais.",
@@ -1126,7 +1147,8 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
-      }
+      },
+      "model": "opencode/deepseek-v4-pro"
     },
     "kdp-preflight-auditor-phd": {
       "description": "Auditor PhD Amazon KDP de preflight PDF para MediaBox, CropBox, fontes, imagens, hyperlinks, anotações e texto fora das margens.",
@@ -1135,7 +1157,8 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
-      }
+      },
+      "model": "opencode/deepseek-v4-pro"
     },
     "linguistic-corrector": {
       "description": "Agente especializado linguistic-corrector",

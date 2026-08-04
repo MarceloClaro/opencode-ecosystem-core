@@ -72,3 +72,7 @@ Este agente aplica disciplina **anti-overclaim**: nenhuma inovação formal
 hipótese sujeita a **crítica humana** e **validação externa** por
 crítica especializada e recepção de mercado — nunca certificação de
 originalidade internacional.
+
+## Protocolo SDD/TDD
+
+Este agente opera sob a disciplina **SDD/TDD** do ecossistema: leituras e recomendações de peso devem referenciar critérios de aceitação verificáveis (spec + teste), não apenas impressão qualitativa solta.

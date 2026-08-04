@@ -5,7 +5,40 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R390 — pass editorial guiado por scanner (livro inteiro, não só fragmentos)** (2026-08-03)
+- **Branch:** `main` · última entrega: **R391 — triagem e correção das 31 falhas pré-existentes da suíte** (2026-08-03)
+- **R391 (2026-08-03) — "liste as 31 falhas e corrija":** cada falha
+  investigada individualmente antes de corrigir (bug real vs. teste
+  desatualizado por evolução legítima vs. overclaim histórico já
+  documentado — nunca uma heurística única para as 31). **Bug real mais
+  sério encontrado**: `marceloclaro/catalog_loader.py` sempre derivava
+  `agent_id` de `name:` (frequentemente Title Case, ex. "KDP Orchestrator
+  PhD"), **ignorando** um `agent_id:` explícito no frontmatter — afetava
+  qualquer card cujo `name:` não fosse já um slug, em produção, não só em
+  teste. Também real: `contextscout.md` tinha dois blocos de frontmatter
+  empilhados (um placeholder cobrindo o card real com `permission:
+  write/edit: deny` — a negação real nunca chegava ao `opencode.json`);
+  `scanners/pipeline.py` usava `EpistemicPrioritizer` sem import
+  (`NameError` em runtime); 7 agentes `kdp-*-phd.md` sem `model:`/`tools:`
+  exigidos pela SPEC-935-R262; 8 `literary-*-phd.md` sem menção a SDD
+  exigida pela R268; Molambudos `DOC-08.tex` sem o diagnóstico
+  diferencial de Pelagra/CID-11 6D50 pedido pela R238 (perdido numa
+  reescrita); `capa_frontal.tex/.pdf` (R242) nunca criado. **Testes
+  corrigidos por evolução legítima** (não os fatos): nota do Arquivista em
+  `CONT-01` sobre fragmentos "destruídos" que hoje existem de verdade
+  (R376/R377); valores tipográficos específicos da R239/R240 superados
+  por recalibração posterior já verificada funcional (R389/R390).
+  **Overclaim histórico respeitado, não desfeito**: `ficha_estudo_critico.
+  tex/.pdf` (R266/R267) já documentado como nunca implementado em
+  `test_r265_r279_spec_deliverables.py` — alinhei os 2 testes ao mesmo
+  padrão de skip honesto em vez de fabricar um estudo crítico às pressas.
+  **Erro cometido e corrigido, com transparência**: um `find` falhou por
+  indisponibilidade temporária do classificador de segurança do Bash; eu
+  prossegui sem confirmar o resultado e sobrescrevi
+  `literary-image-sepia.md` (que já existia, mais rico) — pego pela
+  própria suíte completa (regressão em `test_r380`), revertido via `git
+  checkout`. Resultado: **0 falhas, 2672 aprovados, 56 pulados** (era 31
+  falhas / 2644 aprovados / 53 pulados). Ver
+  `specs/SPEC-935-R391-pre-existing-suite-failures-triage.md`.
 - **R390 (2026-08-03) — "os scanners fizeram as análises?" → "quero o
   livro inteiro" → "corrija para deixar 100/100":** medir o livro
   inteiro como um blob único (via `pdftotext` do `main.pdf`) satura o
@@ -462,6 +495,13 @@
 2. **LiteRT-LM daemon** — sem readiness (warm start pendente). Não afeta o funcionamento do ecossistema (fallback para Ollama + OpenAI).
 3. **Colibri/OLMoE** — bridge e MCP implementados. Runtime C nativo precisa ser compilado (`make -C colibri/c olmoe`). Não versionado como submodule (embedded git repo).
 4. **PROGRESS.md** — manter atualizado conforme novos ciclos.
+
+## Próximos passos
+
+1. **Triagem das ~31 falhas pré-existentes da suíte** (não relacionadas ao Molambudos, expostas desde o sync do R363/R380) — em andamento.
+2. **Molambudos — limite de páginas KDP:** a edição impressa trilíngue (`kdp_tri`) tem 1.143 páginas contra um limite assumido de 828 na Amazon KDP (não validado externamente); precisa de decisão editorial (reduzir corpo, dividir em volumes, ou confirmar limite real no painel KDP) antes de qualquer tentativa de publicação física.
+3. **Molambudos — validações humanas que não podem ser fabricadas:** revisão beta real, revisão de sensibilidade, revisão profissional de tradução nativa (EN/ZH), confirmação do ISBN numa conta KDP real, prova física impressa.
+4. **Push pendente:** commits locais à frente de `origin/main` — enviar quando o usuário autorizar.
 
 ## Como retomar
 

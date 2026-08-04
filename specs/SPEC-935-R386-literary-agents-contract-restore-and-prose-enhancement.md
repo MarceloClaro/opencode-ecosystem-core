@@ -3,7 +3,7 @@ spec_id: SPEC-935-R386
 title: Restaura contrato dos 9 agentes literários + caminho de relatórios arquivados + aprimoramento cirúrgico de prosa em CONT-01/CONT-02
 component: agents/catalog/literary-*.md, projetos/molambudos (fragmentos CONT-01/CONT-02)
 status: verified
-test_file: tests/test_r385_psychological_immersion_scanners.py (regressão do bug de fronteira de parágrafo), tests/test_r270..r276 (contrato restaurado)
+test_file: tests/test_r385_psychological_immersion_scanners.py
 ---
 
 # SPEC-935-R386 — Restauração de Contrato + Aprimoramento de Prosa

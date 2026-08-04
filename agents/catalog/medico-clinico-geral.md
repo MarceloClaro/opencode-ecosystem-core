@@ -8,9 +8,9 @@ skills:
   description: >-
     Executa tarefas especializadas de médico clínico geral — orquestrador clínico conforme protocolo
     SDD/TDD.
-  tags: [médico, clínico, geral]
+  tags: [médico, clínico, geral, clinica_geral]
   examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
-tags: [clínico, geral, médico, médico clínico geral — orquestrador clínico]
+tags: [clínico, geral, médico, médico clínico geral — orquestrador clínico, clinica_geral]
 examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
 agent_id: medico-clinico-geral
 ---

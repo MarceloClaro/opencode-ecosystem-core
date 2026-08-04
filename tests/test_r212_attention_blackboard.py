@@ -202,6 +202,14 @@ class _NoopEconomy:
         return None
 
 
+class _NoopReduction:
+    """Nunca atinge o threshold — força o fallback de atenção multi-cabeça,
+    preservando o comportamento testado antes da integração SPEC-967."""
+
+    def route(self, description: str) -> dict[str, Any]:
+        return {"agent": "", "confidence": 0.0, "method": "noop"}
+
+
 def _bare_orchestrator(allowed_agents: set[str]) -> MarceloClaroOrchestrator:
     """Monta somente o estado utilizado por ``_on_cfp``."""
 
@@ -213,6 +221,9 @@ def _bare_orchestrator(allowed_agents: set[str]) -> MarceloClaroOrchestrator:
     orchestrator.economy = _NoopEconomy()
     orchestrator.task_stakes = {}
     orchestrator._task_counter = 0
+    orchestrator.reduction_layer = _NoopReduction()
+    orchestrator.reduction_threshold = 0.85
+    orchestrator._llm_calls_saved = 0
     return orchestrator
 
 

@@ -1,18 +1,4 @@
 ---
-name: contextscout
-description: Agente especializado contextscout
-version: '1.0.0'
-skills:
-- id: contextscout
-  name: Contextscout
-  description: Executa tarefas especializadas de contextscout conforme protocolo SDD/TDD.
-  tags: [contextscout]
-  examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados]
-tags: [contextscout]
-examples: [Execute esta tarefa conforme especificação, Analise e reporte os resultados, Execute esta tarefa conforme especificação]
----
-
----
 name: ContextScout
 description: >-
   Discovers and recommends context files from .opencode/context/ ranked by priority. Suggests

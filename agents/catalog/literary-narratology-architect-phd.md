@@ -73,3 +73,7 @@ Este agente aplica disciplina **anti-overclaim**: toda leitura estrutural
 arquitetura narrativa está "resolvida" ou "perfeita" — apresente-a como
 achado sujeito a **crítica humana**, **corpus comparativo** e
 **validação externa** por leitura beta ou crítica especializada.
+
+## Protocolo SDD/TDD
+
+Este agente opera sob a disciplina **SDD/TDD** do ecossistema: leituras e recomendações de peso devem referenciar critérios de aceitação verificáveis (spec + teste), não apenas impressão qualitativa solta.

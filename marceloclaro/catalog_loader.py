@@ -451,7 +451,15 @@ def load_catalog_definitions(catalog_dir: str = CATALOG_DIR) -> List[Dict[str, A
             continue
 
         meta = _parse_frontmatter_v2(content)
-        name = meta.get("name") or os.path.splitext(os.path.basename(path))[0]
+        file_stem = os.path.splitext(os.path.basename(path))[0]
+        name = meta.get("name") or file_stem
+        # agent_id deve ser um identificador estável (slug), não o rótulo de
+        # exibição: honra um `agent_id:` explícito do frontmatter e, na
+        # ausência dele, cai para o nome do arquivo -- nunca para `name:`,
+        # que em vários cartões é um título em Title Case (ex.: "KDP
+        # Orchestrator PhD") e nunca bateria com o slug esperado pelos
+        # consumidores (build_config, testes de catálogo).
+        agent_id = meta.get("agent_id") or file_stem
 
         # Descrição: frontmatter > legado
         desc = meta.get("description", "").strip()
@@ -479,7 +487,7 @@ def load_catalog_definitions(catalog_dir: str = CATALOG_DIR) -> List[Dict[str, A
         episteme = str(episteme_raw).strip().lower() if episteme_raw else None
 
         definition = {
-            "agent_id": name,
+            "agent_id": agent_id,
             "name": name.replace("_", " ").title(),
             "description": desc or f"Agente especializado do catálogo: {name}",
             "capabilities": capabilities,
