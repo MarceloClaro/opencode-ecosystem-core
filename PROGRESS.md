@@ -5,7 +5,33 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R400 — todas as rotas levam ao Epílogo; nenhum ciclo aprisiona; nenhum fragmento fora da rede** (2026-08-04)
+- **Branch:** `main` · última entrega: **R401 — Mapas 2 e 3 gerados do corpus; Índice de Fragmentos completado (faltavam 11); contagens do livro alinhadas** (2026-08-05)
+- **R401 (2026-08-05) — "faça o mesmo com os mapas de grafos 2 e 3":**
+  `molambudos_grafo_rotas.py` ganhou `--mapa {rotas,enredo,linear,todos}` e passou
+  a derivar a estrutura de partes do próprio `main.tex`, não de lista mantida à
+  mão — que foi como as legendas acabaram dizendo "78 fragmentos" muito depois de
+  o corpus passar de 78. **Mapa 2**: atos agrupando as 5 partes (Trauma 9,
+  Institucionalização 41, O Ciclo 35), faixas com altura **proporcional ao
+  conteúdo** (faixas iguais dariam ao Ato 1 o mesmo peso do Ato 2, sugerindo
+  equilíbrio que a obra não tem) e as **55 rotas que atravessam atos** em
+  vermelho. **Mapa 3**: 85 entradas em serpentina, coloridas por parte,
+  transições em vermelho, Epílogo em preto. **Achado maior que os mapas**: o
+  **Índice de Fragmentos estava incompleto** — declarava 26 e 21 nas Partes 3 e 4
+  mas listava 18 e 17; faltavam **11 fragmentos** (DOC-20 a DOC-27, LUC-13,
+  LUC-14, MEM-27), quase os mesmos que o R400 achou sem rota de entrada. Aquele
+  conteúdo entrou na obra e **não foi ligado a nenhum dos dois sistemas de
+  navegação** — existia só para quem folheasse página a página. Os 11 inseridos
+  com títulos reais lidos dos arquivos; índice agora **84/84**. O livro dizia
+  **três números diferentes sobre si mesmo**, nenhum correto ("78 fragmentos" em
+  7 lugares, "180 rotas" em 4, "71 FRAGMENTOS" num comentário): 15 ocorrências
+  corrigidas nos 4 `main*.tex`. **Erro meu pego pelo preflight**: o Mapa 2 saiu
+  em paisagem 2:1 e as inclusões só limitavam `height=` — `keepaspectratio` só
+  funciona como esperado com **as duas** dimensões, então a largura cresceu livre
+  e estourou a página xxvii (4 violações por edição). `tri/main_tri.tex` já usava
+  o padrão certo no Mapa 1; as outras 11 inclusões não — as 12 foram alinhadas.
+  Preflight: **`overall_internal_spec_passed=True`, 648/648 rotas, zero violações
+  nas 5 edições**. Suíte **2726, 0 falhas**. Ver
+  `specs/SPEC-935-R401-molambudos-mapas-e-indice.md`.
 - **R400 (2026-08-04) — "todas as rotas levam para o epílogo" + "sem loops
   infinitos" + "não quero nenhum aberto":** o Epílogo era **inalcançável** —
   tinha âncora (`\fragdef{Epilogo}`, última entrada da ordem linear) mas
