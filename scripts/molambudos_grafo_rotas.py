@@ -231,7 +231,10 @@ def desenhar_enredo(arestas: list[tuple[str, str]], saida: Path) -> dict:
                 ato_de[frag] = indice
                 membros[indice].append(frag)
 
-    fig, ax = _fig_sepia(24, 12)
+    # Mesma proporção do Mapa 3 (22x13): rotacionados, os dois ocupam a
+    # mesma área na página, que é o que o autor pediu ao dizer que a
+    # posição do Mapa 2 deveria ser igual à do Mapa 3.
+    fig, ax = _fig_sepia(22, 13)
     pos: dict[str, tuple[float, float]] = {}
     LARG = 30.0
     COLUNAS = 13
