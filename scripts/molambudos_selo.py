@@ -38,7 +38,25 @@ ARTEFATOS = {
     "sha256_main_tex": "main.tex",
     "sha256_pdf": "main.pdf",
     "sha256_kdp_print_pt": "main_kdp_pt_160x230mm.pdf",
+    "sha256_kdp_print_en": "main_kdp_en_160x230mm.pdf",
+    "sha256_kdp_print_zh": "main_kdp_zh_160x230mm.pdf",
+    "sha256_kdp_print_tri": "main_kdp_tri_160x230mm.pdf",
     "sha256_capa_pt": "capa_completa_pt_160x230mm.pdf",
+    "sha256_capa_en": "capa_completa_en_160x230mm.pdf",
+    "sha256_capa_zh": "capa_completa_zh_160x230mm.pdf",
+}
+
+# Paginação de cada edição. Registrada porque é ela que determina a largura da
+# lombada: uma capa impressa contra a paginação errada é recusada pela gráfica.
+PAGINACOES = {
+    "paginas_miolo_digital_pt": "main.pdf",
+    "paginas_miolo_digital_en": "main_en.pdf",
+    "paginas_miolo_digital_zh": "main_zh.pdf",
+    "paginas_miolo_digital_tri": "main_tri.pdf",
+    "paginas_impressao_pt_160x230mm": "main_kdp_pt_160x230mm.pdf",
+    "paginas_impressao_en_160x230mm": "main_kdp_en_160x230mm.pdf",
+    "paginas_impressao_zh_160x230mm": "main_kdp_zh_160x230mm.pdf",
+    "paginas_impressao_tri_160x230mm": "main_kdp_tri_160x230mm.pdf",
 }
 
 # Os PDFs são REGISTRADOS mas ficam FORA da comparação de integridade: o
@@ -50,7 +68,11 @@ ARTEFATOS = {
 # valem como impressão digital de um build específico, para rastrear qual
 # arquivo foi enviado à gráfica.
 ARTEFATOS_NAO_DETERMINISTICOS = frozenset(
-    {"sha256_pdf", "sha256_kdp_print_pt", "sha256_capa_pt"}
+    k for k in (
+        "sha256_pdf", "sha256_kdp_print_pt", "sha256_kdp_print_en",
+        "sha256_kdp_print_zh", "sha256_kdp_print_tri",
+        "sha256_capa_pt", "sha256_capa_en", "sha256_capa_zh",
+    )
 )
 
 ALGORITMO = (
@@ -109,6 +131,13 @@ def _fragmentos() -> list[dict[str, str]]:
 
 
 def _paginas(nome: str) -> int | None:
+    """Páginas de um PDF, ou None se ele não puder ser lido com confiança.
+
+    Um PDF sendo reescrito por um build concorrente abre sem erro e reporta
+    **zero** páginas. Gravar esse zero no selo seria pior que não gravar nada:
+    o selo passaria a afirmar, com aparência de fato medido, uma paginação que
+    nunca existiu — e é a paginação que determina a largura da lombada.
+    """
     pdf = BOOK / nome
     if not pdf.is_file():
         return None
@@ -116,8 +145,12 @@ def _paginas(nome: str) -> int | None:
         import fitz
     except ImportError:
         return None
-    with fitz.open(pdf) as doc:
-        return doc.page_count
+    try:
+        with fitz.open(pdf) as doc:
+            total = doc.page_count
+    except Exception:
+        return None
+    return total if total > 0 else None
 
 
 def construir() -> dict:
@@ -142,8 +175,7 @@ def construir() -> dict:
         "escopo": ESCOPO,
         "total_fragmentos": len(frags),
         "total_frontmatter": len(front),
-        "paginas_miolo_digital": _paginas("main.pdf"),
-        "paginas_miolo_impressao_pt_160x230mm": _paginas("main_kdp_pt_160x230mm.pdf"),
+        **{chave: _paginas(nome) for chave, nome in PAGINACOES.items()},
         "merkle_root_fragmentos": merkle_root([f["sha256"] for f in frags]),
         "sha256_frontmatter": h.hexdigest(),
         **artefatos,
@@ -159,8 +191,7 @@ def _comparar(atual: dict, gravado: dict) -> list[str]:
         "total_fragmentos",
         "merkle_root_fragmentos",
         "sha256_frontmatter",
-        "paginas_miolo_digital",
-        "paginas_miolo_impressao_pt_160x230mm",
+        *PAGINACOES,
         *comparaveis,
     ):
         if gravado.get(chave) != atual.get(chave):

@@ -98,8 +98,8 @@ EDITIONS = {
         "tri/frontmatter/cuidado.tex", "tri/main_tri.tex::partopener",
     ),
     "kdp_tri": Edition(
-        "kdp_tri", "xelatex", "tri/main_kdp_print_160x230mm.tex",
-        "main_kdp_print_160x230mm", 160.0 * PT_PER_MM, 230.0 * PT_PER_MM,
+        "kdp_tri", "xelatex", "main_kdp_tri_160x230mm.tex",
+        "main_kdp_tri_160x230mm", 160.0 * PT_PER_MM, 230.0 * PT_PER_MM,
         20.0 * PT_PER_MM, 15.0 * PT_PER_MM, 18.0 * PT_PER_MM,
         18.0 * PT_PER_MM, 18.0,
         "tri/frontmatter/titlepage.tex", "tri/frontmatter/backpage.tex",

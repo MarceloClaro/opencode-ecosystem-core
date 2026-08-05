@@ -5,7 +5,45 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R401 — Mapas 2 e 3 gerados do corpus; Índice de Fragmentos completado (faltavam 11); contagens do livro alinhadas** (2026-08-05)
+- **Branch:** `main` · última entrega: **R403 — dossiê de estudo acadêmico em 3 línguas** (2026-08-05)
+- **R403 (2026-08-05) — "faça uma ficha dossiê sobre o projeto Molambudos em 3
+  línguas… a nível acadêmico rigoroso":** criados `dossie/dossie_{pt,en,zh}.tex`
+  (6, 6 e 7 páginas A4) como **aparato crítico separado** — não parte da ficção,
+  para não quebrar o quadro diegético. Seções: ficha técnica medida, projeto
+  literário, arquitetura formal, linhagem literária, técnicas narrativas,
+  fundamentos teóricos, base histórica e postura ética, análise crítica,
+  limitações verificadas, estado de validação, agenda de pesquisa. **Todos os
+  números medidos** sobre os fontes (84 fragmentos: MEM 27/DOC 27/LUC 17/CONT
+  13; 43.730 palavras PT, 44.978 EN, 70.750 caracteres ZH; 27 dos 84 com segunda
+  pessoa sustentada). **Disciplina epistêmica**: a seção de linhagem declara que
+  identifica afinidades formais verificáveis e **não** afirma que o autor leu as
+  obras citadas — parentesco de procedimento, não genealogia de leitura. A seção
+  *Estado de validação* separa o verificado tecnicamente do **não realizado**
+  (revisão por pares, revisão editorial externa, verificação historiográfica,
+  revisão nativa das traduções) e declara recepção crítica **inexistente** e
+  impacto **não mensurável**. A análise crítica registra os dois lados; ponto
+  mais sério levantado: a metáfora sobrenatural pode aliviar o horror histórico
+  ao deslocar responsabilidade política para uma entidade.
+- **R402 (2026-08-05) — "corrigir main_kdp_pt_160x230mm… não esqueça de
+  atualizar as paginações":** existiam **quatro** wrappers com o mesmo basename
+  `main_kdp_print_160x230mm.tex` (raiz, `en/`, `zh/`, `tri/`); como todos usam
+  caminhos relativos à raiz, são compilados de lá e o LaTeX nomeia a saída pelo
+  basename — **os quatro produziam o mesmo PDF**, e compilar dois sobrescrevia o
+  outro sem erro. Era a explicação de o PDF da raiz conter texto chinês quando
+  inspecionado no R399. Agora um wrapper por edição com jobname próprio
+  (`main_kdp_{pt,en,zh,tri}_160x230mm.tex`), trim medido 160,0×230,0mm nas
+  quatro: PT 435, EN 427, ZH 397, tri 1115 páginas. O miolo PT foi de 433 para
+  435 (índice +11, mapas ampliados) e o teste da capa falhou de imediato —
+  geradas as capas de EN e ZH, já que cada paginação exige lombada própria
+  (25,93 / 25,46 / 23,67 mm). O selo passou a conferir **oito** paginações.
+  **Defeito no próprio selo**: gerado durante um build, `_paginas()` leu
+  `main.pdf` em reescrita, o PDF abriu sem erro reportando **zero** páginas e o
+  selo gravou o zero — pior que campo ausente, porque é a paginação que
+  dimensiona a lombada; agora devolve `None`, com teste. Testes R239/R240
+  fixavam a fração `0.85\textheight` e quebraram ao ampliar para `0.90` sem nada
+  real ter quebrado — reescritos para exigir a **propriedade** (escala relativa
+  e restrição em **ambas** as dimensões, que é o que impede o estouro do R401).
+  Ver `specs/SPEC-935-R402-molambudos-quatro-edicoes-de-impressao.md`.
 - **R401 (2026-08-05) — "faça o mesmo com os mapas de grafos 2 e 3":**
   `molambudos_grafo_rotas.py` ganhou `--mapa {rotas,enredo,linear,todos}` e passou
   a derivar a estrutura de partes do próprio `main.tex`, não de lista mantida à

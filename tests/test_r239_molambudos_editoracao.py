@@ -1,4 +1,5 @@
 import os
+import re
 import pytest
 
 MOLAMBUDOS_DIR = "/home/marceloclaro/opencode-ecosystem-core/projetos/molambudos/Molambudos_VictoriaRegia"
@@ -34,12 +35,19 @@ def test_main_tex_margin_params():
     # keepaspectratio absorve a diferença -- e test_no_major_overfull_vbox_in_log
     # já confirma, no log real de compilação, que isso não produz overfull
     # vbox. Aceitar ambas as formas evita re-brigar um problema já resolvido.
-    assert (
-        "width=0.82\\textheight" in content
-        or "width=0.85\\textheight" in content
-        or "height=0.85\\textheight" in content
-        or "height=0.82\\textheight" in content
-    ), "Grafos devem utilizar escala baseada em \\textheight para evitar Overfull vbox"
+    # R402: o teste fixava a fração exata (0.82/0.85). Isso é medir o proxy em
+    # vez da propriedade -- ampliar os mapas de 0.85 para 0.90 quebrava o teste
+    # sem quebrar nada de real. A propriedade que importa é a escala ser
+    # RELATIVA a \textheight (nunca absoluta), e quem confirma que não há
+    # overfull é test_no_major_overfull_vbox_in_log, sobre o log real.
+    escalas = re.findall(r"(?:width|height)=0\.\d+\\textheight", content)
+    assert escalas, (
+        "Grafos devem utilizar escala baseada em \\textheight para evitar Overfull vbox"
+    )
+    assert not re.search(r"includegraphics\[[^]]*(?:width|height)=\d+(?:\.\d+)?(?:cm|mm|in|pt)",
+                         content), (
+        "Grafos não podem usar dimensão absoluta: ela não acompanha a geometria da página"
+    )
     assert "\\marginparwidth}{0.75in}" in content or "\\marginparwidth}{0.7in}" in content, "Marginparwidth deve estar calibrada para evitar fuga de margens"
 
 def test_no_major_overfull_vbox_in_log():
