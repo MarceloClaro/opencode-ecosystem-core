@@ -105,7 +105,32 @@ foram alinhadas.
 Foi o preflight que pegou, não a revisão visual — o PDF "parecia" bem numa
 inspeção rápida.
 
-## 5. Critérios de aceitação
+## 5. Posição dos Mapas 2 e 3 igualada
+
+O autor observou que *"a posição do mapa 2 deveria ser igual a posição do mapa
+3, pois fica melhor para visualizar"*. O Mapa 2 era, de fato, o único dos três
+sem `angle=90`.
+
+Rotacioná-lo **não bastou**: sua proporção gerada era 2:1 contra 1,69:1 do
+Mapa 3, de modo que, rotacionado, ficava *mais estreito* que ele — 214 pt
+contra 253 pt de largura. Medido, não estimado.
+
+Corrigido nos dois eixos: o Mapa 2 passou a ser gerado em 4400×2600 (mesma
+proporção do Mapa 3), e a caixa de inclusão dos três subiu de
+`0.96\textwidth × 0.85\textheight` para `0.98 × 0.90` — são grafos densos com
+85 nós rotulados, e a 22% da área da página os rótulos ficavam ilegíveis.
+
+| Mapa | Antes | Depois |
+|---|---|---|
+| 1 — Rotas | 312 × 428 pt (32%) | 330 × 454 pt (36%) |
+| 2 — Três Atos | 214 × 428 pt (22%) | **268 × 454 pt (29%)** |
+| 3 — Linear | 253 × 428 pt (26%) | **268 × 454 pt (29%)** |
+
+Mapas 2 e 3 ficam com dimensões idênticas. O Mapa 1 permanece um pouco maior
+por ter proporção própria: seu layout *force-directed* precisa de mais largura
+para não empilhar os nós.
+
+## 6. Critérios de aceitação
 
 1. Os três mapas são gerados por script a partir do corpus real. ✔
 2. A estrutura de partes é derivada de `main.tex`, não de lista mantida à mão. ✔
@@ -116,3 +141,4 @@ inspeção rápida.
    sobrevive em nenhuma das quatro edições. ✔
 6. Preflight R362 com `--build`: `overall_internal_spec_passed=True`,
    648/648 rotas, **zero violações de layout** nas cinco edições. ✔
+7. Mapas 2 e 3 ocupam área e posição idênticas na página. ✔
