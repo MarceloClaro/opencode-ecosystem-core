@@ -3927,6 +3927,37 @@
       "verification": "Preflight R362 com --build: overall_internal_spec_passed=True, 648/648 rotas, ZERO violacoes de layout nas 5 edicoes (PT 415, EN 411, ZH 387, tri 1061, KDP tri 1115). Suite completa 2726 aprovados, 0 falhas. Indice 84/84; nenhuma ocorrencia de '78 fragmentos'/'180 rotas'/'71 FRAGMENTOS' sobrevive. Apos o ajuste de posicao dos mapas: preflight novamente overall_internal_spec_passed=True, 648/648 rotas, zero violacoes nas 5 edicoes; Mapa 2 e Mapa 3 com dimensoes identicas (268x454pt, 29% da pagina).",
       "status": "verified",
       "date": "2026-08-05"
+    },
+    {
+      "round_id": "R402",
+      "objective": "Usuario pediu para corrigir main_kdp_pt_160x230mm e que main, main_en e main_zh tambem tivessem edicao de impressao, seguido de 'nao esqueca de atualizar as paginacoes'.",
+      "changes": [
+        "Existiam QUATRO wrappers com o mesmo basename main_kdp_print_160x230mm.tex -- raiz (PT), en/, zh/ e tri/. Todos usam caminhos relativos a raiz do livro, logo sao compilados de la, e o LaTeX nomeia a saida pelo basename: os quatro produziam o MESMO PDF. Quem compilasse dois sobrescrevia o outro sem erro e sem aviso. Era a explicacao de o PDF da raiz conter texto chines quando inspecionado no R399.",
+        "Um wrapper por edicao com jobname proprio: main_kdp_pt/en/zh/tri_160x230mm.tex, todos na raiz do livro. Trim medido 160,0x230,0mm nos quatro. Paginas: PT 435, EN 427, ZH 397, tri 1115. audit_r362 atualizado (kdp_tri -> main_kdp_tri_160x230mm.tex).",
+        "O miolo PT foi de 433 para 435 paginas (indice ganhou 11 entradas no R401 e os mapas foram ampliados), desatualizando a lombada da capa -- test_a_paginacao_declarada_na_capa_bate_com_o_miolo falhou de imediato, que era para o que existia. Geradas as capas de EN e ZH, ja que cada paginacao exige lombada propria: PT 25,93mm, EN 25,46mm, ZH 23,67mm.",
+        "O selo passou a registrar e conferir OITO paginacoes (4 miolos digitais + 4 de impressao) em vez de apenas a do portugues.",
+        "DEFEITO NO PROPRIO SELO: gerando-o enquanto o preflight recompilava, _paginas() leu main.pdf em meio a reescrita -- o PDF abriu sem erro e reportou ZERO paginas, e o selo gravou esse zero. Um zero com aparencia de fato medido e pior que campo ausente, porque e a paginacao que dimensiona a lombada. Corrigido: _paginas() devolve None quando o PDF nao abre ou reporta zero, com teste cobrindo o caso.",
+        "Tres guardas novos em test_r399: selo nao grava paginacao zero; selo registra as 4 paginacoes de impressao; cada edicao tem wrapper com jobname proprio (o teste ignora _archive/, que guarda os backups de cada ciclo).",
+        "Testes R239 e R240 fixavam a fracao exata 0.85\\textheight dos mapas e quebraram ao amplia-los para 0.90, sem que nada real tivesse quebrado -- medir o proxy em vez da propriedade, o mesmo padrao do R397. Reescritos para exigir a PROPRIEDADE: escala relativa a pagina (nunca absoluta) e restricao em AMBAS as dimensoes, que e o que impede o estouro visto no R401."
+      ],
+      "verification": "Preflight R362 com --build: overall_internal_spec_passed=True, 648/648 rotas, zero violacoes nas 5 edicoes. As 4 edicoes de impressao compilam com trim medido 160,0x230,0mm. Suite completa 2730 aprovados, 0 falhas.",
+      "status": "verified",
+      "date": "2026-08-05"
+    },
+    {
+      "round_id": "R403",
+      "objective": "Usuario pediu um dossie de estudo academico sobre Molambudos em 3 linguas: projeto literario, influencias, tecnicas, objetivos, analise minuciosa, teorias, limitacoes e impactos.",
+      "changes": [
+        "Criados dossie/dossie_pt.tex, dossie_en.tex e dossie_zh.tex (6, 6 e 7 paginas A4), como aparato critico separado -- NAO parte da ficcao, para nao quebrar o quadro diegetico.",
+        "Estrutura: ficha tecnica medida, projeto literario, arquitetura formal, linhagem literaria, tecnicas narrativas, fundamentos teoricos, base historica e postura etica, analise critica, limitacoes verificadas, estado de validacao, agenda de pesquisa, referencias.",
+        "Todos os numeros foram MEDIDOS sobre os arquivos-fonte: 84 fragmentos (MEM 27, DOC 27, LUC 17, CONT 13), 43.730 palavras PT / 44.978 EN / 70.750 caracteres ZH, extensao por familia, 27 dos 84 fragmentos com segunda pessoa sustentada, paginacao das 4 edicoes.",
+        "DISCIPLINA EPISTEMICA: a secao de linhagem declara explicitamente que identifica afinidades formais verificaveis no texto e NAO afirma que o autor leu as obras citadas (Dracula, House of Leaves, Amarelinha, Calvino, Vidas Secas, Goffman, Arbex) -- parentesco de procedimento, nao genealogia de leitura.",
+        "Secao 'Estado de validacao' separa o verificado tecnicamente (compilacao, paridade de rotas 648/648, integridade SHA-256) do NAO realizado: revisao por pares, revisao editorial externa, verificacao historiografica por especialista, revisao nativa das traducoes EN e ZH. Declara recepcao critica INEXISTENTE (obra nao publicada) e impacto NAO MENSURAVEL, com ressalva pedindo que qualquer alegacao de merito derivada seja tratada como infundada ate haver validacao externa.",
+        "A analise critica registra os dois lados. Ponto mais serio levantado: a metafora sobrenatural pode aliviar o horror historico ao deslocar responsabilidade politica para uma entidade -- a Nota Historica antecipa a objecao e responde, e se a resposta basta fica como questao critica aberta."
+      ],
+      "verification": "Os tres dossies compilam (pdflatex para PT/EN, xelatex para ZH); ZH renderiza CJK corretamente com Noto Serif CJK SC. Suite completa 2730 aprovados, 0 falhas.",
+      "status": "verified",
+      "date": "2026-08-05"
     }
   ]
 }

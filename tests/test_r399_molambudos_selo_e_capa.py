@@ -169,3 +169,50 @@ def test_a_capa_desenha_conteudo_dentro_da_pagina():
         pix = pagina.get_pixmap(clip=meio, dpi=20)
         cores = {pix.pixel(x, y) for x in range(0, pix.width, 7) for y in range(0, pix.height, 7)}
         assert len(cores) > 12, f"metade inferior praticamente uniforme ({len(cores)} cores)"
+
+
+def test_selo_nao_grava_paginacao_zero_de_pdf_em_construcao(tmp_path, monkeypatch):
+    """Um PDF sendo reescrito por um build concorrente abre e reporta 0 páginas.
+
+    Gravar esse zero seria pior que não gravar nada: o selo passaria a afirmar,
+    com aparência de fato medido, uma paginação que nunca existiu — e é a
+    paginação que determina a largura da lombada da capa.
+    """
+    from scripts import molambudos_selo as selo
+
+    truncado = tmp_path / "meio_build.pdf"
+    truncado.write_bytes(b"%PDF-1.7\n")          # cabeçalho sem páginas
+    monkeypatch.setattr(selo, "BOOK", tmp_path)
+    assert selo._paginas("meio_build.pdf") is None
+
+    ausente = selo._paginas("nao_existe.pdf")
+    assert ausente is None
+
+
+def test_selo_registra_a_paginacao_das_quatro_edicoes_de_impressao():
+    import json
+
+    selo = json.loads((BOOK / "SELO_INTEGRIDADE_MERKLE.json").read_text(encoding="utf-8"))
+    for lingua in ("pt", "en", "zh", "tri"):
+        chave = f"paginas_impressao_{lingua}_160x230mm"
+        assert chave in selo, f"selo não registra a paginação de impressão {lingua}"
+
+
+def test_cada_edicao_de_impressao_tem_wrapper_com_jobname_proprio():
+    """Quatro wrappers chamados main_kdp_print_160x230mm.tex — raiz, en/, zh/ e
+    tri/ — produziam o MESMO PDF: quem compilasse dois sobrescrevia o outro."""
+    esperados = [
+        "main_kdp_pt_160x230mm.tex", "main_kdp_en_160x230mm.tex",
+        "main_kdp_zh_160x230mm.tex", "main_kdp_tri_160x230mm.tex",
+    ]
+    for nome in esperados:
+        assert (BOOK / nome).is_file(), f"falta o wrapper de impressão {nome}"
+    # `_archive/` guarda os backups de cada ciclo e deve preservá-los como
+    # estavam — a colisão só importa no corpus ativo, que é o que se compila.
+    colidentes = [
+        p for p in BOOK.rglob("main_kdp_print_160x230mm.tex")
+        if "_archive" not in p.parts
+    ]
+    assert not colidentes, (
+        f"wrappers com basename colidente ainda existem: {colidentes}"
+    )

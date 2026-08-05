@@ -1,4 +1,5 @@
 import os
+import re
 import pytest
 
 MOLAMBUDOS_DIR = "/home/marceloclaro/opencode-ecosystem-core/projetos/molambudos/Molambudos_VictoriaRegia"
@@ -16,11 +17,22 @@ def test_main_tex_graph_framing():
     # e test_latex_compilation_clean_graphs confirma no log real que isso já
     # não produz overfull vbox. \vbox to \textheight e \fboxsep já presentes
     # (checados abaixo) cobrem o travamento vertical e a moldura pedidos.
-    assert (
-        ("height=0.92\\textwidth" in content and "width=0.92\\textheight" in content)
-        or "height=0.85\\textheight" in content
-        or "height=0.82\\textheight" in content
-    ), "Grafos devem usar escala baseada em \\textheight/\\textwidth para evitar Overfull vbox"
+    # R402: idem R239 -- o teste fixava a fração exata e quebrava ao ampliar os
+    # mapas, sem que nada de real tivesse quebrado. Agora exige a propriedade:
+    # toda inclusão de grafo escala em unidades relativas à página E restringe
+    # AMBAS as dimensões. Essa segunda parte não é preciosismo: com apenas
+    # `height=`, keepaspectratio deixa a largura crescer livremente, e foi
+    # exatamente assim que o Mapa 2 estourou a página no R401.
+    inclusoes = re.findall(r"\\includegraphics\[([^]]*)\]\{misc/grafo_[a-z_]+\.png\}", content)
+    assert inclusoes, "nenhuma inclusão de grafo encontrada em main.tex"
+    for opts in inclusoes:
+        assert "keepaspectratio" in opts, f"grafo sem keepaspectratio: [{opts}]"
+        assert re.search(r"width=0\.\d+\\text(width|height)", opts), (
+            f"grafo sem restrição de largura relativa: [{opts}]"
+        )
+        assert re.search(r"height=0\.\d+\\text(width|height)", opts), (
+            f"grafo sem restrição de altura relativa: [{opts}]"
+        )
     assert "\\fboxsep}{3pt}" in content, "Falta calibração de \\fboxsep}{3pt} nos grafos"
 
 def test_latex_compilation_clean_graphs():
