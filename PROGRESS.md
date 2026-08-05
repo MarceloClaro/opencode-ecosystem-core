@@ -5,7 +5,71 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R398 — deduplicação de fragmentos concatenados por engano e coerência factual de personagem** (2026-08-04)
+- **Branch:** `main` · última entrega: **R400 — todas as rotas levam ao Epílogo; nenhum ciclo aprisiona; nenhum fragmento fora da rede** (2026-08-04)
+- **R400 (2026-08-04) — "todas as rotas levam para o epílogo" + "sem loops
+  infinitos" + "não quero nenhum aberto":** o Epílogo era **inalcançável** —
+  tinha âncora (`\fragdef{Epilogo}`, última entrada da ordem linear) mas
+  **nenhuma rota apontava para ele** em nenhum idioma; o grafo tinha um
+  sorvedouro de 48 fragmentos onde o leitor circulava sem nunca chegar ao fim.
+  **Escolha levada ao autor**: grafo acíclico estrito custaria 85 das 192 rotas
+  (−44%), justamente as remissões documento→memória, e contradiria a tese do
+  livro ("O ciclo recomeça") — o autor optou por **garantir saída sempre**,
+  preservando os ciclos. Epílogo recebeu o ID **`EPI-01`** (casa com o padrão do
+  validador, então passa a ser auditado), com `\rota{EPI-01}` em 10 fragmentos
+  terminais. **Armadilha**: renomear nos 3 `main*.tex` de idioma não bastou —
+  `tri/main_tri.tex` ficou para trás, e como a trilíngue ancora cada fragmento
+  sob 3 prefixos (`frag:`/`fragen:`/`fragzh:`), as rotas EN e ZH não resolviam:
+  preflight acusou **618/648**, exatamente 30 faltantes. Foi o preflight que
+  pegou, não a revisão manual. Depois, os **14 fragmentos sem rota de entrada**
+  (DOC-17, DOC-20 a DOC-27, LUC-13, LUC-14, MEM-18, MEM-21, MEM-27 — o bloco
+  DOC-20→DOC-26 órfão inteiro) receberam enlaces escolhidos por **motivação
+  narrativa**: a cadeia do dossiê de 2026 em sequência (carta de Oliveira →
+  memorando → ocorrência → conservação → identificação → mecanismo → a origem de
+  1853), a espiral final de Lúcia (desaparecimento → gravação da noite →
+  autoavaliação), *A Fila* → *A Última Página*. **Estado final**: 0 órfãos
+  (eram 14), **84/84 alcançam o Epílogo** (eram 0), Epílogo sorvedouro (10
+  entradas, 0 saídas), 6 ciclos preservados (maior: 58) com **0 aprisionantes**, 216 rotas,
+  0 quebradas. Protocolo declara 216 rotas nos 3 idiomas com a promessa escrita.
+  4 testes novos travam as propriedades. Preflight: **`overall_internal_spec_passed=True`,
+  648/648 rotas, zero violações nas 5 edições**. Ver
+  `specs/SPEC-935-R400-molambudos-convergencia-das-rotas.md`.
+- **R399 (2026-08-04) — "já está pronto para publicação" → "prossiga em
+  sequência" + "atualize o mapa de grafo das rotas":** o diagnóstico foi **não**,
+  com 3 bloqueios. **(1) A capa não podia ser impressa com nenhum miolo**:
+  painéis de 157,4×234,6mm contra miolo de 160×230mm, e lombada de 1,404in
+  dimensionada para ~623 páginas contra miolos de 415 e 1115 — o template
+  arquivado (`CASE_LAMINATE_6.000x9.000_471_PREMIUM_WHITE`) mostra que foi feita
+  para capa dura 6×9in com 471 páginas. Pior: `capa_completa.pdf` **nunca
+  renderizou** — `overlay` sem ancorar em `current page.south west` empurrava
+  todo o conteúdo para fora da página; sobrava um retângulo escuro com uma tira
+  no topo, desde julho, sem guarda nenhuma. Também descoberto que
+  `main_kdp_print_160x230mm.tex` (raiz, PT) e `tri/main_kdp_print_160x230mm.tex`
+  **colidem no mesmo basename** — o PDF na raiz era o build trilíngue. Criado
+  `main_kdp_pt_160x230mm.tex` (jobname próprio): **433 páginas, trim medido
+  160,0×230,0mm**. Nova `capa_completa_pt_160x230mm.tex` em **brochura** (a KDP
+  não oferece 160×230mm em capa dura), geometria inteiramente derivada de 5
+  parâmetros, lombada 25,81mm pela constante de impressão **em cor** —
+  verificado que todas as páginas têm preenchimento sépia `#F2E8CF`. A arte tem
+  proporção 0,6955 e o painel 160×230mm tem 0,6957: o formato pedido é o certo;
+  o painel de capa dura (0,6710) é que a distorcia. **Não corrigido** (exige
+  regeneração externa): arte a 163 DPI onde a KDP pede 300, e **código de barras
+  fictício embutido** no `contracapa.png` com ISBN `978-65-01-23456-7` ≠ ISBN
+  real — a reserva branca foi dimensionada para cobri-lo. **(2) O selo não
+  provava nada**: declarava 74 fragmentos (reais 84), 359 páginas, hashes que não
+  conferiam, e ninguém o gerava ou conferia. Novo `scripts/molambudos_selo.py`
+  (`gerar`/`verificar`), algoritmo `merkle-sha256-v1` documentado no próprio JSON
+  e campo `escopo` declarando o que ele **não** atesta. **Guarda provado**:
+  alterar `MEM-01.tex` fez `verificar` sair 1 e o teste falhar; restaurado,
+  voltou ao verde. **(3) O grafo de rotas** era PNG estático de 30/jul sem script
+  de origem. Novo `scripts/molambudos_grafo_rotas.py` lê as `\rota{}` reais e
+  regenera `grafo_narrativo.png`. Revelou: **1 componente conexo, 0 rotas
+  quebradas, 0 becos**, hub DOC-01 com 20 entradas — mas **14 fragmentos sem
+  rota de entrada**, inalcançáveis pela "Rota Hipertextual" do protocolo;
+  verificado contra o backup pré-R397 que a condição é **anterior** a esta
+  sessão. Registrada, não corrigida (arquitetura narrativa). **Bloqueio que
+  permanece**: 10 fragmentos ainda divergem estruturalmente entre PT/EN/ZH.
+  Testes: `test_r399` 8/8, conjunto Molambudos 57/57. Ver
+  `specs/SPEC-935-R399-molambudos-preparacao-de-impressao.md`.
 - **R398 (2026-08-04) — "polimento, 160×230mm, incoerências/redundâncias/loops"
   + "remova redundância e repetições" + "psiquiatra forense":** a redundância
   **não era autoral** — DOC-24/DOC-25/DOC-27 carregavam, colados após seu fim

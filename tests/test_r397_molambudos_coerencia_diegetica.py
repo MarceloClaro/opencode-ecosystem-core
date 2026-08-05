@@ -279,3 +279,151 @@ def test_nenhum_fragmento_deixa_grupo_aberto(edition: str) -> None:
         if unclosed:
             offenders.append(f"{path.name}({len(unclosed)})")
     assert not offenders, f"fragmentos {edition} com grupo aberto: {offenders}"
+
+
+# ---------------------------------------------------------------------------
+# 5. Convergência da navegação (R400)
+# ---------------------------------------------------------------------------
+#
+# Regra de arquitetura narrativa declarada pelo autor: **todas as rotas levam
+# ao Epílogo**, e o leitor nunca pode ficar preso num ciclo infinito. Os ciclos
+# em si são temáticos e ficam ("O ciclo recomeça"); o que não pode existir é
+# ciclo do qual não haja saída.
+#
+# Antes do R400 nenhuma rota apontava para o Epílogo em nenhum idioma, e o
+# grafo tinha um sorvedouro de 48 fragmentos: quem navegava por saltos
+# circulava ali para sempre sem nunca alcançar o fim da obra.
+
+EPILOGO = "EPI-01"
+
+
+def _grafo_de_rotas(edition: str):
+    """(nós, arestas) das rotas de uma edição, incluindo o Epílogo."""
+    nos = {path.stem for path in _fragment_paths(edition)}
+    nos.add(EPILOGO)
+    arestas = []
+    for path in _fragment_paths(edition):
+        for destino in re.findall(r"\\rota\{([A-Z]{3,4}-(?:\d+|[A-Za-z][A-Za-z-]*))\}", _text(path)):
+            if destino in nos:
+                arestas.append((path.stem, destino))
+    return nos, arestas
+
+
+def _alcancam_epilogo(nos: set[str], arestas: list[tuple[str, str]]) -> set[str]:
+    """Conjunto de fragmentos a partir dos quais o Epílogo é alcançável."""
+    reverso: dict[str, list[str]] = {n: [] for n in nos}
+    for origem, destino in arestas:
+        reverso[destino].append(origem)
+    vistos = {EPILOGO}
+    pilha = [EPILOGO]
+    while pilha:
+        atual = pilha.pop()
+        for anterior in reverso.get(atual, ()):
+            if anterior not in vistos:
+                vistos.add(anterior)
+                pilha.append(anterior)
+    return vistos - {EPILOGO}
+
+
+@pytest.mark.parametrize("edition", sorted(EDITIONS))
+def test_o_epilogo_e_alcancavel_de_todos_os_fragmentos(edition: str) -> None:
+    nos, arestas = _grafo_de_rotas(edition)
+    alcancam = _alcancam_epilogo(nos, arestas)
+    presos = sorted(nos - alcancam - {EPILOGO})
+    assert not presos, (
+        f"na edição {edition}, {len(presos)} fragmento(s) não têm percurso de "
+        f"rotas até o Epílogo: {presos}"
+    )
+
+
+@pytest.mark.parametrize("edition", sorted(EDITIONS))
+def test_o_epilogo_recebe_rotas_e_nao_emite_nenhuma(edition: str) -> None:
+    """O Epílogo é o sorvedouro: chega-se nele e não se sai."""
+    _, arestas = _grafo_de_rotas(edition)
+    entram = [a for a in arestas if a[1] == EPILOGO]
+    saem = [a for a in arestas if a[0] == EPILOGO]
+    assert entram, f"nenhuma rota chega ao Epílogo na edição {edition}"
+    assert not saem, f"o Epílogo emite rotas na edição {edition}: {saem}"
+
+
+@pytest.mark.parametrize("edition", sorted(EDITIONS))
+def test_nenhum_ciclo_aprisiona_o_leitor(edition: str) -> None:
+    """Ciclos podem existir — são o tema da obra — mas todos têm saída.
+
+    A propriedade verificada é mais forte que 'existe saída': como o Epílogo é
+    alcançável de todo fragmento (teste acima), todo ciclo necessariamente tem
+    uma aresta que sai dele. Aqui a checagem é direta, sem depender disso.
+    """
+    nos, arestas = _grafo_de_rotas(edition)
+    saida: dict[str, set[str]] = {n: set() for n in nos}
+    for origem, destino in arestas:
+        saida[origem].add(destino)
+
+    # componentes fortemente conexos (Tarjan iterativo simplificado via DFS dupla)
+    ordem: list[str] = []
+    visto: set[str] = set()
+
+    def _mergulha(inicio: str) -> None:
+        pilha = [(inicio, iter(sorted(saida[inicio])))]
+        visto.add(inicio)
+        while pilha:
+            no, it = pilha[-1]
+            for prox in it:
+                if prox not in visto:
+                    visto.add(prox)
+                    pilha.append((prox, iter(sorted(saida[prox]))))
+                    break
+            else:
+                ordem.append(pilha.pop()[0])
+
+    for no in sorted(nos):
+        if no not in visto:
+            _mergulha(no)
+
+    entrada: dict[str, set[str]] = {n: set() for n in nos}
+    for origem, destino in arestas:
+        entrada[destino].add(origem)
+
+    atribuido: set[str] = set()
+    componentes: list[set[str]] = []
+    for no in reversed(ordem):
+        if no in atribuido:
+            continue
+        comp, pilha = {no}, [no]
+        atribuido.add(no)
+        while pilha:
+            atual = pilha.pop()
+            for anterior in entrada[atual]:
+                if anterior not in atribuido and anterior in visto:
+                    atribuido.add(anterior)
+                    comp.add(anterior)
+                    pilha.append(anterior)
+        componentes.append(comp)
+
+    presos = [
+        sorted(c) for c in componentes
+        if len(c) > 1 and not any(d not in c for n in c for d in saida[n])
+    ]
+    assert not presos, (
+        f"edição {edition}: ciclo(s) sem nenhuma saída — o leitor fica preso: {presos}"
+    )
+
+
+@pytest.mark.parametrize("edition", sorted(EDITIONS))
+def test_nenhum_fragmento_fica_fora_da_rede_de_rotas(edition: str) -> None:
+    """Todo fragmento tem de ser alcançável por navegação, não só na leitura linear.
+
+    Antes do R400, 14 fragmentos não tinham nenhuma rota de entrada — DOC-17,
+    DOC-20 a DOC-27, LUC-13, LUC-14, MEM-18, MEM-21 e MEM-27. O leitor que
+    seguia as setas jamais chegava a eles; só os encontrava folheando na ordem
+    linear. Num livro que se apresenta como hipertexto impresso, isso é
+    conteúdo prometido e não entregue por um dos três modos de leitura.
+    """
+    nos, arestas = _grafo_de_rotas(edition)
+    com_entrada = {destino for _, destino in arestas}
+    # O Epílogo é destino, nunca origem; os fragmentos é que precisam de entrada.
+    orfaos = sorted(n for n in nos if n != EPILOGO and n not in com_entrada)
+    assert not orfaos, (
+        f"edição {edition}: {len(orfaos)} fragmento(s) sem nenhuma rota de "
+        f"entrada, inalcançáveis por navegação livre: {orfaos}"
+    )

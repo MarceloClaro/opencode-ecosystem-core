@@ -3874,6 +3874,42 @@
       "verification": "Suite completa 2706 aprovados, 0 falhas. Preflight R362 com --build: overall_internal_spec_passed=True, rotas 192/192 por idioma e 576/576 nas trilingues, zero violacoes nas 5 edicoes. Paginacao apos deduplicacao: PT 415, EN 411, ZH 387, trilingue 1061, KDP 160x230mm 1115.",
       "status": "verified",
       "date": "2026-08-04"
+    },
+    {
+      "round_id": "R399",
+      "objective": "Usuario perguntou se a obra estava pronta para publicacao; diagnostico foi NAO, com 3 bloqueios. Pediu 'prossiga em sequencia' e, depois, 'atualize o mapa de grafo das rotas'.",
+      "changes": [
+        "A capa entregue nao podia ser impressa com nenhum miolo: paineis de 157,4x234,6mm contra miolo de 160x230mm, e lombada de 1,404in dimensionada para ~623 paginas contra miolos de 415 e 1115. O template arquivado (CASE_LAMINATE_6.000x9.000_471_PREMIUM_WHITE) revela que foi projetada para capa dura 6x9in com 471 paginas.",
+        "capa_completa.pdf (6,4MB, de 30/jul) NUNCA renderizou: tikzpicture com overlay cujas coordenadas partem do ponto de texto corrente em vez do canto da pagina, empurrando todo o conteudo para fora. Sobrava um retangulo escuro com uma tira no topo. Defeito presente desde julho, sem nenhuma guarda.",
+        "main_kdp_print_160x230mm.tex (raiz, PT) e tri/main_kdp_print_160x230mm.tex produzem o mesmo basename e colidem: o PDF na raiz era o build trilingue. Criado main_kdp_pt_160x230mm.tex com jobname proprio: 433 paginas, trim medido 160,0x230,0mm, em portugues.",
+        "Nova capa capa_completa_pt_160x230mm.tex em BROCHURA (a KDP nao oferece 160x230mm em capa dura). Geometria inteiramente derivada de 5 parametros; lombada = 433 x 0,002347 = 25,81mm, constante de impressao EM COR -- verificado que todas as paginas amostradas tem preenchimento sepia #F2E8CF. Capa final 352,2x236,3mm. Ancorada em current page.south west, corrigindo o defeito de posicionamento.",
+        "Confirmacao de que 160x230mm e o formato certo: a arte tem proporcao 0,6955 e o painel 160x230mm tem 0,6957; o painel de capa dura antigo (0,6710) e que a distorcia.",
+        "Dois defeitos da arte sinalizados e NAO corrigidos (exigem regeneracao externa): resolucao de 163 DPI onde a KDP pede 300; e codigo de barras ficticio embutido no contracapa.png com ISBN 978-65-01-23456-7, diferente do ISBN real. A reserva branca foi dimensionada para cobrir o codigo falso.",
+        "SELO_INTEGRIDADE_MERKLE.json declarava 74 fragmentos (reais 84), 359 paginas, hashes que nao conferiam, e NINGUEM o gerava ou conferia. Novo scripts/molambudos_selo.py com gerar/verificar, algoritmo merkle-sha256-v1 documentado no proprio JSON, e campo 'escopo' declarando o que o selo NAO atesta. Guarda PROVADO: alterar MEM-01.tex fez verificar sair 1 e o teste falhar; restaurado, voltou ao verde.",
+        "Os 3 PNGs de grafo em misc/ eram estaticos de 30/07 e nenhum script os produzia -- defasados da expansao CONT, do R389 e da deduplicacao do R398. Novo scripts/molambudos_grafo_rotas.py le as chamadas \\rota{} reais e regenera grafo_narrativo.png (4400x3200px).",
+        "O grafo revelou: 84 fragmentos, 192 rotas, 1 componente conexo, ZERO rotas quebradas, ZERO becos sem saida, hub DOC-01 com 20 rotas de entrada. Mas 14 fragmentos sem rota de ENTRADA (DOC-17, DOC-20..27, LUC-13, LUC-14, MEM-18, MEM-21, MEM-27) sao inalcancaveis pela 'Rota Hipertextual' que o protocolo oferece. Verificado contra o backup pre-R397 que a condicao e ANTERIOR a esta sessao -- registrada, nao corrigida, por ser decisao de arquitetura narrativa."
+      ],
+      "verification": "tests/test_r399_molambudos_selo_e_capa.py 8/8; conjunto Molambudos (R358/R384/R397/R399) 57/57. Selo confere com o corpus (84 fragmentos, root 7815a423...). Guarda do selo provado com alteracao real e reversao.",
+      "status": "verified",
+      "date": "2026-08-04"
+    },
+    {
+      "round_id": "R400",
+      "objective": "Autor declarou a regra de arquitetura narrativa: 'todas as rotas levam para o epilogo', 'sem loop e sem loops infinitos', e 'nao quero nenhum aberto, corrija todos, devem estar contidos na rota com coesao e coerencia e sequencia logica da narracao'.",
+      "changes": [
+        "O Epilogo era INALCANCAVEL: \\fragdef{Epilogo} existia como ancora, ultima entrada da ordem linear, mas nenhuma rota apontava para ele em nenhum dos 3 idiomas. O grafo tinha um sorvedouro de 48 fragmentos -- quem seguia as setas circulava ali indefinidamente.",
+        "Havia dois caminhos com resultados muito diferentes: grafo aciclico estrito custaria 85 das 192 rotas (-44%), justamente as remissoes documento->memoria que dao a obra o carater de arquivo, e contradiria a tese do livro ('O ciclo recomeca'). A escolha foi levada ao autor via AskUserQuestion; decisao: garantir saida sempre, preservando os ciclos.",
+        "Epilogo recebeu o ID EPI-01, que casa com FRAGMENT_ID_PATTERN do validador -- passa a ser auditado como qualquer destino. Dez fragmentos terminais ganharam \\rota{EPI-01}: os 8 sorvedouros da ordem-frente mais LUC-12 (Lucia encerra seu ciclo) e DOC-27 (fecha o dossie).",
+        "ARMADILHA TRILINGUE: renomear nos 3 main*.tex de idioma nao bastou -- tri/main_tri.tex ficou para tras. A edicao trilingue ancora cada fragmento sob 3 prefixos (frag:, fragen:, fragzh:) via \\tribody, e o Epilogo tinha so \\fragdef{Epilogo}. As rotas EPI-01 das versoes EN e ZH nao resolviam: preflight acusou 618/648, exatamente 30 faltantes (10 por idioma). Corrigido ancorando nas 3 variantes. Foi o preflight que pegou, nao a revisao manual.",
+        "14 fragmentos nao tinham NENHUMA rota de entrada (DOC-17, DOC-20..27, LUC-13, LUC-14, MEM-18, MEM-21, MEM-27); o bloco DOC-20->DOC-26 estava orfao inteiro. Verificado contra o backup pre-R397 que a condicao era anterior a esta sessao.",
+        "Os 14 enlaces foram escolhidos por motivacao narrativa, nao para fechar o grafo: MEM-07->DOC-17 (o curral visto de dentro), LUC-02->DOC-20 (Lucia recebe o diario -> cadeia de custodia), DOC-16->DOC-21 (Oliveira se identifica -> sua carta nunca enviada), a cadeia DOC-21..DOC-27 reproduzindo a sequencia do dossie de 2026 ate a origem de 1853, LUC-12->LUC-13->LUC-14 (desaparecimento -> gravacao -> autoavaliacao), MEM-17->MEM-18, MEM-12->MEM-21, CONT-13->MEM-27 (A Fila -> A Ultima Pagina).",
+        "Estado final: 0 fragmentos sem entrada (eram 14), 84/84 alcancam o Epilogo (eram 0), Epilogo sorvedouro com 10 rotas de entrada e 0 de saida, 6 ciclos preservados com ZERO aprisionantes, 216 rotas (eram 192), 85 destinos distintos, 1 componente conexo, 0 rotas quebradas.",
+        "Protocolo atualizado nos 3 idiomas para 216 rotas, com a promessa escrita: 'Nenhum caminho e um beco: de qualquer fragmento existe percurso ate o Epilogo.'",
+        "4 testes novos parametrizados nos 3 idiomas travam as propriedades; scripts/molambudos_grafo_rotas.py passou a conhecer o Epilogo como no legitimo (nao tem arquivo, e capitulo inline) e a medir convergencia, ciclos aprisionantes e orfaos."
+      ],
+      "verification": "Preflight R362 com --build: overall_internal_spec_passed=True, 648/648 rotas, source_multiset_match=True nas 5 edicoes, zero violacoes de layout. Paginacao: PT 415, EN 411, ZH 387, tri 1061, KDP tri 1115, miolo PT de impressao 433. test_r397 40/40, test_r399 8/8.",
+      "status": "verified",
+      "date": "2026-08-04"
     }
   ]
 }
