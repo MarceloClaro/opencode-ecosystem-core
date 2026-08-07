@@ -3958,6 +3958,23 @@
       "verification": "Os tres dossies compilam (pdflatex para PT/EN, xelatex para ZH); ZH renderiza CJK corretamente com Noto Serif CJK SC. Suite completa 2730 aprovados, 0 falhas.",
       "status": "verified",
       "date": "2026-08-05"
+    },
+    {
+      "round_id": "R404",
+      "objective": "Usuario pediu: 'remova a nota do editor que esta quebrando o climax de terror psicologico, o gradual experiencia sensorial e dinamismo frenetico; corrija para imergir um desconforto e sensacoes ja propostas na ideia do projeto'.",
+      "changes": [
+        "O R397 identificou o problema e recomendou a relocacao; o R398 implementou e REVERTEU porque MEM-06/MEM-26 estao sob cadeia de proveniencia SHA-256 selada do R362. Desta vez os fragmentos rastreados foram levantados ANTES de agir (DOC-02/05/08/15/17/18, LUC-01/10, MEM-02/04/06/12/26) e confirmou-se que a familia CONT nao esta entre eles -- o caminho estava livre sem tocar em nenhum registro selado.",
+        "As notas nao eram todas a mesma coisa; remove-las em bloco custaria conteudo. Classificadas por natureza: (a) EXPLICAM A TECNICA -- CONT-02, CONT-10, CONT-13, critica literaria dentro da ficcao desmontando o efeito no instante em que ocorre; CONT-02 chegava a dizer que 'o uso da segunda pessoa e um dispositivo formal de contaminacao'. Removidas; esse material ja esta no dossie do R403. (b) RESSALVAS DE PROTECAO -- CONT-03, CONT-04, CONT-07 (substancia no papel, sonhos/sono, codigos CID). Migradas ao aviso. (c) HIBRIDA COM DESESCALADA -- CONT-01 mandava 'feche o livro por 60 segundos' no auge sensorial. Removida. (d) DIEGETICA -- CONT-11, o arquivista relatando um lapis de marca inexistente em 1979: aprofunda o horror em vez de explica-lo. MANTIDA.",
+        "17 notas removidas (PT 4, EN 7, ZH 6); CONT-11 preservada em EN e ZH. Balanco: PT 13->9 notas, EN 17->10, ZH 16->10; zero em CONT no PT, uma (diegetica) em EN e ZH.",
+        "A substancia protetiva migrou para frontmatter/aviso_ao_leitor.tex nos 3 idiomas -- paratexto ANTES da ficcao, custo de imersao zero. Duas clausulas novas: sobre sonhos/sono/sintomas, e sobre codigos e escalas clinicas, esta com a frase explicita 'este livro nao diagnostica o leitor: ele simula um diagnostico, como dispositivo de ficcao'. Importa porque DOC-09 formata deliberadamente um item de suicidalidade dentro de um instrumento com escore.",
+        "Efeito: CONT-03 encerra em 'Para seu corpo, ela e real.' e a pagina segue; CONT-04 em 'Obrigado, paciente 1.263. O ciclo continua.' e vai direto para as rotas. O ultimo som passa a ser o do texto, nao o do editor pedindo licenca.",
+        "test_r384 reescrito: o teste antigo fixava a PRESENCA da nota em CONT-03, exatamente o que este ciclo remove. Dois novos travam a politica -- CONT-03 nao pode ter \\NE e o aviso tem de conter a substancia migrada; nenhum fragmento CONT nos 3 idiomas pode carregar nota, com CONT-11 registrada como excecao diegetica explicita.",
+        "Paginacao: o aviso cresceu e o ZH de impressao foi de 397 para 399 paginas; capa ZH atualizada (lombada 23,67 -> 23,79mm). PT (435) e EN (427) mantiveram a paginacao -- as clausulas couberam nas paginas existentes. Selo regerado com as 8 paginacoes.",
+        "Nota operacional: um timeout matou um xelatex no meio e deixou o .aux truncado, fazendo o build do ZH falhar com 'File ended while scanning use of \\@newl@bel' apontando para frag:LUC-04, que nao tinha relacao com o problema. Apagar os auxiliares e recompilar do zero resolveu."
+      ],
+      "verification": "Preflight R362 com --build: overall_internal_spec_passed=True, 648/648 rotas, zero violacoes nas 5 edicoes (PT 417, EN 413, ZH 387, tri 1059, kdp_tri 1113). As 4 edicoes de impressao compilam com trim 160,0x230,0mm. Suite completa 2730 aprovados, 0 falhas; conjunto Molambudos 82/82. Testes de proveniencia R360/R384 verdes -- nenhum fragmento rastreado foi tocado.",
+      "status": "verified",
+      "date": "2026-08-07"
     }
   ]
 }

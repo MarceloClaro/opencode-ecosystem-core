@@ -5,7 +5,33 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R403 — dossiê de estudo acadêmico em 3 línguas** (2026-08-05)
+- **Branch:** `main` · última entrega: **R404 — notas do editor saem do clímax de contaminação** (2026-08-07)
+- **R404 (2026-08-07) — "remova a nota do editor que está quebrando o clímax…
+  corrija para imergir um desconforto e sensações já propostas":** o R397
+  identificou e recomendou; o R398 implementou e **reverteu** por quebrar
+  proveniência. Desta vez os fragmentos rastreados foram levantados **antes** de
+  agir (MEM-02/04/06/12/26, DOC-02/05/08/15/17/18, LUC-01/10) e confirmou-se que
+  **CONT não está entre eles** — caminho livre sem tocar em registro selado.
+  **As notas não eram todas a mesma coisa**: (a) *explicam a técnica* — CONT-02,
+  CONT-10, CONT-13, crítica literária dentro da ficção desmontando o efeito no
+  instante em que ocorre (CONT-02 dizia que "o uso da segunda pessoa é um
+  dispositivo formal de contaminação") → removidas, esse material já está no
+  dossiê do R403; (b) *ressalvas de proteção* — CONT-03/04/07 → migradas ao
+  aviso; (c) *híbrida com desescalada* — CONT-01 mandava "feche o livro por 60
+  segundos" no auge sensorial → removida; (d) **diegética** — CONT-11, o
+  arquivista relatando um lápis de marca inexistente em 1979 → **mantida**,
+  aprofunda o horror em vez de explicá-lo. 17 removidas (PT 13→9, EN 17→10,
+  ZH 16→10). A substância protetiva migrou para `aviso_ao_leitor.tex` nos 3
+  idiomas — paratexto antes da ficção, custo de imersão zero — com duas
+  cláusulas novas: sonhos/sono/sintomas, e códigos clínicos, esta com **"este
+  livro não diagnostica o leitor"** (importa porque DOC-09 formata um item de
+  suicidalidade num instrumento com escore). **Efeito**: CONT-03 encerra em
+  *"Para seu corpo, ela é real."* e a página segue; CONT-04 em *"Obrigado,
+  paciente 1.263. O ciclo continua."* e vai direto às rotas. `test_r384`
+  reescrito (fixava a **presença** da nota) para travar a política nova. ZH de
+  impressão 397→399 págs, capa atualizada (23,79mm). Preflight
+  **`overall_internal_spec_passed=True`, 648/648, zero violações**; suíte
+  **2730, 0 falhas**. Ver `specs/SPEC-935-R404-molambudos-notas-fora-do-climax.md`.
 - **R403 (2026-08-05) — "faça uma ficha dossiê sobre o projeto Molambudos em 3
   línguas… a nível acadêmico rigoroso":** criados `dossie/dossie_{pt,en,zh}.tex`
   (6, 6 e 7 páginas A4) como **aparato crítico separado** — não parte da ficção,

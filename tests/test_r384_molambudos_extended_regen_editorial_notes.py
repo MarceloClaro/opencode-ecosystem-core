@@ -18,15 +18,50 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-VIC_FRAG = ROOT / "projetos/molambudos/Molambudos_VictoriaRegia/fragmentos"
+VIC = ROOT / "projetos/molambudos/Molambudos_VictoriaRegia"
+VIC_FRAG = VIC / "fragmentos"
 CANON_FRAG = ROOT / "projetos/molambudos/fragmentos"
 
 
 class TestNotasEditoriaisPreservadas:
-    def test_cont03_preserva_nota_do_editor(self):
-        text = (VIC_FRAG / "cont/CONT-03.tex").read_text(encoding="utf-8")
-        assert r"\NE{Nota do Editor" in text
-        assert "protocolos de contaminação aqui descritos são simulações formais" in text
+    def test_cont03_conserva_a_substancia_da_nota_fora_do_climax(self):
+        """R404: a nota saiu do fragmento, mas a informação continua no livro.
+
+        A nota original de CONT-03 caía imediatamente depois de "Para seu corpo,
+        ela é real." --- o ponto mais alto da indução --- e informava ali que a
+        contaminação é textual. A informação é necessária; a posição desfazia o
+        efeito que o fragmento acabara de construir. A substância migrou para
+        `frontmatter/aviso_ao_leitor.tex`, que é paratexto ANTES da ficção e por
+        isso não custa imersão nenhuma.
+        """
+        frag = (VIC_FRAG / "cont/CONT-03.tex").read_text(encoding="utf-8")
+        assert r"\NE{" not in frag, (
+            "CONT-03 voltou a interromper a indução com nota de rodapé"
+        )
+        assert "Para seu corpo, ela é real." in frag, "o fecho da indução sumiu"
+
+        aviso = (VIC / "frontmatter/aviso_ao_leitor.tex").read_text(encoding="utf-8")
+        assert "dispositivo narrativo" in aviso
+        assert "sem qualquer substância aplicada" in aviso
+
+    def test_nenhum_fragmento_de_contaminacao_interrompe_a_imersao(self):
+        """A família CONT é o dispositivo de imersão da obra.
+
+        Exceção deliberada: CONT-11 conserva sua nota porque ela é *diegética* ---
+        é o arquivista relatando uma página escrita a lápis de marca que não
+        existia em 1979. Ela aprofunda o horror em vez de sair da ficção para
+        explicá-lo.
+        """
+        DIEGETICAS = {"CONT-11"}
+        intrusas = [
+            f.stem
+            for base in ("fragmentos", "en/fragmentos", "zh/fragmentos")
+            for f in sorted((VIC / base / "cont").glob("*.tex"))
+            if r"\NE{" in f.read_text(encoding="utf-8") and f.stem not in DIEGETICAS
+        ]
+        assert not intrusas, (
+            f"nota do editor de volta em fragmento de contaminação: {sorted(set(intrusas))}"
+        )
 
     def test_mem27_preserva_nota_do_editor(self):
         text = (VIC_FRAG / "mem/MEM-27.tex").read_text(encoding="utf-8")
