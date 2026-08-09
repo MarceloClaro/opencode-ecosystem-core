@@ -5,7 +5,31 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R404 — notas do editor saem do clímax de contaminação** (2026-08-07)
+- **Branch:** `main` · última entrega: **R405 — paridade textual das edições EN e ZH; dois fragmentos chineses contradiziam o cânone** (2026-08-08)
+- **R405 (2026-08-08) — "corrija o inglês" + "foque o texto… faça o mesmo com o
+  chinês":** método = razão de **caracteres** por fragmento contra a mediana da
+  própria edição (contagem de linhas entre idiomas é enganosa; o chinês não usa
+  espaços). **Erro meu pego antes de agir**: o primeiro extrator descartava o
+  conteúdo dentro de `\textit{}`, que o ZH usa muito mais, penalizando o chinês
+  e apontando DOC-17 como quase vazio quando estava correto. **INGLÊS**: 14 → 7
+  fora da faixa; o pior era **CONT-03 (0,68)**, que tinha perdido a escalada
+  fisiológica inteira — mão pálida, peso do livro, canto do quarto — mais a
+  Escala Atualização 2. Também restaurados MEM-23 (o fecho sobre a fome),
+  LUC-Escolha e MEM-27 (tabelas), DOC-23 (a declaração de Edson), MEM-21,
+  MEM-22. Global EN/PT **1,001**. **CHINÊS**: 8 → 4; **dois não eram tradução,
+  eram outro texto contradizendo a cronologia** — CONT-05 matava Oliveira em
+  **1989** (cânone: desaparecimento em 13/jun/1979 sem corpo; "1989" não existia
+  em nenhum outro arquivo da obra) e DOC-26 encerrava seus escritos em **1981**,
+  apagando os 45 anos até a entrega do diário em 2026. Ambos retraduzidos
+  integralmente. Global ZH/PT **0,363** (mediana 0,37). **Defeito no selo
+  exposto**: substituí dois fragmentos ZH inteiros e o merkle root **não se
+  moveu** — o selo do R399 cobria só o português; corrigido para as três edições
+  (84 → 252 folhas), provado alterando `zh/CONT-05`. **Efeito colateral**: com o
+  inglês completo, PT e EN convergiram para **417 páginas cada** — a diferença
+  de paginação *era* o conteúdo ausente. Preflight
+  **`overall_internal_spec_passed=True`, 648/648, zero violações**; suíte
+  **2730, 0 falhas**. **Não validado**: revisão nativa das traduções. Ver
+  `specs/SPEC-935-R405-molambudos-paridade-textual-en-zh.md`.
 - **R404 (2026-08-07) — "remova a nota do editor que está quebrando o clímax…
   corrija para imergir um desconforto e sensações já propostas":** o R397
   identificou e recomendou; o R398 implementou e **reverteu** por quebrar

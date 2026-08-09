@@ -64,13 +64,27 @@ def test_selo_confere_com_o_corpus_atual():
     )
 
 
-def test_selo_declara_o_numero_real_de_fragmentos():
+def test_selo_cobre_os_fragmentos_das_tres_edicoes():
+    """R405: o selo cobria apenas o corpus português.
+
+    A lacuna apareceu na prática: dois fragmentos chineses foram substituídos
+    por inteiro (CONT-05 e DOC-26, que contradiziam a cronologia da obra) e o
+    merkle root não se moveu. Um selo que não reage a mudança de conteúdo numa
+    das edições publicadas atesta um terço da obra, não a obra.
+    """
     import json
 
     selo = json.loads((BOOK / "SELO_INTEGRIDADE_MERKLE.json").read_text(encoding="utf-8"))
-    reais = len(list((BOOK / "fragmentos").rglob("*.tex")))
-    assert selo["total_fragmentos"] == reais
+    reais = sum(
+        len(list((BOOK / edicao).rglob("*.tex")))
+        for edicao in ("fragmentos", "en/fragmentos", "zh/fragmentos")
+    )
+    assert selo["total_fragmentos"] == reais, (
+        f"selo cobre {selo['total_fragmentos']} fragmentos; as três edições somam {reais}"
+    )
     assert len(selo["fragmentos"]) == reais
+    cobertas = {f["arquivo"].split("/")[0] for f in selo["fragmentos"]}
+    assert cobertas == {"fragmentos", "en", "zh"}, f"edições cobertas: {cobertas}"
 
 
 def test_selo_declara_explicitamente_o_que_nao_atesta():

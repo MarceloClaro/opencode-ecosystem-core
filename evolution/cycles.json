@@ -3975,6 +3975,22 @@
       "verification": "Preflight R362 com --build: overall_internal_spec_passed=True, 648/648 rotas, zero violacoes nas 5 edicoes (PT 417, EN 413, ZH 387, tri 1059, kdp_tri 1113). As 4 edicoes de impressao compilam com trim 160,0x230,0mm. Suite completa 2730 aprovados, 0 falhas; conjunto Molambudos 82/82. Testes de proveniencia R360/R384 verdes -- nenhum fragmento rastreado foi tocado.",
       "status": "verified",
       "date": "2026-08-07"
+    },
+    {
+      "round_id": "R405",
+      "objective": "Usuario pediu 'corrija o ingles' e depois 'ignore as capas, foque o texto, deixe pronto para publicacao, faca o mesmo com o chines'.",
+      "changes": [
+        "Metodo: razao de CARACTERES por fragmento contra a mediana da propria edicao, com limite por IQR. Contagem de LINHAS entre idiomas e enganosa (o chines nao usa espacos). Um extrator ingenuo deu resultado ERRADO na primeira tentativa -- descartava o conteudo dentro de \\textit{}/\\textbf{}, que o ZH usa muito mais, penalizando o chines artificialmente e apontando DOC-17 como quase vazio quando estava correto. Corrigido antes de tocar em qualquer arquivo.",
+        "INGLES: 14 fragmentos fora da faixa -> 7. Sete tinham conteudo ausente. O pior, CONT-03 (0.68), tinha perdido a escalada fisiologica inteira: a mao palida e a circulacao periferica, o peso do livro e a fadiga simpatica, o canto do quarto com a contagem ate 5, mais a Escala de Contaminacao Atualizacao 2. Tambem restaurados: MEM-23 (o medo de ser esquecido no incendio + o fecho sobre a fome), LUC-Escolha e MEM-27 (tabelas de escala), DOC-23 (a declaracao de Edson e a nota 'Ele nao estava mentindo'), MEM-21 (a fala sobre os jornais + a pagina no colchao), MEM-22 (a fala sobre os gritos + 'Eu tampava os ouvidos'). Razao global EN/PT: 1.001.",
+        "CHINES: 8 fora da faixa -> 4. DOIS NAO ERAM TRADUCAO, eram outro texto contradizendo a cronologia. CONT-05 (0.16): o PT e o laudo que registra o LEITOR como Paciente 1.263 com criterios A-G; o ZH era um relatorio sobre a internacao de Oliveira afirmando que ele MORREU EM 1989 -- o canone e desaparecimento em 13/jun/1979 sem corpo (LUC-07, LUC-14), e DOC-25 diz que 'o paciente 1.261 nao desapareceu, foi guardado para o momento da entrega'; '1989' nao aparecia em nenhum outro arquivo da obra em nenhum idioma. DOC-26 (0.19): o PT sao folhas de 1979 a 2026 sobre a fenda temporal e os saltos de 62 dias; o ZH eram notas de 1981 encerrando com 'nunca mais escreveu', apagando os 45 anos ate a entrega do diario. Ambos retraduzidos integralmente; texto anterior em _archive/backup_R405_pre_traducao_zh/.",
+        "CONT-03 ZH recebeu a mesma escalada fisiologica; LUC-Escolha e MEM-27 ZH receberam as tabelas de escala. Razao global ZH/PT: 0.363 contra mediana 0.37.",
+        "DEFEITO NO SELO exposto por este ciclo: dois fragmentos chineses foram substituidos por inteiro e o merkle_root NAO se moveu, porque o selo do R399 percorria apenas fragmentos/ (portugues). Um selo que ignora duas das tres edicoes publicadas atesta um terco da obra. Corrigido: _fragmentos() percorre as tres edicoes, de 84 para 252 folhas. Verificado na pratica -- alterar zh/CONT-05 faz verificar sair 1 apontando o arquivo, e voltar ao verde apos restaurar. test_selo_declara_o_numero_real_de_fragmentos substituido por test_selo_cobre_os_fragmentos_das_tres_edicoes.",
+        "Efeito colateral notavel: com o ingles completado, PT e EN convergiram para 417 paginas cada (eram 417 e 413) -- a diferenca de paginacao ERA o conteudo ausente. Miolos de impressao e lombadas atualizados: PT 435/25,93mm, EN 431/25,69mm, ZH 405/24,14mm, tri 1125/67,07mm.",
+        "LIMITE do detector de paragrafos: casamento por similaridade de string so funciona entre idiomas com cognatos. Apontou CONT-12 e LUC-08 como incompletos e ambos estavam corretos. Usado como apontador, com verificacao manual de cada caso."
+      ],
+      "verification": "Preflight R362 com --build: overall_internal_spec_passed=True, 648/648 rotas, zero violacoes nas 5 edicoes (PT 417, EN 417, ZH 395, tri 1073, kdp_tri 1125). Suite completa 2730 aprovados, 0 falhas; conjunto Molambudos 82/82. NAO validado: revisao nativa das traducoes EN e ZH -- o corrigido foi conteudo ausente medido por volume e contradicao factual contra o canone, nao qualidade de lingua.",
+      "status": "verified",
+      "date": "2026-08-08"
     }
   ]
 }
