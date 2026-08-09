@@ -5,7 +5,28 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R405 — paridade textual das edições EN e ZH; dois fragmentos chineses contradiziam o cânone** (2026-08-08)
+- **Branch:** `main` · última entrega: **R406 — coerência factual das três edições e verificador de cânone** (2026-08-08)
+- **R406 (2026-08-08) — "corrija com precisão todas as contradições e
+  incoerências das três edições":** o defeito de método era encontrar
+  contradições **por acaso** — a de 1989 (zh) apareceu enquanto se mediam razões
+  de caracteres, a de 1981 (pt) numa varredura feita por causa de uma pergunta.
+  Uma varredura sistemática achou que `DOC-07` matava o Dr. Oliveira em 1981
+  **só em português**, contra as quatro fontes que o têm desaparecido sem corpo
+  em 13/jun/1979 e escrevendo até 2026. É o elo central: se ele morre em 1981, o
+  diário não chega a Lúcia e o ciclo não fecha. P.S. reescrito preservando a
+  anotação do colega (parar de sentir fome como pior sintoma) e acrescentado às
+  três edições. `zh/DOC-23` ganhou a declaração final do vigilante Edson, que
+  faltava. `scripts/molambudos_canone.py` substitui a sorte: 14 fatos-âncora
+  afirmados, 4 proibidos, paridade de datas, CRM fora do cânone — sai `!=0` como
+  gate. **Provado por reintrodução**: as três contradições corrigidas foram
+  reinjetadas e todas foram acusadas com edição e arquivo. Armadilha documentada
+  no código: `\b` não casa antes de 年, e foi assim que uma medição anterior
+  "perdeu" 17 anos do chinês. Estado: 0 contradições, 45 anos com paridade, selo
+  sobre 252 folhas. Suíte **2733, 0 falhas** — a única falha do caminho foi o
+  próprio selo acusando corretamente a edição do `zh/DOC-23`. **Limite
+  declarado:** cobre fatos, não prosa; âncoras finitas e escritas à mão; as
+  traduções en/zh são de autoria própria e seguem exigindo revisor nativo. Ver
+  `specs/SPEC-935-R406-molambudos-coerencia-factual.md`.
 - **R405 (2026-08-08) — "corrija o inglês" + "foque o texto… faça o mesmo com o
   chinês":** método = razão de **caracteres** por fragmento contra a mediana da
   própria edição (contagem de linhas entre idiomas é enganosa; o chinês não usa
