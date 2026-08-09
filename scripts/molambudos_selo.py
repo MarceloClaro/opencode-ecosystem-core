@@ -122,11 +122,22 @@ def merkle_root(folhas: list[str]) -> str:
 
 
 def _fragmentos() -> list[dict[str, str]]:
-    base = BOOK / "fragmentos"
+    """Folhas do merkle: os fragmentos das TRÊS edições.
+
+    Até o R405 o selo cobria apenas `fragmentos/` (português). A consequência
+    foi visível na prática: dois fragmentos chineses foram substituídos por
+    inteiro --- CONT-05 e DOC-26, que contradiziam a cronologia da obra --- e
+    o merkle root não se moveu. Um selo que não reage a mudança de conteúdo
+    numa das edições publicadas não atesta a obra; atesta um terço dela.
+    """
     saida = []
-    for path in sorted(base.rglob("*.tex")):
-        rel = path.relative_to(BOOK).as_posix()
-        saida.append({"arquivo": rel, "sha256": _folha(rel, path)})
+    for edicao in ("fragmentos", "en/fragmentos", "zh/fragmentos"):
+        base = BOOK / edicao
+        if not base.is_dir():
+            continue
+        for path in sorted(base.rglob("*.tex")):
+            rel = path.relative_to(BOOK).as_posix()
+            saida.append({"arquivo": rel, "sha256": _folha(rel, path)})
     return saida
 
 
