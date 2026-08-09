@@ -3991,6 +3991,19 @@
       "verification": "Preflight R362 com --build: overall_internal_spec_passed=True, 648/648 rotas, zero violacoes nas 5 edicoes (PT 417, EN 417, ZH 395, tri 1073, kdp_tri 1125). Suite completa 2730 aprovados, 0 falhas; conjunto Molambudos 82/82. NAO validado: revisao nativa das traducoes EN e ZH -- o corrigido foi conteudo ausente medido por volume e contradicao factual contra o canone, nao qualidade de lingua.",
       "status": "verified",
       "date": "2026-08-08"
+    },
+    {
+      "round_id": "R406",
+      "date": "2026-08-08",
+      "objective": "Molambudos: eliminar as contradicoes factuais das tres edicoes e substituir a deteccao por acaso por verificacao sistematica de canone.",
+      "changes": [
+        "DOC-07: P.S. contradizia o canone ('Oliveira faleceu em 1981') e existia so em portugues; reescrito para o desaparecimento de 13/jun/1979 e acrescentado a en e zh.",
+        "zh/DOC-23: faltava a declaracao final do vigilante Edson presente em pt e en; acrescentada.",
+        "scripts/molambudos_canone.py: verificador de coerencia factual (14 fatos-ancora afirmados, 4 proibidos, paridade de datas, CRM fora do canone); sai !=0 como gate.",
+        "Selo regerado apos a edicao do zh/DOC-23 (merkle root sobre 252 folhas)."
+      ],
+      "status": "verified",
+      "verification": "pytest tests/ -q: 2733 passed, 56 skipped. Canone: 0 contradicoes, 45 anos com paridade nas tres edicoes. Verificador provado por reintroducao das tres contradicoes corrigidas (1981/pt, 1989/zh, CRP/en) - todas acusadas com edicao e arquivo. Selo confere. LIMITE DECLARADO: cobre fatos, nao prosa; o conjunto de ancoras e finito e escrito a mao. Traducoes en/zh sao de autoria propria e seguem exigindo revisor nativo."
     }
   ]
 }
