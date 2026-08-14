@@ -1,0 +1,989 @@
+{
+  "spec": "SPEC-935-R413",
+  "painel_fonte": "data/processed/panel_wdi_expandido_1960_2023.csv",
+  "sha256_painel": "5fc56158a3be53a5f66eb5a136fb411096632c990d198eebe40414a14bb11b53",
+  "n_paises": 135,
+  "n_pais_ano": 8640,
+  "n_bootstrap": 500,
+  "seed": 42,
+  "lag_anos": 5,
+  "proveniencia_fechada": true,
+  "nota_metodologica": "Correlações parciais de Pearson sobre resíduos; IC via cluster bootstrap por país (500 replicações, seed 42). Painel FE com erros padrão clusterizados por país. Linguagem associativa; nenhuma inferência causal.",
+  "parciais": [
+    {
+      "x": "ln_tertiaria",
+      "y": "ln_gdp_pc",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": 0.652633805464444,
+      "n": 2557,
+      "ic_boot_inf": 0.5543484642455948,
+      "ic_boot_sup": 0.7353069409282426
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "SE_XPD_TOTL_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.09610346121828944,
+      "n": 2660,
+      "ic_boot_inf": -0.003913287066791478,
+      "ic_boot_sup": 0.18604383805190275
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "GB_XPD_RSDV_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.0036543692784971053,
+      "n": 1637,
+      "ic_boot_inf": -0.12020228544551297,
+      "ic_boot_sup": 0.1081119929271859
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "SP_DYN_LE00_IN",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.684362557349869,
+      "n": 4374,
+      "ic_boot_inf": 0.638713700426838,
+      "ic_boot_sup": 0.7282848017343527
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "SI_POV_GINI",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.18431638722118704,
+      "n": 1475,
+      "ic_boot_inf": -0.30169334481123683,
+      "ic_boot_sup": -0.0419032114441347
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "SP_URB_TOTL_IN_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.4307068690327058,
+      "n": 4374,
+      "ic_boot_inf": 0.3544299863363094,
+      "ic_boot_sup": 0.5082106331585304
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "NV_IND_MANF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.25798861729401834,
+      "n": 3610,
+      "ic_boot_inf": 0.15103895998471337,
+      "ic_boot_sup": 0.35122287641647354
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "TX_VAL_TECH_MF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.0016975153469465688,
+      "n": 1566,
+      "ic_boot_inf": -0.11989884580462039,
+      "ic_boot_sup": 0.08682087939160432
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.03333822733055212,
+      "n": 4190,
+      "ic_boot_inf": 0.006045351525367762,
+      "ic_boot_sup": 0.14905513119105343
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.19337528404821178,
+      "n": 2557,
+      "ic_boot_inf": -0.31349344608459506,
+      "ic_boot_sup": -0.08001771862388146
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.2755155306455973,
+      "n": 2556,
+      "ic_boot_inf": -0.3682441798173515,
+      "ic_boot_sup": -0.1827122165768141
+    },
+    {
+      "x": "ln_tertiaria",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.14235403226429563,
+      "n": 2550,
+      "ic_boot_inf": -0.24903548546276416,
+      "ic_boot_sup": -0.031654501005764904
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "SE_XPD_TOTL_GD_ZS",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": -0.017778589010631854,
+      "n": 2443,
+      "ic_boot_inf": -0.15931949143431107,
+      "ic_boot_sup": 0.09976069587360137
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "GB_XPD_RSDV_GD_ZS",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": 0.19007019876816553,
+      "n": 1810,
+      "ic_boot_inf": 0.048515542592644234,
+      "ic_boot_sup": 0.31210345883360696
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "SP_DYN_LE00_IN",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": 0.6672791755519568,
+      "n": 3371,
+      "ic_boot_inf": 0.6136338834478504,
+      "ic_boot_sup": 0.7275349309868612
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "SI_POV_GINI",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": -0.039356105182289214,
+      "n": 1490,
+      "ic_boot_inf": -0.17228715832777247,
+      "ic_boot_sup": 0.07926839027523001
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "SP_URB_TOTL_IN_ZS",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": 0.7332313492049282,
+      "n": 3371,
+      "ic_boot_inf": 0.6613186053550796,
+      "ic_boot_sup": 0.787934912599783
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "NV_IND_MANF_ZS",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": 0.03213728699590156,
+      "n": 3151,
+      "ic_boot_inf": -0.0774733661166858,
+      "ic_boot_sup": 0.1531740627892233
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "TX_VAL_TECH_MF_ZS",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": 0.08681274956068348,
+      "n": 1901,
+      "ic_boot_inf": -0.008657118498777662,
+      "ic_boot_sup": 0.19501637547520073
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": -0.003442055084984722,
+      "n": 3300,
+      "ic_boot_inf": -0.06627474734448235,
+      "ic_boot_sup": 0.01682595928358152
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "WGI_media",
+      "controles": [],
+      "rho_parcial": 0.7984029321946845,
+      "n": 3371,
+      "ic_boot_inf": 0.7536104667062915,
+      "ic_boot_sup": 0.8420479019715427
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "WGI_CC",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": -0.02197745995391191,
+      "n": 3366,
+      "ic_boot_inf": -0.13916228270030004,
+      "ic_boot_sup": 0.08603517337640572
+    },
+    {
+      "x": "ln_gdp_pc",
+      "y": "WGI_GE",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho_parcial": 0.36295055652571023,
+      "n": 3357,
+      "ic_boot_inf": 0.2815001591858802,
+      "ic_boot_sup": 0.4499810478370429
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "GB_XPD_RSDV_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.2977849213961032,
+      "n": 1461,
+      "ic_boot_inf": 0.16988065990128923,
+      "ic_boot_sup": 0.43778241521484645
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "SP_DYN_LE00_IN",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.01931218480707706,
+      "n": 3791,
+      "ic_boot_inf": -0.08698774595029463,
+      "ic_boot_sup": 0.1426868892804497
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "SI_POV_GINI",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.13854161512077057,
+      "n": 1370,
+      "ic_boot_inf": -0.2606390476383798,
+      "ic_boot_sup": -0.0009892391705289797
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "SP_URB_TOTL_IN_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.01675928872311889,
+      "n": 3791,
+      "ic_boot_inf": -0.11712665823959695,
+      "ic_boot_sup": 0.08192631747919177
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "NV_IND_MANF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.07148662026187802,
+      "n": 3241,
+      "ic_boot_inf": -0.19987050772054835,
+      "ic_boot_sup": 0.03277233942904308
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "TX_VAL_TECH_MF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.03602581455356818,
+      "n": 1556,
+      "ic_boot_inf": -0.05727486519394457,
+      "ic_boot_sup": 0.1342117143602928
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.025307483830598828,
+      "n": 3690,
+      "ic_boot_inf": -0.043936616777267144,
+      "ic_boot_sup": 0.054734225819343035
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.2687312719084353,
+      "n": 2443,
+      "ic_boot_inf": 0.14352185866283035,
+      "ic_boot_sup": 0.40175504731058287
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.3407704246928133,
+      "n": 2441,
+      "ic_boot_inf": 0.24680762615831972,
+      "ic_boot_sup": 0.42251370715745845
+    },
+    {
+      "x": "SE_XPD_TOTL_GD_ZS",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.26523812807985153,
+      "n": 2440,
+      "ic_boot_inf": 0.16155745756480325,
+      "ic_boot_sup": 0.38487236988624324
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "SP_DYN_LE00_IN",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.010882125596874273,
+      "n": 1987,
+      "ic_boot_inf": -0.1196784700988352,
+      "ic_boot_sup": 0.08491420843181502
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "SI_POV_GINI",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.18989280113207152,
+      "n": 1226,
+      "ic_boot_inf": -0.4028602544338534,
+      "ic_boot_sup": -0.009323034618015797
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "SP_URB_TOTL_IN_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.12221772670623277,
+      "n": 1987,
+      "ic_boot_inf": -0.2759090296969135,
+      "ic_boot_sup": 0.03692321000963083
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "NV_IND_MANF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.28331275779820414,
+      "n": 1864,
+      "ic_boot_inf": 0.14279610081584385,
+      "ic_boot_sup": 0.43640190239944027
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "TX_VAL_TECH_MF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.25026488871533287,
+      "n": 1148,
+      "ic_boot_inf": 0.10307615214566583,
+      "ic_boot_sup": 0.42937129760262843
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.12053140627702084,
+      "n": 1942,
+      "ic_boot_inf": -0.16284036013314404,
+      "ic_boot_sup": -0.07336057636535519
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.30220930777705873,
+      "n": 1810,
+      "ic_boot_inf": 0.1587068132622878,
+      "ic_boot_sup": 0.47139398441454333
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.380476031457618,
+      "n": 1809,
+      "ic_boot_inf": 0.2264946524126736,
+      "ic_boot_sup": 0.5390384007437286
+    },
+    {
+      "x": "GB_XPD_RSDV_GD_ZS",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.45372886237952625,
+      "n": 1806,
+      "ic_boot_inf": 0.3585771892818368,
+      "ic_boot_sup": 0.5487665331646288
+    },
+    {
+      "x": "SP_DYN_LE00_IN",
+      "y": "SI_POV_GINI",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.15086240883161772,
+      "n": 1891,
+      "ic_boot_inf": -0.27613125758444196,
+      "ic_boot_sup": -0.030605592272853775
+    },
+    {
+      "x": "SP_DYN_LE00_IN",
+      "y": "SP_URB_TOTL_IN_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.40031518553904455,
+      "n": 7508,
+      "ic_boot_inf": 0.32284012321127786,
+      "ic_boot_sup": 0.4726572518604382
+    },
+    {
+      "x": "SP_DYN_LE00_IN",
+      "y": "NV_IND_MANF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.10641109431521915,
+      "n": 5517,
+      "ic_boot_inf": -0.007674144293759416,
+      "ic_boot_sup": 0.20466147999849815
+    },
+    {
+      "x": "SP_DYN_LE00_IN",
+      "y": "TX_VAL_TECH_MF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.013431738494628762,
+      "n": 1901,
+      "ic_boot_inf": -0.09595548415668237,
+      "ic_boot_sup": 0.12994881825687155
+    },
+    {
+      "x": "SP_DYN_LE00_IN",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.07960840100917485,
+      "n": 6298,
+      "ic_boot_inf": 0.06792318283803868,
+      "ic_boot_sup": 0.18354274775108004
+    },
+    {
+      "x": "SP_DYN_LE00_IN",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.06091704236698701,
+      "n": 3371,
+      "ic_boot_inf": -0.16502016284075754,
+      "ic_boot_sup": 0.05339614971023668
+    },
+    {
+      "x": "SP_DYN_LE00_IN",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.12057266346774949,
+      "n": 3366,
+      "ic_boot_inf": -0.2326961406776724,
+      "ic_boot_sup": -0.01571167471809741
+    },
+    {
+      "x": "SP_DYN_LE00_IN",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.022906476371241016,
+      "n": 3357,
+      "ic_boot_inf": -0.06281878603838013,
+      "ic_boot_sup": 0.11707210330535875
+    },
+    {
+      "x": "SI_POV_GINI",
+      "y": "SP_URB_TOTL_IN_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.20063117477670048,
+      "n": 1891,
+      "ic_boot_inf": 0.04977473345977529,
+      "ic_boot_sup": 0.3348565383517286
+    },
+    {
+      "x": "SI_POV_GINI",
+      "y": "NV_IND_MANF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.02386291849557809,
+      "n": 1688,
+      "ic_boot_inf": -0.1467037817579642,
+      "ic_boot_sup": 0.10169042539624323
+    },
+    {
+      "x": "SI_POV_GINI",
+      "y": "TX_VAL_TECH_MF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.11867600874813561,
+      "n": 986,
+      "ic_boot_inf": -0.24544681870968957,
+      "ic_boot_sup": 0.02447267889224665
+    },
+    {
+      "x": "SI_POV_GINI",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.03933042191013671,
+      "n": 1865,
+      "ic_boot_inf": -0.0725811601404414,
+      "ic_boot_sup": 0.011454855067641993
+    },
+    {
+      "x": "SI_POV_GINI",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.16513139015776918,
+      "n": 1490,
+      "ic_boot_inf": -0.2870008321489146,
+      "ic_boot_sup": -0.007043237670556184
+    },
+    {
+      "x": "SI_POV_GINI",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.13901391049935422,
+      "n": 1490,
+      "ic_boot_inf": -0.2537013446026562,
+      "ic_boot_sup": -0.0022116653380173192
+    },
+    {
+      "x": "SI_POV_GINI",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.14609062657738617,
+      "n": 1489,
+      "ic_boot_inf": -0.2710091330352391,
+      "ic_boot_sup": -0.007948368186438329
+    },
+    {
+      "x": "SP_URB_TOTL_IN_ZS",
+      "y": "NV_IND_MANF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.03565833055256893,
+      "n": 5517,
+      "ic_boot_inf": -0.08620915443199728,
+      "ic_boot_sup": 0.15659681353951105
+    },
+    {
+      "x": "SP_URB_TOTL_IN_ZS",
+      "y": "TX_VAL_TECH_MF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.049092309081085625,
+      "n": 1901,
+      "ic_boot_inf": -0.17380039970340203,
+      "ic_boot_sup": 0.05433623761919302
+    },
+    {
+      "x": "SP_URB_TOTL_IN_ZS",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.030953634516348517,
+      "n": 6298,
+      "ic_boot_inf": -0.040031623724804406,
+      "ic_boot_sup": 0.08137256882248171
+    },
+    {
+      "x": "SP_URB_TOTL_IN_ZS",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.33025197803193695,
+      "n": 3371,
+      "ic_boot_inf": -0.42758647620410944,
+      "ic_boot_sup": -0.21964225298226742
+    },
+    {
+      "x": "SP_URB_TOTL_IN_ZS",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.25523602417630964,
+      "n": 3366,
+      "ic_boot_inf": -0.34752606380986034,
+      "ic_boot_sup": -0.1474178664106577
+    },
+    {
+      "x": "SP_URB_TOTL_IN_ZS",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.3036115193029418,
+      "n": 3357,
+      "ic_boot_inf": -0.39658869581254685,
+      "ic_boot_sup": -0.1970634620919768
+    },
+    {
+      "x": "NV_IND_MANF_ZS",
+      "y": "TX_VAL_TECH_MF_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.19246119383389615,
+      "n": 1854,
+      "ic_boot_inf": 0.023785796061224385,
+      "ic_boot_sup": 0.3405485786976326
+    },
+    {
+      "x": "NV_IND_MANF_ZS",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.08286388938058682,
+      "n": 5046,
+      "ic_boot_inf": -0.13828743060016285,
+      "ic_boot_sup": -0.04667538073904606
+    },
+    {
+      "x": "NV_IND_MANF_ZS",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.01451107776231209,
+      "n": 3151,
+      "ic_boot_inf": -0.1286327546534564,
+      "ic_boot_sup": 0.0997583370612645
+    },
+    {
+      "x": "NV_IND_MANF_ZS",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": -0.04752864676071664,
+      "n": 3151,
+      "ic_boot_inf": -0.16179728920875616,
+      "ic_boot_sup": 0.04947395515452614
+    },
+    {
+      "x": "NV_IND_MANF_ZS",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.06038339197841788,
+      "n": 3143,
+      "ic_boot_inf": -0.06756716711255491,
+      "ic_boot_sup": 0.167422680097889
+    },
+    {
+      "x": "TX_VAL_TECH_MF_ZS",
+      "y": "BX_KLT_DINV_WD_GD_ZS",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.16068277681414617,
+      "n": 1893,
+      "ic_boot_inf": 0.04244222150187329,
+      "ic_boot_sup": 0.23758355496863895
+    },
+    {
+      "x": "TX_VAL_TECH_MF_ZS",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.1646250576145122,
+      "n": 1901,
+      "ic_boot_inf": 0.070555282007509,
+      "ic_boot_sup": 0.26149329966286783
+    },
+    {
+      "x": "TX_VAL_TECH_MF_ZS",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.1433271434846844,
+      "n": 1901,
+      "ic_boot_inf": 0.04168928529457957,
+      "ic_boot_sup": 0.24254389545731578
+    },
+    {
+      "x": "TX_VAL_TECH_MF_ZS",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.264516955185704,
+      "n": 1901,
+      "ic_boot_inf": 0.16752505215202454,
+      "ic_boot_sup": 0.34250669725105276
+    },
+    {
+      "x": "BX_KLT_DINV_WD_GD_ZS",
+      "y": "WGI_media",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.08235062719875427,
+      "n": 3300,
+      "ic_boot_inf": 0.0545937846252534,
+      "ic_boot_sup": 0.15319367972927764
+    },
+    {
+      "x": "BX_KLT_DINV_WD_GD_ZS",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.03503483188942673,
+      "n": 3295,
+      "ic_boot_inf": 0.006447547691005475,
+      "ic_boot_sup": 0.11629415551179129
+    },
+    {
+      "x": "BX_KLT_DINV_WD_GD_ZS",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.06036168940137272,
+      "n": 3292,
+      "ic_boot_inf": 0.0349990162886913,
+      "ic_boot_sup": 0.1470344549022426
+    },
+    {
+      "x": "WGI_media",
+      "y": "WGI_CC",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.8827250080248267,
+      "n": 3366,
+      "ic_boot_inf": 0.8580428484198847,
+      "ic_boot_sup": 0.9030469559965959
+    },
+    {
+      "x": "WGI_media",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.8639235109545013,
+      "n": 3357,
+      "ic_boot_inf": 0.827248489000622,
+      "ic_boot_sup": 0.8864865942431811
+    },
+    {
+      "x": "WGI_CC",
+      "y": "WGI_GE",
+      "controles": [
+        "ln_gdp_pc"
+      ],
+      "rho_parcial": 0.7924638047036555,
+      "n": 3357,
+      "ic_boot_inf": 0.751925114074867,
+      "ic_boot_sup": 0.8260719836028493
+    }
+  ],
+  "etapas": [
+    {
+      "ordem": 0,
+      "etapa": "inicial",
+      "controle": "nenhum",
+      "controles": [],
+      "rho": 0.7013874395616716,
+      "n": 4374,
+      "ic_boot_inf": 0.6424260264154265,
+      "ic_boot_sup": 0.7559015577843982
+    },
+    {
+      "ordem": 1,
+      "etapa": "wgi",
+      "controle": "wgi",
+      "controles": [
+        "WGI_media"
+      ],
+      "rho": 0.652633805464444,
+      "n": 2557,
+      "ic_boot_inf": 0.5674667740034016,
+      "ic_boot_sup": 0.7381384093500001
+    },
+    {
+      "ordem": 2,
+      "etapa": "estrutura",
+      "controle": "wgi+estrutura",
+      "controles": [
+        "WGI_media",
+        "SE_XPD_TOTL_GD_ZS",
+        "GB_XPD_RSDV_GD_ZS",
+        "SP_URB_TOTL_IN_ZS",
+        "NV_IND_MANF_ZS"
+      ],
+      "rho": 0.3578532009489252,
+      "n": 1146,
+      "ic_boot_inf": 0.20481832955507653,
+      "ic_boot_sup": 0.5276010759904296
+    },
+    {
+      "ordem": 3,
+      "etapa": "saude",
+      "controle": "saude",
+      "controles": [
+        "WGI_media",
+        "SE_XPD_TOTL_GD_ZS",
+        "GB_XPD_RSDV_GD_ZS",
+        "SP_URB_TOTL_IN_ZS",
+        "NV_IND_MANF_ZS",
+        "SP_DYN_LE00_IN"
+      ],
+      "rho": 0.10467343688913612,
+      "n": 1146,
+      "ic_boot_inf": -0.09030041324979647,
+      "ic_boot_sup": 0.2883552596900668
+    }
+  ],
+  "canais": {
+    "saude": {
+      "especificacao": "SP_DYN_LE00_IN ~ ln_tertiaria_lag5 + WGI_media + SE_XPD_TOTL_GD_ZS + GB_XPD_RSDV_GD_ZS + SP_URB_TOTL_IN_ZS + NV_IND_MANF_ZS + C(iso3_cat) + C(year_cat)",
+      "coef": 0.5349179007302594,
+      "ic_inf": -0.25696081127829096,
+      "ic_sup": 1.3267966127388098,
+      "p_value": 0.1855146181233729,
+      "cluster": "por_pais",
+      "n_clusters": 106,
+      "n_obs": 1020,
+      "nota": "associação condicional dentro do país (FE), com controles; sem inferência causal"
+    },
+    "desigualdade": {
+      "especificacao": "SI_POV_GINI ~ ln_tertiaria_lag5 + WGI_media + SE_XPD_TOTL_GD_ZS + GB_XPD_RSDV_GD_ZS + SP_URB_TOTL_IN_ZS + NV_IND_MANF_ZS + C(iso3_cat) + C(year_cat)",
+      "coef": -0.10411001521958219,
+      "ic_inf": -2.8021044250634057,
+      "ic_sup": 2.593884394624242,
+      "p_value": 0.9397127124509312,
+      "cluster": "por_pais",
+      "n_clusters": 77,
+      "n_obs": 726,
+      "nota": "associação condicional dentro do país (FE), com controles; sem inferência causal"
+    },
+    "inovacao": {
+      "especificacao": "TX_VAL_TECH_MF_ZS ~ GB_XPD_RSDV_GD_ZS_lag5 + WGI_media + SE_XPD_TOTL_GD_ZS + GB_XPD_RSDV_GD_ZS + SP_URB_TOTL_IN_ZS + NV_IND_MANF_ZS + C(iso3_cat) + C(year_cat)",
+      "coef": 0.8356946751076795,
+      "ic_inf": -1.7682465954037763,
+      "ic_sup": 3.439635945619135,
+      "p_value": 0.5293358804472605,
+      "cluster": "por_pais",
+      "n_clusters": 77,
+      "n_obs": 769,
+      "nota": "associação condicional dentro do país (FE), com controles; sem inferência causal"
+    }
+  },
+  "interacoes": [
+    {
+      "termo": "ln_tertiaria_lag5_WGI_media",
+      "coef": 0.05431516374931456,
+      "ic_inf": 0.016525313413699616,
+      "ic_sup": 0.0921050140849295,
+      "p_value": 0.004846751140982932,
+      "cluster": "por_pais",
+      "n_clusters": 106,
+      "n_obs": 1020,
+      "exploratorio": true,
+      "nota": "exploratório: interação no painel FE clusterizado; não é evidência de moderação causal"
+    },
+    {
+      "termo": "ln_tertiaria_lag5_GB_XPD_RSDV_GD_ZS_lag5",
+      "coef": -0.0031201505250602543,
+      "ic_inf": -0.017396552280608532,
+      "ic_sup": 0.011156251230488025,
+      "p_value": 0.6683919382141352,
+      "cluster": "por_pais",
+      "n_clusters": 80,
+      "n_obs": 844,
+      "exploratorio": true,
+      "nota": "exploratório: interação no painel FE clusterizado; não é evidência de moderação causal"
+    }
+  ],
+  "loocv_folds": 135
+}

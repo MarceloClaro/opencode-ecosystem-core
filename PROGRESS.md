@@ -5,7 +5,155 @@
 
 ## Estado atual
 
-- **Branch:** `main` · última entrega: **R406 — coerência factual das três edições e verificador de cânone** (2026-08-08)
+- **Branch:** `main` · última entrega: **R414 — Auditoria de submissão do manuscrito RBEP** (2026-08-13)
+- **R414 (2026-08-13) — "avalie com os scanners, busque gaps, inconsistências, redundâncias e contradições, e corrija para submissão":**
+  auditoria do `ARTIGO_RBEP_SUBMISSAO.md` com scanners (scientific_reasoning_scan,
+  super_rigor_audit) + verificação programática de consistência numérica
+  MD↔provenance↔TeX. Correções aplicadas em MD e TeX:
+  **(1) contradição 4.5 eliminada** — "matrícula terciária defasada" → "log do
+  PIB per capita defasado como regressor" (alinhado à 3.2c); **(2) 3.1
+  limpo** — "135 países (mais de 20 países)" → "135 países"; **(3) 3.2a com
+  falsificabilidade explícita** — critérios de invalidação pré-definidos
+  (FD≈níveis refuta dominância de diferenças permanentes; FE estável e ≠ 0
+  refuta não discernibilidade); **(4) gap fechado** — nova **seção 4.7
+  "Canais associativos"** + Tabela 7 com números fechados por
+  `provenance_r413.json` (0,701→0,358→0,105; parcial saúde 0,684; canais FE
+  0,535/−0,104/0,836; interação WGI 0,054 p=0,005 exploratória) + parágrafo
+  na Discussão; **(5) bug corrigido no EvolutionRegistry** — R413 gravado
+  fora do formato canônico zerava o carregamento (0/230); convertido →
+  230/230, total 1418,54; **(6) anti-overclaim refinado** (word-boundary)
+  nos testes R410/R411/R412 sem perder a intenção. Scanners pós-correção:
+  excellence 42.5→**57.5**, SRI 35→**65**, methodology 25→**75**, 0 falácias.
+  Suíte R408–R414 **247/247 GREEN** (R414: 23/23). PDF recompilado (12 pág.,
+  **0 Overfull** — Tabelas 1, 5 e 7 enquadradas nas margens ABNT via `p{}` e
+  `\resizebox` + `graphicx`; guarda `test_log_sem_overfull`).
+  **AGUARDA revisão humana das seções novas antes da submissão efetiva à RBEP.**
+- **R413 (2026-08-13) — "prossiga" (gap coverage com validação e auditoria):**
+  nova análise de **canais associativos** sobre o painel expandido R412 (135
+  países, 1960–2023), cobrindo combinações que a literatura trata separadamente
+  mas raramente junta (educação terciária × saúde × governança × inovação).
+  Entregas: `specs/SPEC-935-R413-canais-associativos.md`;
+  `scripts/analyze_channels.py` (correlações parciais ctrl PIB; análise em
+  etapas; canais FE clusterizados por país; interações exploratórias; bootstrap
+  por país 500× seed 42; LOOCV 135 folds); `outputs/channels/` (provenance
+  fechada com SHA-256 do painel + 4 tabelas + folds);
+  `NOTA_CANAIS_ASSOCIATIVOS.md` (resumo trilíngue, anti-overclaim) + LaTeX/PDF.
+  Achados: ρ matrícula×PIB cai **0,701 → 0,105** ao adicionar expectativa de
+  vida (canal saúde, IC bootstrap [−0,090; 0,288]); parcial matrícula×saúde
+  **0,684** (IC [0,639; 0,728], n=4374); canais FE cluster: saúde 0,535
+  (p=0,186), desigualdade −0,104 (p=0,940), inovação 0,836 (p=0,529) — sinais
+  consistentes, p-values altos reportados honestamente; interação
+  matrícula×WGI 0,054 (p=0,005) marcada **exploratória**. Gate refinado:
+  bloqueio de verbos causais preservando o substantivo técnico "determinantes".
+  Suíte R408–R413 **228/228 GREEN** (R413: 26/26). **AGUARDA revisão humana:
+  nota é candidata a apêndice do artigo ou segundo artigo; submissão à RBEP
+  segue ação humana.**
+- **R412 (2026-08-13) — "prossiga" (expansão para eliminar limitações reais):**
+  painel expandido de **7 → 135 países** (8.640 obs país-ano, 1960–2023),
+  com critério transparente (≥20 obs não nulas de matrícula e PIB; agregados
+  excluídos via lista oficial). Novos controles: **WGI** (6 dimensões de
+  governança, source 3 da API, IDs `GOV_WGI_*`) e estruturais (manufatura,
+  alta tecnologia, expectativa de vida, investimento). **Erros padrão
+  clusterizados por país** (statsmodels). Achados: ρ níveis **0,751**
+  (n=4374); ρ primeiras diferenças **0,146** (n=4373); LOOCV 135 folds
+  (treino 0,751±0,003; teste 0,542); subperíodos 0,615/0,769; painel
+  FE país+ano+controles **coef 0,073 (IC95% −0,169 a 0,314; p=0,555;
+  106 clusters)** → não significativo (achado negativo honesto); ML
+  AUC 0,694 linha vs **0,609** agrupado. Manuscrito (`ARTIGO_RBEP_SUBMISSAO.md`),
+  LaTeX/PDF e carta atualizados; testes R410/R411 migrados para
+  `provenance_expanded.json` (mudança documentada). Suíte R408–R412
+  **202/202 GREEN**; ciclo R412 score 8.5. **AGUARDA revisão humana e
+  submissão efetiva à RBEP (ação humana).**
+- **R411 (2026-08-12) — "latex/pdf":** versão LaTeX compilável do manuscrito
+  R410 (`latex/ARTIGO_RBEP_SUBMISSAO.tex`, ~490 linhas; pdflatex; A4; 12pt;
+  margens ABNT 3/3/2/2 cm; espaçamento 1,5; newtxtext; 6 tabelas booktabs)
+  e **PDF compilado** (`latex/ARTIGO_RBEP_SUBMISSAO.pdf`, 11 páginas A4).
+  Fidelidade numérica integral ao R410/R409 (teste de identidade: todo número
+  decimal do corpo do MD presente no .tex, exceto numeração de seção gerada
+  pelo LaTeX). Correções de layout: colunas p{} + \footnotesize nas tabelas
+  largas (overfull 237pt → 0), \path{} do hyperref para paths longos
+  (81pt → 0), comentário do cabeçalho sem aviso editorial. Testes
+  `test_r411_artigo_rbep_latex.py` 75/75 GREEN (inclui compilação pdflatex
+  real em subprocess); suíte acumulada R408–R411 **182/182 GREEN**; doctor
+  10/12 (0 falhas). Ciclo R411 score 0.85. **AGUARDA revisão humana e
+  submissão efetiva à RBEP (ação humana).**
+- **R410 (2026-08-12) — periódico-alvo "revista de educação":** adequação do
+  manuscrito R409 às normas da **Revista Brasileira de Estudos Pedagógicos
+  (RBEP/INEP)** — Qualis CAPES **A1 em Educação** (2017–2020 e 2021–2024),
+  e-ISSN 2176-6681. Entregue `ARTIGO_RBEP_SUBMISSAO.md` (título PT/EN/ES,
+  resumo/abstract/resumen, 3–5 palavras-chave por idioma do Thesaurus
+  Brasileiro de Educação/Brased, citações ABNT NBR 10520 caixa alta, 16
+  referências ABNT NBR 6023 com DOI em ordem alfabética; **corpo sem avisos
+  editoriais**) e `CARTA_AO_EDITOR.md` (contribuição, ciência aberta SHA-256,
+  declarações de ineditismo/conflito/autoria — onde residem os avisos de
+  candidatura). Números idênticos ao R409 (proveniência fechada). Testes
+  `test_r410_artigo_rbep.py` 41/41 GREEN; suíte acumulada R408+R409+R410
+  107/107 GREEN; doctor 10/12 (0 falhas). Ciclo R410 score 0.86. **AGUARDA
+  revisão humana; submissão efetiva à RBEP é ação humana.**
+- **R408 (2026-08-12) — "prossiga" (auditoria do artigo ARM–educação):** reanálise
+  com dados oficiais do World Bank WDI (cache com URL/UTC/status/SHA-256,
+  offline-capable). **Confirmação empírica da pseudorreplicação:** ρ=0,934
+  matrícula terciária × PIB (n=198) é reproduzido em níveis, mas colapsa para
+  0,174 em primeiras diferenças por país (n=191); gasto educacional (manuscrito
+  reportava r=0,050 ns) tem Spearman 0,29 em níveis e 0,014 em diferenças —
+  seleção seletiva. **d=16,06 e AUC 0,997 removidos da versão científica**
+  (sem código/dados originais; uso indevido de médias agregadas como distribuição
+  estudantil). 33 referências únicas entre 178 notas (0 confirmed, 27 partial,
+  6 not_verified — conservador). Gate: **PUBLICAÇÃO BLOQUEADA** (fail-closed).
+  Entregues: `specs/SPEC-935-R408`, `tests/test_r408_arm_article_audit.py`
+  (34 testes, GREEN), `academic/papers/arm_education_audit/` (SOURCE_MANIFEST,
+  RELATORIO_AUDITORIA, MANUSCRITO_REVISADO candidato, painel 448, matrices de
+  reprodução/alegação-evidência/citações). Ciclo R408 score 0.85.
+- **R409 (2026-08-12) — "gere um artigo publicável com rigor Qualis A1":** versão
+  **candidata a submissão** (nenhuma alegação de Qualis/prontidão — anti-overclaim
+  R142). Mesma pesquisa real e auditável do R408, com validações cruzadas
+  legítimas: LOOCV por país (ρ níveis 0,888–0,968; excl. China 0,888), primeiras
+  diferenças (0,934 → 0,181), 2 blocos temporais (treino anterior ao teste),
+  painel com efeitos fixos de país e defasagem de 5 anos (coef 0,022; IC95%
+  0,017–0,026; n=168; 7 países), ML Random Forest com split agrupado por país
+  (AUC 0,591) vs por linha (0,796) — não identificabilidade declarada como
+  resultado negativo. Entregue `academic/papers/arm_education_audit/ARTIGO_PUBLICAVEL.md`
+  (~420 linhas; resumo/abstract/6 seções; 17 referências ABNT com DOI,
+  subconjunto das 33 obras auditadas; linguagem estritamente associativa; cada
+  número do resumo com proveniência em provenance.json). Scripts e tabelas em
+  `outputs/publishable_tables/`. Testes `test_r409_artigo_publicavel.py` 32/32
+  GREEN; R408 permanece 34/34; doctor 10/12 (0 falhas). Ciclo R409 score 0.87.
+  **AGUARDA revisão humana e escolha de periódico-alvo único.**
+- **R407 (2026-08-08) — "posso concluir a revisão das 3 edições? tudo corrigido
+  para partir para o trilíngue?":** a pergunta obrigou a olhar o que a trilíngue
+  herda. Ela faz `\input` dos **mesmos** fragmentos (sem cópias), então as
+  correções do R405/R406 propagaram sozinhas — mas ela tem **índice e
+  frontmatter próprios**, e era ali que estava o defeito. **O Índice de
+  Fragmentos estava quebrado em três das quatro edições**: pt 84/84, en 73/84
+  (faltavam DOC-20…DOC-27 incluindo *O Homem do Pano Preto*, LUC-13, LUC-14,
+  MEM-27), zh 83/84, tri 77/84. Num livro-hipertexto o índice é o instrumento de
+  navegação. Mais 26 divergências, três das quais contradição de cânone
+  sobrevivendo no aparato: DOC-26 rotulado **1981** em zh/tri (o ano que o R406
+  removeu), DOC-09 anunciado como escala do **1.261** (Oliveira) em vez do 1.263
+  (o leitor), e MEM-27 com um título por edição — repetindo em pt o título de
+  MEM-26. MEM-27 **não** é "A Última Página": é o verso dela, escrito depois da
+  morte; passou a "A Página Seguinte"/"The Next Page"/下一页, frase do próprio
+  fragmento. **Tratamento do leitor em chinês:** medição por família revelou
+  convenção deliberada — CONT (obra→leitor) 528 您 contra 1 你; MEM
+  (personagem→personagem) 189 你. Mas o aparato inteiro (mains, dois
+  frontmatters, dossiê) tratava o leitor por 你, e o dossiê **citava a obra com
+  o pronome errado**. 70 ocorrências unificadas em 您; os 189 你 do diálogo
+  preservados, com teste. **Causa estrutural:** quatro cópias manuais da mesma
+  informação. `scripts/molambudos_indice.py` passa a **derivar** o índice do
+  corpus. `molambudos_canone.py` ganhou `_aparato()` (76 arquivos) — a brecha
+  que deixou o 1981 passar. Provado por reintrodução em ambos. **Erro meu no
+  ciclo:** a troca do título 循环→下一页 atingiu 3 ocorrências e corrompeu «o
+  ciclo não se fecha: transfere-se» no corpo; pego pela contagem, revertido,
+  registrado como o 5º erro de CJK no CORRIGENDUM §9. **Achado pela suíte
+  completa:** existe uma **árvore canônica paralela** em
+  `projetos/molambudos/fragmentos` (84 fragmentos pt, fora de qualquer build)
+  que estava dois ciclos atrás — ainda continha o «faleceu em 1981» que o R406
+  declarou eliminado. Aquela declaração valia só para a edição VictoriaRegia; a
+  spec do R406 foi corrigida. Árvore sincronizada e incluída na cobertura, com
+  checagem de `cópia divergente` provada por reintrodução. **Fica para o autor
+  decidir:** MEM-26/27 dizem 62 anos contando da vala de 1915 (=1977, não 1979);
+  as outras ocorrências de 62 fecham. Ver
+  `specs/SPEC-935-R407-molambudos-indice-e-registro.md`.
 - **R406 (2026-08-08) — "corrija com precisão todas as contradições e
   incoerências das três edições":** o defeito de método era encontrar
   contradições **por acaso** — a de 1989 (zh) apareceu enquanto se mediam razões

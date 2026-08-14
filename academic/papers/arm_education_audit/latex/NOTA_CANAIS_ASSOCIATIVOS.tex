@@ -1,0 +1,189 @@
+% ======================================================================
+% NOTA_CANAIS_ASSOCIATIVOS.tex — Nota de pesquisa (R413)
+% Complementa o artigo principal (R410+R412) com canais associativos:
+% saúde, desigualdade, inovação e moderação institucional.
+% Números idênticos à NOTA_CANAIS_ASSOCIATIVOS.md (provenance_r413.json).
+% Compilar: pdflatex NOTA_CANAIS_ASSOCIATIVOS.tex (duas passadas)
+% ======================================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{newtxtext,newtxmath}
+\usepackage[margin=3cm,top=3cm,left=3cm,right=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+\begin{document}
+
+% ----------------------------------------------------------------------
+% Título e resumos trilíngues
+% ----------------------------------------------------------------------
+\begin{center}
+{\Large\bfseries Canais associativos da educação terciária: saúde, desigualdade e inovação com moderação institucional (135 economias, 1960--2023)}
+\end{center}
+
+\noindent\textbf{Título:} Canais associativos da educação terciária: saúde, desigualdade e inovação com moderação institucional (135 economias, 1960--2023)
+
+\noindent\textbf{Title:} Associational channels of tertiary education: health, inequality and innovation with institutional moderation (135 economies, 1960--2023)
+
+\noindent\textbf{Título en español:} Canales asociativos de la educación terciaria: salud, desigualdad e innovación con moderación institucional (135 economías, 1960--2023)
+
+\vspace{0.8cm}
+
+\section*{Resumo}
+
+Esta nota mapeia canais associativos entre educação terciária e renda em painel de 135 países (1960--2023), com correlações parciais controlando o PIB per capita, cluster bootstrap por país (500 replicações, semente 42) e painel com efeitos fixos e erros padrão clusterizados por país. Quatro achados. Primeiro, a associação matrícula terciária $\times$ PIB per capita cai de 0,701 para 0,105 quando se adiciona a expectativa de vida como controle: em níveis, a associação é sensível ao canal saúde. Segundo, a correlação parcial matrícula terciária $\times$ expectativa de vida é 0,684 (IC95\% 0,639 a 0,728; n = 4374). Terceiro, os canais de desigualdade (matrícula $\times$ Gini = $-$0,184) e inovação (P\&D $\times$ alta tecnologia = 0,250) mostram associações fracas a moderadas. Quarto, a interação matrícula$\times$WGI no painel FE é positiva (coeficiente 0,054; p = 0,005) e marcada como exploratória. Nenhuma relação de efeito é inferida.
+
+\noindent\textbf{Palavras-chave:} educação terciária; expectativa de vida; desigualdade; inovação; governança; análise de canais.
+
+\section*{Abstract}
+
+This note maps associational channels between tertiary education and income in a 135-country panel (1960--2023), using partial correlations controlling for GDP per capita, country-cluster bootstrap (500 replications, seed 42), and fixed-effects panel regressions with country-clustered standard errors. Four findings. First, the tertiary-enrollment $\times$ GDP-per-capita association drops from 0.701 to 0.105 when life expectancy is added as a control: in levels, the association is sensitive to the health channel. Second, the partial correlation between tertiary enrollment and life expectancy is 0.684 (95\% CI 0.639 to 0.728; n = 4374). Third, the inequality (enrollment $\times$ Gini = $-$0.184) and innovation (R\&D $\times$ high-tech exports = 0.250) channels show weak-to-moderate associations. Fourth, the enrollment$\times$WGI interaction in the FE panel is positive (coefficient 0.054; p = 0.005) and labeled exploratory. No effect relationship is inferred.
+
+\noindent\textbf{Keywords:} tertiary education; life expectancy; inequality; innovation; governance; channel analysis.
+
+\section*{Resumen}
+
+Esta nota mapea canales asociativos entre educación terciaria e ingreso en un panel de 135 países (1960--2023), con correlaciones parciales controlando el PIB per cápita, bootstrap por conglomerados de país (500 réplicas, semilla 42) y panel de efectos fijos con errores estándar agrupados por país. Cuatro hallazgos. Primero, la asociación matrícula terciaria $\times$ PIB per cápita cae de 0,701 a 0,105 al añadir la esperanza de vida como control: en niveles, la asociación es sensible al canal salud. Segundo, la correlación parcial matrícula terciaria $\times$ esperanza de vida es 0,684 (IC95\% 0,639 a 0,728; n = 4374). Tercero, los canales de desigualdad (matrícula $\times$ Gini = $-$0,184) e innovación (I+D $\times$ alta tecnología = 0,250) muestran asociaciones débiles a moderadas. Cuarto, la interacción matrícula$\times$WGI en el panel FE es positiva (coeficiente 0,054; p = 0,005) y se marca como exploratoria. No se infiere ninguna relación de efecto.
+
+\noindent\textbf{Palabras clave:} educación terciaria; esperanza de vida; desigualdad; innovación; gobernanza; análisis de canales.
+
+\vspace{0.6cm}
+
+% ----------------------------------------------------------------------
+% 1. Motivação e lacuna
+% ----------------------------------------------------------------------
+\section{Motivação e lacuna}
+
+A literatura sobre crescimento trata educação, saúde e governança como determinantes separados \cite{acemoglu2014,barro2013,kaufmann2011}. A combinação das três dimensões em um único painel amplo, com matrícula \emph{terciária} e validação por bootstrap por país, permanece escassa. Estudos de determinantes da longevidade sugerem a educação secundária/terciária como extensão de pesquisa futura. Esta nota ocupa parcialmente essa lacuna com linguagem estritamente associativa.
+
+% ----------------------------------------------------------------------
+% 2. Dados e método
+% ----------------------------------------------------------------------
+\section{Dados e método}
+
+\begin{itemize}
+\item \textbf{Dados}: painel país-ano 1960--2023, 135 países, 16 indicadores (WDI + WGI), sem imputação; critério de amostra: $\geq$ 20 observações não nulas de matrícula e PIB (R412). SHA-256 do painel em \texttt{provenance\_r413.json}.
+\item \textbf{Correlações parciais}: resíduos de regressão de cada variável sobre os controles (ln PIB; WGI média quando o par envolve PIB), correlação de Pearson entre resíduos.
+\item \textbf{Validação}: cluster bootstrap por país (500 replicações, semente 42) para intervalos de confiança 95\%; leave-one-country-out (135 folds) das parciais centrais.
+\item \textbf{Painel FE}: efeitos fixos de país e ano, defasagem de 5 anos, controles (gasto educacional, P\&D, urbanização, manufatura, WGI média), erros padrão clusterizados por país \cite{cameron2015}.
+\item \textbf{Limites declarados}: associações descritivas; sem variação exógena; sem identificação de efeito; cobertura desigual entre variáveis.
+\end{itemize}
+
+% ----------------------------------------------------------------------
+% 3. Resultados
+% ----------------------------------------------------------------------
+\section{Resultados}
+
+\subsection{Análise em etapas: onde a associação matrícula$\times$PIB se esvai}
+
+Correlação parcial entre matrícula terciária (log) e PIB per capita (log), acumulando controles (IC95\% bootstrap por país):
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lccr}
+\toprule
+\textbf{Etapa} & \textbf{Controles adicionados} & \textbf{$\rho$ parcial} & \textbf{n} \\
+\midrule
+Inicial & --- & 0,701 & 4.374 \\
++WGI & WGI média & 0,653 & 2.557 \\
++Estrutura & gasto educ., P\&D, urbanização, manufatura & 0,358 & 1.146 \\
++Saúde & expectativa de vida & 0,105 & 1.146 \\
+\bottomrule
+\end{tabular}
+\caption{Análise em etapas do par matrícula$\times$PIB (IC95\% bootstrap: inicial [0,642; 0,756]; saúde [$-$0,090; 0,288]).}
+\end{table}
+
+\subsection{Matriz de correlações parciais (seleção)}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lcr}
+\toprule
+\textbf{Par} & \textbf{$\rho$ parcial} & \textbf{n} \\
+\midrule
+Matrícula terciária $\times$ Expectativa de vida & 0,684 (IC [0,639; 0,728]) & 4.374 \\
+Matrícula terciária $\times$ Gini & $-$0,184 & 1.475 \\
+Gasto educacional $\times$ WGI controle da corrupção & 0,341 & 2.441 \\
+P\&D $\times$ Exportação alta tecnologia & 0,250 & 1.148 \\
+\bottomrule
+\end{tabular}
+\caption{Correlações parciais selecionadas (controle: ln PIB salvo indicação).}
+\end{table}
+
+\subsection{Canais com painel FE clusterizado (defasagem 5 anos)}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lcccr}
+\toprule
+\textbf{Canal} & \textbf{Especificação} & \textbf{Coef} & \textbf{p} & \textbf{Clusters} \\
+\midrule
+Saúde & Expectativa de vida $\sim$ matrícula defasada & 0,535 & 0,186 & 106 \\
+Desigualdade & Gini $\sim$ matrícula defasada & $-$0,104 & 0,940 & 77 \\
+Inovação & Alta tecnologia $\sim$ P\&D defasado & 0,836 & 0,529 & 77 \\
+\bottomrule
+\end{tabular}
+\caption{Painel FE de país e ano; erros padrão clusterizados por país; controles WGI, gasto educacional, P\&D, urbanização e manufatura.}
+\end{table}
+
+Os coeficientes têm o sinal consistente com as parciais, mas \emph{p-values} altos após clusterização: a associação dentro dos países é imprecisa nesta especificação. O resultado completo, incluindo a não significância, é reportado conforme boa prática.
+
+\subsection{Moderação institucional (exploratória)}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lccr}
+\toprule
+\textbf{Termo de interação (y = ln PIB)} & \textbf{Coef} & \textbf{p} & \textbf{Clusters} \\
+\midrule
+Matrícula defasada $\times$ WGI média & 0,054 & 0,005 & 106 \\
+Matrícula defasada $\times$ P\&D defasado & $-$0,003 & 0,668 & 80 \\
+\bottomrule
+\end{tabular}
+\caption{Interações no painel FE clusterizado; exploratórias, sem hipótese pré-registrada.}
+\end{table}
+
+% ----------------------------------------------------------------------
+% 4. Discussão e limites
+% ----------------------------------------------------------------------
+\section{Discussão e limites}
+
+O achado do canal saúde dialoga com a literatura de capital humano \cite{acemoglu2014,barro2013}: a educação terciária correlaciona-se com maior longevidade, e a longevidade é candidata a canal da associação com renda --- aqui apenas descritivo. O sinal negativo matrícula$\times$Gini é relevante para o debate brasileiro de inclusão educacional e desigualdade. A cadeia P\&D$\rightarrow$alta tecnologia é fraca no painel FE (p = 0,529): a associação em níveis não se confirma dentro dos países nesta janela. Limites: cobertura desigual (Gini n = 1.475); especificação de FE reduz variância; interações não pré-registradas; sem identificação de efeito.
+
+% ----------------------------------------------------------------------
+% Referências
+% ----------------------------------------------------------------------
+\begin{thebibliography}{9}
+
+\bibitem{acemoglu2014}
+ACEMOGLU, D.; GALLEGO, F. A.; ROBINSON, J. A. Institutions, human capital, and development. \emph{Annual Review of Economics}, v. 6, p. 875--912, 2014. DOI: 10.1146/annurev-economics-080213-041119.
+
+\bibitem{barro2013}
+BARRO, R. J.; LEE, J. W. A new data set of educational attainment in the world, 1950--2010. \emph{Journal of Development Economics}, v. 104, p. 184--198, 2013. DOI: 10.1016/j.jdeveco.2012.10.001.
+
+\bibitem{cameron2015}
+CAMERON, A. C.; MILLER, D. L. A practitioner's guide to cluster-robust inference. \emph{Journal of Human Resources}, v. 50, n. 2, p. 317--372, 2015. DOI: 10.3368/jhr.50.2.317.
+
+\bibitem{kaufmann2011}
+KAUFMANN, D.; KRAAY, A.; MASTRUZZI, M. The Worldwide Governance Indicators: methodology and analytical issues. \emph{Hague Journal on the Rule of Law}, v. 3, n. 2, p. 220--246, 2011. DOI: 10.1017/S1876404511200046.
+
+\bibitem{worldbank2024}
+WORLD BANK. \emph{World Development Report 2024: The Middle-Income Trap}. Washington, DC: World Bank, 2024. DOI: \href{https://doi.org/10.1596/978-1-4648-2078-6}{10.1596/978-1-4648-2078-6}.
+
+\end{thebibliography}
+
+\end{document}
