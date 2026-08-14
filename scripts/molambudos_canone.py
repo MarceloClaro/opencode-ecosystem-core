@@ -37,6 +37,12 @@ ROOT = Path(__file__).resolve().parents[1]
 BOOK = ROOT / "projetos" / "molambudos" / "Molambudos_VictoriaRegia"
 EDICOES = {"pt": "fragmentos", "en": "en/fragmentos", "zh": "zh/fragmentos"}
 
+# Árvore canônica em português, paralela à edição. Não entra em nenhum build,
+# mas é uma cópia do corpus --- e ficou dois ciclos carregando o "faleceu em
+# 1981" que o R406 removeu só da edição. Uma cópia fora de verificação vira
+# fonte de contradição na primeira vez que alguém a usar.
+CANON = ROOT / "projetos" / "molambudos" / "fragmentos"
+
 # Ano isolado: `\b` não serve porque em chinês o ano vem colado a 年, que o
 # módulo `re` trata como caractere de palavra — foi assim que uma medição
 # anterior "perdeu" 17 anos na edição chinesa.
@@ -90,6 +96,25 @@ def _corpus(edicao: str) -> dict[str, str]:
     return {p.name: p.read_text(encoding="utf-8") for p in sorted(base.rglob("*.tex"))}
 
 
+def _aparato() -> dict[str, str]:
+    """Índice, frontmatter, mains e dossiês --- tudo o que não é fragmento.
+
+    O R406 varria só os fragmentos, e por isso não viu que o Índice de
+    Fragmentos ainda rotulava DOC-26 como **1981** em chinês e na trilíngue, e
+    anunciava DOC-09 como a escala do "1.261" (Oliveira) em vez do 1.263 (o
+    leitor). Uma contradição no aparato de navegação é lida como as outras.
+    """
+    saida: dict[str, str] = {}
+    for p in sorted(BOOK.rglob("*.tex")):
+        rel = p.relative_to(BOOK).as_posix()
+        if rel.startswith("_archive/") or "/fragmentos/" in f"/{rel}":
+            continue
+        if rel.startswith("capa_") or "/capa" in rel:
+            continue
+        saida[rel] = p.read_text(encoding="utf-8")
+    return saida
+
+
 def verificar() -> dict:
     corpora = {e: _corpus(e) for e in EDICOES}
     juntos = {e: "\n".join(v.values()) for e, v in corpora.items()}
@@ -111,6 +136,35 @@ def verificar() -> dict:
                     "tipo": "contradição", "fato": rotulo, "edicao": edicao,
                     "arquivos": sorted(atingidos), "porque": porque,
                 })
+
+    aparato = _aparato()
+    for rotulo, padrao, porque in PROIBIDOS:
+        atingidos = [n for n, t in aparato.items() if re.search(padrao, t)]
+        if atingidos:
+            problemas.append({
+                "tipo": "contradição", "fato": rotulo, "edicao": "aparato",
+                "arquivos": sorted(atingidos), "porque": porque,
+            })
+
+    canon = {p.relative_to(CANON).as_posix(): p.read_text(encoding="utf-8")
+             for p in sorted(CANON.rglob("*.tex"))} if CANON.is_dir() else {}
+    for rotulo, padrao, porque in PROIBIDOS:
+        atingidos = [n for n, t in canon.items() if re.search(padrao, t)]
+        if atingidos:
+            problemas.append({
+                "tipo": "contradição", "fato": rotulo, "edicao": "árvore canônica",
+                "arquivos": sorted(atingidos), "porque": porque,
+            })
+    divergentes = [n for n, t in canon.items()
+                   if (BOOK / "fragmentos" / n).is_file()
+                   and (BOOK / "fragmentos" / n).read_text(encoding="utf-8") != t]
+    if divergentes:
+        problemas.append({
+            "tipo": "cópia divergente", "fato": "árvore canônica fora de sincronia",
+            "edicao": "árvore canônica", "arquivos": sorted(divergentes),
+            "porque": "uma cópia do corpus que não acompanha as correções vira fonte "
+                      "de contradição na primeira vez que for usada",
+        })
 
     crm_re = re.compile(r"CRM[- ]?MG\s*([\d.,]+)")
     for edicao in EDICOES:
@@ -135,6 +189,8 @@ def verificar() -> dict:
 
     return {
         "fragmentos_por_edicao": {e: len(v) for e, v in corpora.items()},
+        "arquivos_de_aparato": len(aparato),
+        "arvore_canonica": len(canon),
         "fatos_afirmados": len(AFIRMADOS),
         "fatos_proibidos": len(PROIBIDOS),
         "anos_distintos": len(set().union(*[set(a) for a in anos.values()])),
@@ -153,7 +209,8 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(r, ensure_ascii=False, indent=2))
         return 0 if r["ok"] else 1
 
-    print(f"fragmentos: {r['fragmentos_por_edicao']}")
+    print(f"fragmentos: {r['fragmentos_por_edicao']} | aparato: {r['arquivos_de_aparato']}"
+          f" | árvore canônica: {r['arvore_canonica']}")
     print(f"fatos-âncora afirmados: {r['fatos_afirmados']} | proibidos: {r['fatos_proibidos']}"
           f" | anos distintos: {r['anos_distintos']}")
     if r["ok"]:

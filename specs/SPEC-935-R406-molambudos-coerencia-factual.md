@@ -50,7 +50,16 @@ senti-la é o sinal de que ela já tomou o corpo.
 > disse ele, era o pior sintoma de todos."*
 
 O P.S. equivalente foi acrescentado às edições inglesa e chinesa, que não o
-tinham. `1981` desapareceu da obra.
+tinham.
+
+> **Correção posterior (R407):** este ciclo afirmou que «`1981` desapareceu da
+> obra». Era verdade apenas para a edição `Molambudos_VictoriaRegia`. Existe uma
+> segunda árvore de fragmentos em `projetos/molambudos/fragmentos` — paralela,
+> em português, fora de qualquer build — e ela continuou carregando o «faleceu
+> em 1981» por mais dois ciclos, porque o verificador só varria a edição. O
+> R407 sincronizou a árvore e estendeu a cobertura. A lição é a mesma que este
+> ciclo já enunciava: o verificador prova a ausência das contradições **nos
+> lugares em que olha**.
 
 ## 2. O problema de método, e o que o substitui
 

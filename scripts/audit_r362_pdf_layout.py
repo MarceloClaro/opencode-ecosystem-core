@@ -133,7 +133,9 @@ PART_MARKERS = {
         ("colonia", "收容院（1917"),
         ("diario", "奥利维拉日记与鉴定报告"),
         ("investigacao", "卢西亚调查"),
-        ("contaminacao", "污染（你）"),
+        # R407: a obra trata o leitor por 您 (formal), não 你 — convenção de
+        # 528 contra 1 nos fragmentos de Contaminação. O abre-parte acompanhou.
+        ("contaminacao", "污染（您）"),
     ),
     "tri": (
         ("sertao", "A Vala (1914"),
