@@ -1,0 +1,15 @@
+{
+  "auc_linha": 0.796,
+  "auc_agrupado": 0.591,
+  "n_linha": 24,
+  "n_agrupado": 76,
+  "n_paises": 7,
+  "features": [
+    "SE.TER.ENRR",
+    "SE.XPD.TOTL.GD.ZS",
+    "GB.XPD.RSDV.GD.ZS",
+    "SP.URB.TOTL.IN.ZS"
+  ],
+  "alvo": "crescimento do PIB pc acima da mediana do período",
+  "interpretacao": "O AUC com split por linha (vaza: mesmo país em treino e teste) é substancialmente superior ao AUC com leave-one-country-out. Com 7 países e cobertura parcial, o modelo não generaliza para países não vistos — não identificabilidade."
+}

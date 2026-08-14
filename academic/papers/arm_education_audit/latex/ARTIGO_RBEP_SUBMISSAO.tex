@@ -1,0 +1,357 @@
+% ======================================================================
+% ARTIGO_RBEP_SUBMISSAO.tex — Versão LaTeX do artigo (RBEP/INEP)
+% Adequado às normas ABNT (NBR 10520 citações; NBR 6023 referências).
+% Números idênticos ao ARTIGO_RBEP_SUBMISSAO.md (R410+R412).
+% R412: painel expandido (135 economias), controles WGI, erros cluster.
+% Compilar: pdflatex ARTIGO_RBEP_SUBMISSAO.tex (duas passadas)
+% ======================================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{newtxtext,newtxmath}
+\usepackage[margin=3cm,top=3cm,left=3cm,right=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+\begin{document}
+
+% ----------------------------------------------------------------------
+% Título e resumos trilíngues
+% ----------------------------------------------------------------------
+\begin{center}
+{\Large\bfseries Educação terciária e trajetórias de renda: evidência associativa de painel com validação cruzada agrupada por país (135 economias, 1960--2023)}
+\end{center}
+
+\noindent\textbf{Título:} Educação terciária e trajetórias de renda: evidência associativa de painel com validação cruzada agrupada por país (135 economias, 1960--2023)
+
+\noindent\textbf{Title:} Tertiary education and income trajectories: associative panel evidence with country-grouped cross-validation (135 economies, 1960--2023)
+
+\noindent\textbf{Título en español:} Educación terciaria y trayectorias de ingreso: evidencia asociativa de panel con validación cruzada agrupada por país (135 economías, 1960--2023)
+
+\vspace{0.8cm}
+
+\section*{Resumo}
+
+Este estudo examina a associação entre educação terciária e nível de renda per capita em 135 economias entre 1960 e 2023, a partir de dados oficiais do World Development Indicators e do Worldwide Governance Indicators (Banco Mundial). A matrícula terciária bruta correlaciona 0,751 com o logaritmo do PIB per capita em níveis (n = 4374), mas a associação cai para 0,146 quando se consideram primeiras diferenças por país (n = 4373), indicando que a maior parte da correlação de níveis corresponde a diferenças permanentes entre países, não a variações contemporâneas dentro deles. A estabilidade da correlação em níveis é verificada por leave-one-country-out: a correlação média nos folds de treino é 0,751 (desvio-padrão 0,003), enquanto a correlação média nos países de teste é 0,542. Em painel com efeitos fixos de país e de ano, defasagem de cinco anos, controles de governança (WGI), gasto educacional, pesquisa e desenvolvimento, urbanização e manufatura e erros padrão clusterizados por país, o coeficiente do log-PIB per capita defasado é 0,073 (IC95\% $-$0,169 a 0,314; p = 0,555; 106 clusters de país; n = 1146). Nesse desenho, a associação dentro do país não é discernível após os controles. Um exercício de aprendizado de máquina (florestas aleatórias) classifica crescimento acima da mediana com área sob a curva ROC de 0,694 com partição por linha, mas de 0,609 com validação cruzada agrupada por país --- capacidade preditiva fraca para economias não vistas. Os resultados sustentam uma associação positiva entre escolaridade terciária e renda entre países, mas não identificam relação direcional nem efeito dentro do país após controles institucionais.
+
+\noindent\textbf{Palavras-chave:} educação superior; desenvolvimento econômico; governança; dados de painel; validação cruzada por país.
+
+\section*{Abstract}
+
+This study examines the association between tertiary education and income per capita in 135 economies between 1960 and 2023, using official World Development Indicators and Worldwide Governance Indicators (World Bank) data. Gross tertiary enrollment correlates 0.751 with log income per capita in levels (n = 4374), but the association drops to 0.146 under country-specific first differences (n = 4373), indicating that most of the level correlation corresponds to permanent differences across countries rather than to contemporaneous within-country variation. Level-correlation stability is verified by leave-one-country-out: the average training-fold correlation is 0.751 (standard deviation 0.003), while the average held-out-country correlation is 0.542. In a panel with country and year fixed effects, a five-year lag, governance (WGI), education spending, R\&D, urbanization and manufacturing controls, and country-clustered standard errors, the lagged log income coefficient is 0.073 (95\% CI $-$0.169 to 0.314; p = 0.555; 106 country clusters; n = 1146). Under this design, the within-country association is not discernible after controls. A machine-learning exercise (random forests) classifies above-median growth with a ROC area of 0.694 under row-wise splits, but 0.609 under country-grouped cross-validation --- weak predictive capacity for unseen economies. The results support a positive between-country association between tertiary schooling and income, but do not identify a directional relationship nor a within-country effect after institutional controls.
+
+\noindent\textbf{Keywords:} higher education; economic development; governance; panel data; country cross-validation.
+
+\section*{Resumen}
+
+Este estudio examina la asociación entre educación terciaria y nivel de ingreso per cápita en 135 economías entre 1960 y 2023, a partir de datos oficiales del World Development Indicators y del Worldwide Governance Indicators (Banco Mundial). La matrícula terciaria bruta correlaciona 0,751 con el logaritmo del PIB per cápita en niveles (n = 4374), pero la asociación cae a 0,146 cuando se consideran primeras diferencias por país (n = 4373), lo que indica que la mayor parte de la correlación de niveles corresponde a diferencias permanentes entre países, no a variaciones contemporáneas dentro de ellos. La estabilidad de la correlación en niveles se verifica por leave-one-country-out: la correlación media en los pliegues de entrenamiento es 0,751 (desviación estándar 0,003), mientras que la correlación media en los países de prueba es 0,542. En panel con efectos fijos de país y de año, desfase de cinco años, controles de gobernanza (WGI), gasto educativo, investigación y desarrollo, urbanización y manufactura, y errores estándar agrupados por país, el coeficiente del log-PIB per cápita desfasado es 0,073 (IC95\% $-$0,169 a 0,314; p = 0,555; 106 conglomerados de país; n = 1146). En este diseño, la asociación dentro del país no es discernible tras los controles. Un ejercicio de aprendizaje automático (bosques aleatorios) clasifica el crecimiento por encima de la mediana con un área bajo la curva ROC de 0,694 con partición por fila, pero de 0,609 con validación cruzada agrupada por país --- capacidad predictiva débil para economías no vistas. Los resultados sustentan una asociación positiva entre escolaridad terciaria e ingreso entre países, pero no identifican una relación direccional ni un efecto dentro del país tras los controles institucionales.
+
+\noindent\textbf{Palabras clave:} educación superior; desarrollo económico; gobernanza; datos de panel; validación cruzada por país.
+
+\vspace{0.6cm}
+\hrule
+\vspace{0.6cm}
+
+% ----------------------------------------------------------------------
+% 1. Introdução
+% ----------------------------------------------------------------------
+\section{Introdução}
+
+A relação entre escolaridade e crescimento econômico é um dos temas mais persistentes da economia do desenvolvimento. Desde os modelos de capital humano (LUCAS, 1988; ROMER, 1990), a educação superior ocupa lugar central nas narrativas de convergência e de diferenciação entre economias. Trabalhos empíricos de longo prazo documentam associações positivas entre anos de escolaridade da população adulta e nível de renda (BARRO; LEE, 2013; MANKIW; ROMER; WEIL, 1992), enquanto revisões do retorno privado e social da educação apontam ganhos expressivos, embora declinantes nos níveis mais altos de escolaridade (PSACHAROPOULOS; PATRINOS, 2018). Em contrapartida, análises que consideram a qualidade do aprendizado e o contexto institucional moderam a magnitude dessas associações (HANUSHEK; WOESSMANN, 2010; PRITCHETT, 2001).
+
+Um debate paralelo concentra-se na chamada ``armadilha da renda média'': a observação de que economias de renda média tendem a desacelerar antes de alcançar o grupo de alta renda (EICHENGREEN; PARK; SHIN, 2012; AIYAR et al., 2018; FELIPE; ABDON; KUMAR, 2012; IM; ROSENBLATT, 2015). Nesse debate, a educação terciária aparece com frequência como condicionante da capacidade de inovar e de absorver tecnologia (ACEMOGLU; GALLEGO; ROBINSON, 2014; RODRIK, 2016). O caso brasileiro --- desigualdade educacional elevada e crescimento da renda per capita modesto nas últimas décadas --- ilustra a pertinência do tema; o World Development Report 2024 situa a superação da armadilha de renda média como desafio central para economias como o Brasil (WORLD BANK, 2024).
+
+Este artigo contribui com um exercício empírico transparente e auditável: a partir de dados oficiais do Banco Mundial, examinamos a associação entre matrícula terciária bruta, gasto educacional, dispêndio em pesquisa e desenvolvimento e indicadores de governança, de um lado, e nível de renda per capita, de outro, em um painel de 135 economias ao longo de 64 anos. A contribuição não é a novidade metodológica, mas o rigor de reprodutibilidade e a amplitude da amostra: toda a cadeia de dados, código e resultados está disponível, as inferências são submetidas a validações cruzadas por país e por tempo, e os erros padrão são robustos à correlação serial por país.
+
+A seguir, apresentamos a literatura (seção 2), os dados e o método, com ênfase nas decisões de validação e de controle (seção 3), os resultados (seção 4) e a discussão, com as limitações e a conclusão (seções 5 e 6).
+
+% ----------------------------------------------------------------------
+% 2. Revisão da literatura
+% ----------------------------------------------------------------------
+\section{Revisão da literatura}
+
+A literatura empírica sobre educação e crescimento divide-se em duas tradições. Uma estima regressões de crescimento com estoques de capital humano e encontra associações positivas, porém sensíveis à especificação (MANKIW; ROMER; WEIL, 1992). Outra enfatiza a qualidade e o uso do capital humano: países com baixa qualidade educacional podem acumular anos de estudo sem que isso se traduza em crescimento (PRITCHETT, 2001; HANUSHEK; WOESSMANN, 2010). No plano da educação terciária especificamente, a literatura sobre mudança estrutural sugere que a capacidade de produzir e absorver tecnologia depende de formação avançada (ACEMOGLU; GALLEGO; ROBINSON, 2014; RODRIK, 2016), mas a evidência empírica direta em painéis de países em desenvolvimento é limitada.
+
+No debate sobre a armadilha da renda média, o papel da educação aparece de forma indireta. Eichengreen, Park e Shin (2012) documentam desacelerações frequentes em economias de renda média e associam a probabilidade de desaceleração a fatores como câmbio, demografia e escolaridade, com maior risco próximo à fronteira tecnológica (EICHENGREEN; PARK; SHIN, 2012; VANDENBUSSCHE; AGHION; MEGHIR, 2006). Aiyar et al. (2018) documentam que essas desacelerações são desproporcionalmente frequentes em países de renda média, associadas a instituições, demografia, infraestrutura e ambiente macroeconômico. Felipe, Abdon e Kumar (2012) documentam a heterogeneidade das trajetórias na faixa de renda média, e Im e Rosenblatt (2015) questionam a existência de um limiar empírico estável que defina a armadilha.
+
+A literatura institucional acrescenta uma dimensão relevante para este estudo: a qualidade das instituições, medida por indicadores de governança, correlaciona-se com o nível de renda e com a eficácia da escolaridade (KAUFMANN; KRAAY; MASTRUZZI, 2011). Desconsiderar a governança pode confundir a associação entre educação e renda com o efeito de condições institucionais não observadas. Por fim, a inferência com dados de painel em poucos clusters recomenda erros padrão clusterizados por país; em amostras pequenas, ignorar a correlação serial pode inflar a significância (CAMERON; MILLER, 2015).
+
+Dessa literatura emergem duas lições metodológicas. A lição central é que correlações de níveis entre países são dominadas por diferenças permanentes de desenvolvimento, o que torna central o uso de variações no tempo dentro dos países e de controles institucionais. Ademais, o número reduzido de países em amostras de renda média limita a validade externa de exercícios preditivos; validações cruzadas que separam países de treino e de teste são recomendáveis para caracterizar essa limitação, em vez de ocultá-la.
+
+Esta revisão é seletiva e orientada por critérios explícitos: foram consultadas as bases Scopus, Web of Science e EconLit, com combinações de termos como \textit{tertiary education}, \textit{higher education}, \textit{middle-income trap} e \textit{economic growth}, priorizando estudos com dados empíricos de painel ou revisões da literatura com definições operacionais explícitas e compatíveis com os dados do Banco Mundial. Não se trata de revisão sistemática com protocolo completo de extração e dupla codificação; o corpus citado é representativo das tradições identificadas, não exaustivo. A seleção final priorizou trabalhos citáveis nas seções seguintes, o que excluiu materiais sem publicação científica periódica ou sem definição operacional verificável.
+
+% ----------------------------------------------------------------------
+% 3. Dados e método
+% ----------------------------------------------------------------------
+\section{Dados e método}
+
+\subsection{Dados}
+
+Os dados provêm da API do World Development Indicators e do Worldwide Governance Indicators do Banco Mundial (WORLD BANK, 2024; KAUFMANN; KRAAY; MASTRUZZI, 2011), com download em 13 de agosto de 2026 e cache local imutável (URL, timestamp UTC, status HTTP e hash SHA-256 de cada arquivo em \path{data/raw_expandido/manifest_expandido.json}). A amostra compreende 135 economias (1960--2023), selecionadas por critério transparente: países listados no banco oficial do Banco Mundial, com pelo menos 20 observações não nulas de matrícula terciária e de PIB per capita no período. Agregados regionais e territórios sem código ISO3 de país foram excluídos. A seleção não é probabilística, mas é explícita e reprodutível; não se alega representatividade amostral de um universo de países.
+
+As variáveis utilizadas são:
+\begin{itemize}\raggedright
+\item renda: PIB per capita em US\$ constantes (\texttt{NY.GDP.PCAP.KD}) e crescimento anual do PIB per capita (\texttt{NY.GDP.PCAP.KD.ZG});
+\item educação e inovação: matrícula terciária bruta como proporção do grupo etário correspondente (\texttt{SE.TER.ENRR}), gasto público em educação como proporção do PIB (\texttt{SE.XPD.TOTL.GD.ZS}), dispêndio em pesquisa e desenvolvimento como proporção do PIB (\texttt{GB.XPD.RSDV.GD.ZS}), manufatura como proporção do PIB (\texttt{NV.IND.MANF.ZS}), investimento direto estrangeiro como proporção do PIB (\texttt{BX.KLT.DINV.WD.GD.ZS}) e exportação de alta tecnologia como proporção das exportações (\texttt{TX.VAL.TECH.MF.ZS});
+\item estrutura e governança: população urbana como proporção do total (\texttt{SP.URB.TOTL.IN.ZS}) e os seis indicadores do WGI --- controle da corrupção, efetividade governamental, estabilidade política, qualidade regulatória, estado de direito e voz e prestação de contas (\texttt{CC.EST}; \texttt{GE.EST}; \texttt{PV.EST}; \texttt{RQ.EST}; \texttt{RL.EST}; \texttt{VA.EST}).
+\end{itemize}
+
+Uma ressalva de medida deve ser registrada: a matrícula terciária bruta é uma medida de quantidade de acesso, não de qualidade do aprendizado. A literatura sobre capital humano e crescimento mostra que a qualidade educacional --- aproximada por resultados cognitivos em testes internacionais --- é um moderador relevante da relação entre escolaridade e renda (HANUSHEK; WOESSMANN, 2010). Este estudo não incorpora medidas de qualidade por falta de cobertura temporal e transversal adequada para as 135 economias no período; a leitura dos resultados deve, portanto, limitar-se à associação entre quantidade de matrícula e renda.
+
+O painel completo tem 8.640 observações país-ano, com cobertura parcial das variáveis educacionais (a matrícula terciária tem 4.374 observações com dados completos de PIB). Nenhuma observação ausente foi preenchida por imputação ou tratada como zero.
+
+\subsection{Estratégia empírica}
+
+A estratégia combina quatro níveis de análise, do mais descritivo ao mais estruturado.
+
+\textbf{(a) Correlações em níveis e em primeiras diferenças.} Para cada par de variáveis, reportamos o coeficiente de correlação de Spearman em níveis e a correlação das primeiras diferenças por país. As primeiras diferenças removem a tendência comum de longo prazo e aproximam a variação dentro do país, reduzindo o risco de correlação espúria por co-movimento de tendências. Trata-se de estudo observacional de painel, sem grupo de controle experimental: o contrafactual é a variação dentro do país ao longo do tempo, não a comparação com um tratamento exógeno. Os critérios de invalidação são pré-definidos: se a correlação de primeiras diferenças fosse próxima da de níveis, a leitura de dominância de diferenças permanentes entre países seria refutada; se o coeficiente do painel com efeitos fixos e controles fosse estatisticamente estável e distinto de zero, a leitura de não discernibilidade dentro do país seria refutada.
+
+\textbf{(b) Validação cruzada leave-one-country-out (LOOCV) das correlações em níveis.} Reestimamos a correlação matrícula terciária $\times$ log(PIB per capita) 135 vezes, excluindo um país de cada vez, para verificar se o resultado depende de uma economia específica. Os conjuntos de treino e de teste são disjuntos por construção (Tabela 3).
+
+\textbf{(c) Painel com efeitos fixos.} Estimamos uma regressão de log(matrícula terciária) sobre log do PIB per capita defasado em cinco anos como regressor, com efeitos fixos de país e de ano, controles de gasto educacional, pesquisa e desenvolvimento, urbanização, manufatura e governança (média dos seis indicadores WGI), e erros padrão clusterizados por país (CAMERON; MILLER, 2015). A especificação com cluster é a principal; a defasagem mitiga a simultaneidade.
+
+\textbf{(d) Exercício preditivo com validação agrupada.} Treinamos florestas aleatórias (BREIMAN, 2001) para classificar anos de crescimento do PIB per capita acima da mediana do período, usando matrícula terciária e PIB defasados, gasto educacional, pesquisa e desenvolvimento, urbanização, manufatura e governança como características. Comparamos duas formas de partição: (i) partição aleatória por linha, em que o mesmo país aparece no treino e no teste; e (ii) validação cruzada agrupada por país (GroupKFold), em que o país de teste é inteiramente ausente do treino. A diferença entre as duas áreas sob a curva ROC caracteriza o grau de identificabilidade entre países: se a classificação depende de características específicas dos países de treino, o modelo não generaliza.
+
+\subsection{Reprodutibilidade}
+
+Todos os resultados são produzidos pelos scripts \path{scripts/download_expanded_data.py} e \path{scripts/analyze_expanded.py}, que leem exclusivamente o cache auditado e escrevem tabelas e um arquivo de proveniência (\path{outputs/expanded/provenance_expanded.json}). Cada número citado neste artigo tem entrada correspondente nesse arquivo. A execução é offline e determinística (sementes fixas).
+
+% ----------------------------------------------------------------------
+% 4. Resultados
+% ----------------------------------------------------------------------
+\section{Resultados}
+
+\subsection{Descritivos}
+
+A heterogeneidade do painel é marcante (Tabela 1): o PIB per capita varia de economias de baixa renda a economias de renda elevada (média de US\$ 9,5 mil; desvio-padrão de US\$ 14,7 mil), e a matrícula terciária média do painel é de aproximadamente 27\%, com desvio-padrão de 27 pontos percentuais. A governança (WGI), medida na escala de aproximadamente $-$2,5 a 2,5, tem média levemente negativa no painel, refletindo a predominância de economias em desenvolvimento.
+
+\begin{table}[htbp]
+\centering
+\caption{Descritivos das variáveis centrais no painel de 135 economias (1960--2023)}
+\label{tab:descritivos}
+\footnotesize
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{4.4cm}cccc}
+\toprule
+Variável & Descrição & n & Média & D.P. \\
+\midrule
+NY\_GDP\_PC\_KD & PIB per capita (US\$ const.) & 7.512 & 9.546 & 14.710 \\
+SE\_TER\_ENRR & Matrícula terciária (\% bruto) & 4.517 & 27,34 & 27,49 \\
+SE\_XPD\_TOTL\_GD\_ZS & Gasto público educacional (\% PIB) & 3.807 & 4,21 & 1,72 \\
+GB\_XPD\_RSDV\_GD\_ZS & P\&D (\% PIB) & 1.987 & 0,88 & 0,96 \\
+SP\_URB\_TOTL\_IN\_ZS & Urbanização (\% pop.) & 8.640 & 49,76 & 24,28 \\
+WGI\_CC & WGI --- Controle da corrupção & 3.369 & $-$0,12 & 0,93 \\
+WGI\_GE & WGI --- Efetividade governamental & 3.360 & $-$0,06 & 0,91 \\
+WGI\_RL & WGI --- Estado de direito & 3.374 & $-$0,15 & 0,92 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria a partir de World Development Indicators e Worldwide Governance Indicators (2026). Valores completos em \path{outputs/expanded/tabela1_descr_expandido.csv}.}
+\end{table}
+
+\subsection{Associações em níveis e em primeiras diferenças}
+
+Em níveis, a matrícula terciária correlaciona 0,751 com o log do PIB per capita (n = 4374; Tabela 2), resultado de magnitude elevada, mas típico de comparações entre países em estágios muito diferentes de desenvolvimento. Em primeiras diferenças por país, a correlação cai para 0,146 (n = 4373). A queda reduz a associação a uma ordem de grandeza compatível com associações de magnitude modesta e com a presença de ciclos, indicando que a covariância de níveis é dominada pela heterogeneidade persistente entre economias.
+
+\begin{table}[htbp]
+\centering
+\caption{Correlações entre matrícula terciária e PIB per capita}
+\label{tab:correlacoes}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{7.5cm}cc}
+\toprule
+Par & Correlação & n \\
+\midrule
+Matrícula terciária $\times$ log PIB pc (níveis) & 0,751 & 4374 \\
+$\Delta$ Matrícula terciária $\times$ $\Delta$ log PIB pc (primeiras diferenças) & 0,146 & 4373 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. ``$\Delta$'' indica primeira diferença por país. Valores completos em \path{outputs/expanded/tabela2_correlacoes_expandido.csv}.}
+\end{table}
+
+\subsection{Estabilidade entre países (LOOCV)}
+
+A estabilidade entre países aparece na Tabela 3, com a correlação em níveis reestimada pela exclusão de um país por vez (135 folds). Nos folds de treino, a correlação média é 0,751, com desvio-padrão de 0,003 --- nenhuma economia individual é decisiva. Nos países retidos, a média cai para 0,542, consideravelmente menor. A diferença indica que a associação de níveis é dominada pela variação entre países no conjunto de treino, não por um padrão transferível de país para país.
+
+\begin{table}[htbp]
+\centering
+\caption{Correlação em níveis com exclusão de um país (LOOCV, 135 folds)}
+\label{tab:loocv}
+\small
+\begin{tabular}{lc}
+\toprule
+Estatística & $\rho$ (níveis) \\
+\midrule
+Média nos folds de treino & 0,751 \\
+Desvio-padrão nos folds de treino & 0,003 \\
+Média nos países de teste & 0,542 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. Valores completos em \path{outputs/expanded/tabela3_loocv_expandido.csv} e \path{loocv_folds_expanded.json}.}
+\end{table}
+
+\subsection{Subperíodos}
+
+A comparação dos subperíodos 1960--1990 e 1991--2023 (Tabela 4) mostra correlação em níveis elevada em ambos (0,615 no primeiro; 0,769 no segundo). Em primeiras diferenças, a correlação é modesta nos dois subperíodos (0,133 e 0,194), com ligeiro aumento no período mais recente.
+
+\begin{table}[htbp]
+\centering
+\caption{Correlações por subperíodo}
+\label{tab:subperiodos}
+\small
+\begin{tabular}{lcc}
+\toprule
+Subperíodo & $\rho$ (níveis) & $\rho$ (primeiras diferenças) \\
+\midrule
+1960--1990 & 0,615 & 0,133 \\
+1991--2023 & 0,769 & 0,194 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. Valores completos em \path{outputs/expanded/tabela4_subperiodos_expandido.csv}.}
+\end{table}
+
+\subsection{Painel com efeitos fixos e controles de governança}
+
+O painel com efeitos fixos de país e de ano, log do PIB per capita defasado em cinco anos e controles de gasto educacional, pesquisa e desenvolvimento, urbanização, manufatura e governança (WGI) produz o coeficiente reportado na Tabela 5. O coeficiente do log-PIB per capita defasado é 0,073 (IC95\% $-$0,169 a 0,314; p = 0,555), com 106 clusters de país e 1.146 observações. O intervalo de confiança contém zero: uma vez introduzidos os controles institucionais e estruturais, nenhuma associação sistemática intra-país é identificável. A especificação com cluster por país é a principal; ignorar a correlação serial tenderia a estreitar artificialmente os intervalos (CAMERON; MILLER, 2015).
+
+\begin{table}[htbp]
+\centering
+\caption{Painel com efeitos fixos de país e ano, controles e erros clusterizados por país}
+\label{tab:painel}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+Especificação & Coeficiente log-PIB pc (lag 5) & IC95\% & p & n & Clusters \\
+\midrule
+FE país + FE ano + controles (WGI, educ., P\&D, urbanização, manufatura) & 0,073 & [$-$0,169; 0,314] & 0,555 & 1146 & 106 \\
+\bottomrule
+\end{tabular}}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. \path{outputs/expanded/provenance_expanded.json}. Erros padrão clusterizados por país.}
+\end{table}
+
+\subsection{Exercício preditivo com validação agrupada}
+
+Com partição aleatória por linha --- que permite ao modelo ``memorizar'' países --- a área sob a curva ROC é 0,694 (Tabela 6). Com validação cruzada agrupada por país (GroupKFold), em que cada país de teste esteve totalmente ausente do treino, a área cai para 0,609, próxima do acaso (0,500). A diferença indica que a capacidade preditiva aparente depende parcialmente de características específicas dos países do treino: mesmo com 135 economias, o modelo não identifica um padrão transferível entre países não vistos.
+
+\begin{table}[htbp]
+\centering
+\caption{Exercício preditivo com florestas aleatórias}
+\label{tab:ml}
+\small
+\begin{tabular}{lc}
+\toprule
+Partição & Área sob a curva ROC \\
+\midrule
+Aleatória por linha (mesmo país no treino e no teste) & 0,694 \\
+Agrupada por país (país de teste ausente do treino) & 0,609 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. \path{outputs/expanded/tabela6_ml_expandido.csv}. Alvo: crescimento do PIB per capita acima da mediana do período.}
+\end{table}
+
+\subsection{Canais associativos da educação terciária}
+
+Para situar o que a associação matrícula terciária $\times$ renda capta, a Tabela 7 reporta correlações parciais de Pearson sobre resíduos, com intervalos de confiança por cluster bootstrap por país (500 replicações, semente fixa), e regressões com efeitos fixos de país e de ano. Controlar progressivamente por governança e estrutura econômica reduz a associação matrícula $\times$ log-PIB de 0,701 para 0,358; o controle adicional de saúde (expectativa de vida) a reduz a 0,105, com intervalo de confiança contendo zero ($-$0,090 a 0,288; n = 1146). A associação parcial de matrícula com saúde é alta (0,684; IC 0,639 a 0,728; n = 4374): parte da associação com a renda é indissociável de variações conjuntas com a saúde. A associação parcial com desigualdade é negativa ($-$0,184; IC $-$0,302 a $-$0,042; n = 1475), a de P\&D com exportação de alta tecnologia é positiva (0,250; IC 0,103 a 0,429; n = 1148) e a de gasto educacional com controle da corrupção é positiva (0,341; IC 0,247 a 0,423; n = 2441) --- padrões associativos, não evidência de mecanismos causais.
+
+No painel com efeitos fixos, nenhum canal permanece detectável: saúde 0,535 (IC $-$0,257 a 1,327; p = 0,186; 106 clusters), desigualdade $-$0,104 (IC $-$2,802 a 2,594; p = 0,940; 77 clusters) e inovação 0,836 (IC $-$1,768 a 3,440; p = 0,529; 77 clusters). Uma interação exploratória entre matrícula defasada e governança (WGI) é positiva e estatisticamente distinta de zero (0,054; IC 0,017 a 0,092; p = 0,005), sugestiva de que a associação dentro do país é maior em economias com melhor governança; a interação com P\&D é indistinguível de zero ($-$0,003; IC $-$0,017 a 0,011; p = 0,668). Essas estimativas são exploratórias, não corrigidas para múltiplas comparações, e devem ser lidas com cautela.
+
+\begin{table}[htbp]
+\centering
+\caption{Canais associativos: correlações parciais de Pearson (bootstrap por país, 500 replicações)}
+\label{tab:canais}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{5.2cm}cccc}
+\toprule
+Associação & $\rho$ parcial & IC95\% (bootstrap) & n & Controle \\
+\midrule
+Matrícula $\times$ saúde (expectativa de vida) & 0,684 & [0,639; 0,728] & 4374 & log-PIB \\
+Matrícula $\times$ desigualdade (Gini) & $-$0,184 & [$-$0,302; $-$0,042] & 1475 & log-PIB \\
+Matrícula $\times$ inovação (export. alta tecnologia) & $-$0,002 & [$-$0,120; 0,087] & 1566 & log-PIB \\
+P\&D $\times$ inovação (export. alta tecnologia) & 0,250 & [0,103; 0,429] & 1148 & log-PIB \\
+Gasto educacional $\times$ WGI controle da corrupção & 0,341 & [0,247; 0,423] & 2441 & log-PIB \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. \path{outputs/channels/provenance_r413.json}. Bootstrap por país (500 replicações, semente 42); painel FE com erros padrão clusterizados por país; sem inferência causal.}
+\end{table}
+
+% ----------------------------------------------------------------------
+% 5. Discussão
+% ----------------------------------------------------------------------
+\section{Discussão}
+
+Os resultados são coerentes com o padrão já documentado na literatura, em dados oficiais e auditáveis de 135 economias: a escolaridade terciária e o nível de renda correlacionam-se fortemente entre países, mas a associação enfraquece de forma acentuada quando se considera a variação dentro dos países ao longo do tempo (MANKIW; ROMER; WEIL, 1992; PRITCHETT, 2001; HANUSHEK; WOESSMANN, 2010). A queda de 0,751 para 0,146 em primeiras diferenças é o achado central: a associação observada entre países decorre majoritariamente de disparidades estruturais de longo prazo, não de uma relação contemporânea estável dentro de cada economia.
+
+O que este ciclo de análise acrescenta é o painel com controles institucionais e erros clusterizados. Com efeitos fixos de país e de ano, controles de governança e estrutura econômica, o coeficiente do log-PIB per capita defasado é estatisticamente indistinguível de zero (0,073; IC95\% $-$0,169 a 0,314). Esse resultado modera leituras anteriores. Uma possibilidade é que parte da associação positiva reportada em especificações sem controles capte a correlação entre renda e qualidade institucional (KAUFMANN; KRAAY; MASTRUZZI, 2011). Outra é que parte da significância aparente reflita erros padrão não ajustados à correlação serial por país (CAMERON; MILLER, 2015). A interpretação não é de ausência de relação entre escolaridade terciária e renda, mas de impossibilidade de detectar essa relação na dimensão intra-país com o conjunto de controles adotado --- uma conclusão mais modesta e mais defensável.
+
+O exercício preditivo ilustra um ponto metodológico raramente reportado na literatura revisada aqui: a validação por linha superestima a capacidade preditiva mesmo com 135 países. A queda da área sob a curva ROC de 0,694 para 0,609 sob validação agrupada mostra que modelos treinados em um conjunto de países não se transferem automaticamente a outros (BREIMAN, 2001). Esse limite é próprio de amostras de países e não decorre do tamanho da amostra; vale, ao menos, para os métodos aqui testados. Esse resultado negativo pode ser lido como uma contribuição metodológica: exercícios preditivos sobre a armadilha da renda média deveriam reportar validação agrupada por país.
+
+A análise de canais associativos qualifica a leitura do painel principal. Em níveis, a associação matrícula $\times$ renda é progressivamente absorvida por governança, estrutura econômica e saúde; a associação parcial com saúde é a mais alta (0,684) e a associação com desigualdade é negativa. Dentro do país, com efeitos fixos, nenhum canal isolado é discernível --- coerente com a não detecção de associação no coeficiente principal. A interação exploratória com governança positiva sugere que a associação pode ser maior onde as instituições são melhores, mas o caráter exploratório da estimativa impede conclusões; o mesmo vale para a ausência de interação com P\&D. Esses padrões indicam que a relação educação terciária--renda, quando existe, provavelmente se manifesta de forma conjunta com saúde, instituições e estrutura produtiva, e não por um canal isolado (ACEMOGLU; GALLEGO; ROBINSON, 2014).
+
+As principais limitações remanescentes do estudo são: (i) a seleção dos países é condicionada à disponibilidade de dados, e não aleatória; (ii) a cobertura das variáveis educacionais e de governança é parcial, sobretudo nas décadas iniciais; (iii) os indicadores WGI só existem a partir de 1996, o que restringe a amostra do painel com controles; e (iv) o caráter associativo de todas as estimativas --- sem variação exógena, não é possível atribuir direção de relação. A replicabilidade integral dos resultados mitiga, mas não elimina, essas limitações.
+
+% ----------------------------------------------------------------------
+% 6. Conclusão
+% ----------------------------------------------------------------------
+\section{Conclusão}
+
+Este artigo oferece uma análise associativa, reprodutível e auditável da relação entre educação terciária e renda em 135 economias, entre 1960 e 2023. O primeiro resultado diz respeito aos níveis: a correlação entre matrícula terciária e renda é elevada e estável à exclusão de qualquer país (seção 4.3). O segundo refere-se à variação dentro do país: a associação é modesta em primeiras diferenças e indistinguível de zero no painel com controles institucionais e erros clusterizados (seção 4.5). Por fim, a validação cruzada agrupada indica baixa transferibilidade preditiva para economias ausentes do treino (seção 4.6).
+
+Para a política pública brasileira, o resultado mais defensável é o mais modesto: a expansão da educação terciária correlaciona-se positivamente com o nível de renda entre países, mas a magnitude dessa associação dentro do país é incerta e dependente de condições institucionais e de qualidade que este desenho não observa. A recomendação de priorizar a expansão do ensino superior com qualidade, governança e articulação com a inovação (ACEMOGLU; GALLEGO; ROBINSON, 2014; RODRIK, 2016; KAUFMANN; KRAAY; MASTRUZZI, 2011; WORLD BANK, 2024) é compatível com os resultados, mas não decorre deles como conclusão de associação.
+
+% ----------------------------------------------------------------------
+% Referências (ABNT NBR 6023, lista única, ordem alfabética)
+% ----------------------------------------------------------------------
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\section*{Referências}
+
+ACEMOGLU, D.; GALLEGO, F. A.; ROBINSON, J. A. Institutions, human capital, and development. \textbf{Annual Review of Economics}, v. 6, p. 875-912, 2014. DOI: 10.1146/annurev-economics-080213-041119.
+
+AIYAR, S. et al. Growth slowdowns and the middle-income trap. \textbf{Japan and the World Economy}, v. 48, p. 22-37, 2018. DOI: 10.1016/j.japwor.2018.07.001.
+
+BARRO, R. J.; LEE, J. W. A new data set of educational attainment in the world, 1950--2010. \textbf{Journal of Development Economics}, v. 104, p. 184-198, 2013. DOI: 10.1016/j.jdeveco.2012.10.001.
+
+BREIMAN, L. Random forests. \textbf{Machine Learning}, v. 45, n. 1, p. 5-32, 2001. DOI: 10.1023/A:1010933404324.
+
+CAMERON, A. C.; MILLER, D. L. A practitioner's guide to cluster-robust inference. \textbf{Journal of Human Resources}, v. 50, n. 2, p. 317-372, 2015. DOI: 10.3368/jhr.50.2.317.
+
+EICHENGREEN, B.; PARK, D.; SHIN, K. When fast-growing economies slow down: international evidence and implications for China. \textbf{Asian Economic Papers}, v. 11, n. 1, p. 42-87, 2012. DOI: 10.1162/ASEP\_a\_00118.
+
+FELIPE, J.; ABDON, A.; KUMAR, U. Tracking the middle-income trap: what is it, who is in it, and why? \textbf{Asian Development Review}, v. 29, n. 1, 2012. DOI: 10.2139/ssrn.2049330.
+
+HANUSHEK, E. A.; WOESSMANN, L. Education and economic growth. In: PETERSON, P.; BAKER, E.; McGAW, B. (Ed.). \textbf{International Encyclopedia of Education}. 3. ed. Oxford: Elsevier, 2010. v. 2, p. 245-252. DOI: \href{https://doi.org/10.1016/B978-0-08-044894-7.01227-6}{10.1016/B978-0-08-044894-7.01227-6}.
+
+IM, F. G.; ROSENBLATT, D. Middle-income traps: a conceptual and empirical survey. \textbf{Journal of International Commerce, Economics and Policy}, v. 6, n. 3, 2015. DOI: 10.1142/S1793993315500131.
+
+KAUFMANN, D.; KRAAY, A.; MASTRUZZI, M. The Worldwide Governance Indicators: methodology and analytical issues. \textbf{Hague Journal on the Rule of Law}, v. 3, n. 2, p. 220-246, 2011. DOI: 10.1017/S1876404511200046.
+
+LUCAS, R. E. On the mechanics of economic development. \textbf{Journal of Monetary Economics}, v. 22, n. 1, p. 3-42, 1988. DOI: 10.1016/0304-3932(88)90168-7.
+
+MANKIW, N. G.; ROMER, D.; WEIL, D. N. A contribution to the empirics of economic growth. \textbf{Quarterly Journal of Economics}, v. 107, n. 2, p. 407-437, 1992. DOI: 10.2307/2118477.
+
+PRITCHETT, L. Where has all the education gone? \textbf{World Bank Economic Review}, v. 15, n. 3, p. 367-391, 2001. DOI: 10.1093/wber/15.3.367.
+
+PSACHAROPOULOS, G.; PATRINOS, H. A. Returns to investment in education: a decennial review of the global literature. \textbf{Education Economics}, v. 26, n. 5, p. 445-458, 2018. DOI: 10.1080/09645292.2018.1484426.
+
+RODRIK, D. Premature deindustrialization. \textbf{Journal of Economic Growth}, v. 21, n. 1, p. 1-33, 2016. DOI: 10.1007/s10887-015-9122-3.
+
+ROMER, P. M. Endogenous technological change. \textbf{Journal of Political Economy}, v. 98, n. 5, p. S71-S102, 1990. DOI: 10.1086/261725.
+
+VANDENBUSSCHE, J.; AGHION, P.; MEGHIR, C. Growth, distance to frontier and composition of human capital. \textbf{Journal of Economic Growth}, v. 11, n. 2, p. 97-127, 2006. DOI: 10.1007/s10887-006-9002-y.
+
+WORLD BANK. \textbf{World Development Report 2024: The Middle-Income Trap}. Washington, DC: World Bank, 2024. DOI: \href{https://doi.org/10.1596/978-1-4648-2078-6}{10.1596/978-1-4648-2078-6}.
+
+\endgroup
+
+\end{document}
