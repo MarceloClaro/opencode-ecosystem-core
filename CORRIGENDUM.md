@@ -150,6 +150,43 @@ projeto.
 
 ---
 
+## 9. Medições próprias em CJK: um padrão de erro do assistente (R405–R407)
+
+**Alegação implícita:** que as medições automatizadas feitas sobre a edição
+chinesa de *Molambudos* durante os ciclos R405–R407 eram confiáveis o
+suficiente para embasar edições no texto.
+
+**Por que é um overclaim:** ao longo desses ciclos, **cinco** medições em
+chinês produziram conclusões falsas, todas pela mesma causa — expressões
+regulares e substituições concebidas para escrita alfabética:
+
+| # | Erro | Efeito |
+|---|---|---|
+| 1 | Extrator de texto descartava o conteúdo de `\textit{}` | penalizou o chinês, que o usa muito mais; DOC-17 apareceu como quase vazio |
+| 2 | `\b` não casa antes de 年 (caractere de palavra para o módulo `re`) | "sumiram" 17 anos da edição chinesa |
+| 3 | Contagem de idades exigia "anos" | não via o "62 years" do inglês |
+| 4 | Transliterações chutadas (惠灵顿, 埃德森) | Wellington e Edson dados como ausentes do chinês; são 韦林顿 e 埃德松 |
+| 5 | Substituição de título `循环`→`下一页` atingiu 3 ocorrências, não 2 | corrompeu «o ciclo não se fecha: transfere-se» no corpo do texto |
+
+Os quatro primeiros foram pegos antes de qualquer edição; o quinto foi pego
+pela conferência de contagem e revertido na mesma sessão. Nenhum chegou ao
+texto publicado, mas a taxa é o dado relevante.
+
+**Leitura correta:** contagem de linhas e de parágrafos **não** é comparável
+entre chinês e línguas alfabéticas — o chinês não separa palavras por espaço e
+quebra parágrafos por convenção própria (fragmentos com 98 parágrafos contra 51
+do português não têm conteúdo a mais). A métrica que se mostrou confiável é a
+**razão de caracteres** contra a mediana da própria edição, com limite inferior
+por IQR. E toda substituição em texto CJK deve conferir a contagem de
+ocorrências antes e depois, porque um termo de título costuma reaparecer no
+corpo com outro sentido.
+
+**Consequência prática:** a revisão nativa das edições inglesa e chinesa não é
+formalidade. As traduções são de autoria do assistente, e as ferramentas com
+que ele as verificou erraram cinco vezes no idioma que menos domina.
+
+---
+
 ## Como este documento é mantido
 
 - `MarceloClaroOrchestrator.doctor()` (`marceloclaro/doctor.py`) verifica
@@ -208,3 +245,37 @@ projeto.
 - **[Autocorreção Circuito Fechado - 2026-08-04 14:22:24]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
 
 - **[Autocorreção Circuito Fechado - 2026-08-04 15:06:40]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-04 18:43:42]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.002s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-04 18:53:53]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.008s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-04 19:26:07]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.005s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-04 19:37:47]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-04 23:02:13]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-04 23:15:21]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.002s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-04 23:23:48]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-05 00:12:15]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-05 06:07:23]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-05 06:19:00]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-07 16:55:01]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.002s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-08 20:48:48]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.005s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-08 20:54:50]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.002s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-08 21:39:24]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-08 22:40:16]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-08 22:50:36]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.001s)
+
+- **[Autocorreção Circuito Fechado - 2026-08-12 20:35:36]**: Spec `SPEC-935-R221` — Teste de falha controlada em módulo (verificado em 0.003s)
