@@ -1,4 +1,4 @@
-# Nota Técnica — Diagnóstico de indicadores correlacionados com o IDEB no Sertão de Cratéus (foco: Crateús)
+# Nota Técnica — Diagnóstico de indicadores correlacionados com o IDEB no Sertão de Crateús (foco: Crateús)
 
 **Ciclo R427** — SPEC-935-R427-crateus-diagnostico.md
 **Data:** 2026-08-15 · **Autor:** Marcelo Claro Laranjeira
@@ -7,7 +7,7 @@
 
 Dentre os indicadores municipais oficiais disponíveis, **quais se correlacionam mais
 (positivamente) e quais menos** com o desempenho escolar (IDEB) nos nove municípios do
-Sertão de Cratéus — e onde Crateús se posiciona nos indicadores de maior correlação,
+Sertão de Crateús — e onde Crateús se posiciona nos indicadores de maior correlação,
 para orientar prioridades de política pública?
 
 ## 2. Método e dados

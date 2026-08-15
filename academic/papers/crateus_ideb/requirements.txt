@@ -1,0 +1,9 @@
+# Requirements — artigo Crateús-IDEB (R428)
+# Análise: Python 3.11+; dados oficiais INEP/IBGE/IPEA Data
+numpy>=1.26
+pandas>=2.0
+scipy>=1.11
+# Documento (TeX/DOCX)
+pandoc>=3.0        # via sistema; conversão MD -> DOCX
+# Testes
+pytest>=7.0
