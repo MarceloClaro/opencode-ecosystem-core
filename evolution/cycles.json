@@ -4332,6 +4332,23 @@
         "Manifest sha256 fecha a proveniência também para artefato Word"
       ],
       "timestamp": "2026-08-14T07:15:00"
+    },
+    {
+      "round_id": "R422",
+      "objective": "Blind peer review emulado (3 revisores) do manuscrito final e correção dos achados de submissão",
+      "changes": [
+        "Relatório outputs/review/peer_review_r422.md: 3 pareceres, 12 achados, 0 críticos, verificação aritmética exaustiva",
+        "Corrigidos 8 achados: RBEP=Pedagógicos (ID9), validações por subperíodos (ID6), ressalva demográfica 4.8 (ID7), rótulo regional Tabela 10 (ID8), seção Declarações (ID11), arredondamento Δ (ID1), proveniência canais (ID5), datas download/verificação (ID10)",
+        "Regenerados PDF (19p, 0 Overfull) e DOCX com as correções",
+        "Testes R422 (17); suíte R408-R422 com 351 passed"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Blind peer review emulado detecta erros editoriais que viajariam no envelope de submissão (nome do periódico no glossário)",
+        "Conteúdo de tabela no DOCX não aparece em paragraphs; testes precisam varrer células",
+        "IDs 2/3/4 (dispersão LOOCV, cluster comparativo, TOST) ficam como melhorias metodológicas para R423"
+      ],
+      "timestamp": "2026-08-14T07:40:00"
     }
   ]
 }
