@@ -278,6 +278,44 @@ Os mapas coropléticos (Figuras 5 e 6) apresentam os dois proxies oficiais de de
 \caption{PIB per capita por município (2021, IBGE).}
 \end{figure}
 
+\subsection{Marcadores socioeconômicos não convencionais (análise exploratória)}
+
+Para ampliar o diagnóstico além dos proxies clássicos (renda do responsável e PIB per capita), esta rodada incorpora 33 marcadores do Censo Demográfico 2022 (IBGE) por município: gênero, raça/etnia, trabalho (carteira, conta própria, setor público, previdência), profissões (grandes grupos de ocupação), atividade econômica (seções), renda (domiciliar per capita e do trabalho), condições de vida (renda per capita até um salário mínimo), educação/formação (anos de estudo, superior completo, frequência escolar) e habitação (alvenaria, densidade de dormitório). A fonte primária foi a API do IBGE (SIDRA v3), com tabelas do universo e os resultados preliminares da amostra do Censo 2022, e proveniência auditável por tabela, variável e classificação (manifest no repositório).
+
+O desfecho primário é o IDEB 2025 anos iniciais (rede municipal, INEP); o IDEB 2023 entra como sensibilidade. Para cada marcador, calcularam-se correlações de Spearman e Pearson com IC95\% por bootstrap não paramétrico ($n = 9$; 5.000 reamostragens; seed 42) e estabilidade de sinal. Como o protocolo é exploratório e envolve múltiplas comparações, os 66 $p$-valores (33 marcadores $\times$ 2 desfechos) foram corrigidos por FDR (Benjamini--Hochberg) e por Bonferroni.
+
+\textbf{Nenhuma associação sobreviveu ao ajuste.} Após a correção, todos os $q$-valores superaram 0,05 (menor $q_{BH} = 0{,}49$), tanto no desfecho primário quanto na sensibilidade; o mesmo ocorreu sob Bonferroni. Esse é o resultado esperado para um desenho com $n = 9$ e 66 hipóteses, e a leitura correta é de precisão insuficiente para distinguir associações reais do ruído amostral --- não de prova de ausência de associação.
+
+Na escala descritiva (sem inferência formal), os coeficientes crus de maior magnitude no desfecho primário foram: \% de ocupados sem carteira ($\rho = +0{,}73$; $p = 0{,}026$; IC95\% $[0{,}20; 0{,}97]$; sinal estável em 99\% das réplicas), \% de adultos com superior completo ($\rho = -0{,}73$; IC95\% $[-0{,}93; 0{,}03]$), \% de profissionais das ciências e intelectuais ($\rho = -0{,}72$; IC95\% $[-0{,}92; 0{,}10]$), \% de diretores e gerentes ($\rho = +0{,}71$; IC95\% $[0{,}05; 0{,}95]$), nível de ocupação ($\rho = -0{,}68$; IC95\% $[-0{,}95; 0{,}10]$) e \% de domicílios em alvenaria ($\rho = -0{,}65$; IC95\% $[-0{,}93; 0{,}17]$).
+
+\begin{table}[h!]
+\centering
+\caption{Marcadores não convencionais com maior $|\rho|$ (IDEB 2025 anos iniciais; $n = 9$).}
+\small
+\begin{tabular}{l l c c c c}
+\hline
+Família & Marcador & $\rho$ & $p$ & $q_{BH}$ & Sinal estável \\
+\hline
+Trabalho & Ocupados sem carteira (\%) & $+0{,}73$ & 0,026 & 0,49 & 99\% \\
+Educação/formação & 18+ com superior completo (\%) & $-0{,}73$ & 0,026 & 0,49 & 98\% \\
+Profissões & Profissionais ciências/intelectuais (\%) & $-0{,}72$ & 0,029 & 0,49 & 98\% \\
+Profissões & Diretores e gerentes (\%) & $+0{,}71$ & 0,032 & 0,49 & 98\% \\
+Trabalho & Nível de ocupação 10+ (\%) & $-0{,}68$ & 0,045 & 0,49 & 96\% \\
+Habitação & Domicílios em alvenaria (\%) & $-0{,}65$ & 0,057 & 0,49 & 95\% \\
+Habitação & Moradores $>$3/dormitório (\%) & $-0{,}54$ & 0,130 & 0,75 & 99\% \\
+Educação/formação & Anos de estudo (11+) & $-0{,}53$ & 0,139 & 0,75 & 65\% \\
+Trabalho & Conta própria (\%) & $-0{,}51$ & 0,160 & 0,75 & 95\% \\
+Profissões & Ocupados agropecuária (\%) & $-0{,}48$ & 0,194 & 0,75 & 80\% \\
+\hline
+\end{tabular}
+\end{table}
+
+O padrão descritivo combina dois elementos. O primeiro é a posição da sede regional: Crateús concentra os maiores valores de renda domiciliar per capita (R\$ 920; primeiro entre os nove municípios), rendimento médio do trabalho (R\$ 1.563), anos de estudo (8,0), nível de ocupação (43,2\%), ocupados com carteira (19,9\%) e contribuintes de previdência (44,3\%), e os menores valores de ocupados sem carteira (29,7\%) e de renda per capita até um salário mínimo (79,4\%). O segundo é que, nessa microrregião, os municípios de perfil menos urbano alcançaram IDEB 2025 médio mais elevado do que a sede em vários anos --- o que produz coeficientes crus negativos para escolaridade superior e profissionais liberais e positivos para ocupações sem carteira e direção. Em outras palavras, a associação positiva renda--escolaridade--desempenho documentada no agregado nacional não aparece dentro desta microrregião nem na dimensão transversal com marcadores não convencionais, o que é coerente com as Seções 4.1 e 4.2.
+
+A sensibilidade com IDEB 2023 preserva os sinais das principais correlações (ocupados sem carteira, $\rho = +0{,}65$; mulheres e técnicos de nível médio, $\rho = -0{,}63$; profissionais, $\rho = -0{,}55$), com nenhuma sobrevivência ao ajuste.
+
+Duas indisponibilidades de fonte devem ser registradas com transparência. Primeiro, o indicador de docentes/formadores do INEP (Censo Escolar/AFD) permaneceu inacessível na rede do ambiente (download.inep.gov.br bloqueado); o proxy oficial adotado foi o \% de profissionais das ciências e intelectuais entre ocupados (Censo 2022), complementado pela alfabetização 15+, já incorporada nas Seções 3 e 4. Segundo, no momento da coleta as tabelas clássicas de trabalho, saúde e renda do SIDRA v3 (vacinação COVID-19, pobreza multidimensional, insegurança alimentar, uso de internet por pessoas, rendimento dos ocupados) responderam erro 500 de forma seletiva no ambiente; a solução foi usar as tabelas da amostra do Censo 2022 (auditáveis), com proxies oficiais para pobreza (renda domiciliar per capita até um salário mínimo) e formalidade (contribuintes de previdência). A internet domiciliar foi reaproveitada da base anterior (Seção 4.7). Recomenda-se, em ambiente com acesso pleno, reexecutar a coleta com as tabelas originais do INEP e do SIDRA.
+
 \section{Discussão}
 
 Os resultados indicam que, no Sertão de Crateús, \textbf{não se sustenta a hipótese de associação renda--desempenho em nenhuma das duas dimensões testadas}: entre municípios, a correlação estimada é negativa e não discernível de zero ($r = -0{,}24$; IC95\% $[-0{,}77; 0{,}50]$; Figura 1); dentro dos municípios, as primeiras diferenças são próximas de zero e os efeitos fixos não são discerníveis de zero sob erros clusterizados ($\beta = 2{,}61$; IC95\% $[-1{,}73; 6{,}95]$; $p = 0{,}20$; Figuras 2 e 3). A precisão do estudo é limitada (MDES $\approx 6{,}0$; TOST não significativo mesmo com margem substantiva), de modo que a leitura correta é de \textbf{precisão insuficiente para detectar efeitos plausíveis}, e não de prova de ausência de efeito.

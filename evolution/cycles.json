@@ -4504,7 +4504,24 @@
         "Pendências de submissão RBEP em aberto: anonimização _BLINDED, dados do autor, declaração financiamento/conflito, carta de submissão, formatação final"
       ],
       "timestamp": 1786827961.533976
+    },
+    {
+      "round_id": "R430",
+      "objective": "Marcadores socioeconômicos não convencionais (33 indicadores do Censo 2022, universo+amostra) x IDEB 2025 AI (primário) e 2023 (sensibilidade), n=9, bootstrap seed 42, 66 hipóteses, FDR BH + Bonferroni; nenhuma associação sobrevive ao ajuste (menor qBH=0,49); §4.8 no MD+TeX; números R428/R429 intocados",
+      "changes": [
+        "specs/SPEC-935-R430-crateus-marcadores-nao-convencionais.md: fontes efetivadas (amostra Censo 2022: 10056/10061/10062/10261/10264/10266/10268/10280/10295/10296; universo 9605/9606/9928/9940); indisponibilidades (SIDRA v3 500 em 9622/9616/9624/9717/9546/9547/9730/9770/9780/9580/9562; INEP bloqueado); resultado principal",
+        "scripts/baixar_indicadores_r430.py: coletor reescrito, 33 indicadores, 33/33 OK, manifest auditável",
+        "data/processed/indicadores_r430.json + manifest_r430.json: gerados (9 municípios x 33 indicadores)",
+        "scripts/analise_r430_marcadores.py: análise bootstrap vetorizada, Spearman/Pearson, IC95, sinal estável, FDR/Bonferroni (66 hipóteses), ranking, perfil Crateús",
+        "outputs/expanded/resultados_r430.json + provenance_r430.json: gerados",
+        "docs/ARTIGO_CRATEUS_RBEP.md e latex/ARTIGO_CRATEUS_RBEP.tex: nova subseção 4.8 (espelhada), tabela-resumo top-10, nota indisponibilidades",
+        "tests/test_r430_marcadores.py: 15 testes novos",
+        "outputs/docx/ARTIGO_CRATEUS_RBEP.docx e latex/ARTIGO_CRATEUS_RBEP.pdf regenerados",
+        "evolution/evo-61-r430-marcadores-nao-convencionais.md: registro"
+      ],
+      "result": "33 marcadores x 9 municípios; 66 hipóteses; nenhuma sobrevivência ao FDR/Bonferroni (menor qBH=0,49); descritivo: sem-carteira rho=+0,73 p=0,026 IC95[0,20;0,97], superior completo rho=-0,73, profissionais rho=-0,72, diretores rho=+0,71, nível de ocupação rho=-0,68, alvenaria rho=-0,65; perfil Crateús: máx 9/9 em renda/estudo/carteira/previdência, mín 1/9 em sem-carteira/pobreza<=1SM; sensibilidade 2023 preserva sinais",
+      "verification": "pytest tests/test_r430_marcadores.py 15 passed; suíte R420-R430 125 passed; doctor 10 pass/2 warn pré-existentes/0 failed; PDF 20 páginas"
     }
   ],
-  "total": 247
+  "total": 248
 }

@@ -1,0 +1,2080 @@
+{
+  "resumo": {
+    "ciclo": "R430",
+    "desfecho_primario": "IDEB 2025 anos iniciais, rede municipal (INEP)",
+    "desfecho_sensibilidade": "IDEB 2023 anos iniciais, rede municipal (INEP)",
+    "n_municipios": 9,
+    "n_indicadores": 33,
+    "n_hipoteses": 66,
+    "seed": 42,
+    "b_reamostragens": 5000,
+    "ajuste": "FDR Benjamini-Hochberg + Bonferroni (66 hipóteses, rho de Spearman)",
+    "significativos_bh": [],
+    "significativos_bonf": [],
+    "top_abs_rho": [
+      {
+        "indicador": "ocup_sem_carteira_pct",
+        "desfecho": "ideb_2025_ai",
+        "rho": 0.728039845617479,
+        "q_bh": 0.49196243721053523
+      },
+      {
+        "indicador": "superior_completo_pct",
+        "desfecho": "ideb_2025_ai",
+        "rho": -0.728039845617479,
+        "q_bh": 0.49196243721053523
+      },
+      {
+        "indicador": "ocup_profissionais_pct",
+        "desfecho": "ideb_2025_ai",
+        "rho": -0.7196715715299219,
+        "q_bh": 0.49196243721053523
+      },
+      {
+        "indicador": "ocup_diretores_pct",
+        "desfecho": "ideb_2025_ai",
+        "rho": 0.7113032974423646,
+        "q_bh": 0.49196243721053523
+      },
+      {
+        "indicador": "nivel_ocupacao_pct",
+        "desfecho": "ideb_2025_ai",
+        "rho": -0.6778302010921357,
+        "q_bh": 0.49196243721053523
+      },
+      {
+        "indicador": "alvenaria_pct",
+        "desfecho": "ideb_2025_ai",
+        "rho": -0.6527253788294639,
+        "q_bh": 0.49196243721053523
+      },
+      {
+        "indicador": "domicilio_densidade_pct",
+        "desfecho": "ideb_2025_ai",
+        "rho": -0.54393781569122,
+        "q_bh": 0.7530832873879777
+      },
+      {
+        "indicador": "anos_estudo_11mais",
+        "desfecho": "ideb_2025_ai",
+        "rho": -0.5336134453781513,
+        "q_bh": 0.7530832873879777
+      }
+    ]
+  },
+  "resultados": [
+    {
+      "indicador": "mulheres_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Gênero",
+      "etiqueta": "Mulheres na população (%)",
+      "n": 9,
+      "rho": -0.42678197846541877,
+      "rho_p": 0.25195669028740064,
+      "r": -0.2999195254966182,
+      "r_p": 0.4329748418941887,
+      "rho_ic95": [
+        -0.7833333333333333,
+        0.36666666666666664
+      ],
+      "r_ic95": [
+        -0.9209802745285153,
+        0.19329854649783226
+      ],
+      "sinal_estavel_pct": 91.12,
+      "media": 50.38948609224805,
+      "desvio": 0.4454053464873591,
+      "min": 49.7296322999279,
+      "max": 51.3417986647467,
+      "crateus_valor": 51.3417986647467,
+      "q_bh": 0.791863883760402,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "mulheres_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Gênero",
+      "etiqueta": "Mulheres na população (%)",
+      "n": 9,
+      "rho": -0.6333333333333333,
+      "rho_p": 0.06708578689234572,
+      "r": -0.7062214959232178,
+      "r_p": 0.03346531367871024,
+      "rho_ic95": [
+        -0.95,
+        0.11666666666666667
+      ],
+      "r_ic95": [
+        -0.9683544165091378,
+        -0.22599089880332793
+      ],
+      "sinal_estavel_pct": 99.6,
+      "media": 50.38948609224805,
+      "desvio": 0.4454053464873591,
+      "min": 49.7296322999279,
+      "max": 51.3417986647467,
+      "crateus_valor": 51.3417986647467,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "pretos_pardos_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Raça/etnia",
+      "etiqueta": "Pretos e pardos na população (%)",
+      "n": 9,
+      "rho": 0.3765723339400754,
+      "rho_p": 0.3178226816985236,
+      "r": 0.33417279290272844,
+      "r_p": 0.3794402459415437,
+      "rho_ic95": [
+        -0.38333333333333336,
+        0.95
+      ],
+      "r_ic95": [
+        -0.2003768185018658,
+        0.9039630997196382
+      ],
+      "sinal_estavel_pct": 93.66,
+      "media": 69.75730522672399,
+      "desvio": 5.236394956623668,
+      "min": 59.77024899411044,
+      "max": 76.13137215393915,
+      "crateus_valor": 68.21049875638172,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 4,
+      "n_vals": 9,
+      "crateus_pctil": 37.5
+    },
+    {
+      "indicador": "pretos_pardos_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Raça/etnia",
+      "etiqueta": "Pretos e pardos na população (%)",
+      "n": 9,
+      "rho": 0.21666666666666667,
+      "rho_p": 0.5755148957119259,
+      "r": 0.17884507191566779,
+      "r_p": 0.6452319188835967,
+      "rho_ic95": [
+        -0.5,
+        0.8833333333333333
+      ],
+      "r_ic95": [
+        -0.38018264895288556,
+        0.9274337142595281
+      ],
+      "sinal_estavel_pct": 74.44,
+      "media": 69.75730522672399,
+      "desvio": 5.236394956623668,
+      "min": 59.77024899411044,
+      "max": 76.13137215393915,
+      "crateus_valor": 68.21049875638172,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "nivel_ocupacao_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Nível de ocupação 10+ (%)",
+      "n": 9,
+      "rho": -0.6778302010921357,
+      "rho_p": 0.04480926269300503,
+      "r": -0.3642082635543814,
+      "r_p": 0.33523964364472225,
+      "rho_ic95": [
+        -0.95,
+        0.1
+      ],
+      "r_ic95": [
+        -0.9150398815003785,
+        0.08364288258472888
+      ],
+      "sinal_estavel_pct": 95.96000000000001,
+      "media": 33.36333333333333,
+      "desvio": 6.073345453701773,
+      "min": 22.12,
+      "max": 43.19,
+      "crateus_valor": 43.19,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "nivel_ocupacao_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Nível de ocupação 10+ (%)",
+      "n": 9,
+      "rho": -0.31666666666666665,
+      "rho_p": 0.406397014486386,
+      "r": -0.4307203014124983,
+      "r_p": 0.247128374012671,
+      "rho_ic95": [
+        -0.8,
+        0.43333333333333335
+      ],
+      "r_ic95": [
+        -0.8505586623655116,
+        0.2247429785786346
+      ],
+      "sinal_estavel_pct": 91.56,
+      "media": 33.36333333333333,
+      "desvio": 6.073345453701773,
+      "min": 22.12,
+      "max": 43.19,
+      "crateus_valor": 43.19,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_carteira_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Ocupados com carteira (%)",
+      "n": 9,
+      "rho": 0.12552411131335847,
+      "rho_p": 0.7476182289428042,
+      "r": 0.07479616631098845,
+      "r_p": 0.8483350877268303,
+      "rho_ic95": [
+        -0.6833333333333333,
+        0.7666666666666667
+      ],
+      "r_ic95": [
+        -0.8411216578708578,
+        0.6251802583922689
+      ],
+      "sinal_estavel_pct": 61.96,
+      "media": 10.85815735048588,
+      "desvio": 5.078712207665423,
+      "min": 4.689063616869192,
+      "max": 19.913555718219527,
+      "crateus_valor": 19.913555718219527,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "ocup_carteira_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Ocupados com carteira (%)",
+      "n": 9,
+      "rho": -0.21666666666666667,
+      "rho_p": 0.5755148957119259,
+      "r": -0.4934194301155707,
+      "r_p": 0.17707278709273117,
+      "rho_ic95": [
+        -0.8833333333333333,
+        0.583749999999994
+      ],
+      "r_ic95": [
+        -0.9797415995824185,
+        0.44582862109735255
+      ],
+      "sinal_estavel_pct": 86.26,
+      "media": 10.85815735048588,
+      "desvio": 5.078712207665423,
+      "min": 4.689063616869192,
+      "max": 19.913555718219527,
+      "crateus_valor": 19.913555718219527,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_sem_carteira_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Ocupados sem carteira (%)",
+      "n": 9,
+      "rho": 0.728039845617479,
+      "rho_p": 0.02615362075316227,
+      "r": 0.4316208543041131,
+      "r_p": 0.24603133284360085,
+      "rho_ic95": [
+        0.2,
+        0.9666666666666667
+      ],
+      "r_ic95": [
+        0.14353351740098264,
+        0.9136851943092047
+      ],
+      "sinal_estavel_pct": 99.32,
+      "media": 35.36087840019198,
+      "desvio": 3.6354313985014275,
+      "min": 29.694307922897277,
+      "max": 41.89291672986501,
+      "crateus_valor": 29.694307922897277,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 1,
+      "n_vals": 9,
+      "crateus_pctil": 0.0
+    },
+    {
+      "indicador": "ocup_sem_carteira_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Ocupados sem carteira (%)",
+      "n": 9,
+      "rho": 0.65,
+      "rho_p": 0.058073058017148654,
+      "r": 0.5679536417916753,
+      "r_p": 0.11064003282289375,
+      "rho_ic95": [
+        -0.08333333333333333,
+        1.0
+      ],
+      "r_ic95": [
+        -0.04445375799950997,
+        0.8999650818200079
+      ],
+      "sinal_estavel_pct": 97.06,
+      "media": 35.36087840019198,
+      "desvio": 3.6354313985014275,
+      "min": 29.694307922897277,
+      "max": 41.89291672986501,
+      "crateus_valor": 29.694307922897277,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_conta_propria_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Conta própria (%)",
+      "n": 9,
+      "rho": -0.510464719340991,
+      "rho_p": 0.16026666791460534,
+      "r": -0.30570854713486995,
+      "r_p": 0.4237020480040256,
+      "rho_ic95": [
+        -0.8333333333333334,
+        0.25
+      ],
+      "r_ic95": [
+        -0.8918759804418399,
+        0.09020258539849339
+      ],
+      "sinal_estavel_pct": 94.54,
+      "media": 36.51782912314275,
+      "desvio": 4.503962659120609,
+      "min": 28.994614003590662,
+      "max": 43.751140302864435,
+      "crateus_valor": 36.13580117815191,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 5,
+      "n_vals": 9,
+      "crateus_pctil": 50.0
+    },
+    {
+      "indicador": "ocup_conta_propria_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Conta própria (%)",
+      "n": 9,
+      "rho": 0.049999999999999996,
+      "rho_p": 0.8983528043506303,
+      "r": 0.09126072228614056,
+      "r_p": 0.8153706813693422,
+      "rho_ic95": [
+        -0.6166666666666667,
+        0.6
+      ],
+      "r_ic95": [
+        -0.5130700186428983,
+        0.6187361948635884
+      ],
+      "sinal_estavel_pct": 66.24,
+      "media": 36.51782912314275,
+      "desvio": 4.503962659120609,
+      "min": 28.994614003590662,
+      "max": 43.751140302864435,
+      "crateus_valor": 36.13580117815191,
+      "q_bh": 0.9719882801170754,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_empregador_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Empregadores (%)",
+      "n": 9,
+      "rho": 0.06694619270045785,
+      "rho_p": 0.8641266713551773,
+      "r": 0.525624024395292,
+      "r_p": 0.146126939963705,
+      "rho_ic95": [
+        -0.7833333333333333,
+        0.8166666666666667
+      ],
+      "r_ic95": [
+        -0.5297001557451181,
+        0.9160042757243398
+      ],
+      "sinal_estavel_pct": 71.24000000000001,
+      "media": 2.365622898842852,
+      "desvio": 0.8019157357879533,
+      "min": 0.9756097560975611,
+      "max": 3.261034430456545,
+      "crateus_valor": 2.757154310014291,
+      "q_bh": 0.9672800980564312,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 7,
+      "n_vals": 9,
+      "crateus_pctil": 75.0
+    },
+    {
+      "indicador": "ocup_empregador_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Empregadores (%)",
+      "n": 9,
+      "rho": 0.39999999999999997,
+      "rho_p": 0.286105101908313,
+      "r": 0.3310672889691639,
+      "r_p": 0.3841593583574548,
+      "rho_ic95": [
+        -0.55,
+        0.95
+      ],
+      "r_ic95": [
+        -0.4750471306747312,
+        0.9222187749588562
+      ],
+      "sinal_estavel_pct": 77.86,
+      "media": 2.365622898842852,
+      "desvio": 0.8019157357879533,
+      "min": 0.9756097560975611,
+      "max": 3.261034430456545,
+      "crateus_valor": 2.757154310014291,
+      "q_bh": 0.8583153057249391,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_domestico_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Trabalhadores domésticos (%)",
+      "n": 9,
+      "rho": -0.04184137043778616,
+      "rho_p": 0.9148857180816651,
+      "r": 0.019034269768119637,
+      "r_p": 0.9612354094537932,
+      "rho_ic95": [
+        -0.6166666666666667,
+        0.75
+      ],
+      "r_ic95": [
+        -0.5238675801446862,
+        0.6394314789129711
+      ],
+      "sinal_estavel_pct": 56.66,
+      "media": 5.02272448441805,
+      "desvio": 1.310680356679087,
+      "min": 2.536033570516329,
+      "max": 7.371454573032003,
+      "crateus_valor": 5.333054480811461,
+      "q_bh": 0.9739106031191918,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 7,
+      "n_vals": 9,
+      "crateus_pctil": 75.0
+    },
+    {
+      "indicador": "ocup_domestico_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Trabalhadores domésticos (%)",
+      "n": 9,
+      "rho": -0.09999999999999999,
+      "rho_p": 0.797971695234851,
+      "r": -0.1329748993075809,
+      "r_p": 0.7330657641687328,
+      "rho_ic95": [
+        -0.7666666666666667,
+        0.7
+      ],
+      "r_ic95": [
+        -0.7941680211326767,
+        0.4976411194544688
+      ],
+      "sinal_estavel_pct": 66.47999999999999,
+      "media": 5.02272448441805,
+      "desvio": 1.310680356679087,
+      "min": 2.536033570516329,
+      "max": 7.371454573032003,
+      "crateus_valor": 5.333054480811461,
+      "q_bh": 0.9575660342818212,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_setor_publico_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Empregados no setor público (%)",
+      "n": 9,
+      "rho": 0.3096261412396175,
+      "rho_p": 0.41747791701205456,
+      "r": 0.04039077939823052,
+      "r_p": 0.91782836311782,
+      "rho_ic95": [
+        -0.6004166666666665,
+        0.95
+      ],
+      "r_ic95": [
+        -0.6170691528788581,
+        0.8055112976410237
+      ],
+      "sinal_estavel_pct": 60.62,
+      "media": 24.48007230230977,
+      "desvio": 7.575282419729556,
+      "min": 14.303048688002425,
+      "max": 36.2657091561939,
+      "crateus_valor": 15.97476384677054,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 2,
+      "n_vals": 9,
+      "crateus_pctil": 12.5
+    },
+    {
+      "indicador": "ocup_setor_publico_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Empregados no setor público (%)",
+      "n": 9,
+      "rho": -0.26666666666666666,
+      "rho_p": 0.48792227483870076,
+      "r": 0.07176125565788664,
+      "r_p": 0.8544350805549077,
+      "rho_ic95": [
+        -0.85,
+        0.6166666666666667
+      ],
+      "r_ic95": [
+        -0.688918699890294,
+        0.6974968498128136
+      ],
+      "sinal_estavel_pct": 56.52,
+      "media": 24.48007230230977,
+      "desvio": 7.575282419729556,
+      "min": 14.303048688002425,
+      "max": 36.2657091561939,
+      "crateus_valor": 15.97476384677054,
+      "q_bh": 0.8945241705376181,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_familiar_aux_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Trabalhadores familiares auxiliares (%)",
+      "n": 9,
+      "rho": -0.1924703040138163,
+      "rho_p": 0.6198061390079387,
+      "r": -0.42668679607386406,
+      "r_p": 0.25207400007925346,
+      "rho_ic95": [
+        -0.7666666666666667,
+        0.65
+      ],
+      "r_ic95": [
+        -0.850163660882594,
+        0.6504658868055294
+      ],
+      "sinal_estavel_pct": 70.56,
+      "media": 2.254168989700575,
+      "desvio": 1.3782030051436427,
+      "min": 0.43787629994526506,
+      "max": 4.474348191757779,
+      "crateus_valor": 0.8818711004217641,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 3,
+      "n_vals": 9,
+      "crateus_pctil": 25.0
+    },
+    {
+      "indicador": "ocup_familiar_aux_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Trabalhadores familiares auxiliares (%)",
+      "n": 9,
+      "rho": 0.06666666666666667,
+      "rho_p": 0.8646897846262036,
+      "r": 0.029340426451178972,
+      "r_p": 0.9402710367863707,
+      "rho_ic95": [
+        -0.6166666666666667,
+        0.8
+      ],
+      "r_ic95": [
+        -0.7542114018927186,
+        0.8445841598164194
+      ],
+      "sinal_estavel_pct": 54.059999999999995,
+      "media": 2.254168989700575,
+      "desvio": 1.3782030051436427,
+      "min": 0.43787629994526506,
+      "max": 4.474348191757779,
+      "crateus_valor": 0.8818711004217641,
+      "q_bh": 0.9672800980564312,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "contribuintes_previdencia_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Contribuintes da previdência (%)",
+      "n": 9,
+      "rho": 0.16736548175114463,
+      "rho_p": 0.6669046355985242,
+      "r": 0.1379085073216401,
+      "r_p": 0.7234697598502785,
+      "rho_ic95": [
+        -0.5666666666666667,
+        0.8833333333333333
+      ],
+      "r_ic95": [
+        -0.6262234540480307,
+        0.8165070434767354
+      ],
+      "sinal_estavel_pct": 67.7,
+      "media": 35.67197207109158,
+      "desvio": 6.562933843150826,
+      "min": 27.348105789849892,
+      "max": 44.320122695109625,
+      "crateus_valor": 44.320122695109625,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "contribuintes_previdencia_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Trabalho",
+      "etiqueta": "Contribuintes da previdência (%)",
+      "n": 9,
+      "rho": -0.48333333333333334,
+      "rho_p": 0.18746985521554216,
+      "r": -0.48454532289490737,
+      "r_p": 0.1862027250285739,
+      "rho_ic95": [
+        -0.9333333333333333,
+        0.31666666666666665
+      ],
+      "r_ic95": [
+        -0.932400599814254,
+        0.21678646932064935
+      ],
+      "sinal_estavel_pct": 91.22,
+      "media": 35.67197207109158,
+      "desvio": 6.562933843150826,
+      "min": 27.348105789849892,
+      "max": 44.320122695109625,
+      "crateus_valor": 44.320122695109625,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_diretores_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Profissões",
+      "etiqueta": "Diretores e gerentes (%)",
+      "n": 9,
+      "rho": 0.7113032974423646,
+      "rho_p": 0.03165655703330228,
+      "r": 0.5387605905298654,
+      "r_p": 0.13448654841980612,
+      "rho_ic95": [
+        0.05,
+        0.95
+      ],
+      "r_ic95": [
+        0.07103212848754782,
+        0.9523759772689979
+      ],
+      "sinal_estavel_pct": 98.34,
+      "media": 2.492178935674395,
+      "desvio": 0.8880410866796437,
+      "min": 0.985277463193657,
+      "max": 3.579554072501138,
+      "crateus_valor": 2.443445222907734,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 5,
+      "n_vals": 9,
+      "crateus_pctil": 50.0
+    },
+    {
+      "indicador": "ocup_diretores_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Profissões",
+      "etiqueta": "Diretores e gerentes (%)",
+      "n": 9,
+      "rho": 0.16666666666666669,
+      "rho_p": 0.668231040071504,
+      "r": 0.11949706099331084,
+      "r_p": 0.7594408171397042,
+      "rho_ic95": [
+        -0.65,
+        0.9
+      ],
+      "r_ic95": [
+        -0.6289155641506267,
+        0.7741659351669
+      ],
+      "sinal_estavel_pct": 61.72,
+      "media": 2.492178935674395,
+      "desvio": 0.8880410866796437,
+      "min": 0.985277463193657,
+      "max": 3.579554072501138,
+      "crateus_valor": 2.443445222907734,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_profissionais_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Profissões",
+      "etiqueta": "Profissionais ciências/intelectuais (%)",
+      "n": 9,
+      "rho": -0.7196715715299219,
+      "rho_p": 0.02881918460143582,
+      "r": -0.5982503935000303,
+      "r_p": 0.08879556122499821,
+      "rho_ic95": [
+        -0.9166666666666666,
+        0.1004166666666606
+      ],
+      "r_ic95": [
+        -0.9123668525734513,
+        -0.10748662779094002
+      ],
+      "sinal_estavel_pct": 98.5,
+      "media": 8.096318498021837,
+      "desvio": 2.1288131953591063,
+      "min": 4.732291824662521,
+      "max": 10.86627417998318,
+      "crateus_valor": 8.229635051762,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 4,
+      "n_vals": 9,
+      "crateus_pctil": 37.5
+    },
+    {
+      "indicador": "ocup_profissionais_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Profissões",
+      "etiqueta": "Profissionais ciências/intelectuais (%)",
+      "n": 9,
+      "rho": -0.5499999999999999,
+      "rho_p": 0.12497678418833194,
+      "r": -0.539061135644837,
+      "r_p": 0.13422687011528567,
+      "rho_ic95": [
+        -0.9166666666666666,
+        0.25
+      ],
+      "r_ic95": [
+        -0.8698483544157197,
+        0.06146680593647868
+      ],
+      "sinal_estavel_pct": 96.54,
+      "media": 8.096318498021837,
+      "desvio": 2.1288131953591063,
+      "min": 4.732291824662521,
+      "max": 10.86627417998318,
+      "crateus_valor": 8.229635051762,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_tecnicos_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Profissões",
+      "etiqueta": "Técnicos de nível médio (%)",
+      "n": 9,
+      "rho": 0.1338923854009157,
+      "rho_p": 0.7312787650945741,
+      "r": 0.06892288669933133,
+      "r_p": 0.8601460871673061,
+      "rho_ic95": [
+        -0.6833333333333333,
+        0.85
+      ],
+      "r_ic95": [
+        -0.6141415316194628,
+        0.7060914548265441
+      ],
+      "sinal_estavel_pct": 60.22,
+      "media": 5.718034981056802,
+      "desvio": 1.812013606094958,
+      "min": 3.518883664492644,
+      "max": 9.560143626570916,
+      "crateus_valor": 6.633204364041967,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 8,
+      "n_vals": 9,
+      "crateus_pctil": 87.5
+    },
+    {
+      "indicador": "ocup_tecnicos_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Profissões",
+      "etiqueta": "Técnicos de nível médio (%)",
+      "n": 9,
+      "rho": -0.6333333333333333,
+      "rho_p": 0.06708578689234572,
+      "r": -0.36273312547565245,
+      "r_p": 0.33734838434185593,
+      "rho_ic95": [
+        -0.9333333333333333,
+        0.13333333333333333
+      ],
+      "r_ic95": [
+        -0.8986201535288311,
+        0.1133612792157997
+      ],
+      "sinal_estavel_pct": 94.89999999999999,
+      "media": 5.718034981056802,
+      "desvio": 1.812013606094958,
+      "min": 3.518883664492644,
+      "max": 9.560143626570916,
+      "crateus_valor": 6.633204364041967,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_servicos_vendas_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Profissões",
+      "etiqueta": "Serviços e vendedores (%)",
+      "n": 9,
+      "rho": 0.4518868007280905,
+      "rho_p": 0.22203877371139547,
+      "r": 0.5956415411473065,
+      "r_p": 0.09056206254607937,
+      "rho_ic95": [
+        -0.45,
+        0.95
+      ],
+      "r_ic95": [
+        -0.6129554479781605,
+        0.9297528517439942
+      ],
+      "sinal_estavel_pct": 80.02,
+      "media": 19.322072284687124,
+      "desvio": 4.08587838876878,
+      "min": 11.757779646761984,
+      "max": 24.910233393177737,
+      "crateus_valor": 23.35389870682143,
+      "q_bh": 0.7712925823659,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 8,
+      "n_vals": 9,
+      "crateus_pctil": 87.5
+    },
+    {
+      "indicador": "ocup_servicos_vendas_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Profissões",
+      "etiqueta": "Serviços e vendedores (%)",
+      "n": 9,
+      "rho": -0.13333333333333333,
+      "rho_p": 0.7323675052362973,
+      "r": -0.04553673625112381,
+      "r_p": 0.9073934735064094,
+      "rho_ic95": [
+        -0.8166666666666667,
+        0.7166666666666667
+      ],
+      "r_ic95": [
+        -0.9540747931017624,
+        0.8695287927329659
+      ],
+      "sinal_estavel_pct": 54.67999999999999,
+      "media": 19.322072284687124,
+      "desvio": 4.08587838876878,
+      "min": 11.757779646761984,
+      "max": 24.910233393177737,
+      "crateus_valor": 23.35389870682143,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_agropec_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Profissões",
+      "etiqueta": "Ocupados agropecuária (%)",
+      "n": 9,
+      "rho": -0.4769916229907622,
+      "rho_p": 0.1941791760650662,
+      "r": -0.3225341532328451,
+      "r_p": 0.3972664814402265,
+      "rho_ic95": [
+        -0.8833333333333333,
+        0.35
+      ],
+      "r_ic95": [
+        -0.7880988391808312,
+        0.5512340602740374
+      ],
+      "sinal_estavel_pct": 79.74,
+      "media": 21.700028000367706,
+      "desvio": 6.820447938823292,
+      "min": 11.714542190305206,
+      "max": 31.05272760445174,
+      "crateus_valor": 15.078950120255149,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 3,
+      "n_vals": 9,
+      "crateus_pctil": 25.0
+    },
+    {
+      "indicador": "ocup_agropec_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Profissões",
+      "etiqueta": "Ocupados agropecuária (%)",
+      "n": 9,
+      "rho": 0.08333333333333334,
+      "rho_p": 0.831214097710308,
+      "r": 0.3166673434290912,
+      "r_p": 0.40639595587344574,
+      "rho_ic95": [
+        -0.6666666666666666,
+        0.65
+      ],
+      "r_ic95": [
+        -0.4787040887264067,
+        0.9522749449617247
+      ],
+      "sinal_estavel_pct": 80.60000000000001,
+      "media": 21.700028000367706,
+      "desvio": 6.820447938823292,
+      "min": 11.714542190305206,
+      "max": 31.05272760445174,
+      "crateus_valor": 15.078950120255149,
+      "q_bh": 0.9672800980564312,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ocup_elementares_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Profissões",
+      "etiqueta": "Ocupações elementares (%)",
+      "n": 9,
+      "rho": 0.2677847708018314,
+      "rho_p": 0.4860296141888536,
+      "r": -0.05236648950425209,
+      "r_p": 0.8935633491214318,
+      "rho_ic95": [
+        -0.6333333333333333,
+        0.9333333333333333
+      ],
+      "r_ic95": [
+        -0.7548351354821893,
+        0.7836351922582102
+      ],
+      "sinal_estavel_pct": 49.38,
+      "media": 19.512281545216307,
+      "desvio": 2.8310234334765387,
+      "min": 15.672322568874291,
+      "max": 23.967684021543985,
+      "crateus_valor": 18.425180382725088,
+      "q_bh": 0.8945241705376181,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 4,
+      "n_vals": 9,
+      "crateus_pctil": 37.5
+    },
+    {
+      "indicador": "ocup_elementares_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Profissões",
+      "etiqueta": "Ocupações elementares (%)",
+      "n": 9,
+      "rho": -0.18333333333333335,
+      "rho_p": 0.6368198117628943,
+      "r": -0.13630756458209528,
+      "r_p": 0.7265800511137518,
+      "rho_ic95": [
+        -0.75,
+        0.6
+      ],
+      "r_ic95": [
+        -0.7788635729918025,
+        0.4957627524685938
+      ],
+      "sinal_estavel_pct": 70.44,
+      "media": 19.512281545216307,
+      "desvio": 2.8310234334765387,
+      "min": 15.672322568874291,
+      "max": 23.967684021543985,
+      "crateus_valor": 18.425180382725088,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ativ_agropec_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: agropecuária (%)",
+      "n": 9,
+      "rho": -0.4769916229907622,
+      "rho_p": 0.1941791760650662,
+      "r": -0.4097335857878748,
+      "r_p": 0.2734308578247528,
+      "rho_ic95": [
+        -0.9333333333333333,
+        0.35
+      ],
+      "r_ic95": [
+        -0.851435164434955,
+        0.5727154868289289
+      ],
+      "sinal_estavel_pct": 78.2,
+      "media": 25.220774669509602,
+      "desvio": 7.626307578016374,
+      "min": 14.219041692594898,
+      "max": 35.49201009251472,
+      "crateus_valor": 16.295444246923907,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 2,
+      "n_vals": 9,
+      "crateus_pctil": 12.5
+    },
+    {
+      "indicador": "ativ_agropec_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: agropecuária (%)",
+      "n": 9,
+      "rho": 0.06666666666666667,
+      "rho_p": 0.8646897846262036,
+      "r": 0.28345719284690213,
+      "r_p": 0.4598256563514419,
+      "rho_ic95": [
+        -0.7504166666666665,
+        0.85
+      ],
+      "r_ic95": [
+        -0.7581347033426367,
+        0.9318068774139866
+      ],
+      "sinal_estavel_pct": 76.03999999999999,
+      "media": 25.220774669509602,
+      "desvio": 7.626307578016374,
+      "min": 14.219041692594898,
+      "max": 35.49201009251472,
+      "crateus_valor": 16.295444246923907,
+      "q_bh": 0.9672800980564312,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ativ_industria_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: indústria (%)",
+      "n": 9,
+      "rho": -0.15899720766358738,
+      "rho_p": 0.6828398157150526,
+      "r": 0.09334354864400378,
+      "r_p": 0.8112173840512287,
+      "rho_ic95": [
+        -0.6833333333333333,
+        0.55
+      ],
+      "r_ic95": [
+        -0.6475149424089033,
+        0.5018490139379858
+      ],
+      "sinal_estavel_pct": 55.58,
+      "media": 4.557816202531224,
+      "desvio": 1.742579272964667,
+      "min": 2.871174914998111,
+      "max": 8.068865380626427,
+      "crateus_valor": 4.810206002300534,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 7,
+      "n_vals": 9,
+      "crateus_pctil": 75.0
+    },
+    {
+      "indicador": "ativ_industria_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: indústria (%)",
+      "n": 9,
+      "rho": -0.33333333333333337,
+      "rho_p": 0.38071318167686347,
+      "r": -0.3029440233561853,
+      "r_p": 0.4281190694134457,
+      "rho_ic95": [
+        -0.7833333333333333,
+        0.4666666666666667
+      ],
+      "r_ic95": [
+        -0.8656177829010788,
+        0.2678772972494762
+      ],
+      "sinal_estavel_pct": 83.0,
+      "media": 4.557816202531224,
+      "desvio": 1.742579272964667,
+      "min": 2.871174914998111,
+      "max": 8.068865380626427,
+      "crateus_valor": 4.810206002300534,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ativ_construcao_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: construção (%)",
+      "n": 9,
+      "rho": -0.1338923854009157,
+      "rho_p": 0.7312787650945741,
+      "r": 0.04082829033955451,
+      "r_p": 0.9169407432807732,
+      "rho_ic95": [
+        -0.6833333333333333,
+        0.6
+      ],
+      "r_ic95": [
+        -0.5428399335342501,
+        0.4585494712820702
+      ],
+      "sinal_estavel_pct": 53.18000000000001,
+      "media": 8.670968753074892,
+      "desvio": 3.4427537935145027,
+      "min": 3.867907316183178,
+      "max": 16.05889014722537,
+      "crateus_valor": 10.084004322214088,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 7,
+      "n_vals": 9,
+      "crateus_pctil": 75.0
+    },
+    {
+      "indicador": "ativ_construcao_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: construção (%)",
+      "n": 9,
+      "rho": 0.31666666666666665,
+      "rho_p": 0.406397014486386,
+      "r": 0.07978220693104186,
+      "r_p": 0.8383286736964173,
+      "rho_ic95": [
+        -0.6166666666666667,
+        0.8333333333333334
+      ],
+      "r_ic95": [
+        -0.7651784449961679,
+        0.6208494412502439
+      ],
+      "sinal_estavel_pct": 62.519999999999996,
+      "media": 8.670968753074892,
+      "desvio": 3.4427537935145027,
+      "min": 3.867907316183178,
+      "max": 16.05889014722537,
+      "crateus_valor": 10.084004322214088,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ativ_comercio_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: comércio (%)",
+      "n": 9,
+      "rho": 0.10041928905068677,
+      "rho_p": 0.7971388092372125,
+      "r": 0.34097533626360343,
+      "r_p": 0.3691993857948528,
+      "rho_ic95": [
+        -0.6337499999999998,
+        0.9
+      ],
+      "r_ic95": [
+        -0.5935513517655325,
+        0.885590049675428
+      ],
+      "sinal_estavel_pct": 75.26,
+      "media": 14.524933763042274,
+      "desvio": 3.8391220488697457,
+      "min": 9.029089535323006,
+      "max": 18.95151451775942,
+      "crateus_valor": 18.95151451775942,
+      "q_bh": 0.9575660342818212,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "ativ_comercio_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: comércio (%)",
+      "n": 9,
+      "rho": -0.13333333333333333,
+      "rho_p": 0.7323675052362973,
+      "r": -0.19558674769098966,
+      "r_p": 0.6140381488414587,
+      "rho_ic95": [
+        -0.8333333333333334,
+        0.75
+      ],
+      "r_ic95": [
+        -0.8805886569324656,
+        0.6267148198950336
+      ],
+      "sinal_estavel_pct": 68.38,
+      "media": 14.524933763042274,
+      "desvio": 3.8391220488697457,
+      "min": 9.029089535323006,
+      "max": 18.95151451775942,
+      "crateus_valor": 18.95151451775942,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ativ_admin_pub_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: administração pública (%)",
+      "n": 9,
+      "rho": 0.11715583722580122,
+      "rho_p": 0.764045116648623,
+      "r": 0.08825958226319745,
+      "r_p": 0.8213621387841091,
+      "rho_ic95": [
+        -0.6166666666666667,
+        0.7833333333333333
+      ],
+      "r_ic95": [
+        -0.822480904138491,
+        0.5954517368805672
+      ],
+      "sinal_estavel_pct": 66.84,
+      "media": 5.249721763356662,
+      "desvio": 2.880657039958884,
+      "min": 2.865232163080407,
+      "max": 12.391386475255006,
+      "crateus_valor": 5.9430443724075435,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 8,
+      "n_vals": 9,
+      "crateus_pctil": 87.5
+    },
+    {
+      "indicador": "ativ_admin_pub_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: administração pública (%)",
+      "n": 9,
+      "rho": -0.5,
+      "rho_p": 0.1704706607870538,
+      "r": 0.02927735439966094,
+      "r_p": 0.9403992503578841,
+      "rho_ic95": [
+        -0.9,
+        0.3333333333333333
+      ],
+      "r_ic95": [
+        -0.9263910438534504,
+        0.5313376892487618
+      ],
+      "sinal_estavel_pct": 50.96000000000001,
+      "media": 5.249721763356662,
+      "desvio": 2.880657039958884,
+      "min": 2.865232163080407,
+      "max": 12.391386475255006,
+      "crateus_valor": 5.9430443724075435,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ativ_educacao_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: educação (%)",
+      "n": 9,
+      "rho": -0.35146751167740364,
+      "rho_p": 0.353666329808871,
+      "r": -0.4214076534996378,
+      "r_p": 0.25862595058036175,
+      "rho_ic95": [
+        -0.8333333333333334,
+        0.5
+      ],
+      "r_ic95": [
+        -0.9072018019999797,
+        0.5353408591826477
+      ],
+      "sinal_estavel_pct": 82.0,
+      "media": 10.312621366497542,
+      "desvio": 3.1242744543165673,
+      "min": 5.733353556802669,
+      "max": 15.891260718846926,
+      "crateus_valor": 7.727700512391509,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 2,
+      "n_vals": 9,
+      "crateus_pctil": 12.5
+    },
+    {
+      "indicador": "ativ_educacao_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: educação (%)",
+      "n": 9,
+      "rho": -0.31666666666666665,
+      "rho_p": 0.406397014486386,
+      "r": -0.22464462510708025,
+      "r_p": 0.5611691495744128,
+      "rho_ic95": [
+        -0.8166666666666667,
+        0.6166666666666667
+      ],
+      "r_ic95": [
+        -0.8735954860389576,
+        0.510461501076884
+      ],
+      "sinal_estavel_pct": 73.52,
+      "media": 10.312621366497542,
+      "desvio": 3.1242744543165673,
+      "min": 5.733353556802669,
+      "max": 15.891260718846926,
+      "crateus_valor": 7.727700512391509,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ativ_saude_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: saúde (%)",
+      "n": 9,
+      "rho": 0.025104822262671692,
+      "rho_p": 0.9488837293174807,
+      "r": 0.10466462240752103,
+      "r_p": 0.7887158731961604,
+      "rho_ic95": [
+        -0.6166666666666667,
+        0.8
+      ],
+      "r_ic95": [
+        -0.6837894880709952,
+        0.5818556175318643
+      ],
+      "sinal_estavel_pct": 62.36000000000001,
+      "media": 5.418380120768601,
+      "desvio": 1.2903266663194841,
+      "min": 4.05436013590034,
+      "max": 8.258527827648116,
+      "crateus_valor": 5.455052459130677,
+      "q_bh": 0.9809171855946045,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 5,
+      "n_vals": 9,
+      "crateus_pctil": 50.0
+    },
+    {
+      "indicador": "ativ_saude_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: saúde (%)",
+      "n": 9,
+      "rho": -0.43333333333333335,
+      "rho_p": 0.24395243588005172,
+      "r": -0.18733741090020026,
+      "r_p": 0.6293453228366143,
+      "rho_ic95": [
+        -0.7666666666666667,
+        0.4670833333333273
+      ],
+      "r_ic95": [
+        -0.9637150796590767,
+        0.3580170411132638
+      ],
+      "sinal_estavel_pct": 83.0,
+      "media": 5.418380120768601,
+      "desvio": 1.2903266663194841,
+      "min": 4.05436013590034,
+      "max": 8.258527827648116,
+      "crateus_valor": 5.455052459130677,
+      "q_bh": 0.791863883760402,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "ativ_serv_domestico_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: serviços domésticos (%)",
+      "n": 9,
+      "rho": 0.0,
+      "rho_p": 1.0,
+      "r": 0.05127125257354577,
+      "r_p": 0.8957795990660128,
+      "rho_ic95": [
+        -0.5833333333333334,
+        0.8166666666666667
+      ],
+      "r_ic95": [
+        -0.5030919701512763,
+        0.6366321846595112
+      ],
+      "sinal_estavel_pct": 60.31999999999999,
+      "media": 5.216553130322525,
+      "desvio": 1.3065474245675095,
+      "min": 2.864440795475278,
+      "max": 7.614136205065979,
+      "crateus_valor": 5.685105789675485,
+      "q_bh": 1.0,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 7,
+      "n_vals": 9,
+      "crateus_pctil": 75.0
+    },
+    {
+      "indicador": "ativ_serv_domestico_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Atividade econômica",
+      "etiqueta": "Atividade: serviços domésticos (%)",
+      "n": 9,
+      "rho": -0.11666666666666665,
+      "rho_p": 0.765007942926146,
+      "r": -0.12639788792078668,
+      "r_p": 0.7459079543376966,
+      "rho_ic95": [
+        -0.8166666666666667,
+        0.7
+      ],
+      "r_ic95": [
+        -0.8000804780220174,
+        0.5095954963634837
+      ],
+      "sinal_estavel_pct": 65.34,
+      "media": 5.216553130322525,
+      "desvio": 1.3065474245675095,
+      "min": 2.864440795475278,
+      "max": 7.614136205065979,
+      "crateus_valor": 5.685105789675485,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "rend_domiciliar_percapita",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Renda",
+      "etiqueta": "Renda domiciliar per capita (R$)",
+      "n": 9,
+      "rho": -0.32636268941473195,
+      "rho_p": 0.3913604492997979,
+      "r": -0.1848924748687079,
+      "r_p": 0.6339059202089173,
+      "rho_ic95": [
+        -0.8166666666666667,
+        0.6666666666666666
+      ],
+      "r_ic95": [
+        -0.9485661144310735,
+        0.4553754288560818
+      ],
+      "sinal_estavel_pct": 71.24000000000001,
+      "media": 720.5266666666668,
+      "desvio": 87.36547573269432,
+      "min": 623.37,
+      "max": 920.1,
+      "crateus_valor": 920.1,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "rend_domiciliar_percapita",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Renda",
+      "etiqueta": "Renda domiciliar per capita (R$)",
+      "n": 9,
+      "rho": -0.016666666666666666,
+      "rho_p": 0.9660548039946862,
+      "r": -0.46340193447017997,
+      "r_p": 0.20900304519639928,
+      "rho_ic95": [
+        -0.7166666666666667,
+        0.7333333333333333
+      ],
+      "r_ic95": [
+        -0.9019324031466932,
+        0.5010455296967327
+      ],
+      "sinal_estavel_pct": 81.78,
+      "media": 720.5266666666668,
+      "desvio": 87.36547573269432,
+      "min": 623.37,
+      "max": 920.1,
+      "crateus_valor": 920.1,
+      "q_bh": 0.9809171855946045,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "rend_trabalho_medio",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Renda",
+      "etiqueta": "Rendimento médio do trabalho (R$)",
+      "n": 9,
+      "rho": 0.11715583722580122,
+      "rho_p": 0.764045116648623,
+      "r": -0.02477965891720963,
+      "r_p": 0.9495451168614911,
+      "rho_ic95": [
+        -0.6833333333333333,
+        0.7333333333333333
+      ],
+      "r_ic95": [
+        -0.9185479086395578,
+        0.6774047576103165
+      ],
+      "sinal_estavel_pct": 46.42,
+      "media": 1209.2822222222223,
+      "desvio": 154.40805603803335,
+      "min": 1062.91,
+      "max": 1562.53,
+      "crateus_valor": 1562.53,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "rend_trabalho_medio",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Renda",
+      "etiqueta": "Rendimento médio do trabalho (R$)",
+      "n": 9,
+      "rho": -0.016666666666666666,
+      "rho_p": 0.9660548039946862,
+      "r": -0.4272731773590939,
+      "r_p": 0.25135176368160894,
+      "rho_ic95": [
+        -0.8,
+        0.7666666666666667
+      ],
+      "r_ic95": [
+        -0.9352897571131794,
+        0.5399106189148672
+      ],
+      "sinal_estavel_pct": 77.9,
+      "media": 1209.2822222222223,
+      "desvio": 154.40805603803335,
+      "min": 1062.91,
+      "max": 1562.53,
+      "crateus_valor": 1562.53,
+      "q_bh": 0.9809171855946045,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "pobreza_renda_1sm_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Condições de vida",
+      "etiqueta": "Renda per capita até 1 SM (%)",
+      "n": 9,
+      "rho": 0.36820405985251814,
+      "rho_p": 0.3295603649720029,
+      "r": 0.11654640862627179,
+      "r_p": 0.7652446875309965,
+      "rho_ic95": [
+        -0.5333333333333333,
+        0.9833333333333333
+      ],
+      "r_ic95": [
+        -0.5601520741908178,
+        0.9283259812589777
+      ],
+      "sinal_estavel_pct": 58.099999999999994,
+      "media": 86.71546547888701,
+      "desvio": 3.150149741747609,
+      "min": 79.41955968406414,
+      "max": 89.32929467762874,
+      "crateus_valor": 79.41955968406414,
+      "q_bh": 0.8888239523482452,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 1,
+      "n_vals": 9,
+      "crateus_pctil": 0.0
+    },
+    {
+      "indicador": "pobreza_renda_1sm_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Condições de vida",
+      "etiqueta": "Renda per capita até 1 SM (%)",
+      "n": 9,
+      "rho": -0.049999999999999996,
+      "rho_p": 0.8983528043506303,
+      "r": 0.41923127193633253,
+      "r_p": 0.2613530555057625,
+      "rho_ic95": [
+        -0.7666666666666667,
+        0.7333333333333333
+      ],
+      "r_ic95": [
+        -0.64111589236262,
+        0.8924699263868136
+      ],
+      "sinal_estavel_pct": 76.78,
+      "media": 86.71546547888701,
+      "desvio": 3.150149741747609,
+      "min": 79.41955968406414,
+      "max": 89.32929467762874,
+      "crateus_valor": 79.41955968406414,
+      "q_bh": 0.9719882801170754,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "anos_estudo_11mais",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Educação/formação",
+      "etiqueta": "Anos de estudo (11+)",
+      "n": 9,
+      "rho": -0.5336134453781513,
+      "rho_p": 0.13897984104155633,
+      "r": -0.11862032151668804,
+      "r_p": 0.7611642731189104,
+      "rho_ic95": [
+        -0.9333333333333333,
+        0.3333333333333333
+      ],
+      "r_ic95": [
+        -0.9502995334447194,
+        0.5991637276356789
+      ],
+      "sinal_estavel_pct": 64.56,
+      "media": 7.044444444444444,
+      "desvio": 0.49777281743560264,
+      "min": 6.3,
+      "max": 8.0,
+      "crateus_valor": 8.0,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "anos_estudo_11mais",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Educação/formação",
+      "etiqueta": "Anos de estudo (11+)",
+      "n": 9,
+      "rho": -0.20920685218893076,
+      "rho_p": 0.5890472411061645,
+      "r": -0.3447712604353682,
+      "r_p": 0.3635427642241866,
+      "rho_ic95": [
+        -0.85,
+        0.5333333333333333
+      ],
+      "r_ic95": [
+        -0.8963018379388066,
+        0.5116010011436254
+      ],
+      "sinal_estavel_pct": 76.86,
+      "media": 7.044444444444444,
+      "desvio": 0.49777281743560264,
+      "min": 6.3,
+      "max": 8.0,
+      "crateus_valor": 8.0,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "superior_completo_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Educação/formação",
+      "etiqueta": "18+ com superior completo (%)",
+      "n": 9,
+      "rho": -0.728039845617479,
+      "rho_p": 0.02615362075316227,
+      "r": -0.4049684638393456,
+      "r_p": 0.2795982711733708,
+      "rho_ic95": [
+        -0.9333333333333333,
+        0.03333333333333333
+      ],
+      "r_ic95": [
+        -0.9682423022713741,
+        -0.021813923421603775
+      ],
+      "sinal_estavel_pct": 98.02,
+      "media": 6.50088814892901,
+      "desvio": 1.5556916641184888,
+      "min": 3.860252004581901,
+      "max": 9.481432842010678,
+      "crateus_valor": 9.481432842010678,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 9,
+      "n_vals": 9,
+      "crateus_pctil": 100.0
+    },
+    {
+      "indicador": "superior_completo_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Educação/formação",
+      "etiqueta": "18+ com superior completo (%)",
+      "n": 9,
+      "rho": -0.4666666666666666,
+      "rho_p": 0.2053863511058121,
+      "r": -0.518031763491075,
+      "r_p": 0.15311371161886028,
+      "rho_ic95": [
+        -0.8666666666666667,
+        0.26666666666666666
+      ],
+      "r_ic95": [
+        -0.9040784351647339,
+        0.0936332865048267
+      ],
+      "sinal_estavel_pct": 95.14,
+      "media": 6.50088814892901,
+      "desvio": 1.5556916641184888,
+      "min": 3.860252004581901,
+      "max": 9.481432842010678,
+      "crateus_valor": 9.481432842010678,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "taxa_frequencia_escolar",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Educação/formação",
+      "etiqueta": "Taxa bruta de frequência escolar",
+      "n": 9,
+      "rho": -0.2845213189769458,
+      "rho_p": 0.4580688437057312,
+      "r": 0.02179556515289466,
+      "r_p": 0.9556160128629382,
+      "rho_ic95": [
+        -0.8166666666666667,
+        0.65
+      ],
+      "r_ic95": [
+        -0.5662069188849536,
+        0.5589398114543876
+      ],
+      "sinal_estavel_pct": 52.12,
+      "media": 26.997777777777774,
+      "desvio": 3.1644382510082965,
+      "min": 21.25,
+      "max": 33.17,
+      "crateus_valor": 26.27,
+      "q_bh": 0.8930000503452212,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 4,
+      "n_vals": 9,
+      "crateus_pctil": 37.5
+    },
+    {
+      "indicador": "taxa_frequencia_escolar",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Educação/formação",
+      "etiqueta": "Taxa bruta de frequência escolar",
+      "n": 9,
+      "rho": 0.11666666666666665,
+      "rho_p": 0.765007942926146,
+      "r": 0.1338222980998708,
+      "r_p": 0.7314152356784256,
+      "rho_ic95": [
+        -0.6333333333333333,
+        0.8333333333333334
+      ],
+      "r_ic95": [
+        -0.6017173599587017,
+        0.7780256390231414
+      ],
+      "sinal_estavel_pct": 66.53999999999999,
+      "media": 26.997777777777774,
+      "desvio": 3.1644382510082965,
+      "min": 21.25,
+      "max": 33.17,
+      "crateus_valor": 26.27,
+      "q_bh": 0.9526514006250121,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "alvenaria_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Habitação",
+      "etiqueta": "Domicílios em alvenaria (%)",
+      "n": 9,
+      "rho": -0.6527253788294639,
+      "rho_p": 0.056676692165527745,
+      "r": -0.6315604052780412,
+      "r_p": 0.06809299599427233,
+      "rho_ic95": [
+        -0.9333333333333333,
+        0.16666666666666666
+      ],
+      "r_ic95": [
+        -0.9009008333694202,
+        0.1488707117430674
+      ],
+      "sinal_estavel_pct": 95.12,
+      "media": 99.38111111111111,
+      "desvio": 0.38789316971443455,
+      "min": 98.81,
+      "max": 100.0,
+      "crateus_valor": 99.39,
+      "q_bh": 0.49196243721053523,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 5,
+      "n_vals": 9,
+      "crateus_pctil": 50.0
+    },
+    {
+      "indicador": "alvenaria_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Habitação",
+      "etiqueta": "Domicílios em alvenaria (%)",
+      "n": 9,
+      "rho": -0.2833333333333333,
+      "rho_p": 0.46003032896572005,
+      "r": -0.43086171785741856,
+      "r_p": 0.24695592929337717,
+      "rho_ic95": [
+        -0.7833333333333333,
+        0.6
+      ],
+      "r_ic95": [
+        -0.8488774923306878,
+        0.3142048963845977
+      ],
+      "sinal_estavel_pct": 89.62,
+      "media": 99.38111111111111,
+      "desvio": 0.38789316971443455,
+      "min": 98.81,
+      "max": 100.0,
+      "crateus_valor": 99.39,
+      "q_bh": 0.8930000503452212,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    },
+    {
+      "indicador": "domicilio_densidade_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Habitação",
+      "etiqueta": "Moradores >3/dormitório (%)",
+      "n": 9,
+      "rho": -0.54393781569122,
+      "rho_p": 0.13005468899084704,
+      "r": -0.5642714335886375,
+      "r_p": 0.11349525139298793,
+      "rho_ic95": [
+        -0.8333333333333334,
+        0.21666666666666667
+      ],
+      "r_ic95": [
+        -0.9707846149939817,
+        -0.19369001537754268
+      ],
+      "sinal_estavel_pct": 99.1,
+      "media": 4.955795392452474,
+      "desvio": 0.4695686499113487,
+      "min": 4.378249354216394,
+      "max": 5.8545687795206725,
+      "crateus_valor": 5.254737394269228,
+      "q_bh": 0.7530832873879777,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false,
+      "crateus_pos": 7,
+      "n_vals": 9,
+      "crateus_pctil": 75.0
+    },
+    {
+      "indicador": "domicilio_densidade_pct",
+      "desfecho": "ideb_2023_ai",
+      "familia": "Habitação",
+      "etiqueta": "Moradores >3/dormitório (%)",
+      "n": 9,
+      "rho": -0.3,
+      "rho_p": 0.43284532670948234,
+      "r": -0.26601656694586223,
+      "r_p": 0.489024123527726,
+      "rho_ic95": [
+        -0.8333333333333334,
+        0.583749999999994
+      ],
+      "r_ic95": [
+        -0.9656786314476535,
+        0.5687773283350276
+      ],
+      "sinal_estavel_pct": 79.58,
+      "media": 4.955795392452474,
+      "desvio": 0.4695686499113487,
+      "min": 4.378249354216394,
+      "max": 5.8545687795206725,
+      "crateus_valor": 5.254737394269228,
+      "q_bh": 0.8927434863383074,
+      "q_bonferroni": 1.0,
+      "signif_bh": false,
+      "signif_bonf": false
+    }
+  ]
+}
