@@ -2,6 +2,7 @@
 
 **Data:** 13 de agosto de 2026
 **Manuscrito:** "Educação terciária e trajetórias de renda: evidência associativa de painel com validação cruzada agrupada por país (135 economias, 1960–2023)"
+**Autor:** Marcelo Claro Laranjeira — ORCID: https://orcid.org/0000-0001-8996-2887
 
 ---
 
@@ -11,7 +12,7 @@ Submetemos à consideração da Revista Brasileira de Estudos Pedagógicos o man
 
 ## Contribuição
 
-O manuscrito contribui em três frentes. Primeiro, apresenta evidência descritiva transparente sobre uma questão de política educacional relevante para o Brasil e para a agenda da renda média. Segundo, submete as estimativas a validações cruzadas por país (leave-one-country-out) e por tempo, quantificando explicitamente a limitação de generalização de amostras com poucos países — um ponto metodológico raramente reportado na literatura de educação e crescimento. Terceiro, a ciência aberta é integral: dados, código e arquivo de proveniência numérica (SHA-256) estão disponíveis para verificação independente.
+O manuscrito contribui em três frentes. Primeiro, apresenta evidência descritiva transparente sobre uma questão de política educacional relevante para o Brasil e para a agenda da renda média. Segundo, submete as estimativas a validações cruzadas por país (leave-one-country-out) e a análises de subperíodos, quantificando explicitamente a limitação de generalização de amostras com poucos países — um ponto metodológico raramente reportado na literatura de educação e crescimento. Terceiro, a ciência aberta é integral: dados, código e arquivo de proveniência numérica (SHA-256) estão disponíveis para verificação independente.
 
 ## Ciência aberta e reprodutibilidade
 
@@ -25,7 +26,7 @@ O manuscrito contribui em três frentes. Primeiro, apresenta evidência descriti
 - **Ineditismo:** este manuscrito não foi publicado e não está sob consideração em outro periódico no momento da submissão; comprometemo-nos a comunicar qualquer alteração dessa condição.
 - **Conflitos de interesse:** não há conflitos de interesse a declarar.
 - **Financiamento:** o estudo não contou com financiamento externo.
-- **Autoria:** todos os autores contribuíram substancialmente para a concepção, análise e redação, e aprovam a versão submetida.
+- **Autoria:** o autor contribuiu substancialmente para a concepção, análise e redação, e aprova a versão submetida.
 
 ## Nota de conduta
 
@@ -35,5 +36,5 @@ Agradecemos a oportunidade de submeter este trabalho.
 
 Atenciosamente,
 
-**Equipe de pesquisa — OpenCode Ecosystem Core**
+**Marcelo Claro Laranjeira** — ORCID: https://orcid.org/0000-0001-8996-2887
 (Manuscrito preparado com apoio de ferramentas de IA; a revisão final e a decisão de submissão permanecem sob responsabilidade humana.)

@@ -56,6 +56,16 @@ class TestMetadadosTrilingues:
         assert "Title:" in texto.lower() or "Title:" in texto
         assert "Título:" in texto and "Título en español" in texto
 
+    def test_autor_orcid_md(self):
+        texto = ARTIGO.read_text(encoding="utf-8")
+        assert "Marcelo Claro Laranjeira" in texto
+        assert "https://orcid.org/0000-0001-8996-2887" in texto
+
+    def test_autor_orcid_carta(self):
+        texto = CARTA.read_text(encoding="utf-8")
+        assert "Marcelo Claro Laranjeira" in texto
+        assert "orcid.org/0000-0001-8996-2887" in texto
+
     def test_resumo_abstract_resumen(self):
         texto = ARTIGO.read_text(encoding="utf-8")
         for secao in ["Resumo", "Abstract", "Resumen"]:

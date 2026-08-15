@@ -79,6 +79,11 @@ class TestConteudoTrilingue:
         assert "Title:" in texto
         assert "Título en español" in texto
 
+    def test_autor_orcid_tex(self):
+        texto = TEX.read_text(encoding="utf-8")
+        assert "Marcelo Claro Laranjeira" in texto
+        assert "orcid.org/0000-0001-8996-2887" in texto
+
     def test_resumo_abstract_resumen(self):
         texto = TEX.read_text(encoding="utf-8")
         for secao in ["Resumo", "Abstract", "Resumen"]:

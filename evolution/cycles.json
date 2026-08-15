@@ -4368,6 +4368,22 @@
         "MDES explicita o que 'não discernível' significa e previne leitura de efeito nulo"
       ],
       "timestamp": "2026-08-14T08:00:00"
+    },
+    {
+      "round_id": "R424",
+      "objective": "Adicionar autoria (Marcelo Claro Laranjeira, ORCID 0000-0001-8996-2887) ao manuscrito e à carta ao editor",
+      "changes": [
+        "MD e TeX: linha Autor com ORCID (link href no TeX) após título trilíngue",
+        "CARTA_AO_EDITOR.md: autor+ORCID no cabeçalho e assinatura; correção do overclaim 'por tempo' → 'análises de subperíodos' (paridade R422)",
+        "PDF recompilado (20p, 0 Overfull) e DOCX regenerado",
+        "Testes R410/R411: 3 novos (autor/ORCID no MD, carta e TeX); suíte com 369 passed"
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Documentos de submissão (carta) compartilham as regras de anti-overclaim do manuscrito — a carta tinha o mesmo overclaim 'por tempo' corrigido em R422",
+        "Autoria deve constar no cabeçalho trilíngue e na assinatura da carta"
+      ],
+      "timestamp": "2026-08-14T08:15:00"
     }
   ]
 }
