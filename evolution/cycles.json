@@ -4349,6 +4349,25 @@
         "IDs 2/3/4 (dispersão LOOCV, cluster comparativo, TOST) ficam como melhorias metodológicas para R423"
       ],
       "timestamp": "2026-08-14T07:40:00"
+    },
+    {
+      "round_id": "R423",
+      "objective": "Melhorias metodológicas pós-peer-review: dispersão LOOCV, cluster comparativo, MDES/TOST",
+      "changes": [
+        "Script analyze_metodologia_suplementar.py: tabela12_loocv_dispersao, tabela5b_cluster_comparativo, tabela13_tost_deteccao, provenance_r423.json",
+        "LOOCV: mediana 0,778 vs média 0,542 (DP 0,508; 83% positivos); corr n_obs x |rho| = 0,248 (p=0,004) — instabilidade em n pequeno qualifica a queda 0,751->0,542",
+        "FE sem cluster: 0,073 (SE 0,055; IC [-0,036;0,182]; p=0,190) vs cluster (IC [-0,169;0,314]; p=0,555) — confirma estreitamento sem alterar conclusão",
+        "MDES = 0,173 (poder 80%); TOST ±0,10 p=0,329 e ±0,05 p=0,644 — leitura honesta: não-detecção, não equivalência",
+        "MD/TeX: nota 4.3, Tabela 5b, subseção 4.10 com Tabela 13; PDF 20p 0 Overfull; DOCX 16 tabelas",
+        "Testes R423 (15) + ajustes R419 (split 4.10) e R421 (tabela por conteúdo)"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Média de folds LOOCV sem dispersão engana (mediana 0,778 vs média 0,542)",
+        "Índice fixo de tabelas em testes DOCX quebra ao adicionar tabelas; localizar por conteúdo",
+        "MDES explicita o que 'não discernível' significa e previne leitura de efeito nulo"
+      ],
+      "timestamp": "2026-08-14T08:00:00"
     }
   ]
 }

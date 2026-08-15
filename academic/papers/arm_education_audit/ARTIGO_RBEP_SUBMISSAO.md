@@ -123,6 +123,8 @@ A estabilidade entre países aparece na Tabela 3, com a correlação em níveis 
 
 *Fonte: elaboração própria. Valores completos em `outputs/expanded/tabela3_loocv_expandido.csv` e `loocv_folds_expanded.json`.*
 
+A distribuição dos ρ de teste merece qualificação (Tabela 3b, disponível em `outputs/expanded/tabela12_loocv_dispersao.csv`): a média de 0,542 esconde forte dispersão e assimetria — a mediana é 0,778, o desvio-padrão é 0,508 e 83% dos folds de teste apresentam correlação positiva. A média baixa é puxada por um conjunto pequeno de países com ρ fortemente negativo, e a instabilidade é maior em países com poucas observações: a correlação entre o número de observações do país e o valor absoluto do ρ de teste é positiva (0,248; p = 0,004; n = 20 a 54 por país). A leitura "a associação de níveis é dominada pela variação entre países no treino" permanece, mas com a ressalva de que parte da queda de 0,751 para 0,542 reflete imprecisão amostral em amostras pequenas, e não apenas ausência de transferibilidade.
+
 ### 4.4 Subperíodos
 
 A comparação dos subperíodos 1960–1990 e 1991–2023 (Tabela 4) mostra correlação em níveis elevada em ambos (0,615 no primeiro; 0,769 no segundo). Em primeiras diferenças, a correlação é modesta nos dois subperíodos (0,133 e 0,194), com ligeiro aumento no período mais recente.
@@ -136,13 +138,20 @@ A comparação dos subperíodos 1960–1990 e 1991–2023 (Tabela 4) mostra corr
 
 ### 4.5 Painel com efeitos fixos e controles de governança
 
-O painel com efeitos fixos de país e de ano, log do PIB per capita defasado em cinco anos e controles de gasto educacional, pesquisa e desenvolvimento, urbanização, manufatura e governança (WGI) produz o coeficiente reportado na Tabela 5. O coeficiente do log-PIB per capita defasado é 0,073 (IC95% −0,169 a 0,314; p = 0,555), com 106 clusters de país e 1.146 observações. O intervalo de confiança contém zero: uma vez introduzidos os controles institucionais e estruturais, nenhuma associação sistemática intra-país é identificável. A especificação com cluster por país é a principal; ignorar a correlação serial tenderia a estreitar artificialmente os intervalos (CAMERON; MILLER, 2015).
+O painel com efeitos fixos de país e de ano, log do PIB per capita defasado em cinco anos e controles de gasto educacional, pesquisa e desenvolvimento, urbanização, manufatura e governança (WGI) produz o coeficiente reportado na Tabela 5. O coeficiente do log-PIB per capita defasado é 0,073 (IC95% −0,169 a 0,314; p = 0,555), com 106 clusters de país e 1.146 observações. O intervalo de confiança contém zero: uma vez introduzidos os controles institucionais e estruturais, nenhuma associação sistemática intra-país é identificável. A especificação com cluster por país é a principal; a comparação com erros padrão homocedásticos (Tabela 5b) confirma o diagnóstico: sem cluster o intervalo estreita-se (0,073; IC95% −0,036 a 0,182; p = 0,190), mas permanece contendo o zero e a conclusão de não-detecção se mantém — o ajuste à correlação serial por país amplia a incerteza, sem alterar a leitura substantiva (CAMERON; MILLER, 2015).
 
 | Especificação | Coeficiente log-PIB pc (lag 5) | IC95% | p | n | Clusters |
 |---|---|---|---|---|---|
 | FE país + FE ano + controles (WGI, educ, P&D, urbanização, manufatura) | 0,073 | [−0,169; 0,314] | 0,555 | 1146 | 106 |
 
 *Fonte: elaboração própria. `outputs/expanded/provenance_expanded.json`; erros padrão clusterizados por país.*
+
+| Erros padrão | Coeficiente log-PIB pc (lag 5) | SE | IC95% | p |
+|---|---|---|---|---|
+| Clusterizados por país (principal) | 0,073 | 0,062 | [−0,169; 0,314] | 0,555 |
+| Homocedásticos (comparação) | 0,073 | 0,055 | [−0,036; 0,182] | 0,190 |
+
+*Fonte: elaboração própria. `outputs/expanded/tabela5b_cluster_comparativo.csv`; mesma especificação e mesma amostra (n = 1.146; 106 países), variando apenas o tratamento dos erros padrão.*
 
 ### 4.6 Exercício preditivo com validação agrupada
 
@@ -229,6 +238,21 @@ A confiabilidade das estatísticas centrais é atestada por intervalos de confia
 | 123 | 0,604 | 0,548 | 0,661 | < 0,001 |
 
 *Fonte: elaboração própria. Valores completos em `outputs/expanded/tabela11_confiabilidade.csv`.*
+
+### 4.10 Limites de detecção e equivalência do coeficiente de painel
+
+A ausência de associação detectável na especificação de painel (0,073; IC95% −0,169 a 0,314) não é evidência de ausência de efeito: é necessário informar o tamanho do efeito que o desenho conseguiria detectar. Com o erro padrão clusterizado (0,062; n = 1.146; 106 clusters), o menor efeito detectável com poder de 80% e α de 5% bilateral é 0,173 no log da matrícula terciária (Tabela 13): um efeito genuíno de magnitude inferior a 0,17 não seria distinguível de zero neste desenho. Complementarmente, o teste de equivalência de dois unilaterais (TOST) com limites de ±0,10 e ±0,05 não permite declarar equivalência: p = 0,329 e p = 0,644, respectivamente — o coeficiente é compatível tanto com efeitos próximos de zero quanto com efeitos de magnitude relevante, e a leitura correta é de não-detecção, não de equivalência nem de efeito nulo.
+
+| Métrica | Valor |
+|---|---|
+| Coeficiente (log-PIB pc, lag 5) | 0,073 |
+| Erro padrão clusterizado | 0,062 |
+| IC95% | [−0,169; 0,314] |
+| Menor efeito detectável (poder 80%, α 5%) | 0,173 |
+| TOST ±0,10 (p) | 0,329 |
+| TOST ±0,05 (p) | 0,644 |
+
+*Fonte: elaboração própria. `outputs/expanded/tabela13_tost_deteccao.csv` e `provenance_r423.json`. MDES = (z0,975 + z0,80) × SE; TOST de dois unilaterais sobre o log da matrícula terciária.*
 
 ## 5. Discussão
 

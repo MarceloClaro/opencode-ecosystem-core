@@ -58,11 +58,14 @@ class TestEstrutura:
 
     def test_tabelas_suficientes(self):
         doc = docx.Document(str(DOCX))
-        assert len(doc.tables) >= 14, f"esperava 14+ tabelas, há {len(doc.tables)}"
+        assert len(doc.tables) >= 16, f"esperava 16+ tabelas, há {len(doc.tables)}"
 
     def test_tabela_8_brasil(self):
         doc = docx.Document(str(DOCX))
-        t = doc.tables[7]
+        # localiza a tabela do caso brasileiro por conteúdo (índice varia com
+        # a adição de tabelas suplementares, ex.: R423)
+        t = next(tb for tb in doc.tables
+                 if tb.rows and "Brasil" in tb.rows[1].cells[0].text)
         assert len(t.rows) == 8
         assert "Brasil" in t.rows[1].cells[0].text
 
