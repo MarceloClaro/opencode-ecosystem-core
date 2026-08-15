@@ -4405,7 +4405,7 @@
     },
     {
       "round_id": "R426",
-      "objective": "Estudo Crateús-IDEB: testar padrão associativo renda × IDEB na microrregião do Sertão de Cratéus (CE, 9 municípios) com dados oficiais auditáveis, mapas com proxies do IPCE, manuscrito MD/TeX/PDF/DOCX, 17 testes e registro evolutivo",
+      "objective": "Estudo Crateús-IDEB (pesquisa original, sem estudo anterior): testar associação renda × IDEB na microrregião do Sertão de Cratéus (CE, 9 municípios) com RQ explícita, SE clusterizado, mapas, 4 gráficos e 4 tabelas; manuscrito MD/TeX/PDF/DOCX; 23 testes",
       "changes": [
         "SPEC-935-R426-crateus-ideb.md com H1/H2/H3 e anti-overclaim",
         "scripts/baixar_dados.py + SOURCE_MANIFEST.json (INEP IDEB 2005-2025; IBGE PIB 2010-2021; Censo 2022 renda)",
@@ -4414,7 +4414,11 @@
         "H3: premissa de estagnação refutada — 9/9 municípios atingiram meta 2021; ganho médio AI 5,93 (2007-2025); correlação ganho×renda r=-0,14 p=0,73",
         "scripts/mapa_crateus.py: mapa_renda_responsavel_censo2022.png e mapa_pib_per_capita_2021.png",
         "docs/ARTIGO_CRATEUS_RBEP.md + latex/ARTIGO_CRATEUS_RBEP.tex (PDF 8p, 0 Overfull) + export_docx_rbep.py (DOCX ABNT)",
-        "tests/test_r426_crateus_ideb.py com 17 testes; evolution/evo-57-r426-crateus-ideb.md"
+        "tests/test_r426_crateus_ideb.py com 17 testes; evolution/evo-57-r426-crateus-ideb.md",
+        "Auditoria: SE clusterizado CRVE por município (t com G-1=8) no FE; MDES 5,71 (cluster) e TOST p=0,90; IC95 cluster FE [-1,51; 6,73] p=0,18",
+        "Pesquisa original: removidas referências a estudo anterior/espelho/ARM; pergunta de pesquisa (RQ) explícita na Introdução; seção 3.5 de falsificabilidade",
+        "Figuras: scripts/graficos_crateus.py → fig_scatter_niveis, fig_serie_ideb, fig_loocv_r_teste, fig_scatter_ganho_renda; 6 figuras (2 mapas + 4 gráficos) incorporadas ao MD e TeX; PDF 13p 0 Overfull; DOCX com 6 imagens + 4 tabelas com bordas",
+        "tests/test_r426_crateus_ideb.py ampliado para 23 testes (figuras, RQ, sem referência a estudo anterior, valores cluster)"
       ],
       "score": 8.0,
       "lessons": [
@@ -4422,7 +4426,9 @@
         "n=9 municipal exige declarar não-detecção (MDES 6,05; TOST p=0,88), nunca equivalência nem ausência",
         "IPCE não auditável → proxies oficiais (renda do responsável, PIB per capita) com limitação declarada",
         "LaTeX: \\texttt não quebra em '_'; usar xurl + \\path{} para 0 Overfull em DOI/paths",
-        "Crossref descarta falsos DOIs (10.1590/1981-3821202300010003 não é Ponne)"
+        "Crossref descarta falsos DOIs (10.1590/1981-3821202300010003 não é Ponne)",
+        "Erros padrão homocedásticos subestimam incerteza com poucos clusters; reportar CRVE por município (G-1 dof)",
+        "Pandoc incorpora imagens markdown ao DOCX automaticamente quando o cwd é a pasta do paper"
       ],
       "timestamp": "2026-08-15T16:16:15"
     }

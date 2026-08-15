@@ -88,12 +88,19 @@ def bootstrap_ic(x: np.ndarray, y: np.ndarray, grupos: np.ndarray, b: int = 2000
 
 
 def fe_duplo(d: pd.DataFrame, y: str, x: str) -> dict:
-    """Efeitos fixos de município E ano via within-transformation iterativa."""
+    """Efeitos fixos de município E ano via within-transformation iterativa.
+
+    Retorna SE homocedástico (transparência) e SE clusterizado por município
+    (CRVE com correção de pequena amostra; t com G-1 graus de liberdade),
+    espelhando o protocolo da ARM (R410-R412).
+    """
     yv = d[y].astype(float).values
     xv = d[x].astype(float).values
     g = d["cod_mun"].values
     t = d["ano_ideb"].values
     n = len(d)
+    n_mun = d["cod_mun"].nunique()
+    n_ano = d["ano_ideb"].nunique()
     # demean iterativo (two-way within)
     yw, xw = yv.copy(), xv.copy()
     for _ in range(200):
@@ -109,15 +116,40 @@ def fe_duplo(d: pd.DataFrame, y: str, x: str) -> dict:
         return {"erro": "sem variância dentro"}
     coef = float((xw * yw).sum() / den)
     resid = yw - coef * xw
-    dof = n - d["cod_mun"].nunique() - d["ano_ideb"].nunique() - 1
-    se = float(np.sqrt((resid * resid).sum() / max(dof, 1) / den))
-    tval = coef / se if se > 0 else float("nan")
-    p = 2 * (1 - tdist.cdf(abs(tval), max(dof, 5)))
+
+    # SE homocedástico
+    k = n_mun + n_ano + 1
+    dof = n - k
+    se_homo = float(np.sqrt((resid * resid).sum() / max(dof, 1) / den))
+
+    # SE clusterizado por município (CRVE) com correção de pequena amostra
+    scores = np.array([
+        float(np.sum(xw[g == gi] * resid[g == gi]))
+        for gi in np.unique(g)
+    ])
+    g_clusters = int(len(scores))
+    crve = float(np.sum(scores * scores) / den ** 2)
+    # correção CR3-like: (G/(G-1)) * ((N-1)/(N-K))
+    c_pequena = (g_clusters / max(g_clusters - 1, 1)) * ((n - 1) / max(n - k, 1))
+    se_cluster = float(np.sqrt(crve * c_pequena))
+
+    def _ic(se: float, df_t: int) -> tuple:
+        tcrit = tdist.ppf(0.975, df_t)
+        return (round(coef - tcrit * se, 4), round(coef + tcrit * se, 4))
+
+    ic_homo = _ic(se_homo, max(dof, 5))
+    ic_cluster = _ic(se_cluster, max(g_clusters - 1, 1))
+    p_cluster = 2 * (1 - tdist.cdf(abs(coef / se_cluster), max(g_clusters - 1, 1)))
     return {
-        "coef": round(coef, 4), "se": round(se, 4),
-        "ic95_inf": round(coef - 1.96 * se, 4), "ic95_sup": round(coef + 1.96 * se, 4),
-        "p_valor": round(float(p), 4),
-        "n": int(n), "n_municipios": int(d["cod_mun"].nunique()),
+        "coef": round(coef, 4),
+        "se": round(se_homo, 4),
+        "ic95_inf": ic_homo[0], "ic95_sup": ic_homo[1],
+        "p_valor": round(2 * (1 - tdist.cdf(abs(coef / se_homo), max(dof, 5))), 4),
+        "se_cluster": round(se_cluster, 4),
+        "ic95_cluster_inf": ic_cluster[0], "ic95_cluster_sup": ic_cluster[1],
+        "p_valor_cluster": round(float(p_cluster), 4),
+        "n_clusters": g_clusters,
+        "n": int(n), "n_municipios": int(n_mun),
         "anos": sorted(d["ano_ideb"].unique().tolist()),
     }
 
@@ -215,23 +247,32 @@ def loocv_municipio(painel: pd.DataFrame, filtro: pd.Series) -> dict:
 
 
 def mdes_tost(fe: dict | None) -> dict | None:
-    if not fe or "coef" not in fe or "se" not in fe:
+    """MDES e TOST usando o SE clusterizado (G-1 dof) — conservador com 9 clusters.
+
+    Reporta também o homocedástico como transparência.
+    """
+    if not fe or "coef" not in fe or "se_cluster" not in fe:
         return None
     n = fe["n"]
-    se = fe["se"]
+    g = fe["n_clusters"]
+    se = fe["se_cluster"]
+    df_cl = max(g - 1, 1)
     df_aprox = max(n - 3, 5)
-    t_alpha = tdist.ppf(0.975, df_aprox)
-    t_power = tdist.ppf(0.8, df_aprox)
-    mdes = (t_alpha + t_power) * se
+    # MDES com cluster (dof = G-1) e com homocedástico (transparência)
+    mdes_cluster = (tdist.ppf(0.975, df_cl) + tdist.ppf(0.8, df_cl)) * se
+    mdes_homo = (tdist.ppf(0.975, df_aprox) + tdist.ppf(0.8, df_aprox)) * fe["se"]
     delta = 0.10
     t1 = (fe["coef"] + delta) / se
     t2 = (fe["coef"] - delta) / se
-    p_tost = 1 - tdist.cdf(min(t1, -t2), df_aprox)
+    p_tost = 1 - tdist.cdf(min(t1, -t2), df_cl)
     return {
-        "mdes": round(float(mdes), 4),
+        "mdes_cluster": round(float(mdes_cluster), 4),
+        "mdes_homocedastico": round(float(mdes_homo), 4),
+        "mdes": round(float(mdes_cluster), 4),
         "tost_delta": delta,
         "p_tost": round(float(p_tost), 4),
         "leitura": "não-detecção (não permite declarar equivalência)" if p_tost > 0.05 else "equivalência dentro de ±0,10",
+        "nota": "MDES/TOST baseados no SE clusterizado por município (dof = G-1 = 8)",
     }
 
 
@@ -332,7 +373,15 @@ def principal() -> None:
         "resumo_resultados": {
             "micro_niveis": resultados["microrregiao"].get("niveis"),
             "micro_1dif": resultados["microrregiao"].get("primeiras_diferencas"),
-            "micro_fe": resultados["microrregiao"].get("fe"),
+            "micro_fe": {k: v for k, v in resultados["microrregiao"].get("fe", {}).items()
+                         if k != "anos"},
+            "micro_fe_cluster": {
+                "se_cluster": resultados["microrregiao"].get("fe", {}).get("se_cluster"),
+                "ic95_cluster": [resultados["microrregiao"].get("fe", {}).get("ic95_cluster_inf"),
+                                 resultados["microrregiao"].get("fe", {}).get("ic95_cluster_sup")],
+                "p_valor_cluster": resultados["microrregiao"].get("fe", {}).get("p_valor_cluster"),
+                "n_clusters": resultados["microrregiao"].get("fe", {}).get("n_clusters"),
+            },
             "ce_niveis": resultados["ceara"].get("niveis"),
             "br_niveis": resultados["brasil"].get("niveis"),
             "loocv": {k: v for k, v in resultados["loocv_microrregiao"].items() if k != "folds"},

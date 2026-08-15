@@ -19,19 +19,25 @@
   "micro_fe": {
    "coef": 2.6068,
    "se": 2.1406,
-   "ic95_inf": -1.5888,
-   "ic95_sup": 6.8023,
+   "ic95_inf": -1.6446,
+   "ic95_sup": 6.8581,
    "p_valor": 0.2264,
+   "se_cluster": 1.787,
+   "ic95_cluster_inf": -1.514,
+   "ic95_cluster_sup": 6.7275,
+   "p_valor_cluster": 0.1828,
+   "n_clusters": 9,
    "n": 108,
-   "n_municipios": 9,
-   "anos": [
-    2013,
-    2015,
-    2017,
-    2019,
-    2021,
-    2023
-   ]
+   "n_municipios": 9
+  },
+  "micro_fe_cluster": {
+   "se_cluster": 1.787,
+   "ic95_cluster": [
+    -1.514,
+    6.7275
+   ],
+   "p_valor_cluster": 0.1828,
+   "n_clusters": 9
   },
   "ce_niveis": {
    "r": 0.2612,
@@ -61,14 +67,17 @@
    "pct_positivos": 100.0
   },
   "mdes_tost": {
-   "mdes": 6.0533,
+   "mdes_cluster": 5.7093,
+   "mdes_homocedastico": 6.0533,
+   "mdes": 5.7093,
    "tost_delta": 0.1,
-   "p_tost": 0.8779,
-   "leitura": "não-detecção (não permite declarar equivalência)"
+   "p_tost": 0.9009,
+   "leitura": "não-detecção (não permite declarar equivalência)",
+   "nota": "MDES/TOST baseados no SE clusterizado por município (dof = G-1 = 8)"
   }
  },
  "sha256_scripts": {
   "baixar_dados.py": "93a394b894bdc5ee21ca356d79e34b9d2e213b449994ccd733d222107c1f8968",
-  "analise_crateus.py": "1e24a0f343c30c3a9308faa086cc961f8021c5ed9e41065b76b8adad833641fe"
+  "analise_crateus.py": "f5dd403045863ebf367e135e9634c4251f3ed13c703020b7667c2408932f6c59"
  }
 }
