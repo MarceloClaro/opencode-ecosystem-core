@@ -4402,6 +4402,29 @@
         "README do pacote repete a nota anti-overclaim 'candidato a submissão'"
       ],
       "timestamp": "2026-08-15T09:15:00"
+    },
+    {
+      "round_id": "R426",
+      "objective": "Estudo Crateús-IDEB: testar padrão associativo renda × IDEB na microrregião do Sertão de Cratéus (CE, 9 municípios) com dados oficiais auditáveis, mapas com proxies do IPCE, manuscrito MD/TeX/PDF/DOCX, 17 testes e registro evolutivo",
+      "changes": [
+        "SPEC-935-R426-crateus-ideb.md com H1/H2/H3 e anti-overclaim",
+        "scripts/baixar_dados.py + SOURCE_MANIFEST.json (INEP IDEB 2005-2025; IBGE PIB 2010-2021; Censo 2022 renda)",
+        "scripts/analise_crateus.py: bootstrap por cluster, 1ª dif, FE, LOOCV por município, MDES 6,05, TOST; resultados_r426.json + provenance_r426.json",
+        "H1 micro r=0,4873 IC95 [0,3432; 0,6382] n=108 (9 clusters); 1ª dif r=-0,0549 p=0,61; FE β=2,61 IC [-1,59; 6,80] p=0,23; LOOCV 9/9 positivos (mediana r=0,62)",
+        "H3: premissa de estagnação refutada — 9/9 municípios atingiram meta 2021; ganho médio AI 5,93 (2007-2025); correlação ganho×renda r=-0,14 p=0,73",
+        "scripts/mapa_crateus.py: mapa_renda_responsavel_censo2022.png e mapa_pib_per_capita_2021.png",
+        "docs/ARTIGO_CRATEUS_RBEP.md + latex/ARTIGO_CRATEUS_RBEP.tex (PDF 8p, 0 Overfull) + export_docx_rbep.py (DOCX ABNT)",
+        "tests/test_r426_crateus_ideb.py com 17 testes; evolution/evo-57-r426-crateus-ideb.md"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "A premissa de estagnação foi refutada pelos dados oficiais (9/9 acima da meta 2021, ganho médio 5,93) — relatar a refutação com clareza, sem forçar a hipótese original",
+        "n=9 municipal exige declarar não-detecção (MDES 6,05; TOST p=0,88), nunca equivalência nem ausência",
+        "IPCE não auditável → proxies oficiais (renda do responsável, PIB per capita) com limitação declarada",
+        "LaTeX: \\texttt não quebra em '_'; usar xurl + \\path{} para 0 Overfull em DOI/paths",
+        "Crossref descarta falsos DOIs (10.1590/1981-3821202300010003 não é Ponne)"
+      ],
+      "timestamp": "2026-08-15T16:16:15"
     }
   ]
 }

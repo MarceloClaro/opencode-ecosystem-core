@@ -1,0 +1,74 @@
+{
+ "ciclo": "R426",
+ "resumo_resultados": {
+  "micro_niveis": {
+   "r": 0.4873,
+   "ic95_inf": 0.3432,
+   "ic95_sup": 0.6382,
+   "n": 108,
+   "n_clusters": 9,
+   "p_valor": 0.0,
+   "bootstrap_b": 2000,
+   "seed": 42
+  },
+  "micro_1dif": {
+   "r": -0.0549,
+   "p_valor": 0.6074,
+   "n": 90
+  },
+  "micro_fe": {
+   "coef": 2.6068,
+   "se": 2.1406,
+   "ic95_inf": -1.5888,
+   "ic95_sup": 6.8023,
+   "p_valor": 0.2264,
+   "n": 108,
+   "n_municipios": 9,
+   "anos": [
+    2013,
+    2015,
+    2017,
+    2019,
+    2021,
+    2023
+   ]
+  },
+  "ce_niveis": {
+   "r": 0.2612,
+   "ic95_inf": 0.1957,
+   "ic95_sup": 0.3301,
+   "n": 2202,
+   "n_clusters": 184,
+   "p_valor": 0.0,
+   "bootstrap_b": 500,
+   "seed": 42
+  },
+  "br_niveis": {
+   "r": 0.4562,
+   "ic95_inf": 0.4408,
+   "ic95_sup": 0.4716,
+   "n": 48695,
+   "n_clusters": 5360,
+   "p_valor": 0.0,
+   "bootstrap_b": 500,
+   "seed": 42
+  },
+  "loocv": {
+   "n_folds": 9,
+   "r_teste_media": 0.6549,
+   "r_teste_mediana": 0.6227,
+   "r_teste_dp": 0.1084,
+   "pct_positivos": 100.0
+  },
+  "mdes_tost": {
+   "mdes": 6.0533,
+   "tost_delta": 0.1,
+   "p_tost": 0.8779,
+   "leitura": "não-detecção (não permite declarar equivalência)"
+  }
+ },
+ "sha256_scripts": {
+  "baixar_dados.py": "93a394b894bdc5ee21ca356d79e34b9d2e213b449994ccd733d222107c1f8968",
+  "analise_crateus.py": "1e24a0f343c30c3a9308faa086cc961f8021c5ed9e41065b76b8adad833641fe"
+ }
+}
