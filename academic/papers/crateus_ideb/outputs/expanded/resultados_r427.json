@@ -1,0 +1,1235 @@
+{
+  "ciclo": "R427",
+  "n": 9,
+  "municipios": {
+    "2301257": "Ararendá",
+    "2304103": "Crateús",
+    "2305605": "Independência",
+    "2305654": "Ipaporanga",
+    "2308609": "Monsenhor Tabosa",
+    "2309300": "Nova Russas",
+    "2309409": "Novo Oriente",
+    "2311264": "Quiterianópolis",
+    "2313203": "Tamboril"
+  },
+  "desfechos": {
+    "ideb_2025_ai": "IDEB 2025 anos iniciais",
+    "ideb_2025_af": "IDEB 2025 anos finais",
+    "ganho_ideb_ai": "Ganho IDEB AI 2007–2025"
+  },
+  "correlacoes": {
+    "taxa_alfabetizacao_15_pct|ideb_2025_ai": {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Capital humano",
+      "n": 9,
+      "pearson": 0.07920247344031667,
+      "spearman": 0.05857791861290061,
+      "pearson_ic95": [
+        -0.845881146385471,
+        0.731410480411266
+      ],
+      "spearman_ic95": [
+        -0.8114505798857538,
+        0.7142857142857142
+      ],
+      "sinal_estavel_pct": 62.56
+    },
+    "taxa_alfabetizacao_15_pct|ideb_2025_af": {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Capital humano",
+      "n": 9,
+      "pearson": -0.013900491709658907,
+      "spearman": 0.0,
+      "pearson_ic95": [
+        -0.8308272459113357,
+        0.7045125905263996
+      ],
+      "spearman_ic95": [
+        -0.8500331705159767,
+        0.7382042237619334
+      ],
+      "sinal_estavel_pct": 48.74
+    },
+    "taxa_alfabetizacao_15_pct|ganho_ideb_ai": {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Capital humano",
+      "n": 9,
+      "pearson": 0.1525296688956699,
+      "spearman": 0.2857243743174461,
+      "pearson_ic95": [
+        -0.7543614354673506,
+        0.8660430062894584
+      ],
+      "spearman_ic95": [
+        -0.5675675675675675,
+        0.8974358974358972
+      ],
+      "sinal_estavel_pct": 68.47999999999999
+    },
+    "agua_rede_geral_pct|ideb_2025_ai": {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.403504873201834,
+      "spearman": 0.20920685218893076,
+      "pearson_ic95": [
+        -0.34205677414892194,
+        0.8507611234347425
+      ],
+      "spearman_ic95": [
+        -0.5263157894736842,
+        0.846153846153846
+      ],
+      "sinal_estavel_pct": 84.22
+    },
+    "agua_rede_geral_pct|ideb_2025_af": {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.4416551819364427,
+      "spearman": 0.389886514581966,
+      "pearson_ic95": [
+        -0.17617717658231832,
+        0.8750790534378726
+      ],
+      "spearman_ic95": [
+        -0.2982456140350877,
+        0.8917859640458629
+      ],
+      "sinal_estavel_pct": 92.12
+    },
+    "agua_rede_geral_pct|ganho_ideb_ai": {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.38832979355002456,
+      "spearman": 0.26051340011296553,
+      "pearson_ic95": [
+        -0.38418388334616155,
+        0.802857520891528
+      ],
+      "spearman_ic95": [
+        -0.6491299524362321,
+        0.7614678899082569
+      ],
+      "sinal_estavel_pct": 82.19999999999999
+    },
+    "esgoto_rede_pct|ideb_2025_ai": {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": -0.1905537347378738,
+      "spearman": -0.36820405985251814,
+      "pearson_ic95": [
+        -0.8750620799781607,
+        0.3862374547001163
+      ],
+      "spearman_ic95": [
+        -0.8620689655172415,
+        0.4609549689440982
+      ],
+      "sinal_estavel_pct": 76.6
+    },
+    "esgoto_rede_pct|ideb_2025_af": {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": -0.22714609984822792,
+      "spearman": -0.18646746349572288,
+      "pearson_ic95": [
+        -0.8233105517520318,
+        0.552773216083298
+      ],
+      "spearman_ic95": [
+        -0.810344827586207,
+        0.7393286210618054
+      ],
+      "sinal_estavel_pct": 75.2
+    },
+    "esgoto_rede_pct|ganho_ideb_ai": {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": -0.2413182290542178,
+      "spearman": -0.47060485181697,
+      "pearson_ic95": [
+        -0.9353391137029952,
+        0.27862378903560914
+      ],
+      "spearman_ic95": [
+        -0.9401806052934649,
+        0.28831250948354337
+      ],
+      "sinal_estavel_pct": 84.61999999999999
+    },
+    "lixo_coletado_pct|ideb_2025_ai": {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.25459004471851565,
+      "spearman": 0.03347309635022892,
+      "pearson_ic95": [
+        -0.7097140665523746,
+        0.8088021428579687
+      ],
+      "spearman_ic95": [
+        -0.7297686022097145,
+        0.8620689655172415
+      ],
+      "sinal_estavel_pct": 68.72
+    },
+    "lixo_coletado_pct|ideb_2025_af": {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.32705080514601004,
+      "spearman": 0.32208016421988495,
+      "pearson_ic95": [
+        -0.520671197924812,
+        0.8570673374116754
+      ],
+      "spearman_ic95": [
+        -0.5896618941607872,
+        0.8783523140123373
+      ],
+      "sinal_estavel_pct": 79.0
+    },
+    "lixo_coletado_pct|ganho_ideb_ai": {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.35051143837364634,
+      "spearman": 0.4033755872716886,
+      "pearson_ic95": [
+        -0.5418045426278264,
+        0.8246243946447003
+      ],
+      "spearman_ic95": [
+        -0.4533736350032653,
+        0.8982572592039424
+      ],
+      "sinal_estavel_pct": 79.80000000000001
+    },
+    "banheiro_exclusivo_pct|ideb_2025_ai": {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.4492667366651165,
+      "spearman": 0.32636268941473195,
+      "pearson_ic95": [
+        -0.4519408486024688,
+        0.8649534479524987
+      ],
+      "spearman_ic95": [
+        -0.5263157894736842,
+        0.894736842105263
+      ],
+      "sinal_estavel_pct": 80.17999999999999
+    },
+    "banheiro_exclusivo_pct|ideb_2025_af": {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.4088930606902679,
+      "spearman": 0.35598333940092547,
+      "pearson_ic95": [
+        -0.4735462831256191,
+        0.8385391067486769
+      ],
+      "spearman_ic95": [
+        -0.4824506406770077,
+        0.9444444444444444
+      ],
+      "sinal_estavel_pct": 81.3
+    },
+    "banheiro_exclusivo_pct|ganho_ideb_ai": {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Saneamento",
+      "n": 9,
+      "pearson": 0.5208678086468157,
+      "spearman": 0.6218706970438532,
+      "pearson_ic95": [
+        -0.2103419060142966,
+        0.8887381285072407
+      ],
+      "spearman_ic95": [
+        -0.054208933590719294,
+        0.9459459459459459
+      ],
+      "sinal_estavel_pct": 91.22
+    },
+    "internet_domicilios_pct|ideb_2025_ai": {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Conectividade",
+      "n": 9,
+      "pearson": -0.14501341316870395,
+      "spearman": -0.16736548175114463,
+      "pearson_ic95": [
+        -0.6719465160389785,
+        0.42707209543683805
+      ],
+      "spearman_ic95": [
+        -0.8181836200155737,
+        0.6180516646426805
+      ],
+      "sinal_estavel_pct": 75.44
+    },
+    "internet_domicilios_pct|ideb_2025_af": {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Conectividade",
+      "n": 9,
+      "pearson": -0.2536368026614384,
+      "spearman": -0.33903175181040524,
+      "pearson_ic95": [
+        -0.7373536205897873,
+        0.2790164891364789
+      ],
+      "spearman_ic95": [
+        -0.8545454545454545,
+        0.35196008319869676
+      ],
+      "sinal_estavel_pct": 87.58
+    },
+    "internet_domicilios_pct|ganho_ideb_ai": {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Conectividade",
+      "n": 9,
+      "pearson": -0.11058048544507489,
+      "spearman": -0.16807316136320358,
+      "pearson_ic95": [
+        -0.6458263556034843,
+        0.6675529556412296
+      ],
+      "spearman_ic95": [
+        -0.8113207547169811,
+        0.8111124468803917
+      ],
+      "sinal_estavel_pct": 70.54
+    },
+    "renda_responsavel|ideb_2025_ai": {
+      "indicador": "renda_responsavel",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Renda/desigualdade",
+      "n": 9,
+      "pearson": -0.154408731960616,
+      "spearman": -0.2845213189769458,
+      "pearson_ic95": [
+        -0.9418859367686763,
+        0.5110149327432872
+      ],
+      "spearman_ic95": [
+        -0.8384359417244028,
+        0.7217512077294684
+      ],
+      "sinal_estavel_pct": 64.98
+    },
+    "renda_responsavel|ideb_2025_af": {
+      "indicador": "renda_responsavel",
+      "desfecho": "ideb_2025_af",
+      "familia": "Renda/desigualdade",
+      "n": 9,
+      "pearson": -0.19771402413258288,
+      "spearman": -0.16951587590520262,
+      "pearson_ic95": [
+        -0.8681180695519253,
+        0.5730337192627818
+      ],
+      "spearman_ic95": [
+        -0.8245614035087718,
+        0.7336314490088525
+      ],
+      "sinal_estavel_pct": 65.58
+    },
+    "renda_responsavel|ganho_ideb_ai": {
+      "indicador": "renda_responsavel",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Renda/desigualdade",
+      "n": 9,
+      "pearson": -0.13640327107440978,
+      "spearman": -0.12605487102240268,
+      "pearson_ic95": [
+        -0.9279083418746888,
+        0.5275041304531124
+      ],
+      "spearman_ic95": [
+        -0.8518858307849133,
+        0.6167939547439613
+      ],
+      "sinal_estavel_pct": 58.84
+    },
+    "pib_per_capita|ideb_2025_ai": {
+      "indicador": "pib_per_capita",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Renda/desigualdade",
+      "n": 9,
+      "pearson": 0.21318462580817893,
+      "spearman": 0.04184137043778616,
+      "pearson_ic95": [
+        -0.9396528136910514,
+        0.8415046704369514
+      ],
+      "spearman_ic95": [
+        -0.8434782608695652,
+        0.8276032059191135
+      ],
+      "sinal_estavel_pct": 68.42
+    },
+    "pib_per_capita|ideb_2025_af": {
+      "indicador": "pib_per_capita",
+      "desfecho": "ideb_2025_af",
+      "familia": "Renda/desigualdade",
+      "n": 9,
+      "pearson": 0.13827781026147734,
+      "spearman": 0.13561270072416207,
+      "pearson_ic95": [
+        -0.8768775186263582,
+        0.8662715555018272
+      ],
+      "spearman_ic95": [
+        -0.8148286008898825,
+        0.8858774457751719
+      ],
+      "sinal_estavel_pct": 63.480000000000004
+    },
+    "pib_per_capita|ganho_ideb_ai": {
+      "indicador": "pib_per_capita",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Renda/desigualdade",
+      "n": 9,
+      "pearson": 0.10992503826803235,
+      "spearman": -0.2857243743174461,
+      "pearson_ic95": [
+        -0.9558375345149872,
+        0.8157493771139396
+      ],
+      "spearman_ic95": [
+        -0.995644546904641,
+        0.5757593594126973
+      ],
+      "sinal_estavel_pct": 58.4
+    }
+  },
+  "ranking_pearson": [
+    {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Saneamento",
+      "r": 0.5208678086468157,
+      "r_abs": 0.5208678086468157,
+      "ic95": [
+        -0.2103419060142966,
+        0.8887381285072407
+      ],
+      "sinal_estavel_pct": 91.22
+    },
+    {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Saneamento",
+      "r": 0.4492667366651165,
+      "r_abs": 0.4492667366651165,
+      "ic95": [
+        -0.4519408486024688,
+        0.8649534479524987
+      ],
+      "sinal_estavel_pct": 80.17999999999999
+    },
+    {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Saneamento",
+      "r": 0.4416551819364427,
+      "r_abs": 0.4416551819364427,
+      "ic95": [
+        -0.17617717658231832,
+        0.8750790534378726
+      ],
+      "sinal_estavel_pct": 92.12
+    },
+    {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Saneamento",
+      "r": 0.4088930606902679,
+      "r_abs": 0.4088930606902679,
+      "ic95": [
+        -0.4735462831256191,
+        0.8385391067486769
+      ],
+      "sinal_estavel_pct": 81.3
+    },
+    {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Saneamento",
+      "r": 0.403504873201834,
+      "r_abs": 0.403504873201834,
+      "ic95": [
+        -0.34205677414892194,
+        0.8507611234347425
+      ],
+      "sinal_estavel_pct": 84.22
+    },
+    {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Saneamento",
+      "r": 0.38832979355002456,
+      "r_abs": 0.38832979355002456,
+      "ic95": [
+        -0.38418388334616155,
+        0.802857520891528
+      ],
+      "sinal_estavel_pct": 82.19999999999999
+    },
+    {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Saneamento",
+      "r": 0.35051143837364634,
+      "r_abs": 0.35051143837364634,
+      "ic95": [
+        -0.5418045426278264,
+        0.8246243946447003
+      ],
+      "sinal_estavel_pct": 79.80000000000001
+    },
+    {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Saneamento",
+      "r": 0.32705080514601004,
+      "r_abs": 0.32705080514601004,
+      "ic95": [
+        -0.520671197924812,
+        0.8570673374116754
+      ],
+      "sinal_estavel_pct": 79.0
+    },
+    {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Saneamento",
+      "r": 0.25459004471851565,
+      "r_abs": 0.25459004471851565,
+      "ic95": [
+        -0.7097140665523746,
+        0.8088021428579687
+      ],
+      "sinal_estavel_pct": 68.72
+    },
+    {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Conectividade",
+      "r": -0.2536368026614384,
+      "r_abs": 0.2536368026614384,
+      "ic95": [
+        -0.7373536205897873,
+        0.2790164891364789
+      ],
+      "sinal_estavel_pct": 87.58
+    },
+    {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Saneamento",
+      "r": -0.2413182290542178,
+      "r_abs": 0.2413182290542178,
+      "ic95": [
+        -0.9353391137029952,
+        0.27862378903560914
+      ],
+      "sinal_estavel_pct": 84.61999999999999
+    },
+    {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Saneamento",
+      "r": -0.22714609984822792,
+      "r_abs": 0.22714609984822792,
+      "ic95": [
+        -0.8233105517520318,
+        0.552773216083298
+      ],
+      "sinal_estavel_pct": 75.2
+    },
+    {
+      "indicador": "pib_per_capita",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Renda/desigualdade",
+      "r": 0.21318462580817893,
+      "r_abs": 0.21318462580817893,
+      "ic95": [
+        -0.9396528136910514,
+        0.8415046704369514
+      ],
+      "sinal_estavel_pct": 68.42
+    },
+    {
+      "indicador": "renda_responsavel",
+      "desfecho": "ideb_2025_af",
+      "familia": "Renda/desigualdade",
+      "r": -0.19771402413258288,
+      "r_abs": 0.19771402413258288,
+      "ic95": [
+        -0.8681180695519253,
+        0.5730337192627818
+      ],
+      "sinal_estavel_pct": 65.58
+    },
+    {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Saneamento",
+      "r": -0.1905537347378738,
+      "r_abs": 0.1905537347378738,
+      "ic95": [
+        -0.8750620799781607,
+        0.3862374547001163
+      ],
+      "sinal_estavel_pct": 76.6
+    },
+    {
+      "indicador": "renda_responsavel",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Renda/desigualdade",
+      "r": -0.154408731960616,
+      "r_abs": 0.154408731960616,
+      "ic95": [
+        -0.9418859367686763,
+        0.5110149327432872
+      ],
+      "sinal_estavel_pct": 64.98
+    },
+    {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Capital humano",
+      "r": 0.1525296688956699,
+      "r_abs": 0.1525296688956699,
+      "ic95": [
+        -0.7543614354673506,
+        0.8660430062894584
+      ],
+      "sinal_estavel_pct": 68.47999999999999
+    },
+    {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Conectividade",
+      "r": -0.14501341316870395,
+      "r_abs": 0.14501341316870395,
+      "ic95": [
+        -0.6719465160389785,
+        0.42707209543683805
+      ],
+      "sinal_estavel_pct": 75.44
+    },
+    {
+      "indicador": "pib_per_capita",
+      "desfecho": "ideb_2025_af",
+      "familia": "Renda/desigualdade",
+      "r": 0.13827781026147734,
+      "r_abs": 0.13827781026147734,
+      "ic95": [
+        -0.8768775186263582,
+        0.8662715555018272
+      ],
+      "sinal_estavel_pct": 63.480000000000004
+    },
+    {
+      "indicador": "renda_responsavel",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Renda/desigualdade",
+      "r": -0.13640327107440978,
+      "r_abs": 0.13640327107440978,
+      "ic95": [
+        -0.9279083418746888,
+        0.5275041304531124
+      ],
+      "sinal_estavel_pct": 58.84
+    },
+    {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Conectividade",
+      "r": -0.11058048544507489,
+      "r_abs": 0.11058048544507489,
+      "ic95": [
+        -0.6458263556034843,
+        0.6675529556412296
+      ],
+      "sinal_estavel_pct": 70.54
+    },
+    {
+      "indicador": "pib_per_capita",
+      "desfecho": "ganho_ideb_ai",
+      "familia": "Renda/desigualdade",
+      "r": 0.10992503826803235,
+      "r_abs": 0.10992503826803235,
+      "ic95": [
+        -0.9558375345149872,
+        0.8157493771139396
+      ],
+      "sinal_estavel_pct": 58.4
+    },
+    {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ideb_2025_ai",
+      "familia": "Capital humano",
+      "r": 0.07920247344031667,
+      "r_abs": 0.07920247344031667,
+      "ic95": [
+        -0.845881146385471,
+        0.731410480411266
+      ],
+      "sinal_estavel_pct": 62.56
+    },
+    {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ideb_2025_af",
+      "familia": "Capital humano",
+      "r": -0.013900491709658907,
+      "r_abs": 0.013900491709658907,
+      "ic95": [
+        -0.8308272459113357,
+        0.7045125905263996
+      ],
+      "sinal_estavel_pct": 48.74
+    }
+  ],
+  "ranking_spearman": [
+    {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ganho_ideb_ai",
+      "rho": 0.6218706970438532,
+      "rho_abs": 0.6218706970438532,
+      "ic95": [
+        -0.054208933590719294,
+        0.9459459459459459
+      ],
+      "sinal_estavel_pct": 91.22
+    },
+    {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ganho_ideb_ai",
+      "rho": -0.47060485181697,
+      "rho_abs": 0.47060485181697,
+      "ic95": [
+        -0.9401806052934649,
+        0.28831250948354337
+      ],
+      "sinal_estavel_pct": 84.61999999999999
+    },
+    {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ganho_ideb_ai",
+      "rho": 0.4033755872716886,
+      "rho_abs": 0.4033755872716886,
+      "ic95": [
+        -0.4533736350032653,
+        0.8982572592039424
+      ],
+      "sinal_estavel_pct": 79.80000000000001
+    },
+    {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ideb_2025_af",
+      "rho": 0.389886514581966,
+      "rho_abs": 0.389886514581966,
+      "ic95": [
+        -0.2982456140350877,
+        0.8917859640458629
+      ],
+      "sinal_estavel_pct": 92.12
+    },
+    {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ideb_2025_ai",
+      "rho": -0.36820405985251814,
+      "rho_abs": 0.36820405985251814,
+      "ic95": [
+        -0.8620689655172415,
+        0.4609549689440982
+      ],
+      "sinal_estavel_pct": 76.6
+    },
+    {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ideb_2025_af",
+      "rho": 0.35598333940092547,
+      "rho_abs": 0.35598333940092547,
+      "ic95": [
+        -0.4824506406770077,
+        0.9444444444444444
+      ],
+      "sinal_estavel_pct": 81.3
+    },
+    {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ideb_2025_af",
+      "rho": -0.33903175181040524,
+      "rho_abs": 0.33903175181040524,
+      "ic95": [
+        -0.8545454545454545,
+        0.35196008319869676
+      ],
+      "sinal_estavel_pct": 87.58
+    },
+    {
+      "indicador": "banheiro_exclusivo_pct",
+      "desfecho": "ideb_2025_ai",
+      "rho": 0.32636268941473195,
+      "rho_abs": 0.32636268941473195,
+      "ic95": [
+        -0.5263157894736842,
+        0.894736842105263
+      ],
+      "sinal_estavel_pct": 80.17999999999999
+    },
+    {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ideb_2025_af",
+      "rho": 0.32208016421988495,
+      "rho_abs": 0.32208016421988495,
+      "ic95": [
+        -0.5896618941607872,
+        0.8783523140123373
+      ],
+      "sinal_estavel_pct": 79.0
+    },
+    {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ganho_ideb_ai",
+      "rho": 0.2857243743174461,
+      "rho_abs": 0.2857243743174461,
+      "ic95": [
+        -0.5675675675675675,
+        0.8974358974358972
+      ],
+      "sinal_estavel_pct": 68.47999999999999
+    },
+    {
+      "indicador": "pib_per_capita",
+      "desfecho": "ganho_ideb_ai",
+      "rho": -0.2857243743174461,
+      "rho_abs": 0.2857243743174461,
+      "ic95": [
+        -0.995644546904641,
+        0.5757593594126973
+      ],
+      "sinal_estavel_pct": 58.4
+    },
+    {
+      "indicador": "renda_responsavel",
+      "desfecho": "ideb_2025_ai",
+      "rho": -0.2845213189769458,
+      "rho_abs": 0.2845213189769458,
+      "ic95": [
+        -0.8384359417244028,
+        0.7217512077294684
+      ],
+      "sinal_estavel_pct": 64.98
+    },
+    {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ganho_ideb_ai",
+      "rho": 0.26051340011296553,
+      "rho_abs": 0.26051340011296553,
+      "ic95": [
+        -0.6491299524362321,
+        0.7614678899082569
+      ],
+      "sinal_estavel_pct": 82.19999999999999
+    },
+    {
+      "indicador": "agua_rede_geral_pct",
+      "desfecho": "ideb_2025_ai",
+      "rho": 0.20920685218893076,
+      "rho_abs": 0.20920685218893076,
+      "ic95": [
+        -0.5263157894736842,
+        0.846153846153846
+      ],
+      "sinal_estavel_pct": 84.22
+    },
+    {
+      "indicador": "esgoto_rede_pct",
+      "desfecho": "ideb_2025_af",
+      "rho": -0.18646746349572288,
+      "rho_abs": 0.18646746349572288,
+      "ic95": [
+        -0.810344827586207,
+        0.7393286210618054
+      ],
+      "sinal_estavel_pct": 75.2
+    },
+    {
+      "indicador": "renda_responsavel",
+      "desfecho": "ideb_2025_af",
+      "rho": -0.16951587590520262,
+      "rho_abs": 0.16951587590520262,
+      "ic95": [
+        -0.8245614035087718,
+        0.7336314490088525
+      ],
+      "sinal_estavel_pct": 65.58
+    },
+    {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ganho_ideb_ai",
+      "rho": -0.16807316136320358,
+      "rho_abs": 0.16807316136320358,
+      "ic95": [
+        -0.8113207547169811,
+        0.8111124468803917
+      ],
+      "sinal_estavel_pct": 70.54
+    },
+    {
+      "indicador": "internet_domicilios_pct",
+      "desfecho": "ideb_2025_ai",
+      "rho": -0.16736548175114463,
+      "rho_abs": 0.16736548175114463,
+      "ic95": [
+        -0.8181836200155737,
+        0.6180516646426805
+      ],
+      "sinal_estavel_pct": 75.44
+    },
+    {
+      "indicador": "pib_per_capita",
+      "desfecho": "ideb_2025_af",
+      "rho": 0.13561270072416207,
+      "rho_abs": 0.13561270072416207,
+      "ic95": [
+        -0.8148286008898825,
+        0.8858774457751719
+      ],
+      "sinal_estavel_pct": 63.480000000000004
+    },
+    {
+      "indicador": "renda_responsavel",
+      "desfecho": "ganho_ideb_ai",
+      "rho": -0.12605487102240268,
+      "rho_abs": 0.12605487102240268,
+      "ic95": [
+        -0.8518858307849133,
+        0.6167939547439613
+      ],
+      "sinal_estavel_pct": 58.84
+    },
+    {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ideb_2025_ai",
+      "rho": 0.05857791861290061,
+      "rho_abs": 0.05857791861290061,
+      "ic95": [
+        -0.8114505798857538,
+        0.7142857142857142
+      ],
+      "sinal_estavel_pct": 62.56
+    },
+    {
+      "indicador": "pib_per_capita",
+      "desfecho": "ideb_2025_ai",
+      "rho": 0.04184137043778616,
+      "rho_abs": 0.04184137043778616,
+      "ic95": [
+        -0.8434782608695652,
+        0.8276032059191135
+      ],
+      "sinal_estavel_pct": 68.42
+    },
+    {
+      "indicador": "lixo_coletado_pct",
+      "desfecho": "ideb_2025_ai",
+      "rho": 0.03347309635022892,
+      "rho_abs": 0.03347309635022892,
+      "ic95": [
+        -0.7297686022097145,
+        0.8620689655172415
+      ],
+      "sinal_estavel_pct": 68.72
+    },
+    {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "desfecho": "ideb_2025_af",
+      "rho": 0.0,
+      "rho_abs": 0.0,
+      "ic95": [
+        -0.8500331705159767,
+        0.7382042237619334
+      ],
+      "sinal_estavel_pct": 48.74
+    }
+  ],
+  "ranking_agregado": [
+    {
+      "indicador": "banheiro_exclusivo_pct",
+      "familia": "Saneamento",
+      "r_medio": 0.45967586866740007,
+      "|r|_medio": 0.45967586866740007,
+      "rho_medio": 0.43473890861983683,
+      "sinal_estavel_medio_pct": 84.23333333333333
+    },
+    {
+      "indicador": "agua_rede_geral_pct",
+      "familia": "Saneamento",
+      "r_medio": 0.41116328289610043,
+      "|r|_medio": 0.41116328289610043,
+      "rho_medio": 0.28653558896128745,
+      "sinal_estavel_medio_pct": 86.17999999999999
+    },
+    {
+      "indicador": "lixo_coletado_pct",
+      "familia": "Saneamento",
+      "r_medio": 0.310717429412724,
+      "|r|_medio": 0.310717429412724,
+      "rho_medio": 0.2529762826139342,
+      "sinal_estavel_medio_pct": 75.84
+    },
+    {
+      "indicador": "esgoto_rede_pct",
+      "familia": "Saneamento",
+      "r_medio": -0.21967268788010652,
+      "|r|_medio": 0.21967268788010652,
+      "rho_medio": -0.341758791721737,
+      "sinal_estavel_medio_pct": 78.80666666666667
+    },
+    {
+      "indicador": "internet_domicilios_pct",
+      "familia": "Conectividade",
+      "r_medio": -0.1697435670917391,
+      "|r|_medio": 0.1697435670917391,
+      "rho_medio": -0.2248234649749178,
+      "sinal_estavel_medio_pct": 77.85333333333334
+    },
+    {
+      "indicador": "renda_responsavel",
+      "familia": "Renda/desigualdade",
+      "r_medio": -0.16284200905586954,
+      "|r|_medio": 0.16284200905586954,
+      "rho_medio": -0.1933640219681837,
+      "sinal_estavel_medio_pct": 63.13333333333333
+    },
+    {
+      "indicador": "pib_per_capita",
+      "familia": "Renda/desigualdade",
+      "r_medio": 0.15379582477922954,
+      "|r|_medio": 0.15379582477922954,
+      "rho_medio": -0.036090101051832614,
+      "sinal_estavel_medio_pct": 63.43333333333334
+    },
+    {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "familia": "Capital humano",
+      "r_medio": 0.0726105502087759,
+      "|r|_medio": 0.08187754468188183,
+      "rho_medio": 0.11476743097678223,
+      "sinal_estavel_medio_pct": 59.92666666666667
+    }
+  ],
+  "perfil_crateus": {
+    "taxa_alfabetizacao_15_pct": {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "valor_crateus": 82.12,
+      "mediana_micro": 76.64,
+      "melhor_micro": 82.12,
+      "pior_micro": 72.93,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.08187754468188183
+    },
+    "agua_rede_geral_pct": {
+      "indicador": "agua_rede_geral_pct",
+      "valor_crateus": 78.5,
+      "mediana_micro": 72.67,
+      "melhor_micro": 90.99,
+      "pior_micro": 59.6,
+      "acima_mediana": true,
+      "posicao_relativa": 0.6021025804396305,
+      "gap_melhor_pct": 13.726783162984937,
+      "|r|_medio": 0.41116328289610043
+    },
+    "esgoto_rede_pct": {
+      "indicador": "esgoto_rede_pct",
+      "valor_crateus": 48.56,
+      "mediana_micro": 16.16,
+      "melhor_micro": 48.56,
+      "pior_micro": 0.45,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.21967268788010652
+    },
+    "lixo_coletado_pct": {
+      "indicador": "lixo_coletado_pct",
+      "valor_crateus": 80.55,
+      "mediana_micro": 64.8,
+      "melhor_micro": 85.56,
+      "pior_micro": 47.9,
+      "acima_mediana": true,
+      "posicao_relativa": 0.8669676048858204,
+      "gap_melhor_pct": 5.855539971949515,
+      "|r|_medio": 0.310717429412724
+    },
+    "banheiro_exclusivo_pct": {
+      "indicador": "banheiro_exclusivo_pct",
+      "valor_crateus": 94.82,
+      "mediana_micro": 93.87,
+      "melhor_micro": 97.27,
+      "pior_micro": 89.63,
+      "acima_mediana": true,
+      "posicao_relativa": 0.6793193717277484,
+      "gap_melhor_pct": 2.518762208286217,
+      "|r|_medio": 0.45967586866740007
+    },
+    "internet_domicilios_pct": {
+      "indicador": "internet_domicilios_pct",
+      "valor_crateus": 83.46,
+      "mediana_micro": 79.66,
+      "melhor_micro": 83.46,
+      "pior_micro": 72.86,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.1697435670917391
+    },
+    "renda_responsavel": {
+      "indicador": "renda_responsavel",
+      "valor_crateus": 1676.7,
+      "mediana_micro": 1172.89,
+      "melhor_micro": 1676.7,
+      "pior_micro": 1045.85,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.16284200905586954
+    },
+    "pib_per_capita": {
+      "indicador": "pib_per_capita",
+      "valor_crateus": 12661.3,
+      "mediana_micro": 9854.38,
+      "melhor_micro": 12661.3,
+      "pior_micro": 8694.35,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.15379582477922954
+    }
+  },
+  "matriz_prioridade": [
+    {
+      "indicador": "agua_rede_geral_pct",
+      "valor_crateus": 78.5,
+      "mediana_micro": 72.67,
+      "melhor_micro": 90.99,
+      "pior_micro": 59.6,
+      "acima_mediana": true,
+      "posicao_relativa": 0.6021025804396305,
+      "gap_melhor_pct": 13.726783162984937,
+      "|r|_medio": 0.41116328289610043
+    },
+    {
+      "indicador": "lixo_coletado_pct",
+      "valor_crateus": 80.55,
+      "mediana_micro": 64.8,
+      "melhor_micro": 85.56,
+      "pior_micro": 47.9,
+      "acima_mediana": true,
+      "posicao_relativa": 0.8669676048858204,
+      "gap_melhor_pct": 5.855539971949515,
+      "|r|_medio": 0.310717429412724
+    }
+  ],
+  "alavancas": [
+    {
+      "indicador": "banheiro_exclusivo_pct",
+      "valor_crateus": 94.82,
+      "mediana_micro": 93.87,
+      "melhor_micro": 97.27,
+      "pior_micro": 89.63,
+      "acima_mediana": true,
+      "posicao_relativa": 0.6793193717277484,
+      "gap_melhor_pct": 2.518762208286217,
+      "|r|_medio": 0.45967586866740007
+    }
+  ],
+  "nao_alavancas": [
+    {
+      "indicador": "taxa_alfabetizacao_15_pct",
+      "valor_crateus": 82.12,
+      "mediana_micro": 76.64,
+      "melhor_micro": 82.12,
+      "pior_micro": 72.93,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.08187754468188183
+    },
+    {
+      "indicador": "internet_domicilios_pct",
+      "valor_crateus": 83.46,
+      "mediana_micro": 79.66,
+      "melhor_micro": 83.46,
+      "pior_micro": 72.86,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.1697435670917391
+    },
+    {
+      "indicador": "renda_responsavel",
+      "valor_crateus": 1676.7,
+      "mediana_micro": 1172.89,
+      "melhor_micro": 1676.7,
+      "pior_micro": 1045.85,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.16284200905586954
+    },
+    {
+      "indicador": "pib_per_capita",
+      "valor_crateus": 12661.3,
+      "mediana_micro": 9854.38,
+      "melhor_micro": 12661.3,
+      "pior_micro": 8694.35,
+      "acima_mediana": true,
+      "posicao_relativa": 1.0,
+      "gap_melhor_pct": 0.0,
+      "|r|_medio": 0.15379582477922954
+    }
+  ],
+  "metadados": {
+    "fonte": "IBGE Censo 2022 (SIDRA) + INEP IDEB + IBGE PIB",
+    "bootstrap": {
+      "seed": 42,
+      "reamostragens": 5000,
+      "ic": "percentil 2.5/97.5"
+    },
+    "anti_overclaim": "n=9; associação != causalidade; IC95 amplos; sinal estável >= 90%",
+    "limite_financas": "FINBRA/SICONFI e indicadores educacionais escolares indisponíveis via API no momento da coleta"
+  }
+}
