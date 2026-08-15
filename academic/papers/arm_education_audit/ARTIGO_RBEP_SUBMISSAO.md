@@ -6,6 +6,8 @@
 
 **Título en español:** Educación terciaria y trayectorias de ingreso: evidencia asociativa de panel con validación cruzada agrupada por país (135 economías, 1960–2023)
 
+**Autor:** Marcelo Claro Laranjeira — ORCID: https://orcid.org/0000-0001-8996-2887
+
 ---
 
 ## Resumo
