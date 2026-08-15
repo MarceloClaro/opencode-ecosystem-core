@@ -19,9 +19,14 @@
   "fe": {
    "coef": 2.6068,
    "se": 2.1406,
-   "ic95_inf": -1.5888,
-   "ic95_sup": 6.8023,
+   "ic95_inf": -1.6446,
+   "ic95_sup": 6.8581,
    "p_valor": 0.2264,
+   "se_cluster": 1.787,
+   "ic95_cluster_inf": -1.514,
+   "ic95_cluster_sup": 6.7275,
+   "p_valor_cluster": 0.1828,
+   "n_clusters": 9,
    "n": 108,
    "n_municipios": 9,
    "anos": [
@@ -54,9 +59,14 @@
   "fe": {
    "coef": 0.0013,
    "se": 0.1453,
-   "ic95_inf": -0.2836,
-   "ic95_sup": 0.2861,
+   "ic95_inf": -0.2837,
+   "ic95_sup": 0.2863,
    "p_valor": 0.9931,
+   "se_cluster": 0.1318,
+   "ic95_cluster_inf": -0.2589,
+   "ic95_cluster_sup": 0.2614,
+   "p_valor_cluster": 0.9924,
+   "n_clusters": 184,
    "n": 2202,
    "n_municipios": 184,
    "anos": [
@@ -92,6 +102,11 @@
    "ic95_inf": 0.0753,
    "ic95_sup": 0.1459,
    "p_valor": 0.0,
+   "se_cluster": 0.0222,
+   "ic95_cluster_inf": 0.067,
+   "ic95_cluster_sup": 0.1542,
+   "p_valor_cluster": 0.0,
+   "n_clusters": 5360,
    "n": 48695,
    "n_municipios": 5360,
    "anos": [
@@ -177,10 +192,13 @@
   ]
  },
  "mdes_tost_micro": {
-  "mdes": 6.0533,
+  "mdes_cluster": 5.7093,
+  "mdes_homocedastico": 6.0533,
+  "mdes": 5.7093,
   "tost_delta": 0.1,
-  "p_tost": 0.8779,
-  "leitura": "não-detecção (não permite declarar equivalência)"
+  "p_tost": 0.9009,
+  "leitura": "não-detecção (não permite declarar equivalência)",
+  "nota": "MDES/TOST baseados no SE clusterizado por município (dof = G-1 = 8)"
  },
  "h3_estagnacao": {
   "n_linhas": 8148,
@@ -89876,6 +89894,6 @@
   "defasagem_pib_anos": 2,
   "meta_ano": 2021,
   "seed": 42,
-  "gerado_em": "2026-08-15T16:06:52.216678+00:00"
+  "gerado_em": "2026-08-15T16:38:51.419392+00:00"
  }
 }

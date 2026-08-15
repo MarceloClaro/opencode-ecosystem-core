@@ -1,6 +1,6 @@
-"""Testes do ciclo R426 — estudo Crateús-IDEB (Sertão de Cratéus × padrão ARM).
+"""Testes do ciclo R426 — estudo Crateús-IDEB (Sertão de Cratéus).
 
-Valida: SPEC-935-R426-crateus-ideb.md, dados/scripts/resultados/mapas/manuscrito.
+Valida: SPEC-935-R426-crateus-ideb.md, dados/scripts/resultados/mapas/figuras/manuscrito.
 """
 import json
 import hashlib
@@ -16,6 +16,7 @@ PAPER = RAIZ / "academic" / "papers" / "crateus_ideb"
 PROC = PAPER / "data" / "processed"
 OUT = PAPER / "outputs" / "expanded"
 MAPAS = PAPER / "outputs" / "mapas"
+FIGURAS = PAPER / "outputs" / "figuras"
 SCRIPTS = PAPER / "scripts"
 DOCS = PAPER / "docs"
 
@@ -85,8 +86,10 @@ def test_h1_niveis_positivo_micro():
 def test_h2_dentro_nula_micro():
     r = json.loads((OUT / "resultados_r426.json").read_text())
     fe = r["microrregiao"]["fe"]
-    # intervalo de confiança do FE contém zero (não-detecção)
-    assert fe["ic95_inf"] < 0 < fe["ic95_sup"]
+    # SE clusterizado presente e IC95% cluster contém zero (não-detecção)
+    assert "se_cluster" in fe and "ic95_cluster_inf" in fe
+    assert fe["ic95_cluster_inf"] < 0 < fe["ic95_cluster_sup"]
+    assert fe["n_clusters"] == 9
     d1 = r["microrregiao"]["primeiras_diferencas"]
     assert abs(d1["r"]) < 0.2
 
@@ -160,3 +163,56 @@ def test_manuscrito_referencias_com_doi():
             "10.18222/eae.v35.10549", "10.1590/S0101-73302013000300013"]
     for doi in dofs:
         assert doi in texto, doi
+
+
+# ---------- pesquisa original (sem estudo anterior; RQ explícita) ----------
+
+def test_manuscrito_sem_referencia_estudo_anterior():
+    texto = (DOCS / "ARTIGO_CRATEUS_RBEP.md").read_text(encoding="utf-8")
+    for termo in ["estudo anterior", "espelho", "espelhando", "espelhado",
+                  "padrão nacional", "padrão associativo nacional", "reproduz o padrão"]:
+        assert termo.lower() not in texto.lower(), termo
+    # "padrão associativo" pode aparecer como conceito (sem nacional/anterior); verificar que
+    # nenhuma menção remete a estudo prévio
+    assert "estudo anterior" not in texto.lower()
+    assert "ARM" not in texto
+
+
+def test_manuscrito_pergunta_de_pesquisa():
+    texto = (DOCS / "ARTIGO_CRATEUS_RBEP.md").read_text(encoding="utf-8")
+    assert "Pergunta de pesquisa" in texto or "RQ" in texto
+    assert "transversal" in texto and "temporal" in texto
+
+
+def test_manuscrito_figuras_referenciadas():
+    texto = (DOCS / "ARTIGO_CRATEUS_RBEP.md").read_text(encoding="utf-8")
+    for i in range(1, 7):
+        assert f"Figura {i} —" in texto, i
+    # gráficos e mapas presentes no markdown
+    assert "outputs/figuras/fig_scatter_niveis_micro.png" in texto
+    assert "outputs/figuras/fig_serie_ideb_micro.png" in texto
+    assert "outputs/figuras/fig_loocv_r_teste.png" in texto
+    assert "outputs/figuras/fig_scatter_ganho_renda.png" in texto
+    assert "outputs/mapas/mapa_renda_responsavel_censo2022.png" in texto
+    assert "outputs/mapas/mapa_pib_per_capita_2021.png" in texto
+
+
+def test_manuscrito_quatro_tabelas():
+    texto = (DOCS / "ARTIGO_CRATEUS_RBEP.md").read_text(encoding="utf-8")
+    for i in range(1, 5):
+        assert f"**Tabela {i} —" in texto or f"**Tabela {i} —" in texto, i
+
+
+# ---------- figuras geradas (gráficos) ----------
+
+def test_figuras_geradas():
+    for f in ["fig_scatter_niveis_micro.png", "fig_serie_ideb_micro.png",
+              "fig_loocv_r_teste.png", "fig_scatter_ganho_renda.png"]:
+        p = FIGURAS / f
+        assert p.exists() and p.stat().st_size > 10_000, f
+    m = json.loads((FIGURAS / "figuras_manifest.json").read_text(encoding="utf-8"))
+    assert len(m["figuras"]) == 4
+
+
+def test_script_graficos_existe():
+    assert (SCRIPTS / "graficos_crateus.py").exists()
