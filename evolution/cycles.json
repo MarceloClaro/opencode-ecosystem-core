@@ -4461,6 +4461,31 @@
     "academic/papers/crateus_ideb/docs/NOTA_TECNICA_CRATEUS_INDICADORES.md",
     "tests/test_r427_crateus_diagnostico.py"
    ]
+  },
+  {
+   "round_id": "R428",
+   "objective": "Correções completas da auditoria Qualis A1 do artigo Crateús-IDEB: between, FE cluster-robusto + wild sob H0, PIB real (IPCA), H3 por ano, TOST/MDES, LOOCV interno, lags, missingness, referências verificadas",
+   "changes": [
+    "SPEC-935-R428-crateus-correcoes-auditoria.md (7 CAs, 20 achados mapeados)",
+    "scripts/analise_crateus_r428.py: between bootstrap por cluster; FE município×etapa+ano com t(G-1) e wild cluster bootstrap sob H0 (p=0,2302); lags 0-4; H3 por ano; TOST ±0,5; MDES 6,01/0,57; missingness; LOOCV interno; jackknife; deflação IPCA",
+    "data/processed/ipca_medias_anuais.json: deflator IPEA Data PRECOS12_IPCA12 (fator 2021/ano); deflação mudou pooled micro 0,487->0,159",
+    "outputs/expanded/resultados_r428.json + provenance_r428.json",
+    "docs/ARTIGO_CRATEUS_RBEP.md + latex/ARTIGO_CRATEUS_RBEP.tex reescritos (Crateús, LOOCV interno, H3 ano a ano, PIB real, TOST/MDES, missingness, referências com paginação real; PAIC nota; agreed target)",
+    "latex/ARTIGO_CRATEUS_RBEP.pdf compilado; outputs/docx/ regenerado (ABNT)",
+    "scripts/verificar_consistencia_manuscrito_r428.py (Tabela 4 inteira vs ai_2021_detalhe)",
+    "tests/test_r428_crateus_correcoes.py (20 testes)",
+    "requirements.txt"
+   ],
+   "score": 95.0,
+   "lessons": [
+    "Wild cluster bootstrap com G=9 exige reamostragem sob H0 (resíduos restritos); sob alternativa p=0,0 espúrio",
+    "Deflação IPCA mudou pooled micro de 0,487 para 0,159; FE com efeito de ano absorve fatores nacionais",
+    "Testes de paridade tabela↔JSON pegam erro de cópia de linha (Ararendá/Independência na Tabela 4)",
+    "Atingiu ≠ superou: Quiterianópolis empatou meta 2021 (5,9=5,9)",
+    "Título de obra é fiel à fonte (Aprendizagem vs Alfabetização) com nota explícita",
+    "Re-auditoria delta: APROVADO (9,5/10 honestidade); nenhum P0/P1 remanescente"
+   ],
+   "timestamp": 1786823483.2093322
   }
  ]
 }

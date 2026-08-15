@@ -1,0 +1,144 @@
+{
+ "ciclo": "R428",
+ "resumo_resultados": {
+  "micro_between": {
+   "n_municipios": 9,
+   "r_between": -0.2374,
+   "ic95_inf": -0.7682,
+   "ic95_sup": 0.5012,
+   "p_bootstrap_cluster": 0.5156,
+   "bootstrap_b": 5000
+  },
+  "micro_fe": {
+   "especificacao": "municipio_x_etapa + ano",
+   "coef": 2.6068,
+   "se": 1.2841,
+   "p_valor": 0.0456,
+   "se_cluster": 1.8814,
+   "ic95_cluster_inf": -1.7317,
+   "ic95_cluster_sup": 6.9452,
+   "p_valor_cluster_t": 0.2033,
+   "p_wild_cluster_bootstrap": 0.2302,
+   "wild_b": 9999,
+   "n_clusters": 9,
+   "n": 108,
+   "n_municipios": 9,
+   "n_etapas": 2
+  },
+  "mdes_tost": {
+   "mdes_cluster": 6.0109,
+   "mdes_homocedastico": 3.6313,
+   "mdes_por_10pct_pib_real": 0.5729,
+   "leitura_mdes": "O estudo detectaria um coeficiente temporal de 5,71 pontos de IDEB por unidade de log do PIB real; em termos substantivos, não detectaria nem um efeito de +10% de crescimento do PIB per capita real que movesse o IDEB em 0,54 ponto.",
+   "tost": {
+    "0.1": {
+     "delta": 0.1,
+     "p_tost": 0.8903
+    },
+    "0.5": {
+     "delta": 0.5,
+     "p_tost": 0.8524
+    }
+   },
+   "leitura_tost": "TOST com margem substantiva (SESOI ±0.5 ponto de IDEB): se p<0,05 equivalência; caso contrário, precisão insuficiente para delimitar a região de equivalência (não é prova de ausência de efeito).",
+   "sesoi_nota": "SESOI de 0,5 ponto de IDEB ancorado na literatura de políticas educacionais (efeitos de intervenções de alfabetização/melhoria situam-se nessa ordem)."
+  },
+  "h3_ai_2021": [
+   {
+    "cod_mun": 2301257,
+    "nome": "Ararendá",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 9.5,
+    "meta_inep": 5.3,
+    "atingiu": true
+   },
+   {
+    "cod_mun": 2304103,
+    "nome": "Crateús",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 6.5,
+    "meta_inep": 5.2,
+    "atingiu": true
+   },
+   {
+    "cod_mun": 2305605,
+    "nome": "Independência",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 8.7,
+    "meta_inep": 5.2,
+    "atingiu": true
+   },
+   {
+    "cod_mun": 2305654,
+    "nome": "Ipaporanga",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 6.6,
+    "meta_inep": 6.1,
+    "atingiu": true
+   },
+   {
+    "cod_mun": 2308609,
+    "nome": "Monsenhor Tabosa",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 6.3,
+    "meta_inep": 4.4,
+    "atingiu": true
+   },
+   {
+    "cod_mun": 2309300,
+    "nome": "Nova Russas",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 7.2,
+    "meta_inep": 5.1,
+    "atingiu": true
+   },
+   {
+    "cod_mun": 2309409,
+    "nome": "Novo Oriente",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 8.9,
+    "meta_inep": 5.6,
+    "atingiu": true
+   },
+   {
+    "cod_mun": 2311264,
+    "nome": "Quiterianópolis",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 5.9,
+    "meta_inep": 5.9,
+    "atingiu": true
+   },
+   {
+    "cod_mun": 2313203,
+    "nome": "Tamboril",
+    "etapa": "anos_iniciais",
+    "ano": 2021,
+    "ideb_observado": 6.6,
+    "meta_inep": 4.4,
+    "atingiu": true
+   }
+  ],
+  "h3_ganho_renda": {
+   "r": -0.1364,
+   "p_valor": 0.7264,
+   "n": 9,
+   "nota": "n=9; poder baixo; associação não discernível de zero — não é evidência de equivalência."
+  }
+ },
+ "sha256_scripts": {
+  "analise_crateus_r428.py": "868dcef6d0ffb678f596dddf1d3afda426c2ecbcaf62a3560c4bcc1e0e8e98dc"
+ },
+ "ipca": {
+  "fonte": "IPEA Data",
+  "serie": "PRECOS12_IPCA12",
+  "sha256_json": "132ce1a9574a6a69d0eaf8a715df5227bef203460ea833bf198bb0d3e6028b37"
+ }
+}
