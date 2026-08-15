@@ -4236,6 +4236,102 @@
         "Restaurar a string exata do contrato (regressor 'como regressor') é mais seguro que flexibilizar o teste; o teste R414 é o guard da contradição 4.5 vs 3.2c"
       ],
       "timestamp": 1786669157.7112012
+    },
+    {
+      "round_id": "R418",
+      "objective": "Caso brasileiro em perspectiva comparada no artigo RBEP (seção 4.8), sem alterar a amostra de 135 países",
+      "changes": [
+        "Brasil fora da amostra principal por cobertura WDI (SE.TER.ENRR só a partir de 2012; 11 obs < limiar 20); confirmado via API oficial",
+        "Sensibilidade de limiar ≥20/15/10 medida; decisão: manter 135 países e tratar Brasil como estudo de caso (janela 2012-2022)",
+        "Seção 4.8 no MD e TeX + Tabela 8: Brasil 43,834→61,000 (+17,166 p.p.; PIB pc −0,149%/ano) vs renda média asiática, EUA, Europa Ocidental, China",
+        "Cobertura desbalanceada declarada (EUA/DEU 2013+, PRT 2015+, VNM lacunas); crescimento sobre número real de anos, sem imputação",
+        "Proveniência fechada outputs/expanded/provenance_r418.json + tabela8_brasil_comparado.csv (sha256 dos crus)",
+        "Teste R418 (26 testes): script/proveniência/tabela, valores-chave, seção no MD/TeX, anti-overclaim, âncoras numéricas, PDF",
+        "Bug corrigido: ZG já vem em percentual (removido fator 100)"
+      ],
+      "score": 46.5,
+      "lessons": [
+        "Validar cache de dados contra a fonte externa antes de reutilizar números de turnos anteriores (data/ é gitignored e pode ser regenerado)",
+        "Cobertura desbalanceada: declarar janela real por unidade e calcular crescimento com anos efetivos, sem imputação",
+        "Indicadores WDI *_ZG já vêm em percentual; não multiplicar por 100",
+        "Gate de âncoras numéricas: normalizar separador de milhar ('1.462' → 1462) antes de comparar"
+      ],
+      "timestamp": 1786699590.030052
+    },
+    {
+      "round_id": "R418",
+      "objective": "Caso brasileiro em perspectiva comparada no artigo RBEP (seção 4.8), sem alterar a amostra de 135 países",
+      "changes": [
+        "Brasil fora da amostra principal por cobertura WDI (SE.TER.ENRR só a partir de 2012; 11 obs < limiar 20); confirmado via API oficial",
+        "Sensibilidade de limiar ≥20/15/10 medida; decisão: manter 135 países e tratar Brasil como estudo de caso (janela 2012-2022)",
+        "Seção 4.8 no MD e TeX + Tabela 8: Brasil 43,834→61,000 (+17,166 p.p.; PIB pc −0,149%/ano) vs renda média asiática, EUA, Europa Ocidental, China",
+        "Cobertura desbalanceada declarada (EUA/DEU 2013+, PRT 2015+, VNM lacunas); crescimento sobre número real de anos, sem imputação",
+        "Proveniência fechada outputs/expanded/provenance_r418.json + tabela8_brasil_comparado.csv (sha256 dos crus)",
+        "Teste R418 (26 testes): script/proveniência/tabela, valores-chave, seção no MD/TeX, anti-overclaim, âncoras numéricas, PDF",
+        "Bug corrigido: ZG já vem em percentual (removido fator 100)"
+      ],
+      "score": 46.5,
+      "lessons": [
+        "Validar cache de dados contra a fonte externa antes de reutilizar números de turnos anteriores (data/ é gitignored e pode ser regenerado)",
+        "Cobertura desbalanceada: declarar janela real por unidade e calcular crescimento com anos efetivos, sem imputação",
+        "Indicadores WDI *_ZG já vêm em percentual; não multiplicar por 100",
+        "Gate de âncoras numéricas: normalizar separador de milhar ('1.462' → 1462) antes de comparar"
+      ],
+      "timestamp": 1786699599.8824053
+    },
+    {
+      "round_id": "R419",
+      "objective": "Estatística da hipótese, amostragem e confiabilidade no artigo RBEP (seção 4.9); enquadrar tabelas e manuscrito nas margens ABNT",
+      "changes": [
+        "Margens ABNT: build limpo com 0 Overfull/0 Underfull (16 páginas); Tabela 8 com resizebox eliminou estouro de 113 pt",
+        "Teste formal da hipótese por bootstrap por país (500 replicações, seed 42): Δ=0,604 (0,751−0,146), IC95% [0,547; 0,665], p<0,001; IC95% ρ níveis [0,697; 0,809] e ρ 1ªdif [0,118; 0,177] sem sobreposição",
+        "Amostragem formal: população 217 países oficiais WDI; 135 elegíveis (≥20 obs); 82 excluídos por motivo (13 sem matrícula, 2 sem PIB, 2 sem ambos, 65 com <20 obs); cobertura 1.350 obs/década 1960-2019 e 540 em 2020-2023",
+        "Confiabilidade: IC95% bootstrap por país + robustez de semente (42, 7, 2024, 123) — Δ estável em 0,604, IC95% 0,543-0,665, p<0,001",
+        "Seção 4.9 no MD/TeX (Tabelas 9-11, numeração automática), âncoras em 3.1 e 4.2; substituiu 'IC95% percentil' por 'intervalo de confiança empírico' (termo bloqueado)",
+        "Correção: classificação de exclusões usa dados brutos (load_series), não o painel já filtrado; split do teste R418 ajustado para o marcador ### 4.9"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Nova subseção de resultados exige fechar a extração das seções anteriores nos testes pelo marcador da seção seguinte",
+        "Classificar exclusões amostrais exige dados brutos, não o painel já elegível (senão categorias tautológicas)",
+        "Termo 'percentil' é bloqueado pelos gates de anti-overclaim; usar 'intervalo de confiança empírico'",
+        "EvolutionRegistry exige chaves round_id/objective/changes/score/lessons/timestamp — chaves extras quebram o carregamento"
+      ],
+      "timestamp": "2026-08-14T06:40:00"
+    },
+    {
+      "round_id": "R420",
+      "objective": "Apêndice A — Glossário de símbolos, códigos e abreviaturas; avaliação conceitual da q-estatística",
+      "changes": [
+        "Avaliação: q-exponencial/q-estatística NÃO implementada na análise central — sem ganho inferencial (inferência já robusta via cluster e bootstrap por país), sem ancoragem teórica (Tsallis é para interações de longo alcance), diagnóstico mostra leptocurtose +3,27 com assimetria -1,11",
+        "Apêndice A no MD e TeX: A.1 símbolos estatísticos, A.2 códigos WDI/WGI (18 indicadores), A.3 abreviaturas (15 siglas)",
+        "TeX com \\appendix, resizebox (0 Overfull), sem \\caption*, fonte após \\end{tabular}",
+        "Testes R420 (15) + ajuste do R410 (split do apêndice na ordem alfabética das referências)"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Conteúdo pós-referências exige ajustar testes que extraem a lista de referências pelo marcador 'Referências'",
+        "\\caption* é proibido no projeto (bug de numeração R411); usar título em negrito + nota de fonte após \\end{tabular}",
+        "No TeX, 'P&D' é escrito 'P\\&D'; testes de conteúdo devem usar a variante escapada",
+        "q-estatística não agrega valor inferencial a desenho observacional com bootstrap não paramétrico"
+      ],
+      "timestamp": "2026-08-14T07:05:00"
+    },
+    {
+      "round_id": "R421",
+      "objective": "Compilar o artigo RBEP em DOCX com formatação ABNT e auditabilidade",
+      "changes": [
+        "Script export_docx_rbep.py: reference ABNT (margens 3/3/2/2 cm, A4, Times 12, espaçamento 1,5) + pandoc + pós-processamento python-docx (bordas Table Grid)",
+        "Artefato outputs/docx/ARTIGO_RBEP_SUBMISSAO.docx (14 tabelas, apêndice incluído, TOC)",
+        "MANIFEST.json com sha256 do MD, DOCX e reference",
+        "Testes R421 (11): margens, A4, tabelas, conteúdo crítico, apêndice após referências"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Pandoc + reference.docx + python-docx produz DOCX ABNT sem LibreOffice",
+        "Manifest sha256 fecha a proveniência também para artefato Word"
+      ],
+      "timestamp": "2026-08-14T07:15:00"
     }
   ]
 }

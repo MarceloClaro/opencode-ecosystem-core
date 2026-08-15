@@ -1,0 +1,143 @@
+{
+  "painel_fonte": "panel_wdi_expandido_1960_2023.csv (R412)",
+  "sha256_raw": {
+    "NY.GDP.PCAP.KD": "72a50916aa0ccccf123a20e086bd8e2944eedd3562a6bbc16c237f00f90b0354",
+    "SE.TER.ENRR": "06a0192056b381903f0e9fae3fe0f3028469d7e9ff7061debf8f94862c8c5df7",
+    "manifest_expandido.json": "09de86af2c4c240d01b401575d85204fef85da8a3d397b1c806546dd2ef832d3"
+  },
+  "sha256_countries_meta": "4bca8777553d4e674df745b0628cbb8bf5efe838ef8f5cb606ad3b15d48b3302",
+  "proveniencia_fechada": true,
+  "n_paises": 135,
+  "n_pais_ano": 8640,
+  "hipotese": {
+    "enunciado": "A associação matrícula terciária × renda é forte entre países (níveis) e fraca dentro do país (primeiras diferenças).",
+    "h0": "ρ_níveis − ρ_1ªdif ≤ 0",
+    "h1": "ρ_níveis − ρ_1ªdif > 0",
+    "metodo": "bootstrap por país (re-amostragem de países com reposição, 500 replicações, seed 42); IC95% percentil",
+    "n_boot": 500,
+    "n_replicacoes_validas": 500,
+    "seed": 42,
+    "rho_niveis_obs": 0.7507618573866992,
+    "rho_diferencas_obs": 0.14646046480537914,
+    "delta_obs": 0.6043013925813201,
+    "delta_ic95_inf": 0.5473770973863664,
+    "delta_ic95_sup": 0.6651027628407574,
+    "p_valor_delta_positivo": 0.0,
+    "p_valor_delta_interpretacao": "proporção de replicações bootstrap com Δ ≤ 0; p < 0,05 indica que a diferença ρ_níveis − ρ_1ªdif é estatisticamente positiva",
+    "rho_niveis_ic95_inf": 0.6972552903331188,
+    "rho_niveis_ic95_sup": 0.8087490202738982,
+    "rho_diferencas_ic95_inf": 0.11815276602517291,
+    "rho_diferencas_ic95_sup": 0.17663516165795426
+  },
+  "amostragem": {
+    "populacao": {
+      "n_paises_oficiais_wdi": 217,
+      "definicao": "países oficiais do WDI com região definida (excluídos agregados e territórios sem ISO3)"
+    },
+    "criterio_elegibilidade": ">= 20 observações não nulas de matrícula terciária E de PIB per capita (sem imputação)",
+    "elegiveis": 135,
+    "amostra_final": 135,
+    "exclusoes": {
+      "total_paises_excluidos": 82,
+      "por_motivo": {
+        "elegivel": 135,
+        "menos_de_20_obs": 65,
+        "sem_matricula": 13,
+        "sem_matricula_e_sem_pib": 2,
+        "sem_pib": 2
+      }
+    },
+    "por_regiao": {
+      "populacao": {
+        "Europe & Central Asia": 58,
+        "Sub-Saharan Africa": 48,
+        "Latin America & Caribbean": 42,
+        "East Asia & Pacific": 37,
+        "Middle East, North Africa, Afghanistan & Pakistan": 23,
+        "South Asia": 6,
+        "North America": 3
+      },
+      "amostra": {
+        "Europe & Central Asia": 40,
+        "Sub-Saharan Africa": 34,
+        "Middle East, North Africa, Afghanistan & Pakistan": 20,
+        "Latin America & Caribbean": 20,
+        "East Asia & Pacific": 15,
+        "South Asia": 5,
+        "North America": 1
+      }
+    },
+    "cobertura_decadas": {
+      "1960s": {
+        "n_pais_ano": 1350,
+        "n_paises": 135
+      },
+      "1970s": {
+        "n_pais_ano": 1350,
+        "n_paises": 135
+      },
+      "1980s": {
+        "n_pais_ano": 1350,
+        "n_paises": 135
+      },
+      "1990s": {
+        "n_pais_ano": 1350,
+        "n_paises": 135
+      },
+      "2000s": {
+        "n_pais_ano": 1350,
+        "n_paises": 135
+      },
+      "2010s": {
+        "n_pais_ano": 1350,
+        "n_paises": 135
+      },
+      "2020s": {
+        "n_pais_ano": 540,
+        "n_paises": 135
+      }
+    },
+    "nota": "A seleção é condicionada à disponibilidade de dados, não aleatória; a generalização vale para a amostra observada."
+  },
+  "confiabilidade": {
+    "metodo": "IC95% bootstrap por país (percentil 2,5%–97,5%) e robustez de semente",
+    "sementes": [
+      {
+        "seed": 42,
+        "delta_obs": 0.6043013925813201,
+        "delta_ic95_inf": 0.5473770973863664,
+        "delta_ic95_sup": 0.6651027628407574,
+        "p_valor_delta_positivo": 0.0,
+        "rho_niveis_obs": 0.7507618573866992,
+        "rho_diferencas_obs": 0.14646046480537914
+      },
+      {
+        "seed": 7,
+        "delta_obs": 0.6043013925813201,
+        "delta_ic95_inf": 0.5452781963509142,
+        "delta_ic95_sup": 0.6599862022177525,
+        "p_valor_delta_positivo": 0.0,
+        "rho_niveis_obs": 0.7507618573866992,
+        "rho_diferencas_obs": 0.14646046480537914
+      },
+      {
+        "seed": 2024,
+        "delta_obs": 0.6043013925813201,
+        "delta_ic95_inf": 0.5430669476656979,
+        "delta_ic95_sup": 0.658267809883847,
+        "p_valor_delta_positivo": 0.0,
+        "rho_niveis_obs": 0.7507618573866992,
+        "rho_diferencas_obs": 0.14646046480537914
+      },
+      {
+        "seed": 123,
+        "delta_obs": 0.6043013925813201,
+        "delta_ic95_inf": 0.547885476331847,
+        "delta_ic95_sup": 0.6605657177439362,
+        "p_valor_delta_positivo": 0.0,
+        "rho_niveis_obs": 0.7507618573866992,
+        "rho_diferencas_obs": 0.14646046480537914
+      }
+    ]
+  }
+}
