@@ -97,7 +97,7 @@ Esta revisão é seletiva e orientada por critérios explícitos: foram consulta
 
 \subsection{Dados}
 
-Os dados provêm da API do World Development Indicators e do Worldwide Governance Indicators do Banco Mundial (WORLD BANK, 2024; KAUFMANN; KRAAY; MASTRUZZI, 2011), com download em 13 de agosto de 2026 e cache local imutável (URL, timestamp UTC, status HTTP e hash SHA-256 de cada arquivo em \path{data/raw_expandido/manifest_expandido.json}). A amostra compreende 135 economias (1960--2023), selecionadas por critério transparente: países listados no banco oficial do Banco Mundial, com pelo menos 20 observações não nulas de matrícula terciária e de PIB per capita no período. Agregados regionais e territórios sem código ISO3 de país foram excluídos. A seleção não é probabilística, mas é explícita e reprodutível; não se alega representatividade amostral de um universo de países.
+Os dados provêm da API do World Development Indicators e do Worldwide Governance Indicators do Banco Mundial (WORLD BANK, 2024; KAUFMANN; KRAAY; MASTRUZZI, 2011), com download em 13 de agosto de 2026 e cache local imutável (URL, timestamp UTC, status HTTP e hash SHA-256 de cada arquivo em \path{data/raw_expandido/manifest_expandido.json}). A amostra compreende 135 economias (1960--2023), selecionadas por critério transparente: países listados no banco oficial do Banco Mundial, com pelo menos 20 observações não nulas de matrícula terciária e de PIB per capita no período. Agregados regionais e territórios sem código ISO3 de país foram excluídos. A seleção não é probabilística, mas é explícita e reprodutível; não se alega representatividade amostral de um universo de países. O detalhamento do processo de amostragem --- população, critérios de elegibilidade, motivos de exclusão e cobertura temporal --- é apresentado na subseção 4.9.
 
 As variáveis utilizadas são:
 \begin{itemize}\raggedright
@@ -159,7 +159,7 @@ WGI\_RL & WGI --- Estado de direito & 3.374 & $-$0,15 & 0,92 \\
 
 \subsection{Associações em níveis e em primeiras diferenças}
 
-Em níveis, a matrícula terciária correlaciona 0,751 com o log do PIB per capita (n = 4374; Tabela 2), resultado de magnitude elevada, mas típico de comparações entre países em estágios muito diferentes de desenvolvimento. Em primeiras diferenças por país, a correlação cai para 0,146 (n = 4373). A queda reduz a associação a uma ordem de grandeza compatível com associações de magnitude modesta e com a presença de ciclos, indicando que a covariância de níveis é dominada pela heterogeneidade persistente entre economias.
+Em níveis, a matrícula terciária correlaciona 0,751 com o log do PIB per capita (n = 4374; Tabela 2), resultado de magnitude elevada, mas típico de comparações entre países em estágios muito diferentes de desenvolvimento. Em primeiras diferenças por país, a correlação cai para 0,146 (n = 4373). A queda reduz a associação a uma ordem de grandeza compatível com associações de magnitude modesta e com a presença de ciclos, indicando que a covariância de níveis é dominada pela heterogeneidade persistente entre economias. A diferença entre as duas correlações é testada formalmente na subseção 4.9, com bootstrap por país ($\Delta$ = 0,604; IC95\% 0,547 a 0,665; p $<$ 0,001).
 
 \begin{table}[htbp]
 \centering
@@ -283,6 +283,105 @@ Gasto educacional $\times$ WGI controle da corrupção & 0,341 & [0,247; 0,423] 
 \par\vspace{3pt}{\footnotesize Fonte: elaboração própria. \path{outputs/channels/provenance_r413.json}. Bootstrap por país (500 replicações, semente 42); painel FE com erros padrão clusterizados por país; sem inferência causal.}
 \end{table}
 
+\subsection{O caso brasileiro em perspectiva comparada}
+
+O Brasil está ausente da amostra principal por uma limitação de cobertura, e não por decisão analítica: o WDI reporta matrícula terciária para o país apenas a partir de 2012 (11 observações não nulas até 2022, abaixo do limiar de 20 exigido para compor o painel de 135 economias). Para situar o caso brasileiro, a Tabela 8 compara o Brasil com a renda média asiática (China, Indonésia, Malásia, Tailândia e Vietnã), os Estados Unidos, a Europa Ocidental (Alemanha, França, Reino Unido, Itália, Espanha e Portugal), a China e dois vizinhos latino-americanos de renda média (México e Argentina), todos na janela comum 2012--2022, com a mesma fonte WDI. A cobertura é desbalanceada --- os Estados Unidos e a Alemanha iniciam a série em 2013 e Portugal em 2015 ---, e o crescimento médio anual do PIB per capita é calculado sobre o número real de anos disponíveis em cada unidade, sem imputação.
+
+\begin{table}[htbp]
+\centering
+\caption{Caso brasileiro em perspectiva comparada (janela 2012--2022)}
+\label{tab:brasil}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{5.2cm}cccc}
+\toprule
+Unidade & Matrícula (início) & Matrícula (fim) & $\Delta$ matrícula (p.p.) & Cresc. médio anual PIB pc (\%) \\
+\midrule
+Brasil (2012--2022) & 43,834 & 61,000 & +17,166 & $-$0,149 \\
+Argentina (2012--2022) & 78,147 & 107,104 & +28,957 & $-$0,353 \\
+México (2012--2022) & 29,350 & 46,406 & +17,056 & 0,233 \\
+Renda média asiática (2012--2022) & 34,333 & 47,788 & +13,455 & 3,579 \\
+Estados Unidos (2013--2022) & 88,726 & 79,362 & $-$9,364 & 1,811 \\
+Europa Ocidental (2012--2022) & 65,575 & 78,773 & +13,199 & 1,063 \\
+China (2012--2022) & 29,308 & 71,580 & +42,272 & 5,814 \\
+\bottomrule
+\end{tabular}}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. \path{outputs/expanded/provenance_r418.json}; valores completos em \path{outputs/expanded/tabela8_brasil_comparado.csv}. Matrícula terciária bruta (WDI, SE.TER.ENRR); PIB per capita em dólares constantes (WDI, NY.GDP.PCAP.KD); janela comum 2012--2022; médias de grupo sobre os países com observação no ano; sem imputação.}
+\end{table}
+
+Na década observada, o Brasil elevou a matrícula terciária de 43,834\% para 61,000\%, um acréscimo de 17,166 pontos percentuais, em um contexto de PIB per capita aproximadamente estacionário ($-$0,149\% ao ano). O contraste com a China é o mais pronunciado: o país asiático partiu de um patamar inferior ao brasileiro (29,308\%) e alcançou 71,580\% (+42,272 p.p.), com crescimento econômico de 5,814\% ao ano. A comparação com os vizinhos latino-americanos é igualmente reveladora. A Argentina iniciou o período com matrícula já elevada (78,147\%) e atingiu 107,104\% em 2022 --- valor acima de 100\%, característico de matrícula bruta que incorpora alunos fora da faixa etária típica ---, com expansão de 28,957 p.p. e PIB per capita em leve declínio ($-$0,353\% ao ano). O México partiu de 29,350\%, patamar semelhante ao chinês e inferior ao brasileiro, e alcançou 46,406\% (+17,056 p.p.), com crescimento econômico modesto (0,233\% ao ano). Entre os grupos de referência, a Europa Ocidental avançou +13,199 p.p. (1,063\% ao ano) e a renda média asiática +13,455 p.p. (3,579\% ao ano), enquanto os Estados Unidos registraram declínio ($-$9,364 p.p.), evidenciando a heterogeneidade das trajetórias mesmo entre economias de alta renda.
+
+Em relação à associação global de níveis estimada na janela, o Brasil posiciona-se acima da linha predita pela renda: o resíduo médio do log da matrícula terciária é +0,318 (n = 1.462 observações país-ano). Em outras palavras, a matrícula brasileira em 2012--2022 é mais alta do que a sugerida pela sua renda per capita na relação transversal média das economias com dados no período --- um padrão descritivo, sem inferência sobre relação de efeito. Dentro do país, a associação entre variações anuais da matrícula e do PIB per capita é indistinguível de zero (Spearman das primeiras diferenças = 0,418; p = 0,229; n = 10), consistente com o achado central do artigo: a associação matrícula terciária $\times$ renda se manifesta sobretudo entre países, não dentro de um mesmo país no curto prazo. A comparação ilustra, portanto, que avanços expressivos de matrícula podem ocorrer em contexto de estagnação ou mesmo declínio da renda per capita --- como no Brasil e na Argentina ---, e que tais avanços, ainda que reais, não se traduzem automaticamente em crescimento econômico na dimensão temporal observada (PRITCHETT, 2001). O contraste latino-americano com a China sugere que a intensidade da expansão educacional esteve associada, no período, a trajetórias de crescimento distintas, mas essa leitura permanece descritiva: a direção da relação entre escolaridade e renda não pode ser estabelecida com os dados observacionais aqui empregados (HANUSHEK; WOESSMANN, 2010).
+
+% ----------------------------------------------------------------------
+% 4.9 Estatística da hipótese, amostragem e confiabilidade
+% ----------------------------------------------------------------------
+\subsection{Estatística da hipótese, amostragem e confiabilidade}
+
+A hipótese central deste estudo --- a associação matrícula terciária $\times$ renda é forte entre países (níveis) e fraca dentro do país (primeiras diferenças) --- é avaliada formalmente. Formulada como H0: $\rho_{\text{níveis}} - \rho_{\text{primeiras diferenças}} \le 0$ contra H1: $\rho_{\text{níveis}} - \rho_{\text{primeiras diferenças}} > 0$, a hipótese é testada por bootstrap por país: os 135 países são re-amostrados com reposição (500 replicações, semente fixa) e as duas correlações são recalculadas em cada replicação (Tabela 9). A diferença observada é $\Delta$ = 0,604 (0,751 $-$ 0,146), com intervalo de confiança de 95\% entre 0,547 e 0,665; nenhuma das 500 replicações apresentou diferença não positiva (p $<$ 0,001). O teste rejeita a igualdade entre as correlações: a queda de 0,751 para 0,146 não é ruído amostral, mas um padrão sistemático do painel --- a covariância de níveis é dominada pela heterogeneidade persistente entre economias, não por uma associação contemporânea dentro do país.
+
+\begin{table}[htbp]
+\centering
+\caption{Teste formal da hipótese: diferença entre correlações em níveis e em primeiras diferenças}
+\label{tab:hipotese}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.2cm}cccc}
+\toprule
+Estatística & Valor & IC95\% inf. & IC95\% sup. \\
+\midrule
+$\rho$ em níveis & 0,751 & 0,697 & 0,809 \\
+$\rho$ em primeiras diferenças & 0,146 & 0,118 & 0,177 \\
+$\Delta = \rho_{\text{níveis}} - \rho_{\text{1\AA dif}}$ & 0,604 & 0,547 & 0,665 \\
+p ($\Delta \le 0$) & $<$ 0,001 & --- & --- \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. Bootstrap por país com 500 replicações e semente fixa; intervalo de confiança de 95\% empírico. Valores completos em \path{outputs/expanded/provenance_r419.json} e \path{outputs/expanded/tabela9_hipotese.csv}.}
+\end{table}
+
+A amostragem é documentada de forma fechada (Tabela 10). A população-alvo é o conjunto de países oficiais do WDI com região definida (217 economias; excluídos os agregados regionais e territórios sem ISO3). A elegibilidade exige ao menos 20 observações não nulas de matrícula terciária e de PIB per capita no período, sem imputação; 135 países satisfazem o critério e todos compõem a amostra final. Os 82 países excluídos dividem-se por motivo: 13 sem série de matrícula terciária; 2 sem série de PIB per capita; 2 sem nenhuma das duas; e 65 com as duas séries, mas com menos de 20 observações não nulas. A cobertura temporal é balanceada: 1.350 observações país-ano em cada década completa (135 países $\times$ 10 anos) entre 1960 e 2019 e 540 no quadriênio 2020--2023. A seleção é condicionada à disponibilidade de dados, não aleatória; a generalização vale para a amostra observada.
+
+\begin{table}[htbp]
+\centering
+\caption{Processo de amostragem: população e amostra por região}
+\label{tab:amostragem}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.0cm}cc}
+\toprule
+Região & População & Amostra \\
+\midrule
+Ásia Oriental e Pacífico & 37 & 15 \\
+Europa e Ásia Central & 58 & 40 \\
+América Latina e Caribe & 42 & 20 \\
+Oriente Médio e Norte da África & 23 & 20 \\
+América do Norte & 3 & 1 \\
+Ásia Meridional & 6 & 5 \\
+África Subsaariana & 48 & 34 \\
+\textbf{Total} & \textbf{217} & \textbf{135} \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria a partir de \path{data/raw_expandido/wdi_countries_meta.json} e séries WDI. Valores completos em \path{outputs/expanded/tabela10_amostragem.csv}.}
+\end{table}
+
+A confiabilidade das estatísticas centrais é atestada por intervalos de confiança bootstrap por país (Tabela 11): o $\rho$ de níveis tem IC95\% entre 0,697 e 0,809, e o $\rho$ de primeiras diferenças entre 0,118 e 0,177; os intervalos não se sobrepõem, reforçando a separação entre as duas associações. A robustez de semente é verificada com três sementes alternativas (7, 2024 e 123): em todas, o $\Delta$ observado permanece 0,604, com IC95\% entre 0,543 e 0,665 e p $<$ 0,001.
+
+\begin{table}[htbp]
+\centering
+\caption{Robustez de semente do teste da hipótese}
+\label{tab:confiabilidade}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}ccccc}
+\toprule
+Semente & $\Delta$ observado & IC95\% inf. & IC95\% sup. & p ($\Delta \le 0$) \\
+\midrule
+42 & 0,604 & 0,547 & 0,665 & $<$ 0,001 \\
+7 & 0,604 & 0,545 & 0,660 & $<$ 0,001 \\
+2024 & 0,604 & 0,543 & 0,658 & $<$ 0,001 \\
+123 & 0,604 & 0,548 & 0,661 & $<$ 0,001 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. Valores completos em \path{outputs/expanded/tabela11_confiabilidade.csv}.}
+\end{table}
+
 % ----------------------------------------------------------------------
 % 5. Discussão
 % ----------------------------------------------------------------------
@@ -351,6 +450,108 @@ ROMER, P. M. Endogenous technological change. \textbf{Journal of Political Econo
 VANDENBUSSCHE, J.; AGHION, P.; MEGHIR, C. Growth, distance to frontier and composition of human capital. \textbf{Journal of Economic Growth}, v. 11, n. 2, p. 97-127, 2006. DOI: 10.1007/s10887-006-9002-y.
 
 WORLD BANK. \textbf{World Development Report 2024: The Middle-Income Trap}. Washington, DC: World Bank, 2024. DOI: \href{https://doi.org/10.1596/978-1-4648-2078-6}{10.1596/978-1-4648-2078-6}.
+
+% ----------------------------------------------------------------------
+% Apêndice A — Glossário de símbolos, códigos e abreviaturas
+% ----------------------------------------------------------------------
+\appendix
+\section*{Apêndice A --- Glossário de símbolos, códigos e abreviaturas}
+
+Este apêndice consolida os símbolos estatísticos, os códigos oficiais dos indicadores e as siglas utilizadas no manuscrito, para facilitar a leitura. Todos os códigos referem-se ao World Development Indicators (WDI) e ao Worldwide Governance Indicators (WGI) do Banco Mundial.
+
+\subsection*{A.1 Símbolos estatísticos}
+
+\begin{table}[htbp]
+\centering
+\noindent\textbf{Glossário A.1 --- Símbolos estatísticos}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{11.0cm}}
+\toprule
+Símbolo & Significado \\
+\midrule
+$\rho$ & coeficiente de correlação de Spearman (ordinal), entre $-$1 e 1 \\
+$\rho_{\text{níveis}}$ & correlação em níveis (valores observados de cada ano) \\
+$\rho_{\text{1\AA dif}}$ & correlação das primeiras diferenças por país \\
+$\Delta$ & operador de primeira diferença: variação de um ano para o seguinte, calculada por país \\
+$\ln$ & logaritmo natural (base $e$) \\
+IC95\% & intervalo de confiança de 95\% (empírico, por bootstrap, salvo indicação) \\
+$p$ & nível descritivo (probabilidade de observar o resultado sob a hipótese nula) \\
+$n$ & número de observações \\
+$H_0$ & hipótese nula \\
+$H_1$ & hipótese alternativa \\
+p.p. & pontos percentuais (diferença entre duas porcentagens) \\
+D.P. & desvio-padrão \\
+$\beta$ & coeficiente de regressão \\
+WGI\_media & média aritmética dos seis indicadores WGI \\
+\bottomrule
+\end{tabular}}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria.}
+\end{table}
+
+\subsection*{A.2 Códigos de indicadores (WDI/WGI)}
+
+\begin{table}[htbp]
+\centering
+\noindent\textbf{Glossário A.2 --- Códigos de indicadores}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.4cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{7.0cm}}
+\toprule
+Código & Indicador & Descrição \\
+\midrule
+\texttt{NY.GDP.PCAP.KD} & PIB per capita (US\$ const.) & produto interno bruto per capita em dólares constantes \\
+\texttt{NY.GDP.PCAP.KD.ZG} & Crescimento do PIB pc (\%) & crescimento anual do PIB per capita, já em percentual \\
+\texttt{SE.TER.ENRR} & Matrícula terciária (\% bruto) & matrícula no ensino superior como proporção do grupo etário correspondente \\
+\texttt{SE.XPD.TOTL.GD.ZS} & Gasto educacional (\% PIB) & gasto público em educação como proporção do PIB \\
+\texttt{GB.XPD.RSDV.GD.ZS} & P\&D (\% PIB) & dispêndio em pesquisa e desenvolvimento como proporção do PIB \\
+\texttt{NV.IND.MANF.ZS} & Manufatura (\% PIB) & valor adicionado da manufatura como proporção do PIB \\
+\texttt{BX.KLT.DINV.WD.GD.ZS} & IDE (\% PIB) & investimento direto estrangeiro líquido como proporção do PIB \\
+\texttt{TX.VAL.TECH.MF.ZS} & Alta tecnologia (\% exp.) & exportações de alta tecnologia como proporção das exportações de manufaturados \\
+\texttt{SP.URB.TOTL.IN.ZS} & Urbanização (\% pop.) & população urbana como proporção do total \\
+\texttt{SP.DYN.LE00.IN} & Expectativa de vida & expectativa de vida ao nascer, em anos \\
+\texttt{SI.POV.GINI} & Desigualdade & coeficiente de Gini \\
+\texttt{CC.EST} & WGI --- controle da corrupção & percepção do exercício do poder público para ganho privado \\
+\texttt{GE.EST} & WGI --- efetividade governamental & qualidade dos serviços públicos e da formulação de políticas \\
+\texttt{PV.EST} & WGI --- estabilidade política & probabilidade percebida de instabilidade ou violência política \\
+\texttt{RQ.EST} & WGI --- qualidade regulatória & capacidade de formular e aplicar regulações adequadas \\
+\texttt{RL.EST} & WGI --- estado de direito & confiança nas regras da sociedade e na aplicação de contratos \\
+\texttt{VA.EST} & WGI --- voz e prestação de contas & participação dos cidadãos e liberdade de expressão \\
+\bottomrule
+\end{tabular}}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria. Códigos conforme World Development Indicators e Worldwide Governance Indicators (Banco Mundial).}
+\end{table}
+
+\subsection*{A.3 Abreviaturas}
+
+\begin{table}[htbp]
+\centering
+\noindent\textbf{Glossário A.3 --- Abreviaturas}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{11.0cm}}
+\toprule
+Sigla & Significado \\
+\midrule
+WDI & World Development Indicators (Banco Mundial) \\
+WGI & Worldwide Governance Indicators (Banco Mundial) \\
+PIB & produto interno bruto \\
+P\&D & pesquisa e desenvolvimento \\
+FE & efeitos fixos (de país e de ano, no painel) \\
+LOOCV & validação cruzada leave-one-country-out (exclusão de um país por vez) \\
+RF & floresta aleatória (random forest) \\
+ROC & receiver operating characteristic; a área sob a curva ROC mede a capacidade preditiva \\
+GroupKFold & validação cruzada agrupada por país (país de teste ausente do treino) \\
+ML & aprendizado de máquina (machine learning) \\
+ISO3 & código ISO 3166-1 alfa-3, identificador de país com três letras \\
+RBEP & Revista Brasileira de Estudos de População (periódico-alvo) \\
+IDE & investimento direto estrangeiro \\
+SHA-256 & função hash criptográfica de 256 bits, usada na verificação de integridade dos dados \\
+UTC & Tempo Universal Coordenado \\
+\bottomrule
+\end{tabular}}
+\par\vspace{3pt}{\footnotesize Fonte: elaboração própria.}
+\end{table}
 
 \endgroup
 

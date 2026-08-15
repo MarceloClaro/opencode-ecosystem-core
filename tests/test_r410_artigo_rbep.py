@@ -99,7 +99,11 @@ class TestNormasABNT:
 
     def test_referencias_ordem_alfabetica(self):
         texto = ARTIGO.read_text(encoding="utf-8")
-        refs_bloco = texto.split("Referências")[-1]
+        bloco = texto.split("Referências")[-1]
+        # apêndice (R420) não faz parte da lista de referências
+        if "## Apêndice" in bloco:
+            bloco = bloco.split("## Apêndice")[0]
+        refs_bloco = bloco
         linhas = [l.strip() for l in refs_bloco.splitlines()
                   if l.strip() and not l.startswith("#")]
         sobrenomes = [l.split(",")[0].upper() for l in linhas if l.split(",")]
