@@ -42,7 +42,7 @@ TERMOS_BLOQUEADOS = [
 def secao_49(texto: str) -> str:
     assert "### 4.9" in texto or "\\subsection{Estatística da hipótese" in texto
     if "### 4.9" in texto:
-        return texto.split("### 4.9")[1].split("## 5.")[0]
+        return texto.split("### 4.9")[1].split("### 4.10")[0]
     return texto.split("\\subsection{Estatística da hipótese")[1].split("\\section{Discussão}")[0]
 
 
@@ -188,7 +188,7 @@ class TestSecaoNoArtigo:
 
     def test_tabelas_9_10_11_no_md(self):
         texto = MD.read_text(encoding="utf-8")
-        secao = texto.split("### 4.9")[1].split("## 5.")[0]
+        secao = texto.split("### 4.9")[1].split("### 4.10")[0]
         for ref in ["Tabela 9", "Tabela 10", "Tabela 11"]:
             assert ref in secao
 

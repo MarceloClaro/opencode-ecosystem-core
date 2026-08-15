@@ -1,0 +1,84 @@
+{
+  "ciclo": "R423",
+  "spec": "SPEC-935-R423-metodologia-suplementar.md",
+  "painel_entrada": {
+    "caminho": "data/processed/panel_wdi_expandido_1960_2023.csv",
+    "sha256": "5fc56158a3be53a5f66eb5a136fb411096632c990d198eebe40414a14bb11b53"
+  },
+  "folds_entrada": {
+    "caminho": "outputs/expanded/loocv_folds_expanded.json",
+    "sha256": "73b6243cb5347d2e79e6787d7741a7798a1199d2cb3c8cbf0add2a3ac282a9e7"
+  },
+  "loocv_dispersao": {
+    "n_folds_validos": 135,
+    "n_folds_total": 135,
+    "rho_teste_media": 0.541673509696646,
+    "rho_teste_mediana": 0.7778592375366569,
+    "rho_teste_dp": 0.5083114197691819,
+    "rho_teste_iqr": 0.5675131056386389,
+    "rho_teste_min": -0.9529411764705883,
+    "rho_teste_max": 0.9948139255702281,
+    "rho_teste_pct_positivo": 82.96296296296296,
+    "n_obs_por_pais_min": 20,
+    "n_obs_por_pais_max": 54,
+    "corr_n_obs_x_abs_rho_teste": 0.2479603182628673,
+    "corr_n_obs_x_abs_rho_teste_p": 0.0037355083526072344,
+    "corr_n_obs_x_rho_teste": 0.21493928275597918,
+    "corr_n_obs_x_rho_teste_p": 0.012297925909485006,
+    "rho_teste_media_ic95_inf": 0.4538676279585108,
+    "rho_teste_media_ic95_sup": 0.6227563002042683,
+    "bootstrap_replicacoes": 2000,
+    "semente": 42
+  },
+  "painel_fe_sem_cluster": {
+    "especificacao": "ln_tertiaria ~ ln_gdp_pc_lag5 + controles + FE pais + FE ano",
+    "lag_anos": 5,
+    "erros": "homocedasticos_sem_cluster",
+    "coef": 0.07275270149514974,
+    "se": 0.0554383592980029,
+    "ic_95_inf": -0.03603485231789884,
+    "ic_95_sup": 0.18154025530819834,
+    "p_value": 0.18971134830240127,
+    "n_clusters": 106,
+    "n_obs": 1146
+  },
+  "painel_fe_cluster_referencia": {
+    "coef": 0.07275270149514657,
+    "ic_95_inf": -0.16862666914781863,
+    "ic_95_sup": 0.3141320721381118,
+    "se": 0.06157750156302231,
+    "p_value": 0.5546940168247241,
+    "n_clusters": 106,
+    "n_obs": 1146
+  },
+  "tost_deteccao": {
+    "coef_cluster": 0.07275270149514657,
+    "ic_95_inf": -0.16862666914781863,
+    "ic_95_sup": 0.3141320721381118,
+    "se_cluster": 0.06157750156302231,
+    "mdes_poder80_alpha5": 0.1725146181472915,
+    "z_alpha": 1.959963984540054,
+    "z_poder80": 0.8416212335729143,
+    "tost_010": {
+      "bound": 0.1,
+      "se_coef": 0.06157750156302231,
+      "t_upper": -0.4424878862122529,
+      "p_upper": 0.3290680971500767,
+      "t_lower": -2.805451619668923,
+      "p_lower": 0.002512306188648519,
+      "p_tost": 0.3290680971500767,
+      "conclusao": "nao_rejeita_efeito_pequeno"
+    },
+    "tost_005": {
+      "bound": 0.05,
+      "se_coef": 0.06157750156302231,
+      "t_upper": 0.36949699025804106,
+      "p_upper": 0.6441213419349661,
+      "t_lower": -1.993466743198629,
+      "p_lower": 0.02310518085396515,
+      "p_tost": 0.6441213419349661,
+      "conclusao": "nao_rejeita_efeito_pequeno"
+    }
+  },
+  "nota": "MDES = (z_0,975 + z_0,80) x SE; TOST de dois unilaterais com bounds em log da matrícula terciária; p >= 0,05 indica que não se pode descartar efeito de magnitude superior ao bound."
+}
