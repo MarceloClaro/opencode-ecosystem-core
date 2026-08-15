@@ -4384,6 +4384,24 @@
         "Autoria deve constar no cabeçalho trilíngue e na assinatura da carta"
       ],
       "timestamp": "2026-08-14T08:15:00"
+    },
+    {
+      "round_id": "R425",
+      "objective": "Gerar pacote final de submissão RBEP (ZIP auditável com manuscrito, carta, revisão, proveniência e manifesto)",
+      "changes": [
+        "SPEC-935-R425 com 6 critérios de aceitação",
+        "scripts/empacotar_submissao.py: ZIP em outputs/submission com 01_manuscrito, 02_carta, 03_revisao, 04_dados, README_SUBMISSAO e MANIFEST_SUBMISSAO.json",
+        "MANIFEST_SUBMISSAO.json solto versionado; *.zip ignorado no .gitignore",
+        "test_r425_pacote_submissao.py com 8 testes (estrutura, SHA-256, anti-overclaim, autoria no DOCX)",
+        "Suíte R408-R425 com 377 passed"
+      ],
+      "score": 7.0,
+      "lessons": [
+        "Pacote de submissão deve ser gerado por script reprodutível e auditável via SHA-256; ZIP não versionado, mas script/spec/teste/manifest solto sim",
+        "Testes de DOCX dentro de ZIP exigem io.BytesIO, não Path",
+        "README do pacote repete a nota anti-overclaim 'candidato a submissão'"
+      ],
+      "timestamp": "2026-08-15T09:15:00"
     }
   ]
 }
