@@ -1,0 +1,37 @@
+{
+  "titulo_provisorio": "Geometry-Survival Evidence Gates for Reproducible and Cost-Aware Quantum Kernel Applications Under Noise",
+  "pergunta_primaria": "A acurácia balanceada do kernel quântico supera o SVM-RBF sob seleção interna justa e validação cruzada externa repetida?",
+  "hipotese_primaria": "H1: média pareada de ΔBAC = BAC_QML − BAC_RBF > 0",
+  "hipotese_mecanistica": "H2: maior sobrevivência geométrica ideal→shots→ruído está associada a menor degradação preditiva.",
+  "desfecho_primario": "delta_acuracia_balanceada",
+  "desfechos_secundarios": [
+    "delta_acuracia",
+    "delta_f1",
+    "alinhamento_kernel_alvo",
+    "posto_efetivo_relativo",
+    "erro_frobenius_relativo",
+    "tempo_kernel_s"
+  ],
+  "modelo_referencia": "SVM-RBF",
+  "validacao_externa": "4 folds estratificados × 3 repetições",
+  "validacao_interna": "3 folds estratificados",
+  "grade_C": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "grade_gamma_rbf": [
+    "scale",
+    "auto"
+  ],
+  "alpha": 0.05,
+  "margem_equivalencia_bac": 0.02,
+  "teste_primario": "t corrigido de Nadeau-Bengio para folds dependentes",
+  "analises_sensibilidade": [
+    "permutação exata de sinais",
+    "TOST de equivalência com erro-padrão corrigido",
+    "IC corrigido de 95%",
+    "Holm para desfechos secundários"
+  ],
+  "regra_alegacao": "não usar a expressão vantagem quântica sem ganho, custo de escala, teste externo e validação em hardware"
+}

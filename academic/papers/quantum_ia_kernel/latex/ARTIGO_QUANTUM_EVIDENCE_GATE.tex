@@ -1,0 +1,848 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{microtype}
+
+\hypersetup{
+  colorlinks  = true,
+  linkcolor   = blue!60!black,
+  citecolor   = blue!60!black,
+  urlcolor    = blue!60!black,
+}
+
+\newcommand{\BAC}{\mathrm{BAC}}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eg}{\textit{e.g.}}
+
+\title{Geometry-Survival Evidence Gates for Reproducible and Cost-Aware
+       Quantum Kernel Applications Under Noise}
+
+\author{Marcelo Claro Laranjeira\\[4pt]
+        \textit{Projeto Fundamentos Qu\^anticos Aplicados \`a Pesquisa em IA}\\[2pt]
+        \textit{Protocol frozen: 16 August 2026}\\[2pt]
+        SHA-256:\ 89c08f07f2f03a56c144bd4c4b7eddb71813bb1b043bb90920de8e5e70140eaf}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The deployment of quantum kernel methods in machine learning faces a persistent
+gap between theoretical promise and empirical validation under realistic noise
+conditions. While quantum kernels computed via feature maps on quantum hardware
+may capture geometric structures inaccessible to classical kernels, the
+conditions under which this potential translates into predictive superiority
+remain poorly specified. This study introduces the
+\textbf{Geometry-Survival Evidence Gate}, a prospective, sequential decision
+framework that integrates paired corrected effect estimation, equivalence
+testing, geometric survival analysis across fidelity tiers (ideal statevector,
+shot-based estimation, and depolarised noise), and computational cost
+accounting before authorising progression to full quantum processing unit (QPU)
+classification. The framework was pre-specified via SHA-256 hash and evaluated
+on four tabular datasets (synthetic moons, Iris binary, Wine binary, and Breast
+Cancer Wisconsin) using nested repeated cross-validation (4 outer folds
+$\times$ 3 repetitions) with Nadeau--Bengio correction for dependent folds. The
+primary outcome---paired difference in balanced accuracy between a fidelity
+quantum kernel SVM and a tuned SVM-RBF---yielded a mean $\Delta\BAC$ of
+$-0.217$ (95\% corrected CI $[-0.285;\; -0.148]$; one-sided corrected
+$p=0.9999$), indicating statistical inferiority of the quantum kernel under
+this protocol. Equivalence testing (TOST, margin $\pm 0.02$) yielded
+$p=0.9999$, and the permutation test of signs yielded $p=0.0005$. The
+effective kernel rank was 27.9\% of capacity, and kernel--target alignment was
+0.110. The validity ladder demonstrated geometric survival across all three
+fidelity tiers (BAC stable at 0.625), yet this survival did not translate into
+predictive advantage. The multi-dataset exploratory suite confirmed consistent
+RBF superiority across all 16 folds (mean $\Delta\BAC = -0.146$). The Evidence
+Gate classified this protocol as \textbf{inconclusive for advancement to QPU},
+restricting future hypotheses and providing a transparent, reproducible negative
+result for quantum kernel evaluation on tabular data.
+
+\medskip
+\noindent\textbf{Keywords:} quantum kernel methods; machine learning; nested
+cross-validation; evidence gate; negative result; reproducibility; noise
+characterization
+\end{abstract}
+
+% ── RESUMO ────────────────────────────────────────────────────────────────────
+\selectlanguage{brazil}
+\begin{abstract}
+O emprego de m\'etodos de kernel qu\^antico em aprendizado de m\'aquina enfrenta
+uma lacuna persistente entre a promessa te\'orica e a valida\c{c}\~ao
+emp\'irica sob condi\c{c}\~oes realistas de ru\'ido. Embora kernels qu\^anticos
+computados via feature maps em hardware qu\^antico possam capturar
+geometrias inacess\'iveis a kernels cl\'assicos, as condi\c{c}\~oes sob as
+quais esse potencial se traduz em superioridade preditiva permanecem mal
+especificadas. Este estudo introduz o \textbf{Geometry-Survival Evidence
+Gate}---framework prospectivo e sequencial de decis\~ao que integra
+estimativa de efeito pareado corrigido, teste de equival\^encia, an\'alise de
+sobreviv\^encia geom\'etrica em camadas de fidelidade (statevector ideal,
+estimativa por shots e ru\'ido despolarizante) e contabilidade de custo
+computacional antes de autorizar o avan\c{c}o para classifica\c{c}\~ao
+completa em processador qu\^antico (QPU). O protocolo foi pr\'e-registrado via
+hash SHA-256 e avaliado em quatro bases de dados tabulares (moons sint\'etico,
+Iris bin\'ario, Wine bin\'ario e Breast Cancer Wisconsin) utilizando
+valida\c{c}\~ao cruzada aninhada repetida (4 folds externos $\times$ 3
+repeti\c{c}\~oes) com corre\c{c}\~ao de Nadeau--Bengio para folds dependentes.
+O desfecho prim\'ario---diferen\c{c}a pareada de acur\'acia balanceada entre
+SVM com kernel qu\^antico de fidelidade e SVM-RBF sintonizado---produziu
+$\Delta\BAC$ m\'edio de $-0{,}217$ (IC95\% corrigido $[-0{,}285;\;
+-0{,}148]$; $p$ unicaudal corrigido $= 0{,}9999$), indicando inferioridade
+estat\'istica do kernel qu\^antico neste protocolo. O teste de equival\^encia
+(TOST, margem $\pm 0{,}02$) retornou $p = 0{,}9999$ e o teste de
+permuta\c{c}\~ao de sinais retornou $p = 0{,}0005$. O posto efetivo do kernel
+foi de 27,9\% da capacidade e o alinhamento kernel-alvo foi de 0,110. A escada
+de validade demonstrou sobreviv\^encia geom\'etrica nas tr\^es camadas de
+fidelidade (BAC est\'avel em 0,625), por\'em essa sobreviv\^encia n\~ao se
+converteu em vantagem preditiva. A su\'ite explorat\'oria multibase confirmou
+superioridade consistente do RBF em todos os 16 folds ($\Delta\BAC$ m\'edio
+$= -0{,}146$). O Evidence Gate classificou este protocolo como
+\textbf{inconclusivo para avan\c{c}o a QPU}, restringindo hip\'oteses para
+dados tabulares com feature maps de baixa capacidade e demonstrando o Evidence
+Gate como mecanismo de controle de qualidade para pesquisa em QML.
+
+\medskip
+\noindent\textbf{Palavras-chave:} m\'etodos de kernel qu\^antico; aprendizado
+de m\'aquina; valida\c{c}\~ao cruzada aninhada; gate de evid\^encia; resultado
+negativo; reprodutibilidade; caracteriza\c{c}\~ao de ru\'ido
+\end{abstract}
+\selectlanguage{english}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Introduction}
+\label{sec:intro}
+
+Quantum machine learning (QML) has been presented as one of the most promising
+applications of near-term quantum computing, with claims that quantum kernels
+could capture geometric structures in high-dimensional spaces inaccessible to
+classical approaches \citep{bowles2024better,heyrand2022noisy}. The central
+premise is that a quantum feature map---a parametrised sequence of quantum gates
+that encodes classical data into quantum states---can produce similarity
+matrices (kernels) that, when fed into a classical classifier such as the
+Support Vector Machine (SVM), offer predictive advantage over widely used
+classical kernels such as the Radial Basis Function (RBF)
+\citep{kakavand2026benchmarking}.
+
+However, recent literature has revealed a significant gap between this promise
+and the available empirical evidence. \citet{bowles2024better} demonstrated
+that many QML benchmarks lack strong baselines and adequate control of
+simplistic claims. \citet{kakavand2026benchmarking} conducted the most
+comprehensive study to date---with 970 experiments, nested cross-validation,
+and IBM hardware validation---and concluded that quantum kernels for tabular
+data rarely outperform well-tuned classical baselines.
+\citet{heyrand2022noisy} characterised the geometric distortion induced by
+noise in quantum kernel machines, showing that the effective rank and spectrum
+of the kernel matrix are substantially altered by physical noise channels.
+\citet{yin2025experimental} demonstrated superiority on a photonic processor,
+but on a platform and task that differs from the standard tabular flow.
+\citet{sahin2025quantum} proposed approximation techniques (KTA and
+Nystr\"om) to reduce evaluation cost, but without integrating paired
+corrected inference into the decision flow.
+\citet{aqka2026active} optimised anchor-pair acquisition and shot budgets, but
+presupposes that progression to QPU has already been authorised.
+
+In this landscape, a clear methodological gap emerges: no prospective and
+sequential rule currently exists that integrates criteria of statistical effect,
+equivalence, geometric survival through fidelity tiers, computational cost, and
+hardware validation into a transparent go/no-go decision structure. Existing
+studies treat these criteria in a fragmented manner---either focusing on
+benchmarks without corrected inference, or spectral diagnostics without fidelity
+progression, or cost optimisation without a decision gate.
+
+The present article contributes the \textbf{Geometry-Survival Evidence
+Gate}---a pre-specified decision rule that answers the following operational
+question: \textit{should one proceed from simulation to quantum hardware on a
+given classification task?} The Evidence Gate integrates five sequential
+criteria: (i) statistical superiority of the quantum kernel over the classical
+baseline, assessed by Nadeau--Bengio corrected testing; (ii) practical
+equivalence within a pre-specified margin; (iii) survival of accuracy across
+three fidelity tiers---exact statevector, 2048-shot estimation, and Aer
+depolarised noise simulation; (iv) complete computational cost accounting; and
+(v) anchor-pair validation with minimum-target correlation between ideal
+fidelity and QPU. The rule is binary (go/no-go) and was frozen via SHA-256
+hash before experiment execution.
+
+This study has two declared objectives. The first is to present and formalise
+the Evidence Gate as a reusable methodological contribution for the QML
+community. The second is to honestly report the negative result obtained: under
+the pre-specified protocol, the SVM with fidelity quantum kernel demonstrated
+statistical inferiority to the SVM-RBF on tabular data, with $\Delta\BAC =
+-0.217$ (95\% corrected CI $[-0.285;\; -0.148]$). This result is
+restrictive---it does not settle the question of quantum kernel utility in
+general, but constrains future hypotheses and demonstrates the applicability of
+the Evidence Gate as a quality control mechanism for QML research.
+
+Section~\ref{sec:theory} presents the theoretical background on quantum
+kernels, nested cross-validation, and corrected statistical inference.
+Section~\ref{sec:methods} describes the experimental protocol.
+Section~\ref{sec:results} reports the results.
+Section~\ref{sec:discussion} discusses implications, limitations, and future
+work. Section~\ref{sec:conclusions} concludes.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Theoretical Background}
+\label{sec:theory}
+
+\subsection{Quantum kernels and feature maps}
+\label{ssec:kernels}
+
+A quantum kernel is defined by the similarity function between two data points,
+computed via the inner overlap of quantum states prepared by a parametrised
+circuit \citep{kakavand2026benchmarking}:
+\begin{equation}
+  K(\mathbf{x},\mathbf{y})
+  = \bigl|\langle \phi(\mathbf{x}) | \phi(\mathbf{y})\rangle\bigr|^{2},
+  \label{eq:kernel}
+\end{equation}
+where $|\phi(\mathbf{x})\rangle$ is the quantum state prepared by the feature
+map from the classical data vector $\mathbf{x}$. The ZZFeatureMap used in this
+study applies $R_z$ rotations with angular data encoding followed by
+controlled-Z entangling gates between pairs of qubits, producing interference
+that captures pairwise feature correlations \citep{havlicek2019supervised}. For
+two qubits with one repetition and linear entanglement, the circuit is:
+\begin{equation}
+  U_{\phi}(\mathbf{x})
+  = \exp\!\Bigl(i \textstyle\sum_{S} \phi_{S}(\mathbf{x})
+      \prod_{k\in S} Z_{k}\Bigr)\; H^{\otimes n},
+  \label{eq:featuremap}
+\end{equation}
+where $S$ indexes subsets of qubits with entanglement and $\phi_S$ are data
+encoding functions. The kernel matrix $K$ is evaluated by computing
+$|\langle \phi(\mathbf{x}_i)|\phi(\mathbf{x}_j)\rangle|^{2}$ for all pairs
+$(i,j)$ in the dataset, producing a positive semi-definite matrix that feeds
+the SVM \citep{havlicek2019supervised,kakavand2026benchmarking}.
+
+Exact evaluation of the kernel matrix requires inner overlap computation via
+statevector (perfect quantum simulation). On real hardware, the estimate is
+obtained by sampling (shots): each data pair is prepared as a quantum state,
+measured repeatedly, and fidelity is estimated by outcome counting
+\citep{heyrand2022noisy}. The variance of this estimate scales as
+$O(1/N_{\text{shots}})$, introducing statistical noise that adds to
+hardware physical noise.
+
+\subsection{Noise and geometric degradation}
+\label{ssec:noise}
+
+On real quantum hardware, three error sources affect the kernel matrix: (i)
+gate errors, which distort the prepared state; (ii) readout errors, which
+alter measured outcomes; and (iii) decoherence, which destroys quantum
+correlations \citep{heyrand2022noisy}. Modelable noise channels---such as the
+depolarising channel with parameter $p$---transform the ideal state
+$\rho_0$ into:
+\begin{equation}
+  \mathcal{E}(\rho) = (1-p)\,\rho_0 + \frac{p}{2^{n}}\,I,
+  \label{eq:depolarise}
+\end{equation}
+where $n$ is the number of qubits and $I$ is the identity matrix. This
+distortion alters the kernel matrix spectrum, reducing kernel--target alignment
+and modifying the effective rank \citep{heyrand2022noisy,sahin2025quantum}.
+
+The concept of \textbf{geometric survival}---the maintenance of predictive
+accuracy across successive fidelity tiers
+(statevector$\;\to\;$shots$\;\to\;$noise)---is central to this study.
+Survival is not guaranteed: shot statistical fluctuations can alter
+classification decisions, and physical noise can degrade the kernel structure
+\citep{heyrand2022noisy}. The validity ladder quantifies this survival
+empirically.
+
+\subsection{Nested cross-validation and corrected inference}
+\label{ssec:cv}
+
+Cross-validation (CV) is the standard for generalisation estimation in machine
+learning \citep{refsgaard1999proper}. However, standard CV violates the
+independence assumption between folds, inflating statistical power and
+producing underestimated confidence intervals \citep{nadeau2003inference}.
+Nested CV partially addresses this problem by separating hyperparameter
+selection (inner folds) from generalisation estimation (outer folds)
+\citep{refsgaard1999proper}.
+
+\citet{nadeau2003inference} proposed a correction for the standard error in
+dependent CV estimates:
+\begin{equation}
+  \mathrm{SE}_{\mathrm{corr}}
+  = \mathrm{SE} \times
+    \sqrt{\frac{1}{n_{\text{test}}} + \frac{n_{\text{test}}}{n_{\text{train}}}},
+  \label{eq:nadeau}
+\end{equation}
+where $n_{\text{test}}$ and $n_{\text{train}}$ are the test and training set
+sizes, respectively. This correction is conservative: it produces wider
+confidence intervals that adequately reflect the dependence between folds.
+
+The primary one-sided test---$H_1$: paired mean $\Delta\BAC > 0$---is
+evaluated with the Nadeau--Bengio corrected $t$-statistic. Sensitivity analyses
+include: (i) exact sign permutation, testing $H_0$:
+$\mathrm{median}(\Delta)=0$ without normality assumption; (ii) TOST
+(Two One-Sided Tests) equivalence with pre-specified margin $\pm 0.02$ in BAC;
+and (iii) Holm adjustment for secondary outcomes.
+
+\subsection{Evidence gates in reproducible science}
+\label{ssec:evidencegates}
+
+The concept of an evidence gate has roots in the clinical trials literature and
+open science practices, where go/no-go criteria are pre-specified before data
+collection \citep{scheel2022role}. The Evidence Gate proposed in this study
+adapts this concept to QML, integrating statistical, geometric, and economic
+criteria into a formal decision sequence.
+
+The distinction between the Evidence Gate and existing approaches is important.
+\citet{kakavand2026benchmarking} conducted rigorous benchmarks, but without a
+formal decision rule for when to advance to hardware.
+\citet{aqka2026active} optimised resource allocation, but presupposes prior
+advancement. \citet{bowles2024better} cautioned against simplistic claims, but
+did not provide an operational decision structure. The Evidence Gate fills this
+gap by formalising the question: \textit{based on simulated evidence, should
+one reserve QPU time for this task?}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Experimental design}
+\label{ssec:design}
+
+The study was designed as a comparative computational investigation,
+pre-specified and frozen via SHA-256 hash before execution. The primary outcome
+was the paired difference in balanced accuracy ($\Delta\BAC = \BAC_{\mathrm{QML}} -
+\BAC_{\mathrm{RBF}}$). The pre-specified classification of the result was:
+superiority, inferiority, practical equivalence, or inconclusive.
+
+Four tabular datasets were used: (i) \texttt{make\_moons} (synthetic, 200
+samples, 2 features, Gaussian noise $\sigma=0.1$); (ii) Iris binary (100
+samples, 4 features, classes 0/1); (iii) Wine binary (130 samples, 13
+features, classes 0/1); (iv) Breast Cancer Wisconsin (180 samples, 30
+features, classes malignant/benign). All datasets were binarised and subjected
+to identical preprocessing: missing-value imputation (median), standardisation
+($z$-score), and dimensionality reduction by PCA to 2 components. All
+preprocessing was fit exclusively on the training set in each fold to prevent
+data leakage.
+
+\subsection{Repeated nested cross-validation}
+\label{ssec:ncv}
+
+The validation design used repeated nested CV with: (i) 4 stratified outer
+folds (generalisation estimation); (ii) 3 outer repetitions with different
+seeds; (iii) 3 stratified inner folds (hyperparameter selection). The total
+was 12 outer evaluations per dataset.
+
+In each outer fold, the imputation--standardisation--PCA--angular scaling
+transformation was fit exclusively on the training data. Internal selection
+used a hyperparameter grid: $C \in \{0.1,\; 1.0,\; 10.0\}$ for both SVMs and
+$\gamma \in \{\text{scale},\; \text{auto}\}$ for the RBF. The winning internal
+classifier was selected by mean balanced accuracy on inner folds and then
+re-evaluated on the outer fold.
+
+\subsection{Quantum kernel}
+\label{ssec:qkernel}
+
+The quantum feature map used ZZFeatureMap with 2 qubits, 1 repetition, and
+linear entanglement. The kernel matrix was evaluated across three fidelity tiers
+(validity ladder):
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{Exact statevector:} direct inner overlap computation without
+        sampling---represents the ideal noise-free limit.
+  \item \textbf{2048 shots:} sampling-based estimation with 2048 independent
+        measurements per pair---introduces statistical fluctuation.
+  \item \textbf{Aer with noise:} simulation of the Qiskit Aer depolarising
+        channel with parameters $p_1 = 0.001$ (single-qubit gate error),
+        $p_2 = 0.01$ (two-qubit gate error) and $p_{\text{readout}} = 0.02$
+        (readout error)---represents typical NISQ hardware conditions.
+\end{enumerate}
+
+\subsection{Evidence Gate---decision rule}
+\label{ssec:gate}
+
+The Evidence Gate is a sequential decision rule with five pre-specified
+criteria. The protocol advances through stages only if \textbf{all} criteria
+of the current stage are satisfied:
+
+\medskip
+\noindent\textbf{Stage 1 --- Primary inference:}
+\begin{itemize}
+  \item $\Delta\BAC$ corrected mean $> 0$ (statistical superiority)
+  \item 95\% bilateral corrected CI (Nadeau--Bengio) above zero
+  \item Classification: inferiority, equivalence, or inconclusive
+        $\to$ \textbf{stop}
+\end{itemize}
+
+\noindent\textbf{Stage 2 --- Practical equivalence:}
+\begin{itemize}
+  \item TOST with margin $\pm 0.02$ in BAC yields $p < 0.05$
+  \item If not equivalent $\to$ continue only if Stage 3 is promising
+\end{itemize}
+
+\noindent\textbf{Stage 3 --- Geometric survival:}
+\begin{itemize}
+  \item BAC at exact statevector $\geq$ classical baseline
+  \item BAC with 2048 shots $\geq 95\%$ of statevector BAC
+  \item BAC with Aer noise $\geq 90\%$ of statevector BAC
+  \item Drop $>10\%$ across any transition $\to$ \textbf{stop}
+\end{itemize}
+
+\noindent\textbf{Stage 4 --- Computational cost:}
+\begin{itemize}
+  \item Kernel time recorded and comparable to baseline
+  \item Estimated logical evaluations reported
+  \item Infeasible cost $\to$ \textbf{stop}
+\end{itemize}
+
+\noindent\textbf{Stage 5 --- Anchor pairs and QPU advancement:}
+\begin{itemize}
+  \item Pearson/Spearman correlation ideal--QPU $\geq 0.90$ on anchor pairs
+  \item MAE $\leq 0.10$ between ideal fidelity and QPU on anchor pairs
+  \item Budgetary cost viability
+  \item All satisfied $\to$ \textbf{go} for full QPU classifier
+\end{itemize}
+
+\subsection{Statistical inference}
+\label{ssec:statistics}
+
+The primary test used Nadeau--Bengio correction for fold dependence
+\citep{nadeau2003inference}, with $\alpha = 0.05$ and one-sided test ($H_1$:
+$\mu_{\Delta\BAC} > 0$). Pre-specified sensitivity analyses: (i) exact sign
+permutation with 1024 permutations; (ii) TOST equivalence with margin
+$\pm 0.02$; (iii) paired Cohen's $d_z$; (iv) 95\% bootstrap interval (5000
+resamples); (v) Holm adjustment for secondary outcomes.
+
+\subsection{Kernel diagnostics}
+\label{ssec:diagnostics}
+
+Three diagnostic metrics were recorded at each evaluation: (i) kernel--target
+alignment \citep{bowles2024better}; (ii) effective rank, defined as
+$\exp(-\sum_i p_i \ln p_i)$ where $p_i = \lambda_i / \sum_j \lambda_j$
+\citep{heyrand2022noisy}; (iii) relative Frobenius error between the evaluated
+kernel matrix and the statevector reference.
+
+\subsection{Claim control}
+\label{ssec:claims}
+
+Claim control rules were pre-specified \citep{bowles2024better,kakavand2026benchmarking}:
+\begin{itemize}
+  \item Do not claim ``first study'' without an updated systematic review.
+  \item Do not claim ``quantum advantage'' from simulator accuracy.
+  \item Distinguish predictive superiority, practical equivalence, geometric
+        survival, and computational advantage.
+  \item Report null and negative results without softening.
+  \item Identify as exploratory any analysis not frozen in the SHA-256 protocol.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Results}
+\label{sec:results}
+
+\subsection{Primary result---statistical inferiority}
+\label{ssec:primary}
+
+In repeated nested cross-validation (12 outer evaluations,
+\texttt{make\_moons} dataset), the mean primary outcome was $\Delta\BAC =
+-0.217$, with Nadeau--Bengio corrected 95\% CI $[-0.285;\; -0.148]$ and
+corrected one-sided $p=0.9999$ (Table~\ref{tab:inference}). The confidence
+interval is entirely negative, indicating that the SVM-RBF outperforms the
+fidelity quantum kernel in balanced accuracy within this protocol.
+
+\begin{table}[htbp]
+\centering
+\caption{Statistical inference results for the primary and secondary outcomes.}
+\label{tab:inference}
+\smallskip
+\begin{tabular}{@{}llccc@{}}
+\toprule
+Outcome & Mean & 95\% CI Lower & 95\% CI Upper & Corrected $p$ \\
+\midrule
+$\Delta$ balanced accuracy (primary) & $-0.217$ & $-0.285$ & $-0.148$ & $0.9999$ \\
+$\Delta$ accuracy                      & $-0.217$ & $-0.285$ & $-0.148$ & $2.38\times10^{-5}$ \\
+$\Delta F1$                            & $-0.200$ & $-0.296$ & $-0.104$ & $8.05\times10^{-4}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The paired Cohen's $d_z = -4.495$, indicating a large-magnitude difference
+between models. This value reflects the consistency of the pattern: across all
+12 outer evaluations, the SVM-RBF outperformed the quantum kernel.
+
+\subsection{Sensitivity analyses}
+\label{ssec:sensitivity}
+
+Exact sign permutation (1024 permutations) yielded $p=0.0005$, confirming
+statistical inferiority. TOST equivalence with margin $\pm 0.02$ yielded
+$p=0.9999$, indicating the models are \emph{not} equivalent.
+
+\begin{table}[htbp]
+\centering
+\caption{Pre-specified sensitivity analyses.}
+\label{tab:sensitivity}
+\smallskip
+\begin{tabular}{@{}llll@{}}
+\toprule
+Analysis & Statistic & $p$ / CI & Interpretation \\
+\midrule
+Nadeau--Bengio (one-sided $H_1$: $\Delta>0$) & Corrected $t$ & $p=0.9999$ & No superiority evidence \\
+Sign permutation (bilateral)  & Exact $p$  & $p=0.0005$ & Significant inferiority \\
+TOST equivalence ($\pm 0.02$) & One-sided $p$ & $p=0.9999$ & Not equivalent \\
+Cohen's $d_z$ & $d_z=-4.495$ & --- & Large negative effect \\
+95\% bootstrap $\Delta\BAC$ (5000) & Median & $[-0.563;\; 0.063]$ & Includes zero (uncorrected) \\
+Fraction positive $\Delta$ resamples & --- & 4.2\% & Rarely does quantum kernel win \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Robust validation---outer repetitions}
+\label{ssec:repetitions}
+
+Table~\ref{tab:ncv} presents the 12 outer evaluations.
+
+\begin{table}[htbp]
+\centering
+\caption{Repeated nested cross-validation results (12 outer evaluations).}
+\label{tab:ncv}
+\smallskip
+\footnotesize
+\begin{tabular}{@{}ccccccccc@{}}
+\toprule
+Run & Rep. & Fold & Seed & $\BAC$ RBF & $\BAC$ QML & $\Delta\BAC$ & $C_{\text{RBF}}$ & $C_{\text{QML}}$ & Kernel (s) \\
+\midrule
+ 1 & 1 & 1 & 1051  & 1.000 & 0.767 & $-0.233$ & 10.0 &  1.0 & 0.89 \\
+ 2 & 1 & 2 & 2060  & 0.933 & 0.733 & $-0.200$ & 10.0 &  0.1 & 0.91 \\
+ 3 & 1 & 3 & 3069  & 0.967 & 0.767 & $-0.200$ & 10.0 &  0.1 & 0.92 \\
+ 4 & 1 & 4 & 4078  & 0.933 & 0.800 & $-0.133$ & 10.0 &  0.1 & 0.91 \\
+ 5 & 2 & 1 & 5087  & 0.967 & 0.767 & $-0.200$ & 10.0 &  1.0 & 0.96 \\
+ 6 & 2 & 2 & 6096  & 0.967 & 0.667 & $-0.300$ & 10.0 & 10.0 & 0.95 \\
+ 7 & 2 & 3 & 7105  & 0.900 & 0.667 & $-0.233$ & 10.0 &  0.1 & 1.12 \\
+ 8 & 2 & 4 & 8114  & 0.967 & 0.733 & $-0.233$ &  1.0 &  1.0 & 1.29 \\
+ 9 & 3 & 1 & 9123  & 1.000 & 0.700 & $-0.300$ & 10.0 & 10.0 & 1.44 \\
+10 & 3 & 2 & 10132 & 0.833 & 0.667 & $-0.167$ &  1.0 & 10.0 & 0.94 \\
+11 & 3 & 3 & 11141 & 1.000 & 0.800 & $-0.200$ & 10.0 & 10.0 & 0.89 \\
+12 & 3 & 4 & 12150 & 0.933 & 0.733 & $-0.200$ & 10.0 &  1.0 & 0.95 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The SVM-RBF won in 12/12 evaluations (100\%), with mean BAC of 0.955 (SD
+0.050). The quantum kernel showed mean BAC of 0.738 (SD 0.047). The mean
+$\Delta\BAC$ was $-0.217$ (SD 0.048).
+
+\subsection{Validity ladder---geometric survival}
+\label{ssec:ladder}
+
+\begin{table}[htbp]
+\centering
+\caption{Validity ladder---statevector $\to$ shots $\to$ Aer noise.}
+\label{tab:ladder}
+\smallskip
+\footnotesize
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+Level & Accuracy & $F1$ & Frobenius & Alignment & Eff.\ Rank & Time (s) & Errors \\
+\midrule
+0 \textperiodcentered\ Exact SV  & 0.625 & 0.500 & 0.000 & 0.109 & 8.63  & 0.055  & --- \\
+1 \textperiodcentered\ 2048 shots & 0.625 & 0.500 & 0.011 & 0.110 & 8.93  & 23.271 & --- \\
+2 \textperiodcentered\ Aer noise   & 0.625 & 0.500 & 0.055 & 0.110 & 10.34 & 8.595  & $0.001/0.01/0.02$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Geometric survival was \textbf{complete}: BAC remained stable at 0.625 across
+all tiers. Relative Frobenius error grew progressively ($0.000 \to 0.011
+\to 0.055$), indicating increasing kernel distortion, but this did not alter
+SVM classification decisions.
+
+\subsection{Computational cost}
+\label{ssec:cost}
+
+Kernel time ranged from 0.89\,s to 1.44\,s (mean 1.01\,s). The 2048-shot
+evaluation required 23.27\,s ($423\times$ statevector), and Aer noise required
+8.59\,s ($156\times$ statevector). Estimated logical evaluations: $1{,}008
+\times 2048 = 2{,}064{,}384$ shots.
+
+\subsection{Model comparison}
+\label{ssec:models}
+
+\begin{table}[htbp]
+\centering
+\caption{Model comparison---\texttt{make\_moons} (single split).}
+\label{tab:models}
+\smallskip
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Model & Accuracy & $\BAC$ & $F1$ & Kernel (s) & 95\% Bootstrap CI \\
+\midrule
+SVM-RBF                & 0.875 & 0.875 & 0.889 & ---     & $[0.688;\; 1.000]$ \\
+Logistic Regression    & 0.813 & 0.813 & 0.842 & ---     & $[0.625;\; 1.000]$ \\
+SVM + Quantum Kernel   & 0.625 & 0.625 & 0.500 & 23.27   & $[0.375;\; 0.875]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Multi-dataset suite---exploratory analysis}
+\label{ssec:multidataset}
+
+\begin{table}[htbp]
+\centering
+\caption{Multi-dataset application suite (exploratory, not frozen).}
+\label{tab:multi}
+\smallskip
+\footnotesize
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+Dataset & Fold & $\Delta\BAC$ & Geom.\ Surv. & Frobenius & Alignment & Rel.\ Rank & Kernel (s) \\
+\midrule
+make\_moons   & 1 & $-0.300$ & 0.978 & 0.022 & 0.093 & 0.117 & 0.86 \\
+make\_moons   & 2 & $-0.200$ & 0.980 & 0.020 & 0.105 & 0.115 & 0.89 \\
+make\_moons   & 3 & $-0.133$ & 0.980 & 0.020 & 0.122 & 0.112 & 0.89 \\
+make\_moons   & 4 & $-0.167$ & 0.976 & 0.024 & 0.093 & 0.111 & 0.90 \\
+iris\_binaria & 1 & $-0.119$ & 0.979 & 0.021 & 0.130 & 0.115 & 0.68 \\
+iris\_binaria & 2 & $-0.237$ & 0.936 & 0.064 & 0.147 & 0.127 & 0.63 \\
+iris\_binaria & 3 & $-0.080$ & 0.981 & 0.019 & 0.134 & 0.116 & 0.64 \\
+iris\_binaria & 4 & $-0.237$ & 0.983 & 0.017 & 0.166 & 0.116 & 0.66 \\
+wine\_binario & 1 & $-0.072$ & 0.978 & 0.022 & 0.167 & 0.099 & 1.03 \\
+wine\_binario & 2 & $-0.028$ & 0.978 & 0.022 & 0.261 & 0.095 & 1.40 \\
+wine\_binario & 3 & $-0.059$ & 0.984 & 0.016 & 0.224 & 0.096 & 1.77 \\
+wine\_binario & 4 & $-0.127$ & 0.975 & 0.025 & 0.128 & 0.109 & 1.05 \\
+breast\_cancer & 1 & $-0.133$ & 0.984 & 0.016 & 0.189 & 0.074 & 1.55 \\
+breast\_cancer & 2 & $-0.020$ & 0.985 & 0.015 & 0.200 & 0.073 & 1.53 \\
+breast\_cancer & 3 & $-0.087$ & 0.985 & 0.015 & 0.199 & 0.074 & 1.52 \\
+breast\_cancer & 4 & $-0.053$ & 0.984 & 0.016 & 0.195 & 0.078 & 1.49 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Across all 16 folds, $\Delta\BAC$ was negative. Geometric survival was high
+($>0.93$), but did not translate into predictive advantage.
+
+\subsection{Mechanistic analysis}
+\label{ssec:correlation}
+
+\begin{table}[htbp]
+\centering
+\caption{Exploratory Spearman correlations between kernel metrics and
+         $\Delta\BAC$.}
+\label{tab:correlation}
+\smallskip
+\begin{tabular}{@{}llll@{}}
+\toprule
+Metric & $\rho$ (Spearman) & $p$ & Interpretation \\
+\midrule
+Geometric survival $\to$ $\Delta\BAC$     & 0.415 & 0.110 & Moderate, non-significant \\
+Kernel--target alignment $\to$ $\Delta\BAC$ & 0.739 & 0.001 & Strong, significant \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Kernel diagnostics}
+\label{ssec:kdiag}
+
+\begin{table}[htbp]
+\centering
+\caption{Quantum kernel diagnostics.}
+\label{tab:kdiag}
+\smallskip
+\begin{tabular}{@{}ll@{}}
+\toprule
+Metric & Value \\
+\midrule
+Maximum asymmetry (eigenvalues)   & $2.22\times10^{-16}$ \\
+Maximum diagonal deviation       & 0.006 \\
+Smallest eigenvalue              & $-5.97\times10^{-16}$ \\
+Kernel--target alignment         & 0.110 \\
+Diagonal tolerance               & 0.022 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Evidence Gate result}
+\label{ssec:egate}
+
+\begin{table}[htbp]
+\centering
+\caption{Evidence Gate sequential evaluation.}
+\label{tab:egate}
+\smallskip
+\begin{tabular}{@{}p{3.2cm}cp{5.5cm}@{}}
+\toprule
+Criterion & Status & Result \\
+\midrule
+\textbf{Stage 1}: $\Delta\BAC>0$, CI$_{95\%}>0$
+  & \textbf{FAIL} & $\Delta\BAC=-0.217$; CI $[-0.285;\; -0.148]$ \\
+\textbf{Stage 2}: Equivalence (TOST, $\pm 0.02$)
+  & \textbf{FAIL} & $p=0.9999$ (not equivalent) \\
+\textbf{Stage 3}: Geometric survival
+  & \textbf{PASS} & BAC stable 0.625 across 3 tiers \\
+\textbf{Stage 4}: Computational cost
+  & \textbf{PASS} & Kernel $\sim 1$\,s; cost recorded \\
+\textbf{Stage 5}: Anchor-pair QPU
+  & \textbf{NOT ASSESSED} & Conditional on Stage 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Evidence Gate classification: NO-GO---inconclusive for QPU
+advancement.}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Statistical inferiority}
+\label{ssec:disc_inferiority}
+
+The primary outcome---statistical inferiority of the fidelity quantum kernel
+over the SVM-RBF ($\Delta\BAC = -0.217$)---is consistent with recent
+literature \citep{bowles2024better,kakavand2026benchmarking}. The RBF
+baseline was tuned by nested validation, representing a strong classical
+competitor. The quantum kernel showed consistently low kernel--target alignment
+(0.093--0.261). This geometric inadequacy---not noise instability---appears
+to be the dominant factor in inferiority.
+
+The spectral diagnostics (Table~\ref{tab:kdiag}) reveal that the 2-qubit
+feature map may be structurally insufficient to capture class separability in
+tabular data with 2--30 features. The low relative effective rank (7--12\%)
+indicates underutilisation of circuit capacity.
+
+\subsection{Geometric survival without predictive advantage}
+\label{ssec:disc_survival}
+
+A conceptual contribution is the empirical demonstration that
+\textbf{geometric survival $\neq$ predictive advantage}. The kernel survived
+perfectly across statevector$\;\to\;$shots$\;\to\;$Aer, but its performance
+was consistently inferior to the RBF. Survival indicates noise robustness;
+inferiority indicates geometric inadequacy.
+
+\subsection{Correlation between alignment and performance}
+\label{ssec:disc_alignment}
+
+The strong correlation between kernel--target alignment and $\Delta\BAC$
+($\rho = 0.739$, $p = 0.001$) is consistent with kernel theory. However, even
+the highest observed alignment (0.261) was insufficient to produce positive
+$\Delta\BAC$, suggesting an alignment threshold below which the quantum kernel
+offers no advantage.
+
+\subsection{Positioning relative to the literature}
+\label{ssec:disc_positioning}
+
+The present study distinguishes itself in three aspects: (i) the Evidence Gate
+as a methodological contribution; (ii) transparent negative result
+\citep{scheel2022role}; (iii) cost integration as a decision factor.
+
+\subsection{Limitations}
+\label{ssec:limitations}
+
+\begin{enumerate}[label=(\roman*)]
+  \item Small scale: 200 samples, 90/10 splits.
+  \item Limited feature map: 2 qubits, 1 repetition.
+  \item Simulation only (Aer), not real QPU.
+  \item Tabular data only; may differ for molecular/materials data.
+  \item PCA to 2 components may discard discriminative information.
+  \item Residual fold dependence despite correction.
+  \item Mechanistic analyses are exploratory (not frozen in SHA-256).
+\end{enumerate}
+
+\subsection{Future work}
+\label{ssec:future}
+
+\begin{enumerate}[label=(\roman*)]
+  \item Feature map expansion to identify alignment threshold for advancement.
+  \item QPU validation with anchor pairs (Criteria 3--5).
+  \item Cost reduction via approximation (Nystr\"om, KTA).
+  \item Multi-class and regression extensions.
+  \item Quantum-structure data (molecular, materials).
+  \item Systematic review with retrospective Evidence Gate application.
+\end{enumerate}
+
+\subsection{Implications for QML practice}
+\label{ssec:implications}
+
+\begin{enumerate}[label=(\roman*)]
+  \item A strong baseline is essential; weak baselines produce superficial
+        superiority claims.
+  \item Kernel diagnostics (alignment, effective rank, Frobenius error) must
+        be routinely reported.
+  \item Negative results are valuable and constrain future hypotheses.
+  \item Evidence Gates should be adopted as minimum standard for QML
+        evaluation.
+\end{enumerate}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Conclusions}
+\label{sec:conclusions}
+
+This study presented the \textbf{Geometry-Survival Evidence Gate}---a
+prospective, sequential go/no-go decision rule for quantum kernel application
+on tabular data---and honestly reported the negative result obtained under a
+pre-specified protocol.
+
+The SVM with fidelity quantum kernel demonstrated \textbf{statistical
+inferiority} to the SVM-RBF in repeated nested cross-validation ($\Delta\BAC =
+-0.217$; 95\% corrected CI $[-0.285;\; -0.148]$; one-sided $p = 0.9999$).
+The kernel survived geometrically across three fidelity tiers (statevector
+$\to$ shots $\to$ Aer noise), but this survival did not translate into
+predictive advantage. The correlation between kernel--target alignment and
+$\Delta\BAC$ ($\rho = 0.739$) suggests that feature map geometry is the
+limiting factor, not noise robustness.
+
+The Evidence Gate classified this protocol as \textbf{NO-GO} for QPU
+advancement, with failure at Criteria~1 (superiority) and~2 (equivalence). The
+result is restrictive: it does not settle quantum kernel utility in general, but
+constrains hypotheses for tabular data with low-capacity feature maps and
+demonstrates the Evidence Gate as a quality control mechanism for QML research.
+
+It is recommended that the community adopt prospective evidence gates as
+minimum standard for quantum kernel evaluation, valuing transparent negative
+results and promoting reproducibility in an area prone to premature claims.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\bibliographystyle{apalike}
+\bibliography{ARTIGO_QUANTUM_EVIDENCE_GATE}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\appendix
+\section{Experiment Configuration}
+\label{app:config}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+Parameter & Value \\
+\midrule
+Researcher & Marcelo Claro Laranjeira \\
+Seed & 42 \\
+Shots & 2048 \\
+Feature map & ZZFeatureMap \\
+Feature map reps & 1 \\
+Entanglement & Linear \\
+$C$ (quantum SVM) & 1.0 \\
+Kernel time (full split) & 23.27\,s \\
+Kernel--target alignment & 0.110 \\
+Diagonal tolerance & 0.022 \\
+Protocol SHA-256 & \texttt{89c08f07\ldots} \\
+Python & 3.12.13 \\
+NumPy & 2.0.2 \\
+Pandas & 2.2.2 \\
+Scikit-learn & 1.6.1 \\
+Qiskit & 2.3.1 \\
+Qiskit Aer & 0.17.2 \\
+Qiskit ML & 0.9.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Pre-registered Protocol}
+\label{app:protocol}
+
+The full protocol was frozen via SHA-256 and is available in
+\texttt{data/processed/protocolo\_sha256.txt}. The mandatory execution order
+was: OSF $\to$ Nested CV $\to$ Application suite $\to$ Aer noise $\to$
+Anchor pairs QPU $\to$ Full QPU classifier. The present execution completed
+items 1--3 and stopped at Evidence Gate Criterion~1 (statistical inferiority).
+
+\end{document}
