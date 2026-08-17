@@ -1,0 +1,66 @@
+{
+  "baseline_referencia": "SVM-RBF",
+  "delta_acuracia_qml_menos_baseline": -0.25,
+  "ic95_delta_pareado": [
+    -0.5625,
+    0.0625
+  ],
+  "mediana_delta_bootstrap": -0.25,
+  "fracao_reamostragens_delta_positivo": 0.0424,
+  "n_bootstrap": 5000,
+  "n_teste": 16,
+  "posto_efetivo_kernel": 8.927015100292106,
+  "posto_efetivo_relativo": 0.2789692218841283,
+  "tempo_kernel_s": 23.27079132,
+  "avaliacoes_fidelidade_estimadas": 1008,
+  "shots_logicos_estimados": 2064384,
+  "parecer": "inconclusivo: o IC pareado inclui diferença zero",
+  "status_evidencia": "inferioridade estatística neste protocolo",
+  "criterios": {
+    "baseline_pre_especificado": true,
+    "comparacao_pareada": true,
+    "ic_exclui_zero_a_favor_qml": false,
+    "teste_com_ao_menos_30_casos": false,
+    "validacao_multissemente_executada": true,
+    "teste_externo_executado": false,
+    "custo_quantico_registrado": true
+  },
+  "proximos_passos": [
+    "Aumentar o teste e repetir o split em pelo menos 10 sementes; a diferença ainda inclui zero.",
+    "Reservar um teste maior ou externo; a amostra atual é adequada apenas para exploração.",
+    "Ajustar C e hiperparâmetros de ambos os SVMs por validação aninhada, sem tocar no teste final.",
+    "Executar a escada statevector → shots → ruído → QPU e registrar a degradação do kernel.",
+    "Relatar o resultado mesmo se for nulo ou negativo; ele restringe hipóteses futuras."
+  ],
+  "validacao_robusta": {
+    "n_avaliacoes_externas": 12,
+    "n_repeticoes_externas": 3,
+    "n_folds_externos": 4,
+    "media_delta_acuracia": -0.2166666666666667,
+    "desvio_delta_acuracia": 0.048199920365414754,
+    "ic95_media_delta": [
+      -0.24444444444444446,
+      -0.19166666666666665
+    ],
+    "mediana_bootstrap_media_delta": -0.2166666666666667,
+    "vitorias_qml": 0,
+    "empates": 0,
+    "parecer": "baseline RBF favorecido nas repetições"
+  },
+  "inferencia_paper": {
+    "desfecho_primario": "delta_acuracia_balanceada",
+    "teste": "Nadeau-Bengio corrigido, unilateral",
+    "media_delta_bac": -0.21666666666666665,
+    "ic95_corrigido_bilateral": [
+      -0.2851457304517865,
+      -0.1481876028815468
+    ],
+    "p_primario_corrigido": 0.999988103402152,
+    "p_permutacao_sinais_sensibilidade": 0.00048828125,
+    "p_tost_equivalencia": 0.9999716573530641,
+    "margem_equivalencia": 0.02,
+    "tamanho_efeito_dz": -4.495166486252808,
+    "classificacao": "inferioridade estatística neste protocolo",
+    "nota_dependencia": "erro-padrão inclui correção n_teste/n_treino"
+  }
+}

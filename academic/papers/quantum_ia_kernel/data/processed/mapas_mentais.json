@@ -1,0 +1,152 @@
+{
+  "visão geral": {
+    "centro": "Física e computação quântica",
+    "ramos": {
+      "Estado": [
+        "amplitudes",
+        "fase",
+        "normalização"
+      ],
+      "Transformação": [
+        "portas",
+        "interferência",
+        "entrelaçamento"
+      ],
+      "Medição": [
+        "base",
+        "probabilidade",
+        "shots"
+      ],
+      "Pesquisa": [
+        "baseline",
+        "incerteza",
+        "reprodução"
+      ]
+    }
+  },
+  "qubit": {
+    "centro": "Qubit",
+    "ramos": {
+      "Base": [
+        "|0⟩",
+        "|1⟩",
+        "espaço 2D"
+      ],
+      "Estado": [
+        "α|0⟩+β|1⟩",
+        "fase",
+        "norma 1"
+      ],
+      "Geometria": [
+        "esfera de Bloch",
+        "polos",
+        "equador"
+      ],
+      "Leitura": [
+        "escolha da base",
+        "colapso",
+        "frequências"
+      ]
+    }
+  },
+  "circuito": {
+    "centro": "Circuito quântico",
+    "ramos": {
+      "Preparar": [
+        "estado inicial",
+        "dados",
+        "qubits"
+      ],
+      "Transformar": [
+        "H",
+        "rotações",
+        "CX"
+      ],
+      "Executar": [
+        "statevector",
+        "Aer",
+        "QPU"
+      ],
+      "Observar": [
+        "bitstrings",
+        "contagens",
+        "estimativas"
+      ]
+    }
+  },
+  "QML": {
+    "centro": "Kernel quântico",
+    "ramos": {
+      "Dados": [
+        "split",
+        "PCA no treino",
+        "ângulos"
+      ],
+      "Geometria": [
+        "feature map",
+        "fidelidade",
+        "matriz K"
+      ],
+      "Aprendizado": [
+        "SVM",
+        "C",
+        "predição"
+      ],
+      "Controle": [
+        "RBF",
+        "custo",
+        "IC pareado"
+      ]
+    }
+  },
+  "escada de validade": {
+    "centro": "O resultado sobrevive?",
+    "ramos": {
+      "Ideal": [
+        "statevector",
+        "sem shots",
+        "referência"
+      ],
+      "Amostragem": [
+        "shots",
+        "flutuação",
+        "PSD"
+      ],
+      "Ruído": [
+        "portas",
+        "leitura",
+        "decoerência"
+      ],
+      "Hardware": [
+        "âncoras",
+        "go/no-go",
+        "QPU"
+      ]
+    }
+  },
+  "paper": {
+    "centro": "Evidência publicável",
+    "ramos": {
+      "Antes": [
+        "pergunta",
+        "hipótese",
+        "pré-registro"
+      ],
+      "Desenho": [
+        "CV aninhada",
+        "baseline",
+        "sem vazamento"
+      ],
+      "Inferência": [
+        "efeito",
+        "IC",
+        "equivalência"
+      ],
+      "Transparência": [
+        "custos",
+        "limitações",
+        "dados e código"
+      ]
+    }
+  }
+}
