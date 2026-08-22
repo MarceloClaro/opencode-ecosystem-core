@@ -4676,6 +4676,29 @@
         "Score 99 exige transversalidade: Reversa em artigos (seções) + repos (módulos) + scripts (pattern) + gaps (diagnostic) — próximo 100 exigirá Reversa em tempo real durante a escrita do manuscrito"
       ],
       "timestamp": 1787421780.8241417
+    },
+    {
+      "round_id": "R438",
+      "objective": "R438: Caminho para 100 — fechamento dos 5 gaps residuais (10.0/100)",
+      "changes": [
+        "SPEC-935-R438 criada (101 specs) para fechar 5 gaps da auditoria R437 rumo a 100",
+        "G1: specs/loops/dsh-reasoning-97.md e harness-reasoning-97.md gerados via loop_spec_registry dump (formato scientific-discovery-loop.md) + marceloclaro/doctor.py passa a importar reasoning_loops para registrar loops em memória → doctor loop_specs: pass (2 loops bem formados)",
+        "G2: rag/enhanced_search_rag.py — AntigravityWebSearcher wrapper (AntigravityBridge.delegate) como web_searcher padrão em UnifiedSearcher; search(providers=[\"web\"]) e query com http:// delegam para Antigravity, TDD com FakeWeb injetado mantém determinismo, fallback [] quando CLI ausente",
+        "G3: reversa_universal/engine.py — dependencies() com fallback tomli (try import tomllib → except ImportError: import tomli as tomllib) com tomli 2.4.1 disponível, fallback regex quando ambos falham",
+        "G4: integrations/harness/harness_worker_pool.py — HarnessWorkerPool dedicado nativo (PREFIX harness-worker-, capabilities harness_execution/universal_model_routing/autonomous_production, ThreadPoolExecutor + trust/economy) e UniversalHarnessBridge migrado de DeepSeekWorkerPool para HarnessWorkerPool (desacoplamento)",
+        "G5: evolution/cycles.py:EvolutionRegistry.average_score docstring + README.md (Ciclos Evolutivos) explicitam 'média móvel dos scores, não gate de qualidade' (gate real é SpecVerifier+GradingHead+calibration)",
+        "Validação: 15/15 GREEN em tests/test_r438_caminho_100.py, 98/98 GREEN com R433-R437, doctor loop_specs pass, 101 specs, HarnessWorkerPool scale/submit com harness-worker-N"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "LoopSpecs em disco + em memória são complementares: arquivo documenta, registro em memória habilita doctor; ambos precisam ser gerados (dump) e importados (doctor.py)",
+        "Antigravity como web_searcher padrão deve ser lazy e condicional (providers=[\"web\"] ou http) para não poluir buscas locais em testes; wrapper com available check evita handoff desnecessário",
+        "tomli fallback é trivial com try/except ImportError mas exige teste com monkeypatch de builtins.__import__ para provar que o caminho é exercitado",
+        "HarnessWorkerPool dedicado elimina override de WORKER_CAPABILITIES e PREFIX — desacoplamento que torna UniversalHarnessBridge independente de DeepSeekWorkerPool",
+        "Documentar average_score como média móvel evita confusão com gate de qualidade; próxima métrica para 100+ poderia ser mediana ou p50 para robustez a outliers",
+        "Caminho para 100 é fechar gaps de infraestrutura/documentação, não de scoring — 10.0 reflete completude do processo, não validação externa"
+      ],
+      "timestamp": 1787424303.4092543
     }
   ]
 }

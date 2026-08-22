@@ -37,6 +37,53 @@ except Exception:
     PaperRecord = object  # type: ignore
     MultiSearcher = object  # type: ignore
 
+# ── Antigravity web_searcher padrão (G2 — R438) ──────────────────────────
+class AntigravityWebSearcher:
+    """Wrapper AntigravityBridge como web_searcher para UnifiedSearcher (provider=web)."""
+
+    def __init__(self):
+        self._bridge = None
+        self._available = False
+        try:
+            from integrations.antigravity.bridge import AntigravityBridge
+
+            self._bridge = AntigravityBridge()
+            self._available = bool(getattr(self._bridge, "available", False))
+        except Exception:
+            self._bridge = None
+            self._available = False
+
+    def search(self, query: str, limit: int = 5) -> List[Dict[str, Any]]:
+        if not self._bridge or not self._available:
+            return []
+        try:
+            # Delega via Antigravity com agente de busca/web
+            result = self._bridge.delegate(query, agent="search")
+            # Bridge retorna {status, stdout, ...} ou {status: queued, handoff_file}
+            if result.get("status") == "queued":
+                return []
+            content = result.get("stdout") or result.get("content") or ""
+            if not content or not content.strip():
+                return []
+            # Converte stdout em registro único (título = primeira linha)
+            title = content.strip().split("\n")[0][:200].strip() or query[:80]
+            return [{"title": title, "year": 2026, "source": "antigravity-web", "doi": "", "content": content[:2000]}]
+        except Exception:
+            return []
+
+    @property
+    def available(self) -> bool:
+        return self._available
+
+
+def _default_web_searcher() -> Optional[Any]:
+    try:
+        ws = AntigravityWebSearcher()
+        # Retorna mesmo quando indisponível, mas search() retornará [] (não quebra)
+        return ws
+    except Exception:
+        return None
+
 
 # =======================================================================
 # C1 — UnifiedSearcher
@@ -56,7 +103,11 @@ class UnifiedSearcher:
         # searchers injetáveis permitem TDD determinístico
         self.searchers: List[Any] = searchers if searchers is not None else self._default_searchers()
         self.rag = rag
-        self.web_searcher = web_searcher
+        # G2: web_searcher padrão é AntigravityBridge quando não injetado
+        if web_searcher is not None:
+            self.web_searcher = web_searcher
+        else:
+            self.web_searcher = _default_web_searcher()
         self._cache: Dict[str, Tuple[float, List[Dict[str, Any]]]] = {}
 
     def _default_searchers(self) -> List[Any]:
@@ -193,8 +244,14 @@ class UnifiedSearcher:
             except Exception:
                 pass
 
-        # 3) Web searcher injetado (opcional)
+        # 3) Web searcher (Antigravity padrão quando provider=web — G2 R438)
+        should_use_web = False
         if self.web_searcher is not None:
+            if providers is not None and "web" in [p.lower() for p in providers]:
+                should_use_web = True
+            elif "http://" in query.lower() or "https://" in query.lower():
+                should_use_web = True
+        if should_use_web:
             try:
                 web_results = self.web_searcher.search(query, limit=min(limit, 5)) if hasattr(self.web_searcher, "search") else []
                 for idx, rec in enumerate(web_results or []):

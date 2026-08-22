@@ -11,6 +11,7 @@ from integrations.harness.universal_adapter import UniversalHarnessAdapter
 from integrations.harness.universal_bridge import UniversalHarnessBridge, harness_bridge
 from integrations.harness.universal_reasoning_loop import UniversalReasoningLoop
 from integrations.harness.model_registry import HarnessModelRegistry
+from integrations.harness.harness_worker_pool import HarnessWorkerPool
 
 __all__ = [
     "UniversalHarnessAdapter",
@@ -18,4 +19,5 @@ __all__ = [
     "harness_bridge",
     "UniversalReasoningLoop",
     "HarnessModelRegistry",
+    "HarnessWorkerPool",
 ]

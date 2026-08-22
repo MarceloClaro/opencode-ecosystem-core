@@ -266,13 +266,16 @@ class ReversaUniversalEngine:
                     pass
                 break  # só raiz para evitar node_modules explosão
 
-        # pyproject.toml
+        # pyproject.toml (G3 — R438: tomllib com fallback tomli)
         for toml_file in list(root.glob("pyproject.toml")) + list(root.glob("**/pyproject.toml")):
             if toml_file.is_file():
                 txt = _read_text(toml_file)
-                # tenta tomllib se disponível
+                # tenta tomllib (3.11+) com fallback tomli (G3)
                 try:
-                    import tomllib
+                    try:
+                        import tomllib
+                    except ImportError:
+                        import tomli as tomllib  # type: ignore
                     data = tomllib.loads(txt)
                     # PEP 621 [project.dependencies]
                     proj = data.get("project", {})

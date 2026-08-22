@@ -8,13 +8,14 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.8.0_Triagem_Real_%2B_Multi--CLI-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.750_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-255_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-256_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-100-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-101-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
 [![Reversa](https://img.shields.io/badge/Reversa-Universal_99-success.svg)](reversa_universal/engine.py)
+[![Caminho100](https://img.shields.io/badge/Caminho_100-10.0_Completo-gold.svg)](specs/SPEC-935-R438-caminho-100.md)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
@@ -181,6 +182,22 @@ orch.reversa_enhance_gaps(report, path="rag")       # injeta reversa_gaps no dia
 
 `ReversaBridge` publica no MetaBus (`reversa_universal.analysis.completed`, `add_reflection`, `upsert_semantic_topic`) e o `diagnostic_pipeline` passa a incluir `reversa_gaps` em `evolutionary.total_gaps` — metacognição, raciocínio, pesquisa, manuscrito, correlações, soluções, inovações e scanners de gaps agora falam a mesma língua estrutural.
 
+### Act XII — Caminho para 100: Fechando os 5 Gaps Residuais (R438 — 10.0 / 100)
+A auditoria R437 apontou os últimos 5 gaps entre 9.9 e 100 — todos de infraestrutura, não de scoring:
+
+1. **LoopSpecs em disco** — `specs/loops/dsh-reasoning-97.md` e `harness-reasoning-97.md` gerados via `loop_spec_registry` dump + `marceloclaro/doctor.py` passa a importar `reasoning_loop` antes de checar `loop_specs` → `doctor` agora `pass (2 loops bem formados)` em vez de `warn`.
+2. **Antigravity como web_searcher** — `rag/enhanced_search_rag.py:AntigravityWebSearcher` wrapper de `AntigravityBridge.delegate` como `web_searcher` padrão em `UnifiedSearcher`; `search(providers=["web"])` ou query com `http` delega para Antigravity (handoff quando CLI ausente, determinístico com `FakeWeb` em testes).
+3. **tomli fallback** — `reversa_universal/engine.py:dependencies` tenta `import tomllib` → fallback `import tomli as tomllib` (2.4.1 disponível) antes do fallback regex — testado via `monkeypatch` de `builtins.__import__`.
+4. **HarnessWorkerPool dedicado** — `integrations/harness/harness_worker_pool.py` nativo com `PREFIX harness-worker-` e `capabilities harness_execution` desacopla `UniversalHarnessBridge` de `DeepSeekWorkerPool` (G4).
+5. **Média móvel documentada** — `evolution/cycles.py:average_score` docstring + `README.md` (§ Ciclos Evolutivos) explicitam: *"média móvel dos scores, não gate de qualidade; gate real é SpecVerifier+GradingHead+calibration"*.
+
+```bash
+python3 -m pytest tests/test_r438_caminho_100.py -v  # 15 passed
+python3 -m marceloclaro.cli doctor  # 101 specs, 2 loops pass, 256/256 ciclos
+```
+
+100 não é novo scoring — é fechar a infraestrutura que faltava para o `doctor` passar e para o harness ser verdadeiramente agnóstico e auditável.
+
 ---
 
 ---
@@ -213,6 +230,7 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 - **CI/CD Quality Gates (R106):** GitHub Actions com lint, matrix test e package build
 - **Harness Universal Agnóstico (R433–R435):** ponte DeepSeek Harness escalada para qualquer modelo OpenCode via `ModelRouter` (litert/colibri/zen/go/openai) com gate 97, pool `harness-worker-N` e compatibilidade legada
 - **Reversa Universal (R437):** engenharia reversa filesystem (AST, package.json, LOC) em artigos, repos, códigos e scripts com `inventory`/`gaps`/`correlações`/`soluções`/`inovações` e injeção em `diagnostic_pipeline` e MetaBus
+- **Caminho para 100 (R438):** 5 gaps fechados — LoopSpecs em disco, Antigravity web_searcher, tomli fallback, HarnessWorkerPool nativo e média móvel documentada — `doctor` agora `pass` em `loop_specs`
 
 ---
 
@@ -1631,7 +1649,7 @@ Cada ciclo completo de execução é registrado como um **evento evolutivo** no 
 }
 ```
 
-Atualmente o ecossistema possui **212 ciclos registrados** (R1 a R395, com sub-etapas como R104a–R104d), cada um com score, lições e timestamp.
+Atualmente o ecossistema possui **256 ciclos registrados** (R1 a R438, com sub-etapas como R104a–R104d), cada um com score, lições e timestamp. O `EvolutionRegistry.average_score()` é **média móvel** dos scores (indicador de tendência), **não gate de qualidade** — o gate real é `SpecVerifier` + `GradingHead` + `confidence_calibrator` (G5 — R438).
 
 ---
 

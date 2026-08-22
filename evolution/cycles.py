@@ -97,6 +97,13 @@ class EvolutionRegistry:
         return [asdict(c) for c in self.cycles[-limit:]]
 
     def average_score(self) -> Optional[float]:
+        """Média móvel dos scores dos ciclos com score (G5 — R438).
+
+        Esta média **não é gate de qualidade**. O gate real é
+        `SpecVerifier` + `GradingHead` + `confidence_calibrator` (verificado
+        por `SpecRegistry` e `loop_spec_registry`), não a média histórica.
+        A média serve apenas como indicador de tendência evolutiva.
+        """
         if self._scored_count > 0:
             return round(self._total_score / self._scored_count, 2)
         return None
