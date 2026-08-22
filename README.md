@@ -8,10 +8,11 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.8.0_Triagem_Real_%2B_Multi--CLI-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.750_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-212_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-253_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-237-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-98-dodgerblue.svg)](specs/)
+[![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
@@ -124,6 +125,24 @@ Nenhuma dessas descobertas veio de ler código com mais atenção. Vieram de
 rodar o binário real, compilar o PDF real, chamar a API real e olhar para
 a resposta — ou para o silêncio.
 
+### Act IX — Harness Universal Agnóstico: de um harness específico a qualquer modelo OpenCode (R433–R435)
+O `deepseek-harness.zip` trouxe um monorepo exemplar (DeepSeek Harness `dsh` v0.1.0-rc.7 — 231 pacotes, 49 grupos, tudo plugin sobre Cordis, com SDK Python JSON-RPC). Em 3 ciclos o ecossistema o absorveu e o superou:
+
+- **R433 (9.3)** — ponte orquestrada: `integrations/deepseek_harness/` indexa factualmente o monorepo (`_reversa_sdd/inventory.md` + `.reversa/state.json`), adapta canal `sdk/runtime-bin/unavailable` com handoff auditável, ingere `session.events` e `.agents/notes/implemented` como metacognição nativa e escala `dsh-worker-N` no Blackboard com Trust/Economy e gate SDD `TSPEC` — 16/16 GREEN.
+- **R434 (9.7 / 97)** — loop raciocinado: `reasoning_loop` com ensemble de 12 motores (Z3, SymPy, Critical, Bayesian, Causal, Temporal, Fuzzy, CoT, Analogical, Counterfactual, Quantum), `confidence_calibrator` com sinais fortes (p<0.001, BF>100) e `GradingHead` 0-7, iterando até gate 97 (`cal≥0.97` & `grade≥6`) com `LoopSpec dsh-reasoning-97` — 25/25 GREEN.
+- **R435 (9.8 / 98)** — harness universal: `integrations/harness/` desacopla o harness do DeepSeek. `HarnessModelRegistry` descobre qualquer modelo via `ModelRouter` (coding/reasoning/academic/writing × litert/colibri/openai/zen/go), `UniversalHarnessAdapter` roteia `task_type/provider/model` ou runner injetado, `UniversalHarnessBridge` orquestra com `TSPEC` e `UniversalReasoningLoop` (`harness-reasoning-97`) atinge 97 para `coding/reasoning/writing` com `litert:gemma-4-E2B-it`, `colibri:olmoe-1b-7b` ou `zen:deepseek-v3` — 42/42 GREEN, compatibilidade `dsh` preservada como provider legado.
+
+```python
+from marceloclaro.orchestrator import MarceloClaroOrchestrator
+orch = MarceloClaroOrchestrator()
+orch.harness_status()  # {registry:{total_models, providers:{litert, colibri, zen,…}}, adapter, pool}
+orch.orchestrate_harness("auditar sessões", task_type="coding", provider="litert-lm", model="gemma-4-E2B-it", workers=1)
+orch.orchestrate_harness_iterative("produção até 97", task_type="reasoning", max_iters=3, target=0.97)  # gate 97
+# Legado ainda funciona: orch.orchestrate_deepseek_harness("...") → delega para harness universal
+```
+
+Harness agnóstico = `ModelRouter` como indirection: adicionar um novo modelo não exige código novo no harness.
+
 ---
 
 ---
@@ -154,6 +173,7 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 - **Evidence Graph (R102):** Grafo epistemológico de entidades, relações e evidências com proveniência
 - **MCP Security (R100):** Guard model, audit trail, vetting de comandos e rate limiting
 - **CI/CD Quality Gates (R106):** GitHub Actions com lint, matrix test e package build
+- **Harness Universal Agnóstico (R433–R435):** ponte DeepSeek Harness escalada para qualquer modelo OpenCode via `ModelRouter` (litert/colibri/zen/go/openai) com gate 97, pool `harness-worker-N` e compatibilidade legada
 
 ---
 
