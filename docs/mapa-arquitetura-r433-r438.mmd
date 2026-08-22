@@ -1,8 +1,8 @@
 graph TD
     %% ===== DEV REPRODUZÍVEL =====
     Dev([Dev / CI]) -->|git clone| Repo[(opencode-ecosystem-core<br>main)]
-    Repo -->|python3 -m marceloclaro.cli doctor| Doctor{doctor: 101 specs<br>2 loops pass<br>256/256 ciclos}
-    Repo -->|python3 -m pytest tests/test_r43* -q| Tests{98 testes GREEN<br>R433 16 + R434 9 + R435 17 + R436 22 + R437 19 + R438 15}
+    Repo -->|python3 -m marceloclaro.cli doctor| Doctor{doctor: 102 specs<br>2 loops pass<br>257/257 ciclos}
+    Repo -->|python3 -m pytest tests/test_r43* -q| Tests{113 testes GREEN<br>R433 16 + R434 9 + R435 17 + R436 22 + R437 19 + R438 15 + R439 15}
     Repo -->|specs/SPEC-935-R43*.md| SDD[SDD Engine<br>SpecRegistry + SpecVerifier<br>Spec → RED → GREEN → REFACTOR]
     SDD --> Tests
     Tests --> Doctor
@@ -99,6 +99,20 @@ graph TD
     Orchestrator -->|reversa_analyze<br>reversa_on_article/repo/scripts<br>reversa_enhance_gaps| ReversaUniversal
     Agents -->|Registra AgentCard| Blackboard
 
+    %% ===== BANCA RIGOROSA (R439) =====
+    subgraph RigorousBoard [Banca Rigorosa Multi-Periódico — R439]
+        BoardCriteria[BoardCriteria<br>CAPES / Nature / IEEE / Lancet<br>pesos + thresholds]
+        Reviewers[3 Reviewers<br>R1 Metodologista<br>R2 Teorico<br>R3 Formal Etico]
+        GapCleaning[GapCleaningEngine<br>TODO / ABNT / segredo<br>baseline / etica]
+        BoardLoop[correction_loop<br>revisao → limpeza → re-verificacao<br>max 3 iteracoes]
+        BoardCriteria --> Reviewers
+        Reviewers --> GapCleaning
+        GapCleaning --> BoardLoop
+    end
+    Orchestrator -->|academic_pipeline_with_rigorous_board<br>antes de entregar| RigorousBoard
+    RigorousBoard -->|board_report + gaps_cleaned| Orchestrator
+    RigorousBoard -.->|valida| Academic
+
     %% ===== OUTROS SUBSISTEMAS =====
     subgraph Outros [Acadêmico + MCP + Observabilidade]
         Academic[Pipeline Acadêmico<br>R101 EvoSci → R102 Deep Research → R103 Peer Review → R104 Revision → R105 Paper Composer]
@@ -118,19 +132,23 @@ graph TD
     Dev -->|1. Reproduz Harness| Harness
     Dev -->|2. Reproduz Search-RAG| SearchRAG
     Dev -->|3. Reproduz Reversa| ReversaUniversal
+    Dev -->|4. Reproduz Banca| RigorousBoard
     Tests -.->|cobre| Harness
     Tests -.->|cobre| SearchRAG
     Tests -.->|cobre| ReversaUniversal
-    Doctor -.->|valida 101 specs + 2 loops| LoopSpecs
+    Tests -.->|cobre| RigorousBoard
+    Doctor -.->|valida 102 specs + 2 loops| LoopSpecs
 
     %% ===== ESTILOS =====
     classDef harness fill:#e1f5fe,stroke:#0288d1
     classDef search fill:#f3e5f5,stroke:#7b1fa2
     classDef reversa fill:#e8f5e9,stroke:#2e7d32
+    classDef board fill:#fce4ec,stroke:#880e4f
     classDef mci fill:#fff3e0,stroke:#ef6c00
     classDef core fill:#fce4ec,stroke:#c2185b
     class Harness,DSInventory,DSAdapter,DSPool,DSBridge,DSLoop,ModelRegistry,UnivAdapter,HarnessPool,UnivBridge,UnivLoop harness
     class SearchRAG,UnifiedSearcher,EnhancedRAG,ReferenceAuditor,UnifiedFacade search
     class ReversaUniversal,Engine,Gaps,BridgeReversa,Scanner reversa
+    class RigorousBoard,BoardCriteria,Reviewers,GapCleaning,BoardLoop board
     class MCI,MetaBus,Blackboard,Memory,Reflexion mci
     class CoreGovernance,Trust,Economy,Transformer,Evolution core
