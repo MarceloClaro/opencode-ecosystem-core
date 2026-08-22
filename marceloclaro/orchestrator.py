@@ -108,6 +108,15 @@ class MarceloClaroOrchestrator:
         # Pipeline acadêmico Qualis A1 (MASWOS) acoplado à delegação real
         self.maswos = MaswosPipeline(delegate_fn=self._maswos_delegate)
 
+        # Ponte DeepSeek Harness (SPEC-935-R433/R434) — lazy, não falha sem zip
+        self._dsh_bridge = None
+        self._dsh_bridge_failed = False
+        self._dsh_reasoning_loop = None
+        # Harness Universal agnóstico (SPEC-935-R435) — qualquer modelo OpenCode
+        self._harness_bridge = None
+        self._harness_bridge_failed = False
+        self._harness_reasoning_loop = None
+
         # MiroFish (enxame preditivo) — carregamento tardio
         self._swarm_validator = None
 
@@ -779,6 +788,292 @@ class MarceloClaroOrchestrator:
             ),
         )
         return report
+
+    # ------------------------------------------------------------------
+    # PONTE DEEPSEEK HARNESS (SPEC-935-R433)
+    # Integra produções autônomas e metacognições do dsh ao ciclo
+    # Perceber → Especificar → Delegar → Executar → Verificar → Refletir.
+    # Lazy: a ponte é resolvida apenas no primeiro acesso; falhas de
+    # import ou ausência do diretório deepseek-harness/ não quebram o
+    # __init__ do orquestrador.
+    # ------------------------------------------------------------------
+    @property
+    def dsh_bridge(self):
+        if not hasattr(self, "_dsh_bridge") or self._dsh_bridge is None:
+            # cache miss — tenta resolver lazy
+            if getattr(self, "_dsh_bridge_failed", False):
+                return None
+            try:
+                from integrations.deepseek_harness.bridge import DeepSeekHarnessBridge
+
+                self._dsh_bridge = DeepSeekHarnessBridge()
+                self._dsh_bridge_failed = False
+            except Exception as exc:
+                logger.warning(f"[{self.id}] Ponte dsh indisponível: {exc}")
+                self._dsh_bridge = None
+                self._dsh_bridge_failed = True
+                return None
+        return self._dsh_bridge
+
+    def dsh_state(self) -> Dict[str, Any]:
+        """Estado auditável da ponte dsh (inventário + canal + pool)."""
+        bridge = self.dsh_bridge
+        if bridge is None:
+            return {"available": False, "reason": "ponte dsh indisponível nesta instalação"}
+        try:
+            return bridge.status()
+        except Exception as exc:
+            return {"available": False, "error": str(exc)}
+
+    def orchestrate_deepseek_harness(
+        self,
+        objective: str,
+        workers: int = 1,
+        runner=None,
+    ) -> Dict[str, Any]:
+        """Orquestra uma produção autônoma do dsh sob gate SDD e reflexão.
+
+        Aplica percepção metacognitiva prévia, delega via ponte com workers
+        escaláveis, verifica o gate SDD e registra reflexão no Global Workspace.
+        """
+        awareness = self.perceive(topic="deepseek_harness")
+        bridge = self.dsh_bridge
+        if bridge is None:
+            return {
+                "status": "unavailable",
+                "reason": "ponte dsh indisponível",
+                "lessons_considered": len(awareness.get("lessons", [])),
+            }
+        outcome = bridge.orchestrate(objective, runner=runner, workers=workers)
+        # Reflexão adicional no orquestrador (nível Core)
+        try:
+            verified = bool(outcome.get("verification", {}).get("verified"))
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"orquestração dsh: {objective[:100]}",
+                reflection=(
+                    f"Core orquestrou dsh ({workers} worker(s)): "
+                    f"gate SDD {outcome.get('spec_id')} "
+                    f"{'aprovado' if verified else 'reprovado'}; "
+                    f"{len(outcome.get('results', []))} produção(ões) escalada(s)."
+                ),
+                score=1.0 if verified else 0.5,
+            )
+        except Exception:
+            pass
+        outcome["lessons_considered"] = len(awareness.get("lessons", []))
+        return outcome
+
+    # ------------------------------------------------------------------
+    # PONTE DSH RACIOCINADA — CICLO REFLEXIVO ATÉ 97 (SPEC-935-R434)
+    # ------------------------------------------------------------------
+    @property
+    def dsh_reasoning_loop(self):
+        if getattr(self, "_dsh_reasoning_loop", None) is not None:
+            return self._dsh_reasoning_loop
+        try:
+            from integrations.deepseek_harness.reasoning_loop import DeepSeekReasoningLoop
+
+            self._dsh_reasoning_loop = DeepSeekReasoningLoop(bridge=self.dsh_bridge)
+        except Exception as exc:
+            logger.warning(f"[{self.id}] Loop raciocinado dsh indisponível: {exc}")
+            return None
+        return self._dsh_reasoning_loop
+
+    def dsh_reasoning_status(self) -> Dict[str, Any]:
+        """Estado do loop raciocinado (motores + loop spec + último histórico)."""
+        try:
+            from reasoning import multi_reasoning
+
+            reasoning = multi_reasoning.status()
+        except Exception:
+            reasoning = {}
+        try:
+            from sdd.loop_spec import loop_spec_registry
+
+            spec = loop_spec_registry.get("dsh-reasoning-97")
+            loop = spec.to_dict() if spec else None
+        except Exception:
+            loop = None
+        return {
+            "reasoning_engines": reasoning,
+            "loop_spec": loop,
+            "bridge_available": self.dsh_bridge is not None,
+        }
+
+    def orchestrate_deepseek_harness_iterative(
+        self,
+        objective: str,
+        workers: int = 1,
+        runner=None,
+        max_iters: int = 3,
+        target: float = 0.97,
+    ) -> Dict[str, Any]:
+        """Ciclo reflexivo raciocinado até o gate 97 (calibrada + grading).
+
+        Aplica percepção metacognitiva, pré-raciocínio multi-motor, loop de
+        execução-calibração-grading-reflexão e reflexão final no Global Workspace.
+        """
+        awareness = self.perceive(topic="deepseek_harness")
+        loop = self.dsh_reasoning_loop
+        if loop is None:
+            return {
+                "status": "unavailable",
+                "reason": "loop raciocinado indisponível",
+                "lessons_considered": len(awareness.get("lessons", [])),
+            }
+        result = loop.run(objective, runner=runner, workers=workers, max_iters=max_iters, target=target)
+        # Reflexão do orquestrador sobre o ciclo iterativo
+        try:
+            best = result.get("best", {})
+            cal = best.get("calibrated_value", 0) if isinstance(best, dict) else 0
+            grade = best.get("grade", {}) if isinstance(best, dict) else {}
+            achieved = bool(result.get("achieved_target"))
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"orquestração iterativa dsh (97): {objective[:80]}",
+                reflection=(
+                    f"Ciclo iterativo dsh concluído em {result.get('iterations',0)} iteração(ões) "
+                    f"({'atingiu' if achieved else 'não atingiu'} gate 97): "
+                    f"calibrada {cal:.2f}, grade {grade.get('score','?')}/7, "
+                    f"terminal={result.get('terminal')}, best_engine={result.get('pre_reason',{}).get('best_engine')}."
+                ),
+                score=cal if achieved else max(0.4, cal),
+            )
+        except Exception:
+            pass
+        result["lessons_considered"] = len(awareness.get("lessons", []))
+        return result
+
+    # ------------------------------------------------------------------
+    # HARNESS UNIVERSAL AGNÓSTICO (SPEC-935-R435) — qualquer modelo OpenCode
+    # ------------------------------------------------------------------
+    @property
+    def harness(self):
+        """Harness universal (ModelRouter: litert/colibri/openai/zen/go/deepseek)."""
+        if getattr(self, "_harness_bridge", None) is not None:
+            return self._harness_bridge
+        if getattr(self, "_harness_bridge_failed", False):
+            return None
+        try:
+            from integrations.harness.universal_bridge import UniversalHarnessBridge
+
+            self._harness_bridge = UniversalHarnessBridge()
+            self._harness_bridge_failed = False
+        except Exception as exc:
+            logger.warning(f"[{self.id}] Harness universal indisponível: {exc}")
+            self._harness_bridge = None
+            self._harness_bridge_failed = True
+            return None
+        return self._harness_bridge
+
+    def harness_status(self) -> Dict[str, Any]:
+        """Inventário universal: modelos, providers, perfis e pool."""
+        bridge = self.harness
+        if bridge is None:
+            return {"available": False, "reason": "harness universal indisponível"}
+        try:
+            return bridge.status()
+        except Exception as exc:
+            return {"available": False, "error": str(exc)}
+
+    def harness_reasoning_status(self) -> Dict[str, Any]:
+        try:
+            from reasoning import multi_reasoning
+
+            reasoning = multi_reasoning.status()
+        except Exception:
+            reasoning = {}
+        try:
+            from sdd.loop_spec import loop_spec_registry
+
+            spec = loop_spec_registry.get("harness-reasoning-97")
+            loop = spec.to_dict() if spec else None
+        except Exception:
+            loop = None
+        return {"reasoning_engines": reasoning, "loop_spec": loop, "harness_available": self.harness is not None}
+
+    @property
+    def harness_reasoning_loop(self):
+        if getattr(self, "_harness_reasoning_loop", None) is not None:
+            return self._harness_reasoning_loop
+        try:
+            from integrations.harness.universal_reasoning_loop import UniversalReasoningLoop
+
+            self._harness_reasoning_loop = UniversalReasoningLoop(bridge=self.harness)
+        except Exception as exc:
+            logger.warning(f"[{self.id}] Loop universal indisponível: {exc}")
+            return None
+        return self._harness_reasoning_loop
+
+    def orchestrate_harness(
+        self,
+        objective: str,
+        task_type: str = "coding",
+        provider: str | None = None,
+        model: str | None = None,
+        workers: int = 1,
+        runner=None,
+    ) -> Dict[str, Any]:
+        """Orquestra harness universal com qualquer modelo (gate SDD)."""
+        awareness = self.perceive(topic="harness")
+        bridge = self.harness
+        if bridge is None:
+            return {"status": "unavailable", "reason": "harness universal indisponível", "lessons_considered": len(awareness.get("lessons", []))}
+        outcome = bridge.orchestrate(objective, task_type=task_type, provider=provider, model=model, runner=runner, workers=workers)
+        try:
+            verified = bool(outcome.get("verification", {}).get("verified"))
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"harness universal {task_type}: {objective[:80]}",
+                reflection=(
+                    f"Harness universal ({task_type} via {provider or 'auto'}/{model or 'auto'}): "
+                    f"{len(outcome.get('results',[]))} produção(ões), gate {outcome.get('spec_id')} "
+                    f"{'aprovado' if verified else 'reprovado'}."
+                ),
+                score=1.0 if verified else 0.5,
+            )
+        except Exception:
+            pass
+        outcome["lessons_considered"] = len(awareness.get("lessons", []))
+        return outcome
+
+    def orchestrate_harness_iterative(
+        self,
+        objective: str,
+        task_type: str = "coding",
+        provider: str | None = None,
+        model: str | None = None,
+        workers: int = 1,
+        runner=None,
+        max_iters: int = 3,
+        target: float = 0.97,
+    ) -> Dict[str, Any]:
+        """Ciclo universal reflexivo até gate 97 com qualquer modelo."""
+        awareness = self.perceive(topic="harness")
+        loop = self.harness_reasoning_loop
+        if loop is None:
+            return {"status": "unavailable", "reason": "loop universal indisponível", "lessons_considered": len(awareness.get("lessons", []))}
+        result = loop.run(objective, task_type=task_type, provider=provider, model=model, runner=runner, workers=workers, max_iters=max_iters, target=target)
+        try:
+            best = result.get("best", {})
+            cal = best.get("calibrated_value", 0) if isinstance(best, dict) else 0
+            grade = best.get("grade", {}) if isinstance(best, dict) else {}
+            achieved = bool(result.get("achieved_target"))
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"harness iterativo 97 ({task_type}): {objective[:80]}",
+                reflection=(
+                    f"Harness iterativo {task_type} ({provider or 'auto'}/{model or 'auto'}) "
+                    f"em {result.get('iterations',0)} it(s) {'atingiu' if achieved else 'não atingiu'} 97: "
+                    f"cal {cal:.2f}, grade {grade.get('score','?')}/7, terminal={result.get('terminal')}."
+                ),
+                score=cal if achieved else max(0.4, cal),
+            )
+        except Exception:
+            pass
+        result["lessons_considered"] = len(awareness.get("lessons", []))
+        return result
 
     def list_agents(self) -> List[Dict[str, Any]]:
         return [card.to_dict() for card in blackboard.registry.values()]
