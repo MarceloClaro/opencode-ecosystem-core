@@ -8,12 +8,13 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.8.0_Triagem_Real_%2B_Multi--CLI-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.750_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-254_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-255_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-99-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-100-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
+[![Reversa](https://img.shields.io/badge/Reversa-Universal_99-success.svg)](reversa_universal/engine.py)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
@@ -163,6 +164,23 @@ orch.audit_references([{"title":"Causality","authors":["Pearl"],"year":2009,"sou
 
 Busca unificada + RAG aprimorado + auditoria ABNT são agora o tripé que conecta retrieval a citação confiável.
 
+### Act XI — Reversa Universal: de um scanner textual a engenharia reversa em artigos, repos, códigos e gaps (R437 — 99/9.9)
+O `ReversaScanner` original detectava `def`/`class` em texto — útil, mas cego a filesystem. R437 o elevou a `ReversaUniversalEngine` (`reversa_universal/engine.py`) que analisa qualquer path e gera `inventory` (LOC, linguagens, frameworks, integrações), `modules` (AST para `.py`, headings para `.md`), `dependencies` (`requirements.txt`/`package.json`/`pyproject.toml`), `data_model` e `gaps` (`missing_tests/docs`, `stale_deps`, `TODO`, `hardcoded_secret`, `long_files`) com `correlações` (ex. TODO+sem teste), `soluções` (TDD, gitleaks) e `inovações` (SBOM, capability seam).
+
+```python
+from marceloclaro.orchestrator import MarceloClaroOrchestrator
+orch = MarceloClaroOrchestrator()
+orch.reversa_analyze("rag")                          # 1 módulo ScientificRAG, 3 gaps
+orch.reversa_on_article("manuscrito/")              # sugere arquitetura/limitações
+orch.reversa_on_repo("research/")                   # módulos + integrações
+orch.reversa_on_scripts("scripts/*.py")             # pattern glob
+orch.reversa_enhance_gaps(report, path="rag")       # injeta reversa_gaps no diagnostic
+# Scanner também entende path:
+# scanners/reversa_scanner.scan("rag/scientific.py") → 5.9 com findings Reversa Universal
+```
+
+`ReversaBridge` publica no MetaBus (`reversa_universal.analysis.completed`, `add_reflection`, `upsert_semantic_topic`) e o `diagnostic_pipeline` passa a incluir `reversa_gaps` em `evolutionary.total_gaps` — metacognição, raciocínio, pesquisa, manuscrito, correlações, soluções, inovações e scanners de gaps agora falam a mesma língua estrutural.
+
 ---
 
 ---
@@ -194,6 +212,7 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 - **MCP Security (R100):** Guard model, audit trail, vetting de comandos e rate limiting
 - **CI/CD Quality Gates (R106):** GitHub Actions com lint, matrix test e package build
 - **Harness Universal Agnóstico (R433–R435):** ponte DeepSeek Harness escalada para qualquer modelo OpenCode via `ModelRouter` (litert/colibri/zen/go/openai) com gate 97, pool `harness-worker-N` e compatibilidade legada
+- **Reversa Universal (R437):** engenharia reversa filesystem (AST, package.json, LOC) em artigos, repos, códigos e scripts com `inventory`/`gaps`/`correlações`/`soluções`/`inovações` e injeção em `diagnostic_pipeline` e MetaBus
 
 ---
 

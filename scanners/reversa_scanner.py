@@ -62,6 +62,63 @@ class ReversaScanner:
         findings: List[str] = []
         recommendations: List[str] = []
 
+        # 0. Delegação universal quando corpus é path existente (SPEC-935-R437)
+        #    Permite Reversa em artigos, repos, códigos e scripts via filesystem
+        corpus_stripped = corpus.strip()
+        # Heurística: path curto (<500 chars) sem quebras excessivas e que existe no FS
+        if corpus_stripped and len(corpus_stripped) < 600 and "\n" not in corpus_stripped[:300]:
+            import os as _os
+            from pathlib import Path as _Path
+            _p = _Path(corpus_stripped)
+            # Tenta resolver relativo ao repo root se não absoluto
+            if not _p.is_absolute():
+                _root = _Path(__file__).resolve().parents[1]
+                _cand = _root / corpus_stripped
+                if _cand.exists():
+                    _p = _cand
+            if _p.exists():
+                try:
+                    from reversa_universal.engine import ReversaUniversalEngine
+                    _eng = ReversaUniversalEngine()
+                    _analysis = _eng.analyze(str(_p))
+                    _gaps = _analysis.get("gaps", {}).get("gaps", [])
+                    _inv = _analysis.get("inventory", {})
+                    _mods = _analysis.get("modules", [])
+                    if _inv.get("total_files", 0) > 0 or _mods:
+                        # Enriquece findings com análise universal
+                        findings.append(
+                            f"Reversa Universal analisou `{_p}`: "
+                            f"{len(_mods)} módulos, {_inv.get('total_files',0)} arquivos, "
+                            f"{_inv.get('total_loc',0)} LOC, linguagens {', '.join(_inv.get('languages',[])[:3]) or '—'}."
+                        )
+                        if _gaps:
+                            findings.append(
+                                f"Gaps estruturais Reversa: {', '.join(g['type'] for g in _gaps[:3])} "
+                                f"({len(_gaps)} total) — correlações e soluções disponíveis."
+                            )
+                            for g in _gaps[:2]:
+                                recommendations.append(f"[{g['severity']}] {g['type']}: {g['description']}")
+                        for corr in _analysis.get("gaps", {}).get("correlations", [])[:1]:
+                            findings.append(f"Correlação Reversa: {corr}")
+                        for sol in _analysis.get("gaps", {}).get("solutions", [])[:2]:
+                            recommendations.append(sol)
+                        for inn in _analysis.get("gaps", {}).get("innovations", [])[:1]:
+                            recommendations.append(f"Inovação: {inn}")
+                        # Score universal: base 5 + gaps*0.5 + módulos*0.3 clamp 10
+                        _score = 5.0 + min(len(_gaps), 6) * 0.6 + min(len(_mods), 8) * 0.3
+                        _score = min(10.0, max(5.5, _score))
+                        # Para path, retorna sempre o score universal quando análise produziu inventário
+                        return DiagnosticResult(
+                            scanner_name=self.name,
+                            score=round(_score, 2),
+                            findings=findings,
+                            recommendations=recommendations or [
+                                "Gerar TSPECs para cada módulo via Reversa Universal antes de refatorar."
+                            ],
+                        )
+                except Exception:
+                    pass  # fallback para detecção textual
+
         # 1. Detecção de código
         detected = [k for k, p in _CODE_PATTERNS.items() if p.search(corpus)]
         has_code = bool(detected)

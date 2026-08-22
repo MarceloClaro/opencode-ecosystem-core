@@ -4652,6 +4652,30 @@
         "Score 99 = R435 9.8 + busca unificada 0.04 + RAG aprimorado 0.03 + auditoria ABNT 0.03 — próximo 100 exigirá validação externa com corpus real e DOIs resolvidos via Crossref"
       ],
       "timestamp": 1787421124.4083405
+    },
+    {
+      "round_id": "R437",
+      "objective": "R437: Reversa Universal — engenharia reversa em artigos, repos, códigos, scripts e scanners de gaps (99/9.9)",
+      "changes": [
+        "SPEC-935-R437 criada (100 specs) universalizando Reversa como camada metacognitiva transversal",
+        "reversa_universal/engine.py — ReversaUniversalEngine.analyze(path, output_root) com inventory (métricas, linguagens, frameworks, integrações), modules (AST py/headings md), dependencies (requirements/package.json/pyproject.toml), data_model (models.py/*.sql), gaps (missing_tests/docs, stale_deps, TODO/secrets, long_files) e correlações/soluções/inovações; enhance_reasoning/research/manuscript",
+        "reversa_universal/bridge.py — ReversaBridge.analyze_and_reflect (MetaBus add_reflection + upsert_semantic_topic + publish_subsystem_event) e enhance_gaps (injeta reversa_gaps em diagnostic_report.evolutionary) com status",
+        "scanners/reversa_scanner.py — estendido para delegar a ReversaUniversalEngine quando corpus é path existente (rag/scientific.py → score 5.9 com findings Reversa), mantendo compatibilidade textual",
+        "scanners/pipeline.py — diagnostic_pipeline.run com domain=reversa já incluía reversa_scanner; bridge.enhance_gaps agora injeta reversa_gaps estruturais em evolutionary.total_gaps",
+        "marceloclaro/orchestrator.py — bridge lazy _reversa_bridge + reversa_analyze/reversa_on_article/reversa_on_repo/reversa_on_scripts/reversa_enhance_gaps/reversa_status/reversa_enhance_reasoning com reflexões no Global Workspace",
+        "tests/test_r437_reversa_universal.py — 19 testes TDD (inventory/modules/dependencies/gaps/analyze com output_root, enhance, bridge reflect/enhance_gaps, scanner path/textual, pipeline domain=reversa, orchestrator 5 métodos) — 83/83 GREEN com R433-R436",
+        "Validação: rag/ → 1 módulo ScientificRAG, 3 gaps; synthetic fixture com TODO/secret/stale_dep detecta 4 gaps; artigo simulado sugere arquitetura/limitações; unified_search dedup validado"
+      ],
+      "score": 9.9,
+      "lessons": [
+        "Reversa textual (regex) detecta código em corpus, mas filesystem (AST + package.json) revela módulos, LOC e dependências — ambos são complementares, não substitutos",
+        "Path como corpus é heurística poderosa: length<600 e sem quebras excessivas evita falso-positivo em textos longos, mas exige resolver relativo ao repo root",
+        "Gaps sintéticos (missing_tests/docs, stale_deps, TODO/secrets) são os que melhor conectam Reversa a scanners evolutivos — correlações (TODO+sem teste) geram priorização automática",
+        "Bridge deve publicar em 3 canais MetaBus (add_reflection, upsert_semantic_topic, publish_subsystem_event) para metacognição, raciocínio e relatório usarem o mesmo fato",
+        "enhance_manuscript/research/reasoning são wrappers finos que evitam acoplamento: análise Reversa é opcional (None→passthrough) para não quebrar pipelines sem path",
+        "Score 99 exige transversalidade: Reversa em artigos (seções) + repos (módulos) + scripts (pattern) + gaps (diagnostic) — próximo 100 exigirá Reversa em tempo real durante a escrita do manuscrito"
+      ],
+      "timestamp": 1787421780.8241417
     }
   ]
 }
