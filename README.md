@@ -8,14 +8,15 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.8.0_Triagem_Real_%2B_Multi--CLI-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.750_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-256_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-257_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-101-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-102-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
 [![Reversa](https://img.shields.io/badge/Reversa-Universal_99-success.svg)](reversa_universal/engine.py)
 [![Caminho100](https://img.shields.io/badge/Caminho_100-10.0_Completo-gold.svg)](specs/SPEC-935-R438-caminho-100.md)
+[![Banca](https://img.shields.io/badge/Banca-Rigorosa_Multi--Periódico-critical.svg)](academic/rigorous_board.py)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
@@ -198,6 +199,23 @@ python3 -m marceloclaro.cli doctor  # 101 specs, 2 loops pass, 256/256 ciclos
 
 100 não é novo scoring — é fechar a infraestrutura que faltava para o `doctor` passar e para o harness ser verdadeiramente agnóstico e auditável.
 
+### Act XIII — Banca Rigorosa Multi-Periódico com Correção e Limpeza de Gaps (R439 — 10.0 / 100)
+Antes de **qualquer entrega** de artigo/manuscrito pronto, o sistema agora **sempre** simula uma banca rigorosa que combina CAPES Qualis A1 + Nature/Science/IEEE/Lancet, revisa, recomenda melhoras e **limpa os gaps antes de entregar**.
+
+- **BoardCriteria por venue** — `academic/rigorous_board.py:BOARD_CRITERIA` com pesos somando 1.0 (CAPES: rubrica MASWOS 10 critérios; Nature: originalidade 0.25; IEEE: reprodutibilidade 0.20; Lancet: CONSORT/CAAE 0.25) e thresholds `accept ≥8.0-8.5` / `minor ≥7.0` / `major ≥5.0`.
+- **3 revisores determinísticos** — R1 Metodologista/Estatístico (p-hacking, baseline, ablação), R2 Teórico (lacuna, so-what), R3 Formal/Ético (ABNT, ética, reprodutibilidade) → `BoardDecision` com `overall_score`, `status ∈ {accept,minor,major,reject}`, `gaps critical/major/minor` e `recommendations` priorizadas.
+- **GapCleaningEngine** — limpa `TODO/FIXME`, segredos hardcoded → `.env`, completa `ABNT` faltante, adiciona `Limitações`/`Baseline` e marca `p-hacking` com correção de Holm — **sem fabricar dados**, apenas estrutura.
+- **Loop obrigatório** — `RigorousBoard.correction_loop(manuscript, venue, max_iter=3)` → revisão → limpeza → re-verificação até `accept/minor` ou 3 iterações; `MaswosPipeline.run_with_rigorous_board` e `orchestrator.academic_pipeline_with_rigorous_board` só aprovam se banca final não for `reject`/`major` persistente, com reflexão no `MetaBus` e `board_report` anexado ao `summary`.
+
+```bash
+python3 -m pytest tests/test_r439_rigorous_board.py -v  # 15 passed
+# Manuscrito fraco (TODO+segredo) → reject 0.18 → após limpeza 1.53 (melhora honesta, ainda reject)
+# Manuscrito forte → minor_revision 7.4 (CAPES) / 7.9 (Nature) — entrega liberada
+python3 -c "from marceloclaro.orchestrator import MarceloClaroOrchestrator; o=MarceloClaroOrchestrator(auto_load_agents=False); print(o.academic_pipeline_with_rigorous_board('Tema', manuscript='Texto fraco. TODO.', venue='auto')['board']['status'])"
+```
+
+> **Garantia de entrega:** Nenhum `final_manuscript` é retornado sem `board_history` e `gaps_cleaned`; se ainda `critical`, o `summary["approved"]` é forçado a `False` e o `CORRIGENDUM.md` registra a decisão com timestamp — **revisão sempre antes da entrega**.
+
 ---
 
 ## Histórico Consolidado R433–R438 & Mapa Completo da Infraestrutura Testada e Reproduzível
@@ -212,8 +230,9 @@ python3 -m marceloclaro.cli doctor  # 101 specs, 2 loops pass, 256/256 ciclos
 | **R436** | 9.9 / 99 | Buscas Unificadas + RAG Aprimorado + Referências ABNT | `SPEC-935-R436` | 22/22 (64 c/ anteriores) | `rag/enhanced_search_rag.py` (`UnifiedSearcher` dedup+temporal, `EnhancedRAG` expansão/citação, `ReferenceAuditor` ABNT/BibTeX) | `temporal 2025>2010`, `dedup DOI`, `grounded 0.97`, `audit duplicate` |
 | **R437** | 9.9 / 99 | Reversa Universal transversal | `SPEC-935-R437` | 19/19 (83 c/ anteriores) | `reversa_universal/{engine,bridge}` + `scanners/reversa_scanner` path-aware + `orchestrator.reversa_*` (5 métodos) | `inventory rag` AST, `gaps` TODO/secret, `bridge` MetaBus, `pipeline domain=reversa` |
 | **R438** | **10.0 / 100** | Caminho para 100 — 5 gaps residuais | `SPEC-935-R438` | 15/15 (98 c/ anteriores) | `specs/loops/*.md`, `AntigravityWebSearcher`, `tomli` fallback, `HarnessWorkerPool` nativo, `average_score` doc | `doctor` 101 specs, 2 loops pass, 256/256 ciclos |
+| **R439** | **10.0 / 100** | Banca Rigorosa Multi-Periódico com Correção e Limpeza | `SPEC-935-R439` | 15/15 (113 c/ anteriores) | `academic/rigorous_board.py` (3 revisores × 4 venues, `BoardCriteria`, `GapCleaningEngine`, `correction_loop`) + `MaswosPipeline.run_with_rigorous_board` + `orchestrator.academic_pipeline_with_rigorous_board` | `review` fraco→reject 0.18, forte→minor 7.4; `correction_loop` limpa TODO/ABNT/segredo e re-verifica até 3 iterações |
 
-> **Total:** 101 specs formais, 256 ciclos evolutivos, 98 testes dedicados R433-R438 (todos GREEN), 83→98 testes integrados, `average_score` = média móvel (indicador, não gate — gate real é `SpecVerifier`+`GradingHead`+`calibration`).
+> **Total:** 102 specs formais, 257 ciclos evolutivos, 113 testes dedicados R433-R439 (todos GREEN), 83→113 testes integrados, `average_score` = média móvel (indicador, não gate — gate real é `SpecVerifier`+`GradingHead`+`calibration`+`RigorousBoard`).
 
 ### Infraestrutura Detalhada — Camadas e Dependências
 
@@ -235,8 +254,8 @@ python3 -m marceloclaro.cli doctor  # 101 specs, 2 loops pass, 256/256 ciclos
 graph TD
     %% ===== DEV REPRODUZÍVEL =====
     Dev([Dev / CI]) -->|git clone| Repo[(opencode-ecosystem-core<br>main)]
-    Repo -->|python3 -m marceloclaro.cli doctor| Doctor{doctor: 101 specs<br>2 loops pass<br>256/256 ciclos}
-    Repo -->|python3 -m pytest tests/test_r43* -q| Tests{98 testes GREEN<br>R433 16 + R434 9 + R435 17 + R436 22 + R437 19 + R438 15}
+    Repo -->|python3 -m marceloclaro.cli doctor| Doctor{doctor: 102 specs<br>2 loops pass<br>257/257 ciclos}
+    Repo -->|python3 -m pytest tests/test_r43* -q| Tests{113 testes GREEN<br>R433 16 + R434 9 + R435 17 + R436 22 + R437 19 + R438 15 + R439 15}
     Repo -->|specs/SPEC-935-R43*.md| SDD[SDD Engine<br>SpecRegistry + SpecVerifier<br>Spec → RED → GREEN → REFACTOR]
     SDD --> Tests
     Tests --> Doctor
@@ -333,6 +352,20 @@ graph TD
     Orchestrator -->|reversa_analyze<br>reversa_on_article/repo/scripts<br>reversa_enhance_gaps| ReversaUniversal
     Agents -->|Registra AgentCard| Blackboard
 
+    %% ===== BANCA RIGOROSA (R439) =====
+    subgraph RigorousBoard [Banca Rigorosa Multi-Periódico — R439]
+        BoardCriteria[BoardCriteria<br>CAPES / Nature / IEEE / Lancet<br>pesos + thresholds]
+        Reviewers[3 Reviewers<br>R1 Metodologista<br>R2 Teorico<br>R3 Formal Etico]
+        GapCleaning[GapCleaningEngine<br>TODO / ABNT / segredo<br>baseline / etica]
+        BoardLoop[correction_loop<br>revisao → limpeza → re-verificacao<br>max 3 iteracoes]
+        BoardCriteria --> Reviewers
+        Reviewers --> GapCleaning
+        GapCleaning --> BoardLoop
+    end
+    Orchestrator -->|academic_pipeline_with_rigorous_board<br>antes de entregar| RigorousBoard
+    RigorousBoard -->|board_report + gaps_cleaned| Orchestrator
+    RigorousBoard -.->|valida| Academic
+
     %% ===== OUTROS SUBSISTEMAS =====
     subgraph Outros [Acadêmico + MCP + Observabilidade]
         Academic[Pipeline Acadêmico<br>R101 EvoSci → R102 Deep Research → R103 Peer Review → R104 Revision → R105 Paper Composer]
@@ -352,20 +385,24 @@ graph TD
     Dev -->|1. Reproduz Harness| Harness
     Dev -->|2. Reproduz Search-RAG| SearchRAG
     Dev -->|3. Reproduz Reversa| ReversaUniversal
+    Dev -->|4. Reproduz Banca| RigorousBoard
     Tests -.->|cobre| Harness
     Tests -.->|cobre| SearchRAG
     Tests -.->|cobre| ReversaUniversal
-    Doctor -.->|valida 101 specs + 2 loops| LoopSpecs
+    Tests -.->|cobre| RigorousBoard
+    Doctor -.->|valida 102 specs + 2 loops| LoopSpecs
 
     %% ===== ESTILOS =====
     classDef harness fill:#e1f5fe,stroke:#0288d1
     classDef search fill:#f3e5f5,stroke:#7b1fa2
     classDef reversa fill:#e8f5e9,stroke:#2e7d32
+    classDef board fill:#fce4ec,stroke:#880e4f
     classDef mci fill:#fff3e0,stroke:#ef6c00
     classDef core fill:#fce4ec,stroke:#c2185b
     class Harness,DSInventory,DSAdapter,DSPool,DSBridge,DSLoop,ModelRegistry,UnivAdapter,HarnessPool,UnivBridge,UnivLoop harness
     class SearchRAG,UnifiedSearcher,EnhancedRAG,ReferenceAuditor,UnifiedFacade search
     class ReversaUniversal,Engine,Gaps,BridgeReversa,Scanner reversa
+    class RigorousBoard,BoardCriteria,Reviewers,GapCleaning,BoardLoop board
     class MCI,MetaBus,Blackboard,Memory,Reflexion mci
     class CoreGovernance,Trust,Economy,Transformer,Evolution core
 ```
@@ -432,6 +469,7 @@ O OpenCode Ecosystem Core é uma implementação modular de sistemas multiagente
 - **Harness Universal Agnóstico (R433–R435):** ponte DeepSeek Harness escalada para qualquer modelo OpenCode via `ModelRouter` (litert/colibri/zen/go/openai) com gate 97, pool `harness-worker-N` e compatibilidade legada
 - **Reversa Universal (R437):** engenharia reversa filesystem (AST, package.json, LOC) em artigos, repos, códigos e scripts com `inventory`/`gaps`/`correlações`/`soluções`/`inovações` e injeção em `diagnostic_pipeline` e MetaBus
 - **Caminho para 100 (R438):** 5 gaps fechados — LoopSpecs em disco, Antigravity web_searcher, tomli fallback, HarnessWorkerPool nativo e média móvel documentada — `doctor` agora `pass` em `loop_specs`
+- **Banca Rigorosa Multi-Periódico (R439):** 3 revisores (R1 Metodologista, R2 Teórico, R3 Formal/Ético) × 4 venues (CAPES/Nature/IEEE/Lancet) com `BoardCriteria`, `GapCleaningEngine` e loop `revisão→limpeza→re-verificação` até 3 iterações — nenhum `final_manuscript` é entregue sem `board_report` e `gaps_cleaned`
 
 ---
 

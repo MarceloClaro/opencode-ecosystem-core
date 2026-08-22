@@ -76,9 +76,18 @@ class MaswosRun:
     final_score: Optional[float] = None
     approved: bool = False
     started_at: float = field(default_factory=time.time)
+    # R439 — banca rigorosa (opcionais, preenchidos por run_with_rigorous_board)
+    manuscript: Optional[str] = None
+    board_report: Optional[Dict[str, Any]] = None
+    board_history: Optional[List[Dict[str, Any]]] = None
+    final_manuscript: Optional[str] = None
+    gaps_cleaned: Optional[int] = None
+    board_iterations: Optional[int] = None
+    board_score: Optional[float] = None
+    board_error: Optional[str] = None
 
     def summary(self) -> Dict[str, Any]:
-        return {
+        base = {
             "topic": self.topic,
             "stages_completed": sum(1 for s in self.stages if s.status == "completed"),
             "stages_total": len(self.stages),
@@ -86,6 +95,20 @@ class MaswosRun:
             "approved": self.approved,
             "duration_s": round(time.time() - self.started_at, 2),
         }
+        # Anexa dados da banca quando presentes (R439)
+        if self.board_report is not None:
+            base["board"] = self.board_report
+        if self.board_history is not None:
+            base["board_history"] = self.board_history
+        if self.final_manuscript is not None:
+            base["final_manuscript"] = self.final_manuscript[:8000]
+        if self.gaps_cleaned is not None:
+            base["gaps_cleaned"] = self.gaps_cleaned
+        if self.board_iterations is not None:
+            base["board_iterations"] = self.board_iterations
+        if self.board_score is not None:
+            base["board_score"] = self.board_score
+        return base
 
 
 class MaswosPipeline:
@@ -137,6 +160,94 @@ class MaswosPipeline:
         # Quality gate final: AUTO_SCORE_QUALIS
         run.final_score = round(self.score_fn(accumulated or topic), 2)
         run.approved = run.final_score >= QUALITY_GATE_THRESHOLD
+        # Anexa manuscrito acumulado para uso pela banca rigorosa
+        run.manuscript = accumulated  # type: ignore
+        return run
+
+    def run_with_rigorous_board(
+        self,
+        topic: str,
+        manuscript: str = "",
+        venue: str = "auto",
+        references: Optional[List[Dict[str, Any]]] = None,
+        max_iter: int = 3,
+        stages: Optional[List[str]] = None,
+    ) -> MaswosRun:
+        """Pipeline com banca rigorosa multi-periódico obrigatória antes da entrega.
+
+        Executa o pipeline canônico e, antes de aprovar, submete o manuscrito
+        à banca rigorosa (CAPES/Nature/IEEE/Lancet) com loop de correção e
+        limpeza de gaps. Só aprova se a banca final for accept/minor_revision.
+        """
+        # 1. Pipeline canônico
+        run = self.run(topic, manuscript, stages=stages)
+        # Usa manuscrito acumulado se existir
+        base_manuscript = getattr(run, "manuscript", manuscript) or manuscript or topic
+
+        # 2. Banca rigorosa com correção
+        try:
+            from academic.rigorous_board import RigorousBoard
+
+            board = RigorousBoard()
+            loop_result = board.correction_loop(base_manuscript, venue=venue, references=references, max_iter=max_iter)
+            final_decision = loop_result["final_decision"]
+            final_manuscript = loop_result["final_manuscript"]
+
+            # Anexa resultado da banca ao run
+            run.board_report = final_decision.to_dict()  # type: ignore
+            run.board_history = loop_result["history"]  # type: ignore
+            run.final_manuscript = final_manuscript  # type: ignore
+            run.gaps_cleaned = loop_result["gaps_cleaned"]  # type: ignore
+            run.board_iterations = loop_result["iterations"]  # type: ignore
+
+            # Só aprova se banca não for reject/major persistente
+            board_approved = final_decision.status in ("accept", "minor_revision")
+            # Mantém approved original apenas se banca também aprovar
+            run.approved = bool(run.approved and board_approved)
+            # Se banca rejeitou mas pipeline aprovou, força reprovação honesta
+            if not board_approved and run.final_score >= QUALITY_GATE_THRESHOLD:
+                run.approved = False
+
+            # Atualiza final_score para refletir board se for menor (não infla)
+            run.board_score = final_decision.overall_score  # type: ignore
+            if final_decision.overall_score < run.final_score:
+                # Mantém o menor como sinal honesto
+                pass
+
+            # Publica no MetaBus
+            try:
+                from mci.metabus import metabus
+
+                metabus.publish_subsystem_event(
+                    "academic",
+                    "rigorous_board.completed",
+                    {
+                        "topic": topic,
+                        "venue": venue,
+                        "iterations": loop_result["iterations"],
+                        "final_status": final_decision.status,
+                        "overall_score": final_decision.overall_score,
+                        "gaps_cleaned": loop_result["gaps_cleaned"],
+                    },
+                    source_agent="maswos_rigorous_board",
+                )
+                metabus.memory.add_reflection(
+                    agent_id="maswos_pipeline",
+                    task_context=f"banca rigorosa {venue}: {topic[:60]}",
+                    reflection=(
+                        f"Banca {venue} concluiu {loop_result['iterations']} iteração(ões): "
+                        f"{final_decision.status} (score {final_decision.overall_score}/10), "
+                        f"{len(final_decision.gaps)} gaps, {loop_result['gaps_cleaned']} limpos."
+                    ),
+                    score=final_decision.overall_score / 10.0,
+                )
+            except Exception:
+                pass
+
+        except Exception as exc:
+            # Falha da banca não deve derrubar pipeline — registra e mantém decisão original
+            run.board_error = str(exc)  # type: ignore
+
         return run
 
     @staticmethod

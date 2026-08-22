@@ -1487,6 +1487,66 @@ class MarceloClaroOrchestrator:
         )
         return summary
 
+    def academic_pipeline_with_rigorous_board(
+        self,
+        topic: str,
+        manuscript: str = "",
+        venue: str = "auto",
+        references: Optional[List[Dict[str, Any]]] = None,
+        max_iter: int = 3,
+        stages: Optional[List[str]] = None,
+    ) -> Dict[str, Any]:
+        """Pipeline MASWOS + Banca Rigorosa Multi-Periódico (R439) — sempre revisa e corrige antes de entregar.
+
+        Fluxo: MASWOS (16 estágios) → Banca Rigorosa (3 revisores × 4 venues) →
+        GapCleaningEngine (limpa TODO/ABNT/ética) → re-verificação até accept/minor
+        ou max_iter. Só entrega se banca final não for reject/major persistente.
+        """
+        # Percepção metacognitiva: lições de bancas anteriores
+        awareness = self.perceive(topic=f"banca_{venue}")
+
+        run = self.maswos.run_with_rigorous_board(
+            topic, manuscript, venue=venue, references=references, max_iter=max_iter, stages=stages
+        )
+        summary = run.summary()
+        # Anexa dados da banca ao summary para transparência
+        board_report = getattr(run, "board_report", None)
+        if board_report:
+            summary["board"] = board_report
+            summary["board_iterations"] = getattr(run, "board_iterations", 1)
+            summary["gaps_cleaned"] = getattr(run, "gaps_cleaned", 0)
+            summary["final_manuscript"] = getattr(run, "final_manuscript", manuscript)[:8000]  # limita para serialização
+            summary["board_score"] = getattr(run, "board_score", None)
+
+        # Reflexão metacognitiva: banca rigorosa
+        try:
+            board_status = board_report.get("status", "unknown") if isinstance(board_report, dict) else "unknown"
+            board_score = board_report.get("overall_score", 0) if isinstance(board_report, dict) else 0
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"banca rigorosa {venue}: {topic[:60]}",
+                reflection=(
+                    f"Banca rigorosa {venue} ({summary.get('board_iterations',1)} iterações): "
+                    f"{board_status} (score {board_score}/10), "
+                    f"{summary.get('gaps_cleaned',0)} gaps limpos, "
+                    f"MASWOS {summary['final_score']}/10 → "
+                    f"{'ENTREGUE' if summary['approved'] else 'BLOQUEADO até correções'}."
+                ),
+                score=board_score / 10.0 if board_score else (summary["final_score"] or 0) / 10.0,
+            )
+            # Também registra no EvolutionRegistry via academic pipeline
+            if summary.get("approved"):
+                metabus.memory.upsert_semantic_topic(
+                    f"academic.board.{venue}",
+                    lesson=f"Banca {venue} aprovou '{topic[:40]}' com {board_score}/10 após {summary.get('board_iterations',1)} iterações.",
+                    metadata={"venue": venue, "score": board_score, "gaps_cleaned": summary.get("gaps_cleaned", 0)},
+                )
+        except Exception:
+            pass
+
+        summary["lessons_considered"] = len(awareness.get("lessons", []))
+        return summary
+
     # ------------------------------------------------------------------
     # FUSÃO DO PIPELINE CIENTÍFICO R101-R105 (SPEC-935-R108)
     # ------------------------------------------------------------------

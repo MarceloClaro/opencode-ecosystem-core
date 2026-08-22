@@ -4699,6 +4699,28 @@
         "Caminho para 100 é fechar gaps de infraestrutura/documentação, não de scoring — 10.0 reflete completude do processo, não validação externa"
       ],
       "timestamp": 1787424303.4092543
+    },
+    {
+      "round_id": "R439",
+      "objective": "R439: Banca Rigorosa Simulada Multi-Periódico com Correção e Limpeza de Gaps (10.0/100)",
+      "changes": [
+        "SPEC-935-R439 criada (102 specs) com banca rigorosa multi-periódico (CAPES Qualis A1/Nature/IEEE/Lancet) e loop obrigatório de revisão→correção→limpeza antes de qualquer entrega",
+        "academic/rigorous_board.py — BoardCriteria (pesos por venue, soma 1.0), RigorousBoard (3 revisores R1 Metodologista/R2 Teórico/R3 Formal, score 0-10, gaps critical/major/minor, BoardDecision accept/minor/major/reject), GapCleaningEngine (limpa TODO/ABNT/segredo/baseline/ética) e correction_loop (máx 3 iterações até accept/minor)",
+        "academic/maswos.py — MaswosRun com campos board_* e run_with_rigorous_board(topic, venue, references, max_iter) com loop de banca e só aprova se board não for reject/major persistente, com reflexão no MetaBus",
+        "marceloclaro/orchestrator.py — academic_pipeline_with_rigorous_board(topic, venue, references, max_iter) com percepção de bancas anteriores, reflexão e semantic topic, sempre revisa e corrige antes de entregar",
+        "tests/test_r439_rigorous_board.py — 15 testes TDD (critérios venues, review weak→major/reject e strong→accept/minor, venue-specific Lancet/IEEE, GapCleaning, correction_loop, Maswos e orchestrator com board) — 113/113 GREEN com R433-R438",
+        "Validação: manuscrito fraco (TODO+segredo) → reject 0.18 → após limpeza 1.53 (melhora, mas ainda reject honesto); manuscrito forte → minor_revision 7.4-7.9 por venue; IEEE sem baseline → gap detectado"
+      ],
+      "score": 10.0,
+      "lessons": [
+        "Banca multi-periódico exige pesos distintos: Nature pesa originalidade 0.25, IEEE pesa reprodutibilidade 0.20, Lancet pesa CONSORT/CAAE 0.25 — média simples não serve",
+        "GapCleaningEngine é determinístico e limitado: limpa TODO/ABNT/segredo/baseline, mas não fabrica metodologia — manuscrito muito fraco permanece reject honestamente após 3 iterações",
+        "Correction loop deve ser monotônico não-pior: score não pode cair, gaps devem reduzir ou manter; se não, indica regressão heurística",
+        "MaswosRun com campos opcionais board_* mantém compatibilidade: run.summary() só inclui board quando presente (R439), não quebra testes legados",
+        "Orquestrador deve sempre refletir banca no MetaBus (add_reflection + upsert_semantic_topic) para metacognição de bancas futuras — lição da R439 para R440",
+        "Score 10.0 reflete fechamento do circuito revisão→correção→limpeza antes de entrega, não validação externa — próximo passo é banca com LLM real e validação externa"
+      ],
+      "timestamp": 1787428037.4361634
     }
   ]
 }

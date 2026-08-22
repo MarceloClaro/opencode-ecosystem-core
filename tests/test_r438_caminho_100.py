@@ -179,11 +179,14 @@ class TestG5AverageScoreDocs(unittest.TestCase):
 
     def test_doctor_101_specs(self):
         from marceloclaro.doctor import run_doctor
+        import re
         report = run_doctor()
         specs = next((c for c in report["checks"] if c["name"] == "specs_formais"), None)
         self.assertIsNotNone(specs)
-        # Após R438, deve ser 101
-        self.assertIn("101", specs["detail"])
+        # Após R438, deve ser >=101 (R439 adiciona 102)
+        m = re.search(r"(\d+)\s+especifica", specs["detail"])
+        count = int(m.group(1)) if m else 0
+        self.assertGreaterEqual(count, 101, f"esperado >=101 specs, got {specs['detail']}")
 
 
 class TestCompatibility(unittest.TestCase):
