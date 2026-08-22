@@ -1,0 +1,136 @@
+graph TD
+    %% ===== DEV REPRODUZÍVEL =====
+    Dev([Dev / CI]) -->|git clone| Repo[(opencode-ecosystem-core<br>main)]
+    Repo -->|python3 -m marceloclaro.cli doctor| Doctor{doctor: 101 specs<br>2 loops pass<br>256/256 ciclos}
+    Repo -->|python3 -m pytest tests/test_r43* -q| Tests{98 testes GREEN<br>R433 16 + R434 9 + R435 17 + R436 22 + R437 19 + R438 15}
+    Repo -->|specs/SPEC-935-R43*.md| SDD[SDD Engine<br>SpecRegistry + SpecVerifier<br>Spec → RED → GREEN → REFACTOR]
+    SDD --> Tests
+    Tests --> Doctor
+
+    %% ===== ORQUESTRADOR CENTRAL =====
+    User([Usuário / CLI / Webapp]) -->|comando| Orchestrator[marceloclaro/orchestrator.py<br>MarceloClaroOrchestrator<br>Perceber → Especificar → Delegar → Executar → Verificar → Refletir]
+
+    %% ===== MCI — BARRAMENTO METACOGNITIVO =====
+    subgraph MCI [MCI — Metacognitive Interconnect]
+        MetaBus[MetaBus<br>Global Workspace<br>pub/sub]
+        Blackboard[Blackboard<br>A2A Protocol<br>AgentCard + CFP]
+        Memory[(Memory<br>episodic 1000<br>semantic 100+ topics<br>confidence_ledger)]
+        Reflexion[Reflexion<br>Middleware<br>Shinn et al. 2023]
+        HierarchicalMem[HierarchicalMemory<br>HTM]
+        MetaBus <--> Memory
+        Blackboard <--> MetaBus
+        Reflexion <--> MetaBus
+        HierarchicalMem --> Memory
+    end
+    Orchestrator <-.->|perceive/recall| MCI
+    Orchestrator -->|publish task.cfp| Blackboard
+    Blackboard -->|Call for Proposals| Agents
+
+    %% ===== SDD/TDD + TRUST/ECONOMY + TRANSFORMER =====
+    subgraph CoreGovernance [Governança Core]
+        Trust[Trust Engine<br>BehavioralGate<br>0.0-1.0 + slashing]
+        Economy[Token Economy<br>staking/commit/resolve]
+        Transformer[Transformer<br>AttentionRouter 4 cabeças<br>GradingHead 0-7]
+        Evolution[EvolutionRegistry<br>cycles.json 256 ciclos<br>average_score = média móvel]
+        SDD -->|gate| Trust
+        Trust --> Economy
+        Transformer --> Blackboard
+        Orchestrator --> Evolution
+    end
+
+    %% ===== HARNESS UNIVERSAL (R433-R435 + R438 G4) =====
+    subgraph Harness [Harness Universal Agnóstico — R433-R435 + R438]
+        DSInventory[DeepSeek Inventory<br>_reversa_sdd/inventory.md<br>231 pacotes 49 grupos]
+        DSAdapter[DeepSeek Adapter<br>sdk / runtime-bin / unavailable<br>handoff .deepseek-harness/queue/]
+        DSMetacog[DS Metacognition<br>session.events → MetaBus<br>.agents/notes → semantic]
+        DSPool[DeepSeek Worker Pool<br>dsh-worker-N<br>Trust+Economy]
+        DSBridge[DeepSeek Bridge<br>orchestrate TSPEC]
+        DSLoop[DeepSeek Reasoning Loop<br>dsh-reasoning-97<br>ensemble 12 motores<br>cal 0.97 + grade 6]
+        DSInventory --> DSAdapter
+        DSAdapter --> DSPool
+        DSPool --> DSBridge
+        DSBridge --> DSLoop
+        DSLoop -.->|specs/loops/dsh-reasoning-97.md| LoopSpecs
+
+        ModelRegistry[Harness Model Registry<br>ModelRouter<br>38 modelos<br>litert/colibri/zen/go/openai/deepseek]
+        UnivAdapter[Universal Adapter<br>run_task task_type/provider/model<br>runner injetado > route_and_complete]
+        HarnessPool[Harness Worker Pool<br>harness-worker-N G4 nativo<br>harness_execution]
+        UnivBridge[Universal Bridge<br>orchestrate TSPEC]
+        UnivLoop[Universal Reasoning Loop<br>harness-reasoning-97<br>qualquer task_type/provider]
+        ModelRegistry --> UnivAdapter
+        UnivAdapter --> HarnessPool
+        HarnessPool --> UnivBridge
+        UnivBridge --> UnivLoop
+        UnivLoop -.->|specs/loops/harness-reasoning-97.md| LoopSpecs
+        DSBridge -.->|legado compatível| UnivBridge
+    end
+    Orchestrator -->|lazy harness| Harness
+    Orchestrator -->|lazy dsh_bridge| Harness
+    LoopSpecs[(specs/loops/<br>dsh + harness<br>2 loops pass)]
+
+    %% ===== SEARCH-RAG-REFERÊNCIAS (R436 + R438 G2) =====
+    subgraph SearchRAG [Buscas Unificadas + RAG + Referências — R436 + R438]
+        UnifiedSearcher[UnifiedSearcher<br>MultiSearcher 6 providers<br>+ RAG local + AntigravityWebSearcher G2<br>dedup DOI/titulo + temporal half-life 5a<br>cache TTL 300s]
+        EnhancedRAG[EnhancedRAG<br>ScientificRAG + RAGEvolved<br>query_expansion SYNONYMS<br>temporal_boost + CitationGraph<br>answer_grounded abstained]
+        ReferenceAuditor[ReferenceAuditor<br>ABNT NBR 6023 + BibTeX<br>has_doi/year_valid/duplicate<br>completeness_score]
+        UnifiedFacade[UnifiedSearchRAG<br>fachada search/rag_query/audit/status]
+        EnhancedRAG --> ReferenceAuditor
+        UnifiedSearcher --> EnhancedRAG
+        EnhancedRAG --> UnifiedFacade
+        UnifiedFacade --> SearchRAGStatus
+        Antigravity[AntigravityBridge<br>agy --print<br>handoff .antigravity/queue/]
+        Antigravity -.->|provider=web| UnifiedSearcher
+    end
+    Orchestrator -->|unified_search<br>rag_query<br>audit_references| SearchRAG
+    SearchRAGStatus[(search_rag_status)]
+
+    %% ===== REVERSA UNIVERSAL (R437 + R438 G3) =====
+    subgraph ReversaUniversal [Reversa Universal Transversal — R437 + R438]
+        Engine[ReversaUniversalEngine<br>inventory: os.walk + LOC<br>modules: ast + headings<br>dependencies: requirements/package.json/pyproject.toml<br>tomllib para tomli fallback G3<br>data_model: models.py]
+        Gaps[Gaps<br>missing_tests/docs<br>stale_deps/TODO/secrets/long_files<br>correlações/soluções/inovações]
+        Engine --> Gaps
+        BridgeReversa[ReversaBridge<br>analyze_and_reflect<br>enhance_gaps]
+        Engine --> BridgeReversa
+        Scanner[ReversaScanner<br>path-aware: rag/scientific.py → 5.9<br>texto: def/class regex]
+        Engine -.->|delega quando corpus é path| Scanner
+        PipelineReversa[DiagnosticPipeline<br>domain=reversa<br>evolutionary.reversa_gaps]
+        BridgeReversa --> PipelineReversa
+    end
+    Orchestrator -->|reversa_analyze<br>reversa_on_article/repo/scripts<br>reversa_enhance_gaps| ReversaUniversal
+    Agents -->|Registra AgentCard| Blackboard
+
+    %% ===== OUTROS SUBSISTEMAS =====
+    subgraph Outros [Acadêmico + MCP + Observabilidade]
+        Academic[Pipeline Acadêmico<br>R101 EvoSci → R102 Deep Research → R103 Peer Review → R104 Revision → R105 Paper Composer]
+        ResearchHub[Research Hub<br>searchers + DataKnowledgeHub]
+        MCP[MCP 6 Servers<br>litert-lm, metacognitive-interconnect, antigravity-bridge,<br>pypi-search, colibri-mcp, scanners-mcp]
+        Observability[Observability<br>MetricsCollector<br>Doctor]
+        Academic --> ResearchHub
+        ResearchHub --> UnifiedSearcher
+        Academic --> EnhancedRAG
+        MCP --> MCI
+        Observability --> Doctor
+    end
+    Orchestrator -->|academic_pipeline| Academic
+    Orchestrator -->|diagnose| PipelineReversa
+
+    %% ===== FLUXO DE TESTE REPRODUZÍVEL =====
+    Dev -->|1. Reproduz Harness| Harness
+    Dev -->|2. Reproduz Search-RAG| SearchRAG
+    Dev -->|3. Reproduz Reversa| ReversaUniversal
+    Tests -.->|cobre| Harness
+    Tests -.->|cobre| SearchRAG
+    Tests -.->|cobre| ReversaUniversal
+    Doctor -.->|valida 101 specs + 2 loops| LoopSpecs
+
+    %% ===== ESTILOS =====
+    classDef harness fill:#e1f5fe,stroke:#0288d1
+    classDef search fill:#f3e5f5,stroke:#7b1fa2
+    classDef reversa fill:#e8f5e9,stroke:#2e7d32
+    classDef mci fill:#fff3e0,stroke:#ef6c00
+    classDef core fill:#fce4ec,stroke:#c2185b
+    class Harness,DSInventory,DSAdapter,DSPool,DSBridge,DSLoop,ModelRegistry,UnivAdapter,HarnessPool,UnivBridge,UnivLoop harness
+    class SearchRAG,UnifiedSearcher,EnhancedRAG,ReferenceAuditor,UnifiedFacade search
+    class ReversaUniversal,Engine,Gaps,BridgeReversa,Scanner reversa
+    class MCI,MetaBus,Blackboard,Memory,Reflexion mci
+    class CoreGovernance,Trust,Economy,Transformer,Evolution core
