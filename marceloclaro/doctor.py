@@ -100,6 +100,19 @@ def _check_evolution_registry() -> DoctorCheck:
 
 def _check_loop_specs() -> DoctorCheck:
     try:
+        # Garante que loops do harness/Reversa estejam registrados (R438 — caminho para 100)
+        try:
+            import integrations.deepseek_harness.reasoning_loop  # noqa: F401
+        except Exception:
+            pass
+        try:
+            import integrations.harness.universal_reasoning_loop  # noqa: F401
+        except Exception:
+            pass
+        try:
+            import reversa_universal.engine  # noqa: F401 — registra loops reversa se houver
+        except Exception:
+            pass
         from sdd.loop_spec import loop_spec_registry
         loops = loop_spec_registry.list()
         if not loops:

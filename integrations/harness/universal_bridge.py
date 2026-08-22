@@ -26,26 +26,17 @@ class UniversalHarnessBridge:
         # Reusa o router do registry para o adapter
         self.adapter = UniversalHarnessAdapter(router=self.registry.router, registry=self.registry)
 
-        # Pool universal — reutiliza DeepSeekWorkerPool mas com workers universal_*
-        # Para evitar acoplamento, cria pool próprio com metabus e adapter universal
+        # Pool dedicado nativo (G4 — R438) — sem acoplamento ao DeepSeek pool
         try:
-            from integrations.deepseek_harness.worker_pool import DeepSeekWorkerPool
+            from integrations.harness.harness_worker_pool import HarnessWorkerPool
 
-            # Pool será adaptado: usaremos nosso adapter universal mas mantemos lógica de escala
-            self.pool = DeepSeekWorkerPool(metabus=self.metabus, adapter=self.adapter)
-            # Sobrescreve capabilities do pool para universal
-            self.pool.WORKER_CAPABILITIES = [
-                "harness_execution",
-                "universal_model_routing",
-                "autonomous_production",
-            ]
-            # Renomeia prefixo de workers para universal
-            self._worker_prefix = "harness-worker-"
+            self.pool = HarnessWorkerPool(metabus=self.metabus, adapter=self.adapter)
+            self._worker_prefix = HarnessWorkerPool.PREFIX
         except Exception:
             self.pool = None
             self._worker_prefix = "harness-worker-"
 
-        # Pool universal simplificado quando DeepSeek pool indisponível
+        # Fallback simples quando pool dedicado indisponível
         self._workers: List[str] = []
         self._use_simple_pool = self.pool is None
 
@@ -131,24 +122,25 @@ class UniversalHarnessBridge:
         runner: Optional[Callable[..., Dict[str, Any]]] = None,
     ) -> List[Dict[str, Any]]:
         if self.pool is not None:
-            # Wrap runner para propagar provider/model
-            def _wrapped(prompt, **kw):
-                # Runner pode ser simples; tenta chamar com provider/model
-                if runner is None:
-                    return self.adapter.run_task(prompt, task_type=task_type, provider=provider, model=model)
-                try:
-                    return runner(prompt, provider=provider, model=model, task_type=task_type)
-                except TypeError:
-                    try:
-                        return runner(prompt)
-                    except Exception as exc:
-                        return {"status": "error", "error": str(exc)}
-
-            # Se pool já tem workers, usa submit; senão garante
-            workers = self.pool.report().get("workers", 0) if hasattr(self.pool, "report") else len(self._workers)
+            workers = self.pool.report().get("workers", 0) if hasattr(self.pool, "report") else 0
             if workers == 0:
                 self.pool.scale(1)
-            return self.pool.submit(objective, runner=_wrapped)
+            # Pool dedicado HarnessWorkerPool já é nativo com harness-worker- (G4)
+            try:
+                return self.pool.submit(objective, runner=runner, task_type=task_type, provider=provider, model=model)
+            except TypeError:
+                # Fallback para pool legado sem task_type
+                def _wrapped(prompt, **kw):
+                    if runner is None:
+                        return self.adapter.run_task(prompt, task_type=task_type, provider=provider, model=model)
+                    try:
+                        return runner(prompt, provider=provider, model=model, task_type=task_type)
+                    except TypeError:
+                        try:
+                            return runner(prompt)
+                        except Exception as exc:
+                            return {"status": "error", "error": str(exc)}
+                return self.pool.submit(objective, runner=_wrapped)
         # Simple pool: executa 1x via adapter
         result = self.adapter.run_task(objective, task_type=task_type, provider=provider, model=model, runner=runner)
         result = dict(result)
