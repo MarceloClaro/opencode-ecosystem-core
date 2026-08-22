@@ -118,6 +118,8 @@ class MarceloClaroOrchestrator:
         self._harness_reasoning_loop = None
         # Buscas/RAG/Referências aprimorados (SPEC-935-R436) — lazy
         self._search_rag = None
+        # Reversa Universal (SPEC-935-R437) — lazy
+        self._reversa_bridge = None
 
         # MiroFish (enxame preditivo) — carregamento tardio
         self._swarm_validator = None
@@ -1160,6 +1162,97 @@ class MarceloClaroOrchestrator:
         except Exception:
             pass
         return result
+
+    # ------------------------------------------------------------------
+    # REVERSA UNIVERSAL — artigos, repos, códigos, scripts e gaps (SPEC-935-R437)
+    # ------------------------------------------------------------------
+    @property
+    def reversa_bridge(self):
+        if getattr(self, "_reversa_bridge", None) is not None:
+            return self._reversa_bridge
+        try:
+            from reversa_universal.bridge import ReversaBridge
+
+            self._reversa_bridge = ReversaBridge()
+        except Exception as exc:
+            logger.warning(f"[{self.id}] reversa universal indisponível: {exc}")
+            return None
+        return self._reversa_bridge
+
+    def reversa_analyze(self, path: str, output_root: Optional[str] = None) -> Dict[str, Any]:
+        """Análise Reversa Universal em qualquer path (artigo/repo/script)."""
+        bridge = self.reversa_bridge
+        if bridge is None:
+            return {"error": "reversa_bridge indisponível", "target": path}
+        result = bridge.analyze_and_reflect(path, output_root=output_root)
+        # Metacognição adicional no orquestrador
+        try:
+            gaps = result.get("gaps", {}).get("metrics", {}).get("total_gaps", 0)
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"reversa universal: {path}",
+                reflection=f"Orquestrador aplicou Reversa em {path}: {len(result.get('modules',[]))} módulos, {gaps} gaps. Recomendações: {len(result.get('recommendations',[]))}.",
+                score=min(1.0, 0.6 + gaps * 0.08) if isinstance(gaps, int) else 0.6,
+            )
+        except Exception:
+            pass
+        return result
+
+    def reversa_on_article(self, article_path: str, output_root: Optional[str] = None) -> Dict[str, Any]:
+        """Reversa em manuscrito científico (seções, referências, dados)."""
+        return self.reversa_analyze(article_path, output_root=output_root)
+
+    def reversa_on_repo(self, repo_path: str, output_root: Optional[str] = None) -> Dict[str, Any]:
+        """Reversa em repositório (módulos, dependências, integrações)."""
+        return self.reversa_analyze(repo_path, output_root=output_root)
+
+    def reversa_on_scripts(self, pattern: str, base_dir: str = ".", output_root: Optional[str] = None) -> Dict[str, Any]:
+        """Reversa em conjunto de scripts via glob pattern (ex. 'scripts/*.py')."""
+        import glob as _glob
+        import pathlib as _pl
+        matches = _glob.glob(os.path.join(base_dir, pattern), recursive=True)
+        if not matches:
+            return {"error": f"nenhum script encontrado para pattern {pattern}", "pattern": pattern}
+        # Analisa diretório comum ou primeiro match
+        # Para simplicidade, analisa base_dir e filtra por pattern no report
+        result = self.reversa_analyze(base_dir if _pl.Path(base_dir).is_dir() else matches[0], output_root=output_root)
+        result["pattern"] = pattern
+        result["matched_files"] = matches[:20]
+        return result
+
+    def reversa_enhance_gaps(self, diagnostic_report: Dict[str, Any], path: Optional[str] = None) -> Dict[str, Any]:
+        """Injeta gaps Reversa em relatório de diagnóstico (scanners de gaps)."""
+        bridge = self.reversa_bridge
+        if bridge is None:
+            return diagnostic_report
+        analysis = None
+        if path:
+            try:
+                from reversa_universal.engine import reversa_engine
+
+                analysis = reversa_engine.analyze(path)
+            except Exception:
+                pass
+        return bridge.enhance_gaps(diagnostic_report, analysis=analysis)
+
+    def reversa_status(self) -> Dict[str, Any]:
+        bridge = self.reversa_bridge
+        if bridge is None:
+            return {"available": False}
+        try:
+            return bridge.status()
+        except Exception as exc:
+            return {"available": False, "error": str(exc)}
+
+    def reversa_enhance_reasoning(self, context: Dict[str, Any], path: Optional[str] = None) -> Dict[str, Any]:
+        """Enriquece contexto de raciocínio com estrutura Reversa."""
+        try:
+            from reversa_universal.engine import reversa_engine
+
+            analysis = reversa_engine.analyze(path) if path else None
+            return reversa_engine.enhance_reasoning(context, analysis)
+        except Exception:
+            return context
 
     def list_agents(self) -> List[Dict[str, Any]]:
         return [card.to_dict() for card in blackboard.registry.values()]
