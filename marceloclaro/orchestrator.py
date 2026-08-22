@@ -116,6 +116,8 @@ class MarceloClaroOrchestrator:
         self._harness_bridge = None
         self._harness_bridge_failed = False
         self._harness_reasoning_loop = None
+        # Buscas/RAG/Referências aprimorados (SPEC-935-R436) — lazy
+        self._search_rag = None
 
         # MiroFish (enxame preditivo) — carregamento tardio
         self._swarm_validator = None
@@ -1073,6 +1075,90 @@ class MarceloClaroOrchestrator:
         except Exception:
             pass
         result["lessons_considered"] = len(awareness.get("lessons", []))
+        return result
+
+    # ------------------------------------------------------------------
+    # BUSCAS UNIFICADAS + RAG APRIMORADO + REFERÊNCIAS ABNT (SPEC-935-R436)
+    # ------------------------------------------------------------------
+    @property
+    def search_rag(self):
+        if getattr(self, "_search_rag", None) is not None:
+            return self._search_rag
+        try:
+            from rag.enhanced_search_rag import UnifiedSearchRAG
+
+            self._search_rag = UnifiedSearchRAG()
+        except Exception as exc:
+            logger.warning(f"[{self.id}] search_rag indisponível: {exc}")
+            return None
+        return self._search_rag
+
+    def search_rag_status(self) -> Dict[str, Any]:
+        s = self.search_rag
+        if s is None:
+            return {"available": False, "reason": "search_rag indisponível"}
+        try:
+            return s.status()
+        except Exception as exc:
+            return {"available": False, "error": str(exc)}
+
+    def unified_search(self, query: str, limit: int = 10, providers: Optional[List[str]] = None) -> List[Dict[str, Any]]:
+        """Busca unificada dedup + temporal (MultiSearcher + RAG + web)."""
+        s = self.search_rag
+        if s is None:
+            return []
+        results = s.search(query, limit=limit, providers=providers)
+        try:
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"busca unificada: {query[:80]}",
+                reflection=f"Busca unificada retornou {len(results)} resultados para '{query[:60]}'.",
+                score=min(1.0, len(results) / max(1, limit)),
+            )
+        except Exception:
+            pass
+        return results
+
+    def rag_query(self, query: str, top_k: int = 5) -> Dict[str, Any]:
+        """RAG aprimorado grounded (expansão + temporal + citação)."""
+        s = self.search_rag
+        if s is None:
+            return {"query": query, "abstained": True, "evidence": [], "error": "search_rag indisponível"}
+        result = s.rag_query(query, top_k=top_k)
+        try:
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"rag query: {query[:80]}",
+                reflection=(
+                    f"RAG retornou {result.get('evidence_count',0)} evidências "
+                    f"({'absteve' if result.get('abstained') else 'grounded'}, "
+                    f"groundedness={result.get('groundedness',0):.2f})."
+                ),
+                score=float(result.get("groundedness", 0.0)),
+            )
+        except Exception:
+            pass
+        return result
+
+    def audit_references(self, references: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Auditoria ABNT determinística (DOI, ano, duplicata, completude)."""
+        s = self.search_rag
+        if s is None:
+            return {"total": 0, "error": "search_rag indisponível"}
+        result = s.audit(references)
+        try:
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"auditoria referências: {len(references)} refs",
+                reflection=(
+                    f"Auditoria ABNT: {result.get('valid',0)}/{result.get('total',0)} válidas, "
+                    f"{len(result.get('duplicates',[]))} duplicatas, "
+                    f"{len(result.get('incomplete',[]))} incompletas."
+                ),
+                score=float(result.get("valid", 0)) / max(1, float(result.get("total", 0))),
+            )
+        except Exception:
+            pass
         return result
 
     def list_agents(self) -> List[Dict[str, Any]]:

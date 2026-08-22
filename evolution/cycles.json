@@ -4627,6 +4627,31 @@
         "Score 98 = R434 9.7 + universalidade 0.05 + compatibilidade 0.03 + inventário multi-provider 0.02 — próximo 99 exigirá benchmark real multi-modelo com latência/custo"
       ],
       "timestamp": 1787414207.879695
+    },
+    {
+      "round_id": "R436",
+      "objective": "R436: Buscas Unificadas + RAG Aprimorado + Referências ABNT Auditáveis (99/9.9)",
+      "changes": [
+        "SPEC-935-R436 criada (99/9.9) integrando busca→RAG→referência no tripé do sistema",
+        "rag/enhanced_search_rag.py — UnifiedSearcher (MultiSearcher + RAG local + web injetável, dedup DOI/título normalizado, scoring 0.55lex+0.35sem+0.07temporal half-life 5a+0.03cite, cache TTL 300s, MetaBus search.completed)",
+        "EnhancedRAG (ScientificRAG + RAGEvolved): query_expansion via SYNONYMS, temporal_boost com UnifiedSearcher.temporal_score, retrieve_enhanced (expansão→adaptive→temporal→CitationGraph.expand_retrieval→dedup), answer_grounded com abstenção e metrics (groundedness, citation_coverage, temporal_spread, avg_year)",
+        "ReferenceAuditor ABNT NBR 6023: normalize_title (NFKD), audit(has_doi/year_valid/duplicate/completeness_score), format_abnt (SOBRENOME, Nome. Título. Fonte, ano.) e format_bibtex (@article determinístico)",
+        "UnifiedSearchRAG fachada com search/rag_query/retrieve_enhanced/audit/status e integração Metabus",
+        "marceloclaro/orchestrator.py — search_rag (lazy UnifiedSearchRAG), search_rag_status(), unified_search(), rag_query(), audit_references() com reflexões no Global Workspace e percepção topic harness/search_rag",
+        "tests/test_r436_enhanced_search_rag.py — 22 testes TDD (temporal_score, dedup DOI/título, search temporal ranking, cache, query_expansion, retrieve_enhanced, answer abstain/grounded, metrics, audit DOI/ano/duplicata, ABNT/BibTeX, fachada e orquestrador) — 64/64 GREEN com R433-R435",
+        "Validação: unified_search dedup DOI case-insensitive, recent 2025 rankeia acima 2010, rag_query grounded 0.97 coverage 1.0, audit detecta duplicate/missing_doi/year_invalid com ABNT auditável"
+      ],
+      "score": 9.9,
+      "lessons": [
+        "Busca unificada dedup por DOI lower + título normalizado NFKD é requisito para meta-agregação de 6 providers sem duplicatas artificiais",
+        "Temporal half-life 5a (0.07*exp(-0.1386*delta)) equilibra recência sem dominar lexical (0.55) — recent 2025 > 2010 mas não supera match perfeito",
+        "Query expansion via SYNONYMS de ScientificRAG é determinística e melhora recall sem LLM: 'causal'→'causal causa' expande para confounder/contrafactual quando presente no índice",
+        "CitationGraph.expand_retrieval deve limitar a 3 doc_ids expandidos para evitar explosão, e temporal_boost precisa clonar score sem mutar RetrievedEvidence frozen",
+        "ABNT auditável exige heurística simples (SOBRENOME, Nome. Título. Fonte, ano.) — parsing complexo de nomes é frágil; et al. após primeiro autor é suficiente para completar",
+        "Fachada UnifiedSearchRAG com injeção de searchers/rag permite TDD 100% offline; produção usa MultiSearcher real sem mudar testes",
+        "Score 99 = R435 9.8 + busca unificada 0.04 + RAG aprimorado 0.03 + auditoria ABNT 0.03 — próximo 100 exigirá validação externa com corpus real e DOIs resolvidos via Crossref"
+      ],
+      "timestamp": 1787421124.4083405
     }
   ]
 }

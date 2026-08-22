@@ -8,11 +8,12 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.8.0_Triagem_Real_%2B_Multi--CLI-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.750_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-253_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-254_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-98-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-99-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
+[![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
 [![Autonomia](https://img.shields.io/badge/Autonomia-100%25_Standalone-green.svg)](benchmarks/standalone_readiness_eval.py)
 [![Colibri MoE](https://img.shields.io/badge/Colibri-OLMoE_Engine-success.svg)](integrations/colibri/)
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
@@ -142,6 +143,25 @@ orch.orchestrate_harness_iterative("produção até 97", task_type="reasoning", 
 ```
 
 Harness agnóstico = `ModelRouter` como indirection: adicionar um novo modelo não exige código novo no harness.
+
+### Act X — Buscas Unificadas, RAG Aprimorado e Referências ABNT Auditáveis (R436 — 99/9.9)
+Busca, RAG e referência não são módulos isolados — são o mesmo fluxo `busca → evidência → citação`. R436 fecha essa última milha com `rag/enhanced_search_rag.py`:
+
+- **UnifiedSearcher** — `MultiSearcher` (Arxiv, SemanticScholar, Crossref, OpenAlex, EuropePMC, Scielo) + RAG local + web injetável, dedup por `doi.lower()` ou `titulo_normalizado` (NFKD), scoring `0.55lex+0.35sem+0.07temporal(half-life 5a)+0.03cite`, cache TTL 300s e evento `search.completed` no MetaBus.
+- **EnhancedRAG** — `ScientificRAG` + `RAGEvolved` com `query_expansion` (SYNONYMS), `temporal_boost` (recente 2025 > 2010), `CitationGraph.expand_retrieval` e `answer_grounded` com `abstained`/`groundedness`/`citation_coverage` + `metrics`.
+- **ReferenceAuditor** — ABNT NBR 6023 simplificada (`SOBRENOME, Nome. Título. Fonte, ano.`), `BibTeX @article`, `audit` detecta `missing_doi`/`year_invalid`/`duplicate`/`completeness_score` e `format_abnt`/`format_bibtex` determinísticos.
+
+```python
+from marceloclaro.orchestrator import MarceloClaroOrchestrator
+orch = MarceloClaroOrchestrator()
+orch.search_rag_status()  # {searcher:{searchers, cache}, rag:{indexed_chunks}, auditor}
+orch.unified_search("causal inference", limit=10)  # dedup + temporal ranking
+orch.rag_query("causal inference", top_k=5)        # {abstained, evidence, groundedness}
+orch.audit_references([{"title":"Causality","authors":["Pearl"],"year":2009,"source":"Cambridge","doi":"10.1/a"}])
+# → {total, valid, duplicates, by_id:{r1:{has_doi, year_valid, duplicate, completeness_score, abnt}}}
+```
+
+Busca unificada + RAG aprimorado + auditoria ABNT são agora o tripé que conecta retrieval a citação confiável.
 
 ---
 
