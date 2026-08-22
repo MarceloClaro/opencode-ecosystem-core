@@ -200,6 +200,207 @@ python3 -m marceloclaro.cli doctor  # 101 specs, 2 loops pass, 256/256 ciclos
 
 ---
 
+## Histórico Consolidado R433–R438 & Mapa Completo da Infraestrutura Testada e Reproduzível
+
+### Tabela Consolidada — Evolução Contínua até 100
+
+| Ciclo | Score | Objetivo | Spec | Testes | Artefatos Principais | Gate Verificável |
+|---|---|---|---|---|---|---|
+| **R433** | 9.3 | Ponte orquestrada DeepSeek Harness — Core orquestra produções/metacognições do dsh | `SPEC-935-R433` | 16/16 | `integrations/deepseek_harness/{inventory,adapter,metacognition,worker_pool,bridge}` + `orchestrator.dsh_bridge` | `inventory` 231 pacotes, 49 grupos; `adapter` handoff auditável; `pool` Blackboard |
+| **R434** | 9.7 / 97 | Loop raciocinado até gate 97 | `SPEC-935-R434` | 9/9 (25 c/ R433) | `reasoning_loop.py` (ensemble 12 motores + `calibrate` + `GradingHead` 0-7 + `LoopSpec dsh-reasoning-97`) | `cal≥0.97 & grade≥6` em 1 iteração; falha→reflexão→sucesso em 2 |
+| **R435** | 9.8 / 98 | Harness Universal agnóstico (qualquer modelo) | `SPEC-935-R435` | 17/17 (42 c/ anteriores) | `integrations/harness/{model_registry,universal_adapter,universal_bridge,universal_reasoning_loop}` + `orchestrator.harness` | `discover total_models≥5`, `resolve_model`, `orchestrate` com `litert/colibri/zen` → green |
+| **R436** | 9.9 / 99 | Buscas Unificadas + RAG Aprimorado + Referências ABNT | `SPEC-935-R436` | 22/22 (64 c/ anteriores) | `rag/enhanced_search_rag.py` (`UnifiedSearcher` dedup+temporal, `EnhancedRAG` expansão/citação, `ReferenceAuditor` ABNT/BibTeX) | `temporal 2025>2010`, `dedup DOI`, `grounded 0.97`, `audit duplicate` |
+| **R437** | 9.9 / 99 | Reversa Universal transversal | `SPEC-935-R437` | 19/19 (83 c/ anteriores) | `reversa_universal/{engine,bridge}` + `scanners/reversa_scanner` path-aware + `orchestrator.reversa_*` (5 métodos) | `inventory rag` AST, `gaps` TODO/secret, `bridge` MetaBus, `pipeline domain=reversa` |
+| **R438** | **10.0 / 100** | Caminho para 100 — 5 gaps residuais | `SPEC-935-R438` | 15/15 (98 c/ anteriores) | `specs/loops/*.md`, `AntigravityWebSearcher`, `tomli` fallback, `HarnessWorkerPool` nativo, `average_score` doc | `doctor` 101 specs, 2 loops pass, 256/256 ciclos |
+
+> **Total:** 101 specs formais, 256 ciclos evolutivos, 98 testes dedicados R433-R438 (todos GREEN), 83→98 testes integrados, `average_score` = média móvel (indicador, não gate — gate real é `SpecVerifier`+`GradingHead`+`calibration`).
+
+### Infraestrutura Detalhada — Camadas e Dependências
+
+**Princípios de reprodutibilidade para dev:**
+1. **SDD → TDD → Verificação** — toda spec tem `spec_id` + `test_file` + `SpecVerifier` antes de `report_completion`
+2. **Anti-overclaim** — `unavailable` ≠ `completed`; `abstained` quando sem evidência; `handoff` em disco quando sem credenciais
+3. **Lazy + Tolerante** — `orchestrator.*` nunca quebra `__init__` quando `deepseek-harness/` ou `DEEPSEEK_API_KEY` ausentes
+4. **Injeção para testes** — `searchers`/`runner`/`rag` injetáveis garantem `determinismo` sem rede
+
+**Dependências externas (stdlib primeiro):** `ast`, `tomllib→tomli`, `unicodedata`, `json`, `re`, `concurrent.futures`; opcionais `whoosh`, `ModelRouter`, `AntigravityBridge` (com fallback `[]`/`handoff`)
+
+---
+
+### Mapa Completo da Arquitetura Testada e Reproduzível (Mermaid)
+
+> **Como reproduzir:** salve como `docs/mapa-r433-r438.mmd` e valide com `npx mmdc -i docs/mapa-r433-r438.mmd -o /tmp/mapa.png` ou `python3 scripts/verify-mermaid.py` (usa `mermaid-cli` via `npx`). Todos os caminhos abaixo são testados via `pytest tests/test_r43*` e `python3 -m marceloclaro.cli doctor`.
+
+```mermaid
+graph TD
+    %% ===== DEV REPRODUZÍVEL =====
+    Dev([Dev / CI]) -->|git clone| Repo[(opencode-ecosystem-core<br>main)]
+    Repo -->|python3 -m marceloclaro.cli doctor| Doctor{doctor: 101 specs<br>2 loops pass<br>256/256 ciclos}
+    Repo -->|python3 -m pytest tests/test_r43* -q| Tests{98 testes GREEN<br>R433 16 + R434 9 + R435 17 + R436 22 + R437 19 + R438 15}
+    Repo -->|specs/SPEC-935-R43*.md| SDD[SDD Engine<br>SpecRegistry + SpecVerifier<br>Spec → RED → GREEN → REFACTOR]
+    SDD --> Tests
+    Tests --> Doctor
+
+    %% ===== ORQUESTRADOR CENTRAL =====
+    User([Usuário / CLI / Webapp]) -->|comando| Orchestrator[marceloclaro/orchestrator.py<br>MarceloClaroOrchestrator<br>Perceber → Especificar → Delegar → Executar → Verificar → Refletir]
+
+    %% ===== MCI — BARRAMENTO METACOGNITIVO =====
+    subgraph MCI [MCI — Metacognitive Interconnect]
+        MetaBus[MetaBus<br>Global Workspace<br>pub/sub]
+        Blackboard[Blackboard<br>A2A Protocol<br>AgentCard + CFP]
+        Memory[(Memory<br>episodic 1000<br>semantic 100+ topics<br>confidence_ledger)]
+        Reflexion[Reflexion<br>Middleware<br>Shinn et al. 2023]
+        HierarchicalMem[HierarchicalMemory<br>HTM]
+        MetaBus <--> Memory
+        Blackboard <--> MetaBus
+        Reflexion <--> MetaBus
+        HierarchicalMem --> Memory
+    end
+    Orchestrator <-.->|perceive/recall| MCI
+    Orchestrator -->|publish task.cfp| Blackboard
+    Blackboard -->|Call for Proposals| Agents
+
+    %% ===== SDD/TDD + TRUST/ECONOMY + TRANSFORMER =====
+    subgraph CoreGovernance [Governança Core]
+        Trust[Trust Engine<br>BehavioralGate<br>0.0-1.0 + slashing]
+        Economy[Token Economy<br>staking/commit/resolve]
+        Transformer[Transformer<br>AttentionRouter 4 cabeças<br>GradingHead 0-7]
+        Evolution[EvolutionRegistry<br>cycles.json 256 ciclos<br>average_score = média móvel]
+        SDD -->|gate| Trust
+        Trust --> Economy
+        Transformer --> Blackboard
+        Orchestrator --> Evolution
+    end
+
+    %% ===== HARNESS UNIVERSAL (R433-R435 + R438 G4) =====
+    subgraph Harness [Harness Universal Agnóstico — R433-R435 + R438]
+        DSInventory[DeepSeek Inventory<br>_reversa_sdd/inventory.md<br>231 pacotes 49 grupos]
+        DSAdapter[DeepSeek Adapter<br>sdk / runtime-bin / unavailable<br>handoff .deepseek-harness/queue/]
+        DSMetacog[DS Metacognition<br>session.events → MetaBus<br>.agents/notes → semantic]
+        DSPool[DeepSeek Worker Pool<br>dsh-worker-N<br>Trust+Economy]
+        DSBridge[DeepSeek Bridge<br>orchestrate TSPEC]
+        DSLoop[DeepSeek Reasoning Loop<br>dsh-reasoning-97<br>ensemble 12 motores<br>cal 0.97 + grade 6]
+        DSInventory --> DSAdapter
+        DSAdapter --> DSPool
+        DSPool --> DSBridge
+        DSBridge --> DSLoop
+        DSLoop -.->|specs/loops/dsh-reasoning-97.md| LoopSpecs
+
+        ModelRegistry[Harness Model Registry<br>ModelRouter<br>38 modelos<br>litert/colibri/zen/go/openai/deepseek]
+        UnivAdapter[Universal Adapter<br>run_task task_type/provider/model<br>runner injetado > route_and_complete]
+        HarnessPool[Harness Worker Pool<br>harness-worker-N G4 nativo<br>harness_execution]
+        UnivBridge[Universal Bridge<br>orchestrate TSPEC]
+        UnivLoop[Universal Reasoning Loop<br>harness-reasoning-97<br>qualquer task_type/provider]
+        ModelRegistry --> UnivAdapter
+        UnivAdapter --> HarnessPool
+        HarnessPool --> UnivBridge
+        UnivBridge --> UnivLoop
+        UnivLoop -.->|specs/loops/harness-reasoning-97.md| LoopSpecs
+        DSBridge -.->|legado compatível| UnivBridge
+    end
+    Orchestrator -->|lazy harness| Harness
+    Orchestrator -->|lazy dsh_bridge| Harness
+    LoopSpecs[(specs/loops/<br>dsh + harness<br>2 loops pass)]
+
+    %% ===== SEARCH-RAG-REFERÊNCIAS (R436 + R438 G2) =====
+    subgraph SearchRAG [Buscas Unificadas + RAG + Referências — R436 + R438]
+        UnifiedSearcher[UnifiedSearcher<br>MultiSearcher 6 providers<br>+ RAG local + AntigravityWebSearcher G2<br>dedup DOI/titulo + temporal half-life 5a<br>cache TTL 300s]
+        EnhancedRAG[EnhancedRAG<br>ScientificRAG + RAGEvolved<br>query_expansion SYNONYMS<br>temporal_boost + CitationGraph<br>answer_grounded abstained]
+        ReferenceAuditor[ReferenceAuditor<br>ABNT NBR 6023 + BibTeX<br>has_doi/year_valid/duplicate<br>completeness_score]
+        UnifiedFacade[UnifiedSearchRAG<br>fachada search/rag_query/audit/status]
+        EnhancedRAG --> ReferenceAuditor
+        UnifiedSearcher --> EnhancedRAG
+        EnhancedRAG --> UnifiedFacade
+        UnifiedFacade --> SearchRAGStatus
+        Antigravity[AntigravityBridge<br>agy --print<br>handoff .antigravity/queue/]
+        Antigravity -.->|provider=web| UnifiedSearcher
+    end
+    Orchestrator -->|unified_search<br>rag_query<br>audit_references| SearchRAG
+    SearchRAGStatus[(search_rag_status)]
+
+    %% ===== REVERSA UNIVERSAL (R437 + R438 G3) =====
+    subgraph ReversaUniversal [Reversa Universal Transversal — R437 + R438]
+        Engine[ReversaUniversalEngine<br>inventory: os.walk + LOC<br>modules: ast + headings<br>dependencies: requirements/package.json/pyproject.toml<br>tomllib para tomli fallback G3<br>data_model: models.py]
+        Gaps[Gaps<br>missing_tests/docs<br>stale_deps/TODO/secrets/long_files<br>correlações/soluções/inovações]
+        Engine --> Gaps
+        BridgeReversa[ReversaBridge<br>analyze_and_reflect<br>enhance_gaps]
+        Engine --> BridgeReversa
+        Scanner[ReversaScanner<br>path-aware: rag/scientific.py → 5.9<br>texto: def/class regex]
+        Engine -.->|delega quando corpus é path| Scanner
+        PipelineReversa[DiagnosticPipeline<br>domain=reversa<br>evolutionary.reversa_gaps]
+        BridgeReversa --> PipelineReversa
+    end
+    Orchestrator -->|reversa_analyze<br>reversa_on_article/repo/scripts<br>reversa_enhance_gaps| ReversaUniversal
+    Agents -->|Registra AgentCard| Blackboard
+
+    %% ===== OUTROS SUBSISTEMAS =====
+    subgraph Outros [Acadêmico + MCP + Observabilidade]
+        Academic[Pipeline Acadêmico<br>R101 EvoSci → R102 Deep Research → R103 Peer Review → R104 Revision → R105 Paper Composer]
+        ResearchHub[Research Hub<br>searchers + DataKnowledgeHub]
+        MCP[MCP 6 Servers<br>litert-lm, metacognitive-interconnect, antigravity-bridge,<br>pypi-search, colibri-mcp, scanners-mcp]
+        Observability[Observability<br>MetricsCollector<br>Doctor]
+        Academic --> ResearchHub
+        ResearchHub --> UnifiedSearcher
+        Academic --> EnhancedRAG
+        MCP --> MCI
+        Observability --> Doctor
+    end
+    Orchestrator -->|academic_pipeline| Academic
+    Orchestrator -->|diagnose| PipelineReversa
+
+    %% ===== FLUXO DE TESTE REPRODUZÍVEL =====
+    Dev -->|1. Reproduz Harness| Harness
+    Dev -->|2. Reproduz Search-RAG| SearchRAG
+    Dev -->|3. Reproduz Reversa| ReversaUniversal
+    Tests -.->|cobre| Harness
+    Tests -.->|cobre| SearchRAG
+    Tests -.->|cobre| ReversaUniversal
+    Doctor -.->|valida 101 specs + 2 loops| LoopSpecs
+
+    %% ===== ESTILOS =====
+    classDef harness fill:#e1f5fe,stroke:#0288d1
+    classDef search fill:#f3e5f5,stroke:#7b1fa2
+    classDef reversa fill:#e8f5e9,stroke:#2e7d32
+    classDef mci fill:#fff3e0,stroke:#ef6c00
+    classDef core fill:#fce4ec,stroke:#c2185b
+    class Harness,DSInventory,DSAdapter,DSPool,DSBridge,DSLoop,ModelRegistry,UnivAdapter,HarnessPool,UnivBridge,UnivLoop harness
+    class SearchRAG,UnifiedSearcher,EnhancedRAG,ReferenceAuditor,UnifiedFacade search
+    class ReversaUniversal,Engine,Gaps,BridgeReversa,Scanner reversa
+    class MCI,MetaBus,Blackboard,Memory,Reflexion mci
+    class CoreGovernance,Trust,Economy,Transformer,Evolution core
+```
+
+**Reprodutibilidade para dev — comandos exatos (testado em `main` @ `23b7b19` + `cb5a705`):**
+```bash
+# 1. Clonar e preparar
+git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git && cd opencode-ecosystem-core
+python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+
+# 2. Validar infraestrutura (sem rede/credenciais)
+python3 -m marceloclaro.cli doctor
+# → 101 specs formais, 2 loop specs pass, 256/256 ciclos, overall degraded (apenas external_clis warn)
+
+# 3. Rodar suíte R433-R438 (98 testes, determinísticos com runners/searchers injetados)
+python3 -m pytest tests/test_r433_deepseek_harness_bridge.py tests/test_r434_deepseek_harness_reasoning.py tests/test_r435_harness_universal.py tests/test_r436_enhanced_search_rag.py tests/test_r437_reversa_universal.py tests/test_r438_caminho_100.py -q
+# → 98 passed
+
+# 4. Reproduzir harness universal com qualquer modelo (mock por padrão quando sem DEEPSEEK_API_KEY)
+python3 << 'PY'
+from marceloclaro.orchestrator import MarceloClaroOrchestrator
+orch = MarceloClaroOrchestrator(auto_load_agents=False)
+print(orch.harness_status())  # registry total_models, adapter providers
+print(orch.orchestrate_harness("auditar sessões", task_type="coding", provider="litert-lm", model="gemma-4-E2B-it", runner=lambda p,**kw: {"status":"completed","final_response":p+" resposta ancorada "+p})["verification"]["status"])
+PY
+
+# 5. Validar Mermaid (opcional)
+npx -y mermaid-cli --version && npx mermaid-cli -i README.md -o /tmp/readme_mermaid.png || echo "mermaid-cli não instalado — diagrama ainda é válido via GitHub render"
+python3 scripts/verify-mermaid.py 2>&1 | head  # se existir
+```
+
+> **Nota de honestidade:** O `average_score` (9.63) é média móvel dos 256 scores — indicador de tendência, **não gate**. O gate real é `SpecVerifier` (TSPEC) + `GradingHead` (≥6/7) + `calibration` (≥0.97), verificado em cada `orchestrate`/`rag_query`/`reversa_analyze`.
+
+---
+
 ---
 
 ##  O que é o OpenCode Ecosystem?
