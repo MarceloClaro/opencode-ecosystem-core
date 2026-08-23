@@ -1,12 +1,12 @@
-# Arquitetura: OpenCode Ecosystem Core v3.8 (Triagem Real de CLIs Externos)
+# Arquitetura: OpenCode Ecosystem Core v3.9 (Microsoft APM & Amplificação Cognitiva DeepSeek Harness)
 
-Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, sua fusão e loop real (R108–R109), os subsistemas de raciocínio e revisão (R113–R115), instalação e pesquisa CLI (R116/R120), apresentações MIRA (R123–R126), **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, **On-Device LLM via LiteRT-LM (R48–R52)**, a **Camada Epistêmica e Guardas de Tradução Cultural (R363–R369)**, e a **auditoria real dos três CLIs externos e do supervisor LiteRT-LM (R391–R395)** — ver última seção deste documento. Para a narrativa completa por ciclo (incluindo R370–R390, rigor estatístico/triangulação/pré-registro e a preparação editorial trilíngue do projeto Molambudos), ver [`README.md`](README.md).
+Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, sua fusão e loop real (R108–R109), os subsistemas de raciocínio e revisão (R113–R115), instalação e pesquisa CLI (R116/R120), apresentações MIRA (R123–R126), **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, **On-Device LLM via LiteRT-LM (R48–R52)**, a **Camada Epistêmica e Guardas de Tradução Cultural (R363–R369)**, a **auditoria real dos três CLIs externos e do supervisor LiteRT-LM (R391–R395)**, a **Padronização Canônica Microsoft APM (SPEC-935-R440)** e a **Amplificação Cognitiva de Modelos Free via DeepSeek Harness (SPEC-935-R441)**.
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
 ---
 
-## Diagrama de Arquitetura Completo
+## Diagrama de Arquitetura Completo (v3.9)
 
 ```mermaid
 graph TD
@@ -75,12 +75,36 @@ graph TD
         DocCheck -.->|consulta| Metrics
     end
 
+    %% Microsoft APM (R440)
+    subgraph APM [Microsoft APM - Agent Package Manager R440]
+        APMMan[apm.yml<br>222 Primitivas]
+        APMAudit[APMAuditor<br>Trojan Source & Injection Scan]
+        APMComp[APMCompiler<br>opencode.json & AGENTS/CLAUDE]
+        APMLock[apm.lock.yaml<br>Hashes SHA-256]
+        
+        APMMan --> APMAudit
+        APMAudit --> APMComp
+        APMComp --> APMLock
+    end
+
+    %% DeepSeek Harness Free Model Amplifier (R441)
+    subgraph DSH [DeepSeek Harness Free Model Amplifier R441]
+        FreeModels[Modelos Free<br>ox-alpha-free · deepseek-free]
+        Scaffold[ReasoningScaffoldEngine<br>Test-Time Compute <think>]
+        CtxAmp[ContextAmplifier<br>Whoosh3 BM25F + DataHub RAG]
+        CoVe[ChainOfVerification<br>CoVe 97%+ & Grading Head]
+        
+        FreeModels --> Scaffold
+        Scaffold --> CtxAmp
+        CtxAmp --> CoVe
+    end
+
     %% Camada Core
     subgraph Core [Core Subsystems]
         Trust[Trust Engine<br>Behavioral Gate]
         Eco[Token Economy<br>Staking/Slashing]
         Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
-        Acad[MASWOS<br>Qualis A1]
+        MASWOS[MASWOS<br>Qualis A1]
         Reason[Reasoning<br>12 Engines + Quantum]
         Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928]
         LegalBench[Legal Benchmarks<br>SPEC-928]
@@ -104,7 +128,7 @@ graph TD
         ColibriEngine["Colibri MoE C Engine<br>OLMoE 1B/7B int4<br>colibri/c/olmoe"]
         ColibriProv["ColibriProvider<br>Porta 8090 · OpenAI API<br>Lazy Auto-Start"]
         SelfCorrection["SelfCorrectionEngine<br>Diagnóstico → Correção<br>Validação RED-GREEN → CORRIGENDUM"]
-        LazyCatalog["LazyAgentCatalog<br>187+ agentes · @lru_cache"]
+        LazyCatalog["LazyAgentCatalog<br>205+ agentes · @lru_cache"]
         VecDrift["VectorizedGoalDriftDetector<br>N-gram L2 Cosseno"]
         AgentEval["AgentEvalHarness<br>TSR + Tool Accuracy + Percentis"]
         MerkleGuard["MerkleIntegrityGuard<br>Merkle Root SHA-256<br>Imutabilidade do Código"]
@@ -177,6 +201,8 @@ graph TD
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
+    Orchestrator -->|Governança & Primitivas| APM
+    Orchestrator -->|Amplificação Free Models| DSH
     
     %% Conexões de observabilidade
     Orchestrator -->|get_reduction_stats| Metrics

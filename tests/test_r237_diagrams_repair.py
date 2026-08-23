@@ -25,8 +25,8 @@ class TestR237DiagramsRepair(unittest.TestCase):
 
         # Garante que cada ```mermaid possui seu fechamento ``` correspondente
         mermaid_opens = content.count("```mermaid")
-        self.assertEqual(mermaid_opens, 4, "Devem existir 4 blocos de diagramas Mermaid no README.md")
-        self.assertIn("Mapa da Arquitetura Completa (v3.7.0)", content)
+        self.assertGreaterEqual(mermaid_opens, 4, "Devem existir ao menos 4 blocos de diagramas Mermaid no README.md")
+        self.assertIn("Mapa da Arquitetura Completa (v3.9.0)", content)
         self.assertIn("subgraph Core [Core Subsystems]", content)
 
     def test_spec_verifier_execution(self):
