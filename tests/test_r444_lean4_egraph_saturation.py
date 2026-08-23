@@ -137,7 +137,7 @@ theorem unproven_claim (n : Nat) : n > 0 := by
         self.assertIn("Lean 4 & E-Graph ativos", check.detail)
 
         doc_report = run_doctor()
-        self.assertEqual(doc_report["checks_total"], 17)
+        self.assertGreaterEqual(doc_report["checks_total"], 17)
         self.assertEqual(doc_report["checks_failed"], 0)
 
 

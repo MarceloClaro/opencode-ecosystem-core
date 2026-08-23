@@ -263,9 +263,20 @@ def main() -> int:
             expr = sys.argv[2]
             egraph_res = orchestrator.egraph_saturate_term(expr)
             print(json.dumps(egraph_res, indent=2, ensure_ascii=False))
+        elif cmd in ("geometry", "alphageometry", "wu"):
+            prob_type = sys.argv[2] if len(sys.argv) > 2 else "midpoint_theorem"
+            geom_res = orchestrator.solve_geometry_problem(prob_type)
+            print(json.dumps(geom_res, indent=2, ensure_ascii=False))
+        elif cmd in ("autoformalize", "formalize", "crossval"):
+            if len(sys.argv) < 3:
+                print('Uso: python3 -m marceloclaro.cli autoformalize "<enunciado_informal>"')
+                raise SystemExit(1)
+            informal_text = sys.argv[2]
+            form_res = orchestrator.autoformalize_to_lean4(informal_text)
+            print(json.dumps(form_res, indent=2, ensure_ascii=False))
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
         return 0
 
     # Modo interativo

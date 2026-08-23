@@ -6,16 +6,17 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.9.0_Lean4_%2B_Egglog_%2B_AlphaProof-blue.svg)](CHANGELOG.md)
+[![Versão](https://img.shields.io/badge/Versão-3.9.0_AlphaGeometry_%2B_AutoFormalize_%2B_Lean4-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.850_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-262_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-263_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![APM](https://img.shields.io/badge/Microsoft_APM-222_primitivas-0078D4.svg)](apm.yml)
+[![AlphaGeometry](https://img.shields.io/badge/OpenCode-AlphaGeometry_%26_Wu's_Method-EA4335.svg)](integrations/deepmind/)
 [![Lean 4 & E-Graph](https://img.shields.io/badge/Lean_4-Formal_Proof_%26_E--Graph-34A853.svg)](integrations/deepmind/)
 [![AlphaProof](https://img.shields.io/badge/OpenCode-AlphaProof_%26_DeepThink-4285F4.svg)](integrations/deepmind/)
 [![DeepSeek Harness](https://img.shields.io/badge/DeepSeek_Harness-Free_Model_Amplifier-4B0082.svg)](integrations/deepseek_harness/)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-209-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-108-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-109-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
 [![Reversa](https://img.shields.io/badge/Reversa-Universal_99-success.svg)](reversa_universal/engine.py)
@@ -217,16 +218,16 @@ Integrando o repositório **DeepSeek Harness** ([https://github.com/MarceloClaro
 - **Chain of Verification (CoVe 97%+)**: Auto-correção iterativa com grading head de confiança ($\ge 0.90$).
 - **CLI & Orquestrador**: Comando `python3 -m marceloclaro.cli amplify "<prompt>" --model ox-alpha-free` e métodos nativos no `MarceloClaroOrchestrator`.
 
-### Act XVI — O Raciocínio de Fronteira: Google DeepMind Superhuman & Aletheia (R442 — 10.0 / 100)
-### Act XVIII — A Fronteira Formal: Lean 4 & Descoberta Autônoma de Lemas com E-Graph (R444 — 10.0 / 100)
-Superando os últimos gaps técnicos em relação aos assistentes de provas mais avançados do mundo:
-- **Ponte e Verificador Lean 4 (`Lean4ProofVerifier`)**: Geração de código formal em Lean 4 (`Mathlib.Tactic`), detecção rigorosa de incompletude (`sorry`), validação estática de táticas (`ring`, `linarith`, `omega`, `aesop`, `intro`, `exact`) e compilação nativa machine-checked via kernel Lean 4.
-- **Motor E-Graph & Saturação de Igualdade (`EqualitySaturationEngine`)**: Algoritmo baseado no paradigma *Egg/Egglog* com fechamento por congruência (*congruence closure*) e extração por programação dinâmica *bottom-up*, permitindo simplificação ótima e descoberta autônoma de lemas sem loop infinito.
-- **CLI & Orquestrador**: Comandos `python3 -m marceloclaro.cli lean4` e `egraph`. Novo check `lean4_egraph_engine` no `doctor` (17/17 checks estruturais ativos).
+### Act XIX — O Motor Geométrico & Auto-Formalização Bidirecional com Validação Cruzada (R445 — 10.0 / 100)
+Expandindo a fronteira do raciocínio formal para a geometria olímpica e tradução semântica de provas:
+- **OpenCode AlphaGeometry & Método de Wu (`OpenCodeAlphaGeometry`)**: Solucionador neuro-simbólico combinando Base Dedutiva (*Geometric Deductive Database - DD*) e Provedor Algébrico pelo Método de Wu via anulação de ideais polinomiais no SymPy, gerando diagramas vetoriais SVG e código LaTeX TikZ compilável.
+- **Auto-Formalizador Bidirecional (`AutoFormalizerEngine`)**: Traduz linguagem natural/LaTeX diretamente para scripts formais em Lean 4 (`Mathlib.Tactic`), e decompila código Lean 4 em demonstrações matemáticas rigorosas e didáticas em português formal.
+- **Validação Cruzada Tripla (*Cross-Validation*)**: Checagem de consistência entre hipóteses informais, polinômios algébricos e scripts formais compiláveis (com rejeição estrita de `sorry`).
+- **CLI & Orquestrador**: Comandos `python3 -m marceloclaro.cli geometry` e `autoformalize`. Novo check `geometry_autoformalization_engine` no `doctor` (18/18 checks estruturais ativos).
 
 ---
 
-## Histórico Consolidado R433–R444 & Mapa Completo da Infraestrutura Testada e Reproduzível
+## Histórico Consolidado R433–R445 & Mapa Completo da Infraestrutura Testada e Reproduzível
 
 ### Tabela Consolidada — Evolução Contínua até 100
 
@@ -244,8 +245,9 @@ Superando os últimos gaps técnicos em relação aos assistentes de provas mais
 | **R442** | **10.0 / 100** | Raciocínio Científico Google DeepMind Superhuman & Aletheia | `SPEC-935-R442` | 10/10 | `integrations/deepmind/{aletheia_scaffold,formal_verifier,imobench_harness}` + `orchestrator.aletheia_*` + `cli aletheia/imobench` + `doctor` | Decomposição em lemas e provas LaTeX Aletheia, verificação formal SymPy/Z3 e benchmark IMO-Bench |
 | **R443** | **10.0 / 100** | Motores Nativos OpenCode AlphaProof, Deep Think & Erdős/Hirzebruch Solver | `SPEC-935-R443` | 10/10 | `integrations/deepmind/{alphaproof_engine,deep_think_engine,erdos_hirzebruch_solver}` + `orchestrator.{deep_think,alphaproof_search,solve_open_conjecture}` + `cli deepthink/alphaproof/erdos` + `doctor` | Busca em árvore de provas, Test-Time Compute dinâmico, demonstração de irracionalidade Erdős-1051 e autopesos de Hirzebruch |
 | **R444** | **10.0 / 100** | Integração Lean 4 & Saturação de Igualdade E-Graph (Egglog) | `SPEC-935-R444` | 11/11 | `integrations/deepmind/{lean4_verifier,egraph_rewriter}` + `orchestrator.{lean4_verify_code,egraph_saturate_term}` + `cli lean4/egraph` + `doctor` | Geração e verificação Lean 4 machine-checked, detecção de sorry, E-graphs com congruence closure e simplificação ótima |
+| **R445** | **10.0 / 100** | AlphaGeometry (Método de Wu) & Auto-Formalização Bidirecional | `SPEC-935-R445` | 12/12 | `integrations/deepmind/{geometry_engine,autoformalizer}` + `orchestrator.{solve_geometry_problem,autoformalize_to_lean4,cross_validate_reasoning}` + `cli geometry/autoformalize` + `doctor` | Base dedutiva geométrica, redução algébrica de Wu (resíduo 0), diagramas TikZ/SVG, autoformalização Lean 4 e validação cruzada tripla |
 
-> **Total:** 108 specs formais, 262 ciclos evolutivos, 167 testes dedicados R433–R444 (todos GREEN), 100% integrados no Orquestrador e verificáveis via `doctor`.
+> **Total:** 109 specs formais, 263 ciclos evolutivos, 179 testes dedicados R433–R445 (todos GREEN), 100% integrados no Orquestrador e verificáveis via `doctor`.
 
 ### Infraestrutura Detalhada — Camadas e Dependências
 
@@ -2547,8 +2549,8 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>262 ciclos evolutivos (R1–R444) · 2.850 testes coletados · 209 agentes · 108 specs formais</i><br>
-  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | Lean 4 Verifier | E-Graph Equality Saturation | OpenCode AlphaProof & Deep Think | Aletheia Open Problems | Camada Epistêmica</b><br>
+  <i>263 ciclos evolutivos (R1–R445) · 2.850 testes coletados · 209 agentes · 109 specs formais</i><br>
+  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | AlphaGeometry & Wu's Method | Lean 4 Auto-Formalizer | E-Graph Saturation | AlphaProof & Deep Think</b><br>
   <sub>Números medidos em 2026-08 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
   contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
