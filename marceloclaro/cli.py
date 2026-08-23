@@ -14,6 +14,7 @@ Uso:
 SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 """
 
+import os
 import sys
 import json
 
@@ -243,9 +244,28 @@ def main() -> int:
                 params["dim"] = int(sys.argv[4])
             res = orchestrator.solve_open_conjecture(conjecture_type, params=params)
             print(json.dumps(res, indent=2, ensure_ascii=False))
+        elif cmd in ("lean4", "lean"):
+            if len(sys.argv) < 3:
+                print('Uso: python3 -m marceloclaro.cli lean4 "<codigo_lean_ou_caminho_arquivo>"')
+                raise SystemExit(1)
+            raw_input = sys.argv[2]
+            if os.path.isfile(raw_input):
+                with open(raw_input, "r", encoding="utf-8") as f:
+                    code = f.read()
+            else:
+                code = raw_input
+            lean_res = orchestrator.lean4_verify_code(code)
+            print(json.dumps(lean_res, indent=2, ensure_ascii=False))
+        elif cmd in ("egraph", "saturate", "egg"):
+            if len(sys.argv) < 3:
+                print('Uso: python3 -m marceloclaro.cli egraph "<expressao_s_expr>" (ex: "(+ (* x 1) 0)")')
+                raise SystemExit(1)
+            expr = sys.argv[2]
+            egraph_res = orchestrator.egraph_saturate_term(expr)
+            print(json.dumps(egraph_res, indent=2, ensure_ascii=False))
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
         return 0
 
     # Modo interativo

@@ -467,6 +467,29 @@ def _check_opencode_deepthink_alphaproof() -> DoctorCheck:
         return DoctorCheck("opencode_deepthink_alphaproof", "warn", f"OpenCode AlphaProof/DeepThink indisponível: {exc}")
 
 
+def _check_lean4_egraph_engine() -> DoctorCheck:
+    """Verifica se a ponte Lean 4 e o motor de saturação de igualdade E-Graph estão operacionais (R444)."""
+    try:
+        from integrations.deepmind import Lean4ProofVerifier, EqualitySaturationEngine
+        lean_verifier = Lean4ProofVerifier()
+        egraph_engine = EqualitySaturationEngine()
+
+        # Teste rápido Lean 4
+        sample_code = lean_verifier.format_theorem("sample_th", "x + 0 = x", ["intro x", "ring"])
+        lean_res = lean_verifier.verify_lean_code(sample_code)
+
+        # Teste rápido E-Graph
+        sat_res = egraph_engine.saturate("(+ x 0)", max_iterations=1)
+
+        compiler_str = "Kernel Lean 4 ativo" if lean_verifier.has_compiler else "Analisador Estático Lean 4 ativo"
+        return DoctorCheck(
+            "lean4_egraph_engine", "pass",
+            f"Lean 4 & E-Graph ativos: {compiler_str} (status: {lean_res.status}) + Equality Saturation ({sat_res['rules_applied']} regras aplicadas)."
+        )
+    except Exception as exc:
+        return DoctorCheck("lean4_egraph_engine", "warn", f"Lean 4 / E-Graph indisponível: {exc}")
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -492,6 +515,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_free_model_amplification(),
         _check_deepmind_superhuman_reasoning(),
         _check_opencode_deepthink_alphaproof(),
+        _check_lean4_egraph_engine(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)
