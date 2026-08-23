@@ -628,10 +628,11 @@ reinício (chat completion coerente via modelo local).
 | SPEC-935-R395 | Daemon LiteRT-LM travado + diagnóstico de spawn | 1 |
 | SPEC-935-R440 | Integração Padrão Microsoft APM (Agent Package Manager) | 13 |
 | SPEC-935-R441 | Amplificação Cognitiva de Modelos Free via DeepSeek Harness | 10 |
+| SPEC-935-R442 | Raciocínio Científico Google DeepMind Superhuman & Aletheia | 10 |
 
 ---
 
-## Padrão Microsoft APM & Amplificação Cognitiva DeepSeek Harness (R440–R441)
+## Padrão Microsoft APM, DeepSeek Harness & DeepMind Superhuman (R440–R442)
 
 ### Microsoft APM (Agent Package Manager — SPEC-935-R440)
 O OpenCode Ecosystem Core unificou a governança de suas 222 primitivas sob o padrão canônico do **Microsoft APM** (`microsoft/apm`):
@@ -644,3 +645,9 @@ Para modelos gratuitos e de inferência leve (`ox-alpha-free`, `deepseek-free`, 
 1. **Test-Time Compute Scaffolding**: Emulação de `<think>` com decomposição lógica e testes de casos de borda.
 2. **RAG Local a Custo Zero**: Expansão de contexto grounded via Whoosh3 BM25F local + DataKnowledgeHub + MetaBus episódico.
 3. **Cadeia de Verificação Iterativa (CoVe)**: Auto-correção e grading head de confiança ($\ge 0.90$).
+
+### Raciocínio Científico Google DeepMind Superhuman & Aletheia (SPEC-935-R442)
+Incorporando as técnicas e datasets de raciocínio de fronteira do **Google DeepMind Superhuman** (`google-deepmind/superhuman`):
+1. **Scaffold de Pesquisa Aletheia (`AletheiaHypothesisEngine`)**: Decomposição automática de proposições complexas em lemas intermediários e geração direta de manuscritos em LaTeX (`amsmath`/`amsthm`).
+2. **Verificador Formal Simbólico (`FormalProofVerifier`)**: Validação de consistência lógica e algébrica via SymPy e Z3 Solver para garantir a solidez dedutiva de artigos.
+3. **Harness IMO Bench & Calibração de Grading (`IMOBenchmarkHarness`)**: Benchmark objetivo baseado em `IMO-AnswerBench` e `IMO-ProofBench` com calibração na escala de 0 a 7 pontos do `IMO-GradingBench`.

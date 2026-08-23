@@ -422,6 +422,26 @@ def _check_free_model_amplification() -> DoctorCheck:
         return DoctorCheck("free_model_amplification", "warn", f"Harness free models indisponível: {exc}")
 
 
+def _check_deepmind_superhuman_reasoning() -> DoctorCheck:
+    """Verifica a prontidão dos módulos DeepMind Superhuman (Aletheia, Formal Verifier e IMO-Bench) - SPEC-935-R442."""
+    try:
+        from integrations.deepmind import (
+            AletheiaHypothesisEngine,
+            FormalProofVerifier,
+            IMOBenchmarkHarness,
+        )
+        verifier = FormalProofVerifier()
+        engine = AletheiaHypothesisEngine(verifier=verifier)
+        harness = IMOBenchmarkHarness(verifier=verifier)
+        sympy_str = "SymPy ativo" if verifier.has_sympy else "SymPy fallback"
+        return DoctorCheck(
+            "deepmind_superhuman_reasoning", "pass",
+            f"DeepMind Superhuman Reasoning ativo: Aletheia scaffold + Verificador formal ({sympy_str}) + IMO Bench ({len(harness.sample_dataset)} problemas)."
+        )
+    except Exception as exc:
+        return DoctorCheck("deepmind_superhuman_reasoning", "warn", f"DeepMind reasoning indisponível: {exc}")
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -445,6 +465,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_episteme_coverage(),
         _check_apm_integration(),
         _check_free_model_amplification(),
+        _check_deepmind_superhuman_reasoning(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)

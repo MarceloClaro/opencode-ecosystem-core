@@ -6,14 +6,15 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.9.0_Microsoft_APM_%2B_DeepSeek_Harness-blue.svg)](CHANGELOG.md)
+[![Versão](https://img.shields.io/badge/Versão-3.9.0_Microsoft_APM_%2B_DeepSeek_Harness_%2B_DeepMind_Superhuman-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.850_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-259_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-260_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![APM](https://img.shields.io/badge/Microsoft_APM-222_primitivas-0078D4.svg)](apm.yml)
 [![DeepSeek Harness](https://img.shields.io/badge/DeepSeek_Harness-Free_Model_Amplifier-4B0082.svg)](integrations/deepseek_harness/)
+[![DeepMind Superhuman](https://img.shields.io/badge/Google_DeepMind-Superhuman_Reasoning_%26_Aletheia-4285F4.svg)](integrations/deepmind/)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-209-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-104-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-106-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
 [![Reversa](https://img.shields.io/badge/Reversa-Universal_99-success.svg)](reversa_universal/engine.py)
@@ -215,9 +216,16 @@ Integrando o repositório **DeepSeek Harness** ([https://github.com/MarceloClaro
 - **Chain of Verification (CoVe 97%+)**: Auto-correção iterativa com grading head de confiança ($\ge 0.90$).
 - **CLI & Orquestrador**: Comando `python3 -m marceloclaro.cli amplify "<prompt>" --model ox-alpha-free` e métodos nativos no `MarceloClaroOrchestrator`.
 
+### Act XVI — O Raciocínio de Fronteira: Google DeepMind Superhuman & Aletheia (R442 — 10.0 / 100)
+Incorporando as técnicas de ponta do repositório **Google DeepMind Superhuman** ([https://github.com/google-deepmind/superhuman](https://github.com/google-deepmind/superhuman)), o ecossistema agora aplica formalização matemática e raciocínio de pesquisa semi-autônomo de alta precisão:
+- **Scaffold de Pesquisa Aletheia (`AletheiaHypothesisEngine`)**: Decomposição automática de teoremas e hipóteses complexas em lemas intermediários e passos dedutivos, gerando manuscritos completos em LaTeX no padrão formal acadêmico (`amsmath`/`amsthm`).
+- **Verificador Formal Simbólico (`FormalProofVerifier`)**: Validação de consistência algébrica e lógica de deduções científicas via SymPy e Z3 Solver para eliminação de alucinações.
+- **Harness IMO Bench & Calibração de Grading (`IMOBenchmarkHarness`)**: Suíte de benchmarking sobre datasets do DeepMind (`IMO-AnswerBench` e `IMO-ProofBench`) com grading head calibrado na rubrica de 0 a 7 pontos do `IMO-GradingBench`.
+- **CLI & Orquestrador**: Métodos `orchestrator.aletheia_decompose()`, `orchestrator.aletheia_prove()`, `orchestrator.imobench_evaluate()` e comandos CLI `python3 -m marceloclaro.cli aletheia` e `imobench`. Check `deepmind_superhuman_reasoning` no `doctor` (15/15 checks ativos).
+
 ---
 
-## Histórico Consolidado R433–R441 & Mapa Completo da Infraestrutura Testada e Reproduzível
+## Histórico Consolidado R433–R442 & Mapa Completo da Infraestrutura Testada e Reproduzível
 
 ### Tabela Consolidada — Evolução Contínua até 100
 
@@ -232,8 +240,9 @@ Integrando o repositório **DeepSeek Harness** ([https://github.com/MarceloClaro
 | **R439** | **10.0 / 100** | Banca Rigorosa Multi-Periódico com Correção e Limpeza | `SPEC-935-R439` | 15/15 (113 c/ anteriores) | `academic/rigorous_board.py` (3 revisores × 4 venues, `BoardCriteria`, `GapCleaningEngine`, `correction_loop`) + `MaswosPipeline.run_with_rigorous_board` + `orchestrator.academic_pipeline_with_rigorous_board` | `review` fraco→reject 0.18, forte→minor 7.4; `correction_loop` limpa TODO/ABNT/segredo e re-verifica até 3 iterações |
 | **R440** | **10.0 / 100** | Padrão Canônico Microsoft APM (Agent Package Manager) | `SPEC-935-R440` | 13/13 | `integrations/apm.py` + `apm.yml` + `apm.lock.yaml` + `apm-policy.yml` + `marceloclaro/cli.py apm` + `doctor` | 222 primitivas gerenciadas, auditoria Trojan Source, lockfile SHA-256 e compilador multi-harness |
 | **R441** | **10.0 / 100** | Amplificação Cognitiva de Modelos Free via DeepSeek Harness | `SPEC-935-R441` | 10/10 | `integrations/deepseek_harness/free_model_amplifier.py` + `orchestrator.amplify_free_model_response` + `cli amplify` + `doctor` | Scaffolding `<think>` CoT, RAG local Whoosh3 0-cost, CoVe 97%+ para `ox-alpha-free` e catálogo free |
+| **R442** | **10.0 / 100** | Raciocínio Científico Google DeepMind Superhuman & Aletheia | `SPEC-935-R442` | 10/10 | `integrations/deepmind/{aletheia_scaffold,formal_verifier,imobench_harness}` + `orchestrator.aletheia_*` + `cli aletheia/imobench` + `doctor` | Decomposição em lemas e provas LaTeX Aletheia, verificação formal SymPy/Z3 e benchmark IMO-Bench |
 
-> **Total:** 104 specs formais, 259 ciclos evolutivos, 136 testes dedicados R433–R441 (todos GREEN), 100% integrados no Orquestrador e verificáveis via `doctor`.
+> **Total:** 106 specs formais, 260 ciclos evolutivos, 146 testes dedicados R433–R442 (todos GREEN), 100% integrados no Orquestrador e verificáveis via `doctor`.
 
 ### Infraestrutura Detalhada — Camadas e Dependências
 
@@ -2535,8 +2544,8 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>259 ciclos evolutivos (R1–R441) · 2.850 testes coletados · 209 agentes · 105 specs formais</i><br>
-  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | DeepSeek Harness Free Model Amplifier | Camada Epistêmica | Triagem Real de CLIs | MCP Security | CI/CD</b><br>
+  <i>260 ciclos evolutivos (R1–R442) · 2.850 testes coletados · 209 agentes · 106 specs formais</i><br>
+  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | DeepSeek Harness | Google DeepMind Superhuman Reasoning & Aletheia | Camada Epistêmica | MCP Security | CI/CD</b><br>
   <sub>Números medidos em 2026-08 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
   contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>

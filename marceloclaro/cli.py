@@ -198,9 +198,25 @@ def main() -> int:
                 use_rag=True,
             )
             print(json.dumps(res, indent=2, ensure_ascii=False))
+        elif cmd in ("aletheia", "prove", "decompor"):
+            if len(sys.argv) < 3:
+                print('Uso: python3 -m marceloclaro.cli aletheia "<proposição_ou_teorema>" [--domain general|math|physics|biology]')
+                raise SystemExit(1)
+            claim = sys.argv[2]
+            domain = "general"
+            if len(sys.argv) > 4 and sys.argv[3] == "--domain":
+                domain = sys.argv[4]
+            decomp = orchestrator.aletheia_decompose(claim, domain=domain)
+            print(json.dumps(decomp, indent=2, ensure_ascii=False))
+        elif cmd in ("imobench", "imo"):
+            limit = 4
+            if len(sys.argv) > 3 and sys.argv[2] == "--limit":
+                limit = int(sys.argv[3])
+            bench_res = orchestrator.imobench_evaluate(limit=limit)
+            print(json.dumps(bench_res, indent=2, ensure_ascii=False))
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'apm', 'amplify', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
         return 0
 
     # Modo interativo
