@@ -101,9 +101,29 @@ def main():
     print(f"[EXTRATO DO MANUSCRITO LATEX GERADO]:\n{erdos_res['result']['latex_document'][:280]}...\n")
 
     # -------------------------------------------------------------
-    # 6. TESTE REAL: Diagnóstico Estrutural Completo (Doctor)
+    # 6. TESTE REAL: Investigação Clínica por Teoria dos Jogos (Minimax)
     # -------------------------------------------------------------
-    print_banner("6. Teste Real: Diagnóstico Estrutural de Saúde (Doctor Engine)")
+    print_banner("6. Teste Real: Investigação Clínica por Teoria dos Jogos & Evidências Reais")
+    case_input = {
+        "chief_complaint": "Dor torácica opressiva e sudorese há 2 horas",
+        "patient_profile": {"age": 55, "sex": "M", "egfr": 80.0, "comorbidities": ["Hipertensão"]},
+        "duration": "2 horas",
+        "severity": "grave"
+    }
+    print(f"[CASO CLÍNICO]: {case_input['chief_complaint']}")
+    clinical_res = orchestrator.investigate_clinical_case(case_input, mode="professional_cds")
+    med_root = clinical_res["resposta_medico_virtual_supremo"]
+    print(f"[REPRESENTAÇÃO DO PROBLEMA]: {med_root['clinical_summary']['problem_representation']}")
+    print(f"[EXAME MINIMAX RECOMENDADO]: {med_root['game_theory_decision']['minimax_recommended_test']}")
+    print(f"[VERIFICAÇÃO DE SEGURANÇA Z3]: is_safe={med_root['game_theory_decision']['safety_validation']['is_safe']}")
+    print(f"[EVIDÊNCIAS REAIS ANCORADAS]: {len(med_root['evidence'])} diretrizes")
+    for ev in med_root['evidence'][:2]:
+        print(f"  • {ev.get('source_title', ev.get('claim'))} (DOI: {ev.get('doi', 'N/A')})")
+
+    # -------------------------------------------------------------
+    # 7. TESTE REAL: Diagnóstico Estrutural Completo (Doctor)
+    # -------------------------------------------------------------
+    print_banner("7. Teste Real: Diagnóstico Estrutural de Saúde (Doctor Engine - 19 Checks)")
     doc_res = run_doctor()
     print(f"[CHECKS TOTAIS]: {doc_res['checks_total']}")
     print(f"[CHECKS APROVADOS]: {doc_res['checks_passed']}")
