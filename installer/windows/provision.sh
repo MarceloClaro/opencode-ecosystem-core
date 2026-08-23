@@ -91,20 +91,25 @@ install_claude_code_cli
 install_ollama_cli
 
 # ---------------------------------------------------------------------------
-# 5. OpenCode Ecosystem Core (nativo)
+# 5. OpenCode Ecosystem Core (nativo - Reinstalação Limpa do Zero)
 # ---------------------------------------------------------------------------
-log "Etapa 3/4: Instalando o OpenCode Ecosystem Core..."
+log "Etapa 3/4: Instalando o OpenCode Ecosystem Core (Instalação Limpa do Zero)..."
+if [ -d "$ECO_DIR" ]; then
+    log "Instalação anterior detectada em $ECO_DIR. Removendo completamente para reinstalação limpa do zero..."
+    rm -rf "$ECO_DIR"
+    ok "Instalação anterior removida."
+fi
+
+# Limpa caches locais antigos
+rm -rf "$HOME/.local/share/marceloclaro" "$HOME/.opencode/state" 2>/dev/null || true
+
+log "Clonando versão mais recente do ecossistema do GitHub..."
+git clone --depth 1 "$REPO_URL" "$ECO_DIR" >>"$LOG_FILE" 2>&1
 if [ -d "$ECO_DIR/.git" ]; then
-    log "Repositório já existe; atualizando (git pull)..."
-    git -C "$ECO_DIR" pull --ff-only >>"$LOG_FILE" 2>&1 && ok "Ecosystem atualizado." || warn "git pull falhou; mantendo versão local."
+    ok "Ecosystem clonado limpo em $ECO_DIR"
 else
-    git clone --depth 1 "$REPO_URL" "$ECO_DIR" >>"$LOG_FILE" 2>&1
-    if [ -d "$ECO_DIR/.git" ]; then
-        ok "Ecosystem clonado em $ECO_DIR"
-    else
-        err "Falha ao clonar $REPO_URL."
-        err "Se o repositório for PRIVADO, autentique primeiro:  gh auth login  (ou use um token: git clone https://<TOKEN>@github.com/MarceloClaro/opencode-ecosystem-core.git)"
-    fi
+    err "Falha ao clonar $REPO_URL."
+    err "Se o repositório for PRIVADO, autentique primeiro:  gh auth login  (ou use um token: git clone https://<TOKEN>@github.com/MarceloClaro/opencode-ecosystem-core.git)"
 fi
 
 if [ -f "$ECO_DIR/requirements.txt" ]; then

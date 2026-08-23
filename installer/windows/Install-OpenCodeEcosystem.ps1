@@ -232,13 +232,41 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 # ----------------------------------------------------------------------------
-# 4. Atalhos na Área de Trabalho
+# 4. Atalhos na Área de Trabalho (Limpeza e Recriação do Zero)
 # ----------------------------------------------------------------------------
 Write-Step "Etapa 4/5: Criando atalhos na Area de Trabalho"
 
 $Desktop = [Environment]::GetFolderPath('Desktop')
 $WShell  = New-Object -ComObject WScript.Shell
 $EcoDir  = "/home/$wslUser/opencode-ecosystem-core"
+
+# Remove atalhos antigos para recriar do zero
+$oldShortcuts = @(
+    'OpenCode Ecosystem.lnk',
+    'Antigravity CLI.lnk',
+    'Claude Code CLI.lnk',
+    'Claude Code (Ecosystem).lnk',
+    'Ecosystem (marceloclaro).lnk'
+)
+foreach ($oldSc in $oldShortcuts) {
+    $scPath = Join-Path $Desktop $oldSc
+    if (Test-Path $scPath) {
+        Remove-Item $scPath -Force -ErrorAction SilentlyContinue
+    }
+}
+
+# Prepara ícone do ecossistema
+$AppDir = Join-Path $env:LOCALAPPDATA 'OpenCodeEcosystem'
+if (-not (Test-Path $AppDir)) { New-Item -ItemType Directory -Path $AppDir -Force | Out-Null }
+$LocalIco = Join-Path $AppDir 'icon.ico'
+
+try {
+    $wslIco = "\\wsl.localhost\$Distro\home\$wslUser\opencode-ecosystem-core\assets\icon.ico"
+    if (Test-Path $wslIco) {
+        Copy-Item $wslIco $LocalIco -Force -ErrorAction SilentlyContinue
+    }
+} catch { }
+$IconTarget = if (Test-Path $LocalIco) { $LocalIco } else { "$env:SystemRoot\System32\wsl.exe,0" }
 
 function New-EcoShortcut {
     param([string]$Name, [string]$Arguments, [string]$Description, [string]$IconLocation)
@@ -256,17 +284,17 @@ function New-EcoShortcut {
 New-EcoShortcut -Name 'OpenCode Ecosystem' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"opencode`"" `
     -Description 'OpenCode CLI com o OpenCode Ecosystem Core nativo (209 agentes + 6 MCPs + APM)' `
-    -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
+    -IconLocation $IconTarget
 
 New-EcoShortcut -Name 'Antigravity CLI' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"agy`"" `
     -Description 'Google Antigravity CLI no diretorio do ecossistema' `
-    -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
+    -IconLocation $IconTarget
 
 New-EcoShortcut -Name 'Claude Code CLI' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"claude`"" `
     -Description 'Claude Code CLI no diretorio do ecossistema' `
-    -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
+    -IconLocation $IconTarget
 
 New-EcoShortcut -Name 'Ecosystem (marceloclaro)' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"python3 -m marceloclaro.cli`"" `
