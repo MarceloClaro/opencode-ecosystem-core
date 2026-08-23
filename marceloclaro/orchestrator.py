@@ -2721,5 +2721,64 @@ class MarceloClaroOrchestrator:
         engine = EqualitySaturationEngine()
         return engine.saturate(expr, max_iterations=max_iterations)
 
+    # ------------------------------------------------------------------
+    # ALPHAGEOMETRY & AUTO-FORMALIZATION — SPEC-935-R445
+    # ------------------------------------------------------------------
+    def solve_geometry_problem(
+        self,
+        problem_type: str = "midpoint_theorem",
+        premises: Optional[List[str]] = None,
+        goal: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Resolve problema geométrico via AlphaGeometry (Base Dedutiva + Método de Wu + TikZ)."""
+        from integrations.deepmind import OpenCodeAlphaGeometry
+        geom = OpenCodeAlphaGeometry()
+        res = geom.solve(problem_type=problem_type, premises=premises, goal=goal)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="geometry_solve",
+            reflection=f"Problema geométrico '{problem_type}' resolvido ({res.method_used}) com resíduo {res.polynomial_residue}.",
+            score=1.0 if res.is_proven else 0.5,
+        )
+        return res.to_dict()
+
+    def autoformalize_to_lean4(
+        self,
+        informal_text: str,
+        domain: str = "algebra",
+    ) -> Dict[str, Any]:
+        """Auto-formaliza enunciado informal ou conjectura em código Lean 4."""
+        from integrations.deepmind import AutoFormalizerEngine
+        engine = AutoFormalizerEngine()
+        return engine.informal_to_lean4(informal_text, domain=domain)
+
+    def explain_lean4_proof(
+        self,
+        lean_code: str,
+        language: str = "pt-br",
+    ) -> Dict[str, Any]:
+        """Decompila e explica script Lean 4 em demonstração passo a passo em linguagem natural."""
+        from integrations.deepmind import AutoFormalizerEngine
+        engine = AutoFormalizerEngine()
+        return engine.lean4_to_informal(lean_code, language=language)
+
+    def cross_validate_reasoning(
+        self,
+        informal_text: str,
+        lean_code: str,
+    ) -> Dict[str, Any]:
+        """Executa validação cruzada entre enunciado informal e código Lean 4."""
+        from integrations.deepmind import AutoFormalizerEngine
+        engine = AutoFormalizerEngine()
+        res = engine.cross_validate(informal_text, lean_code)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="cross_validate",
+            reflection=f"Validação cruzada para '{res.lean_theorem_name}': status '{res.status}', confiança {res.confidence_score:.2f}.",
+            score=res.confidence_score,
+        )
+        return res.to_dict()
+
+
 
 

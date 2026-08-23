@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-DeepMind Superhuman Reasoning & Aletheia Integration — SPEC-935-R442 / R443 / R444
-===================================================================================
+DeepMind Superhuman Reasoning, Aletheia & AlphaGeometry — SPEC-935-R442–R445
+=============================================================================
 Módulo de integração dos paradigmas de raciocínio científico avançado:
+- OpenCode AlphaGeometry & Wu's Method Geometry Engine
+- Bidirectional Auto-Formalizer & Cross-Validation Engine
 - OpenCode AlphaProof (Proof-Tree Search & Táticas Formais)
 - OpenCode Deep Think (Test-Time Compute & Trajetórias MCTS)
-- Aletheia Scaffold & LaTeX Formatter
-- Erdős & Hirzebruch Open Problems Solvers
 - Lean 4 Formal Proof Bridge & Verifier
 - E-Graph & Equality Saturation Engine (Egglog Paradigm)
+- Aletheia Scaffold & LaTeX Formatter
+- Erdős & Hirzebruch Open Problems Solvers
 - IMO Bench Harness & DeepMind Grading Head
 - Formal Proof Verifier (SymPy + Z3)
 """
@@ -23,6 +25,10 @@ from integrations.deepmind.alphaproof_engine import (
     OpenCodeAlphaProof,
     PrioritizedProofNode,
     ProofState,
+)
+from integrations.deepmind.autoformalizer import (
+    AutoFormalizerEngine,
+    CrossValidationResult,
 )
 from integrations.deepmind.deep_think_engine import (
     OpenCodeDeepThink,
@@ -45,6 +51,14 @@ from integrations.deepmind.formal_verifier import (
     FormalProofVerifier,
     FormalVerificationResult,
     VerificationStep,
+)
+from integrations.deepmind.geometry_engine import (
+    GeometricDeductiveDatabase,
+    GeometricProofResult,
+    GeometryPoint,
+    OpenCodeAlphaGeometry,
+    TikzGeometryRenderer,
+    WuGeometryProver,
 )
 from integrations.deepmind.imobench_harness import (
     GradingHeadDeepMind,
@@ -85,4 +99,12 @@ __all__ = [
     "ENode",
     "EClass",
     "EqualitySaturationEngine",
+    "GeometryPoint",
+    "GeometricProofResult",
+    "GeometricDeductiveDatabase",
+    "WuGeometryProver",
+    "TikzGeometryRenderer",
+    "OpenCodeAlphaGeometry",
+    "AutoFormalizerEngine",
+    "CrossValidationResult",
 ]

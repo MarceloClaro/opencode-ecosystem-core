@@ -631,10 +631,11 @@ reinício (chat completion coerente via modelo local).
 | SPEC-935-R442 | Raciocínio Científico Google DeepMind Superhuman & Aletheia | 10 |
 | SPEC-935-R443 | Motores Nativos OpenCode AlphaProof, Deep Think & Erdős/Hirzebruch Solver | 10 |
 | SPEC-935-R444 | Integração Lean 4 & Saturação de Igualdade E-Graph (Egglog) | 11 |
+| SPEC-935-R445 | AlphaGeometry (Método de Wu) & Auto-Formalização Bidirecional | 12 |
 
 ---
 
-## Padrão Microsoft APM, DeepSeek Harness, DeepMind Superhuman & Lean 4 (R440–R444)
+## Padrão Microsoft APM, DeepSeek Harness, DeepMind Superhuman & AlphaGeometry (R440–R445)
 
 ### Microsoft APM (Agent Package Manager — SPEC-935-R440)
 O OpenCode Ecosystem Core unificou a governança de suas 222 primitivas sob o padrão canônico do **Microsoft APM** (`microsoft/apm`):
@@ -662,3 +663,7 @@ Incorporando as técnicas e datasets de raciocínio de fronteira do **Google Dee
 ### Integração Lean 4 & Saturação de Igualdade E-Graph (SPEC-935-R444)
 1. **Ponte e Verificador Lean 4 (`Lean4ProofVerifier`)**: Geração formal de arquivos `.lean`, validação estática de táticas de prova (`ring`, `linarith`, `omega`, `aesop`, `intro`, `exact`, `apply`, `rw`), detecção estrita de `sorry` e suporte à compilação com kernel Lean 4.
 2. **Motor E-Graph & Saturação de Igualdade (`EqualitySaturationEngine`)**: Representação compacta de equivalências matemáticas com fechamento por congruência (*congruence closure*) e extração por programação dinâmica, permitindo simplificação canônica ótima e descoberta automatizada de identidades algébricas.
+
+### AlphaGeometry (Método de Wu) & Auto-Formalização Bidirecional (SPEC-935-R445)
+1. **AlphaGeometry Neuro-Simbólico (`OpenCodeAlphaGeometry`)**: Base Dedutiva (*Geometric Deductive Database - DD*) para encadeamento de regras geométricas e Provedor Algébrico pelo Método de Wu (`WuGeometryProver`) com anulação de ideais polinomiais e exportação direta em LaTeX TikZ e SVG.
+2. **Auto-Formalizador Bidirecional (`AutoFormalizerEngine`)**: Tradução de enunciados em linguagem natural/LaTeX para Lean 4 / Mathlib e decompilação explicativa com validação cruzada tripla de consistência e completude.

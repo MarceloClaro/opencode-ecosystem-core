@@ -490,6 +490,27 @@ def _check_lean4_egraph_engine() -> DoctorCheck:
         return DoctorCheck("lean4_egraph_engine", "warn", f"Lean 4 / E-Graph indisponível: {exc}")
 
 
+def _check_geometry_autoformalization_engine() -> DoctorCheck:
+    """Verifica se os motores AlphaGeometry e Auto-Formalizador Bidirecional estão operacionais (R445)."""
+    try:
+        from integrations.deepmind import OpenCodeAlphaGeometry, AutoFormalizerEngine
+        geom = OpenCodeAlphaGeometry()
+        autoform = AutoFormalizerEngine()
+
+        # Teste rápido AlphaGeometry (Teorema da Base Média / Wu)
+        geom_res = geom.solve("midpoint_theorem")
+
+        # Teste rápido AutoFormalizer
+        form_res = autoform.informal_to_lean4("para todo x real x + 0 = x")
+
+        return DoctorCheck(
+            "geometry_autoformalization_engine", "pass",
+            f"AlphaGeometry & Auto-Formalizer ativos: Wu's Method (resíduo {geom_res.polynomial_residue}) + Lean 4 Autoformalize (status {form_res['verification_status']})."
+        )
+    except Exception as exc:
+        return DoctorCheck("geometry_autoformalization_engine", "warn", f"AlphaGeometry / Auto-Formalizer indisponível: {exc}")
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -516,6 +537,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_deepmind_superhuman_reasoning(),
         _check_opencode_deepthink_alphaproof(),
         _check_lean4_egraph_engine(),
+        _check_geometry_autoformalization_engine(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)
