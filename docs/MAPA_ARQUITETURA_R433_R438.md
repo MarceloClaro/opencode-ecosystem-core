@@ -19,7 +19,7 @@ python3 -m pytest tests/test_r433_deepseek_harness_bridge.py tests/test_r434_dee
 
 # Doctor (infraestrutura)
 python3 -m marceloclaro.cli doctor
-# → 102 specs, 2 loops pass, 257/257 ciclos
+# → 103 specs, 2 loops pass, 258/258 ciclos
 ```
 
 ## Diagrama
@@ -28,7 +28,7 @@ python3 -m marceloclaro.cli doctor
 graph TD
     %% ===== DEV REPRODUZÍVEL =====
     Dev([Dev / CI]) -->|git clone| Repo[(opencode-ecosystem-core<br>main)]
-    Repo -->|python3 -m marceloclaro.cli doctor| Doctor{doctor: 102 specs<br>2 loops pass<br>257/257 ciclos}
+    Repo -->|python3 -m marceloclaro.cli doctor| Doctor{doctor: 103 specs<br>2 loops pass<br>258/258 ciclos}
     Repo -->|python3 -m pytest tests/test_r43* -q| Tests{113 testes GREEN<br>R433 16 + R434 9 + R435 17 + R436 22 + R437 19 + R438 15 + R439 15}
     Repo -->|specs/SPEC-935-R43*.md| SDD[SDD Engine<br>SpecRegistry + SpecVerifier<br>Spec → RED → GREEN → REFACTOR]
     SDD --> Tests
@@ -164,7 +164,7 @@ graph TD
     Tests -.->|cobre| SearchRAG
     Tests -.->|cobre| ReversaUniversal
     Tests -.->|cobre| RigorousBoard
-    Doctor -.->|valida 102 specs + 2 loops| LoopSpecs
+    Doctor -.->|valida 103 specs + 2 loops| LoopSpecs
 
     %% ===== ESTILOS =====
     classDef harness fill:#e1f5fe,stroke:#0288d1
