@@ -199,6 +199,15 @@ if [ -d "$ECO_DIR" ]; then
     (cd "$ECO_DIR" && python3 -m marceloclaro.cli doctor) || true
 fi
 
+# Criação / sincronização de atalhos na Área de Trabalho
+if [ -d "$ECO_DIR" ]; then
+    echo ""
+    log "Criando atalhos na Área de Trabalho (OpenCode, Antigravity, Claude Code, Ecosystem)..."
+    (cd "$ECO_DIR" && python3 -m marceloclaro.cli shortcuts >>"$LOG_FILE" 2>&1) \
+        && ok "Atalhos na Área de Trabalho criados e verificados com sucesso." \
+        || warn "Aviso ao configurar atalhos."
+fi
+
 echo ""
 if [ "$FAIL" -eq 0 ]; then
     ok "Provisionamento concluído com sucesso total!"
