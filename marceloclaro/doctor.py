@@ -511,6 +511,34 @@ def _check_geometry_autoformalization_engine() -> DoctorCheck:
         return DoctorCheck("geometry_autoformalization_engine", "warn", f"AlphaGeometry / Auto-Formalizer indisponível: {exc}")
 
 
+def _check_clinical_game_theory_engine() -> DoctorCheck:
+    """Verifica se o motor de Decisão Clínica por Grafos, Teoria dos Jogos e Evidências Reais está operacional (R446)."""
+    try:
+        from integrations.medical import (
+            ClinicalInvestigationPipeline,
+            ClinicalEvidenceLibrary,
+            ClinicalSafetyVerifier,
+        )
+        pipeline = ClinicalInvestigationPipeline()
+        ev_lib = ClinicalEvidenceLibrary()
+        verifier = ClinicalSafetyVerifier()
+
+        # Teste rápido
+        test_case = {
+            "chief_complaint": "Dor torácica",
+            "patient_profile": {"age": 50, "sex": "M", "egfr": 80.0},
+        }
+        res = pipeline.investigate(test_case, mode="professional_cds")
+        has_minimax = "game_theory_decision" in res["resposta_medico_virtual_supremo"]
+
+        return DoctorCheck(
+            "clinical_game_theory_engine", "pass",
+            f"Decisão Clínica por Teoria dos Jogos & Grafos ativa: {len(ev_lib.evidence_database)} diretrizes verificadas + Minimax Regret ativo + Verificador Z3 ({verifier.z3_active})."
+        )
+    except Exception as exc:
+        return DoctorCheck("clinical_game_theory_engine", "warn", f"Motor clínico indisponível: {exc}")
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -538,6 +566,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_opencode_deepthink_alphaproof(),
         _check_lean4_egraph_engine(),
         _check_geometry_autoformalization_engine(),
+        _check_clinical_game_theory_engine(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)

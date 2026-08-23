@@ -2779,6 +2779,85 @@ class MarceloClaroOrchestrator:
         )
         return res.to_dict()
 
+    # ------------------------------------------------------------------
+    # CLINICAL INVESTIGATION & GAME THEORY — SPEC-935-R446
+    # ------------------------------------------------------------------
+    def investigate_clinical_case(
+        self,
+        case_data: Dict[str, Any],
+        mode: str = "professional_cds",
+    ) -> Dict[str, Any]:
+        """Executa investigação clínica completa por Grafos Bayesianos, Minimax Regret e Evidências Reais."""
+        from integrations.medical import ClinicalInvestigationPipeline
+        pipeline = ClinicalInvestigationPipeline()
+        result = pipeline.investigate(case_data, mode=mode)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="clinical_investigate",
+            reflection=f"Caso clínico investigado no modo '{mode}' via Minimax Regret e Evidências Reais.",
+            score=1.0,
+        )
+        return result
+
+    def generate_clinical_anamnesis(
+        self,
+        patient_profile: Dict[str, Any],
+        chief_complaint: str,
+        duration: str = "Início recente",
+        severity: str = "moderada",
+    ) -> Dict[str, Any]:
+        """Gera anamnese estruturada e representação clínica compacta."""
+        from integrations.medical import ClinicalAnamnesisGenerator
+        problem_rep = ClinicalAnamnesisGenerator.generate_problem_representation(
+            patient_profile, chief_complaint, duration, severity
+        )
+        return {
+            "problem_representation": problem_rep,
+            "patient_profile": patient_profile,
+            "chief_complaint": chief_complaint,
+            "duration": duration,
+            "severity": severity,
+        }
+
+    def evaluate_diagnostic_decision_graph(
+        self,
+        hypotheses: List[Dict[str, Any]],
+        available_tests: List[Dict[str, Any]],
+    ) -> Dict[str, Any]:
+        """Calcula matriz de payoff, arrependimento Minimax e ganho de informação para hipóteses e testes."""
+        from integrations.medical import (
+            DiagnosticHypothesis,
+            DiagnosticTest,
+            ClinicalGameTheoryEngine,
+            ShannonEntropyEngine,
+        )
+        h_objs = [
+            DiagnosticHypothesis(
+                name=h.get("name", "H"),
+                prior_probability=float(h.get("prior_probability", 0.2)),
+                severity_level=h.get("severity_level", "moderada"),
+                critical_miss_penalty=float(h.get("critical_miss_penalty", 5.0)),
+            ) for h in hypotheses
+        ]
+        t_objs = [
+            DiagnosticTest(
+                name=t.get("name", "T"),
+                target_condition=t.get("target_condition", "H"),
+                sensitivity=float(t.get("sensitivity", 0.9)),
+                specificity=float(t.get("specificity", 0.9)),
+                cost_score=float(t.get("cost_score", 2.0)),
+                invasiveness_score=float(t.get("invasiveness_score", 1.0)),
+                turnaround_hours=float(t.get("turnaround_hours", 1.0)),
+            ) for t in available_tests
+        ]
+        engine = ClinicalGameTheoryEngine(h_objs, t_objs)
+        minimax = engine.compute_minimax_regret()
+        gains = {t.name: round(ShannonEntropyEngine.calculate_information_gain(h_objs, t), 4) for t in t_objs}
+        return {
+            "minimax_decision": minimax,
+            "information_gains": gains,
+        }
+
 
 
 
