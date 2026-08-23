@@ -1,4 +1,4 @@
-﻿# ============================================================================
+# ============================================================================
 # OpenCode Ecosystem Core - Desinstalador para Windows
 # ----------------------------------------------------------------------------
 # Por padrao, remove APENAS o que o instalador criou e que e seguro reverter:
@@ -56,6 +56,7 @@ $Desktop = [Environment]::GetFolderPath('Desktop')
 $shortcuts = @(
     'OpenCode Ecosystem.lnk',
     'Antigravity CLI.lnk',
+    'Claude Code CLI.lnk',
     'Claude Code (Ecosystem).lnk',
     'Ecosystem (marceloclaro).lnk'
 )
