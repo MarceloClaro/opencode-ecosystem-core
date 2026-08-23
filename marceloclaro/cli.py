@@ -208,15 +208,44 @@ def main() -> int:
                 domain = sys.argv[4]
             decomp = orchestrator.aletheia_decompose(claim, domain=domain)
             print(json.dumps(decomp, indent=2, ensure_ascii=False))
-        elif cmd in ("imobench", "imo"):
-            limit = 4
-            if len(sys.argv) > 3 and sys.argv[2] == "--limit":
-                limit = int(sys.argv[3])
-            bench_res = orchestrator.imobench_evaluate(limit=limit)
-            print(json.dumps(bench_res, indent=2, ensure_ascii=False))
+        elif cmd in ("deepthink", "think"):
+            if len(sys.argv) < 3:
+                print('Uso: python3 -m marceloclaro.cli deepthink "<problema>" [--budget 1-5] [--domain general|math|physics]')
+                raise SystemExit(1)
+            problem = sys.argv[2]
+            budget = 3
+            domain = "general"
+            idx = 3
+            while idx < len(sys.argv):
+                if sys.argv[idx] == "--budget" and idx + 1 < len(sys.argv):
+                    budget = int(sys.argv[idx + 1])
+                    idx += 2
+                elif sys.argv[idx] == "--domain" and idx + 1 < len(sys.argv):
+                    domain = sys.argv[idx + 1]
+                    idx += 2
+                else:
+                    idx += 1
+            think_res = orchestrator.deep_think(problem, domain=domain, compute_budget=budget)
+            print(json.dumps(think_res, indent=2, ensure_ascii=False))
+        elif cmd in ("alphaproof", "prover"):
+            if len(sys.argv) < 3:
+                print('Uso: python3 -m marceloclaro.cli alphaproof "<teorema_ou_meta>"')
+                raise SystemExit(1)
+            theorem = sys.argv[2]
+            proof_res = orchestrator.alphaproof_search(theorem)
+            print(json.dumps(proof_res, indent=2, ensure_ascii=False))
+        elif cmd in ("erdos", "conjecture", "hirzebruch"):
+            conjecture_type = sys.argv[2] if len(sys.argv) > 2 else "erdos"
+            params = {}
+            if len(sys.argv) > 4 and sys.argv[3] == "--c":
+                params["c"] = int(sys.argv[4])
+            if len(sys.argv) > 4 and sys.argv[3] == "--dim":
+                params["dim"] = int(sys.argv[4])
+            res = orchestrator.solve_open_conjecture(conjecture_type, params=params)
+            print(json.dumps(res, indent=2, ensure_ascii=False))
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
         return 0
 
     # Modo interativo

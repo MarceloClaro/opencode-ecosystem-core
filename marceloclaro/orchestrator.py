@@ -2639,3 +2639,52 @@ class MarceloClaroOrchestrator:
         verifier = FormalProofVerifier()
         return verifier.verify_algebraic_identity(lhs, rhs)
 
+    # ------------------------------------------------------------------
+    # OPENCODE ALPHAPROOF, DEEP THINK & ERDŐS/HIRZEBRUCH SOLVER — SPEC-935-R443
+    # ------------------------------------------------------------------
+    def deep_think(
+        self,
+        problem_statement: str,
+        domain: str = "general",
+        compute_budget: int = 3,
+    ) -> Dict[str, Any]:
+        """Executa raciocínio profundo via Deep Think com alocação dinâmica de Test-Time Compute."""
+        from integrations.deepmind import OpenCodeDeepThink
+        deep_think_engine = OpenCodeDeepThink()
+        res = deep_think_engine.think(problem_statement, domain=domain, compute_budget=compute_budget)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"deep_think:{domain}",
+            reflection=f"Problema '{problem_statement[:60]}' analisado via Deep Think (orçamento {compute_budget}) com nota {res['best_grade_0_to_7']}/7.",
+            score=res.get("confidence_score", 0.95),
+        )
+        return res
+
+    def alphaproof_search(
+        self,
+        goal: str,
+        premises: Optional[List[str]] = None,
+    ) -> Dict[str, Any]:
+        """Executa busca em árvore de provas formais aplicando táticas AlphaProof."""
+        from integrations.deepmind import OpenCodeAlphaProof
+        prover = OpenCodeAlphaProof()
+        res = prover.search_proof(goal, premises=premises)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"alphaproof_search",
+            reflection=f"Teorema '{goal[:60]}' explorado via AlphaProof com {res['nodes_expanded']} nós e confiança {res['confidence_score']:.2f}.",
+            score=res.get("confidence_score", 0.9),
+        )
+        return res
+
+    def solve_open_conjecture(
+        self,
+        problem_type: str,
+        params: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Resolve e demonstra formalmente problemas abertos (Erdős, Hirzebruch, Conjecturas)."""
+        from integrations.deepmind import OpenProblemsResearchWorkflow
+        workflow = OpenProblemsResearchWorkflow()
+        return workflow.solve_conjecture(problem_type, params=params)
+
+

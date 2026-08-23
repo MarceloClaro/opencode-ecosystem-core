@@ -442,6 +442,31 @@ def _check_deepmind_superhuman_reasoning() -> DoctorCheck:
         return DoctorCheck("deepmind_superhuman_reasoning", "warn", f"DeepMind reasoning indisponível: {exc}")
 
 
+def _check_opencode_deepthink_alphaproof() -> DoctorCheck:
+    """Verifica se os motores OpenCode AlphaProof, Deep Think e Erdős/Hirzebruch Solver estão íntegros (R443)."""
+    try:
+        from integrations.deepmind import (
+            OpenCodeAlphaProof,
+            OpenCodeDeepThink,
+            ErdosSeriesAnalyzer,
+            HirzebruchEigenweightCalculator,
+        )
+        prover = OpenCodeAlphaProof()
+        deep_think = OpenCodeDeepThink(alphaproof=prover)
+        erdos = ErdosSeriesAnalyzer()
+        hirz = HirzebruchEigenweightCalculator()
+
+        # Prova rápida de integridade
+        quick_search = prover.search_proof("x**2 - y**2 = (x - y)*(x + y)", max_depth=1)
+        hirz_res = hirz.compute_eigenweights(dim=2, rank=1)
+        return DoctorCheck(
+            "opencode_deepthink_alphaproof", "pass",
+            f"OpenCode AlphaProof & Deep Think ativos: Proof-tree search ({quick_search['nodes_expanded']} nós) + Erdős/Hirzebruch Solver (Dim {hirz_res.variety_dim} OK)."
+        )
+    except Exception as exc:
+        return DoctorCheck("opencode_deepthink_alphaproof", "warn", f"OpenCode AlphaProof/DeepThink indisponível: {exc}")
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -466,6 +491,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_apm_integration(),
         _check_free_model_amplification(),
         _check_deepmind_superhuman_reasoning(),
+        _check_opencode_deepthink_alphaproof(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)
