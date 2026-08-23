@@ -274,9 +274,12 @@ def main() -> int:
             informal_text = sys.argv[2]
             form_res = orchestrator.autoformalize_to_lean4(informal_text)
             print(json.dumps(form_res, indent=2, ensure_ascii=False))
+        elif cmd in ("shortcuts", "atalhos"):
+            from scripts.create_desktop_shortcuts import main as make_shortcuts
+            make_shortcuts()
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'shortcuts', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
         return 0
 
     # Modo interativo
