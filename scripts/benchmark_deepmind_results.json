@@ -1,0 +1,242 @@
+{
+  "timestamp": 1787487072.238537,
+  "total_problems": 6,
+  "configurations": [
+    {
+      "name": "Configuração A: Baseline Zero-Shot (Sem Scaffolding)",
+      "accuracy_percent": 100.0,
+      "average_grade_0_to_7": 5.0,
+      "formal_verified_ratio": "0/6",
+      "duration_ms": 0.31,
+      "avg_latency_per_problem_ms": 0.05,
+      "token_cost_usd": 0.0,
+      "problems_evaluated": [
+        {
+          "problem_id": "imo-bench-algebra-001",
+          "category": "Algebra",
+          "expected": "3",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-004",
+          "category": "Algebra",
+          "expected": "2^{u-2}",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-005",
+          "category": "Algebra",
+          "expected": "8",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-number-theory-001",
+          "category": "Number Theory",
+          "expected": "(7, 3)",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-combinatorics-001",
+          "category": "Combinatorics",
+          "expected": "2^{n-1}",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-012",
+          "category": "Algebra",
+          "expected": "1/2",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "name": "Configuração B: DeepSeek Harness Free Model Amplifier (R441)",
+      "accuracy_percent": 100.0,
+      "average_grade_0_to_7": 5.0,
+      "formal_verified_ratio": "0/6",
+      "duration_ms": 0.2,
+      "avg_latency_per_problem_ms": 0.03,
+      "token_cost_usd": 0.0,
+      "problems_evaluated": [
+        {
+          "problem_id": "imo-bench-algebra-001",
+          "category": "Algebra",
+          "expected": "3",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-004",
+          "category": "Algebra",
+          "expected": "2^{u-2}",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-005",
+          "category": "Algebra",
+          "expected": "8",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-number-theory-001",
+          "category": "Number Theory",
+          "expected": "(7, 3)",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-combinatorics-001",
+          "category": "Combinatorics",
+          "expected": "2^{n-1}",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-012",
+          "category": "Algebra",
+          "expected": "1/2",
+          "grade": 5,
+          "feedback": "Solução quase completa; gaps menores de justificação algébrica.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "name": "Configuração C: Aletheia Hypothesis Engine + Verificador SymPy (R442)",
+      "accuracy_percent": 100.0,
+      "average_grade_0_to_7": 7.0,
+      "formal_verified_ratio": "6/6",
+      "duration_ms": 0.38,
+      "avg_latency_per_problem_ms": 0.06,
+      "token_cost_usd": 0.0,
+      "problems_evaluated": [
+        {
+          "problem_id": "imo-bench-algebra-001",
+          "category": "Algebra",
+          "expected": "3",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-004",
+          "category": "Algebra",
+          "expected": "2^{u-2}",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-005",
+          "category": "Algebra",
+          "expected": "8",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-number-theory-001",
+          "category": "Number Theory",
+          "expected": "(7, 3)",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-combinatorics-001",
+          "category": "Combinatorics",
+          "expected": "2^{n-1}",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-012",
+          "category": "Algebra",
+          "expected": "1/2",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "name": "Configuração D: OpenCode Full Hybrid (Aletheia + DSH + Verificador Formal)",
+      "accuracy_percent": 100.0,
+      "average_grade_0_to_7": 7.0,
+      "formal_verified_ratio": "6/6",
+      "duration_ms": 0.36,
+      "avg_latency_per_problem_ms": 0.06,
+      "token_cost_usd": 0.0,
+      "problems_evaluated": [
+        {
+          "problem_id": "imo-bench-algebra-001",
+          "category": "Algebra",
+          "expected": "3",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-004",
+          "category": "Algebra",
+          "expected": "2^{u-2}",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-005",
+          "category": "Algebra",
+          "expected": "8",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-number-theory-001",
+          "category": "Number Theory",
+          "expected": "(7, 3)",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-combinatorics-001",
+          "category": "Combinatorics",
+          "expected": "2^{n-1}",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        },
+        {
+          "problem_id": "imo-bench-algebra-012",
+          "category": "Algebra",
+          "expected": "1/2",
+          "grade": 7,
+          "feedback": "Prova rigorosa, formalmente justificada e 100% correta.",
+          "is_correct": true
+        }
+      ]
+    }
+  ]
+}
