@@ -8,10 +8,10 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
 [![Versão](https://img.shields.io/badge/Versão-3.8.0_Triagem_Real_%2B_Multi--CLI-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.750_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-257_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-258_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-205-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-102-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-103-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
 [![Reversa](https://img.shields.io/badge/Reversa-Universal_99-success.svg)](reversa_universal/engine.py)
@@ -231,8 +231,9 @@ python3 -c "from marceloclaro.orchestrator import MarceloClaroOrchestrator; o=Ma
 | **R437** | 9.9 / 99 | Reversa Universal transversal | `SPEC-935-R437` | 19/19 (83 c/ anteriores) | `reversa_universal/{engine,bridge}` + `scanners/reversa_scanner` path-aware + `orchestrator.reversa_*` (5 métodos) | `inventory rag` AST, `gaps` TODO/secret, `bridge` MetaBus, `pipeline domain=reversa` |
 | **R438** | **10.0 / 100** | Caminho para 100 — 5 gaps residuais | `SPEC-935-R438` | 15/15 (98 c/ anteriores) | `specs/loops/*.md`, `AntigravityWebSearcher`, `tomli` fallback, `HarnessWorkerPool` nativo, `average_score` doc | `doctor` 101 specs, 2 loops pass, 256/256 ciclos |
 | **R439** | **10.0 / 100** | Banca Rigorosa Multi-Periódico com Correção e Limpeza | `SPEC-935-R439` | 15/15 (113 c/ anteriores) | `academic/rigorous_board.py` (3 revisores × 4 venues, `BoardCriteria`, `GapCleaningEngine`, `correction_loop`) + `MaswosPipeline.run_with_rigorous_board` + `orchestrator.academic_pipeline_with_rigorous_board` | `review` fraco→reject 0.18, forte→minor 7.4; `correction_loop` limpa TODO/ABNT/segredo e re-verifica até 3 iterações |
+| **R440** | **10.0 / 100** | Artigo Qualis A1 expandido (26 páginas) — banca em documento separado | `SPEC-935-R440` | regressão R433–R439 GREEN | `MANUSCRITO(_FINAL).md/.pdf` 26p A4 · 7 tabelas · 6 figuras de dados oficiais · `scripts/gerar_figuras_tabelas.py` · `RELATORIO_BANCA_R439.md` separado | `accept` 9,67/10 (**96,7/100**) CAPES; todos os venues ≥9,43; **0 overfull boxes**; números idênticos a `resultados_r428.json` |
 
-> **Total:** 102 specs formais, 257 ciclos evolutivos, 113 testes dedicados R433-R439 (todos GREEN), 83→113 testes integrados, `average_score` = média móvel (indicador, não gate — gate real é `SpecVerifier`+`GradingHead`+`calibration`+`RigorousBoard`).
+> **Total:** 103 specs formais, 258 ciclos evolutivos, 113 testes dedicados R433–R439 (+ regressão R440) (todos GREEN), 83→113 testes integrados, `average_score` = média móvel (indicador, não gate — gate real é `SpecVerifier`+`GradingHead`+`calibration`+`RigorousBoard`).
 
 ### Infraestrutura Detalhada — Camadas e Dependências
 
