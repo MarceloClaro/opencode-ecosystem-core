@@ -4,6 +4,26 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [3.9.0] - 2026-08-23
+
+### Adicionado
+- **Investigação Clínica por Grafos Bayesianos, Teoria dos Jogos & Evidências Reais (SPEC-935-R446)**:
+  - `integrations/medical/evidence_grounding.py`: Biblioteca de diretrizes com DOIs, PMIDs e classificações Oxford CEBM / GRADE (*European Heart Journal*, *The Lancet*, *Kidney International*, *Arthritis & Rheumatology*, *Critical Care Medicine*).
+  - `integrations/medical/clinical_game_theory.py`: Modelagem por grafos de decisão bayesiana (probabilidades pré/pós-teste via nomograma de Fagan), redução de Entropia de Shannon para ganho de informação propedêutico, e matriz de payoff com Critério Minimax Regret de Savage (1951) blindando contra subdiagnóstico de emergências fatais.
+  - `integrations/medical/clinical_verifier.py`: Verificador formal de contraindicações e interações via Z3 SMT Solver ($eGFR < 30$, gestação, alergias, risco hemorrágico) e gatilhos de interrupção imediata para SAMU 192 / UPA.
+  - `integrations/medical/clinical_orchestrator_bridge.py`: Formatação canônica YAML no schema `resposta_medico_virtual_supremo` em 7 etapas (análise de emergência, frase clínica, grafo de decisão, matriz minimax, verificação de segurança, plano de ação e referências).
+  - `marceloclaro/cli.py`: Subcomando CLI `python3 -m marceloclaro.cli clinical "<queixa>" [--mode professional_cds|patient_education]`.
+  - `marceloclaro/doctor.py`: Check 19 `clinical_game_theory_engine` elevando o diagnóstico estrutural para **19/19 checks**.
+- **AlphaGeometry & Método Algébrico de Wu (SPEC-935-R445)**: Demonstração geométrica neuro-simbólica combinando Base Dedutiva (*DD*) e anulação de polinômios de Wu com SymPy, gerando diagramas TikZ/SVG.
+- **Auto-Formalizador Bidirecional Lean 4 (SPEC-935-R445)**: Tradução bidirecional (Linguagem Natural $\leftrightarrow$ Lean 4 / Mathlib) com validação cruzada tripla e explicação didática em português formal.
+- **Ponte e Verificador Lean 4 & E-Graph (SPEC-935-R444)**: Compilação machine-checked de scripts Lean 4 e motor de saturação de termos *Egglog* com fechamento por congruência.
+- **OpenCode AlphaProof, Deep Think & Solucionador Erdős-1051 (SPEC-935-R443)**: Busca em árvore de provas, alocação de Test-Time Compute com Grading Head DeepMind (0-7), e demonstração formal de irracionalidade de séries hiper-convergentes.
+- **Padrão Canônico Microsoft APM (SPEC-935-R440)**: Manifesto `apm.yml`, lockfile SHA-256 de 222 primitivas e auditoria estrita contra ataques Trojan Source.
+- **Amplificação Cognitiva para Modelos Free via DeepSeek Harness (SPEC-935-R441)**: CoT estruturado `<think>`, RAG Whoosh3 local a custo zero e Chain of Verification para `ox-alpha-free` e modelos on-device.
+
+### Documentado
+- `README.md`: Inserido Ato XX, diagrama Mermaid de atuação clínica, matriz Minimax Regret, exemplos de CLI, e métricas atualizadas para 264 ciclos evolutivos, 3.483 testes e 110 specs formais.
+
 ## [2.5.0] - 2026-08-03
 
 ### Adicionado
