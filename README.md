@@ -6,15 +6,15 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.9.0_Microsoft_APM_%2B_DeepSeek_Harness_%2B_DeepMind_Superhuman-blue.svg)](CHANGELOG.md)
+[![Versão](https://img.shields.io/badge/Versão-3.9.0_AlphaProof_%2B_DeepThink_%2B_Aletheia-blue.svg)](CHANGELOG.md)
 [![Testes](https://img.shields.io/badge/Testes-2.850_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-260_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-261_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![APM](https://img.shields.io/badge/Microsoft_APM-222_primitivas-0078D4.svg)](apm.yml)
+[![AlphaProof](https://img.shields.io/badge/OpenCode-AlphaProof_%26_DeepThink-4285F4.svg)](integrations/deepmind/)
 [![DeepSeek Harness](https://img.shields.io/badge/DeepSeek_Harness-Free_Model_Amplifier-4B0082.svg)](integrations/deepseek_harness/)
-[![DeepMind Superhuman](https://img.shields.io/badge/Google_DeepMind-Superhuman_Reasoning_%26_Aletheia-4285F4.svg)](integrations/deepmind/)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-209-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-106-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-107-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
 [![Reversa](https://img.shields.io/badge/Reversa-Universal_99-success.svg)](reversa_universal/engine.py)
@@ -217,15 +217,16 @@ Integrando o repositório **DeepSeek Harness** ([https://github.com/MarceloClaro
 - **CLI & Orquestrador**: Comando `python3 -m marceloclaro.cli amplify "<prompt>" --model ox-alpha-free` e métodos nativos no `MarceloClaroOrchestrator`.
 
 ### Act XVI — O Raciocínio de Fronteira: Google DeepMind Superhuman & Aletheia (R442 — 10.0 / 100)
-Incorporando as técnicas de ponta do repositório **Google DeepMind Superhuman** ([https://github.com/google-deepmind/superhuman](https://github.com/google-deepmind/superhuman)), o ecossistema agora aplica formalização matemática e raciocínio de pesquisa semi-autônomo de alta precisão:
-- **Scaffold de Pesquisa Aletheia (`AletheiaHypothesisEngine`)**: Decomposição automática de teoremas e hipóteses complexas em lemas intermediários e passos dedutivos, gerando manuscritos completos em LaTeX no padrão formal acadêmico (`amsmath`/`amsthm`).
-- **Verificador Formal Simbólico (`FormalProofVerifier`)**: Validação de consistência algébrica e lógica de deduções científicas via SymPy e Z3 Solver para eliminação de alucinações.
-- **Harness IMO Bench & Calibração de Grading (`IMOBenchmarkHarness`)**: Suíte de benchmarking sobre datasets do DeepMind (`IMO-AnswerBench` e `IMO-ProofBench`) com grading head calibrado na rubrica de 0 a 7 pontos do `IMO-GradingBench`.
-- **CLI & Orquestrador**: Métodos `orchestrator.aletheia_decompose()`, `orchestrator.aletheia_prove()`, `orchestrator.imobench_evaluate()` e comandos CLI `python3 -m marceloclaro.cli aletheia` e `imobench`. Check `deepmind_superhuman_reasoning` no `doctor` (15/15 checks ativos).
+### Act XVII — Os Motores Nativos: OpenCode AlphaProof, Deep Think & Conjecturas de Erdős/Hirzebruch (R443 — 10.0 / 100)
+Evoluindo além de um simples consumidor de técnicas externas, o ecossistema agora possui seus próprios motores nativos de demonstração de teoremas e pesquisa de problemas em aberto:
+- **OpenCode AlphaProof (`OpenCodeAlphaProof`)**: Motor de busca em árvore de provas formais (*Proof-Tree Search*) aplicando táticas como Simplificação Algébrica Simbólica, Indução Matemática Estrutural, Análise de Casos e Redução ao Absurdo (*Reductio ad Absurdum*).
+- **OpenCode Deep Think (`OpenCodeDeepThink`)**: Alocação dinâmica de computação em tempo de teste (*Test-Time Compute Budget*), gerando trajetórias concorrentes de pensamento `<think>`, pontuadas por rubrica de 0 a 7 e selecionadas pela trilha ótima de consistência.
+- **Solucionador de Conjecturas Erdős & Hirzebruch (`ErdosHirzebruchSolver`)**: Demonstração de irracionalidade de séries hiper-aceleradas do tipo Erdős-1051 ($\sum \frac{1}{2^{2^n} - c}$) e cálculo de autopesos de proporcionalidade aritmética de Hirzebruch (*princípio Feng–Yun–Zhang*).
+- **CLI & Orquestrador**: Comandos `python3 -m marceloclaro.cli deepthink`, `alphaproof` e `erdos`. Novo check `opencode_deepthink_alphaproof` no `doctor` (16/16 checks ativos).
 
 ---
 
-## Histórico Consolidado R433–R442 & Mapa Completo da Infraestrutura Testada e Reproduzível
+## Histórico Consolidado R433–R443 & Mapa Completo da Infraestrutura Testada e Reproduzível
 
 ### Tabela Consolidada — Evolução Contínua até 100
 
@@ -241,8 +242,9 @@ Incorporando as técnicas de ponta do repositório **Google DeepMind Superhuman*
 | **R440** | **10.0 / 100** | Padrão Canônico Microsoft APM (Agent Package Manager) | `SPEC-935-R440` | 13/13 | `integrations/apm.py` + `apm.yml` + `apm.lock.yaml` + `apm-policy.yml` + `marceloclaro/cli.py apm` + `doctor` | 222 primitivas gerenciadas, auditoria Trojan Source, lockfile SHA-256 e compilador multi-harness |
 | **R441** | **10.0 / 100** | Amplificação Cognitiva de Modelos Free via DeepSeek Harness | `SPEC-935-R441` | 10/10 | `integrations/deepseek_harness/free_model_amplifier.py` + `orchestrator.amplify_free_model_response` + `cli amplify` + `doctor` | Scaffolding `<think>` CoT, RAG local Whoosh3 0-cost, CoVe 97%+ para `ox-alpha-free` e catálogo free |
 | **R442** | **10.0 / 100** | Raciocínio Científico Google DeepMind Superhuman & Aletheia | `SPEC-935-R442` | 10/10 | `integrations/deepmind/{aletheia_scaffold,formal_verifier,imobench_harness}` + `orchestrator.aletheia_*` + `cli aletheia/imobench` + `doctor` | Decomposição em lemas e provas LaTeX Aletheia, verificação formal SymPy/Z3 e benchmark IMO-Bench |
+| **R443** | **10.0 / 100** | Motores Nativos OpenCode AlphaProof, Deep Think & Erdős/Hirzebruch Solver | `SPEC-935-R443` | 10/10 | `integrations/deepmind/{alphaproof_engine,deep_think_engine,erdos_hirzebruch_solver}` + `orchestrator.{deep_think,alphaproof_search,solve_open_conjecture}` + `cli deepthink/alphaproof/erdos` + `doctor` | Busca em árvore de provas, Test-Time Compute dinâmico, demonstração de irracionalidade Erdős-1051 e autopesos de Hirzebruch |
 
-> **Total:** 106 specs formais, 260 ciclos evolutivos, 146 testes dedicados R433–R442 (todos GREEN), 100% integrados no Orquestrador e verificáveis via `doctor`.
+> **Total:** 107 specs formais, 261 ciclos evolutivos, 156 testes dedicados R433–R443 (todos GREEN), 100% integrados no Orquestrador e verificáveis via `doctor`.
 
 ### Infraestrutura Detalhada — Camadas e Dependências
 
@@ -2544,8 +2546,8 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>260 ciclos evolutivos (R1–R442) · 2.850 testes coletados · 209 agentes · 106 specs formais</i><br>
-  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | DeepSeek Harness | Google DeepMind Superhuman Reasoning & Aletheia | Camada Epistêmica | MCP Security | CI/CD</b><br>
+  <i>261 ciclos evolutivos (R1–R443) · 2.850 testes coletados · 209 agentes · 107 specs formais</i><br>
+  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | DeepSeek Harness | OpenCode AlphaProof & Deep Think | Aletheia Open Problems | Camada Epistêmica | MCP Security</b><br>
   <sub>Números medidos em 2026-08 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
   contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>

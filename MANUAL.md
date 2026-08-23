@@ -18,7 +18,7 @@ Isso abre um menu interativo. Se preferir comandos diretos, sem menu:
 
 ```bash
 python3 -m marceloclaro.cli status      # foto geral do sistema
-python3 -m marceloclaro.cli doctor      # está tudo saudável? (15 checks rápidos)
+python3 -m marceloclaro.cli doctor      # está tudo saudável? (16 checks rápidos)
 python3 -m marceloclaro.cli helpdesk    # o que está errado E como corrigir
 python3 -m marceloclaro.cli ajuda       # este resumo, no terminal
 python3 -m marceloclaro.cli pesquisa "seu tema aqui"   # pesquisa científica (11 fontes)
@@ -26,6 +26,9 @@ python3 -m marceloclaro.cli apresentacao pasta_da_producao  # deck MIRA
 python3 -m marceloclaro.cli apm audit   # auditoria de segurança e integridade APM (R440)
 python3 -m marceloclaro.cli amplify "sua pergunta" --model ox-alpha-free # raciocínio profundo em modelos free (R441)
 python3 -m marceloclaro.cli aletheia "sua conjectura ou teorema" # decomposição formal Aletheia & LaTeX (R442)
+python3 -m marceloclaro.cli deepthink "seu problema" --budget 3 # raciocínio profundo com Test-Time Compute (R443)
+python3 -m marceloclaro.cli alphaproof "seu teorema algébrico" # busca em árvore de provas formais (R443)
+python3 -m marceloclaro.cli erdos erdos --c 1 # demonstração de irracionalidade de séries de Erdős (R443)
 python3 -m marceloclaro.cli imobench --limit 4 # benchmark e grading formal DeepMind (R442)
 ```
 
