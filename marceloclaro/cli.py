@@ -107,6 +107,39 @@ def main() -> int:
             print(json.dumps(report, indent=2, ensure_ascii=False))
             return 0 if report.get("overall") in {"healthy", "degraded"} else 1
 
+        if cmd == "apm":
+            from integrations.apm import APMPackageManager
+            pm = APMPackageManager()
+            subcmd = sys.argv[2] if len(sys.argv) > 2 else "audit"
+            if subcmd == "init":
+                manifest, lock = pm.init(overwrite=True)
+                print(f"APM inicializado: {pm.manifest_path.name} e {pm.lock_path.name}")
+                print(f"Total de primitivas: {sum(len(v) for v in manifest.primitives.values())}")
+            elif subcmd == "install":
+                lock = pm.install()
+                print(f"APM dependências verificadas e lockfile atualizado: {pm.lock_path.name}")
+            elif subcmd == "compile":
+                target = sys.argv[3] if len(sys.argv) > 3 else "all"
+                res = pm.compile(target=target)
+                print(f"APM compilação concluída ({target}):")
+                for k, v in res.items():
+                    print(f"  - {k} -> {v}")
+            elif subcmd == "audit":
+                report = pm.audit()
+                print(json.dumps(report.summary(), indent=2, ensure_ascii=False))
+                return 0 if report.status in {"pass", "warn"} else 1
+            elif subcmd == "pack":
+                out = sys.argv[3] if len(sys.argv) > 3 else None
+                pkg = pm.pack(out)
+                print(f"APM pacote exportado: {pkg}")
+            elif subcmd in ("list", "primitives"):
+                prims = pm.list_primitives()
+                print(json.dumps(prims, indent=2, ensure_ascii=False))
+            else:
+                print(f"Subcomando APM desconhecido: '{subcmd}'. Opções: init, install, compile, audit, pack, list.")
+                return 1
+            return 0
+
         orchestrator = MarceloClaroOrchestrator()
         if cmd == "status":
             print(json.dumps(orchestrator.status(), indent=2, ensure_ascii=False))
@@ -136,9 +169,38 @@ def main() -> int:
                 indent=2,
                 ensure_ascii=False,
             ))
+        elif cmd in ("amplify", "amplificar", "dsh"):
+            if len(sys.argv) < 3:
+                print('Uso: python3 -m marceloclaro.cli amplify "<prompt>" [--model ox-alpha-free] [--type general|coding|reasoning|academic] [--iterations N]')
+                raise SystemExit(1)
+            prompt = sys.argv[2]
+            model = "ox-alpha-free"
+            task_type = "general"
+            iterations = 2
+            idx = 3
+            while idx < len(sys.argv):
+                if sys.argv[idx] == "--model" and idx + 1 < len(sys.argv):
+                    model = sys.argv[idx + 1]
+                    idx += 2
+                elif sys.argv[idx] == "--type" and idx + 1 < len(sys.argv):
+                    task_type = sys.argv[idx + 1]
+                    idx += 2
+                elif sys.argv[idx] == "--iterations" and idx + 1 < len(sys.argv):
+                    iterations = int(sys.argv[idx + 1])
+                    idx += 2
+                else:
+                    idx += 1
+            res = orchestrator.amplify_free_model_response(
+                prompt=prompt,
+                model=model,
+                task_type=task_type,
+                iterations=iterations,
+                use_rag=True,
+            )
+            print(json.dumps(res, indent=2, ensure_ascii=False))
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
         return 0
 
     # Modo interativo

@@ -14,6 +14,14 @@ from integrations.deepseek_harness.adapter import DeepSeekHarnessAdapter
 from integrations.deepseek_harness.metacognition import DSHMetacognitionIngestor
 from integrations.deepseek_harness.worker_pool import DeepSeekWorkerPool
 from integrations.deepseek_harness.reasoning_loop import DeepSeekReasoningLoop
+from integrations.deepseek_harness.free_model_amplifier import (
+    DeepSeekFreeModelHarness,
+    get_free_model_amplifier,
+    ReasoningScaffoldEngine,
+    ContextAmplifier,
+    ChainOfVerification,
+    AmplificationResult,
+)
 
 __all__ = [
     "DeepSeekHarnessBridge",
@@ -23,4 +31,10 @@ __all__ = [
     "DSHMetacognitionIngestor",
     "DeepSeekWorkerPool",
     "DeepSeekReasoningLoop",
+    "DeepSeekFreeModelHarness",
+    "get_free_model_amplifier",
+    "ReasoningScaffoldEngine",
+    "ContextAmplifier",
+    "ChainOfVerification",
+    "AmplificationResult",
 ]

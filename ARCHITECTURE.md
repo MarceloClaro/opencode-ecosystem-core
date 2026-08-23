@@ -600,3 +600,21 @@ reinício (chat completion coerente via modelo local).
 | SPEC-935-R393 | Bridge do Antigravity CLI — sintaxe real | 5 |
 | SPEC-935-R394 | Auditoria real do OpenCode CLI | 11 |
 | SPEC-935-R395 | Daemon LiteRT-LM travado + diagnóstico de spawn | 1 |
+| SPEC-935-R440 | Integração Padrão Microsoft APM (Agent Package Manager) | 13 |
+| SPEC-935-R441 | Amplificação Cognitiva de Modelos Free via DeepSeek Harness | 10 |
+
+---
+
+## Padrão Microsoft APM & Amplificação Cognitiva DeepSeek Harness (R440–R441)
+
+### Microsoft APM (Agent Package Manager — SPEC-935-R440)
+O OpenCode Ecosystem Core unificou a governança de suas 222 primitivas sob o padrão canônico do **Microsoft APM** (`microsoft/apm`):
+1. **Manifesto e Lockfile**: `apm.yml` declarativo e `apm.lock.yaml` determinístico com hashes SHA-256 de todas as primitivas.
+2. **Scanner de Segurança `APMAuditor`**: Identifica e bloqueia ataques Unicode Trojan Source (bidi overrides, zero-width chars), injeções de prompt e alegações não verificadas (anti-overclaim).
+3. **Compilação Multi-Harness `APMCompiler`**: Gera e sincroniza automaticamente `opencode.json`, `AGENTS.md` e `CLAUDE.md`.
+
+### Amplificação Cognitiva de Modelos Free (SPEC-935-R441)
+Para modelos gratuitos e de inferência leve (`ox-alpha-free`, `deepseek-free`, `colibri-olmoe`, `qwen-2.5-coder-free`), o módulo `integrations/deepseek_harness/free_model_amplifier.py` aplica:
+1. **Test-Time Compute Scaffolding**: Emulação de `<think>` com decomposição lógica e testes de casos de borda.
+2. **RAG Local a Custo Zero**: Expansão de contexto grounded via Whoosh3 BM25F local + DataKnowledgeHub + MetaBus episódico.
+3. **Cadeia de Verificação Iterativa (CoVe)**: Auto-correção e grading head de confiança ($\ge 0.90$).
