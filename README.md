@@ -2668,8 +2668,8 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>263 ciclos evolutivos (R1–R445) · 2.850 testes coletados · 209 agentes · 109 specs formais</i><br>
-  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | AlphaGeometry & Wu's Method | Lean 4 Auto-Formalizer | E-Graph Saturation | AlphaProof & Deep Think</b><br>
+  <i>264 ciclos evolutivos (R1–R446) · 3.483 testes coletados · 209 agentes · 110 specs formais</i><br>
+  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | Decisão Clínica & Teoria dos Jogos | AlphaGeometry & Wu's Method | Lean 4 Auto-Formalizer | E-Graph Saturation | AlphaProof & Deep Think</b><br>
   <sub>Números medidos em 2026-08 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
   contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
