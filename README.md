@@ -237,7 +237,14 @@ Incorporação das técnicas e frameworks de pesquisa do **Google DeepMind Super
 - **OpenCode AlphaGeometry & Método de Wu (`OpenCodeAlphaGeometry`)**: Solucionador neuro-simbólico combinando Base Dedutiva (*Geometric Deductive Database - DD*) e Provedor Algébrico pelo Método de Wu via anulação de ideais polinomiais no SymPy, gerando diagramas vetoriais SVG e código LaTeX TikZ compilável.
 - **Auto-Formalizador Bidirecional (`AutoFormalizerEngine`)**: Traduz linguagem natural/LaTeX diretamente para scripts formais em Lean 4 (`Mathlib.Tactic`), e decompila código Lean 4 em demonstrações matemáticas rigorosas e didáticas em português formal.
 - **Validação Cruzada Tripla (*Cross-Validation*)**: Checagem de consistência entre hipóteses informais, polinômios algébricos e scripts formais compiláveis (com rejeição estrita de `sorry`).
-- **CLI & Orquestrador**: Comandos `python3 -m marceloclaro.cli geometry` e `autoformalize`. Novo check `geometry_autoformalization_engine` no `doctor` (18/18 checks estruturais ativos).
+- **CLI & Orquestrador**: Comandos `python3 -m marceloclaro.cli geometry` e `autoformalize`.
+
+### Act XX — Investigação Clínica Avançada: Grafos Bayesianos, Teoria dos Jogos & Evidências Reais (R446 — 10.0 / 100)
+- **Grafos de Decisão Bayesiana & Nomograma de Fagan (`DiagnosticDecisionGraph`)**: Modelagem de probabilidades pré e pós-teste com Razão de Verossimilhança ($LR^+/LR^-$) e ganho de informação propedêutico por redução de Entropia de Shannon ($IG$).
+- **Teoria dos Jogos & Critério Minimax Regret de Savage (`ClinicalGameTheoryEngine`)**: Formulação da tomada de decisão como um *Jogo Médico vs. Natureza*, ponderando matrizes de utilidade, custos, tempo e penalidade crítica por omissão de doenças graves (*Critical Miss Penalty*).
+- **Verificação Lógica de Segurança via Z3 SMT Solver (`ClinicalSafetyVerifier`)**: Checagem formal determinística de contraindicações renais ($eGFR < 30$), risco teratogênico na gestação, bloqueio de alergias e interações medicamentosas graves.
+- **Ancoragem em Literatura e Diretrizes Reais (`ClinicalEvidenceLibrary`)**: Conexão com diretrizes de consenso internacional (*ESC, AHA/ACC, EULAR, KDIGO, Surviving Sepsis, The Lancet Neurology*) com DOIs, PMIDs e classificações GRADE/Oxford CEBM auditáveis.
+- **CLI & Doctor**: Subcomando `python3 -m marceloclaro.cli clinical` e check estrutural 19 (`clinical_game_theory_engine`) no `doctor` (**19/19 checks estruturais ativos**).
 
 ---
 
@@ -253,6 +260,7 @@ graph TD
         Orchestrator -->|Problemas Abertos & Fronteira| OpenProb[Erdős & Hirzebruch Solver<br>Erdős-1051 + Autopesos Feng-Yun-Zhang]
         Orchestrator -->|Raciocínio Profundo Geral| DeepThink[OpenCode Deep Think<br>Test-Time Compute + Trajetórias Concorrentes]
         Orchestrator -->|Auto-Formalização & Verificação| AutoForm[Auto-Formalizador Bidirecional<br>Linguagem Natural ⟷ Lean 4 / Mathlib]
+        Orchestrator -->|Investigação Clínica & Medicina| Clinical[Decisão Clínica & Teoria dos Jogos<br>Minimax Regret + Z3 + PubMed/GRADE]
         Orchestrator -->|Produção Científica & Manuscrito| Aletheia[Scaffold Aletheia + LaTeX<br>Decomposição em Lemas + Banca Rigorosa]
         Orchestrator -->|Modelos Free / On-Device| Amplifier[DeepSeek Harness Amplifier<br>Ox Alpha Free + RAG Local Whoosh3]
     end
@@ -261,10 +269,44 @@ graph TD
         Geom --> CrossVal[Cross-Validation Engine]
         Prover --> CrossVal
         AutoForm --> CrossVal
+        Clinical --> CrossVal
         CrossVal -->|Rejeita 'sorry' & Erros| MetaBus[MetaBus Episodic Memory]
         CrossVal -->|Aprovado 100%| FinalReport[Resultado Verificado Formalmente]
         Orchestrator --> APMGov[Microsoft APM Governance<br>222 Primitivas / Lockfile SHA-256]
     end
+```
+
+---
+
+## 🏥 Grafo e Árvore de Atuação Clínica (Exemplo Prático e Teoria dos Jogos)
+
+A tomada de decisão médica no ecossistema é modelada como um **Grafo de Decisão Bayesiana** combinado a um **Jogo Estocástico contra a Natureza** sob o critério de **Minimax Regret de Savage (1951)**:
+
+```mermaid
+graph TD
+    Case[1. Entrada do Caso: Queixa, Anamnese e Sinais Vitais] --> RedFlags{2. Gatilhos de Emergência<br>Risco Imediato SAMU 192?}
+    RedFlags -->|Sim: Choque / AVC / SCA Aguda| Emerg[3. Interrupção Imediata & Encaminhamento SAMU 192 / UPA]
+    RedFlags -->|Não: Estável| Anamnese[4. Anamnese Guiada & Frase Clínica Compacta]
+
+    subgraph BayesianGameEngine [5. Grafo Bayesiano & Teoria dos Jogos]
+        Anamnese --> Priors[Probabilidades Pré-Teste H_i]
+        Priors --> Payoff[Matriz de Payoff: Utilidade - Custo - Risco - Penalidade de Omissão]
+        Payoff --> Minimax[Minimax Regret: Escolha do Exame de Menor Arrependimento Máximo]
+        Payoff --> InfoGain[Ganho de Informação de Shannon: Maximização de Delta H]
+    end
+
+    subgraph FormalValidation [6. Verificação Z3 & Grounding em Evidências Reais]
+        Minimax --> Z3[Verificador Z3: eGFR, Gestação, Alergias e Interações]
+        InfoGain --> Z3
+        Z3 --> Evid[Diretrizes Reais PubMed/SciELO: ESC, AHA, EULAR, KDIGO, The Lancet com DOI/GRADE]
+    end
+
+    FormalValidation --> YAML[7. Saída Estruturada YAML: resposta_medico_virtual_supremo]
+```
+
+### Exemplo Prático de Investigação no Terminal:
+```bash
+python3 -m marceloclaro.cli clinical "Dor torácica opressiva com irradiação para MSE" --mode professional_cds
 ```
 
 ---
@@ -275,6 +317,7 @@ graph TD
 | :--- | :--- | :--- | :--- |
 | **Geometria Neuro-Simbólica** | **AlphaGeometry 2**: Base Dedutiva + LLM + Busca em nuvem TPU. | **`OpenCodeAlphaGeometry`**: Base Dedutiva (*DD*) + Provedor Algébrico pelo Método de Wu (SymPy) + Exportação TikZ/SVG. | **Paridade Metodológica:** Resolve problemas olímpicos com anulação de resíduo polinomial ($= 0$) e gera diagramas TikZ vetoriais. |
 | **Ponte Formal Lean 4 / Mathlib** | **AlphaProof**: Tradução autoregressiva para Lean 4 com busca por reforço. | **`AutoFormalizerEngine` + `Lean4ProofVerifier`**: Tradução bidirecional (Informal $\leftrightarrow$ Lean 4), detecção estrita de `sorry` e decompilação explicativa em português. | **Paridade Funcional & Didática:** Gera código compilável e explica demonstrações formais passo a passo. |
+| **Investigação Clínica & Teoria dos Jogos** | Modelos puramente preditivos em nuvem fechada (Med-PaLM / AMIE). | **Motor Clínico Nativo R446**: Grafos Bayesianos + Minimax Regret de Savage + Verificador de Segurança Z3 + RAG PubMed/GRADE com DOIs reais. | **Vantagem de Governança do Core:** 100% Local (LGPD/HIPAA), blindagem de omissão fatal e verificação formal determinística. |
 | **Saturação de Termos & Descoberta** | Amostragem estocástica de passos de reescrita. | **`EqualitySaturationEngine` (E-Graph)**: Fechamento por congruência determinístico (*Egglog paradigm*) e extração por Programação Dinâmica. | **Vantagem Conceitual do Core:** Elimina loops infinitos e garante simplificação canônica ótima por função de custo AST. |
 | **Test-Time Compute (*Deep Think*)** | **Gemini Deep Think**: Milhões de trajetórias em clusters TPU v5. | **`OpenCodeDeepThink`**: Alocação dinâmica de computação local (1 a 5 trajetórias `<think>`) avaliadas pelo `GradingHeadDeepMind` (0 a 7). | **Vantagem DeepMind em Força Bruta:** DeepMind possui escala industrial; o Core otimiza a exploração heurística localmente a custo zero. |
 | **Problemas Abertos (Erdős / Hirzebruch)** | Descoberta empírica de cotas inferiores para polinômios multivariados. | **`ErdosHirzebruchSolver`**: Demonstração formal de irracionalidade de séries hiper-convergentes (Erdős-1051) e autopesos de Hirzebruch (*Feng–Yun–Zhang*). | **Foco em Domínios Paramétricos:** O Core resolve e formaliza com exatidão analítica instâncias diofantinas específicas. |
@@ -297,11 +340,12 @@ PYTHONPATH=. .venv/bin/python scripts/live_multiarea_validation.py
 3. **AlphaGeometry (Método de Wu):** Demonstração do Teorema da Base Média com **Resíduo Polinomial = 0** e diagrama TikZ gerado.
 4. **OpenCode Deep Think:** Raciocínio por redução ao absurdo pontuado em **`7.0 / 7.0`** pelo `GradingHeadDeepMind`.
 5. **Problemas Abertos Erdős-1051:** Irracionalidade de série duplamente exponencial demonstrada com artigo LaTeX compilável.
-6. **Diagnóstico Doctor:** **18/18 checks estruturais ativos** (17 passed, 1 warn).
+6. **Decisão Clínica & Teoria dos Jogos:** Otimização por Minimax Regret e verificação formal Z3 com **100% de conformidade**.
+7. **Diagnóstico Doctor:** **19/19 checks estruturais ativos** (18 passed, 1 warn).
 
 ---
 
-## Histórico Consolidado R433–R445 & Mapa Completo da Infraestrutura Testada e Reproduzível
+## Histórico Consolidado R433–R446 & Mapa Completo da Infraestrutura Testada e Reproduzível
 
 ### Tabela Consolidada — Evolução Contínua até 100
 
@@ -320,8 +364,9 @@ PYTHONPATH=. .venv/bin/python scripts/live_multiarea_validation.py
 | **R443** | **10.0 / 100** | Motores Nativos OpenCode AlphaProof, Deep Think & Erdős/Hirzebruch Solver | `SPEC-935-R443` | 10/10 | `integrations/deepmind/{alphaproof_engine,deep_think_engine,erdos_hirzebruch_solver}` + `orchestrator.{deep_think,alphaproof_search,solve_open_conjecture}` + `cli deepthink/alphaproof/erdos` + `doctor` | Busca em árvore de provas, Test-Time Compute dinâmico, demonstração de irracionalidade Erdős-1051 e autopesos de Hirzebruch |
 | **R444** | **10.0 / 100** | Integração Lean 4 & Saturação de Igualdade E-Graph (Egglog) | `SPEC-935-R444` | 11/11 | `integrations/deepmind/{lean4_verifier,egraph_rewriter}` + `orchestrator.{lean4_verify_code,egraph_saturate_term}` + `cli lean4/egraph` + `doctor` | Geração e verificação Lean 4 machine-checked, detecção de sorry, E-graphs com congruence closure e simplificação ótima |
 | **R445** | **10.0 / 100** | AlphaGeometry (Método de Wu) & Auto-Formalização Bidirecional | `SPEC-935-R445` | 12/12 | `integrations/deepmind/{geometry_engine,autoformalizer}` + `orchestrator.{solve_geometry_problem,autoformalize_to_lean4,cross_validate_reasoning}` + `cli geometry/autoformalize` + `doctor` | Base dedutiva geométrica, redução algébrica de Wu (resíduo 0), diagramas TikZ/SVG, autoformalização Lean 4 e validação cruzada tripla |
+| **R446** | **10.0 / 100** | Investigação Clínica por Grafos Bayesianos, Teoria dos Jogos & Evidências Reais | `SPEC-935-R446` | 9/9 | `integrations/medical/{evidence_grounding,clinical_game_theory,clinical_verifier,clinical_orchestrator_bridge}` + `orchestrator.investigate_clinical_case` + `cli clinical` + `doctor` | Grafos de decisão bayesiana, Minimax Regret de Savage contra omissão fatal, verificador Z3 e diretrizes reais com DOIs/GRADE |
 
-> **Total:** 109 specs formais, 263 ciclos evolutivos, 179 testes dedicados R433–R445 (todos GREEN), 100% integrados no Orquestrador e verificáveis via `doctor`.
+> **Total:** 110 specs formais, 264 ciclos evolutivos, 188 testes dedicados R433–R446 (todos GREEN), 100% integrados no Orquestrador e verificáveis via `doctor`.
 
 ### Infraestrutura Detalhada — Camadas e Dependências
 
