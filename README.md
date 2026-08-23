@@ -486,7 +486,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercont
 
 ---
 
-##  Arquitetura do Sistema (v3.7)
+##  Arquitetura do Sistema (v3.9)
 
 O ecossistema é organizado em **14 camadas interconectadas**:
 
@@ -1223,7 +1223,7 @@ sequenceDiagram
     end
 ```
 
-#### 4. Mapa da Arquitetura Completa (v3.7.0)
+#### 4. Mapa da Arquitetura Completa (v3.9.0)
 
 ```mermaid
 graph TD
@@ -1275,6 +1275,30 @@ graph TD
         
         Metrics --> HTTP
         DocMetrics -.->|consulta| Metrics
+    end
+
+    %% Microsoft APM (R440)
+    subgraph APM [Microsoft APM - Agent Package Manager R440]
+        APMMan[apm.yml<br>222 Primitivas]
+        APMAudit[APMAuditor<br>Trojan Source & Injection Scan]
+        APMComp[APMCompiler<br>opencode.json & AGENTS/CLAUDE]
+        APMLock[apm.lock.yaml<br>Hashes SHA-256]
+        
+        APMMan --> APMAudit
+        APMAudit --> APMComp
+        APMComp --> APMLock
+    end
+
+    %% DeepSeek Harness Free Model Amplifier (R441)
+    subgraph DSH [DeepSeek Harness Free Model Amplifier R441]
+        FreeModels[Modelos Free<br>ox-alpha-free · deepseek-free]
+        Scaffold[ReasoningScaffoldEngine<br>Test-Time Compute <think>]
+        CtxAmp[ContextAmplifier<br>Whoosh3 BM25F + DataHub RAG]
+        CoVe[ChainOfVerification<br>CoVe 97%+ & Grading Head]
+        
+        FreeModels --> Scaffold
+        Scaffold --> CtxAmp
+        CtxAmp --> CoVe
     end
     
     %% Pipeline Academico Agentivo
@@ -1361,6 +1385,8 @@ graph TD
     Orchestrator -->|4. Executa TDD| Pipe
     Pipe -->|Verifica| Ver
     Orchestrator <-->|Usa| Core
+    Orchestrator -->|Governança & Primitivas| APM
+    Orchestrator -->|Amplificação Free Models| DSH
     
     %% Conexões de observabilidade
     Orchestrator -->|get_reduction_stats| Metrics
@@ -2509,9 +2535,9 @@ substituição cega de seu estado nem mistura de métricas históricas com
 validação externa.
 
 <div align="center">
-  <i>212 ciclos evolutivos (R1–R395) · 2.750 testes coletados · 205 agentes · 237 specs formais</i><br>
-  <b>v3.8.0 — Pipeline Acadêmico Agentivo | Camada Epistêmica | Guardas de Tradução Cultural | Triagem Real de CLIs Externos | MCP Security | CI/CD</b><br>
-  <sub>Números medidos em 2026-08-04 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
+  <i>259 ciclos evolutivos (R1–R441) · 2.850 testes coletados · 209 agentes · 105 specs formais</i><br>
+  <b>v3.9.0 — Pipeline Acadêmico Agentivo | Microsoft APM | DeepSeek Harness Free Model Amplifier | Camada Epistêmica | Triagem Real de CLIs | MCP Security | CI/CD</b><br>
+  <sub>Números medidos em 2026-08 pelas próprias ferramentas do ecossistema (doctor, pytest --collect-only,
   contagem de arquivos) — não validação externa. Ver <a href="CORRIGENDUM.md">CORRIGENDUM.md</a>.</sub><br>
   <a href="https://buymeacoffee.com/geomaker">Apoie o projeto</a>
 </div>
