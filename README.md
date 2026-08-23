@@ -6,17 +6,18 @@
 [![Licença](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success.svg)]()
-[![Versão](https://img.shields.io/badge/Versão-3.9.0_AlphaGeometry_%2B_AutoFormalize_%2B_Lean4-blue.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/Testes-2.850_coletados-success.svg)](tests/)
-[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-263_evolutivos-blueviolet.svg)](evolution/cycles.json)
+[![Versão](https://img.shields.io/badge/Versão-3.9.0_Clinical_Game_Theory_%26_Lean4-blue.svg)](CHANGELOG.md)
+[![Testes](https://img.shields.io/badge/Testes-3.483_coletados-success.svg)](tests/)
+[![Ciclos Evolutivos](https://img.shields.io/badge/Ciclos-264_evolutivos-blueviolet.svg)](evolution/cycles.json)
 [![APM](https://img.shields.io/badge/Microsoft_APM-222_primitivas-0078D4.svg)](apm.yml)
+[![Clinical Game Theory](https://img.shields.io/badge/Clinical_AI-Game_Theory_%26_Z3-FF6F00.svg)](integrations/medical/)
 [![AlphaGeometry](https://img.shields.io/badge/OpenCode-AlphaGeometry_%26_Wu's_Method-EA4335.svg)](integrations/deepmind/)
 [![Lean 4 & E-Graph](https://img.shields.io/badge/Lean_4-Formal_Proof_%26_E--Graph-34A853.svg)](integrations/deepmind/)
 [![AlphaProof](https://img.shields.io/badge/OpenCode-AlphaProof_%26_DeepThink-4285F4.svg)](integrations/deepmind/)
 [![DeepSeek Harness](https://img.shields.io/badge/DeepSeek_Harness-Free_Model_Amplifier-4B0082.svg)](integrations/deepseek_harness/)
 [![MCP](https://img.shields.io/badge/MCP-6_servidores-8A2BE2.svg)](integrations/)
 [![Agentes](https://img.shields.io/badge/Agentes-209-orange.svg)](agents/catalog/)
-[![Specs](https://img.shields.io/badge/Specs-109-dodgerblue.svg)](specs/)
+[![Specs](https://img.shields.io/badge/Specs-110-dodgerblue.svg)](specs/)
 [![Harness](https://img.shields.io/badge/Harness-Universal_Agnóstico-success.svg)](integrations/harness/)
 [![Search-RAG](https://img.shields.io/badge/Search--RAG-Unificado_99-success.svg)](rag/enhanced_search_rag.py)
 [![Reversa](https://img.shields.io/badge/Reversa-Universal_99-success.svg)](reversa_universal/engine.py)
@@ -27,7 +28,7 @@
 [![Autocorreção](https://img.shields.io/badge/Autocorreção-Circuito_Fechado-gold.svg)](mci/self_correction.py)
 [![CI/CD](https://img.shields.io/badge/CI/CD-GitHub_Actions-green.svg)](.github/workflows/ci.yml)
 
-*Uma arquitetura cognitiva completa que integra 209 agentes especializados, Pipeline Científico Agentivo, Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado**, **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline**, 6 Servidores MCP, **Padrão Canônico Microsoft APM (Agent Package Manager - R440)** com manifesto determinístico e lockfile SHA-256, **Amplificação Cognitiva DeepSeek Harness para Modelos Free (R441)** com test-time compute `<think>` e RAG multi-fonte a custo zero, e 259 ciclos de evolução contínua.*
+*Uma arquitetura cognitiva completa que integra 209 agentes especializados, Pipeline Científico Agentivo, Investigação Clínica por Grafos Bayesianos e Teoria dos Jogos (Minimax Regret de Savage - R446), Motor de Inferência MoE Local via **Colibri (OLMoE 1B/7B)** em C nativo, **Autocorreção em Circuito Fechado**, **Guardião de Integridade Merkle Tree**, **Internal Audit Harness com Assinatura SHA-256**, **SuperRigor Pipeline**, 6 Servidores MCP, **Padrão Canônico Microsoft APM (Agent Package Manager - R440)** com manifesto determinístico e lockfile SHA-256, **Amplificação Cognitiva DeepSeek Harness para Modelos Free (R441)** com test-time compute `<think>` e RAG multi-fonte a custo zero, e 264 ciclos de evolução contínua.*
 
 > Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
 
