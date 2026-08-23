@@ -277,9 +277,22 @@ def main() -> int:
         elif cmd in ("shortcuts", "atalhos"):
             from scripts.create_desktop_shortcuts import main as make_shortcuts
             make_shortcuts()
+        elif cmd in ("clinical", "medico", "anamnese"):
+            complaint = sys.argv[2] if len(sys.argv) > 2 else "Dor torácica atípica"
+            mode = "professional_cds"
+            if len(sys.argv) > 4 and sys.argv[3] == "--mode":
+                mode = sys.argv[4]
+            case_data = {
+                "chief_complaint": complaint,
+                "patient_profile": {"age": 52, "sex": "M", "egfr": 75.0, "comorbidities": ["Hipertensão"]},
+                "duration": "2 dias",
+                "severity": "moderada a grave",
+            }
+            clinical_res = orchestrator.investigate_clinical_case(case_data, mode=mode)
+            print(json.dumps(clinical_res, indent=2, ensure_ascii=False))
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'shortcuts', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'clinical', 'shortcuts', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
         return 0
 
     # Modo interativo
