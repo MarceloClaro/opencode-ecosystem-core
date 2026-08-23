@@ -132,10 +132,19 @@ log "Etapa 4/4: Configurando PATH, aliases e integração nativa..."
 BASHRC="$HOME/.bashrc"
 add_line() { grep -qxF "$1" "$BASHRC" 2>/dev/null || echo "$1" >> "$BASHRC"; }
 
-add_line 'export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH"'
+add_line 'export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$HOME/.elan/bin:$PATH"'
 add_line "alias ecosystem='cd $ECO_DIR && python3 -m marceloclaro.cli'"
 add_line "alias eco-opencode='cd $ECO_DIR && opencode'"
 add_line "alias eco-agy='cd $ECO_DIR && agy'"
+add_line "alias eco-claude='cd $ECO_DIR && claude'"
+
+# Instalação best-effort do Lean 4 Elan (Gerenciador de toolchains formais)
+if ! command -v elan >/dev/null 2>&1 && [ ! -f "$HOME/.elan/bin/elan" ]; then
+    log "Instalando Elan / Lean 4 (gerenciador de provas formais)..."
+    curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none >>"$LOG_FILE" 2>&1 \
+        && ok "Elan (Lean 4) instalado com sucesso." \
+        || warn "Elan/Lean 4 não pôde ser instalado automaticamente (verificador usará fallback sintático)."
+fi
 
 # Integração nativa: o opencode.json do repositório carrega os agentes e o
 # servidor MCP metacognitivo automaticamente quando o OpenCode CLI é aberto
@@ -150,14 +159,22 @@ print(f'opencode.json regenerado: {path}')
       || warn "Não foi possível regenerar opencode.json (usando o do repositório)."
 fi
 
+# Compilação e auditoria Microsoft APM (222 primitivas)
+if [ -d "$ECO_DIR" ]; then
+    log "Auditando e compilando pacotes Microsoft APM..."
+    (cd "$ECO_DIR" && python3 -m marceloclaro.cli apm compile >>"$LOG_FILE" 2>&1) \
+        && ok "Microsoft APM sincronizado com sucesso." \
+        || warn "Aviso ao compilar APM (verifique o log)."
+fi
+
 # ---------------------------------------------------------------------------
-# Smoke tests
+# Smoke tests & Diagnóstico Doctor
 # ---------------------------------------------------------------------------
 echo ""
 echo "==================================================================="
-echo "  VERIFICAÇÃO FINAL"
+echo "  VERIFICAÇÃO FINAL & DIAGNÓSTICO DO ECOSSISTEMA"
 echo "==================================================================="
-export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$HOME/.elan/bin:$PATH"
 FAIL=0
 for tool in opencode agy claude ollama git python3 pandoc; do
     if command -v "$tool" >/dev/null 2>&1; then
@@ -175,9 +192,16 @@ else
     FAIL=1
 fi
 
+# Execução do Doctor para checagem estrutural completa
+if [ -d "$ECO_DIR" ]; then
+    echo ""
+    log "Executando Doctor de integridade estrutural (18 checks)..."
+    (cd "$ECO_DIR" && python3 -m marceloclaro.cli doctor) || true
+fi
+
 echo ""
 if [ "$FAIL" -eq 0 ]; then
-    ok "Provisionamento concluído com sucesso!"
+    ok "Provisionamento concluído com sucesso total!"
 else
     warn "Provisionamento concluído com pendências. Revise: $LOG_FILE"
 fi

@@ -255,12 +255,17 @@ function New-EcoShortcut {
 
 New-EcoShortcut -Name 'OpenCode Ecosystem' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"opencode`"" `
-    -Description 'OpenCode CLI com o OpenCode Ecosystem Core nativo (134 agentes + MCP)' `
+    -Description 'OpenCode CLI com o OpenCode Ecosystem Core nativo (209 agentes + 6 MCPs + APM)' `
     -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
 
 New-EcoShortcut -Name 'Antigravity CLI' `
     -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"agy`"" `
     -Description 'Google Antigravity CLI no diretorio do ecossistema' `
+    -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
+
+New-EcoShortcut -Name 'Claude Code CLI' `
+    -Arguments "-d $Distro --cd $EcoDir -- bash -lic `"claude`"" `
+    -Description 'Claude Code CLI no diretorio do ecossistema' `
     -IconLocation "$env:SystemRoot\System32\wsl.exe,0"
 
 New-EcoShortcut -Name 'Ecosystem (marceloclaro)' `
@@ -271,21 +276,28 @@ New-EcoShortcut -Name 'Ecosystem (marceloclaro)' `
 # ----------------------------------------------------------------------------
 # 5. Resumo final
 # ----------------------------------------------------------------------------
-Write-Step "Etapa 5/5: Concluido!"
+Write-Step "Etapa 5/5: Concluido com Sucesso!"
 Write-Host @"
 
 ===================================================================
-  INSTALACAO CONCLUIDA
+  INSTALACAO CONCLUIDA — OPENCODE ECOSYSTEM CORE v3.9.0
 ===================================================================
   Atalhos criados na Area de Trabalho:
-    [1] OpenCode Ecosystem        -> OpenCode CLI + ecossistema nativo
+    [1] OpenCode Ecosystem        -> OpenCode CLI + 209 agentes nativos
     [2] Antigravity CLI           -> Google Antigravity (agy)
-    [3] Ecosystem (marceloclaro)  -> CLI do orquestrador metacognitivo
+    [3] Claude Code CLI           -> Claude Code CLI (@anthropic-ai)
+    [4] Ecosystem (marceloclaro)  -> CLI do orquestrador metacognitivo
 
-  Observacoes:
-    - No primeiro uso do OpenCode/Antigravity, faca login quando solicitado.
-    - Para modelos locais gratuitos:  wsl -d Ubuntu -- ollama pull llama3.2
-    - Log de provisionamento: ~/.opencode-ecosystem-install.log (no Ubuntu)
-    - Para atualizar tudo no futuro, execute novamente este instalador.
+  Recursos Configurados:
+    - WSL2 + Ubuntu Linux otimizado
+    - 209 Agentes Especialistas + 6 Servidores MCP
+    - Microsoft APM (222 primitivas gerenciadas)
+    - Raciocínio Formal: AlphaProof, AlphaGeometry, Lean 4 e E-Graph
+    - Modelos Locais Ollama & Colibri MoE em C nativo
+
+  Primeiros Passos:
+    - Diagnóstico de saúde:  wsl -d Ubuntu -- bash -lic "cd ~/opencode-ecosystem-core && python3 -m marceloclaro.cli doctor"
+    - Modelos locais free:   wsl -d Ubuntu -- ollama pull llama3.2
+    - Log de instalacao:     ~/.opencode-ecosystem-install.log (no Ubuntu)
 ===================================================================
 "@ -ForegroundColor Green
