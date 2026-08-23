@@ -1,10 +1,3 @@
-<div class="center">
-
-Prof. Marcelo Claro — Mestre em Educação, Pesquisador em Economia da Educação  
-ORCID: [0000-0001-8996-2887](https://orcid.org/0000-0001-8996-2887)
-
-</div>
-
 ---
 header-includes: |
   \usepackage{graphicx}
@@ -18,7 +11,7 @@ keywords: [Armadilha da renda média, IDEB, Sertão de Crateús, Ceará, Economi
 ---
 
 \begin{center}
-{\Large\bfseries Educação, Armadilha da Renda Média e Desempenho Escolar:}\[4pt]
+{\Large\bfseries Educação, Armadilha da Renda Média e Desempenho Escolar:}\\[4pt]
 {\large\bfseries Evidências do IDEB no Sertão de Crateús e no Ceará (2005–2025)\\ como Ruptura da Estagnação}
 \end{center}
 
@@ -27,7 +20,7 @@ keywords: [Armadilha da renda média, IDEB, Sertão de Crateús, Ceará, Economi
 \small ORCID: \href{https://orcid.org/0000-0001-8996-2887}{0000-0001-8996-2887}
 \end{center}
 
-> **Fontes e proveniência:** todos os dados são de fontes oficiais auditáveis (INEP; IBGE; World Bank; OCDE; FAO; USPTO; CONAB; IPEA), com manifesto de downloads contendo URL, data-hora e hash SHA-256 (`data/raw/SOURCE_MANIFEST.json` (projeto Crateús-IDEB)). Scripts, saídas completas e o relatório independente de validação por banca simulada acompanham o material suplementar (Apêndice A).
+> **Fontes e proveniência:** todos os dados são de fontes oficiais auditáveis (INEP; IBGE; World Bank; OCDE; FAO; USPTO; CONAB; IPEA). Cada download está registrado em manifesto próprio com URL, data-hora e hash SHA-256. Scripts, saídas completas e o relatório independente de validação por banca simulada acompanham o material suplementar (Apêndice A).
 
 ## Resumo
 
@@ -117,7 +110,7 @@ As hipóteses foram registradas antes da execução analítica e mapeiam-se biun
 
 - **H2 (associação temporal fraca ou nula).** Dentro das unidades, primeiras diferenças apresentam correlações próximas de zero e o coeficiente de efeitos fixos de município×etapa e ano é estatisticamente indistinguível de zero sob erros clusterizados com correção de pequena amostra e sob *wild cluster bootstrap*. Trata-se de hipótese avaliada por **não-detecção qualificada**: somente com MDES e TOST reportados é possível classificar adequadamente um resultado não significativo.
 
-- **H3a (metas).** Em cada par (município, etapa, ano t ∈ {2011, 2013, 2015, 2017, 2019, 2021}), o IDEB observado é maior ou igual à meta projetada pelo INEP para aquele mesmo ano — critério de cumprimento sincronizado, mais exigente que comparações defasadas.
+- **H3a (metas).** Em cada par (município, etapa, ano t nos anos {2011, 2013, 2015, 2017, 2019, 2021}), o IDEB observado é maior ou igual à meta projetada pelo INEP para aquele mesmo ano — critério de cumprimento sincronizado, mais exigente que comparações defasadas.
 
 - **H3b (ganho e renda).** O ganho de IDEB em AI entre 2007 e 2025 não se associa à renda municipal censitária (correlação compatível com zero, IC95% amplo reportado).
 
