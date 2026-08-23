@@ -9,892 +9,892 @@ primitives:
   instructions:
     AGENTS.md:
       path: AGENTS.md
-      sha256: 78ee83e7878ba79f1971b90bc5d15a4f0e665652742bc584bf937f5c75dd6a9d
-      locked_at: 1787477795.7827795
+      sha256: 7d940a52dc9bf7138634a3424a71988a1bb263def11999d6ca31e8a1b2124c70
+      locked_at: 1787479962.419717
     CLAUDE.md:
       path: CLAUDE.md
       sha256: aa7e8c46318295088f0a45cadd777adc0f1c39bbfefb95ba709857375972ffbd
-      locked_at: 1787477795.7834167
+      locked_at: 1787479962.4197936
     MANUAL.md:
       path: MANUAL.md
-      sha256: f9850397dea899b147719f372bbaacbc3300adbbed26db175674d5b63a3805f6
-      locked_at: 1787477795.7839565
+      sha256: adeb4177b3d86764005806d60cd20f9de67c074d914ef38b8565c5adffb9bd76
+      locked_at: 1787479962.4198484
   prompts: {}
   agents:
     00_editor_chefe_phd:
       path: agents/catalog/00_editor_chefe_phd.md
       sha256: e2d8cf0b7dbe49b4240398805b3eb4d3465c33a93880ce4eabdda9a16b0b8366
-      locked_at: 1787477795.7844894
+      locked_at: 1787479962.419901
     01_agente_diagnostico_escopo:
       path: agents/catalog/01_agente_diagnostico_escopo.md
       sha256: 3b8e3695e713080b71774550e1de05e012c44231539817ad3d432352aea59e5b
-      locked_at: 1787477795.7877288
+      locked_at: 1787479962.4199448
     02_agente_busca_curadoria:
       path: agents/catalog/02_agente_busca_curadoria.md
       sha256: 108b7f8e478d92c93fc89775aada18b6bc71b895d48c05158f8ce22ff1c8dc7a
-      locked_at: 1787477795.7882192
+      locked_at: 1787479962.4199858
     03_agente_evidencias_citacoes:
       path: agents/catalog/03_agente_evidencias_citacoes.md
       sha256: e571e4b7c2fb48ff73148cf13b2f70a44dbc0fa579c26804aaa7be1ece636322
-      locked_at: 1787477795.7885318
+      locked_at: 1787479962.4200265
     04_agente_estrutura_argumentativa:
       path: agents/catalog/04_agente_estrutura_argumentativa.md
       sha256: 72a74ecaa6f995a1e831682225a21cc89f07916643826e66623dad60c056a34a
-      locked_at: 1787477795.7888649
+      locked_at: 1787479962.420065
     05_agente_revisao_literatura_teoria:
       path: agents/catalog/05_agente_revisao_literatura_teoria.md
       sha256: 59b229251c8e8b8402b747abffcae2e30fd5def4d3aab81d5780dcafdcd1f29e
-      locked_at: 1787477795.7891402
+      locked_at: 1787479962.4201045
     06_agente_metodologia_reprodutibilidade:
       path: agents/catalog/06_agente_metodologia_reprodutibilidade.md
       sha256: cdc283c1c2cc312297426343fdd4a7494f487535a6498ab5c5424da45555d222
-      locked_at: 1787477795.7894635
+      locked_at: 1787479962.4201496
     07_agente_estatistica_analise:
       path: agents/catalog/07_agente_estatistica_analise.md
       sha256: 9e2394e15aa84c0eb671e5c21f5378f8d7f03de26658cc96ae8bccfc4ff55e04
-      locked_at: 1787477795.789737
+      locked_at: 1787479962.4202685
     08_agente_visualizacao_evidencia_grafica:
       path: agents/catalog/08_agente_visualizacao_evidencia_grafica.md
       sha256: 7faed97a0b25897b0d48170eaf84f6a8229474b068db04600b6a2b9aa1662f64
-      locked_at: 1787477795.7900095
+      locked_at: 1787479962.4203224
     09_agente_resultados:
       path: agents/catalog/09_agente_resultados.md
       sha256: 15e6a1017fa00bbbef9f2ad8e9bdb3644213a980eeadb85c229e8d60864a1909
-      locked_at: 1787477795.7904563
+      locked_at: 1787479962.4203665
     10_agente_discussao_contribuicao:
       path: agents/catalog/10_agente_discussao_contribuicao.md
       sha256: 925ef85cd329c60102424cd393f67d0d6feda2bbd072d5f1b302426695badcbe
-      locked_at: 1787477795.790831
+      locked_at: 1787479962.4204068
     11_agente_conclusao_coerencia_final:
       path: agents/catalog/11_agente_conclusao_coerencia_final.md
       sha256: 818b312dcd39d8efa9709f7a5aeb1be9e37b159d3744c15f4cb1cb60e7fc33e1
-      locked_at: 1787477795.7911897
+      locked_at: 1787479962.4204478
     12_agente_auditoria_bibliografica_abnt:
       path: agents/catalog/12_agente_auditoria_bibliografica_abnt.md
       sha256: 4aec117177ac52150a62072ab9c39def8c613625152c8bc90c7898ca09f6a8ac
-      locked_at: 1787477795.791561
+      locked_at: 1787479962.420487
     13_agente_qa_qualis_a1:
       path: agents/catalog/13_agente_qa_qualis_a1.md
       sha256: 4f5873d38037348bd7dc717f6a32998c27c6dabe19e5588284efbdcbff96ba56
-      locked_at: 1787477795.7919161
+      locked_at: 1787479962.4205272
     14_agente_consistencia_interna:
       path: agents/catalog/14_agente_consistencia_interna.md
       sha256: 0c4f50057da9020185b6a16c7d179195b2c38a6329f7950a1bff66edadd01357
-      locked_at: 1787477795.7922366
+      locked_at: 1787479962.4205673
     15_agente_resumo_abstract_palavras_chave:
       path: agents/catalog/15_agente_resumo_abstract_palavras_chave.md
       sha256: acdfb053a8a2955246646796b20a26473ef2744ae30170aade3a9b92e402aceb
-      locked_at: 1787477795.7928274
+      locked_at: 1787479962.4206073
     16_agente_integracao_editorial_docx:
       path: agents/catalog/16_agente_integracao_editorial_docx.md
       sha256: 3dc3feac2f09e73db4ce951baa1ca55aeb759ec4be641bfc48fc1fa5b7746cdf
-      locked_at: 1787477795.79323
+      locked_at: 1787479962.4206462
     17_agente_framework_reprodutivel_ambientes:
       path: agents/catalog/17_agente_framework_reprodutivel_ambientes.md
       sha256: 4159011c9185d33c925c8ea33925e1cf9d63f92890c1d8f935805e15332dda0d
-      locked_at: 1787477795.793507
+      locked_at: 1787479962.4206846
     18_agente_engenharia_dados_datasets_proveniencia:
       path: agents/catalog/18_agente_engenharia_dados_datasets_proveniencia.md
       sha256: 9f053dc2cbbb491f88cef4d770d5e4d0692a529839a5ac31762f33a445a36541
-      locked_at: 1787477795.79376
+      locked_at: 1787479962.4207497
     19_agente_auditoria_codigo_documentacao_tecnica:
       path: agents/catalog/19_agente_auditoria_codigo_documentacao_tecnica.md
       sha256: 3a4f1cfa946cd0822f5b2ccbe0442513cbbbae7e902b905f357f106542d4b45e
-      locked_at: 1787477795.79409
+      locked_at: 1787479962.420793
     20_agente_estatistica_avancada_inferencia:
       path: agents/catalog/20_agente_estatistica_avancada_inferencia.md
       sha256: 54bc18b1463f57ed31176d8aaec6e9354bb325eaadff1780b5de5f9f1effb017
-      locked_at: 1787477795.794413
+      locked_at: 1787479962.420835
     21_agente_matematica_aplicada_modelagem_formal:
       path: agents/catalog/21_agente_matematica_aplicada_modelagem_formal.md
       sha256: 0111cf572a5e5a09c4675966fbe90b5a8a2a3a8c040f1d0d84e7ee30b935e88c
-      locked_at: 1787477795.794777
+      locked_at: 1787479962.4208763
     22_agente_ml_dl_datamining:
       path: agents/catalog/22_agente_ml_dl_datamining.md
       sha256: 22a23903b49f75bfe9d4cfcc55a7c941edb7b850404660a6da9fd7c84a330f16
-      locked_at: 1787477795.7950935
+      locked_at: 1787479962.4209168
     23_agente_bioinformatica_omicas:
       path: agents/catalog/23_agente_bioinformatica_omicas.md
       sha256: c0a223a04cfc069ffd0a0642eed444d277d5e402728b58239b40ce63396bd8c2
-      locked_at: 1787477795.7953448
+      locked_at: 1787479962.4209557
     24_agente_quimioinformatica_modelagem_molecular:
       path: agents/catalog/24_agente_quimioinformatica_modelagem_molecular.md
       sha256: e1b878b553f3adff9176b1118847e59a7473edf0fb57232a461a16dc28f475a2
-      locked_at: 1787477795.7956605
+      locked_at: 1787479962.4209948
     25_agente_ciencias_sociais_linguistica_computacional:
       path: agents/catalog/25_agente_ciencias_sociais_linguistica_computacional.md
       sha256: ea29b5684b36b0c83b88cec5189ea3b68a9f7d8181a898ec61660acf862af213
-      locked_at: 1787477795.7959375
+      locked_at: 1787479962.4210334
     26_agente_visao_computacional_multimodal:
       path: agents/catalog/26_agente_visao_computacional_multimodal.md
       sha256: 576ce09575378f05e17979d7ec05d0bc1a31857f946fcc74bed259e5f1f7e42c
-      locked_at: 1787477795.7961845
+      locked_at: 1787479962.4210737
     27_agente_computacao_quantica_aplicada:
       path: agents/catalog/27_agente_computacao_quantica_aplicada.md
       sha256: 80369933adc4e445f4616e17c36fe8e6b60eb48f4d114c1e614c5718de73df97
-      locked_at: 1787477795.796377
+      locked_at: 1787479962.4211125
     28_agente_benchmarking_ablacao_robustez:
       path: agents/catalog/28_agente_benchmarking_ablacao_robustez.md
       sha256: 4a5e8e9e142e85684ede91ff9aea45d537053a64ddc89410ebf37f425f533081
-      locked_at: 1787477795.7965207
+      locked_at: 1787479962.4211822
     29_agente_conformidade_internacional:
       path: agents/catalog/29_agente_conformidade_internacional.md
       sha256: d8398c3db86ced08b075b247285d10443c31dbb1faed22ced82e709085b41653
-      locked_at: 1787477795.7966797
+      locked_at: 1787479962.4212236
     30_agente_traducao_nativa_proofreading:
       path: agents/catalog/30_agente_traducao_nativa_proofreading.md
       sha256: b825c3baba3f71f75dbbd8fe675d3532de904d06c4840ee31bb86fa736e95c28
-      locked_at: 1787477795.7968745
+      locked_at: 1787479962.4212644
     31_agente_blind_peer_review_emulado:
       path: agents/catalog/31_agente_blind_peer_review_emulado.md
       sha256: 3185b7593f740dcf817f6a22fc9ab8d17130039c142d06015bded4ea176e00da
-      locked_at: 1787477795.7971966
+      locked_at: 1787479962.4213076
     32_agente_etica_open_science:
       path: agents/catalog/32_agente_etica_open_science.md
       sha256: 5b1d9f03b2e66abe808b65d8c67f65df8b32d0666e3c48c58cdd5dd362c9fac8
-      locked_at: 1787477795.7974102
+      locked_at: 1787479962.421352
     33_agente_automacao_multi_norma:
       path: agents/catalog/33_agente_automacao_multi_norma.md
       sha256: 63dbfb95505b9d87a34d45d01a79e8224d9a00037380f80dbfeaa883c65819c2
-      locked_at: 1787477795.7975907
+      locked_at: 1787479962.421396
     34_agente_identificacao_conflitos_similaridade:
       path: agents/catalog/34_agente_identificacao_conflitos_similaridade.md
       sha256: 049bcaba6301fc14cecd6c44f1f6168739b49a7c79644189559ded13c58dc15b
-      locked_at: 1787477795.7978034
+      locked_at: 1787479962.4214392
     35_agente_coleta_datasets_reais:
       path: agents/catalog/35_agente_coleta_datasets_reais.md
       sha256: 23199b95301e4b4347cc4f446e3dcb7cbd64f520c011ed26bf13e2c543c92ffc
-      locked_at: 1787477795.7981122
+      locked_at: 1787479962.4215083
     36_agente_exportacao_latex_pdf:
       path: agents/catalog/36_agente_exportacao_latex_pdf.md
       sha256: 25a4f6a4fe6176038fc0a904eabc6c3e2290bd08a4712addc1766110b95e9230
-      locked_at: 1787477795.798414
+      locked_at: 1787479962.4215517
     37_agente_apresentacao_slides_banca:
       path: agents/catalog/37_agente_apresentacao_slides_banca.md
       sha256: 03a2f4ae096c99d70b4936f813d097f01c3d7e4d9354682ea58531a7985b881c
-      locked_at: 1787477795.798647
+      locked_at: 1787479962.4215941
     38_agente_montagem_entrega_final:
       path: agents/catalog/38_agente_montagem_entrega_final.md
       sha256: 772503467dfc114fd4d04b9f0fa8727f6d3eba9f9bc82e941bcdfd81e9a14832
-      locked_at: 1787477795.7988834
+      locked_at: 1787479962.4216425
     39_agente_metodologia_multi_paradigma:
       path: agents/catalog/39_agente_metodologia_multi_paradigma.md
       sha256: c459b858e7f44cae8d5121cbe25d8426ed260a2d746994332bc80534fc4b819e
-      locked_at: 1787477795.7992358
+      locked_at: 1787479962.4217389
     40_agente_marcos_teoricos_interpretacao:
       path: agents/catalog/40_agente_marcos_teoricos_interpretacao.md
       sha256: 1a69b9177428684006789ebea8c3ed9dc6620e076d471a5c39a553ceaf39d46c
-      locked_at: 1787477795.80758
+      locked_at: 1787479962.4218707
     41_agente_gis_geoprocessamento_cartografia:
       path: agents/catalog/41_agente_gis_geoprocessamento_cartografia.md
       sha256: 21c318811bd2bfdf101c169d27ee31ea457c6c39de34e4c64177c06f0999ebb0
-      locked_at: 1787477795.8081858
+      locked_at: 1787479962.4219487
     42_agente_desenvolvedor_cientista_computacao:
       path: agents/catalog/42_agente_desenvolvedor_cientista_computacao.md
       sha256: aedfeb02a07d831794c136c0626b4b3592fec61ca9265fd74fc5f1ee7f084922
-      locked_at: 1787477795.8093681
+      locked_at: 1787479962.4220037
     43_agente_satelite_bioinformatica_omics:
       path: agents/catalog/43_agente_satelite_bioinformatica_omics.md
       sha256: aa667d481b4d677f05e63332d7fc0135b25fbc5046b1f64954519ce64ce5b789
-      locked_at: 1787477795.810417
+      locked_at: 1787479962.4220655
     44_agente_correcao_textual_qualis:
       path: agents/catalog/44_agente_correcao_textual_qualis.md
       sha256: 2b736b2f7df4588ee032c3392a693cbca277c37738564877564b2e61f4448fb0
-      locked_at: 1787477795.8107483
+      locked_at: 1787479962.4221013
     45_agente_refinamento_argumentacao:
       path: agents/catalog/45_agente_refinamento_argumentacao.md
       sha256: 069d43cc5f23e61152746422cbcd95475db4fc9ec135c998abae9f59e920ddc4
-      locked_at: 1787477795.8110852
+      locked_at: 1787479962.422135
     DISPATCHER_ATIVACAO:
       path: agents/catalog/DISPATCHER_ATIVACAO.md
       sha256: 72050892a38d477e621e83f4a9c8c50f3ce433b501f972b36a7d3ebdbd7d8107
-      locked_at: 1787477795.8112624
+      locked_at: 1787479962.4221675
     README:
       path: agents/catalog/README.md
       sha256: a73f6836e0e02b7cefb9fae2519e5fc002cd9ae35c03adb588928298f877705a
-      locked_at: 1787477795.8114083
+      locked_at: 1787479962.4221988
     TEMPLATE_HANDOFF:
       path: agents/catalog/TEMPLATE_HANDOFF.md
       sha256: 27fb7b31710c8986050c7cbe26f44ae40e5661157156fb4b11bdf41e448da86f
-      locked_at: 1787477795.8115413
+      locked_at: 1787479962.42223
     adr-manager:
       path: agents/catalog/adr-manager.md
       sha256: 8572920399e2d64295f2057df7985cd0e868cab0c731aa9dda3123df781478f3
-      locked_at: 1787477795.8116953
+      locked_at: 1787479962.4222746
     antigravity-orchestrator:
       path: agents/catalog/antigravity-orchestrator.md
       sha256: e5765f252b33bc4f7f0bc3ae6282c36265b4e5beabed5c709f3ee0969cc429c5
-      locked_at: 1787477795.8118567
+      locked_at: 1787479962.422317
     architect:
       path: agents/catalog/architect.md
       sha256: 846a7c6180ed5b05ee0b4f03ba1a454837d4540a3ccbc3aac7b7179050efa593
-      locked_at: 1787477795.812006
+      locked_at: 1787479962.4223504
     architecture-analyzer:
       path: agents/catalog/architecture-analyzer.md
       sha256: 057e0f9d35a0fb40e95f9c34c4fa831bbaba64e847df0501f9c5c80a3c96b35b
-      locked_at: 1787477795.8123288
+      locked_at: 1787479962.42241
     author-voice-guardian:
       path: agents/catalog/author-voice-guardian.md
       sha256: 1ffef58beadc9b9f07d354af41ec9e1de696739560599e568e7fc17014530ea6
-      locked_at: 1787477795.8125825
+      locked_at: 1787479962.4224436
     autoevolve:
       path: agents/catalog/autoevolve.md
       sha256: eb737f834f57ebfa9b62c9979328812b34891cc9d6a1a73c74b4712ec6591671
-      locked_at: 1787477795.8129103
+      locked_at: 1787479962.4224832
     auxjuris_document_summarizer:
       path: agents/catalog/auxjuris_document_summarizer.md
       sha256: a9aa6223e01aff2f9201e638f97ca7781b892ff927f31d43a89f26205fcd16f1
-      locked_at: 1787477795.8132083
+      locked_at: 1787479962.4225135
     auxjuris_email_drafter:
       path: agents/catalog/auxjuris_email_drafter.md
       sha256: 401ddfdddacc93fab309a8a2579bd43c635da5b49e33dd600bcb0b6e278367d0
-      locked_at: 1787477795.813455
+      locked_at: 1787479962.4225428
     auxjuris_legal_assistant:
       path: agents/catalog/auxjuris_legal_assistant.md
       sha256: 74858d0416fcd3ae4829369a283742ea806f1baf95200d7479be6dc49649e2c8
-      locked_at: 1787477795.8136954
+      locked_at: 1787479962.4225726
     auxjuris_legal_research:
       path: agents/catalog/auxjuris_legal_research.md
       sha256: 5572fabc7a8809a19a5e75f5676732c71b061d6e62a261c1355cee97e1af7838
-      locked_at: 1787477795.8140466
+      locked_at: 1787479962.4226017
     back-translation-verifier:
       path: agents/catalog/back-translation-verifier.md
       sha256: 7e17459ebcf1fdd93b435166e82a3c65483ab6980f56cfb6bebe1af15e2063f6
-      locked_at: 1787477795.8143628
+      locked_at: 1787479962.422633
     batch-executor:
       path: agents/catalog/batch-executor.md
       sha256: 553af45900ea529f0de8c7525b28a270aadc41708dcc55b6326ac834c2be80a6
-      locked_at: 1787477795.81474
+      locked_at: 1787479962.4226787
     bernstein-orchestrator:
       path: agents/catalog/bernstein-orchestrator.md
       sha256: 042f4c38e2224132d66db5a078586d40e34509b4b68765cc0cc082dd7db4ae2e
-      locked_at: 1787477795.814939
+      locked_at: 1787479962.4227152
     build-agent:
       path: agents/catalog/build-agent.md
       sha256: ac4827becfcde420b8ce3c64bec87fa89defb0e9da114efdcd449f19981c78e4
-      locked_at: 1787477795.8152416
+      locked_at: 1787479962.422753
     cloud-alloydb-specialist:
       path: agents/catalog/cloud-alloydb-specialist.md
       sha256: 8df45c590ffb34d6cb6ceddc9886d318b384051270cd9dcd531fcfeea98fe0a2
-      locked_at: 1787477795.8155458
+      locked_at: 1787479962.4227889
     cloud-bigquery-specialist:
       path: agents/catalog/cloud-bigquery-specialist.md
       sha256: cc3d402971c328a48ad3445118601739fbc908d5f755a71b4524ac528c67ab33
-      locked_at: 1787477795.8232343
+      locked_at: 1787479962.422823
     cloud-data-infra-generalist:
       path: agents/catalog/cloud-data-infra-generalist.md
       sha256: 9daaeb08c81cc6dda91ca7bebd94c55c29dee7682a2470f86b33237b6dc19151
-      locked_at: 1787477795.8238645
+      locked_at: 1787479962.4228551
     cloud-data-pipelines-specialist:
       path: agents/catalog/cloud-data-pipelines-specialist.md
       sha256: 46547d30c6ca1e6ad8a8a5db0dc4de9d1fef7f0a368895a7ac2255274ea4faa6
-      locked_at: 1787477795.8243728
+      locked_at: 1787479962.4228868
     cloud-security-specialist:
       path: agents/catalog/cloud-security-specialist.md
       sha256: 07cfc81132101d096b12d0e73587f3227dcaebc744f011529e8c1326f545aad6
-      locked_at: 1787477795.824848
+      locked_at: 1787479962.4229195
     cloud-sql-mysql-specialist:
       path: agents/catalog/cloud-sql-mysql-specialist.md
       sha256: 4cc2a725af259d44d369cbc50aab74c8ca107cc60461fcb440cf5b81baae1b97
-      locked_at: 1787477795.825275
+      locked_at: 1787479962.4229517
     cloud-sql-postgres-specialist:
       path: agents/catalog/cloud-sql-postgres-specialist.md
       sha256: fc9db7dab170aa5761f26b9b712aa052132ec3e37a650d9a616712ed481a5432
-      locked_at: 1787477795.8256793
+      locked_at: 1787479962.4229856
     cloud-sql-sqlserver-specialist:
       path: agents/catalog/cloud-sql-sqlserver-specialist.md
       sha256: 9aad567c22dbd620b4dc346f6640eade57bd45a3b5e1102336ce42ff3d0c4f4e
-      locked_at: 1787477795.826051
+      locked_at: 1787479962.4230173
     code-reviewer:
       path: agents/catalog/code-reviewer.md
       sha256: 82fcad151eac422bbb0d7b6584ef593ac014b754b835c86deafd9aaba3a7c5fa
-      locked_at: 1787477795.8264055
+      locked_at: 1787479962.423048
     codebase-analyzer:
       path: agents/catalog/codebase-analyzer.md
       sha256: d16ad1d5c856a79d85b73d9af108a346fd4f98510f5e3a96fc2088572332922a
-      locked_at: 1787477795.8267038
+      locked_at: 1787479962.4230843
     codebase-locator:
       path: agents/catalog/codebase-locator.md
       sha256: b44592b9bd65bed45288dc6597ce2e70ddffeb2520d980691e1f60ba1f26cba4
-      locked_at: 1787477795.827014
+      locked_at: 1787479962.423121
     codebase-pattern-finder:
       path: agents/catalog/codebase-pattern-finder.md
       sha256: a6e4416834471572360aca67ef2601d6b25e9dde3f5696c9f3aac7fbffdfd8f8
-      locked_at: 1787477795.8273296
+      locked_at: 1787479962.4231586
     coder-agent:
       path: agents/catalog/coder-agent.md
       sha256: 3b388233e302eed8f4ccf8683a69491df71aa318611b2f408a3b172236d55bde
-      locked_at: 1787477795.8276358
+      locked_at: 1787479962.423202
     colibri-agent:
       path: agents/catalog/colibri-agent.md
       sha256: ccdc7349a1ba4e656530a5d9a8c79b97364e496557dc7d52bc44eeafae5b5762
-      locked_at: 1787477795.8279283
+      locked_at: 1787479962.4232378
     context-manager:
       path: agents/catalog/context-manager.md
       sha256: f20031d3fcc3ca5771f5cdd8145570c55880fe8a42e6ad2a658ed48e04b571f0
-      locked_at: 1787477795.828277
+      locked_at: 1787479962.4232886
     context-retriever:
       path: agents/catalog/context-retriever.md
       sha256: 3c354c6a7b6b408373a4854db1b0784561a6d4aeddc7c2d407721c08beef364b
-      locked_at: 1787477795.8286343
+      locked_at: 1787479962.4233432
     contextscout:
       path: agents/catalog/contextscout.md
       sha256: ecfb7de4363de20d63673d9eb994dfe0e90cc82d06c1202a497c6a3064d98ab3
-      locked_at: 1787477795.8289928
+      locked_at: 1787479962.4233813
     contract-manager:
       path: agents/catalog/contract-manager.md
       sha256: cd80ad428ba097381cd2217ab37f4271d034725c0f59ee79f4b4081d55094417
-      locked_at: 1787477795.8295958
+      locked_at: 1787479962.4234354
     copywriter:
       path: agents/catalog/copywriter.md
       sha256: 7ee81331ddb16b11a9e7935ac40f20fb310311cd0df5ed64e2afb8891d140aa2
-      locked_at: 1787477795.829894
+      locked_at: 1787479962.4234679
     cultural-episteme-agent:
       path: agents/catalog/cultural-episteme-agent.md
       sha256: fe43d6fdc476d0ec43e673931fb783b38c4791bcaa878ea59dc876ee6b1eab7f
-      locked_at: 1787477795.8302433
+      locked_at: 1787479962.4235067
     data-knowledge-hub:
       path: agents/catalog/data-knowledge-hub.md
       sha256: 87aed0a62b492711e030814a66c1241a489322ecde061f9770d5dde056f3aa8d
-      locked_at: 1787477795.8305147
+      locked_at: 1787479962.4235423
     debugger:
       path: agents/catalog/debugger.md
       sha256: 4f527c24d2bdddd9c2b4dd2ec67aaf2c844b062c107a80fb5e5319a7c42e8265
-      locked_at: 1787477795.8308322
+      locked_at: 1787479962.4235735
     devops-specialist:
       path: agents/catalog/devops-specialist.md
       sha256: f5d6c105b4d079f597d08388f79a2926904ee107fd4ccdbd3b1e91a27df86b97
-      locked_at: 1787477795.8329926
+      locked_at: 1787479962.4236114
     docs-writer:
       path: agents/catalog/docs-writer.md
       sha256: 4f96c8e76027a315677e9d8e35a99aad20a6d4b037cf15652d3da6e69bf89707
-      locked_at: 1787477795.8336103
+      locked_at: 1787479962.423645
     documentation:
       path: agents/catalog/documentation.md
       sha256: 3cd77459bbf53227e755a0dd9a721f6cbc5a0e9d818f9e36b4fe336787623aea
-      locked_at: 1787477795.8340845
+      locked_at: 1787479962.423681
     eval-runner:
       path: agents/catalog/eval-runner.md
       sha256: b2d9c8cb7c18621fff9471214e8887c23f62a38e85de087f508d7cf4fc9a9431
-      locked_at: 1787477795.8344064
+      locked_at: 1787479962.4237475
     externalscout:
       path: agents/catalog/externalscout.md
       sha256: 67dd12ed127dce575a5c0022cb71cef3ca1e14b7c56ea79bdb7c9905cffe8d8a
-      locked_at: 1787477795.8347516
+      locked_at: 1787479962.423817
     frontend-specialist:
       path: agents/catalog/frontend-specialist.md
       sha256: 375c543c221bb2276062f09e9366ba3855c77a8023bf23cbb33867228c1c281b
-      locked_at: 1787477795.8352182
+      locked_at: 1787479962.423861
     gametheory-local:
       path: agents/catalog/gametheory-local.md
       sha256: 08b498f1609b20a9b86462a090161147b8d29929ef249e839d2156c166f1e40a
-      locked_at: 1787477795.8356926
+      locked_at: 1787479962.4238946
     git-manager:
       path: agents/catalog/git-manager.md
       sha256: 568fc176b3df1af9bd7fcdcb2cdc83d473e33fe52c8486b57c1c579fd9283897
-      locked_at: 1787477795.8361328
+      locked_at: 1787479962.4239259
     honest-critic-agent:
       path: agents/catalog/honest-critic-agent.md
       sha256: 167ca91f7411ffdaf4e7de49e0c643442bb7dc2dc8352bd7966f10121af6a955
-      locked_at: 1787477795.8366287
+      locked_at: 1787479962.4239602
     image-specialist:
       path: agents/catalog/image-specialist.md
       sha256: 1e9ae473d282f5dae65a4f0b44d8fc24b3ef9ec4a2f1b5cec1410b12162905a0
-      locked_at: 1787477795.837104
+      locked_at: 1787479962.4239943
     jinja2-templates:
       path: agents/catalog/jinja2-templates.md
       sha256: e06c5c92fb519c9dc9ad2c2f94392a4c69d95f0230cbccbda800c22120c17393
-      locked_at: 1787477795.8375456
+      locked_at: 1787479962.4240263
     kdp-cover-engineer-phd:
       path: agents/catalog/kdp-cover-engineer-phd.md
       sha256: 991fedaa4ddbc5eee65116cdb43a2b6fd6d7ea7ff93b7321736497af8f5fc856
-      locked_at: 1787477795.84039
+      locked_at: 1787479962.4240587
     kdp-ebook-epub-phd:
       path: agents/catalog/kdp-ebook-epub-phd.md
       sha256: 04bb999ddaf1f80438fa6c1798e21a8c47c9bedc77d4eced884e5cce8195a731
-      locked_at: 1787477795.8408706
+      locked_at: 1787479962.4240906
     kdp-final-qa-phd:
       path: agents/catalog/kdp-final-qa-phd.md
       sha256: 6de5f0df6fa9b5bad3da859c3cbd590ad9679b19a0206891d1d0664d9a25408b
-      locked_at: 1787477795.8411682
+      locked_at: 1787479962.4241219
     kdp-interior-layout-phd:
       path: agents/catalog/kdp-interior-layout-phd.md
       sha256: d98338131017c36af393892b35101a575b680cbad5f83eb26c8c6e0263dba870
-      locked_at: 1787477795.841579
+      locked_at: 1787479962.4241536
     kdp-metadata-isbn-phd:
       path: agents/catalog/kdp-metadata-isbn-phd.md
       sha256: 1104404fa5ef9fea9a13f707ede4187977abe0e1e84fa8b5979b583e25b7ccba
-      locked_at: 1787477795.8418906
+      locked_at: 1787479962.424185
     kdp-orchestrator-phd:
       path: agents/catalog/kdp-orchestrator-phd.md
       sha256: 506c9479f22591fb07fbacf209bc0a2d88dc729a4f00c5ec638f21621f0d1617
-      locked_at: 1787477795.8451993
+      locked_at: 1787479962.4242158
     kdp-preflight-auditor-phd:
       path: agents/catalog/kdp-preflight-auditor-phd.md
       sha256: 078cfc5f875b962204e0febc39cfe023f05fb01d027c604712f8bdfb9384881f
-      locked_at: 1787477795.845835
+      locked_at: 1787479962.424247
     linguistic-corrector:
       path: agents/catalog/linguistic-corrector.md
       sha256: ca1de257db80a1eddd807db050a57c2189109143a20e65f6aabadb247caff39f
-      locked_at: 1787477795.8464983
+      locked_at: 1787479962.4242823
     literary-character-psychology-phd:
       path: agents/catalog/literary-character-psychology-phd.md
       sha256: b6fd29435a1f25c4e3918ebd8705980eba1cea422a9a137916920dca728e4761
-      locked_at: 1787477795.8517096
+      locked_at: 1787479962.4243171
     literary-ethics-trauma-phd:
       path: agents/catalog/literary-ethics-trauma-phd.md
       sha256: 8a4c54fe404b4577af7259f9bc91401c18095e70a92d63325deb5c768e725843
-      locked_at: 1787477795.8524983
+      locked_at: 1787479962.4243503
     literary-image-sepia:
       path: agents/catalog/literary-image-sepia.md
       sha256: b67d96fc7efc7f59c13276559c739bfe527c8e467f535b3529cc77f5a28648f3
-      locked_at: 1787477795.8529787
+      locked_at: 1787479962.424386
     literary-innovation-editorial-phd:
       path: agents/catalog/literary-innovation-editorial-phd.md
       sha256: ef8f2305df4a8d0d9e97aee2c8be91368de3ea5494301a82deac03a732a6b86a
-      locked_at: 1787477795.8535807
+      locked_at: 1787479962.4244206
     literary-narratology-architect-phd:
       path: agents/catalog/literary-narratology-architect-phd.md
       sha256: 5aefc1f29b343556676bec960bec6fbfaf71b8c4b4fa64201667f2d498144ef0
-      locked_at: 1787477795.8543394
+      locked_at: 1787479962.4244545
     literary-neurolinguistic-engineering-phd:
       path: agents/catalog/literary-neurolinguistic-engineering-phd.md
       sha256: 00fba3e7d4b3bf69ffab8e5399790a03fa7c4aefba31d5dafedf0b5636c3974a
-      locked_at: 1787477795.8551743
+      locked_at: 1787479962.4244878
     literary-orchestrator-phd:
       path: agents/catalog/literary-orchestrator-phd.md
       sha256: 435c422ec15f7c0e6e4d4c667ed3ae401b3aa29ce140fe48dbe1b3894c94e88a
-      locked_at: 1787477795.8556402
+      locked_at: 1787479962.424524
     literary-research-scholar-phd:
       path: agents/catalog/literary-research-scholar-phd.md
       sha256: 687f0a7375ca6244d176a94c0d10ef1a86148a7a090ee544389ef08217838e63
-      locked_at: 1787477795.8560336
+      locked_at: 1787479962.424558
     literary-smoke-minimal:
       path: agents/catalog/literary-smoke-minimal.md
       sha256: 7f99add035117f81aa3037686d37107358f33d25ee12b61afc551ba8b6bb732b
-      locked_at: 1787477795.8563752
+      locked_at: 1787479962.4245894
     literary-style-voice-phd:
       path: agents/catalog/literary-style-voice-phd.md
       sha256: 094e7715a7e3bf15057338f2ce8b0cd0d8bbb7b6636c3137807a1e4ba63b46a7
-      locked_at: 1787477795.8567576
+      locked_at: 1787479962.424622
     literary-symbolic-imagery-phd:
       path: agents/catalog/literary-symbolic-imagery-phd.md
       sha256: 35fc52562282f4a8d3b8a7a96c6c2fa3126541c3b71a29b422ce457df8fe8de6
-      locked_at: 1787477795.8571043
+      locked_at: 1787479962.424655
     litert-lm-agent:
       path: agents/catalog/litert-lm-agent.md
       sha256: 867a9730bfcfb575d66fe478990a577b3e6e4bf91e4ea9fd3febbe38a5ba9825
-      locked_at: 1787477795.8574712
+      locked_at: 1787479962.424688
     llm-reduction:
       path: agents/catalog/llm-reduction.md
       sha256: 98ce5955aa29d3f313be036b8747a2d6665e2368c23326f00aed46f99962bd0e
-      locked_at: 1787477795.8578815
+      locked_at: 1787479962.424802
     marceloclaro:
       path: agents/catalog/marceloclaro.md
       sha256: f87909c8762338e6602ca51ffa5e58be9263934c266adf8d5b942cb4ce9afead
-      locked_at: 1787477795.8582516
+      locked_at: 1787479962.4248865
     master-orchestrator:
       path: agents/catalog/master-orchestrator.md
       sha256: add319f61e53e449f7bf660ba1e5c20c78c7352d25ad615298f61d08c4f2965b
-      locked_at: 1787477795.8585994
+      locked_at: 1787479962.4249268
     medico-cardiologista:
       path: agents/catalog/medico-cardiologista.md
       sha256: a0d1adfc1417fe045844d6ce619029f16eb497a5b1d087b03c9ae3e1a345a262
-      locked_at: 1787477795.8589787
+      locked_at: 1787479962.424969
     medico-clinico-geral:
       path: agents/catalog/medico-clinico-geral.md
       sha256: 1dcdb6bb42040678f4994adb9dfcbc7eb16393c154831d951529f67b9ea89ab4
-      locked_at: 1787477795.8593981
+      locked_at: 1787479962.4250028
     medico-infectologista:
       path: agents/catalog/medico-infectologista.md
       sha256: 31e92fd218767ac1b6c619cdc079b0fa621bc1480a0554f176f3cba6cbc4f9a9
-      locked_at: 1787477795.8598146
+      locked_at: 1787479962.4250445
     medico-neurologista:
       path: agents/catalog/medico-neurologista.md
       sha256: 6b19c8fbef30c5d6d7055e3a0107d14524a8d89e50a7a8cadd7e016abd8efd4c
-      locked_at: 1787477795.861078
+      locked_at: 1787479962.4251173
     medico-radiologista:
       path: agents/catalog/medico-radiologista.md
       sha256: 2e96f3aac7a4b57b0f9e3156afb205408f9742bae4584aa6016ca4254577b7b0
-      locked_at: 1787477795.8622818
+      locked_at: 1787479962.425174
     medico-virtual-supremo:
       path: agents/catalog/medico-virtual-supremo.md
       sha256: 255eaecb7e9d777e5b3af7a44cb33496ab58d990ca62a22c98372ed2602553cf
-      locked_at: 1787477795.8628507
+      locked_at: 1787479962.4252174
     mira-3d:
       path: agents/catalog/mira-3d.md
       sha256: 9d021ab07d9340b95f4facdc2ce79de76cfc6ce8c64cb3635af8a7276300be9f
-      locked_at: 1787477795.8643029
+      locked_at: 1787479962.4252498
     mira-animated-metaphor:
       path: agents/catalog/mira-animated-metaphor.md
       sha256: 90c57d48b56fa228e7a237268822cd10aaf46575b0c1c41935b88507dfacec12
-      locked_at: 1787477795.8646288
+      locked_at: 1787479962.4252799
     mira-animator:
       path: agents/catalog/mira-animator.md
       sha256: 98f984b46b02c0b520c46f9fe2906447484221046bc7c5999bce1d518165cdf3
-      locked_at: 1787477795.8649614
+      locked_at: 1787479962.425323
     mira-builder:
       path: agents/catalog/mira-builder.md
       sha256: a8a9468d63a53ca95dbfc265c3b40f64aed1e237deb56f3aa5f8d90ff8e9824b
-      locked_at: 1787477795.865359
+      locked_at: 1787479962.4253557
     mira-chart-race:
       path: agents/catalog/mira-chart-race.md
       sha256: 8eb638a170631dc2c1b8201a7bf6fce4f7414bd1d4bb0e5f22a628dc329d3f34
-      locked_at: 1787477795.865745
+      locked_at: 1787479962.4253852
     mira-chart:
       path: agents/catalog/mira-chart.md
       sha256: bdad0689a7071c4fcecf05963d8d0d18c78be6deeb5d02b42c25ee62d76ca4b6
-      locked_at: 1787477795.8661087
+      locked_at: 1787479962.4254146
     mira-copywriter:
       path: agents/catalog/mira-copywriter.md
       sha256: e6f49e7b494427fa133ab137ad3cd7aa700074c455f344d53c7aa88438916f7f
-      locked_at: 1787477795.8664627
+      locked_at: 1787479962.4254432
     mira-extract:
       path: agents/catalog/mira-extract.md
       sha256: abd815b1c287dff7fceb94599970f099dc8d4ca6b5c057ccb11ef5cd8edd354e
-      locked_at: 1787477795.8668976
+      locked_at: 1787479962.4254718
     mira-get-videos:
       path: agents/catalog/mira-get-videos.md
       sha256: daa1dd00d2101c6423a55ab7fe0a06e17ca0ca8fa354970cc6559c5b66b153a1
-      locked_at: 1787477795.8671806
+      locked_at: 1787479962.4255004
     mira-image-template:
       path: agents/catalog/mira-image-template.md
       sha256: cab54083a226406f93e879d3aeebf3d07769e185f3b741e681952bac462c3ab0
-      locked_at: 1787477795.8675818
+      locked_at: 1787479962.425528
     mira-image:
       path: agents/catalog/mira-image.md
       sha256: 25ffd400a254fad8186e28bbd7f42c34ba79fe4c617efc29553ff95467358cd3
-      locked_at: 1787477795.86792
+      locked_at: 1787479962.4255562
     mira-new:
       path: agents/catalog/mira-new.md
       sha256: abcd5bbbe0cb79c9a98f91a0a01682d48fae12ca28e1e4b0304818cfaf45844e
-      locked_at: 1787477795.8681946
+      locked_at: 1787479962.4255853
     mira-planner:
       path: agents/catalog/mira-planner.md
       sha256: 3acd192c064ace005ec304984c09da2eea60817921cb32e2a733bd8a88acb0c4
-      locked_at: 1787477795.8685138
+      locked_at: 1787479962.425614
     mira-qrcode:
       path: agents/catalog/mira-qrcode.md
       sha256: 498848e3ca560cffe7382c6fc7398e1d0b05471f60531e34bf1f37bc8e3b82fa
-      locked_at: 1787477795.8688793
+      locked_at: 1787479962.4256432
     mira-references:
       path: agents/catalog/mira-references.md
       sha256: f921ebb2aba8d2a671ec5163dd3269ef2e0f0b43ceef83b28571c43fa1e385ba
-      locked_at: 1787477795.8692129
+      locked_at: 1787479962.4256716
     mira-size-animator:
       path: agents/catalog/mira-size-animator.md
       sha256: ac4c1ddf93503c1db877daa43e600df95190b134de0a601bdd69e882e5aa10cf
-      locked_at: 1787477795.869472
+      locked_at: 1787479962.4257011
     mira-squared:
       path: agents/catalog/mira-squared.md
       sha256: 67e60cb037c6381dc8ff1f0e6a55d98c7cba73bf754b0fc434c30272d5d79fc5
-      locked_at: 1787477795.8697042
+      locked_at: 1787479962.4257693
     mira-survey:
       path: agents/catalog/mira-survey.md
       sha256: 57ba314eb221d2c3d8d26100ec7698fe51ef47041bf593b85d4c290529c2c016
-      locked_at: 1787477795.869903
+      locked_at: 1787479962.4258163
     mira-thirds:
       path: agents/catalog/mira-thirds.md
       sha256: ae3df234b74ebf629ce8bb097d96f59c781b0e8a7cebd62a816eae480aca22f5
-      locked_at: 1787477795.870464
+      locked_at: 1787479962.4258494
     mira-validator:
       path: agents/catalog/mira-validator.md
       sha256: d74809eb1ee9bdb9d93534fe35d2756670654feea2eb0d371aa9fa6f7d877689
-      locked_at: 1787477795.870947
+      locked_at: 1787479962.4258795
     mira-vertical:
       path: agents/catalog/mira-vertical.md
       sha256: eab4abedf80bd6be3f8f7d527fe30c7530b39a9b8fb357a3df0ed3a8696fe286
-      locked_at: 1787477795.871306
+      locked_at: 1787479962.425909
     mira-visuals:
       path: agents/catalog/mira-visuals.md
       sha256: 697f1bc76a3b82e9c8dcb2c9737c740fede2770c5a84dfc4a2f30daa2f114e23
-      locked_at: 1787477795.871579
+      locked_at: 1787479962.4259377
     nano-orchestrator:
       path: agents/catalog/nano-orchestrator.md
       sha256: 69b949d0361b0c695f9bacf8c16a1ce8aa12e4a6864986a338d8dbbc38891998
-      locked_at: 1787477795.8718643
+      locked_at: 1787479962.4259708
     openagent:
       path: agents/catalog/openagent.md
       sha256: 5df6455c05ea7a0f24887e9df03a630b015a1780b7bedd219cd5cb1e55bf9b7c
-      locked_at: 1787477795.8724232
+      locked_at: 1787479962.426039
     opencode-go-agent:
       path: agents/catalog/opencode-go-agent.md
       sha256: 7b30dda7d4f22e93829548f746b6bb8ff2ff94a8e7060c28289393ef8b48ad8e
-      locked_at: 1787477795.8728564
+      locked_at: 1787479962.4260798
     opencode-zen-agent:
       path: agents/catalog/opencode-zen-agent.md
       sha256: c3399436c5f8ad42593518806cc24f818dd40dadf8f5ffde6d06af5f5b9d79d7
-      locked_at: 1787477795.8731613
+      locked_at: 1787479962.4261131
     opencoder:
       path: agents/catalog/opencoder.md
       sha256: 2d94f83932b7192b1b67fad006dac3ff5ceed261f593988f4b8a2ddbe4d44627
-      locked_at: 1787477795.8734524
+      locked_at: 1787479962.4261713
     optimizer:
       path: agents/catalog/optimizer.md
       sha256: b7922b322c56545ce57cb96a1d891fdbad17f1d24f00a04550466366c187bb55
-      locked_at: 1787477795.8736835
+      locked_at: 1787479962.4262023
     pdf2latex-agent:
       path: agents/catalog/pdf2latex-agent.md
       sha256: 0a40596a643a98de8f4750934981e1989a280b18471371c18c7290b8bc003447
-      locked_at: 1787477795.8739784
+      locked_at: 1787479962.4262347
     prioritization-engine:
       path: agents/catalog/prioritization-engine.md
       sha256: 713a21e5590d9a0d4be9e9767243b3169315e035472563b72f51fd905c6a6ee5
-      locked_at: 1787477795.8743432
+      locked_at: 1787479962.4262924
     pypi-searcher:
       path: agents/catalog/pypi-searcher.md
       sha256: b35f74f60a0e5da98e52362297831c8b38b3ffc0763217eaa589eda76fdfe1fb
-      locked_at: 1787477795.8745985
+      locked_at: 1787479962.4263356
     quantum-nexus-phd:
       path: agents/catalog/quantum-nexus-phd.md
       sha256: 48f26b146844f2abeaa384b93ff1ae832900a923c94fca38d29d4e61ef0f1778
-      locked_at: 1787477795.874827
+      locked_at: 1787479962.42637
     reversa-agent-forum:
       path: agents/catalog/reversa-agent-forum.md
       sha256: f74fde40f66169a774b3b39ee4a4cabc49382e5505c7c624019b7580ef75ee57
-      locked_at: 1787477795.8751123
+      locked_at: 1787479962.4264123
     reversa-anp:
       path: agents/catalog/reversa-anp.md
       sha256: e674903d7587ef3fbf626dbab331f195155408f8d02060c12edc944bfbf842ac
-      locked_at: 1787477795.8754616
+      locked_at: 1787479962.4264486
     reversa-archaeologist:
       path: agents/catalog/reversa-archaeologist.md
       sha256: 2ce8e1ce83c54e98e756dc45db48a3b7d008bdfc52a85d5ac3be27e1dc9d3ce8
-      locked_at: 1787477795.8758373
+      locked_at: 1787479962.4264874
     reversa-architect:
       path: agents/catalog/reversa-architect.md
       sha256: 8abc8bac86f049352c87f98c2b08af75f54d1b8cc916b85a55df30fa1d40c8f8
-      locked_at: 1787477795.8763614
+      locked_at: 1787479962.4265203
     reversa-config-generator:
       path: agents/catalog/reversa-config-generator.md
       sha256: 7e0802d0ecdfc6158d180119bb046425875f2291fd9c3067918c88b1c37f5941
-      locked_at: 1787477795.876955
+      locked_at: 1787479962.4265518
     reversa-data-master:
       path: agents/catalog/reversa-data-master.md
       sha256: 3f3bd6877cdb277acd755092b95451d78ad88b50d4948bbaf6816df747716b85
-      locked_at: 1787477795.8775864
+      locked_at: 1787479962.4265826
     reversa-design-system:
       path: agents/catalog/reversa-design-system.md
       sha256: 09e784feefbd0665966092c3d263e04294c833604a60242320c3e375a0654d6a
-      locked_at: 1787477795.878062
+      locked_at: 1787479962.4266136
     reversa-detective:
       path: agents/catalog/reversa-detective.md
       sha256: e7d6c302a099c48c248892ab45c12b443073f9eced58927e85f8e296eff03491
-      locked_at: 1787477795.8784885
+      locked_at: 1787479962.426645
     reversa-document-ir:
       path: agents/catalog/reversa-document-ir.md
       sha256: b1332c444bff9bf12dc748468553fb842a590114c34988dbb11ea9bbaca326b6
-      locked_at: 1787477795.882267
+      locked_at: 1787479962.426684
     reversa-entity-ner:
       path: agents/catalog/reversa-entity-ner.md
       sha256: 09dbabffff21d790acfdfee1def5064197767ce013291cbfe6c2697cfa535329
-      locked_at: 1787477795.8828957
+      locked_at: 1787479962.426716
     reversa-fileipc:
       path: agents/catalog/reversa-fileipc.md
       sha256: 52a8da3e48a6af1600f4b9bf8b37d7fff55852d80af0960c9d009e2e9d24034c
-      locked_at: 1787477795.8835049
+      locked_at: 1787479962.4267495
     reversa-graph-builder:
       path: agents/catalog/reversa-graph-builder.md
       sha256: cd19fdb43b6d492e862b8c96718d3753e8cceab6a2e576969ef4e45a9ea08c8b
-      locked_at: 1787477795.8840296
+      locked_at: 1787479962.4267817
     reversa-graphrag:
       path: agents/catalog/reversa-graphrag.md
       sha256: 33746e2d2a475340d3738d9fb642c3ad297384331cbfcf83c19746aab28ed639
-      locked_at: 1787477795.8846235
+      locked_at: 1787479962.426816
     reversa-hybrid-graph:
       path: agents/catalog/reversa-hybrid-graph.md
       sha256: d3a995dcc631ab57c442acd3ab04e5e5ca8a41f7a8d2fc73185c87f90ebfc4cc
-      locked_at: 1787477795.8924325
+      locked_at: 1787479962.4268496
     reversa-memory-updater:
       path: agents/catalog/reversa-memory-updater.md
       sha256: b68ea0f89ed18202d79c08e7a1288a6b8ed255c9662eeb1dbccbcf38df6ea617
-      locked_at: 1787477795.8974957
+      locked_at: 1787479962.4268856
     reversa-oasis-profile:
       path: agents/catalog/reversa-oasis-profile.md
       sha256: 80d73e6d64eb94c0741d65cb5977dfb552471b9a976b9bb67ed8bc791958f6a5
-      locked_at: 1787477795.8978086
+      locked_at: 1787479962.426921
     reversa-ontology-gen:
       path: agents/catalog/reversa-ontology-gen.md
       sha256: 9783995e72744ae2bdbecb0caf6afee9c9b113b67418dbda5914498bc039f39f
-      locked_at: 1787477795.8979897
+      locked_at: 1787479962.4269526
     reversa-planner:
       path: agents/catalog/reversa-planner.md
       sha256: 241259f30b85fa1c971e1f14a2184613cf484e2e6707166469d7d6a4e66f14d2
-      locked_at: 1787477795.8982005
+      locked_at: 1787479962.4269829
     reversa-process-lifecycle:
       path: agents/catalog/reversa-process-lifecycle.md
       sha256: 353fb60cdf8676487259827895c7fc13404444a9e38cabde575814ce2ec39d8a
-      locked_at: 1787477795.898451
+      locked_at: 1787479962.427022
     reversa-report-agent:
       path: agents/catalog/reversa-report-agent.md
       sha256: 2d10cbcf4ca2daf679ad5e0a4d806d7cb462a68c206e86789f7e3c85846bb562
-      locked_at: 1787477795.898715
+      locked_at: 1787479962.4270563
     reversa-reviewer:
       path: agents/catalog/reversa-reviewer.md
       sha256: ba21ab124a59b444c6a8383f263d776758b1a73d7e6a9762d29ea12f140c0656
-      locked_at: 1787477795.8988712
+      locked_at: 1787479962.4270873
     reversa-scout:
       path: agents/catalog/reversa-scout.md
       sha256: 33329c109aa46f6f6e3a03486e3dcbc1c018c4e36b9dead3267b3e833e928cd9
-      locked_at: 1787477795.9012222
+      locked_at: 1787479962.4271185
     reversa-statemachine:
       path: agents/catalog/reversa-statemachine.md
       sha256: 61d43dca1de5b0c057db3e6320af31f557c213b5812b5ab8d5599e57eb23fb79
-      locked_at: 1787477795.9019375
+      locked_at: 1787479962.427149
     reversa-swarm-review:
       path: agents/catalog/reversa-swarm-review.md
       sha256: 9582aa9cd5bc66b5d36dac7d38860e7d79e51e6ff43ec34ff0365786ef0d759f
-      locked_at: 1787477795.902434
+      locked_at: 1787479962.4271839
     reversa-synthesis:
       path: agents/catalog/reversa-synthesis.md
       sha256: 367112a874b326ba9ec5964ae3352d0aab30ad7ee82503182e289be0f92b75b6
-      locked_at: 1787477795.9029348
+      locked_at: 1787479962.4272149
     reversa-visor:
       path: agents/catalog/reversa-visor.md
       sha256: 3f3a64cced7a2badd56459c2388f7e84e101f259cd8cadad0839f1efd4b62b7e
-      locked_at: 1787477795.903467
+      locked_at: 1787479962.4272466
     reversa-writer:
       path: agents/catalog/reversa-writer.md
       sha256: 9e1cfddc526086ae304159dd621d2db92a13c61a0ce1e5f54a81c13f2faee0e7
-      locked_at: 1787477795.9038246
+      locked_at: 1787479962.4272778
     reversa:
       path: agents/catalog/reversa.md
       sha256: 2a447f356785373508974839590deca720b8e555c432f96f56e00a1bfe1be681
-      locked_at: 1787477795.9043381
+      locked_at: 1787479962.4273107
     reviewer:
       path: agents/reviewer.md
       sha256: fdf6629879370cfcaad70f6043e39c258394b6e0343b7a7f621e468122439521
-      locked_at: 1787477795.9178648
+      locked_at: 1787479962.428294
     security-auditor:
       path: agents/catalog/security-auditor.md
       sha256: 83dceb169688286b1bfee81c5ea314808f39f51549ac21de39b6a49e6c1c79da
-      locked_at: 1787477795.905616
+      locked_at: 1787479962.4273744
     simple-responder:
       path: agents/catalog/simple-responder.md
       sha256: a5c85a604d81ce70dd0313c6da5f0a94404ada80c00006a6357747fe6a7d5983
-      locked_at: 1787477795.9061265
+      locked_at: 1787479962.4274037
     skills-cloud-antigravity:
       path: agents/catalog/skills-cloud-antigravity.md
       sha256: a63be42001dfc79991ac8db6d06971d8c98484b94fc95eb11182a7fafac8aa0d
-      locked_at: 1787477795.9066608
+      locked_at: 1787479962.4274468
     stage-orchestrator:
       path: agents/catalog/stage-orchestrator.md
       sha256: 942dd9c7fa373a793150046558f45bf5417c5bc8d8e66babae39ed6eb4c2350a
-      locked_at: 1787477795.9071949
+      locked_at: 1787479962.4274988
     story-mapper:
       path: agents/catalog/story-mapper.md
       sha256: a7a79a9e1cbd048e4372628063fbca6ffe9ec9e57c9326b6483e0e58302177d0
-      locked_at: 1787477795.907965
+      locked_at: 1787479962.4275584
     task-manager:
       path: agents/catalog/task-manager.md
       sha256: cf89e3d98667e4a624bf0d1351d1e01c4a77214dd2245a08d5d9131ab7a8950c
-      locked_at: 1787477795.9085007
+      locked_at: 1787479962.427629
     technical-writer:
       path: agents/catalog/technical-writer.md
       sha256: e4d98c8398982870a03ce47f44fcb36571f2b26c86691f2005366613fa9af0c9
-      locked_at: 1787477795.9091563
+      locked_at: 1787479962.4276853
     terminology-graph-agent:
       path: agents/catalog/terminology-graph-agent.md
       sha256: 885e33e5f29b4d81e14c030bdbca18d3914605afd464f124b674adbc35dccd7b
-      locked_at: 1787477795.9095747
+      locked_at: 1787479962.4277155
     test-engineer:
       path: agents/catalog/test-engineer.md
       sha256: 5c443ddad669a30a8c829fa69f9cfa8268b937b71a69f48a02c22a9263a64345
-      locked_at: 1787477795.909887
+      locked_at: 1787479962.4277892
     thoughts-analyzer:
       path: agents/catalog/thoughts-analyzer.md
       sha256: 26e349e422df49a7c9873a5dc69b0cac34d3c7c1c52090396d18d2d31c548f72
-      locked_at: 1787477795.9138288
+      locked_at: 1787479962.4278402
     thoughts-locator:
       path: agents/catalog/thoughts-locator.md
       sha256: d68b57da055e3e729ade4e19a75a2afcf116785ed96ada5cfc14091b476f56c7
-      locked_at: 1787477795.914282
+      locked_at: 1787479962.4278786
     university_synthetic:
       path: agents/catalog/university_synthetic.md
       sha256: ef96a1367da7b932f27779959959490ce9cc3421f2af52f15e051754f58e63b9
-      locked_at: 1787477795.914609
+      locked_at: 1787479962.4279137
     web-developer:
       path: agents/catalog/web-developer.md
       sha256: db78c37bbff9255e1cde9aa26dd720c0eb99aff7e235a4902e34eee4d5e9337c
-      locked_at: 1787477795.914878
+      locked_at: 1787479962.4279428
     web-search-researcher:
       path: agents/catalog/web-search-researcher.md
       sha256: 1e2f0cc277db28aa27e667a39766b6eeca1e62c5447f8ee4ac7cf8ed4ae95e1c
-      locked_at: 1787477795.9151244
+      locked_at: 1787479962.4279764
     ws-academic-pipeline:
       path: agents/catalog/ws-academic-pipeline.md
       sha256: 829d4bdf7a95f325ca51f00950bffac1c0e1acae34e2c054a25660e7f88345da
-      locked_at: 1787477795.9153726
+      locked_at: 1787479962.4280097
     ws-coder:
       path: agents/catalog/ws-coder.md
       sha256: 42913aa81f4e444af74ceceb2b77026f65a3f2c33200f1a8d71812f0ea5100d0
-      locked_at: 1787477795.9156396
+      locked_at: 1787479962.428044
     ws-researcher:
       path: agents/catalog/ws-researcher.md
       sha256: b3ecc2d72dcac4c9a5ff1c4e7427fd5d0620f090a3f919c3a41f1f5af9097804
-      locked_at: 1787477795.915926
+      locked_at: 1787479962.4280803
     ws-reviewer:
       path: agents/catalog/ws-reviewer.md
       sha256: bcec3b60dc7c9e8a06a691f2d69e4b29de7d962367b05e10f38d83e15b27b9b4
-      locked_at: 1787477795.9162052
+      locked_at: 1787479962.428112
     ws-scribe:
       path: agents/catalog/ws-scribe.md
       sha256: dfdfe8e5efb3bcf2e312481992535cc532701902fbaebc1ba2834bd7c1987858
-      locked_at: 1787477795.9165096
+      locked_at: 1787479962.4281454
     academic_writer:
       path: agents/academic_writer.md
       sha256: 93dab4d68274a8957ac9629d197457ba9f0a408fefeb93afa6f156a5ab47d5e0
-      locked_at: 1787477795.9168289
+      locked_at: 1787479962.4281752
     auditor:
       path: agents/auditor.md
       sha256: 2afdbe2a74f3fc9aa57df56358d92d953b5fbf2a3960472d59409be077224aae
-      locked_at: 1787477795.9170928
+      locked_at: 1787479962.4282057
     coder:
       path: agents/coder.md
       sha256: 5b918bbcbf9ba9d3bf291932ce756860e2ded04144b9509d2f70134af120e6e8
-      locked_at: 1787477795.9173496
+      locked_at: 1787479962.428236
     researcher:
       path: agents/researcher.md
       sha256: 574c4f396ec401ac26e4cb42216734037bc36b5b35d5754f715799acf76dc905
-      locked_at: 1787477795.917594
+      locked_at: 1787479962.4282653
   skills:
     deep-research:
       path: skills/deep-research/SKILL.md
       sha256: d784c7f5f3f38e61cf9f3625bc13a3de7eb4a287d1a07be38f78591b9adbd2e1
-      locked_at: 1787477795.9181151
+      locked_at: 1787479962.428327
     evo-science:
       path: skills/evo-science/SKILL.md
       sha256: 2d81f56c7713f46fa5ac9be98593f61a04e6d4b5381212581f576629d8567793
-      locked_at: 1787477795.9184127
+      locked_at: 1787479962.4283576
     litert_lm:
       path: skills/litert_lm
       sha256: f5c5bde3faf05add4cde2bb6c9af891e30623de077c2c64bb82f26868120a207
-      locked_at: 1787477795.9274628
+      locked_at: 1787479962.430476
     mcp-security:
       path: skills/mcp-security/SKILL.md
       sha256: bc760a0d4e9115874b7a9f0f1e439cb7be213150804654fb47c162fe59813b04
-      locked_at: 1787477795.928162
+      locked_at: 1787479962.4305534
     medico_virtual_supremo:
       path: skills/medico_virtual_supremo
       sha256: 514a44efe2fc411ca750c02cb77cd0ec71d10e3871948573407dee3771abb2bb
-      locked_at: 1787477795.9468174
+      locked_at: 1787479962.4371743
     peer-review-v2:
       path: skills/peer-review-v2/SKILL.md
       sha256: 5be83ab9247b16ab77c1d884eb8d6a782ce85d01a64a2a2ea75c9dc32a8db7f4
-      locked_at: 1787477795.9472141
+      locked_at: 1787479962.4372458
     tooling:
       path: skills/tooling
       sha256: e5896da6fbfd0bcef1b82c96b205a9d8ee468d5811b2f93353fbb4b679c6b1ec
-      locked_at: 1787477795.962461
+      locked_at: 1787479962.439269
   hooks:
     audit_gate:
       path: integrations/apm.py
       sha256: dd530129a8b4117280f59227a2de650096e9bf4d8e0ba511dd1fd8d8c249a199
-      locked_at: 1787477795.96281
+      locked_at: 1787479962.439361
   mcps:
     mci:
       path: mci/mcp_server.py
       sha256: d0a22c64ad158ddddb1d2dc126a1a84f5d377185dc05eab89704712598f298e8
-      locked_at: 1787477795.9631035
+      locked_at: 1787479962.439407
   plugins: {}
-generated_at: 1787477795.9631443
+generated_at: 1787479962.439424
