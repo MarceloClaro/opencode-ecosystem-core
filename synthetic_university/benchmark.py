@@ -51,6 +51,8 @@ def get_embedder():
 
 def neural_coherence(embedder, term1, term2):
     """Similaridade por cosseno neural, clampada a [0, 1]."""
+    if term1 == term2:
+        return 1.0
     v1 = embedder.embed(term1)
     v2 = embedder.embed(term2)
     if v1 is None or v2 is None:

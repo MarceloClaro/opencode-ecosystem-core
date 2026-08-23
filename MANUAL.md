@@ -18,12 +18,13 @@ Isso abre um menu interativo. Se preferir comandos diretos, sem menu:
 
 ```bash
 python3 -m marceloclaro.cli status      # foto geral do sistema
-python3 -m marceloclaro.cli doctor      # está tudo saudável?
+python3 -m marceloclaro.cli doctor      # está tudo saudável? (14 checks rápidos)
 python3 -m marceloclaro.cli helpdesk    # o que está errado E como corrigir
 python3 -m marceloclaro.cli ajuda       # este resumo, no terminal
 python3 -m marceloclaro.cli pesquisa "seu tema aqui"   # pesquisa científica (11 fontes)
 python3 -m marceloclaro.cli apresentacao pasta_da_producao  # deck MIRA
-python3 -m marceloclaro.cli audit        # auditoria auditável SHA-256 e Merkle Tree
+python3 -m marceloclaro.cli apm audit   # auditoria de segurança e integridade APM (R440)
+python3 -m marceloclaro.cli amplify "sua pergunta" --model ox-alpha-free # raciocínio profundo em modelos free (R441)
 ```
 
 ## O menu, explicado sem jargão

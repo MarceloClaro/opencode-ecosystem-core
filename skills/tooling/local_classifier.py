@@ -20,6 +20,7 @@ import json
 import re
 import time
 import pickle
+import tempfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -42,10 +43,23 @@ class LocalClassifier:
     """
 
     def __init__(self, model_dir: Optional[str] = None, add_default_rules: bool = True):
-        self.model_dir = Path(model_dir) if model_dir else (
-            Path.home() / ".opencode" / "classifiers"
-        )
-        self.model_dir.mkdir(parents=True, exist_ok=True)
+        if model_dir:
+            self.model_dir = Path(model_dir)
+            try:
+                self.model_dir.mkdir(parents=True, exist_ok=True)
+            except (OSError, PermissionError):
+                pass
+        else:
+            try:
+                candidate = Path.home() / ".opencode" / "classifiers"
+                candidate.mkdir(parents=True, exist_ok=True)
+                self.model_dir = candidate
+            except (OSError, PermissionError):
+                self.model_dir = Path(tempfile.gettempdir()) / "opencode_classifiers"
+                try:
+                    self.model_dir.mkdir(parents=True, exist_ok=True)
+                except (OSError, PermissionError):
+                    pass
 
         self._pipeline: Optional[Pipeline] = None
         self._rules: list = []

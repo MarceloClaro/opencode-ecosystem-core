@@ -32,6 +32,7 @@ import os
 import re
 import shutil
 import subprocess
+import tempfile
 import time
 import unicodedata
 from typing import Any, Dict, List, Optional
@@ -124,40 +125,57 @@ def _detect_desktop_path() -> str:
         if os.path.isdir(candidate):
             return candidate
 
-    # Nenhum existe: cria fallback
+    # Nenhum existe: tenta criar fallback, se falhar cai para tempdir
     fallback = candidates[0]
-    os.makedirs(fallback, exist_ok=True)
-    return fallback
+    try:
+        os.makedirs(fallback, exist_ok=True)
+        return fallback
+    except (OSError, PermissionError):
+        tmp_desktop = os.path.join(tempfile.gettempdir(), "Desktop")
+        try:
+            os.makedirs(tmp_desktop, exist_ok=True)
+            return tmp_desktop
+        except (OSError, PermissionError):
+            return tempfile.gettempdir()
 
 def _ensure_desktop_shortcut(output_root: str = DEFAULT_OUTPUT_ROOT) -> str:
     """Garante que existe um atalho na Área de Trabalho para a pasta de produção.
     
     Cria symlink no Linux/macOS e atalho .lnk (via PowerShell) no Windows.
     """
-    desktop = _detect_desktop_path()
-    shortcut_name = "Produção Científica - OpenCode"
-    
-    # Garante que a pasta de produção existe
-    os.makedirs(output_root, exist_ok=True)
+    try:
+        desktop = _detect_desktop_path()
+        shortcut_name = "Produção Científica - OpenCode"
+        
+        # Garante que a pasta de produção existe
+        try:
+            os.makedirs(output_root, exist_ok=True)
+        except (OSError, PermissionError):
+            pass
 
-    if _platform.system() == "Windows":
-        return _ensure_desktop_shortcut_windows(desktop, shortcut_name, output_root)
-    else:
-        return _ensure_desktop_shortcut_unix(desktop, shortcut_name, output_root)
+        if _platform.system() == "Windows":
+            return _ensure_desktop_shortcut_windows(desktop, shortcut_name, output_root)
+        else:
+            return _ensure_desktop_shortcut_unix(desktop, shortcut_name, output_root)
+    except (OSError, PermissionError):
+        return ""
 
 def _ensure_desktop_shortcut_unix(desktop: str, name: str, target: str) -> str:
     """Symlink no Linux/macOS."""
-    shortcut_path = os.path.join(desktop, name)
-    
-    if os.path.islink(shortcut_path):
-        current_target = os.readlink(shortcut_path)
-        if os.path.realpath(current_target) != os.path.realpath(target):
-            os.remove(shortcut_path)
+    try:
+        shortcut_path = os.path.join(desktop, name)
+        
+        if os.path.islink(shortcut_path):
+            current_target = os.readlink(shortcut_path)
+            if os.path.realpath(current_target) != os.path.realpath(target):
+                os.remove(shortcut_path)
+                os.symlink(target, shortcut_path)
+        elif not os.path.exists(shortcut_path):
             os.symlink(target, shortcut_path)
-    elif not os.path.exists(shortcut_path):
-        os.symlink(target, shortcut_path)
-    
-    return shortcut_path
+        
+        return shortcut_path
+    except (OSError, PermissionError):
+        return ""
 
 def _ensure_desktop_shortcut_windows(desktop: str, name: str, target: str) -> str:
     """Atalho .lnk no Windows (via PowerShell, sem dependências externas)."""

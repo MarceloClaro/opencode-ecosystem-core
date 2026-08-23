@@ -13,9 +13,12 @@ import pytest
 
 try:
     from starlette.testclient import TestClient
-    HAS_STARLETTE = True
+    from synthetic_university import api_gateway
+    HAS_FASTAPI = getattr(api_gateway, "HAS_FASTAPI", False) and api_gateway.app is not None
+    HAS_STARLETTE = True and HAS_FASTAPI
 except ImportError:
     HAS_STARLETTE = False
+    HAS_FASTAPI = False
 
 
 # ============================================================

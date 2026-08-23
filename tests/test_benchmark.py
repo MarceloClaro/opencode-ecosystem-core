@@ -15,7 +15,10 @@ class TestBenchmark:
             texts = []
             for fid, fac in FACULTY_MAP.items():
                 texts.append(fac.descricao)
-                texts.extend(fac.conceitos.values())
+                if isinstance(fac.conceitos, dict):
+                    texts.extend(fac.conceitos.values())
+                else:
+                    texts.extend([str(c) for c in fac.conceitos])
             emb.build_corpus(texts)
             emb.save("/tmp/semantic_embedder.pkl")
         return emb

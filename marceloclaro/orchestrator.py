@@ -2511,3 +2511,89 @@ class MarceloClaroOrchestrator:
             "standalone_readiness": standalone_status,
             "status": "certified_by_marceloclaro" if rigor["passed"] else "refinement_requested",
         }
+
+    # ------------------------------------------------------------------
+    # MICROSOFT APM (AGENT PACKAGE MANAGER) — SPEC-935-R440
+    # ------------------------------------------------------------------
+    def apm_audit(self) -> Dict[str, Any]:
+        """Executa auditoria completa de segurança e governança via Microsoft APM."""
+        from integrations.apm import APMPackageManager
+        pm = APMPackageManager()
+        report = pm.audit()
+        summary = report.summary()
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="apm_audit",
+            reflection=f"Auditoria APM executada: status {report.status}, {report.primitives_scanned} primitivas analisadas.",
+            score=1.0 if report.status == "pass" else 0.8,
+        )
+        return summary
+
+    def apm_list_primitives(self) -> Dict[str, Any]:
+        """Lista todas as 7 primitivas canônicas do padrão Microsoft APM."""
+        from integrations.apm import APMPackageManager
+        pm = APMPackageManager()
+        return pm.list_primitives()
+
+    def apm_compile(self, target: str = "all") -> Dict[str, Any]:
+        """Compila primitivas APM para os harnesses alvo (opencode, AGENTS, CLAUDE)."""
+        from integrations.apm import APMPackageManager
+        pm = APMPackageManager()
+        return pm.compile(target=target)
+
+    def apm_install(self) -> Dict[str, Any]:
+        """Valida e instala dependências APM atualizando o apm.lock.yaml."""
+        from integrations.apm import APMPackageManager
+        pm = APMPackageManager()
+        lock = pm.install()
+        return lock.to_dict()
+
+    # ------------------------------------------------------------------
+    # DEEPSEEK HARNESS FREE MODEL AMPLIFICATION — SPEC-935-R441
+    # ------------------------------------------------------------------
+    def amplify_free_model_response(
+        self,
+        prompt: str,
+        model: str = "ox-alpha-free",
+        task_type: str = "general",
+        iterations: int = 2,
+        use_rag: bool = True,
+        runner: Optional[Callable[[str], str]] = None,
+    ) -> Dict[str, Any]:
+        """
+        Amplifica a resposta de modelos gratuitos (Ox Alpha Free, DeepSeek Free, etc.)
+        utilizando scaffolding de raciocínio profundo, expansão de contexto e RAG multi-fonte.
+        """
+        from integrations.deepseek_harness.free_model_amplifier import get_free_model_amplifier
+        amplifier = get_free_model_amplifier()
+        result = amplifier.amplify(
+            prompt=prompt,
+            model=model,
+            task_type=task_type,
+            iterations=iterations,
+            use_rag=use_rag,
+            runner=runner,
+        )
+        return result.to_dict()
+
+    def orchestrate_free_model_harness(
+        self,
+        objective: str,
+        model: str = "ox-alpha-free",
+        task_type: str = "reasoning",
+    ) -> Dict[str, Any]:
+        """Orquestra uma tarefa complexa em modelo free aplicando o harness completo."""
+        res = self.amplify_free_model_response(
+            prompt=objective,
+            model=model,
+            task_type=task_type,
+            iterations=3,
+            use_rag=True,
+        )
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"free_model_harness:{model}",
+            reflection=f"Tarefa '{objective[:60]}' orquestrada no modelo free '{model}' com confiança {res['confidence_score']:.2f}.",
+            score=res["confidence_score"],
+        )
+        return res

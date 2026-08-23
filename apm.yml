@@ -1,0 +1,1325 @@
+name: opencode-ecosystem-core
+version: 1.0.0
+description: 'OpenCode Ecosystem Core: A2A Blackboard, MetaBus metacognition e catálogo
+  de 209+ agentes'
+author: Marcelo Claro
+license: MIT
+repository: https://github.com/MarceloClaro/opencode-ecosystem-core
+dependencies:
+  microsoft/apm-sample-package: ^1.0.0
+primitives:
+  instructions:
+  - name: AGENTS.md
+    path: AGENTS.md
+    description: Instruções canônicas de AGENTS.md
+  - name: CLAUDE.md
+    path: CLAUDE.md
+    description: Instruções canônicas de CLAUDE.md
+  - name: MANUAL.md
+    path: MANUAL.md
+    description: Instruções canônicas de MANUAL.md
+  prompts: []
+  agents:
+  - name: 00_editor_chefe_phd
+    path: agents/catalog/00_editor_chefe_phd.md
+    description: Agente especialista 00_editor_chefe_phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 01_agente_diagnostico_escopo
+    path: agents/catalog/01_agente_diagnostico_escopo.md
+    description: Agente especialista 01_agente_diagnostico_escopo
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 02_agente_busca_curadoria
+    path: agents/catalog/02_agente_busca_curadoria.md
+    description: Agente especialista 02_agente_busca_curadoria
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 03_agente_evidencias_citacoes
+    path: agents/catalog/03_agente_evidencias_citacoes.md
+    description: Agente especialista 03_agente_evidencias_citacoes
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 04_agente_estrutura_argumentativa
+    path: agents/catalog/04_agente_estrutura_argumentativa.md
+    description: Agente especialista 04_agente_estrutura_argumentativa
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 05_agente_revisao_literatura_teoria
+    path: agents/catalog/05_agente_revisao_literatura_teoria.md
+    description: Agente especialista 05_agente_revisao_literatura_teoria
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 06_agente_metodologia_reprodutibilidade
+    path: agents/catalog/06_agente_metodologia_reprodutibilidade.md
+    description: Agente especialista 06_agente_metodologia_reprodutibilidade
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 07_agente_estatistica_analise
+    path: agents/catalog/07_agente_estatistica_analise.md
+    description: Agente especialista 07_agente_estatistica_analise
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 08_agente_visualizacao_evidencia_grafica
+    path: agents/catalog/08_agente_visualizacao_evidencia_grafica.md
+    description: Agente especialista 08_agente_visualizacao_evidencia_grafica
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 09_agente_resultados
+    path: agents/catalog/09_agente_resultados.md
+    description: Agente especialista 09_agente_resultados
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 10_agente_discussao_contribuicao
+    path: agents/catalog/10_agente_discussao_contribuicao.md
+    description: Agente especialista 10_agente_discussao_contribuicao
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 11_agente_conclusao_coerencia_final
+    path: agents/catalog/11_agente_conclusao_coerencia_final.md
+    description: Agente especialista 11_agente_conclusao_coerencia_final
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 12_agente_auditoria_bibliografica_abnt
+    path: agents/catalog/12_agente_auditoria_bibliografica_abnt.md
+    description: Agente especialista 12_agente_auditoria_bibliografica_abnt
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 13_agente_qa_qualis_a1
+    path: agents/catalog/13_agente_qa_qualis_a1.md
+    description: Agente especialista 13_agente_qa_qualis_a1
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 14_agente_consistencia_interna
+    path: agents/catalog/14_agente_consistencia_interna.md
+    description: Agente especialista 14_agente_consistencia_interna
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 15_agente_resumo_abstract_palavras_chave
+    path: agents/catalog/15_agente_resumo_abstract_palavras_chave.md
+    description: Agente especialista 15_agente_resumo_abstract_palavras_chave
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 16_agente_integracao_editorial_docx
+    path: agents/catalog/16_agente_integracao_editorial_docx.md
+    description: Agente especialista 16_agente_integracao_editorial_docx
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 17_agente_framework_reprodutivel_ambientes
+    path: agents/catalog/17_agente_framework_reprodutivel_ambientes.md
+    description: Agente especialista 17_agente_framework_reprodutivel_ambientes
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 18_agente_engenharia_dados_datasets_proveniencia
+    path: agents/catalog/18_agente_engenharia_dados_datasets_proveniencia.md
+    description: Agente especialista 18_agente_engenharia_dados_datasets_proveniencia
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 19_agente_auditoria_codigo_documentacao_tecnica
+    path: agents/catalog/19_agente_auditoria_codigo_documentacao_tecnica.md
+    description: Agente especialista 19_agente_auditoria_codigo_documentacao_tecnica
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 20_agente_estatistica_avancada_inferencia
+    path: agents/catalog/20_agente_estatistica_avancada_inferencia.md
+    description: Agente especialista 20_agente_estatistica_avancada_inferencia
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 21_agente_matematica_aplicada_modelagem_formal
+    path: agents/catalog/21_agente_matematica_aplicada_modelagem_formal.md
+    description: Agente especialista 21_agente_matematica_aplicada_modelagem_formal
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 22_agente_ml_dl_datamining
+    path: agents/catalog/22_agente_ml_dl_datamining.md
+    description: Agente especialista 22_agente_ml_dl_datamining
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 23_agente_bioinformatica_omicas
+    path: agents/catalog/23_agente_bioinformatica_omicas.md
+    description: Agente especialista 23_agente_bioinformatica_omicas
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 24_agente_quimioinformatica_modelagem_molecular
+    path: agents/catalog/24_agente_quimioinformatica_modelagem_molecular.md
+    description: Agente especialista 24_agente_quimioinformatica_modelagem_molecular
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 25_agente_ciencias_sociais_linguistica_computacional
+    path: agents/catalog/25_agente_ciencias_sociais_linguistica_computacional.md
+    description: Agente especialista 25_agente_ciencias_sociais_linguistica_computacional
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 26_agente_visao_computacional_multimodal
+    path: agents/catalog/26_agente_visao_computacional_multimodal.md
+    description: Agente especialista 26_agente_visao_computacional_multimodal
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 27_agente_computacao_quantica_aplicada
+    path: agents/catalog/27_agente_computacao_quantica_aplicada.md
+    description: Agente especialista 27_agente_computacao_quantica_aplicada
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 28_agente_benchmarking_ablacao_robustez
+    path: agents/catalog/28_agente_benchmarking_ablacao_robustez.md
+    description: Agente especialista 28_agente_benchmarking_ablacao_robustez
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 29_agente_conformidade_internacional
+    path: agents/catalog/29_agente_conformidade_internacional.md
+    description: Agente especialista 29_agente_conformidade_internacional
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 30_agente_traducao_nativa_proofreading
+    path: agents/catalog/30_agente_traducao_nativa_proofreading.md
+    description: Agente especialista 30_agente_traducao_nativa_proofreading
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 31_agente_blind_peer_review_emulado
+    path: agents/catalog/31_agente_blind_peer_review_emulado.md
+    description: Agente especialista 31_agente_blind_peer_review_emulado
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 32_agente_etica_open_science
+    path: agents/catalog/32_agente_etica_open_science.md
+    description: Agente especialista 32_agente_etica_open_science
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 33_agente_automacao_multi_norma
+    path: agents/catalog/33_agente_automacao_multi_norma.md
+    description: Agente especialista 33_agente_automacao_multi_norma
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 34_agente_identificacao_conflitos_similaridade
+    path: agents/catalog/34_agente_identificacao_conflitos_similaridade.md
+    description: Agente especialista 34_agente_identificacao_conflitos_similaridade
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 35_agente_coleta_datasets_reais
+    path: agents/catalog/35_agente_coleta_datasets_reais.md
+    description: Agente especialista 35_agente_coleta_datasets_reais
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 36_agente_exportacao_latex_pdf
+    path: agents/catalog/36_agente_exportacao_latex_pdf.md
+    description: Agente especialista 36_agente_exportacao_latex_pdf
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 37_agente_apresentacao_slides_banca
+    path: agents/catalog/37_agente_apresentacao_slides_banca.md
+    description: Agente especialista 37_agente_apresentacao_slides_banca
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 38_agente_montagem_entrega_final
+    path: agents/catalog/38_agente_montagem_entrega_final.md
+    description: Agente especialista 38_agente_montagem_entrega_final
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 39_agente_metodologia_multi_paradigma
+    path: agents/catalog/39_agente_metodologia_multi_paradigma.md
+    description: Agente especialista 39_agente_metodologia_multi_paradigma
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 40_agente_marcos_teoricos_interpretacao
+    path: agents/catalog/40_agente_marcos_teoricos_interpretacao.md
+    description: Agente especialista 40_agente_marcos_teoricos_interpretacao
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 41_agente_gis_geoprocessamento_cartografia
+    path: agents/catalog/41_agente_gis_geoprocessamento_cartografia.md
+    description: Agente especialista 41_agente_gis_geoprocessamento_cartografia
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 42_agente_desenvolvedor_cientista_computacao
+    path: agents/catalog/42_agente_desenvolvedor_cientista_computacao.md
+    description: Agente especialista 42_agente_desenvolvedor_cientista_computacao
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 43_agente_satelite_bioinformatica_omics
+    path: agents/catalog/43_agente_satelite_bioinformatica_omics.md
+    description: Agente especialista 43_agente_satelite_bioinformatica_omics
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 44_agente_correcao_textual_qualis
+    path: agents/catalog/44_agente_correcao_textual_qualis.md
+    description: Agente especialista 44_agente_correcao_textual_qualis
+    permissions:
+      edit: deny
+      bash: deny
+  - name: 45_agente_refinamento_argumentacao
+    path: agents/catalog/45_agente_refinamento_argumentacao.md
+    description: Agente especialista 45_agente_refinamento_argumentacao
+    permissions:
+      edit: deny
+      bash: deny
+  - name: DISPATCHER_ATIVACAO
+    path: agents/catalog/DISPATCHER_ATIVACAO.md
+    description: Agente especialista DISPATCHER_ATIVACAO
+    permissions:
+      edit: deny
+      bash: deny
+  - name: README
+    path: agents/catalog/README.md
+    description: Agente especialista README
+    permissions:
+      edit: deny
+      bash: deny
+  - name: TEMPLATE_HANDOFF
+    path: agents/catalog/TEMPLATE_HANDOFF.md
+    description: Agente especialista TEMPLATE_HANDOFF
+    permissions:
+      edit: deny
+      bash: deny
+  - name: adr-manager
+    path: agents/catalog/adr-manager.md
+    description: Agente especialista adr-manager
+    permissions:
+      edit: deny
+      bash: deny
+  - name: antigravity-orchestrator
+    path: agents/catalog/antigravity-orchestrator.md
+    description: Agente especialista antigravity-orchestrator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: architect
+    path: agents/catalog/architect.md
+    description: Agente especialista architect
+    permissions:
+      edit: deny
+      bash: deny
+  - name: architecture-analyzer
+    path: agents/catalog/architecture-analyzer.md
+    description: Agente especialista architecture-analyzer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: author-voice-guardian
+    path: agents/catalog/author-voice-guardian.md
+    description: Agente especialista author-voice-guardian
+    permissions:
+      edit: deny
+      bash: deny
+  - name: autoevolve
+    path: agents/catalog/autoevolve.md
+    description: Agente especialista autoevolve
+    permissions:
+      edit: deny
+      bash: deny
+  - name: auxjuris_document_summarizer
+    path: agents/catalog/auxjuris_document_summarizer.md
+    description: Agente especialista auxjuris_document_summarizer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: auxjuris_email_drafter
+    path: agents/catalog/auxjuris_email_drafter.md
+    description: Agente especialista auxjuris_email_drafter
+    permissions:
+      edit: deny
+      bash: deny
+  - name: auxjuris_legal_assistant
+    path: agents/catalog/auxjuris_legal_assistant.md
+    description: Agente especialista auxjuris_legal_assistant
+    permissions:
+      edit: deny
+      bash: deny
+  - name: auxjuris_legal_research
+    path: agents/catalog/auxjuris_legal_research.md
+    description: Agente especialista auxjuris_legal_research
+    permissions:
+      edit: deny
+      bash: deny
+  - name: back-translation-verifier
+    path: agents/catalog/back-translation-verifier.md
+    description: Agente especialista back-translation-verifier
+    permissions:
+      edit: deny
+      bash: deny
+  - name: batch-executor
+    path: agents/catalog/batch-executor.md
+    description: Agente especialista batch-executor
+    permissions:
+      edit: deny
+      bash: deny
+  - name: bernstein-orchestrator
+    path: agents/catalog/bernstein-orchestrator.md
+    description: Agente especialista bernstein-orchestrator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: build-agent
+    path: agents/catalog/build-agent.md
+    description: Agente especialista build-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cloud-alloydb-specialist
+    path: agents/catalog/cloud-alloydb-specialist.md
+    description: Agente especialista cloud-alloydb-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cloud-bigquery-specialist
+    path: agents/catalog/cloud-bigquery-specialist.md
+    description: Agente especialista cloud-bigquery-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cloud-data-infra-generalist
+    path: agents/catalog/cloud-data-infra-generalist.md
+    description: Agente especialista cloud-data-infra-generalist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cloud-data-pipelines-specialist
+    path: agents/catalog/cloud-data-pipelines-specialist.md
+    description: Agente especialista cloud-data-pipelines-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cloud-security-specialist
+    path: agents/catalog/cloud-security-specialist.md
+    description: Agente especialista cloud-security-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cloud-sql-mysql-specialist
+    path: agents/catalog/cloud-sql-mysql-specialist.md
+    description: Agente especialista cloud-sql-mysql-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cloud-sql-postgres-specialist
+    path: agents/catalog/cloud-sql-postgres-specialist.md
+    description: Agente especialista cloud-sql-postgres-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cloud-sql-sqlserver-specialist
+    path: agents/catalog/cloud-sql-sqlserver-specialist.md
+    description: Agente especialista cloud-sql-sqlserver-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: code-reviewer
+    path: agents/catalog/code-reviewer.md
+    description: Agente especialista code-reviewer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: codebase-analyzer
+    path: agents/catalog/codebase-analyzer.md
+    description: Agente especialista codebase-analyzer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: codebase-locator
+    path: agents/catalog/codebase-locator.md
+    description: Agente especialista codebase-locator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: codebase-pattern-finder
+    path: agents/catalog/codebase-pattern-finder.md
+    description: Agente especialista codebase-pattern-finder
+    permissions:
+      edit: deny
+      bash: deny
+  - name: coder-agent
+    path: agents/catalog/coder-agent.md
+    description: Agente especialista coder-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: colibri-agent
+    path: agents/catalog/colibri-agent.md
+    description: Agente especialista colibri-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: context-manager
+    path: agents/catalog/context-manager.md
+    description: Agente especialista context-manager
+    permissions:
+      edit: deny
+      bash: deny
+  - name: context-retriever
+    path: agents/catalog/context-retriever.md
+    description: Agente especialista context-retriever
+    permissions:
+      edit: deny
+      bash: deny
+  - name: contextscout
+    path: agents/catalog/contextscout.md
+    description: Agente especialista contextscout
+    permissions:
+      edit: deny
+      bash: deny
+  - name: contract-manager
+    path: agents/catalog/contract-manager.md
+    description: Agente especialista contract-manager
+    permissions:
+      edit: deny
+      bash: deny
+  - name: copywriter
+    path: agents/catalog/copywriter.md
+    description: Agente especialista copywriter
+    permissions:
+      edit: deny
+      bash: deny
+  - name: cultural-episteme-agent
+    path: agents/catalog/cultural-episteme-agent.md
+    description: Agente especialista cultural-episteme-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: data-knowledge-hub
+    path: agents/catalog/data-knowledge-hub.md
+    description: Agente especialista data-knowledge-hub
+    permissions:
+      edit: deny
+      bash: deny
+  - name: debugger
+    path: agents/catalog/debugger.md
+    description: Agente especialista debugger
+    permissions:
+      edit: deny
+      bash: deny
+  - name: devops-specialist
+    path: agents/catalog/devops-specialist.md
+    description: Agente especialista devops-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: docs-writer
+    path: agents/catalog/docs-writer.md
+    description: Agente especialista docs-writer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: documentation
+    path: agents/catalog/documentation.md
+    description: Agente especialista documentation
+    permissions:
+      edit: deny
+      bash: deny
+  - name: eval-runner
+    path: agents/catalog/eval-runner.md
+    description: Agente especialista eval-runner
+    permissions:
+      edit: deny
+      bash: deny
+  - name: externalscout
+    path: agents/catalog/externalscout.md
+    description: Agente especialista externalscout
+    permissions:
+      edit: deny
+      bash: deny
+  - name: frontend-specialist
+    path: agents/catalog/frontend-specialist.md
+    description: Agente especialista frontend-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: gametheory-local
+    path: agents/catalog/gametheory-local.md
+    description: Agente especialista gametheory-local
+    permissions:
+      edit: deny
+      bash: deny
+  - name: git-manager
+    path: agents/catalog/git-manager.md
+    description: Agente especialista git-manager
+    permissions:
+      edit: deny
+      bash: deny
+  - name: honest-critic-agent
+    path: agents/catalog/honest-critic-agent.md
+    description: Agente especialista honest-critic-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: image-specialist
+    path: agents/catalog/image-specialist.md
+    description: Agente especialista image-specialist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: jinja2-templates
+    path: agents/catalog/jinja2-templates.md
+    description: Agente especialista jinja2-templates
+    permissions:
+      edit: deny
+      bash: deny
+  - name: kdp-cover-engineer-phd
+    path: agents/catalog/kdp-cover-engineer-phd.md
+    description: Agente especialista kdp-cover-engineer-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: kdp-ebook-epub-phd
+    path: agents/catalog/kdp-ebook-epub-phd.md
+    description: Agente especialista kdp-ebook-epub-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: kdp-final-qa-phd
+    path: agents/catalog/kdp-final-qa-phd.md
+    description: Agente especialista kdp-final-qa-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: kdp-interior-layout-phd
+    path: agents/catalog/kdp-interior-layout-phd.md
+    description: Agente especialista kdp-interior-layout-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: kdp-metadata-isbn-phd
+    path: agents/catalog/kdp-metadata-isbn-phd.md
+    description: Agente especialista kdp-metadata-isbn-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: kdp-orchestrator-phd
+    path: agents/catalog/kdp-orchestrator-phd.md
+    description: Agente especialista kdp-orchestrator-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: kdp-preflight-auditor-phd
+    path: agents/catalog/kdp-preflight-auditor-phd.md
+    description: Agente especialista kdp-preflight-auditor-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: linguistic-corrector
+    path: agents/catalog/linguistic-corrector.md
+    description: Agente especialista linguistic-corrector
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-character-psychology-phd
+    path: agents/catalog/literary-character-psychology-phd.md
+    description: Agente especialista literary-character-psychology-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-ethics-trauma-phd
+    path: agents/catalog/literary-ethics-trauma-phd.md
+    description: Agente especialista literary-ethics-trauma-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-image-sepia
+    path: agents/catalog/literary-image-sepia.md
+    description: Agente especialista literary-image-sepia
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-innovation-editorial-phd
+    path: agents/catalog/literary-innovation-editorial-phd.md
+    description: Agente especialista literary-innovation-editorial-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-narratology-architect-phd
+    path: agents/catalog/literary-narratology-architect-phd.md
+    description: Agente especialista literary-narratology-architect-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-neurolinguistic-engineering-phd
+    path: agents/catalog/literary-neurolinguistic-engineering-phd.md
+    description: Agente especialista literary-neurolinguistic-engineering-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-orchestrator-phd
+    path: agents/catalog/literary-orchestrator-phd.md
+    description: Agente especialista literary-orchestrator-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-research-scholar-phd
+    path: agents/catalog/literary-research-scholar-phd.md
+    description: Agente especialista literary-research-scholar-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-smoke-minimal
+    path: agents/catalog/literary-smoke-minimal.md
+    description: Agente especialista literary-smoke-minimal
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-style-voice-phd
+    path: agents/catalog/literary-style-voice-phd.md
+    description: Agente especialista literary-style-voice-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: literary-symbolic-imagery-phd
+    path: agents/catalog/literary-symbolic-imagery-phd.md
+    description: Agente especialista literary-symbolic-imagery-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: litert-lm-agent
+    path: agents/catalog/litert-lm-agent.md
+    description: Agente especialista litert-lm-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: llm-reduction
+    path: agents/catalog/llm-reduction.md
+    description: Agente especialista llm-reduction
+    permissions:
+      edit: deny
+      bash: deny
+  - name: marceloclaro
+    path: agents/catalog/marceloclaro.md
+    description: Agente especialista marceloclaro
+    permissions:
+      edit: deny
+      bash: deny
+  - name: master-orchestrator
+    path: agents/catalog/master-orchestrator.md
+    description: Agente especialista master-orchestrator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: medico-cardiologista
+    path: agents/catalog/medico-cardiologista.md
+    description: Agente especialista medico-cardiologista
+    permissions:
+      edit: deny
+      bash: deny
+  - name: medico-clinico-geral
+    path: agents/catalog/medico-clinico-geral.md
+    description: Agente especialista medico-clinico-geral
+    permissions:
+      edit: deny
+      bash: deny
+  - name: medico-infectologista
+    path: agents/catalog/medico-infectologista.md
+    description: Agente especialista medico-infectologista
+    permissions:
+      edit: deny
+      bash: deny
+  - name: medico-neurologista
+    path: agents/catalog/medico-neurologista.md
+    description: Agente especialista medico-neurologista
+    permissions:
+      edit: deny
+      bash: deny
+  - name: medico-radiologista
+    path: agents/catalog/medico-radiologista.md
+    description: Agente especialista medico-radiologista
+    permissions:
+      edit: deny
+      bash: deny
+  - name: medico-virtual-supremo
+    path: agents/catalog/medico-virtual-supremo.md
+    description: Agente especialista medico-virtual-supremo
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-3d
+    path: agents/catalog/mira-3d.md
+    description: Agente especialista mira-3d
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-animated-metaphor
+    path: agents/catalog/mira-animated-metaphor.md
+    description: Agente especialista mira-animated-metaphor
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-animator
+    path: agents/catalog/mira-animator.md
+    description: Agente especialista mira-animator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-builder
+    path: agents/catalog/mira-builder.md
+    description: Agente especialista mira-builder
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-chart-race
+    path: agents/catalog/mira-chart-race.md
+    description: Agente especialista mira-chart-race
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-chart
+    path: agents/catalog/mira-chart.md
+    description: Agente especialista mira-chart
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-copywriter
+    path: agents/catalog/mira-copywriter.md
+    description: Agente especialista mira-copywriter
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-extract
+    path: agents/catalog/mira-extract.md
+    description: Agente especialista mira-extract
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-get-videos
+    path: agents/catalog/mira-get-videos.md
+    description: Agente especialista mira-get-videos
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-image-template
+    path: agents/catalog/mira-image-template.md
+    description: Agente especialista mira-image-template
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-image
+    path: agents/catalog/mira-image.md
+    description: Agente especialista mira-image
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-new
+    path: agents/catalog/mira-new.md
+    description: Agente especialista mira-new
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-planner
+    path: agents/catalog/mira-planner.md
+    description: Agente especialista mira-planner
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-qrcode
+    path: agents/catalog/mira-qrcode.md
+    description: Agente especialista mira-qrcode
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-references
+    path: agents/catalog/mira-references.md
+    description: Agente especialista mira-references
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-size-animator
+    path: agents/catalog/mira-size-animator.md
+    description: Agente especialista mira-size-animator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-squared
+    path: agents/catalog/mira-squared.md
+    description: Agente especialista mira-squared
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-survey
+    path: agents/catalog/mira-survey.md
+    description: Agente especialista mira-survey
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-thirds
+    path: agents/catalog/mira-thirds.md
+    description: Agente especialista mira-thirds
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-validator
+    path: agents/catalog/mira-validator.md
+    description: Agente especialista mira-validator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-vertical
+    path: agents/catalog/mira-vertical.md
+    description: Agente especialista mira-vertical
+    permissions:
+      edit: deny
+      bash: deny
+  - name: mira-visuals
+    path: agents/catalog/mira-visuals.md
+    description: Agente especialista mira-visuals
+    permissions:
+      edit: deny
+      bash: deny
+  - name: nano-orchestrator
+    path: agents/catalog/nano-orchestrator.md
+    description: Agente especialista nano-orchestrator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: openagent
+    path: agents/catalog/openagent.md
+    description: Agente especialista openagent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: opencode-go-agent
+    path: agents/catalog/opencode-go-agent.md
+    description: Agente especialista opencode-go-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: opencode-zen-agent
+    path: agents/catalog/opencode-zen-agent.md
+    description: Agente especialista opencode-zen-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: opencoder
+    path: agents/catalog/opencoder.md
+    description: Agente especialista opencoder
+    permissions:
+      edit: deny
+      bash: deny
+  - name: optimizer
+    path: agents/catalog/optimizer.md
+    description: Agente especialista optimizer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: pdf2latex-agent
+    path: agents/catalog/pdf2latex-agent.md
+    description: Agente especialista pdf2latex-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: prioritization-engine
+    path: agents/catalog/prioritization-engine.md
+    description: Agente especialista prioritization-engine
+    permissions:
+      edit: deny
+      bash: deny
+  - name: pypi-searcher
+    path: agents/catalog/pypi-searcher.md
+    description: Agente especialista pypi-searcher
+    permissions:
+      edit: deny
+      bash: deny
+  - name: quantum-nexus-phd
+    path: agents/catalog/quantum-nexus-phd.md
+    description: Agente especialista quantum-nexus-phd
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-agent-forum
+    path: agents/catalog/reversa-agent-forum.md
+    description: Agente especialista reversa-agent-forum
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-anp
+    path: agents/catalog/reversa-anp.md
+    description: Agente especialista reversa-anp
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-archaeologist
+    path: agents/catalog/reversa-archaeologist.md
+    description: Agente especialista reversa-archaeologist
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-architect
+    path: agents/catalog/reversa-architect.md
+    description: Agente especialista reversa-architect
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-config-generator
+    path: agents/catalog/reversa-config-generator.md
+    description: Agente especialista reversa-config-generator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-data-master
+    path: agents/catalog/reversa-data-master.md
+    description: Agente especialista reversa-data-master
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-design-system
+    path: agents/catalog/reversa-design-system.md
+    description: Agente especialista reversa-design-system
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-detective
+    path: agents/catalog/reversa-detective.md
+    description: Agente especialista reversa-detective
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-document-ir
+    path: agents/catalog/reversa-document-ir.md
+    description: Agente especialista reversa-document-ir
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-entity-ner
+    path: agents/catalog/reversa-entity-ner.md
+    description: Agente especialista reversa-entity-ner
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-fileipc
+    path: agents/catalog/reversa-fileipc.md
+    description: Agente especialista reversa-fileipc
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-graph-builder
+    path: agents/catalog/reversa-graph-builder.md
+    description: Agente especialista reversa-graph-builder
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-graphrag
+    path: agents/catalog/reversa-graphrag.md
+    description: Agente especialista reversa-graphrag
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-hybrid-graph
+    path: agents/catalog/reversa-hybrid-graph.md
+    description: Agente especialista reversa-hybrid-graph
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-memory-updater
+    path: agents/catalog/reversa-memory-updater.md
+    description: Agente especialista reversa-memory-updater
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-oasis-profile
+    path: agents/catalog/reversa-oasis-profile.md
+    description: Agente especialista reversa-oasis-profile
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-ontology-gen
+    path: agents/catalog/reversa-ontology-gen.md
+    description: Agente especialista reversa-ontology-gen
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-planner
+    path: agents/catalog/reversa-planner.md
+    description: Agente especialista reversa-planner
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-process-lifecycle
+    path: agents/catalog/reversa-process-lifecycle.md
+    description: Agente especialista reversa-process-lifecycle
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-report-agent
+    path: agents/catalog/reversa-report-agent.md
+    description: Agente especialista reversa-report-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-reviewer
+    path: agents/catalog/reversa-reviewer.md
+    description: Agente especialista reversa-reviewer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-scout
+    path: agents/catalog/reversa-scout.md
+    description: Agente especialista reversa-scout
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-statemachine
+    path: agents/catalog/reversa-statemachine.md
+    description: Agente especialista reversa-statemachine
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-swarm-review
+    path: agents/catalog/reversa-swarm-review.md
+    description: Agente especialista reversa-swarm-review
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-synthesis
+    path: agents/catalog/reversa-synthesis.md
+    description: Agente especialista reversa-synthesis
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-visor
+    path: agents/catalog/reversa-visor.md
+    description: Agente especialista reversa-visor
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa-writer
+    path: agents/catalog/reversa-writer.md
+    description: Agente especialista reversa-writer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reversa
+    path: agents/catalog/reversa.md
+    description: Agente especialista reversa
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reviewer
+    path: agents/catalog/reviewer.md
+    description: Agente especialista reviewer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: security-auditor
+    path: agents/catalog/security-auditor.md
+    description: Agente especialista security-auditor
+    permissions:
+      edit: deny
+      bash: deny
+  - name: simple-responder
+    path: agents/catalog/simple-responder.md
+    description: Agente especialista simple-responder
+    permissions:
+      edit: deny
+      bash: deny
+  - name: skills-cloud-antigravity
+    path: agents/catalog/skills-cloud-antigravity.md
+    description: Agente especialista skills-cloud-antigravity
+    permissions:
+      edit: deny
+      bash: deny
+  - name: stage-orchestrator
+    path: agents/catalog/stage-orchestrator.md
+    description: Agente especialista stage-orchestrator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: story-mapper
+    path: agents/catalog/story-mapper.md
+    description: Agente especialista story-mapper
+    permissions:
+      edit: deny
+      bash: deny
+  - name: task-manager
+    path: agents/catalog/task-manager.md
+    description: Agente especialista task-manager
+    permissions:
+      edit: deny
+      bash: deny
+  - name: technical-writer
+    path: agents/catalog/technical-writer.md
+    description: Agente especialista technical-writer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: terminology-graph-agent
+    path: agents/catalog/terminology-graph-agent.md
+    description: Agente especialista terminology-graph-agent
+    permissions:
+      edit: deny
+      bash: deny
+  - name: test-engineer
+    path: agents/catalog/test-engineer.md
+    description: Agente especialista test-engineer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: thoughts-analyzer
+    path: agents/catalog/thoughts-analyzer.md
+    description: Agente especialista thoughts-analyzer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: thoughts-locator
+    path: agents/catalog/thoughts-locator.md
+    description: Agente especialista thoughts-locator
+    permissions:
+      edit: deny
+      bash: deny
+  - name: university_synthetic
+    path: agents/catalog/university_synthetic.md
+    description: Agente especialista university_synthetic
+    permissions:
+      edit: deny
+      bash: deny
+  - name: web-developer
+    path: agents/catalog/web-developer.md
+    description: Agente especialista web-developer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: web-search-researcher
+    path: agents/catalog/web-search-researcher.md
+    description: Agente especialista web-search-researcher
+    permissions:
+      edit: deny
+      bash: deny
+  - name: ws-academic-pipeline
+    path: agents/catalog/ws-academic-pipeline.md
+    description: Agente especialista ws-academic-pipeline
+    permissions:
+      edit: deny
+      bash: deny
+  - name: ws-coder
+    path: agents/catalog/ws-coder.md
+    description: Agente especialista ws-coder
+    permissions:
+      edit: deny
+      bash: deny
+  - name: ws-researcher
+    path: agents/catalog/ws-researcher.md
+    description: Agente especialista ws-researcher
+    permissions:
+      edit: deny
+      bash: deny
+  - name: ws-reviewer
+    path: agents/catalog/ws-reviewer.md
+    description: Agente especialista ws-reviewer
+    permissions:
+      edit: deny
+      bash: deny
+  - name: ws-scribe
+    path: agents/catalog/ws-scribe.md
+    description: Agente especialista ws-scribe
+    permissions:
+      edit: deny
+      bash: deny
+  - name: academic_writer
+    path: agents/academic_writer.md
+    description: Agente essencial academic_writer
+    permissions:
+      edit: allow
+      bash: deny
+  - name: auditor
+    path: agents/auditor.md
+    description: Agente essencial auditor
+    permissions:
+      edit: deny
+      bash: deny
+  - name: coder
+    path: agents/coder.md
+    description: Agente essencial coder
+    permissions:
+      edit: allow
+      bash: allow
+  - name: researcher
+    path: agents/researcher.md
+    description: Agente essencial researcher
+    permissions:
+      edit: deny
+      bash: deny
+  - name: reviewer
+    path: agents/reviewer.md
+    description: Agente essencial reviewer
+    permissions:
+      edit: deny
+      bash: deny
+  skills:
+  - name: deep-research
+    path: skills/deep-research/SKILL.md
+    description: Habilidade deep-research
+  - name: evo-science
+    path: skills/evo-science/SKILL.md
+    description: Habilidade evo-science
+  - name: litert_lm
+    path: skills/litert_lm
+    description: Habilidade litert_lm
+  - name: mcp-security
+    path: skills/mcp-security/SKILL.md
+    description: Habilidade mcp-security
+  - name: medico_virtual_supremo
+    path: skills/medico_virtual_supremo
+    description: Habilidade medico_virtual_supremo
+  - name: peer-review-v2
+    path: skills/peer-review-v2/SKILL.md
+    description: Habilidade peer-review-v2
+  - name: tooling
+    path: skills/tooling
+    description: Habilidade tooling
+  hooks:
+  - name: audit_gate
+    path: integrations/apm.py
+    description: PreToolUse Audit Gate para prevenção de injeções Unicode e violações
+      anti-overclaim
+    metadata:
+      event: PreToolUse
+  mcps:
+  - name: mci
+    path: mci/mcp_server.py
+    description: Servidor MCP Metacognitive Interconnect (MetaBus / Reflexões)
+    metadata:
+      command: python3
+      args:
+      - -m
+      - mci.mcp_server
+  plugins: []
+registries:
+  github: https://github.com
+  local: local
+metadata: {}

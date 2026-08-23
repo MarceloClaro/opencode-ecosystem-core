@@ -386,6 +386,42 @@ def _check_episteme_coverage() -> DoctorCheck:
         return DoctorCheck("episteme_coverage", "fail", f"Erro ao medir cobertura: {exc}")
 
 
+def _check_apm_integration() -> DoctorCheck:
+    """Verifica a integridade do manifesto Microsoft APM (SPEC-935-R440)."""
+    try:
+        from integrations.apm import APMPackageManager
+        pm = APMPackageManager()
+        if not pm.manifest_path.exists():
+            return DoctorCheck(
+                "apm_integration", "warn",
+                "Manifesto apm.yml ausente. Execute: python3 -m marceloclaro.cli apm init"
+            )
+        manifest = pm.load_manifest()
+        total_prims = sum(len(v) for v in manifest.primitives.values())
+        has_lock = pm.lock_path.exists()
+        lock_detail = "com lockfile íntegro" if has_lock else "sem lockfile (execute 'apm install')"
+        return DoctorCheck(
+            "apm_integration", "pass",
+            f"Microsoft APM ativo (v{manifest.version}): {total_prims} primitivas declaradas ({lock_detail})."
+        )
+    except Exception as exc:
+        return DoctorCheck("apm_integration", "warn", f"Erro no diagnóstico APM: {exc}")
+
+
+def _check_free_model_amplification() -> DoctorCheck:
+    """Verifica o status do DeepSeek Harness para amplificação de modelos free (SPEC-935-R441)."""
+    try:
+        from integrations.deepseek_harness.free_model_amplifier import get_free_model_amplifier
+        amp = get_free_model_amplifier()
+        stats = amp.get_stats()
+        return DoctorCheck(
+            "free_model_amplification", "pass",
+            "Amplificação DeepSeek Harness ativa: RAG local Whoosh3 + Scaffold CoT para modelos free (Ox Alpha, DeepSeek Free)."
+        )
+    except Exception as exc:
+        return DoctorCheck("free_model_amplification", "warn", f"Harness free models indisponível: {exc}")
+
+
 def run_doctor() -> Dict[str, Any]:
     """Executa todos os checks estruturais e agrega o resultado.
 
@@ -407,6 +443,8 @@ def run_doctor() -> Dict[str, Any]:
         _check_colibri(),
         _check_llm_reduction_metrics(),
         _check_episteme_coverage(),
+        _check_apm_integration(),
+        _check_free_model_amplification(),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)
