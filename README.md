@@ -555,8 +555,13 @@ Roteador de atenção (Multi-Head Attention com 4 cabeças: semântica, capacida
 - **MCP Security (R100):** MCPGuard, AuditLogger, ToolVetter, RateLimiter
 - **CI/CD (R106):** GitHub Actions, quality report, coverage gate
 
-### 6. Catálogo de Agentes
-205 agentes especializados (contagem medida pelo doctor em 2026-08-02): Researcher, Coder, Reviewer, Academic Writer, 32 agentes MASWOS, Deep Research, Peer Review, Revision, Paper Composer, LLM Reduction, Colibri/OLMoE, GameTheory, Jinja2, DataKnowledgeHub, e especialistas jurídicos, de design e quânticos.
+### 6. Catálogo e Orquestração de Agentes
+
+O ecossistema organiza seus agentes em três níveis de registro complementares e auditáveis:
+- **205 Agentes Especialistas no Catálogo (`agents/catalog/*.md`)**: Catálogo temático (MASWOS, Reversa, MIRA, Engenharia, Jurídico, Literatura, etc.) lidos via `load_catalog_definitions()`.
+- **209 Subagentes no `opencode.json` (OpenCode CLI)**: 205 do catálogo + 4 essenciais (`academic_writer`, `auditor`, `coder`, `researcher`) + 1 subagente de nano-orquestração (`nano-orchestrator`), excluindo o orquestrador raiz `marceloclaro`.
+- **210 Agentes Registrados no Blackboard (`MarceloClaroOrchestrator`)**: 205 do catálogo + 5 agentes essenciais do Core (`academic_writer`, `auditor`, `coder`, `researcher`, `reviewer`).
+- **1 Orquestrador Primário Central (`MarceloClaroOrchestrator`)**: O ponto de entrada que coordena e delega tarefas a todos os demais via protocolo A2A.
 
 ### 6.1 Tabela Completa dos 205 Agentes — Função e Camada
 
