@@ -630,10 +630,11 @@ reinício (chat completion coerente via modelo local).
 | SPEC-935-R441 | Amplificação Cognitiva de Modelos Free via DeepSeek Harness | 10 |
 | SPEC-935-R442 | Raciocínio Científico Google DeepMind Superhuman & Aletheia | 10 |
 | SPEC-935-R443 | Motores Nativos OpenCode AlphaProof, Deep Think & Erdős/Hirzebruch Solver | 10 |
+| SPEC-935-R444 | Integração Lean 4 & Saturação de Igualdade E-Graph (Egglog) | 11 |
 
 ---
 
-## Padrão Microsoft APM, DeepSeek Harness & DeepMind Superhuman / AlphaProof (R440–R443)
+## Padrão Microsoft APM, DeepSeek Harness, DeepMind Superhuman & Lean 4 (R440–R444)
 
 ### Microsoft APM (Agent Package Manager — SPEC-935-R440)
 O OpenCode Ecosystem Core unificou a governança de suas 222 primitivas sob o padrão canônico do **Microsoft APM** (`microsoft/apm`):
@@ -657,3 +658,7 @@ Incorporando as técnicas e datasets de raciocínio de fronteira do **Google Dee
 1. **OpenCode AlphaProof (`OpenCodeAlphaProof`)**: Motor de busca em árvore de provas formais (*Proof-Tree Search*) aplicando táticas de Simplificação Algébrica Simbólica, Indução Matemática, Análise de Casos e Redução ao Absurdo com verificação determinística SymPy/Z3.
 2. **OpenCode Deep Think (`OpenCodeDeepThink`)**: Alocação dinâmica de computação em tempo de teste (*Test-Time Compute Budget*), gerando trajetórias concorrentes `<think>`, pontuadas pelo `GradingHeadDeepMind` (0 a 7) e selecionadas pelo caminho de maior rigor.
 3. **Solucionador de Problemas Abertos de Erdős & Hirzebruch (`ErdosHirzebruchSolver`)**: Demonstração formal de irracionalidade de séries do tipo Erdős-1051 ($\sum \frac{1}{2^{2^n} - c}$) e cálculo exato de autopesos de proporcionalidade aritmética de Hirzebruch (*princípio Feng–Yun–Zhang*).
+
+### Integração Lean 4 & Saturação de Igualdade E-Graph (SPEC-935-R444)
+1. **Ponte e Verificador Lean 4 (`Lean4ProofVerifier`)**: Geração formal de arquivos `.lean`, validação estática de táticas de prova (`ring`, `linarith`, `omega`, `aesop`, `intro`, `exact`, `apply`, `rw`), detecção estrita de `sorry` e suporte à compilação com kernel Lean 4.
+2. **Motor E-Graph & Saturação de Igualdade (`EqualitySaturationEngine`)**: Representação compacta de equivalências matemáticas com fechamento por congruência (*congruence closure*) e extração por programação dinâmica, permitindo simplificação canônica ótima e descoberta automatizada de identidades algébricas.

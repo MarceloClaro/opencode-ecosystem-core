@@ -2687,4 +2687,39 @@ class MarceloClaroOrchestrator:
         workflow = OpenProblemsResearchWorkflow()
         return workflow.solve_conjecture(problem_type, params=params)
 
+    # ------------------------------------------------------------------
+    # LEAN 4 VERIFIER & E-GRAPH EQUALITY SATURATION — SPEC-935-R444
+    # ------------------------------------------------------------------
+    def lean4_verify_code(self, code: str) -> Dict[str, Any]:
+        """Valida e executa código formal Lean 4 com detecção de sorry e táticas."""
+        from integrations.deepmind import Lean4ProofVerifier
+        verifier = Lean4ProofVerifier()
+        res = verifier.verify_lean_code(code)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="lean4_verify",
+            reflection=f"Código Lean 4 para '{res.theorem_name}' validado com status '{res.status}'.",
+            score=1.0 if res.is_valid else 0.5,
+        )
+        return res.to_dict()
+
+    def lean4_format_theorem(
+        self,
+        name: str,
+        statement: str,
+        tactics: List[str],
+        parameters: str = "",
+    ) -> str:
+        """Gera um arquivo de código formal em Lean 4 para um teorema."""
+        from integrations.deepmind import Lean4ProofVerifier
+        verifier = Lean4ProofVerifier()
+        return verifier.format_theorem(name, statement, tactics, parameters=parameters)
+
+    def egraph_saturate_term(self, expr: str, max_iterations: int = 3) -> Dict[str, Any]:
+        """Executa simplificação por saturação de igualdade no E-Graph."""
+        from integrations.deepmind import EqualitySaturationEngine
+        engine = EqualitySaturationEngine()
+        return engine.saturate(expr, max_iterations=max_iterations)
+
+
 
