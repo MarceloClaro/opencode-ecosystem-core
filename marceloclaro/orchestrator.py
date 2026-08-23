@@ -2597,3 +2597,45 @@ class MarceloClaroOrchestrator:
             score=res["confidence_score"],
         )
         return res
+
+    # ------------------------------------------------------------------
+    # GOOGLE DEEPMIND SUPERHUMAN REASONING & ALETHEIA — SPEC-935-R442
+    # ------------------------------------------------------------------
+    def aletheia_decompose(self, claim: str, domain: str = "general") -> Dict[str, Any]:
+        """Decompõe uma hipótese ou teorema científico em lemas e passos formais (padrão Aletheia)."""
+        from integrations.deepmind import AletheiaHypothesisEngine
+        engine = AletheiaHypothesisEngine()
+        decomp = engine.decompose(claim, domain=domain)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"aletheia_decompose:{domain}",
+            reflection=f"Alegação '{claim[:60]}' decomposta em {len(decomp.lemmas)} lemas com confiança {decomp.confidence_score:.2f}.",
+            score=decomp.confidence_score,
+        )
+        return decomp.to_dict()
+
+    def aletheia_prove(self, claim: str, domain: str = "general") -> Dict[str, Any]:
+        """Gera a prova estruturada e o manuscrito em LaTeX via Aletheia."""
+        res = self.aletheia_decompose(claim, domain=domain)
+        return {
+            "claim": claim,
+            "domain": domain,
+            "latex_document": res.get("latex_document", ""),
+            "lemmas": res.get("lemmas", []),
+            "proof_steps": res.get("proof_steps", []),
+            "verification": res.get("verification_result", {}),
+            "confidence": res.get("confidence_score", 0.0),
+        }
+
+    def imobench_evaluate(self, limit: int = 4, solver_fn: Optional[Callable] = None) -> Dict[str, Any]:
+        """Executa avaliação sobre o dataset de benchmark do Google DeepMind (IMO-Bench)."""
+        from integrations.deepmind import IMOBenchmarkHarness
+        harness = IMOBenchmarkHarness()
+        return harness.run_benchmark(solver_fn=solver_fn, limit=limit)
+
+    def formal_verify_identity(self, lhs: str, rhs: str) -> Tuple[bool, str]:
+        """Verifica simbolicamente a equivalência entre duas expressões algébricas."""
+        from integrations.deepmind import FormalProofVerifier
+        verifier = FormalProofVerifier()
+        return verifier.verify_algebraic_identity(lhs, rhs)
+
