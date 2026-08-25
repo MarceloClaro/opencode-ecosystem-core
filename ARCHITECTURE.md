@@ -37,6 +37,28 @@ graph TD
     Orquestrador --> MIRA[mira-presenter]
 ```
 
+## Diagrama operacional atual
+
+O diagrama abaixo resume o runtime observável sem tentar listar todos os
+arquivos, classes auxiliares ou serviços opcionais do ecossistema.
+
+```mermaid
+flowchart TB
+    Usuario2[Usuário ou automação] --> CLI2[CLI marceloclaro]
+    CLI2 --> Orq2[MarceloClaroOrchestrator]
+    Orq2 --> Router[AttentionRouter]
+    Orq2 --> SpecRegistry2[SpecRegistry]
+    Orq2 --> SpecVerifier2[SpecVerifier]
+    Orq2 --> TDDRunner2[TDDRunner]
+    Orq2 --> MetaBus2[MetaBus]
+    Orq2 --> Blackboard2[Blackboard]
+    Orq2 --> MCP2[6 MCPs configurados]
+    Orq2 --> Agents2[209 agentes configurados]
+    Orq2 --> Mira2[mira-presenter]
+    Mira2 --> Deck2[MiraDeckPipeline]
+    Deck2 --> Engine2[MiraEngine]
+```
+
 | Camada | Responsabilidade | Referências principais |
 |---|---|---|
 | Entrada | CLI interativo e comandos diretos. | `marceloclaro/cli.py`, `MANUAL.md` |
@@ -77,6 +99,19 @@ O fluxo básico é:
 4. a entrega é avaliada contra os critérios disponíveis para aquela tarefa.
 
 Esse fluxo descreve mecanismos de software, não mérito externo do resultado.
+
+## Domínios multiárea observáveis
+
+| Área | Principais referências observáveis |
+|---|---|
+| Pipeline acadêmico agentivo | `agentic_science_v2/orchestrator.py`, `deep_research.py`, `review_agent.py`, `revision_agent.py`, `paper_composer.py` |
+| Prova, formalização e raciocínio | `integrations/deepmind/formal_verifier.py`, `alphaproof_engine.py`, `aletheia_scaffold.py`, `deep_think_engine.py`, `autoformalizer.py`, `geometry_engine.py`, `lean4_verifier.py`, `egraph_rewriter.py`, `erdos_hirzebruch_solver.py` |
+| Jurídico | `legal/integration.py`, `specializations.py`, `knowledge_base.py`, `precedents.py`, `datajud_client.py`, `benchmarks.py` |
+| Clínico | `integrations/medical/clinical_game_theory.py`, `clinical_verifier.py`, `evidence_grounding.py`, `clinical_orchestrator_bridge.py` |
+| Scientific RAG | `rag/scientific.py`, `rag/evolved.py`, `rag/enhanced_search_rag.py` |
+| Universidade Sintética | `synthetic_university/core.py`, `combinatorial_engine.py`, `evolutionary_memory.py`, `mcp_server.py`, `api_gateway.py` |
+| Runtime local | `integrations/litert_lm.py`, `litert_lm_provider.py`, `litert_lm_supervisor.py`, `integrations/colibri_provider.py` |
+| Integridade e quality gates | `installer/`, `benchmarks/merkle_integrity_guard.py`, `scripts/quality_report.py`, `benchmarks/scientific_reasoning/` |
 
 ## SDD e TDD
 
