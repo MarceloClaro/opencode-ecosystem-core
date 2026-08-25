@@ -18,7 +18,7 @@ import time
 import logging
 from typing import Dict, List, Any, Callable, Optional
 
-from sdd.spec_engine import spec_verifier, spec_registry
+from sdd.spec_engine import spec_verifier
 from mci.metabus import metabus
 
 logger = logging.getLogger("self-correction")
@@ -31,8 +31,13 @@ CORRIGENDUM_PATH = os.path.join(REPO_ROOT, "CORRIGENDUM.md")
 class SelfCorrectionEngine:
     """Motor de autocorreção autônoma em circuito fechado."""
 
-    def __init__(self):
+    def __init__(self, corrigendum_path: Optional[os.PathLike[str] | str] = None):
         self.history: List[Dict[str, Any]] = []
+        self.corrigendum_path = (
+            os.fspath(corrigendum_path)
+            if corrigendum_path is not None
+            else CORRIGENDUM_PATH
+        )
 
     def run_correction_cycle(
         self,
@@ -108,12 +113,12 @@ class SelfCorrectionEngine:
 
     def _append_to_corrigendum(self, spec_id: str, issue: str, duration: float) -> None:
         """Registra a autocorreção bem-sucedida no arquivo CORRIGENDUM.md."""
-        if not os.path.exists(CORRIGENDUM_PATH):
+        if not os.path.exists(self.corrigendum_path):
             return
 
         try:
             entry = f"\n- **[Autocorreção Circuito Fechado - {time.strftime('%Y-%m-%d %H:%M:%S')}]**: Spec `{spec_id}` — {issue} (verificado em {duration}s)\n"
-            with open(CORRIGENDUM_PATH, "a", encoding="utf-8") as f:
+            with open(self.corrigendum_path, "a", encoding="utf-8") as f:
                 f.write(entry)
         except Exception as exc:
             logger.warning("Falha ao atualizar CORRIGENDUM.md: %s", exc)

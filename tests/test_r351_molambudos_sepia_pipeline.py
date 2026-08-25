@@ -24,18 +24,34 @@ def test_import_pipeline():
     assert hasattr(P, "save_for_latex")
 
 
-def test_apply_sepia_from_url():
-    """apply_sepia deve processar imagem de URL e retornar imagem RGB com tom sépia."""
+def test_apply_sepia_from_url(monkeypatch):
+    """apply_sepia processa bytes baixados sem depender de rede pública."""
+    import io
     from PIL import Image
-    from scripts.literary_sepia_pipeline import apply_sepia, fetch_image
+    import scripts.literary_sepia_pipeline as pipeline
 
-    # Usar imagem de teste pública
-    url = "https://raw.githubusercontent.com/python-pillow/Pillow/main/Tests/images/hopper.jpg"
-    img = fetch_image(url)
+    source = Image.new("RGB", (16, 16), (180, 160, 120))
+    payload = io.BytesIO()
+    source.save(payload, format="PNG")
+
+    class FakeResponse:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+        def read(self):
+            return payload.getvalue()
+
+    monkeypatch.setattr(pipeline, "HAS_REQUESTS", False)
+    monkeypatch.setattr(pipeline.urllib.request, "urlopen", lambda *_args, **_kwargs: FakeResponse())
+
+    img = pipeline.fetch_image("https://images.example.invalid/fixture.png")
     assert img is not None, "fetch_image falhou"
     assert img.mode in ("RGB", "RGBA")
 
-    result = apply_sepia(img, intensity=1.0)
+    result = pipeline.apply_sepia(img, intensity=1.0)
     assert result is not None
     assert result.mode == "RGB"
     assert result.size == img.size
@@ -115,11 +131,17 @@ def test_apply_grain():
     assert len(diffs) > 0, "Grain deve alterar pelo menos alguns pixels"
 
 
-def test_fetch_image_invalid_url():
-    """fetch_image deve retornar None para URL inválida."""
-    from scripts.literary_sepia_pipeline import fetch_image
+def test_fetch_image_invalid_url(monkeypatch):
+    """fetch_image retorna None para falha simulada, sem consulta externa."""
+    import scripts.literary_sepia_pipeline as pipeline
 
-    result = fetch_image("https://invalid.example.com/nonexistent.jpg")
+    def raise_url_error(*_args, **_kwargs):
+        raise OSError("falha de rede simulada")
+
+    monkeypatch.setattr(pipeline, "HAS_REQUESTS", False)
+    monkeypatch.setattr(pipeline.urllib.request, "urlopen", raise_url_error)
+
+    result = pipeline.fetch_image("https://invalid.example.com/nonexistent.jpg")
     assert result is None, "URL inválida deve retornar None"
 
 

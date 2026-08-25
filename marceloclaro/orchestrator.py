@@ -22,9 +22,10 @@ import uuid
 import time
 import logging
 from dataclasses import dataclass
-from typing import Dict, List, Any, Iterable, Mapping, Optional
+from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Tuple
 
-import sys, os
+import os
+import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from mci.metabus import metabus
@@ -32,8 +33,8 @@ from mci.blackboard import blackboard
 from mci.task_runtime import AcceptanceCriterion, NanoTaskSpec, TaskGraph, TaskRuntime
 from synthetic_university import SyntheticUniversity
 from mci.reflexion import reflexion_engine  # noqa: F401 — ativa o singleton
-from mci import run_scientific_cycle, run_scientific_governance_pipeline
-from marceloclaro.agent_loader import register_all_agents, load_agent_definitions
+from mci import run_scientific_governance_pipeline
+from marceloclaro.agent_loader import register_all_agents
 from skills.tooling.llm_reduction import LLMReductionLayer
 from transformer.attention import AttentionRouter
 from transformer.pipeline import TransformerPipeline, GradingHead
@@ -671,18 +672,52 @@ class MarceloClaroOrchestrator:
         spec_id = self.task_specs.get(task_id)
         verification = None
         if spec_id:
-            verification = spec_verifier.verify(spec_id, result)
+            # Specs Markdown com contratos executáveis não aceitam a evidência
+            # declarada pelo agente. O runner executa o test_file registrado e
+            # emite um objeto selado, vinculado à spec, para o SpecVerifier.
+            # Em qualquer exceção, arquivo ausente ou teste reprovado, a falta
+            # de evidência confiável mantém o gate fechado.
+            verifier_registry = getattr(spec_verifier, "registry", spec_registry)
+            spec = verifier_registry.get(spec_id)
+            trusted_test_evidence = None
+            requires_trusted_test_evidence = bool(
+                spec is not None
+                and getattr(spec, "requires_trusted_test_evidence", False)
+            )
+            if requires_trusted_test_evidence:
+                try:
+                    trusted_test_evidence = tdd_runner.run_spec_test(spec)
+                except Exception as exc:
+                    logger.warning(
+                        "[%s] Execução do test_file da spec %s falhou: %s",
+                        self.id,
+                        spec_id,
+                        exc,
+                    )
+
+            verification = spec_verifier.verify(
+                spec_id,
+                result,
+                trusted_test_evidence=trusted_test_evidence,
+            )
             metabus.memory.add_reflection(
                 agent_id=agent_id,
                 task_context=f"verificação SDD da tarefa {task_id} (spec {spec_id})",
                 reflection=(
-                    f"Verificação SDD: {verification['passed_count']}/"
-                    f"{verification['total_count']} critérios aprovados "
-                    f"(status: {verification['status']})."
+                    f"Verificação SDD: {verification.get('passed_count', 0)}/"
+                    f"{verification.get('total_count', 0)} critérios aprovados "
+                    f"(status: {verification.get('status', 'reprovada')})."
                 ),
-                score=1.0 if verification["verified"] else 0.0,
+                score=1.0 if verification.get("verified", False) else 0.0,
             )
-            if self.strict_sdd and not verification["verified"]:
+            # A ausência/falha de teste de um contrato Markdown é sempre
+            # fail-closed, inclusive quando o modo legado não estrito foi
+            # solicitado. Specs legadas mantêm o comportamento pré-existente.
+            hard_runtime_gate = requires_trusted_test_evidence
+            if (
+                (self.strict_sdd or hard_runtime_gate)
+                and not verification.get("verified", False)
+            ):
                 logger.warning(
                     f"[{self.id}] GATE SDD: entrega de {agent_id} para {task_id} "
                     f"REPROVADA na spec {spec_id}; registrando como falha."
@@ -704,7 +739,7 @@ class MarceloClaroOrchestrator:
         # Token Economy: resolve stakes (recompensa ou slashing)
         if task_id in self.task_stakes:
             try:
-                resolution = self.economy.resolve(task_id, success=success)
+                self.economy.resolve(task_id, success=success)
                 if not success:
                     logger.info(f"[{self.id}] Slashing aplicado a {agent_id} na tarefa {task_id}")
                 del self.task_stakes[task_id]
@@ -2135,14 +2170,21 @@ class MarceloClaroOrchestrator:
     # ------------------------------------------------------------------
     def produce_scientific_work(self, title: str, content: str,
                                 template: str = "artigo",
-                                author: str = "Prof. Marcelo Claro") -> Dict[str, Any]:
+                                author: str = "Prof. Marcelo Claro",
+                                output_root: Optional[str] = None) -> Dict[str, Any]:
         """
         Gera a pasta única de produção científica com fonte LaTeX (template
         Qualis A1/ABNT/livro) e compilados PDF, DOCX, MD e ODT (Amazon KDP),
-        com manifesto auditável (checksums SHA-256).
+        com manifesto auditável (checksums SHA-256). ``output_root`` permite
+        isolar artefatos de chamadas automatizadas em um destino injetado.
         """
         from publishing import ScientificProduction
-        production = ScientificProduction(title=title, template=template, author=author)
+        production = ScientificProduction(
+            title=title,
+            template=template,
+            author=author,
+            output_root=output_root,
+        )
         manifest = production.build(content)
         generated = [f for f, info in manifest["formats"].items() if info]
         metabus.memory.add_reflection(
@@ -2671,7 +2713,7 @@ class MarceloClaroOrchestrator:
         res = prover.search_proof(goal, premises=premises)
         metabus.memory.add_reflection(
             agent_id=self.id,
-            task_context=f"alphaproof_search",
+            task_context="alphaproof_search",
             reflection=f"Teorema '{goal[:60]}' explorado via AlphaProof com {res['nodes_expanded']} nós e confiança {res['confidence_score']:.2f}.",
             score=res.get("confidence_score", 0.9),
         )
@@ -2857,7 +2899,3 @@ class MarceloClaroOrchestrator:
             "minimax_decision": minimax,
             "information_gains": gains,
         }
-
-
-
-

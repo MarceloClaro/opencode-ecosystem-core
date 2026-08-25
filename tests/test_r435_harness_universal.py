@@ -10,6 +10,8 @@ Runners injetados garantem determinismo sem credenciais.
 import sys
 import unittest
 
+import pytest
+
 sys.path.insert(0, ".")  # repo root
 
 from sdd.spec_engine import spec_registry
@@ -36,6 +38,57 @@ def _runner_ok(prompt: str, provider=None, model=None, task_type=None, **kw):
 
 def _runner_simple(prompt: str, cwd=None, **kw):
     return {"status": "completed", "final_response": _long_resp(prompt), "events": []}
+
+
+@pytest.fixture(autouse=True)
+def _isolate_harness_runtime_state():
+    """Remove workers e TSPECs efêmeras entre testes do harness universal."""
+
+    from sdd.spec_engine import spec_registry
+
+    existing_task_specs = {
+        spec_id for spec_id in spec_registry.specs if spec_id.startswith("TSPEC-")
+    }
+    existing_worker_ids = set()
+    singleton_pool = None
+    singleton_worker_count = 0
+    try:
+        from integrations.harness.universal_bridge import harness_bridge
+        from mci.blackboard import blackboard
+
+        singleton_pool = harness_bridge.pool
+        if singleton_pool is not None:
+            singleton_worker_count = singleton_pool.report().get("workers", 0)
+        existing_worker_ids = {
+            worker_id
+            for worker_id in blackboard.registry
+            if worker_id.startswith(("harness-worker-", "dsh-worker-"))
+        }
+    except Exception:
+        pass
+    yield
+
+    try:
+        if singleton_pool is not None:
+            singleton_pool.scale(singleton_worker_count)
+    except Exception:
+        pass
+
+    try:
+        from mci.blackboard import blackboard
+
+        for worker_id in list(blackboard.registry):
+            if (
+                worker_id.startswith(("harness-worker-", "dsh-worker-"))
+                and worker_id not in existing_worker_ids
+            ):
+                del blackboard.registry[worker_id]
+    except Exception:
+        pass
+
+    for spec_id in list(spec_registry.specs):
+        if spec_id.startswith("TSPEC-") and spec_id not in existing_task_specs:
+            del spec_registry.specs[spec_id]
 
 
 class TestR435Spec(unittest.TestCase):
@@ -148,16 +201,6 @@ class TestR435UniversalReasoningLoop(unittest.TestCase):
             self.assertTrue(res["achieved_target"], f"gate 97 deve ser atingido para task_type={task_type}")
             self.assertGreaterEqual(res["best"]["grade"]["score"], 6)
             self.assertGreaterEqual(res["best"]["calibrated_value"], 0.97)
-            # cleanup
-            try:
-                loop.bridge.pool.scale(0)
-                from mci.blackboard import blackboard
-
-                for wid in list(blackboard.registry.keys()):
-                    if wid.startswith(("harness-worker-", "dsh-worker-")):
-                        del blackboard.registry[wid]
-            except Exception:
-                pass
 
     def test_loop_with_forced_provider(self):
         from integrations.harness.universal_reasoning_loop import UniversalReasoningLoop
@@ -181,6 +224,21 @@ class TestR435UniversalReasoningLoop(unittest.TestCase):
         spec = loop_spec_registry.get("harness-reasoning-97")
         self.assertIsNotNone(spec)
         self.assertEqual(spec.max_iterations, 3)
+
+    def test_loop_spec_is_restored_after_registry_state_reset(self):
+        """Isolamento de outro teste não pode apagar o contrato do harness."""
+        from integrations.harness.universal_reasoning_loop import UniversalReasoningLoop
+        from sdd.loop_spec import loop_spec_registry
+
+        snapshot = dict(loop_spec_registry.loops)
+        try:
+            loop_spec_registry.loops = {}
+            UniversalReasoningLoop()
+            spec = loop_spec_registry.get("harness-reasoning-97")
+            self.assertIsNotNone(spec)
+            self.assertEqual(spec.max_iterations, 3)
+        finally:
+            loop_spec_registry.loops = snapshot
 
 
 class TestR435OrchestratorUniversal(unittest.TestCase):
@@ -217,16 +275,6 @@ class TestR435OrchestratorUniversal(unittest.TestCase):
         )
         self.assertTrue(out["achieved_target"])
         self.assertGreaterEqual(out["best"]["grade"]["score"], 6)
-        # cleanup
-        try:
-            orch.harness.pool.scale(0)
-            from mci.blackboard import blackboard
-
-            for wid in list(blackboard.registry.keys()):
-                if wid.startswith(("harness-worker-", "dsh-worker-")):
-                    del blackboard.registry[wid]
-        except Exception:
-            pass
 
     def test_deepseek_compat_still_works(self):
         from marceloclaro.orchestrator import MarceloClaroOrchestrator

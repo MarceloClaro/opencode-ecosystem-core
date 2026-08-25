@@ -49,19 +49,24 @@ class TestOpenCodeAlphaProofDeepThinkR443(unittest.TestCase):
         self.assertIn("\\item", res["latex_proof_block"])
 
     def test_alphaproof_inductive_tactic(self):
-        """Valida a aplicação da tática de indução matemática na árvore."""
+        """Esboço indutivo não fecha uma meta sem caso base e passo verificados."""
         goal = "A soma dos primeiros n cubos e igual a (n*(n+1)/2)^2"
         res = self.alphaproof.search_proof(goal, max_depth=3)
-        self.assertTrue(res["is_proven"])
-        self.assertGreaterEqual(res["confidence_score"], 0.90)
-        self.assertIn("MathematicalInduction", res["tactics_applied"])
+        obligations = self.alphaproof.apply_tactic_induction(goal)
+
+        self.assertFalse(res["is_proven"])
+        self.assertEqual(res["proof_status"], "unproven")
+        self.assertTrue(all(confidence == 0.0 for _, _, confidence in obligations))
 
     def test_alphaproof_contradiction_tactic(self):
-        """Valida a aplicação de redução ao absurdo."""
+        """Redução ao absurdo sem contradição verificável permanece pendente."""
         goal = "Nao existem inteiros positivos x, y tais que 4*x**2 - y**2 = 1"
         res = self.alphaproof.search_proof(goal, max_depth=2)
-        self.assertTrue(res["is_proven"])
-        self.assertIn("ReductioAdAbsurdum", res["tactics_applied"])
+        obligation = self.alphaproof.apply_tactic_contradiction(goal)
+
+        self.assertFalse(res["is_proven"])
+        self.assertEqual(res["proof_status"], "unproven")
+        self.assertEqual(obligation[2], 0.0)
 
     def test_deep_think_trajectory_expansion(self):
         """Valida a expansão concorrente de trajetórias de raciocínio profundo com compute budget."""
@@ -110,7 +115,8 @@ class TestOpenCodeAlphaProofDeepThinkR443(unittest.TestCase):
         self.assertIn("best_trajectory", dt_res)
 
         ap_res = self.orchestrator.alphaproof_search("exp(x) > 0 para todo x real")
-        self.assertTrue(ap_res["is_proven"])
+        self.assertFalse(ap_res["is_proven"])
+        self.assertEqual(ap_res["proof_status"], "unproven")
 
         conj_res = self.orchestrator.solve_open_conjecture("erdos", params={"c": 1})
         self.assertEqual(conj_res["status"], "proven_irrational")

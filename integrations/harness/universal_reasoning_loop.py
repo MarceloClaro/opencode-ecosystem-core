@@ -39,12 +39,23 @@ try:
             "task_type/provider/model propagados a cada iteração.",
         ],
     )
-    try:
-        loop_spec_registry.register(_LOOP_SPEC_UNIV)
-    except Exception:
-        pass
 except Exception:
     _LOOP_SPEC_UNIV = None
+
+
+def _ensure_loop_spec_registered() -> None:
+    """Reinsere o contrato após isolamento que tenha limpado o singleton."""
+    if _LOOP_SPEC_UNIV is None:
+        return
+    try:
+        if loop_spec_registry.get(_LOOP_SPEC_UNIV.name) is None:
+            loop_spec_registry.register(_LOOP_SPEC_UNIV)
+    except Exception:
+        # O loop continua opcional quando a infraestrutura SDD não está carregada.
+        pass
+
+
+_ensure_loop_spec_registered()
 
 
 class UniversalReasoningLoop:
@@ -54,6 +65,7 @@ class UniversalReasoningLoop:
     GRADE_CUTOFF = 6
 
     def __init__(self, bridge: Any | None = None, metabus: Any | None = None, max_iters: int = 3, target: float = TARGET_DEFAULT):
+        _ensure_loop_spec_registered()
         self.target = float(target)
         self.max_iters = int(max_iters)
         if metabus is not None:

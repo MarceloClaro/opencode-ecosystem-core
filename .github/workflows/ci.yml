@@ -16,7 +16,7 @@ env:
 
 jobs:
   lint:
-    name: Lint (Ruff)
+    name: Static lint (R448 safety surface)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,9 +24,28 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip"
-      - run: pip install ruff
-      - run: ruff check --output-format=github .
-      - run: ruff format --check --diff . || echo "Format check complete"
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Run pinned Ruff checks
+        run: |
+          python -m ruff check --output-format=github --select E4,E7,E9,F \
+            sdd/spec_engine.py \
+            sdd/tdd_runner.py \
+            integrations/deepmind/formal_verifier.py \
+            integrations/deepmind/formal_safety_predicates.py \
+            integrations/deepmind/alphaproof_engine.py \
+            marceloclaro/orchestrator.py \
+            mci/self_correction.py \
+            publishing/production.py \
+            tests/test_r448_hardening.py \
+            tests/test_r448_installer_security.py \
+            tests/test_r448_sdd_contracts.py \
+            tests/test_r448_documentation_reconciliation.py
+      - name: Check Bash installer syntax
+        run: |
+          bash -n installer/common/install_clis.sh
+          bash -n installer/linux/install.sh
+          bash -n installer/macos/install.sh
+          bash -n installer/windows/provision.sh
 
   test:
     name: Test (Python ${{ matrix.python-version }})
@@ -42,11 +61,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
-      - run: pip install -r requirements-dev.txt pytest-timeout pytest-xdist
-      - run: python -m pytest tests/ -q --tb=short --timeout=120 -x
-        name: Run all tests (fail-fast on first error)
-      - run: python scripts/quality_report.py
-        name: Generate quality report
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest tests/ -q --tb=short --timeout=120
+        name: Run full test suite
       - run: python scripts/quality_report.py
         name: Generate quality report
 

@@ -14,11 +14,10 @@ Implementa:
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-from integrations.deepmind.formal_verifier import FormalProofVerifier, FormalVerificationResult
+from integrations.deepmind.formal_verifier import FormalProofVerifier
 
 
 @dataclass
@@ -72,16 +71,21 @@ class AletheiaLatexFormatter:
 
     @staticmethod
     def render_latex(title: str, main_theorem: str, lemmas: List[AletheiaLemma],
-                     proof_steps: List[Dict[str, str]], author: str = "OpenCode Core & Aletheia Engine") -> str:
-        """Gera um arquivo LaTeX autocontido com pacotes amsmath e amsthm."""
+                      proof_steps: List[Dict[str, str]], author: str = "OpenCode Core & Aletheia Engine") -> str:
+        """Gera um documento LaTeX que distingue esboços de provas verificadas."""
         lemmas_latex = ""
         for l in lemmas:
+            verification_status = (
+                "Verificado por uma evidência formal associada."
+                if l.verified
+                else "Pendente de verificação formal; esta estratégia não constitui demonstração."
+            )
             lemmas_latex += f"""
 \\begin{{lemma}}\\label{{{l.latex_label or l.lemma_id}}}
 {l.statement}
 \\end{{lemma}}
 \\begin{{proof}}
-{l.proof_strategy}
+\\textit{{Status:}} {verification_status} {l.proof_strategy}
 \\end{{proof}}
 """
 
@@ -90,6 +94,16 @@ class AletheiaLatexFormatter:
             stmt = s.get("statement", "")
             just = s.get("justification", "")
             steps_latex += f"\\item \\textbf{{Passo {i}:}} {stmt} \\\\ \\textit{{Justificativa:}} {just}\n"
+
+        all_lemmas_verified = bool(lemmas) and all(lemma.verified for lemma in lemmas)
+        proof_conclusion = (
+            "As evidências formais associadas aos lemas permitem a conclusão indicada."
+            if all_lemmas_verified
+            else (
+                "A demonstração formal permanece pendente: os lemas abaixo são obrigações "
+                "de prova e nenhuma conclusão é inferida deste scaffold."
+            )
+        )
 
         latex_source = f"""\\documentclass{{article}}
 \\usepackage{{geometry}}
@@ -114,30 +128,30 @@ class AletheiaLatexFormatter:
 \\maketitle
 
 \\begin{{abstract}}
-This document presents a structured formal proof generated via the Aletheia reasoning scaffold, decomposing the primary claim into verifiable auxiliary lemmas and deductive steps.
+This document presents a proof-obligation scaffold. Generated statements are not formal proofs unless their verification status explicitly says so.
 \\end{{abstract}}
 
-\\section{{Main Theoretical Statement}}
-\\begin{{theorem}}\\label{{thm:main}}
+\\section{{Claim Under Analysis}}
+\\begin{{claim}}\\label{{thm:main}}
 {main_theorem}
-\\end{{theorem}}
+\\end{{claim}}
 
 \\section{{Auxiliary Lemmas}}
 {lemmas_latex}
 
-\\section{{Deductive Proof Pipeline}}
+\\section{{Proposed Verification Pipeline}}
 \\begin{{enumerate}}
 {steps_latex}
 \\end{{enumerate}}
 
-\\begin{{proof}}[Proof of Theorem \\ref{{thm:main}}]
-Combining the established auxiliary lemmas and deductive verification steps, the main result follows by structural synthesis.
+\\begin{{proof}}[Verification status of Claim \\ref{{thm:main}}]
+{proof_conclusion}
 \\qed
 \\end{{proof}}
 
 \\section{{Epistemic Confidence and Verification}}
 \\begin{{remark}}
-Formal verification of all symbolic identities was processed through deterministic engines (SymPy/Z3) with no halluncinated intermediate steps.
+The scaffold records candidate lemmas and proof obligations. It does not assert formal verification for a statement without a successful, associated check.
 \\end{{remark}}
 
 \\end{{document}}
@@ -153,33 +167,39 @@ class AletheiaHypothesisEngine:
         self.formatter = AletheiaLatexFormatter()
 
     def decompose(self, claim: str, domain: str = "general") -> AletheiaDecomposition:
-        """Decompõe uma alegação científica em lemas, passos de prova e testes de borda."""
+        """Decompõe uma alegação em obrigações de prova sem alegar certificação."""
         clean_claim = claim.strip()
 
         # 1. Formalização da alegação
-        formalized = f"Seja o sistema científico sob análise. Afirma-se formalmente que: {clean_claim}"
+        formalized = f"Proposição candidata sob análise: {clean_claim}"
 
         # 2. Geração determinística de Lemas fundamentais
         lemmas = [
             AletheiaLemma(
                 lemma_id="lemma_1_invariance",
                 statement=f"Para todas as condições iniciais do domínio, a invariante fundamental de {clean_claim[:60]} é preservada.",
-                proof_strategy="Demonstrado por indução estrutural e conservação de operadores.",
-                verified=True,
+                proof_strategy=(
+                    "Estratégia proposta: formalizar operadores e verificar caso base e passo "
+                    "indutivo antes de aceitar o lema."
+                ),
                 latex_label="lem:invariance",
             ),
             AletheiaLemma(
                 lemma_id="lemma_2_convergence",
                 statement=f"A taxa de convergência e consistência assintótica do processo é estritamente não-divergente.",
-                proof_strategy="Demonstrado por limitação superior via sequências monótonas.",
-                verified=True,
+                proof_strategy=(
+                    "Estratégia proposta: explicitar as hipóteses e provar a limitação superior "
+                    "antes de aceitar o lema."
+                ),
                 latex_label="lem:convergence",
             ),
             AletheiaLemma(
                 lemma_id="lemma_3_soundness",
                 statement="A conclusão dedutiva decorre unicamente das premissas sem introdução de axiomas ocultos.",
-                proof_strategy="Verificação de completude lógica via cálculo de predicados.",
-                verified=True,
+                proof_strategy=(
+                    "Estratégia proposta: fornecer premissas e derivação em um cálculo formal "
+                    "antes de aceitar o lema."
+                ),
                 latex_label="lem:soundness",
             ),
         ]
@@ -187,25 +207,31 @@ class AletheiaHypothesisEngine:
         # 3. Passos ordenados de dedução
         proof_steps = [
             {
-                "statement": "Definição do espaço amostral e operadores de transição",
-                "justification": "Axiomática fundamental do domínio",
+                "statement": "Obrigação: definir o espaço amostral e os operadores de transição",
+                "justification": "Axiomática do domínio ainda deve ser formalizada",
             },
             {
-                "statement": "Aplicação do Lema 1 (Invariância estrutural)",
-                "justification": "Garante estabilidade nas transformações intermediárias",
+                "statement": "Obrigação: provar o Lema 1 (invariância estrutural)",
+                "justification": "A estratégia proposta ainda não é uma derivação verificável",
             },
             {
-                "statement": "Aplicação do Lema 2 (Convergência e limitação)",
-                "justification": "Elimina estados assintóticos divergentes",
+                "statement": "Obrigação: provar o Lema 2 (convergência e limitação)",
+                "justification": "A estratégia proposta ainda não é uma derivação verificável",
             },
             {
-                "statement": "Síntese pelo Lema 3 (Completude e soundess)",
-                "justification": "Fechamento lógico da proposição principal",
+                "statement": "Obrigação: provar o Lema 3 e a síntese da proposição principal",
+                "justification": "O fechamento lógico permanece pendente de prova formal",
             },
         ]
 
         # 4. Verificação Formal Simbólica
         verif_result = self.verifier.verify_proof_steps(clean_claim, proof_steps)
+
+        # O scaffold não contém uma evidência individual que permita promover
+        # qualquer lema. Manter o estado explícito evita que texto gerado seja
+        # confundido com uma demonstração.
+        for lemma in lemmas:
+            lemma.verified = False
 
         # 5. Estratégias de falseamento popperiano
         falsification_tests = [
@@ -216,7 +242,7 @@ class AletheiaHypothesisEngine:
 
         # 6. Renderização LaTeX
         latex_doc = self.formatter.render_latex(
-            title=f"Aletheia Research Proof: {clean_claim[:50]}",
+            title=f"Aletheia Proof-Obligation Scaffold: {clean_claim[:50]}",
             main_theorem=formalized,
             lemmas=lemmas,
             proof_steps=proof_steps,

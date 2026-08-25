@@ -6,6 +6,7 @@ integridade SHA-256 via MANIFEST_SUBMISSAO.json.
 """
 import hashlib
 import json
+import os
 import zipfile
 from datetime import date
 from pathlib import Path
@@ -13,7 +14,8 @@ from pathlib import Path
 import pytest
 
 PAPER = Path(__file__).resolve().parent.parent / "academic" / "papers" / "arm_education_audit"
-ZIP = PAPER / "outputs" / "submission" / f"ARTIGO_RBEP_SUBMISSAO_submissao_{date.today().isoformat()}.zip"
+SUBMISSION_OUTPUT = PAPER / "outputs" / "submission"
+ZIP_ENV_VAR = "RBEP_SUBMISSION_ZIP"
 
 REQUERIDOS = [
     "01_manuscrito/ARTIGO_RBEP_SUBMISSAO.docx",
@@ -26,16 +28,65 @@ REQUERIDOS = [
 ]
 
 
+def select_submission_zip(
+    output_dir: Path,
+    *,
+    zip_path: Path | None = None,
+    submission_date: date | None = None,
+) -> Path | None:
+    """Seleciona um artefato injetado ou a opção disponível de modo estável."""
+
+    if zip_path is not None:
+        return zip_path
+    if submission_date is not None:
+        return output_dir / (
+            "ARTIGO_RBEP_SUBMISSAO_submissao_"
+            f"{submission_date.isoformat()}.zip"
+        )
+    candidates = sorted(output_dir.glob("ARTIGO_RBEP_SUBMISSAO_submissao_*.zip"))
+    return candidates[-1] if candidates else None
+
+
+def test_selecao_zip_injetavel_e_deterministica(tmp_path: Path):
+    """O teste não depende da data corrente nem de um ZIP versionado no checkout."""
+
+    older = tmp_path / "ARTIGO_RBEP_SUBMISSAO_submissao_2026-01-01.zip"
+    newer = tmp_path / "ARTIGO_RBEP_SUBMISSAO_submissao_2026-02-01.zip"
+    injected = tmp_path / "artefato-injetado.zip"
+    older.touch()
+    newer.touch()
+
+    assert select_submission_zip(tmp_path) == newer
+    assert select_submission_zip(
+        tmp_path,
+        submission_date=date(2026, 1, 1),
+    ) == older
+    assert select_submission_zip(tmp_path, zip_path=injected) == injected
+
+
 @pytest.fixture(scope="module")
-def zf():
-    if not ZIP.exists():
-        pytest.skip(f"pacote não gerado: {ZIP}")
-    with zipfile.ZipFile(ZIP) as f:
+def submission_zip() -> Path:
+    """Entrega o ZIP opcional configurado ou pula explicitamente a validação."""
+
+    configured_path = os.environ.get(ZIP_ENV_VAR)
+    injected_path = Path(configured_path).expanduser() if configured_path else None
+    selected = select_submission_zip(SUBMISSION_OUTPUT, zip_path=injected_path)
+    if selected is None or not selected.is_file():
+        pytest.skip(
+            "artefato opcional de submissão ausente; "
+            f"defina {ZIP_ENV_VAR} para validar um ZIP específico"
+        )
+    return selected
+
+
+@pytest.fixture(scope="module")
+def zf(submission_zip: Path):
+    with zipfile.ZipFile(submission_zip) as f:
         yield f
 
 
-def test_pacote_existe():
-    assert ZIP.exists(), "pacote ZIP de submissão ausente"
+def test_pacote_existe(submission_zip: Path):
+    assert submission_zip.is_file(), "pacote ZIP de submissão ausente"
 
 
 def test_estrutura_obrigatoria(zf):

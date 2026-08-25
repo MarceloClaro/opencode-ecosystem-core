@@ -1,5 +1,25 @@
-mcp>=1.0.0
-httpx>=0.27.0
-click>=8.1.7
-prompt-toolkit>=3.0.43
-pytest>=7.0.0
+# Dependências de runtime carregadas pela CLI/orquestrador e seus imports eager.
+# Integrações sob demanda permanecem fora deste manifesto mínimo.
+mcp==1.28.1
+httpx==0.28.1
+click==8.4.2
+prompt-toolkit==3.0.52
+PyYAML==6.0.3
+jsonschema==4.26.0
+Whoosh==2.7.4
+Jinja2==3.1.6
+# Mantém a matriz Python 3.10–3.14 da CI com wheels compatíveis por faixa.
+numpy==2.2.6 ; python_version < "3.12"
+numpy==2.5.1 ; python_version >= "3.12"
+scikit-learn==1.7.2 ; python_version < "3.12"
+scikit-learn==1.9.0 ; python_version >= "3.12"
+# Pins explícitos eliminam o conflito observado entre MCP e Starlette na .venv.
+starlette==0.49.1
+sse-starlette==3.4.6
+# Motores formais carregados em runtime por integrations.deepmind.formal_verifier.
+sympy==1.14.0
+z3-solver==4.16.0.0
+# Leitura e validação de pacotes DOCX de submissão.
+python-docx==1.2.0
+# Coleta online WDI; o módulo mantém o caminho offline livre desta importação.
+requests==2.32.5

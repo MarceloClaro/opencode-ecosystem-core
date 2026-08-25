@@ -143,14 +143,16 @@ theorem sample_sum (x : Real) : x + 0 = x := by
         cv_res = self.orchestrator.cross_validate_reasoning("Para x real x + 0 = x", form_res["lean_code"])
         self.assertTrue(cv_res["is_aligned"])
 
-    def test_doctor_check_18_geometry(self):
-        """Valida que o 18º check do doctor passa e que o total de checks é 18."""
+    def test_doctor_check_geometry(self):
+        """Valida o check de geometria sem acoplar ao total evolutivo do doctor."""
         check = _check_geometry_autoformalization_engine()
         self.assertEqual(check.status, "pass")
         self.assertIn("AlphaGeometry & Auto-Formalizer ativos", check.detail)
 
         doc_report = run_doctor()
-        self.assertEqual(doc_report["checks_total"], 18)
+        check_names = [item["name"] for item in doc_report["checks"]]
+        self.assertIn("geometry_autoformalization_engine", check_names)
+        self.assertEqual(doc_report["checks_total"], len(doc_report["checks"]))
         self.assertEqual(doc_report["checks_failed"], 0)
 
 

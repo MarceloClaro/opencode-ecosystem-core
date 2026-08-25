@@ -17,10 +17,10 @@ import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 from urllib.parse import urlencode
 
 import pandas as pd
-import requests
 
 AUDIT_DIR = Path(__file__).resolve().parents[1]
 RAW_DIR = AUDIT_DIR / "data" / "raw"
@@ -62,7 +62,7 @@ def _indicator_url(indicator: str) -> str:
     return f"{BASE_URL}country/{';'.join(COUNTRIES)}/indicator/{indicator}?{params}"
 
 
-def fetch_indicator(indicator: str, session: requests.Session) -> dict:
+def fetch_indicator(indicator: str, session: Any) -> dict:
     """Baixa um indicador e devolve registro de cache com resposta bruta."""
     url = _indicator_url(indicator)
     resp = session.get(url, timeout=60)
@@ -159,6 +159,10 @@ def main() -> None:
     if args.offline:
         manifest, _ = load_cached_raw()
     else:
+        # A reconstrução offline não deve exigir a biblioteca HTTP nem rede;
+        # a dependência é carregada somente no caminho de coleta online.
+        import requests
+
         session = requests.Session()
         existing = {}
         if MANIFEST_PATH.exists():

@@ -1,5 +1,10 @@
 # Dependências adicionais para testes e empacotamento local/CI.
 -r requirements.txt
-build>=1.2.2
-setuptools>=75.0
-wheel>=0.44
+pytest==9.1.1
+pytest-timeout==2.4.0
+pytest-xdist==3.8.0
+ruff==0.16.4
+mutmut==3.7.0
+build==1.5.0
+setuptools==83.0.0
+wheel==0.47.0

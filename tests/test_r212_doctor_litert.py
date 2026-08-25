@@ -38,6 +38,15 @@ _OTHER_DOCTOR_CHECKS = (
     ("_check_colibri", "colibri"),
     ("_check_llm_reduction_metrics", "llm_reduction_metrics"),
     ("_check_episteme_coverage", "episteme_coverage"),
+    # Checks posteriores também devem permanecer doubles: este contrato valida
+    # exclusivamente a agregação do LiteRT, sem I/O ou efeitos de subsistemas.
+    ("_check_apm_integration", "apm_integration"),
+    ("_check_free_model_amplification", "free_model_amplification"),
+    ("_check_deepmind_superhuman_reasoning", "deepmind_superhuman_reasoning"),
+    ("_check_opencode_deepthink_alphaproof", "opencode_deepthink_alphaproof"),
+    ("_check_lean4_egraph_engine", "lean4_egraph_engine"),
+    ("_check_geometry_autoformalization_engine", "geometry_autoformalization_engine"),
+    ("_check_clinical_game_theory_engine", "clinical_game_theory_engine"),
 )
 
 _AFFIRMATIVE_INFERENCE_CLAIMS = (
@@ -192,8 +201,8 @@ def test_check_litert_lm_indisponivel_redige_segredos_do_erro_do_supervisor(
 
     # Arrange: injeta canários somente na exceção do supervisor mockado.
     secret_values = (
-        "sk-ca9-nao-expor-7f4c91",
-        "ghp_CA9NaoExporToken8821",
+        "test-canary-openai-ca9",
+        "test-canary-github-ca9",
         "senha-ca9-nao-expor-4402",
     )
     unsafe_error = RuntimeError(

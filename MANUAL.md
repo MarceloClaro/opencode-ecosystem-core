@@ -1,123 +1,145 @@
 # Manual do OpenCode Ecosystem Core
 
-Este é o manual em linguagem simples. Para arquitetura técnica detalhada, veja [`ARCHITECTURE.md`](ARCHITECTURE.md). Para instalar, veja [`installer/README.md`](installer/README.md). Para ver como tudo se encaixa visualmente, abra o **[mapa interativo 3D da arquitetura](docs/architecture_map.html)** — tem um alternador Leigo/PhD no topo.
+Este manual descreve a interface disponível no checkout atual. Para arquitetura
+técnica, consulte [ARCHITECTURE.md](ARCHITECTURE.md); para procedência e
+instalação local, consulte [installer/README.md](installer/README.md).
 
-## O que é isso, em uma frase
+> Os comandos produzem saídas operacionais locais. Elas não constituem
+> certificação externa, garantia de resultado ou aconselhamento profissional.
 
-Um sistema de agentes de software especializados (pesquisa, revisão, escrita acadêmica, raciocínio, etc.) coordenados por um orquestrador central chamado **marceloclaro**, que decide qual agente faz cada tarefa e aprende com os resultados ao longo do tempo.
+## Estado estrutural
+
+Na configuração consultada em **2026-08-23**, `doctor` relacionava **19 checks**,
+e `opencode.json` continha **6 MCPs** e **209 agentes**. Execute os
+comandos abaixo no seu checkout para confirmar o estado presente:
+
+```bash
+python3 -m marceloclaro.cli doctor
+python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); print(len(c.get('mcp', {})), len(c.get('agent', {})))"
+```
+
+O diagnóstico pode retornar avisos ou falhas conforme as dependências locais.
+Não use esta contagem como indicador de cobertura, qualidade ou validação
+externa.
 
 ## Como começar
-
-Depois de instalado (veja [`installer/README.md`](installer/README.md)):
 
 ```bash
 python3 -m marceloclaro.cli
 ```
 
-Isso abre um menu interativo. Se preferir comandos diretos, sem menu:
+Esse comando abre o menu interativo. Para evitar confusão entre a interface e
+funções internas, o menu possui uma única opção `[10]`: a apresentação MIRA.
 
-```bash
-python3 -m marceloclaro.cli status      # foto geral do sistema
-python3 -m marceloclaro.cli doctor      # está tudo saudável? (18 checks rápidos)
-python3 -m marceloclaro.cli helpdesk    # o que está errado E como corrigir
-python3 -m marceloclaro.cli ajuda       # este resumo, no terminal
-python3 -m marceloclaro.cli pesquisa "seu tema aqui"   # pesquisa científica (11 fontes)
-python3 -m marceloclaro.cli apresentacao pasta_da_producao  # deck MIRA
-python3 -m marceloclaro.cli apm audit   # auditoria de segurança e integridade APM (R440)
-python3 -m marceloclaro.cli amplify "sua pergunta" --model ox-alpha-free # raciocínio profundo em modelos free (R441)
-python3 -m marceloclaro.cli aletheia "sua conjectura ou teorema" # decomposição formal Aletheia & LaTeX (R442)
-python3 -m marceloclaro.cli deepthink "seu problema" --budget 3 # raciocínio profundo com Test-Time Compute (R443)
-python3 -m marceloclaro.cli alphaproof "seu teorema algébrico" # busca em árvore de provas formais (R443)
-python3 -m marceloclaro.cli erdos erdos --c 1 # demonstração de irracionalidade de séries de Erdős (R443)
-python3 -m marceloclaro.cli lean4 "seu arquivo.lean ou script" # verificação formal em Lean 4 / Mathlib (R444)
-python3 -m marceloclaro.cli egraph "(+ (* x 1) 0)" # saturação de igualdade e simplificação E-Graph (R444)
-python3 -m marceloclaro.cli geometry midpoint_theorem # resolução de geometria com Método de Wu e TikZ (R445)
-python3 -m marceloclaro.cli autoformalize "para todo x real x + 0 = x" # tradução informal para Lean 4 (R445)
-python3 -m marceloclaro.cli imobench --limit 4 # benchmark e grading formal DeepMind (R442)
-```
-
-## O menu, explicado sem jargão
-
-| Opção | O que faz | Em outras palavras |
-|---|---|---|
-| `[1]` Listar agentes | Mostra quem está disponível | Cada "agente" é uma especialidade (pesquisador, revisor, escritor acadêmico, auditor...) |
-| `[2]` Postar tarefa | Descreve um trabalho e o sistema escolhe quem faz | O "Blackboard" é um quadro de avisos onde os agentes se candidatam à tarefa que combina com suas habilidades |
-| `[3]` Reportar conclusão | Diz se um agente terminou com sucesso ou falhou | O sistema aprende: agentes que dão certo ganham mais confiança para tarefas futuras |
-| `[4]` Consultar memória | Mostra o que o sistema já aprendeu | A "memória metacognitiva" é compartilhada por todo o ecossistema, não presa a um agente só |
-| `[5]` Status geral | Uma foto completa: agentes, confiança, economia | Útil para ver "o que está acontecendo agora" |
-| `[6]` Doctor | Checagem rápida (segundos) de saúde | Inclui verificações de specs, ciclos, Colibri MoE e servidores MCP |
-| `[7]` Ajuda | Este resumo | — |
-| `[8]` Helpdesk | Doctor + sugestão do que fazer para cada problema | Ex.: "CLI X ausente → rode este comando para instalar" |
-| `[9]` Pesquisa científica | Busca um tema em 11 fontes acadêmicas, baixa PDFs, converte para Markdown e gera fichamento + resenha crítica em ABNT/APA | Agora com enriquecimento opcional do DataKnowledgeHub (16 fontes) com `use_data_hub=True` |
-| `[10]` Auditoria & Merkle Tree | Executa os 8 scanners, calcula a Merkle Root do código e emite certificado digital SHA-256 | Garante a integridade e o rigor científico imutável do ecossistema |
-| `[10]` Apresentação MIRA | Transforma `manuscrito.md` em deck HTML de cards de vidro animados | Esteira `extract → plan → copywrite → build → animate → validate`, com relatório de conformidade |
-
-## Comandos avançados (OpenCode CLI)
-
-Se você usa o OpenCode CLI, estes comandos customizados estão disponíveis:
-
-| Comando | O que faz | Ciclo |
-|---|---|---|
-| `/gametheory` | Executa teoria dos jogos local (Nash, Shapley, Pareto) sem LLM | R220 |
-| `/reduction` | Estatísticas da camada de redução de LLM | R220 |
-| `/templates` ou `/template` | Lista ou renderiza templates Jinja2 | R220 |
-| `/data` ou `/domains` | Consulta o DataKnowledgeHub (16 fontes) | R221 |
-| `/metrics` | Métricas de LLM calls saved, DataHub queries e saúde | R222 |
-
-## Perguntas frequentes
-
-**"Blackboard", "MetaBus", "Reflexion" — o que são?**
-São nomes técnicos internos. Na prática: o Blackboard é onde tarefas esperam um agente disponível; o MetaBus é a "memória compartilhada" de tudo que já aconteceu; Reflexion é o mecanismo que registra lições aprendidas depois de cada tarefa. Você não precisa entender os nomes para usar o menu — as opções acima já traduzem o que cada coisa faz.
-
-**O `doctor` disse "degraded". É grave?**
-Não necessariamente. "Degraded" significa que há avisos (`warn`), não falhas críticas (`fail`). Rode `[8] Helpdesk` para ver exatamente o que fazer em cada caso.
-
-**Preciso instalar OpenCode, Antigravity, Claude Code, Ollama E scihub-cli?**
-Não — todos são opcionais para o ecossistema em Python puro funcionar. Cada um serve a um uso diferente: OpenCode CLI expõe o catálogo de agentes como comandos de terminal; Antigravity permite delegar tarefas a um agente externo do Google; Claude Code é o assistente de desenvolvimento que já lê `CLAUDE.md`/`AGENTS.md` automaticamente neste projeto; Ollama roda modelos de linguagem localmente e de graça; `scihub-cli` (`pip install scihub-cli`) é usado pela opção `[9] Pesquisa científica` como último recurso para baixar PDFs de artigos pagos quando não há versão de acesso aberto — sem ele, a pesquisa continua funcionando normalmente, só não baixa esses PDFs específicos. O `doctor`/`helpdesk` avisa quando algum está faltando, mas nunca bloqueia o uso por causa disso.
-
-**Onde ficam os atalhos depois de instalar no Windows?**
-Na Área de Trabalho, com o ícone próprio do projeto: "OpenCode Ecosystem", "Antigravity CLI", "Claude Code (Ecosystem)" e "Ecosystem (marceloclaro)".
-
-**Quero desinstalar tudo.**
-Veja o instalador da sua plataforma em [`installer/README.md`](installer/README.md) — cada um tem um script de desinstalação correspondente (`Uninstall-OpenCodeEcosystem.ps1` no Windows, `uninstall.sh` no Linux/macOS). Ações destrutivas (como remover o WSL inteiro) sempre pedem confirmação explícita antes de executar.
-
-**As alegações do README/ARCHITECTURE são todas garantidas?**
-Não cegamente — veja [`CORRIGENDUM.md`](CORRIGENDUM.md), um documento público que lista alegações que precisavam de ressalva (ex.: "Score médio" é autoavaliação interna, não benchmark externo).
-
-## Troubleshooting rápido
-
-| Sintoma | O que fazer |
+| Opção | O que faz |
 |---|---|
-| `doctor` mostra `opencode_config: fail` | Rode `python3 -m integrations.opencode_cli` para regenerar `opencode.json` |
-| `doctor` mostra `external_clis: warn` | Rode `python3 -m marceloclaro.cli helpdesk` — ele mostra o comando exato de instalação de cada CLI ausente |
-| `doctor` mostra `evolution_registry: fail` | Pare antes de gravar novos ciclos; o histórico pode estar incompleto — veja `evolution/cycles.json` manualmente |
-| Atalho de desktop não abre nada no Windows | Confirme que o WSL/Ubuntu está instalado (`wsl --status` no PowerShell) e rode o instalador novamente |
-| Import `MarceloClaroOrchestrator` falha | Rode `pip3 install -r requirements.txt` dentro da pasta do projeto |
+| `[1]` | Lista agentes registrados. |
+| `[2]` | Posta uma tarefa no Blackboard. |
+| `[3]` | Reporta a conclusão de uma tarefa. |
+| `[4]` | Consulta a memória metacognitiva. |
+| `[5]` | Mostra o status geral. |
+| `[6]` | Executa o doctor. |
+| `[7]` | Exibe Ajuda. |
+| `[8]` | Abre o helpdesk com orientações. |
+| `[9]` | Inicia pesquisa científica. |
+| `[10]` | Gera uma apresentação MIRA a partir de uma pasta com `manuscrito.md`. |
+| `[0]` | Encerra o menu. |
 
-Se nada disso resolver, `python3 -m marceloclaro.cli helpdesk` é sempre o primeiro passo — ele já roda todos os checks acima automaticamente.
+### O vocabulário do menu
 
-## Tradução cultural, roteamento por tipo de conhecimento e produção de obras (R363–R369)
+- **Blackboard**: fila compartilhada em que tarefas podem receber agentes.
+- **Memória metacognitiva**: registros de contexto e reflexões do ecossistema.
+- **doctor**: diagnóstico estrutural; os 19 checks não substituem inspeção do
+  ambiente nem avaliação externa.
+- **helpdesk**: leitura do diagnóstico com sugestões de próximos passos.
+- **Ajuda**: resumo embutido do próprio CLI.
 
-Em linguagem simples, o ecossistema agora também sabe:
+## Comandos diretos disponíveis
 
-1. **Escolher o agente certo pelo tipo de conhecimento** que a tarefa pede
-   (estatística? tradução literária? norma ABNT?). Isso é a "camada
-   epistêmica". Se ele não tiver certeza, não adivinha — segue como antes.
-2. **Vigiar traduções** de livros e artigos: um grafo de termos que só um
-   humano pode aprovar, um guarda da voz do autor (para o texto não perder o
-   sotaque e a força), e um verificador de retrotradução (traduz de volta e
-   confere números, nomes e negações). Nada disso "aprova" tradução — eles
-   apontam problemas e mandam para revisão humana.
-3. **Exigir honestidade científica**: se um texto diz "inédito" ou
-   "inovador" sem citar com quem está se comparando, o sistema marca a frase
-   e trava até um humano decidir.
-4. **Medir (sem julgar) a distintividade de textos literários**: repetições,
-   ritmo e clichês ("frio na espinha"...) são contados e mostrados — o
-   veredito de qualidade continua sendo humano.
-
-Comandos úteis:
+Os comandos abaixo correspondem a handlers presentes em
+`marceloclaro/cli.py`. Os exemplos mostram a forma canônica; aliases são
+aceitos apenas quando listados na tabela seguinte.
 
 ```bash
-python3 -m marceloclaro.cli doctor          # inclui o check episteme_coverage
-python3 scripts/benchmark_r367_cultural.py  # regenera o benchmark cultural medido
+python3 -m marceloclaro.cli status
+python3 -m marceloclaro.cli agents
+python3 -m marceloclaro.cli doctor
+python3 -m marceloclaro.cli helpdesk
+python3 -m marceloclaro.cli ajuda
+python3 -m marceloclaro.cli pesquisa "tema" --max-papers 8 --no-download
+python3 -m marceloclaro.cli apresentacao caminho/da/producao
+python3 -m marceloclaro.cli apm audit
+python3 -m marceloclaro.cli amplify "pergunta" --model ox-alpha-free
+python3 -m marceloclaro.cli aletheia "proposição" --domain math
+python3 -m marceloclaro.cli deepthink "problema" --budget 3
+python3 -m marceloclaro.cli alphaproof "meta"
+python3 -m marceloclaro.cli erdos erdos --c 1
+python3 -m marceloclaro.cli lean4 "código Lean ou caminho"
+python3 -m marceloclaro.cli egraph "(+ (* x 1) 0)"
+python3 -m marceloclaro.cli geometry midpoint_theorem
+python3 -m marceloclaro.cli autoformalize "para todo x real, x + 0 = x"
+python3 -m marceloclaro.cli shortcuts
+python3 -m marceloclaro.cli clinical "queixa" --mode professional_cds
 ```
+
+| Comando canônico | Aliases tratados pelo CLI | Observação |
+|---|---|---|
+| `pesquisa` | `research` | Exige um tema; `--no-download` evita tentativa de baixar PDFs. |
+| `apresentacao` | `present`, `mira` | A pasta deve conter `manuscrito.md`. |
+| `amplify` | `amplificar`, `dsh` | Aceita opções de modelo, tipo e iterações. |
+| `aletheia` | `prove`, `decompor` | Decompõe uma proposição; examine o estado retornado. |
+| `deepthink` | `think` | Aceita orçamento e domínio. |
+| `alphaproof` | `prover` | O resultado deve ser interpretado conforme o campo de estado retornado. |
+| `erdos` | `conjecture`, `hirzebruch` | Aceita parâmetros compatíveis com o tipo selecionado. |
+| `lean4` | `lean` | Recebe texto Lean ou caminho de arquivo local. |
+| `egraph` | `saturate`, `egg` | Recebe expressão S-expression. |
+| `geometry` | `alphageometry`, `wu` | Usa `midpoint_theorem` quando o tipo não é informado. |
+| `autoformalize` | `formalize`, `crossval` | Recebe enunciado informal. |
+| `shortcuts` | `atalhos` | Solicita a criação de atalhos pela rotina local. |
+| `clinical` | `medico`, `anamnese` | Demonstra uma rotina de apoio; não substitui profissional habilitado. |
+
+`apm` aceita os subcomandos `init`, `install`, `compile`, `audit`, `pack` e
+`list`. Para ver o resumo nativo de uso, execute
+`python3 -m marceloclaro.cli ajuda`.
+
+## Fluxos usuais
+
+### Diagnosticar o ambiente
+
+```bash
+python3 -m marceloclaro.cli doctor
+python3 -m marceloclaro.cli helpdesk
+```
+
+O primeiro mostra o estado dos checks; o segundo organiza sugestões. Se o
+resultado for `degraded`, leia a lista de avisos antes de modificar o ambiente.
+
+### Fazer uma pesquisa sem baixar arquivos
+
+```bash
+python3 -m marceloclaro.cli pesquisa "governança de IA" --max-papers 5 --no-download
+```
+
+Fontes, disponibilidade de rede e resultados variam. Examine o manifesto
+retornado antes de reutilizar uma referência.
+
+### Gerar uma apresentação MIRA
+
+```bash
+python3 -m marceloclaro.cli apresentacao caminho/da/producao
+```
+
+O pipeline MIRA percorre `extract`, `plan`, `copywrite`, `build`, `animate` e
+`validate`. A etapa final registra conformidade do artefato segundo regras
+internas; não avalia externamente o mérito científico do manuscrito.
+
+## Limites e solução de problemas
+
+| Situação | Ação inicial |
+|---|---|
+| `doctor` aponta configuração inválida | Rode `python3 -m integrations.opencode_cli` somente após revisar as alterações esperadas em `opencode.json`. |
+| CLI externa ausente | Use `helpdesk` e siga o procedimento local e versionado em `installer/README.md`. |
+| Checkout não corresponde à revisão desejada | Pare e confira `git rev-parse HEAD` contra o commit Git informado pelo manifesto da versão. |
+| Instalação de dependências falha | Recrie o ambiente virtual e use os manifestos de requisitos presentes no checkout revisado. |
+
+Para alegações históricas e ressalvas, consulte [CORRIGENDUM.md](CORRIGENDUM.md).
