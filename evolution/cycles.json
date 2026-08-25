@@ -5004,6 +5004,22 @@
         "Evidência local emitida no mesmo processo bloqueia autoatestado por payload, porém não deve ser descrita como sandbox ou validação externa."
       ],
       "timestamp": 1787692800.0
+    },
+    {
+      "round_id": "R455",
+      "objective": "README com snapshot histórico preservado, diagrama operacional atual e riqueza multiárea restaurada.",
+      "changes": [
+        "README.md: separação explícita entre visão resumida, snapshot histórico e diagrama operacional atual.",
+        "README.md: restauração de fluxos multiárea do checkout atual (acadêmico, formal, jurídico, clínico, MIRA, RAG, Universidade Sintética, runtimes locais e quality gates).",
+        "ARCHITECTURE.md: alinhamento com o diagrama operacional atual e tabela resumida de domínios multiárea.",
+        "VALIDATION_R455.md e testes documentais R455 adicionados para sustentar a atualização."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Um README conservador não precisa ser pobre: é possível preservar riqueza arquitetural separando snapshot histórico, panorama multiárea e diagrama operacional atual.",
+        "A documentação principal deve refletir a complexidade do ecossistema sem confundir mapa conceitual com inventário exaustivo do runtime."
+      ],
+      "timestamp": 1787696400.0
     }
   ]
 }

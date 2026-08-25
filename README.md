@@ -149,6 +149,10 @@ encontradas em evidência já revisada.
 
 ## Arquitetura resumida
 
+Esta seção combina três camadas de leitura: uma **visão resumida** do fluxo,
+um **snapshot histórico** preservado por valor documental e um **diagrama
+operacional atual** de alto nível para o runtime observável neste checkout.
+
 ### Fluxograma Intuitivo
 
 ```mermaid
@@ -202,29 +206,176 @@ flowchart LR
 
 ### Mapa da Arquitetura Completa (v3.9.0)
 
-Este mapa é um **snapshot histórico** de nomenclatura documental; não é um
-inventário do checkout, dos agentes ativos ou de serviços disponíveis hoje.
+Este mapa é um **snapshot histórico** de nomenclatura documental; não é um inventário do checkout, dos agentes ativos ou de serviços disponíveis hoje.
 
 ```mermaid
 flowchart TB
-    subgraph Core [Core Subsystems]
-        CLI2[CLI]
-        ORQ2[Orquestrador]
-        REG[Registro de specs]
-        MEM2[Memória compartilhada]
+    USERH[Pessoa ou automação] --> CLI2[CLI / integrações]
+    CLI2 --> ORQ2[Orquestrador]
+
+    subgraph SDDH [SDD / TDD]
+        REG[SpecRegistry]
+        VERH[SpecVerifier]
+        TDDH[TDDRunner]
     end
-    subgraph Presentation [Presentation]
+
+    subgraph MCIH [Metacognição]
+        MEM2[MetaBus]
+        BBH[Blackboard]
+        EPH[Memória compartilhada]
+    end
+
+    subgraph ACADH [Fluxo acadêmico]
+        EVOH[EvoSci]
+        DEEPH[Deep Research]
+        REVH[Peer Review]
+        REVISAH[Revision]
+        PAPERH[Paper Composer]
+    end
+
+    subgraph FORMH [Formal e raciocínio]
+        FVERH[FormalVerifier]
+        APROOFH[AlphaProof]
+        ALETHH[Aletheia]
+        DTHINKH[Deep Think]
+        AUTOFH[AutoFormalizer]
+        GEOH[AlphaGeometry]
+        LEANH[Lean4 / E-Graph]
+    end
+
+    subgraph DOMAINSH [Domínios e produtos]
+        RAGH[Scientific RAG]
+        LEGH[Jurídico]
+        CLINH[Clínico]
+        SYNTHH[Universidade Sintética]
+    end
+
+    subgraph PRESENTH [Apresentações]
         PIPE[MiraDeckPipeline]
         ENGINE[MiraEngine]
         PRES[mira-presenter]
     end
-    CLI2 --> ORQ2
-    ORQ2 --> REG
-    ORQ2 --> MEM2
-    ORQ2 --> PIPE
-    PIPE --> ENGINE
-    ENGINE --> PRES
+
+    subgraph RUNTIMEH [Runtime local e integração]
+        MCPH[6 MCPs]
+        AGH[209 agentes]
+        LITERTH[LiteRT-LM]
+        COLH[Colibri / OLMoE]
+    end
+
+    subgraph QUALH [Qualidade e integridade]
+        INSTH[Instaladores]
+        MERKLEH[MerkleIntegrityGuard]
+        QREPH[quality_report.py]
+        BENCHH[Benchmarks]
+    end
+
+    ORQ2 --> SDDH
+    ORQ2 --> MCIH
+    ORQ2 --> ACADH
+    ORQ2 --> FORMH
+    ORQ2 --> DOMAINSH
+    ORQ2 --> PRESENTH
+    ORQ2 --> RUNTIMEH
+    ORQ2 --> QUALH
+    MEM2 <--> BBH
+    MEM2 <--> EPH
+    EVOH --> DEEPH --> REVH --> REVISAH --> PAPERH
+    PIPE --> ENGINE --> PRES
 ```
+
+### Diagrama Operacional Atual
+
+Este diagrama resume o runtime observável de alto nível. Ele não substitui o
+inventário técnico detalhado de `ARCHITECTURE.md`, nem promete que todo serviço
+externo estará disponível em qualquer máquina.
+
+```mermaid
+flowchart TB
+    U2[Pessoa ou automação] --> CLIA[CLI marceloclaro]
+    CLIA --> ORQA[MarceloClaroOrchestrator]
+
+    ORQA --> ROUTER[AttentionRouter]
+    ORQA --> SPECS[SpecRegistry]
+    ORQA --> VERIFY[SpecVerifier]
+    ORQA --> TDDA[TDDRunner]
+    ORQA --> MBUSA[MetaBus]
+    ORQA --> BBA[Blackboard]
+    ORQA --> MCPS[6 MCPs configurados]
+    ORQA --> AGCFG[209 agentes configurados]
+    ORQA --> MIRAOP[mira-presenter]
+    ORQA --> ACADEM[Pipeline acadêmico agentivo]
+    ORQA --> FORMALOP[Prova e raciocínio formal]
+    ORQA --> LEGOP[Jurídico]
+    ORQA --> CLINOP[Clínico]
+    ORQA --> RAGOP[Scientific RAG]
+    ORQA --> SYNTHOP[Universidade Sintética]
+    ORQA --> LITOP[LiteRT-LM]
+    ORQA --> COLOP[Colibri / OLMoE]
+    ORQA --> QAOP[Integridade e quality gates]
+
+    SPECS --> VERIFY
+    TDDA --> VERIFY
+    MBUSA <--> BBA
+    ROUTER --> AGCFG
+    MIRAOP --> MIRAPIPE[MiraDeckPipeline]
+    MIRAPIPE --> MIRAENG[MiraEngine]
+```
+
+### Fluxos multiárea do checkout atual
+
+O README preserva abaixo um panorama mais rico do ecossistema, mas cada bloco
+continua sendo documentação técnica de alto nível — não prova de disponibilidade
+de todos os serviços, nem certificação do resultado produzido por cada área.
+
+```mermaid
+flowchart LR
+    ORQM[MarceloClaroOrchestrator] --> ACM[Pipeline acadêmico agentivo]
+    ORQM --> FRM[Prova, formalização e raciocínio]
+    ORQM --> JURM[Jurídico]
+    ORQM --> CLMM[Clínico]
+    ORQM --> MIRAM[MIRA]
+    ORQM --> RAGM[Scientific RAG]
+    ORQM --> SYNM[Universidade Sintética]
+    ORQM --> RTM[LiteRT-LM / Colibri]
+    ORQM --> QAM[Integridade / quality gates]
+
+    ACM --> EVOM[EvoSci → Deep Research → Peer Review → Revision → Paper Composer]
+    FRM --> DMM[FormalVerifier · AlphaProof · Aletheia · Deep Think · Lean4 · E-Graph]
+    JURM --> JDET[legal.integration · precedents · datajud_client · benchmarks]
+    CLMM --> CDET[clinical_game_theory · evidence_grounding · clinical_verifier]
+    MIRAM --> MDET[MiraDeckPipeline · MiraEngine · mira-presenter]
+    RAGM --> RDET[rag/scientific.py · rag/evolved.py · rag/enhanced_search_rag.py]
+    SYNM --> SDET[core · combinatorial_engine · evolutionary_memory · mcp_server]
+    RTM --> RDET2[litert_lm_provider · litert_lm_supervisor · colibri_provider]
+    QAM --> QDET[installer/* · MerkleIntegrityGuard · quality_report.py · benchmarks]
+```
+
+### Áreas e subsistemas preservados no README
+
+| Área | Principais módulos observáveis | Papel documentado |
+|---|---|---|
+| **Pipeline acadêmico agentivo** | `agentic_science_v2/orchestrator.py`, `deep_research.py`, `review_agent.py`, `revision_agent.py`, `paper_composer.py` | Encadeia descoberta, pesquisa, revisão, revisão de manuscrito e composição final. |
+| **Prova, formalização e raciocínio** | `integrations/deepmind/formal_verifier.py`, `alphaproof_engine.py`, `aletheia_scaffold.py`, `deep_think_engine.py`, `autoformalizer.py`, `geometry_engine.py`, `lean4_verifier.py`, `egraph_rewriter.py`, `erdos_hirzebruch_solver.py` | Reúne verificação formal, andaimagem de prova, autoformalização, geometria e motores simbólicos. |
+| **Jurídico** | `legal/integration.py`, `specializations.py`, `knowledge_base.py`, `precedents.py`, `datajud_client.py`, `benchmarks.py` | Oferece raciocínio jurídico, especializações, bases de conhecimento e benchmarks conservadores. |
+| **Clínico** | `integrations/medical/clinical_game_theory.py`, `clinical_verifier.py`, `evidence_grounding.py`, `clinical_orchestrator_bridge.py` | Organiza apoio clínico com grafos diagnósticos, grounding e verificações formais. |
+| **MIRA** | `illustrations/mira_deck.py`, `mira_engine.py`, `mira_agent.py`, `mermaid_engine.py`, `graphify_engine.py` | Gera decks, metáforas animadas e ilustrações a partir de pastas de produção. |
+| **Scientific RAG** | `rag/scientific.py`, `rag/evolved.py`, `rag/enhanced_search_rag.py` | Faz grounding científico, busca enriquecida e recuperação estruturada. |
+| **Universidade Sintética** | `synthetic_university/core.py`, `combinatorial_engine.py`, `evolutionary_memory.py`, `mcp_server.py`, `api_gateway.py` | Integra descoberta, avaliação, memória evolutiva e exposição de ferramentas. |
+| **Runtime local** | `integrations/litert_lm.py`, `litert_lm_provider.py`, `litert_lm_supervisor.py`, `integrations/colibri_provider.py`, `colibri/c/olmoe` | Disponibiliza inferência on-device e fallback local quando configurados. |
+| **Integridade e quality gates** | `installer/`, `benchmarks/merkle_integrity_guard.py`, `scripts/quality_report.py`, `benchmarks/scientific_reasoning/` | Reúne procedência, integridade, relatórios de qualidade e suites de benchmark locais. |
+
+### Como funciona a orquestração multiárea
+
+1. a entrada chega pela CLI ou por integrações configuradas;
+2. o `MarceloClaroOrchestrator` consulta memória e aplica `AttentionRouter`,
+   `MetaBus`, `Blackboard` e o gate SDD/TDD quando a tarefa exige spec;
+3. a execução pode seguir para uma ou mais áreas especializadas: pipeline
+   acadêmico agentivo, prova formal, jurídico, clínico, MIRA, Scientific RAG,
+   Universidade Sintética ou runtimes locais;
+4. quality gates, hashes, recibos de validação e benchmarks locais ajudam a
+   inspecionar artefatos e limites observados;
+5. a interpretação final continua sendo humana e dependente do domínio.
 
 ## Apresentações MIRA
 
