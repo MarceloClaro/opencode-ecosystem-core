@@ -57,7 +57,7 @@ def test_env_example_nao_contem_segredo():
 class TestDoctorLLMCheck:
     def test_pass_quando_openai_key_definida(self, monkeypatch):
         from marceloclaro import doctor as d
-        monkeypatch.setenv("OPENAI_API_KEY", "sk-fake-somente-para-teste-XYZ")
+        monkeypatch.setenv("OPENAI_API_KEY", "test-openai-key-r128")
         # sem Ollama, mas com a chave → pass
         monkeypatch.setattr(d, "_ollama_available", lambda: False, raising=False)
         check = d._check_llm_providers()
@@ -78,7 +78,7 @@ class TestDoctorLLMCheck:
 
     def test_detail_nunca_vaza_o_valor_da_chave(self, monkeypatch):
         from marceloclaro import doctor as d
-        segredo = "sk-super-secreto-nao-deve-aparecer-1234567890"
+        segredo = "test-secret-r128"
         monkeypatch.setenv("OPENAI_API_KEY", segredo)
         check = d._check_llm_providers()
         assert segredo not in check.detail

@@ -29,6 +29,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import platform as _platform
 import re
 import shutil
 import subprocess
@@ -45,7 +46,6 @@ TEMPLATES_DIR = os.path.join(_HERE, "templates")
 DEFAULT_OUTPUT_ROOT = os.path.join(_ROOT, "producao_cientifica")
 
 # ── Atalho na Área de Trabalho ──────────────────────────────────────────
-import platform as _platform
 
 def _is_wsl() -> bool:
     """Detecta se o processo roda no Windows Subsystem for Linux."""
@@ -278,9 +278,11 @@ class ScientificProduction:
         stamp = time.strftime("%Y%m%d-%H%M%S")
         self.slug = f"{_slugify(title)}-{stamp}"
         root = output_root or DEFAULT_OUTPUT_ROOT
-        
-        # Garante atalho na Área de Trabalho (criado uma única vez, inofensivo nas chamadas seguintes)
-        _ensure_desktop_shortcut(root)
+
+        # Um destino injetado é normalmente temporário (testes/automação) e
+        # não deve produzir efeitos externos, como atalho na Área de Trabalho.
+        if output_root is None:
+            _ensure_desktop_shortcut(root)
         
         self.folder = os.path.join(root, self.slug)
         self.latex_dir = os.path.join(self.folder, "latex")

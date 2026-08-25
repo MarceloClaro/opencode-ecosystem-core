@@ -4,6 +4,9 @@ Testes Unitários para a SPEC-935-R221: Self-Correction Engine
 """
 
 import unittest
+import tempfile
+from pathlib import Path
+
 from sdd.spec_engine import spec_registry, spec_verifier
 from mci.self_correction import SelfCorrectionEngine
 
@@ -11,7 +14,21 @@ from mci.self_correction import SelfCorrectionEngine
 class TestR221SelfCorrectionEngine(unittest.TestCase):
 
     def setUp(self):
-        self.engine = SelfCorrectionEngine()
+        self._temporary_dir = tempfile.TemporaryDirectory()
+        self.corrigendum_path = Path(self._temporary_dir.name) / "CORRIGENDUM.md"
+        self.corrigendum_path.write_text("# Corrigendum de teste\n", encoding="utf-8")
+        self.engine = SelfCorrectionEngine(corrigendum_path=self.corrigendum_path)
+
+    def tearDown(self):
+        self._temporary_dir.cleanup()
+
+    def test_corrigendum_path_injetavel(self):
+        """O registro de teste é dirigido ao destino temporário, nunca ao arquivo real."""
+        self.engine._append_to_corrigendum("SPEC-TEST", "registro isolado", 0.01)
+
+        content = self.corrigendum_path.read_text(encoding="utf-8")
+        self.assertEqual(self.engine.corrigendum_path, str(self.corrigendum_path))
+        self.assertIn("SPEC-TEST", content)
 
     def test_spec_r221_registered(self):
         spec = spec_registry.get("SPEC-935-R221")
@@ -35,6 +52,7 @@ class TestR221SelfCorrectionEngine(unittest.TestCase):
         self.assertTrue(result["success"])
         self.assertEqual(result["stage"], "applied")
         self.assertGreater(len(self.engine.get_correction_history()), 0)
+        self.assertIn("SPEC-935-R221", self.corrigendum_path.read_text(encoding="utf-8"))
 
     def test_correction_cycle_failed_fix(self):
         def failing_fix():

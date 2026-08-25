@@ -6,11 +6,21 @@ import os
 import shutil
 import sys
 import tempfile
+from pathlib import Path
 
 import pytest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
+
+
+@pytest.fixture(autouse=True)
+def _isolate_mirofish_state(monkeypatch, tmp_path):
+    """Evita que previsões de teste persistam em ``.mci_state`` do checkout."""
+
+    import mirofish.swarm as swarm_module
+
+    monkeypatch.setattr(swarm_module, "_STATE_DIR", str(tmp_path / "mirofish-state"))
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -166,7 +176,7 @@ class TestPublishing:
 # ─────────────────────────────────────────────────────────────────────
 
 class TestOrchestratorIntegration:
-    @pytest.fixture(scope="class")
+    @pytest.fixture()
     def orch(self):
         from marceloclaro.orchestrator import MarceloClaroOrchestrator
         return MarceloClaroOrchestrator(auto_load_agents=False)
@@ -183,10 +193,12 @@ class TestOrchestratorIntegration:
         r = orch.swarm_predict("O ecossistema passará nos testes?", signal=0.8)
         assert 0.0 <= r["final"] <= 1.0
 
-    def test_produce_scientific_work(self, orch, tmp_path):
+    def test_produce_scientific_work_uses_injected_output_root(self, orch, tmp_path):
         manifest = orch.produce_scientific_work(
-            "Artigo Integrado", "## Intro\n\nTexto, breve.\n", template="artigo"
+            "Artigo Integrado",
+            "## Intro\n\nTexto, breve.\n",
+            template="artigo",
+            output_root=str(tmp_path),
         )
         assert manifest["formats"]["md"] is not None
-        # limpeza: remove a pasta gerada no repositório
-        shutil.rmtree(os.path.dirname(manifest["folder"]), ignore_errors=True)
+        assert Path(manifest["folder"]).parent == tmp_path

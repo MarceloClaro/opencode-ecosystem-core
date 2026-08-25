@@ -5,21 +5,35 @@
 #   1. OpenCode Ecosystem        -> wsl.exe -d Ubuntu --cd ... opencode
 #   2. Antigravity CLI           -> wsl.exe -d Ubuntu --cd ... agy
 #   3. Claude Code CLI           -> wsl.exe -d Ubuntu --cd ... claude
-#   4. Ecosystem (marceloclaro)  -> wsl.exe -d Ubuntu --cd ... python3 -m marceloclaro.cli
+#   4. Ecosystem (marceloclaro)  -> wsl.exe -d Ubuntu --cd ... .venv/bin/python -m marceloclaro.cli
 # ============================================================================
 
 #Requires -Version 5.1
 
-$ErrorActionPreference = 'SilentlyContinue'
+$ErrorActionPreference = 'Stop'
 $Distro     = 'Ubuntu'
 $Desktop    = [Environment]::GetFolderPath('Desktop')
 $WShell     = New-Object -ComObject WScript.Shell
 
-# Detecta usuário default do WSL Ubuntu
+# Detecta usuário default do WSL Ubuntu sem inventar um fallback de usuário.
 $wslUser = (wsl.exe -d $Distro -- whoami 2>$null)
-if (-not $wslUser) { $wslUser = 'marceloclaro' } else { $wslUser = $wslUser.Trim() }
+if ($LASTEXITCODE -ne 0 -or -not $wslUser) {
+    Write-Error "Não foi possível identificar o usuário padrão de $Distro; atalhos não serão criados."
+    exit 1
+}
+$wslUser = $wslUser.Trim()
+if ($wslUser -notmatch '^[a-z_][a-z0-9_-]{0,31}$') {
+    Write-Error "O usuário WSL possui formato inseguro para compor atalhos; atalhos não serão criados."
+    exit 1
+}
 
 $EcoDir = "/home/$wslUser/opencode-ecosystem-core"
+$VenvPython = "$EcoDir/.venv/bin/python"
+wsl.exe -d $Distro -- bash -lc "test -x '$VenvPython'"
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "A virtualenv do ecossistema não está disponível; atalhos não serão criados."
+    exit 1
+}
 
 Write-Host "===================================================================" -ForegroundColor Cyan
 Write-Host "  Criando Atalhos do OpenCode Ecosystem Core no Windows" -ForegroundColor Cyan
@@ -52,6 +66,6 @@ function New-EcoShortcut ($Name, $Arguments, $Description, $Icon) {
 New-EcoShortcut 'OpenCode Ecosystem' "-d $Distro --cd $EcoDir -- bash -lic `"opencode`"" 'OpenCode CLI com 209 agentes nativos + 6 MCPs + APM' $IconTarget
 New-EcoShortcut 'Antigravity CLI' "-d $Distro --cd $EcoDir -- bash -lic `"agy`"" 'Google Antigravity CLI no ecossistema' $IconTarget
 New-EcoShortcut 'Claude Code CLI' "-d $Distro --cd $EcoDir -- bash -lic `"claude`"" 'Claude Code CLI no ecossistema' $IconTarget
-New-EcoShortcut 'Ecosystem (marceloclaro)' "-d $Distro --cd $EcoDir -- bash -lic `"python3 -m marceloclaro.cli`"" 'CLI interativo do orquestrador marceloclaro' "$env:SystemRoot\System32\cmd.exe,0"
+New-EcoShortcut 'Ecosystem (marceloclaro)' "-d $Distro --cd $EcoDir -- bash -lic `"$EcoDir/.venv/bin/python -m marceloclaro.cli`"" 'CLI interativo do orquestrador marceloclaro' "$env:SystemRoot\System32\cmd.exe,0"
 
 Write-Host "`n[SUCESSO] Os 4 atalhos foram criados na sua Area de Trabalho!" -ForegroundColor Green

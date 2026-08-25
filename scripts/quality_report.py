@@ -21,7 +21,9 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-PYTEST_TIMEOUT_SECONDS = 300
+# A suíte integral ultrapassa cinco minutos em ambientes limpos; o relatório
+# é um gate da CI e deve aguardar a mesma janela usada pelo executor SDD.
+PYTEST_TIMEOUT_SECONDS = 1200
 
 
 def _parse_pytest_counts(output: str) -> dict:
@@ -75,7 +77,7 @@ def check_lint() -> dict:
     """Verifica lint com Ruff (se instalado)."""
     try:
         result = subprocess.run(
-            ["ruff", "check", "--output-format=json", "."],
+            [sys.executable, "-m", "ruff", "check", "--output-format=json", "."],
             capture_output=True, text=True, timeout=30,
             cwd=str(REPO_ROOT)
         )
@@ -194,7 +196,7 @@ def main():
     if args.json:
         print(json.dumps(report, indent=2, default=str))
     else:
-        print(f"\nRELATORIO DE QUALIDADE")
+        print("\nRELATORIO DE QUALIDADE")
         print(f"  Status: {report['overall_status']}")
         print(f"  Score: {report['quality_score']['overall_score']}/10")
         print(f"  Testes: {report['test_results']['passed']}/{report['test_results']['total']}")

@@ -4875,6 +4875,135 @@
         "Toda hipotese, exame e conduta e ancorada em diretrizes clinicas de consenso internacional reais com DOIs, PMIDs e classificacao GRADE/Oxford."
       ],
       "timestamp": 1787491200.0
+    },
+    {
+      "round_id": "R447",
+      "objective": "Avaliação técnica auditável do OpenCode Ecosystem Core (SPEC-935-R447)",
+      "changes": [
+        "Adicionada SPEC-935-R447 de avaliação somente leitura, com critérios executáveis e contrato granular criterion-runtime-v1.",
+        "Adicionado recibo local VALIDATION_R447.md e ampliado o teste de rastreabilidade para ambiente, achados, limites e escopo somente leitura.",
+        "Registradas as recomendações e limites da auditoria que motivaram as remediações R448-R453, sem apresentar o ciclo como certificação externa."
+      ],
+      "score": 4.0,
+      "lessons": [
+        "Não confundir volume de testes ou checks internos com qualidade/certificação externa.",
+        "Falhas de soundness em verificadores formais devem bloquear alegações de prova.",
+        "Instaladores privilegiados e curl|shell exigem hardening antes de uso sensível.",
+        "Critérios Markdown precisam de ligação executável para sustentar SDD."
+      ],
+      "timestamp": 1787505763.463076
+    },
+    {
+      "round_id": "R448",
+      "objective": "Hardening fail-closed de soundness formal, instaladores, SDD e reprodutibilidade da SPEC-935-R448.",
+      "changes": [
+        "Rejeição de contramodelos e entradas formais malformadas, com predicado positivo isolado.",
+        "Instaladores verificam revisão, versão, SHA-256, bytes LF e propagam falhas.",
+        "Gate SDD exige evidência de teste emitida pelo runtime para a suíte integral.",
+        "Testes remotos/externos foram tornados herméticos ou opt-in; registro de loop é resiliente a isolamento.",
+        "Manifestações pinados, CI crítica e teste de mutação focado foram adicionados."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "A execução integral deve ser capturada antes de promover uma spec; testes focados não substituem a evidência vinculada.",
+        "Testes de rede, caminhos locais e singletons globais precisam de injeção, simulação ou restauração explícita.",
+        "Mutação focada no predicado que promove uma prova dá evidência adicional sem alegar cobertura total.",
+        "Validação sintática em Linux não substitui E2E Windows elevado.",
+        "Correção de gate final: o SpecVerifier reexecutado aprovou 18/18 critérios com evidência vinculada à suíte integral."
+      ],
+      "timestamp": 1787529143.0225968
+    },
+    {
+      "round_id": "R449",
+      "objective": "Documentação operacional e reconciliação de README da SPEC-935-R449.",
+      "changes": [
+        "README.md: entrada operacional, instalação, limites e navegação histórica reconciliados.",
+        "CONTRIBUTING.md e SECURITY.md: políticas conservadoras adicionadas.",
+        "SPEC-935-R449 e testes documentais: gate runtime aprovado."
+      ],
+      "score": 7.0,
+      "lessons": [
+        "Preservar rotas históricas de documentação não exige repetir métricas antigas como estado atual.",
+        "Resultados de testes locais devem declarar escopo e não equivalem a certificação externa."
+      ],
+      "timestamp": 1787554026.2974534
+    },
+    {
+      "round_id": "R450",
+      "objective": "Fechamento de fronteiras de segurança da SPEC-935-R450.",
+      "changes": [
+        "formal_verifier.py: AST restrita substitui avaliação textual insegura.",
+        "installer/: validação de caminhos, cache privado e retomada Windows manual.",
+        "testes e documentação de fronteiras de instalação atualizados."
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Validação sintática local e testes herméticos não substituem E2E Windows elevado.",
+        "Bytes auxiliares executados pelo WSL devem ter procedência e hash conferidos."
+      ],
+      "timestamp": 1787554026.3427343
+    },
+    {
+      "round_id": "R451",
+      "objective": "Limites de recurso e exatidão do fragmento formal da SPEC-935-R451.",
+      "changes": [
+        "formal_verifier.py: limites para AST, potências, contraexemplos e fórmulas proposicionais.",
+        "tests/test_r451_formal_resource_soundness.py: regressões fail-closed."
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Limites locais reduzem superfície de consumo, mas não substituem sandbox de processo.",
+        "A recusa de entrada fora do fragmento é preferível a uma promoção heurística."
+      ],
+      "timestamp": 1787554026.3582115
+    },
+    {
+      "round_id": "R452",
+      "objective": "Soundness de domínio e orçamentos globais da SPEC-935-R452.",
+      "changes": [
+        "formal_verifier.py: domínio de divisão e potências não positivas restrito a literais seguros.",
+        "Snapshots imutáveis para premissas e passos, timeout Z3 e comparação de claim por AST.",
+        "tests/test_r452_domain_soundness_budgets.py: regressões para domínio, Unicode, orçamento e TOCTOU."
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Uma identidade simbólica só é universal quando seu domínio foi preservado.",
+        "Validar uma coleção sem consumir um snapshot permite TOCTOU e pode promover conclusões indevidas."
+      ],
+      "timestamp": 1787554026.3713386
+    },
+    {
+      "round_id": "R453",
+      "objective": "R453: fechamento auditável de segurança pré-commit",
+      "changes": [
+        "Scanner de segredos lê blobs do índice, não o working tree divergente.",
+        "Preflights vinculam a árvore executada e atestam staging WSL antes de source.",
+        "Timeout SDD deve exceder a duração observada da suíte para evitar falso negativo.",
+        "Ollama é executado somente por artefato verificado, sem ativar serviço privilegiado pré-existente."
+      ],
+      "score": 7.5,
+      "lessons": [
+        "A tentativa inicial do gate expirou a 900 s; o ajuste para 1200 s foi validado por execução integral.",
+        "Riscos residuais documentados: TOCTOU local, cache NPM transitivo e ausência de E2E elevado Windows/macOS."
+      ],
+      "timestamp": 1787617851.2336352
+    },
+    {
+      "round_id": "R454",
+      "objective": "Evidência runtime granular por critério e fechamento rastreável do lote R447-R453.",
+      "changes": [
+        "sdd/spec_engine.py e sdd/tdd_runner.py: contrato criterion-runtime-v1 com criterion_id -> pytest nodeid(s), fingerprint SHA-256 e registros runtime selados por critério.",
+        "SPEC-935-R447 a SPEC-935-R453 migradas para evidence_contract granular; SPEC-935-R454 adicionada como guarda estrutural da migração.",
+        "VALIDATION_R447.md criado; VALIDATION_R448.md, VALIDATION_R452.md e VALIDATION_R453.md reconciliados com a revalidação granular; README.md atualizado.",
+        "Gates locais reexecutados com 190 testes focados verdes e revalidação SDD granular de SPEC-935-R447 a SPEC-935-R454."
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Uma suíte global verde não basta para sustentar contagens por critério; a associação explícita criterion_id -> nodeid reduz ambiguidade auditável.",
+        "Recibos históricos podem continuar válidos como contexto local, mas a prova granular precisa apontar para o contrato e a execução corrente.",
+        "Evidência local emitida no mesmo processo bloqueia autoatestado por payload, porém não deve ser descrita como sandbox ou validação externa."
+      ],
+      "timestamp": 1787692800.0
     }
   ]
 }

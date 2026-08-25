@@ -1,0 +1,3 @@
+# Scripts conferidos por SHA-256 no fluxo Windows/WSL devem manter bytes LF
+# idênticos entre checkout, cache temporário e execução no Bash.
+*.sh text eol=lf

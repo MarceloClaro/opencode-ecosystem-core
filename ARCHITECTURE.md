@@ -1,669 +1,122 @@
-# Arquitetura: OpenCode Ecosystem Core v3.9 (Microsoft APM & Amplificação Cognitiva DeepSeek Harness)
+# Arquitetura do OpenCode Ecosystem Core
 
-Este documento detalha a arquitetura atual do ecossistema, incluindo o **Pipeline Acadêmico Agentivo (R101–R105)**, sua fusão e loop real (R108–R109), os subsistemas de raciocínio e revisão (R113–R115), instalação e pesquisa CLI (R116/R120), apresentações MIRA (R123–R126), **Evolutionary Memory (R97)**, **Scientific RAG Evolved (R99)**, **MCP Security (R100)**, **CI/CD Quality Gates (R106)**, **On-Device LLM via LiteRT-LM (R48–R52)**, a **Camada Epistêmica e Guardas de Tradução Cultural (R363–R369)**, a **auditoria real dos três CLIs externos e do supervisor LiteRT-LM (R391–R395)**, a **Padronização Canônica Microsoft APM (SPEC-935-R440)** e a **Amplificação Cognitiva de Modelos Free via DeepSeek Harness (SPEC-935-R441)**.
+Este documento descreve a organização técnica observável no checkout. Não é um
+relatório de desempenho, cobertura ou validação externa. Para ressalvas sobre
+alegações históricas, consulte [CORRIGENDUM.md](CORRIGENDUM.md).
 
-> Ressalvas sobre métricas e alegações: consulte [`CORRIGENDUM.md`](CORRIGENDUM.md).
+> Hashes, testes e diagnósticos são controles internos de artefatos e
+> configurações específicas; não constituem certificação externa de segurança,
+> qualidade ou adequação para um domínio de uso.
 
----
+## Configuração estrutural
 
-## Diagrama de Arquitetura Completo (v3.9)
-
-```mermaid
-graph TD
-    %% Atores e Orquestrador
-    User([Usuário / CLI]) -->|Comandos| Orchestrator[Orquestrador: marceloclaro]
-    WebUI([Webapp Streamlit<br>Dashboard + Jurídico]) -->|Painel visual| Orchestrator
-    
-    %% Camada SDD/TDD
-    subgraph SDD [SDD & TDD Engine]
-        Spec[SpecRegistry<br>Especificações]
-        Ver[SpecVerifier<br>Gate SDD]
-        TDD[TDDRunner<br>Red-Green-Refactor]
-        
-        TDD -.->|Valida| Ver
-        Ver -.->|Lê| Spec
-    end
-
-    %% Camada Transformer
-    subgraph TF [Transformer Layer]
-        Attn[AttentionRouter<br>Multi-Head]
-        Pipe[TransformerPipeline<br>Gerar-Verificar-Revisar]
-        HTM[(Hierarchical<br>Memory HTM)]
-        Emb[TaskEmbedder<br>d=64]
-        
-        Attn -.->|Usa| Emb
-        HTM -.->|Usa| Emb
-    end
-    
-    %% Pipeline Academico Agentivo (R101-R105)
-    subgraph Acad ["Pipeline Academico Agentivo (R101-R105)"]
-        EvoSci["R101: EvoSci<br>MentorAgent<br>PrimeResearcherAgent<br>ReviewerAgent<br>EvolutionManagerAgent<br>EvoEngine (Selection/Crossover/Mutation/Inheritance)"]
-        DeepRes["R102: Deep Research<br>KnowledgeBaseRegistry<br>BFRSAgent<br>DFRSAgent<br>ExecutionSandbox<br>OrchestratorAgent"]
-        PReview["R103: Peer Review<br>RubricEngine (8 dim)<br>ReviewLedger<br>AuditGraph<br>MultiCriticReviewer<br>OrchestratorReviewer"]
-        Revision["R104d: Revision<br>ReviewAnalyzer<br>SectionMapper<br>ProposalGenerator<br>DiffEngine (rollback)<br>OrchestratorRevision"]
-        Composer["R105: Paper Composer<br>StructurePlanner<br>SectionWriter (6 secoes)<br>CitationFormatter (3 estilos)<br>CrossConsistencyVerifier<br>OrchestratorComposer"]
-        
-        EvoSci --> DeepRes
-        DeepRes --> PReview
-        PReview --> Revision
-        Revision --> Composer
-    end
-    
-    %% LLM Reduction Layer (R220-R222)
-    subgraph RED [LLM Reduction Layer]
-        Router[RuleBasedRouter<br>25 regras + DecisionTree]
-        Class[LocalClassifier<br>TF-IDF + LogReg]
-        Whoosh[Whoosh3Engine<br>BM25F local < 30ms]
-        Game[GameTheoryLocal<br>Nash/Shapley/Pareto]
-        Jinja[Jinja2Engine<br>9 templates .j2]
-        DataHub[DataKnowledgeHub<br>16 fontes · 5 domínios]
-        Valid[CrossValidator<br>Calibration + Audit]
-        AuditTrail[AuditTrail<br>hash SHA-256]
-        
-        Router --> Class
-        DataHub --> Valid
-        Valid --> AuditTrail
-    end
-    
-    %% Observabilidade (R222)
-    subgraph OBS [Observabilidade]
-        Metrics[MetricsCollector<br>LLM calls saved]
-        HTTPMetrics[MetricsHTTPServer<br>/health · /metrics]
-        DocCheck[Doctor Check<br>llm_reduction_metrics]
-        
-        Metrics --> HTTPMetrics
-        DocCheck -.->|consulta| Metrics
-    end
-
-    %% Microsoft APM (R440)
-    subgraph APM [Microsoft APM - Agent Package Manager R440]
-        APMMan[apm.yml<br>222 Primitivas]
-        APMAudit[APMAuditor<br>Trojan Source & Injection Scan]
-        APMComp[APMCompiler<br>opencode.json & AGENTS/CLAUDE]
-        APMLock[apm.lock.yaml<br>Hashes SHA-256]
-        
-        APMMan --> APMAudit
-        APMAudit --> APMComp
-        APMComp --> APMLock
-    end
-
-    %% DeepSeek Harness Free Model Amplifier (R441)
-    subgraph DSH [DeepSeek Harness Free Model Amplifier R441]
-        FreeModels[Modelos Free<br>ox-alpha-free · deepseek-free]
-        Scaffold[ReasoningScaffoldEngine<br>Test-Time Compute <think>]
-        CtxAmp[ContextAmplifier<br>Whoosh3 BM25F + DataHub RAG]
-        CoVe[ChainOfVerification<br>CoVe 97%+ & Grading Head]
-        
-        FreeModels --> Scaffold
-        Scaffold --> CtxAmp
-        CtxAmp --> CoVe
-    end
-
-    %% Camada Core
-    subgraph Core [Core Subsystems]
-        Trust[Trust Engine<br>Behavioral Gate]
-        Eco[Token Economy<br>Staking/Slashing]
-        Scan[Scanners & Deep Diagnose<br>M1-M5/Prioritizer]
-        MASWOS[MASWOS<br>Qualis A1]
-        Reason[Reasoning<br>12 Engines + Quantum]
-        Legal[Legal Reasoning + AuxJuris<br>SPEC-921/922/923/924/925/926/927/928]
-        LegalBench[Legal Benchmarks<br>SPEC-928]
-        RAG[Scientific RAG<br>Grounding + Citations]
-        RAGEvolved["Scientific RAG Evolved (R99)<br>AdaptiveRetriever<br>CitationGraph<br>OutlineSynthesizer"]
-        Bench[Superhuman Readiness<br>Benchmarks + Tiers]
-        MetaEval[Metacognitive Eval<br>SPEC-920]
-        MiroFish[MiroFish<br>Swarm c/ GraphMemory]
-        SynthUniv["Synthetic University<br>SPEC-935 · 11 Faculdades"]
-        Publishing[Publishing<br>LaTeX & Cover Designer]
-        Research[Research<br>Hub c/ OSINT<br>CLI pesquisa R120]
-        Illus[Illustrations<br>Mermaid/MIRA/Graph<br>Apresentações MIRA R123/R125]
-        MiraAgent[Agente mira-presenter<br>executor delegável R126]
-        EvoMem["Evolutionary Memory (R97)<br>IdeationMemory<br>ExperimentationMemory<br>HeartbeatReflection<br>StagnationDetector"]
-        NoveltyV2["Novelty V2 (R98)<br>ContributionPointExtractor<br>PointwiseLiteratureRetriever<br>PointwiseNoveltyScorer<br>HierarchicalTaxonomyBuilder"]
-    end
-    MiraAgent -.->|encarna o pipeline| Illus
-
-    %% Motor Colibri MoE, Autocorreção e Integridade Criptográfica (R214-R230)
-    subgraph EngineMoE ["Colibri MoE, Self-Correction & Merkle Integrity Guard (R214-R230)"]
-        ColibriEngine["Colibri MoE C Engine<br>OLMoE 1B/7B int4<br>colibri/c/olmoe"]
-        ColibriProv["ColibriProvider<br>Porta 8090 · OpenAI API<br>Lazy Auto-Start"]
-        SelfCorrection["SelfCorrectionEngine<br>Diagnóstico → Correção<br>Validação RED-GREEN → CORRIGENDUM"]
-        LazyCatalog["LazyAgentCatalog<br>205+ agentes · @lru_cache"]
-        VecDrift["VectorizedGoalDriftDetector<br>N-gram L2 Cosseno"]
-        AgentEval["AgentEvalHarness<br>TSR + Tool Accuracy + Percentis"]
-        MerkleGuard["MerkleIntegrityGuard<br>Merkle Root SHA-256<br>Imutabilidade do Código"]
-        InternalAudit["InternalAuditHarness<br>Certificados Digitais Imutáveis"]
-        ExtValidation["ExternalValidationHarness<br>Provas Criptográficas 3rd Party"]
-        SuperRigor["SuperRigorPipeline<br>8 Scanners de Excelência (EXS 0-100)"]
-
-        ColibriProv --> ColibriEngine
-        SelfCorrection --> Ver
-        SelfCorrection --> AuditTrail
-        AgentEval --> Metrics
-        MerkleGuard --> InternalAudit
-        SuperRigor --> InternalAudit
-    end
-
-    %% Servidores MCP Interoperáveis (R229)
-    subgraph MCPServers ["Servidores MCP Interoperáveis (6 Servers)"]
-        MCPLiteRT["litert-lm<br>LiteRT-LM On-Device"]
-        MCPMCI["metacognitive-interconnect<br>Memória Episódica & MetaBus"]
-        MCPAntigrav["antigravity-bridge<br>Integração Antigravity CLI"]
-        MCPPyPI["pypi-search<br>Busca de Pacotes PyPI"]
-        MCPColibri["colibri-mcp<br>Inferência Colibri MoE"]
-        MCPScanners["scanners-mcp<br>Auditoria & Merkle Tree"]
-    end
-
-    %% Seguranca e Qualidade
-    subgraph Security ["Seguranca & Qualidade"]
-        MCPSec["MCP Security (R100)<br>MCPGuard<br>AuditLogger<br>ToolVetter<br>RateLimiter"]
-        CICD["CI/CD Pipeline (R106)<br>GitHub Actions: Lint+Test+Package<br>scripts/quality_report.py<br>scripts/check_coverage.py<br>scripts/run_full_suite.sh"]
-        Skills["Skills Exportaveis (R104a)<br>evo-science<br>deep-research<br>peer-review-v2<br>mcp-security"]
-        PipPkg["Pip Packages (R104b)<br>opencode-evosci<br>opencode-deep-research<br>opencode-peer-review"]
-    end
-
-    %% Camada Scientific Governance (legado)
-    subgraph SGP [Scientific Governance Pipeline v2.x]
-        OQS[OQS<br>Optimal Question Scanner]
-        SCI[MCI Scientific Core<br>Hipótese·Experimento·Estatística]
-        VSEE[VSEE<br>Vector Shortcut Engine]
-        EGS[EGS<br>Ethical Governance Scanner]
-        EvidenceGraph[EvidenceGraph<br>Memória Epistemológica]
-        
-        OQS --> SCI
-        SCI --> VSEE
-        VSEE --> EGS
-        EGS -.->|Registra| EvidenceGraph
-    end
-
-    %% Camada MCI
-    subgraph MCI [Metacognitive Interconnect]
-        MB[MetaBus<br>Global Workspace]
-        BB[Blackboard<br>A2A Protocol]
-        Mem[(Metacognitive<br>Memory)]
-        Ref[Reflexion<br>Middleware]
-        
-        MB <--> Mem
-        BB <--> MB
-        Ref <--> MB
-    end
-    
-    %% Orquestrador integra as camadas
-    Orchestrator -->|1. Cria Spec| Spec
-    Orchestrator -->|2. Recuperação em 2 níveis| HTM
-    HTM -->|Lê Episódica| Mem
-    Orchestrator -->|3. Gate & Roteia| Trust
-    Trust -->|Libera| RED
-    RED -->|conf >= 0.85| Router
-    Router -->|skip Attn| BB
-    RED -->|conf < 0.85| Attn
-    Attn -->|Publica Volunteer| BB
-    Orchestrator -->|4. Executa TDD| Pipe
-    Pipe -->|Verifica| Ver
-    Orchestrator <-->|Usa| Core
-    Orchestrator -->|Governança & Primitivas| APM
-    Orchestrator -->|Amplificação Free Models| DSH
-    
-    %% Conexões de observabilidade
-    Orchestrator -->|get_reduction_stats| Metrics
-    RED -.->|alimenta| Metrics
-    
-    %% Conexões do pipeline academico
-    Orchestrator -->|5. Pipeline Academico| EvoSci
-    EvoSci -->|Alimenta| DeepRes
-    DeepRes -->|Produz evidencia| PReview
-    PReview -->|Gera revisao| Revision
-    Revision -->|Manuscrito revisado| Composer
-    Composer -->|Artigo final| Orchestrator
-    
-    %% Conexões de suporte
-    Acad -->|Consulta evidências| RAG
-    Reason -->|Grounding científico| RAG
-    RAG -->|Métricas| Bench
-    RAGEvolved -->|Citacoes em grafo| DeepRes
-    EvoMem -->|Memoria de direcoes| EvoSci
-    NoveltyV2 -->|Analise de novidade| EvoSci
-    
-    MB -->|Traços e reflexões| MetaEval
-    Trust -->|Confiança e outcomes| MetaEval
-    Orchestrator -->|6. Raciocínio Jurídico| Legal
-    
-    Legal -->|Subsunção + Ponderação| Reason
-    Legal -->|Interpretação Constitucional| MetaEval
-    Legal -->|RAG jurídico + Datajud| RAG
-    Legal -->|Agentes jurídicos A2A| BB
-    Legal -->|Especialização por 7 ramos| LegalBench
-    LegalBench -->|tiers conservadores| MetaEval
-    
-    %% Seguranca
-    MCPSec -.->|Protege| MB
-    CICD -.->|Valida qualidade| Pipe
-    Skills -.->|Exporta| BB
-    PipPkg -.->|Distribui| External
-    
-    SynthUniv -->|10k+ combinações via MiroFish| MiroFish
-    SynthUniv -->|Publica descobertas| MB
-    EGS -->|Reflete Resultado| MB
-    
-    %% Agentes
-    subgraph Agents [Catálogo de Agentes 187+]
-        A1[Researcher]
-        A2[Coder]
-        A3[Reviewer]
-        A4[32 MASWOS Agents]
-        A5[Academic Writer]
-        A6[Deep Research]
-        A7[Peer Review]
-        A8[Paper Composer]
-        A9[Revision Agent]
-        A10[EvoSci Agent]
-    end
-    
-    %% Fluxo de Agentes
-    Agents -.->|Registra Agent Card| BB
-    BB -.->|Call for Proposals| Agents
-    Agents -->|Voluntaria-se| BB
-    Agents -->|Conclui Tarefa| Ref
-    
-    %% MCP
-    MCP[MCP Server 14 Tools] -->|Expõe API| MCI
-    External[External Tools / LLMs] -->|JSON-RPC| MCP
-```
-
----
-
-## Fluxo de Vida de uma Tarefa no Pipeline Acadêmico
-
-### 1. Descoberta (R101 — EvoSci)
-O **MentorAgent** constrói o espaço do problema e gera direções de pesquisa. O **PrimeResearcherAgent** decompõe e gera soluções candidatas. O **ReviewerAgent** avalia com scores dimensionais. O **EvolutionManagerAgent** mantém memórias de ideação e experimentação. O **EvoEngine** executa o ciclo evolutivo: Selection → Crossover → Mutation → Inheritance, com detecção de estagnação.
-
-### 2. Pesquisa Profunda (R102 — Deep Research)
-O **KnowledgeBaseRegistry** gerencia fontes simuladas. O **BFRSAgent** explora conexões imediatas em largura. O **DFRSAgent** constrói cadeias multi-hop. O **EvidenceGraph** acumula entidades, relações e evidências com proveniência. O **OrchestratorAgent** planeja, roteia BF/DF, aplica gate de suficiência e sintetiza.
-
-### 3. Revisão por Pares (R103 — Agentic Peer Review)
-O **RubricEngine** instancia 8 meta-dimensões de avaliação. O **ReviewLedger** rastreia claims, evidências e riscos. O **AuditGraph** (integrado ao R102) ancora evidências. O **MultiCriticReviewer** executa 4 críticos em paralelo. O **OrchestratorReviewer** executa o pipeline: drafting → ledger → grounding → audit → gate → synthesis.
-
-### 4. Revisão de Manuscrito (R104d — Agentic Revision)
-O **ReviewAnalyzer** extrai claims, riscos e ações do pacote de revisão R103. O **SectionMapper** mapeia claims para seções. O **ProposalGenerator** gera propostas de correção com alternativas. O **DiffEngine** aplica diffs controlados com rollback. O **OrchestratorRevision** executa: analyze → map → propose → apply → verify → report.
-
-### 5. Composição Final (R105 — Paper Composer)
-O **StructurePlanner** gera outline por venue (ABNT, APA, IEEE). O **SectionWriter** escreve 6 seções com fallbacks para inputs vazios. O **CitationFormatter** formata em 3 estilos. O **CrossConsistencyVerifier** executa 5 verificações de consistência interna. O **OrchestratorComposer** executa: plan → write → format → verify → export.
-
----
-
-## Subsistemas de Suporte
-
-### Evolutionary Memory (R97)
-Memória persistente que registra direções de pesquisa, estratégias, outcomes de experimentos e detecta estagnação. Usada pelo EvoSci para evitar re-exploração de direções falhadas e sugerir pivots.
-
-### Scientific RAG Evolved (R99)
-O `rag/evolved.py` fornece:
-- **AdaptiveRetriever:** analisa complexidade da query (simple/moderate/complex) com 3 estratégias
-- **CitationGraph:** grafo direcionado com BFS até max_depth
-- **OutlineSynthesizer:** gera outlines com templates temáticos
-- **RAGEvolved:** roteia automaticamente entre answer_simple e answer_structured
-
-### MCP Security (R100)
-Camada que envolve o servidor MCP com:
-- **MCPGuard:** valida argumentos contra JSON Schema
-- **AuditLogger:** registro estruturado de todas as chamadas
-- **ToolVetter:** detecta prompt injection, command injection, path traversal, SQLi
-- **RateLimiter:** token bucket por caller
-
-### Subsistema de Apresentações MIRA (R123–R126)
-
-O MIRA possui responsabilidades separadas, preservando o contrato atual
-do pipeline científico e sem substituir as superfícies de MCP ou LiteRT:
-
-| Elemento | Responsabilidade | Arquivo |
-|---|---|---|
-| `MiraEngine` | Cards avulsos com metáforas visuais em loop. | `illustrations/mira_engine.py` |
-| `MiraDeckPipeline` | Esteira `extract → plan → copywrite → build → animate → validate`. | `illustrations/mira_deck.py` |
-| `MiraPresentationAgent` (`mira-presenter`) | Executor registrado no Blackboard com capacidade exclusiva `apresentacao-mira`. | `illustrations/mira_agent.py` |
-| `present()` / `present_task()` | Via direta do CLI e via delegada com `report_completion`. | `marceloclaro/orchestrator.py` |
-
-**Processo:** `extract` separa as seções e marcadores; `plan` escolhe
-`quote`/`code`/`grid`/`concept`; `copywrite` limita títulos a seis palavras;
-`build` produz HTML autocontido de cards de vidro; `animate` aplica a Regra
-Zero (`@keyframes` e `infinite`); e `validate` gera `ConformityReport` e
-`CONFORMIDADE.md`. O agente `mira-presenter` fecha o laço
-`delegate → execute → report_completion` sob as regras do runtime.
-
-### LLM Reduction Layer (R220 — SPEC-967)
-Camada determinística de 6 componentes que substitui chamadas de LLM para
-tarefas rotineiras de roteamento, classificação, busca, debate e geração
-de documentos:
-
-| Componente | Arquivo | Substitui | Performance |
-|---|---|---|---|
-| **Whoosh3Engine** | `skills/tooling/whoosh3_engine.py` | Busca semântica via LLM | < 30ms |
-| **RuleBasedRouter** | `skills/tooling/rule_based_router.py` | AttentionRouter (LLM) | < 2ms |
-| **LocalClassifier** | `skills/tooling/local_classifier.py` | Classificação via Ollama/OpenAI | < 10ms |
-| **GameTheoryLocal** | `skills/tooling/game_theory_local.py` | Debate_strategies.py (146x LLM) | ~3ms |
-| **Jinja2Engine** | `skills/tooling/jinja2_templates/` | Geração de docs via LLM | < 5ms |
-| **DataKnowledgeHub** | `skills/tooling/data_knowledge_hub/` | Consulta a dados externos | < 50ms |
-
-**Fluxo no orquestrador:**
-1. Toda tarefa passa primeiro pelo `RuleBasedRouter` (25 regras regex + DecisionTree)
-2. Se confiança ≥ 0.85 e agente elegível → **usa rota direta (0 LLM)**
-3. Senão → fallback para `AttentionRouter` (LLM real)
-
-### DataKnowledgeHub (R221 — SPEC-968)
-Hub de 16 fontes de dados e conhecimento com validação cruzada, calibração
-de confiança e audit trail:
-
-| Domínio | Fontes |
-|---|---|
-| **Financeiro** | yfinance, BCB/SGS, FRED, World Bank, Alpha Vantage |
-| **Oficial** | IBGE/SIDRA, IPEA/Ipeadata, dados.gov.br (CKAN) |
-| **Conhecimento** | Wikipedia (pt/en), Wikidata (SPARQL), ConceptNet, Google Scholar |
-| **Datasets** | Zenodo, DataCite, UCI, Figshare |
-
-Integrado ao `ResearchHub`: quando `use_data_hub=True`, o manifesto de
-pesquisa ganha uma seção `data_knowledge` com dados validados e confiança
-calibrada.
-
-### Observabilidade (R222 — SPEC-969)
-Sistema leve de métricas e monitoramento:
-
-- **MetricsCollector** (`marceloclaro/metrics.py`): agrega stats do orquestrador,
-  LLMReductionLayer e DataKnowledgeHub
-- **MetricsHTTPServer**: servidor HTTP em socket nativo com rotas `/health` e `/metrics`
-- **Doctor check**: `llm_reduction_metrics` exibe LLM calls saved no diagnóstico
+Em **2026-08-23**, o diagnóstico local listava **19 checks**. A configuração
+`opencode.json` declarava **6 MCPs** e **209 agentes**. As fontes autoritativas
+para uma nova conferência são o comando `python3 -m marceloclaro.cli doctor` e
+as chaves `mcp` e `agent` de `opencode.json`:
 
 ```bash
-# Ver métricas no terminal
-python3 -c "from marceloclaro.metrics import get_collector; print(get_collector().render())"
-
-# Iniciar servidor HTTP de métricas
-python3 -c "
-from marceloclaro.metrics import MetricsCollector, MetricsHTTPServer
-c = MetricsCollector()
-s = MetricsHTTPServer(c, port=9090)
-s.start()
-input('Pressione Enter para parar...')
-s.stop()
-"
+python3 -m marceloclaro.cli doctor
+python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); print({'mcps': len(c.get('mcp', {})), 'agentes': len(c.get('agent', {}))})"
 ```
 
-### LiteRT-LM — On-Device LLM (R48–R52)
-O ecossistema integra o LiteRT-LM (Google AI Edge) como **provider LLM on-device**,
-eliminando a dependência de APIs externas para inferência:
+Specs, ciclos, testes e cobertura mudam com o checkout. Consulte,
+respectivamente, `specs/`, `evolution/cycles.json`, `tests/` e a configuração
+de CI em vez de tratar números de documentos antigos como estado atual.
 
-- **Modelos**: Gemma 4 2B/4B/12B, Qwen3 0.6B (todos quantizados para edge)
-- **API**: OpenAI-compatível via `localhost:9379/v1`
-- **Contexto**: 16.384 tokens (KV cache configurável via `LITERT_LM_MAX_TOKENS`)
-- **Registro no OpenCode**: Provider via `npm:@ai-sdk/openai-compatible` no `opencode.json`
-- **Fallback**: Plugin TypeScript em `.opencode/plugins/litert-lm-provider.ts`
-- **Performance**: ~2-8s request quente, cold start ~2-4min (modelo 2.4GB)
-
-```bash
-# Iniciar servidor on-device
-./scripts/litert-lm-serve.sh
-
-# Usar no OpenCode
-opencode run --model "litert-lm/litert-community/gemma-4-E2B-it-litert-lm"
-```
-
-### CI/CD Pipeline (R106)
-Infraestrutura de qualidade com:
-- **GitHub Actions:** 3 jobs (lint → test matrix → package build)
-- **quality_report.py:** score 0-10 com análise de testes, cobertura e lint
-- **check_coverage.py:** gate que bloqueia se cobertura < 80% ou testes falham
-
----
-
-## Especificações Formais (SDD)
-
-Cada ciclo possui uma especificação formal em `specs/SPEC-935-R*.md`:
-
-| Spec | Ciclo | Critérios |
-|---|---|---|
-| SPEC-935-R97 | Evolutionary Memory | 9 CA |
-| SPEC-935-R98 | Novelty V2 | 10 CA |
-| SPEC-935-R99 | RAG Evolved | 8 CA |
-| SPEC-935-R100 | MCP Security | 9 CA |
-| SPEC-935-R101 | Agentic Science V2 | 10 CA |
-| SPEC-935-R102 | Deep Research | 10 CA |
-| SPEC-935-R103 | Peer Review | 10 CA |
-| SPEC-935-R104a | Integration Skills | 7 CA |
-| SPEC-935-R104b | Pip Packages | 6 CA |
-| SPEC-935-R104c | Compatibility Doc | 4 CA |
-| SPEC-935-R104d | Manuscript Revision | 8 CA |
-| SPEC-935-R105 | Paper Composer | 8 CA |
-| SPEC-935-R106 | CI/CD Pipeline | 7 CA |
-| SPEC-935-R107 | Auditoria Sistêmica + Hardening | 9 CA |
-| SPEC-935-R108 | Fusão do Pipeline Científico no Orquestrador | 10 CA |
-| SPEC-935-R109 | Loop Engineering e estados terminais nomeados | 7 CA |
-| SPEC-935-R113 | Detector de falácias e vieses | 6 CA |
-| SPEC-935-R114 | ARCHE RLT | 6 CA |
-| SPEC-935-R115 | Revisão às cegas real | 7 CA |
-| SPEC-935-R116 | Instalação multiplataforma e helpdesk | 8 CA |
-| SPEC-935-R120 | Comando pesquisa no CLI | 7 CA |
-| SPEC-935-R123 | Pipeline MIRA de apresentações | 10 CA |
-| SPEC-963 | LLM Reduction — 6 componentes determinísticos | 8 CA |
-| SPEC-964 | Jinja2Templates — 9 templates .j2 | 7 CA |
-| SPEC-965 | DataKnowledgeHub — 16 fontes integradas | 10 CA |
-| SPEC-966 | CrossValidator + CalibrationLayer + AuditTrail | 8 CA |
-| SPEC-967 | Integração LLM Reduction ao Orquestrador | 7 CA |
-| SPEC-968 | Integração DataKnowledgeHub ao ResearchHub | 7 CA |
-| SPEC-969 | Observabilidade — metrics + health endpoints | 8 CA |
-| SPEC-935-R125 | MIRA como superfície de primeira classe | 8 CA |
-| SPEC-935-R126 | Agente-executor MIRA delegável | 8 CA |
-| SPEC-935-R127 | Documentação arquitetural em dupla-registro | 8 CA |
-| SPEC-935-R210 | LiteRT-LM Plugin Provider | 12 CA |
-| SPEC-935-R211 | MCP/Core/LiteRT Reconciliation | 10 CA |
-| SPEC-935-R212 | Resiliente LiteRT Nano-Orquestração | 31 CA |
-| SPEC-935-R214 | Colibri Provider Bridge | 6 CA |
-| SPEC-935-R228 | Colibri + OLMoE Integration | 6 CA |
-| ADR-012 | LiteRT-LM Provider Integration | Decisão arquitetural |
-
----
-
-## Métricas de Maturidade
-
-| Métrica | v3.0.0 | v3.2.0 (atual) |
-|---|---|---|
-| Testes | 1062 | **338+** (lote crítico) |
-| Ciclos de evolução | 65 | **50+** (R47–R229) |
-| MCP Servers | 14 tools | **5 servidores** (Core, LiteRT-LM, Colibri, PyPI, SynthUniv) |
-| Agentes | 160+ | **187+** no catálogo |
-| Score médio | 9.4/10 | **~9.3/10** (autoavaliação interna; ver CORRIGENDUM) |
-| Skills exportáveis | 4 | **6** (litert_lm, colibri, llm_reduction, jinja2, data_hub, gametheory) |
-| Pip packages | 3 | **3** |
-| Cobertura estimada | 84% | **~42%** (scanner noológico — ecossistema em expansão) |
-| CI/CD | GitHub Actions | **GitHub Actions** |
-| On-Device LLM | ❌ | **LiteRT-LM (Gemma 4, Qwen3) + Colibri/OLMoE (C nativo)** |
-| LLM Reduction | ❌ | **6 componentes determinísticos** (Whoosh, Router, Classifier, GameTheory, Jinja2, DataHub) |
-| Observabilidade | ❌ | **MetricsCollector + /health + /metrics** |
-
-> As métricas são auto-reportadas pelo ecossistema (doctor, scanners, evolution registry).
-> Consulte [`CORRIGENDUM.md`](CORRIGENDUM.md) para contexto sobre alegações que
-> requerem validação externa.
-
----
-
-## Camadas R363–R369 — Epistêmica, Guardas Culturais e Andaimes Produtivos (2026-08-02)
-
-### Camada Epistêmica de Roteamento (SPEC-935-R363 + R368)
-
-```mermaid
-graph LR
-    Task[Descrição da tarefa] --> Inf[infer_task_episteme<br>léxico determinístico pt/en]
-    Card[Agent Card<br>frontmatter episteme: opcional] --> Reg[register_skill<br>override ou inferência]
-    Inf --> Match[SkillHandbook.match]
-    Reg --> Match
-    Match -->|"score × (1 + 0.20×(afinidade−0.5))<br>±10% máx, fail-open"| Rank[Ranking de agentes]
-    Doctor[doctor: episteme_coverage] -.->|mede 133/205 = 65%| Card
-```
-
-- 6 regimes: `empirico_analitico`, `formal_dedutivo`,
-  `hermeneutico_interpretativo`, `critico_reflexivo`, `pragmatico_tecnico`,
-  `regulatorio_normativo`; matriz de afinidade simétrica explícita.
-- Inferência exige ≥ 2 sinais ("nunca chuta"); sinais disjuntos entre
-  regimes (invariante testada); sem episteme em qualquer ponta, o score do
-  matcher é numericamente idêntico ao anterior (fail-open).
-
-### Guardas de Tradução Cultural (SPEC-935-R359, R364–R367)
+## Visão das camadas
 
 ```mermaid
 graph TD
-    Man[Manuscrito congelado] --> AVG[AuthorVoiceGuardian R365<br>VOICE_SHIFT/ANACHRONISM/REGISTER_SHIFT]
-    AVG --> TR[Tradução preliminar]
-    TR --> CEA[CulturalEpistemeAgent R359<br>21 códigos de risco]
-    CEA -->|delta propose_upsert| TG[TerminologyGraph R364<br>aprovação humana por termo<br>gate fail-closed]
-    TR --> BTV[BackTranslationVerifier R366<br>6 verificações determinísticas]
-    TG --> Human{Revisão humana<br>obrigatória em alto risco}
-    BTV --> Human
-    Bench[Benchmark R367<br>corpus rotulado 18 casos<br>precisão 1.00 / recall 0.86] -.->|mede| CEA
+    Usuario[Usuário ou automação] --> CLI[marceloclaro CLI]
+    CLI --> Orquestrador[MarceloClaroOrchestrator]
+    Orquestrador --> SDD[SpecRegistry e SpecVerifier]
+    Orquestrador --> MCI[MetaBus e Blackboard]
+    Orquestrador --> MCP[6 MCPs configurados]
+    Orquestrador --> Agentes[209 agentes configurados]
+    Orquestrador --> MIRA[mira-presenter]
 ```
 
-Princípios compartilhados: contratos fail-closed (`ContractError`), códigos
-exclusivamente de `cultural_episteme.ISSUE_CODES`, `requires_human_review`
-em todo achado, determinismo bit a bit, e relatórios com números **medidos**
-(`claim: internal-fixture-*`) — nunca metas anunciadas.
+| Camada | Responsabilidade | Referências principais |
+|---|---|---|
+| Entrada | CLI interativo e comandos diretos. | `marceloclaro/cli.py`, `MANUAL.md` |
+| Orquestração | Coordenação de tarefas e roteamento. | `marceloclaro/orchestrator.py` |
+| SDD/TDD | Registro de specs, critérios e evidência por teste. | `sdd/spec_engine.py`, `specs/`, `tests/` |
+| Memória | Eventos, tarefas e reflexões compartilhadas. | `mci/` |
+| Integrações | Servidores MCP e definição de agentes. | `opencode.json`, `integrations/` |
+| Apresentação | Geração de deck a partir de pasta de produção. | `illustrations/mira_deck.py` |
+| Integridade | Cálculo local de raiz de arquivos selecionados. | `benchmarks/merkle_integrity_guard.py` |
 
-### Andaimes de Raciocínio Produtivo (SPEC-935-R369)
+## Servidores MCP Interoperáveis
 
-`reasoning/production_scaffolds.py` conecta os 11 motores (SPEC-917) e a
-árvore ARCHE/Peirce à produção editorial:
+Os **6 MCPs** configurados em `opencode.json` são:
 
-| Função | Contrato |
+1. `litert-lm`;
+2. `metacognitive-interconnect`;
+3. `antigravity-bridge`;
+4. `pypi-search`;
+5. `colibri-mcp`;
+6. `scanners-mcp`.
+
+A presença dessas entradas de configuração não implica disponibilidade de toda
+dependência externa em cada máquina. O `doctor` expõe a situação encontrada
+localmente entre os seus 19 checks.
+
+## Agentes e orquestração
+
+O arquivo `opencode.json` é a fonte da contagem de **209 agentes** configurados
+para a integração OpenCode. O Blackboard pode apresentar registros em momentos
+diferentes do processo de inicialização; por isso, não se deve misturar uma
+contagem de runtime com a contagem declarada no arquivo de configuração.
+
+O fluxo básico é:
+
+1. uma tarefa chega pelo CLI ou por integração;
+2. o orquestrador recupera contexto e publica ou encaminha a tarefa;
+3. um agente produz um resultado e o estado é registrado;
+4. a entrega é avaliada contra os critérios disponíveis para aquela tarefa.
+
+Esse fluxo descreve mecanismos de software, não mérito externo do resultado.
+
+## SDD e TDD
+
+Uma spec formal pode declarar objetivo, critérios de aceitação, invariantes e
+arquivo de teste. O `SpecVerifier` avalia a evidência estruturada disponível
+para esses critérios. A ausência de evidência deve permanecer identificável,
+em vez de ser apresentada como êxito.
+
+O ciclo de desenvolvimento recomendado é:
+
+1. definir ou ler a spec aplicável;
+2. escrever o teste dirigido;
+3. implementar a menor mudança que atende ao contrato;
+4. executar os testes relevantes;
+5. registrar limitações e resultados observados.
+
+O resultado de um teste é restrito ao ambiente, versão e dados utilizados na
+execução. Não transforme uma passagem local em certificação externa.
+
+## MIRA e documentação em dupla leitura
+
+O subsistema de apresentações inclui:
+
+| Elemento | Papel |
 |---|---|
-| `audit_scientific_manuscript` | 8 movimentos obrigatórios com `engine_hints`; `MISSING_MOVE` high para método/evidência/limitação |
-| auditoria de novidade | `UNSUPPORTED_NOVELTY_CLAIM` quando "inédito/inovador/state-of-the-art" não tem citação/comparação na mesma frase |
-| `validate_literary_plan` | voz, conflito, símbolos e estratégia de estranhamento obrigatórios antes da escrita |
-| `literary_distinctiveness_report` | medição descritiva (type-token, ritmo, 22 clichês pt); nunca veredito |
-| `select_scaffold` | roteia científico/literário pela episteme da tarefa; `indeterminate` sem sinais |
+| `MiraEngine` | Produz componentes visuais de apresentação. |
+| `MiraDeckPipeline` | Executa os estágios `extract`, `plan`, `copywrite`, `build`, `animate` e `validate`. |
+| `mira-presenter` | Agente usado na execução delegada da apresentação. |
 
-### Specs do bloco
+`SPEC-935-R126` registra o agente delegável e `SPEC-935-R127` registra a
+documentação em dupla leitura. A interface de uso é documentada no manual;
+a arquitetura aponta os arquivos e as responsabilidades.
 
-| Spec | Título | Testes |
-|---|---|---|
-| SPEC-935-R363 | Camada epistêmica de roteamento | 27 |
-| SPEC-935-R364 | TerminologyGraphAgent | 21 |
-| SPEC-935-R365 | AuthorVoiceGuardian | 17 |
-| SPEC-935-R366 | BackTranslationVerifier | 14 |
-| SPEC-935-R367 | Benchmark cultural medido | 10 |
-| SPEC-935-R368 | Cobertura epistêmica + doctor | 12 |
-| SPEC-935-R369 | Andaimes de raciocínio produtivo | 21 |
+## Integridade e procedência
 
----
+`MerkleIntegrityGuard` e os mecanismos SHA-256 permitem comparar os bytes de
+artefatos definidos. Eles ajudam a detectar divergência do material conferido,
+mas não são uma prova geral de comportamento, segurança ou correção.
 
-## Auditoria Real de Fim-a-Fim: CLIs Externos e Supervisor LiteRT-LM (R391–R395)
-
-Diferente das seções anteriores (que descrevem componentes desenhados e
-testados isoladamente), este bloco documenta correções que só apareceram
-ao **rodar o binário real** de cada integração — não ao reler a assinatura
-das funções que os invocam.
-
-### Roteamento por Atenção — a cabeça `load` deixa de ser constante (R392)
-
-```mermaid
-graph LR
-    Task[Descrição da tarefa] --> Router[AttentionRouter._evaluate]
-    Router --> Sem[Cabeça semantic<br>embedding real]
-    Router --> Cap[Cabeça capability<br>interseção de conjuntos]
-    Router --> Conf[Cabeça confidence<br>ledger real, 20 valores distintos]
-    Router --> Load["Cabeça load<br>ANTES: sempre 1.0 (constante)<br>DEPOIS: _live_load() real"]
-    Load -.->|conta| Tasks[(Blackboard.tasks<br>assigned/completed/failed)]
-```
-
-`mci/blackboard.py::AgentCard.to_dict()` nunca publicava a chave `"load"`;
-`_head_load()` caía sempre no mesmo default silencioso
-(`card.get("load", 0.0)` → `1.0 - 0.0 = 1.0` para todo agente). Nova função
-`_live_load(agent_id)` conta tarefas reais atribuídas no Blackboard,
-normalizadas por uma capacidade de referência — 10% do peso da decisão de
-roteamento passou a diferenciar de fato entre um agente ocioso e um com
-backlog real.
-
-### Pontes de CLI Externo — sintaxe real, não assumida (R393–R394)
-
-| Integração | Bug real encontrado | Correção |
-|---|---|---|
-| `integrations/antigravity/bridge.py` | Comando `agy run --agent X --prompt Y` — subcomando/flag inexistentes no binário real (v1.1.8); falha real saía com `returncode == 0`, reportando `"completed"` sem fazer nada | Sintaxe real `--agent`/`--print`/`--output-format`; detecção de prefixos de erro conhecidos mesmo com código de saída zero |
-| `integrations/cli_ecosystem_bridge.py` | `antigravity_cli.active` checava a existência de `AGENTS.md` (documentação do próprio OpenCode CLI); `get_unified_status()` retornava `"fully_synchronized"` como string fixa, nunca computada | `shutil.which("agy")` como sinal real; `unified_status` computado a partir de `discover_cli_capabilities()` |
-| `scanners/pipeline.py` | `ReversaScanner` usado sem import — todo `/diagnose` real reportava `NameError` disfarçado de resultado de scanner | Import adicionado (mesma classe de bug do `EpistemicPrioritizer`, corrigido antes no mesmo arquivo) |
-| `integrations/opencode_cli.py` (`/pypi`) | Fallback de argumento vazio chamava `search('*', ...)` — a busca não trata `'*'` como coringa, sempre retornava zero resultados | Fallback imprime instrução de uso em vez de rodar busca que sabidamente não retorna nada |
-
-Novo teste genérico (`tests/test_r394_opencode_cli_commands_real_execution.py`)
-executa o comando shell real de cada uma das 9 entradas de
-`build_config()["command"]` — não só importa o módulo Python — e falha se
-aparecer `Traceback`/`NameError`/`ImportError` na saída combinada.
-
-### Supervisor LiteRT-LM — travado não é offline (R395)
-
-```mermaid
-graph TD
-    Ensure[LiteRTSupervisor.ensure] --> Probe{_probe_ready?}
-    Probe -->|"sim"| Ready[state: READY]
-    Probe -->|"não, pid vivo"| Starting[state: STARTING]
-    Probe -->|"não, pid morto"| Spawn[_spawn_locked]
-    Spawn -->|"ANTES: stdout/stderr → DEVNULL"| Blind["Falha real descartada<br>(ex.: Address already in use)"]
-    Spawn -->|"DEPOIS: stdout/stderr → log_path"| Log[(litert-lm.log<br>runtime_dir real)]
-```
-
-Um processo `litert-lm serve` vivo desde 24 de julho (11+ dias) — travado,
-aceitando conexão TCP mas nunca respondendo na camada HTTP — mantinha o
-circuit breaker do supervisor aberto indefinidamente (`failure_count`
-chegou a 41). `_spawn_locked()` redirecionava `stdout`/`stderr` do
-processo filho para `subprocess.DEVNULL`; a mensagem real de erro de
-qualquer tentativa de spawn subsequente (`OSError: Address already in
-use`, pela porta ainda ocupada pelo zumbi) era descartada, exigindo
-reprodução manual fora do supervisor para diagnosticar.
-
-Novo `SupervisorConfig.log_path` (`<runtime_dir>/litert-lm.log`);
-`scripts/litert-lm-start.sh --log` mostra esse arquivo real quando não há
-unidade `systemd --user` instalada. Verificado com inferência real após o
-reinício (chat completion coerente via modelo local).
-
-### Specs do bloco
-
-| Spec | Título | Testes |
-|---|---|---|
-| SPEC-935-R391 | Triagem das 31 falhas pré-existentes da suíte | — |
-| SPEC-935-R392 | Cabeça `load` do AttentionRouter deixa de ser constante | 2 |
-| SPEC-935-R393 | Bridge do Antigravity CLI — sintaxe real | 5 |
-| SPEC-935-R394 | Auditoria real do OpenCode CLI | 11 |
-| SPEC-935-R395 | Daemon LiteRT-LM travado + diagnóstico de spawn | 1 |
-| SPEC-935-R440 | Integração Padrão Microsoft APM (Agent Package Manager) | 13 |
-| SPEC-935-R441 | Amplificação Cognitiva de Modelos Free via DeepSeek Harness | 10 |
-| SPEC-935-R442 | Raciocínio Científico Google DeepMind Superhuman & Aletheia | 10 |
-| SPEC-935-R443 | Motores Nativos OpenCode AlphaProof, Deep Think & Erdős/Hirzebruch Solver | 10 |
-| SPEC-935-R444 | Integração Lean 4 & Saturação de Igualdade E-Graph (Egglog) | 11 |
-| SPEC-935-R445 | AlphaGeometry (Método de Wu) & Auto-Formalização Bidirecional | 12 |
-
----
-
-## Padrão Microsoft APM, DeepSeek Harness, DeepMind Superhuman & AlphaGeometry (R440–R445)
-
-### Microsoft APM (Agent Package Manager — SPEC-935-R440)
-O OpenCode Ecosystem Core unificou a governança de suas 222 primitivas sob o padrão canônico do **Microsoft APM** (`microsoft/apm`):
-1. **Manifesto e Lockfile**: `apm.yml` declarativo e `apm.lock.yaml` determinístico com hashes SHA-256 de todas as primitivas.
-2. **Scanner de Segurança `APMAuditor`**: Identifica e bloqueia ataques Unicode Trojan Source (bidi overrides, zero-width chars), injeções de prompt e alegações não verificadas (anti-overclaim).
-3. **Compilação Multi-Harness `APMCompiler`**: Gera e sincroniza automaticamente `opencode.json`, `AGENTS.md` e `CLAUDE.md`.
-
-### Amplificação Cognitiva de Modelos Free (SPEC-935-R441)
-Para modelos gratuitos e de inferência leve (`ox-alpha-free`, `deepseek-free`, `colibri-olmoe`, `qwen-2.5-coder-free`), o módulo `integrations/deepseek_harness/free_model_amplifier.py` aplica:
-1. **Test-Time Compute Scaffolding**: Emulação de `<think>` com decomposição lógica e testes de casos de borda.
-2. **RAG Local a Custo Zero**: Expansão de contexto grounded via Whoosh3 BM25F local + DataKnowledgeHub + MetaBus episódico.
-3. **Cadeia de Verificação Iterativa (CoVe)**: Auto-correção e grading head de confiança ($\ge 0.90$).
-
-### Raciocínio Científico Google DeepMind Superhuman & Aletheia (SPEC-935-R442)
-Incorporando as técnicas e datasets de raciocínio de fronteira do **Google DeepMind Superhuman** (`google-deepmind/superhuman`):
-1. **Scaffold de Pesquisa Aletheia (`AletheiaHypothesisEngine`)**: Decomposição automática de proposições complexas em lemas intermediários e geração direta de manuscritos em LaTeX (`amsmath`/`amsthm`).
-2. **Verificador Formal Simbólico (`FormalProofVerifier`)**: Validação de consistência lógica e algébrica via SymPy e Z3 Solver para garantir a solidez dedutiva de artigos.
-3. **Harness IMO Bench & Calibração de Grading (`IMOBenchmarkHarness`)**: Benchmark objetivo baseado em `IMO-AnswerBench` e `IMO-ProofBench` com calibração na escala de 0 a 7 pontos do `IMO-GradingBench`.
-
-### Motores Nativos OpenCode AlphaProof, Deep Think & Erdős/Hirzebruch Solver (SPEC-935-R443)
-1. **OpenCode AlphaProof (`OpenCodeAlphaProof`)**: Motor de busca em árvore de provas formais (*Proof-Tree Search*) aplicando táticas de Simplificação Algébrica Simbólica, Indução Matemática, Análise de Casos e Redução ao Absurdo com verificação determinística SymPy/Z3.
-2. **OpenCode Deep Think (`OpenCodeDeepThink`)**: Alocação dinâmica de computação em tempo de teste (*Test-Time Compute Budget*), gerando trajetórias concorrentes `<think>`, pontuadas pelo `GradingHeadDeepMind` (0 a 7) e selecionadas pelo caminho de maior rigor.
-3. **Solucionador de Problemas Abertos de Erdős & Hirzebruch (`ErdosHirzebruchSolver`)**: Demonstração formal de irracionalidade de séries do tipo Erdős-1051 ($\sum \frac{1}{2^{2^n} - c}$) e cálculo exato de autopesos de proporcionalidade aritmética de Hirzebruch (*princípio Feng–Yun–Zhang*).
-
-### Integração Lean 4 & Saturação de Igualdade E-Graph (SPEC-935-R444)
-1. **Ponte e Verificador Lean 4 (`Lean4ProofVerifier`)**: Geração formal de arquivos `.lean`, validação estática de táticas de prova (`ring`, `linarith`, `omega`, `aesop`, `intro`, `exact`, `apply`, `rw`), detecção estrita de `sorry` e suporte à compilação com kernel Lean 4.
-2. **Motor E-Graph & Saturação de Igualdade (`EqualitySaturationEngine`)**: Representação compacta de equivalências matemáticas com fechamento por congruência (*congruence closure*) e extração por programação dinâmica, permitindo simplificação canônica ótima e descoberta automatizada de identidades algébricas.
-
-### AlphaGeometry (Método de Wu) & Auto-Formalização Bidirecional (SPEC-935-R445)
-1. **AlphaGeometry Neuro-Simbólico (`OpenCodeAlphaGeometry`)**: Base Dedutiva (*Geometric Deductive Database - DD*) para encadeamento de regras geométricas e Provedor Algébrico pelo Método de Wu (`WuGeometryProver`) com anulação de ideais polinomiais e exportação direta em LaTeX TikZ e SVG.
-2. **Auto-Formalizador Bidirecional (`AutoFormalizerEngine`)**: Tradução de enunciados em linguagem natural/LaTeX para Lean 4 / Mathlib e decompilação explicativa com validação cruzada tripla de consistência e completude.
+A instalação deve começar por uma versão identificada, um commit Git completo
+e uma soma SHA-256 publicada para o artefato que será conferido. O procedimento
+reprodutível e as limitações por plataforma estão em
+[installer/README.md](installer/README.md).

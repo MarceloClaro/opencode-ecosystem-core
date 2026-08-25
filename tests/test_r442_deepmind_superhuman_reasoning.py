@@ -47,19 +47,20 @@ class TestDeepMindSuperhumanReasoningR442(unittest.TestCase):
         self.assertFalse(invalid, "Expressões distintas não devem ser consideradas idênticas")
 
     def test_formal_verifier_logical_implication(self):
-        """Valida o motor de implicação lógica."""
-        premises = ["P_imply_Q", "P"]
+        """Valida uma implicação proposicional que o Z3 pode verificar."""
+        premises = ["P -> Q", "P"]
         conclusion = "Q"
         valid, msg = self.verifier.verify_logical_implication(premises, conclusion)
         self.assertTrue(valid, f"Implicação lógica deve ser válida: {msg}")
 
     def test_formal_verifier_proof_steps(self):
-        """Valida a verificação de passos encadeados de prova."""
+        """Valida passos simbólicos que também estabelecem a alegação principal."""
+        claim = "x**2 - 1 = (x - 1)*(x + 1)"
         steps = [
-            {"statement": "x**2 - 1 = (x - 1)*(x + 1)", "justification": "Fatoração de diferença de quadrados"},
-            {"statement": "Para x > 1, (x-1) > 0 e (x+1) > 0", "justification": "Aritmética básica"},
+            {"statement": claim, "justification": "Fatoração de diferença de quadrados"},
+            {"statement": "(x - 1)*(x + 1) = x**2 - 1", "justification": "Comutatividade da igualdade"},
         ]
-        res = self.verifier.verify_proof_steps("Provar que x^2 - 1 > 0 para x > 1", steps)
+        res = self.verifier.verify_proof_steps(claim, steps)
         self.assertTrue(res.is_valid)
         self.assertGreaterEqual(res.confidence, 0.90)
         self.assertEqual(len(res.verified_steps), 2)
@@ -74,7 +75,9 @@ class TestDeepMindSuperhumanReasoningR442(unittest.TestCase):
         self.assertGreaterEqual(len(decomp.proof_steps), 3)
         self.assertIn("\\documentclass{article}", decomp.latex_document)
         self.assertIn("Theorem", decomp.latex_document)
-        self.assertGreaterEqual(decomp.confidence_score, 0.85)
+        self.assertTrue(all(not lemma.verified for lemma in decomp.lemmas))
+        self.assertFalse(decomp.verification_result["is_valid"])
+        self.assertEqual(decomp.confidence_score, 0.0)
 
     def test_aletheia_latex_formatter(self):
         """Valida a estrutura do LaTeX gerado no padrão acadêmico do DeepMind."""
@@ -122,7 +125,8 @@ class TestDeepMindSuperhumanReasoningR442(unittest.TestCase):
 
         proof = self.orchestrator.aletheia_prove("Invariância de Pareto em Jogos Conexos", domain="gametheory")
         self.assertIn("latex_document", proof)
-        self.assertGreaterEqual(proof["confidence"], 0.8)
+        self.assertFalse(proof["verification"]["is_valid"])
+        self.assertEqual(proof["confidence"], 0.0)
 
         eval_res = self.orchestrator.imobench_evaluate(limit=2)
         self.assertEqual(eval_res["total_problems"], 2)

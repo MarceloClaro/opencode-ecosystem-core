@@ -34,6 +34,19 @@ variável de ambiente tem efeito garantido sobre `mci.metabus`.
 """
 
 import os
+import sys
 import tempfile
+from pathlib import Path
 
 os.environ["MCI_STATE_DIR"] = tempfile.mkdtemp(prefix="mci_test_state_")
+
+# O Mutmut executa pytest dentro de ``mutants/``, mas o processo que iniciou
+# a ferramenta também mantém o checkout original em ``sys.path``. Sem esta
+# precedência explícita, os testes podem passar contra o código não mutado.
+if os.environ.get("MUTANT_UNDER_TEST"):
+    root = Path(__file__).resolve().parent.parent
+    try:
+        sys.path.remove(str(root))
+    except ValueError:
+        pass
+    sys.path.insert(0, str(root))

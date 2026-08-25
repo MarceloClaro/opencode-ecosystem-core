@@ -16,6 +16,7 @@ from __future__ import annotations
 import shutil
 import subprocess
 import sys
+import os
 from pathlib import Path
 from unittest import mock
 
@@ -100,7 +101,10 @@ def test_delegate_still_reports_failed_for_nonzero_returncode():
     assert result["status"] == "failed", result
 
 
-@pytest.mark.skipif(shutil.which("agy") is None, reason="binário agy real não instalado neste ambiente")
+@pytest.mark.skipif(
+    os.environ.get("OPENCODE_RUN_EXTERNAL_AGY_TEST") != "1" or shutil.which("agy") is None,
+    reason="integração agy externa requer OPENCODE_RUN_EXTERNAL_AGY_TEST=1 e binário disponível",
+)
 def test_delegate_real_agy_binary_completes_a_trivial_prompt():
     """Integração real (pulada se o binário não estiver instalado): confirma
     que a sintaxe corrigida de fato funciona contra o agy real, não só mocks.
