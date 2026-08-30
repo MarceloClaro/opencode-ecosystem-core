@@ -14,35 +14,41 @@ modificado.
 \subsection{Resultados agregados por estratégia}
 
 A Tabela~\ref{tab:resumo} apresenta as médias das métricas por estratégia ao longo
-das 4 queries. O HABD usa $\lambda_{\min}=0{,}3$, $\lambda_{\mathrm{base}}=0{,}7$;
+das 4 queries. O HABD usa $\lambda_{\min}=0{,}3$, $\lambda_{\mathrm B}=0{,}7$;
 o $\lambda$ médio efetivo observado foi $0{,}4333$ — confirmando a rotação para
 diversidade (o ranking é localmente monopolista, $\mu$ baixo).
 
 \begin{table}[ht]
 \centering
 \caption{Resultados agregados do coorte (médias sobre $n\_queries=4$, $K=4$).
-Valores reais do \texttt{cohort\_report.json}.}
+Valores reais extraídos do relatório do \emph{benchmark} (\texttt{cohort\_report}).}
 \label{tab:resumo}
+\small
 \begin{tabular}{lcccc}
 \toprule
-\textbf{Estratégia} & $\Div(\mathcal{S})$ & \emph{groundedness} & \emph{cobertura} & $\Delta g$ \\
+\textbf{Estratégia} & $\Div$ & \emph{g} & \emph{cob.} & $\Delta g$ \\
 \midrule
-\emph{top-k} (atual) & 0.500 & 0.4561 & 0.667 & --- \\
-Recamán               & 0.500 & 0.4561 & 0.667 & 0.0\% \\
-MMR ($\lambda=0.7$)   & 0.750 & 0.4256 & 0.917 & $-6{,}7\%$ \\
-\textbf{HABD}         & \textbf{0.8333} & 0.4087 & \textbf{1.000} & $-10{,}4\%$ \\
+\emph{top-k} & 0.500 & 0.4561 & 0.667 & --- \\
+Recamán      & 0.500 & 0.4561 & 0.667 & 0.0\% \\
+MMR, $\lambda{=}0.7$ & 0.750 & 0.4256 & 0.917 & $-6{,}7\%$ \\
+\textbf{HABD} & \textbf{0.8333} & 0.4087 & \textbf{1.000} & $-10{,}4\%$ \\
 \bottomrule
 \end{tabular}
+\caption*{\footnotesize \emph{g}: groundedness; \emph{cob.}: cobertura.}
 \end{table}
 
 Os resultados revelam quatro fatos:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.88\textwidth]{figures/cohort_results.png}
+% NOTA: usar \columnwidth (e não \textwidth) — em documento twocolumn,
+% \textwidth é a largura DA PÁGINA INTEIRA e faria a figura transbordar a
+% coluna e sobrepor-se à coluna adjacente. \columnwidth resolve em ambos
+% os layouts (uma coluna: \columnwidth == \textwidth).
+\includegraphics[width=0.9\columnwidth]{figures/cohort_results.png}
 \caption{Comparação das quatro estratégias sob diversidade, relevância e cobertura
-(corpus-piloto controlado, médias sobre 4 queries). Valores iguais aos do
-\texttt{cohort\_report.json}.}
+(corpus-piloto controlado, médias sobre 4 queries). Valores iguais aos reportados
+no \emph{benchmark}.}
 \label{fig:cohort}
 \end{figure}
 
@@ -81,7 +87,7 @@ rotação de $\lambda$ preserva a cobertura mesmo quando a dissimilaridade por p
 \begin{table}[ht]
 \centering
 \caption{Diversidade $\Div(\mathcal{S})$ por query.
-Valores reais do \texttt{cohort\_report.json}.}
+Valores reais extraídos do relatório do \emph{benchmark}.}
 \label{tab:porquery}
 \begin{tabular}{lcccc}
 \toprule
@@ -99,8 +105,11 @@ q3 & 0.500 & 0.8333 & 0.500 & 0.8333 \\
 
 Com base nos critérios definidos na Seção~\ref{sec:metodo}:
 \[
-\underbrace{\Delta\Div(\text{Recamán}) = 0{,}0}_{\text{não estritamente }>0}
-\;\Rightarrow\; \textbf{H2 refutada}
+\begin{aligned}
+&\Delta\Div(\text{Recam\'an}) = 0{,}0
+    && \mathrlap{\text{(n\~ao estritamente $>0$)}}\\
+&\Rightarrow\; \textbf{H2 refutada}
+\end{aligned}
 \]
 Registramos, portanto, o veredito \texttt{refuta\_H2}: no corpus-piloto, a
 seleção posicional por Recamán \emph{não demonstra} ganho estrito de diversidade
@@ -108,12 +117,15 @@ sobre o \emph{top-k}, enquanto o MMR demonstra ganho em 3 das 4 queries.
 
 Para o HABD, ainda que a \emph{diversidade} e a \emph{cobertura} sejam as maiores
 do coorte (0{,}8333 e 1{,}000), a queda relativa de relevância
-($10{,}4\%$) \textbf{excede} a tolerância de $5\%$:
+($10{,}4\%$) \textbf{excede} a tolerância de $5\%$. Formalmente:
 \[
-\underbrace{\Delta\Div(\text{HABD}) > 0{,}5 \;\wedge\; \Div(\text{HABD})\ge\Div(\text{MMR})}_{\text{verdadeiro (factual) }}
-\;\wedge\;
-\underbrace{\frac{\Delta g}{g} = 0{,}104}_{> 0{,}05 \;\Rightarrow\; \textbf{condição violada}}
-\;\Rightarrow\; \textbf{H3 refutada}
+\begin{aligned}
+\Delta\Div(\text{HABD}) &> 0{,}5\\[-2pt]
+\Div(\text{HABD}) &\ge \Div(\text{MMR}) &&\mathrlap{\text{(factual)}}\\[2pt]
+\tfrac{\Delta g}{g} &= 0{,}104 > 0{,}05
+  &&\mathrlap{\Rightarrow \textbf{cond. violada}}\\[2pt]
+&\Rightarrow \textbf{H3 refutada}
+\end{aligned}
 \]
 Registramos \texttt{refuta\_H3}: o HABD \emph{supera} MMR e Recamán em diversidade
 e cobertura, mas \emph{não satisfaz} o critério rígido de relevância. As duas
