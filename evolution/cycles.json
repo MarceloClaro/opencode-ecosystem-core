@@ -5020,6 +5020,23 @@
         "A documentação principal deve refletir a complexidade do ecossistema sem confundir mapa conceitual com inventário exaustivo do runtime."
       ],
       "timestamp": 1787696400.0
+    },
+    {
+      "round_id": "R456",
+      "objective": "Manual técnico (formato banca de doutorado) da arquitetura RAG e da proposta pós-Recamán, compilado em PDF com referências reais validadas.",
+      "changes": [
+        "docs/r456_manual_tecnico_rag/: manual_rag_recaman.tex (ABNT NBR 6022, classe abntex2 local), referencias.bib com 14 referências reais validadas, build.sh, Makefile e PDF compilado (15 páginas).",
+        "Manual distingue explicitamente estado atual (rag/evolved.py, rag/enhanced_search_rag.py) da arquitetura-alvo proposta pós-Recamán (ArtifactType, AnchorResolver, RecamanDiversifier, CanonicalContextPacker) com aviso metodológico anti-overclaim.",
+        "Diagramas TikZ com legendas (Figura 1: pipeline atual; Figura 2: proposta pós-Recamán), equações (BM25, MMR, Recamán, diversidade) e tabelas de especificações técnicas.",
+        "tests/test_r456_manual_tecnico_rag.py (12 contratos documentais verdes), VALIDATION_R456.md e SPEC-935-R456 registrados."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Documentação de proposta de arquitetura deve rotular explicitamente o que é proposto vs. implementado para sustentar o rigor anti-overclaim do ecossistema.",
+        "A compilação local de documentos ABNT reproduzíveis exige configurar TEXINPUTS, BSTINPUTS e BIBINPUTS para localizar a classe abntex2 copiada e evitar referências indefinidas.",
+        "Ao usar listings com ficheiros UTF-8, os blocos de código devem ser ASCII puro para evitar o erro \"Invalid UTF-8 byte sequence\" do pacote listings."
+      ],
+      "timestamp": 1788096506.2147543
     }
   ]
 }
