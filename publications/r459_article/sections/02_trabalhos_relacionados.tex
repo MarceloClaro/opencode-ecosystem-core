@@ -43,11 +43,44 @@ determinísticos} derivados da sequência de Recamán, removendo parâmetros e
 aleatoriedade. A pergunta que este artigo coloca é se essa escolha preserva a
 capacidade de diversificar \emph{conteúdo} (âncora) em cenários realistas.
 
+\subsection{Diversidade adaptativa e a limitação do $\lambda$ fixo}
+
+Uma limitação recorrente do MMR é a \emph{escolha do $\lambda$}. Diferentes
+estratégias foram propostas para superá-la. \emph{Probabilistic Latent MMR}
+(PLMMR) \citep{GuoSanner2010PLMMR} deriva uma variante de MMR por inferência
+variacional num modelo de grafos latentes que \emph{elimina a necessidade de
+balançar manualmente} relevância e diversidade, mostrando ainda que a diversidade
+de um conjunto deve ser \emph{relevante à consulta}. Na mesma direção,
+\emph{Learning MMR} \citep{Xia2015LearningMMR} aprende o modelo de relevância
+otimizando diretamente métricas de diversidade a partir de dados. Mais
+recentemente, no contexto de RAG, \emph{DF-RAG} \citep{Khan2026DFRAG} mostrou
+empiricamente (em cinco \emph{benchmarks} de QA) que \textbf{o $\lambda$ ótimo
+varia por query e por dataset}, e que um \emph{Oracle} que escolhe o $\lambda$
+ideal por query supera o RAG vanilla em até $\sim 18\%$ de F1 absoluto — dos quais
+o próprio DF-RAG captura até $91{,}3\%$ adaptando o $\lambda$ \emph{em tempo de
+teste}, sem fine-tuning, via um \emph{Planner/Evaluator} LLM. Já \emph{Vendi-RAG}
+\citep{RezaeiDieng2025VendiRAG} adapta iterativamente um parâmetro de diversidade
+$s$ com base na qualidade da resposta avaliada por um juiz LLM, usando a
+\emph{Vendi Score} como métrica explícita de diversidade de conjuntos.
+
+Nosso trabalho dialoga com essa linha \emph{sem depender de LLM}: o
+$\lambda$ adaptativo do HABD é derivado por uma \emph{heurística determinística}
+(índice de mistura de âncoras no topo do ranking), o que o torna auditável,
+reprodutível e de custo desprezível. Em contraste com DF-RAG e Vendi-RAG, não
+treinamos nem consultamos um modelo para escolher o balanço; medimos a
+\emph{estrutura} do ranking (monopolista vs. misto) e ajustamos o balanço em
+consequência. Isso reforça a tese comum — $\lambda$ fixo é subótimo — e oferece
+uma alternativa determinística para cenários sem acesso a LLM de julgamento.
+
 \subsection{Posição deste trabalho}
 
 Ao contrário de trabalhos que propõem novos diversificadores e assumem ganho,
-este artigo submete a proposta pós-Recamán a um \emph{turno empírico controlado},
-comparando-a ao \emph{top-k} e ao MMR em métricas explícitas. Reportamos um
-resultado em que a proposta \emph{empatia} com o \emph{top-k} — não um ganho
-inventado — e analisamos a causa estrutural. Essa postura de \emph{reporte
-negativo/quilibrado} é rara na literatura e contribui para a robustez da área.
+este artigo submete as propostas a um \emph{turno empírico controlado},
+comparando-as ao \emph{top-k} e ao MMR em métricas explícitas. Reportamos um
+resultado em que a proposta posicional \emph{empatia} com o \emph{top-k} e em que
+o HABD, apesar de superar em diversidade/cobertura, \emph{não demonstra} ganho
+dentro da tolerância de relevância — vereditos \texttt{refuta\_H2} e
+\texttt{refuta\_H3}. Essa postura de \emph{reporte negativo/quilibrado}, ancorada
+não apenas na teoria, mas na \emph{medição explícita} de diversidade
+\citep{Yu2024RAGEvalSurvey}, é rara na literatura e contribui para a robustez da
+área.

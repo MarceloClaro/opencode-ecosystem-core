@@ -4,32 +4,41 @@
 \section{Conclusão}
 \label{sec:conclusao}
 
-Este artigo submeteu a proposta pós-Recamán a uma avaliação empírica controlada
-no contexto do RAG científico, comparando a seleção pós-ranqueamento posicional
-por Recamán ao \emph{top-k} (estado atual) e ao MMR, sob um \emph{benchmark} de
-coorte aberto e reprodutível.
+Este artigo submeteu três famílias de diversificadores pós-ranqueamento a uma
+avaliação empírica controlada no contexto do RAG científico — o \emph{top-k}
+(estado atual), o MMR com $\lambda=0{,}7$ fixo, o esquema posicional por Recamán e
+um novo híbrido \textbf{HABD} (\emph{Hybrid Anchor-Blended Deterministic}) — sob
+um \emph{benchmark} de coorte aberto e reprodutível.
 
 Do ponto de vista \emph{metodológico}, formalizamos o diversificador
 determinístico (Algoritmo~\ref{alg:recaman}), a métrica de diversidade
-$\Div(\mathcal{S})$ sobre âncoras canônicas (Eq.~\ref{eq:diversity}) e um protocolo
-de coorte com cuidados de validade explícitos (dedup por documento, pool amplo,
-query balanceada e veredito anti-empate). Contribuímos, assim, com um
-\emph{benchmark} que permite \emph{medir} — em vez de \emph{assumir} — o efeito de
-estratégias de diversificação.
+$\Div(\mathcal{S})$ sobre âncoras canônicas (Eq.~\ref{eq:diversity}), o HABD com
+$\lambda$ adaptativo por query (Eqs.~\ref{eq:mu}, \ref{eq:lambda},
+\ref{eq:habdscore}) e um protocolo de coorte com cuidados de validade explícitos
+(dedup por documento, pool amplo, query balanceada e veredito anti-empate).
+Contribuímos, assim, com um \emph{benchmark} que permite \emph{medir} — em vez de
+\emph{assumir} — o efeito de estratégias de diversificação.
 
-Do ponto de vista \emph{empírico}, o resultado é \emph{factual}: no corpus-piloto,
-o esquema posicional de Recamán \textbf{empatou} com o \emph{top-k} em diversidade
-($\Div=0{,}500$; $\Delta\Div=0{,}0$), enquanto o MMR superou ambos ($\Div=0{,}750$;
-cobertura $0{,}917$). Registramos o veredito \texttt{refuta\_H2}: a hipótese de
-ganho estrito de diversidade \emph{não foi demonstrada} pela variante posicional.
-A análise atribui o achado à natureza \emph{estruturalmente posicional} do
-diversificador, que não consulta âncoras de conteúdo e, portanto, reproduz o
-\emph{top-k} sob rankings monopolistas por família.
+Do ponto de vista \emph{empírico}, os resultados são \emph{factuais} no
+corpus-piloto: (i) o esquema posicional de Recamán \textbf{empatou} com o
+\emph{top-k} em diversidade ($\Div=0{,}500$; $\Delta\Div=0{,}0$) — registrando
+\texttt{refuta\_H2} — por operar sobre posições, não sobre âncoras; (ii) o MMR
+superou ambos em diversidade e cobertura ($\Div=0{,}750$; $0{,}917$), com queda de
+relevância de $\approx 6{,}7\%$; e (iii) o \textbf{HABD} atingiu a maior
+diversidade ($\Div=0{,}8333$) e a cobertura máxima ($1{,}0$), superando MMR e
+Recamán na fronteira de diversidade, \textbf{mas} com queda de relevância de
+$\approx 10{,}4\%$ — acima da tolerância de $5\%$, o que registramos como
+\texttt{refuta\_H3}.
+
+A análise situa esses resultados na literatura recente de \emph{diversidade ciente
+da consulta}: confirmamos a tese de que \emph{$\lambda$ fixo é subótimo}
+\citep{Khan2026DFRAG} e que adaptá-lo — mesmo por heurística determinística, sem
+LLM — ganha cobertura; porém, sem um \emph{feedback de qualidade} da resposta,
+como em Vendi-RAG \citep{RezaeiDieng2025VendiRAG}, a diversidade ganha primazia
+sem contrapeso de relevância, deixando o gargalo aberto.
 
 Reiteramos o escopo: os valores reportados provêm de \emph{corpus-piloto
-controlado} e \emph{não generalizam para produção}. A proposta pós-Recamán
-permanece válida como \emph{capacidade determinística exposta}, mas a otimização
-posicional isolada não demonstrou, neste cenário, ganho de diversidade de fonte —
-apontando a necessidade de diversificadores que operem sobre \emph{âncoras} ou da
-combinação com dissimilaridade de conteúdo, direções que deixamos como trabalho
-futuro.
+controlado} e \emph{não generalizam para produção}. O caminho para um diversificador
+que respeite a tolerância de relevância passa por acoplar a rotação adaptativa a um
+sinal de qualidade (LLM-judge ou extrínseco), validar em corpora reais com mais
+queries e integrar embeddings densos — direções que deixamos como trabalho futuro.

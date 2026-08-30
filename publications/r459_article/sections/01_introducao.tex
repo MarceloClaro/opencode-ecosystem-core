@@ -43,13 +43,18 @@ comparada ao \emph{top-k}? E como ela se compara ao MMR?
 
 Para respondê-la de forma controlada e reprodutível, construímos um
 \emph{benchmark} de coorte com corpus-piloto determinístico, no qual famílias de
-documentos representam ângulos de perspectiva distintos, e comparamos três
+documentos representam ângulos de perspectiva distintos, e comparamos quatro
 estratégias de seleção pós-ranqueamento sob métricas de diversidade, relevância
 e cobertura. O resultado central é \emph{factual} e \emph{contrarintuitivo} em
 relação à expectativa inicial: no cenário testado, o esquema posicional de
-Recamán \textbf{empata} com o \emph{top-k} em diversidade, enquanto o MMR supera
-ambos. Esse achado evidencia uma \emph{limitação estrutural} de diversificadores
-posicionais, com implicações práticas para o desenho de diversificação no RAG.
+Recamán \textbf{empata} com o \emph{top-k} em diversidade; o MMR supera ambos;
+e um novo diversificador híbrido, \textbf{HABD}, que combina determinismo com
+dissimilaridade de \emph{âncoras} e $\lambda$ adaptativo por query, supera ambos
+em diversidade e cobertura — porém ao custo de uma queda de relevância acima da
+tolerância adotada. Esses achados evidenciam (i) uma \emph{limitação estrutural}
+de diversificadores posicionais e (ii) que \emph{$\lambda$ fixo é subótimo},
+alinhando-se à literatura recente de \emph{diversidade ciente da consulta}
+\citep{Khan2026DFRAG,RezaeiDieng2025VendiRAG}.
 
 \subsection{Contribuições}
 
@@ -61,19 +66,28 @@ Resumimos as contribuições deste artigo:
         âncoras canônicas, de caráter aditivo e determinístico;
   \item \textbf{C2 (método)} — um \emph{benchmark} de coorte aberto e
         reprodutível para comparar estratégias de diversificação
-        (\texttt{benchmarks/cohort\_recaman.py});
+        (\texttt{benchmarks/cohort\_recaman.py}), incluindo \emph{top-k}, MMR,
+        Recamán e HABD;
   \item \textbf{C3 (evidência)} — a evidência empírica controlada de que
         diversificadores posicionais podem coincidir com o \emph{top-k} sob
         ranking monopolista por família, enquanto o MMR, baseado em
-        dissimilaridade de conteúdo, espalha por fonte.
+        dissimilaridade de conteúdo, espalha por fonte;
+  \item \textbf{C4 (HABD)} — um diversificador híbrido \emph{anchor-blended}
+        determinístico com $\lambda$ adaptativo por query (sem LLM), que
+        maximiza a cobertura de âncoras; e a avaliação honesta de que, apesar
+        de superar MMR/Recamán em diversidade, \textbf{não satisfaz} a
+        tolerância de relevância (H3 refutada) — reporte equilibrado raro na
+        literatura.
 \end{enumerate}
 
 \subsection{Organização do artigo}
 
-Na Seção~\ref{sec:rel} revisamos trabalhos relacionados. A
-Seção~\ref{sec:metodo} apresenta a formulação da proposta, o desenho do
-corpus-piloto e o protocolo de avaliação. A Seção~\ref{sec:resultados} reporta
-os resultados observados. A Seção~\ref{sec:discussao} discute implicações e
-limitações, e a Seção~\ref{sec:conclusao} conclui. Declaramos, desde já, o
-escopo: todos os valores quantitativos provêm de \emph{corpus piloto controlado} e
-\emph{não generalizam para produção}.
+Na Seção~\ref{sec:rel} revisamos trabalhos relacionados, incluindo a literatura
+recente de diversidade \emph{adaptativa} em RAG (DF-RAG, Vendi-RAG, PLMMR). A
+Seção~\ref{sec:metodo} apresenta a formulação das propostas (Recamán e HABD), o
+desenho do corpus-piloto e o protocolo de avaliação. A Seção~\ref{sec:resultados}
+reporta os resultados observados para as quatro estratégias. A
+Seção~\ref{sec:discussao} discute implicações e limitações, e a
+Seção~\ref{sec:conclusao} conclui. Declaramos, desde já, o escopo: todos os
+valores quantitativos provêm de \emph{corpus piloto controlado} e \emph{não
+generalizam para produção}.

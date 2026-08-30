@@ -29,7 +29,13 @@
         "diversity": 0.5,
         "groundedness": 0.4352,
         "coverage": 0.6667
-      }
+      },
+      "habd": {
+        "diversity": 0.8333,
+        "groundedness": 0.3996,
+        "coverage": 1.0
+      },
+      "habd_lambda": 0.4333
     },
     {
       "query": "explique e compare a evidencia para intervencao poder vies contrafactual tamanho_amostral selecao efeito intervalo",
@@ -55,7 +61,13 @@
         "diversity": 0.5,
         "groundedness": 0.4688,
         "coverage": 0.6667
-      }
+      },
+      "habd": {
+        "diversity": 0.8333,
+        "groundedness": 0.4242,
+        "coverage": 1.0
+      },
+      "habd_lambda": 0.4333
     },
     {
       "query": "explique e compare a evidencia para poder vies matriz tamanho_amostral selecao variancia intervalo publicacao",
@@ -81,7 +93,13 @@
         "diversity": 0.5,
         "groundedness": 0.4846,
         "coverage": 0.6667
-      }
+      },
+      "habd": {
+        "diversity": 0.8333,
+        "groundedness": 0.4167,
+        "coverage": 1.0
+      },
+      "habd_lambda": 0.4333
     },
     {
       "query": "explique e compare a evidencia para vies matriz hipotese selecao variancia significancia publicacao covariancia",
@@ -107,7 +125,13 @@
         "diversity": 0.5,
         "groundedness": 0.4358,
         "coverage": 0.6667
-      }
+      },
+      "habd": {
+        "diversity": 0.8333,
+        "groundedness": 0.3942,
+        "coverage": 1.0
+      },
+      "habd_lambda": 0.4333
     }
   ],
   "per_strategy": {
@@ -125,6 +149,11 @@
       "diversity": 0.5,
       "groundedness": 0.4561,
       "coverage": 0.6667
+    },
+    "habd": {
+      "diversity": 0.8333,
+      "groundedness": 0.4087,
+      "coverage": 1.0
     }
   },
   "recaman": {
@@ -134,11 +163,23 @@
     "gain_div_vs_atual": 0.0,
     "loss_rel_groundedness": 0.0
   },
+  "habd": {
+    "diversity": 0.8333,
+    "groundedness": 0.4087,
+    "coverage": 1.0,
+    "lambda_medio": 0.4333,
+    "loss_rel_groundedness": 0.1039,
+    "supera_empate_topk": true,
+    "vs_mmr_gte": true
+  },
   "comparison": {
     "mmr_div": 0.75,
     "recaman_div": 0.5,
-    "mmr_supera_recaman": true
+    "habd_div": 0.8333,
+    "mmr_supera_recaman": true,
+    "habd_supera_mmr": true
   },
   "verdict": "refuta_H2",
+  "verdict_h3": "refuta_H3",
   "escopo": "resultado observado em corpus-piloto controlado; nao generaliza para producao."
 }

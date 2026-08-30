@@ -1,6 +1,7 @@
 % =====================================================================
-% ARTIGO R459 — Diversificação pós-ranqueamento no RAG científico:
-% avaliação empírica do esquema posicional de Recamán vs MMR
+% ARTIGO R459/R460 — Diversificação pós-ranqueamento no RAG científico:
+% avaliação empírica do esquema posicional de Recamán vs MMR e um
+% diversificador híbrido anchor-blended com λ adaptativo (HABD)
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 
@@ -41,7 +42,8 @@
 \onecolumn
 
 \title{\textbf{Diversificação pós-ranqueamento no RAG científico:\\
-uma avaliação empírica do esquema posicional de Recamán vs.\ MMR}}
+avaliação empírica do esquema posicional de Recamán vs. MMR e um\\
+diversificador híbrido anchor-blended com $\lambda$ adaptativo (HABD)}}
 
 \author{
   Marcelo Claro Laranjeira\\
@@ -61,52 +63,59 @@ uma avaliação empírica do esquema posicional de Recamán vs.\ MMR}}
 \noindent\textbf{Resumo.} Em arquiteturas de \textit{Retrieval-Augmented
 Generation} (RAG) para domínio científico, o estágio de pós-ranqueamento costuma
 otimizar \emph{relevância}, mas raramente mede ou promove a \emph{diversidade}
-do conjunto recuperado. Este artigo formaliza a proposta pós-Recamán: um
-diversificador determinístico de pós-ranqueamento baseado na sequência de Recamán
-(OEIS A005132) e uma métrica de diversidade $\Div(\mathcal{S})$ sobre âncoras
-canônicas. Para avaliar a proposta de forma controlada e reprodutível,
-construímos um \emph{benchmark} de coorte com corpus-piloto determinístico
-(6 ângulos de perspectiva $\times$ 3 documentos), comparando três estratégias de
-seleção pós-ranqueamento: \emph{top-k} (estado atual), MMR e Recamán, sob métricas
-de diversidade, relevância (\emph{groundedness}) e cobertura de ângulos. Os
-resultados mostram que, no cenário testado, o esquema posicional de Recamán
-\emph{empata} com o \emph{top-k} em diversidade ($\Div = 0{,}500$; ganho $= 0{,}0$),
-enquanto o MMR supera ambos ($\Div = 0{,}750$; cobertura $0{,}917$), sem que o
-Recamán degrade a relevância (queda $= 0{,}0\%$). O achado evidencia uma
-\emph{limitação estrutural} de diversificadores posicionais: como operam sobre
-posições (offsets) e não sobre âncoras de conteúdo, eles podem reproduzir o
-\emph{top-k} em rankings ``localmente monopolistas''. Discutimos implicações para
-a diversificação de fontes em consultas de paisagem multicunha e propomos
-direções de trabalho futuro. \emph{Observação de escopo:} valores reportados são
-oriundos de corpus-piloto controlado; não generalizam para produção.
+do conjunto recuperado. Este artigo estuda três famílias de diversificadores de
+pós-ranqueamento sob um \emph{benchmark} de coorte controlado e reprodutível
+(corpus-piloto determinístico, 6 ângulos de perspectiva $\times$ 3 documentos):
+o \emph{top-k} (estado atual), o \emph{Maximal Marginal Relevance} (MMR) com
+$\lambda=0{,}7$ fixo, o esquema posicional baseado na sequência de Recamán
+(OEIS A005132) e um novo diversificador \textbf{HABD} (\emph{Hybrid
+Anchor-Blended Deterministic diversifier}). Resultados (médias sobre 4 queries):
+Recamán \emph{empata} com o \emph{top-k} em diversidade ($\Div{=}0{,}500$;
+ganho $=0{,}0$) por operar sobre \emph{posições}, e não sobre \emph{âncoras} de
+conteúdo; o MMR supera ambos ($\Div{=}0{,}750$; cobertura $0{,}917$) à custa de
+queda de relevância ($\approx 6{,}7\%$); e o \textbf{HABD}, que combina
+determinismo com dissimilaridade de \emph{âncoras} e \emph{$\lambda$
+adaptativo por query} (sem LLM), supera MMR e Recamán em diversidade
+($\Div{=}0{,}8333$) e atinge \emph{cobertura máxima} ($1{,}0$), porém com queda
+de relevância de $\approx 10{,}4\%$ — acima da tolerância de $5\%$ aqui
+adotada, o que registramos como \texttt{refuta\_H3}. A proposta insere-se na
+tendência recente de \emph{diversidade ciente da consulta} (DF-RAG,
+\citenum{Khan2026DFRAG}; Vendi-RAG, \citenum{RezaeiDieng2025VendiRAG}) e mostra
+que $\lambda$ fixo é subótimo, mas que adaptá-lo por heurística determinística
+ganha fronteira de diversidade sem resolver o gargalo da
+relevância. \emph{Observação de escopo:} valores provêm de corpus-piloto
+controlado; não generalizam para produção.
 
 \medskip
 \noindent\textbf{Abstract.} In scientific \textit{Retrieval-Augmented Generation}
 (RAG) architectures, the post-ranking stage usually optimizes \emph{relevance}
 but seldom measures or promotes the \emph{diversity} of the retrieved set. This
-paper formalizes the post-Recamán proposal: a deterministic post-ranking
-diversifier based on the Recamán sequence (OEIS A005132) and a diversity metric
-$\Div(\mathcal{S})$ over canonical anchors. To evaluate the proposal in a
-controlled and reproducible manner, we build a cohort benchmark with a
-deterministic pilot corpus (6 perspective angles $\times$ 3 documents), comparing
-three post-ranking selection strategies: \emph{top-k} (current state), MMR, and
-Recamán, under diversity, relevance (\emph{groundedness}), and angle-coverage
-metrics. Results show that, in the tested scenario, the Recamán positional scheme
-\emph{ties} with \emph{top-k} in diversity ($\Div = 0.500$; gain $= 0.0$), while
-MMR outperforms both ($\Div = 0.750$; coverage $0.917$), with Recamán not degrading
-relevance (drop $= 0.0\%$). The finding highlights a \emph{structural limitation}
-of positional diversifiers: operating on positions (offsets) rather than content
-anchors, they can reproduce \emph{top-k} under ``locally monopolistic'' rankings.
-We discuss implications for source diversification in multi-faceted landscape
-queries and propose future work. \emph{Scope note:} reported values come from a
-controlled pilot corpus and do not generalize to production.
+paper studies three families of post-ranking diversifiers under a controlled and
+reproducible cohort benchmark (deterministic pilot corpus, 6 perspective angles
+$\times$ 3 documents): \emph{top-k} (current state), \emph{Maximal Marginal
+Relevance} (MMR) with fixed $\lambda{=}0.7$, the positional scheme based on the
+Recamán sequence (OEIS A005132), and a new \textbf{HABD} (\emph{Hybrid
+Anchor-Blended Deterministic diversifier}). Results (means over 4 queries):
+Recamán \emph{ties} with \emph{top-k} in diversity ($\Div{=}0.500$; gain $=0.0$)
+because it operates on \emph{positions} rather than content \emph{anchors}; MMR
+outperforms both ($\Div{=}0.750$; coverage $0.917$) at the cost of a relevance
+drop ($\approx 6.7\%$); and \textbf{HABD}, which combines determinism with anchor
+dissimilarity and a \emph{query-adaptive} $\lambda$ (LLM-free), surpasses MMR and
+Recamán in diversity ($\Div{=}0.8333$) and reaches \emph{full coverage} ($1.0$),
+but with a relevance drop of $\approx 10.4\%$ — above the $5\%$ tolerance
+adopted here, recorded as \texttt{refutes\_H3}. The proposal fits the recent
+\emph{query-aware diversity} trend (DF-RAG, \citenum{Khan2026DFRAG};
+Vendi-RAG, \citenum{RezaeiDieng2025VendiRAG}) and shows that a fixed $\lambda$ is
+suboptimal, yet adapting it by a deterministic heuristic wins in the diversity
+frontier without resolving the relevance bottleneck. \emph{Scope note:} reported
+values come from a controlled pilot corpus and do not generalize to production.
 
 \medskip
 \noindent\textbf{Palavras-chave:} Recuperação de Informação; Retrieval-Augmented
-Generation; Diversificação; Recamán; MMR; Métrica de diversidade.
+Generation; Diversificação; MMR; Recamán; Lambda adaptativo; Diversidade de fonte.
 
 \noindent\textbf{Keywords:} Information Retrieval; Retrieval-Augmented Generation;
-Diversification; Recamán; MMR; Diversity metric.
+Diversification; MMR; Recamán; Adaptive lambda; Source diversity.
 \end{abstract}
 
 \tableofcontents
@@ -132,13 +141,20 @@ Diversification; Recamán; MMR; Diversity metric.
 \addcontentsline{toc}{section}{Apêndice A — Arquivos e reprodutibilidade}
 Os artefatos do estudo estão versionados no repositório de pesquisa:
 \begin{itemize}
-  \item Proposta e métrica: \texttt{rag/recaman.py} (sequência de Recamán,
+  \item Recamán e métrica: \texttt{rag/recaman.py} (sequência de Recamán,
         \texttt{RecamanDiversifier}, \texttt{AnchorResolver}, métrica
         $\Div(\mathcal{S})$); integração aditiva em
         \texttt{rag/enhanced\_search\_rag.py} (campo \texttt{diversity}).
+  \item HABD: \texttt{rag/habd.py} (\texttt{HABD} com \texttt{resolve\_anchors},
+        \texttt{mix\_index}/\texttt{mu}, \texttt{adaptive\_lambda} e
+        \texttt{select} MMR anchor-blended); testes
+        \texttt{tests/test\_r460\_habd.py} (13 testes).
   \item \emph{Benchmark} de coorte: \texttt{benchmarks/cohort\_recaman.py}
-        e relatório \texttt{benchmarks/cohort\_report.json}.
-  \item Especificações: \texttt{SPEC-935-R457}, \texttt{SPEC-935-R458}.
+        (estratégias \texttt{atual}, \texttt{mmr}, \texttt{recaman},
+        \texttt{habd}) e relatório \texttt{benchmarks/cohort\_report.json}.
+        Figura: \texttt{publications/r459\_article/make\_figures.py}.
+  \item Especificações: \texttt{SPEC-935-R457}, \texttt{SPEC-935-R458},
+        \texttt{SPEC-935-R460}.
   \item Manual técnico: \texttt{docs/r456\_manual\_tecnico\_rag/}.
 \end{itemize}
 

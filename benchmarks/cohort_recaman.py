@@ -20,6 +20,7 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from rag.recaman import RecamanDiversifier, AnchorResolver, diversity
 from rag.scientific import ScientificDocument, ScientificRAG
+from rag.habd import HABD
 
 # Baselines
 N_ANGLES = 6          # famílias de perspectiva (ângulos)
@@ -264,12 +265,14 @@ def run_cohort(
     rag.index(corpus["documents"])
     resolver = AnchorResolver()
     mmr = MMR()
+    habd = HABD()
 
     per_query: List[Dict[str, Any]] = []
     agg: Dict[str, Dict[str, float]] = {
         "atual": {"diversity": 0.0, "groundedness": 0.0, "coverage": 0.0, "n": 0},
         "mmr": {"diversity": 0.0, "groundedness": 0.0, "coverage": 0.0, "n": 0},
         "recaman": {"diversity": 0.0, "groundedness": 0.0, "coverage": 0.0, "n": 0},
+        "habd": {"diversity": 0.0, "groundedness": 0.0, "coverage": 0.0, "n": 0},
     }
 
     for q_idx in range(n_queries):
@@ -290,16 +293,18 @@ def run_cohort(
         sel_atual = _select_current(candidates, k)
         sel_mmr = mmr.select(candidates, k)
         sel_rec = _select_recaman(candidates, k, len(candidates))
+        sel_habd = habd.select(candidates, k)
 
         m_atual = _metrics_of(sel_atual, target_fams, resolver)
         m_mmr = _metrics_of(sel_mmr, target_fams, resolver)
         m_rec = _metrics_of(sel_rec, target_fams, resolver)
+        m_habd = _metrics_of(sel_habd, target_fams, resolver)
 
         # top-1 presente na seleção Recamán?
         rec_ids = [s.get("doc_id") for s in _to_evidence_dicts(sel_rec)]
         top1_id = ranked[0].doc_id
 
-        for name, m_ in (("atual", m_atual), ("mmr", m_mmr), ("recaman", m_rec)):
+        for name, m_ in (("atual", m_atual), ("mmr", m_mmr), ("recaman", m_rec), ("habd", m_habd)):
             agg[name]["diversity"] += m_["diversity"]
             agg[name]["groundedness"] += m_["groundedness"]
             agg[name]["coverage"] += m_["coverage"]
@@ -313,6 +318,8 @@ def run_cohort(
             "atual": m_atual,
             "mmr": m_mmr,
             "recaman": m_rec,
+            "habd": m_habd,
+            "habd_lambda": round(habd.adaptive_lambda(candidates), 4),
         })
 
     # Médias por estratégia
@@ -340,6 +347,13 @@ def run_cohort(
     # Situação: Recamán empatando é NÃO-demonstração; MMR superando é registrado.
     mmr_supera_recaman = mmrx["diversity"] > rec["diversity"] + 1e-9
 
+    # ---- H3 (HABD): supera empate top-k/Recamán e >= MMR, com queda <= tol ----
+    hb = per_strategy["habd"]
+    hb_loss = (atu["groundedness"] - hb["groundedness"]) / atu["groundedness"] if atu["groundedness"] else 0.0
+    hb_supera_empate = hb["diversity"] > 0.5 + 1e-9  # > top-k (0.5)
+    hb_vs_mmr = hb["diversity"] >= mmrx["diversity"] - 1e-9
+    h3_sustenta = hb_supera_empate and hb_vs_mmr and (hb_loss <= LOSS_TOLERANCE)
+
     return {
         "config": {"top_n": top_n, "k": k, "n_queries": len(per_query)},
         "per_query": per_query,
@@ -351,12 +365,24 @@ def run_cohort(
             "gain_div_vs_atual": round(gain_div, 4),
             "loss_rel_groundedness": round(loss_rel, 4),
         },
+        "habd": {
+            "diversity": hb["diversity"],
+            "groundedness": hb["groundedness"],
+            "coverage": hb["coverage"],
+            "lambda_medio": round(sum(pq.get("habd_lambda", 0.7) for pq in per_query) / max(1, len(per_query)), 4),
+            "loss_rel_groundedness": round(hb_loss, 4),
+            "supera_empate_topk": hb_supera_empate,
+            "vs_mmr_gte": hb_vs_mmr,
+        },
         "comparison": {
             "mmr_div": mmrx["diversity"],
             "recaman_div": rec["diversity"],
+            "habd_div": hb["diversity"],
             "mmr_supera_recaman": mmr_supera_recaman,
+            "habd_supera_mmr": hb["diversity"] > mmrx["diversity"] + 1e-9,
         },
         "verdict": "sustenta_H2" if sustenta else "refuta_H2",
+        "verdict_h3": "sustenta_H3" if h3_sustenta else "refuta_H3",
         "escopo": "resultado observado em corpus-piloto controlado; nao generaliza para producao.",
     }
 
