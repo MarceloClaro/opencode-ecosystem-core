@@ -1,0 +1,144 @@
+{
+  "config": {
+    "top_n": 8,
+    "k": 4,
+    "n_queries": 4
+  },
+  "per_query": [
+    {
+      "query": "explique e compare a evidencia para metodi intervencao poder amostragem contrafactual tamanho_amostral confundidor efeito",
+      "query_index": 0,
+      "recaman_docs": [
+        "doc_2_0",
+        "doc_2_1",
+        "doc_2_2",
+        "doc_1_1"
+      ],
+      "recaman_top1_present": true,
+      "atual": {
+        "diversity": 0.5,
+        "groundedness": 0.4352,
+        "coverage": 0.6667
+      },
+      "mmr": {
+        "diversity": 0.8333,
+        "groundedness": 0.3996,
+        "coverage": 1.0
+      },
+      "recaman": {
+        "diversity": 0.5,
+        "groundedness": 0.4352,
+        "coverage": 0.6667
+      }
+    },
+    {
+      "query": "explique e compare a evidencia para intervencao poder vies contrafactual tamanho_amostral selecao efeito intervalo",
+      "query_index": 1,
+      "recaman_docs": [
+        "doc_2_0",
+        "doc_2_1",
+        "doc_2_2",
+        "doc_3_1"
+      ],
+      "recaman_top1_present": true,
+      "atual": {
+        "diversity": 0.5,
+        "groundedness": 0.4688,
+        "coverage": 0.6667
+      },
+      "mmr": {
+        "diversity": 0.8333,
+        "groundedness": 0.4242,
+        "coverage": 1.0
+      },
+      "recaman": {
+        "diversity": 0.5,
+        "groundedness": 0.4688,
+        "coverage": 0.6667
+      }
+    },
+    {
+      "query": "explique e compare a evidencia para poder vies matriz tamanho_amostral selecao variancia intervalo publicacao",
+      "query_index": 2,
+      "recaman_docs": [
+        "doc_2_0",
+        "doc_2_1",
+        "doc_2_2",
+        "doc_3_1"
+      ],
+      "recaman_top1_present": true,
+      "atual": {
+        "diversity": 0.5,
+        "groundedness": 0.4846,
+        "coverage": 0.6667
+      },
+      "mmr": {
+        "diversity": 0.5,
+        "groundedness": 0.4846,
+        "coverage": 0.6667
+      },
+      "recaman": {
+        "diversity": 0.5,
+        "groundedness": 0.4846,
+        "coverage": 0.6667
+      }
+    },
+    {
+      "query": "explique e compare a evidencia para vies matriz hipotese selecao variancia significancia publicacao covariancia",
+      "query_index": 3,
+      "recaman_docs": [
+        "doc_3_0",
+        "doc_3_1",
+        "doc_3_2",
+        "doc_4_1"
+      ],
+      "recaman_top1_present": true,
+      "atual": {
+        "diversity": 0.5,
+        "groundedness": 0.4358,
+        "coverage": 0.6667
+      },
+      "mmr": {
+        "diversity": 0.8333,
+        "groundedness": 0.3942,
+        "coverage": 1.0
+      },
+      "recaman": {
+        "diversity": 0.5,
+        "groundedness": 0.4358,
+        "coverage": 0.6667
+      }
+    }
+  ],
+  "per_strategy": {
+    "atual": {
+      "diversity": 0.5,
+      "groundedness": 0.4561,
+      "coverage": 0.6667
+    },
+    "mmr": {
+      "diversity": 0.75,
+      "groundedness": 0.4256,
+      "coverage": 0.9167
+    },
+    "recaman": {
+      "diversity": 0.5,
+      "groundedness": 0.4561,
+      "coverage": 0.6667
+    }
+  },
+  "recaman": {
+    "diversity": 0.5,
+    "groundedness": 0.4561,
+    "coverage": 0.6667,
+    "gain_div_vs_atual": 0.0,
+    "loss_rel_groundedness": 0.0
+  },
+  "comparison": {
+    "mmr_div": 0.75,
+    "recaman_div": 0.5,
+    "mmr_supera_recaman": true
+  },
+  "verdict": "refuta_H2",
+  "escopo": "resultado observado em corpus-piloto controlado; nao generaliza para producao."
+}
