@@ -1,0 +1,126 @@
+% =====================================================================
+% SUBMISSION — Diversificação pós-ranqueamento no RAG científico
+% Versão de submissão (2 colunas, estilo periódico) gerada a partir do
+% manuscrito R459/R460. Compila garantidamente com a classe article
+% (IEEEtran/acmart não disponíveis no ambiente).
+% =====================================================================
+\documentclass[10pt,twocolumn,a4paper]{article}
+% twocolumn: layout padrão de submissão para periódicos de engenharia/CS
+% (o PDF de leitura em uma coluna continua em main.tex).
+
+% ---- Pacotes ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hyperref}
+\usepackage{lineno}
+\usepackage{threeparttable}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black,
+  pdftitle={Diversificacao pos-ranqueamento no RAG cientifico (Recaman vs MMR vs HABD)},
+  pdfsubject={RAG, Recuperacao de Informacao, Diversificacao, Recaman, MMR, Lambda adaptativo}
+}
+
+% ---- Comandos auxiliares (definidos no main de leitura) ----
+\newcommand{\Div}{\mathrm{Div}}
+\newcommand{\Sim}{\mathrm{Sim}}
+\newcommand{\RGA}{\mathit{RA}}
+\newcommand{\E}[1]{\ensuremath{\mathbb{E}\left[#1\right]}}
+
+% ---- Linhas numeradas (revisão de submissão) ----
+\linenumbers
+
+% ---- Caminho das figuras (as seções usam figures/cohort_results.png) ----
+\graphicspath{{../}}
+
+% ---- Metadados ----
+\title{\textbf{Diversificação pós-ranqueamento no RAG científico:\\
+avaliação empírica do esquema posicional de Recamán vs.\ MMR e um\\
+diversificador híbrido anchor-blended com $\lambda$ adaptativo (HABD)}}
+
+\author{
+  Marcelo Claro Laranjeira\\
+  \small \texttt{marceloclaro@gmail.com} \quad ORCID 0000-0001-8996-2887
+}
+\date{\today}
+
+\begin{document}
+
+\twocolumn[
+  \maketitle
+  \begin{@twocolumnfalse}
+  \small
+  \noindent\textbf{Resumo.} Este artigo estuda três famílias de diversificadores
+  de pós-ranqueamento em \textit{Retrieval-Augmented Generation} (RAG) científico
+  sob um \emph{benchmark} de coorte controlado e reprodutível (corpus-piloto
+  determinístico, 6 ângulos $\times$ 3 documentos, 4 queries): \emph{top-k},
+  \emph{Maximal Marginal Relevance} (MMR, $\lambda{=}0{,}7$), o esquema posicional
+  de Recamán (OEIS A005132) e um novo diversificador \textbf{HABD} (\emph{Hybrid
+  Anchor-Blended Deterministic}, com $\lambda$ adaptativo por query e sem LLM).
+  Resultados: Recamán \emph{empata} com o \emph{top-k} em diversidade
+  ($\Div{=}0{,}500$) por operar sobre \emph{posições}, não sobre \emph{âncoras};
+  MMR supera ambos ($\Div{=}0{,}750$; cobertura $0{,}917$) com queda de relevância
+  de $\approx 6{,}7\%$; e \textbf{HABD} alcança a maior diversidade
+  ($\Div{=}0{,}8333$) e cobertura máxima ($1{,}0$), superando MMR e Recamán, porém
+  com queda de relevância de $\approx 10{,}4\%$ — acima da tolerância de $5\%$
+  adotada ($\texttt{refuta\_H3}$). Os achados corroboram a literatura de
+  \emph{diversidade ciente da consulta} (DF-RAG, Vendi-RAG): $\lambda$ fixo é
+  subótimo; adaptá-lo por heurística determinística ganha cobertura sem resolver
+  o gargalo de relevância. \emph{Escopo:} corpus-piloto; não generaliza.
+
+  \medskip
+  \noindent\textbf{Palavras-chave:} Recuperação de Informação; RAG;
+  Diversificação; MMR; Recamán; Lambda adaptativo; Diversidade de fonte.
+
+  \medskip
+  \noindent\textbf{Abstract.} This paper studies three post-ranking diversifier
+  families in scientific \textit{Retrieval-Augmented Generation} (RAG) under a
+  controlled cohort benchmark (deterministic pilot corpus, 6 angles $\times$ 3
+  documents, 4 queries): \emph{top-k}, \emph{Maximal Marginal Relevance} (MMR,
+  $\lambda{=}0.7$), the Recamán positional scheme (OEIS A005132) and a novel
+  \textbf{HABD} (\emph{Hybrid Anchor-Blended Deterministic}, with query-adaptive
+  $\lambda$, LLM-free). Results: Recamán \emph{ties} \emph{top-k} in diversity
+  ($\Div{=}0.500$) because it operates on \emph{positions} rather than
+  \emph{anchors}; MMR outperforms both ($\Div{=}0.750$; coverage $0.917$) with a
+  relevance drop of $\approx 6.7\%$; and \textbf{HABD} reaches the highest
+  diversity ($\Div{=}0.8333$) and full coverage ($1.0$), beating MMR and Recamán,
+  yet with a relevance drop of $\approx 10.4\%$ — above the adopted $5\%$
+  tolerance ($\texttt{refutes\_H3}$). Findings corroborate \emph{query-aware
+  diversity} literature (DF-RAG, Vendi-RAG): fixed $\lambda$ is suboptimal;
+  adapting it by a deterministic heuristic gains coverage without resolving the
+  relevance bottleneck. \emph{Scope:} pilot corpus; does not generalize.
+  \end{@twocolumnfalse}
+]
+
+% =====================================================================
+% SEÇÕES (reutilizadas do manuscrito de leitura)
+% =====================================================================
+\input{../sections/01_introducao.tex}
+\input{../sections/02_trabalhos_relacionados.tex}
+\input{../sections/03_metodologia.tex}
+\input{../sections/04_resultados.tex}
+\input{../sections/05_discussao.tex}
+\input{../sections/06_conclusao.tex}
+
+% =====================================================================
+% REFERÊNCIAS
+% =====================================================================
+\bibliographystyle{abbrvnat}
+\bibliography{../referencias}
+
+\end{document}
