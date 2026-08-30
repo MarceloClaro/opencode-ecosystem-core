@@ -1,0 +1,35 @@
+% =====================================================================
+% SEC 06 — Conclusão
+% =====================================================================
+\section{Conclusão}
+\label{sec:conclusao}
+
+Este artigo submeteu a proposta pós-Recamán a uma avaliação empírica controlada
+no contexto do RAG científico, comparando a seleção pós-ranqueamento posicional
+por Recamán ao \emph{top-k} (estado atual) e ao MMR, sob um \emph{benchmark} de
+coorte aberto e reprodutível.
+
+Do ponto de vista \emph{metodológico}, formalizamos o diversificador
+determinístico (Algoritmo~\ref{alg:recaman}), a métrica de diversidade
+$\Div(\mathcal{S})$ sobre âncoras canônicas (Eq.~\ref{eq:diversity}) e um protocolo
+de coorte com cuidados de validade explícitos (dedup por documento, pool amplo,
+query balanceada e veredito anti-empate). Contribuímos, assim, com um
+\emph{benchmark} que permite \emph{medir} — em vez de \emph{assumir} — o efeito de
+estratégias de diversificação.
+
+Do ponto de vista \emph{empírico}, o resultado é \emph{factual}: no corpus-piloto,
+o esquema posicional de Recamán \textbf{empatou} com o \emph{top-k} em diversidade
+($\Div=0{,}500$; $\Delta\Div=0{,}0$), enquanto o MMR superou ambos ($\Div=0{,}750$;
+cobertura $0{,}917$). Registramos o veredito \texttt{refuta\_H2}: a hipótese de
+ganho estrito de diversidade \emph{não foi demonstrada} pela variante posicional.
+A análise atribui o achado à natureza \emph{estruturalmente posicional} do
+diversificador, que não consulta âncoras de conteúdo e, portanto, reproduz o
+\emph{top-k} sob rankings monopolistas por família.
+
+Reiteramos o escopo: os valores reportados provêm de \emph{corpus-piloto
+controlado} e \emph{não generalizam para produção}. A proposta pós-Recamán
+permanece válida como \emph{capacidade determinística exposta}, mas a otimização
+posicional isolada não demonstrou, neste cenário, ganho de diversidade de fonte —
+apontando a necessidade de diversificadores que operem sobre \emph{âncoras} ou da
+combinação com dissimilaridade de conteúdo, direções que deixamos como trabalho
+futuro.

@@ -1,0 +1,145 @@
+% =====================================================================
+% ARTIGO R459 — Diversificação pós-ranqueamento no RAG científico:
+% avaliação empírica do esquema posicional de Recamán vs MMR
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+% ---- Pacotes ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black,
+  pdftitle={Diversificacao pos-ranqueamento no RAG cientifico},
+  pdfsubject={RAG, Recuperacao de Informacao, Diversificacao, Recaman, MMR}
+}
+
+% ---- Comandos auxiliares ----
+\newcommand{\Div}{\mathrm{Div}}
+\newcommand{\Sim}{\mathrm{Sim}}
+\newcommand{\RGA}{\mathit{RA}}
+\newcommand{\E}[1]{\ensuremath{\mathbb{E}\left[#1\right]}}
+
+% Fontes/configuração da linha
+\setlength{\emergencystretch}{3em}
+\raggedbottom
+\onecolumn
+
+\title{\textbf{Diversificação pós-ranqueamento no RAG científico:\\
+uma avaliação empírica do esquema posicional de Recamán vs.\ MMR}}
+
+\author{
+  Marcelo Claro Laranjeira\\
+  \small \texttt{marceloclaro@gmail.com} \quad ORCID 0000-0001-8996-2887
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% =====================================================================
+% RESUMO
+% =====================================================================
+\begin{abstract}
+\noindent\textbf{Resumo.} Em arquiteturas de \textit{Retrieval-Augmented
+Generation} (RAG) para domínio científico, o estágio de pós-ranqueamento costuma
+otimizar \emph{relevância}, mas raramente mede ou promove a \emph{diversidade}
+do conjunto recuperado. Este artigo formaliza a proposta pós-Recamán: um
+diversificador determinístico de pós-ranqueamento baseado na sequência de Recamán
+(OEIS A005132) e uma métrica de diversidade $\Div(\mathcal{S})$ sobre âncoras
+canônicas. Para avaliar a proposta de forma controlada e reprodutível,
+construímos um \emph{benchmark} de coorte com corpus-piloto determinístico
+(6 ângulos de perspectiva $\times$ 3 documentos), comparando três estratégias de
+seleção pós-ranqueamento: \emph{top-k} (estado atual), MMR e Recamán, sob métricas
+de diversidade, relevância (\emph{groundedness}) e cobertura de ângulos. Os
+resultados mostram que, no cenário testado, o esquema posicional de Recamán
+\emph{empata} com o \emph{top-k} em diversidade ($\Div = 0{,}500$; ganho $= 0{,}0$),
+enquanto o MMR supera ambos ($\Div = 0{,}750$; cobertura $0{,}917$), sem que o
+Recamán degrade a relevância (queda $= 0{,}0\%$). O achado evidencia uma
+\emph{limitação estrutural} de diversificadores posicionais: como operam sobre
+posições (offsets) e não sobre âncoras de conteúdo, eles podem reproduzir o
+\emph{top-k} em rankings ``localmente monopolistas''. Discutimos implicações para
+a diversificação de fontes em consultas de paisagem multicunha e propomos
+direções de trabalho futuro. \emph{Observação de escopo:} valores reportados são
+oriundos de corpus-piloto controlado; não generalizam para produção.
+
+\medskip
+\noindent\textbf{Abstract.} In scientific \textit{Retrieval-Augmented Generation}
+(RAG) architectures, the post-ranking stage usually optimizes \emph{relevance}
+but seldom measures or promotes the \emph{diversity} of the retrieved set. This
+paper formalizes the post-Recamán proposal: a deterministic post-ranking
+diversifier based on the Recamán sequence (OEIS A005132) and a diversity metric
+$\Div(\mathcal{S})$ over canonical anchors. To evaluate the proposal in a
+controlled and reproducible manner, we build a cohort benchmark with a
+deterministic pilot corpus (6 perspective angles $\times$ 3 documents), comparing
+three post-ranking selection strategies: \emph{top-k} (current state), MMR, and
+Recamán, under diversity, relevance (\emph{groundedness}), and angle-coverage
+metrics. Results show that, in the tested scenario, the Recamán positional scheme
+\emph{ties} with \emph{top-k} in diversity ($\Div = 0.500$; gain $= 0.0$), while
+MMR outperforms both ($\Div = 0.750$; coverage $0.917$), with Recamán not degrading
+relevance (drop $= 0.0\%$). The finding highlights a \emph{structural limitation}
+of positional diversifiers: operating on positions (offsets) rather than content
+anchors, they can reproduce \emph{top-k} under ``locally monopolistic'' rankings.
+We discuss implications for source diversification in multi-faceted landscape
+queries and propose future work. \emph{Scope note:} reported values come from a
+controlled pilot corpus and do not generalize to production.
+
+\medskip
+\noindent\textbf{Palavras-chave:} Recuperação de Informação; Retrieval-Augmented
+Generation; Diversificação; Recamán; MMR; Métrica de diversidade.
+
+\noindent\textbf{Keywords:} Information Retrieval; Retrieval-Augmented Generation;
+Diversification; Recamán; MMR; Diversity metric.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+% SEÇÕES
+% =====================================================================
+\input{sections/01_introducao.tex}
+\input{sections/02_trabalhos_relacionados.tex}
+\input{sections/03_metodologia.tex}
+\input{sections/04_resultados.tex}
+\input{sections/05_discussao.tex}
+\input{sections/06_conclusao.tex}
+
+% =====================================================================
+% REFERÊNCIAS
+% =====================================================================
+\bibliographystyle{abbrvnat}
+\bibliography{referencias}
+
+\appendix
+\section*{Apêndice A — Arquivos e reprodutibilidade}
+\addcontentsline{toc}{section}{Apêndice A — Arquivos e reprodutibilidade}
+Os artefatos do estudo estão versionados no repositório de pesquisa:
+\begin{itemize}
+  \item Proposta e métrica: \texttt{rag/recaman.py} (sequência de Recamán,
+        \texttt{RecamanDiversifier}, \texttt{AnchorResolver}, métrica
+        $\Div(\mathcal{S})$); integração aditiva em
+        \texttt{rag/enhanced\_search\_rag.py} (campo \texttt{diversity}).
+  \item \emph{Benchmark} de coorte: \texttt{benchmarks/cohort\_recaman.py}
+        e relatório \texttt{benchmarks/cohort\_report.json}.
+  \item Especificações: \texttt{SPEC-935-R457}, \texttt{SPEC-935-R458}.
+  \item Manual técnico: \texttt{docs/r456\_manual\_tecnico\_rag/}.
+\end{itemize}
+
+\end{document}

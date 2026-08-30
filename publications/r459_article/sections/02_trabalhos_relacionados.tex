@@ -1,0 +1,53 @@
+% =====================================================================
+% SEC 02 — Trabalhos Relacionados
+% =====================================================================
+\section{Trabalhos Relacionados}
+\label{sec:rel}
+
+\subsection{Ranqueamento e recuperação}
+
+A recuperação \emph{lexical} clássica, exemplificada pelo BM25
+\citep{RobertsonZaragoza2009BM25}, otimiza a relevância por sobreposição de
+termos e é amplamente usada como \emph{baseline} de recuperação. Métodos densos
+de \emph{passage retrieval} \citep[cf.][]{KhattabZaharia2020ColBERT} representam
+trechos e consultas em espaço vetorial latente, capturando semelhança semântica;
+contudo, ambos tendem a concentrar resultados em um subespaço homogêneo, o que
+reduz a diversidade do conjunto recuperado \citep{He2023RethinkingRetrieval}.
+
+\subsection{Retrieval-Augmented Generation}
+
+O paradigma RAG \citep{Lewis2020RAG} acopla recuperação a geração ancorada.
+Abordagens modernas exploram o enriquecimento de consultas e a avaliação
+\emph{adaptativa} \citep{Jeong2024AdaptiveRAG}, a intercalação de passagens
+\citep{Trivedi2023Interleaving}, a correção reflexiva \citep{Yan2024CRAG} e o
+uso de \emph{grafos de conhecimento} \citep{Edge2024GraphRAG}. Na maioria desses
+trabalhos, o foco está em melhorar a \emph{qualidade da evidência recuperada};
+a \emph{diversidade} do conjunto raramente é tratada como primeiro-cidadão,
+especialmente em termos de métrica explícita.
+
+\subsection{Diversificação em Recuperação de Informação}
+
+O \emph{Maximal Marginal Relevance} (MMR) \citep{CarbonellGoldstein1998MMR} é o
+arcabouço clássico de diversificação: seleciona itens maximizando uma combinação
+linear de relevância e dissimilaridade em relação aos já selecionados,
+\[
+\label{eq:mmr}
+\mathrm{MMR}(d) \;=\; \lambda\,\mathrm{relev}(d) \;-\; (1-\lambda)\,
+\max_{d_j\in S} \Sim(d, d_j) \; ,
+\]
+onde $\lambda\in[0,1]$ controla o balanço. O MMR é eficaz, porém \emph{sensível a
+parâmetros} ($\lambda$) e à escolha da função de similaridade, e tem custo
+$O(K\cdot|D|)$. A proposta pós-Recamán \citep{Alekseyev2022RecamanCousins} situa-se
+na mesma família, mas substitui a otimização gulosa por \emph{offsets
+determinísticos} derivados da sequência de Recamán, removendo parâmetros e
+aleatoriedade. A pergunta que este artigo coloca é se essa escolha preserva a
+capacidade de diversificar \emph{conteúdo} (âncora) em cenários realistas.
+
+\subsection{Posição deste trabalho}
+
+Ao contrário de trabalhos que propõem novos diversificadores e assumem ganho,
+este artigo submete a proposta pós-Recamán a um \emph{turno empírico controlado},
+comparando-a ao \emph{top-k} e ao MMR em métricas explícitas. Reportamos um
+resultado em que a proposta \emph{empatia} com o \emph{top-k} — não um ganho
+inventado — e analisamos a causa estrutural. Essa postura de \emph{reporte
+negativo/quilibrado} é rara na literatura e contribui para a robustez da área.
