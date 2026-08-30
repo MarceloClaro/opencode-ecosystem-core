@@ -254,3 +254,237 @@ def test_report_gera_markdown_auditavel():
     out = os.path.join(tmp, "rel.md")
     rep.write(out)
     assert os.path.exists(out)
+
+
+# ---------------------------------------------------------------------------
+# Endurecimento minucioso (SPEC-935-R462, fase "implemente minuciosamente")
+# ---------------------------------------------------------------------------
+
+
+def test_auto_hash_de_disco_ancora_imutabilidade_real(tmp_path):
+    """(h) resolve_artifacts hasheia o conteúdo REAL de arquivos em disco
+    (auto-hash), e merkle_root muda quando um arquivo é alterado."""
+    gate = EvolutionAuditGate()
+    f1 = tmp_path / "mod.py"
+    f2 = tmp_path / "spec.md"
+    f1.write_bytes(b"def f():\n    return 42\n")
+    f2.write_bytes(b"# spec R462")
+
+    hashes_antes = gate.resolve_artifacts({"mod.py": str(f1), "spec.md": str(f2)})
+    assert isinstance(hashes_antes["mod.py"], str) and len(hashes_antes["mod.py"]) == 64
+    assert hashes_antes["mod.py"] == _sha("def f():\n    return 42\n")
+
+    # tamper real no disco
+    f1.write_bytes(b"def f():\n    return 999\n")
+    verification = gate.verify_tamper(
+        artifact_files={"mod.py": str(f1), "spec.md": str(f2)},
+        registered_hashes=hashes_antes,
+    )
+    assert verification.tampered is True
+    assert "mod.py" in verification.reason
+
+
+def test_merkle_root_agrega_e_verify_merkle_confere(gate: EvolutionAuditGate):
+    """(i) merkle_root agrega os hashes de forma canônica (ordenada por nome)
+    e verify_merkle confere a raiz ancorada."""
+    h1 = {"a.py": "1111", "b.py": "2222"}
+    root = gate.merkle_root(h1)
+    assert isinstance(root, str) and len(root) == 64
+    # mesma ordem (canônica por nome) => mesma raiz
+    h_reord = {"b.py": "2222", "a.py": "1111"}
+    assert gate.merkle_root(h_reord) == root
+    # qualquer artefato alterado => raiz muda
+    assert gate.merkle_root({"a.py": "9999", "b.py": "2222"}) != root
+    # verificação da âncora
+    assert gate.verify_merkle(hashes=h1, registered_root=root) is True
+    assert gate.verify_merkle(hashes={"a.py": "9999", "b.py": "2222"},
+                              registered_root=root) is False
+    # conjunto vazio => raiz vazia (sem falsificação)
+    assert gate.merkle_root({}) == ""
+
+
+def test_merkle_root_e_sensivel_a_nome_do_artefato(gate: EvolutionAuditGate):
+    """(j) a raiz muda se o NOME muda, mesmo com conteúdo igual."""
+    m1 = gate.merkle_root({"x.py": "abc"})
+    m2 = gate.merkle_root({"y.py": "abc"})
+    assert m1 != m2
+
+
+def test_git_head_commit_retorna_hash_ou_vazio():
+    """(k) git_head_commit retorna o commit HEAD ou string vazia (não
+    falsifica quando o repo/contexto não está disponível)."""
+    from evolution.audit_gate import git_head_commit
+    c = git_head_commit()
+    # Em ambiente git (este repo), deve retornar um hash hex de 40 carac.
+    if c:
+        assert len(c) == 40
+        assert all(ch in "0123456789abcdef" for ch in c)
+
+
+def test_record_audited_ancora_commit_merkle_estado(gate: EvolutionAuditGate):
+    """(l) o ciclo auditado grava âncoras externas: origin_commit (git HEAD),
+    merkle_root (agregado dos artefatos) e state_merkle_root (fotografia do
+    cycles.json antes da inserção)."""
+    reg = _registry()
+    art = _artefato()
+    files = {"mod.py": art}
+    v = gate.verify_cycle(
+        objective="ancoras",
+        changes=["z"],
+        artifact_files=files,
+        verifier_identity="auditor_ext",
+        generator_identity="gerador",
+        evidence_trail=["test_r462"],
+    )
+    assert v.passed is True
+    ciclo = reg.record_audited(
+        objective="ancoras",
+        changes=["z"],
+        artifact_hashes={k: _sha(x.decode()) for k, x in files.items()},
+        external_verdict={"passed": True},
+        verifier_identity="auditor_ext",
+        generator_identity="gerador",
+        evidence_trail=["test_r462"],
+        round_id="R462",
+    )
+    # merkle_root ancorado (agregado dos hashes do ciclo)
+    assert ciclo.merkle_root == gate.merkle_root(
+        {k: _sha(x.decode()) for k, x in files.items()})
+    # origin_commit presente (repo git) OU vazio (contexto sem git) — sem falsificação
+    assert isinstance(ciclo.origin_commit, str)
+    # state_merkle_root: fotografia do cycles.json no momento do registro
+    assert isinstance(ciclo.state_merkle_root, str)
+    if ciclo.state_merkle_root:
+        # re-hashear o OUTRO estado (após a persistência) deve divergir,
+        # pois o hash foi tirado ANTES de inserir o ciclo
+        with open(reg.state_path, "rb") as f:
+            pos_hash = gate.hash_state(f.read())
+        assert pos_hash != ciclo.state_merkle_root
+
+    # persistência round-trip: as âncoras sobrevivem ao reload
+    reg2 = EvolutionRegistry(state_path=reg.state_path)
+    ciclos2 = [c for c in reg2.cycles if c.round_id == "R462"]
+    assert len(ciclos2) == 1
+    assert ciclos2[0].merkle_root == ciclo.merkle_root
+    assert ciclos2[0].origin_commit == ciclo.origin_commit
+    assert ciclos2[0].state_merkle_root == ciclo.state_merkle_root
+
+
+def test_record_rejected_persiste_rastro_auditavel():
+    """(m) um veredito REPROVADO é persistido como rastro auditável
+    (reject trail), não apenas exceção — a falha também é rastreável."""
+    reg = _registry()
+    total_antes = reg.custody_metric()["total"]
+    ciclo = reg.record_rejected(
+        objective="tentativa reprovada",
+        changes=["falhou no gate"],
+        reason="verificador == gerador",
+        verifier_identity="gerador",
+        generator_identity="gerador",
+    )
+    assert ciclo.audited is False
+    assert ciclo.external_verdict["passed"] is False
+    assert ciclo.external_verdict["reason"] == "verificador == gerador"
+
+    m = reg.custody_metric()
+    assert m["total"] == total_antes + 1
+    assert m["rejected"] == 1   # contabilizado como reject trail
+    assert m["audited"] == 0    # NÃO conta como ciclo auditado
+
+    # round-trip: o rastro persiste após reload
+    reg2 = EvolutionRegistry(state_path=reg.state_path)
+    rej = [c for c in reg2.cycles if c.external_verdict
+           and c.external_verdict.get("passed") is False]
+    assert len(rej) == 1
+
+
+def test_verify_tamper_detecta_tamper_real_persistido(gate: EvolutionAuditGate, tmp_path):
+    """(n) cenário completo de tamper real: hash registrado -> alteração no
+    disco -> verify_tamper marca tampered=True e a métrica reflete."""
+    f = tmp_path / "mod.py"
+    f.write_bytes(b"def f():\n    return 42\n")
+
+    v = gate.verify_cycle(
+        objective="tamper real",
+        changes=["z"],
+        artifact_files={"mod.py": str(f)},
+        verifier_identity="auditor_ext",
+        generator_identity="gerador",
+        evidence_trail=["test_r462"],
+    )
+    assert v.passed is True
+    registered = v.hashes
+
+    # altera o arquivo no disco
+    f.write_bytes(b"def f():\n    return 999\n")
+    res = gate.verify_tamper(artifact_files={"mod.py": str(f)},
+                             registered_hashes=registered)
+    assert res.tampered is True
+
+    # veredito externo marcado com tampered reflete no registro
+    reg = _registry()
+    ciclo = reg.record_audited(
+        objective="tamper real",
+        changes=["z"],
+        artifact_hashes=registered,
+        external_verdict={"passed": True, "tampered": True},
+        verifier_identity="auditor_ext",
+        generator_identity="gerador",
+        round_id="R700",
+    )
+    assert ciclo.external_verdict["tampered"] is True
+    assert reg.custody_metric()["tampered"] == 1
+
+
+def test_full_load_mapeia_todos_os_tipos_de_ciclo():
+    """(o) carregamento completo (full-load) preserva auditado, legado e
+    rejeitado juntos no mesmo registro, sem perda de nenhum."""
+    reg, tmp = _isolated()
+    reg.record(objective="legado", changes=["x"], round_id="R100")       # legacy
+    reg.record_rejected(objective="rejeitado", changes=["z"],
+                        reason="gate", verifier_identity="gerador",
+                        generator_identity="gerador", round_id="R101")   # rejected
+    art = _artefato()
+    reg.record_audited(
+        objective="auditado", changes=["z"],
+        artifact_hashes={"m.py": _sha(art.decode())},
+        external_verdict={"passed": True},
+        verifier_identity="auditor_ext",
+        generator_identity="gerador",
+        round_id="R102",
+    )                                                                   # audited
+
+    reg2 = EvolutionRegistry(state_path=os.path.join(tmp, "cycles.json"))
+    assert len(reg2.cycles) == 3
+    m = reg2.custody_metric()
+    assert m["legacy"] == 1
+    assert m["rejected"] == 1
+    assert m["audited"] == 1
+    assert m["total"] == 3
+
+
+def test_pdf_gerado_quando_conversor_disponivel():
+    """(p) report.to_pdf retorna caminho se pandoc/weasyprint existir, ou None
+    (não falsifica) caso contrário."""
+    from evolution.report import EvolutionReport
+    reg = _registry()
+    art = _artefato()
+    reg.record_audited(
+        objective="pdf", changes=["z"],
+        artifact_hashes={"m.py": _sha(art.decode())},
+        external_verdict={"passed": True},
+        verifier_identity="auditor_ext",
+        generator_identity="gerador",
+        round_id="R462",
+    )
+    rep = EvolutionReport(reg)
+    tmp = tempfile.mkdtemp(prefix="evo_report_")
+    out = os.path.join(tmp, "rel.pdf")
+    result = rep.to_pdf(out)
+    if result is not None:
+        assert result == out
+        assert os.path.exists(out)
+        assert os.path.getsize(out) > 0
+    else:
+        # sem conversor: retorna None, sem criar arquivo fantasma
+        assert not os.path.exists(out)
