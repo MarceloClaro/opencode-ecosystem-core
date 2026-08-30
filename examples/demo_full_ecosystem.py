@@ -101,8 +101,15 @@ def main():
         score=9.5,
         lessons=["A integração via singletons preserva o Global Workspace único.",
                  "Gates comportamentais devem ter fallback para não órfanar tarefas."],
+        # Cadeia de Custódia Auditável (SPEC-935-R462): ancora o próprio script
+        # da demo como artefato real e usa papel auditor DISTINTO do gerador.
+        verifier_identity=f"{orch.id}@auditor.blind",
+        generator_identity=orch.id,
+        artifact_files={os.path.basename(__file__): os.path.abspath(__file__)},
+        evidence_trail=["examples/demo_full_ecosystem.py", "specs/SPEC-935-R462.md"],
     )
-    print(f"    Registrado: {evo['round_id']} (score {evo['score']}, média {evo['avg_score']})")
+    print(f"    Registrado: {evo['round_id']} (score {evo['score']}, média {evo['avg_score']}, "
+          f"auditado={evo.get('audited')})")
 
     # 8. Integração externa (Antigravity)
     print(f"\n[8] INTEGRAÇÃO EXTERNA (Antigravity CLI)")
