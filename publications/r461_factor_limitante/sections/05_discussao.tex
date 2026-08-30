@@ -1,0 +1,73 @@
+% =====================================================================
+% Seção 5 — Discussão
+% =====================================================================
+\section{Discussão}\label{sec:disc}
+
+A convergência entre a literatura e o estudo de caso permite articular o fator
+limítrofe em três planos complementares, cada um ancorado em evidência.
+
+\subsection{Plano informacional: a informação não se auto-cria}
+
+A evidência mais forte é informacional. O colapso sob treinamento recursivo
+(\emph{Nature}, 2024)~\parencite{Shumailov2024Collapse} e sua inevitabilidade
+estatística~\parencite{Borji2024CollapseNote} mostram que \emph{informação nova
+não é criada por reamostragem}. A derivação teórica do expoente de scaling a
+partir das estatísticas da fonte~\parencite{Cagnetta2026ScalingTheory} reforça
+esse ponto: o ``teto'' do loop é a entropia da fonte externa. No estudo de caso,
+o análogo é direto: o HABD reorganiza âncoras já existentes e obtém diversidade,
+mas não expande o conteúdo informacional do corpus; quando pressiona a métrica,
+o custo aparece em groundedness.
+
+\subsection{Plano de avaliação: gerador e avaliador não podem coincidir}
+
+O segundo plano é o sinal de avaliação. A literatura de
+\emph{self-play}~\parencite{SelfPlayGuidance2026} e o
+\emph{discovery--reliability gap}~\parencite{RSIBench2026} mostram que, quando o
+mesmo processo gera e avalia, o feedback perde validade. No estudo de caso, a
+\texttt{groundedness} atua como avaliador \emph{independente} do gerador de
+diversidade --- é ela que impede o overclaim. Este é o comportamento que a
+definição operacional da Seção~\ref{sec:metodo} exige (condição (ii)): sem um
+sinal externo de fidelidade, o ganho de diversidade seria reportado como vitória
+limpa.
+
+\subsection{Plano de mitigação: âncora real, não teto absoluto}
+
+O terceiro plano distingue o teto de um loop \emph{fechado} do de um loop
+\emph{ancorado}. Gerstgrasser \textit{et al.}~\parencite{Gerstgrasser2024Collapse}
+e Dohmatob \textit{et al.}~\parencite{Dohmatob2024CollapseScaling} mostram que o
+colapso é \emph{contido} quando dados reais são acumulados a cada iteração. Isso
+se transfere ao estudo de caso e, por extensão, ao \emph{OpenCode Ecosystem Core}
+em geral: cada ciclo de pesquisa (R458--R460) é um loop ancorado --- a
+diversificação de código, a geração de dados sintéticos para testes e a
+supervisão por agentes auditáveis funcionam como âncoras que impedem o loop de
+degenerar. O ecossistema, ao exigir especificação formal e testes (gate SDD/TDD)
+antes de qualquer entrega, incorpora praticamente a condição (ii) da definição:
+o avaliador (teste) é externo ao gerador (código).
+
+\subsection{Conexão com o contexto do OpenCode Ecosystem Core}
+
+O estudo de caso não é o único lugar do ecossistema onde o fator limítrofe emerge.
+O \emph{OpenCode Ecosystem Core} opera 278 ciclos de evolução registrados, 124
+especificações formais e um MetaBus de memória metacognitiva compartilhada. Nesse
+desenho, os agentes geram artefatos (código, textos, análises), mas a \emph{validação
+} é sempre delegada a uma instância distinta (gate SDD/TDD, BehavioralGate,
+auditoria bibliográfica, revisão cega emulada). A \emph{razão} dessa arquitetura é
+precisamente a hipótese que este artigo defende: \textbf{produzir IA com IA é
+viável e produtivo quando há âncora externa de validação; torna-se degenerativo
+quando o mesmo processo gera e julga}. O ecossistema é, nesse sentido, um
+experimento permanente do fator limítrofe --- e seus vereditos honestos
+(\texttt{refuta\_H2}, \texttt{refuta\_H3}) são exemplos de \emph{anti-overclaim}
+operacionalizado.
+
+\subsection{Limites desta evidência}
+
+É preciso honestidade epistêmica. Grande parte das fontes de auto-melhoria são
+preprints (arXiv) ainda não revisados por pares; apenas o núcleo --- colapso
+(\emph{Nature} 2024), scaling laws (Kaplan 2020, Chinchilla 2022) --- é
+peer-reviewed consolidado. O estudo de caso usa \textbf{4 consultas} em
+\emph{corpus-piloto controlado}; seu papel é \emph{ilustrativo e internalmente
+válido}, não estatisticamente generalizável. Não afirmamos que o fator limítrofe
+seja inviolável para sempre: melhorias algorítmicas podem elevar o teto, e a
+transferência dos resultados de distribuições simuladas para linguagem real é
+objeto de debate legítimo (cf.~emergência como artefato de métrica,~\textcite
+{Schaeffer2023EmergentMirage}).

@@ -1,0 +1,57 @@
+% =====================================================================
+% Seção 1 — Introdução
+% =====================================================================
+\section{Introdução}\label{sec:intro}
+
+A fronteira entre o que a inteligência artificial produz \emph{sozinha} e o que
+ela obtém \emph{do mundo} tornou-se, nos últimos três anos, uma questão central
+tanto da engenharia quanto da teoria. Dois fenômenos simultâneos a tornaram
+urgente. De um lado, a escala dos \emph{large language models} (LLMs) apróxima-se
+do limite de dados humanos disponíveis: as \emph{scaling laws} empíricas de
+Kaplan \textit{et al.}~\parencite{Kaplan2020Scaling} e a revisão
+Chinchilla~\parencite{Hoffmann2022Chinchilla} estabeleceram o dado, ao lado de
+parâmetros e computação, como um dos três insumos físicos que determinam a perda
+de um modelo, e o regime de restrição a dados
+(\emph{data-constrained})~\parencite{Muennighoff2023DataConstrained} tornou-se o
+cenário dominante de planejamento. De outro, a prática industrial passou a
+empregar \emph{dados sintéticos} --- respostas, raciocínios e problemas gerados por
+modelos --- como combustível central do pós-treino.
+
+Nesse encontro nasce a pergunta que este artigo investiga: \textbf{existe um
+fator limítrofe entre produzir IA com IA?} A questão não é meramente filosófica.
+Ela tem consequências operacionais diretas: se um modelo pode, em princípio,
+gerar o seu próprio sinal de melhoria de forma ilimitada, então o caminho para a
+auto-melhoria recursiva seria uma reta sem teto; se, ao contrário, há um limite
+informacional e de confiabilidade, então todo loop de auto-produção precisa de
+uma âncora externa para não degenerar.
+
+Evidências recentes e de alto impacto apontam para a segunda leitura.
+Shumailov \textit{et al.}~\parencite{Shumailov2024Collapse}, em \emph{Nature},
+demonstraram que modelos treinados recursivamente sobre dados gerados por
+modelos \emph{colapsam}: a distribuição aprendida perde os modos de baixa
+probabilidade, a variância colapsa e o modelo converge para uma singularidade
+estatística. Borji~\parencite{Borji2024CollapseNote} mostrou que o fenômeno é um
+efeito estatístico fundamental, provavelmente inevitável em loop fechado. Em
+paralelo, a literatura de auto-melhoria documenta um gargalo de confiabilidade:
+\emph{self-play} instável~\parencite{SelfPlayGuidance2026} e um
+\emph{discovery--reliability gap} em agentes de pesquisa
+recursiva~\parencite{RSIBench2026}.
+
+Este artigo contribui ao integrar essas três linhas --- colapso, \emph{scaling
+laws} e auto-melhoria --- com um \textbf{estudo de caso empírico} conduzido no
+\emph{OpenCode Ecosystem Core}: um ecossistema multiagente metacognitivo no qual
+ciclos de pesquisa (R458--R460) avaliaram a diversificação pós-ranqueamento em
+\emph{Retrieval-Augmented Generation} (RAG). O estudo de caso é instrutivo porque
+encarna, em microcosmo e com dados primários auditáveis, exatamente o \emph{trade-off
+} limítrofe que a teoria prevê: ganhar na fronteira de uma métrica (diversidade)
+custa fidelidade a outra (relevância).
+
+A resposta que defendemos, ancorada nas evidências, é equilibrada e honesta:
+\textbf{existe um fator limítrofe estrutural, mas não absoluto}. Ele separa a
+produção de IA em \emph{loop fechado auto-suficiente} (que colapsa) da produção
+\emph{com âncora externa de dados reais} (que progride). O restante do artigo
+estrutura-se assim: a Seção~\ref{sec:fund} estabelece a fundamentação teórica; a
+Seção~\ref{sec:metodo} conceitua formalmente o fator limítrofe e descreve o
+método do estudo de caso; a Seção~\ref{sec:caso} apresenta os resultados
+empíricos; a Seção~\ref{sec:disc} discute a síntese; e a Seção~\ref{sec:conc}
+responde à pergunta central, declara os limites e evita alegações excessivas.

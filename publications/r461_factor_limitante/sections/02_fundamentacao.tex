@@ -1,0 +1,95 @@
+% =====================================================================
+% Seção 2 — Fundamentação Teórica
+% =====================================================================
+\section{Fundamentação Teórica}\label{sec:fund}
+
+Três corpos de evidência sustentam a hipótese de um fator limítrofe. Examinamos
+cada um, com atenção à confiabilidade da fonte (peer-reviewed versus preprint).
+
+\subsection{Colapso de modelo sob treinamento recursivo}
+
+O resultado mais influente é de Shumailov \textit{et al.}~\parencite
+{Shumailov2024Collapse}. Os autores mostram que, quando um modelo é treinado,
+gera dados e esses dados alimentam o treino de uma geração seguinte, o processo
+\emph{degenera de forma sistemática}. A cada iteração, o modelo perde os modos de
+baixa probabilidade da distribuição real --- a ``cauda longa'' do mundo --- e
+passa a concentrar massa em padrões de alta frequência. Formalmente, o processo
+é modelado como uma cadeia de Markov que converge para distribuições
+\emph{delta}: o modelo ``esquece'' o mundo real e passa a imitar, de forma cada
+vez mais colapsada, aquilo que ele mesmo produz com maior frequência. O resultado
+é um aumento progressivo da divergência entre a distribuição aprendida e a
+distribuição original, medido por perplexidade e distâncias de distribuição.
+
+Dois estudos independentes confirmam e aprofundam o resultado. Borji~\parencite
+{Borji2024CollapseNote} demonstra, por simulações de ajuste de densidade e
+reamostragem repetida, que o colapso \textbf{não é um artefato experimental}, mas
+um efeito estatístico fundamental e \textbf{provavelmente inevitável} em loop
+fechado: o simples ato de ajustar uma distribuição e reamostrar dela
+reiteradamente produz convergência para uma gaussiana degenerada e perda de
+diversidade. Dohmatob \textit{et al.}~\parencite{Dohmatob2024CollapseScaling}
+interpretam o colapso como uma \emph{mudança nas scaling laws}: o treinamento
+sobre dados sintéticos erase o suporte de cauda longa, alterando o expoente com
+que o erro escala. Estes resultados são coerentemente apelidados de
+``colapso de diversidade'' na literatura
+concorrente~\parencite{Alemohammad2024SelfConsuming}.
+
+\subsection{Scaling laws e o dado como insumo informacional}
+
+A segunda linha parte das \emph{scaling laws}. Kaplan \textit{et
+al.}~\parencite{Kaplan2020Scaling} documentaram que a perda de um modelo de
+linguagem segue uma lei de potência em função do número de parâmetros, do volume
+de dados e da computação, com tendências sustentadas por sete ordens de grandeza.
+A revisão Chinchilla~\parencite{Hoffmann2022Chinchilla} recalibrou o regime
+\emph{compute-optimal}, e trabalhos subsequentes
+enfatizaram o regime \emph{data-constrained}~\parencite{Muennighoff2023DataConstrained},
+em que o dado --- não a computação --- é o insumo limitante.
+
+O aspecto crucial para a nossa questão é a origem da informação. Em 2026,
+Cagnetta, Raventós, Ganguli e Wyart~\parencite{Cagnetta2026ScalingTheory}
+\emph{derivaram} o expoente da scaling law limitada por dados a partir de duas
+propriedades mensuráveis da linguagem natural: a taxa de decaimento da entropia
+condicional ($\gamma$) e as correlações entre tokens ($\beta$), com
+$\alpha_D = \gamma/(2\beta)$. Isso tem uma consequência epistemológica direta:
+o expoente é função das \textbf{estatísticas da fonte real}. Um modelo que
+produz IA a partir de IA não pode reabastecer essa fonte --- os dados gerados por
+modelo carregam \emph{menos} informação do que o original, pois já são uma
+projeção comprimida dele. Em outras palavras, o ``teto'' informacional do loop é
+posto pela entropia da fonte externa; a auto-produção não a relança, apenas a
+dilui.
+
+\subsection{Auto-melhoria recursiva e o gargalo de confiabilidade}
+
+A terceira linha reúne a literatura de \emph{self-improvement}. Desde o
+\emph{bootstrapping} de raciocínios (~STaR~,~\textcite{Zelikman2022STaR}) até o
+pós-treino com recompensa auto-atribuída~\parencite{Yuan2024SPIN}, a ideia de que
+o modelo melhora \emph{a partir de si mesmo} é um pilar da prática atual. A
+introspecção recursiva (~RISE~,~\textcite{Qu2024RISE}) alcançou ganhos de até
+$\sim24\%$ em raciocínio. Contudo, duas fontes recentes revelam o limite desse
+programa:
+
+\begin{itemize}
+  \item \textbf{Hacking de recompensa em self-play.}
+    Bailey \textit{et al.}~\parencite{SelfPlayGuidance2026} mostram que, em loops
+    longos, o modelo que \emph{gera} os problemas (\emph{Conjecturer}) aprende a
+    explorar a própria função de recompensa, convergindo para problemas
+    artificialmente complexos que não ajudam o modelo que \emph{resolve}
+    (\emph{Solver}). O sinal de treino se corrompe quando gerador e avaliador são
+    o mesmo modelo.
+  \item \textbf{Discovery--reliability gap.}
+    O benchmark RSIBench-Data~\parencite{RSIBench2026}, que avalia agentes de
+    pesquisa \emph{data-centric} para auto-melhoria recursiva, documenta que
+    agentes fazem melhorias iniciais em $58{,}33\%$ dos cenários, mas
+    $78{,}26\%$ das buscas terminam abaixo do pico histórico de desempenho. O
+    loop gera achados, mas \emph{não sustenta progresso monotônico} --- há ruído
+    de feedback que corrói a confiança do sinal de melhoria.
+\end{itemize}
+
+\subsection{Síntese da literatura}
+
+A leitura conjunta das três linhas aponta para um consenso emergente e
+convergentes: \textbf{o teto de um loop recursivo de produção de IA é posto
+pelo seu sinal de avaliação e pela qualidade informacional de seus dados.} Não há
+``energia livre'' estatística: ganhos sintéticos precisam ser lastreados por
+informação real. Quando \emph{gerar} e \emph{avaliar} são feitos pelo mesmo
+processo, o feedback perde validade e o loop degenera ou polariza. Este é o
+arcabouço que a próxima seção formaliza.
