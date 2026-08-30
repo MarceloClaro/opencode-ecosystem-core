@@ -1,0 +1,185 @@
+% =====================================================================
+% SEC_03 — Fundamentação Teórica
+% =====================================================================
+
+\section*{3. Fundamentação Teórica}
+\addcontentsline{toc}{section}{3. Fundamentação Teórica}
+
+\nivel{0} Esta seção constrói a base conceitual que sustenta tanto o estado atual
+quanto a proposta. Percorremos, em ordem crescente de complexidade: (1) como
+ranqueamos documentos (BM25); (2) como acoplamos recuperação e geração (RAG);
+(3) como melhoramos o RAG com raciocínio e correção; (4) como diversificamos
+(MMR); e (5) que ferramenta matemática usamos para tornar a diversificação
+determinística (Recamán). Cada tópico começa no nível 0 (intuição) e evolui até o
+rigor formal.
+
+\subsection*{3.1 Ranqueamento clássico: BM25}
+
+\nivel{0} Quando você digita uma busca, o sistema precisa decidir a ordem dos
+resultados. A intuição do BM25 é: um documento é mais relevante se contém os
+termos da busca com alta frequência \emph{relativa}, e termos que aparecem em
+poucos documentos são mais "informativos" do que termos que aparecem em todos.
+
+\begin{intuicao}
+Se você busca "baleia" e um documento usa a palavra "baleia" muitas vezes, ele
+provavelmente é relevante. Mas a palavra "o" aparece em todo documento e, portanto,
+diz pouco. O BM25 equilibra "quantas vezes o termo aparece" com "quão raro o termo
+é no corpus".
+\end{intuicao}
+
+\nivel{2} O \emph{Best Matching 25} (BM25) é um dos modelos de ranqueamento mais
+estabelecidos, formalizado no quadro da teoria da relevância probabilística
+\cite{RobertsonZaragoza2009BM25}. Para um documento $D$ e uma consulta $Q$
+contendo os termos $q_1,\dots,q_n$, o escore é dado por:
+
+\begin{equation}
+\label{eq:bm25}
+\text{BM25}(D,Q)\;=\;\sum_{i=1}^{n}
+\text{IDF}(q_i)\;\cdot\;
+\frac{f(q_i,D)\,(k_1+1)}{f(q_i,D)+k_1\,\bigl(1-b+b\,\tfrac{|D|}{\text{avgdl}}\bigr)}
+\end{equation}
+
+onde $f(q_i,D)$ é a frequência do termo $q_i$ em $D$, $|D|$ é o comprimento do
+documento, $\text{avgdl}$ é o comprimento médio dos documentos do corpus, e
+$k_1,b$ são parâmetros de saturação e de normalização por comprimento. O termo de
+frequência inversa de documento $\text{IDF}(q_i)$ é função do número de documentos
+que contêm $q_i$. Este modelo estabelece o \emph{baseline} lexical do
+ranqueamento no ecossistema.
+
+\nivel{1} Para este manual, o que importa reter é: o BM25 produz uma \emph{ordem}
+dos documentos. É essa ordem que a proposta de diversificação irá
+\emph{re-balancear} em um estágio posterior, sem refazer o ranqueamento lexical.
+
+\subsection*{3.2 RAG canônico}
+
+\nivel{0} RAG significa "gerar texto a partir de documentos recuperados". Em vez
+de um modelo de linguagem responder "de memória", ele primeiro \emph{recupera}
+fontes relevantes e depois escreve a resposta \emph{apoiado} nessas fontes. Isso
+reduz alucinações e permite atualizar o conhecimento sem retreinar o modelo.
+
+\begin{intuicao}
+Duas estratégias: (a) um aluno responde de cabeça --- rápido, mas pode errar; (b)
+um aluno abre os livros antes de responder --- mais confiável. O RAG é a
+estratégia (b): o modelo consulta a "biblioteca" (recuperador) e então responde
+(gerador).
+\end{intuicao}
+
+\nivel{2} O paradigma RAG combina um recuperador (retriever) com um gerador
+sequência-a-sequência. O arcabouço original \cite{Lewis2020RAG} condiciona a
+geração nos documentos recuperados $z \in \mathcal{Z}$, modelando
+$p(y \mid x) \approx \sum_{z \in \mathcal{Z}} p_\eta(z \mid x)\; p_\theta(y \mid x, z)$,
+onde $\eta$ parametriza o recuperador e $\theta$ o gerador. A recuperação densa
+por interação tardia (\emph{late interaction}), como em ColBERT
+\cite{KhattabZaharia2020ColBERT}, permite forte poder expressivo com custo de
+inferência reduzido.
+
+\nivel{1} Conceitualmente, o RAG tem dois fatores que importam para este manual:
+o \emph{recuperador} (decide \emph{o que} entra no contexto) e o \emph{gerador}
+(decide \emph{como} responder). A diversificação atua no recuperador, mudando o
+\emph{quê} entra --- não o \emph{como} é respondido.
+
+\subsection*{3.3 Recuperação aumentada e raciocínio}
+
+\nivel{0} O RAG simples recupera uma vez e responde. Mas perguntas complexas
+precisam de \emph{vários passos}: recuperar, raciocinar, recuperar de novo. Além
+disso, o RAG pode "quebrar" se os documentos recuperados forem ruins --- existem
+mecanismos para detectar e corrigir isso.
+
+\nivel{2} Trabalhos subsequentes demonstraram que a qualidade do RAG depende
+criticamente da \emph{posição} dos documentos relevantes no contexto longo
+\cite{Liu2024LostMiddle}, e que estratégias iterativas de recuperação combinada
+com raciocínio (\emph{retrieve-then-read}, \emph{interleave}) melhoram a precisão
+em perguntas de múltiplos passos \cite{IzacardGrave2021LeveragingPassages,
+Trivedi2023Interleaving}. O RAG auto-adaptativo roteia a intensidade da
+recuperação conforme a complexidade da consulta \cite{Jeong2024AdaptiveRAG}.
+Abordagens baseadas em grafos, como o \emph{GraphRAG}, organizam o corpus em
+comunidades temáticas para sumarização focada na consulta \cite{Edge2024GraphRAG}.
+Métodos de correção pós-recuperação tratam a degradação quando a recuperação
+falha \cite{Yan2024CRAG}, e há evidências de que o uso da recuperação em tempo de
+inferência (\emph{in-context}) requer ajuste fino eficiente
+\cite{Ram2023RetrievalAugmented}. Alternativas \emph{prompt-only}, como o
+raciocínio com recuperação sobre passos de raciocínio, buscam fidelidade sem novo
+treinamento \cite{He2023RethinkingRetrieval}.
+
+\begin{pontochave}
+O RAG é um campo em evolução. A proposta deste manual (diversificação por Recamán)
+é \emph{ortogonal} a esses avanços: ela não compete com raciocínio iterativo,
+correção ou grafos --- atua como um estágio de pós-processamento do conjunto
+recuperado, podendo ser combinada com todos eles.
+\end{pontochave}
+
+\subsection*{3.4 Diversificação: MMR}
+
+\nivel{0} Se o RAG recupera documentos, a \emph{diversificação} decide como evitar
+redundância: entre dois documentos igualmente relevantes, prefira aquele que
+\emph{adiciona informação nova} em vez de repetir o que já foi dito.
+
+\begin{intuicao}
+Ao montar uma comissão para debater um tema, você não convida dez integrantes
+iguais. Você equilibra \emph{relevância} (pessoas entendidas) com
+\emph{diversidade} (pessoas com pontos de vista distintos). O MMR é esse
+"recrutador".
+\end{intuicao}
+
+\nivel{2} A \emph{Maximal Marginal Relevance} (MMR) equilibra relevância e
+novidade \cite{CarbonellGoldstein1998MMR}. Dado um conjunto de documentos $D$ já
+selecionado e o restante $R$, o próximo documento $d$ é escolhido por:
+
+\begin{equation}
+\label{eq:mmr}
+\text{MMR} \;=\; \arg\max_{d \in R}\Bigl[
+\lambda\,\text{Sim}_1(d,Q)\;-\;(1-\lambda)\,
+\max_{d_j \in D}\text{Sim}_2(d,d_j)
+\Bigr]
+\end{equation}
+
+O parâmetro $\lambda \in [0,1]$ controla o balanço entre relevância à consulta
+($\text{Sim}_1$) e redundância em relação aos já selecionados ($\text{Sim}_2$).
+MMR é a inspiração central da proposta de diversificação deste manual.
+
+\nivel{2} Um ponto crítico para a nossa proposta: o MMR depende de uma medida de
+similaridade $\text{Sim}_2$ e de um parâmetro $\lambda$. Essa dependência pode
+introduzir \emph{não-determinismo} (variação conforme a implementação da
+similaridade) e sensibilidade a $\lambda$. A proposta deste manual busca
+\emph{uma alternativa determinística} -- ainda inspirada no espírito de MMR, mas
+baseada em uma sequência canônica (Recamán) com cobertura determinística do
+ranking.
+
+\subsection*{3.5 A sequência de Recamán}
+
+\nivel{0} A sequência de Recamán é uma "conta" matemática simples com um "pulos"
+curiosos. Começa em 0. Em cada passo, você tenta \emph{subtrair} o número do passo;
+se o resultado der negativo ou já tiver aparecido, você \emph{soma}. O resultado é
+uma sequência que salta entre números pequenos e grandes, criando uma "cobertura"
+irregular mas **totalmente previsível** -- determinística.
+
+\begin{intuicao}
+Imagine escolher cadeiras em uma sala muito grande, sempre tentando andar para
+trás; se não der, andando para frente. A sequência de Recamán produz um padrão de
+saltos que "espalha" os números de forma que nenhum valor se repete precocemente.
+Para a diversificação, esse "espalhamento" é exatamente o que queremos: evitar
+ficar preso a um único canto do ranking.
+\end{intuicao}
+
+\nivel{2} A sequência de Recamán é definida por $a_0 = 0$ e, para $n \geq 1$:
+
+\begin{equation}
+\label{eq:recaman}
+a_n = \begin{cases}
+a_{n-1} - n, & \text{se } a_{n-1} - n > 0 \text{ e } a_{n-1} - n \notin \{a_0,\dots,a_{n-1}\},\\
+a_{n-1} + n, & \text{caso contrário}.
+\end{cases}
+\end{equation}
+
+A sequência produz uma permutação dos inteiros não negativos e exibe propriedades
+misteriosas ainda em estudo; "primos da sequência" foram descritos em
+\cite{Alekseyev2022RecamanCousins}. A proposta deste manual usa a sequência como
+fonte determinística de \emph{offsets} de diversificação, conferindo
+reprodutibilidade total ao estágio de diversificação.
+
+\begin{pontochave}
+A ponte conceitual está pronta: o MMR inspira \emph{por que} diversificar
+(Eq.~\ref{eq:mmr}); a sequência de Recamán oferece \emph{como} diversificar de
+forma determinística (Eq.~\ref{eq:recaman}). A próxima seção mostra o que já está
+implementado no ecossistema.
+\end{pontochave}

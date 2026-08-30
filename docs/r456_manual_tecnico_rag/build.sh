@@ -2,6 +2,9 @@
 #
 # build.sh — compila o manual técnico RAG/Recamán para PDF.
 #
+# O manual é modular: cada seção (sec_XX_*.tex) é incluída pelo documento-mestre
+# main.tex via \input. Edite a seção desejada e rode ./build.sh para regenerar.
+#
 # Uso:  ./build.sh            -> compila e deixa o PDF em docs/r456_manual_tecnico_rag/
 #       ./build.sh clean      -> remove artefatos de compilação (.aux, .log, etc.)
 #
@@ -13,11 +16,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 ABNTEX_DIR="../../publishing/templates/abntex2"
-SRC="manual_rag_recaman"
+SRC="main"
 
 clean() {
-  rm -f *.aux *.log *.out *.toc *.bbl *.blg *.lof *.lot *.synctex.gz \
-        *.fls *.fdb_latexmk *.run.xml *.bcf *.nav *.snm *.vrb *.idx *.ilg *.ind
+  rm -f *.aux *.log *.out *.toc *.bbl *.blg *.lof *.lot *.brf *.synctex.gz \
+        *.fls *.fdb_latexmk *.run.xml *.bcf *.nav *.snm *.vrb *.idx *.ilg *.ind \
+        main.pdf manual_rag_recaman.pdf
   echo "[build] artefatos de compilação removidos."
 }
 
@@ -26,7 +30,7 @@ if [ "${1:-}" = "clean" ]; then
   exit 0
 fi
 
-# Garante que a classe abntex2 local seja encontrada.
+# Garante que a classe abntex2 local e os estilos bibliográficos sejam encontrados.
 export TEXINPUTS=".:${ABNTEX_DIR}/:${TEXINPUTS:-}"
 export BSTINPUTS=".:${ABNTEX_DIR}/:${BSTINPUTS:-}"
 export BIBINPUTS=".:${ABNTEX_DIR}/:${BIBINPUTS:-}"
@@ -43,7 +47,7 @@ pdflatex -interaction=nonstopmode -halt-on-error "$SRC" >/dev/null
 pdflatex -interaction=nonstopmode -halt-on-error "$SRC" >/dev/null
 
 if [ -f "${SRC}.pdf" ]; then
-  echo "[build] OK -> ${SCRIPT_DIR}/${SRC}.pdf"
+  echo "[build] OK -> ${SCRIPT_DIR}/main.pdf (manual completo, modular)"
 else
   echo "[build] ERRO: PDF não gerado. Rode 'pdflatex ${SRC}.tex' manualmente para ver o log." >&2
   exit 1

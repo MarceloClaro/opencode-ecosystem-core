@@ -1,0 +1,157 @@
+% =====================================================================
+% SEC_09 — Considerações Finais e Trabalho Futuro
+% =====================================================================
+
+\section*{9. Considerações Finais e Trabalho Futuro}
+\addcontentsline{toc}{section}{9. Considerações Finais e Trabalho Futuro}
+
+\nivel{0} Chegamos ao fim. Esta seção amarra o fio narrativo: retomamos o problema
+de pesquisa da Seção~2, verificamos como cada seção contribuiu para resolvê-lo e
+definimos um \emph{roadmap concreto} de trabalho futuro, com etapas verificáveis e
+métricas de aceitação. Nada de promessas vagas: cada item tem critério e
+responsável (o protocolo TDD do ecossistema).
+
+\subsection*{9.1 Síntese: o caminho percorrido}
+
+\nivel{1} O manual seguiu uma sequência lógica que pode ser resumida em um único
+fluxo de raciocínio:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Etapa} & \textbf{O que se estabeleceu} \\
+\midrule
+Seção 1 & Leitor é orientado sobre como ler (trilha N0--N2). \\
+Seção 2 & Problema de pesquisa (PP), 4 RQs e hipótese H1 são formalizados. \\
+Seção 3 & Base teórica: BM25, RAG, raciocínio, MMR e Recamán. \\
+Seção 4 & Estado atual: pipeline implementado e \emph{lacuna} de diversidade. \\
+Seção 5 & Proposta pós-Recamán: 4 artefatos e posicionamento aditivo. \\
+Seção 6 & Cálculos: métricas, custo $O(N)$ e conexão com "lost in the middle". \\
+Seção 7 & Implementações: algoritmo, interface e reprodutibilidade. \\
+Seção 8 & Mapas: transversalidade e impacto sem quebrar interfaces. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{pontochave}
+O fio condutor único: \emph{um problema real} (concentração de resultados)
+$\rightarrow$ \emph{uma hipótese} (diversificação determinística via Recamán)
+$\rightarrow$ \emph{uma especificação} (artefatos + métricas) $\rightarrow$ \emph{uma
+implementação reproduzível}.
+\end{pontochave}
+
+\subsection*{9.2 Retomada do problema e das hipóteses}
+
+\nivel{2} Voltando à Seção~2: o problema de pesquisa (PP) pedia uma diversificação
+estruturada determinística, pós-ranqueamento, com custo controlado. O manual
+\emph{responde} a cada componente:
+
+\begin{itemize}
+  \item \textbf{Determinismo} --- respondido pela sequência de Recamán
+        (Eq.~\ref{eq:recaman}), que é uma função matemática canônica, sem
+        \emph{seed} (Seções 5 e 7).
+  \item \textbf{Pós-ranqueamento} --- o \texttt{RecamanDiversifier} opera sobre o
+        ranking já ordenado, sem alterar o ranqueador (Seção 5).
+  \item \textbf{Custo controlado} --- demonstrado em $O(N)$ (Eq.~\ref{eq:cost}),
+        não dominante no pipeline (Seção 6).
+\end{itemize}
+
+\noindent A hipótese H1, portanto, permanece \textbf{plausível e mensurável}, mas
+\textbf{não verificada}: sua confirmação exige implementação e experimentação
+empírica. Este manual a \emph{formula} e a \emph{prepara}, sem a \emph{provar}.
+
+\subsection*{9.3 Roadmap de trabalho futuro (concreto e verificável)}
+
+\nivel{1} Definimos um roadmap em fases, cada uma com \textbf{critério de aceitação
+mensurável} e alinhado às RQs. Este é o plano \emph{ação-ação}, passível de virar
+specs SDD/TDD:
+
+\begin{enumerate}[label=\textbf{Fase \arabic*.}]
+  \item \textbf{Implementação do \texttt{RecamanDiversifier}} (RQ2, RQ3).
+        \begin{itemize}
+          \item \emph{Ação:} criar \texttt{rag/recaman.py} com a interface da
+                Seção~7, seguindo TDD (RED$\to$GREEN$\to$REFACTOR).
+          \item \emph{Critério:} testes deterministas ($a_0\!..\!a_5 =
+                [0,1,3,6,2,7]$), terminação para todos os $N$,$k$, e
+                $\text{Div}(\mathcal{S})$ mensurável.
+        \end{itemize}
+  \item \textbf{Métrica de diversidade no \texttt{EnhancedRAG.metrics()}} (RQ1).
+        \begin{itemize}
+          \item \emph{Ação:} adicionar o campo $\text{Div}(\mathcal{S})$
+                (Eq.~\ref{eq:diversity}) ao painel de métricas existente, ligado a
+                \texttt{AnchorResolver}.
+          \item \emph{Critério:} painel passa a reportar diversidade; teste
+                garante $\text{Div}\in[0,1]$ e coerência com \emph{groundedness}.
+        \end{itemize}
+  \item \textbf{Experimento de coorte em corpus-piloto} (RQ1, RQ4).
+        \begin{itemize}
+          \item \emph{Ação:} comparar diversidade e groundedness entre estado
+                atual, MMR e Recamán em um corpus real do ecossistema.
+          \item \emph{Critério:} relatório com $\text{Div}$, groundedness e
+                \emph{baseline} justo (mesmos dados, mesmas seeds, mesmo oráculo).
+        \end{itemize}
+  \item \textbf{Teste de regressão de interface} (RQ4).
+        \begin{itemize}
+          \item \emph{Ação:} garantir que fluxos (acadêmico, jurídico, clínico,
+                MIRA) continuem consumindo o RAG sem mudança de contrato.
+          \item \emph{Critério:} suíte de regressão verde sobre a interface pública
+                dos fluxos.
+        \end{itemize}
+  \item \textbf{Registro evolutivo} (governança).
+        \begin{itemize}
+          \item \emph{Ação:} registrar cada ciclo no \texttt{evolution/cycles.json}
+                e no MetaBus, conforme o protocolo do ecossistema.
+          \item \emph{Critério:} ciclo R456+ registrado com score e lições;
+                MetaBus acessível.
+        \end{itemize}
+\end{enumerate}
+
+\begin{intuicao}
+O roadmap é como a "lista de tarefas de um projeto": cada linha tem um \emph{o
+que fazer} (ação), um \emph{como saber que deu certo} (critério) e uma \emph{ligação
+com a pergunta de pesquisa} (RQ). Isso transforma intenções em trabalho auditável.
+\end{intuicao}
+
+\subsection*{9.4 Contribuições esperadas (com rigor)}
+
+\nivel{2} As contribuições esperadas deste trabalho, de forma \emph{cautelosa} e
+sem \emph{overclaim}, são:
+
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{Contribuição metodológica:} uma ponte determinística entre teoria
+        dos números (Recamán) e diversificação de recuperação, oferecendo um
+        \emph{baseline reproduzível} e comparável (Seções 5--6).
+  \item \textbf{Contribuição de engenharia:} uma especificação aditiva e de baixo
+        acoplamento para o ecossistema, com custo $O(N)$ e preservação de
+        interface (Seções 6 e 8).
+  \item \textbf{Contribuição de medição:} o fechamento da lacuna de \emph{métrica de
+        diversidade} do painel atual (Seção 4), permitindo avaliar a hipótese H1.
+\end{enumerate}
+
+\begin{pontochave}
+Diferentemente de relatos que superestimam resultados, este manual declara
+\emph{contribuições esperadas} e \emph{hipotéticas}, vinculadas a RQs e métricas
+— nunca como fatos consumados.
+\end{pontochave}
+
+\subsection*{9.5 Considerações éticas e de rigor final}
+
+\nivel{2} Reafirmamos os compromissos éticos e de rigor que atravessaram todo o
+documento:
+
+\begin{itemize}
+  \item \textbf{Anti-overclaim:} nenhuma certificação externa, segurança absoluta
+        ou disponibilidade universal é alegada.
+  \item \textbf{Transparência:} estado atual e proposta estão separados e
+        rotulados; nenhum componente proposto é apresentado como implementado.
+  \item \textbf{Mensurabilidade:} todo impacto potencial está vinculado a uma RQ e
+        a uma métrica (Eq.~\ref{eq:diversity}), a ser validada empiricamente.
+  \item \textbf{Reprodutibilidade:} algoritmos, métricas e até a compilação deste
+        manual são reproduzíveis (Seção 7).
+\end{itemize}
+
+\begin{pontochave}
+O fecho deste manual não é um ponto final, mas um \emph{ponto de partida}:
+deixamos o problema formulado, a hipótese preparada e o roadmap aberto, prontos
+para migrar da \emph{especificação} para a \emph{implementação verificável}.
+\end{pontochave}

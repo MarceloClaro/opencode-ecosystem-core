@@ -1,0 +1,174 @@
+% =====================================================================
+% SEC_07 — Implementações Reproduzíveis
+% =====================================================================
+
+\section*{7. Implementações Reproduzíveis}
+\addcontentsline{toc}{section}{7. Implementações Reproduzíveis}
+
+\nivel{0} Toda o arcabouço teórico das seções anteriores precisa, em última
+instância, se materializar em \emph{código executável e reproduzível}. Esta seção
+percorre, em ordem didática, os três alicerces práticos: (1) \emph{o quê} gera a
+sequência determinística; (2) \emph{como} o diversificador a consome; e (3)
+\emph{com que ferramenta} tudo isso é compilado e auditado. A lógica segue a do
+ecossistema: \emph{testes primeiro} (RED), \emph{implementação} (GREEN) e
+\emph{refatoração} (REFACTOR), dentro do protocolo TDD.
+
+\subsection*{7.1 Geração determinística da sequência de Recamán}
+
+\nivel{1} O Algoritmo~\ref{alg:recaman} gera os primeiros $M$ termos da sequência
+de Recamán (Eq.~\ref{eq:recaman}). Sua execução é totalmente reprodutível: para o
+mesmo $M$, a saída é bit a bit idêntica em qualquer ambiente.
+
+\begin{algorithm}[!htb]
+\caption{Geração determinística da sequência de Recamán}
+\label{alg:recaman}
+\begin{algorithmic}[1]
+\Require $M \geq 1$ (número de termos desejado), com $a_0 = 0$
+\Ensure $a[0..M]$ tais que satisfaçam a Eq.~\ref{eq:recaman}
+\State $a[0] \gets 0$
+\State $\text{seen} \gets \{0\}$
+\For{$n \gets 1$ \textbf{to} $M$}
+  \State $\text{cand} \gets a[n-1] - n$
+  \If{$\text{cand} > 0$ \textbf{and} $\text{cand} \notin \text{seen}$}
+    \State $a[n] \gets \text{cand}$
+  \Else
+    \State $a[n] \gets a[n-1] + n$
+  \EndIf
+  \State $\text{seen} \gets \text{seen} \cup \{a[n]\}$
+\EndFor
+\State \Return $a$
+\end{algorithmic}
+\end{algorithm}
+
+\nivel{2} \textbf{Insight de implementação: a garantia de determinismo}. A
+reprodutibilidade vem de três detalhes que, isoladamente, podem parecer triviais,
+mas juntos asseguram a invariância:
+
+\begin{enumerate}[label=\arabic*.]
+  \item \emph{Ordem determinística de avaliação} --- a condição testa primeiro
+        $a_{n-1} - n > 0$ e, só então, a pertinência a \texttt{seen}; essa ordem
+        é fixa e documentada.
+  \item \emph{Conjunto de visitados} (\texttt{seen}) --- implementável como um
+        \texttt{set} (hash) ou uma \texttt{bitset}; o conteúdo (não a ordem
+        interna) é o que importa para decidir a pertinência.
+  \item \emph{Independência de \emph{seed}} --- ao contrário de amostragens
+        aleatórias, não há gerador pseudoaleatório, logo não há \emph{seed} que
+        altere o resultado.
+\end{enumerate}
+
+\begin{intuicao}
+O algoritmo é "uma receita de bolo com medidas exatas": não importa quem execute
+nem em que máquina --- o bolo (a sequência) sai idêntico. Isso permite que testes
+automáticos (TDD) verifiquem valores esperados conhecidos da sequência, como
+$a_0 = 0$, $a_1 = 1$, $a_2 = 3$, $a_3 = 6$, $a_4 = 2$, $a_5 = 7$.
+\end{intuicao}
+
+\begin{pontochave}
+Os primeiros termos conhecidos (OEIS A005132) $0,1,3,6,2,7,13,\dots$ servem como
+\emph{oráculo de teste}: um teste TDD pode afirmar que
+\texttt{recaman\_sequence(6) == [0,1,3,6,2,7]}, transformando a reprodutibilidade
+em algo \emph{verificável por máquina}.
+\end{pontochave}
+
+\subsection*{7.2 Esboço da interface do Diversificador}
+
+\nivel{1} O trecho abaixo esquematiza a interface proposta (não implementada) do
+\texttt{RecamanDiversifier}. Ele consome o ranking e os offsets da sequência para
+selecionar $k$ candidatos.
+
+\begin{lstlisting}[language=Python, caption={Esboço de interface do RecamanDiversifier (proposta, não implementada).}]
+class RecamanDiversifier:
+    """Deterministic diversifier based on the Recaman sequence.
+
+    PROPOSAL - NOT implemented in the checkout.
+    """
+    def __init__(self, seen=None):
+        self.a = [0]
+        self.seen = seen or {0}
+
+    def next_offset(self, n):
+        # generates a_n per the Recaman Eq. (O(1) amortized)
+        prev = self.a[n - 1]
+        cand = prev - n
+        if cand > 0 and cand not in self.seen:
+            val = cand
+        else:
+            val = prev + n
+        self.a.append(val)
+        self.seen.add(val)
+        return val
+
+    def diversify(self, ranked, k):
+        """Selects k candidates from 'ranked' using Recaman offsets."""
+        selected = []
+        cursor = 0
+        n = 0
+        while len(selected) < k and cursor < len(ranked):
+            selected.append(ranked[cursor])
+            offset = self.next_offset(n)
+            cursor = (cursor + offset + 1) % len(ranked)
+            n += 1
+        return selected
+\end{lstlisting}
+
+\nivel{2} \textbf{Insight de desenho: `next\_offset` é o coração reutilizável.} O
+método \texttt{next\_offset(n)} isola a \emph{geração incremental} da sequência,
+separando-a da \emph{lógica de seleção} (\texttt{diversify}). Essa separação é
+didática e de engenharia: permite testar a geração de offsets isoladamente
+(propriedades de Recamán) e a seleção separadamente (cobertura do ranking).
+
+\begin{intuicao}
+Separar "gerar o número do salto" de "decidir para onde saltar" é como separar a
+fábrica de "chaves" da fechadura que as usa: cada parte pode ser testada e
+ajustada sem quebrar a outra.
+\end{intuicao}
+
+\nivel{2} \textbf{Insight de correção: a estrutura do laço garante terminação.} O
+laço de \texttt{diversify} avança o cursor com \texttt{(cursor + offset + 1) \% len(ranked)}.
+Ao usar o módulo, o cursor permanece sempre no intervalo $[0, N-1]$, e a condição
+\texttt{len(selected) < k} limita o total de iterações a, no máximo, $k$ ---
+garantindo terminação e um limite superior de $O(k)$ operações (consistente com a
+Eq.~\ref{eq:cost}).
+
+\begin{pontochave}
+Ética de implementação: o esboço é \emph{legível} e \emph{testável} por partes.
+Antes de qualquer uso em produção, ele deve passar por um ciclo TDD completo:
+testar determinismo (mesma entrada, mesma saída), testar cobertura e testar a
+terminação para todos os $N$ e $k$ de interesse.
+\end{pontochave}
+
+\subsection*{7.3 Compilação do manual}
+
+\nivel{1} O PDF deste manual é compilado de forma reproduzível com os comandos:
+
+\begin{lstlisting}[language=bash, caption={Comando de compilação reproduzível do manual.}]
+cd docs/r456_manual_tecnico_rag
+./build.sh            # uses pdflatex + bibtex + makeindex
+# or, alternatively:
+make                  # uses latexmk -pdf
+\end{lstlisting}
+
+\nivel{2} A toolchain exigida é TeX Live com \texttt{pdflatex}, \texttt{bibtex},
+\texttt{makeindex} e \texttt{latexmk}, e a classe local \texttt{abntex2} do
+diretório \texttt{publishing/templates/abntex2}. Para que a compilação encontre a
+classe e os estilos bibliográficos \emph{copiados no repositório} (e não os do
+sistema), é necessário expor três variáveis de ambiente:
+
+\begin{lstlisting}[language=bash, caption={Variáveis de ambiente para localizar a classe abntex2 local.}]
+export TEXINPUTS=".:../../publishing/templates/abntex2/:${TEXINPUTS}"
+export BSTINPUTS=".:../../publishing/templates/abntex2/:${BSTINPUTS}"
+export BIBINPUTS=".:../../publishing/templates/abntex2/:${BIBINPUTS}"
+\end{lstlisting}
+
+\begin{intuicao}
+Pense nessas variáveis como o "caminho até a biblioteca": o \LaTeX{} precisa saber
+onde estão as classes e estilos que você não instalou globalmente. Apontando para
+a pasta do repositório, garantimos que a mesma versão da classe seja usada em
+qualquer máquina --- mais uma camada de reprodutibilidade.
+\end{intuicao}
+
+\begin{pontochave}
+A reprodutibilidade não se limita ao \emph{código do diversificador}: ela se
+estende à \emph{geração deste próprio manual}. O mesmo princípio de "saída
+idêntica para a mesma entrada" guia a compilação via \texttt{build.sh}/\texttt{make}.
+\end{pontochave}

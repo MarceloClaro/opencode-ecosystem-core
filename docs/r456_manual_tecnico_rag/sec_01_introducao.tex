@@ -1,0 +1,92 @@
+% =====================================================================
+% SEC_01 — Introdução e Escopo
+% =====================================================================
+
+\section*{1. Introdução e Escopo}
+\addcontentsline{toc}{section}{1. Introdução e Escopo}
+
+\nivel{0} Este manual tem duas finalidades complementares. A primeira é documentar,
+de forma precisa e verificável, a arquitetura de Recuperação Aumentada por
+Geração (RAG) tal como \emph{implementada} no ecossistema, referenciando os
+módulos reais do código-fonte. A segunda é apresentar uma \textbf{proposta} de
+evolução dessa arquitetura: a introdução de um estágio de diversificação
+estruturada baseado na sequência matemática de Recamán, que atua sobre o
+ranqueamento dos candidatos recuperados.
+
+\begin{intuicao}
+Pense no RAG como um assistente de pesquisa que, antes de responder, consulta
+uma biblioteca. A qualidade da resposta depende de \emph{quais livros} ele
+coloca sobre a mesa. O ponto central deste manual é simples: às vezes a mesa fica
+cheia de livros muito parecidos entre si. A \emph{diversificação} tenta resolver
+isso, garantindo que os livros representem ângulos diferentes do tema.
+\end{intuicao}
+
+\nivel{2} É fundamental registrar uma distinção metodológica que orienta todo o
+documento: a arquitetura \emph{atual} é observável e auditável no checkout,
+enquanto a arquitetura \emph{pós-Recamán} configura um desenho-alvo
+\textbf{proposto}, ainda não implementado. Esta separação entre o que \emph{é} e
+o que \emph{poderia ser} sustenta o rigor anti-overclaim do ecossistema
+(SDD/TDD): nenhum resultado é apresentado como implementado sem ser observável no
+código. Nenhuma alegação de certificação externa, de segurança absoluta ou de
+disponibilidade universal de serviços é feita aqui.
+
+\begin{pontochave}
+Ao final desta leitura, você deve ser capaz de: (i) distinguir o estado atual da
+proposta pós-Recamán; (ii) identificar o problema de pesquisa que motiva a
+diversificação; (iii) compreender a intuição por trás do uso da sequência de
+Recamán; e (iv) localizar as especificações técnicas e referências que sustentam
+cada afirmação.
+\end{pontochave}
+
+\subsection*{1.1 Como ler este manual (trilha de profundidade)}
+
+\nivel{0} Este manual foi escrito para ser lido por camadas. Cada seção é
+marcada com um \textbf{nível de profundidade} (N0, N1 ou N2) que indica o grau de
+formalização exigido:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Nível} & \textbf{Tipo de leitor} & \textbf{Em que consiste} \\
+\midrule
+N0 & Introdutório & Intuição, analogias e motivação; a "história" do problema. \\
+N1 & Aplicado & Como os conceitos se materializam em componentes; leitura de
+diagramas, tabelas e trechos de código. \\
+N2 & Pós-graduação & Formalização matemática, equações, complexidade
+assintótica e diálogo com a literatura (referências reais). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent O leitor de nível 0 pode percorrer apenas os parágrafos marcados N0 e
+as \emph{Caixas de intuição}. O leitor de nível PhD deve percorrer tudo, incluindo
+as equações e as referências. Nenhuma informação é "escondida": a mesma ideia
+aparece em várias profundidades, de forma didática, sem sacrificar o rigor da
+publicação.
+
+\subsection*{1.2 Estrutura do documento}
+
+O manual está organizado da seguinte forma:
+
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{Introdução e escopo} --- esta seção.
+  \item \textbf{Problema de pesquisa e impactos} --- formulação do problema que
+        motiva o estudo e seus impactos na ciência e no ecossistema.
+  \item \textbf{Fundamentação teórica} --- modelos de ranqueamento, RAG e MMR.
+  \item \textbf{Estado atual da arquitetura RAG} --- componentes implementados.
+  \item \textbf{Proposta pós-Recamán} --- arquitetura-alvo e diversificador.
+  \item \textbf{Cálculos e especificações técnicas} --- equações e métricas.
+  \item \textbf{Implementações reproduzíveis} --- pseudocódigo e trechos.
+  \item \textbf{Mapas de dados e diagrama operacional} --- visualização.
+  \item \textbf{Considerações finais e trabalho futuro}.
+\end{enumerate}
+
+\subsection*{1.3 Princípios de rigor}
+
+\nivel{2} Seguindo o protocolo de rigor do ecossistema (SDD/TDD e anti-overclaim),
+todo resultado aqui apresentado é ou (i) observável no código, ou (ii)
+reproduzível a partir das especificações, ou (iii) claramente rotulado como
+proposta. As referências bibliográficas correspondem a fontes reais validadas ---
+DOIs de periódicos/conferências e preprints arXiv --- e nenhuma foi fabricada.
+A didática nunca substitui a precisão: analogias são sempre acompanhadas da
+formalização correspondente.

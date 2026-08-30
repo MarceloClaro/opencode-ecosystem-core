@@ -5023,18 +5023,22 @@
     },
     {
       "round_id": "R456",
-      "objective": "Manual técnico (formato banca de doutorado) da arquitetura RAG e da proposta pós-Recamán, compilado em PDF com referências reais validadas.",
+      "objective": "Manual técnico (formato banca de doutorado) da arquitetura RAG e da proposta pós-Recamán, compilado em PDF, reescrito em arquitetura MODULAR (uma seção por arquivo .tex) com didática de profundidade progressiva (níveis N0-N2) e nova Seção 2 de Problema de Pesquisa e Impactos.",
       "changes": [
-        "docs/r456_manual_tecnico_rag/: manual_rag_recaman.tex (ABNT NBR 6022, classe abntex2 local), referencias.bib com 14 referências reais validadas, build.sh, Makefile e PDF compilado (15 páginas).",
-        "Manual distingue explicitamente estado atual (rag/evolved.py, rag/enhanced_search_rag.py) da arquitetura-alvo proposta pós-Recamán (ArtifactType, AnchorResolver, RecamanDiversifier, CanonicalContextPacker) com aviso metodológico anti-overclaim.",
-        "Diagramas TikZ com legendas (Figura 1: pipeline atual; Figura 2: proposta pós-Recamán), equações (BM25, MMR, Recamán, diversidade) e tabelas de especificações técnicas.",
-        "tests/test_r456_manual_tecnico_rag.py (12 contratos documentais verdes), VALIDATION_R456.md e SPEC-935-R456 registrados."
+        "docs/r456_manual_tecnico_rag/: manual reescrito em arquitetura modular — main.tex (documento-mestre) inclui via \\input as secoes sec_00 a sec_09 em arquivos .tex separados (capa/rosto, introducao, problema de pesquisa, fundamentacao, estado atual, proposta recaman, calculos/specs, implementacoes, mapas, consideracoes).",
+        "Nova Seccao 2 \"Problema de Pesquisa e Impactos\" com formulacao formal (PP, 4 RQs RQ1-RQ4, hipotese H1) e impactos na ciencia (metodologicos, sem overclaim) e no ecossistema (multiarea, rotulados como hipoteses).",
+        "Aprofundamento didatico de cada secao em sequencia logica N0 (intuicao) -> N1 (aplicacao) -> N2 (rigor formal) com caixas ambiente intuitiva/pontochave, marcador de nivel e marginpar; rigor de publicacao mantido.",
+        "Riqueza de engenharia extraida do codigo real (rag/evolved.py, rag/enhanced_search_rag.py): heuristica ponderada do AdaptiveRetriever, determinismo temporal deliberado, lacuna de metrica de diversidade no painel EnhancedRAG.metrics(), conexao com o efeito lost-in-the-middle.",
+        "Autoria registrada: Marcelo Claro Laranjeira (ORCID 0000-0001-8996-2887, marceloclaro@gmail.com) na capa e folha de rosto.",
+        "build.sh/Makefile atualizados para compilar main.pdf (modular); PDF final com 31 paginas e ~63.800 chars, 14 referencias reais validadas, 3 figuras e 2 tabelas com legendas; sem warnings de citacao/referencia indefinida no log.",
+        "tests/test_r456_manual_tecnico_rag.py atualizado (16 contratos documentais verdes) e VALIDATION_R456.md reescrito para a arquitetura modular."
       ],
-      "score": 9.0,
+      "score": 9.5,
       "lessons": [
-        "Documentação de proposta de arquitetura deve rotular explicitamente o que é proposto vs. implementado para sustentar o rigor anti-overclaim do ecossistema.",
-        "A compilação local de documentos ABNT reproduzíveis exige configurar TEXINPUTS, BSTINPUTS e BIBINPUTS para localizar a classe abntex2 copiada e evitar referências indefinidas.",
-        "Ao usar listings com ficheiros UTF-8, os blocos de código devem ser ASCII puro para evitar o erro \"Invalid UTF-8 byte sequence\" do pacote listings."
+        "Documentacao de proposta de arquitetura deve rotular explicitamente o que e proposto vs. implementado para sustentar o rigor anti-overclaim.",
+        "A compilacao local de documentos ABNT reproduziveis exige configurar TEXINPUTS, BSTINPUTS e BIBINPUTS para localizar a classe abntex2 copiada e evitar referencias indefinidas.",
+        "Ao usar listings com UTF-8, os blocos de codigo devem ser ASCII puro para evitar o erro \"Invalid UTF-8 byte sequence\" do pacote listings.",
+        "A arquitetura modular (uma secao por arquivo .tex) permite aprofundar cada secao isoladamente e recompilar o PDF unico, melhorando manutenibilidade e auditoria do documento."
       ],
       "timestamp": 1788096506.2147543
     }

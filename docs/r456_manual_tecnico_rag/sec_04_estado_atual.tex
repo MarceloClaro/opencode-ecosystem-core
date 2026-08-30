@@ -1,0 +1,181 @@
+% =====================================================================
+% SEC_04 — Estado Atual da Arquitetura RAG
+% =====================================================================
+
+\section*{4. Estado Atual da Arquitetura RAG}
+\addcontentsline{toc}{section}{4. Estado Atual da Arquitetura RAG}
+
+\nivel{0} Antes de propor mudanças, precisamos saber exatamente o que já existe.
+O ecossistema tem um pipeline RAG implementado em Python, organizado em dois
+módulos principais, auditáveis no repositório:
+
+\begin{itemize}
+  \item \texttt{rag/evolved.py} --- contém \texttt{AdaptiveRetriever},
+        \texttt{CitationGraph}, \texttt{OutlineSynthesizer} e \texttt{RAGEvolved}.
+  \item \texttt{rag/enhanced\_search\_rag.py} --- contém \texttt{UnifiedSearcher},
+        \texttt{EnhancedRAG}, \texttt{ReferenceAuditor} e \texttt{UnifiedSearchRAG}.
+\end{itemize}
+
+\begin{intuicao}
+Pense nesses módulos como as "engrenagens" de uma linha de montagem de respostas:
+a consulta entra em uma ponta; a resposta ancorada sai na outra. Cada engrenagem
+tem um papel específico --- decidir a estratégia, buscar em múltiplas fontes,
+expandir a consulta, organizar a síntese, auditar as referências.
+\end{intuicao}
+
+\subsection*{4.1 Diagrama operacional atual}
+
+\nivel{1} O diagrama abaixo (Figura~\ref{fig:atual}) representa o fluxo operacional
+observável. Diagramas aqui possuem \textbf{legenda} explícita dos elementos.
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[
+  node distance=1.1cm,
+  box/.style={draw, rounded corners, minimum width=2.6cm, minimum height=1.0cm,
+              align=center, font=\small, fill=blue!8},
+  arrow/.style={-{Stealth[length=3mm]}, thick}
+]
+  % Consulta
+  \node[box] (q) {Consulta do usuário};
+  \node[box, below=0.7cm of q] (ev) {RAGEvolved\\\emph{analisa complexidade}};
+  \node[box, below=0.7cm of ev, fill=orange!15] (ar) {AdaptiveRetriever\\\emph{retrieval adaptativo}};
+  \node[box, right=1.2cm of ar] (us) {UnifiedSearcher\\\emph{busca unificada}};
+  \node[box, below=0.7cm of ar] (cg) {CitationGraph\\\emph{expansão por citação}};
+  \node[box, below=0.7cm of cg] (os) {OutlineSynthesizer\\\emph{síntese por seção}};
+  \node[box, below=0.7cm of os] (en) {EnhancedRAG\\\emph{gerador ancorado}};
+  \node[box, below=0.7cm of en] (ra) {ReferenceAuditor\\\emph{auditoria ABNT/BibTeX}};
+  \node[box, below=0.7cm of ra] (out) {Resposta ancorada};
+
+  \draw[arrow] (q) -- (ev);
+  \draw[arrow] (ev) -- (ar);
+  \draw[arrow] (ar) -- (us);
+  \draw[arrow] (ar) -- (cg);
+  \draw[arrow] (cg) -- (os);
+  \draw[arrow] (os) -- (en);
+  \draw[arrow] (en) -- (ra);
+  \draw[arrow] (ra) -- (out);
+\end{tikzpicture}
+\caption{Diagrama operacional atual do pipeline RAG. \textbf{Legenda:} caixas
+azuis = componentes da recuperação/geração; caixa laranja = módulo de roteamento
+adaptativo; setas = fluxo de dados. Fonte: observação do código-fonte
+(\texttt{rag/evolved.py}, \texttt{rag/enhanced\_search\_rag.py}).}
+\label{fig:atual}
+\end{figure}
+
+\subsection*{4.2 Insight: o roteamento adaptativo é uma heurística ponderada}
+
+\nivel{2} Um insight que não costuma aparecer em descrições de alto nível é
+\emph{como} o \texttt{AdaptiveRetriever} decide a estratégia. Observando o código,
+a classificação da consulta (\texttt{simple}, \texttt{moderate}, \texttt{complex})
+não é um modelo aprendido: é uma \textbf{heurística linear ponderada} sobre quatro
+sinais textuais:
+
+\begin{itemize}
+  \item \textbf{Comprimento} (nº de palavras) com peso $0{,}15$;
+  \item \textbf{Conceitos} (palavras capitalizadas) com peso $2{,}0$;
+  \item \textbf{Conectores} lógicos/reasoning (\emph{compare}, \emph{analyze},
+        \emph{synthesize}, \emph{evaluate}, \emph{implications}...) com peso $4{,}0$;
+  \item \textbf{Multi-fonte} (citações autor-ano) com peso $3{,}0$.
+\end{itemize}
+
+\begin{equation}
+\label{eq:complexity}
+\text{score} = 0{,}15\,\text{n\_palavras} + 2\,c_{\text{conceitos}}
++ 4\,c_{\text{conectores}} + 3\,c_{\text{multi-fonte}}
+\end{equation}
+
+\noindent Consultas com $\text{score} \geq 12$ (ou com $\geq 3$ conectores em
+combinação com $\geq 2$ conceitos, ou mais de 25 palavras) são tratadas como
+\emph{complex}. Esse roteamento dialoga diretamente com a literatura de RAG
+auto-adaptativo \cite{Jeong2024AdaptiveRAG}, mas de forma \emph{interpretável} e
+determinística.
+
+\begin{intuicao}
+A heurística "conta palavras e pistas" imita como um ser humano avalia a
+dificuldade: uma pergunta com "compare e analise as implicações entre A e B"
+tem várias pistas de complexidade e será tratada com mais cuidado (mais
+recuperação). O código torna isso explícito e reproduzível.
+\end{intuicao}
+
+\subsection*{4.3 Insight: determinismo em todos os estágios}
+
+\nivel{2} O ecossistema demonstra uma \textbf{preocupação deliberada com
+determinismo}, visível em dois pontos do código que este manual destaca pela
+primeira vez:
+
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{Pontuação temporal com ano de referência fixo.} A função
+        \texttt{temporal\_score} aplica \emph{decaimento exponencial} com meia-vida
+        de 5 anos ($\lambda = \ln 2 / 5 \approx 0{,}1386$), mas fixa o ano de
+        referência em 2026 "para determinismo em testes":
+        \begin{equation}
+        \label{eq:temporal}
+        \text{temporal}(y) = \min\!\Bigl(0{,}07,\;
+        0{,}07 \cdot e^{-0{,}1386 \cdot \max(0,\,2026-y)}\Bigr)
+        \end{equation}
+        Isso impede que a saída \emph{mude com a passagem do relógio}, priorizando a
+        reprodutibilidade. O \textbf{clamp} em $0{,}07$ é outro insight: o bônus
+        temporal é mantido \emph{pequeno e limitado}, para não virar o ranqueamento
+        principal.
+  \item \textbf{Expansão de consulta mínima e determinística.}
+        \texttt{query\_expansion} adiciona \emph{no máximo um} sinônimo por termo
+        (o primeiro em ordem alfabética) e nunca insere sinônimo já presente.
+        Essa escolha evita \emph{consulta-desvio} (query drift) e garante
+        reproduzibilidade, em contraste com expansões probabilísticas que poderiam
+        variar entre execuções.
+\end{enumerate}
+
+\begin{pontochave}
+O estado atual já incorpora determinismo como \emph{valor de engenharia}. A
+proposta de Recamán estende essa filosofia ao estágio de diversificação, que hoje
+é o \emph{único} ponto sem uma escolha determinística explícita.
+\end{pontochave}
+
+\subsection*{4.4 Funções dos componentes}
+
+\nivel{1} Vamos detalhar o papel de cada componente, de forma aplicada:
+
+\noindent\textbf{\texttt{AdaptiveRetriever}.} Analisa a complexidade da consulta
+(Eq.~\ref{eq:complexity}) e escolhe entre recuperação sequencial, paralela ou
+decomposta. Isso dialoga com o conceito de RAG auto-adaptativo
+\cite{Jeong2024AdaptiveRAG}.
+
+\noindent\textbf{\texttt{UnifiedSearcher}.} Agrega múltiplas fontes de busca,
+deduplica resultados (por título normalizado) e aplica pontuação temporal
+(Eq.~\ref{eq:temporal}). \texttt{EnhancedRAG} reutiliza a recuperação e aplica
+\emph{query expansion} determinística e \emph{temporal boost}, produzindo
+respostas ancoradas.
+
+\noindent\textbf{\texttt{ReferenceAuditor}.} Normaliza títulos, formata
+referências em ABNT e BibTeX, e audita consistência — alinhado ao rigor
+bibliográfico do ecossistema.
+
+\subsection*{4.5 Insight: a métrica de diversidade está ausente}
+
+\nivel{2} Este é um dos insights mais relevantes do manual: o módulo
+\texttt{EnhancedRAG.metrics()} já computa um conjunto de métricas de qualidade do
+retrieval --- \emph{groundedness}, \emph{citation\_coverage},
+\emph{temporal\_spread} e \emph{avg\_year} --- mas \textbf{não há nenhuma métrica
+de diversidade} entre elas.
+
+\begin{itemize}
+  \item \emph{groundedness}: média dos escores de ancoragem das evidências;
+  \item \emph{citation\_coverage}: fração de evidências com citação;
+  \item \emph{temporal\_spread}: amplitude de anos (ano máx.\ $-$ ano mín.);
+  \item \emph{avg\_year}: ano médio das evidências.
+\end{itemize}
+
+\begin{intuicao}
+É como um painel de controle de um carro que mede velocidade, combustível e
+temperatura --- mas não mede se os passageiros estão conversando entre si (a
+"diversidade" das conversas). A proposta adiciona exatamente esse "medidor": a
+métrica de diversidade (Eq.~\ref{eq:diversity}), fechando a lacuna entre o que o
+sistema mede hoje e o que ele poderia medir.
+\end{intuicao}
+
+\begin{pontochave}
+A lacuna de \emph{medição} de diversidade é tão importante quanto a lacuna de
+\emph{implementação} de diversificação: sem métrica, não há como validar a
+hipótese H1. A proposta entrega ambas.
+\end{pontochave}
