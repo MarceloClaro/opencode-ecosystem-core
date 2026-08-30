@@ -93,7 +93,25 @@ def _check_evolution_registry() -> DoctorCheck:
                 f"apenas {loaded_count} carregados no registro. Verifique "
                 f"EvolutionRegistry._load() e chaves extras desconhecidas nas entradas.",
             )
-        return DoctorCheck("evolution_registry", "pass", f"{loaded_count}/{raw_count} ciclos carregados corretamente.")
+
+        # SPEC-935-R462 — reportar Cadeia de Custódia Auditável (estrutural).
+        # A métrica é medida, não declarada; uma custódia baixa é esperada
+        # enquanto houver ciclos legados pré-R462 (NÃO reescritos).
+        try:
+            g = registry.custody_metric()
+            r = registry.custody_recent()
+            custody_detail = (
+                f" | Custódia: {g['pct']}% ({g['audited']}/{g['total']}); "
+                f"recente R462+ {r['pct']}% ({r['audited']}/{r['total']}); "
+                f"âncoras merkle {g['anchored']}; rejeitados {g['rejected']}; "
+                f"legados {g['legacy']}"
+            )
+        except Exception as exc:
+            custody_detail = f" | Custódia: erro ({exc})"
+        return DoctorCheck(
+            "evolution_registry", "pass",
+            f"{loaded_count}/{raw_count} ciclos carregados corretamente.{custody_detail}",
+        )
     except Exception as exc:
         return DoctorCheck("evolution_registry", "fail", f"Erro ao verificar registro de evolução: {exc}")
 

@@ -15,8 +15,10 @@ from __future__ import annotations
 
 import hashlib
 import os
+import shutil
+import subprocess
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from evolution.audit_gate import EvolutionAuditGate
 from evolution.cycles import EvolutionRegistry
@@ -53,33 +55,77 @@ class EvolutionReport:
                      f"({g['audited']}/{g['total']} ciclos) |")
         lines.append(f"| Custódia recente (R462+) | **{r['pct']}%** "
                      f"({r['audited']}/{r['total']}) |")
+        lines.append(f"| Âncoras de imutabilidade (merkle) | {g['anchored']} |")
         lines.append(f"| Rejeitados pelo gate | {g['rejected']} |")
         lines.append(f"| Tamper detectado | {g['tampered']} |")
         lines.append(f"| Ciclos legados (pré-R462, não reescritos) | {g['legacy']} |")
         lines.append("")
         lines.append("## Detalhe por ciclo (últimos %d)" % limit)
         lines.append("")
-        lines.append("| Ciclo | Auditado | Verificador | Hash | Veredito |")
-        lines.append("|---|---|---|---|---|")
+        lines.append("| Ciclo | Auditado | Verificador | Hash | Veredito | Merkle | Commit |")
+        lines.append("|---|---|---|---|---|---|---|")
         for c in self.registry.cycles[-limit:]:
             aud = "Sim" if c.audited else ("Legacy" if c.legacy else "Não")
             verif = c.verifier_identity or "—"
             n_hash = len(c.artifact_hashes)
             ok = (c.external_verdict or {}).get("passed")
             verdict = "APROVADO" if ok is True else ("Reprovado" if ok is False else "—")
+            merkle = (c.merkle_root or "—")[:12] + "…" if c.merkle_root else "—"
+            commit = (c.origin_commit or "—")[:10] + "…" if c.origin_commit else "—"
             lines.append(
-                f"| {c.round_id} | {aud} | {verif} | {n_hash} | {verdict} |"
+                f"| {c.round_id} | {aud} | {verif} | {n_hash} | {verdict} | "
+                f"{merkle} | {commit} |"
             )
         lines.append("")
         lines.append("## Anti-Tamper (SHA-256 ancorado)")
         lines.append("")
         lines.append(
             "Cada artefato é ancorado por hash SHA-256 no momento da "
-            "produção. Alterações posteriores são detectáveis via "
-            "`EvolutionAuditGate.verify_tamper()`. O hash prova **ausência de "
-            "alteração**, não **correção** do conteúdo."
+            "produção; o `merkle_root` agrega todos os hashes do ciclo em uma "
+            "ancora única e o `origin_commit` fixa a versão do código-fonte no "
+            "registro. Alterações posteriores são detectáveis via "
+            "`EvolutionAuditGate.verify_tamper()`/`verify_merkle()`. O hash "
+            "prova **ausência de alteração**, não **correção** do conteúdo."
         )
         return "\n".join(lines)
+
+    def to_pdf(self, out_path: str, limit: int = 20) -> Optional[str]:
+        """Gera um PDF a partir do relatório Markdown, se um conversor estiver
+        disponível. Preferência: pandoc → weasyprint. Retorna o caminho gerado
+        ou `None` se nenhum conversor estiver instalado (não falsifica)."""
+        md = self.to_markdown(limit)
+
+        # 1) pandoc (preferência)
+        if shutil.which("pandoc"):
+            pandoc_html = os.path.join(
+                os.path.dirname(out_path), "_relatorio_tmp.html")
+            os.makedirs(os.path.dirname(out_path), exist_ok=True)
+            with open(pandoc_html, "w", encoding="utf-8") as f:
+                f.write(md)
+            try:
+                res = subprocess.run(
+                    ["pandoc", pandoc_html, "-o", out_path],
+                    capture_output=True, text=True, timeout=60,
+                )
+                if res.returncode == 0 and os.path.exists(out_path):
+                    os.remove(pandoc_html)
+                    return out_path
+            except Exception:
+                pass
+
+        # 2) weasyprint (fallback)
+        try:
+            import weasyprint  # type: ignore
+            html = ("<html><body><pre>" + md.replace("&", "&amp;")
+                    .replace("<", "&lt;").replace(">", "&gt;")
+                    + "</pre></body></html>")
+            os.makedirs(os.path.dirname(out_path), exist_ok=True)
+            weasyprint.HTML(string=html).write_pdf(out_path)
+            return out_path
+        except Exception:
+            pass
+
+        return None
 
     def write(self, out_path: str, limit: int = 20) -> str:
         md = self.to_markdown(limit)

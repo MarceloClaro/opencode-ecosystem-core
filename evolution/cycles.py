@@ -20,6 +20,8 @@ import time
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional
 
+from evolution.audit_gate import EvolutionAuditGate, git_head_commit
+
 EVOLUTION_DIR = os.path.dirname(os.path.abspath(__file__))
 # Isolamento de teste: respeita EVOLUTION_STATE_PATH se definida,
 # senao usa o state_path real (evolution/cycles.json).
@@ -44,6 +46,10 @@ class EvolutionCycle:
     evidence_trail: List[str] = field(default_factory=list)  # specs/testes/scans
     audited: bool = False  # True se passou pelo gate externo
     legacy: bool = False  # True se ciclo pré-R462 sem auditoria formal
+    # --- Âncoras externas de imutabilidade (endurecimento R462) ---
+    merkle_root: str = ""  # hash agregado dos artefatos do ciclo
+    origin_commit: str = ""  # commit git HEAD no momento do registro
+    state_merkle_root: str = ""  # hash do cycles.json no momento do registro
 
 
 class EvolutionRegistry:
@@ -63,7 +69,8 @@ class EvolutionRegistry:
                     data = json.load(f)
                 allowed = {"round_id", "objective", "changes", "score", "lessons",
                            "timestamp", "artifact_hashes", "external_verdict",
-                           "verifier_identity", "evidence_trail", "audited", "legacy"}
+                           "verifier_identity", "evidence_trail", "audited", "legacy",
+                           "merkle_root", "origin_commit", "state_merkle_root"}
                 self.cycles = [
                     EvolutionCycle(**{key: value for key, value in cycle.items() if key in allowed})
                     for cycle in data.get("cycles", [])
@@ -108,6 +115,22 @@ class EvolutionRegistry:
         self.save()
         return cycle
 
+    def _anchor(self, artifact_hashes: Dict[str, str],
+                state_merkle_root: Optional[str] = None) -> Dict[str, str]:
+        """Constrói âncoras externas de imutabilidade do ciclo.
+
+        Retorna {commit, merkle, state} — commit git HEAD atual, merkle_root
+        dos artefatos registrados e (opcional) hash do estado do cycles.json
+        no momento do registro. Ancorar o estado prova em que 'fotografia' do
+        registro o ciclo foi inserido (imutabilidade do estado).
+        """
+        gate = EvolutionAuditGate()
+        return {
+            "commit": git_head_commit(),
+            "merkle": gate.merkle_root(artifact_hashes),
+            "state": state_merkle_root or "",
+        }
+
     def record_audited(self, objective: str, changes: List[str],
                        artifact_hashes: Dict[str, str],
                        external_verdict: Dict[str, Any],
@@ -116,12 +139,14 @@ class EvolutionRegistry:
                        evidence_trail: Optional[List[str]] = None,
                        round_id: Optional[str] = None,
                        score: Optional[float] = None,
-                       lessons: Optional[List[str]] = None) -> EvolutionCycle:
+                       lessons: Optional[List[str]] = None,
+                       anchor_state: bool = True) -> EvolutionCycle:
         """Registra um ciclo que JÁ passou pelo EvolutionAuditGate (auditado).
 
-        Fail-closed: se o veredito externo não estiver aprovado (passed=True),
-        ou se verificador == gerador, o registro é RECUSADO (PermissionError)
-        e nada é persistido. (SPEC-935-R462 / A6, gate fail-closed)
+        Fail-closed: exige external_verdict.passed=True e verifier distinto do
+        gerador (Pelo contrario, ver `record_rejected`). Endurecido: ancora
+        automaticamente o commit git HEAD, o merkle_root dos artefatos e o hash
+        do estado do cycles.json (imutabilidade composita) se `anchor_state`.
         """
         passed = bool(external_verdict and external_verdict.get("passed") is True)
         verified_by_other = bool(verifier_identity
@@ -129,8 +154,18 @@ class EvolutionRegistry:
         if not passed or not verified_by_other:
             raise PermissionError(
                 "Ciclo recusado: exige external_verdict.passed=True e "
-                "verifier_identity distinto do gerador. (SPEC-935-R462 gate)"
+                "verifier_identity distinto do gerador. Use record_rejected() "
+                "para persistir um rastro de rejeicao. (SPEC-935-R462 gate)"
             )
+
+        anchors = self._anchor(artifact_hashes)
+        state_hash = ""
+        if anchor_state and self.state_path:
+            try:
+                with open(self.state_path, "rb") as f:
+                    state_hash = EvolutionAuditGate().hash_state(f.read())
+            except OSError:
+                state_hash = ""
 
         cycle = EvolutionCycle(
             round_id=round_id or self.next_round_id(),
@@ -142,11 +177,39 @@ class EvolutionRegistry:
             evidence_trail=list(evidence_trail or []),
             audited=True,
             legacy=False,
+            merkle_root=anchors["merkle"] or state_hash,
+            origin_commit=anchors["commit"],
+            state_merkle_root=state_hash,
         )
         self.cycles.append(cycle)
         if score is not None:
             self._total_score += score
             self._scored_count += 1
+        self.save()
+        return cycle
+
+    def record_rejected(self, objective: str, changes: List[str],
+                        reason: str,
+                        verifier_identity: str,
+                        generator_identity: str,
+                        round_id: Optional[str] = None) -> EvolutionCycle:
+        """Persiste um veredito REPROVADO como rastro auditável (reject trail).
+
+        Diferente de `record_audited`, que levanta PermissionError, este metodo
+        REGISTRA o ciclo com external_verdict.passed=False — mantendo a
+        evidenci a de que uma tentativa ocorreu e foi reprovada pelo gate. E
+        auditabilidade da falha, nao apenas acerto. (SPEC-935-R462)
+        """
+        cycle = EvolutionCycle(
+            round_id=round_id or self.next_round_id(),
+            objective=objective, changes=changes,
+            external_verdict={"passed": False, "reason": reason,
+                              "verifier": verifier_identity},
+            verifier_identity=verifier_identity,
+            audited=False,
+            legacy=False,
+        )
+        self.cycles.append(cycle)
         self.save()
         return cycle
 
@@ -160,24 +223,31 @@ class EvolutionRegistry:
         total = len(self.cycles)
         if total == 0:
             return {"audited": 0, "total": 0, "pct": 0.0, "rejected": 0,
-                    "tampered": 0, "legacy": 0}
+                    "tampered": 0, "legacy": 0, "anchored": 0}
         audited = sum(1 for c in self.cycles
                       if c.audited
                       and c.artifact_hashes
                       and c.external_verdict
                       and c.verifier_identity
                       and c.external_verdict.get("passed") is True)
+        # 'anchored' = auditado E com merkle_root (imutabilidade composita)
+        anchored = sum(1 for c in self.cycles
+                       if c.audited and c.merkle_root
+                       and c.external_verdict
+                       and c.external_verdict.get("passed") is True)
         legacy = sum(1 for c in self.cycles if c.legacy)
         tampered = sum(1 for c in self.cycles
                        if c.external_verdict
                        and c.external_verdict.get("tampered") is True)
+        rejected_trail = sum(1 for c in self.cycles
+                             if c.external_verdict
+                             and c.external_verdict.get("passed") is False)
         return {
             "audited": audited,
             "total": total,
             "pct": round(100.0 * audited / total, 1),
-            "rejected": sum(1 for c in self.cycles
-                            if c.external_verdict
-                            and c.external_verdict.get("passed") is False),
+            "anchored": anchored,
+            "rejected": rejected_trail,
             "tampered": tampered,
             "legacy": legacy,
         }
