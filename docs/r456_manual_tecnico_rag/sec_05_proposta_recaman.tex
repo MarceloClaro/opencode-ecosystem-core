@@ -51,7 +51,9 @@ cobertura.
 \nivel{2} Uma pergunta natural é: "por que não diversificar com uma amostragem
 aleatória ou com MMR?". A resposta está na análise comparativa dos critérios:
 
-\begin{tabularx}{\textwidth}{lXXX}
+\begin{center}
+\small
+\begin{tabular}{@{}L{0.14\textwidth}L{0.27\textwidth}L{0.27\textwidth}L{0.28\textwidth}@{}}
 \toprule
 \textbf{Critério} & \textbf{Aleatório} & \textbf{MMR} & \textbf{Recamán (proposta)} \\
 \midrule
@@ -61,7 +63,8 @@ Custo extra & baixo & $O(K \cdot |D|)$ & \textbf{$O(K)$} \\
 Sensibilidade a parâmetros & n/a & alta ($\lambda$) & \textbf{nula} \\
 Interpretabilidade & baixa & média & \textbf{alta} \\
 \bottomrule
-\end{tabularx}
+\end{tabular}
+\end{center}
 
 \begin{intuicao}
 Acender uma "loteria" para escolher livros funciona em média, mas não é

@@ -5038,7 +5038,8 @@
         "Documentacao de proposta de arquitetura deve rotular explicitamente o que e proposto vs. implementado para sustentar o rigor anti-overclaim.",
         "A compilacao local de documentos ABNT reproduziveis exige configurar TEXINPUTS, BSTINPUTS e BIBINPUTS para localizar a classe abntex2 copiada e evitar referencias indefinidas.",
         "Ao usar listings com UTF-8, os blocos de codigo devem ser ASCII puro para evitar o erro \"Invalid UTF-8 byte sequence\" do pacote listings.",
-        "A arquitetura modular (uma secao por arquivo .tex) permite aprofundar cada secao isoladamente e recompilar o PDF unico, melhorando manutenibilidade e auditoria do documento."
+        "A arquitetura modular (uma secao por arquivo .tex) permite aprofundar cada secao isoladamente e recompilar o PDF unico, melhorando manutenibilidade e auditoria do documento.",
+        "Tabelas em ABNT dentro de ambientes com recuo (quote) devem usar linewidth e colunas raggedright (L{}) para nao estourar as margens; e o comando marginpar colide com as margens ABNT estreitas, devendo ser desativado em favor de marcadores inline."
       ],
       "timestamp": 1788096506.2147543
     }
