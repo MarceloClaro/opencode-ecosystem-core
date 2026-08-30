@@ -71,6 +71,16 @@
 \hypersetup{hidelinks=true}
 \usepackage{caption}
 
+% --- Controle de overfull: permite quebra de palavras longas e espaçamento
+%     flexível para evitar caixas estouradas (margens ABNT respeitadas) ---
+\emergencystretch=3em
+\tolerance=2000
+\hbadness=10000
+
+% --- Coluna de tabela com largura fixa e alinhamento à esquerda (evita
+%     overfull por justificação em colunas estreitas). Uso: L{0.3\textwidth} ---
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
 % ---------------------------------------------------------------
 % Infraestrutura didática de profundidade progressiva
 % ---------------------------------------------------------------
@@ -92,10 +102,11 @@
   \end{quote}\par\medskip
 }
 
-% Marcador de nível de leitura didático:
+% Marcador de nível de leitura didático (inline, NÃO usa marginpar para evitar
+% colisão/sobreposição nas margens ABNT):
 %   \nivel{0} fundamento/intuição | \nivel{1} aplicação | \nivel{2} rigor formal
+\renewcommand{\marginpar}[1]{\relax} % desativa marginpar globalmente
 \newcommand{\nivel}[1]{%
-  \marginpar{\color{gray}\footnotesize N\raisebox{0.1ex}{\scriptsize #1}}%
   {\color{gray!70}\small\textbf{(nível \raisebox{0.1ex}{\scriptsize #1})} }%
 }
 

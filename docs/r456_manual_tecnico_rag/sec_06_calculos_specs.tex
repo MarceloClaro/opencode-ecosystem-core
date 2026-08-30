@@ -62,7 +62,7 @@ de explosão. Comparado com a \emph{codificação de embeddings} dos documentos
 \begin{equation}
 \label{eq:cost}
 T(N,K) \;=\; \underbrace{O(K)}_{\text{seleção via offsets}}
-\;+\; \underbrace{O(N)}_{\text{geração/consulta de âncoras}}
+          \;+\; \underbrace{O(N)}_{\text{âncoras}}
 \end{equation}
 
 \noindent O primeiro termo ($O(K)$) cobre o percurso do ranking com os offsets de
@@ -73,17 +73,25 @@ ou seja, \textbf{não adiciona um termo dominante novo} ao pipeline. Isso contra
 com o MMR, cuja etapa de seleção pode atingir $O(K \cdot |D|)$ por causa da
 comparação $\max_{d_j \in D} \text{Sim}_2(d,d_j)$ (Eq.~\ref{eq:mmr}).
 
-\begin{pontochave}
-\begin{tabularx}{\textwidth}{lXX}
+\begin{center}
+\small
+\begin{tabular}{@{}L{0.30\linewidth}L{0.20\linewidth}L{0.46\linewidth}@{}}
 \toprule
 \textbf{Estágio} & \textbf{Complexidade} & \textbf{Observação} \\
 \midrule
-Geração de Recamán ($M$ termos) & $O(M)$ tempo, $O(M)$ memóri & valores visitados em \texttt{set} \\
-Seleção de $K$ itens & $O(K)$ & percurso com offsets \\
+Geração de Recamán ($M$ termos) & $O(M)$ tempo, $O(M)$ memória & valores visitados em \emph{conjunto} \\
+Seleção de $K$ itens & $O(K)$ & percurso com \emph{offsets} \\
 Resolução de âncoras & $O(N)$ & deduplicação por identidade \\
-\textbf{Total} & $O(N)$ & não domina o pipeline \\
+\textbf{Total} & $O(N)$ & \textbf{não domina} o pipeline \\
 \bottomrule
-\end{tabularx}
+\end{tabular}
+\end{center}
+
+\begin{pontochave}
+O custo extra do diversificador é linear ($O(N)$) e não altera a ordem de
+grandeza do pipeline: resolve-se em memória auxiliar e tempo negligível frente à
+codificação de embeddings. É por isso que a proposal \emph{não} degrada a
+latência de forma apreciável.
 \end{pontochave}
 
 \subsection*{6.3 Insight: conexão com o efeito "perdido no meio"}
@@ -148,7 +156,7 @@ e da arquitetura-alvo proposta.
 pós-Recamán. \textbf{Legenda:} CH = implementado no checkout; PROP = proposta não
 implementada.}
 \label{tab:spec}
-\begin{tabularx}{\textwidth}{lXX}
+\begin{tabular}{@{}L{0.22\textwidth}L{0.36\textwidth}L{0.38\textwidth}@{}}
 \toprule
 \textbf{Aspecto} & \textbf{Estado atual} & \textbf{Proposta (pós-Recamán)} \\
 \midrule
@@ -162,7 +170,7 @@ Reprodutibilidade da diversif. & não determinística & determinística (Recamá
 Métrica de diversidade & ausente & $\text{Div}(\mathcal{S})$ (Eq.~\ref{eq:diversity}) \\
 Custo assimptótico extra & n/a & $O(N)$ (Eq.~\ref{eq:cost}) \\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 \begin{pontochave}

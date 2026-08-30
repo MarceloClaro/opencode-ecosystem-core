@@ -17,7 +17,7 @@ responsável (o protocolo TDD do ecossistema).
 fluxo de raciocínio:
 
 \begin{center}
-\begin{tabularx}{\textwidth}{lX}
+\begin{tabular}{@{}p{0.12\textwidth}p{0.84\textwidth}@{}}
 \toprule
 \textbf{Etapa} & \textbf{O que se estabeleceu} \\
 \midrule
@@ -30,7 +30,7 @@ Seção 6 & Cálculos: métricas, custo $O(N)$ e conexão com "lost in the middl
 Seção 7 & Implementações: algoritmo, interface e reprodutibilidade. \\
 Seção 8 & Mapas: transversalidade e impacto sem quebrar interfaces. \\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{center}
 
 \begin{pontochave}
@@ -70,10 +70,10 @@ specs SDD/TDD:
   \item \textbf{Implementação do \texttt{RecamanDiversifier}} (RQ2, RQ3).
         \begin{itemize}
           \item \emph{Ação:} criar \texttt{rag/recaman.py} com a interface da
-                Seção~7, seguindo TDD (RED$\to$GREEN$\to$REFACTOR).
-          \item \emph{Critério:} testes deterministas ($a_0\!..\!a_5 =
-                [0,1,3,6,2,7]$), terminação para todos os $N$,$k$, e
-                $\text{Div}(\mathcal{S})$ mensurável.
+                Seção~7, seguindo TDD (RED$\,\to\,$GREEN$\,\to\,$REFACTOR).
+          \item \emph{Critério:} testes deterministas
+                ($a_0\,..\,a_5 = [0,1,3,6,2,7]$), terminação para todos os
+                $N$ e $k$, e $\text{Div}(\mathcal{S})$ mensurável.
         \end{itemize}
   \item \textbf{Métrica de diversidade no \texttt{EnhancedRAG.metrics()}} (RQ1).
         \begin{itemize}
