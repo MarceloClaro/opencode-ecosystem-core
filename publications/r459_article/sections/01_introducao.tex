@@ -1,0 +1,79 @@
+% =====================================================================
+% SEC 01 — Introdução
+% =====================================================================
+\section{Introdução}
+\label{sec:intro}
+
+Sistemas de \emph{Retrieval-Augmented Generation} (RAG) combinam recuperação de
+documentos com geração de linguagem natural para responder consultas com
+\emph{grounding} em evidências \citep{Lewis2020RAG}. Em domínios científicos, a
+confiabilidade da resposta depende diretamente da qualidade e da \emph{cobertura}
+do conjunto de documentos recuperados \citep{Ram2023RetrievalAugmented}. Contudo,
+os estágios de ranqueamento de tais sistemas são, em sua grande maioria,
+orientados a \emph{relevância} individual \citep{RobertsonZaragoza2009BM25},
+medindo quão bem cada documento responde à consulta isoladamente — e não quão
+\emph{diversos} ou \emph{complementares} eles são entre si.
+
+\begin{quote}\small
+\textbf{Ponto-chave.} Para consultas de \emph{paisagem} ou \emph{multicunha} (revisão de literatura,
+síntese de evidências, comparação entre perspectivas), um conjunto recuperado
+que concentra-se em um único ângulo subestima o espaço de respostas mesmo quando
+cada item individualmente é altamente relevante. A diversidade dos candidatos é,
+nesses casos, tão importante quanto a relevância individual.
+\end{quote}
+
+Do ponto de vista de mensuração, arquiteturas científicas de RAG frequentemente
+expõem um painel de métricas de \emph{groundedness}, cobertura de citação e
+propagação temporal, mas \textbf{ausentam} uma métrica de diversidade do conjunto
+recuperado. Essa lacuna metodológica motivou a formulação da \emph{proposta
+pós-Recamán} \citep{Alekseyev2022RecamanCousins}: um estágio de diversificação
+\emph{determinístico} e \emph{pós-ranqueado}, baseado na sequência de Recamán
+(OEIS A005132), que gera \emph{offsets} fixos sobre o ranking para espalhar a
+seleção, acompanhado de uma métrica de diversidade $\Div(\mathcal{S})$ sobre
+\emph{âncoras canônicas} de conteúdo.
+
+A proposta é atraente por três razões: (i) \emph{determinismo} — os offsets são
+fixos e universais, eliminando a aleatoriedade da amostragem; (ii) \emph{custo
+baixo} — geração da sequência em $O(M)$ e seleção em $O(K)$ sobre o ranking; e
+(iii) \emph{interpretabilidade} — não depende de parâmetros como o $\lambda$ do
+MMR \citep{CarbonellGoldstein1998MMR}. A questão que este artigo investiga é,
+porém, essencialmente \emph{empírica}: dado um ranking, a seleção posicional por
+Recamán de fato aumenta a diversidade de \emph{conteúdo} (âncora/fonte) quando
+comparada ao \emph{top-k}? E como ela se compara ao MMR?
+
+Para respondê-la de forma controlada e reprodutível, construímos um
+\emph{benchmark} de coorte com corpus-piloto determinístico, no qual famílias de
+documentos representam ângulos de perspectiva distintos, e comparamos três
+estratégias de seleção pós-ranqueamento sob métricas de diversidade, relevância
+e cobertura. O resultado central é \emph{factual} e \emph{contrarintuitivo} em
+relação à expectativa inicial: no cenário testado, o esquema posicional de
+Recamán \textbf{empata} com o \emph{top-k} em diversidade, enquanto o MMR supera
+ambos. Esse achado evidencia uma \emph{limitação estrutural} de diversificadores
+posicionais, com implicações práticas para o desenho de diversificação no RAG.
+
+\subsection{Contribuições}
+
+Resumimos as contribuições deste artigo:
+
+\begin{enumerate}
+  \item \textbf{C1 (formalização)} — a formulação matemática da diversificação
+        pós-ranqueamento por Recamán e da métrica $\Div(\mathcal{S})$ sobre
+        âncoras canônicas, de caráter aditivo e determinístico;
+  \item \textbf{C2 (método)} — um \emph{benchmark} de coorte aberto e
+        reprodutível para comparar estratégias de diversificação
+        (\texttt{benchmarks/cohort\_recaman.py});
+  \item \textbf{C3 (evidência)} — a evidência empírica controlada de que
+        diversificadores posicionais podem coincidir com o \emph{top-k} sob
+        ranking monopolista por família, enquanto o MMR, baseado em
+        dissimilaridade de conteúdo, espalha por fonte.
+\end{enumerate}
+
+\subsection{Organização do artigo}
+
+Na Seção~\ref{sec:rel} revisamos trabalhos relacionados. A
+Seção~\ref{sec:metodo} apresenta a formulação da proposta, o desenho do
+corpus-piloto e o protocolo de avaliação. A Seção~\ref{sec:resultados} reporta
+os resultados observados. A Seção~\ref{sec:discussao} discute implicações e
+limitações, e a Seção~\ref{sec:conclusao} conclui. Declaramos, desde já, o
+escopo: todos os valores quantitativos provêm de \emph{corpus piloto controlado} e
+\emph{não generalizam para produção}.

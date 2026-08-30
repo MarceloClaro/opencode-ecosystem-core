@@ -1,0 +1,145 @@
+% =====================================================================
+% SEC 03 — Metodologia
+% =====================================================================
+\section{Metodologia}
+\label{sec:metodo}
+
+\subsection{Formulação da proposta pós-Recamán}
+
+\subsubsection{A sequência de Recamán}
+\label{sec:recaman-seq}
+
+A sequência de Recamán $A005132$ \citep{Alekseyev2022RecamanCousins} é definida por
+$a_0 = 0$ e, para $n\ge 1$,
+\[
+a_n \;=\; \begin{cases}
+a_{n-1} - n, & \text{se } a_{n-1}-n > 0 \text{ e valor não visitado},\\
+a_{n-1} + n, & \text{caso contrário}.
+\end{cases}
+\]
+Os primeiros termos são $0,1,3,6,2,7,13,20,12,21$.\footnote{Nota metodológica:
+a sequência \textbf{não é injetora} para $n$ grande (revisita valores); qualquer
+teste/benchmark que exija termo todos distintos é incorreto.}
+
+\subsubsection{Offset de índice sobre o ranking}
+
+Dado um ranking ordenado de $N$ candidatos e a sequência de Recamán
+$a_0,a_1,\dots$, o índice candidato para o $m$-ésimo passo de diversificação é
+\[
+\label{eq:offset}
+\mathrm{offset}_m \;=\; (1 + a_m) \bmod N .
+\]
+Para $N=8$, os offsets percorridos são $1,2,4,7,3,0,\dots$, cobrindo tanto o topo
+quanto o fim do ranking com saltos curtos e longos alternados.
+
+\begin{algorithm}[ht]
+\caption{Diversificador pós-Recamán (determinístico)}
+\label{alg:recaman}
+\begin{algorithmic}[1]
+\Require ranking $R$ de $N$ candidatos, orçamento $K$
+\Ensure seleção $S$, com $|S|=\min(K,N)$, $|S|$ distinto, top-1 presente
+\State $S \gets [\,]$; \Comment{seleção vazia}
+\State $S.\mathrm{add}(R[0])$; \Comment{relevância primária nunca é perdida}
+\State $\texttt{seen} \gets \{0\}$; $m \gets 0$;
+\While{$|S| < \min(K,N)$}
+  \State $p \gets (1 + a_m) \bmod N$;
+  \If{$p \notin \texttt{seen}$}
+    \State $S.\mathrm{add}(R[p])$; \Comment{``pula'' para posição $p$}
+    \State $\texttt{seen} \gets \texttt{seen} \cup \{p\}$;
+  \EndIf
+  \State $m \gets m+1$;
+\EndWhile
+\Return $S$
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Métrica de diversidade $\Div(\mathcal{S})$}
+
+Sobre o conjunto selecionado $\mathcal{S}$, a diversidade média entre pares é
+\[
+\label{eq:diversity}
+\Div(\mathcal{S})
+\;=\; \frac{1}{|\mathcal{S}|\,(|\mathcal{S}|-1)}
+\sum_{\substack{i\ne j\\ r_i,r_j\in\mathcal{S}}}
+\bigl(1 - \Sim(r_i, r_j)\bigr),
+\]
+com $\Sim\in[0,1]$ uma similaridade normalizada. Valores próximos de $1$ indicam
+alta diversidade; próximos de $0$, redundância.
+
+\begin{quote}\small
+\textbf{Insight de rigor.} Se $\Sim$ fosse medida sobre o \emph{texto bruto}
+(coseno de embeddings), duas redações distintas da mesma fonte dariam $\Sim$
+baixo, \emph{superestimando} a diversidade. Por isso a métrica vincula-se às
+\emph{âncoras canônicas}: $\Sim$ é computada sobre identidade de
+fonte/âmago (ex.: \texttt{source}). Isso garante \emph{diversidade efetiva}
+(conteúdo realmente distinto), não \emph{variedade de redação}.
+\end{quote}
+
+\subsection{Desenho do corpus-piloto}
+
+Construímos um corpus determinístico com $A=6$ \emph{ângulos de perspectiva}
+(famílias), cada um com $m=3$ documentos, totalizando $18$ documentos. Cada
+ângulo associa-se a uma \emph{fonte} (\texttt{family\_$k$}) única e a um conjunto
+de palavras-chave temáticas; o texto de cada documento recombina essas
+palavras-chave de forma determinística. Dessa forma, a \emph{âncora canônica}
+(coincidente com a \emph{fonte}) define a noção de ``família de perspectiva'' e
+torna a métrica $\Div(\mathcal{S})$ coerente com a intuição de diversidade de
+conteúdo.
+
+Para cada query, um subconjunto de ângulos é designado como \emph{alvo} da
+consulta; a query combina palavras-chave dos ângulos-alvo de forma \emph{equilibrada}
+(ver os cuidados de validade adiante). O ranking de entrada é obtido por um
+\emph{ranqueador} lexical-semântico determinístico (`ScientificRAG.retrieve`),
+sobre o qual as estratégias de seleção operam.
+
+\subsection{Protocolo de coorte}
+
+Comparamos três estratégias de \emph{seleção pós-ranqueamento}, com o mesmo
+orçamento $K$ por query:
+\begin{enumerate}
+  \item \textbf{\emph{top-k} (estado atual):} mantém os $K$ primeiros do ranking
+        por relevância ($\mathrm{final\_score}$).
+  \item \textbf{MMR:} seleção gulosa maximizando
+        $\lambda\,\mathrm{relev} - (1-\lambda)\max \Sim(\cdot,\cdot)$, com
+        $\lambda=0{,}7$ e similaridade por \emph{sobreposição de tokens}
+        (Jaccard), determinístico e sem embeddings externos.
+  \item \textbf{Recamán:} o \texttt{RecamanDiversifier} (Algoritmo~\ref{alg:recaman})
+        sobre o ranking ordenado.
+\end{enumerate}
+
+As métricas avaliadas por seleção são: diversidade $\Div(\mathcal{S})$ (Eq.
+\ref{eq:diversity} sobre âncoras), \emph{groundedness} (média dos
+$\mathrm{final\_score}$ selecionados) e \emph{cobertura} (fração de ângulos-alvo
+representados na seleção).
+
+\subsection{Cuidados de validade}
+
+Para que o experimento seja \emph{válido} (não apenas executável), aplicamos
+quatro correções metodológicas explícitas:
+
+\begin{enumerate}
+  \item \textbf{Query balanceada:} as palavras-chave da query são distribuídas
+        proporcionalmente entre os ângulos-alvo, evitando que o 1.º ângulo domine
+        por ordem de tokens.
+  \item \textbf{Dedup por documento:} o ranqueador retorna múltiplos \emph{chunks}
+        do mesmo documento; sem deduplicação, o topo é monopolizado por chunks do
+        mesmo documento, tornando \emph{impossível} a qualquer diversificador
+        espalhar. Deduplicamos por \texttt{doc\_id} antes da seleção.
+  \item \textbf{Pool amplo:} coletamos um pool de candidatos (\texttt{poll\_size}
+        $=40$ chunks) antes da deduplicação, para capturar mais de uma família.
+  \item \textbf{Veredito anti-empate:} a hipótese H2 exige ganho \emph{estrito} de
+        diversidade; empate ($\Div_{\text{Rec}}\le \Div_{\text{top-k}}$) é tratado
+        como \emph{não-demonstração}, não como sucesso.
+\end{enumerate}
+
+\subsection{Hipótese}
+
+Formalizamos a hipótese a testar:
+\[
+\textbf{H2:}\quad \Div(S_{\text{Recamán}}) > \Div(S_{\text{top-k}})
+\;\wedge\; \frac{g_{\text{top-k}} - g_{\text{Recamán}}}{g_{\text{top-k}}} \le 0{,}05,
+\]
+onde $g$ denota \emph{groundedness} médio. A segunda condição garante que o
+ganho de diversidade, se houver, não degrada relevância além de uma tolerância de
+$5\%$. H2 é \emph{refutável}: se a evidência não a sustentar, registramos
+\texttt{refuta\_H2} sem maquiar.

@@ -1,0 +1,84 @@
+% =====================================================================
+% SEC 05 — Discussão
+% =====================================================================
+\section{Discussão}
+\label{sec:discussao}
+
+\subsection{Por que o esquema posicional empata com o \emph{top-k}}
+
+O resultado central — Recamán $=$ \emph{top-k} em diversidade — tem uma causa
+\emph{estrutural}, não acidental. O diversificador pós-Recamán (Algoritmo
+\ref{alg:recaman}) opera \emph{sobre posições} do ranking: ele salta para índices
+determinísticos $\mathrm{offset}_m = (1+a_m)\bmod N$, mas \textbf{não consulta o
+conteúdo} (âncora/fonte) dos itens. Quando o ranking é \emph{localmente
+monopolista} — i.e., quando várias posições consecutivas são ocupadas por
+documentos da \emph{mesma família de perspectiva} — os offsets que caem nessas
+posições selecionam novamente a mesma família.
+
+No corpus-piloto, as três primeiras posições de cada ranking são preenchidas por
+três documentos da mesma família (ex.: \texttt{family\_2}). Os offsets iniciais
+de Recamán e o fato de o algoritmo partir do top-1 fazem com que a seleção recaia
+majoritariamente nessa família, reproduzindo o \emph{top-k}. Formalmente, um
+diversificador posicional $P$ só garante diversidade de $\Div$ quando o mapeamento
+posição$\to$família é ``colorida'', o que não ocorre em rankings monopolistas.
+
+\subsection{Contraste com o MMR}
+
+O MMR, por maximizar explicitamente
+$\lambda\,\mathrm{relev} - (1-\lambda)\max\Sim(\cdot,\cdot)$, usa \emph{dissimilaridade de
+conteúdo} entre os itens já selecionados e os candidatos. Isso o torna capaz de
+\emph{quebrar} o monopolismo: mesmo que a família dominante ocupe o topo, o MMR
+prefere um candidato de outra família desde que a dissimilaridade compense a perda
+de relevância. O custo disso é uma \emph{queda de relevância} ($\approx 6{,}7\%$ no
+corpus-piloto), acima da tolerância definida neste estudo — o que evidencia o
+`trade-off` clássico entre diversidade e relevância.
+
+\subsection{Implicações para diversificação em RAG}
+
+Do ponto de vista prático, o achado sugere:
+
+\begin{itemize}
+  \item Diversificadores \emph{posicionais} (como a variante pós-Recamán aqui
+        avaliada) são eficazes para \emph{espalhar por posição}, mas não garantem
+        diversidade de \emph{fonte/âncora} quando o ranqueador upstream concentra
+        famílias no topo. Uma direção de melhoria é \emph{operar o diversificador
+        sobre âncoras}, recomputando os offsets no espaço de famílias (não de
+        posições) — além do escopo deste artigo.
+  \item Para consultas de paisagem/multicunha em RAG, uma combinação
+        \emph{relevância+dissimilaridade} (na linha do MMR) tende a ser mais
+        adequada, aceitando-se uma queda controlada de relevância, desde que a
+        métrica de diversidade seja monitorada explicitamente (Eq.
+        \ref{eq:diversity}).
+  \item A métrica $\Div(\mathcal{S})$ e o \emph{benchmark} propostos provêm uma
+        fundação para \emph{medir} — e não apenas \emph{assumir} — o ganho de
+        diversificação em futuros trabalhos.
+\end{itemize}
+
+\subsection{Limitações do estudo}
+
+Declaramos as limitações de forma explícita (anti-overclaim):
+
+\begin{enumerate}
+  \item \textbf{Corpus-piloto sintético:} os resultados referem-se a um corpus
+        controlado e determinístico; \textbf{não generalizam} para produção nem
+        para corpora reais de grande escala.
+  \item \textbf{Sem embeddings externos:} o ranqueador e a similaridade do MMR
+        usam sobreposição de tokens, não representações densas; comportamento com
+        embeddings pode diferir.
+  \item \textbf{Sem geração de linguagem:} avaliamos \emph{seleção/recuperação},
+        não a qualidade do texto gerado pelo LLM \emph{a partir} das evidências.
+  \item \textbf{Conjunto de queries pequeno} ($n=4$): os agregados têm caráter
+        ilustrativo; um experimento com dezenas/centenas de queries e múltiplas
+        sementes é necessário para inferência estatística.
+  \item \textbf{Parâmetro $\lambda=0{,}7$ fixo} no MMR; a sensibilidade a
+        $\lambda$ não foi explorada aqui.
+\end{enumerate}
+
+\subsection{Trabalho futuro}
+
+Como extensões naturais, propomos: (i) o redesenho do diversificador para operar
+sobre \emph{âncoras canônicas} (offsets no espaço de famílias); (ii) a validação
+em corpus real (ex.: coleções científicas abertas), com mais queries e sementes;
+(iii) a inclusão de embeddings densos e similaridade semântica; e (iv) a
+avaliação \emph{extrínseca} da qualidade da resposta gerada sob as diferentes
+estratégias de seleção.

@@ -5082,6 +5082,27 @@
         "Anti-overclaim: numero negativo de ganho e um RESULTADO valido; registra-se refuta_H2 sem maquiar, mantendo a capacidade Recaman exposta (R457) mas nao promovendo-a ao pipeline padrao."
       ],
       "timestamp": 1788101624.018539
+    },
+    {
+      "round_id": "R459",
+      "objective": "Artigo cientifico de publicacao (SPEC-935-R459) baseado no achado R458 e no manual R456: 'Diversificacao pos-ranqueamento no RAG cientifico: avaliacao empirica do esquema posicional de Recaman vs MMR'.",
+      "changes": [
+        "publications/r459_article/main.tex: manuscrito LaTeX completo (titulo, autoria c/ ORCID, resumo PT + abstract EN, sumario, 6 seccoes, apendice de reprodutibilidade).",
+        "publications/r459_article/sections/01..06: introducao, trabalhos relacionados (BM25, RAG, MMR, ColBERT), metodologia (sequencia A005132, offsets (1+a_m) mod N, Algoritmo 1, metrica Div(S) Eq, desenho do corpus, protocolo, cuidados de validade, H2), resultados (Quadro 1 + tabela por-query com valores REAIS do cohort_report.json), discussao (causa estrutural do empate, contraste MMR, implicacoes, limitacoes, trabalho futuro), conclusao.",
+        "publications/r459_article/figures/cohort_results.png: figura de evidencia gerada de dados reais (matplotlib), embutida na sec. de resultados.",
+        "publications/r459_article/referencias.bib: 13 referencias reais/verificadas herdadas do manual R456.",
+        "Compilado LaTeX->PDF (10 paginas) com pdflatex+bibtex, 0 citacoes indefinidas, 1 overfull menor.",
+        "QA: scientific_reasoning_scan com metodologia completa -> SRI 60, falsifiability 75, sem falacias; super_rigor_audit sem ressalvas de sobre-alegacao."
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Anti-overclaim estrutural: artigo reporta veredito refuta_H2 (valor negativo/neutro) e rotula escopo ('corpus-piloto, nao generaliza, sem embeddings, sem geração de texto') — postura de reporte equilibrado rara e valiosa.",
+        "Scanner de rigor avalia o texto que RECEBE; usar resumo truncado da SRI artificialmente baixa; para QA justo submeter a metodologia completa.",
+        "Todos os numeros do artigo foram extraidos do cohort_report.json real (0.500/0.750/0.4561/0.4256/0.667/0.917) — nenhum valor interpolado.",
+        "Classe IEEEtran/acmart ausente no ambiente; usar classe 'article' com estilo limpo compila garantidamente e e convertivel depois para classe alvo.",
+        "Ambientes customizados do manual (ponto-chave, emphasis) nao existem na classe article; substituir por quote+textbf para compilacao robusta."
+      ],
+      "timestamp": 1788102046.5287309
     }
   ]
 }
