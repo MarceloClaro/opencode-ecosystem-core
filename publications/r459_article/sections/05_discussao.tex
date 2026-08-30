@@ -33,6 +33,37 @@ de relevância. O custo disso é uma \emph{queda de relevância} ($\approx 6{,}7
 corpus-piloto), acima da tolerância definida neste estudo — o que evidencia o
 `trade-off` clássico entre diversidade e relevância.
 
+\subsection{Por que o HABD maximiza cobertura, mas excede a tolerância de relevância}
+
+O HABD supera o MMR em diversidade ($0{,}8333$ vs. $0{,}750$) e atinge cobertura
+máxima ($1{,}0$) por um mecanismo \emph{deliberado}: ao operar sobre \emph{âncoras}
+(e não sobre similaridade de tokens) e ao reduzir $\lambda$ sob ranking
+monopolista, ele garante que \emph{toda âncora alvo} seja representada, mesmo
+quando a dissimilaridade por pares de tokens não discrimina (caso da query 2, em
+que o MMR empata com o \emph{top-k}). Esse ganho na fronteira de diversidade,
+porém, tem custo: o HABD sacrifica mais relevância ($\approx 10{,}4\%$) que o MMR,
+ficando acima da tolerância de $5\%$.
+
+Três observações qualitativas emergem desse resultado:
+\begin{itemize}
+  \item \textbf{Cobertura vs.\ relevância são objetivamente conflitantes:} o HABD
+        maximiza a cobertura de fontes descartando parte da relevância do topo;
+        isso é coerente com o alerta de que retenção de diversidade pode reduzir a
+        preservação de evidência \citep{Khan2026DFRAG}.
+  \item \textbf{$\lambda$ adaptativo melhora a diversidade, mas não é gratuito:}
+        a rotação determinística do $\lambda$ (de $0{,}7$ para $0{,}4333$ em média)
+        espelha a lição de que $\lambda$ fixo é subótimo
+        \citep{Khan2026DFRAG,GuoSanner2010PLMMR}, porém, sem um mecanismo de
+        \emph{qualidade da resposta} como o de Vendi-RAG
+        \citep{RezaeiDieng2025VendiRAG}, a diversidade ganha primazia sem
+        contrapeso explícito de relevância.
+  \item \textbf{Heurística determinística vs.\ LLM-judge:} o HABD obtém ganho de
+        diversidade \emph{sem LLM}, o que o torna barato e auditável; mas a
+        literatura sugere que o balanço ótimo depende de \emph{feedback de
+        qualidade} (DF-RAG, Vendi-RAG), o que aponta para um acoplamento futuro
+        entre a heurística de $\mu$ e um sinal de qualidade.
+\end{itemize}
+
 \subsection{Implicações para diversificação em RAG}
 
 Do ponto de vista prático, o achado sugere:
@@ -43,15 +74,18 @@ Do ponto de vista prático, o achado sugere:
         diversidade de \emph{fonte/âncora} quando o ranqueador upstream concentra
         famílias no topo. Uma direção de melhoria é \emph{operar o diversificador
         sobre âncoras}, recomputando os offsets no espaço de famílias (não de
-        posições) — além do escopo deste artigo.
+        posições) — exatamente o que o HABD faz de forma gulosa.
   \item Para consultas de paisagem/multicunha em RAG, uma combinação
         \emph{relevância+dissimilaridade} (na linha do MMR) tende a ser mais
         adequada, aceitando-se uma queda controlada de relevância, desde que a
         métrica de diversidade seja monitorada explicitamente (Eq.
         \ref{eq:diversity}).
+  \item O \emph{over-retrieve before diversify} é essencial: sem um pool amplo que
+        contenha mais de uma família, nenhum diversificador pode agir — por isso o
+        coorte usa \texttt{poll\_size}$=40$ antes da deduplicação por documento.
   \item A métrica $\Div(\mathcal{S})$ e o \emph{benchmark} propostos provêm uma
         fundação para \emph{medir} — e não apenas \emph{assumir} — o ganho de
-        diversificação em futuros trabalhos.
+        diversificação em futuros trabalhos \citep{Yu2024RAGEvalSurvey}.
 \end{itemize}
 
 \subsection{Limitações do estudo}
@@ -67,18 +101,28 @@ Declaramos as limitações de forma explícita (anti-overclaim):
         embeddings pode diferir.
   \item \textbf{Sem geração de linguagem:} avaliamos \emph{seleção/recuperação},
         não a qualidade do texto gerado pelo LLM \emph{a partir} das evidências.
+        Em particular, não medimos o efeito da diversidade na qualidade da
+        resposta final — lacuna que Vendi-RAG endereça com juiz LLM
+        \citep{RezaeiDieng2025VendiRAG}.
   \item \textbf{Conjunto de queries pequeno} ($n=4$): os agregados têm caráter
         ilustrativo; um experimento com dezenas/centenas de queries e múltiplas
         sementes é necessário para inferência estatística.
-  \item \textbf{Parâmetro $\lambda=0{,}7$ fixo} no MMR; a sensibilidade a
-        $\lambda$ não foi explorada aqui.
+  \item \textbf{$\lambda_{\min}$/$\lambda_{\mathrm{base}}$ escolhidos por
+        convenção} ($0{,}3$/$0{,}7$); a sensibilidade a esses valores e ao tamanho
+        da janela $W$ do índice de mistura $\mu$ não foi explorada aqui.
+  \item \textbf{Heurística sem feedback de qualidade:} o HABD não usa LLM-judge
+        nem sinal de resposta; a fronteira relevância$\times$diversidade poderia
+        ser melhor equilibrada com tal retroalimentação, como em DF-RAG e
+        Vendi-RAG \citep{Khan2026DFRAG,RezaeiDieng2025VendiRAG}.
 \end{enumerate}
 
 \subsection{Trabalho futuro}
 
-Como extensões naturais, propomos: (i) o redesenho do diversificador para operar
-sobre \emph{âncoras canônicas} (offsets no espaço de famílias); (ii) a validação
-em corpus real (ex.: coleções científicas abertas), com mais queries e sementes;
-(iii) a inclusão de embeddings densos e similaridade semântica; e (iv) a
-avaliação \emph{extrínseca} da qualidade da resposta gerada sob as diferentes
+Como extensões naturais, propomos: (i) acoplar a heurística adaptativa do HABD a
+um \emph{feedback de qualidade} de resposta (na linha de Vendi-RAG), para
+encontrar o ponto da fronteira dentro da tolerância de relevância; (ii) validar em
+corpus real (ex.: coleções científicas abertas), com mais queries e sementes; (iii)
+incluir embeddings densos e similaridade semântica, além de uma métrica de
+diversidade de conjuntos como a Vendi Score \citep{RezaeiDieng2025VendiRAG}; e (iv)
+avaliar \emph{extrinsecamente} a qualidade da resposta gerada sob as diferentes
 estratégias de seleção.

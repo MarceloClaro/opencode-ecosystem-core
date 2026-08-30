@@ -75,6 +75,68 @@ fonte/âmago (ex.: \texttt{source}). Isso garante \emph{diversidade efetiva}
 (conteúdo realmente distinto), não \emph{variedade de redação}.
 \end{quote}
 
+\subsection{Formulação do HABD (diversificador híbrido anchor-blended)}
+
+O achado do R458 — Recamán empata com o \emph{top-k} por diversificar
+\emph{posição}, não \emph{âncora} — e a literatura de $\lambda$ adaptativo
+\citep{Khan2026DFRAG,RezaeiDieng2025VendiRAG,GuoSanner2010PLMMR} motivam o
+\textbf{HABD} (\emph{Hybrid Anchor-Blended Deterministic diversifier}), que
+combina (a) o determinismo e o custo baixo do Recamán, (b) a dissimilaridade de
+\emph{conteúdo} do MMR e (c) um $\lambda$ \emph{adaptativo por query}, sem LLM.
+Formalmente, o HABD opera em três passos.
+
+\subsubsection{Índice de mistura de âncoras ($\mu$)}
+
+Dado o ranking de candidatos $R$ e a resolução de âncoras (Seção
+\ref{sec:recaman-seq}), definimos o \emph{índice de mistura} sobre a janela de
+topo de tamanho $W$:
+\[
+\label{eq:mu}
+\mu(q) \;=\; \frac{
+\bigl|\{ \text{âncoras distintas nos } W \text{ primeiros de } R\}\bigr|
+}{
+\min(W, |R|)
+} ,
+\qquad \mu \in [0,1].
+\]
+$\mu\approx 0$ indica ranking \emph{localmente monopolista} (poucas famílias no
+topo); $\mu\approx 1$ indica ranking \emph{misto}. É uma medida barata e
+determinística da \emph{estrutura} do ranking em relação às âncoras — a mesma
+informação que, no DF-RAG \citep{Khan2026DFRAG}, é obtida por um julgador LLM.
+
+\subsubsection{$\lambda$ adaptativo determinístico}
+
+Para que a diversificação reaja ao monopolismo, mapeamos $\mu$ para $\lambda$ de
+forma monotônica:
+\[
+\label{eq:lambda}
+\lambda_{\mathrm{HABD}}(q) \;=\; \lambda_{\min} + \mu(q)\,
+\bigl(\lambda_{\mathrm{base}} - \lambda_{\min}\bigr) ,
+\]
+com $\lambda_{\min}=0{,}3$ e $\lambda_{\mathrm{base}}=0{,}7$. Quando $\mu\to 0$
+(monopolista), $\lambda\to 0{,}3$ — a seleção passa a favorecer \emph{diversidade}
+(penaliza fortemente âncoras repetidas). Quando $\mu\to 1$ (misto), $\lambda\to
+0{,}7$ — privilegia-se \emph{relevância}, pois a diversidade já está
+representada no ranking. Essa rotação entre relevância e diversidade é a ideia
+central do \emph{over-retrieve + diversify} e da adaptação por tipo de consulta
+presentes na prática moderna de RAG \citep{Khan2026DFRAG,RezaeiDieng2025VendiRAG}.
+
+\subsubsection{Seleção MMR anchor-blended}
+
+A escolha gulosa, a cada passo, maximiza:
+\[
+\label{eq:habdscore}
+\mathrm{score}(d) \;=\; \lambda\,\mathrm{relev}(d) \;-\; (1-\lambda)\,
+\underbrace{\max_{d_j\in S}\, \Sim_{\mathrm{anchor}}(d,d_j)}_{\text{0 se }d\text{ tem âncora nova}} ,
+\]
+onde $\Sim_{\mathrm{anchor}}(d,d_j)=1$ se $d$ e $d_j$ têm a \emph{mesma âncora} e
+$0$ caso contrário. A top-1 do ranking é sempre mantida. O efeito é duplo: (i)
+uma \emph{âncora ainda não representada} no conjunto $S$ tem penalidade $0$ e,
+portanto, prioridade — garantindo \emph{cobertura de fontes} determinística; (ii)
+entre candidatos de \emph{mesma âncora}, vence o mais relevante. O custo é
+$O(K\cdot |R|)$, idêntico ao do MMR, e o determinismo é preservado (sem seed;
+desempates por ordem de ranking).
+
 \subsection{Desenho do corpus-piloto}
 
 Construímos um corpus determinístico com $A=6$ \emph{ângulos de perspectiva}
@@ -94,7 +156,7 @@ sobre o qual as estratégias de seleção operam.
 
 \subsection{Protocolo de coorte}
 
-Comparamos três estratégias de \emph{seleção pós-ranqueamento}, com o mesmo
+Comparamos quatro estratégias de \emph{seleção pós-ranqueamento}, com o mesmo
 orçamento $K$ por query:
 \begin{enumerate}
   \item \textbf{\emph{top-k} (estado atual):} mantém os $K$ primeiros do ranking
@@ -105,12 +167,16 @@ orçamento $K$ por query:
         (Jaccard), determinístico e sem embeddings externos.
   \item \textbf{Recamán:} o \texttt{RecamanDiversifier} (Algoritmo~\ref{alg:recaman})
         sobre o ranking ordenado.
+  \item \textbf{HABD:} o diversificador \emph{anchor-blended} determinístico com
+        $\lambda$ adaptativo (Seção do HABD), com $\lambda_{\min}=0{,}3$ e
+        $\lambda_{\mathrm{base}}=0{,}7$.
 \end{enumerate}
 
 As métricas avaliadas por seleção são: diversidade $\Div(\mathcal{S})$ (Eq.
 \ref{eq:diversity} sobre âncoras), \emph{groundedness} (média dos
 $\mathrm{final\_score}$ selecionados) e \emph{cobertura} (fração de ângulos-alvo
-representados na seleção).
+representados na seleção). O HABD registra, ainda, o $\lambda$ efetivo por query
+(que varia conforme $\mu$), para verificação de que a rotação realmente ocorre.
 
 \subsection{Cuidados de validade}
 
@@ -132,14 +198,27 @@ quatro correções metodológicas explícitas:
         como \emph{não-demonstração}, não como sucesso.
 \end{enumerate}
 
-\subsection{Hipótese}
+\subsection{Hipóteses}
 
-Formalizamos a hipótese a testar:
+Formalizamos as hipóteses a testar. Para o esquema posicional de Recamán:
 \[
 \textbf{H2:}\quad \Div(S_{\text{Recamán}}) > \Div(S_{\text{top-k}})
 \;\wedge\; \frac{g_{\text{top-k}} - g_{\text{Recamán}}}{g_{\text{top-k}}} \le 0{,}05,
 \]
 onde $g$ denota \emph{groundedness} médio. A segunda condição garante que o
 ganho de diversidade, se houver, não degrada relevância além de uma tolerância de
-$5\%$. H2 é \emph{refutável}: se a evidência não a sustentar, registramos
-\texttt{refuta\_H2} sem maquiar.
+$5\%$.
+
+Para o diversificador híbrido HABD:
+\[
+\textbf{H3:}\quad \bigl[\Div(S_{\text{HABD}}) > 0{,}5\bigr]
+\;\wedge\; \bigl[\Div(S_{\text{HABD}}) \ge \Div(S_{\text{MMR}})\bigr]
+\;\wedge\; \frac{g_{\text{top-k}} - g_{\text{HABD}}}{g_{\text{top-k}}} \le 0{,}05,
+\]
+em que a primeira condição exige superar o \emph{empate} top-k/Recamán, a segunda
+exige não ficar atrás do MMR em diversidade, e a terceira impõe a mesma tolerância
+de relevância. Ambas as hipóteses são \emph{refutáveis}: se a evidência não as
+sustentar, registramos \texttt{refuta\_H2} / \texttt{refuta\_H3} sem maquiar. O
+HABD \emph{pode} superar em diversidade e cobertura (factual, reportável) e ainda
+assim \emph{refutar} H3 por não respeitar a tolerância de relevância — as duas
+dimensões (ganho observável vs. critério rígido) são explicitamente separadas.

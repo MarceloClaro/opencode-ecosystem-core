@@ -5103,6 +5103,27 @@
         "Ambientes customizados do manual (ponto-chave, emphasis) nao existem na classe article; substituir por quote+textbf para compilacao robusta."
       ],
       "timestamp": 1788102046.5287309
+    },
+    {
+      "round_id": "R460",
+      "objective": "Diversificador hibrido anchor-blended deterministico (HABD) para superar MMR e Recaman (SPEC-935-R460), ancorado na literatura (DF-RAG arXiv 2601.17212: lambda adaptativo por query; RAG Cookbook 2026; reranking trap).",
+      "changes": [
+        "specs/SPEC-935-R460-hybrid-anchor-blended.md: spec formal com hipotese H3 refutavel e criterios de aceitacao executaveis.",
+        "rag/habd.py: HABD (resolve_anchors, mix_index/mu, adaptive_lambda deterministico, select com MMR anchor-blended preferindo ancora nova).",
+        "tests/test_r460_habd.py: 13 testes (determinismo, lambda adaptativo monopolista/misto, preferencia por ancora nova, coorte R458 justo, anti-overclaim).",
+        "benchmarks/cohort_recaman.py: estrategia habd adicionada ao coorte (baseline justo, mesmos dados/k/queries).",
+        "benchmarks/cohort_report.json: relatorio persistido com habd.",
+        "VALIDATION_R460.md: recibo de validacao com veredito honesto."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "HABD supera MMR/Recaman em diversidade (0.8333 vs 0.75 vs 0.5) e atinge cobertura 1.0, mas a queda de groundedness (10.4%) excede a tolerancia de 5%: H3 foi REFUTADA honestamente. Diversificar sobre ancoras ganha fronteira de diversidade mas nao resolve o gargalo de groundedness.",
+        "O gatilho anti-overclaim funcionou: um teste de tolerancia foi codificado para falhar quando a queda supera 5%, forcando refuta_H3 em vez de vitoria vendida. Nunca maquiar teste para passar um resultado ruim.",
+        "lambda adaptativo por query (deterministico, sem LLM) melhora cobertura: ranking monopolista -> lambda baixo (busca diversidade) e misto -> lambda alto (relevancia) e uma heuristica barata e auditavel.",
+        "Distinguir 'supera em diversidade' (observavel/reportavel) de 'satisfaz H3' (rigido, exige tolerancia de groundedness) e essencial para nao overclaim.",
+        "Custo O(K*N) do HABD igual ao MMR; determinismo herdado do Recaman (sem seed) preservado e testado."
+      ],
+      "timestamp": 1788103022.0712953
     }
   ]
 }
