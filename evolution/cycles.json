@@ -5042,6 +5042,25 @@
         "Tabelas em ABNT dentro de ambientes com recuo (quote) devem usar linewidth e colunas raggedright (L{}) para nao estourar as margens; e o comando marginpar colide com as margens ABNT estreitas, devendo ser desativado em favor de marcadores inline."
       ],
       "timestamp": 1788096506.2147543
+    },
+    {
+      "round_id": "R457",
+      "objective": "Implementacao da proposta pos-Recaman (SPEC-935-R456): diversificador estruturado deterministico + metrica de diversidade.",
+      "changes": [
+        "rag/recaman.py (novo, 100% stdlib): recaman_sequence (oraculo A005132), ArtifactType, AnchorResolver, RecamanDiversifier (offsets (1+a_m) mod N, Tabela 1), CanonicalContextPacker e metrica diversity() (Eq. 6.1 Div(S)).",
+        "rag/enhanced_search_rag.py: integracao ADITIVA de EnhancedRAG.metrics() com novo campo 'diversity' em [0,1], sem quebrar os 4 campos historicos; flag _DIVERSIFIER_ENABLED=False (pipeline padrao nao aciona).",
+        "specs/SPEC-935-R457-implementacao-proposta-recaman.md criada (status green com 13 criterios executaveis).",
+        "tests/test_r457_recaman_diversifier.py: 25 contratos GREEN (oraculo, tabela N=8, determinismo, relevancia primaria, orcamento, DEDUP por ancora, faixa/identicos/disjuntos Div, packer canonico, integracao aditiva).",
+        "VALIDATION_R457.md criado com escopo e limites anti-overclaim."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "A sequencia de Recaman (A005132) NAO e injetora para n grande (revisita valores); testes que exigem 'todos termos distintos' sao incorretos e devem ser corrigidos para refletir a definicao real.",
+        "Implementacao 'da proposta do manual' deve preservar o espirito anti-overclaim: expor a capacidade e a metrica, deixar o pipeline padrao desligado (flag) e nao alegar ganho empirico sem experimento de coorte.",
+        "Integracao de metrica nova em API existente deve ser aditiva (append de chave) e tolerante (try/except), para nao quebrar contrato nem falhar se o modulo opcional estiver ausente.",
+        "Os offsets da Tabela 1 sao (1 + a_m) mod N, nao a_m mod N: a coluna 0 (relevancia max) e coberta no percurso e o topo nunca e perdido."
+      ],
+      "timestamp": 1788099545.03523
     }
   ]
 }

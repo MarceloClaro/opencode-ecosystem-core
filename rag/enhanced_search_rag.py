@@ -31,6 +31,15 @@ except Exception:
     CitationGraph = object  # type: ignore
     RAGEvolved = object  # type: ignore
 
+# ── Diversificador proposto (SPEC-935-R457) ────────────────────────────────
+_DIVERSIFIER_ENABLED = False  # API exposta; pipeline padrão não a aciona ainda.
+try:
+    from rag.recaman import RecamanDiversifier as _RecamanDiversifier
+    from rag.recaman import diversity as _diversity
+except Exception:
+    _RecamanDiversifier = None  # type: ignore
+    _diversity = None  # type: ignore
+
 try:
     from research.searchers import PaperRecord, MultiSearcher
 except Exception:
@@ -542,9 +551,18 @@ class EnhancedRAG:
         }
 
     def metrics(self, evidence: List[Any]) -> Dict[str, float]:
-        """Métricas de qualidade do retrieval."""
+        """Métricas de qualidade do retrieval (inclui diversidade — SPEC-935-R457).
+
+        Retorna os 4 campos históricos (groundedness, citation_coverage,
+        temporal_spread, avg_year) mais o novo campo ``diversity`` em [0,1]
+        (Div(S) sobre âncoras canônicas), de forma ADITIVA e sem quebrar
+        contrato existente.
+        """
         if not evidence:
-            return {"groundedness": 0.0, "citation_coverage": 0.0, "temporal_spread": 0.0, "avg_year": 0.0}
+            return {
+                "groundedness": 0.0, "citation_coverage": 0.0,
+                "temporal_spread": 0.0, "avg_year": 0.0, "diversity": 0.0,
+            }
         # groundedness = média dos final_score
         scores = [float(getattr(ev, "final_score", 0) or (ev.get("final_score", 0) if isinstance(ev, dict) else 0)) for ev in evidence]
         groundedness = sum(scores) / len(scores) if scores else 0.0
@@ -556,11 +574,16 @@ class EnhancedRAG:
         years = [y for y in years if isinstance(y, int)]
         temporal_spread = float(max(years) - min(years)) if len(years) >= 2 else 0.0
         avg_year = float(sum(years) / len(years)) if years else 0.0
+        # diversity (SPEC-935-R457) — Div(S) sobre âncoras canônicas.
+        div_value = 0.0
+        if _diversity is not None:
+            div_value = float(_diversity(evidence))
         return {
             "groundedness": round(groundedness, 4),
             "citation_coverage": round(citation_coverage, 4),
             "temporal_spread": temporal_spread,
             "avg_year": round(avg_year, 1),
+            "diversity": round(div_value, 4),
         }
 
     def status(self) -> Dict[str, Any]:
