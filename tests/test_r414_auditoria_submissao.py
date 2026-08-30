@@ -223,7 +223,11 @@ class TestGuardaEvolutionRegistry:
                      # Cadeia de Custódia Auditável (SPEC-935-R462): campos
                      # opcionais de auditoria externa por ciclo.
                      "artifact_hashes", "external_verdict", "verifier_identity",
-                     "evidence_trail", "audited", "legacy"}
+                     "evidence_trail", "audited", "legacy",
+                     # Âncoras externas de imutabilidade (endurecimento R462):
+                     # merkle agregado dos artefatos, commit git de origem e
+                     # fotografia do estado do registro no momento da gravação.
+                     "merkle_root", "origin_commit", "state_merkle_root"}
         for ciclo in ciclos:
             assert isinstance(ciclo, dict)
             assert ciclo.get("round_id"), f"ciclo sem round_id: {ciclo}"

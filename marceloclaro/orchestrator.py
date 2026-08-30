@@ -53,6 +53,8 @@ from reasoning import multi_reasoning, run_experiment_suite
 from reasoning.production_scaffolds import audit_scientific_manuscript
 from agentic_science_v2.paper_composer import compose_paper as compose_paper_core
 from evolution import evolution_registry
+from evolution.audit_gate import EvolutionAuditGate
+from evolution.cycles import EvolutionCycle as _EvolutionCycle
 from integrations.antigravity import antigravity_bridge
 from marceloclaro.catalog_loader import register_catalog_agents
 
@@ -2076,11 +2078,110 @@ class MarceloClaroOrchestrator:
         )
         return report
 
-    def record_evolution(self, objective: str, changes: List[str],
-                         score: Optional[float] = None,
-                         lessons: Optional[List[str]] = None) -> Dict[str, Any]:
-        """Registra um ciclo evolutivo (R47+) e injeta lições na memória global."""
-        cycle = evolution_registry.record(objective, changes, score, lessons)
+    def record_evolution(
+        self,
+        objective: str,
+        changes: List[str],
+        score: Optional[float] = None,
+        lessons: Optional[List[str]] = None,
+        *,
+        verifier_identity: Optional[str] = None,
+        artifact_files: Optional[Dict[str, object]] = None,
+        evidence_trail: Optional[List[str]] = None,
+        external_verdict: Optional[Dict[str, Any]] = None,
+        generator_identity: Optional[str] = None,
+        round_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Registra um ciclo evolutivo (R47+) e injeta lições na memória global.
+
+        Propagacao da Cadeia de Custodia Auditavel (SPEC-935-R462):
+
+        - Se `verifier_identity` E `artifact_files` forem fornecidos, o ciclo e
+          validado pelo `EvolutionAuditGate` (fail-closed) e persistido via
+          `record_audited` — elevando a metrica de Custodia. Se o gate reprovar
+          (ex.: verifier == gerador, sem trilha), persiste um REJECT TRAIL via
+          `record_rejected` (a falha tambem e rastreavel) e retorna aviso.
+        - Se NENHUM dado de auditoria for fornecido (chamadas antigas,
+          auto-registro/demo), mantem `record()` legado e retorna `audited=False`
+          explicito — sem falsificar a custodia (nao eleva a metrica).
+        """
+        gen = generator_identity or self.id
+        # Caminho auditado: requires verifier externo + artefatos
+        if verifier_identity and artifact_files:
+            gate = EvolutionAuditGate()
+            verdict: Any = external_verdict
+            try:
+                if external_verdict is None:
+                    v = gate.verify_cycle(
+                        objective=objective,
+                        changes=changes,
+                        artifact_files=artifact_files,
+                        verifier_identity=verifier_identity,
+                        generator_identity=gen,
+                        evidence_trail=evidence_trail,
+                    )
+                    if not v.passed:
+                        cycle = evolution_registry.record_rejected(
+                            objective=objective, changes=changes,
+                            reason=v.reason,
+                            verifier_identity=verifier_identity,
+                            generator_identity=gen,
+                            round_id=round_id,
+                        )
+                        return {
+                            "round_id": cycle.round_id, "score": None,
+                            "avg_score": evolution_registry.average_score(),
+                            "audited": False, "rejected": True,
+                            "reason": v.reason,
+                        }
+                    verdict = {"passed": v.passed, "reason": v.reason,
+                               "tampered": v.tampered,
+                               "verified_by": verifier_identity}
+
+                # Persiste via caminho auditado (fail-closed interno)
+                cycle = evolution_registry.record_audited(
+                    objective=objective, changes=changes,
+                    artifact_hashes=gate.resolve_artifacts(artifact_files),
+                    external_verdict=verdict or {"passed": True},
+                    verifier_identity=verifier_identity,
+                    generator_identity=gen,
+                    evidence_trail=evidence_trail,
+                    score=score, lessons=lessons,
+                    round_id=round_id,
+                )
+            except PermissionError as exc:  # fail-closed do registro
+                cycle = evolution_registry.record_rejected(
+                    objective=objective, changes=changes,
+                    reason=str(exc),
+                    verifier_identity=verifier_identity,
+                    generator_identity=gen,
+                    round_id=round_id,
+                )
+                for lesson in (lessons or []):
+                    metabus.memory.add_reflection(
+                        agent_id=self.id,
+                        task_context=f"ciclo {cycle.round_id} REJEITADO",
+                        reflection=lesson, score=0.0,
+                    )
+                return {
+                    "round_id": cycle.round_id, "score": None,
+                    "avg_score": evolution_registry.average_score(),
+                    "audited": False, "rejected": True, "reason": str(exc),
+                }
+            for lesson in (lessons or []):
+                metabus.memory.add_reflection(
+                    agent_id=self.id,
+                    task_context=f"ciclo evolutivo {cycle.round_id}",
+                    reflection=lesson,
+                    score=(score or 5.0) / 10.0,
+                )
+            return {"round_id": cycle.round_id, "score": cycle.score,
+                    "avg_score": evolution_registry.average_score(),
+                    "audited": True}
+
+        # Caminho legado: sem auditoria externa => nao eleva custodia (honesto)
+        cycle = evolution_registry.record(objective, changes, score, lessons,
+                                          round_id=round_id)
         for lesson in (lessons or []):
             metabus.memory.add_reflection(
                 agent_id=self.id,
@@ -2089,7 +2190,8 @@ class MarceloClaroOrchestrator:
                 score=(score or 5.0) / 10.0,
             )
         return {"round_id": cycle.round_id, "score": cycle.score,
-                "avg_score": evolution_registry.average_score()}
+                "avg_score": evolution_registry.average_score(),
+                "audited": False}
 
     def delegate_external(self, prompt: str, agent: str = "default") -> Dict[str, Any]:
         """Delegação externa via Antigravity CLI (SPEC-046), com fila de handoff."""
