@@ -218,7 +218,12 @@ class TestGuardaEvolutionRegistry:
         data = json.loads(CYCLES.read_text(encoding="utf-8"))
         ciclos = data.get("cycles", [])
         assert len(ciclos) >= 230, f"esperado >= 230 ciclos, encontrado {len(ciclos)}"
-        canonicas = {"round_id", "objective", "changes", "score", "lessons", "timestamp"}
+        canonicas = {"round_id", "objective", "changes", "score", "lessons",
+                     "timestamp",
+                     # Cadeia de Custódia Auditável (SPEC-935-R462): campos
+                     # opcionais de auditoria externa por ciclo.
+                     "artifact_hashes", "external_verdict", "verifier_identity",
+                     "evidence_trail", "audited", "legacy"}
         for ciclo in ciclos:
             assert isinstance(ciclo, dict)
             assert ciclo.get("round_id"), f"ciclo sem round_id: {ciclo}"

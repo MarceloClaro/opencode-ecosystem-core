@@ -21,7 +21,12 @@ from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional
 
 EVOLUTION_DIR = os.path.dirname(os.path.abspath(__file__))
-STATE_PATH = os.path.join(EVOLUTION_DIR, "cycles.json")
+# Isolamento de teste: respeita EVOLUTION_STATE_PATH se definida,
+# senao usa o state_path real (evolution/cycles.json).
+STATE_PATH = os.environ.get(
+    "EVOLUTION_STATE_PATH",
+    os.path.join(EVOLUTION_DIR, "cycles.json"),
+)
 
 
 @dataclass
@@ -32,6 +37,13 @@ class EvolutionCycle:
     score: Optional[float] = None  # 0-10
     lessons: List[str] = field(default_factory=list)
     timestamp: float = field(default_factory=time.time)
+    # --- Cadeia de custódia auditável (SPEC-935-R462) ---
+    artifact_hashes: Dict[str, str] = field(default_factory=dict)  # sha256 por artefato
+    external_verdict: Optional[Dict[str, Any]] = None  # quem auditou + passou/reprovou
+    verifier_identity: str = ""  # identificador do auditor (≠ gerador)
+    evidence_trail: List[str] = field(default_factory=list)  # specs/testes/scans
+    audited: bool = False  # True se passou pelo gate externo
+    legacy: bool = False  # True se ciclo pré-R462 sem auditoria formal
 
 
 class EvolutionRegistry:
@@ -49,7 +61,9 @@ class EvolutionRegistry:
             try:
                 with open(self.state_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                allowed = {"round_id", "objective", "changes", "score", "lessons", "timestamp"}
+                allowed = {"round_id", "objective", "changes", "score", "lessons",
+                           "timestamp", "artifact_hashes", "external_verdict",
+                           "verifier_identity", "evidence_trail", "audited", "legacy"}
                 self.cycles = [
                     EvolutionCycle(**{key: value for key, value in cycle.items() if key in allowed})
                     for cycle in data.get("cycles", [])
@@ -85,6 +99,7 @@ class EvolutionRegistry:
             round_id=round_id or self.next_round_id(),
             objective=objective, changes=changes,
             score=score, lessons=lessons or [],
+            legacy=True,  # sem auditoria externa formal => ciclo legado (R462)
         )
         self.cycles.append(cycle)
         if score is not None:
@@ -92,6 +107,104 @@ class EvolutionRegistry:
             self._scored_count += 1
         self.save()
         return cycle
+
+    def record_audited(self, objective: str, changes: List[str],
+                       artifact_hashes: Dict[str, str],
+                       external_verdict: Dict[str, Any],
+                       verifier_identity: str,
+                       generator_identity: str,
+                       evidence_trail: Optional[List[str]] = None,
+                       round_id: Optional[str] = None,
+                       score: Optional[float] = None,
+                       lessons: Optional[List[str]] = None) -> EvolutionCycle:
+        """Registra um ciclo que JÁ passou pelo EvolutionAuditGate (auditado).
+
+        Fail-closed: se o veredito externo não estiver aprovado (passed=True),
+        ou se verificador == gerador, o registro é RECUSADO (PermissionError)
+        e nada é persistido. (SPEC-935-R462 / A6, gate fail-closed)
+        """
+        passed = bool(external_verdict and external_verdict.get("passed") is True)
+        verified_by_other = bool(verifier_identity
+                                 and verifier_identity != generator_identity)
+        if not passed or not verified_by_other:
+            raise PermissionError(
+                "Ciclo recusado: exige external_verdict.passed=True e "
+                "verifier_identity distinto do gerador. (SPEC-935-R462 gate)"
+            )
+
+        cycle = EvolutionCycle(
+            round_id=round_id or self.next_round_id(),
+            objective=objective, changes=changes,
+            score=score, lessons=lessons or [],
+            artifact_hashes=dict(artifact_hashes),
+            external_verdict=dict(external_verdict),
+            verifier_identity=verifier_identity,
+            evidence_trail=list(evidence_trail or []),
+            audited=True,
+            legacy=False,
+        )
+        self.cycles.append(cycle)
+        if score is not None:
+            self._total_score += score
+            self._scored_count += 1
+        self.save()
+        return cycle
+
+    def custody_metric(self) -> Dict[str, Any]:
+        """Métrica de Custódia Auditável (SPEC-935-R462 / gate de aceitação).
+
+        Custódia(%) = (ciclos com artifact_hashes ∧ external_verdict ∧
+                       verifier_identity ≠ '') / total × 100.
+        Baseline medido: 0,0%. Alvo pós-R462: ≥ 90%.
+        """
+        total = len(self.cycles)
+        if total == 0:
+            return {"audited": 0, "total": 0, "pct": 0.0, "rejected": 0,
+                    "tampered": 0, "legacy": 0}
+        audited = sum(1 for c in self.cycles
+                      if c.audited
+                      and c.artifact_hashes
+                      and c.external_verdict
+                      and c.verifier_identity
+                      and c.external_verdict.get("passed") is True)
+        legacy = sum(1 for c in self.cycles if c.legacy)
+        tampered = sum(1 for c in self.cycles
+                       if c.external_verdict
+                       and c.external_verdict.get("tampered") is True)
+        return {
+            "audited": audited,
+            "total": total,
+            "pct": round(100.0 * audited / total, 1),
+            "rejected": sum(1 for c in self.cycles
+                            if c.external_verdict
+                            and c.external_verdict.get("passed") is False),
+            "tampered": tampered,
+            "legacy": legacy,
+        }
+
+    def custody_recent(self, since_round: str = "R462") -> Dict[str, Any]:
+        """Custódia sobre ciclos NOVOS (a partir de `since_round`). Mede a
+        fração dos ciclos gerados sob o regime auditado que realmente passaram
+        pelo gate externo. É a medida honesta da melhoria estrutural (R462)."""
+        recent = [c for c in self.cycles
+                  if self._round_num(c.round_id) >= self._round_num(since_round)]
+        total = len(recent)
+        if total == 0:
+            return {"audited": 0, "total": 0, "pct": 0.0}
+        audited = sum(1 for c in recent
+                      if c.audited and c.artifact_hashes and c.external_verdict
+                      and c.verifier_identity
+                      and c.external_verdict.get("passed") is True)
+        return {
+            "audited": audited,
+            "total": total,
+            "pct": round(100.0 * audited / total, 1),
+        }
+
+    def _round_num(self, round_id: str) -> int:
+        m = re.match(r"R(\d+)", round_id or "")
+        return int(m.group(1)) if m else -1
+
 
     def history(self, limit: int = 20) -> List[Dict[str, Any]]:
         return [asdict(c) for c in self.cycles[-limit:]]
