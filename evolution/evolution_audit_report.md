@@ -1,14 +1,14 @@
 # Relatório de Evolução Auditável — R462
 
-> **SPEC-935-R462** · Cadeia de Custódia Auditável · Gerado em 2026-08-30 18:10 UTC
+> **SPEC-935-R462** · Cadeia de Custódia Auditável · Gerado em 2026-08-30 18:27 UTC
 
 ## Métricas de Custódia
 
 | Métrica | Valor |
 |---|---|
-| Custódia global | **0.4%** (1/279 ciclos) |
-| Custódia recente (R462+) | **100.0%** (1/1) |
-| Âncoras de imutabilidade (merkle) | 1 |
+| Custódia global | **0.7%** (2/280 ciclos) |
+| Custódia recente (R462+) | **100.0%** (2/2) |
+| Âncoras de imutabilidade (merkle) | 2 |
 | Rejeitados pelo gate | 0 |
 | Tamper detectado | 0 |
 | Ciclos legados (pré-R462, não reescritos) | 278 |
@@ -17,7 +17,6 @@
 
 | Ciclo | Auditado | Verificador | Hash | Veredito | Merkle | Commit |
 |---|---|---|---|---|---|---|
-| R442 | Legacy | — | 0 | — | — | — |
 | R443 | Legacy | — | 0 | — | — | — |
 | R444 | Legacy | — | 0 | — | — | — |
 | R445 | Legacy | — | 0 | — | — | — |
@@ -37,6 +36,7 @@
 | R459 | Legacy | — | 0 | — | — | — |
 | R460 | Legacy | — | 0 | — | — | — |
 | R462 | Sim | marceloclaro@auditor.blind | 5 | APROVADO | 6a3ee615af8a… | f35927d405… |
+| R463 | Sim | marceloclaro@auditor.blind | 7 | APROVADO | f4b26f7247bc… | 7a525b0e48… |
 
 ## Anti-Tamper (SHA-256 ancorado)
 
