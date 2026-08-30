@@ -5061,6 +5061,27 @@
         "Os offsets da Tabela 1 sao (1 + a_m) mod N, nao a_m mod N: a coluna 0 (relevancia max) e coberta no percurso e o topo nunca e perdido."
       ],
       "timestamp": 1788099545.03523
+    },
+    {
+      "round_id": "R458",
+      "objective": "Experimento de coorte (SPEC-935-R458, Fase 3 do manual Secc 9.3): medir se a diversificacao por Recaman demonstra ganho de diversidade sobre o estado atual, vs baseline classico MMR, em corpus-piloto controlado.",
+      "changes": [
+        "benchmarks/cohort_recaman.py (novo): corpus-piloto deterministico (6 angulos x 3 docs, fontes/ancoras distintas), MMR baseline (max. marginal relevance, lambda=0.7, similaridade por tokens), run_cohort com metrics Div/groundedness/coverage por estrategia, write_report.",
+        "tests/test_r458_cohort_experiment.py: 11 contratos GREEN (modulo, corpus deterministico, current=topk, mmr baseline, recaman top1, determinismo, metricas em [0,1], loss<=5%, relatorio + veredito + escopo).",
+        "Correcoes de validade do benchmark: query equilibrada em angulos; DEDUP por documento (retrieve retorna chunks duplicados que monopolizam o topo); pool amplo (poll_size=40) antes do corte; veredito exige ganho ESTRITO de diversidade (anti-empate espurio).",
+        "specs/SPEC-935-R458-experimento-coorte-recaman.md (status green) com desfecho observado.",
+        "VALIDATION_R458.md com metrica, descoberta e limites anti-overclaim.",
+        "benchmarks/cohort_report.json: relatorio estruturado do run."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "ACHADO CENTRAL: o esquema posicional de Recaman diversifica POSICAO (offsets (1+a_m) mod N), nao ANCORA/FONTE; em ranking localmente monopolista (3 docs da mesma familia no topo), os offsets recaem na mesma familia e o resultado coincide com o top-k (gain_div=0.0).",
+        "H2 NAO foi demonstrada no corpus-piloto: veredito refuta_H2. MMR baseline supera claramente (Div 0.75 vs 0.50) maximizando dissimilaridade de conteudo, nao posicao.",
+        "Sem dedup por documento e sem pool amplo, o experimento e INVALIDO: o retrieve retorna chunks do mesmo doc monopolizando o top-N; qualquer diversificador pos-ranqueamento fica impossibilitado de espalhar (gargalo real documentado).",
+        "Veredito de hipotese deve exigir ganho estrito (a>b), nao fracamente maior igual (a>=b), senao empate 'sustenta' espuriamente.",
+        "Anti-overclaim: numero negativo de ganho e um RESULTADO valido; registra-se refuta_H2 sem maquiar, mantendo a capacidade Recaman exposta (R457) mas nao promovendo-a ao pipeline padrao."
+      ],
+      "timestamp": 1788101624.018539
     }
   ]
 }
