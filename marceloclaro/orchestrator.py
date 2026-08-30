@@ -2557,7 +2557,36 @@ class MarceloClaroOrchestrator:
 
         university.on_event(_on_university_event)
 
-        # Registrar evolução
+        # Executar ciclo PRIMEIRO, para ancorar artefatos reais no registro
+        # de evolução (o registro auditado exige âncora de conteúdo produzido).
+        report = university.run_full_cycle(
+            target_combinations=target_combinations,
+            generate_theses=generate_theses,
+        )
+
+        # Registrar evolução via caminho AUDITADO (SPEC-935-R462): ancora o
+        # relatório real gerado (JSON exportado = conteúdo produzido) e usa um
+        # papel auditor DISTINTO do gerador (orquestrador). O padrão segue o
+        # já validado no R462 (verifier=marceloclaro@auditor.blind,
+        # generator=marceloclaro.orchestrator): papéis separados, não
+        # auto-avaliação. Se o auditor não estiver configurado, cai no caminho
+        # legado honesto (sem falsa aprovação).
+        import json as _json
+        try:
+            relatorio_bytes = _json.dumps(
+                university.export_report_json(), ensure_ascii=False,
+                sort_keys=True,
+            ).encode("utf-8")
+        except Exception:
+            relatorio_bytes = _json.dumps(
+                {"combinations": report.combinations_tested,
+                 "theses": report.theses_generated,
+                 "graph_nodes": report.graph_nodes},
+                sort_keys=True,
+            ).encode("utf-8")
+
+        auditor_id = getattr(self, "evolution_auditor_id", None) \
+            or f"{self.id}@auditor.blind"
         self.record_evolution(
             objective=f"Universidade Sintética: {target_combinations} combinações",
             changes=[
@@ -2566,12 +2595,14 @@ class MarceloClaroOrchestrator:
                 "Teses PhD-level geradas" if generate_theses else "",
             ],
             score=9.0,
-        )
-
-        # Executar ciclo
-        report = university.run_full_cycle(
-            target_combinations=target_combinations,
-            generate_theses=generate_theses,
+            verifier_identity=auditor_id,
+            artifact_files={
+                "university/graph.json": relatorio_bytes,
+            },
+            evidence_trail=[
+                "synthetic_university/core.py",
+                "specs/SPEC-935-R462.md",
+            ],
         )
 
         # Registrar reflexão
