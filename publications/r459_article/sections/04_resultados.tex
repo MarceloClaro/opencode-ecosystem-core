@@ -107,7 +107,7 @@ Com base nos critérios definidos na Seção~\ref{sec:metodo}:
 \[
 \begin{aligned}
 &\Delta\Div(\text{Recam\'an}) = 0{,}0
-    && \mathrlap{\text{(n\~ao estritamente $>0$)}}\\
+  \quad \text{(n\~ao estritamente $>0$)}\\
 &\Rightarrow\; \textbf{H2 refutada}
 \end{aligned}
 \]
@@ -119,13 +119,12 @@ Para o HABD, ainda que a \emph{diversidade} e a \emph{cobertura} sejam as maiore
 do coorte (0{,}8333 e 1{,}000), a queda relativa de relevância
 ($10{,}4\%$) \textbf{excede} a tolerância de $5\%$. Formalmente:
 \[
-\begin{aligned}
-\Delta\Div(\text{HABD}) &> 0{,}5\\[-2pt]
-\Div(\text{HABD}) &\ge \Div(\text{MMR}) &&\mathrlap{\text{(factual)}}\\[2pt]
-\tfrac{\Delta g}{g} &= 0{,}104 > 0{,}05
-  &&\mathrlap{\Rightarrow \textbf{cond. violada}}\\[2pt]
-&\Rightarrow \textbf{H3 refutada}
-\end{aligned}
+\begin{gathered}
+\Delta\Div(\text{HABD}) > 0{,}5\\[3pt]
+\Div(\text{HABD}) \ge \Div(\text{MMR}) \quad \text{(factual)}\\[3pt]
+\tfrac{\Delta g}{g} = 0{,}104 > 0{,}05 \;\Rightarrow\; \textbf{(cond.\ violada)}\\[3pt]
+\Rightarrow \textbf{H3 refutada}
+\end{gathered}
 \]
 Registramos \texttt{refuta\_H3}: o HABD \emph{supera} MMR e Recamán em diversidade
 e cobertura, mas \emph{não satisfaz} o critério rígido de relevância. As duas
