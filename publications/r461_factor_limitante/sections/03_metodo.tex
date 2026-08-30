@@ -1,0 +1,124 @@
+% =====================================================================
+% Seção 3 — Método
+% =====================================================================
+\section{Método}\label{sec:metodo}
+
+Nesta seção formalizamos o fator limítrofe e descrevemos o estudo de caso
+empírico que o ilustra.
+
+\subsection{Formalização do fator limítrofe}
+
+Seja $\mathcal{M}_t$ um modelo obtido após $t$ iterações de um processo
+recursivo de produção de IA. O processo recebe, em cada iteração, uma mistura de
+dados reais $\mathcal{D}_t^r$ e dados sintéticos $\mathcal{D}_t^s$ gerados por
+$\mathcal{M}_{t-1}$. Definimos a forma mais simples de fator limítrofe pela
+\emph{fração sintética} do treino:
+\[
+\phi_t \;=\; \frac{|\mathcal{D}_t^s|}{|\mathcal{D}_t^s| + |\mathcal{D}_t^r|}
+      \;\in\;[0,1].
+\]
+Em loop fechado puro, $\phi_t = 1$ para todo $t$. A evidência de
+Shumailov \textit{et al.}~\parencite{Shumailov2024Collapse} implica que a
+qualidade Q do modelo converge a um valor residual quando $\phi_t$ permanece
+máximo por muitas gerações:
+\[
+\lim_{t\to\infty} Q(\mathcal{M}_t) \;=\; Q^*_{\text{loop}},
+\quad Q^*_{\text{loop}} < Q(\mathcal{M}_0),
+\]
+onde a queda reflete a perda de suporte de cauda longa. Quando se mantém uma
+fração real $\phi_t < 1$ estacionária por iteração, a literatura indica que o
+colapso pode ser \emph{contido} (Gerstgrasser \textit{et
+al.}~\parencite{Gerstgrasser2024Collapse}; Dohmatob \textit{et
+al.}~\parencite{Dohmatob2024CollapseScaling}). Formalmente, o fator limítrofe é
+a condição sobre a \emph{fonte de informação}, não sobre a capacidade do modelo:
+
+\begin{quote}
+\emph{Fator limítrofe (definição operacional).} Um loop de produção de IA
+progride de forma sustentável se, e somente se, a cada iteração há uma âncora
+externa de informação real que (i) limita $\phi_t$ e (ii) valida o sinal de
+avaliação de forma independente do próprio gerador.
+\end{quote}
+
+Esta definição unifica as três linhas da literatura: o colapso (violação de
+(i)), o \emph{hacking} de recompensa (violação de (ii)) e o
+\emph{discovery--reliability gap} (manifestação conjunta de (i)--(ii)).
+
+\subsection{Componente empírica: diversificação pós-ranqueamento em RAG}
+
+Para observar o fator limítrofe em dados primários, utilizamos um estudo de caso
+do \emph{OpenCode Ecosystem Core}, especificamente os ciclos R458--R460 (SPEC-935).
+O cenário é de \emph{Retrieval-Augmented Generation} (RAG): dado um ranking
+inicial de documentos recuperados para uma consulta, aplicam-se estratégias de
+diversificação pós-ranqueamento. Há aqui um \emph{trade-off} estrutural clássico,
+documentado desde o MMR~\parencite{CarbonellGoldstein1998MMR} e retomado por
+trabalhos de diversidade sensível à consulta~\parencite{Khan2026DFRAG,
+RezaeiDieng2025VendiRAG}: maximizar a diversidade diverge dos critérios
+monotônicos de relevância.
+
+\paragraph{Desenho experimental e isolamento de variáveis.}
+O desenho é controlado por \emph{pareamento de insumos}, de modo a isolar o
+efeito da estratégia de diversificação:
+\begin{itemize}
+  \item \textbf{Controle (baseline).} A estratégia \emph{top-k} (seleção posicional
+        pura) serve de grupo de controle: representa o {cenário} sem diversificação
+        e define a groundedness de referência $g_{\mathrm{base}}$;
+  \item \textbf{Insumos fixados.} Todas as estratégias recebem \emph{exatamente o
+        mesmo ranking candidato}, o mesmo $n$ (top-$n{=}8$) e o mesmo orçamento
+        de seleção ($k{=}4$). Toda variação de métrica entre estratégias é,
+        portanto, atribuível \emph{apenas} à estratégia, não à qualidade do
+        ranking de entrada;
+  \item \textbf{Amostragem.} As 4 consultas foram construídas a partir de um
+        vocabulário controlado de conceitos (intervenção, poder, viés,
+        contrafactual, tamanho amostral, confundidor, seleção, variância,
+        significância, publicação), produzindo \emph{queries} tematicamente
+        homogêneas e de dificuldade comparável. Trata-se de amostra
+        \emph{proposital e interna}, não probabilística;
+  \item \textbf{Determinismo e reprodutibilidade.} Duas estratégias (Recamán e
+        HABD) são determinísticas; desempates usam critério fixo. O benchmark é
+        auditável em \texttt{cohort\_report.json}.
+\end{itemize}
+
+O benchmark avaliou \textbf{4 consultas} com \textbf{top-$n$ = 8} e seleção de
+\textbf{$k$ = 4} documentos, comparando quatro estratégias:
+\begin{itemize}
+  \item \textbf{atual} / \textbf{top-k}: seleção posicional pura do ranking;
+  \item \textbf{MMR}: Maximal Marginal Relevance, com
+        $\mathrm{score} = \lambda\,\mathrm{rel} - (1-\lambda)\,\mathrm{sim}$;
+  \item \textbf{Recamán}: diversificação posicional determinística (sequência de
+        Recamán) que rearranja \emph{posições} sem operar sobre \emph{âncoras};
+  \item \textbf{HABD} (Hybrid Anchor-Blended Deterministic, ciclo R460): opera
+        sobre \emph{âncoras canônicas}, com $\lambda$ adaptativo por consulta
+        derivado de um índice de mistura.
+\end{itemize}
+
+Três métricas foram reportadas por consulta e agregadas: \emph{diversidade}
+($\Div$, dissimilaridade média entre itens selecionados), \emph{cobertura}
+($\cob$, fração de âncoras distintas representadas) e \emph{groundedness}
+($g$, fidelidade à referência). Definiu-se um critério rígido de ganho: $\Delta
+\Div > 0{,}5$ \emph{e} $\Div \ge \Div(\mathrm{MMR})$ \emph{e} queda relativa de
+groundedness $\Delta g_{\mathrm{rel}} \le 5\%$. A queda relativa de relevância é
+\[
+\frac{\Delta g}{g} \;=\; \frac{g_{\text{base}} - g_{\text{estr}}}{g_{\text{base}}}.
+\]
+Reportamos todos os números com escopo declarado (corpus-piloto controlado),
+sem alegar generalização a produção (\texttt{escopo} no relatório: ``resultado
+observado em corpus-piloto controlado; não generaliza para produção'').
+
+\subsection{Hipóteses formalmente falsificáveis}
+
+Formulamos as hipóteses do estudo de caso de modo explicitamente falsificável,
+com limiares numéricos fixados \emph{a priori}:
+\begin{itemize}
+  \item \textbf{H2} (diversificação posicional gera ganho estrito de
+        diversidade): $\Div(\mathrm{Recam\'an}) > \Div(\mathrm{top\text{-}k})$.
+        \emph{Falsificada} se $\Delta\Div = 0$ no corpus;
+  \item \textbf{H3} (diversificação por âncoras supera sem sacrificar
+        relevância): $\Delta\Div(\mathrm{HABD}) > 0{,}5$ \emph{e}
+        $\Div(\mathrm{HABD}) \ge \Div(\mathrm{MMR})$ \emph{e}
+        $\Delta g/g \le 0{,}05$. \emph{Falsificada} se qualquer limiar for
+        violado;
+  \item \textbf{H1} (generalização): qualquer ganho observado transfere-se a
+        produção. \emph{Falsificada} por construção, dado o escopo do
+        corpus-piloto (hipótese de não-generalização adotada como princípio
+        epistemológico).
+\end{itemize}

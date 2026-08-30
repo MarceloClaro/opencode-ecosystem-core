@@ -1,0 +1,95 @@
+% =====================================================================
+% Seção 4 — Estudo de Caso (R459/R460)
+% =====================================================================
+\section{Estudo de Caso: Diversificação em RAG}\label{sec:caso}
+
+Apresentamos os resultados empíricos do benchmark R459/R460. Todos os valores
+são do relatório auditável \texttt{cohort\_report.json}.
+
+\subsection{Resultado agregado por estratégia}
+
+A Tabela~\ref{tab:result} resume as métricas por estratégia, agregadas sobre as
+4 consultas.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Métricas agregadas por estratégia de diversificação no corpus-piloto
+(4 consultas, top-$n$=8, $k$=4). Fonte: \texttt{cohort\_report.json}.}
+\label{tab:result}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Estratégia} & \textbf{Div} & \textbf{Cob.} & \textbf{$g$} \\
+\midrule
+top-k (atual) & 0{,}5000 & 0{,}6667 & 0{,}4561 \\
+MMR          & 0{,}7500 & 0{,}9167 & 0{,}4256 \\
+Recamán      & 0{,}5000 & 0{,}6667 & 0{,}4561 \\
+\textbf{HABD} & \textbf{0{,}8333} & \textbf{1{,}0000} & 0{,}4087 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Três observações decorrem diretamente dos dados:
+
+\begin{enumerate}
+  \item \textbf{Recamán não diverge do top-k em diversidade} ($\Div = 0{,}5000$
+        em ambos). Como o schema \emph{posicional} rearranja posições sem operar
+        sobre âncoras, sob um ranking monopolista ele reproduz o top-k. O veredito
+        é \texttt{refuta\_H2}: não há ganho estrito de diversidade sobre o
+        top-k.
+  \item \textbf{HABD maximiza diversidade e cobertura}: $\Div = 0{,}8333$ e
+        $\cob = 1{,}0000$, superando MMR ($0{,}7500$ / $0{,}9167$) e Recamán. O
+        veredito agregado registra \texttt{HABD supera MMR e Recamán em
+        diversidade e cobertura}.
+  \item \textbf{Mas a fidelidade cai além do tolerável}: a groundedness cai de
+        $g_{\mathrm{base}} = 0{,}4561$ (top-k) para $g_{\mathrm{HABD}} =
+        0{,}4087$, uma queda relativa de
+        $\tfrac{\Delta g}{g} = 0{,}1039 > 0{,}05$. Formalmente:
+        \[
+        \frac{\Delta g}{g} \;=\;
+        \frac{0{,}4561 - 0{,}4087}{0{,}4561} \;=\; 0{,}1039,
+        \]
+        que excede a tolerância de $5\%$ adotada.
+\end{enumerate}
+
+\subsection{Veredito das hipóteses}
+
+Com base nos critérios definidos na Seção~\ref{sec:metodo}:
+
+\textbf{H2 (Recamán supera o top-k em diversidade):}
+\[
+\begin{aligned}
+\Delta\Div(\text{Recam\'an}) &= 0{,}0
+  \quad \text{(n\~ao estritamente $>0$)}\\
+&\Rightarrow\; \textbf{H2 refutada}
+\end{aligned}
+\]
+
+\textbf{H3 (HABD supera sem sacrificar relevância):}
+\[
+\begin{gathered}
+\Delta\Div(\mathrm{HABD}) > 0{,}5\\[2pt]
+\Div(\mathrm{HABD}) \ge \Div(\mathrm{MMR}) \quad \text{(factual)}\\[2pt]
+\tfrac{\Delta g}{g} = 0{,}104 > 0{,}05
+   \;\Rightarrow\; \textbf{(cond. violada)}\\[2pt]
+\Rightarrow \textbf{H3 refutada}
+\end{gathered}
+\]
+
+Registramos \texttt{refuta\_H3}: o HABD \emph{supera} MMR e Recamán em
+diversidade e cobertura, mas \emph{não satisfaz} o critério rígido de
+relevância. As duas afirmações são simultaneamente verdadeiras e reportadas de
+forma equilibrada: ganho observável na fronteira de diversidade, sem vitória
+limpa no critério definido.
+
+\subsection{Leitura como microcosmo do fator limítrofe}
+
+O estudo de caso encarna, em escala menor, o fator limítrofe formalizado na
+Seção~\ref{sec:metodo}. O HABD opera análogo a um ``gerador com âncora'': ele
+\emph{não cria informação nova} do vazio, mas reorganiza itens a partir de
+\emph{âncoras canônicas} já presentes no ranking (analogia a $\mathcal{D}_t^r$).
+O ganho de diversidade é real, mas \emph{não é gratuito}: ele incide sobre a
+relevância, exatamente como a teoria prevê que otimizar uma métrica à custa de
+outra tem um custo de fidelidade. A métrica de \emph{groundedness} é a ``âncora
+externa'' que expõe o custo --- sem ela, o ganho de diversidade seria reportado
+como vitória limpa, o que constituiria um \emph{overclaim}.

@@ -1,0 +1,49 @@
+% =====================================================================
+% Seção 6 — Conclusão
+% =====================================================================
+\section{Conclusão}\label{sec:conc}
+
+Retornamos à pergunta central: \textbf{existe um fator limítrofe entre produzir
+IA com IA?} A evidência reunida --- teórica, estatística e empírica --- sustenta
+uma resposta afirmativa e, ao mesmo tempo, matizada.
+
+\textbf{Sim, existe um fator limítrofe estrutural.} Ele tem três manifestações
+documentadas: (i) \emph{informacional} --- o treinamento recursivo sobre dados
+gerados por modelo colapsa a distribuição aprendida, eliminando o suporte de
+cauda longa e reduzindo a diversidade, fenômeno estatisticamente previsto e
+confirmado empiricamente (\emph{Nature} 2024); (ii) \emph{de avaliação} --- quando
+o mesmo processo gera e julga, o sinal de melhoria se corrompe
+(\emph{self-play} hacking, discovery--reliability gap); e (iii) \emph{de âncora} ---
+o progresso sustentado exige dados reais ou validação externa a cada iteração.
+
+\textbf{Mas não é um muro absoluto; é um gargalo de informação e de feedback.} O
+fator limítrofe não separa ``produzir IA com IA'' de ``não poder em absoluto''.
+Separa a produção em \emph{loop fechado auto-suficiente} (que colapsa) da
+produção \emph{com âncora externa} (que progride). O gargalo não está na
+inteligência, mas na fonte de informação e na honestidade do sinal de avaliação.
+
+O estudo de caso do \emph{OpenCode Ecosystem Core} (R459/R460) corporifica essa
+tese em dados primários auditáveis: o HABD maximiza diversidade e cobertura
+($\Div = 0{,}8333$, $\cob = 1{,}000$) mas viola o critério de relevância
+($\Delta g/g = 0{,}104 > 0{,}05$), com veredito honesto \texttt{refuta\_H3}. O
+resultado demonstra que o ecossistema --- que produz IA com IA continuamente ---
+só o faz de forma sustentável porque cada loop é \emph{ancorado} por
+especificação formal, testes externos ao gerador e auditoria independente.
+
+\paragraph{Resposta direta à pergunta.}
+Sim. Existe um fator limítrofe entre produzir IA com IA. Ele é real, tem
+fundamento matemático e empírico, e é \emph{mitigável, não anulável}: a IA pode
+produzir IA, desde que não seja \emph{apenas} IA produzindo IA. Sem âncora
+externa de informação e de validação, o loop se retroalimenta até esgotar; com
+âncora, ele progride. \emph{O limite não é a inteligência; é a fonte e o
+verificador.}
+
+\paragraph{Limites e anti-overclaim.}
+Declaramos o escopo: as observações empíricas vêm de corpus-piloto controlado e
+não generalizam para produção. Distinguimos ``ganho observável'' (fato) de
+``satisfaz critério rígido de relevância'' (não satisfeito). Não afirmamos que o
+fator limítrofe seja inviolável para sempre, nem que os resultados de
+distribuições simuladas se transfiram integralmente a linguagem natural. O
+artigo oferece, portanto, uma resposta fundamentada, equilibrada e honesta ---
+consistente com o princípio de \emph{anti-overclaim} que governa o ecossistema
+que o produziu.

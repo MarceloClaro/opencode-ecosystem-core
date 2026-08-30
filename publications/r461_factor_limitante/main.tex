@@ -1,0 +1,80 @@
+% =====================================================================
+% R461 — O Fator Limítrofe entre Produzir IA com IA
+% Artigo científico integrando literatura + estudo de caso OpenCode Ecosystem Core
+% Compilação: pdflatex + bibtex + pdflatex + pdflatex
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{mathtools}   % mathclap, aligned, gathered
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm, top=2.8cm, bottom=2.8cm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, linkcolor=blue!60!black, citecolor=green!40!black,
+            urlcolor=blue!60!black]{hyperref}
+\usepackage[style=authoryear, maxbibnames=99, backend=biber]{biblatex}
+\addbibresource{referencias.bib}
+
+\newcommand{\Div}{\mathrm{Div}}
+\newcommand{\HABD}{\mathrm{HABD}}
+\newcommand{\cob}{\mathrm{cob}}
+
+\title{\textbf{O Fator Limítrofe entre Produzir IA com IA:\\[3pt]
+Evidências de Colapso Recursivo, \emph{Scaling Laws} e Auto-Melhoria\\
+com um Estudo de Caso no OpenCode Ecosystem Core}}
+
+\author{Marcelo Claro Laranjeira\\[2pt]
+\small ORCID \texttt{0000-0001-8996-2887} \;$\cdot$\; \texttt{marceloclaro@gmail.com}}
+
+\date{30 de agosto de 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+Este artigo examina a pergunta: \emph{existe um fator limítrofe entre produzir
+IA com IA?} Sintetizamos três linhas independentes de evidência --- (i) o
+colapso de modelo sob treinamento recursivo em dados gerados por modelo
+(Shumailov et al., \emph{Nature} 2024); (ii) as \emph{scaling laws} que
+estabelecem dados, parâmetros e computação como insumos com estrutura
+informacional externa; e (iii) a literatura emergente sobre auto-melhoria
+recursiva (\emph{self-play}, \emph{self-reward}) --- e as confrontamos com um
+estudo de caso empírico conduzido no \emph{OpenCode Ecosystem Core}: o ciclo
+R459/R460 de diversificação pós-ranqueamento em \emph{Retrieval-Augmented
+Generation}. O estudo mostra uma estratégia \textbf{HABD} (Hybrid Anchor-Blended
+Deterministic) que maximiza diversidade e cobertura ($\Div{=}0{,}8333$,
+$\cob{=}1{,}000$), porém com queda relativa de relevância de $10{,}4\%$ acima da
+tolerância de $5\%$ --- um \emph{trade-off} limítrofe entre expandir a fronteira
+de uma métrica e degradar a fidelidade à referência. Nossa resposta, ancorada
+nas evidências, é que \textbf{existe um fator limítrofe estrutural}, mas ele não
+é um muro absoluto: separa a produção de IA \emph{em loop fechado e
+auto-suficiente} (que colapsa estatisticamente) da produção \emph{com âncora
+externa de dados reais} (que progride). O gargalo está na fonte de informação e
+na honestidade do sinal de avaliação, não na inteligência. Resultados reportados
+com escopo declarado (corpus-piloto) e sem alegação de generalização além da
+evidência.
+\\[4pt]
+\textbf{Palavras-chave:} colapso de modelo; dados sintéticos; auto-melhoria
+recursiva; \emph{scaling laws}; diversificação em RAG.
+\end{abstract}
+
+\tableofcontents
+
+\input{sections/01_introducao}
+\input{sections/02_fundamentacao}
+\input{sections/03_metodo}
+\input{sections/04_estudo_caso}
+\input{sections/05_discussao}
+\input{sections/06_conclusao}
+
+\printbibliography
+
+\end{document}
