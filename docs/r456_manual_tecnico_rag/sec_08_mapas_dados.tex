@@ -1,0 +1,96 @@
+% =====================================================================
+% SEC_08 — Mapas de Dados e Diagrama Operacional
+% =====================================================================
+
+\section*{8. Mapas de Dados e Diagrama Operacional}
+\addcontentsline{toc}{section}{8. Mapas de Dados e Diagrama Operacional}
+
+\nivel{0} Até aqui vimos os conceitos (Seção 3), o que existe (Seção 4), a
+proposta (Seção 5), as métricas (Seção 6) e o código (Seção 7). Falta uma camada
+"cartográfica": como a proposta se encaixa no \emph{mapa geral} do ecossistema e
+em quais fluxos ela tem efeito. Esta seção desenha o "mapa do território".
+
+\subsection*{8.1 O papel dos mapas de dados no ecossistema}
+
+\nivel{1} O ecossistema mantém mapas de dados e mapas de arquitetura em
+\texttt{docs/} (por exemplo, \texttt{MAPA\_ARQUITETURA\_R433\_R438.md},
+\texttt{architecture\_map.html}). Estes artefatos documentais informam tanto o
+estado atual quanto o desenho da proposta, preservando a riqueza dos fluxos
+multiárea: acadêmico, formal, jurídico, clínico, MIRA, RAG, Universidade
+Sintética, runtimes locais e gates de qualidade/integridade.
+
+\begin{intuicao}
+Um mapa de arquitetura é como o mapa de um metrô: não mostra cada trilho, mas
+mostra as \emph{linhas} (fluxos) e as \emph{estações} (subsistemas) e como elas
+se conectam. O RAG é uma das "linhas" que cruza várias outras.
+\end{intuicao}
+
+\subsection*{8.2 Insight: o RAG como subsistema transversal}
+
+\nivel{2} Um insight estrutural que o mapa revela é que o RAG \emph{não pertence a
+um único fluxo}: ele é um subsistema \emph{transversal}, reutilizado por múltiplos
+fluxos. A Figura~\ref{fig:transversal} ilustra essa transversalidade de forma
+conceitual.
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[
+  node distance=1.0cm,
+  flujo/.style={draw, rounded corners, minimum width=2.4cm, minimum height=0.9cm,
+                align=center, font=\small},
+  ragbox/.style={draw, rounded corners, minimum width=2.6cm, minimum height=1.1cm,
+                 align=center, font=\small, fill=orange!15, thick},
+  arrow/.style={-{Stealth[length=3mm]}, thick}
+]
+  \node[ragbox] (rag) {Subsistema RAG\\\emph{(estado atual)} + proposta\\\emph{diversificação}};
+  \node[flujo, above left=1.4cm and -0.5cm of rag] (ac) {Fluxo\\acadêmico};
+  \node[flujo, above=1.4cm of rag] (ju) {Fluxo\\jurídico};
+  \node[flujo, above right=1.4cm and -0.5cm of rag] (cl) {Fluxo\\clínico};
+  \node[flujo, below=1.2cm of rag] (mi) {Fluxo\\MIRA};
+
+  \draw[arrow] (ac) -- (rag);
+  \draw[arrow] (ju) -- (rag);
+  \draw[arrow] (cl) -- (rag);
+  \draw[arrow] (mi) -- (rag);
+\end{tikzpicture}
+\caption{Transversalidade conceitual do subsistema RAG. \textbf{Legenda:} caixa
+laranja = subsistema RAG (estado atual) com a proposta de diversificação; caixas
+azuis = fluxos consumidores. As setas indicam dependência dos fluxos em relação ao
+RAG. A diversificação proposta atua \emph{no interior} do subsistema, sem alterar a
+interface pública dos fluxos e sem exigir mudança neles.}
+\label{fig:transversal}
+\end{figure}
+
+\nivel{2} \textbf{Por que isso é relevante para a proposta:} como o RAG é
+transversal, qualquer melhoria interna --- como a diversificação por Recamán ---
+propaga-se \emph{sem custo de integração} para todos os fluxos dependentes. Isso
+explica a RQ4 (impacto multiárea): o ganho potencial não exige tocar em cada fluxo
+individualmente; basta melhorar o subsistema compartilhado.
+
+\begin{pontochave}
+A transversalidade é um \emph{multiplicador de impacto}: uma melhoria única no
+subsistema RAG beneficia os fluxos acadêmico, jurídico, clínico e MIRA
+simultaneamente, com o mesmo esforço de implementação.
+\end{pontochave}
+
+\subsection*{8.3 Integração do RAG nos fluxos multiárea}
+
+\nivel{1} Concretizando: o RAG atua como subsistema transversal e serve ao fluxo
+acadêmico (revisão de literatura), ao fluxo jurídico (recuperação normativa), ao
+fluxo clínico (suporte à decisão) e ao fluxo MIRA (geração de conteúdo). A proposta
+de diversificação por Recamán visa melhorar a \emph{cobertura semântica} desse
+subsistema transversal, sem alterar a interface pública dos fluxos consumidores.
+
+\nivel{2} \textbf{Insight de rigor: "sem alterar a interface" é um contrato, não
+uma promessa.} Preservar a interface pública dos fluxos é um critério de desenho
+\textbf{verificável}: os fluxos continuam a consumir as mesmas entradas/saídas do
+subsistema RAG. A diversificação ocorre \emph{internamente}, no conjunto de
+candidatos selecionados antes da geração, de modo que a assinatura de chamada e o
+formato de resposta permanecem compatíveis. Esse é um requisito que será
+verificado por testes de regressão de interface no trabalho futuro.
+
+\begin{pontochave}
+O mapa mostra que a proposta é \emph{adicional} e \emph{localizada}: ela enriquece
+o subsistema transversal mantendo o restante do território intacto. É uma
+mudança de \emph{alto impacto, baixo risco de integração}.
+\end{pontochave}

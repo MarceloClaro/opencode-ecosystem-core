@@ -1,0 +1,168 @@
+% =====================================================================
+% SEC_02 — Problema de Pesquisa e Impactos
+% =====================================================================
+
+\section*{2. Problema de Pesquisa e Impactos}
+\addcontentsline{toc}{section}{2. Problema de Pesquisa e Impactos}
+
+\subsection*{2.1 Contextualização do problema}
+
+\nivel{0} Toda investigação nasce de uma insatisfação: algo não funciona tão bem
+quanto deveria. Neste manual, a insatisfação é a seguinte: quando um sistema de
+recuperação devolve respostas a uma pergunta, ele tende a devolver resultados
+\emph{concentrados} --- todos muito parecidos entre si. Isso é útil quando a
+pergunta tem uma única resposta certa, mas é um problema quando a pergunta admite
+múltiplos ângulos, como numa revisão de literatura ou numa síntese que precisa
+cobrir pontos de vista distintos.
+
+\begin{intuicao}
+Imagine pedir a um bibliotecário "liste livros sobre mudanças climáticas". Um
+sistema comum traria dez livros de física atmosférica. Mas a pergunta que você
+realmente tinha era sobre o \emph{impacto econômico} e o \emph{impacto social}
+das mudanças climáticas. O bibliotecário "muito relevante demais" perdeu a
+\emph{diversidade} que você precisava.
+\end{intuicao}
+
+\nivel{2} Do ponto de vista formal, o fenômeno é bem documentado: ranqueadores
+lexicais (BM25, Eq.~\ref{eq:bm25}) e densos tendem a concentrar o ranking em um
+subespaço semântico homogêneo, privilegiando \emph{relevância individual} em
+detrimento de \emph{cobertura} do espaço de interpretações. A literatura de
+diversificação, tendo como marco o \emph{Maximal Marginal Relevance} (MMR)
+\cite{CarbonellGoldstein1998MMR}, mostra que o equilíbrio entre relevância e
+novidade é alcançável, mas frequentemente à custa de parametrizações heurísticas e
+de comportamento não determinístico.
+
+\subsection*{2.2 Formulação do problema de pesquisa}
+
+\nivel{2} A partir dessa contextualização, este manual delimita o seguinte
+problema de pesquisa, com critérios de auditabilidade:
+
+\begin{quote}
+\textbf{Problema de pesquisa (PP).} Como introduzir um estágio de
+\textbf{diversificação estruturada} na arquitetura RAG do ecossistema que: (i)
+seja \textbf{determinístico} e \textbf{reproduzível} (mesma entrada $\Rightarrow$
+mesma saída); (ii) opere \textbf{após} o ranqueamento semântico-estrutural, sem
+degradar a relevância primária; e (iii) tenha \textbf{custo assimptótico}
+controlável, compatível com pipelines de grande escala?
+\end{quote}
+
+Para operacionalizar o problema, derivamos as seguintes \textbf{perguntas de
+pesquisa} (RQ):
+
+\begin{enumerate}[label=\textbf{RQ\arabic*.}]
+  \item \textbf{RQ1 --- Diversidade.} É possível aumentar a diversidade média do
+        conjunto recuperado (Eq.~\ref{eq:diversity}) sem sacrificar a precisão do
+        ranqueamento primário?
+  \item \textbf{RQ2 --- Determinismo.} A diversificação pode ser tornada
+        totalmente determinística e reproduzível, eliminando variações por \emph{seed}
+        ou por ordem de execução?
+  \item \textbf{RQ3 --- Custo.} Qual é a complexidade assimptótica de tempo e
+        memória do estágio de diversificação, e ela é compatível com o pipeline
+        existente?
+  \item \textbf{RQ4 --- Impacto multiárea.} A diversificação produz benefícios
+        observáveis nos fluxos do ecossistema (acadêmico, jurídico, clínico, MIRA)
+        que dependem do RAG?
+\end{enumerate}
+
+\noindent A \textbf{hipótese central} (H1) é:
+
+\begin{quote}
+\textbf{H1.} A sequência de Recamán pode ser usada como \emph{gerador
+determinístico de offsets} de diversificação que incrementa a cobertura semântica
+do conjunto recuperado com custo $O(K)$ (sobre um ranking indexado de $N$
+candidatos), sem exigir retreinamento do modelo de ranqueamento.
+\end{quote}
+
+\begin{pontochave}
+O problema de pesquisa é, em essência, \emph{determinismo aplicado à
+diversificação}: usar uma sequência matemática bem comportada (Recamán) para
+garantir que a diversidade seja reproduzível, mensurável e barata.
+\end{pontochave}
+
+\subsection*{2.3 Impactos na Ciência}
+
+\nivel{2} O problema descrito conecta-se a fronteiras ativas de pesquisa em
+Recuperação de Informação (IR) e Processamento de Linguagem Natural (PLN). Os
+impactos potenciais na ciência são:
+
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{Diversificação determinística.} A literatura tradicional de
+        diversificação (MMR, Eq.~\ref{eq:mmr}) depende de parâmetros heurísticos
+        ($\lambda$) e de medidas de similaridade que introduzem dependência de
+        implementação. Uma abordagem determinística baseada em uma sequência
+        matemática canônica oferece um \textbf{baseline reproduzível} que pode ser
+        comparado de forma justa entre sistemas \cite{CarbonellGoldstein1998MMR}.
+  \item \textbf{Conexão entre teoria dos números e IR.} O uso de uma sequência da
+        teoria dos números (Recamán), cujas propriedades ainda são objeto de
+        investigação \cite{Alekseyev2022RecamanCousins}, abre um diálogo
+        interdisciplinar: propriedades combinatórias da sequência podem informar a
+        distribuição de offsets de diversidade. Trata-se de uma contribuição
+        metodológica (a \emph{ponte} entre dois campos), não de um resultado
+        empírico já validado.
+  \item \textbf{Rigor metodológico em RAG.} O RAG moderno enfrenta problemas de
+        reprodutibilidade (variações por \emph{seed}, ordem de recuperação) e de
+        degradação quando a recuperação falha \cite{Yan2024CRAG}; a posição dos
+        documentos no contexto impacta a qualidade \cite{Liu2024LostMiddle}. Um
+        estágio determinístico de diversificação contribui com uma dimensão
+        adicional de reprodutibilidade para avaliações experimentais
+        \cite{Ram2023RetrievalAugmented}.
+  \item \textbf{Complemento, não substituto.} A proposta não substitui os avanços
+        em RAG auto-adaptativo \cite{Jeong2024AdaptiveRAG}, recuperação por grafos
+        \cite{Edge2024GraphRAG} nem correção pós-recuperação \cite{Yan2024CRAG};
+        ela os \emph{integra} como um estágio de pós-processamento ortogonal,
+        preservando a interface dos fluxos consumidores.
+\end{enumerate}
+
+\begin{pontochave}
+O impacto científico pretendido é \emph{metodológico}: estabelecer uma ponte
+reproduzível entre teoria dos números e diversificação de recuperação, que possa
+ser avaliada de forma justa e comparável pela comunidade.
+\end{pontochave}
+
+\subsection*{2.4 Impactos no Ecossistema OpenCode Ecosystem Core}
+
+\nivel{1} O OpenCode Ecosystem Core opera múltiplos fluxos que consomem RAG como
+subsistema transversal. A vantagem potencial da proposta no ecossistema decorre do
+fato de que esses fluxos se beneficiam de \emph{cobertura} semântica:
+
+\begin{itemize}
+  \item \textbf{Fluxo acadêmico} (revisão de literatura): a diversificação pode
+        ampliar o leque de obras e correntes teóricas recuperadas, reduzindo a
+        concentração em um único paradigma.
+  \item \textbf{Fluxo jurídico} (recuperação normativa): múltiplos dispositivos
+        legais e doutrinas podem ser cobertos de forma mais abrangente.
+  \item \textbf{Fluxo clínico} (suporte à decisão): a identificação de múltiplos
+        ângulos diagnósticos/terapêuticos pode melhorar a revisão de alternativas.
+  \item \textbf{Fluxo MIRA} (geração de conteúdo): a síntese multi-perspectiva
+        torna o conteúdo gerado mais rico e equilibrado.
+\end{itemize}
+
+\nivel{2} É importante registrar, com rigor, o \textbf{limite do impacto}: os
+benefícios descritos são \emph{potenciais} e \emph{hipotéticos}, dependentes da
+implementação e de validação empírica futura. Este manual \emph{não} afirma que a
+diversificação por Recamán já produz tais benefícios no ecossistema --- trata-se
+de uma hipótese (H1) e de uma direção de impacto a ser medida nas RQs. A
+arquitetura pós-Recamán permanece \textbf{proposta, não implementada}.
+
+\begin{pontochave}
+O impacto no ecossistema será \emph{medido}, não presumido: cada benefício
+potencial listado acima está vinculado a uma RQ e será validado por métricas
+(como a Eq.~\ref{eq:diversity}) em trabalho futuro, respeitando o protocolo de
+rigor do ecossistema.
+\end{pontochave}
+
+\subsection*{2.5 Delimitação do estudo}
+
+\nivel{2} Para preservar a auditabilidade, delimitamos explicitamente o que este
+manual \emph{não} cobre:
+
+\begin{itemize}
+  \item Não implementa o \texttt{RecamanDiversifier} (apenas especifica a
+        proposta).
+  \item Não apresenta resultados empíricos novos de precisão/diversidade sobre
+        corpora (ação futura, RQ1/RQ4).
+  \item Não alega que a sequência de Recamán é a "única" ou "ótima" forma de
+        diversificar; propõe um baseline determinístico comparável.
+  \item Não estabelece vínculo causal entre a proposta e melhorias de saúde,
+        jurídicas ou acadêmicas sem validação.
+\end{itemize}

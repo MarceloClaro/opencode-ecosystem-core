@@ -1,0 +1,203 @@
+% =====================================================================
+% SEC_05 — Proposta Pós-Recamán (Arquitetura-Alvo)
+% =====================================================================
+
+\section*{5. Proposta Pós-Recamán (Arquitetura-Alvo)}
+\addcontentsline{toc}{section}{5. Proposta Pós-Recamán (Arquitetura-Alvo)}
+
+\begin{quote}
+\textbf{Aviso metodológico:} a arquitetura descrita nesta seção é uma
+\textbf{proposta}, ainda \textbf{não implementada} no código-fonte. Ela representa
+a arquitetura-alvo após a adoção do Diversificador de Recamán, e deve ser tratada
+como desenho, não como componente observável. Em particular, nenhum dos artefatos
+descritos (\texttt{ArtifactType}, \texttt{AnchorResolver},
+\texttt{RecamanDiversifier}, \texttt{CanonicalContextPacker}) existe no checkout
+neste momento.
+\end{quote}
+
+\subsection*{5.1 Motivação e posicionamento}
+
+\nivel{0} Na seção anterior, vimos que o estado atual mede \emph{groundedness},
+\emph{cobertura de citação} e \emph{propagação temporal}, mas \textbf{não mede nem
+diversifica} o conjunto recuperado. A proposta entra exatamente nessa lacuna: um
+estágio que torna a diversificação \emph{determinística} e \emph{mensurável}.
+
+\begin{intuicao}
+Voltando à analogia do bibliotecário: o sistema atual é ótimo em achar livros
+\emph{relevantes} e em citá-los corretamente. A proposta acrescenta um passo
+"anti-enjoo": antes de montar a mesa final, garante que os livros escolhidos
+cubram ângulos distintos. E --- diferentemente de abordagens que dependem de sorte
+--- esse passo é \emph{exatamente o mesmo} toda vez que a mesma pergunta é feita.
+\end{intuicao}
+
+\nivel{2} Rankeadores lexicais (BM25, Eq.~\ref{eq:bm25}) e densos tendem a
+concentrar os resultados em um subespaço semântico homogêneo. Quando o objetivo é
+\emph{cobrir} múltiplos ângulos de uma consulta (revisão de literatura,
+sumarização, síntese multiárea), a diversidade dos candidatos é tão importante
+quanto a relevância individual. A proposta introduz a diversificação
+\textbf{após} o ranqueamento semântico-estrutural, usando Recamán como gerador
+determinístico de \emph{offsets} --- não como substituição da relevância, mas como
+mecanismo de \emph{re-balanceamento} inspirado em MMR (Eq.~\ref{eq:mmr}).
+
+\begin{pontochave}
+\emph{Posicionamento-chave:} a proposta \textbf{não compete} com o ranqueamento;
+ela opera \emph{a jusante} dele, sobre a ordem já produzida. Isso garante que a
+relevância primária nunca seja perdida --- apenas \emph{re-ordenada} para ganhar
+cobertura.
+\end{pontochave}
+
+\subsection*{5.2 Insight: por que Recamán e não apenas randomização}
+
+\nivel{2} Uma pergunta natural é: "por que não diversificar com uma amostragem
+aleatória ou com MMR?". A resposta está na análise comparativa dos critérios:
+
+\begin{tabularx}{\textwidth}{lXXX}
+\toprule
+\textbf{Critério} & \textbf{Aleatório} & \textbf{MMR} & \textbf{Recamán (proposta)} \\
+\midrule
+Determinismo & não & depende de $\lambda$/Sim & \textbf{sim} \\
+Reprodutibilidade & baixa & parcial & \textbf{alta} \\
+Custo extra & baixo & $O(K \cdot |D|)$ & \textbf{$O(K)$} \\
+Sensibilidade a parâmetros & n/a & alta ($\lambda$) & \textbf{nula} \\
+Interpretabilidade & baixa & média & \textbf{alta} \\
+\bottomrule
+\end{tabularx}
+
+\begin{intuicao}
+Acender uma "loteria" para escolher livros funciona em média, mas não é
+reproduzível (cada execução dá um resultado). O MMR é melhor, mas pede que você
+defina quanto peso dar à diversidade ($\lambda$) e como medir similaridade ---
+afinações que mudam o resultado. A sequência de Recamán remove essas escolhas:
+dado o ranking, os offsets são \emph{fixos} e \emph{universais}. É "sorte"
+determinística: sempre a mesma, mas bem distribuída.
+\end{intuicao}
+
+\subsection*{5.3 Artefatos e contratos propostos}
+
+\nivel{1} A proposta define os seguintes artefatos (abstratos, como especificação):
+
+\begin{itemize}
+  \item \texttt{ArtifactType} --- enum que classifica o tipo de artefato
+        (texto, tabela, gráfico, referência, código, dado). Este insight de design
+        permite que a diversificação respeite \emph{tipos}: por exemplo, ao montar
+        uma síntese, garante-se que não só textos, mas também tabelas e gráficos
+        sejam representados.
+  \item \texttt{AnchorResolver} --- mapeia cada artefato recuperado a uma
+        \emph{âncora} canônica (citação, DOI, seção, URN interna) para ancoragem
+        de diversidade. A \emph{âncora} é a chave para não contar duas versões do
+        mesmo conteúdo como se fossem fontes distintas.
+  \item \texttt{RecamanDiversifier} --- dado o ranking ordenado de candidatos,
+        reordena/reamostra selecionando itens com \emph{offsets} derivados da
+        sequência de Recamán, garantindo determinismo e reprodutibilidade.
+  \item \texttt{CanonicalContextPacker} --- empacota o contexto final de forma
+        canônica, respeitando a ordem de diversificação e a ancoragem.
+\end{itemize}
+
+\begin{intuicao}
+A divisão em quatro artefatos segue o princípio de \emph{responsabilidade única}:
+cada um faz uma coisa bem definida. \texttt{ArtifactType} "rotula" o que é;
+\texttt{AnchorResolver} "amarra" cada item a uma identidade unívoca;
+\texttt{RecamanDiversifier} "embaralha de forma fixa"; \texttt{ContextPacker}
+"organiza a mala" final. Isso torna a proposta testável peça por peça (TDD).
+\end{intuicao}
+
+\subsection*{5.4 Insight: ancoragem canônica evita falsa diversidade}
+
+\nivel{2} Um insight de design que merece destaque: a \emph{ancoragem canônica}
+(\texttt{AnchorResolver}) resolve um problema sutil de \emph{diversidade aparente}.
+Dois artefatos podem \emph{parecer} diferentes (texto distinto) mas
+\emph{representar a mesma fonte} (mesmo DOI, mesma seção). Ao ancorar cada
+artefato a uma identidade unívoca, a proposta evita que o diversificador
+"conte duas vezes" conteúdos redundantes disfarçados de itens novos.
+
+\begin{equation}
+\label{eq:anchor}
+\forall\, a \in \mathcal{S}:\; \text{âncora}(a) \in \mathcal{A},\quad
+|\{\text{âncora}(a) : a \in \mathcal{S}\}| = |\mathcal{S}|
+\end{equation}
+
+\noindent A condição acima exige que todas as âncoras do conjunto selecionado
+$\mathcal{S}$ sejam \emph{distintas}. Documentos que colidem na mesma âncora são
+tratados como uma única fonte efetiva --- um critério essencial para que a métrica
+de diversidade (Eq.~\ref{eq:diversity}) reflita \emph{diversidade real}, e não
+apenas \emph{variedade de redação}.
+
+\subsection*{5.5 Diagrama da arquitetura-alvo}
+
+\nivel{1} O diagrama abaixo (Figura~\ref{fig:alvo}) mostra onde os novos artefatos
+se encaixam, \emph{posteriores} ao ranqueamento existente.
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[
+  node distance=1.1cm,
+  box/.style={draw, rounded corners, minimum width=2.8cm, minimum height=1.0cm,
+              align=center, font=\small, fill=blue!8},
+  prop/.style={draw, rounded corners, minimum width=2.8cm, minimum height=1.0cm,
+               align=center, font=\small, fill=green!12, dashed},
+  arrow/.style={-{Stealth[length=3mm]}, thick}
+]
+  \node[box] (ev) {RAGEvolved\\\emph{ranqueamento semântico-estrutural}};
+  \node[prop, below=0.7cm of ev] (at) {ArtifactType\\\emph{classificação}};
+  \node[prop, below=0.7cm of at] (ar) {AnchorResolver\\\emph{ancoragem canônica}};
+  \node[prop, below=0.7cm of ar, fill=orange!15] (rd) {RecamanDiversifier\\\emph{diversificação determinística}};
+  \node[prop, below=0.7cm of rd] (cp) {CanonicalContextPacker\\\emph{empacotamento canônico}};
+  \node[box, below=0.7cm of cp] (en) {EnhancedRAG\\\emph{geração ancorada}};
+
+  \draw[arrow] (ev) -- (at);
+  \draw[arrow] (at) -- (ar);
+  \draw[arrow] (ar) -- (rd);
+  \draw[arrow] (rd) -- (cp);
+  \draw[arrow] (cp) -- (en);
+
+  \node[rotate=90, font=\scriptsize, gray, right=0.1cm of cp] {proposta};
+\end{tikzpicture}
+\caption{Diagrama da arquitetura-alvo pós-Recamán (proposta). \textbf{Legenda:}
+caixas tracejadas verdes = novos artefatos propostos; caixa laranja tracejada =
+Diversificador de Recamán (núcleo da proposta); caixas azuis sólidas = componentes
+já implementados. Setas = fluxo de dados proposto. Note que a proposta \emph{se
+insere} entre o ranqueamento e a geração, não substituindo nenhum componente
+existente.}
+\label{fig:alvo}
+\end{figure}
+
+\subsection*{5.6 Demonstração do Diversificador}
+
+\nivel{1} Dada uma sequência ranqueada $\mathbf{r} = [r_1, r_2, \dots, r_N]$ de
+candidatos e os termos da sequência de Recamán $a_0, a_1, \dots$, o diversificador
+proposto seleciona candidatos percorrendo $\mathbf{r}$ com passos $a_k$, garantindo
+que índices próximos (semanticamente redundantes) sejam alternados com saltos
+diversificados. A Tabela~\ref{tab:offsets} ilustra os primeiros passos.
+
+\begin{table}[!htb]
+\centering
+\caption{Passos derivados da sequência de Recamán para diversificação (proposta).
+\textbf{Legenda:} $n$ = passo; $a_n$ = valor da sequência; exemplo de índice de
+candidato selecionado sobre um ranking fictício com $N=8$.}
+\label{tab:offsets}
+\begin{tabular}{cccc}
+\toprule
+$n$ & $a_n$ & índice candidato $(1\!+\!a_n) \bmod 8$ & ilustração \\
+\midrule
+0 & 0 & 1 & primeiro candidato (relevância máxima) \\
+1 & 1 & 2 & deslocamento de 1 posição \\
+2 & 3 & 4 & salto de 3 posições (diversidade) \\
+3 & 6 & 7 & salto maior \\
+4 & 2 & 3 & volta a um candidato próximo \\
+5 & 7 & 0 & novo salto (cobre o fim do ranking) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\nivel{2} A Tabela~\ref{tab:offsets} evidencia a \emph{alternância} entre saltos
+curtos e longos, característica da sequência de Recamán. Esse padrão é um insight
+crucial: ao alternar $a_n$ entre valores pequenos e grandes, o diversificador
+"varre" tanto as regiões de alta relevância (início do ranking) quanto as de maior
+cobertura (final), cobrindo \emph{simultaneamente} relevância e diversidade --- em
+linha com o espírito do MMR, mas sem parâmetros $\lambda$.
+
+\begin{pontochave}
+Em uma frase: \emph{o MMR equilibra relevância e novidade usando um parâmetro; a
+proposta equilibra usando a própria geometria da sequência de Recamán ---
+deterministicamente.}
+\end{pontochave}

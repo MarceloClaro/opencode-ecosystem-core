@@ -1,0 +1,173 @@
+% =====================================================================
+% SEC_06 — Cálculos e Especificações Técnicas
+% =====================================================================
+
+\section*{6. Cálculos e Especificações Técnicas}
+\addcontentsline{toc}{section}{6. Cálculos e Especificações Técnicas}
+
+\nivel{0} Esta seção transforma as ideias das seções anteriores em números e
+contratos precisos: como \emph{medir} diversidade, quanto \emph{custa} a proposta
+e o que \emph{muda} (antes/depois) na especificação. É aqui que a proposta sai do
+"discurso" e vira \emph{especificação verificável}.
+
+\subsection*{6.1 Métricas de diversidade}
+
+\nivel{2} Sobre um conjunto de candidatos selecionados $\mathcal{S}$, definimos a
+diversidade média entre os itens recuperados:
+
+\begin{equation}
+\label{eq:diversity}
+\text{Div}(\mathcal{S})\;=\;\frac{1}{|\mathcal{S}|(|\mathcal{S}|-1)}
+\sum_{\substack{i \neq j \\ r_i, r_j \in \mathcal{S}}}
+\bigl(1 - \text{Sim}(r_i, r_j)\bigr)
+\end{equation}
+
+\noindent onde $\text{Sim}(\cdot,\cdot) \in [0,1]$ é uma medida de similaridade
+normalizada (coseno ou Jaccard sobre âncoras). Valores de $\text{Div}(\mathcal{S})$
+próximos de $1$ indicam alta diversidade; valores próximos de $0$ indicam
+redundância.
+
+\begin{intuicao}
+A fórmula apenas computa, em média, "o quanto os itens são diferentes entre si".
+Se todos os livros falam do mesmo assunto (similaridade $1$), a diversidade é $0$.
+Se cada um é disjunto (similaridade $0$), a diversidade é $1$. Simples e poderoso.
+\end{intuicao}
+
+\nivel{2} \textbf{Insight de rigor: a escolha do $\text{Sim}$ importa.} Se a
+similaridade for medida sobre \emph{texto bruto} (coseno de embeddings), dois
+textos com redação distinta mas mesma fonte terão $\text{Sim}$ baixo e a métrica
+superestimará a diversidade. Por isso a proposta vincula a métrica às
+\emph{âncoras canônicas} (Eq.~\ref{eq:anchor}): ao computar a similaridade sobre
+identidade de fonte/âmago, a $\text{Div}$ reflete \emph{diversidade efetiva}
+(conteúdo realmente distinto), não \emph{variedade de redação}. Essa é uma decisão
+metodológica explícita e verificável.
+
+\subsection*{6.2 Custo computacional do Diversificador}
+
+\nivel{2} A sequência de Recamán até o passo $M$ pode ser gerada em $O(M)$ de
+tempo com memória $O(M)$ (mantendo o conjunto dos valores já visitados). Para um
+ranking de $N$ candidatos e um orçamento de $K$ seleções, o Diversificador
+proposto opera, no pior caso, em $O(K)$ sobre o ranking indexado, com memória
+adicional $O(N)$ para as âncoras e $O(N)$ para o conjunto de valores da sequência.
+
+\begin{intuicao}
+"Custo $O(K)$" significa: o esforço cresce \emph{linearmente} com quantos itens
+queremos selecionar. Se dobrar a quantidade de seleções, dobra o esforço --- nada
+de explosão. Comparado com a \emph{codificação de embeddings} dos documentos
+(tipicamente o gargalo), o diversificador é negligível.
+\end{intuicao}
+
+\nivel{2} \textbf{Análise de rigor:} decompomos o custo em dois termos:
+
+\begin{equation}
+\label{eq:cost}
+T(N,K) \;=\; \underbrace{O(K)}_{\text{seleção via offsets}}
+\;+\; \underbrace{O(N)}_{\text{geração/consulta de âncoras}}
+\end{equation}
+
+\noindent O primeiro termo ($O(K)$) cobre o percurso do ranking com os offsets de
+Recamán; o segundo ($O(N)$) cobre a resolução de âncoras para classificar e deduplicar
+os $N$ candidatos disponíveis. Como, na prática, $K \leq N$, o custo total é
+dominado por $O(N)$ --- assintoticamente o mesmo custo de \emph{ler} os candidatos,
+ou seja, \textbf{não adiciona um termo dominante novo} ao pipeline. Isso contrasta
+com o MMR, cuja etapa de seleção pode atingir $O(K \cdot |D|)$ por causa da
+comparação $\max_{d_j \in D} \text{Sim}_2(d,d_j)$ (Eq.~\ref{eq:mmr}).
+
+\begin{pontochave}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+\textbf{Estágio} & \textbf{Complexidade} & \textbf{Observação} \\
+\midrule
+Geração de Recamán ($M$ termos) & $O(M)$ tempo, $O(M)$ memóri & valores visitados em \texttt{set} \\
+Seleção de $K$ itens & $O(K)$ & percurso com offsets \\
+Resolução de âncoras & $O(N)$ & deduplicação por identidade \\
+\textbf{Total} & $O(N)$ & não domina o pipeline \\
+\bottomrule
+\end{tabularx}
+\end{pontochave}
+
+\subsection*{6.3 Insight: conexão com o efeito "perdido no meio"}
+
+\nivel{2} Um insight que conecta a proposta à literatura de forma não trivial: o
+efeito \emph{lost in the middle} \cite{Liu2024LostMiddle} mostra que modelos de
+linguagem têm desempenho assimétrico em relação à posição dos documentos no
+contexto longo (tendem a "esquecer" o que está no meio). A \emph{ordem} em que o
+contexto é montado --- e que o \texttt{CanonicalContextPacker} define --- não é um
+detalhe cosmético: ela afeta diretamente a qualidade da geração.
+
+\begin{equation}
+\label{eq:positional}
+\Pr[\text{documento } r \text{ ser usado}] \;\approx\;
+g\bigl(\text{posição}(r)\bigr),\quad
+g \text{ não monótona (efeito em U)}
+\end{equation}
+
+\noindent A literatura sugere um efeito em forma de \emph{U}: início e fim do
+contexto são mais bem utilizados do que o meio \cite{Liu2024LostMiddle}. Isso
+confere \emph{relevância funcional} à proposta: não basta selecionar documentos
+diversos; é preciso \emph{posicioná-los} de forma canônica no contexto para
+maximizar a chance de uso. O \texttt{CanonicalContextPacker} torna esse
+posicionamento \emph{determinístico} e \emph{auditável}, uma dimensão que o
+estado atual não formaliza.
+
+\begin{intuicao}
+Se o gerador "presta menos atenção" no meio do texto, ao montar o contexto
+devemos ser espertos sobre a ordem: colocar os documentos mais importantes no
+início e no fim. O \emph{empacotador canônico} garante que essa ordem seja sempre
+a mesma, tornando o comportamento previsível e testável.
+\end{intuicao}
+
+\subsection*{6.4 Insight: três dimensões ortogonais de qualidade}
+
+\nivel{2} Consolidando as seções precedentes, o estado atual já mede duas
+dimensões de qualidade do retrieval (\emph{groundedness} e
+\emph{citation\_coverage}), além de \emph{temporal\_spread}. A proposta adiciona
+uma terceira e distinta dimensão --- \emph{diversidade}:
+
+\begin{itemize}
+  \item \textbf{groundedness} --- quão ancoradas estão as evidências;
+  \item \textbf{citation\_coverage} --- quão bem citadas;
+  \item \textbf{diversity} (nova) --- quão \emph{cobertos} estão os ângulos.
+\end{itemize}
+
+\noindent A ortogonalidade dessas dimensões é o que permite avaliar a hipótese H1
+sem ambiguidade: um sistema pode ter \emph{alta} groundedness e \emph{alta}
+diversidade simultaneamente --- não são métricas concorrentes. O painel de
+controle do \texttt{EnhancedRAG.metrics()} passa, na arquitetura-alvo, a incluir
+$\text{Div}(\mathcal{S})$ como quinto campo (Eq.~\ref{eq:diversity}), fechando a
+lacuna de medição identificada na Seção~4.
+
+\subsection*{6.5 Antes/depois: contrato da especificação}
+
+\nivel{1} A Tabela~\ref{tab:spec} resume as especificações técnicas do estado atual
+e da arquitetura-alvo proposta.
+
+\begin{table}[!htb]
+\centering
+\caption{Especificações técnicas comparadas: estado atual vs.\ proposta
+pós-Recamán. \textbf{Legenda:} CH = implementado no checkout; PROP = proposta não
+implementada.}
+\label{tab:spec}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+\textbf{Aspecto} & \textbf{Estado atual} & \textbf{Proposta (pós-Recamán)} \\
+\midrule
+Ranqueamento primário & BM25/denso (Eq.~\ref{eq:bm25}) & preservado, sem alteração \\
+Roteamento adaptativo & \texttt{AdaptiveRetriever} (CH) & preservado \\
+Diversificação & via MMR conceitual & \texttt{RecamanDiversifier} (PROP) \\
+Classificação de artefato & ausente & \texttt{ArtifactType} (PROP) \\
+Ancoragem canônica & parcial (auditoria) & \texttt{AnchorResolver} (PROP) \\
+Empacotamento & \texttt{CanonicalContextPacker} (PROP) & proposto \\
+Reprodutibilidade da diversif. & não determinística & determinística (Recamán) \\
+Métrica de diversidade & ausente & $\text{Div}(\mathcal{S})$ (Eq.~\ref{eq:diversity}) \\
+Custo assimptótico extra & n/a & $O(N)$ (Eq.~\ref{eq:cost}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{pontochave}
+A especificação evolui de forma \emph{aditiva}: nada do que existe hoje é
+removido ou alterado em contrato público. A proposta \emph{insere} novos
+componentes e uma nova métrica, respeitando o princípio de compatibilidade
+retrógrada dos fluxos consumidores.
+\end{pontochave}

@@ -1,0 +1,177 @@
+% =====================================================================
+% DOCUMENTO-MESTRE — Manual Técnico RAG + Recamán (R456)
+%
+% Arquitetura modular: cada seção vive em um arquivo separado
+% (sec_XX_*.tex) e é incluída aqui via \input. Para aprofundar uma
+% seção, edite apenas o arquivo correspondente e recompile main.tex.
+%
+% Compilar:  ./build.sh   ou   make
+% Classe:    abntex2 (local: publishing/templates/abntex2)
+% =====================================================================
+\documentclass[
+	article,
+	11pt,
+	oneside,
+	a4paper,
+	english,
+	brazil,
+	sumario=tradicional
+	]{abntex2}
+
+% --- Pacotes fundamentais ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{indentfirst}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+
+% --- Matemática e algoritmos ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% --- Tabelas ---
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+
+% --- Diagramas ---
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,calc,fit}
+
+% --- Listagens de código ---
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  frame=single,
+  breaklines=true,
+  language=Python,
+  keywordstyle=\bfseries\color{blue!60!black},
+  commentstyle=\color{gray!60!black},
+  stringstyle=\color{red!50!black}
+}
+
+% --- Enumeração/ambiente ---
+\usepackage{enumitem}
+
+% --- Citações ABNT ---
+\usepackage[alf]{abntex2cite}
+\usepackage[brazilian,hyperpageref]{backref}
+
+% --- Índice remissivo ---
+\usepackage{makeidx}
+\makeindex
+
+% --- Hiperlinks (abntex2 já carrega hyperref; configuramos opções) ---
+\hypersetup{hidelinks=true}
+\usepackage{caption}
+
+% ---------------------------------------------------------------
+% Infraestrutura didática de profundidade progressiva
+% ---------------------------------------------------------------
+% Caixa de intuição: traduz um conceito formal em uma analogia acessível.
+\newenvironment{intuicao}{%
+  \par\medskip\noindent
+  \begin{quote}
+  \color{blue!55!black}\textbf{\small Caixa de intuição.} \itshape
+}{%
+  \end{quote}\par\medskip
+}
+
+% Caixa de "ponto-chave": sintetiza o que o leitor deve reter ao fim de uma seção.
+\newenvironment{pontochave}{%
+  \par\medskip\noindent
+  \begin{quote}
+  \color{black!70}\textbf{\small Ponto-chave.} \normalfont
+}{%
+  \end{quote}\par\medskip
+}
+
+% Marcador de nível de leitura didático:
+%   \nivel{0} fundamento/intuição | \nivel{1} aplicação | \nivel{2} rigor formal
+\newcommand{\nivel}[1]{%
+  \marginpar{\color{gray}\footnotesize N\raisebox{0.1ex}{\scriptsize #1}}%
+  {\color{gray!70}\small\textbf{(nível \raisebox{0.1ex}{\scriptsize #1})} }%
+}
+
+% ---------------------------------------------------------------
+% Configuração da capa
+% ---------------------------------------------------------------
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \center
+    \ABNTEXchapterfont\Large\textbf{Ecossistema OpenCode}
+    \vspace{0.2cm}
+    \ABNTEXchapterfont\large{Núcleo de Documentação Técnica}
+    \vspace{1.2cm}
+
+    {\ABNTEXchapterfont\bfseries\large MANUAL TÉCNICO}
+
+    \vspace{0.6cm}
+    {\ABNTEXchapterfont\bfseries\LARGE Arquitetura de Recuperação Aumentada por Geração (RAG)}
+
+    \vspace{0.4cm}
+    {\ABNTEXchapterfont\large Estado Atual e Proposta de Diversificação Estruturada via Sequência de Recamán}
+
+    \vspace{1.6cm}
+    {\large\textbf{Marcelo Claro Laranjeira}}
+
+    \vspace{0.2cm}
+    {\small ORCID: \texttt{0000-0001-8996-2887} \quad E-mail: \texttt{marceloclaro@gmail.com}}
+
+    \vspace{1.8cm}
+    {\large\textbf{Especificação formal:} SPEC-935-R456}
+
+    \vspace{0.3cm}
+    {\large\textbf{Rodada:} R456}
+
+    \vspace{0.3cm}
+    {\large\textbf{Data:} 30 de agosto de 2026}
+
+    \vspace{1.5cm}
+    {\small Documento técnico confidencial do ecossistema.}
+
+  \end{capa}%
+}
+
+% ---------------------------------------------------------------
+% Metadados
+% ---------------------------------------------------------------
+\titulo{Arquitetura de Recuperação Aumentada por Geração (RAG): Estado Atual e Proposta de Diversificação Estruturada via Sequência de Recamán}
+\autor{Marcelo Claro Laranjeira}
+\local{São Paulo, Brasil}
+\data{2026}
+\instituicao{Ecossistema OpenCode --- Documentação Técnica}
+\orientador{}
+\coorientador{}
+
+% =====================================================================
+\begin{document}
+
+% --- Capa, folha de rosto, resumo, sumário e listas ---
+\input{sec_00_capa_rosto}
+
+% --- Corpo (seções numeradas) ---
+\input{sec_01_introducao}
+\input{sec_02_problema_pesquisa}
+\input{sec_03_fundamentacao}
+\input{sec_04_estado_atual}
+\input{sec_05_proposta_recaman}
+\input{sec_06_calculos_specs}
+\input{sec_07_implementacoes}
+\input{sec_08_mapas_dados}
+\input{sec_09_consideracoes}
+
+% ---------------------------------------------------------------------
+% Referências (unificadas de todo o documento)
+% ---------------------------------------------------------------------
+\clearpage
+\bibliography{referencias}
+\bibliographystyle{abntex2-alf}
+
+\end{document}

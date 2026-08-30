@@ -1,0 +1,62 @@
+% =====================================================================
+% SEC_00 — Capa, folha de rosto, resumo, sumário e listas
+% =====================================================================
+
+% Capa
+\imprimircapa
+
+% Folha de rosto
+\newpage
+\begin{center}
+{\ABNTEXchapterfont\bfseries\large FOLHA DE ROSTO}
+\end{center}
+\vspace{0.8cm}
+\begin{center}
+{\large\imprimirtitulo}
+\end{center}
+\vspace{1cm}
+\begin{center}
+{\large Autor: \imprimirautor}
+\end{center}
+\vspace{0.2cm}
+\begin{center}
+{\small ORCID: \texttt{0000-0001-8996-2887} \quad E-mail: \texttt{marceloclaro@gmail.com}}
+\end{center}
+\vspace{0.5cm}
+\begin{center}
+{\normalsize Especificação: SPEC-935-R456 (Rodada R456)}
+\end{center}
+\vspace{1cm}
+
+\textbf{Resumo:} Este manual documenta a arquitetura de Recuperação Aumentada por
+Geração (RAG) do ecossistema, distinguindo rigorosamente o \textbf{estado atual}
+(implementado e observável no código-fonte) da \textbf{arquitetura-alvo proposta}
+(não implementada) que integra um Diversificador Estruturado baseado na sequência
+de Recamán para aumentar a diversidade semântico-estrutural dos resultados
+recuperados. O documento parte de um \textbf{problema de pesquisa} formalizado,
+que motiva o estudo de diversificação estruturada, e apresenta mapas de
+arquitetura, diagramas com legendas, cálculos e especificações técnicas
+reproduzíveis, apoiados em referências reais verificadas (DOIs e preprints arXiv).
+Foi escrito para uma trilha de leitura de profundidade progressiva --- do leitor
+de nível introdutório ao leitor de pós-graduação.
+
+\vspace{0.5cm}
+\textbf{Palavras-chave:} RAG; Recuperação de Informação; Recamán; Diversificação;
+Geração Aumentada por Recuperação; Arquitetura de Software; Problema de Pesquisa.
+
+\newpage
+
+% ---------------------------------------------------------------
+% Sumário
+% ---------------------------------------------------------------
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\clearpage
+
+% Lista de figuras e tabelas (formato banca)
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\clearpage
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\clearpage
