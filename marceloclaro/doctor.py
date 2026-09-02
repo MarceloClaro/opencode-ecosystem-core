@@ -44,6 +44,7 @@ EXTERNAL_CLIS = {
     "claude": "npm install -g @anthropic-ai/claude-code",
     "ollama": "curl -fsSL https://ollama.com/install.sh | sh",
     "scihub-cli": "pip install scihub-cli",
+    "runai": "curl -fsSL https://canirun.ai/runai/install.sh | bash",
 }
 
 
@@ -352,6 +353,36 @@ def _check_colibri() -> DoctorCheck:
                            "unavailable: não foi possível consultar o runtime Colibri.")
 
 
+def _check_runai() -> DoctorCheck:
+    """Verifica se o provisionador local runai está disponível.
+
+    runai não é um provider HTTP do core; é um launcher/provisionador opcional
+    para modelos locais via GGUF + llama.cpp. Portanto, ausência = warn.
+    """
+    try:
+        from integrations.runai import runai_provisioner
+
+        if not runai_provisioner.is_available():
+            return DoctorCheck(
+                "runai", "warn",
+                "runai ausente. Instale com: curl -fsSL https://canirun.ai/runai/install.sh | bash",
+            )
+        info = runai_provisioner.provider_info()
+        health = runai_provisioner.health_check()
+        if health.get("doctor_ok"):
+            return DoctorCheck(
+                "runai", "pass",
+                f"runai disponível (bin={info['binary']}); catálogo curado={info['catalog_models']} modelos; doctor OK.",
+            )
+        return DoctorCheck(
+            "runai", "warn",
+            f"runai encontrado (bin={info['binary']}), mas 'runai doctor' não confirmou prontidão (exit={health.get('doctor_exit_code')}).",
+        )
+    except Exception as exc:
+        return DoctorCheck("runai", "warn",
+                           f"runai indisponível/não consultável: {exc}")
+
+
 def _check_llm_reduction_metrics() -> DoctorCheck:
     """Verifica se as métricas de redução LLM estão disponíveis."""
     if not _METRICS_AVAILABLE:
@@ -576,6 +607,7 @@ def run_doctor() -> Dict[str, Any]:
         _check_llm_providers(),
         _check_litert_lm(),
         _check_colibri(),
+        _check_runai(),
         _check_llm_reduction_metrics(),
         _check_episteme_coverage(),
         _check_apm_integration(),

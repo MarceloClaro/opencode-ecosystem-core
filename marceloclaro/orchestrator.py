@@ -119,6 +119,9 @@ class MarceloClaroOrchestrator:
         self._harness_bridge = None
         self._harness_bridge_failed = False
         self._harness_reasoning_loop = None
+        # Provisionador local opcional runai (GGUF + llama.cpp) — lazy
+        self._runai_bridge = None
+        self._runai_bridge_failed = False
         # Buscas/RAG/Referências aprimorados (SPEC-935-R436) — lazy
         self._search_rag = None
         # Reversa Universal (SPEC-935-R437) — lazy
@@ -789,6 +792,7 @@ class MarceloClaroOrchestrator:
             "catalog_agents": self.catalog_size,
             "reasoning_engines": multi_reasoning.status(),
             "antigravity": antigravity_bridge.status(),
+            "runai": self.runai_status(),
             "evolution_avg_score": evolution_registry.average_score(),
         }
 
@@ -1017,6 +1021,56 @@ class MarceloClaroOrchestrator:
             return bridge.status()
         except Exception as exc:
             return {"available": False, "error": str(exc)}
+
+    @property
+    def runai(self):
+        """Bridge lazy do provisionador local runai."""
+        if getattr(self, "_runai_bridge", None) is not None:
+            return self._runai_bridge
+        if getattr(self, "_runai_bridge_failed", False):
+            return None
+        try:
+            from integrations.runai import runai_provisioner
+
+            self._runai_bridge = runai_provisioner
+            self._runai_bridge_failed = False
+        except Exception as exc:
+            logger.warning(f"[{self.id}] runai indisponível: {exc}")
+            self._runai_bridge = None
+            self._runai_bridge_failed = True
+            return None
+        return self._runai_bridge
+
+    def runai_status(self) -> Dict[str, Any]:
+        """Estado resumido do runai como provisionador local opcional."""
+        bridge = self.runai
+        if bridge is None:
+            return {"available": False, "reason": "runai bridge indisponível"}
+        try:
+            return {
+                "available": bridge.is_available(),
+                "provider": bridge.provider_info(),
+                "health": bridge.health_check(),
+            }
+        except Exception as exc:
+            return {"available": False, "error": str(exc)}
+
+    def runai_pull_model(self, model_id: str) -> Dict[str, Any]:
+        """Baixa/provisiona um modelo local via `runai pull <model_id>`."""
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.pull(model_id)
+
+    def runai_launch_model(self, model_id: str) -> Dict[str, Any]:
+        """Lança um chat local via `runai run <model_id>`.
+
+        Escopo honesto: launcher CLI best-effort, sem alegar API de completude.
+        """
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.run(model_id)
 
     def harness_reasoning_status(self) -> Dict[str, Any]:
         try:
