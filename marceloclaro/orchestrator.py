@@ -1062,6 +1062,28 @@ class MarceloClaroOrchestrator:
             return {"ok": False, "error": "runai bridge indisponível"}
         return bridge.pull(model_id)
 
+    def runai_help(self) -> Dict[str, Any]:
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.help()
+
+    def runai_version(self) -> Dict[str, Any]:
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.version()
+
+    def runai_installer_diagnosis(self) -> Dict[str, Any]:
+        bridge = self.runai
+        if bridge is None:
+            try:
+                from integrations.runai import runai_provisioner
+                return runai_provisioner.installer_diagnosis()
+            except Exception as exc:
+                return {"ok": False, "detail": str(exc)}
+        return bridge.installer_diagnosis()
+
     def runai_launch_model(self, model_id: str) -> Dict[str, Any]:
         """Lança um chat local via `runai run <model_id>`.
 

@@ -82,6 +82,14 @@ def _get_openai():
         return None, {}
 
 
+def _get_runai():
+    try:
+        from integrations.runai import runai_provisioner, MODELS as RUNAI_MODELS
+        return runai_provisioner, RUNAI_MODELS
+    except ImportError:
+        return None, {}
+
+
 def _get_colibri():
     try:
         from integrations.colibri_provider import colibri_provider, MODELS as COLI_MODELS
@@ -309,13 +317,15 @@ class ModelRouter:
         self._zen_provider, self._zen_models = _get_opencode_zen()
         self._lt_provider, self._lt_models = _get_litert_lm()
         self._oa_provider, self._oa_models = _get_openai()
+        self._runai_provider, self._runai_models = _get_runai()
         logger.info(
-            "ModelRouter inicializado — %d perfis, Go=%s, Zen=%s, LiteRT=%s, OpenAI=%s",
+            "ModelRouter inicializado — %d perfis, Go=%s, Zen=%s, LiteRT=%s, OpenAI=%s, runai=%s",
             len(self.profiles),
             "OK" if self._go_provider else "indisponível",
             "OK" if self._zen_provider else "indisponível",
             "OK" if self._lt_provider else "indisponível",
             "OK" if self._oa_provider else "indisponível",
+            "OK" if self._runai_provider else "indisponível",
         )
 
     def route(
@@ -357,6 +367,12 @@ class ModelRouter:
 
         # Override forçado
         if force_provider and force_model:
+            if force_provider == "runai":
+                raise ValueError(
+                    "'runai' é um provisionador local/launcher CLI, não um provider "
+                    "de completude do ModelRouter. Use orchestrator.runai_pull_model() "
+                    "ou orchestrator.runai_launch_model()."
+                )
             selected_model = self._normalize_model_for_provider(
                 force_provider,
                 force_model,
@@ -472,6 +488,8 @@ class ModelRouter:
             models.extend(self._lt_provider.list_models(local_only=True))
         if self._oa_provider:
             models.extend(self._oa_provider.list_models())
+        if self._runai_provider:
+            models.extend(self._runai_provider.list_models())
         return models
 
     def list_profiles(self) -> List[Dict[str, Any]]:
@@ -515,12 +533,21 @@ class ModelRouter:
                     "authenticated": self._is_authenticated("openai"),
                     "models": len(self._oa_models),
                 },
+                "runai": {
+                    "loaded": self._runai_provider is not None,
+                    "available": bool(self._runai_provider and self._runai_provider.is_available()),
+                    "authenticated": self._is_authenticated("runai"),
+                    "models": len(self._runai_models),
+                    "scope": "provisionador local opcional (não completion provider)",
+                    "provisioning_only": True,
+                },
             },
             "total_models": (
                 len(self._go_models)
                 + len(self._zen_models)
                 + (len(CANONICAL_LITERT_MODEL_IDS) if self._lt_provider else 0)
                 + len(self._oa_models)
+                + len(self._runai_models)
             ),
         }
 
@@ -616,6 +643,8 @@ class ModelRouter:
             )
         if provider_id == "openai":
             return self._oa_models.get(model_id, {})
+        if provider_id == "runai":
+            return self._runai_models.get(model_id, {})
         return {}
 
     def _is_authenticated(self, provider_id: str) -> bool:
@@ -628,6 +657,8 @@ class ModelRouter:
             return True  # servidor local, sempre autenticado
         if provider_id == "openai" and self._oa_provider:
             return bool(self._oa_provider._api_key)
+        if provider_id == "runai" and self._runai_provider:
+            return bool(self._runai_provider.is_available())
         return False
 
     def _get_provider(self, provider_id: str):

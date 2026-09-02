@@ -363,6 +363,13 @@ def _check_runai() -> DoctorCheck:
         from integrations.runai import runai_provisioner
 
         if not runai_provisioner.is_available():
+            diagnosis = runai_provisioner.installer_diagnosis()
+            if diagnosis.get("status_code") == 404:
+                return DoctorCheck(
+                    "runai", "warn",
+                    "runai ausente e o pacote npm documentado pelo instalador respondeu 404; "
+                    "há inconsistência upstream em https://canirun.ai/runai/install.sh / @canirun/runai.",
+                )
             return DoctorCheck(
                 "runai", "warn",
                 "runai ausente. Instale com: curl -fsSL https://canirun.ai/runai/install.sh | bash",
