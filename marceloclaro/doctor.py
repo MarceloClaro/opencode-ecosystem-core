@@ -209,7 +209,19 @@ def _check_external_clis() -> DoctorCheck:
     Code para desenvolvimento neste projeto, Ollama para modelos locais,
     scihub-cli como fallback de download de PDF no pipeline de pesquisa
     quando não há acesso open-access direto — ver `research/downloader.py`)."""
-    missing = {name: cmd for name, cmd in EXTERNAL_CLIS.items() if shutil.which(name) is None}
+    missing = {}
+    for name, cmd in EXTERNAL_CLIS.items():
+        if name == "runai":
+            try:
+                from integrations.runai import runai_provisioner
+                if runai_provisioner.is_available():
+                    continue
+            except Exception:
+                pass
+            missing[name] = cmd
+            continue
+        if shutil.which(name) is None:
+            missing[name] = cmd
     if not missing:
         return DoctorCheck(
             "external_clis", "pass",
@@ -368,7 +380,8 @@ def _check_runai() -> DoctorCheck:
                 return DoctorCheck(
                     "runai", "warn",
                     "runai ausente e o pacote npm documentado pelo instalador respondeu 404; "
-                    "há inconsistência upstream em https://canirun.ai/runai/install.sh / @canirun/runai.",
+                    "há inconsistência upstream em https://canirun.ai/runai/install.sh / @canirun/runai. "
+                    "Workaround suportado: clone https://github.com/midudev/canirun.ai e defina RUNAI_SOURCE_DIR para o checkout.",
                 )
             return DoctorCheck(
                 "runai", "warn",
@@ -376,14 +389,15 @@ def _check_runai() -> DoctorCheck:
             )
         info = runai_provisioner.provider_info()
         health = runai_provisioner.health_check()
+        mode = info.get("mode", "unknown")
         if health.get("doctor_ok"):
             return DoctorCheck(
                 "runai", "pass",
-                f"runai disponível (bin={info['binary']}); catálogo curado={info['catalog_models']} modelos; doctor OK.",
+                f"runai disponível (modo={mode}, bin={info['binary']}); catálogo curado={info['catalog_models']} modelos; doctor OK.",
             )
         return DoctorCheck(
             "runai", "warn",
-            f"runai encontrado (bin={info['binary']}), mas 'runai doctor' não confirmou prontidão (exit={health.get('doctor_exit_code')}).",
+            f"runai encontrado (modo={mode}, bin={info['binary']}), mas 'runai doctor' não confirmou prontidão (exit={health.get('doctor_exit_code')}).",
         )
     except Exception as exc:
         return DoctorCheck("runai", "warn",
