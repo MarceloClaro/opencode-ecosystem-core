@@ -41,6 +41,52 @@ def test_runai_doctor_success(monkeypatch):
     assert result["stdout"] == "doctor ok"
 
 
+def test_runai_source_mode_detection(monkeypatch, tmp_path):
+    root = tmp_path / "canirun"
+    (root / "packages" / "runai").mkdir(parents=True)
+    (root / "packages" / "runai" / "package.json").write_text("{}")
+    (root / "node_modules").mkdir()
+    (root / "packages" / "compatibility" / "dist").mkdir(parents=True)
+    (root / "packages" / "models" / "dist").mkdir(parents=True)
+
+    monkeypatch.setattr("shutil.which", lambda name: None if name == "runai" else f"/usr/bin/{name}")
+    bridge = RunAIProvisioner(binary="runai", source_dir=str(root), bun_binary="bun", pnpm_binary="pnpm")
+    assert bridge.is_binary_available() is False
+    assert bridge.has_source_checkout() is True
+    assert bridge.is_source_available() is True
+    assert bridge.runtime_mode() == "source"
+
+
+def test_runai_source_cli_executes_pnpm_dev(monkeypatch, tmp_path):
+    root = tmp_path / "canirun"
+    (root / "packages" / "runai").mkdir(parents=True)
+    (root / "packages" / "runai" / "package.json").write_text("{}")
+    (root / "node_modules").mkdir()
+    (root / "packages" / "compatibility" / "dist").mkdir(parents=True)
+    (root / "packages" / "models" / "dist").mkdir(parents=True)
+
+    monkeypatch.setattr("shutil.which", lambda name: None if name == "runai" else f"/usr/bin/{name}")
+    captured = {}
+
+    class R:
+        returncode = 0
+        stdout = "doctor ok"
+        stderr = ""
+
+    def fake_run(args, **kwargs):
+        captured["args"] = args
+        captured["cwd"] = kwargs.get("cwd")
+        return R()
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    bridge = RunAIProvisioner(binary="runai", source_dir=str(root), bun_binary="bun", pnpm_binary="pnpm")
+    result = bridge.doctor()
+    assert result["ok"] is True
+    assert result["mode"] == "source"
+    assert captured["args"][:5] == ["/usr/bin/pnpm", "--filter", "@canirun/runai", "run", "dev"]
+    assert captured["cwd"] == str(root)
+
+
 def test_runai_pull_calls_correct_command(monkeypatch):
     monkeypatch.setattr("shutil.which", lambda _: "/usr/bin/runai")
     captured = {}
@@ -59,6 +105,33 @@ def test_runai_pull_calls_correct_command(monkeypatch):
     result = bridge.pull("qwen3.5-4b")
     assert result["ok"] is True
     assert captured["args"] == ["runai", "pull", "qwen3.5-4b"]
+
+
+def test_runai_browse_recommend_list_show(monkeypatch):
+    monkeypatch.setattr("shutil.which", lambda _: "/usr/bin/runai")
+    calls = []
+
+    class R:
+        returncode = 0
+        stdout = "{}"
+        stderr = ""
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        return R()
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    bridge = RunAIProvisioner(binary="runai")
+    assert bridge.doctor(json_mode=True)["ok"] is True
+    assert bridge.browse("qwen", limit=3, json_mode=True)["ok"] is True
+    assert bridge.recommend(top=2, json_mode=True)["ok"] is True
+    assert bridge.list_installed(json_mode=True)["ok"] is True
+    assert bridge.show("qwen3.5-4b", json_mode=True)["ok"] is True
+    assert calls[0] == ["runai", "doctor", "--json"]
+    assert calls[1] == ["runai", "browse", "qwen", "--limit", "3", "--json"]
+    assert calls[2] == ["runai", "recommend", "--top", "2", "--json"]
+    assert calls[3] == ["runai", "list", "--json"]
+    assert calls[4] == ["runai", "show", "qwen3.5-4b", "--json"]
 
 
 def test_runai_run_launches_subprocess(monkeypatch):
@@ -162,6 +235,18 @@ def test_runai_installer_diagnosis_404(monkeypatch):
     assert diag["status_code"] == 404
 
 
+def test_runai_source_diagnosis(monkeypatch, tmp_path):
+    root = tmp_path / "canirun"
+    (root / "packages" / "runai").mkdir(parents=True)
+    (root / "packages" / "runai" / "package.json").write_text("{}")
+    (root / "node_modules").mkdir()
+    monkeypatch.setattr("shutil.which", lambda name: None if name == "runai" else f"/usr/bin/{name}")
+    bridge = RunAIProvisioner(binary="runai", source_dir=str(root), bun_binary="bun", pnpm_binary="pnpm")
+    diag = bridge.source_diagnosis()
+    assert diag["detected"] is True
+    assert diag["dependencies_installed"] is True
+
+
 def test_doctor_check_runai_warns_on_upstream_404(monkeypatch):
     monkeypatch.setattr("shutil.which", lambda _: None)
 
@@ -198,6 +283,38 @@ def test_doctor_check_runai_pass_when_available(monkeypatch):
     assert "doctor OK" in check.detail
 
 
+def test_external_clis_treats_runai_source_mode_as_available(monkeypatch, tmp_path):
+    root = tmp_path / "canirun"
+    (root / "packages" / "runai").mkdir(parents=True)
+    (root / "packages" / "runai" / "package.json").write_text("{}")
+    (root / "node_modules").mkdir()
+    (root / "packages" / "compatibility" / "dist").mkdir(parents=True)
+    (root / "packages" / "models" / "dist").mkdir(parents=True)
+
+    def fake_which(name):
+        if name == "runai":
+            return None
+        if name in {"bun", "pnpm", "opencode", "agy", "claude", "ollama"}:
+            return f"/usr/bin/{name}"
+        return None
+
+    monkeypatch.setattr("shutil.which", fake_which)
+    monkeypatch.setenv("RUNAI_SOURCE_DIR", str(root))
+    monkeypatch.setenv("RUNAI_BUN_BIN", "bun")
+    monkeypatch.setenv("RUNAI_PNPM_BIN", "pnpm")
+    from marceloclaro import doctor as doctor_mod
+    import integrations.runai as runai_mod
+
+    monkeypatch.setattr(
+        runai_mod,
+        "runai_provisioner",
+        RunAIProvisioner(binary="runai", source_dir=str(root), bun_binary="bun", pnpm_binary="pnpm"),
+    )
+
+    check = doctor_mod._check_external_clis()
+    assert "runai" not in check.detail
+
+
 def test_orchestrator_runai_utilities(monkeypatch):
     monkeypatch.setattr("shutil.which", lambda _: "/usr/bin/runai")
 
@@ -225,10 +342,20 @@ def test_orchestrator_runai_utilities(monkeypatch):
     orch = MarceloClaroOrchestrator(auto_load_agents=False)
     status = orch.runai_status()
     assert status["available"] is True
+    doctor_res = orch.runai_doctor(json_mode=True)
+    assert doctor_res["ok"] is True
     help_res = orch.runai_help()
     assert help_res["ok"] is True
     version_res = orch.runai_version()
     assert version_res["ok"] is True
+    browse_res = orch.runai_browse("qwen", limit=2, json_mode=True)
+    assert browse_res["ok"] is True
+    recommend_res = orch.runai_recommend(top=2, json_mode=True)
+    assert recommend_res["ok"] is True
+    list_res = orch.runai_list_installed(json_mode=True)
+    assert list_res["ok"] is True
+    show_res = orch.runai_show("qwen3.5-4b", json_mode=True)
+    assert show_res["ok"] is True
     pull = orch.runai_pull_model("qwen3.5-4b")
     assert pull["ok"] is True
     launched = orch.runai_launch_model("qwen3.5-4b")

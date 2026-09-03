@@ -1074,6 +1074,36 @@ class MarceloClaroOrchestrator:
             return {"ok": False, "error": "runai bridge indisponível"}
         return bridge.version()
 
+    def runai_doctor(self, json_mode: bool = False) -> Dict[str, Any]:
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.doctor(json_mode=json_mode)
+
+    def runai_browse(self, query: str = "", limit: int = 5, json_mode: bool = True) -> Dict[str, Any]:
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.browse(query=query, limit=limit, json_mode=json_mode)
+
+    def runai_recommend(self, top: int = 5, json_mode: bool = True) -> Dict[str, Any]:
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.recommend(top=top, json_mode=json_mode)
+
+    def runai_list_installed(self, json_mode: bool = True) -> Dict[str, Any]:
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.list_installed(json_mode=json_mode)
+
+    def runai_show(self, model_id: str, json_mode: bool = True) -> Dict[str, Any]:
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.show(model_id=model_id, json_mode=json_mode)
+
     def runai_installer_diagnosis(self) -> Dict[str, Any]:
         bridge = self.runai
         if bridge is None:
