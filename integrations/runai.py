@@ -1,16 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-RunAI Provisioner — Ponte opcional para provisionamento local via canirun.ai
-============================================================================
+RunAI Provisioner — Ponte para o runtime local canirun.ai (CLI + API HTTP)
+========================================================================
 
-Escopo honesto: o `runai` é tratado aqui como um provisionador/launcher de
-modelos locais via CLI (`doctor`, `pull`, `run`), NÃO como um provider HTTP de
-completude. O objetivo é reduzir fricção de onboarding e seleção manual de
-quantização GGUF/llama.cpp por hardware.
+Escopo honesto: o `runai` é um runtime local que oferece (a) provisionamento/
+launcher de modelos via CLI (`doctor`, `pull`, `run`, `serve`) e (b) uma API
+OpenAI-compatível quando o daemon `serve` está ativo (`/v1/chat/completions`,
+`/v1/completions`, `/v1/embeddings`, `/v1/models`, `/health`).
+
+Nesta ponte, o `runai` é tratado como um provisionador/launcher APENAS quando
+o daemon não está ativo. Quando `serve` está rodando, os métodos `chat()`,
+`complete()` e `embed()` permitem inferência real de ponta a ponta.
+
+Nota de compatibilidade de modelos: alguns GGUFs (ex.: Qwen 3) geram tokens
+de controle que detokenizam para string vazia com node-llama-cpp 3.20.0 —
+a geração via `LlamaChatSession` retorna vazio para `qwen3-0.6b` e
+`qwen3.5-2b`, embora embeddings funcionem. Modelos com tokenizer maduro
+(ex.: `llama3.2-1b`) geram texto corretamente. Ver SPEC-935-R467.
 """
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -414,6 +425,172 @@ class RunAIProvisioner:
             args.append("--json")
         return self._run_cli(args, timeout=60.0)
 
+    # ------------------------------------------------------------------ #
+    # Daemon HTTP (serve) — inferência real de ponta a ponta
+    # ------------------------------------------------------------------ #
+
+    DEFAULT_PORT = 11435
+
+    def http_base_url(self, port: Optional[int] = None) -> str:
+        """URL base da API OpenAI-compatível do runai."""
+        return f"http://127.0.0.1:{port or int(os.environ.get('RUNAI_PORT', self.DEFAULT_PORT))}"
+
+    def _http_get_json(self, path: str, timeout: float = 10.0) -> Dict[str, Any]:
+        with urllib.request.urlopen(self.http_base_url() + path, timeout=timeout) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+
+    def _http_post_json(self, path: str, payload: Dict[str, Any], timeout: float = 120.0) -> Dict[str, Any]:
+        data = json.dumps(payload).encode("utf-8")
+        req = urllib.request.Request(
+            self.http_base_url() + path,
+            data=data,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+
+    def api_health(self) -> Dict[str, Any]:
+        """Verifica /health do daemon. Nunca lança exceção — retorna dict."""
+        try:
+            body = self._http_get_json("/health", timeout=5.0)
+            return {"ok": True, **body}
+        except Exception as exc:  # pragma: no cover - daemon ausente/offline
+            return {"ok": False, "detail": str(exc)}
+
+    def is_serving(self) -> bool:
+        """True se o daemon HTTP do runai está ativo e respondendo."""
+        return bool(self.api_health().get("ok"))
+
+    def serve(self, model: Optional[str] = None, port: Optional[int] = None, detach: bool = True) -> Dict[str, Any]:
+        """Inicia o daemon `runai serve`.
+
+        Em detach mode, o runai lança o daemon em background e retorna
+        imediatamente; usamos um timeout curto para não travar o caller.
+        """
+        args = ["serve"]
+        if detach:
+            args.append("--detach")
+        if model:
+            args.extend(["--model", self.resolve_model_id(model)])
+        if port:
+            args.extend(["--port", str(port)])
+        return self._run_cli(args, timeout=60.0)
+
+    def stop(self) -> Dict[str, Any]:
+        """Para o daemon `runai serve` em background."""
+        return self._run_cli(["stop"], timeout=30.0)
+
+    def chat(
+        self,
+        messages: List[Dict[str, str]],
+        model: str = "auto",
+        *,
+        temperature: Optional[float] = None,
+        max_tokens: Optional[int] = None,
+        top_p: Optional[float] = None,
+        stream: bool = False,
+        timeout: float = 120.0,
+    ) -> Dict[str, Any]:
+        """POST /v1/chat/completions — inferência real (requer daemon ativo).
+
+        Em caso de daemon ausente, retorna erro estruturado sugerindo `serve()`.
+        """
+        if not self.is_serving():
+            return {
+                "ok": False,
+                "error": "daemon_offline",
+                "detail": "Daemon runai não está ativo. Use runai_serve()/runai serve --detach.",
+                "hint": "orchestrator.runai_serve(model=...)",
+            }
+        payload: Dict[str, Any] = {"model": self.resolve_model_id(model), "messages": messages}
+        if temperature is not None:
+            payload["temperature"] = temperature
+        if max_tokens is not None:
+            payload["max_tokens"] = max_tokens
+        if top_p is not None:
+            payload["top_p"] = top_p
+        if stream:
+            # Streaming SSE não é suportado pelo cliente HTTP simples desta
+            # ponte; retornamos erro explícito em vez de fingir suporte.
+            return {
+                "ok": False,
+                "error": "stream_unsupported",
+                "detail": "Streaming SSE não é suportado por esta ponte; use stream=False.",
+            }
+        try:
+            body = self._http_post_json("/v1/chat/completions", payload, timeout=timeout)
+            return {"ok": True, "response": body}
+        except Exception as exc:
+            return {"ok": False, "error": "http_error", "detail": str(exc)}
+
+    def complete(
+        self,
+        prompt: str,
+        model: str = "auto",
+        *,
+        temperature: Optional[float] = None,
+        max_tokens: Optional[int] = None,
+        timeout: float = 120.0,
+    ) -> Dict[str, Any]:
+        """POST /v1/completions — inferência real (requer daemon ativo)."""
+        if not self.is_serving():
+            return {
+                "ok": False,
+                "error": "daemon_offline",
+                "detail": "Daemon runai não está ativo. Use runai_serve()/runai serve --detach.",
+                "hint": "orchestrator.runai_serve(model=...)",
+            }
+        payload: Dict[str, Any] = {"model": self.resolve_model_id(model), "prompt": prompt}
+        if temperature is not None:
+            payload["temperature"] = temperature
+        if max_tokens is not None:
+            payload["max_tokens"] = max_tokens
+        try:
+            body = self._http_post_json("/v1/completions", payload, timeout=timeout)
+            return {"ok": True, "response": body}
+        except Exception as exc:
+            return {"ok": False, "error": "http_error", "detail": str(exc)}
+
+    def embed(
+        self,
+        text: str,
+        model: str = "auto",
+        *,
+        timeout: float = 60.0,
+    ) -> Dict[str, Any]:
+        """POST /v1/embeddings — embeddings reais (requer daemon ativo)."""
+        if not self.is_serving():
+            return {
+                "ok": False,
+                "error": "daemon_offline",
+                "detail": "Daemon runai não está ativo. Use runai_serve()/runai serve --detach.",
+                "hint": "orchestrator.runai_serve(model=...)",
+            }
+        try:
+            body = self._http_post_json(
+                "/v1/embeddings",
+                {"model": self.resolve_model_id(model), "input": text},
+                timeout=timeout,
+            )
+            return {"ok": True, "response": body}
+        except Exception as exc:
+            return {"ok": False, "error": "http_error", "detail": str(exc)}
+
+    def list_server_models(self) -> Dict[str, Any]:
+        """GET /v1/models — modelos disponíveis no daemon ativo."""
+        if not self.is_serving():
+            return {
+                "ok": False,
+                "error": "daemon_offline",
+                "detail": "Daemon runai não está ativo. Use runai_serve()/runai serve --detach.",
+            }
+        try:
+            body = self._http_get_json("/v1/models", timeout=10.0)
+            return {"ok": True, "response": body}
+        except Exception as exc:
+            return {"ok": False, "error": "http_error", "detail": str(exc)}
+
     def run(self, model_id: str) -> Dict[str, Any]:
         """Lança `runai run <model_id>` em subprocesso best-effort.
 
@@ -516,6 +693,7 @@ class RunAIProvisioner:
             "stderr": "runai ausente",
             "command": [self.binary, "doctor"],
         }
+        serving = self.is_serving() if available else False
         return {
             "provider": PROVIDER_ID,
             "available": available,
@@ -525,6 +703,8 @@ class RunAIProvisioner:
             "aliases": dict(MODEL_ALIASES),
             "doctor_ok": bool(result.get("ok")),
             "doctor_exit_code": result.get("exit_code"),
+            "serving": serving,
+            "api_base": self.http_base_url() if serving else None,
             "installer": self.installer_diagnosis() if not self.is_binary_available() else {"ok": True, "detail": "Binário local encontrado; diagnóstico upstream opcional."},
             "source": self.source_diagnosis(),
         }
@@ -537,10 +717,17 @@ class RunAIProvisioner:
             "mode": self.runtime_mode(),
             "catalog_models": len(MODELS),
             "model_aliases": dict(MODEL_ALIASES),
-            "scope": "provisionamento/launcher CLI local (não HTTP provider)",
+            "serving": self.is_serving(),
+            "api_base": self.http_base_url(),
+            "scope": "provisionamento/launcher CLI local + API OpenAI-compatível quando daemon ativo",
             "supported_commands": [
                 "doctor[--json]", "pull", "run", "browse", "recommend",
-                "list", "show", "--help", "--version|version"
+                "list", "show", "serve[--detach]", "stop", "ps",
+                "--help", "--version|version",
+            ],
+            "http_endpoints": [
+                "GET /health", "GET /v1/models",
+                "POST /v1/chat/completions", "POST /v1/completions", "POST /v1/embeddings",
             ],
             "installer_package_url": NPM_PACKAGE_URL,
             "source_repository_url": SOURCE_REPOSITORY_URL,

@@ -1,7 +1,8 @@
-"""Testes da integração opcional do runai (SPEC-935-R464)."""
+"""Testes da integração opcional do runai (SPEC-935-R464/R465/R466/R467)."""
 
 from __future__ import annotations
 
+import json
 import subprocess
 import urllib.error
 
@@ -365,6 +366,7 @@ def test_orchestrator_runai_utilities(monkeypatch):
 
 def test_model_router_status_inventories_runai(monkeypatch):
     monkeypatch.setattr("shutil.which", lambda _: "/usr/bin/runai")
+    monkeypatch.setattr(RunAIProvisioner, "is_serving", lambda self: False)
 
     class R:
         returncode = 0
@@ -383,11 +385,215 @@ def test_model_router_status_inventories_runai(monkeypatch):
 
 def test_model_router_refuses_runai_as_completion_provider(monkeypatch):
     monkeypatch.setattr("shutil.which", lambda _: "/usr/bin/runai")
+    monkeypatch.setattr(RunAIProvisioner, "is_serving", lambda self: False)
     from integrations.model_router import ModelRouter
 
     router = ModelRouter()
     with pytest.raises(ValueError):
         router.route("coding", force_provider="runai", force_model="qwen3.5-4b")
+
+
+def test_model_router_allows_runai_when_daemon_serving(monkeypatch):
+    monkeypatch.setattr("shutil.which", lambda _: "/usr/bin/runai")
+    monkeypatch.setattr(RunAIProvisioner, "is_serving", lambda self: True)
+    monkeypatch.setattr(RunAIProvisioner, "is_available", lambda self: True)
+    from integrations.model_router import ModelRouter
+
+    router = ModelRouter()
+    result = router.route("coding", force_provider="runai", force_model="auto")
+    assert result.provider_id == "runai"
+    assert result.authenticated is True
+    assert result.mock_mode is False
+
+
+def test_orchestrator_runai_http_utilities(monkeypatch):
+    """Orquestrador expõe serve/stop/chat/complete/embed delegando à ponte."""
+    monkeypatch.setattr("shutil.which", lambda _: "/usr/bin/runai")
+    from marceloclaro.orchestrator import MarceloClaroOrchestrator
+
+    orch = MarceloClaroOrchestrator(auto_load_agents=False)
+    bridge = orch.runai
+    assert bridge is not None
+
+    monkeypatch.setattr(bridge, "is_serving", lambda: False)
+    assert orch.runai_is_serving() is False
+    chat_offline = orch.runai_chat([{"role": "user", "content": "oi"}])
+    assert chat_offline["ok"] is False
+    assert chat_offline["error"] == "daemon_offline"
+
+    captured = {}
+    monkeypatch.setattr(
+        bridge,
+        "is_serving",
+        lambda: True,
+    )
+
+    def _fake_post(path, payload, timeout=120.0):
+        captured["path"] = path
+        captured["payload"] = payload
+        return {"choices": [{"message": {"content": "resposta"}}]}
+
+    monkeypatch.setattr(bridge, "_http_post_json", _fake_post)
+    ok_chat = orch.runai_chat(
+        [{"role": "user", "content": "oi"}],
+        model="llama3.2-1b",
+        max_tokens=32,
+    )
+    assert ok_chat["ok"] is True
+    assert captured["path"] == "/v1/chat/completions"
+    assert captured["payload"]["max_tokens"] == 32
+
+    ok_comp = orch.runai_complete("hello", model="auto", max_tokens=8)
+    assert ok_comp["ok"] is True
+    assert captured["path"] == "/v1/completions"
+    assert captured["payload"]["prompt"] == "hello"
+
+    ok_emb = orch.runai_embed("hello world")
+    assert ok_emb["ok"] is True
+    assert captured["path"] == "/v1/embeddings"
+
+    monkeypatch.setattr(bridge, "serve", lambda **kw: {"ok": True, "pid": 123})
+    serve_res = orch.runai_serve(model="llama3.2-1b")
+    assert serve_res["ok"] is True
+    assert serve_res["pid"] == 123
+
+    monkeypatch.setattr(bridge, "stop", lambda: {"ok": True})
+    stop_res = orch.runai_stop()
+    assert stop_res["ok"] is True
+
+
+def test_runai_http_base_url_respects_env(monkeypatch):
+    bridge = RunAIProvisioner(binary="runai")
+    assert bridge.http_base_url() == "http://127.0.0.1:11435"
+    monkeypatch.setenv("RUNAI_PORT", "9999")
+    assert bridge.http_base_url() == "http://127.0.0.1:9999"
+    assert bridge.http_base_url(port=7000) == "http://127.0.0.1:7000"
+
+
+def test_runai_is_serving_false_when_http_unreachable(monkeypatch):
+    def boom(*a, **k):
+        raise urllib.error.URLError("connection refused")
+
+    monkeypatch.setattr(urllib.request, "urlopen", boom)
+    bridge = RunAIProvisioner(binary="runai")
+    assert bridge.is_serving() is False
+    health = bridge.api_health()
+    assert health["ok"] is False
+    assert "connection refused" in health["detail"]
+
+
+class _FakeHTTPResponse:
+    def __init__(self, payload):
+        self._payload = payload
+
+    def read(self):
+        return json.dumps(self._payload).encode("utf-8")
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
+def test_runai_chat_posts_payload_when_serving(monkeypatch):
+    bridge = RunAIProvisioner(binary="runai")
+    monkeypatch.setattr(bridge, "is_serving", lambda: True)
+
+    captured = {}
+
+    def fake_urlopen(req, timeout=120.0):
+        captured["url"] = req.full_url
+        captured["data"] = json.loads(req.data.decode("utf-8"))
+        return _FakeHTTPResponse(
+            {"choices": [{"message": {"content": "Paris"}}], "usage": {}}
+        )
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    result = bridge.chat([{"role": "user", "content": "Capital of France?"}], model="auto", max_tokens=16)
+    assert result["ok"] is True
+    assert result["response"]["choices"][0]["message"]["content"] == "Paris"
+    assert captured["url"] == "http://127.0.0.1:11435/v1/chat/completions"
+    assert captured["data"]["max_tokens"] == 16
+    assert captured["data"]["messages"][0]["content"] == "Capital of France?"
+
+
+def test_runai_complete_posts_payload_when_serving(monkeypatch):
+    bridge = RunAIProvisioner(binary="runai")
+    monkeypatch.setattr(bridge, "is_serving", lambda: True)
+    captured = {}
+
+    def fake_urlopen(req, timeout=120.0):
+        captured["data"] = json.loads(req.data.decode("utf-8"))
+        return _FakeHTTPResponse({"choices": [{"text": "Paris."}], "usage": {}})
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    result = bridge.complete("The capital of France is", temperature=0.4)
+    assert result["ok"] is True
+    assert result["response"]["choices"][0]["text"] == "Paris."
+    assert captured["data"]["prompt"] == "The capital of France is"
+    assert captured["data"]["temperature"] == 0.4
+
+
+def test_runai_embed_posts_payload_when_serving(monkeypatch):
+    bridge = RunAIProvisioner(binary="runai")
+    monkeypatch.setattr(bridge, "is_serving", lambda: True)
+    captured = {}
+
+    def fake_urlopen(req, timeout=120.0):
+        captured["data"] = json.loads(req.data.decode("utf-8"))
+        return _FakeHTTPResponse({"data": [{"embedding": [1.0, 2.0]}]})
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    result = bridge.embed("hello world")
+    assert result["ok"] is True
+    assert result["response"]["data"][0]["embedding"] == [1.0, 2.0]
+    assert captured["data"]["input"] == "hello world"
+
+
+def test_runai_list_server_models_when_serving(monkeypatch):
+    bridge = RunAIProvisioner(binary="runai")
+    monkeypatch.setattr(bridge, "is_serving", lambda: True)
+
+    def fake_urlopen(*a, **k):
+        return _FakeHTTPResponse({"object": "list", "data": [{"id": "auto"}]})
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    result = bridge.list_server_models()
+    assert result["ok"] is True
+    assert result["response"]["data"][0]["id"] == "auto"
+
+
+def test_runai_chat_returns_offline_when_daemon_down(monkeypatch):
+    monkeypatch.setattr(RunAIProvisioner, "is_serving", lambda self: False)
+    bridge = RunAIProvisioner(binary="runai")
+    result = bridge.chat([{"role": "user", "content": "oi"}])
+    assert result["ok"] is False
+    assert result["error"] == "daemon_offline"
+    assert "serve" in result["hint"]
+
+
+def test_runai_serve_and_stop_commands(monkeypatch):
+    monkeypatch.setattr("shutil.which", lambda _: "/usr/bin/runai")
+    captured = []
+
+    class R:
+        returncode = 0
+        stdout = "daemon started"
+        stderr = ""
+
+    def fake_run(args, **kwargs):
+        captured.append(args)
+        return R()
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    bridge = RunAIProvisioner(binary="runai")
+    serve_res = bridge.serve(model="llama3.2-1b", detach=True)
+    assert serve_res["ok"] is True
+    assert captured[-1] == ["runai", "serve", "--detach", "--model", "llama3.2-1b"]
+    stop_res = bridge.stop()
+    assert stop_res["ok"] is True
+    assert captured[-1] == ["runai", "stop"]
 
 
 @pytest.mark.skipif(
@@ -402,3 +608,33 @@ def test_runai_real_doctor_smoke():
     assert result["exit_code"] in (0, 1)
     assert isinstance(result["stdout"], str)
     assert isinstance(result["stderr"], str)
+
+
+@pytest.mark.skipif(
+    __import__("os").environ.get("RUNAI_REAL") != "1",
+    reason="Smoke real HTTP só executa sob RUNAI_REAL=1",
+)
+def test_runai_real_http_inference_smoke():
+    """Valida inferência real via daemon HTTP do runai (se disponível)."""
+    bridge = RunAIProvisioner(binary="runai", timeout=120.0)
+    if not bridge.is_serving():
+        pytest.skip("daemon runai não está ativo em http://127.0.0.1:11435")
+    models = bridge.list_server_models()
+    assert models["ok"] is True
+    ids = [m["id"] for m in models["response"]["data"]]
+    # Pelo menos o alias "auto" deve existir
+    assert "auto" in ids
+    chat = bridge.chat(
+        [{"role": "user", "content": "What is the capital of France? Answer in one word."}],
+        model="auto",
+        max_tokens=16,
+    )
+    assert chat["ok"] is True
+    content = chat["response"]["choices"][0]["message"]["content"]
+    assert isinstance(content, str) and len(content) > 0
+    comp = bridge.complete("2+2=", model="auto", max_tokens=8)
+    assert comp["ok"] is True
+    assert isinstance(comp["response"]["choices"][0]["text"], str)
+    emb = bridge.embed("hello world", model="auto")
+    assert emb["ok"] is True
+    assert len(emb["response"]["data"][0]["embedding"]) > 0
