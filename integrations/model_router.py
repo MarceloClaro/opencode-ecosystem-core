@@ -368,10 +368,35 @@ class ModelRouter:
         # Override forçado
         if force_provider and force_model:
             if force_provider == "runai":
-                raise ValueError(
-                    "'runai' é um provisionador local/launcher CLI, não um provider "
-                    "de completude do ModelRouter. Use orchestrator.runai_pull_model() "
-                    "ou orchestrator.runai_launch_model()."
+                runai_serving = bool(
+                    self._runai_provider
+                    and self._runai_provider.is_available()
+                    and self._runai_provider.is_serving()
+                )
+                if not runai_serving:
+                    raise ValueError(
+                        "'runai' está em modo provisionamento (daemon HTTP inativo). "
+                        "Para rota de completude real, inicie o daemon primeiro: "
+                        "orchestrator.runai_serve(model=...) ou 'runai serve --detach'. "
+                        "Enquanto isso, use orchestrator.runai_pull_model() ou "
+                        "orchestrator.runai_launch_model() para provisionamento."
+                    )
+                # Daemon ativo → rota real permitida. O force_model deve ser um
+                # modelo conhecido do catálogo curado ou o alias "auto".
+                selected_model = self._normalize_model_for_provider(
+                    force_provider,
+                    force_model,
+                    strict=force_provider == "litert-lm",
+                )
+                return RouteResult(
+                    task_type=task_type,
+                    provider_id=force_provider,
+                    model_id=selected_model,
+                    profile=profile,
+                    reason=f"Override forçado: {force_provider}/{selected_model} (daemon local ativo)",
+                    alternatives=[],
+                    authenticated=True,
+                    mock_mode=False,
                 )
             selected_model = self._normalize_model_for_provider(
                 force_provider,
@@ -537,9 +562,12 @@ class ModelRouter:
                     "loaded": self._runai_provider is not None,
                     "available": bool(self._runai_provider and self._runai_provider.is_available()),
                     "authenticated": self._is_authenticated("runai"),
+                    "serving": bool(self._runai_provider and self._runai_provider.is_serving()),
                     "models": len(self._runai_models),
-                    "scope": "provisionador local opcional (não completion provider)",
-                    "provisioning_only": True,
+                    "scope": "provisionador local + API OpenAI-compatível quando daemon ativo",
+                    "provisioning_only": not bool(
+                        self._runai_provider and self._runai_provider.is_serving()
+                    ),
                 },
             },
             "total_models": (
@@ -658,7 +686,11 @@ class ModelRouter:
         if provider_id == "openai" and self._oa_provider:
             return bool(self._oa_provider._api_key)
         if provider_id == "runai" and self._runai_provider:
-            return bool(self._runai_provider.is_available())
+            # Para rota de completude real, o daemon HTTP precisa estar ativo.
+            return bool(
+                self._runai_provider.is_available()
+                and self._runai_provider.is_serving()
+            )
         return False
 
     def _get_provider(self, provider_id: str):
@@ -671,6 +703,8 @@ class ModelRouter:
             return self._lt_provider
         if provider_id == "openai":
             return self._oa_provider
+        if provider_id == "runai":
+            return self._runai_provider
         return None
 
     def _build_reason(

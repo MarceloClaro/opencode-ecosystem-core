@@ -7707,6 +7707,35 @@
       "merkle_root": "f4b26f7247bcf5075d80c7726539d020534b7e392866fdb77a5416096c62a80f",
       "origin_commit": "7a525b0e4805370bb6eff6e7b9ed58ae517dc0ad",
       "state_merkle_root": "3f32b200120a2ef129784bcb246d0902c3db5c9b301d67cf408fd4e93e82f827"
+    },
+    {
+      "round_id": "R467",
+      "objective": "Fechar elo de inferência real do runai (daemon serve + API OpenAI-compatível) com validação real de ponta a ponta",
+      "changes": [
+        "RunAIProvisioner: métodos HTTP serve/stop/is_serving/api_health/chat/complete/embed/list_server_models/http_base_url",
+        "ModelRouter: rota real para runai quando daemon ativo; ValueError com instrução quando offline; status com serving/provisioning_only dinâmico",
+        "Orquestrador: runai_serve/runai_stop/runai_is_serving/runai_chat/runai_complete/runai_embed + status com serving/api_base",
+        "Spec SPEC-935-R467-runai-inferencia-real.md",
+        "Testes: mocks HTTP (payload/URL/offline) + smoke real RUNAI_REAL=1 contra daemon ativo",
+        "Causa raiz documentada: GGUFs Qwen 3 geram vazio (tokens de controle detokenizam como '') em node-llama-cpp 3.20.0; llama3.2-1b gera corretamente"
+      ],
+      "score": 4.0,
+      "lessons": [
+        "Geração vazia com finish_reason=stop e completion_tokens=0 NÃO significa que o modelo não gerou tokens: onTextChunk pode ser chamado com '' (tokens de controle com detokenização vazia)",
+        "Embeddings funcionarem não implica geração funcionar: embedding é forward pass sem sampling/detokenization",
+        "Validar inferência real exige smoke contra daemon vivo, não apenas mocks",
+        "Isolar problema com teste direto em node-llama-cpp (sem a camada serve) para eliminar variáveis"
+      ],
+      "timestamp": 1788785533.0772195,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }

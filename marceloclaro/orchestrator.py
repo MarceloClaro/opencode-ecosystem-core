@@ -1042,13 +1042,16 @@ class MarceloClaroOrchestrator:
         return self._runai_bridge
 
     def runai_status(self) -> Dict[str, Any]:
-        """Estado resumido do runai como provisionador local opcional."""
+        """Estado resumido do runai como provisionador local + daemon opcional."""
         bridge = self.runai
         if bridge is None:
             return {"available": False, "reason": "runai bridge indisponível"}
         try:
+            serving = bridge.is_serving()
             return {
                 "available": bridge.is_available(),
+                "serving": serving,
+                "api_base": bridge.http_base_url() if serving else None,
                 "provider": bridge.provider_info(),
                 "health": bridge.health_check(),
             }
@@ -1123,6 +1126,81 @@ class MarceloClaroOrchestrator:
         if bridge is None:
             return {"ok": False, "error": "runai bridge indisponível"}
         return bridge.run(model_id)
+
+    def runai_serve(
+        self,
+        model: Optional[str] = None,
+        port: Optional[int] = None,
+        detach: bool = True,
+    ) -> Dict[str, Any]:
+        """Inicia o daemon `runai serve` (API OpenAI-compatível local)."""
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.serve(model=model, port=port, detach=detach)
+
+    def runai_stop(self) -> Dict[str, Any]:
+        """Para o daemon `runai serve` em background."""
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.stop()
+
+    def runai_is_serving(self) -> bool:
+        """True se o daemon HTTP do runai está ativo."""
+        bridge = self.runai
+        if bridge is None:
+            return False
+        return bridge.is_serving()
+
+    def runai_chat(
+        self,
+        messages: List[Dict[str, str]],
+        model: str = "auto",
+        *,
+        temperature: Optional[float] = None,
+        max_tokens: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """Inferência real de chat via daemon runai (requer serve ativo)."""
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.chat(
+            messages,
+            model=model,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+
+    def runai_complete(
+        self,
+        prompt: str,
+        model: str = "auto",
+        *,
+        temperature: Optional[float] = None,
+        max_tokens: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """Inferência real de texto via daemon runai (requer serve ativo)."""
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.complete(
+            prompt,
+            model=model,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+
+    def runai_embed(
+        self,
+        text: str,
+        model: str = "auto",
+    ) -> Dict[str, Any]:
+        """Embeddings reais via daemon runai (requer serve ativo)."""
+        bridge = self.runai
+        if bridge is None:
+            return {"ok": False, "error": "runai bridge indisponível"}
+        return bridge.embed(text, model=model)
 
     def harness_reasoning_status(self) -> Dict[str, Any]:
         try:
