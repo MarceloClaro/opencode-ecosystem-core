@@ -1,0 +1,11 @@
+# Dependências opcionais para executar a instalação completa da supercamada v4.1.
+# O bridge nativo em scientific_lab/ usa apenas stdlib.
+numpy
+pandas
+scipy
+statsmodels
+networkx
+matplotlib
+psutil
+jsonschema>=4.26.0
+cyclonedx-bom==7.3.1
