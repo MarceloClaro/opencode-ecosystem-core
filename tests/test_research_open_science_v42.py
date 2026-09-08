@@ -122,8 +122,6 @@ def test_doi_resolver_prefers_openalex_before_unpaywall(tmp_path, monkeypatch):
     result = dl.download([_rec(pdf_url=None, source="crossref")])[0]
     assert result.ok is True
     assert result.method == "openalex_oa"
-    # Os resolvers são materializados deterministicamente; OpenAlex é a rota
-    # de download preferida quando ambos localizam uma cópia aberta.
     assert calls[:2] == ["openalex", "unpaywall"]
 
 
@@ -154,3 +152,17 @@ def test_runtime_downloader_does_not_depend_on_external_bypass_cli():
     assert forbidden not in source.lower()
     assert "subprocess" not in source
     assert "shutil.which" not in source
+
+
+def test_doctor_does_not_register_external_paywall_bypass_cli():
+    from marceloclaro import doctor
+
+    forbidden = "sci" + "hub-cli"
+    assert forbidden not in {name.lower() for name in doctor.EXTERNAL_CLIS}
+
+
+def test_spec_017_declares_crossref_metadata_only():
+    spec = Path(__file__).resolve().parents[1] / "specs" / "SPEC-017-research.md"
+    text = spec.read_text(encoding="utf-8").lower()
+    assert "crossref é usado para doi/metadados" in text
+    assert "não comprovam acesso aberto" in text
