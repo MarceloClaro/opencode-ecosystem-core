@@ -91,7 +91,7 @@ def test_crossref_pdf_url_is_not_presumed_open(tmp_path, monkeypatch):
     assert result.extra["attempted_routes"] == 0
 
 
-def test_doi_resolver_prefers_openalex_before_unpaywall(tmp_path, monkeypatch):
+def test_doi_resolver_stops_after_openalex_success(tmp_path, monkeypatch):
     calls = []
     dl = PaperDownloader(str(tmp_path), email="researcher@example.org")
 
@@ -122,7 +122,7 @@ def test_doi_resolver_prefers_openalex_before_unpaywall(tmp_path, monkeypatch):
     result = dl.download([_rec(pdf_url=None, source="crossref")])[0]
     assert result.ok is True
     assert result.method == "openalex_oa"
-    assert calls[:2] == ["openalex", "unpaywall"]
+    assert calls == ["openalex"]
 
 
 def test_record_explicitly_marked_repository_may_use_direct_url(tmp_path, monkeypatch):
