@@ -8221,6 +8221,41 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R484",
+      "objective": "Expand research proposals from 80 to 160 (20 per domain x 8 domains)",
+      "changes": [
+        "Added 80 new research proposals across 8 scientific domains (10 per domain)",
+        "Healthcare: foundation models, federated learning, sepsis alert, radiology reports, immunotherapy, drug prescriptions, outbreak detection, ICU RL, cross-lingual NLP, dermatology fairness",
+        "Environment: deforestation transformers, climate diffusion, grid MARL, marine biodiversity, air quality KG, invasive species, irrigation FL, CO2 NLP, climate risk DBN, smart recycling",
+        "Social Sciences: multilingual misinformation, temporal polarization, poverty satellites, policy simulation, multimodal hate speech, climate migration, algorithmic fairness, street view estimation, depression detection, parliamentary topics",
+        "Computer Science: formal verification, LLM compiler, fault-tolerant training, E2E testing, vector DB optimization, differentiable compiler, repo-context code, agent security, memory hierarchy, temporal PL",
+        "Engineering: generative materials, bridge digital twin, humanoid manipulation, water distribution, AM quality control, EV routing, wind turbine faults, sustainable cement, semantic SLAM, microgrid resilience",
+        "Biology: protein structure refinement, molecular diffusion drugs, single-cell foundation, variant DNA LM, soil metagenomics, spatial transcriptomics, PPI knowledge graphs, fermentation optimization, CRISPR long-read, phylogenomic AMR",
+        "Finance: AML graph networks, fundamental LLM, portfolio RL, crisis early warning, cost-of-capital NLP, insurance fraud NLP, LOB trading, alternative data default, systemic risk networks, crypto on-chain sentiment",
+        "Agriculture: nutrition drone mapping, harvest TFT, federated soil management, crop simulation LLM, market multimodal, biocontrol automation, biomass radar-LiDAR, seed quality NIR, irrigation RL",
+        "Total: 160 proposals across 8 domains with real references, target journals, datasets, and methodologies",
+        "Uploaded to HuggingFace Hub: marceloclaro/opencode-research",
+        "Git commit 5e40cff"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Each proposal follows consistent schema: id, title, title_en, gap, dataset, methodology, expected_contribution, target_journal, target_conference, references, timeline_months, difficulty",
+        "New proposals target high-impact journals (Nature, Science, Lancet, etc.) with realistic methodologies and datasets",
+        "Cross-domain proposals include novel intersections (e.g., KG for air quality, RL for irrigation, LLM for crop simulation)",
+        "Difficulty distribution: ~30% Medio, ~40% Alto, ~30% Muito Alto - balanced for different researcher levels"
+      ],
+      "timestamp": 1788911983.3023481,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
