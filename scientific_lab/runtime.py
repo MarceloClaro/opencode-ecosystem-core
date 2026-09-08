@@ -10,6 +10,9 @@ from pathlib import Path
 from typing import Iterable
 
 BASELINE_CORE_COMMIT = "a5478054ceb8fc34eb0d254a30a3c451d6d864cd"
+EXPECTED_VERSION = "4.1.0"
+EXPECTED_PACKAGE_MANIFEST_SHA256 = "89786fcb9b461d0bffbbbaae962da69bb9ce03e2b4e56178ed2c36f15776b89e"
+EXPECTED_SKILL_ARCHIVE_SHA256 = "a805894960e96b7d9aa153a0e8b73c08f5654eef8bb0289867902f9f9612bc78"
 REQUIRED_CORE = (
     "marceloclaro/orchestrator.py",
     "mci/metabus.py",
@@ -72,6 +75,12 @@ def _git_head(checkout: Path) -> str | None:
         return None
 
 
+def _sha256(path: Path) -> str | None:
+    if not path.is_file():
+        return None
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def core_compatibility(checkout: Path) -> dict:
     checks = []
     for rel in REQUIRED_CORE:
@@ -95,20 +104,31 @@ def installed_status(home: Path | None = None) -> dict:
             "status": "not_installed",
             "home": None,
             "version": None,
+            "verified_release": False,
             "message": "Instale a supercamada v4.1 ou defina PESQUISADOR_UNIVERSAL_HOME.",
         }
     try:
-        version = json.loads((path / "VERSION.json").read_text(encoding="utf-8"))
+        version_data = json.loads((path / "VERSION.json").read_text(encoding="utf-8"))
     except Exception as exc:
-        return {"status": "invalid", "home": str(path), "version": None, "error": str(exc)}
-    manifest = path / "PACKAGE_MANIFEST.sha256"
-    manifest_sha = hashlib.sha256(manifest.read_bytes()).hexdigest() if manifest.is_file() else None
+        return {
+            "status": "invalid",
+            "home": str(path),
+            "version": None,
+            "verified_release": False,
+            "error": str(exc),
+        }
+    version = version_data.get("version")
+    manifest_sha = _sha256(path / "PACKAGE_MANIFEST.sha256")
+    verified = version == EXPECTED_VERSION and manifest_sha == EXPECTED_PACKAGE_MANIFEST_SHA256
     return {
-        "status": "installed",
+        "status": "installed_verified" if verified else "installed_unverified",
         "home": str(path),
-        "version": version.get("version"),
-        "edition": version.get("edition"),
+        "version": version,
+        "edition": version_data.get("edition"),
         "package_manifest_sha256": manifest_sha,
+        "expected_package_manifest_sha256": EXPECTED_PACKAGE_MANIFEST_SHA256,
+        "expected_skill_archive_sha256": EXPECTED_SKILL_ARCHIVE_SHA256,
+        "verified_release": verified,
     }
 
 
@@ -117,6 +137,10 @@ def dispatch(command: str, argv: list[str], home: Path | None = None) -> int:
     if root is None:
         print(json.dumps(installed_status(), ensure_ascii=False, indent=2))
         return 4
+    status = installed_status(root)
+    if not status.get("verified_release"):
+        print(json.dumps(status, ensure_ascii=False, indent=2), file=sys.stderr)
+        return 5
     controller = CONTROLLERS.get(command)
     if controller is None:
         print(f"comando científico desconhecido: {command}", file=sys.stderr)

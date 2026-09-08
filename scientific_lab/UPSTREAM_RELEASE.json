@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "release_id": "PU-4.1.0-5f93ededbece",
+  "version": "4.1.0",
+  "baseline_core_commit": "a5478054ceb8fc34eb0d254a30a3c451d6d864cd",
+  "skill_archive": {
+    "sha256": "a805894960e96b7d9aa153a0e8b73c08f5654eef8bb0289867902f9f9612bc78",
+    "size_bytes": 394742
+  },
+  "package_manifest_sha256": "89786fcb9b461d0bffbbbaae962da69bb9ce03e2b4e56178ed2c36f15776b89e",
+  "wsl_installer": {
+    "sha256": "d355a8e9bf23e73df3b604fa8ce7ea817ca098e68a439b33c45d7c42d07bbbea",
+    "size_bytes": 407540
+  },
+  "sbom": {
+    "format": "CycloneDX",
+    "spec_version": "1.7",
+    "sha256": "66aa7b476f4cef281f3bca5061512b31e130386a8da6a32550826f4d388bcf1a"
+  },
+  "observed_validation": {
+    "tests": 87,
+    "schemas": 88,
+    "python_versions_observed": ["3.13"]
+  },
+  "claims": {
+    "externally_certified": false,
+    "reproducible_build_verified": false,
+    "signed_release_verified": false
+  }
+}

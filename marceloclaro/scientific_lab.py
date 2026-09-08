@@ -16,9 +16,9 @@ from scientific_lab.runtime import core_compatibility, dispatch, installed_statu
 HELP = """Pesquisador Universal v4.1 — bridge do OpenCode Ecosystem Core
 
 Comandos:
-  status       mostra discovery/versionamento da supercamada
+  status       mostra discovery, versão e verificação do release instalado
   core-check   verifica componentes estruturais do Core hospedeiro
-  doctor       executa core-check e, se instalada, valida contratos/estrutura v4.1
+  doctor       exige Core compatível + release científico v4.1 verificado
   research/articles, mesh, mission, review, living, synthesis, grade,
   causal, federation, production
 
@@ -59,8 +59,8 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(result, ensure_ascii=False, indent=2))
         if not core["compatible"]:
             return 3
-        if status["status"] != "installed":
-            return 4
+        if not status.get("verified_release"):
+            return 5 if status["status"] != "not_installed" else 4
         return _run_validation(Path(status["home"]))
     return dispatch(cmd, rest)
 
