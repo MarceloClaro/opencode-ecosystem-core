@@ -1,0 +1,244 @@
+{
+  "timestamp": "2026-09-08T20:44:28.906917",
+  "total_agents": 8,
+  "total_journals": 44,
+  "total_research_gaps": 80,
+  "agents": {
+    "healthcare": {
+      "agent_name": "Dr. Healthcare ML PhD",
+      "expertise": "Machine Learning aplicado à Saúde, Diagnóstico Computadorado, Medicina de Precisão",
+      "journals": [
+        "Nature Medicine (IF: 82.9)",
+        "The Lancet Digital Health (IF: 30.8)",
+        "JAMA Network Open (IF: 13.8)",
+        "NPJ Digital Medicine (IF: 15.2)",
+        "BMC Medical Informatics (IF: 3.5)",
+        "Artificial Intelligence in Medicine (IF: 7.5)",
+        "Journal of Biomedical Informatics (IF: 8.0)"
+      ],
+      "conferences": [
+        "MICCAI",
+        "NeurIPS Health",
+        "ICML Health",
+        "AMIA"
+      ],
+      "research_gaps": [
+        "Falta de interpretabilidade em modelos de diagnóstico por IA",
+        "Sesgo algorítmico em populações sub-representadas",
+        "Limitação de dados multimodais (imagem + texto + genômica)",
+        "Reprodutibilidade em estudos de validação clínica",
+        "Integração de LLMs em fluxos de trabalho clínicos",
+        "Privacidade federada em dados de saúde sensíveis",
+        "Transfer learning entre datasets de imagens médicas",
+        "Detecção de anomalias em séries temporais de sinais vitais",
+        "Avaliação de equidade algorítmica em triagem",
+        "Fusão de conhecimento (知识图谱) com dados clínicos"
+      ]
+    },
+    "environment": {
+      "agent_name": "Dr. Environmental AI PhD",
+      "expertise": "AI para Mudanças Climáticas, Sensoriamento Remoto, Biodiversidade",
+      "journals": [
+        "Nature Climate Change (IF: 30.7)",
+        "Environmental Science & Technology (IF: 11.4)",
+        "Global Change Biology (IF: 10.8)",
+        "Remote Sensing of Environment (IF: 13.5)",
+        "Ecological Informatics (IF: 6.7)",
+        "Environmental Modelling & Software (IF: 7.0)"
+      ],
+      "conferences": [
+        "AGU",
+        "EGU",
+        "IGARSS",
+        "CoRL"
+      ],
+      "research_gaps": [
+        "Predição de eventos climáticos extremos com IA",
+        "Mapeamento de desmatamento em tempo real via satélite",
+        "Modelagem de biodiversidade com dados de eDNA",
+        "Detecção precoce de incêndios florestais",
+        "Otimização de redes de energia renovável",
+        "Análise de poluição oceânica com microplásticos",
+        "Predição de colapso de ecossistemas marinhos",
+        "Monitoramento de calidad del aire urbano con IoT",
+        "Estimativa de emissões de CO2 via sensoriamento remoto",
+        "Modelagem de impactos combinados (calor + poluição)"
+      ]
+    },
+    "social_sciences": {
+      "agent_name": "Dr. Social Computing PhD",
+      "expertise": "Computação Social, Ciência de Dados Aplicada a Políticas Públicas",
+      "journals": [
+        "American Political Science Review (IF: 8.2)",
+        "Social Science & Medicine (IF: 4.9)",
+        "Journal of Computational Social Science (IF: 4.0)",
+        "PLOS ONE (IF: 3.7)",
+        "Scientific Reports (IF: 4.6)",
+        "Big Data & Society (IF: 5.1)"
+      ],
+      "conferences": [
+        "ICWSM",
+        "AAAI",
+        "WebSci",
+        "HCOMP"
+      ],
+      "research_gaps": [
+        "Detecção de fake news em saúde pública com LLMs",
+        "Análise de desigualdade socioeconômica via dados de celular",
+        "Predição de pobreza com imagens de satélite",
+        "Detecção de viés algorítmico em decisões judiciais",
+        "Análise de mobilidade urbana pós-pandemia",
+        "Estimativa de informalidade laboral via redes sociais",
+        "Monitoramento de discourse de ódio em tempo real",
+        "Predição de crise humanitária com dados abertos",
+        "Análise de gênero em publicações acadêmicas",
+        "Modelagem de adoção de políticas públicas"
+      ]
+    },
+    "computer_science": {
+      "agent_name": "Dr. ML Systems PhD",
+      "expertise": "Sistemas de Aprendizado de Máquina, Segurança, NLP",
+      "journals": [
+        "IEEE Transactions on PAMI (IF: 24.3)",
+        "ACM Computing Surveys (IF: 23.8)",
+        "Journal of Machine Learning Research (IF: 6.0)",
+        "Neural Computation (IF: 3.3)",
+        "IEEE TNNLS (IF: 10.4)"
+      ],
+      "conferences": [
+        "NeurIPS",
+        "ICML",
+        "ICLR",
+        "CVPR",
+        "ACL",
+        "S&P",
+        "USENIX"
+      ],
+      "research_gaps": [
+        "Detecção de fraude em tempo real com graphs neural networks",
+        "Sistemas de recomendação com explicabilidade",
+        "Detecção de deepfakes multimodais",
+        "Otimização de modelos para edge devices",
+        "Segurança de modelos adversariais",
+        "LLM agents para código autônomo",
+        "Análise de sentimentos em contexts multilíngues",
+        "Differential privacy em federated learning",
+        "Detecção de bias em datasets de treinamento",
+        "Model compression sem perda de performance"
+      ]
+    },
+    "engineering": {
+      "agent_name": "Dr. Engineering AI PhD",
+      "expertise": "IA Aplicada à Engenharia, Manutenção Preditiva, Materiais",
+      "journals": [
+        "Nature Materials (IF: 41.2)",
+        "Advanced Materials (IF: 32.1)",
+        "Computer-Aided Civil Engineering (IF: 11.8)",
+        "Engineering Applications of AI (IF: 8.0)",
+        "Mechanical Systems and Signal Processing (IF: 8.4)"
+      ],
+      "conferences": [
+        "IEEE SmartGridComm",
+        "ACM BuildSys",
+        "NeurIPS Materials"
+      ],
+      "research_gaps": [
+        "Manutenção preditiva com dados de vibração em tempo real",
+        "Descoberta de novos materiais com ML generativo",
+        "Digital twins para infraestrutura crítica",
+        "Otimização de consumo energético em fábricas",
+        "Detecção de defeitos em manufatura aditiva",
+        "Predição de vida útil de componentes estruturais",
+        "Robótica autônoma com reinforcement learning",
+        "Controle de qualidade visual com visão computacional",
+        "Otimização de supply chain com IA",
+        "Simulação de cenários de engenharia sísmica"
+      ]
+    },
+    "biology": {
+      "agent_name": "Dr. Computational Biology PhD",
+      "expertise": "Bioinformática, Genômica, Proteômica, Ecologia Computacional",
+      "journals": [
+        "Nature Biotechnology (IF: 60.1)",
+        "Genome Biology (IF: 17.9)",
+        "Bioinformatics (IF: 6.9)",
+        "Nucleic Acids Research (IF: 19.0)",
+        "PLOS Computational Biology (IF: 4.3)"
+      ],
+      "conferences": [
+        "ISMB",
+        "RECOMB",
+        "NeurIPS Biology",
+        "ICML CompBio"
+      ],
+      "research_gaps": [
+        "Predição de estrutura proteica com LLMs (pós-AlphaFold)",
+        "Análise de microbioma intestinal e doenças autoimunes",
+        "Classificação de células single-cell com transformers",
+        "Descoberta de biomarcadores via metabolômica",
+        "Análise de dados de eDNA para biodiversidade",
+        "Predição de resistência a antimicrobianos",
+        "Análise de redes de interação proteína-proteína",
+        "Identificação de espécies via áudio (bioacústica)",
+        "Análise de dados epigenômicos e envelhecimento",
+        "Modelagem de ecossistemas marinhos com dados de satélite"
+      ]
+    },
+    "finance": {
+      "agent_name": "Dr. Financial AI PhD",
+      "expertise": "Finanças Computacionais, IA para Mercados, Risco",
+      "journals": [
+        "Journal of Finance (IF: 8.2)",
+        "Review of Financial Studies (IF: 7.4)",
+        "Journal of Financial Economics (IF: 8.8)",
+        "Quantitative Finance (IF: 1.8)",
+        "Journal of Banking & Finance (IF: 3.7)"
+      ],
+      "conferences": [
+        "NeurIPS Finance",
+        "ACM ICFS",
+        "QFIN"
+      ],
+      "research_gaps": [
+        "Predição de volatilidade com modelos de граф neural networks",
+        "Detecção de lavagem de dinheiro com graph analytics",
+        "Análise de sentimento para criptomoedas",
+        "Credit scoring com dados alternativos (social media)",
+        "Otimização de portfólio com reinforcement learning",
+        "Detecção de manipulação de mercado",
+        "Análise de risco sistêmico via redes financeiras",
+        "Predição de defaults em empréstimos P2P",
+        "Análise de impacto de notícias em mercados",
+        "FRAUD detection em transações internacionais"
+      ]
+    },
+    "agriculture": {
+      "agent_name": "Dr. AgriTech AI PhD",
+      "expertise": "Agricultura de Precisão, Visão Computacional Agrícola, IoT Rural",
+      "journals": [
+        "Nature Food (IF: 23.2)",
+        "Computers and Electronics in Agriculture (IF: 8.1)",
+        "Precision Agriculture (IF: 5.4)",
+        "Remote Sensing (IF: 7.3)",
+        "Biosystems Engineering (IF: 5.1)"
+      ],
+      "conferences": [
+        "ECPA",
+        "AgriFood AI",
+        "IEEE AgriFood"
+      ],
+      "research_gaps": [
+        "Detecção de pragas em tempo real via drone + IA",
+        "Predição de produtividade com dados de satélite",
+        "Otimização de irrigação com IA e sensores IoT",
+        "Classificação de solo com espectroscopia e ML",
+        "Predição de colheita com modelos de série temporal",
+        "Detecção de doenças em plantas via smartphone",
+        "Otimização de uso de fertilizantes com IA",
+        "Análise de estresse hídrico em culturas",
+        "Monitoramento de bem-estar animal com visão computacional",
+        "Planejamento agrícola com dados climáticos e de mercado"
+      ]
+    }
+  }
+}

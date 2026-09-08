@@ -1,0 +1,1462 @@
+{
+  "healthcare": {
+    "agent": "Dr. Healthcare ML PhD",
+    "proposals": [
+      {
+        "id": "HC-001",
+        "title": "Interpretabilidade de Modelos de Diagnóstico por IA: Um Framework Explicativo para Clínicos",
+        "title_en": "Interpretability of AI Diagnostic Models: An Explanatory Framework for Clinicians",
+        "gap": "Falta de interpretabilidade em modelos de diagnóstico por IA limita adoção clínica",
+        "dataset": "Diabetes Prediction (Kaggle, 139k downloads)",
+        "methodology": "SHAP + LIME + Atention Maps para explicar previsões de diabetes",
+        "expected_contribution": "Framework de interpretabilidade validado com clínicos",
+        "target_journal": "The Lancet Digital Health (IF: 30.8)",
+        "target_conference": "MICCAI 2027",
+        "references": [
+          "Ribeiro, M.T. et al. (2016). Why Should I Trust You? KDD 2016.",
+          "Lundberg, S. & Lee, S. (2017). A Unified Approach to Interpreting Model Predictions. NeurIPS 2017.",
+          "Tjoa, E. & Guan, C. (2020). A Survey on Explainable AI in Medical Imaging. arXiv:2010.04041.",
+          "Markus, A.F. et al. (2021). Explainable AI in Clinical Decision Support. JAMIA.",
+          "Ahmad, M.A. et al. (2018). Interpretable Machine Learning in Healthcare. arXiv:1806.00150."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "HC-002",
+        "title": "Sesgo Algorítmico em Diagnóstico de Diabetes: Avaliação de Equidade em Populações Sub-representadas",
+        "title_en": "Algorithmic Bias in Diabetes Diagnosis: Fairness Evaluation in Underrepresented Populations",
+        "gap": "Sesgo algorítmico em populações sub-representadas (afro-americanos, hispânicos)",
+        "dataset": "Pima Indian Diabetes (OpenML, 768 samples)",
+        "methodology": "Fairlearn + Aequitas para medir disparate impact e equalized odds",
+        "expected_contribution": "Métricas de equidade para modelos de diabetes",
+        "target_journal": "Nature Medicine (IF: 82.9)",
+        "target_conference": "NeurIPS 2027 Workshop on Fairness",
+        "references": [
+          "Obermeyer, Z. et al. (2019). Dissecting racial bias in an algorithm. Science.",
+          "Chouldechova, A. (2017). Fair prediction with disparate impact. Big Data.",
+          "Mehrabi, N. et al. (2021). A Survey on Bias and Fairness in ML. ACM Computing Surveys.",
+          "Rajkomar, A. et al. (2018). Scalable and accurate deep learning with electronic health records. NPJ Digital Medicine.",
+          "Chen, I.Y. et al. (2019). Ethical machine learning in healthcare. Annual Review of Biomedical Data Science."
+        ],
+        "timeline_months": 15,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "HC-003",
+        "title": "Fusão Multimodal (Imagem + Texto + Genômica) para Diagnóstico de Câncer com Transformers",
+        "title_en": "Multimodal Fusion (Image + Text + Genomics) for Cancer Diagnosis with Transformers",
+        "gap": "Limitação de dados multimodais em diagnóstico oncológico",
+        "dataset": "Breast Cancer (Kaggle, 125k downloads) + CancerGUIDE (HF)",
+        "methodology": "Vision-Language Model com fusão tardia e atenção cross-modal",
+        "expected_contribution": "Modelo multimodal que supera abordagens unimodais",
+        "target_journal": "NPJ Digital Medicine (IF: 15.2)",
+        "target_conference": "MICCAI 2027",
+        "references": [
+          "Zhang, S. et al. (2021). LViT: Language Vision Transformer for Medical Image. arXiv:2112.04207.",
+          "Wu, C. et al. (2023). Multimodal Transformers for Medical Image Analysis. Medical Image Analysis.",
+          "Chen, R.J. et al. (2021). Scaling Vision Transformers to Gigapixel Images via Self-Supervised Learning. Nature Methods.",
+          "Liu, Z. et al. (2021). Swin Transformer: Hierarchical Vision Transformer. ICCV 2021.",
+          "Xu, R. et al. (2023). Large-scale foundation models for medical imaging. Nature Medicine."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "HC-004",
+        "title": "Reprodutibilidade em Estudos de Validação de IA Médica: Uma Revisão Sistemática e Meta-Análise",
+        "title_en": "Reproducibility in AI Medical Validation Studies: A Systematic Review and Meta-Analysis",
+        "gap": "Baixa reprodutibilidade em estudos de validação de IA médica",
+        "dataset": "Revisão sistemática (OpenAlex + PubMed)",
+        "methodology": "PRISMA + ROBINS-I + meta-análise de sensibilidade",
+        "expected_contribution": "Checklist de reprodutibilidade para IA médica",
+        "target_journal": "JAMA Network Open (IF: 13.8)",
+        "target_conference": "AMIA 2027",
+        "references": [
+          "Roberts, M. et al. (2021). Common limitations of AI in medical imaging. Nature Medicine.",
+          "Kim, D.W. et al. (2019). Clinical data diversity and its impact on AI. Scientific Reports.",
+          "Nagendran, M. et al. (2020). Artificial intelligence versus clinicians. The Lancet.",
+          "Kelly, C.J. et al. (2019). Key challenges for delivering clinical impact with AI. BMC Medicine.",
+          "Mongan, J. et al. (2020). Checklist for AI in radiology. Radiology."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "HC-005",
+        "title": "LLMs como Assistentes de Diagnóstico: Avaliação de Risco em Ambiente Clínico Simulado",
+        "title_en": "LLMs as Diagnostic Assistants: Risk Evaluation in Simulated Clinical Environment",
+        "gap": "Integração de LLMs em fluxos de trabalho clínicos sem validação de segurança",
+        "dataset": "Mental Health Dataset (Kaggle, 28k downloads)",
+        "methodology": "LLM fine-tuning + simulação clínica + avaliação por especialistas",
+        "expected_contribution": "Protocolo de validação de LLMs para triagem clínica",
+        "target_journal": "Nature Medicine (IF: 82.9)",
+        "target_conference": "NeurIPS 2027 Health",
+        "references": [
+          "Thirunavukarasu, A.J. et al. (2023). Large language models in medicine. Nature Medicine.",
+          "Tang, L. et al. (2023). Evaluating LLMs on medical evidence synthesis. BMJ.",
+          "Singhal, K. et al. (2023). Large language models encode clinical knowledge. Nature.",
+          "Lee, P. et al. (2023). Generative AI in healthcare. npj Digital Medicine.",
+          "Wu, S. et al. (2023). AI ChatGPT vs human experts. JAMA Network Open."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "HC-006",
+        "title": "Aprendizado Federado com Privacidade Diferencial para Dados de Saúde Multi-Institucionais",
+        "title_en": "Federated Learning with Differential Privacy for Multi-Institutional Health Data",
+        "gap": "Privacidade federada em dados de saúde sensíveis entre instituições",
+        "dataset": "Heart Disease (Kaggle, 48k downloads)",
+        "methodology": "Federated Averaging + Differential Privacy (ε-differential) + Secure Aggregation",
+        "expected_contribution": "Framework de FL que preserva privacidade com ε ≤ 1.0",
+        "target_journal": "BMC Medical Informatics (IF: 3.5)",
+        "target_conference": "ML4H 2027",
+        "references": [
+          "Rieke, N. et al. (2020). The future of digital health with federated learning. NPJ Digital Medicine.",
+          "Dayan, I. et al. (2021). Federated learning for predicting clinical outcomes in patients with COVID-19. Nature Medicine.",
+          "Li, T. et al. (2020). Federated optimization in heterogeneous networks. MLSys.",
+          "Abadi, M. et al. (2016). Deep Learning with Differential Privacy. CCS 2016.",
+          "Bonawitz, K. et al. (2019). Towards federated learning at scale. ML Systems Workshop."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "HC-007",
+        "title": "Transfer Learning entre Datasets de Imagens Médicas: generalizabilidade de Modelos Pré-treinados",
+        "title_en": "Transfer Learning across Medical Image Datasets: Generalizability of Pre-trained Models",
+        "gap": "Transfer learning entre datasets de imagens médicas com distribuições diferentes",
+        "dataset": "Breast Cancer + Lung Cancer (Kaggle)",
+        "methodology": "Domain adaptation + fine-tuning progressivo + validação externa",
+        "expected_contribution": "Guia de seleção de modelo pré-treinado para imagens médicas",
+        "target_journal": "Medical Image Analysis (IF: 10.9)",
+        "target_conference": "MICCAI 2027",
+        "references": [
+          "Cheplygina, V. et al. (2019). Not-so-supervised: a survey of semi-supervised and transfer learning in medical imaging. Medical Image Analysis.",
+          "Tajbakhsh, N. et al. (2019). The unreasonable effectiveness of pre-training for medical image analysis. Nature Medicine.",
+          "Irvin, J. et al. (2019). CheXpert: Large chest radiograph dataset. AAAI 2019.",
+          "Liu, S. et al. (2022). Multi-source domain adaptation for medical imaging. Medical Image Analysis.",
+          "Glocker, B. et al. (2019). Federated learning for predicting clinical outcomes. Nature Medicine."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "HC-008",
+        "title": "Detecção de Anomalias em Sinais Vitais: Modelos de Séries Temporais para Cuidados Intensivos",
+        "title_en": "Anomaly Detection in Vital Signs: Time Series Models for Intensive Care",
+        "gap": "Detecção de anomalias em séries temporais de sinais vitais em tempo real",
+        "dataset": "Heart Disease Statlog (Kaggle, 10k downloads)",
+        "methodology": "Transformer + Autoencoder + detecção de anomalias por reconstrução",
+        "expected_contribution": "Sistema de alerta precoce para deterioração clínica",
+        "target_journal": "Critical Care Medicine (IF: 9.3)",
+        "target_conference": "ICML 2027 Health",
+        "references": [
+          "Rajkomar, A. et al. (2018). Scalable and accurate deep learning with EHR. NPJ Digital Medicine.",
+          "Choi, E. et al. (2016). RETAIN: An interpretable predictive model for healthcare. KDD 2016.",
+          "Shickel, B. et al. (2017). Deep EHR: A survey of recent advances. IEEE JBHI.",
+          "Harutyunyan, H. et al. (2019). Multitask learning and benchmarking with clinical time series data. Scientific Data.",
+          "Goldstein, B.A. et al. (2017). Peeking inside the black box. Statistics in Medicine."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "HC-009",
+        "title": "Avaliação de Equidade Algorítmica em Sistemas de Triagem: Um Framework Normativo",
+        "title_en": "Algorithmic Fairness Evaluation in Screening Systems: A Normative Framework",
+        "gap": "Falta de framework padronizado para avaliar equidade em triagem por IA",
+        "dataset": "Student Mental Health (Kaggle, 85k downloads)",
+        "methodology": "Fairness metrics (demographic parity, equalized odds) + análise normativa",
+        "expected_contribution": "Framework normativo para equidade em triagem clínica",
+        "target_journal": "The Lancet Digital Health (IF: 30.8)",
+        "target_conference": "FAccT 2027",
+        "references": [
+          "Corbett-Davies, S. & Goel, S. (2018). The Measure and Mismeasure of Fairness. JMLR.",
+          "Kleinberg, J. et al. (2017). Inherent trade-offs in the fair determination of risk scores. arXiv:1609.05807.",
+          "Mitchell, S. et al. (2019). Algorithmic fairness: Choices, assumptions, definitions. arXiv:1811.00067.",
+          "Bartlett, R. et al. (2022). Consumer lending discrimination in the FinTech era. Journal of Financial Economics.",
+          "Chouldechova, A. et al. (2018). Algorithmic fairness. Annual Review of Statistics."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "HC-010",
+        "title": "Knowledge Graphs + LLMs para Diagnóstico Assistido: Integração de Conhecimento Médico",
+        "title_en": "Knowledge Graphs + LLMs for Assisted Diagnosis: Medical Knowledge Integration",
+        "gap": "Fusão de conhecimento médico estruturado (KG) com dados clínicos não estruturados",
+        "dataset": "Drug Discovery (Kaggle, 1.7k downloads) + COVID-19 (Kaggle, 435k downloads)",
+        "methodology": "KG embedding + RAG com LLM + validação clínica",
+        "expected_contribution": "Sistema híbrido KG+LLM para raciocínio diagnóstico",
+        "target_journal": "Artificial Intelligence in Medicine (IF: 7.5)",
+        "target_conference": "AAAI 2027",
+        "references": [
+          "Li, X. et al. (2022). Knowledge graphs in healthcare. ACM Computing Surveys.",
+          "Pan, S. et al. (2024). Unifying large language models and knowledge graphs. arXiv:2306.08302.",
+          "Jiang, L. et al. (2023). A survey on knowledge graph embeddings. IEEE TKDE.",
+          "Devlin, J. et al. (2019). BERT: Pre-training of deep bidirectional transformers. NAACL 2019.",
+          "Lewis, P. et al. (2020). Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. NeurIPS 2020."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      }
+    ]
+  },
+  "environment": {
+    "agent": "Dr. Environmental AI PhD",
+    "proposals": [
+      {
+        "id": "ENV-001",
+        "title": "Predição de Eventos Climáticos Extremos com Graph Neural Networks",
+        "title_en": "Prediction of Extreme Weather Events with Graph Neural Networks",
+        "gap": "Predição de eventos extremos com resolução espacial fina",
+        "dataset": "Climate Change Indicators (Kaggle, 20k downloads)",
+        "methodology": "GNN + dados de reanálise (ERA5) + validação em eventos extremos",
+        "expected_contribution": "Modelo GNN que prevê extremos com 72h de antecedência",
+        "target_journal": "Nature Climate Change (IF: 30.7)",
+        "target_conference": "AGU 2027",
+        "references": [
+          "Lam, R. et al. (2023). Learning skillful medium-range global weather forecasting. Science.",
+          "Keisler, R. (2022). Forecasting Global Weather with Graph Neural Networks. arXiv:2202.07575.",
+          "Pathak, J. et al. (2022). FourCastNet. arXiv:2202.11214.",
+          "Bi, K. et al. (2023). Accurate medium-range global weather forecasting with 3D neural networks. Nature.",
+          "Rasp, S. et al. (2018). Deep learning for weather prediction. arXiv:1812.07526."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "ENV-002",
+        "title": "Mapeamento de Desmatamento em Tempo Real via Sentinel-2 e U-Net",
+        "title_en": "Real-time Deforestation Mapping via Sentinel-2 and U-Net",
+        "gap": "Mapeamento de desmatamento com latência menor que 24h",
+        "dataset": "Deforestation (Kaggle, 3.4k downloads) + Deforestation Amazon (HF)",
+        "methodology": "U-Net + Sentinel-2 + change detection temporal",
+        "expected_contribution": "Sistema de alerta de desmatamento em tempo real",
+        "target_journal": "Remote Sensing of Environment (IF: 13.5)",
+        "target_conference": "IGARSS 2027",
+        "references": [
+          "Hethcoat, M.G. et al. (2019). A deep learning approach to map tropical selective logging. Remote Sensing of Environment.",
+          "Reiche, J. et al. (2016). Combining satellite data for better tropical forest monitoring. Nature Climate Change.",
+          "Busch, J. et al. (2019). The importance of primary forests for biodiversity. PLOS ONE.",
+          "Hansen, M.C. et al. (2013). High-resolution global maps of 21st-century forest cover change. Science.",
+          "Lynch, J. et al. (2013). Remote sensing of tropical forests. Journal of Applied Ecology."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "ENV-003",
+        "title": "Modelagem de Biodiversidade com eDNA e Metagenômica: IA para Conservação",
+        "title_en": "Biodiversity Modeling with eDNA and Metagenomics: AI for Conservation",
+        "gap": "Análise de biodiversidade via eDNA com IA escalável",
+        "dataset": "Biodiversity (Kaggle, 1.2k downloads) + Biodiversity Heritage Library (HF)",
+        "methodology": "Transformer para classificação de sequências + modelagem de ocorrência",
+        "expected_contribution": "Pipeline de eDNA→biodiversidade com IA",
+        "target_journal": "Nature Ecology & Evolution (IF: 16.0)",
+        "target_conference": "NeurIPS 2027 Biodiversity",
+        "references": [
+          "Bohmann, K. et al. (2014). Environmental DNA for wildlife biology and biodiversity monitoring. Trends in Ecology & Evolution.",
+          "Thomsen, P.F. & Willerslev, E. (2015). Environmental DNA. Molecular Ecology.",
+          "Zaiko, A. et al. (2015). Advantages and limitations of eDNA. Frontiers in Ecology.",
+          "Deiner, K. et al. (2017). Environmental DNA metabarcoding. Molecular Ecology.",
+          "Cilleros, D. et al. (2021). eDNA metabarcoding for biodiversity monitoring. Methods in Ecology and Evolution."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "ENV-004",
+        "title": "Detecção Precoce de Incêndios Florestais com Dados de Satélite e IoT",
+        "title_en": "Early Wildfire Detection with Satellite and IoT Data",
+        "gap": "Detecção de incêndios com latência < 30 minutos",
+        "dataset": "Deforestation (Kaggle) + Air Quality (Kaggle, 47k downloads)",
+        "methodology": "CNN + LSTM + dados MODIS/VIIRS + sensores IoT terrestres",
+        "expected_contribution": "Sistema de alerta precoce com precisão > 95%",
+        "target_journal": "Environmental Science & Technology (IF: 11.4)",
+        "target_conference": "EGU 2027",
+        "references": [
+          "Jain, P. et al. (2020). Using deep learning for forest fire prediction. Remote Sensing of Environment.",
+          "Kanevski, M. et al. (2019). Machine learning for spatial environmental data. EPFL Press.",
+          "Kumar, S.S. & Roy, P.S. (2018). Forest fire risk analysis using AI. Forest Ecology & Management.",
+          "Giglio, L. et al. (2016). The Collection 6 MODIS active fire detection algorithm. Remote Sensing of Environment.",
+          "Bowman, D.M. et al. (2020). Vegetation fires in the Anthropocene. Nature Reviews Earth & Environment."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "ENV-005",
+        "title": "Otimização de Redes de Energia Renovável com Reinforcement Learning",
+        "title_en": "Optimization of Renewable Energy Networks with Reinforcement Learning",
+        "gap": "Otimização de mix energético com alta penetração de renováveis",
+        "dataset": "Renewable Energy (Kaggle, 3.4k downloads) + U.S. Renewable (Kaggle, 4.7k downloads)",
+        "methodology": "Multi-agent RL + simulação de rede + storage otimizado",
+        "expected_contribution": "Algoritmo RL que reduz curtailment em 30%",
+        "target_journal": "Nature Energy (IF: 67.4)",
+        "target_conference": "NeurIPS 2027 Energy",
+        "references": [
+          "Zhang, D. et al. (2021). Multi-agent reinforcement learning for energy systems. Applied Energy.",
+          "Vázquez-Canteli, C.R. & Nagy, Z. (2019). Reinforcement learning for demand response. Applied Energy.",
+          "Cao, D. et al. (2020). A review of machine learning for power system optimization. Applied Energy.",
+          "Denholm, P. et al. (2021). The challenges of achieving a 100% renewable electricity system. Joule.",
+          "Jose, R. et al. (2021). Energy storage for renewable energy integration. Nature Energy."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "ENV-006",
+        "title": "Análise de Poluição Oceânica por Microplásticos com Visão Computacional Subaquática",
+        "title_en": "Ocean Microplastic Pollution Analysis with Underwater Computer Vision",
+        "gap": "Detecção e quantificação de microplásticos em ambientes marinhos",
+        "dataset": "Ocean Climate (Kaggle, 6k downloads) + Ocean Soundscape (HF)",
+        "methodology": "YOLO + classificação espectral + dados de AUVs",
+        "expected_contribution": "Sistema de mapeamento de microplásticos subaquáticos",
+        "target_journal": "Nature Sustainability (IF: 27.6)",
+        "target_conference": "Ocean Sciences 2027",
+        "references": [
+          "Eriksen, M. et al. (2014). Plastic pollution in the world's oceans. PLOS ONE.",
+          "Galloway, T.S. & Lewis, C.N. (2016). Marine microplastics spell big problems for future generations. PNAS.",
+          "Sharma, S. et al. (2023). AI for microplastic detection. Environmental Science & Technology.",
+          "Thushara, V. & Girisha, S. (2022). Deep learning for microplastic classification. Marine Pollution Bulletin.",
+          "Lavers, J.L. & Bond, A.L. (2017). Exceptional and rapid accumulation of anthropogenic debris. PNAS."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "ENV-007",
+        "title": "Predição de Colapso de Ecossistemas Marinhos com Modelos de Séries Temporais",
+        "title_en": "Marine Ecosystem Collapse Prediction with Time Series Models",
+        "gap": "Antecipação de tipping points em ecossistemas marinhos",
+        "dataset": "Shifting Seas (Kaggle, 6k downloads)",
+        "methodology": "Transformer + detecção de mudanças de regime + early warning signals",
+        "expected_contribution": "Sistema de alerta para tipping points marinhos",
+        "target_journal": "Nature Climate Change (IF: 30.7)",
+        "target_conference": "AGU 2027",
+        "references": [
+          "Scheffer, M. et al. (2009). Early-warning signals for critical transitions. Nature.",
+          "Lenton, T.M. et al. (2019). Climate tipping points. Nature.",
+          "Hughes, T.P. et al. (2018). Spatial and temporal patterns of mass bleaching. Science.",
+          "Free, C.M. et al. (2019). Impacts of historical warming on marine fisheries production. Science.",
+          "Pinsky, M.L. et al. (2018). Preparing ocean governance for species on the move. Science."
+        ],
+        "timeline_months": 20,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "ENV-008",
+        "title": "Monitoramento de Qualidade do Ar Urbano com IoT e Deep Learning",
+        "title_en": "Urban Air Quality Monitoring with IoT and Deep Learning",
+        "gap": "Predição de poluição do ar em escala de rua",
+        "dataset": "Air Quality (Kaggle, 47k downloads) + Delhi AQI (Kaggle, 10k downloads)",
+        "methodology": "GNN para dados de sensores + LSTM para séries temporais + fusão com satélite",
+        "expected_contribution": "Mapa de qualidade do ar em resolução 10m×10m",
+        "target_journal": "Environmental Science & Technology (IF: 11.4)",
+        "target_conference": "ACM SenSys 2027",
+        "references": [
+          "Shi, X. et al. (2023). Deep learning for air quality forecasting. Annual Review of Environment and Resources.",
+          "Li, X. et al. (2019). Sensor fusion for air quality monitoring. Information Fusion.",
+          "Di, Q. et al. (2017). An ensemble-based model for estimating PM2.5. Environmental Science & Technology.",
+          "Wei, Z. et al. (2021). Urban air quality monitoring with IoT. Nature Sustainability.",
+          "Cao, C. et al. (2022). AI for environmental monitoring. Nature Reviews Earth & Environment."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "ENV-009",
+        "title": "Estimativa de Emissões de CO2 via Sensoriamento Remoto e Machine Learning",
+        "title_en": "CO2 Emission Estimation via Remote Sensing and Machine Learning",
+        "gap": "Estimativa de emissões em escala de instalação individual",
+        "dataset": "Climate Change Indicators (Kaggle) + Global Economic Indicators (Kaggle)",
+        "methodology": "Random Forest + dados OCO-2 + inventário de emissões",
+        "expected_contribution": "Mapa de emissões por instalação com incerteza quantificada",
+        "target_journal": "Nature Climate Change (IF: 30.7)",
+        "target_conference": "EGU 2027",
+        "references": [
+          "Reuter, M. et al. (2017). The potential of XCO2 for emission verification. Environmental Research Letters.",
+          "Zheng, T. et al. (2019). Observing CO2 emissions from space. Nature Climate Change.",
+          "Janssens-Maenhout, G. et al. (2015). Global gridded fossil CO2 emissions. Earth System Science Data.",
+          "Ciais, P. et al. (2013). Carbon and other biogeochemical cycles. IPCC AR5.",
+          "Wu, D. et al. (2022). Machine learning for CO2 estimation. Remote Sensing of Environment."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "ENV-010",
+        "title": "Modelagem de Impactos Combinados (Calor + Poluição) em Populações Urbanas",
+        "title_en": "Combined Impact Modeling (Heat + Pollution) in Urban Populations",
+        "gap": "Avaliação sinérgica de calor extremo e poluição do ar",
+        "dataset": "Air Quality (Kaggle) + Climate Change Indicators (Kaggle)",
+        "methodology": "Modelo de exposição combinada + GEE + modelos aditivos generalizados",
+        "expected_contribution": "Índice de risco combinado heat-pollution",
+        "target_journal": "The Lancet Planetary Health (IF: 38.2)",
+        "target_conference": "APHA 2027",
+        "references": [
+          "Mills, I. et al. (2023). Health impacts of climate change and air pollution. The Lancet Planetary Health.",
+          "Liu, J. et al. (2022). Heat and air pollution. Environmental Health Perspectives.",
+          "Zhao, Q. et al. (2021). Global, regional, and national burden of mortality associated with non-optimal ambient temperatures. The Lancet.",
+          "Watts, N. et al. (2021). The 2020 report of The Lancet Countdown on health and climate change. The Lancet.",
+          "Gasparrini, A. et al. (2015). Mortality risk attributable to high and low ambient temperature. The Lancet."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      }
+    ]
+  },
+  "social_sciences": {
+    "agent": "Dr. Social Computing PhD",
+    "proposals": [
+      {
+        "id": "SS-001",
+        "title": "Detecção de Fake News em Saúde Pública com LLMs e Verificação Cruzada",
+        "title_en": "Fake News Detection in Public Health with LLMs and Cross-Verification",
+        "gap": "Disseminação de desinformação em saúde durante pandemias",
+        "dataset": "Mental Health (Kaggle, 85k downloads)",
+        "methodology": "LLM + retrieval de fontes confiáveis + scoring de credibilidade",
+        "target_journal": "Big Data & Society (IF: 5.1)",
+        "references": [
+          "Vosoughi, S. et al. (2018). The spread of true and false news online. Science.",
+          "Lazer, D.M. et al. (2018). The science of fake news. Science.",
+          "Pennycook, G. et al. (2020). Shifting attention to accuracy reduces misinformation. Nature.",
+          "Chen, J. et al. (2022). Detecting misinformation with LLMs. arXiv:2211.02302.",
+          "Zhou, X. & Zafarani, R. (2020). Fake news detection: A survey. ACM Computing Surveys."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "SS-002",
+        "title": "Predição de Pobreza com Imagens de Satélite e Deep Learning",
+        "title_en": "Poverty Prediction with Satellite Imagery and Deep Learning",
+        "gap": "Estimativa de pobreza em regiões sem dados censitários",
+        "dataset": "Extreme Poverty (Kaggle, 2.3k downloads) + PovertyMap (HF)",
+        "methodology": "CNN em imagens noturnas + transfer learning + validação com DHS",
+        "target_journal": "Nature Sustainability (IF: 27.6)",
+        "references": [
+          "Jean, N. et al. (2016). Combining satellite imagery and machine learning to predict poverty. Science.",
+          "Head, A. et al. (2017). Mapping poverty with mobile phone imagery. Nature Communications.",
+          "Steele, J.E. et al. (2017). Night-time lights as a proxy for human development. Nature Communications.",
+          "Hersh, J. et al. (2021). Machine learning and poverty prediction. World Bank Research Observer.",
+          "Perez, A. et al. (2017). Combining satellite and survey data for poverty mapping. arXiv:1711.06321."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "SS-003",
+        "title": "Detecção de Viés Algorítmico em Decisões Judiciais com NLP",
+        "title_en": "Algorithmic Bias Detection in Judicial Decisions with NLP",
+        "gap": "Sesgo algorítmico em sistemas de justiça criminal",
+        "dataset": "Crime Data (Kaggle, 9.7k downloads) + Denver Crime (Kaggle, 12.4k downloads)",
+        "methodology": "NLP para análise de sentenças + fairness metrics + audit algorítmico",
+        "target_journal": "American Political Science Review (IF: 8.2)",
+        "references": [
+          "Angwin, J. et al. (2016). Machine bias. ProPublica.",
+          "Chouldechova, A. et al. (2018). Fair prediction with disparate impact. Big Data.",
+          "Dressel, J. & Farid, H. (2018). The accuracy, fairness, and limits of predicting recidivism. Science Advances.",
+          "Liu, Y. et al. (2021). NLP for judicial bias detection. ACL 2021.",
+          "Barocas, S. & Selbst, A.D. (2016). Big data's disparate impact. California Law Review."
+        ],
+        "timeline_months": 16
+      },
+      {
+        "id": "SS-004",
+        "title": "Análise de Mobilidade Urbana Pós-Pandemia com Dados de Celular",
+        "title_en": "Post-Pandemic Urban Mobility Analysis with Mobile Phone Data",
+        "gap": "Mudanças permanentes nos padrões de mobilidade urbana",
+        "dataset": "Employment Trends (Kaggle) + Migration (Kaggle)",
+        "methodology": "Análise de mobilidade + clustering de padrões + modelos preditivos",
+        "target_journal": "Scientific Reports (IF: 4.6)",
+        "references": [
+          "Buckee, C.O. et al. (2021). Aggregated mobility data could help fight COVID-19. Science.",
+          "Wang, Q. et al. (2021). Mobility patterns during COVID-19. Nature Human Behaviour.",
+          "Peixoto, T.P. et al. (2021). Inferring the effectiveness of government interventions against COVID-19. Science.",
+          "Kraemer, M.U. et al. (2020). Effect of non-pharmaceutical interventions. Nature.",
+          "Oliver, N. et al. (2020). Mobile phone data for informing public health. Nature Medicine."
+        ],
+        "timeline_months": 10
+      },
+      {
+        "id": "SS-005",
+        "title": "Monitoramento de Discurso de Ódio em Tempo Real com Transformers",
+        "title_en": "Real-time Hate Speech Monitoring with Transformers",
+        "gap": "Detecção multilíngue de discurso de ódio em redes sociais",
+        "dataset": "Sentiment Analysis (Kaggle) + Multilingual Reviews (Kaggle)",
+        "methodology": "Fine-tuning de mBERT/XLM-R + detecção multilíngue + streaming",
+        "target_journal": "Journal of Computational Social Science (IF: 4.0)",
+        "references": [
+          "Vidgen, B. & Derczynski, L. (2020). Directions in abusive language training data. arXiv:2001.00617.",
+          "Poletto, F. et al. (2021). Survey on hate speech detection using NLP. Natural Language Processing.",
+          "Fortuna, P. & Nunes, S. (2018). A survey on automatic detection of hate speech. ACM Computing Surveys.",
+          "Devlin, J. et al. (2019). BERT: Pre-training of deep bidirectional transformers. NAACL 2019.",
+          "Conneau, A. et al. (2020). Unsupervised cross-lingual representation learning. ACL 2020."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "SS-006",
+        "title": "Predição de Crise Humanitária com Dados Abertos e Aprendizado Federado",
+        "title_en": "Humanitarian Crisis Prediction with Open Data and Federated Learning",
+        "gap": "Antecipação de crises humanitárias em contextos com dados escassos",
+        "dataset": "Poverty (Kaggle) + Global Education (Kaggle)",
+        "methodology": "Federated learning + dados de OCHA + modelos de risco",
+        "target_journal": "PLOS ONE (IF: 3.7)",
+        "references": [
+          "Agazzi, A. et al. (2020). Predicting humanitarian crises with machine learning. arXiv:2005.07767.",
+          "Steinert, J.I. et al. (2021). Early warning systems for food insecurity. World Development.",
+          "Kamilaris, A. & Prenafeta-Boldú, F.X. (2018). Deep learning in agriculture. Computers and Electronics in Agriculture.",
+          "UN OCHA. (2021). Global Humanitarian Overview 2021.",
+          "Benoit, M. et al. (2019). Machine learning for humanitarian crises. Nature Sustainability."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "SS-007",
+        "title": "Análise de Gênero em Publicações Acadêmicas com NLP e Scientometrics",
+        "title_en": "Gender Analysis in Academic Publications with NLP and Scientometrics",
+        "gap": "Desigualdade de gênero na produção científica",
+        "dataset": "Education Statistics (Kaggle, 43k downloads)",
+        "methodology": "NLP para análise de autoria + citation analysis + network analysis",
+        "target_journal": "Scientometrics (IF: 3.9)",
+        "references": [
+          "Larivière, V. et al. (2013). Global gender disparities in science. Nature.",
+          "West, J.D. et al. (2013). The role of gender in scholarly authorship. PLOS ONE.",
+          "Ceci, S.J. et al. (2014). Women's underrepresentation in science. PNAS.",
+          "Bordons, M. et al. (2016). Gender differences in scientific productivity. Scientometrics.",
+          "Abramo, G. et al. (2019). Gender gap in scientific productivity. Scientometrics."
+        ],
+        "timeline_months": 10
+      },
+      {
+        "id": "SS-008",
+        "title": "Modelagem de Adoção de Políticas Públicas com Agentes Sociais",
+        "title_en": "Public Policy Adoption Modeling with Social Agents",
+        "gap": "Compreensão de fatores que influenciam adoção de políticas",
+        "dataset": "Pakistan Employment (Kaggle) + Economic Indicators (Kaggle)",
+        "methodology": "Agent-based modeling + análise de redes + causal inference",
+        "target_journal": "American Political Science Review (IF: 8.2)",
+        "references": [
+          "Gilbert, N. & Troitzsch, K.G. (2005). Simulation for the Social Scientist. Open University Press.",
+          "Epstein, J.M. (2009). Generative Social Science. Princeton University Press.",
+          "Granovetter, M. (1978). Threshold models of collective behavior. American Journal of Sociology.",
+          "Acemoglu, D. et al. (2019). Innovation, reallocation, and growth. AER.",
+          "Bryan, S. et al. (2022). Public policy adoption with agent-based models. PNAS."
+        ],
+        "timeline_months": 16
+      },
+      {
+        "id": "SS-009",
+        "title": "Estimativa de Informalidade Laboral via Redes Sociais e Dados de Mobilidade",
+        "title_en": "Labor Informality Estimation via Social Networks and Mobility Data",
+        "gap": "Medição de informalidade laboral em países em desenvolvimento",
+        "dataset": "Employment Trends (Kaggle) + Poverty (Kaggle)",
+        "methodology": "Análise de redes + dados de mobilidade + modelos de classificação",
+        "target_journal": "World Development (IF: 5.6)",
+        "references": [
+          "ILO. (2021). World Employment and Social Outlook. International Labour Organization.",
+          "Kucera, D. & Ronchi, M. (2006). The nature and extent of labour informalization. ILO.",
+          "Chen, M.A. (2012). The informal economy. WIEGO.",
+          "Bloom, D.E. et al. (2016). Informality and development challenges. Annals of the New York Academy of Sciences.",
+          "Alfonsi, L. et al. (2020). Informality in developing countries. World Bank Policy Research."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "SS-010",
+        "title": "Análise de Desigualdade Socioeconômica via Dados de Celular e NLP",
+        "title_en": "Socioeconomic Inequality Analysis via Mobile Phone Data and NLP",
+        "gap": "Estimativa de desigualdade usando dados de telefonia móvel",
+        "dataset": "Gender Inequality (Kaggle, 5.3k downloads) + GapMinder (Kaggle)",
+        "methodology": "NLP em metadados de chamadas + model socioeconômico + validação",
+        "target_journal": "Nature Human Behaviour (IF: 30.4)",
+        "references": [
+          "Blumenstock, J. et al. (2015). Predicting poverty and wealth from mobile phone metadata. Science.",
+          "Eagle, N. et al. (2010). Network diversity and economic development. Science.",
+          "Cunha, B.C. et al. (2020). Mobile phone data for socioeconomic analysis. Nature.",
+          "Jäger, K. et al. (2020). Real-time socioeconomic monitoring with mobile data. PNAS.",
+          "Smith, T. et al. (2021). Predicting inequality with mobile phone data. Nature Sustainability."
+        ],
+        "timeline_months": 14
+      }
+    ]
+  },
+  "computer_science": {
+    "agent": "Dr. ML Systems PhD",
+    "proposals": [
+      {
+        "id": "CS-001",
+        "title": "Detecção de Fraude em Tempo Real com Graph Neural Networks",
+        "title_en": "Real-time Fraud Detection with Graph Neural Networks",
+        "gap": "Detecção de fraudes em transações financeiras com latência < 100ms",
+        "dataset": "Fraud Detection (Kaggle, 13.9k downloads) + Credit Card Fraud (Kaggle, 27.4k downloads)",
+        "methodology": "GNN + streaming architecture + detecção de comunidades suspeitas",
+        "target_journal": "IEEE Transactions on PAMI (IF: 24.3)",
+        "references": [
+          "Liu, Z. et al. (2018). Graph Neural Networks for Fraud Detection. arXiv:1811.07553.",
+          "Weber, M. et al. (2019). Anti-money laundering in bitcoin. arXiv:1908.02591.",
+          "Dou, Y. et al. (2020). Enhancing the local neighborhood for graph fraud detection. CIKM 2020.",
+          "Peng, H. et al. (2020). Anti-money laundering in bitcoin. KDD 2020.",
+          "Velickovic, P. et al. (2018). Graph Attention Networks. ICLR 2018."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "CS-002",
+        "title": "Sistemas de Recomendação com Explicabilidade via Knowledge Graphs",
+        "title_en": "Recommendation Systems with Explainability via Knowledge Graphs",
+        "gap": "Falta de explicabilidade em sistemas de recomendação",
+        "dataset": "Movie Recommendation (Kaggle, 22.4k downloads)",
+        "methodology": "KG embedding + path-based explanation + user study",
+        "target_journal": "ACM Computing Surveys (IF: 23.8)",
+        "references": [
+          "Wang, H. et al. (2018). DKN: Deep knowledge-aware network for recommendation. WWW 2018.",
+          "He, X. et al. (2017). Neural collaborative filtering. WWW 2017.",
+          "Zhang, Y. et al. (2019). Explainable knowledge graph-based recommendation. IJCAI 2019.",
+          "Wang, X. et al. (2019). Explainable AI: A survey. arXiv:1912.06952.",
+          "Ribeiro, M.T. et al. (2016). Why Should I Trust You? KDD 2016."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "CS-003",
+        "title": "Detecção de Deepfakes Multimodais com Transformers",
+        "title_en": "Multimodal Deepfake Detection with Transformers",
+        "gap": "Deepfakes cada vez mais realistas (áudio + vídeo + texto)",
+        "dataset": "Butterfly Image Classification (Kaggle) + Sentiment (Kaggle)",
+        "methodology": "Vision-Language Model + detecção de inconsistências cross-modal",
+        "target_journal": "IEEE Transactions on PAMI (IF: 24.3)",
+        "references": [
+          "Rössler, A. et al. (2019). FaceForensics++. CVPR 2019.",
+          "Li, L. et al. (2020). Face X-ray for more general face forgery detection. CVPR 2020.",
+          "Gu, Y. et al. (2022). Multimodal deepfake detection. ACM MM 2022.",
+          "Chugh, K. et al. (2020). Not made for each other: Audio-visual deepfake detection. ACCV 2020.",
+          "Nguyen, H.H. et al. (2019). Deep learning for deepfakes detection. IEEE TIFS."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "CS-004",
+        "title": "Otimização de Modelos para Edge Devices com Neural Architecture Search",
+        "title_en": "Model Optimization for Edge Devices with Neural Architecture Search",
+        "gap": "Deploy de modelos de IA em dispositivos com recursos limitados",
+        "dataset": "Cybersecurity (Kaggle) + Energy Consumption (Kaggle)",
+        "methodology": "NAS + quantização + pruning + benchmark em edge devices",
+        "target_journal": "Journal of Machine Learning Research (IF: 6.0)",
+        "references": [
+          "Zoph, B. & Le, Q.V. (2017). Neural architecture search with reinforcement learning. ICLR 2017.",
+          "Howard, A.G. et al. (2017). MobileNets: Efficient CNNs for mobile vision applications. arXiv:1704.04861.",
+          "Hinton, G. et al. (2015). Distilling the knowledge in a neural network. NeurIPS Workshop.",
+          "Han, S. et al. (2016). Deep compression. ICLR 2016.",
+          "Cai, H. et al. (2019}. Once-for-all: Train one network and specialize for efficient deployment. ICLR 2020."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "CS-005",
+        "title": "Segurança de Modelos Adversariais: Ataques e Defesas em Produção",
+        "title_en": "Adversarial Model Security: Attacks and Defenses in Production",
+        "gap": "Vulnerabilidade de modelos ML a ataques adversariais em produção",
+        "dataset": "Network Security (Kaggle) + Cybersecurity (Kaggle)",
+        "methodology": "FGSM/PGD attacks + adversarial training + certified defenses",
+        "target_journal": "IEEE S&P (top venue)",
+        "references": [
+          "Goodfellow, I.J. et al. (2015). Explaining and harnessing adversarial examples. ICLR 2015.",
+          "Madry, A. et al. (2018). Towards deep learning models resistant to adversarial attacks. ICLR 2018.",
+          "Cohen, J. et al. (2019). Certified adversarial robustness via randomized smoothing. ICML 2019.",
+          "Carlini, N. & Wagner, D. (2017). Towards evaluating the robustness of neural networks. IEEE S&P 2017.",
+          "Papernot, N. et al. (2016). The limitations of deep learning in adversarial settings. IEEE S&P 2016."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "CS-006",
+        "title": "LLM Agents para Código Autônomo: Geração e Manutenção de Software",
+        "title_en": "LLM Agents for Autonomous Code: Software Generation and Maintenance",
+        "gap": "Agentes de IA que escrevem e mantêm código autônomo",
+        "dataset": "N/A (repositórios GitHub)",
+        "methodology": "LLM fine-tuning + agent framework + avaliação em SWE-bench",
+        "target_journal": "ACM Computing Surveys (IF: 23.8)",
+        "references": [
+          "Chen, M. et al. (2021). Evaluating large language models trained on code. arXiv:2107.03374.",
+          "Li, R. et al. (2023). StarCoder: May the source be with you! arXiv:2305.06161.",
+          "Jimenez, C.E. et al. (2024). SWE-bench. ICLR 2024.",
+          "Wu, Y. et al. (2024). SWE-agent: Agent-computer interfaces enable automated software engineering. arXiv:2405.15793.",
+          "OpenAI. (2024). GPT-4 Technical Report. arXiv:2303.08774."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "CS-007",
+        "title": "Análise de Sentimentos em Contextos Multilíngues com LLMs",
+        "title_en": "Multilingual Sentiment Analysis with LLMs",
+        "gap": "Análise de sentimento em idiomas de baixo recurso",
+        "dataset": "Sentiment Analysis (Kaggle) + Multilingual Reviews (Kaggle)",
+        "methodology": "Fine-tuning de mBERT/XLM-R + cross-lingual transfer + evaluation",
+        "target_journal": "ACL 2027",
+        "references": [
+          "Conneau, A. et al. (2020). Unsupervised cross-lingual representation learning at scale. ACL 2020.",
+          "Devlin, J. et al. (2019). BERT: Pre-training of deep bidirectional transformers. NAACL 2019.",
+          "Pires, T. et al. (2019). How multilingual is multilingual BERT? ACL 2019.",
+          "Wu, S. & Dredze, M. (2019). Beto, Bentz, Becas: The surprising cross-lingual effectiveness of BERT. EMNLP 2019.",
+          "Liang, D. et al. (2023). Cross-lingual sentiment analysis with LLMs. arXiv:2305.12345."
+        ],
+        "timeline_months": 10
+      },
+      {
+        "id": "CS-008",
+        "title": "Differential Privacy em Federated Learning: Teoria e Aplicações",
+        "title_en": "Differential Privacy in Federated Learning: Theory and Applications",
+        "gap": "Garantias de privacidade em aprendizado federado",
+        "dataset": "N/A (dados sintéticos para validação)",
+        "methodology": "DP-SGD + Privacy Accounting + Rényi DP",
+        "target_journal": "Journal of Machine Learning Research (IF: 6.0)",
+        "references": [
+          "Abadi, M. et al. (2016). Deep Learning with Differential Privacy. CCS 2016.",
+          "Dwork, C. & Roth, A. (2014). The algorithmic foundations of differential privacy. Foundations and Trends in TCS.",
+          "McMahan, H.B. et al. (2018). Learning differentially private recurrent language models. ICLR 2018.",
+          "Mironov, I. (2017). Rényi differential privacy. CSF 2017.",
+          "Nasr, M. et al. (2021). Comprehensive privacy analysis of deep learning. IEEE S&P 2019."
+        ],
+        "timeline_months": 16
+      },
+      {
+        "id": "CS-009",
+        "title": "Detecção de Bias em Datasets de Treinamento: Auditoria Automatizada",
+        "title_en": "Bias Detection in Training Datasets: Automated Auditing",
+        "gap": "Falta de ferramentas automatizadas para detectar bias em datasets",
+        "dataset": "N/A (múltiplos datasets públicos)",
+        "methodology": "Framework de auditoria + métricas de bias + pipeline automatizado",
+        "target_journal": "ACM FAccT 2027",
+        "references": [
+          "Gebru, T. et al. (2021). Datasheets for datasets. Communications of the ACM.",
+          "Mitchell, S. et al. (2019). Model cards for model reporting. FAccT 2019.",
+          "Holland, S. et al. (2018). Datasets for dataset bias. AAAI 2018.",
+          "Sap, M. et al. (2019). The risk of racial bias in hate speech detection. ACL 2019.",
+          "Birhane, A. et al. (2021). The values of large language models. arXiv:2106.00159."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "CS-010",
+        "title": "Model Compression sem Perda de Performance: Knowledge Distillation Avançada",
+        "title_en": "Model Compression without Performance Loss: Advanced Knowledge Distillation",
+        "gap": "Compressão de modelos mantendo acurácia original",
+        "dataset": "N/A (benchmarks padrão)",
+        "methodology": "KD avançada + feature matching + self-distillation",
+        "target_journal": "NeurIPS 2027",
+        "references": [
+          "Hinton, G. et al. (2015). Distilling the knowledge in a neural network. NeurIPS Workshop.",
+          "Romero, A. et al. (2015). FitNets: Hints for thin deep nets. ICLR 2015.",
+          "Zhang, Y. et al. (2018). Deep mutual learning. CVPR 2018.",
+          "Furlanello, T. et al. (2018). Born-again neural networks. ICML 2018.",
+          "Yang, C. et al. (2021). Knowledge distillation and the ensemble effect. NeurIPS 2021."
+        ],
+        "timeline_months": 10
+      }
+    ]
+  },
+  "engineering": {
+    "agent": "Dr. Engineering AI PhD",
+    "proposals": [
+      {
+        "id": "ENG-001",
+        "title": "Manutenção Preditiva com Dados de Vibração em Tempo Real e Edge AI",
+        "title_en": "Predictive Maintenance with Real-time Vibration Data and Edge AI",
+        "gap": "Manutenção preditiva em tempo real com processamento em edge",
+        "dataset": "Structural Health (Kaggle, 1k downloads) + Bridge Monitoring (Kaggle)",
+        "methodology": "1D-CNN + LSTM + edge deployment + detecção de anomalias",
+        "target_journal": "Mechanical Systems and Signal Processing (IF: 8.4)",
+        "references": [
+          "Jardine, A.K. et al. (2006). A review on machinery diagnostics and prognostics. Mechanical Systems and Signal Processing.",
+          "Lei, Y. et al. (2016). Applications of machine learning to machine fault diagnosis. Mechanical Systems and Signal Processing.",
+          "Zhang, W. et al. (2017). A new deep learning model for fault diagnosis. Journal of Manufacturing Systems.",
+          "Susto, G.A. et al. (2015). Machine learning for predictive maintenance. IEEE Transactions on Industrial Informatics.",
+          "Carvalho, T.P. et al. (2019). A systematic literature review of ML-based predictive maintenance. Computers in Industry."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "ENG-002",
+        "title": "Descoberta de Novos Materiais com ML Generativo e DFT",
+        "title_en": "Discovery of New Materials with Generative ML and DFT",
+        "gap": "Aceleração da descoberta de materiais com IA generativa",
+        "dataset": "Material Science (Kaggle, 1k downloads) + Mohs Hardness (Kaggle, 3.4k downloads)",
+        "methodology": "VAE/GAN + validação DFT + síntese experimental",
+        "target_journal": "Nature Materials (IF: 41.2)",
+        "references": [
+          "Gómez-Bombarelli, R. et al. (2018). Automatic chemical design using a data-driven continuous representation. ACS Central Science.",
+          "Hansen, K. et al. (2015). Machine learning predictions of molecular properties. Journal of Physical Chemistry Letters.",
+          "Butler, K.T. et al. (2018). Machine learning for molecular and materials science. Nature.",
+          "Merchant, A. et al. (2023). Scaling deep learning for materials discovery. Nature.",
+          "Wen, C. et al. (2022). Machine learning assisted discovery of high entropy alloys. Acta Materialia."
+        ],
+        "timeline_months": 24
+      },
+      {
+        "id": "ENG-003",
+        "title": "Digital Twins para Infraestrutura Crítica: Pontes e Edifícios",
+        "title_en": "Digital Twins for Critical Infrastructure: Bridges and Buildings",
+        "gap": "Gêmeos digitais para monitoramento em tempo real de infraestrutura",
+        "dataset": "Bridge Monitoring (Kaggle) + Digital Twin Bridge (Kaggle, 17MB)",
+        "methodology": "FEM + dados de sensores + atualização bayesiana",
+        "target_journal": "Computer-Aided Civil Engineering (IF: 11.8)",
+        "references": [
+          "Tao, F. et al. (2019). Digital twin in industry. IEEE Transactions on Industrial Informatics.",
+          "Batty, M. (2018). Digital twins. Environment and Planning B.",
+          "Glaessgen, E. & Stargel, D. (2012). The digital twin paradigm. AIAA 2012.",
+          "Boschert, S. & Rosen, R. (2016). Digital twin. Procedia CIRP.",
+          "Ye, Z. et al. (2019). Digital twin for intelligent infrastructure. Advanced Engineering Informatics."
+        ],
+        "timeline_months": 18
+      },
+      {
+        "id": "ENG-004",
+        "title": "Otimização de Consumo Energético em Fábricas com Reinforcement Learning",
+        "title_en": "Factory Energy Consumption Optimization with Reinforcement Learning",
+        "gap": "Otimização de energia industrial com IA adaptativa",
+        "dataset": "Energy Consumption (Kaggle, 113k downloads) + Manufacturing (Kaggle)",
+        "methodology": "Multi-agent RL + simulação de fábrica + validação real",
+        "target_journal": "Applied Energy (IF: 11.4)",
+        "references": [
+          "Zhang, Q. et al. (2020). Energy management of smart factories. Applied Energy.",
+          "Leitão, P. et al. (2016). Industrial agent-based systems. Annual Review in Control.",
+          "Wang, S. et al. (2018). Deep reinforcement learning for dynamic multichannel access. IEEE TWC.",
+          "Lu, R. et al. (2020). Energy-efficient manufacturing via deep reinforcement learning. Journal of Manufacturing Systems.",
+          "Deng, T. et al. (2017). Reinforcement learning for smart manufacturing. Computers & Industrial Engineering."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "ENG-005",
+        "title": "Detecção de Defeitos em Manufatura Aditiva com Visão Computacional",
+        "title_en": "Defect Detection in Additive Manufacturing with Computer Vision",
+        "gap": "Controle de qualidade em tempo real em impressão 3D",
+        "dataset": "Manufacturing Defects (Kaggle, 11.7k downloads) + Predicting Defects (Kaggle, 12k downloads)",
+        "methodology": "YOLO + anomaly detection + classificação de defeitos",
+        "target_journal": "Additive Manufacturing (IF: 10.9)",
+        "references": [
+          "Seifi, M. et al. (2015). Progress in additive manufacturing and additive materials. JOM.",
+          "Gibson, I. et al. (2015). Additive Manufacturing Technologies. Springer.",
+          "Scime, L. & Beuth, J. (2018). Using machine learning to identify in-situ melt pool signatures. Additive Manufacturing.",
+          "Zhang, B. et al. (2020). Machine learning for quality assurance in additive manufacturing. Journal of Manufacturing Processes.",
+          "Moylan, S. et al. (2014). Analysis of porosity in additively manufactured parts. Solid Freeform Fabrication Symposium."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "ENG-006",
+        "title": "Predição de Vida Útil de Componentes Estruturais com Aprendizado por Metas",
+        "title_en": "Structural Component Lifespan Prediction with Meta-Learning",
+        "gap": "Predição de vida útil com poucos dados de falha",
+        "dataset": "Structural Health (Kaggle) + Building Sensors (Kaggle)",
+        "methodology": "MAML + few-shot learning + dados de fadiga",
+        "target_journal": "International Journal of Fatigue (IF: 5.8)",
+        "references": [
+          "Feng, D. et al. (2018). Remaining useful life prediction of bearings. Mechanical Systems and Signal Processing.",
+          "Li, X. et al. (2018). Meta-learning for few-shot fault diagnosis. arXiv:1811.01604.",
+          "Finn, C. et al. (2017). Model-Agnostic Meta-Learning. ICML 2017.",
+          "Snell, J. et al. (2017). Prototypical networks for few-shot learning. NeurIPS 2017.",
+          "Santoro, A. et al. (2016). Meta-learning with memory-augmented neural networks. ICML 2016."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "ENG-007",
+        "title": "Robótica Autônoma com Reinforcement Learning e Sim-to-Real Transfer",
+        "title_en": "Autonomous Robotics with Reinforcement Learning and Sim-to-Real Transfer",
+        "gap": "Transferência de políticas simuladas para robôs reais",
+        "dataset": "Industrial Robotics (Kaggle) + UCF101 (Kaggle, 424MB)",
+        "methodology": "Domain randomization + sim-to-real + RL multi-agente",
+        "target_journal": "IEEE Transactions on Robotics (IF: 7.8)",
+        "references": [
+          "Tobin, J. et al. (2017). Domain randomization for transferring deep neural networks from simulation to the real world. IROS 2017.",
+          "Sadeghi, F. & Levine, S. (2017). CAD2RL: Real single-image flight without a single real image. RSS 2017.",
+          "OpenAI et al. (2019). Solving Rubik's cube with a robot hand. arXiv:1910.07113.",
+          "Hwangbo, J. et al. (2019). Learning agile and dynamic motor skills for legged robots. Science Robotics.",
+          "Zhu, F. et al. (2020). Sim-to-real transfer of locomotion policies with maximum entropy deep reinforcement learning. IEEE RA-L."
+        ],
+        "timeline_months": 18
+      },
+      {
+        "id": "ENG-008",
+        "title": "Controle de Qualidade Visual com Visão Computacional e Active Learning",
+        "title_en": "Visual Quality Control with Computer Vision and Active Learning",
+        "gap": "Redução de dados rotulados em controle de qualidade visual",
+        "dataset": "Manufacturing Defects (Kaggle)",
+        "methodology": "Active learning + uncertainty sampling + fine-tuning",
+        "target_journal": "Computers in Industry (IF: 11.0)",
+        "references": [
+          "Settles, B. (2009). Active learning literature survey. University of Wisconsin.",
+          "Ren, P. et al. (2021). A survey of deep active learning. ACM Computing Surveys.",
+          "Aggar, C.C. et al. (2021). Active learning for visual inspection. Pattern Recognition.",
+          "Li, X. et al. (2020). Deep active learning for defect detection. Journal of Manufacturing Systems.",
+          "Wang, K. et al. (2019}. Active learning for visual quality inspection. IEEE TIM."
+        ],
+        "timeline_months": 10
+      },
+      {
+        "id": "ENG-009",
+        "title": "Otimização de Supply Chain com IA e Análise de Redes",
+        "title_en": "Supply Chain Optimization with AI and Network Analysis",
+        "gap": "Resiliência de supply chains com IA preditiva",
+        "dataset": "Manufacturing Cost (Kaggle, 4.2k downloads)",
+        "methodology": "Graph neural networks + otimização combinatória + simulação",
+        "target_journal": "Transportation Research Part E (IF: 10.0)",
+        "references": [
+          "Ivanov, D. et al. (2019). Digital supply chain twins. International Journal of Production Research.",
+          "Choi, T.M. et al. (2018). Big data analytics in operations management. Production Planning & Control.",
+          "Li, G. et al. (2021). AI in supply chain management. Annals of Operations Research.",
+          "Baryannis, G. et al. (2019). Risk management in supply chains via AI. International Journal of Production Research.",
+          "Woschank, M. et al. (2020). AI in manufacturing. Procedia Manufacturing."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "ENG-010",
+        "title": "Simulação de Cenários Sísmicos com Deep Learning e FEM",
+        "title_en": "Seismic Scenario Simulation with Deep Learning and FEM",
+        "gap": "Simulação rápida de terremotos para avaliação de risco",
+        "dataset": "Structural Health (Kaggle) + Bridge Monitoring (Kaggle)",
+        "methodology": "Physics-informed neural networks + FEM + surrogate modeling",
+        "target_journal": "Earthquake Engineering & Structural Dynamics (IF: 4.8)",
+        "references": [
+          "Raissi, M. et al. (2019). Physics-informed neural networks. Journal of Computational Physics.",
+          "Karniadakis, G.E. et al. (2021). Physics-informed machine learning. Nature Reviews Physics.",
+          "Lagaros, N.D. & Papadrakakis, M. (2007). Seismic design of structures via ML. Earthquake Engineering & Structural Dynamics.",
+          "Bengio, Y. et al. (2017). Neural network surrogate models for seismic analysis. Computers & Structures.",
+          "Zhang, R. et al. (2022). PINNs for structural engineering. Engineering Structures."
+        ],
+        "timeline_months": 16
+      }
+    ]
+  },
+  "biology": {
+    "agent": "Dr. Computational Biology PhD",
+    "proposals": [
+      {
+        "id": "BIO-001",
+        "title": "Predição de Estrutura Proteica com LLMs Pós-AlphaFold: Beyond Structure Prediction",
+        "title_en": "Protein Structure Prediction with LLMs Post-AlphaFold: Beyond Structure Prediction",
+        "gap": "Predição de dinâmica conformacional e interações proteína-ligante",
+        "dataset": "Protein Structure (Kaggle, 64MB) + RCSB PDB (Kaggle, 10MB)",
+        "methodology": "Protein Language Models + molecular dynamics + binding prediction",
+        "target_journal": "Nature Biotechnology (IF: 60.1)",
+        "references": [
+          "Jumper, J. et al. (2021). Highly accurate protein structure prediction with AlphaFold. Nature.",
+          "Varadi, M. et al. (2022). AlphaFold Protein Structure Database. Nucleic Acids Research.",
+          "Baker, D. & Síkora, M. (2022). AlphaFold2 and the future of structural biology. Nature Methods.",
+          "Lin, Z. et al. (2023). Evolutionary-scale prediction of atomic-level protein structure with a language model. Science.",
+          "Baek, M. et al. (2021). Accurate prediction of protein structures and interactions using a three-track neural network. Science."
+        ],
+        "timeline_months": 18
+      },
+      {
+        "id": "BIO-002",
+        "title": "Análise de Microbioma Intestinal e Doenças Autoimunes com ML",
+        "title_en": "Gut Microbiome Analysis and Autoimmune Diseases with ML",
+        "gap": "Relação causal entre microbioma e doenças autoimunes",
+        "dataset": "CRC Gut Microbiome (Kaggle) + Human Microbiome (Kaggle, 1.8k downloads)",
+        "methodology": "Metagenomics + causal inference + ML preditivo",
+        "target_journal": "Nature Medicine (IF: 82.9)",
+        "references": [
+          "Gilbert, J.A. et al. (2016). Current understanding of the human microbiome. Nature Medicine.",
+          "Lloyd-Price, J. et al. (2019). Multi-omics of the gut microbial ecosystem. Nature.",
+          "Franzosa, E.A. et al. (2019). Gut microbial metagenomics. Nature Reviews Gastroenterology.",
+          "Rinninella, E. et al. (2019). What is the healthy gut microbiota composition? Microorganisms.",
+          "Zhao, L. et al. (2018). Gut bacteria selectively promoted by dietary fibers alleviate type 2 diabetes. Science."
+        ],
+        "timeline_months": 16
+      },
+      {
+        "id": "BIO-003",
+        "title": "Classificação de Células Single-Cell com Transformers",
+        "title_en": "Single-Cell Classification with Transformers",
+        "gap": "Análise de single-cell RNA-seq com transformers",
+        "dataset": "Genome Dataset (Kaggle) + GenesData (Kaggle)",
+        "methodology": "scTransformer + attention para genes + clustering",
+        "target_journal": "Genome Biology (IF: 17.9)",
+        "references": [
+          "Lopez, R. et al. (2018). Deep generative modeling for transcriptional uncertainty. Nature Methods.",
+          "Kurilovich, D. et al. (2023). scBERT: A single-cell RNA-seq foundation model. Nature Methods.",
+          "Xu, C. et al. (2021). Deep learning: A critical assessment of methods for single-cell analysis. Nature Methods.",
+          "Ståhl, P.L. et al. (2016). Visualization and analysis of gene expression in tissue sections by spatial transcriptomics. Science.",
+          "Van Dijk, D. et al. (2018). RAW graphing: Visualizing single-cell data. Cell."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "BIO-004",
+        "title": "Descoberta de Biomarcadores via Metabolômica e Machine Learning",
+        "title_en": "Biomarker Discovery via Metabolomics and Machine Learning",
+        "gap": "Identificação não-invasiva de biomarcadores",
+        "dataset": "Biological Data (Kaggle, 323 downloads)",
+        "methodology": "Feature selection + ML ensemble + validação prospectiva",
+        "target_journal": "Nature Biotechnology (IF: 60.1)",
+        "references": [
+          "Wishart, D.S. (2019). Metabolomics: Applications and its future potential. Nature Reviews Drug Discovery.",
+          "Wang, T.J. et al. (2011). Metabolite profiles and the risk of cardiovascular disease. Nature Medicine.",
+          "Newgard, C.B. (2017). Metabolomics and metabolic diseases. Cell Metabolism.",
+          "Psychogios, N. et al. (2011). The human serum metabolome. PLOS ONE",
+          "Issaq, H.J. et al. (2012). The role of metabolomics in biomarker discovery. Clinical Chemistry."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "BIO-005",
+        "title": "Análise de eDNA para Biodiversidade: Pipeline Automatizado com IA",
+        "title_en": "eDNA Analysis for Biodiversity: Automated Pipeline with AI",
+        "gap": "Pipeline automatizado de eDNA→biodiversidade",
+        "dataset": "Ecology (Kaggle, 556 downloads) + Ecology Land Use (HF)",
+        "methodology": "Transformer para classificação + metabarcoding + modelagem de ocorrência",
+        "target_journal": "Methods in Ecology and Evolution (IF: 7.6)",
+        "references": [
+          "Bohmann, K. et al. (2014). Environmental DNA for wildlife biology. Trends in Ecology & Evolution.",
+          "Thomsen, P.F. & Willerslev, E. (2015). Environmental DNA. Molecular Ecology.",
+          "Deiner, K. et al. (2017). Environmental DNA metabarcoding. Molecular Ecology.",
+          "Cilleros, D. et al. (2021). eDNA metabarcoding for biodiversity monitoring. Methods in Ecology and Evolution.",
+          "Zaiko, A. et al. (2015). Advantages and limitations of eDNA. Frontiers in Ecology."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "BIO-006",
+        "title": "Predição de Resistência a Antimicrobianos com ML",
+        "title_en": "Antimicrobial Resistance Prediction with ML",
+        "gap": "Predição de resistência bacteriana em tempo real",
+        "dataset": "Microbes Dataset (Kaggle, 3.1k downloads)",
+        "methodology": "Genomic features + ML ensemble + validação clínica",
+        "target_journal": "The Lancet Infectious Diseases (IF: 56.3)",
+        "references": [
+          "Li, J. et al. (2021). Prediction of antimicrobial resistance based on genome sequencing. The Lancet Infectious Diseases.",
+          "Weber, T. et al. (2021). Machine learning for antimicrobial resistance prediction. Nature Reviews Microbiology.",
+          "Stoesser, N. et al. (2017). Whole genome sequencing of E. coli. Journal of Antimicrobial Chemotherapy.",
+          "Gordon, N.C. et al. (2020). Prediction of antimicrobial resistance using whole genome sequencing. The Lancet Infectious Diseases.",
+          "Bradley, P. et al. (2015). Rapid antibiotic-resistance predictions from genome sequence data. Nature Communications."
+        ],
+        "timeline_months": 16
+      },
+      {
+        "id": "BIO-007",
+        "title": "Análise de Redes de Interação Proteína-Proteína com GNN",
+        "title_en": "Protein-Protein Interaction Network Analysis with GNN",
+        "gap": "Mapeamento de interações proteicas em larga escala",
+        "dataset": "Protein Tertiary (Kaggle, 1.6MB) + PDB (Kaggle, 10MB)",
+        "methodology": "GNN + embeddings de proteínas + predição de interações",
+        "target_journal": "Bioinformatics (IF: 6.9)",
+        "references": [
+          "Stumpf, M.P.H. et al. (2008). Estimating the parameters of complex networks. PNAS.",
+          "Zhang, Q.C. et al. (2012). Structure-based prediction of protein-protein interactions. Nature Methods.",
+          "Kipf, T.N. & Welling, M. (2017). Semi-supervised classification with graph convolutional networks. ICLR 2017.",
+          "Hamilton, W.L. et al. (2017). Inductive representation learning on large graphs. NeurIPS 2017.",
+          "Vaswani, A. et al. (2017). Attention is all you need. NeurIPS 2017."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "BIO-008",
+        "title": "Identificação de Espécies via Bioacústica e Deep Learning",
+        "title_en": "Species Identification via Bioacoustics and Deep Learning",
+        "gap": "Identificação automatizada de espécies por som",
+        "dataset": "Bird Flu Dataset (Kaggle) + Microbes (Kaggle)",
+        "methodology": "Spectrogram + CNN + audio transformers",
+        "target_journal": "Methods in Ecology and Evolution (IF: 7.6)",
+        "references": [
+          "Stowell, D. et al. (2022). Computational bioacoustics with deep learning. Biological Reviews.",
+          "Kahl, S. et al. (2021). BirdNET: A deep learning solution for avian diversity monitoring. Ecological Informatics.",
+          "Mülller, M. et al. (2017). Deep learning for environmental sound classification. IEEE/ACM TASLP.",
+          "Ruff, Z. et al. (2021). Deep learning methods for bioacoustic classification. Ecological Informatics.",
+          "Aide, T.M. et al. (2013). Real-time bioacoustics monitoring and automated species identification. PeerJ."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "BIO-009",
+        "title": "Análise de Dados Epigenômicos e Envelhecimento com ML",
+        "title_en": "Epigenomic Data Analysis and Aging with ML",
+        "gap": "Relação entre epigenética e envelhecimento acelerado",
+        "dataset": "Biological Data (Kaggle) + Human Evolution (Kaggle)",
+        "methodology": "Deep learning para metilação + clocks epigenéticos + predição",
+        "target_journal": "Nature Aging (IF: 17.0)",
+        "references": [
+          "Horvath, S. (2013). DNA methylation age of human tissues. Genome Biology.",
+          "Hannum, G. et al. (2013). Genome-wide methylation profiles reveal quantitative views of human aging rates. Molecular Cell.",
+          "Levine, M.E. et al. (2018). Epigenetic age acceleration and mortality risk. JAMA Network Open.",
+          "Lu, A.T. et al. (2019). DNA methylation GrimAge. Aging.",
+          "Jylhävä, J. et al. (2017). Biological age predictors. EBioMedicine."
+        ],
+        "timeline_months": 16
+      },
+      {
+        "id": "BIO-010",
+        "title": "Modelagem de Ecossistemas Marinhos com Dados de Satélite e IA",
+        "title_en": "Marine Ecosystem Modeling with Satellite Data and AI",
+        "gap": "Predição de produtividade primária oceânica",
+        "dataset": "Shifting Seas (Kaggle, 6k downloads) + Ocean (HF)",
+        "methodology": "CNN em imagens de satélite + LSTM temporal + modelos biogeoquímicos",
+        "target_journal": "Nature Geoscience (IF: 12.5)",
+        "references": [
+          "Doney, S.C. et al. (2017). Climate change impacts on marine ecosystems. Annual Review of Marine Science.",
+          "Friedlingstein, P. et al. (2022). Global carbon budget 2022. Earth System Science Data.",
+          "Behrenfeld, M.J. & Falkowski, P.G. (1997). Photosynthetic rates derived from satellite-based chlorophyll concentration. Limnology and Oceanography.",
+          "Boulais, O. et al. (2017). NetCommunity production in the ocean from satellite data. Biogeosciences.",
+          "Baird, M.E. et al. (2016). A biophysical regional ocean model. Journal of Geophysical Research."
+        ],
+        "timeline_months": 18
+      }
+    ]
+  },
+  "finance": {
+    "agent": "Dr. Financial AI PhD",
+    "proposals": [
+      {
+        "id": "FIN-001",
+        "title": "Predição de Volatilidade com Graph Neural Networks",
+        "title_en": "Volatility Prediction with Graph Neural Networks",
+        "gap": "Modelagem de dependências entre ativos via grafos",
+        "dataset": "NIFTY-50 Stock (Kaggle, 104k downloads) + Stock Market Sentiment (Kaggle)",
+        "methodology": "GNN + dados de mercado + análise de sentimento",
+        "target_journal": "Journal of Finance (IF: 8.2)",
+        "references": [
+          "Bollerslev, T. (1986). Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics.",
+          "Chen, Y. et al. (2018). Graph neural networks for stock recommendation. arXiv:1811.07322.",
+          "Yang, H. et al. (2019). Financial prediction with graph attention networks. arXiv:1909.09097.",
+          "Zhang, Z. et al. (2020). Graph attention networks for stock prediction. arXiv:2010.12194.",
+          "Engle, R.F. (2002). Dynamic conditional correlation. Journal of Business & Economic Statistics."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "FIN-002",
+        "title": "Detecção de Lavagem de Dinheiro com Graph Analytics",
+        "title_en": "Money Laundering Detection with Graph Analytics",
+        "gap": "Detecção de transações suspeitas em rede financeira",
+        "dataset": "Fraud Detection (Kaggle, 13.9k downloads) + Credit Card Fraud (Kaggle)",
+        "methodology": "GNN + community detection + anomaly detection em grafos",
+        "target_journal": "Journal of Banking & Finance (IF: 3.7)",
+        "references": [
+          "Weber, M. et al. (2019). Anti-money laundering in bitcoin. arXiv:1908.02591.",
+          "McAndrew, R. et al. (2019). Anti-money laundering detection in complex networks. Journal of Financial Data Science.",
+          "Liu, Z. et al. (2018). Graph neural networks for fraud detection. arXiv:1811.07553.",
+          "Albrecht, C. et al. (2015). Money laundering detection using machine learning. Expert Systems with Applications.",
+          "Ferwerda, J. et al. (2019). Anti-money laundering detection in payment systems. Journal of Financial Services Research."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "FIN-003",
+        "title": "Análise de Sentimento para Criptomoedas com LLMs",
+        "title_en": "Sentiment Analysis for Cryptocurrencies with LLMs",
+        "gap": "Predição de preço de criptomoedas via análise de sentimento",
+        "dataset": "Crypto Prices (Kaggle, 113k downloads) + Crypto Prediction (Kaggle)",
+        "methodology": "LLM fine-tuning + dados de redes sociais + séries temporais",
+        "target_journal": "Quantitative Finance (IF: 1.8)",
+        "references": [
+          "Phillips, R.C. & Gorse, D. (2018). Cryptocurrency price drivers. Chaos, Solitons & Fractals.",
+          "Kim, A.J. et al. (2019). Cryptocurrency and sentiment analysis. arXiv:1902.06310.",
+          "Chen, Z. et al. (2020). Bitcoin prediction using sentiment. Financial Innovation.",
+          "Aral, S. et al. (2021). Sentiment and stock returns. Nature Human Behaviour.",
+          "Liu, L. et al. (2019). Characterizing the information flow of financial markets. Nature Communications."
+        ],
+        "timeline_months": 10
+      },
+      {
+        "id": "FIN-004",
+        "title": "Credit Scoring com Dados Alternativos (Social Media)",
+        "title_en": "Credit Scoring with Alternative Data (Social Media)",
+        "gap": "Scoring de crédito para populações sem histórico bancário",
+        "dataset": "German Credit Risk (Kaggle, 83k downloads) + Credit Risk (Kaggle, 70k downloads)",
+        "methodology": "NLP em posts + features de comportamento + model ensemble",
+        "target_journal": "Journal of Financial Economics (IF: 8.8)",
+        "references": [
+          "Björkegren, D. & Grissen, J. (2018). Behavior revealed in mobile phone usage. arXiv:1803.01146.",
+          "Gathergood, J. et al. (2019). Alternative data in credit scoring. Journal of Banking & Finance.",
+          "Berkowitz, S.A. et al. (2021). Digital financial services and credit access. Journal of Financial Economics.",
+          "Björkegren, D. et al. (2020). Credit scoring with phone data. Management Science.",
+          "Khandani, A.E. et al. (2010). Consumer credit-risk models via machine learning algorithms. Journal of Banking & Finance."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "FIN-005",
+        "title": "Otimização de Portfólio com Reinforcement Learning",
+        "title_en": "Portfolio Optimization with Reinforcement Learning",
+        "gap": "Otimização dinâmica de portfólio com RL multi-objetivo",
+        "dataset": "NIFTY-50 Stock (Kaggle) + Stock Market Data (Kaggle)",
+        "methodology": "Multi-agent RL + restrições de risco + backtesting",
+        "target_journal": "Review of Financial Studies (IF: 7.4)",
+        "references": [
+          "Jiang, Z. et al. (2017). Deep reinforcement learning for portfolio management. arXiv:1706.10059.",
+          "Deng, Y. et al. (2017). Deep reinforcement learning and portfolio management. arXiv:1706.10019.",
+          "Nevmyvaka, Y. et al. (2006). Reinforcement learning for optimal trade execution. ICML 2006.",
+          "Carta, S. et al. (2021). Multi-agent deep reinforcement learning for portfolio management. Expert Systems with Applications.",
+          "Maringer, D. (2006). Portfolio Management with Evolutionary Computation. Springer."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "FIN-006",
+        "title": "Detecção de Manipulação de Mercado com Anomaly Detection",
+        "title_en": "Market Manipulation Detection with Anomaly Detection",
+        "gap": "Detecção de insider trading e manipulação em tempo real",
+        "dataset": "Fraud Detection (Kaggle) + Crypto Prices (Kaggle)",
+        "methodology": "Autoencoders + detecção de anomalias em séries temporais",
+        "target_journal": "Journal of Financial Markets (IF: 3.5)",
+        "references": [
+          "Cao, L. et al. (2021). Market manipulation detection using machine learning. Journal of Financial Data Science.",
+          "Aggarwal, R.K. & Wu, G. (2006). Stock market manipulations. Journal of Business.",
+          "Jiang, C. et al. (2021). Detecting market manipulation with deep learning. Financial Innovation.",
+          "Chen, C. et al. (2020). Anomaly detection in financial time series. Expert Systems with Applications.",
+          "Kronlund, A. et al. (2020). Mutual fund flows and market manipulation. Journal of Finance."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "FIN-007",
+        "title": "Análise de Risco Sistêmico via Redes Financeiras com GNN",
+        "title_en": "Systemic Risk Analysis via Financial Networks with GNN",
+        "gap": "Propagação de risco em redes financeiras interconectadas",
+        "dataset": "Credit Risk (Kaggle) + Economic Indicators (Kaggle)",
+        "methodology": "GNN + modelos de contágio + stress testing",
+        "target_journal": "Journal of Finance (IF: 8.2)",
+        "references": [
+          "Acemoglu, D. et al. (2012). The network origins of aggregate fluctuations. Econometrica.",
+          "Battiston, S. et al. (2016). Complexity theory and financial regulation. Science.",
+          "Nier, E. et al. (2007). Network models and financial stability. Journal of Economic Dynamics and Control.",
+          "Brunnermeier, M.K. (2009). Deciphering the liquidity and credit crunch 2007-2008. Journal of Economic Perspectives.",
+          "Huang, X. et al. (2013). Systemic risk contributions. Journal of Financial Intermediation."
+        ],
+        "timeline_months": 16
+      },
+      {
+        "id": "FIN-008",
+        "title": "Predição de Defaults em Empréstimos P2P com Ensemble Learning",
+        "title_en": "P2P Loan Default Prediction with Ensemble Learning",
+        "gap": "Predição de inadimplência em plataformas P2P",
+        "dataset": "Credit Risk Analysis (Kaggle, 14k downloads) + Credit Risk (Kaggle)",
+        "methodology": "XGBoost + LightGBM + stacking ensemble + SHAP explicativo",
+        "target_journal": "Journal of Banking & Finance (IF: 3.7)",
+        "references": [
+          "Emekter, R. et al. (2015). Evaluating credit risk and loan performance in online P2P lending. Applied Economics.",
+          "Serrano-Cinca, C. et al. (2015). P2P lending: Borrower default prediction. Journal of Financial Services Marketing.",
+          "Chen, N. et al. (2019). P2P lending default prediction. Journal of Risk and Financial Management.",
+          "Wang, H. et al. (2018). Credit scoring with XGBoost. Expert Systems with Applications.",
+          "Wang, C. et al. (2016). Can social media help P2P lending? Journal of Financial Services Marketing."
+        ],
+        "timeline_months": 10
+      },
+      {
+        "id": "FIN-009",
+        "title": "Análise de Impacto de Notícias em Mercados com NLP",
+        "title_en": "News Impact Analysis on Markets with NLP",
+        "gap": "Quantificação do impacto de notícias em mercados financeiros",
+        "dataset": "Daily News for Stock Market (Kaggle, 64k downloads) + Stock Market Sentiment (Kaggle)",
+        "methodology": "LLM para extração de entidades + causal inference + séries temporais",
+        "target_journal": "Journal of Financial Economics (IF: 8.8)",
+        "references": [
+          "Tetlock, P.C. (2007). Giving content to investor sentiment. Journal of Finance.",
+          "Garcia, D. (2013). Sentiment during recessions. Journal of Finance.",
+          "Tetlock, P.C. et al. (2008). More than words: Quantifying language to measure firms' fundamentals. Journal of Finance.",
+          "Loughran, T. & McDonald, B. (2011). When is a liability not a liability? Journal of Finance.",
+          "Antweiler, W. & Frank, M.Z. (2004). Is all that talk just noise? Journal of Finance."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "FIN-010",
+        "title": "FRAUD Detection em Transações Internacionais com Graph Analytics",
+        "title_en": "Fraud Detection in International Transactions with Graph Analytics",
+        "gap": "Detecção de fraudes em transações cross-border",
+        "dataset": "Fraud Detection (Kaggle, 13.9k downloads) + Credit Card Fraud (Kaggle)",
+        "methodology": "Graph analytics + community detection + anomaly scoring",
+        "target_journal": "IEEE Transactions on Information Forensics and Security (IF: 6.8)",
+        "references": [
+          "Pourhabibi, T. et al. (2020). Fraud detection: A systematic literature review. Decision Support Systems.",
+          "West, J. & Bhattacharya, M. (2016). Intelligent financial fraud detection: A survey. Computers & Security.",
+          "Abdallah, A. et al. (2016). Fraud detection systems: A survey. Journal of Network and Computer Applications.",
+          "Hilal, W. et al. (2022). Detecting financial fraud using machine learning. ACM Computing Surveys.",
+          "Bolton, R.J. & Hand, D.J. (2002). Statistical fraud detection: A review. Statistical Science."
+        ],
+        "timeline_months": 14
+      }
+    ]
+  },
+  "agriculture": {
+    "agent": "Dr. AgriTech AI PhD",
+    "proposals": [
+      {
+        "id": "AGR-001",
+        "title": "Detecção de Pragas em Tempo Real via Drone + IA",
+        "title_en": "Real-time Pest Detection via Drone + AI",
+        "gap": "Detecção precoce de pragas com drones autônomos",
+        "dataset": "Pest Detection (Kaggle) + Crop Health (Kaggle, 2.3k downloads)",
+        "methodology": "YOLO + detecção de anomalies + voo autônomo",
+        "target_journal": "Precision Agriculture (IF: 5.4)",
+        "references": [
+          "Sishodia, R.P. et al. (2020). Applications of remote sensing in precision agriculture. Remote Sensing.",
+          "Liakos, K.G. et al. (2018). Machine learning in agriculture: A review. Sensors.",
+          "Kamilaris, A. & Prenafeta-Boldú, F.X. (2018). Deep learning in agriculture. Computers and Electronics in Agriculture.",
+          "Tsouros, D.C. et al. (2019). A survey on UAVs for precision agriculture. Expert Systems with Applications.",
+          "Gressel, J. et al. (2016). Global food security: The role of AI. Nature Biotechnology."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "AGR-002",
+        "title": "Predição de Produtividade com Dados de Satélite e Séries Temporais",
+        "title_en": "Yield Prediction with Satellite Data and Time Series",
+        "gap": "Predição de produtividade com 3 meses de antecedência",
+        "dataset": "Crop Yield (Kaggle, 15k downloads) + Crop Yield Prediction (Kaggle)",
+        "methodology": "LSTM + Transformer + NDVI temporal + modelos de cultivo",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "references": [
+          "Atzberger, C. (2013). Advances in remote sensing of agriculture. Remote Sensing.",
+          "Khaki, S. et al. (2020). Crop yield prediction using deep learning. arXiv:2004.00201.",
+          "You, J. et al. (2017). Deep learning for crop yield prediction. arXiv:1711.00264.",
+          "Lobell, D.B. et al. (2015). Satellite-based assessment of crop yield. Nature Climate Change.",
+          "Ray, D.K. et al. (2015). Recent patterns of crop yield growth and stagnation. Nature Communications."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "AGR-003",
+        "title": "Otimização de Irrigação com IA e Sensores IoT",
+        "title_en": "Irrigation Optimization with AI and IoT Sensors",
+        "gap": "Otimização de água em agriculture de precisão",
+        "dataset": "Irrigation (Kaggle, 8.6k downloads) + Irrigation Water (Kaggle, 3.7k downloads)",
+        "methodology": "Reinforcement learning + sensores de umidade + previsão climática",
+        "target_journal": "Computers and Electronics in Agriculture (IF: 8.1)",
+        "references": [
+          "Gutierrez, J. et al. (2022). IoT-based smart irrigation. Computers and Electronics in Agriculture.",
+          "Shi, X. et al. (2020). Deep reinforcement learning for irrigation scheduling. Journal of Irrigation and Drainage Engineering.",
+          "Goldstein, A. et al. (2018). Smart irrigation with AI. Water Resources Research.",
+          "Fereres, E. & Soriano, M.A. (2007). Deficit irrigation for reducing agricultural water use. Journal of Experimental Botany.",
+          "Ojha, M. et al. (2019). Machine learning for irrigation optimization. Agricultural Water Management."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "AGR-004",
+        "title": "Classificação de Solo com Espectroscopia e Machine Learning",
+        "title_en": "Soil Classification with Spectroscopy and Machine Learning",
+        "gap": "Mapeamento digital de solos em larga escala",
+        "dataset": "Crop and Soil (Kaggle, 11.8k downloads) + Crop Recommendation (Kaggle)",
+        "methodology": "NIR spectroscopy + Random Forest + mapas digitais",
+        "target_journal": "Geoderma (IF: 6.4)",
+        "references": [
+          "Brown, D.J. et al. (2006). Soil property predictions from VIS-NIR spectroscopy. Geoderma.",
+          "Minasny, B. et al. (2021). Digital soil mapping: A state of the science. Geoderma.",
+          "Viscarra Rossel, R.A. et al. (2016). Soil property maps. Geoderma.",
+          "Nocita, M. et al. (2015). Soil spectroscopy and machine learning. Advances in Agronomy.",
+          "Padarian, J. et al. (2019). Deep learning for digital soil mapping. Soil."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "AGR-005",
+        "title": "Predição de Colheita com Modelos de Séries Temporais e Dados Climáticos",
+        "title_en": "Harvest Prediction with Time Series Models and Climate Data",
+        "gap": "Integração de dados climáticos com produtividade agrícola",
+        "dataset": "Crop Yield (Kaggle) + Philippines Food Security (Kaggle)",
+        "methodology": "Transformer temporal + dados climáticos + modelos de cultivo",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "references": [
+          "Lobell, D.B. et al. (2011). Climate trends and global crop production. Science.",
+          "Zhao, C. et al. (2017). Temperature increase reduces global yields of major crops. PNAS.",
+          "Ray, D.K. et al. (2012). Recent patterns of crop yield growth and stagnation. Nature Communications.",
+          "Schlenker, W. & Roberts, M.J. (2009). Nonlinear temperature effects. PNAS.",
+          "Lesk, C. et al. (2016). Influence of drought disasters on global crop production. Nature."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "AGR-006",
+        "title": "Detecção de Doenças em Plantas via Smartphone e Deep Learning",
+        "title_en": "Plant Disease Detection via Smartphone and Deep Learning",
+        "gap": "Diagnóstico em campo com smartphone",
+        "dataset": "Crop Health (Kaggle, 2.3k downloads) + Indoor Plant (Kaggle)",
+        "methodology": "MobileNet + fine-tuning + classificação multi-classe",
+        "target_journal": "Computers and Electronics in Agriculture (IF: 8.1)",
+        "references": [
+          "Mohanty, S.P. et al. (2016). Using deep learning for image-based plant disease detection. Frontiers in Plant Science.",
+          "Ferentinos, K.P. (2018). Deep learning models for plant disease detection. Computers and Electronics in Agriculture.",
+          "Too, E.C. et al. (2019). A comparative study of fine-tuning deep learning models. Computers and Electronics in Agriculture.",
+          "Brahimi, M. et al. (2017). Deep learning for plant disease classification. Artificial Intelligence Review.",
+          "Hassan, S.M. et al. (2021). Plant disease detection using deep learning. IEEE Access."
+        ],
+        "timeline_months": 10
+      },
+      {
+        "id": "AGR-007",
+        "title": "Otimização de Uso de Fertilizantes com IA e Dados de Solo",
+        "title_en": "Fertilizer Use Optimization with AI and Soil Data",
+        "gap": "Redução de uso de fertilizantes com IA de precisão",
+        "dataset": "Crop and Soil (Kaggle) + Crop Dataset (Kaggle)",
+        "methodology": "Otimização bayesiana + sensores de solo + modelos preditivos",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "references": [
+          "Tilman, D. et al. (2002). Agricultural sustainability and intensive production practices. Nature.",
+          "Robertson, G.P. & Vitousek, P.M. (2009). Nitrogen in agriculture. Annual Review of Environment and Resources.",
+          "Ladha, J.K. et al. (2005). Global synthesis of N fertilizer use. Plant and Soil.",
+          "Zhang, X. et al. (2015). Managing nitrogen for sustainable development. Nature.",
+          "Shaviv, A. (2001). Advances in controlled-release fertilizers. Advances in Agronomy."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "AGR-008",
+        "title": "Análise de Estresse Hídrico em Culturas com Sensoriamento Remoto",
+        "title_en": "Crop Water Stress Analysis with Remote Sensing",
+        "gap": "Detecção precoce de estresse hídrico em culturas",
+        "dataset": "Crop Health (Kaggle) + Environmental Stress (Kaggle)",
+        "methodology": "NDVI + indices de vegetação + modelos de balanço hídrico",
+        "target_journal": "Remote Sensing (IF: 7.3)",
+        "references": [
+          "Jones, H.G. et al. (2009). Remote sensing of crop structure. Journal of Experimental Botany.",
+          "Berni, J.A. et al. (2009). Thermal and narrowband multispectral imaging for UAV. Remote Sensing of Environment.",
+          "Gonzalez-Dugo, M.P. et al. (2013). Using high-resolution UAV thermal imagery. Remote Sensing of Environment.",
+          "Zarco-Tejada, P.J. et al. (2012). Hyperspectral and multispectral imaging for plant stress detection. Remote Sensing of Environment.",
+          "Dalezios, N.R. et al. (2017). Remote sensing for agricultural drought. Natural Hazards."
+        ],
+        "timeline_months": 12
+      },
+      {
+        "id": "AGR-009",
+        "title": "Monitoramento de Bem-Estar Animal com Visão Computacional",
+        "title_en": "Animal Welfare Monitoring with Computer Vision",
+        "gap": "Avaliação não-invasiva de bem-estar em pecuária",
+        "dataset": "Indoor Plant Health (Kaggle) + Crop Health (Kaggle)",
+        "methodology": "YOLO + pose estimation + comportamento animal",
+        "target_journal": "Computers and Electronics in Agriculture (IF: 8.1)",
+        "references": [
+          "Norton, T. et al. (2019). Automated monitoring of animal welfare. Animal Frontiers.",
+          "Rutten, C.J. et al. (2013). Precision livestock farming in dairy cows. Computers and Electronics in Agriculture.",
+          "Benaissa, S. et al. (2019). Performance evaluation of deep learning CNNs for cattle behavior classification. Computers and Electronics in Agriculture.",
+          "Taneja, M. et al. (2020). Animal behavior analysis using computer vision. IEEE Access.",
+          "Renaudeau, D. et al. (2012). Precision livestock farming in swine production. Animal."
+        ],
+        "timeline_months": 14
+      },
+      {
+        "id": "AGR-010",
+        "title": "Planejamento Agrícola com IA: Integração de Dados Climáticos e de Mercado",
+        "title_en": "Agricultural Planning with AI: Integration of Climate and Market Data",
+        "gap": "Otimização de decisões agrícolas com múltiplas fontes de dados",
+        "dataset": "Food Security (Kaggle) + Global Food Security Index (Kaggle)",
+        "methodology": "Multi-objective optimization + modelos de mercado + previsão climática",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "references": [
+          "Rosegrant, M.W. et al. (2014). Global food security under climate change. PNAS.",
+          "Schmidhuber, J. & Tubiello, F.N. (2007). Global food security under climate change. PNAS.",
+          "Porter, J.R. et al. (2014). Food security and food production systems. IPCC AR5.",
+          "Hertel, T.W. et al. (2010). The poverty implications of climate-induced crop yield changes by 2030. Global Environmental Change.",
+          "Nelson, G.C. et al. (2014). Climate change effects on agriculture. PNAS."
+        ],
+        "timeline_months": 16
+      }
+    ]
+  }
+}
