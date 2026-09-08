@@ -1,0 +1,13 @@
+{
+  "integration_version": "4.1.0-core.1",
+  "core_repository": "MarceloClaro/opencode-ecosystem-core",
+  "baseline_audited_commit": "a5478054ceb8fc34eb0d254a30a3c451d6d864cd",
+  "mode": "native_bridge_to_scientific_superlayer",
+  "primary_orchestrator": "marceloclaro",
+  "replaces_core": false,
+  "default_scientific_home": "~/.local/share/pesquisador-universal/skill",
+  "environment_override": "PESQUISADOR_UNIVERSAL_HOME",
+  "opencode_skill": ".opencode/skills/pesquisador-universal-marcelo-claro/SKILL.md",
+  "native_entrypoint": "python -m marceloclaro.scientific_lab",
+  "automatic_epistemic_authority": false
+}
