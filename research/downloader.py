@@ -113,19 +113,15 @@ class PaperDownloader:
         return results
 
     def _download_one(self, rec: PaperRecord) -> DownloadResult:
-        candidates = list(self._candidate_urls(rec))
-        if not candidates:
-            return DownloadResult(
-                rec,
-                ok=False,
-                method="-",
-                error="nenhuma rota open-access/repositório/preprint localizada",
-                extra={"doi": _normalise_doi(rec.doi)},
-            )
+        """Tenta as rotas em ordem e interrompe no primeiro PDF válido.
 
+        O iterador é deliberadamente lazy: se uma URL OA direta funciona, não
+        consulta OpenAlex; se OpenAlex funciona, não consulta Unpaywall/Europe
+        PMC. Isso reduz tráfego, latência e exposição desnecessária de DOI.
+        """
         errors: List[str] = []
         seen = set()
-        for method, url, metadata in candidates:
+        for method, url, metadata in self._candidate_urls(rec):
             if not _safe_http_url(url) or url in seen:
                 continue
             seen.add(url)
@@ -138,7 +134,11 @@ class PaperDownloader:
             rec,
             ok=False,
             method="-",
-            error="; ".join(errors) if errors else "nenhuma rota OA válida respondeu com PDF",
+            error=(
+                "; ".join(errors)
+                if errors
+                else "nenhuma rota open-access/repositório/preprint localizada"
+            ),
             extra={"doi": _normalise_doi(rec.doi), "attempted_routes": len(seen)},
         )
 
