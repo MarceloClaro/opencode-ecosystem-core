@@ -25,6 +25,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
 import re
 import urllib.parse
 import urllib.request
@@ -105,7 +106,14 @@ class PaperDownloader:
                  timeout: int = 30, max_pdf_bytes: int = MAX_PDF_BYTES):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        self.email = (email or "").strip() or None
+        configured_email = (
+            email
+            or os.environ.get("UNPAYWALL_EMAIL")
+            or os.environ.get("CROSSREF_MAILTO")
+            or ""
+        )
+        self.email = configured_email.strip() or None
+        self.openalex_api_key = os.environ.get("OPENALEX_API_KEY", "").strip() or None
         self.timeout = timeout
         self.max_pdf_bytes = max_pdf_bytes
 
@@ -197,10 +205,13 @@ class PaperDownloader:
 
     def _resolve_openalex_oa(self, doi: str) -> Optional[Tuple[str, Dict]]:
         identifier = urllib.parse.quote(f"https://doi.org/{doi}", safe=":/")
-        url = f"https://api.openalex.org/works/{identifier}"
+        base = f"https://api.openalex.org/works/{identifier}"
+        params = {}
         if self.email:
-            separator = "&" if "?" in url else "?"
-            url += separator + urllib.parse.urlencode({"mailto": self.email})
+            params["mailto"] = self.email
+        if self.openalex_api_key:
+            params["api_key"] = self.openalex_api_key
+        url = base + (("?" + urllib.parse.urlencode(params)) if params else "")
         try:
             data = self._json_get(url)
             location = data.get("best_oa_location") or {}
@@ -272,6 +283,7 @@ class PaperDownloader:
     def _write_receipt(self, rec: PaperRecord, dest: Path, method: str,
                        url: str, metadata: Dict, digest: str, total: int) -> Path:
         receipt_path = dest.with_suffix(".receipt.json")
+        receipt_tmp = receipt_path.with_suffix(receipt_path.suffix + ".part")
         receipt = {
             "schema": "open-science-download-receipt-v1",
             "title": rec.title,
@@ -289,10 +301,11 @@ class PaperDownloader:
             "source_url": _public_source_url(url),
             "source_url_sha256": hashlib.sha256(url.encode("utf-8")).hexdigest(),
         }
-        receipt_path.write_text(
+        receipt_tmp.write_text(
             json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
+        receipt_tmp.replace(receipt_path)
         return receipt_path
 
     def _download_pdf(self, rec: PaperRecord, method: str, url: str,
@@ -300,8 +313,11 @@ class PaperDownloader:
         fname = f"[{rec.year or 's.d.'}] - {_slugify(rec.title)}.pdf"
         dest = self.output_dir / fname
         tmp = dest.with_suffix(dest.suffix + ".part")
+        receipt_path = dest.with_suffix(".receipt.json")
+        receipt_tmp = receipt_path.with_suffix(receipt_path.suffix + ".part")
         sha = hashlib.sha256()
         total = 0
+        dest_written = False
 
         try:
             req = urllib.request.Request(
@@ -336,7 +352,8 @@ class PaperDownloader:
 
             digest = sha.hexdigest()
             tmp.replace(dest)
-            receipt_path = self._write_receipt(
+            dest_written = True
+            persisted_receipt = self._write_receipt(
                 rec, dest, method, url, metadata or {}, digest, total
             )
             extra = dict(metadata or {})
@@ -346,7 +363,7 @@ class PaperDownloader:
                 "source_url": _public_source_url(url),
                 "source_url_sha256": hashlib.sha256(url.encode("utf-8")).hexdigest(),
                 "validated_pdf_magic": True,
-                "receipt": str(receipt_path),
+                "receipt": str(persisted_receipt),
             })
             logger.info("[%s] baixado: %s (%d KiB)", method, dest.name, total // 1024)
             return DownloadResult(
@@ -358,6 +375,10 @@ class PaperDownloader:
             )
         except Exception as exc:
             tmp.unlink(missing_ok=True)
+            receipt_tmp.unlink(missing_ok=True)
+            if dest_written:
+                dest.unlink(missing_ok=True)
+                receipt_path.unlink(missing_ok=True)
             return DownloadResult(
                 rec,
                 ok=False,
