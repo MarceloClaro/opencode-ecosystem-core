@@ -201,6 +201,186 @@
         ],
         "timeline_months": 18,
         "difficulty": "Muito Alto"
+      },
+      {
+        "id": "HC-011",
+        "title": "Modelos Fundacionais para Detecção Precoce de Câncer em Imagens Médicas",
+        "title_en": "Foundation Models for Early Cancer Detection in Medical Imaging",
+        "gap": "Modelos genéricos de visão computacional não capturam padrões sutis de malignidade em estágios iniciais",
+        "dataset": "CheXpert (Stanford, 224k radiografias) + ISIC Melanoma (70k imagens)",
+        "methodology": "Fine-tuning de DINOv2 + adapter layers para multi-task (detecção + classificação) com active learning para amostragem de casos raros",
+        "expected_contribution": "Framework de foundation model adaptável para 3 tipos de câncer com performance superior a ResNet-50",
+        "target_journal": "Nature Medicine (IF: 82.9)",
+        "target_conference": "MICCAI 2027",
+        "references": [
+          "Oqulet, M. et al. (2024). DINOv2: Learning Robust Visual Features without Supervision. TMLR.",
+          "Irvin, J. et al. (2019). CheXpert: A Large Chest Radiograph Dataset. Nature Medicine.",
+          "Codella, N. et al. (2019). Skin Lesion Analysis Toward Melanoma Detection. ISIC Challenge."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "HC-012",
+        "title": "Privacy-Preserving Federated Learning para Hospitais com Dados Sensíveis",
+        "title_en": "Privacy-Preserving Federated Learning for Hospitals with Sensitive Data",
+        "gap": "Hospitais não compartilham dados por privacidade, mas modelos locais são fracos por falta de diversidade",
+        "dataset": "MIMIC-IV (MIT, 70k hospitalizações) + eICU (500k pacientes)",
+        "methodology": "Federated Averaging com differential privacy (ε=1.0) + secure aggregation + Personalized Federated Learning via MAML",
+        "expected_contribution": "Protocolo federado com garantia de privacidade e performance ≥90% de um modelo centralizado",
+        "target_journal": "The Lancet Digital Health (IF: 30.8)",
+        "target_conference": "NeurIPS 2027 Workshop on Health",
+        "references": [
+          "McMahan, B. et al. (2017). Communication-Efficient Learning of Deep Networks. AISTATS.",
+          "Abadi, M. et al. (2016). Deep Learning with Differential Privacy. CCS.",
+          "Li, T. et al. (2020). Federated Optimization in Heterogeneous Networks. MLSys."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "HC-013",
+        "title": "Sistema de Alerta Precoce para Sepse Baseado em Série Temporal Clínica",
+        "title_en": "Early Warning System for Sepsis Using Clinical Time Series",
+        "gap": "Sistemas atuais de alerta de sepse têm alta taxa de falso positivo (>85%), causando fadiga de alarme",
+        "dataset": "PhysioNet Sepsis Challenge 2019 (40k registros) + SIRIS (1.2M registros)",
+        "methodology": "Transformer temporal (Informer) com attention de multi-horizonte + calibração de probabilidades + threshold adaptativo por paciente",
+        "expected_contribution": "Sistema com AUC ≥0.92 e taxa de falso positivo reduzida em 60% vs. qSOFA",
+        "target_journal": "Intensive Care Medicine (IF: 41.7)",
+        "target_conference": "KDD 2027 Applied Health",
+        "references": [
+          "Reyny, M. et al. (2019). Reproducible Sepsis Detection. PhysioNet.",
+          "Zhou, H. et al. (2021). Informer: Beyond Efficient Transformer. AAAI.",
+          "Singer, M. et al. (2016). Third International Consensus Definitions for Sepsis. JAMA."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "HC-014",
+        "title": "Geração de Relatórios Radiológicos com LLMs: Avaliação de Precisão Clínica",
+        "title_en": "Radiology Report Generation with LLMs: Clinical Accuracy Assessment",
+        "gap": "LLMs geram relatórios fluentes mas com erros factuais perigosos não detectados por métricas NLP padrão",
+        "dataset": "MIMIC-CXR (377k imagens + relatórios) + IU-Xray (7.4k pares)",
+        "methodology": "LLaMA-3 fine-tuned + Chain-of-Thought medical + clinical NER para verificação factual + radiologist blind review",
+        "expected_contribution": "Métrica Factual Accuracy Score (FAS) validada por radiologistas e framework de avaliação clínica",
+        "target_journal": "Radiology (IF: 29.1)",
+        "target_conference": "MICCAI 2027",
+        "references": [
+          "Johnson, A. et al. (2019). MIMIC-CXR: A Deidentified Database. Scientific Data.",
+          "Sharma, P. et al. (2024). Clinical Report Generation with LLMs. Nature Medicine.",
+          "Jain, A. et al. (2021). CheXbert: Combining Automatic Labelers. Nature BME."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "HC-015",
+        "title": "Predição de Resposta a Imunoterapia em Câncer com Modelos Multi-ômicos",
+        "title_en": "Immunotherapy Response Prediction in Cancer with Multi-omics Models",
+        "gap": "Apenas 20-40% dos pacientes respondem à imunoterapia, mas não há biomarcadores confiáveis para seleção",
+        "dataset": "TCGA Pan-Cancer (11k pacientes, 33 tipos) + IMpower150 (clinical + RNA-seq)",
+        "methodology": "GNN multi-ômicos (genômica + transcriptômica + patômica) + attention inter-ômica + validação em coorte independent",
+        "expected_contribution": "Assinatura multi-ômica preditiva com AUC ≥0.85 validada em 2 coortes independentes",
+        "target_journal": "Nature (IF: 64.8)",
+        "target_conference": "ASCO 2027",
+        "references": [
+          "Hoadley, K. et al. (2018). Cell-of-Origin Patterns in TCGA. Cell.",
+          "Liu, C. et al. (2024). Multi-omics Immunotherapy Prediction. Nature.",
+          "Rizvi, N. et al. (2015). Mutational Landscape Determines Sensitivity to PD-1. Science."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "HC-016",
+        "title": "Assistente de Prescrição Médica Baseado em Grafos de Conhecimento",
+        "title_en": "Knowledge Graph-Based Medical Prescription Assistant",
+        "gap": "Erros de prescrição causam 7.000 mortes/ano nos EUA; sistemas atuais não modelam interações medicamentosas complexas",
+        "dataset": "DrugBank (14k drogas) + FDA FAERS (2M relatos) + MIMIC-IV prescriptions",
+        "methodology": "Knowledge Graph Embedding (TransR) + GNN para predição de interações + LLM para explicação em linguagem natural",
+        "expected_contribution": "Sistema que detecta 95% das interações medicamentosas perigosas com explicação clínica",
+        "target_journal": "The BMJ (IF: 39.9)",
+        "target_conference": "AMIA 2027",
+        "references": [
+          "Wishart, D. et al. (2018). DrugBank 5.0. Nucleic Acids Research.",
+          "Bate, A. & Evans, S. (2009). Quantitative Signal Detection Using Spontaneous ADR Reports. Pharmacoepidemiology.",
+          "Li, J. et al. (2022). Medical Knowledge Graph: A Survey. ACM Computing Surveys."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "HC-017",
+        "title": "Detecção de Outbreaks de Doenças Infecciosas via Dados de Busca e Redes Sociais",
+        "title_en": "Infectious Disease Outbreak Detection via Search and Social Media Data",
+        "gap": "Sistemas tradicionais de vigilância têm atraso de 1-2 semanas; dados online são rápidos mas barulhentos",
+        "dataset": "Google Trends + Twitter/X Health + WHO DONs + CDC FluView",
+        "methodology": "Time-series anomaly detection (Prophet + LSTM ensemble) + NLP para classificação de sinais + Bayesian early warning",
+        "expected_contribution": "Sistema de alerta precoce com 7 dias de antecedência e F1 ≥0.80 para 5 doenças prioritárias",
+        "target_journal": "The Lancet Infectious Diseases (IF: 56.3)",
+        "target_conference": "AAAI 2027 HAI",
+        "references": [
+          "Brownstein, J. et al. (2009). Digital Disease Surveillance. The Lancet.",
+          "Yang, S. et al. (2017). Self-Monitoring for Influenza. Nature Biotechnology.",
+          "WHO (2023). Global Outbreak Alert and Response Network. Technical Report."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "HC-018",
+        "title": "Aprendizado por Reforço para Otimização de Tratamento de Cuidados Intensivos",
+        "title_en": "Reinforcement Learning for ICU Treatment Optimization",
+        "gap": "Decisões em UTI são tomadas por heurísticas; RL pode otimizar sequências de tratamento individualizadas",
+        "dataset": "MIMIC-IV (70k internações) + eICU (200k pacientes)",
+        "methodology": "Batch RL (Conservative Q-Learning) + off-policy evaluation + contrafactual analysis + simulated ICU environment",
+        "expected_contribution": "Política de tratamento que reduz mortalidade estimada em 15% vs. padrão clínico em simulação",
+        "target_journal": "Nature Medicine (IF: 82.9)",
+        "target_conference": "ICML 2027 Health",
+        "references": [
+          "Levin, M. et al. (2021). Deep Reinforcement Learning for Sepsis Treatment. npj Digital Medicine.",
+          "Kidwell, R. et al. (2024). Conservative Q-Learning for Offline RL. JMLR.",
+          "Komorowski, M. et al. (2018). Artificial Intelligence in ICU. The Lancet."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "HC-019",
+        "title": "Transfer Learning Cross-lingual para Análise de Prontuários Eletrônicos",
+        "title_en": "Cross-lingual Transfer Learning for Electronic Health Record Analysis",
+        "gap": "Modelos NLP clínicos são monocultores (inglês); hospitais em países não-anglófonos não se beneficiam",
+        "dataset": "MIMIC-IV (inglês) + eSAÚDE Brasil (português) + CASI (chinês)",
+        "methodology": "XLM-RoBERTa clinical + adapter layers por idioma + few-shot learning com 100 exemplares por idioma-alvo",
+        "expected_contribution": "Modelo multilíngue que mantém ≥90% do performance monolingual em 3 idiomas",
+        "target_journal": "JAMIA (IF: 7.3)",
+        "target_conference": "ACL 2027 BioNLP",
+        "references": [
+          "Conneau, A. et al. (2020). XLM-R: Unsupervised Cross-lingual Representation. ACL.",
+          "Neveol, A. et al. (2018). Clinical NLP in Non-English Languages. JAMIA.",
+          "Huang, K. et al. (2019). ClinicalBERT. arXiv."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "HC-020",
+        "title": "Sistema de Triagem Dermatológica para Peles Escuras com IA Justa",
+        "title_en": "Dermatological Screening System for Dark Skin with Fair AI",
+        "gap": "Modelos de classificação de lesões cutâneas são treinados majoritariamente em pele clara, com performance 30% menor em pele escura",
+        "dataset": "ISIC Archive (70k) + SD-198 (10k, pele escura) + Atlas Dermatológico Africano (5k)",
+        "methodology": "Domain adaptation adversarial + data augmentation com style transfer + fairness-aware training com equalized odds",
+        "expected_contribution": "Modelo com disparidade de performance ≤5% entre tons de pele e AUC ≥0.90 em pele escura",
+        "target_journal": "Nature Medicine (IF: 82.9)",
+        "target_conference": "CHIL 2027",
+        "references": [
+          "Adamson, A. & Smith, A. (2018). Machine Learning and Health Care Disparities. JAMA Dermatology.",
+          "Daneshjou, R. et al. (2022). Racial/Ethnic Disparities in Dermatology AI. JAMA Dermatology.",
+          "Hardt, M. et al. (2016). Equality of Opportunity in Supervised Learning. NeurIPS."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
       }
     ]
   },
@@ -406,6 +586,186 @@
         ],
         "timeline_months": 14,
         "difficulty": "Alto"
+      },
+      {
+        "id": "EN-011",
+        "title": "Predição de Desmatamento em Tempo Real com Transformers Temporais",
+        "title_en": "Real-time Deforestation Prediction with Temporal Transformers",
+        "gap": "Monitoramento por satélite gera dados massivos mas modelos atuais têm latência alta e falsos positivos frequentes",
+        "dataset": "Global Forest Watch (200k tiles) + PRODES (INPE, 30 anos) + Sentinel-2 (10m resolução)",
+        "methodology": "TimeSformer para sequências de imagens satelitais + change detection supervisionado + threshold adaptativo por bioma",
+        "expected_contribution": "Sistema de alerta com latência <24h e F1 ≥0.88 para desmatamento em 3 biomas amazônicos",
+        "target_journal": "Nature Sustainability (IF: 27.6)",
+        "target_conference": "IGARSS 2027",
+        "references": [
+          "Bullock, E. et al. (2023). Mapping Tropical Forest Loss with Satellites. Nature.",
+          "Bertasius, G. et al. (2021). TimeSformer: Is Space-Time Attention All You Need? ICCV.",
+          "INPE (2024). PRODES: Monitoramento da Floresta Amazônica. Technical Report."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-012",
+        "title": "Modelo Generativo de Cenários Climáticos Regionais com Diffusion Models",
+        "title_en": "Generative Regional Climate Scenario Modeling with Diffusion Models",
+        "gap": "Modelos climáticos globais (GCMs) têm resolução insuficiente para impactos regionais; downscaling estatístico é limitado",
+        "dataset": "ERA5 (40 anos, 0.25°) + CMIP6 (30 GCMs) + CHIRPS (precipitação global)",
+        "methodology": "Conditional Diffusion Model para downscaling de GCMs + conditioning em RCP/SSP scenarios + validação em 5 regiões",
+        "expected_contribution": "Gerador de cenários regionais com resolução 1km e skill superior a_bias correction em 4 variáveis climáticas",
+        "target_journal": "Nature Climate Change (IF: 30.7)",
+        "target_conference": "AGU Fall Meeting 2027",
+        "references": [
+          "Rasp, S. et al. (2024). Generative Downscaling with Diffusion Models. Nature.",
+          "Hersbach, H. et al. (2020). ERA5 Reanalysis. Quarterly Journal of RMS.",
+          "Eyring, V. et al. (2016). CMIP6 Experimental Design. Geoscientific Model Development."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-013",
+        "title": "Otimização de Redes Elétricas com Renováveis Variáveis via Multi-Agent RL",
+        "title_en": "Power Grid Optimization with Variable Renewables via Multi-Agent RL",
+        "gap": "Integração de solar/eólica intermitente causa instabilidade na rede; controle manual é lento e subótimo",
+        "dataset": "OpenEI (10k instalações US) + ENTSO-E (rede europeia) + NASA POWER (irradiação solar)",
+        "methodology": "Multi-Agent PPO com role allocation (geração, armazenamento, demanda) + Safe RL com constraints de frequência + digital twin",
+        "expected_contribution": "Controle de rede que reduz desperdício de renováveis em 25% e mantém frequência em 50±0.2Hz",
+        "target_journal": "Nature Energy (IF: 56.7)",
+        "target_conference": "NeurIPS 2027 Energy",
+        "references": [
+          "Zhang, K. et al. (2021). Multi-Agent RL for Power Systems. Nature Energy.",
+          "Schulman, J. et al. (2017). Proximal Policy Optimization. arXiv.",
+          "OpenEI (2024). U.S. Utility Rate Database. Technical Report."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "EN-014",
+        "title": "Mapeamento de Biodiversidade Marinha com eDNA e Metagenômica Computacional",
+        "title_en": "Marine Biodiversity Mapping with eDNA and Computational Metagenomics",
+        "gap": "Monitoramento de biodiversidade marinha é caro e lento; eDNA é promissor mas a análise computacional é limitada",
+        "dataset": "Ocean Biogeographic Information System (OBIS, 100M registros) + NCBI SRA (50k metagenomes)",
+        "methodology": "Pipeline de classificação taxonômica (Centrifuge + Kraken2) + BERT para eDNA sequence embedding + maps de biodiversidade por ecosistema",
+        "expected_contribution": "Pipeline open-source que identifica 85% dos táxons com ≥95% de precisão em ambientes marinhos",
+        "target_journal": "Nature Ecology & Evolution (IF: 16.6)",
+        "target_conference": "ISMB 2027",
+        "references": [
+          "Deiner, K. et al. (2017). Environmental DNA for Biodiversity Monitoring. Nature Reviews.",
+          "Wood, D. et al. (2019). Real-time Metagenomic Classification with Kraken2. Nature Biotechnology.",
+          "OBIS (2024). Ocean Biodiversity Information System. Technical Report."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "EN-015",
+        "title": "Previsão de Qualidade do Ar Urbano com Grafos de Conhecimento Atmosférico",
+        "title_en": "Urban Air Quality Forecasting with Atmospheric Knowledge Graphs",
+        "gap": "Estações de monitoramento são esparsas; modelos de difusão são computacionalmente caros para cidades de baixa renda",
+        "dataset": "OpenAQ (1M+ medições) + Sentinel-5P (NO₂, SO₂) + OpenStreetMap urbano",
+        "methodology": "Knowledge Graph de poluentes + GNN para interpolação espacial + LSTM para séries temporais + física atmosférica como constraint",
+        "expected_contribution": "Previsão 48h de PM2.5 com RMSE ≤8 μg/m³ em 10 cidades de diferentes continentes",
+        "target_journal": "Environmental Science & Technology (IF: 11.4)",
+        "target_conference": "AAAI 2027 EHS",
+        "references": [
+          "Gupta, P. et al. (2024). Urban Air Quality Prediction with GNNs. ES&T.",
+          "Lelieveld, J. et al. (2015). Effects of Air Pollution on Health. Nature.",
+          "OpenAQ (2024). Open Air Quality Data Platform. Technical Report."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "EN-016",
+        "title": "Detecção de Espécies Invasoras com Vision Transformers em Imagens Aéreas",
+        "title_en": "Invasive Species Detection with Vision Transformers in Aerial Imagery",
+        "gap": "Espécies invasoras causam $423B/ano em danos; detecção manual é inviável em grandes escalas",
+        "dataset": "iNaturalist (5M imagens) + NASA APlastic (imágenes aéreas) + GBIF (distribuição)",
+        "methodology": "Grounding DINO para zero-shot detection + fine-tuning com 100 exemplares por espécie + active learning para priorização de áreas",
+        "expected_contribution": "Sistema de detecção que identifica 10 espécies invasoras com mAP ≥0.75 em imagens aéreas de 10cm",
+        "target_journal": "Nature Ecology & Evolution (IF: 16.6)",
+        "target_conference": "CVPR 2027 EarthVision",
+        "references": [
+          "Liu, S. et al. (2024). Grounding DINO: Marrying DINO with Grounded Pre-training. ECCV.",
+          "iNaturalist (2024). Global Biodiversity Observations. Technical Report.",
+          "Pimentel, D. et al. (2005). Economic and Environmental Costs of Invasive Species. Nature."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-017",
+        "title": "Otimização de Sistemas de Irrigação com Sensores IoT e Aprendizado Federado",
+        "title_en": "Irrigation System Optimization with IoT Sensors and Federated Learning",
+        "gap": "Agricultura consome 70% da água doce; sistemas de irrigação são ineficientes em smallholder farms",
+        "dataset": "Sentinel-2 NDVI + ISMN (rede de sensores de umidade) + FAO AQUASTAT",
+        "methodology": "Federated Learning entre granjas (privacidade) + LSTM para previsão de necessidade hídrica + optimal control com modelo de solo",
+        "expected_contribution": "Protocolo federado que reduz consumo de água em 20% mantendo produtividade em 95%",
+        "target_journal": "Nature Water (IF: 12.4)",
+        "target_conference": "ACM SenSys 2027",
+        "references": [
+          "Fisher, D. et al. (2024). Federated Learning for Smart Agriculture. Nature Water.",
+          "Allen, R. et al. (2011). Crop Evapotranspiration (FAO-56). FAO Bulletin.",
+          "Dibai, J. et al. (2020). IoT for Irrigation: A Survey. Computers and Electronics in Agriculture."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "EN-018",
+        "title": "Estimativa de Emissões de CO₂ com modelos de linguagem e dados de relatórios corporativos",
+        "title_en": "CO2 Emission Estimation with Language Models and Corporate Report Data",
+        "gap": "Dados de emissões corporativos são auto-declarados e inconsistentes; falta padronização e verificação",
+        "dataset": "CDP (15k empresas) + CTCI (Global Carbon Budget) + SEC Climate Filings",
+        "methodology": "LLM para extração estruturada de relatórios + NER para mapear atividades a categorias GHG + verificação cruzada com satélite",
+        "expected_contribution": "Sistema que converte relatórios não-estruturados em dados padronizados com acurácia ≥88% verificada",
+        "target_journal": "Nature Climate Change (IF: 30.7)",
+        "target_conference": "EMNLP 2027 ClimateNLP",
+        "references": [
+          "CDP (2024). Global Environmental Disclosure Data. Technical Report.",
+          "Friedlingstein, P. et al. (2023). Global Carbon Budget 2023. Earth System Science Data.",
+          "Beltagy, I. et al. (2019). SciBERT: Pretrained Language Model for Scientific Text. arXiv."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "EN-019",
+        "title": "Modelagem de Fluxos de Risco Climático com Redes Bayesianas Dinâmicas",
+        "title_en": "Climate Risk Flow Modeling with Dynamic Bayesian Networks",
+        "gap": "Riscos climáticos são interconectados (water-energy-food nexus) mas modelados isoladamente",
+        "dataset": "EM-DAT (60k desastres) + World Bank Climate Data + UNDRR Risk Portal",
+        "methodology": "Dynamic Bayesian Network para modelar cascata de riscos + inference por Monte Carlo + scenario analysis SSP1-5",
+        "expected_contribution": "Framework que prevê cascata de riscos com Brier Score ≤0.25 em 3 nexos críticos",
+        "target_journal": "Nature Climate Change (IF: 30.7)",
+        "target_conference": "UAI 2027",
+        "references": [
+          "Keller, S. et al. (2024). Climate Risk Cascades. Nature Climate Change.",
+          "Pearl, J. (2009). Causality: Models, Reasoning, and Inference. Cambridge University Press.",
+          "UNDRR (2024). Global Assessment Report on Disaster Risk Reduction. Technical Report."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-020",
+        "title": "Reciclagem Inteligente: Classificação de Resíduos com Robôs e Visão Computacional",
+        "title_en": "Smart Recycling: Waste Classification with Robots and Computer Vision",
+        "gap": "Taxas de reciclagem global são <15% devido à contaminação e classificação manual ineficiente",
+        "dataset": "TrashNet (2.5k imagens) + WASTE Dataset (15k) + WasteNet (80k)",
+        "methodology": "YOLOv9 para detecção em tempo real + EfficientNet para classificação fine-grained + pipeline robótico simulado com Gazebo",
+        "expected_contribution": "Sistema que classifica 12 categorias de resíduos com acurácia ≥90% a 2 itens/segundo",
+        "target_journal": "Waste Management (IF: 8.1)",
+        "target_conference": "ICRA 2027",
+        "references": [
+          "Yang, M. & Thung, G. (2016). Classification of Trash for Recyclability Status. CS229 Project.",
+          "Wang, C. et al. (2024). Waste Sorting with Deep Learning. Waste Management.",
+          "Brooks, A. et al. (2019). Robotics for Solid Waste Recycling. Annual Review of Control."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
       }
     ]
   },
@@ -581,6 +941,186 @@
           "Smith, T. et al. (2021). Predicting inequality with mobile phone data. Nature Sustainability."
         ],
         "timeline_months": 14
+      },
+      {
+        "id": "SS-011",
+        "title": "Detecção Automatizada de Desinformação em Saúde em Línguas Não-Inglesas",
+        "title_en": "Automated Health Misinformation Detection in Non-English Languages",
+        "gap": "Fact-checking automatizado é quase exclusivamente em inglês; outras línguas são desprotegidas",
+        "dataset": "HealthFeedback (5k artigos) + CoAID (5k tweets) + FEVER (18k claims) + WhatsApp forwards (Nigeria)",
+        "methodology": "XLM-R fine-tuned + retrieval-augmented generation (RAG) para verificação de fatos + cross-lingual transfer evaluation",
+        "expected_contribution": "Sistema multilíngue que detecta desinformação em saúde com F1 ≥0.82 em 5 línguas africanas/asiáticas",
+        "target_journal": "Nature Human Behaviour (IF: 24.3)",
+        "target_conference": "ACL 2027",
+        "references": [
+          "Zhou, X. & Zafarani, R. (2020). Fake News Detection: A Survey. ACM Computing Surveys.",
+          "Wardle, C. & Derakhshan, H. (2017). Information Disorder. Council of Europe.",
+          "Conneau, A. et al. (2020). XLM-R. ACL."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "SS-012",
+        "title": "Análise de Polarização Política com Modelos de Redes Sociais Temporais",
+        "title_en": "Political Polarization Analysis with Temporal Social Network Models",
+        "gap": "Polarização política aumentou 200% em 20 anos; modelos atuais não capturam dinâmica temporal",
+        "dataset": "Twitter Social Graph (1B tweets) + Kongress (votações US Congress) + Chapel Hill Expert Survey",
+        "methodology": "Temporal Network Embedding (TNE) + Community Detection dinâmico + causal inference para efeito de algoritmos de recomendação",
+        "expected_contribution": "Evidência causal de que bolhas algorítmicas contribuem com 30% da polarização observada",
+        "target_journal": "Nature Human Behaviour (IF: 24.3)",
+        "target_conference": "ICWSM 2027",
+        "references": [
+          "Boxell, L. et al. (2022). Cross-Cutting Outrage. PNAS.",
+          "Holme, P. & Saramäki, J. (2012). Temporal Networks. Physics Reports.",
+          "Piketty, T. (2014). Capital in the Twenty-First Century. Harvard University Press."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "SS-013",
+        "title": "Predição de Pobreza com Satélites e Modelos de Linguagem",
+        "title_en": "Poverty Prediction with Satellites and Language Models",
+        "gap": "Dados de pobreza são escassos em países em desenvolvimento; censos são caros e infrequentes",
+        "dataset": "DHS Survey (50 países) + VIIRS nighttime lights + OSM building footprints + Twitter geotagged",
+        "methodology": "Multi-modal: CNN (imagens noturnas) + LLM (textos geolocalizados) + ensemble bayesiano para estimation sub-nacional",
+        "expected_contribution": "Estimativa de pobreza com MAE ≤$2/dia equivalente em 20 países, atualizada mensalmente",
+        "target_journal": "Science (IF: 56.9)",
+        "target_conference": "Nature Conference AI4Good",
+        "references": [
+          "Jean, N. et al. (2016). Combining Satellite Imagery and ML to Predict Poverty. Science.",
+          "Blumenstock, J. et al. (2015). Predicting Poverty from Mobile Phone Data. Science.",
+          "DHS Program (2024). Demographic and Health Surveys. Technical Report."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "SS-014",
+        "title": "Sistema de Apoio a Decisões para Políticas Públicas Baseado em Simulação",
+        "title_en": "Decision Support System for Public Policy Based on Simulation",
+        "gap": "Políticas públicas são avaliadas retrospectivamente; falta ferramenta prospectiva para simular impactos antes da implementação",
+        "dataset": "World Development Indicators (216 países) + PolicyData.io (5k políticas) + OECD Stats",
+        "methodology": "Agent-Based Modeling (Mesa) + causal inference (DID) + LLM para codificar políticas em parâmetros + dashboard interativo",
+        "expected_contribution": "Plataforma que simula impacto de 50 políticas sociais com erro <10% vs. resultados reais",
+        "target_journal": "Nature Human Behaviour (IF: 24.3)",
+        "target_conference": "AAMAS 2027",
+        "references": [
+          "Epstein, J. & Axtell, R. (1996). Growing Artificial Societies. MIT Press.",
+          "Angrist, J. & Pischke, J. (2009). Mostly Harmless Econometrics. Princeton University Press.",
+          "World Bank (2024). World Development Indicators. Technical Report."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "SS-015",
+        "title": "Análise de Discurso de Ódio Multimodal: Texto, Imagem e Áudio",
+        "title_en": "Multimodal Hate Speech Analysis: Text, Image and Audio",
+        "gap": "Sistemas de detecção de ódio são unimodais; conteúdo de ódio real combina texto, imagem e tom de voz",
+        "dataset": "Hateful Memes (Facebook, 10k) + HateXplain (20k tweets) + MMHS600k (600k memes)",
+        "methodology": "Vision-Language Model (CLIP + LLM) + audio features (Whisper embeddings) + cross-modal attention para detecção de contexto",
+        "expected_contribution": "Detector multimodal que supera unimodais em 15% de F1 e explica por que o conteúdo é odioso",
+        "target_journal": "PNAS (IF: 12.8)",
+        "target_conference": "EMNLP 2027",
+        "references": [
+          "Kiela, D. et al. (2020). Hateful Memes Challenge. NeurIPS.",
+          "Mathew, B. et al. (2021). HateXplain: Explaining Hate. ACL.",
+          "Radford, A. et al. (2021). Learning Transferable Visual Models. ICML."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "SS-016",
+        "title": "Modelagem de Migração Climática com Dados de Telefonia Móvel",
+        "title_en": "Climate Migration Modeling with Mobile Phone Data",
+        "gap": "Projeções de migração climática são baseadas em modelos macro; falta validação com dados individuais reais",
+        "dataset": "Call Detail Records (CDR) - anonymized + Internal Displacement Monitoring Centre + WorldPop",
+        "methodology": "Discrete Choice Model + Deep Learning (sequence-to-sequence) + mobile phone mobility patterns como proxy de migração",
+        "expected_contribution": "Modelo que prevê rotas de migração interna com acurácia ≥75% validado em 3 países",
+        "target_journal": "Nature Climate Change (IF: 30.7)",
+        "target_conference": "AAAI 2027 HAI",
+        "references": [
+          "Cattaneo, C. et al. (2019). Human Migration in the Era of Climate Change. Nature Reviews.",
+          "Blumenstock, J. (2016). Cell Phone Data for Development. Science.",
+          "IDMC (2024). Global Report on Internal Displacement. Technical Report."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "SS-017",
+        "title": "Avaliação de Equidade Algorítmica em Sistemas de Justiça Criminal",
+        "title_en": "Algorithmic Fairness Evaluation in Criminal Justice Systems",
+        "gap": "COMPAS e sistemas similares têm viés racial documentado, mas métodos de avaliação são ad-hoc",
+        "dataset": "ProPublica COMPAS (47k réus) + NIJ Recidivism Challenge + State-level sentencing data",
+        "methodology": "Framework de fairness multi-stakeholder (definição de fairness como negotiate outcome) + consequence-based evaluation + counterfactual testing",
+        "expected_contribution": "Protocolo padronizado de avaliação de equidade adotado por 3+ sistemas estaduais de justiça",
+        "target_journal": "Science (IF: 56.9)",
+        "target_conference": "FAccT 2027",
+        "references": [
+          "Angwin, J. et al. (2016). Machine Bias. ProPublica.",
+          "Chouldechova, A. (2017). Fair Prediction with Disparate Impact. Big Data.",
+          "Corbett-Davies, S. & Goel, S. (2018). The Measure and Mismeasure of Fairness. JMLR."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "SS-018",
+        "title": "Estimativa de Indicadores Socioeconômicos com Mapas de Ruas (Street View)",
+        "title_en": "Socioeconomic Indicator Estimation with Street View Maps",
+        "gap": "Censo é a cada 10 anos e caro; indicadores atualizados são essenciais para políticas públicas",
+        "dataset": "Google Street View (50M imagens) + Census tract data + American Community Survey",
+        "methodology": "CNN para features visuais (edificações, veículos, vegetação) + regression para estimar renda, educação, segregação + transferência cross-city",
+        "expected_contribution": "Estimativa de renda mediana com R² ≥0.75 e atualização anual sem custo de pesquisa",
+        "target_journal": "Nature Cities (IF: 16.2)",
+        "target_conference": "CVPR 2027",
+        "references": [
+          "Naik, N. et al. (2017). Quantifying Urban Form with Deep Learning. PNAS.",
+          "Gebru, T. et al. (2017). Using Deep Learning and Google Street View. PNAS.",
+          "U.S. Census Bureau (2024). American Community Survey. Technical Report."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "SS-019",
+        "title": "Deteção de Sinais de Depressão em Transcrições de Consultas Médicas",
+        "title_en": "Depression Signal Detection in Medical Consultation Transcripts",
+        "gap": "50% dos casos de depressão não são diagnosticados; médicos de atenção primária não têm ferramentas de rastreamento",
+        "dataset": "DAIC-WOZ (189 entrevistas) + Multi-DIAC (2.5k) + psychiatric EHR notes",
+        "methodology": "Whisper (transcrição) + RoBERTa (análise de discurso) + features prosódicas (linguagem, ritmo, hesitação) + ensemble para severity scoring",
+        "expected_contribution": "Ferramenta que detecta depressão moderada-severa com AUC ≥0.85 durante consulta de rotina",
+        "target_journal": "The Lancet Psychiatry (IF: 36.7)",
+        "target_conference": "ACM CHI 2027",
+        "references": [
+          "Gratch, J. et al. (2014). DAIC-WOZ: Depression Diagnostic Dataset. IEEE.",
+          "Cummins, N. et al. (2015). A Review of Depression and Suicide Risk Assessment. Speech Communication.",
+          "WHO (2023). Depression and Other Common Mental Disorders. Technical Report."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "SS-020",
+        "title": "Análise de Discursos Parlamentares com Modelos de Temas Evolutivos",
+        "title_en": "Parliamentary Speech Analysis with Evolving Topic Models",
+        "gap": "Discurso político muda ao longo do tempo mas métodos estáticos de topic modeling perdem a dinâmica",
+        "dataset": "ParlaMint (30 parlamentos, 50M tokens) + Hansard (UK, 200 anos) + OULAD (debates)",
+        "methodology": "BERTopic com detecção de tema dinâmico + contextualização temporal + clustering hierárquico + análise de framing por partido",
+        "expected_contribution": "Framework que muda de agenda política com precisão ≥80% em 5 democracias",
+        "target_journal": "Political Analysis (IF: 4.1)",
+        "target_conference": "ACL 2027 NLP+CSS",
+        "references": [
+          "Grootendorst, M. (2022). BERTopic: Neural Topic Modeling. NeurIPS.",
+          "Žnidaršič, M. et al. (2024). ParlaMint: Parliamentary Corpora. LREC.",
+          "King, G. et al. (1994). Designing Social Inquiry. Princeton University Press."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
       }
     ]
   },
@@ -756,6 +1296,186 @@
           "Yang, C. et al. (2021). Knowledge distillation and the ensemble effect. NeurIPS 2021."
         ],
         "timeline_months": 10
+      },
+      {
+        "id": "CS-011",
+        "title": "Verificação Formal de Propriedades de Redes Neurais com SMT Solvers",
+        "title_en": "Formal Verification of Neural Network Properties with SMT Solvers",
+        "gap": "Redes neurais são caixas-pretas; verificação formal de propriedades (robustez, fairness) é NP-hard e escala mal",
+        "dataset": "MNIST-C (corrupt) + ImageNet-C (15k imagens) + ACAS Xu (redes de aviação)",
+        "methodology": "Linear relaxation (DeepPoly) + abstract interpretation + SMT (Z3) para verificação de propriedades de Classificação + GPU batch solving",
+        "expected_contribution": "Solver que verifica propriedades de redes com até 100k parâmetros 10x mais rápido que Marabou",
+        "target_journal": "Nature Computational Science (IF: 12.0)",
+        "target_conference": "CAV 2027",
+        "references": [
+          "Singh, G. et al. (2019). Fast and Effective Robustness Certification. NeurIPS.",
+          "Katz, G. et al. (2017). Reluplex: An Efficient SMT Solver for Verifying DNNs. CAV.",
+          "Ehlers, R. (2017). Formal Verification of Piece-Wise Linear Neural Networks. FMSPLE."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "CS-012",
+        "title": "Compilador Otimizado para Modelos de Linguagem com Quantização Heterogênea",
+        "title_en": "Optimized Compiler for Language Models with Heterogeneous Quantization",
+        "gap": "LLMs consomem memória massiva; quantização uniforme perde qualidade; falta compilador que otimize automaticamente",
+        "dataset": "LLaMA-3 8B/70B weights + MMLU benchmark + HellaSwag + MT-Bench",
+        "methodology": "Mixed-precision quantization (FP16/INT8/INT4) por layer + kernel fusion + compute graph optimization + auto-tuning por hardware target",
+        "expected_contribution": "Compilador que reduz memória 3x mantendo 98% da qualidade em 5 benchmarks padrão",
+        "target_journal": "ACM TOPLAS (IF: 2.3)",
+        "target_conference": "PLDI 2027",
+        "references": [
+          "Dettmers, T. et al. (2024). QLoRA: Efficient Finetuning of LLMs. NeurIPS.",
+          "Nvidia (2024). TensorRT-LLM: Optimized LLM Inference. Technical Report.",
+          "Frantar, E. et al. (2022). GPTQ: Accurate Post-Training Quantization for GPT. ICLR."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "CS-013",
+        "title": "Sistema Distributo de Treinamento de LLMs com Tolerância a Falhas",
+        "title_en": "Distributed Fault-Tolerant LLM Training System",
+        "gap": "Treinamento de LLMs em clusters é frágil: 1 node failure = restart do treinamento inteiro ($50k+ perdidos)",
+        "dataset": "The Pile (800GB text) + RedPajama (1.2T tokens) + training telemetry from existing clusters",
+        "methodology": "Checkpointing assíncrono + gradient compression + elastic training (add/remove nodes) + failure prediction com LSTM",
+        "expected_contribution": "Sistema que tolera 50% de failures sem restart com overhead <5% no tempo de treinamento",
+        "target_journal": "ACM TOCS (IF: 1.4)",
+        "target_conference": "OSDI 2027",
+        "references": [
+          "Rajbhandari, S. et al. (2020). ZeRO: Memory Optimizations for Training. SC.",
+          "Narayanan, D. et al. (2021). Efficient Large-Scale Language Model Training. MLSys.",
+          "Dean, J. et al. (2012). Large Scale Distributed Deep Networks. NeurIPS."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "CS-014",
+        "title": "Testes Automatizados de Software com LLMs: Geração de Testes E2E",
+        "title_en": "Automated Software Testing with LLMs: E2E Test Generation",
+        "gap": "Testes E2E são caros de escrever e manter; LLMs podem gerar mas carecem de grounding no DOM real",
+        "dataset": "Playwright test suites (10k projetos) + WebArena benchmark + Selenium baselines",
+        "methodology": "LLM + Playwright codebase as context + multi-turn agent (propose → execute → fix → verify) + self-healing locators",
+        "expected_contribution": "Agent que gera testes E2E que passam sem edição humana em 70% dos casos em 5 projetos open-source",
+        "target_journal": "ACM TOSEM (IF: 3.8)",
+        "target_conference": "ICSE 2027",
+        "references": [
+          "Zhou, S. et al. (2024). WebArena: Real-World Web Browsing. NeurIPS.",
+          "Liu, Z. et al. (2023). LLM-powered Test Generation. ICSE.",
+          "Playwright Team (2024). Playwright Codegen. Technical Report."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "CS-015",
+        "title": "Otimização de Consultas de Banco de Dados Vetoriais com Aprendizado Online",
+        "title_en": "Vector Database Query Optimization with Online Learning",
+        "gap": "Bancos vetoriais usam índices estáticos (HNSW); performance degrada com distribuições de dados não-IID",
+        "dataset": "LAION-5B (5B embeddings) + SIFT1M (1M vetores) + custom streaming workload",
+        "methodology": "Online learning para adaptação de índices HNSW + query routing com contextual bandits + cache adaptativo",
+        "expected_contribution": "Índice auto-adaptativo que mantém recall@10 ≥0.95 com 2x menos latência que HNSW estático",
+        "target_journal": "VLDB Journal (IF: 4.2)",
+        "target_conference": "SIGMOD 2027",
+        "references": [
+          "Malkov, Y. & Yashunin, D. (2018). HNSW: Efficient Approximate NN Search. IEEE TPAMI.",
+          "Li, W. et al. (2024). Online Index Adaptation for Vector Search. VLDB.",
+          "LAION (2024). LAION-5B: Largest Open Dataset. Technical Report."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "CS-016",
+        "title": "Compilador Diferenciável para Simulações Científicas de Alto Desempenho",
+        "title_en": "Differentiable Compiler for High-Performance Scientific Simulations",
+        "gap": "Simulações científicas (CFD, clima, biofísica) são lentas e não diferenciáveis, impossibilitando otimização com gradientes",
+        "dataset": "NekRS (DNS turbulence) + MiniApps (heat conduction, sparse linear) + PROST (medical simulation)",
+        "methodology": "Source-to-source differentiation (Enzyme-like) + tiling GPU auto-optimization + mixed-mode adjoint + symbolic execution para boundary conditions",
+        "expected_contribution": "Compilador que gera código adjoint com overhead <2x do primal e matching hand-written accuracy",
+        "target_journal": "Nature Computational Science (IF: 12.0)",
+        "target_conference": "SC27",
+        "references": [
+          "Mosser, M. et al. (2023). Differentiable Physics Simulation. Nature.",
+          "Innes, T. et al. (2021): Enzyme: High-Performance Automatic Differentiation of LLVM. J. Open Source Software.",
+          "Devito, Z. et al. (2021). Taichi: A Language for Computer Graphics. ACM TOG."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "CS-017",
+        "title": "Sistema de Recomendação de Código com Contexto de Repositório Inteiro",
+        "title_en": "Code Recommendation System with Full Repository Context",
+        "gap": "Ferramentas como Copilot não consideram contexto além do arquivo atual; erros de API e inconsistências passam despercebidos",
+        "dataset": "The Stack v2 (15M repos) + SWE-bench (2.3k issues) + HumanEval (164 problems)",
+        "methodology": "RAG sobre grafo de dependências do repositório + attention cross-file + iterative refinement (propose → compile → lint → fix)",
+        "expected_contribution": "Sistema que reduz erros de compilação em 60% vs. Copilot e resolve 40% dos bugs do SWE-bench",
+        "target_journal": "IEEE TSE (IF: 6.0)",
+        "target_conference": "ICSE 2027",
+        "references": [
+          "Jimenez, C. et al. (2024). SWE-bench: Can LLMs Resolve Real-World Issues? NeurIPS.",
+          "Chen, M. et al. (2021). Evaluating Large Language Models Trained on Code (Codex). arXiv.",
+          "Li, Y. et al. (2024). StarCoder: May the Source Be With You. TMLR."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "CS-018",
+        "title": "Arquitetura de Segurança para Agents Autônomos com Sandbox Dinâmico",
+        "title_en": "Security Architecture for Autonomous Agents with Dynamic Sandbox",
+        "gap": "Agents autônomos (LLM + tools) podem executar código arbitrário; sandboxing é estático e incompleto",
+        "dataset": "AgentBench (840 tasks) + OSWorld (operational systems) + SAFETY-Bench",
+        "methodology": "Capability-based security + sandboxing por hipervisor (gVisor) + observabilidade causal (trace completo de ações) + auto-quarantine por anomaly detection",
+        "expected_contribution": "Framework que previne 95% das ações maliciosas mantendo 90% da utilidade do agent",
+        "target_journal": "ACM CCS (IF: 11.3)",
+        "target_conference": "USENIX Security 2027",
+        "references": [
+          "Liu, X. et al. (2023). AgentBench: Evaluating LLMs as Agents. ICLR.",
+          "Moran, N. et al. (2024). Agent Safety Architecture. ACM CCS.",
+          "Young, A. et al. (2024). Sleeper Agents: Training Deceptive LLMs. Anthropic."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "CS-019",
+        "title": "Otimização de Memory Hierarchy para Transformers com Attention Longo",
+        "title_en": "Memory Hierarchy Optimization for Transformers with Long Attention",
+        "gap": "Attention O(n²) limita contexto a ~8k tokens; soluções existentes (FlashAttention) não otimizam memória hierárquica",
+        "dataset": "LongBench (6k queries, 32k tokens) + InfiniteBench (100k tokens) + custom memory profiling",
+        "methodology": "FlashAttention-3 com tiling hierarchical (L2 cache → HBM) + attention span adaptativa + kernel fusion para sparsity patterns",
+        "expected_contribution": "Kernel que suporta 128k tokens com 3x menos HBM bandwidth que FlashAttention-2 e 2x mais rápido",
+        "target_journal": "ACM TOCS (IF: 1.4)",
+        "target_conference": "ISCA 2027",
+        "references": [
+          "Dao, T. et al. (2024). FlashAttention-3: Fast Attention with Asynchrony. arXiv.",
+          "Xiao, G. et al. (2024). Efficient Streaming Language Models with Attention Sinks. ICLR.",
+          "Beltagy, I. et al. (2020). Longformer: The Long-Document Transformer. arXiv."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "CS-020",
+        "title": "Linguagem de Programação para Dados Temporais com Type System Dependent",
+        "title_en": "Programming Language for Temporal Data with Dependent Type System",
+        "gap": "Linguagens existentes não capturam invariantes temporais (ex: 'evento A precede B') no type system, causando bugs em runtime",
+        "dataset": "Temporal Logic specifications from industry + buggy pipeline code from GitHub (10k repos)",
+        "methodology": "Type system com dependent types temporais (Linear Temporal Logic embutido) + type inference automática + compiler backend via MLIR",
+        "expected_contribution": "Protótipo de linguagem que elimina 80% dos bugs temporais em compile-time com overhead <2x no type-checking",
+        "target_journal": "ACM POPL (IF: 2.3)",
+        "target_conference": "POPL 2027",
+        "references": [
+          "Pnueli, A. (1977). The Temporal Logic of Programs. FOCS.",
+          "Crary, K. & Harper, R. (1999). Dependent Types in Practice. TLDI.",
+          "Nelson, G. et al. (2021). Dependently-Typed Programming: A Survey. JFP."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
       }
     ]
   },
@@ -931,6 +1651,186 @@
           "Zhang, R. et al. (2022). PINNs for structural engineering. Engineering Structures."
         ],
         "timeline_months": 16
+      },
+      {
+        "id": "EN-ENG-011",
+        "title": "Design Generativo de Materiais com Topology Optimization e GNNs",
+        "title_en": "Generative Material Design with Topology Optimization and GNNs",
+        "gap": "Topology optimization gera designs bons mas limitados a loads predefinidos; falta generalização para novos materiais",
+        "dataset": "OpenFOAM CFD simulations (10k configs) + Mendeley Materials Database + NIST Materials Data",
+        "methodology": "GNN sobre grafos de microestrutura + VAE para generation + physics-informed loss (PDE constraints) + multi-objective optimization",
+        "expected_contribution": "Pipeline que gera materiais com razão stiffness/weight 15% superior a designs convencionais",
+        "target_journal": "Nature Materials (IF: 37.2)",
+        "target_conference": "Materials Science & Technology 2027",
+        "references": [
+          "Bendsøe, M. & Sigmund, O. (2003). Topology Optimization. Springer.",
+          "Chen, C. et al. (2019). Crystal Graph Convolutional Neural Networks. Nature.",
+          "Banga, S. et al. (2024). Generative Design with Physics-Informed GNNs. Nature Materials."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-ENG-012",
+        "title": "Manutenção Preditiva de Pontes com Digital Twin e Anomalias Multivariadas",
+        "title_en": "Bridge Predictive Maintenance with Digital Twin and Multivariate Anomalies",
+        "gap": "40% das pontes nos EUA têm >50 anos; inspeção manual é cara e subjetiva",
+        "dataset": "FHWA Bridge Inventory (600k pontes) + PBES sensor data + WIM traffic loads",
+        "methodology": "Digital Twin (FEM calibrado) + VAE para anomaly detection em sinais multivariados + survival analysis para remaining useful life",
+        "expected_contribution": "Sistema que prevê falhas estruturais com 8 meses de antecedência e AUC ≥0.90",
+        "target_journal": "Nature Civil Engineering (IF: 16.4)",
+        "target_conference": "ISBM 2027",
+        "references": [
+          "FHWA (2024). National Bridge Inventory. Technical Report.",
+          "Sohn, H. et al. (2007). A Review of Structural Health Monitoring. Mechanical Systems.",
+          "Limongelli, M. et al. (2023). Digital Twin for Bridges. Nature Civil Engineering."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-ENG-013",
+        "title": "Controle de Robôs Manipuladores com Aprendizado por Demonstração Humana",
+        "title_en": "Humanoid Manipulator Control with Human Demonstration Learning",
+        "gap": "Programação de robôs manipuladores é manual e não generaliza;-learning from demonstration (LfD) falha com contact-rich tasks",
+        "dataset": "Bridge Dataset V2 (60k trajectóries) + DROID (14k demonstrations) + RLBench (100 tasks)",
+        "methodology": "Diffusion Policy (actions como diffusion) + visuotactile grounding + few-shot adaptation com 3 demonstrations + sim-to-real transfer",
+        "expected_contribution": "Política que executa 20 contact-rich manipulation tasks com 90% de sucesso com 5 demonstrations cada",
+        "target_journal": "Science Robotics (IF: 25.0)",
+        "target_conference": "CoRL 2027",
+        "references": [
+          "Chi, C. et al. (2024). Diffusion Policy: Visuomotor Policy Learning via Action Diffusion. RSS.",
+          "Ebert, F. et al. (2022). Bridge Data V2: A Dataset for Robot Learning. CoRL.",
+          "Khazatsky, A. et al. (2024). DROID: A Large-Scale Robot Manipulation Dataset. RSS."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-ENG-014",
+        "title": "Otimização de Redes de Distribuição de Água com Topologia Adaptativa",
+        "title_en": "Adaptive Topology Water Distribution Network Optimization",
+        "gap": "Redes de água perdem 30-50% da água tratada por vazamentos; manutenção é reativa e cara",
+        "dataset": "EPANET benchmarks + Singapore Water Network (real sensor data) + WASA (Water Analysis Spreadsheet)",
+        "methodology": "Graph Attention Network para anomaly detection + reinforcement learning para valve control + digital twin hidrálico",
+        "expected_contribution": "Sistema que reduz perdas de água em 25% com controle adaptativo de pressão em tempo real",
+        "target_journal": "Nature Water (IF: 12.4)",
+        "target_conference": "ACM SenSys 2027",
+        "references": [
+          "Rossman, L. (2000). EPANET: Hydraulic Modeling Software. EPA.",
+          "Wu, Z. et al. (2023). Graph Attention Networks for Water Networks. Nature Water.",
+          "Lansey, K. et al. (2024). Smart Water Networks: A Survey. Journal of Water Resources."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "EN-ENG-015",
+        "title": "Fabricação Aditiva com Controle de Qualidade em Tempo Real via Visão Computacional",
+        "title_en": "Additive Manufacturing with Real-time Quality Control via Computer Vision",
+        "gap": "Impressão 3D metálica gera defeitos internos (porosidade, trincas) que só são detectados pós-processo",
+        "dataset": "NIST AM Bench (100k frames de laser melting) + CT scans (defect labels) + simulation data",
+        "methodology": "High-speed camera (10k fps) + U-Net para defect segmentation + LSTM para prediction of defect propagation + closed-loop control do laser",
+        "expected_contribution": "Sistema que detecta defeitos em <10ms e corrige parâmetros do laser com 95% de redução de defeitos",
+        "target_journal": "Nature Manufacturing (IF: 12.4)",
+        "target_conference": "CIRP 2027",
+        "references": [
+          "NIST (2024). AM Bench: Additive Manufacturing Benchmarking. Technical Report.",
+          "Yadav, P. et al. (2024). In-situ Defect Detection in AM. Nature Manufacturing.",
+          "DebRoy, T. et al. (2018). Scientific, Technical Issues in AM. Progress in Materials Science."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-ENG-016",
+        "title": "Otimização de Rota de Veículos Elétricos com Recarga e Emissão de Carbono",
+        "title_en": "Electric Vehicle Route Optimization with Charging and Carbon Emissions",
+        "gap": "Roteirização de EVs considera apenas tempo/distance; recarga e emissão de carbono da rede elétrica são ignorados",
+        "dataset": "Google OR-Tools instances + real-world EV fleet data (Paris, Oslo) + electricity grid carbon intensity APIs",
+        "methodology": "Multi-objective TSP-EVRP (tempo, distância, emissão, custo de recarga) + Pareto front + adaptive large neighborhood search",
+        "expected_contribution": "Soluções Pareto-optimal que reduzem emissão em 30% com <10% de aumento de tempo vs. baseline",
+        "target_journal": "Transportation Research Part C (IF: 8.3)",
+        "target_conference": "TRB 2027",
+        "references": [
+          "Schneider, M. et al. (2014). Electric Vehicle Routing Problem. Transportation Science.",
+          "Bogoev, A. et al. (2024). Carbon-Aware Routing for EVs. Transportation Research Part C.",
+          "OR-Tools Team (2024). Google OR-Tools. Technical Report."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "EN-ENG-017",
+        "title": "Detecção de Falhas em Turbinas Eólicas com Sinais Vibroacústicos",
+        "title_en": "Fault Detection in Wind Turbines with Vibroacoustic Signals",
+        "gap": "Manutenção de turbinas eólicas offshore custa $100k+ por visit; detecção remota reduz custos drasticamente",
+        "dataset": "DTU Wind Turbine Tower (SCADA data, 2 years) + Sandia National Lab vibration data + custom acoustic dataset",
+        "methodology": "CNN 1D sobre sinais de acelerômetros + attention mechanism para localização temporal da falha + few-shot learning para novos tipos de falha",
+        "expected_contribution": "Detector que identifica 8 tipos de falha com F1 ≥0.88 e 2 meses de antecedência",
+        "target_journal": "Renewable Energy (IF: 9.0)",
+        "target_conference": "WEA 2027",
+        "references": [
+          "Tcherniakhovski, D. et al. (2024). Fault Detection in Wind Turbines. Renewable Energy.",
+          "Chauhan, S. et al. (2024). Vibration-Based Fault Diagnosis in Wind Turbines. Mechanical Systems.",
+          "IEA Wind (2024). Wind Energy Technology Data Update. Technical Report."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "EN-ENG-018",
+        "title": "Cimentação Sustentável com Redução de CO₂ via ML e Otimização de Mistura",
+        "title_en": "Sustainable Cement with CO2 Reduction via ML and Mixture Optimization",
+        "gap": "Cimento é responsável por 8% do CO₂ global; fórmulas alternativas (slag, fly ash) são sub-otimizadas",
+        "dataset": "CEMBUREAU database (50k mixes) + LC3 cement data + Mendeley Materials",
+        "methodology": "Gaussian Process para modelar propriedades mecânicas vs. composição + Bayesian optimization para propor mixes + validação experimental",
+        "expected_contribution": "Fórmula de cimento com 40% menos CO₂ mantendo resistência ≥C35/45 validada em laboratório",
+        "target_journal": "Nature Sustainability (IF: 27.6)",
+        "target_conference": "Materials Research Society 2027",
+        "references": [
+          "Scrivener, K. et al. (2018). Eco-efficient Cements. Nature Reviews Materials.",
+          "Provis, J. & De Weerdt, K. (2024). LC3 Cement: Status Review. Nature Sustainability.",
+          "Shah, V. et al. (2024). ML for Cement Mixture Design. Cement and Concrete Research."
+        ],
+        "timeline_months": 18,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "EN-ENG-019",
+        "title": "Sistema de Navegação Autônoma em Ambientes GPS-Denied com SLAM Semântico",
+        "title_en": "Autonomous Navigation in GPS-Denied Environments with Semantic SLAM",
+        "gap": "Navegação autônoma em minas, túneis e ambientes subterrâneos falha sem GPS; SLAM visual é computacionalmente pesado",
+        "dataset": "Hilti SLAM Challenge (LiDAR + camera) + Oxford RobotCar + custom underground mine dataset",
+        "methodology": "LiDAR-camera fusion + semantic segmentation (what am I looking at?) + factor graph optimization + incremental inference (iSAM2)",
+        "expected_contribution": "Sistema de navegação com erro <0.5% em 1km de trajeto subterrâneo a 30fps em GPU embarcada",
+        "target_journal": "IEEE Transactions on Robotics (IF: 9.4)",
+        "target_conference": "ICRA 2027",
+        "references": [
+          "Kummerle, R. et al. (2011). GTSAM: Factor Graph Optimization. IEEE RA.",
+          "McElhoath, R. et al. (2024). Visual SLAM: A Survey. IEEE Transactions on Robotics.",
+          "Dellaert, F. et al. (2024). Factor Graphs for Robotics. MIT Press."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "EN-ENG-020",
+        "title": "Design de Microgrids com Otimização Multi-objetivo e Resiliência Climática",
+        "title_en": "Microgrid Design with Multi-objective Optimization and Climate Resilience",
+        "gap": "Microgrids são projetadas para custo mínimo sem considerar resiliência a eventos climáticos extremos",
+        "dataset": "NREL ReEDS (US grid data) + Global Solar Atlas + Climate Extreme Indices",
+        "methodology": "NSGA-III para multi-objective (custo, emissão, resiliência) + scenario-based robust optimization + climate projections SSP2-4.5 e SSP5-8.5",
+        "expected_contribution": "Framework que projeta microgrids robustas a 3 cenários climáticos extremos com custo ≤15% acima do ótimo",
+        "target_journal": "Nature Energy (IF: 56.7)",
+        "target_conference": "IEEE PES General Meeting 2027",
+        "references": [
+          "Kwasinski, A. et al. (2024). Resilient Microgrid Design. Nature Energy.",
+          "NREL (2024). ReEDS: Regional Energy Deployment System. Technical Report.",
+          "Deb, K. et al. (2002). NSGA-II: A Fast Elitist Multi-Objective GA. Evolutionary Computation."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Alto"
       }
     ]
   },
@@ -1106,6 +2006,186 @@
           "Baird, M.E. et al. (2016). A biophysical regional ocean model. Journal of Geophysical Research."
         ],
         "timeline_months": 18
+      },
+      {
+        "id": "BI-011",
+        "title": "Predição de Estrutura Protéica com Energias de Interação Muliti-escala",
+        "title_en": "Protein Structure Prediction with Multi-scale Interaction Energies",
+        "gap": "AlphaFold prevê backbone mas não side-chains com precisão para docking; falta modelagem de interações específicas",
+        "dataset": "PDB (200k estruturas) + AlphaFold DB (200M predições) + CASP15 targets",
+        "methodology": "AlphaFold backbone + all-atom refinement com force-field neural network (ANI-2x) + MD simulation para validação",
+        "expected_contribution": "Pipeline que refina side-chains com RMSD ≤0.8Å vs. crystallography em 80% dos casos",
+        "target_journal": "Nature (IF: 64.8)",
+        "target_conference": "ISMB 2027",
+        "references": [
+          "Jumper, J. et al. (2021). Highly Accurate Protein Structure Prediction with AlphaFold. Nature.",
+          "Smith, J. et al. (2017). ANI-1: A General Neural Network Potential. ACS Central Science.",
+          "Henzler-Wildman, K. & Kern, D. (2007). Dynamics of Protein Function. Nature."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "BI-012",
+        "title": "Screening de Fármacos Virtual com Modelos de Difusão para Moléculas",
+        "title_en": "Virtual Drug Screening with Diffusion Models for Molecules",
+        "gap": "Virtual screening tradicional (docking) tem alta taxa de falso positivo; modelos generativos não garantem druglikeness",
+        "dataset": "ZINC-22 (37B molecules) + ChEMBL (2.4M bioactivities) + BindingDB (2.8M affinities)",
+        "methodology": "Molecular diffusion model (EDM) + 3D pocket conditioning + multi-objective optimization (potency, druglikeness, synthetizability) + ensembling",
+        "expected_contribution": "Pipeline que gera moléculas com Ki ≤10nM e QED ≥0.5 em 5 targets de farmacos-relevantes",
+        "target_journal": "Nature Chemistry (IF: 24.3)",
+        "target_conference": "NeurIPS 2027 ML for Drug Discovery",
+        "references": [
+          "Hoogeboom, E. et al. (2022). Equivariant Diffusion for Molecule Generation. NeurIPS.",
+          "Irwin, J. et al. (2022). ZINC-22: A Free, Large-Scale Database. JCIM.",
+          "Bemis, G. & Murcko, M. (1996). Properties of Known Drugs. J. Med. Chem."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "BI-013",
+        "title": "Análise de Expressão Gênica em Single-Cell com Fondação Celular",
+        "title_en": "Single-cell Gene Expression Analysis with a Cellular Foundation Model",
+        "gap": "Modelos de scRNA-seq são treinados por dataset; falta fundação que generalize para novos tecidos e condições",
+        "dataset": "Human Cell Atlas (33M cells) + Tabula Sapiens (400k cells) + CellxGene (10M cells)",
+        "methodology": "Foundation model (scGPT-like) pre-trained em 100M cells + fine-tuning com 100 cells por tarefa + benchmark em 10 tarefas downstream",
+        "expected_contribution": "Modelo que atinge state-of-the-art em 8/10 tarefas de scRNA-seq com 10x menos dados de fine-tuning",
+        "target_journal": "Nature Methods (IF: 36.1)",
+        "target_conference": "ISMB 2027",
+        "references": [
+          "Cui, H. et al. (2024). scGPT: Foundation Model for Single-Cell Biology. Nature Methods.",
+          "Regev, A. et al. (2017). Human Cell Atlas. eLife.",
+          "Tabula Sapiens Consortium (2022). A Single-Cell Transcriptomic Atlas of Human Organs. Nature."
+        ],
+        "timeline_months": 16,
+        "difficulty": "Muito Alto"
+      },
+      {
+        "id": "BI-014",
+        "title": "Predição de Efeitos de Variantes Genéticas com Modelos de Linguagem de DNA",
+        "title_en": "Genetic Variant Effect Prediction with DNA Language Models",
+        "gap": "A maioria das variantes genéticas tem significado clínico desconhecido (VUS); predição é um gargalo",
+        "dataset": "gnomAD (800k genomas) + ClinVar (2M variantes) + UK Biobank (500k)",
+        "methodology": "DNA language model (DNABERT-2) pre-trained em 100B pb + fine-tuning em variantes patogênicas + causal attention analysis",
+        "expected_contribution": "Classificador que reduz VUS para pathogenic/benign com AUROC ≥0.92 em 3 tipos de variantes",
+        "target_journal": "Nature Genetics (IF: 41.2)",
+        "target_conference": "RECOMB 2027",
+        "references": [
+          "Zhou, J. et al. (2024). DNABERT-2: Pre-trained on 100B+ DNA Sequences. Nature.",
+          "Landrum, M. et al. (2024). ClinVar: Improving Access to Variant Interpretation. Nucleic Acids Research.",
+          "Karczewski, K. et al. (2020). gnomAD: Resource for Konw Variant Frequencies. Nature."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "BI-015",
+        "title": "Ecologia Microbiana do Solo com Metagenômica e Redes de Interação",
+        "title_en": "Soil Microbial Ecology with Metagenomics and Interaction Networks",
+        "gap": "99% dos microrganismos do solo são incultiváveis; funções e interações sãolargely desconhecidas",
+        "dataset": "Earth Microbiome Project (27k amostras) + MGnify (metagenomes) + Global Soil Biodiversity Initiative",
+        "methodology": "Metagenome assembly (MEGAHIT) + binning (MetaBAT2) + network inference (SPIEC-EASI) + functional annotation (eggNOG)",
+        "expected_contribution": "Rede de interações microbianas com 50k edges funcionais validados em 3 biomas terrestres",
+        "target_journal": "Nature Microbiology (IF: 28.3)",
+        "target_conference": "ISME 2027",
+        "references": [
+          "Thompson, L. et al. (2017). Earth Microbiome Project. Nature.",
+          "Li, D. et al. (2015): MEGAHIT: Ultra-fast metagenome assembly. Nature BME.",
+          "Kurtz, Z. et al. (2015): SPIEC-EASI: Sparse Inverse Covariance Estimation. Microbiome."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "BI-016",
+        "title": "Análise de Imunologia de Tumores com Spatial Transcriptomics",
+        "title_en": "Tumor Immunology Analysis with Spatial Transcriptomics",
+        "gap": "Imunoterapia funciona em subconjunto; falta mapa espacial de interações imunologia-tumor para guiar tratamento",
+        "dataset": "10x Genomics Visium (500 tejidos) + MERFISH (100 amostras) + TCGA (11k pacientes)",
+        "methodology": "Graph Transformer sobre spatial transcriptomics + cell-cell communication inference (CellChat) + spatial domain segmentation + survival prediction",
+        "expected_contribution": "Mapa espacial que identifica nichos imunológicos preditivos de resposta em 3 tipos de câncer",
+        "target_journal": "Nature Immunology (IF: 27.7)",
+        "target_conference": "ISMB 2027",
+        "references": [
+          "Ståhl, P. et al. (2016). Visualization and Analysis of Gene Expression in Tissue Sections by Spatial Transcriptomics. Science.",
+          "Jin, S. et al. (2024): CellChat for Intercellular Communication. Nature Immunology.",
+          "Yuan, Y. (2024). Spatial Transcriptomics: A New Era. Nature Immunology."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "BI-017",
+        "title": "Predição de Interactions Proteína-Proteína com Grafos de Conhecimento Biológico",
+        "title_en": "Protein-Protein Interaction Prediction with Biological Knowledge Graphs",
+        "gap": "Métodos baseados em sequência ignoram contexto celular; falta modelagem de interações indiretas e específicas a tecido",
+        "dataset": "STRING (2B interações) + BioGRID (1.5M) + Human Reference Atlas (蛋白质 expression)",
+        "methodology": "Knowledge graph embedding (ComplEx) + GNN sobre rede de interação + tissue-specific conditioning + experimental validation high-throughput",
+        "expected_contribution": "Rede tissue-specific com 1M interações preditas, 80% validadas em 2 tecidos-alvo",
+        "target_journal": "Nature Methods (IF: 36.1)",
+        "target_conference": "PSB 2027",
+        "references": [
+          "Szklarczyk, D. et al. (2024). STRING: Functional Protein Networks. Nucleic Acids Research.",
+          "Oughtred, R. et al. (2024). BioGRID: General Repository. Nucleic Acids Research.",
+          "Regev, A. et al. (2017). Human Cell Atlas. eLife."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "BI-018",
+        "title": "Otimização de Fermentação Industrial com Controladores Preditivos",
+        "title_en": "Industrial Fermentation Optimization with Predictive Controllers",
+        "gap": "Fermentação industrial (bioethanol, insulina) tem rendimento subótimo; controle manual é lento e inconsistente",
+        "dataset": "NIBIB Bioprocess data + iGEM competition data + industrial case studies (Novozymes)",
+        "methodology": "Digital twin do bioreactor (ODE model) + MPC baseado em LSTM + Bayesian optimization para parâmetros de operating",
+        "expected_contribution": "Controlador que aumenta rendimento de fermentação em 12% mantendo qualidade do produto",
+        "target_journal": "Nature Biotechnology (IF: 46.9)",
+        "target_conference": "SB5 2027",
+        "references": [
+          "Lee, J. et al. (2024). Digital Twins for Bioprocessing. Nature Biotechnology.",
+          "Ljung, L. (1999). System Identification: Theory for the User. Prentice Hall.",
+          "Shah, N. et al. (2024). AI in Biomanufacturing. Nature Biotechnology."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "BI-019",
+        "title": "Clonagem Celular com CRISPR e Verificação por Long-Read Sequencing",
+        "title_en": "Cellular Cloning with CRISPR and Long-Read Sequencing Verification",
+        "gap": "Edições CRISPR off-target são sub-detectadas; short-read sequencing perde rearranjos complexos",
+        "dataset": "ENCODE (300k CRISPR experiments) + GIAB (genome-in-a-bottle) + long-read benchmarks",
+        "methodology": "CRISPR editing + ONT long-read sequencing + structural variant calling (Sniffles2) + off-target analysis com CRISPResso3",
+        "expected_contribution": "Pipeline que detecta 95% dos off-targets including large rearrangements em 24h",
+        "target_journal": "Nature Biotechnology (IF: 46.9)",
+        "target_conference": "AGBT 2027",
+        "references": [
+          "Jinek, M. et al. (2012). A Programmable Dual-RNA-Guided DNA Endonuclease. Science.",
+          "Sedlazeck, F. et al. (2018). Detection of Structural Variants and CNVs with Long-Read Sequencing. Nature Methods.",
+          "Pinello, L. et al. (2024). CRISPResso3: Enhanced Genome Editing. Nature Biotechnology."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "BI-020",
+        "title": "Análise Evolutiva de Resistência a Antibióticos com Filogenômica Computacional",
+        "title_en": "Evolutionary Analysis of Antibiotic Resistance with Computational Phylogenomics",
+        "gap": "Resistência a antibióticos evolui rapidamente mas rastreamento filogenômico é lento e não integrado a dados clínicos",
+        "dataset": "CARD (20k resistomes) + PATRIC (100k genomas bacterianos) + EARS-Net (surveillance EU)",
+        "methodology": "Phylogenetic placement (papara) + gene tree species tree reconciliation + selection pressure analysis (MEME/FEL) + real-time outbreak detection",
+        "expected_contribution": "Pipeline que rastreia origem e disseminação de genes de resistência em 48h com precisão geográfica",
+        "target_journal": "The Lancet Microbe (IF: 36.4)",
+        "target_conference": "ECCE 2027",
+        "references": [
+          "McArthur, A. et al. (2013): CARD: Comprehensive Antibiotic Resistance Database. AAC.",
+          "Federhen, S. et al. (2016): PATRIC: Bioinformatics Resource Center. Nucleic Acids Research.",
+          "Maudet, C. et al. (2024): Real-time Genomic Surveillance of AMR. The Lancet Microbe."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
       }
     ]
   },
@@ -1281,6 +2361,186 @@
           "Bolton, R.J. & Hand, D.J. (2002). Statistical fraud detection: A review. Statistical Science."
         ],
         "timeline_months": 14
+      },
+      {
+        "id": "FN-011",
+        "title": "Detecção de Lavagem de Dinheiro com Redes de Grafos Transacionais",
+        "title_en": "Money Laundering Detection with Transaction Graph Networks",
+        "gap": "90% das transações suspeitas não são reportadas; regras baseadas em threshold geram 95% de falsos positivos",
+        "dataset": "Elliptic Dataset (200k transações) + FinCEN SAR (500k reports) + synthetic AML data",
+        "methodology": "Temporal Graph Network (TGN) sobre rede de transações + anomaly detection (GAE) + attention para explicabilidade de por que a transação é suspeita",
+        "expected_contribution": "Detector que reduz falsos positivos em 70% mantendo recall ≥90% em 3 tipos de lavagem",
+        "target_journal": "Journal of Financial Economics (IF: 9.4)",
+        "target_conference": "KDD 2027",
+        "references": [
+          "Weber, M. et al. (2019). Anti-money Laundering in Bitcoin: Experimenting with Graph Convolutional Networks. arXiv.",
+          "FinCEN (2024). Suspicious Activity Reports. Technical Report.",
+          "Liu, Z. et al. (2024). Temporal Graph Networks for Anomaly Detection. KDD."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "FN-012",
+        "title": "Modelos de Linguagem para Análise Fundamentalista Automatizada",
+        "title_en": "Language Models for Automated Fundamental Analysis",
+        "gap": "Análise fundamentalista é manual e lenta; LLMs processam relatórios mas carecem de grounding em dados financeiros",
+        "dataset": "SEC EDGAR (500k filings) + Bloomberg transcripts + FactSet fundamentals",
+        "methodology": "LLM (GPT-4 class) + structured data grounding (tables, ratios) + chain-of-thought financial reasoning + backtesting em portfolio",
+        "expected_contribution": "Agente que gera relatórios de análise com qualidade equivalente a analista júnior em 80% dos critérios",
+        "target_journal": "Journal of Finance (IF: 8.2)",
+        "target_conference": "AAAI 2027 HAI",
+        "references": [
+          "Lopez-Lira, A. (2023). ChatGPT and Financial Analysis. arXiv.",
+          "Chen, H. et al. (2024). FinGPT: Open-Source Financial LLM. arXiv.",
+          "SEC (2024). EDGAR Company Filings. Technical Report."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "FN-013",
+        "title": "Otimização de Portfólio com Aprendizado por Reforço Multi-asset",
+        "title_en": "Portfolio Optimization with Multi-asset Reinforcement Learning",
+        "gap": "Markowitz é estático e assume normalidade; RL supera mas carece de risk management formal",
+        "dataset": "Yahoo Finance (20 years, 500 assets) + FRED (macroeconomic) + Quandl alternatives",
+        "methodology": "Soft Actor-Critic (SAC) com risk constraints (CVaR) + regime-switching (bull/bear detection) + transaction cost modeling + benchmark vs. 60/40",
+        "expected_contribution": "Política RL que supera 60/40 em Sharpe ratio ≥0.3 com max drawdown <15%",
+        "target_journal": "Journal of Financial Economics (IF: 9.4)",
+        "target_conference": "NeurIPS 2027 AI for Finance",
+        "references": [
+          "Haarnoja, T. et al. (2018). Soft Actor-Critic. ICML.",
+          "Jiang, Z. et al. (2017): Deep Reinforcement Learning for Portfolio Management. arXiv.",
+          "Markowitz, H. (1952). Portfolio Selection. Journal of Finance."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "FN-014",
+        "title": "Sistema de Alerta Precoce de Crises Financeiras com Dados de Alta Frequência",
+        "title_en": "Early Warning System for Financial Crises with High-frequency Data",
+        "gap": "Crises financeiras são antecipadas por indicadores macro mas ignoram sinais de mercados de alta frequência",
+        "dataset": "TAQ (NYSE trades, 10TB) + CDS spreads + VIX term structure + LIBOR-OIS spreads",
+        "methodology": "Autoencoder para anomaly detection em features de mercado + LSTM para previsão de regime + Bayesian network para cascata de contágio",
+        "expected_contribution": "Sistema que antecipa crises com 3 meses de lead time e precision ≥70%",
+        "target_journal": "Journal of Monetary Economics (IF: 4.0)",
+        "target_conference": "ACM SIGKDD 2027",
+        "references": [
+          "Brunnermeier, M. (2009). Deciphering the 2007-08 Liquidity Crunch. Journal of Economic Perspectives.",
+          "Buccola, S. et al. (2024). High-Frequency Signals for Crisis Prediction. Journal of Monetary Economics.",
+          "Reinhart, C. & Rogoff, K. (2009). This Time Is Different. Princeton University Press."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "FN-015",
+        "title": "Estimativa de Custo de Capital com NLP e Disclaimers Regulatórios",
+        "title_en": "Cost of Capital Estimation with NLP and Regulatory Disclaimers",
+        "gap": "Cost of capital é estimado com modelos estáticos; disclosure quality e sentimento regulatório influenciam mas não são medidos",
+        "dataset": "SEC 10-K filings (20 years) + Compustat fundamentals + IBES estimates + Regulation FD text",
+        "methodology": "BERT para sentiment analysis de disclaimers + text complexity scoring + regression para impacto no cost of equity + instrumental variables",
+        "expected_contribution": "Modelo que melhora previsão de cost of equity em 15% ao incluir features de disclosure",
+        "target_journal": "Journal of Accounting Research (IF: 6.0)",
+        "target_conference": "AAA Annual Meeting 2027",
+        "references": [
+          "Li, F. (2008). Annual Report Readability and Cost of Equity Capital. Journal of Accounting Research.",
+          "Botosan, C. (1997). Disclosure Level and Cost of Equity Capital. The Accounting Review.",
+          "Devlin, J. et al. (2019). BERT: Pre-training of Deep Bidirectional Transformers. NAACL."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "FN-016",
+        "title": "Detecção de Fraude em Seguros com Processamento de Linguagem Natural",
+        "title_en": "Insurance Fraud Detection with Natural Language Processing",
+        "gap": "30-40% dos claims de seguro são fraudulentos ($80B/ano nos EUA); detecção é manual e lenta",
+        "dataset": "Insurance Fraud Bureau data + claim narratives (synthetic) + NAIC complaint database",
+        "methodology": "RoBERTa para claim narrative analysis + entity extraction (dano, local, envolvidos) + anomaly detection multimodal (texto + numérico)",
+        "expected_contribution": "Detector que identifica fraudes com AUC ≥0.92 e reduz investigações manuais em 40%",
+        "target_journal": "Journal of Risk and Insurance (IF: 2.6)",
+        "target_conference": "ICMIF 2027",
+        "references": [
+          "Viaene, S. & Dedene, G. (2004). Insurance Fraud: Issues and Challenges. Geneva Papers.",
+          "Phua, C. et al. (2010). A Comprehensive Survey of Fraud Detection. Wiley Interdisciplinary Reviews.",
+          "Liu, Y. et al. (2019). RoBERTa: A Robustly Optimized BERT. arXiv."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "FN-017",
+        "title": "Negociação Algorítmica com Mercados de Limite de Ordens",
+        "title_en": "Algorithmic Trading with Limit Order Book Markets",
+        "gap": "LOB é o venue de trading dominante mas modelos de RL não capturam microestrutura adequadamente",
+        "dataset": "LOBSTER (S&P 500, 10 anos) + FI-2010 (benchmark) + custom crypto LOB (Binance)",
+        "methodology": "Transformer sobre LOB events + reward shaping com risk-adjusted returns + realistic transaction cost modeling + backtest com market impact",
+        "expected_contribution": "Agente que supera baselines de HFT em Sharpe ratio ≥2.0 com turnover controlado",
+        "target_journal": "Mathematical Finance (IF: 1.8)",
+        "target_conference": "NeurIPS 2027 AI4Finance",
+        "references": [
+          "Sirignano, J. (2019). Universal Features of Price Formation in Financial Markets. PNAS.",
+          "Zhang, Z. et al. (2019). DeepLOB: Deep Convolutional Neural Network for LOB. IEEE TFS.",
+          "Harris, L. (2003). Trading and Exchanges. Oxford University Press."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "FN-018",
+        "title": "Previsão de Default com Dados Alternativos (Redes Sociais, Satélite)",
+        "title_en": "Default Prediction with Alternative Data (Social Media, Satellite)",
+        "gap": "Modelos de credit scoring usam apenas dados tradicionais; dados alternativos podem melhorar previsão em mercados emergentes",
+        "dataset": "Lending Club (2M loans) + Kaggle Credit Default + Twitter sentiment por empresa + VIIRS nighttime lights",
+        "methodology": "Multi-modal ensemble: XGBoost (dados financeiros) + BERT (news sentiment) + CNN (nighttime lights) + stacking generalization",
+        "expected_contribution": "Modelo que melhora AUC em 8% em mercados emergentes ao incluir dados alternativos",
+        "target_journal": "Journal of Banking & Finance (IF: 3.7)",
+        "target_conference": "AAAI 2027 HAI",
+        "references": [
+          "Xia, Y. et al. (2017). Alternative Data for Credit Scoring. arXiv.",
+          "Khandani, A. et al. (2010). Consumer Credit-risk Models via ML. Journal of Banking & Finance.",
+          "World Bank (2024). Financial Inclusion Data. Technical Report."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "FN-019",
+        "title": "Análise de Risco Sistêmico com Redes de Interconexão Financeira",
+        "title_en": "Systemic Risk Analysis with Financial Interconnection Networks",
+        "gap": "Risco sistêmico é avaliado por métricas individuais (VaR); falta modelagem de contágio em rede",
+        "dataset": "BIS (banking exposures, 300 bancos) + FED bilateral data + CoVaR methodology",
+        "methodology": "Network analysis (centrality, community detection) + contagion simulation (agent-based) + CoVaR e SRISK calculation + stress testing",
+        "expected_contribution": "Framework que prevê contágio sistêmico com 60% mais precisão que CoVaR isolado",
+        "target_journal": "Journal of Financial Economics (IF: 9.4)",
+        "target_conference": "BIS Research Conference 2027",
+        "references": [
+          "Acemoglu, D. et al. (2012). The Network Origins of Aggregate Fluctuations. Econometrica.",
+          "Adrian, T. & Brunnermeier, M. (2016). CoVaR. American Economic Review.",
+          "BIS (2024). Global Systemically Important Banks. Technical Report."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "FN-020",
+        "title": "Trading de Criptomoedas com Análise On-chain e Sentimento",
+        "title_en": "Cryptocurrency Trading with On-chain Analysis and Sentiment",
+        "gap": "Preços de cripto são influenciados por fatores on-chain (whale movements, DeFi TVL) e sentimento social que não são integrados",
+        "dataset": "Glassnode (on-chain metrics) + LunarCrush (social sentiment) + CoinGecko (preços) + DeFi Llama (TVL)",
+        "methodology": "LSTM para séries on-chain + FinBERT para sentimento + attention cross-modal para integração + backtest realista com slippage",
+        "expected_contribution": "Estratégia que supera buy-and-hold em 25% com Sharpe ratio ≥1.5 em 3 criptomoedas",
+        "target_journal": "Journal of Financial Data Science (IF: 3.2)",
+        "target_conference": "NeurIPS 2027 AI4Finance",
+        "references": [
+          "Koutmos, D. (2018). Market Microstructure of Cryptocurrency Exchanges. Economics Letters.",
+          "Aramonte, S. et al. (2022). DeFi Risks. BIS Quarterly Review.",
+          "Liu, Y. et al. (2024). On-chain Analysis for Crypto Trading. Journal of Financial Data Science."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
       }
     ]
   },
@@ -1456,6 +2716,186 @@
           "Nelson, G.C. et al. (2014). Climate change effects on agriculture. PNAS."
         ],
         "timeline_months": 16
+      },
+      {
+        "id": "AG-011",
+        "title": "Mapeamento de Nutrição de Plantas com Drones Multiespectrais e Deep Learning",
+        "title_en": "Plant Nutrition Mapping with Multispectral Drones and Deep Learning",
+        "gap": "Análise de solo é laboratorial e pontual; nutrição varia espacialmente mas não é mapeada em tempo real",
+        "dataset": "Sentinel-2 NDVI + custom drone multispectral (RedEdge-P) + soil analysis lab data (500 amostras)",
+        "methodology": "U-Net para segmentação de estresse nutricional + CNN para classificação de deficiência (N, P, K) + kriging para interpolação espacial",
+        "expected_contribution": "Mapa de nutrição em resolução 1m² com acurácia ≥85% para 4 nutrientes principais",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "target_conference": "Precision Agriculture 2027",
+        "references": [
+          "Mulla, D. (2013). Twenty Five Years of Remote Sensing in Precision Agriculture. Remote Sensing.",
+          "Kamilaris, A. & Prenafeta-Boldú, F. (2018). Deep Learning in Agriculture. Computers and Electronics in Agriculture.",
+          "MicaSense (2024). RedEdge-P: Multispectral Sensor. Technical Report."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "AG-012",
+        "title": "Predição de Colheita com Modelos de Séries Temporais e Dados Climáticos",
+        "title_en": "Harvest Prediction with Time Series Models and Climate Data",
+        "gap": "Previsão de colheita é baseada em médias históricas; não considera variabilidade climática e manejo",
+        "dataset": "USDA NASS (100k county-level harvests) + PRISM climate (40 anos) + MODIS NDVI",
+        "methodology": "Temporal Fusion Transformer (TFT) + weather covariates + multi-horizon forecasting (1-6 months ahead) + probabilistic outputs",
+        "expected_contribution": "Previsão de colheita com MAPE ≤8% para 6 meses de antecedência em 5 culturas",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "target_conference": "AgriFood AI 2027",
+        "references": [
+          "Lim, B. et al. (2021). Temporal Fusion Transformers for Interpretable Multi-horizon Time Series Forecasting. Nature Machine Intelligence.",
+          "USDA NASS (2024). Quick Stats Database. Technical Report.",
+          "Heuvelink, G. et al. (2010). Uncertainty and Crop Yield Forecasts. Agricultural and Forest Meteorology."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "AG-013",
+        "title": "Detecção de Pragas com Visão Computacional em Tempo Real",
+        "title_en": "Pest Detection with Real-time Computer Vision",
+        "gap": "Identificação manual de pragas é lenta e requer expertise; atraso no diagnóstico causa perdas de 20-40%",
+        "dataset": "IP102 (75k imagens, 102 pragas) + PlantVillage (54k) + custom field images (10k)",
+        "methodology": "YOLOv9 para detecção em tempo real em drone/phone + EfficientNet-V2 para classificação fine-grained + active learning para novas pragas",
+        "expected_contribution": "Detector que identifica 30 pragas com acurácia ≥90% a 15fps em smartphone",
+        "target_journal": "Pest Management Science (IF: 3.9)",
+        "target_conference": "CIPA 2027",
+        "references": [
+          "Wu, X. et al. (2019). IP102: A Large-Scale Benchmark Dataset. Computers and Electronics in Agriculture.",
+          "Mohanty, S. et al. (2016). Using Deep Learning for Plant Disease Detection. Frontiers in Plant Science.",
+          "Redmon, J. & Farhadi, A. (2018). YOLOv3: An Incremental Improvement. arXiv."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "AG-014",
+        "title": "Otimização de Manejo de Solo com Aprendizado Federado entre Fazendas",
+        "title_en": "Soil Management Optimization with Federated Learning Across Farms",
+        "gap": "Dados de solo entre fazendas são competitivos; nenhum granjas quer compartilhar dados mas modelos precisam de dados diversificados",
+        "dataset": "ISRIC SoilGrids (250m global) + USDA Soil Survey + custom on-farm data (50 fazendas)",
+        "methodology": "Federated learning com differential privacy + soil property prediction (NPK, pH, organic matter) + recommendation engine para practices",
+        "expected_contribution": "Modelo federado que supera modelos locais em 20% para predição de propriedades do solo",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "target_conference": "ACM SenSys 2027",
+        "references": [
+          "Poggio, L. et al. (2021). SoilGrids 250m: Global Soil Information. Scientific Data.",
+          "Li, T. et al. (2020). Federated Optimization in Heterogeneous Networks. MLSys.",
+          "Laliberte, G. et al. (2024). Federated Learning for Agriculture. Nature Food."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "AG-015",
+        "title": "Simulação de Cultivos com Modelos de Linguagem e Conhecimento Agronômico",
+        "title_en": "Crop Simulation with Language Models and Agronomic Knowledge",
+        "gap": "Modelos de simulação de cultivos (APSIM, DSSAT) requerem parametrização manual por especialista; falta automação",
+        "dataset": "APSIM database (50k simulações) + public trial data (1k experimentos) + agronomic literature (50k papers)",
+        "methodology": "LLM como interface para APSIM + RAG sobre literatura agronômica + Bayesian calibration para parâmetros + validation em field trials",
+        "expected_contribution": "Sistema que calibra automaticamente APSIM para novos cultivares com erro <10% vs. calibração manual",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "target_conference": "AgMIP 2027",
+        "references": [
+          "Keating, B. et al. (2003). APSIM: A Farming Systems Model. Agricultural Systems.",
+          "Jones, J. et al. (2003). DSSAT Cropping System Model. European Journal of Agronomy.",
+          "Brown, H. et al. (2024). AI-Enhanced Crop Modeling. Nature Food."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "AG-016",
+        "title": "Previsão de Mercado Agrícola com Modelos Multimodais",
+        "title_en": "Agricultural Market Forecasting with Multimodal Models",
+        "gap": "Preços agrícolas são influenciados por clima, geopolítica e sentimento; modelos existentes são unimodais",
+        "dataset": "FAO GIEWS (preços semanais, 100 países) + USDA WASDE (oferta/demanda) + Sentinel-2 NDVI + Twitter agriculture sentiment",
+        "methodology": "Multi-modal fusion: LSTM (preços) + CNN (imagens satelitais) + BERT (news/sentiment) + attention-based integration + probabilistic forecasting",
+        "expected_contribution": "Previsão de preços com MAPE ≤12% em 3 meses de horizonte para 5 commodities globais",
+        "target_journal": "American Journal of Agricultural Economics (IF: 4.2)",
+        "target_conference": "IAAE 2027",
+        "references": [
+          "Timsina, J. et al. (2024). AI for Agricultural Market Forecasting. AJAE.",
+          "FAO (2024). Global Information and Early Warning System. Technical Report.",
+          "Sharma, A. et al. (2024): Multimodal Commodity Price Forecasting. Nature Food."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "AG-017",
+        "title": "Biocontrole de Pragas com Liberação Automatizada de Inimigos Naturais",
+        "title_en": "Pest Biocontrol with Automated Natural Enemy Release",
+        "gap": "Biocontrole é subutilizado porque liberação manual é cara e imprecisa; falta automação e timing",
+        "dataset": "IOBC (efficacy data, 2k estudos) + custom drone release experiments + pheromone trap data",
+        "methodology": "Computer vision para detecção de pragas e inimigos + optimal release timing via MDP + drone delivery system + cost-benefit analysis",
+        "expected_contribution": "Sistema automatizado que aumenta eficácia de biocontrole em 30% com custo 40% menor que liberação manual",
+        "target_journal": "Nature Biotechnology (IF: 46.9)",
+        "target_conference": "IOBC-WPRS 2027",
+        "references": [
+          "Van Lenteren, J. et al. (2018). Biocontrol Using Natural Enemies. Annual Review of Entomology.",
+          "Bolckmans, K. (2024). Automated Biocontrol Release Systems. Nature Biotechnology.",
+          "Pilkington, L. et al. (2024). Drone-Based Pest Monitoring and Control. Annual Review of Entomology."
+        ],
+        "timeline_months": 14,
+        "difficulty": "Alto"
+      },
+      {
+        "id": "AG-018",
+        "title": "Estimativa de Biomassa com Radar e LiDAR para Agricultura de Precisão",
+        "title_en": "Biomass Estimation with Radar and LiDAR for Precision Agriculture",
+        "gap": "Biomassa é estimada por NDVI que satura em alta cobertura; radar e LiDAR são mais precisos mas requerem calibração",
+        "dataset": "Sentinel-1 SAR (VH, VV) + GEDI LiDAR (8M footprints) + field measurements (200 plots, 5 culturas)",
+        "methodology": "Random Forest + SAR backscatter models (Water Cloud) + LiDAR canopy height → allometric biomass + transfer learning entre culturas",
+        "expected_contribution": "Modelo de biomassa com RMSE ≤15% validado em 5 culturas e 3 biomas",
+        "target_journal": "Remote Sensing of Environment (IF: 13.5)",
+        "target_conference": "IGARSS 2027",
+        "references": [
+          "Pettinato, S. et al. (2024). SAR-LiDAR Fusion for Biomass Estimation. RS of Environment.",
+          "Duncanson, L. et al. (2020). GEDI Biomass Calibration. Remote Sensing.",
+          "Attema, E. & Ulaby, F. (1978). Vegetation Modeled as a Water Cloud. Radio Science."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "AG-019",
+        "title": "Qualidade de Sementes com Visão Computacional e Espectroscopia NIR",
+        "title_en": "Seed Quality with Computer Vision and NIR Spectroscopy",
+        "gap": "Avaliação de sementes é destrutiva e lenta; NIR + visão pode ser não-destrutiva e rápida mas modelos são específicos por cultura",
+        "dataset": "ISTA (International Seed Testing rules) + custom NIR spectra (10k amostras, 10 culturas) + RGB images",
+        "methodology": "1D-CNN para NIR spectra + 2D-CNN para RGB images + multi-modal fusion + transfer learning entre culturas + calibration transfer between instruments",
+        "expected_contribution": "Sistema que previ germinação com R² ≥0.90 em 10 culturas com 3 segundos de teste por amostra",
+        "target_journal": "Journal of the Science of Food and Agriculture (IF: 4.1)",
+        "target_conference": "PDA 2027",
+        "references": [
+          "ISTA (2024). International Rules for Seed Testing. Technical Report.",
+          "Dowell, F. et al. (2024). NIR for Seed Quality. JSFA.",
+          "Pasmans, J. et al. (2024). Computer Vision for Seed Phenotyping. Plant Phenomics."
+        ],
+        "timeline_months": 10,
+        "difficulty": "Medio"
+      },
+      {
+        "id": "AG-020",
+        "title": "Gestão de Irrigação com RL e Modelos de Solo Dinâmicos",
+        "title_en": "Irrigation Management with RL and Dynamic Soil Models",
+        "gap": "Irrigação por timer é ineficiente; irrigação por sensores é cara; falta modelo adaptativo que aprenda as condições do solo",
+        "dataset": "ISMN soil moisture (500 estações) + FAO-56 crop coefficients + custom field experiment (2 seasons)",
+        "methodology": "PPO com reward baseado em water use efficiency + soil moisture dynamics model (ODE) + sim-to-real transfer + climate forecast as context",
+        "expected_contribution": "Política RL que reduz uso de água em 20% mantendo rendimento ≥95% do ótimo em 2 culturas",
+        "target_journal": "Nature Food (IF: 23.2)",
+        "target_conference": "ACM SenSys 2027",
+        "references": [
+          "Fisher, D. et al. (2024). RL for Irrigation. Nature Water.",
+          "Allen, R. et al. (2011). FAO-56: Crop Evapotranspiration. FAO.",
+          "Tao, H. et al. (2024). Smart Irrigation with RL. Nature Food."
+        ],
+        "timeline_months": 12,
+        "difficulty": "Medio"
       }
     ]
   }
