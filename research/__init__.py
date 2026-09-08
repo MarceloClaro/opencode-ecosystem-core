@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-research — Subsistema de Busca e Extração Acadêmica (SPEC-017)
-===============================================================
+research — Subsistema de Busca e Extração Acadêmica (SPEC-017 v2)
+==================================================================
 Buscadores multiplataforma (arXiv, OpenAlex, Crossref, Semantic Scholar,
-Europe PMC/PubMed, GitHub, Kaggle), download de PDFs (scihub-cli /
-paper-download-mcp / OA direto), conversão PDF→Markdown e fichamentos +
-resenhas críticas em ABNT (NBR 6023:2018 / NBR 10520:2023) e APA 7.
+Europe PMC/PubMed, SciELO, GitHub, Kaggle), download Open Science por rotas
+OA/repositório/preprint, conversão PDF→Markdown e fichamentos + resenhas
+críticas em ABNT (NBR 6023:2018 / NBR 10520:2023) e APA 7.
 """
 
 from .searchers import MultiSearcher, PaperRecord
