@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","title":"ArticleSearchManifest v1.1","type":"object","additionalProperties":false,
+  "required":["schema_version","search_id","query","created_at","source_priority","results","policy","limitations"],
+  "properties":{
+    "schema_version":{"const":"1.0"},"search_id":{"type":"string","pattern":"^ASEARCH-[a-f0-9]{10}$"},"query":{"type":"string","minLength":1},"created_at":{"type":"string","format":"date-time"},
+    "source_priority":{"type":"array","minItems":1,"items":{"enum":["openalex","europepmc","scielo","arxiv","semantic_scholar","core","crossref","pubmed","biorxiv"]}},
+    "errors":{"type":"array","items":{"type":"object"}},"policy":{"const":"open_science_only"},"limitations":{"type":"array","minItems":1,"items":{"type":"string"}},
+    "results":{"type":"array","items":{"type":"object","additionalProperties":true,"required":["article_id","title","source","oa","retrieval_priority"],"properties":{"article_id":{"type":"string","pattern":"^ART-[0-9]{4}$"},"title":{"type":"string","minLength":1},"doi":{"type":["string","null"]},"year":{"type":["integer","null"]},"authors":{"type":"array"},"venue":{"type":["string","null"]},"source":{"type":"string"},"record_url":{"type":["string","null"]},"landing_url":{"type":["string","null"]},"pdf_url":{"type":["string","null"]},"oa":{"type":"boolean"},"oa_status":{"type":["string","null"]},"license":{"type":["string","null"]},"cited_by_count":{"type":"integer","minimum":0},"retrieval_priority":{"type":"number"},"also_found_in":{"type":"array"}}}}
+  }
+}

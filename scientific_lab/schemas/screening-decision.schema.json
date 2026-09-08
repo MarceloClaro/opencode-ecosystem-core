@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","title":"ScreeningDecision v1.0","type":"object","additionalProperties":false,
+  "required":["schema_version","decision_id","protocol_id","study_id","stage","reviewer","decision","reason","decided_at","human_decision"],
+  "properties":{"schema_version":{"const":"1.0"},"decision_id":{"type":"string","pattern":"^SCR-[A-Fa-f0-9]{8,16}$"},"protocol_id":{"type":"string"},"study_id":{"type":"string"},"stage":{"enum":["title_abstract","full_text"]},"reviewer":{"type":"string","minLength":1},"decision":{"enum":["include","exclude","uncertain"]},"reason":{"type":"string","minLength":2},"decided_at":{"type":"string","format":"date-time"},"human_decision":{"type":"boolean"},"assistant_suggestion":{"type":["string","null"]},"evidence_refs":{"type":"array","items":{"type":"string"}}},
+  "allOf":[{"if":{"properties":{"stage":{"const":"full_text"}}},"then":{"properties":{"human_decision":{"const":true}}}}]
+}
