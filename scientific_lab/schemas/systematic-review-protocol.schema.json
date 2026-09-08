@@ -1,0 +1,5 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema","title":"SystematicReviewProtocol v4.2 native","type":"object","additionalProperties":true,
+ "required":["schema_version","protocol_id","project_id","title","question","eligibility","search_plan","screening","integrity_policy","synthesis_plan","reporting_standard","human_review_required","status"],
+ "properties":{"schema_version":{"const":"1.0"},"protocol_id":{"type":"string","pattern":"^SRP-[A-Z0-9-]{3,64}$"},"project_id":{"type":"string","minLength":3},"title":{"type":"string","minLength":3},"question":{"type":"string","minLength":5},"eligibility":{"type":"object"},"search_plan":{"type":"object"},"screening":{"type":"object"},"integrity_policy":{"type":"object"},"synthesis_plan":{"type":"object"},"reporting_standard":{"const":"PRISMA_2020"},"human_review_required":{"const":true},"status":{"enum":["draft","approved"]},"approved_by":{"type":["string","null"]}}
+}
