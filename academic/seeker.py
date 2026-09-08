@@ -254,6 +254,68 @@ def search_huggingface(query: str, limit: int = 10) -> list[dict]:
 
 
 # ─────────────────────────────────────────────
+# Kaggle Datasets (busca pública, sem auth)
+# ─────────────────────────────────────────────
+
+KAGGLE_DATASETS_API = "https://www.kaggle.com/api/v1/datasets/list"
+
+def search_kaggle(query: str, limit: int = 10, max_size_mb: int = 500) -> list[dict]:
+    """
+    Busca datasets públicos no Kaggle.
+    Não requer autenticação para busca básica.
+    API retorna chaves com sufixo 'Nullable'.
+    """
+    try:
+        params = {
+            'search': query,
+            'maxSize': max_size_mb * 1024 * 1024,
+            'filetype': 'csv',
+        }
+        headers = {'Accept': 'application/json'}
+        r = requests.get(KAGGLE_DATASETS_API, params=params, headers=headers, timeout=15)
+        if r.status_code != 200:
+            logger.warning(f"Kaggle: status {r.status_code}")
+            return []
+        raw = r.json()
+        results = []
+        for ds in raw[:limit]:
+            # Kaggle API usa chaves com sufixo 'Nullable'
+            ref = ds.get('ownerRefNullable', '') + '/' + ds.get('ref', ds.get('urlNullable', '').split('/')[-1])
+            title = ds.get('titleNullable', ds.get('title', ref))
+            desc = ds.get('subtitleNullable', ds.get('description', '')) or ''
+            url = ds.get('urlNullable', f'https://www.kaggle.com/datasets/{ref}')
+            total_bytes = ds.get('totalBytesNullable', ds.get('totalBytes', 0)) or 0
+            download_count = ds.get('downloadCountNullable', ds.get('downloadCount', 0)) or 0
+            license_name = ds.get('licenseNameNullable', ds.get('licenseName', '')) or ''
+            last_updated = ds.get('lastUpdatedNullable', ds.get('lastUpdated', '')) or ''
+            tags = ds.get('tags', [])
+            if isinstance(tags, list):
+                tags_str = ', '.join(str(t) if isinstance(t, str) else t.get('name', '') for t in tags)
+            else:
+                tags_str = str(tags)
+
+            results.append({
+                'name':     title,
+                'about':    desc[:200],
+                'link':     url,
+                'download': f"https://www.kaggle.com/api/v1/datasets/download/{ref}",
+                'category': tags_str,
+                'cloud':    'Kaggle',
+                'vintage':  str(last_updated[:4]) if last_updated else 'NA',
+                'license':  license_name,
+                'source':   'Kaggle',
+                'size_bytes': total_bytes,
+                'download_count': download_count,
+                'ref':      ref,
+            })
+        logger.info(f"Kaggle: {len(results)} resultados para '{query}'")
+        return results
+    except Exception as e:
+        logger.warning(f"Kaggle error: {e}")
+        return []
+
+
+# ─────────────────────────────────────────────
 # Pipeline unificado de busca
 # ─────────────────────────────────────────────
 
@@ -262,6 +324,7 @@ def search_all(
     category: str = '',
     include_datagov: bool = True,
     include_hf: bool = True,
+    include_kaggle: bool = True,
     limit_local: int = 10,
     limit_remote: int = 10,
     parallel: bool = True,
@@ -277,6 +340,7 @@ def search_all(
           'local':     [dict, ...],  # catálogo curado
           'datagov':   [dict, ...],  # data.gov CKAN
           'huggingface': [dict, ...],
+          'kaggle':    [dict, ...],
         },
         'audit': [str, ...],  # trilha para PhD Auditor L5
         'timestamp': str,
@@ -286,7 +350,7 @@ def search_all(
         'query':     query,
         'category':  category,
         'total':     0,
-        'results':   {'local': [], 'datagov': [], 'huggingface': []},
+        'results':   {'local': [], 'datagov': [], 'huggingface': [], 'kaggle': []},
         'audit':     [],
         'timestamp': datetime.now().isoformat(),
     }
@@ -297,13 +361,15 @@ def search_all(
     report['results']['local'] = local_res
     report['audit'].append(f"Catálogo local: {len(local_res)} resultados")
 
-    if parallel and (include_datagov or include_hf):
+    if parallel and (include_datagov or include_hf or include_kaggle):
         tasks = {}
-        with ThreadPoolExecutor(max_workers=2) as executor:
+        with ThreadPoolExecutor(max_workers=3) as executor:
             if include_datagov:
                 tasks['datagov'] = executor.submit(search_datagov, query, limit_remote)
             if include_hf:
                 tasks['huggingface'] = executor.submit(search_huggingface, query, limit_remote)
+            if include_kaggle:
+                tasks['kaggle'] = executor.submit(search_kaggle, query, limit_remote)
             for key, future in tasks.items():
                 try:
                     res = future.result(timeout=20)

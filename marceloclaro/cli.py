@@ -67,6 +67,7 @@ Comandos diretos:
     python3 -m marceloclaro.cli doctor
     python3 -m marceloclaro.cli helpdesk
     python3 -m marceloclaro.cli pesquisa "tema" [--max-papers N] [--platforms a,b] [--no-download]
+    python3 -m marceloclaro.cli pesquisa-full "tema" [--question '...'] [--per-source N] [--max-pdfs N]
     python3 -m marceloclaro.cli apresentacao <pasta>
 """
 
@@ -160,6 +161,40 @@ def main() -> int:
             topic = sys.argv[2]
             flags = _parse_pesquisa_flags(sys.argv[3:])
             print(json.dumps(orchestrator.research(topic, **flags), indent=2, ensure_ascii=False))
+        elif cmd in ("pesquisa-full", "research-full"):
+            if len(sys.argv) < 3:
+                print(
+                    'Uso: python3 -m marceloclaro.cli pesquisa-full "<tema>" '
+                    "[--question '...'] [--objective '...'] [--per-source N] [--max-pdfs N]"
+                )
+                raise SystemExit(1)
+            topic = sys.argv[2]
+            question = None
+            objective = None
+            per_source = 10
+            max_pdfs = 20
+            idx = 3
+            while idx < len(sys.argv):
+                if sys.argv[idx] == "--question" and idx + 1 < len(sys.argv):
+                    question = sys.argv[idx + 1]
+                    idx += 2
+                elif sys.argv[idx] == "--objective" and idx + 1 < len(sys.argv):
+                    objective = sys.argv[idx + 1]
+                    idx += 2
+                elif sys.argv[idx] == "--per-source" and idx + 1 < len(sys.argv):
+                    per_source = int(sys.argv[idx + 1])
+                    idx += 2
+                elif sys.argv[idx] == "--max-pdfs" and idx + 1 < len(sys.argv):
+                    max_pdfs = int(sys.argv[idx + 1])
+                    idx += 2
+                else:
+                    idx += 1
+            from research.orchestrate import run_full_research
+            result = run_full_research(
+                topic=topic, question=question, objective=objective,
+                per_source=per_source, max_pdfs=max_pdfs,
+            )
+            print(json.dumps(result, indent=2, ensure_ascii=False))
         elif cmd in ("apresentacao", "present", "mira"):
             if len(sys.argv) < 3:
                 print("Uso: python3 -m marceloclaro.cli apresentacao <pasta_da_producao>")
@@ -292,7 +327,7 @@ def main() -> int:
             print(json.dumps(clinical_res, indent=2, ensure_ascii=False))
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'clinical', 'shortcuts', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'clinical', 'shortcuts', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa', 'pesquisa-full' ou 'apresentacao'.")
         return 0
 
     # Modo interativo
