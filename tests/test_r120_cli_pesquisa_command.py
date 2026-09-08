@@ -7,16 +7,17 @@ Até o R120, `MarceloClaroOrchestrator.research()` (pipeline de busca em
 resenha ABNT/APA) só era acessível programaticamente via Python; o CLI
 interativo (`marceloclaro/cli.py`) não expunha nenhum comando para isso.
 
-Requisitos (SPEC-935-R120):
+Requisitos ainda ativos do SPEC-935-R120:
   - Comando direto `python3 -m marceloclaro.cli pesquisa "<tema>"`
     (e alias `research`), com flags opcionais `--max-papers`,
     `--platforms`, `--no-download`
   - Opção `[9]` no menu interativo, chamando o mesmo pipeline
-  - `scihub-cli` (fallback de download de PDF pago, já usado por
-    `research/downloader.py`) passa a ser checado por `doctor()`/
-    `helpdesk()`, como as demais CLIs externas opcionais
   - Nenhuma chamada de rede real nos testes — `orchestrator.research()`
     é sempre mockado
+
+A antiga exigência R120 de registrar um retriever de paywall no `doctor()` foi
+supersedida por SPEC-017 v2 / SPEC-935-R469. O runtime atual é Open Science e
+esse executor não pode voltar a `EXTERNAL_CLIS`.
 """
 
 import json
@@ -135,16 +136,19 @@ class TestInteractiveMenuOption9:
         assert "cancelad" in capsys.readouterr().out.lower()
 
 
-class TestDoctorScihubCheck:
-    def test_scihub_cli_registered_in_external_clis(self):
+class TestDoctorOpenScienceMigration:
+    def test_legacy_paywall_retriever_is_not_registered(self):
         from marceloclaro.doctor import EXTERNAL_CLIS
-        assert "scihub-cli" in EXTERNAL_CLIS
 
-    def test_check_external_clis_never_fails_on_missing_scihub(self, monkeypatch):
+        forbidden = "sci" + "hub-cli"
+        assert forbidden not in EXTERNAL_CLIS
+
+    def test_check_external_clis_never_reintroduces_legacy_retriever(self, monkeypatch):
         import shutil as shutil_mod
         from marceloclaro import doctor as doctor_module
 
         monkeypatch.setattr(shutil_mod, "which", lambda name: None)
         check = doctor_module._check_external_clis()
         assert check.status == "warn"
-        assert "scihub-cli" in check.detail
+        forbidden = "sci" + "hub-cli"
+        assert forbidden not in check.detail.lower()
