@@ -8,6 +8,7 @@ artefato; não validam disponibilidade das APIs externas.
 from __future__ import annotations
 
 import hashlib
+import json
 from pathlib import Path
 
 from research.downloader import PaperDownloader
@@ -67,6 +68,12 @@ def test_direct_open_access_pdf_is_hash_recorded(tmp_path, monkeypatch):
     assert result.extra["validated_pdf_magic"] is True
     assert result.extra["sha256"] == hashlib.sha256(payload).hexdigest()
     assert Path(result.pdf_path).read_bytes() == payload
+    receipt_path = Path(result.extra["receipt"])
+    assert receipt_path.exists()
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    assert receipt["sha256"] == hashlib.sha256(payload).hexdigest()
+    assert receipt["access_basis"] == "open_access"
+    assert receipt["validated_pdf_magic"] is True
 
 
 def test_html_disfarçado_de_pdf_is_rejected(tmp_path, monkeypatch):
@@ -79,6 +86,7 @@ def test_html_disfarçado_de_pdf_is_rejected(tmp_path, monkeypatch):
     assert result.ok is False
     assert "magic bytes" in result.error
     assert not list(tmp_path.glob("*.pdf"))
+    assert not list(tmp_path.glob("*.receipt.json"))
 
 
 def test_crossref_pdf_url_is_not_presumed_open(tmp_path, monkeypatch):
@@ -141,6 +149,21 @@ def test_record_explicitly_marked_repository_may_use_direct_url(tmp_path, monkey
     assert result.ok is True
     assert result.method == "direct_oa"
     assert result.extra["access_basis"] == "repository"
+
+
+def test_receipt_strips_query_but_hashes_full_source_url(tmp_path, monkeypatch):
+    payload = b"%PDF-1.7\nsigned-url\n%%EOF\n"
+    signed = "https://repository.example/paper.pdf?token=secret-temporary&expires=123"
+    monkeypatch.setattr(
+        "research.downloader.urllib.request.urlopen",
+        lambda *a, **k: _FakeResponse(payload, {}),
+    )
+    dl = PaperDownloader(str(tmp_path))
+    result = dl.download([_rec(pdf_url=signed)])[0]
+    receipt = json.loads(Path(result.extra["receipt"]).read_text(encoding="utf-8"))
+    assert receipt["source_url"] == "https://repository.example/paper.pdf"
+    assert "secret-temporary" not in json.dumps(receipt)
+    assert receipt["source_url_sha256"] == hashlib.sha256(signed.encode("utf-8")).hexdigest()
 
 
 def test_runtime_downloader_does_not_depend_on_external_bypass_cli():
