@@ -87,6 +87,17 @@ def _safe_http_url(url: Optional[str]) -> bool:
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
+def _public_source_url(url: str) -> str:
+    """Remove query/fragment antes de persistir provenance.
+
+    Alguns repositórios fornecem URLs assinadas de curta duração. O hash da URL
+    completa preserva correlação operacional sem gravar parâmetros que podem
+    conter tokens temporários.
+    """
+    parsed = urllib.parse.urlsplit(url)
+    return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, "", ""))
+
+
 class PaperDownloader:
     """Baixa PDFs abertos para ``pesquisa/pdfs/`` com receipts mínimos."""
 
@@ -258,6 +269,32 @@ class PaperDownloader:
             logger.debug("[europepmc] DOI %s não resolvido: %s", doi, exc)
         return None
 
+    def _write_receipt(self, rec: PaperRecord, dest: Path, method: str,
+                       url: str, metadata: Dict, digest: str, total: int) -> Path:
+        receipt_path = dest.with_suffix(".receipt.json")
+        receipt = {
+            "schema": "open-science-download-receipt-v1",
+            "title": rec.title,
+            "doi": _normalise_doi(rec.doi),
+            "source": rec.source,
+            "method": method,
+            "resolver": metadata.get("resolver"),
+            "access_basis": metadata.get("access_basis"),
+            "license": metadata.get("license"),
+            "version": metadata.get("version"),
+            "pdf_path": dest.name,
+            "bytes": total,
+            "sha256": digest,
+            "validated_pdf_magic": True,
+            "source_url": _public_source_url(url),
+            "source_url_sha256": hashlib.sha256(url.encode("utf-8")).hexdigest(),
+        }
+        receipt_path.write_text(
+            json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        return receipt_path
+
     def _download_pdf(self, rec: PaperRecord, method: str, url: str,
                       metadata: Dict) -> DownloadResult:
         fname = f"[{rec.year or 's.d.'}] - {_slugify(rec.title)}.pdf"
@@ -297,13 +334,19 @@ class PaperDownloader:
                         fh.write(chunk)
                         sha.update(chunk)
 
+            digest = sha.hexdigest()
             tmp.replace(dest)
+            receipt_path = self._write_receipt(
+                rec, dest, method, url, metadata or {}, digest, total
+            )
             extra = dict(metadata or {})
             extra.update({
-                "sha256": sha.hexdigest(),
+                "sha256": digest,
                 "bytes": total,
-                "source_url": url,
+                "source_url": _public_source_url(url),
+                "source_url_sha256": hashlib.sha256(url.encode("utf-8")).hexdigest(),
                 "validated_pdf_magic": True,
+                "receipt": str(receipt_path),
             })
             logger.info("[%s] baixado: %s (%d KiB)", method, dest.name, total // 1024)
             return DownloadResult(
@@ -320,5 +363,9 @@ class PaperDownloader:
                 ok=False,
                 method=method,
                 error=str(exc),
-                extra={"source_url": url, **(metadata or {})},
+                extra={
+                    "source_url": _public_source_url(url),
+                    "source_url_sha256": hashlib.sha256(url.encode("utf-8")).hexdigest(),
+                    **(metadata or {}),
+                },
             )
