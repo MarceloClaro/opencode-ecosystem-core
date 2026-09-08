@@ -1,13 +1,12 @@
 {
-  "integration_version": "4.1.0-core.1",
-  "core_repository": "MarceloClaro/opencode-ecosystem-core",
-  "baseline_audited_commit": "a5478054ceb8fc34eb0d254a30a3c451d6d864cd",
-  "mode": "native_bridge_to_scientific_superlayer",
-  "primary_orchestrator": "marceloclaro",
-  "replaces_core": false,
-  "default_scientific_home": "~/.local/share/pesquisador-universal/skill",
-  "environment_override": "PESQUISADOR_UNIVERSAL_HOME",
-  "opencode_skill": ".opencode/skills/pesquisador-universal-marcelo-claro/SKILL.md",
-  "native_entrypoint": "python -m marceloclaro.scientific_lab",
-  "automatic_epistemic_authority": false
+  "integration_version":"4.2.0-core.1",
+  "core_repository":"MarceloClaro/opencode-ecosystem-core",
+  "baseline_core_commit":"8af98945b35af0863b2bf3217651190d98516d8a",
+  "mode":"native_scientific_runtime_with_optional_advanced_external_fallback",
+  "primary_orchestrator":"marceloclaro",
+  "replaces_core":false,
+  "native_commands":["research","articles","review","evidence"],
+  "external_advanced_commands":["mesh","mission","living","synthesis","grade","causal","federation","production"],
+  "open_science_only":true,
+  "automatic_epistemic_authority":false
 }

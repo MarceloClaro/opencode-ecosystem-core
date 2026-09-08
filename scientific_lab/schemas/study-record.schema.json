@@ -1,0 +1,5 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema","title":"StudyRecord v4.2 native","type":"object","additionalProperties":true,
+ "required":["schema_version","study_id","canonical_title","identifiers","authors","versions","source_records","integrity_status","screening_status","included_in_synthesis","created_at","updated_at"],
+ "properties":{"schema_version":{"const":"1.0"},"study_id":{"type":"string","pattern":"^STUDY-[A-F0-9]{8}$"},"canonical_title":{"type":"string","minLength":1},"identifiers":{"type":"object"},"authors":{"type":"array"},"year":{"type":["integer","null"]},"venue":{"type":["string","null"]},"versions":{"type":"array"},"source_records":{"type":"array"},"integrity_status":{"type":"string"},"screening_status":{"type":"string"},"included_in_synthesis":{"type":"boolean"},"exclusion_reason":{"type":["string","null"]},"created_at":{"type":"string","format":"date-time"},"updated_at":{"type":"string","format":"date-time"}}
+}
