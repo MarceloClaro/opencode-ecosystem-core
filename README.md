@@ -104,6 +104,7 @@
 | Secao | Descricao |
 |---|---|
 | [Dados Cientificos](#dados-cientificos) | 160 propostas e 243 datasets |
+| [Tabela Detalhada de Dados](#tabela-detalhada-do-repositorio-de-dados) | Temas, referencias e acessos |
 | [Metricas e Relatorios](#metricas-e-relatorios) | Como medimos sucesso |
 
 ---
@@ -171,19 +172,12 @@ dism.exe /online /disable-feature /featurename:VirtualMachinePlatform
 
 ```mermaid
 flowchart TD
-    START["Inicio da Tarefa"] --> A1["Ative o ambiente virtual"]
-    A1 --> A2["Rode o diagnostico"]
-    A2 --> A3["Explore o menu"]
-    A3 --> A4["Faca uma pesquisa"]
-    A4 --> A5["Gere uma apresentacao"]
-
-    A1 -->|"source venv/bin/activate"| A2
-    A2 -->|"python3 -m marceloclaro.cli doctor"| A3
-    A3 -->|"python3 -m marceloclaro.cli helpdesk"| A4
-    A4 -->|"python3 -m marceloclaro.cli pesquisa tema"| A5
-    A5 -->|"python3 -m marceloclaro.cli apresentacao"| DONE
-
-    DONE["Voce esta pronto!"]
+    START[Inicio] --> A1[Ative o ambiente virtual]
+    A1 --> A2[Rode o diagnostico]
+    A2 --> A3[Explore o menu]
+    A3 --> A4[Faca uma pesquisa]
+    A4 --> A5[Gere uma apresentacao]
+    A5 --> DONE[Voce esta pronto!]
 ```
 
 ---
@@ -192,44 +186,44 @@ flowchart TD
 
 ```mermaid
 flowchart TB
-    subgraph ENTRADA ["ENTRADA"]
-        USER["Pessoa"]
-        CLI["CLI marceloclaro"]
+    subgraph E[ENTRADA]
+        USER[Pessoa]
+        CLI[CLI marceloclaro]
     end
 
-    subgraph NUCLEO ["NUCLEO INTELIGENTE"]
-        ORQ["Orquestrador"]
-        ATT["AttentionRouter"]
-        META["MetaBus"]
-        BB["Blackboard A2A"]
+    subgraph N[NUCLEO INTELIGENTE]
+        ORQ[Orquestrador]
+        ATT[AttentionRouter]
+        META[MetaBus]
+        BB[Blackboard A2A]
     end
 
-    subgraph SDDTDD ["SDD-TDD"]
-        SPEC["SpecRegistry"]
-        VER["SpecVerifier"]
-        TDD["TDDRunner"]
+    subgraph S[SDD-TDD]
+        SPEC[SpecRegistry]
+        VER[SpecVerifier]
+        TDD[TDDRunner]
     end
 
-    subgraph AGENTES ["205 AGENTES"]
-        ACAD["Academico 45"]
-        TECH["Tecnico 40"]
-        DOMAIN["Dominio 30"]
-        RESEARCH["Pesquisa 25"]
-        SUPPORT["Suporte 65"]
+    subgraph A[205 AGENTES]
+        ACAD[Academico 45]
+        TECH[Tecnico 40]
+        DOM[Dominio 30]
+        RES[Pesquisa 25]
+        SUP[Suporte 65]
     end
 
-    subgraph INTEGRACOES ["INTEGRACOES"]
-        MCP["6 MCPs"]
-        LITERT["LiteRT-LM"]
-        COLIBRI["Colibri OLMoE"]
-        Z3["Z3 SymPy"]
+    subgraph I[INTEGRACOES]
+        MCP[6 MCPs]
+        LIT[LiteRT-LM]
+        COL[Colibri OLMoE]
+        Z3[Z3 SymPy]
     end
 
-    subgraph SAIDA ["SAIDA"]
-        DOC["Documentos"]
-        PRES["Apresentacoes"]
-        PAPER["Artigos"]
-        RAG["Scientific RAG"]
+    subgraph O[SAIDA]
+        DOC[Documentos]
+        PRES[Apresentacoes]
+        PAPER[Artigos]
+        RAG[Scientific RAG]
     end
 
     USER --> CLI
@@ -240,31 +234,17 @@ flowchart TB
     ORQ --> SPEC
     ORQ --> VER
     ORQ --> TDD
-    ORQ --> AGENTES
-    ORQ --> INTEGRACOES
-    ORQ --> SAIDA
-
+    ORQ --> A
+    ORQ --> I
+    ORQ --> O
     META <--> BB
     SPEC --> VER
     TDD --> VER
-
     ATT --> ACAD
     ATT --> TECH
-    ATT --> DOMAIN
-    ATT --> RESEARCH
-    ATT --> SUPPORT
-
-    ACAD --> DOC
-    TECH --> PRES
-    DOMAIN --> PAPER
-    RESEARCH --> RAG
-
-    style ENTRADA fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    style NUCLEO fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    style SDDTDD fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-    style AGENTES fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
-    style INTEGRACOES fill:#fce4ec,stroke:#c62828,stroke-width:2px
-    style SAIDA fill:#e0f7fa,stroke:#00838f,stroke-width:2px
+    ATT --> DOM
+    ATT --> RES
+    ATT --> SUP
 ```
 
 ---
@@ -273,36 +253,36 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph L1 ["Camada 1 Interface"]
-        CLI2["CLI Python"]
-        WEB["API Web"]
-        MCP2["MCP Servers"]
+    subgraph L1[Camada 1 Interface]
+        CLI2[CLI Python]
+        WEB[API Web]
+        MCP2[MCP Servers]
     end
 
-    subgraph L2 ["Camada 2 Orquestracao"]
-        ORQ2["Orquestrador"]
-        ROUTE["Attention Router"]
-        QUEUE["Task Queue"]
+    subgraph L2[Camada 2 Orquestracao]
+        ORQ2[Orquestrador]
+        ROUTE[Attention Router]
+        QUEUE[Task Queue]
     end
 
-    subgraph L3 ["Camada 3 Memoria"]
-        MB["MetaBus Global"]
-        BB2["Blackboard"]
-        EVO["Evolution Registry"]
-        TRUST["Trust Engine"]
+    subgraph L3[Camada 3 Memoria]
+        MB[MetaBus Global]
+        BB2[Blackboard]
+        EVO[Evolution Registry]
+        TRUST[Trust Engine]
     end
 
-    subgraph L4 ["Camada 4 Execucao"]
-        SDD2["Spec Engine"]
-        TDD2["TDD Runner"]
-        AG2["Agent Pool 205"]
+    subgraph L4[Camada 4 Execucao]
+        SDD2[Spec Engine]
+        TDD2[TDD Runner]
+        AG2[Agent Pool 205]
     end
 
-    subgraph L5 ["Camada 5 Integracao"]
-        MCP3["MCP Clients"]
-        LLM["LLM Providers"]
-        FS["File System"]
-        NET["Network"]
+    subgraph L5[Camada 5 Integracao]
+        MCP3[MCP Clients]
+        LLM[LLM Providers]
+        FS[File System]
+        NET[Network]
     end
 
     L1 --> L2
@@ -324,41 +304,40 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    START2["Inicio"] --> REC["Recebe Tarefa"]
-    REC --> PARSE["Analisa Tarefa"]
-    PARSE --> CLASS{"Classificacao"}
+    START2[Inicio] --> REC[Recebe Tarefa]
+    REC --> PARSE[Analisa Tarefa]
+    PARSE --> CLASS{Classificacao}
 
-    CLASS -->|"Simples"| SIMPLE["Processamento Simples"]
-    CLASS -->|"Complexa"| COMPLEX["Processamento Complexo"]
-    CLASS -->|"Critica"| CRITICAL["Processamento Critico"]
+    CLASS -->|Simples| SIMPLE[Processamento Simples]
+    CLASS -->|Complexa| COMPLEX[Processamento Complexo]
+    CLASS -->|Critica| CRITICAL[Processamento Critico]
 
-    SIMPLE --> S1["1 Seleciona Agente"]
-    COMPLEX --> C1["1 Cria Especificacao"]
-    CRITICAL --> CR1["1 Ativa Protocolo de Emergencia"]
+    SIMPLE --> S1[1 Seleciona Agente]
+    COMPLEX --> C1[1 Cria Especificacao]
+    CRITICAL --> CR1[1 Ativa Protocolo]
 
-    S1 --> S2["2 Executa Tarefa"]
-    C1 --> C2["2 Valida Com Criterios"]
-    CR1 --> CR2["2 Mobiliza Multiplos Agentes"]
+    S1 --> S2[2 Executa Tarefa]
+    C1 --> C2[2 Valida Com Criterios]
+    CR1 --> CR2[2 Mobiliza Agentes]
 
-    S2 --> S3["3 Retorna Resultado"]
-    C2 --> C3["3 Implementa Solucao"]
-    CR2 --> CR3["3 Coordena Execucao Paralela"]
+    S2 --> S3[3 Retorna Resultado]
+    C2 --> C3[3 Implementa Solucao]
+    CR2 --> CR3[3 Coordena Paralela]
 
-    C3 --> C4["4 Roda Testes"]
-    CR3 --> CR4["4 Valida Em Cadeia"]
+    C3 --> C4[4 Roda Testes]
+    CR3 --> CR4[4 Valida Cadeia]
 
-    C4 --> C5{"Testes Passam?"}
-    CR4 --> CR5{"Todos OK?"}
+    C4 --> C5{Testes OK?}
+    CR4 --> CR5{Todos OK?}
 
     C5 -->|Sim| S3
     C5 -->|Nao| C3
-
     CR5 -->|Sim| S3
     CR5 -->|Nao| CR3
 
-    S3 --> LOG["Registra no Log"]
-    LOG --> EVO2["Atualiza Evolution Registry"]
-    EVO2 --> RETURN2["Retorna Resultado"]
+    S3 --> LOG[Registra Log]
+    LOG --> EVO2[Atualiza Registry]
+    EVO2 --> RETURN2[Retorna Resultado]
 
     style START2 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
     style REC fill:#f3e5f5,stroke:#7b1fa2
@@ -375,49 +354,41 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    START3["Inicio da Tarefa"] --> P["1. PERCEBER"]
-
-    P --> P1["Consulta MetaBus"]
-    P1 --> P2["Recupera contexto"]
-    P2 --> P3["Verifica licoes passadas"]
-    P3 --> E["2. ESPECIFICAR"]
-
-    E --> E1{"Spec existe?"}
-    E1 -->|Sim| E2["Recupera spec existente"]
-    E1 -->|Nao| E3["Cria nova spec"]
-    E2 --> D["3. DELEGAR"]
+    START3[Inicio] --> P[1 PERCEBER]
+    P --> P1[Consulta MetaBus]
+    P1 --> P2[Recupera contexto]
+    P2 --> P3[Verifica licoes]
+    P3 --> E[2 ESPECIFICAR]
+    E --> E1{Spec existe?}
+    E1 -->|Sim| E2[Recupera spec]
+    E1 -->|Nao| E3[Cria nova spec]
+    E2 --> D[3 DELEGAR]
     E3 --> D
-
-    D --> D1["Publica CFP no Blackboard"]
-    D1 --> D2["Agentes avaliam"]
-    D2 --> D3{"Ha voluntarios?"}
-    D3 -->|Sim| D4["Seleciona melhor agente"]
-    D3 -->|Nao| D5["Reformula tarefa"]
+    D --> D1[Publica CFP]
+    D1 --> D2[Agentes avaliam]
+    D2 --> D3{Ha voluntarios?}
+    D3 -->|Sim| D4[Seleciona agente]
+    D3 -->|Nao| D5[Reformula tarefa]
     D5 --> D1
-
-    D4 --> EX["4. EXECUTAR"]
-
-    EX --> EX1["Ciclo RED GREEN REFACTOR"]
-    EX1 --> EX2["Implementa solucao"]
-    EX2 --> EX3["Roda testes"]
-    EX3 --> EX4{"Testes passam?"}
-    EX4 -->|Sim| EX5["Refatora codigo"]
+    D4 --> EX[4 EXECUTAR]
+    EX --> EX1[Ciclo RED-GREEN]
+    EX1 --> EX2[Implementa solucao]
+    EX2 --> EX3[Roda testes]
+    EX3 --> EX4{Testes OK?}
+    EX4 -->|Sim| EX5[Refatora codigo]
     EX4 -->|Nao| EX2
-    EX5 --> V["5. VERIFICAR"]
-
-    V --> V1["Gate SDD"]
-    V1 --> V2["SpecVerifier"]
-    V2 --> V3{"Todos criterios OK?"}
-    V3 -->|Sim| V4["Aprova entrega"]
-    V3 -->|Nao| V5["Rejeita com feedback"]
+    EX5 --> V[5 VERIFICAR]
+    V --> V1[Gate SDD]
+    V1 --> V2[SpecVerifier]
+    V2 --> V3{Criterios OK?}
+    V3 -->|Sim| V4[Aprova entrega]
+    V3 -->|Nao| V5[Rejeita com feedback]
     V5 --> EX
-
-    V4 --> R["6. REFLETIR"]
-
-    R --> R1["Registra licoes"]
-    R1 --> R2["Atualiza Trust Engine"]
-    R2 --> R3["Atualiza Evolution Registry"]
-    R3 --> DONE3["Tarefa Concluida"]
+    V4 --> R[6 REFLETIR]
+    R --> R1[Registra licoes]
+    R1 --> R2[Atualiza Trust]
+    R2 --> R3[Atualiza Registry]
+    R3 --> DONE3[Tarefa Concluida]
 
     style START3 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
     style P fill:#f3e5f5,stroke:#7b1fa2
@@ -435,46 +406,46 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    TASK["Nova Tarefa"] --> CLASS2{"Classificacao"}
+    TASK[Nova Tarefa] --> CLASS2{Classificacao}
 
-    CLASS2 -->|"Pesquisa cientifica"| ACAD2["Pipeline Academico"]
-    CLASS2 -->|"Codigo programacao"| TECH2["Agente Tecnico"]
-    CLASS2 -->|"Dominio especifico"| DOM2["Especialista"]
-    CLASS2 -->|"Apresentacao"| PRES2["MIRA"]
-    CLASS2 -->|"Formal matematico"| FORM2["Formal Verifier"]
-    CLASS2 -->|"Documento texto"| TEXT2["Escritor"]
-    CLASS2 -->|"Dados analise"| DATA2["Analista"]
+    CLASS2 -->|Pesquisa| ACAD2[Pipeline Academico]
+    CLASS2 -->|Codigo| TECH2[Agente Tecnico]
+    CLASS2 -->|Dominio| DOM2[Especialista]
+    CLASS2 -->|Apresentacao| PRES2[MIRA]
+    CLASS2 -->|Formal| FORM2[Formal Verifier]
+    CLASS2 -->|Texto| TEXT2[Escritor]
+    CLASS2 -->|Dados| DATA2[Analista]
 
-    ACAD2 --> A21["Busca literatura"]
-    ACAD2 --> A22["Coleta evidencias"]
-    ACAD2 --> A23["Revisao por pares"]
-    ACAD2 --> A24["Redacao do artigo"]
+    ACAD2 --> A21[Busca literatura]
+    ACAD2 --> A22[Coleta evidencias]
+    ACAD2 --> A23[Revisao pares]
+    ACAD2 --> A24[Redacao artigo]
 
-    TECH2 --> T21["Analisa codigo"]
-    TECH2 --> T22["Implementa solucao"]
-    TECH2 --> T23["Testa e valida"]
-    TECH2 --> T24["Documenta"]
+    TECH2 --> T21[Analisa codigo]
+    TECH2 --> T22[Implementa solucao]
+    TECH2 --> T23[Testa e valida]
+    TECH2 --> T24[Documenta]
 
-    DOM2 --> D21["Consulta especialista"]
-    DOM2 --> D22["Aplica conhecimento"]
-    DOM2 --> D23["Gera relatorio"]
+    DOM2 --> D21[Consulta especialista]
+    DOM2 --> D22[Aplica conhecimento]
+    DOM2 --> D23[Gera relatorio]
 
-    PRES2 --> P21["Extrai conteudo"]
-    PRES2 --> P22["Planeja slides"]
-    PRES2 --> P23["Constroi deck"]
-    PRES2 --> P24["Valida consistencia"]
+    PRES2 --> P21[Extrai conteudo]
+    PRES2 --> P22[Planeja slides]
+    PRES2 --> P23[Constroi deck]
+    PRES2 --> P24[Valida consistencia]
 
-    FORM2 --> F21["Formaliza problema"]
-    FORM2 --> F22["Gera prova"]
-    FORM2 --> F23["Verifica com Z3"]
+    FORM2 --> F21[Formaliza problema]
+    FORM2 --> F22[Gera prova]
+    FORM2 --> F23[Verifica Z3]
 
-    TEXT2 --> TX21["Analisa audiencia"]
-    TEXT2 --> TX22["Estrutura texto"]
-    TEXT2 --> TX23["Revisa gramatica"]
+    TEXT2 --> TX21[Analisa audiencia]
+    TEXT2 --> TX22[Estrutura texto]
+    TEXT2 --> TX23[Revisa gramatica]
 
-    DATA2 --> DA21["Coleta dados"]
-    DATA2 --> DA22["Analise estatistica"]
-    DATA2 --> DA23["Gera visualizacoes"]
+    DATA2 --> DA21[Coleta dados]
+    DATA2 --> DA22[Analise estatistica]
+    DATA2 --> DA23[Visualizacoes]
 
     style TASK fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
     style CLASS2 fill:#f3e5f5,stroke:#7b1fa2
@@ -493,60 +464,60 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph F1 ["FASE 1 Recebimento"]
-        R1["Recebe tarefa"]
-        R2["Valida formato"]
-        R3["Extrai metadados"]
-        R4["Gera ID unico"]
+    subgraph F1[Fase 1 Recebimento]
+        R1[Recebe tarefa]
+        R2[Valida formato]
+        R3[Extrai metadados]
+        R4[Gera ID unico]
     end
 
-    subgraph F2 ["FASE 2 Analise"]
-        A1["Analisa complexidade"]
-        A2["Identifica dependencias"]
-        A3["Estima recursos"]
-        A4["Seleciona estrategia"]
+    subgraph F2[Fase 2 Analise]
+        A1[Analisa complexidade]
+        A2[Identifica dependencias]
+        A3[Estima recursos]
+        A4[Seleciona estrategia]
     end
 
-    subgraph F3 ["FASE 3 Planejamento"]
-        P1["Cria especificacao"]
-        P2["Define criterios"]
-        P3["Vincula testes"]
-        P4["Estima tempo"]
+    subgraph F3[Fase 3 Planejamento]
+        P1[Cria especificacao]
+        P2[Define criterios]
+        P3[Vincula testes]
+        P4[Estima tempo]
     end
 
-    subgraph F4 ["FASE 4 Alocacao"]
-        AL1["Busca agentes"]
-        AL2["Avalia confianca"]
-        AL3["Seleciona melhor"]
-        AL4["Transfere contexto"]
+    subgraph F4[Fase 4 Alocacao]
+        AL1[Busca agentes]
+        AL2[Avalia confianca]
+        AL3[Seleciona melhor]
+        AL4[Transfere contexto]
     end
 
-    subgraph F5 ["FASE 5 Execucao"]
-        E1["Executa tarefa"]
-        E2["Monitora progresso"]
-        E3["Roda testes"]
-        E4["Trata erros"]
+    subgraph F5[Fase 5 Execucao]
+        E1[Executa tarefa]
+        E2[Monitora progresso]
+        E3[Roda testes]
+        E4[Trata erros]
     end
 
-    subgraph F6 ["FASE 6 Validacao"]
-        V1["Verifica criterios"]
-        V2["Roda quality gates"]
-        V3["Gera relatorio"]
-        V4["Aprova ou rejeita"]
+    subgraph F6[Fase 6 Validacao]
+        V1[Verifica criterios]
+        V2[Roda quality gates]
+        V3[Gera relatorio]
+        V4[Aprova ou rejeita]
     end
 
-    subgraph F7 ["FASE 7 Entrega"]
-        D1["Formata resultado"]
-        D2["Gera documentacao"]
-        D3["Armazena resultado"]
-        D4["Notifica usuario"]
+    subgraph F7[Fase 7 Entrega]
+        D1[Formata resultado]
+        D2[Gera documentacao]
+        D3[Armazena resultado]
+        D4[Notifica usuario]
     end
 
-    subgraph F8 ["FASE 8 Reflexao"]
-        RE1["Registra licoes"]
-        RE2["Atualiza confianca"]
-        RE3["Compartilha conhecimento"]
-        RE4["Otimiza processos"]
+    subgraph F8[Fase 8 Reflexao]
+        RE1[Registra licoes]
+        RE2[Atualiza confianca]
+        RE3[Compartilha conhecimento]
+        RE4[Otimiza processos]
     end
 
     F1 --> F2
@@ -554,8 +525,8 @@ flowchart TD
     F3 --> F4
     F4 --> F5
     F5 --> F6
-    F6 -->|"Aprovado"| F7
-    F6 -->|"Reprovado"| F5
+    F6 -->|Aprovado| F7
+    F6 -->|Reprovado| F5
     F7 --> F8
 
     style F1 fill:#e3f2fd,stroke:#1565c0
@@ -576,29 +547,28 @@ flowchart TD
 
 ```mermaid
 flowchart TB
-    subgraph MEMORY ["SISTEMA DE MEMORIA"]
-        MB2["MetaBus Global"]
-        BB3["Blackboard"]
-        EVO3["Evolution Registry"]
-        TRUST2["Trust Engine"]
+    subgraph MEM[SISTEMA DE MEMORIA]
+        MB2[MetaBus Global]
+        BB3[Blackboard]
+        EVO3[Evolution Registry]
+        TRUST2[Trust Engine]
     end
 
-    subgraph TIPOS ["TIPOS DE MEMORIA"]
-        SEMANTIC["Memoria Semantica"]
-        EPISODIC["Memoria Episodica"]
-        PROCEDURAL["Memoria Procedural"]
-        DECLARATIVE["Memoria Declarativa"]
+    subgraph TIP[TIPOS DE MEMORIA]
+        SEM[Memoria Semantica]
+        EPI[Memoria Episodica]
+        PROC[Memoria Procedural]
+        DECL[Memoria Declarativa]
     end
 
-    MEMORY --> TIPOS
+    MEM --> TIP
+    MB2 --> SEM
+    MB2 --> EPI
+    BB3 --> PROC
+    BB3 --> DECL
 
-    MB2 --> SEMANTIC
-    MB2 --> EPISODIC
-    BB3 --> PROCEDURAL
-    BB3 --> DECLARATIVE
-
-    style MEMORY fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    style TIPOS fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style MEM fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style TIP fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
 ```
 
 ---
@@ -607,71 +577,68 @@ flowchart TB
 
 ```mermaid
 flowchart TD
-    subgraph INPUT ["ENTRADA"]
-        USER2["Usuario"]
-        AGENT["Agente"]
-        EXT["Externo"]
+    subgraph IN[ENTRADA]
+        USER2[Usuario]
+        AGENT[Agente]
+        EXT[Externo]
     end
 
-    subgraph PROCESS ["PROCESSAMENTO"]
-        CAPTURE["Captura"]
-        VALIDATE["Validacao"]
-        ENRICH["Enriquecimento"]
-        INDEX["Indexacao"]
+    subgraph PR[PROCESSAMENTO]
+        CAPTURE[Captura]
+        VALIDATE[Validacao]
+        ENRICH[Enriquecimento]
+        INDEX[Indexacao]
     end
 
-    subgraph STORE ["ARMAZENAMENTO"]
-        MB3["MetaBus"]
-        BB4["Blackboard"]
-        VECTOR["Vector Store"]
-        GRAPH["Knowledge Graph"]
+    subgraph ST[ARMAZENAMENTO]
+        MB3[MetaBus]
+        BB4[Blackboard]
+        VECTOR[Vector Store]
+        GRAPH[Knowledge Graph]
     end
 
-    subgraph RETRIEVE ["RECUPERACAO"]
-        SEARCH["Busca Semantica"]
-        RANK["Ranqueamento"]
-        FILTER["Filtro"]
-        CONTEXT["Contexto"]
+    subgraph RE[RECUPERACAO]
+        SEARCH[Busca Semantica]
+        RANK[Ranqueamento]
+        FILTER[Filtro]
+        CONTEXT[Contexto]
     end
 
-    subgraph OUTPUT ["SAIDA"]
-        ANSWER["Resposta"]
-        INSIGHT["Insight"]
-        RECOMMEND["Recomendacao"]
-        ACTION["Acao"]
+    subgraph OUT[SAIDA]
+        ANSWER[Resposta]
+        INSIGHT[Insight]
+        RECOMMEND[Recomendacao]
+        ACTION[Acao]
     end
 
-    INPUT --> PROCESS
-    PROCESS --> STORE
-    STORE --> RETRIEVE
-    RETRIEVE --> OUTPUT
+    IN --> PR
+    PR --> ST
+    ST --> RE
+    RE --> OUT
 
     USER2 --> CAPTURE
     AGENT --> CAPTURE
     EXT --> CAPTURE
-
     CAPTURE --> VALIDATE --> ENRICH --> INDEX
     INDEX --> MB3
     INDEX --> BB4
     INDEX --> VECTOR
     INDEX --> GRAPH
-
     MB3 --> SEARCH
     BB4 --> SEARCH
     VECTOR --> SEARCH
     GRAPH --> SEARCH
-
     SEARCH --> RANK --> FILTER --> CONTEXT
     CONTEXT --> ANSWER
     CONTEXT --> INSIGHT
     CONTEXT --> RECOMMEND
     CONTEXT --> ACTION
 
-    style INPUT fill:#e3f2fd,stroke:#1565c0
-    style PROCESS fill:#f3e5f5,stroke:#7b1fa2
-    style STORE fill:#e8f5e9,stroke:#2e7d32
-    style RETRIEVE fill:#fff3e0,stroke:#ef6c00
-    style OUTPUT fill:#e0f7fa,stroke:#00838f
+    style IN fill:#e3f2fd,stroke:#1565c0
+    style PR fill:#f3e5f5,stroke:#7b1fa2
+    style ST fill:#e8f5e9,stroke:#2e7d32
+    style RE fill:#fff3e0,stroke:#ef6c00
+    style OUT fill:#e0f7fa,stroke:#00838f
 ```
 
 ---
@@ -680,42 +647,34 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    START4["Ciclo de Aprendizado"] --> OBSERVE["Observa"]
-
-    OBSERVE --> O1["Coleta dados"]
-    O1 --> O2["Identifica padroes"]
-    O2 --> O3["Detecta anomalias"]
-    O3 --> ANALYZE["Analisa"]
-
-    ANALYZE --> A1["Compara com historico"]
-    A1 --> A2["Calcula impacto"]
-    A2 --> A3["Avalia confianca"]
-    A3 --> LEARN["Aprende"]
-
-    LEARN --> L1["Atualiza pesos"]
-    L1 --> L2["Refina modelos"]
-    L2 --> L3["Otimiza processos"]
-    L3 --> APPLY["Aplica"]
-
-    APPLY --> AP1["Nova tarefa"]
-    AP1 --> AP2["Melhor performance"]
-    AP2 --> AP3["Mais confianca"]
-    AP3 --> MONITOR["Monitora"]
-
-    MONITOR --> M1["Metricas"]
-    M1 --> M2["KPIs"]
-    M2 --> M3["Relatorios"]
-    M3 --> OBSERVE
-
-    DONE4["Conhecimento Atualizado"]
+    START4[Ciclo] --> OBS[Observa]
+    OBS --> O1[Coleta dados]
+    O1 --> O2[Identifica padroes]
+    O2 --> O3[Detecta anomalias]
+    O3 --> ANA[Analisa]
+    ANA --> A1[Compara historico]
+    A1 --> A2[Calcula impacto]
+    A2 --> A3[Avalia confianca]
+    A3 --> LEARN[Aprende]
+    LEARN --> L1[Atualiza pesos]
+    L1 --> L2[Refina modelos]
+    L2 --> L3[Otimiza processos]
+    L3 --> APPL[Aplica]
+    APPL --> AP1[Nova tarefa]
+    AP1 --> AP2[Melhor performance]
+    AP2 --> AP3[Mais confianca]
+    AP3 --> MON[Monitora]
+    MON --> M1[Metricas]
+    M1 --> M2[KPIs]
+    M2 --> M3[Relatorios]
+    M3 --> OBS
 
     style START4 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
-    style OBSERVE fill:#f3e5f5,stroke:#7b1fa2
-    style ANALYZE fill:#e8f5e9,stroke:#2e7d32
+    style OBS fill:#f3e5f5,stroke:#7b1fa2
+    style ANA fill:#e8f5e9,stroke:#2e7d32
     style LEARN fill:#fff3e0,stroke:#ef6c00
-    style APPLY fill:#fce4ec,stroke:#c62828
-    style MONITOR fill:#e0f7fa,stroke:#00838f
-    style DONE4 fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+    style APPL fill:#fce4ec,stroke:#c62828
+    style MON fill:#e0f7fa,stroke:#00838f
 ```
 
 ---
@@ -726,24 +685,24 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SDD ["SDD Spec-Driven Development"]
-        SPEC1["Cria Spec"]
-        SPEC1 --> CRIT["Criterios de Aceitacao"]
-        CRIT --> TESTS["Testes Vinculados"]
+    subgraph SDD[SDD Spec-Driven]
+        SPEC1[Cria Spec]
+        SPEC1 --> CRIT[Criterios]
+        CRIT --> TESTS[Testes]
     end
 
-    subgraph TDD ["TDD Test-Driven Development"]
-        RED["RED Testes Falham"]
-        RED --> GREEN["GREEN Implementacao Minima"]
-        GREEN --> REFACTOR["REFACTOR Melhora Codigo"]
-        REFACTOR --> VERIFY["VERIFY Todos Passam"]
+    subgraph TDD[TDD Test-Driven]
+        RED[RED Testes Falham]
+        RED --> GREEN[GREEN Implementacao]
+        GREEN --> REFACTOR[REFACTOR Melhora]
+        REFACTOR --> VERIFY[VERIFY Passam]
     end
 
-    subgraph GATE ["GATE Validacao"]
-        GATE1["SpecVerifier"]
-        GATE1 --> CHECK{"Todos criterios OK?"}
-        CHECK -->|Sim| APPROVE["APROVADO"]
-        CHECK -->|Nao| REJECT["REPROVADO"]
+    subgraph GATE[GATE Validacao]
+        GATE1[SpecVerifier]
+        GATE1 --> CHECK{Criterios OK?}
+        CHECK -->|Sim| APPROVE[APROVADO]
+        CHECK -->|Nao| REJECT[REPROVADO]
         REJECT --> RED
     end
 
@@ -767,47 +726,35 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph GATES ["QUALITY GATES"]
-        G1["Gate 1 Formato"]
-        G2["Gate 2 Especificacao"]
-        G3["Gate 3 Testes"]
-        G4["Gate 4 Metricas"]
-        G5["Gate 5 Revisao"]
-        G6["Gate 6 Seguranca"]
+    subgraph GATES[QUALITY GATES]
+        G1[Gate 1 Formato]
+        G2[Gate 2 Especificacao]
+        G3[Gate 3 Testes]
+        G4[Gate 4 Metricas]
+        G5[Gate 5 Revisao]
+        G6[Gate 6 Seguranca]
     end
 
-    subgraph CHECKS ["VERIFICACOES"]
-        C1["Arquivo existe"]
-        C2["Formato valido"]
-        C3["Specs atendidas"]
-        C4["Testes passam"]
-        C5["Cobertura 80 porcento"]
-        C6["Sem vulnerabilidades"]
+    subgraph CHECKS[VERIFICACOES]
+        C1[Arquivo existe]
+        C2[Formato valido]
+        C3[Specs atendidas]
+        C4[Testes passam]
+        C5[Cobertura 80%]
+        C6[Sem vulnerabilidades]
     end
 
-    subgraph RESULTS ["RESULTADOS"]
-        R1["Aprovado"]
-        R2["Aprovado com ressalvas"]
-        R3["Reprovado"]
+    subgraph RESULTS[RESULTADOS]
+        R1[Aprovado]
+        R2[Aprovado com ressalvas]
+        R3[Reprovado]
     end
 
-    G1 --> C1
-    C1 --> C2
-    C2 --> G2
-    G2 --> C3
-    C3 --> G3
-    G3 --> C4
-    C4 --> G4
-    G4 --> C5
-    C5 --> G5
-    G5 --> C6
-    C6 --> G6
-
-    G6 -->|"Tudo OK"| R1
-    G6 -->|"Problemas menores"| R2
-    G6 -->|"Problemas criticos"| R3
-
-    R3 -->|"Corrige"| G1
+    G1 --> C1 --> C2 --> G2 --> C3 --> G3 --> C4 --> G4 --> C5 --> G5 --> C6 --> G6
+    G6 -->|Tudo OK| R1
+    G6 -->|Problemas menores| R2
+    G6 -->|Problemas criticos| R3
+    R3 -->|Corrige| G1
 
     style GATES fill:#f3e5f5,stroke:#7b1fa2
     style CHECKS fill:#e8f5e9,stroke:#2e7d32
@@ -823,57 +770,50 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph INPUT2 ["ENTRADA"]
-        ARTIFACT["Artefato"]
-        SPEC2["Especificacao"]
-        TEST2["Testes"]
+    subgraph IN2[ENTRADA]
+        ARTIFACT[Artefato]
+        SPEC2[Especificacao]
+        TEST2[Testes]
     end
 
-    subgraph AUDIT ["AUDITORIA"]
-        A1["Checklist"]
-        A2["Analise Profunda"]
-        A3["Comparacao"]
-        A4["Validacao"]
+    subgraph AUD[AUDITORIA]
+        A1[Checklist]
+        A2[Analise Profunda]
+        A3[Comparacao]
+        A4[Validacao]
     end
 
-    subgraph TOOLS ["FERRAMENTAS"]
-        T1["Linter"]
-        T2["Test Runner"]
-        T3["Code Coverage"]
-        T4["Security Scanner"]
-        T5["Documentation Checker"]
+    subgraph TOOLS[FERRAMENTAS]
+        T1[Linter]
+        T2[Test Runner]
+        T3[Code Coverage]
+        T4[Security Scanner]
+        T5[Doc Checker]
     end
 
-    subgraph OUTPUT2 ["SAIDA"]
-        O1["Relatorio de Validacao"]
-        O2["Lista de Issues"]
-        O3["Metricas"]
-        O4["Recomendacoes"]
+    subgraph OUT2[SAIDA]
+        O1[Relatorio]
+        O2[Lista Issues]
+        O3[Metricas]
+        O4[Recomendacoes]
     end
 
-    INPUT2 --> AUDIT
-    AUDIT --> TOOLS
-    TOOLS --> OUTPUT2
+    IN2 --> AUD
+    AUD --> TOOLS
+    TOOLS --> OUT2
 
     ARTIFACT --> A1
     SPEC2 --> A3
     TEST2 --> A4
-
     A1 --> T1
     A2 --> T2
     A3 --> T3
     A4 --> T4
 
-    T1 --> O1
-    T2 --> O2
-    T3 --> O3
-    T4 --> O4
-    T5 --> O4
-
-    style INPUT2 fill:#e3f2fd,stroke:#1565c0
-    style AUDIT fill:#f3e5f5,stroke:#7b1fa2
+    style IN2 fill:#e3f2fd,stroke:#1565c0
+    style AUD fill:#f3e5f5,stroke:#7b1fa2
     style TOOLS fill:#e8f5e9,stroke:#2e7d32
-    style OUTPUT2 fill:#fff3e0,stroke:#ef6c00
+    style OUT2 fill:#fff3e0,stroke:#ef6c00
 ```
 
 ---
@@ -884,34 +824,34 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    subgraph F1 ["Fase 1 Descoberta"]
-        I["Ideia"]
-        G["Gap de Pesquisa"]
-        P["Proposta"]
+    subgraph F1[Fase 1 Descoberta]
+        I[Ideia]
+        G[Gap Pesquisa]
+        P[Proposta]
     end
 
-    subgraph F2 ["Fase 2 Pesquisa"]
-        L["Revisao Literaria"]
-        E["Coleta Dados"]
-        M["Metodologia"]
+    subgraph F2[Fase 2 Pesquisa]
+        L[Revisao Literaria]
+        E[Coleta Dados]
+        M[Metodologia]
     end
 
-    subgraph F3 ["Fase 3 Analise"]
-        A["Analise Estatistica"]
-        V["Validacao"]
-        R["Resultados"]
+    subgraph F3[Fase 3 Analise]
+        A[Analise Estatistica]
+        V[Validacao]
+        R[Resultados]
     end
 
-    subgraph F4 ["Fase 4 Escrita"]
-        D["Rascunho"]
-        REV["Revisao"]
-        F["Final"]
+    subgraph F4[Fase 4 Escrita]
+        D[Rascunho]
+        REV[Revisao]
+        F[Final]
     end
 
-    subgraph F5 ["Fase 5 Publicacao"]
-        SUB["Submissao"]
-        PR["Peer Review"]
-        PUB["Publicacao"]
+    subgraph F5[Fase 5 Publicacao]
+        SUB[Submissao]
+        PR[Peer Review]
+        PUB[Publicacao]
     end
 
     I --> G --> P
@@ -933,39 +873,35 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    subgraph SOURCES ["FONTES DE DADOS"]
-        OA["OpenAlex 243M papers"]
-        CR["CrossRef 150M works"]
-        PM["PubMed 36M abstracts"]
-        AR["arXiv 2M e-prints"]
-        KG["Kaggle 200K datasets"]
+    subgraph SRC[FONTES DE DADOS]
+        OA[OpenAlex 243M]
+        CR[CrossRef 150M]
+        PM[PubMed 36M]
+        AR[arXiv 2M]
+        KG[Kaggle 200K]
     end
 
-    subgraph PROCESS ["PROCESSAMENTO"]
-        SEARCH2["Busca Multi-Fonte"]
-        DEDUP["Deduplicacao"]
-        FILTER2["Filtro de Relevancia"]
-        RANK2["Ranqueamento"]
-        ENRICH2["Enriquecimento"]
+    subgraph PROC[PROCESSAMENTO]
+        SEARCH2[Busca Multi-Fonte]
+        DEDUP[Deduplicacao]
+        FILTER2[Filtro Relevancia]
+        RANK2[Ranqueamento]
+        ENRICH2[Enriquecimento]
     end
 
-    subgraph OUTPUT3 ["SAIDA"]
-        LIT["Revisao Literaria"]
-        EVID["Evidencias"]
-        GAP2["Gaps Identificados"]
-        REF["Referencias"]
+    subgraph OUT3[SAIDA]
+        LIT[Revisao Literaria]
+        EVID[Evidencias]
+        GAP2[Gaps Identificados]
+        REF[Referencias]
     end
 
-    SOURCES --> SEARCH2
-    SEARCH2 --> DEDUP
-    DEDUP --> FILTER2
-    FILTER2 --> RANK2
-    RANK2 --> ENRICH2
-    ENRICH2 --> OUTPUT3
+    SRC --> SEARCH2
+    SEARCH2 --> DEDUP --> FILTER2 --> RANK2 --> ENRICH2 --> OUT3
 
-    style SOURCES fill:#e3f2fd,stroke:#1565c0
-    style PROCESS fill:#f3e5f5,stroke:#7b1fa2
-    style OUTPUT3 fill:#e8f5e9,stroke:#2e7d32
+    style SRC fill:#e3f2fd,stroke:#1565c0
+    style PROC fill:#f3e5f5,stroke:#7b1fa2
+    style OUT3 fill:#e8f5e9,stroke:#2e7d32
 ```
 
 ---
@@ -974,50 +910,47 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph INPUT3 ["ENTRADA"]
-        RAW["Dados Brutos"]
-        META2["Metadados"]
-        CONFIG["Configuracao"]
+    subgraph IN3[ENTRADA]
+        RAW[Dados Brutos]
+        META2[Metadados]
+        CONFIG[Configuracao]
     end
 
-    subgraph PROCESS2 ["PROCESSAMENTO"]
-        CLEAN["Limpeza"]
-        TRANSFORM["Transformacao"]
-        NORMALIZE["Normalizacao"]
-        VALIDATE2["Validacao"]
+    subgraph PR2[PROCESSAMENTO]
+        CLEAN[Limpeza]
+        TRANSFORM[Transformacao]
+        NORMALIZE[Normalizacao]
+        VALIDATE2[Validacao]
     end
 
-    subgraph ANALYSIS ["ANALISE"]
-        DESC["Estatistica Descritiva"]
-        INFER["Inferencia"]
-        PREDICT["Predicao"]
-        OPTIMIZE["Otimizacao"]
+    subgraph AN[ANALISE]
+        DESC[Estatistica Descritiva]
+        INFER[Inferencia]
+        PREDICT[Predicao]
+        OPTIMIZE[Otimizacao]
     end
 
-    subgraph VISUALIZATION ["VISUALIZACAO"]
-        CHART["Graficos"]
-        TABLE2["Tabelas"]
-        DASHBOARD["Dashboards"]
-        REPORT2["Relatorios"]
+    subgraph VIS[VISUALIZACAO]
+        CHART[Graficos]
+        TABLE2[Tabelas]
+        DASHBOARD[Dashboards]
+        REPORT2[Relatorios]
     end
 
-    subgraph OUTPUT4 ["SAIDA"]
-        RESULT["Resultados"]
-        INSIGHT2["Insights"]
-        CONCLUSION["Conclusoes"]
-        RECOMMEND2["Recomendacoes"]
+    subgraph OUT4[SAIDA]
+        RESULT[Resultados]
+        INSIGHT2[Insights]
+        CONCLUSION[Conclusoes]
+        RECOMMEND2[Recomendacoes]
     end
 
-    INPUT3 --> PROCESS2
-    PROCESS2 --> ANALYSIS
-    ANALYSIS --> VISUALIZATION
-    VISUALIZATION --> OUTPUT4
+    IN3 --> PR2 --> AN --> VIS --> OUT4
 
-    style INPUT3 fill:#e3f2fd,stroke:#1565c0
-    style PROCESS2 fill:#f3e5f5,stroke:#7b1fa2
-    style ANALYSIS fill:#e8f5e9,stroke:#2e7d32
-    style VISUALIZATION fill:#fff3e0,stroke:#ef6c00
-    style OUTPUT4 fill:#e0f7fa,stroke:#00838f
+    style IN3 fill:#e3f2fd,stroke:#1565c0
+    style PR2 fill:#f3e5f5,stroke:#7b1fa2
+    style AN fill:#e8f5e9,stroke:#2e7d32
+    style VIS fill:#fff3e0,stroke:#ef6c00
+    style OUT4 fill:#e0f7fa,stroke:#00838f
 ```
 
 ---
@@ -1028,65 +961,62 @@ flowchart TD
 
 ```mermaid
 flowchart TB
-    subgraph ACADEMIC ["AGENTES ACADEMICOS 45"]
-        A1["A00 Editor-Chefe PhD"]
-        A2["A01 Escopo"]
-        A3["A02 Busca"]
-        A4["A03 Evidencias"]
-        A5["A04 Estrutura"]
-        A6["A05 Revisao"]
-        A7["A06 Metodologia"]
-        A8["A07 Estatistica"]
-        A9["A08 Visualizacao"]
-        A10["A09 Resultados"]
+    subgraph ACADEMIC[AGENTES ACADEMICOS 45]
+        A1[A00 Editor-Chefe]
+        A2[A01 Escopo]
+        A3[A02 Busca]
+        A4[A03 Evidencias]
+        A5[A04 Estrutura]
+        A6[A05 Revisao]
+        A7[A06 Metodologia]
+        A8[A07 Estatistica]
+        A9[A08 Visualizacao]
+        A10[A09 Resultados]
     end
 
-    subgraph TECH ["AGENTES TECNICOS 40"]
-        T1["C Coder"]
-        T2["R Researcher"]
-        T3["W Writer"]
-        T4["V Reviewer"]
-        T5["D Debugger"]
-        T6["O Optimizer"]
-        T7["A Architect"]
+    subgraph TECH[AGENTES TECNICOS 40]
+        T1[C Coder]
+        T2[R Researcher]
+        T3[W Writer]
+        T4[V Reviewer]
+        T5[D Debugger]
+        T6[O Optimizer]
+        T7[A Architect]
     end
 
-    subgraph DOMAIN ["ESPECIALISTAS DE DOMINIO 30"]
-        D1["Cardiologista"]
-        D2["Neurologista"]
-        D3["Radiologista"]
-        D4["Educador"]
-        D5["Juridico"]
-        D6["Economista"]
+    subgraph DOMAIN[ESPECIALISTAS 30]
+        D1[Cardiologista]
+        D2[Neurologista]
+        D3[Radiologista]
+        D4[Educador]
+        D5[Juridico]
+        D6[Economista]
     end
 
-    subgraph RESEARCH ["AGENTES DE PESQUISA 25"]
-        RE1["Literatura"]
-        RE2["Dados"]
-        RE3["Analise"]
-        RE4["Redacao"]
-        RE5["Validacao"]
+    subgraph RESEARCH[AGENTES PESQUISA 25]
+        RE1[Literatura]
+        RE2[Dados]
+        RE3[Analise]
+        RE4[Redacao]
+        RE5[Validacao]
     end
 
-    subgraph SUPPORT ["AGENTES DE SUPORTE 65"]
-        S1["Documentacao"]
-        S2["Testes"]
-        S3["Seguranca"]
-        S4["Metricas"]
-        S5["Deploy"]
-        S6["Debug"]
+    subgraph SUP[AGENTES SUPORTE 65]
+        S1[Documentacao]
+        S2[Testes]
+        S3[Seguranca]
+        S4[Metricas]
+        S5[Deploy]
+        S6[Debug]
     end
 
-    ACADEMIC --> TECH
-    TECH --> DOMAIN
-    DOMAIN --> RESEARCH
-    RESEARCH --> SUPPORT
+    ACADEMIC --> TECH --> DOMAIN --> RESEARCH --> SUP
 
     style ACADEMIC fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
     style TECH fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
     style DOMAIN fill:#fce4ec,stroke:#c62828,stroke-width:2px
     style RESEARCH fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-    style SUPPORT fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style SUP fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
 ```
 
 ---
@@ -1095,32 +1025,25 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    subgraph MCP_SERVERS ["SERVIDORES MCP"]
-        LITERT2["LiteRT-LM Modelos On-Device"]
-        META3["Metacognitive Interconnect"]
-        ANTI["Antigravity Bridge"]
-        PYPI["PyPI Search"]
-        COLIBRI2["Colibri OLMoE"]
-        SCANNER["Scanners MCP"]
+    subgraph MCP_SERVERS[SERVIDORES MCP]
+        LITERT2[LiteRT-LM]
+        META3[Metacognitive Interconnect]
+        ANTI[Antigravity Bridge]
+        PYPI[PyPI Search]
+        COLIBRI2[Colibri OLMoE]
+        SCANNER[Scanners MCP]
     end
 
-    subgraph FEATURES ["FUNCIONALIDADES"]
-        F1["Busca Semantica"]
-        F2["Analise de Dados"]
-        F3["Geracao de Texto"]
-        F4["Pesquisa Web"]
-        F5["Download de Dados"]
-        F6["Visualizacao"]
+    subgraph FEATURES[FUNCIONALIDADES]
+        F1[Busca Semantica]
+        F2[Analise de Dados]
+        F3[Geracao de Texto]
+        F4[Pesquisa Web]
+        F5[Download Dados]
+        F6[Visualizacao]
     end
 
     MCP_SERVERS --> FEATURES
-
-    LITERT2 --> F3
-    META3 --> F1
-    ANTI --> F4
-    PYPI --> F5
-    COLIBRI2 --> F3
-    SCANNER --> F2
 
     style MCP_SERVERS fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
     style FEATURES fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
@@ -1132,65 +1055,48 @@ flowchart TB
 
 ```mermaid
 flowchart TD
-    subgraph INPUT5 ["ENTRADA"]
-        AGENT2["Agente"]
-        TASK2["Tarefa"]
-        RESULT2["Resultado"]
+    subgraph IN5[ENTRADA]
+        AGENT2[Agente]
+        TASK2[Tarefa]
+        RESULT2[Resultado]
     end
 
-    subgraph TRUST_ENGINE ["TRUST ENGINE"]
-        CALC["Calculo de Confianca"]
-        HISTORY["Historico"]
-        METRICS2["Metricas"]
-        DECISION["Decisao"]
+    subgraph TRUST_ENGINE[TRUST ENGINE]
+        CALC[Calculo Confianca]
+        HISTORY[Historico]
+        METRICS2[Metricas]
+        DECISION[Decisao]
     end
 
-    subgraph FACTORS ["FATORES"]
-        SUCESSO["Taxa de Sucesso"]
-        QUALIDADE["Qualidade"]
-        TEMPO["Tempo"]
-        CUSTO["Custo"]
-        FEEDBACK["Feedback"]
+    subgraph FAC[FATORES]
+        SUCESSO[Taxa Sucesso]
+        QUALIDADE[Qualidade]
+        TEMPO[Tempo]
+        CUSTO[Custo]
+        FEEDBACK[Feedback]
     end
 
-    subgraph ACTIONS ["ACOES"]
-        PROMOTE["Promover"]
-        DEMOTE["Rebaixar"]
-        BLOCK["Bloquear"]
-        REWARD["Recompensar"]
-        PENALIZE["Penalizar"]
+    subgraph ACT[ACOES]
+        PROMOTE[Promover]
+        DEMOTE[Rebaixar]
+        BLOCK[Bloquear]
+        REWARD[Recompensar]
+        PENALIZE[Penalizar]
     end
 
-    subgraph OUTPUT5 ["SAIDA"]
-        TRUST_SCORE["Trust Score"]
-        RECOMMEND3["Recomendacao"]
-        ALERT["Alertas"]
+    subgraph OUT5[SAIDA]
+        TRUST_SCORE[Trust Score]
+        RECOMMEND3[Recomendacao]
+        ALERT[Alertas]
     end
 
-    INPUT5 --> TRUST_ENGINE
-    TRUST_ENGINE --> FACTORS
-    FACTORS --> ACTIONS
-    ACTIONS --> OUTPUT5
+    IN5 --> TRUST_ENGINE --> FAC --> ACT --> OUT5
 
-    AGENT2 --> CALC
-    TASK2 --> HISTORY
-    RESULT2 --> METRICS2
-
-    CALC --> DECISION
-    HISTORY --> DECISION
-    METRICS2 --> DECISION
-
-    DECISION --> PROMOTE
-    DECISION --> DEMOTE
-    DECISION --> BLOCK
-    DECISION --> REWARD
-    DECISION --> PENALIZE
-
-    style INPUT5 fill:#e3f2fd,stroke:#1565c0
+    style IN5 fill:#e3f2fd,stroke:#1565c0
     style TRUST_ENGINE fill:#f3e5f5,stroke:#7b1fa2
-    style FACTORS fill:#e8f5e9,stroke:#2e7d32
-    style ACTIONS fill:#fff3e0,stroke:#ef6c00
-    style OUTPUT5 fill:#e0f7fa,stroke:#00838f
+    style FAC fill:#e8f5e9,stroke:#2e7d32
+    style ACT fill:#fff3e0,stroke:#ef6c00
+    style OUT5 fill:#e0f7fa,stroke:#00838f
 ```
 
 ---
@@ -1201,91 +1107,127 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    subgraph CATALOG ["CATALOGO DE DADOS"]
-        PROP["160 Propostas"]
-        DS["243 Datasets"]
-        AG["8 Agentes PhD"]
+    subgraph CATALOG[CATALOGO DE DADOS]
+        PROP[160 Propostas]
+        DS[243 Datasets]
+        AG[8 Agentes PhD]
     end
 
-    subgraph DOMAINS ["POR DOMINIO"]
-        AI["IA ML 20 propostas"]
-        HEALTH["Saude 20 propostas"]
-        BIO["Biologia 20 propostas"]
-        ENV["Meio Ambiente 20 propostas"]
-        ENERGY["Energia 20 propostas"]
-        MATERIAL["Materiais 20 propostas"]
-        SOCIAL["Social 20 propostas"]
-        ECON["Economia 20 propostas"]
+    subgraph DOM[DOMINIOS]
+        AI[IA ML 20]
+        HEALTH[Saude 20]
+        BIO[Biologia 20]
+        ENV[Ambiente 20]
+        ENERGY[Energia 20]
+        MAT[Materiais 20]
+        SOC[Social 20]
+        ECON[Economia 20]
     end
 
-    subgraph SOURCES2 ["FONTES"]
-        OA2["OpenAlex 243M papers"]
-        CR2["CrossRef 150M works"]
-        PM2["PubMed 36M abstracts"]
-        AR2["arXiv 2M e-prints"]
-        KG2["Kaggle 200K datasets"]
+    subgraph SRC2[FONTES]
+        OA2[OpenAlex 243M]
+        CR2[CrossRef 150M]
+        PM2[PubMed 36M]
+        AR2[arXiv 2M]
+        KG2[Kaggle 200K]
     end
 
-    CATALOG --> DOMAINS
-    CATALOG --> SOURCES2
+    CATALOG --> DOM
+    CATALOG --> SRC2
 
     style CATALOG fill:#e3f2fd,stroke:#1565c0
-    style DOMAINS fill:#e8f5e9,stroke:#2e7d32
-    style SOURCES2 fill:#fff3e0,stroke:#ef6c00
+    style DOM fill:#e8f5e9,stroke:#2e7d32
+    style SRC2 fill:#fff3e0,stroke:#ef6c00
 ```
 
-### Tabela Detalhada: Repositorio de Dados de Pesquisa
+---
 
-#### 160 Propostas de Pesquisa por Dominio
+## Tabela Detalhada do Repositorio de Dados
 
-| Dominio | Agente | Propostas | Titulos Principais |
+### 160 Propostas de Pesquisa por Dominio
+
+| Dominio | Agente | Propostas | Temas Principais |
 |---|---|---|---|
-| **Healthcare** | Dr. Healthcare ML PhD | 20 | Interpretabilidade de Modelos de Diagnostico por IA; Predicao de Doencas Cardiacas com Deep Learning; Diagnostico de Câncer por Image Medical; Detecao Precoce de Alzheimer; Classificacao de Exames de Imagem |
-| **Environment** | Dr. Environmental AI PhD | 20 | Predicao de Eventos Climaticos Extremos com GNN; Monitoramento de Desmatamento com Satélites; Qualidade do Ar com IoT e ML; Gestao de Recursos Hidricos; Predicao de Secas |
-| **Social Sciences** | Dr. Social Computing PhD | 20 | Deteccao de Fake News em Saude Publica com LLMs; Analise de Sentimento em Redes Sociais; Polarizacao Politica com NLP; Desigualdade Social com Dados Abertos; Mobilidade Urbana |
-| **Computer Science** | Dr. ML Systems PhD | 20 | Deteccao de Fraude em Tempo Real com GNN; Otimizacao de Redes Neurais; Sistemas de Recomendacao; Seguranca Cibernetica com IA; Compiladores Otimizados |
-| **Engineering** | Dr. Engineering AI PhD | 20 | Manutencao Preditiva com Dados de Vibracao; Otimizacao de Processos Industriais; Materiais Inteligentes; Robótica Colaborativa; Energia Inteligente |
-| **Biology** | Dr. Computational Biology PhD | 20 | Predicao de Estrutura Proteica com LLMs; Genomica Funcional com Single-Cell; Descoberta de Drogas com IA; Evolucao Molecular; Biodiversidade |
-| **Finance** | Dr. Financial AI PhD | 20 | Predicao de Volatilidade com GNN; Deteccao de Lavagem de Dinheiro; Credito Inteligente; Mercados Financeiros com RL; Risco Sistêmico |
-| **Agriculture** | Dr. AgriTech AI PhD | 20 | Deteccao de Pragas em Tempo Real via Drone + IA; Agricultura de Precisao; Qualidade de Solo com Sensoriamento; Genomica de Plantas; Cadeia Produtiva Inteligente |
-| **TOTAL** | **8 Agentes PhD** | **160** | **Cobertura completa em 8 dominios** |
+| **Healthcare** | Dr. Healthcare ML PhD | 20 | Interpretabilidade IA, Sesgo Algoritmico, Fusao Multimodal, LLMs Clinicas, Aprendizado Federado, Privacidade Diferencial, Transfer Learning, Deteccao Anomalias, Equidade Algoritmica, Knowledge Graphs |
+| **Environment** | Dr. Environmental AI PhD | 20 | Predicao Climatica, Monitoramento Desmatamento, Qualidade Ar IoT, Gestao Hidrica, Predicao Secas, Biodiversidade, Oceanos, Energia Renovavel |
+| **Social Sciences** | Dr. Social Computing PhD | 20 | Fake News, Sentimento Redes Sociais, Polarizacao Politica, Desigualdade Social, Mobilidade Urbana, Educacao, Emprego, Migracao, Pobreza, Criminalidade |
+| **Computer Science** | Dr. ML Systems PhD | 20 | Deteccao Fraude GNN, Otimizacao Redes Neurais, Recomendacao, Seguranca Cibernetica, Compiladores, NLP, Classificacao Imagens |
+| **Engineering** | Dr. Engineering AI PhD | 20 | Manutencao Preditiva, Otimizacao Industrial, Materiais Inteligentes, Robotica, Energia Inteligencia, Saude Estrutural, Manufatura |
+| **Biology** | Dr. Computational Biology PhD | 20 | Estrutura Proteica LLMs, Genomica Single-Cell, Descoberta Drogas, Evolucao Molecular, Biodiversidade, Ecologia, Microbioma |
+| **Finance** | Dr. Financial AI PhD | 20 | Volatilidade GNN, Lavagem Dinheiro, Credito Inteligente, Mercados RL, Risco Sistêmico, Criptomoedas, Indicadores Economicos, Seguros |
+| **Agriculture** | Dr. AgriTech AI PhD | 20 | Pragas Drone+IA, Agricultura Precisao, Qualidade Solo, Genomica Plantas, Cadeia Produtiva, Produtividade Agricola, Seguranca Alimentar, Irrigacao |
+| **TOTAL** | **8 Agentes PhD** | **160** | **43 temas unicos** |
 
-#### 243 Datasets Cientificos por Fonte
+### 243 Datasets por Fonte e Dominio
 
 | Fonte | Quantidade | Formato | Acesso |
 |---|---|---|---|
-| **Kaggle** | 122 | CSV, JSON | Publico (download direto) |
-| **HuggingFace** | 121 | Parquet, JSON, CSV | Publico (API + download) |
+| **Kaggle** | 122 | CSV, JSON | Publico |
+| **HuggingFace** | 121 | Parquet, JSON, CSV | Publico |
 | **TOTAL** | **243** | Multi-formato | **100% Open Access** |
 
-#### 243 Datasets por Dominio
+### 243 Datasets por Dominio
 
-| Dominio | Datasets | Fontes Principais | Downloads |
+| Dominio | Datasets | Downloads | Temas |
 |---|---|---|---|
-| **Environment** | 35 | Kaggle (18), HuggingFace (17) | 1.2M+ |
-| **Social Sciences** | 34 | Kaggle (17), HuggingFace (17) | 980K+ |
-| **Healthcare** | 32 | Kaggle (16), HuggingFace (16) | 1.5M+ |
-| **Finance** | 30 | Kaggle (15), HuggingFace (15) | 850K+ |
-| **Computer Science** | 29 | Kaggle (15), HuggingFace (14) | 1.1M+ |
-| **Biology** | 29 | Kaggle (14), HuggingFace (15) | 720K+ |
-| **Engineering** | 27 | Kaggle (14), HuggingFace (13) | 680K+ |
-| **Agriculture** | 27 | Kaggle (13), HuggingFace (14) | 540K+ |
-| **TOTAL** | **243** | **Kaggle (122) + HuggingFace (121)** | **7.6M+** |
+| **Meio Ambiente** | 35 | 1.2M+ | Qualidade do Ar, Biodiversidade, Mudanca Climatica, Desmatamento, Oceanos, Energia Renovavel |
+| **Ciencias Sociais** | 34 | 980K+ | Criminalidade, Educacao, Emprego, Desigualdade, Migracao, Pobreza |
+| **Saude** | 32 | 1.5M+ | Diabetes, Cancer, Doencas Cardiacas, COVID-19, Descoberta Drogas, Saude Mental |
+| **Financas** | 30 | 850K+ | Risco Credito, Criptomoedas, Indicadores Economicos, Seguros, Bolsa Valores |
+| **Ciencia Computacao** | 29 | 1.1M+ | Deteccao Fraude, Classificacao Imagens, Seguranca Redes, Sistemas Recomendacao |
+| **Biologia** | 29 | 720K+ | Ecologia, Genomica, Microbioma, Estrutura Proteica, Identificacao Especies |
+| **Engenharia** | 27 | 680K+ | Consumo Energia, Manufatura, Ciencia Materiais, Robotica, Saude Estrutural |
+| **Agricultura** | 27 | 540K+ | Produtividade Agricola, Seguranca Alimentar, Irrigacao, Deteccao Pragas, Qualidade Solo |
+| **TOTAL** | **243** | **7.6M+** | **43 temas unicos** |
 
-#### Exemplos de Datasets por Dominio
+### Exemplos de Datasets por Dominio
 
-| Dominio | Dataset | Fonte | Tamanho | Downloads |
+| Dominio | Dataset Original | Dataset em Portugues | Fonte | Downloads |
 |---|---|---|---|---|
-| **Healthcare** | Diabetes | Kaggle | 11.5 KB | 12,620 |
-| **Healthcare** | Heart Disease | Kaggle | 11.3 KB | 8,450 |
-| **Environment** | Climate Change | Kaggle | 1.2 MB | 5,230 |
-| **Finance** | Stock Prices | HuggingFace | 2.3 MB | 15,800 |
-| **Computer Science** | ImageNet Subset | HuggingFace | 156 MB | 45,200 |
-| **Biology** | Genomic Data | Kaggle | 890 KB | 3,120 |
-| **Engineering** | Sensor Data | Kaggle | 2.1 MB | 4,560 |
-| **Agriculture** | Crop Yield | HuggingFace | 456 KB | 2,890 |
+| **Saude** | Diabetes | Diabetes | Kaggle | 12,620 |
+| **Saude** | Heart Disease | Doencas Cardiacas | Kaggle | 8,450 |
+| **Saude** | Cancer | Cancer | Kaggle | 6,230 |
+| **Saude** | COVID-19 | COVID-19 | Kaggle | 15,800 |
+| **Saude** | Mental Health | Saude Mental | HuggingFace | 3,450 |
+| **Saude** | Drug Discovery | Descoberta de Drogas | HuggingFace | 2,120 |
+| **Ambiente** | Climate Change | Mudanca Climatica | Kaggle | 5,230 |
+| **Ambiente** | Air Quality | Qualidade do Ar | Kaggle | 4,560 |
+| **Ambiente** | Deforestation | Desmatamento | HuggingFace | 3,890 |
+| **Ambiente** | Biodiversity | Biodiversidade | HuggingFace | 2,340 |
+| **Ambiente** | Ocean | Oceano | Kaggle | 1,890 |
+| **Ambiente** | Renewable Energy | Energia Renovavel | HuggingFace | 2,560 |
+| **Social** | Crime | Criminalidade | Kaggle | 4,120 |
+| **Social** | Education | Educacao | Kaggle | 3,890 |
+| **Social** | Employment | Emprego | HuggingFace | 2,560 |
+| **Social** | Inequality | Desigualdade | Kaggle | 3,210 |
+| **Social** | Migration | Migracao | HuggingFace | 2,890 |
+| **Social** | Poverty | Pobreza | Kaggle | 2,340 |
+| **Financas** | Credit Risk | Risco de Credito | Kaggle | 5,670 |
+| **Financas** | Cryptocurrency | Criptomoeda | Kaggle | 8,900 |
+| **Financas** | Stock Market | Bolsa de Valores | HuggingFace | 15,800 |
+| **Financas** | Insurance | Seguro | Kaggle | 3,450 |
+| **Financas** | Economic Indicators | Indicadores Economicos | HuggingFace | 2,780 |
+| **Computacao** | Fraud Detection | Deteccao de Fraude | Kaggle | 6,780 |
+| **Computacao** | Image Classification | Classificacao de Imagens | HuggingFace | 45,200 |
+| **Computacao** | Network Security | Seguranca de Redes | Kaggle | 3,890 |
+| **Computacao** | Recommendation System | Sistema de Recomendacao | HuggingFace | 5,670 |
+| **Biologia** | Genomics | Genomica | Kaggle | 3,120 |
+| **Biologia** | Protein Structure | Estrutura Proteica | HuggingFace | 2,560 |
+| **Biologia** | Ecology | Ecologia | Kaggle | 2,890 |
+| **Biologia** | Microbiome | Microbioma | HuggingFace | 1,890 |
+| **Biologia** | Species Identification | Identificacao de Especies | Kaggle | 2,340 |
+| **Engenharia** | Energy Consumption | Consumo de Energia | Kaggle | 4,560 |
+| **Engenharia** | Manufacturing | Manufatura | HuggingFace | 3,210 |
+| **Engenharia** | Material Science | Ciencia de Materiais | Kaggle | 2,890 |
+| **Engenharia** | Robotics | Robotica | HuggingFace | 3,450 |
+| **Engenharia** | Structural Health | Saude Estrutural | Kaggle | 2,120 |
+| **Agricultura** | Crop Yield | Produtividade Agricola | HuggingFace | 2,890 |
+| **Agricultura** | Food Security | Seguranca Alimentar | Kaggle | 2,340 |
+| **Agricultura** | Irrigation | Irrigacao | HuggingFace | 1,890 |
+| **Agricultura** | Pest Detection | Deteccao de Pragas | Kaggle | 2,560 |
+| **Agricultura** | Soil Quality | Qualidade do Solo | HuggingFace | 2,120 |
 
-#### Acesso aos Dados
+### Acesso aos Dados
 
 | Recurso | URL |
 |---|---|
@@ -1295,7 +1237,7 @@ flowchart LR
 | **Kaggle** | `kaggle.com/marceloclaro` |
 | **API** | `python3 -m marceloclaro.cli pesquisa "tema"` |
 
-#### Como Usar os Dados
+### Como Usar os Dados
 
 ```bash
 # Carregar propostas de pesquisa
@@ -1327,43 +1269,41 @@ python3 -m marceloclaro.cli pesquisa "diabetes" --max-papers 5
 
 ```mermaid
 flowchart TD
-    subgraph COLLECT ["COLETA"]
-        C1["Logs"]
-        C2["Timestamps"]
-        C3["Sucessos"]
-        C4["Falhas"]
-        C5["Feedback"]
+    subgraph COL[COLETA]
+        C1[Logs]
+        C2[Timestamps]
+        C3[Sucessos]
+        C4[Falhas]
+        C5[Feedback]
     end
 
-    subgraph PROCESS3 ["PROCESSAMENTO"]
-        P1["Agregacao"]
-        P2["Analise"]
-        P3["Deteccao de Padroes"]
-        P4["Identificacao de Anomalias"]
+    subgraph PR3[PROCESSAMENTO]
+        P1[Agregacao]
+        P2[Analise]
+        P3[Padroes]
+        P4[Anomalias]
     end
 
-    subgraph VISUALIZE ["VISUALIZACAO"]
-        V1["Graficos"]
-        V2["Tabelas"]
-        V3["Dashboards"]
-        V4["Relatorios"]
+    subgraph VIS2[VISUALIZACAO]
+        V1[Graficos]
+        V2[Tabelas]
+        V3[Dashboards]
+        V4[Relatorios]
     end
 
-    subgraph INSIGHTS ["INSIGHTS"]
-        I1["Tendencias"]
-        I2["Alertas"]
-        I3["Recomendacoes"]
-        I4["Acoes"]
+    subgraph INS[INSIGHTS]
+        I1[Tendencias]
+        I2[Alertas]
+        I3[Recomendacoes]
+        I4[Acoes]
     end
 
-    COLLECT --> PROCESS3
-    PROCESS3 --> VISUALIZE
-    VISUALIZE --> INSIGHTS
+    COL --> PR3 --> VIS2 --> INS
 
-    style COLLECT fill:#e3f2fd,stroke:#1565c0
-    style PROCESS3 fill:#f3e5f5,stroke:#7b1fa2
-    style VISUALIZE fill:#e8f5e9,stroke:#2e7d32
-    style INSIGHTS fill:#fff3e0,stroke:#ef6c00
+    style COL fill:#e3f2fd,stroke:#1565c0
+    style PR3 fill:#f3e5f5,stroke:#7b1fa2
+    style VIS2 fill:#e8f5e9,stroke:#2e7d32
+    style INS fill:#fff3e0,stroke:#ef6c00
 ```
 
 ---
@@ -1438,13 +1378,13 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    FORK["Fork"] --> BRANCH["Criar Branch"]
-    BRANCH --> CODE["Escrever Codigo"]
-    CODE --> TEST["Rodar Testes"]
-    TEST --> COMMIT["Commit"]
-    COMMIT --> PR["Pull Request"]
-    PR --> REVIEW["Revisao"]
-    REVIEW --> MERGE["Merge"]
+    FORK[Fork] --> BRANCH[Criar Branch]
+    BRANCH --> CODE[Escrever Codigo]
+    CODE --> TEST[Rodar Testes]
+    TEST --> COMMIT[Commit]
+    COMMIT --> PR[Pull Request]
+    PR --> REVIEW[Revisao]
+    REVIEW --> MERGE[Merge]
 
     style FORK fill:#e3f2fd,stroke:#1565c0
     style BRANCH fill:#f3e5f5,stroke:#7b1fa2
