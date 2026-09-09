@@ -253,49 +253,49 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph L1[Camada 1 Interface]
+    subgraph C1[Interface]
         CLI2[CLI Python]
         WEB[API Web]
         MCP2[MCP Servers]
     end
 
-    subgraph L2[Camada 2 Orquestracao]
+    subgraph C2[Orquestracao]
         ORQ2[Orquestrador]
-        ROUTE[Attention Router]
+        ROUTE[Router]
         QUEUE[Task Queue]
     end
 
-    subgraph L3[Camada 3 Memoria]
-        MB[MetaBus Global]
+    subgraph C3[Memoria]
+        MB[MetaBus]
         BB2[Blackboard]
         EVO[Evolution Registry]
         TRUST[Trust Engine]
     end
 
-    subgraph L4[Camada 4 Execucao]
+    subgraph C4[Execucao]
         SDD2[Spec Engine]
         TDD2[TDD Runner]
-        AG2[Agent Pool 205]
+        AG2[Agent Pool]
     end
 
-    subgraph L5[Camada 5 Integracao]
+    subgraph C5[Integracao]
         MCP3[MCP Clients]
         LLM[LLM Providers]
         FS[File System]
         NET[Network]
     end
 
-    L1 --> L2
-    L2 --> L3
-    L2 --> L4
-    L3 --> L5
-    L4 --> L5
+    C1 --> C2
+    C2 --> C3
+    C2 --> C4
+    C3 --> C5
+    C4 --> C5
 
-    style L1 fill:#e3f2fd,stroke:#1565c0
-    style L2 fill:#f3e5f5,stroke:#7b1fa2
-    style L3 fill:#e8f5e9,stroke:#2e7d32
-    style L4 fill:#fff3e0,stroke:#ef6c00
-    style L5 fill:#fce4ec,stroke:#c62828
+    style C1 fill:#e3f2fd,stroke:#1565c0
+    style C2 fill:#f3e5f5,stroke:#7b1fa2
+    style C3 fill:#e8f5e9,stroke:#2e7d32
+    style C4 fill:#fff3e0,stroke:#ef6c00
+    style C5 fill:#fce4ec,stroke:#c62828
 ```
 
 ---
@@ -308,32 +308,32 @@ flowchart TD
     REC --> PARSE[Analisa Tarefa]
     PARSE --> CLASS{Classificacao}
 
-    CLASS -->|Simples| SIMPLE[Processamento Simples]
-    CLASS -->|Complexa| COMPLEX[Processamento Complexo]
-    CLASS -->|Critica| CRITICAL[Processamento Critico]
+    CLASS --> "Simples" SIMPLE[Processamento Simples]
+    CLASS --> "Complexa" COMPLEX[Processamento Complexo]
+    CLASS --> "Critica" CRITICAL[Processamento Critico]
 
-    SIMPLE --> S1[1 Seleciona Agente]
-    COMPLEX --> C1[1 Cria Especificacao]
-    CRITICAL --> CR1[1 Ativa Protocolo]
+    SIMPLE --> S1[Seleciona Agente]
+    COMPLEX --> C1[Cria Especificacao]
+    CRITICAL --> CR1[Ativa Protocolo]
 
-    S1 --> S2[2 Executa Tarefa]
-    C1 --> C2[2 Valida Com Criterios]
-    CR1 --> CR2[2 Mobiliza Agentes]
+    S1 --> S2[Executa Tarefa]
+    C1 --> C2[Valida Com Criterios]
+    CR1 --> CR2[Mobiliza Agentes]
 
-    S2 --> S3[3 Retorna Resultado]
-    C2 --> C3[3 Implementa Solucao]
-    CR2 --> CR3[3 Coordena Paralela]
+    S2 --> S3[Retorna Resultado]
+    C2 --> C3[Implementa Solucao]
+    CR2 --> CR3[Coordena Paralela]
 
-    C3 --> C4[4 Roda Testes]
-    CR3 --> CR4[4 Valida Cadeia]
+    C3 --> C4[Roda Testes]
+    CR3 --> CR4[Valida Cadeia]
 
     C4 --> C5{Testes OK?}
     CR4 --> CR5{Todos OK?}
 
-    C5 -->|Sim| S3
-    C5 -->|Nao| C3
-    CR5 -->|Sim| S3
-    CR5 -->|Nao| CR3
+    C5 --> "Sim" S3
+    C5 --> "Nao" C3
+    CR5 --> "Sim" S3
+    CR5 --> "Nao" CR3
 
     S3 --> LOG[Registra Log]
     LOG --> EVO2[Atualiza Registry]
@@ -354,37 +354,37 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    START3[Inicio] --> P[1 PERCEBER]
+    START3[Inicio] --> P[PERCEBER]
     P --> P1[Consulta MetaBus]
     P1 --> P2[Recupera contexto]
     P2 --> P3[Verifica licoes]
-    P3 --> E[2 ESPECIFICAR]
+    P3 --> E[ESPECIFICAR]
     E --> E1{Spec existe?}
-    E1 -->|Sim| E2[Recupera spec]
-    E1 -->|Nao| E3[Cria nova spec]
-    E2 --> D[3 DELEGAR]
+    E1 --> "Sim" E2[Recupera spec]
+    E1 --> "Nao" E3[Cria nova spec]
+    E2 --> D[DELEGAR]
     E3 --> D
     D --> D1[Publica CFP]
     D1 --> D2[Agentes avaliam]
     D2 --> D3{Ha voluntarios?}
-    D3 -->|Sim| D4[Seleciona agente]
-    D3 -->|Nao| D5[Reformula tarefa]
+    D3 --> "Sim" D4[Seleciona agente]
+    D3 --> "Nao" D5[Reformula tarefa]
     D5 --> D1
-    D4 --> EX[4 EXECUTAR]
+    D4 --> EX[EXECUTAR]
     EX --> EX1[Ciclo RED-GREEN]
     EX1 --> EX2[Implementa solucao]
     EX2 --> EX3[Roda testes]
     EX3 --> EX4{Testes OK?}
-    EX4 -->|Sim| EX5[Refatora codigo]
-    EX4 -->|Nao| EX2
-    EX5 --> V[5 VERIFICAR]
+    EX4 --> "Sim" EX5[Refatora codigo]
+    EX4 --> "Nao" EX2
+    EX5 --> V[VERIFICAR]
     V --> V1[Gate SDD]
     V1 --> V2[SpecVerifier]
     V2 --> V3{Criterios OK?}
-    V3 -->|Sim| V4[Aprova entrega]
-    V3 -->|Nao| V5[Rejeita com feedback]
+    V3 --> "Sim" V4[Aprova entrega]
+    V3 --> "Nao" V5[Rejeita com feedback]
     V5 --> EX
-    V4 --> R[6 REFLETIR]
+    V4 --> R[REFLETIR]
     R --> R1[Registra licoes]
     R1 --> R2[Atualiza Trust]
     R2 --> R3[Atualiza Registry]
@@ -408,13 +408,13 @@ flowchart TD
 flowchart TD
     TASK[Nova Tarefa] --> CLASS2{Classificacao}
 
-    CLASS2 -->|Pesquisa| ACAD2[Pipeline Academico]
-    CLASS2 -->|Codigo| TECH2[Agente Tecnico]
-    CLASS2 -->|Dominio| DOM2[Especialista]
-    CLASS2 -->|Apresentacao| PRES2[MIRA]
-    CLASS2 -->|Formal| FORM2[Formal Verifier]
-    CLASS2 -->|Texto| TEXT2[Escritor]
-    CLASS2 -->|Dados| DATA2[Analista]
+    CLASS2 --> "Pesquisa" ACAD2[Pipeline Academico]
+    CLASS2 --> "Codigo" TECH2[Agente Tecnico]
+    CLASS2 --> "Dominio" DOM2[Especialista]
+    CLASS2 --> "Apresentacao" PRES2[MIRA]
+    CLASS2 --> "Formal" FORM2[Formal Verifier]
+    CLASS2 --> "Texto" TEXT2[Escritor]
+    CLASS2 --> "Dados" DATA2[Analista]
 
     ACAD2 --> A21[Busca literatura]
     ACAD2 --> A22[Coleta evidencias]
@@ -525,8 +525,8 @@ flowchart TD
     F3 --> F4
     F4 --> F5
     F5 --> F6
-    F6 -->|Aprovado| F7
-    F6 -->|Reprovado| F5
+    F6 --> "Aprovado" F7
+    F6 --> "Reprovado" F5
     F7 --> F8
 
     style F1 fill:#e3f2fd,stroke:#1565c0
@@ -685,13 +685,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SDD[SDD Spec-Driven]
+    subgraph SDD[SDD Spec Driven]
         SPEC1[Cria Spec]
         SPEC1 --> CRIT[Criterios]
         CRIT --> TESTS[Testes]
     end
 
-    subgraph TDD[TDD Test-Driven]
+    subgraph TDD[TDD Test Driven]
         RED[RED Testes Falham]
         RED --> GREEN[GREEN Implementacao]
         GREEN --> REFACTOR[REFACTOR Melhora]
@@ -701,8 +701,8 @@ flowchart TD
     subgraph GATE[GATE Validacao]
         GATE1[SpecVerifier]
         GATE1 --> CHECK{Criterios OK?}
-        CHECK -->|Sim| APPROVE[APROVADO]
-        CHECK -->|Nao| REJECT[REPROVADO]
+    CHECK --> "Sim" APPROVE[APROVADO]
+    CHECK --> "Nao" REJECT[REPROVADO]
         REJECT --> RED
     end
 
@@ -751,10 +751,10 @@ flowchart TD
     end
 
     G1 --> C1 --> C2 --> G2 --> C3 --> G3 --> C4 --> G4 --> C5 --> G5 --> C6 --> G6
-    G6 -->|Tudo OK| R1
-    G6 -->|Problemas menores| R2
-    G6 -->|Problemas criticos| R3
-    R3 -->|Corrige| G1
+    G6 --> "Tudo OK" R1
+    G6 --> "Problemas menores" R2
+    G6 --> "Problemas criticos" R3
+    R3 --> "Corrige" G1
 
     style GATES fill:#f3e5f5,stroke:#7b1fa2
     style CHECKS fill:#e8f5e9,stroke:#2e7d32
@@ -874,15 +874,15 @@ flowchart LR
 ```mermaid
 flowchart TD
     subgraph SRC[FONTES DE DADOS]
-        OA[OpenAlex 243M]
-        CR[CrossRef 150M]
-        PM[PubMed 36M]
-        AR[arXiv 2M]
-        KG[Kaggle 200K]
+        OA[OpenAlex]
+        CR[CrossRef]
+        PM[PubMed]
+        AR[arXiv]
+        KG[Kaggle]
     end
 
     subgraph PROC[PROCESSAMENTO]
-        SEARCH2[Busca Multi-Fonte]
+        SEARCH2[Busca Multi Fonte]
         DEDUP[Deduplicacao]
         FILTER2[Filtro Relevancia]
         RANK2[Ranqueamento]
@@ -962,52 +962,52 @@ flowchart TD
 ```mermaid
 flowchart TB
     subgraph ACADEMIC[AGENTES ACADEMICOS 45]
-        A1[A00 Editor-Chefe]
-        A2[A01 Escopo]
-        A3[A02 Busca]
-        A4[A03 Evidencias]
-        A5[A04 Estrutura]
-        A6[A05 Revisao]
-        A7[A06 Metodologia]
-        A8[A07 Estatistica]
-        A9[A08 Visualizacao]
-        A10[A09 Resultados]
+        AC1[Editor Chefe]
+        AC2[Escopo]
+        AC3[Busca]
+        AC4[Evidencias]
+        AC5[Estrutura]
+        AC6[Revisao]
+        AC7[Metodologia]
+        AC8[Estatistica]
+        AC9[Visualizacao]
+        AC10[Resultados]
     end
 
     subgraph TECH[AGENTES TECNICOS 40]
-        T1[C Coder]
-        T2[R Researcher]
-        T3[W Writer]
-        T4[V Reviewer]
-        T5[D Debugger]
-        T6[O Optimizer]
-        T7[A Architect]
+        TC1[Coder]
+        TC2[Researcher]
+        TC3[Writer]
+        TC4[Reviewer]
+        TC5[Debugger]
+        TC6[Optimizer]
+        TC7[Architect]
     end
 
     subgraph DOMAIN[ESPECIALISTAS 30]
-        D1[Cardiologista]
-        D2[Neurologista]
-        D3[Radiologista]
-        D4[Educador]
-        D5[Juridico]
-        D6[Economista]
+        DM1[Cardiologista]
+        DM2[Neurologista]
+        DM3[Radiologista]
+        DM4[Educador]
+        DM5[Juridico]
+        DM6[Economista]
     end
 
     subgraph RESEARCH[AGENTES PESQUISA 25]
-        RE1[Literatura]
-        RE2[Dados]
-        RE3[Analise]
-        RE4[Redacao]
-        RE5[Validacao]
+        RS1[Literatura]
+        RS2[Dados]
+        RS3[Analise]
+        RS4[Redacao]
+        RS5[Validacao]
     end
 
     subgraph SUP[AGENTES SUPORTE 65]
-        S1[Documentacao]
-        S2[Testes]
-        S3[Seguranca]
-        S4[Metricas]
-        S5[Deploy]
-        S6[Debug]
+        SP1[Documentacao]
+        SP2[Testes]
+        SP3[Seguranca]
+        SP4[Metricas]
+        SP5[Deploy]
+        SP6[Debug]
     end
 
     ACADEMIC --> TECH --> DOMAIN --> RESEARCH --> SUP
@@ -1114,22 +1114,22 @@ flowchart LR
     end
 
     subgraph DOM[DOMINIOS]
-        AI[IA ML 20]
-        HEALTH[Saude 20]
-        BIO[Biologia 20]
-        ENV[Ambiente 20]
-        ENERGY[Energia 20]
-        MAT[Materiais 20]
-        SOC[Social 20]
-        ECON[Economia 20]
+        AI[IA ML]
+        HEALTH[Saude]
+        BIO[Biologia]
+        ENV[Ambiente]
+        ENERGY[Energia]
+        MAT[Materiais]
+        SOC[Social]
+        ECON[Economia]
     end
 
     subgraph SRC2[FONTES]
-        OA2[OpenAlex 243M]
-        CR2[CrossRef 150M]
-        PM2[PubMed 36M]
-        AR2[arXiv 2M]
-        KG2[Kaggle 200K]
+        OA2[OpenAlex]
+        CR2[CrossRef]
+        PM2[PubMed]
+        AR2[arXiv]
+        KG2[Kaggle]
     end
 
     CATALOG --> DOM
