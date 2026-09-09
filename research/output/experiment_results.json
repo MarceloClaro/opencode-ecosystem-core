@@ -1,0 +1,190 @@
+{
+  "title": "Sesgo Algorítmico em Diagnóstico de Diabetes",
+  "date": "2026-09-09T00:38:20.670319",
+  "dataset": {
+    "n_samples": 768,
+    "prevalence": 0.4869791666666667
+  },
+  "results": {
+    "Logistic Regression": {
+      "accuracy": 0.7922,
+      "f1_score": 0.7949,
+      "auc_roc": 0.867,
+      "ethnicity": {
+        "eo_diff": 0.1059,
+        "dp_diff": 0.1224,
+        "metrics": {
+          "majority": {
+            "tpr": 0.8333,
+            "fpr": 0.1818,
+            "precision": 0.8,
+            "f1": 0.8163,
+            "support": 103
+          },
+          "minority": {
+            "tpr": 0.8148,
+            "fpr": 0.375,
+            "precision": 0.7097,
+            "f1": 0.7586,
+            "support": 51
+          }
+        }
+      },
+      "gender": {
+        "eo_diff": 0.0813,
+        "dp_diff": 0.1387,
+        "metrics": {
+          "female": {
+            "tpr": 0.8235,
+            "fpr": 0.3043,
+            "precision": 0.75,
+            "f1": 0.785,
+            "support": 97
+          },
+          "male": {
+            "tpr": 0.8333,
+            "fpr": 0.1515,
+            "precision": 0.8,
+            "f1": 0.8163,
+            "support": 57
+          }
+        }
+      }
+    },
+    "Random Forest": {
+      "accuracy": 0.7727,
+      "f1_score": 0.7771,
+      "auc_roc": 0.8452,
+      "ethnicity": {
+        "eo_diff": 0.1361,
+        "dp_diff": 0.1127,
+        "metrics": {
+          "majority": {
+            "tpr": 0.8333,
+            "fpr": 0.2,
+            "precision": 0.7843,
+            "f1": 0.8081,
+            "support": 103
+          },
+          "minority": {
+            "tpr": 0.7778,
+            "fpr": 0.4167,
+            "precision": 0.6774,
+            "f1": 0.7241,
+            "support": 51
+          }
+        }
+      },
+      "gender": {
+        "eo_diff": 0.1447,
+        "dp_diff": 0.2047,
+        "metrics": {
+          "female": {
+            "tpr": 0.8431,
+            "fpr": 0.3478,
+            "precision": 0.7288,
+            "f1": 0.7818,
+            "support": 97
+          },
+          "male": {
+            "tpr": 0.75,
+            "fpr": 0.1515,
+            "precision": 0.7826,
+            "f1": 0.766,
+            "support": 57
+          }
+        }
+      }
+    },
+    "Gradient Boosting": {
+      "accuracy": 0.7792,
+      "f1_score": 0.7733,
+      "auc_roc": 0.8589,
+      "ethnicity": {
+        "eo_diff": 0.1392,
+        "dp_diff": 0.0634,
+        "metrics": {
+          "majority": {
+            "tpr": 0.8125,
+            "fpr": 0.1636,
+            "precision": 0.8125,
+            "f1": 0.8125,
+            "support": 103
+          },
+          "minority": {
+            "tpr": 0.7037,
+            "fpr": 0.3333,
+            "precision": 0.7037,
+            "f1": 0.7037,
+            "support": 51
+          }
+        }
+      },
+      "gender": {
+        "eo_diff": 0.0719,
+        "dp_diff": 0.1326,
+        "metrics": {
+          "female": {
+            "tpr": 0.7843,
+            "fpr": 0.2609,
+            "precision": 0.7692,
+            "f1": 0.7767,
+            "support": 97
+          },
+          "male": {
+            "tpr": 0.75,
+            "fpr": 0.1515,
+            "precision": 0.7826,
+            "f1": 0.766,
+            "support": 57
+          }
+        }
+      }
+    },
+    "SVM": {
+      "accuracy": 0.7727,
+      "f1_score": 0.7712,
+      "auc_roc": 0.8497,
+      "ethnicity": {
+        "eo_diff": 0.1325,
+        "dp_diff": 0.0929,
+        "metrics": {
+          "majority": {
+            "tpr": 0.8125,
+            "fpr": 0.1818,
+            "precision": 0.7959,
+            "f1": 0.8041,
+            "support": 103
+          },
+          "minority": {
+            "tpr": 0.7407,
+            "fpr": 0.375,
+            "precision": 0.6897,
+            "f1": 0.7143,
+            "support": 51
+          }
+        }
+      },
+      "gender": {
+        "eo_diff": 0.1061,
+        "dp_diff": 0.1635,
+        "metrics": {
+          "female": {
+            "tpr": 0.7843,
+            "fpr": 0.3261,
+            "precision": 0.7273,
+            "f1": 0.7547,
+            "support": 97
+          },
+          "male": {
+            "tpr": 0.7917,
+            "fpr": 0.1212,
+            "precision": 0.8261,
+            "f1": 0.8085,
+            "support": 57
+          }
+        }
+      }
+    }
+  }
+}
