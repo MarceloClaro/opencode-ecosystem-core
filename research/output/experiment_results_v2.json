@@ -1,0 +1,303 @@
+{
+  "title": "Sesgo Algorítmico em Diagnóstico de Diabetes V2",
+  "date": "2026-09-09T00:41:32.656973",
+  "version": "2.0",
+  "dataset": {
+    "n_samples": 768,
+    "prevalence": 0.5078125
+  },
+  "results": {
+    "Logistic Regression": {
+      "cv_f1_mean": 0.7929,
+      "cv_f1_std": 0.0313,
+      "accuracy": 0.8182,
+      "f1_score": 0.8272,
+      "auc_roc": 0.8877,
+      "ethnicity": {
+        "eo_diff": 0.0687,
+        "dp_diff": 0.0314,
+        "metrics": {
+          "minority": {
+            "tpr": 0.8438,
+            "fpr": 0.1429,
+            "precision": 0.9,
+            "f1": 0.871,
+            "support": 53
+          },
+          "majority": {
+            "tpr": 0.8696,
+            "fpr": 0.2545,
+            "precision": 0.7407,
+            "f1": 0.8,
+            "support": 101
+          }
+        }
+      },
+      "gender": {
+        "eo_diff": 0.0838,
+        "dp_diff": 0.013,
+        "metrics": {
+          "male": {
+            "tpr": 0.9231,
+            "fpr": 0.1786,
+            "precision": 0.8276,
+            "f1": 0.8727,
+            "support": 54
+          },
+          "female": {
+            "tpr": 0.8269,
+            "fpr": 0.25,
+            "precision": 0.7818,
+            "f1": 0.8037,
+            "support": 100
+          }
+        }
+      },
+      "intersectional": {
+        "minority_male": {
+          "accuracy": 0.8667,
+          "f1": 0.8889,
+          "tpr": 0.8,
+          "support": 15
+        },
+        "majority_female": {
+          "accuracy": 0.7581,
+          "f1": 0.7619,
+          "tpr": 0.8,
+          "support": 62
+        },
+        "majority_male": {
+          "accuracy": 0.8718,
+          "f1": 0.8649,
+          "tpr": 1.0,
+          "support": 39
+        },
+        "minority_female": {
+          "accuracy": 0.8421,
+          "f1": 0.8636,
+          "tpr": 0.8636,
+          "support": 38
+        }
+      }
+    },
+    "Random Forest": {
+      "cv_f1_mean": 0.7679,
+      "cv_f1_std": 0.0243,
+      "accuracy": 0.7792,
+      "f1_score": 0.7875,
+      "auc_roc": 0.8731,
+      "ethnicity": {
+        "eo_diff": 0.0306,
+        "dp_diff": 0.0512,
+        "metrics": {
+          "minority": {
+            "tpr": 0.7812,
+            "fpr": 0.2381,
+            "precision": 0.8333,
+            "f1": 0.8065,
+            "support": 53
+          },
+          "majority": {
+            "tpr": 0.8261,
+            "fpr": 0.2545,
+            "precision": 0.7308,
+            "f1": 0.7755,
+            "support": 101
+          }
+        }
+      },
+      "gender": {
+        "eo_diff": 0.1143,
+        "dp_diff": 0.0215,
+        "metrics": {
+          "male": {
+            "tpr": 0.8846,
+            "fpr": 0.1786,
+            "precision": 0.8214,
+            "f1": 0.8519,
+            "support": 54
+          },
+          "female": {
+            "tpr": 0.7692,
+            "fpr": 0.2917,
+            "precision": 0.7407,
+            "f1": 0.7547,
+            "support": 100
+          }
+        }
+      },
+      "intersectional": {
+        "minority_male": {
+          "accuracy": 0.8667,
+          "f1": 0.8889,
+          "tpr": 0.8,
+          "support": 15
+        },
+        "majority_female": {
+          "accuracy": 0.7419,
+          "f1": 0.7419,
+          "tpr": 0.7667,
+          "support": 62
+        },
+        "majority_male": {
+          "accuracy": 0.8462,
+          "f1": 0.8333,
+          "tpr": 0.9375,
+          "support": 39
+        },
+        "minority_female": {
+          "accuracy": 0.7368,
+          "f1": 0.7727,
+          "tpr": 0.7727,
+          "support": 38
+        }
+      }
+    },
+    "Gradient Boosting": {
+      "cv_f1_mean": 0.7769,
+      "cv_f1_std": 0.0221,
+      "accuracy": 0.7662,
+      "f1_score": 0.7805,
+      "auc_roc": 0.8543,
+      "ethnicity": {
+        "eo_diff": 0.0636,
+        "dp_diff": 0.0691,
+        "metrics": {
+          "minority": {
+            "tpr": 0.7812,
+            "fpr": 0.3333,
+            "precision": 0.7812,
+            "f1": 0.7812,
+            "support": 53
+          },
+          "majority": {
+            "tpr": 0.8478,
+            "fpr": 0.2727,
+            "precision": 0.7222,
+            "f1": 0.78,
+            "support": 101
+          }
+        }
+      },
+      "gender": {
+        "eo_diff": 0.0787,
+        "dp_diff": 0.0615,
+        "metrics": {
+          "male": {
+            "tpr": 0.8462,
+            "fpr": 0.2143,
+            "precision": 0.7857,
+            "f1": 0.8148,
+            "support": 54
+          },
+          "female": {
+            "tpr": 0.8077,
+            "fpr": 0.3333,
+            "precision": 0.7241,
+            "f1": 0.7636,
+            "support": 100
+          }
+        }
+      },
+      "intersectional": {
+        "minority_male": {
+          "accuracy": 0.8,
+          "f1": 0.8235,
+          "tpr": 0.7,
+          "support": 15
+        },
+        "majority_female": {
+          "accuracy": 0.7581,
+          "f1": 0.7619,
+          "tpr": 0.8,
+          "support": 62
+        },
+        "majority_male": {
+          "accuracy": 0.8205,
+          "f1": 0.8108,
+          "tpr": 0.9375,
+          "support": 39
+        },
+        "minority_female": {
+          "accuracy": 0.7105,
+          "f1": 0.766,
+          "tpr": 0.8182,
+          "support": 38
+        }
+      }
+    },
+    "SVM": {
+      "cv_f1_mean": 0.7859,
+      "cv_f1_std": 0.0229,
+      "accuracy": 0.8182,
+      "f1_score": 0.8313,
+      "auc_roc": 0.8794,
+      "ethnicity": {
+        "eo_diff": 0.0492,
+        "dp_diff": 0.0493,
+        "metrics": {
+          "minority": {
+            "tpr": 0.875,
+            "fpr": 0.1905,
+            "precision": 0.875,
+            "f1": 0.875,
+            "support": 53
+          },
+          "majority": {
+            "tpr": 0.8913,
+            "fpr": 0.2727,
+            "precision": 0.7321,
+            "f1": 0.8039,
+            "support": 101
+          }
+        }
+      },
+      "gender": {
+        "eo_diff": 0.0566,
+        "dp_diff": 0.0815,
+        "metrics": {
+          "male": {
+            "tpr": 0.8846,
+            "fpr": 0.1786,
+            "precision": 0.8214,
+            "f1": 0.8519,
+            "support": 54
+          },
+          "female": {
+            "tpr": 0.8846,
+            "fpr": 0.2917,
+            "precision": 0.7667,
+            "f1": 0.8214,
+            "support": 100
+          }
+        }
+      },
+      "intersectional": {
+        "minority_male": {
+          "accuracy": 0.8,
+          "f1": 0.8421,
+          "tpr": 0.8,
+          "support": 15
+        },
+        "majority_female": {
+          "accuracy": 0.7581,
+          "f1": 0.7761,
+          "tpr": 0.8667,
+          "support": 62
+        },
+        "majority_male": {
+          "accuracy": 0.8718,
+          "f1": 0.8571,
+          "tpr": 0.9375,
+          "support": 39
+        },
+        "minority_female": {
+          "accuracy": 0.8684,
+          "f1": 0.8889,
+          "tpr": 0.9091,
+          "support": 38
+        }
+      }
+    }
+  }
+}
