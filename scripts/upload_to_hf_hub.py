@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """
 Upload OpenCode Ecosystem Core to HuggingFace Hub.
-Mirror repository structure like GitHub.
+Mirror repository structure like GitHub, serve as portfolio and backup.
 
 Usage:
     python3 scripts/upload_to_hf_hub.py
 
 Rate limit: 128 commits/hour (free plan). Wait 40 min if 429 error.
 Repo: https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core
+
+Features:
+    - Portfolio: documents all ecosystem capabilities, data, and achievements
+    - Backup: complete mirror of code, data, specs, agents, and documentation
+    - Research: 160 proposals, 243 datasets, 8 PhD agents
 """
 
 import os
@@ -27,9 +32,24 @@ def prepare_staging():
         shutil.rmtree(STAGING)
     os.makedirs(STAGING)
 
+    # Copy HF-specific README (portfolio + dataset card)
+    hf_readme = os.path.join(BASE, "HF_README.md")
+    if os.path.exists(hf_readme):
+        shutil.copy2(hf_readme, os.path.join(STAGING, "README.md"))
+    else:
+        # Fallback: use original README
+        src = os.path.join(BASE, "README.md")
+        if os.path.exists(src):
+            shutil.copy2(src, os.path.join(STAGING, "README.md"))
+
+    # Copy .gitattributes for LFS
+    gitattr = os.path.join(BASE, ".gitattributes.hf")
+    if os.path.exists(gitattr):
+        shutil.copy2(gitattr, os.path.join(STAGING, ".gitattributes"))
+
     # Root docs
     root_docs = [
-        "README.md", "ARCHITECTURE.md", "AGENTS.md", "CLAUDE.md", "MANUAL.md",
+        "ARCHITECTURE.md", "AGENTS.md", "CLAUDE.md", "MANUAL.md",
         "CONTRIBUTING.md", "SECURITY.md", "LICENSE", "CHANGELOG.md", "CORRIGENDUM.md",
         "PROGRESS.md", "RELEASE_NOTES.md", "requirements.txt", "requirements-dev.txt",
         "requirements-scientific-lab.txt", "setup.cfg", "pytest.ini", "opencode.json",
