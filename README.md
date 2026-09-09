@@ -308,9 +308,9 @@ flowchart TD
     REC --> PARSE[Analisa Tarefa]
     PARSE --> CLASS{Classificacao}
 
-    CLASS --> "Simples" SIMPLE[Processamento Simples]
-    CLASS --> "Complexa" COMPLEX[Processamento Complexo]
-    CLASS --> "Critica" CRITICAL[Processamento Critico]
+    CLASS -->|Simples| SIMPLE[Processamento Simples]
+    CLASS -->|Complexa| COMPLEX[Processamento Complexo]
+    CLASS -->|Critica| CRITICAL[Processamento Critico]
 
     SIMPLE --> S1[Seleciona Agente]
     COMPLEX --> C1[Cria Especificacao]
@@ -330,10 +330,10 @@ flowchart TD
     C4 --> C5{Testes OK?}
     CR4 --> CR5{Todos OK?}
 
-    C5 --> "Sim" S3
-    C5 --> "Nao" C3
-    CR5 --> "Sim" S3
-    CR5 --> "Nao" CR3
+    C5 -->|Sim| S3
+    C5 -->|Nao| C3
+    CR5 -->|Sim| S3
+    CR5 -->|Nao| CR3
 
     S3 --> LOG[Registra Log]
     LOG --> EVO2[Atualiza Registry]
@@ -360,29 +360,29 @@ flowchart TD
     P2 --> P3[Verifica licoes]
     P3 --> E[ESPECIFICAR]
     E --> E1{Spec existe?}
-    E1 --> "Sim" E2[Recupera spec]
-    E1 --> "Nao" E3[Cria nova spec]
+    E1 -->|Sim| E2[Recupera spec]
+    E1 -->|Nao| E3[Cria nova spec]
     E2 --> D[DELEGAR]
     E3 --> D
     D --> D1[Publica CFP]
     D1 --> D2[Agentes avaliam]
     D2 --> D3{Ha voluntarios?}
-    D3 --> "Sim" D4[Seleciona agente]
-    D3 --> "Nao" D5[Reformula tarefa]
+    D3 -->|Sim| D4[Seleciona agente]
+    D3 -->|Nao| D5[Reformula tarefa]
     D5 --> D1
     D4 --> EX[EXECUTAR]
     EX --> EX1[Ciclo RED-GREEN]
     EX1 --> EX2[Implementa solucao]
     EX2 --> EX3[Roda testes]
     EX3 --> EX4{Testes OK?}
-    EX4 --> "Sim" EX5[Refatora codigo]
-    EX4 --> "Nao" EX2
+    EX4 -->|Sim| EX5[Refatora codigo]
+    EX4 -->|Nao| EX2
     EX5 --> V[VERIFICAR]
     V --> V1[Gate SDD]
     V1 --> V2[SpecVerifier]
     V2 --> V3{Criterios OK?}
-    V3 --> "Sim" V4[Aprova entrega]
-    V3 --> "Nao" V5[Rejeita com feedback]
+    V3 -->|Sim| V4[Aprova entrega]
+    V3 -->|Nao| V5[Rejeita com feedback]
     V5 --> EX
     V4 --> R[REFLETIR]
     R --> R1[Registra licoes]
@@ -408,13 +408,13 @@ flowchart TD
 flowchart TD
     TASK[Nova Tarefa] --> CLASS2{Classificacao}
 
-    CLASS2 --> "Pesquisa" ACAD2[Pipeline Academico]
-    CLASS2 --> "Codigo" TECH2[Agente Tecnico]
-    CLASS2 --> "Dominio" DOM2[Especialista]
-    CLASS2 --> "Apresentacao" PRES2[MIRA]
-    CLASS2 --> "Formal" FORM2[Formal Verifier]
-    CLASS2 --> "Texto" TEXT2[Escritor]
-    CLASS2 --> "Dados" DATA2[Analista]
+    CLASS2 -->|Pesquisa| ACAD2[Pipeline Academico]
+    CLASS2 -->|Codigo| TECH2[Agente Tecnico]
+    CLASS2 -->|Dominio| DOM2[Especialista]
+    CLASS2 -->|Apresentacao| PRES2[MIRA]
+    CLASS2 -->|Formal| FORM2[Formal Verifier]
+    CLASS2 -->|Texto| TEXT2[Escritor]
+    CLASS2 -->|Dados| DATA2[Analista]
 
     ACAD2 --> A21[Busca literatura]
     ACAD2 --> A22[Coleta evidencias]
@@ -525,8 +525,8 @@ flowchart TD
     F3 --> F4
     F4 --> F5
     F5 --> F6
-    F6 --> "Aprovado" F7
-    F6 --> "Reprovado" F5
+    F6 -->|Aprovado| F7
+    F6 -->|Reprovado| F5
     F7 --> F8
 
     style F1 fill:#e3f2fd,stroke:#1565c0
@@ -701,8 +701,8 @@ flowchart TD
     subgraph GATE[GATE Validacao]
         GATE1[SpecVerifier]
         GATE1 --> CHECK{Criterios OK?}
-    CHECK --> "Sim" APPROVE[APROVADO]
-    CHECK --> "Nao" REJECT[REPROVADO]
+    CHECK -->|Sim| APPROVE[APROVADO]
+    CHECK -->|Nao| REJECT[REPROVADO]
         REJECT --> RED
     end
 
@@ -751,10 +751,10 @@ flowchart TD
     end
 
     G1 --> C1 --> C2 --> G2 --> C3 --> G3 --> C4 --> G4 --> C5 --> G5 --> C6 --> G6
-    G6 --> "Tudo OK" R1
-    G6 --> "Problemas menores" R2
-    G6 --> "Problemas criticos" R3
-    R3 --> "Corrige" G1
+    G6 -->|Tudo OK| R1
+    G6 -->|Problemas menores| R2
+    G6 -->|Problemas criticos| R3
+    R3 -->|Corrige| G1
 
     style GATES fill:#f3e5f5,stroke:#7b1fa2
     style CHECKS fill:#e8f5e9,stroke:#2e7d32
