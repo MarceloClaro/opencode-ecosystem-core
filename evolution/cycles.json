@@ -8616,6 +8616,37 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R495",
+      "objective": "Fix flowcharts, add themes, translate datasets to Portuguese",
+      "changes": [
+        "Fixed all Mermaid flowcharts - removed pipe characters and simplified syntax",
+        "Added 43 unique themes associated with research proposals",
+        "Translated all 43 dataset names from English to Portuguese",
+        "Added detailed themes table per domain (8 domains)",
+        "Added dataset examples table with original and Portuguese names",
+        "Flowcharts now render correctly on GitHub",
+        "Git commit ec2cd6d, pushed to GitHub"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Pipe characters in Mermaid arrow labels cause rendering errors on GitHub",
+        "Simple node labels without special characters work best",
+        "Subgraph labels should avoid quotes and special characters",
+        "Translating dataset names improves accessibility for Portuguese speakers",
+        "Themes help users understand research scope without reading full proposals"
+      ],
+      "timestamp": 1788921790.2085133,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
