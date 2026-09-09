@@ -8386,6 +8386,39 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R489",
+      "objective": "Sync GitHub repository with local - clean history and force push",
+      "changes": [
+        "Installed git-filter-repo to rewrite history",
+        "Replaced HF token (hf_*) with REDACTED in all commits using git filter-repo",
+        "Created backup at /tmp/opencode-backup.git before rewrite",
+        "Force pushed cleaned history to GitHub: fb310ea -> 7aa2f79",
+        "Local and remote HEADs synced at 7aa2f79",
+        "Resolved merge conflicts during rebase (scientific-lab files)",
+        "GitHub Push Protection no longer blocking",
+        "Git commit 7aa2f79"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "GitHub Push Protection detects HF tokens in commit history",
+        "git filter-repo --replace-text is the cleanest way to rewrite secrets from history",
+        "Always backup before history rewrite: git clone --mirror . /tmp/backup.git",
+        "git rebase with remote changes can cause conflicts - resolve with --theirs for clean files",
+        "Force push after rewrite is necessary: git push --force origin main",
+        "Large file warnings (50MB+) are non-blocking but consider Git LFS for binaries"
+      ],
+      "timestamp": 1788918036.5751295,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
