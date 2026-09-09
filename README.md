@@ -1,19 +1,41 @@
 <div align="center">
 
-# 🧠 OpenCode Ecosystem Core
+<img src="https://avatars.githubusercontent.com/u/61574889?v=4" width="150" height="150" style="border-radius: 50%; border: 4px solid #1565c0; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" alt="Marcelo Claro Laranjeira"/>
 
-### Ecossistema de Orquestração Multi-Agente para Pesquisa Científica e Automação
+# MARCELO CLARO LARANJEIRA
 
-**205 Agentes** · **303 Specs** · **160 Propostas de Pesquisa** · **Auto-Score 97/100**
+### Professor de Geografia · Pedagogo · Desenvolvedor Científico
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarceloClaro/opencode-ecosystem-core)
-[![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+**55 seguidores · 66 seguindo · 310 contribuições**
+
+[![GitHub](https://img.shields.io/badge/GitHub-marceloclaro-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarceloClaro)
+[![ORCID](https://img.shields.io/badge/ORCID-0000--0001--8996--2887-A6CE39?style=for-the-badge&logo=orcid&logoColor=white)](https://orcid.org/0000-0001-8996-2887)
+[![Website](https://img.shields.io/badge/Website-geomaker-00ACC1?style=for-the-badge&logo=googleearth&logoColor=white)](https://bit.ly/geomaker)
+[![Location](https://img.shields.io/badge/Location-Crateús%20CE-FF5722?style=for-the-badge&logo=googlemaps&logoColor=white)](https://maps.google.com/?q=Crateús+CE+Brasil)
 
 ---
 
-**Um ecossistema completo que transforma ideias em pesquisas científicas, apresentações e soluções — usando inteligência artificial de forma responsável.**
+**"Transformando dados em conhecimento, e conhecimento em ferramentas para a educação e a ciência aberta."**
+
+</div>
+
+---
+
+## 🧠 OpenCode Ecosystem Core
+
+<div align="center">
+
+### Ecossistema de Orquestração Multi-Agente para Pesquisa Científica e Automação
+
+![GitHub Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=flat-square&logo=github)
+![GitHub Forks](https://img.shields.io/github/forks/MarceloClaro/opencode-ecosystem-core?style=flat-square&logo=github)
+![GitHub Issues](https://img.shields.io/github/issues/MarceloClaro/opencode-ecosystem-core?style=flat-square)
+![GitHub License](https://img.shields.io/github/license/MarceloClaro/opencode-ecosystem-core?style=flat-square)
+![Python Version](https://img.shields.io/badge/python-3.10+-blue?style=flat-square&logo=python&logoColor=white)
+
+---
+
+**205 Agentes** · **303 Specs** · **160 Propostas de Pesquisa** · **Auto-Score 97/100**
 
 </div>
 
@@ -32,6 +54,7 @@
 | [📊 Dados](#-dados-científicos) | 160 propostas e 243 datasets |
 | [🛠️ Comandos](#-comandos-úteis) | Tudo que você pode fazer |
 | [📚 Documentação](#-documentação) | Guias detalhados |
+| [👤 Autor](#-sobre-o-autor) | Quem criou este projeto |
 
 ---
 
@@ -668,6 +691,54 @@ flowchart LR
 
 ---
 
+## 👤 Sobre o Autor
+
+<div align="center">
+
+<img src="https://avatars.githubusercontent.com/u/61574889?v=4" width="200" height="200" style="border-radius: 50%; border: 4px solid #1565c0; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" alt="Marcelo Claro Laranjeira"/>
+
+### **MARCELO CLARO LARANJEIRA**
+
+**Professor de Geografia · Pedagogo · Desenvolvedor Científico**
+
+---
+
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![ORCID](https://img.shields.io/badge/ORCID-0000--0001--8996--2887-A6CE39?style=for-the-badge&logo=orcid&logoColor=white)
+![Website](https://img.shields.io/badge/Website-geomaker-00ACC1?style=for-the-badge&logo=googleearth&logoColor=white)
+![Location](https://img.shields.io/badge/Location-Crateús%20CE-FF5722?style=for-the-badge&logo=googlemaps&logoColor=white)
+
+---
+
+**📍 Localização:** Crateús, Ceará, Brasil
+
+**🔗 Links:**
+- [GitHub](https://github.com/MarceloClaro)
+- [ORCID](https://orcid.org/0000-0001-8996-2887)
+- [Website Pessoal](https://bit.ly/geomaker)
+- [Google Scholar](https://scholar.google.com/citations?user=marceloclaro)
+
+**🎯 Áreas de Atuação:**
+- Geografia e Geotecnologias
+- Educação a Distância (EAD)
+- Ciência Aberta e Dados Abertos
+- Inteligência Artificial Aplicada à Educação
+- Sistemas de Informação Geográfica (SIG)
+
+**📊 Estatísticas GitHub:**
+- **310** contribuições no último ano
+- **55** seguidores
+- **66** seguindo
+- **Projetos** open source
+
+---
+
+**"A tecnologia é uma ferramenta poderosa, mas é o conhecimento humano que a transforma em soluções para a sociedade."**
+
+</div>
+
+---
+
 ## 📄 Licença
 
 Este projeto é licenciado sob a [Licença MIT](LICENSE).
@@ -676,9 +747,9 @@ Este projeto é licenciado sob a [Licença MIT](LICENSE).
 
 <div align="center">
 
-### Feito com ❤️ para a comunidade de pesquisa e desenvolvimento
+### Feito com ❤️ por [Marcelo Claro Laranjeira](https://github.com/MarceloClaro)
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarceloClaro/opencode-ecosystem-core)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarceloClaro)
 [![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
