@@ -8256,6 +8256,37 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R485",
+      "objective": "Create HuggingFace Hub mirror of OpenCode Ecosystem Core repository",
+      "changes": [
+        "Created HuggingFace Hub repo: marceloclaro/opencode-ecosystem-core (dataset type)",
+        "Uploaded 144 files: core modules (marceloclaro, academic, research, evolution, sdd, transformer, translation, trust, mci), documentation (README, ARCHITECTURE, AGENTS, CLAUDE, MANUAL, etc.), root config",
+        "Created scripts/upload_to_hf_hub.py for batch upload of remaining files",
+        "Remaining files: data/ (160 proposals, 243 datasets), agents/catalog/ (205 agents), specs/ (303 specs), tests/, skills/, docs/, examples/",
+        "Rate limit hit: 128 commits/hour on free plan, ~40min cooldown required",
+        "HF Hub URL: https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core",
+        "Git commit 3f654c1"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "HuggingFace Hub free plan: 128 commits/hour limit, individual file uploads consume commit budget fast",
+        "upload_folder is more efficient than individual upload_file for large batches",
+        "Rate limit cooldown is ~40 minutes; plan uploads accordingly",
+        "Dataset type repos are appropriate for code+data mirrors on HF Hub",
+        "README with YAML metadata prevents warnings during upload"
+      ],
+      "timestamp": 1788914210.8936262,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
