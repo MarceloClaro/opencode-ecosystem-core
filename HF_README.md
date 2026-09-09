@@ -25,7 +25,6 @@ pretty_name: "OpenCode Ecosystem Core"
 datasets:
   - marceloclaro/opencode-research
 task_categories:
-  - multi-task
   - other
 ---
 
