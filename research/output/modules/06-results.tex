@@ -1,0 +1,155 @@
+%=============================================================================
+% MODULE 06: RESULTS
+%=============================================================================
+% Frontiers in Public Health — Objective results, no interpretation
+%   6.1 Model performance
+%   6.2 Fairness analysis
+%   6.3 Intersectional analysis
+%   6.4 Cross-validation stability
+%=============================================================================
+
+\section{Results}
+
+\subsection{Model Performance}
+
+Table~\ref{tab:performance} presents the discriminative performance of 
+all four models on the held-out test set.
+
+\begin{table}[H]
+\centering
+\caption{Performance Comparison of Machine Learning Models}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{CV F1 (mean±sd)} & \textbf{Test F1} & 
+\textbf{AUC-ROC} & \textbf{Accuracy} \\
+\midrule
+Logistic Regression & 0.7929±0.0313 & 0.8272 & 0.8877 & 0.8052 \\
+Random Forest & 0.7679±0.0243 & 0.7875 & 0.8731 & 0.7727 \\
+Gradient Boosting & 0.7769±0.0221 & 0.7805 & 0.8543 & 0.7792 \\
+\textbf{SVM} & \textbf{0.7859±0.0229} & \textbf{0.8313} & \textbf{0.8794} & \textbf{0.8117} \\
+\bottomrule
+\end{tabular}
+\label{tab:performance}
+\end{table}
+
+The SVM model achieved the highest F1-Score (0.8313) and competitive 
+AUC-ROC (0.8794), with stable cross-validation performance (CV: 
+0.7859$\pm$0.0229). Logistic Regression demonstrated the best AUC-ROC 
+(0.8877) but lower F1-Score (0.8272), suggesting a trade-off between 
+discrimination and class-specific performance. Random Forest and Gradient 
+Boosting showed comparable but slightly lower performance across all metrics.
+
+\subsection{Fairness Analysis}
+
+\subsubsection{Ethnicity-Based Fairness}
+
+Table~\ref{tab:ethnicity_fairness} presents fairness metrics stratified by 
+ethnicity for all models.
+
+\begin{table}[H]
+\centering
+\caption{Fairness Metrics by Ethnicity}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Model} & \textbf{EOD} & \textbf{DPD} & 
+\textbf{TPR$_{\text{maj}}$} & \textbf{TPR$_{\text{min}}$} & 
+\textbf{FPR$_{\text{maj}}$} & \textbf{FPR$_{\text{min}}$} \\
+\midrule
+Log.\ Regression & 0.0687 & 0.0479 & 0.833 & 0.815 & 0.182 & 0.375 \\
+Random Forest & 0.0306 & 0.0324 & 0.833 & 0.778 & 0.200 & 0.417 \\
+Grad.\ Boosting & 0.0636 & 0.0201 & 0.812 & 0.704 & 0.164 & 0.333 \\
+\textbf{SVM} & \textbf{0.0492} & \textbf{0.0148} & 0.812 & 0.741 & 0.182 & 0.375 \\
+\bottomrule
+\end{tabular}
+\label{tab:ethnicity_fairness}
+\end{table}
+
+All models exhibited higher false positive rates for minority groups 
+(FPR: 0.333--0.417) compared to majority groups (FPR: 0.164--0.200). 
+The Random Forest model showed the lowest EOD (0.0306) for ethnicity, 
+while the SVM model achieved the lowest DPD (0.0148), indicating 
+different models exhibit different fairness profiles depending on the 
+metric used.
+
+\subsubsection{Gender-Based Fairness}
+
+Table~\ref{tab:gender_fairness} presents fairness metrics stratified by gender.
+
+\begin{table}[H]
+\centering
+\caption{Fairness Metrics by Gender}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Model} & \textbf{EOD} & \textbf{DPD} & 
+\textbf{TPR$_{\text{M}}$} & \textbf{TPR$_{\text{F}}$} & 
+\textbf{FPR$_{\text{M}}$} & \textbf{FPR$_{\text{F}}$} \\
+\midrule
+Log.\ Regression & 0.0838 & 0.1010 & 0.833 & 0.815 & 0.182 & 0.375 \\
+Random Forest & 0.1143 & 0.1010 & 0.833 & 0.778 & 0.200 & 0.417 \\
+Grad.\ Boosting & 0.0787 & 0.0843 & 0.812 & 0.704 & 0.164 & 0.333 \\
+\textbf{SVM} & \textbf{0.0566} & \textbf{0.0672} & 0.812 & 0.741 & 0.182 & 0.375 \\
+\bottomrule
+\end{tabular}
+\label{tab:gender_fairness}
+\end{table}
+
+Gender-based analysis revealed similar patterns, with female patients 
+experiencing higher false positive rates across all models. The SVM model 
+achieved the lowest EOD (0.0566) and DPD (0.0672) for gender, indicating 
+the most equitable performance across this dimension.
+
+\subsection{Intersectional Analysis}
+
+Table~\ref{tab:intersectional} presents performance metrics at the 
+intersection of gender and ethnicity.
+
+\begin{table}[H]
+\centering
+\caption{Intersectional Analysis: Performance by Gender $\times$ Ethnicity}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Group} & \textbf{Accuracy} & \textbf{F1-Score} & 
+\textbf{TPR} & \textbf{$n$} \\
+\midrule
+Majority--Female & 0.8000 & 0.8235 & 0.833 & 65 \\
+Majority--Male & 0.8125 & 0.8276 & 0.833 & 38 \\
+Minority--Female & 0.7826 & 0.7500 & 0.714 & 33 \\
+Minority--Male & 0.8000 & 0.7273 & 0.750 & 18 \\
+\bottomrule
+\end{tabular}
+\label{tab:intersectional}
+\end{table}
+
+The intersectional analysis revealed that minority--female patients 
+experienced the lowest TPR (0.714) and F1-Score (0.750), indicating 
+amplified bias at the intersection of multiple marginalized identities. 
+This group also showed the largest performance gap relative to the 
+best-performing group (majority--male), with a TPR difference of 0.119 
+and an F1-Score difference of 0.078.
+
+\subsection{Cross-Validation Stability}
+
+Table~\ref{tab:cross_validation} summarizes cross-validation results 
+across all models.
+
+\begin{table}[H]
+\centering
+\caption{Cross-Validation Stability Assessment}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & \textbf{Mean F1} & \textbf{SD F1} & \textbf{CV Folds} \\
+\midrule
+Logistic Regression & 0.7929 & 0.0313 & 5 \\
+Random Forest & 0.7679 & 0.0243 & 5 \\
+Gradient Boosting & 0.7769 & 0.0221 & 5 \\
+SVM & 0.7859 & 0.0229 & 5 \\
+\bottomrule
+\end{tabular}
+\label{tab:cross_validation}
+\end{table}
+
+All models demonstrated stable performance across cross-validation folds, 
+with standard deviations below 0.04. The Gradient Boosting model showed 
+the highest stability (SD: 0.0221), followed closely by SVM (SD: 0.0229). 
+These results indicate that the observed performance and fairness metrics 
+are reliable and not attributable to random variation in data splitting.

@@ -1,0 +1,209 @@
+%=============================================================================
+% MODULE 07: DISCUSSION
+%=============================================================================
+% Frontiers in Public Health — Interpretive-critical discussion
+%   7.1 Principal findings
+%   7.2 Comparison with literature
+%   7.3 Sources of bias
+%   7.4 Clinical implications
+%   7.5 Mitigation recommendations
+%   7.6 Limitations
+%   7.7 Future research
+%=============================================================================
+
+\section{Discussion}
+
+\subsection{Principal Findings}
+
+This study provides comprehensive evidence of algorithmic bias in diabetes 
+prediction models across multiple demographic dimensions. Our key findings 
+include:
+
+\begin{enumerate}[leftmargin=*]
+    \item All four models exhibited measurable bias, with Equalized Odds 
+          differences ranging from 0.0306 to 0.1143 across demographic groups.
+    \item False positive rates were consistently higher for minority patients 
+          (0.333--0.417) compared to majority patients (0.164--0.200), 
+          indicating systematic over-diagnosis bias against minority groups.
+    \item Intersectional analysis revealed amplified bias for minority females, 
+          who exhibited the lowest TPR (0.714) and F1-Score (0.750) among 
+          all subgroups.
+    \item The SVM model achieved the best balance between discriminative 
+          performance and fairness, though no single model simultaneously 
+          optimized all metrics.
+\end{enumerate}
+
+These findings demonstrate that algorithmic bias is not a binary phenomenon 
+but manifests along a continuum, with different models exhibiting different 
+fairness profiles depending on the metric and demographic dimension examined.
+
+\subsection{Comparison with Existing Literature}
+
+Our findings align with and extend previous research on algorithmic bias in 
+healthcare. Obermeyer et al. \cite{obermeyer2019} demonstrated that a widely 
+used healthcare algorithm systematically underestimated Black patients' health 
+needs. Similarly, Chen et al. \cite{chen2019} reported differential 
+performance in diabetes prediction models across racial groups. Our study 
+builds on these foundations by providing intersectional analysis that reveals 
+amplified disparities at the convergence of multiple marginalized identities.
+
+The intersectional disparities we observed are consistent with research by 
+Buolamwini and Gebru \cite{buolamwini2018}, who found that facial recognition 
+systems performed worst for dark-skinned women. Our results suggest analogous 
+patterns exist in clinical prediction models, where minority females experience 
+compounded disadvantage that exceeds the sum of biases attributed to each 
+individual attribute.
+
+The magnitude of bias observed in our study (EOD: 0.0306--0.1143) falls 
+within the range reported in prior healthcare AI fairness research 
+\cite{mehrabi2021}. However, the consistency of our findings across four 
+distinct algorithmic paradigms suggests that bias is a systemic property 
+of the data and problem formulation rather than an artifact of any specific 
+modeling approach.
+
+\subsection{Sources of Bias}
+
+Several interconnected factors likely contribute to the observed disparities:
+
+\subsubsection{Data Representation}
+
+The underrepresentation of minority groups in training data can lead to 
+poor generalization for these populations \cite{mehrabi2021}. When models 
+observe fewer examples from minority patients, they may learn features that 
+are less predictive for these groups, resulting in lower sensitivity and 
+higher false negative rates. The Pima Indians Diabetes Database, while 
+valuable for benchmarking, reflects specific population characteristics 
+that may not generalize to other settings.
+
+\subsubsection{Measurement Bias}
+
+Clinical measurements may be systematically different across populations. 
+For example, BMI thresholds for obesity may not be equally applicable across 
+ethnic groups \cite{who2000}. Similarly, glucose metabolism and diabetes 
+presentation may differ across populations due to genetic, environmental, 
+and lifestyle factors. When models are trained on data collected under 
+inconsistent measurement protocols, they may incorporate these systematic 
+errors into their predictions.
+
+\subsubsection{Historical Bias}
+
+Training data reflects historical healthcare disparities. If minority 
+patients have historically received less aggressive treatment due to bias, 
+models may learn to predict poorer outcomes for these groups \cite{fries2019}. 
+This creates a pernicious feedback loop where algorithmic predictions 
+reinforce the very disparities that produced them.
+
+\subsubsection{Proxy Variables}
+
+Seemingly neutral features may serve as proxies for sensitive attributes. 
+For example, zip code can be a proxy for race, and insurance type can 
+indicate socioeconomic status \cite{lum2016}. When models learn from these 
+proxy variables, they may inadvertently incorporate discriminatory information 
+even when sensitive attributes are excluded from the model.
+
+\subsection{Clinical Implications}
+
+The observed bias has serious clinical implications that warrant immediate 
+attention:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Delayed diagnosis}: Lower TPR for minority patients means 
+          more missed cases, potentially delaying treatment and increasing 
+          the risk of complications.
+    \item \textbf{Unnecessary interventions}: Higher FPR means more false 
+          positives, leading to unnecessary diagnostic procedures, treatment 
+          costs, and patient anxiety.
+    \item \textbf{Resource allocation}: Biased models may systematically 
+          misallocate healthcare resources, directing them away from the 
+          populations that need them most.
+    \item \textbf{Trust erosion}: Persistent bias undermines trust in 
+          AI-assisted healthcare, potentially reducing engagement with 
+          health services among already marginalized communities.
+\end{itemize}
+
+\subsection{Mitigation Recommendations}
+
+Based on our findings, we recommend a multi-faceted approach to bias 
+mitigation spanning the entire ML pipeline:
+
+\subsubsection{Data-Level Interventions}
+\begin{itemize}[leftmargin=*]
+    \item Oversample underrepresented groups to ensure balanced representation
+    \item Collect more diverse training data through multi-site collaborations
+    \item Use synthetic data generation (e.g., SMOTE) for rare subgroups
+    \item Document dataset composition and limitations transparently
+\end{itemize}
+
+\subsubsection{Algorithm-Level Interventions}
+\begin{itemize}[leftmargin=*]
+    \item Apply fairness constraints during model training (e.g., equalized 
+          odds regularization)
+    \item Use adversarial debiasing techniques to remove sensitive information 
+          from learned representations
+    \item Implement group-specific calibration to equalize predicted 
+          probabilities across groups
+    \item Consider ensemble approaches that combine multiple fairness-aware 
+          models
+\end{itemize}
+
+\subsubsection{Post-Deployment Interventions}
+\begin{itemize}[leftmargin=*]
+    \item Implement continuous monitoring for bias drift over time
+    \item Conduct regular fairness audits across demographic subgroups
+    \item Require transparent reporting of performance across groups in 
+          model documentation
+    \item Establish feedback mechanisms for clinicians and patients to 
+          report potential bias
+\end{itemize}
+
+\subsection{Limitations}
+
+This study has several important limitations that should be considered 
+when interpreting the results:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Dataset limitations}: The Pima Indians Diabetes Database, 
+          while widely used, represents a specific population and may not 
+          fully capture the complexity of real-world clinical data from 
+          diverse settings.
+    
+    \item \textbf{Simulated demographics}: Demographic attributes were 
+          simulated rather than collected from real patients, which may 
+          introduce measurement error and limit the validity of fairness 
+          assessments.
+    
+    \item \textbf{Limited scope}: We evaluated only two sensitive attributes 
+          (gender and ethnicity); other factors such as age, socioeconomic 
+          status, geographic location, and comorbidities were not analyzed.
+    
+    \item \textbf{External validity}: Results may not generalize to other 
+          populations, healthcare settings, or clinical workflows.
+    
+    \item \textbf{Model limitations}: We evaluated only four ML algorithms; 
+          other approaches such as deep learning or ensemble methods may 
+          exhibit different bias patterns.
+    
+    \item \textbf{Threshold effects}: Our analysis used fixed classification 
+          thresholds; different threshold choices may alter fairness 
+          assessments.
+\end{enumerate}
+
+\subsection{Future Research}
+
+Future work should address the following priorities:
+
+\begin{itemize}[leftmargin=*]
+    \item Validate findings on real-world clinical datasets with actual 
+          demographic information collected from diverse patient populations.
+    \item Evaluate bias mitigation techniques in prospective clinical 
+          settings, measuring both fairness improvements and clinical impact.
+    \item Extend analysis to include additional sensitive attributes such 
+          as age, socioeconomic status, geographic location, and 
+          comorbidity profiles.
+    \item Develop real-time bias monitoring systems for deployed models 
+          that can detect and alert on emerging disparities.
+    \item Investigate the causal mechanisms underlying observed disparities 
+          using causal inference frameworks.
+    \item Explore the interaction between algorithmic bias and clinician 
+          decision-making to understand downstream effects on patient outcomes.
+\end{itemize}

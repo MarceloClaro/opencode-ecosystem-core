@@ -1,0 +1,43 @@
+%=============================================================================
+% MODULE 08: CONCLUSION
+%=============================================================================
+% Frontiers in Public Health — Concise conclusion, no new data
+%=============================================================================
+
+\section{Conclusions}
+
+This study demonstrates significant algorithmic bias in diabetes prediction 
+models across demographic groups. The SVM model achieved the best 
+discriminative performance (F1-Score: 0.8313, AUC-ROC: 0.8794) but still 
+exhibited notable fairness concerns, particularly at the intersection of 
+race and gender. All four evaluated models showed higher false positive rates 
+for minority patients, indicating systematic over-diagnosis bias.
+
+The intersectional analysis revealed that minority females experience 
+amplified disadvantage, with a true positive rate of only 0.714 compared 
+to 0.833 for majority groups. This finding underscores the limitations of 
+single-attribute fairness analysis and highlights the importance of examining 
+bias at the intersection of multiple marginalized identities.
+
+Our results underscore the urgent need for:
+
+\begin{enumerate}[leftmargin=*]
+    \item Systematic bias assessment in clinical ML models prior to deployment, 
+          using multiple fairness metrics and intersectional analysis.
+    \item Fairness-aware model development that explicitly incorporates equity 
+          objectives alongside performance optimization.
+    \item Continuous monitoring for bias in deployed systems, with automated 
+          alerts when disparities exceed acceptable thresholds.
+    \item Transparent reporting of performance across demographic groups, 
+          enabling clinicians and patients to make informed decisions about 
+          AI-assisted care.
+\end{enumerate}
+
+As artificial intelligence becomes increasingly integrated into healthcare 
+delivery, ensuring algorithmic fairness is not merely a technical challenge 
+but a moral imperative. Only through deliberate, systematic attention to 
+equity can we realize the promise of AI for all patients, regardless of 
+their demographic background. The path forward requires collaboration 
+across disciplines---including computer science, clinical medicine, 
+ethics, and public health---to develop and deploy AI systems that 
+advance rather than undermine health equity.

@@ -1,0 +1,128 @@
+%=============================================================================
+% MAIN.TEX — UNIFIED MANUSCRIPT (English)
+%=============================================================================
+% Frontiers in Public Health — Main document
+% Order: Title → Abstract → Intro → Review → Methods → 
+%        Results → Discussion → Conclusion → Figures → References
+%=============================================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------------------------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{subcaption}
+
+% ---------------------------------------------------------------------------
+% GLOBAL SETTINGS
+% ---------------------------------------------------------------------------
+\geometry{margin=2.5cm}
+\onehalfspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Algorithmic Bias in Diabetes Diagnosis},
+    pdfauthor={Marcelo Claro Laranjeira},
+}
+
+% ---------------------------------------------------------------------------
+% DOCUMENT START
+% ---------------------------------------------------------------------------
+\begin{document}
+
+% Module 01 — Title, authors and affiliations
+\input{modules/01-title.tex}
+
+% Module 02 — Abstract and keywords
+\input{modules/02-resumo.tex}
+
+% Module 03 — Introduction
+\input{modules/03-introduction.tex}
+
+% Module 04 — Literature Review
+\input{modules/04-literature-review.tex}
+
+% Module 05 — Methodology
+\input{modules/05-methodology.tex}
+
+% Module 06 — Results
+\input{modules/06-results.tex}
+
+% Module 07 — Discussion
+\input{modules/07-discussion.tex}
+
+% Module 08 — Conclusion
+\input{modules/08-conclusion.tex}
+
+% ---------------------------------------------------------------------------
+% FIGURES
+% ---------------------------------------------------------------------------
+\clearpage
+\section*{Figures}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_performance.png}
+\caption{Model Performance Comparison. (A) Test F1-Score, (B) AUC-ROC, 
+(C) 5-Fold Cross-Validation F1-Score. Dashed red lines indicate mean 
+performance across all models.}
+\label{fig:performance}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig2_fairness_heatmap.png}
+\caption{Fairness Metrics Heatmap. (A) Ethnicity-based fairness metrics, 
+(B) Gender-based fairness metrics. Color intensity indicates metric 
+magnitude (darker = higher bias). EOD: Equalized Odds Difference, 
+DPD: Demographic Parity Difference, FPR: False Positive Rate.}
+\label{fig:heatmap}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig3_intersectional.png}
+\caption{Intersectional Analysis (Gender $\times$ Ethnicity). 
+(A) Accuracy by subgroup, (B) F1-Score by subgroup, (C) True Positive 
+Rate by subgroup. Minority-Female group shows lowest performance across 
+all metrics, indicating amplified bias at the intersection.}
+\label{fig:intersectional}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig4_fpr_disparity.png}
+\caption{False Positive Rate Disparity by Ethnicity. Red bars (Minority) 
+consistently exceed blue bars (Majority) across all models, indicating 
+systematic over-diagnosis bias. Gap values ($\Delta$) shown above each 
+model.}
+\label{fig:fpr_disparity}
+\end{figure}
+
+% Module 09 — References
+\input{modules/09-references.tex}
+
+% ---------------------------------------------------------------------------
+% DOCUMENT END
+% ---------------------------------------------------------------------------
+\end{document}

@@ -1,0 +1,39 @@
+%=============================================================================
+% MODULE 02: ABSTRACT AND KEYWORDS
+%=============================================================================
+% Frontiers in Public Health — Structured abstract (max 250 words)
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+% ABSTRACT
+%-----------------------------------------------------------------------------
+\section*{Abstract}
+
+\textbf{Background}: Algorithmic bias in healthcare artificial intelligence 
+threatens equitable care delivery. Diabetes prediction models may 
+systematically disadvantage underrepresented populations, exacerbating 
+existing health disparities.
+
+\textbf{Methods}: We evaluated four machine learning classifiers (Logistic 
+Regression, Random Forest, Gradient Boosting, SVM) on the Pima Indians 
+Diabetes Database (768 samples, 8 features) using 5-fold stratified 
+cross-validation. Performance was assessed across demographic subgroups 
+defined by gender and ethnicity. Fairness was quantified using Equalized 
+Odds and Demographic Parity metrics. Intersectional analysis examined bias 
+at the intersection of gender and ethnicity.
+
+\textbf{Results}: The SVM model achieved the best performance (F1: 0.8313, 
+AUC-ROC: 0.8794, CV: 0.7859±0.0229). All models exhibited bias, with 
+Equalized Odds differences ranging from 0.0306 to 0.1143 across groups. 
+False positive rates were consistently higher for minority patients 
+(0.333--0.417) compared to majority patients (0.164--0.200). Intersectional 
+analysis revealed amplified bias for minority females (TPR: 0.714, F1: 0.750).
+
+\textbf{Conclusions}: Significant algorithmic bias exists across demographic 
+groups in diabetes prediction models. Minority females experience compounded 
+disadvantage at the intersection of multiple marginalized identities. 
+Fairness-aware development, continuous monitoring, and transparent reporting 
+are essential for equitable clinical AI deployment.
+
+\textbf{Keywords}: algorithmic bias, diabetes, equity, machine learning, 
+underrepresented populations, intersectionality, public health.

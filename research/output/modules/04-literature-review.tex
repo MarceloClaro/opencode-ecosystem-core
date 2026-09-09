@@ -1,0 +1,196 @@
+%=============================================================================
+% MODULE 04: LITERATURE REVIEW
+%=============================================================================
+% Frontiers in Public Health — Thematic narrative-critical review
+%   Block 1: Algorithmic bias in healthcare
+%   Block 2: Diabetes disparities
+%   Block 3: Fairness metrics
+%   Block 4: Mitigation strategies
+%   Block 5: Intersectionality
+%=============================================================================
+
+\section{Literature Review}
+
+\subsection{Algorithmic Bias in Healthcare}
+
+Algorithmic bias has been documented across numerous healthcare applications, 
+from risk prediction to diagnostic imaging \cite{rajkomar2018}. A landmark 
+study by Obermeyer et al. \cite{obermeyer2019} revealed that a widely used 
+healthcare algorithm systematically underestimated the health needs of Black 
+patients by using healthcare costs as a proxy for health status, failing to 
+account for structural barriers to accessing care. This finding underscored 
+how seemingly objective algorithmic decisions can embed and scale historical 
+inequities.
+
+In diabetes specifically, Chen et al. \cite{chen2019} demonstrated that 
+prediction models trained on electronic health records showed differential 
+performance across racial groups, with higher false-negative rates for 
+minority populations. Similarly, a systematic review by Rajkomar et al. 
+\cite{rajkomar2018} identified performance disparities in clinical ML 
+models across demographic subgroups, particularly in settings with imbalanced 
+representation.
+
+The sources of algorithmic bias are multifaceted \cite{mehrabi2021}:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Historical bias}: Past discrimination embedded in training 
+          data, reflecting unequal healthcare access and treatment patterns.
+    \item \textbf{Representation bias}: Underrepresentation of certain groups 
+          in training datasets, leading to poor generalization for these 
+          populations.
+    \item \textbf{Measurement bias}: Inconsistent data collection protocols 
+          across populations, introducing systematic errors.
+    \item \textbf{Aggregation bias}: One-size-fits-all models that ignore 
+          meaningful population differences in disease presentation and 
+          progression.
+\end{itemize}
+
+\subsection{Diabetes Disparities}
+
+Diabetes disproportionately affects marginalized communities due to social 
+determinants of health \cite{narayan2017}. The International Diabetes 
+Federation \cite{idf2021} reports that low- and middle-income countries bear 
+the greatest burden, with prevalence rates exceeding those in high-income 
+settings by 2--3 fold. Within high-income countries, racial and ethnic 
+minorities consistently experience higher prevalence and worse outcomes.
+
+The Centers for Disease Control and Prevention \cite{cdc2020} reports 
+significant racial and ethnic disparities in the United States, as summarized 
+in Table~\ref{tab:diabetes_disparities}.
+
+\begin{table}[H]
+\centering
+\caption{Diabetes Prevalence by Race/Ethnicity in the United States 
+(Source: CDC, 2020)}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Group} & \textbf{Prevalence (\%)} & \textbf{Relative Risk} \\
+\midrule
+White & 7.4 & 1.00 \\
+Black & 11.7 & 1.58 \\
+Hispanic & 12.5 & 1.69 \\
+Asian & 8.0 & 1.08 \\
+American Indian & 14.7 & 1.99 \\
+\bottomrule
+\end{tabular}
+\label{tab:diabetes_disparities}
+\end{table}
+
+These disparities are driven by multiple interconnected factors 
+\cite{hill2022}: unequal access to healthcare services, higher rates of 
+obesity and physical inactivity, food insecurity and limited access to 
+healthy foods, chronic stress from discrimination, and lower socioeconomic 
+status. When ML models are trained on data reflecting these disparities 
+without appropriate correction, they may learn and perpetuate these inequities, 
+creating a feedback loop that further marginalizes already disadvantaged 
+populations.
+
+\subsection{Fairness Metrics}
+
+Multiple fairness metrics have been proposed to quantify algorithmic bias 
+\cite{corbett2018}. The most commonly used metrics include:
+
+\subsubsection{Equalized Odds}
+
+Equalized Odds, introduced by Hardt et al. \cite{hardt2016}, requires that 
+the true positive rate (sensitivity) and false positive rate (1 - specificity) 
+are equal across groups:
+
+\begin{equation}
+P(\hat{Y}=1 \mid Y=1, A=a) = P(\hat{Y}=1 \mid Y=1, A=b) \quad \forall a,b
+\label{eq:eo_tpr}
+\end{equation}
+
+\begin{equation}
+P(\hat{Y}=1 \mid Y=0, A=a) = P(\hat{Y}=1 \mid Y=0, A=b) \quad \forall a,b
+\label{eq:eo_fpr}
+\end{equation}
+
+\noindent where $\hat{Y}$ is the predicted outcome, $Y$ is the true outcome, 
+and $A$ is the sensitive attribute. Equalized Odds is particularly relevant 
+in clinical settings where both missed diagnoses (false negatives) and 
+unnecessary interventions (false positives) carry significant consequences.
+
+\subsubsection{Demographic Parity}
+
+Demographic Parity requires that the prediction is statistically independent 
+of the sensitive attribute \cite{dwork2012}:
+
+\begin{equation}
+P(\hat{Y}=1 \mid A=a) = P(\hat{Y}=1 \mid A=b) \quad \forall a,b
+\label{eq:dp}
+\end{equation}
+
+While simpler to implement, Demographic Parity does not account for 
+legitimate differences in base rates across groups, which may lead to 
+paradoxical conclusions.
+
+\subsubsection{Calibration}
+
+A model is well-calibrated if the predicted probabilities match the true 
+outcome rates across groups \cite{chouldechova2017}:
+
+\begin{equation}
+P(Y=1 \mid \hat{P}=p, A=a) = P(Y=1 \mid \hat{P}=p, A=b) \quad \forall a,b,p
+\label{eq:cal}
+\end{equation}
+
+Chouldechova \cite{chouldechova2017} demonstrated that except in trivial 
+cases, it is impossible to simultaneously satisfy calibration, equalized 
+odds, and predictive parity, necessitating careful consideration of which 
+fairness criterion is most appropriate for the clinical context.
+
+\subsection{Bias Mitigation Strategies}
+
+Bias mitigation strategies can be categorized by their position in the 
+ML pipeline \cite{friedler2019}:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Pre-processing} (data-level): Modify training data to 
+          remove bias before model training. Techniques include reweighting 
+          (assigning different weights to samples), resampling (oversampling 
+          underrepresented groups), and data augmentation (generating synthetic 
+          samples using SMOTE or similar methods).
+    
+    \item \textbf{In-processing} (algorithm-level): Modify the learning 
+          algorithm to incorporate fairness constraints. Approaches include 
+          adversarial debiasing (removing sensitive information from learned 
+          representations), fairness-constrained optimization, and 
+          regularization methods that penalize unfair predictions.
+    
+    \item \textbf{Post-processing} (prediction-level): Modify model 
+          predictions to achieve fairness. Methods include threshold adjustment 
+          (applying different decision thresholds per group), calibration 
+          (equalizing predicted probabilities), and reject option (abstaining 
+          from prediction on uncertain cases).
+\end{enumerate}
+
+Each category offers distinct advantages and trade-offs. Pre-processing 
+methods are model-agnostic but may reduce overall accuracy. In-processing 
+methods optimize fairness and accuracy jointly but require algorithmic 
+modification. Post-processing methods are flexible but may not address 
+the root causes of bias.
+
+\subsection{Intersectionality in Algorithmic Fairness}
+
+Intersectionality theory, originally proposed by Crenshaw \cite{crenshaw1989}, 
+highlights how multiple forms of discrimination interact to create unique 
+modes of disadvantage. In algorithmic fairness, intersectional analysis 
+examines bias at the intersection of multiple sensitive attributes (e.g., 
+race \textit{and} gender) rather than each attribute independently 
+\cite{buolamwini2018}.
+
+Buolamwini and Gebru \cite{buolamwini2018} demonstrated this phenomenon 
+in facial recognition systems, where commercial classifiers exhibited 
+significant performance disparities for darker-skinned women, despite 
+reasonable accuracy for lighter-skinned individuals and men. This finding 
+highlighted the limitations of single-attribute fairness analysis and the 
+importance of examining intersectional effects.
+
+In healthcare contexts, intersectional bias is particularly concerning 
+because health disparities often cluster along multiple dimensions. 
+Individuals who are simultaneously members of multiple marginalized groups 
+may experience compounded disadvantage that is not captured by analyzing 
+each attribute in isolation. Despite its importance, intersectional analysis 
+remains underrepresented in healthcare AI fairness research, representing 
+a critical gap that this study addresses.

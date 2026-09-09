@@ -1,0 +1,88 @@
+%=============================================================================
+% MODULE 03: INTRODUCTION
+%=============================================================================
+% Frontiers in Public Health — Funnel structure:
+%   broad context → problem → gap → objectives → contribution
+%=============================================================================
+
+\section{Introduction}
+
+\subsection{Background}
+
+Artificial intelligence (AI) and machine learning (ML) are transforming 
+healthcare delivery across multiple domains, from diagnostic imaging to 
+clinical decision support systems \cite{topol2019}. In diabetes care 
+specifically, ML models demonstrate substantial promise for early detection, 
+risk stratification, and personalized treatment recommendations 
+\cite{sd2019, esteva2017}. The global diabetes epidemic, affecting over 
+537 million adults worldwide \cite{idf2021}, demands scalable and accurate 
+screening tools that can operate effectively across diverse populations.
+
+However, growing evidence suggests that these technologies may perpetuate 
+or amplify existing health disparities through algorithmic bias 
+\cite{mehrabi2021}. Algorithmic bias in healthcare refers to systematic 
+and unfair discrimination against certain groups, often rooted in historical 
+data that reflects societal inequities \cite{barocas2019}. In diabetes 
+diagnosis, biased models may produce less accurate predictions for 
+underrepresented populations, leading to delayed diagnoses, inappropriate 
+treatments, and ultimately worse health outcomes \cite{obermeyer2019}.
+
+The diabetes epidemic disproportionately affects marginalized communities. 
+In the United States, diabetes prevalence is 60\% higher among Black adults 
+and 77\% higher among Hispanic adults compared to White adults \cite{cdc2020}. 
+These disparities are driven by social determinants of health, including 
+access to healthcare, nutrition, and socioeconomic factors \cite{hill2022}. 
+When ML models are trained on data that underrepresents these populations, 
+they may fail to generalize effectively, exacerbating existing inequities.
+
+\subsection{Problem Statement}
+
+Despite growing awareness of algorithmic fairness, few studies have 
+systematically evaluated bias in diabetes prediction models across multiple 
+demographic dimensions simultaneously. Most existing research focuses on 
+single attributes (race \textit{or} gender) rather than examining 
+intersectional effects where multiple forms of disadvantage converge 
+\cite{crenshaw1989, buolamwini2018}. Furthermore, while technical metrics 
+for fairness have been proposed \cite{corbett2018}, their practical 
+implications for clinical decision-making remain insufficiently understood.
+
+The intersectionality framework, originally articulated by Crenshaw 
+\cite{crenshaw1989}, highlights how overlapping identities create unique 
+modes of discrimination that cannot be captured by analyzing each attribute 
+in isolation. In the context of algorithmic fairness, this means that bias 
+experienced by individuals at the intersection of multiple marginalized 
+groups (e.g., minority women) may exceed the sum of biases attributed to 
+each individual group.
+
+\subsection{Objectives}
+
+This study aims to:
+
+\begin{enumerate}[leftmargin=*]
+    \item Evaluate the discriminative performance of four ML models for 
+          diabetes diagnosis across demographic subgroups defined by gender 
+          and ethnicity.
+    \item Quantify algorithmic bias using established fairness metrics, 
+          including Equalized Odds and Demographic Parity.
+    \item Perform intersectional analysis to identify amplified disparities 
+          at the intersection of race and gender.
+    \item Provide evidence-based recommendations for bias mitigation in 
+          clinical ML systems deployed in diabetes care.
+\end{enumerate}
+
+\subsection{Significance and Contribution}
+
+This research contributes to the growing literature on healthcare AI equity 
+through:
+
+\begin{itemize}[leftmargin=*]
+    \item A comprehensive evaluation framework for assessing algorithmic bias 
+          that integrates performance, fairness, and intersectional analysis.
+    \item Empirical evidence of intersectional disparities in diabetes 
+          prediction, extending beyond single-attribute bias assessment.
+    \item Practical guidance for developing fairer clinical AI systems, 
+          including actionable recommendations for data collection, model 
+          development, and deployment monitoring.
+    \item A fully reproducible methodology with open-source code, facilitating 
+          replication and extension by the research community.
+\end{itemize}
