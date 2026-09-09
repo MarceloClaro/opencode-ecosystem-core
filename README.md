@@ -1234,6 +1234,93 @@ flowchart LR
     style SOURCES2 fill:#fff3e0,stroke:#ef6c00
 ```
 
+### Tabela Detalhada: Repositorio de Dados de Pesquisa
+
+#### 160 Propostas de Pesquisa por Dominio
+
+| Dominio | Agente | Propostas | Titulos Principais |
+|---|---|---|---|
+| **Healthcare** | Dr. Healthcare ML PhD | 20 | Interpretabilidade de Modelos de Diagnostico por IA; Predicao de Doencas Cardiacas com Deep Learning; Diagnostico de Câncer por Image Medical; Detecao Precoce de Alzheimer; Classificacao de Exames de Imagem |
+| **Environment** | Dr. Environmental AI PhD | 20 | Predicao de Eventos Climaticos Extremos com GNN; Monitoramento de Desmatamento com Satélites; Qualidade do Ar com IoT e ML; Gestao de Recursos Hidricos; Predicao de Secas |
+| **Social Sciences** | Dr. Social Computing PhD | 20 | Deteccao de Fake News em Saude Publica com LLMs; Analise de Sentimento em Redes Sociais; Polarizacao Politica com NLP; Desigualdade Social com Dados Abertos; Mobilidade Urbana |
+| **Computer Science** | Dr. ML Systems PhD | 20 | Deteccao de Fraude em Tempo Real com GNN; Otimizacao de Redes Neurais; Sistemas de Recomendacao; Seguranca Cibernetica com IA; Compiladores Otimizados |
+| **Engineering** | Dr. Engineering AI PhD | 20 | Manutencao Preditiva com Dados de Vibracao; Otimizacao de Processos Industriais; Materiais Inteligentes; Robótica Colaborativa; Energia Inteligente |
+| **Biology** | Dr. Computational Biology PhD | 20 | Predicao de Estrutura Proteica com LLMs; Genomica Funcional com Single-Cell; Descoberta de Drogas com IA; Evolucao Molecular; Biodiversidade |
+| **Finance** | Dr. Financial AI PhD | 20 | Predicao de Volatilidade com GNN; Deteccao de Lavagem de Dinheiro; Credito Inteligente; Mercados Financeiros com RL; Risco Sistêmico |
+| **Agriculture** | Dr. AgriTech AI PhD | 20 | Deteccao de Pragas em Tempo Real via Drone + IA; Agricultura de Precisao; Qualidade de Solo com Sensoriamento; Genomica de Plantas; Cadeia Produtiva Inteligente |
+| **TOTAL** | **8 Agentes PhD** | **160** | **Cobertura completa em 8 dominios** |
+
+#### 243 Datasets Cientificos por Fonte
+
+| Fonte | Quantidade | Formato | Acesso |
+|---|---|---|---|
+| **Kaggle** | 122 | CSV, JSON | Publico (download direto) |
+| **HuggingFace** | 121 | Parquet, JSON, CSV | Publico (API + download) |
+| **TOTAL** | **243** | Multi-formato | **100% Open Access** |
+
+#### 243 Datasets por Dominio
+
+| Dominio | Datasets | Fontes Principais | Downloads |
+|---|---|---|---|
+| **Environment** | 35 | Kaggle (18), HuggingFace (17) | 1.2M+ |
+| **Social Sciences** | 34 | Kaggle (17), HuggingFace (17) | 980K+ |
+| **Healthcare** | 32 | Kaggle (16), HuggingFace (16) | 1.5M+ |
+| **Finance** | 30 | Kaggle (15), HuggingFace (15) | 850K+ |
+| **Computer Science** | 29 | Kaggle (15), HuggingFace (14) | 1.1M+ |
+| **Biology** | 29 | Kaggle (14), HuggingFace (15) | 720K+ |
+| **Engineering** | 27 | Kaggle (14), HuggingFace (13) | 680K+ |
+| **Agriculture** | 27 | Kaggle (13), HuggingFace (14) | 540K+ |
+| **TOTAL** | **243** | **Kaggle (122) + HuggingFace (121)** | **7.6M+** |
+
+#### Exemplos de Datasets por Dominio
+
+| Dominio | Dataset | Fonte | Tamanho | Downloads |
+|---|---|---|---|---|
+| **Healthcare** | Diabetes | Kaggle | 11.5 KB | 12,620 |
+| **Healthcare** | Heart Disease | Kaggle | 11.3 KB | 8,450 |
+| **Environment** | Climate Change | Kaggle | 1.2 MB | 5,230 |
+| **Finance** | Stock Prices | HuggingFace | 2.3 MB | 15,800 |
+| **Computer Science** | ImageNet Subset | HuggingFace | 156 MB | 45,200 |
+| **Biology** | Genomic Data | Kaggle | 890 KB | 3,120 |
+| **Engineering** | Sensor Data | Kaggle | 2.1 MB | 4,560 |
+| **Agriculture** | Crop Yield | HuggingFace | 456 KB | 2,890 |
+
+#### Acesso aos Dados
+
+| Recurso | URL |
+|---|---|
+| **GitHub (codigo)** | `data/research_proposals.json` |
+| **GitHub (catalogo)** | `data/scientific_datasets_catalog.json` |
+| **HuggingFace** | `huggingface.co/datasets/marceloclaro/opencode-research` |
+| **Kaggle** | `kaggle.com/marceloclaro` |
+| **API** | `python3 -m marceloclaro.cli pesquisa "tema"` |
+
+#### Como Usar os Dados
+
+```bash
+# Carregar propostas de pesquisa
+python3 -c "
+import json
+with open('data/research_proposals.json') as f:
+    data = json.load(f)
+for domain, info in data.items():
+    print(f'{domain}: {len(info[\"proposals\"])} propostas')
+"
+
+# Carregar catalogo de datasets
+python3 -c "
+import json
+with open('data/scientific_datasets_catalog.json') as f:
+    data = json.load(f)
+print(f'Total: {data[\"total_datasets\"]} datasets')
+for ds in data['datasets'][:5]:
+    print(f'  - {ds[\"name\"]} ({ds[\"domain\"]})')
+"
+
+# Buscar dataset especifico
+python3 -m marceloclaro.cli pesquisa "diabetes" --max-papers 5
+```
+
 ---
 
 ## Metricas e Relatorios
