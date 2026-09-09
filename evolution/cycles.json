@@ -8684,6 +8684,35 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R497",
+      "objective": "Fix Mermaid edge label syntax for GitHub compatibility",
+      "changes": [
+        "Replaced all quoted labels with pipe syntax",
+        "GitHub Mermaid renderer only supports -->|label| syntax",
+        "Not --> \"label\" syntax",
+        "All edge labels now use correct Mermaid syntax",
+        "Git commit be232f8, pushed to GitHub"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "GitHub Mermaid renderer uses older version that only supports pipe syntax",
+        "The correct syntax is -->|label| not --> \"label\"",
+        "Pipe characters in edge labels are valid Mermaid syntax",
+        "Quoted strings are not valid for edge labels in older Mermaid versions",
+        "Always test Mermaid diagrams on GitHub before committing"
+      ],
+      "timestamp": 1788923532.9607291,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
