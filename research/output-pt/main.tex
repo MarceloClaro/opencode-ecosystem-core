@@ -88,8 +88,127 @@
 % Conclusão
 \input{modules/08-conclusion}
 
+% ---------------------------------------------------------------------------
+% FIGURAS
+% ---------------------------------------------------------------------------
+\clearpage
+\section*{Figuras}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_performance.png}
+\caption{Comparação de Desempenho dos Modelos. (A) F1-Score no Teste, 
+(B) AUC-ROC, (C) F1-Score da Validação Cruzada em 5 Dobras. Linhas 
+vermelhas tracejadas indicam desempenho médio entre todos os modelos.}
+\label{fig:performance}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig2_fairness_heatmap.png}
+\caption{Mapa de Calor das Métricas de Justiça. (A) Métricas de justiça 
+baseadas em etnia, (B) Métricas de justiça baseadas em gênero. A intensidade 
+da cor indica a magnitude da métrica (mais escuro = viés mais alto). EOD: 
+Diferença de Odds Equalizados, DPD: Diferença de Paridade Demográfica, 
+FPR: Taxa de Falsos Positivos.}
+\label{fig:heatmap}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig3_intersectional.png}
+\caption{Análise Interseccional (Gênero $\times$ Etnia). 
+(A) Acurácia por subgrupo, (B) F1-Score por subgrupo, (C) Taxa de 
+Verdadeiros Positivos por subgrupo. O grupo Minoritário--Feminino 
+apresenta o menor desempenho em todas as métricas, indicando viés 
+amplificado na intersecção.}
+\label{fig:intersectional}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig4_fpr_disparity.png}
+\caption{Disparidade de Taxa de Falsos Positivos por Etnia. Barras 
+vermelhas (Minoritário) consistentemente excedem barras azuis (Majoritário) 
+em todos os modelos, indicando viés sistemático de sobre-diagnóstico. 
+Valores de gap ($\Delta$) mostrados acima de cada modelo.}
+\label{fig:fpr_disparity}
+\end{figure}
+
 % Referências
-\newpage
 \input{modules/09-references}
 
+% ---------------------------------------------------------------------------
+% MATÉRIA COMPLEMENTAR
+% ---------------------------------------------------------------------------
+\clearpage
+
+% Contribuição do Autor
+\section*{Contribuição do Autor}
+
+\textbf{Marcelo Claro Laranjeira}: Conceitualização, Metodologia, Software, 
+Validação, Análise Formal, Investigação, Curadoria de Dados, Escrita -- 
+Rascunho Original, Escrita -- Revisão \& Edição, Visualização, Administração 
+do Projeto.
+
+O autor confirma responsabilidade exclusiva por todos os aspectos do estudo, 
+desde a concepção até a preparação final do manuscrito.
+
+% Disponibilidade dos Dados
+\section*{Declaração de Disponibilidade dos Dados}
+
+O Banco de Dados de Diabetes dos Índios Pima utilizado neste estudo está 
+publicamente disponível no Repositório de Aprendizado de Máquina UCI 
+(\url{https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes}). 
+O conjunto de dados foi originalmente coletado pelo Instituto Nacional de 
+Diabetes e Doenças Digestivas e Renais e tem sido amplamente utilizado para 
+benchmarking de modelos de aprendizado de máquina. Todos os dados utilizados 
+neste estudo são livremente acessíveis sem restrições. Os atributos 
+demográficos (gênero e etnia) foram simulados para fins de análise de 
+justiça, conforme descrito na seção de Metodologia. Todo o código gerado 
+para este estudo está disponível em 
+\url{https://github.com/MarceloClaro/opencode-ecosystem-core}.
+
+% Disponibilidade do Código
+\section*{Disponibilidade do Código}
+
+Todo o código experimental, incluindo pré-processamento de dados, treinamento 
+de modelos, análise de justiça e geração de figuras, está publicamente 
+disponível em \url{https://github.com/MarceloClaro/opencode-ecosystem-core}. 
+O código foi implementado em Python 3.10 usando scikit-learn 1.3.0, 
+pandas 2.1.0, numpy 1.25.0 e matplotlib 3.7.0. A semente aleatória foi 
+fixada em 42 para reprodutibilidade.
+
+% Financiamento
+\section*{Financiamento}
+
+Esta pesquisa não recebeu nenhum financiamento específico de agências de 
+fomento nos setores público, comercial ou sem fins lucrativos.
+
+% Conflitos de Interesse
+\section*{Conflitos de Interesse}
+
+O autor declara não haver conflitos de interesse.
+
+% Declaração de Ética
+\section*{Aprovação em Comitê de Ética}
+
+Este estudo utilizou dados publicamente disponíveis e anonimizados do 
+Repositório de Aprendizado de Máquina UCI. Não foi necessária aprovação 
+de comitê de ética em pesquisa, pois o estudo não envolveu pesquisa com 
+seres humanos, experimentos animais ou coleta de informações pessoais 
+identificáveis.
+
+% Agradecimentos
+\section*{Agradecimentos}
+
+O autor agradece à Equipe de Pesquisa do OpenCode Ecosystem por fornecer 
+a infraestrutura computacional e o arcabouço de pesquisa utilizado neste 
+estudo. Agradecimentos especiais ao Repositório de Aprendizado de Máquina 
+UCI por manter o Banco de Dados de Diabetes dos Índios Pima como recurso 
+de acesso aberto para a comunidade de pesquisa.
+
+% ---------------------------------------------------------------------------
+% FIM DO DOCUMENTO
+% ---------------------------------------------------------------------------
 \end{document}
