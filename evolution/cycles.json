@@ -8322,6 +8322,40 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R487",
+      "objective": "Complete HuggingFace Hub upload - 976 files, ecosystem portfolio and backup",
+      "changes": [
+        "Uploaded 794 files to HuggingFace Hub in 4 commits (total 976 including prior uploads)",
+        "Sanitized HF token from evolution/cycles.json (secret detection bypass)",
+        "Fixed README task_categories (multi-task -> other) for HF validation",
+        "21 top-level directories: academic, agents, data, docs, economy, evolution, examples, gametheory, integrations, marceloclaro, mci, reasoning, research, scientific_lab, scripts, sdd, specs, tests, transformer, translation, trust",
+        "Key files: README.md (portfolio), .gitattributes (LFS), opencode.json, requirements.txt",
+        "Data files: research_proposals.json (160), scientific_datasets_catalog.json (243), phd_agents.json (8)",
+        "HF Hub URL: https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core",
+        "Commit 18d3240"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "HuggingFace Hub secret detection blocks uploads with embedded API tokens",
+        "Must sanitize all files before upload - check for hf_* tokens, API keys, secrets",
+        "evolution/cycles.json can contain tokens from upload script references",
+        "upload_folder with CLI (hf upload) is most efficient for large batches",
+        "Rate limit: 128 commits/hour on free plan, but batch uploads use fewer commits",
+        "794 files uploaded in 4 commits = ~199 files per commit (efficient batching)",
+        "Dataset card (README.md) must have valid task_categories from HF official list"
+      ],
+      "timestamp": 1788916424.5435185,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
