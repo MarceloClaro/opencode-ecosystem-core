@@ -50,3 +50,13 @@ de exigir que o repositório permaneça congelado no commit anterior.
 - convergência entre laboratórios não constitui verdade científica.
 - GRADE, inferência causal, recomendações e promoção de claims continuam sob os
   gates humanos definidos na supercamada.
+
+## Apêndice R470 — resolvedor restrito opt-in (desabilitado por omissão)
+
+O padrão permanece `open_science_only`; nenhum fluxo aberto deriva para
+restrito automaticamente. O opt-in exige habilitação, política, allowlist,
+autorização humana, base legal declarada e evidência referenciada, com recibos
+auditáveis (`scientific_lab/restricted_resolver.py`). Sem configuração, toda
+tentativa é negada (fail-closed). Detalhes em
+`specs/SPEC-935-R470-resolvedor-acesso-restrito-opcional.md`; isto não é
+aconselhamento jurídico.
