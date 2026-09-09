@@ -8647,6 +8647,43 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R496",
+      "objective": "Fix all Mermaid diagrams rendering errors on GitHub",
+      "changes": [
+        "Replaced all pipe-based edge labels with quoted labels",
+        "Changed subgraph IDs from L1-L5 to C1-C5 to avoid number conflicts",
+        "Removed numbers from node labels (1 Seleciona Agente -> Seleciona Agente)",
+        "Simplified labels (removed numbers like 20, 243M, 150M)",
+        "Changed SDD Spec-Driven to SDD Spec Driven (removed dash)",
+        "Changed TDD Test-Driven to TDD Test Driven (removed dash)",
+        "Simplified Agent Pool 205 to Agent Pool",
+        "Changed Camada 1 Interface to Interface",
+        "Changed Busca Multi-Fonte to Busca Multi Fonte",
+        "All flowcharts now use simplified syntax for GitHub compatibility",
+        "Git commit 3cb32ed, pushed to GitHub"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "GitHub Mermaid renderer fails with pipe characters in edge labels",
+        "Quoted labels work better than pipe-based labels",
+        "Subgraph IDs with numbers can cause conflicts with node IDs",
+        "Numbers in node labels can cause parsing issues",
+        "Dashes in subgraph labels can cause issues",
+        "Simplified labels render more reliably",
+        "All 20+ flowcharts now use consistent, simplified syntax"
+      ],
+      "timestamp": 1788922561.388682,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
