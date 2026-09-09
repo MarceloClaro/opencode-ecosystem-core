@@ -1,53 +1,62 @@
-# HuggingFace Hub — Configuração do Profile (Passos Manuais)
+# Configuração do Profile HuggingFace Hub
 
-## Status Atual
+> **Guia passo a passo para configurar seu profile no HuggingFace Hub.**
+> Este guia é para iniciantes.
 
-| Item | Status | Método |
-|---|---|---|
-| Repositório criado | ✅ | API |
-| 976 arquivos uploadados | ✅ | CLI |
-| Dataset card (README) | ✅ | Arquivo |
-| .gitattributes (LFS) | ✅ | Arquivo |
-| Repo público | ✅ | API |
-| Repo non-gated | ✅ | API |
-| **Bio do profile** | ⏳ | **Web UI** |
-| **Links do profile** | ⏳ | **Web UI** |
-| **Foto do profile** | ⏳ | **Web UI** |
-| **Collection** | ⏳ | **Web UI** |
+---
 
-## Passo 1: Atualizar Bio do Profile
+## O que é o HuggingFace Hub?
 
-1. Acesse: https://huggingface.co/settings/profile
-2. No campo **"Full name"**, mantenha: `Marcelo Claro`
-3. No campo **"Bio"**, adicione:
+O HuggingFace Hub é uma plataforma para compartilhar modelos, datasets e projetos de IA. Configurar seu profile ajuda outras pessoas a encontrarem seu trabalho.
+
+---
+
+## Passo 1: Acesse seu Profile
+
+1. Abra o navegador
+2. Acesse: https://huggingface.co/settings/profile
+3. Faça login com sua conta
+
+---
+
+## Passo 2: Atualize sua Bio
+
+1. Na página de configurações, encontre o campo **"Bio"**
+2. Copie e cole:
 
 ```
-OpenCode Ecosystem Core Developer | Multi-Agent Orchestration | Scientific Research Automation | 205 Agents, 303 Specs, 160 Research Proposals | Qualis A1 Auto-Score 97/100
+OpenCode Ecosystem Core Developer | Multi-Agent Orchestration | Scientific Research Automation | 205 Agents, 303 Specs, 160 Research Proposals
 ```
 
-4. Clique em **"Save"**
+3. Clique em **"Save"**
 
-## Passo 2: Adicionar Links
+---
 
-1. Na mesma página de profile
-2. Seção **"Links"** ou **"Social"**
-3. Adicione:
+## Passo 3: Adicione Links
+
+1. Na mesma página, encontre a seção **"Links"**
+2. Adicione:
 
 | Tipo | URL |
 |---|---|
 | GitHub | `https://github.com/MarceloClaro` |
 | Website | `https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core` |
-| Twitter/X | (se disponível) |
 
-4. Clique em **"Save"**
+3. Clique em **"Save"**
 
-## Passo 3: Foto do Profile
+---
 
-1. Na página de profile, clique no **ícone de avatar**
-2. Faça upload de uma foto profissional
-3. Recomendação: foto com fundo neutro, olhando para câmera
+## Passo 4: Adicione uma Foto
 
-## Passo 4: Criar Collection
+1. Clique no ícone de avatar (foto de perfil)
+2. Faça upload de uma foto sua
+3. Recomendação: foto com fundo neutro
+
+---
+
+## Passo 5: Crie uma Collection
+
+Uma Collection é como uma pasta para organizar seus repositórios.
 
 1. Acesse: https://huggingface.co/collections
 2. Clique em **"New collection"**
@@ -56,42 +65,60 @@ OpenCode Ecosystem Core Developer | Multi-Agent Orchestration | Scientific Resea
 | Campo | Valor |
 |---|---|
 | **Name** | `OpenCode Ecosystem` |
-| **Description** | `Ecossistema completo de orquestração multi-agente, pesquisa científica e automação - 205 agentes, 303 specs, 160 propostas de pesquisa` |
+| **Description** | `Ecossistema completo de orquestração multi-agente e pesquisa científica` |
 | **Visibility** | Public |
 
-4. Adicione os seguintes repositórios à collection:
-
-| Repositório | Tipo |
-|---|---|
-| `marceloclaro/opencode-ecosystem-core` | Dataset |
-| `marceloclaro/opencode-research` | Dataset |
+4. Adicione seus repositórios:
+   - `marceloclaro/opencode-ecosystem-core`
+   - `marceloclaro/opencode-research`
 
 5. Clique em **"Create"**
 
-## Passo 5: Verificar Repositórios
+---
+
+## Verificação
 
 Após configurar, verifique:
 
-1. https://huggingface.co/marceloclaro — Profile page
-2. https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core — Main repo
-3. https://huggingface.co/datasets/marceloclaro/opencode-research — Research repo
-4. https://huggingface.co/collections — Collection page
+1. https://huggingface.co/marceloclaro — Seu profile
+2. https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core — Repo principal
+3. https://huggingface.co/collections — Suas collections
 
-## URLs Importantes
+---
+
+## Problemas Comuns
+
+### "Não consigo salvar as mudanças"
+
+- Verifique se está logado
+- Tente recarregar a página
+- Limpe o cache do navegador
+
+### "Não consigo criar a collection"
+
+- Verifique se tem permissão
+- Tente usar outro navegador
+
+### "A foto não carrega"
+
+- Use formatos: JPG, PNG ou GIF
+- Tamanho máximo: 10MB
+- Resolução recomendada: 400x400 pixels
+
+---
+
+## Links Úteis
 
 | Recurso | URL |
 |---|---|
-| Profile | https://huggingface.co/marceloclaro |
-| Settings | https://huggingface.co/settings/profile |
-| Core Repo | https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core |
-| Research Repo | https://huggingface.co/datasets/marceloclaro/opencode-research |
-| Collections | https://huggingface.co/collections |
-| API Token | `hf_***REDACTED***` |
+| **Profile** | https://huggingface.co/settings/profile |
+| **Collections** | https://huggingface.co/collections |
+| **Documentação** | https://huggingface.co/docs/hub |
 
-## Notas
+---
 
-- O profile já tem avatar (produção HF)
-- Repos são públicos e non-gated
-- Dataset card está completo com YAML metadata
-- .gitattributes configurado para LFS automático
-- 976 arquivos uploadados com sucesso
+<div align="center">
+
+**Voltar ao [README Principal](README.md)**
+
+</div>
