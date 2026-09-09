@@ -8452,6 +8452,46 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R491",
+      "objective": "Redesign README.md with dynamic Mermaid flowcharts for better UX",
+      "changes": [
+        "Created 7+ interactive Mermaid diagrams:",
+        "  1. Architecture Overview — color-coded subsystems (Entry, Core, SDD, Agents, Integrations, Output)",
+        "  2. Technical Architecture — 5-layer structure (Interface, Orchestration, Memory, Execution, Integration)",
+        "  3. Main Workflow — 6-step cycle with decision gates",
+        "  4. Decision Flow — agent selection by task type",
+        "  5. Academic Pipeline — 5-phase flow (Discovery, Research, Analysis, Writing, Publication)",
+        "  6. SDD/TDD Cycle — red-green-refactor with gate validation",
+        "  7. Agent Distribution — pie chart + detailed agent map",
+        "  8. Data Flow — catalog, domains, and sources",
+        "  9. Contributing Flow — fork to merge process",
+        "Improved UX: navigation table, color-coded sections, badges, emoji icons",
+        "Quick command reference table by user level",
+        "Document guide sorted by expertise level",
+        "Important limitations section clearly stated",
+        "Git commit b217b21, pushed to GitHub"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Mermaid diagrams render natively on GitHub — no external tools needed",
+        "Color coding improves visual scanning and comprehension",
+        "Navigation tables at top reduce scroll depth for experienced users",
+        "Pie charts are effective for showing distribution (agent domains)",
+        "Subgraph nesting in Mermaid creates clear visual hierarchy",
+        "Emoji icons improve scannability in technical documentation"
+      ],
+      "timestamp": 1788919060.4338799,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
