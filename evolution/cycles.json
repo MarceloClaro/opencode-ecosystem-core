@@ -8287,6 +8287,41 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R486",
+      "objective": "Configure HuggingFace Hub as ecosystem portfolio, repository, and backup",
+      "changes": [
+        "Created HF_README.md: comprehensive dataset card with YAML metadata, portfolio documentation, full repository structure",
+        "Created .gitattributes.hf: LFS tracking for binary files (images, models, data, archives)",
+        "Updated scripts/upload_to_hf_hub.py: includes README and .gitattributes in staging",
+        "HF Hub repo: marceloclaro/opencode-ecosystem-core (144/794 files uploaded, rate limited)",
+        "HF Hub repo: marceloclaro/opencode-research (3 catalogs uploaded)",
+        "Portfolio documents: 160 proposals, 243 datasets, 8 PhD agents, 8 ML experiments, auto-score 97/100",
+        "Backup purpose: complete ecosystem mirror with all modules, data, specs, agents, tests",
+        "Rate limit strategy: 128 commits/hour (free plan), upload_folder for batch upload, ~40min cooldown",
+        "Git commit b71dc55"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "HuggingFace Hub free plan: 128 commits/hour limit is strict for large repos",
+        "upload_folder() is more efficient than individual upload_file() for batch operations",
+        "Dataset card (README.md with YAML metadata) is required for proper HF Hub display",
+        ".gitattributes for LFS is essential for binary files (images, models, data)",
+        "Profile updates require web UI, not API - focus on repo-level configuration",
+        "Staging directory approach (/tmp/hf_staging) works well for preparing uploads",
+        "Rate limit cooldown is ~40 minutes - plan uploads in advance"
+      ],
+      "timestamp": 1788914782.0778255,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
