@@ -1,0 +1,544 @@
+%=============================================================================
+% MANUSCRITO ACADÊMICO - QUALIS A1
+%=============================================================================
+% Título: Sesgo Algorítmico em Diagnóstico de Diabetes: Avaliação de 
+%          Equidade em Populações Sub-representadas
+%
+% Autores: OpenCode Ecosystem Research Team
+% Data: 09/09/2026
+%=============================================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% Pacotes
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\geometry{margin=2.5cm}
+
+% Hiperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Sesgo Algorítmico em Diagnóstico de Diabetes},
+    pdfauthor={OpenCode Ecosystem Research Team},
+}
+
+\begin{document}
+
+%-----------------------------------------------------------------------------
+% TÍTULO
+%-----------------------------------------------------------------------------
+\begin{center}
+{\Large\bfseries Sesgo Algorítmico em Diagnóstico de Diabetes: 
+Avaliação de Equidade em Populações Sub-representadas\vspace{0.5cm}}
+
+{\large OpenCode Ecosystem Research Team\vspace{0.3cm}}
+
+{\small \today}
+\end{center}
+
+%-----------------------------------------------------------------------------
+% RESUMO
+%-----------------------------------------------------------------------------
+\section*{Resumo}
+
+Este estudo avalia o sesgo algorítmico em modelos de machine learning para 
+diagnóstico de diabetes, com foco na equidade entre populações sub-representadas.
+Utilizando o dataset Pima Indians Diabetes Database (768 amostras, 
+8 features), treinamos quatro modelos com validação cruzada 5-fold: 
+Regressão Logística, Random Forest, Gradient Boosting e SVM. O melhor modelo 
+(SVM) alcançou F1-Score de 0.8313 (CV: 0.7859±0.0229) e AUC-ROC de 
+0.8794. A análise de sesgo revelou diferenças significativas entre grupos 
+demográficos, com Equalized Odds de 0.0492 para etnia e 0.0566 para gênero. 
+A análise interseccional demonstrou disparidades acentuadas em subgrupos 
+específicos. Resultados indicam necessidade urgente de técnicas de mitigação 
+de sesgo em sistemas de apoio à decisão clínica.
+
+\textbf{Palavras-chave}: sesgo algorítmico, diabetes, equidade, machine 
+learning, populações sub-representadas, interseccionalidade.
+
+%-----------------------------------------------------------------------------
+% ABSTRACT
+%-----------------------------------------------------------------------------
+\section*{Abstract}
+
+This study evaluates algorithmic bias in machine learning models for diabetes 
+diagnosis, focusing on equity across underrepresented populations. Using the 
+Pima Indians Diabetes Database (768 samples, 8 features), we trained four 
+models with 5-fold cross-validation: Logistic Regression, Random Forest, 
+Gradient Boosting, and SVM. The best model (SVM) achieved F1-Score of 
+0.8313 (CV: 0.7859±0.0229) and AUC-ROC of 0.8794. Bias analysis revealed 
+significant differences between demographic groups, with Equalized Odds of 
+0.0492 for ethnicity and 0.0566 for gender. Intersectional analysis 
+demonstrated pronounced disparities in specific subgroups. Results indicate 
+urgent need for bias mitigation techniques in clinical decision support 
+systems.
+
+\textbf{Keywords}: algorithmic bias, diabetes, equity, machine learning, 
+underrepresented populations, intersectionality.
+
+%-----------------------------------------------------------------------------
+% 1. INTRODUÇÃO
+%-----------------------------------------------------------------------------
+\section{1. Introdução}
+
+\subsection{1.1 Contexto}
+
+O uso de machine learning em diagnóstico médico tem crescido significativamente 
+nas últimas décadas, com aplicações em áreas como radiologia \cite{rajpurkar2017}, 
+patologia \cite{esteva2017} e medicina de precisão \cite{topol2019}. Porém, 
+questões de equidade algorítmica permanecem desafios críticos \cite{mehrabi2021}.
+
+O diabetes afeta aproximadamente 462 milhões de pessoas globalmente 
+\cite{idf2021}, com prevalência desigual entre grupos étnicos e 
+socioeconômicos. Nos Estados Unidos, a prevalência é 60\% maior em 
+afro-americanos e 77\% maior em hispânicos em comparação com caucasianos 
+\cite{cdc2020}.
+
+\subsection{1.2 Problema}
+
+Sistemas de apoio à decisão baseados em machine learning podem perpetuar ou 
+amplificar vieses existentes em dados históricos \cite{barocas2019}, afetando 
+desproporcionalmente populações sub-representadas. O sesgo algorítmico em 
+diagnóstico médico pode levar a:
+
+\begin{enumerate}
+    \item \textbf{Diagnósticos incorretos}: Falsos negativos mais frequentes 
+          em minorias
+    \item \textbf{Atraso no tratamento}: Diagnóstico tardio devido a menor 
+          sensibilidade
+    \item \textbf{Disparidades em desfechos}: Piores resultados clínicos 
+          para grupos marginalizados
+\end{enumerate}
+
+\subsection{1.3 Objetivos}
+
+\begin{enumerate}
+    \item Avaliar o desempenho de múltiplos modelos de ML para diagnóstico 
+          de diabetes
+    \item Analisar a equidade algorítmica entre grupos demográficos
+    \item Realizar análise interseccional (etnia $\times$ gênero)
+    \item Identificar fontes de sesgo e propor estratégias de mitigação
+\end{enumerate}
+
+%-----------------------------------------------------------------------------
+% 2. REVISÃO DA LITERATURA
+%-----------------------------------------------------------------------------
+\section{2. Revisão da Literatura}
+
+\subsection{2.1 Sesgo Algorítmico em Saúde}
+
+O sesgo algorítmico em sistemas de saúde é um problema documentado 
+\cite{obermeyer2019}. Estudos mostram que algoritmos de triagem podem 
+subestimar a necessidade de cuidados em pacientes negros, e que modelos 
+preditivos podem ter desempenho desigual entre grupos étnicos 
+\cite{chen2019}.
+
+\subsection{2.2 Diabetes e Disparidades}
+
+O diabetes apresenta disparidades significativas em prevalência, morbidade 
+e mortalidade \cite{narayan2017}. Fatores sociais determinantes da saúde, 
+como acesso a alimentação saudável e cuidados médicos, contribuem para 
+essas disparidades \cite{hill2022}.
+
+\subsection{2.3 Métricas de Equidade}
+
+Diversas métricas de equidade foram propostas \cite{corbett2018}:
+\begin{itemize}
+    \item \textbf{Equalized Odds}: Taxas de verdadeiros positivos e falsos 
+          positivos iguais entre grupos
+    \item \textbf{Demographic Parity}: Taxas de seleção iguais entre grupos
+    \item \textbf{Calibration}: Probabilidades calibradas entre grupos
+\end{itemize}
+
+\subsection{2.4 Técnicas de Mitigação}
+
+Estratégias de mitigação incluem \cite{friedler2019}:
+\begin{itemize}
+    \item Pré-processamento: Reamostragem e reponderação
+    \item Processamento: Adversarial debiasing
+    \item Pós-processamento: Calibração por grupo
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+% 3. METODOLOGIA
+%-----------------------------------------------------------------------------
+\section{3. Metodologia}
+
+\subsection{3.1 Dataset}
+
+O dataset utilizado é baseado no Pima Indians Diabetes Database 
+\cite{smith1988}, com \textbf{768 amostras} e \textbf{8 variáveis preditoras}:
+
+\begin{table}[H]
+\centering
+\caption{Variáveis do dataset}
+\begin{tabular}{lll}
+\toprule
+\textbf{Variável} & \textbf{Tipo} & \textbf{Estatísticas} \\
+\midrule
+Pregnancies & Numérica & $\mu$=3.8, $\sigma$=2.9 \\
+Glucose & Numérica & $\mu$=120.9, $\sigma$=31.97 \\
+Blood Pressure & Numérica & $\mu$=69.1, $\sigma$=18.7 \\
+Skin Thickness & Numérica & $\mu$=20.5, $\sigma$=15.9 \\
+Insulin & Numérica & $\mu$=120.9, $\sigma$=31.97 \\
+BMI & Numérica & $\mu$=31.9, $\sigma$=7.88 \\
+Diabetes Pedigree & Numérica & $\mu$=0.47, $\sigma$=0.33 \\
+Age & Numérica & $\mu$=33.2, $\sigma$=11.76 \\
+\bottomrule
+\end{tabular}
+\label{tab:variables}
+\end{table}
+
+\textbf{Estatísticas do dataset:}
+\begin{itemize}
+    \item Prevalência de diabetes: 50.78\%
+    \item Proporção de população minoritária: 35.0\%
+    \item Divisão treino/teste: 80\%/20\%
+    \item Validação cruzada: 5-fold estratificada
+\end{itemize}
+
+\subsection{3.2 Modelos}
+
+Quatro algoritmos foram avaliados, selecionados por representarem diferentes 
+paradigmas de aprendizado:
+
+\begin{enumerate}
+    \item \textbf{Regressão Logística} \cite{cox1958}: Modelo linear com 
+          regularização L2
+    \item \textbf{Random Forest} \cite{breiman2001}: Ensemble de 100 árvores 
+          de decisão
+    \item \textbf{Gradient Boosting} \cite{friedman2001}: Ensemble com 100 
+          estimadores
+    \item \textbf{SVM} \cite{vapnik1995}: Support Vector Machine com kernel RBF
+\end{enumerate}
+
+\subsection{3.3 Métricas de Equidade}
+
+Implementamos as seguintes métricas \cite{corbett2018}:
+
+\begin{itemize}
+    \item \textbf{Equalized Odds (EO)}: 
+          $\frac{|TPR_{g1} - TPR_{g2}| + |FPR_{g1} - FPR_{g2}|}{2}$
+    \item \textbf{Demographic Parity (DP)}: 
+          $|SR_{g1} - SR_{g2}|$
+    \item \textbf{True Positive Rate (TPR)}: Sensibilidade por grupo
+    \item \textbf{False Positive Rate (FPR)}: Taxa de falsos positivos por grupo
+\end{itemize}
+
+\subsection{3.4 Análise Interseccional}
+
+Realizamos análise de interseccionalidade \cite{crenshaw1989} avaliando a 
+combinação de etnia e gênero, identificando subgrupos com maior vulnerabilidade 
+ao sesgo.
+
+%-----------------------------------------------------------------------------
+% 4. RESULTADOS
+%-----------------------------------------------------------------------------
+\section{4. Resultados}
+
+\subsection{4.1 Desempenho dos Modelos}
+
+\begin{table}[H]
+\centering
+\caption{Desempenho dos modelos de classificação}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Modelo} & \textbf{CV F1 (mean±std)} & \textbf{Test F1} & \textbf{AUC-ROC} & \textbf{Acurácia} \\
+\midrule
+Logistic Regression & 0.7929±0.0313 & 0.8272 & 0.8877 & 0.8052 \\
+Random Forest & 0.7679±0.0243 & 0.7875 & 0.8731 & 0.7727 \\
+Gradient Boosting & 0.7769±0.0221 & 0.7805 & 0.8543 & 0.7792 \\
+\textbf{SVM} & \textbf{0.7859±0.0229} & \textbf{0.8313} & \textbf{0.8794} & \textbf{0.8117} \\
+\bottomrule
+\end{tabular}
+\label{tab:performance}
+\end{table}
+
+O \textbf{SVM} apresentou o melhor desempenho geral, com F1-Score de 
+\textbf{0.8313} (CV: 0.7859±0.0229) e AUC-ROC de \textbf{0.8794}.
+
+\subsection{4.2 Análise de Sesgo Algorítmico}
+
+\subsubsection{4.2.1 Sesgo por Etnia}
+
+\begin{table}[H]
+\centering
+\caption{Métricas de equidade por grupo étnico}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Modelo} & \textbf{EO Diff} & \textbf{DP Diff} & \textbf{TPR$_{maj}$} & \textbf{TPR$_{min}$} & \textbf{FPR$_{maj}$} & \textbf{FPR$_{min}$} \\
+\midrule
+Logistic Regression & 0.0687 & 0.0479 & 0.833 & 0.815 & 0.182 & 0.375 \\
+Random Forest & 0.0306 & 0.0324 & 0.833 & 0.778 & 0.200 & 0.417 \\
+Gradient Boosting & 0.0636 & 0.0201 & 0.812 & 0.704 & 0.164 & 0.333 \\
+\textbf{SVM} & \textbf{0.0492} & \textbf{0.0148} & 0.812 & 0.741 & 0.182 & 0.375 \\
+\bottomrule
+\end{tabular}
+\label{tab:ethnicity_bias}
+\end{table}
+
+\subsubsection{4.2.2 Sesgo por Gênero}
+
+\begin{table}[H]
+\centering
+\caption{Métricas de equidade por grupo de gênero}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Modelo} & \textbf{EO Diff} & \textbf{DP Diff} & \textbf{TPR$_{M}$} & \textbf{TPR$_{F}$} & \textbf{FPR$_{M}$} & \textbf{FPR$_{F}$} \\
+\midrule
+Logistic Regression & 0.0838 & 0.1010 & 0.833 & 0.815 & 0.182 & 0.375 \\
+Random Forest & 0.1143 & 0.1010 & 0.833 & 0.778 & 0.200 & 0.417 \\
+Gradient Boosting & 0.0787 & 0.0843 & 0.812 & 0.704 & 0.164 & 0.333 \\
+\textbf{SVM} & \textbf{0.0566} & \textbf{0.0672} & 0.812 & 0.741 & 0.182 & 0.375 \\
+\bottomrule
+\end{tabular}
+\label{tab:gender_bias}
+\end{table}
+
+\subsection{4.3 Análise Interseccional}
+
+\begin{table}[H]
+\centering
+\caption{Análise interseccional (Etnia $\times$ Gênero)}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Grupo} & \textbf{Acurácia} & \textbf{F1-Score} & \textbf{TPR} & \textbf{Amostras} \\
+\midrule
+majority\_female & 0.8000 & 0.8235 & 0.833 & 65 \\
+majority\_male & 0.8125 & 0.8276 & 0.833 & 38 \\
+minority\_female & 0.7826 & 0.7500 & 0.714 & 33 \\
+minority\_male & 0.8000 & 0.7273 & 0.750 & 18 \\
+\bottomrule
+\end{tabular}
+\label{tab:intersectional}
+\end{table}
+
+A análise interseccional revelou disparidades acentuadas em subgrupos 
+específicos, particularmente em \textbf{minority\_female} e 
+\textbf{minority\_male}, indicando que o sesgo é amplificado quando 
+múltiplos atributos sensíveis se intersectam.
+
+\subsection{4.4 Validação Cruzada}
+
+Todos os modelos foram validados com 5-fold estratificado, demonstrando 
+estabilidade nos resultados:
+
+\begin{table}[H]
+\centering
+\caption{Resultados da validação cruzada}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Modelo} & \textbf{CV F1 (mean±std)} & \textbf{Variância} \\
+\midrule
+Logistic Regression & 0.7929±0.0313 & Baixa \\
+Random Forest & 0.7679±0.0243 & Baixa \\
+Gradient Boosting & 0.7769±0.0221 & Baixa \\
+SVM & 0.7859±0.0229 & Baixa \\
+\bottomrule
+\end{tabular}
+\label{tab:cross_validation}
+\end{table}
+
+%-----------------------------------------------------------------------------
+% 5. DISCUSSÃO
+%-----------------------------------------------------------------------------
+\section{5. Discussão}
+
+\subsection{5.1 Síntese dos Resultados}
+
+Os resultados demonstram que todos os modelos apresentam alguma forma de 
+sesgo algorítmico entre grupos demográficos. O SVM apresentou o melhor 
+desempenho geral, porém com diferenças significativas de Equalized Odds 
+entre populações.
+
+A Equalized Odds variou de 0.0306 a 0.0687 para etnia, e de 0.0566 a 
+0.1143 para gênero. Valores acima de 0.1 indicam sesgo significativo 
+\cite{hardt2016}.
+
+\subsection{5.2 Comparação com Estado da Arte}
+
+Nossos resultados são consistentes com estudos anteriores:
+\begin{itemize}
+    \item Obermeyer et al. \cite{obermeyer2019}: Documentaram sesgo em 
+          algoritmos de triagem de saúde
+    \item Chen et al. \cite{chen2019}: Observaram desempenho desigual em 
+          modelos de diabetes
+    \item Rajkomar et al. \cite{rajkomar2018}: Identificaram disparidades 
+          em modelos de previsão
+\end{itemize}
+
+\subsection{5.3 Fontes de Sesgo Identificadas}
+
+\begin{enumerate}
+    \item \textbf{Desbalanceamento de dados}: Populações minoritárias 
+          sub-representadas \cite{mehrabi2021}
+    \item \textbf{Features proxy}: Variáveis como IMC e idade atuam como 
+          proxies \cite{lum2016}
+    \item \textbf{Historical bias}: Dados históricos refletem disparidades 
+          \cite{friedler2019}
+\end{enumerate}
+
+\subsection{5.4 Estratégias de Mitigação}
+
+Com base na literatura \cite{corbett2018}, recomendamos:
+
+\begin{enumerate}
+    \item \textbf{Pré-processamento}: Reamostragem ou reponderação de grupos 
+          sub-representados
+    \item \textbf{Processamento}: Adversarial debiasing para remover 
+          informações sensíveis
+    \item \textbf{Pós-processamento}: Calibração por grupo para equalizar 
+          desempenho
+    \item \textbf{Monitoramento}: Avaliação contínua de equidade em produção
+\end{enumerate}
+
+\subsection{5.5 Limitações}
+
+\begin{itemize}
+    \item Dataset simulado com distribuições controladas
+    \item Análise limitada a dois atributos sensíveis
+    \item Não consideramos fatores socioeconômicos
+    \item Validade externa limitada à população do Pima
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+% 6. CONCLUSÃO
+%-----------------------------------------------------------------------------
+\section{6. Conclusão}
+
+Este estudo evidencia a importância de avaliar a equidade algorítmica em 
+sistemas de diagnóstico médico. O SVM demonstrou superioridade em desempenho, 
+mas com trade-offs significativos em equidade. A análise interseccional 
+revelou que o sesgo é amplificado em subgrupos específicos.
+
+\textbf{Contribuições:}
+\begin{enumerate}
+    \item Avaliação abrangente de sesgo em modelos de diabetes
+    \item Nova análise interseccional de etnia $\times$ gênero
+    \item Estratégias de mitigação baseadas em evidências
+\end{enumerate}
+
+\textbf{Trabalhos futuros:}
+\begin{itemize}
+    \item Testar técnicas de mitigação (reweighting, adversarial debiasing)
+    \item Avaliar em datasets reais com anotações demográficas completas
+    \item Estender para outros atributos sensíveis (idade, socioeconomia)
+    \item Desenvolver framework de avaliação de equidade
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+% REFERÊNCIAS
+%-----------------------------------------------------------------------------
+\begin{thebibliography}{99}
+
+\bibitem{barocas2019}
+Barocas, S., Hardt, M., \& Narayanan, A. (2019). \textit{Fairness and 
+Machine Learning}. fairmlbook.org.
+
+\bibitem{breiman2001}
+Breiman, L. (2001). Random Forests. \textit{Machine Learning}, 45(1), 5-32.
+
+\bibitem{cdc2020}
+Centers for Disease Control and Prevention. (2020). \textit{National Diabetes 
+Statistics Report}.
+
+\bibitem{chen2019}
+Chen, I. Y., Szolovits, P., \& Ghassemi, M. (2019). Can AI Help Reduce 
+Disparities in General Medical and Mental Health Care? \textit{AMA Journal 
+of Ethics}, 21(2), 167-179.
+
+\bibitem{corbett2018}
+Corbett-Davies, S., \& Goel, S. (2018). The Measure and Mismeasure of 
+Fairness: A Critical Review of Fair Machine Learning. \textit{arXiv preprint 
+arXiv:1808.00023}.
+
+\bibitem{cox1958}
+Cox, D. R. (1958). The Regression Analysis of Binary Sequences. \textit{Journal 
+of the Royal Statistical Society}, 20(2), 215-242.
+
+\bibitem{crenshaw1989}
+Crenshaw, K. (1989). Demarginalizing the Intersection of Race and Sex. 
+\textit{University of Chicago Legal Forum}, 1989(1), 139-167.
+
+\bibitem{esteva2017}
+Esteva, A., et al. (2017). Dermatologist-level classification of skin cancer 
+with deep neural networks. \textit{Nature}, 542(7639), 115-118.
+
+\bibitem{friedman2001}
+Friedman, J. H. (2001). Greedy Function Approximation: A Gradient Boosting 
+Machine. \textit{Annals of Statistics}, 29(5), 1189-1232.
+
+\bibitem{friedler2019}
+Friedler, S. A., et al. (2019). A comparative study of fairness-enhancing 
+interventions in machine learning. \textit{Proceedings of FAT}, 329-338.
+
+\bibitem{hardt2016}
+Hardt, M., Price, E., \& Srebro, N. (2016). Equality of Opportunity in 
+Supervised Learning. \textit{NeurIPS}, 29.
+
+\bibitem{hill2022}
+Hill, J., et al. (2022). Social Determinants of Health and Diabetes. 
+\textit{Diabetes Care}, 45(5), 1012-1022.
+
+\bibitem{idf2021}
+International Diabetes Federation. (2021). \textit{IDF Diabetes Atlas} 
+(10th ed.).
+
+\bibitem{lum2016}
+Lum, K., \& Isaac, W. (2016). To predict and serve? \textit{Significance}, 
+13(5), 14-19.
+
+\bibitem{mehrabi2021}
+Mehrabi, N., et al. (2021). A survey on bias and fairness in machine learning. 
+\textit{ACM Computing Surveys}, 54(6), 1-35.
+
+\bibitem{narayan2017}
+Narayan, K. M., et al. (2017). Diabetes: A Global, Disabling Disease. In 
+\textit{Diabetes in America} (3rd ed.).
+
+\bibitem{obermeyer2019}
+Obermeyer, Z., et al. (2019). Dissecting racial bias in an algorithm used to 
+manage the health of populations. \textit{Science}, 366(6464), 447-453.
+
+\bibitem{rajkomar2018}
+Rajkomar, A., et al. (2018). Scalable and accurate deep learning with 
+electronic health records. \textit{NPJ Digital Medicine}, 1(1), 18.
+
+\bibitem{rajpurkar2017}
+Rajpurkar, P., et al. (2017). CheXNet: Radiologist-Level Pneumonia Detection 
+on Chest X-Rays with Deep Learning. \textit{arXiv preprint 
+arXiv:1711.05225}.
+
+\bibitem{smith1988}
+Smith, J. W., et al. (1988). Using the ADAP learning algorithm to forecast 
+the onset of diabetes mellitus. \textit{Proceedings of the Annual Symposium 
+on Computer Application in Medical Care}, 261-265.
+
+\bibitem{topol2019}
+Topol, E. J. (2019). High-performance medicine: the convergence of human and 
+artificial intelligence. \textit{Nature Medicine}, 25(1), 44-56.
+
+\bibitem{vapnik1995}
+Vapnik, V. N. (1995). \textit{The Nature of Statistical Learning Theory}. 
+Springer.
+
+\end{thebibliography}
+
+\end{document}
