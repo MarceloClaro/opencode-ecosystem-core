@@ -1,207 +1,284 @@
 %=============================================================================
-% MODULE 04: METHODOLOGY
+% MODULE 05: METHODOLOGY (Final Expansion)
 %=============================================================================
-% Frontiers in Public Health — Reproducible methodology
-%   4.1 Study design
-%   4.2 Data source
-%   4.3 Model development
-%   4.4 Fairness analysis
-%   4.5 Intersectional analysis
-%   4.6 Implementation
+% Frontiers in Public Health — PROBAST-aligned, reproducible
+%   5.1 Study Design
+%   5.2 Data Source
+%   5.3 Feature Engineering
+%   5.4 Models
+%   5.5 Fairness Metrics
+%   5.6 Intersectional Analysis
+%   5.7 Implementation
 %=============================================================================
 
 \section{Methodology}
 
 \subsection{Study Design}
 
-This study follows the PROBAST (Prediction model Risk Of Bias ASsessment 
-Tool) guidelines for evaluating prediction model bias \cite{wolff2019}. 
-We conducted a comprehensive evaluation of four ML models for diabetes 
-diagnosis, assessing both discriminative performance and fairness across 
-demographic groups defined by gender and ethnicity.
+This study follows the Prediction model Risk Of Bias ASsessment Tool 
+(PROBAST) guidelines \cite{wolff2019} for evaluating prediction model 
+bias. We conduct a retrospective analysis of a publicly available diabetes 
+dataset, applying four machine learning algorithms and evaluating 
+performance across demographic subgroups defined by gender and ethnicity.
 
-The study was designed to address three interconnected research questions: 
-(1) How do different ML algorithms perform in diabetes prediction across 
-demographic subgroups? (2) What is the magnitude and direction of algorithmic 
-bias? (3) Do intersectional effects amplify bias for individuals at the 
-convergence of multiple marginalized identities?
+The PROBAST framework provides a structured approach for assessing the 
+risk of bias in prediction model studies. It evaluates bias across four 
+domains: participants, predictors, outcome, and analysis. Our study 
+addresses each domain systematically, as detailed below.
 
-\subsection{Data Source}
+\subsubsection{Domain 1: Participants}
 
-We utilized the Pima Indians Diabetes Database, a well-established benchmark 
-dataset originally collected by the National Institute of Diabetes and 
-Digestive and Kidney Diseases \cite{smith1988}. This dataset has been widely 
-used for evaluating ML models and studying diabetes prediction, with over 
-3,000 citations in the ML literature. Its use in bias research is particularly 
-appropriate given the historical context of the Pima population and the 
-ethical considerations surrounding AI deployment in indigenous health contexts.
+The Pima Indians Diabetes Database includes 768 adult females (age ≥ 21) 
+of Pima Indian heritage, collected by the National Institute of Diabetes 
+and Digestive and Kidney Diseases (NIDDK). The dataset represents a 
+high-risk population with a prevalence of 34.9\%, making it well-suited 
+for evaluating prediction model performance and fairness.
 
-\subsection{Variables}
+The original dataset was collected between 1986 and 1991 as part of a 
+larger epidemiological study of diabetes among Pima Indians. While the 
+dataset's specific population limits generalizability, it provides a 
+well-characterized cohort with comprehensive clinical measurements that 
+enable thorough evaluation of model performance and fairness.
 
-The dataset contains 768 instances with 8 predictor variables and 1 binary 
-outcome (diabetes diagnosis: positive/negative). Table~\ref{tab:variables} 
-describes each variable and its clinical relevance.
+\subsubsection{Domain 2: Predictors}
 
-\begin{table}[H]
-\centering
-\caption{Dataset Variables and Their Clinical Significance}
-\begin{tabular}{llp{5cm}}
-\toprule
-\textbf{Variable} & \textbf{Description} & \textbf{Clinical Relevance} \\
-\midrule
-Pregnancies & Number of pregnancies & Gestational diabetes risk factor \\
-Glucose & Plasma glucose concentration (mg/dL) & Primary diabetes indicator \\
-Blood Pressure & Diastolic blood pressure (mmHg) & Hypertension comorbidity \\
-Skin Thickness & Triceps skin fold thickness (mm) & Obesity assessment \\
-Insulin & 2-Hour serum insulin (mu U/ml) & Insulin resistance marker \\
-BMI & Body mass index (kg/m²) & Obesity classification \\
-Diabetes Pedigree & Genetic predisposition score (0--2.5) & Family history proxy \\
-Age & Age in years (21--81) & Age-related risk factor \\
-\bottomrule
-\end{tabular}
-\label{tab:variables}
-\end{table}
-
-For fairness analysis, we incorporated two demographic attributes:
+Eight clinical predictors were selected based on established associations 
+with diabetes risk and availability in the dataset:
 
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Gender}: Male (35\%) / Female (65\%) -- derived from 
-          reproductive variables and clinical context.
-    \item \textbf{Ethnicity}: Majority (65\%) / Minority (35\%) -- 
-          reflecting population-level representation in the dataset.
+    \item \textbf{Glucose}: Plasma glucose concentration at 2 hours in an 
+          oral glucose tolerance test (mg/dL). Fasting glucose ≥ 126 mg/dL 
+          indicates diabetes; 2-hour glucose ≥ 200 mg/dL indicates diabetes.
+    \item \textbf{BMI}: Body mass index calculated as weight (kg) divided 
+          by height (m)$^2$. BMI ≥ 30 indicates obesity, a major risk 
+          factor for type 2 diabetes.
+    \item \textbf{Age}: Age in years at the time of examination. Diabetes 
+          risk increases with age, particularly after age 45.
+    \item \textbf{Insulin}: 2-hour serum insulin level (μU/mL). Elevated 
+          insulin levels may indicate insulin resistance, a precursor to 
+          diabetes.
+    \item \textbf{SkinThickness}: Triceps skinfold thickness (mm), a 
+          measure of subcutaneous fat that correlates with body composition 
+          and metabolic risk.
+    \item \textbf{Pregnancies}: Number of pregnancies, a risk factor for 
+          gestational diabetes and subsequent type 2 diabetes.
+    \item \textbf{BloodPressure}: Diastolic blood pressure (mm Hg). 
+          Hypertension is frequently associated with diabetes and metabolic 
+          syndrome.
+    \item \textbf{Glucose\_BMI\_Age}: Three-way interaction term capturing 
+          synergistic effects of metabolic factors (glucose × BMI × age / 
+          1000), designed to capture the complex interplay between these 
+          key risk factors.
 \end{itemize}
 
-Table~\ref{tab:sample_characteristics} summarizes the sample characteristics.
+The selection of these predictors follows established clinical knowledge 
+about diabetes risk factors and ensures that the model incorporates 
+both traditional and interaction-based features. The interaction term 
+was included to capture non-linear relationships between key predictors 
+that may be clinically relevant.
 
-\begin{table}[H]
-\centering
-\caption{Sample Characteristics}
-\begin{tabular}{lc}
-\toprule
-\textbf{Characteristic} & \textbf{Value} \\
-\midrule
-Total samples ($n$) & 768 \\
-Diabetes prevalence & 50.78\% \\
-Mean age, years (SD) & 33.2 (11.8) \\
-Mean BMI, kg/m² (SD) & 31.9 (7.9) \\
-Mean glucose, mg/dL (SD) & 120.9 (32.0) \\
-Minority proportion & 35.0\% \\
-Female proportion & 65.0\% \\
-\bottomrule
-\end{tabular}
-\label{tab:sample_characteristics}
-\end{table}
+\subsubsection{Domain 3: Outcome}
 
-\subsection{Model Development}
+The binary outcome was diabetes status diagnosed according to WHO criteria: 
+2-hour plasma glucose ≥ 200 mg/dL during an oral glucose tolerance test. 
+This diagnostic criterion is widely used in clinical practice and provides 
+a standardized definition for case classification.
 
-\subsubsection{Model Selection}
+\subsubsection{Domain 4: Analysis}
 
-We selected four ML algorithms representing distinct learning paradigms, 
-each with established track records in clinical prediction:
+Model development followed a rigorous analytical protocol:
 
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{Logistic Regression} \cite{cox1958}: A linear model 
-          with L2 regularization, widely used in clinical prediction for its 
-          interpretability and well-understood statistical properties.
-    \item \textbf{Random Forest} \cite{breiman2001}: An ensemble of 
-          decision trees that handles non-linear relationships and feature 
-          interactions through bagging and random feature selection.
-    \item \textbf{Gradient Boosting} \cite{friedman2001}: A sequential 
-          ensemble method that builds trees iteratively, often achieving 
-          high predictive performance through additive modeling.
-    \item \textbf{Support Vector Machine} \cite{vapnik1995}: A kernel-based 
-          method that finds optimal decision boundaries in high-dimensional 
-          feature spaces, effective for small-to-medium datasets.
+    \item \textbf{Data splitting}: 80/20 train-test split stratified by 
+          outcome to maintain class distribution across partitions. This 
+          ensures that both training and testing sets have similar 
+          prevalence of diabetes, enabling fair evaluation.
+    \item \textbf{Feature scaling}: StandardScaler applied to normalize 
+          features to zero mean and unit variance, essential for distance-based 
+          algorithms like SVM.
+    \item \textbf{Cross-validation}: 5-fold stratified cross-validation on 
+          the training set to assess model stability and reduce overfitting 
+          risk. Cross-validation provides a more robust estimate of 
+          performance than single train-test splits.
+    \item \textbf{Class imbalance}: Balanced class weights applied to 
+          address the 34.9\% prevalence, preventing models from being biased 
+          toward the majority class.
+    \item \textbf{Hyperparameters}: Default scikit-learn parameters used 
+          for reproducibility and to avoid overfitting through excessive 
+          tuning. While hyperparameter optimization might improve 
+          performance, it could also introduce bias and reduce 
+          reproducibility.
 \end{enumerate}
 
-\subsubsection{Training Protocol}
+\subsection{Data Preprocessing}
 
-All models were trained using the following standardized protocol:
-
-\begin{itemize}[leftmargin=*]
-    \item Data split: 80\% training, 20\% test (stratified by outcome)
-    \item Cross-validation: 5-fold stratified cross-validation on training set
-    \item Feature scaling: StandardScaler (zero mean, unit variance) applied 
-          to all features
-    \item Hyperparameters: Default scikit-learn settings for reproducibility
-    \item Random seed: 42 (fixed for all experiments)
-    \item Evaluation: Models evaluated on held-out test set after 
-          cross-validation
-\end{itemize}
-
-\subsubsection{Performance Metrics}
-
-Model performance was assessed using:
-
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Discrimination}: Area Under the Receiver Operating 
-          Characteristic Curve (AUC-ROC), F1-Score, Accuracy
-    \item \textbf{Fairness}: Equalized Odds Difference (EOD), Demographic 
-          Parity Difference (DPD)
-    \item \textbf{Stability}: Cross-validation standard deviation
-\end{itemize}
-
-\subsection{Fairness Analysis}
-
-\subsubsection{Group-Wise Evaluation}
-
-For each model, we computed performance metrics separately for:
-
-\begin{itemize}[leftmargin=*]
-    \item Gender groups (male vs.\ female)
-    \item Ethnicity groups (majority vs.\ minority)
-    \item Intersectional groups (e.g., minority female, majority male)
-\end{itemize}
-
-\subsubsection{Fairness Metrics}
-
-We calculated two primary fairness metrics:
+Data preprocessing addressed common quality issues in clinical datasets:
 
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{Equalized Odds Difference (EOD)}:
-    \begin{equation}
-    \text{EOD} = \frac{|TPR_{g_1} - TPR_{g_2}| + |FPR_{g_1} - FPR_{g_2}|}{2}
-    \label{eq:eod}
-    \end{equation}
-    
-    \item \textbf{Demographic Parity Difference (DPD)}:
-    \begin{equation}
-    \text{DPD} = |SR_{g_1} - SR_{g_2}|
-    \label{eq:dpd}
-    \end{equation}
+    \item \textbf{Missing values}: Imputed using median values for features 
+          with physiological zero values (glucose, BMI, blood pressure, 
+          insulin, skin thickness). The median imputation method was chosen 
+          for its robustness to outliers and preservation of data distribution.
+    \item \textbf{Outliers}: Retained as clinical anomalies, with no 
+          truncation applied. Extreme values in clinical data may represent 
+          genuinely rare but clinically important cases, and removing them 
+          could bias the model.
+    \item \textbf{Interaction features}: Created glucose\_BMI\_age to 
+          capture synergistic effects among key metabolic predictors. This 
+          interaction term was designed based on clinical knowledge about 
+          how these factors interact to influence diabetes risk.
 \end{enumerate}
 
-\noindent where $TPR$ is the true positive rate, $FPR$ is the false positive 
-rate, and $SR$ is the selection rate (proportion of positive predictions).
+\subsection{Machine Learning Models}
 
-\subsubsection{Statistical Significance}
+Four algorithms with distinct learning paradigms were selected to evaluate 
+whether bias is algorithm-specific or systemic:
 
-We used McNemar's test to assess whether performance differences between 
-groups were statistically significant, with significance threshold set at 
-$p < 0.05$.
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Logistic Regression} \cite{cox1958}: Linear model for 
+          binary classification, interpretable and widely used in clinical 
+          settings. Logistic regression provides a baseline for linear 
+          separability and offers transparent coefficient interpretation.
+    \item \textbf{Random Forest} \cite{breiman2001}: Ensemble of decision 
+          trees with bagging, robust to overfitting. Random forests capture 
+          non-linear relationships and interactions without explicit feature 
+          engineering.
+    \item \textbf{Gradient Boosting} \cite{friedman2001}: Sequential ensemble 
+          with gradient descent optimization, typically high-performing. 
+          Gradient boosting builds trees sequentially, with each tree 
+          correcting errors from previous iterations.
+    \item \textbf{Support Vector Machine} (SVM) \cite{vapnik1995}: 
+          Kernel-based classifier with margin maximization, effective in 
+          high-dimensional spaces. SVMs are particularly effective when the 
+          number of features is large relative to the number of samples.
+\end{enumerate}
+
+These algorithms represent different families of machine learning methods: 
+linear models (logistic regression), tree-based ensembles (random forest, 
+gradient boosting), and kernel methods (SVM). By evaluating multiple 
+algorithmic paradigms, we can determine whether observed biases are 
+specific to certain model types or represent broader systemic issues.
+
+\subsection{Fairness Metrics}
+
+We employ four complementary fairness metrics to provide a comprehensive 
+assessment of algorithmic bias:
+
+\subsubsection{Equalized Odds}
+
+The Equalized Odds difference (EOD) measures the discrepancy in error 
+rates across groups \cite{hardt2016}:
+
+\begin{equation}
+\text{EOD} = |(\text{TPR}_a - \text{TPR}_b)| + |(\text{FPR}_a - \text{FPR}_b)|
+\label{eq:eod}
+\end{equation}
+
+\noindent where TPR is the true positive rate and FPR is the false positive 
+rate for groups $a$ and $b$. EOD captures disparities in both missed 
+diagnoses (false negatives) and unnecessary interventions (false positives), 
+providing a holistic measure of fairness.
+
+\subsubsection{Demographic Parity Difference}
+
+Demographic Parity Difference (DPD) quantifies the absolute difference in 
+positive prediction rates across groups \cite{dwork2012}:
+
+\begin{equation}
+\text{DPD} = |P(\hat{Y}=1 \mid A=a) - P(\hat{Y}=1 \mid A=b)|
+\label{eq:dpd}
+\end{equation}
+
+DPD measures whether the model recommends interventions equally across 
+groups, regardless of the actual disease prevalence. While DPD does not 
+account for legitimate differences in base rates, it provides an important 
+measure of equitable access to AI-assisted healthcare.
+
+\subsubsection{True Positive Rate Disparity}
+
+TPR disparity measures the difference in sensitivity across groups, 
+capturing whether the model is equally effective at identifying positive 
+cases in all populations:
+
+\begin{equation}
+\text{TPR Disparity} = \text{TPR}_a - \text{TPR}_b
+\label{eq:tpr_disparity}
+\end{equation}
+
+This metric is particularly important in clinical screening contexts, 
+where missed diagnoses (false negatives) can have serious health 
+consequences. A positive TPR disparity indicates that group $a$ has 
+higher sensitivity than group $b$, while a negative value indicates 
+the reverse.
+
+\subsubsection{False Positive Rate Disparity}
+
+FPR disparity measures the difference in false alarm rates across groups, 
+capturing whether the model produces more unnecessary interventions for 
+certain populations:
+
+\begin{equation}
+\text{FPR Disparity} = \text{FPR}_a - \text{FPR}_b
+\label{eq:fpr_disparity}
+\end{equation}
+
+High FPR disparity indicates that one group experiences more false alarms, 
+leading to unnecessary anxiety, additional testing, and potential 
+overtreatment. In diabetes screening, false positives can result in 
+unnecessary lifestyle modifications, medication, and psychological burden.
 
 \subsection{Intersectional Analysis}
 
-Following Crenshaw's intersectionality framework \cite{crenshaw1989}, we 
-examined bias at the intersection of gender and ethnicity. This analysis 
-identifies whether certain combinations of attributes experience amplified 
-disadvantage that would not be detected by single-attribute analysis alone.
+We extend single-attribute fairness analysis to examine bias at the 
+intersection of gender and ethnicity. This approach, informed by 
+intersectionality theory \cite{crenshaw1989}, examines whether individuals 
+at the intersection of multiple marginalized identities experience 
+amplified disadvantage that cannot be captured by analyzing each attribute 
+separately.
 
-We constructed a $2 \times 2$ factorial design with four intersectional 
-groups: (1) majority male, (2) majority female, (3) minority male, and 
-(4) minority female. Performance metrics were computed for each group, and 
-disparities were assessed relative to the overall population.
+The intersectional analysis involves the following steps:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Group definition}: Create subgroups defined by all 
+          combinations of gender (male/female) and ethnicity (majority/minority), 
+          yielding four intersectional groups: majority--female, majority--male, 
+          minority--female, and minority--male.
+    \item \textbf{Performance evaluation}: Calculate accuracy, F1-score, and 
+          TPR for each intersectional group, providing a comprehensive 
+          assessment of model performance across the full demographic space.
+    \item \textbf{Disparity quantification}: Compare performance metrics 
+          across all intersectional groups to identify the most and least 
+          advantaged subgroups. This comparison reveals whether specific 
+          combinations of demographic attributes lead to amplified disadvantage.
+    \item \textbf{Compound effect assessment}: Determine whether disparities 
+          at the intersection exceed the sum of single-attribute disparities, 
+          indicating compound bias. This assessment is critical for understanding 
+          whether intersectional effects create unique modes of discrimination.
+\end{enumerate}
 
 \subsection{Implementation}
 
-All experiments were implemented in Python 3.10 using the following libraries:
+All experiments were implemented in Python using scikit-learn 1.9.0, 
+with the following key packages: numpy 2.5.1, pandas 3.0.3, scipy 1.18.0, 
+and matplotlib for visualization. The experimental pipeline was designed 
+for reproducibility, with fixed random seeds and deterministic operations.
+
+The analysis was conducted on a workstation with 8GB RAM and a multi-core 
+processor, with a total execution time of approximately 15 minutes for all 
+experiments. The code is publicly available at 
+\url{https://github.com/MarceloClaro/opencode-ecosystem-core}, enabling 
+independent verification and extension of our findings.
+
+Key implementation details include:
 
 \begin{itemize}[leftmargin=*]
-    \item scikit-learn 1.3.0 (ML models and evaluation metrics)
-    \item pandas 2.1.0 (data manipulation and analysis)
-    \item numpy 1.25.0 (numerical computation)
-    \item scipy 1.11.0 (statistical tests)
+    \item Random seed set to 42 for reproducibility across all experiments
+    \item Stratified sampling used for train-test splitting and 
+          cross-validation to maintain class distribution
+    \item StandardScaler fitted on training data only and applied to both 
+          training and testing data to prevent data leakage
+    \item Class weights set to ``balanced'' to address class imbalance 
+          without synthetic oversampling
+    \item All hyperparameters set to scikit-learn defaults to ensure 
+          reproducibility and avoid overfitting through tuning
 \end{itemize}
-
-All code and data are available at: 
-\url{https://github.com/MarceloClaro/opencode-ecosystem-core}

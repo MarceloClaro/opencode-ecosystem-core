@@ -1,5 +1,5 @@
 %=============================================================================
-% MODULE 04: LITERATURE REVIEW
+% MODULE 04: LITERATURE REVIEW (Additional Expansion)
 %=============================================================================
 % Frontiers in Public Health — Thematic narrative-critical review
 %   Block 1: Algorithmic bias in healthcare
@@ -20,30 +20,65 @@ healthcare algorithm systematically underestimated the health needs of Black
 patients by using healthcare costs as a proxy for health status, failing to 
 account for structural barriers to accessing care. This finding underscored 
 how seemingly objective algorithmic decisions can embed and scale historical 
-inequities.
+inequities, affecting millions of patients annually.
+
+The Obermeyer study demonstrated that at a given risk score, Black patients 
+were considerably sicker than White patients, as evidenced by conditions 
+such as diabetes, hypertension, and chronic kidney disease. The algorithm 
+used healthcare costs as a proxy for health needs, but because Black patients 
+historically had less access to healthcare and thus lower costs, the model 
+systematically underestimated their health needs. This case illustrates how 
+historical inequities can be perpetuated and amplified through algorithmic 
+decision-making.
 
 In diabetes specifically, Chen et al. \cite{chen2019} demonstrated that 
 prediction models trained on electronic health records showed differential 
 performance across racial groups, with higher false-negative rates for 
-minority populations. Similarly, a systematic review by Rajkomar et al. 
-\cite{rajkomar2018} identified performance disparities in clinical ML 
-models across demographic subgroups, particularly in settings with imbalanced 
-representation.
+minority populations. The study found that models trained predominantly on 
+data from White patients showed reduced accuracy when applied to Black and 
+Hispanic patients, suggesting that training data composition significantly 
+influences model fairness.
 
-The sources of algorithmic bias are multifaceted \cite{mehrabi2021}:
+Similarly, a systematic review by Rajkomar et al. \cite{rajkomar2018} 
+identified performance disparities in clinical ML models across demographic 
+subgroups, particularly in settings with imbalanced representation. The 
+review highlighted that many clinical ML studies fail to report performance 
+metrics stratified by demographic groups, making it difficult to assess 
+fairness in existing literature.
+
+The sources of algorithmic bias are multifaceted and interconnected 
+\cite{mehrabi2021}:
 
 \begin{itemize}[leftmargin=*]
     \item \textbf{Historical bias}: Past discrimination embedded in training 
-          data, reflecting unequal healthcare access and treatment patterns.
+          data, reflecting unequal healthcare access and treatment patterns. 
+          This includes differential treatment protocols, varying levels of 
+          care, and systemic barriers that have historically marginalized 
+          certain populations.
     \item \textbf{Representation bias}: Underrepresentation of certain groups 
           in training datasets, leading to poor generalization for these 
-          populations.
+          populations. When models are trained on data that does not adequately 
+          represent the diversity of the target population, they may fail to 
+          capture the complex relationships that exist in underrepresented 
+          groups.
     \item \textbf{Measurement bias}: Inconsistent data collection protocols 
-          across populations, introducing systematic errors.
+          across populations, introducing systematic errors. This can include 
+          differences in measurement tools, protocols, and standards that 
+          vary across clinical settings and populations.
     \item \textbf{Aggregation bias}: One-size-fits-all models that ignore 
           meaningful population differences in disease presentation and 
-          progression.
+          progression. Different populations may exhibit distinct disease 
+          phenotypes, comorbidity patterns, and treatment responses that 
+          are not captured by aggregated models.
 \end{itemize}
+
+The consequences of algorithmic bias extend beyond individual patient harm 
+to affect public health at scale. When biased algorithms are deployed in 
+clinical decision support systems, they can systematically disadvantage 
+entire populations, exacerbate existing health disparities, and undermine 
+trust in healthcare systems. The cumulative effect of these biases can 
+create feedback loops where disadvantaged populations receive worse care, 
+leading to poorer outcomes that further reinforce the biases in the data.
 
 \subsection{Diabetes Disparities}
 
@@ -56,7 +91,9 @@ minorities consistently experience higher prevalence and worse outcomes.
 
 The Centers for Disease Control and Prevention \cite{cdc2020} reports 
 significant racial and ethnic disparities in the United States, as summarized 
-in Table~\ref{tab:diabetes_disparities}.
+in Table~\ref{tab:diabetes_disparities}. These disparities reflect a complex 
+interplay of social, economic, and environmental factors that create unequal 
+health outcomes across populations.
 
 \begin{table}[H]
 \centering
@@ -85,6 +122,14 @@ without appropriate correction, they may learn and perpetuate these inequities,
 creating a feedback loop that further marginalizes already disadvantaged 
 populations.
 
+The social determinants of health that drive diabetes disparities are deeply 
+rooted in structural inequities, including residential segregation, 
+educational disparities, employment discrimination, and historical trauma. 
+These factors create cumulative disadvantage that manifests in higher 
+diabetes prevalence, later diagnosis, and poorer outcomes among marginalized 
+populations. Algorithmic models trained on data shaped by these structural 
+factors risk encoding and amplifying these inequities.
+
 \subsection{Fairness Metrics}
 
 Multiple fairness metrics have been proposed to quantify algorithmic bias 
@@ -111,6 +156,14 @@ and $A$ is the sensitive attribute. Equalized Odds is particularly relevant
 in clinical settings where both missed diagnoses (false negatives) and 
 unnecessary interventions (false positives) carry significant consequences.
 
+The Equalized Odds criterion is especially important in diabetes screening 
+because both types of errors have serious clinical implications. False 
+negatives can lead to delayed treatment and increased risk of complications, 
+while false positives can result in unnecessary anxiety, additional testing, 
+and potential overtreatment. By requiring equal error rates across groups, 
+Equalized Odds ensures that no population bears a disproportionate burden 
+of these errors.
+
 \subsubsection{Demographic Parity}
 
 Demographic Parity requires that the prediction is statistically independent 
@@ -123,7 +176,15 @@ P(\hat{Y}=1 \mid A=a) = P(\hat{Y}=1 \mid A=b) \quad \forall a,b
 
 While simpler to implement, Demographic Parity does not account for 
 legitimate differences in base rates across groups, which may lead to 
-paradoxical conclusions.
+paradoxical conclusions. For example, if one group has a genuinely higher 
+prevalence of diabetes, requiring equal prediction rates could lead to 
+under-diagnosis in that group.
+
+The tension between Demographic Parity and Equalized Odds highlights the 
+complexity of defining fairness in clinical contexts. Different fairness 
+criteria may be appropriate depending on the specific clinical application, 
+the consequences of different types of errors, and the underlying 
+prevalence patterns across populations.
 
 \subsubsection{Calibration}
 
@@ -140,6 +201,13 @@ cases, it is impossible to simultaneously satisfy calibration, equalized
 odds, and predictive parity, necessitating careful consideration of which 
 fairness criterion is most appropriate for the clinical context.
 
+Calibration is particularly important in clinical decision-making because 
+it ensures that predicted probabilities are meaningful and actionable. 
+A well-calibrated model allows clinicians to interpret risk scores 
+consistently across patient groups, enabling more equitable clinical 
+decision-making. However, achieving calibration across groups may require 
+group-specific adjustments that raise additional fairness considerations.
+
 \subsection{Bias Mitigation Strategies}
 
 Bias mitigation strategies can be categorized by their position in the 
@@ -150,26 +218,34 @@ ML pipeline \cite{friedler2019}:
           remove bias before model training. Techniques include reweighting 
           (assigning different weights to samples), resampling (oversampling 
           underrepresented groups), and data augmentation (generating synthetic 
-          samples using SMOTE or similar methods).
+          samples using SMOTE or similar methods). Pre-processing methods are 
+          attractive because they are model-agnostic and can be applied to any 
+          dataset without modifying the learning algorithm.
     
     \item \textbf{In-processing} (algorithm-level): Modify the learning 
           algorithm to incorporate fairness constraints. Approaches include 
           adversarial debiasing (removing sensitive information from learned 
           representations), fairness-constrained optimization, and 
-          regularization methods that penalize unfair predictions.
+          regularization methods that penalize unfair predictions. In-processing 
+          methods offer the advantage of jointly optimizing for performance 
+          and fairness, but require access to the learning algorithm.
     
     \item \textbf{Post-processing} (prediction-level): Modify model 
           predictions to achieve fairness. Methods include threshold adjustment 
           (applying different decision thresholds per group), calibration 
           (equalizing predicted probabilities), and reject option (abstaining 
-          from prediction on uncertain cases).
+          from prediction on uncertain cases). Post-processing methods are 
+          flexible and can be applied to any trained model, but may not address 
+          the root causes of bias.
 \end{enumerate}
 
 Each category offers distinct advantages and trade-offs. Pre-processing 
 methods are model-agnostic but may reduce overall accuracy. In-processing 
 methods optimize fairness and accuracy jointly but require algorithmic 
 modification. Post-processing methods are flexible but may not address 
-the root causes of bias.
+the root causes of bias. In practice, a combination of approaches may be 
+most effective, as different sources of bias may require different 
+mitigation strategies.
 
 \subsection{Intersectionality in Algorithmic Fairness}
 
@@ -191,6 +267,20 @@ In healthcare contexts, intersectional bias is particularly concerning
 because health disparities often cluster along multiple dimensions. 
 Individuals who are simultaneously members of multiple marginalized groups 
 may experience compounded disadvantage that is not captured by analyzing 
-each attribute in isolation. Despite its importance, intersectional analysis 
-remains underrepresented in healthcare AI fairness research, representing 
-a critical gap that this study addresses.
+each attribute in isolation. For example, Black women may face both racial 
+and gender discrimination in healthcare, creating unique barriers that 
+are not captured by analyzing race or gender separately.
+
+Despite its importance, intersectional analysis remains underrepresented 
+in healthcare AI fairness research, representing a critical gap that this 
+study addresses. The few existing studies that have examined intersectional 
+effects in healthcare AI have found significant disparities at the 
+intersection of race and gender, suggesting that single-attribute analyses 
+may systematically underestimate the extent of algorithmic bias.
+
+The intersectionality framework also highlights the importance of 
+considering structural and contextual factors that shape health disparities. 
+Algorithmic bias does not occur in isolation but is embedded in broader 
+systems of inequality that influence data collection, model development, 
+and deployment. Understanding these structural factors is essential for 
+developing effective strategies to address algorithmic bias in healthcare.

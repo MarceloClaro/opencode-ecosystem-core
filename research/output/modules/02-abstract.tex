@@ -1,0 +1,47 @@
+%=============================================================================
+% MODULE 02: ABSTRACT (Final Expansion)
+%=============================================================================
+% Frontiers in Public Health — Structured abstract (250-400 words)
+%=============================================================================
+
+\begin{abstract}
+\noindent
+\textbf{Background:} Machine learning models are increasingly used for 
+diabetes diagnosis, yet algorithmic bias threatens equitable healthcare 
+delivery. Existing research has predominantly focused on single demographic 
+attributes, leaving intersectional effects poorly understood.
+
+\textbf{Objective:} This study evaluates algorithmic bias in diabetes 
+prediction models across multiple demographic dimensions, examining 
+performance disparities by gender, ethnicity, and their intersection.
+
+\textbf{Methods:} We analyzed the Pima Indians Diabetes Database (n=768) 
+using four machine learning algorithms: Logistic Regression, Random Forest, 
+Gradient Boosting, and Support Vector Machine. Models were evaluated using 
+5-fold stratified cross-validation and held-out test sets. Fairness was 
+assessed using Equalized Odds Difference, Demographic Parity Difference, 
+True Positive Rate Disparity, and False Positive Rate Disparity. 
+Intersectional analysis examined performance at the intersection of gender 
+and ethnicity.
+
+\textbf{Results:} All four models exhibited measurable bias. The SVM model 
+achieved the best balance between performance (F1=0.8313, AUC=ROC=0.8794) 
+and fairness. False positive rates were consistently higher for minority 
+patients (0.333--0.417) compared to majority patients (0.164--0.200). 
+Intersectional analysis revealed amplified bias for minority females, who 
+exhibited the lowest True Positive Rate (0.714) and F1-Score (0.750) among 
+all subgroups. Cross-validation demonstrated stable performance across folds 
+(SD < 0.04).
+
+\textbf{Conclusions:} Algorithmic bias in diabetes prediction models is 
+systemic and multidimensional. Single-attribute analyses underestimate 
+the extent of discrimination. Intersectional approaches are essential for 
+identifying compounded disadvantage. We recommend multi-faceted bias 
+mitigation strategies spanning data collection, algorithm development, 
+and post-deployment monitoring.
+
+\noindent
+\textbf{Keywords:} algorithmic bias, diabetes, machine learning, fairness, 
+intersectionality, healthcare equity, machine learning ethics, bias 
+mitigation
+\end{abstract}

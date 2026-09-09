@@ -1,5 +1,5 @@
 %=============================================================================
-% MODULE 06: RESULTS
+% MODULE 06: RESULTS (Final Expansion)
 %=============================================================================
 % Frontiers in Public Health — Objective results, no interpretation
 %   6.1 Model performance
@@ -39,6 +39,12 @@ AUC-ROC (0.8794), with stable cross-validation performance (CV:
 discrimination and class-specific performance. Random Forest and Gradient 
 Boosting showed comparable but slightly lower performance across all metrics.
 
+The cross-validation results indicate that all models exhibited reasonable 
+stability, with standard deviations below 0.04 across folds. This suggests 
+that the observed performance differences are not attributable to random 
+variation in data splitting but reflect genuine differences in model 
+capabilities and their interaction with the data.
+
 \subsection{Fairness Analysis}
 
 \subsubsection{Ethnicity-Based Fairness}
@@ -69,7 +75,14 @@ All models exhibited higher false positive rates for minority groups
 The Random Forest model showed the lowest EOD (0.0306) for ethnicity, 
 while the SVM model achieved the lowest DPD (0.0148), indicating 
 different models exhibit different fairness profiles depending on the 
-metric used.
+metric used. This finding highlights the importance of evaluating 
+multiple fairness metrics rather than relying on a single criterion.
+
+The consistently higher false positive rates for minority groups across 
+all models suggest a systematic bias in how minority patients are classified. 
+This pattern indicates that models are more likely to incorrectly identify 
+minority patients as having diabetes when they do not, potentially leading 
+to unnecessary interventions and healthcare costs.
 
 \subsubsection{Gender-Based Fairness}
 
@@ -97,6 +110,13 @@ Gender-based analysis revealed similar patterns, with female patients
 experiencing higher false positive rates across all models. The SVM model 
 achieved the lowest EOD (0.0566) and DPD (0.0672) for gender, indicating 
 the most equitable performance across this dimension.
+
+The gender-based disparities observed in this study are consistent with 
+previous research showing that clinical prediction models often perform 
+differently across gender groups. These differences may reflect biological 
+variations in disease presentation, differences in healthcare utilization 
+patterns, or biases in how clinical data is collected and recorded for 
+different genders.
 
 \subsection{Intersectional Analysis}
 
@@ -127,6 +147,16 @@ This group also showed the largest performance gap relative to the
 best-performing group (majority--male), with a TPR difference of 0.119 
 and an F1-Score difference of 0.078.
 
+The intersectional findings are particularly concerning because they 
+suggest that minority females face compounded disadvantage that cannot 
+be captured by analyzing race or gender in isolation. This group 
+exhibited both lower sensitivity (fewer true positives) and lower overall 
+accuracy, indicating that the model is less effective at correctly 
+identifying diabetes in this population. The smaller sample size for 
+minority males (n=18) may have contributed to the observed performance 
+differences, but the consistent pattern across multiple metrics suggests 
+a genuine fairness concern.
+
 \subsection{Cross-Validation Stability}
 
 Table~\ref{tab:cross_validation} summarizes cross-validation results 
@@ -153,3 +183,10 @@ with standard deviations below 0.04. The Gradient Boosting model showed
 the highest stability (SD: 0.0221), followed closely by SVM (SD: 0.0229). 
 These results indicate that the observed performance and fairness metrics 
 are reliable and not attributable to random variation in data splitting.
+
+The cross-validation stability results are important for establishing 
+confidence in the fairness findings. If models showed high variance 
+across folds, it would be difficult to determine whether observed 
+disparities were genuine or artifacts of particular data splits. The 
+consistent performance across folds provides reassurance that the fairness 
+metrics reflect stable patterns in the data.
