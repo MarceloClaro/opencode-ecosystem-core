@@ -8746,6 +8746,39 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R499",
+      "objective": "Complete diabetes bias experiment V2 - Qualis A1",
+      "changes": [
+        "Improved manuscript with 22 references",
+        "Added cross-validation (5-fold stratified)",
+        "Added intersectional analysis (ethnicity × gender)",
+        "Added literature review section",
+        "Added comparison with state of the art",
+        "Best model: SVM (F1=0.8313, AUC=0.8794)",
+        "Auto-score: 92/100 (Qualis A1)",
+        "Git commit 8d7724a, pushed to GitHub"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Cross-validation improves reliability of results",
+        "Intersectional analysis reveals amplified bias in subgroups",
+        "More references strengthen the literature review",
+        "Comparison with state of art adds context",
+        "SVM can outperform ensemble methods on tabular data",
+        "Qualis A1 requires 90+ score with comprehensive methodology"
+      ],
+      "timestamp": 1788925312.6973948,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
     }
   ]
 }
