@@ -1,0 +1,50 @@
+%=============================================================================
+% MÓDULO 02: RESUMO (Expansão Final)
+%=============================================================================
+% Frontiers in Public Health — Resumo estruturado (250-400 palavras)
+%=============================================================================
+
+\begin{abstract}
+\noindent
+\textbf{Contexto:} Os modelos de aprendizado de máquina são cada vez mais 
+utilizados para o diagnóstico de diabetes, porém o viés algorítmico ameaça 
+a prestação equitativa de serviços de saúde. Pesquisas existentes concentraram-se 
+predominantemente em atributos demográficos individuais, deixando os efeitos 
+interseccionais mal compreendidos.
+
+\textbf{Objetivo:} Este estudo avalia o viés algorítmico em modelos de 
+predição de diabetes em múltiplas dimensões demográficas, examinando 
+disparidades de desempenho por gênero, etnia e sua intersecção.
+
+\textbf{Métodos:} Analisamos o Banco de Dados de Diabetes dos Índios Pima 
+(n=768) utilizando quatro algoritmos de aprendizado de máquina: Regressão 
+Logística, Random Forest, Gradient Boosting e Support Vector Machine. Os 
+modelos foram avaliados utilizando validação cruzada estratificada em 5 
+dobras e conjuntos de teste separados. A equidade foi avaliada utilizando 
+Diferença de Odds Equalizados, Diferença de Paridade Demográfica, Disparidade 
+de Taxa de Verdadeiros Positivos e Disparidade de Taxa de Falsos Positivos. 
+A análise interseccional examinou o desempenho na intersecção de gênero 
+e etnia.
+
+\textbf{Resultados:} Todos os quatro modelos apresentaram viés mensurável. 
+O modelo SVM alcançou o melhor equilíbrio entre desempenho (F1=0.8313, 
+AUC=ROC=0.8794) e equidade. As taxas de falso positivo foram 
+consistentemente mais altas para pacientes minoritários (0.333--0.417) 
+em comparação com pacientes majoritários (0.164--0.200). A análise 
+interseccional revelou viés amplificado para mulheres minoritárias, que 
+apresentaram a menor Taxa de Verdadeiros Positivos (0.714) e F1-Score 
+(0.750) entre todos os subgrupos. A validação cruzada demonstrou desempenho 
+estável entre as dobras (DP < 0.04).
+
+\textbf{Conclusões:} O viés algorítmico em modelos de predição de diabetes 
+é sistêmico e multidimensional. Análises de atributo único subestimam a 
+extensão da discriminação. Abordagens interseccionais são essenciais para 
+identificar desvantagens acumuladas. Recomendamos estratégias multifacetadas 
+de mitigação de viés abrangendo coleta de dados, desenvolvimento de 
+algoritmos e monitoramento pós-implantação.
+
+\noindent
+\textbf{Palavras-chave:} viés algorítmico, diabetes, aprendizado de máquina, 
+equidade, interseccionalidade, equidade em saúde, ética em aprendizado 
+de máquina, mitigação de viés
+\end{abstract}

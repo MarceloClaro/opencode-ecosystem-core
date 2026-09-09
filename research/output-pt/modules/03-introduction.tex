@@ -1,0 +1,193 @@
+%=============================================================================
+% MÓDULO 03: INTRODUÇÃO (Expansão Adicional)
+%=============================================================================
+% Frontiers in Public Health — Estrutura de funil com contexto expandido
+%   contexto amplo → problema → lacuna → objetivos → contribuição
+%=============================================================================
+
+\section{Introdução}
+
+\subsection{Contexto}
+
+A inteligência artificial (IA) e o aprendizado de máquina (AM) estão 
+fundamentalmente transformando a prestação de serviços de saúde em múltiplos 
+domínios, desde imagem diagnóstica até sistemas de apoio à decisão clínica 
+\cite{topol2019}. O rápido avanço das capacidades computacionais, acoplado 
+ao crescimento exponencial de prontuários eletrônicos e dados biomédicos, 
+criou oportunidades sem precedentes para desenvolver modelos preditivos que 
+possam auxiliar os clínicos a fazer diagnósticos mais precisos e oportunos. 
+Somente nos Estados Unidos, dispositivos médicos habilitados por IA receberam 
+mais de 500 aprovações da Food and Drug Administration, com aplicações 
+abrangendo radiologia, cardiologia, patologia e atenção primária.
+
+No cuidado ao diabetes especificamente, os modelos de aprendizado de máquina 
+demonstram promessa substancial para detecção precoce, estratificação de 
+risco e recomendações de tratamento personalizadas \cite{sd2019, esteva2017}. 
+A epidemia global de diabetes, afetando mais de 537 milhões de adultos em 
+todo o mundo com projeções indicando aumento para 783 milhões até 2045 
+\cite{idf2021}, demanda ferramentas de triagem escaláveis e precisas que 
+possam operar efetivamente em populações diversas. Estimativas atuais 
+sugerem que aproximadamente um em cada dois adultos com diabetes permanece 
+não diagnosticado, representando um desafio significativo de saúde pública 
+que ferramentas de triagem baseadas em IA poderiam potencialmente resolver.
+
+As abordagens de aprendizado de máquina para predição de diabetes evoluíram 
+significativamente nas últimas duas décadas. Estudos iniciais dependiam de 
+métodos estatísticos tradicionais como regressão logística e árvores de 
+decisão \cite{smith1988}, enquanto trabalhos mais recentes exploraram 
+métodos ensemble \cite{breiman2001, friedman2001}, máquinas de vetores 
+de suporte \cite{vapnik1995} e redes neurais profundas. Esses modelos 
+mostraram resultados promissores, com precisões relatadas variando de 75\% 
+a 95\% dependendo do conjunto de dados, características e algoritmo 
+utilizado. No entanto, o foco em métricas de desempenho geral ofuscou 
+em grande medida questões críticas sobre equidade e justiça em predições 
+algorítmicas.
+
+No entanto, evidências crescentes sugerem que essas tecnologias podem 
+perpetuar ou amplificar disparidades existentes de saúde através de viés 
+algorítmico \cite{mehrabi2021}. O viés algorítmico em saúde refere-se à 
+discriminação sistemática e injusta contra certos grupos, frequentemente 
+enraizada em dados históricos que refletem desigualdades sociais 
+\cite{barocas2019}. Este fenômeno é particularmente preocupante em contextos 
+clínicos, onde predições enviesadas podem impactar diretamente os desfechos 
+dos pacientes através de diagnósticos atrasados, tratamentos inadequados 
+e alocação desigual de recursos.
+
+As consequências do viés algorítmico em saúde são abrangentes e 
+potencialmente devastadoras. Quando um modelo de diagnóstico apresenta 
+desempenho sistematicamente inferior para certos grupos demográficos, ele 
+cria um sistema de saúde em dois níveis onde as predições algorítmicas são 
+confiáveis para populações privilegiadas mas não confiáveis para comunidades 
+marginalizadas. Isso pode exacerbar disparidades existentes de saúde, 
+erosionar a confiança nos sistemas de saúde e, em última análise, minar a 
+promessa de IA para melhorar a saúde para todos.
+
+No diagnóstico de diabetes, modelos enviesados podem produzir predições 
+menos precisas para populações sub-representadas, levando a diagnósticos 
+atrasados, tratamentos inadequados e, em última análise, piores desfechos 
+de saúde \cite{obermeyer2019}. Os mecanismos através dos quais o viés se 
+manifesta em modelos de predição de diabetes são multifacetados e incluem 
+viés de representação de dados, viés de medição e viés algorítmico. 
+Compreender esses mecanismos é essencial para desenvolver estratégias 
+eficazes de mitigação.
+
+A epidemia de diabetes afeta desproporcionalmente comunidades 
+marginalizadas, criando um contexto particularmente urgente para abordar 
+o viés algorítmico. Nos Estados Unidos, a prevalência de diabetes é 60\% 
+maior entre adultos negros e 77\% maior entre adultos hispânicos em 
+comparação com adultos brancos \cite{cdc2020}. Essas disparidades são 
+impulsionadas por determinantes sociais da saúde, incluindo acesso à saúde, 
+nutrição e fatores socioeconômicos \cite{hill2022}. Quando os modelos de 
+AM são treinados com dados que sub-representam essas populações, eles 
+podem falhar em generalizar efetivamente, exacerbando desigualdades 
+existentes e criando ciclos de retroalimentação que perpetuam disparidades 
+de saúde.
+
+\subsection{Declaração do Problema}
+
+Apesar da crescente conscientização sobre justiça algorítmica, poucos 
+estudos avaliaram sistematicamente o viés em modelos de predição de diabetes 
+em múltiplas dimensões demográficas simultaneamente. A maioria das pesquisas 
+existentes concentra-se em atributos individuais (raça \textit{ou} gênero) 
+em vez de examinar efeitos interseccionais onde múltiplas formas de 
+desvantagem convergem \cite{crenshaw1989, buolamwini2018}. Essa abordagem 
+de atributo único falha em capturar a natureza complexa e acumulativa da 
+discriminação experimentada por indivíduos que pertencem a múltiplos grupos 
+marginalizados.
+
+Além disso, embora métricas técnicas de justiça tenham sido propostas 
+\cite{corbett2018}, suas implicações práticas para a decisão clínica 
+permanecem insuficientemente compreendidas. A lacuna entre as definições 
+teóricas de justiça e suas aplicações clínicas no mundo real representa 
+uma barreira crítica para implementar sistemas de IA equitativos em 
+ambientes de saúde.
+
+O arcabouço da interseccionalidade, originalmente articulado por Crenshaw 
+\cite{crenshaw1989}, destaca como identidades sobrepostas criam modos 
+únicos de discriminação que não podem ser capturados analisando cada 
+atributo isoladamente. No contexto da justiça algorítmica, isso significa 
+que o viés experimentado por indivíduos na intersecção de múltiplos grupos 
+marginalizados (por exemplo, mulheres minoritárias) pode exceder a soma 
+dos vieses atribuídos a cada grupo individual. Apesar de sua importância 
+na compreensão da discriminação, a análise interseccional continua 
+sub-representada na pesquisa sobre justiça de IA em saúde.
+
+\subsection{Objetivos}
+
+Este estudo tem como objetivo:
+
+\begin{enumerate}[leftmargin=*]
+    \item Avaliar o desempenho discriminativo de quatro modelos de AM para 
+          diagnóstico de diabetes em subgrupos demográficos definidos por 
+          gênero e etnia, fornecendo uma avaliação abrangente de como 
+          diferentes abordagens algorítmicas se comportam em populações 
+          diversas.
+    \item Quantificar o viés algorítmico utilizando métricas estabelecidas 
+          de justiça, incluindo Odds Equalizados e Paridade Demográfica, 
+          para determinar se existem disparidades sistemáticas nas predições 
+          dos modelos.
+    \item Realizar análise interseccional para identificar disparidades 
+          amplificadas na intersecção de raça e gênero, examinando se 
+          indivíduos na convergência de múltiplas identidades marginalizadas 
+          experimentam desvantagem acumulada.
+    \item Fornecer recomendações baseadas em evidências para mitigação de 
+          viés em sistemas clínicos de AM implantados no cuidado ao diabetes, 
+          oferecendo orientação prática para desenvolvedores e profissionais 
+          de saúde.
+\end{enumerate}
+
+\subsection{Significado e Contribuição}
+
+Esta pesquisa contribui para a literatura crescente sobre equidade de IA 
+em saúde através de:
+
+\begin{itemize}[leftmargin=*]
+    \item Um arcabouço de avaliação abrangente para avaliar viés algorítmico 
+          que integra desempenho, justiça e análise interseccional, 
+          fornecendo um modelo metodológico para pesquisas futuras.
+    \item Evidências empíricas de disparidades interseccionais em predição 
+          de diabetes, indo além da avaliação de viés de atributo único para 
+          capturar a natureza complexa da discriminação.
+    \item Orientação prática para desenvolver sistemas de IA clínica mais 
+          justos, incluindo recomendações aplicáveis para coleta de dados, 
+          desenvolvimento de modelos e monitoramento de implantação que 
+          podem ser imediatamente aplicadas em contextos clínicos.
+    \item Uma metodologia totalmente reprodutível com código de fonte 
+          aberta, facilitando a replicação e extensão pela comunidade de 
+          pesquisa e permitindo a validação de descobertas em diferentes 
+          contextos.
+\end{itemize}
+
+\subsection{Trabalhos Relacionados}
+
+O estudo da justiça algorítmica em saúde ganhou atenção significativa nos 
+últimos anos, com vários estudos emblemáticos destacando a prevalência e 
+consequências do viés em sistemas de IA clínica. Obermeyer et al. 
+\cite{obermeyer2019} demonstraram que um algoritmo de saúde amplamente 
+utilizado subestimou sistematicamente as necessidades de saúde de pacientes 
+negros, afetando milhões de indivíduos anualmente. Essa descoberta gerou 
+debate generalizado sobre as implicações éticas da decisão algorítmica 
+em saúde e a necessidade de abordagens conscientes de justiça.
+
+No domínio da predição de diabetes especificamente, vários estudos avaliaram 
+o viés entre grupos demográficos. Chen et al. \cite{chen2019} descobriram 
+que modelos de predição treinados com prontuários eletrônicos mostraram 
+desempenho diferenciado entre grupos raciais, com taxas de falso negativo 
+maiores para populações minoritárias. Da mesma forma, Rajkomar et al. 
+\cite{rajkomar2018} identificaram disparidades de desempenho em modelos 
+clínicos de AM entre subgrupos demográficos em sua revisão sistemática de 
+aplicações de IA em saúde.
+
+O arcabouço da interseccionalidade foi aplicado à justiça algorítmica em 
+outros domínios, mais notavelmente por Buolamwini e Gebru \cite{buolamwini2018}, 
+que demonstraram disparidades significativas de desempenho para mulheres de 
+pele escura em sistemas de reconhecimento facial. No entanto, a análise 
+interseccional continua rara na pesquisa de IA em saúde, representando uma 
+lacuna crítica que este estudo aborda.
+
+Nosso trabalho baseia-se nessas fundações fornecendo uma avaliação 
+abrangente de viés algorítmico em predição de diabetes que integra desempenho, 
+justiça e análise interseccional. Diferente de estudos anteriores que 
+concentraram-se em atributos individuais ou métricas específicas de justiça, 
+examinamos múltiplas dimensões simultaneamente para capturar a natureza 
+complexa do viés em sistemas de IA clínica.

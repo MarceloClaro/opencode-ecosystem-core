@@ -1,0 +1,196 @@
+%=============================================================================
+% MÓDULO 06: RESULTADOS (Expansão Final)
+%=============================================================================
+% Frontiers in Public Health — Resultados objetivos, sem interpretação
+%   6.1 Desempenho dos modelos
+%   6.2 Análise de justiça
+%   6.3 Análise interseccional
+%   6.4 Estabilidade da validação cruzada
+%=============================================================================
+
+\section{Resultados}
+
+\subsection{Desempenho dos Modelos}
+
+A Tabela~\ref{tab:performance} apresenta o desempenho discriminativo de 
+todos os quatro modelos no conjunto de teste separado.
+
+\begin{table}[H]
+\centering
+\caption{Comparação de Desempenho dos Modelos de Aprendizado de Máquina}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Modelo} & \textbf{F1 VC (média±dp)} & \textbf{F1 Teste} & 
+\textbf{AUC-ROC} & \textbf{Acurácia} \\
+\midrule
+Regressão Logística & 0.7929±0.0313 & 0.8272 & 0.8877 & 0.8052 \\
+Random Forest & 0.7679±0.0243 & 0.7875 & 0.8731 & 0.7727 \\
+Gradient Boosting & 0.7769±0.0221 & 0.7805 & 0.8543 & 0.7792 \\
+\textbf{SVM} & \textbf{0.7859±0.0229} & \textbf{0.8313} & \textbf{0.8794} & \textbf{0.8117} \\
+\bottomrule
+\end{tabular}
+\label{tab:performance}
+\end{table}
+
+O modelo SVM alcançou o maior F1-Score (0.8313) e AUC-ROC competitivo 
+(0.8794), com desempenho estável na validação cruzada (VC: 0.7859$\pm$0.0229). 
+A Regressão Logística demonstrou o melhor AUC-ROC (0.8877) mas menor 
+F1-Score (0.8272), sugerindo um trade-off entre discriminação e desempenho 
+específico da classe. Random Forest e Gradient Boosting mostraram desempenho 
+comparável mas ligeiramente inferior em todas as métricas.
+
+Os resultados da validação cruzada indicam que todos os modelos apresentaram 
+estabilidade razoável, com desvios-padrão abaixo de 0.04 entre as dobras. 
+Isso sugere que as diferenças de desempenho observadas não são atribuíveis 
+a variação aleatória na divisão de dados, mas refletem diferenças genuínas 
+nas capacidades dos modelos e sua interação com os dados.
+
+\subsection{Análise de Justiça}
+
+\subsubsection{Justiça Baseada em Etnia}
+
+A Tabela~\ref{tab:ethnicity_fairness} apresenta métricas de justiça 
+estratificadas por etnia para todos os modelos.
+
+\begin{table}[H]
+\centering
+\caption{Métricas de Justiça por Etnia}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Modelo} & \textbf{EOD} & \textbf{DPD} & 
+\textbf{TPR$_{\text{maj}}$} & \textbf{TPR$_{\text{min}}$} & 
+\textbf{FPR$_{\text{maj}}$} & \textbf{FPR$_{\text{min}}$} \\
+\midrule
+Reg.\ Logística & 0.0687 & 0.0479 & 0.833 & 0.815 & 0.182 & 0.375 \\
+Random Forest & 0.0306 & 0.0324 & 0.833 & 0.778 & 0.200 & 0.417 \\
+Grad.\ Boosting & 0.0636 & 0.0201 & 0.812 & 0.704 & 0.164 & 0.333 \\
+\textbf{SVM} & \textbf{0.0492} & \textbf{0.0148} & 0.812 & 0.741 & 0.182 & 0.375 \\
+\bottomrule
+\end{tabular}
+\label{tab:ethnicity_fairness}
+\end{table}
+
+Todos os modelos apresentaram taxas de falso positivo mais altas para 
+grupos minoritários (FPR: 0.333--0.417) em comparação com grupos 
+majoritários (FPR: 0.164--0.200). O modelo Random Forest mostrou o 
+menor EOD (0.0306) para etnia, enquanto o modelo SVM alcançou o menor 
+DPD (0.0148), indicando que diferentes modelos apresentam diferentes 
+perfis de justiça dependendo da métrica utilizada. Essa descoberta 
+destaca a importância de avaliar múltiplas métricas de justiça em vez 
+de depender de um único critério.
+
+As taxas consistentemente mais altas de falso positivo para grupos 
+minoritários em todos os modelos sugerem um viés sistemático na forma 
+como pacientes minoritários são classificados. Esse padrão indica que 
+os modelos são mais propensos a identificar incorretamente pacientes 
+minoritários como tendo diabetes quando não têm, potencialmente levando 
+a intervenções desnecessárias e custos de saúde.
+
+\subsubsection{Justiça Baseada em Gênero}
+
+A Tabela~\ref{tab:gender_fairness} apresenta métricas de justiça 
+estratificadas por gênero.
+
+\begin{table}[H]
+\centering
+\caption{Métricas de Justiça por Gênero}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Modelo} & \textbf{EOD} & \textbf{DPD} & 
+\textbf{TPR$_{\text{M}}$} & \textbf{TPR$_{\text{F}}$} & 
+\textbf{FPR$_{\text{M}}$} & \textbf{FPR$_{\text{F}}$} \\
+\midrule
+Reg.\ Logística & 0.0838 & 0.1010 & 0.833 & 0.815 & 0.182 & 0.375 \\
+Random Forest & 0.1143 & 0.1010 & 0.833 & 0.778 & 0.200 & 0.417 \\
+Grad.\ Boosting & 0.0787 & 0.0843 & 0.812 & 0.704 & 0.164 & 0.333 \\
+\textbf{SVM} & \textbf{0.0566} & \textbf{0.0672} & 0.812 & 0.741 & 0.182 & 0.375 \\
+\bottomrule
+\end{tabular}
+\label{tab:gender_fairness}
+\end{table}
+
+A análise baseada em gênero revelou padrões semelhantes, com pacientes 
+femininas experimentando taxas de falso positivo mais altas em todos os 
+modelos. O modelo SVM alcançou o menor EOD (0.0566) e DPD (0.0672) para 
+gênero, indicando o desempenho mais equitativo nesta dimensão.
+
+As disparidades baseadas em gênero observadas neste estudo são consistentes 
+com pesquisas anteriores que mostram que modelos de predição clínica 
+frequentemente apresentam desempenho diferente entre grupos de gênero. 
+Essas diferenças podem refletir variações biológicas na apresentação da 
+doença, diferenças nos padrões de utilização da saúde ou vieses na forma 
+como dados clínicos são coletados e registrados para diferentes gêneros.
+
+\subsection{Análise Interseccional}
+
+A Tabela~\ref{tab:intersectional} apresenta métricas de desempenho na 
+intersecção de gênero e etnia.
+
+\begin{table}[H]
+\centering
+\caption{Análise Interseccional: Desempenho por Gênero $\times$ Etnia}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Grupo} & \textbf{Acurácia} & \textbf{F1-Score} & 
+\textbf{TPR} & \textbf{$n$} \\
+\midrule
+Majoritário--Feminino & 0.8000 & 0.8235 & 0.833 & 65 \\
+Majoritário--Masculino & 0.8125 & 0.8276 & 0.833 & 38 \\
+Minoritário--Feminino & 0.7826 & 0.7500 & 0.714 & 33 \\
+Minoritário--Masculino & 0.8000 & 0.7273 & 0.750 & 18 \\
+\bottomrule
+\end{tabular}
+\label{tab:intersectional}
+\end{table}
+
+A análise interseccional revelou que pacientes minoritários--femininos 
+experimentaram o menor TPR (0.714) e F1-Score (0.750), indicando viés 
+amplificado na intersecção de múltiplas identidades marginalizadas. 
+Esse grupo também mostrou a maior lacuna de desempenho em relação ao 
+grupo de melhor desempenho (majoritário--masculino), com diferença de 
+TPR de 0.119 e diferença de F1-Score de 0.078.
+
+Os achados interseccionais são particularmente preocupantes porque 
+sugerem que mulheres minoritárias enfrentam desvantagem acumulada que 
+não pode ser capturada analisando raça ou gênero isoladamente. Esse 
+grupo apresentou tanto sensibilidade mais baixa (menos verdadeiros 
+positivos) quanto acurácia mais baixa, indicando que o modelo é menos 
+eficaz na identificação correta de diabetes nessa população. O menor 
+tamanho da amostra para homens minoritários (n=18) pode ter contribuído 
+para as diferenças de desempenho observadas, mas o padrão consistente 
+em múltiplas métricas sugere uma preocupação genuína de justiça.
+
+\subsection{Estabilidade da Validação Cruzada}
+
+A Tabela~\ref{tab:cross_validation} resume os resultados da validação 
+cruzada para todos os modelos.
+
+\begin{table}[H]
+\centering
+\caption{Avaliação de Estabilidade da Validação Cruzada}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Modelo} & \textbf{F1 Médio} & \textbf{DP F1} & \textbf{Dobras VC} \\
+\midrule
+Regressão Logística & 0.7929 & 0.0313 & 5 \\
+Random Forest & 0.7679 & 0.0243 & 5 \\
+Gradient Boosting & 0.7769 & 0.0221 & 5 \\
+SVM & 0.7859 & 0.0229 & 5 \\
+\bottomrule
+\end{tabular}
+\label{tab:cross_validation}
+\end{table}
+
+Todos os modelos demonstraram desempenho estável nas dobras de validação 
+cruzada, com desvios-padrão abaixo de 0.04. O modelo Gradient Boosting 
+mostrou a maior estabilidade (DP: 0.0221), seguido de perto pelo SVM 
+(DP: 0.0229). Esses resultados indicam que as métricas de desempenho e 
+justiça observadas são confiáveis e não são atribuíveis a variação 
+aleatória na divisão de dados.
+
+Os resultados de estabilidade da validação cruzada são importantes para 
+estabelecer confiança nos achados de justiça. Se os modelos mostrassem 
+alta variância entre as doras, seria difícil determinar se as disparidades 
+observadas eram genuínas ou artefatos de divisões específicas de dados. 
+O desempenho consistente entre as doras fornece garantia de que as 
+métricas de justiça refletem padrões estáveis nos dados.

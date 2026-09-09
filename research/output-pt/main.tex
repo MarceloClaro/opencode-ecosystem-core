@@ -1,0 +1,95 @@
+%=============================================================================
+% MAIN.TEX — ARTIGO EM PORTUGUÊS
+%=============================================================================
+% Frontiers in Public Health — Versão em Português
+% Compilar com: pdflatex main.tex (duas vezes)
+%=============================================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% Pacotes essenciais
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% Configurações de página
+\geometry{margin=2.5cm}
+\onehalfspacing
+\setlength{\parindent}{1.5cm}
+\setlength{\parskip}{0.3cm}
+
+% Cabeçalho e rodapé
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Viés Algorítmico no Diagnóstico de Diabetes}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Títulos
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% Hiperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    bookmarks=true,
+    pdfauthor={Marcelo Claro Laranjeira},
+    pdftitle={Viés Algorítmico no Diagnóstico de Diabetes},
+    pdfsubject={Saúde Pública},
+    pdfkeywords={viés algorítmico, diabetes, aprendizado de máquina, equidade}
+}
+
+% Início do documento
+\begin{document}
+
+% Título e autores
+\input{modules/01-title}
+
+% Resumo
+\input{modules/02-abstract}
+
+% Nova página
+\newpage
+\setcounter{page}{1}
+
+% Introdução
+\input{modules/03-introduction}
+
+% Revisão de literatura
+\input{modules/04-literature-review}
+
+% Metodologia
+\input{modules/05-methodology}
+
+% Resultados
+\input{modules/06-results}
+
+% Discussão
+\input{modules/07-discussion}
+
+% Conclusão
+\input{modules/08-conclusion}
+
+% Referências
+\newpage
+\input{modules/09-references}
+
+\end{document}

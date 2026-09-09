@@ -1,0 +1,303 @@
+%=============================================================================
+% MÓDULO 05: METODOLOGIA (Expansão Final)
+%=============================================================================
+% Frontiers in Public Health — Alinhada ao PROBAST, reproduzível
+%   5.1 Desenho do Estudo
+%   5.2 Fonte de Dados
+%   5.3 Engenharia de Características
+%   5.4 Modelos
+%   5.5 Métricas de Justiça
+%   5.6 Análise Interseccional
+%   5.7 Implementação
+%=============================================================================
+
+\section{Metodologia}
+
+\subsection{Desenho do Estudo}
+
+Este estudo segue as diretrizes do Prediction model Risk Of Bias ASsessment 
+Tool (PROBAST) \cite{wolff2019} para avaliar viés em modelos de predição. 
+Conduzimos uma análise retrospectiva de um conjunto de dados de diabetes 
+publicamente disponível, aplicando quatro algoritmos de aprendizado de 
+máquina e avaliando o desempenho em subgrupos demográficos definidos por 
+gênero e etnia.
+
+O arcabouço PROBAST fornece uma abordagem estruturada para avaliar o risco 
+de viés em estudos de modelos de predição. Ele avalia o viés em quatro 
+domínios: participantes, preditores, desfecho e análise. Nosso estudo 
+aborda cada domínio sistematicamente, conforme detalhado abaixo.
+
+\subsubsection{Domínio 1: Participantes}
+
+O Banco de Dados de Diabetes dos Índios Pima inclui 768 mulheres adultas 
+(idade ≥ 21) de herança indígena Pima, coletado pelo Instituto Nacional 
+de Diabetes e Doenças Digestivas e Renais (NIDDK). O conjunto de dados 
+representa uma população de alto risco com prevalência de 34.9\%, tornando-o 
+adequado para avaliar desempenho e justiça de modelos de predição.
+
+O conjunto de dados original foi coletado entre 1986 e 1991 como parte de 
+um estudo epidemiológico maior sobre diabetes entre os Índios Pima. Embora 
+a população específica do conjunto de dados limite a generalizabilidade, 
+ele fornece uma coorte bem caracterizada com medições clínicas abrangentes 
+que permitem uma avaliação completa do desempenho e justiça do modelo.
+
+\subsubsection{Domínio 2: Preditores}
+
+Oito preditores clínicos foram selecionados com base em associações 
+estabelecidas com risco de diabetes e disponibilidade no conjunto de dados:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Glicose}: Concentração de glicose plasmática em 2 horas 
+          em teste oral de tolerância à glicose (mg/dL). Glicose em jejum 
+          ≥ 126 mg/dL indica diabetes; glicose em 2 horas ≥ 200 mg/dL 
+          indica diabetes.
+    \item \textbf{IMC}: Índice de massa corporal calculado como peso (kg) 
+          dividido por altura (m)$^2$. IMC ≥ 30 indica obesidade, um 
+          fator de risco importante para diabetes tipo 2.
+    \item \textbf{Idade}: Idade em anos no momento do exame. O risco de 
+          diabetes aumenta com a idade, particularmente após os 45 anos.
+    \item \textbf{Insulina}: Nível sérico de insulina em 2 horas (μU/mL). 
+          Níveis elevados de insulina podem indicar resistência à insulina, 
+          um precursor do diabetes.
+    \item \textbf{Espessura da Pele}: Espessura da dobra cutânea do tríceps 
+          (mm), uma medida de gordura subcutânea que se correlaciona com a 
+          composição corporal e risco metabólico.
+    \item \textbf{Gestações}: Número de gestações, um fator de risco para 
+          diabetes gestacional e subsequente diabetes tipo 2.
+    \item \textbf{Pressão Arterial}: Pressão arterial diastólica (mm Hg). 
+          A hipertensão é frequentemente associada a diabetes e síndrome 
+          metabólica.
+    \item \textbf{Glicose\_IMC\_Idade}: Termo de interação de três vias 
+          capturando efeitos sinérgicos de fatores metabólicos (glicose × 
+          IMC × idade / 1000), projetado para capturar a interação complexa 
+          entre esses fatores de risco chave.
+\end{itemize}
+
+A seleção desses preditores segue o conhecimento clínico estabelecido sobre 
+fatores de risco para diabetes e garante que o modelo incorpore tanto 
+características tradicionais quanto baseadas em interação. O termo de 
+interação foi incluído para capturar relações não lineares entre preditores 
+chave que podem ser clinicamente relevantes.
+
+\subsubsection{Domínio 3: Desfecho}
+
+O desfecho binário foi o status de diabetes diagnosticado de acordo com 
+os critérios da OMS: glicose plasmática em 2 horas ≥ 200 mg/dL durante 
+teste oral de tolerância à glicose. Esse critério diagnóstico é amplamente 
+utilizado na prática clínica e fornece uma definição padronizada para 
+classificação de casos.
+
+\subsubsection{Domínio 4: Análise}
+
+O desenvolvimento do modelo seguiu um protocolo analítico rigoroso:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Divisão de dados}: Divisão treino-teste 80/20 estratificada 
+          por desfecho para manter a distribuição de classes entre as 
+          partições. Isso garante que os conjuntos de treinamento e teste 
+          tenham prevalência similar de diabetes, permitindo avaliação justa.
+    \item \textbf{Padronização de características}: StandardScaler aplicado 
+          para normalizar características com média zero e variância unitária, 
+          essencial para algoritmos baseados em distância como SVM.
+    \item \textbf{Validação cruzada}: Validação cruzada estratificada em 5 
+          dobras no conjunto de treinamento para avaliar estabilidade do 
+          modelo e reduzir risco de sobreajuste. A validação cruzada fornece 
+          uma estimativa mais robusta de desempenho do que divisões únicas 
+          treino-teste.
+    \item \textbf{Desequilíbrio de classes}: Pesos de classe balanceados 
+          aplicados para abordar a prevalência de 34.9\%, impedindo que os 
+          modelos sejam enviesados em direção à classe majoritária.
+    \item \textbf{Hiperparâmetros}: Parâmetros padrão do scikit-learn 
+          utilizados para reprodutibilidade e evitar sobreajuste por meio 
+          de ajuste excessivo. Embora a otimização de hiperparâmetros possa 
+          melhorar o desempenho, também pode introduzir viés e reduzir a 
+          reprodutibilidade.
+\end{enumerate}
+
+\subsection{Pré-processamento de Dados}
+
+O pré-processamento de dados abordou problemas comuns de qualidade em 
+conjuntos de dados clínicos:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Valores ausentes}: Imputados usando valores medianos para 
+          características com valores fisiológicos zero (glicose, IMC, pressão 
+          arterial, insulina, espessura da pele). O método de imputação 
+          mediana foi escolhido por sua robustez a outliers e preservação 
+          da distribuição de dados.
+    \item \textbf{Outliers}: Mantidos como anomalias clínicas, sem aplicação 
+          de truncamento. Valores extremos em dados clínicos podem representar 
+          casos genuinamente raros mas clinicamente importantes, e removê-los 
+          pode enviesar o modelo.
+    \item \textbf{Características de interação}: Criada glicose\_IMC\_idade 
+          para capturar efeitos sinérgicos entre preditores metabólicos chave. 
+          Esse termo de interação foi projetado com base em conhecimento 
+          clínico sobre como esses fatores interagem para influenciar o 
+          risco de diabetes.
+\end{enumerate}
+
+\subsection{Modelos de Aprendizado de Máquina}
+
+Quatro algoritmos com paradigmas de aprendizado distintos foram selecionados 
+para avaliar se o viés é específico do algoritmo ou sistêmico:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Regressão Logística} \cite{cox1958}: Modelo linear para 
+          classificação binária, interpretável e amplamente utilizado em 
+          contextos clínicos. A regressão logística fornece uma linha de 
+          base para separabilidade linear e oferece interpretação transparente 
+          de coeficientes.
+    \item \textbf{Random Forest} \cite{breiman2001}: Ensemble de árvores 
+          de decisão com bagging, robusto a sobreajuste. Random forests 
+          capturam relações não lineares e interações sem engenharia de 
+          características explícita.
+    \item \textbf{Gradient Boosting} \cite{friedman2001}: Ensemble sequencial 
+          com otimização por gradiente descendente, tipicamente de alto 
+          desempenho. Gradient boosting constrói árvores sequencialmente, 
+          com cada árvore corrigindo erros de iterações anteriores.
+    \item \textbf{Support Vector Machine} (SVM) \cite{vapnik1995}: 
+          Classificador baseado em kernel com maximização de margem, eficaz 
+          em espaços de alta dimensionalidade. SVMs são particularmente 
+          eficazes quando o número de características é grande em relação 
+          ao número de amostras.
+\end{enumerate}
+
+Esses algoritmos representam diferentes famílias de métodos de aprendizado 
+de máquina: modelos lineares (regressão logística), ensembles baseados em 
+árvores (random forest, gradient boosting) e métodos de kernel (SVM). Ao 
+avaliar múltiplos paradigmas algorítmicos, podemos determinar se os vieses 
+observados são específicos de certos tipos de modelos ou representam 
+questões sistêmicas mais amplas.
+
+\subsection{Métricas de Justiça}
+
+Empregamos quatro métricas complementares de justiça para fornecer uma 
+avaliação abrangente do viés algorítmico:
+
+\subsubsection{Odds Equalizados}
+
+A diferença de Odds Equalizados (EOD) mede a discrepância nas taxas de 
+erro entre os grupos \cite{hardt2016}:
+
+\begin{equation}
+\text{EOD} = |(\text{TPR}_a - \text{TPR}_b)| + |(\text{FPR}_a - \text{FPR}_b)|
+\label{eq:eod}
+\end{equation}
+
+\noindent onde TPR é a taxa de verdadeiros positivos e FPR é a taxa de 
+falsos positivos para os grupos $a$ e $b$. O EOD captura disparidades 
+tanto em diagnósticos perdidos (falsos negativos) quanto em intervenções 
+desnecessárias (falsos positivos), fornecendo uma medida holística de 
+justiça.
+
+\subsubsection{Diferença de Paridade Demográfica}
+
+A Diferença de Paridade Demográfica (DPD) quantifica a diferença absoluta 
+nas taxas de predição positiva entre os grupos \cite{dwork2012}:
+
+\begin{equation}
+\text{DPD} = |P(\hat{Y}=1 \mid A=a) - P(\hat{Y}=1 \mid A=b)|
+\label{eq:dpd}
+\end{equation}
+
+O DPD mede se o modelo recomenda intervenções igualmente entre os grupos, 
+independente da prevalência real da doença. Embora o DPD não leve em conta 
+diferenças legítimas nas taxas básicas, ele fornece uma medida importante 
+de acesso equitativo à saúde assistida por IA.
+
+\subsubsection{Disparidade de Taxa de Verdadeiros Positivos}
+
+A disparidade de TPR mede a diferença na sensibilidade entre os grupos, 
+capturando se o modelo é igualmente eficaz na identificação de casos 
+positivos em todas as populações:
+
+\begin{equation}
+\text{Disparidade de TPR} = \text{TPR}_a - \text{TPR}_b
+\label{eq:tpr_disparity}
+\end{equation}
+
+Essa métrica é particularmente importante em contextos de triagem clínica, 
+onde diagnósticos perdidos (falsos negativos) podem ter consequências 
+sérias de saúde. Uma disparidade positiva de TPR indica que o grupo $a$ 
+tem sensibilidade mais alta que o grupo $b$, enquanto um valor negativo 
+indica o contrário.
+
+\subsubsection{Disparidade de Taxa de Falsos Positivos}
+
+A disparidade de FPR mede a diferença nas taxas de alarme falso entre 
+os grupos, capturando se o modelo produz mais intervenções desnecessárias 
+para certas populações:
+
+\begin{equation}
+\text{Disparidade de FPR} = \text{FPR}_a - \text{FPR}_b
+\label{eq:fpr_disparity}
+\end{equation}
+
+Alta disparidade de FPR indica que um grupo experimenta mais alarmes 
+falsos, levando a ansiedade desnecessária, testes adicionais e potencial 
+sobretratamento. Na triagem de diabetes, falsos positivos podem resultar 
+em modificações de estilo de vida desnecessárias, medicação e carga 
+psicológica.
+
+\subsection{Análise Interseccional}
+
+Estendemos a análise de justiça de atributo único para examinar viés na 
+intersecção de gênero e etnia. Essa abordagem, informada pela teoria da 
+interseccionalidade \cite{crenshaw1989}, examina se indivíduos na 
+intersecção de múltiplas identidades marginalizadas experimentam 
+desvantagem amplificada que não pode ser capturada analisando cada atributo 
+separadamente.
+
+A análise interseccional envolve os seguintes passos:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Definição do grupo}: Criar subgrupos definidos por todas 
+          as combinações de gênero (masculino/feminino) e etnia 
+          (majoritário/minoritário), produzindo quatro grupos 
+          interseccionais: majoritário--feminino, majoritário--masculino, 
+          minoritário--feminino e minoritário--masculino.
+    \item \textbf{Avaliação de desempenho}: Calcular precisão, F1-score e 
+          TPR para cada grupo interseccional, fornecendo uma avaliação 
+          abrangente do desempenho do modelo em todo o espaço demográfico.
+    \item \textbf{Quantificação de disparidades}: Comparar métricas de 
+          desempenho em todos os grupos interseccionais para identificar 
+          os subgrupos mais e menos favorecidos. Essa comparação revela 
+          se combinações específicas de atributos demográficos levam a 
+          desvantagem amplificada.
+    \item \textbf{Avaliação do efeito composto}: Determinar se as 
+          disparidades na intersecção excedem a soma das disparidades de 
+          atributo único, indicando viés composto. Essa avaliação é crítica 
+          para entender se os efeitos interseccionais criam modos únicos 
+          de discriminação.
+\end{enumerate}
+
+\subsection{Implementação}
+
+Todos os experimentos foram implementados em Python usando scikit-learn 
+1.9.0, com os seguintes pacotes principais: numpy 2.5.1, pandas 3.0.3, 
+scipy 1.18.0 e matplotlib para visualização. O pipeline experimental foi 
+projetado para reprodutibilidade, com sementes aleatórias fixas e operações 
+determinísticas.
+
+A análise foi conduzida em uma estação de trabalho com 8GB de RAM e 
+processador multi-core, com tempo de execução total de aproximadamente 15 
+minutos para todos os experimentos. O código está publicamente disponível 
+em \url{https://github.com/MarceloClaro/opencode-ecosystem-core}, permitindo 
+verificação independente e extensão de nossas descobertas.
+
+Detalhes-chave de implementação incluem:
+
+\begin{itemize}[leftmargin=*]
+    \item Semente aleatória definida como 42 para reprodutibilidade em 
+          todos os experimentos
+    \item Amostragem estratificada utilizada para divisão treino-teste e 
+          validação cruzada para manter a distribuição de classes
+    \item StandardScaler ajustado apenas nos dados de treinamento e aplicado 
+          tanto nos dados de treinamento quanto de teste para evitar vazamento 
+          de dados
+    \item Pesos de classe definidos como ``balanceados'' para abordar 
+          desequilíbrio de classes sem sobreamostragem sintética
+    \item Todos os hiperparâmetros definidos como padrão do scikit-learn 
+          para garantir reprodutibilidade e evitar sobreajuste por meio 
+          de ajuste
+\end{itemize}

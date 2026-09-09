@@ -1,0 +1,296 @@
+%=============================================================================
+% MÓDULO 04: REVISÃO DE LITERATURA (Expansão Adicional)
+%=============================================================================
+% Frontiers in Public Health — Revisão temática narrativa-crítica
+%   Bloco 1: Viés algorítmico em saúde
+%   Bloco 2: Disparidades de diabetes
+%   Bloco 3: Métricas de justiça
+%   Bloco 4: Estratégias de mitigação
+%   Bloco 5: Interseccionalidade
+%=============================================================================
+
+\section{Revisão de Literatura}
+
+\subsection{Viés Algorítmico em Saúde}
+
+O viés algorítmico foi documentado em numerosas aplicações de saúde, desde 
+predição de risco até imagem diagnóstica \cite{rajkomar2018}. Um estudo 
+emblemático de Obermeyer et al. \cite{obermeyer2019} revelou que um 
+algoritmo de saúde amplamente utilizado subestimou sistematicamente as 
+necessidades de saúde de pacientes negros, afetando milhões de indivíduos 
+anualmente. Esse achado destacou como decisões algorítmicas aparentemente 
+objetivas podem incorporar e ampliar desigualdades históricas, afetando 
+milhões de pacientes anualmente.
+
+O estudo de Obermeyer demonstrou que, para um determinado escore de risco, 
+os pacientes negros estavam consideravelmente mais doentes do que os 
+pacientes brancos, conforme evidenciado por condições como diabetes, 
+hipertensão e doença renal crônica. O algoritmo usava custos de saúde como 
+proxy para necessidades de saúde, mas como os pacientes negros historicamente 
+tinham menos acesso à saúde e, portanto, custos menores, o modelo subestimou 
+sistematicamente suas necessidades de saúde. Esse caso ilustra como 
+desigualdades históricas podem ser perpetuadas e amplificadas através de 
+decisões algorítmicas.
+
+No diabetes especificamente, Chen et al. \cite{chen2019} demonstraram que 
+modelos de predição treinados com prontuários eletrônicos mostraram desempenho 
+diferenciado entre grupos raciais, com taxas de falso negativo maiores para 
+populações minoritárias. O estudo descobriu que modelos treinados 
+predominantemente com dados de pacientes brancos mostraram precisão reduzida 
+quando aplicados a pacientes negros e hispânicos, sugerindo que a composição 
+dos dados de treinamento influencia significativamente a justiça do modelo.
+
+Da mesma forma, uma revisão sistemática de Rajkomar et al. \cite{rajkomar2018} 
+identificou disparidades de desempenho em modelos clínicos de AM entre 
+subgrupos demográficos, particularmente em configurações com representação 
+desbalanceada. A revisão destacou que muitos estudos clínicos de AM falham 
+em relatar métricas de desempenho estratificadas por grupos demográficos, 
+tornando difícil avaliar a justiça na literatura existente.
+
+As fontes de viés algorítmico são multifacetadas e interconectadas 
+\cite{mehrabi2021}:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Viés histórico}: Discriminação passada incorporada nos dados 
+          de treinamento, refletindo acesso desigual à saúde e padrões de 
+          tratamento. Isso inclui protocolos de tratamento diferenciados, 
+          níveis variáveis de cuidado e barreiras sistêmicas que historicamente 
+          marginalizaram certas populações.
+    \item \textbf{Viés de representação}: Sub-representação de certos grupos 
+          em conjuntos de dados de treinamento, levando a generalização 
+          pobre para essas populações. Quando os modelos são treinados com 
+          dados que não representam adequadamente a diversidade da população 
+          alvo, eles podem falhar em capturar as relações complexas que 
+          existem em grupos sub-representados.
+    \item \textbf{Viés de medição}: Protocolos inconsistentes de coleta de 
+          dados entre populações, introduzindo erros sistemáticos. Isso pode 
+          incluir diferenças em ferramentas de medição, protocolos e padrões 
+          que variam entre configurações clínicas e populações.
+    \item \textbf{Viés de agregação}: Modelos padronizados que ignoram 
+          diferenças populacionais significativas na apresentação e progressão 
+          da doença. Diferentes populações podem apresentar fenótipos 
+          distintos da doença, padrões de comorbidade e respostas ao 
+          tratamento que não são capturados por modelos agregados.
+\end{itemize}
+
+As consequências do viés algorítmico vão além do dano individual ao paciente 
+para afetar a saúde pública em escala. Quando algoritmos enviesados são 
+implantados em sistemas de apoio à decisão clínica, eles podem 
+sistematicamente prejudicar populações inteiras, exacerbando disparidades 
+existentes de saúde e minando a confiança nos sistemas de saúde. O efeito 
+cumulativo desses vieses pode criar ciclos de retroalimentação onde 
+populações desfavorecidas recebem pior cuidado, levando a desfechos mais 
+ruins que reforçam ainda mais os vieses nos dados.
+
+\subsection{Disparidades de Diabetes}
+
+O diabetes afeta desproporcionalmente comunidades marginalizadas devido a 
+determinantes sociais da saúde \cite{narayan2017}. A Federação Internacional 
+de Diabetes \cite{idf2021} relata que países de baixa e média renda suportam 
+a maior carga, com taxas de prevalência excedendo as de países de alta 
+renda em 2--3 vezes. Dentro de países de alta renda, minorias raciais e 
+étnicas consistentemente experimentam prevalência mais alta e piores 
+desfechos.
+
+Os Centros de Controle e Prevenção de Doenças \cite{cdc2020} relatam 
+disparidades raciais e étnicas significativas nos Estados Unidos, conforme 
+resumido na Tabela~\ref{tab:diabetes_disparities}. Essas disparidades 
+refletem uma interação complexa de fatores sociais, econômicos e ambientais 
+que criam desfechos de saúde desiguais entre populações.
+
+\begin{table}[H]
+\centering
+\caption{Prevalência de Diabetes por Raça/Etnia nos Estados Unidos 
+(Fonte: CDC, 2020)}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Grupo} & \textbf{Prevalência (\%)} & \textbf{Risco Relativo} \\
+\midrule
+Branco & 7.4 & 1.00 \\
+Negro & 11.7 & 1.58 \\
+Hispânico & 12.5 & 1.69 \\
+Asiático & 8.0 & 1.08 \\
+Índio Americano & 14.7 & 1.99 \\
+\bottomrule
+\end{tabular}
+\label{tab:diabetes_disparities}
+\end{table}
+
+Essas disparidades são impulsionadas por múltiplos fatores interconectados 
+\cite{hill2022}: acesso desigual a serviços de saúde, taxas mais altas 
+de obesidade e inatividade física, insegurança alimentar e acesso limitado 
+a alimentos saudáveis, estresse crônico de discriminação e status 
+socioeconômico mais baixo. Quando os modelos de AM são treinados com dados 
+que refletem essas disparidades sem correção apropriada, eles podem aprender 
+e perpetuar essas desigualdades, criando um ciclo de retroalimentação que 
+marginaliza ainda mais populações já desfavorecidas.
+
+Os determinantes sociais da saúde que impulsionam as disparidades de diabetes 
+estão profundamente enraizados em desigualdades estruturais, incluindo 
+segregação residencial, disparidades educacionais, discriminação no emprego 
+e trauma histórico. Esses fatores criam desvantagem cumulativa que se 
+manifesta em maior prevalência de diabetes, diagnóstico mais tardio e 
+piores desfechos entre populações marginalizadas. Modelos algorítmicos 
+treinados com dados moldados por esses fatores estruturais correm o risco 
+de codificar e amplificar essas desigualdades.
+
+\subsection{Métricas de Justiça}
+
+Múltiplas métricas de justiça foram propostas para quantificar o viés 
+algorítmico \cite{corbett2018}. As métricas mais comumente utilizadas 
+incluem:
+
+\subsubsection{Odds Equalizados}
+
+Os Odds Equalizados, introduzidos por Hardt et al. \cite{hardt2016}, 
+exigem que a taxa de verdadeiros positivos (sensibilidade) e a taxa de 
+falsos positivos (1 - especificidade) sejam iguais entre os grupos:
+
+\begin{equation}
+P(\hat{Y}=1 \mid Y=1, A=a) = P(\hat{Y}=1 \mid Y=1, A=b) \quad \forall a,b
+\label{eq:eo_tpr}
+\end{equation}
+
+\begin{equation}
+P(\hat{Y}=1 \mid Y=0, A=a) = P(\hat{Y}=1 \mid Y=0, A=b) \quad \forall a,b
+\label{eq:eo_fpr}
+\end{equation}
+
+\noindent onde $\hat{Y}$ é o desfecho previsto, $Y$ é o desfecho real 
+e $A$ é o atributo sensível. Os Odds Equalizados são particularmente 
+relevantes em contextos clínicos onde tanto diagnósticos perdidos (falsos 
+negativos) quanto intervenções desnecessárias (falsos positivos) carregam 
+consequências significativas.
+
+O critério de Odds Equalizados é especialmente importante na triagem de 
+diabetes porque ambos os tipos de erro têm implicações clínicas sérias. 
+Falsos negativos podem levar a tratamento atrasado e maior risco de 
+complicações, enquanto falsos positivos podem resultar em ansiedade 
+desnecessária, testes adicionais e potencial sobretratamento. Ao exigir 
+taxas de erro iguais entre os grupos, os Odds Equalizados garantem que 
+nenhuma população suporte uma carga desproporcional desses erros.
+
+\subsubsection{Paridade Demográfica}
+
+A Paridade Demográfica exige que a predição seja estatisticamente 
+independente do atributo sensível \cite{dwork2012}:
+
+\begin{equation}
+P(\hat{Y}=1 \mid A=a) = P(\hat{Y}=1 \mid A=b) \quad \forall a,b
+\label{eq:dp}
+\end{equation}
+
+Embora mais simples de implementar, a Paridade Demográfica não leva em 
+conta diferenças legítimas nas taxas básicas entre os grupos, o que pode 
+levar a conclusões paradoxais. Por exemplo, se um grupo tem uma prevalência 
+genuinamente mais alta de diabetes, exigir taxas de predição iguais pode 
+levar a sub-diagnóstico nesse grupo.
+
+A tensão entre Paridade Demográfica e Odds Equalizados destaca a 
+complexidade de definir justiça em contextos clínicos. Diferentes critérios 
+de justiça podem ser apropriados dependendo da aplicação clínica específica, 
+das consequências de diferentes tipos de erros e dos padrões subjacentes 
+de prevalência entre as populações.
+
+\subsubsection{Calibração}
+
+Um modelo está bem calibrado se as probabilidades previstas correspondem 
+às taxas reais de desfecho entre os grupos \cite{chouldechova2017}:
+
+\begin{equation}
+P(Y=1 \mid \hat{P}=p, A=a) = P(Y=1 \mid \hat{P}=p, A=b) \quad \forall a,b,p
+\label{eq:cal}
+\end{equation}
+
+Chouldechova \cite{chouldechova2017} demonstrou que, exceto em casos 
+triviais, é impossível satisfazer simultaneamente calibração, odds 
+equalizados e paridade preditiva, necessitando consideração cuidadosa 
+de qual critério de justiça é mais apropriado para o contexto clínico.
+
+A calibração é particularmente importante na decisão clínica porque 
+garante que as probabilidades previstas sejam significativas e acionáveis. 
+Um modelo bem calibrado permite que os clínicos interpretem escores de 
+risco consistentemente entre grupos de pacientes, permitindo uma decisão 
+clínica mais equitativa. No entanto, alcançar calibração entre os grupos 
+pode exigir ajustes específicos do grupo que levantam considerações 
+adicionais de justiça.
+
+\subsection{Estratégias de Mitigação de Viés}
+
+As estratégias de mitigação de viés podem ser categorizadas por sua posição 
+no pipeline de AM \cite{friedler2019}:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Pré-processamento} (nivel de dados): Modificar os dados 
+          de treinamento para remover viés antes do treinamento do modelo. 
+          As técnicas incluem reposicionamento (atribuir diferentes pesos 
+          às amostras), reamostragem (sobreamostrar grupos sub-representados) 
+          e aumento de dados (gerar amostras sintéticas usando SMOTE ou 
+          métodos similares). Os métodos de pré-processamento são atraentes 
+          porque são agnósticos ao modelo e podem ser aplicados a qualquer 
+          conjunto de dados sem modificar o algoritmo de aprendizado.
+    
+    \item \textbf{Durante o processamento} (nivel do algoritmo): Modificar 
+          o algoritmo de aprendizado para incorporar restrições de justiça. 
+          As abordagens incluem dessensibilização adversarial (remover 
+          informações sensíveis das representações aprendidas), otimização 
+          com restrições de justiça e métodos de regularização que penalizam 
+          predições injustas. Os métodos durante o processamento oferecem a 
+          vantagem de otimizar conjuntamente desempenho e justiça, mas 
+          exigem acesso ao algoritmo de aprendizado.
+    
+    \item \textbf{Pós-processamento} (nivel de predição): Modificar as 
+          predições do modelo para alcançar justiça. Os métodos incluem 
+          ajuste de limiar (aplicar diferentes limiares de decisão por grupo), 
+          calibração (equalizar probabilidades previstas) e opção de rejeição 
+          (abster-se de predição em casos incertos). Os métodos de 
+          pós-processamento são flexíveis e podem ser aplicados a qualquer 
+          modelo treinado, mas podem não abordar as causas raiz do viés.
+\end{enumerate}
+
+Cada categoria oferece vantagens e trade-offs distintos. Os métodos de 
+pré-processamento são agnósticos ao modelo mas podem reduzir a precisão 
+geral. Os métodos durante o processamento otimizam justiça e precisão 
+conjuntamente mas exigem modificação algorítmica. Os métodos de 
+pós-processamento são flexíveis mas podem não abordar as causas raiz do 
+viés. Na prática, uma combinação de abordagens pode ser mais eficaz, 
+diferentes fontes de viés podem exigir diferentes estratégias de mitigação.
+
+\subsection{Interseccionalidade na Justiça Algorítmica}
+
+A teoria da interseccionalidade, originalmente proposta por Crenshaw 
+\cite{crenshaw1989}, destaca como múltiplas formas de discriminação 
+interagem para criar modos únicos de desvantagem. Na justiça algorítmica, 
+a análise interseccional examina viés na intersecção de múltiplos 
+atributos sensíveis (por exemplo, raça \textit{e} gênero) em vez de cada 
+atributo independentemente \cite{buolamwini2018}.
+
+Buolamwini e Gebru \cite{buolamwini2018} demonstraram esse fenômeno em 
+sistemas de reconhecimento facial, onde classificadores comerciais 
+apresentaram disparidades significativas de desempenho para mulheres de 
+pele escura, apesar de precisão razoável para indivíduos de pele clara 
+e homens. Essa descoberta destacou as limitações da análise de justiça 
+de atributo único e a importância de examinar efeitos interseccionais.
+
+Em contextos de saúde, o viés interseccional é particularmente preocupante 
+porque as disparidades de saúde frequentemente se agrupam ao longo de 
+múltiplas dimensões. Indivíduos que são simultaneamente membros de múltiplos 
+grupos marginalizados podem experimentar desvantagem acumulada que não é 
+capturada analisando cada atributo isoladamente. Por exemplo, mulheres 
+negras podem enfrentar discriminação racial e de gênero na saúde, criando 
+barreiras únicas que não são capturadas analisando raça ou gênero 
+separadamente.
+
+Apesar de sua importância, a análise interseccional continua sub-representada 
+na pesquisa sobre justiça de IA em saúde, representando uma lacuna crítica 
+que este estudo aborda. Os poucos estudos existentes que examinaram efeitos 
+interseccionais em IA em saúde encontraram disparidades significativas na 
+intersecção de raça e gênero, sugerindo que análises de atributo único 
+podem subestimar sistematicamente a extensão do viés algorítmico.
+
+O arcabouço da interseccionalidade também destaca a importância de considerar 
+fatores estruturais e contextuais que moldam as disparidades de saúde. O 
+viés algorítmico não ocorre isoladamente, mas está embutido em sistemas mais 
+amplos de desigualdade que influenciam a coleta de dados, o desenvolvimento 
+de modelos e a implantação. Compreender esses fatores estruturais é essencial 
+para desenvolver estratégias eficazes para abordar o viés algorítmico em saúde.
