@@ -9753,6 +9753,38 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R486",
+      "objective": "Convergência Polimática — quem, fora do domínio, já resolveu parte do gap",
+      "changes": [
+        "scanners/polymathic_convergence.py: PolymathicConvergence (tokens + score ponderado por campo title=2/industry=2/framework=1.5/dependencies=1/swift=1; match_capability com top_k e desempate agent_id; scan integra ReverseScanner)",
+        "specs/SPEC-935-R486-polymathic-convergence.md (CA1-CA10)",
+        "tests/test_r486_polymathic_convergence.py (15 testes)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "A paisagem externa atual (20 agentes de produto do 500-AI-Agents-Projects) tem cobertura quase nula para lacunas epistemológicas — a ausência de match é um resultado legítimo que orienta expandir o manifest com fontes científicas (feynman, science-skills)",
+        "Score binário por campo (I(tok∈campo)) é intencional, mas exige docstring explícita para evitar leitura como overlap de tokens",
+        "Durante RED: assumi que o agente 02 cobria 100% da capability; só após rodar vi que 'metodos' não casa em nenhum campo => score=2/7.5; os testes foram escritos ANTES do código (TDD) pegando a semântica errada no ASSERT, não no módulo",
+        "source no params deve usar endswith nos testes (caminho absoluto x relativo)",
+        "Convergência é decoração de R483/R485: reusa ReverseScanner sem duplicação"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 4 falhas iniciais (asserts de scoring e fixture) corrigidas no TESTE",
+        "GREEN: pytest tests/test_r486_polymathic_convergence.py -> 15 passed",
+        "Regressões R483-R486 -> 75 passed; suíte completa -> 3949 passed, 58 skipped, 0 failed (359s)",
+        "Demo real: 1 correspondência parcial entre 4 lacunas (dados -> Resume Parser)"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }
