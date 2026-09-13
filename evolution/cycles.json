@@ -9846,6 +9846,41 @@
       "origin_commit": null,
       "state_merkle_root": "19e6513678bcc61a74c5013723e94de52f7dfcc96b969c2dd5474eade705cb2c",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R489",
+      "objective": "Paisagem Acadêmica — manifest academic (DeepMind + science-skills) e convergência ampliada",
+      "changes": [
+        "landscape/manifest.json: chave academic (4 fontes Apache-2.0 curadas: superhuman, alphageometry, alphageometry2, science-skills)",
+        "scanners/polymathic_convergence.py: cruza agents + academic (ACADEMIC_FIELDS title/description/tags), source academic:, agents_indexed total",
+        "tests/test_r489_academic_landscape.py (10 testes)",
+        "specs/SPEC-935-R489-academic-landscape.md",
+        "THIRD_PARTY_NOTICES.md: secao Paisagem academica (R489)"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "A R486 apontou cobertura nula para lacunas epistemologicas; a R489 fecha o maior buraco: raciocinio formal (alphageometry) e literature search (science-skills) agora convergem com score ~0.64",
+        "Anti-overclaim no nome do repo: 'superhuman' e rotulo da FONTE, jamais veredicto; curadoria registra a distincao no manifest e nos testes",
+        "Campos ponderados por tipo de fonte (agents vs academic) evitam contaminar scores com campos inexistentes (industry/framework)",
+        "'meta-analise' segue sem fonte externa — resultado honesto que orienta proximas curadorias",
+        "Escalada: R489 encadeia no R488 via prev_state_merkle_root"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 5 falhas iniciais + 1 veto de alvo no teste (target_state)",
+        "GREEN: pytest tests/test_r489_academic_landscape.py -> 10 passed",
+        "Regressoes R486/R483 -> 46 passed",
+        "Demo: alphageometry score 0.64 p/ prova geometrica; science-skills 0.64 p/ literature"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": "07ec6c0",
+      "state_merkle_root": null,
+      "prev_state_merkle_root": "19e6513678bcc61a74c5013723e94de52f7dfcc96b969c2dd5474eade705cb2c"
     }
   ]
 }
