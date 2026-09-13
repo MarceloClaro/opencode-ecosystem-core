@@ -10104,6 +10104,37 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R497",
+      "objective": "Paisagem acadêmica — deepmind/acme (RL framework) curado no manifest + THIRD_PARTY_NOTICES + teste R489 ajustado (24→25)",
+      "changes": [
+        "landscape/manifest.json: academic += deepmind-acme (Apache-2.0, https://github.com/google-deepmind/acme)",
+        "THIRD_PARTY_NOTICES.md: linha deepmind-acme na tabela R489 (metadados apenas; stack TF/JAX/Reverb não incorporada)",
+        "tests/test_r489_academic_landscape.py: agents_indexed 24 → 25"
+      ],
+      "score": 0.82,
+      "lessons": [
+        "Contagem fixa em teste de paisagem (24) quebra ao adicionar fonte — não é contrato imutável, é inventário: atualizar refletindo curadoria (20 agents + 5 academic)",
+        "Analogia estrutural do acme: environment_loop ↔ ciclo Perceber→…→Refletir do orquestrador; adders/replay ↔ MetaBus; specs ↔ SDD — valida o desenho do Core por paralelo independente (DeepMind)",
+        "Acme pontua 1.000 em 'loop de controle' e 0.636 em 'agentes'/'pesquisa científica' — vocabulário de convergência confirma a curadoria",
+        "Anti-overclaim: o acme é framework de PESQUISA em RL, não 'superhuman'; inclusão é metadados/paisagem, stack de terceiros não incorporada (hermético/stdlib)"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: test_r489 test_default_index_24 falhou (24 → 25) após curadoria",
+        "GREEN: tests/test_r489 + test_r486 -> 25 passed",
+        "Demo: agents_indexed=25; acme match 'loop de controle' score=1.000, 'agentes'/'pesquisa científica' 0.636"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }

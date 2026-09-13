@@ -47,7 +47,7 @@ class TestManifest:
         assert pc.agents  # 20 agents carregados
         report = pc.scan({}, target_state=["x.y"])
         total = report.params.get("agents_indexed")
-        assert total == 24
+        assert total == 25  # 20 agents + 5 acadêmicas (4 DeepMind + acme R497)
 
 
 class TestCross:

@@ -410,6 +410,24 @@
       "source_repo": "https://github.com/google-deepmind/science-skills",
       "reference_url": "https://github.com/google-deepmind/science-skills",
       "note": ""
+    },
+    {
+      "id": "deepmind-acme",
+      "title": "Acme — framework de pesquisa em reinforcement learning",
+      "description": "Biblioteca DeepMind de blocos de construção para RL: environment loops (agente-ambiente), adders de experiência/replay, agentes baseline (DQN, D4PG, IMPALA) e contratos de tipos (specs). Analogia estrutural: environment_loop ↔ ciclo Perceber→Especificar→Delegar→Executar→Verificar→Refletir do orquestrador; adders ↔ MetaBus/lições; specs ↔ SDD; agents baseline ↔ catálogo de agentes.",
+      "tags": [
+        "reinforcement learning",
+        "agentes",
+        "environment loop",
+        "replay",
+        "experiência",
+        "contratos",
+        "pesquisa"
+      ],
+      "license": "Apache-2.0",
+      "source_repo": "https://github.com/google-deepmind/acme",
+      "curated_at": "2026-09-13",
+      "note": "Metadados apenas; stack TF/JAX/Reverb é incompatível com o princípio hermético/stdlib do Core — nenhum código incorporado"
     }
   ]
 }

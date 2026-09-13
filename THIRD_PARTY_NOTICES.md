@@ -52,6 +52,7 @@ terceiros incorporado.
 | deepmind-alphageometry | google-deepmind/alphageometry | Apache-2.0 | Fonte de paisagem p/ **prova geométrica / dedução simbólica** |
 | deepmind-alphageometry2 | google-deepmind/alphageometry2 | Apache-2.0 | Fonte de paisagem p/ **prova geométrica / busca orientada** |
 | deepmind-science-skills | google-deepmind/science-skills | Apache-2.0 | Fonte de paisagem p/ **literature search e bancos de dados biológicos** (37 skills) |
+| deepmind-acme | google-deepmind/acme | Apache-2.0 | Fonte de paisagem p/ **reinforcement learning e loops agente-ambiente** (R497). Analogia estrutural: `environment_loop` ↔ ciclo Perceber→…→Refletir do orquestrador; `adders`/replay ↔ MetaBus; `specs` ↔ SDD. Metadados apenas; stack TF/JAX/Reverb não incorporada (princípio hermético/stdlib) |
 | feynman-tutor | koukekoukej-glitch/feynman-tutor | MIT | Inspiração conceptual para o Successor Generator (R491): método Feynman aplicado a tutoria |
 
 ## Fonte de espelhos (item 2B)
