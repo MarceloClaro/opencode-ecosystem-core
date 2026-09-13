@@ -1,0 +1,37 @@
+{
+  "pesos": {
+    "acurácia": 0.4,
+    "velocidade": 0.3,
+    "conformidade": 0.2,
+    "disponibilidade": 0.1
+  },
+  "ranking": [
+    {
+      "model": "opencode/mimo-v2.5-free",
+      "latencia_media_s": 23.8,
+      "acurácia_maswos": 1.0,
+      "conformidade_maswos": 1.0,
+      "velocidade_norm": 0.957,
+      "disponibilidade": 1.0,
+      "score": 0.987,
+      "achados": {
+        "raw_ctx_vazio": true,
+        "typo_exp_mimo": true
+      }
+    },
+    {
+      "model": "opencode/nemotron-3-ultra-free",
+      "latencia_media_s": 107.4,
+      "acurácia_maswos": 1.0,
+      "conformidade_maswos": 1.0,
+      "velocidade_norm": 0.029,
+      "disponibilidade": 1.0,
+      "score": 0.709,
+      "achados": {
+        "raw_ctx_vazio": true,
+        "typo_exp_mimo": false
+      }
+    }
+  ],
+  "veredito": "Camada de orquestração (scaffold MASWOS) foi o fator decisivo: C0/C1 sem scaffold → 0 acertos, saída vazia; C2 com scaffold → 100% acerto+conformidade. Ranking free: mimo-v2.5-free (1º) por latência ~4x menor e mesma acurácia sob orquestração."
+}

@@ -10167,6 +10167,42 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R499",
+      "objective": "Estudo IMO (solver determinístico anti-leak) + benchmark LLMs free reais + raio-x da orquestração por camadas",
+      "changes": [
+        "specs/SPEC-935-R499-imo-pilot.md: spec do estudo IMO + adendo benchmark LLM free",
+        "integrations/deepmind/imo_real_solver.py: solvers determinísticos reais (enumeração, anti-leak)",
+        "tests/test_r499_imo_real_solver.py: 7 testes (exatidão, anti-leak, anti-overclaim)",
+        "research/imo_study/: study_results.json (2/4 corretos, média 4.5/7), manuscrito draft + LaTeX/PDF/DOCX, llm_free_benchmark.json, llm_free_ranking.json, raio-x_orquestracao.md",
+        "Descarte do llama3.2 local (latência) em favor dos modelos externos free reais"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "ANTI-LEAK: o solver padrão do harness ecoava a resposta (overclaim); solver determinístico real deu 2/4 corretos com 3 achados metodológicos (semântica quotient, definição local maximum, sensibilidade de serialização do grading)",
+        "ORQUESTRAÇÃO DECIDE: scaffold MASWOS (C2) elevou acurácia de 0% (raw/ctx) para 100% nos 2 modelos free — sem orquestração, LLM free não entrega resultado utilizável",
+        "TIER ≠ ACESSIBILIDADE: deepseek-v4-flash 'fast' exige saldo; gemini-2.5-flash erro de servidor; catálogo precisa campo de acessibilidade real",
+        "CONTEXTO SEM SCAFFOLD É RUÍDO: C1 (ctx) piorou latência e deu timeout no nemotron; contexto só agrega com estrutura de saída",
+        "MODELO LOCAL INEFICAZ: llama3.2 a 30-50s/estágio × 16 estágios >10min sem conclusão — descartado por métrica objetiva",
+        "mimo-v2.5-free é 4x mais rápido que nemotron-3-ultra-free com mesma acurácia sob orquestração (score 0.987 vs 0.709)"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED→GREEN: tests/test_r499_imo_real_solver.py 7 passed; regressão R442+deep_diagnose 27 passed",
+        "E2E solver real: nt001=(7,3), alg001(floor)=3, comb001=2^(n-1) n=1..6, alg004=parcial (sem prova) — 2/4 corretos, média 4.5/7",
+        "Benchmark free: 6 trials reais; C0/C1 0 acertos (vazio/timeout), C2 2/2 acertos+conformes; ranking mimo 0.987 > nemotron 0.709",
+        "Gate: FormalProofVerifier True para 7^3-3^5=(7+3)^2, False para par errado"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }

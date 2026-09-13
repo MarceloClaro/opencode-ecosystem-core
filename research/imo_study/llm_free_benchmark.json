@@ -1,0 +1,62 @@
+[
+  {
+    "model": "opencode/mimo-v2.5-free",
+    "condition": "raw",
+    "elapsed_s": 19.85,
+    "chars": 0,
+    "correct": false,
+    "conforming": false,
+    "status": "vazio",
+    "output_head": ""
+  },
+  {
+    "model": "opencode/mimo-v2.5-free",
+    "condition": "ctx",
+    "elapsed_s": 25.57,
+    "chars": 0,
+    "correct": false,
+    "conforming": false,
+    "status": "vazio",
+    "output_head": ""
+  },
+  {
+    "model": "opencode/mimo-v2.5-free",
+    "condition": "maswos",
+    "elapsed_s": 23.84,
+    "chars": 61,
+    "correct": true,
+    "conforming": true,
+    "status": "ok",
+    "output_head": "(7, 3) Verificação: 7³ − 3²⁵ = 343 − 243 = 100 = (7+3)² = 10²"
+  },
+  {
+    "model": "opencode/nemotron-3-ultra-free",
+    "condition": "raw",
+    "elapsed_s": 63.77,
+    "chars": 0,
+    "correct": false,
+    "conforming": false,
+    "status": "vazio",
+    "output_head": ""
+  },
+  {
+    "model": "opencode/nemotron-3-ultra-free",
+    "condition": "ctx",
+    "elapsed_s": 110.0,
+    "chars": 0,
+    "correct": false,
+    "conforming": false,
+    "status": "timeout",
+    "output_head": ""
+  },
+  {
+    "model": "opencode/nemotron-3-ultra-free",
+    "condition": "maswos",
+    "elapsed_s": 107.43,
+    "chars": 47,
+    "correct": true,
+    "conforming": true,
+    "status": "ok",
+    "output_head": "(7, 3) 7³ - 3⁵ = 343 - 243 = 100 = (7+3)² = 10²"
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "benchmark": {
+    "total_problems": 4,
+    "correct_problems": 2,
+    "accuracy": 0.5,
+    "average_grade_0_to_7": 4.5,
+    "results": [
+      {
+        "problem_id": "imo-bench-algebra-001",
+        "is_correct": true,
+        "predicted_answer": "3",
+        "expected_answer": "3",
+        "grade_score_0_to_7": 6,
+        "grade_feedback": "Solução completa e correta com omissões puramente estilísticas.",
+        "justification": "Metodo: enumeracao exata de N em 1..60 com soma dos quocientes (divisao inteira) igual a alvo racional. Valores encontrados: N=[3]. Justificativa: para cada N, calculamos S(N)=sum ab//(N+1) e comparamos com (N^3-N^2+2)/4; a igualdade exata define os candidatos.",
+        "formal_verified": false
+      },
+      {
+        "problem_id": "imo-bench-algebra-004",
+        "is_correct": false,
+        "predicted_answer": "incompleto",
+        "expected_answer": "2^{u-2}",
+        "grade_score_0_to_7": 3,
+        "grade_feedback": "Abordagem correta iniciada; lemas intermediários faltantes.",
+        "justification": "Metodo: validacao numerica extensiva da desigualdade para u=[2, 3, 4, 5, 6] e grade de t. Candidato C=2**(u-2) status parcial; prova formal nao concluida (evidencia numerica forte apenas).",
+        "formal_verified": false
+      },
+      {
+        "problem_id": "imo-bench-number-theory-001",
+        "is_correct": true,
+        "predicted_answer": "(7, 3)",
+        "expected_answer": "(7, 3)",
+        "grade_score_0_to_7": 6,
+        "grade_feedback": "Solução completa e correta com omissões puramente estilísticas.",
+        "justification": "Metodo: enumeracao exata de primos p,q em 2..400 testando p^3-q^5=(p+q)^2. Pares encontrados: [(7, 3)]. Verificacao aritmetica: 7^3-3^5=343-243=100=(7+3)^2.",
+        "formal_verified": false
+      },
+      {
+        "problem_id": "imo-bench-combinatorics-001",
+        "is_correct": false,
+        "predicted_answer": "incompleto",
+        "expected_answer": "2^{n-1}",
+        "grade_score_0_to_7": 3,
+        "grade_feedback": "Abordagem correta iniciada; lemas intermediários faltantes.",
+        "justification": "Metodo: enumeracao exata de permutacoes n=1..6 com local maximum (incluindo extremos). Contagens: {1: 1, 2: 2, 3: 4, 4: 8, 5: 16, 6: 32}; formula 2^(n-1) confirmada: True.",
+        "formal_verified": false
+      }
+    ]
+  },
+  "findings": {
+    "alg001_semantics": "parafrase do harness e ambigua; quotient=divisao inteira (floor) -> N=3; racional -> N=1",
+    "comb001_definition": "local maximum interior falha em n=1,2; definicao com extremos incluidos confirma 2^(n-1) p/ n=1..6",
+    "grading_serialization": "GradingHead e sensivel a serializacao: 2^(n-1) vs 2^{n-1} altera deteccao de resposta curta",
+    "alg004_status": "evidencia numerica forte para C=2^(u-2); sem prova formal automatizada"
+  },
+  "limitations": [
+    "corpus amostral de 4 problemas (IMO Shortlist 2020-2022), nao o IMO-AnswerBench completo",
+    "sem comparacao head-to-head executada contra AlphaGeometry/AG2/Aletheia",
+    "solvers determinísticos por dominio; sem busca neural ou prova formal Lean4"
+  ],
+  "harness_metadata": {
+    "grading_scale": "0-7 GradingHead (R442)",
+    "anti_leak": "solver nunca recebe short_answer; resultados por deducao exata",
+    "motores": [
+      "enumeracao exata (fractions, itertools)",
+      "aritmetica de primos",
+      "sympy disponivel"
+    ]
+  }
+}
