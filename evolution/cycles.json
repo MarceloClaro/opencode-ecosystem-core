@@ -9785,6 +9785,35 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R487",
+      "objective": "Análise de paisagem: science-skills (Google DeepMind) e ruflo; registro de licenças e lições",
+      "changes": [
+        "THIRD_PARTY_NOTICES.md: tabela 'Análise de paisagem — repos inspecionados (R487)' + seção de fonte de espelhos (item 2B)",
+        "examples/agents/: 21 espelhos arquiteturais do 500-AI-Agents-Projects (00 fundação + 20 pilotos)",
+        "Inspeção local: /tmp/opencode/science-skills (Apache-2.0), /tmp/opencode/ruflo (MIT)"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "science-skills: literature search e bancos de dados biológicos são candidatos diretos a enriquecer o landscape/manifest com domínio academic — a Convergência Polimática (R486) mostrou cobertura nula das lacunas epistemológicas na paisagem atual",
+        "ruflo: o Learning Loop confirma o desenho do ciclo Reflexion do Core (Blackboard + Trust Engine + MetaBus); arquitetura TS de terceiros não é incorporada",
+        "Espelhos são documentação de padrões (MIT respeitado); metadados declarativos (entrypoint/deps/llm) permitem auditoria sem executar"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "clones locais validados (LICENSE Apache-2.0 / MIT)",
+        "21 espelhos verificados (seções + proveniência)",
+        "suíte completa R483-R486: 3949 passed, 0 failed"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }

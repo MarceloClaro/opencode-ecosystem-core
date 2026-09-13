@@ -17,7 +17,7 @@ análise de licença prévia; este arquivo é o registro canônico.
 | SciHubEVA | leovan/SciHubEVA | MIT | Frontend opt-in do resolvedor restrito (M6) | Nunca padrão; herda gates fail-closed da R470 |
 | tig | rsrohan99/tig | **sem licença declarada** (license: null) | Executor alternativo multi-provedor (M7) | Invocação externa opcional; **vedada redistribuição**, inclusão em bundle ou venda de código derivado sem autorização |
 | openclaw-qa | ythx-101 | conteúdo **CC BY-SA 4.0** (share-alike) | Observatório de campo (M8) | **Nenhuma incorporação de conteúdo**; citar com atribuição; derivados sob mesma licença |
-| 500-AI-Agents-Projects | MarceloClaro (fork); ashishpatel26/500-AI-Agents-Projects | MIT | **Referência de paisagem** (R482): manifest curado com 20 agentes auto-contidos e LANDSCAPE_REPORT | **Nenhum código-fonte copiado**; apenas metadados curados (metadados não são obra derivada); sem promessa de integração |
+| 500-AI-Agents-Projects | MarceloClaro (fork); ashishpatel26/500-AI-Agents-Projects | MIT | **Referência de paisagem** (R482): manifest curado com 20 agentes auto-contidos e LANDSCAPE_REPORT; **espelhos arquiteturais** (item 2B): `examples/agents/` 00+20 | **Nenhum código-fonte copiado**; apenas metadados curados (metadados não são obra derivada) e documentação de padrões; sem promessa de integração |
 
 ## Referências epistemológicas da R483 (Scanner Reverso)
 
@@ -29,6 +29,22 @@ de métricas; nenhum código copiado, nenhuma dependência):
 | feynman-skill | MarceloClaro (fork); alchaincyf/feynman-skill | MIT (Huashu/花叔) | Termo **ritual(g)** — teste anti-cargo-cult: distinguir lacuna genuína de lacuna ritual |
 | feynman | MarceloClaro (fork); advaitpaliwal/feynman | MIT (Companion, Inc.) | Executor futuro das trajetórias de pesquisa (planejado, fora do escopo R483) |
 | bernstein | MarceloClaro (fork); sipyourdrink-ltd/bernstein | Apache-2.0 | Executor futuro do roadmap via orquestração determinística (planejado, fora do escopo R483) |
+
+## Análise de paisagem — repos inspecionados (R487)
+
+Inspeção local com `git clone --depth 1` em `/tmp/opencode/`; nenhum código
+incorporado ao Core nesta revisão.
+
+| Componente | Origem | Licença | Papel/lição para o Core |
+|---|---|---|---|
+| science-skills | google-deepmind/science-skills | Apache-2.0 | 37 skills científicas (UniProt, ClinVar, gnomAD, PubMed, OpenAlex, AlphaFold, Foldseek…). Lição: **vocabulário de convergência** — as skills de literature search (arXiv/bioRxiv/EuropePMC/OpenAlex/PubMed) e bancos de dados preenchem parte das lacunas metodológicas que o `ReverseScanner`/`PolymathicConvergence` (R483/R486) sinalizam; candidatas a enriquecer o landscape/manifest com domínio **academic** |
+| ruflo (ex Claude Flow) | ruvnet/ruflo | MIT | "Sistema nervoso" de agente: CLI/MCP → Router → Swarm → Memory com Learning Loop. Lição: o Core já cobre o equivalente via Blackboard (A2A) + Trust Engine + MetaBus; o **Learning Loop** (retroalimentação de padrões bem-sucedidos) confirma o desenho do ciclo **Reflexion** R472+; arquitetura em TypeScript não é copiada |
+
+## Fonte de espelhos (item 2B)
+
+`examples/agents/` referencia 21 espelhos (00 fundação + 20 pilotos) do
+500-AI-Agents-Projects (MIT). Licenças individuais dos agentes-fonte: MIT.
+Os espelhos são **documentação de padrões**, não redistribuição de código.
 
 ## Política geral
 
