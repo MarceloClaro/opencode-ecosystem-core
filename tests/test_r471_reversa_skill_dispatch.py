@@ -102,6 +102,28 @@ def test_functional_api_returns_plain_dict(tmp_path: Path) -> None:
     assert isinstance(result["instruction"], str)
 
 
+def test_bridge_exposes_safe_skill_handoff(tmp_path: Path) -> None:
+    _write_skill(
+        tmp_path,
+        "reversa-clarify",
+        "disable-model-invocation: true\n",
+        openai_policy=(
+            "interface:\n"
+            "  display_name: Reversa Clarify\n"
+            "policy:\n"
+            "  allow_implicit_invocation: false\n"
+        ),
+    )
+    from reversa_universal.bridge import ReversaBridge
+
+    decision = ReversaBridge().skill_handoff("reversa-clarify", project_root=tmp_path)
+    assert decision["found"] is True
+    assert decision["user_invoked"] is True
+    assert decision["execution_mode"] == "read-and-execute"
+    assert "disable-model-invocation=true" in str(decision["reason"])
+    assert "allow_implicit_invocation=false" in str(decision["reason"])
+
+
 def test_no_environment_leak_between_dispatchers(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("REVERSA_SKILLS_ROOT", raising=False)
     dispatcher = ReversaSkillDispatcher(tmp_path)
