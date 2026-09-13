@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-ReversaBridge — ponte metacognitiva e de gaps (SPEC-935-R437)
+ReversaBridge — ponte metacognitiva e de gaps (SPEC-935-R437/R471)
 """
 
 from __future__ import annotations
 
 import re
-import unicodedata
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from reversa_universal.engine import ReversaUniversalEngine, reversa_engine
+from reversa_universal.skill_dispatch import ReversaSkillDispatcher
 
 
 def _slug(path: str) -> str:
@@ -21,10 +21,11 @@ def _slug(path: str) -> str:
 
 
 class ReversaBridge:
-    """Ponte que conecta engine a MetaBus, pesquisa, manuscrito e scanners."""
+    """Ponte que conecta engine a MetaBus, pesquisa, manuscrito, scanners e skills."""
 
     def __init__(self, engine: Optional[ReversaUniversalEngine] = None, metabus: Any = None):
         self.engine = engine or reversa_engine
+        self.skill_dispatcher = ReversaSkillDispatcher()
         if metabus is not None:
             self.metabus = metabus
         else:
@@ -64,6 +65,21 @@ class ReversaBridge:
                 pass
         return result
 
+    def skill_handoff(
+        self,
+        skill_name: str,
+        project_root: str | Path = ".",
+    ) -> Dict[str, object]:
+        """Planeja o handoff sem disparar invocação implícita proibida.
+
+        Se a skill trouxer ``disable-model-invocation: true`` ou
+        ``allow_implicit_invocation: false``, o retorno orienta o orquestrador
+        a ler o SKILL.md e executar suas instruções no contexto atual.
+        """
+
+        dispatcher = ReversaSkillDispatcher(project_root=project_root)
+        return dispatcher.plan(skill_name).to_dict()
+
     def enhance_gaps(self, diagnostic_report: Dict[str, Any], analysis: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Injeta gaps Reversa no report de diagnóstico."""
         if not isinstance(diagnostic_report, dict):
@@ -75,17 +91,14 @@ class ReversaBridge:
         gaps = gaps_data.get("gaps", [])
         if not gaps:
             return diagnostic_report
-        # Garante estruturas
         evo = diagnostic_report.setdefault("evolutionary", {})
         evo.setdefault("total_gaps", 0)
-        # Injeta reversa_gaps
         reversa_gaps = [
-            {"dimension": f"reversa:{g['type']}", "severity": g.get("severity","medium"), "description": g["description"]}
+            {"dimension": f"reversa:{g['type']}", "severity": g.get("severity", "medium"), "description": g["description"]}
             for g in gaps
         ]
         evo["reversa_gaps"] = reversa_gaps
         evo["total_gaps"] = int(evo.get("total_gaps", 0)) + len(reversa_gaps)
-        # Seção reversa dedicada
         diagnostic_report["reversa"] = {
             "score": max(0.0, min(10.0, 5.0 + len(gaps) * 0.8)),
             "findings": [g["description"] for g in gaps],
@@ -94,7 +107,6 @@ class ReversaBridge:
             "solutions": gaps_data.get("solutions", []),
             "innovations": gaps_data.get("innovations", []),
         }
-        # Recomendações evolutivas: prioriza gaps críticos
         if gaps:
             evo["recommendation"] = f"Reversa detectou {len(gaps)} gaps estruturais ({', '.join(g['type'] for g in gaps[:3])}) — priorizar soluções: {'; '.join(gaps_data.get('solutions',[])[:1])}"
         return diagnostic_report
@@ -103,6 +115,7 @@ class ReversaBridge:
         last = self._last_analysis
         return {
             "engine_available": self.engine is not None,
+            "skill_dispatcher_available": self.skill_dispatcher is not None,
             "last_target": last.get("target") if isinstance(last, dict) else None,
             "last_modules": len(last.get("modules", [])) if isinstance(last, dict) else 0,
             "last_gaps": last.get("gaps", {}).get("metrics", {}).get("total_gaps", 0) if isinstance(last, dict) else 0,
