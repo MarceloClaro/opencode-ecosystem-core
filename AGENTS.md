@@ -10,6 +10,7 @@ Este arquivo é lido automaticamente pelo OpenCode CLI (`opencode.json.instructi
 4. **Anti-overclaim**: nunca declare um resultado como "superhuman", "verificado" ou "Qualis A1" sem validação externa explícita — ver `mci/metacognitive_evaluator.py::classify_metacognitive_tier()` e `CORRIGENDUM.md` para o histórico de alegações já corrigidas.
 5. **Antes de editar**: rode `python3 -m marceloclaro.cli doctor` para confirmar que o ambiente está saudável (specs carregando, registro de evolução íntegro, memória metacognitiva acessível).
 6. **Depois de mudanças relevantes**: registre um ciclo de evolução (`evolution_registry.record(...)`, ver `evolution/cycles.py`) e, se aplicável, uma spec formal em `specs/SPEC-935-R*.md`.
+7. **Invocação de skills e continuidade de pipelines**: quando uma skill filha estiver marcada com `disable-model-invocation: true` no `SKILL.md` ou `policy.allow_implicit_invocation: false` em `agents/openai.yaml`, **não** tente acioná-la implicitamente pelo Skill tool nem pelo mecanismo de subagente por nome. O orquestrador deve localizar e ler o `SKILL.md` correspondente e executar suas instruções no contexto atual. Se o usuário já respondeu `CONTINUAR` ao próximo passo sugerido, isso é consentimento explícito para esse handoff; não interrompa o pipeline exigindo que ele digite `/nome-da-skill`. Para resolução determinística, use `reversa_universal.skill_dispatch.ReversaSkillDispatcher` (SPEC-935-R471).
 
 ## Onde encontrar o quê
 
