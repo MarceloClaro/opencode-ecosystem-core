@@ -37,6 +37,24 @@ CONTROLLERS = {
     "production": "productionctl.py",
 }
 
+# Comandos nativos de primeira classe da camada científica (SPEC-935-R475),
+# resolvidos localmente no Core sem depender da supercamada externa:
+# o contrato de teste test_scientific_lab_v42_native.py exige no mínimo
+# {"research","articles","review","evidence"}.
+NATIVE_COMMANDS = frozenset(CONTROLLERS) | {"evidence", "native_status"}
+
+
+def native_status() -> dict:
+    """Status da camada científica nativa v4.2-core: comandos e controllers."""
+    return {
+        "mode": "native",
+        "version": "4.2.0-core.1",
+        "commands": sorted(NATIVE_COMMANDS),
+        "controllers": {k: v for k, v in CONTROLLERS.items()},
+        "superlayer_discovered": discover() is not None,
+        "experience": "execucao nativa no Core; supercamada externa opcional",
+    }
+
 
 def _candidates() -> Iterable[Path]:
     explicit = os.environ.get("PESQUISADOR_UNIVERSAL_HOME")

@@ -41,6 +41,204 @@
 
 ---
 
+## Visão geral
+
+O **OpenCode Ecosystem Core** é um ecossistema de orquestração multi-agente para pesquisa científica e automação. O orquestrador primário `marceloclaro` coordena 209 agentes configurados via Blackboard (protocolo A2A), memoria metacognitiva compartilhada via MetaBus, gates SDD/TDD estritos, economia de tokens com stake/slashing (Trust Engine) e 6 MCPs configurados. Toda entrega nasce de uma especificação formal (`specs/SPEC-935-R*.md`) e é validada por testes (`tests/test_r*.py`).
+
+## Capacidades principais
+
+- **Pesquisa multi-fonte open science**: OpenAlex, Crossref, EuropePMC e arXiv como fontes-padrão (`open_science_only`); failover e recibos auditáveis.
+- **Fábrica de pesquisa** (`research_factory/`): ciclos pesquisar → revisar → analisar → agendar, com autonomia (Reflexion), raciocínio (consistência de planos, estatísticas e prazos) e busca com failover.
+- **Execução multi-provedor** (executor `tig` opcional): Ollama local como âncora, com fallback DeepSeek → Groq → Gemini → OpenAI.
+- **Raciocínio formal**: motores Z3, SymPy, Kanren e verificadores Lean 4 / E-Graph / AlphaGeometry.
+- **Pipeline acadêmico**, **MIRA** (apresentações), **jurídico**, **clínico**, **Scientific RAG** e **Universidade Sintética**.
+
+## Início rápido local
+
+```bash
+git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git
+cd opencode-ecosystem-core
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m marceloclaro.cli doctor
+.venv/bin/python -m marceloclaro.cli helpdesk
+```
+
+## Instalação segura e procedência
+
+A instalação é **local e revisável**: nada é executado por pipe de rede. A procedência combina versão publicada, revisão Git imutável e checksum:
+
+- `ECOSYSTEM_VERSION` — versão publicada da release;
+- `ECOSYSTEM_REF` — revisão Git exata (`git describe --tags --exact-match HEAD`);
+- `ECOSYSTEM_SOURCE_SHA256` — checksum do archive da release pala `sha256sum -c` (Linux) ou `shasum -a 256 -c` (macOS) com o valor publicado em `<sha-256-publicado-com-64-caracteres>`;
+- `ProvisionSha256` — checksum do provisionador WSL (Windows);
+- `CommonInstallerSha256` — checksum do instalador comum `installer/common/install_clis.sh`.
+
+Fluxo verificado:
+
+```bash
+git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git
+git checkout --detach ECOSYSTEM_REF
+sha256sum -c ECOSYSTEM_SOURCE_SHA256
+.venv/bin/python -m marceloclaro.cli doctor
+```
+
+## Uso básico
+
+```bash
+.venv/bin/python -m marceloclaro.cli status
+.venv/bin/python -m marceloclaro.cli agents
+.venv/bin/python -m marceloclaro.cli doctor
+.venv/bin/python -m marceloclaro.cli pesquisa
+.venv/bin/python -m marceloclaro.cli apresentacao
+.venv/bin/python -m marceloclaro.cli ajuda
+```
+
+## Arquitetura resumida
+
+Esta seção é uma **visão resumida** e de navegação: ela contém o **snapshot histórico** da arquitetura documentada e o **diagrama operacional atual** do checkout. O snapshot histórico é uma **snapshot documental**; ele **não é um inventário do checkout** e nem um contrato de runtime. O diagrama operacional atual reflete componentes realmente presentes no código, e os números de agentes/MCPs vêm da configuração (209 agentes, 6 MCPs) e do diagnóstico (`doctor`, 19 checks essenciais).
+
+### Mapa da Arquitetura Completa (v3.9.0)
+
+> **snapshot histórico** — preservado como registro documental da evolução; **não é um inventário do checkout** atual nem contrato de runtime.
+
+```mermaid
+flowchart TD
+    subgraph Core [Core Subsystems]
+        ORCH["MarceloClaroOrchestrator"]
+        MB["MetaBus"]
+        BB["Blackboard"]
+    end
+    ORCH --> MB
+    ORCH --> BB
+    AR["AttentionRouter"] --> ORCH
+    MIRA["MiraDeckPipeline"] --> AR
+    PRESENTER["mira-presenter"] --> MIRA
+    SR["SpecRegistry"] --> ORCH
+    SV["SpecVerifier"] --> SR
+    TDD["TDDRunner"] --> SV
+```
+
+O mapa v3.9.0 preserva os marcos legados: **MiraDeckPipeline**, **mira-presenter**, **AttentionRouter**, **SpecRegistry**, **SpecVerifier**, **TDDRunner**, **MetaBus**, **Blackboard** e a evolução registrada de **R47–R127** (faixa com 81 ciclos; o total documentado no `evolution/cycles.json` na época era 85). O indicador **média móvel** de score é apenas um descritor operacional e **não gate** de qualidade — ver `EvolutionRegistry.average_score`.
+
+### Diagrama Operacional Atual
+
+```mermaid
+flowchart TD
+    CLI["CLI marceloclaro"] --> ORCH["MarceloClaroOrchestrator"]
+    ORCH --> BB["Blackboard"]
+    ORCH --> MB["MetaBus"]
+    ORCH --> AR["AttentionRouter"]
+    ORCH --> SR["SpecRegistry"]
+    ORCH --> SV["SpecVerifier"]
+    ORCH --> TDD["TDDRunner"]
+    BB --> AGENTS["209 agentes configurados"]
+    MB --> MCP["6 MCPs configurados"]
+    AR --> PRESENTER["mira-presenter"]
+    subgraph Core [Core Subsystems]
+        SR
+        SV
+        TDD
+        MB
+    end
+```
+
+## Fluxos multiárea do checkout atual
+
+- **Pipeline acadêmico agentivo**: busca, curadoria, evidências, estrutura argumentativa, revisão de literatura, metodologia reprodutível, estatística, discussão e auditoria ABNT.
+- **Prova, formalização e raciocínio**: Lean 4, E-Graph, AlphaGeometry, Z3, SymPy, motores de raciocínio crítico.
+- **Jurídico**: apoio de pesquisa e sumarização documental com rastreabilidade.
+- **Clínico**: apoio clínico auditável com múltiplas especialidades médicas.
+- **Scientific RAG**: RAG sobre literatura científica com ranqueamento e evidências localizadas.
+- **Universidade Sintética**: orquestração acadêmica transversal.
+- **LiteRT-LM**: modelos on-device (Gemma 4, Qwen3) via LiteRT-LM.
+- **Colibri / OLMoE**: geração local com OLMoE 1B/7B MoE.
+- **MerkleIntegrityGuard**: integridade criptográfica SHA-256 dos artefatos via Árvore de Merkle, verificada por `quality_report.py`.
+
+## Apresentações MIRA
+
+**Registro duplo**: esta legenda endereça tanto o **leigo** (o que cada peça faz, sem jargão) quanto o **phd** (contrato de arquitetura e pipeline). O subsistema MIRA gera apresentações navegáveis em cards e seções a partir de fontes arbitrárias.
+
+- **MiraDeckPipeline**: pipeline orquestrado que transforma fontes em deck (extract → plan → copywrite → build → animate → validate).
+- **MiraEngine**: motor central de composição e roteamento de artefatos visuais.
+- **mira-presenter**: agente de apresentação/visualização que consolida o deck final.
+
+### Como funciona a apresentação MIRA
+
+1. **extract** — extração do briefing e da estrutura inicial a partir das fontes (`mira-extract`).
+2. **plan** — planejamento da sequência de slides e da narrativa (`mira-planner`).
+3. **copywrite** — refinamento de textos e mensagens visuais (`mira-copywriter`).
+4. **build** — montagem do deck em cards e seções navegáveis (`mira-builder`).
+5. **animate** — geração de animações centrais em loop e ajustes de escala (`mira-animator`, `mira-size-animator`).
+6. **validate** — validação de conformidade e consistência final (`mira-validator`).
+
+Complementam o workflow: `mira-chart`, `mira-chart-race`, `mira-image`, `mira-image-template`, `mira-qrcode`, `mira-references`, `mira-survey`, `mira-thirds`, `mira-squared`, `mira-vertical`, `mira-visuals`, `mira-get-videos`, `mira-extract` e `mira-new`.
+
+## Presentation On Storytelling
+
+Legado de apresentação narrativa preservado: **Act I — A Ilha de Agentes** é o ato inicial da narrativa que guia o deck MIRA para o público leigo. A apresentação resume o ecossistema como uma ilha povoada por agentes especialistas, com storytelling em três atos e navegação por métricas; o controle de integridade criptográfica dos artefatos é feito por **MerkleIntegrityGuard** (ver `quality_report.py`).
+
+## Fluxograma Intuitivo
+
+```mermaid
+flowchart LR
+    A["Problema"] --> B["Spec SDD"]
+    B --> C["Testes RED"]
+    C --> D["Implementacao GREEN"]
+    D --> E["Verificacao"]
+    E --> F["Reflexao"]
+    F --> A
+```
+
+## Arquitetura Técnica Multilateral
+
+A arquitetura é **multilateral**: orquestrador primário (`marceloclaro`), agentes especialistas do catálogo, subagentes configurados no `opencode.json`, protocolo Blackboard A2A e MetaBus de memória metacognitiva. A governança combina **SDD/TDD** (spec antes de código, testes antes de implementação), Trust Engine (stake/slashing), SpecVerifier e BehavioralGate.
+
+## Ciclo de Vida SDD / TDD
+
+```mermaid
+flowchart TD
+    SPEC["Spec formal"] --> TEST["Testes RED"]
+    TEST --> IMPL["Implementacao GREEN"]
+    IMPL --> REF["Refactor"]
+    REF --> GATE["Gate SDD"]
+    GATE --> CYCLE["Ciclo evolutivo R47x"]
+```
+
+## Limites de segurança e operação
+
+- O padrão de acesso é `open_science_only`; fontes-padrão: OpenAlex, Crossref, EuropePMC e arXiv. Serviços externos são opcionais e auditáveis; os resultados **não transforma as fontes encontradas em evidência já revisada.**
+- Métricas internas (testes, doctor, auto-score) **não constituem certificação externa** e **não substituem revisão humana**.
+- A instalação por pipe de rede é proibida: todo despacho é local e verificável; credenciais nunca são persistidas em recibos ou sandboxes.
+- O `doctor` (19 checks essenciais) diagnostica o ambiente; CLIs externas ausentes geram advertência, não falha.
+- Limites conhecidos: resolvedores restritos (ex.: sci-hub) permanecem desabilitados por omissão, exigem autorização humana explícita e registram base legal; ferramentas de scraping de redes sociais e controle de LAN não são adotadas por padrão.
+
+## Validação, contribuição e release
+
+A validação observada da release R448 registrou, em execução local sobre WSL2: **SPEC-935-R448** com **18/18** critérios, **3.488 passed**, **70 skipped** e **quatro subtestes aprovados.** Os números são uma fotografia daquela execução local, com as dependências disponíveis na sua máquina. Eles **não constituem certificação externa**. O recibo completo está em [`VALIDATION_R448.md`](VALIDATION_R448.md) e o padrão de release segue `git describe --tags --exact-match HEAD` + checksum publicados.
+
+Execução local da suíte e contribuição:
+
+```bash
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pytest tests/ -q --tb=short --timeout=120
+.venv/bin/python -m marceloclaro.cli doctor
+```
+
+- Contribuições: veja [`CONTRIBUTING.md`](CONTRIBUTING.md) (apresente uma SPEC, escreva testes, rode `pytest` e `git diff --check`).
+- Segurança: veja [`SECURITY.md`](SECURITY.md) (use Security Advisories; não abra issue pública para vulnerabilidades).
+- Histórico de correções de alegações: [`CORRIGENDUM.md`](CORRIGENDUM.md).
+- Registro de mudanças: [`CHANGELOG.md`](CHANGELOG.md).
+
+## Documentação e licença
+
+- Manual de uso em linguagem simples: [`MANUAL.md`](MANUAL.md)
+- Arquitetura técnica completa: [`ARCHITECTURE.md`](ARCHITECTURE.md)
+- Instalador (detalhes, requisitos, solução de problemas): [`installer/README.md`](installer/README.md) e [`installer/windows/README.md`](installer/windows/README.md)
+- Licença: [`LICENSE`](LICENSE) (MIT)
+
+---
+
 ## Navegacao Completa do Ecossistema
 
 ### Primeiros Passos
@@ -124,13 +322,19 @@ wsl --install -d Ubuntu
 Apos reiniciar, abra o **Ubuntu** e cole:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/setup.sh | bash
+curl -fsSL -o setup.sh https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/setup.sh
+# Verifique a integridade publicada (ECOSYSTEM_SOURCE_SHA256) antes de executar:
+bash setup.sh
 ```
+
+> Instalação local e revisável: nada é executado por pipe de rede. Detalhes do instalador, requisitos e solução de problemas: [`installer/README.md`](installer/README.md).
 
 ### Linux / macOS
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/setup.sh | bash
+curl -fsSL -o setup.sh https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/setup.sh
+# Verifique a integridade publicada (ECOSYSTEM_SOURCE_SHA256) antes de executar:
+bash setup.sh
 ```
 
 ### Apos a instalacao
@@ -151,7 +355,9 @@ python3 -m marceloclaro.cli helpdesk
 ### Remover apenas o ecossistema
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/uninstall.sh | bash
+curl -fsSL -o uninstall.sh https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/uninstall.sh
+# Verifique a integridade publicada antes de executar:
+bash uninstall.sh
 ```
 
 ### Remover WSL do Windows (Tudo)
@@ -1164,7 +1370,7 @@ flowchart LR
 |---|---|---|---|
 | **Kaggle** | 122 | CSV, JSON | Publico |
 | **HuggingFace** | 121 | Parquet, JSON, CSV | Publico |
-| **TOTAL** | **243** | Multi-formato | **100% Open Access** |
+| **TOTAL** | **243** | Multi-formato | **Totalmente Open Access** |
 
 ### 243 Datasets por Dominio
 

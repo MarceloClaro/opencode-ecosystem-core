@@ -45,6 +45,9 @@ EXTERNAL_CLIS = {
     "ollama": "curl -fsSL https://ollama.com/install.sh | sh",
     "scihub-cli": "pip install scihub-cli",
     "runai": "curl -fsSL https://canirun.ai/runai/install.sh | bash",
+    # SPEC-935-R473/M7: executor alternativo multi-provedor (tig) — integração
+    # por invocação externa; upstream sem licença declarada (uso local do operador).
+    "tig": "pip install tig-code",
 }
 
 

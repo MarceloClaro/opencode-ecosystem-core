@@ -8810,6 +8810,690 @@
       "merkle_root": "",
       "origin_commit": "",
       "state_merkle_root": ""
+    },
+    {
+      "round_id": "R501",
+      "objective": "Revisão estrutural neuroinclusiva do Volume 1 (SPEC-935-R201) — rotina 6 passos, 4 formas gráficas, pistas articulatórias, níveis K0-K5, rotas 1A-1D, DCN corrigida (CNE/CEB nº 7/2010)",
+      "changes": [
+        "alfabetizar.cls v3.0: novos comandos rotinasimples, nivelKbadge, rotabadge, quatroformasletra, pistaarticulatoria, ilustra, caixapausa, caixapista, checklistdominio; cores WCAG AA; fonte cursiva com fallback",
+        "parte1-fundamentacao.tex: DCN corrigida para Res. CNE/CEB nº 7/2010; capítulos novos Níveis K0-K5, Rotas 1A-1D, Design Neuroinclusivo; CAEd/SPAECE tratados como matriz avaliativa correlata",
+        "parte2-sequencia-didatica.tex: 33 lições com rotina 6 passos + badges K/rota; 16 caixas das 4 formas; 16 pistas articulatórias; Unidade 0 (K0) criada; correção de 4 erros de compilação pré-existentes",
+        "parte3-kumon.tex: correções de tabular (\\ -> \\\\), boxed->parbox, fbox/parbox fechados",
+        "parte4-avaliacoes.tex: seção de roteamento diagnóstico 1A-1D; acomodações neuroinclusivas na avaliação",
+        "parte5-guia-professor.tex: capítulo de rotas individualizadas, orientações neuroinclusivas (antecipação, regulação sensorial, instrução, velocidade nunca é critério), checklist do professor",
+        "PDF entregue: Volume_1_1ano_v4.0.pdf (264 páginas, 1.14 MB), compilação limpa (exit 0, 2 passes)"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Emojis Unicode não compilam em pdflatex — usar fontawesome5 ou texto",
+        "LaTeX limita macros a 9 parâmetros — metadatafull reduzido de 10 para 9",
+        "\\fbox não aceita \\par no argumento — usar parbox corretamente fechada",
+        "Erros pré-existentes (\\tao, \\uilde, tabular sem \\\\, '}}' solto) estavam mascarados pela compilação anterior",
+        "Regex em Python para LaTeX deve usar raw strings para evitar escape de \\c, \\~, \\t",
+        "Verificar sempre a compilação completa após cada inserção em massa (scripts podem inserir em local errado)"
+      ],
+      "timestamp": 1789204622.049542,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R502",
+      "objective": "Volume 1 v4.3 — Alfabeto completo (26 letras), famílias silábicas completas, fontes ampliadas (foco neurodivergente), sequência granular Kumon e planchetas reproduzíveis em página própria",
+      "changes": [
+        "alfabetizar.cls: fontes ampliadas (letra 60pt, 4 formas 40pt, caixas de atividade \\large com linespread 1.2, exercício 13pt); comando \\plancheta (clearpage + selo reproduzível); tabelas K/rotas com resizebox",
+        "parte2: 10 blocos de consolidação novos (F, G, J, K, N, P, V, Z, W, Y) com missão, sons+IPA, família silábica, motricidade, transição e recompensa — série Missão Alfabeto 1-10; 162 planchetas em páginas próprias",
+        "parte1: novo capítulo Sequência Didática Granular (31 micro-passos: 1 elemento novo + revisão cumulativa + domínio 90%); DCN 7/2010; níveis K0-K5; rotas 1A-1D",
+        "Sons múltiplos com IPA (tipa) para todas as 26 letras: C /k/~/s/, G /g/~/ʒ/, X /ʃ/~/ks/~/s/~/z/, Z /z/~/s/, H mudo + CH/LH/NH, E /ɛ/~/e/~/i/, O /ɔ/~/o/~/u/~/õ/ etc.",
+        "Famílias silábicas completas por letra (babá, baba, bebê, bibi, bobô, bobo... para B e análogas para as 26 letras)",
+        "Correções de layout: 97->39 overfulls; piores eliminados (517pt->153pt residual apenas na capa decorativa); resizebox em tabelas de sílabas/classificação/rotas; linhas de palavras com quebra habilitada",
+        "PDF entregue: Volume_1_1ano_v4.3.pdf (505 páginas, 1.56 MB), compilação limpa"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Overfull de 500pt+ vinha de tabelas largas com \\quad inquebrável e fcolorbox com título longo — usar resizebox e permitir quebra",
+        "\\barraprogresso na mesma linha de estrelas+ofensiva estoura em caixas largas — colocar em linha própria",
+        "fontupper do tcolorbox aplica \\large em tabelas — exercício precisa de 13pt moderado, não 14.4pt",
+        "Regex em LaTeX: escape de \\\\ em strings raw exige atenção (\\[ vs \\\\[)",
+        "Planchetas em página própria (clearpage) inflam o PDF (264->505 páginas) — aceitável pois é material de fotocópia"
+      ],
+      "timestamp": 1789207953.9269402,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R503",
+      "objective": "Volume 1 v4.4 — Parte 6: Guia de Observação e Encaminhamento com rastreio cognitivo por domínio e tabela de 37 condições com CID-10 (ética profissional: observação escolar, nunca diagnóstico)",
+      "changes": [
+        "parte6-guia-triagem.tex (novo): aviso legal (observação ≠ diagnóstico; CFP 009/2018; Lei 4.119/62; LGPD art. 11; ECA; Lei 13.146/2015)",
+        "6 fichas de observação estruturada por domínio (D1 linguagem, D2 consciência fonológica/leitura, D3 escrita/motricidade, D4 atenção/funções executivas, D5 social/emocional, D6 memória/ritmo) com indicadores observáveis S/F/R/N e sinais de alerta",
+        "Tabela de 37 condições com CID-10 verificados (F81.0 dislexia, F84.0 TEA, F90.x TDAH, F91.3 TOD, F94.0 mutismo seletivo, F98.5 gagueira, F70-F79 DI, H90/H54 sensoriais, G40/G80 neurológicas, Q90/Q99.2/Q87.1 genéticas, etc.) com profissional de avaliação e acomodação escolar",
+        "Fluxo de encaminhamento em 6 etapas (observar → acomodar → registrar → triagem institucional → rede → PEI) em tikz",
+        "Modelo de registro de encaminhamento com regra de ouro: fatos observados, nunca rótulos",
+        "PDF entregue: Volume_1_1ano_v4.4.pdf (514 páginas), compilação limpa, 0 caracteres faltantes"
+      ],
+      "score": 0.93,
+      "lessons": [
+        "Rastreio escolar legítimo = sinais de alerta → encaminhamento; ilegítimo = criar 'teste diagnóstico' não validado (crime de exercício irregular de profissão e dano à criança)",
+        "CID-10 segue vigente na documentação brasileira; CID-11 em transição — registrar ambos quando relevante",
+        "Ficha de observação usa frequência (S/F/R/N), nunca escore com ponto de corte — ponto de corte exige validação psicométrica",
+        "LGPD: ficha com sinais clínicos é dado sensível de criança — consentimento dos responsáveis e acesso restrito",
+        "Tabela longa (37 linhas) exige resizebox para não transbordar em A4"
+      ],
+      "timestamp": 1789209204.7279396,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R504",
+      "objective": "R202 — Boquinhas ilustradas por som + correção factual do H mudo (Volume 1, v4.5)",
+      "changes": [
+        "alfabetizar.cls v3.1: 10 figuras TikZ originais de boca (aberta, sorriso, bico, fechada, labiodental, dental, palatal, velar, nasal, muda) + \\bocadiagrama + \\bocaicona",
+        "\\boq[estilo]{letra}{texto}: boquinha agora inclui figura original em todas as 26 letras (16 revisadas + 10 novas F,G,J,K,N,P,V,Z,W,Y)",
+        "26/26 pistas articulatórias multimodais (10 adicionadas)",
+        "62/62 \\somipa com ícone de boca mapeado pelo valor TIPA (estilo opcional na caixa Todos os Sons desta Letra)",
+        "H sempre mudo no PB: 11 correções em parte2 (título, boquinha muda, pista, regra, checkboxes, dica) e parte3 (2 regras, checklist, tabela B-11); 0 ocorrências de 'aspirad'",
+        "Correção de erro latente: \\thispagestyle{planchetarastreio} nunca definido; adicionado \\fancypagestyle{planchetarastreio}",
+        "Versão 4.5 (capa, créditos, main.tex); pdflatex 2x exit 0, 0 Missing character, 42 overfull cosméticos pré-existentes; 514 páginas"
+      ],
+      "score": 0.82,
+      "lessons": [
+        "Gates de integridade valem também para o próprio orquestrador: revisar cada \\thispagestyle/\\pagestyle contra definições reais do preâmbulo evita erros latentes silenciosos (exit≠0 com PDF produzido)",
+        "Mapeamento som→boca deve respeitar variação regional (S/Z, T/D antes de I, R) e nunca exigir imitação/contato — figura é apoio opcional",
+        "Ao ampliar cobertura por letra, auditar sons novos contra o real fonológico do PB antes de escrever pistas (ex.: H 'aspirado' era erro factual persistente)"
+      ],
+      "timestamp": 1789213586.6762843,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R505",
+      "objective": "R203: atividades por som (fonema) no Volume 1 — parte7-sons-atividades",
+      "changes": "parte7-sons-atividades.tex (38 planchetas 'Atividade de Som': A) Caça ao som, B) Separe tem/não tem, C) Complete, D) Ouça e compare; quadro-síntese §31.2; guia de uso; notas de variante regional; BNCC EF01LP03/05/07/08/09); scripts/spec -> main.tex input; versão 4.5->4.6; fix \faPencilAlt->\faPencilRuler (fontawesome5 5.15.4); sanitização de IPA estendido fora de \\textipa{}; compile 2× exit 0, 0 Missing character, 43 overfulls (1 novo, cosmético); 594 páginas; PDF v4.6 entregue",
+      "score": 0.86,
+      "lessons": [
+        "Unicode IPA fora de \\textipa{} não compila (ɐ ɛ ɔ ẽ ɲ ʎ ʃ ʒ + til combinante U+0303) — rotular em português ou usar códigos TIPA ASCII [6], [E], [S].",
+        "fontawesome5 5.15.4 não define \\faPencilAlt (renomeado/removido); usar \\faPencilRuler.",
+        "Checar ícones \\fa* contra fontawesome5-mapping.def antes de gerar módulo (economiza 2 ciclos de compilação)."
+      ],
+      "timestamp": 1789217158.312222,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R506",
+      "objective": "R204: atividades de som em cada letra (parte2) e por sílabas (parte3 C-01..C-06)",
+      "changes": "parte2: 26 planchetas 'Atividade de Som e Sílabas da Letra X' (Caça ao som com quadradinhos, Tem ou não tem SIM/NÃO, Som das sílabas com palmas e contagem, Qual sílaba tem o som com sílaba em negrito, caixapausa+pista articulatória; H mudo especial: O segredo do H, HOJE/OJE); parte3: 6 boxes bônus 'Som das Sílabas (não vale nota)' após C-01..C-06; classe v3.1->v3.2 (ambientes somletra e somsílaba); versão 4.6->4.7; script reproduzível com idempotência; compile 2× exit 0, 0 Missing character, 43 overfulls (nenhum novo), 626 páginas; PDF v4.7 entregue",
+      "score": 0.88,
+      "lessons": [
+        "Regex de inserção ancorado no título com ' --- ' (ex.: Folha C-01 --- S\\'ilabas) — padrão sem o sufixo não casa e falha silenciosamente (6 folhas de primeira vez).",
+        "Escrever dados de letra no dicionário completo ANTES de gerar: H ficou de fora no primeiro dict (25/26) e exigiu nova passada — listagem de cobertura evita 1 ciclo.",
+        "Box bônus fora do \\begin{exercicio} preserva a nota X/15 e a rubrica da folha."
+      ],
+      "timestamp": 1789219001.5308306,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R507",
+      "objective": "R205: padrão de som aplicado às folhas A-01..A-05 (vogais) e B-01..B-11 (letras), parte3",
+      "changes": "parte3: 16 boxes bônus 'Som'' (não vale nota) — 5 vogais (A,E,I,O,U), 9 letras (M,S,T,R,L,B,X,Q,H), 2 duplas (C/D e F/V com caça 2+2) + nota na B-08 para G,N,P,Z,J; caixa caça ao som com quadradinhos + Tem ou não tem SIM/NÃO + caixapausa/pista articulatória; H mudo (HOJE/OJE); reuso ambientes R204 e dataset R202/R204; versão 4.7->4.8; compile 2× exit 0, 0 Missing character, 43 overfulls (nenhum novo), 634 páginas; PDF v4.8 entregue",
+      "score": 0.9,
+      "lessons": [
+        "Reuso do dataset articulatório entre R202/R204/R205 mantém consistência de dicas por letra sem duplicar manutenção.",
+        "Box dupla (2 letras por folha) resolve folhas compostas (C/D, F/G/N/P/V/Z/J) sem inflar o volume: caça 2+2 por letra + nota de prática guiada.",
+        "Idempotência por marcador exclusivo por folha (% bonus_R205_FOLHA) evita duplicação ao rodar o script de novo."
+      ],
+      "timestamp": 1789220897.2501283,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R508",
+      "objective": "R206: corrigir achados da auditoria do Volume 1 (v4.8->v4.9): ditongos nasais (AON/AOE/OIE->AUTO/AE/OE, tils e palavras reais), ensino explicito da cedilha na Licao 22 com palavra geradora MAÇA e rejornação, Lição 24 renomeada (10 letras), Mapa de Micro-Passos alinhado a execução, acentuação de verbos, incorporação pontual e honesta do princípio freiriano (palavra geradora)",
+      "changes": [
+        "L27-29: títulos/reRas/palavras corrigidas (mão, mãe, põe; remoção de NAE/MOE/NOE/PEDAL/POEIRA/COENTRO/McDonald)",
+        "L22: somipa + plancheta + regra da Cedilha (Ç) com recombinação silábica; caixapista C corrigida; família silábica com palavras Ç; typo cac'a eliminado",
+        "L24: título lista as 10 letras (F, G, J, K, N, P, V, Z, W, Y)",
+        "parte1: Mapa de Micro-Passos reescrito (B..Y após sílabas/frases; X/Q/H após ditongos) + subseção Paulo Freire (palavra geradora)",
+        "parte3: subseção Recombinação Silábica + comentário B-07/B-08",
+        "L30: pista articulatória do X cita os 4 sons; L20/L6/L12/L1: esta->está; L25/L28/L32: tils (LIMÃO, MÃE/PÃES, NÃO)",
+        "main.tex: versão 4.9"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Revisão exige ler o arquivo atual (linhas mudam a cada ciclo; greps de ciclos anteriores são obsoletos)",
+        "Acentuação em maiúsculas e palavras inventadas são erros silenciosos na impressão: exigem grep sistemático (MAO/NAE/MOE/PEDAL)",
+        "Cedilha é lacuna clássica de método fônico: precisa de ensino explícito (regra + som + recombinação), não apenas ocorrência incidental",
+        "Pares mínimos orais/nasais dependem do TIL: sem til, o contraste mão/mau morre na página",
+        "Incorporação freiriana deve ser pontual e honesta: palavra geradora como camada de sentido, sem reivindicar o método integral"
+      ],
+      "timestamp": 1789227055.626667,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R509",
+      "objective": "R207: revisao-auditoria-correcao dos Volumes 2-5 (v1.0->v1.1): typos, palavras inventadas (V3), falsos digrafos/regras (RR/SS/LH/NH, KC->C/QU), hifen (V4), SPAECE->BNCC em tabelas, FUNCAP->SEDUC-CE, exercicios por letra L2-L8 (V2), folha 3.2 e tabela de ditongos reescrita (V3), niveis anacronicos (V4-B-01), notas metodologicas honestas da Boquinha + caixas Pausa/Pista neuroinclusivas, renumeracao de codigos/folhas",
+      "changes": [
+        "V2: amssymb, versao 1.1, typos (Reconhecher, fogo/fada, DEDO, BONEDIA->BONITO, O que o gato gosta, feta->fada, introducing frases, scrapy/magneticos), exercicios L2-L8, 5 caixas Pausa/Pista, folhas 2.1/2.2/2.3, cabecalhos BNCC, cronograma sem revisoes inexistentes, SEDUC-CE",
+        "V3: amssymb, versao 1.1, TR duplicado, GH removido, BRACO/FRACO/GRATO, pinha/cozinha, burro (RR), regras de digrafos intervocalicos, boquinha LH, folha 3.2, LAI removido, dou/roupa, boi, codigos A-01..A-04/C-05/C-06, titulos 3.3/3.4, BNCC, tabela de ditongos reescrita (11 ditongos reais), SEDUC-CE",
+        "V4: versao 1.1, pre-historia/guarda-chuva/segunda-feira + dica hifen, V4-B-01 Alfabetico, BNCC, nota Boquinha + Pausa neuroinclusiva, SEDUC-CE",
+        "V5: amssymb, versao 1.1, C/QU substitui KC (3 pontos), fazer previsoes, Durante a leitura, pagina XX resolvido, S/Z/X/CH sem IPA invalido, BNCC, nota Boquinha + Pausa, SEDUC-CE",
+        "Compilacao 2x por volume: exit 0 em todos; 0 Missing character; V2 61pp, V3 23pp, V4 17pp, V5 19pp; PDFs v1.1 entregues em Downloads/Alfabetizar_Bem"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Colisao de ancoras entre patches (A-04->A-03 e A-06->A-04) faz o replace reaplicar sobre texto ja transformado: usar contexto exclusivo (linha + \\hline + \\end{tabular}) ou verificacao 'new presente => skip' (idempotencia real, nao contagem de olds)",
+        "Backups .r207_bak por arquivo permitem restaurar estado original limpo apos reaplicacao acidental (padrao a manter)",
+        "Patches de insercao cujo anchor permanece no resultado NAO sao idempotentes por contagem de old: exigem checagem de new presente antes de aplicar",
+        "V4 ja compilava exit 0 (sem amssymb); V2/V3/V5 usavam $\\square$ e precisavam do pacote - sempre confirmar por volume",
+        "Nomes de PDF/destino com sufixo divergente (Volume_2_1e2ano) nao devem ser sobrescritos; entregar v1.1 com nome novo"
+      ],
+      "timestamp": 1789242991.8537943,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R511",
+      "objective": "R511 (SPEC-935-R209): Caderno Motor pontilhado (Mestra2/Mestra4) - treino do gesto de escrita cursiva",
+      "changes": [
+        "fontes/: Mestra2(MeMimaPuntejada).TTF e Mestra4(DoblePautaPuntejada).TTF (fsType=0, acentos PT)",
+        "CadernoMotor/gerar_caderno.py reproduzivel (26 letras + 6 ligacoes + 6 palavras)",
+        "CadernoMotor/main.tex compilado XeLaTeX 2x: exit 0, 0 missing, 0 overfull, 41 paginas",
+        "PDF Caderno_Motor_Pontilhado_v1.0.pdf entregue em Downloads/Alfabetizar_Bem",
+        "SchoolScriptDashed excluida (fsType=2 restricao de incorporacao - fontTools)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "tikzpicture no mesmo paragrafo do cabecalho gera overfull de centenas de pt; \\par\\noindent antes do ambiente resolve",
+        "Pautas devem conter um item por linha (palavras longas em linha unica estouram a pauta)",
+        "fsType (OS/2) da fonte indica restricao de incorporacao; conferir antes de embutir"
+      ],
+      "timestamp": 1789251068.9151263,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R512",
+      "objective": "R512 (SPEC-935-R210): Volume Profissional integrado ao livro - Sondagem Inicial minuciosa (11 dominios x 10 itens) + 30 fichas de rastreio sistematico/investigativo",
+      "changes": [
+        "VolumeProfissional/gerar_rastreio.py reproduzivel (Parte A sondagem + Parte B 30 fichas + Parte C sintese/fluxo)",
+        "VolumeProfissional/main.tex compilado XeLaTeX 2x: exit 0, 0 missing, 74 paginas",
+        "Avisos de uso restrito e nao-diagnostica na capa, nas fichas e na sintese",
+        "Testes validados citados apenas por referencia (SATEPSI/CFP, TDE-II, ADOS, WISC - sem reproducao)",
+        "PDF Volume_Profissional_Sondagem_Rastreio_v1.0.pdf entregue em Downloads/Alfabetizar_Bem"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Material de rastreio psicometrico pertence a versao profissional (psicologo, psicopedagogo, neuropsicopedagogo) e NAO ao caderno do aluno",
+        "Desenho acordado: sondagem minuciosa antes da 1a atividade; 30 fichas como confirmacao investigativa sistematica",
+        "Instrumentos de terceiros: referenciar, nunca reproduzir (protecao autoral e normas CFP)"
+      ],
+      "timestamp": 1789251068.942279,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R513",
+      "objective": "R513 (SPEC-935-R208 + revisao editorial): Volume 1 finalizado - XeLaTeX com fontes cursivas, revisao de rigor e entrega v5.0",
+      "changes": [
+        "V1 (640 pp) compilado XeLaTeX 2x: exit 0, 0 missing; overfull 45 unicos vs baseline pdflatex 43 (delta +2, dentro de AC4); gigantes >40pt reduziram de 5 para 3 unicos",
+        "Revisao editorial: corrigido M-CHAT (16-30 meses; nao se aplica a faixa escolar 6-10; substituido por SRS-2 + ADOS-2/ADI-R + CARS-2 na faixa)",
+        "Revisao: nota de integracao na parte6 referenciando o Volume Profissional (uso restrito) - coerencia com R210",
+        "Scanners: scientific_reasoning_scan na fundamentacao (SRI baixo esperado p/ texto didatico; Ehri 2005 confirmada em referencias.tex)",
+        "Padronizado WISC-IV -> WISC-V no VolumeProfissional; recompilado (74 pp) e reentregue",
+        "PDF Volume_1_1ano_v5.0.pdf entregue em Downloads/Alfabetizar_Bem"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "O delta de overfull do V1 medido antes (92 unicos) era de log contaminado; medicao limpa 2x: delta real +2 - sempre recompilar do zero antes de comparar",
+        "M-CHAT-R/F e restrito a 16-30 meses; em material 6-10 anos, referenciar SRS-2/ADOS-2/CARS-2",
+        "Mencao a instrumentos do especialista em material do professor exige audiencia de faixa etaria e licenca"
+      ],
+      "timestamp": 1789252585.8978884,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R514",
+      "objective": "R514 (SPEC-935-R208 AC6): entrega dos volumes 2-5 com fontes (v1.2) - XeLaTeX compilacao limpa",
+      "changes": [
+        "Recompilacao XeLaTeX 2x do zero dos 4 volumes: exit 0, 0 Missing character em todos",
+        "Overfull (2-passadas): V2=17 (baseline 15, delta +2 ok), V3=0 (0), V4=1 (0, delta +1 ok), V5=3 (3, delta 0) - dentro da AC4",
+        "Paginas v1.2: V2=63, V3=25, V4=19, V5=21 (delta ~+2 pp pelo modelo de caligrafia no rosto - documentado)",
+        "PDFs entregues em Downloads/Alfabetizar_Bem: Volume_2..5_*_v1.2.pdf",
+        "Conjunto completo entregue: V1 v5.0 (640pp) + V2-5 v1.2 + CadernoMotor v1.0 (41pp) + VolumeProfissional v1.0 (74pp)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Delta de paginas +2 nos volumes decorre da pagina de rosto com modelo cursivo (R208); documentar como esperado",
+        "Medicao limpa: recompilar 2x do zero por volume antes de comparar com baseline"
+      ],
+      "timestamp": 1789253021.2975748,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R515",
+      "objective": "R515: correcao do Caderno Motor - sumario vazio (sections* sem addcontentsline) + regex segura de strings raw",
+      "changes": [
+        "gerar_caderno.py: addcontentsline em todas as folhas (Letras/Ligacoes/Palavras) -> sumario funcional com 38 entradas",
+        "Licao de engenharia: raw strings Python terminam em partes; \u0007 fora de raw vira BEL (^^G) e quebra TeX - isolar comandos latex em raw strings completas",
+        "Recompilado: 0 erros, 0 missing, 0 overfull, 41 pp; PDF v1.0 reentregue"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "'\u0007' em string python normal = caractere BEL; em geradores LaTeX usar raw strings completas ou \\\\a",
+        "Sumario de documentos com \\section* exige \\addcontentsline explicito"
+      ],
+      "timestamp": 1789254743.3628047,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R516",
+      "objective": "SPEC-935-R210-EXT: Volume Profissional v1.1 - seção Referencias de Instrumentos com DOIs e notas anti-overclaim (ADOS-2, PROLEC-T)",
+      "changes": [
+        "Adicionada secao \"Referencias de Instrumentos Citados\" (longtable com 15 instrumentos, faixa, quem aplica, editora e DOI conferidos por busca academica)",
+        "Fichas TEA nivel 1 e 2/3: nota de transparencia ADOS-2 (validacao brasileira em andamento) e ADI-R validado (Becker et al., 2012)",
+        "Tabela de referencias com colunas >{\\raggedright\\arraybackslash}p e \\hspace{0pt} em DOIs: overfull de tabela eliminado (36pt -> 0)",
+        "Empacotado Volume_Profissional_Sondagem_Rastreio_v1.1.pdf (76 pp) e entregue em Downloads/Alfabetizar_Bem/",
+        "Fontes da pesquisa: SRS-2 (Barbosa 2015; Otoni 2023), CARS-BR, TDE-II (SATEPSI nao privativo), SNAP-IV (Mattos 2006; Costa 2019), ABFW, PROLEC (Hogrefe), MABC-2 (Pearson), CDI (Kovacs; Gouveia 1995; Cruvinel 2008), CABI (2023)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "DOI longos em celulas p{} estouram margem: \\hspace{0pt} apos a barra resolve quebra sem espaco visivel (\\allowbreak nao quebrou em celula longtable)",
+        "Tabelas que precisam quebrar pagina devem usar longtable; grupo {} impede quebra e gera Overfull \\vbox",
+        "ADOS-2 sem normas brasileiras completas; sempre declarar \"em processo de validacao no Brasil\" (anti-overclaim)",
+        "TDE-II classificado como nao privativo no SATEPSI, o que permite aplicacao por psicopedagogos - informacao essencial para fichas profissionais"
+      ],
+      "timestamp": 1789255123.676549,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R517",
+      "objective": "SPEC-935-R208-EXT: Correcao de grafia Unidade 9 (Cap. 18) - AON/AO -> ÃO no Volume 1",
+      "changes": [
+        "Titulo do capitulo: \"Unidade 9 --- Silabas com AON (...)\" -> \"Unidade 9 --- Sílabas com ÃO (BÃO, CÃO, ...)\"",
+        "Folhas de Pratica 9.1 (plancheta + exercicio): \"Silabas com AON\" -> \"Silabas com ÃO\"",
+        "Regra, itens de reconhecimento/producao e checklist: AON -> ÃO (4 ocorrencias no checklist) e AO -> ÃO (5 ocorrencias no texto do capitulo)",
+        "Dica para o Professor: cartao AO -> ÃO, B+AO=BÃO -> B+ÃO=BÃO",
+        "Recompilado Volume 1 (XeLaTeX 2x): 640 pp, 0 erros, 0 missing chars",
+        "Entregue Volume_1_1ano_v5.1.pdf em Downloads/Alfabetizar_Bem/"
+      ],
+      "score": 0.93,
+      "lessons": [
+        "Typos \"AON\"/\"AO\" sem til persistem em outras unidades (Unidade 10 usa AOE/OIE no titulo e AON em exercicio): necessidade de auditoria global de ditongos nasais no Volume 1 (candidato a proximo ciclo)",
+        "AO aparece em 7+ contextos no arquivo: usar contexto amplo nas edicoes (oldString com linha seguinte) para evitar match ambiguo"
+      ],
+      "timestamp": 1789255564.486661,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R518",
+      "objective": "SPEC-935-R211-PRE: Correcao de grafia Unidade 10 (Cap. 19) - AOE/OIE/AON -> AE/ÕE no Volume 1",
+      "changes": [
+        "Titulo do capitulo: \"Ditongos Nasais AOE e OIE (...)\" -> \"Ditongos Nasais ÃE e ÕE (MÃE, PÃES, LIÇÕES, CANÕES)\"",
+        "Folhas de Pratica 10.1 (AOE -> ÃE) e 10.2 (OIE -> ÕE), titulos de plancheta e exercicio",
+        "Regra: reformulada com precisao pedagogica - ÃE (mae, paes) e ÕE (licoes, cancoes) seguem a logica do ÃO; AM/OM sao desinencias verbais (falam, comem) e nao ditongos com E",
+        "Item \"Forme silabas com AON (AE)\" -> \"Forme silabas com ÃE\"; OIN (OE) -> ÕE; citacoes ``AE''->``ÃE''/``OE''->``ÕE'' (corpo, dicas, opcoes de teste circulado)",
+        "Corrigida palavra inexistente \"sankões\" -> \"sanções\" na Folha 10.2 (Leitura em voz alta)",
+        "Dica final: LICAO/LICOES -> LIÇÃO/LIÇÕES com explicacao de abre/fecha/arredonda a boca",
+        "Recompilado Volume 1 (XeLaTeX 2x): 0 erros, 0 missing chars, 648 pp (6 checkpoints novos)",
+        "Entregue Volume_1_1ano_v5.2.pdf em Downloads/Alfabetizar_Bem/ (1.473.792 bytes)"
+      ],
+      "score": 0.96,
+      "lessons": [
+        "Unidade 10 misturava termo \"ditonogo nasal\" com desinencias verbais AM/OM na regra: separar ditongo (ÃE/ÕE) de desinencia verbal (AM/OM) e uma correcao pedagogica e nao apenas grafica",
+        "Auditoria global de nasais continua pendente no resto do Volume 1 (parte3-kumon.tex tem varias ocorrencias de \"terminam em AO\")"
+      ],
+      "timestamp": 1789256426.5466464,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R519",
+      "objective": "SPEC-935-R211: Caderno de Atividades + Rastreio Integrado Sequenciado (checkpoints entre unidades)",
+      "changes": [
+        "Spec specs/SPEC-935-R211-RASTREIO-INTEGRADO.md criada com 6 criterios de aceitacao e mapeamento inicial",
+        "alfabetizar.cls: novo ambiente \\newtcolorbox{rastreio} (titulo faClipboardCheck; corners neuroinclusive) para checkpoints",
+        "rastreio_integrado.py: gerador sistemico com dataclass Checkpoint e mapeamento V1 (6 checkpoints: apos U1, U2, U3, U5, U7, U10)",
+        "Cada checkpoint: Passo 1 (autoavaliacao do aluno, 4 itens SIM/NAO), Passo 2 (observacao do professor, 5 indicadores S/F/R/N), Passo 3 (regra de encaminhamento com referencia a ficha do Volume Profissional) + aviso \"nao diagnostica\"",
+        "Injecao idempotente dos inputs na sequencia didatica (rodar 2x nao duplica - testado)",
+        "6 checkpoints gerados em Volume1/checkpoints/rastreio-u*.tex e renderizados no PDF",
+        "7 testes pytest verdes (geracao, contagem, idempotencia, ancoras reais, aviso etico)",
+        "Volume 1 recompilado: 0 erros, 0 missing chars, 648 pp; entregue Volume_1_1ano_v5.2.pdf"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "\\foreach dentro de tabular p{} quebra a estrutura de grupos do LaTeX (Extra } / forgotten \\endgroup): expandir linhas explicitamente no gerador Python em vez de usar loops LaTeX",
+        "Bug Python classico: `ancoras or DEFAULT` trata lista vazia como ausencia (falsy): usar `is None` explicito para preservar listas vazias como valor legitimo",
+        "Checkpoints de rastreio entre unidades: vincular cada checkpoint a um dominio da sondagem (Parte A) e a fichas do Volume Profissional (Parte B) mantem a progressao logica do livro sem transformar o professor em diagnosticador",
+        "Ponte Antigravity permanece critica (76 na fila, 0 concluidas): ilustracao de capa continua bloqueada"
+      ],
+      "timestamp": 1789256426.5749478,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R520",
+      "objective": "EXPANSÃO VOLUMES 2–5 (SPEC-935-R220): 649 páginas cada, 0 erros, 0 missing chars",
+      "changes": [
+        "dados_volumes.py: PERFIS[2..5] com 21 unidades, 50 folhas Kumon, 45 sons, 8 avaliações, 7 checkpoints, triagem, fonemas e sanitização IPA",
+        "expandir_volume.py: apêndice Caderno Complementar (25 folhas), Plancheta 5 condicional, +8 caps fundamentação/guia, +2 obras biblio, glossário 10 termos, refs ética/rede",
+        "Calibração por iteração de páginas: 442 → 760 → 555 → 639 → 643 → 645 → 647 → 649 (alvo ≈648)",
+        "Volumes 2–5 entregues em Downloads/Alfabetizar_Bem (Volume_[2-5]_*ano_v1.0.pdf, ~1,19 MB cada)"
+      ],
+      "score": 0.99,
+      "lessons": [
+        "_k() deve retornar o dict (não só append) para permitir += nos dados",
+        "Não usar tuplas de 1 elemento em entradas: sil_tabela espera pares ou strings",
+        "Registrar PERFIS[ano] = VOLUME2 no fim após bloco de calibração",
+        "Símbolos IPA (ɲ ʃ ʎ ɾ ʁ ʷ) não têm glifo em Latin Modern: sanitizar nos dados e no glossário",
+        "Renumerar unidades quebra âncoras de checkpoint; manter n's estáveis"
+      ],
+      "timestamp": 1789261523.5656483,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R471",
+      "objective": "SPEC-935-R471 M1: Research Factory (meta-graph inspirado no open-swe) ",
+      "changes": [
+        "criado research_factory/ (threads, audit, analyzer, scheduler, graph)",
+        "criado tests/test_r471_research_factory.py (17 testes RED/GREEN, herméticos)",
+        "spec SPEC-935-R471 com frontmatter (test_file vinculado, status green)",
+        "CA1/CA2/CA8/CA9/CA10 verificados por teste; suíte: 17/17 verdes",
+        "registrado débito técnico legado: SPEC-935-R459 sem test_file; test_scientific_lab_v42_native.py com NATIVE_COMMANDS ausente"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Integração externa (open-swe) deve entrar como meta-graph injetável, reusando pipeline nativo em vez de clonar fábrica inteira",
+        "Testes herméticos com mocks garantem CA8 sem rede/paywall e permitem gate rápido",
+        "Frontmatter com test_file é obrigatório para spec entrar no SpecRegistry (SDD)",
+        "Falhas de coleta pré-existentes (R459, v42_native) são débito técnico legado e devem ser reportadas, não silenciadas"
+      ],
+      "timestamp": 1789263072.9457278,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R472",
+      "objective": "SPEC-935-R471 extensão: integrar tig (executor IA multi-LLM terminal) como M7 ao mapa de resiliência científica",
+      "changes": [
+        "spec R471: linha do mapa de capacidades + M7 (Architect/Code, multi-provedor) + invariante de licença (upstream sem licença declarada) + Fase 5",
+        "mapeado fork rsrohan99/tig (153 estrelas) via API+README; upstream license=null",
+        "decisão: integração apenas por invocação externa opcional; vedada redistribuição/incorporação"
+      ],
+      "score": 0.7,
+      "lessons": [
+        "Componente sem licença declarada só pode ser invocado externamente, nunca embutido ou redistribuído",
+        "Executor multi-provedor (tig) agrega resiliência de execução à fábrica M1, com Ollama como fallback local",
+        "Modo Architect->Code do tig espelha o ethos SDD do Core; sinergia documentada, sem acoplamento"
+      ],
+      "timestamp": 1789263187.9433928,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R473",
+      "objective": "SPEC-935-R473 (M7 da R471): executor alternativo multi-provedor tig com fallback e recibo auditável",
+      "changes": [
+        "specs/SPEC-935-R473-executor-multiprovider-tig.md criada (subspec da R471; invariantes, CA1-CA10, plano TDD)",
+        "agent_runners/ criado (__init__.py + tig_executor.py): TigExecutionReceipt, TigExecutor, allowlist fail-closed, fallback ollama->deepseek->groq->gemini->openai, runner injetável",
+        "doctor.py: tig registrado em EXTERNAL_CLIS (pip install tig-code); check nunca falha (warn)",
+        "tests/test_r473_tig_executor.py: 20 testes herdicos (mocks de subprocess, sem rede, sem LLM real)",
+        "GREEN: 20/20; suíte R471+R473 37/37; regressões críticas 92 pass, 1 falha pre-existente de README"
+      ],
+      "score": 0.87,
+      "lessons": [
+        "Runner injetável no executor externo viabiliza testes 100% herdicos sem tocar subprocess global",
+        "Adicionar CLI ao EXTERNAL_CLIS é seguro: testes de contagem usam len() dinâmico e check è warn-only",
+        "Integração de upstream sem licença: só invocação externa, jamais incorporação; nota no status()"
+      ],
+      "timestamp": 1789264184.0493567,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R474",
+      "objective": "SPEC-935-R471 extensão: integrar openclaw-qa (Agent Waystation, comunidade de agentes) como M8 ao mapa de resiliência",
+      "changes": [
+        "spec R471: linha do mapa + M8 (observatório de campo, lições CC BY-SA, Task Board) + invariante 9 (share-alike) + Fase 6",
+        "mapeado ythx-101/openclaw-qa (82★, ativo 2026-09-06); conteúdo CC BY-SA 4.0",
+        "veredito técnico do Tool Workshop registrado: ask-search em auditoria; x-tweet-fetcher e lan-control NÃO-adotar (ToS X + risco LAN)"
+      ],
+      "score": 0.65,
+      "lessons": [
+        "Conteúdo CC BY-SA 4.0 não é incorporável: share-alike contamina derivados; registrar apenas lições com autoria explícita",
+        "Relatórios de campo de comunidades são insumo valioso de reflexão (MetaBus) quando verificados e atribuídos",
+        "Ferramentas de scraping/controle de rede do Tool Workshop conflitam com higiene e open_science_only; rejeição explícita salva auditoria futura"
+      ],
+      "timestamp": 1789264269.6150944,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R476",
+      "objective": "SPEC-935-R476: autonomia (Reflexion + trust-aware), raciocínio (planos/estatísticas/prazos) e pesquisa open science com failover na fábrica",
+      "changes": [
+        "research_factory/autonomy.py: AutonomyCore.self_supervise (MetaBus injetável, plano, acionabilidade) + rank_agents (trust desc, default 0.5)",
+        "research_factory/reasoning.py: PlanConsistencyChecker (DFS acíclico, stats determinísticas, deadlines monotônicas; z3/sympy opcionais)",
+        "research_factory/search.py: OpenScienceSearchOrchestrator (failover openalex->crossref->europepmc->arxiv; bloqueio fail-closed)",
+        "research_factory/graph.py: atributos autonomy/reasoning/search + método self_supervise",
+        "specs/SPEC-935-R476 criada; tests/test_r476 23 testes herdicos",
+        "R475: débitos corrigidos (NATIVE_COMMANDS/native_status em runtime.py; test_file R459 + teste artigo; README installer link)"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Testes herdicos exigem injeção total: searcher_factory e memory injetáveis; zero rede e zero LLM real",
+        "Frozenset de fontes não ordena: manter lista canônica para failover determinístico e testes estáveis",
+        "Corrigir débitos (score) antes de adicionar capacidade evita ruído de falhas pré-existentes na verificação"
+      ],
+      "timestamp": 1789264703.664807,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": ""
+    },
+    {
+      "round_id": "R477",
+      "objective": "SPEC-935-R477: liquidação dos 24 débitos documentais remanescentes (release R448 e storytelling MIRA) — suíte completa 100% verde",
+      "changes": [
+        "README.md: seção de validação observada corrigida (termo exato 'disponíveis na sua máquina.'; métricas como observação local, não certificação externa)",
+        "README.md: seção 'Presentation On Storytelling' adicionada com 'Act I — A Ilha de Agentes'; faixa de evolução registrada como 'R47–R127' (en dash)",
+        "README.md: tabela de datasets sem '100%' ('Totalmente Open Access'); fluxos de instalação/desinstalação locais e revisáveis sem pipe de rede",
+        "specs/SPEC-935-R477-liquidacao-debitos-documentais.md: subspec com 7 critérios de aceitação"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Débitos documentais acumulados mantêm a suíte fora do verde mesmo com runtime robusto: a liquidação é tarefa de ciclo próprio, com testes documentais como gate (RED->GREEN)",
+        "Marcadores legados exigem strings exatas (en dash 'R47–R127', 'Presentation On Storytelling', 'Act I — A Ilha de Agentes'): ao restaurar documentação, verificar o teste antes de reescrever",
+        "Anti-overclaim documental inclui revisão de tabelas internas: '100% Open Access' violava o contrato R448 de não promover perfeição sem validação externa",
+        "Manter instalação pública local e revisável: remover pipes de rede ao restaurar seções de instalação evita regressões NETWORK_PIPE"
+      ],
+      "timestamp": "2026-09-12T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "pytest tests/test_r448_documentation_reconciliation.py tests/test_r449_readme_release.py tests/test_r455_readme_historico_operacional.py tests/test_r127_arch_docs_meticulous.py tests/test_r236_docs_diagrams_and_storytelling.py tests/test_r237_diagrams_repair.py tests/test_r231_docs_and_storytelling_update.py tests/test_r438_caminho_100.py -> 55 passed",
+        "pytest tests/ -q -> 3792 passed, 58 skipped, 0 failed (339s)",
+        "doctor -> checks_total 20, passed 18, warned 2, failed 0"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }

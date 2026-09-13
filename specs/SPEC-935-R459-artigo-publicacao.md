@@ -2,6 +2,7 @@
 spec_id: SPEC-935-R459
 title: Artigo científico — "Diversificação pós-ranqueamento no RAG científico: uma avaliação empírica do esquema posicional de Recamán vs MMR"
 component: publications/r459_article/ (LaTeX, figuras, referencias)
+test_file: tests/test_r459_article_spec.py
 status: green
 round_id: R459
 ---
