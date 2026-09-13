@@ -9976,6 +9976,38 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R493",
+      "objective": "Inércia Vetorial Analyzer — mensurar resistência estrutural à emergência (QIV = Potencial − Inércia)",
+      "changes": [
+        "scanners/inertia_analyzer.py: InertiaVectorAnalyzer com 4 forças ponderadas (complexidade 0.30, dependencias 0.30, custo 0.20, acoplamentos 0.20); QIV clamp; faixas quebra-imediata/moderada/inercia-dominante; ranking de barreiras; reorg_prediction; consume PotentialityReport (R491)",
+        "tests/test_r493_inertia_analyzer.py (12 testes)",
+        "specs/SPEC-935-R493-inertia-analyzer.md (CA1-CA12)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "A pergunta do usuário muda o trajeto: de 'quão próximo?' (coverage) para 'o que impede?' — QIV = potencial − inércia é o operador formal que completa o PotentialityScanner",
+        "Exemplo conceitual do usuário (0.82 - 0.27 = 0.55) bate com o modelo: Potential Discovery Engine com 3 requires existentes dá inércia ≈ 0.23 e QIV ≈ 0.59 (±0.06)",
+        "Regressão silenciosa R491→R492 descoberta só na suíte completa: construtores obrigando modules quebravam pipeline SPEC-020; lição: sempre rodar test_deep_diagnose + full suite ao tocar scanners",
+        "Faixas inclusivas: QIV=0.70 e 0.40 caem em quebra-moderada (usuário: 0.40 ≤ QIV ≤ 0.70)"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 2 erros de indentação no teste (test_tiers/test_components_fora da classe) — corrigidos",
+        "GREEN: pytest tests/test_r493_inertia_analyzer.py -> 12 passed",
+        "Regressões R483-R493 -> 148 passed",
+        "Demo: potential-discovery-engine QIV 0.77 (quebra-imediata); future-radar QIV 0.0 (inercia-dominante, 2 dependências críticas)"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }
