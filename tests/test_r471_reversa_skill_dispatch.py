@@ -74,7 +74,10 @@ def test_missing_skill_returns_safe_fallback(tmp_path: Path) -> None:
     assert decision.skill_path is None
 
 
-@pytest.mark.parametrize("invalid", ["../reversa-clarify", "reversa/clarify", "", "reversa clarify"])
+@pytest.mark.parametrize(
+    "invalid",
+    ["../reversa-clarify", "reversa/clarify", "..", "reversa..clarify", "", "reversa clarify"],
+)
 def test_invalid_skill_names_are_rejected(tmp_path: Path, invalid: str) -> None:
     with pytest.raises(ValueError):
         ReversaSkillDispatcher(tmp_path).plan(invalid)
