@@ -482,7 +482,7 @@ def build_config() -> Dict[str, Any]:
         },
         "command": {
             "diagnose": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from scanners import diagnostic_pipeline; import json; print(json.dumps(diagnostic_pipeline.run(open('$ARGUMENTS').read() if '$ARGUMENTS' else 'ecosystem'), ensure_ascii=False, indent=2))\"",
+                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from scanners import diagnostic_pipeline; import json; print(json.dumps(diagnostic_pipeline.run(open('$ARGUMENTS').read() if '$ARGUMENTS' else 'ecosystem', deep=True), ensure_ascii=False, indent=2))\"",
                 "description": "Roda o pipeline de diagnóstico (5 scanners) sobre um arquivo",
             },
             "maswos": {

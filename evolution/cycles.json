@@ -10135,6 +10135,38 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R498",
+      "objective": "Pipe real: /diagnose roda deep=True por padrão; contrato testado sobre documento real",
+      "changes": [
+        "integrations/opencode_cli.py: template do comando diagnose ganhou deep=True (fonte geradora)",
+        "opencode.json: /diagnose agora executa DiagnosticPipeline.run(..., deep=True) — IVA/SNS/SCE sempre ativos no pipe invocado pelo usuário",
+        "tests/test_r496_pipeline_integration.py: TestRealPipeContract (3 testes) — garante deep=True no comando + pipe real sobre spec R200 entrega blocos novos"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Custom command era o 'pipe real' e rodava sem deep=True — blocos R493-R495 invisíveis para o usuário. Contrato de teste impede regressão silenciosa",
+        "Execução real: ecossistema 13.8s, 8 blocos; ARCHITECTURE.md SPS=1.0 NRR=0 (documento limpo); SPEC-935-R200 NRR=0.06 (3 itens numerados removidos) CR=0.8654 CPS=1.0; 07-discussion.tex CR=0.9712 CPS=1.0",
+        "SNS/SCE são honestos em código (ecossistema: CR≈0.96 sem ganho real) — a compressão auditável brilha em prosa longa/documentos, onde nível seguro e preservação funcional (CPS=1.0) são o valor",
+        "IVA report real: 9 candidatas avaliadas, todas quebra-imediata, top scientific-discovery-engine QIV=0.768 (potencial 1.0 − inércia 0.232)",
+        "Lição anti-overclaim: em corpus já denso (ARCHITECTURE.md), CR próximo de 1 com tokens_saved=0 é relatado sem maquiagem"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: /diagnose sem deep=True — blocos novos ausentes do comando real",
+        "GREEN: tests/test_r496_pipeline_integration.py -> 13 passed (inclui TestRealPipeContract)",
+        "E2E real: DiagnosticPipeline.run('ecosystem', deep=True) 13.8s; run(spec R200, deep=True) 0.15s com noise/compression/inertia/successors"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }

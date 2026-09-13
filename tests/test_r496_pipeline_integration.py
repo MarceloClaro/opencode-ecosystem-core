@@ -11,7 +11,9 @@ Hermético, anti-overclaim.
 
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 
 import pytest
 
@@ -127,3 +129,33 @@ class TestEffectiveness:
         assert "noise" in report
         assert "compression" in report
         assert "duration_s" in report
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# R498 — contrato do pipe real: o comando /diagnose (opencode.json)
+# roda o pipeline com deep=True por padrão (blocos novos SEMPRE ativos)
+# ═══════════════════════════════════════════════════════════════════════
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+class TestRealPipeContract:
+    """O pipe invocado pelo usuário não é demo: carrega a camada profunda."""
+
+    def test_opencode_json_diagnose_uses_deep(self):
+        cfg = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
+        template = cfg["command"]["diagnose"]["template"]
+        assert "deep=True" in template, "comando /diagnose precisa chamar deep=True"
+
+    def test_generator_source_has_deep(self):
+        src = (ROOT / "integrations" / "opencode_cli.py").read_text(encoding="utf-8")
+        assert 'deep=True' in src, "fonte geradora do opencode.json precisa usar deep=True"
+
+    def test_real_document_run_deep_report(self):
+        """Pipe real sobre documento real do repo (spec R200) entrega blocos novos."""
+        corpus = (ROOT / "specs" / "SPEC-935-R200-LIVRO-ALFABETIZACAO.md").read_text(encoding="utf-8")
+        report = DiagnosticPipeline().run(corpus, domain="academic", deep=True)
+        assert report["noise"]["level"] in ("seguro", "moderado", "destrutivo")
+        assert "report_md" in report["inertia"]
+        assert report["successors"]["total"] >= 1
+        assert {"cr", "cps", "dg"} <= set(report["compression"])
