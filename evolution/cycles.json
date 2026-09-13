@@ -9526,6 +9526,40 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R479",
+      "objective": "SPEC-935-R479/Fase 3 da R471: M4 workbench DeepSeekGUI (supervisão desktop opt-in) e M5 modelos pequenos reprodutíveis minimind (currículo 64M didático)",
+      "changes": [
+        "workbench/deepseek_gui.py: conector opt-in (DEEPSEEK_GUI_ENABLED/WORKSPACE), allowlist de workspaces do Core (pesquisa/academic/publications), launch_config com licenças PolyForm Perimeter 1.0.1 vs MIT e limitação (redistribuição competitiva vedada)",
+        "model_lab/curriculum.py: MiniMindCurriculum com estágios canônicos tokenizer->pretrain->sft->rlhf->dpo->moe->distill->quant e plano determinístico por seed (64M)",
+        "model_lab/hardware.py: HardwareProbe (device cuda/cpu/none) com limitação de hardware explícita sem GPU (CA6)",
+        "model_lab/benchmark.py: MiniMindBenchmark com curva de pretrain estritamente decrescente, relatório de reprodutibilidade determinístico por seed e hardware_limitation quando device != cuda",
+        "THIRD_PARTY_NOTICES.md: registro canônico de licenças da R471 (open-swe MIT, OpenShell/NemoClaw/PAIR/minimind Apache-2.0, DeepSeekGUI PolyForm Perimeter, SciHubEVA MIT, tig sem licença, openclaw-qa CC BY-SA)",
+        "specs/SPEC-935-R479-workbench-modelos.md: subspec Fase 3 com 19 testes e 8 critérios de aceitação"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Workbench desktop entra como conector opt-in com recibo de licença: sem executar GUI, documenta workspace válido, licenças (produto vs upstream) e limitação (redistribuição competitiva vedada)",
+        "Currículo didático de modelos pequenos deve ser hermeticamente testável: plano determinístico por seed e simulação de loss sem gradiente real permitem CA6 sem exigir GPU",
+        "Sem GPU, documentar limitação explicitamente (e não alegar viabilidade) é a forma honesta de cumprir CA6 — torch ausente vira 'none' com nota de limitação",
+        "THIRD_PARTY_NOTICES.md na raiz é o registro canônico: componentes da R471 com licenças divergentes (sem licença, CC BY-SA, PolyForm) precisam de restrição explícita por linha"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "pytest tests/test_r479_m4_m5.py -> 19 passed",
+        "pytest tests/test_r479_m4_m5.py tests/test_r478_sandbox_pair.py tests/test_r471_research_factory.py tests/test_r473_tig_executor.py tests/test_r476_autonomy_reasoning_search.py -> 104 passed",
+        "pytest tests/ -q -> 3836 passed, 58 skipped, 0 failed (357s)",
+        "doctor -> checks_total 20, passed 18, warned 2, failed 0"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }
