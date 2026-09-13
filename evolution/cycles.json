@@ -9722,6 +9722,37 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R485",
+      "objective": "Mapa de Trajetórias Evolutivas — rotas de construção + alavancas estruturais",
+      "changes": [
+        "scanners/trajectory_mapper.py: TrajectoryMapper (paths_between DFS determinística anti-ciclo com max_depth/max_paths; lever score = count/max_count; oportunidades enriquecidas combined=0.70·p+0.30·lever; tier alavanca estrutural)",
+        "specs/SPEC-935-R485-trajectory-mapper.md (CA1-CA10)",
+        "tests/test_r485_trajectory_mapper.py (21 testes)"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Direção da DFS em caminhos de construção usa SUCESSORES (Y tal que X ∈ prereqs(Y)), não prereqs — o R483 usa prereqs para fecho regressivo; confundi na 1ª versão e os testes RED pegaram",
+        "Desempate lexical no ranking de levers não deve ser contrato de teste (F e HUB empatam em contagem); contratar contagem máxima, não posição",
+        "Caminho identidade [g] é informação legítima (alvo já em Δ aparece nas rotas)",
+        "lever_score normaliza por max_count global; alavanca estrutural exige combined≥0.7 E lever≥0.6"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 3 falhas de direção antes da correção (_succ)",
+        "GREEN: pytest tests/test_r485_trajectory_mapper.py -> 21 passed",
+        "Regressões R483+R484+R485 -> 60 passed",
+        "Demo: Meta-análise -> 4 rotas; Probabilístico levantado como alavanca (count 2)"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }
