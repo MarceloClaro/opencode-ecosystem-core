@@ -9560,6 +9560,37 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R480",
+      "objective": "SPEC-935-R480/Fase 4 da R471: M6 frontend de download opt-in SciHubEVA — completa o roadmap M1-M8 da R471",
+      "changes": [
+        "workbench/scihubeva_frontend.py: frontend opt-in do resolvedor restrito R470 (SCIHUBEVA_RESOLVER=scihubeva), GUI neutra à política (requested_policy nunca repassado à fachada), validate_target (doi/pmid/url/query), launch_argv como lista sem shell, submit herdando dispatch_restricted",
+        "workbench/__init__.py: exports M6",
+        "specs/SPEC-935-R480-scihubeva-frontend.md: subspec Fase 4 com 19 testes e 11 critérios de aceitação"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "GUI como frontend de resolvedor restrito deve ser neutra à política: o parâmetro requested_policy não pode ser repassado à fachada R470 (precedência explícita permitiria a GUI alterar a política)",
+        "Herdar a fachada R470 (dispatch_restricted) reaproveita gates e recibos canônicos: a GUI gera CLIExecutionReceipt completo sem duplicar lógica",
+        "Versão sem binário/arquivo/rede com status pending_manual_execution é o limite honesto do CA7 (CA8 hermético); módulo sem imports de rede/processo",
+        "Fechamento do roadmap R471 (Fase 0-6): após M8, o Core integra sandbox, roteamento, workbench, modelos didáticos, executor alternativo e observatório com falha segura em todo componente"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "pytest tests/test_r480_m6_scihubeva.py -> 19 passed",
+        "pytest tests/test_r480_m6_scihubeva.py tests/test_r479_m4_m5.py tests/test_r478_sandbox_pair.py tests/test_r471_research_factory.py tests/test_r473_tig_executor.py tests/test_r476_autonomy_reasoning_search.py -> 123 passed",
+        "pytest tests/ -q -> 3855 passed, 58 skipped, 0 failed (351s)",
+        "doctor -> checks_total 20, passed 18, warned 2, failed 0"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }
