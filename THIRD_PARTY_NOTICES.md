@@ -40,6 +40,20 @@ incorporado ao Core nesta revisão.
 | science-skills | google-deepmind/science-skills | Apache-2.0 | 37 skills científicas (UniProt, ClinVar, gnomAD, PubMed, OpenAlex, AlphaFold, Foldseek…). Lição: **vocabulário de convergência** — as skills de literature search (arXiv/bioRxiv/EuropePMC/OpenAlex/PubMed) e bancos de dados preenchem parte das lacunas metodológicas que o `ReverseScanner`/`PolymathicConvergence` (R483/R486) sinalizam; candidatas a enriquecer o landscape/manifest com domínio **academic** |
 | ruflo (ex Claude Flow) | ruvnet/ruflo | MIT | "Sistema nervoso" de agente: CLI/MCP → Router → Swarm → Memory com Learning Loop. Lição: o Core já cobre o equivalente via Blackboard (A2A) + Trust Engine + MetaBus; o **Learning Loop** (retroalimentação de padrões bem-sucedidos) confirma o desenho do ciclo **Reflexion** R472+; arquitetura em TypeScript não é copiada |
 
+## Paisagem acadêmica — fontes DeepMind (R489)
+
+Fontes curadas em `landscape/manifest.json` (chave `academic`) e cruzadas pelo
+`PolymathicConvergence` (R486 ampliado). Metadados apenas; nenhum código de
+terceiros incorporado.
+
+| Componente | Origem | Licença | Uso no Core |
+|---|---|---|---|
+| deepmind-superhuman | google-deepmind/superhuman | Apache-2.0 | Fonte de paisagem p/ **raciocínio formal** (AlphaGeometry, AlphaGeometry2, IMO Bench, Aletheia). Curadoria anti-overclaim: o rótulo do repo não é adotado como veredicto no Core |
+| deepmind-alphageometry | google-deepmind/alphageometry | Apache-2.0 | Fonte de paisagem p/ **prova geométrica / dedução simbólica** |
+| deepmind-alphageometry2 | google-deepmind/alphageometry2 | Apache-2.0 | Fonte de paisagem p/ **prova geométrica / busca orientada** |
+| deepmind-science-skills | google-deepmind/science-skills | Apache-2.0 | Fonte de paisagem p/ **literature search e bancos de dados biológicos** (37 skills) |
+| feynman-tutor | koukekoukej-glitch/feynman-tutor | MIT | Inspiração conceptual para o Successor Generator (R491): método Feynman aplicado a tutoria |
+
 ## Fonte de espelhos (item 2B)
 
 `examples/agents/` referencia 21 espelhos (00 fundação + 20 pilotos) do

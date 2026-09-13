@@ -44,6 +44,11 @@ WEIGHTED_FIELDS: list[tuple[str, float]] = [
     ("dependencies", 1.0),
     ("swift", 1.0),
 ]
+ACADEMIC_FIELDS: list[tuple[str, float]] = [
+    ("title", 2.0),
+    ("description", 2.0),
+    ("tags", 1.5),
+]
 DEFAULT_TOP_K = 3
 
 _TOKEN_RE = re.compile(r"[a-zà-ÿ0-9]+", re.IGNORECASE)
@@ -82,11 +87,13 @@ class PolymathicConvergence:
             )
         self.manifest_path = pathlib.Path(manifest_path)
         self.agents: list[dict[str, Any]] = []
+        self.academic_sources: list[dict[str, Any]] = []
         self.warnings: list[str] = []
         if self.manifest_path.exists():
             try:
                 data = json.loads(self.manifest_path.read_text(encoding="utf-8"))
                 self.agents = data.get("agents", [])
+                self.academic_sources = data.get("academic", [])
             except (json.JSONDecodeError, OSError) as exc:
                 self.warnings.append(f"manifest ilegível: {exc}")
         else:
@@ -102,11 +109,13 @@ class PolymathicConvergence:
 
     # ─── SCORE (CA2) ──────────────────────────────────────────────────────
 
-    def _score_agent(self, capability_tokens: set[str], agent: dict[str, Any]) -> tuple[float, list[str]]:
+    def _score_agent(self, capability_tokens: set[str], agent: dict[str, Any],
+                     fields: list[tuple[str, float]] | None = None) -> tuple[float, list[str]]:
         matched_weight = 0.0
         total_weight = 0.0
         overlap: set[str] = set()
-        for field_name, weight in WEIGHTED_FIELDS:
+        fields = fields or WEIGHTED_FIELDS
+        for field_name, weight in fields:
             total_weight += weight
             value = agent.get(field_name, "")
             if isinstance(value, list):
@@ -120,27 +129,38 @@ class PolymathicConvergence:
             return 0.0, []
         return round(matched_weight / total_weight, 4), sorted(overlap)
 
+    def _all_sources(self) -> list[tuple[str, dict[str, Any], list[tuple[str, float]]]]:
+        """Fontes de convergência: agentes (manifest) + acadêmicas (R489)."""
+        items: list[tuple[str, dict[str, Any], list[tuple[str, float]]]] = [
+            ("manifest", a, WEIGHTED_FIELDS) for a in self.agents
+        ]
+        items += [
+            ("academic", a, ACADEMIC_FIELDS) for a in self.academic_sources
+        ]
+        return items
+
     # ─── MATCH POR LACUNA (CA1-CA3) ───────────────────────────────────────
 
     def match_capability(self, capability: str, top_k: int = DEFAULT_TOP_K) -> list[PolymathicMatch]:
-        """Top_k agentes do manifest que cobrem `capability`, por score."""
+        """Top_k fontes (agents + academic) que cobrem `capability`, por score."""
         cap_tokens = self._tokens(capability)
         scored: list[tuple[float, str, dict[str, Any], list[str]]] = []
-        for agent in self.agents:
+        for kind, agent, fields in self._all_sources():
             if not cap_tokens:
                 break
-            score, overlap = self._score_agent(cap_tokens, agent)
+            score, overlap = self._score_agent(cap_tokens, agent, fields)
             if score > 0.0:
                 scored.append((score, str(agent.get("id", "")), agent, overlap))
         scored.sort(key=lambda item: (-item[0], item[1]))  # desempate agent_id asc
         matches: list[PolymathicMatch] = []
         for score, agent_id, agent, overlap in scored[:top_k]:
+            kind = "academic" if agent_id in {a.get("id") for a in self.academic_sources} else "manifest"
             matches.append(
                 PolymathicMatch(
                     capability=capability,
                     agent_id=agent_id,
                     agent_title=str(agent.get("title", "")),
-                    source="manifest:" + agent_id,
+                    source=f"{kind}:{agent_id}",
                     score=score,
                     overlap_terms=overlap,
                 )
@@ -183,7 +203,7 @@ class PolymathicConvergence:
             params={
                 "top_k": top_k,
                 "source": str(self.manifest_path),
-                "agents_indexed": len(self.agents),
+                "agents_indexed": len(self.agents) + len(self.academic_sources),
             },
             warnings=list(base.warnings) + list(self.warnings),
         )

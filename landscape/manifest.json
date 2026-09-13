@@ -3,28 +3,413 @@
   "source_repo": "https://github.com/MarceloClaro/500-AI-Agents-Projects",
   "upstream": "ashishpatel26/500-AI-Agents-Projects",
   "license": "MIT",
-  "curated_at": "2026-09-13",
-  "scope_note": "Manifest curado dos 20 agentes auto-contidos em agents/ (o README referencia centenas de casos de uso adicionais como links externos; esses não são integrações, apenas contexto de paisagem).",
+  "curated_at": "2026-09-13T07:03:54.790209+00:00",
+  "scope_note": "Manifest curado dos 20 agentes auto-contidos em agents/ (o README referencia centenas de casos de uso adicionais como links externos; esses não são integrações, apenas contexto de paisagem). | academic: fontes de pesquisa DeepMind (Apache-2.0) curadas na R489 para ampliar a cobertura de lacunas epistemológicas na Convergência Polimática (R486).",
   "agents": [
-    {"id": "01-web-research-agent", "title": "Web Research Agent", "industry": "Research/Web", "framework": "langchain-langgraph", "dependencies": ["langchain", "langchain-openai", "langgraph", "langchain-tavily"], "env_required": ["OPENAI_API_KEY", "TAVILY_API_KEY"], "swift": "Pesquisa na web com síntese de múltiplas fontes via LangGraph.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/01-web-research-agent", "license": "MIT"},
-    {"id": "02-code-review-agent", "title": "Code Review Agent", "industry": "Software Development", "framework": "langchain", "dependencies": ["langchain", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Revisa diffs e sugere melhorias de código.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/02-code-review-agent", "license": "MIT"},
-    {"id": "03-pdf-qa-agent", "title": "PDF QA Agent", "industry": "Knowledge/Documentation", "framework": "llama-index", "dependencies": ["llama-index", "llama-index-llms-openai", "llama-index-embeddings-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Responde perguntas sobre documentos PDF com RAG.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/03-pdf-qa-agent", "license": "MIT"},
-    {"id": "04-sql-query-agent", "title": "SQL Query Agent", "industry": "Data/Database", "framework": "langchain", "dependencies": ["langchain", "langchain-openai", "langchain-community"], "env_required": ["OPENAI_API_KEY"], "swift": "Traduz linguagem natural em consultas SQL.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/04-sql-query-agent", "license": "MIT"},
-    {"id": "05-email-drafting-agent", "title": "Email Drafting Agent", "industry": "Communication", "framework": "crewai", "dependencies": ["crewai", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Redige respostas de e-mail a partir de contexto.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/05-email-drafting-agent", "license": "MIT"},
-    {"id": "06-news-summarizer-agent", "title": "News Summarizer Agent", "industry": "Media/News", "framework": "langchain", "dependencies": ["langchain", "langchain-openai", "requests"], "env_required": ["OPENAI_API_KEY"], "swift": "Resume notícias de fontes RSS/páginas.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/06-news-summarizer-agent", "license": "MIT"},
-    {"id": "07-github-issue-triager", "title": "GitHub Issue Triager", "industry": "Development/PM", "framework": "langchain", "dependencies": ["langchain", "langchain-openai", "requests"], "env_required": ["OPENAI_API_KEY"], "swift": "Classifica e prioriza issues do GitHub.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/07-github-issue-triager", "license": "MIT"},
-    {"id": "08-data-analysis-agent", "title": "Data Analysis Agent", "industry": "Data/Analytics", "framework": "langchain", "dependencies": ["langchain", "langchain-openai", "langchain-experimental", "pandas", "openpyxl"], "env_required": ["OPENAI_API_KEY"], "swift": "Analisa planilhas/datasets com pandas e relata.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/08-data-analysis-agent", "license": "MIT"},
-    {"id": "09-resume-parser-agent", "title": "Resume Parser Agent", "industry": "Human Resources", "framework": "langchain", "dependencies": ["langchain", "langchain-openai", "pypdf"], "env_required": ["OPENAI_API_KEY"], "swift": "Extrai dados estruturados de currículos PDF.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/09-resume-parser-agent", "license": "MIT"},
-    {"id": "10-meeting-notes-agent", "title": "Meeting Notes Agent", "industry": "Productivity", "framework": "langchain", "dependencies": ["langchain", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Gera atas e resumos de reuniões.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/10-meeting-notes-agent", "license": "MIT"},
-    {"id": "11-stock-research-agent", "title": "Stock Research Agent", "industry": "Finance", "framework": "langchain", "dependencies": ["langchain", "langchain-openai", "yfinance"], "env_required": ["OPENAI_API_KEY"], "swift": "Pesquisa ações e gera relatório de investimento.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/11-stock-research-agent", "license": "MIT"},
-    {"id": "12-travel-planner-agent", "title": "Travel Planner Agent", "industry": "Travel/Hospitality", "framework": "crewai", "dependencies": ["crewai", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Planeja roteiros de viagem com itens do dia.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/12-travel-planner-agent", "license": "MIT"},
-    {"id": "13-customer-support-agent", "title": "Customer Support Agent", "industry": "Customer Service", "framework": "langchain-langgraph", "dependencies": ["langchain", "langchain-openai", "langchain-community", "langgraph", "faiss-cpu"], "env_required": ["OPENAI_API_KEY"], "swift": "Chat de suporte com base de conhecimento RAG.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/13-customer-support-agent", "license": "MIT"},
-    {"id": "14-social-media-agent", "title": "Social Media Agent", "industry": "Marketing", "framework": "crewai", "dependencies": ["crewai", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Gera posts para redes sociais.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/14-social-media-agent", "license": "MIT"},
-    {"id": "15-unit-test-generator", "title": "Unit Test Generator", "industry": "Software Development", "framework": "langchain", "dependencies": ["langchain", "langchain-openai", "pytest"], "env_required": ["OPENAI_API_KEY"], "swift": "Gera testes unitários a partir de código.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/15-unit-test-generator", "license": "MIT"},
-    {"id": "16-documentation-writer", "title": "Documentation Writer", "industry": "Documentation", "framework": "langchain", "dependencies": ["langchain", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Redige documentação técnica de APIs e módulos.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/16-documentation-writer", "license": "MIT"},
-    {"id": "17-recipe-agent", "title": "Recipe Agent", "industry": "Food/Lifestyle", "framework": "langchain", "dependencies": ["langchain", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Sugere receitas a partir de ingredientes.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/17-recipe-agent", "license": "MIT"},
-    {"id": "18-job-application-agent", "title": "Job Application Agent", "industry": "Human Resources", "framework": "crewai", "dependencies": ["crewai", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Personaliza currículo e carta para vagas.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/18-job-application-agent", "license": "MIT"},
-    {"id": "19-competitive-analysis-agent", "title": "Competitive Analysis Agent", "industry": "Business/Marketing", "framework": "langchain-langgraph", "dependencies": ["langchain", "langchain-openai", "langgraph"], "env_required": ["OPENAI_API_KEY"], "swift": "Analisa concorrentes e elabora relatório comparativo.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/19-competitive-analysis-agent", "license": "MIT"},
-    {"id": "20-multi-agent-debate", "title": "Multi-Agent Debate", "industry": "Research/Collaboration", "framework": "langchain", "dependencies": ["langchain", "langchain-openai"], "env_required": ["OPENAI_API_KEY"], "swift": "Simula debate entre múltiplos agentes sobre um tema.", "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/20-multi-agent-debate", "license": "MIT"}
+    {
+      "id": "01-web-research-agent",
+      "title": "Web Research Agent",
+      "industry": "Research/Web",
+      "framework": "langchain-langgraph",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "langgraph",
+        "langchain-tavily"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY",
+        "TAVILY_API_KEY"
+      ],
+      "swift": "Pesquisa na web com síntese de múltiplas fontes via LangGraph.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/01-web-research-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "02-code-review-agent",
+      "title": "Code Review Agent",
+      "industry": "Software Development",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Revisa diffs e sugere melhorias de código.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/02-code-review-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "03-pdf-qa-agent",
+      "title": "PDF QA Agent",
+      "industry": "Knowledge/Documentation",
+      "framework": "llama-index",
+      "dependencies": [
+        "llama-index",
+        "llama-index-llms-openai",
+        "llama-index-embeddings-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Responde perguntas sobre documentos PDF com RAG.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/03-pdf-qa-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "04-sql-query-agent",
+      "title": "SQL Query Agent",
+      "industry": "Data/Database",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "langchain-community"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Traduz linguagem natural em consultas SQL.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/04-sql-query-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "05-email-drafting-agent",
+      "title": "Email Drafting Agent",
+      "industry": "Communication",
+      "framework": "crewai",
+      "dependencies": [
+        "crewai",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Redige respostas de e-mail a partir de contexto.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/05-email-drafting-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "06-news-summarizer-agent",
+      "title": "News Summarizer Agent",
+      "industry": "Media/News",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "requests"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Resume notícias de fontes RSS/páginas.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/06-news-summarizer-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "07-github-issue-triager",
+      "title": "GitHub Issue Triager",
+      "industry": "Development/PM",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "requests"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Classifica e prioriza issues do GitHub.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/07-github-issue-triager",
+      "license": "MIT"
+    },
+    {
+      "id": "08-data-analysis-agent",
+      "title": "Data Analysis Agent",
+      "industry": "Data/Analytics",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "langchain-experimental",
+        "pandas",
+        "openpyxl"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Analisa planilhas/datasets com pandas e relata.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/08-data-analysis-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "09-resume-parser-agent",
+      "title": "Resume Parser Agent",
+      "industry": "Human Resources",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "pypdf"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Extrai dados estruturados de currículos PDF.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/09-resume-parser-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "10-meeting-notes-agent",
+      "title": "Meeting Notes Agent",
+      "industry": "Productivity",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Gera atas e resumos de reuniões.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/10-meeting-notes-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "11-stock-research-agent",
+      "title": "Stock Research Agent",
+      "industry": "Finance",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "yfinance"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Pesquisa ações e gera relatório de investimento.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/11-stock-research-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "12-travel-planner-agent",
+      "title": "Travel Planner Agent",
+      "industry": "Travel/Hospitality",
+      "framework": "crewai",
+      "dependencies": [
+        "crewai",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Planeja roteiros de viagem com itens do dia.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/12-travel-planner-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "13-customer-support-agent",
+      "title": "Customer Support Agent",
+      "industry": "Customer Service",
+      "framework": "langchain-langgraph",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "langchain-community",
+        "langgraph",
+        "faiss-cpu"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Chat de suporte com base de conhecimento RAG.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/13-customer-support-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "14-social-media-agent",
+      "title": "Social Media Agent",
+      "industry": "Marketing",
+      "framework": "crewai",
+      "dependencies": [
+        "crewai",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Gera posts para redes sociais.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/14-social-media-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "15-unit-test-generator",
+      "title": "Unit Test Generator",
+      "industry": "Software Development",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "pytest"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Gera testes unitários a partir de código.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/15-unit-test-generator",
+      "license": "MIT"
+    },
+    {
+      "id": "16-documentation-writer",
+      "title": "Documentation Writer",
+      "industry": "Documentation",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Redige documentação técnica de APIs e módulos.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/16-documentation-writer",
+      "license": "MIT"
+    },
+    {
+      "id": "17-recipe-agent",
+      "title": "Recipe Agent",
+      "industry": "Food/Lifestyle",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Sugere receitas a partir de ingredientes.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/17-recipe-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "18-job-application-agent",
+      "title": "Job Application Agent",
+      "industry": "Human Resources",
+      "framework": "crewai",
+      "dependencies": [
+        "crewai",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Personaliza currículo e carta para vagas.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/18-job-application-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "19-competitive-analysis-agent",
+      "title": "Competitive Analysis Agent",
+      "industry": "Business/Marketing",
+      "framework": "langchain-langgraph",
+      "dependencies": [
+        "langchain",
+        "langchain-openai",
+        "langgraph"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Analisa concorrentes e elabora relatório comparativo.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/19-competitive-analysis-agent",
+      "license": "MIT"
+    },
+    {
+      "id": "20-multi-agent-debate",
+      "title": "Multi-Agent Debate",
+      "industry": "Research/Collaboration",
+      "framework": "langchain",
+      "dependencies": [
+        "langchain",
+        "langchain-openai"
+      ],
+      "env_required": [
+        "OPENAI_API_KEY"
+      ],
+      "swift": "Simula debate entre múltiplos agentes sobre um tema.",
+      "reference_url": "https://github.com/MarceloClaro/500-AI-Agents-Projects/tree/main/agents/20-multi-agent-debate",
+      "license": "MIT"
+    }
+  ],
+  "academic": [
+    {
+      "id": "deepmind-superhuman",
+      "title": "Superhuman Reasoning (AlphaGeometry/AG2/IMO Bench/Aletheia)",
+      "description": "Suite DeepMind de raciocínio matemático robusto: provas de geometria olímpica sem demonstrações humanas (AlphaGeometry/AG2), benchmarks IMO Bench e agente de pesquisa matemática Aletheia.",
+      "tags": [
+        "racionamento formal",
+        "prova",
+        "geometria",
+        "benchmark",
+        "agente de pesquisa",
+        "matemática"
+      ],
+      "license": "Apache-2.0",
+      "source_repo": "https://github.com/google-deepmind/superhuman",
+      "reference_url": "https://github.com/google-deepmind/superhuman",
+      "note": "Curadoria anti-overclaim: o nome do repo contém 'superhuman', mas o Core NÃO adota esse rótulo em veredictos; a entrada é fonte de paisagem para raciocínio formal."
+    },
+    {
+      "id": "deepmind-alphageometry",
+      "title": "AlphaGeometry — prova de geometria olímpica",
+      "description": "Resolve problemas de geometria olímpica sem demonstrações humanas (publicação Nature 2024), integrando dedução simbólica (DDAR) e busca neural.",
+      "tags": [
+        "racionamento dedutivo",
+        "geometria",
+        "prova",
+        "dedução simbólica",
+        "busca neural"
+      ],
+      "license": "Apache-2.0",
+      "source_repo": "https://github.com/google-deepmind/alphageometry",
+      "reference_url": "https://github.com/google-deepmind/alphageometry",
+      "note": ""
+    },
+    {
+      "id": "deepmind-alphageometry2",
+      "title": "AlphaGeometry2 — desempenho medalha de ouro",
+      "description": "Versão melhorada do AlphaGeometry (agosto 2025) alcançando desempenho medalha de ouro na IMO 2000-2024 (84%), com dedução simbólica e busca orientada.",
+      "tags": [
+        "racionamento dedutivo",
+        "geometria",
+        "prova",
+        "dedução simbólica",
+        "busca orientada"
+      ],
+      "license": "Apache-2.0",
+      "source_repo": "https://github.com/google-deepmind/alphageometry2",
+      "reference_url": "https://github.com/google-deepmind/alphageometry2",
+      "note": ""
+    },
+    {
+      "id": "deepmind-science-skills",
+      "title": "Science Skills (37 skills de pesquisa científica)",
+      "description": "Skills de agentes para pesquisa científica: bancos de dados (UniProt, ClinVar, gnomAD, Ensenmbl, STRING, ChEMBL, PubChem) e literature search (arXiv, bioRxiv, EuropePMC, OpenAlex, PubMed).",
+      "tags": [
+        "literature search",
+        "bancos de dados",
+        "biologia",
+        "química",
+        "proteínas",
+        "pesquisa"
+      ],
+      "license": "Apache-2.0",
+      "source_repo": "https://github.com/google-deepmind/science-skills",
+      "reference_url": "https://github.com/google-deepmind/science-skills",
+      "note": ""
+    }
   ]
 }
