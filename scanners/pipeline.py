@@ -25,6 +25,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import lru_cache
@@ -34,15 +35,25 @@ from mci.metabus import metabus
 from scanners.noological_scanner import NoologicalScanner
 from scanners.teleological_scanner import TeleologicalReverseScanner, TeleologicalGoal
 from scanners.evolutionary_pipeline import EvolutionaryRoadmap  # noqa: F401 (reexport)
-from scanners.potentiality_scanner import PotentialityScanner
+from scanners.potentiality_scanner import (
+    PotentialityScanner,
+    PotentialityCandidate,
+    PotentialityReport,  # noqa: F401 (reexport)
+)
 from scanners.social_impact_scanner import SocialImpactScanner
 from scanners.legal_impact_scanner import LegalImpactScanner
 from scanners.scientific_reasoning_scanner import ScientificReasoningScanner
-from scanners.successor_generator import SuccessorGenerator
+from scanners.successor_generator import (
+    SuccessorGenerator,
+    SUCCESSOR_BANK,
+)
 from scanners.reversa_scanner import ReversaScanner
 from scanners.epistemic_prioritizer import EpistemicPrioritizer, EpistemicOpportunity  # noqa: F401 (reexport)
 from scanners.literary_scanners import run_literary_scanner_suite
 from scanners.literary_research_scanners import run_literary_research_scanner_suite
+from scanners.inertia_analyzer import InertiaVectorAnalyzer
+from scanners.noise_scanner import StructuralNoiseScanner
+from scanners.compression_engine import StructuralCompressionEngine
 
 
 # Metas-padrão do ecossistema OpenCode Core (SPEC-022)
@@ -107,6 +118,9 @@ class DiagnosticPipeline:
         self._reversa: Optional[ReversaScanner] = None
         self._prioritizer: Optional[EpistemicPrioritizer] = None
         self._successor_gen: Optional[SuccessorGenerator] = None
+        self._inertia_analyzer: Optional[InertiaVectorAnalyzer] = None
+        self._noise_scanner: Optional[StructuralNoiseScanner] = None
+        self._compression_engine: Optional[StructuralCompressionEngine] = None
         # Cache do corpus (válido enquanto os hashes dos arquivos baterem)
         self._cached_corpus: Optional[str] = None
         self._cached_hash: Optional[str] = None
@@ -160,6 +174,24 @@ class DiagnosticPipeline:
         if self._successor_gen is None:
             self._successor_gen = SuccessorGenerator()
         return self._successor_gen
+
+    @property
+    def inertia_analyzer(self) -> InertiaVectorAnalyzer:
+        if self._inertia_analyzer is None:
+            self._inertia_analyzer = InertiaVectorAnalyzer()
+        return self._inertia_analyzer
+
+    @property
+    def noise_scanner(self) -> StructuralNoiseScanner:
+        if self._noise_scanner is None:
+            self._noise_scanner = StructuralNoiseScanner()
+        return self._noise_scanner
+
+    @property
+    def compression_engine(self) -> StructuralCompressionEngine:
+        if self._compression_engine is None:
+            self._compression_engine = StructuralCompressionEngine()
+        return self._compression_engine
 
     # ── Cache do corpus ────────────────────────────────────────────────
 
@@ -810,6 +842,7 @@ class DiagnosticPipeline:
             report["epistemic_opportunities"] = {"error": str(exc)}
 
         # c) Sucessores plausíveis a partir do DNA estrutural
+        successors: List[Any] = []
         try:
             dna = self.potentiality.extract_dna()
             successors = self.successor_gen.generate(dna, theme=domain)
@@ -822,6 +855,122 @@ class DiagnosticPipeline:
             }
         except Exception as exc:
             report["successors"] = {"error": str(exc)}
+
+        # d) Inércia Vetorial Analyzer (R493): o que impede a emergência?
+        try:
+            candidates = [
+                {"id": h.id, "description": h.description,
+                 "requires": list(h.requires)}
+                for h in SUCCESSOR_BANK
+            ]
+            for s in successors[:6]:
+                candidates.append({
+                    "id": s.name,
+                    "description": s.rationale,
+                    "requires": list(getattr(s, "genes", [])),
+                })
+            pot_rep = self.potentiality.scan([
+                PotentialityCandidate(id=c["id"], description=c["description"],
+                                      requires=c["requires"])
+                for c in candidates if c["requires"]
+            ])
+            inv = self.inertia_analyzer.analyze(pot_rep)
+            tiers = {a.tier: 0 for a in inv.ranking}
+            for a in inv.ranking:
+                tiers[a.tier] = tiers.get(a.tier, 0) + 1
+            md_lines = [
+                "# Inércia Vetorial — o que impede a emergência?",
+                "",
+                f"Avaliações: **{len(inv.ranking)}** | "
+                f"quebra-imediata: {tiers.get('quebra-imediata', 0)} | "
+                f"quebra-moderada: {tiers.get('quebra-moderada', 0)} | "
+                f"inercia-dominante: {tiers.get('inercia-dominante', 0)}",
+                "",
+                "| Candidata | QIV | Inércia | Tier | Reorganização |",
+                "|---|---|---|---|---|",
+            ]
+            for a in inv.ranking[:10]:
+                md_lines.append(
+                    f"| {a.id} | {a.qiv:.3f} | {a.inertia:.3f} | {a.tier} "
+                    f"| {a.reorg_prediction} |")
+            report["inertia"] = {
+                "n_assessments": len(inv.ranking),
+                "quebra_imediata": tiers.get("quebra-imediata", 0),
+                "quebra_moderada": tiers.get("quebra-moderada", 0),
+                "inercia_dominante": tiers.get("inercia-dominante", 0),
+                "top": [a.to_dict() for a in inv.ranking[:8]],
+                "report_md": "\n".join(md_lines),
+            }
+        except Exception as exc:
+            report["inertia"] = {"error": str(exc)}
+
+        # e) Structural Noise Scanner (R494): ruído sem perda funcional
+        try:
+            corpus_text = trail.get_all_text()
+            sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+",
+                                                      corpus_text)
+                         if s.strip()]
+            noise = self.noise_scanner.scan_text(sentences)
+            md_lines = [
+                "# Structural Noise Scanner — compressão sem perda funcional",
+                "",
+                f"Elementos: **{len(sentences)}** → preservados "
+                f"**{len(noise.preserved)}** | removidos **{len(noise.removed)}**",
+                f"SPS={noise.sps:.2f} ({noise.level}) | NRR={noise.nrr:.2f} "
+                f"| FLI={noise.fli:.2f}",
+                "",
+                "## Remoções",
+                "",
+            ]
+            md_lines += [f"- {el}: {why}" for el, why
+                         in list(noise.removals.items())[:10]]
+            report["noise"] = {
+                "sps": noise.sps,
+                "nrr": noise.nrr,
+                "fli": noise.fli,
+                "level": noise.level,
+                "n_elements": len(sentences),
+                "n_preserved": len(noise.preserved),
+                "n_removed": len(noise.removed),
+                "removed": noise.removed[:10],
+                "classified": noise.classified[:20],
+                "report_md": "\n".join(md_lines),
+            }
+        except Exception as exc:
+            report["noise"] = {"error": str(exc)}
+
+        # f) Structural Compression Engine (R495): versão densa do corpus
+        try:
+            comp = self.compression_engine.compress(trail.get_all_text())
+            md_lines = [
+                "# Structural Compression Engine — versão densa auditável",
+                "",
+                f"Tokens: **{comp.tokens_original}** → **{comp.tokens_final}** "
+                f"(economia {comp.tokens_saved})",
+                f"CR={comp.cr:.2f} | CPS={comp.cps:.2f} | "
+                f"FLI={comp.fli:.2f} | DG={comp.dg:.2f} | "
+                f"nível={comp.level}",
+                "",
+                "## Texto denso",
+                "",
+                comp.compressed_text[:2000],
+            ]
+            report["compression"] = {
+                "cr": comp.cr,
+                "cps": comp.cps,
+                "fli": comp.fli,
+                "dg": comp.dg,
+                "level": comp.level,
+                "tokens_original": comp.tokens_original,
+                "tokens_final": comp.tokens_final,
+                "tokens_saved": comp.tokens_saved,
+                "n_elements_original": comp.n_elements_original,
+                "n_elements_final": comp.n_elements_final,
+                "compressed_text": comp.compressed_text[:2000],
+                "report_md": "\n".join(md_lines),
+            }
+        except Exception as exc:
+            report["compression"] = {"error": str(exc)}
 
 
 # Singleton — modo ecossistema como padrão (SPEC-022)

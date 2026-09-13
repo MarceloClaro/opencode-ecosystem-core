@@ -10072,6 +10072,38 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R496",
+      "objective": "Integração IVA/SNS/SCE no DiagnosticPipeline — camada profunda completa (deep=True inclui o que impede a emergência, ruído e versão densa)",
+      "changes": [
+        "scanners/pipeline.py: lazy properties inertia_analyzer/noise_scanner/compression_engine; blocos d/e/f em _run_deep com padrão try/except {'error': ...} da pipeline; report_md nos 3 blocos",
+        "tests/test_r496_pipeline_integration.py (10 testes)",
+        "specs/SPEC-935-R496-pipeline-integration.md (CA1-CA10)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Integrar exigiu visibilidade de successors entre blocos: definir a lista antes do try do bloco (c) para reutilizar no IVA (d) — padrão pipeline de try/except por bloco",
+        "Anti-overclaim em str(report) é contaminação de INPUT: goal com 'Qualis A1' no próprio teste dispara o regex — verificar saídas geradas, não o eco do input (lição de design de teste)",
+        "SCE em corpus de CÓDIGO (sem fronteiras de frase) resulta em CR ≈ 0.98 com nível seguro: honesto mas sem ganho — a ferramenta é para prosa/documentos; o pipeline aplica a sentenças do trail sem perda funcional",
+        "A camada profunda agora responde as 8 perguntas: não-existe, deveria-existir, como-chegar, pode-emergir, quão-próximo, o-que-impede, o-que-remover, versão-densa"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 9 falhas (blocos inexistentes) + 1 anti-overclaim por input com 'Qualis A1'",
+        "GREEN: pytest tests/test_r496_pipeline_integration.py -> 10 passed",
+        "Regressões R483-R496 + test_deep_diagnose -> 192 passed",
+        "Demo ecosystem: inertia 9 avaliações (3 quebra-imediata); noise SPS=0.94 seguro; compression CR=0.98 (código, honesto) nível seguro"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }
