@@ -9912,6 +9912,38 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R491",
+      "objective": "Potentiality Scanner — DNA estrutural e detecção de capacidades latentes (proposta camada 3)",
+      "changes": [
+        "scanners/potentiality_scanner.py: StructuralDNA (capabilities/redundant/central) + PotentialityScanner (coverage/missing/resistencia/tier latente-alto≥0.75, emergente≥0.34, distante)",
+        "tests/test_r491_potentiality_scanner.py (12 testes)",
+        "specs/SPEC-935-R491-potentiality-scanner.md (CA1-CA8)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "A analogia do avião do usuário é o núcleo: capacidade latente = componentes presentes + combinação faltante; o scan responde 'o que está prestes a nascer' e o que FALTA",
+        "Limiar de tiering: usei 0.66 e o 2/3 (0.6667) caía na borda; ≥0.75 (3/4) para latente-alto é definição mais clara e testável",
+        "Erro veio do TESTE (assumi cross_validation ausente, mas está no DNA): o DNA real do ecossistema já contém cross_validation",
+        "Distinção honesta: candidatas são HIPÓTESES (curadoria humana ou geradas pelo Successor R492)"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 1 falha de borda de limiar + 1 erro de teste (cross_validation presente) — corrigidos",
+        "GREEN: pytest tests/test_r491_potentiality_scanner.py -> 12 passed",
+        "Regressões R483-R491 -> 121 passed",
+        "Demo: cognitive-manifold emergente (2/3), self-validating latente-alto (3/3), radar distante (0/3)"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }
