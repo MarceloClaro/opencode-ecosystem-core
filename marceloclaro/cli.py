@@ -109,6 +109,12 @@ def main() -> int:
             print(json.dumps(report, indent=2, ensure_ascii=False))
             return 0 if report.get("overall") in {"healthy", "degraded"} else 1
 
+        if cmd == "core-check":
+            from marceloclaro.core_check import run_core_check
+
+            report = run_core_check()
+            return 0 if report["overall"] in {"healthy", "degraded"} else 1
+
         if cmd == "apm":
             from integrations.apm import APMPackageManager
             pm = APMPackageManager()

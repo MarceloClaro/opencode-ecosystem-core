@@ -9591,6 +9591,37 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R481",
+      "objective": "Auditoria formal CA1–CA10 da SPEC-935-R471 + implementação do core-check (fecha ressalva CA9)",
+      "changes": [
+        "scripts/audit_r471_cas.py: auditoria executável dos 10 critérios de aceitação da R471 (pass/ressalva/fail com evidência)",
+        "marceloclaro/core_check.py + cli core-check: 7 verificações estruturais (doctor, specs, evolution registry, DEFAULT_SOURCES, anti-overclaim docs, hermericidade dos módulos R471, sem alegações no output)",
+        "VALIDATION_R471.md: relatório gerado — 9 pass / 1 ressalva (CA2 manuscrito-demo consolidado) / 0 fail"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Scanner anti-overclaim precisa de contexto: palavras vedadas em frases de proibição ('nenhum artefato contém X'), verificação técnica ('verificado por mock', 'previamente verificados') e word-boundary ('verificadores' != 'verificado') são gate, não violação",
+        "core-check como subcomando do CLI fecha o CA9 da R471 com saída compatível com o doctor (checks_total/passed/warned/failed/overall) e exit code verificável",
+        "O DOC_PATHS oficial da R448 é installer/windows/README.md (não INSTALLER_WINDOWS.md); disclaimer avaliado no combined, não por arquivo",
+        "Auditoria de invariantes deve ser executável e regenerável (script), não apenas documental"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "python3 scripts/audit_r471_cas.py -> CA1,3,4,5,6,7,8,9,10 pass; CA2 ressalva; 0 fail",
+        "pytest tests/test_r481_core_check.py -> 7 passed",
+        "python3 -m marceloclaro.cli core-check -> overall healthy, exit 0",
+        "pytest tests/ -q -> 3862 passed, 58 skipped, 0 failed (375s)"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }
