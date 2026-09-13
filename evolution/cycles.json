@@ -10040,6 +10040,38 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R495",
+      "objective": "Structural Compression Engine (SCE) — ferramenta de compressão estrutural auditável (fragmentação → SNS → vetores → reconstrução → delta)",
+      "changes": [
+        "scanners/compression_engine.py: fragmentação por fronteiras de frase; SNS por parte (R494); métricas CR/CPS/FLI/DG; níveis seguro/moderado/destrutivo; relatório delta",
+        "tests/test_r495_compression_engine.py (12 testes)",
+        "specs/SPEC-935-R495-compression-engine.md (CA1-CA12)"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "CPS deve medir FUNÇÕES preservadas (não elementos): remover 4 réplicas mantém 100% das funções (CPS=1.0, FLI=0) mesmo com CR=2.52 — a definição do usuário é 'estruturas/funções', não 'elementos'",
+        "Fronteiras de frase: regex lookbehind (?<=[.!?])\\s+ preserva frases intactas; fallback palavra-a-palavra para frases gigantes",
+        "Corpus com repetição do usuário (100k→10k, CR=10x, CPS=0.95) é reproduzível no modelo: repetição pura gera compressão segura com FLI≈0",
+        "Δ = Estrutura(T) − Estrutura(T') é capturada pelo par CPS/FLI: a compressão só é aprovada se o texto final permite reconstruir o raciocínio original"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: CPS medindo elementos -> 2 falhas (nível destrutivo em corpus reprodutível) — corrigido para funções",
+        "GREEN: pytest tests/test_r495_compression_engine.py -> 12 passed",
+        "Regressões R483-R495 -> 182 passed",
+        "Demo: 63→25 tokens (economia 38), CR=2.52, CPS=1.00, FLI=0.00, DG=2.52, nível seguro"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }
