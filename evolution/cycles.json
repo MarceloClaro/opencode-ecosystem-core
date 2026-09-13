@@ -9881,6 +9881,37 @@
       "origin_commit": "07ec6c0",
       "state_merkle_root": null,
       "prev_state_merkle_root": "19e6513678bcc61a74c5013723e94de52f7dfcc96b969c2dd5474eade705cb2c"
+    },
+    {
+      "round_id": "R490",
+      "objective": "Composição Unitária do Conhecimento — insumos cognitivos por capacidade (proposta camada 2)",
+      "changes": [
+        "scanners/knowledge_composition.py: KnowledgeComposition (COMPOSITION_BANK curado: Meta-análise, Prova geométrica, Metadados; fallback lexical com warning; scan integra ReverseScanner)",
+        "tests/test_r490_knowledge_composition.py (15 testes)",
+        "specs/SPEC-935-R490-knowledge-composition.md (CA1-CA9)"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Analogia de obra do usuário é acurada: cronograma (R485) sem composição de insumos (R490) é lista de atividades sem materiais; juntos formam plano executável",
+        "Composição curada (bank) deve ser explícita como tal; fallback lexical é heurística honesta com warning — nunca fingir curadoria onde não há",
+        "Integrar via ReverseScanner (reuso) em vez de duplicar lógica de gap",
+        "6 classes de insumo cobrem conceito/método/base/ferramenta/domínio/validação — fecha o ciclo construção-verificação"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "GREEN: pytest tests/test_r490_knowledge_composition.py -> 15 passed",
+        "Regressões R483-R490 -> 109 passed",
+        "Demo: Meta-análise curada (6 classes); Harmonia modal lexical com warning"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }
