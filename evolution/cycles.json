@@ -9944,6 +9944,38 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R492",
+      "objective": "Successor Generator — recombinação estrutural de capabilities (proposta camada 4)",
+      "changes": [
+        "scanners/successor_generator.py: SUCCESSOR_BANK (3 hipóteses do usuário) + geração combinatoria (pares/trios inter-módulo, max_combos) com score = 1.0·diversity + 0.5·novelty + 0.3·centrality",
+        "tests/test_r492_successor_generator.py (13 testes)",
+        "specs/SPEC-935-R492-successor-generator.md (CA1-CA9)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "A recombinação (Motor+Asas+Controle→Avião) vira heurística verificável: pares/trios de capabilities de MÓDULOS DISTINTOS, ranking por diversidade/novelty/centralidade",
+        "Bank curado independe do DNA (hipóteses do usuário permanecem mesmo com módulos vazios) — distinção entre curadoria e geração automática foi o erro inicial do teste",
+        "Hipóteses são EXPLÍCITAS (nunca 'implementação planejada') — anti-overclaim garantido no relatório",
+        "O R492 fecha o pipeline 4-camadas do usuário: Reverso (o quê) → Trajetória (ordem) → Composição (do quê) → Potentiality/Successor (o que pode nascer)"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 1 teste com premissa errada (bank independe do DNA) — corrigido no TESTE",
+        "GREEN: pytest tests/test_r492_successor_generator.py -> 13 passed",
+        "Regressões R483-R492 -> 134 passed",
+        "Demo: 3 bank (score 3.0) + gerados diversidade 3.5"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }
