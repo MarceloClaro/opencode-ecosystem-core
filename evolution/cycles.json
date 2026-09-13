@@ -9657,6 +9657,41 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R483",
+      "objective": "Scanner Reverso de Trajetórias Evolutivas — planejamento estrutural do futuro (R(F), Δ, p(g) com anti-cargo-cult)",
+      "changes": [
+        "scanners/reverse_scanner.py: ReverseScanner, ReverseOpportunity, ReverseScanReport; fecho regressivo R(F) com poda em A; gap evolutivo Δ; p(g) = α·cascade + β·centrality + γ·novelty − δ·ritual (α=0.40 β=0.25 γ=0.20 δ=0.15); tiering alavanca/prioritaria/marginal/ritual",
+        "specs/SPEC-935-R483-reverse-scanner.md: spec formal com CA1–CA10 e modelo matemático",
+        "tests/test_r483_reverse_scanner.py: 31 testes (fecho transitivo, poda, ciclos, componentes, decomposição, integração CrossValidationEngine, anti-overclaim, robustez legada, determinismo)",
+        "THIRD_PARTY_NOTICES.md: referências epistemológicas feynman-skill (MIT), feynman (MIT), bernstein (Apache-2.0) — nenhum código copiado"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "O teste RED pegou 2 erros nos próprios testes (aspas na chave de dimensão) — evidência de que a poda/ordenação do algoritmo estava correta; ajustar o teste, nunca o algoritmo sem justificativa",
+        "Chave default do CrossValidationEngine é f'{domain}.{category}' sem aspas — duplicar essa convenção em literais de teste causa falsos negativos",
+        "SyntaxWarnings de \\  em docstrings matemáticas quebram coleta com -W error::SyntaxWarning; usar 'R(F) - A' em docstring",
+        "A demo com exemplares sintéticos mostrou que a semântica ritual(g) está correta: sem a capacidade no exemplar, a lacuna é sinalizada como ritual — mas exemplares reais devem refletir a realidade científica",
+        "Sem corpus_terms, novelty=1.0 documentado não oculto: capacidade não indexada é máxima novidade por convenção explícita",
+        "Suíte completa permanece 0 falhas com +31 testes (3905 passed) — padrão do ciclo mantido"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: collection error antes da implementação",
+        "GREEN: pytest tests/test_r483_reverse_scanner.py -> 31 passed",
+        "Regressões R480-R483 -> 69 passed",
+        "Suíte completa -> 3905 passed, 58 skipped, 0 failed (374s)",
+        "doctor 18/20; core-check healthy"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }

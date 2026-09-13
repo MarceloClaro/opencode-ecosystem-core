@@ -19,6 +19,17 @@ análise de licença prévia; este arquivo é o registro canônico.
 | openclaw-qa | ythx-101 | conteúdo **CC BY-SA 4.0** (share-alike) | Observatório de campo (M8) | **Nenhuma incorporação de conteúdo**; citar com atribuição; derivados sob mesma licença |
 | 500-AI-Agents-Projects | MarceloClaro (fork); ashishpatel26/500-AI-Agents-Projects | MIT | **Referência de paisagem** (R482): manifest curado com 20 agentes auto-contidos e LANDSCAPE_REPORT | **Nenhum código-fonte copiado**; apenas metadados curados (metadados não são obra derivada); sem promessa de integração |
 
+## Referências epistemológicas da R483 (Scanner Reverso)
+
+Componentes citados no **design** do `scanners/reverse_scanner.py` (inspiração
+de métricas; nenhum código copiado, nenhuma dependência):
+
+| Componente | Origem | Licença | Papel no design |
+|---|---|---|---|
+| feynman-skill | MarceloClaro (fork); alchaincyf/feynman-skill | MIT (Huashu/花叔) | Termo **ritual(g)** — teste anti-cargo-cult: distinguir lacuna genuína de lacuna ritual |
+| feynman | MarceloClaro (fork); advaitpaliwal/feynman | MIT (Companion, Inc.) | Executor futuro das trajetórias de pesquisa (planejado, fora do escopo R483) |
+| bernstein | MarceloClaro (fork); sipyourdrink-ltd/bernstein | Apache-2.0 | Executor futuro do roadmap via orquestração determinística (planejado, fora do escopo R483) |
+
 ## Política geral
 
 - Credenciais nunca são persistidas em sandbox, recibo ou configuração.
