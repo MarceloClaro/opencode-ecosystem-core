@@ -10008,6 +10008,38 @@
       "origin_commit": null,
       "state_merkle_root": null,
       "prev_state_merkle_root": null
+    },
+    {
+      "round_id": "R494",
+      "objective": "Structural Noise Scanner — compressão estrutural que remove ruído sem perder função (C=E+S+R → C'=S+E*)",
+      "changes": [
+        "scanners/noise_scanner.py: ElementClassifier (exemplo/estrutura/ruido/redundancia/vetor-explicativo), FunctionPreservation (vocabulário funcional), StructuralCompression (Jaccard ≥ 0.60), ReconstructionTest, RelevanceProtection (3 regras do usuário), métricas SPS/NRR/FLI com níveis",
+        "tests/test_r494_noise_scanner.py (14 testes)",
+        "specs/SPEC-935-R494-noise-scanner.md (CA1-CA12)"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "A função é o invariante da compressão: só se remove o que tem função representada em outro elemento, retirada que não altera reconstrução, ou repetição sem função nova",
+        "Dict keyed por elemento idêntico colapsa chaves — testes com duplicatas devem indexar por posição (erro de teste, não de scanner)",
+        "Asserções com siglas maiúsculas num módulo lowercased exigem term.lower() — falsos negativos em teste de documentação",
+        "Cluster mínimo conservador: Jaccard 0.60 não agrupa Leonardo/Agostinho/Aristóteles (compartilham só 'estruturas'); compressão mais profunda exigiria abstração tópica (documentado como limite)"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 4 falhas (2 testes mal construídos, 1 stub preserved_function, caixa das siglas) — corrigidas",
+        "GREEN: pytest tests/test_r494_noise_scanner.py -> 14 passed",
+        "Regressões R483-R494 -> 143 passed",
+        "Demo: 7 elementos -> 5 mantidos, SPS=1.00 seguro, NRR=0.29, FLI=0.00; remoção só de repetição e ruído"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null,
+      "prev_state_merkle_root": null
     }
   ]
 }
