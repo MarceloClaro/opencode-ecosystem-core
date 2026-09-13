@@ -227,7 +227,10 @@ class TestGuardaEvolutionRegistry:
                      # Âncoras externas de imutabilidade (endurecimento R462):
                      # merkle agregado dos artefatos, commit git de origem e
                      # fotografia do estado do registro no momento da gravação.
-                     "merkle_root", "origin_commit", "state_merkle_root"}
+                     "merkle_root", "origin_commit", "state_merkle_root",
+                     # Audit chain entre ciclos (R488, lição Bernstein RFC 2104):
+                     # estado do ciclo anterior ancorado (opcional, aditivo).
+                     "prev_state_merkle_root"}
         for ciclo in ciclos:
             assert isinstance(ciclo, dict)
             assert ciclo.get("round_id"), f"ciclo sem round_id: {ciclo}"

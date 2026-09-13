@@ -9814,6 +9814,38 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R488",
+      "objective": "Audit Chain entre ciclos — síntese Bernstein (zero-LLM, HMAC RFC 2104, lineage)",
+      "changes": [
+        "evolution/cycles.py: prev_state_merkle_root (campo aditivo) + chain_state_merkle() HMAC-SHA256 RFC 2104 + verify_state_chain()",
+        "tests/test_r488_audit_chain.py (9 testes)",
+        "specs/SPEC-935-R488-audit-chain-bernstein.md"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Bernstein: audit chain HMAC-SHA256 por decisão + lineage por artefato + replay journal — o Core herda âncoras por ciclo (R462); este R488 encadeia os ciclos entre si (prev_state_merkle_root), detectando rearranjo/remoção/injeção",
+        "Bernstein: 'zero LLM na coordenação' -> para fluxos mecânicos (registro, verificação, despacho por trust), não invocar LLM; decisão determinística em Python como o scheduler dele",
+        "Bernstein: replay journal always-on com hash-mismatch como sinal de não-determinismo -> o Core responde com SDD/TDD hermético + evidence_trail; journal por run fica no roadmap",
+        "Encadeamento é aditivo e retrocompatível: ciclos antigos são nós cegos tolerados; a cadeia inicia no primeiro âncora"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: ImportError + tamper round_id corrigido",
+        "GREEN: pytest tests/test_r488_audit_chain.py -> 9 passed",
+        "Regressões evolução: 215 passed (R462/R380/audit pipeline)",
+        "Suíte completa: sem novas falhas (baseline 3949 passed)"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": "19e6513678bcc61a74c5013723e94de52f7dfcc96b969c2dd5474eade705cb2c",
+      "prev_state_merkle_root": ""
     }
   ]
 }

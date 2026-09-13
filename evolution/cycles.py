@@ -13,6 +13,8 @@ memória metacognitiva do ecossistema (lições viram reflexões no MetaBus).
 from __future__ import annotations
 
 import glob
+import hashlib
+import hmac
 import json
 import os
 import re
@@ -50,6 +52,23 @@ class EvolutionCycle:
     merkle_root: str = ""  # hash agregado dos artefatos do ciclo
     origin_commit: str = ""  # commit git HEAD no momento do registro
     state_merkle_root: str = ""  # hash do cycles.json no momento do registro
+    # --- Audit chain entre ciclos (R488, lição Bernstein RFC 2104) ---
+    prev_state_merkle_root: str = ""  # state_merkle_root do ciclo ANTERIOR ancorado
+
+
+def chain_state_merkle(prev_hex: str, state_bytes: bytes) -> str:
+    """HMAC-SHA256 (RFC 2104) encadeando um estado ao hash do ciclo anterior.
+
+    chain(prev, state) = HMAC-SHA256(key=prev, msg=state_bytes).
+
+    Uso: cada ciclo âncora registra `prev_state_merkle_root` = state_merkle_root
+    do ciclo anterior, e `state_merkle_root` = sha256 do cycles.json APÓS sua
+    inserção. Rearranjar/remover/injetar ciclos quebra a cadeia verificável por
+    `EvolutionRegistry.verify_state_chain()`.
+    """
+    return hmac.new(
+        prev_hex.encode("utf-8"), state_bytes, digestmod=hashlib.sha256
+    ).hexdigest()
 
 
 class EvolutionRegistry:
@@ -70,7 +89,8 @@ class EvolutionRegistry:
                 allowed = {"round_id", "objective", "changes", "score", "lessons",
                            "timestamp", "artifact_hashes", "external_verdict",
                            "verifier_identity", "evidence_trail", "audited", "legacy",
-                           "merkle_root", "origin_commit", "state_merkle_root"}
+                           "merkle_root", "origin_commit", "state_merkle_root",
+                           "prev_state_merkle_root"}
                 self.cycles = [
                     EvolutionCycle(**{key: value for key, value in cycle.items() if key in allowed})
                     for cycle in data.get("cycles", [])
@@ -274,6 +294,45 @@ class EvolutionRegistry:
     def _round_num(self, round_id: str) -> int:
         m = re.match(r"R(\d+)", round_id or "")
         return int(m.group(1)) if m else -1
+
+    def verify_state_chain(self) -> Dict[str, Any]:
+        """Verifica a cadeia de audit entre ciclos (R488, lição Bernstein).
+
+        Percorre os ciclos EM ORDEM; para cada ciclo com âncora
+        (`prev_state_merkle_root` ou `state_merkle_root` preenchidos):
+        - primeiro nó âncora: `prev` deve ser "" (raiz da cadeia);
+        - nós seguintes: `prev` deve ser igual ao `state_merkle_root` do último
+          nó âncora visto;
+        - nós cegos (sem âncoras) são tolerados e não quebram a cadeia.
+
+        Retorna {"ok", "size", "anchored", "broken"} onde `broken` lista os
+        round_ids com elo adulterado. Um `ok=False` indica rearranjo/remoção/
+        injeção de ciclos âncora no registro.
+        """
+        last_state = ""
+        broken: List[Dict[str, Any]] = []
+        in_chain = 0
+        anchored = 0
+        for cycle in self.cycles:
+            prev = cycle.prev_state_merkle_root or ""
+            state = cycle.state_merkle_root or ""
+            if state:
+                anchored += 1
+            if not (prev or state):
+                continue  # nó cego
+            in_chain += 1
+            if prev and last_state == "" and prev != "":
+                broken.append({"round_id": cycle.round_id, "reason": "prev sem âncora anterior"})
+            elif prev and prev != last_state:
+                broken.append({"round_id": cycle.round_id, "reason": "prev != state do ciclo anterior"})
+            if state:
+                last_state = state
+        return {
+            "ok": not broken,
+            "size": in_chain,
+            "anchored": anchored,
+            "broken": broken,
+        }
 
 
     def history(self, limit: int = 20) -> List[Dict[str, Any]]:
