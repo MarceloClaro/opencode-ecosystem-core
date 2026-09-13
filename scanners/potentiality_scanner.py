@@ -40,6 +40,22 @@ from typing import Any
 TIER_LATENTE_ALTO = 0.75
 TIER_EMERGENTE = 0.34
 
+# DNA declarativo padrão do ecossistema (compatibilidade com pipeline.py,
+# que instancia PotentialityScanner() sem argumentos — SPEC-020)
+DEFAULT_MODULES: dict[str, list[str]] = {
+    "noological_scanner": ["gap_detection"],
+    "teleological_scanner": ["target_definition"],
+    "reverse_scanner": ["capacity_decomposition"],
+    "trajectory_mapper": ["dependency_mapping", "trajectory_mapping"],
+    "cross_validation_engine": ["cross_validation"],
+    "polymathic_convergence": ["polymathic_reasoning", "cross_reference"],
+    "knowledge_composition": ["input_decomposition"],
+    "auto_evolve": ["self_evolution"],
+    "mci_blackboard": ["multi_agent_coordination"],
+    "trust_engine": ["evaluation"],
+    "metabus": ["shared_memory"],
+}
+
 
 @dataclass
 class StructuralDNA:
@@ -102,10 +118,26 @@ class PotentialityReport:
 
 
 class PotentialityScanner:
-    """Avalia candidatas a capacidade latente contra o DNA estrutural."""
+    """Avalia candidatas a capacidade latente contra o DNA estrutural.
 
-    def __init__(self, modules: dict[str, list[str]]):
-        self.dna = StructuralDNA(modules=modules)
+    Compatibilidade (SPEC-020/pipeline.py): sem argumentos, usa
+    DEFAULT_MODULES e expõe extract_dna() para o SuccessorGenerator legado.
+    """
+
+    def __init__(self, modules: dict[str, list[str]] | None = None):
+        self.dna = StructuralDNA(modules=modules if modules is not None
+                                 else DEFAULT_MODULES)
+
+    def extract_dna(self) -> dict[str, Any]:
+        """Retorna o DNA estrutural no formato legado (SPEC-020).
+
+        Formato aceito por SuccessorGenerator.generate():
+            {'capabilities': [...], 'modules': [...]}
+        """
+        return {
+            "capabilities": sorted(self.dna.capabilities),
+            "modules": list(self.dna.modules),
+        }
 
     @staticmethod
     def _resolve(candidate: PotentialityCandidate, dna_caps: set[str]) -> Potentiality:
