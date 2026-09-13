@@ -9,29 +9,53 @@
     {
       "model": "opencode/mimo-v2.5-free",
       "latencia_media_s": 23.8,
-      "acurácia_maswos": 1.0,
-      "conformidade_maswos": 1.0,
-      "velocidade_norm": 0.957,
-      "disponibilidade": 1.0,
-      "score": 0.987,
-      "achados": {
-        "raw_ctx_vazio": true,
-        "typo_exp_mimo": true
-      }
+      "lat_C2_s": 23.84,
+      "acurácia": 1.0,
+      "conformidade": 1.0,
+      "vel_norm": 0.957,
+      "disp": 1.0,
+      "score": 0.987
+    },
+    {
+      "model": "opencode/big-pickle",
+      "latencia_media_s": 43.0,
+      "lat_C2_s": 42.97,
+      "acurácia": 1.0,
+      "conformidade": 1.0,
+      "vel_norm": 0.745,
+      "disp": 1.0,
+      "score": 0.923
     },
     {
       "model": "opencode/nemotron-3-ultra-free",
       "latencia_media_s": 107.4,
-      "acurácia_maswos": 1.0,
-      "conformidade_maswos": 1.0,
-      "velocidade_norm": 0.029,
-      "disponibilidade": 1.0,
-      "score": 0.709,
-      "achados": {
-        "raw_ctx_vazio": true,
-        "typo_exp_mimo": false
-      }
+      "lat_C2_s": 107.43,
+      "acurácia": 1.0,
+      "conformidade": 1.0,
+      "vel_norm": 0.029,
+      "disp": 1.0,
+      "score": 0.709
+    },
+    {
+      "model": "opencode/muse-spark-1.3-contributor-free",
+      "latencia_media_s": 42.7,
+      "lat_C2_s": 18.07,
+      "acurácia": 0.0,
+      "conformidade": 0.0,
+      "vel_norm": 0.748,
+      "disp": 1.0,
+      "score": 0.324
+    },
+    {
+      "model": "opencode/muse-spark-1.2-contributor-free",
+      "latencia_media_s": 46.5,
+      "lat_C2_s": 24.37,
+      "acurácia": 0.0,
+      "conformidade": 0.0,
+      "vel_norm": 0.706,
+      "disp": 1.0,
+      "score": 0.312
     }
   ],
-  "veredito": "Camada de orquestração (scaffold MASWOS) foi o fator decisivo: C0/C1 sem scaffold → 0 acertos, saída vazia; C2 com scaffold → 100% acerto+conformidade. Ranking free: mimo-v2.5-free (1º) por latência ~4x menor e mesma acurácia sob orquestração."
+  "veredito": "mimo-v2.5-free lidera (rápido+correto sob scaffold). big-pickle 2º (correto, 43s, não listado no router). nemotron 3º (correto mas lento). Muse Spark 1.3/1.2: rápidos mas NÃO resolveram (fake reasoning: anunciam verificação sem entregar par) — acurácia 0 sobretudo no formato preciso exigido pelo scaffold."
 }

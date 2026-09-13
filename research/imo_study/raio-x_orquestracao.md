@@ -117,3 +117,44 @@ latência incomportável.
    (C3) — maior impacto por custo zero.
 3. **Não injetar contexto sem estrutura de saída** (C1 ineficiente).
 4. Persistir roteamento automático tarefa→modelo (ranking R499 como base).
+---
+
+## 5. Adendo — big-pickle e Muse Spark free (extensão do benchmark)
+
+### 5.1 big-pickle (modelo do orquestrador, `opencode/big-pickle`)
+- **C0 raw**: 25.9 s — vazio (0 chars), como os demais sem scaffold.
+- **C2 scaffold MASWOS**: **43.0 s — correto e conforme**: `(p,q) = (7,3)
+  Verificação aritmética: 7³ − 3⁵ = 343 − 243 = 100 = 10² = (7+3)²`.
+- **Score 0.923 — 2º lugar**. Latência 2× o mimo, mesma acurácia.
+- **Gap mapeado**: big-pickle **não está listado no `model_router`** (41
+  modelos listados, big-pickle ausente) — é usado pela própria sessão do
+  orquestrador via CLI, mas invisível ao roteamento automático do ecossistema.
+
+### 5.2 Muse Spark (contributor-free)
+- `muse-spark-1.3-contributor-free` e `muse-spark-1.2-contributor-free`:
+  acessíveis, **rápidos (PONG 13–15 s; C2 18–24 s — mais rápidos que mimo)**.
+- **Resultado: 0/4 acertos.** Em nenhuma condição entregaram o par (7,3).
+  Padrão observado: **"fake reasoning"** — anunciam a ação
+  ("verificando a aritmética antes de entregar o par solicitado", "buscando o
+  par que satisfaz a condição") **sem produzir a resposta**. C2 chars=80 sem
+  o par; C0 chars=55–84 sem o par.
+- **Score**: 0.324 (1.3) e 0.312 (1.2) — velocidade boa, acurácia zero.
+- **Interpretação**: o scaffold MASWOS exigiu formato de saída e o modelo não
+  cumpriu — para esta tarefa de precisão, os Muse Spark são **ineficazes
+  apesar da latência baixa**; latência não compensa acurácia.
+
+### 5.3 Ranking final free (5 modelos, mesma tarefa, mesma condição C2)
+
+| # | Modelo | Score | Lat C2 | Acurácia C2 | Conformidade C2 |
+|---|---|---|---|---|---|
+| 1 | mimo-v2.5-free | 0.987 | 23.8 s | 1.0 | 1.0 |
+| 2 | big-pickle | 0.923 | 43.0 s | 1.0 | 1.0 |
+| 3 | nemotron-3-ultra-free | 0.709 | 107.4 s | 1.0 | 1.0 |
+| 4 | muse-spark-1.3-contributor-free | 0.324 | 18.1 s | 0.0 | 0.0 |
+| 5 | muse-spark-1.2-contributor-free | 0.312 | 24.4 s | 0.0 | 0.0 |
+
+**Conclusão do adendo**: orquestração (scaffold) continua sendo a camada
+decisiva; entre os modelos free, **mimo-v2.5-free é o melhor custo-benefício
+real**, big-pickle é o melhor do ecossistema na tarefa com scaffold, e
+**Muse Spark, apesar da velocidade, não resolve a tarefa** — seria preterido
+pelo roteamento automático proposto (R500).

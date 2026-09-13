@@ -58,5 +58,45 @@
     "conforming": true,
     "status": "ok",
     "output_head": "(7, 3) 7³ - 3⁵ = 343 - 243 = 100 = (7+3)² = 10²"
+  },
+  {
+    "model": "opencode/muse-spark-1.3-contributor-free",
+    "condition": "raw",
+    "elapsed_s": 67.34,
+    "correct": false,
+    "conforming": false,
+    "status": "sem-evidencias",
+    "chars": 55,
+    "output_head": "Provo a unicidade e confirmo o cálculo por verificação."
+  },
+  {
+    "model": "opencode/muse-spark-1.3-contributor-free",
+    "condition": "maswos",
+    "elapsed_s": 18.07,
+    "correct": false,
+    "conforming": false,
+    "status": "sem-evidencias",
+    "chars": 80,
+    "output_head": "Resolvendo a equação diofantina — buscando o par primo que satisfaz a igualdade."
+  },
+  {
+    "model": "opencode/muse-spark-1.2-contributor-free",
+    "condition": "raw",
+    "elapsed_s": 68.59,
+    "correct": false,
+    "conforming": false,
+    "status": "sem-evidencias",
+    "chars": 84,
+    "output_head": "Resolvendo a equação diofantina dos primos — buscando o par que satisfaz a condição."
+  },
+  {
+    "model": "opencode/muse-spark-1.2-contributor-free",
+    "condition": "maswos",
+    "elapsed_s": 24.37,
+    "correct": false,
+    "conforming": false,
+    "status": "sem-evidencias",
+    "chars": 80,
+    "output_head": "Solução calculada — verificando a aritmética antes de entregar o par solicitado."
   }
 ]
