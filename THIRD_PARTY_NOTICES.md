@@ -17,6 +17,7 @@ análise de licença prévia; este arquivo é o registro canônico.
 | SciHubEVA | leovan/SciHubEVA | MIT | Frontend opt-in do resolvedor restrito (M6) | Nunca padrão; herda gates fail-closed da R470 |
 | tig | rsrohan99/tig | **sem licença declarada** (license: null) | Executor alternativo multi-provedor (M7) | Invocação externa opcional; **vedada redistribuição**, inclusão em bundle ou venda de código derivado sem autorização |
 | openclaw-qa | ythx-101 | conteúdo **CC BY-SA 4.0** (share-alike) | Observatório de campo (M8) | **Nenhuma incorporação de conteúdo**; citar com atribuição; derivados sob mesma licença |
+| 500-AI-Agents-Projects | MarceloClaro (fork); ashishpatel26/500-AI-Agents-Projects | MIT | **Referência de paisagem** (R482): manifest curado com 20 agentes auto-contidos e LANDSCAPE_REPORT | **Nenhum código-fonte copiado**; apenas metadados curados (metadados não são obra derivada); sem promessa de integração |
 
 ## Política geral
 

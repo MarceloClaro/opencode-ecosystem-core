@@ -1160,6 +1160,15 @@
       },
       "model": "opencode/deepseek-v4-pro"
     },
+    "landscape-curator": {
+      "description": "Curador da paisagem de agentes externos — consome o manifest curado da coleção 500-AI-Agents-Projects (20 agentes auto-contidos, MIT), cruza com o catálogo do Core (196 agent cards) por afinidade lexi",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/landscape-curator.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
     "linguistic-corrector": {
       "description": "Agente especializado linguistic-corrector",
       "mode": "subagent",

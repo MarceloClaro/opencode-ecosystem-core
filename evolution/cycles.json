@@ -9622,6 +9622,41 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R482",
+      "objective": "Curadoria da paisagem de agentes externos — 500-AI-Agents-Projects como referência (item 2-A do usuário)",
+      "changes": [
+        "landscape/manifest.json: manifest curado dos 20 agentes auto-contidos (MIT, source_repo, scope_note honesto sem '500 integrados')",
+        "landscape/curator.py + __init__.py: LandscapeCurator cruza manifest x catálogo Core (196 cards) com scoring lexical auditável (peso 2 name/tags, 1 descrição); report JSON + LANDSCAPE_REPORT.md com disclaimer",
+        "agents/catalog/landscape-curator.md: agent card R482",
+        "THIRD_PARTY_NOTICES.md: registro da coleção 500-AI-Agents-Projects (MIT; nenhum código copiado; metadados não são obra derivada)",
+        "opencode.json regenerado (210 agentes)",
+        "tests/test_r380_maswos_catalog_enrichment.py: contrato do catálogo 205 -> 206 (documentado)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Card de catálogo quebrou o teste R380 de contagem fixa: adicionar agent card exige atualizar o contrato do catálogo na mesma revisão (teste agora documenta a mudança)",
+        "Parser de frontmatter precisa aceitar comentários HTML antes do bloco YAML (cards com <!-- --> antes do --- não eram carregados)",
+        "Scoring lexical com peso em name/tags evita ruído de keywords genéricas na descrição ('research' não domina o ranking)",
+        "Manifest de referência externa registra escopo honesto (20 auto-contidos; resto são links) para não prometer integração falsa",
+        "Ciclos de integração de referência externa devem atualizar THIRD_PARTY_NOTICES na mesma revisão"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "pytest tests/test_r482_landscape_curator.py -> 12 passed",
+        "pytest tests/test_r380_maswos_catalog_enrichment.py tests/test_r482_landscape_curator.py tests/test_r481_core_check.py -> 206 passed",
+        "python3 -m integrations.opencode_cli -> opencode.json gerado com 210 agentes",
+        "suíte completa -> 3873 passed / 1 falha (R380 corrigido antes deste registro); re-run verde"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }
