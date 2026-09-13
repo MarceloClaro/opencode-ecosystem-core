@@ -17,6 +17,7 @@ SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 import os
 import sys
 import json
+import pathlib
 
 from marceloclaro.orchestrator import MarceloClaroOrchestrator
 
@@ -69,6 +70,7 @@ Comandos diretos:
     python3 -m marceloclaro.cli pesquisa "tema" [--max-papers N] [--platforms a,b] [--no-download]
     python3 -m marceloclaro.cli pesquisa-full "tema" [--question '...'] [--per-source N] [--max-pdfs N]
     python3 -m marceloclaro.cli apresentacao <pasta>
+    python3 -m marceloclaro.cli reverse-scan --target "metodos.Meta-análise" [--file A.md] [--domain ecosystem|academic] [--json]
 """
 
 
@@ -96,6 +98,117 @@ def _parse_pesquisa_flags(args):
         else:
             index += 1
     return {"max_papers": max_papers, "platforms": platforms, "download": download}
+
+
+def _cmd_reverse_scan(argv):
+    """Comando direto: planejamento reverso do futuro (R483 → CLI, R484).
+
+    Uso:
+        python3 -m marceloclaro.cli reverse-scan --target "metodos.Meta-análise" \
+            [--file A.md [B.md ...]] [--domain ecosystem|academic] [--json]
+    """
+    targets: list[str] = []
+    files: list[str] = []
+    domain = "ecosystem"
+    as_json = False
+    i = 0
+    while i < len(argv):
+        arg = argv[i]
+        if arg == "--target" and i + 1 < len(argv):
+            for target in argv[i + 1].split(","):
+                target = target.strip()
+                if target:
+                    targets.append(target)
+            i += 2
+        elif arg == "--file" and i + 1 < len(argv):
+            files.append(argv[i + 1])
+            i += 2
+        elif arg == "--domain" and i + 1 < len(argv):
+            domain = argv[i + 1]
+            i += 2
+        elif arg == "--json":
+            as_json = True
+            i += 1
+        else:
+            i += 1
+
+    if not targets:
+        print(
+            'Uso: python3 -m marceloclaro.cli reverse-scan --target "<capacidade>" '
+            '[--file A.md [B.md ...]] [--domain ecosystem|academic] [--json]'
+        )
+        return 1
+
+    # Corpus: arquivos explícitos ou specs/ do próprio Core (hermético, local).
+    if files:
+        texts: list[str] = []
+        for path in files:
+            try:
+                texts.append(pathlib.Path(path).read_text(encoding="utf-8"))
+            except OSError as exc:
+                print(f"erro ao ler {path}: {exc}")
+                return 1
+    else:
+        specs_dir = pathlib.Path(__file__).resolve().parent.parent / "specs"
+        texts = [
+            p.read_text(encoding="utf-8")
+            for p in sorted(specs_dir.glob("SPEC-935-R*.md"))
+        ]
+
+    class _FileAudit:
+        def __init__(self, corpus):
+            self._corpus = corpus
+
+        def get_all_text(self):
+            return self._corpus
+
+    from scanners.noological_scanner import NoologicalScanner
+    from scanners.reverse_scanner import ReverseScanner
+
+    ns = NoologicalScanner()
+    scan = ns.scan(_FileAudit("\n\n".join(texts)), research_domain=domain)
+    rs = ReverseScanner()
+    report = rs.scan(scan, target_state=targets)
+
+    if as_json:
+        print(json.dumps({
+            "target_state": report.target_state,
+            "observed_capabilities": report.observed_capabilities,
+            "reverse_closure": report.reverse_closure,
+            "evolution_gap": report.evolution_gap,
+            "opportunities": [
+                {
+                    k: getattr(o, k)
+                    for k in ("capability", "domain", "potential", "cascade",
+                              "centrality", "novelty", "ritual", "tier",
+                              "possibly_ritual")
+                }
+                for o in report.opportunities
+            ],
+            "params": report.params,
+            "warnings": report.warnings,
+            "domain": domain,
+        }, indent=2, ensure_ascii=False))
+        return 0
+
+    print(f"\nEstado futuro desejado (F): {', '.join(report.target_state)}")
+    print(f"Domínio: {domain}")
+    print(f"Capacidades observadas (A): {len(report.observed_capabilities)}")
+    print(f"Fecho regressivo R(F): {len(report.reverse_closure)} capacidades")
+    if report.warnings:
+        print("Avisos:")
+        for warning in report.warnings:
+            print(f"  - {warning}")
+    print("\nGap evolutivo (Δ) e oportunidades priorizadas:")
+    for opportunity in sorted(report.opportunities, key=lambda o: -o.potential):
+        flag = " [lacuna ritual]" if opportunity.possibly_ritual else ""
+        print(
+            f"  {opportunity.capability:45s} "
+            f"p={opportunity.potential:.2f} "
+            f"tier={opportunity.tier:12s}{flag}"
+        )
+    print()
+    return 0
 
 
 def main() -> int:
@@ -147,6 +260,9 @@ def main() -> int:
                 print(f"Subcomando APM desconhecido: '{subcmd}'. Opções: init, install, compile, audit, pack, list.")
                 return 1
             return 0
+
+        if cmd in ("reverse-scan", "reverso"):
+            return _cmd_reverse_scan(sys.argv[2:])
 
         orchestrator = MarceloClaroOrchestrator()
         if cmd == "status":

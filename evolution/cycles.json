@@ -9692,6 +9692,36 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R484",
+      "objective": "Integração do ReverseScanner ao CLI do orquestrador (comando direto reverse-scan)",
+      "changes": [
+        "marceloclaro/cli.py: _cmd_reverse_scan() — --target obrigatório, --file (lista), --domain ecosystem|academic, --json; corpus default specs/; saída humana PT-BR com R(F), Δ e tier; exit codes",
+        "marceloclaro/cli.py: ajuda (AJUDA_TEXT) documenta o comando",
+        "specs/SPEC-935-R484-cli-reverse-scan.md + tests/test_r484_cli_reverse_scan.py (8 testes subprocess herméticos)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Alvos metodos.*/raciocinio.* pertencem às dimensões EPISTEMOLÓGICAS do NoologicalScanner — domínio default ecosystem não os detecta; --domain academic é o caminho certo (documentado nos testes)",
+        "Corpus fraco em teste gerava grafo vazio e target 'fora do grafo' — usar corpus real (spec R483) em vez de artefato sintético mínimo",
+        "Edições em docstrings-tripla (AJUDA_TEXT) podem remover o fechamento \"\"\" acidentalmente; validar com py_compile após editar",
+        "CLI direto deve ser resolvido ANTES de instanciar MarceloClaroOrchestrator (padrão doctor/core-check) para manter o comando leve"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "RED: 6 fail antes da implementação",
+        "GREEN: pytest tests/test_r484_cli_reverse_scan.py -> 8 passed",
+        "Regressões R480-R483 -> 69 passed"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }
