@@ -262,6 +262,14 @@ def _check_llm_providers() -> DoctorCheck:
     OpenAI/compatível (nuvem, custa tokens)."""
     ollama = _ollama_available()
     openai_key_set = bool(os.environ.get("OPENAI_API_KEY"))
+    # SPEC-935-R478/M3: provedor PAIR (Personal-AI-Router) — opt-in via ambiente;
+    # reporta apenas definido/ausente, jamais host/porta/credencial (R128).
+    pair_status = ""
+    try:
+        from research_factory.pair_router import pair_provider_status
+        pair_status = pair_provider_status()
+    except Exception:
+        pair_status = "PAIR indisponível (módulo ausente)"
 
     disponiveis = []
     if ollama:
@@ -269,18 +277,21 @@ def _check_llm_providers() -> DoctorCheck:
     if openai_key_set:
         # apenas o indicador — NUNCA o valor da chave
         disponiveis.append("OpenAI (OPENAI_API_KEY definida)")
+    if "definido" in pair_status:
+        disponiveis.append("PAIR (provedor da LAN definido)")
 
     if disponiveis:
         return DoctorCheck(
             "llm_providers", "pass",
             "Provedor(es) LLM disponível(is): " + "; ".join(disponiveis)
-            + ". Preferência: Ollama local → OpenAI.",
+            + ". Preferência: local → PAIR → Ollama → OpenAI.",
         )
     return DoctorCheck(
         "llm_providers", "warn",
         "Nenhum provedor LLM disponível — enriquecimento por LLM desativado "
         "(o pipeline de pesquisa segue funcionando sem ele). Para habilitar: "
-        "rode o Ollama local, ou defina OPENAI_API_KEY no seu .env "
+        "rode o Ollama local, defina PAIR_BASE_URL/PAIR_ENDPOINTS (roteador "
+        "PAIR da LAN), ou defina OPENAI_API_KEY no seu .env "
         "(ver .env.example).",
     )
 

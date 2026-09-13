@@ -9494,6 +9494,38 @@
       "merkle_root": null,
       "origin_commit": null,
       "state_merkle_root": null
+    },
+    {
+      "round_id": "R478",
+      "objective": "SPEC-935-R478/Fase 2 da R471: M2 sandbox científico declarativo (OpenShell/NemoClaw adaptado) e M3 roteador local de inferência PAIR",
+      "changes": [
+        "sandbox/declarative_policy.py: política YAML 4 camadas (filesystem/network/process/providers), SCIENTIFIC_TEMPLATE_YAML, DECIS?ão fail-closed com PolicyDecision, allowlist bibliográfica (18 endpoints), bloqueio de shell/interpolação (invariante 4), credenciais nunca em recibo (invariante 5)",
+        "research_factory/pair_router.py: PairRouter com prioridade local->pair->ollama->openai, fallback transparente sem exceção, pair_configured/pair_provider_status sem expor valores (padr?o R128)",
+        "marceloclaro/doctor.py: _check_llm_providers reporta PAIR definido/ausente e nova ordem de preferência local -> PAIR -> Ollama -> OpenAI",
+        "specs/SPEC-935-R478-sandbox-pair.md: subspec Fase 2 com 25 testes e 7 critérios de aceitação"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Integração de sandbox declarativo: replicar o modelo OpenShell de 4 camadas em YAML dá decisões auditáveis sem depender de Docker/Podman (testável hermeticamente)",
+        "PAIR (roteador LAN) entra como opt-in por ambiente e readiness injetável: módulo sem chamadas de rede é testável e seguro (padrão R128 de nunca expor credencial)",
+        "A ordem de prioridade de inferência do doctor é local -> PAIR -> Ollama -> OpenAI; reportar apenas booleano definido/ausente evita vazar host/porta/chave",
+        "Metacaracteres de shell e interpolação precisam ser negados por camada process; teste explícito para cada vetor (bash -c, ;, &&, |, $(), ${})"
+      ],
+      "timestamp": "2026-09-13T00:00:00Z",
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "marceloclaro",
+      "evidence_trail": [
+        "pytest tests/test_r478_sandbox_pair.py -> 25 passed",
+        "pytest tests/test_r478_sandbox_pair.py tests/test_r471_research_factory.py tests/test_r473_tig_executor.py tests/test_r476_autonomy_reasoning_search.py -> 85 passed",
+        "pytest tests/ -q -> 3817 passed, 58 skipped, 0 failed (371s)",
+        "doctor -> checks_total 20, passed 18, warned 2, failed 0"
+      ],
+      "audited": true,
+      "legacy": false,
+      "merkle_root": null,
+      "origin_commit": null,
+      "state_merkle_root": null
     }
   ]
 }
