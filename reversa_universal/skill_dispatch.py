@@ -70,7 +70,7 @@ class ReversaSkillDispatcher:
     @staticmethod
     def _validate_name(skill_name: str) -> str:
         name = str(skill_name).strip()
-        if not name or not _SKILL_NAME_RE.fullmatch(name):
+        if not name or ".." in name or not _SKILL_NAME_RE.fullmatch(name):
             raise ValueError(f"Nome de skill inválido: {skill_name!r}")
         return name
 
