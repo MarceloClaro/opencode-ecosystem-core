@@ -2641,6 +2641,122 @@ class MarceloClaroOrchestrator:
             "violations": report.violations,
         }
 
+    def podcast(
+        self,
+        production_folder: str,
+        executor: Optional[Any] = None,
+        title: Optional[str] = None,
+        language: str = "pt-BR",
+        length: str = "long",
+        fmt: str = "deep_dive",
+    ) -> Dict[str, Any]:
+        """Gera um podcast (áudio) do manuscrito de uma pasta de produção.
+
+        Fase 1 da SPEC-972: ferramenta EXPLÍCITA do operador (opt-in), nunca
+        etapa automática do pipeline. Compõe o `NlmPodcastExecutor`:
+        criar notebook → adicionar fonte de `manuscrito.md` → gerar áudio →
+        baixar para ``<folder>/audio/``.
+
+        ``executor`` é injetável para testes herméticos; em produção usa o
+        executor real (binário `nlm` do PATH/NLM_BIN).
+        """
+        from pathlib import Path as _P
+
+        from agent_runners.nlm_executor import (
+            ALLOWED_AUDIO_FORMATS,
+            ALLOWED_LENGTHS,
+            NlmPodcastExecutor,
+            NlmPodcastReceipt,
+        )
+
+        steps: List[Any] = []
+        folder = _P(production_folder)
+        if not folder.exists():
+            return {"ok": False, "error": f"pasta não encontrada: {folder}"}
+
+        if fmt not in ALLOWED_AUDIO_FORMATS:
+            return {"ok": False, "error": f"formato inválido: {fmt}"}
+        if length not in ALLOWED_LENGTHS:
+            return {"ok": False, "error": f"length inválido: {length}"}
+
+        exec_ = executor or NlmPodcastExecutor()
+        if not exec_.available():
+            return {"ok": False, "error": (
+                "binário nlm indisponível — instale com `pip install "
+                "notebooklm-mcp-cli` e autentique com `nlm login`."
+            )}
+
+        manuscript = folder / "manuscrito.md"
+        if not manuscript.exists():
+            return {"ok": False, "error": (
+                "manuscrito.md não encontrado — não há fonte textual para o podcast."
+            )}
+        text = manuscript.read_text(encoding="utf-8", errors="ignore")
+        text = text.strip()[:30000]  # limite defensivo para --text
+        if not text:
+            return {"ok": False, "error": "manuscrito.md vazio."}
+
+        step = exec_.create_notebook(title or f"Podcast {folder.name[:60]}")
+        steps.append(_step_dict(step))
+        if not step.success:
+            return self._podcast_fail("create_notebook", steps, step)
+
+        notebook_id = step.result_id or ""
+
+        step = exec_.add_source_text(notebook_id, text)
+        steps.append(_step_dict(step))
+        if not step.success:
+            return self._podcast_fail("add_source_text", steps, step, notebook_id)
+
+        step = exec_.create_audio(notebook_id, fmt=fmt, length=length, language=language)
+        steps.append(_step_dict(step))
+        if not step.success:
+            return self._podcast_fail("create_audio", steps, step, notebook_id)
+        artifact_id = step.result_id or ""
+
+        audio_dir = folder / "audio"
+        audio_dir.mkdir(parents=True, exist_ok=True)
+        step = exec_.download_audio(notebook_id, artifact_id, str(audio_dir))
+        steps.append(_step_dict(step))
+        if not step.success:
+            return self._podcast_fail("download_audio", steps, step, notebook_id)
+
+        audio_file = _find_audio(audio_dir)
+        report = {
+            "ok": True,
+            "steps": steps,
+            "notebook_id": notebook_id,
+            "artifact_id": artifact_id,
+            "audio": audio_file,
+            "nota": (
+                "Artefato de difusão editorial (SPEC-972); sem validação "
+                "científica do conteúdo gerado."
+            ),
+        }
+        try:
+            metabus.memory.add_reflection(
+                agent_id=self.id,
+                task_context=f"podcast de {folder.name[:60]}",
+                reflection=(
+                    f"Podcast gerado via nlm: notebook={notebook_id}, "
+                    f"audio={audio_file or 'pendente'}."
+                ),
+                score=0.9 if audio_file else 0.6,
+            )
+        except Exception:
+            pass
+        return report
+
+    def _podcast_fail(self, etapa: str, steps: List[Any], step: Any,
+                      notebook_id: str = "") -> Dict[str, Any]:
+        return {
+            "ok": False,
+            "etapa": etapa,
+            "error": step.reason,
+            "steps": steps,
+            "notebook_id": notebook_id or None,
+        }
+
     def register_mira_agent(self) -> str:
         """Registra de forma idempotente o executor MIRA no Blackboard."""
         from illustrations.mira_agent import MiraPresentationAgent, MIRA_AGENT_ID
@@ -3216,3 +3332,26 @@ class MarceloClaroOrchestrator:
             "minimax_decision": minimax,
             "information_gains": gains,
         }
+
+
+def _step_dict(step: Any) -> Dict[str, Any]:
+    """Converte um recibo NlmPodcastReceipt em dict JSON-friendly."""
+    try:
+        return step.to_dict()
+    except Exception:
+        return {
+            "operation": getattr(step, "operation", ""),
+            "success": bool(getattr(step, "success", False)),
+            "reason": str(getattr(step, "reason", "")),
+            "result_id": getattr(step, "result_id", None),
+        }
+
+
+def _find_audio(audio_dir) -> Optional[str]:
+    """Encontra o primeiro arquivo de áudio (m4a/mp3/wav) no diretório."""
+    import glob as _glob
+    for pattern in ("*.m4a", "*.mp3", "*.wav", "*.aac", "*.ogg"):
+        hits = sorted(_glob.glob(str(audio_dir / pattern)))
+        if hits:
+            return hits[0]
+    return None

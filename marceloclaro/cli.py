@@ -327,6 +327,35 @@ def main() -> int:
                 indent=2,
                 ensure_ascii=False,
             ))
+        elif cmd in ("podcast", "audio"):
+            if len(sys.argv) < 3:
+                print("Uso: python3 -m marceloclaro.cli podcast <pasta_da_producao> "
+                      "[--title T] [--language pt-BR] [--length long] [--format deep_dive]")
+                print("Gera um podcast (áudio m4a) do manuscrito.md da pasta via "
+                      "Gemini Notebook (nlm). Fase 1 SPEC-972: uso explícito do operador.")
+                raise SystemExit(1)
+            kwargs: Dict[str, object] = {}
+            idx = 3
+            while idx < len(sys.argv):
+                if sys.argv[idx] == "--title" and idx + 1 < len(sys.argv):
+                    kwargs["title"] = sys.argv[idx + 1]
+                    idx += 2
+                elif sys.argv[idx] == "--language" and idx + 1 < len(sys.argv):
+                    kwargs["language"] = sys.argv[idx + 1]
+                    idx += 2
+                elif sys.argv[idx] == "--length" and idx + 1 < len(sys.argv):
+                    kwargs["length"] = sys.argv[idx + 1]
+                    idx += 2
+                elif sys.argv[idx] == "--format" and idx + 1 < len(sys.argv):
+                    kwargs["fmt"] = sys.argv[idx + 1]
+                    idx += 2
+                else:
+                    idx += 1
+            print(json.dumps(
+                orchestrator.podcast(sys.argv[2], **kwargs),
+                indent=2,
+                ensure_ascii=False,
+            ))
         elif cmd in ("amplify", "amplificar", "dsh"):
             if len(sys.argv) < 3:
                 print('Uso: python3 -m marceloclaro.cli amplify "<prompt>" [--model ox-alpha-free] [--type general|coding|reasoning|academic] [--iterations N]')

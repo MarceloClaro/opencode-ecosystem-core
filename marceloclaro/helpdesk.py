@@ -53,9 +53,10 @@ _SUGGESTIONS = {
     ),
     "external_clis": (
         "Uma ou mais CLIs externas (OpenCode, Antigravity/agy, Claude Code, "
-        "Ollama) não foram encontradas no PATH. Rode o instalador da sua "
-        "plataforma (installer/README.md) ou instale manualmente — o "
-        "comando exato de cada uma aparece no detalhe do check."
+        "Ollama, GitHub Copilot, Gemini Notebook/nlm) não foram encontradas "
+        "no PATH. Rode o instalador da sua plataforma (installer/README.md) "
+        "ou instale manualmente — o comando exato de cada uma aparece no "
+        "detalhe do check."
     ),
 }
 

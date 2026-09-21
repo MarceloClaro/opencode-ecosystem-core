@@ -86,6 +86,7 @@ python3 -m marceloclaro.cli clinical "queixa" --mode professional_cds
 |---|---|---|
 | `pesquisa` | `research` | Exige um tema; `--no-download` evita tentativa de baixar PDFs. |
 | `apresentacao` | `present`, `mira` | A pasta deve conter `manuscrito.md`. |
+| `podcast` | `audio` | Gera áudio m4a do `manuscrito.md` via Gemini Notebook (`nlm`, SPEC-972 — uso explícito do operador; `--title`, `--language`, `--length`, `--format`). |
 | `amplify` | `amplificar`, `dsh` | Aceita opções de modelo, tipo e iterações. |
 | `aletheia` | `prove`, `decompor` | Decompõe uma proposição; examine o estado retornado. |
 | `deepthink` | `think` | Aceita orçamento e domínio. |

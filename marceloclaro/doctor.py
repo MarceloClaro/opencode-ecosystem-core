@@ -48,6 +48,15 @@ EXTERNAL_CLIS = {
     # SPEC-935-R473/M7: executor alternativo multi-provedor (tig) — integração
     # por invocação externa; upstream sem licença declarada (uso local do operador).
     "tig": "pip install tig-code",
+    # SPEC-970: CLI oficial do GitHub Copilot (binário `copilot`; o pacote
+    # legado @github/copilot-cli retorna E404 no registry — nome canônico é
+    # @github/copilot). Uso: assistente de codificação no terminal.
+    "copilot": "npm install -g @github/copilot",
+    # SPEC-971 (R548): CLI do Gemini Notebook (ex-NotebookLM), pacote PyPI
+    # notebooklm-mcp-cli (MIT, jacob-bd/gemini-notebook-mcp-cli). Veredito
+    # ADOTAR-opt-in (lição R474): uso do operador; NÃO acoplar ao pipeline
+    # automático — upstream usa APIs internas não documentadas + cookies.
+    "nlm": "pip install notebooklm-mcp-cli",
 }
 
 
@@ -204,14 +213,16 @@ def _check_corrigendum() -> DoctorCheck:
 
 def _check_external_clis() -> DoctorCheck:
     """Verifica se as CLIs externas de primeira classe (OpenCode, Antigravity,
-    Claude Code, Ollama, scihub-cli) estão instaladas e no PATH. São
+    Claude Code, Ollama, GitHub Copilot, etc.) estão instaladas e no PATH. São
     opcionais para o funcionamento do ecossistema em Python puro, por isso
     o resultado é sempre ``warn`` (nunca ``fail``) quando alguma está
     ausente — cada ferramenta é usada em fluxos diferentes (OpenCode CLI
     para o catálogo de agentes, Antigravity para delegação externa, Claude
     Code para desenvolvimento neste projeto, Ollama para modelos locais,
-    scihub-cli como fallback de download de PDF no pipeline de pesquisa
-    quando não há acesso open-access direto — ver `research/downloader.py`)."""
+    GitHub Copilot para assistência de codificação no terminal, nlm para
+    acesso opt-in ao Gemini Notebook do operador, scihub-cli como fallback
+    de download de PDF no pipeline de pesquisa quando não há acesso
+    open-access direto — ver `research/downloader.py`)."""
     missing = {}
     for name, cmd in EXTERNAL_CLIS.items():
         if name == "runai":
