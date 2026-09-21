@@ -1,0 +1,837 @@
+%% ============================================================
+%% ALFABETIZAR BEM — Volume 1 (1º Ano)
+%% Classe LaTeX para Livro Didático de Alfabetização
+%% v3.1 - R202: Boquinhas Ilustradas por Som (figuras TikZ originais)
+%% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{alfabetizar}[2026/09/12 v3.1 Classe Alfabetizar Bem Neuroinclusivo]
+
+%% --- Opções da Classe ---
+\LoadClass[a4paper,12pt,twoside]{book}
+
+%% --- Pacotes Essenciais ---
+\RequirePackage[brazil]{babel}
+\RequirePackage{fontspec}
+\defaultfontfeatures{Path=../fontes/, Extension=.ttf}
+\newfontfamily\fontecursiva{irineu cursivo escolar}
+% \newfontfamily\titulofonte{Irineu Brasil Infantil A}   %% desbloquear quando licenciada
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{graphicx}
+\RequirePackage[table]{xcolor}
+\RequirePackage{tikz}
+\usetikzlibrary{positioning}
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{tcolorbox}
+\RequirePackage{hyperref}
+\RequirePackage{multicol}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
+\RequirePackage{ulem}
+\RequirePackage{calc}
+\RequirePackage{calligra}
+\RequirePackage{ragged2e}      % anti-overflow
+\RequirePackage{microtype}      % micro-justificação
+\RequirePackage{makecell}       % células com quebra de linha
+\RequirePackage{longtable}      % tabelas multi-página
+\RequirePackage{changepage}     % adjustwidth
+\RequirePackage{fontawesome5}   % ícones para pausas/pistas
+\RequirePackage{tipa}           % IPA — Alfabeto Fonético Internacional
+
+%% --- Geometria da Página (Neuroinclusivo: margens amplas) ---
+\geometry{
+  left=3cm,
+  right=3cm,
+  top=3cm,
+  bottom=3cm,
+  headheight=14pt,
+  marginparwidth=0pt,
+  marginparsep=0pt
+}
+
+%% --- Cores do Livro (WCAG 2.1 AA: contraste ≥ 4.5:1) ---
+\definecolor{primary}{HTML}{1B4F72}      % Azul escuro - contraste 7.2:1
+\definecolor{secondary}{HTML}{5D2E5E}    % Roxo escuro - contraste 6.8:1
+\definecolor{accent}{HTML}{B85C00}       % Laranja escuro - contraste 5.1:1
+\definecolor{success}{HTML}{1E7D32}      % Verde escuro - contraste 5.6:1
+\definecolor{warning}{HTML}{C62828}      % Vermelho escuro - contraste 5.9:1
+\definecolor{bglight}{HTML}{F5F5F5}      % Cinza muito claro
+\definecolor{border}{HTML}{BDC3C7}       % Cinza médio
+\definecolor{codekumon}{HTML}{4A148C}    % Roxo profundo
+\definecolor{bncc}{HTML}{1B5E20}         % Verde profundo
+\definecolor{caed}{HTML}{BF360C}         % Laranja profundo
+\definecolor{spaece}{HTML}{B71C1C}       % Vermelho profundo
+\definecolor{dcnc}{HTML}{0D47A1}         % Azul profundo
+\definecolor{neurocalm}{HTML}{E8F5E9}    % Verde pastel para caixas neuro
+\definecolor{neurofocus}{HTML}{E3F2FD}  % Azul pastel para foco
+\definecolor{neurorest}{HTML}{FCE4EC}   % Rosa pastel para pausa
+
+%% --- Fonte Cursiva (com fallback) ---
+\newcommand{\cursiva}[1]{{\calligra #1}}
+\newcommand{\cursivabold}[1]{{\bfseries\calligra #1}}
+
+%% --- Estilo de Capítulos (acessível: hierarquia clara) ---
+\titleformat{\chapter}[display]
+  {\normalfont\LARGE\bfseries\color{primary}}
+  {\chaptertitlename\ \thechapter}
+  {15pt}{\Huge}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{secondary}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{accent}}
+  {\thesubsection}{1em}{}
+
+%% --- Cabeçalho e Rodapé (simplificado, sem ruído visual) ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\color{primary}\small\leftmark}
+\fancyhead[RO]{\color{primary}\small\rightmark}
+\fancyfoot[CE,CO]{\color{primary}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% --- Estilo de página para planchetas reproduzíveis (R201/R202) ---
+\fancypagestyle{planchetarastreio}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\color{border}\scriptsize\faCopy~Cópia autorizada para uso escolar não comercial}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0.3pt}%
+}
+
+%% --- Ambientes para Exercícios (alto contraste, cantos arredondados) ---
+\tcbuselibrary{skins,breakable}
+
+% Boquinha: posição da boca + traçado
+\newtcolorbox{boquinha}[1][]{
+  colback=bglight, colframe=primary,
+  fonttitle=\bfseries\large,
+  title={\color{white}#1},
+  boxrule=1.5pt, arc=4mm,
+  left=10pt, right=10pt, top=10pt, bottom=10pt
+}
+
+% Exercício principal: fundo branco, borda accent
+\newtcolorbox{exercicio}[1][]{
+  colback=white, colframe=accent,
+  fonttitle=\bfseries, title={#1},
+  boxrule=1pt, arc=3mm,
+  left=8pt, right=8pt, top=8pt, bottom=8pt,
+  fontupper={\linespread{1.15}\fontsize{13}{18}\selectfont},
+  breakable
+}
+
+% Dica para professor: verde calmo
+\newtcolorbox{dica}{
+  colback=neurocalm, colframe=success,
+  fonttitle=\bfseries, title={\faLightbulb~Dica para o Professor},
+  boxrule=1pt, arc=3mm
+}
+
+% Avaliação diagnóstica: vermelho suave
+\newtcolorbox{avaliacao}{
+  colback=warning!5, colframe=warning,
+  fonttitle=\bfseries, title={\faClipboardList~Avaliação Diagnóstica},
+  boxrule=1pt, arc=3mm,
+  breakable
+}
+
+% NOVO: Caixa de Pausa (neuroinclusivo)
+\newtcolorbox{pausa}{
+  colback=neurorest, colframe=warning,
+  fonttitle=\bfseries, title={\faPauseCircle~Pausa},
+  boxrule=1pt, arc=3mm,
+  before skip=0.5em, after skip=0.5em
+}
+
+% NOVO: Caixa de Pista (apoio multimodal)
+\newtcolorbox{pista}{
+  colback=neurofocus, colframe=primary,
+  fonttitle=\bfseries, title={\faLightbulb~Pista},
+  boxrule=1pt, arc=3mm,
+  before skip=0.5em, after skip=0.5em
+}
+
+% NOVO: Caixa de Pista da Boca (articulatória)
+\newtcolorbox{pistaboca}{
+  colback=neurofocus, colframe=primary,
+  fonttitle=\bfseries, title={\faSmile~Pista da Boca},
+  boxrule=1pt, arc=3mm,
+  before skip=0.5em, after skip=0.5em
+}
+
+% NOVO: Caixa das 4 Formas Gráficas
+\newtcolorbox{quatroformas}{
+  colback=white, colframe=secondary,
+  fonttitle=\bfseries, title={\faPen~Quatro Formas da Letra},
+  boxrule=1pt, arc=3mm,
+  breakable
+}
+
+% NOVO: Badge de Nível K
+\newcommand{\nivelKbadge}[1]{%
+  \begin{center}%
+  \small\color{codekumon}%
+  \fcolorbox{codekumon}{neurofocus}{\textbf{Nível K: #1}}%
+  \end{center}%
+  \vspace{0.3em}%
+}
+
+% NOVO: Badge de Rota
+\newcommand{\rotabadge}[1]{%
+  \begin{center}%
+  \small\color{secondary}%
+  \fcolorbox{secondary}{neurorest}{\textbf{Rota: #1}}%
+  \end{center}%
+  \vspace{0.3em}%
+}
+
+% NOVO: Rotina Visual 6 Passos (ícones + texto curto)
+\newcommand{\rotinavisual}[6]{%
+  \begin{center}%
+  \begin{tikzpicture}[
+    passo/.style={circle, draw=primary, fill=primary!10, minimum size=1.3cm, font=\small\bfseries, align=center, inner sep=1pt},
+    seta/.style={->, thick, color=accent}
+  ]
+    \node[passo] (p1) {\faEye\\#1};
+    \node[passo] (p2) [right=0.6cm of p1] {\faAssistiveListeningSystems\\#2};
+    \node[passo] (p3) [right=0.6cm of p2] {\faComment\\#3};
+    \node[passo] (p4) [right=0.6cm of p3] {\faPen\\#4};
+    \node[passo] (p5) [right=0.6cm of p4] {\faBook\\#5};
+    \node[passo] (p6) [right=0.6cm of p5] {\faCheckCircle\\#6};
+    \draw[seta] (p1) -- (p2);
+    \draw[seta] (p2) -- (p3);
+    \draw[seta] (p3) -- (p4);
+    \draw[seta] (p4) -- (p5);
+    \draw[seta] (p5) -- (p6);
+  \end{tikzpicture}%
+  \end{center}%
+  \vspace{0.5em}%
+}
+
+% NOVO: Rotina simplificada inline (para cabeçalho de lição)
+\newcommand{\rotinasimples}{%
+  \begin{center}%
+  \small\color{primary}\bfseries%
+  \faEye~OBSERVAR $\rightarrow$ \faAssistiveListeningSystems~OUVIR $\rightarrow$ \faComment~FALAR $\rightarrow$ \faPen~TRAÇAR $\rightarrow$ \faBook~LER $\rightarrow$ \faCheckCircle~CONFERIR%
+  \end{center}%
+  \vspace{0.3em}%
+}
+
+%% ============================================================
+%% BARRA DE METADADOS — Kumon + BNCC + CAEd + SPAECE + DCNC + PNA + NÍVEL K + ROTA
+%% ============================================================
+%% Uso: \metadata{kumon_code}{kumon_level}{bncc}{caed}{spaece}{dcnc}
+%% PNA: consciência fonêmica, instrução fônica, fluência, vocabulário, compreensão, produção
+\newcommand{\metadata}[6]{%
+  \begin{center}%
+  \footnotesize%
+  \fbox{\parbox{0.92\textwidth}{%
+    \textbf{\color{codekumon}Kumon:} \texttt{#1}~|--~\textbf{#2}%
+    \hfill%
+    \textbf{\color{bncc}BNCC:} #3\enspace%
+    \textbf{\color{caed}CAEd:} #4\enspace%
+    \textbf{\color{spaece}SPAECE:} #5\enspace%
+    \textbf{\color{dcnc}DCNC:} #6%
+  }}%
+  \end{center}%
+  \vspace{0.5em}%
+}
+
+%% Barra de metadados estendida com PNA, SPAECE-Alfa, Nível K e Rota
+\newcommand{\metadatafull}[9]{%
+  \begin{center}%
+  \footnotesize%
+  \fbox{\parbox{0.95\textwidth}{%
+    \textbf{\color{codekumon}Kumon:} \texttt{#1}~|--~\textbf{#2}%
+    \hfill%
+    \textbf{\color{bncc}BNCC:} #3\enspace%
+    \textbf{\color{caed}CAEd:} #4\\[2pt]
+    \textbf{\color{spaece}SPAECE:} #5\enspace%
+    \textbf{\color{dcnc}DCNC:} #6\enspace%
+    \textbf{\color{primary}PNA:} #7\\[2pt]
+    \textbf{\color{codekumon}Nível K:} #8\enspace%
+    \textbf{\color{secondary}Rota:} #9%
+  }}%
+  \end{center}%
+  \vspace{0.5em}%
+}
+
+%% Barra de timing Kumon (SCT — Standard Completion Time) — AGORA OPCIONAL
+\newcommand{\kumontiming}[2]{%
+  \begin{center}%
+  \small\color{codekumon}%
+  \textbf{Tempo estimado (SCT):} #1~minutos \enspace
+  \textbf{Meta de domínio:} $\geq$~#2\%%
+  \end{center}%
+}
+
+%% Barra simplificada para nível Kumon
+\newcommand{\nivelkumon}[1]{%
+  \begin{center}%
+  \small\color{codekumon}%
+  \textbf{Nível Kumon:} #1%
+  \end{center}%
+}
+
+%% ============================================================
+%% TABELA DE PROGRESSÃO KUMON (Leitura) — Mantida para referência
+%% ============================================================
+\newcommand{\kumonprogression}{%
+  \begin{center}%
+  \small%
+  \begin{tabular}{|c|c|l|c|}
+  \hline
+  \textbf{Nível} & \textbf{Folhas} & \textbf{Habilidade} & \textbf{SCT} \\
+  \hline
+  7A & 200 & Letras e sons, rastreamento visual & 1--2\,min \\
+  6A & 200 & Palavras familiares, frases simples & 1--2\,min \\
+  5A & 200 & Leitura de palavras, frases curtas & 2\,min \\
+  4A & 200 & Frases completas, parágrafos simples & 2--3\,min \\
+  3A & 200 & Sílabas complexas, vocabulário expandido & 3\,min \\
+  2A & 200 & Funções das palavras (substantivo, verbo, adjetivo) & 3--4\,min \\
+  \hline
+  \end{tabular}%
+  \end{center}%
+}
+
+%% ============================================================
+%% NOVO: TABELA DE NÍVEIS K INTERNOS (K0-K5)
+%% ============================================================
+\newcommand{\niveisK}{%
+  \begin{center}%
+  \small%
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|l|l|l|}
+  \hline
+  \textbf{Nível} & \textbf{Nome} & \textbf{Foco Principal} & \textbf{Unidades} \\
+  \hline
+  K0 & Prontidão & Motricidade fina, atenção, oralidade & Unidade 0 \\
+  \hline
+  K1 & Letras e Grafias & Reconhecimento + traçado 4 formas & Unidades 1--3 \\
+  \hline
+  K2 & Consciência Fonológica & Sílabas, rimas, aliteração & Unidades 4--5 \\
+  \hline
+  K3 & Decodificação & Blending sílabas → palavras & Unidades 6--7 \\
+  \hline
+  K4 & Frases e Compreensão & Leitura + sentido + inferência & Unidades 8--9 \\
+  \hline
+  K5 & Fluência e Transferência & Textos curtos, escrita autônoma & Unidade 10 + Parte 3 \\
+  \hline
+  \end{tabular}}%
+  \end{center}%
+}
+
+%% ============================================================
+%% NOVO: TABELA DE ROTAS INDIVIDUALIZADAS (1A-1D)
+%% ============================================================
+\newcommand{\rotasindividualizadas}{%
+  \begin{center}%
+  \small%
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|l|l|l|}
+  \hline
+  \textbf{Rota} & \textbf{Perfil} & \textbf{Estratégia} & \textbf{Ativação} \\
+  \hline
+  1A & Recomposição Intensiva & Voltar a K0/K1; prática diária 15 min & Diagnóstico < 50\% \\
+  \hline
+  1B & Segmentação + Leitura Funcional & Foco K2-K3; sílabas + palavras CVC & Diagnóstico 50--70\% \\
+  \hline
+  1C & Consolidação + Expansão & K3-K4; frases, textos curtos & Diagnóstico 70--85\% \\
+  \hline
+  1D & Aprofundamento + Autonomia & K4-K5; projetos de leitura/escrita & Diagnóstico > 85\% \\
+  \hline
+  \end{tabular}}%
+  \end{center}%
+}
+
+%% ============================================================
+%% DESCRITORES SPAECE-ALFA (2º Ano) — Matriz Avaliativa Correlata
+%% ============================================================
+\newcommand{\spaecealfa}{%
+  \begin{center}%
+  \small%
+  \begin{tabular}{|c|l|}
+  \hline
+  \textbf{Cód.} & \textbf{Descritor} \\
+  \hline
+  D01 & Relacionar elementos sonoros com representação escrita \\
+  D02 & Ler palavras \\
+  D03 & Ler frases \\
+  D04 & Localizar informações explícitas em textos \\
+  D05 & Reconhecer a finalidade de um texto \\
+  D06 & Inferir o assunto de um texto \\
+  D09 & Escrever palavras \\
+  D10 & Escrever textos \\
+  \hline
+  \end{tabular}%
+  \end{center}%
+}
+
+%% ============================================================
+%% 6 COMPONENTES DA PNA (Política Nacional de Alfabetização)
+%% ============================================================
+\newcommand{\pnacomponents}{%
+  \begin{center}%
+  \small%
+  \begin{tabular}{|c|l|}
+  \hline
+  \textbf{Nº} & \textbf{Componente PNA} \\
+  \hline
+  1 & Consciência fonêmica \\
+  2 & Instrução fônica sistemática \\
+  3 & Fluência em leitura oral \\
+  4 & Desenvolvimento de vocabulário \\
+  5 & Compreensão de textos \\
+  6 & Produção de escrita \\
+  \hline
+  \end{tabular}%
+  \end{center}%
+}
+
+%% ============================================================
+%% NÍVEIS DE PROFICIÊNCIA SPAECE
+%% ============================================================
+\newcommand{\spaecelevels}{%
+  \begin{center}%
+  \small%
+  \begin{tabular}{|c|l|l|}
+  \hline
+  \textbf{Nível} & \textbf{Classificação} & \textbf{Descrição} \\
+  \hline
+  1 & Muito Crítico & Não alfabetizado \\
+  2 & Crítico & Em processo de alfabetização \\
+  3 & Intermediário & Alfabetizado em processo \\
+  4 & Adequado & Alfabetizado \\
+  \hline
+  \end{tabular}%
+  \end{center}%
+}
+
+%% --- Comandos Personalizados ---
+
+% Letra grande em quadro (imprensa maiúscula)
+\newcommand{\letra}[1]{%
+  \begin{center}%
+    \begin{tikzpicture}%
+      \node[draw=primary, line width=2pt, rounded corners=8pt,
+            minimum width=3.6cm, minimum height=3.6cm,
+            font=\fontsize{60}{70}\selectfont\bfseries\color{primary}] {#1};%
+    \end{tikzpicture}%
+  \end{center}%
+}
+
+% Letra minúscula imprensa
+\newcommand{\letramin}[1]{%
+  \begin{center}%
+    \begin{tikzpicture}%
+      \node[draw=secondary, line width=1.5pt, rounded corners=6pt,
+            minimum width=2.5cm, minimum height=2.5cm,
+            font=\fontsize{36}{42}\selectfont\bfseries\color{secondary}] {#1};%
+    \end{tikzpicture}%
+  \end{center}%
+}
+
+% Boquinha com FIGURA original da boca (R202): \boq[estilo]{letra}{texto}
+\newcommand{\boq}[3][aberta]{%
+  \begin{boquinha}[Boquinha da Letra #2]
+    \begin{minipage}{0.27\textwidth}
+      \centering\bocadiagrama{#1}{Letra #2}{}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.34\textwidth}
+      \centering\textbf{Posição da Boca}\\[0.5em] #3
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.27\textwidth}
+      \centering\textbf{Traçado Imprensa}\\[0.5em] \letra{#2}
+    \end{minipage}
+  \end{boquinha}
+}
+
+% NOVO: Boquinha completa com 4 formas + pista articulatória
+\newcommand{\boqcompleta}[4]{%
+  \begin{boquinha}[Boquinha da Letra #1]
+    \begin{minipage}{0.48\textwidth}
+      \centering\textbf{Posição da Boca}\\[0.5em] #2
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+      \centering\textbf{Traçado Imprensa}\\[0.5em] \letra{#1}
+    \end{minipage}
+    \vspace{0.5em}
+    \begin{minipage}{0.48\textwidth}
+      \centering\textbf{Traçado Cursiva}\\[0.5em] \cursiva{#1} / \cursiva{#3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+      \centering\textbf{Pista Articulatória}\\[0.5em] #4
+    \end{minipage}
+  \end{boquinha}
+}
+
+%% ============================================================
+%% R202 - FIGURAS ORIGINAIS DE BOCA (TikZ, uso didático)
+%% Estilos: aberta | sorriso | bico | fechada | labiodental |
+%%          dental | palatal | velar | nasal | muda
+%% As figuras são APOIOS OPCIONAIS (nunca exercício obrigatório
+%% de imitação ou de contato). Desenhos originais; não reproduzem
+%% a marca Boquinha® de terceiros.
+%% ============================================================
+
+% Boca aberta (vogal aberta, ex.: A tônico)
+\newcommand{\boca@aberta}{%
+  \fill[secondary!12] (1.4,1.0) ellipse (0.95 and 0.60);%
+  \draw[secondary, line width=1.3pt] (1.4,1.0) ellipse (0.95 and 0.60);%
+  \fill[accent!80] (1.3,0.75) ellipse (0.38 and 0.24);%
+}
+
+% Lábios esticados em sorriso (ex.: I, E fechado)
+\newcommand{\boca@sorriso}{%
+  \fill[secondary!12] (1.4,0.95) ellipse (0.95 and 0.34);%
+  \draw[secondary, line width=1.3pt] (1.4,0.95) ellipse (0.95 and 0.34);%
+}
+
+% Lábios em bico (ex.: O, U, semivogal W)
+\newcommand{\boca@bico}{%
+  \fill[secondary!15] (1.4,0.9) circle (0.5);%
+  \fill[bglight] (1.4,0.9) circle (0.34);%
+  \draw[secondary, line width=1.3pt] (1.4,0.9) circle (0.5);%
+}
+
+% Lábios fechados (ex.: P, B, M)
+\newcommand{\boca@fechada}{%
+  \draw[secondary, line width=2.0pt, line cap=round]%
+    (0.55,0.95) .. controls (1.4,1.12) and (1.4,0.78) .. (2.25,0.95);%
+}
+
+% Lábio-dental (dentes superiores no lábio inferior; ex.: F, V)
+\newcommand{\boca@labiodental}{%
+  \draw[secondary, line width=1.8pt, line cap=round]%
+    (0.55,0.9) -- (2.25,0.9);%
+  \fill[white, draw=secondary, line width=0.7pt] (0.95,0.9) rectangle (1.85,1.06);%
+  \draw[-latex, accent, line width=1.0pt] (1.4,1.35) -- (1.4,1.6);%
+}
+
+% Língua atrás dos dentes (ex.: T, D, S, Z, N, L, R fraco)
+\newcommand{\boca@dental}{%
+  \fill[secondary!10] (1.4,0.95) ellipse (0.85 and 0.45);%
+  \draw[secondary, line width=1.3pt] (1.4,0.95) ellipse (0.85 and 0.45);%
+  \fill[white, draw=secondary, line width=0.6pt] (1.0,1.12) rectangle (1.85,1.22);%
+  \fill[accent!80] (1.35,0.68) ellipse (0.45 and 0.18);%
+}
+
+% Língua no céu da boca (palatal; ex.: CH, J, LH, NH)
+\newcommand{\boca@palatal}{%
+  \fill[secondary!10] (1.4,0.95) ellipse (0.8 and 0.48);%
+  \draw[secondary, line width=1.3pt] (1.4,0.95) ellipse (0.8 and 0.48);%
+  \fill[accent!80] (1.1,1.02) .. controls (0.95,0.72) and (1.95,0.72) .. (1.82,1.04)%
+    .. controls (1.55,0.95) and (1.28,0.95) .. (1.1,1.02);%
+}
+
+% Fundo da boca/garganta (velar; ex.: C, Q, G, K, R forte)
+\newcommand{\boca@velar}{%
+  \fill[secondary!10] (1.4,0.95) ellipse (0.9 and 0.52);%
+  \draw[secondary, line width=1.3pt] (1.4,0.95) ellipse (0.9 and 0.52);%
+  \fill[accent!75] (0.7,0.62) .. controls (0.55,0.5) and (1.1,0.42) .. (1.45,0.46)%
+    .. controls (1.8,0.42) and (2.15,0.5) .. (2.02,0.66) -- (1.45,0.72) -- cycle;%
+  \draw[-latex, accent, line width=1.1pt] (2.45,1.5) -- (2.7,1.72);%
+}
+
+% Nasal (boca fechada, ar pelo nariz; ex.: M, N, vogais nasalizadas)
+\newcommand{\boca@nasal}{%
+  \draw[secondary, line width=2.0pt, line cap=round]%
+    (0.55,0.95) .. controls (1.4,1.12) and (1.4,0.78) .. (2.25,0.95);%
+  \draw[-latex, accent, line width=1.1pt] (1.4,1.35) -- (1.4,1.72);%
+  \fill[accent] (1.4,1.85) circle (0.07);%
+}
+
+% Boca neutra, SEM ar: letra muda (ex.: H mudo)
+\newcommand{\boca@muda}{%
+  \fill[secondary!8] (1.4,0.95) ellipse (0.55 and 0.16);%
+  \draw[secondary, line width=1.0pt] (1.4,0.95) ellipse (0.55 and 0.16);%
+}
+
+% Diagrama completo com moldura: \bocadiagrama{estilo}{rotulo}{legenda}
+\newcommand{\bocadiagrama}[3]{%
+  \begin{tikzpicture}[line cap=round, line join=round]
+    \draw[rounded corners=3pt, line width=1.1pt, secondary] (0,0) rectangle (2.7,2.55);
+    \node[font=\scriptsize\bfseries\color{secondary}] at (1.35,2.3) {#2};
+    \csname boca@#1\endcsname
+    \ifx\empty#3\empty\relax\else
+      \node[font=\tiny\bfseries\color{accent}] at (1.35,0.14) {#3};
+    \fi
+  \end{tikzpicture}%
+}
+
+% Ícone pequeno para linha de som: \bocaicona{estilo}
+\newcommand{\bocaicona}[1]{%
+  \begin{tikzpicture}[baseline=-0.6ex, scale=0.30]
+    \csname boca@#1\endcsname
+  \end{tikzpicture}%
+}
+
+% Sílabas
+\newcommand{\sil}[2]{\textbf{#1} + \textbf{#2} = \textbf{\color{primary}#1#2}}
+
+% Linha de prática cursiva (traçado guia)
+\newcommand{\linhacursiva}[1]{%
+  \begin{center}%
+  \fontsize{28}{34}\selectfont\cursiva{#1}%
+  \end{center}%
+}
+
+% Linha de prática imprensa minúscula
+\newcommand{\linhamin}[1]{%
+  \begin{center}%
+  \fontsize{24}{28}\selectfont\textbf{#1}%
+  \end{center}%
+}
+
+% Caixa com borda arredondada
+\newcommand{\caixa}[2][0.9\textwidth]{%
+  \fcolorbox{border}{white}{\parbox{#1}{#2}}%
+}
+
+% NOVO: Ilustração didática padronizada (placeholder para geração)
+\newcommand{\ilustra}[2]{%
+  \begin{tikzpicture}
+    \draw[thick, dashed, color=border] (0,0) rectangle (4,2.6);
+    \node[align=center, color=secondary, font=\small] at (2,1.5) {\faImage~#1};
+    \node[align=center, font=\small, color=border] at (2,0.6) {#2};
+  \end{tikzpicture}%
+}
+
+% NOVO: Quatro formas gráficas da letra (para uso em lições)
+\newcommand{\quatroformasletra}[2]{%
+  \begin{quatroformas}%
+  \centering
+  \begin{tabular}{@{}cccc@{}}
+  \textbf{Imprensa} & \textbf{Imprensa} & \textbf{Cursiva} & \textbf{Cursiva} \\
+  \textbf{Maiúscula} & \textbf{Minúscula} & \textbf{Maiúscula} & \textbf{Minúscula} \\[0.5em]
+  \fontsize{40}{48}\selectfont\bfseries\color{primary}#1 &
+  \fontsize{40}{48}\selectfont\bfseries\color{secondary}#2 &
+  \fontsize{40}{48}\selectfont{\color{primary}\cursiva#1} &
+  \fontsize{40}{48}\selectfont{\color{secondary}\cursiva#2} \\
+  \end{tabular}
+  \end{quatroformas}%
+}
+
+% NOVO: Pista articulatória multimodal
+\newcommand{\pistaarticulatoria}[3]{%
+  \begin{pistaboca}%
+  \textbf{Som:} #1\\[0.3em]
+  \textbf{Boca:} #2\\[0.3em]
+  \textbf{Toque:} #3%
+  \end{pistaboca}%
+}
+
+% NOVO: Estrutura padrão de lição neuroinclusiva
+\newcommand{\licaoneuro}[7]{%
+  % #1 = letra, #2 = nome_lição, #3 = boquinha_texto, #4 = pista_articulatoria,
+  % #5 = nivelK, #6 = rota, #7 = metadatafull args (10 args)
+  \section{#2}
+  \rotinasimples
+  \nivelKbadge{#5}
+  \rotabadge{#6}
+  \boqcompleta{#1}{#3}{#1}{#4}
+  \metadatafull{#7}
+  \quatroformasletra{#1}{#1}
+}
+
+% NOVO: Exercício com rotina 6 passos
+\newcommand{\exercicioneuro}[2]{%
+  % #1 = título, #2 = conteúdo
+  \begin{exercicio}[#1]
+  \rotinasimples
+  #2
+  \end{exercicio}
+}
+
+% NOVO: Instrução curta (1 ação) - neuroinclusivo
+\newcommand{\instrucao}[1]{%
+  \noindent{\large\bfseries #1}\par\vspace{0.3em}%
+}
+
+% NOVO: Caixa de pausa explícita
+\newcommand{\caixapausa}[1]{%
+  \begin{pausa}%
+  #1
+  \end{pausa}%
+}
+
+% NOVO: Caixa de pista explícita
+\newcommand{\caixapista}[1]{%
+  \begin{pista}%
+  #1
+  \end{pista}%
+}
+
+% NOVO: Linha pontilhada para traçado (acessível)
+\newcommand{\linhapontilhada}[2][10]{%
+  \begin{center}%
+  \foreach \i in {1,...,#1} {%
+    \underline{\hspace{1.2cm}}\quad%
+  }%
+  \end{center}%
+}
+
+% NOVO: Checklist de domínio (≥90%)
+\newcommand{\checklistdominio}[1]{%
+  \begin{center}%
+  \small\bfseries\color{success}%
+  \faCheckCircle~Domínio atingido: #1\\
+  \vspace{0.2em}
+  \begin{tabular}{ll}
+  $\square$ Reconhece & $\square$ Traça (4 formas) \\
+  $\square$ Lê em voz alta & $\square$ Escreve ditado \\
+  $\square$ Compreende & $\square$ Transfere
+  \end{tabular}%
+  \end{center}%
+}
+
+%% ============================================================
+%% R201.1 — CONSOLIDAÇÃO, SONS+IPA, FAMÍLIA SILÁBICA, TRANSIÇÃO,
+%% MOTRICIDADE E GAMIFICAÇÃO ÉTICA (engajamento)
+%% ============================================================
+
+% Bloco de Consolidação (prática extra antes de avançar)
+\newtcolorbox{consolidacao}{
+  colback=white, colframe=accent,
+  fonttitle=\bfseries, title={\faRedo~Consolidação --- Pratique até dominar},
+  boxrule=1pt, arc=3mm,
+  fontupper={\linespread{1.2}\large},
+  breakable
+}
+
+% Caixa dos Sons da Letra com IPA
+\newtcolorbox{sonsdaletra}{
+  colback=neurofocus, colframe=primary,
+  fonttitle=\bfseries, title={\faMusic~Todos os Sons desta Letra (IPA)},
+  boxrule=1pt, arc=3mm,
+  fontupper={\linespread{1.2}\large},
+  breakable
+}
+
+% Caixa de Família Silábica
+\newtcolorbox{familiasilabica}{
+  colback=neurocalm, colframe=success,
+  fonttitle=\bfseries, title={\faUsers~Família Silábica},
+  boxrule=1pt, arc=3mm,
+  fontupper={\linespread{1.2}\large},
+  breakable
+}
+
+% Caixa de Atividade de Som da Letra (R204)
+\newtcolorbox{somletra}{
+  colback=neurofocus, colframe=primary,
+  fonttitle=\bfseries, title={\faMusic~Atividade de Som da Letra},
+  boxrule=1pt, arc=3mm,
+  fontupper={\linespread{1.2}\large},
+  breakable
+}
+
+% Caixa de Som das Sílabas (R204)
+\newtcolorbox{somsilaba}{
+  colback=neurocalm!50, colframe=success,
+  fonttitle=\bfseries, title={\faMusic~Som das Sílabas},
+  boxrule=1pt, arc=3mm,
+  fontupper={\linespread{1.2}\large},
+  breakable
+}
+
+% Caixa de Transição (ponte entre conteúdos)
+\newtcolorbox{transicao}{
+  colback=neurorest, colframe=secondary,
+  fonttitle=\bfseries, title={\faArrowRight~Ponte para a Próxima Letra},
+  boxrule=1pt, arc=3mm,
+  fontupper={\linespread{1.2}\large},
+  breakable
+}
+
+% Caixa de Motricidade (fortalecimento motor fino)
+\newtcolorbox{motricidade}{
+  colback=neurocalm!50, colframe=success,
+  fonttitle=\bfseries, title={\faHandPaper~Missão Motora --- Mãos em Ação},
+  boxrule=1pt, arc=3mm,
+  fontupper={\linespread{1.2}\large},
+  breakable
+}
+
+% Caixa de Missão Gamificada (engajamento ético)
+\newtcolorbox{missao}{
+  colback=warning!5, colframe=warning,
+  fonttitle=\bfseries, title={\faGamepad~Missão de Hoje},
+  boxrule=1pt, arc=3mm,
+  fontupper={\linespread{1.2}\large},
+  breakable
+}
+
+% Caixa de Recompensa (estrelas / medalhas)
+\newtcolorbox{recompensa}{
+  colback=neurofocus, colframe=codekumon,
+  fonttitle=\bfseries, title={\faTrophy~Recompensa da Missão},
+  boxrule=1pt, arc=3mm,
+  breakable
+}
+
+% Linha de som com IPA e ícone de boca (R202):
+% \somipa[estilo]{grafia}{código tipa}{descrição}{exemplos}
+\newcommand{\somipa}[5][aberta]{%
+  \noindent\bocaicona{#1}\hspace{0.5em}\textbf{#2} = \textipa{[#3]}\enspace #4 --- \textit{ex.: #5}\\[0.3em]%
+}
+
+% Estrelas visuais de recompensa: \estrelas{n}
+\newcommand{\estrelas}[1]{%
+  \faStar~\faStar~\faStar%
+}
+
+% Ofensiva (streak): \ofensiva{n}
+\newcommand{\ofensiva}[1]{%
+  \faFire~Sequência de #1 missão(oes) seguidas!%
+}
+
+% Subida de nível: \subiunivel{nivel}
+\newcommand{\subiunivel}[1]{%
+  \faRocket~Você subiu de nível! Agora você está no nível \textbf{#1}.%
+}
+
+% Barra de progresso simples: \barraprogresso{n-de-10}
+\newcommand{\barraprogresso}[2]{%
+  \begin{tikzpicture}
+    \fill[border] (0,0) rectangle (8,0.25);
+    \fill[success] (0,0) rectangle (#1*8/#2,0.25);
+    \draw[border] (0,0) rectangle (8,0.25);
+  \end{tikzpicture}%
+}
+
+% NOVO: Plancheta reproduzível — quebra de página + selo de cópia autorizada
+% Uso: \plancheta{Título da folha}
+\newcommand{\plancheta}[1]{%
+  \clearpage%
+  \thispagestyle{planchetarastreio}%
+  \begin{center}%
+    {\large\bfseries\color{primary}\faCopy~\textbf{PLANCHETA REPRODUZÍVEL}}\par\vspace{0.1em}%
+    {\large\bfseries\color{secondary}#1}\par\vspace{0.2em}%
+    {\tiny\color{border}Cópia autorizada para uso escolar não comercial. Cada plancheta ocupa uma página inteira para facilitar a reprodução.}%
+  \end{center}%
+  \vspace{0.5em}%
+}
+
+% R211 — Rastreio Integrado Sequenciado (checkpoint entre unidades)
+% O ambiente rastreio hospeda o checkpoint; o conteúdo (Passos 1–3) é gerado
+% por rastreio_integrado.py (SPEC-935-R211) SEM loops LaTeX (\foreach em
+% tabular p{} quebra a estrutura de grupos — lesson R519).
+\newtcolorbox{rastreio}[1][]{
+  colback=neurofocus!15, colframe=secondary,
+  fonttitle=\bfseries, title={\faClipboardCheck~#1},
+  boxrule=1.2pt, arc=3mm,
+  left=8pt, right=8pt, top=8pt, bottom=8pt,
+  fontupper={\linespread{1.15}\fontsize{11}{15}\selectfont},
+  breakable
+}
+
+\endinput
