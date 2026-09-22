@@ -36,7 +36,9 @@ def test_r550_segmenta_manuscrito_real():
     assert len(trechos) >= 2, f"esperado N≥2 capítulos, veio {len(trechos)}"
     # cada trecho começa com o marcador de capítulo
     for t in trechos[:3]:
-        assert t.upper().startswith(("CAPÍTULO", "CAPITULO", "PRÓLOGO", "PROLOGO")), t[:40]
+        # anti-overclaim: o manuscrito FÍSICO REAL de produção marca com "## MEM-NN"
+        # (entradas de diário), NUNCA "CAPÍTULO" — o assert aceita os marcadores REAIS
+        assert t.lstrip("# ").upper().startswith(("MEM", "CAPÍTULO", "CAPITULO", "PRÓLOGO", "PROLOGO")), t[:40]
 
 
 def test_r550_gera_um_job_por_capitulo():

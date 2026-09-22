@@ -345,41 +345,21 @@ def _join_download_args(
 
 
 def segmentar_por_capitulo(texto: str, marcador: str | None = None) -> list[str]:
-    """Segmenta o manuscrito em N trechos de episódio (1 episódio por capítulo).
-
-    O marcador NÃO é teoria: é aprendido do manuscrito físico. O canônico da
-    frente (Molambudos — O Diário do Paciente 1.260) usa entradas MEM-01..MEM-32
-    (diário), NÃO 'CAPÍTULO'. Se o marcador físico contiver 'MEM', a regex canônica
-    passa a reconhecer MEM-NNN/entrada-NN (qualquer posição, determinística).
-    Anti-overclaim: se NÃO houver NENHUM marcador no texto, devolve [texto]
-    (episódio único) — NUNCA inventa um número N de capítulos.
-    Determinístico: concat(segmentos) == texto original (sha256 preserva).
-    """
-    import re as _re
-    # marcador físico REAl do manuscrito da frente (diário) — a regex canônica:
+    import re  # SPEC-973/R550: import ANTES do autodetect MEM (evita UnboundLocalError em re.findall físico)
+    # AUTODETECT FÍSICO-DETERMINÍSTICO (SPEC-973/R550): se `marcador` for None,
+    # olha o manuscrito REAL por headers-markdown de entrada de diário "## MEM-NN"
+    # (Molambudos), senão por "CAPÍTULO"/"CAP[ÍI]TULO" clássico; se NENHUM casar,
+    # devolve [texto] (episódio único — nunca inventa capítulos inexistentes).
     if marcador is None:
-        # autodetect: se o texto contém MEM-NN (diário Molambudos), usa entradas;
-        # senão usa genérico de capítulo; senão 1 episódio.
-        usa_mem = bool(_re.search(r"\bMEM[-\s]?\d{1,3}\b", texto, _re.I))
-        marcador = (r"\bMEM[-\s]?\d{1,3}\b" if usa_mem else
-                    r"(?i)CAP[IÍ]TULO\s+[0-9XVI]+|PR[OÓ]LOGO|EP[ÍI]LOGO")
-    padrao = None
-    if "MEM" in marcador.upper():
-        padrao = _re.compile(marcador, _re.I)
-    else:
-        padrao = _re.compile(marcador, _re.I | _re.M)
-    pos = [m.start() for m in padrao.finditer(texto)]
-    if not pos:
-        return [texto]
-    out = []
-    for i, p0 in enumerate(pos):
-        p1 = pos[i + 1] if i + 1 < len(pos) else len(texto)
-        out.append(texto[p0:p1].strip())
-    return out
-
-
-def segmentar_por_capitulo(texto: str, marcador: str = r"(?:CAP[ÍI]TULO\s+\w+|##?\s+\d+\s*$|PR[OÓ]LOGO|EP[ÍI]LOGO)") -> list[str]:
+        _mem = re.findall(r"(?im)^\s*#{1,6}\s*MEM[\s-]\d{1,3}", texto)
+        if _mem:
+            marcador = r"(?:#{1,6}\s*)?MEM[\s-]?\d{1,3}.*"   # miolo SEM âncoras: o wrap do executor põe ^[ \t]*(?:…)[ \t]*$ ; .* casa o título real " — A Ironia…" até o $
+        else:
+            marcador = r"(?:CAP[ÍI]TULO\s+|PR[OÓ]LOGO|EP[ÍI]LOGO)"
     """Segmenta o manuscrito por capítulo (1 episódio por capítulo) — SPEC-973.
+    FISICO-DETERMINISTICO: marcador=None = AUTODETECT do marcador REAL do
+    manuscrito físico (default); se o manuscrito tiver headers de diário
+    "## MEM-NN"/"MEM-NN" (Molambudos SPEC-973) o marcador vira MEM; senão CAPÍTULO.
 
     FISICO-DETERMINISTICO: a regex roda sobre o texto real; se o manuscrito não
     tiver NENHUM marcador, devolve [texto] (episódio único) — comportamento
