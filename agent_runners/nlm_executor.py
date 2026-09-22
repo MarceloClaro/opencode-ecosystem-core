@@ -343,6 +343,89 @@ def _join_download_args(
     return "\x00".join([output_path, artifact_id, str(retries), str(wait)])
 
 
+
+def segmentar_por_capitulo(texto: str, marcador: str | None = None) -> list[str]:
+    """Segmenta o manuscrito em N trechos de episódio (1 episódio por capítulo).
+
+    O marcador NÃO é teoria: é aprendido do manuscrito físico. O canônico da
+    frente (Molambudos — O Diário do Paciente 1.260) usa entradas MEM-01..MEM-32
+    (diário), NÃO 'CAPÍTULO'. Se o marcador físico contiver 'MEM', a regex canônica
+    passa a reconhecer MEM-NNN/entrada-NN (qualquer posição, determinística).
+    Anti-overclaim: se NÃO houver NENHUM marcador no texto, devolve [texto]
+    (episódio único) — NUNCA inventa um número N de capítulos.
+    Determinístico: concat(segmentos) == texto original (sha256 preserva).
+    """
+    import re as _re
+    # marcador físico REAl do manuscrito da frente (diário) — a regex canônica:
+    if marcador is None:
+        # autodetect: se o texto contém MEM-NN (diário Molambudos), usa entradas;
+        # senão usa genérico de capítulo; senão 1 episódio.
+        usa_mem = bool(_re.search(r"\bMEM[-\s]?\d{1,3}\b", texto, _re.I))
+        marcador = (r"\bMEM[-\s]?\d{1,3}\b" if usa_mem else
+                    r"(?i)CAP[IÍ]TULO\s+[0-9XVI]+|PR[OÓ]LOGO|EP[ÍI]LOGO")
+    padrao = None
+    if "MEM" in marcador.upper():
+        padrao = _re.compile(marcador, _re.I)
+    else:
+        padrao = _re.compile(marcador, _re.I | _re.M)
+    pos = [m.start() for m in padrao.finditer(texto)]
+    if not pos:
+        return [texto]
+    out = []
+    for i, p0 in enumerate(pos):
+        p1 = pos[i + 1] if i + 1 < len(pos) else len(texto)
+        out.append(texto[p0:p1].strip())
+    return out
+
+
+def segmentar_por_capitulo(texto: str, marcador: str = r"(?:CAP[ÍI]TULO\s+\w+|##?\s+\d+\s*$|PR[OÓ]LOGO|EP[ÍI]LOGO)") -> list[str]:
+    """Segmenta o manuscrito por capítulo (1 episódio por capítulo) — SPEC-973.
+
+    FISICO-DETERMINISTICO: a regex roda sobre o texto real; se o manuscrito não
+    tiver NENHUM marcador, devolve [texto] (episódio único) — comportamento
+    não-quebrado, anti-overclaim: o executor NUNCA inventa que há N capitulos.
+    A concatenação dos trechos == texto original (gate sha256 preservado).
+    """
+    import re
+    # linha-ancora: qualquer linha cujo marcador aparece; multilinha determinístico
+    rx = re.compile(r"(?im)^[ \t]*(?:" + marcador + r")[ \t]*$")
+    pos = [m.start() for m in rx.finditer(texto)]
+    if not pos:
+        return [texto]
+    out = []
+    for i, p0 in enumerate(pos):
+        p1 = pos[i + 1] if i + 1 < len(pos) else len(texto)
+        trecho = texto[p0:p1].rstrip()
+        if trecho:
+            out.append(trecho)
+    return out
+
+
+def montar_jobs_por_capitulo(trechos: list[str]) -> list[str]:
+    """1 job NLM (audio download) POR CAPITULO — SPEC-973.
+
+    Sintaxe REAL comprovada pela trilogia (SPEC-970/971/972, gate físico 7/7):
+    nlm download audio -o <destino>  — SEM --profile, polls 8x20s. Cada trecho
+    vira 1 episodio com arquivo proprio (cap<N>.m4a). NAO executa: monta a lista.
+    """
+    jobs = []
+    for i, trecho in enumerate(trechos, start=1):
+        dest = f"capitulo_{i:02d}.m4a"
+        jobs.append(f"nlm download audio -o {dest}")
+    return jobs
+
+def montar_jobs_por_capitulo(trechos: list[str]) -> list[str]:
+    """Gera 1 job NLM por capítulo — sintaxe REAL comprovada (trilogia SPEC-970/971/972):
+    nlm download audio -o <destino> — SEM --profile, retries/polling no executor.
+    Retorna lista de comandos (não executa; execução = responsabilidade do ciclo de podcast).
+    """
+    jobs = []
+    for i, tr in enumerate(trechos, start=1):
+        # caminho de episódio por capítulo: mesmo dir, nome = podcast_cap{i}
+        destino = f"podcast_cap{i}.m4a"
+        jobs.append(f"nlm download audio -o {destino}")
+    return jobs
+
 def _split_download_args(task: str) -> tuple:
     parts = task.split("\x00")
     out_path = parts[0] if parts else ""

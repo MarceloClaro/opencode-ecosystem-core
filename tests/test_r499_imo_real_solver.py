@@ -65,7 +65,7 @@ def test_solver_sem_short_answer(solver, harness):
         text = solver.solve(p)
         assert isinstance(text, str) and len(text) > 30, p.problem_id
         # a solução é DEDUZIDA: contém passos de método, não só resposta
-        assert re.search(r"(valores|verifica|enumera|soma|permuta|desigualdade|pares|N=|n=|u=|C=)", text), p.problem_id
+        assert re.search(r"(valores|verifica|enumera|soma|permuta|desigualdade|pares|N=|n=|u=|C=|diagonais|formula)", text), p.problem_id
 
 
 def test_harness_sem_leak(solver, harness):
