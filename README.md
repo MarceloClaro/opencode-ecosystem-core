@@ -1,1452 +1,308 @@
 <div align="center">
 
-<img src="https://avatars.githubusercontent.com/u/58664974?s=400&u=b58dbf2c479bff1f942355f0ce28106f0b81ecae&v=4" width="150" height="150" style="border-radius: 50%; border: 4px solid #1565c0; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" alt="Marcelo Claro Laranjeira"/>
+<a href="https://github.com/MarceloClaro">
+  <img src="https://avatars.githubusercontent.com/u/58664974?s=400&u=b58dbf2c479bff1f942355f0ce28106f0b81ecae&v=4" width="120" height="120" style="border-radius: 50%; border: 3px solid #1565c0; box-shadow: 0 4px 18px rgba(21,101,192,0.25);" alt="Marcelo Claro Laranjeira"/>
+</a>
 
-# MARCELO CLARO LARANJEIRA
+# 🧠 OpenCode Ecosystem Core
 
-### Professor de Geografia - Pedagogo - Desenvolvedor Cientifico
+### Ecossistema de Orquestração Multi‑Agente para Pesquisa Científica, Automação e Metacognição
 
-**55 seguidores - 66 seguindo - 310 contribuicoes**
+**Transformando dados em conhecimento, e conhecimento em ferramentas para a educação e a ciência aberta.**
 
-[![GitHub](https://img.shields.io/badge/GitHub-marceloclaro-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarceloClaro)
-[![ORCID](https://img.shields.io/badge/ORCID-0000--0001--8996--2887-A6CE39?style=for-the-badge&logo=orcid&logoColor=white)](https://orcid.org/0000-0001-8996-2887)
-[![Website](https://img.shields.io/badge/Website-geomaker-00ACC1?style=for-the-badge&logo=googleearth&logoColor=white)](https://bit.ly/geomaker)
-[![Location](https://img.shields.io/badge/Location-Crateus%20CE-FF5722?style=for-the-badge&logo=googlemaps&logoColor=white)](https://maps.google.com/?q=Crateus+CE+Brasil)
+[![GitHub Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=for-the-badge&logo=github&logoColor=white&color=181717)](https://github.com/MarceloClaro/opencode-ecosystem-core)
+[![License MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3b82f6?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![MCP Servers](https://img.shields.io/badge/MCP%20Servers-7-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
+[![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
+
+**210 agentes** · **7 MCP servers** · **406 ciclos de evolução** · **51 lições semânticas** · **2 skills novas (frente R581–R582)**
 
 ---
-
-**"Transformando dados em conhecimento, e conhecimento em ferramentas para a educacao e a ciencia aberta."**
 
 </div>
 
+## 📑 Índice
+
+- [O que é](#-o-que-é)
+- [🚀 Novidades — frentes R581 e R582](#-novidades--frentes-r581-e-r582)
+- [⚡ Início rápido](#-início-rápido)
+- [🏗️ Camadas do ecossistema](#️-camadas-do-ecossistema)
+  - [1. Agentes e orquestração](#1-agentes-e-orquestração)
+  - [2. Conectores MCP](#2-conectores-mcp)
+  - [3. Skills](#3-skills)
+  - [4. Hooks e guards](#4-hooks-e-guards)
+  - [5. Plugins](#5-plugins)
+- [🔁 Ciclo de vida SDD/TDD + Reflexion](#-ciclo-de-vida-sddtdd--reflexion)
+- [📊 Observabilidade e eficiência](#-observabilidade-e-eficiência)
+- [🧠 Memória e metacognição](#-memória-e-metacognição)
+- [🔐 Segurança e limites](#-segurança-e-limites)
+- [📦 Instalação](#-instalação)
+- [📖 Documentação](#-documentação)
+- [🤝 Contribuindo](#-contribuindo)
+- [📜 Licença](#-licença)
+
 ---
 
-# OpenCode Ecosystem Core
+## 🧭 O que é
 
-<div align="center">
+O **OpenCode Ecosystem Core** é um ecossistema de orquestração multi‑agente onde o orquestrador primário `marceloclaro` coordena **210 agentes especialistas** via **Blackboard (protocolo A2A)** com **memória metacognitiva compartilhada (MetaBus)**, **gates SDD/TDD estritos**, **economia de tokens** (stake/slashing · Trust Engine) e **7 MCP servers**.
 
-### Ecossistema de Orquestracao Multi-Agente para Pesquisa Cientifica e Automacao
+Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC-*.md`) **e só é concluída com testes verdes e prova física** — jamais "parece que funciona".
 
-![GitHub Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=flat-square&logo=github)
-![GitHub Forks](https://img.shields.io/github/forks/MarceloClaro/opencode-ecosystem-core?style=flat-square&logo=github)
-![GitHub Issues](https://img.shields.io/github/issues/MarceloClaro/opencode-ecosystem-core?style=flat-square)
-![GitHub License](https://img.shields.io/github/license/MarceloClaro/opencode-ecosystem-core?style=flat-square)
-![Python Version](https://img.shields.io/badge/python-3.10+-blue?style=flat-square&logo=python&logoColor=white)
+### Capacidades principais
+
+| Área | O que entrega |
+|---|---|
+| 🔬 **Pesquisa open science** | OpenAlex, Crossref, EuropePMC e arXiv (`open_science_only`), failover auditável e recibos |
+| 🏭 **Fábrica de pesquisa** | `research_factory/`: pesquisar → revisar → analisar → agendar, com Reflexion |
+| 🧮 **Raciocínio formal** | Z3, SymPy, Kanren, verificadores Lean 4 / E‑Graph / AlphaGeometry |
+| 🎓 **Pipeline acadêmico** | Dissertações/artigos com rigor MASWOS, banca emulada (Reviewers 1–3), ABNT |
+| 📽️ **MIRA** | Apresentações e slides com animação, QR codes e validação de terços |
+| ⚖️🩺 **Jurídico & Clínico** | Apoio computacional auditável em domínios sensíveis |
+| 🌐 **Deploy estático** | GitHub Pages com verificação física (GET+Range, 404 real, marcador de conteúdo) |
 
 ---
 
-**205 Agentes** - **303 Specs** - **160 Propostas de Pesquisa** - **Auto-Score 97/100**
+## 🚀 Novidades — frentes R581 e R582
 
-</div>
+> Lançadas nas frentes **SPEC-974** (ecossistema integrado e autônomo) e **SPEC-975** (eficiência mensurável).
+
+| Entrega | O que mudou |
+|---|---|
+| 🪝 **Hooks de guarda** (`.opencode/hooks/`) | `credential_guard.sh` (token sem imprimir segredo), `js_smoke_dom.sh` (stub de DOM em Node — pega a classe de bug R580 que `node --check` não pega), `budget_guard.sh` (1 GB / 25 MiB por arquivo) — **fail‑closed** |
+| 🧩 **Plugin `deploy-guards.ts`** | Gates automáticos em `edit`/`write` de `.html` e em `git push/commit` do site (dispara os hooks) |
+| 🛰️ **MCP `web-deploy-mcp`** | `pages_status`, `probe_url` (GET+Range, nunca HEAD), `site_weight`, `validate_feed`, `assert_gone` — padrão fail‑closed SPEC‑970/971/972 |
+| 📚 **2 skills novas** | `deploy-estatico-github-pages` (receita R569–R580) e `smoke-test-dom-js` (regressão R580) |
+| 🧠 **Metacognição preenchida** | 51 lições semânticas consultáveis no MetaBus (deploy/media/verification/registry) — antes vazia |
+| 🔧 **Fix crítico** | `EvolutionRegistry._load` tolerante por entrada: 1 entrada malformada não zera mais os **406 ciclos** |
+| ⏱️ **Eficiência mensurável** | `/efficiency` com mediana/p90 por operação — linha de base R582 medida |
 
 ---
 
-## Visão geral
-
-O **OpenCode Ecosystem Core** é um ecossistema de orquestração multi-agente para pesquisa científica e automação. O orquestrador primário `marceloclaro` coordena 209 agentes configurados via Blackboard (protocolo A2A), memoria metacognitiva compartilhada via MetaBus, gates SDD/TDD estritos, economia de tokens com stake/slashing (Trust Engine) e 6 MCPs configurados. Toda entrega nasce de uma especificação formal (`specs/SPEC-935-R*.md`) e é validada por testes (`tests/test_r*.py`).
-
-## Capacidades principais
-
-- **Pesquisa multi-fonte open science**: OpenAlex, Crossref, EuropePMC e arXiv como fontes-padrão (`open_science_only`); failover e recibos auditáveis.
-- **Fábrica de pesquisa** (`research_factory/`): ciclos pesquisar → revisar → analisar → agendar, com autonomia (Reflexion), raciocínio (consistência de planos, estatísticas e prazos) e busca com failover.
-- **Execução multi-provedor** (executor `tig` opcional): Ollama local como âncora, com fallback DeepSeek → Groq → Gemini → OpenAI.
-- **Raciocínio formal**: motores Z3, SymPy, Kanren e verificadores Lean 4 / E-Graph / AlphaGeometry.
-- **Pipeline acadêmico**, **MIRA** (apresentações), **jurídico**, **clínico**, **Scientific RAG** e **Universidade Sintética**.
-
-## Início rápido local
+## ⚡ Início rápido
 
 ```bash
 git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git
 cd opencode-ecosystem-core
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-dev.txt
-.venv/bin/python -m marceloclaro.cli doctor
-.venv/bin/python -m marceloclaro.cli helpdesk
+
+# 1. Saúde do ambiente (specs, registro de evolução, memória)
+python3 -m marceloclaro.cli doctor
+
+# 2. Ajuda guiada
+python3 -m marceloclaro.cli helpdesk
+
+# 3. Pesquisa científica
+python3 -m marceloclaro.cli pesquisa "seu tema"
+
+# 4. Eficiência por operação (mediana/p90 dos guards e tools MCP)
+python3 -m integrations.op_timing report      # ou /efficiency
 ```
 
-## Instalação segura e procedência
+---
 
-A instalação é **local e revisável**: nada é executado por pipe de rede. A procedência combina versão publicada, revisão Git imutável e checksum:
+## 🏗️ Camadas do ecossistema
 
-- `ECOSYSTEM_VERSION` — versão publicada da release;
-- `ECOSYSTEM_REF` — revisão Git exata (`git describe --tags --exact-match HEAD`);
-- `ECOSYSTEM_SOURCE_SHA256` — checksum do archive da release pala `sha256sum -c` (Linux) ou `shasum -a 256 -c` (macOS) com o valor publicado em `<sha-256-publicado-com-64-caracteres>`;
-- `ProvisionSha256` — checksum do provisionador WSL (Windows);
-- `CommonInstallerSha256` — checksum do instalador comum `installer/common/install_clis.sh`.
-
-Fluxo verificado:
-
-```bash
-git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git
-git checkout --detach ECOSYSTEM_REF
-sha256sum -c ECOSYSTEM_SOURCE_SHA256
-.venv/bin/python -m marceloclaro.cli doctor
-```
-
-## Uso básico
-
-```bash
-.venv/bin/python -m marceloclaro.cli status
-.venv/bin/python -m marceloclaro.cli agents
-.venv/bin/python -m marceloclaro.cli doctor
-.venv/bin/python -m marceloclaro.cli pesquisa
-.venv/bin/python -m marceloclaro.cli apresentacao
-.venv/bin/python -m marceloclaro.cli ajuda
-```
-
-## Arquitetura resumida
-
-Esta seção é uma **visão resumida** e de navegação: ela contém o **snapshot histórico** da arquitetura documentada e o **diagrama operacional atual** do checkout. O snapshot histórico é uma **snapshot documental**; ele **não é um inventário do checkout** e nem um contrato de runtime. O diagrama operacional atual reflete componentes realmente presentes no código, e os números de agentes/MCPs vêm da configuração (209 agentes, 6 MCPs) e do diagnóstico (`doctor`, 19 checks essenciais).
-
-### Mapa da Arquitetura Completa (v3.9.0)
-
-> **snapshot histórico** — preservado como registro documental da evolução; **não é um inventário do checkout** atual nem contrato de runtime.
+### 1. Agentes e orquestração
 
 ```mermaid
-flowchart TD
-    subgraph Core [Core Subsystems]
-        ORCH["MarceloClaroOrchestrator"]
-        MB["MetaBus"]
-        BB["Blackboard"]
+flowchart TB
+    subgraph ORCH[ORQUESTRADOR marceloclaro]
+        OR1[Blackboard A2A]
+        OR2[MetaBus]
+        OR3[Trust Engine]
     end
-    ORCH --> MB
-    ORCH --> BB
-    AR["AttentionRouter"] --> ORCH
-    MIRA["MiraDeckPipeline"] --> AR
-    PRESENTER["mira-presenter"] --> MIRA
-    SR["SpecRegistry"] --> ORCH
-    SV["SpecVerifier"] --> SR
-    TDD["TDDRunner"] --> SV
+
+    subgraph GROUPS[GRUPOS DE AGENTES ~210]
+        AC[Acadêmicos 45]
+        TE[Técnicos 40]
+        ES[Especialistas 30]
+        RS[Pesquisa 25]
+        SU[Suporte 70]
+    end
+
+    ORCH --> GROUPS
+    AC --> TE --> ES --> RS --> SU
+
+    style ORCH fill:#eef2ff,stroke:#4f46e5,stroke-width:2px
+    style GROUPS fill:#f8fafc,stroke:#94a3b8,stroke-width:1px
+    style AC fill:#e3f2fd,stroke:#1565c0
+    style TE fill:#fff3e0,stroke:#ef6c00
+    style ES fill:#fce4ec,stroke:#c62828
+    style RS fill:#e8f5e9,stroke:#2e7d32
+    style SU fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-O mapa v3.9.0 preserva os marcos legados: **MiraDeckPipeline**, **mira-presenter**, **AttentionRouter**, **SpecRegistry**, **SpecVerifier**, **TDDRunner**, **MetaBus**, **Blackboard** e a evolução registrada de **R47–R127** (faixa com 81 ciclos; o total documentado no `evolution/cycles.json` na época era 85). O indicador **média móvel** de score é apenas um descritor operacional e **não gate** de qualidade — ver `EvolutionRegistry.average_score`.
+Catálogo completo: [`agents/catalog/`](agents/catalog/) · Mapa detalhado: [`ARCHITECTURE.md`](ARCHITECTURE.md)
 
-### Diagrama Operacional Atual
+### 2. Conectores MCP
 
-```mermaid
-flowchart TD
-    CLI["CLI marceloclaro"] --> ORCH["MarceloClaroOrchestrator"]
-    ORCH --> BB["Blackboard"]
-    ORCH --> MB["MetaBus"]
-    ORCH --> AR["AttentionRouter"]
-    ORCH --> SR["SpecRegistry"]
-    ORCH --> SV["SpecVerifier"]
-    ORCH --> TDD["TDDRunner"]
-    BB --> AGENTS["209 agentes configurados"]
-    MB --> MCP["6 MCPs configurados"]
-    AR --> PRESENTER["mira-presenter"]
-    subgraph Core [Core Subsystems]
-        SR
-        SV
-        TDD
-        MB
-    end
-```
+| Servidor | Ferramentas | Para quê |
+|---|---|---|
+| `litert-lm` | chat, models, status | Modelos on‑device (Gemma 4 / Qwen3) via LiteRT‑LM |
+| `metacognitive-interconnect` | blackboard, memory, tasks | Memória compartilhada, postagem de tarefas A2A |
+| `antigravity-bridge` | browser, search, image, RAG | Google DeepMind no pipeline |
+| `pypi-search` | search, recommend, lookup | Curadoria de bibliotecas Python |
+| `colibri-mcp` | generate, status | Geração local Colibri OLMoE |
+| `scanners-mcp` | literary, scientific, rigor | 8 scanners de auditoria e Excelência (EXS) |
+| **`web-deploy-mcp`** 🆕 | pages_status, probe_url, site_weight, validate_feed, assert_gone | Deploy/verificação GitHub Pages com prova física |
 
-## Fluxos multiárea do checkout atual
+### 3. Skills
 
-- **Pipeline acadêmico agentivo**: busca, curadoria, evidências, estrutura argumentativa, revisão de literatura, metodologia reprodutível, estatística, discussão e auditoria ABNT.
-- **Prova, formalização e raciocínio**: Lean 4, E-Graph, AlphaGeometry, Z3, SymPy, motores de raciocínio crítico.
-- **Jurídico**: apoio de pesquisa e sumarização documental com rastreabilidade.
-- **Clínico**: apoio clínico auditável com múltiplas especialidades médicas.
-- **Scientific RAG**: RAG sobre literatura científica com ranqueamento e evidências localizadas.
-- **Universidade Sintética**: orquestração acadêmica transversal.
-- **LiteRT-LM**: modelos on-device (Gemma 4, Qwen3) via LiteRT-LM.
-- **Colibri / OLMoE**: geração local com OLMoE 1B/7B MoE.
-- **MerkleIntegrityGuard**: integridade criptográfica SHA-256 dos artefatos via Árvore de Merkle, verificada por `quality_report.py`.
+| Skill | Quando usar |
+|---|---|
+| `nano-orchestration` | Manuscritos de 30–500 laudas com modelos LiteRT‑LM on‑device |
+| `pesquisa-artigo-qualis-a1` | TCC, dissertação, artigo, defesa — rigor metodológico e referências ativas |
+| `pesquisador-universal-marcelo-claro` | Revisão sistemática, Evidence Graph, meta‑análise, GRADE |
+| `deploy-estatico-github-pages` 🆕 | Publicar/verificar site estático no GitHub Pages (receita R569–R580) |
+| `smoke-test-dom-js` 🆕 | Detectar bug de runtime JS inline (classe R580: `'num'` vs `'.num'`) |
 
-## Apresentações MIRA
+### 4. Hooks e guards
 
-**Registro duplo**: esta legenda endereça tanto o **leigo** (o que cada peça faz, sem jargão) quanto o **phd** (contrato de arquitetura e pipeline). O subsistema MIRA gera apresentações navegáveis em cards e seções a partir de fontes arbitrárias.
+> Fail‑closed: se o guard falhar, a operação **não** acontece — e o motivo é claro.
 
-- **MiraDeckPipeline**: pipeline orquestrado que transforma fontes em deck (extract → plan → copywrite → build → animate → validate).
-- **MiraEngine**: motor central de composição e roteamento de artefatos visuais.
-- **mira-presenter**: agente de apresentação/visualização que consolida o deck final.
+| Hook | Gatilho | Custo médio (baseline R582) |
+|---|---|---|
+| `credential_guard.sh` | commit/push no repo do site | **38,5 ms** |
+| `budget_guard.sh` | push (peso 1 GB / 25 MiB) | **87,1 ms** |
+| `js_smoke_dom.sh` | edição de `.html`/`.js` inline | **108,7 ms** |
 
-### Como funciona a apresentação MIRA
+### 5. Plugins
 
-1. **extract** — extração do briefing e da estrutura inicial a partir das fontes (`mira-extract`).
-2. **plan** — planejamento da sequência de slides e da narrativa (`mira-planner`).
-3. **copywrite** — refinamento de textos e mensagens visuais (`mira-copywriter`).
-4. **build** — montagem do deck em cards e seções navegáveis (`mira-builder`).
-5. **animate** — geração de animações centrais em loop e ajustes de escala (`mira-animator`, `mira-size-animator`).
-6. **validate** — validação de conformidade e consistência final (`mira-validator`).
+| Plugin | Papel |
+|---|---|
+| `litert-lm-provider.ts` | Registra `litert-lm` como provider nativo do OpenCode |
+| `deploy-guards.ts` 🆕 | Conecta os hooks ao ciclo de vida (`tool.execute.before`, gates de `git push`) |
 
-Complementam o workflow: `mira-chart`, `mira-chart-race`, `mira-image`, `mira-image-template`, `mira-qrcode`, `mira-references`, `mira-survey`, `mira-thirds`, `mira-squared`, `mira-vertical`, `mira-visuals`, `mira-get-videos`, `mira-extract` e `mira-new`.
+---
 
-## Presentation On Storytelling
-
-Legado de apresentação narrativa preservado: **Act I — A Ilha de Agentes** é o ato inicial da narrativa que guia o deck MIRA para o público leigo. A apresentação resume o ecossistema como uma ilha povoada por agentes especialistas, com storytelling em três atos e navegação por métricas; o controle de integridade criptográfica dos artefatos é feito por **MerkleIntegrityGuard** (ver `quality_report.py`).
-
-## Fluxograma Intuitivo
+## 🔁 Ciclo de vida SDD/TDD + Reflexion
 
 ```mermaid
 flowchart LR
-    A["Problema"] --> B["Spec SDD"]
-    B --> C["Testes RED"]
-    C --> D["Implementacao GREEN"]
-    D --> E["Verificacao"]
-    E --> F["Reflexao"]
-    F --> A
+    P[Perceber] --> S[Especificar SDD]
+    S --> D[Delegar via Blackboard]
+    D --> T[TDD RED→GREEN→REFACTOR]
+    T --> V[Verificar gates]
+    V --> R[Refletir Reflexion]
+    R --> P
+
+    style P fill:#eef2ff,stroke:#4f46e5
+    style S fill:#e3f2fd,stroke:#1565c0
+    style D fill:#fff3e0,stroke:#ef6c00
+    style T fill:#e8f5e9,stroke:#2e7d32
+    style V fill:#fce4ec,stroke:#c62828
+    style R fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-## Arquitetura Técnica Multilateral
+- **SDD**: nenhuma entrega sem `specs/SPEC-*.md` com critérios de aceitação.
+- **TDD**: testes primeiro (RED), implementação (GREEN), refatoração só com verde.
+- **Gates**: `SpecVerifier` + Trust Engine; entrega reprovada gera slashing de stake.
+- **Reflexion**: cada falha vira reflexão registrada **e lição semântica** no MetaBus.
+- **Evolução**: cada ciclo relevante é ancorado no `EvolutionRegistry` (ada de custódia, hash e cadeia HMAC).
 
-A arquitetura é **multilateral**: orquestrador primário (`marceloclaro`), agentes especialistas do catálogo, subagentes configurados no `opencode.json`, protocolo Blackboard A2A e MetaBus de memória metacognitiva. A governança combina **SDD/TDD** (spec antes de código, testes antes de implementação), Trust Engine (stake/slashing), SpecVerifier e BehavioralGate.
+---
 
-## Ciclo de Vida SDD / TDD
+## 📊 Observabilidade e eficiência
 
-```mermaid
-flowchart TD
-    SPEC["Spec formal"] --> TEST["Testes RED"]
-    TEST --> IMPL["Implementacao GREEN"]
-    IMPL --> REF["Refactor"]
-    REF --> GATE["Gate SDD"]
-    GATE --> CYCLE["Ciclo evolutivo R47x"]
-```
-
-## Limites de segurança e operação
-
-- O padrão de acesso é `open_science_only`; fontes-padrão: OpenAlex, Crossref, EuropePMC e arXiv. Serviços externos são opcionais e auditáveis; os resultados **não transforma as fontes encontradas em evidência já revisada.**
-- Métricas internas (testes, doctor, auto-score) **não constituem certificação externa** e **não substituem revisão humana**.
-- A instalação por pipe de rede é proibida: todo despacho é local e verificável; credenciais nunca são persistidas em recibos ou sandboxes.
-- O `doctor` (19 checks essenciais) diagnostica o ambiente; CLIs externas ausentes geram advertência, não falha.
-- Limites conhecidos: resolvedores restritos (ex.: sci-hub) permanecem desabilitados por omissão, exigem autorização humana explícita e registram base legal; ferramentas de scraping de redes sociais e controle de LAN não são adotadas por padrão.
-
-## Validação, contribuição e release
-
-A validação observada da release R448 registrou, em execução local sobre WSL2: **SPEC-935-R448** com **18/18** critérios, **3.488 passed**, **70 skipped** e **quatro subtestes aprovados.** Os números são uma fotografia daquela execução local, com as dependências disponíveis na sua máquina. Eles **não constituem certificação externa**. O recibo completo está em [`VALIDATION_R448.md`](VALIDATION_R448.md) e o padrão de release segue `git describe --tags --exact-match HEAD` + checksum publicados.
-
-Execução local da suíte e contribuição:
+| Recurso | Comando | O que mostra |
+|---|---|---|
+| Saúde do ecossistema | `python3 -m marceloclaro.cli doctor` | 20 checks (specs, registro, memória, gates) |
+| Eficiência por operação | `python3 -m integrations.op_timing report` | mediana/p90 por op (`.mci_state/op_times.jsonl`) |
+| Estado do registro | `python3 -m integrations.opencode_cli --check` | consistência do `opencode.json` (agentes/MCP/comandos) |
 
 ```bash
-.venv/bin/python -m pip install -r requirements-dev.txt
-.venv/bin/python -m pytest tests/ -q --tb=short --timeout=120
-.venv/bin/python -m marceloclaro.cli doctor
+# exemplo de saída (baseline R582)
+$ python3 -m integrations.op_timing report
+op_timing: 9 medições, 0 falhas
+  budget         n=3  mediana=   87.1 ms  p90=   87.1 ms
+  credential     n=3  mediana=   38.5 ms  p90=   38.5 ms
+  smoke          n=3  mediana=  108.7 ms  p90=  108.7 ms
 ```
 
-- Contribuições: veja [`CONTRIBUTING.md`](CONTRIBUTING.md) (apresente uma SPEC, escreva testes, rode `pytest` e `git diff --check`).
-- Segurança: veja [`SECURITY.md`](SECURITY.md) (use Security Advisories; não abra issue pública para vulnerabilidades).
-- Histórico de correções de alegações: [`CORRIGENDUM.md`](CORRIGENDUM.md).
-- Registro de mudanças: [`CHANGELOG.md`](CHANGELOG.md).
+---
 
-## Documentação e licença
+## 🧠 Memória e metacognição
 
-- Manual de uso em linguagem simples: [`MANUAL.md`](MANUAL.md)
-- Arquitetura técnica completa: [`ARCHITECTURE.md`](ARCHITECTURE.md)
-- Instalador (detalhes, requisitos, solução de problemas): [`installer/README.md`](installer/README.md) e [`installer/windows/README.md`](installer/windows/README.md)
-- Licença: [`LICENSE`](LICENSE) (MIT)
+- **MetaBus** (`.mci_state/shared_memory.json`): reflexões episódicas + **lições semânticas consultáveis por tópico** (`mci_get_memory(topic=...)`).
+- **Confidence Ledger**: EMA por domínio/tópico (calibração de confiança).
+- **Anti‑overclaim estrutural**: alegações ("Qualis A1", "verificado") exigem validação externa; histórico em [`CORRIGENDUM.md`](CORRIGENDUM.md).
+- Consulta direta:
+
+```bash
+python3 -c "
+import sys; sys.path.insert(0,'.')
+from mci.metabus import MetacognitiveMemory
+m = MetacognitiveMemory()
+print(m.extract_lessons('deploy'))   # lições da frente GitHub Pages
+"
+```
 
 ---
 
-## Navegacao Completa do Ecossistema
+## 🔐 Segurança e limites
 
-### Primeiros Passos
-
-| Secao | Descricao |
-|---|---|
-| [Instalacao One-Click](#instalacao-one-click) | Instale tudo com um unico comando |
-| [Desinstalacao](#desinstalacao-total) | Remova tudo com um clique |
-| [Primeiros Passos](#primeiros-passos) | Comece a usar agora |
-
-### Arquitetura e Estrutura
-
-| Secao | Descricao |
-|---|---|
-| [Visao Geral da Arquitetura](#visao-geral-da-arquitetura) | Como tudo se conecta |
-| [Camadas Tecnicas](#camadas-tecnicas) | Estrutura interna do sistema |
-| [Ciclo de Vida Completo](#ciclo-de-vida-completo) | Fluxo de uma tarefa do inicio ao fim |
-
-### Fluxos de Trabalho
-
-| Secao | Descricao |
-|---|---|
-| [Fluxo Principal](#fluxo-principal) | Perceber - Especificar - Delegar - Executar - Verificar - Refletir |
-| [Decisao de Roteamento](#decisao-de-roteamento) | Como o sistema escolhe o agente certo |
-| [Fluxo de uma Tarefa](#fluxo-de-uma-tarefa) | Passo a passo detalhado |
-
-### Memoria e Conhecimento
-
-| Secao | Descricao |
-|---|---|
-| [Sistema de Memoria](#sistema-de-memoria) | MetaBus, Blackboard e armazenamento |
-| [Fluxo de Conhecimento](#fluxo-de-conhecimento) | Como informacoes fluem pelo sistema |
-| [Aprendizado Continuo](#aprendizado-continuo) | Como o sistema evolui |
-
-### SDD/TDD e Qualidade
-
-| Secao | Descricao |
-|---|---|
-| [Ciclo SDD/TDD](#ciclo-sddtdd) | Desenvolvimento orientado por especificacao |
-| [Quality Gates](#quality-gates) | Portoes de validacao |
-| [Auditoria e Validacao](#auditoria-e-validacao) | Como garantimos qualidade |
-
-### Pipeline Academico
-
-| Secao | Descricao |
-|---|---|
-| [Pipeline Academico](#pipeline-academico) | Da ideia ao artigo publicado |
-| [Busca de Literatura](#busca-de-literatura) | Como encontramos fontes |
-| [Analise de Dados](#analise-de-dados) | Processamento e validacao |
-
-### Agentes e Integracoes
-
-| Secao | Descricao |
-|---|---|
-| [Mapa de Agentes](#mapa-de-agentes) | 205 especialistas organizados |
-| [Integracoes MCP](#integracoes-mcp) | Conexoes externas |
-| [Trust Engine](#trust-engine) | Sistema de confianca |
-
-### Dados e Relatorios
-
-| Secao | Descricao |
-|---|---|
-| [Dados Cientificos](#dados-cientificos) | 160 propostas e 243 datasets |
-| [Tabela Detalhada de Dados](#tabela-detalhada-do-repositorio-de-dados) | Temas, referencias e acessos |
-| [Metricas e Relatorios](#metricas-e-relatorios) | Como medimos sucesso |
+- **Acesso padrão `open_science_only`**: fontes OpenAlex, Crossref, EuropePMC e arXiv; serviços externos opcionais e auditáveis.
+- **Sem pipe de rede**: instalação local e verificável; credenciais nunca em recibos/sandboxes.
+- **Segredos protegidos**: o `credential_guard.sh` valida o token **sem imprimi‑lo**; `~/.git-credentials` nunca é commitado.
+- **Resolvedores restritos** (ex.: sci‑hub) desabilitados por omissão; exigem autorização humana e base legal.
+- **Domínios sensíveis** (clínico, jurídico, científico): agentes são **apoio computacional**, não decisores.
+- **Não é certificação**: métricas internas e auto‑score são observadas no checkout, não validação externa.
+- Conforme [`SECURITY.md`](SECURITY.md): use Security Advisories para vulnerabilidades.
 
 ---
 
-## Instalacao One-Click
+## 📦 Instalação
 
-<div align="center">
+> Instalação local e revisável — nada é executado por pipe de rede. Verifique sempre a integridade (`ECOSYSTEM_SOURCE_SHA256`).
 
-### Windows
-
-**Um unico comando no PowerShell (como Administrador):**
-
-```powershell
+```bash
+# Windows (PowerShell como Administrador) → WSL
 wsl --install -d Ubuntu
-```
 
-Apos reiniciar, abra o **Ubuntu** e cole:
-
-```bash
+# Linux / macOS / WSL Ubuntu
 curl -fsSL -o setup.sh https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/setup.sh
-# Verifique a integridade publicada (ECOSYSTEM_SOURCE_SHA256) antes de executar:
-bash setup.sh
+bash setup.sh          # confira ECOSYSTEM_SOURCE_SHA256 publicada antes
 ```
 
-> Instalação local e revisável: nada é executado por pipe de rede. Detalhes do instalador, requisitos e solução de problemas: [`installer/README.md`](installer/README.md).
-
-### Linux / macOS
-
-```bash
-curl -fsSL -o setup.sh https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/setup.sh
-# Verifique a integridade publicada (ECOSYSTEM_SOURCE_SHA256) antes de executar:
-bash setup.sh
-```
-
-### Apos a instalacao
+Após instalar:
 
 ```bash
 source ~/opencode-ecosystem-core/.venv/bin/activate
 python3 -m marceloclaro.cli helpdesk
 ```
 
-</div>
+Detalhes, requisitos e solução de problemas: [`installer/README.md`](installer/README.md) · [`installer/windows/README.md`](installer/windows/README.md). Desinstalação completa no README do instalador.
 
 ---
 
-## Desinstalacao Total
-
-<div align="center">
-
-### Remover apenas o ecossistema
-
-```bash
-curl -fsSL -o uninstall.sh https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/uninstall.sh
-# Verifique a integridade publicada antes de executar:
-bash uninstall.sh
-```
-
-### Remover WSL do Windows (Tudo)
-
-**PowerShell como Administrador:**
-
-```powershell
-wsl --unregister Ubuntu
-dism.exe /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux
-dism.exe /online /disable-feature /featurename:VirtualMachinePlatform
-```
-
-</div>
-
----
-
-## Primeiros Passos
-
-```mermaid
-flowchart TD
-    START[Inicio] --> A1[Ative o ambiente virtual]
-    A1 --> A2[Rode o diagnostico]
-    A2 --> A3[Explore o menu]
-    A3 --> A4[Faca uma pesquisa]
-    A4 --> A5[Gere uma apresentacao]
-    A5 --> DONE[Voce esta pronto!]
-```
-
----
-
-# Visao Geral da Arquitetura
-
-```mermaid
-flowchart TB
-    subgraph E[ENTRADA]
-        USER[Pessoa]
-        CLI[CLI marceloclaro]
-    end
-
-    subgraph N[NUCLEO INTELIGENTE]
-        ORQ[Orquestrador]
-        ATT[AttentionRouter]
-        META[MetaBus]
-        BB[Blackboard A2A]
-    end
-
-    subgraph S[SDD-TDD]
-        SPEC[SpecRegistry]
-        VER[SpecVerifier]
-        TDD[TDDRunner]
-    end
-
-    subgraph A[205 AGENTES]
-        ACAD[Academico 45]
-        TECH[Tecnico 40]
-        DOM[Dominio 30]
-        RES[Pesquisa 25]
-        SUP[Suporte 65]
-    end
-
-    subgraph I[INTEGRACOES]
-        MCP[6 MCPs]
-        LIT[LiteRT-LM]
-        COL[Colibri OLMoE]
-        Z3[Z3 SymPy]
-    end
-
-    subgraph O[SAIDA]
-        DOC[Documentos]
-        PRES[Apresentacoes]
-        PAPER[Artigos]
-        RAG[Scientific RAG]
-    end
-
-    USER --> CLI
-    CLI --> ORQ
-    ORQ --> ATT
-    ORQ --> META
-    ORQ --> BB
-    ORQ --> SPEC
-    ORQ --> VER
-    ORQ --> TDD
-    ORQ --> A
-    ORQ --> I
-    ORQ --> O
-    META <--> BB
-    SPEC --> VER
-    TDD --> VER
-    ATT --> ACAD
-    ATT --> TECH
-    ATT --> DOM
-    ATT --> RES
-    ATT --> SUP
-```
-
----
-
-## Camadas Tecnicas
-
-```mermaid
-flowchart LR
-    subgraph C1[Interface]
-        CLI2[CLI Python]
-        WEB[API Web]
-        MCP2[MCP Servers]
-    end
-
-    subgraph C2[Orquestracao]
-        ORQ2[Orquestrador]
-        ROUTE[Router]
-        QUEUE[Task Queue]
-    end
-
-    subgraph C3[Memoria]
-        MB[MetaBus]
-        BB2[Blackboard]
-        EVO[Evolution Registry]
-        TRUST[Trust Engine]
-    end
-
-    subgraph C4[Execucao]
-        SDD2[Spec Engine]
-        TDD2[TDD Runner]
-        AG2[Agent Pool]
-    end
-
-    subgraph C5[Integracao]
-        MCP3[MCP Clients]
-        LLM[LLM Providers]
-        FS[File System]
-        NET[Network]
-    end
-
-    C1 --> C2
-    C2 --> C3
-    C2 --> C4
-    C3 --> C5
-    C4 --> C5
-
-    style C1 fill:#e3f2fd,stroke:#1565c0
-    style C2 fill:#f3e5f5,stroke:#7b1fa2
-    style C3 fill:#e8f5e9,stroke:#2e7d32
-    style C4 fill:#fff3e0,stroke:#ef6c00
-    style C5 fill:#fce4ec,stroke:#c62828
-```
-
----
-
-## Ciclo de Vida Completo
-
-```mermaid
-flowchart TD
-    START2[Inicio] --> REC[Recebe Tarefa]
-    REC --> PARSE[Analisa Tarefa]
-    PARSE --> CLASS{Classificacao}
-
-    CLASS -->|Simples| SIMPLE[Processamento Simples]
-    CLASS -->|Complexa| COMPLEX[Processamento Complexo]
-    CLASS -->|Critica| CRITICAL[Processamento Critico]
-
-    SIMPLE --> S1[Seleciona Agente]
-    COMPLEX --> C1[Cria Especificacao]
-    CRITICAL --> CR1[Ativa Protocolo]
-
-    S1 --> S2[Executa Tarefa]
-    C1 --> C2[Valida Com Criterios]
-    CR1 --> CR2[Mobiliza Agentes]
-
-    S2 --> S3[Retorna Resultado]
-    C2 --> C3[Implementa Solucao]
-    CR2 --> CR3[Coordena Paralela]
-
-    C3 --> C4[Roda Testes]
-    CR3 --> CR4[Valida Cadeia]
-
-    C4 --> C5{Testes OK?}
-    CR4 --> CR5{Todos OK?}
-
-    C5 -->|Sim| S3
-    C5 -->|Nao| C3
-    CR5 -->|Sim| S3
-    CR5 -->|Nao| CR3
-
-    S3 --> LOG[Registra Log]
-    LOG --> EVO2[Atualiza Registry]
-    EVO2 --> RETURN2[Retorna Resultado]
-
-    style START2 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
-    style REC fill:#f3e5f5,stroke:#7b1fa2
-    style PARSE fill:#e8f5e9,stroke:#2e7d32
-    style CLASS fill:#fff3e0,stroke:#ef6c00
-    style RETURN2 fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
-```
-
----
-
-# Fluxos de Trabalho
-
-## Fluxo Principal
-
-```mermaid
-flowchart TD
-    START3[Inicio] --> P[PERCEBER]
-    P --> P1[Consulta MetaBus]
-    P1 --> P2[Recupera contexto]
-    P2 --> P3[Verifica licoes]
-    P3 --> E[ESPECIFICAR]
-    E --> E1{Spec existe?}
-    E1 -->|Sim| E2[Recupera spec]
-    E1 -->|Nao| E3[Cria nova spec]
-    E2 --> D[DELEGAR]
-    E3 --> D
-    D --> D1[Publica CFP]
-    D1 --> D2[Agentes avaliam]
-    D2 --> D3{Ha voluntarios?}
-    D3 -->|Sim| D4[Seleciona agente]
-    D3 -->|Nao| D5[Reformula tarefa]
-    D5 --> D1
-    D4 --> EX[EXECUTAR]
-    EX --> EX1[Ciclo RED-GREEN]
-    EX1 --> EX2[Implementa solucao]
-    EX2 --> EX3[Roda testes]
-    EX3 --> EX4{Testes OK?}
-    EX4 -->|Sim| EX5[Refatora codigo]
-    EX4 -->|Nao| EX2
-    EX5 --> V[VERIFICAR]
-    V --> V1[Gate SDD]
-    V1 --> V2[SpecVerifier]
-    V2 --> V3{Criterios OK?}
-    V3 -->|Sim| V4[Aprova entrega]
-    V3 -->|Nao| V5[Rejeita com feedback]
-    V5 --> EX
-    V4 --> R[REFLETIR]
-    R --> R1[Registra licoes]
-    R1 --> R2[Atualiza Trust]
-    R2 --> R3[Atualiza Registry]
-    R3 --> DONE3[Tarefa Concluida]
-
-    style START3 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
-    style P fill:#f3e5f5,stroke:#7b1fa2
-    style E fill:#e8f5e9,stroke:#2e7d32
-    style D fill:#fff3e0,stroke:#ef6c00
-    style EX fill:#fce4ec,stroke:#c62828
-    style V fill:#e0f7fa,stroke:#00838f
-    style R fill:#f1f8e9,stroke:#558b2f
-    style DONE3 fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
-```
-
----
-
-## Decisao de Roteamento
-
-```mermaid
-flowchart TD
-    TASK[Nova Tarefa] --> CLASS2{Classificacao}
-
-    CLASS2 -->|Pesquisa| ACAD2[Pipeline Academico]
-    CLASS2 -->|Codigo| TECH2[Agente Tecnico]
-    CLASS2 -->|Dominio| DOM2[Especialista]
-    CLASS2 -->|Apresentacao| PRES2[MIRA]
-    CLASS2 -->|Formal| FORM2[Formal Verifier]
-    CLASS2 -->|Texto| TEXT2[Escritor]
-    CLASS2 -->|Dados| DATA2[Analista]
-
-    ACAD2 --> A21[Busca literatura]
-    ACAD2 --> A22[Coleta evidencias]
-    ACAD2 --> A23[Revisao pares]
-    ACAD2 --> A24[Redacao artigo]
-
-    TECH2 --> T21[Analisa codigo]
-    TECH2 --> T22[Implementa solucao]
-    TECH2 --> T23[Testa e valida]
-    TECH2 --> T24[Documenta]
-
-    DOM2 --> D21[Consulta especialista]
-    DOM2 --> D22[Aplica conhecimento]
-    DOM2 --> D23[Gera relatorio]
-
-    PRES2 --> P21[Extrai conteudo]
-    PRES2 --> P22[Planeja slides]
-    PRES2 --> P23[Constroi deck]
-    PRES2 --> P24[Valida consistencia]
-
-    FORM2 --> F21[Formaliza problema]
-    FORM2 --> F22[Gera prova]
-    FORM2 --> F23[Verifica Z3]
-
-    TEXT2 --> TX21[Analisa audiencia]
-    TEXT2 --> TX22[Estrutura texto]
-    TEXT2 --> TX23[Revisa gramatica]
-
-    DATA2 --> DA21[Coleta dados]
-    DATA2 --> DA22[Analise estatistica]
-    DATA2 --> DA23[Visualizacoes]
-
-    style TASK fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
-    style CLASS2 fill:#f3e5f5,stroke:#7b1fa2
-    style ACAD2 fill:#e8f5e9,stroke:#2e7d32
-    style TECH2 fill:#fff3e0,stroke:#ef6c00
-    style DOM2 fill:#fce4ec,stroke:#c62828
-    style PRES2 fill:#e0f7fa,stroke:#00838f
-    style FORM2 fill:#f1f8e9,stroke:#558b2f
-    style TEXT2 fill:#f3e5f5,stroke:#7b1fa2
-    style DATA2 fill:#e3f2fd,stroke:#1565c0
-```
-
----
-
-## Fluxo de uma Tarefa
-
-```mermaid
-flowchart TD
-    subgraph F1[Fase 1 Recebimento]
-        R1[Recebe tarefa]
-        R2[Valida formato]
-        R3[Extrai metadados]
-        R4[Gera ID unico]
-    end
-
-    subgraph F2[Fase 2 Analise]
-        A1[Analisa complexidade]
-        A2[Identifica dependencias]
-        A3[Estima recursos]
-        A4[Seleciona estrategia]
-    end
-
-    subgraph F3[Fase 3 Planejamento]
-        P1[Cria especificacao]
-        P2[Define criterios]
-        P3[Vincula testes]
-        P4[Estima tempo]
-    end
-
-    subgraph F4[Fase 4 Alocacao]
-        AL1[Busca agentes]
-        AL2[Avalia confianca]
-        AL3[Seleciona melhor]
-        AL4[Transfere contexto]
-    end
-
-    subgraph F5[Fase 5 Execucao]
-        E1[Executa tarefa]
-        E2[Monitora progresso]
-        E3[Roda testes]
-        E4[Trata erros]
-    end
-
-    subgraph F6[Fase 6 Validacao]
-        V1[Verifica criterios]
-        V2[Roda quality gates]
-        V3[Gera relatorio]
-        V4[Aprova ou rejeita]
-    end
-
-    subgraph F7[Fase 7 Entrega]
-        D1[Formata resultado]
-        D2[Gera documentacao]
-        D3[Armazena resultado]
-        D4[Notifica usuario]
-    end
-
-    subgraph F8[Fase 8 Reflexao]
-        RE1[Registra licoes]
-        RE2[Atualiza confianca]
-        RE3[Compartilha conhecimento]
-        RE4[Otimiza processos]
-    end
-
-    F1 --> F2
-    F2 --> F3
-    F3 --> F4
-    F4 --> F5
-    F5 --> F6
-    F6 -->|Aprovado| F7
-    F6 -->|Reprovado| F5
-    F7 --> F8
-
-    style F1 fill:#e3f2fd,stroke:#1565c0
-    style F2 fill:#f3e5f5,stroke:#7b1fa2
-    style F3 fill:#e8f5e9,stroke:#2e7d32
-    style F4 fill:#fff3e0,stroke:#ef6c00
-    style F5 fill:#fce4ec,stroke:#c62828
-    style F6 fill:#e0f7fa,stroke:#00838f
-    style F7 fill:#f1f8e9,stroke:#558b2f
-    style F8 fill:#e8f5e9,stroke:#2e7d32
-```
-
----
-
-# Sistema de Memoria
-
-## Visao Geral da Memoria
-
-```mermaid
-flowchart TB
-    subgraph MEM[SISTEMA DE MEMORIA]
-        MB2[MetaBus Global]
-        BB3[Blackboard]
-        EVO3[Evolution Registry]
-        TRUST2[Trust Engine]
-    end
-
-    subgraph TIP[TIPOS DE MEMORIA]
-        SEM[Memoria Semantica]
-        EPI[Memoria Episodica]
-        PROC[Memoria Procedural]
-        DECL[Memoria Declarativa]
-    end
-
-    MEM --> TIP
-    MB2 --> SEM
-    MB2 --> EPI
-    BB3 --> PROC
-    BB3 --> DECL
-
-    style MEM fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    style TIP fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-```
-
----
-
-## Fluxo de Conhecimento
-
-```mermaid
-flowchart TD
-    subgraph IN[ENTRADA]
-        USER2[Usuario]
-        AGENT[Agente]
-        EXT[Externo]
-    end
-
-    subgraph PR[PROCESSAMENTO]
-        CAPTURE[Captura]
-        VALIDATE[Validacao]
-        ENRICH[Enriquecimento]
-        INDEX[Indexacao]
-    end
-
-    subgraph ST[ARMAZENAMENTO]
-        MB3[MetaBus]
-        BB4[Blackboard]
-        VECTOR[Vector Store]
-        GRAPH[Knowledge Graph]
-    end
-
-    subgraph RE[RECUPERACAO]
-        SEARCH[Busca Semantica]
-        RANK[Ranqueamento]
-        FILTER[Filtro]
-        CONTEXT[Contexto]
-    end
-
-    subgraph OUT[SAIDA]
-        ANSWER[Resposta]
-        INSIGHT[Insight]
-        RECOMMEND[Recomendacao]
-        ACTION[Acao]
-    end
-
-    IN --> PR
-    PR --> ST
-    ST --> RE
-    RE --> OUT
-
-    USER2 --> CAPTURE
-    AGENT --> CAPTURE
-    EXT --> CAPTURE
-    CAPTURE --> VALIDATE --> ENRICH --> INDEX
-    INDEX --> MB3
-    INDEX --> BB4
-    INDEX --> VECTOR
-    INDEX --> GRAPH
-    MB3 --> SEARCH
-    BB4 --> SEARCH
-    VECTOR --> SEARCH
-    GRAPH --> SEARCH
-    SEARCH --> RANK --> FILTER --> CONTEXT
-    CONTEXT --> ANSWER
-    CONTEXT --> INSIGHT
-    CONTEXT --> RECOMMEND
-    CONTEXT --> ACTION
-
-    style IN fill:#e3f2fd,stroke:#1565c0
-    style PR fill:#f3e5f5,stroke:#7b1fa2
-    style ST fill:#e8f5e9,stroke:#2e7d32
-    style RE fill:#fff3e0,stroke:#ef6c00
-    style OUT fill:#e0f7fa,stroke:#00838f
-```
-
----
-
-## Aprendizado Continuo
-
-```mermaid
-flowchart TD
-    START4[Ciclo] --> OBS[Observa]
-    OBS --> O1[Coleta dados]
-    O1 --> O2[Identifica padroes]
-    O2 --> O3[Detecta anomalias]
-    O3 --> ANA[Analisa]
-    ANA --> A1[Compara historico]
-    A1 --> A2[Calcula impacto]
-    A2 --> A3[Avalia confianca]
-    A3 --> LEARN[Aprende]
-    LEARN --> L1[Atualiza pesos]
-    L1 --> L2[Refina modelos]
-    L2 --> L3[Otimiza processos]
-    L3 --> APPL[Aplica]
-    APPL --> AP1[Nova tarefa]
-    AP1 --> AP2[Melhor performance]
-    AP2 --> AP3[Mais confianca]
-    AP3 --> MON[Monitora]
-    MON --> M1[Metricas]
-    M1 --> M2[KPIs]
-    M2 --> M3[Relatorios]
-    M3 --> OBS
-
-    style START4 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
-    style OBS fill:#f3e5f5,stroke:#7b1fa2
-    style ANA fill:#e8f5e9,stroke:#2e7d32
-    style LEARN fill:#fff3e0,stroke:#ef6c00
-    style APPL fill:#fce4ec,stroke:#c62828
-    style MON fill:#e0f7fa,stroke:#00838f
-```
-
----
-
-# SDD/TDD e Qualidade
-
-## Ciclo SDD/TDD
-
-```mermaid
-flowchart TD
-    subgraph SDD[SDD Spec Driven]
-        SPEC1[Cria Spec]
-        SPEC1 --> CRIT[Criterios]
-        CRIT --> TESTS[Testes]
-    end
-
-    subgraph TDD[TDD Test Driven]
-        RED[RED Testes Falham]
-        RED --> GREEN[GREEN Implementacao]
-        GREEN --> REFACTOR[REFACTOR Melhora]
-        REFACTOR --> VERIFY[VERIFY Passam]
-    end
-
-    subgraph GATE[GATE Validacao]
-        GATE1[SpecVerifier]
-        GATE1 --> CHECK{Criterios OK?}
-    CHECK -->|Sim| APPROVE[APROVADO]
-    CHECK -->|Nao| REJECT[REPROVADO]
-        REJECT --> RED
-    end
-
-    SPEC1 --> RED
-    TESTS --> RED
-    VERIFY --> GATE1
-
-    style SDD fill:#e3f2fd,stroke:#1565c0
-    style TDD fill:#e8f5e9,stroke:#2e7d32
-    style GATE fill:#fff3e0,stroke:#ef6c00
-    style RED fill:#ffebee,stroke:#c62828
-    style GREEN fill:#e8f5e9,stroke:#2e7d32
-    style REFACTOR fill:#e3f2fd,stroke:#1565c0
-    style APPROVE fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
-    style REJECT fill:#ffebee,stroke:#c62828,stroke-width:3px
-```
-
----
-
-## Quality Gates
-
-```mermaid
-flowchart TD
-    subgraph GATES[QUALITY GATES]
-        G1[Gate 1 Formato]
-        G2[Gate 2 Especificacao]
-        G3[Gate 3 Testes]
-        G4[Gate 4 Metricas]
-        G5[Gate 5 Revisao]
-        G6[Gate 6 Seguranca]
-    end
-
-    subgraph CHECKS[VERIFICACOES]
-        C1[Arquivo existe]
-        C2[Formato valido]
-        C3[Specs atendidas]
-        C4[Testes passam]
-        C5[Cobertura 80%]
-        C6[Sem vulnerabilidades]
-    end
-
-    subgraph RESULTS[RESULTADOS]
-        R1[Aprovado]
-        R2[Aprovado com ressalvas]
-        R3[Reprovado]
-    end
-
-    G1 --> C1 --> C2 --> G2 --> C3 --> G3 --> C4 --> G4 --> C5 --> G5 --> C6 --> G6
-    G6 -->|Tudo OK| R1
-    G6 -->|Problemas menores| R2
-    G6 -->|Problemas criticos| R3
-    R3 -->|Corrige| G1
-
-    style GATES fill:#f3e5f5,stroke:#7b1fa2
-    style CHECKS fill:#e8f5e9,stroke:#2e7d32
-    style RESULTS fill:#e3f2fd,stroke:#1565c0
-    style R1 fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
-    style R2 fill:#fff3e0,stroke:#ef6c00,stroke-width:3px
-    style R3 fill:#ffebee,stroke:#c62828,stroke-width:3px
-```
-
----
-
-## Auditoria e Validacao
-
-```mermaid
-flowchart TD
-    subgraph IN2[ENTRADA]
-        ARTIFACT[Artefato]
-        SPEC2[Especificacao]
-        TEST2[Testes]
-    end
-
-    subgraph AUD[AUDITORIA]
-        A1[Checklist]
-        A2[Analise Profunda]
-        A3[Comparacao]
-        A4[Validacao]
-    end
-
-    subgraph TOOLS[FERRAMENTAS]
-        T1[Linter]
-        T2[Test Runner]
-        T3[Code Coverage]
-        T4[Security Scanner]
-        T5[Doc Checker]
-    end
-
-    subgraph OUT2[SAIDA]
-        O1[Relatorio]
-        O2[Lista Issues]
-        O3[Metricas]
-        O4[Recomendacoes]
-    end
-
-    IN2 --> AUD
-    AUD --> TOOLS
-    TOOLS --> OUT2
-
-    ARTIFACT --> A1
-    SPEC2 --> A3
-    TEST2 --> A4
-    A1 --> T1
-    A2 --> T2
-    A3 --> T3
-    A4 --> T4
-
-    style IN2 fill:#e3f2fd,stroke:#1565c0
-    style AUD fill:#f3e5f5,stroke:#7b1fa2
-    style TOOLS fill:#e8f5e9,stroke:#2e7d32
-    style OUT2 fill:#fff3e0,stroke:#ef6c00
-```
-
----
-
-# Pipeline Academico
-
-## Visao Geral do Pipeline
-
-```mermaid
-flowchart LR
-    subgraph F1[Fase 1 Descoberta]
-        I[Ideia]
-        G[Gap Pesquisa]
-        P[Proposta]
-    end
-
-    subgraph F2[Fase 2 Pesquisa]
-        L[Revisao Literaria]
-        E[Coleta Dados]
-        M[Metodologia]
-    end
-
-    subgraph F3[Fase 3 Analise]
-        A[Analise Estatistica]
-        V[Validacao]
-        R[Resultados]
-    end
-
-    subgraph F4[Fase 4 Escrita]
-        D[Rascunho]
-        REV[Revisao]
-        F[Final]
-    end
-
-    subgraph F5[Fase 5 Publicacao]
-        SUB[Submissao]
-        PR[Peer Review]
-        PUB[Publicacao]
-    end
-
-    I --> G --> P
-    P --> L --> E --> M
-    M --> A --> V --> R
-    R --> D --> REV --> F
-    F --> SUB --> PR --> PUB
-
-    style F1 fill:#e3f2fd,stroke:#1565c0
-    style F2 fill:#f3e5f5,stroke:#7b1fa2
-    style F3 fill:#e8f5e9,stroke:#2e7d32
-    style F4 fill:#fff3e0,stroke:#ef6c00
-    style F5 fill:#fce4ec,stroke:#c62828
-```
-
----
-
-## Busca de Literatura
-
-```mermaid
-flowchart TD
-    subgraph SRC[FONTES DE DADOS]
-        OA[OpenAlex]
-        CR[CrossRef]
-        PM[PubMed]
-        AR[arXiv]
-        KG[Kaggle]
-    end
-
-    subgraph PROC[PROCESSAMENTO]
-        SEARCH2[Busca Multi Fonte]
-        DEDUP[Deduplicacao]
-        FILTER2[Filtro Relevancia]
-        RANK2[Ranqueamento]
-        ENRICH2[Enriquecimento]
-    end
-
-    subgraph OUT3[SAIDA]
-        LIT[Revisao Literaria]
-        EVID[Evidencias]
-        GAP2[Gaps Identificados]
-        REF[Referencias]
-    end
-
-    SRC --> SEARCH2
-    SEARCH2 --> DEDUP --> FILTER2 --> RANK2 --> ENRICH2 --> OUT3
-
-    style SRC fill:#e3f2fd,stroke:#1565c0
-    style PROC fill:#f3e5f5,stroke:#7b1fa2
-    style OUT3 fill:#e8f5e9,stroke:#2e7d32
-```
-
----
-
-## Analise de Dados
-
-```mermaid
-flowchart TD
-    subgraph IN3[ENTRADA]
-        RAW[Dados Brutos]
-        META2[Metadados]
-        CONFIG[Configuracao]
-    end
-
-    subgraph PR2[PROCESSAMENTO]
-        CLEAN[Limpeza]
-        TRANSFORM[Transformacao]
-        NORMALIZE[Normalizacao]
-        VALIDATE2[Validacao]
-    end
-
-    subgraph AN[ANALISE]
-        DESC[Estatistica Descritiva]
-        INFER[Inferencia]
-        PREDICT[Predicao]
-        OPTIMIZE[Otimizacao]
-    end
-
-    subgraph VIS[VISUALIZACAO]
-        CHART[Graficos]
-        TABLE2[Tabelas]
-        DASHBOARD[Dashboards]
-        REPORT2[Relatorios]
-    end
-
-    subgraph OUT4[SAIDA]
-        RESULT[Resultados]
-        INSIGHT2[Insights]
-        CONCLUSION[Conclusoes]
-        RECOMMEND2[Recomendacoes]
-    end
-
-    IN3 --> PR2 --> AN --> VIS --> OUT4
-
-    style IN3 fill:#e3f2fd,stroke:#1565c0
-    style PR2 fill:#f3e5f5,stroke:#7b1fa2
-    style AN fill:#e8f5e9,stroke:#2e7d32
-    style VIS fill:#fff3e0,stroke:#ef6c00
-    style OUT4 fill:#e0f7fa,stroke:#00838f
-```
-
----
-
-# Agentes e Integracoes
-
-## Mapa de Agentes
-
-```mermaid
-flowchart TB
-    subgraph ACADEMIC[AGENTES ACADEMICOS 45]
-        AC1[Editor Chefe]
-        AC2[Escopo]
-        AC3[Busca]
-        AC4[Evidencias]
-        AC5[Estrutura]
-        AC6[Revisao]
-        AC7[Metodologia]
-        AC8[Estatistica]
-        AC9[Visualizacao]
-        AC10[Resultados]
-    end
-
-    subgraph TECH[AGENTES TECNICOS 40]
-        TC1[Coder]
-        TC2[Researcher]
-        TC3[Writer]
-        TC4[Reviewer]
-        TC5[Debugger]
-        TC6[Optimizer]
-        TC7[Architect]
-    end
-
-    subgraph DOMAIN[ESPECIALISTAS 30]
-        DM1[Cardiologista]
-        DM2[Neurologista]
-        DM3[Radiologista]
-        DM4[Educador]
-        DM5[Juridico]
-        DM6[Economista]
-    end
-
-    subgraph RESEARCH[AGENTES PESQUISA 25]
-        RS1[Literatura]
-        RS2[Dados]
-        RS3[Analise]
-        RS4[Redacao]
-        RS5[Validacao]
-    end
-
-    subgraph SUP[AGENTES SUPORTE 65]
-        SP1[Documentacao]
-        SP2[Testes]
-        SP3[Seguranca]
-        SP4[Metricas]
-        SP5[Deploy]
-        SP6[Debug]
-    end
-
-    ACADEMIC --> TECH --> DOMAIN --> RESEARCH --> SUP
-
-    style ACADEMIC fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    style TECH fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
-    style DOMAIN fill:#fce4ec,stroke:#c62828,stroke-width:2px
-    style RESEARCH fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-    style SUP fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-```
-
----
-
-## Integracoes MCP
-
-```mermaid
-flowchart TB
-    subgraph MCP_SERVERS[SERVIDORES MCP]
-        LITERT2[LiteRT-LM]
-        META3[Metacognitive Interconnect]
-        ANTI[Antigravity Bridge]
-        PYPI[PyPI Search]
-        COLIBRI2[Colibri OLMoE]
-        SCANNER[Scanners MCP]
-    end
-
-    subgraph FEATURES[FUNCIONALIDADES]
-        F1[Busca Semantica]
-        F2[Analise de Dados]
-        F3[Geracao de Texto]
-        F4[Pesquisa Web]
-        F5[Download Dados]
-        F6[Visualizacao]
-    end
-
-    MCP_SERVERS --> FEATURES
-
-    style MCP_SERVERS fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    style FEATURES fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-```
-
----
-
-## Trust Engine
-
-```mermaid
-flowchart TD
-    subgraph IN5[ENTRADA]
-        AGENT2[Agente]
-        TASK2[Tarefa]
-        RESULT2[Resultado]
-    end
-
-    subgraph TRUST_ENGINE[TRUST ENGINE]
-        CALC[Calculo Confianca]
-        HISTORY[Historico]
-        METRICS2[Metricas]
-        DECISION[Decisao]
-    end
-
-    subgraph FAC[FATORES]
-        SUCESSO[Taxa Sucesso]
-        QUALIDADE[Qualidade]
-        TEMPO[Tempo]
-        CUSTO[Custo]
-        FEEDBACK[Feedback]
-    end
-
-    subgraph ACT[ACOES]
-        PROMOTE[Promover]
-        DEMOTE[Rebaixar]
-        BLOCK[Bloquear]
-        REWARD[Recompensar]
-        PENALIZE[Penalizar]
-    end
-
-    subgraph OUT5[SAIDA]
-        TRUST_SCORE[Trust Score]
-        RECOMMEND3[Recomendacao]
-        ALERT[Alertas]
-    end
-
-    IN5 --> TRUST_ENGINE --> FAC --> ACT --> OUT5
-
-    style IN5 fill:#e3f2fd,stroke:#1565c0
-    style TRUST_ENGINE fill:#f3e5f5,stroke:#7b1fa2
-    style FAC fill:#e8f5e9,stroke:#2e7d32
-    style ACT fill:#fff3e0,stroke:#ef6c00
-    style OUT5 fill:#e0f7fa,stroke:#00838f
-```
-
----
-
-# Dados e Metricas
-
-## Dados Cientificos
-
-```mermaid
-flowchart LR
-    subgraph CATALOG[CATALOGO DE DADOS]
-        PROP[160 Propostas]
-        DS[243 Datasets]
-        AG[8 Agentes PhD]
-    end
-
-    subgraph DOM[DOMINIOS]
-        AI[IA ML]
-        HEALTH[Saude]
-        BIO[Biologia]
-        ENV[Ambiente]
-        ENERGY[Energia]
-        MAT[Materiais]
-        SOC[Social]
-        ECON[Economia]
-    end
-
-    subgraph SRC2[FONTES]
-        OA2[OpenAlex]
-        CR2[CrossRef]
-        PM2[PubMed]
-        AR2[arXiv]
-        KG2[Kaggle]
-    end
-
-    CATALOG --> DOM
-    CATALOG --> SRC2
-
-    style CATALOG fill:#e3f2fd,stroke:#1565c0
-    style DOM fill:#e8f5e9,stroke:#2e7d32
-    style SRC2 fill:#fff3e0,stroke:#ef6c00
-```
-
----
-
-## Tabela Detalhada do Repositorio de Dados
-
-### 160 Propostas de Pesquisa por Dominio
-
-| Dominio | Agente | Propostas | Temas Principais |
-|---|---|---|---|
-| **Healthcare** | Dr. Healthcare ML PhD | 20 | Interpretabilidade IA, Sesgo Algoritmico, Fusao Multimodal, LLMs Clinicas, Aprendizado Federado, Privacidade Diferencial, Transfer Learning, Deteccao Anomalias, Equidade Algoritmica, Knowledge Graphs |
-| **Environment** | Dr. Environmental AI PhD | 20 | Predicao Climatica, Monitoramento Desmatamento, Qualidade Ar IoT, Gestao Hidrica, Predicao Secas, Biodiversidade, Oceanos, Energia Renovavel |
-| **Social Sciences** | Dr. Social Computing PhD | 20 | Fake News, Sentimento Redes Sociais, Polarizacao Politica, Desigualdade Social, Mobilidade Urbana, Educacao, Emprego, Migracao, Pobreza, Criminalidade |
-| **Computer Science** | Dr. ML Systems PhD | 20 | Deteccao Fraude GNN, Otimizacao Redes Neurais, Recomendacao, Seguranca Cibernetica, Compiladores, NLP, Classificacao Imagens |
-| **Engineering** | Dr. Engineering AI PhD | 20 | Manutencao Preditiva, Otimizacao Industrial, Materiais Inteligentes, Robotica, Energia Inteligencia, Saude Estrutural, Manufatura |
-| **Biology** | Dr. Computational Biology PhD | 20 | Estrutura Proteica LLMs, Genomica Single-Cell, Descoberta Drogas, Evolucao Molecular, Biodiversidade, Ecologia, Microbioma |
-| **Finance** | Dr. Financial AI PhD | 20 | Volatilidade GNN, Lavagem Dinheiro, Credito Inteligente, Mercados RL, Risco Sistêmico, Criptomoedas, Indicadores Economicos, Seguros |
-| **Agriculture** | Dr. AgriTech AI PhD | 20 | Pragas Drone+IA, Agricultura Precisao, Qualidade Solo, Genomica Plantas, Cadeia Produtiva, Produtividade Agricola, Seguranca Alimentar, Irrigacao |
-| **TOTAL** | **8 Agentes PhD** | **160** | **43 temas unicos** |
-
-### 243 Datasets por Fonte e Dominio
-
-| Fonte | Quantidade | Formato | Acesso |
-|---|---|---|---|
-| **Kaggle** | 122 | CSV, JSON | Publico |
-| **HuggingFace** | 121 | Parquet, JSON, CSV | Publico |
-| **TOTAL** | **243** | Multi-formato | **Totalmente Open Access** |
-
-### 243 Datasets por Dominio
-
-| Dominio | Datasets | Downloads | Temas |
-|---|---|---|---|
-| **Meio Ambiente** | 35 | 1.2M+ | Qualidade do Ar, Biodiversidade, Mudanca Climatica, Desmatamento, Oceanos, Energia Renovavel |
-| **Ciencias Sociais** | 34 | 980K+ | Criminalidade, Educacao, Emprego, Desigualdade, Migracao, Pobreza |
-| **Saude** | 32 | 1.5M+ | Diabetes, Cancer, Doencas Cardiacas, COVID-19, Descoberta Drogas, Saude Mental |
-| **Financas** | 30 | 850K+ | Risco Credito, Criptomoedas, Indicadores Economicos, Seguros, Bolsa Valores |
-| **Ciencia Computacao** | 29 | 1.1M+ | Deteccao Fraude, Classificacao Imagens, Seguranca Redes, Sistemas Recomendacao |
-| **Biologia** | 29 | 720K+ | Ecologia, Genomica, Microbioma, Estrutura Proteica, Identificacao Especies |
-| **Engenharia** | 27 | 680K+ | Consumo Energia, Manufatura, Ciencia Materiais, Robotica, Saude Estrutural |
-| **Agricultura** | 27 | 540K+ | Produtividade Agricola, Seguranca Alimentar, Irrigacao, Deteccao Pragas, Qualidade Solo |
-| **TOTAL** | **243** | **7.6M+** | **43 temas unicos** |
-
-### Exemplos de Datasets por Dominio
-
-| Dominio | Dataset Original | Dataset em Portugues | Fonte | Downloads |
-|---|---|---|---|---|
-| **Saude** | Diabetes | Diabetes | Kaggle | 12,620 |
-| **Saude** | Heart Disease | Doencas Cardiacas | Kaggle | 8,450 |
-| **Saude** | Cancer | Cancer | Kaggle | 6,230 |
-| **Saude** | COVID-19 | COVID-19 | Kaggle | 15,800 |
-| **Saude** | Mental Health | Saude Mental | HuggingFace | 3,450 |
-| **Saude** | Drug Discovery | Descoberta de Drogas | HuggingFace | 2,120 |
-| **Ambiente** | Climate Change | Mudanca Climatica | Kaggle | 5,230 |
-| **Ambiente** | Air Quality | Qualidade do Ar | Kaggle | 4,560 |
-| **Ambiente** | Deforestation | Desmatamento | HuggingFace | 3,890 |
-| **Ambiente** | Biodiversity | Biodiversidade | HuggingFace | 2,340 |
-| **Ambiente** | Ocean | Oceano | Kaggle | 1,890 |
-| **Ambiente** | Renewable Energy | Energia Renovavel | HuggingFace | 2,560 |
-| **Social** | Crime | Criminalidade | Kaggle | 4,120 |
-| **Social** | Education | Educacao | Kaggle | 3,890 |
-| **Social** | Employment | Emprego | HuggingFace | 2,560 |
-| **Social** | Inequality | Desigualdade | Kaggle | 3,210 |
-| **Social** | Migration | Migracao | HuggingFace | 2,890 |
-| **Social** | Poverty | Pobreza | Kaggle | 2,340 |
-| **Financas** | Credit Risk | Risco de Credito | Kaggle | 5,670 |
-| **Financas** | Cryptocurrency | Criptomoeda | Kaggle | 8,900 |
-| **Financas** | Stock Market | Bolsa de Valores | HuggingFace | 15,800 |
-| **Financas** | Insurance | Seguro | Kaggle | 3,450 |
-| **Financas** | Economic Indicators | Indicadores Economicos | HuggingFace | 2,780 |
-| **Computacao** | Fraud Detection | Deteccao de Fraude | Kaggle | 6,780 |
-| **Computacao** | Image Classification | Classificacao de Imagens | HuggingFace | 45,200 |
-| **Computacao** | Network Security | Seguranca de Redes | Kaggle | 3,890 |
-| **Computacao** | Recommendation System | Sistema de Recomendacao | HuggingFace | 5,670 |
-| **Biologia** | Genomics | Genomica | Kaggle | 3,120 |
-| **Biologia** | Protein Structure | Estrutura Proteica | HuggingFace | 2,560 |
-| **Biologia** | Ecology | Ecologia | Kaggle | 2,890 |
-| **Biologia** | Microbiome | Microbioma | HuggingFace | 1,890 |
-| **Biologia** | Species Identification | Identificacao de Especies | Kaggle | 2,340 |
-| **Engenharia** | Energy Consumption | Consumo de Energia | Kaggle | 4,560 |
-| **Engenharia** | Manufacturing | Manufatura | HuggingFace | 3,210 |
-| **Engenharia** | Material Science | Ciencia de Materiais | Kaggle | 2,890 |
-| **Engenharia** | Robotics | Robotica | HuggingFace | 3,450 |
-| **Engenharia** | Structural Health | Saude Estrutural | Kaggle | 2,120 |
-| **Agricultura** | Crop Yield | Produtividade Agricola | HuggingFace | 2,890 |
-| **Agricultura** | Food Security | Seguranca Alimentar | Kaggle | 2,340 |
-| **Agricultura** | Irrigation | Irrigacao | HuggingFace | 1,890 |
-| **Agricultura** | Pest Detection | Deteccao de Pragas | Kaggle | 2,560 |
-| **Agricultura** | Soil Quality | Qualidade do Solo | HuggingFace | 2,120 |
-
-### Acesso aos Dados
-
-| Recurso | URL |
+## 📖 Documentação
+
+| Documento | Para quem | Descrição |
+|---|---|---|
+| [`QUICKSTART.md`](QUICKSTART.md) | Iniciantes | Primeiros passos |
+| [`MANUAL.md`](MANUAL.md) | Todos | Uso completo da CLI, linguagem simples |
+| [`ARCHITECTURE.md`](ARCHITECTURE.md) | Desenvolvedores | Arquitetura técnica, camadas, fluxos |
+| [`CLAUDE.md`](CLAUDE.md) | Agentes | Manual de operação para agentes |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contribuidores | Como participar (SPEC → testes → PR) |
+| [`SECURITY.md`](SECURITY.md) | Segurança | Vulnerabilidades |
+| [`CORRIGENDUM.md`](CORRIGENDUM.md) | Histórico | Correções de alegações passadas |
+| [`CHANGELOG.md`](CHANGELOG.md) | Mudanças | Versões anteriores |
+
+Comandos úteis:
+
+| Comando | O que faz |
 |---|---|
-| **GitHub (codigo)** | `data/research_proposals.json` |
-| **GitHub (catalogo)** | `data/scientific_datasets_catalog.json` |
-| **HuggingFace** | `huggingface.co/datasets/marceloclaro/opencode-research` |
-| **Kaggle** | `kaggle.com/marceloclaro` |
-| **API** | `python3 -m marceloclaro.cli pesquisa "tema"` |
+| `python3 -m marceloclaro.cli` | Menu interativo principal |
+| `python3 -m marceloclaro.cli doctor` | Diagnóstico do sistema |
+| `python3 -m marceloclaro.cli helpdesk` | Ajuda guiada |
+| `python3 -m marceloclaro.cli pesquisa "tema"` | Pesquisa científica |
+| `python3 -m integrations.op_timing report` | Eficiência por operação |
+| `python3 -m integrations.opencode_cli --check` | Consistência da config |
 
-### Como Usar os Dados
+Dados da pesquisa (propostas e catálogo de datasets):
 
 ```bash
-# Carregar propostas de pesquisa
 python3 -c "
 import json
 with open('data/research_proposals.json') as f:
@@ -1455,146 +311,33 @@ for domain, info in data.items():
     print(f'{domain}: {len(info[\"proposals\"])} propostas')
 "
 
-# Carregar catalogo de datasets
 python3 -c "
 import json
 with open('data/scientific_datasets_catalog.json') as f:
     data = json.load(f)
 print(f'Total: {data[\"total_datasets\"]} datasets')
-for ds in data['datasets'][:5]:
-    print(f'  - {ds[\"name\"]} ({ds[\"domain\"]})')
 "
-
-# Buscar dataset especifico
-python3 -m marceloclaro.cli pesquisa "diabetes" --max-papers 5
 ```
 
----
-
-## Metricas e Relatorios
-
-```mermaid
-flowchart TD
-    subgraph COL[COLETA]
-        C1[Logs]
-        C2[Timestamps]
-        C3[Sucessos]
-        C4[Falhas]
-        C5[Feedback]
-    end
-
-    subgraph PR3[PROCESSAMENTO]
-        P1[Agregacao]
-        P2[Analise]
-        P3[Padroes]
-        P4[Anomalias]
-    end
-
-    subgraph VIS2[VISUALIZACAO]
-        V1[Graficos]
-        V2[Tabelas]
-        V3[Dashboards]
-        V4[Relatorios]
-    end
-
-    subgraph INS[INSIGHTS]
-        I1[Tendencias]
-        I2[Alertas]
-        I3[Recomendacoes]
-        I4[Acoes]
-    end
-
-    COL --> PR3 --> VIS2 --> INS
-
-    style COL fill:#e3f2fd,stroke:#1565c0
-    style PR3 fill:#f3e5f5,stroke:#7b1fa2
-    style VIS2 fill:#e8f5e9,stroke:#2e7d32
-    style INS fill:#fff3e0,stroke:#ef6c00
-```
+Links: [GitHub](https://github.com/MarceloClaro/opencode-ecosystem-core) · [HuggingFace Core](https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core) · [HuggingFace Research](https://huggingface.co/datasets/marceloclaro/opencode-research)
 
 ---
 
-## Comandos Uteis
-
-<div align="center">
-
-| Comando | O que faz | Nivel |
-|---|---|---|
-| `python3 -m marceloclaro.cli` | Menu interativo principal | Iniciante |
-| `python3 -m marceloclaro.cli doctor` | Diagnostico do sistema | Iniciante |
-| `python3 -m marceloclaro.cli helpdesk` | Ajuda guiada | Iniciante |
-| `python3 -m marceloclaro.cli status` | Status do ecossistema | Intermediario |
-| `python3 -m marceloclaro.cli pesquisa "tema"` | Pesquisa cientifica | Intermediario |
-| `python3 -m marceloclaro.cli apresentacao /caminho` | Gerar apresentacao | Avancado |
-
-</div>
-
----
-
-## Documentacao
-
-<div align="center">
-
-| Documento | Para quem | Descricao |
-|---|---|---|
-| [QUICKSTART.md](QUICKSTART.md) | Iniciantes | Primeiros passos |
-| [MANUAL.md](MANUAL.md) | Todos | Uso completo da CLI |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Desenvolvedores | Arquitetura tecnica |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribuidores | Como participar |
-| [SECURITY.md](SECURITY.md) | Seguranca | Vulnerabilidades |
-| [CORRIGENDUM.md](CORRIGENDUM.md) | Historico | Correcoes passadas |
-| [CHANGELOG.md](CHANGELOG.md) | Mudancas | Versoes anteriores |
-
-</div>
-
----
-
-## Links Importantes
-
-<div align="center">
-
-| Recurso | URL |
-|---|---|
-| GitHub | [github.com/MarceloClaro/opencode-ecosystem-core](https://github.com/MarceloClaro/opencode-ecosystem-core) |
-| HuggingFace Core | [huggingface.co/datasets/marceloclaro/opencode-ecosystem-core](https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core) |
-| HuggingFace Research | [huggingface.co/datasets/marceloclaro/opencode-research](https://huggingface.co/datasets/marceloclaro/opencode-research) |
-| Licenca MIT | [LICENSE](LICENSE) |
-
-</div>
-
----
-
-## Limites Importantes
-
-<div align="center">
-
-| Limite | Descricao |
-|---|---|
-| Nao e certificacao | Resultados sao observados no checkout, nao validados externamente |
-| Revisao humana | Agentes sao ferramentas, nao decisores autonomos |
-| Dominios sensiveis | Clinico, juridico e cientifico sao apoio computacional |
-| Servicos externos | MCPs e modelos podem falhar ou estar indisponiveis |
-| Metricas internas | Auto-score e interno, nao certificacao externa |
-
-</div>
-
----
-
-## Contribuindo
+## 🤝 Contribuindo
 
 ```mermaid
 flowchart LR
     FORK[Fork] --> BRANCH[Criar Branch]
-    BRANCH --> CODE[Escrever Codigo]
-    CODE --> TEST[Rodar Testes]
+    BRANCH --> SPEC[Apresentar SPEC]
+    SPEC --> TEST[Escrever Testes]
     TEST --> COMMIT[Commit]
     COMMIT --> PR[Pull Request]
-    PR --> REVIEW[Revisao]
+    PR --> REVIEW[Revisão]
     REVIEW --> MERGE[Merge]
 
     style FORK fill:#e3f2fd,stroke:#1565c0
     style BRANCH fill:#f3e5f5,stroke:#7b1fa2
-    style CODE fill:#e8f5e9,stroke:#2e7d32
+    style SPEC fill:#e8f5e9,stroke:#2e7d32
     style TEST fill:#fff3e0,stroke:#ef6c00
     style COMMIT fill:#fce4ec,stroke:#c62828
     style PR fill:#e0f7fa,stroke:#00838f
@@ -1602,11 +345,21 @@ flowchart LR
     style MERGE fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
 ```
 
+Validação da suíte:
+
+```bash
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pytest tests/ -q --tb=short --timeout=120
+.venv/bin/python -m marceloclaro.cli doctor
+```
+
+> Os números de validação são fotografia da execução local, **não certificação externa**. Recibo de release: `git describe --tags --exact-match HEAD` + checksums publicados.
+
 ---
 
-## Licenca
+## 📜 Licença
 
-Este projeto e licenciado sob a [Licenca MIT](LICENSE).
+Distribuído sob a [Licença MIT](LICENSE).
 
 ---
 
@@ -1615,9 +368,10 @@ Este projeto e licenciado sob a [Licenca MIT](LICENSE).
 ### Feito com carinho por [Marcelo Claro Laranjeira](https://github.com/MarceloClaro)
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarceloClaro)
+[![ORCID](https://img.shields.io/badge/ORCID-0000--0001--8996--2887-A6CE39?style=for-the-badge&logo=orcid&logoColor=white)](https://orcid.org/0000-0001-8996-2887)
 [![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![License MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-**[Voltar ao topo](#-opencode-ecosystem-core)**
+**[⬆ Voltar ao topo](#-opencode-ecosystem-core)**
 
 </div>
