@@ -16,6 +16,7 @@ import glob
 import hashlib
 import hmac
 import json
+import logging
 import os
 import re
 import time
@@ -23,6 +24,8 @@ from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional
 
 from evolution.audit_gate import EvolutionAuditGate, git_head_commit
+
+logger = logging.getLogger("evolution.cycles")
 
 EVOLUTION_DIR = os.path.dirname(os.path.abspath(__file__))
 # Isolamento de teste: respeita EVOLUTION_STATE_PATH se definida,
@@ -91,13 +94,35 @@ class EvolutionRegistry:
                            "verifier_identity", "evidence_trail", "audited", "legacy",
                            "merkle_root", "origin_commit", "state_merkle_root",
                            "prev_state_merkle_root"}
-                self.cycles = [
-                    EvolutionCycle(**{key: value for key, value in cycle.items() if key in allowed})
-                    for cycle in data.get("cycles", [])
-                    if isinstance(cycle, dict)
-                ]
+                raw_cycles = data.get("cycles", [])
             except (json.JSONDecodeError, TypeError, ValueError):
-                self.cycles = []
+                raw_cycles = []
+            # Tolerância por entrada (lição R581): UMA entrada malformada ou em
+            # formato antigo (id/titulo) não pode derrubar o registro inteiro —
+            # antes, TypeError aqui zerava o histórico e o próximo record() o
+            # sobrescrevia silenciosamente.
+            self.cycles = []
+            dropped = 0
+            for cycle in raw_cycles:
+                if not isinstance(cycle, dict):
+                    dropped += 1
+                    continue
+                try:
+                    self.cycles.append(
+                        EvolutionCycle(
+                            **{key: value for key, value in cycle.items()
+                               if key in allowed}
+                        )
+                    )
+                except (TypeError, ValueError):
+                    dropped += 1
+            if dropped:
+                logger.warning(
+                    "EvolutionRegistry: %d entrada(s) ignorada(s) (formato antigo ou inválida); %d carregadas",
+                    dropped, len(self.cycles),
+                )
+        else:
+            self.cycles = []
         self._recompute_stats()
 
     def _recompute_stats(self) -> None:

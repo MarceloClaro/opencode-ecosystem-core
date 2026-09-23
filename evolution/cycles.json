@@ -11512,35 +11512,260 @@
       "prev_state_merkle_root": ""
     },
     {
-      "id": "R550",
-      "titulo": "Trilogia CLI integrada (SPEC-970/971/972) + frente alfabetização (SPEC-935-R200..R211) + bundle v4.1-com-trilogia reprodutível",
-      "ciclos": {
-        "T1": {
-          "podcast": "podcast_R550.m4a (aac-lc, 44.1kHz, estéreo)",
-          "spec": "SPEC-972",
-          "executor": "agent_runners/nlm_executor.py",
-          "sintaxe_real_binario": "nlm download audio -o <arquivo> (v0.11.6) SEM --profile; retry/polling 8x20s"
-        },
-        "T2": {
-          "frente": "SPEC-935-R200..R211 alfabetização",
-          "n_arquivos": 35,
-          "commit": "356c381"
-        }
-      },
-      "bundle": {
-        "v4.1_com_trilogia": "opencode-ecosystem-core-pesquisador-universal-v4.1-com-trilogia-full-bundle.zip",
-        "gate_sha256_injp_zip7_7": true,
-        "oficial_frozen_intacto": true
-      },
-      "licao": "Caminho-negado (teórico) vs prefixo-real do zip — nunca validar sha256 de arquivo-dentro-zip usando caminho que não foi o usado no zip; usar unzip -l p/ descobrir o prefixo real (117 bytes composto) antes do gate"
+      "round_id": "R574",
+      "objective": "Redesign UX profissional do site do podcast Molambudos (Grid/Pages): nav sticky blur, Fraunces+Inter, hero em camadas, cards com hover, a11y/focus/reduced-motion, theme-color, favicon da capa.",
+      "changes": [
+        "commit 7546397",
+        "Redesign UX profissional do site do podcast Molamb..."
+      ],
+      "score": 9.0,
+      "lessons": [],
+      "timestamp": 1790187990.0764341,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "id": "R551",
-      "spec": "SPEC-973",
-      "titulo": "segmentação por capítulo físico do manuscrito Molambudos (## MEM-01..26 → 26 episódios reais)",
-      "tarefa": "T3 — trilogia v4.1-com-trilogia: 1 episódio/entrada de diário, teste r550 3/3, regressão 48/48, bundle rezipado sha8/8",
-      "data": "2026-09-22",
-      "score": 1.0
+      "round_id": "R575",
+      "objective": "Publicação das 16 figuras sépia autorizadas otimizadas (JPEG web progressivo ≤1000px q80, 4,27MB) em figuras/; hero com ponte levadiça; seção 'Figuras da obra' com 16 cards lazy.",
+      "changes": [
+        "commit 996acf9",
+        "Publicação das 16 figuras sépia autorizadas otimiz..."
+      ],
+      "score": 8.5,
+      "lessons": [],
+      "timestamp": 1790187990.1487339,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R576",
+      "objective": "Design cinematográfico: hero min-height 92vh, grão de filme SVG feTurbulence overlay z2000, scrollbar custom, stats (26Ep/616min/5Partes/1903-1994), 3 cenas parallax (smoke/tower/well) com citações Fraunces, masonry 3 col.",
+      "changes": [
+        "commit c05ab57",
+        "Design cinematográfico: hero min-height 92vh, grão..."
+      ],
+      "score": 9.0,
+      "lessons": [],
+      "timestamp": 1790187990.2075741,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R577",
+      "objective": "Curadoria: remoção de 8 figuras (img-000/chains/piazza/platform/smoke/staircase/tower/wheel) com 404 real; cena 'As Vozes' (smoke) removida; cena 'O Colônia' (tower) -> .cena gates (drawbridge). Galeria 8, cenas 2.",
+      "changes": [
+        "commit 90c1890",
+        "Curadoria: remoção de 8 figuras (img-000/chains/pi..."
+      ],
+      "score": 8.5,
+      "lessons": [],
+      "timestamp": 1790187990.249656,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R578",
+      "objective": "Renomeações semânticas ecoando Ep.4: 'Ponte levadiça - portões do Colônia' -> 'Molambudo'; 'Poço' -> 'Vala' (alt+legenda, revisão de referências cruzadas).",
+      "changes": [
+        "commit 3648e67",
+        "Renomeações semânticas ecoando Ep.4: 'Ponte levadi..."
+      ],
+      "score": 8.0,
+      "lessons": [],
+      "timestamp": 1790187990.3000998,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R579",
+      "objective": "Reparo de reprodução em mobile: preload='metadata' + type='audio/mp4' nos 3 players; rótulos de trailer viram botões play/pause acessíveis (tabindex/role/Enter/Espaço/.playing); cabeçalho do card clicável; GET+Range 206 nos áudios.",
+      "changes": [
+        "commit 7a46389",
+        "Reparo de reprodução em mobile: preload='metadata'..."
+      ],
+      "score": 8.5,
+      "lessons": [],
+      "timestamp": 1790187990.3642561,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R580",
+      "objective": "Fix de regressão crítica: ['num','h3','cap'] sem ponto -> querySelector null -> TypeError -> grid vazio (26 episódios sumiam); corrigido para ['.num','h3','.cap']; prova via stub de DOM em Node (26 appendChild, ep01 correto); 6/6 live.",
+      "changes": [
+        "commit cf69270",
+        "Fix de regressão crítica: ['num','h3','cap'] sem p..."
+      ],
+      "score": 9.5,
+      "lessons": [],
+      "timestamp": 1790187990.4331284,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R550",
+      "objective": "Trilogia CLI integrada (SPEC-970/971/972) + frente alfabetização (SPEC-935-R200..R211) + bundle v4.1-com-trilogia reprodutível",
+      "changes": [
+        "artefato legado convertido do formato id/titulo",
+        "{'id': 'R550', 'titulo': 'Trilogia CLI integrada (SPEC-970/971/972) + frente alfabetização (SPEC-935-R200..R211) + bundle v4.1-com-trilogia reprodutível', 'ciclos': {'T1': {'podcast': 'podcast_R550.m4a (aac-lc, 44.1kHz, estéreo)', 'spec': 'SPEC-972', 'executor': 'agent_runners/nlm_executor.py', 'sintaxe_real_binario': 'nlm download audio -o <arquivo> (v0.11.6) SEM --profile; retry/polling 8x20s'}, 'T2': {'frente': 'SPEC-935-R200..R211 alfabetização', 'n_arquivos': 35, 'commit': '356c381'}}, 'bun"
+      ],
+      "score": null,
+      "lessons": [],
+      "timestamp": 1790188008.5754375,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R551",
+      "objective": "segmentação por capítulo físico do manuscrito Molambudos (## MEM-01..26 → 26 episódios reais)",
+      "changes": [
+        "artefato legado convertido do formato id/titulo",
+        "{'id': 'R551', 'spec': 'SPEC-973', 'titulo': 'segmentação por capítulo físico do manuscrito Molambudos (## MEM-01..26 → 26 episódios reais)', 'tarefa': 'T3 — trilogia v4.1-com-trilogia: 1 episódio/entrada de diário, teste r550 3/3, regressão 48/48, bundle rezipado sha8/8', 'data': '2026-09-22', 'score': 1.0}"
+      ],
+      "score": null,
+      "lessons": [],
+      "timestamp": 1790188008.6227117,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R581",
+      "objective": "Ecossistema integrado/autônomo/metacognitivo — frente SPEC-974 (hooks, skills, MCP web-deploy, lições MetaBus, fix loader EvolutionRegistry)",
+      "changes": [
+        "SPEC-974 (guarda-chuva) criado com critérios de aceitação",
+        "MetaBus: 12 lições semânticas R569-R580 registradas (deploy×5, media×3, verification×4); total 50",
+        "Hooks .opencode/hooks/: credential_guard.sh, js_smoke_dom.sh+smoke_dom_stub.js, budget_guard.sh (fail-closed)",
+        "Plugin .opencode/plugins/deploy-guards.ts (gates tool.execute.before em edit/write de .html e bash git push/commit do site)",
+        "Skills: deploy-estatico-github-pages e smoke-test-dom-js (SKILL.md)",
+        "MCP web-deploy-mcp (.opencode/mcp/web_deploy_server.py): pages_status, probe_url (GET+Range), site_weight, validate_feed, assert_gone",
+        "opencode.json regenerado: 7 MCP servers (--check OK)",
+        "tests/test_r581_web_deploy_mcp.py: 12/12 verdes (hermético)",
+        "Fix critico EvolutionRegistry._load: entrada malformada não zera mais o registro (era 0 de 425 carregadas); regressão coberta",
+        "Provas físicas: smoke real 26 appendChild GRANTED; R580-negativo DENIED; budget 454 MiB GRANTED; credential GRANTED sem imprimir token"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Guard perto do erro (pre-edit/pre-push) é mais barato que pós-verificação",
+        "Stub de DOM espelhando o HTML real converte bug R580 em teste de regressão",
+        "Ciclo de registro exige loader tolerante: UMA entrada malformada zerava 425 ciclos e o record() seguinte sobrescrevia o histórico",
+        "Backup de evolution/cycles.json antes de qualquer teste de escrita do registry",
+        "Fail-closed exige exit code correto — pipe `| tail` pode mascarar status"
+      ],
+      "timestamp": 1790188008.7031217,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R582",
+      "objective": "Instrumentação de eficiência por operação (SPEC-975) + fix shape MCP CallToolResult + linha de base R582",
+      "changes": [
+        "SPEC-975 aprovada (recorder append-only, hooks, MCP, /efficiency)",
+        "integrations/op_timing.py: record()/report() com OP_TIMES_PATH por chamada",
+        "Hooks instrumentados (trap EXIT): smoke/budget/credential registram duração+ok",
+        "MCP call_tool instrumentado (duração + isError de cada tool)",
+        "Fix shape MCP: _ok retorna list[TextContent]; _mcp_error usa CallToolResult(isError=True) — validado no TRANSPORTE (tools/prova_protocolo_mcp.py)",
+        "Comando /efficiency no opencode.json (10 comandos, --check OK)",
+        "tests/test_r582_op_timing.py: 3 testes; total 20 verdes",
+        "Linha de base R582 medida: smoke/budget/credential (3 amostras cada)"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Resultado de MCP tool deve ser list[TextContent]/CallToolResult, nunca TextContent solto (iteração de NamedTuple corrompe content)",
+        "Teste unitário não prova transporte: validar com handshake JSON-RPC stdio real",
+        "Env de configuração lido no import é erro testável; ler por chamada",
+        "Eficiência se mede por operação, com n e p90; linha de base registrada"
+      ],
+      "timestamp": 1790194880.5486498,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

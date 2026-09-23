@@ -334,6 +334,17 @@ def _essential_agents() -> Dict[str, Any]:
     return agents
 
 
+def _load_opencode_models() -> Dict[str, Any]:
+    """Carrega os 71 modelos OpenCode (free + paid) registrados via catálogo."""
+    models_path = os.path.join(ROOT, "integrations", "opencode_provider_models.json")
+    try:
+        with open(models_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data if isinstance(data, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
 def build_config() -> Dict[str, Any]:
     """Monta o opencode.json completo do ecossistema."""
     agents = _essential_agents()
@@ -357,17 +368,26 @@ def build_config() -> Dict[str, Any]:
         "model": "litert-lm/litert-community/gemma-4-E2B-it-litert-lm",
         "permission": {"edit": "ask", "bash": "ask"},
         "provider": {
+            "opencode": {
+                "options": {
+                    "apiKey": "{env:OPENCODE_API_KEY}",
+                    "baseURL": "https://opencode.ai/zen/v1"
+                },
+                "models": _load_opencode_models()
+            },
             "opencode-go": {
                 "options": {
                     "apiKey": "{env:OPENCODE_API_KEY}",
                     "baseURL": "https://opencode.ai/zen/go/v1"
-                }
+                },
+                "models": _load_opencode_models()
             },
             "opencode-zen": {
                 "options": {
                     "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
                     "baseURL": "https://opencode.ai/zen/v1"
-                }
+                },
+                "models": _load_opencode_models()
             },
             "openai": {
                 "options": {
@@ -479,8 +499,17 @@ def build_config() -> Dict[str, Any]:
                 "command": ["python3", "scanners/scanners_mcp_server.py"],
                 "enabled": True,
             },
+            "web-deploy-mcp": {
+                "type": "local",
+                "command": ["python3", ".opencode/mcp/web_deploy_server.py"],
+                "enabled": True,
+            },
         },
         "command": {
+            "efficiency": {
+                "template": "python3 -m integrations.op_timing report $ARGUMENTS",
+                "description": "Relatório de eficiência por operação (mediana/p90, op_times.jsonl)",
+            },
             "diagnose": {
                 "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from scanners import diagnostic_pipeline; import json; print(json.dumps(diagnostic_pipeline.run(open('$ARGUMENTS').read() if '$ARGUMENTS' else 'ecosystem', deep=True), ensure_ascii=False, indent=2))\"",
                 "description": "Roda o pipeline de diagnóstico (5 scanners) sobre um arquivo",
