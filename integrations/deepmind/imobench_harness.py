@@ -153,6 +153,48 @@ class IMOBenchmarkHarness:
                 subcategory="Permutations",
                 source="IMO Shortlist 2020",
             ),
+            # ── R503: contra-prova (novos problemas estilo-IMO, respostas
+            #    verificáveis por enumeração determinística) ─────────────────
+            IMOProblem(
+                problem_id="imo-bench-algebra-002",
+                problem_text="Find the smallest integer n > 1 such that 2^n > n^2.",
+                short_answer="5",
+                category="Algebra",
+                subcategory="Inequality",
+                source="IMO-style (R503, derivado)",
+            ),
+            IMOProblem(
+                problem_id="imo-bench-number-theory-002",
+                problem_text="Find all primes p <= 20 such that p^2 divides 2^p + 1.",
+                short_answer="{3}",
+                category="Number Theory",
+                subcategory="Modular",
+                source="IMO-style (R503, derivado)",
+            ),
+            IMOProblem(
+                problem_id="imo-bench-number-theory-003",
+                problem_text="Find the largest exponent e such that 3^e divides 2023! (the factorial of 2023).",
+                short_answer="1006",
+                category="Number Theory",
+                subcategory="Legendre",
+                source="IMO-style (R503, derivado)",
+            ),
+            IMOProblem(
+                problem_id="imo-bench-combinatorics-002",
+                problem_text="Let n = 5. Find the number of permutations of (1, 2, 3, 4, 5) having exactly two local maxima (a local maximum is larger than all existing neighbors; endpoints count).",
+                short_answer="88",
+                category="Combinatorics",
+                subcategory="Permutations",
+                source="IMO-style (R503, derivado)",
+            ),
+            IMOProblem(
+                problem_id="imo-bench-geometry-001",
+                problem_text="Find the number of diagonals in a convex polygon with 2023 sides.",
+                short_answer="2043230",
+                category="Geometry",
+                subcategory="Polygon",
+                source="IMO-style (R503, derivado)",
+            ),
         ]
 
     def run_benchmark(self, solver_fn: Optional[Callable[[IMOProblem], str]] = None,

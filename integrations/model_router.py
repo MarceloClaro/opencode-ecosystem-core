@@ -422,6 +422,10 @@ class ModelRouter:
             prefer_free=prefer_free,
         )
 
+        # R500: prefer_free + tarefa acadêmica/científica → curadoria R499
+        if prefer_free and task_type in ("academic", "math", "reasoning", "writing"):
+            return self.route_free(task_type)
+
         if candidates:
             provider_id, model_id = candidates[0]
             alternatives = candidates[1:]
@@ -466,6 +470,34 @@ class ModelRouter:
         self._publish_route_event(result)
         return result
 
+    # ── R500: roteamento free automático (curadoria R499) ───────────────
+    def route_free(
+        self,
+        task_type: str,
+    ) -> RouteResult:
+        """Roteia automaticamente para o melhor modelo free por task_type
+        usando a curadoria empírica do benchmark R499."""
+        from integrations.free_model_catalog import best_free_model, FREE_BENCHMARK, list_free_models
+        model_id = best_free_model(task_type)
+        entry = next((m for m in FREE_BENCHMARK if m["model_id"] == model_id), None)
+        provider = entry["provider"] if entry else "opencode"
+        alternatives = [
+            (m["model_id"], m["provider"])
+            for m in FREE_BENCHMARK
+            if m["model_id"] != model_id and m.get("accessible", True)
+        ][:3]
+        return RouteResult(
+            task_type=task_type,
+            provider_id=provider,
+            model_id=model_id,
+            profile=self.profiles.get(task_type, ModelProfile(task_type=task_type, description="free fallback")),
+            reason=f"Curadoria R499: melhor modelo free para '{task_type}' "
+                   f"(score {entry['score'] if entry else '?'})",
+            alternatives=[(p, mid) for mid, p in alternatives],
+            authenticated=True,
+            mock_mode=False,
+        )
+
     def route_and_complete(
         self,
         prompt: str,
@@ -503,7 +535,7 @@ class ModelRouter:
         )
 
     def list_all_models(self) -> List[Dict[str, Any]]:
-        """Lista todos os modelos de todos os providers."""
+        """Lista todos os modelos de todos os providers (inclui catálogo free R500)."""
         models = []
         if self._go_provider:
             models.extend(self._go_provider.list_models())
@@ -515,6 +547,9 @@ class ModelRouter:
             models.extend(self._oa_provider.list_models())
         if self._runai_provider:
             models.extend(self._runai_provider.list_models())
+        # R500: catálogo free curado (benchmark R499) — inclui big-pickle
+        from integrations.free_model_catalog import list_free_models
+        models.extend(list_free_models())
         return models
 
     def list_profiles(self) -> List[Dict[str, Any]]:

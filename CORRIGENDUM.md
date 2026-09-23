@@ -187,6 +187,36 @@ que ele as verificou erraram cinco vezes no idioma que menos domina.
 
 ---
 
+## 10. "Resultados observados" de extração simulada no manuscrito R522 (SPEC-935-R522)
+
+**Alegação (corrigida em 17/09/2026):** versões v1.1/v1.2 do manuscrito de submissão para a
+Educação Por Escrito (Chamada 799) reportaram como "resultados observados" um fluxograma
+PRISMA (n=1.042 → 15), frequências temáticas (66,7%; 60,0%; 53,3%; 46,7%; 33,3%; 26,7%; 20,0%)
+e Figuras 2-3 (radar e gap map) cujos arquivos-fonte (`popular_extracao_R522.py`,
+`gerar_figuras_R522.py`, `rayyan_export_R522.csv`) identificam a extração como **simulada**.
+
+**Por que é um overclaim:** a triagem Rayyan não foi executada de forma real e auditável em
+exportações das bases de dados; os números e gráficos foram gerados por script com fins de
+protótipo de layout, mas apresentados como evidência empírica observada. Isso viola a política
+anti-overclaim (R110) e o princípio de que resultados científicos só podem ser reportados com
+proveniência rastreável (exportações reais, histórico de deduplicação/triagem, matriz validada).
+
+**Correção aplicada:** gerada a **v2.0 PROTOCOLO**
+(`manuscrito_porescrito799_brasil_comparado_R522_v20_protocolo_ABNT.docx`), que: declara na capa
+"RASCUNHO ACADÊMICO COM PENDÊNCIAS CRÍTICAS — NÃO SUBMETER"; converte todos os achados simulados
+em campos `[A CONFIRMAR APÓS TRIAGEM REAL E AUDITÁVEL]`; exclui tabelas/figuras de extração
+simulada; separa proposições analíticas (Discussão como "estrutura analítica a ser testada") de
+evidência empírica; e mantém referências apenas no núcleo verificado/pendente de auditoria.
+Os artefatos com dados simulados foram movidos para `manuscrito_porescrito799_R522/_simulado_nao_submeter/`
+e não devem ser usados em submissão.
+
+**Leitura correta:** nenhum número de seleção, frequência ou gap pode ser citado como resultado
+observado até que a revisão seja executada de forma real (exportações rastreáveis das bases,
+triagem duplo-cega, extração validada e registro OSF) — somente então os achados podem retornar
+ao manuscrito, com denominadores explícitos e matriz de extração verificável.
+
+---
+
 ## Como este documento é mantido
 
 - `MarceloClaroOrchestrator.doctor()` (`marceloclaro/doctor.py`) verifica

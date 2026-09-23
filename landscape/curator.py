@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
-"""landscape-curator — curadoria da paisagem de agentes externos (R482).
+"""landscape-curator — curadoria da paisagem de agentes externos (R482; multi-coleção R521).
 
-Consome o manifest curado ``landscape/manifest.json`` (20 agentes auto-contidos
-da coleção 500-AI-Agents-Projects, MIT), cruza cada caso de uso com o catálogo
-de agent cards do Core (agents/catalog/*.md) por afinidade lexical e produz um
-relatório auditável (JSON + Markdown).
+Consome manifests curados (``landscape/manifest.json`` para a coleção
+500-AI-Agents-Projects/MIT e ``landscape/manifest_awesome_llm_apps.json`` para
+awesome-llm-apps/Apache-2.0), cruza cada caso de uso com o catálogo de agent
+cards do Core (agents/catalog/*.md) por afinidade lexical e produz um relatório
+auditável (JSON + Markdown) parametrizado pela coleção.
+
+Cada entrada pode declarar suas próprias ``keywords`` (R521); na ausência,
+fallback para ``CASE_KEYWORDS`` (R482) — compatibilidade regressiva.
 
 Regras:
 - Nenhum código-fonte externo é importado (apenas metadados curados).
@@ -117,8 +121,9 @@ class LandscapeCurator:
         return data
 
     # ---------- cruzamento ----------
-    def _score_case(self, case_id: str, card: dict) -> int:
-        keywords = CASE_KEYWORDS.get(case_id, [])
+    def _score_case(self, case: dict, card: dict) -> int:
+        # Keywords da própria entrada (R521) com fallback para CASE_KEYWORDS (R482).
+        keywords = case.get("keywords") or CASE_KEYWORDS.get(case["id"], [])
         name = card["name"].lower()
         tags = card["tags"].lower()
         description = card["description"].lower()
@@ -136,7 +141,7 @@ class LandscapeCurator:
         scored = [
             {"core_agent": c["name"], "score": s}
             for c in self.agent_cards
-            if (s := self._score_case(case["id"], c)) > 0
+            if (s := self._score_case(case, c)) > 0
         ]
         scored.sort(key=lambda x: (-x["score"], x["core_agent"]))
         return scored[:3]
@@ -144,8 +149,33 @@ class LandscapeCurator:
     def build_report(self) -> Dict[str, Any]:
         cases: List[Dict[str, Any]] = []
         unmatched: List[Dict[str, Any]] = []
+        observatory: List[Dict[str, Any]] = []
         matched = 0
         for agent in self.manifest["agents"]:
+            if agent.get("adversarial"):
+                # Entradas com alegações não validadas externamente NÃO recebem
+                # sugestões core (afinidade lexical ruidosa); vão para o
+                # Observatório com veredito explícito (lição R474/R142).
+                entry = {
+                    "case_id": agent["id"],
+                    "title": agent["title"],
+                    "industry": agent["industry"],
+                    "framework": agent["framework"],
+                    "license": agent["license"],
+                    "suggestions": [],
+                    "adversarial": True,
+                    "verdict": "não-adotar/observar",
+                }
+                cases.append(entry)
+                unmatched.append({"case_id": agent["id"],
+                                  "title": agent["title"]})
+                observatory.append({
+                    "case_id": agent["id"],
+                    "title": agent["title"],
+                    "verdict": entry["verdict"],
+                    "note": agent.get("note", ""),
+                })
+                continue
             suggestions = self.match_case(agent)
             entry = {
                 "case_id": agent["id"],
@@ -174,6 +204,7 @@ class LandscapeCurator:
             },
             "cases": cases,
             "unmatched": unmatched,
+            "observatory": observatory,
             "disclaimer": "Relatório interno de curadoria; não constitui certificação externa nem promessa de integração.",
             "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         }
@@ -182,7 +213,7 @@ class LandscapeCurator:
     # ---------- render ----------
     def render_markdown(self, report: dict) -> str:
         lines = [
-            "# Paisagem de agentes — 500-AI-Agents-Projects (R482)",
+            "# Paisagem de agentes — " + report["collection"],
             "",
             f"Coleção: **{report['collection']}** ({report['license']})",
             f"Fonte: {report['source_repo']} (upstream: {report['upstream']})",
@@ -208,6 +239,17 @@ class LandscapeCurator:
                 f"{case['framework']} | {sugg} |"
             )
         lines.append("")
+        if report["observatory"]:
+            lines.append("## Observatório (veredito explícito)")
+            lines.append("")
+            lines.append("Entradas com alegações não validadas externamente não "
+                         "recebem sugestões core (não-adotar/observar):")
+            lines.append("")
+            lines.extend(
+                f"- **{o['case_id']}** — {o['title']} — _veredito_: {o['verdict']}."
+                for o in report["observatory"]
+            )
+            lines.append("")
         if report["unmatched"]:
             lines.append("## Sem afinidade declarada (não inventados)")
             lines.append("")
@@ -220,10 +262,11 @@ class LandscapeCurator:
         lines.append(f"_Gerado em {report['timestamp_utc']} (sem rede, sem código de terceiros)._")
         return "\n".join(lines) + "\n"
 
-    def write_report(self, out_dir: str | None = None) -> pathlib.Path:
+    def write_report(self, out_dir: str | None = None,
+                     filename: str = "LANDSCAPE_REPORT.md") -> pathlib.Path:
         out = pathlib.Path(out_dir or self.root)
         out.mkdir(parents=True, exist_ok=True)
         report = self.build_report()
-        md_path = out / "LANDSCAPE_REPORT.md"
+        md_path = out / filename
         md_path.write_text(self.render_markdown(report), encoding="utf-8")
         return md_path

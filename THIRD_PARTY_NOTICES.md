@@ -18,6 +18,7 @@ análise de licença prévia; este arquivo é o registro canônico.
 | tig | rsrohan99/tig | **sem licença declarada** (license: null) | Executor alternativo multi-provedor (M7) | Invocação externa opcional; **vedada redistribuição**, inclusão em bundle ou venda de código derivado sem autorização |
 | openclaw-qa | ythx-101 | conteúdo **CC BY-SA 4.0** (share-alike) | Observatório de campo (M8) | **Nenhuma incorporação de conteúdo**; citar com atribuição; derivados sob mesma licença |
 | 500-AI-Agents-Projects | MarceloClaro (fork); ashishpatel26/500-AI-Agents-Projects | MIT | **Referência de paisagem** (R482): manifest curado com 20 agentes auto-contidos e LANDSCAPE_REPORT; **espelhos arquiteturais** (item 2B): `examples/agents/` 00+20 | **Nenhum código-fonte copiado**; apenas metadados curados (metadados não são obra derivada) e documentação de padrões; sem promessa de integração |
+| awesome-llm-apps | MarceloClaro (fork); Shubhamsaboo/awesome-llm-apps | Apache-2.0 | **Referência de paisagem** (R521): manifest curado com 15 templates representativos (agent skills, RAG, multi-agente/trust, MCP, otimização, always-on, meta-loop) e LANDSCAPE_REPORT_AWESOME_LLM_APPS; extensão multi-coleção do landscape-curator | **Nenhum código-fonte copiado**; apenas metadados curados; entradas com modelos não validados no upstream (advisor-orchestrator-worker) ficam no **Observatório** com veredito não-adotar/observar (anti-overclaim R142); sem promessa de "100+ integrados" |
 
 ## Referências epistemológicas da R483 (Scanner Reverso)
 
