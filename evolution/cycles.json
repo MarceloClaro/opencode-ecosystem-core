@@ -11766,6 +11766,93 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R583",
+      "objective": "Integração MiroFish-Offline por composição + simulação social determinística + banca editorial (SPEC-976, R583)",
+      "changes": [
+        "mirofish/social/: contratos (OasisAgentProfile, SimulationParameters) + gerador de perfis + motor de rounds + report markdown + banca editorial",
+        "integrations/mirofish_offline.py: driver fail-closed (R473) — nunca copia código AGPL, exige serviço externo real",
+        "marceloclaro/orchestrator.py: orch.mirofish_simulate() lazy + reflexão MetaBus",
+        "tests/test_r583_mirofish_offline.py: 23 testes (R-976.1..R-976.11)",
+        ".opencode/skills/mirofish-offline/SKILL.md: pipeline simulação + banca editorial"
+      ],
+      "score": 8.7,
+      "lessons": [
+        "Licença AGPL do MiroFish-Offline exige integração por composição (driver fail-closed), nunca cópia em repo MIT — padrão R473 validado.",
+        "Portar contratos (dataclasses) em stdlib é viável e determinístico; com seed, ações/opiniões reproduzem (não timestamps decorativos).",
+        "Câmara de eco correta referencia grupo de MESMA postura (polariza); média global converge — TDD capturou (2 falhas RED→GREEN).",
+        "Banca editorial simulada por critério replica padrões reais: rigoroso penaliza, entusiasta aprova; REVISÕES MAIORES coerente com limitações.",
+        "Anti-overclaim preservado: relatório e banca declaram simulação, não revisão por pares real."
+      ],
+      "timestamp": 1790202318.6992707,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R584",
+      "objective": "Banca editorial ampliada R-976.12/13: peso do texto nas decisões, 12 critérios, 12 revisores, instituições Qualis A1 (rótulos), veredito ponderado",
+      "changes": [
+        "mirofish/social/banca.py: text_signals() regex por critério; adjust_bias_by_signal(); 12 critérios; n_members=12 default; _INSTITUTIONS rótulos Qualis A1; banca_weighted_score() e recommendation_from_score(); summarize_banca com text_signals/strengths/weaknesses",
+        "marceloclaro/orchestrator.py: orch.banca_simulate() pipeline completo + reflexão MetaBus",
+        "mirofish/social/__init__.py: exports R-976.12/13",
+        "tests/test_r584_banca_ampliada.py: 11 testes (sinais, bias modulado, 12 critérios, rótulos, veredito ponderado, orquestrador)",
+        "specs/SPEC-976: R-976.12 e R-976.13 documentados"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Bug real capturado por TDD: text_signals lowercava texto mas padrões tinham maiúsculas (PRISMA/JBI/DOI) — nunca casavam; lowerar padrões resolveu (RED→GREEN).",
+        "Peso do texto muda o veredito de forma plausível: redação 0.11 derruba nota (−0.28); evidências/metodologia fortes (0.83–1.0) sustentam; sentimento subiu de −0.089 para +0.122.",
+        "Instituições como rótulos de simulação (Qualis A1) exigem disclaimer explícito anti-overclaim — nunca parecer real.",
+        "Reuso do motor determinístico existente é suficiente: banca = perfis especialistas + sinais textuais, sem novo motor."
+      ],
+      "timestamp": 1790204637.4353433,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R585",
+      "objective": "R-976.14: perfis editoriais por periódico na banca editorial",
+      "changes": [
+        "mirofish/social/editorial_profiles.py: EDITORIAL_PROFILES (11 revistas), JOURNAL_ALIASES, get_profile, merge_weights, profile_summary",
+        "mirofish/social/banca.py: _INSTITUTIONS derivados de JOURNAL_KEYS; resolve_institution_name; BancaProfileGenerator(target_institution) com effective_weights; summarize_banca(editorial_profile)",
+        "marceloclaro/orchestrator.py: banca_simulate(target_institution) + target_profile",
+        "tests/test_r585_banca_editorial_profiles.py: 11 testes",
+        "specs/SPEC-976: R-976.14 documentada; skill mirofish-offline atualizada"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Fontes de referência devem ter prefixo https:// para auditoria",
+        "Aliases (BJET, RBE, C&E) evitam fratura entre nome canônico e uso real",
+        "Perfis editoriais recalibram a nota ponderada sem alterar sentimento individual — diferenciação entre periódicos vem dos pesos"
+      ],
+      "timestamp": 1790205304.1163352,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

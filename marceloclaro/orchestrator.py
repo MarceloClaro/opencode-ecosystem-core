@@ -2420,6 +2420,149 @@ class MarceloClaroOrchestrator:
         return verdict
 
     # ------------------------------------------------------------------
+    # MIROFISH SOCIAL — SIMULAÇÃO DE OPINIÃO PÚBLICA (SPEC-976)
+    # ------------------------------------------------------------------
+    def mirofish_simulate(
+        self,
+        doc_text: str,
+        n_agents: int = 20,
+        rounds: int = 24,
+        seed: int = 42,
+        requirement: str = "",
+    ) -> Dict[str, Any]:
+        """
+        Pipeline completo de simulação social determinística (SPEC-976):
+        perfis → simulação → relatório → reflexão no MetaBus.
+
+        Não usa LLM externo nem Neo4j: 100% stdlib, persistência em .mci_state/.
+        Para o serviço AGPL externo completo, use integrations.mirofish_offline.
+        """
+        from mirofish.social import (
+            EventConfig,
+            PlatformConfig,
+            SimulationParameters,
+            SimulationProfileGenerator,
+            SocialReportGenerator,
+            SocialSimulationEngine,
+        )
+        from mirofish.social.contracts import TimeSimulationConfig
+
+        sim_id = f"sim_{seed}_{n_agents}_{rounds}_{abs(hash(doc_text[:64])) % 10000}"
+        generator = SimulationProfileGenerator(doc_text, n_agents=n_agents, seed=seed)
+        profiles = generator.generate()
+        topics = generator.extract_topics()
+
+        params = SimulationParameters(
+            simulation_id=sim_id,
+            simulation_requirement=requirement or "reação pública ao documento",
+            event_config=EventConfig(hot_topics=topics),
+            twitter_config=PlatformConfig(platform="twitter", echo_chamber_strength=0.5),
+            time_config=TimeSimulationConfig(total_simulation_hours=rounds, minutes_per_round=60),
+        )
+
+        engine = SocialSimulationEngine(profiles, params, seed=seed)
+        result = engine.run(rounds=rounds)
+        saved_path = engine.save(result)
+        summary = SocialReportGenerator(result)
+        markdown = summary.generate()
+
+        from mirofish.social.report import _summarize
+        resumo = _summarize(result)
+        resumo["report_md"] = markdown
+        resumo["state_path"] = saved_path
+
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"simulação social MiroFish: {requirement[:80] or doc_text[:80]}",
+            reflection=(
+                f"Simulação {sim_id}: {resumo['agents']} agentes, "
+                f"{resumo['rounds']} rounds, sentimento final "
+                f"{resumo['final_sentiment']:+.3f}, {resumo['post_count']} posts."
+            ),
+            score=max(0.0, min(1.0, (resumo["final_sentiment"] + 1) / 2)),
+        )
+        return resumo
+
+    def banca_simulate(
+        self,
+        doc_text: str,
+        n_members: int = 12,
+        rounds: int = 12,
+        seed: int = 42,
+        requirement: str = "",
+        target_institution: str = "",
+    ) -> Dict[str, Any]:
+        """
+        Simulação de BANCA EDITORIAL ampliada (SPEC-976 R-976.11..R-976.14):
+        revisores PhD por critério → sinais textuais modulam biases →
+        simulação determinística → veredito ponderado + recomendação.
+        `target_institution` (R-976.14) escolhe o perfil editorial de um
+        periódico real (normas públicas) para calibração da banca.
+
+        ANTI-OVERCLAIM: é simulação de banca, não revisão real; instituições
+        são rótulos de simulação. Não constitui validação externa.
+        """
+        from mirofish.social import (
+            BancaProfileGenerator,
+            EventConfig,
+            PlatformConfig,
+            SimulationParameters,
+            SocialSimulationEngine,
+            TimeSimulationConfig,
+            profile_summary,
+            summarize_banca,
+        )
+
+        sim_id = f"banca_{seed}_{n_members}_{abs(hash(doc_text[:64])) % 10000}"
+        generator = BancaProfileGenerator(
+            doc_text,
+            n_members=n_members,
+            seed=seed,
+            target_institution=target_institution or None,
+        )
+        members = generator.generate()
+        signals = generator.signals()
+        editorial_profile = generator.editorial_profile
+
+        params = SimulationParameters(
+            simulation_id=sim_id,
+            simulation_requirement=requirement or "avaliar manuscrito de pesquisa",
+            event_config=EventConfig(hot_topics=list(signals.keys())),
+            twitter_config=PlatformConfig(platform="twitter", echo_chamber_strength=0.4),
+            time_config=TimeSimulationConfig(total_simulation_hours=rounds, minutes_per_round=60),
+        )
+
+        engine = SocialSimulationEngine(
+            [m.profile for m in members], params, seed=seed
+        )
+        result = engine.run(rounds=rounds)
+        saved_path = engine.save(result)
+        resumo = summarize_banca(
+            members,
+            result.final_opinions,
+            weights=generator.effective_weights,
+            signals=signals,
+            editorial_profile=editorial_profile,
+        )
+        resumo["simulation_id"] = sim_id
+        resumo["state_path"] = saved_path
+        if target_institution:
+            resumo["target_profile"] = profile_summary(target_institution)
+
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context=f"banca editorial simulada: {requirement[:80] or doc_text[:80]}",
+            reflection=(
+                f"Banca {sim_id}: {len(members)} revisores, sentimento "
+                f"{resumo['final_sentiment']:+.3f}, veredito "
+                f"{resumo['verdict']}, score {resumo['weighted_score']}."
+                + (f" Alvo: {resumo.get('editorial_profile', {}).get('journal', target_institution)}." if target_institution else "")
+            ),
+            score=max(0.0, min(1.0, (resumo["final_sentiment"] + 1) / 2)),
+        )
+        return resumo
+
+    # ------------------------------------------------------------------
     # TEORIA DOS JOGOS — 38 RACIOCÍNIOS (agent-forum portado)
     # ------------------------------------------------------------------
     def meta_reason(self, topic: str) -> Dict[str, Any]:
