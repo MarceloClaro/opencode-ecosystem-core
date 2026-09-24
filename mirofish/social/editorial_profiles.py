@@ -276,6 +276,60 @@ EDITORIAL_PROFILES: Dict[str, EditorialProfile] = {
         },
         source="https://fcc.org.br/fcc-noticia/eae-a1",
     ),
+    "Journal of Dentistry": EditorialProfile(
+        journal="Journal of Dentistry (Elsevier)",
+        scope=(
+            "Periódico internacional líder em Odontologia Restauradora; influenciar "
+            "prática clínica, pesquisa, indústria e policy-maker. Pesquisa "
+            "odontológica translacional e clínica; artigos de revisão com perguntas "
+            "estruturadas (quadro PCC), síntese de evidências e implicações clínicas "
+            "proporcionais; destaque para a criação e o uso responsável de "
+            "ferramentas de IA em odontologia."
+        ),
+        priority=(
+            "Revisão/scoping review com protocolo registrado, pergunta estruturada "
+            "por população-conceito-contexto (PCC), critérios de elegibilidade "
+            "explícitos, seleção dupla independente, extração padronizada, síntese "
+            "descritiva (contagens/proporções) e 'Clinical significance' no resumo; "
+            "anti-overclaim: novidade verificada na literatura e implicações "
+            "proporcionais à evidência."
+        ),
+        reference_style="Numerado com DOI ([1] A.A. Surname, [Title], [Journal] [volume] ([year]) [pages]. [DOI])",
+        length_limit=(
+            "Review: máx. 10 páginas impressas ≈ 33 páginas processadas (incl. "
+            "figuras/tabelas); Original Research 6 pp ≈ 20 pp; Short Comm 2 pp ≈ 7 pp; "
+            "Digital Dentistry Section segue o mesmo padrão (6/10/2 pp)"
+        ),
+        review_flow=(
+            "Editorial triage + double anonymized ≥2 revisores (Elsevier); "
+            "checklist estrutural do template (abstract com Clinical significance, "
+            "protocolo/registro, fluxo PRISMA, declarações obrigatórias); "
+            "timeline oficial: 1ª decisão ~5 dias (desk), ~29 dias pós-review, "
+            "~74 dias até aceite; apelação única (Elsevier Appeal Policy); "
+            "mudança de autoria NÃO considerada após submissão"
+        ),
+        special_gates=[
+            "Abstract estruturado com Background/Objective/Methods/Results/Conclusion/Clinical significance",
+            "Protocolo registrado declarado SEM implicar registro inexistente (anti-overclaim)",
+            "Declaração obrigatória de uso de IA generativa em seção própria ANTES das referências (ferramenta, propósito, revisão humana; revisores/editores proibidos de submeter manuscrito a IA)",
+            "Declarações obrigatórias: CRediT, funding, conflito de interesses, ética (aprovação com data/número + ICMJE p/ ensaios), disponibilidade de dados",
+            "Estratégia de busca completa disponibilizada em material suplementar (reprodutibilidade)",
+            "NÃO aceita Case Reports (removidos do sistema se submetidos)",
+            "CONSORT checklist + fluxograma para RCTs; resumo <500 palavras em registro de ensaio NÃO conta como publicação prévia",
+        ],
+        weights={
+            "evidências": 1.8, "metodologia": 1.7, "reprodutibilidade": 1.7,
+            "ética": 1.5, "estatística": 1.4, "clareza": 1.3,
+            "coerência": 1.2, "relevância": 1.2, "impacto": 1.1,
+            "originalidade": 1.1, "redação": 1.0, "teoria": 0.9,
+        },
+        source=(
+            "https://www.sciencedirect.com/journal/journal-of-dentistry/publish/guide-for-authors "
+            "+ https://www.sciencedirect.com/journal/journal-of-dentistry "
+            "+ https://docs.google.com/document/d/1yKkypArCLZefsADlvxqvFWgRWONwGRVnw34gHlILInQ/edit "
+            "(template oficial Review Article, compartilhado pelo autor) — ver EDITAL_JOD_RIGOR_EDITORIAL.md"
+        ),
+    ),
     "Educação (PUCRS)": EditorialProfile(
         journal="Educação (PUCRS)",
         scope=(
@@ -325,6 +379,9 @@ JOURNAL_ALIASES: Dict[str, str] = {
     "educacao pucrs": "Educação (PUCRS)",
     "estudos em avaliacao": "Estudos em Avaliação Educacional",
     "estudos em avaliação": "Estudos em Avaliação Educacional",
+    "jod": "Journal of Dentistry",
+    "journal of dentistry": "Journal of Dentistry",
+    "dentistry": "Journal of Dentistry",
 }
 
 

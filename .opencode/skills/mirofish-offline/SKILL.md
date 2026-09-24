@@ -109,21 +109,40 @@ PY
   para calibrar perfil; nunca parecer real) — ver `disclaimer` no resumo.
 - `n_members>12` repete critérios com posturas distintas (mais granularidade).
 
-## Perfis editoriais por periódico (R-976.14)
+## Perfis editoriais por periódico (R-976.14 + R-976.15 + R-976.16)
 
 `mirofish/social/editorial_profiles.py::EDITORIAL_PROFILES` registra perfis
-baseados em **normas públicas** de 11 revistas Qualis A1/Q1 (RBE/ANPEd,
-Educação & Sociedade/CEDES, Cadernos de Pesquisa/FCC, Práxis Educacional/UESB,
-Práxis Educativa/UEPG, Estudos em Avaliação Educacional/FCC, Educação/PUCRS,
-Computers & Education/Elsevier, BJET/Wiley, Education and Information
-Technologies/Springer, International Review of Education/UNESCO UIL): escopo,
+baseados em **normas públicas** de 12 revistas Qualis A1/Q1 e internacionais
+(RBE/ANPEd, Educação & Sociedade/CEDES, Cadernos de Pesquisa/FCC, Práxis
+Educacional/UESB, Práxis Educativa/UEPG, Estudos em Avaliação
+Educacional/FCC, Educação/PUCRS, Computers & Education/Elsevier, BJET/Wiley,
+Education and Information Technologies/Springer, International Review of
+Education/UNESCO UIL, **Journal of Dentistry/Elsevier**): escopo,
 prioridade (perfil do melhor artigo), estilo de referência, limite de tamanho,
 fluxo de revisão, gates especiais (ex.: Educação & Sociedade e Computers &
 Education **não aceitam IA generativa como autora**; disclosure obrigatória na
-Springer) e pesos por critério.
+Springer; Journal of Dentistry exige **abstract com Clinical significance** +
+protocolo registrado + declaração de IA generativa + estratégia de busca em
+suplemento) e pesos por critério.
+
+O perfil **Journal of Dentistry (JOD)** baseia-se no template oficial Review
+Article da Elsevier (fonte: Google Docs compartilhado pelo autor) **reforçado
+pelo guide-for-authors oficial** (ScienceDirect, acesso 24/09/2026 — ver
+`mirofish/social/EDITAL_JOD_RIGOR_EDITORIAL.md`): escopo líder em Odontologia
+Restauradora; limites por tipo (**Review máx. 10 pp impressas ≈ 33 pp
+processadas**; Original 6 pp; Short Comm 2 pp); **NÃO aceita Case Reports**;
+timeline 1ª decisão ~5 dias (desk) / ~29 dias pós-review / ~74 dias até
+aceite; apelação única; mudança de autoria proibida pós-submissão; declaração
+de IA generativa em seção própria ANTES das referências (revisores/editores
+proibidos de usar IA com manuscrito); ICMJE/CONSORT para ensaios; resumo <500
+palavras em registro de ensaio não conta como pré-publicação. Útil para
+ensaiar **scoping reviews** com pergunta PCC, seleção dupla, síntese descritiva
+e referências numeradas com DOI (weights: evidências 1.8, metodologia 1.7,
+reprodutibilidade 1.7, ética 1.5, estatística 1.4, clareza 1.3, teoria 0.9).
 
 Escolha o periódico-alvo para recalibrar a banca (aliases aceitos: `RBE`,
-`E&S`, `C&E`, `BJET`, `EIT`, `IRE`, `Cadernos`...):
+`E&S`, `C&E`, `BJET`, `EIT`, `IRE`, `Cadernos`, `JOD`, `journal of
+dentistry`...):
 
 ```bash
 python3 - <<'PY'

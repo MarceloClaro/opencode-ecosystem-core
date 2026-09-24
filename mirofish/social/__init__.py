@@ -20,6 +20,7 @@ from .report import SocialReportGenerator, _summarize
 from .editorial_profiles import (
     EDITORIAL_PROFILES,
     EditorialProfile,
+    JOURNAL_ALIASES,
     JOURNAL_KEYS,
     get_profile,
     merge_weights,
@@ -48,6 +49,7 @@ __all__ = [
     "EDITORIAL_PROFILES",
     "EditorialProfile",
     "EventConfig",
+    "JOURNAL_ALIASES",
     "JOURNAL_KEYS",
     "OasisAgentProfile",
     "PlatformConfig",

@@ -11853,6 +11853,61 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R586",
+      "objective": "R-976.15 — Perfil editorial Journal of Dentistry (Elsevier) na banca simulada (SPEC-976)",
+      "changes": [
+        "mirofish/social/editorial_profiles.py: EDITORIAL_PROFILES[Journal of Dentistry] (Elsevier) baseado no template oficial Review Article (Google Docs 1yKkyp...); escopo odontológico translacional/clínico+IA; prioridade revisão com protocolo registrado/PCC/seleção dupla/extração padronizada/síntese descritiva/Clinical significance; reference_style numerado com DOI; 5 special_gates (abstract estruturado, protocolo sem implicar registro, declaração IA generativa, declarações CRediT/funding/conflito/ética/dados, estratégia completa em suplemento); weights evidê1.8/met1.7/reprod1.7/ét1.5/est1.4/clar1.3/teoria0.9",
+        "editorial_profiles.py: aliases jod / journal of dentistry / dentistry",
+        "mirofish/social/__init__.py: exporta JOURNAL_ALIASES no pacote público",
+        "specs/SPEC-976: requisito R-976.15 documentado",
+        "tests/test_r586_banca_journal_dentistry.py: 11 testes verdes"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Template oficial de review article (Clinical significance, PCC, PRISMA, declarações obrigatórias) mapeia diretamente os 12 critérios da banca; perfil JOD rebaixa peso de teoria (0.9) e eleva evidências/metodologia/reprodutibilidade/ética, refletindo periódico translacional",
+        "Anti-overclaim R110: rótulo de simulação continua válido; fonte é template público compartilhado pelo autor, não parecer real"
+      ],
+      "timestamp": 1790237436.245434,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R587",
+      "objective": "R-976.16 — Rigor do edital Journal of Dentistry (Elsevier) e periódicos odontológicos semelhantes aplicado ao perfil JOD (SPEC-976)",
+      "changes": [
+        "mirofish/social/EDITAL_JOD_RIGOR_EDITORIAL.md: síntese do guide-for-authors oficial (ScienceDirect, 24/09/2026) e similares (JDR/IADR-Sage, Clinical Oral Investigations/Springer, JCP/Wiley, J Periodontol/Wiley); métricas IF 5.8/CiteScore 7.8/APC USD 3920; limites por tipo (Review 10 pp impressas ≈ 33 processadas; Original 6 pp; Short Comm 2 pp; Digital Dentistry 6/10/2), NÃO aceita Case Reports, timeline 5/29/74 dias, apelação única, autoria travada pós-submissão, IA generativa antes das referências, ICMJE/CONSORT",
+        "mirofish/social/editorial_profiles.py: perfil JOD atualizado com rigor real do edital — length_limit com 10/33 pp; review_flow com timeline 5/29/74 dias e proibição de mudança de autoria; special_gates de 5 para 7 (+ NÃO Case Reports; + CONSORT/ICMJE e resumo <500 palavras em registro não conta como pré-publicação); scope com Odontologia Restauradora líder internacional; source com guia oficial ScienceDirect",
+        "tests/test_r586_banca_journal_dentistry.py: 11 -> 14 testes (+ gates do edital oficial, + length_limit 10/33, + review_flow timeline 5/29/74)",
+        "specs/SPEC-976: requisito R-976.16 documentado",
+        "regressão R583+R584+R585+R586: 59 passed + 12 subtests"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Edital real de revista-translacional (JOD/Elsevier) adiciona gates que o template puro não cobre: rejeição de Case Reports, timeline editorial, proibição de mudança de autoria pós-submissão, e posicionamento da declaração de IA (antes das referências, com proibição também para revisores)",
+        "ScienceDirect bloqueia scraping direto (403/400); a extração via websearch indexado + template compartilhado pelo autor produziu dados suficientes, mas com lacuna documentada (Highlights/Graphical abstract/figuras devem ser lidos no guia completo antes de submissão real)",
+        "Anti-overclaim R110 mantido: perfil JOD é rótulo de simulação calibrado por normas públicas — nunca parecer editorial real"
+      ],
+      "timestamp": 1790240704.4750974,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }
