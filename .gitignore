@@ -132,6 +132,8 @@ patches/
 ref.json
 opencode.json.tui-migration.bak
 *.bak
+*_bak
+*_bak/
 
 # --- Conteúdo pessoal / projetos externos ---
 PROJETO 1/
@@ -204,3 +206,19 @@ deepseek-harness.zip
 .harness
 LiteRT-LM-main.zip
 *.Zone.Identifier
+
+# --- Conteúdo volumoso / gerado / sensível (organização 2026-09-25) ---
+# Produção de podcast com áudio/pacotes editoriais (3.7 GB) — nunca versionar
+research/producao_real/
+
+# Bundles de distribuição gerados (conteúdo = o próprio repo)
+opencode-ecosystem-core-pesquisador-universal-v4.1*/
+opencode-ecosystem-core-pesquisador-universal-v4.1-*.zip
+
+# Zips duplicados de diretórios versionados
+medicos.zip
+manuscrito_porescrito799_R522_v20_PROTOCOLO.zip
+
+# Material da pesquisa R522 que não deve ir a público
+manuscrito_porescrito799_R522/_simulado_nao_submeter/
+manuscrito_porescrito799_R522/PACOTE_DEPOSITO_OSF_ZENODO_R522_v49/SENSIVEL_NAO_DEPOSITAR_PUBLICO/
