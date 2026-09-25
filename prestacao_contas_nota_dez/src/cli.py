@@ -22,6 +22,7 @@ import json
 import sys
 from pathlib import Path
 
+from .assistente import gerar_sugestoes, gerar_sugestoes_arquivo
 from .auditor import auditar_diligencia, calcular_score
 from .diligencia import parse_diligencia
 from .executor import gerar_controle_csv, gerar_minuta_arquivo
@@ -71,14 +72,36 @@ def _cmd_execute(args: argparse.Namespace) -> int:
     out_dir = audit_json.parent
 
     minuta_path = out_dir / f"minuta_{Path(doc['fonte']).stem}.md"
-    gerar_minuta_arquivo(doc, checklist, minuta_path)
+    sugestoes = None
+    if args.aplicar:
+        sugestoes = gerar_sugestoes(checklist)
+    gerar_minuta_arquivo(doc, checklist, minuta_path, sugestoes=sugestoes)
     controle_path = out_dir / f"controle_{Path(doc['fonte']).stem}.csv"
     gerar_controle_csv(checklist, controle_path)
     relatorio_path = out_dir / f"relatorio_{Path(doc['fonte']).stem}.md"
     gerar_relatorio_arquivo(doc, checklist, score, relatorio_path)
     print(json.dumps(
         {"score": score, "minuta": str(minuta_path), "controle": str(controle_path),
-         "relatorio": str(relatorio_path)},
+         "relatorio": str(relatorio_path),
+         "sugestoes_aplicadas": bool(sugestoes)},
+        ensure_ascii=False, indent=2))
+    return 0
+
+
+def _cmd_sugerir(args: argparse.Namespace) -> int:
+    audit_json = Path(args.json)
+    if not audit_json.exists():
+        print(f"ERRO: JSON de auditoria não encontrado: {audit_json}", file=sys.stderr)
+        return 1
+    payload = json.loads(audit_json.read_text(encoding="utf-8"))
+    doc = payload["doc"]
+    checklist = payload["checklist"]
+    sugestoes = gerar_sugestoes(checklist)
+    out_dir = audit_json.parent
+    destino = out_dir / f"sugestoes_{Path(doc['fonte']).stem}.md"
+    gerar_sugestoes_arquivo(doc, sugestoes, destino)
+    print(json.dumps(
+        {"sugestoes": len(sugestoes), "arquivo": str(destino)},
         ensure_ascii=False, indent=2))
     return 0
 
@@ -96,7 +119,13 @@ def main(argv=None) -> int:
 
     p_exec = sub.add_parser("execute", help="Gera minuta + controle a partir do audit JSON")
     p_exec.add_argument("json")
+    p_exec.add_argument("--aplicar", action="store_true",
+                        help="Preenche células da minuta com sugestões marcadas [SUGESTÃO – REVISAR]")
     p_exec.set_defaults(func=_cmd_execute)
+
+    p_sug = sub.add_parser("sugerir", help="Gera sugestões de preenchimento (para revisão humana)")
+    p_sug.add_argument("json")
+    p_sug.set_defaults(func=_cmd_sugerir)
 
     args = parser.parse_args(argv)
     return args.func(args)

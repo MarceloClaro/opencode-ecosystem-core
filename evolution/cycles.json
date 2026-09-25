@@ -12117,7 +12117,11 @@
         "src/relatorio.py: relatório de conferência (identificação/escopo, síntese, cobertura e limitações, achados, providências) com anti-overclaim explícito",
         "src/cli.py: comando execute também gera relatorio_<nome>.md",
         "src/conciliar.py: conciliação aritmética (escopo financeiro) importada e validada (exemplo convergiu: 24.500,00 + 12,34 - 2.450,00 - 3,50 = 22.058,84 = saldo banco)",
-        "tests/test_r597b_melhorias_plugin.py: 8 testes (verificação base, estados, minuta administrativa, relatório anti-overclaim) — suíte 16/16"
+        "tests/test_r597b_melhorias_plugin.py: 8 testes (verificação base, estados, minuta administrativa, relatório anti-overclaim) — suíte 16/16",
+        "src/assistente.py: preenchimento assistido — classificação por tema (17 categorias), localização de trecho no manual-2019-ocr por página (PDF p. 21/26/27/28/30/31/33), proposta de providência + fundamento",
+        "src/executor.py: gerar_minuta aceita sugestoes e aplica células com marcador [SUGESTÃO – REVISAR] (nunca definitivo)",
+        "src/cli.py: comando 'sugerir' (gera sugestoes_<nome>.md) e flag --aplicar no execute",
+        "tests/test_r597c_assistente.py: 10 testes (classificação, excertos, relatório anti-overclaim, minuta assistida) — suíte 26/26"
       ],
       "score": 100.0,
       "lessons": [
@@ -12128,9 +12132,12 @@
         "Cache OCR em /tmp evita re-OCR (15 páginas = ~2min; cache corta para segundos)",
         "JSONs de auditoria legados sem estado_documental/estado_tramitacao: relatório e executor usam .get() com fallback para retrocompatibilidade",
         "strftime locale en gera 'September' — datas por extenso em pt-BR usam mapa fixo de meses",
-        "O plugin Codex reforçou o modelo de estados (documental × tramitação) e o formato de resposta tabelado; integração enriquece sem duplicar heurísticas"
+        "O plugin Codex reforçou o modelo de estados (documental × tramitação) e o formato de resposta tabelado; integração enriquece sem duplicar heurísticas",
+        "Ordem das regex de classificação importa: 'MAPA COMPARATIVO' deve vir antes de 'PREÇO'; 'VISITA' antes de 'PLANO DE APLICAÇÃO' (textos reais contêm ambos)",
+        "Sugestões entram na minuta só com marcador explícito [SUGESTÃO – REVISAR]; itens sem proposta permanecem com célula em branco",
+        "Distribuição real da diligência 2016: 20 propostas de preço, 14 atesto, 12 comprovação de pagamento, 6 documento fiscal — manual p. 26-31 concentra os fundamentos"
       ],
-      "timestamp": 1790359623.7914832,
+      "timestamp": 1790360191.373953,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",

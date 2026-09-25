@@ -30,14 +30,36 @@ def _data_por_extenso() -> str:
     return f"{hoje.day} de {_MESES_PT[hoje.month - 1]} de {hoje.year}"
 
 
-def gerar_minuta(doc: Dict[str, Any], checklist: List[Dict[str, Any]]) -> str:
+def _aplicar_sugestao(item: Dict[str, Any], sugestoes_by_id: Dict[str, Dict[str, Any]],
+                      campo: str) -> str:
+    """Retorna texto com sugestão marcada: '[SUGESTÃO – REVISAR] ...'"""
+    if not sugestoes_by_id:
+        return ""
+    sugestao = sugestoes_by_id.get(item["id"])
+    if not sugestao:
+        return ""
+    base = sugestao.get(campo, "")
+    if not base:
+        return ""
+    return f"[SUGESTÃO – REVISAR] {base}"
+
+
+def gerar_minuta(
+    doc: Dict[str, Any],
+    checklist: List[Dict[str, Any]],
+    sugestoes: List[Dict[str, Any]] | None = None,
+) -> str:
     """Monta minuta de ofício-resposta em markdown (formato administrativo).
 
     Inspirada no modelo editorial de resposta do plugin
     ``contas-escolares-airam-veras``: cabeçalho formal, tabela
     Item | Exigência | Resposta | Anexo | Pendência e rodapé de assinatura.
     É MINUTA — o preenchimento final é responsabilidade humana.
+
+    Se ``sugestoes`` for fornecido, as células Resposta/Anexo recebem o texto
+    proposto com o marcador ``[SUGESTÃO – REVISAR]`` (nunca como definitivo).
     """
+    sugestoes_by_id = {s["id"]: s for s in (sugestoes or [])}
     cab = doc.get("cabecalho", {})
     unidade = cab.get("unidade_executora", "[UNIDADE EXECUTORA]")
     municipio = cab.get("municipio", "[MUNICÍPIO]")
@@ -73,8 +95,8 @@ def gerar_minuta(doc: Dict[str, Any], checklist: List[Dict[str, Any]]) -> str:
         exigencia = item["demanda"]
         if item["pagina"]:
             exigencia += f" (pag. {item['pagina']})"
-        resposta = item.get("providencia") or "________________________"
-        anexo = item.get("documento") or "________________________"
+        resposta = item.get("providencia") or _aplicar_sugestao(item, sugestoes_by_id, "providencia_sugerida") or "________________________"
+        anexo = item.get("documento") or _aplicar_sugestao(item, sugestoes_by_id, "fundamento_sugerido") or "________________________"
         pendencia = "nenhuma no escopo examinado" if item["status"] == "atendido" else "a regularizar"
         linhas.append(
             f"| {item['id']} | {exigencia} | {resposta} | {anexo} | {pendencia} |"
@@ -140,6 +162,11 @@ def gerar_controle_csv(checklist: List[Dict[str, Any]], destino: Path) -> None:
             )
 
 
-def gerar_minuta_arquivo(doc: Dict[str, Any], checklist: List[Dict[str, Any]], destino: Path) -> None:
+def gerar_minuta_arquivo(
+    doc: Dict[str, Any],
+    checklist: List[Dict[str, Any]],
+    destino: Path,
+    sugestoes: List[Dict[str, Any]] | None = None,
+) -> None:
     destino.parent.mkdir(parents=True, exist_ok=True)
-    destino.write_text(gerar_minuta(doc, checklist), encoding="utf-8")
+    destino.write_text(gerar_minuta(doc, checklist, sugestoes=sugestoes), encoding="utf-8")

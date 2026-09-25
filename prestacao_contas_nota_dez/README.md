@@ -19,8 +19,14 @@ python3 -m prestacao_contas_nota_dez.src.cli audit \
     "/mnt/c/Users/marce/OneDrive/Documentos/img20260924_14524484.pdf" \
     --out exemplos/
 
-# 2) Gerar minuta + controle a partir da auditoria
+# 2) Gerar minuta + controle + relatório a partir da auditoria
 python3 -m prestacao_contas_nota_dez.src.cli execute exemplos/audit_img20260924_14524484.pdf.json
+
+# 2b) Preenchimento assistido: sugestões para REVISÃO HUMANA (tema + manual + fundamento)
+python3 -m prestacao_contas_nota_dez.src.cli sugerir exemplos/audit_img20260924_14524484.pdf.json
+
+# 2c) Aplicar sugestões na minuta com marcador [SUGESTÃO – REVISAR]
+python3 -m prestacao_contas_nota_dez.src.cli execute exemplos/audit_img20260924_14524484.pdf.json --aplicar
 
 # 3) Conciliação aritmética de escopo financeiro (ferramenta auxiliar)
 python3 -m prestacao_contas_nota_dez.src.conciliar --help
@@ -83,6 +89,7 @@ prestacao_contas_nota_dez/
 │   ├── auditor.py       # checklist + score interno + estados documental/tramitação
 │   ├── executor.py      # minuta administrativa + CSV de controle
 │   ├── verificacao.py   # checklist base C01–C40 (references/checklist-base.csv)
+│   ├── assistente.py    # preenchimento assistido: tema + manual + fundamento sugerido
 │   ├── relatorio.py     # relatório de conferência anti-overclaim
 │   ├── conciliar.py     # conciliação aritmética (apoiada)
 │   └── cli.py           # CLI audit / execute

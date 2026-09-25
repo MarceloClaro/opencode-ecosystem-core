@@ -24,6 +24,12 @@ Plugin no diretório `prestacao_contas_nota_dez/` (SPEC R597).
    → gera `minuta_<nome>.md` (tabela Item | Exigência | Resposta | Anexo | Pendência),
    `controle_<nome>.csv` (estados documental/tramitação) e `relatorio_<nome>.md`
    (conferência com anti-overclaim).
+4. **Preenchimento assistido (revisão humana obrigatória)**:
+   `python3 -m prestacao_contas_nota_dez.src.cli sugerir exemplos/audit_<nome>.json`
+   → gera `sugestoes_<nome>.md` (tema, página do manual, providência e fundamento
+   propostos). Para aplicar nas células da minuta com marcador `[SUGESTÃO – REVISAR]`:
+   `... execute ... --aplicar`. Nenhuma sugestão é definitiva; confira o trecho do
+   manual na imagem do PDF e a norma do exercício antes de adotar.
 4. **Verificação base**: `verificacao.carregar_checklist_base()` lê as 40 verificações
    C01–C40 (grupos: Identificação, Governança, Plano, Contratação, Fiscal, Financeiro,
    Tributos, Bonificação, Cooperação, Patrimônio, Obras, Prazo, Integridade,
