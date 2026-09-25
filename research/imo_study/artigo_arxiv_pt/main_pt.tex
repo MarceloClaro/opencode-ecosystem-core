@@ -1,0 +1,92 @@
+% ============================================================================
+% main_pt.tex — Artigo acadêmico em português para submissão arXiv
+% OpenCode Ecosystem Core — Ciclos evolutivos R497–R505
+% Compilação: pdflatex main_pt && bibtex main_pt && pdflatex main_pt && pdflatex main_pt
+% ============================================================================
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds}
+\usepackage[round,numbers]{natbib}
+\bibliographystyle{abbrvnat}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\emergencystretch=1.5em
+
+\definecolor{cororo}{RGB}{46,116,181}
+\definecolor{corverde}{RGB}{34,139,34}
+\definecolor{corcinza}{RGB}{120,120,120}
+\definecolor{coramarelo}{RGB}{238,180,34}
+\definecolor{corvermelho}{RGB}{214,40,40}
+
+\title{\bfseries Modelos de Linguagem Gratuitos em Matemática Olímpica:\\ Orquestração Multiagente, Validação Cruzada e Raio-X de Arquitetura\\
+\large (OpenCode Ecosystem Core, ciclos evolutivos R497--R505)}
+
+\author{Marcelo Claro\\
+\small OpenCode Ecosystem Core --- Pesquisa Autônoma Auditável\\
+\small Preparação para submissão arXiv (não revisado por pares)}
+\date{setembro de 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent Estudamos o raciocínio matemático de modelos de linguagem (LLMs)
+\emph{gratuitos e reais} em problemas canônicos de olimpíadas matemáticas
+internacionais (IMO), sob orquestração multiagente auditável. Nos ciclos
+evolutivos R497--R505 do OpenCode Ecosystem Core, nós (i) curamos um
+panorama acadêmico (25 fontes, incluindo \texttt{deepmind/acme});
+(ii) construímos um pipeline de diagnóstico profundo (\emph{deep}) com
+contrato de execução real; (iii) substituímos um arsenal IMO com vazamento
+(\emph{leak}) por um resolvedor determinístico anti-vazamento;
+(iv) avaliamos cinco modelos gratuitos (mimo-v2.5, big-pickle, nemotron-3,
+muse-spark-1.2/1.3) sob condições brutas (C0), com contexto (C1) e com
+scaffold de raciocínio MASWOS de 16 estágios (C2); e (v) implementamos
+roteamento automático tarefa$\rightarrow$modelo guiado pela curadoria
+empírica (R500). Após reinício do host, executamos uma validação cruzada
+com 9 problemas $\times$ 3 modelos. Resultados: o scaffold MASWOS elevou a
+acurácia no primeiro trial de 0\% a 100\% entre os modelos que resolveram;
+o ranking de problema único do R499 (mimo 0,987 $>$ big-pickle 0,923 $>$
+nemotron 0,709) \emph{não} sobrevive à validação cruzada --- as taxas
+corrigidas são: mimo 4/9 (0,44, IC 95\% [0,14; 0,79]), big-pickle 1/9
+(0,11, [0,00; 0,48]) e nemotron 1/9 (0,11, [0,00; 0,48]). Testes McNemar
+pareados são não-significativos com $n=9$; o $\kappa$ de Cohen entre mimo e
+big-pickle é $-0,216$ (eles resolvem tipos de problemas diferentes). Uma
+hipótese previamente aventada sobre o estado do host para explicar as saídas
+vazias do big-pickle é \emph{refutada}: após reinício, o modelo ainda falha
+(1/9). Os modelos muse-spark apresentam ``raciocínio falso'' (\emph{fake
+reasoning}): anunciam verificação mas não entregam resposta. Reportamos
+intervalos de confiança, testes pareados, estatísticas de concordância,
+distribuições de latência por modelo, fluxos completos e raio-x de
+arquitetura (camadas C0--C5). Todos os 15 DOIs referenciados foram validados
+ativamente (HTTP 200 via \texttt{doi.org}). Implementamos também a Camada
+de Governança Epistemológica (R504) --- Evidence Guard, Gates Feynman
+(FEG-01..07), Avaliação Offline de Política v3 (decide$\rightarrow$observe,
+Brier/ECE, drift, IC95 bootstrap, readiness sem auto-ativação) e Ledger de
+Auditoria SHA-256 ---, bem como a Ponte Hermes (R505) como contratos
+opcionais de interoperabilidade sem runtime externo.
+\end{abstract}
+
+\noindent\textbf{Palavras-chave:} modelos de linguagem; raciocínio
+matemático; sistemas multiagente; validação cruzada; benchmarking; IMO;
+quantificação de incerteza; governança epistemológica.
+
+\input{00-introducao-pt}
+\input{01-metodologia-pt}
+\input{02-resultados-pt}
+\input{03-discussao-pt}
+\input{04-conclusao-pt}
+
+\bibliography{refs_pt}
+\end{document}

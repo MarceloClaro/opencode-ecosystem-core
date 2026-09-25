@@ -1,0 +1,37 @@
+% ============================================================================
+% fig-flow-valcross.tex — Fluxograma da validação cruzada 9×3 (Figura 4)
+% ============================================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=0.8cm and 1.2cm,
+  caixa/.style={rectangle, draw=cororo, thick, rounded corners=2pt,
+                fill=cororo!8, minimum width=3.0cm, minimum height=0.9cm,
+                align=center, font=\footnotesize},
+  decisao/.style={diamond, draw=coramarelo, thick, fill=coramarelo!10,
+                  aspect=2, align=center, font=\footnotesize},
+  seta/.style={-{Stealth[length=3mm]}, thick, color=corcinza}
+]
+  \node[caixa] (corpus) {Corpus IMO\\ 9 problemas (\S2.2)};
+  \node[decisao, right=of corpus] (modelo) {modelo\\ mimo / big-pickle /\\ nemotron};
+  \node[caixa, below=of modelo] (c2) {Condição C2\\ scaffold MASWOS (16 estágios)};
+  \node[caixa, below=of c2] (cli) {CLI real\\ \texttt{opencode run}};
+  \node[decisao, below=of cli] (fmt) {saída\\ conforme?};
+  \node[caixa, below=of fmt] (ext) {Extração de resposta\\ (regex por problema)};
+  \node[caixa, below=of ext] (estat) {Estatística\\ acc + IC Clopper-Pearson\\ McNemar pareado\\ Cohen's $\kappa$ \\ latência};
+
+  \draw[seta] (corpus) -- (modelo);
+  \draw[seta] (modelo) -- (c2);
+  \draw[seta] (c2) -- (cli);
+  \draw[seta] (cli) -- (fmt);
+  \draw[seta] (fmt) -- node[right, font=\tiny]{sim} (ext);
+  \draw[seta, color=corvermelho] (fmt) -- ++(2.6,0) node[right, font=\tiny, align=left, color=corvermelho]{não: vazio/timeout\\ $\rightarrow$ incorreto};
+  \draw[seta] (ext) -- (estat);
+  \draw[seta, dashed] (estat) -- ++(-3.2,-1.2) node[left, font=\tiny]{repete p/ cada modelo};
+\end{tikzpicture}
+\caption{Fluxograma da validação cruzada 9 $\times$ 3 (R503): cada modelo
+percorre os 9 problemas na condição C2; respostas são extraídas por regex por
+problema e pontuadas; estatísticas de confiança/incerteza são calculadas
+sobre a matriz completa.}
+\label{fig:flow}
+\end{figure}

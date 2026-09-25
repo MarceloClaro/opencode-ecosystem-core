@@ -1,0 +1,33 @@
+% ============================================================================
+% fig-flux-roteamento.tex — Fluxograma do roteamento R500 (Figura 2)
+% ============================================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=0.85cm and 1.3cm,
+  caixa/.style={rectangle, draw=cororo, thick, rounded corners=2pt,
+                fill=cororo!8, minimum width=3.1cm, minimum height=0.9cm,
+                align=center, font=\footnotesize},
+  decisao/.style={diamond, draw=coramarelo, thick, fill=coramarelo!10,
+                  aspect=2, align=center, font=\footnotesize},
+  seta/.style={-{Stealth[length=3mm]}, thick, color=corcinza}
+]
+  \node[caixa] (tarefa) {Tarefa acadêmica\\ \texttt{route(task\_type, prefer\_free=True)}};
+  \node[decisao, right=of tarefa] (dec) {task\_type\\ em \{academic, math,\\ reasoning, writing\}?};
+  \node[caixa, below=of dec] (cur) {Curadoria R499\\ \texttt{free\_model\_catalog.py}};
+  \node[caixa, below=of cur] (mimo) {melhor score\\ \texttt{mimo-v2.5-free} (0,987)};
+  \node[caixa, right=of cur] (alt) {fallbacks: big-pickle (0,923)\\ nemotron (0,709)\\ muse-1.3 (0,324)};
+  \node[caixa, below=of mimo] (rota) {\texttt{RouteResult} com\\ \texttt{reason}=``Curadoria R499''};
+
+  \draw[seta] (tarefa) -- (dec);
+  \draw[seta] (dec) -- node[right, font=\tiny]{sim} (cur);
+  \draw[seta] (cur) -- (mimo);
+  \draw[seta] (mimo) -- (rota);
+  \draw[seta, dashed, color=corvermelho] (dec) -- ++(2.7,0) node[right, font=\tiny, color=corvermelho]{não: perfis clássicos inalterados};
+  \draw[seta, dashed] (cur.east) -- (alt.west);
+\end{tikzpicture}
+\caption{Fluxograma do roteamento automático R500: a curadoria empírica do
+R499 (score composto) decide o modelo free por tipo de tarefa, com cadeia de
+\textit{fallback} explícita e \texttt{reason} auditável.}
+\label{fig:flux-roteamento}
+\end{figure}

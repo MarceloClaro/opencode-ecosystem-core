@@ -1,0 +1,46 @@
+% 04-conclusao-pt.tex — Conclusão
+\section{Conclusão}
+\label{sec:conclusion}
+
+Apresentamos um pipeline multiagente auditável e em evolução para avaliação
+de LLMs \emph{gratuitos e reais} em matemática genuína de olimpíadas,
+desenvolvido nos ciclos R497--R505 com uma contra-prova de validação cruzada
+(R503) executada após reinício do host.
+
+\emph{Respostas à pergunta de pesquisa.}
+\begin{enumerate}
+\item \emph{Modelos gratuitos podem ser orquestrados e scaffolddados}: o
+scaffold MASWOS de 16 estágios (C2) foi decisivo --- de 0\% a 100\% de
+sucesso no primeiro trial entre os resolveres --- enquanto condições brutas
+e com apenas contexto falharam com saídas vazias. O orquestrador, o
+roteamento (R500) e a verificação determinística (R499) formam um stack
+reproduzível e auditável.
+\item \emph{Honestidade de benchmarking importa}: o ranking de problema
+único (mimo 0,98 $>$ big-pickle 0,92 $>$ nemotron 0,71) \emph{não}
+sobrevive à validação cruzada. Taxas corrigidas são mimo 0,22 (IC 95\%
+[0,03; 0,60]), big-pickle 0,11 [0,00; 0,48], nemotron 0,22 [0,03; 0,60];
+McNemar pareados não-significativos; $\kappa$ mimo$\times$big-pickle 0,609
+(concordância substancial --- ambos acertam o mesmo problema). Toda inferência
+é reportada com intervalos de confiança, testes pareados e distribuições de
+atraso, e limitações são explícitas.
+\item \emph{Variabilidade entre execuções é real}: mimo variou de 0,44 para
+0,22 entre duas corridas independentes --- reforçando que benchmarks de LLMs
+exigem múltiplos trials por célula.
+\item \emph{Artefatos metodológicos foram expostos e corrigidos}: o vazamento
+do arsenal, a sensibilidade de serialização e o ``raciocínio falso'' dos
+muse-spark; a hipótese do estado do host para big-pickle foi refutada.
+\item \emph{Governança epistemológica funciona}: o Brier score de 0,711 e
+ECE de 0,756 provam que o Trust Engine anterior estava mal calibrado; a
+Avaliação Offline v3 (R504) bloqueia readiness corretamente; o Ledger
+SHA-256 assegura integridade auditável.
+\end{enumerate}
+
+\emph{Trabalhos futuros.} Repetições com $n \gg 9$ problemas e múltiplos
+trials por célula; ganchos de controle de temperatura; divisão treino/
+teste entre desenvolvimento e avaliação; replicação independente por
+terceiros; e integração da camada de verificação determinística como gate
+do Trust Engine para delegação automática.
+
+\textbf{Disponibilidade.} Todas as especificações (SPEC-935-R497..R505),
+arquivos de teste, dados brutos, estatísticas e figuras estão armazenados
+no repositório do OpenCode Ecosystem Core para auditoria e reprodução.

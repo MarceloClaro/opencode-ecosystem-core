@@ -1,0 +1,73 @@
+% ============================================================================
+% 01-metodologia.tex — Methods (module 2/5) com fluxograma da validação cruzada
+% ============================================================================
+\section{Methods}
+\label{sec:methods}
+
+\subsection{System under test}
+\label{sec:system}
+All experiments ran inside the OpenCode Ecosystem Core, a multi-agent
+ecosystem with 206 catalog agents, an A2A Blackboard, a metacognitive bus
+(MetaBus), a Trust Engine and a strict SDD/TDD policy. The orchestrator
+(MarceloClaro) executes the cycle Perceive$\rightarrow$Specify$\rightarrow$
+Delegate$\rightarrow$Execute$\rightarrow$Verify$\rightarrow$Reflect. External
+LLMs are invoked through the \texttt{opencode run} CLI as real subprocesses;
+no simulation or mocked completion is used (Section~\ref{sec:anti-overclaim}).
+
+\subsection{Corpus}
+\label{sec:corpus}
+We use a canonical IMO-AnswerBench sample (R442, 4 problems) plus five
+IMO-style auxiliary problems with deterministically verifiable answers
+(R503), totalling $n=9$: algebra-001 (quotient floor, answer 3),
+algebra-004 (inequality, $2^{u-2}$), number-theory-001 ($p^3-q^5=(p+q)^2$,
+answer $(7,3)$), combinatorics-001 (one local maximum, $2^{n-1}$),
+algebra-002 ($2^n>n^2$, $n>1$, answer 5), number-theory-002 ($p^2 \mid 2^p+1$,
+$\{3\}$), number-theory-003 ($v_3(2023!)=1006$, Legendre), combinatorics-002
+(two local maxima in $S_5$, verified 88 by independent enumeration),
+geometry-001 (2023-gon diagonals, 2043230). The auxiliary items are
+IMO-style derivatives, not official shortlist entries; we label them
+accordingly to avoid attribution errors.
+
+\subsection{Anti-leak deterministic solver}
+\label{sec:solver}
+The original IMO harness \citep{imo_harness_local} echoed the expected
+short answer and self-awarded grade 7 --- a leak. We implemented
+\texttt{RealIMOSolver}, a fully deterministic solver (enumeration, Legendre
+formula, polygon formula) whose output never contains the expected answer
+before its ``Metodo:'' marker, and verified independence by round-trip tests
+(none of the 9 solutions leaks the answer). The solver's own cross-check
+scores 8/9 on the augmented corpus (algebra-004 is numerical-only,
+``partial'', never grade 7).
+
+\subsection{Conditions}
+\label{sec:conditions}
+Three conditions on the same NT-001 probe problem:
+C0 raw prompt; C1 context-only; C2 16-stage MASWOS scaffold (reading,
+hypotheses, verification, strict output format). Composite score
+$S = 0.40A + 0.30V + 0.20C + 0.10D$, where $A$=accuracy, $V$=normalized
+latency $1-(\ell-20)/90$ (clamped to $[0,1]$), $C$=format conformity,
+$D$=availability.
+
+\subsection{Cross-validation protocol (R503)}
+\label{sec:crossval}
+After the R499 single-problem ranking, we implemented automatic routing
+(R500) and then re-ran the experiment after a full host restart (R503).
+The cross-validated protocol is a 9-problem $\times$ 3-model full factorial
+design (no held-out split; all models see all problems, exactly once, in C2).
+We report:
+\begin{itemize}
+  \item per-model accuracy $k/n$ with exact Clopper--Pearson 95\% confidence
+  intervals (binomial);
+  \item paired McNemar tests with continuity correction between model pairs;
+  \item Cohen's $\kappa$ (agreement beyond chance) for the two most
+  competent models;
+  \item per-model latency distributions (ok vs.\ timeout).
+\end{itemize}
+Figure~\ref{fig:flow} shows the cross-validation flow executed per model.
+
+\input{fig-flow-valcross.tex}
+
+\subsection{Cost budget}
+Each LLM call is a real CLI subprocess with a model-specific timeout
+(mimo 100~s, big-pickle 110~s, nemotron 150~s). All raw outputs, timings and
+statuses are stored incrementally (JSON) inside the repository for audit.

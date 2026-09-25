@@ -1,0 +1,72 @@
+% ============================================================================
+% 03-discussao.tex — Discussion (module 4/5) incl. architecture x-ray
+% ============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Architecture x-ray (layers C0--C5)}
+\label{sec:xray}
+The experiment isolates which orchestration layers actually matter.
+\begin{itemize}
+  \item \textbf{C0 --- Runner}: `opencode run` works (35/38 calls ok, 92\%).
+  \item \textbf{C1 --- Scaffold formats}: the context-only condition failed
+  (nemotron timeout, empty outputs) --- formatting alone is insufficient
+  without reasoning scaffolding.
+  \item \textbf{C2 --- 16-stage MASWOS}: decisive; among models that solved
+  at all, 100\% first-trial success under C2 vs.\ 0\% under C0.
+  \item \textbf{C3 --- Deterministic verification}: replaced the leaked
+  grader, exposing serialization sensitivity and partial answers.
+  \item \textbf{C4 --- Cross-validation}: the single-problem rate of 0.98
+  (mimo) collapsed to 0.44 over 9 problems --- the largest correction in
+  the study.
+  \item \textbf{C5 --- Trust Engine / Token Economy}: prior trust scores are
+  updated per cycle; the R503 evidence (big-pickle 1/9) would slash its
+  trust score before any routing delegation.
+\end{itemize}
+
+\subsection{Comparison with the literature}
+\label{sec:comparison}
+Free real free-tier LLMs attain substantially lower rates than reported on
+paid/high-parameter systems on the same difficulty classes
+\citep{hendrycks_math,cobbe_gsm8k,hendrycks_mmlu}; e.g., GPT-4 accuracy at
+that time on MATH was far above our best 0.44 on 9 olympiad items
+\citep{openai_gpt4}. Direct comparison is confounded by item selection,
+temperature, scaffold and trial count; this is why we emphasize the
+\emph{correction} rather than a point ranking, and report CIs instead of
+claims. Our scaffold effect mirrors Chain-of-Thought \citep{wei_cot},
+Reflexion \citep{shinn_reflexion} and ReAct \citep{yao_react}; the empty-
+output/fake-reasoning failure of muse-spark resembles the capability
+discontinuities warned by \citet{schaeffer_mirage}. The deterministic
+verification step parallels the "tool use"/formal-proof pattern
+\citep{yang_leandojo,alpha_geometry}. The architecture itself is a
+multi-agent system in the spirit of AutoGen \citep{wu_autogen} and MetaGPT
+\citep{hong_metagpt}, but with auditable SDD/TDD gates and a
+metacognitive loop (Reflexion mechanism \citep{shinn_reflexion}).
+
+\subsection{Limitations}
+\label{sec:limitations}
+\begin{enumerate}
+  \item $n=9$ problems and $n=1$ trial per cell: genuine statistical power is
+  low; the 95\% CIs are wide (e.g., [0.14, 0.79]). No claim of equivalence
+  or ordering beyond the observed matrix is made.
+  \item We extracted answers by per-problem regex; a model may solve a
+  problem but format differently (e.g., algebra-001 with $n=7$ vs.\ expected
+  3 --- counted incorrect).
+  \item Network/provider variability: timeouts differ by model (100/110/150 s)
+  and were not held constant.
+  \item No temperature control is exposed for these models; single-run
+  variance remains uncontrolled.
+  \item The steering (R500) favors shown capability and cannot generalize
+  out-of-distribution.
+  \item All costs, latencies and statuses are recorded in-repo but not
+  independently replicated by a third party.
+\end{enumerate}
+
+\subsection{Anti-overclaim}
+\label{sec:anti-overclaim}
+Per project policy \citep{corrigendum_internal}, we never state
+``superhuman'', ``verified'' or ``Qualis A1'' without external validation.
+An 8-scanner banca audit (EXS) scored this manuscript 47.5/100
+(requires\_refinement); we report that score honestly instead of a
+self-assigned top grade. All 15 DOI-based references resolve with HTTP 200
+\citep{dois_validados}.

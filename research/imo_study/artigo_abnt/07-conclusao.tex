@@ -1,0 +1,48 @@
+% ============================================================================
+% 07-conclusao.tex — Conclusão (módulo 8/8)
+% ============================================================================
+\chapter{Conclusão}
+
+Este trabalho reportou, com metodologia auditável e postura
+anti-\textit{overclaim}, a orquestração de LLMs gratuitas reais para
+raciocínio matemático de olimpíada no OpenCode Ecosystem Core (ciclos
+R497--R500). Respondendo ao problema de pesquisa: \textit{é possível orquestrar
+multiagente e medir honestamente LLMs free em problemas da IMO} --- sim, com
+as seguintes contribuições:
+
+\begin{enumerate}
+  \item \textbf{Infraestrutura de medição}: pipeline com \texttt{deep=True}
+  (R498) e solucionador determinístico anti-\textit{leak} (R499), eliminando o
+  viés do \textit{harness} original (que ecoava a resposta e se
+  autoavaliava).
+  \item \textbf{Evidência empírica}: ranking free sob \textit{scaffold}
+  MASWOS: mimo (0,987) $>$ big-pickle (0,923) $>$ nemotron (0,709) $>$
+  muse-1.3 (0,324) $>$ muse-1.2 (0,312); o \textit{scaffold} foi o fator
+  decisivo (0\%$\rightarrow$100\% no primeiro \textit{trial} dos que
+  resolveram).
+  \item \textbf{Roteamento automático (R500)}: a curadoria empírica virou
+  decisão operacional (46 testes verdes, regressão preservada); o catálogo
+  free passou a incluir o \texttt{big-pickle} e os cinco modelos medidos.
+  \item \textbf{Replicação e honestidade}: a replicação pós-R500 revelou
+  não-determinismo de amostragem (mimo 2/3; timeout de infra) e
+  \texttt{big-pickle} não confirmado (hipótese de estado do \textit{host});
+  a lição metodológica central é que \textbf{um \textit{trial} por condição
+  não estima a taxa real de uma LLM}.
+  \item \textbf{Entregável editorial}: artigo científico completo em módulos
+  LaTeX (cada seção = um módulo) que compilam em um único arquivo ABNT
+  atualizado (abntex2), com 15 referências de DOIs validados ativos,
+  fluxogramas de todos os processos e raio-x da arquitetura (camadas
+  C0--C5).
+\end{enumerate}
+
+Como trabalhos futuros: (i) ampliar o corpus IMO (30+ problemas) com réplicas
+$n \geq 5$ por condição; (ii) reiniciar o \textit{host} e remedir o
+\texttt{big-pickle} para confirmar ou refutar a hipótese de estado;
+(iii) submeter o manuscrito a validação editorial externa (periódico ou
+conferência) antes de qualquer rótulo de mérito; (iv) integrar o roteamento
+R500 ao fluxo operacional do \texttt{/reason} para tarefas de raciocínio
+científico em produção.
+
+Conforme a política do repositório, nenhuma declaração de superioridade,
+\textit{superhuman} ou Qualis A1 é feita: os resultados são medidos,
+replicados quando possível e explicitamente limitados.

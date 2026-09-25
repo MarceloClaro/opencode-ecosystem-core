@@ -1,0 +1,62 @@
+% ============================================================================
+% main.tex — Artigo ABNT (NBR 14724 / NBR 6023) em MÓDULOS LaTeX
+% OpenCode Ecosystem Core — R497–R500
+% Cada seção é um módulo \input; todos compilam em um único arquivo ABNT.
+% Compilação: pdflatex main && bibtex main && pdflatex main && pdflatex main
+% ============================================================================
+\documentclass[12pt,openright,oneside,a4paper,chapter=TITLE,section=TITLE]{abntex2}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds}
+\usepackage[alf]{abntex2cite}
+% hyperref já é carregado pelo abntex2; configuramos via \hypersetup
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue}
+\usepackage{longtable}
+
+% Cores para diagramas
+\definecolor{cororo}{RGB}{46,116,181}
+\definecolor{corverde}{RGB}{34,139,34}
+\definecolor{corcinza}{RGB}{120,120,120}
+\definecolor{coramarelo}{RGB}{238,180,34}
+\definecolor{corvermelho}{RGB}{190,30,30}
+
+% ---- Metadados ABNT ----
+\title{Orquestração Multiagente para Raciocínio Científico com LLMs Gratuitos:\\ Benchmark em Problemas da IMO, Roteamento Automático e Raio-X da Arquitetura do OpenCode Ecosystem Core}
+\author{Marcelo Claro}
+\instituicao{OpenCode Ecosystem Core --- Pesquisa Autônoma Auditável}
+\local{São Paulo, SP, Brasil}
+\data{2026}
+\tituloestrangeiro{Multi-Agent Orchestration for Scientific Reasoning with Free LLMs: IMO Benchmark, Automatic Routing and Architecture X-Ray of the OpenCode Ecosystem Core}
+\orientador{Orquestrador Primário MarceloClaro (agente autônomo)}
+\preambulo{Relatório técnico-científico resultante dos ciclos evolutivos R497--R500 do OpenCode Ecosystem Core: curadoria acadêmica, pipeline de diagnóstico profundo, benchmark de raciocínio matemático com LLMs gratuitas em problemas da IMO e roteamento automático tarefa$\rightarrow$modelo.}
+
+% ---- Compilação por módulos: cada seção = um arquivo ----
+\begin{document}
+
+\input{00-capa.tex}
+\input{01-resumo.tex}
+
+% Sumário automático do abntex2
+\tableofcontents*
+\clearpage
+
+\textual
+\input{02-introducao.tex}
+\input{03-fundamentacao.tex}
+\input{04-metodologia.tex}
+\input{05-resultados.tex}
+\input{06-discussao.tex}
+\input{07-conclusao.tex}
+
+\postextual
+\bibliography{referencias}
+
+\end{document}

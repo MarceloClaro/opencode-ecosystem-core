@@ -1,0 +1,41 @@
+% ============================================================================
+% 04-conclusao.tex — Conclusion (module 5/5)
+% ============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We presented an auditable, multi-agent, evolving pipeline for benchmarking
+\emph{free real LLMs} on genuine IMO-style mathematics, developed across
+cycles R497--R500 with a cross-validated counter-check (R503) executed after
+a host restart.
+
+\emph{Answers to the research question.}
+\begin{enumerate}
+\item \emph{Free models can be orchestrated and scaffolded}: the 16-stage
+MASWOS scaffold (C2) was decisive --- from 0\% to 100\% first-trial success
+among solvers --- while raw and context-only conditions failed with empty
+outputs. The orchestrator, routing (R500) and deterministic verification
+(R499) form a reproducible, auditable stack.
+\item \emph{Benchmark honesty matters}: the single-problem ranking
+(mimo 0.98 $>$ big-pickle 0.92 $>$ nemotron 0.71) does not survive
+cross-validation. Corrected rates are mimo 0.44 (95\% CI [0.14, 0.79]),
+big-pickle 0.11 [0.00, 0.48], nemotron 0.11 [0.00, 0.48]; paired McNemar are
+non-significant; Cohen's $\kappa$ mimo$\times$big-pickle $=-0.216$
+(they solve different problem types). All inference is reported with
+confidence intervals, paired statistics and delay distributions, and
+limitations are explicit.
+\item \emph{Methodology artifacts were exposed and fixed}: the harness leak,
+the serialization sensitivity, and the ``fake reasoning'' of muse-spark
+models were documented; the host-state hypothesis for big-pickle's failures
+was refuted by a post-restart experiment.
+\end{enumerate}
+
+\emph{Future work.} Repetitions with $n \gg 9$ problems and multiple trials
+per cell; temperature-control hooks; a held-out split between development
+and evaluation; independent third-party replication; and integration of the
+deterministic verification layer as a Trust-Engine gate for automatic
+delegation.
+
+\textbf{Availability.} All specifications (SPEC-935-R497..R503), test files,
+raw outputs, statistics and figures are stored in the OpenCode Ecosystem
+Core repository for audit and reproduction.

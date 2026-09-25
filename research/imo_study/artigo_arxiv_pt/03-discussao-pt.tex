@@ -1,0 +1,86 @@
+% 03-discussao-pt.tex — Discussão
+\section{Discussão}
+\label{sec:discussion}
+
+\subsection{Raio-x da arquitetura (camadas C0--C5)}
+\label{sec:xray}
+O experimento isola quais camadas de orquestração realmente importam.
+\begin{itemize}
+  \item \textbf{C0 --- Runner}: \texttt{opencode run} funciona (32/38 chamadas ok, 84\%).
+  \item \textbf{C1 --- Formatos de scaffold}: a condição apenas contexto
+  falhou (nemotron timeout, saídas vazias) --- formatação sozinha é
+  insuficiente sem scaffold de raciocínio.
+  \item \textbf{C2 --- MASWOS de 16 estágios}: decisivo; entre os modelos
+  que resolveram, 100\% de sucesso no primeiro trial sob C2 vs.\ 0\% sob C0.
+  \item \textbf{C3 --- Verificação determinística}: substituiu o grader com
+  vazamento, expondo sensibilidade de serialização e respostas parciais.
+  \item \textbf{C4 --- Validação cruzada}: a taxa de problema único de 0,98
+  (mimo) colapsou para 0,22 em 9 problemas --- a maior correção do estudo.
+  \item \textbf{C5 --- Trust Engine / Token Economy}: scores de confiança
+  anteriores são atualizados por ciclo; a evidência R503 (big-pickle 1/9)
+  reduziria seu trust score antes de qualquer delegação de roteamento.
+  \item \textbf{C6 --- Governança Epistemológica (R504)}: Evidence Guard
+  impede que memória/policy promovam OBSERVED; Brier/ECE medem calibração;
+  drift detection bloqueia readiness; Ledger SHA-256 garante integridade
+  auditável.
+  \item \textbf{C7 --- Ponte Hermes (R505)}: contratos opcionais de
+  interoperabilidade com runtime Hermes, sem autoridade epistemológica;
+  bridge inerte sem transporte.
+\end{itemize}
+
+\subsection{Comparação com a literatura}
+\label{sec:comparacao}
+LLMs gratuitos atingem taxas substancialmente inferiores às reportadas em
+sistemas pagos/altos parâmetros na mesma classe de dificuldade
+\citep{hendrycks_math,cobbe_gsm8k,hendrycks_mmlu}. A comparação direta é
+confundida por seleção de itens, temperatura, scaffold e número de trials;
+é por isso que enfatizamos a \emph{correção} e não um ranking pontual, e
+reportamos IC em vez de alegações. O efeito de scaffold espelha
+Chain-of-Thought \citep{wei_cot}, Reflexion \citep{shinn_reflexion} e ReAct
+\citep{yao_react}; a falha de saída vazia/raciocínio falso dos muse-spark
+lembra as descontinuidades de capacidade alertadas por
+\citet{schaeffer_mirage}. O passo de verificação determinística paralela ao
+padrão ``uso de ferramentas''/prova formal \citep{yang_leandojo,alpha_geometry}.
+A própria arquitetura é um sistema multiagente no espírito de AutoGen
+\citep{wu_autogen} e MetaGPT \citep{hong_metagpt}, mas com gates SDD/TDD
+auditáveis e loop metacognitivo (mecanismo Reflexion
+\citep{shinn_reflexion}).
+
+\subsection{Implicações para a calibração de confiança}
+\label{sec:calibracao}
+O ReversaFeynman Bridge (R504) revelou que o Trust Engine anterior
+atualizava scores \emph{sem calibração formal}. A avaliação offline v3
+mostra:
+\begin{itemize}
+  \item Brier score de 0,711 e ECE de 0,756 com os dados do R503 --- alarme
+  claro de que as confianças originais (mimo 0,987; big-pickle 0,923) são
+  \emph{mal calibradas} em relação às acurácias reais (0,22 e 0,11);
+  \item readiness bloqueado corretamente (minRecords 30; temos apenas 9);
+  \item drift detection: insufficient\_data (janelas maiores que a amostra);
+  \item calibração do roteador: mimo 0,987 $\rightarrow$ 0,743; big-pickle
+  0,923 $\rightarrow$ 0,558 (recomendação shadow, applied=False).
+\end{itemize}
+
+\subsection{Limitações}
+\label{sec:limitacoes}
+\begin{enumerate}
+  \item $n=9$ problemas e $n=1$ trial por célula: poder estatístico baixo;
+  IC amplos (ex.: mimo [0,03; 0,60]).
+  \item Extração de respostas por regex; um modelo pode resolver mas
+  formatar diferente.
+  \item Variabilidade de rede/provedor: timeouts diferentes por modelo.
+  \item Sem controle de temperatura para esses modelos; variância de
+  single-run não controlada.
+  \item O roteamento (R500) favorece capacidade demonstrada e não pode
+  generalizar out-of-distribution.
+  \item Variabilidade entre execuções (mimo variou de 0,44 para 0,22)
+  exige múltiplos trials, não executados aqui por restrição de tempo.
+\end{enumerate}
+
+\subsection{Anti-overclaim}
+\label{sec:anti-overclaim}
+Seguindo a política do projeto \citep{corrigendum_internal}, jamais declaramos
+``superhuman'', ``verificado'' ou ``Qualis A1'' sem validação externa.
+Uma banca de 8 scanners (EXS) pontuou este manuscrito 47,5/100
+(requires\_refinement); reportamos essa pontuação honestamente. Todos os 15
+DOIs referenciados resolvem com HTTP 200 \citep{dois_validados}.

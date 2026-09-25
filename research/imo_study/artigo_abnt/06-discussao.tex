@@ -1,0 +1,101 @@
+% ============================================================================
+% 06-discussao.tex — Discussão: raio-x da arquitetura (módulo 7/8)
+% ============================================================================
+\chapter{Discussão}
+
+\section{Raio-X completo da arquitetura que conduziu ao resultado}
+
+A Figura \ref{fig:raiox} apresenta as seis camadas da arquitetura
+responsáveis pelo resultado: cada camada contribui com função específica e
+não opcional no ciclo Perceber$\rightarrow$Especificar$\rightarrow$Delegar
+$\rightarrow$Executar$\rightarrow$Verificar$\rightarrow$Refletir.
+
+\input{fig-raiox.tex}
+
+\subsection*{Camada C0 --- Infraestrutura (\textit{host} e MCP)}
+Seis servidores MCP persistentes (metacognitive-interconnect, scanners,
+pypi-search, colibri, litert-lm, antigravity-bridge) + \textit{host} CLI
+opencode (1h15m de sessão no momento da replicação) + \texttt{pdflatex} e
+abntex2. A verificação por \texttt{ps} mostrou que os MCP não importam
+\texttt{model\_router}: a atualização R500 não exige reinício deles; o
+\textit{host} CLI, porém, acumula estado e é a hipótese dominante para o
+\texttt{big-pickle} vazio na replicação.
+
+\subsection*{Camada C1 --- Catálogo e roteamento}
+\texttt{ModelRouter} com 41 modelos catalogados + 5 free curados (R500);
+providers \texttt{opencode-go}, \texttt{opencode-zen}, \texttt{litert-lm},
+\texttt{runai}, \texttt{opencode}. Sem \texttt{prefer\_free}, perfis clássicos
+permanecem; com \texttt{prefer\_free}$\wedge$tarefa acadêmica/math/reasoning/
+writing, a curadoria R499 decide (mimo $>$ big-pickle $>$ nemotron $>$
+muse).
+
+\subsection*{Camada C2 --- Modelos gratuitos reais}
+mimo, big-pickle, nemotron, muse 1.2/1.3 (todos via CLI \texttt{opencode
+run}); locais descartados por latência (llama3.2: 30--50~s/estágio $\times$ 16
+estágios $>$ 10~min). O rótulo ``free'' não implica disponibilidade real:
+deepseek (saldo), gemini (erro), gpt-4o-mini/claude-haiku (vazio).
+
+\subsection*{Camada C3 --- \textit{Scaffold} de raciocínio}
+O template MASWOS de 16 estágios (condição C2) foi o fator decisivo: elevou a
+acurácia de 0\% para 100\% (primeiro \textit{trial}, modelos que resolveram).
+Funcionalmente análogo a \textit{Chain-of-Thought} \cite{wei_cot}, porém com
+etapas obrigatórias de verificação e conformidade de saída, aproximando o
+padrão \textit{Reflexion} \cite{shinn_reflexion} quanto à autoavaliação.
+
+\subsection*{Camada C4 --- Verificação formal}
+O \texttt{RealIMOSolver} eliminou o \textit{leak} do \textit{harness} original
+(R442) e classificou 2/4 problemas corretamente (média 4,5/7), expondo
+ambiguidades de paráfrase (\texttt{N=1} vs \texttt{N=3}; máximo local com
+extremos) e sensibilidade de serialização ($2^{n-1}$ vs $2^{(n-1)}$) — lições
+para \textit{grading heads} automáticos. O \texttt{TestRealPipeContract}
+(R498) garante que o pipeline de diagnóstico roda \texttt{deep=True} em
+documentos reais.
+
+\subsection*{Camada C5 --- Memória metacognitiva e governança}
+MetaBus (lições compartilhadas), Trust Engine, Registro de Evolução (361
+ciclos), banca simulada honesta (sem nota), política anti-
+\textit{overclaim} (CORRIGENDUM). A banca simulada MASWOS local não concluiu
+(abortada por latência); a decisão de não declarar nota é registrada como
+prática.
+
+\section{Agentes e processos multiagentes de melhor desempenho}
+
+Entre os 206 agentes do catálogo, os de maior contribuição para este estudo
+foram: (i) \textbf{honest-critic-agent} (R142) — bloqueou a alegação
+``pronto como/melhor que superhuman'' (\textit{publishable=False}),
+convergindo com a evidência; (ii) \textbf{agentes acadêmicos MASWOS} (33
+agentes, A01--A16) — o \textit{scaffold} delegado via \texttt{delegate\_fn}
+foi decisivo para o acerto dos LLMs na C2; (iii) \textbf{coder/test-engineer}
+— implementação e testes R500 (46 verdes, 1,97~s); (iv) \textbf{agent de
+curadoria landscape} — inserção de \texttt{deepmind/acme} (R497); (v)
+\textbf{RealIMOSolver} (agente de verificação determinística) — sem ele, o
+\textit{harness} ecoaria a resposta (\textit{leak}); (vi) \textbf{banca
+rigorosa MASWOS + honest-critic} — gate editorial anti-
+\textit{overclaim}. O processo A2A (Blackboard + MetaBus) assegurou que as
+lições do R499 (leak, fake reasoning, estocasticidade) fossem consumidas no
+R500.
+
+\section{Comparação com a literatura}
+
+O efeito de \textit{scaffold} observado (0\%$\rightarrow$100\%) é consistente
+com \textit{Chain-of-Thought} \cite{wei_cot}, \textit{Reflexion}
+\cite{shinn_reflexion} e \textit{ReAct} \cite{yao_react}: a estrutura
+explícita de passos e autoavaliação importa mais que o modelo, para problemas
+curtos de olimpíada. A indisponibilidade real de ``free'' (saldo/erro/vazio)
+reforça o alerta de \cite{schaeffer_mirage}: métricas e condições de
+\textit{deployment} mudam a conclusão. O \textit{score} composto (acurácia,
+velocidade, conformidade, disponibilidade) é uma alternativa operacional às
+metrificações binárias de \textit{benchmark}; a replicação (n=3) corrige o
+viés de \textit{um trial} observado em relatórios como \cite{openai_gpt4}.
+
+\section{Limitações}
+
+(i) $n$ pequeno (4 problemas de \textit{harness}; 1 problema no \textit{run}
+de benchmark por condição; n=3 máximo na replicação); (ii) instabilidade de
+latência (timeout 110~s no mimo); (iii) \textit{host} sem reinício antes da
+replicação — \texttt{big-pickle} não confirmado pós-R500; (iv) validação
+externa ausente (nenhum periódico/editora revisou o manuscrito); (v) abntex2
+instalado em \texttt{TEXMFHOME} (não no TeX Live do sistema); (vi) DOIs
+validados por HTTP 200 em \texttt{doi.org}, não por revisão editorial
+cruzada. Nenhuma dessas limitações invalida a evidência reportada; todas
+delas impedem rótulos de excelência.

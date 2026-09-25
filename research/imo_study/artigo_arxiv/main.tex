@@ -1,0 +1,82 @@
+% ============================================================================
+% main.tex — Artigo para submissão arXiv (padrão acadêmico, módulos LaTeX)
+% Cada seção é um módulo \input; compila em um único PDF.
+% Compilação: pdflatex main && bibtex main && pdflatex main && pdflatex main
+% ============================================================================
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds}
+\usepackage[round,numbers]{natbib}
+\bibliographystyle{abbrvnat}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\emergencystretch=1.5em
+
+\definecolor{cororo}{RGB}{46,116,181}
+\definecolor{corverde}{RGB}{34,139,34}
+\definecolor{corcinza}{RGB}{120,120,120}
+\definecolor{coramarelo}{RGB}{238,180,34}
+\definecolor{corvermelho}{RGB}{214,40,40}
+
+\title{\bfseries Free LLMs in Olympic Mathematics:\\ Multi-Agent Orchestration, Cross-Validated Benchmarking, and an Architecture X-Ray\\
+\large (OpenCode Ecosystem Core, evolutionary cycles R497--R500)}
+
+\author{Marcelo Claro\\
+\small OpenCode Ecosystem Core --- Autonomous Auditable Research\\
+\small Preprint for arXiv submission (not peer-reviewed)}
+\date{September 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent We study mathematical reasoning of \emph{free, real} large language
+models (LLMs) on canonical International Mathematical Olympiad (IMO)
+problems under explicit multi-agent orchestration. Across evolutionary cycles
+R497--R500 of the OpenCode Ecosystem Core, we (i) curated an academic
+landscape (25 sources, including \texttt{deepmind/acme}); (ii) built a
+\emph{deep} diagnostics pipeline enforced by a real-execution contract;
+(iii) replaced a leaking IMO harness with a deterministic anti-leak solver;
+(iv) benchmarked five free models (mimo-v2.5, big-pickle, nemotron-3,
+muse-spark-1.2/1.3) under raw (C0), context (C1) and 16-stage MASWOS
+reasoning-scaffold (C2) conditions; and (v) implemented automatic
+task$\rightarrow$model routing driven by the empirical curation (R500).
+After a host restart, we ran a \emph{cross-validated} benchmark of
+9 problems $\times$ 3 models. Results: the MASWOS scaffold raised first-trial
+accuracy from 0\% to 100\% among models that solved at all; the single-problem
+ranking of R499 (mimo 0.987 $>$ big-pickle 0.923 $>$ nemotron 0.709) does
+\emph{not} survive cross-validation --- the corrected rates are mimmo 4/9
+(0.44, 95\% CI [0.14, 0.79]), big-pickle 1/9 (0.11, [0.00, 0.48]) and nemotron
+1/9 (0.11, [0.00, 0.48]). Paired McNemar tests are non-significant at
+$n=9$; Cohen's $\kappa$ between mimo and big-pickle is $-0.216$ (they solve
+different problem types). A previously hypothesized host-state explanation
+for big-pickle's empty outputs is \emph{refuted}: after host restart the
+model still fails (1/9). The muse-spark models exhibit ``fake reasoning''
+(announce verification, deliver no answer). We report confidence intervals,
+paired tests, agreement statistics, per-model latency distributions, complete
+flows and an architecture x-ray (layers C0--C5). All 15 cited references have
+actively validated DOIs (HTTP 200 via \texttt{doi.org}).
+\end{abstract}
+
+\noindent\textbf{Keywords:} large language models; mathematical reasoning;
+multi-agent systems; cross-validation; benchmarking; IMO; uncertainty quantification.
+
+\input{00-introducao.tex}
+\input{01-metodologia.tex}
+\input{02-resultados.tex}
+\input{03-discussao.tex}
+\input{04-conclusao.tex}
+
+\bibliography{refs}
+\end{document}

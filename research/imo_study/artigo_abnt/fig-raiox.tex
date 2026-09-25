@@ -1,0 +1,37 @@
+% ============================================================================
+% fig-raiox.tex — Raio-X da arquitetura (Figura 3): camadas C0–C5
+% ============================================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=0.55cm,
+  camada/.style={rectangle, rounded corners=3pt, minimum width=13.5cm,
+                 minimum height=1.15cm, align=left, font=\footnotesize,
+                 draw=black, thick}
+]
+  \node[camada, fill=cororo!12, text width=13cm]
+    (c0) {\textbf{C0 -- Infraestrutura}: host opencode (sessão 1h15m) + 6 MCP servers + CLI \texttt{opencode run} + pdflatex/abntex2};
+  \node[camada, fill=corverde!10, text width=13cm, below=of c0]
+    (c1) {\textbf{C1 -- Catálogo e roteamento}: ModelRouter (41 catálogo + 5 free curados R500); providers go/zen/litert/runai/opencode; \texttt{route\_free(task\_type)}};
+  \node[camada, fill=coramarelo!10, text width=13cm, below=of c1]
+    (c2) {\textbf{C2 -- Modelos free reais}: mimo (0,987) $>$ big-pickle (0,923) $>$ nemotron (0,709) $>$ muse-1.3 (0,324) $>$ muse-1.2 (0,312); locais descartados por latência};
+  \node[camada, fill=corverde!10, text width=13cm, below=of c2]
+    (c3) {\textbf{C3 -- Scaffold MASWOS (16 estágios)}: condição C2 decisiva 0\%$\rightarrow$100\% (1º trial); funcionamento análogo a CoT/Reflexion};
+  \node[camada, fill=cororo!12, text width=13cm, below=of c3]
+    (c4) {\textbf{C4 -- Verificação formal}: RealIMOSolver anti-\textit{leak} (2/4, média 4,5/7); GradingHead; TestRealPipeContract (deep=True)};
+  \node[camada, fill=corvermelho!8, text width=13cm, below=of c4]
+    (c5) {\textbf{C5 -- Governança e memória}: MetaBus; Trust Engine; EvolutionRegistry (361 ciclos); honest-critic; anti-overclaim (CORRIGENDUM)};
+
+  \node[font=\scriptsize, color=corcinza, right=1.1cm of c0] (s0) {R498};
+  \node[font=\scriptsize, color=corcinza, right=1.1cm of c1] (s1) {R500};
+  \node[font=\scriptsize, color=corcinza, right=1.1cm of c2] (s2) {R499+réplicas};
+  \node[font=\scriptsize, color=corcinza, right=1.1cm of c3] (s3) {R499};
+  \node[font=\scriptsize, color=corcinza, right=1.1cm of c4] (s4) {R499/R498};
+  \node[font=\scriptsize, color=corcinza, right=1.1cm of c5] (s5) {todo o ciclo};
+\end{tikzpicture}
+\caption{Raio-X da arquitetura do OpenCode Ecosystem Core que conduziu ao
+resultado: camadas C0--C5 com os ciclos evolutivos correspondentes (R497--
+R500). O fluxo de dados atravessa todas as camadas; a governança (C5) audita
+as demais.}
+\label{fig:raiox}
+\end{figure}

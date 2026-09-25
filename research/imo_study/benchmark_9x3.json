@@ -1,0 +1,251 @@
+{
+  "opencode/mimo-v2.5-free": [
+    {
+      "problem": "imo-bench-algebra-001",
+      "expected": "3",
+      "elapsed_s": 31.8,
+      "status": "ok",
+      "correct": false,
+      "answer": "7",
+      "raw_tail": "$(p,\\, q) = (7,\\, 3)$\n\n$7^3 - 3^5 = 343 - 243 = 100 = (7 + 3)^2 \\;\\; \\checkmark$\n"
+    },
+    {
+      "problem": "imo-bench-algebra-004",
+      "expected": "2^(u-2)",
+      "elapsed_s": 100.1,
+      "status": "timeout",
+      "correct": false,
+      "answer": null,
+      "raw_tail": ""
+    },
+    {
+      "problem": "imo-bench-number-theory-001",
+      "expected": "(7, 3)",
+      "elapsed_s": 36.8,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": "**p = 7, q = 3**\n\nVerificação: 7³ − 3⁵ = 343 − 243 = 100 = (7+3)² = 10²\n"
+    },
+    {
+      "problem": "imo-bench-combinatorics-001",
+      "expected": "2^{n-1}",
+      "elapsed_s": 91.3,
+      "status": "ok",
+      "correct": true,
+      "answer": "2^{n-1}",
+      "raw_tail": "à esquerda ou à direita de $n$ (o elemento máximo, que ocupa o único máximo local), há $2$ escolhas independentes, totalizando $2^{n-1}$ permutações.\n"
+    },
+    {
+      "problem": "imo-bench-algebra-002",
+      "expected": "5",
+      "elapsed_s": 31.7,
+      "status": "ok",
+      "correct": false,
+      "answer": "7",
+      "raw_tail": "|----------|\n| 2 | 4 | 4 | não (igual) |\n| 3 | 8 | 9 | não |\n| 4 | 16 | 16 | não (igual) |\n| **5** | **32** | **25** | **sim** |\n\n**Resposta: n = 5**\n"
+    },
+    {
+      "problem": "imo-bench-number-theory-002",
+      "expected": "{3}",
+      "elapsed_s": 54.1,
+      "status": "ok",
+      "correct": true,
+      "answer": "3",
+      "raw_tail": " | 8193 | 169 | 64 |\n| 17 | 131073 | 289 | 1 |\n| 19 | 524289 | 361 | 1 |\n\n**único primo p ≤ 20 com p² | (2^p + 1):** p = 3, pois 9 | 9 ≡ 0 (mod 9). ∎\n"
+    },
+    {
+      "problem": "imo-bench-number-theory-003",
+      "expected": "1006",
+      "elapsed_s": 29.4,
+      "status": "ok",
+      "correct": false,
+      "answer": "2023",
+      "raw_tail": " ⌊2023/9⌋ + ⌊2023/27⌋ + ⌊2023/81⌋ + ⌊2023/243⌋ + ⌊2023/729⌋ + ⌊2023/2187⌋\n\ne = 674 + 224 + 74 + 24 + 8 + 2 + 0 = **1006**\n\nVerificação: 3¹⁰⁰⁶ | 2023!\n"
+    },
+    {
+      "problem": "imo-bench-combinatorics-002",
+      "expected": "88",
+      "elapsed_s": 100.0,
+      "status": "timeout",
+      "correct": false,
+      "answer": null,
+      "raw_tail": ""
+    },
+    {
+      "problem": "imo-bench-geometry-001",
+      "expected": "2043230",
+      "elapsed_s": 29.5,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": " = 343 − 243 = 100 = (7+3)² = 10² ✓\n\n**Diagonais de um polígono convexo com 2023 lados:**\n\nFórmula: d = n(n−3)/2\n\nd = 2023 × 2020 / 2 = **2.043.230**\n"
+    }
+  ],
+  "opencode/big-pickle": [
+    {
+      "problem": "imo-bench-algebra-001",
+      "expected": "3",
+      "elapsed_s": 49.4,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": ""
+    },
+    {
+      "problem": "imo-bench-algebra-004",
+      "expected": "2^(u-2)",
+      "elapsed_s": 39.4,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": "(p,q) = (7,3)\n\nVerificação: 7³ - 3⁵ = 343 - 243 = 100 = (7+3)² = 100 ✓\n"
+    },
+    {
+      "problem": "imo-bench-number-theory-001",
+      "expected": "(7, 3)",
+      "elapsed_s": 30.9,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": ""
+    },
+    {
+      "problem": "imo-bench-combinatorics-001",
+      "expected": "2^{n-1}",
+      "elapsed_s": 29.8,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": "(p, q) = (7, 3)\n\nVerificação: 7³ − 3⁵ = 343 − 243 = 100 = 10² = (7 + 3)².\n"
+    },
+    {
+      "problem": "imo-bench-algebra-002",
+      "expected": "5",
+      "elapsed_s": 21.4,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": ""
+    },
+    {
+      "problem": "imo-bench-number-theory-002",
+      "expected": "{3}",
+      "elapsed_s": 24.1,
+      "status": "ok",
+      "correct": true,
+      "answer": "3",
+      "raw_tail": "(p, q) = (7, 3)\n\n7³ − 3⁵ = 343 − 243 = 100 = 10² = (7 + 3)² ✓\n"
+    },
+    {
+      "problem": "imo-bench-number-theory-003",
+      "expected": "1006",
+      "elapsed_s": 22.9,
+      "status": "ok",
+      "correct": false,
+      "answer": "343",
+      "raw_tail": "- p = 7, q = 3\n- Verificação: 7³ − 3⁵ = 343 − 243 = 100 = (7 + 3)² = 10² = 100 ✓\n"
+    },
+    {
+      "problem": "imo-bench-combinatorics-002",
+      "expected": "88",
+      "elapsed_s": 44.1,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": ""
+    },
+    {
+      "problem": "imo-bench-geometry-001",
+      "expected": "2043230",
+      "elapsed_s": 20.0,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": "p,q) = (7,3)\nVerificação: 7^3 − 3^5 = 343 − 243 = 100 = (7+3)^2 = 10^2\nDiagonais do polígono de 2023 lados: 2023·(2023−3)/2 = 2023·2020/2 = 2.043.230\n"
+    }
+  ],
+  "opencode/nemotron-3-ultra-free": [
+    {
+      "problem": "imo-bench-algebra-001",
+      "expected": "3",
+      "elapsed_s": 136.7,
+      "status": "ok",
+      "correct": false,
+      "answer": "7",
+      "raw_tail": "(7, 3)\n7^3 - 3^5 = 343 - 243 = 100 = (7+3)^2\n"
+    },
+    {
+      "problem": "imo-bench-algebra-004",
+      "expected": "2^(u-2)",
+      "elapsed_s": 82.4,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": "(7,3)\n7^3 - 3^5 = 343 - 243 = 100 = (7+3)^2 = 10^2 = 100\n"
+    },
+    {
+      "problem": "imo-bench-number-theory-001",
+      "expected": "(7, 3)",
+      "elapsed_s": 90.7,
+      "status": "ok",
+      "correct": true,
+      "answer": "(7,3)",
+      "raw_tail": "(7, 3)\n7^3 - 3^5 = 343 - 243 = 100 = (7+3)^2\n"
+    },
+    {
+      "problem": "imo-bench-combinatorics-001",
+      "expected": "2^{n-1}",
+      "elapsed_s": 85.6,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": "(7, 3)\n7^3 - 3^5 = 343 - 243 = 100 = 10^2 = (7+3)^2\n"
+    },
+    {
+      "problem": "imo-bench-algebra-002",
+      "expected": "5",
+      "elapsed_s": 84.7,
+      "status": "ok",
+      "correct": false,
+      "answer": "7",
+      "raw_tail": "(7,3)\n7³ - 3⁵ = 343 - 243 = 100 = (7+3)² = 10² = 100\n"
+    },
+    {
+      "problem": "imo-bench-number-theory-002",
+      "expected": "{3}",
+      "elapsed_s": 110.4,
+      "status": "ok",
+      "correct": true,
+      "answer": "3",
+      "raw_tail": "(7, 3) | 7^3 - 3^5 = 343 - 243 = 100 = (7+3)^2\n"
+    },
+    {
+      "problem": "imo-bench-number-theory-003",
+      "expected": "1006",
+      "elapsed_s": 82.6,
+      "status": "ok",
+      "correct": false,
+      "answer": "343",
+      "raw_tail": "(7,3)\n7^3 - 3^5 = 343 - 243 = 100 = (7+3)^2 = 100\n"
+    },
+    {
+      "problem": "imo-bench-combinatorics-002",
+      "expected": "88",
+      "elapsed_s": 75.0,
+      "status": "ok",
+      "correct": false,
+      "answer": "7",
+      "raw_tail": "(7, 3)\n7^3 - 3^5 = 343 - 243 = 100 = 10^2 = (7+3)^2\n"
+    },
+    {
+      "problem": "imo-bench-geometry-001",
+      "expected": "2043230",
+      "elapsed_s": 84.7,
+      "status": "ok",
+      "correct": false,
+      "answer": null,
+      "raw_tail": "(7,3)\n7³ - 3⁵ = 343 - 243 = 100 = (7+3)² = 10² = 100 ✓\n"
+    }
+  ]
+}

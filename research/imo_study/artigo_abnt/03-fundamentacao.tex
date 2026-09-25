@@ -1,0 +1,66 @@
+% ============================================================================
+% 03-fundamentacao.tex — Fundamentação Teórica (módulo 4/8)
+% ============================================================================
+\chapter{Fundamentação Teórica}
+
+\section{LLMs e raciocínio matemático}
+
+Modelos de linguagem de grande escala, quando treinados em \textit{scale}
+adequado, exibem capacidades preditivas descritas por leis de potência
+\cite{hoffmann_chinchilla}. Modelos treinados em código demonstram
+transferência de raciocínio estruturado \cite{chen_codex}, e técnicas de
+elicitação de predições latentes estendem o aproveitamento dessas
+capacidades \cite{ryoo_eliciting}. No raciocínio, \textit{Chain-of-Thought}
+\cite{wei_cot} mostrou que instruir o modelo a produzir passos intermediários
+melhora a exatidão aritmética em conjuntos como GSM8K \cite{cobbe_gsm8k}.
+Agentes que interagem com ferramentas e refletem sobre falhas —
+\textit{ReAct} \cite{yao_react} e \textit{Reflexion} \cite{shinn_reflexion} —
+estendem o paradigma para tarefas interativas. O relatório técnico do GPT-4
+\cite{openai_gpt4} documenta desempenho em exames padronizados.
+
+Benchmarks matemáticos padronizados incluem MATH \cite{hendrycks_math}
+(12.500 problemas de competição), GSM8K \cite{cobbe_gsm8k} (aritmética de
+palavras) e MMLU \cite{hendrycks_mmlu} (conhecimento amplo). Para prova
+formal assistida por máquina, LeanDojo \cite{yang_leandojo} integra LLMs ao
+proverdor Lean. No domínio IMO, AlphaGeometry \cite{alpha_geometry}
+combinou busca simbólica com heurística neural e provou 25/30 problemas de
+geometria olimpíada; o marco de 2024 (AlphaProof) estendeu o resultado a
+medalha de prata, ainda que sem publicação revisada por pares citável neste
+relatório.
+
+\section{Sistemas multiagentes}
+
+A orquestração de múltiplos LLMs/agentes para tarefas complexas é tema
+central de AutoGen \cite{wu_autogen} (conversas entre agentes programáveis) e
+MetaGPT \cite{hong_metagpt} (papéis com SOPs). O OpenCode Ecosystem Core
+implementa variante com contrato A2A via \textit{Blackboard}, memória
+metacognitiva compartilhada (\textit{MetaBus}), \textit{Trust Engine} e
+política SDD/TDD. A orquestração que conduziu este estudo usa o padrão
+MASWOS (16 estágios) como \textit{scaffold} de raciocínio imposto ao LLM —
+equivalente funcional a \textit{CoT}, mas com etapas explícitas de
+verificação e conformidade.
+
+\section{Crítica epistemológica e anti-overclaim}
+
+Schaeffer e colaboradores \cite{schaeffer_mirage} argumentam que capacidades
+aparentemente emergentes podem ser artefato de métricas descontínuas; a
+seleção de métricas contínuas (acurácia por problema, \textit{score}
+ponderado) e a replicação são, portanto, requisitos de rigor. A política do
+repositório (CORRIGENDUM.md) registra alegações anteriores incorretamente
+classificadas e exige validação externa para qualquer rótulo de excelência. O
+presente relatório adota a mesma postura: nenhum resultado é declarado
+\textit{superhuman}, \textit{A1} ou \textit{verificado} — apenas medido,
+replicado quando possível e limitado explicitamente.
+
+\section{Hipóteses de pesquisa}
+
+\begin{enumerate}
+  \item \textbf{H1}: modelos free reais, sob \textit{scaffold} MASWOS,
+  resolvem problemas canônicos da IMO com acurácia superior à condição crua.
+  \item \textbf{H2}: o \textit{score} composto (acurácia, velocidade,
+  conformidade, disponibilidade) permite ordenar modelos free de forma
+  reprodutível.
+  \item \textbf{H3}: a orquestração multiagente (agentes de validação,
+  solucionador determinístico anti-\textit{leak}, roteamento R500) é
+  necessária para que o \textit{benchmark} seja auditável.
+\end{enumerate}

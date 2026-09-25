@@ -1,0 +1,88 @@
+% ============================================================================
+% 05-resultados.tex — Resultados (módulo 6/8)
+% ============================================================================
+\chapter{Resultados}
+
+\section{Ranking dos modelos free (R499)}
+
+A Tabela \ref{tab:rank} consolida o \textit{benchmark} de modelos free reais
+na condição decisiva C2 (\textit{scaffold} MASWOS), com latências medidas e
+acurácia (correção do par $(7,3)$), conformidade de formato e \textit{score}
+composto. Na condição C0, ambos os modelos testados retornaram vazio; na C1,
+o \texttt{nemotron} excedeu o \textit{timeout} de 110~s. O \textit{scaffold}
+MASWOS foi decisivo: 0\% $\rightarrow$ 100\% (primeiro \textit{trial}, modelos
+que resolveram).
+
+\begin{table}[htbp]
+\centering
+\caption{Ranking dos modelos free na condição C2 (MASWOS), R499.}
+\label{tab:rank}
+\begin{tabular}{lccccl}
+\toprule
+Modelo & Latência (s) & Acurácia & Conformidade & Score & Status \\
+\midrule
+\texttt{mimo-v2.5-free}            & 23,8  & 1,0 & 1,0 & \textbf{0,987} & corrigiu, typo unicode cosmético \\
+\texttt{big-pickle}                & 43,0  & 1,0 & 1,0 & 0,923 & corrigiu e conforme, sem typo \\
+\texttt{nemotron-3-ultra-free}     & 107,4 & 1,0 & 1,0 & 0,709 & corrigiu; 4--5$\times$ mais lento \\
+\texttt{muse-spark-1.3-free}       & 18,1  & 0,0 & 0,0 & 0,324 & ``fake reasoning'': anuncia verificação, sem resposta \\
+\texttt{muse-spark-1.2-free}       & 24,4  & 0,0 & 0,0 & 0,312 & idem \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Achados de infraestrutura (R499)}: \texttt{deepseek-v4-flash} não
+disponível (saldo insuficiente); \texttt{gemini-2.5-flash} retornou erro de
+servidor; \texttt{gpt-4o-mini} e \texttt{claude-haiku-4} sem resposta. O
+tier \texttt{fast} do catálogo não é sinônimo de acessível — limitação de
+catálogo mapeada.
+
+\section{Replicação pós-R500 e não-determinismo}
+
+A Tabela \ref{tab:repl} resume a replicação conduzida após a implementação do
+roteamento R500.
+
+\begin{table}[htbp]
+\centering
+\caption{Replicação pós-R500 da condição C2 via roteamento automático.}
+\label{tab:repl}
+\begin{tabular}{lcccl}
+\toprule
+Modelo & Rota & n & Acurácia replicada & Observação \\
+\midrule
+\texttt{mimo-v2.5-free}   & \texttt{route\_free("academic")} & 3 & 2/3 (0,67) & 1 timeout de infra (110~s) \\
+\texttt{big-pickle}       & \texttt{route\_free("writing")}  & 2 & 0/2 (0,00) & output vazio; hipótese: estado do host sem reinício \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Os resultados confirmam a estocasticidade do \textit{decoding}: o mesmo prompt
+C2 acertou (26,6~s; 20,9~s) e errou por \textit{timeout} (110~s) no
+\texttt{mimo}; o \texttt{big-pickle} retornou vazio nas duas réplicas
+(20,9~s; 41,7~s), contra acerto C2 de 43,0~s no R499. A hipótese de estado
+acumulado do \textit{host} opencode (sessão de 1h15m sem reinício) foi
+registrada, mas o reinício não pôde ser executado sem encerrar a sessão
+ativa. \textbf{Decisão metodológica}: \texttt{big-pickle} é reportado como
+\textit{score} pré-R500 não confirmado na replicação; o \texttt{mimo} é
+reportado com média n=3 (0,67), não 1,0. Esta é a principal contribuição
+anti-\textit{overclaim} do ciclo R500: \textbf{1 \textit{trial} por condição
+não estima a taxa real de LLMs}.
+
+\section{Roteamento automático (R500)}
+
+O fluxograma da Figura \ref{fig:flux-roteamento} documenta a decisão
+automatizada: \texttt{route(``academic'', prefer\_free=True)} retorna
+\texttt{opencode/mimo-v2.5-free} com \texttt{reason} indicando curadoria R499
+(score 0,987) e alternativas ordenadas (\texttt{big-pickle}, \texttt{nemotron},
+\texttt{muse-1.3}); \texttt{list\_all\_models()} inclui o catálogo free.
+Regressão: perfis existentes inalterados sem \texttt{prefer\_free} (46 testes
+verdes, 1,97~s).
+
+\input{fig-flux-roteamento.tex}
+
+\section{Gate SDD/TDD}
+
+O ciclo R500 adicionou 7 testes de roteamento/free-catálogo (verdes); a
+regressão \texttt{test\_opencode\_go\_zen.py} segue verde. A suíte completa
+pré-R500 registrou 4066 passed, 58 skipped, 0 failed (681~s). O
+\texttt{doctor} do ecossistema valida specs, registro de evolução e memória
+metacognitiva.

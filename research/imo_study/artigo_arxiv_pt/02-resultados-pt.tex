@@ -1,0 +1,153 @@
+% 02-resultados-pt.tex — Resultados
+\section{Resultados}
+\label{sec:results}
+
+\subsection{Ranking de problema único (R499)}
+\label{sec:r499}
+Sob C2 no problema-prova NT-001, os resultados do primeiro trial foram:
+mimo 0,987 (23,8\,s), big-pickle 0,923 (43,0\,s), nemotron 0,709 (107,4\,s),
+muse-1,3 0,324, muse-1,2 0,312. Os modelos muse-spark nunca entregaram
+resposta válida em nenhuma condição (``raciocínio falso''). Saídas vazias
+observadas em C0 e C1; nemotron timeout de 110\,s em C1.
+
+\subsection{Validação cruzada após reinício do host (R503)}
+\label{sec:r503}
+A Tabela~\ref{tab:acc} e as Figuras~\ref{fig:acc}--\ref{fig:lat} apresentam
+o benchmark 9 $\times$ 3 executado após o reinício do host.
+
+\begin{table}[htbp]
+\centering
+\caption{Acurácia validada cruzada ($n=9$), IC Clopper--Pearson 95\%,
+timeouts, latências (chamadas ok).}
+\label{tab:acc}
+\begin{tabular}{lccccc}
+\toprule
+Modelo & acertos & acurácia & IC 95\% & timeouts & latência (s) \\
+\midrule
+mimo-v2.5-free    & 2/9 & 0,22 & [0,03; 0,60] & 2 & 43,5 (29,4--91,3) \\
+big-pickle        & 1/9 & 0,11 & [0,00; 0,48] & 0 & 31,3 (20,0--49,4) \\
+nemotron-3-ultra  & 2/9 & 0,22 & [0,03; 0,60] & 0 & 92,5 (75,0--136,7) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig1_accuracies.pdf}
+\caption{Acurácia com IC Clopper--Pearson 95\% (barras de erro), $n=9$.}
+\label{fig:acc}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\linewidth]{figures/fig2_matrix.pdf}
+\caption{Matriz de acertos: 9 problemas $\times$ 3 modelos (check = correto).}
+\label{fig:matrix}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig3_latency.pdf}
+\caption{Distribuição de latência por modelo; losango vermelho = timeout.}
+\label{fig:lat}
+\end{figure}
+
+\subsection{Estatísticas pareadas}
+\label{sec:paired}
+Testes McNemar com correção de continuidade são não-significativos com $n=9$
+(mimo vs.\ big-pickle: $b=1, c=0$, $\chi^2=0,00$, $p=1,00$; mimo vs.\
+nemotron: $b=1, c=1$, $\chi^2=0,50$, $p=0,48$; big-pickle vs.\ nemotron:
+$b=0, c=1$, $\chi^2=0,00$, $p=1,00$). Com $n=9$ o poder estatístico é
+baixo; reportamos $p$-valores exatos. O $\kappa$ de Cohen entre mimo e
+big-pickle é $0,609$ (concordância substancial --- ambos acertam o mesmo
+problema NT-002), enquanto entre mimo e nemotron é $0,357$ (concordância
+razoável).
+
+\subsection{Variabilidade entre execuções}
+\label{sec:variabilidade}
+Comparando duas execuções independentes do mesmo protocolo (mesmo host,
+mesmos parâmetros):
+\begin{itemize}
+  \item \textbf{Execução 1} (pós-reinício imediato): mimo 4/9 (0,44),
+  big-pickle 1/9 (0,11), nemotron 1/9 (0,11).
+  \item \textbf{Execução 2} (horas depois): mimo 2/9 (0,22), big-pickle 1/9
+  (0,11), nemotron 2/9 (0,22).
+\end{itemize}
+A variabilidade é substancial (mimo variou de 0,44 para 0,22 entre
+execuções). Isso reforça a necessidade de múltiplos trials por célula em
+benchmarks de LLMs --- uma prática padrão em outros campos mas incomum em
+relatórios de modelos de linguagem.
+
+\subsection{Achados relevantes para metodologia}
+\label{sec:achados}
+\textbf{(a) Vazamento no arsenal original} (R442): o resolvedor padrão ecoava
+a resposta e auto-pontuava 7. O resolvedor determinístico (R499) reduziu
+para escores reais (2/4 canônicos, média 4,5/7; corpus aumentado 8/9 com
+``parcial'' explícito para algebra-004). \textbf{(b) Sensibilidade de
+serialização}: o \emph{grading head} é sensível a $2^{(n-1)}$ vs.\
+$2^{n-1}$ (combinatoria-001). \textbf{(c) Hipótese do estado do host
+refutada}: a replicação R500 atribuía as saídas vazias do big-pickle ao
+estado acumulado do host; após reinício completo, o big-pickle ainda falha
+em 8/9 problemas. \textbf{(d) Roteamento (R500)}: \texttt{route\_free
+("academic")} retorna mimo/0,987 com fallbacks explícitos; o catálogo free
+agora inclui \texttt{big-pickle}; 46 testes verdes.
+
+\subsection{Regressão e gates}
+A suíte completa de testes passa: 4077 aprovados, 58 ignorados, 0 falhas
+(577\,s, pré-R503), mais 11 testes R503+R500 aprovados (1,7\,s), e 26
+testes R504+R505 aprovados (0,6\,s).
+
+\subsection{Benchmark de código executável (R506)}
+\label{sec:r506}
+Para avaliar se os modelos realmente \emph{resolvem} os problemas (e não
+apenas geram texto que parece resposta), implementamos o pipeline R506:
+cada LLM recebe um prompt que solicita um script Python completo, o código
+é extraído, executado em sandbox seguro (subprocess com timeout de 30\,s,
+sem acesso a rede), e a saída \texttt{stdout} é comparada com a resposta
+esperada. A Tabela~\ref{tab:r506} apresenta os resultados.
+
+\begin{table}[htbp]
+\centering
+\caption{R506 --- Benchmark de código executável ($n=9$). Status:
+\textbf{C} = correto, \textbf{W} = resposta errada, \textbf{E} = erro
+de runtime, \textbf{M} = código ausente.}
+\label{tab:r506}
+\begin{tabular}{lccccc}
+\toprule
+Modelo & C & W & E & M & acurácia \\
+\midrule
+mimo-v2.5-free    & 1 & 1 & 2 & 5 & 0,111 \\
+big-pickle        & 0 & 1 & 2 & 6 & 0,000 \\
+nemotron-3-ultra  & 2 & 1 & 4 & 2 & 0,222 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig4_code_vs_text.pdf}
+\caption{Comparação R503 (texto) vs R506 (código executável). A capacidade
+de gerar código correto é consistentemente inferior à de gerar texto que
+parece resposta.}
+\label{fig:code_vs_text}
+\end{figure}
+
+Os resultados revelam três achados críticos. \emph{Primeiro}, a taxa de
+``código ausente'' (modelos que não geram nenhum bloco de código) é alta:
+5/9 para mimo, 6/9 para big-pickle e 2/9 para nemotron. Isso indica que
+muitos modelos respondem em linguagem natural quando solicitados a gerar
+código, ou geram blocos de formato incorreto. \emph{Segundo}, entre os
+códigos gerados, a taxa de erro de runtime é substancial: 2/4 para mimo,
+2/3 para big-pickle e 4/7 para nemotron --- os modelos geram código que
+\emph{não executa}. \emph{Terceiro}, a comparação R503 vs R506 é
+iluminadora: mimo cai de 0,222 (texto) para 0,111 (código); big-pickle
+cai de 0,111 para 0,000; nemotron permanece em 0,222. A capacidade de
+gerar código executável correto é \emph{consistente e mensuravelmente
+inferior} à de gerar texto que parece conter a resposta.
+
+O nemotron se destaca por gerar mais código (7/9 problemas, média 317\,B)
+mas com alta taxa de erro de runtime (4/7), indicando ``confiança
+descalibrada'' --- o modelo gera código elaborado que falha na execução.
+O big-pickle gera pouco código (3/9) mas quando gera, também falha (2/3
+runtime errors). O mimo gera código intermediário (4/9) com taxa de erro
+moderada (2/4).

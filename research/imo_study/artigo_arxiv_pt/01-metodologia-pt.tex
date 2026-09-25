@@ -1,0 +1,91 @@
+% 01-metodologia-pt.tex — Métodos
+\section{Métodos}
+\label{sec:methods}
+
+\subsection{Sistema sob teste}
+\label{sec:sistema}
+Todos os experimentos foram executados dentro do OpenCode Ecosystem Core, um
+ecossistema multiagente com 206 agentes de catálogo, um Blackboard A2A, um
+bus metacognitivo (MetaBus), um Trust Engine e uma política estrita de
+SDD/TDD. O orquestrador (MarceloClaro) executa o ciclo
+Perceber$\rightarrow$Especificar$\rightarrow$Delegar$\rightarrow$Executar
+$\rightarrow$Verificar$\rightarrow$Refletir. LLMs externos são invocados via
+CLI \texttt{opencode run} como subprocessos reais; nenhuma simulação ou
+\emph{mock} é utilizado.
+
+\subsection{Corpus}
+\label{sec:corpus}
+Utilizamos uma amostra canônica do IMO-AnswerBench (R442, 4 problemas) +
+cinco problemas auxiliares estilo-IMO com respostas determinísticamente
+verificáveis (R503), totalizando $n=9$: algebra-001 (quociente de piso,
+resposta 3), algebra-004 (desigualdade, $2^{u-2}$), teoria-dos-numeros-001
+($p^3-q^5=(p+q)^2$, resposta $(7,3)$), combinatoria-001 (um máximo local,
+$2^{n-1}$), algebra-002 ($2^n>n^2$, $n>1$, resposta 5), teoria-dos-numeros-002
+($p^2 \mid 2^p+1$, $\{3\}$), teoria-dos-numeros-003 ($v_3(2023!)=1006$,
+Legendre), combinatoria-002 (dois máximos locais em $S_5$, verificado 88
+por enumeração independente), geometria-001 (diagonais de 2023-gono,
+2043230). Os itens auxiliares são derivados estilo-IMO, não entradas
+oficiais do Shortlist; identificamos accordingly para evitar erros de
+atribuição.
+
+\subsection{Resolvedor determinístico anti-vazamento}
+\label{sec:solver}
+O arsenal IMO original \citep{imo_harness_local} ecoava a resposta curta
+esperada e auto-pontuava com nota 7 --- um vazamento. Implementamos o
+\texttt{RealIMOSolver}, um resolvedor completamente determinístico (enumeração,
+fórmula de Legendre, fórmula poligonal) cuja saída nunca contém a resposta
+esperada antes do marcador ``Metodo:''; verificamos independência por testes
+de ida-e-volta (nenhuma das 9 soluções vaza a resposta).
+
+\subsection{Condições experimentais}
+\label{sec:conditions}
+Três condições no mesmo problema-prova NT-001: C0 (prompt bruto), C1
+(apenas contexto), C2 (scaffold MASWOS de 16 estágios). A pontuação
+composta é $S = 0,40A + 0,30V + 0,20C + 0,10D$, onde $A$=acurácia,
+$V$=latência normalizada $1-(\ell-20)/90$ (limitada a $[0,1]$),
+$C$=conformidade de formato, $D$=disponibilidade.
+
+\subsection{Protocolo de validação cruzada (R503)}
+\label{sec:crossval}
+Após o ranking de problema único do R499, implementamos roteamento
+automático (R500) e então re-executamos o experimento após reinício
+completo do host (R503). O protocolo de validação cruzada é um delineamento
+fatorial completo de 9 problemas $\times$ 3 modelos (sem divisão treino/
+teste; todos os modelos veem todos os problemas, exatamente uma vez, em C2).
+Reportamos:
+\begin{itemize}
+  \item acurácia por modelo $k/n$ com intervalos de confiança exatos
+  Clopper--Pearson 95\% (binomial);
+  \item testes McNemar pareados com correção de continuidade entre pares de
+  modelos;
+  \item $\kappa$ de Cohen (concordância além do acaso) para os dois modelos
+  mais competentes;
+  \item distribuições de latência por modelo (ok vs.\ timeout).
+\end{itemize}
+
+\subsection{Governança epistemológica (R504)}
+\label{sec:governance}
+A Camada de Governança Epistemológica adiciona quatro mecanismos de
+integridade ao ecossistema:
+\begin{enumerate}
+  \item \textbf{Evidence Guard}: estados epistêmicos
+  (OBSERVED/INFERRED/UNVERIFIED/BLOCKED); fontes aprendidas (policy,
+  memória, confiança de skill) \emph{nunca} produzem OBSERVED.
+  \item \textbf{Gates Feynman} (FEG-01..06): pontuação 0--12 baseada em
+  mecanismo, evidência, separação observação/inferência, oracle refutável,
+  necessidade demonstrada e experimento mínimo; FEG-07 (teach-back) é
+  exclusivamente humano.
+  \item \textbf{Avaliação Offline de Política v3}: decide$\rightarrow$observe
+  separados (sem look-ahead), holdout temporal (70\%), Brier/ECE em
+  shadow-matched-only, reward/regret com IC95\% bootstrap determinístico,
+  detecção de drift e readiness sem auto-ativação.
+  \item \textbf{Ledger de Auditoria SHA-256}: hash-chain encadeado,
+  deduplicação por event\_id, verificação de integridade, snapshot somente
+  leitura, exportação JSONL.
+\end{enumerate}
+
+\subsection{Orçamento de custo}
+Cada chamada LLM é um subprocesso CLI real com timeout específico por modelo
+(mimo 100\,s, big-pickle 110\,s, nemotron 150\,s). Todos os dados brutos,
+tempos e status são armazenados incrementalmente (JSON) dentro do repositório
+para auditoria.

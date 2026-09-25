@@ -1,0 +1,78 @@
+% ============================================================================
+% 02-introducao.tex — Introdução (módulo 3/8)
+% ============================================================================
+\chapter{Introdução}
+
+\section{Contexto e problema}
+
+O avanço de modelos de linguagem de grande escala (LLMs) transformou o
+raciocínio em linguagem natural e matemática: técnicas de raciocínio como
+\textit{Chain-of-Thought} \cite{wei_cot}, agentes reflexivos
+\cite{shinn_reflexion} e integração com ferramentas \cite{yao_react}
+demonstraram ganhos em tarefas de raciocínio. No domínio matemático, a
+solução automatizada de problemas da International Mathematical Olympiad
+(IMO) tornou-se um marco: o sistema AlphaGeometry \cite{alpha_geometry}
+provou 25 de 30 problemas de geometria do nível IMO-2000-2021 e, em 2024, a
+combinação AlphaProof/AlphaGeometry alcançou nível de medalha de prata.
+Paralelamente, sistemas multiagentes como AutoGen \cite{wu_autogen} e
+MetaGPT \cite{hong_metagpt} propuseram arquiteturas de colaboração entre
+agentes para tarefas complexas.
+
+Contudo, a avaliação de LLMs em tarefas matemáticas \cite{hendrycks_math,
+cobbe_gsm8k, hendrycks_mmlu} raramente é conduzida com \textit{modelos
+gratuitos reais}, com \textit{código auditável}, \textit{problemas de olimpíada
+não publicados em treino de forma garantida} e \textit{orquestração
+multiagente explícita}. Além disso, o campo sofre de alegações infladas:
+a literatura alerta que \textit{emergência} aparente pode ser artefato de
+métrica \cite{schaeffer_mirage}, e a política anti-\textit{overclaim} do
+OpenCode Ecosystem Core (documentada em CORRIGENDUM.md) proíbe classificar
+qualquer resultado como \textit{superhuman}, \textit{verificado} ou
+\textit{Qualis A1} sem validação externa.
+
+O problema de pesquisa deste estudo é: \textit{como orquestrar LLMs gratuitas
+reais, via arquitetura multiagente auditável, para raciocínio matemático de
+alto rigor (problemas da IMO), e como produzir evidência empírica honesta —
+incluindo limitações — para classificar comparativamente tais modelos?}
+
+\section{Objetivos}
+
+\begin{itemize}
+  \item \textbf{Objetivo geral}: medir, com metodologia auditável, o
+  raciocínio matemático de LLMs gratuitas reais em problemas canônicos da
+  IMO e estruturar o resultado como artigo científico em módulos LaTeX no
+  padrão ABNT atualizado, com citações de DOIs ativos.
+  \item \textbf{Objetivos específicos}:
+  \begin{enumerate}
+    \item Curar a paisagem acadêmica (20 agentes + 5 fontes acadêmicas,
+    incluindo \texttt{deepmind/acme}) e validar contrato de pipeline real
+    (R497--R498).
+    \item Implementar solucionador determinístico anti-\textit{leak} para o
+    \textit{harness} IMO (R499).
+    \item Benchmark de modelos free (\texttt{mimo}, \texttt{big-pickle},
+    \texttt{nemotron}, \texttt{muse-spark}) sob condições C0/C1/C2,
+    estimando \textit{score} composto.
+    \item Replicar o benchmark com roteamento automático (R500) e reportar o
+    não-determinismo como limitação.
+    \item Produzir fluxogramas de cada processo e raio-x completo da
+    arquitetura que conduziu ao resultado.
+  \end{enumerate}
+\end{itemize}
+
+\section{Justificativa}
+
+A relevância reside em três frentes: (i) \textbf{científica} — a replicação
+expõe a fragilidade de \textit{benchmarks} de LLM de \textit{um trial} por
+condição, comum na literatura; (ii) \textbf{tecnológica} — o roteamento
+automático R500 torna o \textit{benchmark} uma decisão operacional, não um
+relatório estático; (iii) \textbf{editorial} — o entregável é um artigo ABNT
+em módulos LaTeX compiláveis, com 15 DOIs validados ativos, atendendo ao
+rigor de editoras e bancas de periódicos de alto nível (Qualis A1 \textit{ex
+ante}), sem prometer aceitação.
+
+\section{Estrutura do relatório}
+
+A seção 2 apresenta a fundamentação teórica; a seção 3 descreve a
+metodologia, incluindo o fluxograma do pipeline e o desenho experimental; a
+seção 4 reporta os resultados (ranks, replicação e achados); a seção 5
+discute o raio-x da arquitetura, os agentes de melhor desempenho e as
+limitações; a seção 6 conclui.

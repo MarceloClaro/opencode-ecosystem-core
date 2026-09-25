@@ -1,0 +1,57 @@
+% ============================================================================
+% 01-resumo.tex — Resumo + Abstract + Palavras-chave (módulo 2/8)
+% ============================================================================
+\begin{resumo}
+Este relatório técnico-científico descreve o ciclo R497--R500 do OpenCode
+Ecosystem Core: um estudo empírico, auditável e anti-\textit{overclaim} do
+raciocínio matemático de LLMs gratuitas reais, conduzido sobre um corpus de
+quatro problemas canônicos da International Mathematical Olympiad (IMO
+Shortlist 2020--2022). A metodologia combinou (i) curadoria acadêmica de
+paisagem (\textit{landscape} de 25 fontes, incluindo \texttt{deepmind/acme});
+(ii) pipeline de diagnóstico profundo (\texttt{deep=True}) validado por
+contrato de execução real; (iii) benchmark de modelos \textit{free} nas
+condições crua (C0), com contexto (C1) e com \textit{scaffold} de raciocínio
+MASWOS de 16 estágios (C2); e (iv) roteamento automático tarefa$\rightarrow$modelo
+baseado na curadoria empírica (Ciclo R500). Resultados principais: o
+\textit{scaffold} MASWOS elevou a acurácia de 0\% para 100\% (primeiro
+\textit{trial}, modelos que resolveram); o ranking final free foi
+\texttt{mimo-v2.5-free} (score 0,987) $>$ \texttt{big-pickle} (0,923) $>$
+\texttt{nemotron-3-ultra-free} (0,709) $>$ \texttt{muse-spark-1.3} (0,324) $>$
+\texttt{muse-spark-1.2} (0,312); e a replicação pós-R500 (n=3 para o primeiro
+colocado) expôs o não-determinismo de amostragem e a instabilidade de
+latência como limitações metodológicas obrigatórias de \textit{benchmarking}
+de LLM. As 15 referências citadas possuem DOI validados ativos (HTTP 200 via
+\texttt{doi.org}). Os fluxogramas de cada processo e o raio-x completo da
+arquitetura (camadas C0--C5) são apresentados nas seções de metodologia e
+discussão.
+\end{resumo}
+
+\textbf{Palavras-chave}: inteligência artificial; raciocínio matemático;
+sistemas multiagentes; benchmarking; LLMs gratuitas; IMO.
+
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+This technical-scientific report describes the R497--R500 cycle of the
+OpenCode Ecosystem Core: an empirical, auditable and anti-overclaim study of
+mathematical reasoning in real free LLMs, carried out on a corpus of four
+canonical International Mathematical Olympiad problems (IMO Shortlist
+2020--2022). The methodology combined (i) academic landscape curation (25
+sources, including \texttt{deepmind/acme}); (ii) a deep diagnostics pipeline
+(\texttt{deep=True}) validated by a real-execution contract; (iii) a
+benchmark of free models under raw (C0), context (C1) and 16-stage MASWOS
+reasoning-scaffold (C2) conditions; and (iv) automatic task$\rightarrow$model
+routing driven by the empirical curation (Cycle R500). Main results: the
+MASWOS scaffold raised accuracy from 0\% to 100\% (first trial, models that
+solved); the final free-model ranking was \texttt{mimo-v2.5-free} (score
+0.987) $>$ \texttt{big-pickle} (0.923) $>$ \texttt{nemotron-3-ultra-free}
+(0.709) $>$ \texttt{muse-spark-1.3} (0.324) $>$ \texttt{muse-spark-1.2}
+(0.312); and the post-R500 replication (n=3 for the leader) exposed sampling
+non-determinism and latency instability as mandatory methodological
+limitations in LLM benchmarking. All 15 cited references have validated
+active DOIs (HTTP 200 via \texttt{doi.org}). Process flowcharts and the full
+architecture x-ray (layers C0--C5) appear in the methodology and discussion
+sections.
+\end{otherlanguage*}
+\textbf{Keywords}: artificial intelligence; mathematical reasoning;
+multi-agent systems; benchmarking; free LLMs; IMO.
+\end{resumo}

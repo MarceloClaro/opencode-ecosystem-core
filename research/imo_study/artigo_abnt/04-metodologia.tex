@@ -1,0 +1,98 @@
+% ============================================================================
+% 04-metodologia.tex — Metodologia (módulo 5/8)
+% ============================================================================
+\chapter{Metodologia}
+
+\section{Desenho geral}
+
+O estudo é observacional-experimental e auditável: quatro problemas canônicos
+da IMO Shortlist (2020--2022) foram submetidos a LLMs gratuitas reais através
+da CLI \texttt{opencode run}, em três condições experimentais, com rotação
+controlada de contexto. O pipeline inteiro — da curadoria de paisagem ao
+relatório — é versionado em Git (ciclos R497--R500) e validado por suíte de
+testes (46 testes do R500 + 4066 anteriores, verdes na última rodada completa
+pré-R500; regressão R500 verde em 1,97~s).
+
+\subsection*{Curadoria acadêmica (R497)}
+O \texttt{landscape/manifest.json} foi enriquecido com a fonte acadêmica
+\texttt{deepmind/acme} (Apache-2.0), elevando o índice acadêmico para 5 fontes
+(25 agentes indexados). A convergência semântica (\texttt{acme} $\leftrightarrow$
+ecossistema) foi de 1,000 no laço de controle, 0,636 em agentes e pesquisa. A
+terceira parte foi notificada em \texttt{THIRD\_PARTY\_NOTICES.md}.
+
+\subsection*{Contrato de pipeline real (R498)}
+O comando \texttt{/diagnose} foi regenerado com \texttt{deep=True}. O
+\texttt{TestRealPipeContract} (3 testes) garante: (a) o template do comando
+contém \texttt{deep=True}; (b) o módulo de integração idem; (c) execução real
+de documentos. Execuções reais: ecossistema (13,8~s, 8 blocos),
+\texttt{ARCHITECTURE.md} (SPS=1,0, NRR=0), \texttt{SPEC-935-R200}
+(NRR=0,06, CR=0,8654), \texttt{07-discussion.tex} (CR=0,9712).
+
+\section{Corpus IMO e solucionador determinístico}
+
+\subsection*{Corpus}
+% Problemas canônicos do harness (R442): algebra-001 (Shortlist 2021, resposta
+% 3), algebra-004 (2^{u-2}), number-theory-001 (p³−q⁵=(p+q)², resposta (7,3),
+% Shortlist 2022) e combinatorics-001 (2^{n−1}, n=1..6, Shortlist 2020).
+
+Para a tarefa de benchmark usou-se o problema de teoria dos números
+\texttt{imo-bench-number-theory-001}: encontrar primos $p,q$ tais que
+$p^3 - q^5 = (p+q)^2$, cuja solução é $(p,q)=(7,3)$, verificação
+$7^3 - 3^5 = 343 - 243 = 100 = 10^2 = (7+3)^2$.
+
+\subsection*{Solucionador anti-leak (\texttt{RealIMOSolver}, R499)}
+O \textit{harness} original (R442) ecoava a resposta esperada
+(\texttt{short\_answer}) e atribuía nota 7 sozinho — \textit{leak} que
+inviabilizava medição. O \texttt{RealIMOSolver} implementa solução
+determinística: (i) enumeção de primos até 400 para o par $(7,3)$ (correto);
+(ii) divisão inteira (\texttt{N=3}) versus racional (\texttt{N=1}) — achado
+de ambiguidade de paráfrase; (iii) máximo local incluindo extremos
+($2^{n-1}$) versus somente interior ($n=1,2$ falha); (iv) validação numérica
+apenas, sem prova formal (status \textit{parcial}). Resultado: 2/4 corretos,
+média 4,5/7 (alg001=6, nt001=6, alg004=3, comb001=3), além da sensibilidade
+do \textit{grading head} à serialização ($2^{(n-1)}$ vs $2^{n-1}$).
+
+\section{Condições experimentais}
+
+Três condições (mesmo problema, mesma CLI, modelos free):
+\begin{itemize}
+  \item \textbf{C0 (crua)}: prompt direto sem contexto adicional;
+  \item \textbf{C1 (contexto)}: prompt com contexto do problema (sem scaffold);
+  \item \textbf{C2 (scaffold MASWOS)}: prompt com o template MASWOS de 16
+  estágios, exigindo etapas explícitas (leitura, hipóteses, verificação,
+  conformidade) e formato de saída estrito (um par).
+\end{itemize}
+A \textit{score} composto é $S = 0{,}40\,A + 0{,}30\,V + 0{,}20\,C + 0{,}10\,D$,
+com acurácia $A$, velocidade normalizada $V = 1 - (\text{latência} - 20)/90$
+(clampado em $[0,1]$), conformidade $C$ e disponibilidade $D$.
+
+\section{Fluxograma do pipeline de benchmark}
+
+% Fluxograma do processo (Figura 1): pasta fig-flux-pipeline.tex
+\input{fig-flux-pipeline.tex}
+
+\section{Roteamento automático (R500)}
+
+O \texttt{ModelRouter} foi estendido com catálogo free curado
+(\texttt{integrations/free\_model\_catalog.py}) derivado do \textit{score}
+R499: a rota \texttt{route\_free(task\_type)} seleciona o melhor modelo por
+tipo de tarefa; \texttt{list\_all\_models()} passou a incluir
+\texttt{opencode/big-pickle} e os cinco modelos free. O fluxograma do
+roteamento é apresentado na seção de resultados (Figura 2).
+
+\section{Replicação pós-R500}
+
+Após a implementação (46 testes verdes), repetiu-se a condição C2 usando o
+próprio roteamento (\texttt{route\_free("academic")} $\rightarrow$ mimo; n=3;
+\texttt{route\_free("writing")} $\rightarrow$ big-pickle; n=2). A hipótese de
+infraestrutura — estado acumulado do \textit{host} opencode de 1h15m sem
+reinício — foi registrada e testada apenas parcialmente (reinício mataria a
+sessão ativa); o não-determinismo de amostragem foi confirmado.
+
+\section{Limitações pré-registradas}
+
+(i) $n$ pequeno por condição; (ii) latência de infra variável (timeout
+observado); (iii) ausência de reinício do \textit{host} antes das réplicas;
+(iv) \textit{harness} de 4 problemas não é amostra estatística; (v) nenhuma
+validação externa (editorial/benchmark independente) — portanto nenhum
+resultado é rotulado \textit{superhuman} ou \textit{A1}.

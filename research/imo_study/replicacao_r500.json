@@ -1,0 +1,59 @@
+{
+  "replicas": {
+    "opencode/mimo-v2.5-free": [
+      {
+        "n": 1,
+        "elapsed_s": 26.56,
+        "correct": true,
+        "status": "ok",
+        "out": "**(7, 3)** 7³ − 3⁵ = 343 − 243 = 100 = (7+3)² = 10² ✓"
+      },
+      {
+        "n": 2,
+        "elapsed_s": 20.95,
+        "correct": true,
+        "status": "ok",
+        "out": "**(p, q) = (7, 3)** Verificação: 7³ − 3⁵ = 343 − 243 = 100 = (7+3)²"
+      },
+      {
+        "n": 3,
+        "elapsed_s": 110.0,
+        "correct": false,
+        "status": "timeout",
+        "out": ""
+      }
+    ],
+    "opencode/big-pickle": [
+      {
+        "n": 1,
+        "elapsed_s": 20.9,
+        "correct": false,
+        "status": "vazio",
+        "out": ""
+      },
+      {
+        "n": 2,
+        "elapsed_s": 41.67,
+        "correct": false,
+        "status": "vazio",
+        "out": ""
+      }
+    ]
+  },
+  "veredito": "Benchmark de LLMs é ESTOCÁSTICO: 1 trial/condição não estima taxa real. R499 reportou 1/1; replicação mostra instabilidade (mimo: 1º acerto R499 vs erro na replicação 1). Não-determinismo de amostragem é limitação metodológica OBRIGATÓRIA no artigo.",
+  "veredito_host": {
+    "pergunta": "Reiniciar o opencode ecosystem core mudaria o resultado das réplicas?",
+    "fatos": [
+      "MCP servers (6 persistentes, uptime 1h15m) NÃO importam model_router/free_model_catalog (grep vazio) — R500 ativo em processos Python novos (46 testes passando).",
+      "Host opencode (pid 157077, 1h15m) acumula estado (build/cache/contexto da sessão atual); opencode run -m big-pickle é subprocesso DENTRO dele.",
+      "big-pickle é o modelo da sessão corrente do orquestrador — contexto enorme acumulado.",
+      "mimo (mesmo host) acertou 2/3 réplicas; falha restante = timeout 110s (latência), não lógica."
+    ],
+    "veredito": "Parcialmente sim. Reiniciar o host limparia estado acumulado e é o procedimento correto ANTES de remedir big-pickle; não executado porque mataria a sessão atual. Não-determinismo de amostragem + instabilidade de latência também presentes (mimo 2/3, um timeout).",
+    "decisao_artigo": {
+      "mimo": "score R499 0.987 (1 trial) + replicação pós-R500 n=3 → acurácia 0.67; reportar média e n.",
+      "big-pickle": "score R499 0.923 PRÉ-R500; replicação pós-R500 n=2 → 0 acertos (vazio); NÃO confirmado; requer reinício do host p/ validação — reportar como não verificado na replicação.",
+      "direta": "Reportar limitação: 1 trial/condição não estima taxa real; LLMs free são estocásticos e latência instável."
+    }
+  }
+}

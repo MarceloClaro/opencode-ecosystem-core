@@ -1,0 +1,314 @@
+{
+  "opencode/mimo-v2.5-free": [
+    {
+      "problem": "r506-algebra-001",
+      "category": "algebra",
+      "expected": "866",
+      "code": "# Solução\nimport math\nresposta = math.floor(2025/7) + math.floor(2025/8) + math.floor(2025/9)\nprint(resposta)",
+      "stdout": "767\n",
+      "stderr": "",
+      "status": "wrong_answer",
+      "elapsed_s": 0.06,
+      "model_time_s": 28.1,
+      "exit_code": 0
+    },
+    {
+      "problem": "r506-algebra-004",
+      "category": "algebra",
+      "expected": "1",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 130.2,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-nt-001",
+      "category": "number_theory",
+      "expected": "(7, 3)",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 42.4,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-comb-001",
+      "category": "combinatorics",
+      "expected": "n-1",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 130.2,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-algebra-002",
+      "category": "algebra",
+      "expected": "5",
+      "code": "# Solução\nn = 2\nwhile 2**n <= n**2:\nn += 1\nprint(n)",
+      "stdout": "",
+      "stderr": "  File \"/tmp/r506_exec_225420.py\", line 4\n    n += 1\n    ^\nIndentationError: expected an indented block after 'while' statement on line 3\n",
+      "status": "runtime_error",
+      "elapsed_s": 0.35,
+      "model_time_s": 22.8,
+      "exit_code": 1
+    },
+    {
+      "problem": "r506-nt-002",
+      "category": "number_theory",
+      "expected": "{3}",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 45.0,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-nt-003",
+      "category": "number_theory",
+      "expected": "1006",
+      "code": "n = 2023\np = 3\nexp = 0\nwhile n:\nn //= p\nexp += n\nprint(exp)",
+      "stdout": "",
+      "stderr": "  File \"/tmp/r506_exec_225420.py\", line 5\n    n //= p\n    ^\nIndentationError: expected an indented block after 'while' statement on line 4\n",
+      "status": "runtime_error",
+      "elapsed_s": 0.2,
+      "model_time_s": 35.0,
+      "exit_code": 1
+    },
+    {
+      "problem": "r506-comb-002",
+      "category": "combinatorics",
+      "expected": "88",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 25.5,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-geo-001",
+      "category": "geometry",
+      "expected": "2043230",
+      "code": "# Solução\nn = 2023\ndiagonais = n * (n - 3) // 2\nprint(diagonais)",
+      "stdout": "2043230\n",
+      "stderr": "",
+      "status": "correct",
+      "elapsed_s": 0.09,
+      "model_time_s": 27.4,
+      "exit_code": 0
+    }
+  ],
+  "opencode/big-pickle": [
+    {
+      "problem": "r506-algebra-001",
+      "category": "algebra",
+      "expected": "866",
+      "code": "print(2025 // 7 + 2025 // 8 + 2025 // 9)",
+      "stdout": "767\n",
+      "stderr": "",
+      "status": "wrong_answer",
+      "elapsed_s": 0.07,
+      "model_time_s": 31.2,
+      "exit_code": 0
+    },
+    {
+      "problem": "r506-algebra-004",
+      "category": "algebra",
+      "expected": "1",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 140.2,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-nt-001",
+      "category": "number_theory",
+      "expected": "(7, 3)",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 140.2,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-comb-001",
+      "category": "combinatorics",
+      "expected": "n-1",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 140.2,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-algebra-002",
+      "category": "algebra",
+      "expected": "5",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 28.2,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-nt-002",
+      "category": "number_theory",
+      "expected": "{3}",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 32.2,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-nt-003",
+      "category": "number_theory",
+      "expected": "1006",
+      "code": "n = 2023\np = 3\nexp = 0\npower = p\nwhile power <= n:\nexp += n // power\npower *= p\nprint(exp)",
+      "stdout": "",
+      "stderr": "  File \"/tmp/r506_exec_225420.py\", line 6\n    exp += n // power\n    ^^^\nIndentationError: expected an indented block after 'while' statement on line 5\n",
+      "status": "runtime_error",
+      "elapsed_s": 0.18,
+      "model_time_s": 15.9,
+      "exit_code": 1
+    },
+    {
+      "problem": "r506-comb-002",
+      "category": "combinatorics",
+      "expected": "88",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "model_time_s": 35.3,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-geo-001",
+      "category": "geometry",
+      "expected": "2043230",
+      "code": "# Solução\nimport math\ndef diagonais(n: int) -> int:\n# Total de segmentos entre n vértices menos as n arestas (lados)\nreturn n * (n - 3) // 2\nn = 2023\nresposta_final = diagonais(n)\nprint(resposta_final)",
+      "stdout": "",
+      "stderr": "  File \"/tmp/r506_exec_225420.py\", line 5\n    return n * (n - 3) // 2\n    ^^^^^^\nIndentationError: expected an indented block after function definition on line 3\n",
+      "status": "runtime_error",
+      "elapsed_s": 0.17,
+      "model_time_s": 14.6,
+      "exit_code": 1
+    }
+  ],
+  "opencode/nemotron-3-ultra-free": [
+    {
+      "problem": "r506-algebra-001",
+      "expected": "866",
+      "code": "# Solução\nimport math\nresultado = math.floor(2025 / 7) + math.floor(2025 / 8) + math.floor(2025 / 9)\nprint(resultado)",
+      "stdout": "767\n",
+      "stderr": "",
+      "status": "wrong_answer",
+      "elapsed_s": 0.07,
+      "exit_code": 0
+    },
+    {
+      "problem": "r506-algebra-004",
+      "expected": "1",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-nt-001",
+      "expected": "(7, 3)",
+      "code": "# Solução\nimport math\ndef is_prime(n):\nif n < 2:\nreturn False\nif n % 2 == 0:\nreturn n == 2\nr = int(math.isqrt(n))\nfor i in range(3, r + 1, 2):\nif n % i == 0:\nreturn False\nreturn True\n# Gerar primos até um limite razoável\n# q^5 cresce rápido; q=13 => 371293, p^3 > q^5 => p > 71\n# Vamos buscar primos até 2000 para p e 100 para q\nmax_q = 100\nmax_p = 2000\nprimes = [i for i in range(2, max_p + 1) if is_prime(i)]\nprimes_q = [p for p in primes if p <= max_q]\nsolutions = []\nfor q in primes_q:\nq5 = q ** 5\n# p deve satisfazer p^3 > q^5 => p > q^(5/3)\nmin_p = int(q ** (5/3)) + 1\nfor p in primes:\nif p < min_p:\ncontinue\nleft = p ** 3 - q5\nright = (p + q) ** 2\nif left == right:\nsolutions.append((p, q))\n# Se left > right e crescerá mais rápido, podemos parar?\n# p^3 domina (p+q)^2 para p grande, mas left = p^3 - q^5, right ~ p^2.\n# Para p suficientemente grande, left > right e a diferença aumenta.\n# No entanto, como q é fixo, left - right = p^3 - p^2 - 2pq - q^2 - q^5.\n# Derivada em p: 3p^2 - 2p - 2q > 0 para p > q. Então left - right é crescente para p > q.\n# Se left > right e p > q, não haverá mais soluções para este q.\nif left > right and p > q:\nbreak\nfor pair in solutions:\nprint(pair)",
+      "stdout": "",
+      "stderr": "  File \"/tmp/r506_exec_234278.py\", line 4\n    if n < 2:\n    ^^\nIndentationError: expected an indented block after function definition on line 3\n",
+      "status": "runtime_error",
+      "elapsed_s": 0.22,
+      "exit_code": 1
+    },
+    {
+      "problem": "r506-comb-001",
+      "expected": "n-1",
+      "code": "",
+      "stdout": "",
+      "stderr": "no_code",
+      "status": "code_missing",
+      "elapsed_s": 0.0,
+      "exit_code": -1
+    },
+    {
+      "problem": "r506-algebra-002",
+      "expected": "5",
+      "code": "# Solução\ndef encontrar_menor_n():\nn = 2\nwhile True:\nif 2 ** n > n ** 2:\nreturn n\nn += 1\nprint(encontrar_menor_n())",
+      "stdout": "",
+      "stderr": "  File \"/tmp/r506_exec_234278.py\", line 3\n    n = 2\n    ^\nIndentationError: expected an indented block after function definition on line 2\n",
+      "status": "runtime_error",
+      "elapsed_s": 0.24,
+      "exit_code": 1
+    },
+    {
+      "problem": "r506-nt-002",
+      "expected": "{3}",
+      "code": "# Solução\n# Pelo Pequeno Teorema de Fermat, para qualquer primo p, 2^p ≡ 2 (mod p).\n# Se p² divide 2^p + 1, então p divide 2^p + 1, logo 2^p ≡ -1 (mod p).\n# Combinando: 2 ≡ -1 (mod p) ⇒ 3 ≡ 0 (mod p) ⇒ p = 3.\n# Verificação: 2^3 + 1 = 9, e 3² = 9 divide 9. Logo, o único primo é 3.\nprint({3})",
+      "stdout": "{3}\n",
+      "stderr": "",
+      "status": "correct",
+      "elapsed_s": 0.05,
+      "exit_code": 0
+    },
+    {
+      "problem": "r506-nt-003",
+      "expected": "1006",
+      "code": "def v_p_factorial(n, p):\ncount = 0\npower = p\nwhile power <= n:\ncount += n // power\npower *= p\nreturn count\nresult = v_p_factorial(2023, 3)\nprint(result)",
+      "stdout": "",
+      "stderr": "  File \"/tmp/r506_exec_234278.py\", line 2\n    count = 0\n    ^^^^^\nIndentationError: expected an indented block after function definition on line 1\n",
+      "status": "runtime_error",
+      "elapsed_s": 0.23,
+      "exit_code": 1
+    },
+    {
+      "problem": "r506-comb-002",
+      "expected": "88",
+      "code": "import itertools\ndef count_local_maxima(perm):\ncount = 0\nfor i in range(1, 4):  # positions 2,3,4 (0-indexed 1,2,3)\nif perm[i-1] < perm[i] > perm[i+1]:\ncount += 1\nreturn count\ntotal = 0\nfor perm in itertools.permutations(range(1, 6)):\nif count_local_maxima(perm) == 2:\ntotal += 1\nprint(total)",
+      "stdout": "",
+      "stderr": "  File \"/tmp/r506_exec_234278.py\", line 3\n    count = 0\n    ^^^^^\nIndentationError: expected an indented block after function definition on line 2\n",
+      "status": "runtime_error",
+      "elapsed_s": 0.39,
+      "exit_code": 1
+    },
+    {
+      "problem": "r506-geo-001",
+      "expected": "2043230",
+      "code": "# Solução\nn = 2023\ndiagonals = n * (n - 3) // 2\nprint(diagonals)",
+      "stdout": "2043230\n",
+      "stderr": "",
+      "status": "correct",
+      "elapsed_s": 0.05,
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+% 00-introducao-pt.tex — Introdução
+\section{Introdução}
+\label{sec:intro}
+
+Modelos de linguagem de grande escala (LLMs) transformaram o raciocínio em
+linguagem natural e matemática. O prompting \emph{Chain-of-Thought} elicita
+etapas intermediárias de raciocínio \citep{wei_cot}; agentes reflexivos
+repetem após falha \citep{shinn_reflexion}; agentes aumentados com
+ferramentas intercalam raciocínio e ação \citep{yao_react}. Na matemática
+formal, o LeanDojo acopla LLMs a um assistente de prova
+\citep{yang_leandojo}, e o AlphaGeometry atingiu nível de medalha de prata
+em geometria da IMO \citep{alpha_geometry}. Frameworks multiagente como
+AutoGen \citep{wu_autogen} e MetaGPT \citep{hong_metagpt} propõem
+colaboração programável entre agentes.
+
+Por outro lado, benchmarks matemáticos padrão --- MATH \citep{hendrycks_math},
+GSM8K \citep{cobbe_gsm8k}, MMLU \citep{hendrycks_mmlu} --- são tipicamente
+avaliados em modelos pagos e de ponta, com um único trial por item e sem
+relatório de incerteza amostral. A crítica recente de
+\citet{schaeffer_mirage} alerta que capacidades aparentes podem ser
+artefatos de métricas descontínuas; leis de escala computacional otimizada
+\citep{hoffmann_chinchilla} e modelos treinados com código
+\citep{chen_codex} complicam ainda mais narrativas simplistas.
+
+Três lacunas motivam nosso estudo. \emph{Primeira}, LLMs gratuitos --- a
+única opção para muitos pesquisadores --- raramente são avaliados em
+problemas genuínos de olimpíadas com pipelines auditáveis. \emph{Segunda},
+a metodologia de benchmarking é frágil: um único problema e um único trial
+não estimam uma taxa real de acurácia; intervalos de confiança, testes
+pareados e validação cruzada são normas em outros campos mas incomuns em
+relatórios de LLMs. \emph{Terceira}, os efeitos de orquestração multiagente
+(delegação, scaffolding, verificação) são confundidos com capacidade bruta
+do modelo.
+
+\textbf{Pergunta de pesquisa.} Como LLMs gratuitos e reais podem ser
+orquestrados, através de uma arquitetura multiagente auditável, para
+raciocinar rigorosamente em problemas da IMO, e como a evidência empírica
+--- incluindo incerteza e limitações --- pode ser reportada honestamente?
+
+\textbf{Contribuições.}
+\begin{enumerate}
+  \item Pipeline de benchmarking auditável (R498--R509): contrato de
+  diagnóstico profundo, resolvedor determinístico anti-vazamento, e scaffold
+  de raciocínio MASWOS de 16 estágios (C2).
+  \item Ranking empírico de cinco modelos gratuitos sob condições de scaffold
+  (R499) seguido de uma validação cruzada de 9 problemas $\times$ 3 modelos
+  após reinício do host (R503), com intervalos de confiança Clopper--Pearson
+  95\%, testes McNemar pareados, $\kappa$ de Cohen e distribuições de latência.
+  \item Roteamento automático tarefa$\rightarrow$modelo (R500) guiado por
+  curadoria empírica, com calibração Brier/ECE (R504) e detecção de drift.
+  \item Camada de governança epistemológica (R504): Evidence Guard, Gates
+  Feynman (FEG-01..07), Avaliação Offline de Política v3 e Ledger de
+  Auditoria SHA-256.
+  \item Ponte Hermes (R505): contratos opcionais de interoperabilidade com o
+  runtime Hermes, sem transferir autoridade epistemológica.
+\end{enumerate}
+
+A Seção~\ref{sec:methods} descreve a metodologia; a
+Seção~\ref{sec:results} apresenta os resultados; a
+Seção~\ref{sec:discussion} discute implicações (incluindo o raio-x de
+arquitetura); a Seção~\ref{sec:conclusion} conclui.

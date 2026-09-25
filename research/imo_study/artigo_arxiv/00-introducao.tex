@@ -1,0 +1,57 @@
+% ============================================================================
+% 00-introducao.tex — Introduction (module 1/5)
+% ============================================================================
+\section{Introduction}
+\label{sec:intro}
+
+Large language models (LLMs) have transformed reasoning in natural language
+and mathematics. Chain-of-Thought prompting elicits intermediate reasoning
+steps \citep{wei_cot}; reflective agents retry after failure
+\citep{shinn_reflexion}; tool-augmented agents interleave reasoning and
+action \citep{yao_react}. In formal mathematics, LeanDojo couples LLMs to a
+proof assistant \citep{yang_leandojo}, and AlphaGeometry attained silver-medal
+level on IMO geometry \citep{alpha_geometry}. Multi-agent frameworks such as
+AutoGen \citep{wu_autogen} and MetaGPT \citep{hong_metagpt} propose program-
+mable collaboration between agents. Meanwhile, standard mathematical
+benchmarks --- MATH \citep{hendrycks_math}, GSM8K \citep{cobbe_gsm8k}, MMLU
+\citep{hendrycks_mmlu} --- are typically evaluated on paid frontier models,
+with a single trial per item and without reporting sampling uncertainty.
+Recent critique \citep{schaeffer_mirage} warns that apparent capabilities may
+be artifacts of discontinuous metrics; compute-optimal scaling laws
+\citep{hoffmann_chinchilla} and code-trained models \citep{chen_codex}
+further complicate simple narratives. Techniques that elicit latent
+predictions \citep{ryoo_eliciting} extend the toolbox.
+
+Three gaps motivate our study. \emph{First}, free-tier LLMs --- the only
+option for many researchers --- are rarely benchmarked on genuine olympiad
+problems with auditable pipelines. \emph{Second}, benchmarking methodology is
+fragile: a single problem and a single trial cannot estimate a real accuracy
+rate; confidence intervals, paired tests and cross-validation are the norm in
+other fields but uncommon in LLM reports. \emph{Third}, multi-agent
+orchestration effects (delegation, scaffolding, verification) are conflated
+with raw model capability.
+
+\textbf{Research question.} How can free, real LLMs be orchestrated, through an
+auditable multi-agent architecture, to reason rigorously on IMO problems, and
+how can the empirical evidence --- including uncertainty and limitations --- be
+reported honestly?
+
+\textbf{Contributions.}
+\begin{enumerate}
+  \item An auditable benchmark pipeline (R498--R499): deep diagnostics
+  contract, deterministic anti-leak solver replacing a leaking harness, and a
+  16-stage MASWOS reasoning scaffold (C2).
+  \item Empirical ranking of five free models under scaffold conditions
+  (R499) followed by a \emph{cross-validated} 9-problem $\times$ 3-model
+  benchmark after a host restart (R503), with Clopper--Pearson 95\%
+  confidence intervals, paired McNemar tests, Cohen's $\kappa$ and latency
+  distributions.
+  \item Automatic task$\rightarrow$model routing (R500) driven by empirical
+  curation.
+  \item A full architecture x-ray (layers C0--C5) identifying which
+  components mattered, and the refutation of a host-state hypothesis.
+\end{enumerate}
+
+The remainder of this paper: \S\ref{sec:methods} methodology;
+\S\ref{sec:results} results; \S\ref{sec:discussion} discussion (including
+the x-ray); \S\ref{sec:conclusion} conclusion.

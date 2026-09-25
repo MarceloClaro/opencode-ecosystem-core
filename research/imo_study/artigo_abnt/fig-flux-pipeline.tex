@@ -1,0 +1,36 @@
+% ============================================================================
+% fig-flux-pipeline.tex — Fluxograma do pipeline de benchmark (Figura 1)
+% ============================================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=0.9cm and 1.4cm,
+  caixa/.style={rectangle, draw=cororo, thick, rounded corners=2pt,
+                fill=cororo!8, minimum width=3.2cm, minimum height=0.9cm,
+                align=center, font=\footnotesize},
+  decisao/.style={diamond, draw=coramarelo, thick, fill=coramarelo!10,
+                  aspect=2, align=center, font=\footnotesize},
+  seta/.style={-{Stealth[length=3mm]}, thick, color=corcinza}
+]
+  \node[caixa] (prob) {Problema IMO\\ (nt001: $(7,3)$)};
+  \node[caixa, right=of prob] (cond) {Condição\\ C0 / C1 / C2};
+  \node[caixa, right=of cond] (llm) {LLM free real\\ \texttt{opencode run}};
+  \node[decisao, below=of llm] (saida) {saída\\ conforme?};
+  \node[caixa, below=of saida] (verif) {Verificação\\ \texttt{RealIMOSolver}};
+  \node[caixa, below=of verif] (score) {Score composto\\ $S=0{,}4A+0{,}3V+0{,}2C+0{,}1D$};
+  \node[caixa, below=of score] (rank) {Ranking\\ curadoria R499};
+
+  \draw[seta] (prob) -- (cond);
+  \draw[seta] (cond) -- (llm);
+  \draw[seta] (llm) -- (saida);
+  \draw[seta] (saida) -- node[right, font=\tiny]{sim} (verif);
+  \draw[seta, color=corvermelho] (saida) -- ++(2.4,0) node[right, font=\tiny, color=corvermelho]{não: vazio/off-format $\rightarrow$ rejeita};
+  \draw[seta] (verif) -- (score);
+  \draw[seta] (score) -- (rank);
+\end{tikzpicture}
+\caption{Fluxograma do pipeline de \textit{benchmark} (R499--R500): o problema
+IMO entra na condição C0/C1/C2; o LLM free responde via CLI; a saída é
+verificada por conformidade e pelo solucionador determinístico; o \textit{score}
+composto alimenta o ranking curado que dirige o roteamento R500.}
+\label{fig:flux-pipeline}
+\end{figure}
