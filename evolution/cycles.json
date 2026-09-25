@@ -12068,6 +12068,34 @@
       ],
       "tests": "test_r137 3/3 (reprodutibilidade do opencode.json)",
       "score": 88
+    },
+    {
+      "round_id": "R596",
+      "objective": "Auto-registro de agentes do catálogo no Blackboard (A2A) — popular o quadro negro com Agent Cards reais para matching CFP",
+      "changes": [
+        "mci/agent_registry_bootstrap.py: parse_agent_catalog_md (frontmatter YAML + fallbacks), load_catalog_agents, register_catalog_agents via MetaBus agent.register",
+        "mci/mcp_server.py: auto-registro do catálogo no boot (env MCI_AUTOREGISTER, padrão ligado; nunca impede o MCP de subir)",
+        "marceloclaro/cli.py: comando agent-register / register-agents",
+        "tests/test_r596_agent_autoregister.py: 10 testes (extração, idempotência, pulo de malformados, catálogo real >=100)"
+      ],
+      "score": 100.0,
+      "lessons": [
+        "Frontmatter do catálogo é heterogêneo (inclusive aninhado/quebrado) — parser deve ser tolerante e pular malformados (49/206 arquivos sem frontmatter YAML válido)",
+        "157 agentes do catálogo registrados com capabilities derivadas (skills+tags+default); registro idempotente por sobrescrita no dict",
+        "Auto-registro no boot do MCP deve ter env guard e try/except para nunca impedir o servidor de subir",
+        "PyYAML 6.0.3 disponível no venv — parse seguro com yaml.safe_load"
+      ],
+      "timestamp": 1790346874.96336,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

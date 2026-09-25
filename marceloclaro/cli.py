@@ -264,6 +264,13 @@ def main() -> int:
         if cmd in ("reverse-scan", "reverso"):
             return _cmd_reverse_scan(sys.argv[2:])
 
+        if cmd in ("agent-register", "register-agents"):
+            from mci.agent_registry_bootstrap import register_catalog_agents
+
+            report = register_catalog_agents()
+            print(json.dumps(report, indent=2, ensure_ascii=False))
+            return 0
+
         orchestrator = MarceloClaroOrchestrator()
         if cmd == "status":
             print(json.dumps(orchestrator.status(), indent=2, ensure_ascii=False))

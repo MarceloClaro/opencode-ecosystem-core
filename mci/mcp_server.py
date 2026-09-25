@@ -214,6 +214,21 @@ class SimpleMCPServer:
 # Instancia o servidor
 mci_server = SimpleMCPServer("metacognitive-interconnect")
 
+# Auto-registro do catálogo de agentes no boot (padrão ligado; desligue com
+# MCI_AUTOREGISTER=0). Popula o Blackboard com os Agent Cards do catálogo
+# para que o matching de capacidades (CFP) tenha base real.
+if os.environ.get("MCI_AUTOREGISTER", "1") not in ("0", "false", "False"):
+    try:
+        from mci.agent_registry_bootstrap import register_catalog_agents
+
+        _boot_summary = register_catalog_agents()
+        logger.info(
+            "Auto-registro no boot: %d agentes do catálogo.",
+            _boot_summary.get("registered", 0),
+        )
+    except Exception:  # nunca impede o MCP de subir
+        logger.exception("Falha no auto-registro de agentes do catálogo.")
+
 # --- Ferramentas MCP ---
 
 def mci_register_agent(args: Dict[str, Any]) -> Dict[str, Any]:
