@@ -1,0 +1,326 @@
+# O Fechamento Comunitário: o caso da Escola Manoel Valdivino, em Bonito -- Crateús/CE
+
+Maria Julieta Araújo Martins Lima  e  Antonia Iane de Lima
+
+_E-mails: julietamartins988@gmail.com; antoniaianelima@gmail.com_ (não constam na versão impressa)
+
+Crateús, CE – 2026
+
+# Folha de Rosto
+
+*Artigo apresentado ao [Programa de Pós-Graduação em Educação do Campo] da [Instituição de Ensino Superior], como requisito parcial para a obtenção do título de Mestre(a) em Educação do Campo.*
+
+Crateús, CE – 2026
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Folha de Aprovação
+
+Maria Julieta Araújo Martins Lima  e  Antonia Iane de Lima
+
+
+O Fechamento Comunitário: o caso da Escola Manoel Valdivino, em Bonito – Crateús/CE
+
+
+
+
+
+
+
+
+Trabalho aprovado. Crateús, CE, [dia] de [mês] de 2026:
+
+
+
+________________________________________
+
+[Nome do(a) Orientador(a)] \\ Orientador(a)
+
+
+________________________________________
+
+[Nome do(a) Avaliador(a) 1] \\ Avaliador(a)
+
+
+________________________________________
+
+[Nome do(a) Avaliador(a) 2] \\ Avaliador(a)
+
+
+
+Crateús, CE
+2026
+
+
+
+# Resumo
+
+O presente artigo discute os impactos do fechamento de escolas do campo sobre o vínculo comunitário, tomando como referência o caso da Escola Manoel Valdivino, localizada na comunidade de Bonito, zona rural do município de Crateús – CE. A pesquisa aborda a importância da escola rural enquanto espaço de educação, convivência social e fortalecimento da identidade cultural das populações do campo. O estudo demonstra que o encerramento das atividades escolares ultrapassa a dimensão administrativa, provocando consequências sociais, culturais e educacionais para a comunidade. A investigação, de natureza qualitativa, adota a modalidade de estudo de caso, com base em revisão bibliográfica e análise documental sobre a educação do campo e o processo de nucleação escolar no Brasil.
+
+
+
+**Palavras-chave**: Educação do Campo. Escola Rural. Comunidade. Fechamento Escolar. Crateús.
+
+
+# Abstract
+
+This article discusses the impacts of the closure of rural schools on community ties, using the case of the Manoel Valdivino School, located in the community of Bonito, in the rural area of the municipality of Crateús, as a reference. The research addresses the importance of rural schools as spaces for education, social interaction, and strengthening the cultural identity of rural populations. The study demonstrates that the closure of school activities goes beyond the administrative dimension, causing social, cultural, and educational consequences for the community. The investigation, of a qualitative nature, adopts a case-study approach, based on a literature review and document analysis on rural education and the school consolidation process in Brazil.
+  
+
+  
+  **Keywords**: Rural Education. Rural School. Community. School Closure. Crateús.
+
+
+
+
+
+
+
+# Lista de Abreviaturas e Siglas
+
+* **CE** — Ceará
+* **CNE** — Conselho Nacional de Educação
+* **IBGE** — Instituto Brasileiro de Geografia e Estatística
+* **INEP** — Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira
+* **LDB** — Lei de Diretrizes e Bases da Educação Nacional
+* **MEC** — Ministério da Educação
+* **PPP** — Projeto Político-Pedagógico
+* **SEBRAE** — Serviço Brasileiro de Apoio às Micro e Pequenas Empresas
+* **SENAR** — Serviço Nacional de Aprendizagem Rural
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+.\arabic{subsection}}
+
+
+# Introdução
+
+A escola do campo representa muito mais do que um espaço destinado ao ensino formal. Nas comunidades rurais, ela constitui um importante centro de convivência social, de construção da identidade coletiva e de valorização cultural. Em diversas regiões do Brasil, principalmente no Nordeste, o fechamento de escolas rurais tem provocado impactos significativos na vida das famílias campesinas. No município de Crateús, localizado no sertão cearense, essa realidade também pode ser observada. O caso da Escola Manoel Valdivino, situada na comunidade de Bonito, evidencia os desafios enfrentados pelas populações rurais diante do processo de fechamento ou de redução das atividades escolares nas comunidades do campo.
+
+A problemática torna-se relevante porque o desaparecimento dessas instituições compromete não apenas o acesso à educação, mas também os laços comunitários, a permanência das famílias no campo e a preservação das tradições locais.
+
+A educação do campo pode ser definida como um movimento e uma política originados da demanda por escola e da crítica à educação ofertada aos camponeses (educação rural), cuja constituição histórica é compreendida pela interpretação da luta de classes, das tensões e dos conflitos que ocorrem nos territórios [@caldart2009]. Assim, é importante compreender como essa política tem se desenvolvido nos municípios, de maneira que ela seja afirmada enquanto direito do povo e não como mercadoria.
+
+A educação ofertada aos camponeses no Brasil foi inicialmente pensada por uma elite agrária e escravocrata interessada apenas na exploração da mão de obra, voltada para a produção latifundiária. Posteriormente, com a ascensão dos movimentos sociais e a luta por reforma agrária, começou-se a pensar também em um modelo de educação vinculado à realidade da vida do camponês, que valorizasse seu modo de produção e sua cultura. Assim, nasceu a educação do campo, compreendida, na análise de @caldart2009, como instrumento de apoio técnico, intelectual e político nas lutas que os trabalhadores do campo travam cotidianamente para afirmar o direito à educação em seu próprio território.
+
+A maioria das escolas do campo ainda está distante de atuar com as metodologias e os princípios necessários para o atendimento daquilo que preconizam as diretrizes da Educação do Campo. A luta atual é para que cada vez mais a escola do campo seja promotora do desenvolvimento do educando para sua formação intelectual e sua atuação no próprio campo. O problema é que muitos governos, em vez de trabalharem para o atendimento desse propósito, têm feito uma política de fechamento de escolas do campo, com a justificativa de ser inviável manter escolas isoladas com número reduzido de alunos, acabar com as turmas multisseriadas – aquelas em que um único professor atende, em uma mesma sala, estudantes de diferentes séries e idades – e concentrar recursos, uma vez que o valor destinado às despesas é calculado de acordo com o número de alunos. Defendem ainda que melhores condições de ensino e de estrutura podem ser ofertadas em escolas nucleadas, resultantes de fechamentos de outras unidades.
+
+Essa realidade foi verificada no município de Crateús, localizado a cerca de 380 km de Fortaleza, no sertão cearense – região que, juntamente com o Norte, lidera o ranking de fechamento de escolas do campo no Brasil [@santosbezerra2025]. Discutir os motivos desses fechamentos e apresentar a opinião da comunidade escolar, possivelmente impactada por novos fechamentos ou nucleamentos, constituem os objetivos deste trabalho.
+
+Nesse sentido, esta pesquisa tem como objetivo geral discutir os motivos do fechamento de escolas do campo no município de Crateús e analisar os impactos desse processo sobre a comunidade de Bonito, tomando como referência o caso da Escola Manoel Valdivino. Como objetivos específicos, busca-se: (i) caracterizar o processo de nucleação e fechamento de escolas no campo; (ii) evidenciar o papel social da escola para as comunidades rurais; e (iii) compreender os impactos do fechamento sobre o vínculo comunitário. A metodologia adotada para o alcance desses objetivos é apresentada na seção 3.
+
+
+# Referencial Teórico
+
+
+## Paradigmas da educação rural e do campo
+Notar a diferença entre educação rural e educação do campo é fundamental para fortalecer aquela que realmente interessa ao campesinato. Apresenta-se, abaixo, uma breve caracterização da educação rural e da educação do campo.
+
+A história da educação do campo no Brasil foi fortemente influenciada pela conjuntura política e econômica do país, de modo que a visão de educação ofertada aos moradores do campo surge condicionada pelas matrizes culturais escravistas e latifundiárias e controlada pelo poder político e econômico das oligarquias [@antunesrocha2014]. Esse grupo importou um modelo de educação urbana caracterizado pela dominação das elites agrárias sobre os trabalhadores e por um ensino direcionado para a formação de mão de obra para a agricultura produtivista e para o desenvolvimento urbano-industrial, bem como para conter o êxodo rural [@caldart2009].
+
+O processo de modernização do Brasil tratou a escolarização como instrumento de desenvolvimento, em um projeto no qual a educação ofertada às populações rurais foi planejada a partir de interesses externos ao campo: para as elites agrárias, tratava-se de formar mão de obra para a grande lavoura; para as elites urbanas, a escola no campo funcionava como instrumento de contenção do fluxo migratório e de prevenção de problemas urbanos como inchaço populacional, marginalização, violência e falta de oportunidades de trabalho [@caldart2009].
+
+Do ponto de vista da Educação do Campo, esse percurso histórico não é um dado neutro: ele explica por que a escola presente no campo, durante décadas, não foi uma escola do campo, mas uma extensão do modelo urbano de ensino, construída de fora para dentro e à margem dos interesses dos sujeitos camponeses [@caldart2009; @antunesrocha2014].
+
+Antes, porém, é importante entender que a Educação do Campo não é uma continuidade da Educação Rural. As características de ambas são elucidadas por @arroyo2003; @arroyo2012, @fernandes2008, @caldart2009 e @antunesrocha2014. O Quadro 1, a seguir, apresenta alguns elementos da abordagem desses autores em relação à presença dessas particularidades nos espaços escolares em questão.
+
+**Quadro 1 – Principais características da Educação Rural e da Educação do Campo**
+
+| **CARACTERÍSTICAS DA EDUCAÇÃO RURAL** | **CARACTERÍSTICAS DA EDUCAÇÃO DO CAMPO** |
+| --- | --- |
+| Propostas de ensino voltadas às demandas capitalistas do mercado, que favorecem a alienação à classe dominante. | Descontinuar com as ideologias dominantes, estimulando o protagonismo dos camponeses, fortalecendo as relações com a comunidade. |
+| Extensão da educação urbana, dominada pela relação homem-natureza elencada na capacidade de força de trabalho e produção de mercadorias. | Referenciais metodológicos e teóricos conjecturados aos modos de vida, à cultura e à identidade social dos sujeitos. |
+| Desprestígio dos saberes social, cultural, histórico e econômico. | Valorização das práticas pedagógicas que articulam as vivências socioculturais, respeitando a diversidade. |
+| Processos educativos dissociados da realidade, relações de dominação e subordinação do conhecimento. | Práticas pedagógicas pautadas na igualdade de direitos, na valorização do ser humano (centro do processo), na aprendizagem crítica na perspectiva da emancipação dos indivíduos. |
+| Silenciamento e eliminação das falas e dos saberes dos camponeses, com a imposição do conhecimento chamado universal. | Conexão entre o saber popular e o científico, com base em pedagogias próprias concebidas e construídas com e pelos camponeses. |
+| Ingerência do SENAR e do SEBRAE, por meio da produção de materiais didáticos direcionados às escolas, mediante convênio com as prefeituras e secretarias de educação. | Produção das Diretrizes Nacionais da Educação do Campo (2002) e das Diretrizes Complementares (2008). |
+| Alteração na nomenclatura das escolas sem diálogo do Projeto Político Pedagógico com os interessados, o povo do campo. | Pacto da Educação do Campo (2010); criação do Fórum Nacional de Educação do Campo. |
+| Trato professor-aluno impositivo, distanciamento em relação à realidade e à identidade do aluno. | Relação professor-estudante baseada no diálogo, incentivando a autonomia, embora ainda não tão presente devido à formação tradicional dos professores. |
+
+Fonte: Elaborado pelas autoras, adaptado de Antunes-Rocha (2014), Arroyo (2003, 2012) e Caldart (2009).
+
+
+Nas palavras de @pinheiro2007, a Educação Rural se relaciona fundamentalmente àquilo que olha o ambiente rural como mercadoria, quando esclarece que:
+
+
+> A expressão educação rural está relacionada a uma postura encadeada pela concepção positivista, mercadológica, competitiva, capitalista, na qual a política de educação direciona para uma formação pragmática, que instrui o indivíduo para desenvolver atividades no mundo do trabalho. Transforma a força de trabalho humana em objeto, coisa, mercadoria. É a "coisificação'' e desumanização do sujeito .
+
+Ainda conforme @caldart2009, é importante compreender que o sentido da Educação do Campo passa pelo campo, pelos seus indivíduos, pela formulação e efetivação de políticas públicas e pela percepção de educação, características que estão ligadas às expectativas dos movimentos sociais que originam essa modalidade de ensino.
+
+Já na percepção de @antunesrocha2014, a Educação do Campo contém um conceito, uma prática e uma teoria. Para que um projeto possa ser identificado como Educação do Campo, necessita apresentar, no mínimo, três elementos: em primeiro lugar, participação ativa das populações do campo no planejamento, na execução e na avaliação; em segundo lugar, uma proposta que garanta e amplie a oferta de modalidades de ensino, a melhoria dos estabelecimentos escolares e a formação de professores, capacitando-os para atuação em contextos de desigualdade e diversidade; e, em terceiro lugar, compromisso com a luta pela construção de formas sustentáveis de produção da vida no campo e na cidade [@antunesrocha2014, p. 19].
+
+Portanto, o sentido de Educação do Campo é muito mais abrangente que a simples delimitação de um espaço geográfico. Não é o fato de a escola estar localizada em uma área rural, ou ``no campo'', que a classifica como ``do campo'': é necessário que ela oferte à população do campo práticas pedagógicas que respeitem e considerem a cultura, a identidade e os direitos sociais, dando a esse sujeito, efetivamente, uma formação integral – questões estas discutidas e aprofundadas no itinerário teórico percorrido neste trabalho.
+
+## A importância da escola para as comunidades rurais
+As escolas do campo possuem funções sociais que vão além da transmissão de conteúdos pedagógicos. Elas atuam como espaços de encontro, de participação comunitária e de fortalecimento das relações sociais.
+
+Segundo as Diretrizes Operacionais para a Educação Básica nas Escolas do Campo, elaboradas pelo Ministério da Educação, a educação básica destinada às populações do campo deve respeitar as especificidades culturais, sociais e econômicas dessas populações [@brasil2002].
+
+É importante sublinhar que os movimentos sociais contemporâneos vêm combatendo e angariando novos direitos, mas, para além dos direitos já assegurados na legislação, ainda pelejam contra a falta de efetivação deles na prática. Para que isso ocorra, é preciso que a classe camponesa entenda que suas questões sociais não estão sendo atendidas. Nesse sentido, @hage2014 [p. 1173] destaca que:
+
+
+> [...] diante da negação de direitos, pela intensificação do trabalho e pela precarização das condições existenciais de vida e funcionamento das escolas, os movimentos sociais passaram a denunciar o fechamento das escolas existentes no campo e pautar o Estado e a Sociedade Brasileira quanto à necessidade de ampliação da oferta de escolarização pública e de qualidade social em todos os níveis no campo [...] Em grande medida, as escolas fechadas no campo são as multisseriadas, envolvidas em uma complexidade de aspectos que implicam em sua existência e atuação, enquanto forma predominante de atendimento à escolarização dos sujeitos do campo nos anos iniciais do Ensino Fundamental .
+
+A educação não é neutra: é carregada de princípios e valores que desenham uma visão de mundo e de sociedade e está sempre associada a um contexto sócio-histórico. É nesse sentido que se pode falar de uma pedagogia dos movimentos sociais, dos mais antigos aos mais atuais, como ensina @arroyo2003:
+
+
+> Uma pedagogia com rituais, símbolos, representações, palavras de ordem, formas de organização e representação... tão parecidas, tão didáticas, tão formadoras e educativas que poderíamos falar em uma pedagogia dos movimentos sociais. Mais idêntica do que diversa. Com traços mantidos e repetidos ao longo dos séculos. Traços repostos em cada movimento como se fossem a marca de todo movimento .
+
+A Pedagogia do Movimento, sistematizada por @caldart2004, concebe a educação como proposta pedagógica articulada com a militância política e com a organização dos sujeitos. Além disso, o conceito de educação adotado pelos movimentos sociais para o campo e seus sujeitos, segundo @caldart2002, tem sua base em diferentes experiências e matrizes pedagógicas construídas no interior dos próprios movimentos.
+
+Uma das propostas da Educação do Campo é a Pedagogia do Oprimido. Na perspectiva de @freire2005, essa pedagogia não pode ser elaborada para o oprimido, mas com ele, reconhecido como sujeito que luta por sua humanidade; ela deve fazer da própria opressão um objeto de análise, para que os indivíduos reconheçam a realidade e se engajem na luta pela libertação. Assim, a Pedagogia do Oprimido é uma compreensão de educação concebida a partir das experiências de resistência dos trabalhadores organizados em movimentos sociais, em oposição às várias formas de opressão. O aparecimento dessa concepção está associado à alegação de que todo conhecimento, concepção e conceito têm origem nos experimentos sociais de resistência, considerando que estes criam a força político-pedagógica das práticas sociais [@arroyo2012].
+
+A concepção basilar da Pedagogia do Oprimido parte da compreensão de que ``somente quando os oprimidos descobrem, nitidamente, o opressor, e se engajam na luta organizada por libertação, começam a crer em si mesmos, superando assim, sua convivência com o regime opressor'' [@freire1987, p. 52]. Destarte, o princípio inicial dessa pedagogia é a sensibilização, por parte dos sujeitos, da relação antagônica entre opressores e oprimidos. Por esse ponto de vista, a função da Educação do Campo e das escolas do campo assenta-se em revelar que a ``desumanização, mesmo que um fato concreto na história, não é, porém, destino dado, mas resultado de uma ordem injusta que gera a violência dos opressores [...]'' [@freire1987, p. 30], influenciando a ação dos movimentos sociais na luta pela reconquista dessa humanidade que foi usurpada dos(as) trabalhadores(as).
+
+À vista disso, Freire indica que não se trata de compreender a educação somente como difusão de conteúdos por parte do professor. Longe disso, significa construir um diálogo, implicando dizer que aquele que ensina também aprende. Para Freire, esse modelo de educação se traduz como uma possibilidade real e contra-hegemônica em relação à educação formal, que tradicionalmente não supriu e não supre as necessidades dessa parcela da população. Assim sendo, é a partir daí que os movimentos sociais do campo dão particular atenção à educação ofertada aos camponeses que vivem no e do campo.
+
+A Pedagogia do Oprimido exige que a escola do campo, por meio de seu Projeto Político Pedagógico (PPP), reconheça que os sujeitos da atividade educativa – incluindo professores, alunos, familiares e comunidades – vivenciam a opressão histórica e enfatiza a necessidade da intervenção pedagógica nesses processos de opressão da população rural. Assim, de acordo com @freire1987, ``não há outro caminho senão o da prática de uma pedagogia humanizadora, em que a liderança revolucionária, em lugar de sobrepor-se aos oprimidos e continuar mantendo-os como quase coisas, com eles estabelece uma relação dialógica permanente'' [@freire1987, p. 55-56].
+
+A dinâmica pedagógica da Educação do Campo ocorre em espaços e tempos diferentes – escola, família e comunidade --, articulando instrumentos pedagógicos próprios que asseguram a troca entre a experiência da vida cotidiana e os conhecimentos científicos e acadêmicos [@molinafreitas2011]. Essa articulação entre os tempos e espaços da vida no campo é um dos eixos centrais da concepção de Educação do Campo, pois reconhece a escola como parte de um território mais amplo de formação dos sujeitos.
+
+As escolas do campo carregam em seu histórico uma extensa jornada de exclusão dos sujeitos, marcada pela imposição de modelos que subordinam o campo aos centros urbanos, seguindo um projeto hegemônico de metodologia e de conteúdo, embasado na negação das conexões com a comunidade e seus sujeitos. Essa situação revela a necessidade de difundir propostas que respeitem e disseminem a Educação do Campo, que favoreçam a intervenção social, possibilitem a contínua discussão política e contradigam a reprodução de modelos pedagógicos fora do contexto da vida cotidiana no campo [@arroyocaldartmolina2011].
+
+A Escola Manoel Valdivino, assim como outras escolas rurais de Crateús, desempenhava papel importante na integração das famílias da comunidade de Bonito. Nessas localidades, a escola frequentemente é utilizada para reuniões comunitárias, nas quais se discutem demandas coletivas, como acesso à água, à saúde e ao transporte; para eventos culturais, que reúnem as famílias em torno das tradições locais; para atividades religiosas, que fortalecem a fé e os laços de solidariedade entre os moradores; para campanhas de saúde, que levam informação e serviços básicos à população; e para debates sociais, que organizam a comunidade em torno de seus direitos. Além disso, a presença da escola contribui para evitar o deslocamento diário de crianças para áreas urbanas, fortalecendo o sentimento de pertencimento ao território rural.
+
+A Educação do Campo assume uma função de transformação social, essencial à emancipação, à libertação e à autonomia dos sujeitos. Para @freire1987, a educação humanizadora conduz o ser humano à consciência de sua inconclusão, tornando-o autônomo e consciente dos direitos e deveres que lhe são imputados e capaz de atuar de forma crítica [@freire1987; @caldart2009]. Esse modelo é antagônico à concepção de desumanização do ser, que não se compreende incompleto e não concebe o real sentido da educação. Assim, é importante discutir, mesmo que sinteticamente, a função social da escola da Educação do Campo, bem como o processo que tem levado ao seu fechamento, tema das próximas seções.
+
+## O processo de nucleação e fechamento de escolas no campo
+O fechamento de escolas do campo não é um fenômeno recente nem isolado. Nas últimas décadas, políticas de nucleação escolar passaram a concentrar estudantes em unidades maiores, geralmente localizadas em áreas urbanas ou em distritos centrais, sob o argumento de que haveria economia de recursos e melhoria da infraestrutura. Esse processo é frequentemente justificado pela redução de custos administrativos e pela tentativa de melhorar as condições de ensino, uma vez que o financiamento da educação básica é calculado com base no número de alunos matriculados. No entanto, ao transformar a presença do aluno em critério de existência da escola, tal lógica desconsidera a função social que a instituição desempenha no território, tratando a comunidade como um custo a ser reduzido e não como sujeito de direitos.
+
+Os números do fechamento de escolas no campo são expressivos e denunciam a dimensão do problema. Com base nos dados do Censo Escolar, @molinafreitas2011 [p. 29] indicam que existiam 107.432 escolas no território rural em 2002 e que esse número caiu para 83.036 em 2009, o que significa o fechamento de 24.396 escolas no meio rural em apenas sete anos. Em escala mais recente, @santosbezerra2025, a partir dos microdados do Censo Escolar/INEP e dos censos demográficos do IBGE, verificaram a redução de 118.996 escolas no campo, em 1999, para 54.730, em 2019 – uma média de quase 3.000 escolas fechadas por ano, oito a cada dia. O fato de atingir, em grande medida, as escolas multisseriadas que atendem os anos iniciais do Ensino Fundamental, forma predominante de escolarização dos sujeitos do campo, aprofunda ainda mais o impacto dessa política [@hage2014]. As regiões Nordeste e Norte lideram esse ranking no país, contexto no qual se insere o município de Crateús, no sertão cearense [@santosbezerra2025].
+
+A justificativa da inviabilidade econômica, contudo, não encontra respaldo na perspectiva da Educação do Campo. Para @arroyocaldartmolina2011, a escola do campo não pode ser avaliada apenas pela lógica administrativa do número de matrículas, pois sua existência está vinculada ao direito dos povos do campo à educação em seu próprio território, à sua cultura e à sua forma de vida. @caldart2009, por sua vez, recorda que a Educação do Campo nasceu exatamente da crítica dos camponeses a uma educação que não os reconhecia como sujeitos – e o fechamento das escolas repõe, no século XXI, a mesma lógica de negação de direitos que os movimentos sociais denunciam desde a origem dessa modalidade educativa.
+
+As consequências desse processo para as crianças e para as comunidades são profundas. Muitas crianças passam a percorrer longas distâncias diariamente, o que gera dificuldades no transporte escolar: rotas precárias, veículos inadequados, esperas prolongadas e exposição a riscos no trânsito e nas estradas do interior. O deslocamento diário impõe, ainda, um desgaste físico considerável a estudantes que, muitas vezes, acordam antes do amanhecer e retornam à tarde, sem tempo para descansar, brincar ou participar das tarefas do grupo familiar. Esse cansaço cumulativo está diretamente relacionado à evasão escolar, pois as famílias passam a questionar se o esforço do deslocamento compensa diante das dificuldades enfrentadas. Além disso, ocorre um afastamento cultural: a criança que estuda fora da comunidade tende a perder a referência do seu lugar, das suas tradições e dos saberes locais, incorporando uma cultura urbana que desvaloriza a vida no campo. Por fim, há a diminuição da participação familiar na escola: como a unidade de ensino fica distante, os pais e as mães deixam de frequentar reuniões, festas e atividades pedagógicas, rompendo-se um dos principais elos entre a família, a escola e a comunidade.
+
+O processo de nucleação consiste na reunião de estudantes de diversas escolas pequenas em uma única unidade maior, sob o argumento de racionalização de recursos e melhoria da qualidade do ensino. Na prática, porém, a nucleação tem funcionado, em muitos municípios, como etapa de um processo mais amplo de fechamento de escolas do campo: extingue-se a escola da comunidade e transporta-se o estudante para um núcleo urbano ou distrital, sem que se garanta, efetivamente, a qualidade e a contextualização do ensino prometida.
+
+O encerramento dessas escolas tem provocado mudanças significativas na vida das comunidades rurais. Com o fim das atividades locais, muitos estudantes precisam se deslocar para centros urbanos, enfrentando dificuldades de acesso e perdendo parte da convivência com sua cultura e com sua realidade local. A criança e o adolescente passam a viver, durante grande parte do dia, em um ambiente que não é o seu; as refeições, as brincadeiras, as conversas e os valores que orientam a vida comunitária ficam de fora do processo educativo. Além disso, o fechamento das escolas enfraquece os vínculos comunitários e contribui para o esvaziamento do campo: sem escola, sem posto de saúde e sem perspectivas, muitas famílias acabam migrando para a cidade, em um ciclo que retroalimenta o fechamento de novos serviços.
+
+Diante desse cenário, os movimentos sociais têm desempenhado um papel fundamental na defesa da Educação do Campo. Eles lutam pela garantia do direito à educação de qualidade, respeitando a identidade, os saberes, a cultura e as necessidades das populações do campo. Essa luta sustenta-se na compreensão de que o campo é território de vida e de produção de conhecimento, e não apenas espaço de exploração econômica. @fernandes2008 contribui com essa discussão ao destacar a relação entre educação do campo e território camponês: a escola compõe o território, e sua retirada desterritorializa a comunidade, retirando dela uma de suas referências materiais e simbólicas mais importantes.
+
+Nesse sentido, a legislação brasileira reconhece a especificidade da Educação do Campo. As Diretrizes Operacionais para a Educação Básica nas Escolas do Campo [@brasil2002] estabelecem que a educação do campo deve ser pensada a partir da realidade dos sujeitos que vivem no campo, com identidade própria e em diálogo com a comunidade. Posteriormente, o Decreto nº 7.352, de 4 de novembro de 2010 [@brasil2010], que dispõe sobre a política de educação do campo, previu mecanismos de proteção às escolas do campo, condicionando o seu fechamento à análise de impacto e à manifestação da comunidade escolar e dos órgãos normativos do sistema de ensino.
+
+Na mesma direção, a Lei nº 12.960, de 27 de março de 2014 [@brasil2014], alterou o artigo 28 da Lei de Diretrizes e Bases da Educação Nacional para exigir que o fechamento de escolas do campo, indígenas e quilombolas seja precedido de manifestação do órgão normativo do respectivo sistema de ensino, que considerará a justificativa apresentada pela Secretaria de Educação, a análise do diagnóstico do impacto da ação e a manifestação da comunidade escolar. Apesar desses marcos legais, o que se observa na prática é um descompasso entre o que prescreve a lei e o que ocorre nos municípios, evidenciando que o direito à educação do campo ainda depende da pressão e da vigilância dos movimentos sociais e das próprias comunidades.
+
+## A educação do campo como direito social
+Os movimentos sociais ligados à Educação do Campo defendem a permanência das escolas rurais como garantia de cidadania e de valorização das populações do campo. Trata-se de reconhecer que o acesso à educação não pode significar a renúncia à vida no campo, à cultura local e ao pertencimento comunitário.
+
+Nessa perspectiva, @arroyocaldartmolina2011 compreendem a Educação do Campo como um direito dos povos do campo, construído a partir de suas lutas e de sua identidade, e não como uma concessão do Estado. Para os autores, a escola do campo deve ser pensada a partir dos sujeitos que nela vivem e estudam, respeitando sua realidade, sua cultura e sua forma de organização social. @caldart2009, por sua vez, afirma que a Educação do Campo é uma política originalmente construída pelos movimentos sociais camponeses, que nasceu da crítica à educação rural tradicional e da demanda por uma escola que reconheça os camponeses como sujeitos de direitos, promovendo educação contextualizada e participação comunitária. Em síntese, como destaca @fernandes2008, não se trata de levar ``a mesma escola'' para o campo, mas de construir, com a população camponesa, uma escola do campo, enraizada no território e na vida comunitária.
+
+A efetivação desse direito, porém, depende de políticas públicas concretas e permanentes. A manutenção das escolas rurais é o primeiro passo, pois garante que a criança possa estudar perto de casa, preservando o vínculo com a família e com a comunidade. A melhoria da infraestrutura é igualmente necessária: muitas escolas do campo funcionam em prédios precários, sem água potável, sem energia elétrica adequada, sem saneamento e sem recursos pedagógicos – condições que não justificam o fechamento, mas exigem investimento público. A valorização dos professores também se impõe, com formação inicial e continuada específica para a realidade do campo, condições dignas de trabalho e permanência, de modo que o docente se reconheça, ele próprio, como sujeito da Educação do Campo. O transporte escolar adequado é outra política indispensável, especialmente nos casos em que a nucleação é inevitável: transporte seguro, com tempo de percurso razoável, e oferta de alimentação e atividades de contraturno. Por fim, a participação das comunidades nas decisões educacionais é condição para que qualquer política pública tenha legitimidade: é preciso que os moradores sejam ouvidos antes de qualquer decisão de nucleação ou fechamento, conforme preveem, inclusive, os mecanismos de manifestação comunitária estabelecidos na legislação [@brasil2010; @brasil2014].
+
+Essas políticas são fundamentais para evitar o desaparecimento das escolas do campo. Sem elas, o direito à educação transforma-se em privilégio daqueles que podem se deslocar para a cidade, e o campo – longe de ser um território de vida e de cultura – reduz-se a espaço de exploração econômica, desprovido de serviços, de escolas e de futuro para as novas gerações.
+
+
+# Metodologia
+
+Esta pesquisa adota uma abordagem qualitativa, na modalidade de estudo de caso, tendo como objeto o processo de fechamento da Escola Manoel Valdivino e seus impactos sobre a comunidade de Bonito, zona rural de Crateús/CE. A opção pelo estudo de caso justifica-se pela necessidade de compreender, em profundidade, um fenômeno contemporâneo inserido em seu contexto real, articulando dimensões educacionais, sociais e culturais [@antunesrocha2014, p. 19].
+
+O percurso metodológico estruturou-se em três etapas complementares. A primeira consistiu em revisão bibliográfica e documental sobre a educação do campo, a educação rural, a nucleação e o fechamento de escolas rurais, com ênfase nos autores e marcos legais apresentados no referencial teórico. A segunda etapa consistiu na análise de dados secundários sobre o fechamento de escolas no campo no Brasil, obtidos a partir do Censo Escolar/INEP e dos censos demográficos do IBGE, sistematizados por Molina e Freitas (2011) e Santos e Bezerra (2025). A terceira etapa corresponde ao levantamento de dados institucionais da Escola Manoel Valdivino junto à Secretaria de Educação do município de Crateús, que subsidiará a caracterização do caso (Quadro 2).
+
+**Quadro 2 – Dados documentais a levantar – Escola Manoel Valdivino (bloco de coleta; preencher e remover antes da submissão)**
+
+| **Campo** | **Dado a preencher** |
+| --- | --- |
+| Nome oficial da unidade | Manoel Valdivino ou Manoel Divino de Araújo? [confirmar] |
+| Ano de fundação | [  ] |
+| Ano de fechamento/nucleação | [  ] |
+| Etapas ofertadas | [educação infantil / anos iniciais / anos finais] |
+| Turmas multisseriadas | [sim/não – quantas] |
+| Nº de alunos à época do fechamento | [  ] |
+| Nº de famílias da comunidade de Bonito | [  ] |
+| Distância até a escola de destino | [  ] km |
+| Manifestação da comunidade (art. 28, Lei 12.960/2014) | [sim/não – documento: ata/ofício] |
+| Documentos consultados | [listar: cadastro, ofícios, atas] |
+
+Fonte: Elaborado pelas autoras, com dados a serem levantados na Secretaria de Educação de Crateús.
+
+
+A análise dos dados foi orientada pela análise de conteúdo temática, organizada em categorias construídas a partir do referencial teórico: paradigmas da educação rural e do campo; importância social da escola; nucleação e fechamento; e vínculo comunitário. No estágio atual da pesquisa, os dados documentais específicos do caso ainda estão em fase de levantamento, o que caracteriza uma limitação a ser superada na versão final do trabalho.
+
+
+# Resultados e Discussão
+
+
+## O caso da Escola Manoel Valdivino em Bonito – Crateús/CE
+A comunidade de Bonito, localizada na zona rural de Crateús – CE, possui forte tradição agrícola e comunitária. Como grande parte das comunidades rurais do sertão cearense, Bonito organiza sua vida em torno da terra, da família e das instituições locais – e, entre essas instituições, a escola figura entre as mais importantes. Nesse contexto, a Escola Manoel Valdivino representava um espaço essencial para a vida social dos moradores, funcionando como ponto de encontro, de organização coletiva e de transmissão de conhecimentos entre gerações.
+
+Dados disponíveis sobre escolas rurais de Crateús demonstram a existência de pequenas unidades educacionais voltadas especialmente para a educação infantil e para o ensino básico nas zonas rurais. A Escola Manoel Valdivino, como as demais pequenas unidades do campo, cumpre um papel que não pode ser medido apenas pelo quantitativo de matrículas, mas pela teia de relações sociais, culturais e afetivas que sustentam a vida comunitária no campo.
+
+O fechamento ou o enfraquecimento das atividades escolares trouxe mudanças significativas para a comunidade. [Ao preencher os dados documentais, substituir esta passagem genérica por constatações ancoradas na documentação: ano do fechamento/nucleação, número de estudantes transferidos, destino das matrículas e o teor da manifestação ou da ausência de manifestação da comunidade.] Em primeiro lugar, houve redução da convivência entre as famílias: sem a escola como espaço comum de encontro diário, os pais deixaram de se ver nas entradas e saídas das aulas, nas reuniões e nos eventos, desaparecendo uma das poucas ocasiões regulares de interação comunitária. Em segundo lugar, verificou-se o enfraquecimento das práticas culturais locais, uma vez que festas juninas, comemorações cívicas, apresentações e outras atividades organizadas pela escola deixaram de ocorrer ou perderam o espaço físico que as abrigava. Em terceiro lugar, aumentou a dependência dos centros urbanos: para estudar, para resolver questões administrativas ou apenas para participar de atividades escolares, as famílias passaram a depender do deslocamento para a sede do município, submetendo-se aos custos e às dificuldades do transporte. Em quarto lugar, instalou-se a dificuldade de acesso à educação, pois o deslocamento diário compromete a frequência, o rendimento e a permanência dos estudantes. Por fim, cresceu a desmotivação das famílias em permanecer no campo, na medida em que a ausência de escola é percebida como sinal de que o poder público não reconhece a comunidade como lugar digno de viver.
+
+Além disso, a retirada da escola contribui para um sentimento de abandono por parte do poder público, afetando diretamente a autoestima coletiva da comunidade rural. Quando uma comunidade perde sua escola, compreende – ainda que de forma não dita – que o Estado não a considera importante o suficiente para manter ali seus serviços e sua presença. Trata-se de uma violência simbólica que aprofunda a exclusão e desarticula a organização comunitária, exatamente no sentido inverso do que propõem as Diretrizes da Educação do Campo, que valorizam a participação e o protagonismo das comunidades [@brasil2002].
+
+A Educação do Campo defende justamente a valorização das experiências locais e o reconhecimento das populações campesinas como sujeitos de direitos. Nesse sentido, o fechamento de escolas rurais representa uma contradição diante das políticas de inclusão educacional: ao mesmo tempo em que o Estado amplia o discurso do direito à educação para todos, elimina a possibilidade de a população do campo educar-se em seu próprio território, com sua própria cultura e em sua própria comunidade – condição que foi justamente reconhecida por @campana2025 como expressão de injustiça espacial nos dados do INEP. O caso da Escola Manoel Valdivino, portanto, não é um episódio isolado: é a expressão local de um processo nacional que atinge milhares de comunidades, e sua análise permite compreender, em escala concreta, os impactos sociais e culturais dessa política.
+
+## Impactos no vínculo comunitário
+O vínculo comunitário é construído por meio das relações cotidianas estabelecidas entre os moradores de uma localidade. A escola funciona como um dos principais elementos de integração social no meio rural, e sua ausência produz efeitos em cadeia sobre a vida da comunidade.
+
+O primeiro impacto é a diminuição da participação social. Em uma comunidade rural, a escola é frequentemente o único espaço coberto e institucionalizado disponível para reuniões. Quando ela deixa de existir, os moradores perdem o local habitual de encontro: as assembleias comunitárias, as rodas de conversa sobre problemas coletivos, as campanhas de saúde e as mobilizações por melhorias deixam de ocorrer ou passam a depender da boa vontade de algum morador em ceder a própria casa. A participação social diminui, portanto, não porque a comunidade se torna menos interessada, mas porque desaparece a infraestrutura material que a viabilizava.
+
+Em segundo lugar, ocorre a perda de espaços coletivos. No meio rural, são raros os equipamentos públicos – salões, quadras, praças, centros de convivência – e a escola quase sempre concentra essas funções. Com o seu fechamento, a comunidade perde não apenas a sala de aula, mas o palco das festas, o abrigo das campanhas de vacinação, o local das celebrações religiosas e o ponto de apoio das atividades de saúde e assistência social. O território comunitário fica, literalmente, mais vazio.
+
+Em terceiro lugar, há o enfraquecimento da identidade comunitária. A escola é também um elemento simbólico: ela nomeia o lugar (``a comunidade da escola''), marca o tempo (as gerações que por ela passaram) e organiza a memória coletiva. Quando a escola é fechada, a comunidade perde uma referência central de si mesma. Muitas famílias enxergam nela a memória de gerações que estudaram no mesmo espaço, fortalecendo laços afetivos com a comunidade; sem esse espaço, a história comum deixa de ter um lugar onde ser contada e transmitida.
+
+Em quarto lugar, verifica-se a redução das atividades culturais. As escolas rurais são, na maioria das vezes, as principais promotoras das festas juninas, das comemorações de datas cívicas, das apresentações de dança, música e teatro, e das feiras de conhecimento que mobilizam as famílias. O fechamento da escola interrompe esse calendário cultural, e as tradições que dependiam dele tendem a desaparecer ou a se fragilizar, pois não há mais um agente institucional que as organize e transmita às novas gerações.
+
+Em quinto lugar, ocorre o isolamento das famílias. Sem a rotina escolar, as famílias deixam de se encontrar diariamente; as crianças que estudam em outras localidades passam o dia fora da comunidade, e os adultos, sem o ponto de encontro que a escola representava, restringem seus contatos ao círculo familiar imediato. O tecido social vai se desfiando, e cada família passa a enfrentar sozinha problemas que antes eram discutidos e resolvidos coletivamente.
+
+Por fim, o fechamento dessas instituições contribui ainda para o êxodo rural, já que algumas famílias migram para áreas urbanas em busca de melhores condições educacionais para os filhos. A decisão de sair do campo raramente é tomada apenas por motivos econômicos: quando a escola desaparece, desaparece também um dos principais argumentos para permanecer. Assim, o fechamento da escola e o esvaziamento do campo formam um ciclo: a escola fecha porque há poucos alunos; os alunos diminuem porque as famílias, sem escola, migram; e a comunidade, com menos famílias, perde ainda mais força para reivindicar seus direitos [@santosbezerra2025].
+
+
+# Considerações Finais
+
+Este trabalho teve como objetivo discutir os motivos do fechamento de escolas do campo no município de Crateús e analisar os impactos desse processo sobre a comunidade de Bonito, tomando como referência o caso da Escola Manoel Valdivino. A partir da revisão bibliográfica e da análise documental, foi possível constatar que o fechamento dessas escolas não é uma decisão meramente administrativa: é uma decisão política que afeta profundamente a vida das comunidades rurais.
+
+A primeira descoberta relevante da pesquisa é que a escola do campo desempenha funções que ultrapassam em muito a transmissão de conteúdos pedagógicos. Ela é espaço de convivência, de organização comunitária, de cultura e de cuidado mútuo. Quando a escola é fechada, não se perde apenas uma sala de aula; perde-se o centro da vida social da comunidade, o que compromete a participação, a identidade e a própria permanência das famílias no território.
+
+A segunda descoberta é que a dimensão do fechamento de escolas do campo é nacional e persistente. Os dados do Censo Escolar analisados por @santosbezerra2025 revelam que, entre 1999 e 2019, mais de 64 mil escolas do campo deixaram de existir no Brasil – uma média de oito fechamentos por dia --, aprofundando uma trajetória que @molinafreitas2011 já registravam entre 2002 e 2009, quando 24.396 unidades foram extintas. As regiões Nordeste e Norte concentram os maiores índices, e Crateús – a comunidade de Bonito em particular – insere-se nesse cenário mais amplo de esvaziamento do campo.
+
+A terceira descoberta é que o processo de nucleação e fechamento contradiz os marcos legais da Educação do Campo. As Diretrizes Operacionais [@brasil2002], o Decreto nº 7.352/2010 [@brasil2010] e a Lei nº 12.960/2014 [@brasil2014] reconhecem a especificidade da educação no campo e preveem a participação das comunidades nas decisões que as afetam. No entanto, o que se observa na prática é o descompasso entre a legislação e a realidade local, com fechamentos justificados por critérios exclusivamente econômicos, sem a devida manifestação comunitária.
+
+A quarta descoberta diz respeito aos impactos no vínculo comunitário. O fechamento da escola provoca diminuição da participação social, perda de espaços coletivos, enfraquecimento da identidade comunitária, redução das atividades culturais, isolamento das famílias e contribui para o êxodo rural. Esses impactos se retroalimentam e transformam o fechamento de uma escola em um processo mais amplo de desestruturação da comunidade.
+
+A quinta descoberta, sintetizada na ideia de que a escola do campo representa memória, pertencimento e resistência, merece ser explicada em seus três termos. A escola representa memória porque guarda a história das gerações que por ela passaram: é nela que os moradores se reconhecem como parte de uma mesma trajetória, e é por meio dela que a história da comunidade continua a ser contada e transmitida aos mais jovens. Representa pertencimento porque é um dos principais elos entre a família e o território: estudar na própria comunidade fortalece o vínculo afetivo com o lugar, com os vizinhos e com as tradições locais, fazendo com que cada criança se sinta parte daquele mundo e não mera expectadora de uma vida que acontece em outro lugar. E representa resistência porque, no contexto histórico brasileiro, manter a escola no campo é uma forma de luta contra a lógica que trata o campo apenas como espaço de exploração econômica e contra o processo de esvaziamento e silenciamento das comunidades rurais: a permanência da escola afirma publicamente que aquela comunidade existe, tem direitos e não aceita desaparecer.
+
+A sexta descoberta é que a luta por uma Educação do Campo vai além da permanência do ambiente escolar na zona rural: ela diz respeito ao vínculo entre a permanência dos sujeitos campesinos e o papel social que a escola pode exercer junto a esses sujeitos. Discutir o fechamento das escolas do campo significa refletir sobre políticas públicas, justiça social e valorização das comunidades rurais brasileiras – e significa, sobretudo, reconhecer que o direito à educação só se realiza plenamente quando o estudante do campo pode aprender sem precisar abandonar seu lugar, sua cultura e sua comunidade.
+
+
+
+
+
+
+
+
+\bibliography{banca_mestrado_educacao_campo}
