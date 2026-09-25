@@ -1,0 +1,804 @@
+INTERNATIONAL JOURNAL OF DIGITAL LAW – IJDL
+v. 6 . e609 . 2025 – DOI: 10.47975/ijdl.v.6.1302
+International Journal of 
+DIGITAL LAW
+IJDL
+
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+3
+Licenciado sob uma Licença Creative Commons
+Licensed under Creative Commons
+International Journal of Digital Law – IJDL 
+DOI: 10.47975/ijdl.v.6.1302
+ 
+Como citar este artigo/How to cite this article: ABAL, Felipe Cittolin; PILATI, Adriana Fasolo. Inteligência 
+Artificial no ensino jurídico: experiências com GPTs personalizados. International Journal of Digital Law, 
+Belo Horizonte, v6, e609, 2025. DOI: 10.47975/ijdl.v.6.1302. 
+*  Professor da Escola de Ciências Jurídicas da Universidade de Passo Fundo (Passo Fundo, Rio Grande do 
+Sul, Brasil). Professor no Programa de Pós-Graduação em História e no Programa de Pós-Graduação em 
+Direito da Universidade de Passo Fundo. Doutor em História pela Universidade de Passo Fundo. Mestre 
+em História pela Universidade de Passo Fundo. E-mail: felipeabal@upf.br.
+**  Professora Titular e Permanente do Programa de Pós-Graduação em Direito e do curso de Graduação em 
+Direito da Universidade de Passo Fundo – UPF (Passo Fundo, Rio Grande do Sul, Brasil). Doutora em Direito 
+pela Universidade Federal de Santa Catarina – UFSC. Mestre em Direito pela Pontifícia Universidade Católica 
+do Rio Grande do Sul – PUCRS. Advogada. Coordenadora do PPG Direito da Universidade de Passo Fundo. 
+Membro do Instituto Brasileiro de Direito Imobiliário (IBRADIM), da Associação Brasileira Elas no Processo 
+(IBEP) e integrante do Banco de Avaliadores (BASis) do Sistema Nacional de Avaliação da Educação Superior 
+(Sinaes). E-mail: apilati@upf.br.
+Inteligência Artificial no ensino 
+jurídico: experiências com GPTs 
+personalizados
+Artificial Intelligence in legal education: 
+experiences with customized GPTs
+Fel ipe Cittolin Abal*
+Uni versidade de Passo Fundo (Passo Fundo, Rio Grande do Sul, Brasil)
+felipeabal@upf.br
+https://orcid.org/0000-0002-6208-5893 
+Adriana Fasolo Pilati**
+Universidade de Passo Fundo (Passo Fundo, Rio Grande do Sul, Brasil)
+apilati@upf.br
+https://orcid.org/0000-0003-3396-9646 
+Rec ebido/Received: 01.08.2025 / August 1st, 2025
+Aprovado/Approved: 15.09.2025 / September 15th, 2025
+Resumo: O artigo apresenta um relato de experiência com o uso de ferramentas baseadas em 
+inteligência artificial generativa no ensino jurídico. A partir de uma perspectiva tecnorrealista, discute-se 
+o potencial pedagógico de GPTs personalizados desenvolvidos pelo próprio professor, com diferentes 
+funções: tutoria, mentoria reversa e simulação de escritório de advocacia. O texto também aborda os 
+riscos éticos e epistemológicos do uso da IA na educação, como plágio automatizado, alucinações, 
+viés algorítmico e impacto ambiental. Os resultados, baseados em feedbacks dos estudantes, indicam 
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+4
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+que a IA pode contribuir para o engajamento e a aprendizagem, desde que inserida em um projeto 
+pedagógico crítico, ético e mediado. O trabalho conclui pela necessidade de letramento em IA para 
+docentes e discentes e pela urgência de um redesenho epistemológico da educação jurídica.
+Palavras-chave: Inteligência artificial. Ensino jurídico. Educação a distância. GPTs personalizados. 
+Letramento digital.
+Abstract: This article presents a case study on the use of generative artificial intelligence tools in legal 
+education. From a technorealist perspective, it discusses the pedagogical potential of customized 
+GPTs developed by instructors, each with a distinct function: tutoring, reverse mentoring, and law firm 
+simulation. The text also addresses the ethical and epistemological risks of using AI in education, 
+such as automated plagiarism, hallucinations, algorithmic bias, and environmental impact. The results, 
+based on student feedback, indicate that AI can contribute to engagement and learning, provided it is 
+embedded in a critical, ethical, and guided pedagogical framework. The study concludes by emphasizing 
+the need for AI literacy for both teachers and students, and the urgency of an epistemological redesign 
+of legal education.
+Keywords: Artificial intelligence. Legal education. Distance learning. Customized GPTs. Digital literacy.
+Sumário: 1 Introdução – 2 Um panorama da Inteligência Artificial – 3 IA e ensino jurídico: riscos, 
+promessas e um caminho tecnorrealista – 4 Tutores, aprendizes e simulações: IA generativa aplicada 
+ao ensino jurídico – 5 Considerações finais – Referências
+1 Introdução
+O ensino jurídico é tradicionalmente estruturado em torno de aulas expositivas 
+tradicionais, apresentando resistência à incorporação de novas tecnologias. Mesmo 
+durante a pandemia da Covid-19, quando o ensino remoto e uso de plataformas 
+digitais se impuseram como única alternativa, o uso da tecnologia foi visto, mui-
+tas vezes, como um mal necessário, não como uma oportunidade de repensar o 
+modelo pedagógico tradicional utilizado.
+Atualmente, a consolidação do uso de ferramentas como o ChatGPT no coti-
+diano dos estudantes faz com que a questão deixe de ser se a inteligência artificial 
+será utilizada na educação jurídica, mas como os educadores lidarão com isso. Ig-
+norar o fenômeno ou tratá-lo simplesmente como uma ameaça desloca o problema 
+para a informalidade e o improviso. Como educadores, é necessário refletir sobre o 
+tema, os bons e maus usos, possibilidades e limitações e assumir protagonismo 
+na mediação crítica com estas ferramentas.
+Apesar da centralidade do tema, que não é recente, são poucos os estudos 
+empíricos que tratam do uso das tecnologias digitais no ensino jurídico. Um levan-
+tamento realizado identificou que apenas 33 artigos entre 2010 e 2020 tratavam 
+do tema, o que demonstra uma lacuna a ser preenchida.1
+1 
+STORR, Christine; MCGRATH, Cormac. In search of the evidence: digital learning in legal education, a scoping 
+review. The Law Teacher, v. 57, n. 2, p. 119-134, 2023.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+5
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+O presente artigo pretende contribuir nesse sentido, apresentando uma expe-
+riência com o uso de GPTs personalizados no ensino jurídico em disciplinas com 
+percentual de EaD. Foram utilizadas ferramentas baseadas em inteligência artificial 
+generativa para criação de tutores, atividades de mentoria e simulações gamifica-
+das com o objetivo de ampliar o engajamento dos alunos, oferecer novas formas 
+de aprendizagem e permitir o acesso a ferramentas de forma integral.
+O método utilizado é o relato de experiência, com análise qualitativa de 
+feedbacks fornecidos pelos estudantes. Além da descrição das ferramentas utilizadas 
+e resultados obtidos, o artigo pretende discutir os desafios éticos e pedagógicos 
+envolvidos no uso da inteligência artificial na educação, com foco no campo jurídico. 
+Para isso, as reflexões serão guiadas por uma postura tecnorrealista, que reconhece 
+os limites e as potencialidades destas tecnologias.
+2 
+Um panorama da Inteligência Artificial
+A história da Inteligência Artificial (IA) teve início com conceitos teóricos de-
+senvolvidos no século XX, tendo papel central o matemático e cientista da com-
+putação Alan Turing. Já em 1936 Turing sonhava em desenvolver uma máquina 
+de computação digital abstrata, conhecida como “máquina de Turing universal”. 
+Ela seria universal, pois poderia ser programada para realizar todo tipo de cálculo 
+possível de ser realizado por um “computador humano”, ou seja, uma pessoa que 
+trabalhasse com tempo e recursos ilimitados e de forma sistemática.2
+A primeira palestra dada por Turing em que foi mencionada a inteligência ar-
+tificial ocorreu em 1947, quando discutiu a possibilidade de máquinas agirem de 
+forma inteligente, aprendendo e vencendo humanos em jogos de xadrez. A contri-
+buição de Turing foi além da teoria, uma vez que sua atuação durante a Segunda 
+Guerra Mundial contribuiu para o desenvolvimento da área. Em 1948 ele escreveu, 
+mas não publicou, um relatório chamado “Maquinaria Inteligente”, refletindo sobre 
+a possibilidade de uma máquina aprender com a experiência. Tal relatório é consi-
+derado por muitos como o primeiro manifesto de IA.3
+Provavelmente o nome do matemático seja mais conhecido devido ao “teste 
+de Turing”, proposto em 1950 em um artigo onde descreveu o chamado “jogo da 
+imitação”, no qual um humano se comunicaria com dois jogadores, um humano e 
+uma máquina, sem que ele soubesse a identidade. A máquina tentaria enganar o 
+2 
+COPELAND, Jack B.; PROUDFOOT, Diane. Artificial Intelligence: History, Foundations, and Philosophical 
+Issues. In: THAGARD, Paul. Handbook of the Philosophy of Psychology and Cognitive Science. Amsterdam: 
+Elsevier, 2007.
+3 
+COPELAND, Jack B.; PROUDFOOT, Diane. Artificial Intelligence: History, Foundations, and Philosophical 
+Issues. In: THAGARD, Paul. Handbook of the Philosophy of Psychology and Cognitive Science. Amsterdam: 
+Elsevier, 2007.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+6
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+interrogador, enquanto ele tentaria determinar qual jogador era o humano e qual 
+era a máquina. Turing previa que no ano 2000 as máquinas conseguiriam passar 
+no teste 30% das vezes.4
+Os primeiros programas de IA foram executados na Grã-Bretanha em 1951 e 
+1952, em parte em virtude da influência de Turing junto aos programadores. Foi só 
+quatro anos depois, em 1956, que começou o chamado “primeiro verão das IAs”, 
+após John McCarthy propor um curso de verão chamado “Inteligência Artificial” na 
+Universidade de Dartmouth, nos Estados Unidos, sendo que esta foi a primeira vez 
+que o nome foi utilizado. Não houve avanços durante o curso, mas o nome acabou 
+adotado e uma nova disciplina foi formada.5
+Durante a década de 1950 avanços significativos foram realizados, desde a 
+criação do Logic Theorist em 1956, o primeiro provador automático de sistemas, 
+a invenção da linguagem LISP, para processamento de estruturas simbólicas,6 e 
+o desenvolvimento de programas como o General Problem Solver, Eliza e Perry.7
+As décadas de 1970 e 1980 ficaram conhecidas como “o inverno das IAs”, 
+devido à frustração com o pouco progresso realizado em temas centrais relacionados 
+à inteligência artificial. As previsões otimistas das décadas anteriores acabaram 
+por não se concretizarem e as pesquisas no campo começaram a se tornar mais 
+raras. No final dos anos 1980 um novo boom estava surgindo.8
+Este novo período iniciou caracterizado pelo fim do auge dos chamados “siste-
+mas especialistas”, os quais utilizavam o conhecimento de especialistas humanos 
+para resolver determinados problemas. O foco da pesquisa em IA passou a ser a 
+criação de agentes. Um agente era projetado para ser um sistema de IA completo, 
+funcionando de modo autônomo e independente em um ambiente específico e 
+encarregado de realizar uma tarefa pelo usuário. Esta perspectiva foi influenciada 
+pela IA comportamental, embora de maneira moderada, e começou a ganhar força 
+nos anos 1990, acabando por tornar-se uma ortodoxia.9
+Uma conquista tornou-se popular à época: o supercomputador e sistema de 
+IA Deepblue da IBM confrontou o grande mestre Garry Kasparov em 1996 em um 
+4 
+MOLLICK, Ethan. Co-intelligence: living and working with AI. New York, New York: Portfolio/Penguin, 2024.
+5 
+WOOLDRIDGE, Michael. A Brief History of Artificial Intelligence: where it is, where we are and where we are 
+going. Nova Iorque: Flatiron Books, 2020.
+6 
+ERTEL, Wolfgang. Introduction to Artificial Intelligence. London: Springer London, 2011. (Undergraduate 
+Topics in Computer Science). Disponível em: https://link.springer.com/10.1007/978-0-85729-299-5. 
+Acesso em: 19 ago. 2024.
+7 
+COPELAND, Jack B.; PROUDFOOT, Diane. Artificial Intelligence: History, Foundations, and Philosophical 
+Issues. In: THAGARD, Paul. Handbook of the Philosophy of Psychology and Cognitive Science. Amsterdam: 
+Elsevier, 2007.
+8 
+WOOLDRIDGE, Michael. A Brief History of Artificial Intelligence: where it is, where we are and where we are 
+going. Nova Iorque: Flatiron Books, 2020.
+9 
+WOOLDRIDGE, Michael. A Brief History of Artificial Intelligence: where it is, where we are and where we are 
+going. Nova Iorque: Flatiron Books, 2020.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+7
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+torneio de seis partidas de xadrez. Kasparov venceu quatro partidas e Deepblue 
+apenas uma. No ano seguinte, porém, uma versão atualizada venceu o enxadrista 
+russo duas vezes, com uma vitória de Kasparov e dois empates.
+Em torno de 2005 as pesquisas se voltaram para as redes neurais e o aprendizado 
+profundo. Redes neurais são modelos computacionais inspirados no funcionamento 
+do cérebro humano. Elas são compostas por camadas de “neurônios artificiais” que 
+processam informações, aprendem padrões e fazem previsões. Cada neurônio recebe 
+dados de entrada, realiza cálculos simples e transmite um resultado para os próximos 
+neurônios da rede. Camadas próximas à entrada trabalham com conceitos de baixo 
+nível nos dados e, conforme se aprofundam, são tratados conceitos mais abstratos.10
+Com o lançamento da Siri para o Iphone em 2010, a interface baseada em 
+agentes tomou o mundo, atuando como assistentes e agindo de maneira coope-
+rativa com o usuário. Outros agentes surgiram na sequência, a exemplo da Alexa, 
+do Google Assistente e da Cortana.
+A inteligência artificial voltou a ser amplamente discutida em 2014 com a 
+aquisição da DeepMind pelo Google. O aprendizado de máquina assumiu uma po-
+sição central, tendo como objetivo que o programa forme um determinado resultado 
+sem receber uma fórmula exata de como fazer isso. Essa é a forma de aprendizado 
+de programas como o ChatGPT, o qual utilizamos para as experiências relatadas 
+neste artigo. O ChatGPT utiliza o aprendizado profundo de três formas: aprendizado 
+supervisionado, aprendizado não supervisionado e aprendizado por reforço.
+No aprendizado supervisionado, o modelo é treinado com um conjunto de da-
+dos rotulados, no qual cada entrada possui uma saída correspondente. Durante o 
+treinamento o modelo faz previsões sobre os dados de entrada e, quando erra, é 
+corrigido. No aprendizado não supervisionado, o modelo é treinado com dados sem 
+rótulos ou saídas conhecidas, tentando encontrar padrões ou estruturas por conta 
+própria. No caso do aprendizado por reforço, o agente aprende a tomar decisões 
+através da interação com um ambiente, recebendo recompensas ou punições com 
+base nas ações realizadas.
+Assim, o ChatGPT é treinado com um conjunto de textos retirados de diversas 
+fontes, expondo-o a grandes volumes para que aprenda padrões de linguagem, es-
+truturas gramaticais etc. Com isso, ele busca prever a palavra em sequência de um 
+texto, com base nas anteriores. Realizado este pré-treinamento, é feito um ajuste 
+fino com técnicas de aprendizado supervisionado ou de reforço.
+10 WOOLDRIDGE, Michael. A Brief History of Artificial Intelligence: where it is, where we are and where we are 
+going. Nova Iorque: Flatiron Books, 2020.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+8
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+O ChatGPT, assim como outros, é, portanto, um Large Language Model (LLM), 
+um tipo de modelo de inteligência artificial treinado em grandes quantidades de 
+texto para realizar tarefas relacionadas à linguagem natural, como entender, gerar, 
+resumir e traduzir textos.
+É importante destacar desde este momento que no estado atual das IAs mais 
+populares, ainda não estamos perto de uma IA geral que seja capaz de reproduzir 
+as capacidades humanas. O burburinho gerado por empresas como a OpenAI é 
+extremamente útil para inflar o valor das ações da empresa, porém os resultados 
+obtidos pelo uso da inteligência artificial, apesar de interessantes em determinados 
+pontos, não chegam perto do prometido pelas empresas.
+As IAs mais populares atualmente, como o ChatGPT, sendo LLMs, são mo-
+delos matemáticos generativos de distribuição estatística de tokens em um vasto 
+corpo de texto gerado por humanos. Eles são generativos porque podemos fazer 
+perguntas a eles. Porém, como ressalta Murray Shanahan, as questões são de um 
+tipo muito específico: “Aqui está um fragmento de texto. Diga-me como esse frag-
+mento pode continuar. De acordo com o seu modelo das estatísticas da linguagem 
+humana, quais palavras provavelmente virão a seguir?”.11
+Isso pode ser visto em um exercício muito simples: se você pedir para uma 
+IA atual completar a frase “Penso, logo...”, a resposta será “existo”. Isso porque 
+essa é a continuação mais provável estatisticamente. Caso fizer o mesmo exercí-
+cio com uma frase menos comum como, por exemplo, “alienígenas invadiram São 
+Paulo e trouxeram com eles...”, as respostas irão variar.
+Transformar um LLM em um sistema de perguntas e respostas ao integrá-lo 
+em um sistema maior e utilizar a engenharia de prompts para direcionar o compor-
+tamento desejado é um padrão atualmente. LLMs podem ser aplicados não só para 
+responder perguntas, mas também para resumir artigos, gerar roteiros, resolver 
+quebra-cabeças lógicos e realizar traduções entre idiomas, entre outros. Há dois 
+pontos importantes a serem observados. Primeiro, a função principal de um LLM 
+(gerar continuações de sequências de palavras com base em probabilidades esta-
+tísticas) é extremamente versátil. Segundo, apesar dessa versatilidade, no núcleo 
+de cada aplicação está um modelo que realiza essencialmente essa única função.12
+Assim, um LLM não possui crenças ou realmente sabe aquilo que está res-
+pondendo, pois, em sua essência, ele apenas prevê sequências de palavras. Às 
+vezes, essas sequências podem parecer proposições, mas a conexão dessas pro-
+posições com a verdade é algo que apenas os humanos percebem. O modelo não 
+11 SHANAHAN, Murray. Talking about Large Language Models. Communications of the ACM, v. 67, n. 2, 
+p. 68-79, 2024, p. 70.
+12 SHANAHAN, Murray. Talking about Large Language Models. Communications of the ACM, v. 67, n. 2, 
+p. 68-79, 2024.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+9
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+tem noção de verdade ou falsidade, pois não possui os mecanismos para aplicar 
+esses conceitos. Pode-se argumentar que um LLM “sabe” quais palavras geralmente 
+seguem outras palavras, mas isso não depende de uma compreensão intencional.13
+Isso nos leva à questão do ajuste fino, trazido anteriormente. Ajustar um 
+modelo com feedback humano em larga escala, usando dados de preferências 
+de avaliadores ou de uma base de usuários, é uma técnica eficaz. Isso pode não 
+apenas moldar as respostas do modelo para que reflitam melhor as normas dos 
+usuários, mas também ajudar a filtrar linguagem tóxica, melhorar a precisão dos 
+fatos e reduzir a tendência de gerar informações falsas. Isso, porém, não altera 
+o cerne dos modelos: o resultado continua sendo um modelo da distribuição de 
+tokens na linguagem humana, embora com algumas modificações.14
+Atualmente, porém, existe um senso comum fomentado por empresas e 
+pessoas interessadas que a inteligência artificial é realmente inteligente e pode 
+responder as mais variadas perguntas com precisão, apesar dos comuns erros 
+e alucinações. Cada vez mais utilizadas por estudantes, importa verificarmos as 
+possibilidades e limitações de sua utilização no ensino jurídico.
+3 
+IA e ensino jurídico: riscos, promessas e um caminho 
+tecnorrealista
+Já é lugar comum trazer a pandemia da Covid-19 como um momento disrup-
+tivo no ensino. Diante dos riscos existentes, instituições, professores e alunos 
+adotaram ambientes virtuais para as atividades educacionais. Tudo o que era visto 
+como complementar e opcional (aulas on-line, plataformas digitais etc.) tornou-se o 
+único meio de manter as atividades. Naquele momento fomos obrigados a aceitar 
+as tecnologias no ensino sem a possibilidade de uma reflexão crítica, sendo que 
+experienciamos, como educadores, o que havia de positivo e negativo naquelas 
+formas de utilizar a tecnologia.
+A educação jurídica, marcada por ser bastante tradicional e voltada para um 
+modelo de utilização de sala de aula em que o professor seria capaz de transmitir 
+o conhecimento de forma quase unilateral para o aluno, foi bastante impactada, 
+já que esta forma é pouco adaptável ao ambiente virtual de forma adequada. Além 
+disso, tratava-se de uma educação “retrospectiva”, baseada na transmissão de 
+conhecimento estabelecido e na aplicação de doutrinas e decisões passadas para 
+problemas futuros, já não parece fazer pleno sentido.15
+13 SHANAHAN, Murray. Talking about Large Language Models. Communications of the ACM, v. 67, n. 2, 
+p. 68-79, 2024.
+14 SHANAHAN, Murray. Talking about Large Language Models. Communications of the ACM, v. 67, n. 2, 
+p. 68-79, 2024.
+15 FORNASIER, Mateus de Oliveira. Ensino Jurídico no Século XXI e a Inteligência Artificial. Revista Opinião 
+Jurídica. Fortaleza, ano 19, n. 31, maio/ago. 2021, p. 1-32.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+10
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+Enquanto retornavam as aulas presenciais, uma tecnologia tomava as man-
+chetes: a inteligência artificial. Apesar de não ser exatamente uma novidade, como 
+vimos no item anterior, o lançamento do ChatGPT em novembro de 2022 e o fato 
+de ter atingido 100 milhões de usuários em apenas dois meses tornaram a ferra-
+menta um fenômeno da era digital.
+O discurso em torno da inteligência artificial passou a ser marcado por um 
+entusiasmo quase messiânico por parte de seus entusiastas. Sam Altman, CEO 
+da OpenAI, afirmou que a IA generativa representa o início de uma nova era: “a 
+decolagem começou” (the takeoff has started). Em seu blog pessoal, ele prevê 
+que “com a superinteligência, podemos fazer qualquer coisa”, incluindo acelerar 
+“massivamente a descoberta científica” e permitir que cada indivíduo tenha “uma 
+equipe pessoal de IA” para colaborar em qualquer projeto.16
+Embora tais visões possam inspirar inovação, também encobrem os riscos 
+sociais, epistêmicos e pedagógicos envolvidos. A crença de que a IA pode resolver 
+todos os problemas da educação ignora o caráter estrutural dos desafios do ensino 
+e desvia o foco de questões como desigualdade, pensamento crítico e formação 
+ética. Como alerta Evgeny Morozov, essa lógica solucionista assume que os proble-
+mas sociais podem ser simplificados e automatizados, quando na verdade exigem 
+deliberação pública e enfrentamento político.17
+Para os críticos mais resistentes a mudanças, especialmente no âmbito edu-
+cacional, a inteligência artificial começou a ser vista como um risco, já que repre-
+sentaria uma ameaça a técnicas educacionais tradicionais, como a elaboração de 
+trabalhos e resenhas, por exemplo.
+Nossa visão tende a ficar em um meio-termo entre o otimismo e o pessimismo, 
+no campo do tecnorrealismo. Isso significa reconhecer que a inteligência artificial 
+pode ser uma ferramenta poderosa no ensino jurídico, mas que seus efeitos de-
+pendem das formas de apropriação, do contexto institucional, e das escolhas pe-
+dagógicas feitas por professores, gestores e pelos próprios alunos como sujeitos 
+ativos do processo de aprendizagem.
+Como destaca Neil Selwyn,18 o mais relevante não é apenas o que a tecnologia 
+pode fazer, mas quem a está utilizando, com quais objetivos e sob quais condi-
+ções. A tecnologia, por si só, não transforma a educação; na verdade, ela apenas 
+reflete e amplia as dinâmicas já existentes. Assumir uma postura tecnorrealista 
+implica, portanto, recusar tanto o deslumbramento quanto o alarmismo, optando 
+16 ALTMAN, Sam. (2023). Reflections. Blog pessoal. Disponível em: https://blog.samaltman.com/reflections. 
+Acesso em: 24 jun. 2025.
+17 MOROZOV, Evgeny. To Save Everything, Click Here: The Folly of Technological Solutionism. New York: Public 
+Affairs, 2013.
+18 SELWYN, Neil. Education and Technology: Key Issues and Debates. 2. ed. London: Bloomsbury Academic, 
+2021.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+11
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+por uma análise situada e crítica do uso da IA em sala de aula, entendendo que a 
+tecnologia não é neutra.
+Diante disso, é importante que citemos alguns riscos pedagógicos do uso da 
+Inteligência Artificial. O ensino jurídico depende, em grande parte, da linguagem (o 
+Direito pode, em determinado aspecto, ser visto como uma linguagem), da inter-
+pretação e da argumentação. LLMs, como é o caso do ChatGPT, Claude, Gemini, 
+dentre outros, são capazes de produzir textos com uma aparência de coerência, 
+mas há de se entender que eles não têm qualquer compromisso com a ética, a 
+verdade ou processos de argumentação. Como aponta Shanahan,19 esses modelos 
+não “sabem” o que dizem: apenas reproduzem sequências de palavras estatisti-
+camente prováveis com base em seu treinamento.
+Isso aponta para riscos pedagógicos relevantes. Primeiramente, um certo 
+senso comum a respeito dos LLMs (baseada na publicidade de empresas do Vale 
+do Silício que pretendem fazer o valor de suas ações crescer) faz crer que eles 
+realmente possuem conhecimento a respeito de todas as coisas, levando a um 
+recebimento acrítico das informações recebidas. Em segundo lugar, a formação 
+de raciocínio e, especificamente, do raciocínio jurídico exige não apenas que se 
+conheça um determinado conteúdo, mas que se construam relações entre concei-
+tos e fatos, capacidade de argumentação, ponderação e decisão diante de casos 
+concretos (e complexos).
+Além disso, o uso da inteligência artificial na educação apresenta outros 
+desafios que não podem ser ignorados. Primeiramente, o incentivo ao plágio 
+automatizado. Ferramentas como os LLMs permitem que textos gerados por IA 
+sejam entregues como se fossem elaborados pelos estudantes, sem processo 
+reflexivo ou autoria verdadeira. Isso compromete tanto a formação como a própria 
+integridade acadêmica.
+Em segundo lugar, há o risco das alucinações, respostas falsas apresentadas 
+como corretas, as quais podem induzir os alunos a erros graves. Frequentemente 
+vêm à luz casos de trabalhos acadêmicos contendo alucinações, bem como peças 
+processuais com obras ou jurisprudência inventada por um LLM. Isso demonstra o 
+mau uso da ferramenta, por ignorância ou más intenções, bem como a falta de atua-
+ção do humano, responsável pelo texto. É por este motivo que a UNESCO20 alerta 
+que tais sistemas devem ser utilizados com supervisão, respeitando os princípios 
+da educação, para que não sejam amplificadas desigualdades e a desinformação.
+19 SHANAHAN, Murray. Talking about Large Language Models. Communications of the ACM, v. 67, n. 2, 
+p. 68-79, 2024.
+20 UNESCO. Orientações globais sobre a IA generativa na educação e na pesquisa. Paris: UNESCO, 2023. 
+Disponível em: https://unesdoc.unesco.org/ark:/48223/pf0000390241. Acesso em: 2 jul. 2025.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+12
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+Outro aspecto fundamental está ligado aos vieses e discriminações algorítmicas 
+nos sistemas de IA. Como destaca Tarcízio Silva,21 os algoritmos trazem consigo as 
+marcas do mundo onde são construídos. Isso significa que sistemas automatizados 
+tendem a reproduzir e até acentuar, desigualdades raciais, de gênero e de classe. 
+Os algoritmos operam por lógicas opacas, podendo reforçar processos de vigilância 
+e exclusão. No campo educacional, isso pode significar a exclusão de grupos com 
+menor letramento digital, pouco acesso à tecnologia ou cujas experiências não se-
+jam levadas em conta durante o treinamento do sistema.
+Há, por fim, o custo ambiental da IA, frequentemente minimizado. O trei-
+namento dos modelos e sua utilização consomem grandes quantias de energia, 
+gerando impactos globais, uma vez que fazem uso intensivo de data centers que, 
+por sua vez, são alimentados por fontes de energia não renováveis. Ignorar esse 
+impacto é incompatível com uma educação comprometida com justiça ambiental. 
+Por outro lado, o uso crítico e informado da inteligência artificial pode abrir 
+possibilidades didáticas. Considerando que sim, os estudantes irão utilizar ferra-
+mentas de inteligência artificial, cabe também ao educador fazer parte deste pro-
+cesso fornecendo boas ferramentas, utilizando de forma consciente e informando 
+sobre qual a melhor forma de utilização.
+Comparar jurisprudência, analisar argumentos, elaborar perguntas, realizar simu-
+lações, dentre outros, são usos possíveis e provavelmente positivos da tecnologia. 
+Não se trata de substituir o professor por um algoritmo ou sequer de considerar o 
+professor como mero “facilitador”, mas de também inseri-lo como mediador entre 
+a tecnologia e o processo de aprendizagem. Ao invés de ceder à tentação de um 
+gerador de respostas prontas (e, por vezes, incorretas!), o docente pode usar tais 
+instrumentos para fomentar o raciocínio jurídico, os questionamentos e a dúvida 
+e a argumentação.
+Como propõe a Unesco,22 o uso da inteligência artificial na educação deve 
+ser centrado no ser humano, com supervisão adequada, respeitando a diversidade 
+e garantindo que a profissão docente seja respeitada. Isso implica que não seja 
+simplesmente disponibilizada uma ferramenta de inteligência artificial, mas também 
+que se compreendam os limites e capacidades dos estudantes nos mais diversos 
+aspectos, culturais, subjetivos, econômicos e sociais.
+No caso do ensino jurídico isto é ainda mais relevante. Não deve haver forma-
+ção jurídica na atualidade sem o conhecimento e uso de ferramentas tecnológicas. 
+Porém, isto deve estar subordinado a um projeto pedagógico voltado ao pensamento 
+21 SILVA, Tarcizio. Racismo Algorítmico e Regulação de Inteligência Artificial: O Contrato Racial na Produção do 
+PL 2338/2023. Tese (Doutorado) – Universidade Federal do ABC, Programa de Pós-Graduação em Ciências 
+Humanas e Sociais, São Bernardo do Campo, 2025.
+22 UNESCO. Orientações globais sobre a IA generativa na educação e na pesquisa. Paris: UNESCO, 2023. 
+Disponível em: https://unesdoc.unesco.org/ark:/48223/pf0000390241. Acesso em: 2 jul. 2025.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+13
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+crítico, à autonomia intelectual, à postura ética e adequada ao exercício do Direito. 
+O papel do professor não é apenas técnico, como vislumbram os otimistas que 
+acreditam que a tecnologia é capaz de educar por si só, nem transmissivo, como é 
+tratado em uma visão tradicional, mas, sim, formativo. O professor é insubstituível, 
+não porque a IA ou qualquer outra tecnologia seja irrelevante, mas porque nenhum 
+modelo computacional pode substituir a responsabilidade ética, política e crítica 
+envolvida no processo educativo de Direito.
+Tendo estas colocações em mente, podemos passar a expor a respeito das 
+experiências realizadas com GPTs personalizados em disciplinas EaD a fim de pro-
+porcionar um melhor processo educativo.
+4 
+Tutores, aprendizes e simulações: IA generativa aplicada 
+ao ensino jurídico
+O curso de Direito da Escola de Ciências Jurídicas da Universidade de Passo 
+Fundo oferece em seus currículos algumas disciplinas em formato 80% EaD, den-
+tre elas Direito Imobiliário e Condominial e Direito Eleitoral. Para essas disciplinas 
+utiliza-se a plataforma Moodle para a disponibilização de materiais.
+Uma das principais dificuldades enfrentadas em disciplinas no formato EaD 
+é o pouco contato do professor com os estudantes. Em virtude disto e tendo em 
+vista que uma das vantagens desse formato é a flexibilidade na realização de ati-
+vidades, foram criadas ferramentas com o uso do ChatGPT para auxiliar os estu-
+dantes a qualquer momento.
+As ferramentas criadas foram inspiradas no artigo de Ethan Mollick e Lilach 
+Mollich intitulado “Instructors as Innovators: A future-focused approach to new AI 
+learning opportunities, with prompts”, publicado em 2024, no qual os autores ex-
+ploram como educadores podem utilizar IA generativa para criar experiências de 
+aprendizado personalizadas para estudantes.23
+A escolha do ChatGPT para a confecção das ferramentas se deu por dois mo-
+tivos: o ChatGPT é a IA generativa mais popular e utilizada, facilitando o uso pelos 
+alunos que já usaram este LLM. Em segundo lugar, em sua versão plus (paga pelo 
+professor) é possível criar GPTs personalizados que se adaptem às necessidades. 
+Esta personalização é extremamente útil, uma vez que permite que o professor 
+utilize prompts fixos e que alimente o GPT com materiais de qualidade (livros e 
+artigos), restringindo o GPT à utilização deles, reduzindo (mas não eliminando) a 
+possibilidade de alucinações e respostas advindas de fontes não confiáveis.
+23 MOLLICK, Ethan; MOLLICK, Lilach. Instructors as Innovators: A future-focused approach to new AI learning 
+opportunities, with prompts. The Wharton School Research Paper, 2024. Disponível em: https://ssrn.com/
+abstract=4802463. Acesso em: 04 jul. 2025.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+14
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+Foram criados, então, três GPTs personalizados para cada uma das discipli-
+nas. O primeiro se trata de um tutor, com o objetivo de auxiliar os alunos de forma 
+rápida em horários em que o professor não estivesse disponível. O tutor para a 
+disciplina de Direito Imobiliário foi denominado “Tutor de Direito Imobiliário”, en-
+quanto o para Direito Eleitoral foi chamado de “Clara, a tutora de Direito Eleitoral”.
+A personalização dos modelos foi realizada com base em materiais didáticos 
+desenvolvidos pelo professor, incluindo livros da área e guias temáticos organiza-
+dos por disciplina. Cada GPT recebeu um conjunto de instruções sobre sua função 
+pedagógica, sendo modelado para atuar como um tutor ou parceiro de aprendiza-
+gem em situações simuladas. Por exemplo, a tutora “Clara”, foi programada para 
+adotar uma postura acolhedora e investigativa, iniciando o diálogo com perguntas 
+abertas sobre o nível de conhecimento do aluno e seu objetivo de estudo. Ao longo 
+da interação, Clara evita oferecer respostas diretas, preferindo conduzir o aluno 
+por meio de exemplos, analogias e perguntas exploratórias, encorajando a formu-
+lação autônoma do raciocínio. Seu comportamento foi ajustado para manter o foco 
+no progresso do aluno e levar a interação adiante mediante questionamentos e 
+reforço do conteúdo.
+Tais instruções foram sendo construídas conforme o GPT foi sendo testado 
+pelo professor. Deve-se destacar que, ao contrário de manter o usuário em uma 
+posição passiva, os GPTs foram instruídos a responder com questionamentos, 
+fazendo com que o estudante também exponha o que sabe, com o objetivo de 
+construir conhecimento, ao invés de ser um mero receptor de informações.
+Outro ponto interessante do uso dos tutores foi a possibilidade de gerar infor-
+mações de forma mais acessível e adequada para cada estudante, uma vez que 
+o usuário podia pedir explicações em formato de texto, quadros comparativos e 
+exemplos. Estes GPTs tutores foram disponibilizados no início de cada disciplina 
+e puderam ser utilizados pelos estudantes durante toda a sua duração.
+O segundo GPT criado foi voltado para que os estudantes fizessem uma 
+atividade de mentoria. Alunos que ensinam os outros têm maior chance de com-
+preender o material e ter noção de suas próprias deficiências, além de gerar maior 
+compreensão e aprendizado duradouro da matéria.24
+Desta forma, para a disciplina de Direito Imobiliário foi criado “Carlos, o 
+curioso de Direito Imobiliário” e para Direito Eleitoral foi desenvolvida “Dona Eva”. 
+Ambos os GPTs são semelhantes, com pequenas diferenças no que tange às suas 
+personas. Carlos seria um aluno novato que deseja aprender Direito Imobiliário, 
+24 MOLLICK, Ethan; MOLLICK, Lilach. Instructors as Innovators: A future-focused approach to new AI learning 
+opportunities, with prompts. The Wharton School Research Paper, 2024. Disponível em: https://ssrn.com/
+abstract=4802463. Acesso em: 04 jul. 2025.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+15
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+enquanto Dona Eva seria uma estudante mais velha, focada em aprender um ponto 
+específico, o sistema proporcional e majoritário. 
+Exemplificando com o caso de Carlos, sua função principal é inverter a lógica 
+tradicional da tutoria: em vez de explicar, Carlos aprende com o usuário, que assume 
+o papel de ensinar. Ele estimula o estudante a ensinar conceitos com base em 
+um arquivo específico previamente carregado como fonte única de conhecimento. 
+Quando o usuário acerta, Carlos reage com entusiasmo e o encoraja a continuar. 
+Quando há erro, ele expressa dúvidas de maneira gentil, permitindo que o estudante 
+reflita e tente reformular antes de intervir com a resposta correta. Ao final, Carlos 
+oferece um breve feedback sobre a clareza e precisão das explicações recebidas.
+Assim, os GPTs de mentoria são voltados a fazer com que o estudante perma-
+neça na atividade, ensinando e refletindo sobre o conteúdo da disciplina. Gize-se 
+de que o GPT “sabe” as respostas, pedindo esclarecimentos caso o usuário se 
+engane ou deliberadamente dê respostas erradas.
+O terceiro tipo de GPT personalizado criado foi um simulador de escritório de 
+advocacia para cada uma das disciplinas. Este tipo de GPT se encaixa na catego-
+ria role play, simulando a prática de forma gamificada. Esses GPTs foram os que 
+demandaram maior nível de instruções, testagem e correção, tratando-se de jogos 
+que motivam o usuário a dar respostas corretas em um ambiente simulado. Dare-
+mos como exemplo o jogo voltado para Direito Eleitoral.
+A ideia do jogo foi simular um escritório de advocacia voltado para o Direito 
+Eleitoral e, mais especificamente, o tópico de elegibilidade e inelegibilidades. 
+Quem apresenta o jogo ao usuário é seu assistente “Carlos”, que na sequência 
+faz os “clientes” entrarem na sala um por vez. “Carlos” é quem auxilia o usuário, 
+comentando sobre as respostas e incentivando para que o jogo continue. Cada 
+cliente faz três perguntas ao estudante, todas ligadas ao tema proposto, e, caso 
+sejam respondidas corretamente, o usuário recebe um “pagamento” de 500 reais. 
+Caso uma das respostas seja respondida incorretamente, o cliente sai irritado e 
+não paga. O objetivo final é completar cinco consultas, acumulando 2.500 reais. 
+Abaixo colocamos o exemplo de uma interação inicial:
+Olá! Bem-vindo ao nosso escritório de Direito Eleitoral! 😊 Antes de 
+começarmos, vou precisar de algumas informações suas: Qual é o 
+seu nome? Como você se identifica em gênero? (Ex.: masculino, fe-
+minino, não-binário, etc.). Qual a sua idade? Qual é o seu nível de 
+expertise em Direito Eleitoral? (iniciante, intermediário ou avançado). 
+Assim que responder, nosso assistente Carlos já entra em ação! 😉
+Você disse:
+Sou Estudante, masculino, 20, iniciante.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+16
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+O ChatGPT disse:
+Perfeito! Prazer em conhecê-lo, Estudante! 😊 Vou chamar o Carlos, 
+nosso assistente animado, para dar início ao seu primeiro atendimen-
+to. Prepare-se para uma boa dose de aprendizado e humor!
+Carlos:
+Olha só quem chegou! Nosso advogado iniciante de ouro! Já que 
+você está começando nessa aventura eleitoral, nada melhor do que 
+um cliente para testar seu talento. Afinal, alguém precisa pagar as 
+contas do escritório, né? 😅
+O cliente do dia é o Seu João da Silva, 56 anos. Ele quer saber se 
+pode se candidatar a prefeito na próxima eleição, mas ouviu rumores 
+sobre questões de inelegibilidade por contas rejeitadas na época em 
+que foi vereador.
+E então, vai atender o Seu João? Prometo que é fácil e, no final, 
+talvez a gente consiga até uma graninha! 😉
+Você disse:
+Vamos lá!
+Carlos:
+Aí sim, doutor! É disso que eu gosto, bora trabalhar! Vou chamar o 
+Seu João, e você dá o show. 💼
+(Carlos sai e volta com o cliente.)
+Seu João:
+“Bom dia, doutor! Sou João da Silva, já fui vereador há alguns anos, 
+mas agora quero disputar a prefeitura. O problema é que ouvi dizer 
+que, como tive contas rejeitadas quando era vereador, isso pode me 
+impedir de ser candidato. Isso é verdade? Quais são as condições 
+para que eu fique inelegível por causa disso?”
+Carlos (sussurrando):
+Essa é sua chance, Estudante! Explica direitinho as condições pra 
+inelegibilidade por rejeição de contas. Não precisa complicar, vai com 
+confiança!
+O jogo segue com as respostas, feedbacks do assistente e novas perguntas, 
+até o final do jogo, ou melhor, do expediente no contexto do simulado. A utilização 
+de questões práticas que posteriormente podem ser utilizadas em avaliações mais 
+tradicionais é bastante proveitosa para a reflexão sobre os temas abordados nas 
+aulas. Agora podemos tratar a respeito de como essas ferramentas foram dispo-
+nibilizadas e qual foi o feedback dos estudantes.
+Como referido, a existência dos GPTs tutores foi apresentada no primeiro dia 
+de aula, juntamente a uma explicação sobre o funcionamento e a melhor forma de 
+uso. Ao fim das disciplinas não é possível visualizar os diálogos com os chatbots, 
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+17
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+porém o ChatGPT apresenta ao criador dos GPTs personalizados o número de 
+acessos. O Tutor de Direito Imobiliário teve mais de 100 acessos dentre os 60 
+alunos da disciplina e Clara, a tutora de Direito Eleitoral, obteve apenas 40 acessos 
+dentre os 98 alunos da disciplina.
+Esses números estiveram abaixo do esperado, uma vez que as ferramentas 
+ficaram disponíveis durante toda a duração das matérias. Isso pode demonstrar 
+pouco interesse nas ferramentas ou baixo conhecimento do seu funcionamento. 
+Alguns feedbacks recebidos ao final das disciplinas revelam ainda esta falta de 
+confiança, com um estudante expondo que “não dava nada pela atividade”.
+Para a utilização dos GPTs de mentoria e simulação foram realizadas ativida-
+des optativas, uma vez que não se pretendeu obrigar os estudantes a utilizarem 
+uma ferramenta externa, seja por questões de acesso ou, até mesmo, por objeções 
+pessoais a ferramentas de Inteligência Artificial. As atividades consistiram somente 
+no uso da ferramenta após assistir a um breve vídeo explicativo e no envio de um 
+feedback, sendo deixado claro que se tratava de uma atividade experimental e 
+que críticas ou comentários que propusessem mudanças eram bem-vindos. Os 
+feedbacks foram coletados, anonimizados e organizados em uma planilha com o 
+objetivo de captar os sentimentos dos estudantes após o uso das ferramentas.
+As planilhas, por sua vez, foram analisadas utilizando o Gemini 2.5 para ve-
+rificar se o feedback foi positivo, negativo ou neutro, as críticas expostas e se foi 
+possível perceber a presença de uma maior motivação para as aulas no formato EaD.
+A atividade envolvendo o Simulador de Escritório voltado para o Direito Imo-
+biliário foi realizada por 25 dos 60 estudantes. Todos os alunos que realizaram 
+a atividade demonstraram sentimentos positivos em relação a ela, expressando 
+entusiasmo e satisfação, destacando-se termos como “excelente”, “muito legal” 
+e “divertido”. Nenhum comentário neutro ou puramente negativo foi encontrado. 
+Os principais pontos de destaque foram a interatividade, a eficácia para fixação do 
+conteúdo, a combinação da teoria com a prática e a inovação no uso da tecnologia 
+para o ensino.
+Quatro dos feedbacks, apesar de positivos, contiveram críticas construtivas, 
+focadas em dificuldades para iniciar as atividades no ChatGPT, uma vez que ele re-
+quer cadastro, dois estudantes relataram que não conseguiram utilizar a ferramenta 
+pelo tempo que desejavam em virtude das limitações da versão gratuita do ChatGPT 
+e um relatou que uma de suas respostas foi corrigida, apesar de ter o mesmo teor.
+Na segunda atividade optativa disponibilizada, foi apresentado o GPT “Carlos, 
+o curioso de Direito Imobiliário”. Nessa atividade houve um decréscimo no número 
+de alunos participantes, com 19 feedbacks a respeito da atividade. Desta vez, 18 
+foram feedbacks positivos e um neutro, em que foram colocados os pontos posi-
+tivos e negativos do uso da ferramenta e destacado que não substitui a interação 
+com humanos.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+18
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+Para as disciplinas de Direito Eleitoral foi utilizada a mesma estratégia, ini-
+ciando pelo GPT “Dona Eva”, no qual os estudantes deveriam ensinar a respeito 
+de sistema proporcional e majoritário. De um total de 98 alunos, 46 utilizaram a 
+ferramenta e enviaram feedbacks. 44 feedbacks recebidos foram em tom positivo, 
+destacando, em especial, motivação pelo uso da tecnologia e facilitação no apren-
+dizado através do exercício de ensinar para o GPT. 
+Dois dos feedbacks foram desconsiderados por ter ficado nítido que utilizaram 
+o GPT de forma equivocada, fazendo perguntas como se fosse um tutor, ao invés 
+de realizar o exercício de mentoria. Novamente, as críticas constantes foram volta-
+das ao fato da limitação de respostas do ChatGPT no uso de sua versão gratuita.
+Posteriormente, foi realizada nova atividade, desta vez voltada para a simu-
+lação de escritório de advocacia especializado em Direito Eleitoral, e novamente 
+foram recebidos 46 feedbacks. No uso do GPT de simulação, 45 feedbacks foram 
+positivos, sendo que neste caso o fator mais apontado foi de se tratar de uma 
+atividade divertida e prazerosa. Três destes feedbacks apontaram a questão do 
+interrompimento do uso após o limite de geração do ChatGPT como uma crítica. 
+O único feedback negativo obtido foi devido, mais uma vez, à questão do limite 
+imposto pelo ChatGPT com o estudante apontando que sequer conseguiu iniciar o 
+jogo. Isto, porém, deve ser devido ao fato de ter utilizado o ChatGPT pouco tempo 
+antes de tentar realizar a simulação.
+Assim, em ambas as disciplinas, a percepção dos estudantes que realizaram 
+as atividades foi predominantemente positiva, devendo ser ressaltado o fator mo-
+tivacional para a realização dessas atividades.
+5 
+Considerações finais
+A experiência relatada neste artigo não pretende ser definitiva ou generalizável. 
+É um relato construído a partir da prática docente com base em literatura estran-
+geira e ferramentas que ainda estão sendo consolidadas. A coleta de feedbacks
+realizada com os próprios estudantes pode influenciar o grau de sinceridade das 
+respostas e problemas de adesão e de falta de questionamentos mais objetivos 
+deixa uma abertura para novas experiências e testes futuros.
+Ainda assim, os dados obtidos permitem que se infira um movimento interes-
+sante: estudantes estão dispostos a utilizar inteligência artificial como parte do seu 
+processo educativo, mas necessitam de letramento digital, critérios e mediação. Para 
+isso a presença dos professores é fundamental. De sua parte, educadores também 
+devem obter maior conhecimento sobre essas tecnologias. Reconhecendo que os 
+alunos irão utilizá-las, devem ser estimulados a fazer um bom uso, sendo capazes 
+de discernir as suas limitações e recusando uma posição meramente passiva.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+19
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+O desafio é também epistemológico. Como propõe Fornasier,25 é preciso um 
+redesenho da educação jurídica que rompa com sua lógica retrospectiva e avance 
+para um modelo prospectivo e interdisciplinar, voltado à resolução de problemas 
+complexos e construção de alternativas. Isso envolve a incorporação de saberes 
+tecnológicos, sociais e ambientais, dentre outros, com foco na crítica, adaptação 
+e criação.
+Não se trata somente de usar ferramentas de IA, mas de se questionar como, 
+para que e com quais consequências. Pensar o futuro da educação com tecnolo-
+gias emergentes exige que enfrentemos desafios sérios, como o combate à desi-
+gualdade, a valorização do papel da coletividade e da convivência na educação, o 
+reconhecimento de professores e estudantes como sujeitos deste processo e não 
+como usuários passivos e avaliar os custos ambientais dessas tecnologias. O uso 
+da IA na educação deve ser orientado por critérios éticos, sociais e pedagógicos 
+bastante claros.
+A educação jurídica está em um momento de tensão entre a tradição e a inova-
+ção. Não é o caso de se abandonar a doutrina e a sala de aula, mas de incorporar 
+elementos de uma formação mais ampla, que dialogue com um mundo em trans-
+formação. Não devemos abraçar as promessas das Big Techs (cujo interesse real 
+está muito mais nas bolsas de valores do que na transmissão de conhecimento), 
+tampouco embarcar em uma crítica, por vezes rasa, embasada na pouca vontade 
+de conhecer o novo ou no medo de fazê-lo. A inteligência artificial pode ser parte 
+dessa formação, com estudantes e professores assumindo o protagonismo, de 
+forma crítica e ética.
+Referências 
+ALTMAN, Sam. Reflections. Blog pessoal. 2023. Disponível em: https://blog.samaltman.com/
+reflections. Acesso em: 24 jun. 2025.
+COPELAND, Jack B.; PROUDFOOT, Diane. Artificial Intelligence: History, Foundations, and 
+Philosophical Issues. In: THAGARD, Paul. Handbook of the Philosophy of Psychology and Cognitive 
+Science. Amsterdam: Elsevier, 2007.
+ERTEL, Wolfgang. Introduction to Artificial Intelligence. London: Springer London, 2011. 
+(Undergraduate Topics in Computer Science). Disponível em: https://link.springer.
+com/10.1007/978-0-85729-299-5. Acesso em: 19 ago. 2024.
+FACER, Keri; SELWYN, Neil. Digital technology and the futures of education: towards ‘non-stupid’ 
+optimism. Paris: UNESCO, 2021.
+FORNASIER, Mateus de Oliveira. Ensino Jurídico no Século XXI e a Inteligência Artificial. Revista 
+Opinião Jurídica. Fortaleza, ano 19, n. 31, maio/ago. 2021, p. 1-32.
+25 FORNASIER, Mateus de Oliveira. Ensino Jurídico no Século XXI e a Inteligência Artificial. Revista Opinião 
+Jurídica. Fortaleza, ano 19, n. 31, maio/ago. 2021, p. 1-32.
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+20
+FELIPE CITTOLIN ABAL, ADRIANA FASOLO PILATI
+MOLLICK, Ethan. Co-intelligence: living and working with AI. New York, New York: Portfolio/Penguin, 
+2024.
+MOLLICK, Ethan; MOLLICK, Lilach. Instructors as Innovators: A future-focused approach to new 
+AI learning opportunities, with prompts. The Wharton School Research Paper, 2024. Disponível 
+em: https://ssrn.com/abstract=4802463. Acesso em: 04 jul. 2025.
+MOROZOV, Evgeny. To Save Everything, Click Here: The Folly of Technological Solutionism. New 
+York: PublicAffairs, 2013.
+O’DONNELL, James; CROWNHART, Casey. We did the math on AI’s energy footprint. Here’s the 
+story you haven’t heard. MIT Technology Review, 20 maio 2025. Disponível em: https://www.
+technologyreview.com/2025/05/20/1116327/ai-energy-usage-climate-footprint-big-tech/. Acesso 
+em: 2 jul. 2025.
+SELWYN, Neil. Education and Technology: Key Issues and Debates. 2. ed. London: Bloomsbury 
+Academic, 2021.
+SHANAHAN, Murray. Talking about Large Language Models. Communications of the ACM, v. 67, 
+n. 2, p. 68–79, 2024.
+SILVA, Tarcizio. Racismo Algorítmico e Regulação de Inteligência Artificial: O Contrato Racial na 
+Produção do PL 2338/2023. Tese (Doutorado) – Universidade Federal do ABC, Programa de Pós-
+Graduação em Ciências Humanas e Sociais, São Bernardo do Campo, 2025.
+STORR, Christine; MCGRATH, Cormac. In search of the evidence: digital learning in legal education, 
+a scoping review. The Law Teacher, v. 57, n. 2, p. 119-134, 2023.
+UNESCO. Orientações globais sobre a IA generativa na educação e na pesquisa. Paris: UNESCO, 
+2023. Disponível em: https://unesdoc.unesco.org/ark:/48223/pf0000390241. Acesso em: 2 
+jul. 2025.
+WOOLDRIDGE, Michael. A Brief History of Artificial Intelligence: where it is, where we are and where 
+we are going. Nova York: Flatiron Books, 2020.
+Informação bibliográfica deste texto, conforme a NBR 6023:2018 da Associação 
+Brasileira de Normas Técnicas (ABNT):
+ABAL, Felipe Cittolin; PILATI, Adriana Fasolo. Inteligência Artificial no ensino 
+jurídico: experiências com GPTs personalizados. International Journal of Digital 
+Law, Belo Horizonte, v6, e609, 2025. DOI: 10.47975/ijdl.v.6.1302. 
+
+International Journal of Digital Law, Belo Horizonte, v. 6, e609, 2025
+21
+INTELIGÊNCIA ARTIFICIAL NO ENSINO JURÍDICO: EXPERIÊNCIAS COM GPTS PERSONALIZADOS
+Informações adicionais
+Additional information
+Editores responsáveis
+Handling Editors
+Editor-Chefe
+Emerson Gabardo
+Editor-Adjunto
+Lucas Bossoni Saikali
+Declaração de autoria e especificação de contribuição ao artigo 
+Statement of Authorship and Individual Contribution
+Felipe Cittolin Abal
+Contribuições: 1. Conceitualização; 
+2. Curadoria de dados; 3. Análise de dados; 
+5. Pesquisa; 6. Metodologia; 
+7. Administração do projeto; 13. Redação 
+do manuscrito original; 14. Redação - 
+revisão e edição.
+Adriana Fasolo Pilati
+Contribuições: 1. Conceitualização; 
+6. Metodologia; 14. Redação - revisão 
+e edição.
+

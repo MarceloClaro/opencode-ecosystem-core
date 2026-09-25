@@ -1,0 +1,2394 @@
+Full Terms & Conditions of access and use can be found at
+https://www.tandfonline.com/action/journalInformation?journalCode=rlit20
+Law, Innovation and Technology
+ISSN: (Print) (Online) Journal homepage: www.tandfonline.com/journals/rlit20
+Generative artificial intelligence vs. law students:
+an empirical study on criminal law exam
+performance
+Armin Alimardani
+To cite this article: Armin Alimardani (23 Sep 2024): Generative artificial intelligence vs.
+law students: an empirical study on criminal law exam performance, Law, Innovation and
+Technology, DOI: 10.1080/17579961.2024.2392932
+To link to this article:  https://doi.org/10.1080/17579961.2024.2392932
+© 2024 The Author(s). Published by Informa
+UK Limited, trading as Taylor & Francis
+Group
+Published online: 23 Sep 2024.
+Submit your article to this journal 
+View related articles 
+View Crossmark data
+
+Generative artificial intelligence vs. law students: an 
+empirical study on criminal law exam performance
+Armin Alimardani 
+School of Law, University of Wollongong, Wollongong, Australia
+ABSTRACT
+Claims that GPT-4 can outperform more than 90% of human test-takers in the 
+US Uniform Bar Examination have sparked heated debates about the impact of 
+Generative AI (GenAI) on legal education, academic integrity, and the future of 
+legal practice. Yet GenAI’s capabilities in broader legal examination contexts – 
+including in jurisdictions outside the US – are unclear. This study addresses this 
+gap by evaluating GenAI’s performance against students who took the ‘Criminal 
+Law’ final exam at an Australian law school in Spring 2023. Various AI models 
+and prompt engineering techniques were used to generate 10 distinct 
+answers to the exam question. Five criminal law tutors, unaware of AI 
+involvement, graded a mix of AI-generated and student responses. Then, the 
+tutors were briefed on the AI-generated papers they marked and engaged in 
+reflective semi-structured interviews. The study found that GenAI performed 
+below the student average in questions that required detailed legal and 
+critical analysis. However, all GenAI papers performed better than students in 
+open-ended questions and essay writing tasks. These results provide a 
+benchmark for the capabilities and limitations of GenAI in higher education 
+and provide insights into the potential implications of its application to legal 
+assessments and education, curriculum development, and the future workforce.
+ARTICLE HISTORY Received 10 June 2024; Accepted 2 July 2024
+KEYWORDS GenAI; ChatGPT; education and technology; law and technology; higher education; legal 
+profession
+1. Introduction
+The potential impact of chatbots powered by artificial intelligence (AI) in 
+higher education has been a topic of discussion for some time.1 However, 
+© 2024 The Author(s). Published by Informa UK Limited, trading as Taylor & Francis Group 
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http:// 
+creativecommons.org/licenses/by/4.0/), which permits unrestricted use, distribution, and reproduction in any 
+medium, provided the original work is properly cited. The terms on which this article has been published allow the 
+posting of the Accepted Manuscript in a repository by the author(s) or with their consent. 
+CONTACT  Armin Alimardani 
+armin@uow.edu.au; armin.techlaw@gmail.com
+School of Law, 
+University of Wollongong, Wollongong, Australia 
+https://www.linkedin.com/in/armin-alimardani/
+1Ann M Rogerson and Grace McCarthy, ‘Using Internet Based Paraphrasing Tools: Original Work, Patch­
+writing or Facilitated Plagiarism?’ (2017) 13 International Journal for Educational Integrity 1; Sencer 
+Yeralan and Laura Ancona Lee, ‘Generative AI: Challenges to Higher Education’ (2023) 5 Sustainable 
+Engineering and Innovation 107; Mohammad Amin Kuhail and others, ‘Interacting with Educational 
+Chatbots: A Systematic Review’ (2023) 28 Education and Information Technologies 973.
+LAW, INNOVATION AND TECHNOLOGY 
+https://doi.org/10.1080/17579961.2024.2392932
+
+the launch of ChatGPT in November 2022 has increased people’s curiosity in 
+Generative AI (GenAI)2 and prompted universities to consider the impli­
+cations of AI in the context of academic integrity.3 Responses have been 
+varied: some institutions have banned GenAI, others have embraced it, 
+and some have remained undecided.4 These policies were initially formed 
+with a limited understanding of GenAI’s potential, relying mainly on the 
+reports of the companies that created them as well as anecdotal assessments.
+This is particularly relevant to the legal field as it appears that OpenAI, the 
+creator of ChatGPT, devoted a significant amount of attention to their 
+model’s performance in this context.5 Specifically, GPT-4 achieved an 
+impressive score of 298 out of 400 in the US Uniform Bar Examination 
+(MBE + MEE + MPT), placing it within the top 10% of human test takers 
+(i.e. the 90th percentile).6 Among the benchmarks reported by OpenAI, 
+the bar exam was the only benchmark highlighted in the abstract of the 
+GPT-4 technical report7 and one of two benchmarks presented on 
+OpenAI’s GPT-4 webpage;8 this is despite the existence of other high- 
+scoring benchmarks like the SAT Evidence-Based Reading & Writing.9
+This emphasis suggests that OpenAI believes that GPT-4’s result on the 
+bar exam is the best showcase of the capabilities of their model in a pro­
+fessional and academic setting. However, the technical report lacks a clear 
+2Md Mostafizer Rahman and Yutaka Watanobe, ‘ChatGPT for Education and Research: Opportunities, 
+Threats, and Strategies’ (2023) 13 Applied Sciences 5783.
+3Jiahui Luo (Jess), ‘A Critical Review of GenAI Policies in Higher Education Assessment: A Call to Recon­
+sider the “Originality” of Students’ Work’ Assessment & Evaluation in Higher Education 1 <https://doi. 
+org/10.1080/02602938.2024.2309963>; Cecilia Ka Yuk Chan, ‘A Comprehensive AI Policy Education 
+Framework for University Teaching and Learning’ (2023) 20 International Journal of Educational Tech­
+nology in Higher Education 38; Thomas KF Chiu, ‘The Impact of Generative AI (GenAI) on Practices, Pol­
+icies and Research Direction in Education: A Case of ChatGPT and Midjourney’ Interactive Learning 
+Environments 1 <https://doi.org/10.1080/10494820.2023.2253861>; Rahman and Watanobe (n 2).
+4Wayne Holmes and Fengchun Miao, Guidance for Generative AI in Education and Research (UNESCO Pub­
+lishing 2023); Tory Shepherd, ‘South Australian Universities to Allow Use of Artificial Intelligence in 
+Assignments, If Disclosed’ (The Guardian, 2023) <https://www.theguardian.com/australia-news/2023/ 
+jan/21/south-australian-universities-to-allow-use-of-artificial-intelligence-in-assignments-if-disclosed> 
+accessed 10 February 2024; Theo Farrell, ‘We Can’t Ban ChatGPT from Education so We Have to Use It’ 
+(The Australian, 2023) <https://www.theaustralian.com.au/higher-education/we-cant-ban-chatgpt- 
+from-education-so-we-have-to-use-it/news-story/40478992ac49541acedb36dd7fa33bdb> 
+accessed 
+18 February 2024; Chiu (n 3). 
+For a similar trend with respect to schools see, Conor Duffy, ‘Public Schools’ Ban on ChatGPT Sparks 
+Concerns’ (ABC News, 2023) <https://www.abc.net.au/listen/programs/am/public-schools-ban-on- 
+chatgpt-sparks-concerns-of-digital-divide/102395706> accessed 18 February 2024; Nir Kshetri and 
+others, ‘“So What If ChatGPT Wrote It?” Multidisciplinary Perspectives on Opportunities, Challenges 
+and Implications of Generative Conversational AI for Research, Practice and Policy’ (2023) 71 Inter­
+national Journal of Information Management 102642.
+5Also see Eric Martínez, ‘Re-Evaluating GPT-4’s Bar Exam Performance’ [2024] Artificial Intelligence and 
+Law <https://doi.org/10.1007/s10506-024-09396-9>.
+6Josh Achiam and others, ‘GPT-4 Technical Report’ [2023] arXiv preprint arXiv:2303.08774.
+7Biology Olympiad is the other benchmark on the OpenAI GPT-4 webpage, scoring in the top 99% of 
+human test takers. Achiam and others (n 6).
+8OpenAI, ‘GPT-4 Is OpenAI’s Most Advanced System, Producing Safer and More Useful Responses’ 
+(OpenAI) <https://openai.com/gpt-4> accessed 24 April 2024.
+9Achiam and others (n 6).
+2 
+A. ALIMARDANI
+
+discussion on how these benchmarks were conducted;10 furthermore, the 
+way OpenAI represents GPT-4’s statistics may give a misleading impression 
+of its capabilities in addressing legal issues.
+Understanding the capabilities of large language models is crucial before 
+deciding on their implementation in the educational sector, whether it be to 
+enhance student learning or prevent academic dishonesty. As Chan points 
+out, there is much more to be examined and discussed before one can 
+begin to ‘formulate more comprehensive and focused policy documents on 
+AI in education’.11
+Some researchers in fields such as medicine, business, and engineering 
+have independently examined the capabilities and viability of GenAI.12
+Although their findings occasionally conflict due to the differing perform­
+ance of language models across different disciplines, there is a consensus 
+that some GenAI models can pass professional tests.13 In the context of 
+legal education, a few studies have assessed GPT-4’s performance within 
+U.S. law schools14 and on simulated U.S. Bar Exams.15 The results of the 
+majority of these studies16 suggest discrepancies between GPT-4’s actual per­
+formance and its representation by OpenAI.
+This empirical study aims to benchmark GenAI and assess its capabilities 
+in the context of an Australian law school. It considers two aspects: first, the 
+10Unlike the majority of the tests that OpenAI conducted independently, the US bar exam was tested by 
+OpenAI’s collaborators at CaseText and Stanford CodeX. Achiam and others (n 6).
+11Chan (n 3) 6, qouted in Luo (Jess) (n 3).
+12Lucija Gosak and others, ‘The ChatGPT Effect and Transforming Nursing Education with Generative AI: 
+Discussion Paper’ (2024) 75 Nurse Education in Practice 103888; Argyro Kavadella and others, ‘Evalu­
+ation of ChatGPT’s Real-Life Implementation in Undergraduate Dental Education: Mixed Methods 
+Study’ (2024) 10 JMIR Medical Education e51344; Tassallah Abdullahi, Ritambhara Singh and Carsten 
+Eickhoff, ‘Learning to Make Rare and Complex Diagnoses With Generative AI Assistance: Qualitative 
+Study of Popular Large Language Models’ (2024) 10 JMIR Medical Education e51391; Sasha Nikolic 
+and others, ‘ChatGPT versus Engineering Education Assessment: A Multidisciplinary and Multi-Insti­
+tutional Benchmarking and Analysis of This Generative Artificial Intelligence Tool to Investigate Assess­
+ment Integrity’ (2023) 48 European Journal of Engineering Education 559 <https://doi.org/10.1080/ 
+03043797.2023.2213169>; Christian Terwiesch, ‘Would Chat GPT3 Get a Wharton MBA’ [2023] A pre­
+diction based on its performance in the operations management course (Mack Institute for Innovation 
+Management at the Wharton School, University of Pennsylvania, 2023); Abhijit Guha, Dhruv Grewal 
+and Stephen Atlas, ‘Generative AI and Marketing Education: What the Future Holds’ (2024) 46 
+Journal of Marketing Education 6.
+13Luo (Jess) (n 3).
+14Jonathan H Choi and Daniel Schwarcz, ‘AI Assistance in Legal Analysis: An Empirical Study’ 73 Journal of 
+Legal Education <https://ssrn.com/abstract=4539836>; Jonathan H Choi and others, ‘ChatGPT Goes to 
+Law School’ (2022) 71 Journal of Legal Education 387 <https://heinonline.org/HOL/P?h=hein.journals/ 
+jled71&i=391>; Andrew Blair-Stanek and others, ‘GPT Gets Its First Law School B-Pluses’ [2024] Avail­
+able at SSRN 4717411; Andrew Blair-Stanek and others, ‘GPT-4’s Law School Grades: Con Law C, Crim C- 
+, Law & Econ C, Partnership Tax B, Property B-, Tax B’ [2023] Available at SSRN 4443471; Andrew Blair- 
+Stanek, Nils Holzenberger and Benjamin Van Durme, ‘Can GPT-3 Perform Statutory Reasoning?’, Pro­
+ceedings of the Nineteenth International Conference on Artificial Intelligence and Law (2023) <https:// 
+arxiv.org/abs/2302.06100>.
+15Daniel Martin Katz and others, ‘Gpt-4 Passes the Bar Exam’ (2024) 382 Philosophical Transactions of the 
+Royal Society A 20230254; Martínez (n 5).
+16Unlike the other studies, Katz et al. study supports OpenAI’s technical report on GPT-4’s bar exam per­
+formance: Katz and others (n 15).
+LAW, INNOVATION AND TECHNOLOGY 
+3
+
+grade that students would have received if they simply provided the exam 
+question to GenAI, and second, the highest possible grade achievable 
+when using various prompting techniques with GenAI. This study adds 
+value and enhances previous research via several key contributions, some 
+of which were only partially addressed in earlier studies: 
+. Previous studies that evaluated GPT-4’s capabilities were largely confined 
+to the US legal system.17 Conducting research in a different jurisdiction, 
+such as Australia, can be beneficial as GPT-4’s training data may have 
+been predominantly based on US law. Evaluating GPT-4 within the Aus­
+tralian legal framework using various test formats could yield distinct out­
+comes and reveal new facets of the AI’s abilities.
+. This study employs various prompting techniques and GenAI models, 
+which can lead to significantly different results.
+. This was a blind study and tutors who marked AI-Generated papers were 
+unaware of the involvement of AI until after all grades were submitted.18
+. Tutors were interviewed to incorporate the perspective of educators 
+directly exposed to GenAI.
+. This study also explores novel applications of other GenAI models, such 
+as ‘Image to Text’ and ‘Speech to Text’, that can be used to provide lecture 
+slides and transcriptions as part of prompts.19
+This research contributes to a complex and dynamic field that is relatively 
+new to many educators. Such empirical studies can provide valuable insights 
+that help shape the future of higher education. By identifying the strengths 
+and weaknesses of AI in problem-solving tasks in the legal field, this study 
+can inform law schools on how to adjust their policies and curricula. Specifi­
+cally, this includes identifying areas that should be prioritised to ensure that 
+the students’ skills exceed those of AI as well as exploring how AI might be 
+integrated to augment student performance.
+Following this introduction, this article comprises five main sections 
+together with a concluding segment. Section 2 provides a detailed descrip­
+tion of the methodology of this study. It begins by outlining the format, 
+structure, content, and marking criteria of the Criminal Law exam at the 
+UOW Law School. This is followed by an explanation of the process by 
+which the 10 AI-generated papers were obtained, including details on the 
+17For instance, the University of Maryland Carey School of Law, and the University of Minnesota Law 
+School. Choi and Schwarcz (n 14); Blair-Stanek and others, ‘GPT-4’s Law School Grades: Con Law C, 
+Crim C-, Law & Econ C, Partnership Tax B, Property B-, Tax B’ (n 14).
+18Some of the parallel studies in the US were not blind, or the markers knew there were AI-generated 
+papers mixed with student papers. For instance, see, Choi and others (n 14); Blair-Stanek and others, 
+‘GPT-4’s Law School Grades: Con Law C, Crim C-, Law & Econ C, Partnership Tax B, Property B-, Tax B’ (n 
+14).
+19These features are not used in any of the parallel studies.
+4 
+A. ALIMARDANI
+
+different prompting techniques used for each paper. It then discusses the 
+procedure by which the AI-generated papers were distributed to tutors as 
+well as how they were kept unaware of AI involvement. Finally, a comparison 
+is drawn between the UOW Criminal Law exam and the US Bar Exam to 
+contextualise the objectives and methodology of the study.
+Section 3 presents an in-depth discussion of the results. It begins by com­
+paring the grades obtained by the AI-generated papers with those of the 
+average student. It then examines the various unique aspects of the AI 
+papers, including their structure, expression, ability to identify and cite rel­
+evant legal authorities, critical analysis capabilities, and the presence of fab­
+ricated information (i.e. ‘hallucination’).
+Section 4 reflects on the limitations of the study, emphasising the need 
+for larger and more comprehensive studies to further investigate the capa­
+bilities and limitations of generative AI in legal education and future legal 
+careers. Section 5 explores the broader implications of the study’s findings 
+in the field of legal education and future careers, providing specific, 
+actionable recommendations for universities to prepare students for the 
+evolving legal job market. These recommendations include a shift in 
+focus towards knowledge and skills that foster responsible and effective 
+collaboration between students and AI, addressing the possible over- 
+reliance on AI, and exploring potential solutions to unequal access to 
+AI technologies.
+During the final stages of this paper, OpenAI released a new model, GPT- 
+4o. Section 6 provides a brief overview of this model’s performance on the 
+Criminal Law exam used in this study and compares it to other OpenAI 
+models.
+2. Methodology
+In this study, references to GenAI models may inadvertently suggest anthro­
+pomorphism, potentially giving an incorrect impression of the capabilities of 
+AI or implying that it possesses reasoning processes and mental structures 
+that are the same as humans.20 Readers are warned that this is simply a 
+figure of speech and it is not my intention to suggest that AI models are 
+similar to humans.
+2.1. Criminal law exam at UOW law school
+The assessment task chosen for this study is the final exam for Criminal 
+Law and Procedure B, a core subject in the law undergraduate programme. 
+The exam is drafted based on a variety of criminal law topics covered in 
+20Achiam and others (n 6) footnote 17.
+LAW, INNOVATION AND TECHNOLOGY 
+5
+
+this subject, including strict liability offences, public order offences, prop­
+erty offences, criminal defences (e.g. self-defence) and sentencing 
+offenders.
+Students have three primary sources of data that they can use to prepare 
+for the exam: lectures, practice seminar questions discussed in tutorials, and 
+reading materials, including their textbook. The exam marking criteria 
+include the students’ knowledge of relevant legal principles, ability to identify 
+relevant facts, legal critical analysis, and persuasive and clear arguments.
+The format and content of the exam at UOW School of Law varies each 
+year. This year, the exam comprised two questions. The first question pre­
+sented a problem scenario with two sub-questions (Q1-1 and Q1-2), each 
+associated with different aspects of criminal law. The second question 
+(Q2) consisted of a set of short answer questions and a brief essay of approxi­
+mately 300 words. The exam was worth a total of 60 marks, accounting for 
+60% of the course grade. Question 1 (Q1-1 and Q1-2) was allocated 50 
+marks, while Question 2 was worth 10 marks.
+The inclusion of both ‘problem scenarios’ and ‘open-ended questions’ in 
+the assessment made it an appropriate tool for evaluating the capabilities of 
+GenAI. Problem scenarios are essential in some law courses, as they demand 
+extensive critical analysis and test the student’s ability to apply theoretical 
+legal knowledge to hypothetical scenarios.21 While there is no prescribed 
+length for problem scenarios, they typically provide the context and details 
+of the offence and can range from 500 to 1000 words.
+Addressing problem scenarios in law involves four key components:22
+. Issue: Identify the legal question and the elements that must be proven. 
+For example, determine what elements must be proven for a self- 
+defence claim. For each element, students must address the following:
+. Law (legal knowledge): Cite the legal rules and principles associated with 
+that legal element as well as their authoritative sources, such as specific 
+sections of the relevant legislation or case law.
+. Application: In this step, students are required to apply the relevant legal 
+rules to the case’s facts. They must identify the relevant facts and argue 
+how these facts may be used to either support or undermine the legal prin­
+ciples. This involves considering both sides of the argument and critically 
+evaluating the strengths and weaknesses of the case. This step demands a 
+high level of legal reasoning and critical analysis, which students often find 
+challenging.
+21Emily Finch and Stefan Fafinski, Legal Skills (Oxford University Press 2023).
+22There are various approaches, and some of them have five components. But in general, the process is 
+similar and has the same outcome. Jay Sanderson, Drossos Stamboulakis and Kim Kelly, A Practical 
+Guide to Legal Research (5th Editio, Lawbook Co 2021).
+6 
+A. ALIMARDANI
+
+. Conclusion: Ultimately, students should conclude the likelihood of 
+proving the legal element (i.e. issue). In most cases, a student’s final con­
+clusion does not matter. Instead, the quality of the legal analysis that leads 
+them to that conclusion as well as the persuasiveness of their arguments is 
+more important.
+Unlike the problem scenario, the short answer questions in this exam did 
+not follow a specific format, and students were primarily assessed based on 
+their legal knowledge, critical thinking, and creativity.
+The exam was drafted by the subject coordinator (the author) and peer- 
+reviewed by two staff members and the school’s discipline leader for 
+clarity and quality. The exam was open-book, three hours long, and held 
+in person. Digital devices were not permitted during the exam; relevant leg­
+islative authorities were provided in the exam paper, while students were 
+responsible for bringing their own notes on relevant case laws.
+2.2. Generating AI papers
+Two important variables must be determined when generating AI responses: 
+the AI engine (GenAI model) and the prompt methods (including what is 
+known as “prompt engineering”). 
+2.2.1. AI engines
+All evaluations involving the selection of the AI engines were based on their 
+availability and accessibility in October – November 2023. Since then, these 
+models have been updated and are more accessible to the public. In Section 6 
+Update, I will review a more recent version (May 2024) of one of the AI 
+models originally selected.
+The two AI companies chosen for this task were OpenAI and Google. This 
+selection was based on several reasons: one factor was that this study aimed 
+to evaluate the likelihood that students would use GenAI for their assign­
+ments; consequently, these GenAI engines were selected based on their 
+public perception, accessibility, and the fact that they were free to use.23
+Additionally, the study seeks to generate the highest quality responses poss­
+ible: evaluations at that time suggested that GPT-4 had the highest 
+performance.24
+23ChatGPT is known as one of the fastest-growing applications: 
+Krystal Hu, ‘ChatGPT Sets Record for Fastest-Growing User Base – Analyst Note’ (REUTERS, 2023); 
+Weng Marc Lim and others, ‘Generative AI and the Future of Education: Ragnarök or Reformation? 
+A Paradoxical Perspective from Management Educators’ (2023) 21 The International Journal of Manage­
+ment Education 100790.
+24Shen Zheng and others, ‘GPT-Fathom: Benchmarking Large Language Models to Decipher the Evol­
+utionary Path towards GPT-4 and Beyond’ [2023] arXiv preprint arXiv:2309.16583.
+LAW, INNOVATION AND TECHNOLOGY 
+7
+
+An important consideration in this study was data privacy: in particular, 
+the author did not have permission to share the exam questions with GenAI 
+companies, which may have used that data to train their models and, conse­
+quently, potentially reproduce the exam questions. Of the various AI compa­
+nies, OpenAI and Google both offer users the option to opt out of 
+contributing their data to model training.
+Google Bard (now known as Google Gemini) was the only easily accessi­
+ble GenAI model that could potentially compete with other GenAI models.25
+The author was familiar with Google Bard’s performance based on previous 
+experiments, which was found to be weaker than the OpenAI models. 
+OpenAI offers multiple models with different capabilities and can be 
+grouped into two categories:
+Frontend models are easily accessible through https://chat.openai.com. 
+These models are categorised into two groups: the free ChatGPT 3.5 
+model and the paid ChatGPT-4 model (these models were later updated, 
+and now OpenAI offers GPT-4 for free to all users). In most cases, GPT-4 
+performs better than GPT-3.526 and is also multimodal, coming integrated 
+with other models such as GPT-Vision (GPT-4 with the ability to analyse 
+images) and Bing (GPT-4 with access to the internet through the Microsoft 
+Bing browser). In terms of privacy, users interacting with the frontend inter­
+face can request that OpenAI exclude their prompts from being used to train 
+its models.27 The GPT-3.5 and GPT-4 models used in this study were 
+released in the early November update.28
+Backend models are designed for developers and can be accessed via ‘API 
+login’ at www.openai.com. Although backend and frontend models may 
+share similar names, their performances can differ.29 Unlike frontend 
+models such as GPT-4, which are continuously updated by OpenAI (‘con­
+tinuous model upgrades’),30 backend models offer access to static model ver­
+sions that remain unchanged from the time of their release (‘static model 
+versions’).31 The specific model used in this study was GPT-4-1106- 
+preview, which was released on November 6, 2023. Backend models allow 
+users to adjust settings such as ‘temperature’,32 which modulates the 
+25Google Gemini now offers multiple GenAI models.
+26In the OpenAI evaluation, GPT-4 outputs were preferred to GPT-3.5 (RLHF) in 70.2% and GPT-3.5 Turbo 
+(RLHF) in 61.1% of instances. Achiam and others (n 6).
+27This is different from turning off data collection through settings. In that approach, you would no 
+longer have access to integrated models and tools such as GPT Vision and Bing. The special request 
+is made through the following link: https://privacy.openai.com/policies.
+28https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4.
+29Zheng and others (n 24).
+30See, https://platform.openai.com/docs/models/continuous-model-upgrades.
+31See, https://platform.openai.com/docs/models/continuous-model-upgrades.
+32Alec Radford and others, ‘Improving Language Understanding by Generative Pre-Training’; Armin Ali­
+mardani and Emma A Jane, ‘We Pitted ChatGPT against Tools for Detecting AI-Written Text, and the 
+Results Are Troubling’ (The Conversation, 2023) <https://theconversation.com/we-pitted-chatgpt- 
+8 
+A. ALIMARDANI
+
+randomness of word generation.33 Contrary to popular belief, GenAI models 
+do not choose the next most probable word but rather select one of the most 
+probable words randomly.34 This is why the same prompt results in different 
+outputs. Increasing the temperature of the model yields more ‘novel’ outputs 
+but also increases the risk of irrelevant responses and ‘hallucinations’, which 
+refers to content that may be ‘nonsensical or untruthful in relation to certain 
+sources’.35 Conversely, decreasing temperature may result in more relevant 
+but less creative and sophisticated answers with a reduced likelihood of hal­
+lucination. In the test rounds, it appeared the backend model had difficulty 
+following the instructions on how to answer the questions. To increase the 
+likelihood that the model adhered to the instructions, the temperature was 
+set to 0 in all papers generated through the backend. The backend models 
+do not collect users’ data for model training purposes by default.36
+2.2.2. Generating AI exam answers and prompt engineering
+The first five papers were generated on the assumption that students were 
+using GenAI to produce answers in cases where the use of AI was prohibited. 
+It was also assumed that students who chose to use GenAI would put in the 
+minimum effort for prompt engineering. This meant that no instructions 
+were provided to the GenAI models and that only the exam question 
+(excluding the cover page) was copied into the model. Nevertheless, the 
+exam question itself contained specific instructions about the expected 
+content of the answer. Since students are more likely to use accessible 
+models, only the front-end models were used for this investigation. Further­
+more, due to the variability in answer quality for the same question observed 
+during test runs, two papers were generated using GPT-4 – Frontend and 
+two papers were generated using GPT-3.5 – Frontend. Only one paper was 
+generated by Google Bard since its outputs in the test runs were much 
+poorer than those of the OpenAI models.
+The second set of five papers was generated to assess the capabilities of 
+different GenAI models as well as to attempt to receive the highest possible 
+grade. In order to achieve the highest possible mark, each of the second set of 
+five papers was provided with specific instructions on how to formulate the 
+response. Further, a variety of prompt engineering methods were used for 
+against-tools-for-detecting-ai-written-text-and-the-results-are-troubling-199774> accessed 24 April 
+2024.
+33The more accurate term is ‘token’ but for ease of understanding ‘word’ will be used in this study. For 
+more information about ‘token’ see, Abigail Rai and Samarjeet Borah, ‘Study of Various Methods for 
+Tokenization’, Applications of Internet of Things: Proceedings of ICCCIOT 2020 (Springer 2021).
+34Alimardani and Jane (n 32).
+35Achiam and others (n 6) 46.
+36Their policy is to hold onto data for 30 days, not for training purposes, but to monitor for any illegal 
+activities, such as scams or the development of malicious code. After this 30-day period, the data is 
+securely deleted: https://openai.com/enterprise-privacy.
+LAW, INNOVATION AND TECHNOLOGY 
+9
+
+each paper, including, Chain-of-Thought prompting (also known as ‘step by 
+step’),37 self-prompting (i.e. asking GenAI to improve the prompt),38 reason­
+ing engine (providing resources),39 and applying intent classifications.40 The 
+development of these prompts involved a review of multiple sources, such as 
+academic literature on prompting techniques41 as well as OpenAI’s rec­
+ommended best practices for prompting.42 The results were repeatedly eval­
+uated, and the instructions were refined until no further improvements in 
+output were possible: 
+. Paper 6: The frontend GPT-4 model was used and the AI was prompted to 
+use the Internet (Microsoft Bing) to find relevant legal resources and then 
+fact-check its answer.
+. Paper 7: OpenAI Whisper (speech-to-text) was used to transcribe the lec­
+tures relevant to the exam question. The frontend GPT-4 model was then 
+prompted to use the transcription of the lecture material to answer the 
+exam questions.
+. Paper 8: OpenAI Whisper (speech-to-text) was used to transcribe the lec­
+tures relevant to the exam question. The GPT-4-1106-preview (backend 
+model) was then prompted to use the transcription of the lecture material 
+to answer the exam questions.
+. Paper 9: Since some of the information on the lecture slides was not read 
+out loud during the lectures, GPT-vision (image-to-text) was used to 
+describe all of the slides from the relevant lectures. The GPT-4-1106- 
+preview was then prompted to use both the transcription of the lecture 
+material and the description of the slides to answer the exam questions.
+37Takeshi Kojima and others, ‘Large Language Models Are Zero-Shot Reasoners’ (2022) 35 Advances in 
+neural information processing systems 22199; Yongchao Zhou and others, ‘Large Language Models 
+Are Human-Level Prompt Engineers’ [2022] arXiv preprint arXiv:2211.01910.
+38Zhou and others (n 37).
+39Using the GenAI as a reasoning engine by providing the information as part of the prompt. In this way 
+GenAI uses the provided information to answer the questions instead of relying on its own knowledge. 
+Also, see OpenAI’s prompt engineering best practice: https://platform.openai.com/docs/guides/ 
+prompt-engineering/strategy-provide-reference-text.
+40This approach breaks down complex and multistep tasks into smaller and simpler tasks. See, https:// 
+platform.openai.com/docs/guides/prompt-engineering/strategy-split-complex-tasks-into-simpler- 
+subtasks.
+41Aman Madaan and others, ‘Self-Refine: Iterative Refinement with Self-Feedback’ Advances in Neural 
+Information Processing Systems (2024); Tom Brown and others, ‘Language Models Are Few-Shot Lear­
+ners’ (2020) 33 Advances in Neural Information Processing Systems 1877; Varun Nair and others, ‘DERA: 
+Enhancing Large Language Model Completions with Dialog-Enabled Resolving Agents’ [2023] arXiv 
+preprint arXiv:2303.17071; Konstantin Hebenstreit and others, ‘An Automatically Discovered Chain- 
+of-Thought Prompt Generalizes to Novel Models and Datasets’ [2023] arXiv preprint 
+arXiv:2305.02897; Noah Shinn, Beck Labash and Ashwin Gopinath, ‘Reflexion: An Autonomous 
+Agent with Dynamic Memory and Self-Reflection’ [2023] arXiv preprint arXiv:2303.11366; Chengrun 
+Yang and others, ‘Large Language Models as Optimizers’ [2023] arXiv preprint arXiv:2309.03409; 
+Shunyu Yao and others, ‘Tree of Thoughts: Deliberate Problem Solving with Large Language 
+Models’ (2024) 36 Advances in Neural Information Processing Systems.
+42https://platform.openai.com/docs/guides/prompt-engineering/prompt-engineering
+10 
+A. ALIMARDANI
+
+. Paper 10: Given that longer inputs (prompts) increase the likelihood that 
+GenAI models will ignore some of the information provided,43 a summary 
+of the relevant legal content for the exam question was provided to the 
+GPT-4-1106-preview for the final paper. This is a much shorter and 
+more structured way of organising the relevant content compared to 
+the other approaches.
+Table 1 provides a summary of the engines and methodologies used to 
+generate the AI-assisted papers. A more detailed description of the method­
+ology used to generate each paper can be found in Table A1 of the Appendix.
+The author drafted instructions and guidance for marking the exam ques­
+tions to the tutors before generating the AI-generated papers. This addressed 
+the concern that the author might have unconsciously drafted an answer 
+scheme in a way that benefits or disadvantages AI-generated answers.
+2.3. Preparing the AI-generated exam papers and distributing them 
+to tutors
+Blank exam papers were obtained from the UOW Exam Office. The author 
+and a research assistant each handwrote five AI-generated exam papers, 
+ensuring that each tutor received two AI papers with distinct handwriting. 
+All AI-generated answers were transcribed verbatim onto physical paper. 
+When the AI did not specify a question number, neither the author nor 
+the research assistant added this information; instead, they began each ques­
+tion on a new page. Titles originally in bold in the AI-generated text were 
+underlined in the transcription.
+Certain parts of the AI-generated content were omitted from the physical 
+papers – specifically, any elements that tutors might have found atypical. For 
+example, one of the papers included an introductory statement by the AI that 
+read, ‘Based on the information provided in the lecture content and the 
+problem scenario, let’s analyse whether the Crown could (…)’. Another 
+paper began the second question with, ‘Certainly, let’s address each part of 
+the question step by step.’44 These omissions were infrequent and, as illus­
+trated by the examples, quite brief.
+I also excluded any website links that the AI models had included as cita­
+tions from the physical papers: examples of these omissions include Paper 5, 
+which was generated by Google Bard, and Paper 6, which was generated by 
+43Achiam and others (n 6); Nelson F Liu and others, ‘Lost in the Middle: How Language Models Use Long 
+Contexts’ (2024) 12 Transactions of the Association for Computational Linguistics 157 <https://doi.org/ 
+10.1162/tacl_a_00638>.
+44Another example: ‘To advise the NSW Office of the Director of Public Prosecutions on whether to 
+charge [offender 1] and [offender 2] with [offence] based on [principles], let’s analyze the legal prin­
+ciples and the facts of the case.’
+LAW, INNOVATION AND TECHNOLOGY 
+11
+
+GPT-4 with internet access. Given that the exam was conducted in person 
+and students were not permitted to access the Internet, such links would 
+appear out of place to tutors.
+The five tutors involved in this subject participated in the study without 
+prior knowledge of its nature, thus ensuring an unbiased approach to 
+marking. To further improve the authenticity of the tests, GPT-4 was used 
+to create fictitious student names and student numbers.45 The author then 
+crafted fake student email addresses and entered all corresponding infor­
+mation into the student roll. This allowed tutors to locate and record marks 
+for these non-existent students as if they were real participants in the exam.
+Each tutor received student exam papers with two AI-generated answers 
+mixed in. The AI papers were placed randomly but separately within the 
+stacks containing real students’ papers. While tutors were not allocated an 
+equal amount of marking, each tutor had more than enough student 
+papers to allow the AI papers to easily blend in between them.
+The marking protocol for this subject required tutors to adhere to a com­
+prehensive and structured marking guide. After marking the three initial exam 
+papers, tutors submitted these papers to the subject coordinator (the author) 
+for cross-marking. This step was crucial to ensure that their marking was 
+aligned with the marking guidelines and consistent with the other tutors. Fol­
+lowing feedback from the subject coordinator, the tutors continued with their 
+marking. Each tutor was aware that the subject coordinator would cross-mark 
+all papers that received either a failing grade or a high distinction. Addition­
+ally, the subject coordinator would randomly cross-mark other papers as 
+part of the quality assurance process. This approach ensures a high standard 
+of marking and fairness across all student submissions.
+2.4. Conducting interviews with tutors
+The interviews offered a fresh and insightful perspective on the topic as they 
+captured the views of tutors who marked GenAI papers without precon­
+ceived notions shaped by the study’s objectives. This detachment from the 
+researcher’s mindset provided them with an opportunity to contribute valu­
+able perspectives to the study.46
+All tutors were informed that they had marked two AI-generated 
+responses. Since the tutors had not initially consented to the grading of 
+AI-generated papers, they were notified that they could withdraw from the 
+45The following prompts were used: 
+Fake student names: ‘Generate 10 full names that are contemporary and first names include male, 
+female and non-binary’. 
+Student numbers: ‘Generate 10 seven-digit numbers that all start with [XX]’.
+46In some of the parallel studies, the researchers were involved in marking the papers, although they did 
+not know which papers were AI-generated and which were student-written papers.
+12 
+A. ALIMARDANI
+
+study without any repercussions. The tutors were invited to participate in a 
+voluntary semi-structured interview and were offered a $50 gift card as com­
+pensation for their time.
+To ensure the privacy of the tutors, especially considering the small 
+number of participants (five tutors), each tutor was assured that the inter­
+views would be anonymised, with no references to their identity, gender, 
+qualifications, or experiences. All tutors agreed to participate in the inter­
+view. In compliance with the guidelines set by the Social Sciences Human 
+Research Ethics Committee of the University of Wollongong, the tutors 
+were instructed not to quote or directly reference the specifics of any stu­
+dent’s paper. Instead, they were instructed to discuss their experiences as 
+tutors of this subject as well as encouraged to share their insights on how 
+the general performance of AI compared with that of university students. 
+Following the interviews, the tutors were provided with the transcripts to 
+review and were allowed to retract any part of the interview that they 
+wished not to be included in the study. The tutors also received the 
+study’s findings and were advised that they could request the exclusion of 
+any part of the results related to their interview.
+The interviews took place two to three weeks after the tutors submitted 
+their grades. The delay in conducting the interviews was due to the need 
+for tutors to have a ‘cool-down’ period before declaring their consent to par­
+ticipate in the study as well as the availability of the tutors. The interview 
+questions covered various topics, including AI-generated answer detection, 
+critical analysis, implications for the educational sector, and implications 
+for future work.
+2.5. Criminal law exam vs US bar exam
+Given that this research was initially motivated by the performance of GPT-4 
+on the US Bar Exam, the following section briefly outlines the Bar Exam’s 
+structure and compares it to the Criminal Law exam at UOW to allow 
+readers to gain a deeper understanding of the methodology of this study.
+The US Uniform Bar Exam aims to ‘[test] knowledge of general prin­
+ciples of law, legal analysis and reasoning, factual analysis, and communi­
+cation skills to determine readiness to enter legal practice in any 
+jurisdiction.’47 The exam has three components, each of which is assessed 
+in separate exams. The Multistate Performance Test (3 hours) has a weight­
+ing of 20% and involves simulated cases (problem scenarios) that assess the 
+candidates’ fundamental lawyering skills. Candidates are provided with the 
+relevant legal sources (e.g. legislation) during the exam. The Multistate 
+47https://www.ncbex.org/sites/default/files/2024-01/NCBE_Understanding_the_UBE.pdf, accessed Feb­
+ruary 2024.
+LAW, INNOVATION AND TECHNOLOGY 
+13
+
+Essay Examination (3 hours) consists of a set of six essays and has a weight­
+ing of 30%. The Multistate Bar Examination (6 hours) has a weighting of 
+50% and comprises 200 multiple-choice exam questions. The passing 
+score differs in different jurisdictions and ranges from 260 to 270 out of 
+400.48
+There are significant differences between the UOW Criminal Law exam 
+and the US Bar Exam, including the length of the test, the range of legal sub­
+jects involved, the inclusion of multiple-choice questions in the Bar exam, 
+and the fact that the tests are designed for very different stages of legal 
+careers: first-year students vs. graduates.
+The prompt techniques used in this study differ from those used by 
+OpenAI. In their technical report, OpenAI notes that all GPT-4 benchmarks 
+were conducted using few-shot prompting,49 which refers to a prompting 
+technique in which the GenAI model is provided with structured examples 
+of the question as well as high-scoring answers before outlining the main 
+question. This allows the GenAI to follow the provided example when 
+answering the question. Various studies have shown that this method can 
+increase the performance of large language models.50 Few-shot prompting 
+was not used in this study.
+While OpenAI provided some examples of the use of few-shot prompting 
+in their benchmarks, there was not much information on the bar exam 
+because, unlike the majority of the tests conducted independently by 
+OpenAI, the model’s performance on the US bar exam was tested by 
+OpenAI’s collaborators at CaseText and Stanford CodeX.51 It is possible 
+that OpenAI provided instructions on how to conduct few-shot prompting 
+to their collaborators in order to allow them to follow the same evaluation 
+model. Furthermore, it was not clear whether those grading the GPT-4 gen­
+erated US bar exam answers were blind to the fact that the answers were AI- 
+generated.
+The temperature in this study was set to 0.0, while the OpenAI notes that 
+they set the temperature to 0.6 for the free-response (open-ended) questions 
+in their benchmark methodology.52 OpenAI explained that ‘we did no meth­
+odology iteration on temperature or prompt, instead we simply ran these free 
+response questions each only a single time at our best-guess temperature 
+(0.6).’53 In addition, OpenAI provided a simple instruction prompt for the 
+free-response questions; in contrast, this study used both sophisticated and 
+48https://www.ncbex.org/sites/default/files/2024-01/NCBE_Understanding_the_UBE.pdf, accessed Feb­
+ruary 2024.
+49Achiam and others (n 6) 6.
+50Brown and others (n 41).
+51Achiam and others (n 6).
+52ibid.
+53Achiam and others (n 6) Appendix, 24.
+14 
+A. ALIMARDANI
+
+simple prompts. Once again, it is not clear how closely the third party con­
+ducting the US Bar Exam benchmark followed all these steps.
+3. Results and discussion
+One of the limitations of this study is the potential impact of the tutors’ sub­
+jective marking on the results. The following discussion assumes that tutors 
+evaluated all papers in a consistent fashion and that if a paper had been 
+marked by a different tutor, the grade would have remained the same or 
+at least been relatively similar. Furthermore, as there are restrictions on 
+sharing the results of the students’ exams, this study is permitted to reference 
+only the average and median marks for each of the two exam questions, as 
+well as their total exam marks.
+3.1. Exam grades
+This section provides a comparative summary of the preliminary results of 
+the grades obtained by the AI-generated papers and the students’ papers; a 
+more detailed analysis will be presented in Sections 3.2–3.10.
+The grades for AI-generated papers varied significantly: the lowest mark 
+given was 17 out of 60 (28.3% of the total mark), while the highest mark 
+given was 47 (78.3% of the total mark). For Q2 (scored out of 10), grades 
+ranged from 7 to 9, which represents a difference of 2 marks (20% of the 
+weight of Q2) between the lowest and highest grades. The greatest impact 
+on the exam outcomes was in the grades for Q1 (scored out of 50), with 
+the lowest being 10 (20% of the weight of Q1) and the highest being 39 
+(78% of the weight of Q1), equating to a difference of 58% of the weight 
+of Q1.
+The first set of five papers is composed of AI papers that were not pro­
+vided with any instructions or legal content beyond what was provided in 
+the exam question. GPT-4 – Frontend was used for Papers 1 and 2, while 
+GPT-3.5 – Frontend was used for Papers 3 and 4. Although the prompts 
+for these papers were identical, there was a seven-mark difference between 
+Papers 1 and 2 (equivalent to 12%) and a nine-mark difference between 
+Papers 3 and 4 (equivalent to 15%). Furthermore, Papers 1 and 3 received 
+a failing grade with 26 and 21 marks out of 60, respectively, while Papers 
+2 and 4 received passing grades of 33 and 30 marks, respectively. This 
+suggests that providing the same GenAI engine with the same prompts 
+can yield considerably different outputs.54 This is at least partly due to the 
+inherent randomness that is a feature of GenAI models (see Section 2.2.1
+54Another potential contributing factor is the way the exam questions were copied. See Table A1 in the 
+Appendix.
+LAW, INNOVATION AND TECHNOLOGY 
+15
+
+AI engines). Google Bard (Paper 5) – which had access to the internet – 
+received the lowest mark among the first five papers.
+The second set of five papers was generated using prompts that included 
+instructions on how to answer the question; relevant case law was also pro­
+vided for all papers except for Paper 6, which had internet access. Unlike the 
+first set of papers, the second set was generated multiple times, with the best 
+output being selected for each. Consequently, randomness did not play a sig­
+nificant role in the outcomes of this set of papers.
+Paper 6, whose AI model had internet access via Microsoft Bing, received 
+a score of 30 (50% of the total grade). This score was significantly higher than 
+that of Google Bard, which also had internet access, yet it did not show any 
+improvement compared to the best-performing papers from the first set 
+(Papers 2 and 4).
+A more substantial improvement was observed in Paper 7, which used 
+GPT-4 – Frontend and was provided with transcriptions of the lecture 
+material and achieved an overall mark of 44. Paper 8, which also had 
+access to lecture transcriptions but used the GPT-4-1106 backend model, 
+received a much lower mark of 31.
+Paper 9, which used the GPT-4-1106 backend model and had access to 
+both lecture transcriptions as well as descriptions of the lecture 
+slides received a mark of 36. The best performance was observed in Paper 
+10, which received an overall mark of 47 (Table 1, Figure 1).
+The primary distinction between Paper 10 and Papers 7, 8, and 9 was 
+that the former was provided with legal content in a more concise form, 
+resulting in a much shorter prompt. This suggests that providing more 
+detailed legal content does not necessarily improve the outcome: indeed, 
+a more concise and structured format of data can significantly enhance 
+the output.
+The average mark of the 225 students was 39.73 (66.2%), which was higher 
+than the grades of all AI papers except for two (Papers 7 and 10). The student 
+average for Q1 was 32.90 (65.8%), which was once again higher than all AI 
+Papers except for Papers 7 and 10. The students’ average for Q2 was 6.83 
+(68.3%), which was lower than all AI Papers (Table 2).
+An evaluation of all 10 papers suggests that a person with sufficient legal 
+knowledge can generate answers that would receive a ‘Distinction’. However, 
+unlike the results of OpenAI’s US Bar Exam benchmark, these results do not 
+suggest that any of the AI models investigated in this study have the capacity 
+to perform better than 90% of students (Table 1).
+3.2. AI detection
+Tutors were first asked whether they could identify the AI papers, after 
+which they were shown the papers and given some time to read them. 
+16 
+A. ALIMARDANI
+
+Table 1. Breakdown of the grades received by the 10 AI-generated papers. The percentile rank shows that the AI-generated papers, except for Papers 7 
+and 10, fell into the bottom 30% of students.
+AI model/s
+Content provided for GenAI (prompt)
+Purpose
+Q1 Grade/ 
+50
+Q2 
+Grade/ 
+10
+Total 
+Grade/60
+Percentile Rank 
+(Total Grade)
+Paper 1:
+GPT-4–Frontend
+Only exam question
+Simulating student use of GenAI
+18 (36%)
+8 (80%)
+26 (43.3%)
+2.5%
+Paper 2:
+GPT-4–Frontend
+Only exam question
+Simulating student use of GenAI
+24 (48%)
+9 (90%)
+33 (55.0%)
+14.7%
+Paper 3:
+GPT-3.5–Frontend
+Only exam question
+Simulating student use of GenAI
+14 (28%)
+7 (70%)
+21 (35.0%)
+0%
+Paper 4:
+GPT-3.5–Frontend
+Only exam question
+Simulating student use of GenAI
+22.5* (45%)
+7 (70%)
+30 (50.0%)
+4.4%
+Paper 5:
+Google Bard
+Only exam question
+Simulating student use of GenAI
+10 (20%)
+7 (70%)
+17 (28.3%)
+0%
+Paper 6:
+GPT-4–Frontend +  
+Bing
+Exam question + instructions on how 
+to answer the question +  
+instructions on accessing internet
+Testing the model’s capabilities by 
+accessing the internet.
+22 (44%)
+8 (80%)
+30 (50.0%)
+4.4%
+Paper 7:
+GPT-4–Frontend +  
+Whisper
+Exam question + instructions on how 
+to answer the question + lecture 
+transcript
+Testing the model’s capabilities by 
+providing a transcript of the lecture 
+material.
+36 (72%)
+8 (80%)
+44 (73.3%)
+75.0%
+Paper 8:
+GPT-4-1106-preview 
+(backend) +  
+Whisper
+Exam question + instructions on how 
+to answer the question + lecture 
+transcript
+Testing the model’s capabilities by 
+providing a transcript of the lecture 
+material.
+23 (46%)
+8 (80%)
+31 (51.7%)
+8.4%
+Paper 9:
+GPT-4-1106-preview 
+(backend) +  
+Whisper + GPT- 
+Vision
+Exam question + instructions on how 
+to answer the question + lecture 
+transcript + description of lecture 
+slides
+Testing the model’s capabilities by 
+providing a transcript of the lecture 
+material and a description of the 
+slides.
+28 (56%)
+8 (80%)
+36 (60.0%)
+25.8%
+Paper 10:
+GPT-4-1106-preview 
+(backend)
+Exam question + instructions on how 
+to answer the question + summary 
+of relevant materials
+Testing the model’s capabilities by 
+providing essential content in a 
+structured manner.
+39 (78%)
+8 (80%)
+47 (78%)
+86.1%
+*All marks were rounded up to the nearest integer when calculating the total mark.
+LAW, INNOVATION AND TECHNOLOGY 
+17
+
+Since these were 60-minute interviews, the tutors did not have the oppor­
+tunity to read both papers carefully and had to rely somewhat on their 
+memory.
+At the time of marking, none of the tutors suspected any papers were AI- 
+generated. They were surprised to learn they had marked two AI-generated 
+papers, which is contrary to some of the previous studies on humans’ ability 
+to identify AI-generated text.55 In addition to the quality of the AI papers and 
+their ability to pass the Turing Test, this may have been exacerbated by the 
+handwritten nature of the exam: if the exams were held online, tutors might 
+have suspected AI involvement. However, three of the five tutors admitted 
+that even with online submissions, they were unlikely to have identified 
+the papers as AI-generated.
+One of the tutors flagged both of their AI papers. One paper received a 
+very low mark (17 out of 60; Student 5). It should be noted that it is standard 
+procedure to flag papers scoring below 50% of the assessment task. The other 
+Figure 1. A comparison of the grades obtained by the 10 AI-generated papers. Question 
+1 was out of 50, and Question 2 was out of 10.
+Table 2. Average and median marks obtained by the 225 students who took the exam. 
+Deferred exam marks were not included in this study.
+Q1/50
+Q2/10
+Total/60
+Average
+32.90 (65.8%)
+6.83 (68%)
+39.73 (66.2%)
+Median
+33
+7
+40
+55For example, see, Catherine A Gao and others, ‘Comparing Scientific Abstracts Generated by ChatGPT 
+to Real Abstracts with Detectors and Blinded Human Reviewers’ (2023) 6 npj Digital Medicine 75 
+<https://doi.org/10.1038/s41746-023-00819-6>.
+18 
+A. ALIMARDANI
+
+paper (31 out of 60; Paper 8) was flagged because it was a borderline Pass, 
+and the tutor sought a second opinion. The tutor noted that the quality of 
+some parts of the answer was much better than others, as if two different 
+people had written the paper: ‘some parts are really good, so, like, it gives 
+the impression that it’s just, like, a human being thinking and not doing 
+very well at it (…) it just looks like the conscience of a confused individual.’ 
+The tutor added that this was not the first time they had encountered papers 
+like that and that, based on their experience, it was difficult to distinguish the 
+two AI papers from those of a typical poor student.
+3.3. Structure
+Students are recommended to follow the Issue, Law, Application, and Con­
+clusion (ILAC) approach when answering a problem question. No instruc­
+tions were provided to the models that generated the first five papers, so 
+the lack of an ILAC approach was expected. However, the two papers that 
+passed the exam (Papers 2 and 4) showed some attempt at ILAC. Further­
+more, Paper 5’s (Google Bard) attempt at ILAC was good, and therefore 
+the best among the first five papers.
+Papers 6–8 included indirect guides to the ILAC approach, such as instruc­
+tions on how to address each legal element individually as well as the appli­
+cation of relevant legal principles. In Papers 9 and 10, however, ILAC was 
+explicitly described, including an explanation of all four components and 
+the issues that needed to be proved. The ILAC quality for Papers 6–8 was 
+very high, whereas the ILAC quality for Papers 9 and 10 was excellent and 
+exceeded expectations. This is clear evidence that providing step-by-step 
+instructions for methods such as ILAC to GenAI models is effective.
+3.4. Expression
+In general, the expression in all AI papers was clear, with no parts that a 
+reader would have found difficult to follow or confusing. Further, while 
+the quality of writing varied across the papers, there were no significant 
+differences between them.
+One of the tutors, however, flagged both of their Papers (1 and 6) in the 
+interview, noting that they found ‘really inappropriate expressions and 
+phrases’ and, on some occasions, could not understand the discussion. 
+They specifically pointed out an example where the AI used a common 
+legal phrase followed by introducing an alternative to that phrase.56
+56Unfortunately, if the phrase is introduced in this paper, the exam topics would be recognisable, and 
+that is inconsistent with the agreement with the School of Law to protect the integrity of the exam.
+LAW, INNOVATION AND TECHNOLOGY 
+19
+
+While the alternative phrase initially appeared to be a ‘tortured phrase’,57
+further investigation revealed that it is used in England’s justice system but is 
+not present in the Australian legal system. No other examples of uncommon 
+phrases or difficult-to-follow sections were found in those two AI papers. 
+Given that tutors were interviewed two to three weeks after marking the 
+exam papers, it is not surprising if a tutor misremembered some details or 
+confused other papers with the AI papers.
+One of the tutors raised an interesting point about Papers 4 and 9 being 
+too direct in trying to get to the answer, with the expression appearing to be 
+somewhat mechanical. They elaborated: ‘the way that the sentence was struc­
+tured, it was very to-the-point, which is kind of that mechanical, rather than 
+embellishing a bit.’ They later added, ‘lawyers tend to [be] quite verbose.’ The 
+tutor did not find this to be an issue specific to AI papers, explaining, ‘I’m 
+aware with my experience of teaching that some students are very 
+mechanical.’
+This to-the-point approach to answering questions was also reflected in 
+interviews with other tutors, who noted that most AI-generated papers 
+were more concise than those of the average student. However, this concise­
+ness did not mean that they covered all expected parts of the answer using 
+fewer words; rather, they often fell short by not using enough words. The 
+AI-generated answers ranged from 1,020 words (Paper 3) to 2,996 words 
+(Paper 10). The lengths of all AI-generated papers can be found in Table 
+A1 in the Appendix.
+This trend of concise answers is at odds with how OpenAI trains 
+its models. In a nutshell, GPT-4 was trained in two stages. In the first 
+stage, the model was trained on a large amount of data to learn how to 
+predict the most likely words that might appear in response to a prompt 
+(this is similar to the auto-complete function on smartphones). This was 
+fine-tuned in the second stage using Reinforcement Learning by Human 
+Feedback (RLHF).58 In other words, after the first stage of the training 
+process, GPT-4 received further training based on human feedback. While 
+not explicitly mentioned in the GPT-4 technical report, the training report 
+for ChatGPT-3.5 explains that human labellers preferred ‘longer answers 
+that look more comprehensive’, which makes the output more verbose.59
+Despite this, it appears the samples generated by the model trained using 
+RLHF were still not long enough to satisfy the legal approach to answering 
+57‘Unexpected weird phrases in lieu of established ones, such as “counterfeit consciousness” instead of 
+“artificial intelligence.”’ Guillaume Cabanac, Cyril Labbé and Alexander Magazinov, ‘Tortured Phrases: A 
+Dubious Writing Style Emerging in Science. Evidence of Critical Issues Affecting Established Journals’ 
+[2021] arXiv preprint arXiv:2107.06751 1. Also see Alimardani and Jane (n 32).
+58Achiam and others (n 6). Also see, Paul F Christiano and others, ‘Deep Reinforcement Learning from 
+Human Preferences’ (2017) 30 Advances in Neural Information Processing Systems 1706.03741 [stat.ML].
+59OpenAI, ‘Introducing ChatGPT’ (OpenAI, 2022) <https://openai.com/blog/chatgpt> accessed 20 Febru­
+ary 2024.
+20 
+A. ALIMARDANI
+
+questions. This suggests that the opinions of humans involved in training 
+language models influence the direction in which GenAI models respond 
+to various inquiries and, consequently, the way that AI models are trained 
+may not be generalisable across all purposes.
+Another factor that can significantly impact the length of outputs is the 
+way language models are prompted, i.e. the way that the AI is instructed 
+to answer the question. Furthermore, the length of the material that was pro­
+vided as input also impacts the size of the output. For instance, if Q1 and Q2 
+were copied separately in separate chat conversation (i.e. to provide Q1 as a 
+prompt, and then create a new blank chat conversation and provide Q2), the 
+total output generated by this approach would be longer than if both Q1 and 
+Q2 had been included in one prompt in the same chat converstion. For 
+example, Papers 3 and 4 had output lengths of 1,020 and 1,707 words, 
+respectively. This discrepancy occurred despite using the same content in 
+the prompts and the same AI model (GPT-3.5 – Frontend) in both 
+instances. The only difference was how the questions were provided to the 
+model (see Table A1 in the Appendix for more detail). Such issues may 
+reduce the usefulness of GenAIs in some tasks or professions. For 
+example, an employee without high-level training would not know how to 
+prompt the model to generate longer output lengths in alignment with 
+their task objectives.
+These issues could potentially be resolved by additional fine-tuning of the 
+model for legal issues. This would involve providing hundreds of perfect 
+answers with the same structure and similar lengths to various legal issues 
+to allow the GenAI (e.g. GPT-4) to learn what is expected when such legal 
+questions are asked (prompted). This approach can be implemented by 
+logging into the OpenAI’s backend.60 However, it is challenging to collect 
+hundreds of perfect answers to various legal questions and also fine tuning 
+requires some degree of programming knowledge.
+3.5. Knowledge: identifying and citing the relevant laws
+3.5.1. Identification of relevant authorities
+Hallucination is an infamous feature of GenAI models and regarded as a 
+potential dealbreaker for using AI in sensitive areas such as law. Close scru­
+tiny was therefore given to whether GenAI was hallucinating and relying on 
+irrelevant or fictional legal principles when generating the AI papers. 
+Further, the possibility of hallucination increases when the user asks for 
+specific and technical material that is unlikely to be available in the training 
+dataset of the AI model, and the user also does not provide 
+the relevant information in the prompt for the language model to use and 
+60See https://platform.openai.com/docs/guides/fine-tuning/fine-tuning accessed 16 April 2024.
+LAW, INNOVATION AND TECHNOLOGY 
+21
+
+infer the answer.61 Since the law in NSW, Australia, is very specific, a 
+working hypothesis was that GenAI would refer to irrelevant or fabricated 
+legal principles.
+Papers 1–4 were expected to have the highest possibility of hallucinating 
+legal principles as the prompts for these papers were limited to materials pro­
+vided in the exam paper, which did not include the relevant legal principles in 
+the case laws.62 In contrast, the papers that were least likely to hallucinate were 
+Papers 9 and 10 for two reasons: first, they were provided with all the legal 
+materials required to answer the questions; second, these two papers were gen­
+erated using the backend model, where it was possible to adjust and set the 
+temperature of the model to 0 (see Section 2.2.1 AI engines), resulting in a 
+lower risk of hallucination. Perhaps surprisingly, none of the 10 AI papers hal­
+lucinated legal principles.63 The AI-generated papers identified most of the 
+core legal principles, but they varied in terms of accuracy and level of detail.
+Among the first four papers, which were not provided with any infor­
+mation other than the exam question, Papers 1 and 3 were particularly 
+poor at providing details of the legal principles. However, Papers 2 (GPT- 
+4) and 4 (GPT-3.5) provided a fair amount of detail. This is somewhat sur­
+prising given that GPT-3.5 is an inferior model to GPT-4, and it was 
+expected that Papers 1 and 2 perform better than Papers 3 and 4. Papers 5 
+(Google Bard) and 6 (GPT-4 Bing + instructions) were not provided with 
+any content but had access to the internet and provided ‘poor’ and ‘good’ 
+amounts of detail, respectively. Papers 7 and 8 which were provided with 
+lecture transcription, and Paper 9 which had both lecture transcriptions 
+and lecture slide descriptions, each offered more detailed legal content com­
+pared to the earlier papers. Finally, Paper 10, which was provided with a 
+structured summary of the legal content, performed the best in terms of out­
+lining the details of the relevant legal principles. The amount of legal detail 
+outlined in each paper suggests that providing legal content in a clear, struc­
+tured manner improves the AI’s performance in terms of identifying the rel­
+evant legal details compared to when a larger amount of content is provided 
+for the model, i.e. the performance of Paper 10 vs. Papers 7–9. However, 
+‘knowledge’ does not necessarily result in a better outcome overall, especially 
+given that answering criminal law questions requires a variety of skillsets. 
+Another interesting result was that even though NSW criminal law is very 
+specific, AI models such as GPT-3.5 and GPT-4 in Papers 1–4 were still 
+able to identify the main legal principles to answer the question despite 
+61Philip Feldman, James R Foulds and Shimei Pan, ‘Trapping LLM Hallucinations Using Tagged Context 
+Prompts’ [2023] arXiv preprint arXiv:2306.06085.
+62As noted in Section 2 Methodology, students were responsible for bringing caselaw materials to the 
+exam.
+63Some may argue that Google Bard’s reference to an incorrect legislative website link and Paper 6’s 
+citation of a legal term specific to the jurisdiction of England should be considered hallucination. 
+However, these issues are relatively minor and did not impact the outcome.
+22 
+A. ALIMARDANI
+
+not being provided with all the required legal content. This suggests that the 
+training dataset for these language models is surprisingly comprehensive and 
+that future larger models will potentially have a better command of various 
+jurisdictional legal knowledge and thus be more reliable.
+3.5.2. Citing relevant authorities
+Papers 6–8 were instructed to cite the relevant legal authorities (legislation 
+and case law) when referring to various legal principles: ‘Cite relevant legis­
+lation and case law to support the legal basis of your arguments.’64 For Papers 
+9 and 10, requests to cite the authorities were more specific and clear: ‘For 
+each element, write all the legal materials relevant to that element and cite 
+all the legislation and case law associated with that element. This information 
+is provided under “Relevant Law”.’
+In terms of citing case law, Papers 9 and 10 performed at a high level, 
+while the other eight papers performed poorly. In terms of citing legislation, 
+Papers 7–10 were found to be ‘good’ or ‘excellent,’ while Paper 6 exhibited 
+‘poor’ performance. Papers 1–5 performed poorly in citing legislation; the 
+exception was Paper 2, which did a ‘fair’ job.
+In general, it appears that a combination of providing the relevant 
+content and clear instructions to cite the authorities was effective (i.e. 
+Papers 9 and 10).
+3.6. Bridging knowledge gaps: the significance of internet access for 
+GenAI legal tasks
+GenAI models have a cut-off date: specifically, the data used to train these 
+models are only collected up to a specific point in time. Consequently, any 
+knowledge or events occurring after this date would not have been included 
+in their dataset. Additionally, not all publicly available data on the internet is 
+used to train these models, resulting in certain knowledge gaps. Conse­
+quently, internet access is crucial for some tasks as it can fill these gaps 
+and provide the models with the most up-to-date information.
+Given that Papers 5 (Google Bard) and 6 (GPT-4 + Bing Browser) were 
+not provided with any legal content (case law) other than those in the 
+exam question (legislation), and instead had access to the internet, it is 
+important to examine how they attempted to fill their legal knowledge 
+gaps.
+In Q1, Google Bard cited internet material only once, providing a link to a 
+comparison of historical versions of the relevant legislation. This indicates 
+that Google Bard identified the correct legal authority but cited a webpage 
+64Citations are crucial, as missing them can lead to the paper being flagged for plagiarism.
+LAW, INNOVATION AND TECHNOLOGY 
+23
+
+comparing two historical versions of the legislation instead of the ‘in force’ 
+(most updated) version.65
+In Q2, Google Bard referred to the legislation a few times66 and referenced 
+four online sources using hyperlinks: an open-access academic paper, 7Sage 
+Law School,67 ThoughtCo,68 and the Internet Encyclopedia of Philosophy.69
+Unlike Paper 5, Paper 6 was specifically instructed to access the Internet to 
+find relevant legal materials and cite legal authorities. In Q1, GPT-4 cited a 
+variety of internet materials, occasionally after referring to different sections 
+of the legislation in the body of the paper. However, GPT-4 did not use the 
+legislative material provided in the exam paper or the NSW official legislative 
+website to extract relevant legislative information. Instead, it relied on inter­
+net materials that cited the legislation. Overall, GPT-4 cited two relatively 
+reliable internet sources to answer Q1: the NSW Criminal Trial Courts 
+Bench Book70 and the NSW Public Defenders website.71 It also cited 
+sources considered unreliable for this type of legal assessment, such as 
+blog posts from different legal firms as well as information from Studocu72
+(a platform where students share their university notes).
+In Q2, GPT-4 cited sources such as a webpage from Cornell Law School,73
+Wikipedia (the only reference made to case law in this paper), the official NSW 
+legislation website,74 and Edubirdie75 (an essay writing service). When referring 
+to sections of the legislation, GPT-4 cited the link to the official NSW legislation 
+website. Additionally, unlike Google Bard, GPT-4 provided the correct link.76
+65https://legislation.nsw.gov.au/view/html/compare/1993-12-02/2017-07-01/act-1900-040 accessed 25 
+April 2024.
+66Instead of using hyperlinks, Google Bard directly referred to the relevant legislation, e.g., ‘According to 
+Section 25 of Crimes Act (…)’.
+67‘7Sage’ is a website that aims to provide free legal education to first-year law students in order to ‘level 
+the playing field’ between those who can afford resources such as tutors and those who cannot: 
+https://7sage.com/lawschool/about-us/.
+68‘ThoughtCo is a premier reference site with a 20+ year focus on expert-created education content. We 
+are proud to be one of the top-10 information sites, as measured by comScore, a leading Internet 
+measurement company’: https://www.thoughtco.com/about-us-4779650.
+69IEP’s purpose is to provide open access, ‘detailed, scholarly, peer-reviewed information on key topics 
+and philosophers in all areas of academic philosophy’: https://iep.utm.edu/home/about/. 
+None of the hyperlink sources were included in the exam paper as they would raise a red flag for 
+marking tutors.
+70https://www.judcom.nsw.gov.au/publications/benchbks/ (The specific webpage address has been 
+removed to maintain the integrity of the exam questions).
+71https://www.publicdefenders.nsw.gov.au (The specific webpage address has been removed to main­
+tain the integrity of the exam questions). For more information on this website, see, https://www. 
+publicdefenders.nsw.gov.au/Pages/public_defenders_aboutus/public_defenders_aboutus.aspx.
+72https://www.studocu.com (The specific webpage address has been removed to maintain the integrity 
+of the exam questions).
+73https://www.lawschool.cornell.edu.
+74https://legislation.nsw.gov.au (s The specific webpage address has been removed to maintain the 
+integrity of the exam questions).
+75https://edubirdie.com/ (The specific webpage address has been removed to maintain the integrity of 
+the exam questions).
+76Same as the Google Bard paper, unless GPT-4 specifically referred to the cited sources in the body of 
+the answer, none of the hyperlink internet sources were included in the exam paper.
+24 
+A. ALIMARDANI
+
+Internet access was expected to enhance GenAI models’ knowledge and 
+capabilities. However, the results from Papers 5 and 6 indicate that issues 
+persist even with internet access. The tested models struggled to identify reliable 
+data sources and often extracted information from unprofessional and unreli­
+able websites. While it is possible to train these models to access specific web­
+sites, the data must still be cross-checked for accuracy. Even seemingly up-to- 
+date and reliable sources can be outdated; for example, the author noted that a 
+reference to a page on the NSW Public Defenders website contained outdated 
+legal information. Such instances demonstrate how language models with inter­
+net access can be easily misled by false information.
+Overall, the incomprehensive training dataset, cut-off date, and lack of 
+proper in-built mechanisms to ensure that the outputs are only reliant on 
+credible internet material are significant limitations of GenAI models, redu­
+cing their reliability for legal tasks. These issues can be mitigated by directing 
+the language model to use curated libraries, such as a database of labelled 
+PDF files on various legal topics. Upon reviewing the question, the language 
+model would then identify relevant legal topics (e.g. self-defence) and select 
+PDF files labelled with those topics to help answer the question based on the 
+information contained within those files. This approach ensures that the 
+language model does not need to process all available information in the 
+legal domain; instead, the model would only need to focus on information 
+associated with the relevant topics. This can be implemented using 
+OpenAI’s ‘Assistants API’ (also known as ‘AI Agents’) which allows for an 
+attachment of up to 10,00077 documents.78
+3.7. Not deviating from the question and case facts
+None of the AI papers appeared to misunderstand or misinterpret the ques­
+tion, nor did they address irrelevant matters (i.e. hallucinate).
+Interestingly, unlike students, who often address issues not asked in the 
+question, the AI papers focused solely on what was relevant. One tutor 
+noted that Paper 6 did a better job of addressing the question and paying 
+attention to the relevant topics than would be expected of a typical 
+student. Additionally, there were no instances where the AI provided 
+factual inaccuracies or misconceptions about the problem scenario. 
+However, the papers addressed case facts to varying degrees (this will be dis­
+cussed further in Section 3.8 Critical analysis); this was similar to the pre­
+vious section (Section 3.6 Bridging knowledge gaps) in that, while GenAI 
+did not hallucinate by identifying or relying on to legal principles from 
+other jurisdictions, the amount of legal content provided in each paper 
+77https://platform.openai.com/docs/assistants/tools/file-search/how-it-works accessed 21 May 2024.
+78https://platform.openai.com/docs/assistants/overview/agents accessed 21 May 2024.
+LAW, INNOVATION AND TECHNOLOGY 
+25
+
+was different and, in some cases, was significantly less than the others (e.g. 
+Paper 1 vs Paper 10).
+These results suggest that all AI models generated answers that, while not 
+necessarily addressing all aspects of the question, remained within the scope 
+of the question.79 This suggests that these AI models were fine-tuned to limit 
+their responses (see discussions on RLHF under Section 3.4 Expression), 
+thereby reducing the risk of providing incorrect or ‘hallucinated’ infor­
+mation in an attempt to offer more comprehensive answers.
+Incomprehensive answers are often related to ‘alignment’ issues. In this 
+context, the term ‘alignment’ refers to how GenAI generates outputs that 
+are consistent with the user’s intentions, including avoiding hallucinations.80
+An output that is not comprehensive might be more aligned with the user’s 
+intent compared to an output that is more comprehensive but contains 
+incorrect or irrelevant information.
+This distinction has important implications for how users should 
+approach the generated answers. A lack of hallucination might lead to the 
+risk of a more relaxed evaluation of whether the output is comprehensive, 
+fully aligns with the user’s intent, and addresses all aspects of the request. 
+Identifying these differences could help develop a more structured and criti­
+cal method of generating and evaluating GenAI outputs.
+The grade received by Paper 10 (47 marks) suggests that providing infor­
+mation in a structured format enhances alignment: specifically, a structured 
+and concise outline of the relevant legal materials that avoided excessive expla­
+nation. GenAI models appear to be better at processing concise and organised 
+data, while extraneous, unorganised information can make it difficult for these 
+models to closely follow the instructions in the prompt,81 as was observed in 
+Papers 8 and 9. Although this conclusion might seem obvious in hindsight, 
+many users assume that AI engines process long and messy data in the 
+same way that they process structured and concise data. The implications of 
+this in a legal context are significant, as the field often involves the analysis 
+of a large amount of data, such as legal precedents. The current model’s 
+inability to follow instructions when presented with extensive content could 
+limit the use of language models in certain legal scenarios.
+3.8. Critical analysis
+Critical analysis is a fundamental aspect of legal studies and a skill that many 
+students find challenging to master. It primarily involves applying legal rules 
+79If the following two instances are not considered as hallucination: Google Bard’s reference to an incor­
+rect legislative website link and Paper 6’s citation of a legal term specific to the jurisdiction of England.
+80Long Ouyang and others, ‘Training Language Models to Follow Instructions with Human Feedback’ 
+(2022) 35 Advances in neural information processing systems 27730.
+81Achiam and others (n 6); Liu and others (n 43).
+26 
+A. ALIMARDANI
+
+to the facts of a case, which carries the most weight in a problem scenario. 
+The application section requires students to critically analyse and argue 
+about the facts or combinations of facts that are associated with legal prin­
+ciples, formulate convincing arguments to prove or disprove legal elements, 
+demonstrate sophisticated thinking, and uncover aspects of the case that may 
+not be immediately apparent.
+This task is particularly challenging for AI models because they need to 
+correlate different parts of the content – such as legal principles and case 
+facts – and use those to generate convincing arguments. As expected, the 
+AI models struggled to handle this level of complexity. Although they 
+were often able to identify the relevant facts and construct arguments, 
+these arguments frequently fell short and overlooked important points. In 
+contrast, the AI models performed significantly better when tasked with 
+writing the mini-essay in Q2.
+Tutors also criticised the critical analysis presented in the AI-generated 
+papers. One of the tutors noted that critical analysis was the area in which 
+AI performed the worst, stating that the AI could not ‘apply [legal principles] 
+in a level of detail that was sophisticate[d]’. The tutor further explained that 
+while the AI addressed some aspects of the question, it lacked the depth of 
+analysis needed for a high mark. Another tutor pointed out that although 
+AI struggled with critical analysis, ‘Students struggle with critical analysis. 
+So it’s generally not a high bar.’
+Most tutors believed that the AI demonstrated better critical analysis in 
+the mini-essay compared to the problem scenario described in Q1. One 
+tutor referred to Paper 8, noting that, ‘[in Q1] it’s just like a very verbatim 
+factual application, like a very literal application of the law to the facts as 
+opposed to a critical assessment. Whereas [in Q2] it feels like there’s 
+thought behind it. Like (…) there’s crafting an argument as opposed to 
+just like stating fact’ (a more detailed comparison between the perform­
+ance of AI in Q1 and Q2 is presented in Section 3.9 Comparing Q1 
+and Q2).
+Given the AI model’s superior performance in the mini-essay, the author 
+decided to conduct a follow-up test after the conclusion of the initial study. 
+In this test, AI models were tasked with performing a critical analysis focused 
+on a single legal element rather than multiple elements. In most cases, the AI 
+models exhibited improved performances, indicating that breaking down 
+complex tasks into smaller steps enhances the models’ effectiveness.
+Overall, these results suggest that, although fundamental skills such as 
+critical thinking and creativity are often viewed as what makes humans 
+superior to AI, the current performance of AI is not significantly worse 
+than that of students. Indeed, AI appears to perform better in critical think­
+ing tasks in the context of essay writing. However, this advantage might not 
+hold in the complexity of the real-world practice. Furthermore, first-year 
+LAW, INNOVATION AND TECHNOLOGY 
+27
+
+students are still in the early stages of developing these skills; by the time they 
+graduate, they will likely have significantly improved in this regard.
+3.9. Comparing Q1 and Q2
+Question 2 consisted of three parts: the first two were short answer questions, 
+and the third was a mini-essay. The quality of the answers to Q2 surpassed 
+those of Q1 in all AI-generated papers. Furthermore, the first five papers and 
+Papers 6 and 8 failed Q1, while all the papers passed Q2 with grades that 
+were, on average, higher than those achieved by the average student. This 
+difference is possibly due to the simpler nature of parts 1 and 2 of Q2, 
+which required mainly knowledge and identification of the relevant law 
+with much less critical analysis. Additionally, GenAI models were likely 
+trained on more essay-like content compared to the unique structure 
+required to address legal problem scenarios. Furthermore, Q2 had a 
+simpler structure compared to Q1, with three short answer questions. 
+Longer prompt lengths often mean that the AI pays less attention to the 
+details, which can lower the quality of the output.82 The prompts for Q2 
+were generally shorter than those for Q1, as Q2 did not include the 
+lengthy problem scenario. Therefore, it is reasonable to expect that the AI 
+models would generate higher-quality answers for Q2.
+3.10. Education and future careers
+One of the major concerns of many educators regarding the application of 
+language models in education is academic dishonesty.83 The outcome of 
+AI-generated papers suggests that students might conceivably use Gen-AI 
+for their assignments to achieve passing grades. Two of the first five AI-gen­
+erated papers, which were merely copy-pasted exam papers, passed with 
+marks of 30 (GPT-3.5) and 33 (GPT-4) out of 60, which equates to a 40% 
+chance of passing an exam without any effort. This likelihood increases 
+when students are made aware of the better-performing AI models. For 
+instance, if a student knew that Google Bard’s performance was not as 
+good compared to OpenAI’s models, their chance of passing increases to 
+50%. With newer models presumably becoming capable of improved per­
+formances, passing assessments withtout effort could be even more likely. 
+However, it is important to note that the data in this study is very limited, 
+and the five papers generated in this study cannot and do not represent 
+the overall performance of these models.
+82Liu and others (n 43).
+83Joyjit Chatterjee and Nina Dethlefs, ‘This New Conversational AI Model Can Be Your Friend, Philoso­
+pher, and Guide … and Even Your Worst Enemy’ (2023) 4 Patterns; Lim and others (n 23); Brent A 
+Anders, ‘Is Using ChatGPT Cheating, Plagiarism, Both, Neither, or Forward Thinking?’ (2023) 4 Patterns.
+28 
+A. ALIMARDANI
+
+Based on the quality of the AI-generated papers, tutors were asked 
+whether they thought students would use GenAI to cheat on their assign­
+ments and how this would impact academic integrity. All tutors agreed 
+that students might use it as a cheating method. One tutor reflected on 
+how students may think about their legal careers: 
+I wouldn’t say all students necessarily would use it (…) [unfortunately, the 
+mentality of some students is that] they just want to pass and they want to 
+do as little effort as possible to pass (…) they’re not like worried about (…) 
+having (…) high flying legal careers. So I feel like if there is a known way to 
+get away with it and to do literally no effort and have an AI do it for you, 
+hundred per cent [some] people are going to use it.
+Another tutor thought that assignment anxiety and time pressure may 
+encourage students to use GenAI, stating, ‘I think they would use it 
+because I don’t think they’d realise the limitations. I think the students 
+would feel that it was an easy way to deal with a stressful situation’.
+The tutor who marked the AI paper with the highest mark (Paper 10) 
+thought, ‘it’s inevitable that they will (…) I think there’ll be a consensus 
+that you can start with AI and then just tweak it and submit it. But as 
+time goes on (…) and AI gets better, the need for tweaking and stuff is 
+going to be limited. And what’s going to happen is people are just going 
+to submit as (…) it comes out.’ Reflecting on Paper 10, they added that 
+‘it’s scary.’
+Some tutors were concerned that cheating via GenAI might result in stu­
+dents not learning fundamental skills, ultimately making them less useful in 
+the workforce. One tutor referred to Paper 9 (which received a mark of 36) 
+stating, ‘It scares me that [Paper 9] used [GenAI] and passed.’ They 
+expressed concern that a judge might ask a lawyer, ‘Where did you get 
+this information?’ or ‘How did you get to this point?’ and that the lawyer 
+would be unable to answer.
+To address potential cheating, some tutors suggested handwritten assess­
+ments or invigilated exams. However, one tutor had a different perspective, 
+explaining that we should acknowledge GenAI as a tool to be embraced 
+rather than seen as a cheating platform to be ostracised. Another tutor 
+suggested, ‘not focusing on production [of] an answer, but focusing on a cri­
+tique of answers (…) to get the students to critically analyse [AI-generated] 
+response to improve it.’ This opinion aligns with those of scholars who 
+believe that the growing presence and popularity of GenAI will necessitate 
+a transition in the educational system where GenAI is accepted rather 
+than rejected.84 Tutors, however, did not seem to inherently embrace the 
+emergence of GenAI as an opportunity; instead, they believed its application 
+84Lim and others (n 23).
+LAW, INNOVATION AND TECHNOLOGY 
+29
+
+would have significant drawbacks. However, they also recognised that it was 
+impossible to avoid a reality in which GenAI is accessible to students and 
+would be used in future work.
+In terms of the potential disruption of future jobs by AI,85 all tutors 
+agreed that many administrative and time-consuming legal tasks, especially 
+those performed by paralegals, can be done by AI. One tutor had an inter­
+esting perspective, stating, ‘I don’t think it’s going to take their jobs, but I 
+think it’s going to transform their jobs from (…) creating things to simply 
+reviewing it (…) you’re no longer going to have a paralegal who has to 
+review a thousand documents. What they’re going to review is a report 
+of AI having already reviewed them and then checking the integrity of 
+that report’.
+Given the development of GenAI models and their increasing implemen­
+tation in common apps such as Microsoft Word (Copilot), it is difficult to 
+imagine students not using GenAI in their everyday tasks in the near future. 
+However, this also means there must be a fundamental shift in how students 
+are currently assessed. Future students should be able to use AI to their advan­
+tage and understand how to improve the output of these AIs.
+4. Limitations
+One of the main limitations of this study is that only 10 AI papers were gen­
+erated, which does not provide a comprehensive picture of the limitations 
+and capabilities of GenAI. Additionally, only five tutors participated in the 
+study, limiting the scope of the interview results to the perspective of these 
+participants. Furthermore, although all tutors reviewed the AI-generated 
+papers again during the interviews, it is possible they did not recall some 
+details of the papers given that the interviews were conducted two to three 
+weeks after the marking period.
+This study also lacks inter-rater reliability since each tutor marked a 
+different AI paper; this introduces potential subjective components and 
+unconscious biases, such as the influence of handwriting on the perceived 
+quality of the responses.86 A key reason for not having multiple tutors mark 
+the same AI paper was the fact that tutors had not been initially asked for 
+consent to participate in the study; consequently, there were some ethical con­
+cerns associated with the consistency of marking across tutors if their marking 
+outcomes were different. Despite this, the comprehensive marking guide and 
+85See, Chatterjee and Dethlefs (n 83); Lim and others (n 23); Anders (n 83). Kenneth J Saltman, ‘Artificial 
+Intelligence and the Technological Turn of Public Education Privatization: In Defence of Democratic 
+Education.’ (2020) 18 London Review of Education 196.
+86Joseph Klein and David Taub, ‘The Effect of Variations in Handwriting and Print on Evaluation of 
+Student Essays’ (2005) 10 Assessing Writing 134 <https://www.sciencedirect.com/science/article/pii/ 
+S1075293505000309>.
+30 
+A. ALIMARDANI
+
+cross-marking process (see Section 2 Methodology, for more details) likely 
+helped reduce some of these potential subjective biases.
+In papers generated from prompts that contained lecture transcrip­
+tions and other legal content, the content was limited to topics that 
+were directly associated with the exam papers and not all lectures. 
+Further, while lectures covered most of the content required to answer 
+the problem questions, the concepts were discussed in a more abstract 
+form, with some parts of the content left to the students to study from 
+the textbook. Due to copyright issues, this study did not include any copy­
+righted material in the prompts given to the AI models. The results could 
+potentially have been better if textbook content, which is more structured 
+and comprehensive, had been used. Alternatively, since the content is 
+extensively discussed in the textbook and would have increased the 
+length of the prompts, this may have instead reduced the quality of the 
+GenAI output.
+The exam focused on very specific criminal law topics. The results might 
+be different if a different topic or another area of law (e.g. Contract Law) had 
+been the focus,87 especially considering the unknown data on which these 
+GenAI models were trained.
+Given the fast pace of AI model updates, the AI models used in this study 
+are no longer the same as they were at the time of the research.88 For 
+instance, the ChatGPT-3.5 and ChatGPT-4 models have been updated, 
+while Google Bard has been replaced by Google Gemini. Additionally, 
+some researchers argue that new models from other AI companies, such 
+as Sonnet by Claude 3.5, are potentially strong competitors to the 
+ChatGPT models.89 Due to a lack of transparency regarding the changes 
+in these models, it is impossible to predict how the answers generated by 
+these updated models would differ from the ones presented here.
+Although the author has interacted with GenAI models since early 2022, 
+starting with GPT-3, and is familiar with various studies on prompt engin­
+eering and techniques, there is no guarantee that the prompts chosen for 
+papers five to ten could not have been improved. Additionally, the 
+author’s judgment of the quality of the generated answers introduces 
+another subjective component to this study.
+Overall, this study has many limitations and it is important to interpret 
+the results in light of these limitations. Larger and more comprehensive 
+studies are needed to conduct a robust assessment of new AI models.
+87In some parallel studies ChatGPT performed differently on different legal areas, Katz and others (n 15); 
+Martínez (n 5).
+88OpenAI announced continuous model updates: https://openai.com/blog/introducing-chatgpt-and- 
+whisper-apis.
+89See benchmarks on this webpage: https://www.anthropic.com/news/claude-3-5-sonnet.
+LAW, INNOVATION AND TECHNOLOGY 
+31
+
+5. Implications and recommendations
+There are significant implications for the use of AI in legal education and the 
+field in general. Although most GenAI papers did not receive higher grades 
+than students’ average, with thoughtful prompt engineering and structured 
+content, some GenAI papers received higher marks, including a ‘Credit’ 
+(grades between 65 and 74) and a ‘Distinction’ (grades between 75 and 
+84). These results suggest that humans are not at risk of suddenly being 
+replaced with AIs in the legal sector, but those who know how to utilise 
+and work with AI will have an advantage.90 This study suggests that more 
+significant improvements are necessary for AI to surpass many human qual­
+ities. In the near future, it is unlikely that graduates will be compared against 
+AI models during the employment process for jobs requiring high cognitive 
+skills. Instead, they will be assessed on their ability to work with AI to com­
+plete tasks more efficiently and with higher quality. Consequently, it is 
+necessary to invest in Legal AI literacy to prepare students for the emerging 
+job market.91
+Universities need to shift the focus from building from scratch to generating 
+the best first draft with AI. This study revealed significant differences in the 
+performance of different AI models (GPT-4 vs. Google Bard) as well as the 
+impact of prompt formulation. The study also demonstrated that if prompts 
+are properly structured, AI can identify legal components that need to be 
+proved as well as their relevant legal authorities (e.g. Paper 10). As such, stu­
+dents must be equipped with the knowledge of how to identify the GenAI 
+models that are appropriate for specific tasks and learn new skills such as 
+how to organise data in their prompts.
+None of the GenAI Papers demonstrated a satisfactory level of critical 
+analysis, especially when asked to apply the law to facts presented in the 
+problem scenario. Students also often struggle with these skills. Conse­
+quently, relying on AI to generate a first draft can be risky, as students 
+may lack the necessary critical analysis abilities to identify potential errors 
+and areas for improvement. This suggests law schools must emphasise the 
+development of critical legal analytical skills to enhance students’ overall 
+legal reasoning and achieve better outcomes when collaborating with AI.
+However, this shift in focus should not come at the cost of neglecting the 
+teaching of relevant content and foundational knowledge in the field. A solid 
+grasp of the subject matter as well as familiarity with the best practices is 
+essential for students to identify errors in AI-generated content92 and 
+90Viscovery, ‘AI Won’t Replace Humans, but Humans Using AI Will’ (Viscovery, 2023) <https://viscovery. 
+com/en/ai-wont-replace-humans-but-humans-using-ai-will/> accessed 20 February 2024.
+91Thomas KF Chiu, ‘Future Research Recommendations for Transforming Higher Education with Genera­
+tive AI’ (2024) 6 Computers and Education: Artificial Intelligence 100197.
+92In a study conducted by Chiu it was reported that 90% of students in the study agreed that ‘solid dis­
+ciplinary knowledge is required to assess ChatGPT’s outputs’. Chiu (n 91) 6.
+32 
+A. ALIMARDANI
+
+improve the output of GenAI93 to meet the requisite standards. Universities 
+must ensure that students, particularly in the early stages of their studies, 
+acquire the necessary knowledge and skills before they begin collaborating 
+with AI. This foundational understanding is crucial for students to recognise 
+when their work is ‘good enough’ and to effectively collaborate with AI tools. 
+However, due to the increasing commonality and accessibility of GenAI, it is 
+difficult to discourage students from relying on these tools. This may become 
+a major obstacle to properly teaching students about foundational knowl­
+edge in the legal field.
+Universities also need a comprehensive program to address the significant 
+potential impact of over-reliance on AI. While the increasing performance 
+of AI may result in fewer errors and higher quality work, it also poses the 
+risk of fostering a dangerous level of trust, potentially diminishing the 
+emphasis on human oversight.94 For example, GPT-4 tends to provide 
+false information or perform tasks incorrectly ‘in ways that are more convin­
+cing and believable than earlier GPT models’.95 This issue is partly due to 
+GPT-4s ‘authoritative tone’ and the presentation of incorrect statements 
+within the context of highly detailed and accurate information.96 Further­
+more, GPT-4 exhibits ‘a tendency to hedge in its responses,’ which users 
+may interpret as ‘epistemic humility’, consequently fostering trust and 
+reliance on the AI model.97 This phenomenon could explain findings from 
+a study that show that the use of AI assistance had a diverse impact on 
+student performance.98 In this study, the worst-performing students saw sig­
+nificant improvements, while the best-performing students exhibited a 
+decline of approximately 20 percentile points.99 The authors of the study 
+suggested that ‘access to AI might discourage effort when used as a 
+crutch’;100 this phenomenon occurred even when the students were 
+trained and familiar with the limitations of GenAI.101 Furthermore, a 
+study from Harvard Business School also found that while GenAI can 
+boost the efficiency of certain tasks, it can also cause disruptions: for 
+example, in a controlled experiment on a specific task, participants who 
+93Enkelejda Kasneci and others, ‘ChatGPT for Good? On Opportunities and Challenges of Large Language 
+Models for Education’ (2023) 103 Learning and Individual Differences 102274 <https://www. 
+sciencedirect.com/science/article/pii/S1041608023000195>; Chiu (n 91); Samir Passi and Mihaela Vor­
+voreanu, ‘Overreliance on AI Literature Review’ (2022) <https://www.microsoft.com/en-us/research/ 
+uploads/prod/2022/06/Aether-Overreliance-on-AI-Review-Final-6.21.22.pdf>. cited in Achiam and 
+others (n 6).
+94Achiam and others (n 6).
+95ibid.
+96ibid.
+97ibid.
+98Choi and Schwarcz (n 14).
+99ibid.
+100ibid., at 33.
+101ibid., at 13.
+LAW, INNOVATION AND TECHNOLOGY 
+33
+
+did not use GenAI outperformed those who did.102 Among the participants 
+who used GenAI, those who received brief training on GenAI performed 
+even worse than those who did not receive any training.103 This indicates 
+that over-reliance on AI-generated answers can impair essential human 
+oversight, and that brief training might exacerbate this issue. Students 
+must learn to counteract their over-reliance on AI both during their univer­
+sity studies and in their future careers. Consistent awareness of their poten­
+tial over-reliance on AI and challenging their outputs might become one of 
+the most important skills in the era of AI implementation. As such, it is rec­
+ommended that a comprehensive program be designed to teach this skill 
+through extended and consistent practice. This program should aim to make 
+critical engagement with AI an integral part of students’ routines when 
+using GenAI.
+Allowing students to use GenAI raises concerns about inequality.104 Stu­
+dents who can afford paid models – either personally or through institutional 
+or national funding – will have an advantage over those who cannot.105 Even 
+if educational institutions subscribe to one or more AI models, determining 
+the best model for various fields of study (e.g. law, medicine, engineering) 
+and subscribing to newly released, superior models from different companies 
+can be impractical. A potential solution is a platform with a pay-as-you-go 
+policy that grants access to all AI models approved by Higher Education insti­
+tutions. Under this system, each student would receive credits, possibly pro­
+vided by their institution, to use any of the AI models available on the 
+platform. This approach would allow students to identify and use the most 
+suitable AI model for their specific tasks, a skill that would be valuable in 
+the job market and future careers.
+The use of GenAI by students to complete their assignments challenges 
+traditional notions of ‘originality’ in education.106 This evolving landscape 
+suggests it might be time to reconsider what constitutes originality. While 
+students’ research is built upon the work of others, entirely derivative 
+work is typically seen as merely descriptive and of low value. In contrast, 
+their contributions gain significance when students integrate their own 
+ideas and insights into existing academic literature. Collaborating with AI 
+does not preclude students from making meaningful contributions. Even if 
+102Fabrizio Dell’Acqua and others, ‘Navigating the Jagged Technological Frontier: Field Experimental Evi­
+dence of the Effects of AI on Knowledge Worker Productivity and Quality’ [2023] Harvard Business 
+School Technology & Operations Mgt. Unit Working Paper 24-013 <https://dx.doi.org/10.2139/ssrn. 
+4573321>.
+103Dell’Acqua and others (n 102). Also see Armin Alimardani, ‘GenAI in Legal Education: A Dive into 
+Student Use of Generative AI in an Assessment Task’ [2024] Working paper.
+104Miriam Sullivan, Andrew Kelly and Paul McLaughlan, ‘ChatGPT in Higher Education: Considerations for 
+Academic Integrity and Student Learning’ (2023) 6 Journal of Applied Learning & Teaching 1.
+105Holmes and Miao (n 4).
+106Luo (Jess) (n 3).
+34 
+A. ALIMARDANI
+
+they only critically review AI-generated content to ensure its quality, they are 
+still engaging with the material. While this might reduce the amount of work 
+students need to do, this workload reduction is aligned with one of the 
+primary purposes of developing AI: to benefit humanity. This type of collab­
+oration is likely to become commonplace in future workplaces.
+6. Update
+During the completion and submission of this paper, OpenAI released a new 
+model, GPT-4 Omni (GPT-4o), in May 2024.107 This model is now available 
+for free to all users. According to OpenAI, GPT-4o surpasses their previous 
+models in most benchmarks.108 I will provide a brief overview of GPT-4o’s 
+performance on the Criminal Law exam used in this study to quickly assess 
+the performance of this model.
+6.1. Paper 11
+GPT-4o was evaluated using the backend model GPT-4o-2024-05-13 with 
+the same prompts as Paper 10. The results showed that there was no signifi­
+cant improvement in performance compared to Paper 10. Interestingly, the 
+backend model used to generate Paper 10, GPT-4-1106-preview, occasion­
+ally cited legal authorities more frequently in Q1-1. Throughout the 
+answers, there were instances where one model exhibited better reasoning 
+than the other; however, their overall critical analysis remained comparable.
+6.2. Paper 12
+Paper 12 was generated by using the GPT-4o–Frontend model which was 
+used without any prompts, similar to how Papers 1–5 were generated. 
+Paper 12 was compared directly with Papers 1 and 2, as those papers were 
+generated using GPT-4, an earlier version of GPT-4o.
+Paper 12 demonstrated a more organised approach compared to Papers 1 
+and 2 in Q1-1. Paper 12 addressed each legal element in separate paragraphs 
+rather than combining all elements of the legal matter into a single para­
+graph. In terms of its other aspects, such as its capability for critical analysis 
+and its citation of legal authorities, the answers were generally of the same 
+quality across all papers.
+Like Q1-1, Paper 12 provided a more organised response by individually 
+addressing each legal element in Q1-2. Furthermore, each legal element was 
+described with slightly more accuracy and detail. Paper 12 also included a 
+107OpenAI, ‘Hello GPT-4o’ (OpenAI, 2024) <https://openai.com/index/hello-gpt-4o/> accessed 10 July 
+2024.
+108OpenAI, ‘Hello GPT-4o’ (n 107).
+LAW, INNOVATION AND TECHNOLOGY 
+35
+
+somewhat more critical legal analysis, leading to lengthier discussions. There 
+was no noticeable improvement in any other qualities. The quality of the Q2 
+answer was very similar to that of the earlier papers.
+Overall, there were slight improvements in the performance of GPT-4o in 
+Q1-2 compared to GPT-4. Several factors may have contributed to this 
+improvement, including the use of more data during the training of GPT- 
+4o (which may have included more information about the topics tested in 
+Q1-2) and an enhanced capacity for alignment, allowing it to provide 
+answers that are more consistent with the user’s instructions.
+The fact that OpenAI has released GPT-4o to the public for free can be 
+described as a double-edged sword: it democratises access to high-quality 
+generative AI models but also raises concerns that students are more likely 
+to use it as a means of cheating. Furthermore, the slight improvement in 
+the performance of this new model may increase the likelihood of students 
+passing their tests by simply copy-pasting the questions into GPT-4o.
+7. Conclusion
+This study examines the capabilities and limitations of current GenAI 
+models in the field of legal education, focusing specifically on their perform­
+ance in the Criminal Law exam at the University of Wollongong. Unlike 
+OpenAI’s benchmarks, which highlighted GPT-4’s impressive performance 
+in the US Uniform Bar Examination, the findings in this study suggest 
+that the current GenAI models are comparatively less capable when it 
+comes to university-level Criminal Law exams. Thus, educators should 
+avoid generalising the model benchmarks set by companies. This caution 
+is not necessarily due to dishonesty on the part of the companies; rather, 
+the context and methods used in testing these models may differ significantly 
+from what educators find useful and relevant.
+A considerable weakness of AI-generated answers was the lack of sophis­
+ticated critical legal analysis. While GenAI models demonstrated a stronger 
+capacity for critical analysis in short-answer and short essay questions, their 
+performance declined drastically when faced with the complexity of problem 
+scenarios. This level of complexity is expected in real-world legal scenarios 
+and, therefore, more accurately represents the capabilities of the current 
+AI models in a legal context.
+These findings have significant implications for policies regarding the 
+use of GenAI in universities. In law schools that ban the use of AI in assess­
+ments, students may use GenAI (i.e. cheating) and would still be able to 
+pass non-invigilated assessments without any genuine effort and a true 
+understanding of the subject matter. As a result, these students would 
+not only miss the opportunity to gain an understanding of the foundational 
+concepts of their field of study but they also fail to learn how to collaborate 
+36 
+A. ALIMARDANI
+
+effectively with AI. This collaboration is likely to be an essential skill in 
+their future careers, where expectations extend far beyond merely achiev­
+ing a passing grade.
+Conversely, in law schools where students are allowed to use GenAI in 
+their assessments, the weakness of GenAI in critical analysis tasks means 
+that educators should place a greater emphasis on developing critical analysis 
+skills. This approach will prepare graduates to collaborate with AI tools and 
+leverage AI-driven outputs in their professional careers. However, this shift 
+will be challenging, especially in the context of traditional academic concepts 
+such as originality. Specifically, many assessment policies require students to 
+complete their assignments independently as part of their original work. 
+However, AI-generated answers allow students to potentially redirect their 
+efforts: instead of drafting an essay from scratch, students can now focus 
+on critically analysing and refining the AI-generated outputs. In light of 
+recent advancements in GenAI, it may be time to reconsider the definition 
+of originality to include the evaluation and enhancement of AI-generated 
+content.
+As the landscape of legal research and education continuously evolves, we 
+must prepare to engage with and critically assess emerging concepts that may 
+be useful in education. We must engage in thoughtful discourse about these 
+complex issues before deciding on a course of action. For example, the 
+definition of concepts such as academic originality may have far-reaching 
+implications for students’ future career opportunities.
+The results and implications of this study must be interpreted cautiously 
+due to several inherent limitations. These include the limited sample size of 
+AI-generated papers, the potential bias from the tutors’ subjective marking, 
+and the influence of the specific Criminal Law exam format at UOW on the 
+outputs of the GenAI models. Given these limitations, and in light of the 
+results of this paper, this study encourages further research across different 
+jurisdictions and prompts an exploration of the implications of the use of 
+GenAI in legal contexts. Such research and discussion are crucial to ensuring 
+that students are equipped to thrive in an era where they risk becoming obso­
+lete without proper preparation.
+Ethical approval
+Each tutor’s consent was obtained after grading the AI-generated papers. 
+They were provided with opportunities to withdraw or request changes to 
+how their contribution was represented in this study. Written consent was 
+obtained from all tutors.
+This study was reviewed and approved by the Social Sciences Human 
+Research Ethics Committee of the University of Wollongong, Reference 
+2023/267.
+LAW, INNOVATION AND TECHNOLOGY 
+37
+
+Acknowledgements
+I would like to express my heartfelt gratitude to the UOW Law Admin team, includ­
+ing Megan Edgar, Melissa Pandevski, and especially Jo Vernon-Blom, whose diligent 
+communication with various parties made this research possible. I am also deeply 
+thankful to the Dean of Law, Professor Dilan Thampapillai, and the Acting Dean 
+of Law, Associate Professor Niamh Kinchin, for their support of this research. I 
+would also like to extend my sincere appreciation to all the tutors in ‘Criminal 
+Law and Procedure B’ (2023) who generously offered their time and support. This 
+study could not have been completed without their invaluable assistance. Special 
+thanks go to my partner, Associate Professor Emma A. Jane, who patiently tolerated 
+my never-ending discussions about AI and my excitement over ‘mind-blowing’ AI 
+news and developments. Lastly, I am grateful to Meepo, my Psychiatric Assistance 
+Dog, who remained by my side throughout this study, providing constant compa­
+nionship and support. GenAI was used in this study exclusively for editing purposes. 
+All ideas and discussions presented are entirely my own; GenAI’s role was limited to 
+refining expression and grammar. Example prompt: You are a helpful editor. You 
+edit academic content to enhance clarity and expression. You don’t change anything 
+unless it is necessary for editing, and you don’t add new material. All GenAI outputs 
+were carefully reviewed to ensure its role was strictly editorial and that no new 
+content was added. The GenAI used for this paper does not collect users’ data for 
+improving and training AI model.
+Disclosure statement
+I am reporting that I have a short-term, part-time contract with OpenAI as a consult­
+ant. However, this research was not funded by OpenAI and the views expressed in 
+the article in no sense represent the views of anyone other than me.
+Notes on contributor
+Dr Armin Alimardani is a Lecturer in Law and Emerging Technologies at the School 
+of Law, University of Wollongong, Australia. His interdisciplinary research sits at the 
+intersection of law, technology, science, and philosophy. His publications and talks 
+focus on the social, ethical, and legal impact of emerging technologies such as artifi­
+cial intelligence, brain-computer interfaces, neuroscience, and genetics. Since early 
+2022, Dr Alimardani and his colleagues have been prototyping GenAI research 
+and educational tools that are freely accessible to the public.
+ORCID
+Armin Alimardani 
+http://orcid.org/0000-0002-5580-4239
+38 
+A. ALIMARDANI
+
+Table A1.  A summary of the performance of the AI-generated outputs assessed against various criteria.
+Paper 1
+Paper 2
+Paper 3
+Paper 4
+Paper 5
+Paper 6
+Paper 7
+Paper 8
+Paper 9
+Paper 10
+Engine
+GPT-4–Frontend
+GPT-4– 
+Frontend
+GPT-3.5– 
+Frontend
+GPT-3.5– 
+Frontend
+Google Bard 
+(access to 
+the internet)
+GPT-4 
+(Frontend) 
++ Bing (access 
+to the 
+internet)
+GPT-4 
+(Frontend) +  
+Whisper 
+(speech to 
+text)
+GPT-4-1106- 
+preview 
+(backend) +  
+Whisper (speech 
+to text)
+GPT-4-1106-preview 
+(backend) + GPT- 
+Vision (image to 
+text) + Whisper 
+(speech to text)
+GPT-4-1106- 
+preview 
+(backend)
+Purpose
+Simulating 
+student use of 
+GenAI.
+Simulating 
+student use 
+of GenAI.
+Simulating 
+student use 
+of GenAI.
+Simulating 
+student use 
+of GenAI.
+Simulating 
+student use 
+of GenAI.
+Testing the 
+model’s 
+capabilities by 
+accessing the 
+internet.
+Testing the 
+model’s 
+capabilities 
+by providing 
+a transcript of 
+the lecture 
+material.
+Testing the model’s 
+capabilities by 
+providing a 
+transcript of the 
+lecture material.
+Testing the model’s 
+capabilities by 
+providing a 
+transcript of the 
+lecture material 
+and a description 
+of the slides.
+Testing the model’s 
+capabilities by 
+providing 
+essential content 
+in a structured 
+manner.
+Accessibility
+Paid version 
+(Plus); 
+Simple login
+Paid version 
+(Plus); 
+Simple login
+Free; 
+Simple login
+Free; 
+Simple login
+Free; 
+Simple login
+Paid version 
+(Plus); 
+Simple login
+Paid version 
+(Plus); 
+Simple login
+Pay as you go 
+(requires 
+providing bank 
+account info); 
+Requires logging 
+into OpenAI 
+website 
+(backend) and 
+navigating to 
+chat interface 
+(Playground); 
+Contains 
+complex settings 
+e.g. temperature.
+Pay as you go 
+(requires 
+providing bank 
+account info); 
+Requires logging 
+into OpenAI 
+website (backend) 
+and navigating to 
+chat interface 
+(Playground); 
+Contains complex 
+settings e.g. 
+temperature.
+Pay as you go 
+(requires 
+providing bank 
+account info); 
+Requires logging 
+into OpenAI 
+website 
+(backend) and 
+navigating to 
+chat interface 
+(Playground); 
+Contains 
+complex settings 
+e.g. temperature.
+Content 
+provided for 
+GenAI
+Only exam Q
+Only exam Q
+Only exam Q
+Only exam Q
+Only exam Q
+Exam Q +  
+instructions 
+on how to 
+answer the 
+question +  
+instructions 
+Exam Q +  
+instructions 
+on how to 
+answer the 
+question +  
+lecture 
+transcript
+Exam Q +  
+instructions on 
+how to answer 
+the question +  
+lecture transcript
+Exam Q +  
+instructions on 
+how to answer 
+the question +  
+lecture transcript  
++ description of 
+lecture slides
+Exam Q +  
+instructions on 
+how to answer 
+the question +  
+summary of 
+relevant 
+materials
+(Continued) 
+Appendix
+LAW, INNOVATION AND TECHNOLOGY 
+39
+
+Table A1. Continued.
+Paper 1
+Paper 2
+Paper 3
+Paper 4
+Paper 5
+Paper 6
+Paper 7
+Paper 8
+Paper 9
+Paper 10
+on accessing 
+the internet
+Q1 grade/50
+18 (36%)
+24 (48%)
+14 (28%)
+23 (46%)
+10 (20%)
+22 (44%)
+36 (72%)
+23 (46%)
+28 (56%)
+39 (78%)
+Q2 grade/10
+8 (80%)
+9 (90%)
+7 (70%)
+7 (70%)
+7 (70%)
+8 (80%)
+8 (80%)
+8 (80%)
+8 (80%)
+8 (80%)
+Total grade/60
+26 (43.3%)
+33 (55%)
+21 (35%)
+30 (50%)
+17 (28.3%)
+30 (50%)
+44 (73.3%)
+31 (51.7%)
+36 (60%)
+47 (78.3%)
+Percentile Rank
+2.5%
+14.7%
+0.0%
+4.4%
+0.0%
+4.4%
+75.0%
+8.4%
+25.8%
+86.1%
+ILAC
+Poor (no) ILAC
+Fair ILAC
+Poor (no) ILAC Fair ILAC
+Good ILAC
+Very good ILAC
+Very good ILAC
+Very good ILAC
+Excellent ILAC
+Excellent ILAC
+Output length 
+(words)
+1113
+1428
+1020
+1707
+1255
+1474
+1571
+1664
+2253
+2996
+Identifying 
+relevant legal 
+principles
+Identified 
+majority of 
+the core legal 
+principles, 
+poor amount 
+of detail.
+Identified the 
+majority of 
+the core 
+legal 
+principles, a 
+fair amount 
+of detail.
+Identified the 
+majority of 
+the core 
+legal 
+principles, a 
+poor 
+amount of 
+detail.
+Identified the 
+majority of 
+the core 
+legal 
+principles, a 
+fair amount 
+of detail.
+Identified the 
+majority of 
+the core 
+legal 
+principles, a 
+poor 
+amount of 
+detail.
+Identified the 
+majority of 
+the principles, 
+a good 
+amount of 
+detail.
+Identified the 
+majority of 
+the 
+principles, a 
+good amount 
+of detail.
+Identified the 
+majority of the 
+principles, a good 
+amount of detail.
+Identified the 
+majority of the 
+principles, a very 
+good amount of 
+detail.
+Identified the 
+majority of the 
+principles, an 
+excellent amount 
+of detail.
+Citing case law 
+and legislation
+Very poor case 
+law citations. 
+Very poor 
+legislation 
+citations.
+Very poor case 
+law 
+citations. 
+Fair 
+legislation 
+citations.
+Very poor case 
+law 
+citations. 
+Very poor 
+legislation 
+citations.
+Very poor case 
+law 
+citations. 
+Very poor 
+legislation 
+citations.
+Very poor case 
+law 
+citations. 
+Very poor 
+legislation 
+citations.
+Very poor case 
+law citations. 
+Poor 
+legislation 
+citations.
+Very poor case 
+law citations. 
+Good 
+legislative 
+citations.
+Very poor case law 
+citations. 
+Excellent 
+legislation 
+citations.
+Very good case law 
+citations. Good 
+legislative 
+citation.
+Excellent case law 
+citations. 
+Excellent 
+legislation 
+citations.
+Not deviating 
+from the 
+question and 
+case facts
+TRUE
+TRUE
+TRUE
+TRUE
+TRUE
+TRUE
+TRUE
+TRUE
+TRUE
+TRUE
+Critical analysis 
+Q1
+Below average 
+(Poor)
+Below average Below average Below average 
+(poor)
+Below 
+average/ 
+average
+Below average 
+(poor)
+Above average
+Below average/ 
+average
+Average
+Above average
+Critical analysis 
+Q2 (mini- 
+essay)
+Average
+Average
+Average
+Below average Above average Average
+Above average
+Above average
+Below average
+Average
+Q1 vs Q2  
+performance
+Q2 > Q1
+Q2 > Q1
+Q2 > Q1
+Q2 > Q1
+Q2 > Q1
+Q2 > Q1
+Q2 > Q1 (close)
+Q2 > Q1
+Q2 > Q1
+Q2 = Q1
+(Continued) 
+40 
+A. ALIMARDANI
+
+Table A1. Continued.
+Paper 1
+Paper 2
+Paper 3
+Paper 4
+Paper 5
+Paper 6
+Paper 7
+Paper 8
+Paper 9
+Paper 10
+How the prompt 
+and exam 
+questions 
+were copied
+The problem 
+scenario and 
+both parts of 
+Q1 were 
+copied 
+together, and 
+then in the 
+same chat*, 
+Q2 was 
+copied.
+Each question 
+was copied 
+separately 
+in the same 
+chat.**
+The problem 
+scenario and 
+all questions 
+were copied 
+together.
+Each question 
+was copied 
+separately 
+in the same 
+chat.
+Each question 
+was copied 
+separately 
+in the same 
+chat.
+Each question 
+was copied 
+separately in 
+a new chat***
+Each question 
+was copied 
+separately in 
+a new chat.
+Each question was 
+copied separately 
+in the same chat.
+Each question was 
+copied separately 
+in a new chat.
+Each question was 
+copied separately 
+in a new chat.
+*The problem scenario, Q1-1, and Q1-2 were copied in the same chat window. After prompting the AI to answer Q1, the conversation was continued by copying Q2 into the same chat window (i.e. the 
+prompts were not entered in a new blank chat). 
+**The problem scenario and Q-1-1 were copied together in the first prompt. The conversation was then continued by copying Q1-2 into the same chat window. The same was done for Q2. 
+***A new blank chat window was initialised for each new prompt. The problem scenario and Q1-1 were copied as a single prompt; following this, a new blank chat was initialised and the problem scenario 
+and Q1-2 were copied as a single prompt. Finally, Q2 was copied into a new blank chat window.
+LAW, INNOVATION AND TECHNOLOGY 
+41
+
+Prompt example
+The following prompt was used for Paper 10.
+Notes: 
+.
+In the following explanation, the ‘service’ header refers to the section in which the 
+role of AI is outlined, i.e. what role it has and what service it is supposed to provide 
+to the user. For example, ‘You are a lawyer who does X for the user’. The task (i.e. 
+the exam questions) is then outlined beneath the ‘user’ header. In general, the 
+combination of the ‘service’ and the ‘user’ sections form the prompt for the 
+ChatGPT frontend interface.
+.
+The prompt was shortened as much as possible to make it easier for the GenAI to 
+follow the instructions.
+.
+XML tags were used to clearly point out the relevant information to AI.
+Service
+As an expert in Criminal Law in NSW, Australia, I need your assistance to analyse 
+and answer complex criminal law problem scenarios.
+I will provide you with the ‘Relevant Law’ (delimited with XML tags) as a source 
+to answer the ‘Criminal Law Question’ (delimited with XML tags) from a ‘Problem 
+Scenario’ (delimited with XML tags). You must follow the ‘instructions’ I provide for 
+you step by step (delimited with XML tags).
+User
+<ProblemScenario>
+[The problem scenario was copied here]
+</ProblemScenario>
+<CriminalLawQuestion>
+[Question 1-1 was copied here, including sections of relevant legislation that was out­
+lined in the exam question. I repeated the same process for Question 1-2 in a new 
+chat.]
+</CriminalLawQuestion>
+<RelevantLaw>
+[All relevant legal authorities not covered in the exam question were copied here]
+</RelevantLaw>
+<Instructions> First, provide a summary of the legal matter, who has the onus of 
+proof and what would be the outcome if the legal matter is proved. Break down 
+each legal matter into its basic elements and address each element separately in an 
+ILAC block: 
+1. Issue: 
+1.1. Each legal element forms an issue in the form of a question.
+1.2. Before going through the next issue (legal element), you must first address 
+the Law, Application and Conclusion for that issue.
+2. Law: 
+2.1. For each element, write all the legal materials relevant to that element and 
+cite all the legislation and case law associated with that element. This infor­
+mation is provided under ‘Relevant Law’ (delimited with XML tags).
+42 
+A. ALIMARDANI
+
+3. Application: This is the most important part, so make sure you follow these steps 
+and prioritise them. 
+3.1. For every Application, provide as many arguments as possible from both the 
+prosecution and defendant’s perspectives and assess the weaknesses and 
+strengths of their case.
+3.2. Your argument must be based on facts and events in the ‘Problem Scenario’. 
+Assume the reader doesn’t have access to the problem scenario and therefore you 
+must spell out all the events you’re referring to. For example, don’t say, ‘Accord­
+ing to what the defendant said, the prosecution can argue that [the argument]’; 
+instead, explain exactly what the defendant said or did, directly copy and quote 
+from the ‘Problem Scenario’. For example, ‘The defendant said ‘[quote directly 
+what they said or did]’, and therefore the prosecution can argue that ‘[explain 
+your analysis]’’.
+4. Conclusion: 
+4.1. For each legal element, write a ‘conclusion’ based on your opinion.
+4.2. It’s important to add a statement about whether the prosecution can prove 
+or disprove that legal element beyond a reasonable doubt </Instructions>
+[The same process was repeated for Q1-2 in a new chat.]
+LAW, INNOVATION AND TECHNOLOGY 
+43

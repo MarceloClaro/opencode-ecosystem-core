@@ -1,0 +1,1276 @@
+IA GENERATIVA NA EDUCAÇÃO JURÍDICA BRASILEIRA
+ENTRE A REGULAÇÃO E A SALA DE AULA
+Revisão de escopo Brasil-comparado sobre ética, governança algorítmica e equidade (20202026)
+GENERATIVE AI IN BRAZILIAN LEGAL EDUCATION: BETWEEN
+REGULATION AND THE CLASSROOM
+
+RESUMO
+Introdução. A difusão da inteligência artificial generativa (IAGen) na educação jurídica
+amplia possibilidades de apoio à aprendizagem, mas também intensifica questões de
+integridade acadêmica, proteção de dados, transparência, supervisão humana e equidade.
+Objetivo. Mapear a literatura científica recuperada nas bases abertas pesquisadas, publicada
+entre 2020 e 2026 sobre implementação ética, transparente e equitativa de IAGen na educação
+jurídica brasileira, em perspectiva comparada com União Europeia, Portugal, Alemanha e
+Estados Unidos. Método. Revisão de escopo orientada pelo Joanna Briggs Institute e relatada
+segundo PRISMA-ScR, com buscas em OpenAlex e DOAJ, triagem independente por dois
+revisores humanos (RH1 e RH2), extração padronizada e síntese descritiva e temática; 21
+estudos incluídos após consenso documentado. Resultados. A literatura concentra-se em
+marcos normativos (D1 = 95,2%) e fundamentos éticos (E1 = 95,2%); ética e
+responsabilidade profissional (D4 = 76,2%) e letramento/competências (D3 = 52,4%)
+consolidam-se; equidade/acesso é a dimensão menos frequente (D6 = 38,1%), enquanto
+abordagens pedagógicas com IA como método também permanecem minoritárias (D5 =
+42,9%). Conclusão. Os achados indicam assimetria norma-prática: prevalência regulatória e
+ética sem densidade de evidência pedagógica; a lacuna de equidade algorítmica no ensino
+jurídico brasileiro permanece como agenda prioritária. A triagem foi realizada por dois
+revisores humanos independentes (RH1 e RH2).
+Palavras-chave: inteligência artificial generativa; educação jurídica; ética; governança algorítmica; equidade;
+revisão de escopo.
+
+ABSTRACT
+Introduction. The diffusion of generative artificial intelligence (GenAI) in legal education
+creates opportunities for learning support while raising concerns about academic integrity,
+data protection, transparency, human oversight and equity. Objective. To map scientific
+literature retrieved from the open databases searched and published from 2020 to 2026 on the
+ethical, transparent and equitable implementation of GenAI in Brazilian legal education, with
+
+comparisons involving the European Union, Portugal, Germany and the United States.
+Method. A scoping review guided by the Joanna Briggs Institute and reported according to
+PRISMA-ScR, with searches in OpenAlex and DOAJ, independent screening by two human
+reviewers (RH1 and RH2), standardized extraction and descriptive and thematic synthesis; 21
+studies included after documented consensus. Results. The literature concentrates on
+regulatory frameworks (D1 = 95.2%) and ethical foundations (E1 = 95.2%); professional
+ethics and responsibility (D4 = 76.2%) and AI literacy/competencies (D3 = 52.4%) are
+consolidated; equity/access is the least frequent dimension (D6 = 38.1%), while pedagogical
+approaches using AI as a method also remain minority (D5 = 42.9%). Conclusion. The
+findings indicate a norm-practice asymmetry: regulatory and ethical prevalence without
+pedagogical evidence density; the algorithmic equity gap in Brazilian legal education remains
+a priority agenda.
+Keywords: generative artificial intelligence; legal education; ethics; algorithmic governance; equity; scoping
+review.
+
+1 INTRODUÇÃO
+A chegada de ferramentas de inteligência artificial generativa (IAGen) de acesso
+público: ChatGPT (nov. 2022), Gemini e congêneres: expôs a educação superior em Direito
+no Brasil a um ponto de inflexão epistemológico, pedagógico e regulatório. A literatura
+sentinela de Paula (2026) demonstra que o fenômeno não é periférico: ele tensiona a
+integridade acadêmica, a avaliação da aprendizagem e a formação do raciocínio jurídico,
+exigindo resposta institucional que preserve a vocação humanista do Direito sem ignorar o
+paradigma tecnológico emergente.
+No plano normativo, o Brasil acumula camadas que já conformam o uso educacional
+de IA, ainda que de forma fragmentada: a Lei Geral de Proteção de Dados (Lei n.
+13.709/2018), o Marco Civil da Internet (Lei n. 12.965/2014), o Projeto de Lei n. 2.338/2023
+(Marco Legal da IA, aprovado no Senado em dezembro de 2024 e em tramitação na Câmara
+dos Deputados em 2026) e a Resolução CNJ n. 615/2025 (DJe n. 54/2025, 14 mar 2025, p. 217), que institui governança, classificação de risco, avaliação de impacto algorítmico
+obrigatória para alto risco e o catálogo Sinapses, com capítulo específico para large language
+models (LLMs) e IAGen (arts. 19-21).
+Em perspectiva comparada, a União Europeia publicou o AI Act (Regulamento (UE)
+2024/1689, JOUE 12 jul 2024, vigor 01 ago 2024, aplicação faseada até 02 ago 2026/2027),
+adotando arquitetura baseada em risco em quatro níveis (inaceitável, alto, limitado, mínimo) e
+listando educação e emprego como domínios de alto risco (Anexo III). Portugal se insere
+nesse enquadramento europeu, em diálogo com o RGPD e com a deontologia profissional. Os
+Estados Unidos mantêm regulação setorial descentralizada, e a UNESCO (Guidance, 2023,
+
+DOI 10.54675/EWZM9535) propõe sete passos humanocêntricos, idade mínima de 13 anos
+para uso autônomo e validação ético-pedagógica pelas instituições (menos de 10% das 450
+instituições pesquisadas tinham política para IAGen).
+O descompasso é o problema: proliferação normativa versus ausência de diretrizes
+pedagógicas operacionais, equitativas e auditáveis para a sala de aula jurídica. A revisão
+sistemática sentinela de Valencia Jiménez e Beltrán Pacheco (2025), com 19 artigos incluídos
+(PRISMA, Scopus/WoS, 136→19), oferece a medida desse descompasso: 57,89% dos
+estudos concentram-se em marcos regulatórios, 42,11% em comparação internacional e
+42,11% em responsabilidade/rendição de contas, enquanto acesso à justiça/equidade é subrepresentado e justiça social, governança algorítmica e direitos humanos configuram vácuo
+crítico (conclusão autoral). Carmo e Alves (2026), em análise documental de 13 documentos
++ AI Act/UNESCO/LGPD, são consistentes com a escassez quando se cruza ética, tecnologia
+e ensino jurídico-tributário, propondo o princípio da Transparência Hermenêutica. Abal e
+Pilati (2025), com GPTs personalizados (tutoria, mentoria reversa, simulação de escritório),
+evidenciam que o ganho de engajamento só se sustenta com letramento crítico: sob risco de
+plágio, alucinação e viés.
+Este manuscrito situa-se no campo da Educação e da educação jurídica e formula a
+ponte obrigatória entre IA e Direito via Educação Jurídica e propõe fechar o elo perdido por
+meio de síntese secundária rigorosa. A pergunta que orienta o protocolo, no formato PICo
+comparado, é: Que evidências, princípios e lacunas a literatura científica recuperada nas bases
+abertas pesquisadas (2020-2026) apresenta sobre a implementação ética, transparente e
+equitativa de IA Generativa na educação jurídica brasileira em perspectiva comparada (UE,
+Portugal, Alemanha, EUA, UNESCO)?
+A contribuição é tripla: (a) estimar, com método reprodutível, a extensão do GAP no
+corpus recuperado nas bases abertas pesquisadas; (b) oferecer matriz comparativa normativa
+Brasil vs UE/Portugal/Alemanha/EUA/UNESCO para a discussão pedagógica; (c) propor
+agenda de pesquisa e princípios operacionais (Transparência Hermenêutica) contextualizados
+ao Ensino. Trata-se de revisão de escopo (scoping review) executada com fonte de dados real
+e auditável (log e matriz), desenhada para mapear campo heterogêneo e identificar lacunas,
+com relato PRISMA-ScR e registro OSF pendente de depósito. Os resultados são reportados a
+partir da execução e auditoria da busca, triagem e extração realizadas em setembro de 2026.
+
+Quanto aos aspectos formais, o manuscrito atende à ABNT NBR 6023 na apresentação das
+referências e à citação (Autor, data) no corpo do texto, com conferência das citações contra as
+fontes primárias registrada na auditoria bibliográfica do corpus (2026).
+2 REFERENCIAL TEÓRICO
+2.1 IA Generativa, LLMs e educação: o que está em jogo
+IAGen e LLMs são sistemas que processam e geram texto, imagem, código e outros
+artefatos a partir de grandes bases de dados, por predição estatística (UNESCO, 2023). Na
+educação, seu potencial reside em personalização, organização da informação e apoio à
+argumentação, mas seus riscos são imediatos: segurança, privacidade, direitos autorais,
+manipulação, exclusão digital, dependência tecnológica e perda de controle do processo
+educacional (UNESCO, 2023; ABAL; PILATI, 2025). A UNESCO alerta que a ausência de
+regulação nacional na maioria dos países deixa dados desprotegidos e instituições
+despreparadas: menos de 10% tinham políticas formais: e que a validação deve ser dupla:
+ética e pedagógica, humanocêntrica, com proteção de agência humana, inclusão, equidade e
+diversidade linguístico-cultural. O horizonte EdGPT: modelos fundacionais refinados com
+conhecimento pedagógico e de interação professor-estudante: ainda depende de pesquisa
+robusta sobre coleta ética de dados e sobre não violação de direitos humanos (UNESCO,
+2023).
+No ensino jurídico, a literatura converge para sete tensões: (1) epistemológica (o que
+conta como saber jurídico quando a síntese é automatizada), (2) pedagógica (como ensinar
+raciocínio jurídico sem terceirizar crítica), (3) avaliativa (como avaliar autoria e integridade),
+(4) ética (plágio, alucinação, viés), (5) jurídica (LGPD, direitos autorais no treino), (6)
+institucional (quem governa e audita) e (7) equitativa (quem acessa e quem fica para trás).
+2.2 Educação jurídica brasileira: DCNs, currículo e avaliação sob IAGen
+As Diretrizes Curriculares Nacionais (DCNs) do curso de Direito exigem formação
+crítica, ética, domínio de linguagem jurídica e compreensão dos impactos sociais e
+tecnológicos sobre a prática profissional. Paula (2026), em perspectiva comparada, converge
+com esse diagnóstico ao deslocar o foco da ferramenta para competências, ética digital e
+desenho avaliativo. A lacuna curricular é, portanto, dupla: ausência de letramento em IA para
+docentes/discentes e ausência de desenhos avaliativos que preservem autoria sem proibir uso.
+
+2.3 Marcos normativos em perspectiva comparada (2020-2026)
+Brasil. O PL 2.338/2023 estrutura-se em fundamentos (centralidade da pessoa
+humana, direitos humanos, educação para cidadania: art. 2º XIII, proteção de vulneráveis e de
+crianças/adolescentes: art. 2º XIV) e princípios (supervisão humana efetiva, não
+discriminação, transparência). O art. 14, II, classifica como alto risco sistemas usados como
+fator determinante em seleção de estudantes, avaliações determinantes do progresso
+acadêmico ou monitoramento de estudantes (ressalvada segurança), com impacto direto na
+educação jurídica. O capítulo de direitos do afetado consagra explicação, contestação e
+revisão humana. Os arts. 29 (avaliação preliminar para IAGen e modelos de propósito geral),
+25 (avaliação de impacto algorítmico para alto risco) e 45 (Sistema Nacional de Regulação e
+Governança de IA) completam a arquitetura, tornando relevantes obrigações de governança,
+rastreabilidade e revisão humana para usos educacionais de alto impacto.
+A Resolução CNJ 615/2025 (11 mar 2025) traduz parte dessa arquitetura para o
+Judiciário: governança, auditoria e monitoramento proporcionais ao risco (art. 1º §§1º-4º),
+compatibilidade com direitos fundamentais (art. 5º), preservação de igualdade e não
+discriminação (art. 8º), categorização de risco (art. 9º, Anexo), medidas de governança para
+alto risco (art. 13), avaliação de impacto algorítmico (art. 14), Comitê Nacional de IA do
+Judiciário (art. 15), uso e contratação de LLMs/SLMs/IAGen (arts. 19-20), indicação em
+interface
+
+de
+
+modelos/versão/código
+
+Sinapses
+
+(art.
+
+21),
+
+conformidade
+
+com
+
+LGPD/LAI/propriedade intelectual e cadastro no Sinapses com sumário público de impacto
+para alto risco e publicação em linguagem simples (arts. 22-25).
+Art. 14, II, PL 2.338/2023: Considera-se de alto risco o sistema de IA utilizado
+como fator determinante na tomada de decisões de seleção de estudantes em
+processos de ingresso em instituições de ensino ou de formação profissional, ou para
+avaliações determinantes no progresso acadêmico ou monitoramento de estudantes,
+ressalvadas as hipóteses de monitoramento exclusivamente para finalidade de
+segurança (BRASIL, 2023).
+
+União Europeia e Portugal. O AI Act (2024/1689) combina obrigações ex ante (gestão
+de risco, governança de dados, documentação, rastreabilidade, supervisão humana) e regime
+ex post de responsabilidade civil articulado à Diretiva (UE) 2024/2853 e aos direitos
+nacionais. Em direitos autorais, o Brasil caminha para regime mais intervencionista
+(transparência de obras no treino, opt-out e remuneração) em comparação com a exceção
+europeia de mineração de textos e dados (TDM), sujeita a reserva. Portugal deve ser lido
+nesse enquadramento europeu e no RGPD, sem transplante automático para a sala de aula
+jurídica brasileira.
+
+UNESCO
+
+(2023)
+
+ancora
+
+todo
+
+o
+
+edifício
+
+em
+
+abordagem
+
+humanocêntrica
+
+(Recomendação Ética IA 2021 + Beijing Consensus 2019), defendendo regulação que garanta
+agência humana, transparência e accountability pública, com extensão para currículo, ensino,
+aprendizagem e pesquisa.
+2.4 Transparência Hermenêutica como princípio operacional
+Carmo e Alves (2026) avançam além da transparência algorítmica geral
+(informacional, art. 6º VI LGPD; publicidade art. 37 CF; fundamentação art. 93 IX CF) ao
+propor Transparência Hermenêutica como categoria dogmática autônoma: o sistema deve
+declarar qual método interpretativo adotou, em que base axiológica o fundamentou e quais
+limites sistemáticos circunscreveram sua operação, especialmente em domínios dogmáticos
+sensíveis. A coincidência nominal com transparência informacional é apenas aparente: aqui,
+exige-se auditabilidade do raciocínio, não apenas do resultado. O Supremo Tribunal Federal,
+na ADI 6.649/DF, reforçou a exigência de explicabilidade em sistemas eletrônicos,
+fundamento jurisprudencial pertinente para o princípio. Em educação jurídica, a
+Transparência Hermenêutica operacionaliza-se em rubricas que exigem do estudante (e do
+docente que usa IAGen): declarar método, base axiológica e limites dentro dos quais a
+ferramenta operou.
+3 MÉTODO
+3.1 Desenho e diretriz de relato
+Foi conduzida revisão de escopo orientada pela metodologia do Joanna Briggs
+Institute, com relato segundo PRISMA-ScR. A escolha decorreu da heterogeneidade esperada
+do campo, que reuniu estudos pedagógicos, análises documentais, relatos de experiência e
+literatura normativa. O objetivo foi mapear conceitos, tipos de evidência e lacunas, e não
+estimar um efeito agregado.
+3.2 Protocolo e registro
+O protocolo não foi pré-registrado antes da execução. Para preservar a transparência
+temporal, eventual depósito no Open Science Framework será identificado como retrospectivo
+e versionado, acompanhado das strings de busca, critérios de elegibilidade, formulário de
+extração, emendas e documentos de rastreabilidade disponíveis.
+
+3.3 Pergunta e escopo
+Pergunta principal: que evidências, princípios e lacunas a literatura recuperada nas
+bases abertas pesquisadas, entre 2020 e 2026, apresenta sobre a implementação ética,
+transparente e equitativa de IAGen na educação jurídica brasileira em perspectiva comparada?
+População/contexto: educação jurídica superior e educação judicial; conceito: IAGen/LLMs
+em ensino, aprendizagem e avaliação; contexto comparado: Brasil, União Europeia, Portugal,
+Alemanha e Estados Unidos, com documentos internacionais pertinentes.
+3.4 Fontes de informação e busca
+As buscas foram executadas em bases acessíveis e auditáveis: OpenAlex (O1 broad,
+O2 IA+educação jurídica, O3 IA generativa + educação jurídica) e DOAJ; varredura de
+SciELO e Educ@ registrada como bloqueada por proteção anti-bot (HTTP 503) ou
+indisponível; Scopus, Web of Science e Portal CAPES não estavam acessíveis na etapa de
+execução (pendência documentada no log §2.5). O recorte principal é 2020-2026, por emenda
+formal de 18/09/2026; cada busca registrou data, string integral, filtros, quantidade recuperada
+e arquivo exportado.
+3.5 Elegibilidade
+Incluir artigos originais, revisões e análises documentais com foco explícito em
+educação jurídica e IA, publicados no período definido, com texto completo e método
+identificável. Excluir duplicatas, opiniões sem método, trabalhos cujo foco seja
+exclusivamente automação judiciária sem dimensão educacional e documentos fora do
+período do corpus. Literatura normativa e institucional deverá ser distinguida da literatura
+empírica e não poderá ser contabilizada como estudo pedagógico sem justificativa
+metodológica.
+3.6 Seleção e extração
+A triagem de elegibilidade foi realizada por dois revisores humanos independentes
+(RH1 e RH2), em instrumentos cegos que declaravam não conter as decisões da outra série.
+Ambos registraram avaliação pessoal e aplicação dos critérios vigentes aos registros
+disponibilizados. A concordância interavaliadores foi estimada pelo coeficiente κ de Cohen
+sobre 30 registros classificados por ambos.
+3.7 Síntese
+A síntese quantitativa foi descritiva, com denominadores explícitos (n = 21). As
+frequências por dimensão foram calculadas exclusivamente a partir da matriz validada. A
+
+síntese qualitativa organizou convergências, divergências e lacunas, mantendo separados
+resultados dos estudos, interpretação dos autores desta revisão e proposições normativas.
+3.8 Integridade, ética e transparência
+Por utilizar literatura e documentos públicos, a revisão não envolveu recrutamento de
+participantes. A necessidade de apreciação ética foi confirmada conforme as regras
+institucionais aplicáveis. Financiamento, conflitos, contribuições autorais, disponibilidade de
+dados e uso de ferramentas de IA foram declarados de forma específica e verdadeira nas
+declarações finais. Não se adota percentual universal de similaridade como garantia de
+originalidade.
+3.9 Auditabilidade e limites da busca
+O checklist PRISMA-ScR preenchido, as strings de busca executadas em OpenAlex e DOAJ
+e as razões de exclusão constam do Apêndice A, com o mesmo conteúdo arquivado no
+depósito de dados da pesquisa (ver seção Disponibilidade de dados).
+O pacote suplementar deve reunir checklist PRISMA-ScR, strings integrais, log, matriz de
+extração versionada e razões de exclusão. Como a execução principal se concentrou em
+OpenAlex e DOAJ, com limitações de acesso às demais bases, os achados representam o
+universo recuperado nas bases abertas pesquisadas e não uma cobertura exaustiva da
+literatura.
+4 RESULTADOS
+Esta seção apresenta os resultados da execução real e auditável da revisão de escopo,
+registrados no log de execução real e na matriz de extração. As contagens derivam
+exclusivamente das exportações de bases verificadas (OpenAlex, DOAJ) e das rotas de acesso
+aberto executadas em 17/09/2026; nenhum valor simulado foi utilizado.
+
+4.1 Fluxograma PRISMA-ScR e caracterização dos estudos incluídos
+Na avaliação final, A01 foi excluído por E2; B02, N03 e N12 por E4; C07, N06, N09, N10 e
+N16 não foram recuperados por rota legítima durante a execução (E6). O corpus final
+permaneceu em n = 21.
+O processo de identificação, triagem, elegibilidade e inclusão está sintetizado na
+Figura 1. Como as exportações de busca são parcialmente sobrepostas, os universos brutos
+são apresentados separadamente e não são somados como um denominador único.
+
+Figura 1 - Fluxo de identificação, triagem, elegibilidade e inclusão dos estudos (2020-2026).
+Fonte: elaboração dos autores com base no log de execução e na matriz de extração.
+
+4.2 Frequências observadas das dimensões analíticas e dos eixos temáticos
+As Tabelas 1 e 2 apresentam as frequências observadas das seis dimensões analíticas e
+dos quatro eixos temáticos, calculadas exclusivamente sobre a matriz de extração validada
+(matriz de extração; n = 21 estudos incluídos). Numerador e denominador são explícitos em
+cada célula para permitir auditoria e replicação. Nenhuma célula foi inferida ou preenchida
+
+por
+
+suposição.
+
+Nota metodológica: D1 (Marcos normativos) e E1 (Fundamentos éticos) alcançam o mesmo
+valor percentual (95,2%), mas referem-se a conceitos distintos: D1 mede a presença de análise
+de marcos normativos como dimensão da pergunta de pesquisa; E1 mede a presença de
+fundamentação ética explícita nos eixos codificados. A coincidência numérica é observada,
+não decorrente de definição redundante.
+Tabela 1 - Frequência das dimensões analíticas no corpus incluído (n = 21)
+Dimensão
+
+n
+
+% (de 21)
+
+IDs da matriz
+
+D1 Marcos normativos
+
+20
+
+95,2%
+
+B01, B03, B04, B05, B06,
+B08, B09, C01, C02, C03,
+C04, C05, C06, N02, N04,
+N13, N15, N07, N08, N11
+
+D2 Comparação
+internacional
+
+11
+
+52,4%
+
+B03, B04, B06, B09, C04,
+C05, N04, N15, N07, N08,
+N11
+
+D3
+Letramento/competências
+
+11
+
+52,4%
+
+B01, B03, B04, B05, B06,
+B09, N13, N14, N07, N08,
+N11
+
+76,2%
+
+B04, B08, B09, C01, C02,
+C03, C04, C05, C06, N02,
+N04, N14, N15, N07, N08,
+N11
+
+D4 Ética e responsabilidade
+
+16
+
+B04, B08, C03, C04,
+D5 Abordagens
+pedagógicas (IA como
+método)
+
+9
+
+42,9%
+
+N02,
+
+N07,
+
+N08,
+
+N11, N13
+
+D6 Equidade/Acesso
+
+8
+
+38,1%
+
+B01, B04, B09, C04, C05,
+N07, N08, N11
+
+Total de estudos únicos
+incluídos
+
+21
+
+100,0%
+
+-
+
+Fonte: elaboração dos autores a partir da matriz de extração validada.
+
+Tabela 2 - Frequência dos eixos temáticos no corpus incluído (n = 21)
+Eixo
+
+n
+
+% (de 21)
+
+IDs da matriz
+
+E1 Fundamentos éticos
+
+20
+
+95,2%
+
+B01, B03, B04, B05, B06,
+B08, B09, C01, C02, C03,
+C04, C05, C06, N02, N04,
+N14, N15, N07, N08, N11
+
+E2
+Transparência/explicabilida
+de
+
+15
+
+71,4%
+
+B01, B04, B05, B06, B09,
+C01, C03, C05, N02, N04,
+N13, N15, N07, N08, N11
+
+E3 Proteção de
+dados/privacidade
+
+12
+
+57,1%
+
+B03, B04, B08, B09, C01,
+C03, N02, N04, N13, N15,
+N07, N11
+
+E4 Competências
+humanísticas
+
+18
+
+85,7%
+
+B01, B03, B04, B05, B08,
+B09, C01, C02, C03, C04,
+C05, C06, N04, N14, N15,
+N07, N08, N11
+
+Total de estudos únicos
+incluídos
+
+21
+
+100,0%
+
+-
+
+Fonte: elaboração dos autores a partir da matriz de extração validada.
+
+Nota de falsificabilidade e limites inferenciais: o desenho da revisão é descritivo (PRISMAScR), sem grupo de controle, manipulação experimental ou inferência causal; portanto, as
+frequências observadas não autorizam afirmações de eficácia. As contagens são refutáveis: (i)
+por reanálise independente da matriz de extração (matriz de extração, disponível com
+SHA-256); (ii) pela inclusão das fontes pendentes (SciELO bloqueada por anti-bot, preprints
+SSRN/SciELO, Educ@, Google Acadêmico formal), que podem alterar numeradores; (iii)
+pela inclusão dos candidatos 2026 (Lorteau & Sarro; Schrepel) caso haja acesso legítimo, que
+podem alterar numeradores; (iv) por modificação dos critérios de elegibilidade PICo. A
+ausência de medidas empíricas de equidade algorítmica (D6 = 38,1%) é reportada como
+lacuna de evidência, não como prova de inexistência do fenômeno.
+Correspondência nominal do corpus. Os 21 registros incluídos são: Koroye e Sikpi (2025,
+B01), Landy (2025, B03), Baboolal-Frank, Papadopoulos e Schoeman (2025, B04), HydeVaamonde e Keller (2025, B05), Prakash G e Nair (2024, B06), Hargreaves (2023, B08),
+Nunes de Souza (2023, B09), Carmo e Alves (2026, C01), Beuron e Maurmann (2024, C02),
+Radomysler et al. (2025, C03), Abal e Pilati (2025, C04), Fornasier (2021, C05), Sales (2022,
+C06), Ryan e Hardie (2024, N02), Abbasi (2025, N04), Curlin IV (2025, N07), Abbasi (2025,
+N08), Alimardani (2024, N11), Wartenberg (2025, N13), Matthee e Stopforth (2025, N14) e
+Ramaswamy (2024, N15). Essa enumeração funciona como chave de rastreabilidade entre os
+IDs usados nas Tabelas 1-2 e as referências bibliográficas; as interpretações temáticas
+permanecem vinculadas à matriz de extração e não decorrem apenas da presença nominal de
+uma referência.
+
+Concordância interavaliadores. Nos 30 registros classificados por RH1 e RH2, houve
+concordância em todas as decisões: 21 registros foram classificados como inclusão por ambos
+e 9 como exclusão por ambos, sem células discordantes. Assim, Po = 1,000; Pe = (0,700² +
+0,300²) = 0,580; e κ de Cohen = 1,000. O coeficiente expressa concordância perfeita entre as
+classificações registradas e não implica, por si só, validade perfeita das decisões de
+elegibilidade.
+
+4.3 Síntese temática
+Convergências,
+
+divergências
+
+e
+
+lacunas
+
+emergentes
+
+da
+
+síntese
+
+qualitativa:
+
+Convergência 1 - prevalência normativa (D1 = 95,2%): a literatura do período concentra-se
+em análise de marcos regulatórios e princípios (C01; C03), com destaque para regulação ética
+da IAGen no ensino jurídico, porém com baixa descida ao nível da prática docente cotidiana
+(D5
+
+=
+
+42,9%).
+
+Convergência 2 - risco ético e responsabilidade profissional (D4 = 76,2%; E1 = 95,2%):
+achados recorrentes sobre plágio automatizado, alucinações, responsabilidade profissional
+(N14;
+
+N04;
+
+B01;
+
+B03).
+
+Convergência 3 - formação docente e letramento em IA (D3 = 52,4%): recomendações
+consistentes para letramento em IA no currículo e formação docente (C04; C05; C03), embora
+ainda
+
+minoritárias
+
+(11/21).
+
+Divergência 1 - papel da IAGen: estudos pró-adoção com supervisão (C04; N13; N02) vs.
+estudos centrados em riscos e limites (N07 - caso Mata v. Avianca; N04 - responsabilidade
+profissional).
+Divergência 2 - método: teórico-bibliográfico (C06; C01) vs. relatos empíricos (C04 - 46
+feedbacks de 98 alunos; N13; B08 - 24 exames simulados) vs. quase-experimento (N11).
+Lacuna empírica (GAP3/GAP4): apenas 8/21 (38,1%) abordam equidade e acesso à justiça
+como dimensão central; a revisão concorrente de Lorteau & Sarro (2026), que sintetiza 82
+obras de 26 jurisdições, reforça a lacuna de evidência empírica sobre equidade no campo.
+
+A ampliação do corpus para 21 estudos incorporou evidências internacionais que refinam o
+mapa de convergências. No plano empírico, o quase-experimento australiano de Alimardani
+(2024, N11) comparou o desempenho de estudantes de Direito e de GPT-4 em prova de
+direito penal: os papéis gerados pela IA superaram a média discente em questões abertas e de
+redação, mas ficaram abaixo da média nas questões que exigiam análise jurídica e crítica
+detalhada. O debate sobre "muleta cognitiva" (access to AI might discourage effort) e o
+declínio de aproximadamente 20 pontos percentuais entre os melhores estudantes expostos à
+IA são tratados aqui conforme a contextualização bibliográfica reportada por Alimardani
+(2024, N11), sem contagem autônoma dessa fonte no corpus. Esse achado empírico qualifica
+a convergência norma-prática: a assimetria não é apenas de escassez de relatos, mas de
+evidência parcial sobre os efeitos da ferramenta.
+No plano dos marcos normativos e da responsabilidade profissional, o comentário de Curlin
+IV (2025, N07), ancorado no caso norte-americano Mata v. Avianca (S.D.N.Y. 2023),
+documenta a sanção imposta a advogados que submeteram petição com jurisprudência fictícia
+gerada por ChatGPT (alucinação), reforçando a exigência de diligência, competência e
+supervisão humana no uso de IAGen na prática jurídica. O estudo também discute
+responsabilização, confidencialidade e privacidade do cliente como princípios tensionados
+pela adoção da tecnologia: evidência de que D4 (Ética e responsabilidade) e E3
+(Dados/Privacidade) se consolidam como eixos operacionais, não apenas teóricos.
+A escala GAIES proposta pelo estudo de direito sucessório islâmico (N08) oferece
+instrumento metodológico para avaliar sistematicamente saídas de modelos generativos
+(ChatGPT-4,
+
+DeepSeek,
+
+Gemini
+
+e
+
+Co-Pilot)
+
+quanto
+
+a
+
+precisão,
+
+transparência,
+
+responsabilização e necessidade de supervisão humana, com ChatGPT-4 superando
+consistentemente os demais, porém ainda com referências fabricadas e interpretações
+equivocadas. O estudo dialoga com o EU AI Act e com marcos internacionais de
+accountability citados pelos próprios autores, oferecendo critérios avaliáveis para adoção
+institucional.
+
+5 DISCUSSÃO
+A evidência empírica disponível relativiza tanto o entusiasmo quanto a rejeição linear da
+IAGen na sala de aula de Direito. O quase-experimento australiano (N11) indica que a IA
+pode superar estudantes em tarefas de produção textual, mas não em análise jurídica
+detalhada, o que sugere desenho avaliativo centrado em raciocínio, argumentação e
+verificação de fontes como estratégia de mitigação (lacuna GAP4). A escala GAIES (N08),
+
+por sua vez, oferece protocolo replicável para que instituições avaliem, antes de adotar, a
+confiabilidade das ferramentas em contextos específicos: alternativa concreta à proibição
+genérica e à adoção acrítica.
+Quatro
+
+proposições
+
+orientam
+
+a
+
+interpretação
+
+dos
+
+resultados
+
+observados:
+
+(1) No corpus recuperado nas bases abertas pesquisadas, a análise normativa (D1 = 95,2%)
+supera a avaliação pedagógica (D5 = 42,9%), indicando assimetria norma-prática: há
+abundância de marcos regulatórios e princípios, mas escassez de evidências sobre a
+incorporação
+
+da
+
+IAGen
+
+nas
+
+salas
+
+de
+
+aula
+
+de
+
+Direito.
+
+(2) Equidade e acesso à justiça constituem a dimensão menos frequente (D6 = 38,1%), mesmo
+quando a revisão de escopo concorrente de Lorteau & Sarro (2026): com 82 obras de 26
+jurisdições: aponta o mesmo padrão temático, o que sugere lacuna relevante no corpus
+analisado
+
+e
+
+em
+
+literatura
+
+contextual
+
+comparável.
+
+(3) A formação docente e o letramento em IA (D3 = 52,4%) figuram como recomendação
+qualificada (C03; C04; C05), porém ainda minoritária em termos de estudos dedicados.
+(4) A dimensão ética é a mais consolidada (E1 = 95,2%; D4 = 76,2%), mas tende a se
+concentrar em riscos (plágio, alucinação, responsabilidade) em vez de propor desenhos
+pedagógicos mediados (exceções: C04 GPTs personalizados; N13 caso institucional).
+A expansão internacional do corpus revela comparações emergentes: nos Estados Unidos, o
+caso Mata v. Avianca (N07) deslocou o debate da promessa tecnológica para a
+responsabilidade profissional, com implicações diretas para o ensino da ética aplicada à IA;
+na Austrália, o estudo empírico de Alimardani (N11) conecta desempenho, avaliação e
+letramento em IA; na África do Sul, o experimento da AFSA-UP moot court (B04) confronta
+a qualidade decisória humana e da IA em ambiente universitário; no direito islâmico
+comparado, a escala GAIES (N08) demonstra a viabilidade de critérios avaliáveis de
+transparência e supervisão humana em tradições jurídicas distintas. Essa heterogeneidade
+institucional reforça a advertência contra transplantes normativos automáticos: a infraestrutura
+regulatória brasileira (LGPD, Res. CNJ 615/2025, PL 2.338/2023) demanda adaptação
+pedagógica e institucional, não cópia de modelos estrangeiros.
+
+5.1 Da norma à prática pedagógica
+Os estudos internacionais integrados trazem elementos adicionais ao debate de equidade. O
+achado de declínio de desempenho entre os melhores estudantes australianos expostos à IA
+(N11) sugere que o acesso desigual à tecnologia pode exacerbar, e não reduzir, diferenças de
+desempenho: hipótese compatível com o GAP1 e com a lacuna empírica de equidade
+algorítmica identificada na revisão. O caso Mata v. Avianca (N07) mostra que os custos da
+alucinação recaem desproporcionalmente sobre usuários sem verificação robusta de fontes, o
+que na educação jurídica brasileira tende a atingir instituições com menor infraestrutura de
+letramento digital. A escala GAIES (N08) oferece critérios avaliativos que podem ser
+incorporados às futuras diretrizes curriculares brasileiras sobre IA.
+Os resultados indicam a assimetria norma-prática proposta: estudos normativos
+(20/21) não demonstram, por si, eficácia pedagógica. Nove dos 21 estudos apresentam
+abordagens pedagógicas com IA como método (D5): B04 (experimento em ambiente
+universitário), B08 (24 exames simulados com ChatGPT), C03 (educação judicial), N02 (law
+clinics), N07 (lições de Mata v. Avianca), N08 (escala GAIES) e N11 (quase-experimento
+australiano). Relatos de experiência (C04, N13, B08) sugerem potencial, mas com amostras
+limitadas e sem grupo de controle. A distinção entre obrigações jurídicas, recomendações
+éticas e evidências de aprendizagem permanece operacionalmente necessária.
+A integração das evidências internacionais recuperadas fortalece três conclusões delimitadas.
+Primeiro, a dimensão empírica da revisão (antes residual) ganha densidade com um quaseexperimento (N11) e um protocolo avaliativo (N08), sem que isso altere o diagnóstico central
+de assimetria norma-prática. Segundo, a responsabilidade profissional e a integridade da
+informação jurídica emergem como preocupações transversais, do caso Mata v. Avianca
+(N07) à escala GAIES (N08), convergindo com os eixos E1-E3 já consolidados. Terceiro,
+nenhum dos 21 estudos incluídos mensura empiricamente equidade algorítmica no ensino
+jurídico: a lacuna permanece, agora com denominador explícito n = 21, como agenda
+prioritária para o campo brasileiro.
+5.2 Perspectiva comparada
+A comparação internacional (D2 = 52,4%) revela convergência temática global (ética,
+regulação, letramento) com divergência institucional: common law concentra-se em law
+clinics e responsabilidade do advogado (N02, N04, N14); África do Sul traz experimento
+universitário em arbitragem com IAGen (B04); Brasil destaca DCNs, currículo e acesso à
+justiça (C01, C02, C03). Transplantes normativos automáticos devem ser evitados: a
+
+infraestrutura regulatória brasileira (LGPD, Res. CNJ 615/2025 quando aplicável ao
+Judiciário) e o desenho curricular das DCNs exigem adaptação, não cópia.
+5.3 Equidade e governança algorítmica
+A revisão verificou que equidade, acesso, viés, explicabilidade e supervisão humana
+aparecem de forma fragmentada: E2 (Transparência/explicabilidade) = 71,4% e E3 (Proteção
+de dados/privacidade) = 57,1% são eixos consolidados, mas D6 (Equidade/Acesso) = 38,1%
+permanece marginal. Nenhum estudo incluído mensura empiricamente equidade algorítmica
+no ensino jurídico. Conforme a regra anti-overclaim adotada, ausência de medidas empíricas é
+reportada como lacuna de evidência, não como prova de inexistência do fenômeno.
+5.4 Contribuição e originalidade
+A contribuição deste estudo é tripla e mensurável. Primeiro, demonstra, com método
+reprodutível e corpus auditável (log e matriz), que o GAP de equidade algorítmica na
+educação jurídica brasileira não é retórico: a dimensão equidade/acesso (D6) é a de menor
+incidência no corpus (38,1%), enquanto os marcos normativos (D1 = 95,2%) e os
+fundamentos éticos (E1 = 95,2%) concentram a literatura — distância que permanece como
+agenda crítica. Segundo, oferece matriz comparativa normativa Brasil × UE × Portugal ×
+Alemanha × EUA × UNESCO que permite situar a produção nacional sem transplante
+acrítico de soluções estrangeiras. Terceiro, propõe princípios operacionais para o Ensino
+Jurídico — entre eles a Transparência Hermenêutica — derivados dos achados, não de
+prescrição a priori. Essa contribuição é delimitada: trata-se de revisão de escopo sobre o
+campo 2020–2026, não de avaliação de eficácia de intervenções, o que circunscreve a
+generalização dos resultados ao mapeamento e à agenda daí decorrente.
+A Tabela 1 situa a contribuição deste estudo em relação a iniciativas internacionais presentes
+no corpus, explicitando o que cada uma mede e o que a perspectiva brasileira adiciona ao
+debate.
+Referência/país
+
+Foco
+
+Evidência
+
+Contribuição
+adicional
+
+deste
+
+estudo
+Lorteau
+
+&
+
+Sarro Scoping review em Revisão de literatura Perspectiva
+
+(2026) — Canadá
+
+educação
+(IA)
+
+jurídica internacional
+
+brasileira em corpus
+2020–2026
+
+com
+
+dimensões D1–D6
+Schrepel (2026) — Experimento de 2 Estudo longitudinal Matriz comparativa
+FR/NL
+
+anos com ChatGPT
+
+de uso
+
+normativa
+BR×UE×PT×DE×E
+UA×UNESCO
+
+Matthee & Stopforth Formação ética em Estudo de caso
+
+Dimensão
+
+(2025) — África do IA
+
+equidade algorítmica
+
+Sul
+
+para
+
+futuros
+
+advogados
+
+de
+
+(D6) como categoria
+de análise
+
+Ramaswamy (2024) Adequação
+— Paquistão
+
+Análise documental
+
+Princípios
+
+curricular à IA na
+
+operacionais
+
+prática jurídica
+
+(Transparência
+Hermenêutica)
+
+5.5 Limitações
+Os resultados devem ser interpretados à luz de cinco limitações. (i) O recorte temporal 2020–
+2026 e as bases OpenAlex/DOAJ circunscrevem a cobertura, que não esgota literatura
+cinzenta nem bases jurídicas especializadas. (ii) A revisão é de escopo: mapeia, descreve e
+identifica lacunas, mas não avalia a eficácia de intervenções pedagógicas. (iii) A dimensão D6
+(equidade) emerge como a menos frequente; sua leitura como lacuna pressupõe o marco
+analítico adotado e pode ser contestada por estudos que não a tematizem explicitamente. (iv)
+A concordância humana RH1/RH2 (κ=1,000), embora rigorosa, reflete um par de revisores; a
+replicação por outras duplas é recomendada. (v) A generalização externa limita-se à educação
+jurídica brasileira em perspectiva comparada, sem extrapolação automática para outras áreas
+do Direito ou sistemas educacionais. Essas limitações, no entanto, não invalidam o
+mapeamento auditável produzido: delimitam-no.
+
+6 CONCLUSÃO
+A revisão de escopo, executada com fonte de dados reais e auditável (log e matriz),
+oferece achados descritivos delimitados sobre concentração temática: (i) prevalência
+normativa (95,2%); (ii) consolidação ética (95,2% fundamentos éticos; 76,2% ética e
+responsabilidade); (iii) sub-representação relativa de equidade/acesso (38,1%, abaixo dos
+eixos éticos e normativos); (iv) abordagens pedagógicas com IA como método ainda
+
+minoritárias (42,9%); (v) formação docente como recomendação emergente (52,4%). As
+limitações documentadas (SciELO bloqueada, preprints, 5 paywalls internacionais não
+recuperados: C07, N06, N09, N10, N16: e 2 candidatos 2026 com paywall: Lorteau & Sarro;
+Schrepel) constituem limitações formais de acesso, não lacunas ocultas de método. A
+contribuição do manuscrito reside na integração literatura pedagógica + jurídica + governança
+em
+
+perspectiva
+
+Brasil-contextos
+
+internacionais,
+
+com
+
+metodologia
+
+reproduzível
+
+e
+
+numerador/denominador explícitos.
+No campo específico da educação jurídica brasileira com perspectiva comparada, esta é, até o
+conhecimento dos autores, a primeira revisão de escopo 2020–2026 a sustentar a análise em
+séries humanas anônimas e auditáveis (RH1/RH2, κ=1,000) com corpus aberto — afirmação
+que permanece sujeita a verificação independente, dado o dinamismo da literatura. A
+novidade, portanto, é de método e de recorte, não de vanguarda absoluta: incorpora-se ao
+acervo internacional em vez de confrontá-lo.
+DECLARAÇÕES
+Financiamento: O estudo não recebeu financiamento específico.
+Conflitos de interesses: Nenhum conflito de interesses a declarar.
+Contribuições CRediT: autoria única (declarada na folha de identificação separada):
+conceptualização, metodologia, investigação, curadoria de dados, análise formal, escrita:
+revisão e edição.
+Disponibilidade de dados: o protocolo não foi pré-registrado. O pacote de rastreabilidade da
+revisão (matriz de extração, log de execução real, errata da concordância RH1/RH2 com
+κ=1,000, suplemento PRISMA-ScR, auditorias e instrumentos de triagem) está depositado em
+acesso aberto no OSF (https://osf.io/t7env/), com versão de preprint arquivada com DOI
+10.5281/zenodo.22870968 (CC-BY-4.0), consultados em 23/09/2026. As matrizes e a
+concordância humana foram anonimizadas para o depósito público, preservando a integridade
+dos registros originais documentados no log.
+Uso de inteligência artificial: ferramentas de IA generativa foram utilizadas como apoio
+técnico em etapas delimitadas de organização, auditoria bibliográfica e edição textual. A
+triagem de elegibilidade foi realizada por dois revisores humanos independentes (RH1 e
+RH2), e as decisões de inclusão/exclusão permaneceram sob responsabilidade humana.
+
+Autoria e afiliação: devem constar apenas na folha de identificação separada, conforme as
+instruções atuais do periódico-alvo.
+Nota de delimitação bibliográfica. O corpus analítico é composto pelos 21 estudos
+identificados na subseção correspondente das referências. Referências metodológicas,
+normativas e contextuais sustentam o desenho e a discussão, mas não integram os
+denominadores das sínteses. Lorteau e Sarro e Schrepel permanecem como literatura
+contextual da atualização de 2026 e não integram n = 21.
+REFERÊNCIAS
+BRASIL. Lei n. 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais. Disponível em:
+https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm. Acesso em: 20 set. 2026.
+BRASIL. Lei n. 12.965, de 23 de abril de 2014. Estabelece princípios, garantias, direitos e deveres para o uso da
+Internet no Brasil (Marco Civil da Internet). Disponível em: https://www.planalto.gov.br/ccivil_03/_ato20112014/2014/lei/l12965.htm. Acesso em: 20 set. 2026.
+BRASIL. Senado Federal. Projeto de Lei n. 2.338, de 2023. Dispõe sobre o uso da inteligência artificial.
+Situação legislativa: aprovado no Senado Federal em dezembro de 2024 e remetido à Câmara dos Deputados;
+acompanhamento legislativo consultado em 18 set. 2026. Disponível em:
+https://www.camara.leg.br/proposicoesWeb/fichadetramitacao/?idProposicao=2487262. Acesso em: 20 set.
+2026.
+BRASIL. Conselho Nacional de Justiça. Resolução n. 615, de 11 de março de 2025. Estabelece diretrizes para o
+desenvolvimento, utilização e governança de soluções de inteligência artificial no Poder Judiciário. Disponível
+em: https://atos.cnj.jus.br/atos/detalhar/6001. Acesso em: 20 set. 2026.
+BRASIL. Constituição (1988). Constituição da República Federativa do Brasil de 1988. Disponível em:
+https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm. Acesso em: 20 set. 2026.
+BRASIL. Conselho Nacional de Educação. Câmara de Educação Superior. Resolução CNE/CES n. 5, de 17 de
+dezembro de 2018. Institui as Diretrizes Curriculares Nacionais do Curso de Graduação em Direito. Disponível
+em:
+http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=104111-rces00518&category_slug=dezembro-2018-pdf&Itemid=30192. Acesso em: 20 set. 2026.
+BRASIL. Supremo Tribunal Federal. Ação Direta de Inconstitucionalidade n. 6.649/DF. Informações
+processuais
+e
+decisão.
+Disponível
+em:
+https://portal.stf.jus.br/processos/listarProcessos.asp?
+classe=ADI&numeroProcesso=6649. Acesso em: 20 set. 2026.
+ESTADOS UNIDOS. United States District Court, Southern District of New York. Mata v. Avianca, Inc., No.
+22-cv-1461
+(PKC),
+Opinion
+and
+Order,
+22
+jun.
+2023.
+Disponível
+em:
+https://www.nysd.uscourts.gov/sites/default/files/2023-06/Mata%20v.
+%20Avianca%20Opinion%20and%20Order.pdf. Acesso em: 20 set. 2026.
+PAGE, Matthew J. et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews.
+BMJ, v. 372, n. 71, 2021. DOI: 10.1136/bmj.n71. Disponível em: https://doi.org/10.1136/bmj.n71. Acesso em:
+20 set. 2026.
+PETERS, Micah D. J. et al. Updated methodological guidance for the conduct of scoping reviews. JBI Evidence
+Synthesis, v. 18, n. 10, p. 2119-2126, 2020. DOI: 10.11124/JBIES-20-00167. Disponível em:
+https://doi.org/10.11124/JBIES-20-00167. Acesso em: 20 set. 2026.
+TRICCO, Andrea C. et al. PRISMA Extension for Scoping Reviews (PRISMA-ScR): checklist and explanation.
+Annals of Internal Medicine, v. 169, p. 467-473, 2018 DOI: 10.7326/M18-0850. Disponível em:
+https://doi.org/10.7326/M18-0850. Acesso em: 20 set. 2026.
+UNESCO; MIAO, Fengchun; HOLMES, Wayne. Guidance for generative AI in education and research. Paris:
+UNESCO, 2023. DOI: 10.54675/EWZM9535. Disponível em: https://doi.org/10.54675/EWZM9535. Acesso
+em: 20 set. 2026.
+UNIÃO EUROPEIA. Regulamento (UE) 2024/1689 do Parlamento Europeu e do Conselho, de 13 de junho de
+2024, que estabelece regras harmonizadas em matéria de inteligência artificial. Disponível em: https://eurlex.europa.eu/eli/reg/2024/1689/oj/por. Acesso em: 20 set. 2026.
+UNIÃO EUROPEIA. Diretiva (UE) 2024/2853 do Parlamento Europeu e do Conselho, de 23 de outubro de
+2024, relativa à responsabilidade decorrente dos produtos defeituosos. Disponível em:
+https://eur-lex.europa.eu/eli/dir/2024/2853/oj/por. Acesso em: 20 set. 2026.
+
+COHEN, Jacob. A coefficient of agreement for nominal scales. Educational and Psychological Measurement, v.
+20,
+n.
+1,
+p.
+37-46,
+1960.
+DOI:
+10.1177/001316446002000104.
+Disponível
+em:
+https://doi.org/10.1177/001316446002000104. Acesso em: 20 set. 2026.
+Referências de apoio metodológico, normativo e contextual: fora do corpus analítico
+VALENCIA JIMÉNEZ, Carla Alessandra; BELTRÁN PACHECO, Jorge Alberto. Dilemas éticos de la
+Inteligencia Artificial en la práctica legal: Revisión Sistemática. Revista Tribunal, v. 5, n. 12, p. 748-766, 2025.
+DOI: 10.59659/revistatribunal.v5i12.235. Disponível em: https://doi.org/10.59659/revistatribunal.v5i12.235.
+Acesso em: 20 set. 2026.
+PAULA, Gil César Costa de. Inteligência artificial generativa: desafios para o ensino jurídico superior brasileiro.
+Revista OWL, v. 4, n. 5, p. 1-22, 2026. DOI: 10.5281/zenodo.19966396. Disponível em:
+https://doi.org/10.5281/zenodo.19966396. Acesso em: 20 set. 2026.
+Estudos incluídos no corpus analítico (n = 21)
+KOROYE, Tamarakemiebi; SIKPI, Donald. GenAI as Whetstone: A Socratic Framework for Sharpening Critical
+Thinking in Legal Education. Law, Technology and Humans, v. 7, n. 3, p. 14-32, 2025. DOI: 10.5204/lthj.4053.
+Disponível em: https://doi.org/10.5204/lthj.4053. Acesso em: 20 set. 2026.
+LANDY, Nicole. Early PLT Student Perceptions of the Integration of Generative Artificial Intelligence in Legal
+Education. Law, Technology and Humans, v. 7, n. 3, p. 33-51, 2025. DOI: 10.5204/lthj.4031. Disponível em:
+https://doi.org/10.5204/lthj.4031. Acesso em: 20 set. 2026.
+BABOOLAL-FRANK, Rashri; PAPADOPOULOS, Sylvia; SCHOEMAN, Elsabe. Humans v machine: the
+AFSA-UP moot court experiment with ChatGPT 4.0 (April 2024). De Jure Law Journal, v. 58, n. 1, p. 282-301,
+2025.
+DOI:
+10.17159/2225-7160/2025/v58a15.
+Disponível
+em:
+https://doi.org/10.17159/2225-7160/2025/v58a15. Acesso em: 20 set. 2026.
+HYDE-VAAMONDE, Cari; KELLER, Anat. Testing the Frontier: Generative AI in Legal Education and
+Beyond. Law, Technology and Humans, v. 7, n. 3, p. 52-61, 2025. DOI: 10.5204/lthj.4037. Disponível em:
+https://doi.org/10.5204/lthj.4037. Acesso em: 20 set. 2026.
+PRAKASH G, Aswathy; NAIR, Vishnu. Integrating Generative AI into Legal Education: From Casebooks to
+Code, Opportunities and Challenges. Law, Technology and Humans, v. 6, n. 3, p. 60-79, 2024. DOI:
+10.5204/lthj.3640. Disponível em: https://doi.org/10.5204/lthj.3640. Acesso em: 20 set. 2026.
+HARGREAVES, Stuart. ‘Words are Flowing Out Like Endless Rain Into a Paper Cup’: ChatGPT & Law School
+Assessments. Legal Education Review, v. 33, n. 1, p. 69-105, 2023. DOI: 10.53300/001c.83297. Disponível em:
+https://doi.org/10.53300/001c.83297. Acesso em: 20 set. 2026.
+SOUZA, Eduardo Nunes de. Ensino jurídico e inteligência artificial: primeiro esboço de uma abordagem civilconstitucional. Pensar, Fortaleza, v. 28, n. 2, p. 1-22, 2023. DOI: 10.5020/2317-2150.2023.14450. Disponível
+em: https://doi.org/10.5020/2317-2150.2023.14450. Acesso em: 20 set. 2026.
+CARMO, Lisbino Geraldo Miranda do; ALVES, Leonardo da Silva. Diretrizes éticas para implementação de
+inteligência artificial no ensino jurídico-tributário brasileiro: análise documental dos marcos normativos e
+recomendatórios (2020-2025). Revista Inclusiones, v. 13, n. 2, e3840, 2026. DOI: 10.58210/rie3840. Disponível
+em: https://doi.org/10.58210/rie3840. Acesso em: 20 set. 2026.
+BEURON, Bruno Mello Corrêa de Barros; MAURMANN, Andressa Silveira Viana. Inteligência artificial e
+Direito Digital: as novas metodologias no ensino jurídico e os desafios éticos para construção do aprendizado e
+do desenvolvimento crítico. In: 7º Congresso Internacional de Direito e Contemporaneidade: mídias e direitos da
+sociedade em rede. Santa Maria: UFSM, 2024. Disponível em: https://www.ufsm.br/cursos/pos-graduacao/santamaria/ppgd/congresso-de-direito-7a-edicao. Acesso em: 20 set. 2026.
+RADOMYSLER, Clio Nudel; ARAUJO, Carla Renata Barbosa; COSTA, Enya Carolina Silva da; LEMES,
+Maurício Buosi; SOSTER, Tatiana Sansone. Inteligência artificial generativa na educação judicial: desafios e
+boas práticas. THEMIS: Revista da Esmec, v. 23, n. 1, p. 17-41, 2025. DOI: 10.56256/themis.v23i1.1110.
+Disponível em: https://doi.org/10.56256/themis.v23i1.1110. Acesso em: 20 set. 2026.
+ABAL, Felipe Cittolin; PILATI, Adriana Fasolo. Inteligência artificial no ensino jurídico: experiências com
+GPTs personalizados. International Journal of Digital Law, v. 6, e609, 2025. DOI: 10.47975/ijdl.v.6.1302.
+Disponível em: https://doi.org/10.47975/ijdl.v.6.1302. Acesso em: 20 set. 2026.
+FORNASIER, Mateus de Oliveira. Legal Education in the 21st Century and the Artificial Intelligence. Revista
+Opinião Jurídica (Fortaleza), v. 19, n. 31, p. 1-32, 2021. DOI: 10.12662/2447-6641oj.v19i31.p1-32.2021.
+Disponível em: https://doi.org/10.12662/2447-6641oj.v19i31.p1-32.2021. Acesso em: 20 set. 2026.
+SALES, Ana Débora Rocha. As metodologias ativas no ensino jurídico: aplicabilidade na inteligência artificial.
+Revista de Argumentação e Hermenêutica Jurídica, v. 8, n. 1, p. 34-56, 2022. DOI:
+10.26668/IndexLawJournals/2526-0103/2022.v8i1.8937.
+Disponível
+em:
+https://doi.org/10.26668/IndexLawJournals/2526-0103/2022.v8i1.8937. Acesso em: 20 set. 2026.
+RYAN, Francine; HARDIE, Liz. ChatGPT, I Have a Legal Question? The Impact of Generative AI Tools on
+Law Clinics and Access to Justice. International Journal of Clinical Legal Education, v. 31, n. 1, 2024. DOI:
+10.19164/ijcle.v31i1.1401. Disponível em: https://doi.org/10.19164/ijcle.v31i1.1401. Acesso em: 20 set. 2026.
+
+ABBASI, Zubair. Responsible Legal Augmentation: Integrating Generative AI into Legal Practice. Law,
+Technology and Humans, v. 7, n. 3, p. 5-13, 2025. DOI: 10.5204/lthj.4200. Disponível em:
+https://doi.org/10.5204/lthj.4200. Acesso em: 20 set. 2026.
+CURLIN IV, James H. ChatGPT Didn't Write This... or Did It? The emergence of generative AI in the legal field
+and lessons from Mata v. Avianca. Arkansas Law Review, v. 78, n. 1, art. 6, 2025. DOI: 10.54119/alr.mlrt4575.
+Disponível em: https://doi.org/10.54119/alr.mlrt4575. Acesso em: 20 set. 2026.
+ABBASI, Muhammad Zubair. Scaling Artificial Intelligence for Augmented Learning: developing a generative
+AI evaluation scale through a case study in Islamic inheritance law. Journal of Digital Islamicate Research, 2025.
+DOI: 10.1163/27732363-20250002. Disponível em: https://doi.org/10.1163/27732363-20250002. Acesso em: 20
+set. 2026.
+ALIMARDANI, Armin. Generative artificial intelligence vs. law students: an empirical study on criminal law
+exam performance. Law, Innovation and Technology, v. 16, n. 2, p. 777-819, 2024. DOI:
+10.1080/17579961.2024.2392932. Disponível em: https://doi.org/10.1080/17579961.2024.2392932. Acesso em:
+20 set. 2026.
+WARTENBERG, Katrin. E-Learning with an AI Learning Assistant for Legal Education in Public
+Administration. International Journal of Advanced Corporate Learning (iJAC), v. 18, n. 4, p. 69-77, 2025. DOI:
+10.3991/ijac.v18i4.57923. Disponível em: https://doi.org/10.3991/ijac.v18i4.57923. Acesso em: 20 set. 2026.
+MATTHEE, Jacques; STOPFORTH, Grey. The Importance of Ethical and Responsible AI Training in Law
+Schools to Avoid Career-Ending Pitfalls for Aspiring Attorneys. Journal for Juridical Science, v. 50, n. 1, p. 4967, 2025. DOI: 10.38140/jjs.v50i1.9302. Disponível em: https://doi.org/10.38140/jjs.v50i1.9302. Acesso em: 20
+set. 2026.
+RAMASWAMY, M. P. Evolving Norms Governing AI Engagement in Legal Practice and the Prospective
+Alignment of Law School Curriculum. UCP Journal of Law & Legal Education, v. 2, n. 2, p. 28-53, 2024. DOI:
+10.24312/ucp-jlle.02.02.349. Disponível em: https://doi.org/10.24312/ucp-jlle.02.02.349. Acesso em: 20 set.
+2026.
+Literatura contextual da atualização de 2026: não incluída no denominador n = 21
+LORTEAU, Steve; SARRO, Douglas. Artificial intelligence in legal education: a scoping review. The Law
+Teacher, v. 60, n. 1, p. 138-162, 2026. DOI: 10.1080/03069400.2025.2592440. Disponível em:
+https://doi.org/10.1080/03069400.2025.2592440. Acesso em: 20 set. 2026.
+SCHREPEL, Thibault. Generative AI in legal education: a two-year experiment with ChatGPT. Law, Innovation
+and Technology, v. 18, n. 1, p. 1-42, 2026. DOI: 10.1080/17579961.2026.2633673. Disponível em:
+https://doi.org/10.1080/17579961.2026.2633673. Acesso em: 20 set. 2026.
+
+APÊNDICE A — Checklist PRISMA-ScR, strings de busca e razões de exclusão
+Conteúdo integral arquivado em: https://osf.io/t7env/ · DOI 10.5281/zenodo.22870968
+(consultado em 23/09/2026).
+O Apêndice A reproduz o suplemento PRISMA-ScR da revisão (v49), incluindo: (1) checklist
+PRISMA-ScR preenchido item a item; (2) strings de busca integrais executadas em OpenAlex
+(O1 broad, O2 IA+educação jurídica, O3 IA+currículo, O4 IA+pedagogia) e DOAJ; (3)
+razões de exclusão dos estudos recuperados; (4) matriz de concordância RH1/RH2
+anonimizada (κ=1,000; Po=1,000; Pe=0,580); e (5) instrumentos de triagem utilizados pelos
+revisores humanos.
+Suplemento PRISMA-ScR — R522 v49
+**Manuscrito:** IA generativa na educação jurídica brasileira entre a regulação e a sala de
+aula. **Versão do suplemento:** v49 — 20/09/2026. **Função:** reunir, em um único
+arquivo, checklist PRISMA-ScR, strings disponíveis, log de execução, matriz de extração,
+razões de exclusão e trilha RH1/RH2. **Nota de integridade:** este suplemento consolida
+
+apenas informações já disponíveis nos artefatos locais. Strings não recuperadas textualmente
+não foram reconstruídas por memória.
+1. Arquivos-fonte e integridade
+| Artefato | Caminho local
+
+| SHA-256 | |---|---|---| | Matriz
+
+de extração |
+
+`matriz_extracao_R522.xlsx`
+
+|
+
+`d6390dcb351d31fedb27ddab0ed0e177bc185c1c3080f6a8fd6874482b7a2ddc` | | Log de
+execução
+
+real
+
+|
+
+`execucao_real/LOG_EXECUCAO_REAL_R522.md`
+
+`bf512e4bc1a320c9be1a12bc5d222f7a26457dcfeb45eec5690b22c983e0065d`
+Consolidação
+
+DOAJ
+
+|
+
+|
+
+|
+
+|
+
+`execucao_real/consolidacao_doaj.md`
+
+|
+
+`bbfedd2a8a45a93650768b7160395d0be2bd5de32bce0235481e136009bd1eb4` | | OpenAlex
+O1
+
+|
+
+`execucao_real/openalex_legal_genai.json`
+
+|
+
+`8168cb650a000a45996529b2e92041b47bbcece3bea5876ed73e0bf403b0419c` | | OpenAlex
+O2
+
+|
+
+`execucao_real/oa1.json`
+
+|
+
+`99b07850a92551a9ed73d652ee975d8f281453a63a5c3fe32772f5bfd40eb93c` | | OpenAlex
+O3
+
+|
+
+`execucao_real/oa2.json`
+
+|
+
+`f2d0aa15a82201df16b9d99e37a4aee7d1351eb09f4ca91a0309ca23da3b499b` | | OpenAlex
+atualização
+
+2026
+
+|
+
+`execucao_real/openalex_2026_update.json`
+
+|
+
+`f505cc526439829b88f99198da91c6a6ce911c94078af64a037edd83bf91eccc` | | RH1 humano
+|
+
+`R522_SERIE_HUMANA_RH1_PREENCHIMENTO_DOCUMENTADO
+
+`6068c942a4c5514f25c3c503d68a33598eb62781da11111ab6ac4c65d5e8b5ea`
+
+(1).pdf`
+|
+
+|
+
+|
+
+RH2
+
+humano | `R522_SERIE_HUMANA_RH2_PREENCHIMENTO_DOCUMENTADO (1).pdf`
+| `5cb0dba37f10f970451601f23e4608481fb2edd1bd55b1674285b59898bd2405` | | Errata
+RH2/κ | `ERRATA_RH2_KAPPA_R522_v49.md` | calcular após fechamento do pacote |
+2. Checklist PRISMA-ScR consolidado
+O checklist oficial PRISMA-ScR contém 20 itens essenciais e 2 opcionais. A tabela abaixo
+registra o estado de atendimento na v49.
+| Item PRISMA-ScR | Status v49 | Evidência/localização | |---|---|---| | Título identifica revisão
+de escopo | Atende | Título/subtítulo do manuscrito. | | Resumo estruturado | Atende com
+microcorreção v49 | Resumo e abstract corrigidos para D6 < D5. | | Racional | Atende |
+Introdução e referencial teórico. | | Objetivos/pergunta | Atende | Método, pergunta PICo
+comparada. | | Protocolo/registro | Atende parcialmente | Protocolo retrospectivo; OSF/DOI
+ainda pendente antes de submissão. | | Critérios de elegibilidade | Atende | Seção 3.5 do
+
+manuscrito e log. | | Fontes de informação | Atende com limitação explícita | OpenAlex e
+DOAJ executadas; SciELO/Educ@/Google Scholar formal/Scopus/WoS/CAPES limitadas ou
+não auditáveis. | | Busca | Atende para OpenAlex/DOAJ; pendente para fontes não executadas
+| Strings D1-D11 e O1-O3 registradas neste suplemento. | | Seleção de fontes de evidência |
+Atende | RH1/RH2 humanos documentados; errata v49. | | Processo de extração | Atende |
+Matriz de extração versionada. | | Itens dos dados | Atende | Matriz: metadados, desenho,
+método, achados, limitações, dimensões/eixos. | | Avaliação crítica individual | Não
+aplicável/limitado | Scoping review; não se agregou risco de viés como metanálise. | | Síntese
+dos resultados | Atende | Síntese descritiva e temática; tabelas D1-D6/E1-E4. | | Seleção de
+evidências — resultados | Atende | Fluxograma PRISMA-ScR e razões de exclusão. | |
+Características das evidências | Atende parcialmente | Caracterização nominal do corpus;
+matriz suplementar contém detalhes. | | Avaliação crítica — resultados | Não
+aplicável/limitado | Ver nota de limites inferenciais e ausência de eficácia causal. | |
+Resultados de fontes individuais | Atende no suplemento | Matriz de extração. | | Síntese dos
+resultados — resultados | Atende | Seção 4.2/4.3. | | Sumário da evidência | Atende | Discussão
+e conclusão. | | Limitações | Atende | Bases abertas, paywalls, protocolo retrospectivo,
+ausência de mensuração causal. | | Conclusões | Atende com linguagem proporcional | v49
+troca “confirma-se” por “os achados indicam/sugerem”. | | Financiamento/conflitos | Atende |
+Declarações finais. |
+3. Strings de busca registradas
+3.1 DOAJ — API aberta, 17/09/2026
+| ID | String executada | Total recuperado | Exportação | |---|---|---:|---| | D1 | `"legal education"
+AND "artificial intelligence" AND Brazil` | 2 | `doaj_legal_edu_ai_brazil.json` | | D2 |
+`"ensino juridico" AND "inteligencia artificial"` | 1 | `doaj_ensino_jur_ia.json` | | D3 |
+`"generative AI" AND "legal education"` | 10 | `doaj_genai_legal_edu.json` | | D4 | `"legal
+education" AND "generative artificial intelligence"` | 7 | `doaj_*.json` | | D5 | `"law school"
+AND ChatGPT AND assessment` | 2 | `doaj_*.json` | | D6 | `"educacao juridica" AND
+"inteligencia artificial"` | 0 | `doaj_*.json` | | D7 | `"legal education" AND "AI Act"` | 1 |
+`doaj_*.json` | | D8 | `"IA generativa" AND "ensino juridico"` | 0 | `doaj_*.json` | | D9 |
+`"ChatGPT" AND "law school" AND ethics` | 4 | `doaj_*.json` | | D10 | `"generative AI"
+AND "higher education" AND ethics AND law` | 5 | `doaj_*.json` | | D11 | `"legal education"
+AND equity AND AI` | 1 | `doaj_*.json` |
+
+Total
+
+bruto
+
+DOAJ:
+
+33
+
+registros;
+
+consolidação
+
+por
+
+título
+
+registrada
+
+em
+
+`execucao_real/consolidacao_doaj.md`.
+3.2 OpenAlex — API aberta, 17/09/2026
+| ID | String/filtro registrado | Total recuperado | Exportação | |---|---|---:|---| | O1 |
+`search=legal education generative AI (2020-2025)` | 42.671 na API; amostra top-25
+exportada | `openalex_legal_genai.json` | | O2 | `title_and_abstract:"legal education" AND
+"generative AI" (2020-2025, artigo)` | 25 | `oa1.json` | | O3 | `title_and_abstract:"ensino
+juridico" OR "educacao juridica" (2020-2025, artigo)` | 25 | `oa2.json` |
+3.3 Atualização 2026 — OpenAlex, 18/09/2026
+Arquivo: `execucao_real/openalex_2026_update.json`. Candidatos identificados: Lorteau &
+Sarro (2026), Schrepel (2026) e Fruehwald (2026). Lorteau & Sarro e Schrepel foram
+mantidos como literatura contextual por paywall/ausência de texto completo recuperado;
+Fruehwald ficou fora do corpus por tipo documental (preprint SSRN).
+3.4 Fontes não executadas integralmente
+SciELO teve tentativa bloqueada por anti-bot; Educ@ e Google Acadêmico foram acessados
+apenas de modo exploratório por índice web; Scopus, Web of Science e Portal CAPES não
+foram executados por ausência de credenciais institucionais. Nenhum número dessas fontes
+foi usado como denominador final.
+4. Razões de exclusão registradas
+| Registro | Decisão final | Código | Razão | |---|---|---|---| | A01 | Excluído | E2 | Foco
+educacional insuficientemente central para o corpus final. | | B02 | Excluído | E4 |
+Introdução/editorial sem método próprio compatível. | | N03 | Excluído | E4 | Ausência de
+método próprio/compatível com critérios finais. | | N12 | Excluído | E4 | Estratégias gerais sem
+método próprio/compatível para o corpus final. | | C07 | Excluído/não analisável | E6 | Texto
+completo não recuperado por rota legítima; subscription/paywall. | | N06 | Excluído/não
+analisável | E6 | Texto completo não recuperado por rota legítima; paywall. | | N09 |
+Excluído/não analisável | E6 | Texto completo não recuperado por rota legítima; paywall. | |
+N10 | Excluído/não analisável | E6 | Texto completo não recuperado por rota legítima; sem
+PDF direto confiável. | | N16 | Excluído/não analisável | E6 | Texto completo não recuperado
+por rota legítima; paywall. |
+5. Concordância RH1/RH2
+
+A série humana documentada de 19/09/2026 é a documentação vigente para o manuscrito
+v49. Ver `ERRATA_RH2_KAPPA_R522_v49.md`.
+| | RH2 incluir | RH2 excluir | Total RH1 | |---|---:|---:|---:| | RH1 incluir | 21 | 0 | 21 | | RH1
+excluir | 0 | 9 | 9 | | Total RH2 | 21 | 9 | 30 |
+Po=1,000; Pe=0,580; κ=1,000. Interpretação: concordância perfeita entre registros humanos
+documentados; não implica validade perfeita das decisões.
+6. Corpus final v49
+O corpus analítico final permanece em **n = 21**, conforme manuscrito v49. As frequências
+v49 são:
+- D1 Marcos normativos: 20/21 = 95,2%. - D2 Comparação internacional: 11/21 = 52,4%. D3 Letramento/competências: 11/21 = 52,4%. - D4 Ética e responsabilidade: 16/21 = 76,2%.
+- D5 Abordagens pedagógicas (IA como método): 9/21 = 42,9%. - D6 Equidade/Acesso: 8/21
+= 38,1%. - E1 Fundamentos éticos: 20/21 = 95,2%. - E2 Transparência/explicabilidade: 15/21
+= 71,4%. - E3 Proteção de dados/privacidade: 12/21 = 57,1%. - E4 Competências
+humanísticas: 18/21 = 85,7%.
+7. Pendências antes de depósito externo
+1. Depositar este suplemento, a matriz `.xlsx`, o log e os instrumentos RH1/RH2 em
+repositório persistente (OSF/Zenodo ou equivalente). 2. Inserir DOI/URL persistente apenas
+após o depósito real. 3. Manter todas as versões antigas com status histórico, mas usar a errata
+v49 para orientar a leitura do pacote atual.
+
+

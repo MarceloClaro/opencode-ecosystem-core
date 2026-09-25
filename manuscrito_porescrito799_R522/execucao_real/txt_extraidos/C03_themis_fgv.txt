@@ -1,0 +1,823 @@
+17
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+INTELIGÊNCIA ARTIFICIAL GENERATIVA NA
+EDUCAÇÃO JUDICIAL: DESAFIOS E BOAS PRÁTICAS 
+GENERATIVE ARTIFICIAL INTELLIGENCE IN LEGAL 
+EDUCATION: CHALLENGES AND BEST PRACTICES
+Clio Nudel Radomysler
+Doutoranda e Mestra em Direito Constitucional pela 
+Faculdade de Direito da Universidade de São Paulo 
+(FDUSP), onde também se graduou em Direito. Pes­
+quisadora visitante da Columbia Law School durante 
+o ano de 2022-2023, como parte do programa de dou­
+torado na FDUSP. Em 2014, recebeu o Certificat de 
+Sciences Sociales et Humaines mention cum Laude do 
+Institut dÉtudes Politiques de Paris (Science Po Paris) 
+após programa de intercâmbio anual. Atualmente é 
+líder de projetos e pesquisadora do Centro de Ensino 
+e Pesquisa em Inovação (CEPI) da FGV DIREITO SP 
+e coordenadora do Núcleo de Direito Discriminação e 
+Diversidade (DDD) e do Laboratório de Docência em 
+Direitos Humanos (LabDoc) da Faculdade de Direito 
+da USP. Professora do Programa de Pós Graduação 
+Lato Sensu da FGV Direito SP desde 2022. Desenvolve 
+pesquisas e projetos nas áreas de: ensino jurídico e 
+metodologias ativas; inovação e profissões jurídicas; 
+acesso à justiça e direito da antidiscriminação; media­
+ção de conflitos e comunicação não violenta; e direitos 
+humanos e novas tecnologias.
+E-mail: clio.radomysler@fgv.br 
+Carla Renata Barbosa Araujo
+Advogada. Professora. Mestranda em Processo e 
+Direito ao Desenvolvimento (UniChristus). Espe­
+cialista em Direito e Processo do Trabalho (2016). 
+Graduada em Direito (2015). Pesquisadora Visitante 
+do Centro de Ensino, Pesquisa e Inovação (CEPI) 
+da Fundação Getúlio Vargas - FGV/SP. Monitora da 
+
+18
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+disciplina Perspectivas Jurídicas sobre IA e Saúde na 
+Fundação Getúlio Vargas - FGV/SP.
+E-mail: carlaaraujo28@icloud.com 
+Enya Carolina Silva da Costa
+Mestranda em Direito do Estado e Bacharela em 
+Direito (2020) pela Universidade de São Paulo (USP). 
+Licence en Droit na Université Jean Moulin Lyon III, 
+através do programa Partenariat International Triangu­
+laire dEnseignement Supérieur (PITES). Pesquisadora 
+do Centro de Ensino e Pesquisa em Inovação (CEPI) 
+da FGV Direito SP. Cofundadora e coordenadora do 
+grupo de pesquisa Observatório do Direito à Educa­
+ção e da atividade de extensão Clínica de Direitos da 
+Criança e do Adolescente da Faculdade de Direito da 
+USP (FDUSP). Integrou o Núcleo Direito, Discrimi­
+nação e Diversidade (DDD). Monitora das disciplinas 
+Direito e Discriminação, Direito e Equidade de Gênero 
+e Teoria Geral do Estado I e II, todas ministradas na 
+Universidade de São Paulo. Desenvolve pesquisas e 
+atividades de ensino nas áreas de Direito Constitu­
+cional, Direito à Educação, Acesso à Justiça, Direito e 
+Discriminação, Ensino Jurídico e Direitos Humanos.
+E-mail: enya.costa@fgv.br 
+Maurício Buosi Lemes
+Doutorando vinculado à FGV Direito SP, com Bolsa 
+Mario Henrique Simonsen de Ensino e Pesquisa e da 
+FAPESP. Atualmente realiza estágio de pesquisa na T. 
+Denny Sanford School of Social and Family Dynamics 
+da Arizona State University.
+E-mail: mauricio.lemes@alumni.usp.br 
+Tatiana Sansone Soster
+Doutora em Educação Currículo na linha de pesquisa 
+de Novas Tecnologias na Educação pela PUC-SP com 
+estágio na Graduate School of Education da Stanford 
+University. Mestre em Administração de Empresas 
+
+19
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+com ênfase em Administração, Análise e Tecnologia da 
+Informação pela FGV-EAESP. Especialista em Gestão 
+Empresarial (MBA) pela FGV-EBAPE. Bacharel em 
+Informática pela PUCRS.Organizadora do livro Ino­
+vação Acadêmica e Aprendizagem Ativa do Consórcio 
+STHEM Brasil.Experiência profissional nas áreas de 
+educação, tecnologia a gestão.Temas de interesse de 
+pesquisa e atuação profissional: educação, currículo, 
+estratégias ativas de ensino-aprendizagem, tecnologia 
+educacional, educação maker, inovação, IA generativa, 
+gestão: pública, estratégica, de processos, projetos, 
+riscos, TI.Coordenadora Acadêmica do Pós-ADM 
+da FGV Brasília e Professora da Graduação da Escola 
+de Políticas Públicas e Governo da Fundação Getulio 
+Vargas em Brasília (FGV EPPG).
+E-mail: tatiana.soster@fgv.br 
+Resumo
+A Inteligência Artificial Generativa (IAG) está transformando o ensino superior, 
+incluindo a educação judicial, ao impactar processos de aprendizagem e intera­
+ção em sala de aula. No entanto, essa incorporação tecnológica levanta desafios 
+éticos, jurídicos e pedagógicos que precisam ser abordados para garantir seu 
+uso responsável. Este artigo, fruto de pesquisa realizada pelo Centro de Ensino 
+e Pesquisa em Inovação (CEPI) da FGV Direito SP, visa identificar e analisar 
+esses desafios, bem como sistematizar boas práticas que possam ser adotadas por 
+instituições de ensino jurídico. Utilizando uma revisão bibliográfica nas bases 
+Web of Science e Google Scholar, a pesquisa mapeou as principais discussões aca­
+dêmicas sobre o tema no período de 2020 a 2024, com foco em IA Generativa e 
+suas aplicações. Os resultados destacam a existência de riscos como proteção de 
+dados, plágio, exclusão digital, dependência tecnológica, e a perda de controle 
+do processo educacional, bem como a importância de diretrizes claras para a 
+educação judicial, mudanças curriculares e formação docente e discente, pro­
+movendo um equilíbrio entre inovação e mitigação de riscos. Concluímos que 
+
+20
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+a adoção responsável dessas tecnologias pode trazer avanços significativos para 
+a formação jurídica, desde que acompanhada de uma estrutura institucional 
+ética e sólida. 
+Palavras-chave: Inteligência Artificial Generativa. Ensino Superior. Educação 
+Judicial. Desafios. Boas Práticas.
+Abstract
+Generative Artificial Intelligence (GAI) is transforming higher education, including 
+judicial education, by impacting learning processes and classroom interaction. 
+However, this technological incorporation raises ethical, legal, and pedagogical 
+challenges that must be addressed to ensure its responsible use. This article is a 
+result of research conducted by <omitted for peer review>, that aims to identify 
+and analyze these challenges, as well as to systematize best practices that can be 
+adopted by legal education institutions. Through a literature review in the Web of 
+Science and Google Scholar databases, the research mapped the main academic 
+discussions on the topic between 2020 and 2024, focusing on Generative AI and its 
+applications. The results highlight risks such as data protection, plagiarism, digital 
+exclusion, technological dependency, and loss of control over the educational pro­
+cess, as well as the importance of clear guidelines for judicial education, curricular 
+changes, and training for both faculty and students, promoting a balance between 
+innovation and risk mitigation. We conclude that the responsible adoption of these 
+technologies can bring significant advancements to legal education, provided it is 
+accompanied by a solid and ethical institutional framework. 
+Keywords: Generative Artificial Intelligence. Higher Education. Judicial Education. 
+Challenges. Best Practices.
+1 INTRODUÇÃO 
+A Inteligência Artificial (IA) tem se integrado de forma crescente ao 
+cotidiano das organizações jurídicas, levantando inúmeras questões relacionadas 
+
+21
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+à educação judicial. As dinâmicas de transformação do mercado advindas das 
+novas tecnologias como a IA exigem dos profissionais do Direito um conjunto 
+ampliado de habilidades (Silva et al., 2018). Além das competências jurídicas 
+tradicionais, torna-se cada vez mais importante que esses profissionais desen­
+volvam competências socioemocionais, de gestão e tecnológicas (CEPI, 2023). 
+Essas mudanças também demandam o reconhecimento da tecnologia 
+como novo campo de conhecimento jurídico. Exemplos dessa transformação 
+incluem a incorporação de disciplinas sobre direito digital, proteção de dados, 
+governança algorítmica, visual law e legal design em cursos de graduação e pós­
+-graduação (Radomysler et al, 2022). 
+Para além dessas mudanças, a Inteligência Artificial, especialmente a 
+Inteligência Artificial Generativa (IAG), tem impactado a própria concepção dos 
+processos de ensino-aprendizagem e das dinâmicas em sala de aula. A incorpo­
+ração de tecnologias de IAG no ensino superior tem transformado significativa­
+mente a forma como estudantes e educadores interagem com o conhecimento.
+Conforme descrito por Moya e Eaton (2023), a IAG é uma tecnologia que 
+aproveita modelos de aprendizado profundo para gerar conteúdo semelhante ao 
+humano em resposta a solicitações complexas e variadas. Esses modelos podem 
+interagir com seres humanos em tarefas de conversação e produzir textos que 
+se assemelham aos produzidos por humanos, exigindo um mínimo de esforço 
+da pessoa usuária. Segundo a UNESCO (2023), a IAG gera conteúdo automa­
+ticamente em resposta a comandos escritos em interfaces conversacionais de 
+linguagem natural, produzindo resultados em diferentes formatos, como textos, 
+imagens visuais, códigos, áudios ou até mesmo vídeos.
+A IAG oferece inúmeras possibilidades para a educação, desde a per­
+sonalização da aprendizagem e oferecimento de feedbacks aos estudantes em 
+tempo real até o apoio aos docentes no desenvolvimento de materiais didáticos 
+e planos de aula. Exemplos abrangem aprendizagem adaptativa, tutores inteli­
+gentes, ferramentas de diagnóstico, sistemas de recomendação, e identificação 
+de estilos de aprendizagem (Silva et.al., 2023). No entanto, a implementação 
+
+22
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+dessas tecnologias traz consigo uma série de desafios éticos, jurídicos e peda­
+gógicos que precisam ser cuidadosamente considerados, incluindo proteção de 
+dados, plágio, exclusão digital, dependência tecnológica, e a perda de controle 
+do processo educacional.
+Este artigo resulta de um projeto de pesquisa desenvolvido pelo Centro 
+de Ensino e Pesquisa em Inovação (CEPI) da FGV Direito SP, e tem como objetivo 
+explorar as implicações da IAG no ensino superior, buscando compreender como 
+essas tecnologias podem ser incorporadas de maneira ética e eficaz. Com foco 
+em uma revisão bibliográfica do tema, este artigo visa alcançar dois objetivos 
+específicos: (i) identificar os principais desafios éticos, jurídicos e pedagógicos 
+relacionados à incorporação de IAG no ensino superior, conforme apontado 
+pela literatura acadêmica analisada, e (ii) sistematizar boas práticas para que 
+instituições lidem com esses desafios. A partir dessas informações, o artigo 
+pretende contribuir para o delineamento de diretrizes para a educação judicial, 
+levando em consideração as especificidades dos cursos de Direito. 
+A revisão de literatura foi realizada por meio do mapeamento de refe­
+rências sobre IA no ensino superior, com foco em IAG, utilizando as bases Web 
+of Science e Google Scholar, e aplicando os seguintes termos de busca: “inteligên­
+cia artificial” AND “ensino superior”, “inteligência artificial generativa” AND 
+“ensino superior”, “chat gpt” AND “ensino superior”, em inglês e português.  A 
+filtragem inicial, a partir da leitura do título e resumo, selecionou 43 artigos 
+considerados como de alta relevância para os objetivos da pesquisa. Relatórios 
+recentes publicados por organizações internacionais e centros de pesquisa sobre 
+o tema também foram incluídos. 
+Reconhecemos que a pesquisa enfrenta limitações metodológicas, dentre 
+elas o uso de palavras-chave mais generalistas ao ensino superior e a limitação 
+temporal (2020-2024), o que pode não captar todos os debates ocorridos nos 
+últimos anos. A rápida evolução tecnológica representa um desafio adicional na 
+busca pelo estado da arte em um campo em constante transformação. 
+A investigação sobre o uso de IAG no ensino superior é de extrema 
+
+23
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+importância no contexto atual, em que a tecnologia está cada vez mais presente 
+na vida acadêmica. Compreender as implicações dessa integração tecnológica 
+permite que instituições de ensino se preparem melhor para os desafios e opor­
+tunidades que emergem. 
+No campo da educação judicial, a investigação acerca dos impactos, dos 
+desafios e das potencialidades relativas à adoção de novas tecnologias é ainda mais 
+relevante, tendo em vista que o diagnóstico da “crise do ensino jurídico” tem sido 
+mobilizado há algumas décadas para descrever o ensino oferecido pelos cursos de 
+Direito. Mendonça e Adaid (2018) apontam que a fragilidade da formação crítica 
+dos futuros profissionais do Direito é um aspecto bastante compartilhado nesse 
+campo de debate. 
+Para além da necessidade de superação desse estado por meio da articu­
+lação rigorosa da área do Direito com outros campos do saber, como a Filosofia, a 
+Sociologia, a Psicologia e a História (Mendonça e Adaid, 2018), é preciso conhecer 
+o modo como as novas tecnologias, e em especial a IAG, estão transformando a 
+educação judicial, a fim de se pensar em formas por meio das quais a formação 
+crítica esteja sempre no horizonte das instituições de ensino e dos processos de 
+ensino-aprendizagem. 
+Neste artigo, esperamos inspirar e orientar instituições acadêmicas e edu­
+cadores em cursos de Direito a adotarem práticas que potencializem os benefícios 
+dessas inovações, enquanto mitigam riscos e promovem um ambiente educacional 
+reflexivo, participativo e e equitativo.
+2 POTENCIALIDADES E APLICAÇÕES DA IA GENERATIVA NO ENSINO 
+SUPERIOR
+A personalização do aprendizado, a possibilidade de feedback em tempo 
+real e a acessibilidade são exemplos descritos pela literatura sobre potencialidades 
+advindas da incorporação da IAG no ensino superior. 
+A IAG tem a capacidade de analisar o desempenho dos alunos de forma 
+
+24
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+contínua, permitindo uma avaliação das áreas onde o estudante apresenta maior 
+dificuldade. Assim, é possível gerar relatórios automáticos e individualizados, 
+de forma que haja a possibilidade de os professores adaptarem suas estratégias 
+de ensino para atender às necessidades específicas de cada aluno, fornecendo 
+feedbacks e criando recursos educacionais inteligentes e individuais (Costa 
+Júnior et al., 2023).
+Os sistemas de IAG podem identificar padrões de comportamento e 
+prever dificuldades no acompanhamento acadêmico por parte dos alunos. Aguiar 
+(2023) menciona o exemplo da Universidade Estadual da Geórgia, localizada 
+em Atlanta, nos Estados Unidos, que implementou um sistema de análise pre­
+ditiva baseado em IA para identificar estudantes em risco de abandonar seus 
+estudos. O sistema analisa dados acadêmicos e comportamentais dos alunos, 
+como pontuações de testes e registros de frequência, fornecendo alertas que 
+permitem intervenções oportunas.
+Merece destaque também a possibilidade de personalização do conteúdo 
+educacional e do processo de aprendizagem através do uso de IAG (Silva et al., 
+2023). Isso porque, através da análise de dados sobre o desempenho e preferências 
+dos alunos, as plataformas de IAG podem sugerir materiais complementares, 
+ajustar a complexidade do conteúdo e até oferecer diferentes modos de apresen­
+tação de acordo com o estilo de aprendizado de cada aluno.
+Através do uso de IAG, é possível realizar uma abordagem mais direcio­
+nada e eficiente, além de promover o desenvolvimento acadêmico dos estudantes 
+em ritmo adequado às suas capacidades e necessidades. Para Educause (2024), o 
+suporte personalizado ao aluno inclui tutoria, tradução, aconselhamento acadê­
+mico/carreira, facilitação de processos administrativos, brainstorming, edição, 
+ferramentas de acessibilidade e tecnologia assistiva. 
+Assim, alguns autores confirmam que plataformas de IA podem analisar 
+o desempenho dos alunos em tempo real e o impacto das estratégias de ensino­
+-aprendizagem, identificar áreas de dificuldade e fornecer conteúdo educacional 
+personalizado, o que não apenas pode melhorar a retenção de conhecimento, 
+
+25
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+mas também aumentar o engajamento dos alunos, tornando o aprendizado mais 
+atraente e eficaz (Duque et al., 2023; Aguiar, 2023; Barbosa, 2023; Silva et al., 
+2023; Costa Júnior et al., 2023; Sousa e Fecchio, 2021; Rodrigues, 2023; Palma 
+Jara, 2023; Narciso et al., 2024; Moya e Eaton, 2023; Gallent Torres et al., 2023; 
+Iskender, 2023; Educause, 2024). 
+Ademais, as IAG também podem ser utilizada como fonte de melhora 
+e aprimoramento na questão da acessibilidade em ambientes de ensino superior, 
+na medida em que as ferramentas podem facilitar o processo de transmissão de 
+conhecimento para estudantes com deficiência. A exemplo disso, pode-se citar 
+os alunos com deficiências auditivas ou visuais, os quais podem se beneficiar de 
+sistemas de reconhecimento de fala e conversão de texto em áudio. 
+Esses sistemas, baseados em processamento de linguagem natural, 
+conseguem transcrever automaticamente as falas dos professores, tornando o 
+conteúdo mais acessível a todos. Além disso, a IAG pode traduzir conteúdo em 
+tempo real, permitindo a inclusão de estudantes que não dominam a língua de 
+instrução, ampliando as oportunidades de aprendizado.
+Ainda no contexto de acessibilidade, ferramentas de IAG podem gerar 
+resumos automáticos de textos longos, facilitando a compreensão para alunos 
+que enfrentam dificuldades com leitura ou que tenham menos tempo disponí­
+vel. Portanto, o uso dessas tecnologias pode ajudar a criar uma experiência de 
+aprendizado mais igualitária, minimizando as barreiras ao acesso ao conteúdo.
+A IAG também pode ser utilizada de forma a permitir uma análise mais 
+detalhada das respostas dos alunos em testes e atividades e criar novos modelos 
+de métodos avaliativos. Por exemplo, sistemas de correção automatizada podem 
+identificar não apenas se a resposta está correta, mas também os tipos de erros 
+comuns cometidos e sugerir áreas de foco para estudo. Oliveira e Lino (2023) e 
+Duque et al. (2023) sugerem que essa precisão da análise das respostas permite 
+que os professores ajustem a sua instrução e forneçam uma melhor orientação 
+para os alunos, possibilitando não apenas melhora a retenção de conhecimento, 
+mas também aumentando o engajamento dos alunos, tornando o aprendizado 
+
+26
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+mais eficiente.
+Para Rodrigues (2023), essas ferramentas também podem auxiliar o 
+professor na criação de conteúdos pedagógicos e apoio na planificação de aulas. 
+Desta forma, a IAG aplicada nas IES apresenta diversas oportunidades para as 
+práticas pedagógicas. Ao adotar essas tecnologias de maneira ética e responsável, 
+as instituições de ensino têm a chance de criar experiências de aprendizagem 
+mais personalizadas, inclusivas e eficazes.
+3 DESAFIOS ÉTICOS, JURÍDICOS E PEDAGÓGICOS EM DESTAQUE
+A adoção de tecnologias de IAG no ensino superior vem transformando 
+práticas de ensino-aprendizagem, mas também levanta uma série de desafios 
+éticos, jurídicos e pedagógicos. 
+Nesta seção, primeiramente serão exploradas as principais preocupações 
+éticas e jurídicas associadas à adoção dessas tecnologias. Identificamos na literatura 
+desafios relacionados à privacidade e segurança de dados, transparência, vieses 
+discriminatórios, desigualdades, plágio, integridade acadêmica e confiabilidade das 
+informações, que precisam ser enfrentadas para garantir que essas inovações não 
+prejudiquem os direitos dos estudantes e a integridade das instituições de ensino.
+Em seguida, apresentaremos as preocupações pedagógicas identificadas: 
+dependência excessiva de tecnologias de IA, a desvalorização do papel docente e 
+a precarização do trabalho docente, a limitação das interações humanas, a inefici­
+ência das práticas avaliativas tradicionais, a reprodução de vieses e estereótipos, a 
+perda de autonomia dos professores no processo educacional, a padronização das 
+práticas pedagógicas, a necessidade de alfabetização digital docente e discente, e 
+a desigualdade no acesso à tecnologia.
+I - Desafios éticos e jurídicos 
+Um dos principais desafios associados à utilização de IA nas Instituições 
+
+27
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+de Ensino Superior (IES) é a possibilidade de violação da privacidade dos alu­
+nos e a ausência de proteção de dados nos sistemas de IA utilizados. No âmbito 
+das IES, há coleta massiva de dados, muitas vezes sensíveis, como informações 
+pessoais, resultados acadêmicos, comportamentos online e até mesmo dados 
+biométricos. Essa coleta e tratamento das informações, se não realizados de 
+forma responsável, podem ser usados para fins não autorizados em detrimento 
+da observação de necessidades educacionais (Narciso et. al., 2024). Além disso, 
+no próprio uso individual, é possível que a comunidade acadêmica, na intera­
+ção com a tecnologia, insira informações privadas que podem gerar exposição 
+indevida e acarretar prejuízos, como o vazamento de dados sigilosos (Iskender, 
+2023; Michel-Villarreal et al, 2023; Costa Júnior et al., 2023; College Completion 
+Alliance, 2023).
+Há ainda o desafio relacionado à transparência no uso da IA, que se 
+reflete em duas perspectivas. A primeira diz respeito à falta de clareza sobre o 
+próprio funcionamento dos modelos de IA (Dergaa et al., 2023). As universidades 
+precisam garantir que os algoritmos utilizados sejam auditáveis e que possam 
+explicar como decisões e respostas foram formuladas (Nascimento et al., 2023; 
+Chen et al., 2023). A segunda forma de transparência envolve a clareza sobre o 
+uso de IA no processo de ensino-aprendizagem, tanto por parte da instituição 
+quanto por parte dos indivíduos que a compõem. Nesse sentido, é essencial 
+garantir a transparência para a comunidade acadêmica, informando de maneira 
+clara quando há o uso de IA, para evitar mal-entendidos e promover uma inte­
+ração ética e consciente (Chen et al., 2023). 
+Outro ponto sensível está relacionado ao risco de vieses e discriminação 
+que precisa ser considerado no desenvolvimento e implementação de soluções 
+de IA para garantir a justiça e a equidade no processo de ensino-aprendizagem 
+(Michel-Villarreal et al., 2023; Iskender, 2023). Tais elementos discriminatórios 
+podem ocorrer através da geração de conteúdo tendencioso, prejudicial ou 
+impreciso, devido a preconceitos nos dados de treinamento, ao design algorítmico 
+inadequado ou até mesmo devido ao contexto social para o qual a tecnologia 
+
+28
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+foi criada (Ilieva et al, 2023).  
+Esse cenário leva a outro desafio retratado pela literatura que é o risco 
+de ampliação de desigualdades e da exclusão digital. Entende-se que a IA tem o 
+potencial de acentuar desigualdades pré-existentes, tanto entre países, quanto 
+dentro das instituições, devido ao acesso desigual a recursos e às tecnologias 
+(Barbosa, 2023). Além disso, a incapacidade dos sistemas de IA de entender as 
+necessidades específicas de estudantes de grupos minoritários ou com deficiên­
+cias físicas, pode aprofundar as desigualdades e gerar situações discriminatórias 
+(Dergaa et al, 2023; Barbosa, 2023; Chen et al, 2023).  
+A análise dos artigos revisados destaca ainda a questão do plágio e da 
+integridade acadêmica como central no debate sobre a aplicação da IA generativa 
+no ensino. Ferramentas como o ChatGPT podem gerar textos que escapam dos 
+sistemas de verificação de autoria tradicionais (Chaudhry et al., 2023), levan­
+tando preocupações sobre a autenticidade das produções acadêmicas (Dergaa 
+et al., 2023; Chaudhry et al., 2023). Os conteúdos gerados por IAG, por suas 
+características de desenvolvimento, podem não referenciar corretamente as 
+fontes originais (Perkins, 2023) e, se usados de forma não declarada, gera dúvi­
+das sobre os limites entre o que foi produzido pela máquina e pelo ser humano, 
+trazendo implicações para a propriedade intelectual e os direitos autorais, que 
+muitas vezes não são avaliados por discentes e docentes durante o seu uso (Moya 
+e Eaton, 2023). 
+Por fim, um último desafio explorado na literatura diz respeito à con­
+fiabilidade das informações geradas pela IA. Embora os modelos avançados de 
+linguagem sejam poderosos, eles não estão imunes a erros e podem, inclusive, 
+gerar informações e produzir respostas imprecisas, fictícias ou de baixa qualidade 
+(Ilieva et al., 2023; Currie, 2023; Iskender, 2023; Moya & Eaton, 2023), deman­
+dando uma verificação extensiva dos fatos. A disseminação de deepfakes e de 
+conteúdo fabricado é um risco que afeta diretamente a integridade acadêmica. 
+É necessário que estudantes e instituições estejam cientes dessas limitações e 
+adotem protocolos de verificação e validação das informações produzidas pela 
+
+29
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+IA (Currie, 2023).
+II - Desafios pedagógicos 
+Um dos principais desafios pedagógicos identificados é a dependência 
+excessiva de tecnologias de IA, o que pode prejudicar o desenvolvimento de habili­
+dades fundamentais (Vieira et al., 2023; Chan & Colloton, 2024) para o profissional 
+do século XXI, tais como criatividade, criticidade, capacidade argumentativa e 
+de pesquisa.  No caso específico dos docentes, essa dependência, pode reduzir 
+a qualidade de suas interações com os alunos (Farrokhnia et al., 2023). Para os 
+estudantes, Aguiar (2023) entende que o uso excessivo de tecnologia pode levar à 
+perda de habilidades sociais e interpessoais, como a capacidade de se comunicar 
+efetivamente e trabalhar em equipe.
+Além disso, a introdução de tecnologias de IA no contexto educacional 
+também levanta preocupações sobre a precarização do trabalho docente (Barbosa, 
+2023). A falsa percepção de que atividades como a elaboração e correção de provas, 
+a criação de planos de ensino e materiais didáticos, e a interação direta com os 
+alunos, por meio de tutorias e programas inteligentes, podem ser automatizadas, 
+pode levar à interpretação equivocada de que o papel do professor é secundário, 
+resultando na desvalorização do docente no processo educativo (Silva et al, 2023). 
+A possível substituição do professor por máquinas comprometeria a 
+conexão emocional e o contato humano, ambos essenciais para o processo edu­
+cativo. Embora a interação com professores e colegas seja fundamental para o 
+desenvolvimento cognitivo e socioemocional dos estudantes, a IA pode limitar 
+ou mesmo substituir essa interação (Aguiar, 2023). Para Costa Júnior et.al. (2023, 
+p. 261), “outro aspecto ético relevante diz respeito ao papel do professor e à sua 
+substituição pela IA. É preciso considerar a importância do contato humano na 
+educação e garantir que a IA seja vista como uma ferramenta complementar e não 
+como uma substituta do professor”.
+Uma preocupação adicional diz respeito às práticas avaliativas ineficientes 
+
+30
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+frente à possibilidade de burla e utilização da IA para responder questões de prova, 
+produzir trabalho, entre outros. É, portanto, necessário refletir sobre o que se avalia 
+e como se avalia, mudando a dependência da escrita para avaliações mais criativas 
+que exigem que os alunos demonstrem a aplicação do conhecimento em vez de 
+simplesmente a capacidade de produzir informações (Davis, 2023). 
+A IA pode gerar respostas tendenciosas e reproduzir padrões de pen­
+samento existentes, refletindo e amplificando preconceitos presentes nos dados 
+de treinamento. Isso é particularmente preocupante em contextos educativos, 
+em que a diversidade de perspectivas é crucial para o desenvolvimento de um 
+pensamento crítico e inclusivo. Assim, a dependência de algoritmos que podem 
+perpetuar estereótipos e vieses pode limitar a exposição dos alunos a uma varie­
+dade de opiniões e experiências, comprometendo a qualidade do aprendizado e 
+gerando uma uniformização de pensamentos e entendimentos sobre determinados 
+assuntos, sem promover uma dialética adequada.
+A implementação de IA nas instituições de ensino superior pode levar à 
+perda do controle do processo educacional por parte dos professores (Terwiesch, 
+2023, apud Rebelo, 2023). Sistemas automatizados podem ditar o ritmo e a dire­
+ção do ensino, reduzindo a autonomia dos docentes para adaptar o conteúdo e os 
+métodos de ensino às necessidades específicas de seus alunos, o que pode resultar 
+em um ensino menos personalizado, bem como uma diminuição da capacidade 
+dos professores de inovar e experimentar novas abordagens pedagógicas. Costa 
+Júnior et. al. (2020) reforçam que o uso de IA pode resultar em uma maior padro­
+nização das práticas pedagógicas, o que pode restringir a criatividade e a inovação.
+Outro desafio relevante, diz respeito à literacia da tecnologia IA no con­
+texto da sala de aula, conforme apontado por Duque et al. (2023, p. 4),
+“A mudança na dinâmica da sala de aula impulsionada pela IA pode 
+apresentar desafios tanto para alunos quanto para professores. Alunos 
+podem enfrentar uma curva de aprendizado ao se adaptarem a novas 
+tecnologias e métodos de ensino, e os professores podem precisar de 
+treinamento e apoio adicionais para aproveitar ao máximo a IA em 
+
+31
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+sua prática pedagógica.” (Duque et al., 2023, p. 4).
+As universidades enfrentam o desafio da alfabetização digital docente 
+e discente para um mundo em que o trabalho será cada vez mais híbrido entre 
+humanos e IA (Davis, 2023). Finalmente, um último ponto importante levantado 
+pela literatura é questão da desigualdade no acesso à tecnologia. Segundo a Unesco 
+(2023), “Em regiões onde o acesso à tecnologia é limitado, a adoção da IA pode 
+acentuar as desigualdades educacionais.” Mesmo com acesso à tecnologia, a uti­
+lização de uma ferramenta gratuita em comparação com uma paga poderá criar 
+uma disparidade nas oportunidades de aprendizagem, no desenvolvimento de 
+habilidades e na qualidade das produções acadêmicas, beneficiando injustamente 
+alguns alunos em detrimento de outros.
+4 BOAS PRÁTICAS PARA UM USO EFETIVO E RESPONSÁVEL 
+A aplicação de inteligência artificial generativa (IAG) nas instituições de 
+ensino superior tem sido amplamente discutida. Diferente de simples usos, que se 
+referem à aplicação técnica da IA sem necessariamente garantir uma efetividade 
+no aprendizado, as boas práticas se destacam por serem estratégias institucionais 
+que trazem benefícios ao processo educacional, respeitando questões éticas e 
+promovendo um ensino de maior qualidade. 
+As boas práticas institucionais mais recorrentes mencionadas na revisão 
+de literatura consistem na definição de políticas institucionais e formas de gestão 
+da IA, o letramento envolvendo a IA nos currículos acadêmicos, e a formação e 
+capacitação docente. 
+Um aspecto bastante ressaltado pela literatura analisada consiste na 
+necessidade de definição de políticas, diretrizes e regulamentos claros sobre o 
+uso da IA no ensino superior, além da adoção de medidas para mitigar possíveis 
+efeitos e consequências adversas do uso de IA. Alguns exemplos de tais medidas 
+consistem na supervisão e auditoria adequadas de sistemas de IA, na diversificação 
+
+32
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+de fornecedores de tecnologia, e na promoção da transparência, segurança e pri­
+vacidade na coleta e uso de dados, o que inclui a avaliação rigorosa de como a 
+tecnologia afeta a equidade, a inclusão e a qualidade da educação (Duque et al., 
+2023; Costa Júnior et al., 2023; Palma Jara, 2023; Rebelo, 2023; Gallent Torres et 
+al., 2023; Unesco, 2023).  
+A clareza das políticas institucionais das IES para o uso de IA no ensino 
+superior permite explicitar aos alunos como as ferramentas de inteligência artificial 
+podem ser usadas, determinando os limites em relação à integridade acadêmica, 
+má conduta acadêmica e plágio (Perkins, 2023). Assim, há a necessidade de 
+desenvolvimento de princípios éticos visando orientar a concepção e aplicação 
+de tecnologias educacionais baseadas em IA. Estes princípios procuram assegurar 
+que o desenvolvimento e uso da IA na educação sejam conduzidos de maneira 
+responsável, transparente e focada no bem-estar dos alunos (Narciso et.al., 2024). 
+Chan (2023), por exemplo, traz algumas implicações e sugestões para 
+a política de IA de ensino e aprendizagem universitária: a) formação de alunos 
+e professores sobre a utilização e integração eficazes de tecnologias generativas 
+de IA nas práticas de ensino e aprendizagem; b) desenvolvimento de políticas 
+e diretrizes para uso ético e gestão de risco associada a tecnologias generativas 
+de IA; c) incorporação de tecnologias de IA como ferramentas complementares 
+para ajudar professores e alunos, e não como substitutos da interação humana; 
+d) incentivo à utilização de tecnologias de IA para melhorar competências espe­
+cíficas, como a competência digital e a gestão do tempo, garantindo ao mesmo 
+tempo que os alunos continuam a desenvolver competências vitais; e) promoção 
+de um ambiente transparente em que estudantes e professores possam discutir 
+abertamente os benefícios e preocupações associados à utilização de tecnologias 
+de IA no ensino superior; f) garantia de privacidade e segurança dos dados no 
+uso de tecnologias de IA.   
+A literatura aponta a necessidade de ajustar os currículos, a fim de aumen­
+tar a capacidade dos alunos de avaliar adequadamente e fazer uso das novas 
+tecnologias, estabelecendo oportunidades para que estudantes possam adquirir 
+
+33
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+conhecimentos sobre IA, por meio de currículos e programas de desenvolvimento 
+profissional que incorporem tanto a IA quanto os princípios éticos relacionados 
+a ela (Farrokhnia et al., 2023).  
+Rebelo (2023), por exemplo, sugere alguns conteúdos de uma unidade 
+curricular voltada à IA, como: regras sobre as condições em que este instrumento 
+poderá ou não ser utilizado, conscientização em relação aos potenciais erros 
+das inteligência artificial, princípios de honestidade e ética na utilização dessas 
+tecnologias,  orientações relativas às formas de citação e creditação de resultados 
+obtidos através dessas ferramentas, utilização como ferramenta de aprendizagem 
+e não apenas obtenção de conteúdo, e os riscos da dependência.   
+Assim, esta nova unidade curricular deve preparar os alunos para compre­
+enderem, aplicarem e analisarem criticamente os conceitos e técnicas relacionados 
+com a inteligência artificial, além de desenvolver nos estudantes capacidades e 
+competências de seleção de informação, análise crítica, consciência ética/moral, 
+pensamento criativo, atitudes colaborativas, e responsabilidade e honestidade nos 
+processos de aprendizagem.  
+A implementação de IA no ensino superior exige, ainda, a capacitação e 
+o treinamento de professores e educadores, o que deve incluir a compreensão dos 
+princípios básicos da inteligência artificial, bem como as habilidades necessárias para 
+selecionar, adaptar e avaliar as ferramentas de IA adequadas para cada situação de 
+aprendizado. Além disso, os professores devem ser capazes de interpretar e analisar 
+dados gerados pela IA para melhorar o processo de ensino (Costa Júnior et.al.,2023; 
+Davis, 2023). Infelizmente, os fundos para desenvolvimento do corpo docente 
+são frequentemente escassos em instituições menores, e estas podem encontrar 
+dificuldades em desenvolver ou acessar esse tipo de treinamento (Davis, 2023).   
+A complexidade da aplicação educacional dos modelos de IA exige dos 
+docentes conhecimentos essenciais em prompting – ato de formular instruções, 
+perguntas ou estímulos a um sistema de IAG para que ele gere uma resposta 
+ou realize uma tarefa específica - além do letramento apropriado para uso da 
+IA com fins educacionais (Ricieri, Farias, Barreto, Souza, 2024).  Assim, tendo 
+
+34
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+em vista que prompts são determinantes para a obtenção de respostas corretas, 
+torna-se essencial a formação e capacitação para a construção de um “bom” 
+prompt, que deve ser conciso (com instruções breves e claras), lógico (com 
+instruções estruturadas e coerentes), explícito (com instruções explícitas sobre 
+a forma de apresentar os resultados), adaptativo (com instruções equilibradas 
+entre a criatividade e a especificidade) e reflexivo, uma vez que a melhoria dos 
+prompts deve resultar da realização de múltiplos testes que avaliem a sua eficácia 
+em assuntos conhecidos, relativamente ao rigor, coerência e utilidade das res­
+postas no contexto das instruções dadas (College Completion Alliance, 2023). 
+Os programas profissionais de professores devem promover a atitude 
+de aprender tudo, em vez da atitude de saber tudo, para melhorar as competên­
+cias de facilitação e o ensino interdisciplinar, fomentando nos currículos dos 
+professores habilidades como liderança, alfabetização em IA e facilitação em 
+disciplinas multidisciplinares (Chiu, 2023).
+Por fim, é fundamental que as instituições de ensino continuem a explorar 
+e pesquisar o impacto da IA no ambiente educacional, adaptando suas estratégias 
+conforme novas informações e tecnologias emergem. Isso envolve manter um 
+diálogo constante entre educadores, alunos, desenvolvedores de tecnologia e 
+reguladores para garantir que a IA seja utilizada de maneira que maximize seu 
+potencial positivo sem comprometer os valores educacionais ou éticos.
+5 CONSIDERAÇÕES FINAIS
+Este artigo buscou explorar as implicações da incorporação de IAG no 
+ensino superior, identificando os principais desafios éticos, jurídicos e pedagógi­
+cos relacionados e sistematizando boas práticas para que instituições lidem com 
+esses desafios a nível institucional e em sala de aula. A metodologia empregada 
+foi a revisão bibliográfica realizada por meio do mapeamento de referências 
+sobre IA no ensino superior, com foco em IA Generativa, utilizando as bases 
+Web of Science e Google Scholar. 
+Como principais resultados do estudo, destacamos, no âmbito dos 
+
+35
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+desafios éticos e jurídicos, as preocupações relativas à violação da privacidade 
+dos alunos, à ausência de proteção de dados nos sistemas de IA, à falta de trans­
+parência quanto aos modelos de funcionamento de IA e  ao seu uso no processo 
+de ensino-aprendizagem, aos riscos de vieses discriminatórios, à ampliação das 
+desigualdades e da exclusão digital, à questão do plágio e da integridade acadê­
+mica, além da confiabilidade das informações geradas por IA.  
+Como desafios pedagógicos, percebemos que a literatura analisada 
+enfatizou a dependência excessiva de tecnologias de IA, que pode prejudicar 
+o desenvolvimento de habilidades fundamentais, a precarização do trabalho 
+docente, o comprometimento da conexão emocional e do contato humano no 
+processo educativo, as práticas avaliativas ineficientes, a geração de respostas 
+tendenciosas e preconceituosas, a perda de controle do processo educativo pelos 
+professores, a formação adequada de professores e alunos, a desigualdade de 
+acesso à tecnologia, e o acompanhamento dos impactos produzidos pela IA na 
+educação. 
+As boas práticas identificadas referem-se à definição de políticas institu­
+cionais e formas de gestão da IA na educação superior, o letramento envolvendo a 
+IA nos currículos acadêmicos, e a formação e capacitação docente. Essas práticas 
+são fundamentais para que a IAG possa aprimorar e facilitar a aprendizagem, 
+proporcionando suporte e feedbacks personalizados conforme as necessidades e 
+especificidades de alunos e professores. Além disso, podem promover a melhoria 
+da acessibilidade dos alunos a determinados conteúdos, o redesenho de modelos 
+avaliativos mais adequados à era digital, e a melhor gestão do tempo, a fim de 
+concentrar a atenção do professor na interação direta com os alunos.
+Entendemos que a revisão bibliográfica que mapeou estes desafios éticos, 
+jurídicos e pedagógicos e identificou exemplos de boas práticas relativas à incor­
+poração de IA no ensino superior tem um caráter mais generalista e exploratório. 
+A partir deste estudo, novas pesquisas são necessárias, a fim de compreender, em 
+maior profundidade, as características dos desafios e das boas práticas, considerando 
+as singularidades relativas ao contexto da educação judicial, e às especificidades 
+
+36
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+dos cursos em que a IA for empregada.  
+REFERÊNCIAS
+AGUIAR, J. J. B. Inteligência artificial e tecnologias digitais na educação: opor­
+tunidades e desafios. Open Minds International Journal. São Paulo, v. 4, n. 2, 
+2023. DOI: https://doi.org/10.47180/omij.v4i2.215
+BARBOSA, C. R. de A. C. Transformações no ensino-aprendizagem com o uso 
+da inteligência artificial: revisão sistemática da literatura. RECIMA21 - Revista 
+Científica Multidisciplinar, v. 4, n. 5, p. e453103, 2023. DOI: 10.47820/recima21.
+v4i5.3103. Disponível em: https://recima21.com.br/index.php/recima21/article/
+view/3103. Acesso em: 24 abr. 2024.
+CEPI FGV DIREITO SP. Formando a advocacia do presente e do futuro: 
+habilidades e perspectivas de atuação: destaques e tendências. São Paulo: 
+FGV Direito SP, 2023. p. 43-64. Disponível em: https://repositorio.fgv.br/
+items/922b4466-d1ce-46a2-a5d2-d7139fc20756
+CHAN, C.K.Y. A comprehensive AI policy education framework for univer­
+sity teaching and learning. International Journal of Educational Technology 
+in Higher Education. 20, 38, 2023. Disponível em: https://doi.org/10.1186/
+s41239-023-00408-3  
+CHAN, C. K. Y.; COLLOTON, C. Generative AI in Higher Educa­
+tion: The ChatGPT Effect. Routledge, 2024. Disponível em: https://
+www.taylorfrancis.com/books/oa-mono/10.4324/9781003459026/
+generative-ai-higher-education-cecilia-ka-yuk-chan-tom-colloton. 
+CHAUDHRY, I.; SARWARY, S.; EL-REFAE, G.; CHABCHOUB, H. Time to 
+revisit existing student’s performance evaluation approach in higher education 
+sector in a new era of ChatGPT — a case study. Cogent Education, 2023. DOI:
+
+37
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+10.1080/2331186X.2023.2210461
+CHEN, Y., JENSEN, S., ALBERT, L.J. ET AL. Artificial Intelligence (AI) Stu­
+dent Assistants in the Classroom: Designing Chatbots to Support Student 
+Success. Inf Syst Front, v. 25, p. 161–182, 2023. DOI: https://doi.org/10.1007/
+s10796-022-10291-4 
+CHIU, T. K. F. The impact of Generative AI (GenAI) on practices, policies and 
+research direction in education: a case of ChatGPT and Midjourney. Interactive 
+Learning Environments, 2023. DOI: 10.1080/10494820.2023.2253861 
+COLLEGE COMPLETION ALLIANCE. Attainment with AI: making a real 
+difference in college completion with artificial intelligence. [S.l.]: College Com­
+pletion Alliance, 2023. Disponível em: https://eric.ed.gov/?id=ED633822. Acesso 
+em: 05 jun. 2024.
+COSTA JÚNIOR, J. F. et. al. A inteligência artificial como ferramenta de apoio 
+no ensino superior. REBENA - Revista Brasileira de Ensino e Aprendizagem, v. 6, 
+p. 246–269, 2023. Disponível em: https://rebena.emnuvens.com.br/revista/index
+CURRIE, G. M. cademic integrity and artificial intelligence: is ChatGPT hype, 
+hero or heresy? Seminars in Nuclear Medicine, v. 53, n. 5, p. 719-730, 2023. DOI: 
+10.1053/j.semnuclmed.2023.04.008
+DAVIS, Van L. WCET Primer for Higher Education: General Brief on Generative 
+AI. WCET, março 2023. Disponível em: https://eric.ed.gov/?q=source%3a%22
+WICHE+Cooperative+for+Educational+Technologies%22&ff1=subTechnolog
+y+Uses+in+Education&id=ED631008. Acesso em: 16 jun. 2024.
+DERGAA, I.; CHAMARI, K.; ZMIJEWSKI, P.; BEN SAAD, H. From human 
+writing to artificial intelligence generated text: examining the prospects and 
+potential threats of ChatGPT in academic writing. Biology of Sport, v. 40, n. 2, 
+
+38
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+p. 615-622, 2023. DOI: https://doi.org/10.5114/biolsport.2023.125623
+DUQUE, R. C. S. et al. Inteligência artificial e a transformação do ensino supe­
+rior: um olhar para o futuro. IOSR Journal Of Humanities And Social Science, 
+v. 28, n. 9, série 6, setembro, 2023. DOI: 10.9790/0837-2809060106.
+EDUCAUSE. 2024 EDUCAUSE AI landscape study: introduction and key 
+findings. 2024. Disponível em: https://www.educause.edu/ecar/research­
+-publications/2024/2024-educause-ai-landscape-study/introduction-and-key­
+-findings. Acesso em: 04 set. 2024.
+FARROKHNIA, M.; BANIHASHEM, S. K.; NOROOZI, O.; WALS, A. A SWOT 
+analysis of ChatGPT: implications for educational practice and research. Inno­
+vations in Education and Teaching International, v. 61, n. 3, p. 460–474, 2023. 
+DOI: https://doi.org/10.1080/14703297.2023.2195846
+ILIEVA, G.; YANKOVA, T.; KLISAROVA-BELCHEVA, S.; DIMITROV, A.; BRA­
+TKOV, M.; ANGELOV, D. Effects of generative chatbots in higher education. 
+Information, v. 14, p. 492, 2023. DOI: https://doi.org/10.3390/info14090492
+ISKENDER, A. Holy or unholy? Interview with OpenAI’s ChatGPT. European 
+Journal of Tourism Research, v. 34, p. 3414, 2023.
+GALLENT TORRES, C.; ZAPATA GONZÁLEZ, A.; ORTEGO HERNANDO, J. 
+L. El impacto de la inteligencia artificial generativa en educación superior: una 
+mirada desde la ética y la integridad académica . RELIEVE - Revista Electró­
+nica de Investigación y Evaluación Educativa, [S. l.], v. 29, n. 2, 2023. DOI: 
+10.30827/relieve.v29i2.29134. Disponível em: https://revistaseug.ugr.es/index.
+php/RELIEVE/article/view/29134. Acesso em: 6 jul. 2024.
+MENDOÇA, S.; ADAID, F. A. P. Tendências teóricas sobre o Ensino Jurídico 
+entre 2004 – 2014: busca pela formação crítica. Revista Direito GV, vol. 14, n. 
+
+39
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+3, set./dez. 2018. DOI: https://doi.org/10.1590/2317-6172201831 
+MICHEL-VILLARREAL, R.; VILALTA-PERDOMO, E.; SALINAS-NAVARRO, 
+D. E.; THIERRY-AGUILERA, R.; GERARDOU, F. S. Challenges and opportuni­
+ties of generative AI for higher education as explained by ChatGPT. Educ. Sci., 
+v. 13, p. 856, 2023. DOI: https://doi.org/10.3390/educsci13090856. Acesso em: 
+22 maio 2023.
+MOYA, B.; EATON, S. E. Examinando recomendaciones para el uso de la 
+inteligencia artificial generativa con integridad desde una lente de enseñanza 
+y aprendizaje. RELIEVE - Revista Electrónica de Investigación y Evaluación 
+Educativa, v. 29, n. 2, 2023. DOI: 10.30827/relieve.v29i2.29295. Disponível em: 
+https://revistaseug.ugr.es/index.php/RELIEVE/article/view/29295. Acesso em: 
+04 jul. 2024.
+NARCISO, R.; SILVA, J. G.; RODRIGUES, O. R.; SOUZA, A. M.; CRUZ, L. A. 
+X.; MORAIS, R. N. G. Transformação e desafios: a integração da inteligência 
+artificial no ensino superior. Revista Ibero-Americana de Humanidades, Ciên­
+cias e Educação, v. 10, n. 4, p. 445–457, 2024. DOI: 10.51891/rease.v10i4.13498. 
+Disponível em: https://periodicorease.pro.br/rease/article/view/13498. Acesso 
+em: 04 jul. 2024.
+NASCIMENTO, C. C. et al. Inteligência artificial no ensino superior: da transfor­
+mação digital aos desafios da contemporaneidade. In: ALBINO, J. P.; VALENTE, 
+V. C. P. N. (org.). Inteligência artificial e suas implicações interdisciplinares. Rio 
+de Janeiro: e-Publicar, 2023.
+OLIVEIRA, Lino; PINTO, Mário. A inteligência artificial na educação: ameaças 
+e oportunidades para o ensino-aprendizagem. Porto: Escola Superior de Media 
+Artes e Design, Politécnico do Porto, 2023. ISBN 978-989-35125-1-7. Disponível 
+em: http://hdl.handle.net/10400.22/22779.
+PALMA JARA, Mauricio. Innovación, inteligencia artificial y su utilidad para la 
+mejora del aprendizaje basado en evidencia. Cuidados de Enfermería y Edu­
+cación en Salud (Chile), v. 8, n. 1, p. 61-72, 2023. Disponível em: https://doi.
+
+40
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Clio Nudel Radomysler  |  Carla Renata Barbosa Araujo  |  Enya Carolina Silva da Costa
+Maurício Buosi Lemes  |  Tatiana Sansone Soster
+org/10.15443/ceyes.v8i1.2105. Acesso em: 03 jul. 2024.
+PERKINS, M. Academic integrity considerations of AI large language models 
+in the post-pandemic era. Journal of Educational Integrity, 2023. DOI: https://
+doi.org/10.1007/s40979-023-00124-6
+RADOMYSLER, Clio et al. Futuro do ensino superior: tendências, perspectivas 
+e questionamentos. São Paulo: FGV Direito SP, 2022. 126 p. Pesquisa Direito 
+GV. Disponível em: https://bibliotecadigital.fgv.br/dspace/handle/10438/32332. 
+Acesso em: 24 set. 2024.
+REBELO, E. M. Como lidar com o uso da inteligência artificial no Ensino Supe­
+rior? In: Congresso Nacional de Práticas Pedagógicas no Ensino Superior, 2023, 
+Universidade do Algarve. Anais[...] Algarve: Universidade do Porto, 2023. Dis­
+ponível em: https://repositorio-aberto.up.pt/bitstream/10216/158403/2/670343.
+pdf. Acesso em: 24 set. 2024.
+RICIERI, D. V.; FARIAS, A. M. G.; BARRETO, R. V. G.; SOUZA, F. R. Erros 
+comuns de docentes sem letramento em inteligência artificial: uma revisão 
+integrativa para o ensino superior. Peer Review, v. 6, n. 7, p. 1-10, 30 mar. 2024. 
+DOI: 10.53660/PRW-1986-3703. Acesso em: 01 jul. 2024.
+RODRIGUES, L. Pós-Humanismo e Educação: o potencial da inteligência arti­
+ficial na inclusão no ensino superior. Revista Da UI_IPSantarém, v. 11, n. 4, 
+p. 138–148, 2023. Disponível em: https://doi.org/10.25746/ruiips.v11.i4.35989. 
+Acesso em: 01 jul. 2024.
+SILVA, A. P. da et al. O futuro das profissões jurídicas: você está preparad@? 
+Sumário Executivo da Pesquisa Qualitativa “Tecnologia, Profissões e Ensino 
+Jurídico”. São Paulo: CEPI-FGV Direito SP, 2018.
+SILVA, K. R. et al. Inteligência artificial e seus impactos na educação: uma revisão 
+sistemática. RECIMA21 – Revista Científica Multidisciplinar, v. 4, n. 11, 2023. 
+
+41
+R. Themis, Fortaleza, v. 23, n. 1, p.17-41, jan./jun. 2025
+Inteligência Artificial Generativa na Educação Judicial: Desafios e Boas Práticas 
+DOI: https://doi.org/10.47820/recima21.v4i11.4353.
+SOUSA, Ana Clara Silva de; FECCHIO, Rafael Lipert. Chatbots no apoio à 
+educação superior: revisão de literatura. 2021. Disponível em: https://dspace.
+mackenzie.br/handle/10899/30969. Acesso em: 01 jul. 2024.
+UNESCO. Guidance for generative AI in education and research. Paris: United 
+Nations Educational, Scientific and Cultural Organization, 2023. ISBN 978-92-
+3-100612-8. Disponível em: https://doi.org/10.54675/EWZM9535. Acesso em: 
+04 jun. 2024.
+VIEIRA, A. L. F.; DE AMORIM, M. C. Z.; CUNHA, E. Proposta de avaliação 
+da percepção dos impactos da inteligência artificial generativa na educação 
+superior. In: Simpósio Brasileiro De Tecnologia Da Informação E Da Linguagem 
+Humana (STIL), 14., 2023, Belo Horizonte/MG. Anais [...] Porto Alegre: Socie­
+dade Brasileira de Computação, 2023. p. 403-407. DOI: https://doi.org/10.5753/
+stil.2023.234640.
+Submissão: 09.out.2024
+Aprovação: 20.jan.2025
