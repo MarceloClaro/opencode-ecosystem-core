@@ -25,7 +25,7 @@
 ## 📑 Índice
 
 - [O que é](#-o-que-é)
-- [🚀 Novidades — frentes R581 e R582](#-novidades--frentes-r581-e-r582)
+- [🚀 Novidades — frentes R581/R582, R-976 e R-205.v3](#-novidades--frentes-r581r582-r-976-e-r-205v3)
 - [⚡ Início rápido](#-início-rápido)
 - [🏗️ Camadas do ecossistema](#️-camadas-do-ecossistema)
   - [1. Agentes e orquestração](#1-agentes-e-orquestração)
@@ -39,6 +39,7 @@
 - [🔐 Segurança e limites](#-segurança-e-limites)
 - [📦 Instalação](#-instalação)
 - [📖 Documentação](#-documentação)
+  - [Frentes de produção e conteúdo versionado](#frentes-de-produção-e-conteúdo-versionado)
 - [🤝 Contribuindo](#-contribuindo)
 - [📜 Licença](#-licença)
 
@@ -61,6 +62,9 @@ Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC
 | 📽️ **MIRA** | Apresentações e slides com animação, QR codes e validação de terços |
 | 🗣️ **Simulação social** | MiroFish‑Offline no Core: perfis determinísticos, rounds de opinião, sentimento e banca editorial — anti‑overclaim R110 |
 | ⚖️🩺 **Jurídico & Clínico** | Apoio computacional auditável em domínios sensíveis; Médico Virtual Supremo v3.0 com `audit.status` fail‑closed e revisão humana obrigatória |
+| 📚 **Produção editorial** | Trilogia de alfabetização (5 volumes + VolumeProfissional + CadernoMotor, R200‑R211) com fontes licenciadas e rastreio integrado de progressão |
+| 🏆 **Estudo de raciocínio** | Benchmark pareado IMO 9×3 (R500‑R506), réplicas auditáveis e artigos ABNT/arXiv/arXiv‑PT |
+| 📁 **Evidência de pesquisa** | Pesquisa real R522 (IA Generativa no Direito): manuscritos v20→v49, execução (OpenAlex + PDFs) e pacote de depósito OSF/Zenodo |
 | 🌐 **Deploy estático** | GitHub Pages com verificação física (GET+Range, 404 real, marcador de conteúdo) |
 
 ---
@@ -80,6 +84,7 @@ Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC
 | 🩺 **Médico Virtual Supremo v3.0** | Skill "conselho‑longitudinal" do plugin exportado (`medicos/`, gpt‑6ceee9… v0.4.0): 7 referências instrucionais, `list_references()`/`load_reference()` fail‑closed e `audit.status` em toda resposta (23 testes, R-205.v3) |
 | 🧠 **Metacognição preenchida** | 51+ lições semânticas consultáveis no MetaBus (deploy/media/verification/registry/clinical) |
 | 🔧 **Fix crítico** | `EvolutionRegistry._load` tolerante por entrada: 1 entrada malformada não zera mais os **419 ciclos** |
+| 📦 **Produções versionadas** | 14 commits temáticos de conteúdo: trilogia de alfabetização (R200‑R211), estudo IMO (R500‑R506), evidência R522 com depósito OSF/Zenodo, plugin `medicos/` v0.4.0, hermes‑bridge, reversa‑feynman, landscape, integrações e scripts (ver *Documentação → Frentes de produção*) |
 | ⏱️ **Eficiência mensurável** | `/efficiency` com mediana/p90 por operação — linha de base R582 medida |
 
 ---
@@ -294,6 +299,23 @@ Detalhes, requisitos e solução de problemas: [`installer/README.md`](installer
 | [`SECURITY.md`](SECURITY.md) | Segurança | Vulnerabilidades |
 | [`CORRIGENDUM.md`](CORRIGENDUM.md) | Histórico | Correções de alegações passadas |
 | [`CHANGELOG.md`](CHANGELOG.md) | Mudanças | Versões anteriores |
+
+### Frentes de produção e conteúdo versionado
+
+| Caminho | O que contém |
+|---|---|
+| [`livro-alfabetizacao/`](livro-alfabetizacao/) | Trilogia de alfabetização R200‑R211: Volume1..5, VolumeProfissional, CadernoMotor, fontes escolares (licenças em `fontes/README-FONTES.md`), `dados_volumes.py`/`expandir_volume.py`/`rastreio_integrado.py` e `compilar.sh` |
+| [`research/imo_study/`](research/imo_study/) | Estudo de raciocínio: benchmark pareado IMO 9×3, réplicas R500/R503/R504/R506, scripts e artigos em `artigo_abnt/`, `artigo_arxiv/`, `artigo_arxiv_pt/` (PDFs de build ignorados) |
+| [`manuscrito_porescrito799_R522/`](manuscrito_porescrito799_R522/) | Pesquisa *IA Generativa no Direito* (R522): manuscritos v20→v49 (DOCX/MD), formulário de submissão, execução real (txt extraídos, JSONs OpenAlex, scripts) e pacote público de depósito OSF/Zenodo |
+| [`pesquisa-artigo-qualis-a1/producao/ia-direito-educacao/`](pesquisa-artigo-qualis-a1/producao/ia-direito-educacao/) | Produção do artigo IA Direito & Educação: diagnóstico/gap (M0‑M1), protocolo de revisão (M2‑M3), manuscrito rascunho (M5) e auditoria de fontes (M7) |
+| [`medicos/`](medicos/) | Plugin exportado Médico Virtual Supremo v0.4.0 (fonte da skill R‑205.v3): `plugin.json`, SKILL.md v3.0 "conselho‑longitudinal", referências e assets |
+| [`banca_mestrado_educacao_campo.*`](banca_mestrado_educacao_campo.tex) | Banca simulada de mestrado em Educação do Campo (LaTeX + bib) e [`AUDITORIA_REFERENCIAS_TCC.md`](AUDITORIA_REFERENCIAS_TCC.md), auditoria de referências ABNT |
+| [`landscape/`](landscape/) | Relatório e manifesto da paisagem "awesome‑llm‑apps" (curadoria SPEC R482/R521) |
+| [`reversa_feynman/`](reversa_feynman/) | Gates de evidência, ledger, avaliação offline e calibração de router (método Feynman) |
+| [`hermes_bridge/`](hermes_bridge/) | Bridge de memória e governança de skills: firewall de memória, contratos, trajetórias e adaptador de evidências |
+| [`integrations/code_executor.py`](integrations/code_executor.py) · `code_prompt.py` | Execução de código e templates de prompt para pipelines de agentes |
+| [`integrations/free_model_catalog.py`](integrations/free_model_catalog.py) · `opencode_provider_models.json` | Catálogo de modelos livres e provedores OpenCode |
+| [`scripts/preprocess_docx.py`](scripts/preprocess_docx.py) | Normalização de DOCX → markdown (estrutura, cabeçalhos, tabelas) |
 
 Comandos úteis:
 
