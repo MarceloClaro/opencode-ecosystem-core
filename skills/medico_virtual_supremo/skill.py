@@ -27,6 +27,7 @@ import json
 import time
 import uuid
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 
@@ -58,6 +59,25 @@ except ImportError:
 # ──────────────────────────────────────────────────────────────────────────────
 
 SKILL_VERSION = "2.0.0"
+# ── Integração skill v3.0 "conselho-longitudinal" (ciclo R594 / R-205.v3) ──
+SKILL_V3_RELEASE = "3.0-conselho-longitudinal"
+PLUGIN_SOURCE_ID = "gpt-6ceee9ff15bc7f1a4007d43b810f1876"
+PLUGIN_SOURCE_VERSION = "0.4.0"
+PLUGIN_SOURCE_NOTE = (
+    "Skill v3.0 exportada do plugin Médico Virtual Supremo "
+    "(gpt-6ceee9ff15bc7f1a4007d43b810f1876). A integração adapta padrões de "
+    "orquestração e memória do MiroFish-Offline e OpenCode; a skill não instala "
+    "nem executa esses motores (Neo4j/Ollama não são executados por esta skill)."
+)
+REFERENCE_NAMES = [
+    "SKILL_CHATGPT",
+    "diagnostico-diferencial",
+    "fontes-diagnosticas",
+    "conselho-multiespecialidades",
+    "anamnese-longitudinal",
+    "opcoes-terapeuticas",
+    "integracoes-referencias",
+]
 RESPONSE_GEN_ID = "05272024-resposta-medico-virtual-supremo"
 RESPONSE_SEED = "yaml-ai-resposta-medico-virtual-supremo"
 MODULOS_DISPONIVEIS = {
@@ -615,9 +635,20 @@ class MedicoVirtualSupremoSkill:
         # Verificação 7: Dado sensível desnecessário?
         checks_passed.append("princípio da minimização aplicado")
 
+        # Status fail-closed v3.0 (8.2/8.3): qualquer falha impede "aprovado".
+        if checks_failed:
+            status = (
+                "bloqueado"
+                if "diagnóstico definitivo sem sustentação suficiente" in checks_failed
+                else "requer_escalonamento"
+            )
+        else:
+            status = "aprovado"
+
         return {
             "checks_passed": checks_passed,
             "checks_failed": checks_failed,
+            "status": status,
             "human_review_required": True,
         }
 
@@ -749,6 +780,7 @@ class MedicoVirtualSupremoSkill:
                 "audit": {
                     "checks_passed": ["emergência identificada corretamente"],
                     "checks_failed": [],
+                    "status": "requer_escalonamento",
                     "human_review_required": True,
                 },
                 "mandatory_footer": {
@@ -810,6 +842,7 @@ class MedicoVirtualSupremoSkill:
                 "audit": {
                     "checks_passed": ["prescrição autônoma recusada conforme política"],
                     "checks_failed": [],
+                    "status": "bloqueado",
                     "human_review_required": True,
                 },
                 "mandatory_footer": {
@@ -879,6 +912,36 @@ class MedicoVirtualSupremoSkill:
 # ──────────────────────────────────────────────────────────────────────────────
 # Instância singleton para importação direta
 # ──────────────────────────────────────────────────────────────────────────────
+
+_SKILL_MODULE_DIR = Path(__file__).resolve().parent
+
+
+def list_references() -> List[str]:
+    """Lista nomes das referências instrucionais v3.0 disponíveis (R-205.v3)."""
+    refs_dir = _SKILL_MODULE_DIR / "references"
+    if not refs_dir.exists():
+        return []
+    found = sorted(
+        p.stem for p in refs_dir.glob("*.md") if not p.name.endswith("Zone.Identifier")
+    )
+    return [n for n in REFERENCE_NAMES if n in found]
+
+
+def load_reference(name: Optional[str]) -> Optional[str]:
+    """Carrega conteúdo de referência instrucional v3.0; None se ausente
+    (fail-closed: nunca lança para nome desconhecido)."""
+    if not name:
+        return None
+    stem = name[:-3] if name.endswith(".md") else name
+    if stem not in REFERENCE_NAMES:
+        return None
+    path = _SKILL_MODULE_DIR / "references" / f"{stem}.md"
+    try:
+        content = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return None
+    return content if content.strip() else None
+
 
 _skill = MedicoVirtualSupremoSkill()
 
