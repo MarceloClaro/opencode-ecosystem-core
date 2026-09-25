@@ -11908,6 +11908,166 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R588",
+      "objective": "R-976.17 — Perfis de 6 periódicos reais de odontologia e outras áreas na banca simulada (SPEC-976)",
+      "changes": [
+        "mirofish/social/editorial_profiles.py: EDITORIAL_PROFILES 12 -> 18 perfis; JDR/IADR-Sage (CSE 9, Original 3200 palavras + abstract 300, Critical Review 4000, Discovery convite, ICMJE/CONSORT, 17-18d), Clinical Oral Investigations/Springer (single-blind, 4000 palavras + abstract estruturado 150-250 com Clinical Relevance, Case Reports desencorajados, 6d), Medical Image Analysis/Elsevier-MICCAI (single anonymized + 2 revisores, contribuição metodológica SoA, validação datasets biomédicos, CiteScore 25.8/IF 14), Artificial Intelligence in Medicine/Elsevier (novidade metodológica IA/CS obrigatória, mera aplicação rejeitada, declaração IA generativa, revisores proibidos de usar IA), Journal of Biomedical Informatics/Elsevier-AMIA (metodologia aplicação geral, problema clínico + SoA, single anonymized, timeline 2/49/142d, APC 3550), npj Digital Medicine/Nature (abstract 150 sem subheadings, Data Availability obrigatório, CONSORT RCT, sistemáticas como Article, cover letter, 5d, IF 12.4)",
+        "editorial_profiles.py: aliases jdr/journal of dental research/dental research, coi/clinical oral investigations, mia/medical image analysis, aiim/artificial intelligence in medicine, jbi/journal of biomedical informatics, npj/npj digital medicine",
+        "specs/SPEC-976: requisito R-976.17 documentado",
+        "tests/test_r587_banca_periodicos_reais.py: 12 testes verdes (registro, campos, aliases, rigor de cada guia, afiliação de banca, summarize, determinismo)",
+        "skill mirofish-offline: seção de perfis editoriais ampliada para 18 periódicos com rigor dos novos guias",
+        "regressão R583+R584+R585+R586+R587: 71 passed + 18 subtests"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Periódicos de método (MIA, AIIM, JBI) exigem peso alto em originalidade/metodologia/teoria e gates anti-overclaim (mera aplicação de algoritmo conhecido rejeitada — R110 reforçado)",
+        "Periódicos clínicos translacionais (JDR, COI, npj) elevam evidências/metodologia/ética/reprodutibilidade e impõem abstract estruturado com relevância clínica (Clinical Relevance/Clinical significance) ou Data Availability obrigatório (npj)",
+        "Guia real traz gates que template genérico não cobre: CSE 9ª ed. (JDR), convite obrigatório (Discovery!), Data Availability (npj), timeline oficial (JBI 2/49/142d), single anonymized vs single-blind (MIA/JBI vs COI) — cada perfil documenta fonte pública e mantém anti-overclaim R110"
+      ],
+      "timestamp": 1790267736.5079849,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R589",
+      "objective": "R-976.18 — Rigor dos editais dos 11 perfis editoriais originais de educação na banca simulada (SPEC-976)",
+      "changes": [
+        "mirofish/social/editorial_profiles.py: os 11 perfis originais atualizados com dados dos guias oficiais de submissão (24/09/2026) — length_limit, review_flow e special_gates com números reais; source corrigido para o OJS da RBE",
+        "RBE/ANPEd: 40-70 mil caracteres c/ espaços incl. refs/notas/título/resumo 3 idiomas, Espaço Aberto 30-50 mil, resenhas <=10 mil, ABNT obrigatória, quebra de anonimato = rejeição, 6 gates",
+        "Educação & Sociedade/CEDES: ~45.000 caracteres, Similarity Check, open evaluation opcional, IA generativa não é autora; Cadernos de Pesquisa/FCC: iThenticate 2.0, 8 etapas, CRediT, open peer review experimental",
+        "Práxis Educacional/UESB: ABNT 6022/6028/10520, 3º parecerista/parecer de consolidação, >=1 doutor, máx. 3 autores; Computers & Education/Elsevier: <=8.000 palavras, revisores proibidos de usar IA, arquivos editáveis",
+        "BJET/Wiley: 5.000-6.000 palavras incl. tab/fig/footnotes, leeway por e-mail, decisão GenAI do editor; EIT/Springer-IFIP: sem mudança de autoria pós-submissão, fontes editáveis obrigatórias, NÃO aceita review papers, 6 gates",
+        "IRE/UNESCO UIL: articles <=6.000, research notes <=3.000, book reviews <=1.000, abstract 150-250, 4-6 keywords; Práxis Educativa/UEPG: 20-28 pp, APA, CNS 466/510, plágio prévio, atualmente NÃO aceita submissões",
+        "EAE/FCC: duplo anônimo >=2 ad hoc, parecer consolidado, preprint -> simples anônimo; Educação/PUCRS: APA, folha de rosto separada, declaração de IA obrigatória (omissão = infração ética), Turnitin, 8 critérios de desk reject, <=20 pp, <=4 autores",
+        "mirofish/social/EDITAL_PERFIS_ORIGINAIS.md: síntese dos 11 editais com tabela-resumo, fontes oficiais e notas de atualidade",
+        "tests/test_r588_banca_editais_originais.py: 21 testes verdes (RED -> GREEN; 3 asserções corrigidas por typo na expectativa, não no dado)",
+        "specs/SPEC-976: requisito R-976.18 documentado; skill mirofish-offline atualizada (R-976.14 a R-976.18)",
+        "regressão R583-R588: 112 passed + 18 subtests; smoke de afiliação dos 11 perfis via BancaProfileGenerator + summarize_banca"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Asserção 'aperte' vs 'anonymous' e nomes abreviados (IA vs inteligência artificial) são bugs de EXPECTATIVA do teste, não do dado: ao escrever teste RED, transcrever literalmente a string que a implementação terá ou usar subcadeia estável (ex.: 'declaração de ia')",
+        "Alias faltando ('praxis ed' não existe; o correto é 'praxis educacional') — smoke de afiliação deve rodar sobre os aliases EXPORTADOS (JOURNAL_ALIASES), não sobre fragmentos inventados",
+        "Editais de educação variam muito no que conta no limite (palavras vs caracteres com espaços, incluindo refs ou não; RBE inclui tudo; BJET inclui tab/fig/footnotes; C&E exclui refs/apêndices) — normalizar no perfil evita comparações enganosas de 'tamanho'",
+        "Guia real traz porta de exceção (BJET leeway por e-mail; Práxis Educativa NÃO aceita submissões; EAE muda regime de anonimato se preprint) que template genérico não captura — documentar como gate em vez de esconder no fluxo"
+      ],
+      "timestamp": 1790269043.0624585,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R590",
+      "objective": "R-976.19 — Perfis editoriais de Computação Quântica e Direito na banca simulada (SPEC-976)",
+      "changes": [
+        "mirofish/social/editorial_profiles.py: EDITORIAL_PROFILES ampliado de 18 para 30 perfis com 12 novos (6 computação quântica + 6 direito), baseados nos guias oficiais consultados em 24/09/2026",
+        "Computação quântica: npj Quantum Information (Nature, OA CC BY, ~5d 1ª decisão, cover letter + reporting summary/checklists, deduplicação vs arXiv), Quantum (overlay arXiv, APC zero, sem limite de formato/comprimento, critérios explícitos + disclosure LLM), Quantum Science and Technology (IOP, altamente seletivo: essential reading + interesse amplo + impacto duradouro, Letters c/ justification statement, Topical reviews convidadas, Roadmaps 2-3pp, single anonymous), IEEE TQE (gold OA, sem page limit, APC USD 1.995, foco engenharia: supercondutividade/magnética/micro-ondas/fotônica/sinais), ACM TQC (Manuscript Central, 100% OA, revised minor 30d, ORCID obrigatório), Quantum Information Processing (Springer, single-blind, abstract 150-250, fonte editável + PDF obrigatórios, template LaTeX)",
+        "Direito: Revista Direito GV (FGV, desk review, duplo-cego -> simples-cego se preprint, 5 keywords PT/EN/ES, resenhas <=2.000 palavras incl. refs, sem taxas), Revista Direito e Práxis (UERJ, trilíngue, desk review 30d, 2 ad hoc stricto sensu, 3º avaliador se divergência, COI rigoroso, preprints permitidos, sem APC), RDA (FGV, desde 1945, desk review <=15d, 2-3 pareceristas doutores, titulação mínima doutor, máx. 2 autores 1 doutor, CC BY-NC-ND 4.0), Seqüência (UFSC, duplo-cega, iThenticate, CC BY 4.0, ABNT), REED (empírico, exogenia >=75%, avaliadores nomeados, ORCID, ~6 meses), Suprema (STF, semestral, duplo-cega >=2 externos, 3º se impasse, <=3 coautores, PT/EN/ES/FR/IT)",
+        "JOURNAL_ALIASES: +24 aliases (npjqi, quantum, qst, tqe, tqc, qip, direito gv, direito e praxis, rda, sequencia, reed, suprema...) para os 12 novos perfis",
+        "tests/test_r589_banca_quantum_direito.py: 19 testes verdes (registro, campos obrigatórios, gates reais por periódico com subcadeias literais, anti-overclaim via profile_summary, aliases, afiliação de banca)",
+        "mirofish/social/EDITAL_QUANTUM_DIREITO.md: síntese dos 12 editais com fontes oficiais e notas de atualidade",
+        "specs/SPEC-976: linha R-976.19 adicionada; SKILL.md mirofish-offline: seção R-976.14 a R-976.19 com os 12 novos perfis",
+        "Regressão R583-R589: 131 passed + 30 subtests verdes",
+        "Smoke de afiliação: 12/12 aliases resolvem via BancaProfileGenerator e summarize_banca"
+      ],
+      "score": 22,
+      "lessons": [
+        "Periódicos de direito brasileiros (Qualis A1) variam fortemente em autoria e titulação: RDA exige titulação mínima de doutor e máx. 2 autores; Suprema aceita até 3 coautores; Direito GV não exige titulação — capturar isso nos special_gates diferencia os perfis",
+        "Modelos de revisão são heterogêneos mesmo dentro de áreas próximas: QST/IOP é single anonymous, QIP/Springer é single-blind, IEEE TQE é duplo-cego — sempre conferir a terminologia oficial do guia antes de rotular",
+        "A arquitetura overlay (Quantum via arXiv) produz limites editoriais radicalmente diferentes: sem taxas e sem limite de formato — não forçar números artificiais quando a fonte declara explicitamente ausência de limite",
+        "Preprint policy muda o modelo de anonimato (Direito GV: duplo-cego vira simples-cego) — gate editorial raro que deve ser capturado como special_gate explícito",
+        "Bugs de asserção em testes RED/GREEN continuam sendo de EXPECTATIVA, não de dado (tradução 'quântica' vs busca 'quantum'; '5 palavras-chave' mora em length_limit e não em special_gates[0])",
+        "buscar subcadeia estável literal no idioma do perfil (PT) em vez do termo oficial em inglês quando o perfil traduz fielmente"
+      ],
+      "timestamp": 1790273504.4852672,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R591",
+      "objective": "R-976.20 — Cliente HTTP do backend MiroFish-Offline (AGPL) integrado e funcional no Core (SPEC-976)",
+      "changes": [
+        "integrations/mirofish_offline.py: MiroFishOfflineDriver ganha cliente HTTP (base_url DEFAULT http://127.0.0.1:5001 via MIROFISH_HTTP_URL) com health(), list_simulations(), list_reports(), list_projects(), get_simulation(), start_backend() (sobe o Flask externo na venv própria do repo AGPL via subprocess) e check() ampliado com http_ok/http_health/http_simulations_count; contrato real do /health AGPL respeitado (status==ok, sem chave ok); fail-closed R-976.9 preservado (health nunca lança, listas/prepare levantam RuntimeError sem serviço); detecção padrão inclui ~/projetos/MiroFish-Offline",
+        "marceloclaro/orchestrator.py: novo método mirofish_external_status() expõe no orquestrador o status real do backend externo + contagens observadas; motor local determinístico (mirofish_simulate/banca_simulate) permanece o caminho principal",
+        "tests/test_r590_mirofish_http_client.py: 13 testes (servidor real + fail-closed + erros HTTP); helper sobe o backend externo na venv do repo ao iniciar a suíte",
+        "Integração real validada: backend AGPL no ar em 127.0.0.1:5001 (create_app 61 rotas em Python 3.14, sem camel-oasis); /health 200; /api/simulation/list, /api/graph/project/list, /api/report/list respondem success true",
+        "Anti-overclaim R110: simulação OASIS-full (create/prepare/start) depende de LLM_API_KEY/ZEP_API_KEY e camel-oasis (Python <3.12), reportado de forma transparente; nenhum código AGPL copiado, apenas composição HTTP"
+      ]
+    },
+    {
+      "round_id": "R592",
+      "objective": "R-976.21 — Canonização do repo MarceloClaro/MiroFish-Offline (AGPL, English offline) como serviço externo padrão (SPEC-976)",
+      "changes": [
+        "Repo canônico identificado a partir da orientação do usuário: https://github.com/MarceloClaro/MiroFish-Offline (fork de nikmcfly/MiroFish-Offline, 2542 stars, AGPL-3.0, English fork of MiroFish com Neo4j + Ollama local stack) — distinto de MarceloClaro/MiroFish (fork de 666ghj/MiroFish) usado antes",
+        "Clonado em ~/projetos/MiroFish-Offline-AGPL; backend/run.py + backend/app/ presentes; venv própria criada (.venv) com deps core: flask, flask-cors, openai, requests, neo4j, PyMuPDF, charset-normalizer, chardet, python-dotenv, pydantic (sem camel-oasis, que exige Python <3.12)",
+        "create_app() importa com 61 rotas (Neo4jStorage loga LLM_API_KEY not configured, não-fatal); /health responde com service=\"MiroFish-Offline Backend\" (distinto do outro fork); /api/simulation/list + /api/report/list → success:true",
+        "integrations/mirofish_offline.py: FALLBACK_DIRS inclui ~/projetos/MiroFish-Offline-AGPL como canônico (à frente do fork genérico ~/projetos/MiroFish-Offline); fix import time (NameError em start_backend detectado no smoke); start_backend() sobe o backend canônico na 5001 via venv própria do repo",
+        "tests/test_r590_mirofish_http_client.py: SERVICE_DIR default → ~/projetos/MiroFish-Offline-AGPL; 13/13 verdes contra o backend canônico real",
+        "Validação: servidor 5001 agora serve MiroFish-Offline-AGPL (PID próprio, start_new_session); instância provisória 5002 removida; regressão R581-R590 = 144 passed + 30 subtests; orquestrador mirofish_external_status() → http_ok:True com contagens reais",
+        "Anti-overclaim R110: OASIS-full segue dependendo de LLM_API_KEY/ZEP_API_KEY + camel-oasis (Python <3.12); o backend sobe com subconjunto core; simulação determinística local continua caminho principal do Core"
+      ]
+    },
+    {
+      "round_id": "R593",
+      "objective": "R-976.22 — Normalização tolerante de aliases editoriais no get_profile()/banca_simulate",
+      "changes": [
+        "mirofish/social/editorial_profiles.py: normalize_institution_alias() pública + normalização NFD (acentos/barra/parênteses/hífen/caixa mista -> espaço) e índices normalizados _NORMALIZED_CANONICAL/_NORMALIZED_ALIASES no get_profile()",
+        "Falso positivo evitado: alias curto (<=4 chars, ex. eit/ire) só casa por delimitação de palavra (_alias_substring_match), não por substring ('eit' em 'direito')",
+        "mirofish/social/__init__.py: exporta normalize_institution_alias e resolve_institution_name (__all__)",
+        "tests/test_r591_alias_normalization.py: 60 testes (normalização, fuzzy variants, compat reversa, códigos curtos, anti-falso-positivo, integração banca)",
+        "specs/SPEC-976: linha R-976.22 adicionada"
+      ],
+      "tests": "R581-R591 = 225 passed + 30 subtests",
+      "score": 92
+    },
+    {
+      "round_id": "R594",
+      "objective": "R-205.v3 — Integração do skill v3.0 'conselho-longitudinal' do plugin Médico Virtual Supremo exportado (medicos/) ao Core",
+      "changes": [
+        "skills/medico_virtual_supremo/SKILL.md: skill v3.0 do plugin copiada (fonte de verdade instrucional, rodapé obrigatório, seções 8.2-8.5 e 12/14)",
+        "skills/medico_virtual_supremo/references/: 7 referências instrucionais v3.0 adicionadas (SKILL_CHATGPT, diagnostico-diferencial, fontes-diagnosticas, conselho-multiespecialidades, anamnese-longitudinal, opcoes-terapeuticas, integracoes-referencias)",
+        "skills/medico_virtual_supremo/skill.py: SKILL_V3_RELEASE/PLUGIN_SOURCE_ID/VERSION/NOTE, list_references() e load_reference() fail-closed, audit.status nas respostas (aprovado/bloqueado/requer_escalonamento), Path import",
+        "specs/SPEC-935-R205.md: seção 8 v3.0 com requisitos V3-1..V3-6 e critérios de aceitação",
+        "tests/test_r594_medico_supremo_v3.py: 23 testes (SKILL.md, referências, API, release+compat, paridade manifesto, smoke)"
+      ],
+      "tests": "test_r594 23/23; regressão R205+R446+R591+R590+R594 = 157 passed + 9 skipped",
+      "score": 90
+    },
+    {
+      "round_id": "R595",
+      "objective": "Wrapper CLI da skill Médico Virtual Supremo v3.0 (.opencode/skills/medico-virtual-supremo) + regeneração opencode.json",
+      "changes": [
+        ".opencode/skills/medico-virtual-supremo/SKILL.md: skill invocável no OpenCode CLI (disable-model-invocation: true — alto risco), descreve fluxo fail-closed v3.0, chamada programática e regras de segurança",
+        "python3 -m integrations.opencode_cli: regeneração reprodutível (opencode.json sem diff; 210 agentes, 7 MCP, 10 comandos)",
+        "skills.paths já cobre .opencode/skills — skill descoberta dinamicamente"
+      ],
+      "tests": "test_r137 3/3 (reprodutibilidade do opencode.json)",
+      "score": 88
     }
   ]
 }

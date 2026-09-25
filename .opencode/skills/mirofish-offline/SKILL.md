@@ -109,40 +109,114 @@ PY
   para calibrar perfil; nunca parecer real) — ver `disclaimer` no resumo.
 - `n_members>12` repete critérios com posturas distintas (mais granularidade).
 
-## Perfis editoriais por periódico (R-976.14 + R-976.15 + R-976.16)
+## Perfis editoriais por periódico (R-976.14 a R-976.19)
 
-`mirofish/social/editorial_profiles.py::EDITORIAL_PROFILES` registra perfis
-baseados em **normas públicas** de 12 revistas Qualis A1/Q1 e internacionais
-(RBE/ANPEd, Educação & Sociedade/CEDES, Cadernos de Pesquisa/FCC, Práxis
-Educacional/UESB, Práxis Educativa/UEPG, Estudos em Avaliação
+`mirofish/social/editorial_profiles.py::EDITORIAL_PROFILES` registra **30
+perfis** baseados em **normas públicas** de revistas Qualis A1/Q1 e
+internacionais (RBE/ANPEd, Educação & Sociedade/CEDES, Cadernos de Pesquisa/FCC,
+Práxis Educacional/UESB, Práxis Educativa/UEPG, Estudos em Avaliação
 Educacional/FCC, Educação/PUCRS, Computers & Education/Elsevier, BJET/Wiley,
 Education and Information Technologies/Springer, International Review of
-Education/UNESCO UIL, **Journal of Dentistry/Elsevier**): escopo,
-prioridade (perfil do melhor artigo), estilo de referência, limite de tamanho,
-fluxo de revisão, gates especiais (ex.: Educação & Sociedade e Computers &
-Education **não aceitam IA generativa como autora**; disclosure obrigatória na
-Springer; Journal of Dentistry exige **abstract com Clinical significance** +
-protocolo registrado + declaração de IA generativa + estratégia de busca em
-suplemento) e pesos por critério.
+Education/UNESCO UIL, **Journal of Dentistry/Elsevier**, **Journal of Dental
+Research/IADR-Sage**, **Clinical Oral Investigations/Springer**, **Medical
+Image Analysis/Elsevier-MICCAI**, **Artificial Intelligence in Medicine/
+Elsevier**, **Journal of Biomedical Informatics/Elsevier-AMIA**, **npj Digital
+Medicine/Nature Portfolio**, **6 de computação quântica** — npj Quantum
+Information/Nature, Quantum/overlay arXiv, Quantum Science and Technology/IOP,
+IEEE TQE, ACM TQC, Quantum Information Processing/Springer — e **6 de
+direito** — Revista Direito GV/FGV, Revista Direito e Práxis/UERJ,
+RDA/FGV, Seqüência/UFSC, REED, Suprema/STF): escopo, prioridade (perfil do
+melhor artigo), estilo de referência, limite de tamanho, fluxo de revisão,
+gates especiais (ex.: Educação & Sociedade e Computers & Education **não
+aceitam IA generativa como autora**; disclosure obrigatória na Springer; JOD
+exige **abstract com Clinical significance**; JDR exige **CSE 9ª ed.**; AIIM
+exige **novidade metodológica em IA/CS**; npj exige **Data Availability
+Statement**; Quantum é **overlay via arXiv com APC zero e sem limite de
+formato**; Direito GV faz **duplo-cego → simples-cego se preprint**; RDA exige
+**titulação mínima de doutor e máx. 2 autores**; REED publica **nomes de
+avaliadores** — ciência aberta) e pesos por critério.
 
-O perfil **Journal of Dentistry (JOD)** baseia-se no template oficial Review
-Article da Elsevier (fonte: Google Docs compartilhado pelo autor) **reforçado
-pelo guide-for-authors oficial** (ScienceDirect, acesso 24/09/2026 — ver
-`mirofish/social/EDITAL_JOD_RIGOR_EDITORIAL.md`): escopo líder em Odontologia
-Restauradora; limites por tipo (**Review máx. 10 pp impressas ≈ 33 pp
-processadas**; Original 6 pp; Short Comm 2 pp); **NÃO aceita Case Reports**;
-timeline 1ª decisão ~5 dias (desk) / ~29 dias pós-review / ~74 dias até
-aceite; apelação única; mudança de autoria proibida pós-submissão; declaração
-de IA generativa em seção própria ANTES das referências (revisores/editores
-proibidos de usar IA com manuscrito); ICMJE/CONSORT para ensaios; resumo <500
-palavras em registro de ensaio não conta como pré-publicação. Útil para
-ensaiar **scoping reviews** com pergunta PCC, seleção dupla, síntese descritiva
-e referências numeradas com DOI (weights: evidências 1.8, metodologia 1.7,
-reprodutibilidade 1.7, ética 1.5, estatística 1.4, clareza 1.3, teoria 0.9).
+**Editais originais de educação confirmados (R-976.18,** sintetizados em
+`mirofish/social/EDITAL_PERFIS_ORIGINAIS.md`):** RBE/ANPEd — 40–70 mil
+caracteres c/ espaços **incluindo** refs/notas/título/resumo nos 3 idiomas,
+ABNT obrigatória (senão não considerada), quebra de anonimato = rejeição;
+E&S/CEDES — ~45.000 caracteres, Similarity Check, open evaluation opcional;
+Cadernos de Pesquisa/FCC — iThenticate 2.0, fluxo em 8 etapas, CRediT;
+Práxis Educacional/UESB — ABNT 6022/6028/10520, 3º parecerista em divergência,
+≥1 doutor, máx. 3 autores; Computers & Education — ≤8.000 palavras (excl.
+refs/apêndices), revisores proibidos de usar IA, arquivos editáveis (PDF não é
+fonte); BJET — 5.000–6.000 palavras (excl. refs/abstracts/notas práticas/
+apêndices), leeway via e-mail; EIT/Springer-IFIP — sem mudança de autoria,
+fontes editáveis obrigatórias, **NÃO aceita review papers**; IRE/UNESCO —
+artigos ≤6.000, research notes ≤3.000, book reviews ≤1.000, abstract 150–250,
+4–6 keywords; Práxis Educativa/UEPG — 20–28 pp, APA, resumo ≤10 linhas + 3
+keywords PT/EN/ES, **atualmente não aceita submissões**; EAE/FCC — 2 ad hoc +
+parecer consolidado, preprint → simples anônimo; Educação/PUCRS — APA, folha de
+rosto separada, declaração de IA obrigatória (omissão = infração ética),
+Turnitin, ≤20 pp, ≤4 autores.
+
+Perfis odontológicos: **JOD (Elsevier)** — Review máx. 10 pp impressas ≈ 33
+processadas, NÃO aceita Case Reports, declaração IA antes das refs (ver
+`mirofish/social/EDITAL_JOD_RIGOR_EDITORIAL.md`); **JDR (IADR/Sage)** —
+Original Research 3.200 palavras + abstract 300 + CSE 9ª + ICMJE/CONSORT +
+~17-18 dias 1ª decisão; **Clinical Oral Investigations (Springer)** —
+single-blind, 4.000 palavras + abstract estruturado 150-250 com **Clinical
+Relevance**, Case Reports desencorajados, ~6 dias 1ª decisão.
+
+Perfis de outras áreas (método/IA/saúde): **Medical Image Analysis
+(Elsevier/MICCAI)** — single anonymized + ≥2 revisores, contribuição
+metodológica frente ao SoA, validação experimental em datasets biomédicos;
+**Artificial Intelligence in Medicine (Elsevier)** — **novidade metodológica/
+teórica em IA e CS obrigatória** (mera aplicação rejeitada), declaração de IA
+generativa obrigatória, revisores proibidos de usar IA; **Journal of Biomedical
+Informatics (Elsevier/AMIA)** — metodologia com aplicação geral, problema
+clínico real + SoA, single anonymized, timeline 2/49/142 dias;
+**npj Digital Medicine (Nature Portfolio)** — abstract ≤150 palavras sem
+subheadings, **Data Availability obrigatório**, CONSORT p/ RCTs, sistemáticas
+como Article, sem limites estritos, cover letter obrigatório, ~5 dias 1ª
+decisão.
+
+**Perfis de computação quântica (R-976.19,** sintetizados em
+`mirofish/social/EDITAL_QUANTUM_DIREITO.md`):** **npj Quantum Information
+(Nature Portfolio)** — OA CC BY, 1ª decisão ~5 dias, cover letter + reporting
+summary/checklists na submissão, deduplicação vs arXiv; **Quantum (overlay
+journal)** — submissão via **arXiv (quant-ph)**, **APC zero**, **sem limite de
+formato/comprimento**, pareceristas nomeados, critérios: correção técnica/
+significância/clareza/reprodutibilidade/reivindicações honestas/escopo,
+contributions + disclosure LLM; **QST (IOP)** — altamente seletivo ("essential
+reading" + interesse amplo + impacto duradouro), Letters com justification
+statement, Papers com avanço significativo, Topical reviews convidadas,
+Roadmaps 2–3 pp/seção, **single anonymous**; **IEEE TQE** — gold OA, **sem
+page limit**, APC **USD 1.995**, escopo engenharia (supercondutividade,
+magnética, micro-ondas, fotônica, processamento de sinais); **ACM TQC** —
+Manuscript Central, transição 100% OA, revised minor em **30 dias**, ORCID
+obrigatório; **QIP (Springer)** — single-blind, abstract 150–250, fonte
+editável + PDF obrigatórios, template LaTeX recomendado.
+
+**Perfis de direito (R-976.19):** **Revista Direito GV (FGV)** — desk review
+(ine ditismo + adequação temático-metodológica + requisitos formais),
+**duplo-cego → simples-cego se preprint**, 5 palavras-chave PT/EN/ES,
+desidentificação, resenhas ≤2.000 palavras incl. referências, sem taxas;
+**Revista Direito e Práxis (UERJ)** — trilíngue PT/EN/ES, desk review com
+resposta em até 30 dias, duplo-cega com 2 ad hoc de stricto sensu, 3º avaliador
+se divergência, declaração rigorosa de conflito de interesses, preprints
+permitidos, sem APC; **RDA (FGV)** — desde 1945, desk review ≤15 dias, 2–3
+pareceristas doutores por área, titulação mínima doutor, máx. 2 autores (≥1
+doutor), sem inclusão de autor após submissão, ABNT, **CC BY-NC-ND 4.0**;
+**Seqüência (UFSC)** — duplo-cega, iThenticate, CC BY 4.0, sem taxas, ABNT;
+**REED** — foco em pesquisa empírica jurídica, exogenia de pareceristas ≥75%,
+nomes de avaliadores publicados, ORCID, avaliação ~6 meses; **Suprema (STF)** —
+semestral, duplo-cega com ≥2 pareceristas externos, 3º parecerista se impasse,
+até 3 coautores, PT/EN/ES/FR/IT, fluxo contínuo.
 
 Escolha o periódico-alvo para recalibrar a banca (aliases aceitos: `RBE`,
-`E&S`, `C&E`, `BJET`, `EIT`, `IRE`, `Cadernos`, `JOD`, `journal of
-dentistry`...):
+`E&S`, `C&E`, `BJET`, `EIT`, `IRE`, `Cadernos`, `JOD`, `JDR`, `COI`, `MIA`,
+`AIIM`, `JBI`, `NPJ`, `journal of dentistry`, `npj digital medicine`...).
+Desde R-976.22 a resolução de aliases é **tolerante a barra, parênteses,
+acento, hífen e caixa mista** — `educação/pucrs`, `rbe/anped`,
+`seqüência (ufsc)`, `npj/quantum/information`, `Suprema / STF` resolvem
+normalmente (`normalize_institution_alias()`; sem falsos positivos em códigos
+curtos como `EIT`/`IRE`):
 
 ```bash
 python3 - <<'PY'
@@ -198,21 +272,55 @@ PY
 - `echo_chamber_strength` controla polarização: > 0.5 referencia grupos de mesma
   postura (câmaras de eco), ≤ 0.5 mistura o grupo todo.
 
-## Serviço externo (AGPL-3.0)
+## Serviço externo (AGPL-3.0) — integração por HTTP (R-976.20/21)
 
-Para capacidades completas do MiroFish-Offline original (Neo4j, Ollama, focus
-group com LLM, frontend), use o repo AGPL separado por composição:
+O backend Flask real do MiroFish-Offline (**repo canônico:
+`MarceloClaro/MiroFish-Offline`** — fork English offline de `nikmcfly/
+MiroFish-Offline`, AGPL-3.0, Neo4j + Ollama local stack; clone em
+`~/projetos/MiroFish-Offline-AGPL`) pode ser detectado, iniciado e
+consultado pelo Core **por composição HTTP** — nenhum código AGPL é
+copiado (gate de licença). Um fork genérico (`MarceloClaro/MiroFish`)
+também é aceito como fallback de detecção.
+
+1. **Detectar + subir** (usa a venv própria do repo AGPL, sem tocar o Python do Core):
 
 ```bash
-export MIROFISH_OFFLINE_DIR=/caminho/para/MiroFish-Offline
 python3 - <<'PY'
 from integrations.mirofish_offline import MiroFishOfflineDriver
-d = MiroFishOfflineDriver()
-print(d.check())   # fail-closed: available=True só com serviço real
+d = MiroFishOfflineDriver()                 # detecta ~/projetos/MiroFish-Offline ou $MIROFISH_OFFLINE_DIR
+print(d.start_backend(port=5001))           # sobe o Flask externo se a venv existir e não estiver de pé
+print(d.health())                           # GET /health — nunca lança (R-976.9)
 PY
 ```
 
-Nenhum código do projeto AGPL é copiado para o Core (SPEC-976, gate de licença).
+2. **Consultar via orquestrador** (reflexão no MetaBus incluída):
+
+```bash
+python3 - <<'PY'
+from marceloclaro.orchestrator import MarceloClaroOrchestrator
+orch = MarceloClaroOrchestrator(auto_load_agents=False, pipeline_layers=1)
+print(orch.mirofish_external_status())      # ok, http_ok, contagens reais observadas
+PY
+```
+
+3. **Listagens determinísticas reais** do backend externo:
+
+```bash
+python3 - <<'PY'
+from integrations.mirofish_offline import MiroFishOfflineDriver
+d = MiroFishOfflineDriver()
+print(d.list_simulations())   # GET /api/simulation/list
+print(d.list_reports())       # GET /api/report/list
+print(d.list_projects())      # GET /api/graph/project/list
+PY
+```
+
+**Limite honesto (anti-overclaim R110)**: a simulação OASIS-full do backend
+(`create`/`prepare`/`start`) depende de `LLM_API_KEY`/`ZEP_API_KEY` e de
+`camel-oasis` (que exige Python <3.12). Neste ambiente o backend sobe com o
+subconjunto core (Flask, openai, zep-cloud, pydantic, PyMuPDF). Para simulação
+**determinística local** use `orch.mirofish_simulate(...)` /
+`orch.banca_simulate(...)` — caminho principal do Core.
 
 ## Verificação
 

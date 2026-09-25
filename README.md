@@ -59,23 +59,27 @@ Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC
 | 🧮 **Raciocínio formal** | Z3, SymPy, Kanren, verificadores Lean 4 / E‑Graph / AlphaGeometry |
 | 🎓 **Pipeline acadêmico** | Dissertações/artigos com rigor MASWOS, banca emulada (Reviewers 1–3), ABNT |
 | 📽️ **MIRA** | Apresentações e slides com animação, QR codes e validação de terços |
-| ⚖️🩺 **Jurídico & Clínico** | Apoio computacional auditável em domínios sensíveis |
+| 🗣️ **Simulação social** | MiroFish‑Offline no Core: perfis determinísticos, rounds de opinião, sentimento e banca editorial — anti‑overclaim R110 |
+| ⚖️🩺 **Jurídico & Clínico** | Apoio computacional auditável em domínios sensíveis; Médico Virtual Supremo v3.0 com `audit.status` fail‑closed e revisão humana obrigatória |
 | 🌐 **Deploy estático** | GitHub Pages com verificação física (GET+Range, 404 real, marcador de conteúdo) |
 
 ---
 
-## 🚀 Novidades — frentes R581 e R582
+## 🚀 Novidades — frentes R581/R582, R-976 e R-205.v3
 
-> Lançadas nas frentes **SPEC-974** (ecossistema integrado e autônomo) e **SPEC-975** (eficiência mensurável).
+> Lançadas nas frentes **SPEC-974** (ecossistema integrado e autônomo), **SPEC-975** (eficiência mensurável), **SPEC-976** (MiroFish‑Offline no Core) e **SPEC-935‑R205** (Médico Virtual Supremo).
 
 | Entrega | O que mudou |
 |---|---|
 | 🪝 **Hooks de guarda** (`.opencode/hooks/`) | `credential_guard.sh` (token sem imprimir segredo), `js_smoke_dom.sh` (stub de DOM em Node — pega a classe de bug R580 que `node --check` não pega), `budget_guard.sh` (1 GB / 25 MiB por arquivo) — **fail‑closed** |
 | 🧩 **Plugin `deploy-guards.ts`** | Gates automáticos em `edit`/`write` de `.html` e em `git push/commit` do site (dispara os hooks) |
 | 🛰️ **MCP `web-deploy-mcp`** | `pages_status`, `probe_url` (GET+Range, nunca HEAD), `site_weight`, `validate_feed`, `assert_gone` — padrão fail‑closed SPEC‑970/971/972 |
-| 📚 **2 skills novas** | `deploy-estatico-github-pages` (receita R569–R580) e `smoke-test-dom-js` (regressão R580) |
-| 🧠 **Metacognição preenchida** | 51 lições semânticas consultáveis no MetaBus (deploy/media/verification/registry) — antes vazia |
-| 🔧 **Fix crítico** | `EvolutionRegistry._load` tolerante por entrada: 1 entrada malformada não zera mais os **406 ciclos** |
+| 📚 **Skills novas** | `deploy-estatico-github-pages`, `smoke-test-dom-js`, `mirofish-offline` (SPEC-976) e `medico-virtual-supremo` (v3.0) |
+| 🗣️ **MiroFish‑Offline integrado** | `mirofish_simulate`, `banca_simulate` e cliente HTTP do backend AGPL canônico (`127.0.0.1:5001`) com health, autenticação e retry |
+| 🏷️ **Normalização de aliases** | `normalize_institution_alias()`/`resolve_institution_name()` na banca: nomes como `educação/pucrs`, `rbe/anped` e `seqüência (ufsc)` resolvem sem perfil `?` (60 testes, R-976.22) |
+| 🩺 **Médico Virtual Supremo v3.0** | Skill "conselho‑longitudinal" do plugin exportado (`medicos/`, gpt‑6ceee9… v0.4.0): 7 referências instrucionais, `list_references()`/`load_reference()` fail‑closed e `audit.status` em toda resposta (23 testes, R-205.v3) |
+| 🧠 **Metacognição preenchida** | 51+ lições semânticas consultáveis no MetaBus (deploy/media/verification/registry/clinical) |
+| 🔧 **Fix crítico** | `EvolutionRegistry._load` tolerante por entrada: 1 entrada malformada não zera mais os **419 ciclos** |
 | ⏱️ **Eficiência mensurável** | `/efficiency` com mediana/p90 por operação — linha de base R582 medida |
 
 ---
@@ -156,6 +160,8 @@ Catálogo completo: [`agents/catalog/`](agents/catalog/) · Mapa detalhado: [`AR
 | `pesquisador-universal-marcelo-claro` | Revisão sistemática, Evidence Graph, meta‑análise, GRADE |
 | `deploy-estatico-github-pages` 🆕 | Publicar/verificar site estático no GitHub Pages (receita R569–R580) |
 | `smoke-test-dom-js` 🆕 | Detectar bug de runtime JS inline (classe R580: `'num'` vs `'.num'`) |
+| `mirofish-offline` 🆕 | Simulação de opinião pública multi‑agente (SPEC-976) e integração do backend AGPL por composição |
+| `medico-virtual-supremo` 🆕 | Apoio clínico auditável v3.0 — invocação explícita obrigatória (alto risco, fail‑closed) |
 
 ### 4. Hooks e guards
 

@@ -24,6 +24,7 @@ from .editorial_profiles import (
     JOURNAL_KEYS,
     get_profile,
     merge_weights,
+    normalize_institution_alias,
     profile_summary,
 )
 from .banca import (
@@ -32,6 +33,7 @@ from .banca import (
     banca_verdict,
     banca_weighted_score,
     recommendation_from_score,
+    resolve_institution_name,
     summarize_banca,
     text_signals,
     adjust_bias_by_signal,
@@ -65,8 +67,10 @@ __all__ = [
     "banca_weighted_score",
     "get_profile",
     "merge_weights",
+    "normalize_institution_alias",
     "profile_summary",
     "recommendation_from_score",
+    "resolve_institution_name",
     "summarize_banca",
     "text_signals",
     "_summarize",

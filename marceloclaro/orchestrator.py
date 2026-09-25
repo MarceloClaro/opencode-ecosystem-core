@@ -2562,6 +2562,39 @@ class MarceloClaroOrchestrator:
         )
         return resumo
 
+    def mirofish_external_status(self) -> Dict[str, Any]:
+        """
+        Status do serviço externo MiroFish-Offline (AGPL) via cliente HTTP
+        (SPEC-976 R-976.20). Composição: nenhum código AGPL no Core.
+
+        - health real do backend Flask externo (/health);
+        - contagens observadas de simulações/relatórios/projetos;
+        - fail-closed: serviço indisponível nunca falha silenciosamente.
+        O motor local determinístico (mirofish_simulate/banca_simulate)
+        permanece o caminho principal de simulação no Core.
+        """
+        from integrations.mirofish_offline import MiroFishOfflineDriver
+
+        driver = MiroFishOfflineDriver()
+        status = driver.check()
+        if status.get("http_ok"):
+            try:
+                status["http_reports_count"] = len(driver.list_reports())
+                status["http_projects_count"] = len(driver.list_projects())
+            except RuntimeError as e:
+                status["http_extra_error"] = str(e)
+        metabus.memory.add_reflection(
+            agent_id=self.id,
+            task_context="status do serviço externo MiroFish-Offline (AGPL)",
+            reflection=(
+                f"Serviço externo {'OK' if status.get('http_ok') else 'indisponível'} "
+                f"em {status.get('http_url')}; simulações observadas: "
+                f"{status.get('http_simulations_count')}."
+            ),
+            score=1.0 if status.get("http_ok") else 0.3,
+        )
+        return status
+
     # ------------------------------------------------------------------
     # TEORIA DOS JOGOS — 38 RACIOCÍNIOS (agent-forum portado)
     # ------------------------------------------------------------------
