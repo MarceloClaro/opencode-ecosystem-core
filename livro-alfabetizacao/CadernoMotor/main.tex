@@ -1,0 +1,451 @@
+%% ============================================================
+%% CADERNO MOTOR DE ESCRITA CURSIVA PONTILHADA (SPEC-935-R209)
+%% Uso exclusivamente pedagogico: treino do gesto de escrita.
+%% NAO contem avaliacao clinica; observacao do mediador e registro
+%% pedagogico. Diagnostico e ato privativo de profissional habilitado.
+%% ============================================================
+\documentclass[a4paper,12pt]{book}
+\RequirePackage[brazil]{babel}
+\RequirePackage{fontspec}
+\defaultfontfeatures{Path=../fontes/, Extension=.ttf}
+\newfontfamily\papauta{Mestra4(DoblePautaPuntejada)}
+\newfontfamily\papalavra{Mestra2(MeMimaPuntejada)}
+\RequirePackage{geometry}
+\RequirePackage{tikz}
+\RequirePackage{titlesec}
+\geometry{left=2cm, right=2cm, top=2cm, bottom=2cm}
+\pagestyle{plain}
+
+% pauta dupla (duas linhas + linha media tracejada) com modelo a esquerda
+\newcommand{\pauta}[1]{%
+\par\noindent
+\begin{tikzpicture}[baseline=-0.25em]
+  \useasboundingbox (0,0) rectangle (16.4,1.15);
+  \draw (0,0) -- (16.4,0);
+  \draw (0,1.15) -- (16.4,1.15);
+  \draw[dotted] (0,0.575) -- (16.4,0.575);
+  \node[anchor=west] at (0.1,0.575) {#1};
+\end{tikzpicture}\par\vspace{0.55cm}
+}
+
+% bloco de 5 pautas: letra modelo pontilhada repetida + espaco de treino
+\newcommand{\bloco}[1]{%
+  \pauta{#1}
+  \pauta{#1}
+  \pauta{#1}
+  \pauta{#1}
+  \pauta{#1}
+}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\vspace*{2cm}
+{\Huge\bfseries Caderno Motor}\\[0.8cm]
+{\Large Escrita Cursiva Pontilhada --- Treino do Gesto}\\[1.5cm]
+{\large Alfabetizar Bem --- Metodo Hibrido Fonico-Kumon}\\[0.6cm]
+{\large Uso pedagogico; nao diagnostica.}\\[2.5cm]
+\noindent\rule{10cm}{0.6pt}\\[1cm]
+{\normalsize Letras pontilhadas para contornar (pauta dupla) com base nas
+fontes Mestra4 e Mestra2. O registro do mediador e pedagogico e destina-se
+a planejar o apoio; em caso de sinais persistentes, encaminhar a profissional
+habilitado (psicologo, fonoaudiologo, neurologista pediatrico).}
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+\clearpage
+\section*{Letra A}
+\addcontentsline{toc}{section}{Letra A}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 01
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Aa
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Aa}
+\clearpage
+\section*{Letra B}
+\addcontentsline{toc}{section}{Letra B}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 02
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Bb
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Bb}
+\clearpage
+\section*{Letra C}
+\addcontentsline{toc}{section}{Letra C}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 03
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Cc
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Cc}
+\clearpage
+\section*{Letra D}
+\addcontentsline{toc}{section}{Letra D}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 04
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Dd
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Dd}
+\clearpage
+\section*{Letra E}
+\addcontentsline{toc}{section}{Letra E}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 05
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Ee
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Ee}
+\clearpage
+\section*{Letra F}
+\addcontentsline{toc}{section}{Letra F}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 06
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Ff
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Ff}
+\clearpage
+\section*{Letra G}
+\addcontentsline{toc}{section}{Letra G}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 07
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Gg
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Gg}
+\clearpage
+\section*{Letra H}
+\addcontentsline{toc}{section}{Letra H}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 08
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Hh
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Hh}
+\clearpage
+\section*{Letra I}
+\addcontentsline{toc}{section}{Letra I}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 09
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Ii
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Ii}
+\clearpage
+\section*{Letra J}
+\addcontentsline{toc}{section}{Letra J}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 10
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Jj
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Jj}
+\clearpage
+\section*{Letra K}
+\addcontentsline{toc}{section}{Letra K}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 11
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Kk
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Kk}
+\clearpage
+\section*{Letra L}
+\addcontentsline{toc}{section}{Letra L}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 12
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Ll
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Ll}
+\clearpage
+\section*{Letra M}
+\addcontentsline{toc}{section}{Letra M}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 13
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Mm
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Mm}
+\clearpage
+\section*{Letra N}
+\addcontentsline{toc}{section}{Letra N}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 14
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Nn
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Nn}
+\clearpage
+\section*{Letra O}
+\addcontentsline{toc}{section}{Letra O}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 15
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Oo
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Oo}
+\clearpage
+\section*{Letra P}
+\addcontentsline{toc}{section}{Letra P}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 16
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Pp
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Pp}
+\clearpage
+\section*{Letra Q}
+\addcontentsline{toc}{section}{Letra Q}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 17
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Qq
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Qq}
+\clearpage
+\section*{Letra R}
+\addcontentsline{toc}{section}{Letra R}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 18
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Rr
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Rr}
+\clearpage
+\section*{Letra S}
+\addcontentsline{toc}{section}{Letra S}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 19
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Ss
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Ss}
+\clearpage
+\section*{Letra T}
+\addcontentsline{toc}{section}{Letra T}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 20
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Tt
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Tt}
+\clearpage
+\section*{Letra U}
+\addcontentsline{toc}{section}{Letra U}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 21
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Uu
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Uu}
+\clearpage
+\section*{Letra V}
+\addcontentsline{toc}{section}{Letra V}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 22
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Vv
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Vv}
+\clearpage
+\section*{Letra W}
+\addcontentsline{toc}{section}{Letra W}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 23
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Ww
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Ww}
+\clearpage
+\section*{Letra X}
+\addcontentsline{toc}{section}{Letra X}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 24
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Xx
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Xx}
+\clearpage
+\section*{Letra Y}
+\addcontentsline{toc}{section}{Letra Y}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 25
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Yy
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Yy}
+\clearpage
+\section*{Letra Z}
+\addcontentsline{toc}{section}{Letra Z}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 26
+\vspace{0.4cm}
+\begin{center}
+\papauta\fontsize{64}{64}\selectfont Zz
+\end{center}
+\vspace{0.3cm}
+\bloco{\papauta\fontsize{30}{30}\selectfont Zz}
+
+\clearpage
+\section*{Ligacoes: vogais: aa ee ii oo uu}
+\addcontentsline{toc}{section}{Ligacoes: vogais: aa ee ii oo uu}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 01L
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont aa}
+\pauta{\papalavra\fontsize{28}{28}\selectfont ee}
+\pauta{\papalavra\fontsize{28}{28}\selectfont ii}
+\pauta{\papalavra\fontsize{28}{28}\selectfont oo}
+\pauta{\papalavra\fontsize{28}{28}\selectfont uu}
+\clearpage
+\section*{Ligacoes: ba be bi bo bu}
+\addcontentsline{toc}{section}{Ligacoes: ba be bi bo bu}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 02L
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont ba}
+\pauta{\papalavra\fontsize{28}{28}\selectfont be}
+\pauta{\papalavra\fontsize{28}{28}\selectfont bi}
+\pauta{\papalavra\fontsize{28}{28}\selectfont bo}
+\pauta{\papalavra\fontsize{28}{28}\selectfont bu}
+\clearpage
+\section*{Ligacoes: ca ce ci co cu}
+\addcontentsline{toc}{section}{Ligacoes: ca ce ci co cu}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 03L
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont ca}
+\pauta{\papalavra\fontsize{28}{28}\selectfont ce}
+\pauta{\papalavra\fontsize{28}{28}\selectfont ci}
+\pauta{\papalavra\fontsize{28}{28}\selectfont co}
+\pauta{\papalavra\fontsize{28}{28}\selectfont cu}
+\clearpage
+\section*{Ligacoes: da de di do du}
+\addcontentsline{toc}{section}{Ligacoes: da de di do du}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 04L
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont da}
+\pauta{\papalavra\fontsize{28}{28}\selectfont de}
+\pauta{\papalavra\fontsize{28}{28}\selectfont di}
+\pauta{\papalavra\fontsize{28}{28}\selectfont do}
+\pauta{\papalavra\fontsize{28}{28}\selectfont du}
+\clearpage
+\section*{Ligacoes: fa fe fi fo fu}
+\addcontentsline{toc}{section}{Ligacoes: fa fe fi fo fu}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 05L
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont fa}
+\pauta{\papalavra\fontsize{28}{28}\selectfont fe}
+\pauta{\papalavra\fontsize{28}{28}\selectfont fi}
+\pauta{\papalavra\fontsize{28}{28}\selectfont fo}
+\pauta{\papalavra\fontsize{28}{28}\selectfont fu}
+\clearpage
+\section*{Ligacoes: ma me mi mo mu}
+\addcontentsline{toc}{section}{Ligacoes: ma me mi mo mu}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 06L
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont ma}
+\pauta{\papalavra\fontsize{28}{28}\selectfont me}
+\pauta{\papalavra\fontsize{28}{28}\selectfont mi}
+\pauta{\papalavra\fontsize{28}{28}\selectfont mo}
+\pauta{\papalavra\fontsize{28}{28}\selectfont mu}
+
+\clearpage
+\section*{Palavras 1}
+\addcontentsline{toc}{section}{Palavras 1}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 01P
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont banana}
+\pauta{\papalavra\fontsize{28}{28}\selectfont casa}
+\pauta{\papalavra\fontsize{28}{28}\selectfont dado}
+\pauta{\papalavra\fontsize{28}{28}\selectfont elefante}
+\pauta{\papalavra\fontsize{28}{28}\selectfont foca}
+\pauta{\papalavra\fontsize{28}{28}\selectfont gato}
+\clearpage
+\section*{Palavras 2}
+\addcontentsline{toc}{section}{Palavras 2}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 02P
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont janela}
+\pauta{\papalavra\fontsize{28}{28}\selectfont lapis}
+\pauta{\papalavra\fontsize{28}{28}\selectfont mala}
+\pauta{\papalavra\fontsize{28}{28}\selectfont navio}
+\pauta{\papalavra\fontsize{28}{28}\selectfont ovo}
+\pauta{\papalavra\fontsize{28}{28}\selectfont pato}
+\clearpage
+\section*{Palavras 3}
+\addcontentsline{toc}{section}{Palavras 3}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 03P
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont queijo}
+\pauta{\papalavra\fontsize{28}{28}\selectfont rato}
+\pauta{\papalavra\fontsize{28}{28}\selectfont sapo}
+\pauta{\papalavra\fontsize{28}{28}\selectfont tigre}
+\pauta{\papalavra\fontsize{28}{28}\selectfont uva}
+\pauta{\papalavra\fontsize{28}{28}\selectfont vaca}
+\clearpage
+\section*{Palavras 4}
+\addcontentsline{toc}{section}{Palavras 4}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 04P
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont bola}
+\pauta{\papalavra\fontsize{28}{28}\selectfont chave}
+\pauta{\papalavra\fontsize{28}{28}\selectfont dedo}
+\pauta{\papalavra\fontsize{28}{28}\selectfont escada}
+\pauta{\papalavra\fontsize{28}{28}\selectfont folha}
+\pauta{\papalavra\fontsize{28}{28}\selectfont gente}
+\clearpage
+\section*{Palavras 5}
+\addcontentsline{toc}{section}{Palavras 5}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 05P
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont horta}
+\pauta{\papalavra\fontsize{28}{28}\selectfont indio}
+\pauta{\papalavra\fontsize{28}{28}\selectfont jacare}
+\pauta{\papalavra\fontsize{28}{28}\selectfont limao}
+\pauta{\papalavra\fontsize{28}{28}\selectfont macaco}
+\pauta{\papalavra\fontsize{28}{28}\selectfont zebra}
+\clearpage
+\section*{Palavras 6}
+\addcontentsline{toc}{section}{Palavras 6}
+\noindent\textbf{Nome:} \underline{\hspace{4.5cm}}\quad \textbf{Data:} \underline{\hspace{2.5cm}}\quad \textbf{Folha:} 06P
+\vspace{0.5cm}
+\pauta{\papalavra\fontsize{28}{28}\selectfont tartaruga}
+\pauta{\papalavra\fontsize{28}{28}\selectfont bicicleta}
+\pauta{\papalavra\fontsize{28}{28}\selectfont coragem}
+\pauta{\papalavra\fontsize{28}{28}\selectfont felicidade}
+\pauta{\papalavra\fontsize{28}{28}\selectfont amizade}
+\pauta{\papalavra\fontsize{28}{28}\selectfont sabedoria}
+
+
+\end{document}

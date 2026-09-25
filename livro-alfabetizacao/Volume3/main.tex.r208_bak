@@ -1,0 +1,677 @@
+%% ============================================================
+%% VOLUME 3 — 3º ANO DO ENSINO FUNDAMENTAL
+%% Sílabas Compostas, Digrafos e Ditongos
+%% ============================================================
+
+\documentclass[a4paper,12pt,twoside]{book}
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[brazil]{babel}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{tcolorbox}
+\RequirePackage{hyperref}
+\RequirePackage{multicol}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
+\RequirePackage{ulem}
+\RequirePackage{calc}
+\RequirePackage{amssymb}
+
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm, headheight=14pt}
+
+\definecolor{primary}{HTML}{2E86AB}
+\definecolor{secondary}{HTML}{A23B72}
+\definecolor{accent}{HTML}{F18F01}
+\definecolor{success}{HTML}{2ECC71}
+\definecolor{warning}{HTML}{E74C3C}
+\definecolor{bglight}{HTML}{F8F9FA}
+
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\color{primary}}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}{\normalfont\Large\bfseries\color{secondary}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{accent}}{\thesubsection}{1em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\color{primary}\small\leftmark}
+\fancyhead[RO]{\color{primary}\small\rightmark}
+\fancyfoot[CE,CO]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{boquinha}[1][]{colback=bglight, colframe=primary, fonttitle=\bfseries\large, title={\color{white}#1}, boxrule=1pt, arc=4mm, left=8pt, right=8pt, top=8pt, bottom=8pt}
+\newtcolorbox{exercicio}[1][]{colback=white, colframe=accent, fonttitle=\bfseries, title={#1}, boxrule=0.5pt, arc=2mm, left=6pt, right=6pt, top=6pt, bottom=6pt}
+\newtcolorbox{dica}{colback=success!10, colframe=success, fonttitle=\bfseries, title={Dica para o Professor}, boxrule=0.5pt, arc=2mm}
+\newtcolorbox{avaliacao}{colback=warning!10, colframe=warning, fonttitle=\bfseries, title={Avaliação Diagnóstica}, boxrule=0.5pt, arc=2mm}
+
+\newcommand{\letra}[1]{\begin{center}\begin{tikzpicture}\node[draw=primary, line width=2pt, rounded corners=8pt, minimum width=3cm, minimum height=3cm, font=\fontsize{48}{56}\selectfont\bfseries\color{primary}] {#1};\end{tikzpicture}\end{center}}
+\newcommand{\boq}[2]{\begin{boquinha}[Boquinha da Letra #1]\begin{minipage}{0.45\textwidth}\centering\textbf{Posição da Boca}\\[0.5em] #2\end{minipage}\hfill\begin{minipage}{0.45\textwidth}\centering\textbf{Traçado}\\[0.5em] \letra{#1}\end{minipage}\end{boquinha}}
+\newcommand{\sil}[2]{\textbf{#1} + \textbf{#2} = \textbf{\color{primary}#1#2}}
+\newcommand{\dig}[2]{\textbf{#1#2} = \textbf{\color{secondary}#1#2}}
+
+\begin{document}
+
+%% ==================== CAPA ====================
+\begin{titlepage}
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[primary!10] (current page.south west) rectangle (current page.north east);
+  \fill[primary] (current page.north west) rectangle ([yshift=-4cm]current page.north east);
+  \fill[secondary] ([yshift=3cm]current page.south west) rectangle (current page.south east);
+  \node[anchor=north, font=\fontsize{36}{44}\selectfont\bfseries\color{white}, text width=14cm, align=center] at ([yshift=-2cm]current page.north) {ALFABETIZAR BEM};
+  \node[anchor=north, font=\fontsize{18}{22}\selectfont\color{white}, text width=14cm, align=center] at ([yshift=-4.5cm]current page.north) {Método Híbrido Fonico-Kumon\\com Técnica da Boquinha};
+  \node[anchor=center, font=\fontsize{28}{34}\selectfont\bfseries\color{primary}, text width=12cm, align=center] at (current page.center) {VOLUME 3\\[0.5em]\large 3º Ano do Ensino Fundamental};
+  \node[anchor=south, font=\small\color{white}, text width=14cm, align=center] at ([yshift=3.5cm]current page.south) {\textbf{Alinhamento Curricular}\\BNCC (EF03LP01--EF03LP10) \quad$\cdot$\quad Matriz CAEd \quad$\cdot$\quad SPAECE};
+  \node[anchor=south, font=\normalsize\color{secondary}, text width=14cm, align=center] at ([yshift=1.5cm]current page.south) {\textbf{Autor:} MarceloClaro\\Colaboradores: Agentes Especializados do Ecossistema OpenCode};
+  \node[anchor=south, font=\small\color{primary}] at ([yshift=0.5cm]current page.south) {Versão 1.1 --- Setembro de 2026};
+\end{tikzpicture}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+%% ============================================================
+%% PARTE I — FUNDAMENTAÇÃO
+%% ============================================================
+
+\chapter{Introdução ao 3º Ano}
+
+\section{O que muda no 3º Ano?}
+
+O 3º ano marca a consolidação da leitura e escrita. Neste volume:
+
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Sílabas compostas}: TR, BR, CR, DR, FR, GR, PR, TR
+  \item \textbf{Digrafos}: CH, LH, NH, RR, SS
+  \item \textbf{Ditongos}: AI, EI, OI, UI, AU, EU, OU, IA, IE, IO, IU
+  \item \textbf{Palavras complexas}: Palavras com 3 ou mais sílabas
+  \item \textbf{Textos curtos}: Leitura e produção de textos com 3--5 frases
+\end{enumerate}
+
+\section{Alinhamento Curricular --- 3º Ano}
+
+\begin{table}[h]
+\centering
+\caption{Habilidades BNCC do 3º Ano}
+\begin{tabular}{|p{2cm}|p{6cm}|p{4cm}|}
+\hline
+\textbf{Código} & \textbf{Habilidade} & \textbf{Abordagem} \\
+\hline
+EF03LP01 & Ler e escrever palavras com sílabas compostas & Volume 3, Unidades 1-3 \\
+\hline
+EF03LP02 & Produzir frases e textos simples & Volume 3, Unidade 4 \\
+\hline
+EF03LP03 & Identificar gêneros textuais & Volume 3, Parte II \\
+\hline
+EF03LP04 & Usar o registro oral em situações diversas & Integração contínua \\
+\hline
+EF03LP05 & Reconhecer a função social da escrita & Volume 3, Parte I \\
+\hline
+EF03LP06 & Compreender textos orais e escritos & Volume 3, Parte II \\
+\hline
+EF03LP07 & Produzir textos orais & Volume 3, Parte II \\
+\hline
+EF03LP08 & Ler e escrever palavras e frases complexas & Volume 3, Unidades 1-4 \\
+\hline
+EF03LP09 & Reconhecer e usar palavras comuns & Volume 3, integração \\
+\hline
+EF03LP10 & Reconhecer a estrutura de textos narrativos & Volume 3, Parte II \\
+\hline
+\end{tabular}
+\end{table}
+
+%% ============================================================
+%% PARTE II — SEQUÊNCIA DIDÁTICA
+%% ============================================================
+
+\chapter{Unidade 1 --- Sílabas Compostas com R}
+
+\section{Lição 1: Sílabas com TR}
+
+\begin{boquinha}[Boquinha das Sílabas TR]
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Posição da Boca}\\[0.5em]
+Língua toca atrás dos dentes (T)\\
+Depois vibra no céu da boca (R)\\
+Som: ``TR-TR-TR''\\[1em]
+Palavras: tigre, trabalho, prato
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Sílabas}\\[0.5em]
+\dig{T}{RA} \quad \dig{T}{RE} \quad \dig{T}{RI} \quad \dig{T}{RO} \quad \dig{T}{RU}
+\end{minipage}
+\end{boquinha}
+
+\begin{exercicio}[Folha de Prática 3.1 --- Sílabas TR]
+\noindent\textbf{Nome:} \underline{\hspace{4cm}} \quad \textbf{Data:} \underline{\hspace{2cm}} \quad \textbf{Nota:} \underline{\hspace{1cm}}/10
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V3-A-01 & Silábico-Alfabético & D1 (Leitura de palavras) & EF03LP01 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+  \item Formar sílabas com TR:
+  \begin{center}
+  \dig{T}{RA} \quad \dig{T}{RE} \quad \dig{T}{RI} \quad \dig{T}{RO} \quad \dig{T}{RU}
+  \end{center}
+  
+  \item Separar palavras em sílabas:
+  \begin{center}
+  TRABALHO $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \quad 
+  PRATO $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \quad 
+  TIGRE $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}}
+  \end{center}
+  
+  \item Formar palavras:
+  \begin{center}
+  TR + A + BA + LHO = \underline{\hspace{3cm}} \quad 
+  P + RA + TO = \underline{\hspace{3cm}} \quad 
+  TI + GRE = \underline{\hspace{3cm}}
+  \end{center}
+  
+  \item Ler palavras:
+  \begin{center}
+  $\rightarrow$ trabalho \quad prato \quad tigre \quad troca \quad trecho
+  \end{center}
+  
+  \item Escrever 3 palavras com TR:
+  \begin{center}
+  1. \underline{\hspace{4cm}} \quad 2. \underline{\hspace{4cm}} \quad 3. \underline{\hspace{4cm}}
+  \end{center}
+  
+  \item Ler frase:
+  \begin{center}
+  $\rightarrow$ O tigre é um grande felino.
+  \end{center}
+\end{enumerate}
+\end{exercicio}
+
+\section{Lição 2: Sílabas com BR, CR, DR, FR, GR, PR}
+
+\begin{boquinha}[Boquinha das Sílabas com R]
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Grupo de Sílabas}\\[0.5em]
+\dig{B}{RA} \quad \dig{C}{RA} \quad \dig{D}{RA} \\
+\dig{F}{RA} \quad \dig{G}{RA} \quad \dig{P}{RA}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Exemplos}\\[0.5em]
+BRA + CO = BRAÇO \\
+CRA + VO = CRAVO \\
+DRA + MA = DRAMA \\
+FRA + CO = FRACO \\
+GRA + TO = GRATO \\
+PRA + TO = PRATO
+\end{minipage}
+\end{boquinha}
+
+\begin{exercicio}[Folha de Prática 3.2 --- Sílabas Compostas com R]
+\noindent\textbf{Nome:} \underline{\hspace{4cm}} \quad \textbf{Data:} \underline{\hspace{2cm}} \quad \textbf{Nota:} \underline{\hspace{1cm}}/10
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V3-A-02 & Silábico-Alfabético & D1 (Leitura de palavras) & EF03LP01 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+  \item Formar sílabas com R:
+  \begin{center}
+  \dig{B}{RA} \quad \dig{C}{RA} \quad \dig{D}{RA} \\
+  \dig{F}{RA} \quad \dig{G}{RA} \quad \dig{P}{RA}
+  \end{center}
+
+  \item Formar palavras:
+  \begin{center}
+  BRA + CO = \underline{\hspace{2cm}} \quad 
+  CRA + VO = \underline{\hspace{2cm}} \quad 
+  FRA + CO = \underline{\hspace{2cm}} \\[0.5em]
+  GRA + TO = \underline{\hspace{2cm}} \quad 
+  DRA + MA = \underline{\hspace{2cm}} \quad 
+  PRA + TO = \underline{\hspace{2cm}}
+  \end{center}
+
+  \item Ler palavras:
+  \begin{center}
+  $\rightarrow$ braço \quad cravo \quad fraco \quad grato \quad drama \quad prato
+  \end{center}
+
+  \item Escrever 3 palavras com BR, CR, DR, FR, GR ou PR:
+  \begin{center}
+  1. \underline{\hspace{4cm}} \quad 2. \underline{\hspace{4cm}} \quad 3. \underline{\hspace{4cm}}
+  \end{center}
+\end{enumerate}
+\end{exercicio}
+
+
+%% ============================================================
+
+\chapter{Unidade 2 --- Digrafos}
+
+\section{Lição 3: Digrafos CH, LH, NH}
+
+\begin{boquinha}[Boquinha do Digrafo CH]
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Posição da Boca}\\[0.5em]
+Boca ENTREABERTA\\
+Dentes próximos ao lábio (CH)\\
+Som: ``CH-CH-CH''\\[1em]
+Palavras: chave, chama, choque
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Sílabas}\\[0.5em]
+\dig{CH}{A} \quad \dig{CH}{E} \quad \dig{CH}{I} \quad \dig{CH}{O} \quad \dig{CH}{U}
+\end{minipage}
+\end{boquinha}
+
+\vspace{1em}
+
+\begin{boquinha}[Boquinha do Digrafo NH]
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Posição da Boca}\\[0.5em]
+Boca ENTREABERTA\\
+Língua toca o céu (nasal)\\
+Som: ``NH-NH-NH''\\[1em]
+Palavras: ninho, pinha, cozinha
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Exemplos}\\[0.5em]
+ninho \quad pinha \quad cozinha
+\end{minipage}
+\end{boquinha}
+
+
+\begin{boquinha}[Boquinha do Digrafo LH]
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Posição da Boca}\\[0.5em]
+Boca ENTREABERTA\\
+Língua toca o céu pela lateral\\
+Som: ``LH-LH-LH''\\[1em]
+Palavras: alho, palha, coelho
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Exemplos}\\[0.5em]
+A-LHO \quad PA-LHA \quad CO-E-LHO
+\end{minipage}
+\end{boquinha}
+
+\section{Lição 4: Digrafos RR, SS}
+
+\begin{boquinha}[Boquinha do Digrafo RR]
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Posição da Boca}\\[0.5em]
+Boca ENTREABERTA\\
+Língua vibra FORTE no céu\\
+Som: ``RRR-RRR'' (vibrante longa)\\[1em]
+Palavras: carro, corrida, burro
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Regra}\\[0.5em]
+O RR aparece ENTRE vogais, com som forte:\\[0.3em]
+CAR-RO \quad COR-RI-DA \quad BUR-RO
+\end{minipage}
+\end{boquinha}
+
+\begin{exercicio}[Folha de Prática 3.3 --- Dígrafos]
+\noindent\textbf{Nome:} \underline{\hspace{4cm}} \quad \textbf{Data:} \underline{\hspace{2cm}} \quad \textbf{Nota:} \underline{\hspace{1cm}}/10
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V3-A-03 & Silábico-Alfabético & D1 (Leitura de palavras) & EF03LP01 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+  \item Ler palavras com digrafos:
+  \begin{center}
+  $\rightarrow$ chave \quad ninho \quad carro \quad passo \quad alho \quad pinha
+  \end{center}
+  
+  \item Separar palavras em sílabas:
+  \begin{center}
+  CHAVE $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \quad 
+  NINHO $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \quad 
+  CARRO $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \quad 
+  TRABALHO $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}}
+  \end{center}
+  
+  \item Ler palavras:
+  \begin{center}
+  $\rightarrow$ chave \quad nhoque \quad carro \quad calha \quad pinha \quad ramalho
+  \end{center}
+  
+  \item Escrever 5 palavras com digrafos:
+  \begin{center}
+  1. \underline{\hspace{4cm}} \quad 2. \underline{\hspace{4cm}} \quad 3. \underline{\hspace{4cm}} \quad 4. \underline{\hspace{4cm}} \quad 5. \underline{\hspace{4cm}}
+  \end{center}
+  
+  \item Ler frase:
+  \begin{center}
+  $\rightarrow$ O nhoque é muito gostoso.
+  \end{center}
+\end{enumerate}
+\end{exercicio}
+
+%% ============================================================
+
+\chapter{Unidade 3 --- Ditongos}
+
+\section{Lição 5: Ditongos Intercalares (AI, EI, OI, UI)}
+
+\begin{boquinha}[Boquinha do Ditongo AI]
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Posição da Boca}\\[0.5em]
+Boca ABERTA (A) → ENTREABERTA (I)\\
+Transição suave\\
+Som: ``AI-AI''\\[1em]
+Palavras: pais, mais, cai
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Palavras e Sílabas}\\[0.5em]
+\dig{PA}{I} = pai \quad \dig{CA}{I} = cai \quad \dig{MÃ}{E} = mãe\\[0.3em]
+mais \quad pais
+\end{minipage}
+\end{boquinha}
+
+\section{Lição 6: Ditongos Finais (AU, EU, OU)}
+
+\begin{boquinha}[Boquinha do Ditongo OU]
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Posição da Boca}\\[0.5em]
+Boca ARREDONDADA (O) → ENTREABERTA (U)\\
+Transição circular\\
+Som: ``OU-OU''\\[1em]
+Palavras: dou, couro, roupa
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Sílabas}\\[0.5em]
+\dig{C}{OU} \quad \dig{M}{OU} \quad \dig{S}{OU} \quad \dig{V}{OU} \quad \dig{N}{OU}
+\end{minipage}
+\end{boquinha}
+
+\begin{exercicio}[Folha de Prática 3.4 --- Ditongos]
+\noindent\textbf{Nome:} \underline{\hspace{4cm}} \quad \textbf{Data:} \underline{\hspace{2cm}} \quad \textbf{Nota:} \underline{\hspace{1cm}}/10
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V3-A-04 & Silábico-Alfabético & D1 (Leitura de palavras) & EF03LP01 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+  \item Identificar ditongos nas palavras:
+  \begin{center}
+  \fbox{PAI}S \quad \fbox{MAI}S \quad \fbox{CAI}SA \quad \fbox{NOI}TE \quad \fbox{COU}RO
+  \end{center}
+  
+  \item Separar palavras em sílabas:
+  \begin{center}
+  PAIS $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \quad 
+  COURO $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}} \quad 
+  NOITE $\rightarrow$ \underline{\hspace{1.5cm}} \underline{\hspace{1.5cm}}
+  \end{center}
+  
+  \item Formar palavras com ditongos:
+  \begin{center}
+  MA + IS = \underline{\hspace{2cm}} \quad 
+  COU + RO = \underline{\hspace{2cm}} \quad 
+  NOI + TE = \underline{\hspace{2cm}}
+  \end{center}
+  
+  \item Ler palavras:
+  \begin{center}
+  $\rightarrow$ pais \quad mais \quad noite \quad couro \quad saudade \quad boi
+  \end{center}
+  
+  \item Escrever 3 palavras com ditongos:
+  \begin{center}
+  1. \underline{\hspace{4cm}} \quad 2. \underline{\hspace{4cm}} \quad 3. \underline{\hspace{4cm}}
+  \end{center}
+  
+  \item Ler frase:
+  \begin{center}
+  $\rightarrow$ O pai está em casa.
+  \end{center}
+\end{enumerate}
+\end{exercicio}
+
+%% ============================================================
+
+\chapter{Unidade 4 --- Textos e Produção}
+
+\section{Lição 7: Leitura de Textos Curtos}
+
+\textbf{Exemplo de texto curto:}
+\begin{center}
+\begin{tikzpicture}
+  \draw[thick, rounded corners, fill=bglight] (0,0) rectangle (12,4);
+  \node[align=left, text width=10cm] at (6,2) {
+    \textbf{O CHAVEIRO}\\[0.5em]
+    O homem tinha uma chave grande.\\
+    A chave abria a porta da casa.\\
+    O homem abriu a porta.\\
+    A chave era de ouro.\\
+    O homem cuidou bem da chave.
+  };
+\end{tikzpicture}
+\end{center}
+
+\begin{exercicio}[Ler e Responder]
+\noindent\textbf{Nome:} \underline{\hspace{4cm}} \quad \textbf{Data:} \underline{\hspace{2cm}} \quad \textbf{Nota:} \underline{\hspace{1cm}}/10
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V3-C-05 & Alfabético & D3 (Leitura de textos) & EF03LP06 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+  \item O que o homem tinha? \underline{\hspace{6cm}}
+  \item O que a chave abria? \underline{\hspace{6cm}}
+  \item De que era a chave? \underline{\hspace{6cm}}
+  \item O que o homem fez? \underline{\hspace{6cm}}
+  \item Escrever uma frase sobre o texto:
+  \begin{center}
+  \underline{\hspace{8cm}}
+  \end{center}
+\end{enumerate}
+\end{exercicio}
+
+\section{Lição 8: Produção de Textos}
+
+\textbf{Estrutura de um texto narrativo:}
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Início}: Apresentação do personagem
+  \item \textbf{Meio}: O que acontece
+  \item \textbf{Fim}: O que acontece no final
+\end{enumerate}
+
+\begin{exercicio}[Produção de Texto]
+\noindent\textbf{Nome:} \underline{\hspace{4cm}} \quad \textbf{Data:} \underline{\hspace{2cm}} \quad \textbf{Nota:} \underline{\hspace{1cm}}/10
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V3-C-06 & Alfabético & D4 (Produção de texto) & EF03LP02 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+  \item Escrever um texto de 3--5 frases sobre ``O Animal Favorito'':
+  \begin{center}
+  \begin{tikzpicture}
+    \draw[thick, dashed] (0,0) rectangle (12,6);
+    \node[below left] at (0.2,6) {\small Início:};
+    \node[below left] at (0.2,4) {\small Meio:};
+    \node[below left] at (0.2,2) {\small Fim:};
+  \end{tikzpicture}
+  \end{center}
+  
+  \item Revisar o texto:
+  \begin{center}
+  $\square$ Tem início, meio e fim\\
+  $\square$ Tem pelo menos 3 frases\\
+  $\square$ As frases começam com letra maiúscula\\
+  $\square$ Tem pontuação correta
+  \end{center}
+\end{enumerate}
+\end{exercicio}
+
+%% ============================================================
+%% REFERÊNCIAS
+%% ============================================================
+
+\chapter{Referências Bibliográficas}
+
+\begin{thebibliography}{99}
+\bibitem{bncc} BRASIL. \textbf{BNCC}. Brasília: MEC, 2018.
+\bibitem{ehri} EHRI, L. C. Learning to Read Words. \textit{Scientific Studies of Reading}, 2005.
+\bibitem{kumon} KUMON Institute. \textbf{The Kumon Method}. Tóquio, 2020.
+\bibitem{caed} CAED/UFJF. \textbf{Matriz de Referência}. Juiz de Fora, 2019.
+\bibitem{spaece} SEDUC-CE. \textbf{SPAECE --- Padrões de Desempenho}. Fortaleza, 2019.
+\bibitem{mortatti} MORTATTI, H. \textbf{Ofício de Aprender a Ler e Escrever}. São Paulo, 2004.
+\bibitem{morais} MORAIS, A. \textbf{Alfabetização}. São Paulo: Ática, 2007.
+\bibitem{soares} SOARES, M. \textbf{Alfabetização e Letramento}. São Paulo: Ática, 2003.
+\bibitem{ferreiro} FERREIRO, E.; TEBEROSKY, A. \textbf{Psicogênese da Língua Escrita}. Porto Alegre, 1986.
+\bibitem{vygotsky} VYGOTSKY, L. S. \textbf{Pensamento e Linguagem}. São Paulo, 1989.
+\end{thebibliography}
+
+\appendix
+
+\chapter{Tabela de Sílabas Compostas}
+
+\begin{table}[h]
+\centering
+\caption{Sílabas Compostas com R}
+\begin{tabular}{|c|ccccc|}
+\hline
+\textbf{Consoante} & \textbf{+RA} & \textbf{+RE} & \textbf{+RI} & \textbf{+RO} & \textbf{+RU} \\
+\hline
+B & BRA & BRE & BRI & BRO & BRU \\
+C & CRA & CRE & CRI & CRO & CRU \\
+D & DRA & DRE & DRI & DRO & DRU \\
+F & FRA & FRE & FRI & FRO & FRU \\
+G & GRA & GRE & GRI & GRO & GRU \\
+P & PRA & PRE & PRI & PRO & PRU \\
+T & TRA & TRE & TRI & TRO & TRU \\
+\hline
+\end{tabular}
+\end{table}
+
+\chapter{Tabela de Digrafos}
+
+\begin{table}[h]
+\centering
+\caption{Digrafos do Português}
+\begin{tabular}{|c|ccccc|p{3cm}|}
+\hline
+\textbf{Digrafo} & \textbf{+A} & \textbf{+E} & \textbf{+I} & \textbf{+O} & \textbf{+U} & \textbf{Exemplo} \\
+\hline
+CH & CHA & CHE & CHI & CHO & CHU & chave, choque \\
+LH & LHA & LHE & LHI & LHO & LHU & alho, palha \\
+NH & NHA & NHE & NHI & NHO & NHU & ninho, nhoque \\
+RR & RRA & RRE & RRI & RRO & RRU & carro, corre \\
+SS & SSA & SSE & SSI & SSO & SSU & passo, classes \\
+\hline
+\end{tabular}
+\end{table}
+
+\chapter{Tabela de Ditongos}
+
+\begin{table}[h]
+\centering
+\caption{Ditongos do Português}
+\begin{tabular}{|c|c|p{4cm}|}
+\hline
+\textbf{Ditongo} & \textbf{Tipo} & \textbf{Exemplo} \\
+\hline
+AI & Oral decrescente & mais, cai, pai \\
+EI & Oral decrescente & rei, leite, papel \\
+OI & Oral decrescente & boi, noite, foi \\
+UI & Oral decrescente & fui, muito, Luiz \\
+AU & Oral decrescente & pau, saudade, causa \\
+EU & Oral decrescente & céu, véu, chapéu \\
+OU & Oral decrescente & ouro, couro, roupa \\
+IA & Oral crescente & saia, praia, folia \\
+IE & Oral crescente & viagem, série, régua \\
+IO & Oral crescente & fio, rio, claro \\
+IU & Oral crescente & viu, caiu, partiu \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}

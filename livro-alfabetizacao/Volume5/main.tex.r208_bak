@@ -1,0 +1,447 @@
+%% ============================================================
+%% VOLUME 5 — 5º ANO DO ENSINO FUNDAMENTAL
+%% Leitura e Escrita de Textos
+%% ============================================================
+
+\documentclass[a4paper,12pt,twoside]{book}
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[brazil]{babel}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{tcolorbox}
+\RequirePackage{hyperref}
+\RequirePackage{multicol}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
+\RequirePackage{ulem}
+\RequirePackage{calc}
+\RequirePackage{amssymb}
+
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm, headheight=14pt}
+
+\definecolor{primary}{HTML}{2E86AB}
+\definecolor{secondary}{HTML}{A23B72}
+\definecolor{accent}{HTML}{F18F01}
+\definecolor{success}{HTML}{2ECC71}
+\definecolor{warning}{HTML}{E74C3C}
+\definecolor{bglight}{HTML}{F8F9FA}
+
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\color{primary}}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}{\normalfont\Large\bfseries\color{secondary}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{accent}}{\thesubsection}{1em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\color{primary}\small\leftmark}
+\fancyhead[RO]{\color{primary}\small\rightmark}
+\fancyfoot[CE,CO]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{exercicio}[1][]{colback=white, colframe=accent, fonttitle=\bfseries, title={#1}, boxrule=0.5pt, arc=2mm, left=6pt, right=6pt, top=6pt, bottom=6pt}
+\newtcolorbox{dica}{colback=success!10, colframe=success, fonttitle=\bfseries, title={Dica para o Professor}, boxrule=0.5pt, arc=2mm}
+\newtcolorbox{avaliacao}{colback=warning!10, colframe=warning, fonttitle=\bfseries, title={Avaliação Diagnóstica}, boxrule=0.5pt, arc=2mm}
+
+\newcommand{\sil}[2]{\textbf{#1} + \textbf{#2} = \textbf{\color{primary}#1#2}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[primary!10] (current page.south west) rectangle (current page.north east);
+  \fill[primary] (current page.north west) rectangle ([yshift=-4cm]current page.north east);
+  \fill[secondary] ([yshift=3cm]current page.south west) rectangle (current page.south east);
+  \node[anchor=north, font=\fontsize{36}{44}\selectfont\bfseries\color{white}, text width=14cm, align=center] at ([yshift=-2cm]current page.north) {ALFABETIZAR BEM};
+  \node[anchor=north, font=\fontsize{18}{22}\selectfont\color{white}, text width=14cm, align=center] at ([yshift=-4.5cm]current page.north) {Método Híbrido Fonico-Kumon\\com Técnica da Boquinha};
+  \node[anchor=center, font=\fontsize{28}{34}\selectfont\bfseries\color{primary}, text width=12cm, align=center] at (current page.center) {VOLUME 5\\[0.5em]\large 5º Ano do Ensino Fundamental};
+  \node[anchor=south, font=\small\color{white}, text width=14cm, align=center] at ([yshift=3.5cm]current page.south) {\textbf{Alinhamento Curricular}\\BNCC (EF05LP01--EF05LP15) $\cdot$ Matriz CAEd $\cdot$ SPAECE};
+  \node[anchor=south, font=\normalsize\color{secondary}, text width=14cm, align=center] at ([yshift=1.5cm]current page.south) {\textbf{Autor:} MarceloClaro\\Colaboradores: Agentes Especializados do Ecossistema OpenCode};
+  \node[anchor=south, font=\small\color{primary}] at ([yshift=0.5cm]current page.south) {Versão 1.1 --- Setembro de 2026};
+\end{tikzpicture}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+%% ============================================================
+%% PARTE I — FUNDAMENTAÇÃO
+%% ============================================================
+
+\chapter{Introdução ao 5º Ano}
+
+\section{O que muda no 5º Ano?}
+
+O 5º ano é o último ano do ciclo de alfabetização e letramento. Neste volume:
+
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Leitura de textos complexos}: Narrativas longas, informativos, opinativos
+  \item \textbf{Produção argumentativa}: Textos com argumentos e opinião
+  \item \textbf{Análise gramatical avançada}: Sintaxe, concordância, regência
+  \item \textbf{Ortografia avançada}: Uso do C/QU, S/Z, X/CH, G/J
+  \item \textbf{Revisão e reescrita}: Processo de revisão de textos
+\end{enumerate}
+
+\section{Alinhamento Curricular}
+
+\begin{table}[h]
+\centering
+\caption{Habilidades BNCC do 5º Ano (Seleção)}
+\begin{tabular}{|p{2cm}|p{6cm}|p{4cm}|}
+\hline
+\textbf{Código} & \textbf{Habilidade} & \textbf{Abordagem} \\
+\hline
+EF05LP01 & Ler e compreender textos variados & Volume 5, Parte II \\
+\hline
+EF05LP02 & Produzir textos escritos com coerência & Volume 5, Unidade 4 \\
+\hline
+EF05LP03 & Utilizar estratégias avançadas de leitura & Volume 5, Parte I \\
+\hline
+EF05LP04 & Reconhecer gêneros textuais complexos & Volume 5, Parte II \\
+\hline
+EF05LP05 & Analisar a função social dos textos & Volume 5, Parte I \\
+\hline
+\end{tabular}
+\end{table}
+
+%% ============================================================
+%% PARTE II — SEQUÊNCIA DIDÁTICA
+%% ============================================================
+
+\chapter{Unidade 1 --- Leitura Compreensiva}
+
+\begin{dica}
+\textbf{Pausa neuroinclusiva:} A Técnica da Boquinha (Volume 3, Lição 2) continua à disposição: se algum aluno apresentar dúvida articulatória ao ler em voz alta, retome a posição da boca e o gesto associado ao som antes de prosseguir. No 5º ano, o foco é a compreensão e a argumentação, não a decodificação.
+\end{dica}
+
+\section{Lição 1: Estratégias de Leitura}
+
+\textbf{Estratégias de leitura para o 5º ano:}
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Antes de ler}: Observar título, imagens, fazer previsões
+  \item \textbf{Durante a leitura}: Sublinhar palavras novas, fazer inferências
+  \item \textbf{Depois de ler}: Resumir, avaliar, conectar com experiências
+\end{enumerate}
+
+\section{Lição 2: Tipos de Texto}
+
+\textbf{Gêneros textuais do 5º ano:}
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Narrativo}: Conto, crônica, fábula, lenda
+  \item \textbf{Informativo}: Artigo, reportagem, verbete
+  \item \textbf{Opinativo}: Editorial, carta argumentativa, resenha
+  \item \textbf{Instrucional}: Receita, manual, bula
+  \item \textbf{Descritivo}: Descrição de pessoa, lugar, objeto
+\end{enumerate}
+
+\begin{exercicio}[Leitura Compreensiva]
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V5-A-01 & Alfabético & D3 (Leitura de textos) & EF05LP01 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+  \item Ler o texto ``O Menino e o Urso'' (ver a Avaliação Final do 5º Ano, Seção 1)
+  \item Responder:
+  \begin{enumerate}
+    \item Quem são os personagens? \underline{\hspace{6cm}}
+    \item Onde acontece a história? \underline{\hspace{6cm}}
+    \item Qual é o problema do menino? \underline{\hspace{6cm}}
+    \item Como o problema é resolvido? \underline{\hspace{6cm}}
+    \item Qual é a lição da história? \underline{\hspace{6cm}}
+  \end{enumerate}
+\end{enumerate}
+\end{exercicio}
+
+\chapter{Unidade 2 --- Produção de Textos}
+
+\section{Lição 3: Estrutura do Texto Argumentativo}
+
+\textbf{Estrutura do texto argumentativo:}
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Tese}: Afirmação que se quer provar
+  \item \textbf{Argumentos}: Razões que sustentam a tese
+  \item \textbf{Conclusão}: Síntese dos argumentos
+\end{enumerate}
+
+\section{Lição 4: Revisão e Reescrita}
+
+\textbf{Checklist de revisão:}
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critério} & \textbf{OK} \\
+\hline
+O texto tem início, meio e fim & $\square$ \\
+\hline
+As frases começam com maiúscula & $\square$ \\
+\hline
+Tem pontuação correta & $\square$ \\
+\hline
+Não tem erros de ortografia & $\square$ \\
+\hline
+A concordância está correta & $\square$ \\
+\hline
+O texto é coeso e coerente & $\square$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{exercicio}[Produção de Texto Argumentativo]
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V5-B-01 & Alfabético & D4 (Produção de texto) & EF05LP02 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+  \item Escrever um texto argumentativo de 8--12 frases sobre:
+  \begin{center}
+  ``Por que devemos proteger o meio ambiente?''
+  \end{center}
+  \item Estrutura:
+  \begin{enumerate}
+    \item Tese: \underline{\hspace{8cm}}
+    \item Argumento 1: \underline{\hspace{8cm}}
+    \item Argumento 2: \underline{\hspace{8cm}}
+    \item Argumento 3: \underline{\hspace{8cm}}
+    \item Conclusão: \underline{\hspace{8cm}}
+  \end{enumerate}
+  \item Revisar com o checklist
+  \item Reescrever a versão final
+\end{enumerate}
+\end{exercicio}
+
+\chapter{Unidade 3 --- Ortografia Avançada}
+
+\section{Lição 5: C/QU e SS/Ç}
+
+\textbf{Regras de uso:}
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{C/QU}: A letra \textbf{C} tem som de \textbf{k} antes de A, O e U (casa, coisa, cutia); antes de E e I, o som de \textbf{k} é escrito com \textbf{QU} (queijo, quilo). Não existe a grafia ``KC'' em português.
+  \item \textbf{SS/Ç}: Usa-se SS ou Ç entre vogais (classe, aço); quando há duas vogais com som de \textbf{s} entre elas, escreve-se SS ou Ç (passeio, caçarola), e nunca S sozinho entre vogais para esse som.
+\end{enumerate}
+
+\section{Lição 6: S/Z e X/CH}
+
+\textbf{Regras de uso:}
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{S/Z}: O som de \textbf{z} entre vogais pode ser escrito com S (casa, asa) ou com Z (zero, feliz); no início ou no fim da palavra, o som de \textbf{z} é sempre Z.
+  \item \textbf{X/CH}: O som de \textbf{x} (de xícara) pode ser escrito com X (xícara, mexer) ou com CH (chave, chuva); com X também se escreve o som de \textbf{z} (exemplo) e o som de \textbf{ss} (trouxe).
+\end{enumerate}
+
+\chapter{Unidade 4 --- Revisão e Reescrita}
+
+\section{Lição 7: Processo de Reescrita}
+
+\textbf{Etapas da reescrita:}
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Leitura crítica}: Reler o texto com atenção
+  \item \textbf{Identificação de problemas}: Marcar trechos confusos
+  \item \textbf{Correção}: Reescrever os trechos problemáticos
+  \item \textbf{Revisão final}: Conferir ortografia, pontuação, concordância
+\end{enumerate}
+
+\section{Lição 8: Avaliação do Texto}
+
+\textbf{Rubrica de avaliação:}
+\begin{center}
+\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+\textbf{Critério} & \textbf{Iniciante} & \textbf{Em desenvolvimento} & \textbf{Domínio} \\
+\hline
+Estrutura & Sem início/fim & Parcial & Completa \\
+\hline
+Coesão & Sem conexão & Parcial & Excelente \\
+\hline
+Ortografia & Muitos erros & Alguns erros & Poucos erros \\
+\hline
+Pontuação & Sem pontuação & Parcial & Correta \\
+\hline
+Vocabulário & Pobre & Adequado & Rico \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Avaliação Final do 5º Ano}
+
+\begin{avaliacao}
+
+\vspace{0.3em}
+\begin{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Código Kumon} & \textbf{Nível} & \textbf{CAEd} & \textbf{BNCC} \\
+\hline
+V5-R-01 & Alfabético & D3 (Leitura de textos) + D4 (Produção de texto) & EF05LP01, EF05LP02 \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.3em}
+
+\textbf{AVALIAÇÃO FINAL --- 5º ANO}\\[1em]
+\noindent\textbf{Nome:} \underline{\hspace{4cm}} \quad \textbf{Data:} \underline{\hspace{2cm}}\\[1em]
+
+\textbf{SEÇÃO 1: LEITURA (20 pontos)}
+
+\begin{enumerate}
+  \item Ler o texto e responder (10 pontos):
+  \begin{center}
+  \begin{tikzpicture}
+    \draw[thick, rounded corners, fill=bglight] (0,0) rectangle (14,5);
+    \node[align=left, text width=12cm] at (7,2.5) {
+      \textbf{O MENINO E O URSO}\\[0.5em]
+      Era uma vez um menino que tinha medo de tudo.\\
+      Um dia, ele encontrou um urso no meio da floresta.\\
+      O urso não era mau. Era apenas solitário.\\
+      O menino e o urso se tornaram amigos.\\
+      Aprendemos que as aparências enganam.
+    };
+  \end{tikzpicture}
+  \end{center}
+  
+  \begin{enumerate}
+    \item Quem são os personagens? (2 pontos)
+    \item Onde acontece a história? (2 pontos)
+    \item Qual é o problema do menino? (3 pontos)
+    \item O que o texto nos ensina? (3 pontos)
+  \end{enumerate}
+  
+  \item Ler e classificar o gênero textual (10 pontos):
+  \begin{center}
+  \begin{tabular}{|p{6cm}|p{4cm}|}
+  \hline
+  \textbf{Texto} & \textbf{Gênero} \\
+  \hline
+  ``Era uma vez um rei...'' & \underline{\hspace{3cm}} \\
+  \hline
+  ``O Brasil é um país...'' & \underline{\hspace{3cm}} \\
+  \hline
+  ``Acho que devemos...'' & \underline{\hspace{3cm}} \\
+  \hline
+  ``Corte os ingredientes...'' & \underline{\hspace{3cm}} \\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{enumerate}
+
+\textbf{SEÇÃO 2: PRODUÇÃO (20 pontos)}
+
+\begin{enumerate}[resume]
+  \item Escrever um texto argumentativo de 8--12 frases (20 pontos):
+  \begin{center}
+  ``Por que a leitura é importante?''
+  \end{center}
+  
+  \textbf{Critérios de avaliação:}
+  \begin{center}
+  \begin{tabular}{|l|c|}
+  \hline
+  \textbf{Critério} & \textbf{Pontos} \\
+  \hline
+  Tem tese clara & \underline{\hspace{2cm}}/4 \\
+  \hline
+  Tem 3 argumentos & \underline{\hspace{2cm}}/6 \\
+  \hline
+  Tem conclusão & \underline{\hspace{2cm}}/2 \\
+  \hline
+  Ortografia correta & \underline{\hspace{2cm}}/3 \\
+  \hline
+  Pontuação correta & \underline{\hspace{2cm}}/2 \\
+  \hline
+  Coesão e coerência & \underline{\hspace{2cm}}/3 \\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{enumerate}
+
+\textbf{NOTA TOTAL:} \underline{\hspace{1cm}}/40
+\end{avaliacao}
+
+\chapter{Referências Bibliográficas}
+
+\begin{thebibliography}{99}
+\bibitem{bncc} BRASIL. \textbf{BNCC}. Brasília: MEC, 2018.
+\bibitem{ehri} EHRI, L. C. Learning to Read Words. 2005.
+\bibitem{kumon} KUMON Institute. \textbf{The Kumon Method}. 2020.
+\bibitem{caed} CAED/UFJF. \textbf{Matriz de Referência}. 2019.
+\bibitem{spaece} SEDUC-CE. \textbf{SPAECE --- Padrões de Desempenho}. 2019.
+\bibitem{mortatti} MORTATTI, H. \textbf{Ofício de Aprender a Ler}. 2004.
+\bibitem{morais} MORAIS, A. \textbf{Alfabetização}. 2007.
+\bibitem{soares} SOARES, M. \textbf{Alfabetização e Letramento}. 2003.
+\bibitem{koch} KOCH, I. G. V. \textbf{Linguística do Texto}. 2004.
+\bibitem{marcuschi} MARCUSCHI, L. A. \textbf{Gêneros Textuais}. 2008.
+\end{thebibliography}
+
+\appendix
+
+\chapter{Resumo dos Conteúdos dos 5 Volumes}
+
+\begin{table}[h]
+\centering
+\caption{Resumo da Progressão --- 1º ao 5º Ano}
+\begin{tabular}{|c|p{4cm}|p{4cm}|p{3cm}|}
+\hline
+\textbf{Volume} & \textbf{Conteúdo Principal} & \textbf{Habilidades BNCC} & \textbf{Foco} \\
+\hline
+1 & Vogais, consonantes B1, sílabas diretas & EF01LP01--09 & Consciência fonológica \\
+\hline
+2 & Consonantes B2, sílabas diretas, frases & EF02LP01--10 & Consolidação \\
+\hline
+3 & Sílabas compostas, digrafos, ditongos & EF03LP01--10 & Complexidade \\
+\hline
+4 & Análise gramatical, ortografia, textos & EF04LP01--15 & Produção \\
+\hline
+5 & Leitura compreensiva, argumentação, revisão & EF05LP01--15 & Autonomia \\
+\hline
+\end{tabular}
+\end{table}
+
+\chapter{Materiais Complementares}
+
+\section{Folhas de Prática Kumon --- Padrão}
+
+Cada folha de prática segue a estrutura:
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Reconhecimento} (5 exercícios): Identificar letras/sílabas
+  \item \textbf{Produção guiada} (5 exercícios): Completar palavras
+  \item \textbf{Integração} (5 exercícios): Ler e escrever em contexto
+\end{enumerate}
+
+\section{Avaliações Diagnósticas --- Padrão}
+
+Cada avaliação contém:
+\begin{enumerate}[leftmargin=2cm]
+  \item \textbf{Seção 1}: Reconhecimento (10 pontos)
+  \item \textbf{Seção 2}: Separação silábica (10 pontos)
+  \item \textbf{Seção 3}: Leitura (10 pontos)
+  \item \textbf{Seção 4}: Produção (10 pontos)
+\end{enumerate}
+
+\end{document}

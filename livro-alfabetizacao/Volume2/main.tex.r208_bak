@@ -1,0 +1,106 @@
+%% ============================================================
+%% VOLUME 2 — 2º ANO DO ENSINO FUNDAMENTAL
+%% Consonantes do Bloco 2 e Sílabas Simples
+%% ============================================================
+%% Estrutura de módulos:
+%%   main.tex — Arquivo principal
+%%   parte1-fundamentacao.tex — Fundamentação teórica
+%%   parte2-sequencia-didatica.tex — Sequência didática
+%%   parte3-kumon.tex — Exercícios Kumon
+%%   parte4-avaliacoes.tex — Avaliações
+%%   parte5-guia-professor.tex — Guia para o professor
+%%   referencias.tex — Referências e apêndices
+%% ============================================================
+
+\documentclass[a4paper,12pt,twoside]{book}
+
+%% --- Pacotes ---
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[brazil]{babel}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{tcolorbox}
+\RequirePackage{hyperref}
+\RequirePackage{multicol}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
+\RequirePackage{ulem}
+\RequirePackage{calc}
+\RequirePackage{amssymb}
+
+%% --- Geometria ---
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm, headheight=14pt}
+
+%% --- Cores ---
+\definecolor{primary}{HTML}{2E86AB}
+\definecolor{secondary}{HTML}{A23B72}
+\definecolor{accent}{HTML}{F18F01}
+\definecolor{success}{HTML}{2ECC71}
+\definecolor{warning}{HTML}{E74C3C}
+\definecolor{bglight}{HTML}{F8F9FA}
+
+%% --- Estilo de Capítulos ---
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\color{primary}}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}{\normalfont\Large\bfseries\color{secondary}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{accent}}{\thesubsection}{1em}{}
+
+%% --- Cabeçalho/Rodapé ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\color{primary}\small\leftmark}
+\fancyhead[RO]{\color{primary}\small\rightmark}
+\fancyfoot[CE,CO]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%% --- Ambientes ---
+\newtcolorbox{boquinha}[1][]{colback=bglight, colframe=primary, fonttitle=\bfseries\large, title={\color{white}#1}, boxrule=1pt, arc=4mm, left=8pt, right=8pt, top=8pt, bottom=8pt}
+\newtcolorbox{exercicio}[1][]{colback=white, colframe=accent, fonttitle=\bfseries, title={#1}, boxrule=0.5pt, arc=2mm, left=6pt, right=6pt, top=6pt, bottom=6pt}
+\newtcolorbox{dica}{colback=success!10, colframe=success, fonttitle=\bfseries, title={Dica para o Professor}, boxrule=0.5pt, arc=2mm}
+\newtcolorbox{avaliacao}{colback=warning!10, colframe=warning, fonttitle=\bfseries, title={Avaliação Diagnóstica}, boxrule=0.5pt, arc=2mm}
+
+%% --- Comandos ---
+\newcommand{\letra}[1]{\begin{center}\begin{tikzpicture}\node[draw=primary, line width=2pt, rounded corners=8pt, minimum width=3cm, minimum height=3cm, font=\fontsize{48}{56}\selectfont\bfseries\color{primary}] {#1};\end{tikzpicture}\end{center}}
+\newcommand{\boq}[2]{\begin{boquinha}[Boquinha da Letra #1]\begin{minipage}{0.45\textwidth}\centering\textbf{Posição da Boca}\\[0.5em] #2\end{minipage}\hfill\begin{minipage}{0.45\textwidth}\centering\textbf{Traçado}\\[0.5em] \letra{#1}\end{minipage}\end{boquinha}}
+\newcommand{\sil}[2]{\textbf{#1} + \textbf{#2} = \textbf{\color{primary}#1#2}}
+
+%% --- Documento ---
+\begin{document}
+
+%% ==================== CAPA ====================
+\begin{titlepage}
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[primary!10] (current page.south west) rectangle (current page.north east);
+  \fill[primary] (current page.north west) rectangle ([yshift=-4cm]current page.north east);
+  \fill[secondary] ([yshift=3cm]current page.south west) rectangle (current page.south east);
+  \node[anchor=north, font=\fontsize{36}{44}\selectfont\bfseries\color{white}, text width=14cm, align=center] at ([yshift=-2cm]current page.north) {ALFABETIZAR BEM};
+  \node[anchor=north, font=\fontsize{18}{22}\selectfont\color{white}, text width=14cm, align=center] at ([yshift=-4.5cm]current page.north) {Método Híbrido Fonico-Kumon\\com Técnica da Boquinha};
+  \node[anchor=center, font=\fontsize{28}{34}\selectfont\bfseries\color{primary}, text width=12cm, align=center] at (current page.center) {VOLUME 2\\[0.5em]\large 2º Ano do Ensino Fundamental};
+  \node[anchor=south, font=\small\color{white}, text width=14cm, align=center] at ([yshift=3.5cm]current page.south) {\textbf{Alinhamento Curricular}\\BNCC (EF02LP01--EF02LP10) \quad$\cdot$\quad Matriz CAEd \quad$\cdot$\quad SPAECE};
+  \node[anchor=south, font=\normalsize\color{secondary}, text width=14cm, align=center] at ([yshift=1.5cm]current page.south) {\textbf{Autor:} MarceloClaro\\Colaboradores: Agentes Especializados do Ecossistema OpenCode};
+  \node[anchor=south, font=\small\color{primary}] at ([yshift=0.5cm]current page.south) {Versão 1.1 --- Setembro de 2026};
+\end{tikzpicture}
+\end{titlepage}
+
+%% --- Páginas Preliminares ---
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+
+%% ==================== CONTEÚDO ====================
+\pagenumbering{arabic}
+
+\input{parte1-fundamentacao}
+\input{parte2-sequencia-didatica}
+\input{parte3-kumon}
+\input{parte4-avaliacoes}
+\input{parte5-guia-professor}
+\input{referencias}
+
+\end{document}

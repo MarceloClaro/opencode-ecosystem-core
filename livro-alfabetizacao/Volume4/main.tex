@@ -1,0 +1,49 @@
+%% ============================================================
+%% Volume 4 — Capa e Páginas Preliminares (gerado por expandir_volume.py)
+%% ============================================================
+\documentclass{alfabetizar}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[primary!10] (current page.south west) rectangle (current page.north east);
+  \fill[primary] (current page.north west) rectangle ([yshift=-4cm]current page.north east);
+  \fill[secondary] ([yshift=3cm]current page.south west) rectangle (current page.south east);
+  \node[anchor=north, font=\fontsize{36}{44}\selectfont\bfseries\color{white}, text width=14cm, align=center]
+    at ([yshift=-2cm]current page.north) {ALFABETIZAR BEM};
+  \node[anchor=north, font=\fontsize{18}{22}\selectfont\color{white}, text width=14cm, align=center]
+    at ([yshift=-4.5cm]current page.north) {Método Híbrido Fonico-Kumon\\com Técnica da Boquinha};
+  \node[anchor=center, font=\fontsize{28}{34}\selectfont\bfseries\color{primary}, text width=12cm, align=center]
+    at (current page.center) {VOLUME 4\\[0.5em]\large Alfabetizar Bem --- 4º Ano};
+  \node[anchor=south, font=\small\color{white}, text width=14cm, align=center]
+    at ([yshift=3.5cm]current page.south) {\textbf{Alinhamento Curricular}\\BNCC (EF04LP01, EF04LP02, EF04LP03, EF04LP05, EF04LP06, EF04LP07, EF04LP09) \quad$\cdot$\quad Matriz CAEd \quad$\cdot$\quad SPAECE};
+  \node[anchor=south, font=\normalsize\color{secondary}, text width=14cm, align=center]
+    at ([yshift=1.5cm]current page.south) {\textbf{Autor:} MarceloClaro\\Colaboradores: Agentes Especializados do Ecossistema OpenCode};
+  \node[anchor=south, font=\small\color{primary}] at ([yshift=0.5cm]current page.south) {Versão 1.0 --- Setembro de 2026};
+\end{tikzpicture}
+\end{titlepage}
+
+\noindent\textbf{Modelo de escrita cursiva:}\\[0.3em]
+{\fontecursiva\Large a b c d e f g h i j k l m n o p q r s t u v w x y z}\\[0.3em]
+{\fontecursiva\Large A B C D E F G H I J K L M N O P Q R S T U V W X Y Z}\\[0.5em]
+\hrule
+\vspace{1em}
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+
+\pagenumbering{arabic}
+
+\input{parte1-fundamentacao}
+\input{parte2-sequencia-didatica}
+\input{parte3-kumon}
+\input{parte4-avaliacoes}
+\input{parte5-guia-professor}
+\input{parte6-guia-triagem}
+\input{parte7-sons-atividades}
+\input{referencias}
+\input{apendice}
+
+\end{document}
