@@ -1,0 +1,30 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "gpt-6ceee9ff15bc7f1a4007d43b810f1876",
+  "version": "0.4.0",
+  "description": "Apoio clínico em pt-BR com conselho multiespecialidades simulado, anamnese longitudinal, hipóteses e opções terapêuticas para revisão humana.",
+  "author": {
+    "name": "MARCELO CLARO LARANJEIRA"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "skills"
+        ],
+        "category": "Other",
+        "composerIcon": "./assets/gpt-icon.png",
+        "defaultPrompt": [
+          "Audite esta prescrição com testes SDD/TDD.",
+          "Valide estes exames com critérios de aceitação.",
+          "Revise esta consulta e identifique falhas de segurança."
+        ],
+        "developerName": "MARCELO CLARO LARANJEIRA",
+        "displayName": "Médico Virtual Supremo",
+        "logo": "./assets/gpt-icon.png",
+        "longDescription": "Conselho clínico simulado com perspectivas de especialidades, diagnóstico diferencial, reconstrução retrospectiva da história do paciente e comparação de possibilidades terapêuticas. Organiza evidências, divergências e incertezas com auditoria SDD/TDD. Adapta padrões de memória em grafo e orquestração do MiroFish-Offline e OpenCode; não instala nem executa esses motores. Apoio à decisão sob revisão humana, sem diagnóstico definitivo ou prescrição autônoma.",
+        "shortDescription": "Conselho clínico simulado, histórico e opções para revisão humana."
+      }
+    }
+  }
+}
