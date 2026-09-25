@@ -1,0 +1,27 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "prestacao-contas-nota-dez",
+  "version": "1.0.0",
+  "description": "Auditor e executor de prestação de contas do Prêmio Escola Nota Dez (SEDUC/CE): OCR de diligências escaneadas, parse de apontamentos, checklist e minuta de ofício-resposta item a item sob revisão humana.",
+  "author": {
+    "name": "MARCELO CLARO LARANJEIRA"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "skills"
+        ],
+        "category": "Productivity",
+        "displayName": "Auditor e Executor — Prestação de Contas (Escola Nota 10)",
+        "shortDescription": "Audita diligências do Prêmio Escola Nota Dez e gera minuta de resposta item a item.",
+        "longDescription": "Recebe PDFs escaneados (Epson) de diligências da SEDUC/CE sobre prestação de contas do Prêmio Escola Nota Dez, extrai os apontamentos via OCR (tesseract pt-BR), gera checklist com score interno de cobertura e produz minuta de ofício-resposta + planilha de controle. O score é INTERNO (medida de cobertura dos apontamentos), nunca aprovação do órgão concedente; toda entrega exige revisão humana da documentação original.",
+        "defaultPrompt": [
+          "Audite este PDF de diligência do Prêmio Escola Nota Dez.",
+          "Gere a minuta de resposta para esta diligência.",
+          "Monte o checklist de providências desta prestação de contas."
+        ]
+      }
+    }
+  }
+}

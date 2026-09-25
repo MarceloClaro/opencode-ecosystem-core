@@ -12096,6 +12096,51 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R597",
+      "objective": "Plugin Auditor e Executor de Prestação de Contas (Prêmio Escola Nota Dez, SEDUC/CE): OCR de PDFs escaneados, parse de diligências, checklist item-a-item e minuta de ofício-resposta sob revisão humana",
+      "changes": [
+        "prestacao_contas_nota_dez/plugin.json + README.md: metadados agent-plugins e documentação anti-overclaim (R110)",
+        "prestacao_contas_nota_dez/src/ocr.py: PDF -> texto por página (pdftoppm + tesseract por com cache JSON em /tmp/opencode/pcn_ocr_cache)",
+        "prestacao_contas_nota_dez/src/diligencia.py: parse de cabeçalho (processo, unidade, município, CNPJ, NE, valor, ano), blocos por licitação e demandas com página referida",
+        "prestacao_contas_nota_dez/src/auditor.py: checklist item-a-item com dedup por texto normalizado, mescla de blocos repetidos (OCR por página) e score interno de cobertura",
+        "prestacao_contas_nota_dez/src/executor.py: minuta Markdown por demanda + CSV de controle (id, bloco, demanda, pagina, providencia, documento, status)",
+        "prestacao_contas_nota_dez/src/cli.py: comandos audit (PDF->JSON) e execute (JSON->minuta+CSV)",
+        "prestacao_contas_nota_dez/tests/test_r597_prestacao_contas.py: 8 testes TDD (parse, blocos, demandas, auditor, executor)",
+        ".opencode/skills/prestacao-contas-nota-dez/SKILL.md: skill wrapper com disable-model-invocation (R595 pattern)",
+        "prestacao_contas_nota_dez/exemplos/: auditorias reais das diligências 14524484 (67 itens, NE 18109/2016) e 15174538 (75 itens, NE 18984/2018)",
+        "Integração de referências do plugin contas-escolares-airam-veras (Codex): references/{regras-comuns,base-documental,fontes-oficiais,manual-2019-ocr,checklist-base.csv,modelo-resposta,proveniencia.json}",
+        "src/verificacao.py: carregar_checklist_base (C01-C40) + grupos + tabela markdown; C40 'cada exigência tem evidência, resposta e estado distinto'",
+        "src/auditor.py: itens ganham estado_documental (inicial 'não examinado') e estado_tramitacao (inicial 'identificado'); consolidar_estados()",
+        "src/executor.py: minuta em formato administrativo (modelo-resposta): Ofício nº [PENDENTE], tabela Item|Exigência|Resposta|Anexo|Pendência, índice de anexos, data em pt-BR",
+        "src/relatorio.py: relatório de conferência (identificação/escopo, síntese, cobertura e limitações, achados, providências) com anti-overclaim explícito",
+        "src/cli.py: comando execute também gera relatorio_<nome>.md",
+        "src/conciliar.py: conciliação aritmética (escopo financeiro) importada e validada (exemplo convergiu: 24.500,00 + 12,34 - 2.450,00 - 3,50 = 22.058,84 = saldo banco)",
+        "tests/test_r597b_melhorias_plugin.py: 8 testes (verificação base, estados, minuta administrativa, relatório anti-overclaim) — suíte 16/16"
+      ],
+      "score": 100.0,
+      "lessons": [
+        "str.isupper() é FALSO para 'Nº' (U+00BA é islower em Unicode) — detecção de títulos MAIÚSCULOS deve comparar linha.upper() == linha e excluir conteúdo (OBJETO DA/DATA DA/MAPA COMPARATIVO...), não usar isupper()",
+        "Cabeçalho de diligência: 'VALOR: 24.500,00' pode vir sem 'R$' no corpo — regex deve aceitar moeda opcional",
+        "OCR de PDF escaneado repete cabeçalhos por página e quebra linhas com marcadores 'e'/'o'/'€' (confusão com * + •) — dedup por texto normalizado é obrigatório no checklist",
+        "Anti-overclaim R110: score interno de cobertura de apontamentos é ferramenta de organização da resposta; nunca apresentar como aprovação do órgão concedente",
+        "Cache OCR em /tmp evita re-OCR (15 páginas = ~2min; cache corta para segundos)",
+        "JSONs de auditoria legados sem estado_documental/estado_tramitacao: relatório e executor usam .get() com fallback para retrocompatibilidade",
+        "strftime locale en gera 'September' — datas por extenso em pt-BR usam mapa fixo de meses",
+        "O plugin Codex reforçou o modelo de estados (documental × tramitação) e o formato de resposta tabelado; integração enriquece sem duplicar heurísticas"
+      ],
+      "timestamp": 1790359623.7914832,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }
