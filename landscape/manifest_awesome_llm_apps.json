@@ -1,0 +1,176 @@
+{
+  "collection": "awesome-llm-apps",
+  "source_repo": "https://github.com/MarceloClaro/awesome-llm-apps",
+  "upstream": "Shubhamsaboo/awesome-llm-apps",
+  "license": "Apache-2.0",
+  "curated_at": "2026-09-17T00:00:00.000000+00:00",
+  "scope_note": "Manifest curado de 15 templates representativos das categorias de maior afinidade com o Core (agent skills, RAG, multi-agente/trust, MCP, otimização de tokens, always-on, meta-loop). O README do upstream referencia 100+ templates; estes 15 são metadados de paisagem, não são integração de código no Core e nenhum código externo é copiado. Entrada adversarial 'advisor-orchestrator-worker' registra nota de modelos não validados externamente (anti-overclaim R142).",
+  "agents": [
+    {
+      "id": "agent-skill-project-graveyard",
+      "title": "Project Graveyard (Agent Skill)",
+      "category": "agent-skill",
+      "industry": "Productivity/PM",
+      "framework": "agent-skill (Claude Code/Codex/Cursor)",
+      "keywords": ["skill", "project", "git", "history", "productivity", "review"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/agent_skills/project-graveyard",
+      "note": "Padrão de skill auto-contida instalável via npx skills add; útil como referência de formato para skills do Core."
+    },
+    {
+      "id": "agent-skill-first-reader",
+      "title": "First Reader (Agent Skill)",
+      "category": "agent-skill",
+      "industry": "Writing/Editorial",
+      "framework": "agent-skill",
+      "keywords": ["skill", "reader", "writing", "editorial", "review", "feedback"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/agent_skills/first-reader",
+      "note": "Simula leitores reais em rascunhos; padrão de avaliação de audiencia sem reescrita automatica."
+    },
+    {
+      "id": "agent-skill-scope-creep-detector",
+      "title": "Scope Creep Detector (Agent Skill)",
+      "category": "agent-skill",
+      "industry": "Software Development",
+      "framework": "agent-skill",
+      "keywords": ["skill", "scope", "diff", "review", "git", "quality"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/agent_skills/scope-creep-detector",
+      "note": "Verifica se um diff excedeu a intenção declarada; afinidade com o gate SDD e com revisão de PRs."
+    },
+    {
+      "id": "agent-skill-commit-archaeologist",
+      "title": "Commit Archaeologist (Agent Skill)",
+      "category": "agent-skill",
+      "industry": "Software Development",
+      "framework": "agent-skill",
+      "keywords": ["skill", "git", "commit", "history", "intent", "audit"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/agent_skills/commit-archaeologist",
+      "note": "Reconstrói a intenção de um arquivo a partir do histórico; padrão para auditoria de legado."
+    },
+    {
+      "id": "agent-skill-dependency-doctor",
+      "title": "Dependency Doctor (Agent Skill)",
+      "category": "agent-skill",
+      "industry": "Software Development/Security",
+      "framework": "agent-skill",
+      "keywords": ["skill", "dependency", "package", "manifest", "audit", "security"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/agent_skills/dependency-doctor",
+      "note": "Audita manifestos de dependências; afinidade com health checks e auditoria de segurança."
+    },
+    {
+      "id": "agent-skill-self-improving-agent-skills",
+      "title": "Self-Improving Agent Skills",
+      "category": "agent-skill",
+      "industry": "Research/ML",
+      "framework": "agent-skill (ADK/Gemini)",
+      "keywords": ["skill", "self-improving", "eval", "optimization", "agent"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/agent_skills/self-improving-agent-skills",
+      "note": "Skills que se otimizam contra evals; padrão de observatorio — o Core não adota mutação automatica de skills (Skill Mutation Gate)."
+    },
+    {
+      "id": "rag-corrective-rag",
+      "title": "Corrective RAG (CRAG)",
+      "category": "rag",
+      "industry": "Knowledge/Research",
+      "framework": "langchain",
+      "keywords": ["rag", "retrieval", "grading", "correction", "knowledge", "query"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/rag_tutorials/corrective_rag",
+      "note": "Retrieval que se autoavalia e tenta novamente antes de responder; padrão candidato para estratégias RAG do servidor local."
+    },
+    {
+      "id": "rag-agentic-embedding-gemma",
+      "title": "Agentic RAG with Embedding Gemma",
+      "category": "rag",
+      "industry": "Knowledge/Research",
+      "framework": "local (EmbeddingGemma + Llama 3.2)",
+      "keywords": ["rag", "local", "embedding", "gemma", "agentic", "offline"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/rag_tutorials/agentic_rag_embedding_gemma",
+      "note": "RAG local totalmente offline; afinidade com princípio hermético do Core."
+    },
+    {
+      "id": "rag-knowledge-graph-citations",
+      "title": "Knowledge Graph RAG with Citations",
+      "category": "rag",
+      "industry": "Knowledge/Research",
+      "framework": "knowledge-graph",
+      "keywords": ["rag", "knowledge graph", "citation", "multi-hop", "graph", "verifiable"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/rag_tutorials/knowledge_graph_rag_citations",
+      "note": "Respostas multi-hop com atribuição verificável; afinidade com EvidenceGuard (R504)."
+    },
+    {
+      "id": "rag-failure-diagnostics-clinic",
+      "title": "RAG Failure Diagnostics Clinic",
+      "category": "rag",
+      "industry": "Knowledge/Research",
+      "framework": "framework-agnostic",
+      "keywords": ["rag", "diagnostics", "evaluation", "failure", "quality"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/rag_tutorials/rag_failure_diagnostics_clinic",
+      "note": "Diagnóstico sistemático de falhas de pipeline RAG; padrão de avaliação aplicável ao servidor RAG local."
+    },
+    {
+      "id": "multiagent-trust-gated-team",
+      "title": "Trust-Gated Multi-Agent Research Team",
+      "category": "multi-agent",
+      "industry": "Research/Security",
+      "framework": "langchain",
+      "keywords": ["trust", "audit", "multi", "agent", "research", "hash", "collaboration"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/advanced_ai_agents/multi_agent_apps/trust_gated_agent_team",
+      "note": "Agentes verificados com trilha de auditoria encadeada por hash; conceito alinhado ao Trust Engine do Core (gate mais rigoroso)."
+    },
+    {
+      "id": "mcp-multi-agent-router",
+      "title": "Multi-MCP Agent Router",
+      "category": "mcp",
+      "industry": "Integration/Infra",
+      "framework": "mcp",
+      "keywords": ["mcp", "router", "integration", "tools", "orchestration"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/mcp_ai_agents/multi_mcp_agent_router",
+      "note": "Roteia cada tarefa ao MCP server especializado; padrão de roteamento análogo ao Blackboard A2A do Core."
+    },
+    {
+      "id": "llm-optimization-toonify",
+      "title": "Toonify Token Optimization",
+      "category": "optimization",
+      "industry": "Cost/Infra",
+      "framework": "framework-agnostic",
+      "keywords": ["token", "optimization", "cost", "context", "reduction"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/advanced_llm_apps/llm_optimization_tools/toonify_token_optimization",
+      "note": "Redução de custo de tokens por formato TOON; afirmação de 30-60% não validada externamente — paisagem, não adoção."
+    },
+    {
+      "id": "always-on-release-radar",
+      "title": "Release Radar Agent (Always-on)",
+      "category": "always-on",
+      "industry": "DevOps",
+      "framework": "scheduled-agent",
+      "keywords": ["release", "dependency", "monitoring", "schedule", "security", "alert"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/always_on_agents/release_radar_agent",
+      "note": "Vigia releases de dependências e avisa breaking/security; padrão para always-on agents do Core."
+    },
+    {
+      "id": "advisor-orchestrator-worker",
+      "title": "Advisor Orchestrator Worker (Meta Loop)",
+      "category": "meta-loop",
+      "industry": "Research/Orchestration",
+      "framework": "multi-model",
+      "adversarial": true,
+      "keywords": ["advisor", "orchestrator", "worker", "meta", "loop", "multi"],
+      "license": "Apache-2.0",
+      "reference_url": "https://github.com/MarceloClaro/awesome-llm-apps/tree/main/agent_skills/advisor-orchestrator-worker",
+      "note": "Entrada adversarial: o upstream cita modelos sem validação externa (Claude Fable 5.1, GPT-6 Astra, Gemini 3.8 Flash). Veredito: não-adotar/observar — metadados de paisagem apenas; nenhum modelo endossado."
+    }
+  ]
+}
