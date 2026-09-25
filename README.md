@@ -16,7 +16,7 @@
 [![MCP Servers](https://img.shields.io/badge/MCP%20Servers-7-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
 [![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
 
-**210 agentes** · **7 MCP servers** · **406 ciclos de evolução** · **51 lições semânticas** · **2 skills novas (frente R581–R582)**
+**210 agentes** · **157 auto‑registrados no Blackboard (R596)** · **7 MCP servers** · **420 ciclos de evolução** · **53 lições semânticas** · **7 skills**
 
 ---
 
@@ -25,7 +25,7 @@
 ## 📑 Índice
 
 - [O que é](#-o-que-é)
-- [🚀 Novidades — frentes R581/R582, R-976 e R-205.v3](#-novidades--frentes-r581r582-r-976-e-r-205v3)
+- [🚀 Novidades — R581/R582, R-976, R-205.v3 e R596](#-novidades--r581r582-r-976-r-205v3-e-r596)
 - [⚡ Início rápido](#-início-rápido)
 - [🏗️ Camadas do ecossistema](#️-camadas-do-ecossistema)
   - [1. Agentes e orquestração](#1-agentes-e-orquestração)
@@ -66,12 +66,13 @@ Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC
 | 🏆 **Estudo de raciocínio** | Benchmark pareado IMO 9×3 (R500‑R506), réplicas auditáveis e artigos ABNT/arXiv/arXiv‑PT |
 | 📁 **Evidência de pesquisa** | Pesquisa real R522 (IA Generativa no Direito): manuscritos v20→v49, execução (OpenAlex + PDFs) e pacote de depósito OSF/Zenodo |
 | 🌐 **Deploy estático** | GitHub Pages com verificação física (GET+Range, 404 real, marcador de conteúdo) |
+| 🕸️ **Blackboard A2A vivo** | 157 Agent Cards do catálogo registrados automaticamente no boot (R596) — matching de capacidades real para CFP e roteamento |
 
 ---
 
-## 🚀 Novidades — frentes R581/R582, R-976 e R-205.v3
+## 🚀 Novidades — R581/R582, R-976, R-205.v3 e R596
 
-> Lançadas nas frentes **SPEC-974** (ecossistema integrado e autônomo), **SPEC-975** (eficiência mensurável), **SPEC-976** (MiroFish‑Offline no Core) e **SPEC-935‑R205** (Médico Virtual Supremo).
+> Lançadas nas frentes **SPEC-974** (ecossistema integrado e autônomo), **SPEC-975** (eficiência mensurável), **SPEC-976** (MiroFish‑Offline no Core), **SPEC-935‑R205** (Médico Virtual Supremo) e **R596** (Blackboard vivo).
 
 | Entrega | O que mudou |
 |---|---|
@@ -79,11 +80,12 @@ Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC
 | 🧩 **Plugin `deploy-guards.ts`** | Gates automáticos em `edit`/`write` de `.html` e em `git push/commit` do site (dispara os hooks) |
 | 🛰️ **MCP `web-deploy-mcp`** | `pages_status`, `probe_url` (GET+Range, nunca HEAD), `site_weight`, `validate_feed`, `assert_gone` — padrão fail‑closed SPEC‑970/971/972 |
 | 📚 **Skills novas** | `deploy-estatico-github-pages`, `smoke-test-dom-js`, `mirofish-offline` (SPEC-976) e `medico-virtual-supremo` (v3.0) |
-| 🗣️ **MiroFish‑Offline integrado** | `mirofish_simulate`, `banca_simulate` e cliente HTTP do backend AGPL canônico (`127.0.0.1:5001`) com health, autenticação e retry |
+| 🗣️ **MiroFish‑Offline integrado** | `mirofish_simulate`, `banca_simulate` e cliente HTTP do backend AGPL canônico (`127.0.0.1:5001`) com health, autenticação e retry — backend iniciável via `MiroFishOfflineDriver().start_backend(port=5001)` |
+| 🕸️ **Blackboard vivo (R596)** | Auto‑registro dos Agent Cards do catálogo no boot do MCP (`MCI_AUTOREGISTER`, padrão ligado): **157/206 agentes** com capacidades derivadas (skills+tags), matching CFP real; idempotente e fail‑safe (`agent-register` na CLI, 10 testes) |
 | 🏷️ **Normalização de aliases** | `normalize_institution_alias()`/`resolve_institution_name()` na banca: nomes como `educação/pucrs`, `rbe/anped` e `seqüência (ufsc)` resolvem sem perfil `?` (60 testes, R-976.22) |
 | 🩺 **Médico Virtual Supremo v3.0** | Skill "conselho‑longitudinal" do plugin exportado (`medicos/`, gpt‑6ceee9… v0.4.0): 7 referências instrucionais, `list_references()`/`load_reference()` fail‑closed e `audit.status` em toda resposta (23 testes, R-205.v3) |
 | 🧠 **Metacognição preenchida** | 51+ lições semânticas consultáveis no MetaBus (deploy/media/verification/registry/clinical) |
-| 🔧 **Fix crítico** | `EvolutionRegistry._load` tolerante por entrada: 1 entrada malformada não zera mais os **419 ciclos** |
+| 🔧 **Fix crítico** | `EvolutionRegistry._load` tolerante por entrada: 1 entrada malformada não zera mais os **420 ciclos** |
 | 📦 **Produções versionadas** | 14 commits temáticos de conteúdo: trilogia de alfabetização (R200‑R211), estudo IMO (R500‑R506), evidência R522 com depósito OSF/Zenodo, plugin `medicos/` v0.4.0, hermes‑bridge, reversa‑feynman, landscape, integrações e scripts (ver *Documentação → Frentes de produção*) |
 | ⏱️ **Eficiência mensurável** | `/efficiency` com mediana/p90 por operação — linha de base R582 medida |
 
@@ -144,15 +146,41 @@ flowchart TB
 
 Catálogo completo: [`agents/catalog/`](agents/catalog/) · Mapa detalhado: [`ARCHITECTURE.md`](ARCHITECTURE.md)
 
+#### Auto‑registro no Blackboard (R596)
+
+No boot do MCP (`MCI_AUTOREGISTER=1`, padrão) ou sob demanda (`python3 -m marceloclaro.cli agent-register`), o catálogo de agentes alimenta o quadro negro via o mesmo caminho de eventos do protocolo A2A:
+
+```mermaid
+flowchart LR
+    CAT["agents/catalog/*.md<br/>206 arquivos"] --> P["agent_registry_bootstrap<br/>frontmatter YAML + fallbacks"]
+    P --> EV["metabus.publish<br/>agent.register"]
+    EV --> BB["Blackboard registry<br/>157 Agent Cards"]
+    BB --> CFP["CFP: matching all_of<br/>por capacidades"]
+    CFP --> RT["Roteamento por<br/>confiança + carga"]
+
+    style CAT fill:#f8fafc,stroke:#94a3b8
+    style P fill:#e3f2fd,stroke:#1565c0
+    style EV fill:#fff3e0,stroke:#ef6c00
+    style BB fill:#e8f5e9,stroke:#2e7d32
+    style CFP fill:#fce4ec,stroke:#c62828
+    style RT fill:#f3e5f5,stroke:#7b1fa2
+```
+
+- **Fonte única**: `mci/agent_registry_bootstrap.py` extrai metadados do catálogo (id = nome do arquivo; nome/descrição do frontmatter YAML com fallbacks; capacidades de `skills[]` + `tags` + domínio).
+- **Tolerante a malformados**: arquivos sem frontmatter YAML válido são pulados com contagem explícita (49/206) — nunca impedem o boot.
+- **Mesmo caminho do MCP**: o registro publica `agent.register` no MetaBus, exatamente como `mci_register_agent` — cards respeitam a lógica existente do `Blackboard._handle_registration` (confiança viva do Confidence Ledger e `load` real no `to_dict()`).
+- **Idempotente e fail‑safe**: re‑registrar sobrescreve o card (sem duplicatas); falha no auto‑registro nunca impede o servidor MCP de subir.
+- **Efeito**: o Matching CFP passa a ter base real — `required_capabilities` (semântica *all_of*) casam contra 157 Agent Cards disponíveis, ordenados por confiança decrescente.
+
 ### 2. Conectores MCP
 
 | Servidor | Ferramentas | Para quê |
 |---|---|---|
 | `litert-lm` | chat, models, status | Modelos on‑device (Gemma 4 / Qwen3) via LiteRT‑LM |
-| `metacognitive-interconnect` | blackboard, memory, tasks | Memória compartilhada, postagem de tarefas A2A |
+| `metacognitive-interconnect` | blackboard, memory, tasks | Memória compartilhada, postagem de tarefas A2A — **auto‑registro** do catálogo no boot (157 Agent Cards, R596) |
 | `antigravity-bridge` | browser, search, image, RAG | Google DeepMind no pipeline |
 | `pypi-search` | search, recommend, lookup | Curadoria de bibliotecas Python |
-| `colibri-mcp` | generate, status | Geração local Colibri OLMoE |
+| `colibri-mcp` | generate, status | Geração local Colibri OLMoE (engine `colibri/c/olmoe` exige `SNAP` apontando para um snapshot saudável) |
 | `scanners-mcp` | literary, scientific, rigor | 8 scanners de auditoria e Excelência (EXS) |
 | **`web-deploy-mcp`** 🆕 | pages_status, probe_url, site_weight, validate_feed, assert_gone | Deploy/verificação GitHub Pages com prova física |
 
@@ -221,6 +249,7 @@ flowchart LR
 | Saúde do ecossistema | `python3 -m marceloclaro.cli doctor` | 20 checks (specs, registro, memória, gates) |
 | Eficiência por operação | `python3 -m integrations.op_timing report` | mediana/p90 por op (`.mci_state/op_times.jsonl`) |
 | Estado do registro | `python3 -m integrations.opencode_cli --check` | consistência do `opencode.json` (agentes/MCP/comandos) |
+| Estado do Blackboard | `python3 -m marceloclaro.cli agent-register` (ou MCP `mci_get_blackboard_state`) | agentes registrados (157), tarefas e status A2A |
 
 ```bash
 # exemplo de saída (baseline R582)
@@ -237,6 +266,7 @@ op_timing: 9 medições, 0 falhas
 
 - **MetaBus** (`.mci_state/shared_memory.json`): reflexões episódicas + **lições semânticas consultáveis por tópico** (`mci_get_memory(topic=...)`).
 - **Confidence Ledger**: EMA por domínio/tópico (calibração de confiança).
+- **Eventos A2A**: registro de agentes, postagem/voluntariado/conclusão de tarefas e CFP trafegam como eventos publicados no MetaBus (`agent.register`, `task.post`, `task.cfp`, …) — o Blackboard é consumidor reativo, e o auto‑registro do catálogo (R596) usa o **mesmo canal** do MCP, garantindo uma única semântica de Agent Card.
 - **Anti‑overclaim estrutural**: alegações ("Qualis A1", "verificado") exigem validação externa; histórico em [`CORRIGENDUM.md`](CORRIGENDUM.md).
 - Consulta direta:
 
@@ -325,6 +355,7 @@ Comandos úteis:
 | `python3 -m marceloclaro.cli doctor` | Diagnóstico do sistema |
 | `python3 -m marceloclaro.cli helpdesk` | Ajuda guiada |
 | `python3 -m marceloclaro.cli pesquisa "tema"` | Pesquisa científica |
+| `python3 -m marceloclaro.cli agent-register` | Auto‑registro dos agentes do catálogo no Blackboard (A2A) |
 | `python3 -m integrations.op_timing report` | Eficiência por operação |
 | `python3 -m integrations.opencode_cli --check` | Consistência da config |
 
