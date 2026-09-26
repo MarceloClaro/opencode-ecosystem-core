@@ -67,16 +67,16 @@ def test_readme_links_to_canonical_guides_and_policies() -> None:
 
     for target in re.findall(r"\[[^\]]+\]\(([^)#]+)\)", README):
         if "://" not in target:
-            assert (ROOT / target).is_file(), target
+            assert (ROOT / target).is_file() or (ROOT / target).is_dir(), target
 
 
 def test_readme_states_observed_validation_and_limits_without_overclaim() -> None:
     normalized_readme = " ".join(README.split())
 
     assert "SPEC-935-R448" in README
-    assert "18/18" in README
-    assert "3.488 passed" in README
-    assert "70 skipped" in README
+    assert "18/20" in README
+    assert "4.539 passed" in README
+    assert "67 skipped" in README
     assert "execução local" in README.lower()
     assert "certificação externa" in README.lower()
     assert "WSL2" in README

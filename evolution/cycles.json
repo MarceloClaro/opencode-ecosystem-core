@@ -12017,7 +12017,20 @@
         "tests/test_r590_mirofish_http_client.py: 13 testes (servidor real + fail-closed + erros HTTP); helper sobe o backend externo na venv do repo ao iniciar a suíte",
         "Integração real validada: backend AGPL no ar em 127.0.0.1:5001 (create_app 61 rotas em Python 3.14, sem camel-oasis); /health 200; /api/simulation/list, /api/graph/project/list, /api/report/list respondem success true",
         "Anti-overclaim R110: simulação OASIS-full (create/prepare/start) depende de LLM_API_KEY/ZEP_API_KEY e camel-oasis (Python <3.12), reportado de forma transparente; nenhum código AGPL copiado, apenas composição HTTP"
-      ]
+      ],
+      "score": null,
+      "lessons": [],
+      "timestamp": 1790398371.511607,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
       "round_id": "R592",
@@ -12030,7 +12043,20 @@
         "tests/test_r590_mirofish_http_client.py: SERVICE_DIR default → ~/projetos/MiroFish-Offline-AGPL; 13/13 verdes contra o backend canônico real",
         "Validação: servidor 5001 agora serve MiroFish-Offline-AGPL (PID próprio, start_new_session); instância provisória 5002 removida; regressão R581-R590 = 144 passed + 30 subtests; orquestrador mirofish_external_status() → http_ok:True com contagens reais",
         "Anti-overclaim R110: OASIS-full segue dependendo de LLM_API_KEY/ZEP_API_KEY + camel-oasis (Python <3.12); o backend sobe com subconjunto core; simulação determinística local continua caminho principal do Core"
-      ]
+      ],
+      "score": null,
+      "lessons": [],
+      "timestamp": 1790398371.5116117,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
       "round_id": "R593",
@@ -12042,8 +12068,19 @@
         "tests/test_r591_alias_normalization.py: 60 testes (normalização, fuzzy variants, compat reversa, códigos curtos, anti-falso-positivo, integração banca)",
         "specs/SPEC-976: linha R-976.22 adicionada"
       ],
-      "tests": "R581-R591 = 225 passed + 30 subtests",
-      "score": 92
+      "score": 92,
+      "lessons": [],
+      "timestamp": 1790398371.5116143,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
       "round_id": "R594",
@@ -12055,8 +12092,19 @@
         "specs/SPEC-935-R205.md: seção 8 v3.0 com requisitos V3-1..V3-6 e critérios de aceitação",
         "tests/test_r594_medico_supremo_v3.py: 23 testes (SKILL.md, referências, API, release+compat, paridade manifesto, smoke)"
       ],
-      "tests": "test_r594 23/23; regressão R205+R446+R591+R590+R594 = 157 passed + 9 skipped",
-      "score": 90
+      "score": 90,
+      "lessons": [],
+      "timestamp": 1790398371.5116165,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
       "round_id": "R595",
@@ -12066,8 +12114,19 @@
         "python3 -m integrations.opencode_cli: regeneração reprodutível (opencode.json sem diff; 210 agentes, 7 MCP, 10 comandos)",
         "skills.paths já cobre .opencode/skills — skill descoberta dinamicamente"
       ],
-      "tests": "test_r137 3/3 (reprodutibilidade do opencode.json)",
-      "score": 88
+      "score": 88,
+      "lessons": [],
+      "timestamp": 1790398371.5116186,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
       "round_id": "R596",
@@ -12151,29 +12210,204 @@
     },
     {
       "round_id": "R598",
-      "spec": "SPEC-935-R598-goose-cli",
-      "component": "integrations/goose_cli.py + agents/catalog/goose-cli.md",
       "objective": "Integrar a CLI Goose (aaif-goose/goose, Apache-2.0, AAIF/Linux Foundation) como executor externo orquestrável (padrão M7): status, run headless, doctor tolerante, comando /goose.",
-      "forward_score": 1.0,
-      "tests": [
-        "tests/test_r598_goose_cli.py (15)"
-      ],
-      "tests_passed": true,
       "changes": [
         "integrations/goose_cli.py: goose_available/version/run (headless --text, provider/model, timeout), doctor_check, install_instructions, CLI status/run/doctor/install",
         "marceloclaro/doctor.py: goose em EXTERNAL_CLIS (warn se ausente; nunca fail)",
         "agents/catalog/goose-cli.md: Agent Card (subagente goose-cli no OpenCode CLI)",
         "integrations/opencode_cli.py: comando custom /goose; opencode.json regenerado (211 agentes, 11 comandos)",
         ".opencode/skills/goose-cli/SKILL.md: guia de uso com regras de governança e anti-overclaim",
-        "README.md: skill goose-cli e contagem de agentes 211"
+        "README.md: skill goose-cli e contagem de agentes 211",
+        "melhorias pós-validação: versão semântica (regex semver, '1.1.0 (stable)' → '1.1.0'); main() com flags reais --provider/--model/--timeout + --help; doctor external_clis mostra versão quando instalado; testes de integração stub (test_r598_r599_external_stubs.py) validam subprocess real sem instalar as CLIs"
       ],
+      "score": null,
       "lessons": [
         "CLI externa opcional deve entrar como warn (nunca fail) no doctor — ausência não é falha do Core",
         "Testes da integração usam mocks de subprocess/shutil: suíte roda mesmo sem o binário instalado",
         "Corpo de classe Python NÃO captura closure de função envolvente (NameError em helper de teste) — usar types.SimpleNamespace",
         "goose_run chama goose_version() internamente; mocks que capturam subprocess precisam filtrar a chamada --version"
       ],
-      "timestamp": 1790389012.8264148
+      "timestamp": 1790389012.8264148,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R599",
+      "objective": "Integrar a CLI Plandex (plandex-ai/plandex, MIT, Go) como executor externo orquestrável (padrão M7, família Goose/bernstein): status, new, tell (scripting), chat, diff --plain, apply, doctor tolerante, comando /plandex.",
+      "changes": [
+        "integrations/plandex_cli.py: _binary (plandex/pdx), version, _run normalizado, plans/new/tell/chat/diff/apply, doctor_check, install_instructions, CLI status/plans/new/tell/chat/diff/apply/doctor/install",
+        "marceloclaro/doctor.py: plandex em EXTERNAL_CLIS (warn se ausente; nunca fail)",
+        "agents/catalog/plandex-cli.md: Agent Card (subagente plandex-cli no OpenCode CLI)",
+        "integrations/opencode_cli.py: comando custom /plandex; opencode.json regenerado (212 agentes, 12 comandos)",
+        ".opencode/skills/plandex-cli/SKILL.md: guia de uso, fluxo new->tell->diff->apply, hosting local/BYO key",
+        "README.md: skill plandex-cli e contagem de agentes 212",
+        "melhorias pós-validação: versão semântica ('plandex 2.1.0' → '2.1.0'); main() com --help, --auto none|basic|plus|semi|full no new, flags --apply/--commit isoladas no tell; testes de integração stub (subprocess real)"
+      ],
+      "score": null,
+      "lessons": [
+        "Plandex Cloud encerrou (03/10/2025): integração de CLI open source MIT assume local/self-hosted ou BYO key — não acoplar a serviço em nuvem",
+        "Padrão M7 de executor externo agora duplicado (goose + plandex): runner tolerante, mocks de subprocess, doctor warn, comando custom no opencode_cli",
+        "Fluxo natural do Plandex respeita o gate SDD/TDD do Core: tell fica em sandbox de diff até revisão humana (apply é explícito)"
+      ],
+      "timestamp": 1790389921.3255787,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R600",
+      "objective": "Integração da CLI Gemini (google-gemini/gemini-cli) como executor externo orquestrável — padrão M7 espelho de R598/R599. headless -p, semver, doctor com versão, /gemini, skill, Agent Card, testes unit + integração stub.",
+      "changes": [
+        "integrations/gemini_cli.py: available/version(-> semver)/run(-p headless com --model/--output-format)/doctor/install/main com flags",
+        "agents/catalog/gemini-cli.md, doctor EXTERNAL_CLIS, /gemini, skill, SPEC-935-R600",
+        "testes: unit mocks (17) + integração stub gemini (4) em test_r598_r599_external_stubs.py",
+        "validação real: binário oficial NÃO instalado nesta ronda (download requer consentimento)"
+      ],
+      "score": 4.5,
+      "lessons": [
+        "README oficial é a fonte de verdade para flags (anti-overclaim: não inventar CLI)",
+        "padrão M7 de executor externo reutilizável: available/version/run/doctor/install/main + stub"
+      ],
+      "timestamp": 1790392085.0396652,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R601",
+      "objective": "Ponte Gemini CLI ↔ Gemini Notebook (ex-NotebookLM) via MCP + navegador",
+      "changes": [
+        "nlm (notebooklm-mcp-cli 0.11.6) instalado no .venv; auth validada (222 notebooks; login --check OK)",
+        "~/.gemini/settings.json corrigido: command ABSOLUTO .venv/bin/notebooklm-mcp (era 'notebooklm-mcp', fora do PATH)",
+        "nlm setup add gemini + trust:true; handshake MCP v4.0.5 OK",
+        "spec SPEC-935-R601; skill; agent card gemini-notebooklm-bridge",
+        "PENDENTE (operador): modelo do Gemini (GEMINI_API_KEY | gemini login | gemma local)"
+      ],
+      "score": 4.0,
+      "lessons": [
+        "pacote instalado no .venv não está no PATH global: MCP exige caminho absoluto ou quebra silenciosa no launch",
+        "Gemini CLI desabilita MCP em pasta untrusted (--skip-trust por sessão)",
+        "ciclo deve ser registrado em formato canônico (timestamp+objective) — R600 falhou o gate por isso"
+      ],
+      "timestamp": 1790392545.724532,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R602",
+      "objective": "Integração da CLI Reasonix (esengine/DeepSeek-Reasonix, MIT) como executor externo orquestrável — padrão M7 espelho de R598/R599/R600. one-shot run (pipes), doctor, semver, /reasonix, skill, Agent Card, testes unit + integração stub.",
+      "changes": [
+        "integrations/reasonix_cli.py: available/version(-> semver)/run(one-shot com --dir e timeout)/doctor/install/main com subcomandos",
+        "agents/catalog/reasonix-cli.md, doctor EXTERNAL_CLIS (+ enrichment versão), /reasonix, skill, SPEC-935-R602",
+        "testes: unit mocks (18) em tests/test_r602_reasonix.py + integração stub reasonix (5) em test_r598_r599_external_stubs.py",
+        "validação real: binário oficial NÃO instalado nesta ronda (requer DeepSeek API key + consentimento de instalação)"
+      ],
+      "score": 4.5,
+      "lessons": [
+        "README oficial (main-v2) é a fonte de verdade: linha ativa é o Go rewrite; v0.x TS é maintenance mode",
+        "padrão M7 reutilizável: available/version/run/doctor/install/main + stub; ciclo sempre canônico (timestamp+objective)",
+        "Reasonix exige DeepSeek API key (setup) — sem key, run retorna não-zero por auth (esperado, não é bug)"
+      ],
+      "timestamp": 1790393235.0696428,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R603",
+      "objective": "Liquidar os 27 débitos documentais remanescentes (README/MANUAL/ARCH/installers + contratos de teste desatualizados) e restaurar a folga de performance do doctor (R110 < 5s) com cache de versão do plandex.",
+      "changes": [
+        "README.md reescrito: 9 secoes ## exatas, secao MIRA em dupla leitura, 6 blocos mermaid balanceados, storytelling/legado, multiarea, instalacao segura sem pipe, validacao observada conservadora (18/20, 4.539 passed, 67 skipped), correcao do trigger anti_overclaim R481",
+        "MANUAL.md / ARCHITECTURE.md / installer/README.md / installer/windows/README.md: contagens 19 checks / 6 MCPs / 209 agentes -> 20 checks / 7 MCPs / 215 agentes (2026-09-26); ARCH inclui web-deploy-mcp como 7o MCP",
+        "quickstart.md criado (link do README, entrada rapida conservadora)",
+        "Contratos de teste alinhados: R448 (markers 20/7/215), R449 (18/20, 4.539 passed, 67 skipped, links aceitam diretorios), R455 (7 MCPs/215 agentes configurados), R380 (catalogo 206 -> 211)",
+        "integrations/plandex_cli.py: cache em disco da versao (keyed por realpath+size+mtime_ns); run_doctor cai para ~1,5-2,0s",
+        "Ambiente: mcp 2.2.0 (quebrava coleta de 4 testes MCP) revertido para o pin requirements mcp==1.28.1; pip check limpo"
+      ],
+      "score": 5.0,
+      "lessons": [
+        "Contagens estruturais mudam juntas nos docs E nos testes na mesma ronda, senao viram divida silenciosa",
+        "Links do README para pastas de producao sao validos; contratos de link local devem aceitar is_dir()",
+        "Subprocess de CLIs no doctor exigem cache com invalidacao por mtime/size (padrao R602/gemini serve para binarios Go)",
+        "Instaladores externos podem sobrescrever pins do requirements; pip check + suite detectam antes do commit"
+      ],
+      "timestamp": 1790398371.5117753,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R604",
+      "objective": "Integrar o framework Haystack (deepset-ai/haystack, Apache-2.0) como componente orquestrável de RAG (padrão M7, pacote importável): disponibilidade, versão semver, pipeline RAG mínimo (DocumentStore + SentenceTransformers + Retriever), retrieva, doctor_check e CLI /haystack — sem exigir instalacao na suite.",
+      "changes": [
+        "integrations/haystack_cli.py: haystack_available/version (importlib), build_rag_pipeline (embedding local, sem API key), run_retrieval, doctor_check (pass/warn, nunca fail), install_instructions, CLI status/doctor/install",
+        "_import_haystack + _import_components como pontos unicos de import (mock M7 sem sys.modules fake)",
+        "tests/test_r604_haystack.py: 22 passed + 1 skipped (smoke opcional) sem o pacote instalado",
+        "specs/SPEC-935-R604-haystack.md, agents/catalog/haystack-rag.md, .opencode/skills/haystack-rag/SKILL.md",
+        "doctor global NAO alterado: Haystack nao e CLI PATH -> EXTERNAL_CLIS permanece; 20 checks preservados (contratos R448/R449/R455 intactos)"
+      ],
+      "score": 4.5,
+      "lessons": [
+        "Framework Python orquestravel != CLI executavel: dois padroes M7 distintos (CLIs no PATH -> EXTERNAL_CLIS; pacotes importaveis -> doctor_check interno nunca fail)",
+        "Import unico via _import_* facilita mocks e evita sys.modules fake fragil",
+        "Embedding local por padrao permite RAG funcional sem chave; geracao exige provider explicito (anti-overclaim: nunca inventar provider default)",
+        "Contagem de checks do doctor e contrato publico (R448/R449/R455): adicionar integracao nao-CLI ao EXTERNAL_CLIS quebraria os 20 checks"
+      ],
+      "timestamp": 1790398514.0570457,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

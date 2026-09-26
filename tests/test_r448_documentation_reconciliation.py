@@ -79,7 +79,7 @@ def test_structural_counts_are_consistent_in_operational_documents() -> None:
     """As contagens expostas vêm da configuração e do diagnóstico atuais."""
     for relative_path in DOC_PATHS:
         content = _document(relative_path)
-        for marker in ("19 checks", "6 MCPs", "209 agentes"):
+        for marker in ("20 checks", "7 MCPs", "215 agentes"):
             assert marker in content, f"{marker!r} ausente em {relative_path}"
 
 

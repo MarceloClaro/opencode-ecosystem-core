@@ -9,8 +9,8 @@ instalação local, consulte [installer/README.md](installer/README.md).
 
 ## Estado estrutural
 
-Na configuração consultada em **2026-08-23**, `doctor` relacionava **19 checks**,
-e `opencode.json` continha **6 MCPs** e **209 agentes**. Execute os
+Na configuração consultada em **2026-09-26**, `doctor` relacionava **20 checks**,
+e `opencode.json` continha **7 MCPs** e **215 agentes**. Execute os
 comandos abaixo no seu checkout para confirmar o estado presente:
 
 ```bash
@@ -49,7 +49,7 @@ funções internas, o menu possui uma única opção `[10]`: a apresentação MI
 
 - **Blackboard**: fila compartilhada em que tarefas podem receber agentes.
 - **Memória metacognitiva**: registros de contexto e reflexões do ecossistema.
-- **doctor**: diagnóstico estrutural; os 19 checks não substituem inspeção do
+- **doctor**: diagnóstico estrutural; os 20 checks não substituem inspeção do
   ambiente nem avaliação externa.
 - **helpdesk**: leitura do diagnóstico com sugestões de próximos passos.
 - **Ajuda**: resumo embutido do próprio CLI.

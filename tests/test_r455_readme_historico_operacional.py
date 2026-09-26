@@ -59,8 +59,8 @@ def test_current_diagram_matches_runtime_components() -> None:
         "TDDRunner",
         "MetaBus",
         "Blackboard",
-        "6 MCPs configurados",
-        "209 agentes configurados",
+        "7 MCPs configurados",
+        "215 agentes configurados",
         "mira-presenter",
     ):
         assert marker in current, marker

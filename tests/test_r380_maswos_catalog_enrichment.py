@@ -111,9 +111,11 @@ class TestMigracaoAplicada:
 
 class TestCatalogoIntacto:
     def test_205_registros_carregam(self, catalog_defs):
-        # Contrato fixado em 206 em 2026-09-13: 205 registros do ciclo R380 +
-        # landscape-curator.md (SPEC-935-R482, curadoria da paisagem externa).
-        assert len(catalog_defs) == 206
+        # Contrato atualizado em 2026-09-26 (SPEC-935-R603/R604): o catálogo tem
+        # 212 arquivos em agents/catalog/*.md (205 registros do ciclo R380 +
+        # evolução posterior: landscape-curator R482, R521, skot-1..4,
+        # haystack-rag R604 etc.).
+        assert len(catalog_defs) == 212
 
     def test_placeholder_restante_e_o_esperado(self, catalog_defs):
         """53 registros fora do escopo deste ciclo continuam com placeholder

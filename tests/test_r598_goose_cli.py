@@ -66,7 +66,7 @@ def test_goose_version_parse(monkeypatch):
         stdout = "goose 1.1.0 (stable)\n"
 
     monkeypatch.setattr(goose_cli.subprocess, "run", lambda *a, **k: FakeProc())
-    assert goose_cli.goose_version() == "1.1.0 (stable)"
+    assert goose_cli.goose_version() == "1.1.0"
 
 
 # ---------------------------------------------------------------------- run

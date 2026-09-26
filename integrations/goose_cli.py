@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -44,8 +45,15 @@ def goose_available() -> bool:
     return shutil.which("goose") is not None
 
 
+_SEMVER_RE = r"(\d+(?:\.\d+){1,3}(?:[-+][0-9A-Za-z.-]+)?)"
+
+
 def goose_version() -> Optional[str]:
-    """Versão instalada via `goose --version` (None se ausente/erro)."""
+    """Versão semântica instalada via `goose --version` (None se ausente).
+
+    Lê a primeira linha da saída e extrai apenas o número de versão
+    (ex.: ``"goose 1.1.0 (stable)"`` → ``"1.1.0"``).
+    """
     if not goose_available():
         return None
     try:
@@ -56,12 +64,10 @@ def goose_version() -> Optional[str]:
             timeout=10,
             check=False,
         )
-        line = (proc.stdout or "").strip().splitlines()
-        if line:
-            return line[0].replace("goose", "").strip() or line[0]
+        match = re.search(_SEMVER_RE, (proc.stdout or "").strip())
+        return match.group(1) if match else None
     except (OSError, subprocess.TimeoutExpired):
-        pass
-    return None
+        return None
 
 
 def goose_run(
@@ -192,14 +198,39 @@ def _format_status() -> str:
     return "\n".join(lines)
 
 
+def _parse_run_argv(tokens: List[str]) -> Dict[str, object]:
+    """Interpreta flags de run: --provider/--model/--timeout (valor ou =valor)."""
+    parsed: Dict[str, object] = {"prompt_parts": []}
+    index = 0
+    while index < len(tokens):
+        token = tokens[index]
+        matched = False
+        for flag in ("--provider", "--model", "--timeout"):
+            if token == flag and index + 1 < len(tokens):
+                parsed[flag[2:]] = tokens[index + 1]
+                index += 2
+                matched = True
+                break
+            if token.startswith(flag + "="):
+                parsed[flag[2:]] = token.split("=", 1)[1]
+                index += 1
+                matched = True
+                break
+        if not matched:
+            parsed["prompt_parts"].append(token)  # type: ignore[attr-defined]
+            index += 1
+    return parsed
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
-    if not argv:
+    if not argv or argv[0] in {"--help", "-h", "help"}:
         print(
-            "Uso: python3 -m integrations.goose_cli "
-            "<status|run|doctor|install> [args...]"
+            "Uso: python3 -m integrations.goose_cli <status|run|doctor|install> [args...]\n"
+            "  run '<tarefa>' [--provider PROV] [--model MODELO] [--timeout SEG] [--flag-extra ...]\n"
+            "  ex.: /goose run 'revise este texto' --provider ollama --model qwen3:8b --timeout 120"
         )
-        return 2
+        return 0
     command, *rest = argv
     if command == "status":
         print(_format_status())
@@ -212,11 +243,18 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(install_instructions())
         return 0
     if command == "run":
-        prompt = " ".join(rest).strip()
+        parsed = _parse_run_argv(rest)
+        prompt = " ".join(str(piece) for piece in parsed["prompt_parts"]).strip()
         if not prompt:
-            print("Uso: python3 -m integrations.goose_cli run '<prompt>'")
+            print("Uso: python3 -m integrations.goose_cli run '<prompt>' [--provider PROV] [--model M]")
             return 2
-        result = goose_run(prompt)
+        timeout = int(parsed.get("timeout", 300) or 300)  # type: ignore[arg-type]
+        result = goose_run(
+            prompt,
+            provider=str(parsed.get("provider")) if parsed.get("provider") else None,
+            model=str(parsed.get("model")) if parsed.get("model") else None,
+            timeout=timeout,
+        )
         print(result.get("stdout") or result.get("stderr") or "")
         return 0 if result.get("ok") else 1
     print(f"Comando desconhecido: {command}")

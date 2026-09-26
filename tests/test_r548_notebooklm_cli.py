@@ -73,7 +73,7 @@ class TestHelpdeskWithNlm:
     def test_helpdesk_guidance_references_nlm_when_missing(self, monkeypatch):
         helpdesk_mod = importlib.import_module("marceloclaro.helpdesk")
         doctor_mod = _load_doctor()
-        doctor_mod.shutil.which = lambda name: None  # type: ignore[assignment]
+        monkeypatch.setattr(doctor_mod.shutil, "which", lambda name: None)  # qualificador global restaurado no teardown
         fake_report = {
             "overall": "degraded",
             "checks": [doctor_mod._check_external_clis().to_dict()],

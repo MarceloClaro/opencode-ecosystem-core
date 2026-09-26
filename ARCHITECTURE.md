@@ -10,8 +10,8 @@ alegações históricas, consulte [CORRIGENDUM.md](CORRIGENDUM.md).
 
 ## Configuração estrutural
 
-Em **2026-08-23**, o diagnóstico local listava **19 checks**. A configuração
-`opencode.json` declarava **6 MCPs** e **209 agentes**. As fontes autoritativas
+Em **2026-09-26**, o diagnóstico local listava **20 checks**. A configuração
+`opencode.json` declarava **7 MCPs** e **215 agentes**. As fontes autoritativas
 para uma nova conferência são o comando `python3 -m marceloclaro.cli doctor` e
 as chaves `mcp` e `agent` de `opencode.json`:
 
@@ -32,8 +32,8 @@ graph TD
     CLI --> Orquestrador[MarceloClaroOrchestrator]
     Orquestrador --> SDD[SpecRegistry e SpecVerifier]
     Orquestrador --> MCI[MetaBus e Blackboard]
-    Orquestrador --> MCP[6 MCPs configurados]
-    Orquestrador --> Agentes[209 agentes configurados]
+    Orquestrador --> MCP[7 MCPs configurados]
+    Orquestrador --> Agentes[215 agentes configurados]
     Orquestrador --> MIRA[mira-presenter]
 ```
 
@@ -52,8 +52,8 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[6 MCPs configurados]
-    Orq2 --> Agents2[209 agentes configurados]
+    Orq2 --> MCP2[7 MCPs configurados]
+    Orq2 --> Agents2[215 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
@@ -71,22 +71,23 @@ flowchart TB
 
 ## Servidores MCP Interoperáveis
 
-Os **6 MCPs** configurados em `opencode.json` são:
+Os **7 MCPs** configurados em `opencode.json` são:
 
 1. `litert-lm`;
 2. `metacognitive-interconnect`;
 3. `antigravity-bridge`;
 4. `pypi-search`;
 5. `colibri-mcp`;
-6. `scanners-mcp`.
+6. `scanners-mcp`;
+7. `web-deploy-mcp`.
 
 A presença dessas entradas de configuração não implica disponibilidade de toda
 dependência externa em cada máquina. O `doctor` expõe a situação encontrada
-localmente entre os seus 19 checks.
+localmente entre os seus 20 checks.
 
 ## Agentes e orquestração
 
-O arquivo `opencode.json` é a fonte da contagem de **209 agentes** configurados
+O arquivo `opencode.json` é a fonte da contagem de **215 agentes** configurados
 para a integração OpenCode. O Blackboard pode apresentar registros em momentos
 diferentes do processo de inicialização; por isso, não se deve misturar uma
 contagem de runtime com a contagem declarada no arquivo de configuração.

@@ -1705,6 +1705,24 @@
         "bash": "deny"
       }
     },
+    "gemini-cli": {
+      "description": "Executor externo orquestrável: `gemini` (pacote `@google/gemini-cli`,",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gemini-cli.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "gemini-notebooklm-bridge": {
+      "description": "Habilita o Gemini CLI a operar o Gemini Notebook (notebooklm.google.com) como",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gemini-notebooklm-bridge.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
     "git-manager": {
       "description": "Gerencia git - commits atomicos, PRs, mensagens convencionais",
       "mode": "subagent",
@@ -1718,6 +1736,15 @@
       "description": "Você é o agente proxy do **Goose**, agente de IA nativo open source da Agentic",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/goose-cli.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "haystack-rag": {
+      "description": "- **ID**: haystack-rag",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/haystack-rag.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
@@ -2291,6 +2318,15 @@
         "bash": "deny"
       }
     },
+    "plandex-cli": {
+      "description": "Você é o agente proxy do **Plandex**, agente de codificação AI open source",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plandex-cli.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
     "prioritization-engine": {
       "description": "Agente especializado prioritization-engine",
       "mode": "subagent",
@@ -2317,6 +2353,15 @@
       "description": "Agente especializado quantum-nexus-phd",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/quantum-nexus-phd.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "reasonix-cli": {
+      "description": "Executor externo orquestrável: `reasonix` (`esengine/DeepSeek-Reasonix`, MIT).",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/reasonix-cli.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
@@ -2979,6 +3024,18 @@
     "goose": {
       "template": "python3 -m integrations.goose_cli $ARGUMENTS",
       "description": "Agente Goose (AAIF/Linux Foundation) — executor externo orquestrável (SPEC-935-R598). Ex: /goose status, /goose run '<tarefa>', /goose doctor"
+    },
+    "gemini": {
+      "template": "python3 -m integrations.gemini_cli $ARGUMENTS",
+      "description": "Integração da CLI Gemini (Google) — executor externo orquestrável (SPEC-935-R600). Ex: /gemini status, /gemini run '<tarefa>' [--model|-m MODELO] [--output-format json|stream-json] [--timeout SEG]"
+    },
+    "plandex": {
+      "template": "python3 -m integrations.plandex_cli $ARGUMENTS",
+      "description": "Agente Plandex (plandex-ai/plandex, MIT) — executor de codificação orquestrável com planos e sandbox de diff (SPEC-935-R599). Ex: /plandex status, /plandex new, /plandex tell '<tarefa>', /plandex diff"
+    },
+    "reasonix": {
+      "template": "python3 -m integrations.reasonix_cli $ARGUMENTS",
+      "description": "Agente Reasonix (esengine/DeepSeek-Reasonix, MIT) — agente de codificação DeepSeek-native orquestrável one-shot (SPEC-935-R602). Ex: /reasonix status, /reasonix run '<tarefa>', /reasonix doctor, /reasonix install"
     }
   }
 }

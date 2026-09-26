@@ -30,8 +30,9 @@ Protocol (MCP).
 
 ## Critérios de aceitação
 
-1. `pytest tests/test_r598_goose_cli.py` → 10/10 verdes (mocks; sem depender
-   do binário `goose` instalado).
+1. `pytest tests/test_r598_goose_cli.py tests/test_r598_r599_external_stubs.py`
+   → 15/15 verdes (mocks) + testes de integração stub (subprocess real;
+   sem depender do binário `goose` instalado).
 2. `python3 -m integrations.goose_cli status` → resposta estruturada
    (`{disponivel, versao}`); com Goose ausente, `disponivel: false` sem erro.
 3. `python3 -m integrations.goose_cli doctor` → formato DoctorCheck compatível
@@ -46,7 +47,8 @@ Protocol (MCP).
 ```
 integrations/goose_cli.py                # runner (subprocess, healthcheck, doctor)
 agents/catalog/goose-cli.md              # Agent Card
-tests/test_r598_goose_cli.py             # 10 testes TDD (mocks)
+tests/test_r598_goose_cli.py             # 15 testes TDD (mocks)
+tests/test_r598_r599_external_stubs.py  # integração stub (subprocess real)
 .opencode/skills/goose-cli/SKILL.md      # guia de uso
 ```
 
@@ -54,7 +56,8 @@ tests/test_r598_goose_cli.py             # 10 testes TDD (mocks)
 
 - Goose **não instalado** no ambiente de validação → status `{disponivel: false}`,
   doctor `warn` com instrução oficial (`curl -fsSL ...aaif-goose/goose/.../download_cli.sh | bash`).
-- Testes 10/10 verdes com subprocess simulado (0.2s).
+- Testes 15/15 verdes com mocks + testes de integração stub (subprocess
+  real em tmp_path).
 - Suíte completa do ecossistema sem regressão.
 - Após `python3 -m integrations.opencode_cli`, catálogo passa a conter o
   subagente `goose-cli` (slug do arquivo) e o comando `/goose`.

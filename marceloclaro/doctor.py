@@ -57,11 +57,23 @@ EXTERNAL_CLIS = {
     # ADOTAR-opt-in (lição R474): uso do operador; NÃO acoplar ao pipeline
     # automático — upstream usa APIs internas não documentadas + cookies.
     "nlm": "pip install notebooklm-mcp-cli",
+    "gemini": "npm install -g @google/gemini-cli",
     # SPEC-935-R598: CLI do agente Goose (aaif-goose/goose, Apache-2.0, AAIF/
     # Linux Foundation). Agente generalista em Rust: 15+ providers (Anthropic,
     # OpenAI, Google, Ollama, OpenRouter, Azure, Bedrock) e 70+ extensões MCP.
     # Integração por invocação externa (padrão M7) via integrations.goose_cli.
     "goose": "curl -fsSL https://github.com/aaif-goose/goose/releases/download/stable/download_cli.sh | bash",
+    # SPEC-935-R599: CLI do Plandex (plandex-ai/plandex, MIT, Go). Agente de
+    # codificação terminal-based para tarefas grandes: planos incrementais,
+    # sandbox de diff, até 2M tokens de contexto, autonomia configurável.
+    # Uso local/self-hosted ou BYO key (ex.: OpenRouter); Cloud encerrando.
+    # Integração por invocação externa (padrão M7) via integrations.plandex_cli.
+    "plandex": "curl -sL https://plandex.ai/install.sh | bash",
+    # SPEC-935-R602: CLI do Reasonix (esengine/DeepSeek-Reasonix, MIT). Agente
+    # de codificação DeepSeek-native; linha ativa é o rewrite Go (v2) instalado
+    # via npm (`npm install -g reasonix`, alias `dsnix`). One-shot `run` (pipes)
+    # + `doctor`; exige DeepSeek API key persistida por `reasonix setup`.
+    "reasonix": "npm install -g reasonix",
 }
 
 
@@ -216,6 +228,38 @@ def _check_corrigendum() -> DoctorCheck:
     return DoctorCheck("corrigendum", "pass", f"CORRIGENDUM.md presente ({size} bytes).")
 
 
+def _npm_global_version(bin_name: str, package: str) -> Optional[str]:
+    """Versão de um pacote npm global via package.json local (milissegundos).
+
+    Evita `gemini --version` (Node startup ~2.5s) no doctor — o check
+    estrutural precisa ser rápido (R110: test_is_fast_not_a_full_pytest_run
+    exige run_doctor < 5s). Usa o realpath do binário para subir até
+    node_modules/<pkg>/package.json. Retorna None se não achar (sem erro).
+    """
+    import json
+
+    exe = shutil.which(bin_name)
+    if not exe:
+        return None
+    try:
+        d = os.path.dirname(os.path.realpath(exe))
+        for _ in range(8):
+            pj = os.path.join(d, "package.json")
+            if os.path.isfile(pj):
+                with open(pj, encoding="utf-8") as fh:
+                    meta = json.load(fh)
+                if meta.get("name") == package:
+                    version = str(meta.get("version", ""))
+                    return version or None
+            parent = os.path.dirname(d)
+            if parent == d:
+                break
+            d = parent
+    except Exception:
+        pass
+    return None
+
+
 def _check_external_clis() -> DoctorCheck:
     """Verifica se as CLIs externas de primeira classe (OpenCode, Antigravity,
     Claude Code, Ollama, GitHub Copilot, etc.) estão instaladas e no PATH. São
@@ -229,6 +273,7 @@ def _check_external_clis() -> DoctorCheck:
     de download de PDF no pipeline de pesquisa quando não há acesso
     open-access direto — ver `research/downloader.py`)."""
     missing = {}
+    versions: Dict[str, str] = {}
     for name, cmd in EXTERNAL_CLIS.items():
         if name == "runai":
             try:
@@ -241,10 +286,38 @@ def _check_external_clis() -> DoctorCheck:
             continue
         if shutil.which(name) is None:
             missing[name] = cmd
+            continue
+        # SPEC-935-R598/R599: para integrações com runner próprio, enriquecer
+        # o detail com a versão semântica detectada (sedas instaladas).
+        if name in ("goose", "gemini", "plandex", "reasonix"):
+            try:
+                module_name = {"goose": "goose_cli", "gemini": "gemini_cli", "plandex": "plandex_cli", "reasonix": "reasonix_cli"}[name]
+                if name == "gemini":
+                    # R602-perf: versão via package.json local (ms) em vez do
+                    # subprocess Node (~2.5s) — doctor continua < 5s (R110).
+                    version = _npm_global_version("gemini", "@google/gemini-cli")
+                    if not version:
+                        module = __import__(
+                            f"integrations.{module_name}", fromlist=["gemini_version"]
+                        )
+                        version = module.gemini_version()
+                else:
+                    module = __import__(
+                        f"integrations.{module_name}", fromlist=[f"{name}_version"]
+                    )
+                    version = getattr(module, f"{name}_version")()
+                if version:
+                    versions[name] = version
+            except Exception:
+                pass
     if not missing:
+        suffix = ""
+        if versions:
+            suffix = " (" + ", ".join(f"{n} {v}" for n, v in versions.items()) + ")"
         return DoctorCheck(
             "external_clis", "pass",
-            f"Todas as {len(EXTERNAL_CLIS)} CLIs externas instaladas: {', '.join(EXTERNAL_CLIS)}.",
+            f"Todas as {len(EXTERNAL_CLIS)} CLIs externas instaladas: "
+            f"{', '.join(EXTERNAL_CLIS)}{suffix}.",
         )
     suggestions = "; ".join(f"{name} -> {cmd}" for name, cmd in missing.items())
     return DoctorCheck(

@@ -170,8 +170,8 @@ $wslEnv = @('PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
 & "$env:SystemRoot\System32\wsl.exe" -d Ubuntu -- /usr/bin/env -i $wslEnv /bin/bash --noprofile --norc -c 'cd ~/opencode-ecosystem-core && .venv/bin/python -c "import json; c=json.load(open(\"opencode.json\", encoding=\"utf-8\")); print(len(c.get(\"mcp\", {})), len(c.get(\"agent\", {})))"'
 ```
 
-Na configuração documentada em **2026-08-23**, o diagnóstico continha **19 checks**,
-e `opencode.json` declarava **6 MCPs** e **209 agentes**. São
+Na configuração documentada em **2026-09-26**, o diagnóstico continha **20 checks**,
+e `opencode.json` declarava **7 MCPs** e **215 agentes**. São
 contagens estruturais locais, não resultados de cobertura, testes ou validação
 externa.
 

@@ -74,8 +74,8 @@ python3 -m venv .venv
 .venv/bin/python -m marceloclaro.cli doctor
 ```
 
-No estado estrutural documentado em **2026-08-23**, esse diagnóstico tinha
-**19 checks**; o arquivo `opencode.json` declarava **6 MCPs** e **209 agentes**.
+No estado estrutural documentado em **2026-09-26**, esse diagnóstico tinha
+**20 checks**; o arquivo `opencode.json` declarava **7 MCPs** e **215 agentes**.
 Esses números devem ser reavaliados no checkout instalado e não representam
 resultado de testes, cobertura ou validação externa.
 

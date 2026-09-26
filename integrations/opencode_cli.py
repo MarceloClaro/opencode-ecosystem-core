@@ -549,6 +549,18 @@ def build_config() -> Dict[str, Any]:
             "goose": {
                 "template": "python3 -m integrations.goose_cli $ARGUMENTS",
                 "description": "Agente Goose (AAIF/Linux Foundation) — executor externo orquestrável (SPEC-935-R598). Ex: /goose status, /goose run '<tarefa>', /goose doctor"
+            },
+    "gemini": {
+                "template": "python3 -m integrations.gemini_cli $ARGUMENTS",
+                "description": "Integração da CLI Gemini (Google) — executor externo orquestrável (SPEC-935-R600). Ex: /gemini status, /gemini run '<tarefa>' [--model|-m MODELO] [--output-format json|stream-json] [--timeout SEG]"
+            },
+            "plandex": {
+                "template": "python3 -m integrations.plandex_cli $ARGUMENTS",
+                "description": "Agente Plandex (plandex-ai/plandex, MIT) — executor de codificação orquestrável com planos e sandbox de diff (SPEC-935-R599). Ex: /plandex status, /plandex new, /plandex tell '<tarefa>', /plandex diff"
+            },
+            "reasonix": {
+                "template": "python3 -m integrations.reasonix_cli $ARGUMENTS",
+                "description": "Agente Reasonix (esengine/DeepSeek-Reasonix, MIT) — agente de codificação DeepSeek-native orquestrável one-shot (SPEC-935-R602). Ex: /reasonix status, /reasonix run '<tarefa>', /reasonix doctor, /reasonix install"
             }
         },
     }
