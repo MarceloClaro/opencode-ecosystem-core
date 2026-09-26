@@ -124,12 +124,12 @@ flowchart TB
         OR3[Trust Engine]
     end
 
-    subgraph GROUPS[GRUPOS DE AGENTES ~210]
+    subgraph GROUPS[GRUPOS DE AGENTES ~211]
         AC[Acadêmicos 45]
         TE[Técnicos 40]
         ES[Especialistas 30]
         RS[Pesquisa 25]
-        SU[Suporte 70]
+        SU[Suporte 71]
     end
 
     ORCH --> GROUPS
@@ -195,6 +195,7 @@ flowchart LR
 | `smoke-test-dom-js` 🆕 | Detectar bug de runtime JS inline (classe R580: `'num'` vs `'.num'`) |
 | `mirofish-offline` 🆕 | Simulação de opinião pública multi‑agente (SPEC-976) e integração do backend AGPL por composição |
 | `medico-virtual-supremo` 🆕 | Apoio clínico auditável v3.0 — invocação explícita obrigatória (alto risco, fail‑closed) |
+| `goose-cli` 🆕 | Executor externo Goose (AAIF/Linux Foundation) — `python3 -m integrations.goose_cli status/run/doctor`, 15+ providers, 70+ extensões MCP (SPEC-935-R598) |
 
 ### 4. Hooks e guards
 

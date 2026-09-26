@@ -57,6 +57,11 @@ EXTERNAL_CLIS = {
     # ADOTAR-opt-in (lição R474): uso do operador; NÃO acoplar ao pipeline
     # automático — upstream usa APIs internas não documentadas + cookies.
     "nlm": "pip install notebooklm-mcp-cli",
+    # SPEC-935-R598: CLI do agente Goose (aaif-goose/goose, Apache-2.0, AAIF/
+    # Linux Foundation). Agente generalista em Rust: 15+ providers (Anthropic,
+    # OpenAI, Google, Ollama, OpenRouter, Azure, Bedrock) e 70+ extensões MCP.
+    # Integração por invocação externa (padrão M7) via integrations.goose_cli.
+    "goose": "curl -fsSL https://github.com/aaif-goose/goose/releases/download/stable/download_cli.sh | bash",
 }
 
 

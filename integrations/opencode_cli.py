@@ -545,6 +545,10 @@ def build_config() -> Dict[str, Any]:
             "pypi": {
                 "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from skills.tooling.pypi_search import search, format_output; q = '$ARGUMENTS'.strip(); print('Uso: /pypi <termo de busca> [--json]  (ex.: /pypi requests, /pypi scihub paper download)') if not q else print(format_output(search(q, limit=10), json_output=('--json' in sys.argv)))\"",
                 "description": "Busca bibliotecas Python no PyPI com scoring multicritério. Ex: /pypi scihub paper download, /pypi requests --json"
+            },
+            "goose": {
+                "template": "python3 -m integrations.goose_cli $ARGUMENTS",
+                "description": "Agente Goose (AAIF/Linux Foundation) — executor externo orquestrável (SPEC-935-R598). Ex: /goose status, /goose run '<tarefa>', /goose doctor"
             }
         },
     }

@@ -12148,6 +12148,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R598",
+      "spec": "SPEC-935-R598-goose-cli",
+      "component": "integrations/goose_cli.py + agents/catalog/goose-cli.md",
+      "objective": "Integrar a CLI Goose (aaif-goose/goose, Apache-2.0, AAIF/Linux Foundation) como executor externo orquestrável (padrão M7): status, run headless, doctor tolerante, comando /goose.",
+      "forward_score": 1.0,
+      "tests": [
+        "tests/test_r598_goose_cli.py (15)"
+      ],
+      "tests_passed": true,
+      "changes": [
+        "integrations/goose_cli.py: goose_available/version/run (headless --text, provider/model, timeout), doctor_check, install_instructions, CLI status/run/doctor/install",
+        "marceloclaro/doctor.py: goose em EXTERNAL_CLIS (warn se ausente; nunca fail)",
+        "agents/catalog/goose-cli.md: Agent Card (subagente goose-cli no OpenCode CLI)",
+        "integrations/opencode_cli.py: comando custom /goose; opencode.json regenerado (211 agentes, 11 comandos)",
+        ".opencode/skills/goose-cli/SKILL.md: guia de uso com regras de governança e anti-overclaim",
+        "README.md: skill goose-cli e contagem de agentes 211"
+      ],
+      "lessons": [
+        "CLI externa opcional deve entrar como warn (nunca fail) no doctor — ausência não é falha do Core",
+        "Testes da integração usam mocks de subprocess/shutil: suíte roda mesmo sem o binário instalado",
+        "Corpo de classe Python NÃO captura closure de função envolvente (NameError em helper de teste) — usar types.SimpleNamespace",
+        "goose_run chama goose_version() internamente; mocks que capturam subprocess precisam filtrar a chamada --version"
+      ],
+      "timestamp": 1790389012.8264148
     }
   ]
 }
