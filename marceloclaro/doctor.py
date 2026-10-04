@@ -74,6 +74,17 @@ EXTERNAL_CLIS = {
     # via npm (`npm install -g reasonix`, alias `dsnix`). One-shot `run` (pipes)
     # + `doctor`; exige DeepSeek API key persistida por `reasonix setup`.
     "reasonix": "npm install -g reasonix",
+    # SPEC-935-R645: CLI do Google Colab (googlecolab/google-colab-cli,
+    # Apache-2.0). Provisiona runtimes CPU/GPU/TPU e executa código headless.
+    # Linux/macOS apenas. Integração M7 via integrations.colab_cli.
+    "colab": "uv tool install google-colab-cli",
+    # SPEC-935-R645: Colab MCP Server (googlecolab/colab-mcp, Apache-2.0).
+    # Codificação assistida in-notebook; executável via binário ou uvx.
+    "colab-mcp": "uvx colab-mcp --help",
+    # SPEC-935-R646: Solver MiniZinc (minizinc.org, 2.8+) usado pela ponte
+    # r33drichards/minizinc-mcp (MIT, FastMCP, tool solve_constraint).
+    # Integração M7 via integrations.minizinc_mcp (ponte, sem execução no Core).
+    "minizinc": "MiniZinc 2.8+ em https://www.minizinc.org/software.html",
 }
 
 
@@ -289,9 +300,10 @@ def _check_external_clis() -> DoctorCheck:
             continue
         # SPEC-935-R598/R599: para integrações com runner próprio, enriquecer
         # o detail com a versão semântica detectada (sedas instaladas).
-        if name in ("goose", "gemini", "plandex", "reasonix"):
+        if name in ("goose", "gemini", "plandex", "reasonix", "colab", "colab-mcp", "minizinc"):
             try:
-                module_name = {"goose": "goose_cli", "gemini": "gemini_cli", "plandex": "plandex_cli", "reasonix": "reasonix_cli"}[name]
+                module_name = {"goose": "goose_cli", "gemini": "gemini_cli", "plandex": "plandex_cli", "reasonix": "reasonix_cli", "colab": "colab_cli", "colab-mcp": "colab_mcp", "minizinc": "minizinc_mcp"}[name]
+                func_name = {"goose": "goose_version", "gemini": "gemini_version", "plandex": "plandex_version", "reasonix": "reasonix_version", "colab": "colab_version", "colab-mcp": "mcp_version", "minizinc": "minizinc_version"}[name]
                 if name == "gemini":
                     # R602-perf: versão via package.json local (ms) em vez do
                     # subprocess Node (~2.5s) — doctor continua < 5s (R110).
@@ -303,9 +315,9 @@ def _check_external_clis() -> DoctorCheck:
                         version = module.gemini_version()
                 else:
                     module = __import__(
-                        f"integrations.{module_name}", fromlist=[f"{name}_version"]
+                        f"integrations.{module_name}", fromlist=[func_name]
                     )
-                    version = getattr(module, f"{name}_version")()
+                    version = getattr(module, func_name)()
                 if version:
                     versions[name] = version
             except Exception:

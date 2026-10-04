@@ -561,6 +561,22 @@ def build_config() -> Dict[str, Any]:
             "reasonix": {
                 "template": "python3 -m integrations.reasonix_cli $ARGUMENTS",
                 "description": "Agente Reasonix (esengine/DeepSeek-Reasonix, MIT) — agente de codificação DeepSeek-native orquestrável one-shot (SPEC-935-R602). Ex: /reasonix status, /reasonix run '<tarefa>', /reasonix doctor, /reasonix install"
+            },
+            "colab": {
+                "template": "python3 -m integrations.colab_cli $ARGUMENTS",
+                "description": "Google Colab CLI (googlecolab/google-colab-cli, Apache-2.0) — executor externo orquestrável (SPEC-935-R645). Ex: /colab status, /colab new <nome> [--gpu T4], /colab run sessions, /colab exec -f t.py, /colab doctor"
+            },
+            "colab-mcp": {
+                "template": "python3 -m integrations.colab_mcp $ARGUMENTS",
+                "description": "Colab MCP Server (googlecolab/colab-mcp, Apache-2.0) — ponte orquestrável in-notebook (SPEC-935-R645). Ex: /colab-mcp status, /colab-mcp config, /colab-mcp doctor"
+            },
+            "minizinc": {
+                "template": "python3 -m integrations.minizinc_mcp $ARGUMENTS",
+                "description": "MiniZinc MCP Server (r33drichards/minizinc-mcp, MIT) — ponte constraint solving CSP/COP via solve_constraint (SPEC-935-R646). Ex: /minizinc status, /minizinc payload --model-text '...', /minizinc config --hosted, /minizinc doctor"
+            },
+            "claude-sdk": {
+                "template": "python3 -m integrations.claude_agent_sdk $ARGUMENTS",
+                "description": "Claude Agent SDK Python (anthropics, MIT + Commercial Terms) — ponte de biblioteca, monta options sem executar (SPEC-935-R647). Ex: /claude-sdk status, /claude-sdk options --prompt '...' [--max-turns N], /claude-sdk doctor"
             }
         },
     }
