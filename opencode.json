@@ -3,6 +3,7 @@
   "instructions": [
     "AGENTS.md"
   ],
+  "default_agent": "marceloclaro",
   "model": "litert-lm/litert-community/gemma-4-E2B-it-litert-lm",
   "permission": {
     "edit": "ask",
@@ -733,6 +734,76 @@
         }
       }
     },
+    "ollama-local": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama local (GGUF multimodal)",
+      "options": {
+        "apiKey": "sk-no-key-required",
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "gemma4:e4b-tuned": {
+          "name": "Gemma 4 4B Expert QAT (tuned, ~2.9 tok/s)",
+          "limit": {
+            "context": 24576,
+            "output": 2048
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "tool_call": true,
+          "attachment": true,
+          "reasoning": true,
+          "options": {
+            "reasoning_effort": "none"
+          }
+        },
+        "gemma4:e2b-tuned": {
+          "name": "Gemma 4 2B Expert QAT (tuned, ~7.9 tok/s, recomendado)",
+          "limit": {
+            "context": 24576,
+            "output": 2048
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "tool_call": true,
+          "attachment": true,
+          "reasoning": true,
+          "options": {
+            "reasoning_effort": "none"
+          }
+        },
+        "llama3.2": {
+          "name": "Llama 3.2 3B (Ollama)",
+          "limit": {
+            "context": 32768,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "tool_call": true
+        }
+      }
+    },
     "colibri": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Colibri Engine (OLMoE / GLM-5.2)",
@@ -775,36 +846,36 @@
       }
     },
     "academic_writer": {
-      "description": "Agente essencial do Core com protocolo SDD/TDD: academic_writer",
+      "description": "Agente de redação acadêmica Qualis A1 (ABNT/APA/Vancouver, IMRAD).",
       "mode": "subagent",
-      "prompt": "{file:./agents/academic_writer.md}",
+      "prompt": "{file:./agents/catalog/academic_writer.md}",
       "permission": {
         "edit": "allow",
         "bash": "deny"
       }
     },
     "auditor": {
-      "description": "Agente essencial do Core com protocolo SDD/TDD: auditor",
+      "description": "Agente auditor do ecossistema — sanidade, integração e métricas de qualidade.",
       "mode": "subagent",
-      "prompt": "{file:./agents/auditor.md}",
+      "prompt": "{file:./agents/catalog/auditor.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
       }
     },
     "coder": {
-      "description": "Agente essencial do Core com protocolo SDD/TDD: coder",
+      "description": "Agente de implementação de código Python, refatoração e depuração.",
       "mode": "subagent",
-      "prompt": "{file:./agents/coder.md}",
+      "prompt": "{file:./agents/catalog/coder.md}",
       "permission": {
         "edit": "allow",
         "bash": "allow"
       }
     },
     "researcher": {
-      "description": "Agente essencial do Core com protocolo SDD/TDD: researcher",
+      "description": "Agente de pesquisa profunda, síntese de literatura e verificação de fatos.",
       "mode": "subagent",
-      "prompt": "{file:./agents/researcher.md}",
+      "prompt": "{file:./agents/catalog/researcher.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
@@ -1408,6 +1479,33 @@
         "bash": "deny"
       }
     },
+    "claude-agent-sdk-python": {
+      "description": "Ponte do Claude Agent SDK Python (anthropics, MIT + Commercial Terms): query()/ClaudeSDKClient, in-process MCP, hooks; monta options sem executar.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/claude-agent-sdk-python.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "claude-code-harness": {
+      "description": "Curadoria do Claude Code Harness (Chachamaru127, MIT): loop Plan→Work→Review→Release, 5 verb skills, rota OpenCode internal-compatible. Referência metodológica; não executa o harness.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/claude-code-harness.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "claude-plugins-official": {
+      "description": "Curadoria do marketplace Claude Code Plugins (anthropics, licença por plugin): /plugins + /external_plugins, install por marketplace, gate de trust obrigatório (Anthropic não audita conteúdo dos plugi",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/claude-plugins-official.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
     "cloud-alloydb-specialist": {
       "description": "Especialista em AlloyDB Omni e AlloyDB PostgreSQL — administração, saúde, monitoramento, otimização, performance, replicação e operações Kubernetes. Baseado em 16 skills do Antigravity Backup (SPEC-93",
       "mode": "subagent",
@@ -1539,6 +1637,24 @@
         "bash": "deny"
       }
     },
+    "colab-cli": {
+      "description": "Executor externo orquestrável: `colab` (googlecolab/google-colab-cli, Apache-2.0). Provisiona runtimes CPU/GPU/TPU, executa código e jobs efêmeros, gerencia arquivos do Colab via terminal.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/colab-cli.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "colab-mcp": {
+      "description": "Ponte orquestrável do Colab MCP Server (googlecolab/colab-mcp, Apache-2.0): codificação assistida interativa dentro do notebook Colab, complemento do fluxo terminal do colab-cli. Expõe presença, versã",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/colab-mcp.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
     "colibri-agent": {
       "description": "Agente especializado colibri-agent",
       "mode": "subagent",
@@ -1567,7 +1683,7 @@
       }
     },
     "contextscout": {
-      "description": "> **Mission**: Discover and recommend context files from `.opencode/context/` (or custom_dir from paths.json) ranked by priority. Suggest ExternalScout when a framework/library has no internal coverag",
+      "description": "Discovers and recommends context files from .opencode/context/ ranked by priority. Suggests ExternalScout when a framework/library is mentioned but not found internally.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/contextscout.md}",
       "permission": {
@@ -1742,7 +1858,7 @@
       }
     },
     "haystack-rag": {
-      "description": "- **ID**: haystack-rag",
+      "description": "Integração do framework Haystack (deepset-ai/haystack, Apache-2.0) ao ecossistema: verificação de disponibilidade/versão (haystack-ai via PyPI), construção de pipeline RAG mínimo (InMemoryDocumentStor",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/haystack-rag.md}",
       "permission": {
@@ -1848,7 +1964,7 @@
       "model": "opencode/deepseek-v4-pro"
     },
     "landscape-curator": {
-      "description": "Curadoria da paisagem de agentes (SPEC-935-R482; R521 multi-coleção).",
+      "description": "Curador da paisagem de agentes externos — consome manifests curados de múltiplas coleções (500-AI-Agents-Projects: 20 agentes auto-contidos, MIT, R482; awesome-llm-apps: 15 templates representativos, ",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/landscape-curator.md}",
       "permission": {
@@ -1998,7 +2114,7 @@
       }
     },
     "medico-cardiologista": {
-      "description": "name: Médico Cardiologista description: >- --- name: Médico Cardiologista — Especialista em",
+      "description": "Agente especializado Médico Cardiologista — Especialista em Cardiologia.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/medico-cardiologista.md}",
       "permission": {
@@ -2016,7 +2132,7 @@
       }
     },
     "medico-infectologista": {
-      "description": "name: Médico Infectologista description: >- --- name: Médico Infectologista — Especialista em",
+      "description": "Agente especializado Médico Infectologista — Especialista em Infectologia.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/medico-infectologista.md}",
       "permission": {
@@ -2025,7 +2141,7 @@
       }
     },
     "medico-neurologista": {
-      "description": "name: Médico Neurologista description: >- --- name: Médico Neurologista — Especialista em",
+      "description": "Agente especializado Médico Neurologista — Especialista em Neurologia.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/medico-neurologista.md}",
       "permission": {
@@ -2034,7 +2150,7 @@
       }
     },
     "medico-radiologista": {
-      "description": "name: Médico Radiologista description: >- --- name: Médico Radiologista — Especialista em",
+      "description": "Agente especializado Médico Radiologista — Especialista em Radiologia.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/medico-radiologista.md}",
       "permission": {
@@ -2046,6 +2162,15 @@
       "description": "Agente especializado Médico Virtual Supremo — Apoio Clínico Auditável",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/medico-virtual-supremo.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "minizinc-mcp": {
+      "description": "Ponte orquestrável do MiniZinc Constraint Solver MCP Server (r33drichards/minizinc-mcp, MIT): modelagem CSP/COP via tool solve_constraint (solver gecode). Monta payloads, checa solver + deps e emite c",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/minizinc-mcp.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
@@ -2368,7 +2493,7 @@
       }
     },
     "reversa-agent-forum": {
-      "description": "name: Agente Reversa: Agent Forum / Debate Moderator description: >- --- name:",
+      "description": "Agente moderador de fórum multiagente para debate entre agentes, inspirado pelo ForumEngine do BettaFis.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/reversa-agent-forum.md}",
       "permission": {
@@ -2377,7 +2502,7 @@
       }
     },
     "reversa-anp": {
-      "description": "name: reversa-anp description: >- --- name: reversa-anp description: >- Agente especialista em",
+      "description": "Agente especialista em construir pipelines ANP (Agent Node Pipeline). Executa o pipeline completo: registra nós, define conectores, dependências e automa o fluxo.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/reversa-anp.md}",
       "permission": {
@@ -2471,7 +2596,7 @@
       }
     },
     "reversa-document-ir": {
-      "description": "name: Agente Reversa: Document IR Report Pipeline description: >- --- name: reversa-document-ir",
+      "description": "Agente pipeline de documentação estruturada (IR Report), inspirado pelo ReportEngine do BettaFis.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/reversa-document-ir.md}",
       "permission": {
@@ -2571,7 +2696,7 @@
       }
     },
     "reversa-process-lifecycle": {
-      "description": "name: Agente Reversa: Process Lifecycle Manager description: >- --- name:",
+      "description": "Agente gerenciador de ciclo de vida de processos em background, inspirado pelo padrão do ecossistema Reversa.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/reversa-process-lifecycle.md}",
       "permission": {
@@ -2923,6 +3048,16 @@
     }
   },
   "mcp": {
+    "ecosystem-network": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.ecosystem_mcp"
+      ],
+      "enabled": true,
+      "timeout": 660000
+    },
     "litert-lm": {
       "type": "local",
       "command": [
@@ -2981,6 +3116,11 @@
     }
   },
   "command": {
+    "ecosystem": {
+      "template": "Use ecosystem-network para esta solicitação: $ARGUMENTS. Para diagnóstico use ecosystem_status; para escolher agentes use ecosystem_route; para análise ou texto coordenado use ecosystem_run. Para análise seguida de revisão independente, monte etapas com id, task, dependencies e required_capabilities e use ecosystem_workflow. Em seleção automática reserve per_node_max_steps=2 para permitir fallback. Guarde workflow_id e consulte ecosystem_workflow_status; retome a mesma definição com resume=true. Repetir etapas falhas exige retry_failed=true explícito. Informe os executores realmente usados, erros e limitações.",
+      "description": "Rede coordenada: diagnóstico, execução em etapas, revisão e retomada",
+      "agent": "marceloclaro"
+    },
     "efficiency": {
       "template": "python3 -m integrations.op_timing report $ARGUMENTS",
       "description": "Relatório de eficiência por operação (mediana/p90, op_times.jsonl)"
@@ -3036,6 +3176,22 @@
     "reasonix": {
       "template": "python3 -m integrations.reasonix_cli $ARGUMENTS",
       "description": "Agente Reasonix (esengine/DeepSeek-Reasonix, MIT) — agente de codificação DeepSeek-native orquestrável one-shot (SPEC-935-R602). Ex: /reasonix status, /reasonix run '<tarefa>', /reasonix doctor, /reasonix install"
+    },
+    "colab": {
+      "template": "python3 -m integrations.colab_cli $ARGUMENTS",
+      "description": "Google Colab CLI (googlecolab/google-colab-cli, Apache-2.0) — executor externo orquestrável (SPEC-935-R645). Ex: /colab status, /colab new <nome> [--gpu T4], /colab run sessions, /colab exec -f t.py, /colab doctor"
+    },
+    "colab-mcp": {
+      "template": "python3 -m integrations.colab_mcp $ARGUMENTS",
+      "description": "Colab MCP Server (googlecolab/colab-mcp, Apache-2.0) — ponte orquestrável in-notebook (SPEC-935-R645). Ex: /colab-mcp status, /colab-mcp config, /colab-mcp doctor"
+    },
+    "minizinc": {
+      "template": "python3 -m integrations.minizinc_mcp $ARGUMENTS",
+      "description": "MiniZinc MCP Server (r33drichards/minizinc-mcp, MIT) — ponte constraint solving CSP/COP via solve_constraint (SPEC-935-R646). Ex: /minizinc status, /minizinc payload --model-text '...', /minizinc config --hosted, /minizinc doctor"
+    },
+    "claude-sdk": {
+      "template": "python3 -m integrations.claude_agent_sdk $ARGUMENTS",
+      "description": "Claude Agent SDK Python (anthropics, MIT + Commercial Terms) — ponte de biblioteca, monta options sem executar (SPEC-935-R647). Ex: /claude-sdk status, /claude-sdk options --prompt '...' [--max-turns N], /claude-sdk doctor"
     }
   }
 }

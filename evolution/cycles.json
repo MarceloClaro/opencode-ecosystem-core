@@ -12408,6 +12408,1351 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R604",
+      "objective": "Operar MiroFish-Offline externo com LLMs do OpenCode (big-pickle) via proxy OpenAI-compatível e obter simulação com ações reais",
+      "changes": [
+        "Criado opencode_proxy.py: /v1/chat/completions -> opencode run --format json (subprocess), com suporte a tool_calls para camel-ai",
+        "Proxy com OPENCODE_BIN absoluto via systemd-run (PATH do systemd não cobre ~/.npm-global/bin)",
+        "MiroFish .env: LLM_BASE_URL=http://127.0.0.1:8088/v1, LLM_MODEL_NAME=opencode/big-pickle",
+        "Semeados event_config.initial_posts (5 posts) no simulation_config para desbloquear interações",
+        "Matados processos antigos em wait mode que sobrescreviam run_state.json"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "camel-ai 0.2.78 chama OpenAI SDK com tools e espera message.tool_calls; proxy precisa devolver tool_calls quando o LLM não os emite nativamente",
+        "OASIS com feed vazio -> agentes só do_nothing; event_config.initial_posts desbloqueia CREATE_POST/QUOTE_POST/COMMENT",
+        "opencode/big-pickle é gratuito e rápido (~2-8s); big-pickle respondeu tool call no formato OpenAI",
+        "Processos OASIS ficam em wait mode após simulação e continuam vivos; forçar restart com múltiplos processos concorrentes corrompe run_state"
+      ],
+      "timestamp": 1790413293.814963,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R605",
+      "objective": "Integrar MiroFish-Offline externo ao Core com LLM OpenCode via proxy e simular bancas editoriais",
+      "changes": [
+        "SPEC-935-R605 criada: proxy OpenAI-compat (opencode_proxy.py, porta 8088) -> opencode run com big-pickle; tool-calling para camel-ai; .env do MiroFish apontado para o proxy",
+        "Simulação OASIS real validada: sim_8f8901da13e2 completo com 68 ações (Twitter 32, Reddit 36) e conteúdo textual LLM original",
+        "Skill mirofish-offline atualizada: seção \"LLM do OpenCode via proxy (SPEC-935-R605)\" com fluxo de demo ponta-a-ponta e shield de licença AGPL",
+        "Bancas editoriais mapeadas (30 perfis EDITORIAL_PROFILES + QST/Nature/Science/IEEE/CellPress) vinculadas ao fluxo R605: relatório MiroFish -> banca_simulate(target_institution=...)"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "camel-ai 0.2.78 exige tool_calls no formato OpenAI; LLM textual precisa de wrapper JSON->tool_calls (proxy resolveu)",
+        "big-pickle é suficiente para tool-calling de simulação social (rápido e gratuito)",
+        "Processos OASIS antigos em wait mode corrompem run-state; matar antes de force restart",
+        "Relatório MiroFish usa LLM em série e demora bem mais que a simulação (progress 20%/23% em minutos)"
+      ],
+      "timestamp": 1790413520.9900908,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R605-bancas",
+      "objective": "Simular bancas editoriais mapeadas sobre manuscrito de simulação MiroFish",
+      "changes": [
+        "Bancas simuladas via `banca_simulate()` com 30 perfis EDITORIAL_PROFILES + aliases (R-976.14..R-976.19): Journal of Dentistry, npj Digital Medicine, Clinical Oral Investigations, Journal of Dental Research, Artificial Intelligence in Medicine, IEEE TQE, npj Quantum Information",
+        "Bancas da skill pesquisa-artigo-qualis-a1 (Nature Portfolio, Science/AAAS, IEEE Transactions, Cell Press) validadas com target_institution resolvendo aliases",
+        "Todos os alvos retornam veredito + weighted_score + recommendation + editorial_profile + text_signals — fluxo R605 completo (simulação → relatório → banca)",
+        "Anti-overclaim R110 preservado: vereditos são simulação determinística, não parecer real"
+      ],
+      "score": 0.93,
+      "lessons": [
+        "banca_simulate com manuscrito curto gera veredito REJEITAR (rigoroso) — espera-se score maior com o relatório MiroFish completo",
+        "Aliases resolvem fuzzy (Nature Portfolio → npj Digital Medicine; IEEE Transactions → TQE) — R-976.22 normalize_institution_alias",
+        "Relatório MiroFish (deep retrieval LLM) é gargalo lento; simulação OASIS (proxy big-pickle) é rápida e já entregou 68 ações"
+      ],
+      "timestamp": 1790413703.157026,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R605-final",
+      "objective": "Completar simulação de bancas editoriais mapeadas sobre manuscrito MiroFish e destravar geração de relatório com fallback de modelo",
+      "changes": [
+        "8 bancas editoriais simuladas sobre manuscrito real (34 posts/68 ações da simulação): JOD, JDR, COI, npj Digital Medicine, AIIM, C&E, QST/IOP, RBE/ANPEd — perfil editorial resolvido em todas",
+        "Vereditos REJEITAR consistentes (~22-24) — comportamento honesto R110: simulação computacional sem validação empírica não passa em periódico real",
+        "Fallback de modelo implementado: opencode/big-pickle sobrecarregou (>120s timeout, 502); trocado para opencode/ling-3.0-flash-fin-free (~80ms, custo 0, ilimitado)",
+        "Proxy atualizado: MODEL_DEFAULT=opencode/ling-3.0-flash-fin-free, PROXY_TIMEOUT=300; MiroFish .env LLM_MODEL_NAME=ling-3.0-flash-fin-free",
+        "Relatório MiroFish (report_f14702051df9) progredindo 20%->65% sem erros após fallback; geração em background"
+      ],
+      "score": 0.94,
+      "lessons": [
+        "big-pickle degrada sob concorrência (502/timeout 120s); ling-3.0-flash-fin-free é ~100x mais rápido e ilimitado — escolha primária para MiroFish",
+        "Prompt grande (deep retrieval) excede timeout padrão; PROXY_TIMEOUT=300 necessário",
+        "Banca editorial correta rejeita manuscrito de simulação sem validação empírica — REJEITAR é o comportamento esperado (anti-overclaim R110)",
+        "Manuscrito real das bancas são os posts/68 ações da simulação (34 posts com discurso argumentativo multi-stakeholder)"
+      ],
+      "timestamp": 1790525648.995655,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R606",
+      "objective": "Habilitar Gemma 4 E4B local no OpenCode: instalar e rodar o modelo efetivo 4B com visao e tool calling.",
+      "changes": [
+        "Diagnostico: TasksMax=16 no unit systemd impedia o pool de threads do LiteRT-LM (pthread_create failed) — toda inferencia retornava 500 apos ~10 min. Corrigido para TasksMax=512.",
+        "MemoryMax do unit elevado de 8G para 16G a pedido do operador.",
+        "Instalado gemma4:e4b-it-qat (6,1 GB) via Ollama 0.31.1 (GGUF multimodal).",
+        "Adicionado provider 'ollama-local' (openai-compatible, :11434/v1) no gerador integrations/opencode_cli.py com modalities image, tool_call, attachment e reasoning_effort=none.",
+        "Testado e aprovado via opencode run: texto, visao (leu texto de imagem) e tool calling (emitiu read_file).",
+        "Contexto LiteRT mantido em 20480: elevar a 32768 removia o erro 'Input token ids too long' mas causava OOM-kill (pico 10,9 GB, 21 GB swap) em maquina de 11,8 GB."
+      ],
+      "score": 0.75,
+      "lessons": [
+        "Baixo teto de TasksMax em unit systemd quebra runtimes que usam thread pool e falha de forma enganosa: /v1/models responde 200 enquanto /v1/chat/completions falha.",
+        "Ollama/GGUF foi a unica rota viavel: lida com KV cache quantizado e visao; LiteRT-LM como provedor de chat consome RAM demais para co-residir com opencode.",
+        "R413/anti-overclaim: o E4B LiteRT NAO roda nesta maquina (11,8 GB RAM) — medido, nao presumido. A alegacao de que 'instalar e rodar' foi concluida aplica-se apenas a variante GGUF via Ollama."
+      ],
+      "timestamp": 1790581008.3473353,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R607",
+      "objective": "SPEC-935-R608: bootstrap do catálogo tolerante a frontmatter com cabeçalho",
+      "changes": [
+        "mci/agent_registry_bootstrap.py: _locate_frontmatter() + parse tolerante (201 cards vs 162)",
+        "specs/SPEC-935-R608-catalog-bootstrap-frontmatter.md (critérios B1-B5)",
+        "tests/test_r608_catalog_bootstrap_frontmatter.py (6 testes, 1 hermenêutico c/ catálogo real)",
+        "livro-core/mod-03-memoria-mci.tex: número honesto 201 registráveis + nota da reparação futura"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "startswith('---') rígido descartava 39 cards com head; tolerância isolou 10 com YAML realmente inválido",
+        "contagem de frontmatter 'legível' (gen) difere de 'parseável' (YAML completo): 211 vs 201 — distinção agora documentada"
+      ],
+      "timestamp": 1790672015.573444,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R609",
+      "objective": "R609: reparo das descrições do catálogo (gate SPEC-935-R608-R609) — 212 cards parseáveis, todos com description não vazia",
+      "changes": [
+        "cards 6 sem description:key ganharam description",
+        "haystack-rag ganhou frontmatter YAML válido",
+        "contextscout: alias `*: allow` -> `\"*\": allow`",
+        "landscape-curator: plain scalar com `: ` -> quoted",
+        "4 medico-* e 4 reversa-*: frontmatter reconstruído + quote de scalars latentes com `: `",
+        "mod-03 e specs/SPEC-935-R608 e tests/test_r608 atualizados p/ 212",
+        "gen_mod10 reexecutado (255 fichas/12 categorias)"
+      ],
+      "score": 1.0,
+      "lessons": "next_round_id() (evolution/cycles.py) só varre cycles/ e colidiu com specs/SPEC-935-R607: registrar com round_id explícito até a seq. ser corrigida",
+      "timestamp": 1790672399.393975,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R610",
+      "objective": "R610: Módulo 12 — Fichas Núcleo Expandidas (6 fichas centrais, template 13 dimensões, citações DOI verificadas)",
+      "changes": [
+        "livro-core/mod-12-fichas-nucleo.tex criado (6 fichas: orquestrador, blackboard/MCI, spec-engine SDD/TDD, auditoria, evolução, reprodução)",
+        "main.tex: 2º back matter -> nova parte antes do apêndice com \\input{mod-12-fichas-nucleo}",
+        "12+ citref com 4 DOIs verificados ativos (Flavell 10.1037/0003-066X.34.10.906, Nii 10.1609/aimag.v7i2.538, Ioannidis 10.1371/journal.pmed.0020124, Wilkinson 10.1038/sdata.2016.18)",
+        "proteção tipográfica: _ fora de \\cod/\\pth escapado, macros cruas neutralizadas, \\end{descricao} órfão removido, título curto p/ sumário",
+        "check.py ok; build exit=0; 174 páginas; PDF tem os 4 DOIs"
+      ],
+      "score": 1.0,
+      "lessons": "Macros com nome de comando (\\pth/\\cod/\\hbox/\\elemento) em texto corrido acionam o TeX — sempre \\cod{} ou reescrever; latexmk reseta com -C; overfull de passe 1 no toc pode ser transiente",
+      "timestamp": 1790674835.823631,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R611",
+      "objective": "sem colisão",
+      "changes": [
+        "x"
+      ],
+      "score": 1.0,
+      "lessons": [],
+      "timestamp": 1790674994.7713437,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R612",
+      "objective": "R611: unicidade do round_id (specs_dir como fonte) e ativacao minuciosa com citações DOI verificadas",
+      "changes": [
+        "evolution/cycles.py: __init__(state_path), EVOLUTION_STATE_PATH, SPECS_PATH/EVOLUTION_SPECS_PATH, next_round_id() varre specs/",
+        "specs/SPEC-935-R611-next-round-id-unicity.md criada",
+        "tests/test_r611_round_id_unique.py (4 testes) + suites r462/r488/r581/r611: 52 passed",
+        "livro-core/mod-11-apendices.tex: +3 referencias auditadas (Wooldridge&Jennings 1995; Jennings/Sycara/Wooldridge 1998; Peng 2011)",
+        "livro-core/mod-13-ativacao-agentes.tex: pipeline E1-E7 (teoria, calculo, funcao, gate fail-closed) + ativacao por categoria (14 rotas)",
+        "main.tex: parte Ativacao de Agentes e Subagentes -> input mod-13",
+        "Verificacao Crossref: OK 10.1017/S0269888900008122, 10.1126/science.1213847, 10.1023/A:1010090405266; 404 descartados Nelson&Narens e Newell"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Comando matematico (\\\\|) fora de modo matematico quebra TeX; usar palavra ou modificar para texto puro",
+        "Crossref 404 em DOIs APA/Elsevier antigos exige segunda fonte (Semantic Scholar/doi.org) antes de descartar"
+      ],
+      "timestamp": 1790675406.7775095,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R613",
+      "objective": "Livro Core: lote de ativação por categoria (mod-14), seções R613 de ativação/cálculo em 15 módulos, citações em ABNT e correção de descrições vazias",
+      "changes": [
+        "livro-core/gen_mod14_ativacao.py: injeta seção 'Ativação e cálculo' (E1-E7 + cálculo + limites + citref) em 15 módulos, idempotente por marcador ATIVACAO-R613; labels únicos por módulo (ativ-<mod>); título curto no ToC",
+        "livro-core/mod-14-lote-categorias.tex: novo capítulo com 13 fichas (academic, research, legal, data, inference, engineering, testing, literary, curation-agent, integration, mira-agent, maswos-agent, utility), cada uma com conceito/função, método/cálculo, limite e citação com página",
+        "ABNT: macro \\citref reescrita (NBR 10520:2023, sistema numérico; referência NBR 6023:2018) e 46 chamadas convertidas por DOI; biblioteca mod-11 com data de acesso e hífen ABNT; metodologia declara as normas",
+        "Descrições vazias: removidos blocos YAML espúrios de agents/catalog/medico-neurologista.md e medico-radiologista.md; 212/212 cards com frontmatter e description não vazia",
+        "Skills: .opencode/skills/prestacao-contas-nota-dez (description entre aspas, YAML válido) e 4 SKILL.md sem frontmatter (deep-research, evo-science, mcp-security, peer-review-v2) agora com name+description",
+        "LaTeX: \\@pnumwidth/\\@tocrmarg ampliados (0 overfull); build 205 páginas, exit=0, check.py ok"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Grep de 'description:' vazio dentro do corpo pode ser falso positivo de YAML espúrio duplicado; o frontmatter válido é o PRIMEIRO bloco apos eventual comentario HTML",
+        "Overfull de ~0,6pt no sumario vinha de numeros romanos longos (xxii) excedendo \\@pnumwidth; aumentar a largura resolve sem tocar no texto",
+        "ABNT atualizada: NBR 6023:2018 (referencias) + NBR 10520:2023 (citacoes, sistema numerico em nota de rodape com pagina na citacao direta)",
+        "O comando /maswos (template do opencode_cli) roda em dry-run sem delegate_fn: 0/16 estagios 'completed' por design, nao e aprovacao"
+      ],
+      "timestamp": 1790677459.6698487,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R614",
+      "objective": "Lote 1 da expansão didática (estilo Nussenzveig) dos Módulos 01, 01b, 01c e 02, e correção real do marcador ATIVACAO-R613",
+      "changes": [
+        "Cada seção nova segue o método Nussenzveig: fenômeno observável -> grandezas e definições -> dedução passo a passo -> exemplo resolvido numerado -> ordem de grandeza/verificação -> limite de validade -> exercícios",
+        "mod-01: 'Leitura guiada - Fundamentos' (N-01) com cálculo explicito de P(>=1 erro)=1-0,99^216 ~ 0,886 para justificar o gate fail-closed",
+        "mod-01b: 'Leitura guiada - Historia' (N-01b) com 281/367=0,766 e 367/434=0,85 spec por ciclo",
+        "mod-01c: 'Leitura guiada - Instalacao' (N-01c) com a heuristica de custo de correcao 1:10:100 (rotulada como heuristica, nao medida)",
+        "mod-02: 'Leitura guiada - Orquestracao' (N-02) com 455/5=91 como fator de reducao do espaco de busca e verificacao dos gates",
+        "Corrigido bug real: script anterior usava split('% ATIVACAO-R613') consumindo o delimitador e reportava OK sem alterar nada; o marcador foi removido de 15 arquivos e os labels ativ-xx nunca trocados",
+        "Correcao verificada por assert: restaurado 1 marcador por arquivo, labels unicos (ativ-01f..ativ-12f) e prefixos duplicados removidos em 15 arquivos",
+        "Typos: 'jane'->'janela', 'reflecao'->'reflexao', 'triade'->'triade' acentuado; '9 principios' (sem lastro) -> '3 principios fundamentais (P-1..P-3)'",
+        "Build: 210 paginas, exit=0, 0 overfulls, check.py ok"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Nunca usar split(delimitador) para editar e recompor: o delimitador e consumido. Usar replace simples e VERIFICAR com assert (contagem == esperado), nunca apenas imprimir OK",
+        "Todo post-processamento deve reabrir o arquivo e afirmar as condicoes (marcador 1x, label ausente, prefixo ausente) - fail-closed tambem na edicao de texto",
+        "Estilo Nussenzveig aplica-se bem a engenharia: fenomeno -> definicoes com limiares numericos -> deducao -> exemplo resolvido -> limite de validade -> exercicios",
+        "Exemplos numericos didaticos (p=0,99^216) precisam ser rotulados como hipotese/modelo, nunca como medicao do repositorio (R110)"
+      ],
+      "timestamp": 1790678369.1140852,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R615",
+      "objective": "Lote 2 da expansão didática estilo Nussenzveig (Módulos 03, 04, 05, 06) com exemplos resolvidos verificáveis",
+      "changes": [
+        "mod-03 (N-03): MetaBus vs Blackboard; definicao de confianca como media ponderada tau = sum(s_i w_i)/sum(w_i); exemplo numerico tau=(0,9*3+0,7*2+0,5*1)/6=0,77; 212/216=98,1% cards",
+        "mod-04 (N-04): spec->teste->implementacao; cobertura SDD k <= 254/367=69,2% (limite superior); 281/367=76,6% serie R",
+        "mod-05 (N-05): provar vs gerar; Lei de Amdahl A(N)=1/(s+(1-s)/N); exemplo s=0,2, N=13 -> A~3,8, teto 1/s=5",
+        "mod-06 (N-06): cobertura vs merito; SRI 0-100 e item critico; exemplo kappa=18/20=90% mas reprova por item critico",
+        "Corrigido uso de \\text{ (exige amsmath, ausente no projeto) em mod-04 e mod-06; verificado com grep que nao restou \\text{",
+        "Build: 214 paginas, exit=0, 0 overfulls, check.py ok"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "O projeto LaTeX nao carrega amsmath: \\text{}, \\dfrac e \\textbf dentro de math quebram o build (exit=12). Usar texto fora do math ou \\mathrm apenas se carregado",
+        "Varrer globalmente por \\text{ apos escrever math e obrigatorio (fail-closed antes de compilar)",
+        "Exemplos didaticos devem usar dados do proprio repositorio (212/216, 254/367, 13 engines) e guardar o que e ilustracao (hipotese, heuristica) rotulado como tal"
+      ],
+      "timestamp": 1790678755.3628542,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R616",
+      "objective": "Lote 3 (Módulos 07, 08, 09a, 12) no estilo Nussenzveig + REVISÃO completa do livro: stub de infraestrutura, números desatualizados, discrepância do catálogo, boilerplate e labels",
+      "changes": [
+        "mod-09-infra.tex era um stub 'Em construção' (39 linhas) -> capítulo real (252 linhas): ambiente/perfis, 7 servidores MCP, 4 hooks + 2 plugins, cadeia de deploy, licao HEAD-vs-GET+Range, Leitura guiada N-09",
+        "REVISÃO de números: 367->368 specs, 281->283 da serie R, 254->256 suites test_r*, 434->441 ciclos (medidos em 29/09/2026); recalculos das fracoes afetadas (283/368=0,769; 368/441=0,834; 256/368=0,696)",
+        "REVISÃO do catálogo: titulo corrigido para '255 Fichas de Agente (216 registradas no runtime)' + aviso de discrepancia (39 fichas documentadas nao instanciadas); correcao feita no GERADOR gen_mod10.py e regerado",
+        "REVISÃO de boilerplate: removidas 15 repeticoes de 'Proximo paragrafo, a citacao que ancora...' e 15 frases redundantes sobre a biblioteca",
+        "REVISÃO de metadados: Ficha 12.6 estava desatualizada (165+ paginas, 2x0.61pt, R609) -> 223 paginas, 0 overfulls, R616; Ficha 12.5 ultimo ciclo R609->R616; '205 fichas'->'212 cards'",
+        "REVISÃO de LaTeX: label mod12 duplicado corrigido (mod12-f1); \\code{ -> \\cod{ (9 ocorrencias no mod-09); \\text{ -> \\mathrm{ (3); caracteres CJK acidentais removidos; 'reaffirmed'->'reafirmada'",
+        "Leituras guiadas novas: N-07 (4/6 = 66,7% de executores), N-08 (117/255 = 45,9% e 168/255 = 65,9% de concentracao; 216/255 = 84,7% de registro), N-09a (b = 0/11 = 0% de cobertura comparativa externa), N-12 (u = 1 - 6/78 = 92,3%)",
+        "Build: 223 paginas, exit=0, 0 overfulls, 0 labels duplicados, 13 secoes 'Leitura guiada', check.py ok"
+      ],
+      "score": 0.94,
+      "lessons": [
+        "Revisao numerica exige recalcular os exemplos que dependem dos numeros: trocar 281/367 por 283/368 mantem o texto legacy errado se o resultado nao for refeito",
+        "Arquivos gerados (mod-10) devem ser corrigidos no GERADOR e regerados; editar a mao perde-se na proxima execucao. A regeracao apaga secoes inseridas depois -> reaplicar o gerador idempotente (marcador ATIVACAO-R613)",
+        "F-strings do Python interpretam {\\textbf{...}} como campo: e preciso duplicar as chaves (\\textbf{{...}})",
+        "Discrepancias entre inventario e runtime (255 fichas vs 216 agentes) devem ser DECLARADAS no livro, nao harmonizadas em silencio",
+        "A macro do livro e \\cod, nao \\code; e nao ha amsmath, logo \\text{} quebra o build: usar \\mathrm{}",
+        "O aviso 'multiply defined' pode ser residuo de log anterior; confirmar em main.aux/main.log antes de agir"
+      ],
+      "timestamp": 1790681152.1352348,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R617",
+      "objective": "SPEC-935-R617: gate de integridade editorial fail-closed para livro-core (fecha a lacuna TDD de R613-R616, que introduziram 13 secoes e 46 citacoes sem spec nem teste)",
+      "changes": [
+        "SPEC-935-R617 escrito com 8 criterios de aceitacao (AC1-AC8) e gate fail-closed",
+        "tests/test_r617_livro_integridade.py criado: 13 testes (RED -> GREEN)",
+        "AC1-AC3, AC5a, AC5b(bloques), AC6(ajustado), AC7, AC8: passam",
+        "AC4 RED: boilerplate 'Proximo paragrafo'/'A citacao abaixo conecta' voltava a cada regeracao de mod-10; corrigido NA FONTE (gen_mod14_ativacao.py) e provado por regeneracao do zero (0 ocorrencias)",
+        "AC5b RED real: N-01 nao tinha caixa 'Exemplo resolvido' (deducao e exemplo estavam misturados); reestruturado em caixas separadas",
+        "AC5b RED real: N-01c tambem sem 'Exemplo resolvido'; acrescentado com conta da heuristica 1:10:100 sobre o doctor (14s medidos)",
+        "AC5b RED real: N-06, N-08, N-09a e N-12 sem bloco 'Ordem de grandeza e verificacao'; inserido em cada um com numeros medidos do proprio dominio",
+        "AC3 RED autoral: usei \\text{s} na propria correcao; o teste pegou e foi trocado por \\mathrm{s}",
+        "Build final: 224 paginas, exit=0, 0 overfulls, 0 erros, check.py ok; PDF com 13 'Exemplo resolvido' e 7 'Ordem de grandeza'"
+      ],
+      "score": 0.96,
+      "lessons": [
+        "Lacuna real: os ciclos R613-R616 introduziram muito conteudo sem spec e sem teste, violando o Principio 1 do Core. Sucesso editorial nao substitui gate automatico.",
+        "Corretar boilerplate no .tex gerado e perde-se na proxima regeneracao. A correcao tem de estar no gerador, e a prova e regenerar do zero e reexecutar o teste.",
+        "A suíte completa (301 arquivos) estoura 15 minutos; medir por subconjuntos e usar o que o ciclo tocou.",
+        "O gate R617 pegou erro autoral em codigo de teste-adjacente (\\\\text{s}) que o build LaTeX tambem pegaria: teste estrutural e build sao defesas complementares, nao redundantes.",
+        "Separar 'deducao' de 'exemplo resolvido' em caixas distintas melhorou a leitura e tornou a verificacao automatizavel - o requisito estrutural forçou a qualidade didatica.",
+        "doctor: 18/20 passam, 0 falham, 2 avisos sao CLI externas ausentes (scihub-cli, runai, tig, nlm...) - nao e regressao do Core."
+      ],
+      "timestamp": 1790685504.6164865,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R618",
+      "objective": "SPEC-935-R618: reconciliacao catalogo<->runtime (auditoria da alegacao das '39 fichas nao registradas') + Leitura guiada N-10 no Modulo 10 + 4 fichas de agentes essenciais",
+      "changes": [
+        "AUDITORIA: as 212 fichas de agents/catalog/ estavam TODAS registradas; as '39 nao registradas' eram artefato de convencao de nome (frontmatter humano vs slug kebab-case)",
+        "gen_mod10.py: camada de reconciliacao (nome exato -> alias declarado -> slug -> similaridade) com ALIASES explicitos (18) e INLINE_DECLARADOS; funcoes carregar_cards/reconciliar/nao_registrados",
+        "ERRO FACTUAL CORRIGIDO no livro: titulo passou de '255 fichas (216 registradas)' para '216 fichas (216 registradas)'; aviso de 'discrepancia declarada' substituido por explicacao honesta da convencao de nomes",
+        "4 fichas criadas para os agentes que so existiam inline: academic_writer, auditor, coder, researcher (212 -> 216 cards = cobertura 1:1); prompt canonico embutido nos cards",
+        "REGRESSAO SEGURANCA/OPERACIONAL encontrada e corrigida: agents.update(_catalog_agents()) sobrescrevia as permissoes curadas, e coder perdia bash:allow/edit:allow (ficava {deny,deny} inutilizavel); corrigido com fallback em _catalog_agents()",
+        "Leitura guiada N-10 no Modulo 10: fenomeno/convencao de nome, grandezas, deducao, exemplo resolvido (39 = 21 por slug + 18 por alias -> residuo 0), ordem de grandeza e limite (cobertura documental != evidencia funcional)",
+        "Modulo 8 (N-08) reescrito com numeros reconciliados: 117/216 = 54,2%; (117+52)/216 = 78,2%; cobertura R/F = 100% (antes 255/216 = 84,7%, alegacao falsa)",
+        "Gate novo AC6: o livro nao pode citar total de inventario obsoleto (255/212) nem fracao com denominador obsoleto",
+        "opencode.json regenerado por integrations.opencode_cli: 216 agentes, 7 MCP, 14 comandos; 11 descrições passaram a vir do catalogo (fonte unica de verdade)",
+        "Build: 214 paginas, exit=0, 0 overfulls, check.py ok, 14 secoes 'Leitura guiada' no sumario",
+        "Testes: R617 13/13, R618 12/12, R608 (212->216) ok, mais 95 testes de integracao (R137, R212, R218, R131, mira, R216, R262, R205) verdes"
+      ],
+      "score": 0.93,
+      "lessons": [
+        "Antes de implementar 'registrar o que falta', auditar se realmente falta: as 39 fichas estavam registradas sob outra convencao de nome. Implementar as cegas criaria 39 agentes duplicados e pioraria o problema que motivou o pedido.",
+        "Supercontagem silenciosa: somar dois acervos que se correspondem por alias conta cada agente duas vezes (255 para 216). Contagem sem invariante de reconciliacao produz numeros plausiveis e errados.",
+        "Numeros fixados no texto envelhecem: o N-10 deriva tudo (categoria, media, residuo) do estado real, para nao repetir o erro do 255/39.",
+        "Adicionar cards ao catalogo pode REBAIXAR permissoes: o merge do catalogo sobrescrevia permissoes curadas de agentes essenciais (coder ficou sem bash). Falha silenciosa e funcional, invisivel a diff de contagem.",
+        "O gate anterior (R617) conferia contagens de specs/testes/ciclos, nao de agentes: a divergencia do Modulo 8 passou. Invariantes precisam cobrir a dimensao que o texto afirma.",
+        "A propria suite pegou erros meus de edicao (escape de f-string, texto duplicado, CJK acidental): verificacao automatica vale mais que releitura.",
+        "doctor segue em 18/20 com 2 avisos de CLI externas ausentes; nenhuma regressao estrutural."
+      ],
+      "timestamp": 1790688790.8919954,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R619",
+      "objective": "SPEC-935-R619: cobertura didatica de 100% dos modulos do livro Core (Leituras guiadas N-11, N-13, N-14 + bloco de ordem de grandeza nos 6 modulos que faltavam)",
+      "changes": [
+        "MEDICAO: 14 de 17 modulos pedagógicos tinham Leitura guiada; faltavam mod-11 (biblioteca/ABNT), mod-13 (ativação) e mod-14 (lote por categoria) — justamente os 3 que ensinam como usar o sistema",
+        "NOVA ACHADO: o gate R617 conferia so a primeira Leitura guiada de cada modulo e nao exigia o bloco 'Ordem de grandeza e verificacao' — 6 modulos (01b, 02, 04, 05, 07, 09) estavam incompletos sem que nenhum teste reclamasse",
+        "Bloco 'Ordem de grandeza e verificacao' adicionado aos 6 modulos, com numeros medidos: 444 ciclos / 69 dias = 5,4 ciclos/dia (01b); 216 agentes = 1 primario + 215 subagentes, <2% por tarefa (02); 370 specs / 304 testes = 1:0,89 (04); 5 motores e a assimetria segundos-vs-milisegundos (05); 7 MCP + 14 comandos + 14 skills (07); orcamento 1000 MB/25 MB com razao de folga (09)",
+        "N-11 escrita: 14 referencias, 48 chamadas = 3,43 por referencia; concentracao top-3 = 22/48 = 45,8%; densidade 48/220 = 0,22 citacao por pagina; e o limite honesto de que 100% de DOI nao e 100% de lastro",
+        "N-13 escrita: 7 etapas e 4 rotas; custo da rota por Blackboard = 3 operacoes; 1 em cada 5 tarefas nela = 0,4 operacao extra por tarefa; 14 blocos de ativacao em 14 modulos",
+        "N-14 escrita: 13 fichas condensadas sobre 216 agentes = 6,0%; densidade 0,77 pag/ficha contra 0,28 pag/ficha do enumerado = 2,7x mais densa cobrindo 17x menos itens; e a ressalva de que 13+216 nao se soma (inflacao de R618)",
+        "ORDEM CANONICA normalizada: mod-01 tinha Limite antes de Ordem de grandeza; movido para a ordem majoritaria (17/17 modulos agora em Ordem -> Limite)",
+        "Citacoes reais adicionadas nas 3 secoes novas: PENG (10.1126/science.1213847), NII (10.1609/aimag.v7i2.538), WILKINSON/FAIR (10.1038/sdata.2016.18)",
+        "Novos elementos N-11, N-13, N-14 registrados no padrao \\elemento{\\metainfo{ID}} com Ciclo R619",
+        "Defeitos preexistentes corrigidos: 'VOLUNTARIADO' (mod-13) e 'porbrainsagem' (mod-13)",
+        "Build final: 220 paginas, exit=0, 0 overfulls, check.py ok, 17 'Leitura guiada' no sumario",
+        "Testes: novo tests/test_r619_cobertura_100_por_cento.py (15 testes) + 54 verdes no conjunto R608/R617/R618/R619/R137/R212"
+      ],
+      "score": 0.94,
+      "lessons": [
+        "'100% de cobertura' era uma afirmacao sem medicao: quando o usuario pediu 100%, a medicao mostrou que a lacuna era de 6 modulos em um bloco interno, e nao de 3 modulos inteiros — a auditoria mudou o escopo do trabalho",
+        "O gate anterior (R617) checava so a primeira secao de cada modulo e nao exigia o 7o bloco: gates parciais criam falsa sensacao de seguranca. Cobertura de secao != cobertura de bloco",
+        "Ordens de blocos divergiam em 1 de 17 modulos sem nenhum teste notar; normalizar pela maiorria (16/17) foi mais barato e mais honesto do que impor uma ordem nova",
+        "Numero que descreve o proprio texto e auto-referencial (a densidade de citacao muda quando a secao que a calcula entra). Resolvi declarando a medicao como incluindo a propria secao, em vez de perseguir um valor que nunca estabiliza",
+        "Erro de digitacao recorrente em texto longo escrito de uma vez: CJK, hangul, chines e palavras fundidas entraram em 3 das 3 secoes novas. A varredura de glifos + releitura por script e o que impede publicar esses desvios",
+        "check.py pegou um desbalanceamento de chaves que o latexmk aceitava (\\cod{grep -c elemento\\{ficha-...}): compilar com sucesso nao e o mesmo que estar correto"
+      ],
+      "timestamp": 1790690485.9148629,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R620",
+      "objective": "Capa final do autor substitui a pagina 1; prefacio (nota do autor) inserido depois",
+      "changes": [
+        "mod-00-capa.tex: capa TikX (R599-R620) substituida pela arte final do autor (capa-ecosistema.jpg, 1755x2483 px, ~213 dpi, A4 cheio via tikz overlay)",
+        "Prefacio 'Nota do autor para este livro' inserido na pagina 2, verbatim do PDF do autor, como elemento PREF-01 com metainfo de fonte e ciclo",
+        "ordem final: p1 capa | p2 prefacio | p3 folha de rosto | p4 sumario; 234 -> 235 paginas",
+        "build exit=0, check.py limpo, 78 testes verdes (R137/R212/R608/R617/R618/R619/R620)"
+      ],
+      "score": 0.95,
+      "lessons": [
+        "A capa e arte raster do autor: entra como IMAGEM, nao como texto reconstituido -- recompor a diagramacao em LaTeX altera a arte final sem o|author pedir.",
+        "Resolucao nativa extraida (212 ppi real) em vez de renderizar em 200 ppi e fazer upscaling: o PDF do autor tem pagina de 1128x1596 pts, nao A4, mas a proporcao e a mesma."
+      ],
+      "timestamp": 1790701337.2723694,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R621",
+      "objective": "Aplicar tema escuro editorial ao livro científico",
+      "changes": [
+        "Páginas internas com fundo carvão e tipografia clara",
+        "Painéis, fluxogramas e títulos ajustados para contraste no tema escuro",
+        "Sumário com números de página em tons claros",
+        "Capa ilustrada preservada",
+        "PDF A4 recompilado e conferido visualmente"
+      ],
+      "score": null,
+      "lessons": [],
+      "timestamp": 1790704536.248893,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R622",
+      "objective": "Alinhar o design do livro científico ao MCP Livro de referência",
+      "changes": [
+        "Paleta carvão #222222, roxo profundo #30114C e violeta #BB7DF2",
+        "Faixas roxas corridas no cabeçalho e rodapé",
+        "Tipografia sem serifa e texto cinza claro",
+        "Abertura de capítulos com número e bloco violeta",
+        "Caixas e fluxogramas harmonizados com o padrão violeta",
+        "PDF A4 recompilado e revisado visualmente"
+      ],
+      "score": null,
+      "lessons": [],
+      "timestamp": 1790705546.1847548,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R623",
+      "objective": "Aprimorar o fluxograma de arquitetura do livro científico",
+      "changes": [
+        "Ampliados os nós e contrastes para leitura no tema escuro",
+        "Organizados retornos e integrações nas laterais com legenda visual",
+        "Mantido o título junto ao diagrama na quebra de página",
+        "PDF recompilado e página 32 inspecionada visualmente"
+      ],
+      "score": null,
+      "lessons": [
+        "Diagramas verticais densos ficam mais claros com nós largos, canais separados e legenda dedicada."
+      ],
+      "timestamp": 1790708313.4754276,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R624",
+      "objective": "Padronizar o contraste das notas de rodapé no tema escuro",
+      "changes": [
+        "Texto e marcadores das notas em branco, inclusive em citações quebradas entre páginas",
+        "Linha separadora das notas em branco com espessura explícita",
+        "Links DOI preservados em violeta",
+        "PDF recompilado e páginas de notas inspecionadas visualmente"
+      ],
+      "score": null,
+      "lessons": [
+        "Notas longas podem continuar em outra página; reaplicar a cor por parágrafo e impedir divisão entre linhas preserva o contraste."
+      ],
+      "timestamp": 1790709254.8490243,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R625",
+      "objective": "Aumentar contraste e legibilidade dos fluxogramas do livro científico",
+      "changes": [
+        "Substituídos os traços escuros restantes por retornos violetas tracejados",
+        "Redirecionadas setas de retorno para corredores externos aos nós e rótulos",
+        "Rotulados os caminhos de fallback e reprovação",
+        "PDF de 233 páginas recompilado e fluxogramas revisados visualmente",
+        "Verificação do PDF confirmou ausência de texto preto"
+      ],
+      "score": null,
+      "lessons": [
+        "Conectar setas de retorno às âncoras laterais e reservar o corredor externo reduz cruzamentos e sobreposição em diagramas verticais."
+      ],
+      "timestamp": 1790710169.7322276,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R626",
+      "objective": "Ajustar cabeçalhos e rodapés nas faixas violetas do livro científico",
+      "changes": [
+        "Cabeçalho passa a mostrar o título corrente da seção em caixa alta e negrito",
+        "Rodapé mostra capítulo e número da página em branco e alinhados às extremidades",
+        "Textos reposicionados verticalmente para centralização nas faixas violeta",
+        "PDF recompilado e páginas de conteúdo conferidas visualmente"
+      ],
+      "score": null,
+      "lessons": [
+        "Usar marcas correntes para seção e capítulo mantém a identificação contextual, com alinhamento independente das margens do miolo."
+      ],
+      "timestamp": 1790710722.3809779,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R627",
+      "objective": "Padronizar referências e a sequência contínua das notas de rodapé",
+      "changes": [
+        "Numeração das notas mantida em sequência global, sem reinício por capítulo",
+        "Notas de citação passaram a incluir o parágrafo Referência bibliográfica",
+        "Chamadas dentro de caixas usam o mesmo contador numérico global",
+        "Marcador da primeira citação foi ligado à frase que fundamenta a referência",
+        "Explicação anteriormente marcada por letra foi incorporada ao texto",
+        "PDF de 235 páginas recompilado; conferidas 70 notas numeradas de 1 a 70"
+      ],
+      "score": null,
+      "lessons": [
+        "Em livros LaTeX, o contador padrão de notas reinicia por capítulo; caixas tipográficas também podem alternar para contadores alfabéticos."
+      ],
+      "timestamp": 1790712083.7523324,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R628",
+      "objective": "Inserir citações autor-data-página explícitas no texto e vincular cada chamada à respectiva nota",
+      "changes": [
+        "Adicionar o formato (AUTOR, ANO, p. PÁGINA) às 70 chamadas de referência no livro",
+        "Reposicionar a chamada antes da pontuação e aproximar citações dos rótulos de dois-pontos",
+        "Corrigir os sobrenomes PENG e BROOKS nas referências com divergência evidente",
+        "Preservar a numeração global e o texto das notas de rodapé"
+      ],
+      "score": null,
+      "lessons": [
+        "Usar localizadores específicos já indicados na relevância da referência; quando ausentes, usar a paginação ou o identificador editorial registrado na referência",
+        "Conferir no PDF as citações visíveis e a continuidade das 70 notas"
+      ],
+      "timestamp": 1790716846.8869898,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R629",
+      "objective": "Ampliar a argumentação e corrigir citações órfãs no livro científico",
+      "changes": [
+        "Inseridos parágrafos interpretativos junto a citações que estavam isoladas após avisos e notas.",
+        "Expandidas 13 âncoras de citação com conceitos, justificativas e argumentos contextualizados.",
+        "Incluídos cálculos e equações didáticas com premissas explicitadas, incluindo PPV, lei de Amdahl, reprodutibilidade e reconciliação de conjuntos.",
+        "Compilado e conferido o PDF final de 235 páginas; notas de rodapé numeradas continuamente de 1 a 70."
+      ],
+      "score": null,
+      "lessons": [
+        "Citações que aparecem após quadros de aviso precisam ser acompanhadas de interpretação no corpo do texto.",
+        "Cálculos ilustrativos devem declarar suas hipóteses e não ser apresentados como estimativas empíricas."
+      ],
+      "timestamp": 1790719397.3827002,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R630",
+      "objective": "Revisão didática e factual do manual OpenCode Ecosystem Core",
+      "changes": [
+        "Reescrita de seções para progressão didática: intuição, implementação e formalização",
+        "Correção de exemplos quantitativos, contagens do repositório e interpretação de evidências",
+        "Atualização de diagramas explicativos, comandos e limites das conclusões",
+        "Compilação da edição revisada do manual em PDF"
+      ],
+      "score": null,
+      "lessons": [
+        "Exemplos numéricos devem distinguir observações locais, hipóteses didáticas e evidência geral",
+        "Contagens de arquivos não equivalem a cobertura nem a relações de um para um"
+      ],
+      "timestamp": 1790722457.3271465,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R631",
+      "objective": "Expansão didática da arquitetura integral no livro OpenCode Ecosystem Core",
+      "changes": [
+        "Adicionado capítulo de arquitetura de ponta a ponta com oito camadas e fontes de configuração",
+        "Explicados os caminhos de CLI, OpenCode, Blackboard, TaskRuntime, roteamento, MetaBus, qualidade e integrações",
+        "Incluído glossário operacional de termos técnicos e exercícios guiados",
+        "Corrigidas descrições antigas do roteamento e contagens estruturais no manuscrito"
+      ],
+      "score": null,
+      "lessons": [
+        "Uma visão arquitetural útil deve distinguir o caminho de cada comando e os mecanismos de tarefa que parecem semelhantes",
+        "Definir termos no momento de uso reduz a carga de leitura e evita confundir presença de configuração com capacidade ativa"
+      ],
+      "timestamp": 1790724644.5540185,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R632",
+      "objective": "Reescrever o capítulo do ecossistema com definições didáticas e descrições operacionais verificáveis.",
+      "changes": [
+        "Explicar configuração, agentes, skills, plugins, hooks, especificações, testes e diagnóstico em linguagem acessível.",
+        "Separar catálogo documentado, configuração, disponibilidade local e execução avaliada.",
+        "Atualizar snapshot de saúde e economia interna e registrar divergência entre TokenEconomy.commit e chamada do orquestrador.",
+        "Adicionar cálculo verificável e glossário ao capítulo 8 do livro."
+      ],
+      "score": null,
+      "lessons": [
+        "Contagem de entradas configuradas não demonstra que perfis estejam disponíveis nem que seu desempenho tenha sido avaliado.",
+        "Explicar nomes técnicos na primeira ocorrência e distinguir mecanismo implementado de integração executada reduz ambiguidades."
+      ],
+      "timestamp": 1790727039.2148628,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R633",
+      "objective": "Revisar didaticamente todo o livro OpenCode Ecosystem Core do nível introdutório à análise avançada, com rigor e limites de evidência explícitos.",
+      "changes": [
+        "Criado roteiro pedagógico por capítulo com ponto de partida, vocabulário, percurso técnico, análise avançada e questão de verificação.",
+        "Adicionados exemplos guiados contextualizados aos módulos autorais e ao catálogo gerado.",
+        "Corrigidas formulações que confundiam configuração, execução, determinismo, validade de testes e implementação de teorias cognitivas."
+      ],
+      "score": null,
+      "lessons": [
+        "Didática progressiva melhora a leitura quando exemplos acompanham definições e chegam à evidência verificável.",
+        "Contagens de inventário e testes de código não devem ser descritos como medidas de eficácia do sistema."
+      ],
+      "timestamp": 1790761249.8539903,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R634",
+      "objective": "Expandir e localizar em português o catálogo de agentes e subagentes do livro Core",
+      "changes": [
+        "Atualizado gen_mod10.py para recuperar descrições substantivas das fichas e gerar rótulos em português para os 216 perfis.",
+        "Acrescentada a aplicação individual de cada perfil nos fluxos do Core, com preservação de identificadores, rotas, tipos e permissões declaradas.",
+        "Regenerado e composto o livro em PDF com 288 páginas."
+      ],
+      "score": null,
+      "lessons": [
+        "Uma ficha documental precisa separar nome legível, identificador técnico, função descrita e aplicação no fluxo; registro não comprova execução."
+      ],
+      "timestamp": 1790763645.6695352,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R635",
+      "objective": "SPEC-935-R622 — reconciliar o contrato de metadados do catalogo de modelos: 4 defeitos medidos em list_all_models() (3 sem model_id, 4 com context/context_window conflitantes, Qwen3-0.6B com family=google, 26 de 46 sem free) + 1 defeito descoberto na implementacao (runai nao publica janela de contexto).",
+      "changes": [
+        "specs/SPEC-935-R622-contrato-canonico-catalogo-modelos.md (SDD, 17 CAs)",
+        "tests/test_r622_model_catalog_contract.py (19 testes, gate RED->GREEN)",
+        "integrations/model_router.py: FREE_DEFAULTS, CONTEXT_DEFAULTS e normalize_model_entry() puros; list_all_models() normalizado na fronteira",
+        "integrations/runai.py: list_models() emite id + model_id (retrocompativel)",
+        "integrations/litert_lm_provider.py: catalogo canonico autossuficiente (family, free declarados); context:20480 de R211 intacto",
+        "integrations/litert_lm.py: family e context_window removidos da travessia por alias; CONTRACTED_CONTEXT_TOKENS substitui o literal 32768"
+      ],
+      "score": 0.93,
+      "lessons": [
+        "A premissa inicial estava errada: tratei 'context' duplicado como bug de dado, mas test_r211_remaining_ ja CONTRATAVA context==20480 em cinco superficies distintas. Era preciso ler o contrato vigente antes de propor corrigir um campo: a correcao ingenua (renomear para context_window) teria quebrado um gate existente.",
+        "O defeito real era a INJEPCAO de um segundo campo pelo merge legado, nao o campo contratado. Corrigir a origem e reconciliar na fronteira sao coisas distintas: a fonte eliminate a mentira, a fronteira garante o contrato para o consumidor.",
+        "family e context_window sao atributos de IDENTIDADE, nao dicas de roteamento. O merge por alias so deve transportar hints (strengths, thinking, free); identidade jamais atravessa alias — foi assim que um Qwen virou google.",
+        "runai nao publica janela de contexto e nao esta instalado: nao ha como medir. A resposta honesta e um piso declarado + contract_errors (context_unknown), nunca um numero silencioso nem uma chave ausente. Conformidade formal (CA3) e honestidade epistemica sao dimensoes diferentes e as duas precisam ser satisfeitas.",
+        "Antes de escrever a spec, rode o comando que gerou a duvida e meca a divergencia por provider. A contagem execucao-a-execucao varia com a disponibilidade dos providers (16 vs 17 em opencode-go), logo nenhum teste pode assentar em constante absoluta — CA15 compara a mesma instancia antes/depois.",
+        "O consumidor mais proximo ja documentava o bug: test_r500_free_route.py usava m.get('model_id', m.get('id')), um workaround defensivo que prova que o KeyError ja era sentido na pratica. Workarounds disseminados nos testes sao o melhor detector de defeito de contrato: leia-os antes de escrever a spec."
+      ],
+      "timestamp": 1790763779.0644712,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R636",
+      "objective": "Finalizar localização e descrição do catálogo de agentes e subagentes",
+      "changes": [
+        "Traduzidos e revisados rótulos e descrições em inglês ainda presentes no catálogo.",
+        "Reescrita a aplicação individual dos perfis no Core em português claro e vinculada à tarefa descrita.",
+        "Gerada a versão final do livro em PDF com 289 páginas."
+      ],
+      "score": null,
+      "lessons": [
+        "A revisão visual do artefato identifica problemas de nomenclatura que não aparecem na validação da geração; conferir fichas representativas após compor o PDF."
+      ],
+      "timestamp": 1790764057.9040105,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R637",
+      "objective": "Fechar a revisão do catálogo em português e conferir as legendas de exemplo",
+      "changes": [
+        "Os exemplos do panorama por categoria agora exibem os nomes localizados dos perfis em vez dos rótulos técnicos em inglês.",
+        "PDF recomposto e atualizado após a última revisão editorial."
+      ],
+      "score": null,
+      "lessons": [
+        "Panoramas e tabelas de exemplos também devem usar rótulos legíveis; manter os identificadores ingleses apenas nos campos de referência técnica."
+      ],
+      "timestamp": 1790764478.6457589,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R638",
+      "objective": "OdontoCA: validação interna exploratória em coorte clínica pública e artigo Journal of Dentistry",
+      "changes": [
+        "Coorte dentária pública reproduzida com hash fixado e onze contagens",
+        "Modelos clínico e clínico-espacial avaliados por CV aninhada agrupada por criança",
+        "Notebook Colab atualizado, fluxograma e artigo com 28 DOI auditados"
+      ],
+      "score": null,
+      "lessons": [
+        "Métricas sintéticas não são evidência clínica; calibração e validação externa seguem necessárias"
+      ],
+      "timestamp": 1790815814.143439,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R639",
+      "objective": "OdontoCA: reprodução do Colab e recalibração aninhada por criança",
+      "changes": [
+        "Reproduzidos resultados históricos sob scikit-learn 1.6.1 e documentada a alteração de partições na versão corrigida",
+        "Avaliada recalibração treinada apenas nas dobras internas com bootstrap pareado por criança",
+        "Atualizados notebook, manuscrito, figuras e documentação de reprodutibilidade"
+      ],
+      "score": null,
+      "lessons": [
+        "Melhoras aparentes entre versões do particionador não demonstram ganho clínico",
+        "Recalibração interna requer validação externa antes de uso clínico"
+      ],
+      "timestamp": 1790843405.8087642,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R640",
+      "objective": "Adequar o manuscrito OdontoCA às diretrizes oficiais do Journal of Dentistry (resumo <=250 palavras, citação numérica em colchetes, CRediT/financiamento/COI/ética, IA generativa declarada, página de título separada para revisão duplo anonimizada) e auditar as 28 referências contra o Crossref.",
+      "changes": [
+        "Auditoria Crossref ao vivo: 28/28 DOIs resolvidos, 28/28 metadados coincidentes (título, periódico, ano, volume, páginas/e-locator, primeiro autor). Nenhuma referência inventada ou incorreta.",
+        "Abstract reduzido de 283 para 242 palavras, dentro do limite editorial de 250.",
+        "Título reescrito para refletir o que foi entregue: 'Tooth-level prediction of early-childhood caries from a public longitudinal cohort: reproducible internal validation with patient-separated folds'.",
+        "§2.5 e §3.4 comprimidos (~40% do corpo era auditoria de pipeline); detalhe movido ao Supplementary File S2.",
+        "Legenda da Figura 1 passou a declarar a assistência de OpenAI Codex, conforme exige o guideline para fluxogramas produzidos por IA.",
+        "Anonimização: removidas as expressões 'the user's Colab' e 'legacy clinical Colab'; metadados DOCX (dc:creator, cp:lastModifiedBy) verificados vazios.",
+        "Declaração TRIPOD+AI/PROBAST+AI adicionada aos Métodos; checklist TRIPOD+AI preenchido item-a-item e entregue como Supplementary File S3.",
+        "Page de título separada, Highlights (5 pontos, todos <=85 caracteres) e carta de apresentação redigidos.",
+        "Gate de conformidade programático criado: compliance_gate.py, 28 verificações mecanicamente verificáveis, com relatório JSON."
+      ],
+      "score": 8.4,
+      "lessons": [
+        "Lição de método (a mais cara desta sessão): a primeira análise descreveu o artigo como um modelo de IA para radiografias de cárie. O manuscrito real é uma análise secundária de predição de cárie da primeira infância no nível do dente, com regressão logística penalizada. A análise anterior foi feita sobre uma leitura equivocada da estrutura do diretório e produziu um parecer inteiro falso. Regra: antes de caracterizar o conteúdo de um manuscrito, ler o arquivo-fonte e conferir mecanicamente contagens (palavras do resumo, número de referências, número de citações).",
+        "Verificação de DOI por resolução ao vivo contra o Crossref é barata e decide se uma referência é real. Os 28 DOIs deste manuscrito passaram em título, periódico, ano, volume e localizador. A checagem exige considerar 'article-number' quando 'page' vem vazio — foi a causa de 9 falsos positivos iniciais.",
+        "Quando o guideline diz 'incentivado, não obrigatório' (Highlights, resumo gráfico), tratar como opcional e não inventar entregável. Quando diz 'obrigatório' (CRediT, financiamento, COI, ética), o gate programático deve falhar de verdade — não emitir aviso. Foi configurado assim neste caso.",
+        "Figuras a 170 DPI e o dado-fonte ausente impedem o re-render em alta resolução. Upscale artificial não é correção: não acrescenta resolução real e é detectável. O bloqueador foi reportado ao usuário em vez de ser contornado.",
+        "A disciplina de auto-auditoria do manuscrito (declarar branch sintético como demo, intervalos nulos, ausência de validação externa) é um ativo editorial. O risco real é de escopo, não de rigor — o trabalho entrega revalidação interna reprodutível, não modelo clínico. Alinhar título, resumo e carta a esse fato reduz risco de rejeição por relevância."
+      ],
+      "timestamp": 1790846341.2038584,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R641",
+      "objective": "Concluir o pacote de submissao ao Journal of Dentistry: graphical abstract verificado, PROBAST+AI consistente, cadeia de build reproduzivel",
+      "changes": [
+        "Graphical_Abstract: novo renderer com gate de layout (8 testes: canvas, colisao de texto, contencao em painel, DPI, fontes >= 7pt, numeros derivados do JSON de resultados, ausencia de limiar decisorio)",
+        "Corrigido bug real: inset_axes recebe fracao de axes, nao coordenada de dados; o inset de discriminacao saia do canvas pela direita",
+        " elevatei corpo de 6.2-6.9pt para 7.5-13pt, abaixo do minimo usual de figura de periodico",
+        "PROBAST+AI S4: tabela de resumo contradizia os itens (Outcome e Analysis diziam Low com itens High); 'Moderate' nao e valor valido do instrumento",
+        "Novo test_probast_consistency.py (6 testes) impede divergencia entre tabela de resumo e julgamentos por item",
+        "build_submission.py: cadeia Markdown->DOCX->PDF em um comando, reproduzivel; o PDF de revisao agora deriva do DOCX final (paginas 16->9)",
+        "Highlights e cover letter: notas internas de rascunho separadas dos arquivos submetidos (Highlights 2->1 pagina)",
+        "Methods e title page atualizados para Supplementary Files S3 and S4; alertas obsoletos de DPI e de S3 'To be produced' removidos"
+      ],
+      "score": 8.7,
+      "lessons": [
+        "Nao consigo inspecionar imagens: este modelo nao aceita input visual. A compensacao correta e transformar cada percepcao visual em invariante verificavel por codigo (colisao, contencao, DPI, tamanho de fonte), e declarar o limite ao usuario em vez de afirmar que a figura esta boa.",
+        "Meu primeiro checker acusou texto fora do canvas por causa de ticks ocultos do axes principal: falso positivo. Antes de 'consertar' um bug achado por verificacao propria, confirme que a verificacao esta medindo a coisa certa.",
+        "Tabelas de resumo divergem dos itens que resumem, e nenhum gate de numeros ou de escrita pega isso. Checks de consistencia entre um resumo e suas fontes precisam existir explicitamente.",
+        "Derivar o PDF de revisao do Markdown em vez do DOCX final pulou a etapa de formatacao e inflou 9 paginas para 16 sem erro visivel. Artefatos derivados devem derivar do artefato final, nao da fonte.",
+        "Separar rascunho do entregavel: notas internas dentro de arquivo submetido contamination o pacote sem quebrar nenhum gate.",
+        "anti-overclaim: o S4 mantem 'overall risk High' com os quatro dominios High; o manuscrito nao atenua o veredito da propria avaliacao."
+      ],
+      "timestamp": 1790847846.3199577,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R642",
+      "objective": "Gerar a versao PT-BR do manuscrito OdontoCA a partir do Markdown EN canonico, com paridade estrita de numeros/DOIs e build DOCX/PDF sem contaminar o pacote de submissao em ingles.",
+      "changes": [
+        "Traduzido o manuscrito EN->PT-BR (resumo, 5 secoes, 3 tabelas, declaracoes, 28 referencias).",
+        "Resumo PT reescrito de 325 para 248 palavras para respeitar o limite de 250 do Journal of Dentistry.",
+        "Corrigidas 5 corrupcoes de texto introduzidas durante a geracao (caracteres CJK, palavras em ingles, parenteses colados).",
+        "Removida contaminacao 'Let me do it properly' que havia entrado no corpo do manuscrito.",
+        "Restaurada linha em branco entre o resumo e as palavras-chave (pandoc fundia os dois paragrafos).",
+        "Criado test_ptbr_parity.py com 20 gates: paridade numerica estrita, conjunto exato de DOIs, hedges por secao, estrutura renderizada.",
+        "Tokenizador numerico locale-aware (EN ponto decimal vs PT virgula decimal) com testes unitarios proprios.",
+        "Refatorado finalize_docx.py em funcao com parametro lang; comportamento EN verificado byte-identico parte a parte.",
+        "Corrigido dpi das figuras PT de 170 para 300 (F2/F3) e rerenderizadas as tres figuras PT.",
+        "Criado build_ptbr.py com cadeia propria e verificacao de manifesto exato dos 13 arquivos do pacote EN.",
+        "Seis bugs injetados por teste de regressao; todos agora detectados pelos gates."
+      ],
+      "score": 8.9,
+      "lessons": [
+        "Teste que so verifica PRESENCA de um valor nao detecta ALTERACAO dele: trocar 0,737 por 0,799 em um trecho passava porque o valor ainda existia em outro. Paridade exige igualdade de conjuntos, nao presenca.",
+        "Heuristica de locale por regex e fragil: o mesmo padrao classificava '0.166' como 166 e '2.504' como decimal. O separador decimal precisa ser declarado pelo chamador, nunca adivinhado.",
+        "Gate sobre o Markdown nao ve o DOCX. A linha em branco faltando entre resumo e palavras-chave so quebrou na etapa de formatacao, com IndexError; o gate de estrutura renderizada pega a causa.",
+        "Corrupcao de texto pode entrar no artefato final durante a propria geracao. Um teste de debris e de runs de palavras em ingles no corpo e obrigatorio, com vocabulario amplo.",
+        "Comparacao por substring em nomes de arquivo e fragil: 'ManuSCRIPT' contem 'PT'. Usar manifesto exato de arquivos.",
+        "Refatorar codigo que ja gerava artefatos validos exige prova de nao-regressao: comparar as partes internas do DOCX, nao o hash do zip, que inclui timestamps."
+      ],
+      "timestamp": 1790851143.7703228,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R643",
+      "objective": "SPEC-935-R640: conectar rede coordenada Transformer, executores e memória",
+      "changes": [
+        "Orquestrador marceloclaro padrão; oitavo MCP ecosystem-network e comando ecosystem",
+        "Execução de leitura Claude/Antigravity/Codex com prazo, passos e fallback explícito",
+        "Instruções federadas com hashes, conclusão Blackboard e reflexão MetaBus",
+        "Relatórios legados distinguem instalação, preview e execução",
+        "Provas reais Codex e Antigravity; Claude recusado por saldo; MCP default concluiu via fallback"
+      ],
+      "score": null,
+      "lessons": [
+        "Binário instalado não comprova autenticação, saldo ou inferência",
+        "Ambiente MCP pode remover WSL_DISTRO_NAME: detectar pelo sistema e converter com wslpath",
+        "Antigravity usa response/status SUCCESS; configuração de flags deve preservar plan",
+        "Conclusão rejeitada pelo gate não pode persistir completed/success=True",
+        "Atenção multicritério e avaliação heurística não são treinamento nem validação científica externa"
+      ],
+      "timestamp": 1791021033.218736,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R645",
+      "objective": "Auditar o manuscrito OdontoCA com scanners e determinar se o veredito de rigor e valido para decisao de banca/publicacao",
+      "changes": [
+        "Corrigida corrupcao 'estratificada,oreproduzindo' no PT-BR",
+        "Gate PT-BR tolerante a rotulo 'Palavras-chave (em ingles)' (20/20 restaurado)",
+        "Executados super_rigor_audit (EXS 45) e scientific_reasoning_scan nos arquivos reais",
+        "Constatada inversao EN/PT: metodologia EN 25 vs PT 0; falsificabilidade EN 25 vs PT 100",
+        "Causa raiz identificada no codigo: METHODOLOGY_KEYWORDS e PT-only e 'se' casa como substring",
+        "Prova de nao-discriminacao: narrativa sem metodo (metodologia 25) = manuscrito (25)",
+        "tests/test_r643_scanner_validity_odonto.py criado, 9 testes verdes"
+      ],
+      "score": 8.7,
+      "lessons": [
+        "Scanner que casa subpalavras de outra lingua nao pode ser veredito: mediu o idioma, nao a ciencia",
+        "Repetir o scanner no MESMO input testa determinismo; comparar scanners diferentes testa concordancia (confundi as duas)",
+        "Score baixo que se reproduce em texto sem o atributo medido e ruido, nao sinal — testar com probe negativo",
+        "Keyword 'se' como substring casa sem/segundo/sempre/seis: falsificabilidade gratuita em PT",
+        "Divisor /4.0 sobre 10 keywords satura em 4 casamentos: normalizacao sem base",
+        "Veredito autoritativo de vies permanece PROBAST+AI (High/High), nao SRI"
+      ],
+      "timestamp": 1791024802.8029187,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R646",
+      "objective": "Enquadrar o manuscrito OdontoCA como estudo de predicao clinica: travar modelo final, dimensionar e pre-especificar a validacao externa, sem prometer resultado externo",
+      "changes": [
+        "lock_final_model.py: modelo primario clinical_minimal travado fail-closed (996/83/81)",
+        "clinical_spatial travado como secundario exploratorio, nao por desempenho",
+        "Model card com SHA-256 proprio, versoes, semente, aviso anti-overclaim e disclosure",
+        "predict_clinical_risk.py: inferencia para centros externos, research-only, sem limiar",
+        "external_validation_protocol.md: 240 eventos (24 gl), regra de Riley, regra de decisao",
+        "Manuscrito EN: nova secao 2.5 (modelo travado) + renumeracao 2.6",
+        "Manuscrito EN: paragrafo de proveniencia de amostragem e declaracao de ausencia de grupo de controle",
+        "Abstract EN reescrito para enquadramento de predicao clinica (245 palavras)",
+        "Limitacoes e conclusao EN atualizadas com o deficit de 3,5 eventos/parametro",
+        "S4 PROBAST+AI: 4.6 revisado Low->High pelo deficit EPV; 4.6a adicionado; veredito permanece High",
+        "PT-BR sincronizado (resumo 250 palavras) e DOCX/PDF regenerados",
+        "Corrigido bug de rotulo em test_ptbr_parity.py (contagem inflava +14 palavras)",
+        "Fonte Table_S1 restaurada de /tmp; hash conferido",
+        "tests/test_r645_scanner_validity_odonto.py + test_locked_final_model.py (21 testes)"
+      ],
+      "score": 8.9,
+      "lessons": [
+        "Modelos de deploy exigem travar C na coorte cheia; isso infla metricas e DEVE ser declarado com o numero do manuscrito",
+        "Escolher o primario por disponibilidade de preditor, nao por AUROC, evita selecao data-driven",
+        "Regra de Riley: max(100, 10*gl) convertida em dentes e criancas torna o plano de amostra auditavel",
+        "Dizer 'nenhum modelo final existia' e verdade que impede o enquadramento de predicao clinica",
+        "Ausencia de grupo de controle e de amostragem documentada precisa ser DECLARADA, nao omitida",
+        "Lockar e pre-especificar sao necessarios mas nao suficientes: PROBAST permanece High ate a coorte externa",
+        "Artefato em /tmp nao sobrevive: pipeline de reprodutibilidade nao pode depender de path temporario",
+        "Teste com rotulo tolerante falhava silenciosamente e inflava contagem em 14 palavras"
+      ],
+      "timestamp": 1791026937.0569766,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R647",
+      "objective": "Entregar notebook Colab v1.4.0 de predicao clinica e integrating os achados por dente ao manuscrito EN/PT, com figuras realidas e gates reforcados.",
+      "changes": [
+        "QA programatico das 2 figuras (400 DPI, sem recorte); limitacao visual declarada.",
+        "Criado OdontoCA_v1_4_0_CLINICAL_PREDICTION.ipynb (61 celulas, 6 novas: 28-33) sem alterar o v1.3.5.",
+        "Bug corrigido: 'neighbor_caries_count' e coluna DERIVADA, ausente no CSV persistido; reconstruida e validada em 0..2.",
+        "Bug corrigido: pressupos CFG inexistente; resolvido contra o source real.",
+        "Reexecucao real: 0 erros, 120.3s, via execute_notebook.py (runner validado, nao rascunho ad-hoc).",
+        "Achado novo: 83/83 eventos em 8 molares; 181 linhas anteriores com 0 eventos; df=24; Riley=240 eventos.",
+        "Manuscrito EN/PT: nova secao 3.4 (antiga 3.4 -> 3.5), Tabela 4, Figura 4, Figura S1.",
+        "Figuras localizadas PT (_pt) seguindo convencao do repo; gate agora exige _pt para PT.",
+        "Gate de qualidade reforcado: 6 tabelas, 5 imagens, conteudo novo no DOCX, v1.4.0 sem erros, figuras em disco.",
+        "DOCX/PDF EN e PT regenerados (EN 9 -> 12 paginas); manifesto de 16 arquivos exato."
+      ],
+      "score": 9.1,
+      "lessons": [
+        "Nao tenho inspecao visual: declarar a limitacao e fazer QA programatico (DPI, recorte, bbox) em vez de afirmar qualidade visual.",
+        "Nomes de coluna da prosa do manuscrito nao sao nomes de coluna do CSV: 'neighbor_caries_count' e derivada em add_ca_features(). Verificar sempre no artefato.",
+        "Reusar o runner validado (execute_notebook.py) em vez de um runner ad-hoc; allow_errors e cwd importam para o resultado.",
+        "Gate que so checa figura 1-3 e notebook antigo deixa regressao passar silenciosamente; ancorar o gate no entregavel atual.",
+        "Substituicao textual em dict literal pode corromper chaves vizinhas ao casar o lado do valor em vez do call site."
+      ],
+      "timestamp": 1791030345.7969298,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R648",
+      "objective": "R648: integrar Google Colab CLI + Colab MCP Server ao Core (SPEC-935-R645, padrão M7).",
+      "changes": [
+        "SPEC-935-R645 criada com fonte de verdade README oficial + API GitHub.",
+        "integrations/colab_cli.py: runner genérico em lista, atalhos new/exec/run/stop/sessions, doctor tolerante, install uv/pip.",
+        "integrations/colab_mcp.py: ponte stdio, mcp_config uvx/binário, doctor pass via uvx.",
+        "tests/test_r645_colab_cli.py + test_r645_colab_mcp.py: 29/29 verdes (mocks + timeout).",
+        "Skills colab-cli/colab-mcp + Agent Cards colab-cli/colab-mcp.",
+        "doctor EXTERNAL_CLIS + version enrichment; /colab + /colab-mcp; opencode.json 218 agentes/17 comandos."
+      ],
+      "score": 8.8,
+      "lessons": [
+        "Runner genérico evita amarrar 20+ subcomandos; atalhos cobrem 80/20.",
+        "Cache _BIN_CACHE exige limpeza em testes com which mockado.",
+        "mcp_version nunca faz rede: uvx-only retorna None com pass honesto."
+      ],
+      "timestamp": 1791069970.4305027,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R649",
+      "objective": "R649: ponte MiniZinc MCP Server ao Core (SPEC-935-R646, padrão M7).",
+      "changes": [
+        "SPEC-935-R646 criada com fonte README r33drichards/minizinc-mcp + main.py + requirements.",
+        "integrations/minizinc_mcp.py: solver check, deps via find_spec, build_solve_payload puro, config stdio/SSE, doctor em 3 estados.",
+        "tests/test_r646_minizinc_mcp.py: 16/16 verdes, sem rede/binário.",
+        "Skill minizinc-mcp + Agent Card minizinc-mcp.",
+        "doctor minizinc + /minizinc; opencode.json 219 agentes/18 comandos."
+      ],
+      "score": 8.8,
+      "lessons": [
+        "Ponte em vez de executor: Core monta payload, resolução externa (gecode/SSE).",
+        "SSE hospedado é constante documentada, nunca sondada no doctor.",
+        "find_spec sem importar evita custo e efeitos colaterais no doctor."
+      ],
+      "timestamp": 1791069970.5797286,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R650",
+      "objective": "R650: ativar Colab OAuth (PKCE) + ecossistema Claude (SPEC-935-R647, 3 trilhas).",
+      "changes": [
+        "Auth Colab concluída via PKCE próprio: verifier persistido, code trocado, token+refresh em token.json; colab sessions lista CPU ativa.",
+        "Lição PKCE: code de outra sessão falha (Missing code verifier); URL e verifier precisam nascer juntos.",
+        "SPEC-935-R647 (harness curadoria + plugins federação + SDK ponte).",
+        "integrations/claude_agent_sdk.py + 11 testes verdes; CLI claude 2.1.274 + dep 0.2.163, doctor pass.",
+        "3 skills + 3 cards; /claude-sdk; opencode.json 222 agentes/19 comandos; 56 testes verdes; doctor 0 fail.",
+        "Ativados: colab 0.7.4, minizinc 2.9.3+gecode 6.3.0, binding py + SDK (venv e user)."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "PKCE exige gerar URL e trocar code na mesma custódia de verifier.",
+        "Curadoria sem clone para repos metodológicos/marketplace; ponte sem execução para SDK faturável.",
+        "Licença por plugin e Commercial Terms viram gate explícito, não detalhe."
+      ],
+      "timestamp": 1791072129.1306326,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }
