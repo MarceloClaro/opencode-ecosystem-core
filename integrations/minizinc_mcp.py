@@ -7,16 +7,17 @@ Upstream: r33drichards/minizinc-mcp (MIT): servidor MCP (FastMCP) com tool
 timeout?) -> SolveResult`. Requer Python 3.11+, MiniZinc 2.8+ e deps
 `mcp`, `pydantic`, `minizinc`.
 
-Esta ponte NÃO executa o protocolo MCP nem resolve modelos; ela expõe
-presença/versão, monta payloads no schema ConstraintModel, emite config
-stdio/SSE e orienta instalação. A resolução é EXTERNA (servidor do operador
-ou SSE hospedado); resultados nunca são "verificados" sem validação (R110).
+Esta ponte expõe presença/versão, monta payloads no schema ConstraintModel,
+emite config stdio/SSE, orienta instalação — e, desde o adendo R651,
+executa `solve_constraint` de verdade contra o servidor via protocolo MCP
+stdio (`solve_via_server`). Resultados seguem sob validação do Core (R110).
 """
 
 from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -120,6 +121,122 @@ def mcp_config(local_cmd: Optional[List[str]] = None) -> Dict[str, object]:
         "enabled": True,
         "timeout": 660000,
     }
+
+
+_STDIO_LAUNCHER = (
+    "from main import create_server; "
+    "create_server().run(transport='stdio')"
+)
+
+
+def _server_dir_resolved(server_dir: Optional[str]) -> Optional[str]:
+    """Diretório do servidor: argumento, `MINIZINC_MCP_DIR` ou None."""
+    if server_dir:
+        return server_dir
+    env = os.environ.get("MINIZINC_MCP_DIR")
+    return env if env else None
+
+
+def _run_stdio_call(
+    tool: str,
+    arguments: Dict[str, Any],
+    server_dir: str,
+    timeout: int,
+) -> Dict[str, Any]:
+    """Handshake MCP real via stdio: initialize → list/call (adendo R651).
+
+    `tool == "__list__"` lista tools; senão chama `call_tool`.
+    Importa `mcp`/`anyio` sob demanda (dependências opcionais); nunca lança.
+    """
+    try:
+        import anyio  # noqa: F401
+        from mcp import ClientSession, StdioServerParameters  # noqa: F401
+        from mcp.client.stdio import stdio_client  # noqa: F401
+    except ImportError:
+        return {"ok": False, "error": "pacote `mcp` ausente (pip install mcp)."}
+
+    async def _call() -> Dict[str, Any]:
+        from mcp import ClientSession, StdioServerParameters
+        from mcp.client.stdio import stdio_client
+        params = StdioServerParameters(
+            command=sys.executable,
+            args=["-c", _STDIO_LAUNCHER],
+            cwd=server_dir,
+        )
+        async with stdio_client(params) as (read, write):
+            async with ClientSession(read, write) as session:
+                await session.initialize()
+                if tool == "__list__":
+                    tools = await session.list_tools()
+                    return {"ok": True, "tools": [
+                        {"name": t.name, "description": (t.description or "")[:200]}
+                        for t in (tools.tools or [])
+                    ]}
+                result = await session.call_tool(tool, arguments)
+                texts = [
+                    (c.text if hasattr(c, "text") else str(c))
+                    for c in (result.content or [])
+                ]
+                return {"ok": True, "texts": texts}
+
+    try:
+        import anyio
+
+        async def _bounded() -> Dict[str, Any]:
+            with anyio.fail_after(timeout):
+                return await _call()
+
+        return anyio.run(_bounded)
+    except Exception as exc:  # noqa: BLE001 - erro vira payload, nunca exceção
+        return {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
+
+
+def list_tools_via_server(
+    server_dir: Optional[str] = None, timeout: int = 60,
+) -> Dict[str, Any]:
+    """Lista tools do servidor via `notifications/tools/list` (protocolo real)."""
+    resolved = _server_dir_resolved(server_dir)
+    if not resolved:
+        return {"ok": False, "error": "informe server_dir ou MINIZINC_MCP_DIR."}
+    return _run_stdio_call("__list__", {}, resolved, timeout)
+
+
+def solve_via_server(
+    model: str,
+    data: Optional[Dict[str, Any]] = None,
+    solver: str = DEFAULT_SOLVER,
+    all_solutions: bool = False,
+    timeout: Optional[int] = None,
+    server_dir: Optional[str] = None,
+    protocol_timeout: int = 120,
+) -> Dict[str, Any]:
+    """Executa `solve_constraint` no servidor via protocolo MCP (adendo R651).
+
+    Valida o payload localmente (`build_solve_payload`), abre o servidor em
+    stdio, chama a tool e devolve `{"ok", "result" (SolveResult), ...}`.
+    Nunca lança exceção.
+    """
+    try:
+        payload = build_solve_payload(
+            model, data=data, solver=solver,
+            all_solutions=all_solutions, timeout=timeout,
+        )
+    except ValueError as exc:
+        return {"ok": False, "error": str(exc)}
+    resolved = _server_dir_resolved(server_dir)
+    if not resolved:
+        return {"ok": False, "error": "informe server_dir ou MINIZINC_MCP_DIR."}
+    raw = _run_stdio_call(
+        "solve_constraint", {"problem": payload}, resolved, protocol_timeout,
+    )
+    if not raw.get("ok"):
+        return {"ok": False, "error": str(raw.get("error"))}
+    try:
+        texts = raw.get("texts") or []
+        result = json.loads(texts[0]) if texts else {}
+    except (json.JSONDecodeError, IndexError, TypeError) as exc:
+        return {"ok": False, "error": f"resposta não-JSON do servidor: {exc}"}
+    return {"ok": True, "result": result, "solver": solver}
 
 
 def doctor_check() -> Dict[str, str]:

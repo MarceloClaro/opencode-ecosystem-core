@@ -115,3 +115,43 @@ def test_main_status_config_help(monkeypatch, capsys):
     assert payload["colab-mcp"]["command"] == ["uvx", "colab-mcp"]
     assert colab_mcp.main(["--help"]) == 0
     assert colab_mcp.main(["bogus"]) == 2
+
+
+def test_list_tools_ok(monkeypatch):
+    from integrations import colab_mcp as m
+    monkeypatch.setattr(
+        m, "_run_colab_stdio",
+        lambda *a, **k: {"ok": True, "tools": [{"name": "open_colab_browser_connection"}]},
+    )
+    r = m.list_tools_via_server()
+    assert r["ok"] is True and r["tools"][0]["name"] == "open_colab_browser_connection"
+
+
+def test_materialize_ok(monkeypatch):
+    from integrations import colab_mcp as m
+    monkeypatch.setattr(
+        m, "_run_colab_stdio",
+        lambda *a, **k: {"ok": True, "texts": ['{"path": "/tmp/x.ipynb", "cell_count": 1}']},
+    )
+    r = m.materialize_qcaf('{"nbformat": 4}', filename="x.ipynb", output_dir="/tmp")
+    assert r["ok"] is True and r["result"]["cell_count"] == 1
+
+
+def test_materialize_json_vazio():
+    from integrations import colab_mcp as m
+    assert m.materialize_qcaf(" ")["ok"] is False
+
+
+def test_materialize_erro_protocolo(monkeypatch):
+    from integrations import colab_mcp as m
+    monkeypatch.setattr(m, "_run_colab_stdio", lambda *a, **k: {"ok": False, "error": " Caiu"})
+    assert m.materialize_qcaf('{"a": 1}')['ok'] is False
+
+
+def test_main_list_materialize(monkeypatch, capsys):
+    import json as _json
+    from integrations import colab_mcp as m
+    monkeypatch.setattr(m, "list_tools_via_server", lambda **k: {"ok": True, "tools": []})
+    assert m.main(["list"]) == 0
+    assert _json.loads(capsys.readouterr().out)["ok"] is True
+    assert m.main(["materialize"]) == 2

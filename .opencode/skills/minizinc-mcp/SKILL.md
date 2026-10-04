@@ -40,6 +40,16 @@ mcp_config()   # {"type": "local", "command": [...], "enabled": True}
 hosted_sse()   # "https://minizinc-mcp.up.railway.app/sse"
 ```
 
+## Execução real (adendo R651, provada ao vivo)
+
+```python
+from integrations.minizinc_mcp import solve_via_server  # protocolo MCP stdio
+r = solve_via_server("var 1..10: x; ...", server_dir="/caminho/do/servidor")
+# {"ok": True, "result": {"status": "SATISFIED", "solutions": [...]}}
+```
+
+Exige o checkout do servidor (`MINIZINC_MCP_DIR` ou `server_dir`) + solver.
+
 ## Modos de execução (operador)
 
 1. **SSE hospedado** (sem instalar): registrar a URL no Claude Connectors ou

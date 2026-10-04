@@ -169,3 +169,46 @@ def test_main_solvers_sem_binario(monkeypatch, capsys):
     _which_map(monkeypatch, {"minizinc": None})
     assert minizinc_mcp.main(["solvers"]) == 1
     assert "minizinc" in capsys.readouterr().out.lower()
+
+
+def test_solve_via_server_ok(monkeypatch):
+    from integrations import minizinc_mcp as m
+    monkeypatch.setattr(
+        m, "_run_stdio_call",
+        lambda *a, **k: {"ok": True, "texts": ['{"status": "SATISFIED", "solutions": []}']},
+    )
+    r = m.solve_via_server("solve satisfy;", server_dir="/srv")
+    assert r["ok"] is True
+    assert r["result"]["status"] == "SATISFIED"
+
+
+def test_solve_via_server_sem_dir():
+    from integrations import minizinc_mcp as m
+    import os
+    os.environ.pop("MINIZINC_MCP_DIR", None)
+    r = m.solve_via_server("solve satisfy;")
+    assert r["ok"] is False and "server_dir" in r["error"]
+
+
+def test_solve_via_server_payload_invalido():
+    from integrations import minizinc_mcp as m
+    r = m.solve_via_server("   ", server_dir="/srv")
+    assert r["ok"] is False
+
+
+def test_solve_via_server_erro_protocolo(monkeypatch):
+    from integrations import minizinc_mcp as m
+    monkeypatch.setattr(m, "_run_stdio_call", lambda *a, **k: {"ok": False, "error": "boom"})
+    r = m.solve_via_server("solve satisfy;", server_dir="/srv")
+    assert r["ok"] is False and r["error"] == "boom"
+
+
+def test_list_tools_via_server(monkeypatch):
+    from integrations import minizinc_mcp as m
+    chamadas = {}
+    def fake(tool, args, d, t):
+        chamadas["tool"] = tool
+        return {"ok": True, "tools": [{"name": "solve_constraint"}]}
+    monkeypatch.setattr(m, "_run_stdio_call", fake)
+    r = m.list_tools_via_server(server_dir="/srv")
+    assert r["ok"] is True and chamadas["tool"] == "__list__"

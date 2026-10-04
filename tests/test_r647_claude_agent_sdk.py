@@ -134,3 +134,23 @@ def test_main_status_options_help(monkeypatch, capsys):
     assert sdk.main(["options"]) == 2
     assert sdk.main(["--help"]) == 0
     assert sdk.main(["bogus"]) == 2
+
+
+def test_sdk_local_tool_live():
+    """Prova real sem Claude: servidor in-process + handler (pula sem dep)."""
+    pytest.importorskip("claude_agent_sdk")
+    import anyio
+    from claude_agent_sdk import tool, create_sdk_mcp_server
+
+    @tool("somar", "Soma dois inteiros", {"a": int, "b": int})
+    async def somar(args):
+        return {"content": [{"type": "text", "text": str(args["a"] + args["b"])}]}
+
+    srv = create_sdk_mcp_server(name="calc-teste", version="1.0.0", tools=[somar])
+    assert srv["name"] == "calc-teste"
+
+    async def go():
+        out = await somar.handler({"a": 20, "b": 22})
+        return out["content"][0]["text"]
+
+    assert anyio.run(go) == "42"

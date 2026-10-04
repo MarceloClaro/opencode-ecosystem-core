@@ -85,6 +85,10 @@ EXTERNAL_CLIS = {
     # r33drichards/minizinc-mcp (MIT, FastMCP, tool solve_constraint).
     # Integração M7 via integrations.minizinc_mcp (ponte, sem execução no Core).
     "minizinc": "MiniZinc 2.8+ em https://www.minizinc.org/software.html",
+    # SPEC-935-R650: Kaggle CLI (Kaggle/kaggle-cli). Competições, datasets,
+    # kernels, models e quota via passthrough; auth em ~/.kaggle/kaggle.json.
+    # Integração M7 via integrations.kaggle_cli.
+    "kaggle": "pip install kaggle",
 }
 
 
@@ -300,10 +304,10 @@ def _check_external_clis() -> DoctorCheck:
             continue
         # SPEC-935-R598/R599: para integrações com runner próprio, enriquecer
         # o detail com a versão semântica detectada (sedas instaladas).
-        if name in ("goose", "gemini", "plandex", "reasonix", "colab", "colab-mcp", "minizinc"):
+        if name in ("goose", "gemini", "plandex", "reasonix", "colab", "colab-mcp", "minizinc", "kaggle", "agy"):
             try:
-                module_name = {"goose": "goose_cli", "gemini": "gemini_cli", "plandex": "plandex_cli", "reasonix": "reasonix_cli", "colab": "colab_cli", "colab-mcp": "colab_mcp", "minizinc": "minizinc_mcp"}[name]
-                func_name = {"goose": "goose_version", "gemini": "gemini_version", "plandex": "plandex_version", "reasonix": "reasonix_version", "colab": "colab_version", "colab-mcp": "mcp_version", "minizinc": "minizinc_version"}[name]
+                module_name = {"goose": "goose_cli", "gemini": "gemini_cli", "plandex": "plandex_cli", "reasonix": "reasonix_cli", "colab": "colab_cli", "colab-mcp": "colab_mcp", "minizinc": "minizinc_mcp", "kaggle": "kaggle_cli", "agy": "antigravity_cli"}[name]
+                func_name = {"goose": "goose_version", "gemini": "gemini_version", "plandex": "plandex_version", "reasonix": "reasonix_version", "colab": "colab_version", "colab-mcp": "mcp_version", "minizinc": "minizinc_version", "kaggle": "kaggle_version", "agy": "agy_version"}[name]
                 if name == "gemini":
                     # R602-perf: versão via package.json local (ms) em vez do
                     # subprocess Node (~2.5s) — doctor continua < 5s (R110).

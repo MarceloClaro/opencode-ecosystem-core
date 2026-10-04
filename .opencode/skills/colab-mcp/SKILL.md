@@ -38,6 +38,17 @@ mcp_config()             # {"type": "local", "command": ["uvx", "colab-mcp"], ..
 doctor_check()           # {"name": "colab-mcp", "status": ..., "detail": ...}
 ```
 
+## Execução real (adendo R651, provada ao vivo)
+
+```python
+from integrations.colab_mcp import list_tools_via_server, materialize_qcaf
+list_tools_via_server()  # ["open_colab_browser_connection", "materialize_qcaf_colab_notebook"]
+materialize_qcaf(nb_json, filename="exp.ipynb", output_dir="/tmp", overwrite=True)
+```
+
+`open_colab_browser_connection` exige a aba do navegador do operador
+(bloqueador documentado, não bug).
+
 ## Regras
 
 - Complemento do `colab-cli` (terminal/headless), não substituto.

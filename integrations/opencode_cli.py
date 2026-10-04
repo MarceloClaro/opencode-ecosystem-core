@@ -504,6 +504,24 @@ def build_config() -> Dict[str, Any]:
                 "command": ["python3", ".opencode/mcp/web_deploy_server.py"],
                 "enabled": True,
             },
+            # SPEC-935-R652: servidores MCP de referência (modelcontextprotocol,
+            # sem auth, provados ao vivo via stdio em 2026-10-04). filesystem
+            # escopado à raiz do repo (contexto de trabalho dos agentes).
+            "fetch": {
+                "type": "local",
+                "command": ["uvx", "mcp-server-fetch"],
+                "enabled": True,
+            },
+            "sequential-thinking": {
+                "type": "local",
+                "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+                "enabled": True,
+            },
+            "filesystem": {
+                "type": "local",
+                "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem", ROOT],
+                "enabled": True,
+            },
         },
         "command": {
             "efficiency": {
@@ -577,6 +595,18 @@ def build_config() -> Dict[str, Any]:
             "claude-sdk": {
                 "template": "python3 -m integrations.claude_agent_sdk $ARGUMENTS",
                 "description": "Claude Agent SDK Python (anthropics, MIT + Commercial Terms) — ponte de biblioteca, monta options sem executar (SPEC-935-R647). Ex: /claude-sdk status, /claude-sdk options --prompt '...' [--max-turns N], /claude-sdk doctor"
+            },
+            "opencode-sdk": {
+                "template": "python3 -m integrations.opencode_agent_sdk $ARGUMENTS",
+                "description": "OpenCode Agent SDK FREE local-first (SPEC-935-R649, R$ 0,00): loop agêntico com tools locais via LiteRT-LM/Ollama. Ex: /opencode-sdk status, /opencode-sdk query --prompt '...' [--max-turns N], /opencode-sdk doctor"
+            },
+            "kaggle": {
+                "template": "python3 -m integrations.kaggle_cli $ARGUMENTS",
+                "description": "Kaggle CLI (Kaggle/kaggle-cli) — executor externo orquestrável (SPEC-935-R650). Ex: /kaggle status, /kaggle run competitions list, /kaggle run quota, /kaggle doctor"
+            },
+            "agy": {
+                "template": "python3 -m integrations.antigravity_cli $ARGUMENTS",
+                "description": "Antigravity CLI runner direto (SPEC-935-R651), complemento do bridge/MCP. Ex: /agy status, /agy run '<prompt>' [--agent A], /agy doctor"
             }
         },
     }

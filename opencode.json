@@ -3,7 +3,6 @@
   "instructions": [
     "AGENTS.md"
   ],
-  "default_agent": "marceloclaro",
   "model": "litert-lm/litert-community/gemma-4-E2B-it-litert-lm",
   "permission": {
     "edit": "ask",
@@ -734,76 +733,6 @@
         }
       }
     },
-    "ollama-local": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama local (GGUF multimodal)",
-      "options": {
-        "apiKey": "sk-no-key-required",
-        "baseURL": "http://localhost:11434/v1"
-      },
-      "models": {
-        "gemma4:e4b-tuned": {
-          "name": "Gemma 4 4B Expert QAT (tuned, ~2.9 tok/s)",
-          "limit": {
-            "context": 24576,
-            "output": 2048
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "tool_call": true,
-          "attachment": true,
-          "reasoning": true,
-          "options": {
-            "reasoning_effort": "none"
-          }
-        },
-        "gemma4:e2b-tuned": {
-          "name": "Gemma 4 2B Expert QAT (tuned, ~7.9 tok/s, recomendado)",
-          "limit": {
-            "context": 24576,
-            "output": 2048
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "tool_call": true,
-          "attachment": true,
-          "reasoning": true,
-          "options": {
-            "reasoning_effort": "none"
-          }
-        },
-        "llama3.2": {
-          "name": "Llama 3.2 3B (Ollama)",
-          "limit": {
-            "context": 32768,
-            "output": 4096
-          },
-          "modalities": {
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "tool_call": true
-        }
-      }
-    },
     "colibri": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Colibri Engine (OLMoE / GLM-5.2)",
@@ -850,7 +779,7 @@
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/academic_writer.md}",
       "permission": {
-        "edit": "allow",
+        "edit": "deny",
         "bash": "deny"
       }
     },
@@ -868,8 +797,8 @@
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/coder.md}",
       "permission": {
-        "edit": "allow",
-        "bash": "allow"
+        "edit": "deny",
+        "bash": "deny"
       }
     },
     "researcher": {
@@ -1340,6 +1269,15 @@
         "bash": "deny"
       }
     },
+    "antigravity-cli": {
+      "description": "Runner direto do Antigravity CLI `agy` (google-antigravity, oficial): status/version/run/doctor no padrão M7, com detecção de falha silenciosa. Complementa bridge + MCP + executor (não substitui).",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/antigravity-cli.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
     "antigravity-orchestrator": {
       "description": "Orquestrador especializado que delega tarefas ao Antigravity (Google DeepMind Advanced Agentic Coding), expondo e coordenando suas capacidades exclusivas no pipeline do OpenCode Ecosystem.",
       "mode": "subagent",
@@ -1432,6 +1370,15 @@
       "description": "Agente especializado auxjuris_legal_research",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/auxjuris_legal_research.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "awesome-mcp-servers": {
+      "description": "Curadoria executável da lista wong2/awesome-mcp-servers (SPEC-935-R652): referência-primeiro (fetch, sequential-thinking, filesystem registrados), SaaS com trust gate, adiamentos motivados.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/awesome-mcp-servers.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
@@ -1725,6 +1672,15 @@
         "bash": "deny"
       }
     },
+    "core-hooks": {
+      "description": "Hooks do Core (SPEC-935-R653): engine fail-closed (HookMatcher, eventos Pre/PostToolUse e sessão) + política deny-list auditada para Bash, fiada ao SDK livre.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/core-hooks.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
     "cultural-episteme-agent": {
       "description": "Agente de Epistemes Culturais e Equivalência Interpretativa que audita traduções literárias quanto a voz, história, pragmática, símbolos e riscos de domesticação ou exotização, sempre com revisão huma",
       "mode": "subagent",
@@ -1888,6 +1844,15 @@
       "description": "Agente especializado jinja2-templates",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/jinja2-templates.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "kaggle-cli": {
+      "description": "Executor externo orquestrável: `kaggle` (Kaggle/kaggle-cli) — competições, datasets, kernels, models, quota via passthrough com auth do operador.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/kaggle-cli.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
@@ -2393,6 +2358,15 @@
       "description": "Agente especializado openagent",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/openagent.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "opencode-agent-sdk": {
+      "description": "SDK de agente FREE local-first (SPEC-935-R649, R$ 0,00): query() com loop agêntico, @tool in-process, hooks e autodetect LiteRT-LM/Ollama/Colibri sobre HTTP OpenAI-compatível. Sem conta e sem cobrança",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/opencode-agent-sdk.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
@@ -3048,16 +3022,6 @@
     }
   },
   "mcp": {
-    "ecosystem-network": {
-      "type": "local",
-      "command": [
-        ".venv/bin/python",
-        "-m",
-        "integrations.ecosystem_mcp"
-      ],
-      "enabled": true,
-      "timeout": 660000
-    },
     "litert-lm": {
       "type": "local",
       "command": [
@@ -3113,14 +3077,36 @@
         ".opencode/mcp/web_deploy_server.py"
       ],
       "enabled": true
+    },
+    "fetch": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "mcp-server-fetch"
+      ],
+      "enabled": true
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "enabled": true
+    },
+    "filesystem": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/marceloclaro/opencode-ecosystem-core"
+      ],
+      "enabled": true
     }
   },
   "command": {
-    "ecosystem": {
-      "template": "Use ecosystem-network para esta solicitação: $ARGUMENTS. Para diagnóstico use ecosystem_status; para escolher agentes use ecosystem_route; para análise ou texto coordenado use ecosystem_run. Para análise seguida de revisão independente, monte etapas com id, task, dependencies e required_capabilities e use ecosystem_workflow. Em seleção automática reserve per_node_max_steps=2 para permitir fallback. Guarde workflow_id e consulte ecosystem_workflow_status; retome a mesma definição com resume=true. Repetir etapas falhas exige retry_failed=true explícito. Informe os executores realmente usados, erros e limitações.",
-      "description": "Rede coordenada: diagnóstico, execução em etapas, revisão e retomada",
-      "agent": "marceloclaro"
-    },
     "efficiency": {
       "template": "python3 -m integrations.op_timing report $ARGUMENTS",
       "description": "Relatório de eficiência por operação (mediana/p90, op_times.jsonl)"
@@ -3192,6 +3178,18 @@
     "claude-sdk": {
       "template": "python3 -m integrations.claude_agent_sdk $ARGUMENTS",
       "description": "Claude Agent SDK Python (anthropics, MIT + Commercial Terms) — ponte de biblioteca, monta options sem executar (SPEC-935-R647). Ex: /claude-sdk status, /claude-sdk options --prompt '...' [--max-turns N], /claude-sdk doctor"
+    },
+    "opencode-sdk": {
+      "template": "python3 -m integrations.opencode_agent_sdk $ARGUMENTS",
+      "description": "OpenCode Agent SDK FREE local-first (SPEC-935-R649, R$ 0,00): loop agêntico com tools locais via LiteRT-LM/Ollama. Ex: /opencode-sdk status, /opencode-sdk query --prompt '...' [--max-turns N], /opencode-sdk doctor"
+    },
+    "kaggle": {
+      "template": "python3 -m integrations.kaggle_cli $ARGUMENTS",
+      "description": "Kaggle CLI (Kaggle/kaggle-cli) — executor externo orquestrável (SPEC-935-R650). Ex: /kaggle status, /kaggle run competitions list, /kaggle run quota, /kaggle doctor"
+    },
+    "agy": {
+      "template": "python3 -m integrations.antigravity_cli $ARGUMENTS",
+      "description": "Antigravity CLI runner direto (SPEC-935-R651), complemento do bridge/MCP. Ex: /agy status, /agy run '<prompt>' [--agent A], /agy doctor"
     }
   }
 }

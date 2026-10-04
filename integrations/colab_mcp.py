@@ -15,11 +15,12 @@ validação do Core (anti-overclaim R110).
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
 import sys
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 _BIN_NAME = "colab-mcp"
 _UVX_BIN = "uvx"
@@ -137,11 +138,110 @@ def install_instructions() -> str:
         "Uso no Core:\n"
         "  /colab-mcp status   # presença (binário ou uvx) + versão\n"
         "  /colab-mcp config   # snippet JSON stdio\n"
+        "  /colab-mcp list     # tools via protocolo (open_colab_browser_connection, materialize_*)\n"
+        "  /colab-mcp materialize --model-file M --json NB  # grava .ipynb local\n"
         "  /colab-mcp doctor   # saúde (pass/warn, nunca fail)\n"
         "\n"
-        "Nota: o servidor opera no contexto do notebook Colab autenticado;\n"
-        "credenciais e kernels pertencem ao operador (não ao Core)."
+        "Nota: open_colab_browser_connection exige aba do navegador do operador;\n"
+        "materialize grava .ipynb local via protocolo (provado em R651)."
     )
+
+
+def _server_cmd_resolved(server_cmd: Optional[List[str]] = None) -> List[str]:
+    """Comando do servidor: argumento, `COLAB_MCP_CMD` (separado por \\x1f) ou padrão uvx."""
+    if server_cmd:
+        return list(server_cmd)
+    env = os.environ.get("COLAB_MCP_CMD")
+    if env:
+        return env.split("\x1f")
+    return list(mcp_config(prefer_uvx=True)["command"])  # type: ignore[arg-type]
+
+
+def _run_colab_stdio(
+    op: str,
+    tool: str = "",
+    arguments: Optional[Dict[str, Any]] = None,
+    server_cmd: Optional[List[str]] = None,
+    timeout: int = 120,
+) -> Dict[str, Any]:
+    """Handshake MCP real via stdio contra o colab-mcp (adendo R651).
+
+    `op` = "list" (tools/list) ou "call". Importa `mcp`/`anyio` sob demanda;
+    nunca lança exceção.
+    """
+    try:
+        import anyio  # noqa: F401
+        from mcp import ClientSession, StdioServerParameters  # noqa: F401
+        from mcp.client.stdio import stdio_client  # noqa: F401
+    except ImportError:
+        return {"ok": False, "error": "pacote `mcp` ausente (pip install mcp)."}
+    command = _server_cmd_resolved(server_cmd)
+
+    async def _run() -> Dict[str, Any]:
+        from mcp import ClientSession, StdioServerParameters
+        from mcp.client.stdio import stdio_client
+        params = StdioServerParameters(command=command[0], args=command[1:])
+        async with stdio_client(params) as (read, write):
+            async with ClientSession(read, write) as session:
+                await session.initialize()
+                if op == "list":
+                    tools = await session.list_tools()
+                    return {"ok": True, "tools": [
+                        {"name": t.name, "description": (t.description or "")[:200]}
+                        for t in (tools.tools or [])
+                    ]}
+                result = await session.call_tool(tool, arguments or {})
+                return {"ok": True, "texts": [
+                    (c.text if hasattr(c, "text") else str(c))
+                    for c in (result.content or [])
+                ]}
+
+    try:
+        import anyio
+
+        async def _bounded() -> Dict[str, Any]:
+            with anyio.fail_after(timeout):
+                return await _run()
+
+        return anyio.run(_bounded)
+    except Exception as exc:  # noqa: BLE001 - erro vira payload
+        return {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
+
+
+def list_tools_via_server(
+    server_cmd: Optional[List[str]] = None, timeout: int = 120,
+) -> Dict[str, Any]:
+    """Lista tools do colab-mcp via protocolo (adendo R651)."""
+    return _run_colab_stdio("list", server_cmd=server_cmd, timeout=timeout)
+
+
+def materialize_qcaf(
+    notebook_json: str,
+    filename: str = "qcaf_experiment.ipynb",
+    output_dir: str = ".",
+    overwrite: bool = False,
+    server_cmd: Optional[List[str]] = None,
+    timeout: int = 120,
+) -> Dict[str, Any]:
+    """Materializa notebook QCAF como .ipynb via `materialize_qcaf_colab_notebook`.
+
+    Nunca lança; devolve `{"ok", "result" (QCAFNotebookMaterializeResult)}.
+    """
+    if not isinstance(notebook_json, str) or len(notebook_json.strip()) < 2:
+        return {"ok": False, "error": "notebook_json deve ser string JSON não vazia."}
+    raw = _run_colab_stdio(
+        "call", "materialize_qcaf_colab_notebook",
+        {"request": {"notebook_json": notebook_json, "filename": filename,
+                     "output_dir": output_dir, "overwrite": overwrite}},
+        server_cmd=server_cmd, timeout=timeout,
+    )
+    if not raw.get("ok"):
+        return {"ok": False, "error": str(raw.get("error"))}
+    try:
+        texts = raw.get("texts") or []
+        return {"ok": True, "result": json.loads(texts[0]) if texts else {}}
+    except (json.JSONDecodeError, IndexError, TypeError) as exc:
+        return {"ok": False, "error": f"resposta não-JSON: {exc}"}
 
 
 def _format_status() -> str:
@@ -166,8 +266,10 @@ def main(argv: Optional[List[str]] = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     if not argv or argv[0] in {"--help", "-h", "help"}:
         print(
-            "Uso: python3 -m integrations.colab_mcp <status|config|doctor|install> [args...]\n"
-            "  config [--no-uvx]   # imprime o snippet JSON stdio"
+            "Uso: python3 -m integrations.colab_mcp <status|config|list|materialize|doctor|install> [args...]\n"
+            "  config [--no-uvx]   # imprime o snippet JSON stdio\n"
+            "  list                # tools via protocolo MCP\n"
+            "  materialize --json NBJSON --file NOME [--dir DIR] [--overwrite]"
         )
         return 0
     command, *rest = argv
@@ -179,6 +281,28 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(json.dumps({"colab-mcp": mcp_config(prefer_uvx=prefer_uvx)},
                          ensure_ascii=False, indent=2))
         return 0
+    if command == "list":
+        print(json.dumps(list_tools_via_server(), ensure_ascii=False, indent=2))
+        return 0
+    if command == "materialize":
+        nbjson, fname, dname, over = "", "qcaf_experiment.ipynb", ".", False
+        idx = 0
+        while idx < len(rest):
+            if rest[idx] == "--json" and idx + 1 < len(rest):
+                nbjson = rest[idx + 1]; idx += 2; continue
+            if rest[idx] == "--file" and idx + 1 < len(rest):
+                fname = rest[idx + 1]; idx += 2; continue
+            if rest[idx] == "--dir" and idx + 1 < len(rest):
+                dname = rest[idx + 1]; idx += 2; continue
+            if rest[idx] == "--overwrite":
+                over = True; idx += 1; continue
+            idx += 1
+        if not nbjson.strip():
+            print("Uso: materialize --json NBJSON --file NOME [--dir DIR] [--overwrite]")
+            return 2
+        out = materialize_qcaf(nbjson, fname, dname, over)
+        print(json.dumps(out, ensure_ascii=False, indent=2))
+        return 0 if out.get("ok") else 1
     if command == "doctor":
         check = doctor_check()
         print(f"{check['name']}: {check['status']} — {check['detail']}")
