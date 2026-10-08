@@ -1,0 +1,64 @@
+name: CI por escopos (polímata verde-gate)
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: "1"
+
+jobs:
+  escopo-polimata:
+    name: Escopo polímata (gate verde obrigatório)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest tests/test_r711_pesquisador_polimata_github.py tests/test_r712_polimata_superficies.py tests/test_r713_pinagem_federacao.py tests/test_r714_pinagem_viva.py tests/test_r715_federacao_classes.py tests/test_r716_intencoes.py tests/test_r717_lote_piloto.py tests/test_r718_readiness.py tests/test_r719_aquisicao.py tests/test_r720_inventario.py tests/test_r721_minuta.py tests/test_r722_parecer.py tests/test_r723_dossie.py tests/test_r724_federar.py tests/test_r741_core_polimata.py tests/test_r742_dashboard.py -q --tb=short --timeout=120
+
+  escopo-nucleo-cientifico:
+    name: Núcleo científico (gate verde obrigatório)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest tests/test_scientific_lab_v41_core_integration.py tests/test_r708_descoberta_auditavel.py tests/test_r710_fase_b.py tests/test_r706_manuscript_scale.py -q --tb=short --timeout=120
+
+  escopo-config:
+    name: Config reproduzível (gate verde obrigatório)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest tests/test_r137_opencode_config_reproducible.py tests/test_sdd_tdd.py -q --tb=short --timeout=120
+
+  escopos-alheios:
+    name: Frentes alheias (quarentena informativa, donos R617-R678)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest tests/test_r617_livro_integridade.py tests/test_r618_catalogo_runtime_reconciliacao.py tests/test_r619_cobertura_100_por_cento.py tests/test_r620_fluxogramas_justificados.py tests/test_r673_gemini_notebook_catalog.py tests/test_r674_notebook_pipeline.py tests/test_r674_notebook_edge_cases.py tests/test_r678_library_empty_input_specialist.py tests/test_r442_deepmind_superhuman_reasoning.py tests/test_r443_opencode_alphaproof_deepthink.py tests/test_r445_alphageometry_autoformalization.py -q --tb=line --timeout=120
