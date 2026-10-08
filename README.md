@@ -233,6 +233,25 @@ outro especialista e checkpoints para retomada. A seleção automática consulta
 a saúde persistida dos executores e pausa serviços que falharam recentemente.
 Veja o [guia de execução em etapas](docs/WORKFLOWS_R644.md).
 
+Da R711 à R746, o programa do pesquisador polímata curou 21 repositórios por
+tipo de raciocínio (dedutivo, causal, bayesiano, síntese, autônomo, auditoria)
+com pinagem viva, federação por classes de frescor e decisão humana nominal:
+16 federados no escopo polímata em `workbench/rede_polimata` (fora do harness
+R621), com painel em `workbench/polymath/DASHBOARD.md`, skill
+`pesquisador-polimata-labs`, 3 agentes de catálogo e o MCP `polymath-labs-mcp`.
+Nada federado atesta qualidade; todo federado exige supervisão.
+
+### Mapa dinâmico regenerável
+
+Além do snapshot histórico acima, o inventário vivo do checkout é gerado por
+`marceloclaro/ecosystem_map.py` (1402 nodos, 2217 vetores, incluindo o programa
+polímata) em `maps/ecosystem_map_2026-07-06.json` e
+`MAPA_ECOSSISTEMA_COMPLETO_2026-07-06.md`. Regenere após mudanças com
+`python3 -c "from marceloclaro.ecosystem_map import save_ecosystem_map_artifacts; save_ecosystem_map_artifacts()"`.
+O CI segrega escopos com gates verdes obrigatórios (polímata, núcleo
+científico, config) em `.github/workflows/ci-escopos.yml`, com quarentena
+informativa das frentes com donos.
+
 ### Fluxos multiárea do checkout atual
 
 | Área | Principais referências observáveis |
