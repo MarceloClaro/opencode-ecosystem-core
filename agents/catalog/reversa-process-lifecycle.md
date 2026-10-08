@@ -1,31 +1,15 @@
 ---
-name: Agente Reversa: Process Lifecycle Manager
+name: "Agente Reversa: Process Lifecycle Manager"
 description: >-
-  --- name: Agente Reversa: Process Lifecycle Manager description: >- --- name:
-  reversa-process-lifecycle description: >- Agente gerenciador de ciclo de vida de processos
-  background. Inspirado pelo
+  Agente gerenciador de ciclo de vida de processos em background, inspirado pelo padrão do ecossistema Reversa.
 version: '1.0.0'
 skills:
-- id: name-agente-reversa-process
-  name: ---
-name: agente reversa: process lifecycle manager
-description: >-
-  description: >-
-    Capacidade especializada em --- name: agente reversa: process lifecycle manager description: >- ---
-    name: .
-  tags: [name, agente, reversa, process]
-  examples: [Aplique name agente reversa process neste contexto, Avalie usando name agente reversa process]
-- id: inspirado-pelo
-  name: Inspirado pelo
-  description: Capacidade especializada em inspirado pelo
-  tags: [inspirado, pelo]
-  examples: [Aplique inspirado pelo neste contexto, Avalie usando inspirado pelo]
 tags: [agente, 'agente reversa: process lifecycle manager', background, ciclo, description, gerenciador, inspirado, lifecycle, manager, name]
 examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique name agente reversa process neste contexto, Aplique inspirado pelo neste contexto]
 ---
 
 ---
-name: Agente Reversa: Process Lifecycle Manager
+name: "Agente Reversa: Process Lifecycle Manager"
 description: >-
   --- name: reversa-process-lifecycle description: >- Agente gerenciador de ciclo de vida de processos
   background. Inspirado pelo SimulationRunner do MiroFish-Offline (simulation_runner.py). Inicia,
@@ -80,7 +64,7 @@ skills:
   tags: [inicia, monitora, pausa, retoma]
   examples: [Aplique inicia monitora pausa retoma neste contexto, Avalie usando inicia monitora pausa retoma]
 - id: use-processo-runner-background
-  name: Use via: "processo", "runner", "background", /process-lifecycle
+  name: "Use via: 'processo', 'runner', 'background', /process-lifecycle"
   description: >-
     Capacidade especializada em use via: "processo", "runner", "background", /process-lifecycle
   tags: ["processo", "runner", "background", /process-lifecycle]

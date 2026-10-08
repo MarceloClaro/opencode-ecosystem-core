@@ -1,0 +1,22 @@
+{
+  "nextflow": {
+    "binding": "nextflow",
+    "fixture_path": "nextflow/workflow/trace.txt",
+    "fixture_sha256": "1b949485a35a825f55d904fdf1c624ec4233d325d8336c451d546ce2d3197e20",
+    "golden_path": "goldens/nextflow.json",
+    "normalization": "none",
+    "run_id": "nfcore-fastq-qc-20260808-010703-d888c7ed",
+    "source_sha256": "1b949485a35a825f55d904fdf1c624ec4233d325d8336c451d546ce2d3197e20",
+    "workflow_status": "completed"
+  },
+  "snakemake": {
+    "binding": "snakemake",
+    "fixture_path": "snakemake/results/.snakemake/log/2026-08-07T180851.803407.snakemake.log",
+    "fixture_sha256": "d95c965a54ab3de78e32ea86f60204db9095068dd27a587bb7b2192c7e157b71",
+    "golden_path": "goldens/snakemake.json",
+    "normalization": "workstation identity and absolute path prefixes only",
+    "run_id": "snakemake-fastq-qc-20260808-010555-1ce65ac4",
+    "source_sha256": "25dbedfc5534623c898027c658ab813425afb64b9d6c446f2ec6a46941591df1",
+    "workflow_status": "completed"
+  }
+}

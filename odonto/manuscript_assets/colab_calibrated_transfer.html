@@ -1,0 +1,315 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body><pre id="markdown"># 29. Recalibração aninhada por criança — análise corrigida
+
+**Correção da validação:** o resultado anterior (AP 0,2318/0,2414) é reproduzível no scikit-learn 1.6.1, porém `StratifiedGroupKFold(shuffle=True)` dessa versão pode desalinhar as contagens de classe e os grupos. A célula abaixo reproduz a lógica corrigida da divisão em qualquer uma das versões testadas, por permutação explícita de rótulos de grupo seguida de `shuffle=False`. Com essa divisão corrigida, os resultados-base são AP 0,1665/0,1784 e ROC-AUC 0,6865/0,7372 para os modelos mínimo/espacial. A mudança nos números decorre da divisão das crianças, sem representar piora ou melhora biológica.
+
+**Calibração sem vazamento:** em cada uma das cinco dobras externas, o C é escolhido nas três dobras internas. As previsões cruzadas internas treinam dois mapas de risco: intercepto apenas e intercepto mais inclinação. Eles são aplicados somente ao teste externo. O ajuste do mapa não usa os rótulos das crianças do teste externo. Os intervalos das diferenças vêm de bootstrap pareado por criança das previsões externas já ajustadas.
+
+| Modelo | Probabilidade | AP | ROC-AUC | Brier | Log-loss |
+|---|---|---:|---:|---:|---:|
+| Clínico mínimo | Original corrigido | 0,1665 | 0,6865 | 0,08060 | 0,28836 |
+| Clínico mínimo | Intercepto + inclinação | 0,1920 | 0,7153 | 0,07451 | 0,26802 |
+| Clínico espacial | Original corrigido | 0,1784 | 0,7372 | 0,07536 | 0,26899 |
+| Clínico espacial | Intercepto + inclinação | 0,1759 | 0,7387 | 0,07395 | 0,26381 |
+
+No modelo mínimo, a diferença de Brier (recalibrado − original) foi −0,00610, IC95% bootstrap por criança [−0,01173; −0,000672]. A melhora dos demais desfechos e do modelo espacial requer cautela; não há validação externa nem evidência de utilidade clínica. Esta é uma análise exploratória posterior à avaliação original. A saída contém somente métricas agregadas e figuras, em `/content/OdontoCA_v1_3/10_calibracao`.
+</pre><pre id="code">&quot;&quot;&quot;Nested, child-grouped evaluation of train-only probability recalibration.
+
+The scikit-learn 1.6.1 split policy reproduces the Colab analysis; 1.9.0
+provides a sensitivity analysis with corrected stratified splitting. Only
+aggregate statistics and figures are written; no individual predictions or
+patient identifiers leave this process.
+&quot;&quot;&quot;
+
+from __future__ import annotations
+
+import json
+import platform
+import sys
+from pathlib import Path
+
+import matplotlib
+
+matplotlib.use(&quot;Agg&quot;)
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import scipy
+import sklearn
+from scipy.optimize import minimize, minimize_scalar
+from scipy.special import expit, logit
+from sklearn.metrics import (
+    average_precision_score,
+    brier_score_loss,
+    log_loss,
+    precision_recall_curve,
+    roc_auc_score,
+    roc_curve,
+)
+from sklearn.model_selection import GridSearchCV, StratifiedGroupKFold
+
+# Cohort reconstruction and base-model functions are supplied by the preceding cell.
+
+
+OUT = Path(&quot;/content/OdontoCA_v1_3/10_calibracao&quot; if &quot;google.colab&quot; in sys.modules else &quot;/tmp/odonto_colab_calibrated&quot;)
+OUT.mkdir(parents=True, exist_ok=True)
+METHODS = (&quot;uncalibrated&quot;, &quot;intercept_only&quot;, &quot;intercept_and_slope&quot;)
+VERSION_TAG = sklearn.__version__.replace(&quot;.&quot;, &quot;&quot;)
+SPLIT_POLICY = &quot;corrected_permuted_groups&quot;
+
+
+def corrected_group_splits(X, y, groups, n_splits: int, seed: int):
+    &quot;&quot;&quot;Reproduce the corrected shuffle algorithm across sklearn versions.
+
+    Permuting numeric group labels before shuffle=False yields the same stable
+    tie order as the corrected shuffle=True implementation, while retaining
+    the label-to-group mapping in affected older versions.
+    &quot;&quot;&quot;
+    _, group_inverse = np.unique(groups, return_inverse=True)
+    permutation = np.arange(int(group_inverse.max()) + 1)
+    np.random.RandomState(seed).shuffle(permutation)
+    inverse_permutation = np.empty_like(permutation)
+    inverse_permutation[permutation] = np.arange(permutation.size)
+    relabelled = inverse_permutation[group_inverse]
+    splitter = StratifiedGroupKFold(n_splits=n_splits, shuffle=False)
+    return list(splitter.split(X, y, relabelled))
+
+
+def _score(p: np.ndarray) -&gt; np.ndarray:
+    return logit(np.clip(np.asarray(p, dtype=float), 1e-6, 1 - 1e-6))
+
+
+def fit_recalibrators(y: np.ndarray, p: np.ndarray) -&gt; dict[str, dict[str, float]]:
+    &quot;&quot;&quot;Fit two monotone maps using training-only cross-fitted probabilities.&quot;&quot;&quot;
+    y = np.asarray(y, dtype=int)
+    x = _score(p)
+    if len(np.unique(y)) != 2 or not np.isfinite(x).all():
+        raise ValueError(&quot;Calibration training data need both outcomes and finite scores&quot;)
+    offset = minimize_scalar(
+        lambda a: log_loss(y, expit(a + x), normalize=False),
+        method=&quot;bounded&quot;, bounds=(-12, 12),
+    )
+    if not offset.success:
+        raise RuntimeError(&quot;Intercept recalibration failed&quot;)
+    # The positive slope constraint keeps the map monotone in risk.
+    line = minimize(
+        lambda ab: log_loss(y, expit(ab[0] + ab[1] * x), normalize=False),
+        x0=np.array([float(offset.x), 1.0]),
+        method=&quot;L-BFGS-B&quot;, bounds=[(-12, 12), (0.05, 3.0)],
+    )
+    if not line.success or not np.isfinite(line.x).all():
+        raise RuntimeError(&quot;Intercept-and-slope recalibration failed&quot;)
+    return {
+        &quot;intercept_only&quot;: {&quot;intercept&quot;: float(offset.x), &quot;slope&quot;: 1.0},
+        &quot;intercept_and_slope&quot;: {
+            &quot;intercept&quot;: float(line.x[0]), &quot;slope&quot;: float(line.x[1]),
+        },
+    }
+
+
+def apply_recalibration(p: np.ndarray, parameters: dict[str, float]) -&gt; np.ndarray:
+    return expit(parameters[&quot;intercept&quot;] + parameters[&quot;slope&quot;] * _score(p))
+
+
+def _metrics(y: np.ndarray, p: np.ndarray) -&gt; dict[str, float]:
+    return {
+        &quot;pr_auc&quot;: float(average_precision_score(y, p)),
+        &quot;roc_auc&quot;: float(roc_auc_score(y, p)),
+        &quot;brier&quot;: float(brier_score_loss(y, p)),
+        &quot;log_loss&quot;: float(log_loss(y, np.clip(p, 1e-6, 1 - 1e-6))),
+        **fit_calibration(y, p),
+    }
+
+
+def _reliability(ax, y: np.ndarray, p: np.ndarray, label: str, color: str) -&gt; None:
+    boundaries = np.unique(np.quantile(p, np.linspace(0, 1, 9)))
+    if len(boundaries) &lt; 3:
+        return
+    bins = np.digitize(p, boundaries[1:-1], right=True)
+    px = [p[bins == k].mean() for k in range(len(boundaries) - 1) if (bins == k).any()]
+    py = [y[bins == k].mean() for k in range(len(boundaries) - 1) if (bins == k).any()]
+    ax.plot(px, py, &quot;o-&quot;, lw=1.5, ms=4, label=label, color=color)
+
+
+def _figures(y: np.ndarray, predictions: dict[str, dict[str, np.ndarray]], metrics: dict) -&gt; None:
+    colors = {&quot;clinical_minimal&quot;: &quot;#25668c&quot;, &quot;clinical_spatial&quot;: &quot;#bf7924&quot;}
+    labels = {&quot;clinical_minimal&quot;: &quot;Minimal clinical&quot;, &quot;clinical_spatial&quot;: &quot;Clinical + spatial&quot;}
+    fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.2), dpi=170)
+    for name, variants in predictions.items():
+        p = variants[&quot;uncalibrated&quot;]
+        precision, recall, _ = precision_recall_curve(y, p)
+        fpr, tpr, _ = roc_curve(y, p)
+        axes[0].plot(recall, precision, label=f&quot;{labels[name]} (AP {metrics[name][&#x27;uncalibrated&#x27;][&#x27;pr_auc&#x27;]:.3f})&quot;, color=colors[name], lw=2)
+        axes[1].plot(fpr, tpr, label=f&quot;{labels[name]} (AUC {metrics[name][&#x27;uncalibrated&#x27;][&#x27;roc_auc&#x27;]:.3f})&quot;, color=colors[name], lw=2)
+    axes[0].axhline(y.mean(), ls=&quot;--&quot;, color=&quot;#777&quot;, label=f&quot;Event fraction {y.mean():.3f}&quot;)
+    axes[1].plot([0, 1], [0, 1], ls=&quot;--&quot;, color=&quot;#777&quot;, label=&quot;Chance&quot;)
+    axes[0].set(xlabel=&quot;Recall&quot;, ylabel=&quot;Precision&quot;, title=&quot;A. Precision–recall&quot;)
+    axes[1].set(xlabel=&quot;False-positive rate&quot;, ylabel=&quot;True-positive rate&quot;, title=&quot;B. ROC&quot;)
+    for ax in axes:
+        ax.legend(fontsize=8)
+        ax.grid(alpha=0.15)
+    fig.tight_layout()
+    fig.savefig(OUT / f&quot;Figure_2_discrimination_corrected_sklearn{VERSION_TAG}.png&quot;, bbox_inches=&quot;tight&quot;)
+    plt.close(fig)
+
+    fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.2), dpi=170)
+    method_labels = {
+        &quot;uncalibrated&quot;: &quot;Original&quot;, &quot;intercept_only&quot;: &quot;Intercept updated&quot;,
+        &quot;intercept_and_slope&quot;: &quot;Intercept and slope updated&quot;,
+    }
+    method_colors = {
+        &quot;uncalibrated&quot;: &quot;#69747c&quot;, &quot;intercept_only&quot;: &quot;#25668c&quot;,
+        &quot;intercept_and_slope&quot;: &quot;#bf7924&quot;,
+    }
+    for ax, (name, variants) in zip(axes, predictions.items()):
+        ax.plot([0, 0.5], [0, 0.5], ls=&quot;--&quot;, color=&quot;#333&quot;, lw=1, label=&quot;Ideal&quot;)
+        for method, p in variants.items():
+            _reliability(ax, y, p, method_labels[method], method_colors[method])
+        ax.set(xlim=(0, 0.5), ylim=(0, 0.5), xlabel=&quot;Mean predicted risk&quot;, ylabel=&quot;Observed event fraction&quot;, title=labels[name])
+        ax.grid(alpha=0.15)
+        ax.legend(fontsize=7)
+    fig.tight_layout()
+    fig.savefig(OUT / f&quot;Figure_3_calibration_corrected_sklearn{VERSION_TAG}.png&quot;, bbox_inches=&quot;tight&quot;)
+    plt.close(fig)
+
+
+def run_calibrated() -&gt; dict:
+    frame, source = source_frame()
+    y = frame[&quot;progression_event&quot;].to_numpy(dtype=int)
+    groups = frame[&quot;child_id&quot;].astype(str).to_numpy()
+    if any(FORBIDDEN.intersection(d[&quot;cat&quot;] + d[&quot;num&quot;]) for d in FEATURE_SETS.values()):
+        raise AssertionError(&quot;Future/outcome-derived variable entered the model&quot;)
+    predictions = {
+        name: {method: np.full(len(y), np.nan) for method in METHODS}
+        for name in FEATURE_SETS
+    }
+    fold_ids = np.full(len(y), -1)
+    folds = []
+    prevalence = np.full(len(y), np.nan)
+    outer_splits = corrected_group_splits(frame, y, groups, n_splits=5, seed=SEED)
+    for fold, (train, test) in enumerate(outer_splits):
+        if not set(groups[train]).isdisjoint(groups[test]) or len(np.unique(y[test])) != 2:
+            raise AssertionError(&quot;Outer child separation or outcome balance failed&quot;)
+        prevalence[test] = y[train].mean()
+        fold_ids[test] = fold
+        detail = {
+            &quot;fold&quot;: fold, &quot;train_rows&quot;: len(train), &quot;test_rows&quot;: len(test),
+            &quot;train_children&quot;: len(set(groups[train])), &quot;test_children&quot;: len(set(groups[test])),
+            &quot;train_events&quot;: int(y[train].sum()), &quot;test_events&quot;: int(y[test].sum()),
+        }
+        splits = corrected_group_splits(
+            frame.iloc[train], y[train], groups[train],
+            n_splits=3, seed=SEED + 100 + fold,
+        )
+        if any(not set(groups[train][a]).isdisjoint(groups[train][b]) for a, b in splits):
+            raise AssertionError(&quot;Inner child separation failed&quot;)
+        for name, definition in FEATURE_SETS.items():
+            columns = definition[&quot;cat&quot;] + definition[&quot;num&quot;]
+            xtrain, xtest = frame.iloc[train][columns], frame.iloc[test][columns]
+            search = GridSearchCV(
+                build_pipeline(definition[&quot;cat&quot;], definition[&quot;num&quot;]),
+                {&quot;model__C&quot;: [0.01, 0.1, 1.0, 10.0]},
+                scoring=&quot;average_precision&quot;, cv=splits, n_jobs=1,
+                refit=True, error_score=&quot;raise&quot;,
+            )
+            search.fit(xtrain, y[train])
+            chosen_c = search.best_params_[&quot;model__C&quot;]
+            positive = np.flatnonzero(search.best_estimator_.classes_ == 1)
+            if len(positive) != 1:
+                raise AssertionError(&quot;Positive outcome class is ambiguous&quot;)
+            raw_test = search.predict_proba(xtest)[:, int(positive[0])]
+            predictions[name][&quot;uncalibrated&quot;][test] = raw_test
+
+            # Calibration sees only cross-fitted predictions from this outer TRAIN.
+            inner_oof = np.full(len(train), np.nan)
+            for a, b in splits:
+                model = build_pipeline(definition[&quot;cat&quot;], definition[&quot;num&quot;])
+                model.set_params(model__C=chosen_c)
+                model.fit(xtrain.iloc[a], y[train][a])
+                positive_inner = np.flatnonzero(model.classes_ == 1)
+                if len(positive_inner) != 1:
+                    raise AssertionError(&quot;Inner positive class is ambiguous&quot;)
+                inner_oof[b] = model.predict_proba(xtrain.iloc[b])[:, int(positive_inner[0])]
+            if not np.isfinite(inner_oof).all():
+                raise AssertionError(&quot;Incomplete inner cross-fitting&quot;)
+            recalibrators = fit_recalibrators(y[train], inner_oof)
+            for method, params in recalibrators.items():
+                predictions[name][method][test] = apply_recalibration(raw_test, params)
+            detail[name + &quot;_C&quot;] = chosen_c
+            detail[name + &quot;_calibration&quot;] = recalibrators
+        folds.append(detail)
+
+    if (fold_ids &lt; 0).any() or pd.DataFrame({&quot;child&quot;: groups, &quot;fold&quot;: fold_ids}).groupby(&quot;child&quot;)[&quot;fold&quot;].nunique().max() != 1:
+        raise AssertionError(&quot;Outer grouped OOF coverage failed&quot;)
+    if any(not np.isfinite(p).all() or ((p &lt; 0) | (p &gt; 1)).any() for v in predictions.values() for p in v.values()):
+        raise AssertionError(&quot;Invalid external-fold probability&quot;)
+    metrics = {name: {method: _metrics(y, p) for method, p in variants.items()} for name, variants in predictions.items()}
+
+    # Paired child bootstrap conditions on the already cross-fitted predictions.
+    rng = np.random.default_rng(SEED + 1)
+    children = np.unique(groups)
+    child_indices = {child: np.flatnonzero(groups == child) for child in children}
+    differences = {
+        name: {method: {metric: [] for metric in (&quot;brier&quot;, &quot;log_loss&quot;)}
+               for method in METHODS if method != &quot;uncalibrated&quot;}
+        for name in FEATURE_SETS
+    }
+    valid = 0
+    for _ in range(BOOTSTRAPS):
+        sampled = rng.choice(children, size=len(children), replace=True)
+        index = np.concatenate([child_indices[child] for child in sampled])
+        yy = y[index]
+        if len(np.unique(yy)) != 2:
+            continue
+        valid += 1
+        for name, variants in predictions.items():
+            raw = variants[&quot;uncalibrated&quot;][index]
+            for method in differences[name]:
+                calibrated = variants[method][index]
+                differences[name][method][&quot;brier&quot;].append(float(brier_score_loss(yy, calibrated) - brier_score_loss(yy, raw)))
+                differences[name][method][&quot;log_loss&quot;].append(float(log_loss(yy, calibrated) - log_loss(yy, raw)))
+    delta_report = {
+        name: {
+            method: {
+                metric: {
+                    &quot;estimate&quot;: metrics[name][method][metric] - metrics[name][&quot;uncalibrated&quot;][metric],
+                    &quot;ci95&quot;: interval(values),
+                }
+                for metric, values in by_metric.items()
+            }
+            for method, by_metric in by_method.items()
+        }
+        for name, by_method in differences.items()
+    }
+    report = {
+        &quot;analysis_status&quot;: &quot;EXPLORATORY_INTERNAL_VALIDATION_ONLY&quot;,
+        &quot;source&quot;: source,
+        &quot;runtime&quot;: {
+            &quot;python&quot;: platform.python_version(), &quot;numpy&quot;: np.__version__,
+            &quot;pandas&quot;: pd.__version__, &quot;scipy&quot;: scipy.__version__,
+            &quot;scikit_learn&quot;: sklearn.__version__,
+        },
+        &quot;analysis_rows&quot;: len(y), &quot;analysis_events&quot;: int(y.sum()),
+        &quot;analysis_children&quot;: len(children),
+        &quot;event_children&quot;: len(np.unique(groups[y == 1])),
+        &quot;event_fraction&quot;: float(y.mean()),
+        &quot;seed&quot;: SEED, &quot;outer_folds&quot;: 5, &quot;inner_folds&quot;: 3,
+        &quot;split_policy&quot;: SPLIT_POLICY,
+        &quot;fold_log&quot;: folds,
+        &quot;metrics&quot;: metrics,
+        &quot;prevalence_reference&quot;: {
+            &quot;brier&quot;: float(brier_score_loss(y, prevalence)),
+            &quot;log_loss&quot;: float(log_loss(y, prevalence)),
+        },
+        &quot;calibration_minus_uncalibrated&quot;: delta_report,
+        &quot;bootstrap_requested&quot;: BOOTSTRAPS, &quot;bootstrap_valid&quot;: valid,
+        &quot;scope_note&quot;: &quot;Cross-fitted internal calibration within 81 children; no external validation or clinical use.&quot;,
+    }
+    path = OUT / f&quot;calibrated_clinical_internal_validation_corrected_sklearn{VERSION_TAG}.json&quot;
+    path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding=&quot;utf-8&quot;)
+    _figures(y, predictions, metrics)
+    print(json.dumps({&quot;metrics&quot;: metrics, &quot;calibration_minus_uncalibrated&quot;: delta_report}, ensure_ascii=False, indent=2))
+    return report
+
+
+run_calibrated()
+</pre></body></html>

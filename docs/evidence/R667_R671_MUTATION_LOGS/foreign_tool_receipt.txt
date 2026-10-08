@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_receipt_identity_replay_and_failure ___________________
+tests/test_r670_scientific_plugins.py:83: in test_receipt_identity_replay_and_failure
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ============================
+FAILED tests/test_r670_scientific_plugins.py::test_receipt_identity_replay_and_failure
+1 failed in 0.28s

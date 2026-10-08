@@ -1,0 +1,380 @@
+{
+  "kind": "real_mcp_execution",
+  "tools": [
+    "ecosystem_status",
+    "ecosystem_route",
+    "ecosystem_run"
+  ],
+  "network_status": {
+    "status": "ready",
+    "available_executors": [
+      "claude",
+      "codex",
+      "antigravity"
+    ],
+    "runtime": {
+      "claude": {
+        "installed": true,
+        "available": true,
+        "cli": "claude",
+        "path": "/home/marceloclaro/.local/bin/claude",
+        "execution_mode": "cli-read-only",
+        "verification": "installation_only",
+        "reason": "Instalação detectada; autenticação e inferência ainda não verificadas."
+      },
+      "antigravity": {
+        "installed": true,
+        "available": true,
+        "cli": "agy",
+        "path": "/home/marceloclaro/.local/bin/agy",
+        "execution_mode": "cli-read-only",
+        "verification": "installation_only",
+        "reason": "Instalação detectada; autenticação e inferência ainda não verificadas."
+      },
+      "codex": {
+        "installed": true,
+        "available": true,
+        "cli": "codex",
+        "path": "/mnt/c/Users/marce/AppData/Local/OpenAI/Codex/bin/be3fd7e5c1969ff6/codex.exe",
+        "execution_mode": "cli-read-only-windows-interop",
+        "verification": "installation_only",
+        "reason": "Instalação detectada; autenticação e inferência ainda não verificadas."
+      },
+      "opencode": {
+        "installed": true,
+        "available": false,
+        "cli": "opencode",
+        "path": "/home/marceloclaro/.local/bin/opencode",
+        "execution_mode": "cli-read-only",
+        "verification": "installation_only",
+        "reason": "Execução OpenCode externa desativada para evitar recursão do orquestrador."
+      },
+      "chatgpt": {
+        "installed": false,
+        "available": false,
+        "cli": null,
+        "path": null,
+        "execution_mode": "unavailable",
+        "verification": "installation_only",
+        "reason": "A interface ChatGPT não é controlada. Selecione explicitamente codex para usar a CLI Codex."
+      },
+      "executors": {
+        "claude": {
+          "installed": true,
+          "available": true,
+          "cli": "claude",
+          "path": "/home/marceloclaro/.local/bin/claude",
+          "execution_mode": "cli-read-only",
+          "verification": "installation_only",
+          "reason": "Instalação detectada; autenticação e inferência ainda não verificadas."
+        },
+        "antigravity": {
+          "installed": true,
+          "available": true,
+          "cli": "agy",
+          "path": "/home/marceloclaro/.local/bin/agy",
+          "execution_mode": "cli-read-only",
+          "verification": "installation_only",
+          "reason": "Instalação detectada; autenticação e inferência ainda não verificadas."
+        },
+        "codex": {
+          "installed": true,
+          "available": true,
+          "cli": "codex",
+          "path": "/mnt/c/Users/marce/AppData/Local/OpenAI/Codex/bin/be3fd7e5c1969ff6/codex.exe",
+          "execution_mode": "cli-read-only-windows-interop",
+          "verification": "installation_only",
+          "reason": "Instalação detectada; autenticação e inferência ainda não verificadas."
+        },
+        "opencode": {
+          "installed": true,
+          "available": false,
+          "cli": "opencode",
+          "path": "/home/marceloclaro/.local/bin/opencode",
+          "execution_mode": "cli-read-only",
+          "verification": "installation_only",
+          "reason": "Execução OpenCode externa desativada para evitar recursão do orquestrador."
+        },
+        "chatgpt": {
+          "installed": false,
+          "available": false,
+          "cli": null,
+          "path": null,
+          "execution_mode": "unavailable",
+          "verification": "installation_only",
+          "reason": "A interface ChatGPT não é controlada. Selecione explicitamente codex para usar a CLI Codex."
+        }
+      },
+      "available_executors": [
+        "claude",
+        "antigravity",
+        "codex"
+      ]
+    },
+    "federation": {
+      "spec_id": "SPEC-935-R621",
+      "repo_root": "/home/marceloclaro/opencode-ecosystem-core",
+      "discovered": 319,
+      "duplicates_collapsed": 19,
+      "emitted": 0,
+      "by_ecosystem": {
+        "antigravity": {
+          "skill": 64,
+          "spec": 60
+        },
+        "chatgpt": {
+          "prompt_pack": 3,
+          "spec": 4
+        },
+        "claude": {
+          "agent": 25,
+          "command": 29,
+          "hook": 6,
+          "skill": 42,
+          "spec": 3
+        },
+        "codex": {
+          "plugin": 2,
+          "skill": 80,
+          "spec": 1
+        }
+      },
+      "by_kind": {
+        "skill": 186,
+        "spec": 68,
+        "prompt_pack": 3,
+        "agent": 25,
+        "command": 29,
+        "hook": 6,
+        "plugin": 2
+      },
+      "by_origin": {
+        "first_party": 135,
+        "third_party": 183,
+        "user": 1
+      },
+      "by_status": {
+        "ok": 34,
+        "degraded": 285
+      },
+      "degraded_by_reason": {
+        "license_undeclared": 285
+      },
+      "blocking": 0,
+      "roots_scanned": [
+        {
+          "ecosystem": "claude",
+          "label": "claude:user",
+          "path": "/home/marceloclaro/.claude",
+          "origin": "user"
+        },
+        {
+          "ecosystem": "claude",
+          "label": "claude:plugin_cache",
+          "path": "/home/marceloclaro/.claude/plugins/cache",
+          "origin": "third_party"
+        },
+        {
+          "ecosystem": "claude",
+          "label": "claude:marketplace",
+          "path": "/home/marceloclaro/.claude/plugins/marketplaces",
+          "origin": "third_party"
+        },
+        {
+          "ecosystem": "claude",
+          "label": "claude:project",
+          "path": "/home/marceloclaro/opencode-ecosystem-core/.claude",
+          "origin": "first_party"
+        },
+        {
+          "ecosystem": "antigravity",
+          "label": "antigravity:builtin_skills",
+          "path": "/home/marceloclaro/.gemini/antigravity-cli/builtin/skills",
+          "origin": "first_party"
+        },
+        {
+          "ecosystem": "antigravity",
+          "label": "antigravity:project",
+          "path": "/home/marceloclaro/opencode-ecosystem-core/.antigravity",
+          "origin": "first_party"
+        },
+        {
+          "ecosystem": "antigravity",
+          "label": "antigravity:cloud_scripts",
+          "path": "/home/marceloclaro/opencode-ecosystem-core/scripts/cloud",
+          "origin": "first_party"
+        },
+        {
+          "ecosystem": "codex",
+          "label": "codex:agents_standard",
+          "path": "/home/marceloclaro/opencode-ecosystem-core/deepseek-harness",
+          "origin": "third_party"
+        },
+        {
+          "ecosystem": "chatgpt",
+          "label": "chatgpt:project",
+          "path": "/home/marceloclaro/opencode-ecosystem-core",
+          "origin": "first_party"
+        }
+      ],
+      "roots_missing": [
+        {
+          "ecosystem": "codex",
+          "label": "codex:user",
+          "path": "/home/marceloclaro/.codex",
+          "reason": "root_absent"
+        }
+      ],
+      "ecosystems_present": [
+        "antigravity",
+        "chatgpt",
+        "claude",
+        "codex"
+      ],
+      "ecosystems_missing": [],
+      "binaries": {
+        "claude": false,
+        "codex": false,
+        "agy": false,
+        "gemini": false
+      },
+      "synchronized": false,
+      "synchronized_strict": true,
+      "degraded_count": 285
+    },
+    "transformer": "roteamento multicritério inspirado em atenção; não é rede neural treinada",
+    "bounded": {
+      "max_steps": 10,
+      "max_timeout_seconds": 600.0
+    },
+    "execution_scope": "análise e geração de texto com leitura; hooks e scripts importados inertes"
+  },
+  "result": {
+    "status": "completed",
+    "success": true,
+    "task_id": "task-a71ade19",
+    "agent_id": "auditor",
+    "ecosystem": "codex",
+    "origin_ecosystem": "claude",
+    "execution_mode": "adapted_instructions",
+    "artifact": {
+      "artifact_id": "claude:skill:third_party:dispatching-parallel-agents",
+      "ecosystem": "claude",
+      "kind": "skill",
+      "name": "dispatching-parallel-agents",
+      "slug": "dispatching-parallel-agents",
+      "description": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies",
+      "source_path": "/home/marceloclaro/.claude/plugins/cache/claude-plugins-official/superpowers/6.1.1/skills/dispatching-parallel-agents/SKILL.md",
+      "source_root": "claude:plugin_cache",
+      "origin": "third_party",
+      "license": "MIT",
+      "version": "",
+      "capabilities": [],
+      "tags": [],
+      "hook_events": [],
+      "hook_commands": [],
+      "content_sha256": "3d812ad8e45d3006f0e53a7db46639b76e48ac29c8076b24a027db23a5ed00d1",
+      "source_file_sha256": "f0df13f584049059cc5619f90061405b89dcc6e28ab3f2a8517d27d99c7a46a6",
+      "status": "ok",
+      "available": true,
+      "degraded_reasons": [],
+      "duplicate_paths": [],
+      "metadata": {
+        "frontmatter_keys": [
+          "description",
+          "name"
+        ]
+      }
+    },
+    "output": "A atenção direciona cada tarefa aos agentes cujas especialidades são mais relevantes para o contexto, considerando sua disponibilidade e os registros de confiança. O orquestrador `marceloclaro` coordena esse encaminhamento pelo Blackboard, enquanto o MetaBus compartilha a memória metacognitiva que orienta as decisões seguintes.",
+    "steps": 1,
+    "routing": {
+      "status": "ready",
+      "error": "",
+      "executor": "codex",
+      "available_executors": [
+        "claude",
+        "codex",
+        "antigravity"
+      ],
+      "ranking": [
+        [
+          "claude:skill:third_party:dispatching-parallel-agents",
+          0.6610448538317805
+        ],
+        [
+          "codex:skill:third_party:dsh-archive-agent-notes",
+          0.6535362671697076
+        ],
+        [
+          "codex:skill:third_party:dsh-find-simplifications",
+          0.6165594069174812
+        ],
+        [
+          "claude:skill:third_party:code-review",
+          0.6142549027910826
+        ],
+        [
+          "codex:skill:third_party:dsh-code-review",
+          0.6139711512627586
+        ]
+      ],
+      "weights": {
+        "semantic": 0.35,
+        "capability": 0.3,
+        "maturity": 0.2,
+        "license": 0.15
+      },
+      "spec_id": "SPEC-935-R621",
+      "excluded_artifacts": {
+        "claude:command:third_party:coderabbit-review": "inert_artifact_kind",
+        "claude:command:third_party:maker-setup": "inert_artifact_kind",
+        "claude:hook:third_party:superpowers": "inert_artifact_kind",
+        "claude:command:third_party:new-sdk-app": "inert_artifact_kind",
+        "claude:command:third_party:review-pr": "inert_artifact_kind",
+        "claude:command:third_party:modernize-brief": "inert_artifact_kind",
+        "claude:command:third_party:modernize-reimagine": "inert_artifact_kind",
+        "claude:command:third_party:cancel-ralph": "inert_artifact_kind",
+        "claude:command:third_party:clean-gone": "inert_artifact_kind",
+        "claude:command:third_party:code-review": "inert_artifact_kind",
+        "claude:command:third_party:commit": "inert_artifact_kind",
+        "claude:command:third_party:commit-push-pr": "inert_artifact_kind",
+        "claude:command:third_party:configure": "inert_artifact_kind",
+        "claude:command:third_party:create-docker-mcp-tunnel": "inert_artifact_kind",
+        "claude:command:third_party:create-plugin": "inert_artifact_kind",
+        "claude:command:third_party:example-command": "inert_artifact_kind",
+        "claude:command:third_party:feature-dev": "inert_artifact_kind",
+        "claude:command:third_party:help": "inert_artifact_kind",
+        "claude:command:third_party:hookify": "inert_artifact_kind",
+        "claude:command:third_party:list": "inert_artifact_kind"
+      },
+      "excluded_count": 35,
+      "excluded_reasons": {
+        "inert_artifact_kind": 35
+      },
+      "ranked_count": 5
+    },
+    "error": "",
+    "evaluation_kind": "heuristic",
+    "final_grade": {
+      "score": 6,
+      "max_score": 7,
+      "passed": true,
+      "normalized": 0.857
+    },
+    "attempts": [
+      {
+        "success": true,
+        "output": "A atenção direciona cada tarefa aos agentes cujas especialidades são mais relevantes para o contexto, considerando sua disponibilidade e os registros de confiança. O orquestrador `marceloclaro` coordena esse encaminhamento pelo Blackboard, enquanto o MetaBus compartilha a memória metacognitiva que orienta as decisões seguintes.",
+        "error": "",
+        "ecosystem": "codex",
+        "execution_mode": "cli-read-only-windows-interop",
+        "returncode": 0,
+        "step": 1,
+        "elapsed_seconds": 16.39
+      }
+    ],
+    "fallbacks": [],
+    "runtime_execution_mode": "cli-read-only-windows-interop"
+  }
+}

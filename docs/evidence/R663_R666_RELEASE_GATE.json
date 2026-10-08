@@ -1,0 +1,211 @@
+{
+  "status": "PASS_LOCAL_SCOPE",
+  "generated_at": "2026-10-04T14:54:48.301491+00:00",
+  "specs": [
+    "specs/SPEC-935-R663-scientific-provenance-pipeline.md",
+    "specs/SPEC-935-R664-potentiality-composition.md",
+    "specs/SPEC-935-R665-evolutionary-sequencing.md",
+    "specs/SPEC-935-R666-knowledge-evolution-orchestration.md"
+  ],
+  "tests": {
+    "passed": 723,
+    "skipped": [
+      {
+        "test": "tests.test_research.TestPdf2Md::test_converte_pdf_minimo",
+        "reason": "fpdf2 indisponível"
+      }
+    ],
+    "failures": 0,
+    "suites": [
+      {
+        "path": "docs/evidence/R663_R666_REGRESSION.xml",
+        "sha256": "10b1d03c64634b4b758b3f3ba9227c4cd0a44aa5907eefe8480cc453d0b2ef40",
+        "passed": 413,
+        "skipped": 0,
+        "failures": 0
+      },
+      {
+        "path": "docs/evidence/R663_R666_EXTENDED_FINAL.xml",
+        "sha256": "7671d7ae598b095c0f51720cee3e1ceed0598fc64c3a641d712ae11995dbc273",
+        "passed": 310,
+        "skipped": 1,
+        "failures": 0
+      }
+    ]
+  },
+  "real_probe": {
+    "path": "docs/evidence/R663_R666_REAL_20261004_114400/probe.json",
+    "sha256": "5af67bc05f96e5c0034cfb8508d38e8964427095125e9bd7f09b2ebc4c84b9db",
+    "checks": {
+      "cli_completed": true,
+      "reproduction_passed": true,
+      "mcp_same_orchestrator": true,
+      "mcp_welch_completed": true,
+      "mcp_welch_reproduced": true,
+      "evidence_scope_preserved": true,
+      "manifest_hash_preserved_in_dna": true,
+      "no_external_promotion": true,
+      "external_replication_remains_gap": true,
+      "seven_scoped_capabilities_observed": true,
+      "code_unchanged_during_probe": true
+    },
+    "executed_code_hashes": {
+      "research/provenance_pipeline.py": "40abe1c827eb8313e711eb5e4dc116fbbdf092371f137ef4217c8db5061b4bb6",
+      "research/statistical_methods.py": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+      "marceloclaro/knowledge_evolution.py": "d61026db059a6bb0f853781eec110e1221296c84e2f12f4692bf73e607726efb",
+      "marceloclaro/science_cli.py": "14b6cad770fd1ce81e3a1cec725936d6c8bdf1f64ed5d32be2552a11bf77586f",
+      "marceloclaro/orchestrator.py": "4bbac55a6bffb866e3f1cc1f3eca85721b837cd4c2610eb0aaf1558df380945d",
+      "mci/metabus.py": "cc184fa4356f191d6a7f13d10eaf98e260303e27f0d59f1f17b3992f166f2592",
+      "integrations/ecosystem_mcp.py": "00c4ed0ec4dd129bf7c3834bba6789d716e8538e844495f536b50cce11ea7e3f",
+      "scanners/potentiality_scanner.py": "dbdad6bb2e26c65015cf3ac58439dd60846996a9308579151868204af2ee6e36",
+      "scanners/knowledge_composition.py": "5b6eb88068a6038ee3c52f3d36fd722e6b78e962f83583e6d766d49a758e7434",
+      "scanners/capability_dna.py": "355059071f99a557b2dc71009205e3a01dd05bb90c550e78efeb8341086a267a",
+      "scanners/evolutionary_sequencing.py": "a53873e62e930aa3fab242eee2f3f0ae9eb5eecd92901819c622f5c8cee6120c",
+      "scripts/probe_knowledge_science_real.py": "e156337e6a31a9599c8dc3230b898c338409c270a40ac0b99dc884368be246be"
+    },
+    "artifact_hashes": {
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/dataset.csv": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/configuration.json": "c5450083d6fd73ec31d837b9fbf5ed37eba79e8efaff5cbede5d795820161ebe",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/analysis.json": "4c679924fcddce72815625fd4dde36a293efd73eaf11413f9faf8e4210341cad",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/statistical_methods.py": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/reproduce.py": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/references.json": "a5d8b5d0486a968f138c417d8302678fb8bb5fc5e4ae4c19ac7f0884428c223c",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/reference-source-1.json": "f37e90518575531f60dffde437b78cf958a822851ed388ca0a8883dfa9366ab9",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/reference-source-2.json": "48abda99220de311de7e589667910f99640cf9527ff1fb9441e6e150381a31e4",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/reproduction.json": "bf6c8037851207235f5e96b65fc73446b3a2ec86787f42249f25d7310e5ad55a",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/computational-review.json": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/rag-corpus.json": "4542ee9b3a80d1ac0a2e3e5ae5680e035ddce0f52f24a0a306225798c0d36084",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/rag-query.json": "c33a33377da4d256b77752b0b83a44d9c1aadf5252b40291652c34b3b3cdf122",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/article.md": "fa0af2b2d50fde716a9fb78f60ab7ff61585c29775ed93f29ef26b1fb4c4b1c4",
+      "docs/evidence/R663_R666_REAL_20261004_114400/research/manifest.json": "8b089a634e04d0bf87237aae6856b5429533f0a98f59ab0316b6372c7bc84aa2",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/dataset.csv": "8e6de96d86fbfe22f4fd00bea58e5f159fcb222bfb22e2a52721b68c7a5bbc62",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/configuration.json": "ccd07c0fa21d7ce2ab6c4ba7aa7953944831e017fad936c40946d36bf7b212c7",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/analysis.json": "645a86d76e43fafd608a74c87bc388204c582db30111278948cac25e8dce2453",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/statistical_methods.py": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/reproduce.py": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/references.json": "a5d8b5d0486a968f138c417d8302678fb8bb5fc5e4ae4c19ac7f0884428c223c",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/reference-source-1.json": "f37e90518575531f60dffde437b78cf958a822851ed388ca0a8883dfa9366ab9",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/reference-source-2.json": "48abda99220de311de7e589667910f99640cf9527ff1fb9441e6e150381a31e4",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/reproduction.json": "6eebacd6e12f4bab7dc227362547cd5fa9db1bad50dd745a78028fcd460ef4fc",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/computational-review.json": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/rag-corpus.json": "4542ee9b3a80d1ac0a2e3e5ae5680e035ddce0f52f24a0a306225798c0d36084",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/rag-query.json": "f8b528669c66e62b31c949c906e8140cb299bf07aec54d7da8ade1f36b06309b",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/article.md": "826c491e5feb21b6b2cd460fe4a103bb32df812d8c361c17ea75fe69e9e55b7b",
+      "docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/manifest.json": "4fad4b3cf57c12065acd82b7c6ac73aef76f2acbefe615409bb93657b7db3de6"
+    }
+  },
+  "mutations": {
+    "path": "docs/evidence/R663_R666_MUTATIONS.json",
+    "sha256": "29a37adbec139652b05ad7327738fc49915fcec44a67075d9fb1b3137b92d435",
+    "detected": 4
+  },
+  "doctor": {
+    "path": "docs/evidence/R663_R666_DOCTOR.json",
+    "sha256": "9885d24a7647f16fecf5c0c0aa4d49478f7d862ebebea652356a30fe8ff6bc39",
+    "passed": 18,
+    "warned": 2,
+    "failed": 0
+  },
+  "evolution_cycles": [
+    {
+      "round_id": "R663",
+      "created": true,
+      "audited": false,
+      "score": null
+    },
+    {
+      "round_id": "R664",
+      "created": true,
+      "audited": false,
+      "score": null
+    },
+    {
+      "round_id": "R665",
+      "created": true,
+      "audited": false,
+      "score": null
+    },
+    {
+      "round_id": "R666",
+      "created": true,
+      "audited": false,
+      "score": null
+    }
+  ],
+  "final_snapshot_hashes": {
+    "agentic_science_v2/deep_research.py": "700cfc8ddeef9087682ed5a3d3c7aa7fa9b4a6cb6bd91f5c39ef9d046346505f",
+    "docs/CONHECIMENTO_CIENTIFICO_R663_R666.md": "b91037c99d4eac15993971a07efd42872fadee6ac84dd1ccbddb771fe24f58b3",
+    "gametheory/phd_auditor.py": "0eb0330c1b47bae9c871ae0c5e773e82faaf776496f1251e8ef9bbd2d1e35f87",
+    "integrations/ecosystem_mcp.py": "00c4ed0ec4dd129bf7c3834bba6789d716e8538e844495f536b50cce11ea7e3f",
+    "integrations/opencode_cli.py": "2708c44289575025b6af36b2fc7b98c55852f136e1cd7ad75ed637b67678719b",
+    "marceloclaro/cli.py": "aea81abfb2e7944192f2ece9ea9c6d5aeb0ab62da83fe0499496d5262aff5d87",
+    "marceloclaro/doctor.py": "74a460ccff84cc2f0ffc4000c56c660892077868e086e1cf566ee83d83123fc7",
+    "marceloclaro/knowledge_evolution.py": "d61026db059a6bb0f853781eec110e1221296c84e2f12f4692bf73e607726efb",
+    "marceloclaro/orchestrator.py": "4bbac55a6bffb866e3f1cc1f3eca85721b837cd4c2610eb0aaf1558df380945d",
+    "marceloclaro/science_cli.py": "14b6cad770fd1ce81e3a1cec725936d6c8bdf1f64ed5d32be2552a11bf77586f",
+    "mci/metabus.py": "cc184fa4356f191d6a7f13d10eaf98e260303e27f0d59f1f17b3992f166f2592",
+    "mci/pipeline/scientific_governance_pipeline.py": "c97d1d36cb4f8964c6a9512bb0a21cdc3fc542a00d3649e8730b4618be430119",
+    "opencode.json": "c007102254d4c59802d05434225f6c9429b5c789429190a260653a425e0a7b82",
+    "research/hub.py": "b07e7e3a6173359d6eac768d665d28b1f41027403e29d7d70d30eb3ff221e5a5",
+    "research/provenance_pipeline.py": "40abe1c827eb8313e711eb5e4dc116fbbdf092371f137ef4217c8db5061b4bb6",
+    "research/statistical_methods.py": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+    "scanners/capability_dna.py": "355059071f99a557b2dc71009205e3a01dd05bb90c550e78efeb8341086a267a",
+    "scanners/evolutionary_sequencing.py": "a53873e62e930aa3fab242eee2f3f0ae9eb5eecd92901819c622f5c8cee6120c",
+    "scanners/knowledge_composition.py": "5b6eb88068a6038ee3c52f3d36fd722e6b78e962f83583e6d766d49a758e7434",
+    "scanners/potentiality_scanner.py": "dbdad6bb2e26c65015cf3ac58439dd60846996a9308579151868204af2ee6e36",
+    "scanners/trajectory_mapper.py": "16752a3ed7dfe0c3ead5864e7a795ae2c056ae47e8661b1bd33765498a4a9352",
+    "scripts/finalize_knowledge_gate.py": "6c5024f585eaaa47ce71b942ead3d6ff7525d667fa8effa24f1246f553f1042b",
+    "scripts/probe_knowledge_mutations.py": "a5f8393189e76b5b6bac23a15e83d3a566e9a821e5b52e17da2074eb7edbc7f8",
+    "scripts/probe_knowledge_science_real.py": "e156337e6a31a9599c8dc3230b898c338409c270a40ac0b99dc884368be246be",
+    "skills/tooling/data_knowledge_hub/datasets.py": "d4d80a4556734ef50f99d38dde5ea7177a9399152c2497d271a30627de1e4e10",
+    "specs/SPEC-935-R663-scientific-provenance-pipeline.md": "7a86d710f7a2f3ca123f54b1f23de487fa030cdeb64706fd148a43753deb164b",
+    "specs/SPEC-935-R664-potentiality-composition.md": "bc74aa876466367a044079886b43f583d2999e3b3e09bd4b4e612b1d76db0bfd",
+    "specs/SPEC-935-R665-evolutionary-sequencing.md": "62ba1f9f15c3a21175a179e0935ad0cc2d9aa5d91807eb7e00f769c69101ec52",
+    "specs/SPEC-935-R666-knowledge-evolution-orchestration.md": "dcf4c692c4b9901e346f08d2b26d9011256112f21b0ec0cc47c4ffd8b9d8df9e",
+    "tests/test_metabus_legal_refinement.py": "fd8e9cbf5d4e30b395e67c15bb16f814b485eafa0fa669c0ceb9f7cacafd9b75",
+    "tests/test_metabus_transversal_sync.py": "9c28ddddabcb9d195e0039c98596166e8284322fd343944017d4bd99cf52b2f7",
+    "tests/test_mirofish_gametheory_publishing.py": "4df30f3b572395bdbeff320bfa41ce53c5f5ed875aab5604180c9e2c50a17e54",
+    "tests/test_r101_agentic_science_v2.py": "a9e0a64f2ada44fc89eeb9ac676b8d14e1acf2d7fb9b531ca41675b7e9368e7b",
+    "tests/test_r102_deep_research.py": "65516add56a958032b93b6176ee2246fc2580cc421d3f885aab17b21bb9e13bc",
+    "tests/test_r103_peer_review.py": "417e58f4bac5b043d7197fff4fd53a0942c949b9576fdd978b7089a308605c6c",
+    "tests/test_r108_marceloclaro_scientific_fusion.py": "34d0ca313a093eca44b6eb05b0a8c55b952b2468661ae127b71e7f2ba7a40d2a",
+    "tests/test_r109_loop_engineering.py": "ab08a4ab35f63384004d3ad825236b4c35a10a2137395c8275e97c2e55af022f",
+    "tests/test_r222_research_hub_integration.py": "9b57307fe1933fafff0cd6f6c92349af60126aa0d7911ab999b1362fa71a74d8",
+    "tests/test_r381_manuscript_rigor_gate_integration.py": "42d0aa7172a81983a2e0ccc1fe2c91f68cfaea865d25fa0046c4ccc0cb06fd20",
+    "tests/test_r394_opencode_cli_commands_real_execution.py": "4861a0f0d7d3e037d48397f968ac4a0d6372f1ff4a1f2d7e126f084cd5c3a977",
+    "tests/test_r483_reverse_scanner.py": "c76a3b0ce196a827b1378833143f39fbf172b44011bf21bd6acd3451a1f1d007",
+    "tests/test_r485_trajectory_mapper.py": "fcd145525f776e87fd08be3c991e9b6c6d6feedbfdf5a6b94d04c83ecbdf7df9",
+    "tests/test_r486_polymathic_convergence.py": "71c4caff1f4986deeb57e3ea1f99db3cbea5e6f41a6c3a6e1b8925a6dcf64f20",
+    "tests/test_r490_knowledge_composition.py": "ee2a010ba0b29972ad04f4158f24597084ec7c7db858c823c793ffd3605d0c3b",
+    "tests/test_r491_potentiality_scanner.py": "3cd79a88c4e9ab117bbce3c350935ce6d056cae7088fb909dd97d56d5d6f5da4",
+    "tests/test_r492_successor_generator.py": "78386a2ea141331d6865bc4553127fbed3bb50f984bb3b263357ff898ee189fc",
+    "tests/test_r493_inertia_analyzer.py": "bfd3ed6994eef244e68afdcb4872ec3890762dadbf81a94a8c881f8c1bfce3d4",
+    "tests/test_r496_pipeline_integration.py": "cf8ee2162944d09b3bc6daeed82188b98ffd5f54cd375653b6660324ceef81e9",
+    "tests/test_r55_data_knowledge_hub_research_integration.py": "25ac8a61411bddbcf37f5109e81861a2c8032acaa9f41e0f87d7346128fabdae",
+    "tests/test_r640_ecosystem_surface.py": "dfb87f91438171d27020b96bde75740cba0f47aaf15ce01430ab6071343ec591",
+    "tests/test_r644_network_surface.py": "21c2ca4d5210a37d7a42709693a2e3967ddec105e04914c6dbe40f4da780f25e",
+    "tests/test_r659_sdk_hooks_contract.py": "afb96ab0e60767b6fccb40f7870d57034498f78efa4790006526edf24db720a8",
+    "tests/test_r660_mcp_validation.py": "7c12834d37c3237e48036291756a0da0895413aa1a5d2e2d76c642c9b5f030d6",
+    "tests/test_r661_artifact_integration.py": "652e09fec5d3072427bd0cdd14a9c14b9ab7bf56cf22f2dfb09612e899661288",
+    "tests/test_r662_integration_surface.py": "2ea05ac32ae6fbb7caa08563a51eb135c4b90f2f7401a804861e57ab7edb769a",
+    "tests/test_r663_scientific_provenance.py": "1af42b169ebe67ddc3ed54f6bb1a8b5af17a3ac595e405bf4aea520295f1a79f",
+    "tests/test_r664_potentiality_composition.py": "c30bcc60ec5fc162dcd4983bdc2aa09bdaae51d645143227b58de324ca28cefc",
+    "tests/test_r665_evolutionary_sequencing.py": "e6bd871fd7ee04852aff521f6eff4fac3123b0f05ae3762754bede27c7d4d053",
+    "tests/test_r666_knowledge_orchestration.py": "ecbb42468f543ab602c0f4fca2fcd732288defbfeeecf5b2ed27cf05da795396",
+    "tests/test_research.py": "32d8c0e5f04a7812415292157661e99fabf6035a3d9f33ee8eb3327cea2cb8d2",
+    "tests/test_scientific_governance_contracts.py": "83d9def6453e19bbf4df72eb3ffe2fb07d3b3ef95e3500177d2491e6da982c50",
+    "tests/test_scientific_governance_pipeline.py": "759d85c9e20268e60a9b7db479d0a39fe232fd41abffe2dcd4bf6202c1355709",
+    "tests/test_scientific_reporter_hardening.py": "6f188eed71473d2d08bfe8aed8646660bd2a270a45b8f54e73c4f05aea1fc10f"
+  },
+  "external_validation": false,
+  "human_peer_review": false,
+  "independent_replication": false,
+  "model_inference_executed": false,
+  "limitations": [
+    "Aprovação de contratos locais; não certifica ciência universal.",
+    "Potenciais e roadmaps são hipóteses/estimativas condicionais.",
+    "RAG de metadados; não comprova leitura integral dos artigos.",
+    "MiroFish/OASIS externo e transporte Hermes não executados nesta prova.",
+    "Artigos e código foram gerados; livro completo não foi gerado."
+  ]
+}

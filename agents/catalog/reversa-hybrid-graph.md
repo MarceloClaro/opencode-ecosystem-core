@@ -28,7 +28,7 @@ skills:
   tags: [busca, híbrida, grafo, conhecimento]
   examples: [Aplique busca hibrida grafo conhecimento neste contexto, Avalie usando busca hibrida grafo conhecimento]
 - id: oferece-estrategias-complementares
-  name: Oferece 3 estratégias complementares: insightforge (análise profunda),
+  name: "Oferece 3 estratégias complementares: insightforge (análise profunda),"
   description: >-
     Capacidade especializada em oferece 3 estratégias complementares: insightforge (análise profunda),
     panoramas.
@@ -40,7 +40,7 @@ skills:
   tags: [inspirado, pelo, graphtoolsservice, mirofish-offline]
   examples: [Aplique inspirado pelo graphtoolsservice mirofish neste contexto, Avalie usando inspirado pelo graphtoolsservice mirofish]
 - id: use-busca-graph-grafo
-  name: Use via: "busca", "graph", "grafo", "pesquisa", "insight", "panorama",
+  name: "Use via: 'busca', 'graph', 'grafo', 'pesquisa', 'insight', 'panorama',"
   description: >-
     Capacidade especializada em use via: "busca", "graph", "grafo", "pesquisa", "insight", "panorama",
     "quick", .

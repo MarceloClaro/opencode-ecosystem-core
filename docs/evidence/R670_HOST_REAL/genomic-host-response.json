@@ -1,0 +1,197 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"task\": \"promoter\",\n  \"default_model\": \"g0-promoter-2000bp\",\n  \"models\": [\n    {\n      \"id\": \"g0-promoter-2000bp\",\n      \"name\": \"G0 Large Promoter (2000bp)\",\n      \"description\": \"G0 Large Promoter (2000bp)\",\n      \"is_default\": true,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"human\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"Human promoter sequences from EPDnew database\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-large-300bp\",\n      \"name\": \"G0 Large Promoter (300bp)\",\n      \"description\": \"G0 Large Promoter (300bp)\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 300,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"human\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"Human promoter sequences (300bp windows)\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-base-300bp\",\n      \"name\": \"G0 Base Promoter (300bp, fast)\",\n      \"description\": \"G0 Base Promoter (300bp, fast)\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 300,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"human\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"Human promoter sequences (300bp windows)\"\n      }\n    },\n    {\n      \"id\": \"dnabert-promoter-2000bp\",\n      \"name\": \"DNABERT Promoter (2000bp, 6-mer)\",\n      \"description\": \"DNABERT Promoter (2000bp, 6-mer)\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"k-mer\",\n        \"kmer_k\": 6,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"human\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"Human promoter sequences\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-drosophila\",\n      \"name\": \"G0 Drosophila Promoter\",\n      \"description\": \"G0 Drosophila Promoter\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"drosophila\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"D. melanogaster promoter sequences\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-yeast\",\n      \"name\": \"G0 Yeast Promoter\",\n      \"description\": \"G0 Yeast Promoter\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"yeast\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"S. cerevisiae promoter sequences\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-arabidopsis\",\n      \"name\": \"G0 Arabidopsis Promoter\",\n      \"description\": \"G0 Arabidopsis Promoter\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"arabidopsis\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"A. thaliana promoter sequences\"\n      }\n    }\n  ]\n}"
+    }
+  ],
+  "structuredContent": {
+    "task": "promoter",
+    "default_model": "g0-promoter-2000bp",
+    "models": [
+      {
+        "id": "g0-promoter-2000bp",
+        "name": "G0 Large Promoter (2000bp)",
+        "description": "G0 Large Promoter (2000bp)",
+        "is_default": true,
+        "bio_spec": {
+          "sequence_type": "DNA",
+          "tokenization": "BPE",
+          "kmer_k": null,
+          "max_tokens": 512,
+          "request_max_bp": 500000,
+          "context_window_bp": 2000,
+          "trained_window_bp": null,
+          "recommended_flank_bp": null,
+          "organism": "human",
+          "capabilities": [
+            "classification"
+          ],
+          "output_formats": [
+            "probabilities",
+            "BED",
+            "bedgraph"
+          ],
+          "training_data": "Human promoter sequences from EPDnew database"
+        }
+      },
+      {
+        "id": "g0-promoter-large-300bp",
+        "name": "G0 Large Promoter (300bp)",
+        "description": "G0 Large Promoter (300bp)",
+        "is_default": false,
+        "bio_spec": {
+          "sequence_type": "DNA",
+          "tokenization": "BPE",
+          "kmer_k": null,
+          "max_tokens": 512,
+          "request_max_bp": 500000,
+          "context_window_bp": 300,
+          "trained_window_bp": null,
+          "recommended_flank_bp": null,
+          "organism": "human",
+          "capabilities": [
+            "classification"
+          ],
+          "output_formats": [
+            "probabilities",
+            "BED",
+            "bedgraph"
+          ],
+          "training_data": "Human promoter sequences (300bp windows)"
+        }
+      },
+      {
+        "id": "g0-promoter-base-300bp",
+        "name": "G0 Base Promoter (300bp, fast)",
+        "description": "G0 Base Promoter (300bp, fast)",
+        "is_default": false,
+        "bio_spec": {
+          "sequence_type": "DNA",
+          "tokenization": "BPE",
+          "kmer_k": null,
+          "max_tokens": 512,
+          "request_max_bp": 500000,
+          "context_window_bp": 300,
+          "trained_window_bp": null,
+          "recommended_flank_bp": null,
+          "organism": "human",
+          "capabilities": [
+            "classification"
+          ],
+          "output_formats": [
+            "probabilities",
+            "BED",
+            "bedgraph"
+          ],
+          "training_data": "Human promoter sequences (300bp windows)"
+        }
+      },
+      {
+        "id": "dnabert-promoter-2000bp",
+        "name": "DNABERT Promoter (2000bp, 6-mer)",
+        "description": "DNABERT Promoter (2000bp, 6-mer)",
+        "is_default": false,
+        "bio_spec": {
+          "sequence_type": "DNA",
+          "tokenization": "k-mer",
+          "kmer_k": 6,
+          "max_tokens": 512,
+          "request_max_bp": 500000,
+          "context_window_bp": 2000,
+          "trained_window_bp": null,
+          "recommended_flank_bp": null,
+          "organism": "human",
+          "capabilities": [
+            "classification"
+          ],
+          "output_formats": [
+            "probabilities",
+            "BED",
+            "bedgraph"
+          ],
+          "training_data": "Human promoter sequences"
+        }
+      },
+      {
+        "id": "g0-promoter-drosophila",
+        "name": "G0 Drosophila Promoter",
+        "description": "G0 Drosophila Promoter",
+        "is_default": false,
+        "bio_spec": {
+          "sequence_type": "DNA",
+          "tokenization": "BPE",
+          "kmer_k": null,
+          "max_tokens": 512,
+          "request_max_bp": 500000,
+          "context_window_bp": 2000,
+          "trained_window_bp": null,
+          "recommended_flank_bp": null,
+          "organism": "drosophila",
+          "capabilities": [
+            "classification"
+          ],
+          "output_formats": [
+            "probabilities",
+            "BED",
+            "bedgraph"
+          ],
+          "training_data": "D. melanogaster promoter sequences"
+        }
+      },
+      {
+        "id": "g0-promoter-yeast",
+        "name": "G0 Yeast Promoter",
+        "description": "G0 Yeast Promoter",
+        "is_default": false,
+        "bio_spec": {
+          "sequence_type": "DNA",
+          "tokenization": "BPE",
+          "kmer_k": null,
+          "max_tokens": 512,
+          "request_max_bp": 500000,
+          "context_window_bp": 2000,
+          "trained_window_bp": null,
+          "recommended_flank_bp": null,
+          "organism": "yeast",
+          "capabilities": [
+            "classification"
+          ],
+          "output_formats": [
+            "probabilities",
+            "BED",
+            "bedgraph"
+          ],
+          "training_data": "S. cerevisiae promoter sequences"
+        }
+      },
+      {
+        "id": "g0-promoter-arabidopsis",
+        "name": "G0 Arabidopsis Promoter",
+        "description": "G0 Arabidopsis Promoter",
+        "is_default": false,
+        "bio_spec": {
+          "sequence_type": "DNA",
+          "tokenization": "BPE",
+          "kmer_k": null,
+          "max_tokens": 512,
+          "request_max_bp": 500000,
+          "context_window_bp": 2000,
+          "trained_window_bp": null,
+          "recommended_flank_bp": null,
+          "organism": "arabidopsis",
+          "capabilities": [
+            "classification"
+          ],
+          "output_formats": [
+            "probabilities",
+            "BED",
+            "bedgraph"
+          ],
+          "training_data": "A. thaliana promoter sequences"
+        }
+      }
+    ]
+  },
+  "isError": false
+}

@@ -1,0 +1,357 @@
+% ============================================================
+%  MÓDULO 07 — Integrações: MCP, executores e repositórios de
+%  referência usados na construção do Core. Parte VI.
+% ============================================================
+\chapter{Integrações, MCPs e Referências da Construção}
+
+\roteirodidatico
+{Um sistema isolado não acessa automaticamente arquivos, serviços ou programas externos. Uma integração define a fronteira pela qual esses recursos podem ser solicitados.}
+{\emph{Cliente} inicia a comunicação; \emph{servidor} oferece operações; \emph{protocolo} define mensagens; \emph{credencial} autoriza acesso; \emph{executor externo} é um programa independente.}
+{Para cada integração, identifique o cliente, o servidor, o transporte, a operação chamada, os dados trocados e a resposta. Depois acompanhe falhas e requisitos de autenticação.}
+{Compatibilidade declarada não equivale a conexão testada. Avalie disponibilidade, permissões, tratamento de erros, exposição de dados e limites de serviços de terceiros.}
+{Qual chamada concreta atravessa a fronteira, que permissão permite a operação e qual registro demonstra seu resultado?}
+
+\casoguiado{consulta a um servidor de ferramentas}
+{Um cliente envia a um servidor compatível uma solicitação para listar recursos. Para compreendê-la, identifique o método anunciado, seus parâmetros, o transporte usado e o formato da resposta. Se o serviço estiver apenas no arquivo de configuração, ainda falta confirmar que iniciou e respondeu. A fronteira externa também exige avaliar autenticação, dados enviados e o comportamento quando a conexão falha.}
+
+\section{A camada de integração em perspectiva}
+
+\elemento{Integrar sem delegar responsabilidade}{\metainfo{ID}{I-00} \hfill \metainfo{Camada}{6 deste manual} \hfill \metainfo{Regra}{fail-closed + anti-overclaim}}
+
+\begin{descricao}
+A integração conecta o Core ao mundo: 7 servidores MCP, executores externos
+(Gemini, Reasonix, Plandex, Goose, Haystack, MiroFish via proxy e NotebookLM via
+ponte) e dezenas de repositórios que inspiram padrões. A regra transversal é
+\emph{fail-closed}: se o serviço não está disponível ou não valida, o pedido falha
+com clareza — nunca degrada silenciosamente para ``sucesso''.
+\end{descricao}
+
+\clearpage
+\section{Os sete servidores MCP}
+
+\elemento{Inventário verificado dos MCPs}{\metainfo{Fonte}{opencode.json (chave mcp)} \hfill \metainfo{Total}{7}}
+
+\begin{resultado}
+Servidores MCP configurados (ordem do arquivo de configuração):\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+MCP & Papel \\
+\midrule
+\pth{litert-lm} & modelos on-device (Gemma 4 / Qwen3) por LiteRT-LM \\
+\pth{metacognitive-interconnect} & Blackboard, MetaBus, memória (Parte II) \\
+\pth{antigravity-bridge} & delegação ao Antigravity (Google DeepMind): browser,
+pesquisa, imagem, subagentes \\
+\pth{pypi-search} & busca e recomendação de pacotes Python no PyPI \\
+\pth{colibri-mcp} & geração local via Colibri OLMoE (1B/7B) \\
+\pth{scanners-mcp} & auditores (escrita, pesquisa literária, rigor científico,
+Merkle) \\
+\pth{web-deploy-mcp} & sonda/verificação de deploys no GitHub Pages \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+Como um MCP se apoia no ciclo:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item o servidor anuncia as ferramentas disponíveis e seus parâmetros;
+  \item o orquestrador chama a ferramenta no contexto do tópico em curso;
+  \item a resposta entra como \emph{evidência} no ciclo SDD da Parte III;
+  \item nenhuma ferramenta substitui os gates de qualidade.
+\end{enumerate}
+\end{metodo}
+
+\begin{flowch}[Fluxo genérico de uma chamada MCP]{orquestrador $\to$ servidor $\to$ evidência}
+\matrix[matrix of nodes,name=mcp,row sep=5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|tarefa demanda recurso externo \\[2mm]
+ |[fns]|chamada de ferramenta MCP \\[2mm]
+ |[fns]|servidor executa / fornece \\[2mm]
+ |[fns]|resultado entra como evidência \\[2mm]
+ |[fns]|gate SDD avalia \\[2mm]
+ |[fns]|conclui ou revisa \\ \\
+};
+\draw[seta] (mcp-1-1)--(mcp-2-1);
+\draw[seta] (mcp-2-1)--(mcp-3-1);
+\draw[seta] (mcp-3-1)--(mcp-4-1);
+\draw[seta] (mcp-4-1)--(mcp-5-1);
+\draw[seta] (mcp-5-1)--(mcp-6-1);
+\draw[seta,plumAccent,dashed] (mcp-5-1.west) to[out=180,in=180,looseness=1.4]
+  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{recusa}
+  (mcp-2-1.west);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho tem quatro nós --- \emph{Requisição}, \emph{Transporte}, \emph{Ferramenta}, \emph{Resposta} --- e a seta da requisição para o transporte é assíncrona, o que o desenho indica com estilo distinto. A assimetria relevante: a \emph{resposta} volta por um caminho que não é o inverso do caminho de ida, porque pode ser \textbf{truncada} ou \textbf{negada}, e o cliente precisa tratar os três casos como estados distintos.
+\textbf{Justificativa.} A separação entre protocolo e implementação responde ao problema da complexidade acidental discutido por Brooks: sem uma fronteira clara, o trabalho tende a se deslocar para a camada errada. Ao explicitar essa fronteira, a integração reduz dependências específicas de ferramentas e passa a depender do contrato declarado \citref{BROOKS, F. P. No silver bullet: essence and accidents of software engineering. \emph{Computer}, v.~20, n.~4, p.~10-19, 1987}{10.1109/MC.1987.1663532}{A separação entre protocolo e implementação responde ao problema da complexidade acidental discutido por Brooks: sem uma fronteira clara, o trabalho tende a se deslocar para a camada errada. Ao explicitar essa fronteira, a integração reduz dependências específicas de ferramentas e passa a depender do contrato declarado.}{There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity}{Não há um único desenvolvimento, seja em tecnologia ou técnica de gestão, que por si só prometa uma melhoria de uma ordem de magnitude em produtividade, confiabilidade e simplicidade dentro de uma década.}{BROOKS, 1987, p.~10--19}.
+\end{descricao}
+
+\begin{niveis}
+\textbf{Intuição:} tomadas padrão na parede: qualquer aparelho que siga o padrão
+conecta.\\
+\textbf{Implementação:} protocolo MCP (message-oriented) padroniza ferramentas entre CLI,
+skills e plugins.\\
+\textbf{Formalização:} \emph{protocolo agnóstico de ferramenta} permite acoplamento tardio
+(\textit{plugin architecture}) sem entrega de responsabilidade de qualidade.
+\end{niveis}
+
+\clearpage
+\section{Servidores MCP nativos}
+
+\elemento{O Core como fornecedor de MCP}{\metainfo{Rota}{.opencode/mcp/}}
+
+\begin{resultado}
+O próprio Core mantém servidores MCP implementados no repositório:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Servidor & Papel \\
+\midrule
+\pth{litert_lm_server.py} & expõe geração/status dos modelos \\
+LiteRT-LM on-device \\
+\pth{web_deploy_server.py} & sondagem e verificação de sites \\
+estáticos no GitHub Pages \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{arquitetura}
+Esses servidores são os braços protocolados das capacidades nativas: o primeiro
+fala com o runtime local de modelos; o segundo, com o fluxo de publicação
+(checagem de build, 404 e peso do site — ver Parte VIII).
+\end{arquitetura}
+
+\clearpage
+\section{Executores externos orquestráveis}
+
+\elemento{Delegar computação, reter o juízo}{\metainfo{Rota}{skills/} \hfill \metainfo{Regra}{resultado externo = evidência}}
+
+\begin{resultado}
+Executores externos integrados por skill/composição:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lYY}
+\toprule
+Executor & Identidade & Autenticação \\
+\midrule
+Gemini CLI & Google, headless \pth{GEMINI_API_KEY} ou Vertex \\
+Reasonix & DeepSeek-Reasonix (MIT) & \pth{DEEPSEEK_API_KEY} \\
+Plandex & plandex-ai/plandex (MIT) & própria / local \\
+Goose & aaif-goose (Apache-2.0) & própria \\
+Haystack & deepset-ai/haystack (Apache-2.0) & sem chave p/ RAG mínimo \\
+NotebookLM & ponte via nlm + navegador & sessão do usuário \\
+MiroFish & proxy HTTP para backend AGPL & serviço local \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{aviso}
+Executores externos nunca se tornam ``verificados'' por existir integração: a
+política anti-overclaim (Parte III) vale por igual — o orquestrador continua dono
+do ciclo SDD/TDD e prova local não é chancela externa.
+\end{aviso}
+
+\begin{limite}
+Integrações como a ponte do NotebookLM usam interfaces privadas não documentadas e
+Podem quais: a integração deve ser tratada como \emph{frágil} — e o fail-closed
+continua valendo.
+\end{limite}
+
+\clearpage
+\section{Repositórios e inspirações da construção}
+
+\elemento{Atribuições verificadas na base do Core}{\metainfo{Fonte}{specs/} \hfill \metainfo{Regra}{inspiração sem cópia}}
+
+\begin{descricao}
+Este manual registra, em formato ABNT-NBR 6023, os repositórios que a base do Core
+atribui como \emph{referência, inspiração ou integração}. A nota de governança é
+constante: com exceção dos integrados por composição declarada (ex.: Haystack),
+não há cópia de código — apenas padrões, contratos de dados e contratos de serviço
+adaptados ao ecossistema.
+\end{descricao}
+
+\begin{resultado}
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Repositório & Papel na construção \\
+\midrule
+github.com/MarceloClaro/MiroFish & inspiração do enxame preditivo (SPEC-015) \\
+github.com/MarceloClaro/MiroFish-Offline & serviço externo de simulação OASIS,
+AGPL-3.0 (SPEC-976) \\
+github.com/nikmcfly/MiroFish-Offline & fork-fonte do serviço offline (Neo4j +
+Ollama) \\
+github.com/sipyourdrink-ltd/bernstein & integração auditada de orquestração
+(Apache-2.0) \\
+github.com/microsoft/apm & padrão de empacotamento de agentes (R440) \\
+github.com/deepset-ai/haystack & framework RAG integrado (Apache-2.0, R604) \\
+github.com/langchain-ai/open-swe & padrão de fábrica de software (MIT, R471) \\
+github.com/anomalyco/opencode & a CLI que hospeda o ecossistema \\
+github.com/sst/opencode & API de plugin (tipos ProviderHook) \\
+github.com/timpara/opencode-academic-research & formato de SKILL.md acadêmico \\
+github.com/MarceloClaro/500-AI-Agents-Projects & base de catálogo (R482) \\
+github.com/MarceloClaro/agent-eval e afins & harnesses de avaliação (R217) \\
+arXiv:2506.01056 (MCP-Zero) e 2508.14704 (MCP-Universe) & bases de descoberta de
+MCPs \\
+github.com/lucas-cirilo/abnt2025-latex & template ABNT LaTeX (SPEC-916) \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{flowch}[Da inspiração ao Core]{origem, adaptação e validação}
+\matrix[matrix of nodes,name=rfo,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|repositório externo (fonte) \\[2mm]
+ |[fns]|kit insumo: padrão/contrato/dado \\[2mm]
+ |[fns]|adaptação ao Core (sem cópia) \\[2mm]
+ |[fns]|spec + testes SDD/TDD \\[2mm]
+ |[fns]|integração ativa ou inspiração \\
+};
+\draw[seta] (rfo-1-1)--(rfo-2-1);
+\draw[seta] (rfo-2-1)--(rfo-3-1);
+\draw[seta] (rfo-3-1)--(rfo-4-1);
+\draw[seta] (rfo-4-1)--(rfo-5-1);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho mostra \emph{observação} $\to$ \emph{especificação} $\to$ \emph{implementação} $\to$ \emph{medição}, e o detalhe é que a seta de retorno da medição aponta para a \emph{observação}, não para a implementação. É um ciclo de \textbf{calibração}: a medição não corrige o código, corrige a percepção do que era problema. Por isso a seta de retorno é mais longa que as outras.
+\textbf{Justificativa.} Um trabalho só é reprodutível se o procedimento inteiro é repetível, não se o resultado é repetível. Aplicado a integração, isso significa que adotar uma ferramenta externa sem medir o efeito sobre o sistema é \textbf{trabalho não reprodutível}: na segunda execução, com a ferramenta presente, o resultado muda, e ninguém sabe dizer por quê. A seta de retorno para a observação é o registro dessa mudança \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{Um trabalho só é reprodutível se o procedimento inteiro é repetível, não se o resultado é repetível. Aplicado a integração, isso significa que adotar uma ferramenta externa sem medir o efeito sobre o sistema é \textbf{trabalho não reprodutível}: na segunda execução, com a ferramenta presente, o resultado muda, e ninguém sabe dizer por quê. A seta de retorno para a observação é o registro dessa mudança.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}.
+\end{descricao}
+
+\begin{aviso}
+Atribuir inspiração não equivale a endosse nem a meia-verdade de licença: as
+licenças citadas são \emph{as do repositório-fonte}; a licença do Core permanece a
+do próprio projeto e toda extração de código externo deve passar por auditoria de
+licença antes de entrar no repositório.
+\end{aviso}
+
+\clearpage
+\section{Limites da camada de integração}
+
+\begin{limite}
+Resumo dos limites declarados:
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item MCP expõe ferramenta; não cria mérito científico;
+  \item executor externo é evidente da geração, não chancela de qualidade;
+  \item ponte com interfaces privadas pode quebrar sem aviso;
+  \item simulação externa (MiroFish OASIS) depende de chaves e ambiente
+        (LLM/Zep; camel-oasis exige Python $<$ 3.12) — limite transparente;
+  \item sem serviço disponível, tudo falha com clareza (fail-closed).
+\end{itemize}
+\end{limite}
+
+\section{Conclusão do módulo}
+
+\begin{resultado}
+A integração é a camada rápida do Core: alarga o alcance (ferramentas, modelos,
+serviços e referências) sem largar o rigor. Como o restante do manual repete, a
+pergunta-guia nunca é ``podemos chamar?'' e sim ``o que a chamada prova, e quem
+valida o que ela prova?''.
+\end{resultado}
+
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) 7 servidores MCP e 15 skills
+orquestráveis; (2) executores externos (Gemini, Goose, Plandex, Reasonix,
+Haystack, NotebookLM) têm política própria de invocação e credencial;
+(3) execução com chave exige instrução explícita do operador.
+\textbf{Exercício sugerido:} liste as ferramentas MCP deste capítulo e, para
+cada uma, escreva uma frase do que ela expõe e uma limitação declarada.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-07-integracoes.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Integrações: interfaces, contratos e falhas}
+
+\elemento{Leitura guiada — Integrações}{\metainfo{ID}{N-07} \hfill \metainfo{Ciclo}{R616} \hfill \metainfo{Estilo}{portas, não atalhos}}
+
+\begin{descricao}
+\textbf{A pergunta.} Como identificar uma dependência externa e entender o que
+acontece quando ela não responde? Uma interface nomeada torna a chamada mais
+visível e permite declarar formatos de entrada, saída e erro. Neste checkout,
+\pth{opencode.json} declara \textbf{7 servidores MCP}. A configuração informa
+quais integrações foram declaradas; não demonstra que estejam instaladas,
+disponíveis ou funcionando. O capítulo examina os contratos e as respostas de
+falha documentados para cada integração.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Porta} (servidor MCP): superfície nomeada; aqui $n = 7$.
+  \item \textbf{Executor externo}: CLI de terceiro orquestrável (Gemini, Goose, Plandex, Reasonix, Haystack, NotebookLM) --- $m = 6$.
+  \item \textbf{Disponibilidade} ($s$): executores presentes $/$ executores declarados, numa máquina e num instante especificados.
+  \item \textbf{Degradação controlada}: comportamento de uma integração quando a dependência falta; precisa ser conferido em cada caminho.
+  \item \textbf{Skill orquestrável}: procedimento que encapsula a chamada e sua política de credencial.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Por que degradar em vez de quebrar?
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item Algumas integrações são opcionais para certas tarefas; outras podem ser necessárias ao caminho escolhido.
+  \item Se uma dependência necessária estiver ausente, a tarefa pode falhar mesmo que o restante do Core continue ativo.
+  \item Confira presença, versão e comportamento de erro antes da chamada; declare o limite e prossiga apenas quando houver uma alternativa válida.
+  \item A credencial é a fronteira seguinte: execução autenticada só ocorre com instrução explícita do operador.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Suponha $4$ dos $6$ executores instalados:
+\[ s = \frac{4}{6} \approx 0{,}67, \qquad 6-4=2\ \mathrm{ausentes}. \]
+Seis é o conjunto hipotético de executores considerados: quatro estão
+instalados e dois não. A fração $s$ descreve apenas esse inventário; não mede a
+disponibilidade de todo o Core. Para uma tarefa que dependa de um executor
+ausente, é preciso consultar o tratamento de erro específico e registrar se a
+execução falha, fica bloqueada ou usa uma alternativa configurada.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} O runtime conecta $7$ servidores MCP, $14$ comandos customizados e $14$ skills, e mantém $4$ executores externos opcionais. Essa é a ordem de grandeza de uma integração que ainda é auditável: uma dúzia de canais, não centenas. Cada canal adicional multiplica o custo de manutenção e de verificação, e é por isso que o número de $4$ externos --- todos dependentes de credencial do usuário --- é declarado como limite conhecido, não como detalhe de implementação. Verificação: \cod{grep -c mcp opencode.json} e a contagem de diretórios em \pth{.opencode/skills/}. O sinal de alerta é a assimetria: se o número de canais crescer muito mais rápido que o de testes de integração, a integração está sendo adicionada sem verificação.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Disponibilidade calculada descreve o \emph{ambiente},
+não a qualidade da integração: um executor presente e desatualizado ainda pode
+falhar. E a comparação com alternativas do ecossistema GitHub é de \emph{desenho},
+não medida (Módulo 9a).
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Se $5$ de $6$ estiverem disponíveis, quanto falta em
+percentual? (2) Por que ``executar sem credencial com fallback silencioso'' seria
+violação do gate?
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Integrações externas}
+\elemento{ativ-07i}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-07-integracoes.tex}}
+
+\begin{processo}
+GATILHO. ``executor externo'', ``MCP'', ``CLI''.
+ROTA. bridges tolerantes em \pth{integrations/*}; ausência do binário gera warn, não crash.
+FUNÇÃO. compor CLIs externas como executores orquestráveis e tolerantes; manter proveniência de dados.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. saúde da integração = executores disponíveis / executores declarados; cada bridge valida presença e versão antes do uso.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. a delegação entre nós com anúncio, licitação e contrato é o mecanismo de composição que as bridges implementam para executores externos. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. resultado externo nunca é verificado sem validação do Core (R110). A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação:} Uma bridge deve tratar a ferramenta externa como candidata a executar um contrato delimitado. A conta operacional separa etapas: $T_{total}=T_{anuncio}+T_{janela}+T_{selecao}+T_{execucao}+T_{validacao}$. Propostas podem chegar em paralelo; portanto, a duração da janela é determinada pelo prazo ou pela última proposta aceita, não pela soma dos tempos individuais. Registrar cada etapa permite localizar atrasos e deixa claro que uma execução rápida ainda depende da validação interna \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{p.~1104--1113 (resumo, p.~1104). é o padrão de delegação usado nas bridges: anunciar a tarefa, receber licitações e firmar contrato com o executor mais adequado — o que \pth{integrations/*} faz com gemini, goose, plandex e reasonix.}{Task distribution is affected by a negotiation process, a discussion carried on between nodes with tasks to be executed and nodes that may be able to execute those tasks}{A distribuição de tarefas é efetuada por um processo de negociação, uma discussão conduzida entre nós com tarefas a executar e nós que possam ser capazes de executar essas tarefas.}{SMITH, 1980, p.~1104}

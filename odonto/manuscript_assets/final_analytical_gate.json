@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "checks": {
+    "source": true,
+    "analysis_rows": true,
+    "analysis_events": true,
+    "analysis_children": true,
+    "event_children": true,
+    "event_fraction": true,
+    "seed": true,
+    "outer_folds": true,
+    "inner_folds": true,
+    "split_policy": true,
+    "fold_log": true,
+    "metrics": true,
+    "prevalence_reference": true,
+    "calibration_minus_uncalibrated": true,
+    "bootstrap_valid": true
+  },
+  "runtime": {
+    "python": "3.14.4",
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0"
+  },
+  "source_sha256": {
+    "source_sha256": "b7819fee81efbe2e227b7700c3cd86ce8bc6f7fe6f49da6214f4107d099184fa",
+    "reproduced_eligible": 997,
+    "reproduced_events": 84,
+    "excluded_nonpositive_followup_interval": 1,
+    "excluded_events": 1
+  },
+  "scope": "Reexecution of the same internally validated analysis; not independent clinical validation."
+}

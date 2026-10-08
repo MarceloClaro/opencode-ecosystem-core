@@ -1,0 +1,624 @@
+% ============================================================
+%  MAPA DIDÁTICO DA ARQUITETURA OBSERVÁVEL DO CHECKOUT
+%  Referências: ARCHITECTURE.md, MANUAL.md e módulos Python indicados.
+% ============================================================
+\chapter{Arquitetura de Ponta a Ponta}
+
+\roteirodidatico
+{Imagine um pedido que chega ao sistema, precisa de uma decisão, consulta uma ferramenta e retorna ao usuário. A arquitetura é o mapa que permite localizar cada responsabilidade nesse trajeto.}
+{\emph{Camada} agrupa responsabilidades; \emph{interface} define como partes trocam dados; \emph{configuração} descreve opções; \emph{runtime} é o conjunto de componentes efetivamente em execução.}
+{Use o diagrama como orientação e depois siga as referências até os módulos e arquivos. Para cada seta, procure uma chamada, evento ou interface que a sustente.}
+{Diagramas são modelos seletivos: mostram relações relevantes, mas não enumeram todas as chamadas nem garantem disponibilidade em outra máquina. Compare o modelo com o código e o estado local.}
+{Ao rastrear um pedido, onde ele entra, quem escolhe o executor, que dados atravessam cada fronteira e qual evidência confirma a saída?}
+
+\casoguiado{seguir um pedido de pesquisa}
+{Tome um pedido fictício: ``compare duas definições de memória''. Marque no diagrama a entrada, o componente que interpreta o pedido, a rota escolhida, as fontes consultadas e a composição final. Em seguida, substitua cada seta por uma evidência concreta: chamada, mensagem, arquivo ou registro. Se não encontrar essa evidência, deixe a seta como relação prevista no modelo, não como fato confirmado.}
+
+\section{Antes do diagrama: o que estamos chamando de arquitetura}
+
+\begin{descricao}
+Uma arquitetura é um mapa de partes, responsabilidades e caminhos de
+comunicação. Ela ajuda a responder perguntas práticas: por onde uma solicitação
+entra? Quem decide qual componente deve tratá-la? Onde ficam as instruções? Como
+o sistema reconhece uma falha? E que evidência permite dizer que uma mudança
+funcionou?
+
+Neste capítulo, ``arquitetura do OpenCode Ecosystem Core'' significa a
+organização que conseguimos observar neste checkout: arquivos de código,
+configurações, documentação e diagnóstico local. O mapa é detalhado, mas não é
+uma lista de cada arquivo existente. O repositório muda; por isso, nomes,
+quantidades e caminhos devem ser conferidos nas fontes indicadas, e não tratados
+como constantes eternas.
+\end{descricao}
+
+\begin{conceito}
+O Core não é uma única inteligência que executa tudo. É um conjunto de
+componentes: interfaces para receber pedidos, um orquestrador para coordenar
+trabalho, agentes e ferramentas para executar partes dele, memória e registros
+para preservar contexto, e verificadores para comparar resultados com critérios
+definidos. Alguns componentes rodam no mesmo processo Python; outros dependem
+de serviços, programas externos ou provedores que podem nem estar instalados na
+máquina atual.
+\end{conceito}
+
+\begin{aviso}
+Um desenho arquitetural explica onde uma capacidade está prevista e como os
+componentes se relacionam. Ele não prova que todas as partes estejam ativas,
+que uma ferramenta externa esteja disponível, nem que qualquer resposta esteja
+certa. Para isso, consulte o estado do ambiente e examine a evidência específica
+da tarefa.
+\end{aviso}
+
+\section{A primeira distinção: OpenCode, Core e comando local}
+
+\begin{resultado}
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Nome & O que significa neste manual \\
+\midrule
+OpenCode & O ambiente hospedeiro que lê configurações e pode disponibilizar
+agentes, comandos e ferramentas ao operador. \\
+OpenCode Ecosystem Core & O repositório que contém código Python, definições de
+agentes, skills, configurações, especificações, testes e documentação. \\
+CLI do Core & Interface de linha de comando iniciada por
+\texttt{python3 -m marceloclaro.cli}. Ela chama rotinas do repositório; não é o
+mesmo processo que o aplicativo OpenCode. \\
+\texttt{opencode.json} & Arquivo de configuração que descreve recursos para o
+ambiente OpenCode. Neste projeto, \texttt{integrations/opencode\_cli.py} gera ou
+valida esse arquivo a partir das fontes do repositório. \\
+\bottomrule
+\end{tabularx}}
+\end{resultado}
+
+\begin{descricao}
+Essa separação evita um erro comum. Abrir o projeto no OpenCode não significa que
+o aplicativo passe a executar automaticamente todos os módulos Python do Core.
+O arquivo de configuração apresenta recursos reconhecíveis pelo hospedeiro; o
+comando da CLI inicia uma rota de execução própria; e determinados serviços
+externos precisam estar instalados ou configurados. A pergunta ``isso existe no
+projeto?'' é diferente de ``está disponível nesta máquina?''.
+\end{descricao}
+
+\section{O mapa geral: oito camadas para orientar a leitura}
+
+\begin{descricao}
+Para estudar a arquitetura sem decorar centenas de nomes, começamos por
+responsabilidades. Pense em uma oficina: há uma recepção para receber o pedido,
+um quadro para organizar o trabalho, especialistas para executá-lo, instrumentos
+para medi-lo e um livro de registro para explicar o que ocorreu. A analogia
+orienta a leitura; o código é quem determina o comportamento real.
+\end{descricao}
+
+\begin{resultado}
+{\footnotesize
+\begin{tabularx}{\textwidth}{c l Y l}
+\toprule
+Camada & Responsabilidade & Explicação em linguagem comum & Fontes principais \\
+\midrule
+0 & Fundação & Princípios de trabalho, dependências, configurações do ambiente e
+serviços locais opcionais. & arquivos de requisitos, \texttt{installer/},
+\texttt{integrations/} \\
+1 & Interfaces & Entradas pela CLI, configuração do hospedeiro e catálogo de
+agentes e skills. & \texttt{marceloclaro/cli.py}, \texttt{agents/},
+\texttt{skills/}, \texttt{opencode.json} \\
+2 & Memória e comunicação & Eventos, cartões, tarefas publicadas e memória
+compartilhada. & \texttt{mci/metabus.py}, \texttt{mci/blackboard.py} \\
+3 & Roteamento e orquestração & Prepara o contexto, escolhe uma rota e acompanha
+o trabalho. & \texttt{marceloclaro/orchestrator.py},
+\texttt{transformer/attention.py} \\
+4 & Qualidade e rigor & Compara entregas com especificações, critérios e testes
+associados. & \texttt{sdd/}, \texttt{tests/}, \texttt{trust/} \\
+5 & Evolução e observação & Diagnostica o estado local e guarda registros de
+mudanças e execuções. & \texttt{marceloclaro/doctor.py},
+\texttt{evolution/}, \texttt{.mci\_state/} \\
+6 & Integrações & Liga ferramentas locais, servidores MCP, provedores e programas
+externos. & \texttt{integrations/}, \texttt{opencode.json} \\
+7 & Aplicações & Combina capacidades em fluxos científicos, apresentações,
+raciocínio e outros usos. & \texttt{agentic\_science\_v2/},
+\texttt{illustrations/}, demais módulos \\
+\bottomrule
+\end{tabularx}}
+\end{resultado}
+
+\begin{limite}
+Essas camadas são uma ordem de estudo, não oito degraus obrigatórios percorridos
+por todo comando. Por exemplo, o comando \texttt{doctor} executa verificações
+locais e retorna um relatório; não precisa delegar uma tarefa a um agente. Uma
+solicitação de pesquisa, por sua vez, pode alcançar outras partes do ecossistema.
+\end{limite}
+
+\section{As fontes de instrução e configuração}
+
+\begin{conceito}
+Uma \textbf{fonte} é o lugar em que uma informação é editada como referência
+principal. Um \textbf{artefato gerado} é produzido a partir de uma ou mais
+fontes. Se a equipe altera só o artefato gerado, a mudança pode desaparecer na
+próxima geração; por isso, é importante saber qual arquivo é a fonte.
+\end{conceito}
+
+\begin{resultado}
+{\footnotesize
+\begin{tabularx}{\textwidth}{l l Y}
+\toprule
+Elemento & Local típico & Para que serve \\
+\midrule
+Agentes essenciais & \texttt{agents/*.md} & Definições centrais com metadados
+e instruções de comportamento. \\
+Catálogo especializado & \texttt{agents/catalog/*.md} & Fichas de agentes por
+especialidade; seus metadados podem ser convertidos em capacidades. \\
+Skills & \texttt{skills/} e \texttt{.opencode/skills/} & Procedimentos e
+instruções reutilizáveis que orientam uma tarefa ou ferramenta. Uma skill não é,
+por si só, um agente em execução. \\
+Configuração do hospedeiro & \texttt{opencode.json} & Declara agentes,
+comandos, permissões e servidores MCP para o OpenCode. \\
+Gerador da configuração & \texttt{integrations/opencode\_cli.py} & Constrói ou
+confere a configuração derivada segundo as fontes e regras do repositório. \\
+Especificações & \texttt{specs/*.md} & Registram objetivos, critérios e, em
+alguns casos, alvos de teste para mudanças. \\
+\bottomrule
+\end{tabularx}}
+\end{resultado}
+
+\begin{descricao}
+Quando o catálogo é carregado, o código lê os metadados dos arquivos Markdown e
+os transforma em registros que o Blackboard pode consultar. Um registro de
+agente, chamado \textbf{Agent Card} (cartão de agente), contém identificador,
+nome, descrição, capacidades e, conforme a rota, um contrato dos dados de
+entrada. O cartão ajuda a localizar um candidato; não demonstra que ele tenha
+executado corretamente uma tarefa.
+\end{descricao}
+
+\section{A inicialização: montar o espaço de trabalho}
+
+\begin{processo}
+Quando uma rota normal constrói \texttt{MarceloClaroOrchestrator}, a inicialização
+prepara os componentes centrais. Em termos simplificados, ela:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item conecta o orquestrador ao MetaBus e ao Blackboard;
+  \item prepara os mecanismos de seleção, memória hierárquica, confiança e
+        execução de tarefas;
+  \item registra as definições de \texttt{agents/*.md} e
+        \texttt{agents/catalog/*.md} quando o carregamento automático está ativo;
+  \item configura rotas de trabalho como MASWOS e registra a ficha da MIRA;
+  \item deixa algumas integrações pesadas para carregamento tardio, isto é,
+        só tenta inicializá-las quando uma operação precisa delas.
+\end{enumerate}
+\end{processo}
+
+\begin{descricao}
+\textbf{Singleton} é o padrão pelo qual um módulo reutiliza uma instância
+compartilhada, em vez de criar uma cópia nova a cada chamada. Neste projeto, o
+MetaBus e o Blackboard são instâncias desse tipo no processo Python. Isso
+facilita compartilhar eventos e estado durante a execução atual; não quer dizer
+que sejam, por si sós, serviços distribuídos entre computadores.
+\end{descricao}
+
+\begin{aviso}
+Há rotas especiais na CLI. Por exemplo, \texttt{doctor} chama o diagnóstico
+diretamente, e alguns subcomandos têm seus próprios pontos de entrada. Portanto,
+não se deve presumir que todo comando construa o orquestrador ou carregue todo o
+catálogo.
+\end{aviso}
+
+\section{A viagem de uma solicitação}
+
+\begin{descricao}
+Vamos acompanhar um pedido fictício: ``verifique se uma nova opção da CLI está
+documentada e implemente-a''. O objetivo deste exemplo é localizar cada
+responsabilidade, não afirmar que todo pedido real siga a mesma sequência.
+\end{descricao}
+
+\begin{processo}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \textbf{Entrada.} A pessoa fornece o pedido pela CLI, pelo OpenCode ou
+        por outra integração habilitada.
+  \item \textbf{Preparação.} A rota traduz o pedido para contexto e identifica
+        se existe uma especificação ou procedimento aplicável.
+  \item \textbf{Planejamento.} Se o trabalho depende de etapas, ele pode ser
+        dividido em tarefas menores e dependências explícitas.
+  \item \textbf{Seleção.} O sistema procura agentes elegíveis ou escolhe uma
+        ferramenta compatível com a operação.
+  \item \textbf{Execução.} O agente, a rotina Python ou o serviço externo produz
+        uma entrega. O mecanismo usado depende da rota.
+  \item \textbf{Verificação.} Quando há contrato SDD/TDD associado, a entrega é
+        comparada aos critérios e à evidência de teste exigida.
+  \item \textbf{Retorno.} O resultado, o estado de conclusão e eventuais avisos
+        são devolvidos a quem fez o pedido.
+  \item \textbf{Registro.} A rota pode publicar eventos, atualizar memória ou
+        registrar um ciclo de evolução, conforme o tipo de trabalho.
+\end{enumerate}
+\end{processo}
+
+\begin{flowch}[Caminho conceitual de uma solicitação]{as verificações e ferramentas variam conforme a rota}
+\matrix[matrix of nodes,name=archmain,row sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|Pessoa ou automação \\
+ |[fns]|CLI do Core ou hospedeiro OpenCode \\
+ |[fns]|Preparação do pedido e contexto \\
+ |[fns]|Orquestrador escolhe uma rota \\
+ |[fns]|Agente, código local ou ferramenta integrada \\
+ |[fde]|Verificação: critérios e testes quando aplicáveis \\
+ |[fns]|Resposta, avisos e registros \\ \\
+};
+\draw[seta] (archmain-1-1)--(archmain-2-1);
+\draw[seta] (archmain-2-1)--(archmain-3-1);
+\draw[seta] (archmain-3-1)--(archmain-4-1);
+\draw[seta] (archmain-4-1)--(archmain-5-1);
+\draw[seta] (archmain-5-1)--(archmain-6-1);
+\draw[seta] (archmain-6-1)--(archmain-7-1);
+\draw[seta,plumAccent,dashed] (archmain-6-1.east) to[out=0,in=0,looseness=1.3]
+  node[right=1pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{falha: explicar, corrigir ou bloquear}
+  (archmain-4-1.east);
+\end{flowch}
+
+\begin{descricao}
+Uma seta tracejada indica uma possibilidade de retorno, não uma promessa de
+tentativas infinitas. Se um teste falha, a implementação pode ser corrigida; se
+um serviço não existe, a rota pode avisar ou bloquear; se não há critério
+definido, a entrega precisa ser descrita como não verificada por aquele
+critério. O resultado correto pode ser ``bloqueado'' ou ``inconclusivo'', e não
+necessariamente ``concluído''.
+\end{descricao}
+
+\section{Duas formas de organizar trabalho entre agentes}
+
+\begin{descricao}
+No Core aparecem dois mecanismos que parecem semelhantes porque ambos lidam
+com tarefas, mas resolvem problemas diferentes. O Blackboard coordena anúncios
+e interessados. O \texttt{TaskRuntime} controla uma execução estruturada em
+dependências, tentativas e prazos. Um não é apenas outro nome para o segundo.
+\end{descricao}
+
+\subsection{Blackboard: publicar, encontrar e aceitar}
+
+\begin{conceito}
+\textbf{Blackboard} (quadro compartilhado) é o registro central de cartões e
+tarefas da rota multiagente. \textbf{MetaBus} é o canal local usado para
+publicar eventos e avisar componentes inscritos. Um \textbf{evento} é uma
+mensagem com nome, horário, origem e dados; o nome é chamado de
+\textbf{tópico}, por exemplo \texttt{task.post} ou \texttt{task.complete}.
+\end{conceito}
+
+\begin{processo}
+Na rota do quadro, a sequência observável é:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item publicar uma tarefa com descrição, capacidades necessárias e contexto;
+  \item o Blackboard compara as capacidades necessárias com os cartões
+        disponíveis; a regra de correspondência exige todas as capacidades
+        pedidas;
+  \item se houver candidatos, o Blackboard publica um anúncio de proposta
+        (\textbf{CFP}, abreviação de \emph{Call for Proposals});
+  \item uma manifestação de interesse produz o evento de atribuição;
+  \item o agente entrega um resultado e publica uma conclusão como concluída
+        ou falha;
+  \item a conclusão pode solicitar uma reflexão, que é encaminhada à memória.
+\end{enumerate}
+\end{processo}
+
+\begin{descricao}
+O padrão é inspirado em coordenação por quadro negro e proposta de trabalho.
+Neste checkout, o código do Blackboard e o MetaBus são objetos Python dentro do
+processo. O registro local e os eventos não devem ser confundidos com uma fila
+de mensagens distribuída, com garantia de entrega entre máquinas ou com prova
+de conformidade integral a um protocolo externo.
+\end{descricao}
+
+\subsection{TaskRuntime: grafo, fronteira pronta e concessão de execução}
+
+\begin{conceito}
+Um \textbf{DAG} é um grafo dirigido sem ciclos. No uso do Core, cada nó pode
+representar uma tarefa, e uma seta de dependência significa ``esta tarefa só
+fica pronta depois que aquela terminar''. A \textbf{fronteira pronta} é o
+conjunto de nós cujas dependências já foram satisfeitas.
+\end{conceito}
+
+\begin{processo}
+O \texttt{TaskRuntime} valida o grafo antes de registrá-lo, informa quais nós
+estão prontos e concede um \textbf{lease} (concessão temporária de execução)
+para um agente em uma tentativa. O lease tem identificador e prazo. O runtime
+mantém estados como pronto, concedido, concluído, bloqueado ou falho; também
+aplica limites de tentativas, reatribuições e duração definidos para a execução.
+Se uma concessão expira, o runtime pode reapurar o estado e recalcular a
+fronteira, respeitando os limites configurados.
+\end{processo}
+
+\begin{descricao}
+\textbf{Exemplo.} Para documentar e implementar uma opção da CLI, a tarefa
+``definir o comportamento'' pode preceder ``escrever o código'', que precede
+``verificar a documentação''. As duas últimas só ficam prontas quando seus
+pré-requisitos terminam. Se uma etapa falha, o estado da tarefa permite apontar
+qual parte precisa de atenção. Essa sequência demonstra o conceito; o runtime
+não converte automaticamente qualquer frase do usuário em um grafo correto.
+\end{descricao}
+
+\begin{limite}
+O quadro organiza publicação e seleção por capacidades. O runtime de DAG
+organiza dependências e concessões de execução. A disponibilidade dos dois
+mecanismos no código não significa que toda tarefa passe por ambos. Ao
+interpretar uma execução, identifique qual método ou rota foi realmente usado.
+\end{limite}
+
+\section{Roteamento: como os candidatos são comparados}
+
+\begin{descricao}
+\textbf{Roteamento} é a escolha de um destino para uma tarefa. O
+\texttt{AttentionRouter} compara a descrição e as capacidades pedidas com os
+cartões disponíveis, calcula sinais de compatibilidade e pode explicar por que
+um candidato foi incluído ou excluído. Na rota do runtime, verificações rígidas
+de elegibilidade são aplicadas antes da ordenação: um candidato inelegível não
+deve ganhar só por obter boa pontuação semântica.
+\end{descricao}
+
+\begin{resultado}
+O código do roteador tem cabeças de avaliação, isto é, dimensões separadas que
+produzem sinais para a comparação. Entre elas estão compatibilidade semântica,
+correspondência de capacidades, confiança registrada e carga estimada. Os
+pesos combinam sinais para ordenar os candidatos restantes. Esses valores
+servem à política local de encaminhamento; não são probabilidades calibradas de
+que o agente acertará.
+\end{resultado}
+
+\begin{conceito}
+Um \textbf{hard gate} (barreira obrigatória) é uma condição que precisa ser
+satisfeita para a execução prosseguir. Uma \textbf{heurística} é uma regra
+prática de ordenação ou aproximação; ela ajuda a decidir, mas não constitui uma
+prova de qualidade. A pontuação de confiança do ledger também é um indicador
+interno atualizado por resultados registrados, não uma medida universal de
+competência.
+\end{conceito}
+
+\section{Memória e comunicação: o que fica entre as etapas}
+
+\subsection{MetaBus: mensagens entre partes do mesmo processo}
+
+\begin{descricao}
+O MetaBus implementa um padrão de publicar e assinar. Um componente
+\textbf{publica} um evento em um tópico; outros componentes, previamente
+\textbf{inscritos}, recebem a mensagem. No código atual, a publicação chama os
+\emph{handlers} inscritos no processo e tenta acrescentar o evento a um arquivo
+de eventos. Isso desacopla quem emite uma mensagem de quem reage a ela, mas não
+transforma o barramento em mensageria de rede.
+\end{descricao}
+
+\begin{conceito}
+\textbf{Handler} é uma função executada quando chega um evento. Por exemplo,
+quando o Blackboard recebe \texttt{task.post}, cria um registro da tarefa e
+procura cartões compatíveis; quando recebe \texttt{task.complete}, atualiza o
+estado e pode solicitar reflexão.
+\end{conceito}
+
+\subsection{Memória: episódio, conceito e confiança registrada}
+
+\begin{descricao}
+A memória metacognitiva tem registros episódicos de execuções e reflexões,
+registros semânticos de lições associadas a tópicos e um ledger (livro-razão) de
+confiança usado por algumas rotas. O arquivo local de estado fica sob
+\texttt{.mci\_state/}. ``Episódico'' quer dizer ligado a um acontecimento;
+``semântico'' quer dizer organizado como conceito ou lição reutilizável.
+\end{descricao}
+
+\begin{limite}
+O nome ``metacognitivo'' descreve a intenção de registrar informação sobre o
+processo e seus resultados. Não significa que o software possua consciência,
+que suas reflexões sejam verdadeiras ou que a memória recupere sempre o contexto
+mais relevante. A busca e a atualização seguem regras implementadas no código.
+\end{limite}
+
+\section{Qualidade: especificação, critério e teste}
+
+\begin{conceito}
+\textbf{SDD} (\emph{Spec-Driven Development}) é desenvolvimento guiado por
+especificação: descreve-se o comportamento esperado antes ou junto da
+implementação. \textbf{TDD} (\emph{Test-Driven Development}) é uma prática em
+que um teste executável orienta a mudança. Neste manual, uma
+\textbf{especificação} (ou \textbf{spec}) é o documento que registra objetivo,
+critérios de aceitação e, quando aplicável, a evidência executável associada.
+\end{conceito}
+
+\begin{processo}
+O motor \texttt{sdd/spec\_engine.py} carrega especificações, interpreta
+critérios e oferece verificação. O executor \texttt{sdd/tdd\_runner.py} roda
+testes ligados a uma spec e retorna evidências estruturadas. Quando a tarefa
+tem uma spec que exige teste confiável, a rota estrita mantém o gate fechado se
+o teste falha ou a evidência não existe. A regra é conhecida como
+\textbf{fail-closed}: na dúvida ou na falha, o sistema não registra aprovação.
+\end{processo}
+
+\begin{aviso}
+Um teste demonstra o comportamento coberto por aquele teste, naquela versão e
+naquele ambiente. Não prova que todos os comportamentos possíveis estejam
+corretos, nem que uma conclusão científica, clínica ou jurídica seja válida.
+Separe três frases: ``o teste passou'', ``o critério definido passou'' e ``a
+afirmação é verdadeira fora do sistema''. Cada uma exige evidência diferente.
+\end{aviso}
+
+\section{Ferramentas: MCP, integração e programa externo}
+
+\begin{conceito}
+\textbf{MCP} é um protocolo para que um cliente descubra e chame ferramentas
+oferecidas por um servidor. O nome do protocolo descreve a interface de
+comunicação; não descreve sozinho a função da ferramenta nem garante que o
+servidor esteja ativo. Uma integração direta pode chamar uma biblioteca Python,
+um serviço local ou uma linha de comando sem passar por MCP.
+\end{conceito}
+
+\begin{resultado}
+Na configuração \texttt{opencode.json} lida em 29/09/2026 constavam sete
+entradas MCP: \texttt{litert-lm}, \texttt{metacognitive-interconnect},
+\texttt{antigravity-bridge}, \texttt{pypi-search}, \texttt{colibri-mcp},
+\texttt{scanners-mcp} e \texttt{web-deploy-mcp}. Esse inventário descreve
+declarações de configuração. A presença de uma entrada não confirma que o
+processo de servidor iniciou nem que dependências, rede ou credenciais estejam
+prontas.
+\end{resultado}
+
+\begin{resultado}
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Tipo de recurso & Exemplo de responsabilidade \\
+\midrule
+Código local & Função Python que pode ser importada diretamente pelo Core. \\
+Servidor MCP & Serviço que expõe ferramentas por um contrato comum a clientes
+compatíveis. \\
+CLI externa & Programa separado iniciado por comando; pode não estar instalado. \\
+Provedor de modelo & Serviço local ou remoto que recebe uma solicitação de geração
+ou inferência. \\
+Skill & Procedimento que explica quando e como executar uma operação. \\
+\bottomrule
+\end{tabularx}}
+\end{resultado}
+
+\section{Capacidades de domínio: motores opcionais, não uma etapa universal}
+
+\begin{descricao}
+Sobre a base de orquestração existem áreas especializadas. A pesquisa científica
+e o RAG (recuperação de informação seguida de geração) encontram material para
+responder uma consulta; MASWOS coordena etapas de produção e revisão acadêmica;
+os módulos de \texttt{integrations/deepmind/} incluem ferramentas de
+formalização e raciocínio; as integrações médicas e jurídicas organizam
+verificações próprias de seus domínios; a MIRA prepara apresentações. Esses
+módulos não formam uma única fila universal: cada operação usa apenas a rota que
+foi chamada e as dependências que ela requer.
+\end{descricao}
+
+\begin{limite}
+O inventário de motores é um mapa de código, não uma declaração de que todo
+motor esteja instalado, ligado, testado para qualquer entrada ou adequado a
+decisões de alto impacto. Antes de usar uma capacidade, confirme seu comando,
+dependências, entradas aceitas, estado de saída e limites no módulo
+correspondente.
+\end{limite}
+
+\section{Diagnóstico e histórico: observar não é certificar}
+
+\begin{descricao}
+O comando \texttt{python3 -m marceloclaro.cli doctor} reúne verificações locais
+de estrutura, configuração e dependências. Um \textbf{check} (checagem) é uma
+pergunta delimitada, como ``o arquivo de configuração pode ser lido?''. O
+resultado \texttt{pass}, \texttt{warn} ou \texttt{fail} indica o que aquela
+checagem observou. O \texttt{helpdesk} organiza sugestões com base no
+diagnóstico.
+\end{descricao}
+
+\begin{resultado}
+Na execução local de 29/09/2026, o diagnóstico totalizou 20 checagens: 18
+\texttt{pass}, 2 \texttt{warn}, 0 \texttt{fail}. Entre os avisos estavam
+executáveis externos ausentes e a integração opcional \texttt{runai}. No mesmo
+checkout, o diagnóstico informou 216 agentes na configuração OpenCode, sete
+entradas MCP, 456 ciclos carregados e 136 especificações formais. Esses números
+são uma fotografia do ambiente, não uma propriedade imutável do produto.
+\end{resultado}
+
+\begin{conceito}
+\textbf{Observabilidade} é a capacidade de obter sinais sobre o estado e o
+comportamento do sistema: relatórios, eventos, estados de tarefas e registros.
+\textbf{Proveniência} é a informação que permite identificar de onde veio um
+artefato, quais entradas o produziram e qual revisão estava em uso. O registro
+em \texttt{evolution/cycles.json} guarda ciclos de mudança; suas âncoras e
+campos de auditoria não substituem uma avaliação externa independente.
+\end{conceito}
+
+\section{Onde procurar cada resposta}
+
+\begin{resultado}
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Pergunta operacional & Primeiro lugar a consultar \\
+\midrule
+Como inicio a interface? & \texttt{MANUAL.md} e
+\texttt{marceloclaro/cli.py}. \\
+Como o sistema coordena tarefas? & \texttt{marceloclaro/orchestrator.py},
+\texttt{mci/blackboard.py} e \texttt{mci/task\_runtime.py}. \\
+Como um agente é descrito? & Um arquivo em \texttt{agents/} ou
+\texttt{agents/catalog/}; depois, a rotina que carrega esse arquivo. \\
+Como a memória é atualizada? & \texttt{mci/metabus.py} e
+\texttt{mci/reflexion.py}. \\
+Como se define e avalia um critério? & \texttt{sdd/spec\_engine.py},
+\texttt{sdd/tdd\_runner.py} e a spec indicada. \\
+Como saber o que está disponível? & Saída atual do \texttt{doctor}, logs e
+estado da integração específica. \\
+Como confirmar a mudança? & Critério aplicável, teste executado, diff e registro
+de evolução pertinente. \\
+\bottomrule
+\end{tabularx}}
+\end{resultado}
+
+\section{Glossário para ler o restante do livro}
+
+\begin{resultado}
+{\footnotesize
+\begin{description}[leftmargin=3.2cm,style=nextline,itemsep=1pt]
+\item[Agente] Componente configurado com instruções, identidade e, conforme a rota,
+capacidades que ajudam a escolher tarefas adequadas.
+\item[API] Interface de programação: conjunto de operações e formatos com que um
+componente solicita algo a outro.
+\item[Artefato] Resultado produzido ou arquivo mantido pelo processo: por exemplo,
+um relatório, código, apresentação ou manifesto.
+\item[Blackboard] Quadro compartilhado que mantém cartões e tarefas na rota de
+coordenação por anúncio e proposta.
+\item[Capacidade] Rótulo que descreve uma competência ou operação que um agente
+declara poder assumir.
+\item[CFP] Anúncio de uma tarefa para receber propostas de agentes elegíveis.
+\item[CLI] Interface de linha de comando: comandos digitados em um terminal.
+\item[Critério de aceitação] Condição observável que a entrega precisa cumprir para
+ser considerada aprovada dentro de uma especificação.
+\item[DAG] Grafo dirigido sem ciclos; permite representar tarefas e dependências
+sem uma sequência circular.
+\item[Evento] Mensagem estruturada publicada para informar algo que aconteceu.
+\item[Fail-closed] Comportamento que mantém a aprovação bloqueada quando falta uma
+condição obrigatória ou quando uma verificação falha.
+\item[Gate] Regra de passagem; pode ser uma condição rígida, como exigir um teste
+aprovado.
+\item[Handler] Função acionada ao receber um evento ou chamada.
+\item[Lease] Autorização temporária para executar uma tarefa, com prazo e identidade
+de tentativa.
+\item[MCP] Protocolo que permite a clientes compatíveis descobrir e chamar
+ferramentas oferecidas por servidores.
+\item[MetaBus] Barramento local de eventos que distribui mensagens aos handlers
+inscritos e mantém funcionalidades de memória associadas.
+\item[Pipeline] Sequência de etapas conectadas, em que a saída de uma etapa pode
+servir de entrada à seguinte.
+\item[RAG] Recuperação de documentos ou trechos relevantes antes de gerar uma
+resposta baseada neles.
+\item[Runtime] Conjunto de componentes ativos que controla uma execução enquanto ela
+acontece.
+\item[SDD] Desenvolvimento em que a especificação descreve o comportamento
+pretendido e orienta a implementação.
+\item[Singleton] Padrão em que o processo reutiliza uma instância compartilhada de
+um componente.
+\item[Skill] Procedimento reutilizável com instruções sobre como executar um tipo
+de trabalho.
+\item[Spec] Abreviação de especificação; documento com objetivo e critérios,
+possivelmente vinculados a testes.
+\item[TDD] Prática em que testes executáveis orientam a implementação de uma
+mudança.
+\item[Tópico] Nome de canal usado para classificar um tipo de evento, como
+\texttt{task.post}.
+\item[Trust / confiança] Indicador interno usado por certas regras de encaminhamento;
+não equivale a probabilidade calibrada de acerto.
+\end{description}
+}
+\end{resultado}
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+Ao terminar este capítulo, o leitor deve conseguir distinguir a interface
+OpenCode da CLI Python do Core; localizar as fontes de configuração; descrever
+o papel de orquestrador, agentes, MetaBus, Blackboard, TaskRuntime e motor SDD;
+e reconhecer que ferramentas e verificações dependem da rota usada.
+
+\textbf{Exercício 1.} Rode \texttt{doctor} e escolha um aviso. Localize o check
+correspondente em \texttt{marceloclaro/doctor.py}; explique o que ele mede e o
+que não mede.
+
+\textbf{Exercício 2.} Siga uma tarefa de ponta a ponta no código. Anote o nome
+da função de entrada, o objeto que recebe a tarefa, os eventos publicados, o
+critério de conclusão e o arquivo em que a evidência fica registrada.
+
+\textbf{Exercício 3.} Compare uma tarefa publicada no Blackboard com uma tarefa
+em um DAG do \texttt{TaskRuntime}. Escreva qual estado cada mecanismo controla
+e que tipo de dependência cada um representa.
+\end{resultado}

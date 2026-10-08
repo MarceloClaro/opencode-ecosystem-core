@@ -15,9 +15,9 @@ SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 
 import os
 import json
-import time
 import uuid
 import logging
+import tempfile
 from typing import Dict, List, Any, Optional, Callable
 from datetime import datetime, timezone
 
@@ -68,17 +68,30 @@ class MetacognitiveMemory:
             except Exception as e:
                 logger.error(f"Erro ao carregar memória: {e}")
                 
-    def _save(self):
+    def _save(self, *, strict: bool = False) -> bool:
+        temporary = None
         try:
-            with open(MEMORY_FILE, 'w', encoding='utf-8') as f:
+            descriptor, temporary = tempfile.mkstemp(
+                prefix=".memory-", suffix=".json", dir=os.path.dirname(os.path.abspath(MEMORY_FILE)))
+            with os.fdopen(descriptor, 'w', encoding='utf-8') as f:
                 json.dump({
                     "episodic": self.episodic[-1000:], # Manter últimos 1000 eventos
                     "semantic": self.semantic,
                     "confidence_ledger": self.confidence_ledger,
                     "last_updated": datetime.now(timezone.utc).isoformat()
-                }, f, indent=2)
+                }, f, indent=2, allow_nan=False)
+                f.flush()
+                os.fsync(f.fileno())
+            os.replace(temporary, MEMORY_FILE)
+            return True
         except Exception as e:
             logger.error(f"Erro ao salvar memória: {e}")
+            if strict:
+                raise RuntimeError("Falha ao persistir memória metacognitiva.") from e
+            return False
+        finally:
+            if temporary is not None and os.path.exists(temporary):
+                os.unlink(temporary)
 
     def add_reflection(self, agent_id: str, task_context: str, reflection: str, score: float):
         """Adiciona uma reflexão pós-execução (padrão Reflexion)."""
@@ -98,6 +111,29 @@ class MetacognitiveMemory:
         self.confidence_ledger[agent_id] = (current_conf * 0.7) + (score * 0.3)
         
         self._save()
+        return entry["id"]
+
+    def record_observation(self, agent_id: str, task_context: str,
+                           observation: Dict[str, Any]) -> str:
+        """R666: persiste um resultado delimitado sem aumentar confiança por autoavaliação."""
+        if not isinstance(agent_id, str) or not agent_id.strip():
+            raise ValueError("agent_id deve ser texto útil.")
+        if not isinstance(task_context, str) or len(task_context) > 2000:
+            raise ValueError("Contexto deve ser texto de até 2000 caracteres.")
+        if not isinstance(observation, dict):
+            raise ValueError("Observação deve ser objeto JSON.")
+        payload = json.dumps(observation, ensure_ascii=False, allow_nan=False)
+        if len(payload.encode("utf-8")) > 131072:
+            raise ValueError("Observação excede 128 KiB.")
+        entry = {"id": str(uuid.uuid4()), "timestamp": datetime.now(timezone.utc).isoformat(),
+                 "type": "observation", "agent_id": agent_id, "context": task_context,
+                 "observation": json.loads(payload)}
+        self.episodic.append(entry)
+        try:
+            self._save(strict=True)
+        except RuntimeError:
+            self.episodic.remove(entry)
+            raise
         return entry["id"]
 
     def extract_lessons(self, topic: str) -> List[str]:
@@ -157,7 +193,8 @@ class MetacognitiveMemory:
 
     def upsert_semantic_topic(self, topic: str,
                               lesson: Optional[str] = None,
-                              metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+                              metadata: Optional[Dict[str, Any]] = None,
+                              *, strict: bool = False) -> Dict[str, Any]:
         """Atualiza/inicializa um tópico semântico preservando histórico de lições."""
         entry = self.semantic.setdefault(topic, {
             "lessons": [],
@@ -169,7 +206,10 @@ class MetacognitiveMemory:
         if metadata:
             entry["metadata"].update(metadata)
         entry["updated_at"] = datetime.now(timezone.utc).isoformat()
-        self._save()
+        if strict:
+            self._save(strict=True)
+        else:
+            self._save()
         return entry
 
     def update_domain_confidence(self, domain_id: str, score: float) -> float:

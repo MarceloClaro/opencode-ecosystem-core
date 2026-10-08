@@ -1,0 +1,203 @@
+{
+  "analysis_status": "EXPLORATORY_INTERNAL_VALIDATION_ONLY",
+  "source": {
+    "source_sha256": "b7819fee81efbe2e227b7700c3cd86ce8bc6f7fe6f49da6214f4107d099184fa",
+    "reproduced_eligible": 997,
+    "reproduced_events": 84,
+    "excluded_nonpositive_followup_interval": 1,
+    "excluded_events": 1
+  },
+  "source_commit": "e5868fe5664460c7aac1c5b6d7980776ad26b29c",
+  "analysis_script_sha256": "e84a9b2904757201eb59e6172933ba28e49a8664ae9f8cbc39452014c20d1b1a",
+  "runtime": {
+    "python": "3.14.4",
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0"
+  },
+  "analysis_rows": 996,
+  "analysis_events": 83,
+  "analysis_children": 81,
+  "event_children": 44,
+  "event_fraction": 0.08333333333333333,
+  "followup_months_median": 2.0,
+  "followup_months_iqr": [
+    2.0,
+    3.0
+  ],
+  "followup_months_range": [
+    2.0,
+    5.0
+  ],
+  "seed": 20260930,
+  "outer_folds": 5,
+  "inner_folds": 3,
+  "feature_sets": {
+    "clinical_minimal": {
+      "cat": [
+        "tooth_position"
+      ],
+      "num": [
+        "age_months_t",
+        "host_dmfs_t",
+        "neighbor_caries_count"
+      ]
+    },
+    "clinical_spatial": {
+      "cat": [
+        "tooth_position",
+        "niche_icm",
+        "niche_ul",
+        "niche_lr",
+        "niche_ap",
+        "host_status_t"
+      ],
+      "num": [
+        "age_months_t",
+        "host_dmfs_t",
+        "neighbor_caries_count",
+        "spatial_weighted_dmfs_t",
+        "sum_dmfs_t",
+        "sum_ns_dt_t",
+        "sum_s_dt_t"
+      ]
+    }
+  },
+  "fold_log": [
+    {
+      "fold": 0,
+      "train_rows": 798,
+      "test_rows": 198,
+      "train_children": 65,
+      "test_children": 16,
+      "train_events": 67,
+      "test_events": 16,
+      "clinical_minimal_C": 10.0,
+      "clinical_spatial_C": 1.0
+    },
+    {
+      "fold": 1,
+      "train_rows": 798,
+      "test_rows": 198,
+      "train_children": 65,
+      "test_children": 16,
+      "train_events": 66,
+      "test_events": 17,
+      "clinical_minimal_C": 0.01,
+      "clinical_spatial_C": 0.1
+    },
+    {
+      "fold": 2,
+      "train_rows": 798,
+      "test_rows": 198,
+      "train_children": 64,
+      "test_children": 17,
+      "train_events": 67,
+      "test_events": 16,
+      "clinical_minimal_C": 10.0,
+      "clinical_spatial_C": 10.0
+    },
+    {
+      "fold": 3,
+      "train_rows": 795,
+      "test_rows": 201,
+      "train_children": 65,
+      "test_children": 16,
+      "train_events": 65,
+      "test_events": 18,
+      "clinical_minimal_C": 10.0,
+      "clinical_spatial_C": 1.0
+    },
+    {
+      "fold": 4,
+      "train_rows": 795,
+      "test_rows": 201,
+      "train_children": 65,
+      "test_children": 16,
+      "train_events": 67,
+      "test_events": 16,
+      "clinical_minimal_C": 10.0,
+      "clinical_spatial_C": 10.0
+    }
+  ],
+  "child_disjoint_outer_folds": true,
+  "bootstrap_requested": 1000,
+  "bootstrap_valid": 1000,
+  "metrics": {
+    "clinical_minimal": {
+      "pr_auc": 0.16645846749957754,
+      "roc_auc": 0.6864896607239473,
+      "brier": 0.08060447027632936,
+      "log_loss": 0.28836192038463965,
+      "mean_predicted": 0.11817149482821211,
+      "observed_fraction": 0.08333333333333333,
+      "calibration_in_the_large": -0.4458520781167661,
+      "calibration_slope": 0.5155711016857503,
+      "calibration_model_intercept": -1.2565839350503807,
+      "pr_auc_ci95": [
+        0.11954104584803489,
+        0.24603976864979024
+      ],
+      "roc_auc_ci95": [
+        0.6179052846974195,
+        0.7544965622905544
+      ],
+      "brier_ci95": [
+        0.06242588840709928,
+        0.09958743906452791
+      ]
+    },
+    "clinical_spatial": {
+      "pr_auc": 0.17842150969165643,
+      "roc_auc": 0.7371501339421211,
+      "brier": 0.07536155084418078,
+      "log_loss": 0.2689900330348057,
+      "mean_predicted": 0.08783354719882358,
+      "observed_fraction": 0.08333333333333333,
+      "calibration_in_the_large": -0.06595548144273289,
+      "calibration_slope": 0.6046680441449976,
+      "calibration_model_intercept": -0.8379059217346557,
+      "pr_auc_ci95": [
+        0.1375477001249338,
+        0.23887484361336297
+      ],
+      "roc_auc_ci95": [
+        0.6601151492868734,
+        0.8037455441867533
+      ],
+      "brier_ci95": [
+        0.057402292596722033,
+        0.094926528792467
+      ]
+    }
+  },
+  "prevalence_reference": {
+    "brier": 0.07639705616894175,
+    "log_loss": 0.2868896322615674
+  },
+  "spatial_minus_minimal": {
+    "pr_auc": {
+      "estimate": 0.011963042192078888,
+      "ci95": [
+        -0.045807247692446505,
+        0.05849829987987285
+      ]
+    },
+    "roc_auc": {
+      "estimate": 0.050660473218173796,
+      "ci95": [
+        -0.008716025731943449,
+        0.11207711494943794
+      ]
+    },
+    "brier": {
+      "estimate": -0.0052429194321485795,
+      "ci95": [
+        -0.010389115591946505,
+        0.0004228832076042051
+      ]
+    }
+  },
+  "scope_note": "This is internal validation in one public cohort with no external test, real microbiome alignment or image branch. Patient use is unsupported."
+}

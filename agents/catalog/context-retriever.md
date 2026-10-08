@@ -32,7 +32,7 @@ mode: subagent
 temperature: 0.1
 permission:
   bash:
-    *: deny
+    "*": deny
   edit:
     **/*: deny
   write:

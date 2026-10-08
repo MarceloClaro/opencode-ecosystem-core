@@ -1,0 +1,14 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_local_python_skill_cannot_write_bytecode_into_imported_package ______
+tests/test_r670_scientific_plugins.py:137: in test_local_python_skill_cannot_write_bytecode_into_imported_package
+    result = service.run_local("life-sciences-literature", "pubmed_search", {"term": "reproducibility"})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/scientific_plugins.py:19: in run_local
+    "wolfram": ("Wolfram", "openai-curated-remote/app-69fe0bf66c8481919c513d799406436e", "3.0.0"),
+tests/test_r670_scientific_plugins.py:133: in runner
+    assert "-B" in argv
+E   AssertionError: assert '-B' in ['/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python', '/tmp/pytest-of-marceloclaro/pytest-254/test_local_python_skill_cannot0/skill/scripts/ncbi_entrez.py']
+=========================== short test summary info ============================
+FAILED tests/test_r670_scientific_plugins.py::test_local_python_skill_cannot_write_bytecode_into_imported_package
+1 failed in 0.36s

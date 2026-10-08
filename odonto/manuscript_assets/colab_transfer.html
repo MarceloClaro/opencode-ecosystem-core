@@ -1,0 +1,354 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body><pre id="markdown"># 28. Adendo clínico v1.3.3 — validação interna exploratória
+
+**Estado executado separadamente:** a análise abaixo foi executada sobre o suplemento clínico público Table S1, fixado no commit `e5868fe5` e verificado por SHA-256. Os resultados anteriores do perfil `CI_SMOKE` são sintéticos e não representam desempenho clínico.
+
+**Coorte e alvo:** 997 transições H→H/H→C foram reconstruídas (84 eventos). Uma transição com intervalo de seguimento zero foi excluída: **996 transições, 83 eventos, 81 crianças**; seguimento de 2–5 meses. O alvo é incidência de cárie em um dente inicialmente hígido.
+
+**Método:** dois modelos de regressão logística penalizada, mínimo clínico e clínico-espacial; cinco folds externos e três internos estratificados e agrupados por criança; seleção de regularização dentro do treino; 1.000 reamostragens bootstrap por criança das predições fora da amostra. A classe positiva é localizada explicitamente. Variáveis futuras, o desfecho e o intervalo de seguimento não entram como preditores.
+
+| Modelo | AP | ROC-AUC | Brier | Inclinação de calibração |
+|---|---:|---:|---:|---:|
+| Clínico mínimo | 0,166 | 0,686 | 0,0806 | 0,516 |
+| Clínico-espacial | 0,178 | 0,737 | 0,0754 | 0,605 |
+
+A diferença de AP foi 0,012, com intervalo bootstrap de 95% de −0,046 a 0,058. Portanto, a vantagem do modelo espacial **não está estabelecida**. A calibração ainda precisa melhorar. Não houve validação externa, microbioma real pareado nem imagem clínica pareada. Nenhum resultado autoriza uso assistencial.
+
+**Fluxo atualizado:** Table S1 pública → verificação de versão/hash → reconstrução dente-visita → exclusão de intervalo não positivo → atributos disponíveis em t → CV aninhada agrupada por criança → predições fora da amostra → discriminação, calibração e bootstrap → validação externa prospectiva antes de qualquer avaliação de uso clínico.
+
+A célula seguinte reproduz a análise depois de executar as células anteriores de reconstrução longitudinal. Salva somente estatísticas agregadas e figuras em `/content/OdontoCA_v1_3/09_clinical_addendum`; não exporta registros individuais.
+</pre><pre id="code">&quot;&quot;&quot;Exploratory internal validation using the public OdontoCA source cohort.
+
+The two candidate feature sets are fixed before examining model performance.
+All preprocessing and regularisation selection occur within child-grouped
+training folds. No microbiome or image data are used. Individual records and
+identifiers are neither exported nor added to the manuscript directory.
+&quot;&quot;&quot;
+
+from __future__ import annotations
+
+import hashlib
+import json
+import platform
+from pathlib import Path
+from io import BytesIO
+import sys
+import requests
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import scipy
+import sklearn
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    average_precision_score, brier_score_loss, log_loss,
+    precision_recall_curve, roc_auc_score, roc_curve,
+)
+from sklearn.model_selection import GridSearchCV, StratifiedGroupKFold
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+from scipy.optimize import minimize, minimize_scalar
+from scipy.special import expit, logit
+
+SOURCE_COMMIT = &quot;e5868fe5664460c7aac1c5b6d7980776ad26b29c&quot;
+SOURCE_URL = (
+    &quot;https://raw.githubusercontent.com/HuangShiLab/Single-tooth-ECC/&quot;
+    + SOURCE_COMMIT + &quot;/Figures_and_Tables_in_Manuscript/Table_S1.xlsx&quot;
+)
+SOURCE_SHA256 = &quot;b7819fee81efbe2e227b7700c3cd86ce8bc6f7fe6f49da6214f4107d099184fa&quot;
+
+
+def fit_calibration(y, p):
+    score = logit(np.clip(p, 1e-6, 1 - 1e-6))
+    offset = minimize_scalar(
+        lambda intercept: log_loss(y, expit(intercept + score), normalize=False),
+        method=&quot;bounded&quot;, bounds=(-12, 12),
+    )
+    line = minimize(
+        lambda coef: log_loss(y, expit(coef[0] + coef[1] * score), normalize=False),
+        x0=np.array([0.0, 1.0]), method=&quot;BFGS&quot;,
+    )
+    if not np.isfinite(line.x).all():
+        raise AssertionError(&quot;Nonfinite calibration coefficients&quot;)
+    return {
+        &quot;mean_predicted&quot;: float(p.mean()),
+        &quot;observed_fraction&quot;: float(y.mean()),
+        &quot;calibration_in_the_large&quot;: float(offset.x),
+        &quot;calibration_slope&quot;: float(line.x[1]),
+        &quot;calibration_model_intercept&quot;: float(line.x[0]),
+    }
+
+
+OUT = Path(
+    &quot;/content/OdontoCA_v1_3/09_clinical_addendum&quot;
+    if &quot;google.colab&quot; in sys.modules else &quot;/tmp/odonto_colab_addendum&quot;
+)
+OUT.mkdir(parents=True, exist_ok=True)
+SEED = 20260930
+BOOTSTRAPS = 1000
+FORBIDDEN = {
+    &quot;HostGroup&quot;, &quot;host_group_source&quot;, &quot;Future_Status_Tooth&quot;,
+    &quot;future_status_source_t&quot;, &quot;Time_to_decay&quot;, &quot;time_to_decay_source_t&quot;,
+    &quot;state_t1&quot;, &quot;progression_event&quot;, &quot;delta_months&quot;, &quot;timepoint_t1&quot;,
+}
+FEATURE_SETS = {
+    &quot;clinical_minimal&quot;: {
+        &quot;cat&quot;: [&quot;tooth_position&quot;],
+        &quot;num&quot;: [&quot;age_months_t&quot;, &quot;host_dmfs_t&quot;, &quot;neighbor_caries_count&quot;],
+    },
+    &quot;clinical_spatial&quot;: {
+        &quot;cat&quot;: [&quot;tooth_position&quot;, &quot;niche_icm&quot;, &quot;niche_ul&quot;, &quot;niche_lr&quot;, &quot;niche_ap&quot;, &quot;host_status_t&quot;],
+        &quot;num&quot;: [
+            &quot;age_months_t&quot;, &quot;host_dmfs_t&quot;, &quot;neighbor_caries_count&quot;,
+            &quot;spatial_weighted_dmfs_t&quot;, &quot;sum_dmfs_t&quot;, &quot;sum_ns_dt_t&quot;, &quot;sum_s_dt_t&quot;,
+        ],
+    },
+}
+
+
+def source_frame() -&gt; tuple[pd.DataFrame, dict]:
+    if not all(name in globals() for name in (&quot;clean_single_tooth&quot;, &quot;build_transitions&quot;)):
+        raise RuntimeError(&quot;Execute as células anteriores de reconstrução longitudinal primeiro&quot;)
+    response = requests.get(SOURCE_URL, timeout=90)
+    response.raise_for_status()
+    content = response.content
+    digest = hashlib.sha256(content).hexdigest()
+    if digest != SOURCE_SHA256:
+        raise RuntimeError(&quot;O hash SHA-256 do suplemento clínico é diferente do auditado&quot;)
+    meta = pd.read_excel(BytesIO(content), sheet_name=&quot;all_metadata&quot;)
+    meta.columns = [str(col).strip() for col in meta.columns]
+    _, _, clean = clean_single_tooth(meta)
+    _, _, onset = build_transitions(clean)
+    onset = onset.copy()
+    onset[&quot;neighbor_caries_count&quot;] = (
+        onset[&quot;neighbor_prev_state_t&quot;].eq(&quot;C&quot;).astype(int)
+        + onset[&quot;neighbor_next_state_t&quot;].eq(&quot;C&quot;).astype(int)
+    )
+    if len(onset) != 997 or int(onset[&quot;progression_event&quot;].sum()) != 84:
+        raise AssertionError(&quot;As contagens da coorte de origem não foram reproduzidas&quot;)
+    zero_interval = onset.loc[onset[&quot;delta_months&quot;].le(0)]
+    frame = onset.loc[onset[&quot;delta_months&quot;].gt(0)].reset_index(drop=True)
+    if len(frame) != 996 or int(frame[&quot;progression_event&quot;].sum()) != 83:
+        raise AssertionError(&quot;A coorte analítica com seguimento positivo mudou&quot;)
+    return frame, {
+        &quot;source_sha256&quot;: digest,
+        &quot;reproduced_eligible&quot;: 997,
+        &quot;reproduced_events&quot;: 84,
+        &quot;excluded_nonpositive_followup_interval&quot;: len(zero_interval),
+        &quot;excluded_events&quot;: int(zero_interval[&quot;progression_event&quot;].sum()),
+    }
+
+
+def build_pipeline(categories: list[str], numeric: list[str]) -&gt; Pipeline:
+    try:
+        onehot = OneHotEncoder(handle_unknown=&quot;ignore&quot;, sparse_output=False)
+    except TypeError:
+        onehot = OneHotEncoder(handle_unknown=&quot;ignore&quot;, sparse=False)
+    prep = ColumnTransformer(
+        [
+            (&quot;cat&quot;, Pipeline([(&quot;impute&quot;, SimpleImputer(strategy=&quot;most_frequent&quot;)), (&quot;onehot&quot;, onehot)]), categories),
+            (&quot;num&quot;, Pipeline([(&quot;impute&quot;, SimpleImputer(strategy=&quot;median&quot;)), (&quot;scale&quot;, StandardScaler())]), numeric),
+        ],
+        remainder=&quot;drop&quot;, sparse_threshold=0,
+    )
+    return Pipeline([
+        (&quot;prep&quot;, prep),
+        (&quot;model&quot;, LogisticRegression(penalty=&quot;l2&quot;, solver=&quot;liblinear&quot;, max_iter=5000)),
+    ])
+
+
+def interval(values: list[float]) -&gt; list[float]:
+    return [float(v) for v in np.quantile(values, [0.025, 0.975])]
+
+
+def run() -&gt; None:
+    frame, source = source_frame()
+    y = frame[&quot;progression_event&quot;].to_numpy(dtype=int)
+    groups = frame[&quot;child_id&quot;].astype(str).to_numpy()
+    for definition in FEATURE_SETS.values():
+        if FORBIDDEN.intersection(definition[&quot;cat&quot;] + definition[&quot;num&quot;]):
+            raise AssertionError(&quot;A future or outcome-derived variable entered the model&quot;)
+
+    predictions = {name: np.full(len(frame), np.nan) for name in FEATURE_SETS}
+    prevalence_reference = np.full(len(frame), np.nan)
+    fold_assignment = np.full(len(frame), -1)
+    fold_log = []
+    outer = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=SEED)
+    for fold, (train, test) in enumerate(outer.split(frame, y, groups)):
+        if not set(groups[train]).isdisjoint(groups[test]):
+            raise AssertionError(&quot;Child overlap across outer folds&quot;)
+        if len(np.unique(y[test])) != 2:
+            raise AssertionError(&quot;Outer test fold lacks one outcome class&quot;)
+        prevalence_reference[test] = y[train].mean()
+        inner = StratifiedGroupKFold(n_splits=3, shuffle=True, random_state=SEED + 100 + fold)
+        log = {
+            &quot;fold&quot;: fold,
+            &quot;train_rows&quot;: len(train), &quot;test_rows&quot;: len(test),
+            &quot;train_children&quot;: len(set(groups[train])), &quot;test_children&quot;: len(set(groups[test])),
+            &quot;train_events&quot;: int(y[train].sum()), &quot;test_events&quot;: int(y[test].sum()),
+        }
+        for name, definition in FEATURE_SETS.items():
+            columns = definition[&quot;cat&quot;] + definition[&quot;num&quot;]
+            search = GridSearchCV(
+                build_pipeline(definition[&quot;cat&quot;], definition[&quot;num&quot;]),
+                {&quot;model__C&quot;: [0.01, 0.1, 1.0, 10.0]},
+                scoring=&quot;average_precision&quot;, cv=inner, n_jobs=1,
+                refit=True, error_score=&quot;raise&quot;,
+            )
+            search.fit(frame.iloc[train][columns], y[train], groups=groups[train])
+            classes = search.best_estimator_.named_steps[&quot;model&quot;].classes_
+            positive = np.flatnonzero(classes == 1)
+            if len(positive) != 1:
+                raise AssertionError(&quot;Positive class is absent or ambiguous&quot;)
+            predictions[name][test] = search.predict_proba(frame.iloc[test][columns])[:, int(positive[0])]
+            log[name + &quot;_C&quot;] = search.best_params_[&quot;model__C&quot;]
+        fold_assignment[test] = fold
+        fold_log.append(log)
+
+    if pd.DataFrame({&quot;child&quot;: groups, &quot;fold&quot;: fold_assignment}).groupby(&quot;child&quot;)[&quot;fold&quot;].nunique().max() != 1:
+        raise AssertionError(&quot;Grouped validation invariant failed&quot;)
+    if not all(np.isfinite(p).all() and ((p &gt;= 0) &amp; (p &lt;= 1)).all() for p in predictions.values()):
+        raise AssertionError(&quot;Invalid out-of-fold probability&quot;)
+
+    metrics = {}
+    for name, p in predictions.items():
+        metrics[name] = {
+            &quot;pr_auc&quot;: float(average_precision_score(y, p)),
+            &quot;roc_auc&quot;: float(roc_auc_score(y, p)),
+            &quot;brier&quot;: float(brier_score_loss(y, p)),
+            &quot;log_loss&quot;: float(log_loss(y, np.clip(p, 1e-6, 1 - 1e-6))),
+            **fit_calibration(y, p),
+        }
+
+    rng = np.random.default_rng(SEED + 1)
+    children = np.unique(groups)
+    child_indices = {child: np.flatnonzero(groups == child) for child in children}
+    sampled_metrics = {name: {metric: [] for metric in [&quot;pr_auc&quot;, &quot;roc_auc&quot;, &quot;brier&quot;]} for name in predictions}
+    sampled_deltas = {metric: [] for metric in [&quot;pr_auc&quot;, &quot;roc_auc&quot;, &quot;brier&quot;]}
+    valid = 0
+    for _ in range(BOOTSTRAPS):
+        sampled = rng.choice(children, size=len(children), replace=True)
+        index = np.concatenate([child_indices[child] for child in sampled])
+        yy = y[index]
+        if len(np.unique(yy)) != 2:
+            continue
+        valid += 1
+        for name, p in predictions.items():
+            pp = p[index]
+            sampled_metrics[name][&quot;pr_auc&quot;].append(float(average_precision_score(yy, pp)))
+            sampled_metrics[name][&quot;roc_auc&quot;].append(float(roc_auc_score(yy, pp)))
+            sampled_metrics[name][&quot;brier&quot;].append(float(brier_score_loss(yy, pp)))
+        for metric in sampled_deltas:
+            sampled_deltas[metric].append(
+                sampled_metrics[&quot;clinical_spatial&quot;][metric][-1]
+                - sampled_metrics[&quot;clinical_minimal&quot;][metric][-1]
+            )
+    for name in metrics:
+        for metric, values in sampled_metrics[name].items():
+            metrics[name][metric + &quot;_ci95&quot;] = interval(values)
+    differences = {
+        metric: {
+            &quot;estimate&quot;: metrics[&quot;clinical_spatial&quot;][metric] - metrics[&quot;clinical_minimal&quot;][metric],
+            &quot;ci95&quot;: interval(values),
+        }
+        for metric, values in sampled_deltas.items()
+    }
+
+    report = {
+        &quot;analysis_status&quot;: &quot;EXPLORATORY_INTERNAL_VALIDATION_ONLY&quot;,
+        &quot;source&quot;: source,
+        &quot;source_commit&quot;: SOURCE_COMMIT,
+                &quot;runtime&quot;: {
+            &quot;python&quot;: platform.python_version(),
+            &quot;numpy&quot;: np.__version__,
+            &quot;pandas&quot;: pd.__version__,
+            &quot;scipy&quot;: scipy.__version__,
+            &quot;scikit_learn&quot;: sklearn.__version__,
+        },
+        &quot;analysis_rows&quot;: len(frame),
+        &quot;analysis_events&quot;: int(y.sum()),
+        &quot;analysis_children&quot;: len(children),
+        &quot;event_children&quot;: int(frame.loc[frame[&quot;progression_event&quot;].eq(1), &quot;child_id&quot;].nunique()),
+        &quot;event_fraction&quot;: float(y.mean()),
+        &quot;followup_months_median&quot;: float(frame[&quot;delta_months&quot;].median()),
+        &quot;followup_months_iqr&quot;: [float(v) for v in frame[&quot;delta_months&quot;].quantile([0.25, 0.75])],
+        &quot;followup_months_range&quot;: [float(frame[&quot;delta_months&quot;].min()), float(frame[&quot;delta_months&quot;].max())],
+        &quot;seed&quot;: SEED, &quot;outer_folds&quot;: 5, &quot;inner_folds&quot;: 3,
+        &quot;feature_sets&quot;: FEATURE_SETS,
+        &quot;fold_log&quot;: fold_log,
+        &quot;child_disjoint_outer_folds&quot;: True,
+        &quot;bootstrap_requested&quot;: BOOTSTRAPS, &quot;bootstrap_valid&quot;: valid,
+        &quot;metrics&quot;: metrics,
+        &quot;prevalence_reference&quot;: {
+            &quot;brier&quot;: float(brier_score_loss(y, prevalence_reference)),
+            &quot;log_loss&quot;: float(log_loss(y, prevalence_reference)),
+        },
+        &quot;spatial_minus_minimal&quot;: differences,
+        &quot;scope_note&quot;: (
+            &quot;This is internal validation in one public cohort with no external test, &quot;
+            &quot;real microbiome alignment or image branch. Patient use is unsupported.&quot;
+        ),
+    }
+    (OUT / &quot;real_clinical_internal_validation.json&quot;).write_text(json.dumps(report, ensure_ascii=False, indent=2))
+
+    plt.rcParams.update({&quot;font.size&quot;: 10, &quot;axes.spines.top&quot;: False, &quot;axes.spines.right&quot;: False})
+    fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.2), dpi=170)
+    colors = {&quot;clinical_minimal&quot;: &quot;#25668c&quot;, &quot;clinical_spatial&quot;: &quot;#bf7924&quot;}
+    for name, p in predictions.items():
+        precision, recall, _ = precision_recall_curve(y, p)
+        fpr, tpr, _ = roc_curve(y, p)
+        label = &quot;Minimal clinical&quot; if name == &quot;clinical_minimal&quot; else &quot;Clinical + spatial&quot;
+        axes[0].plot(recall, precision, label=f&quot;{label} (AP {metrics[name][&#x27;pr_auc&#x27;]:.3f})&quot;, color=colors[name], lw=2)
+        axes[1].plot(fpr, tpr, label=f&quot;{label} (AUC {metrics[name][&#x27;roc_auc&#x27;]:.3f})&quot;, color=colors[name], lw=2)
+    axes[0].axhline(y.mean(), color=&quot;#777777&quot;, ls=&quot;--&quot;, label=f&quot;Event fraction {y.mean():.3f}&quot;)
+    axes[1].plot([0, 1], [0, 1], color=&quot;#777777&quot;, ls=&quot;--&quot;, label=&quot;Chance&quot;)
+    axes[0].set(xlabel=&quot;Recall&quot;, ylabel=&quot;Precision&quot;, title=&quot;A. Precision–recall&quot;)
+    axes[1].set(xlabel=&quot;False-positive rate&quot;, ylabel=&quot;True-positive rate&quot;, title=&quot;B. ROC&quot;)
+    for ax in axes:
+        ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.legend(loc=&quot;best&quot;, frameon=False, fontsize=8)
+    fig.suptitle(&quot;Public clinical cohort: child-grouped internal out-of-fold predictions&quot;, fontsize=12)
+    fig.tight_layout()
+    fig.savefig(OUT / &quot;Figure_2_real_internal_validation.png&quot;, bbox_inches=&quot;tight&quot;)
+    fig.savefig(OUT / &quot;Figure_2_real_internal_validation.pdf&quot;, bbox_inches=&quot;tight&quot;)
+    plt.close(fig)
+
+    # Descriptive calibration only: each point pools one fifth of observations
+    # ordered by out-of-fold predicted probability, without outcome fitting.
+    fig, ax = plt.subplots(figsize=(5.5, 5.0), dpi=170)
+    max_bin_value = 0.0
+    for name, p in predictions.items():
+        ordered = np.argsort(p)
+        bins = np.array_split(ordered, 5)
+        mean_pred = [float(p[part].mean()) for part in bins]
+        observed = [float(y[part].mean()) for part in bins]
+        max_bin_value = max(max_bin_value, *mean_pred, *observed)
+        label = &quot;Minimal clinical&quot; if name == &quot;clinical_minimal&quot; else &quot;Clinical + spatial&quot;
+        ax.plot(mean_pred, observed, marker=&quot;o&quot;, color=colors[name], lw=2, label=label)
+    axis_max = min(1.0, max_bin_value * 1.12)
+    ax.plot([0, axis_max], [0, axis_max], ls=&quot;--&quot;, color=&quot;#777777&quot;, label=&quot;Ideal calibration&quot;)
+    ax.set(xlim=(0, axis_max), ylim=(0, axis_max), xlabel=&quot;Mean predicted risk&quot;, ylabel=&quot;Observed event fraction&quot;,
+           title=&quot;Internal calibration, five equal-count bins&quot;)
+    ax.legend(loc=&quot;upper left&quot;, frameon=False, fontsize=8)
+    fig.subplots_adjust(left=0.19, right=0.98, top=0.93, bottom=0.15)
+    fig.savefig(OUT / &quot;Figure_3_real_internal_calibration.png&quot;, bbox_inches=&quot;tight&quot;)
+    fig.savefig(OUT / &quot;Figure_3_real_internal_calibration.pdf&quot;, bbox_inches=&quot;tight&quot;)
+    plt.close(fig)
+
+    print(json.dumps({
+        &quot;analysis_rows&quot;: report[&quot;analysis_rows&quot;],
+        &quot;analysis_events&quot;: report[&quot;analysis_events&quot;],
+        &quot;analysis_children&quot;: report[&quot;analysis_children&quot;],
+        &quot;event_fraction&quot;: report[&quot;event_fraction&quot;],
+        &quot;metrics&quot;: metrics,
+        &quot;prevalence_reference&quot;: report[&quot;prevalence_reference&quot;],
+        &quot;spatial_minus_minimal&quot;: differences,
+    }, ensure_ascii=False, indent=2))
+
+
+if __name__ == &quot;__main__&quot;:
+    run()
+</pre></body></html>

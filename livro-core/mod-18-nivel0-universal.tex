@@ -1,0 +1,119 @@
+% ============================================================
+%  MODULO 18 — Nivel 0 Universal: todos os termos para leigos
+%  SPEC R682 — camada tradutora, sem reescrever 378 fichas
+% ============================================================
+\chapter{N\'ivel 0 Universal: O Dicion\'ario da Casa}
+
+\roteirodidatico
+{Se alguma palavra deste livro travou sua leitura, venha para ca. Este capitulo traduz todos os termos dificeis para a linguagem da casa, com uma frase curta, uma comparacao e o lugar onde o tecnico confere.}
+{\emph{N\'ivel 0} e entender o bastante para usar sem se enganar; \emph{termo discriminado} e palavra com sentido proprio neste livro; \emph{familia} e grupo de agentes com trabalho parecido.}
+{Ache a palavra na lista, leia a frase, guarde a comparacao e, se quiser ir alem, abra o caminho indicado.}
+{Traducao ajuda a usar; so arquivo e comando provam. Analogia nao e definicao tecnica.}
+{Que palavra travou voce, e o que voce consegue fazer com ela depois da traducao?}
+
+\casoguiado{Dona Ana usa o dicionario}
+{Ana le gate fail-closed e trava. Vem aqui, acha Gate: fiscal que devolve sem nota. Lembra da prova com gabarito. Volta ao texto e entende: sem nota, volta. Levou vinte segundos e nao precisou programar.}
+
+\section{Ler qualquer ficha em um minuto}
+
+\begin{flowch}[Qualquer ficha em 5 olhares]{fonte: metodo META-LEITURA do mod-01}
+\matrix[matrix of nodes,name=n0,row sep=2.2mm,column sep=2.5mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|1 Frase: o que promete \\
+ |[fn]|2 Comparacao: com o que parece \\
+ |[fn]|3 Rastro: onde se confere \\
+ |[fde]|4 Passou no criterio \\
+ |[fne]|5 Uso com limite \\
+};
+\draw[seta] (n0-1-1.south)--(n0-2-1.north);
+\draw[seta] (n0-2-1.south)--(n0-3-1.north);
+\draw[seta] (n0-3-1.south)--(n0-4-1.north);
+\draw[seta] (n0-4-1.south)--(n0-5-1.north);
+\end{flowch}
+
+\begin{descricao}
+Um minuto por ficha: leia a promessa, fixe a comparacao, localize o rastro em arquivo ou comando, pergunte se passou no criterio e anote o limite. Se faltar rastro, pare: sem rastro nao ha conclusao, so conversa.
+\end{descricao}
+
+\begin{flowch}[Termo dificil vira uso seguro]{fonte: glossario abaixo}
+\matrix[matrix of nodes,name=n0b,row sep=3mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fn]|Palavra nova \& |[fn]|Frase de 12 palavras \\
+ |[fn]|Comparacao da casa \& |[fne]|Conferencia no codigo \\
+};
+\draw[seta] (n0b-1-1)--(n0b-1-2);
+\draw[seta] (n0b-1-2.south)--(n0b-2-1.north);
+\draw[seta] (n0b-2-1)--(n0b-2-2);
+\end{flowch}
+
+\section{Glossario A a Z em linguagem da casa}
+
+\elemento{Dicionario nivel 0: como usar}{\metainfo{ID}{N0-DIC} \hfill \metainfo{Regra}{frase mais comparacao mais morada}}
+
+\begin{descricao}
+Cada item tem frase curta, comparacao com a casa e, quando existe, a morada no codigo entre parenteses. Morada serve ao tecnico; frase e comparacao bastam ao leigo.
+\end{descricao}
+
+\begin{descricao}
+\textbf{Agente:} ajudante com plaquinha do que tenta. Como plantonista com especialidade do dia. Mora em \pth{agents/catalog/}. \textbf{Orquestrador:} porteiro unico que distribui sem fazer o servico. Como sindico que escala. Mora em \pth{marceloclaro/orchestrator.py}. \textbf{Blackboard:} lousa onde todos veem quem faz o que. Como quadro de plantao. \textbf{MetaBus:} caderno de licoes aprendidas. Como livro de ocorrencias. Mora em \pth{mci/}. \textbf{Memoria episodica:} o que aconteceu. Como diario. \textbf{Memoria semantica:} licao tirada. Como regra da casa. \textbf{Spec:} combinado escrito antes. Como receita. Mora em \pth{specs/}. \textbf{Teste:} prova com gabarito. Como simulado. Mora em \pth{tests/}. \textbf{Gate:} fiscal que devolve sem nota. Como porteira de prova. \textbf{Fail-closed:} na duvida, reprova. Como porteira que nao abre sem cracha. \textbf{SDD:} nada sem combinado. Como obra sem projeto nao comeca. \textbf{TDD:} ciclo curto com teste. Como provar roupa a cada ajuste. \textbf{Escore:} nota de parecido. Como formato da chave. \textbf{Jaccard:} parecido sobre total. Como pecas iguais sobre pecas vistas. \textbf{Atencao:} peso para o parecido. Como ouvir mais quem sabe do assunto. \textbf{Roteamento:} escolher destino. Como mesa que encaminha guia. \textbf{Delegacao:} passar com dono anotado. Como escala assinada. \textbf{Voluntariado:} quem pode se oferece. Como plantao que aceita caso. \textbf{CFP:} anuncio de vaga. Como edital na lousa. \textbf{Lease:} posse temporaria. Como turno com horario. \textbf{Fallback:} plano B. Como estepe. \textbf{Carga:} ocupacao. Como fila de espera. \textbf{Confianca:} pontos de quem acerta. Como credito na cantina, interno e nao garantia. \textbf{Proveniencia:} quem fez, quando, com o que. Como nota fiscal. \textbf{Hash:} digital do arquivo. Como impressao digital. \textbf{Seed:} numero que fixa sorteio. Como senha do bingo. \textbf{Versao:} foto datada. Como edicao do jornal. \textbf{Commit:} ponto salvo. Como capitulo gravado. \textbf{CLI:} janela de comandos. Como balcao de digitacao. \textbf{MCP:} tomada padrao para ferramenta. Como tomada universal. \textbf{A2A:} conversa entre ajudantes. Como radio da equipe. \textbf{Skill:} receita pronta. Como modo de preparo. \textbf{Catalogo:} lista de ajudantes. Como lista de ramais. Mora em \pth{opencode.json}. \textbf{Executor externo:} vizinho que ajuda. Como Gemini e Reasonix chamados quando precisa. \textbf{Reversa:} engenharia de mapa antigo. Como reforma com planta velha. \textbf{Transformer:} maquina de dar peso. Como balanca de parecido. \textbf{Embedding:} numero que resume sentido. Como apelido numerico. \textbf{Softmax:} reparte cem por cento. Como dividir pizza por fome. \textbf{Poder:} chance de achar o que existe. Como faro bom. \textbf{Alfa:} tolerancia a alarme falso. Como cinco em cem. \textbf{PPV:} de cada achado, quanto presta. Como peixe bom na rede. \textbf{Vies:} torta na balanca. Como vento a favor de um lado. \textbf{Taxa-base:} quanto ja era comum. Como peixe que ja tinha no lago. \textbf{FAIR:} facil de achar, abrir, juntar e reusar. Como biblioteca arrumada. \textbf{Reproducao:} refazer e comparar. Como repetir receita. \textbf{Fotografia:} contagem datada. Como censo do predio. \textbf{Doctor:} check-up da casa. Como comando \pth{python3 -m marceloclaro.cli doctor}. \textbf{Ciclo de evolucao:} aprendizado gravado. Como ata numerada R47 em diante. \textbf{Corrigendum:} lista de exageros corrigidos. Como errata na porta. \textbf{Anti-overclaim:} sem selo sem prova externa. Como sem diploma sem escola. \textbf{Metacognicao:} pensar sobre o pensar. Como revisar a propria prova. \textbf{Reflexao:} resumo do que houve. Como relatorio de plantao. \textbf{Percebe:} olhar lousa e caderno antes. Como passar visita. \textbf{Delega:} encaminhar com criterio. Como distribuir guias. \textbf{Executa:} fazer com ferramenta. Como cozinhar com ingredientes. \textbf{Reflete:} guardar licao. Como atualizar livro de ocorrencias. \textbf{Camada:} andar da casa. Como do zero ao sete. \textbf{Interface:} porta de entrada. Como recepcao. \textbf{Infra:} luz, agua e chave. Como Ollama e credenciais. \textbf{Seguranca:} fechadura e cofre. Como permissao e segredo. \textbf{Benchmark:} corrida com cronometro. Como comparacao datada, nao titulo. \textbf{Qualis:} selo externo de revista. Como este livro nao da a ninguem sozinho. \textbf{Mind map:} desenho das ideias. Como arvore da materia. \textbf{Infografico:} cartaz que explica. Como painel do corredor. \textbf{NotebookLM:} caderno que responde com fonte. Como biblioteca que cita pagina.
+\end{descricao}
+
+\section{Cinco fichas-modelo traduzidas para todos os tipos de caixa}
+
+\elemento{Modelo 1 -- Gate fail-closed}{\metainfo{ID}{N0-M1} \hfill \metainfo{Cobre}{processo mais limite}}
+
+\begin{descricao}
+Promessa: nada passa sem criterio. Comparacao: prova com gabarito. Rastro: spec mais teste verde. Limite: gabarito fora do assunto nao aprova nada.
+\end{descricao}
+
+\begin{funcao}
+Proteger o leigo do quase: sem nota, volta com motivo escrito.
+\end{funcao}
+
+\elemento{Modelo 2 -- Blackboard}{\metainfo{ID}{N0-M2} \hfill \metainfo{Cobre}{conceito mais arquitetura}}
+
+\begin{descricao}
+Promessa: todos veem quem faz o que. Comparacao: quadro de plantao. Rastro: entradas do Quadro com tarefa e dono. Limite: lousa cheia nao prova servico bom.
+\end{descricao}
+
+\begin{funcao}
+Evitar duplicar e sumir com dono: sem nome na lousa, ninguem responde.
+\end{funcao}
+
+\elemento{Modelo 3 -- Atencao e Jaccard}{\metainfo{ID}{N0-M3} \hfill \metainfo{Cobre}{metodo mais calculo}}
+
+\begin{descricao}
+Promessa: ordenar por parecido. Comparacao: chave pelo formato. Conta: parecido sobre total, empate por categoria. Limite: parecido nao e acerto.
+\end{descricao}
+
+\begin{funcao}
+Escolher sem fingir certeza: nota guia, fiscal decide.
+\end{funcao}
+
+\elemento{Modelo 4 -- PPV}{\metainfo{ID}{N0-M4} \hfill \metainfo{Cobre}{resultado mais aviso}}
+
+\begin{descricao}
+Promessa: dizer quanto do achado presta. Comparacao: peixe bom na rede. Conta: com campo dificil, 62 em 100 prestam; com campo facil, 94. Limite: mesmo teste vale diferente por campo.
+\end{descricao}
+
+\begin{funcao}
+Vacinar contra numero bonito: sem taxa-base, sem conclusao.
+\end{funcao}
+
+\elemento{Modelo 5 -- FAIR e reproducao}{\metainfo{ID}{N0-M5} \hfill \metainfo{Cobre}{reproducao completa}}
+
+\begin{descricao}
+Promessa: outro refaz e compara. Comparacao: receita com ingredientes e forno. Rastro: comando, versao, hash e seed. Limite: outra maquina pode divergir por dependencia externa; guardar saida real e parte do metodo.
+\end{descricao}
+
+\begin{funcao}
+Transformar leitor em testemunha: sem rastro, e historia; com rastro, e ciencia repetivel.
+\end{funcao}
+
+\section{O catalogo inteiro em 14 frases}
+
+\begin{descricao}
+Orquestracao: quem distribui sem executar. Academica e pesquisa: quem busca e cita sem inventar. Auditoria: quem confere e aponta furo. Juridica: quem redige com norma. Dados: quem trata com origem e permissao. Inferencia: quem calcula com limite. Engenharia e nuvem: quem liga servico com chave. Testes: quem prova com gabarito. Literaria: quem cria e revisa com etica. Curadoria: quem organiza paisagem. Integracao: quem liga ponta com contrato. Mira e apresentacao: quem mostra em cartaz. Qualidade e MASWOS: quem fecha pacote sem prometer selo. Utilidade: quem ajuda no dia a dia com comando curto. Cada um dos 238 segue a mesma leitura de um minuto da primeira secao.
+\end{descricao}
+
+\begin{aviso}
+Limite do nivel 0. Frase curta ajuda a comecar; nao substitui spec, teste e gate. Quando a duvida envolve dinheiro, saude, justica ou seguranca, chame responsavel humano e repita a conferencia com criterio escrito.
+\end{aviso}

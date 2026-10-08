@@ -1,0 +1,20 @@
+digraph OdontoCA {
+  graph [rankdir=TB, bgcolor="white", pad=0.18, nodesep=0.30, ranksep=0.48, fontname="Arial", fontsize=11];
+  node [shape=box, style="rounded,filled", color="#24527A", fillcolor="#EAF3FA", fontname="Arial", fontsize=10, margin="0.12,0.08"];
+  edge [color="#24527A", arrowsize=0.7];
+
+  synthetic [label="Synthetic children\n(n = 36; three visits)"];
+  transitions [label="Tooth-level H to C\ntransitions (686; 54 events)"];
+  models [label="CA rule + clinical,\nmicrobiome and combined models"];
+  cv [label="Nested child-grouped CV\n(3 outer / 2 inner folds)"];
+  outcomes [label="Out-of-fold metrics\nand technical checks"];
+  synthetic -> transitions -> models -> cv -> outcomes;
+
+  node [style="rounded,dashed,filled", color="#8A6A28", fillcolor="#FFF8E9"];
+  clinical [label="Real clinical and Qiita\nreproduction: NOT RUN"];
+  visual [label="Image audit / visual model:\nNOT RUN"];
+  external [label="External clinical\nvalidation: NOT PERFORMED"];
+  outcomes -> clinical [style=dashed, color="#8A6A28"];
+  outcomes -> visual [style=dashed, color="#8A6A28"];
+  outcomes -> external [style=dashed, color="#8A6A28"];
+}

@@ -37,14 +37,14 @@ permission:
     yarn build: allow
     pnpm build: allow
     python -m build: allow
-    *: deny
+    "*": deny
   edit:
     **/*: deny
   write:
     **/*: deny
   task:
     contextscout: allow
-    *: deny
+    "*": deny
 ---
 
 # BuildAgent

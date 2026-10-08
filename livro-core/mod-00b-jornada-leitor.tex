@@ -1,0 +1,81 @@
+% ============================================================
+%  MODULO 00B — Jornada do Leitor: do Funcional ao Reprodutivel
+%  SPEC R679 — quatro estacoes F-S-T-R com calculos justificados
+% ============================================================
+\chapter{Jornada do Leitor: Quatro Esta\c{c}\~oes}
+
+\roteirodidatico
+{Voc\^e pode ler este livro em dois ritmos: Ana l\^e para usar bem; Bruno l\^e para reconstruir. As quatro esta\c{c}\~oes a seguir mostram o mesmo pedido visto de quatro dist\^ancias: o que a casa promete, quem executa, por que o desenho faz sentido e como refazer.}
+{\emph{Esta\c{c}\~ao Funcional} observa entradas e sa\'idas; \emph{Estrutural} abre o cap\^o e localiza arquivos; \emph{Te\'orica} apresenta o modelo que justifica a regra; \emph{Reprodu\c{c}\~ao} fixa comando, vers\~ao e confer\^encia.}
+{Em cada esta\c{c}\~ao, pare na pergunta de verifica\c{c}\~ao antes de avan\c{c}ar. Se n\~ao conseguir responder com arquivo ou comando, volte uma esta\c{c}\~ao.}
+{Modelos inspiram regras; regras n\~ao provam desempenho. DOI ativo prova localiza\c{c}\~ao da fonte, n\~ao acerto da interpreta\c{c}\~ao. C\'alculos valem dentro das hip\'oteses declaradas.}
+{Para o pedido que voc\^e tem em mente, o que muda entre ver s\'o a resposta e conseguir refazer todo o caminho com outro computador?}
+
+\casoguiado{o pedido que atravessa as quatro esta\c{c}\~oes}
+{Ana pede: resuma este artigo em dez linhas sem inventar dados. Bruno registra o mesmo pedido como tarefa com crit\'erio: cada frase do resumo deve apontar para um trecho do original. Na esta\c{c}\~ao funcional, ambos conferem se o resumo veio com fontes. Na estrutural, Bruno localiza quem buscou, quem resumiu e quem verificou. Na te\'orica, os dois entendem por que gates existem. Na reprodu\c{c}\~ao, Bruno repete o diagn\'ostico e recompila o livro para provar que o ambiente sustenta o que o texto afirma.}
+
+\section{Esta\c{c}\~ao Funcional: o contrato antes do mecanismo}
+
+Na esta\c{c}\~ao funcional, a \'unica pergunta \'e se o combinado foi cumprido. Entrada, crit\'erio e sa\'ida ficam vis\'iveis na mesma p\'agina. Ana aprende a exigir tr\^es itens: o texto pedido, a fonte de cada afirma\c{c}\~ao e a declara\c{c}\~ao do que n\~ao foi encontrado. Sem esses tr\^es, ela devolve. Bruno aprende a escrever o crit\'erio antes de chamar qualquer agente, em \pth{specs/SPEC-935-R*.md}, e a s\'o aceitar a entrega quando \pth{tests/test_r*.py} passa. Essa ordem, crit\'erio antes de execu\c{c}\~ao, \'e o SDD/TDD que o livro defender\'a com dados.
+
+A defesa n\~ao \'e slogan \'agil. A disseca\c{c}\~ao do processo mostra que os ganhos associados ao TDD v\^em sobretudo da granularidade e da uniformidade dos passos, n\~ao apenas da ordem teste-primeiro.
+
+Passos curtos e regulares melhoram foco e fluxo, e \'e por isso que este livro exige fichas curtas, comandos curtos e verifica\c{c}\~oes frequentes em vez de grandes blocos sem confer\^encia \citref{FUCCI, D. et al. A dissection of the test-driven development process: does it really matter to test-first or to test-last? IEEE Transactions on Software Engineering, v.~43, n.~7, p.~597-614, 2017}{10.1109/TSE.2016.2616877}{Justifica o SDD/TDD deste livro como disciplina de passos curtos e uniformes, nao como ritual de ordem teste-primeiro.}{Test-driven development is a technique that repeats short coding cycles interleaved with testing}{Desenvolvimento orientado a testes e uma tecnica que repete ciclos curtos de codificacao intercalados com testes.}{FUCCI et al., 2017, p.~597-614}.
+
+A meta-an\'alise de 27 estudos sobre TDD confirma o mesmo ponto com outra lente: h\'a efeito sobre qualidade externa e produtividade, mas condicionado ao desenho do estudo e \`a granularidade da pr\'atica.
+
+Por isso o livro nunca promete que spec mais teste eliminam erro; promete apenas que tornam o crit\'erio inspecion\'avel e a falha localiz\'avel \citref{RAFIQUE, Y.; MISIC, V. B. The effects of test-driven development on external quality and productivity: a meta-analysis. IEEE Transactions on Software Engineering, v.~39, n.~6, p.~835-856, 2013}{10.1109/TSE.2012.28}{Delimita o que o SDD/TDD pode prometer neste livro: efeito condicionado e auditavel, nao garantia universal de qualidade.}{This paper provides a systematic meta-analysis of 27 studies that investigate the impact of test-driven development on external code quality}{Este artigo fornece uma meta-analise sistematica de 27 estudos que investigam o impacto do desenvolvimento orientado a testes na qualidade externa do codigo.}{RAFIQUE; MISIC, 2013, p.~835-856}.
+
+\elemento{Contrato funcional m\'inimo}{\metainfo{ID}{JOR-F} \hfill \metainfo{Para}{Ana e Bruno} \hfill \metainfo{Gate}{fail-closed}}
+
+\begin{descricao}
+Todo pedido traz entrada leg\'ivel, crit\'erio escrito e forma de conferir. Se faltar um dos tr\^es, o Orquestrador recusa encerrar. Essa recusa n\~ao \'e antipatia: \'e o gate fechado que protege o leitor de aceitar resposta sem lastro.
+\end{descricao}
+
+\section{Esta\c{c}\~ao Estrutural: quem faz e onde mora}
+
+Na esta\c{c}\~ao estrutural, Bruno abre o mapa de oito camadas e segue o pedido como quem segue um cano. Camada 1 recebe pela CLI e configura\c{c}\~ao. Camada 3 escolhe o agente por capacidades e escore. Camada 2 anota no Quadro e guarda no MetaBus. Camada 4 barra o que n\~ao passou no gate. Camada 6 chama ferramentas externas por MCP quando precisa. Cada passagem deixa rastro em arquivo ou log; onde n\~ao h\'a rastro, n\~ao h\'a afirma\c{c}\~ao neste livro.
+
+O cora\c{c}\~ao da escolha \'e uma pontua\c{c}\~ao de aten\c{c}\~ao. Por tr\'as do nome elegante h\'a uma opera\c{c}\~ao simples herdada dos Transformers: comparar pergunta e candidatos por produto escalar, suavizar por softmax e combinar valores.
+
+A arquitetura que introduziu esse mecanismo empilha aten\c{c}\~ao pura sem recorr\^encia nem convolu\c{c}\~ao, e \'e dela que o Core toma emprestada a ideia de rotear por relev\^ancia ponderada.
+
+O mecanismo original calcula aten\c{c}\~ao como softmax do produto de consultas por chaves escalado pela raiz da dimens\~ao, ponderando valores \citref{VASWANI, A. et al. Attention is all you need. Advances in Neural Information Processing Systems, v.~30, p.~5998-6008, 2017}{10.48550/arXiv.1706.03762}{Justifica o roteamento por atencao do Core como ponderacao por relevancia, nao como compreensao garantida.}{We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely}{Propomos uma nova arquitetura de rede simples, o Transformer, baseada apenas em mecanismos de atencao, dispensando totalmente recorrencia e convolucoes.}{VASWANI et al., 2017, p.~5998-6008}.
+
+Para que Ana tamb\'em entenda, o livro resolve um caso de brinquedo. Sejam duas consultas e duas chaves em dimens\~ao $d_{k}=4$, com $QK^{T} = [[4,0],[0,4]]$. Escala por $\sqrt{d_{k}}=2$: $[[2,0],[0,2]]$. Softmax por linha: linha 1 d\'a $[\exp(2)/(\exp(2)+\exp(0)), 1/(\exp(2)+1)] \approx [0{,}88, 0{,}12]$; linha 2 espelha $[0{,}12, 0{,}88]$. Multiplicar por $V=[[1,0],[0,1]]$ devolve quase a identidade ponderada. O exemplo mostra o essencial: escore alto concentra peso, escore empatado divide peso. No Core, trocar $Q$, $K$ e $V$ por embeddings de tarefa, agente e hist\'orico n\~ao muda a intui\c{c}\~ao: pontua\c{c}\~ao ordena, n\~ao certifica.
+
+\begin{aviso}
+Limite estrutural. O c\'alculo acima ilustra pondera\c{c}\~ao; n\~ao prova que o roteador do Core escolha bem. A qualidade da escolha depende de embeddings, pesos, desempates e fallbacks implementados, avaliados caso a caso com registros observ\'aveis.
+\end{aviso}
+
+\section{Esta\c{c}\~ao Te\'orica: por que desconfiar at\'e com n\'umero bonito}
+
+Na esta\c{c}\~ao te\'orica, Ana aprende a pergunta que protege o leigo: de cada dez afirma\c{c}\~oes publicadas nesta \'area, quantas seriam verdadeiras antes deste estudo. Bruno aprende a f\'ormula que formaliza a desconfian\c{c}a: o valor preditivo positivo.
+
+O ensaio que fundou essa discuss\~ao mostra que a probabilidade de uma alega\c{c}\~ao ser verdadeira depende de poder, vi\'es e da raz\~ao entre rela\c{c}\~oes verdadeiras e falsas testadas no campo.
+
+Simula\c{c}\~oes desse modelo indicam que, para muitos desenhos e campos, \'e mais prov\'avel que uma alega\c{c}\~ao seja falsa do que verdadeira, o que justifica o gate anti-overclaim deste livro \citref{IOANNIDIS, J. P. A. Why most published research findings are false. PLoS Medicine, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{Fundamenta o gate anti-overclaim e o calculo de PPV: sem considerar poder, vies e razao de verdadeiros, numero bonito nao sustenta conclusao.}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulacoes mostram que, para a maioria dos desenhos e cenarios de estudo, e mais provavel que uma alegacao de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, e124}.
+
+O livro resolve o caso can\^onico. Seja $R$ a raz\~ao entre verdadeiros e falsos antes do estudo, $\alpha=0{,}05$ o n\'ivel de signific\^ancia e $1-\beta$ o poder. Ent\~ao
+
+\[ \mathrm{PPV} = \frac{(1-\beta)R}{(1-\beta)R + \alpha}. \]
+
+Com campo dif\'icil $R=1{:}10=0{,}1$, poder $0{,}8$ e $\alpha=0{,}05$: numerador $0{,}8 \times 0{,}1 = 0{,}08$; denominador $0{,}08+0{,}05=0{,}13$; $\mathrm{PPV} \approx 0{,}615$, cerca de 62 por cento. Ou seja, mesmo com poder razo\'avel, tr\^es a cada oito achados significativos seriam falsos nesse campo. Se houver vi\'es $u$, o denominador cresce e o PPV cai mais. A moral para o Core \'e direta: teste verde sem considerar poder, vi\'es e taxa-base n\~ao \'e selo de verdade; \'e apenas passagem por um crit\'erio declarado.
+
+\section{Esta\c{c}\~ao Reprodu\c{c}\~ao: como refazer sem depender de ningu\'em}
+
+Na \'ultima esta\c{c}\~ao, Bruno executa e Ana confere. O princ\'ipio que organiza a planta de doze passos do ep\'ilogo vem dos princ\'ipios FAIR: para que m\'aquinas e pessoas encontrem, acessem, combinem e reutilizem, dados e metadados precisam de identificador persistente, descri\c{c}\~ao rica e registro indexado.
+
+A urg\^encia de melhorar a infraestrutura de reutiliza\c{c}\~ao \'e o diagn\'ostico que motiva tratar specs, testes, logs e vers\~oes como cidad\~aos de primeira classe neste livro.
+
+Cada artefato do Core ganha, por isso, proveni\^encia: quem gerou, de que vers\~ao, com que comando e com que hash \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{Justifica a planta de reproducao e a proveniencia por observacao exigidas neste livro: tornar cada entrega encontrravel, acessivel e reutilizavel.}{There is an urgent need to improve the infrastructure supporting the reuse of scholarly data}{Ha uma necessidade urgente de melhorar a infraestrutura que sustenta a reutilizacao de dados academicos.}{WILKINSON et al., 2016, 160018}.
+
+\elemento{As quatro esta\c{c}\~oes em uma frase}{\metainfo{ID}{JOR-SINT} \hfill \metainfo{Uso}{guia de bolso}}
+
+\begin{descricao}
+Funcional promete o contrato; estrutural mostra o encanamento; te\'orica explica o porqu\^e do gate; reprodu\c{c}\~ao entrega a chave para refazer. Se voc\^e consegue contar a mesma cena nas quatro linguagens, entendeu o Core o bastante para us\'a-lo sem se enganar.
+\end{descricao}
+
+\begin{funcao}
+Dar ao leigo um caminho seguro at\'e o uso com fontes e ao t\'ecnico um caminho audit\'avel at\'e a reconstru\c{c}\~ao, sem que um precise fingir ser o outro.
+\end{funcao}

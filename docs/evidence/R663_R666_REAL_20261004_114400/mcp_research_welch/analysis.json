@@ -1,0 +1,60 @@
+{
+  "alpha": 0.05,
+  "alternative": "two-sided",
+  "assumptions": [
+    "Observações independentes; esta premissa não é confirmada pelo código.",
+    "A origem e a adequação da amostra dependem da proveniência informada.",
+    "Um único método é executado, sem busca por resultados significativos.",
+    "Os grupos são independentes; a inferência de Welch exige distribuição aproximadamente normal ou amostras adequadas e não implica equivalência de grupos não aleatorizados."
+  ],
+  "causal_inference": false,
+  "confidence_interval_95": [
+    -0.7951002289073511,
+    -0.6048997710926484
+  ],
+  "degrees_of_freedom": 89.04337511251656,
+  "descriptive": {
+    "Iris-versicolor": {
+      "max": 1.8,
+      "mean": 1.326,
+      "median": 1.3,
+      "min": 1.0,
+      "n": 50,
+      "standard_deviation": 0.19775268000454405
+    },
+    "Iris-virginica": {
+      "max": 2.5,
+      "mean": 2.026,
+      "median": 2.0,
+      "min": 1.4,
+      "n": 50,
+      "standard_deviation": 0.27465005563666733
+    }
+  },
+  "estimate": -0.6999999999999997,
+  "experiment_executed": true,
+  "group_sizes": {
+    "Iris-versicolor": 50,
+    "Iris-virginica": 50
+  },
+  "limitations": [
+    "A análise não estabelece causalidade.",
+    "A revisão computacional não substitui revisão humana por pares.",
+    "Não há certificação externa de originalidade ou generalização."
+  ],
+  "method": "welch_t",
+  "missing_values_policy": "reject",
+  "n": 100,
+  "null_hypothesis": "Diferença entre as médias populacionais igual a zero.",
+  "p_value": 2.111534400988574e-25,
+  "seed": 663,
+  "statistic": -14.625367047410148,
+  "variables": {
+    "group": "species",
+    "groups": [
+      "Iris-versicolor",
+      "Iris-virginica"
+    ],
+    "value": "petal_width"
+  }
+}

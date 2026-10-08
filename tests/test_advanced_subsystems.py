@@ -169,7 +169,18 @@ class TestQuantum:
 # ── SPEC-012: Ciclos Evolutivos ─────────────────────────────────────────
 
 class TestEvolution:
-    def test_round_numbering_continues_from_r46(self, tmp_path):
+    def test_round_numbering_continues_from_r46(self, tmp_path, monkeypatch):
+        # R611: next_round_id() também varre specs/ para não colidir com
+        # numeral já usado. Isolar só o state_path não bastava — o teste lia o
+        # specs/ real e passava a falhar sempre que uma spec nova era escrita
+        # no repositório (R607, R611, R617, R621...). O diretório de specs
+        # precisa ser isolado junto, senão o teste mede o estado do repositório
+        # em vez do comportamento do registro.
+        specs_dir = tmp_path / "specs"
+        specs_dir.mkdir()
+        monkeypatch.setenv("EVOLUTION_SPECS_PATH", str(specs_dir))
+        monkeypatch.setenv("EVOLUTION_STATE_PATH", str(tmp_path / "cycles.json"))
+
         from evolution.cycles import EvolutionRegistry
         registry = EvolutionRegistry(state_path=str(tmp_path / "cycles.json"))
         cycle = registry.record("objetivo", ["mudança"], score=8.0)

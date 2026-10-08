@@ -1,0 +1,47 @@
+{
+  "request_id": "48ce12930ae8410babc86576b44c7182",
+  "request_sha256": "3c37d476378e6c617ddd978e4de1fe4fa3dc0fe8d89c3564860b5f251dfffddb",
+  "plugin_id": "ngs-analysis-workbench",
+  "host_tool": "mcp__ngs_compute__list_compute_targets",
+  "status": "completed",
+  "response_sha256": "a84fc9030f8452ba2d0782e392f5587c611d946fdee8b6977e910a350db18b10",
+  "result": {
+    "content": [
+      {
+        "text": "{\n  \"count\": 1,\n  \"targets\": [\n    {\n      \"target_id\": \"local\",\n      \"title\": \"This computer\",\n      \"provider\": \"ngs-analysis-workbench\",\n      \"controller_transport\": \"local_process\",\n      \"executor\": \"local_process\",\n      \"workspace_access\": \"local_filesystem\",\n      \"description\": \"Run the workflow controller as a process on this computer.\"\n    }\n  ]\n}",
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": {
+      "count": 1,
+      "targets": [
+        {
+          "controller_transport": "local_process",
+          "description": "Run the workflow controller as a process on this computer.",
+          "executor": "local_process",
+          "provider": "ngs-analysis-workbench",
+          "target_id": "local",
+          "title": "This computer",
+          "workspace_access": "local_filesystem"
+        }
+      ]
+    }
+  },
+  "reported_by": "Codex desktop authenticated MCP host",
+  "source_authenticity": "host_reported",
+  "host_reported_execution": true,
+  "local_connector_execution": false,
+  "external_validation": false,
+  "metacognition": {
+    "observation_id": "c93ccd63-b6e0-4c9f-b626-c42f6b5c76a6",
+    "persisted": true,
+    "scope_id": "26f9d672abfe9a421e4a2432ad388193efe18d54ead3831c4fb7dcbdf6c73378",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "completed"
+    },
+    "confidence_promoted": false
+  }
+}

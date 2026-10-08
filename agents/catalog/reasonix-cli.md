@@ -1,6 +1,8 @@
 ---
 id: reasonix-cli
 name: reasonix-cli
+description: >-
+  Executor externo orquestrável: `reasonix` (`esengine/DeepSeek-Reasonix`, MIT).
 type: integration
 round: R602
 spec: SPEC-935-R602-reasonix.md

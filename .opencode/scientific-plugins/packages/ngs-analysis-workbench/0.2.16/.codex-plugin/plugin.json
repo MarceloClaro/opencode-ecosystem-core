@@ -1,0 +1,51 @@
+{
+  "name": "ngs-analysis-workbench",
+  "version": "0.2.16",
+  "description": "Journey-oriented NGS data understanding, scientific analysis design, approval-gated execution, and file-backed result interpretation.",
+  "author": {
+    "name": "OpenAI",
+    "email": "support@openai.com",
+    "url": "https://openai.com/"
+  },
+  "homepage": "https://openai.com/gpt-rosalind/",
+  "repository": "https://github.com/openai/openai",
+  "license": "MIT",
+  "keywords": [
+    "ngs",
+    "sequencing",
+    "bioinformatics",
+    "fastq",
+    "rnaseq",
+    "scrnaseq",
+    "pipeline-routing",
+    "snakemake",
+    "nextflow",
+    "nf-core"
+  ],
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "NGS Analysis Workbench",
+    "shortDescription": "Analyze sequencing data",
+    "longDescription": "A journey-oriented NGS workbench for FASTQ QC, bulk RNA-seq, and single-cell RNA-seq. Focused skills establish the user's starting point, design toward a scientific outcome, bind that design to live Nextflow/nf-core or Snakemake capabilities, preserve checksum-bound native approval, and interpret completed results from file-backed evidence.",
+    "developerName": "OpenAI",
+    "category": "Scientific Research",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://openai.com/gpt-rosalind/",
+    "privacyPolicyURL": "https://openai.com/policies/privacy-policy/",
+    "termsOfServiceURL": "https://openai.com/policies/terms-of-use/",
+    "defaultPrompt": [
+      "run a FastQC and Salmon QC on a public RNA-seq dataset and provide an interpretation of the results.",
+      "run a scRNA-seq analysis with STARsolo on a public dataset and provide an interpretation of the results.",
+      "run a NGS analysis on my sequencing data in my project."
+    ],
+    "brandColor": "#0F766E",
+    "composerIcon": "./assets/app-icon.png",
+    "logo": "./assets/app-icon.png",
+    "screenshots": []
+  }
+}

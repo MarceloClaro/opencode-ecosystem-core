@@ -1,0 +1,214 @@
+{
+  "analysis": {
+    "alpha": 0.05,
+    "alternative": "two-sided",
+    "assumptions": [
+      "Observações independentes; esta premissa não é confirmada pelo código.",
+      "A origem e a adequação da amostra dependem da proveniência informada.",
+      "Um único método é executado, sem busca por resultados significativos.",
+      "O p-valor paramétrico e o intervalo de Fisher pressupõem distribuição bivariada adequada; o teste de permutação pressupõe permutabilidade sob a hipótese nula."
+    ],
+    "causal_inference": false,
+    "confidence_interval_95": [
+      0.9490524593111144,
+      0.9729853173787971
+    ],
+    "descriptive": {
+      "petal_length": {
+        "max": 6.9,
+        "mean": 3.758,
+        "median": 4.35,
+        "min": 1.0,
+        "n": 150,
+        "standard_deviation": 1.7652982332594664
+      },
+      "petal_width": {
+        "max": 2.5,
+        "mean": 1.1993333333333334,
+        "median": 1.3,
+        "min": 0.1,
+        "n": 150,
+        "standard_deviation": 0.7622376689603466
+      }
+    },
+    "estimate": 0.9628654314027961,
+    "experiment_executed": true,
+    "limitations": [
+      "A análise não estabelece causalidade.",
+      "A revisão computacional não substitui revisão humana por pares.",
+      "Não há certificação externa de originalidade ou generalização."
+    ],
+    "method": "pearson",
+    "missing_values_policy": "reject",
+    "n": 150,
+    "null_hypothesis": "Correlação linear populacional igual a zero.",
+    "p_value": 4.675003907328585e-86,
+    "permutation": {
+      "extreme": 0,
+      "p_value": 0.001,
+      "replicates": 999,
+      "seed": 663
+    },
+    "seed": 663,
+    "statistic": 0.9628654314027961,
+    "variables": {
+      "x": "petal_length",
+      "y": "petal_width"
+    }
+  },
+  "artifacts": {
+    "analysis": {
+      "bytes": 1663,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/analysis.json",
+      "sha256": "4c679924fcddce72815625fd4dde36a293efd73eaf11413f9faf8e4210341cad"
+    },
+    "article": {
+      "bytes": 5026,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/article.md",
+      "sha256": "52ad31a0b1c497d6d7a369fa051cb581cf17fda949fbcbadb51cf7302f60fb5d"
+    },
+    "computational_review": {
+      "bytes": 304,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/computational-review.json",
+      "sha256": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b"
+    },
+    "configuration": {
+      "bytes": 271,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/configuration.json",
+      "sha256": "c5450083d6fd73ec31d837b9fbf5ed37eba79e8efaff5cbede5d795820161ebe"
+    },
+    "dataset": {
+      "bytes": 4608,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/dataset.csv",
+      "sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65"
+    },
+    "methods_code": {
+      "bytes": 8566,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/statistical_methods.py",
+      "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8"
+    },
+    "rag_corpus": {
+      "bytes": 797,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/rag-corpus.json",
+      "sha256": "4542ee9b3a80d1ac0a2e3e5ae5680e035ddce0f52f24a0a306225798c0d36084"
+    },
+    "rag_retrieval": {
+      "bytes": 816,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/rag-query.json",
+      "sha256": "c33a33377da4d256b77752b0b83a44d9c1aadf5252b40291652c34b3b3cdf122"
+    },
+    "reference_source_1": {
+      "bytes": 539,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/reference-source-1.json",
+      "sha256": "889f4673ca467e99e8dfb1c73ecc2c3950fdc78a8038444526a292b39e88ed47"
+    },
+    "reference_source_2": {
+      "bytes": 549,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/reference-source-2.json",
+      "sha256": "b1f54de2e23949a12264a7e962794cb1b72efe5546267f231f85160433e19327"
+    },
+    "references": {
+      "bytes": 657,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/references.json",
+      "sha256": "a5d8b5d0486a968f138c417d8302678fb8bb5fc5e4ae4c19ac7f0884428c223c"
+    },
+    "reproduce_code": {
+      "bytes": 1110,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/reproduce.py",
+      "sha256": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575"
+    },
+    "reproduction": {
+      "bytes": 244,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research/reproduction.json",
+      "sha256": "bf6c8037851207235f5e96b65fc73446b3a2ec86787f42249f25d7310e5ad55a"
+    }
+  },
+  "computational_review": {
+    "causal_inference": false,
+    "external_validation": false,
+    "finite_numeric_output": true,
+    "human_peer_review": false,
+    "kind": "computational_review",
+    "passed": true,
+    "reproduction_matched": true,
+    "single_prespecified_method": true,
+    "source_authenticity_independently_validated": false
+  },
+  "evidence_kind": "executed_local_analysis",
+  "experiment_executed": true,
+  "external_validation": false,
+  "generated_at": "2026-10-04T19:53:07.467195+00:00",
+  "model_inference_executed": false,
+  "provenance": {
+    "dataset": {
+      "archive_sha256": "d11fe30213d36434a0879aab7cb00ce3c812eb7ba2495874438abff7b7b762e9",
+      "dataset_doi": "10.24432/C56C76",
+      "evidence_kind": "real_observations",
+      "license": "CC-BY-4.0",
+      "limitations": "Conjunto histórico; espécies têm origens distintas. Correlação agregada não prova causalidade.",
+      "member_sha256": "0fed2a99db77ec533a62dc66894d3ec6df3b58b6a8f3cf4a6b47e4086b7f97dc",
+      "original_path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/sources/iris.csv",
+      "sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+      "snapshot_bytes": 4608,
+      "source_authenticity": "user_declared",
+      "source_url": "https://archive.ics.uci.edu/static/public/53/iris.zip",
+      "title": "Iris UCI — bezdekIris.data",
+      "transformation": "Cabeçalho CSV adicionado; registros preservados."
+    },
+    "references": [
+      {
+        "evidence_kind": "retrieved_http_metadata",
+        "retrieved_at": 1791143583.094837,
+        "sha256": "889f4673ca467e99e8dfb1c73ecc2c3950fdc78a8038444526a292b39e88ed47",
+        "source_authenticity": "user_declared",
+        "source_mode": "provided_snapshot",
+        "source_url": "https://api.crossref.org/works/10.1111/j.1469-1809.1936.tb02137.x",
+        "status": "online"
+      },
+      {
+        "evidence_kind": "retrieved_http_metadata",
+        "retrieved_at": 1791143583.4519331,
+        "sha256": "b1f54de2e23949a12264a7e962794cb1b72efe5546267f231f85160433e19327",
+        "source_authenticity": "user_declared",
+        "source_mode": "provided_snapshot",
+        "source_url": "https://api.crossref.org/works/10.1111/1740-9713.01589",
+        "status": "online"
+      }
+    ]
+  },
+  "question": "Qual é a associação linear entre comprimento e largura da pétala no conjunto Iris da UCI?",
+  "rag": {
+    "abstained": false,
+    "evidence": [
+      {
+        "doc_id": "reference-2",
+        "evidence_scope": "bibliographic_metadata",
+        "lexical_score": 0.06666666666666667,
+        "matched_terms": [
+          "iris"
+        ],
+        "sha256": "943c8d35e96b0da0984396d178a706944335be75cb57c80dcd959a964641d053",
+        "source": "https://doi.org/10.1111/1740-9713.01589",
+        "title": "The Iris Data Set: In Search of the Source of<i>Virginica</i>"
+      }
+    ],
+    "limitation": "A recuperação usa título/resumo; não demonstra leitura integral ou sustentação dos resultados.",
+    "method": "lexical_overlap",
+    "model_inference_executed": false,
+    "query": "Qual é a associação linear entre comprimento e largura da pétala no conjunto Iris da UCI?",
+    "retrieval_executed": true,
+    "scientific_claim_support": false
+  },
+  "reproduction": {
+    "analysis_sha256": "4c679924fcddce72815625fd4dde36a293efd73eaf11413f9faf8e4210341cad",
+    "dataset_sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+    "exit_code": 0,
+    "matched": true,
+    "process_executed": true
+  },
+  "runtime": {
+    "python": "3.14.4",
+    "scipy": "1.18.0"
+  },
+  "status": "completed"
+}

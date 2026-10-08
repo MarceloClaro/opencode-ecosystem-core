@@ -1,0 +1,13 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_plan_keeps_declarations_out_of_observed_and_explains_gaps ________
+tests/test_r666_knowledge_orchestration.py:22: in test_plan_keeps_declarations_out_of_observed_and_explains_gaps
+    assert result["observed_capabilities"] == ["sources"]
+E   AssertionError: assert ['analysis', ...4', 'sources'] == ['sources']
+E     
+E     At index 0 diff: 'analysis' != 'sources'
+E     Left contains 5 more items, first extra item: 'evidence-oriented-evolution'
+E     Use -v to get more diff
+=========================== short test summary info ============================
+FAILED tests/test_r666_knowledge_orchestration.py::test_plan_keeps_declarations_out_of_observed_and_explains_gaps
+1 failed in 0.53s

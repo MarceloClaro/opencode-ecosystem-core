@@ -1,0 +1,116 @@
+.panel {
+  min-width: 0;
+  padding: var(--oai-space-4);
+  border: var(--ngs-border-width) solid var(--ngs-border);
+  border-radius: var(--ngs-radius-md);
+  background: var(--ngs-surface);
+}
+.panelHeading,
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--oai-space-3) var(--oai-space-4);
+  margin-bottom: var(--oai-space-4);
+}
+.pageHeader {
+  flex-wrap: wrap;
+}
+.pageHeader > button {
+  flex: none;
+}
+.pageTitle {
+  margin: 0;
+  font-size: var(--ngs-font-title);
+  line-height: var(--ngs-leading-tight);
+}
+.sectionLabel,
+.eyebrow {
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-xs);
+  font-weight: var(--ngs-weight-medium);
+  line-height: var(--ngs-leading);
+}
+.sectionLabel {
+  margin: 0 0 var(--oai-space-3);
+}
+.eyebrow {
+  margin-bottom: var(--oai-space-1);
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--oai-space-2);
+  min-height: var(--ngs-control-height);
+  padding: var(--oai-space-1) var(--ngs-control-padding);
+  border: 1px solid transparent;
+  border-radius: var(--ngs-radius-sm);
+  color: var(--ngs-text);
+  background: transparent;
+  font-size: var(--ngs-font-sm);
+  font-weight: var(--ngs-weight-medium);
+  cursor: pointer;
+}
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.56;
+}
+.buttonPrimary {
+  color: var(--ngs-accent-contrast);
+  background: var(--ngs-accent);
+}
+.buttonPrimary:hover:not(:disabled) {
+  background: var(--ngs-accent-strong);
+}
+.buttonSecondary {
+  border-color: var(--ngs-border);
+  background: var(--ngs-surface);
+}
+.buttonSecondary:hover:not(:disabled),
+.buttonQuiet:hover:not(:disabled) {
+  background: var(--ngs-surface-hover);
+  color: var(--ngs-text);
+}
+.buttonQuiet {
+  color: var(--ngs-text-muted);
+}
+.buttonDanger {
+  color: var(--ngs-danger);
+  border-color: var(--ngs-border);
+}
+.buttonDanger:hover:not(:disabled) {
+  background: var(--ngs-danger-surface);
+}
+.iconButton {
+  width: var(--ngs-control-height);
+  padding: 0;
+  flex: none;
+}
+.emptyCopy {
+  padding: var(--oai-space-4) 0;
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-sm);
+  line-height: var(--ngs-leading);
+}
+.disclosure {
+  margin-top: var(--oai-space-3);
+}
+.disclosure > summary {
+  min-height: var(--ngs-control-height);
+  padding-block: var(--oai-space-2);
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-sm);
+  font-weight: var(--ngs-weight-medium);
+  cursor: pointer;
+}
+.disclosure > p {
+  margin-block: var(--oai-space-3);
+  overflow-wrap: anywhere;
+  font-size: var(--ngs-font-sm);
+}
+.loadingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--oai-space-2);
+}

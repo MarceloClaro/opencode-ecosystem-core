@@ -1,0 +1,323 @@
+% ============================================================
+%  MÓDULO 02 (FRONT) — Fundações: o que é o Core, método e rigor
+% ============================================================
+\chapter{Visão Geral do Ecossistema}
+
+\roteirodidatico
+{Comece pela situação de uma tarefa que precisa de várias etapas: localizar a informação, decidir quem pode tratá-la e verificar a resposta. O Core organiza componentes para coordenar esse percurso.}
+{\emph{Agente} é um componente especializado; \emph{orquestrador} organiza tarefas; \emph{ferramenta} executa uma operação; \emph{evidência} é o registro observável que sustenta uma conclusão.}
+{Leia primeiro o mapa de responsabilidades; depois acompanhe uma solicitação entre componentes; por fim, compare as alegações do manual com arquivos, configurações e diagnóstico.}
+{Separe arquitetura declarada, comportamento implementado, disponibilidade no ambiente e eficácia medida. São níveis de afirmação distintos, e um não prova automaticamente o seguinte.}
+{Para uma capacidade descrita neste capítulo, que arquivo demonstra que ela existe, que comando demonstra que está disponível e que avaliação demonstraria que produz bons resultados?}
+
+\casoguiado{uma tarefa de resumo}
+{Suponha que alguém peça um resumo de um artigo. O pedido é a entrada; um perfil de pesquisa pode localizar a fonte; uma ferramenta pode abrir o documento; um verificador pode conferir se as afirmações aparecem no texto. O mapa do Core ajuda a localizar esses papéis. Para iniciante, basta separar quem coordena de quem executa. Para análise avançada, pergunte se a fonte foi identificada, se a ferramenta realmente respondeu e se o resumo conserva os limites do artigo.}
+
+\elemento{Ecossistema OpenCode Core}{\metainfo{ID}{CORE-000} \hfill \metainfo{Camada}{0 — Fundação} \hfill \metainfo{Rota}{\pth{AGENTS.md}}}
+
+\begin{descricao}
+Este capítulo apresenta o problema que o manual pretende esclarecer: como os
+componentes do OpenCode Ecosystem Core se coordenam para receber uma tarefa,
+escolher um caminho de execução e avaliar o resultado. O repositório contém um
+orquestrador, agentes especializados, mecanismos de comunicação e memória,
+especificações, verificadores e integrações. O capítulo seguinte apresenta
+essas partes em um mapa de responsabilidades e acompanha o caminho de uma
+solicitação. Contagens de agentes, servidores e registros são fotografias do
+checkout; não medem, por si sós, qualidade ou eficácia.
+\end{descricao}
+
+\begin{funcao}
+Fixar o vocabulário e o método de leitura. Nos capítulos seguintes, cada conceito
+parte de uma pergunta prática, apresenta os termos necessários, acompanha o
+mecanismo no código e termina com evidências, limites e uma forma de conferir o
+que foi descrito.
+\end{funcao}
+
+\begin{definicao}
+Neste manual, \textbf{sistema multiagente metacognitivo} designa uma arquitetura
+na qual um orquestrador coordena agentes especializados, usa registros de contexto
+para orientar decisões e mantém mecanismos de avaliação e reflexão sobre as
+execuções. A definição descreve a organização pretendida e os componentes
+observáveis no repositório; não implica que toda execução seja autônoma, correta ou
+validada externamente.
+\end{definicao}
+
+\begin{niveis}
+\textbf{Intuição:} vários programas especializados colaboram, mas um coordenador
+organiza o trabalho e mantém o contexto compartilhado.\\
+\textbf{Implementação:} o repositório separa responsabilidades entre orquestração,
+memória, qualidade, raciocínio e integrações; A2A e MCP definem canais de
+comunicação com agentes e ferramentas.\\
+\textbf{Leitura formal:} metacognição, memória de trabalho e gates de confiança são
+modelos para interpretar componentes concretos. A presença de um modelo teórico
+não comprova que o sistema realize integralmente o comportamento descrito por
+esse modelo.
+\end{niveis}
+
+\begin{limite}
+Livro documental, não código certificado: números citados provêm da leitura do
+repositório e são atualizáveis. Não atribuir Qualis A1, notas ou rankings a nenhum
+elemento sem validação externa (política anti-overclaim).
+\end{limite}
+
+\clearpage
+\section{Princípios do Core}
+
+\elemento{Princípio 1 — SDD/TDD com gate fail-closed}{\metainfo{ID}{P-1} \hfill
+\metainfo{Origem}{\pth{sdd/spec_engine.py}}}
+
+\begin{conceito}
+Toda funcionalidade nasce de uma especificação formal em \pth{specs/SPEC-935-R*.md}
+e só é considerada concluída quando os testes (\pth{tests/test_r*.py}) passam. Sem
+teste verde batendo com a spec, o orquestrador recusa encerrar a tarefa — falha
+fechada (fail-closed), nunca abertura por conveniência.
+\end{conceito}
+
+\begin{funcao}
+Dar rastreio completo entre evidência de comportamento (teste), intenção (spec) e
+implementação (código), viabilizando auditoria e reprodutibilidade.
+\end{funcao}
+
+\elemento{Princípio 2 — Anti-overclaim (R110)}{\metainfo{ID}{P-2} \hfill
+\metainfo{Origem}{\pth{CORRIGENDUM.md}}}
+
+\begin{conceito}
+Nenhum resultado é declarado ``verificado'', ``superhuman'' ou ``Qualis A1'' sem
+validação externa explícita. A função \pth{classify_metacognitive_tier()} nunca
+retorna o tier \texttt{verified} sem \pth{external_validation=True}. O
+\pth{CORRIGENDUM.md} mantém um registro vivo das alegações da documentação que
+soavam mais fortes que a evidência e propõe a leitura correta.
+\end{conceito}
+
+\elemento{Princípio 3 — Orquestração única}{\metainfo{ID}{P-3} \hfill
+\metainfo{Origem}{\pth{AGENTS.md} (orienta via opencode.json.instructions)}}
+
+\begin{conceito}
+O agente \pth{marceloclaro} é o único ponto de entrada para tarefas multipasso.
+Fluxo canônico: \textbf{PERCEBE} (global workspace) $\to$ \textbf{DELEGA} (attention
+routing + blackboard A2A) $\to$ \textbf{EXECUTA} (SDD/TDD) $\to$ \textbf{REFLETE}
+(Reflexion + registro de evolução).
+\end{conceito}
+
+\begin{flowch}[Ciclo de orquestração]{fonte: \pth{marceloclaro/orchestrator.py}}
+\matrix[matrix of nodes,name=o,row sep=5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|PERCEBE \& |[fne]|DELEGA \& |[fne]|EXECUTA \& |[fne]|REFLETE \\
+};
+\draw[seta] (o-1-1)--(o-1-2);
+\draw[seta] (o-1-2)--(o-1-3);
+\draw[seta] (o-1-3)--(o-1-4);
+\draw[seta,bend right=40] (o-1-4) to node[below,font=\tiny]{feedback metacognitivo} (o-1-1);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho encadeia quatro momentos --- \emph{Percebe}, \emph{Delega}, \emph{Executa} e \emph{Reflete} --- e a seta entre eles não indica ``próximo passo qualquer'': indica \textbf{devolução de resultado}. É um ciclo, não uma fila, porque o quarto momento alimenta o primeiro: o que a reflexão grava no MetaBus muda o que a percepção seguinte carrega. A seta é o canal de retorno; sem ela o desenho seria uma sequência e a orquestração seria um \emph{script}.
+\textbf{Justificativa.} O ciclo fechado decorre do papel da memória descrito no Capítulo 2: sem retorno da execução, o agente não exerce metacognição; apenas repete ações. Newell distingue sistemas que \textbf{manipulam representações} daqueles que apenas reagem. O Core se propõe a operar do primeiro modo, e um indício observável disso é o resultado da execução voltar a alterar a representação usada no ciclo seguinte \citref{NEWELL, A. The knowledge level. \emph{Artificial Intelligence}, v.~18, n.~1, p.~87-127, 1982}{10.1016/0004-3702(82)90012-1}{O ciclo fechado decorre do papel da memória descrito no Capítulo 2: sem retorno da execução, o agente não exerce metacognição; apenas repete ações. }{there is another computer system level immediately above the symbol (or program) level and knowledge itself is the processing medium at this level and the principle of rationality plays a central role}{há outro nível de sistema de computador imediatamente acima do nível simbólico (ou de programa), e o próprio conhecimento é o meio de processamento nesse nível, e o princípio da racionalidade desempenha um papel central.}{NEWELL, 1982, p.~87--127}.\end{descricao}
+
+\begin{definicao}
+Um \textbf{nó de passo} (step node): ação de um circuito de atenção (layer 3 do
+mapa do ecossistema) que filtra o nó mais relevante para a tarefa corrente na rede
+semântica.
+\end{definicao}
+
+\clearpage
+\section{Método do Livro e Guia de Leitura}
+
+\elemento{Como ler cada ficha (intuição $\to$ formalização)}{\metainfo{ID}{META-LEITURA} \hfill
+\metainfo{Rota}{aplicável a todo o livro}}
+
+\begin{metodo}
+O percurso pedagógico de cada tema segue cinco perguntas. Primeiro: \emph{que
+problema concreto estamos tentando resolver?} Em seguida: \emph{o que significam
+os termos usados?} Depois: \emph{quais etapas e componentes produzem o resultado?}
+A quarta pergunta é \emph{que evidência permite conferir essa explicação?} Por
+fim: \emph{o que ainda não podemos concluir?} As fichas condensam essas respostas
+em descrição, função, conceito, método, resultado, impacto, limites e referências
+ao código. Fluxogramas mostram relações entre etapas; exemplos numéricos tornam
+explícitas as hipóteses; exercícios convidam o leitor a repetir a verificação.
+
+O caminho mais proveitoso é ler primeiro a explicação e o exemplo, depois abrir os
+arquivos indicados e conferir a evidência. As caixas de processo descrevem uma
+sequência operacional. As caixas de aviso delimitam o alcance de uma afirmação.
+Quando um valor depender da versão do checkout, ele deve ser tratado como
+instantâneo e recalculado antes de ser reutilizado.
+\end{metodo}
+
+\begin{resultado}
+Inventário conferido em 29/09/2026 (fotografia deste checkout):\par
+\smallskip
+
+{\footnotesize
+\begin{tabular}{llr}
+\toprule
+Domínio & Escopo & Quantidade \\
+\midrule
+Runtime (núcleo) & \pth{mci/} & 78 arquivos, 20.769 LOC \\
+Núcleo ampliado & + \pth{agents/} etc. & $\approx$ 103.901 LOC \\
+Agentes declarados & \pth{opencode.json} & 216 (1 + 215 subagentes) \\
+Servidores MCP & \pth{opencode.json}, chave \pth{mcp} & 7 \\
+Nós / vetores & \pth{transformer/} & 455 / 830 \\
+Ciclos de evolução & \pth{evolution/cycles.json} & 455 \\
+Arquivos Markdown de especificação & \pth{specs/} & 371 (285 da série R*) \\
+\end{tabular}\par}
+
+\textbf{Fonte:} contagens dos arquivos e configurações indicados em cada linha.
+O comando \pth{doctor} reportou 135 especificações formais carregadas; esse
+número descreve os registros reconhecidos pelo diagnóstico, enquanto 371 conta
+arquivos Markdown presentes em \pth{specs/}. As duas contagens têm escopos
+distintos e não devem ser tratadas como equivalentes sem comparar os arquivos.
+\end{resultado}
+
+\begin{aviso}
+Este manual descreve \emph{estrutura e números observados no código}. Não constitui
+benchmark comparativo, certificação de qualidade ou atestado de aptidão
+editorial/científica de nenhum agente do catálogo.
+\end{aviso}
+
+\begin{descricao}
+\textbf{Como estudar um mecanismo.} Ao encontrar uma afirmação sobre o Core,
+separe três níveis: (1) o que o projeto declara que deveria ocorrer; (2) o que o
+código implementa; e (3) o que uma execução ou teste demonstrou naquele ambiente.
+Por exemplo, uma especificação pode exigir que uma tarefa seja encaminhada a um
+agente capaz; o código pode implementar uma regra de roteamento; um teste pode
+confirmar um caso específico. Só o terceiro nível constitui evidência daquele
+caso, e nenhum dos três, isoladamente, garante desempenho em todas as situações.
+Essa distinção será retomada nos capítulos sobre orquestração, qualidade e
+infraestrutura.
+\end{descricao}
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) o orquestrador \pth{marceloclaro}
+coordena tudo e não delega tarefas multi-passo a subagentes sem o Blackboard;
+(2) SDD/TDD manda: spec antes, teste como prova; (3) anti-overclaim: nada de
+``superhumano'', ``verificado'' ou ``Qualis A1'' sem validação externa.
+\textbf{Exercício sugerido:} abra \pth{marceloclaro/orchestrator.py} e
+identifique, no fluxo, onde o Blackboard é consultado antes de delegar; depois
+anote num parágrafo em que situação o modelo \emph{não} deveria ser invocado.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-01-fundacoes.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Fundações: do problema ao critério}
+
+\elemento{Leitura guiada — Fundações}{\metainfo{ID}{N-01} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Roteiro}{problema, modelo, evidência}}
+
+\begin{descricao}
+\textbf{A pergunta.} O arquivo de configuração consultado nesta edição declara
+\textbf{216 agentes}: um orquestrador e 215 subagentes. Essa contagem informa o
+tamanho do catálogo configurado, mas não diz quantos agentes serão usados numa
+tarefa nem qual será a qualidade das respostas. Para entender o mecanismo,
+acompanhe um caso simples: chega uma solicitação, o orquestrador identifica as
+capacidades necessárias, encaminha o trabalho e compara a entrega com critérios
+definidos. A pergunta central deixa de ser ``quantos agentes existem?'' e passa a
+ser: \emph{que regra liga a necessidade da tarefa ao agente escolhido, e que
+evidência permite aceitar a entrega?} O manual responde examinando o roteamento e
+os gates no código, não inferindo eficácia a partir da contagem.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.} Antes de formalizar o fluxo, precisamos distinguir
+os termos que nele aparecem:
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Tarefa} ($T$): unidade de trabalho com entrada, critério de aceite e saída.
+  \item \textbf{Agente} ($A$): unidade capaz de executar tarefas; aqui $A = 216$.
+  \item \textbf{Delegação} ($D$): atribuição de $T$ a um agente, registrada no Blackboard.
+  \item \textbf{Confiança} ($\tau$): escore usado pelo Trust Engine; sua interpretação depende da regra de cálculo e dos dados que o alimentam.
+  \item \textbf{Carga} ($\lambda$): medida de ocupação usada pelo runtime; o significado prático depende da métrica e do ponto de coleta.
+  \item \textbf{Gate}: teste booleano de aceitação; fail-closed significa \emph{na dúvida, reprova}.
+\end{itemize}
+Os parâmetros \pth{RUNTIME_MIN_TRUST=0.25} e \pth{RUNTIME_MAX_LOAD=1.0} são
+limiares configurados. Para interpretar seus efeitos, é necessário conferir onde
+são lidos, como as grandezas são calculadas e quais caminhos de execução os
+aplicam.
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Um cálculo simples ajuda a entender por que sistemas
+que reúnem muitas saídas precisam de critérios de validação. Suponha, apenas para
+este exemplo, que $N$ saídas sejam produzidas e que cada uma tenha probabilidade
+$p$ de estar correta. Assumimos também que os erros sejam independentes. A
+probabilidade de uma saída estar correta é $p$; a probabilidade de todas as $N$
+saídas estarem corretas é, sob a hipótese de independência, o produto $p^N$. Logo,
+a probabilidade de haver ao menos uma saída incorreta é o evento complementar:
+\[ P = 1 - p^{N}. \]
+Esse resultado não afirma que o Core combine todas as respostas, nem descreve seu
+roteador. Ele isola um risco geral de agregação. Um gate baseado em especificação e
+testes pode detectar algumas falhas, desde que os critérios cubram o comportamento
+relevante; não elimina erros nem converte o teste em prova universal. A utilidade
+do gate é tornar explícito o critério de aceitação e permitir que ele seja
+inspecionado, repetido e aperfeiçoado.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Para visualizar a dependência em $N$, considere um
+cenário hipotético no qual 216 saídas independentes sejam reunidas e cada uma tenha
+$p = 0{,}99$ de probabilidade de estar correta. O número 216 é usado apenas para
+ilustrar a fórmula; não significa que o Core faça essa agregação.
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item $1 - p = 1 - 0{,}99 = 0{,}01$: a chance hipotética de uma saída estar errada.
+  \item $P = 1 - 0{,}99^{216}$.
+  \item $\ln(0{,}99^{216}) = 216\,\ln 0{,}99 \approx 216 \times (-0{,}01005) \approx -2{,}17$,
+        logo $0{,}99^{216} \approx e^{-2{,}17} \approx 0{,}114$.
+  \item $P \approx 1 - 0{,}114 = 0{,}886$: cerca de \textbf{89\%} de chance de
+        pelo menos uma das 216 saídas estar errada, sob as hipóteses do exemplo.
+\end{enumerate}
+\end{resultado}
+
+\begin{resultado}
+\textbf{Verificação do inventário.} Conte as entradas da chave \pth{agent} em
+\pth{opencode.json} para reproduzir o total registrado nesta edição. Em seguida,
+compare o catálogo configurado com as fichas do Módulo 10: diferenças entre os
+dois totais indicam que configuração e documentação respondem a perguntas
+distintas. A contagem deve ser repetida quando o arquivo mudar.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} O exemplo supõe $p=0{,}99$ e independência entre as
+saídas; nenhuma dessas hipóteses é uma medição do repositório. Em sistemas reais,
+as respostas podem compartilhar modelos, dados ou contexto, tornando os erros
+correlacionados. O cálculo ilustra como uma hipótese altera o resultado; não estima
+a taxa de erro do Core nem quantifica a eficácia de seus gates.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Recalcule $P$ com $p=0{,}999$ e $N=216$; explique por que
+o valor muda. (2) Se todas as saídas repetissem o mesmo erro, a hipótese de
+independência continuaria válida? (3) Dê um exemplo de falha que um teste poderia
+detectar e outro que permaneceria fora do seu escopo. (4) Explique a diferença
+entre não observar um erro num teste e demonstrar que o sistema não pode errar.
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Fundamentos}
+\elemento{ativ-01f}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-01-fundacoes.tex}}
+
+\begin{processo}
+GATILHO. primeira leitura do manual (rota linear capa \textrightarrow{} sumário \textrightarrow{} módulos).
+ROTA. leitura sequencial; gate: capítulo introdutório.
+FUNÇÃO. fixar as bases conceituais (metacognição, agentes, determinismo) antes de qualquer ativação operacional.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. Há 3 princípios destacados nesta ficha: SDD/TDD, anti-overclaim e orquestração. Contá-los mede a presença desses tópicos no esquema, não o domínio do leitor nem a completude conceitual do manual. A compreensão deve ser avaliada por tarefas e critérios explícitos; não há requisito de ``dominar 9'' antes de avançar.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. a tríade reatividade/proatividade/socialidade transforma o gatilho textual em roteamento real. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. Dominar o vocabulário não garante execução correta.
+O percurso depende das rotas implementadas e das condições da tarefa; o esquema
+E1--E7 é apresentado como modelo explicativo, não como pipeline universal. A
+verificação da fonte confirma localização e correspondência textual, mas não
+demonstra, por si só, o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Referência teórica:} Wooldridge e Jennings fundamentam a tríade de agentes \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{p.~115--152 (resumo, p.~115). é o lastro da tríade que define quando um gatilho é de fato uma ativação de agente: reatividade, proatividade e habilidade social são as propriedades que o pipeline E1--E7 converte em regras de roteamento.}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligência artificial quanto na ciência da computação.}{WOOLDRIDGE; JENNINGS, 1995, p.~115}.\par

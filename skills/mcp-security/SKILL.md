@@ -1,3 +1,12 @@
+---
+name: mcp-security
+description: >-
+  Camada de segurança para servidores MCP (R100): controle de acesso, auditoria,
+  rate limiting e validação de ferramentas, inspirada no MCPGuard + AuditLogger.
+  Use para endurecer e auditar chamadas de ferramentas MCP. Não substitui
+  revisão de segurança humana.
+---
+
 # MCP-Security Skill
 
 **Camada de Segurança para MCP — R100 MCP Security Hardening**

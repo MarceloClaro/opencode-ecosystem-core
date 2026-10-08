@@ -1,0 +1,35 @@
+.chip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--oai-space-1);
+  width: fit-content;
+  min-width: var(--oai-space-6);
+  min-height: var(--oai-space-6);
+  padding: 2px var(--oai-space-2);
+  border: 0;
+  border-radius: var(--ngs-radius-pill);
+  background: rgb(
+    from color-mix(in srgb, currentColor 9%, var(--ngs-surface)) r g b / 1
+  );
+  color: var(--ngs-text-muted);
+  font-family: var(--ngs-font-sans);
+  font-size: var(--ngs-font-xs);
+  font-weight: var(--ngs-weight-medium);
+  line-height: var(--oai-line-height-tight);
+  white-space: nowrap;
+}
+
+.chip[data-tone="info"] {
+  color: var(--ngs-text);
+}
+.chip[data-tone="success"] {
+  color: var(--ngs-success-text);
+}
+.chip[data-tone="warning"] {
+  color: var(--ngs-warning-text);
+}
+.chip[data-tone="danger"] {
+  color: var(--ngs-danger);
+}

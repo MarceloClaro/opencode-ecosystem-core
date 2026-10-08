@@ -1,0 +1,296 @@
+% ======================================================================
+%  MÓDULO 4 — Qualidade SDD/TDD: especificar antes, provar por teste
+% ======================================================================
+\thispagestyle{fancy}
+\chapter{Qualidade pela Raiz: SDD/TDD, Especificações e Evidência}
+
+\roteirodidatico
+{Antes de alterar um programa, descreva como reconhecer que a mudança atende ao pedido. Essa descrição transforma uma expectativa vaga em critérios que podem ser examinados.}
+{\emph{SDD} organiza o trabalho a partir da especificação; \emph{TDD} usa testes no ciclo de desenvolvimento; \emph{critério de aceitação} define uma condição; \emph{teste} coleta evidência sobre comportamento.}
+{Converta um requisito em condições observáveis, ligue cada condição a uma verificação e examine o registro de execução, inclusive falhas e casos não cobertos.}
+{Um teste aprovado sustenta apenas as condições exercitadas naquele ambiente e naquela execução. Cobertura, validade dos critérios e evidência externa precisam ser avaliadas separadamente.}
+{Qual requisito cada teste examina, qual comportamento ele não alcança e que evidência adicional seria necessária para a conclusão proposta?}
+
+\casoguiado{de um pedido a um critério}
+{Pedido vago: ``o diagnóstico deve explicar o problema''. Critério verificável: diante de uma dependência ausente, a saída identifica a dependência e sugere onde conferir sua instalação. Um teste pode simular esse caso e comparar a saída esperada. Ele não demonstra que todos os diagnósticos são claros; para isso seriam necessários outros casos e uma avaliação definida de clareza.}
+
+\begin{resultado}
+Este capítulo explica como o fluxo de trabalho do Core usa especificações e
+testes para decidir quando uma mudança pode ser considerada concluída.
+Você aprenderá: (1) o ciclo \textbf{SDD/TDD} do Core; (2) a estrutura de uma
+\pth{Specification} com critérios de aceitação e registros de execução; (3) as
+regras contra injeção no motor de especificações; (4) as contagens observadas
+neste checkout em 29/09/2026 (371 arquivos em \pth{specs/}, 285 da série R*,
+260 módulos \pth{test\_r*} e 455 registros de evolução).
+\end{resultado}
+
+\section{O ciclo de especificação (Spec-Driven Development)}
+
+\begin{conceito}
+\textbf{SDD (Spec-Driven Development)} organiza este fluxo: primeiro se
+documentam intenção e critérios em uma especificação (\pth{specs/SPEC-935-R*}),
+depois se implementa e se coleta evidência por verificações, incluindo testes
+(\pth{tests/test_r*}). A especificação \emph{é} o
+antes; o teste produz evidência sobre o comportamento; o código é o meio. Neste
+processo, uma mudança sem spec ou sem a verificação exigida não deve ser marcada
+como concluída.
+\end{conceito}
+
+\elemento{Specification engine}{
+\metainfo{Código}{sdd/spec\_engine.py} \hfill \metainfo{Apoio}{sdd/tdd\_runner.py}
+\hfill \metainfo{Registro}{specs/}}
+
+\begin{descricao}
+O motor modela uma especificação como primeira classe: \pth{Specification}
+carrega \cod{spec_id}, \cod{title} e \cod{objective}, e recebe critérios de
+aceitação via \cod{add_criterion}. Cada critério é um
+\pth{AcceptanceCriterion} com \cod{criterion_id}, \cod{description} e uma
+função \cod{check()} — a prova programática de que o requisito foi atendido.
+\end{descricao}
+
+\par\smallskip
+O \emph{registro defensável} de execução de cada critério não é capricho
+contábil: é a mesma exigência de \emph{proveniência} dos princípios FAIR
+(\emph{Findable, Accessible, Interoperable, Reusable}). Quando o Core grava
+\emph{quando} um critério rodou e \emph{com qual saída}, ele torna o artefato
+de qualidade localizável e reutilizável por auditoria — e o manual, ao citar um
+número, aponta para o ponto de prova, não para a lembrança. O
+\pth{CriterionRuntimeRecord} com \cod{__setattr__} defensivo é uma
+implementação concreta da exigência de proveniência detalhada \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{dá o lastro normativo à exigência do \pth{CriterionRuntimeRecord}: o rastro ``quando rodou / com qual saída'' é uma implementação concreta do princípio R1.2 (proveniência), e os princípios FAIR valem não só para dados, mas também para algoritmos, ferramentas e fluxos — como o fluxo de evidência do Core}{R1.2. (meta)data are associated with detailed provenance}{R1.2. (meta)dados são associados a proveniência detalhada.}{WILKINSON et al., 2016, p.~160018}.\begin{funcao}
+Duas garantias tornam a especificação \emph{executável} e blindada:
+\cod{requires_trusted_test_evidence()} decide se uma critério exige
+evidência vinda de testes confiáveis; e
+\cod{requires_criterion_runtime_records()} obriga o \emph{registro de
+execução} do critério (quando rodou, com qual saída), materializado em
+\pth{CriterionRuntimeRecord} — uma classe com \cod{__setattr__}
+defensivo que não deixa sobrescrever o rastro.
+\end{funcao}
+
+\begin{processo}
+Ciclo canônico do Core:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+\item \textbf{Especificar} — escrever \pth{specs/SPEC-935-R*} com objetivo e
+critérios de aceitação.
+\item \textbf{Parser seguro} — \cod{_parse_spec_frontmatter} lê o
+frontmatter; \cod{_contains_control_character} e
+\cod{_canonical_relative_repo_path} saneiam entrada (sem caracteres de
+controle, sem caminhos absolutos).
+\item \textbf{Seletor de teste} — \cod{_is_safe_pytest_selector} e
+\cod{_canonical_pytest_target} traduzem a critério para um alvo de
+\pth{pytest} canônico (sem injeção de comando).
+\item \textbf{Rodar} — \pth{sdd/tdd\_runner.py} executa a família
+\pth{tests/test_r*}; cada critério produz um
+\pth{CriterionRuntimeRecord} de saída.
+\item \textbf{Registrar} — o ciclo de evolução vai a
+\pth{evolution/cycles.json} via \cod{evolution_registry.record(...)}.
+\end{enumerate}
+\end{processo}
+
+\begin{flowch}[Especificar $\to$ Provar (rastro bloqueado)]{prova: spec\_engine + tests/test\_r*}
+\matrix[matrix of nodes,name=sd,row sep=4mm,column sep=2mm,nodes={fns},ampersand replacement=\&]{
+ |[fne]|Spec SPEC-935-R* \& |[fns]|Critérios \& |[fns]|Prova test\_r*\\
+};
+\draw[seta] (sd-1-1)--(sd-1-2);
+\draw[seta] (sd-1-2)--(sd-1-3);
+\draw[seta,red] (sd-1-3) -- ++(0,8mm) -- node[above,font=\tiny]{sem prova} ++(-95mm,0) -- (sd-1-1);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho tem uma seta interrompida de propósito: entre \emph{especificação} e \emph{implementação} há uma \textbf{comporta} que só abre com rastro verificado. O caminho alternativo é a seta que volta: spec insuficiente $\to$ nova spec. A seta tracejada não é estilo, é \emph{tipo diferente de ligação}: retroalimentação, não fluxo.
+\textbf{Justificativa.} Um registro verificável distingue \emph{estado da arte} de \emph{estado da prática}: as diretrizes PRISMA exigem relatos completos e transparentes das revisões sistemáticas, e um relatório sem rastro é um relatório em que ninguém confia. A comporta do desenho é a tradução dessa exigência editorial para um portão técnico -- o mesmo princípio aplicado a código \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{Um rastro verificável é o que separa \emph{estado da arte} de \emph{estado da prática}: as diretrizes PRISMA exigem relatos completos e transparentes das revisões sistemáticas, e um relatório sem rastro é um relatório em que ninguém confia. }{reports of systematic reviews should be transparent and complete}{os relatos de revisões sistemáticas devem ser transparentes e completos.}{PAGE et al., 2021, p.~n160}.\end{descricao}
+
+\section{As regras duras de saneamento}
+
+\begin{definicao}
+\emph{Anti-injeção} no motor de especificações: o seletor de pytest nunca é
+aceito “cru”. \cod{_is_safe_pytest_selector} valida o formato do seletor
+antes de virar alvo; \cod{_canonical_pytest_target} resolve o caminho
+canônico relativo ao repositório. O objetivo é impedir que conteúdo de spec
+(frontmatter, seletores) contorne o pipeline e vire \emph{código arbitrário}.
+\end{definicao}
+
+\begin{metodo}
+Três checagens saneiam toda especificação:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+\item \textbf{Caracteres de controle} — \cod{_contains_control_character}
+rejeita bytes perigosos no frontmatter.
+\item \textbf{Caminho canônico} — \cod{_canonical_relative_repo_path}
+exige caminho relativo ao repo (proibido \pth{/}, \pth{\textbackslash}, \pth{..}).
+\item \textbf{Seletor seguro} — \cod{_is_safe_pytest_selector} recusa
+sintaxes de shell no alvo de teste.
+\end{enumerate}
+\end{metodo}
+
+\begin{aviso}
+Um \pth{CriterionRuntimeRecord} com \cod{__setattr__} defensivo é prova
+\emph{de processo}, não de verdade externa. Teste verde significa “o sistema
+faz o que a spec pede”; não significa “o resultado é verdadeiro no mundo”.
+Rotular um resultado apenas por testes como “verificado” ou “Qualis A1” é
+\emph{overclaim} — o livro trata disso de novo no Módulo 6 (rigor e
+replicabilidade).
+\end{aviso}
+
+\section{Dimensão quantificada do patrimônio de especificação}
+
+\begin{resultado}
+Contagens verificadas em 29/09/2026 no checkout usado para esta edição:\par\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Patrimônio & Quantidade verificada \\
+\midrule
+Especificações totais em \pth{specs/} & \textbf{371} arquivos \\
+Série \pth{SPEC-935-R*} (evolução contínua) & \textbf{285} arquivos \\
+Módulos de teste \pth{tests/test_r*} & \textbf{260} arquivos \\
+Ciclos de evolução registrados & \textbf{455} em \pth{evolution/cycles.json} \\
+Agentes derivados do catálogo & \textbf{216} em \pth{opencode.json} \\
+\bottomrule
+\end{tabularx}}
+\end{resultado}
+
+\begin{funcao}
+\textbf{Por que isso importa:} qualquer declaração do manual que cite um
+\emph{número} do ecossistema pode ser conferida por \emph{contagem literal}
+(não por lembrança). É a mesma filosofia de antes-chave do Core: \emph{número
+é rastreável ou não é número}.
+\end{funcao}
+
+\begin{limite}
+O motor \emph{valida a forma} (frontmatter bem formado, seletor seguro,
+registro defensável), \emph{não o mérito científico} do resultado. Qualidade de
+fundo (população, método, inferência) fica com os scanners e com a avaliação
+metacognitiva — consulte Módulos 5 e 6.
+\end{limite}
+
+\begin{niveis}
+\textbf{Intuição:} uma receita escrita antes do bolo, com um provador que diz se
+o bolo saiu do jeito pedido.\par\smallskip
+\textbf{Implementação:} \pth{Specification} + \pth{AcceptanceCriterion.check()} +
+\pth{CriterionRuntimeRecord}; pytest tem alvo canônico e saneado.\par\smallskip
+\textbf{Formalização:} SPEC $\to$ critérios executáveis $\to$ rastro inviolável é um
+\emph{traceability map} formal: cada claim do repositório tem um ponto de
+prova e um registro de execução — base para auditoria de demonstração e
+para replicação federada.
+\end{niveis}
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) SDD inverte código-primeiro:
+spec $\to$ teste $\to$ implementação; (2) a critério vira um
+\pth{AcceptanceCriterion} com \cod{check()}; (3) registro de execução é
+defensivo e intransigente; (4) saneamento impede injeção via frontmatter e
+seletor.\par\smallskip
+\textbf{Exercício sugerido:} abra \pth{sdd/spec\_engine.py}, implemente uma
+\pth{Specification} de brinquedo com uma function \cod{check()} que falha,
+rode \pth{sdd/tdd\_runner.py} contra \pth{tests/test_r*}, e descreva por
+escrito o que o \pth{CriterionRuntimeRecord} registra. Depois tente um seletor
+com \cod{; rm -rf} e observe o saneamento recusar — em ambiente de teste isolado.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-04-qualidade-sdd.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Qualidade: contrato, teste e limite}
+
+\elemento{Leitura guiada — Qualidade pela raiz}{\metainfo{ID}{N-04} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{medir o que se promete}}
+
+\begin{descricao}
+\textbf{A pergunta.} No Módulo 1, um cálculo hipotético mostrou como a
+probabilidade de ao menos uma falha pode crescer quando muitas saídas são
+reunidas. Esse exemplo não mede o Core. Agora examinaremos o mecanismo concreto:
+o que significa uma verificação aprovada, e qual parte do comportamento ela
+observa? O fluxo de engenharia tem uma analogia útil com o método experimental.
+Primeiro formula-se a hipótese (a especificação diz \emph{o que} e \emph{com que
+critério de aceite}); depois se implementa o comportamento e se executa o teste
+que observa esse critério. Assim como um instrumento precisa ser calibrado, um
+teste precisa ser conferido para sabermos o que sua aprovação permite concluir.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Specificação} ($S$): promessa formal com critérios de aceitação. Total $S = 371$.
+  \item \textbf{Série de evolução}: $285$ arquivos da família \cod{SPEC-935-R}.
+  \item \textbf{Suíte de teste} ($T$): conjunto executável de verificações. Total $T = 260$.
+  \item \textbf{Ciclo} ($C$): registro de mudança; $C = 455$.
+  \item \textbf{Cobertura SDD} ($k$): fração de specs ligadas a teste, $k = $ (specs com teste) $/$ (specs totais).
+  \item \textbf{Gate fail-closed}: verde $+$ spec conferida $\Rightarrow$ encerra; caso contrário, devolve.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Por que registrar o critério antes de implementar
+a solução?
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item A spec fixa o critério de aceite \emph{antes} da solução --- impede ``mover a meta'' para caber no código pronto.
+  \item O teste verifica um ou mais aspectos desse critério. Sem teste, falta essa evidência executável; ainda assim, um teste não cobre automaticamente todos os comportamentos possíveis.
+  \item O par spec+teste forma a tríade rastreável: intenção $\to$ comportamento $\to$ código.
+  \item O gate é fail-closed: na ausência de qualquer elo, a tarefa \emph{não} fecha.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Há $T=260$ arquivos \pth{tests/test\_r*.py} e
+$S=371$ arquivos Markdown em \pth{specs/}. A razão de contagens é
+\[ q = \frac{T}{S} = \frac{260}{371} \approx 0{,}701 \quad (\approx 70\%). \]
+Esse quociente não é cobertura: um arquivo de teste pode verificar vários
+critérios, vários arquivos podem verificar o mesmo critério, e pode não haver
+ligação explícita entre alguns deles. Para medir cobertura, seria preciso
+identificar quantas specs têm ao menos um teste correspondente e dividir esse
+total por $S$. Separadamente, $285/371 \approx 0{,}768$, portanto cerca de
+77\% dos arquivos em \pth{specs/} pertencem à série \cod{SPEC-935-R}.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} No mesmo checkout há 285 specs da
+série R e 260 arquivos \pth{tests/test\_r*.py}; a razão simples é
+$260/285 \approx 0{,}91$ arquivo de teste por spec. Ela não prova uma relação
+um a um: para isso, é necessário conferir os seletores e os critérios de cada
+spec. As contagens podem ser reproduzidas com \texttt{find\ specs\ -maxdepth\ 1\ -name\ 'SPEC-935-R*.md'} e \texttt{find\ tests\ -maxdepth\ 1\ -name\ 'test\_r*.py'}. O total de
+371 specs supera 216 agentes porque o diretório registra requisitos de várias
+partes do software e do processo, não apenas fichas de agentes.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Cobertura não é sinônimo de qualidade: um teste pode
+passar sem verificar o comportamento relevante. A razão $260/371$ compara
+quantidades de arquivos e não mede cobertura nem profundidade. Para interpretar
+um gate, confira se o teste escolhido corresponde ao critério e se o registro da
+execução pertence ao mesmo estado do código.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Se 40 novas specs surgirem sem teste, qual será a nova $k$
+(limite superior)? (2) Explique por que Brooks (Módulo 11) diria que nenhuma spec é
+``bala de prata''.
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Qualidade SDD/TDD}
+\elemento{ativ-04q}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-04-qualidade-sdd.tex}}
+
+\begin{processo}
+GATILHO. ``implemente'', ``corrija'', ``teste''.
+ROTA. spec \textrightarrow{} teste \textrightarrow{} código; gate R610 (spec com teste).
+FUNÇÃO. exigir especificação formal e testes antes da entrega; transformar alegações em evidências executáveis.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. cobertura SDD = specs com teste / specs totais; ciclo RED--GREEN--REFACTOR = $1$ se testes verdes, senão $0$.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. nenhuma bala de prata existe — melhoria de produtividade e confiabilidade vem de disciplina acumulada, não de ferramenta única. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. teste verde não generaliza para produção; gate não mede mérito científico. A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação:} A distinção entre complexidade essencial e acidental impede atribuir à ferramenta um ganho que depende da compreensão do problema. Como modelo de raciocínio, escrevemos $C_{total}=C_{essencial}+C_{acidental}$: automação, padrões e testes podem reduzir retrabalho e inconsistências da parcela acidental, mas não eliminam requisitos ambíguos nem decisões de domínio. O ciclo especificação--teste melhora a disciplina de mudança; não promete remover o trabalho conceitual que a solução exige \citref{BROOKS, F. P. No silver bullet: essence and accidents of software engineering. \emph{Computer}, v.~20, n.~4, p.~10-19, 1987}{10.1109/MC.1987.1663532}{p.~10--19 (trecho inicial, p.~11). é o aviso contra otimismo de ferramenta única: o protocolo SDD/TDD do Core traduz a disciplina de passo a passo que Brooks recomenda — nenhum agente entrega ordem de magnitude por si só.}{There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity}{Não há um único desenvolvimento, seja em tecnologia ou técnica de gestão, que por si só prometa uma melhoria de uma ordem de magnitude em produtividade, confiabilidade e simplicidade dentro de uma década.}{BROOKS, 1987, p.~11}

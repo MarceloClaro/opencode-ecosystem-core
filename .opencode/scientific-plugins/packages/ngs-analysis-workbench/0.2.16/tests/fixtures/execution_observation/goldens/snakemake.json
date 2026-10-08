@@ -1,0 +1,172 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "2:1",
+      "attempt_number": 1,
+      "completed_at": "Fri Aug  7 18:08:57 2026",
+      "container": null,
+      "cpu": null,
+      "duration": null,
+      "exit_code": null,
+      "native_id": null,
+      "peak_rss": null,
+      "peak_vmem": null,
+      "process": "fastqc_raw",
+      "process_label": "fastqc_raw",
+      "realtime": null,
+      "sample_or_shard": "sample=SRR6357070",
+      "started_at": "Fri Aug  7 18:08:52 2026",
+      "state": "completed",
+      "submitted_at": null,
+      "task_hash": null,
+      "task_id": "2",
+      "workdir": null
+    },
+    {
+      "attempt_id": "3:1",
+      "attempt_number": 1,
+      "completed_at": "Fri Aug  7 18:08:59 2026",
+      "container": null,
+      "cpu": null,
+      "duration": null,
+      "exit_code": null,
+      "native_id": null,
+      "peak_rss": null,
+      "peak_vmem": null,
+      "process": "fastqc_raw",
+      "process_label": "fastqc_raw",
+      "realtime": null,
+      "sample_or_shard": "sample=SRR6357072",
+      "started_at": "Fri Aug  7 18:08:57 2026",
+      "state": "completed",
+      "submitted_at": null,
+      "task_hash": null,
+      "task_id": "3",
+      "workdir": null
+    },
+    {
+      "attempt_id": "1:1",
+      "attempt_number": 1,
+      "completed_at": "Fri Aug  7 18:09:03 2026",
+      "container": null,
+      "cpu": null,
+      "duration": null,
+      "exit_code": null,
+      "native_id": null,
+      "peak_rss": null,
+      "peak_vmem": null,
+      "process": "multiqc_raw",
+      "process_label": "multiqc_raw",
+      "realtime": null,
+      "sample_or_shard": null,
+      "started_at": "Fri Aug  7 18:08:59 2026",
+      "state": "completed",
+      "submitted_at": null,
+      "task_hash": null,
+      "task_id": "1",
+      "workdir": null
+    },
+    {
+      "attempt_id": "0:1",
+      "attempt_number": 1,
+      "completed_at": "Fri Aug  7 18:09:03 2026",
+      "container": null,
+      "cpu": null,
+      "duration": null,
+      "exit_code": null,
+      "native_id": null,
+      "peak_rss": null,
+      "peak_vmem": null,
+      "process": "all",
+      "process_label": "all",
+      "realtime": null,
+      "sample_or_shard": null,
+      "started_at": "Fri Aug  7 18:09:03 2026",
+      "state": "completed",
+      "submitted_at": null,
+      "task_hash": null,
+      "task_id": "0",
+      "workdir": null
+    }
+  ],
+  "attempts_truncated": false,
+  "count_unit": "task_attempts",
+  "counts": {
+    "aborted": 0,
+    "cached": 0,
+    "completed": 4,
+    "failed": 0,
+    "queued": 0,
+    "running": 0,
+    "total": 4,
+    "unknown": 0
+  },
+  "engine": "snakemake",
+  "evidence": {
+    "append_only": true,
+    "available": true,
+    "coverage": "native Snakemake execution log",
+    "ignored_record_count": 0,
+    "kind": "snakemake_native_log",
+    "path": "results/.snakemake/log/2026-08-07T180851.803407.snakemake.log",
+    "reason": null,
+    "record_count": 89
+  },
+  "progress": {
+    "completed": 4,
+    "determinate": true,
+    "finished_attempts": 4,
+    "reason": null,
+    "total": 4
+  },
+  "schema_version": 1,
+  "structure": {
+    "kind": "discovered_processes",
+    "ordering": "first_runtime_observation",
+    "processes": [
+      {
+        "counts": {
+          "aborted": 0,
+          "cached": 0,
+          "completed": 2,
+          "failed": 0,
+          "queued": 0,
+          "running": 0,
+          "total": 2,
+          "unknown": 0
+        },
+        "label": "fastqc_raw",
+        "name": "fastqc_raw"
+      },
+      {
+        "counts": {
+          "aborted": 0,
+          "cached": 0,
+          "completed": 1,
+          "failed": 0,
+          "queued": 0,
+          "running": 0,
+          "total": 1,
+          "unknown": 0
+        },
+        "label": "multiqc_raw",
+        "name": "multiqc_raw"
+      },
+      {
+        "counts": {
+          "aborted": 0,
+          "cached": 0,
+          "completed": 1,
+          "failed": 0,
+          "queued": 0,
+          "running": 0,
+          "total": 1,
+          "unknown": 0
+        },
+        "label": "all",
+        "name": "all"
+      }
+    ],
+    "semantic_stages": false
+  }
+}

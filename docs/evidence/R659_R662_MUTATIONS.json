@@ -1,0 +1,32 @@
+{
+  "ts": "2026-10-04T10:30:08.284109+00:00",
+  "evidence_kind": "fault_injection_contract_tests_not_live_inference",
+  "production_files_modified": false,
+  "success": true,
+  "results": [
+    {
+      "mutation": "ignore_pre_tool_hooks",
+      "target": "tests/test_r659_sdk_hooks_contract.py::test_global_matchers_deny",
+      "detected": true,
+      "returncode": 1,
+      "contract_failure": true,
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________________ test_global_matchers_deny ___________________________\ntests/test_r659_sdk_hooks_contract.py:52: in test_global_matchers_deny\n    assert executed == []\nE   AssertionError: assert [{'value': 42}] == []\nE     \nE     Left contains one more item: {'value': 42}\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED tests/test_r659_sdk_hooks_contract.py::test_global_matchers_deny - Ass...\n1 failed in 0.64s\n"
+    },
+    {
+      "mutation": "accept_invalid_mci_arguments",
+      "target": "tests/test_r660_mcp_validation.py::test_mci_invalid_payload_never_publishes",
+      "detected": true,
+      "returncode": 1,
+      "contract_failure": true,
+      "output": "FF                                                                       [100%]\n=================================== FAILURES ===================================\n___ test_mci_invalid_payload_never_publishes[mci_register_agent-arguments0] ____\ntests/test_r660_mcp_validation.py:169: in test_mci_invalid_payload_never_publishes\n    assert result[\"isError\"] is True\n           ^^^^^^^^^^^^^^^^^\nE   KeyError: 'isError'\n______ test_mci_invalid_payload_never_publishes[mci_post_task-arguments1] ______\ntests/test_r660_mcp_validation.py:169: in test_mci_invalid_payload_never_publishes\n    assert result[\"isError\"] is True\n           ^^^^^^^^^^^^^^^^^\nE   KeyError: 'isError'\n=========================== short test summary info ============================\nFAILED tests/test_r660_mcp_validation.py::test_mci_invalid_payload_never_publishes[mci_register_agent-arguments0]\nFAILED tests/test_r660_mcp_validation.py::test_mci_invalid_payload_never_publishes[mci_post_task-arguments1]\n2 failed in 0.48s\n"
+    },
+    {
+      "mutation": "loosen_skill_invocation_policy",
+      "target": "tests/test_r661_artifact_integration.py::test_emitted_skill_preserves_policy_and_contained_references",
+      "detected": true,
+      "returncode": 1,
+      "contract_failure": true,
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________ test_emitted_skill_preserves_policy_and_contained_references _________\ntests/test_r661_artifact_integration.py:81: in test_emitted_skill_preserves_policy_and_contained_references\n    assert decision.execution_mode == \"read-and-execute\"\nE   AssertionError: assert 'native-or-read' == 'read-and-execute'\nE     \nE     - read-and-execute\nE     + native-or-read\n=========================== short test summary info ============================\nFAILED tests/test_r661_artifact_integration.py::test_emitted_skill_preserves_policy_and_contained_references\n1 failed in 0.42s\n"
+    }
+  ]
+}

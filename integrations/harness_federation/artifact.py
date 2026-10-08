@@ -55,6 +55,105 @@ _FRONT_RE = re.compile(r"\A﻿?---[ \t]*\r?\n(?P<yaml>.*?)\r?\n---[ \t]*(?:\r?\n
 
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
 
+_SUPPORT_SKIP_DIRS = frozenset({".git", ".venv", "venv", "node_modules", "__pycache__", ".pytest_cache"})
+
+
+def path_is_contained(path: str, root: str) -> bool:
+    """Compara caminhos resolvidos; links não podem escapar da raiz declarada."""
+    try:
+        return os.path.commonpath((os.path.realpath(path), os.path.realpath(root))) == os.path.realpath(root)
+    except (OSError, ValueError):
+        return False
+
+
+def invocation_policy(frontmatter: Dict[str, Any], openai_policy: Optional[Dict[str, Any]] = None) -> Tuple[Dict[str, Any], List[str]]:
+    """Combina restrições declaradas sem permitir que uma camada as flexibilize."""
+    reasons: List[str] = []
+    layers = [frontmatter]
+    for key in ("policy", "x-invocation-policy"):
+        if key in frontmatter:
+            if isinstance(frontmatter[key], dict):
+                layers.append(frontmatter[key])
+            else:
+                reasons.append("invalid_invocation_policy")
+    if openai_policy is not None:
+        layers.append(openai_policy)
+    disabled = False
+    implicit: List[bool] = []
+    for layer in layers:
+        for key in ("disable-model-invocation", "disable_model_invocation"):
+            if key in layer:
+                if not isinstance(layer[key], bool):
+                    reasons.append("invalid_invocation_policy")
+                else:
+                    disabled = disabled or layer[key]
+        if "allow_implicit_invocation" in layer:
+            value = layer["allow_implicit_invocation"]
+            if value is not None and not isinstance(value, bool):
+                reasons.append("invalid_invocation_policy")
+            elif value is not None:
+                implicit.append(value)
+    allow = False if False in implicit else True if True in implicit else None
+    return {"disable_model_invocation": disabled, "allow_implicit_invocation": allow}, sorted(set(reasons))
+
+
+def support_snapshot(root: str) -> Tuple[List[Dict[str, Any]], List[str]]:
+    """Inventaria arquivos de apoio como dados; nunca executa scripts."""
+    files: List[Dict[str, Any]] = []
+    reasons: List[str] = []
+    for directory, dirs, filenames in os.walk(root, followlinks=False):
+        dirs[:] = [name for name in dirs if name not in _SUPPORT_SKIP_DIRS]
+        for child in list(dirs):
+            child_path = os.path.join(directory, child)
+            if os.path.islink(child_path):
+                # Não seguir links de diretório evita ciclos e árvores omitidas.
+                reasons.append("support_path_escape" if not path_is_contained(child_path, root)
+                               else "support_directory_symlink")
+                dirs.remove(child)
+        dirs.sort()
+        for filename in sorted(filenames):
+            path = os.path.join(directory, filename)
+            if os.path.abspath(path) == os.path.join(os.path.abspath(root), "SKILL.md"):
+                continue
+            if not path_is_contained(path, root):
+                reasons.append("support_path_escape")
+                continue
+            try:
+                files.append({"path": os.path.relpath(path, root).replace(os.sep, "/"),
+                              "sha256": _file_sha256(path), "bytes": os.path.getsize(path)})
+            except OSError:
+                reasons.append("support_unreadable")
+    return files, sorted(set(reasons))
+
+
+def source_integrity_reasons(artifact: "HarnessArtifact") -> List[str]:
+    """Revalida a prova do disco antes de uma leitura ou emissão."""
+    reasons: List[str] = []
+    instruction_root = str(artifact.metadata.get("instruction_root") or os.path.dirname(artifact.source_path))
+    if not path_is_contained(artifact.source_path, instruction_root):
+        return ["source_path_escape"]
+    try:
+        current = _file_sha256(artifact.source_path)
+    except OSError:
+        return ["source_unreadable"]
+    if not current:
+        reasons.append("source_not_found")
+    elif current != artifact.source_file_sha256:
+        reasons.append("source_changed")
+    if artifact.kind == "skill":
+        current_support, support_reasons = support_snapshot(instruction_root)
+        reasons.extend(support_reasons)
+        if current_support != artifact.metadata.get("support_files", []):
+            reasons.append("support_changed")
+    if artifact.kind == "plugin":
+        for entry in artifact.metadata.get("plugin_skill_files", []):
+            path = os.path.join(instruction_root, entry["path"])
+            if not path_is_contained(path, instruction_root):
+                reasons.append("support_path_escape")
+            elif not os.path.isfile(path) or _file_sha256(path) != entry["sha256"]:
+                reasons.append("support_changed")
+    return sorted(set(reasons))
+
 
 def slugify(value: str, *, fallback: str = "artefato") -> str:
     """
@@ -341,11 +440,18 @@ class HarnessArtifact:
         registro, silenciosamente.
         """
 
-        return f"{self.ecosystem}:{self.kind}:{self.origin}:{slugify(self.name)}"
+        suffix = str(self.metadata.get("identity_suffix") or "")
+        base = f"{self.ecosystem}:{self.kind}:{self.origin}:{slugify(self.name)}"
+        return f"{base}:{suffix}" if suffix else base
 
     @property
     def slug(self) -> str:
         return slugify(self.name)
+
+    @property
+    def emission_slug(self) -> str:
+        """Nome do destino, distinto do nome nominal quando houver colisão."""
+        return str(self.metadata.get("emission_slug") or self.slug)
 
     @property
     def status(self) -> str:
@@ -393,11 +499,14 @@ class HarnessArtifact:
             "kind": self.kind,
             "name": self.name,
             "slug": self.slug,
+            "emission_slug": self.emission_slug,
             "description": self.description,
             "source_path": self.source_path,
             "source_root": self.source_root,
             "origin": self.origin,
             "license": self.license,
+            "execution_verified": False,
+            "instruction_only": True,
             "version": self.version,
             "capabilities": list(self.capabilities),
             "tags": list(self.tags),
@@ -444,6 +553,8 @@ class HarnessArtifact:
             "kind": self.kind,
             "origin": self.origin,
             "license": self.license,
+            "execution_verified": False,
+            "instruction_only": True,
         }
 
 
@@ -497,10 +608,14 @@ def build_artifact(
         hook_events=_coerce_list(hook_events),
         hook_commands=_coerce_list(hook_commands),
         content_sha256=sha256_of(body),
-        source_file_sha256=_file_sha256(source_path),
+        source_file_sha256=(_file_sha256(source_path) if source_path and path_is_contained(
+            source_path, str(meta.get("instruction_root") or os.path.dirname(os.path.abspath(source_path)))) else ""),
         metadata=meta,
     )
     reasons = artifact.validate()
+    reasons.extend(meta.get("validation_reasons", []))
+    if source_path and not path_is_contained(source_path, str(meta.get("instruction_root") or os.path.dirname(os.path.abspath(source_path)))):
+        reasons.append("source_path_escape")
     if not declared:
         # INV-R621.1: licença ausente nunca é preenchida por suposição. A
         # degradação é registrada como aviso — ela rebaixa a confiança no

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" role="img" aria-labelledby="title description">
+  <title id="title">Life Sciences Literature</title>
+  <desc id="description">Blue literature pages with a DNA helix and magnifying glass</desc>
+  <defs>
+    <linearGradient id="backPage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8193FF"/>
+      <stop offset="0.48" stop-color="#5368DB"/>
+      <stop offset="1" stop-color="#202F9B"/>
+    </linearGradient>
+    <linearGradient id="sidePage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#AFC2FF"/>
+      <stop offset="1" stop-color="#5A70D7"/>
+    </linearGradient>
+    <linearGradient id="frontPage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.55" stop-color="#E7EEFF"/>
+      <stop offset="1" stop-color="#B9CAFA"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8EA0FF"/>
+      <stop offset="1" stop-color="#3144B7"/>
+    </linearGradient>
+    <linearGradient id="blueInk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6277DF"/>
+      <stop offset="0.5" stop-color="#92A6FF"/>
+      <stop offset="1" stop-color="#4054BE"/>
+    </linearGradient>
+    <linearGradient id="blueDna" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#526FF0"/>
+      <stop offset="1" stop-color="#182B9D"/>
+    </linearGradient>
+    <linearGradient id="tealDna" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A3FAF3"/>
+      <stop offset="1" stop-color="#18A8B3"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.42" stop-color="#DCE5F7"/>
+      <stop offset="0.72" stop-color="#8796BD"/>
+      <stop offset="1" stop-color="#F6F8FF"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="35%" cy="30%" r="72%">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.92"/>
+      <stop offset="0.5" stop-color="#E4EEFF" stop-opacity="0.78"/>
+      <stop offset="1" stop-color="#93ACE4" stop-opacity="0.88"/>
+    </radialGradient>
+    <linearGradient id="handle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7186E9"/>
+      <stop offset="1" stop-color="#26399E"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="82" y="34" width="234" height="273" rx="32" fill="url(#backPage)" stroke="#273AA8" stroke-width="6"/>
+  <rect x="102" y="66" width="226" height="248" rx="30" fill="url(#sidePage)" stroke="#4258BC" stroke-width="6"/>
+  <path d="M42 87c0-19 15-34 34-34h174l51 53v204c0 19-15 34-34 34H76c-19 0-34-15-34-34V87Z" fill="url(#frontPage)" stroke="#7289D3" stroke-width="7"/>
+  <path d="M250 53v35c0 19 15 34 34 34h17" fill="url(#fold)" stroke="#4053C1" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M250 53l51 53h-17c-19 0-34-15-34-34V53Z" fill="url(#fold)"/>
+
+  <g fill="none" stroke="url(#blueInk)" stroke-width="11" stroke-linecap="round">
+    <path d="M80 116h112"/>
+    <path d="M80 153h141"/>
+    <path d="M80 190h96"/>
+  </g>
+  <g fill="none" stroke="#C7D3FF" stroke-width="3" stroke-linecap="round" opacity="0.9">
+    <path d="M83 112h105"/>
+    <path d="M83 149h134"/>
+    <path d="M83 186h89"/>
+  </g>
+
+  <g fill="none" stroke="#F9FBFF" stroke-width="11" stroke-linecap="round">
+    <path d="M105 239l59 26"/>
+    <path d="M96 268l61 28"/>
+    <path d="M118 215l54 24"/>
+  </g>
+  <path d="M112 206c-30 33-27 70 15 105" fill="none" stroke="url(#blueDna)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M173 215c-33 32-47 63-22 99" fill="none" stroke="url(#blueDna)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M171 209c11 35-13 55-42 76-18 13-27 28-25 42" fill="none" stroke="url(#tealDna)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M121 201c-4 13-3 25 4 37" fill="none" stroke="#B7C6FF" stroke-width="5" stroke-linecap="round"/>
+  <path d="M167 219c3 11 1 20-4 30" fill="none" stroke="#D1FFFB" stroke-width="5" stroke-linecap="round"/>
+
+  <path d="M258 275l51 53" fill="none" stroke="#1B286F" stroke-width="34" stroke-linecap="round"/>
+  <path d="M258 275l51 53" fill="none" stroke="url(#handle)" stroke-width="25" stroke-linecap="round"/>
+  <path d="M251 269l18 18" fill="none" stroke="url(#metal)" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="225" cy="234" r="68" fill="#3145AA" stroke="#1D2B7D" stroke-width="5"/>
+  <circle cx="225" cy="234" r="56" fill="url(#metal)" stroke="#F8FAFF" stroke-width="3"/>
+  <circle cx="225" cy="234" r="44" fill="url(#lens)" stroke="#788AB7" stroke-width="5"/>
+  <path d="M197 212c9-12 23-18 37-17" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.76"/>
+</svg>

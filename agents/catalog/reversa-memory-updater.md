@@ -40,7 +40,7 @@ skills:
   tags: [monitora, ações, agentes, bufferiza]
   examples: [Aplique monitora acoes agentes bufferiza neste contexto, Avalie usando monitora acoes agentes bufferiza]
 - id: use-memoria-memory-atualizar
-  name: Use via: "memória", "memory", "atualizar grafo", /memory-updater
+  name: "Use via: 'memória', 'memory', 'atualizar grafo', /memory-updater"
   description: >-
     Capacidade especializada em use via: "memória", "memory", "atualizar grafo", /memory-updater
   tags: ["memória", "memory", "atualizar, grafo"]

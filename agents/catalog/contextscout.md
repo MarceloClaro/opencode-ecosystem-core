@@ -27,19 +27,19 @@ examples: [Revise este código para segurança e performance, Implemente a funci
 mode: subagent
 permission:
   read:
-    *: allow
+    "*": allow
   grep:
-    *: allow
+    "*": allow
   glob:
-    *: allow
+    "*": allow
   bash:
-    *: deny
+    "*": deny
   edit:
-    *: deny
+    "*": deny
   write:
-    *: deny
+    "*": deny
   task:
-    *: deny
+    "*": deny
 ---
 
 # ContextScout

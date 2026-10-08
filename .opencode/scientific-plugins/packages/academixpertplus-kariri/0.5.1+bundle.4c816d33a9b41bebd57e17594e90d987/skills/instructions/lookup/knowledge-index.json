@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "name": "CATEQUESE.pdf",
+      "path": "references/CATEQUESE.pdf"
+    },
+    {
+      "name": "Mamiani_1699_Arte_de_grammatica_kiriri_Mindlin.pdf",
+      "path": "references/Mamiani_1699_Arte_de_grammatica_kiriri_Mindlin.pdf"
+    },
+    {
+      "name": "PompeuSobr_1934_Kariris.pdf",
+      "path": "references/PompeuSobr_1934_Kariris.pdf"
+    },
+    {
+      "name": "PompeuSobr_1934_Kariris.pdf",
+      "path": "references/PompeuSobr_1934_Kariris_1.pdf"
+    },
+    {
+      "name": "Reesink_1999_OGaviaoEAArara_EtnohistKariri.pdf",
+      "path": "references/Reesink_1999_OGaviaoEAArara_EtnohistKariri.pdf"
+    },
+    {
+      "name": "nantes_1709_catecismo_mindlin.pdf",
+      "path": "references/nantes_1709_catecismo_mindlin.pdf"
+    },
+    {
+      "name": "pompeu_sobrinho_1950_origens.pdf",
+      "path": "references/pompeu_sobrinho_1950_origens.pdf"
+    },
+    {
+      "name": "suportenti,+05Antonio+Oliveira+-+Processo+de+Invisibilidade+dos+Inidos+Cariri.pdf",
+      "path": "references/suportenti,+05Antonio+Oliveira+-+Processo+de+Invisibilidade+dos+Inidos+Cariri.pdf"
+    }
+  ],
+  "guidelines": "Resolve each files[].path relative to the directory containing this skill's SKILL.md (the skill root), not this index's lookup/ directory or the current working directory. Use that directory for filesystem reads or append the path unchanged to the skill's root resource URI. This index is not a complete inventory of the plugin's files. If a needed file is absent from this index or cannot be found or read at its indexed path, continue normal file discovery using the skill's available file listing or installed files; do not stop or conclude that the file is unavailable based on this index alone. This index is primarily a GPT migration helper that maps original GPT upload names to packaged filenames in the plugin."
+}

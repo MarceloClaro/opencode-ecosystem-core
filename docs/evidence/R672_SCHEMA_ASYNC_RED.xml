@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="16" skipped="0" tests="53" time="1.872" timestamp="2026-10-04T17:34:54.855020-03:00" hostname="OPENCODE"><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_resolves_virtual_environment_outside_path" time="0.004" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_explicit_nlm_bin_is_resolved" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unrelated_binary_is_not_executable" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_missing_server_is_blocked_without_process" time="0.004" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_discovery_uses_handshake_and_preserves_schemas" time="0.041" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_all_49_public_schemas_are_valid_and_preserved_without_redaction" time="0.246"><failure message="AssertionError: assert ['save_auth_tokens'] == []&#10;  &#10;  Left contains one more item: 'save_auth_tokens'&#10;  Use -v to get more diff">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7e5e7d607bf0&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_all_49_public_schemas_are0/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d698350&gt;
+
+    def test_all_49_public_schemas_are_valid_and_preserved_without_redaction(transport, monkeypatch):
+        client, _ = transport
+        catalog = Path(__file__).resolve().parents[1] / "docs/evidence/R672_PUBLIC_MCP_CATALOG.json"
+        monkeypatch.setenv("R672_FIXTURE_SCHEMA", "public_catalog")
+        monkeypatch.setenv("R672_PUBLIC_CATALOG", str(catalog))
+        expected = json.loads(catalog.read_text())["tools"]
+        assert len(expected) == 49
+        discovery = asyncio.run(client.discover_mcp())
+        assert discovery["status"] == "completed"
+        invalid = []
+        for tool in discovery["tools"]:
+            try:
+                jsonschema.validators.validator_for(tool["inputSchema"]).check_schema(tool["inputSchema"])
+            except jsonschema.SchemaError:
+                invalid.append(tool["name"])
+&gt;       assert invalid == []
+E       AssertionError: assert ['save_auth_tokens'] == []
+E         
+E         Left contains one more item: 'save_auth_tokens'
+E         Use -v to get more diff
+
+tests/test_r672_gemini_notebook_transport.py:135: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_calls_discovered_tool_after_validating_schema" time="0.034" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments0]" time="0.035" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments1]" time="0.036" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments2]" time="0.038" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments3]" time="0.037" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments4]" time="0.037" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unknown_operation_never_calls_tool" time="0.030" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_external_schema_references_are_blocked_without_fetching" time="0.033" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_local_schema_references_validate_nested_unknown_fields" time="0.065" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unbounded_or_nonobject_arguments_do_not_start_process[arguments0]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unbounded_or_nonobject_arguments_do_not_start_process[arguments1]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unbounded_or_nonobject_arguments_do_not_start_process[arguments2]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload0]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload1]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload2]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload3]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload4]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_successful_plain_text_is_not_fabricated_business_confirmation" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_async_business_states_are_preserved[pending]" time="0.002"><failure message="AssertionError: assert 'completed' == 'pending'&#10;  &#10;  - pending&#10;  + completed">state = 'pending'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_async_business_states_are_preserved(state):
+        payload = {"isError":False,"content":[{"type":"text","text":json.dumps({"status":state,"job_id":"hermetic"})}]}
+        result = classify_tool_result(payload)
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'pending'
+E         
+E         - pending
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:212: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_async_business_states_are_preserved[running]" time="0.002"><failure message="AssertionError: assert 'completed' == 'running'&#10;  &#10;  - running&#10;  + completed">state = 'running'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_async_business_states_are_preserved(state):
+        payload = {"isError":False,"content":[{"type":"text","text":json.dumps({"status":state,"job_id":"hermetic"})}]}
+        result = classify_tool_result(payload)
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'running'
+E         
+E         - running
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:212: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_async_business_states_are_preserved[generating]" time="0.002"><failure message="AssertionError: assert 'completed' == 'generating'&#10;  &#10;  - generating&#10;  + completed">state = 'generating'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_async_business_states_are_preserved(state):
+        payload = {"isError":False,"content":[{"type":"text","text":json.dumps({"status":state,"job_id":"hermetic"})}]}
+        result = classify_tool_result(payload)
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'generating'
+E         
+E         - generating
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:212: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_async_business_states_are_preserved[partial]" time="0.002"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">state = 'partial'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_async_business_states_are_preserved(state):
+        payload = {"isError":False,"content":[{"type":"text","text":json.dumps({"status":state,"job_id":"hermetic"})}]}
+        result = classify_tool_result(payload)
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:212: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts0-partial]" time="0.002"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">counts = {'failed': 1, 'succeeded': 2, 'total_steps': 3}, expected = 'partial'
+
+    @pytest.mark.parametrize("counts, expected", [
+        ({"failed":1,"succeeded":2,"total_steps":3},"partial"),
+        ({"succeeded":2,"total_steps":3},"partial"),
+        ({"failed":3,"succeeded":0,"total_steps":3},"failed"),
+        ({"succeeded":0,"total_steps":3},"pending"),
+        ({"succeeded":3,"total_steps":3},"completed"),
+    ])
+    def test_nested_batch_counts_override_outer_success(counts, expected):
+        result = classify_tool_result({"isError":False,"structuredContent":{"status":"success", "summary":counts}})
+&gt;       assert result["status"] == expected
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:225: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts1-partial]" time="0.002"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">counts = {'succeeded': 2, 'total_steps': 3}, expected = 'partial'
+
+    @pytest.mark.parametrize("counts, expected", [
+        ({"failed":1,"succeeded":2,"total_steps":3},"partial"),
+        ({"succeeded":2,"total_steps":3},"partial"),
+        ({"failed":3,"succeeded":0,"total_steps":3},"failed"),
+        ({"succeeded":0,"total_steps":3},"pending"),
+        ({"succeeded":3,"total_steps":3},"completed"),
+    ])
+    def test_nested_batch_counts_override_outer_success(counts, expected):
+        result = classify_tool_result({"isError":False,"structuredContent":{"status":"success", "summary":counts}})
+&gt;       assert result["status"] == expected
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:225: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts2-failed]" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts3-pending]" time="0.002"><failure message="AssertionError: assert 'failed' == 'pending'&#10;  &#10;  - pending&#10;  + failed">counts = {'succeeded': 0, 'total_steps': 3}, expected = 'pending'
+
+    @pytest.mark.parametrize("counts, expected", [
+        ({"failed":1,"succeeded":2,"total_steps":3},"partial"),
+        ({"succeeded":2,"total_steps":3},"partial"),
+        ({"failed":3,"succeeded":0,"total_steps":3},"failed"),
+        ({"succeeded":0,"total_steps":3},"pending"),
+        ({"succeeded":3,"total_steps":3},"completed"),
+    ])
+    def test_nested_batch_counts_override_outer_success(counts, expected):
+        result = classify_tool_result({"isError":False,"structuredContent":{"status":"success", "summary":counts}})
+&gt;       assert result["status"] == expected
+E       AssertionError: assert 'failed' == 'pending'
+E         
+E         - pending
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:225: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts4-completed]" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_async_states_survive_transport[pending]" time="0.035"><failure message="AssertionError: assert 'completed' == 'pending'&#10;  &#10;  - pending&#10;  + completed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7e5e7d56a6d0&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_mcp_async_states_survive_0/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d4f65f0&gt;
+state = 'pending'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_mcp_async_states_survive_transport(transport, monkeypatch, state):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE", state)
+        result = asyncio.run(client.call_mcp("notebook_list", {}))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'pending'
+E         
+E         - pending
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:234: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_async_states_survive_transport[running]" time="0.035"><failure message="AssertionError: assert 'completed' == 'running'&#10;  &#10;  - running&#10;  + completed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7e5e7d554d70&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_mcp_async_states_survive_1/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d4f54e0&gt;
+state = 'running'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_mcp_async_states_survive_transport(transport, monkeypatch, state):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE", state)
+        result = asyncio.run(client.call_mcp("notebook_list", {}))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'running'
+E         
+E         - running
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:234: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_async_states_survive_transport[generating]" time="0.036"><failure message="AssertionError: assert 'completed' == 'generating'&#10;  &#10;  - generating&#10;  + completed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7e5e7d5554f0&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_mcp_async_states_survive_2/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d4f5e80&gt;
+state = 'generating'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_mcp_async_states_survive_transport(transport, monkeypatch, state):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE", state)
+        result = asyncio.run(client.call_mcp("notebook_list", {}))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'generating'
+E         
+E         - generating
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:234: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_async_states_survive_transport[partial]" time="0.042"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7e5e7d6d7890&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_mcp_async_states_survive_3/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d4f6200&gt;
+state = 'partial'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_mcp_async_states_survive_transport(transport, monkeypatch, state):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE", state)
+        result = asyncio.run(client.call_mcp("notebook_list", {}))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:234: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_async_states_survive_exit_zero[pending]" time="0.035"><failure message="AssertionError: assert 'completed' == 'pending'&#10;  &#10;  - pending&#10;  + completed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_cli_async_states_survive_0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d4f7770&gt;
+state = 'pending'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_cli_async_states_survive_exit_zero(tmp_path, monkeypatch, state):
+        exe = tmp_path / "nlm-state"
+        exe.write_text("#!"+sys.executable+"\nprint("+repr(json.dumps({"status":state,"job_id":"hermetic"}))+ ")\n")
+        exe.chmod(0o755)
+        monkeypatch.setenv("NLM_BIN", str(exe))
+        result = asyncio.run(GeminiNotebookTransport(tmp_path).run_cli(["nlm", "notebook", "query"]))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'pending'
+E         
+E         - pending
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:246: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_async_states_survive_exit_zero[running]" time="0.035"><failure message="AssertionError: assert 'completed' == 'running'&#10;  &#10;  - running&#10;  + completed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_cli_async_states_survive_1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d4f77e0&gt;
+state = 'running'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_cli_async_states_survive_exit_zero(tmp_path, monkeypatch, state):
+        exe = tmp_path / "nlm-state"
+        exe.write_text("#!"+sys.executable+"\nprint("+repr(json.dumps({"status":state,"job_id":"hermetic"}))+ ")\n")
+        exe.chmod(0o755)
+        monkeypatch.setenv("NLM_BIN", str(exe))
+        result = asyncio.run(GeminiNotebookTransport(tmp_path).run_cli(["nlm", "notebook", "query"]))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'running'
+E         
+E         - running
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:246: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_async_states_survive_exit_zero[generating]" time="0.032"><failure message="AssertionError: assert 'completed' == 'generating'&#10;  &#10;  - generating&#10;  + completed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_cli_async_states_survive_2')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d599a90&gt;
+state = 'generating'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_cli_async_states_survive_exit_zero(tmp_path, monkeypatch, state):
+        exe = tmp_path / "nlm-state"
+        exe.write_text("#!"+sys.executable+"\nprint("+repr(json.dumps({"status":state,"job_id":"hermetic"}))+ ")\n")
+        exe.chmod(0o755)
+        monkeypatch.setenv("NLM_BIN", str(exe))
+        result = asyncio.run(GeminiNotebookTransport(tmp_path).run_cli(["nlm", "notebook", "query"]))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'generating'
+E         
+E         - generating
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:246: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_async_states_survive_exit_zero[partial]" time="0.034"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-277/test_cli_async_states_survive_3')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7e5e7d598130&gt;
+state = 'partial'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_cli_async_states_survive_exit_zero(tmp_path, monkeypatch, state):
+        exe = tmp_path / "nlm-state"
+        exe.write_text("#!"+sys.executable+"\nprint("+repr(json.dumps({"status":state,"job_id":"hermetic"}))+ ")\n")
+        exe.chmod(0o755)
+        monkeypatch.setenv("NLM_BIN", str(exe))
+        result = asyncio.run(GeminiNotebookTransport(tmp_path).run_cli(["nlm", "notebook", "query"]))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:246: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_tool_result_error_is_preserved_as_failure" time="0.032" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_timeout_ends_child_process" time="0.158" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_output_limits_end_process[oversize]" time="0.089" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_output_limits_end_process[oversize_stderr]" time="0.043" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_sanitizes_credentials_recursively_and_in_text" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_internal_environment_overrides_preserve_other_environment" time="0.031" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_forces_stdio_and_disables_debug_environment" time="0.034" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_uses_argument_vector_and_noninteractive_input" time="0.043" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_exit_zero_json_error_is_failure" time="0.054" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_rejects_wrong_binary_or_unbounded_arguments[argv0]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_rejects_wrong_binary_or_unbounded_arguments[argv1]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_rejects_wrong_binary_or_unbounded_arguments[argv2]" time="0.002" /></testsuite></testsuites>

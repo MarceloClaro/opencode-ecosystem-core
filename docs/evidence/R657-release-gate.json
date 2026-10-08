@@ -1,0 +1,289 @@
+{
+  "status": "passed",
+  "executed_at_utc": "2026-10-04T07:45:09.015842+00:00",
+  "verification_scope": "local_runtime",
+  "external_validation": false,
+  "regression": {
+    "tests": 237,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "returncode": 0,
+    "summary": "All checks passed!",
+    "files": [
+      "rag/book_library.py",
+      "integrations/finetuning_data.py",
+      "integrations/ecosystem_mcp.py",
+      "integrations/opencode_cli.py",
+      "marceloclaro/library_cli.py",
+      "marceloclaro/orchestrator.py",
+      "marceloclaro/cli.py",
+      "scripts/verify_book_library.py",
+      "tests/test_r657_book_library.py",
+      "tests/test_r657_book_mcp.py",
+      "tests/test_r657_library_surface.py",
+      "tests/test_r657_evidence_probe.py",
+      "tests/test_r658_finetuning_data.py",
+      "tests/test_r640_ecosystem_surface.py"
+    ]
+  },
+  "sdd": {
+    "SPEC-935-R657": {
+      "spec_id": "SPEC-935-R657",
+      "verified": true,
+      "status": "green",
+      "criteria_results": [
+        {
+          "criterion_id": "R657-PROVENANCE",
+          "description": "Persistência, consulta e releitura preservam página e hashes.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R657-FRESHNESS",
+          "description": "Fontes removidas/alteradas e aliases proibidos não fornecem evidência.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R657-FAILURES",
+          "description": "Limites inválidos, falta de suporte e schema incompleto têm tratamento explícito.",
+          "passed": true
+        }
+      ],
+      "passed_count": 3,
+      "total_count": 3,
+      "runtime_evidence_required": true,
+      "runtime_evidence_valid": true,
+      "evidence_contract_mode": "legacy",
+      "evidence_contract_valid": false,
+      "evidence_contract_error": null,
+      "evidence_contract_sha256": null,
+      "criterion_runtime_records_required": false,
+      "trusted_test_evidence": {
+        "spec_id": "SPEC-935-R657",
+        "test_file": "tests/test_r657_book_library.py",
+        "executed": true,
+        "passed": true,
+        "returncode": 0,
+        "summary": "24 passed in 1.25s",
+        "error": null,
+        "scope": "local_runtime",
+        "external_validation": false,
+        "contract_sha256": null,
+        "criterion_records": []
+      }
+    },
+    "SPEC-935-R658": {
+      "spec_id": "SPEC-935-R658",
+      "verified": true,
+      "status": "green",
+      "criteria_results": [
+        {
+          "criterion_id": "R658-SPLITS",
+          "description": "Deduplicação e componentes transitivos preservam grupos sem vazamento.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R658-REPRODUCIBILITY",
+          "description": "Seed e hashes permanecem estáveis sob reordenação dos registros.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R658-EVALUATION",
+          "description": "Comparação recusa protocolos incompatíveis, valores inválidos e ganho insuficiente.",
+          "passed": true
+        }
+      ],
+      "passed_count": 3,
+      "total_count": 3,
+      "runtime_evidence_required": true,
+      "runtime_evidence_valid": true,
+      "evidence_contract_mode": "legacy",
+      "evidence_contract_valid": false,
+      "evidence_contract_error": null,
+      "evidence_contract_sha256": null,
+      "criterion_runtime_records_required": false,
+      "trusted_test_evidence": {
+        "spec_id": "SPEC-935-R658",
+        "test_file": "tests/test_r658_finetuning_data.py",
+        "executed": true,
+        "passed": true,
+        "returncode": 0,
+        "summary": "52 passed in 0.49s",
+        "error": null,
+        "scope": "local_runtime",
+        "external_validation": false,
+        "contract_sha256": null,
+        "criterion_records": []
+      }
+    }
+  },
+  "doctor": {
+    "overall": "degraded",
+    "checks": [
+      {
+        "name": "specs_formais",
+        "status": "pass",
+        "detail": "141 especificações formais carregadas."
+      },
+      {
+        "name": "evolution_registry",
+        "status": "pass",
+        "detail": "483/483 ciclos carregados corretamente. | Custódia: 0.4% (2/483); recente R462+ 1.0% (2/205); âncoras merkle 2; rejeitados 1; legados 423"
+      },
+      {
+        "name": "loop_specs",
+        "status": "pass",
+        "detail": "2 loop spec(s) registrado(s), todos bem formados."
+      },
+      {
+        "name": "memoria_metacognitiva",
+        "status": "pass",
+        "detail": "MetaBus memory acessível; 170 entradas episódicas."
+      },
+      {
+        "name": "opencode_config",
+        "status": "pass",
+        "detail": "opencode.json válido com 227 agente(s) configurado(s)."
+      },
+      {
+        "name": "corrigendum",
+        "status": "pass",
+        "detail": "CORRIGENDUM.md presente (19372 bytes)."
+      },
+      {
+        "name": "external_clis",
+        "status": "warn",
+        "detail": "5/17 CLI(s) externa(s) ausente(s): scihub-cli -> pip install scihub-cli; runai -> curl -fsSL https://canirun.ai/runai/install.sh | bash; tig -> pip install tig-code; reasonix -> npm install -g reasonix; colab-mcp -> uvx colab-mcp --help"
+      },
+      {
+        "name": "llm_providers",
+        "status": "pass",
+        "detail": "Provedor(es) LLM disponível(is): Ollama local. Preferência: local → PAIR → Ollama → OpenAI."
+      },
+      {
+        "name": "litert_lm",
+        "status": "pass",
+        "detail": "ready: daemon HTTP local respondeu ao health check (pid=externo); readiness não valida geração de texto."
+      },
+      {
+        "name": "colibri",
+        "status": "pass",
+        "detail": "OLMoE OK (bin=/home/marceloclaro/opencode-ecosystem-core/colibri/c/olmoe, snap=/home/marceloclaro/models/olmoe_merged)"
+      },
+      {
+        "name": "runai",
+        "status": "warn",
+        "detail": "runai ausente e o pacote npm documentado pelo instalador respondeu 404; há inconsistência upstream em https://canirun.ai/runai/install.sh / @canirun/runai. Workaround suportado: clone https://github.com/midudev/canirun.ai e defina RUNAI_SOURCE_DIR para o checkout."
+      },
+      {
+        "name": "llm_reduction_metrics",
+        "status": "pass",
+        "detail": "Redução LLM ativa: 0 chamadas evitadas, 0 rotas processadas. Threshold: 0.85."
+      },
+      {
+        "name": "episteme_coverage",
+        "status": "pass",
+        "detail": "149/227 agentes com episteme (66%): 3 explícita(s), 146 inferida(s), 78 sem sinais."
+      },
+      {
+        "name": "apm_integration",
+        "status": "pass",
+        "detail": "Microsoft APM ativo (v1.0.0): 222 primitivas declaradas (com lockfile íntegro)."
+      },
+      {
+        "name": "free_model_amplification",
+        "status": "pass",
+        "detail": "Amplificação DeepSeek Harness ativa: RAG local Whoosh3 + Scaffold CoT para modelos free (Ox Alpha, DeepSeek Free)."
+      },
+      {
+        "name": "deepmind_superhuman_reasoning",
+        "status": "pass",
+        "detail": "DeepMind Superhuman Reasoning ativo: Aletheia scaffold + Verificador formal (SymPy ativo) + IMO Bench (9 problemas)."
+      },
+      {
+        "name": "opencode_deepthink_alphaproof",
+        "status": "pass",
+        "detail": "OpenCode AlphaProof & Deep Think ativos: Proof-tree search (1 nós) + Erdős/Hirzebruch Solver (Dim 2 OK)."
+      },
+      {
+        "name": "lean4_egraph_engine",
+        "status": "pass",
+        "detail": "Lean 4 & E-Graph ativos: Analisador Estático Lean 4 ativo (status: syntax_verified) + Equality Saturation (1 regras aplicadas)."
+      },
+      {
+        "name": "geometry_autoformalization_engine",
+        "status": "pass",
+        "detail": "AlphaGeometry & Auto-Formalizer ativos: Wu's Method (resíduo 0) + Lean 4 Autoformalize (status syntax_verified)."
+      },
+      {
+        "name": "clinical_game_theory_engine",
+        "status": "pass",
+        "detail": "Decisão Clínica por Teoria dos Jogos & Grafos ativa: 7 diretrizes verificadas + Minimax Regret ativo + Verificador Z3 (True)."
+      }
+    ],
+    "checks_total": 20,
+    "checks_passed": 18,
+    "checks_warned": 2,
+    "checks_failed": 0,
+    "duration_seconds": 7.17
+  },
+  "coordination": {
+    "orchestrator": "marceloclaro",
+    "tasks": {
+      "mcp": "task-0ec4cb67",
+      "finetuning": "task-c09f723f",
+      "rag": "task-00b72836"
+    },
+    "assistants": "Codex local implementation and independent review"
+  },
+  "evolution": {
+    "round_ids": [
+      "R657",
+      "R658"
+    ],
+    "audited": false,
+    "score": null,
+    "total_cycles": 483
+  },
+  "actual_pdf_mcp_report": "docs/evidence/R657-library-real.json",
+  "synthetic_cli_report": "docs/evidence/R658-synthetic-cli.json",
+  "artifact_hashes": {
+    "rag/book_library.py": "fdf3ba87e88d25f9601e9e84772b245a480a6ad64562bb49a971f3ef22fd1707",
+    "integrations/finetuning_data.py": "c6cc561c68a69fdd4b82dc9e8e874a680efd7a531d01aac4421dfa5557d843b8",
+    "integrations/ecosystem_mcp.py": "be57e02cd737a4f370f3971cf2645dff7fc1f77277334837966006cbdf32f1b9",
+    "integrations/opencode_cli.py": "cdd8c3eb17011b3fcbbcdcb7c5f8366c9677dfce2bd84b5df80e9c2112e27284",
+    "marceloclaro/library_cli.py": "a4ca5708b8e5bc0400b70386ef6af3560a12959e2f517fb4467a310847b46b1a",
+    "marceloclaro/orchestrator.py": "690b16eb7c25e05d15147222cb60b4a12df4cb505c9dd974e84aa8587b6642d6",
+    "marceloclaro/cli.py": "3af1cf10b58e4493f26c49f52d8d3eb57f2aab128ecba8f2c9dcf2a902d6e79d",
+    "scripts/verify_book_library.py": "be4840fae56c71e6ba3b6268eecad5589923e13cda3561ad8d82737674b32b24",
+    "tests/test_r657_book_library.py": "c2d9d0bf755e99c2faa64466493f408cf5d89e4d74666400696a66c6d0787d49",
+    "tests/test_r657_book_mcp.py": "8e7ab4e740e13e3c4d5a54201087a65af89a87bda5cd9a12d0bcf17260cec1cf",
+    "tests/test_r657_library_surface.py": "2f6102507155b479a27c79dd22fe2edf96f9dec7e291414832eacbdd8d5e7e78",
+    "tests/test_r657_evidence_probe.py": "3a3ad9683740977f411d957400178ed67d5b3bbc6158be3aa354cb0dfd510fc2",
+    "tests/test_r658_finetuning_data.py": "09b809f0ac8832039567b39a6ca097a91631ebaa38755ec483bc24e3d6bd6e45",
+    "tests/test_r640_ecosystem_surface.py": "b210baafcb122751be6b7e7cafc07425c832c85be6fa712259d13a26a3b04830",
+    "requirements.txt": "c7dd55b204fa735caca52b9e69d158c7fa2e7c4a9a6d1ad3bffd625f3620a560",
+    "specs/SPEC-935-R657-biblioteca-local-mcp.md": "521f0074dae152a681aaa95b0577b2ceff65792e84f21b3293c817342a1b8d9e",
+    "specs/SPEC-935-R658-finetuning-data-gate.md": "b9d12dc973f4acb51f89a91ecacc1e32ea4275039ca9f8b7b7873280d2ad946d",
+    "docs/BIBLIOTECA_AI_R657.md": "e638d5fbc8ecc28f0ed88ebbe7fa515026dc9a23ca3b3685a58b2417521695fc",
+    "opencode.json": "548d0fc50f4cfac2097779d5fa7b22fea4af4aa77449e519f193b46ca90d3442",
+    "MANUAL.md": "2db3c63cb4fec0650f75b22aeda9566e35bba3c21ce53918ded9df935d08db63",
+    "ARCHITECTURE.md": "02e43c7330b10b194cbbd06eef846674abbabab26f05a1028f1002557d3b28f4",
+    "README.md": "badd8df08d1e747fd443156938dd2952bceb9dbed1e45814e369222a0f3aa691",
+    "installer/README.md": "4745ca8c536201892a3167b97f703af1fb4acdb1afa7e4546109018989dc26a3",
+    "installer/windows/README.md": "74cd3808d124d8ab6dce8d29b5e722ea13031d49ca2986515fcac82acde90e59",
+    "docs/evidence/R657-library-real.json": "ac603277a8c46bf17886c07569cf6a50c442f30473274aa13ae86914b30c5c39",
+    "docs/evidence/R658-synthetic-cli.json": "fe89b4b459bd69f0f1d6a3b03b279874f28c03af3909493819079db18ea3e10b"
+  },
+  "training_executed": false,
+  "model_inference_executed": false,
+  "limitations": [
+    "Engenharia de Software and RAG PDFs contain0bytes",
+    "No OCR",
+    "Lexical retrieval is not truth verification",
+    "Dataset deduplication does not detect semantic duplicates",
+    "Evaluation compares reported measurements only"
+  ]
+}

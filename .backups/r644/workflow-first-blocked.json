@@ -1,0 +1,582 @@
+{
+  "kind": "real_mcp_two_node_workflow",
+  "tools": [
+    "ecosystem_status",
+    "ecosystem_route",
+    "ecosystem_run",
+    "ecosystem_workflow",
+    "ecosystem_workflow_status"
+  ],
+  "result": {
+    "version": 1,
+    "workflow_id": "workflow-9aa97b0833854db98ebe6fd0f8cd2991",
+    "input_hash": "81965956b14bed00e8d4ce1cca063693ca1edf9b24a4227911119c8f0b484b58",
+    "order": [
+      "analysis",
+      "review"
+    ],
+    "status": "blocked",
+    "success": false,
+    "steps": 0,
+    "max_steps": 2,
+    "timeout_seconds": 180.0,
+    "max_parallel": 1,
+    "timeout_scope": "per_invocation_global_across_nodes",
+    "execution_strategy": "sequential_shared_blackboard",
+    "created_at": "2026-10-03T10:14:24.566302+00:00",
+    "updated_at": "2026-10-03T10:14:29.620275+00:00",
+    "nodes": {
+      "analysis": {
+        "id": "analysis",
+        "task": "Resuma em três frases a diferença entre roteamento inspirado em atenção e treinamento de uma rede Transformer. Não use ferramentas nem altere arquivos.",
+        "dependencies": [],
+        "required_capabilities": [
+          "summarize"
+        ],
+        "ecosystem": "codex",
+        "per_node_max_steps": 1,
+        "status": "blocked",
+        "success": false,
+        "steps": 0,
+        "reserved_steps": 0,
+        "task_id": "task-f83247d2",
+        "output": "",
+        "result": {
+          "status": "blocked",
+          "success": false,
+          "task_id": "task-f83247d2",
+          "agent_id": null,
+          "ecosystem": "codex",
+          "origin_ecosystem": "claude",
+          "execution_mode": "adapted_instructions",
+          "artifact": {
+            "artifact_id": "claude:skill:third_party:access",
+            "ecosystem": "claude",
+            "kind": "skill",
+            "name": "access",
+            "slug": "access",
+            "description": "Manage Telegram channel access — approve pairings, edit allowlists, set DM/group policy. Use when the user asks to pair, approve someone, check who's allowed, or change policy for the Telegram channel.",
+            "source_path": "/home/marceloclaro/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/access/SKILL.md",
+            "source_root": "claude:marketplace",
+            "origin": "third_party",
+            "license": "Apache-2.0",
+            "version": "",
+            "capabilities": [
+              "Read",
+              "Write",
+              "Bash(ls *)",
+              "Bash(mkdir *)"
+            ],
+            "tags": [],
+            "hook_events": [],
+            "hook_commands": [],
+            "content_sha256": "ca4a3759a49b7ed538b7627096cf7c1f65f02b50ba1c8efe3cacc65445bdd831",
+            "source_file_sha256": "c499635ef8a9a68cb166bb737a7f4d0620154d1bc9e96934cb8b630fadf22c86",
+            "status": "ok",
+            "available": true,
+            "degraded_reasons": [],
+            "duplicate_paths": [],
+            "metadata": {
+              "frontmatter_keys": [
+                "allowed-tools",
+                "description",
+                "name",
+                "user-invocable"
+              ]
+            }
+          },
+          "output": "",
+          "steps": 0,
+          "routing": {
+            "status": "ready",
+            "error": "",
+            "executor": "codex",
+            "available_executors": [
+              "claude",
+              "codex",
+              "antigravity"
+            ],
+            "ranking": [
+              [
+                "claude:skill:third_party:access",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:autofix",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:brainstorming",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:cardputer-buddy",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:code-review",
+                0.30500000000000005
+              ]
+            ],
+            "weights": {
+              "semantic": 0.35,
+              "capability": 0.3,
+              "maturity": 0.2,
+              "license": 0.15
+            },
+            "spec_id": "SPEC-935-R621",
+            "excluded_artifacts": {
+              "claude:command:third_party:coderabbit-review": "inert_artifact_kind",
+              "claude:command:third_party:maker-setup": "inert_artifact_kind",
+              "claude:hook:third_party:superpowers": "inert_artifact_kind",
+              "claude:command:third_party:cancel-ralph": "inert_artifact_kind",
+              "claude:command:third_party:clean-gone": "inert_artifact_kind",
+              "claude:command:third_party:code-review": "inert_artifact_kind",
+              "claude:command:third_party:commit": "inert_artifact_kind",
+              "claude:command:third_party:commit-push-pr": "inert_artifact_kind",
+              "claude:command:third_party:configure": "inert_artifact_kind",
+              "claude:command:third_party:create-docker-mcp-tunnel": "inert_artifact_kind",
+              "claude:command:third_party:create-plugin": "inert_artifact_kind",
+              "claude:command:third_party:example-command": "inert_artifact_kind",
+              "claude:command:third_party:feature-dev": "inert_artifact_kind",
+              "claude:command:third_party:help": "inert_artifact_kind",
+              "claude:command:third_party:hookify": "inert_artifact_kind",
+              "claude:command:third_party:list": "inert_artifact_kind",
+              "claude:command:third_party:modernize-assess": "inert_artifact_kind",
+              "claude:command:third_party:modernize-brief": "inert_artifact_kind",
+              "claude:command:third_party:modernize-extract-rules": "inert_artifact_kind",
+              "claude:command:third_party:modernize-harden": "inert_artifact_kind"
+            },
+            "excluded_count": 35,
+            "excluded_reasons": {
+              "inert_artifact_kind": 35
+            }
+          },
+          "error": "Nenhum agente interno elegível foi atribuído pelo orquestrador.",
+          "evaluation_kind": "heuristic",
+          "final_grade": null,
+          "attempts": [],
+          "fallbacks": []
+        },
+        "error": "Nenhum agente interno elegível foi atribuído pelo orquestrador.",
+        "blocked_by": [],
+        "execution_uncertain": false,
+        "execution_attempted": true,
+        "history": []
+      },
+      "review": {
+        "id": "review",
+        "task": "Revise a entrega da análise anterior. Identifique eventual exagero sobre rede neural e sugira uma formulação correta em até três frases. Não use ferramentas nem altere arquivos.",
+        "dependencies": [
+          "analysis"
+        ],
+        "required_capabilities": [
+          "review"
+        ],
+        "ecosystem": "antigravity",
+        "per_node_max_steps": 1,
+        "status": "blocked",
+        "success": false,
+        "steps": 0,
+        "reserved_steps": 0,
+        "task_id": null,
+        "output": "",
+        "result": null,
+        "error": "Dependências sem conclusão aceita.",
+        "blocked_by": [
+          "analysis"
+        ],
+        "execution_uncertain": false,
+        "execution_attempted": false,
+        "history": []
+      }
+    }
+  },
+  "resumed": {
+    "version": 1,
+    "workflow_id": "workflow-9aa97b0833854db98ebe6fd0f8cd2991",
+    "input_hash": "81965956b14bed00e8d4ce1cca063693ca1edf9b24a4227911119c8f0b484b58",
+    "order": [
+      "analysis",
+      "review"
+    ],
+    "status": "blocked",
+    "success": false,
+    "steps": 0,
+    "max_steps": 2,
+    "timeout_seconds": 30.0,
+    "max_parallel": 1,
+    "timeout_scope": "per_invocation_global_across_nodes",
+    "execution_strategy": "sequential_shared_blackboard",
+    "created_at": "2026-10-03T10:14:24.566302+00:00",
+    "updated_at": "2026-10-03T10:14:31.181206+00:00",
+    "nodes": {
+      "analysis": {
+        "id": "analysis",
+        "task": "Resuma em três frases a diferença entre roteamento inspirado em atenção e treinamento de uma rede Transformer. Não use ferramentas nem altere arquivos.",
+        "dependencies": [],
+        "required_capabilities": [
+          "summarize"
+        ],
+        "ecosystem": "codex",
+        "per_node_max_steps": 1,
+        "status": "blocked",
+        "success": false,
+        "steps": 0,
+        "reserved_steps": 0,
+        "task_id": "task-f83247d2",
+        "output": "",
+        "result": {
+          "status": "blocked",
+          "success": false,
+          "task_id": "task-f83247d2",
+          "agent_id": null,
+          "ecosystem": "codex",
+          "origin_ecosystem": "claude",
+          "execution_mode": "adapted_instructions",
+          "artifact": {
+            "artifact_id": "claude:skill:third_party:access",
+            "ecosystem": "claude",
+            "kind": "skill",
+            "name": "access",
+            "slug": "access",
+            "description": "Manage Telegram channel access — approve pairings, edit allowlists, set DM/group policy. Use when the user asks to pair, approve someone, check who's allowed, or change policy for the Telegram channel.",
+            "source_path": "/home/marceloclaro/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/access/SKILL.md",
+            "source_root": "claude:marketplace",
+            "origin": "third_party",
+            "license": "Apache-2.0",
+            "version": "",
+            "capabilities": [
+              "Read",
+              "Write",
+              "Bash(ls *)",
+              "Bash(mkdir *)"
+            ],
+            "tags": [],
+            "hook_events": [],
+            "hook_commands": [],
+            "content_sha256": "ca4a3759a49b7ed538b7627096cf7c1f65f02b50ba1c8efe3cacc65445bdd831",
+            "source_file_sha256": "c499635ef8a9a68cb166bb737a7f4d0620154d1bc9e96934cb8b630fadf22c86",
+            "status": "ok",
+            "available": true,
+            "degraded_reasons": [],
+            "duplicate_paths": [],
+            "metadata": {
+              "frontmatter_keys": [
+                "allowed-tools",
+                "description",
+                "name",
+                "user-invocable"
+              ]
+            }
+          },
+          "output": "",
+          "steps": 0,
+          "routing": {
+            "status": "ready",
+            "error": "",
+            "executor": "codex",
+            "available_executors": [
+              "claude",
+              "codex",
+              "antigravity"
+            ],
+            "ranking": [
+              [
+                "claude:skill:third_party:access",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:autofix",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:brainstorming",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:cardputer-buddy",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:code-review",
+                0.30500000000000005
+              ]
+            ],
+            "weights": {
+              "semantic": 0.35,
+              "capability": 0.3,
+              "maturity": 0.2,
+              "license": 0.15
+            },
+            "spec_id": "SPEC-935-R621",
+            "excluded_artifacts": {
+              "claude:command:third_party:coderabbit-review": "inert_artifact_kind",
+              "claude:command:third_party:maker-setup": "inert_artifact_kind",
+              "claude:hook:third_party:superpowers": "inert_artifact_kind",
+              "claude:command:third_party:cancel-ralph": "inert_artifact_kind",
+              "claude:command:third_party:clean-gone": "inert_artifact_kind",
+              "claude:command:third_party:code-review": "inert_artifact_kind",
+              "claude:command:third_party:commit": "inert_artifact_kind",
+              "claude:command:third_party:commit-push-pr": "inert_artifact_kind",
+              "claude:command:third_party:configure": "inert_artifact_kind",
+              "claude:command:third_party:create-docker-mcp-tunnel": "inert_artifact_kind",
+              "claude:command:third_party:create-plugin": "inert_artifact_kind",
+              "claude:command:third_party:example-command": "inert_artifact_kind",
+              "claude:command:third_party:feature-dev": "inert_artifact_kind",
+              "claude:command:third_party:help": "inert_artifact_kind",
+              "claude:command:third_party:hookify": "inert_artifact_kind",
+              "claude:command:third_party:list": "inert_artifact_kind",
+              "claude:command:third_party:modernize-assess": "inert_artifact_kind",
+              "claude:command:third_party:modernize-brief": "inert_artifact_kind",
+              "claude:command:third_party:modernize-extract-rules": "inert_artifact_kind",
+              "claude:command:third_party:modernize-harden": "inert_artifact_kind"
+            },
+            "excluded_count": 35,
+            "excluded_reasons": {
+              "inert_artifact_kind": 35
+            }
+          },
+          "error": "Nenhum agente interno elegível foi atribuído pelo orquestrador.",
+          "evaluation_kind": "heuristic",
+          "final_grade": null,
+          "attempts": [],
+          "fallbacks": []
+        },
+        "error": "Nenhum agente interno elegível foi atribuído pelo orquestrador.",
+        "blocked_by": [],
+        "execution_uncertain": false,
+        "execution_attempted": true,
+        "history": []
+      },
+      "review": {
+        "id": "review",
+        "task": "Revise a entrega da análise anterior. Identifique eventual exagero sobre rede neural e sugira uma formulação correta em até três frases. Não use ferramentas nem altere arquivos.",
+        "dependencies": [
+          "analysis"
+        ],
+        "required_capabilities": [
+          "review"
+        ],
+        "ecosystem": "antigravity",
+        "per_node_max_steps": 1,
+        "status": "blocked",
+        "success": false,
+        "steps": 0,
+        "reserved_steps": 0,
+        "task_id": null,
+        "output": "",
+        "result": null,
+        "error": "Dependências sem conclusão aceita.",
+        "blocked_by": [
+          "analysis"
+        ],
+        "execution_uncertain": false,
+        "execution_attempted": false,
+        "history": []
+      }
+    }
+  },
+  "status": {
+    "version": 1,
+    "workflow_id": "workflow-9aa97b0833854db98ebe6fd0f8cd2991",
+    "input_hash": "81965956b14bed00e8d4ce1cca063693ca1edf9b24a4227911119c8f0b484b58",
+    "order": [
+      "analysis",
+      "review"
+    ],
+    "status": "blocked",
+    "success": false,
+    "steps": 0,
+    "max_steps": 2,
+    "timeout_seconds": 30.0,
+    "max_parallel": 1,
+    "timeout_scope": "per_invocation_global_across_nodes",
+    "execution_strategy": "sequential_shared_blackboard",
+    "created_at": "2026-10-03T10:14:24.566302+00:00",
+    "updated_at": "2026-10-03T10:14:31.181206+00:00",
+    "nodes": {
+      "analysis": {
+        "id": "analysis",
+        "task": "Resuma em três frases a diferença entre roteamento inspirado em atenção e treinamento de uma rede Transformer. Não use ferramentas nem altere arquivos.",
+        "dependencies": [],
+        "required_capabilities": [
+          "summarize"
+        ],
+        "ecosystem": "codex",
+        "per_node_max_steps": 1,
+        "status": "blocked",
+        "success": false,
+        "steps": 0,
+        "reserved_steps": 0,
+        "task_id": "task-f83247d2",
+        "output": "",
+        "result": {
+          "status": "blocked",
+          "success": false,
+          "task_id": "task-f83247d2",
+          "agent_id": null,
+          "ecosystem": "codex",
+          "origin_ecosystem": "claude",
+          "execution_mode": "adapted_instructions",
+          "artifact": {
+            "artifact_id": "claude:skill:third_party:access",
+            "ecosystem": "claude",
+            "kind": "skill",
+            "name": "access",
+            "slug": "access",
+            "description": "Manage Telegram channel access — approve pairings, edit allowlists, set DM/group policy. Use when the user asks to pair, approve someone, check who's allowed, or change policy for the Telegram channel.",
+            "source_path": "/home/marceloclaro/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/access/SKILL.md",
+            "source_root": "claude:marketplace",
+            "origin": "third_party",
+            "license": "Apache-2.0",
+            "version": "",
+            "capabilities": [
+              "Read",
+              "Write",
+              "Bash(ls *)",
+              "Bash(mkdir *)"
+            ],
+            "tags": [],
+            "hook_events": [],
+            "hook_commands": [],
+            "content_sha256": "ca4a3759a49b7ed538b7627096cf7c1f65f02b50ba1c8efe3cacc65445bdd831",
+            "source_file_sha256": "c499635ef8a9a68cb166bb737a7f4d0620154d1bc9e96934cb8b630fadf22c86",
+            "status": "ok",
+            "available": true,
+            "degraded_reasons": [],
+            "duplicate_paths": [],
+            "metadata": {
+              "frontmatter_keys": [
+                "allowed-tools",
+                "description",
+                "name",
+                "user-invocable"
+              ]
+            }
+          },
+          "output": "",
+          "steps": 0,
+          "routing": {
+            "status": "ready",
+            "error": "",
+            "executor": "codex",
+            "available_executors": [
+              "claude",
+              "codex",
+              "antigravity"
+            ],
+            "ranking": [
+              [
+                "claude:skill:third_party:access",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:autofix",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:brainstorming",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:cardputer-buddy",
+                0.30500000000000005
+              ],
+              [
+                "claude:skill:third_party:code-review",
+                0.30500000000000005
+              ]
+            ],
+            "weights": {
+              "semantic": 0.35,
+              "capability": 0.3,
+              "maturity": 0.2,
+              "license": 0.15
+            },
+            "spec_id": "SPEC-935-R621",
+            "excluded_artifacts": {
+              "claude:command:third_party:coderabbit-review": "inert_artifact_kind",
+              "claude:command:third_party:maker-setup": "inert_artifact_kind",
+              "claude:hook:third_party:superpowers": "inert_artifact_kind",
+              "claude:command:third_party:cancel-ralph": "inert_artifact_kind",
+              "claude:command:third_party:clean-gone": "inert_artifact_kind",
+              "claude:command:third_party:code-review": "inert_artifact_kind",
+              "claude:command:third_party:commit": "inert_artifact_kind",
+              "claude:command:third_party:commit-push-pr": "inert_artifact_kind",
+              "claude:command:third_party:configure": "inert_artifact_kind",
+              "claude:command:third_party:create-docker-mcp-tunnel": "inert_artifact_kind",
+              "claude:command:third_party:create-plugin": "inert_artifact_kind",
+              "claude:command:third_party:example-command": "inert_artifact_kind",
+              "claude:command:third_party:feature-dev": "inert_artifact_kind",
+              "claude:command:third_party:help": "inert_artifact_kind",
+              "claude:command:third_party:hookify": "inert_artifact_kind",
+              "claude:command:third_party:list": "inert_artifact_kind",
+              "claude:command:third_party:modernize-assess": "inert_artifact_kind",
+              "claude:command:third_party:modernize-brief": "inert_artifact_kind",
+              "claude:command:third_party:modernize-extract-rules": "inert_artifact_kind",
+              "claude:command:third_party:modernize-harden": "inert_artifact_kind"
+            },
+            "excluded_count": 35,
+            "excluded_reasons": {
+              "inert_artifact_kind": 35
+            }
+          },
+          "error": "Nenhum agente interno elegível foi atribuído pelo orquestrador.",
+          "evaluation_kind": "heuristic",
+          "final_grade": null,
+          "attempts": [],
+          "fallbacks": []
+        },
+        "error": "Nenhum agente interno elegível foi atribuído pelo orquestrador.",
+        "blocked_by": [],
+        "execution_uncertain": false,
+        "execution_attempted": true,
+        "history": []
+      },
+      "review": {
+        "id": "review",
+        "task": "Revise a entrega da análise anterior. Identifique eventual exagero sobre rede neural e sugira uma formulação correta em até três frases. Não use ferramentas nem altere arquivos.",
+        "dependencies": [
+          "analysis"
+        ],
+        "required_capabilities": [
+          "review"
+        ],
+        "ecosystem": "antigravity",
+        "per_node_max_steps": 1,
+        "status": "blocked",
+        "success": false,
+        "steps": 0,
+        "reserved_steps": 0,
+        "task_id": null,
+        "output": "",
+        "result": null,
+        "error": "Dependências sem conclusão aceita.",
+        "blocked_by": [
+          "analysis"
+        ],
+        "execution_uncertain": false,
+        "execution_attempted": false,
+        "history": []
+      }
+    }
+  },
+  "health_before": {
+    "claude": null,
+    "antigravity": null,
+    "codex": null,
+    "opencode": null,
+    "chatgpt": null
+  },
+  "health_after": {
+    "claude": null,
+    "antigravity": null,
+    "codex": null,
+    "opencode": null,
+    "chatgpt": null
+  },
+  "resume_reused_tasks": true,
+  "resume_no_new_executor_attempts": true,
+  "verified": false
+}

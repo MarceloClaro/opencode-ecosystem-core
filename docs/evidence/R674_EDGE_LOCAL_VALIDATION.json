@@ -1,0 +1,21 @@
+{
+  "spec": "SPEC-935-R674",
+  "recorded_at_utc": "2026-10-04T20:51:23.719229+00:00",
+  "status": "local_green",
+  "edge_cases_passed": 46,
+  "base_cases_passed": 27,
+  "total_passed": 73,
+  "external_operations_executed": false,
+  "remote_generation_executed": false,
+  "source_sha256": {
+    "integrations/gemini_notebook.py": "59684572567fbb99288f7c0d99fc37cea59cc5ae87f0ac78b9dc0a78285d47b7",
+    "tests/test_r674_notebook_edge_cases.py": "f4513125cc5cfa66ced7f882e111cf10677f8ac835f8fd60fbc11b5b67179036"
+  },
+  "evidence": {
+    "edge_red": "docs/evidence/R674_EDGE_RED.xml",
+    "counterexamples_red": "docs/evidence/R674_EDGE_COUNTEREXAMPLES_RED.xml",
+    "session_pipeline_red": "docs/evidence/R674_EDGE_SESSION_PIPELINE_RED.xml",
+    "green": "docs/evidence/R674_EDGE_GREEN.xml"
+  },
+  "validation_scope": "hermetic_service_contracts"
+}

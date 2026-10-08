@@ -1,0 +1,100 @@
+{
+  "status": "completed",
+  "name": "iris-core-personalizado",
+  "domain": "botanical_measurements",
+  "rows": 150,
+  "evidence_kind": "derived_real_observations",
+  "synthetic": false,
+  "license": "cc0-1.0",
+  "sources": [
+    {
+      "provider": "huggingface",
+      "dataset_id": "scikit-learn/iris",
+      "revision": "0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+      "source_url": "https://huggingface.co/datasets/scikit-learn/iris/tree/0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+      "license": "cc0-1.0",
+      "manifest_sha256": "2fa6f0c3d909732bd0027dd85ba248f31e8b29232ff29bc7bea554a2070f5fcc"
+    }
+  ],
+  "schema": [
+    "observation_id",
+    "sepal_length_cm",
+    "sepal_width_cm",
+    "petal_length_cm",
+    "petal_width_cm",
+    "species"
+  ],
+  "units": {
+    "sepal_length_cm": "cm",
+    "sepal_width_cm": "cm",
+    "petal_length_cm": "cm",
+    "petal_width_cm": "cm"
+  },
+  "seed": 668,
+  "splits": {
+    "train": 106,
+    "validation": 22,
+    "test": 22
+  },
+  "split_integrity": {
+    "overlap_groups": 0,
+    "overlap_observation_ids": 0,
+    "assignment": "stratified_by_species_and_grouped_by_identical_measurements"
+  },
+  "mirrored_rows_merged": 0,
+  "artifacts": {
+    "dataset": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/custom/dataset.csv",
+      "sha256": "5086d25c78bc5f8bec406b2d477e8318f4be65a9a35adfd1a2cf657d5d3c8850",
+      "bytes": 4235
+    },
+    "train": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/custom/train.csv",
+      "sha256": "c4721d92b8547e369a18e23283d86ba9257c15f8d51b15655c1fdbd39ae8fa35",
+      "bytes": 3004
+    },
+    "validation": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/custom/validation.csv",
+      "sha256": "0c724a9ca190759758d039f45107b086348a2b337b1868385c7412f83c5e5aaa",
+      "bytes": 699
+    },
+    "test": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/custom/test.csv",
+      "sha256": "51cf8ce984d1b526fffc6f47df3e545e36f34b589ccb70f79a5e8d7295d49f49",
+      "bytes": 702
+    },
+    "lineage": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/custom/lineage.json",
+      "sha256": "cb73458c93d30b77fd0cff3839a1825f86f2d9f8df09aed18610304fe74eaf4b",
+      "bytes": 109266
+    },
+    "card": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/custom/README.md",
+      "sha256": "a6d87f1d44ab0a80375ec93903e33b66303c3f33be72fb469e9ab31a4d439148",
+      "bytes": 834
+    }
+  },
+  "transformations": [
+    "rename_iris_columns_with_centimeter_units",
+    "normalize_species_labels",
+    "align_mirrors_by_original_id_and_reject_conflicts",
+    "preserve_duplicate_measurement_groups_in_same_split"
+  ],
+  "training_executed": false,
+  "upload_executed": false,
+  "external_validation": false,
+  "generated_at": "2026-10-04T19:40:29.987573+00:00",
+  "manifest_path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/custom/custom-manifest.json",
+  "manifest_sha256": "3a291472b60ae418702d2055b83f54f60ffb5937bb3deafa07f657853a0ee05c",
+  "metacognition": {
+    "observation_id": "839cd4b2-5cea-46b5-81a4-29c8da496646",
+    "persisted": true,
+    "scope_id": "3812f4c73559fb38c11581b105e5359a85402b2ffd74adcdd836b74f8ef6ecfb",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "completed"
+    },
+    "confidence_promoted": false
+  }
+}

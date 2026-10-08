@@ -397,7 +397,8 @@ def _derive_capabilities(name: str, meta: Dict[str, Any]) -> List[str]:
     """Deriva capacidades: prioriza skills A2A, fallback para legado.
 
     Se o frontmatter tem skills[] no formato A2A, as capacidades
-    são derivadas das tags. Caso contrário, usa category + nome.
+    são derivadas das tags. Caso contrário, complementa category + nome
+    com as listas declaradas de capabilities e tags do cartão legado.
     """
     skills = meta.get("skills", [])
     if skills and isinstance(skills, list):
@@ -405,8 +406,21 @@ def _derive_capabilities(name: str, meta: Dict[str, Any]) -> List[str]:
         if a2a_caps:
             return a2a_caps
 
-    # Fallback legado
-    return _derive_capabilities_legacy(name, meta)
+    # R644: cartões legados também declaram capacidades em listas próprias.
+    # Ignorá-las fazia o catálogo sobrescrever o researcher canônico sem
+    # summarize/cite. Não confundir o objeto A2A capabilities com uma lista.
+    caps = _derive_capabilities_legacy(name, meta)
+    for field_name in ("capabilities", "tags"):
+        declared = meta.get(field_name)
+        if not isinstance(declared, list):
+            continue
+        for value in declared:
+            if not isinstance(value, str) or not value.strip():
+                continue
+            capability = value.strip().lower().replace("-", "_").replace(" ", "_")
+            if capability not in caps:
+                caps.append(capability)
+    return caps
 
 
 def _extract_skills(meta: Dict[str, Any]) -> List[Dict[str, Any]]:

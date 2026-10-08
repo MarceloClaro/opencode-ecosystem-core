@@ -24,12 +24,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
 import subprocess
 import time
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Sequence, Set
 
 # Operações reconhecidas por este executor (Fase 1).
@@ -46,6 +48,7 @@ ALLOWED_LENGTHS: Set[str] = {"short", "default", "long"}
 
 DEFAULT_PROFILE = "default"
 ORCHESTRATOR = "marceloclaro"
+_REPO_ROOT = Path(__file__).resolve().parents[1]
 
 # Chaves candidatas a ID no JSON de saída do nlm (busca recursiva rasa).
 _ID_KEYS: tuple = ("notebook_id", "artifact_id", "id", "uuid")
@@ -73,6 +76,8 @@ class NlmPodcastReceipt:
     reason: str = ""
     result_id: Optional[str] = None
     artifact_path: Optional[str] = None
+    artifact_sha256: Optional[str] = None
+    artifact_bytes: Optional[int] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -108,10 +113,15 @@ class NlmPodcastExecutor:
         return subprocess.run(cmd, **kwargs)
 
     def _resolve_bin(self, bin_path: Optional[str]) -> Optional[str]:
-        if bin_path:
-            return bin_path
-        if os.environ.get("NLM_BIN"):
-            return os.environ["NLM_BIN"]
+        # Um caminho vazio explícito desabilita o executor, inclusive em testes.
+        if bin_path is not None:
+            return bin_path or None
+        if self.env.get("NLM_BIN"):
+            return self.env["NLM_BIN"]
+        candidates = (_REPO_ROOT / ".venv/bin/nlm", _REPO_ROOT / ".venv/Scripts/nlm.exe")
+        for candidate in candidates:
+            if candidate.is_file() and os.access(candidate, os.X_OK):
+                return str(candidate)
         return shutil.which("nlm")
 
     def available(self) -> bool:
@@ -148,6 +158,18 @@ class NlmPodcastExecutor:
                 return "notebook_id vazio; despacho negado"
             if self.notebook_allowlist and target not in self.notebook_allowlist:
                 return "notebook_id fora da allowlist; fail-closed"
+        if operation == "download_audio":
+            output_path, artifact_id, retries, wait = _split_download_args(task)
+            try:
+                attempts, pause = int(retries), float(wait)
+            except (TypeError, ValueError):
+                return "parametros de download invalidos"
+            if not output_path or not artifact_id.strip() or not 1 <= attempts <= 8:
+                return "parametros de download invalidos"
+            if not math.isfinite(pause) or not 0 <= pause <= 60:
+                return "espera de download invalida"
+            if Path(output_path).exists() or Path(output_path).is_symlink():
+                return "arquivo de destino ja existe; nova prova de download exigida"
         return None
 
     def _invoke(self, cmd: Sequence[str], timeout: int) -> tuple:
@@ -184,6 +206,8 @@ class NlmPodcastExecutor:
             bin_path=self.bin_path,
         )
         error = self._precheck(operation, task, target)
+        if error is None and (type(timeout) is not int or not 1 <= timeout <= 3600):
+            error = "timeout invalido"
         if error:
             receipt.reason = error
             return receipt
@@ -191,15 +215,16 @@ class NlmPodcastExecutor:
         cmd = self._build_cmd(operation, task, target)
         rc, stdout, stderr = self._invoke(cmd, timeout)
 
-        # download_audio: a geração do artefato no servidor do Gemini Notebook
-        # demora (~5-10 min); o download 404 até o artefato ficar completed,
-        # então repetimos com espera entre tentativas (retries/wait no task).
+        # Somente a indisponibilidade transitória do artefato admite nova
+        # tentativa. Falha de autenticação, parâmetros ou permissão encerra.
         if operation == "download_audio":
             retries, wait = _download_retry_params(task)
             attempts = 0
             while attempts < max(1, retries):
                 attempts += 1
                 if rc == 0:
+                    break
+                if not _download_retryable(stdout, stderr):
                     break
                 if attempts >= max(1, retries):
                     break
@@ -208,22 +233,32 @@ class NlmPodcastExecutor:
 
         receipt.exit_code = rc
         if rc != 0:
-            err = stderr.decode("utf-8", errors="replace").strip()
-            receipt.reason = f"exit={rc}: {err[:300]}" if err else f"exit={rc}"
+            receipt.reason = f"exit={rc}: {_failure_category(stdout, stderr)}"
             return receipt
 
         out_text = stdout.decode("utf-8", errors="replace") or ""
-        parsed_id = _extract_id(out_text)
+        if _business_failure(out_text, operation):
+            receipt.reason = "resposta de negocio nao confirmou sucesso"
+            return receipt
+        keys = ("artifact_id", "id", "uuid") if operation == "create_audio" else _ID_KEYS
+        parsed_id = _extract_id(out_text, keys=keys)
         if operation in ("create_notebook", "create_audio"):
             if not parsed_id:
                 receipt.reason = "sucesso sem id parseavel no stdout"
                 return receipt
             receipt.result_id = parsed_id
         elif operation == "download_audio":
-            receipt.result_id = target + ":" + (parsed_id or "")
+            output_path, artifact_id, _retries, _wait = _split_download_args(task)
+            proof = _artifact_proof(Path(output_path))
+            if proof is None:
+                receipt.reason = "download sem arquivo regular nao vazio"
+                return receipt
+            receipt.artifact_path, receipt.artifact_sha256, receipt.artifact_bytes = proof
+            receipt.result_id = target + ":" + artifact_id
         receipt.exit_code = 0
         receipt.success = True
-        receipt.reason = f"operacao {operation} concluida"
+        receipt.reason = ("geracao de audio solicitada; conclusao exige download"
+                          if operation == "create_audio" else f"operacao {operation} concluida")
         return receipt
 
     def _build_cmd(
@@ -306,6 +341,15 @@ class NlmPodcastExecutor:
         o download tenta até ``retries`` vezes com ``wait`` segundos entre
         tentativas (o artefato ainda processando responde 404).
         """
+        if (type(retries) is not int or not 1 <= retries <= 8
+                or not isinstance(wait, (int, float)) or isinstance(wait, bool)
+                or not math.isfinite(wait) or not 0 <= wait <= 60
+                or not isinstance(artifact_id, str) or not artifact_id.strip()
+                or (filename is not None and (not isinstance(filename, str)
+                    or not filename or Path(filename).name != filename
+                    or "/" in filename or "\\" in filename))):
+            return NlmPodcastReceipt(operation="download_audio", target=notebook_id,
+                                     bin_path=self.bin_path, reason="parametros de download invalidos")
         output_path = os.path.join(
             output_dir, filename or f"podcast_{notebook_id[:8]}.m4a"
         )
@@ -323,6 +367,83 @@ def _utc_now() -> str:
 
 def _sha256(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _business_failure(output: str, operation: str) -> bool:
+    """Código zero pode carregar erro JSON do serviço; nunca persistir seu texto."""
+    try:
+        value = json.loads(output)
+    except (TypeError, ValueError):
+        return output.lstrip().startswith(("{", "["))
+    failed = {"error", "failed", "expired", "blocked", "denied", "partial", "invalid"}
+    if operation == "download_audio":
+        failed |= {"pending", "processing", "generating", "queued"}
+
+    def walk(node: Any, depth: int = 0) -> bool:
+        if depth > 6:
+            return True
+        if isinstance(node, dict):
+            status = node.get("status")
+            if isinstance(status, str) and status.lower() in failed:
+                return True
+            if node.get("error") or node.get("isError") or node.get("is_error"):
+                return True
+            if node.get("success") is False or node.get("ok") is False:
+                return True
+            return any(walk(child, depth + 1) for child in node.values()
+                       if isinstance(child, (dict, list)))
+        if isinstance(node, list):
+            return any(walk(child, depth + 1) for child in node)
+        return False
+
+    return walk(value)
+
+
+def _failure_category(stdout: bytes, stderr: bytes) -> str:
+    """Classificação permitida, sem refletir cookies ou dados de erros externos."""
+    message = (stdout + b" " + stderr).decode("utf-8", errors="replace").lower()
+    if message.strip().startswith("timeout ("):
+        return "timeout da execucao"
+    controlled = re.fullmatch(r"excecao controlada: ([A-Za-z][A-Za-z0-9_]{0,80})",
+                              stderr.decode("utf-8", errors="replace").strip())
+    if controlled:
+        return "excecao controlada: " + controlled.group(1)
+    if any(marker in message for marker in ("401", "auth", "expired", "credential")):
+        return "autenticacao indisponivel"
+    if any(marker in message for marker in ("403", "permission", "forbidden")):
+        return "permissao negada"
+    if any(marker in message for marker in ("invalid", "unknown option", "unrecognized", "no such option")):
+        return "parametros invalidos"
+    if _download_retryable(stdout, stderr):
+        return "artefato ainda indisponivel"
+    return "execucao nao concluida"
+
+
+def _download_retryable(stdout: bytes, stderr: bytes) -> bool:
+    message = (stdout + b" " + stderr).decode("utf-8", errors="replace").lower()
+    if any(marker in message for marker in ("401", "403", "auth", "permission", "forbidden",
+                                           "invalid", "unknown option", "unrecognized", "no such option")):
+        return False
+    return "artifact" in message and any(marker in message for marker in
+                                         ("not ready", "still generating", "still processing", "propagat"))
+
+
+def _artifact_proof(path: Path) -> Optional[tuple[str, str, int]]:
+    """Calcula prova física delimitada; links e arquivos vazios são recusados."""
+    try:
+        if path.is_symlink() or not path.is_file() or path.stat().st_size <= 0:
+            return None
+        digest = hashlib.sha256()
+        size = 0
+        with path.open("rb") as stream:
+            for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                size += len(chunk)
+                digest.update(chunk)
+        if size <= 0 or path.stat().st_size != size:
+            return None
+        return str(path.resolve()), digest.hexdigest(), size
+    except OSError:
+        return None
 
 
 def _join_format_length_language(fmt: str, length: str, language: str) -> str:
@@ -382,19 +503,6 @@ def segmentar_por_capitulo(texto: str, marcador: str | None = None) -> list[str]
 
 
 def montar_jobs_por_capitulo(trechos: list[str]) -> list[str]:
-    """1 job NLM (audio download) POR CAPITULO — SPEC-973.
-
-    Sintaxe REAL comprovada pela trilogia (SPEC-970/971/972, gate físico 7/7):
-    nlm download audio -o <destino>  — SEM --profile, polls 8x20s. Cada trecho
-    vira 1 episodio com arquivo proprio (cap<N>.m4a). NAO executa: monta a lista.
-    """
-    jobs = []
-    for i, trecho in enumerate(trechos, start=1):
-        dest = f"capitulo_{i:02d}.m4a"
-        jobs.append(f"nlm download audio -o {dest}")
-    return jobs
-
-def montar_jobs_por_capitulo(trechos: list[str]) -> list[str]:
     """Gera 1 job NLM por capítulo — sintaxe REAL comprovada (trilogia SPEC-970/971/972):
     nlm download audio -o <destino> — SEM --profile, retries/polling no executor.
     Retorna lista de comandos (não executa; execução = responsabilidade do ciclo de podcast).
@@ -428,7 +536,7 @@ def _download_retry_params(task: str) -> tuple:
     return r, w
 
 
-def _extract_id(output: str) -> Optional[str]:
+def _extract_id(output: str, keys: tuple = _ID_KEYS) -> Optional[str]:
     """Extrai um ID (notebook/artifact) do stdout JSON do nlm.
 
     Estratégia: (1) JSON keys conhecidas em busca rasa/recursiva; (2) fallback
@@ -441,9 +549,7 @@ def _extract_id(output: str) -> Optional[str]:
     except (ValueError, TypeError):
         data = None
     if isinstance(data, dict):
-        found = _dig_dict(data, _ID_KEYS)
-        if found:
-            return found
+        return _dig_dict(data, keys)
     uuids = list(_UUID_RE.findall(output))
     if len(uuids) == 1:
         return uuids[0]

@@ -1,0 +1,9 @@
+usage:
+  mandatory-flags:
+    desc: Supply a reviewed workflow config and the number of local cores.
+    flags: --configfile <path> --cores <n>
+  software-stack-deployment:
+    conda: true
+    apptainer: false
+    apptainer+conda: false
+    report: false

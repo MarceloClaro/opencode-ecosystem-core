@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="12" time="4.104" timestamp="2026-10-04T17:45:05.963413-03:00" hostname="OPENCODE"><testcase classname="tests.test_r672_gemini_notebook_session" name="test_two_transport_instances_share_server_memory" time="0.271" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_different_python_processes_share_server_memory" time="0.918" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_broker_socket_and_metadata_are_private" time="0.306" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_session_directory_symlink_is_never_followed" time="0.007" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_socket_symlink_is_never_deleted_or_followed" time="0.010" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_broker_idle_shutdown_resets_volatile_jobs" time="0.824" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_broker_rejects_credential_environment_overrides" time="0.003" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_config_profile_change_updates_fingerprint_without_reading_contents" time="0.011"><failure message="AssertionError: assert 'd8c80030568818d606007984c42804ea2159833366388293295b4e2d3e516920' != 'd8c80030568818d606007984c42804ea2159833366388293295b4e2d3e516920'">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x71ed5cbea090&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-288/test_config_profile_change_upd0/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x71ed5cbee990&gt;
+
+    def test_config_profile_change_updates_fingerprint_without_reading_contents(transport, monkeypatch):
+        client, _ = transport
+        storage = client.repo_root/"official-storage"
+        storage.mkdir()
+        monkeypatch.setenv("NOTEBOOKLM_MCP_CLI_PATH",str(storage))
+        config = storage/"config.toml"
+        config.write_text("profile='one'")
+        first = _configuration(client)["fingerprint"]
+        config.write_text("profile='different-two'")
+        original = Path.read_text
+        def no_contents(self,*args,**kwargs):
+            if self == config:
+                raise AssertionError("Não ler conteúdo do config para o fingerprint")
+            return original(self,*args,**kwargs)
+        monkeypatch.setattr(Path,"read_text",no_contents)
+        second = _configuration(client)["fingerprint"]
+&gt;       assert first != second
+E       AssertionError: assert 'd8c80030568818d606007984c42804ea2159833366388293295b4e2d3e516920' != 'd8c80030568818d606007984c42804ea2159833366388293295b4e2d3e516920'
+
+tests/test_r672_gemini_notebook_session.py:150: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_session" name="test_broker_rejects_public_socket_permissions" time="0.364"><failure message="AssertionError: assert 'completed' == 'blocked'&#10;  &#10;  - blocked&#10;  + completed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x71ed5cbea690&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-288/test_broker_rejects_public_soc0/protocol.log'))
+
+    def test_broker_rejects_public_socket_permissions(transport):
+        client, _ = transport
+        client = GeminiNotebookTransport(client.repo_root,persistent=True)
+        try:
+            assert asyncio.run(client.discover_mcp())["status"] == "completed"
+            socket = next((client.repo_root/".opencode/notebooklm/broker").glob("*.sock"))
+            socket.chmod(0o666)
+            result = asyncio.run(client.discover_mcp())
+&gt;           assert result["status"] == "blocked"
+E           AssertionError: assert 'completed' == 'blocked'
+E             
+E             - blocked
+E             + completed
+
+tests/test_r672_gemini_notebook_session.py:161: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_session" name="test_nonregular_metadata_file_is_rejected" time="0.002"><failure message="Failed: DID NOT RAISE ValueError">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x71ed5ca10310&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-288/test_nonregular_metadata_file_0/protocol.log'))
+
+    def test_nonregular_metadata_file_is_rejected(transport):
+        from integrations.gemini_notebook_session import _check_local_file
+        client, _ = transport
+        target = client.repo_root/"never-read-fifo"
+        os.mkfifo(target,0o600)
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r672_gemini_notebook_session.py:172: Failed</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_session" name="test_timeout_reports_loss_of_volatile_jobs" time="0.417"><failure message="KeyError: 'volatile_jobs_lost'">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x71ed5ca34730&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-288/test_timeout_reports_loss_of_v0/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x71ed5c9cb230&gt;
+
+    def test_timeout_reports_loss_of_volatile_jobs(transport, monkeypatch):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE","sleep")
+        client = GeminiNotebookTransport(client.repo_root,persistent=True)
+        try:
+            assert asyncio.run(client.call_mcp("notebook_query_start",{"query":"volatile"}))["status"] == "pending"
+            result = asyncio.run(client.call_mcp("notebook_list",{},timeout_seconds=0.15))
+            assert result["status"] == "failed"
+            assert result["session_reset"] is True
+&gt;           assert result["volatile_jobs_lost"] is True
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'volatile_jobs_lost'
+
+tests/test_r672_gemini_notebook_session.py:185: KeyError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_session" name="test_close_cleans_all_workspace_sessions_and_waits_for_sockets" time="0.663"><failure message="KeyError: 'sessions_closed'">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x71ed5ce73a40&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-288/test_close_cleans_all_workspac0/protocol.log'))
+
+    def test_close_cleans_all_workspace_sessions_and_waits_for_sockets(transport):
+        client, _ = transport
+        first = GeminiNotebookTransport(client.repo_root,persistent=True,env_overrides={"NOTEBOOKLM_DOWNLOAD_DIR":str(client.repo_root/"one")})
+        second = GeminiNotebookTransport(client.repo_root,persistent=True,env_overrides={"NOTEBOOKLM_DOWNLOAD_DIR":str(client.repo_root/"two")})
+        try:
+            assert asyncio.run(first.discover_mcp())["status"] == "completed"
+            assert asyncio.run(second.discover_mcp())["status"] == "completed"
+            base = client.repo_root/".opencode/notebooklm/broker"
+            assert len(list(base.glob("*.sock"))) == 2
+            closed = asyncio.run(first.close_persistent())
+            assert closed["status"] == "completed"
+&gt;           assert closed["sessions_closed"] == 2
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'sessions_closed'
+
+tests/test_r672_gemini_notebook_session.py:202: KeyError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,636 @@
+% ============================================================
+%  MÓDULO 09A — Problema resolvido pela arquitetura e análise
+%  comparada com sistemas e técnicas disponíveis no GitHub.
+%  Parte VIII. Livre de laudas.
+% ============================================================
+\chapter{O Problema que o Core Resolve e a Arquitetura Comparada}
+
+\roteirodidatico
+{Comparar arquiteturas começa por formular o problema que se quer resolver. Sem pergunta comum e critérios explícitos, diferenças de vocabulário podem parecer diferenças de capacidade.}
+{\emph{Dimensão} é um aspecto comparado; \emph{critério} é a regra aplicada; \emph{alternativa} é outro sistema ou método; \emph{limite} indica o que a comparação não cobre.}
+{Leia a pergunta, examine cada mecanismo, confira as fontes primárias e então avalie forças e custos usando critérios equivalentes para todos os casos.}
+{Não inferir superioridade geral a partir de um único recurso. A comparação só vale para dimensões, versões, evidências e condições declaradas.}
+{As alternativas foram avaliadas na mesma tarefa e versão, com dados comparáveis, ou a conclusão deve ser tratada apenas como análise documental?}
+
+\casoguiado{comparação sob uma pergunta comum}
+{Para comparar duas ferramentas de busca, use a mesma pergunta, o mesmo conjunto de documentos e critérios definidos antes de observar as saídas: recuperação de fontes pertinentes, identificação correta e tempo de resposta. Repita casos suficientes para mostrar variação. Uma leitura de documentação pode comparar recursos declarados, mas não substitui esse ensaio nem autoriza um ranking geral.}
+
+\section{Pergunta de partida}
+
+\elemento{Qual o problema, afinal de contas?}{\metainfo{ID}{A-00} \hfill \metainfo{Método}{comparação por dimensão}}
+
+\begin{conceito}
+O Core responde a uma pergunta de desenho: \emph{como operar um ecossistema com
+mais de duzentos agentes, dezenas de skills, sete servidores MCP e um pipeline
+científico, de modo que toda decisão deixe rastro, toda alegação tenha limite e
+tudo continue rodando na máquina do operador?} A arquitetura não tenta \emph{ser}
+o melhor modelo do mundo; tenta tornar \emph{auditáveis} a coordenação, a memória,
+a prova e a honestidade de centenas de agentes.
+\end{conceito}
+
+\begin{resultado}
+Decomposição do problema em seis subproblemas que a arquitetura cobre — e as sedes:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Subproblema & Mecanismo-resposta \\
+\midrule
+coordenação de muitos agentes & orquestrador + Blackboard A2A (Parte II) \\
+memória persistente do que já foi feito & MetaBus + registro de evolução \\
+prova de que ``ficou pronto'' & tríade spec $\to$ código $\to$ teste (SDD/TDD) \\
+honestidade das alegações & anti-overclaim + honest reviewer \\
+extensibilidade sem caos & catálogo regenerado + skills + MCP + hooks \\
+operação local/offline & modelo local prioritário + instalador (Parte IX) \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{niveis}
+\textbf{Intuição:} uma empresa de agentes: sem memória ela esquece, sem contrato ela
+mentiria sem querer, sem portaria ela não controla quem entra.\\
+\textbf{Implementação:} ``ecossistema'' aqui é \emph{configuração derivada + contrato
+executável + avaliação honesta} — não um framework único.\\
+\textbf{Formalização:} arquitetura \emph{anti-overclaim por construção}: separa
+capacidade-observada de capacidade-sancionada e faz cada etapa ser verificável.
+\end{niveis}
+
+\begin{descricao}
+Para cada elemento, a ficha compara quatro coisas: \emph{problema que resolve},
+\emph{forças} (técnicas e práticas), \emph{fraquezas} (técnicas e práticas) e
+\emph{alternativas} identificáveis no GitHub. As alternativas foram escolhidas
+entre projetos conhecidos e de código aberto, citadas pelo nome do repositório;
+não há promessa de paridade medida — apenas contraste de desenho.
+\end{descricao}
+
+\clearpage
+\section{Elemento 1: Coordenação por Blackboard A2A}
+
+\elemento{Coordenação por blackboard A2A + orquestrador}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} com 215 subagentes, uma delegação
+``direta por nome'' é insustentável: o orquestrador não pode conhecer a fundo cada
+capacidade o tempo todo. O blackboard inverte a responsabilidade — o orquestrador
+\emph{anuncia} (publicar tarefa com capacidades requeridas) e os agentes
+\emph{se voluntariam} por capacidade declarada (Agent Card). Isso baixa o
+acoplamento (emissor não conhece receptor) e transforma a escolha em um leilão
+governado por confiança e carga.
+\end{funcao}
+
+\begin{resultado}
+Forças e fraquezas:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas (técnicas e práticas) & Negativas (técnicas e práticas) \\
+\midrule
+desacopla orquestrador e agentes; adiciona agente sem recompilar o núcleo;
+voluntariado por capacidade real & o ``melhor'' agente só é escolhido se seu
+Agent Card for bem descrito; sem modelo de prioridade formal entre voluntários \\
+rastro A2A audita quem se candidatou e quem venceu; tolera ausências com
+fail-closed & overhead de coordenação por evento; leilão não negocia custo nem
+prazo (não há contratos de SLA) \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} microsoft/AutoGen, langchain-ai/LangGraph
+(orquestração por grafos), crewAIInc/crewAI (equipes fixas),
+openai/openai-agents-python (triagem declarativa) e \pth{microsoft/agent_connect}
+(protocolo A2A). \textbf{Fortaleza relativa:} simplicidade determinística.
+\textbf{Fraqueza relativa:} um LangGraph oferece retomada de fluxo por
+checkpoint e gateways detalhados — o blackboard aqui é mais leve, porém menos
+expressivo para fluxos com DAG complexa.
+\end{metodo}
+
+\clearpage
+\section{Elemento 2: Memória (MetaBus + Blackboard)}
+
+\elemento{Memória em dois canais com superfície MCP}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} agentes sem estado repetem trabalho. O
+Core separa \emph{memória de trabalho} (Blackboard: tarefas abertas) de
+\emph{memória metacognitiva} (MetaBus: o que já se fez e se aprendeu), evitando a
+confusão típica de bibliotecas que misturam estado de tarefa com histórico.
+A leitura por \pth{mci_get_memory(topic, limit)} dá contexto ao próximo ciclo e o
+fluxo publicar-assinar propaga aprendizado sem acoplamento.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+dois canais com papéis distintos reduzem ruído; tópicos permitem assinatura
+seletiva; exposição MCP deixa consumir por qualquer cliente & memória local a uma
+máquina; sem versionamento de estado entre hosts \\
+registro de reflexão (metacognition.reflected) alimenta decisões futuras &
+sem políticas de expiração/compressão de tópicos automáticas em larga escala \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} cpacker/MemGPT, letta/letta (memória
+hierárquica), getzep/zep (memória temporal para agentes) e mem0ai/mem0.
+\textbf{Fortaleza relativa:} desenho simples de dois canais e rastro A2A.
+\textbf{Fraqueza relativa:} mem0 e letta oferecem \emph{recuperação semântica
+escalável} com vetores dedicados; aqui a escala é a de um repositório local.
+\end{metodo}
+
+\clearpage
+\section{Elemento 3: Prova por SDD/TDD}
+
+\elemento{Especificação executável, evidência tipada}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} em ecossistemas com muitos agentes, o
+risco-mor é o \emph{verde falso} — uma entrega que ``parece pronta'' sem prova.
+O SDD/TDD amarra spec a teste e exige dois artefatos de evidência
+(\pth{TrustedTestEvidence} e \pth{CriterionRuntimeRecord}), com caminhos
+canonizados e seletores seguros. O \textbf{runner} repete o teste sem aceitar
+contagens ambíguas (fail-closed).
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+rastreabilidade spec $\to$ teste auditável; evidência tipada (hashes, registros)
+impede ``verde por intimidação''; gates determinísticos & a qualidade do critério
+depende de quem redige a spec; sem orquestrador de suíte distribuída \\
+modelagem de critérios executáveis e recusa a testes ambíguos (boas práticas de
+engenharia de testes) & herda limitações do pytest/harness para flake e timing \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} behave/cucumber e pytest-bdd (BDD/Gherkin),
+hypothesis (testes por propriedade), confident-ai/DeepEval e
+explodinggradients/ragas (avaliação de RAG). \textbf{Fortaleza relativa:} o
+casamento da spec com as duas formas de evidência e a canonização de caminho.
+\textbf{Fraqueza relativa:} BDD expressa comportamento de negócio e ecossistemas
+como DeepEval têm métricas de qualidade de LLM que aqui precisam ser cobertas com
+engines próprias, com menor cobertura pronta.
+\end{metodo}
+
+\clearpage
+\section{Elemento 4: Escrita científica (MASWOS)}
+
+\elemento{Pipeline argumentativo contra o "artigo-narrativa"}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} redigir ciência em esteira de
+especialistas (diagnóstico do escopo, busca, evidências, metodologia,
+estatística, resultados, discussão, auditoria ABNT) impede que o texto seja uma
+``história coerente'' sem estrutura verificável. A função argumentativa de cada
+seção é projetada antes; o QA devolve o texto para revisão quando a função não se
+sustenta.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+divisão explícita de trabalho argumentativo; auditoria de citações ABNT acoplada;
+rastro MASWOS--agente por escala & não substitui revisão por pares nem leitor
+humano de plágio; mais leve em geração autônoma de texto longo \\
+boas práticas para TCC/tese/artigo com checklists auditáveis &
+foco acadêmico brasileiro (ABNT) é vantagem local, menos útil para periódicos
+em inglês sem adaptação \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} stanford-oval/storm (geração de artigos com
+pesquisa automática), \pth{binary-husky/gpt_academic} (assistência acadêmica) e
+timpara/opencode-academic-research (skill acadêmico). \textbf{Fortaleza
+relativa:} auditoria normativa e função argumentativa por estágio.
+\textbf{Fraqueza relativa:} STORM automatiza síntese de múltiplas fontes em
+escala; MASWOS depende de degraus orquestrados manualmente.
+\end{metodo}
+
+\clearpage
+\section{Elemento 5: Auditores (scanners) e integridade}
+
+\elemento{Múltiplos raios de auditoria com verificador de Merkle}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} saber \emph{se} um texto (literário ou
+científico) tem problemas é uma leitura multidimensional (narrativa, estilo,
+símbolos, ética, teoria, rigor). Os scanners executam essas leituras em paralelo
+e consolidam em escore; a integridade do próprio código-fonte é verificada por
+\emph{árvore de Merkle} — o auditor audita, e também é auditável.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+auditoria multi-critério extensível; verificação de integridade por Merkle do
+código & escores SRI/EXS são heurísticos, sem chancela externa; não detectam
+plágio como um iThenticate \\
+anti-overclaim embutido nos relatórios (o escore não se auto-absolutiza) &
+cobertura de scanners próprios é a documentada, sem leque pronto de empacotadores \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} astral-sh/ruff e ESLint (estilo em código; não
+literário), Arize-ai/phoenix e UpTrain (observabilidade de LLM).
+\textbf{Fortaleza relativa:} scanners literários e científicos num único
+pipeline. \textbf{Fraqueza relativa:} Phoenix/LangFuse dão traços e telemetria
+de sessão cross-host; aqui não há telemetria entre máquinas.
+\end{metodo}
+
+\clearpage
+\section{Elemento 6: Avaliação honesta}
+
+\elemento{Nota que se recusa a mentir}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} avaliação de IA costuma inflar: um
+``juiz-LLM'' premia coerência narrativa com mérito. O \pth{honest_reviewer}
+separa \emph{cobertura} de \emph{mérito}, detecta \emph{inflação de alegações}
+palavra a palavra e devolve uma \emph{faixa} em vez de nota única; sem validação
+externa, a classe \pth{verified} permanece bloqueada.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+detecção determinística de inflação (termos-chave exigem chancela) &
+faixa reflete cobertura local; não produz ranking comparativo entre sistemas \\
+devolve banda de escore e limitações explícitas; guarda anti-overclaim &
+molda-se pela política do Core; parâmetros de banda fixos \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} openai/evals (juiz-LLM), confident-ai/DeepEval
+(LLM-as-judge) e Arize-ai/phoenix evals. \textbf{Fortaleza relativa:} a rigidez
+anti-inflação é rara e pragmática. \textbf{Fraqueza relativa:} evals, DeepEval
+e Phoenix têm dezenas de métricas prontas (fidelidade, alucinação) e
+infraestrutura de comparação que aqui não existem.
+\end{metodo}
+
+\clearpage
+\section{Elemento 7: Confiança por ação}
+
+\elemento{TrustScorer como filtro operacional}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} sem histórico, todo agente reaparece
+neutro. O \pth{TrustScorer} guarda confiança por \emph{ação}: cada resultado
+atualiza o escore (\pth{record_outcome}), a deriva é avaliada e os gates
+operacionais (confiança mínima e carga máxima) decidem quem pode assumir o quê.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+leve, determinístico, sem rede; por-ação mantém granularidade; deriva captura
+mudança de comportamento & heurística sem garantia probabilística; sem meio de
+exploração formal (bandit) — só atualiza escore \\
+aplicável em runtime com custo desprezível & não agregado por domínio
+automaticamente; parâmetro de limiar fixo \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} langfuse/langfuse (observabilidade) e
+bibliotecas de bandidos (MAB). \textbf{Fortaleza relativa:} custo mínimo e
+decisões em runtime com determinismo. \textbf{Fraqueza relativa:} LangFuse dá
+traços de custo/latência por chamada — ausentes aqui — e bandidos equilibram
+exploração-explotação que este escore não faz.
+\end{metodo}
+
+\clearpage
+\section{Elemento 8: Registro de evolução}
+
+\elemento{Append-only com âncora de Merkle}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} ``o que mudou e por quê'' fica na
+burocracia humana. O \pth{EvolutionRegistry} grava cada mudança como ciclo com
+\emph{hashes de artefatos} e \emph{encadeamento por Merkle}: alterar o passado
+quebra a corrente. Ciclos \emph{recusados} também ficam registrados — a memória
+do que não deu certo é tão valiosa quanto a de acertos.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+histórico à prova de adulteração local; registra rejeições (memória negativa) &
+formato próprio, não interoperável com SLSA/in-toto/sigstore \\
+numeração sequencial e ancoragem auditáveis; integrado ao ciclo de reflexão &
+sem assinatura por autoridade externa; cadeia localmente mantida \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} in-toto/in-toto e sigstore (cadeia de
+suprimento assinada) e slsa-framework/slsa. \textbf{Fortaleza relativa:}
+simplicidade e foco no ciclo de desenvolvimento. \textbf{Fraqueza relativa:}
+in-toto/sigstore dão prova criptográfica de suprimento contra terceiros — aqui a
+cadeia é local e auto-assinada.
+\end{metodo}
+
+\clearpage
+\section{Elemento 9: Roteamento de modelos}
+
+\elemento{Local primeiro, nuvem com fallback}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} escolher modelo por \emph{tipo de
+tarefa} e por \emph{soberania}: prioridade local (LiteRT/Colibri/Ollama/PAIR)
+preserva privacidade e segue operando sem rede; quando falta, degrada para API
+com \pth{fallback_used=True} — sempre transparente.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+privacidade por omissão (dados não saem da máquina); fallback explícito; perfis
+de tarefa claros & sem balanceamento de custo por requisição; sem cache de
+respostas \\
+configuração por perfil (R607) documentada; PAIR opcional sem exceções
+silenciosas & menos expressivo que gateways maduros para produção multiusuário \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} BerriAI/litellm (unificação de providers),
+openrouter (federação de modelos) e songquanpeng/one-api (gateway unificado).
+\textbf{Fortaleza relativa:} local-first com opção de PAIR e medição local
+documentada. \textbf{Fraqueza relativa:} LiteLLM e one-api suportam budget,
+rate-limit e balanceamento por crédito — capacidades ausentes aqui.
+\end{metodo}
+
+\clearpage
+\section{Elemento 10: Simulação social (MiroFish)}
+
+\elemento{Opinião simulada determinística}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} antever reação pública exige iterar
+cenários. O MiroFish local é enxame determinístico (vieses cíclicos, validação
+cruzada); o MiroFish-Offline (AGPL) entra por composição com fail-closed. Toda a
+operação é sintética, o que permite explorar ``e se a comunicação for assim?''
+sem o custo ético-operacional de testar em humanos reais.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+determinístico e de baixa dependência no motor local; integração fail-closed;
+licença respeitada por composição & escala de agentes modesta frente a frameworks
+dedicados; sem grafos de comportamento sofisticados \\
+relatório estruturado para interpretação humana; rodapé ``não é medição de
+opinião real'' & resultado nunca valida a realidade — serve só como cenário \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} projectmesa/mesa (agent-based em larga escala),
+alibaba/AgentScope e cameldeng/COALA - CAMEL-AI (orquestração multiagente) e
+nikmcfly/MiroFish-Offline (fonte deste). \textbf{Fortaleza relativa:} espelho de
+comunicação e baixa dependência. \textbf{Fraqueza relativa:} mesa e AgentScope
+oferecem visualizações, ticks paralelos e milhões de execuções; aqui a herança é
+pequena.
+\end{metodo}
+
+\clearpage
+\section{Elemento 11: Integração por MCP}
+
+\elemento{Protocolo em vez de plugins proprietários}
+
+\begin{funcao}
+\textbf{Problema resolvido (minucioso):} cada ferramenta com API própria vira
+incompatível. O MCP padroniza ferramentas entre CLI, skills, plugins e agentes:
+7 servidores expõem capacidade reutilizável, e servidores nativos
+(\pth{.opencode/mcp/}) mostram o Core atuando como fornecedor de protocolo.
+\end{funcao}
+
+\begin{resultado}
+Comparativo:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Positivas & Negativas \\
+\midrule
+padrão aberto entre autenticação e contrato de ferramenta; extensível com MCP-Go
+e SDKs várias & custo de mensageria/tokens por chamada; dependência de um cliente
+MCP bem implementado \\
+integrantes externos entram sem conhecimento interno do repositório &
+superfície protocolada mas sem catálogo de descoberta ativa (MCP-Zero) além do
+configurado \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Alternativas no GitHub:} modelcontextprotocol (mcp, SDKs) versus
+ecossistemas plugin-only (ex.: plugins TypeScript do OpenCode, que coexistem no
+Core). \textbf{Fortaleza relativa:} padrão de comunicação com futuro aberto.
+\textbf{Fraqueza relativa:} descoberta ativa de ferramentas (MCP-Zero) reduziria
+o overhead de tokens; aqui os 7 MCPs são fixos em configuração.
+\end{metodo}
+
+\clearpage
+\section{Síntese da comparação}
+
+\begin{resultado}
+Mapa resumido (leitura rápida):\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{Yl}
+\toprule
+Elemento & Vantagem diferencial sobre alternativas do GitHub \\
+\midrule
+Blackboard A2A & leilão voluntário determinístico, leve \\
+MetaBus + Blackboard & dois canais com superfície MCP \\
+SDD/TDD & evidência tipada + canonização segura \\
+MASWOS & função argumentativa por estágio + auditoria ABNT \\
+Scanners & multi-critério + Merkle do código \\
+Honest reviewer & recusa automática de inflação de alegação \\
+TrustScorer & confiança por ação, determinística \\
+Evolution/Merkle & memória de rejeições auditável \\
+Roteamento local & privacidade por omissão + fallback explícito \\
+MiroFish & síntese determinística com fail-closed \\
+MCP & protocolo aberto sem acoplamento proprietário \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{limite}
+Comparações são de \emph{desenho}, não de benchmark medido: nenhum destes
+contrastes implica que o Core seja ``melhor'' ou ``pior'' em desempenho — apenas
+que resolve os mesmos subproblemas com escolhas diferentes, cujas forças e
+fraquezas este capítulo documenta com transparência.
+\end{limite}
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) o problema central é operar muitos
+agentes com memória, prova, honestidade e soberania local; (2) cada elemento tem
+uma ficha de problema $\to$ forças $\to$ fraquezas $\to$ alternativas; (3)
+comparação é um contraste de \emph{desenho}, nunca um veredito de desempenho.
+\textbf{Pergunta de fixação:} escolha um elemento deste capítulo e replique a
+ficha para um caso da sua própria área (ex.: um editor de código comparado ao
+IDE que você usa). Em seguida, verifique se as fichas deste capítulo se aplicam
+ao seu exemplo.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-09a-comparada.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Arquitetura comparada: comparar sem ranquear}
+
+\elemento{Leitura guiada — Arquitetura comparada}{\metainfo{ID}{N-09a} \hfill \metainfo{Ciclo}{R616} \hfill \metainfo{Estilo}{comparar não é ranquear}}
+
+\begin{descricao}
+\textbf{A pergunta.} O que se pode concluir ao comparar dois sistemas? Uma
+comparação arquitetural pode descrever diferenças de componentes, interfaces e
+fluxos. Já uma afirmação de desempenho exige que os sistemas sejam medidos em
+condições comparáveis. Este capítulo examina \textbf{11 elementos} do Core,
+explicita problemas, escolhas e alternativas e pergunta, em cada caso, se existe
+uma comparação externa com medidas reproduzíveis. Descrever uma diferença não é
+ranquear as soluções.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Elemento} ($e$): mecanismo do Core comparado; $e = 11$.
+  \item \textbf{Cobertura comparativa externa} ($b$): elementos com comparação externa medida, dividido por $e$.
+  \item \textbf{Desenho}: escolha estrutural (protocolo, canal, gate).
+  \item \textbf{Desempenho}: medida observada sob condição declarada.
+  \item \textbf{Afirmação comparativa de desempenho}: conclusão que exige $b > 0$, métrica comum e condições de medição comparáveis. Sem isso, ainda é possível descrever diferenças de arquitetura, mas não declarar superioridade empírica.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} O que seria necessário para um veredito legítimo?
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item Mesmo problema: as duas soluções precisam atender ao mesmo requisito, não a subproblemas diferentes.
+  \item Mesma métrica e mesma condição: mesma tarefa, mesmo volume, mesmo hardware.
+  \item Fonte verificável: código, publicação ou repositório do outro lado.
+  \item Só então $b$ deixa de ser zero e o veredito pode ser formulado.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido (a conta honesta).} Nesta conferência, o manual não
+localizou medição externa comparável documentada para nenhum dos $11$ elementos:
+\[ b = \frac{0}{11} = 0\%. \]
+Ou seja: $b = 0$ e, portanto, não há base neste inventário para uma afirmação de
+superioridade empírica. Isso não torna a afirmação falsa; significa que ela não
+está sustentada pela comparação documentada aqui. Uma medição comparável em um
+elemento elevaria a fração para $1/11 \approx 0{,}091$, ou cerca de $9{,}1\%$.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Uma cobertura comparativa de $0/11$
+($b = 0\%$) não é ``quase suficiente'': é ausência total de evidência
+comparativa. Mesmo que a base de 11 implementações fosse pequena para um
+\emph{julgamento} relativo, ela seria suficiente para a afirmação fraca
+``não há evidência neste repositório de que X seja superior'' --- que é
+justamente o limite que o texto sustenta. \emph{Verifique você mesmo:} liste os 11
+sistemas citados no capítulo e, para cada um, procure no repositório um artefato de
+comparação; a ausência esperada em todos confirma o próprio exemplo.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Este exemplo não mede o Core; mede a \emph{lacuna de
+medição}. Ele existe para que o leitor não confunda contraste de desenho com
+vantagem demonstrada --- o mesmo princípio anti-overclaim aplicado à arquitetura.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Escolha um dos 11 elementos e liste o que precisaria para
+que $b$ deixasse de ser zero naquele item. (2) Reescreva, em uma frase sem superlativo, a vantagem de desenho do Blackboard A2A.
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Comparação e benchmarking}
+\elemento{ativ-09a}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-09a-comparada.tex}}
+
+\begin{processo}
+GATILHO. ``compare'', ``benchmark'', ``segunda opinião''.
+ROTA. avaliação multi-agente; gate: ponderação igual e ablação.
+FUNÇÃO. comparar agentes/motores com critérios justos e reproducíveis.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. média ponderada igual entre geradores; ablação isola cada componente; seeds fixas garantem determinismo.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. comparar exige reportar o processo — só há mérito comparável se o relato do método é completo. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. comparação interna não substitui avaliação por pares externa. A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação e cálculo ilustrativo:} O artigo mostra que a força de um resultado depende da probabilidade prévia, do poder estatístico e do limiar de falso positivo; não permite concluir que qualquer achado específico seja falso. No modelo sem viés, $PPV=((1-\beta)R)/(R-\beta R+\alpha)$. Supondo apenas para ilustração $R=0{,}1$ e $\alpha=0{,}05$, um poder de $0{,}2$ ($\beta=0{,}8$) dá $PPV=0{,}02/(0{,}1-0{,}08+0{,}05)\approx0{,}286$; com poder $0{,}8$ ($\beta=0{,}2$), $PPV=0{,}08/(0{,}1-0{,}02+0{,}05)\approx0{,}615$. São premissas didáticas, não estimativas do benchmark do livro. A consequência prática é separar triagem interna de confirmação independente \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{p.~e124 (resumo, p.~e124). é a âncora do ceticismo estruturado do benchmarking: a maioria dos achados publicados é falsa; comparar sem controle de vieses de desenho e relato reproduz o mesmo problema.}{There is increasing concern that most current published research findings are false}{Há preocupação crescente de que a maioria dos resultados de pesquisa atualmente publicados seja falsa.}{IOANNIDIS, 2005, p.~e124}

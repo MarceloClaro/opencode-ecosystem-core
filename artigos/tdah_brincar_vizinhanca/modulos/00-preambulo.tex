@@ -1,0 +1,70 @@
+% ============================================================
+% MODULO 00 - PREAMBULO ABNT (artigo cientifico)
+% Projeto: Da sala para a rua - TDAH, brincar livre e clinica humanista
+% Norma: ABNT NBR 6022/6023/6024/6028/10520 - adaptada para artigo
+% ============================================================
+\documentclass[12pt,a4paper,oneside]{article}
+
+% --- Codificacao e idioma ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+
+% --- Fonte Times New Roman (padrao ABNT) ---
+\usepackage{newtxtext,newtxmath}
+
+% --- Margens ABNT: superior/esquerda 3cm; inferior/direita 2cm ---
+\usepackage[top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry}
+
+% --- Links (carregar ANTES do abntex2cite, conforme documentacao do abnTeX2) ---
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+% --- Citacoes ABNT autor-data (deve vir DEPOIS do hyperref) ---
+\usepackage[alf,abnt-emphasize=bf,abnt-etal-cite=2]{abntex2cite}
+
+% --- Espacamento 1,5 e identacao de paragrafo 1,25cm ---
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+
+% --- Tabelas e quadros (fonte 12pt conforme NBR 14724) ---
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{caption}
+\captionsetup{labelfont=bf}
+
+% --- Listas ---
+\usepackage{enumitem}
+
+
+% --- Cabecalho: numero de pagina no canto superior direito ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- Ajustes ABNT para titulos de secao ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\bfseries\uppercase}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalfont\itshape}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.5\baselineskip}{0.75\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.25\baselineskip}{0.5\baselineskip}
+
+% --- Ambiente quadro ABNT (conteudo em 12pt) ---
+\newenvironment{quadro}[1]{\begin{table}[htbp]\centering
+\caption*{\textbf{#1}}}{\end{table}}
+
+% ============================================================
+% FIM DOS PACOTES — ajustes finais que nenhum pacote pode sobrescrever
+% ============================================================
+% Recuo de paragrafo ABNT: 1,25cm (reforcado apos todos os pacotes)
+\usepackage{indentfirst}      % indenta tambem o 1o paragrafo apos titulos
+\setlength{\parindent}{1.25cm}
+% Tabelas: separacao de colunas reduzida para caber na mancha de 16cm
+\setlength{\tabcolsep}{4pt}
+\emergencystretch=3em         % evita overfull hbox em palavras longas

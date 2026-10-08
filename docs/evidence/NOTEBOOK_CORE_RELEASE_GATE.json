@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "scope": "local_integration_release_gate",
+  "test_result_policy": "Resultados da reexecução dirigida substituem os checks corrigidos da rodada completa.",
+  "unique_tests_passed": 484,
+  "runs": [
+    {
+      "path": "docs/evidence/NOTEBOOK_CORE_REGRESSION_BEFORE_DOC_FIX.xml",
+      "tests": 484,
+      "failures": 1,
+      "errors": 0,
+      "sha256": "5781ead547bd938cce1e296a15ce7a52d544fec927821597a411e5f9149f4d85"
+    },
+    {
+      "path": "docs/evidence/NOTEBOOK_CORE_FINAL_DOCS_GREEN.xml",
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "sha256": "828399cc5d7fe0c545ae4bcbaa6fbc56d10396be534144139e2c9dd2e866ccdc"
+    }
+  ],
+  "targeted_mutants_killed": 3,
+  "real_read_only_probes": 7,
+  "central_mcp_operation_completed": true,
+  "mcp_tools": 49,
+  "cli_entries": 155,
+  "configured_agents": 238,
+  "runtime_source_matches_requested_commit": true,
+  "recorded_cycles": [
+    "R672",
+    "R673",
+    "R674",
+    "R675",
+    "R676"
+  ],
+  "artifact_hashes": {
+    "integrations/gemini_notebook_transport.py": "76d42c37add7113c3f56a9d9a3039eb55082492bdc9679c91043d06780a27790",
+    "integrations/gemini_notebook_session.py": "5e69924d012d160193250adbf288803ba1cdea5db9c8754304874e7e46a4fc41",
+    "specs/SPEC-935-R672-gemini-notebook-transport.md": "e2030c1ab0e24bd661bebaf6d99aea5d78e67634cf41660afa8d3ee0989872cd",
+    "integrations/gemini_notebook_catalog.py": "878ff8777cb1f81422194d453a63e2ef48157e6887b8cc5984aaa0dfa01c56e2",
+    "specs/SPEC-935-R673-gemini-notebook-capability-policy.md": "55c4215fd586d5c20497aac6a7f8f7cab343c8af63c8894bff9c33b0535811ba",
+    "integrations/gemini_notebook.py": "72af1942f1943dc81751d8d07f7d68b7c39603cef490a1e009c1d36cb7be312a",
+    "integrations/gemini_notebook_pipeline.py": "38fdec9fc8d15a34f801e1421d14419e54ac8e61190f1bfc3ea9ce97fb57e4af",
+    "marceloclaro/orchestrator.py": "864d64ef716791364229862677fa9514f8484cd4d0967a276bd0f0ad46b54878",
+    "integrations/ecosystem_mcp.py": "4539c2986b07bede5f5a70ef43ebaa819eb566e240661b7a0756e3266101f2d6",
+    "specs/SPEC-935-R674-gemini-notebook-orchestration.md": "a20b47d4c9c2651209c20cd7366924d36bb1dbe83e082f9e443b795dd36d216e",
+    "agent_runners/nlm_executor.py": "d07750e3832f97a9f9e354484b0655438c7a21a0be1e254ee0874ae778ab8a14",
+    "tests/test_r675_notebook_podcast_truthfulness.py": "3deaf514161c476e2f925096bdc3c9326866662fe5f6af4bb27ba94c651766ee",
+    "specs/SPEC-935-R675-notebook-podcast-truthfulness.md": "8752b15479548e286d654d11d30ceebdc1eaed5062841d4738f957b96faa54dd",
+    "agents/catalog/gemini-notebook-audit.md": "de41b2fea20d80c92e7cbeca3b707225e4916ebf3fc1b54f704c96cadd067b01",
+    "agents/catalog/gemini-notebook-upstream.md": "6633bbb560710ff30b2220f67644cedab797ca30f1aeeadb61acb6eb21021b97",
+    "agents/catalog/gemini-notebook-transport.md": "b04d1340b7985348f03729729f3b6d00c3e445c0c595baba59afd461d2ec580d",
+    "opencode.json": "00a5aca37a534ec183fcc10b55c068eb47762ac7ac53ad5455c53e603e18b659",
+    "specs/SPEC-935-R676-gemini-notebook-specialists.md": "f79762cf7bc2772a995c32c8e1dbf617a2d363948e1b3c614165bbe3d86cd8bf",
+    "livro-core/output/pdf/main.pdf": "6b5c6a480d3debd777883f43d5223304fb37f48ed6c8488e8f2475d65b32e808"
+  },
+  "remote_generation_tested": false,
+  "enterprise_tested": false,
+  "book_pdf_pages": 298,
+  "scientifically_externally_validated": false
+}

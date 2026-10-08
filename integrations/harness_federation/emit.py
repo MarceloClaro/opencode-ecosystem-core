@@ -29,7 +29,8 @@ import json
 import os
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-from .artifact import NON_BLOCKING_REASONS, HarnessArtifact, parse_frontmatter
+from .artifact import (NON_BLOCKING_REASONS, HarnessArtifact, parse_frontmatter,
+                       path_is_contained, source_integrity_reasons)
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -95,6 +96,10 @@ class HarnessEmitter:
     def _write(self, path: str, content: str) -> Dict[str, Any]:
         """Escreve o arquivo de forma idempotente e relata o que houve."""
 
+        if not path_is_contained(path, self.repo_root):
+            return {"status": "refused", "path": path, "reasons": ["destination_path_escape"],
+                    "written": False, "changed": False, "installed": False}
+
         existed = os.path.isfile(path)
         previous = ""
         if existed:
@@ -114,7 +119,27 @@ class HarnessEmitter:
             "changed": changed,
             "written": bool(changed and not self.dry_run),
             "bytes": len(content.encode("utf-8")),
+            "installed": False,
+            "executed": False,
         }
+
+    def _copy_data(self, source: str, target: str) -> Dict[str, Any]:
+        """Copia arquivos auxiliares como bytes, sem executar o conteúdo."""
+        if not path_is_contained(target, self.repo_root):
+            return {"status": "refused", "path": target, "reasons": ["destination_path_escape"]}
+        with open(source, "rb") as handle:
+            data = handle.read()
+        previous = None
+        if os.path.isfile(target):
+            with open(target, "rb") as handle:
+                previous = handle.read()
+        changed = previous != data
+        if changed and not self.dry_run:
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            with open(target, "wb") as handle:
+                handle.write(data)
+        return {"path": target, "changed": changed, "written": changed and not self.dry_run,
+                "bytes": len(data), "executed": False}
 
     def _refuse_degraded(self, artifact: HarnessArtifact) -> Optional[Dict[str, Any]]:
         """
@@ -125,14 +150,17 @@ class HarnessEmitter:
         proveniência, e quem o reutilizar verá exatamente o que falta.
         """
 
-        blocking = [r for r in artifact.degraded_reasons if r not in NON_BLOCKING_REASONS]
+        integrity = source_integrity_reasons(artifact)
+        blocking = [r for r in artifact.degraded_reasons if r not in NON_BLOCKING_REASONS] + integrity
         if not blocking:
             return None
         return {
             "status": "refused",
             "artifact_id": artifact.artifact_id,
-            "reasons": list(artifact.degraded_reasons),
+            "reasons": sorted(set([*artifact.degraded_reasons, *integrity])),
             "blocking_reasons": blocking,
+            "installed": False,
+            "executed": False,
         }
 
     def _read_body(self, artifact: HarnessArtifact) -> str:
@@ -158,22 +186,46 @@ class HarnessEmitter:
         if refusal:
             return refusal
         body = self._read_body(artifact)
+        target_root = os.path.join(self.repo_root, ".opencode", "skills", artifact.emission_slug)
+        support_files = artifact.metadata.get("support_files", [])
+        if any(not path_is_contained(os.path.join(target_root, entry["path"]), self.repo_root)
+               for entry in support_files) or not path_is_contained(target_root, self.repo_root):
+            return {"status": "refused", "artifact_id": artifact.artifact_id,
+                    "reasons": ["destination_path_escape"], "installed": False, "executed": False}
         front = [
             "---",
-            f"name: {_yaml_inline(artifact.slug)}",
+            f"name: {_yaml_inline(artifact.emission_slug)}",
             f"description: {_yaml_block_scalar(artifact.description)}",
             _provenance_block(artifact),
+            f"x-source-artifact-id: {_yaml_inline(artifact.artifact_id)}",
+            f"x-source-skill-path: {_yaml_inline(artifact.source_path)}",
+            f"x-source-skill-sha256: {artifact.source_file_sha256}",
+            f"x-instruction-root: {_yaml_inline(target_root)}",
+            f"x-source-instruction-root: {_yaml_inline(str(artifact.metadata.get('instruction_root') or os.path.dirname(artifact.source_path)))}",
+            "x-invocation-policy:",
+            f"  disable_model_invocation: {str(artifact.metadata.get('invocation_policy', {}).get('disable_model_invocation', False)).lower()}",
+            "  allow_implicit_invocation: " + json.dumps(artifact.metadata.get("invocation_policy", {}).get("allow_implicit_invocation")),
             "---",
             "",
         ]
+        portable = artifact.metadata.get("portable_frontmatter", {})
+        if portable:
+            import yaml
+            front.insert(-2, yaml.safe_dump(portable, allow_unicode=True, sort_keys=False).rstrip())
         content = "\n".join(front) + body.lstrip("\n")
-        result = self._write(os.path.join(self.repo_root, ".opencode", "skills", artifact.slug, "SKILL.md"), content)
+        result = self._write(os.path.join(target_root, "SKILL.md"), content)
+        if result.get("status") == "refused":
+            return {"artifact_id": artifact.artifact_id, **result}
+        source_root = str(artifact.metadata.get("instruction_root") or os.path.dirname(artifact.source_path))
+        support_results = [self._copy_data(os.path.join(source_root, item["path"]), os.path.join(target_root, item["path"]))
+                           for item in support_files]
         return {
             "status": "emitted",
             "artifact_id": artifact.artifact_id,
             "target": "opencode.skill",
             "body_sha256": artifact.content_sha256,
             "source_file_sha256": artifact.source_file_sha256,
+            "support_files": support_results,
             **result,
         }
 
@@ -189,7 +241,7 @@ class HarnessEmitter:
         body = self._read_body(artifact)
         front = [
             "---",
-            f"name: {_yaml_inline(artifact.slug)}",
+            f"name: {_yaml_inline(artifact.emission_slug)}",
             f"description: {_yaml_block_scalar(artifact.description)}",
             "mode: subagent",
             "temperature: 0.3",
@@ -203,7 +255,7 @@ class HarnessEmitter:
             "",
         ]
         content = "\n".join(front) + body.lstrip("\n")
-        result = self._write(os.path.join(self.repo_root, ".opencode", "agents", f"{artifact.slug}.md"), content)
+        result = self._write(os.path.join(self.repo_root, ".opencode", "agents", f"{artifact.emission_slug}.md"), content)
         return {
             "status": "emitted",
             "artifact_id": artifact.artifact_id,
@@ -243,7 +295,7 @@ class HarnessEmitter:
         }
         content = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
         result = self._write(
-            os.path.join(self.repo_root, ".opencode", "hooks", "manifests", f"{artifact.slug}.json"),
+            os.path.join(self.repo_root, ".opencode", "hooks", "manifests", f"{artifact.emission_slug}.json"),
             content,
         )
         return {
@@ -266,31 +318,52 @@ class HarnessEmitter:
         refusal = self._refuse_degraded(artifact)
         if refusal:
             return refusal
+        interface = dict(artifact.metadata.get("portable_interface") or {})
+        interface.setdefault("displayName", artifact.name)
+        interface.setdefault("shortDescription", artifact.description[:180])
+        interface.setdefault("longDescription", artifact.description)
+        interface.setdefault("capabilities", list(artifact.capabilities) or ["skills"])
+        interface["defaultPrompt"] = artifact.metadata.get("default_prompts", [])
         manifest = {
-            "name": f"r621-{artifact.slug}",
+            "name": f"r621-{artifact.emission_slug}",
             "version": artifact.version or "0.1.0",
             "description": artifact.description,
             "author": {"name": "Marcelo Claro Laranjeira"},
             "keywords": list(artifact.tags),
-            "interface": {
-                "displayName": artifact.name,
-                "shortDescription": artifact.description[:180],
-                "longDescription": artifact.description,
-                "developerName": "MARCELO CLARO LARANJEIRA",
-                "capabilities": list(artifact.capabilities) or ["skills"],
-                "defaultPrompt": list(artifact.metadata.get("default_prompts") or []),
-            },
-            "skills": "./skills",
+            "interface": interface,
+            "extensions": {"com.openai": {"interface": dict(interface)}},
         }
+        target_root = os.path.join(self.repo_root, ".codex-plugin", "r621", artifact.emission_slug)
+        skill_files = artifact.metadata.get("plugin_skill_files", [])
+        if not path_is_contained(target_root, self.repo_root) or any(
+            not path_is_contained(os.path.join(target_root, "skills", item["skill_relative_path"]), self.repo_root)
+            for item in skill_files
+        ):
+            return {"status": "refused", "artifact_id": artifact.artifact_id,
+                    "reasons": ["destination_path_escape"], "installed": False, "executed": False}
+        if any(item["skill_relative_path"].endswith("SKILL.md") for item in skill_files):
+            manifest["skills"] = "./skills"
         content = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
         result = self._write(
-            os.path.join(self.repo_root, ".codex-plugin", "r621", f"{artifact.slug}", "plugin.json"),
+            os.path.join(target_root, "plugin.json"),
             content,
         )
+        if result.get("status") == "refused":
+            return {"artifact_id": artifact.artifact_id, **result}
+        copied = []
+        if "skills" in manifest:
+            source_root = str(artifact.metadata["instruction_root"])
+            copied = [self._copy_data(os.path.join(source_root, item["path"]),
+                      os.path.join(target_root, "skills", item["skill_relative_path"])) for item in skill_files]
         return {
             "status": "emitted",
             "artifact_id": artifact.artifact_id,
             "target": "codex.plugin",
+            "manifest_format": "codex_compatibility_overlay",
+            "portable_package": False,
+            "scope": "skills_and_interface",
+            "omitted_components": list(artifact.metadata.get("declared_components") or []),
+            "support_files": copied,
             **result,
         }
 
@@ -322,7 +395,7 @@ class HarnessEmitter:
         ]
         content = "\n".join(header) + body.lstrip("\n")
         result = self._write(
-            os.path.join(self.repo_root, "harness_federation", "chatgpt", f"{artifact.slug}", "SKILL_CHATGPT.md"),
+            os.path.join(self.repo_root, "harness_federation", "chatgpt", f"{artifact.emission_slug}", "SKILL_CHATGPT.md"),
             content,
         )
         return {
@@ -419,9 +492,12 @@ class HarnessEmitter:
             "skipped": len(skipped),
             "by_target": by_target,
             "emitted_paths": sorted({r["path"] for r in emitted}),
+            "emitted_detail": emitted,
             "refused_detail": refused,
             "skipped_detail": skipped,
             "hooks_executed": False,
+            "installed": False,
+            "execution_verified": False,
             # INV-R621.6: "synchronized" só é dito quando nada foi recusado.
             "synchronized": bool(selected) and not refused and not skipped,
         }

@@ -85,6 +85,22 @@ class TrajectoryMapper:
     def __init__(self):
         self._cv = CrossValidationEngine()
 
+    @staticmethod
+    def sequence(
+        capabilities: list[dict[str, Any]],
+        dependencies: list[dict[str, Any]],
+        target_state: list[str],
+        **options: Any,
+    ) -> dict[str, Any]:
+        """Roadmap R665 para evidências explícitas, sem inferir novas relações.
+
+        A API `scan` de R485 mantém seu contrato. O sequenciamento recebe
+        declarações do chamador e explicita bloqueios e estimativas condicionais.
+        """
+        from scanners.evolutionary_sequencing import EvolutionarySequencer
+
+        return EvolutionarySequencer().plan(capabilities, dependencies, target_state, **options)
+
     # ─── GRAFO ────────────────────────────────────────────────────────────
 
     def build_graph(self, noological_scan: dict[str, Any]) -> dict[str, Any]:
@@ -186,7 +202,7 @@ class TrajectoryMapper:
                 )
                 for cap, n in counts.items()
             ),
-            key=lambda l: (-l.count, l.capability),
+            key=lambda lever: (-lever.count, lever.capability),
         )
         return levers
 
@@ -247,7 +263,7 @@ class TrajectoryMapper:
         paths = sorted(paths)
 
         levers = self.compute_levers(paths)
-        lever_by_cap = {l.capability: l.lever_score for l in levers}
+        lever_by_cap = {lever.capability: lever.lever_score for lever in levers}
 
         opportunities: list[TrajectoryOpportunity] = []
         for opp in base.opportunities:

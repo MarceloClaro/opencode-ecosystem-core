@@ -1,0 +1,110 @@
+{
+  "overall": "degraded",
+  "checks": [
+    {
+      "name": "specs_formais",
+      "status": "pass",
+      "detail": "153 especificações formais carregadas."
+    },
+    {
+      "name": "evolution_registry",
+      "status": "pass",
+      "detail": "496/496 ciclos carregados corretamente. | Custódia: 0.4% (2/496); recente R462+ 0.9% (2/218); âncoras merkle 2; rejeitados 1; legados 436"
+    },
+    {
+      "name": "loop_specs",
+      "status": "pass",
+      "detail": "2 loop spec(s) registrado(s), todos bem formados."
+    },
+    {
+      "name": "memoria_metacognitiva",
+      "status": "pass",
+      "detail": "MetaBus memory acessível; 208 entradas episódicas."
+    },
+    {
+      "name": "opencode_config",
+      "status": "pass",
+      "detail": "opencode.json válido com 235 agente(s) configurado(s)."
+    },
+    {
+      "name": "corrigendum",
+      "status": "pass",
+      "detail": "CORRIGENDUM.md presente (19372 bytes)."
+    },
+    {
+      "name": "external_clis",
+      "status": "warn",
+      "detail": "5/17 CLI(s) externa(s) ausente(s): scihub-cli -> pip install scihub-cli; runai -> curl -fsSL https://canirun.ai/runai/install.sh | bash; tig -> pip install tig-code; reasonix -> npm install -g reasonix; colab-mcp -> uvx colab-mcp --help"
+    },
+    {
+      "name": "llm_providers",
+      "status": "pass",
+      "detail": "Provedor(es) LLM disponível(is): Ollama local. Preferência: local → PAIR → Ollama → OpenAI."
+    },
+    {
+      "name": "litert_lm",
+      "status": "pass",
+      "detail": "ready: daemon HTTP local respondeu ao health check (pid=externo); readiness não valida geração de texto."
+    },
+    {
+      "name": "colibri",
+      "status": "pass",
+      "detail": "OLMoE OK (bin=/home/marceloclaro/opencode-ecosystem-core/colibri/c/olmoe, snap=/home/marceloclaro/models/olmoe_merged)"
+    },
+    {
+      "name": "runai",
+      "status": "warn",
+      "detail": "runai ausente e o pacote npm documentado pelo instalador respondeu 404; há inconsistência upstream em https://canirun.ai/runai/install.sh / @canirun/runai. Workaround suportado: clone https://github.com/midudev/canirun.ai e defina RUNAI_SOURCE_DIR para o checkout."
+    },
+    {
+      "name": "llm_reduction_metrics",
+      "status": "pass",
+      "detail": "Redução LLM ativa: 0 chamadas evitadas, 0 rotas processadas. Threshold: 0.85."
+    },
+    {
+      "name": "episteme_coverage",
+      "status": "pass",
+      "detail": "154/235 agentes com episteme (66%): 3 explícita(s), 151 inferida(s), 81 sem sinais."
+    },
+    {
+      "name": "apm_integration",
+      "status": "pass",
+      "detail": "Microsoft APM ativo (v1.0.0): 222 primitivas declaradas (com lockfile íntegro)."
+    },
+    {
+      "name": "free_model_amplification",
+      "status": "pass",
+      "detail": "Amplificação DeepSeek Harness ativa: RAG local Whoosh3 + Scaffold CoT para modelos free (Ox Alpha, DeepSeek Free)."
+    },
+    {
+      "name": "deepmind_superhuman_reasoning",
+      "status": "pass",
+      "detail": "Componentes locais inspirados na DeepMind: Aletheia scaffold + verificador (SymPy ativo) + amostra IMO (9 problemas). Disponibilidade não comprova desempenho equivalente."
+    },
+    {
+      "name": "opencode_deepthink_alphaproof",
+      "status": "pass",
+      "detail": "Rotinas locais inspiradas em AlphaProof/Deep Think: busca (1 nós) + exemplo Erdős/Hirzebruch (dimensão 2). Checagem interna delimitada."
+    },
+    {
+      "name": "lean4_egraph_engine",
+      "status": "pass",
+      "detail": "Lean 4 & E-Graph ativos: Analisador Estático Lean 4 ativo (status: syntax_verified) + Equality Saturation (1 regras aplicadas)."
+    },
+    {
+      "name": "geometry_autoformalization_engine",
+      "status": "pass",
+      "detail": "Rotinas geométricas locais: método de Wu (resíduo 0) + autoformalização (status syntax_verified). Sintaxe não equivale a prova formal."
+    },
+    {
+      "name": "clinical_game_theory_engine",
+      "status": "pass",
+      "detail": "Motor matemático de apoio: 7 diretrizes declaradas + Minimax Regret disponível + Z3 (True). Sem validação clínica externa neste diagnóstico."
+    }
+  ],
+  "checks_total": 20,
+  "checks_passed": 18,
+  "checks_warned": 2,
+  "checks_failed": 0,
+  "duration_seconds": 3.66
+}

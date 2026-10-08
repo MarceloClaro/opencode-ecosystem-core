@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "contas-escolares-airam-veras",
+  "version": "1.0.0",
+  "description": "Conferência documental, conciliação financeira e preparação de respostas às diligências de prestações de contas escolares, com foco no Prêmio Escola Nota Dez e na Escola Airam Veras.",
+  "author": {
+    "name": "Marcelo Claro Laranjeira"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Contas Escolares Airam Veras",
+        "shortDescription": "Confira contas escolares e responda às diligências",
+        "longDescription": "Organize a prestação de contas, confira documentos e movimentações, identifique pendências com referências às páginas e prepare checklists, planos de providências e minutas. Inclui referência histórica ao manual de 2019 e padrões das diligências fornecidas, com verificação das normas aplicáveis ao exercício e proteção contra alterações retroativas indevidas.",
+        "developerName": "Marcelo Claro Laranjeira",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive"
+        ],
+        "defaultPrompt": [
+          "Analise os documentos anexados e organize a prestação de contas completa, com pendências, fontes e providências.",
+          "Confira os extratos e pagamentos, incluindo tarifas e rendimentos, e prepare a conciliação financeira.",
+          "Leia esta diligência e prepare uma matriz de resposta por item, com evidências, documentos necessários e minuta de ofício."
+        ]
+      }
+    }
+  }
+}

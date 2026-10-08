@@ -17,6 +17,18 @@ def _load_doctor():
     return doctor_mod
 
 
+@pytest.fixture(autouse=True)
+def isolated_cli_installations(monkeypatch, tmp_path):
+    import sys
+    from pathlib import Path
+
+    monkeypatch.setattr(Path, "home", classmethod(lambda cls: tmp_path / "home"))
+    monkeypatch.setattr(sys, "executable", str(tmp_path / "venv" / "bin" / "python"))
+    for name in _load_doctor().EXTERNAL_CLIS:
+        key = "ANTIGRAVITY_BIN" if name == "agy" else f"{name.upper()}_BIN"
+        monkeypatch.delenv(key, raising=False)
+
+
 # ── 1. Registro no dicionário EXTERNAL_CLIS ───────────────────────────
 
 class TestNlmRegisteredInExternalClis:

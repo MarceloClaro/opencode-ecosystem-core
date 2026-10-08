@@ -28,7 +28,7 @@ mode: subagent
 temperature: 0.2
 permission:
   bash:
-    *: deny
+    "*": deny
   edit:
     plan/**/*.md: allow
     **/*.md: allow
@@ -37,7 +37,7 @@ permission:
     **/*.secret: deny
   task:
     contextscout: allow
-    *: deny
+    "*": deny
 ---
 
 # DocWriter

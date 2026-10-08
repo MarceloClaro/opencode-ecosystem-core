@@ -1,0 +1,58 @@
+{
+  "scope": "Mutações isoladas em memória; não é validação científica externa.",
+  "success": true,
+  "mutants": [
+    {
+      "id": "simulation_export",
+      "module": "marceloclaro.orchestrator",
+      "class": "MarceloClaroOrchestrator",
+      "method": "scientific_discovery_pipeline",
+      "old": "if r102_ineligible:",
+      "new": "if False:",
+      "test": "tests/test_r666_knowledge_orchestration.py::test_simulated_deep_research_never_reaches_review_or_export",
+      "exit_code": 1,
+      "detected": true,
+      "log": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_MUTATION_LOGS/simulation_export.txt",
+      "log_sha256": "7dec597b91e2a67b8c79f457db94a7430e2b79d840013d3cc6b7b9bd6dc4ed74"
+    },
+    {
+      "id": "declaration_as_execution",
+      "module": "marceloclaro.knowledge_evolution",
+      "class": "KnowledgeEvolutionService",
+      "method": "plan",
+      "old": "{\"executed\", \"externally_validated\"}",
+      "new": "{\"declared\", \"executed\", \"externally_validated\"}",
+      "test": "tests/test_r666_knowledge_orchestration.py::test_plan_keeps_declarations_out_of_observed_and_explains_gaps",
+      "exit_code": 1,
+      "detected": true,
+      "log": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_MUTATION_LOGS/declaration_as_execution.txt",
+      "log_sha256": "d7c9040aa7a7d3b2d1d084f2ada6d3521ce3ca1c0ff7be76f759fd6207d747ac"
+    },
+    {
+      "id": "false_persistence_receipt",
+      "module": "mci.metabus",
+      "class": "MetacognitiveMemory",
+      "method": "record_observation",
+      "old": "self._save(strict=True)",
+      "new": "self._save()",
+      "test": "tests/test_r666_knowledge_orchestration.py::test_observation_cannot_return_persisted_receipt_after_write_failure",
+      "exit_code": 1,
+      "detected": true,
+      "log": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_MUTATION_LOGS/false_persistence_receipt.txt",
+      "log_sha256": "d2d2155d66853dfef89a20cc07db789a69e0064e3eb9f6d96dc0f1e0e12bdc39"
+    },
+    {
+      "id": "dominated_pareto",
+      "module": "gametheory.phd_auditor",
+      "class": "NashSolver",
+      "method": "pure_nash",
+      "old": "if not dominated:",
+      "new": "if True:",
+      "test": "tests/test_r665_evolutionary_sequencing.py::test_pareto_does_not_include_dominated_defection",
+      "exit_code": 1,
+      "detected": true,
+      "log": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_MUTATION_LOGS/dominated_pareto.txt",
+      "log_sha256": "a4758194185d24e279291cbe62c205759ce9aa43711e1722a4fa9cbd198ecbd2"
+    }
+  ]
+}

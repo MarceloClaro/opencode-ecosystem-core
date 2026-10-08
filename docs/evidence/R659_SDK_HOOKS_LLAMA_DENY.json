@@ -1,0 +1,142 @@
+{
+  "spec_id": "SPEC-935-R659",
+  "ts": "2026-10-04T10:27:05.596421+00:00",
+  "started_at": "2026-10-04T10:26:57.053335+00:00",
+  "elapsed_seconds": 8.543,
+  "evidence_kind": "real_local_http_inference_and_native_tool",
+  "success": true,
+  "transport": "HTTP OpenAI-compatible",
+  "tool_execution": "native_in_process_not_MCP",
+  "allowed_success": null,
+  "denial_success": true,
+  "scope": "deny_only",
+  "model": "llama3.2:latest",
+  "base_url": "http://localhost:11434/v1",
+  "prompt": "Use obrigatoriamente a ferramenta somar_inteiros com os argumentos JSON {\"a\":13,\"b\":29}. a e b devem ser números inteiros JSON sem aspas. Após obter o resultado, responda em português com o valor retornado.",
+  "executions": [],
+  "events": [],
+  "denial_events": [
+    {
+      "type": "tool_denied",
+      "tool": "somar_inteiros",
+      "reason": "bloqueio explícito de prova R659"
+    },
+    {
+      "type": "result",
+      "finish": "max_turns"
+    }
+  ],
+  "trace": [
+    {
+      "kind": "hook",
+      "phase": "deny",
+      "event": "SessionStart",
+      "tool": "",
+      "tool_call_id": null,
+      "finish": null
+    },
+    {
+      "kind": "real_http",
+      "phase": "deny",
+      "elapsed_seconds": 8.413,
+      "method": "POST",
+      "url": "http://localhost:11434/v1/chat/completions",
+      "request": {
+        "model": "llama3.2:latest",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Você é um assistente local. Para esta tarefa, chame a ferramenta disponibilizada antes de responder; não calcule sem consultar a ferramenta."
+          },
+          {
+            "role": "user",
+            "content": "Use obrigatoriamente a ferramenta somar_inteiros com os argumentos JSON {\"a\":13,\"b\":29}. a e b devem ser números inteiros JSON sem aspas. Após obter o resultado, responda em português com o valor retornado."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "somar_inteiros",
+              "description": "Soma dois inteiros e retorna o resultado exato.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "integer"
+                  },
+                  "b": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "a",
+                  "b"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "temperature": 0
+      },
+      "response": {
+        "id": "chatcmpl-767",
+        "object": "chat.completion",
+        "created": 1791109625,
+        "model": "llama3.2:latest",
+        "system_fingerprint": "fp_ollama",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "tool_calls": [
+                {
+                  "id": "call_xu5y1hhu",
+                  "index": 0,
+                  "type": "function",
+                  "function": {
+                    "name": "somar_inteiros",
+                    "arguments": "{\"a\":13,\"b\":29}"
+                  }
+                }
+              ]
+            },
+            "finish_reason": "tool_calls"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 262,
+          "completion_tokens": 20,
+          "total_tokens": 282
+        }
+      }
+    },
+    {
+      "kind": "hook",
+      "phase": "deny",
+      "event": "PreToolUse",
+      "tool": "somar_inteiros",
+      "tool_call_id": "call_xu5y1hhu",
+      "finish": null
+    },
+    {
+      "kind": "hook",
+      "phase": "deny",
+      "event": "SessionEnd",
+      "tool": "",
+      "tool_call_id": null,
+      "finish": "max_turns"
+    }
+  ],
+  "code_sha256": {
+    "integrations/opencode_agent_sdk.py": "c522d2b2baf74556ee9e032aaed429b89bd069cad574051d2aa6c6fbd3b64c63",
+    "hooks/engine.py": "9a24619b9c87ce281b02d2e5dee85ef5f504468bc9ef4a55f5384f1eb2ea019c",
+    "hooks/policy.py": "a6512cb8850ff114467af278fbf73706684706a3c358618ff09f90fc73467948",
+    "integrations/mcp_validation.py": "f4373a8dabc8c17722e07e994ab89bb963693ceddb1fc21b3c2857841ac91311",
+    "scripts/probe_sdk_hooks_live.py": "4d8e03ae2923aab8a30e58cf21bb7a79341ef994b1bffb257cb92890474b1fb0"
+  }
+}

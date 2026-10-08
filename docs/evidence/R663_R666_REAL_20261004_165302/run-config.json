@@ -1,0 +1,34 @@
+{
+  "question": "Qual é a associação linear entre comprimento e largura da pétala no conjunto Iris da UCI?",
+  "dataset_csv": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/sources/iris.csv",
+  "dataset_provenance": {
+    "title": "Iris UCI — bezdekIris.data",
+    "source_url": "https://archive.ics.uci.edu/static/public/53/iris.zip",
+    "evidence_kind": "real_observations",
+    "sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+    "dataset_doi": "10.24432/C56C76",
+    "license": "CC-BY-4.0",
+    "archive_sha256": "d11fe30213d36434a0879aab7cb00ce3c812eb7ba2495874438abff7b7b762e9",
+    "member_sha256": "0fed2a99db77ec533a62dc66894d3ec6df3b58b6a8f3cf4a6b47e4086b7f97dc",
+    "transformation": "Cabeçalho CSV adicionado; registros preservados.",
+    "limitations": "Conjunto histórico; espécies têm origens distintas. Correlação agregada não prova causalidade."
+  },
+  "method": "pearson",
+  "variables": {
+    "x": "petal_length",
+    "y": "petal_width"
+  },
+  "reference_sources": [
+    {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/sources/reference-0.json",
+      "source_url": "https://api.crossref.org/works/10.1111/j.1469-1809.1936.tb02137.x",
+      "sha256": "889f4673ca467e99e8dfb1c73ecc2c3950fdc78a8038444526a292b39e88ed47"
+    },
+    {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/sources/reference-1.json",
+      "source_url": "https://api.crossref.org/works/10.1111/1740-9713.01589",
+      "sha256": "b1f54de2e23949a12264a7e962794cb1b72efe5546267f231f85160433e19327"
+    }
+  ],
+  "output_dir": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_165302/research"
+}

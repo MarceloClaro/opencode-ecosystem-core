@@ -20,12 +20,12 @@ Uso:
 from __future__ import annotations
 
 import json
-import os
+import hashlib
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from .base import DataSource
 
@@ -91,14 +91,48 @@ class DatasetDataSource(DataSource):
 
     name = "datasets"
 
-    def __init__(self):
+    def __init__(self, allow_demo_fallback: bool = False):
         super().__init__()
+        if not isinstance(allow_demo_fallback, bool):
+            raise TypeError("allow_demo_fallback must be boolean")
+        self.allow_demo_fallback = allow_demo_fallback
         self._sources = {
             "zenodo": self._search_zenodo,
             "datacite": self._search_datacite,
             "uci": self._search_uci,
             "figshare": self._search_figshare,
         }
+
+    def _make_result(self, query, source, results, status="online", elapsed_ms=0.0):
+        result = super()._make_result(query, source, results, status, elapsed_ms)
+        actual = status == "online"
+        result.update({
+            "evidence_kind": "retrieved_http_metadata" if actual else "unavailable",
+            "synthetic": False, "evidence_eligible": actual,
+            "provenance": {
+                "acquisition": "http_request" if actual else "empty_http_response",
+                "source_url": {"zenodo": "https://zenodo.org/api/records",
+                               "datacite": "https://api.datacite.org/dois",
+                               "uci": "https://archive.ics.uci.edu/ml/datasets.php",
+                               "figshare": "https://api.figshare.com/v2/articles"}.get(source),
+                "metadata_sha256": hashlib.sha256(json.dumps(results, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
+                "retrieved_at": result["timestamp"],
+            },
+        })
+        return result
+
+    def _unavailable(self, query, source, start_time, error):
+        elapsed = (time.time() - start_time) * 1000
+        self._record_query(elapsed, False, offline=True)
+        examples = [dict(record, synthetic=True, evidence_kind="demonstration")
+                    for record in MOCK_DATA[source]] if self.allow_demo_fallback else []
+        result = self._make_result(query, source, examples,
+                                   "demonstration" if examples else "unavailable", elapsed)
+        result.update({"evidence_kind": "demonstration" if examples else "unavailable",
+                       "synthetic": bool(examples), "evidence_eligible": False})
+        result["provenance"].update({"acquisition": "demonstration_fallback" if examples else "failed_http_request",
+                                     "error_type": type(error).__name__})
+        return result
 
     def search(
         self, query: str, source: Optional[str] = None, **kwargs
@@ -165,11 +199,8 @@ class DatasetDataSource(DataSource):
             return self._make_result(query, "zenodo", results,
                                      "online" if success else "offline", elapsed)
 
-        except Exception:
-            elapsed = (time.time() - start_time) * 1000
-            self._record_query(elapsed, False, offline=True)
-            return self._make_result(query, "zenodo", MOCK_DATA["zenodo"],
-                                     "offline", elapsed)
+        except Exception as exc:
+            return self._unavailable(query, "zenodo", start_time, exc)
 
     # ─── DataCite ────────────────────────────────────────────
 
@@ -209,11 +240,8 @@ class DatasetDataSource(DataSource):
             return self._make_result(query, "datacite", results,
                                      "online" if success else "offline", elapsed)
 
-        except Exception:
-            elapsed = (time.time() - start_time) * 1000
-            self._record_query(elapsed, False, offline=True)
-            return self._make_result(query, "datacite", MOCK_DATA["datacite"],
-                                     "offline", elapsed)
+        except Exception as exc:
+            return self._unavailable(query, "datacite", start_time, exc)
 
     # ─── UCI ML Repository ───────────────────────────────────
 
@@ -252,11 +280,8 @@ class DatasetDataSource(DataSource):
             return self._make_result(query, "uci", results,
                                      "online" if success else "offline", elapsed)
 
-        except Exception:
-            elapsed = (time.time() - start_time) * 1000
-            self._record_query(elapsed, False, offline=True)
-            return self._make_result(query, "uci", MOCK_DATA["uci"],
-                                     "offline", elapsed)
+        except Exception as exc:
+            return self._unavailable(query, "uci", start_time, exc)
 
     # ─── Figshare ────────────────────────────────────────────
 
@@ -296,8 +321,5 @@ class DatasetDataSource(DataSource):
             return self._make_result(query, "figshare", results,
                                      "online" if success else "offline", elapsed)
 
-        except Exception:
-            elapsed = (time.time() - start_time) * 1000
-            self._record_query(elapsed, False, offline=True)
-            return self._make_result(query, "figshare", MOCK_DATA["figshare"],
-                                     "offline", elapsed)
+        except Exception as exc:
+            return self._unavailable(query, "figshare", start_time, exc)

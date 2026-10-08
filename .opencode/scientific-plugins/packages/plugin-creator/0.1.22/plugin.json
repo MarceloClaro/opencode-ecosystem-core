@@ -1,0 +1,48 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "OpenAI"
+  },
+  "description": "Create and improve plugins from your ideas, instructions, and workflows.",
+  "extensions": {
+    "com.openai": {
+      "apps": "./.app.json",
+      "interface": {
+        "capabilities": [
+          "Interactive",
+          "Read",
+          "Write"
+        ],
+        "category": "Productivity",
+        "composerIcon": "./assets/composer-icon.png",
+        "defaultPrompt": [
+          "Create a plugin for a task I do often",
+          "Turn these instructions into a plugin",
+          "Improve an existing plugin"
+        ],
+        "developerName": "OpenAI",
+        "displayName": "Plugin Creator",
+        "logo": "./assets/logo.png",
+        "longDescription": "Turn your ideas, instructions, and everyday tasks into plugins. Describe what you want your plugin to do, and Plugin Creator helps you build it. Improve an existing plugin by refining its instructions, adding skills, or changing how it works.",
+        "privacyPolicyURL": "https://openai.com/policies/row-privacy-policy/",
+        "shortDescription": "Create and edit plugins",
+        "termsOfServiceURL": "https://openai.com/policies/row-terms-of-use/",
+        "websiteURL": "https://openai.com/"
+      }
+    }
+  },
+  "homepage": "https://github.com/openai/openai/tree/master/chatgpt/oai-maintained-plugins/plugins/plugin-creator",
+  "keywords": [
+    "plugin creator",
+    "personal plugins",
+    "private workspace plugins",
+    "shared workspace plugins",
+    "plugin authoring",
+    "plugin manifests",
+    "skills"
+  ],
+  "license": "Proprietary",
+  "name": "plugin-creator",
+  "repository": "https://github.com/openai/openai/tree/master/chatgpt/oai-maintained-plugins/plugins/plugin-creator",
+  "version": "0.1.22"
+}

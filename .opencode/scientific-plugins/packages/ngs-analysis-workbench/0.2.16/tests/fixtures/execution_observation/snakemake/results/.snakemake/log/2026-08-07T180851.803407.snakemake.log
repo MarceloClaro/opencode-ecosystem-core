@@ -1,0 +1,89 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-08-07 18:08:51
+  Workflow ID: d80e952f-a943-477b-b52b-61bf07ceafa0
+  Platform: macOS-26.6-arm64-arm-64bit
+  Host: recorded-host
+  User: recorded-user
+  Snakemake version: 9.23.1
+  Python version: 3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 17:06:14) [Clang 19.1.7 ]
+  Command: /recorded/rosalind-ngs/bin/snakemake --snakefile /recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4/workflow/Snakefile --configfile /recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4/config/fastq-qc-config.json --directory /recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4 --cores 4 --printshellcmds --shared-fs-usage input-output persistence software-deployment software-deployment-cache sources storage-local-copies
+  Snakefile: /recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4/workflow/Snakefile
+  Base directory: /recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4/workflow
+  Run directory: /recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4
+  Working directory: /recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4
+  Config file(s): [PosixPath('/recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4/config/fastq-qc-config.json')]
+  Config MD5: aa43d54c7aba35d66bf411f1ca22a75f
+
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job            count
+-----------  -------
+fastqc_raw         2
+multiqc_raw        1
+all                1
+total              4
+
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Aug  7 18:08:52 2026]
+localrule fastqc_raw:
+    input: /recorded/ngs-workbench-run/inputs/SRR6357070_1.fastq.gz, /recorded/ngs-workbench-run/inputs/SRR6357070_2.fastq.gz
+    output: fastqc/raw/SRR6357070.done
+    jobid: 2
+    reason: Missing output files: fastqc/raw/SRR6357070.done
+    wildcards: sample=SRR6357070
+    threads: 4
+    resources: tmpdir=/recorded/tmp
+Shell command: mkdir -p fastqc/raw && /recorded/rosalind-ngs/bin/fastqc -t 4 -o fastqc/raw /recorded/ngs-workbench-run/inputs/SRR6357070_1.fastq.gz /recorded/ngs-workbench-run/inputs/SRR6357070_2.fastq.gz
+Select jobs to execute...
+Touching output file fastqc/raw/SRR6357070.done.
+[Fri Aug  7 18:08:57 2026]
+Finished jobid: 2 (Rule: fastqc_raw)
+1 of 4 steps (25%) done
+Execute 1 jobs...
+[Fri Aug  7 18:08:57 2026]
+localrule fastqc_raw:
+    input: /recorded/ngs-workbench-run/inputs/SRR6357072_1.fastq.gz, /recorded/ngs-workbench-run/inputs/SRR6357072_2.fastq.gz
+    output: fastqc/raw/SRR6357072.done
+    jobid: 3
+    reason: Missing output files: fastqc/raw/SRR6357072.done
+    wildcards: sample=SRR6357072
+    threads: 4
+    resources: tmpdir=/recorded/tmp
+Shell command: mkdir -p fastqc/raw && /recorded/rosalind-ngs/bin/fastqc -t 4 -o fastqc/raw /recorded/ngs-workbench-run/inputs/SRR6357072_1.fastq.gz /recorded/ngs-workbench-run/inputs/SRR6357072_2.fastq.gz
+Touching output file fastqc/raw/SRR6357072.done.
+[Fri Aug  7 18:08:59 2026]
+Finished jobid: 3 (Rule: fastqc_raw)
+2 of 4 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Aug  7 18:08:59 2026]
+localrule multiqc_raw:
+    input: fastqc/raw/SRR6357070.done, fastqc/raw/SRR6357072.done
+    output: multiqc/raw/multiqc_report.html
+    jobid: 1
+    reason: Missing output files: multiqc/raw/multiqc_report.html; Input files updated by another job: fastqc/raw/SRR6357070.done, fastqc/raw/SRR6357072.done
+    resources: tmpdir=/recorded/tmp
+Shell command: mkdir -p multiqc/raw && /recorded/rosalind-ngs/bin/multiqc --force --no-version-check --no-megaqc-upload fastqc/raw -o multiqc/raw
+[Fri Aug  7 18:09:03 2026]
+Finished jobid: 1 (Rule: multiqc_raw)
+3 of 4 steps (75%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Aug  7 18:09:03 2026]
+localrule all:
+    input: multiqc/raw/multiqc_report.html
+    jobid: 0
+    reason: Input files updated by another job: multiqc/raw/multiqc_report.html
+    resources: tmpdir=/recorded/tmp
+Shell command: None
+[Fri Aug  7 18:09:03 2026]
+Finished jobid: 0 (Rule: all)
+4 of 4 steps (100%) done
+Complete log(s): /recorded/ngs-workbench-run/ngs_runs/snakemake/fastq_qc/snakemake-fastq-qc-20260808-010555-1ce65ac4/.snakemake/log/2026-08-07T180851.803407.snakemake.log

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.282" timestamp="2026-10-04T17:21:39.275729-03:00" hostname="OPENCODE"><testcase classname="" name="tests.test_r672_gemini_notebook_transport" time="0.000"><error message="collection failure">ImportError while importing test module '/home/marceloclaro/opencode-ecosystem-core/tests/test_r672_gemini_notebook_transport.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r672_gemini_notebook_transport.py:12: in &lt;module&gt;
+    from integrations.gemini_notebook_transport import (
+E   ModuleNotFoundError: No module named 'integrations.gemini_notebook_transport'</error></testcase></testsuite></testsuites>

@@ -1,6 +1,8 @@
 ---
 id: gemini-cli
 name: gemini-cli
+description: >-
+  Executor externo orquestrável: `gemini` (pacote `@google/gemini-cli`,
 type: integration
 round: R600
 spec: SPEC-935-R600-gemini-cli.md

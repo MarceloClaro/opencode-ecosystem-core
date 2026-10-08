@@ -92,3 +92,9 @@ README oficial `r33drichards/minizinc-mcp@main` (lido em 2026-10-03 via raw):
   MiniZinc local; o doctor distingue as peças para mensagem precisa.
 - Sem auto-instalação de solver (instalador do SO / minizinc.org) e sem
   chamada ao SSE no doctor (privacidade + latência).
+
+## Adendo R651 — execução real via protocolo
+
+`solve_via_server()` + `list_tools_via_server()` (stdio, `MINIZINC_MCP_DIR`):
+provado ao vivo contra o servidor (SATISFIED x=7/y=8). Um bug real
+(`fail_after` fora do loop) foi pego pelo teste ao vivo e corrigido.

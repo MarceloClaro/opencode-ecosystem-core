@@ -32,7 +32,7 @@ mode: subagent
 temperature: 0.1
 permission:
   bash:
-    *: deny
+    "*": deny
   edit:
     **/*.env*: deny
     **/*.key: deny
@@ -41,7 +41,7 @@ permission:
     .git/**: deny
   task:
     contextscout: allow
-    *: deny
+    "*": deny
 ---
 
 # Prioritization Engine

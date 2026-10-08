@@ -13753,6 +13753,2653 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R651",
+      "objective": "R651: push ebdc1b3, consolidacao 0913345, federacao Claude e disparo SDK.",
+      "changes": [
+        "Push ebdc1b3 (416cdfa..ebdc1b3) e consolidacao 0913345 (opencode.json 222/19 + cycles).",
+        "Harness clonado shallow em ~/claude-federation: 39 skills, opencode/ com 37 skills + 5 comandos pm + setup-opencode.sh; binario NAO executado.",
+        "Plugins auditados: 29 Apache-2.0 federaveis, 13 externos sem licenca bloqueados; auditoria-licencas.json persistida.",
+        "Disparo query() real executado: SDK+CLI funcionais, ResultError Credit balance is too low (sem conclusao faturavel)."
+      ],
+      "score": 8.7,
+      "lessons": [
+        "Staging seletivo por hunk evita carimbar trabalho concorrente; commit derivado de HEAD precisa ser autocontido.",
+        "Saldo Claude insuficiente bloqueia query antes de custo; ponte deve expor ResultError, nao mascarar.",
+        "Marketplace sem licenca = degraded por padrao (R621); auditoria md5 identifica Apache-2.0 em lote."
+      ],
+      "timestamp": 1791072913.932561,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R652",
+      "objective": "R652: menções convertidas em execução real (MCP, harness, federação, SDK).",
+      "changes": [
+        "MiniZinc via protocolo: list+solve pelo Core (SATISFIED x=7/y=8); bug fail_after pego ao vivo e corrigido; 21 testes.",
+        "colab-mcp via protocolo: list (2 tools) + materialize (.ipynb válido sha256); browser-connection bloqueador documentado.",
+        "Harness: bin/harness doctor real (4.13.2, migration report NOT_OBSERVED honesto); setup-opencode.sh provado em throwaway (22 skills), NUNCA no Core.",
+        "SPEC R648 + HARNESS_FED_EXTRA_ROOTS no harvester (5 testes); 91 artefatos federados dos clones; 29 Apache-2.0 vs 13 sem licenca.",
+        "SDK: tool in-process provada sem Claude (42); query() conclusiva segue bloqueada por saldo.",
+        "111 testes verdes; doctor 0 fail."
+      ],
+      "score": 9.2,
+      "lessons": [
+        "Teste ao vivo pega o que mock não pega (event loop, PKCE, arg-shape).",
+        "Rotulos com separador quebram parsing env: documentar restrição no formato.",
+        "Throwaway dirs provam instaladores sem poluir o repo.",
+        "Setup que escreve no projeto nunca roda no Core sem backup+restore explícitos."
+      ],
+      "timestamp": 1791073703.1319604,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R653",
+      "objective": "R653: OpenCode Agent SDK free (SPEC-935-R649) com prova ao vivo.",
+      "changes": [
+        "integrations/opencode_agent_sdk.py: query() com loop agentico, @tool in-process, hooks, autodetect LiteRT>Ollama>Colibri; so stdlib.",
+        "10 testes (tool_call->execucao, deny, hooks, autodetect) + skill/card + /opencode-sdk; opencode.json 223/20.",
+        "Ao vivo R$ 0: E2B devolveu LIVRE-FUNCIONA; tool loop chamou somar(20,22)->42; sintese final estourou sob carga (documentado).",
+        "Provedores verificados: LiteRT :9379 UP, Ollama :11434 UP, Colibri :8090 down."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Cold-start on-device mente: primeira inferencia pode estourar timeout; aquecer antes de provar.",
+        "Modelo pequeno + tool_choice=auto: pode chamar ou ignorar; loop precisa tratar os dois.",
+        "FREE como garantia arquitetural (falha explicita), nao preferencia."
+      ],
+      "timestamp": 1791075215.7514932,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R654",
+      "objective": "R654: Kaggle CLI (R650) + runner Antigravity (R651) com prova ao vivo.",
+      "changes": [
+        "integrations/kaggle_cli.py + 7 testes; /kaggle; doctor pass 2.2.4; ao vivo: competitions list (ARC 2026).",
+        "integrations/antigravity_cli.py + 5 testes (falha silenciosa); /agy; doctor pass 1.2.16; forma canonica do bridge.",
+        "Ao vivo agy: 2x eligibility/avatar EOF + 1x hang sob carga; runner trata ambos; provedor pendente de janela estavel.",
+        "Skills/cards x4; SPECs R650/R651; opencode.json 225/22."
+      ],
+      "score": 8.9,
+      "lessons": [
+        "Credencial em arquivo permite auth_check sem rede no doctor.",
+        "Falha silenciosa (rc 0 + stderr) exige inspecao de saida, nao so returncode.",
+        "Provedor instavel: 3 tentativas com padroes distintos antes de declarar bloqueador."
+      ],
+      "timestamp": 1791076049.4101374,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R655",
+      "objective": "R655: Awesome MCP Servers com cobertura real (SPEC-935-R652).",
+      "changes": [
+        "Lista capturada (583 linhas, ~487 links); politica referencia-primeiro.",
+        "Ao vivo: fetch, sequentialthinking e filesystem (list+call) via stdio.",
+        "opencode.json#mcp: 3 registrados (8->11); 226 agentes; --check OK.",
+        "Skill + card + SPEC R652; memory/git/time adiados com motivo."
+      ],
+      "score": 8.8,
+      "lessons": [
+        "Listas awesome viram cobertura via: fetch, prova list+call, registro, gate para o resto.",
+        "Reference servers sem auth sao o ROI maximo; SaaS com key fica em curadoria."
+      ],
+      "timestamp": 1791076517.9316936,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R656",
+      "objective": "R656: hooks do Core (SPEC-935-R653) com bypass pego ao vivo.",
+      "changes": [
+        "hooks/engine.py (matchers, 4 eventos, fail-closed) + hooks/policy.py (7 regras + audit JSONL).",
+        "Fiado ao opencode_agent_sdk via matchers; skill + card.",
+        "Ao vivo: bypass | sudo bash pego e corrigido (regex + regressao).",
+        "23 testes verdes (hooks+SDK); doctor 0 fail."
+      ],
+      "score": 9.1,
+      "lessons": [
+        "Smoke ao vivo apos testes: bypass real que a tabela nao previu.",
+        "Auditoria fora do repo evita poluicao do git.",
+        "Hook com defeito nega: seguranca sobre disponibilidade."
+      ],
+      "timestamp": 1791076759.2620437,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R657",
+      "objective": "Aplicar o livro MCP e os livros tecnicos locais a consulta persistente com proveniencia e interface do Core",
+      "changes": [
+        "Biblioteca local:2 livros,245 paginas,498 trechos; PDFs vazios registrados e laudo excluido.",
+        "SQLite transacional, hashes, fontes atuais, bounds e abstencao; aliases e schema incompleto protegidos.",
+        "MCP search/resource/template/prompt e CLI biblioteca, comando OpenCode /biblioteca, via MarceloClaroOrchestrator.",
+        "237 testes de regressao aprovados; lint passou; prova real docs/evidence/R657-library-real.json."
+      ],
+      "score": null,
+      "lessons": [
+        "Trechos dos livros sao dados, nao instrucoes; recuperacao lexical nao mede capacidade cognitiva.",
+        "Links simbolicos precisam respeitar exclusoes pelo destino; provas nao devem depender de assert removivel por -O."
+      ],
+      "timestamp": 1791099838.9277182,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R658",
+      "objective": "Aplicar o livro Fine-Tuning de LLMs na Pratica a integridade de dados e comparacao antes de treino",
+      "changes": [
+        "Validacao de pares, deduplicacao NFKC, componentes transitivos e splits deterministas por fonte.",
+        "Manifesto e hashes sem ecoar dados no terminal; CLI fine-dados pelo orquestrador.",
+        "Gate compara identidade/protocolo/valores finitos e melhora positiva, com tolerancia relativa no limiar.",
+        "52 testes de dados incluidos na regressao; prova CLI sintetica separada em docs/evidence/R658-synthetic-cli.json."
+      ],
+      "score": null,
+      "lessons": [
+        "Duplicatas entre fontes conectam grupos antes da divisao; o hash do teste identifica a avaliacao congelada.",
+        "Numeros informados nao provam treinamento ou inferencia executados; nenhum modelo foi treinado neste ciclo."
+      ],
+      "timestamp": 1791099838.9654098,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R659",
+      "objective": "Corrigir integração SDK e hooks com prova local de ferramentas",
+      "changes": [
+        "Lifecycle e matchers integrados; schema validado; histórico e códigos CLI corretos; auditoria redigida"
+      ],
+      "score": null,
+      "lessons": [
+        "Inferência real e bloqueio real são distintos de disponibilidade do endpoint."
+      ],
+      "timestamp": 1791120044.637258,
+      "artifact_hashes": {
+        "docs/INTEGRACOES_R659_R662.md": "f285f130caca5cc1edc2e5551a84cbe357f13ee0c2a96b4ab5dc6b8f779b36ac",
+        "docs/evidence/R659_R662_SDD_GATE.json": "0cff8e10bb6ec5cc4ffdd06ae1b698f828cd4ecd839020a954b025993a7a07c2",
+        "docs/evidence/R659_R662_REGRESSION.json": "8386a42cced8d1ed6ee55bdc8630eca823f908c386efa27666ab8617b401a437"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/INTEGRACOES_R659_R662.md",
+        "docs/evidence/R659_R662_SDD_GATE.json",
+        "docs/evidence/R659_R662_REGRESSION.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R660",
+      "objective": "Aplicar contratos JSON Schema antes de efeitos nos MCPs",
+      "changes": [
+        "Validação offline compartilhada em MCI/SU/scanners/Colibri; complete real e falha propagada"
+      ],
+      "score": null,
+      "lessons": [
+        "Erro do provedor não pode virar conclusão de inferência; estado deve permanecer íntegro em entradas inválidas."
+      ],
+      "timestamp": 1791120044.6855614,
+      "artifact_hashes": {
+        "docs/INTEGRACOES_R659_R662.md": "f285f130caca5cc1edc2e5551a84cbe357f13ee0c2a96b4ab5dc6b8f779b36ac",
+        "docs/evidence/R659_R662_SDD_GATE.json": "0cff8e10bb6ec5cc4ffdd06ae1b698f828cd4ecd839020a954b025993a7a07c2",
+        "docs/evidence/R659_R662_REGRESSION.json": "8386a42cced8d1ed6ee55bdc8630eca823f908c386efa27666ab8617b401a437"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/INTEGRACOES_R659_R662.md",
+        "docs/evidence/R659_R662_SDD_GATE.json",
+        "docs/evidence/R659_R662_REGRESSION.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R661",
+      "objective": "Preservar políticas e proveniência na federação de plugins e skills",
+      "changes": [
+        "Raízes modernas e Core; IDs/destinos únicos; contenção/hash; overlay parcial; lookup compatível"
+      ],
+      "score": null,
+      "lessons": [
+        "Configuração descoberta, arquivo emitido e instalação no host são provas diferentes."
+      ],
+      "timestamp": 1791120044.7361472,
+      "artifact_hashes": {
+        "docs/INTEGRACOES_R659_R662.md": "f285f130caca5cc1edc2e5551a84cbe357f13ee0c2a96b4ab5dc6b8f779b36ac",
+        "docs/evidence/R659_R662_SDD_GATE.json": "0cff8e10bb6ec5cc4ffdd06ae1b698f828cd4ecd839020a954b025993a7a07c2",
+        "docs/evidence/R659_R662_REGRESSION.json": "8386a42cced8d1ed6ee55bdc8630eca823f908c386efa27666ab8617b401a437"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/INTEGRACOES_R659_R662.md",
+        "docs/evidence/R659_R662_SDD_GATE.json",
+        "docs/evidence/R659_R662_REGRESSION.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R662",
+      "objective": "Conectar diagnóstico e handoff a orquestrador, CLI e MCP",
+      "changes": [
+        "Serviço central, integracoes, três tools de leitura e config reproduzida; regressão de roteamento corrigida"
+      ],
+      "score": null,
+      "lessons": [
+        "Fluxo conectado exige rastrear a origem e os resultados, além de anunciar ferramentas."
+      ],
+      "timestamp": 1791120044.7854357,
+      "artifact_hashes": {
+        "docs/INTEGRACOES_R659_R662.md": "f285f130caca5cc1edc2e5551a84cbe357f13ee0c2a96b4ab5dc6b8f779b36ac",
+        "docs/evidence/R659_R662_SDD_GATE.json": "0cff8e10bb6ec5cc4ffdd06ae1b698f828cd4ecd839020a954b025993a7a07c2",
+        "docs/evidence/R659_R662_REGRESSION.json": "8386a42cced8d1ed6ee55bdc8630eca823f908c386efa27666ab8617b401a437"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/INTEGRACOES_R659_R662.md",
+        "docs/evidence/R659_R662_SDD_GATE.json",
+        "docs/evidence/R659_R662_REGRESSION.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R663",
+      "objective": "Pesquisa reproduzível com fontes reais, proveniência e bloqueio de simulações",
+      "changes": [
+        "specs/SPEC-935-R663-scientific-provenance-pipeline.md",
+        "docs/CONHECIMENTO_CIENTIFICO_R663_R666.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate: docs/evidence/R663_R666_RELEASE_GATE.json",
+        "723 testes locais aprovados; um PDF ignorado; quatro mutações detectadas.",
+        "Reprodução computacional não equivale a replicação independente.",
+        "Sem avaliação externa, revisão humana ou pontuação científica atribuída."
+      ],
+      "timestamp": 1791125673.699731,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R664",
+      "objective": "DNA de capacidades, potenciais emergentes e composição rastreável",
+      "changes": [
+        "specs/SPEC-935-R664-potentiality-composition.md",
+        "docs/CONHECIMENTO_CIENTIFICO_R663_R666.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate: docs/evidence/R663_R666_RELEASE_GATE.json",
+        "723 testes locais aprovados; um PDF ignorado; quatro mutações detectadas.",
+        "Reprodução computacional não equivale a replicação independente.",
+        "Sem avaliação externa, revisão humana ou pontuação científica atribuída."
+      ],
+      "timestamp": 1791125673.7780685,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R665",
+      "objective": "Sequenciamento evolutivo por dependências e correção de Nash/Pareto",
+      "changes": [
+        "specs/SPEC-935-R665-evolutionary-sequencing.md",
+        "docs/CONHECIMENTO_CIENTIFICO_R663_R666.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate: docs/evidence/R663_R666_RELEASE_GATE.json",
+        "723 testes locais aprovados; um PDF ignorado; quatro mutações detectadas.",
+        "Reprodução computacional não equivale a replicação independente.",
+        "Sem avaliação externa, revisão humana ou pontuação científica atribuída."
+      ],
+      "timestamp": 1791125673.8289807,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R666",
+      "objective": "Orquestração central CLI/MCP e observações metacognitivas persistentes",
+      "changes": [
+        "specs/SPEC-935-R666-knowledge-evolution-orchestration.md",
+        "docs/CONHECIMENTO_CIENTIFICO_R663_R666.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate: docs/evidence/R663_R666_RELEASE_GATE.json",
+        "723 testes locais aprovados; um PDF ignorado; quatro mutações detectadas.",
+        "Reprodução computacional não equivale a replicação independente.",
+        "Sem avaliação externa, revisão humana ou pontuação científica atribuída."
+      ],
+      "timestamp": 1791125673.8858404,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R667",
+      "objective": "R667-live-mirofish-hermes",
+      "changes": [
+        "specs/SPEC-935-R667-live-mirofish-hermes.md",
+        "docs/INTEGRACOES_CIENTIFICAS_R667_R671.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate local: docs/evidence/R667_R671_RELEASE_GATE.json",
+        "Execução, instrução importada e validação externa permanecem distintas.",
+        "106 testes específicos, regressão 777/9 skips; quatro contraprovas detectadas."
+      ],
+      "timestamp": 1791144369.4764638,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R668",
+      "objective": "R668-dataset-cli-provenance",
+      "changes": [
+        "specs/SPEC-935-R668-dataset-cli-provenance.md",
+        "docs/INTEGRACOES_CIENTIFICAS_R667_R671.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate local: docs/evidence/R667_R671_RELEASE_GATE.json",
+        "Execução, instrução importada e validação externa permanecem distintas.",
+        "106 testes específicos, regressão 777/9 skips; quatro contraprovas detectadas."
+      ],
+      "timestamp": 1791144369.4939816,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R669",
+      "objective": "R669-requested-agent-catalog",
+      "changes": [
+        "specs/SPEC-935-R669-requested-agent-catalog.md",
+        "docs/INTEGRACOES_CIENTIFICAS_R667_R671.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate local: docs/evidence/R667_R671_RELEASE_GATE.json",
+        "Execução, instrução importada e validação externa permanecem distintas.",
+        "106 testes específicos, regressão 777/9 skips; quatro contraprovas detectadas."
+      ],
+      "timestamp": 1791144369.5535455,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R670",
+      "objective": "R670-scientific-plugin-bridge",
+      "changes": [
+        "specs/SPEC-935-R670-scientific-plugin-bridge.md",
+        "docs/INTEGRACOES_CIENTIFICAS_R667_R671.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate local: docs/evidence/R667_R671_RELEASE_GATE.json",
+        "Execução, instrução importada e validação externa permanecem distintas.",
+        "106 testes específicos, regressão 777/9 skips; quatro contraprovas detectadas."
+      ],
+      "timestamp": 1791144369.5794115,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R671",
+      "objective": "R671-scientific-runtime-surfaces",
+      "changes": [
+        "specs/SPEC-935-R671-scientific-runtime-surfaces.md",
+        "docs/INTEGRACOES_CIENTIFICAS_R667_R671.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Gate local: docs/evidence/R667_R671_RELEASE_GATE.json",
+        "Execução, instrução importada e validação externa permanecem distintas.",
+        "106 testes específicos, regressão 777/9 skips; quatro contraprovas detectadas."
+      ],
+      "timestamp": 1791144369.6034958,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R672",
+      "objective": "Transporte CLI/MCP oficial e sessões persistentes Gemini Notebook",
+      "changes": [
+        "integrations/gemini_notebook_transport.py",
+        "integrations/gemini_notebook_session.py",
+        "specs/SPEC-935-R672-gemini-notebook-transport.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Provas operacionais delimitadas; não constituem inferência universal ou validação científica externa."
+      ],
+      "timestamp": 1791164865.0371354,
+      "artifact_hashes": {
+        "integrations/gemini_notebook_transport.py": "76d42c37add7113c3f56a9d9a3039eb55082492bdc9679c91043d06780a27790",
+        "integrations/gemini_notebook_session.py": "5e69924d012d160193250adbf288803ba1cdea5db9c8754304874e7e46a4fc41",
+        "specs/SPEC-935-R672-gemini-notebook-transport.md": "e2030c1ab0e24bd661bebaf6d99aea5d78e67634cf41660afa8d3ee0989872cd"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/evidence/NOTEBOOK_CORE_REGRESSION_BEFORE_DOC_FIX.xml",
+        "docs/evidence/NOTEBOOK_CORE_FINAL_DOCS_GREEN.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R673",
+      "objective": "Catálogo completo e política de efeitos Gemini Notebook",
+      "changes": [
+        "integrations/gemini_notebook_catalog.py",
+        "specs/SPEC-935-R673-gemini-notebook-capability-policy.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Provas operacionais delimitadas; não constituem inferência universal ou validação científica externa."
+      ],
+      "timestamp": 1791164865.0847301,
+      "artifact_hashes": {
+        "integrations/gemini_notebook_catalog.py": "878ff8777cb1f81422194d453a63e2ef48157e6887b8cc5984aaa0dfa01c56e2",
+        "specs/SPEC-935-R673-gemini-notebook-capability-policy.md": "55c4215fd586d5c20497aac6a7f8f7cab343c8af63c8894bff9c33b0535811ba"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/evidence/NOTEBOOK_CORE_REGRESSION_BEFORE_DOC_FIX.xml",
+        "docs/evidence/NOTEBOOK_CORE_FINAL_DOCS_GREEN.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R674",
+      "objective": "Orquestração central, skill, preflight e proveniência Gemini Notebook",
+      "changes": [
+        "integrations/gemini_notebook.py",
+        "integrations/gemini_notebook_pipeline.py",
+        "marceloclaro/orchestrator.py",
+        "integrations/ecosystem_mcp.py",
+        "specs/SPEC-935-R674-gemini-notebook-orchestration.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Provas operacionais delimitadas; não constituem inferência universal ou validação científica externa."
+      ],
+      "timestamp": 1791164865.1386533,
+      "artifact_hashes": {
+        "integrations/gemini_notebook.py": "72af1942f1943dc81751d8d07f7d68b7c39603cef490a1e009c1d36cb7be312a",
+        "integrations/gemini_notebook_pipeline.py": "38fdec9fc8d15a34f801e1421d14419e54ac8e61190f1bfc3ea9ce97fb57e4af",
+        "marceloclaro/orchestrator.py": "864d64ef716791364229862677fa9514f8484cd4d0967a276bd0f0ad46b54878",
+        "integrations/ecosystem_mcp.py": "4539c2986b07bede5f5a70ef43ebaa819eb566e240661b7a0756e3266101f2d6",
+        "specs/SPEC-935-R674-gemini-notebook-orchestration.md": "a20b47d4c9c2651209c20cd7366924d36bb1dbe83e082f9e443b795dd36d216e"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/evidence/NOTEBOOK_CORE_REGRESSION_BEFORE_DOC_FIX.xml",
+        "docs/evidence/NOTEBOOK_CORE_FINAL_DOCS_GREEN.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R675",
+      "objective": "Podcast exige áudio real e não promove confiança por sucesso operacional",
+      "changes": [
+        "agent_runners/nlm_executor.py",
+        "tests/test_r675_notebook_podcast_truthfulness.py",
+        "specs/SPEC-935-R675-notebook-podcast-truthfulness.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Provas operacionais delimitadas; não constituem inferência universal ou validação científica externa."
+      ],
+      "timestamp": 1791164865.1869628,
+      "artifact_hashes": {
+        "agent_runners/nlm_executor.py": "d07750e3832f97a9f9e354484b0655438c7a21a0be1e254ee0874ae778ab8a14",
+        "tests/test_r675_notebook_podcast_truthfulness.py": "3deaf514161c476e2f925096bdc3c9326866662fe5f6af4bb27ba94c651766ee",
+        "specs/SPEC-935-R675-notebook-podcast-truthfulness.md": "8752b15479548e286d654d11d30ceebdc1eaed5062841d4738f957b96faa54dd"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/evidence/NOTEBOOK_CORE_REGRESSION_BEFORE_DOC_FIX.xml",
+        "docs/evidence/NOTEBOOK_CORE_FINAL_DOCS_GREEN.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R676",
+      "objective": "Especialistas Gemini notebook audit/upstream/transport registrados no Core",
+      "changes": [
+        "agents/catalog/gemini-notebook-audit.md",
+        "agents/catalog/gemini-notebook-upstream.md",
+        "agents/catalog/gemini-notebook-transport.md",
+        "opencode.json",
+        "specs/SPEC-935-R676-gemini-notebook-specialists.md"
+      ],
+      "score": null,
+      "lessons": [
+        "Provas operacionais delimitadas; não constituem inferência universal ou validação científica externa."
+      ],
+      "timestamp": 1791164865.2453587,
+      "artifact_hashes": {
+        "agents/catalog/gemini-notebook-audit.md": "de41b2fea20d80c92e7cbeca3b707225e4916ebf3fc1b54f704c96cadd067b01",
+        "agents/catalog/gemini-notebook-upstream.md": "6633bbb560710ff30b2220f67644cedab797ca30f1aeeadb61acb6eb21021b97",
+        "agents/catalog/gemini-notebook-transport.md": "b04d1340b7985348f03729729f3b6d00c3e445c0c595baba59afd461d2ec580d",
+        "opencode.json": "00a5aca37a534ec183fcc10b55c068eb47762ac7ac53ad5455c53e603e18b659",
+        "specs/SPEC-935-R676-gemini-notebook-specialists.md": "f79762cf7bc2772a995c32c8e1dbf617a2d363948e1b3c614165bbe3d86cd8bf"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/evidence/NOTEBOOK_CORE_REGRESSION_BEFORE_DOC_FIX.xml",
+        "docs/evidence/NOTEBOOK_CORE_FINAL_DOCS_GREEN.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R677",
+      "objective": "Distinguir consulta bibliografica vazia de indice pronto antes de acessar fontes",
+      "changes": [
+        "rag/book_library.py",
+        "tests/test_r677_empty_library_request.py",
+        "scripts/verify_empty_library_request.py",
+        "specs/SPEC-935-R677-empty-library-request.md",
+        "docs/BIBLIOTECA_AI_R657.md"
+      ],
+      "score": null,
+      "lessons": [
+        "A saida anexada nao foi reproduzida no MCP atual. Entrada vazia nao autoriza retrieval, treinamento nem promocao de confianca."
+      ],
+      "timestamp": 1791165758.5891535,
+      "artifact_hashes": {
+        "rag/book_library.py": "3f7b89ea87ba1cd60c288b65a33c41bf37ae4322e3acc89d2493be727a706deb",
+        "tests/test_r677_empty_library_request.py": "2660df2d5e5bfb449610c8dee186f87456c86db651868328d39c553a24f86dea",
+        "scripts/verify_empty_library_request.py": "02fb760aabff45f4628c9065a9ebc744cc0928c8f04631ac0ddc796a3a2926a8",
+        "specs/SPEC-935-R677-empty-library-request.md": "57d959955f43b081e11c0ee2eb07fd44c42c050ec883f879b9d6ae391b622687",
+        "docs/BIBLIOTECA_AI_R657.md": "33717e3ba27bbb29700d3e50f50b186022aa97496105719de66c5e0063b96420"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/evidence/R677_RED.xml",
+        "docs/evidence/R677_GREEN.xml",
+        "docs/evidence/R677_REGRESSION.xml",
+        "docs/evidence/R677_MCP_BASELINE.json",
+        "docs/evidence/R677_RUNTIME.json",
+        "docs/evidence/R677_LIBRARY_REAL.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R680-atlas-visual-didatico",
+      "objective": "Livro Core didatico com enredo F-S-T-R + atlas M1-M10 e DOIs ativos",
+      "changes": [
+        "mod-00a-enredo-prefacio.tex",
+        "mod-00b-jornada-leitor.tex",
+        "mod-15-epilogo-reproducao.tex",
+        "mod-16-mapas-fluxogramas.tex",
+        "main.tex",
+        "SPEC-935-R679",
+        "SPEC-935-R680"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "Underscore em DOI quebra citref: usar DOI sem underline",
+        "text exige amsmath: usar mbox",
+        "flowch fonte com path usa escape",
+        "NotebookLM create exige confirmacao explicita; list ok com 225"
+      ],
+      "timestamp": 1791195303.5031822,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R681-notebooklm-e1e7-leigos",
+      "objective": "CONTINUAR NotebookLM: E1-E7 para leigos + atlas visual + correcao DOI Nii",
+      "changes": [
+        "mod-17-e1e7-para-leigos.tex",
+        "main.tex",
+        "SPEC-935-R681",
+        "correcao DOI Nii .538->.537 em 9 arquivos",
+        "notebook NotebookLM ba4adef8",
+        "Antigravity anti-1a10d5bdb4b + anti-1a10d5bdb87"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "NotebookLM query honesta evita overclaim: fontes nao cobriam E1-E7",
+        "DOI Nii correto e .537, .538 e outro artigo do mesmo fasciculo",
+        "E1-E7 leigo exige 5 linhas por etapa: Ana/Bruno/analogia/exemplo/armadilha"
+      ],
+      "timestamp": 1791225602.8907733,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R682-nivel0-universal",
+      "objective": "Nivel 0 universal: todos os 378 elementos e termos para leigos",
+      "changes": [
+        "mod-18-nivel0-universal.tex",
+        "main.tex frontmatter",
+        "SPEC-935-R682",
+        "nota NotebookLM Nivel 0"
+      ],
+      "score": 9.3,
+      "lessons": [
+        "Nao reescrever 378 fichas: camada tradutora unica evita regressao",
+        "Glossario com frase+comparacao+morada atende leigo e tecnico",
+        "Frontmatter para Nivel 0 mantem leitura antes do tecnico"
+      ],
+      "timestamp": 1791227431.247592,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R683-podcast-leigos",
+      "objective": "Podcast Livro Core para leigos via NotebookLM audio 25min",
+      "changes": [
+        "podcast m4a 18MB 25min",
+        "roteiro-leigo-ptbr.md",
+        "feed.xml length real",
+        "mod-19-podcast.tex",
+        "SPEC-935-R683",
+        "nota Podcast publicado"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "Audio NotebookLM leva ~15min unknown->completed com 404 transitorio",
+        "Report EN tecnico exige roteiro pt-BR proprio para leigos",
+        "Feed exige length real do arquivo"
+      ],
+      "timestamp": 1791228558.2657757,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R684-podcast-portugues-consolidado",
+      "objective": "Podcast em portugues: apresentacao consolidada unica leigo-dev",
+      "changes": [
+        "apresentacao-ptbr.mp3 4min20",
+        "consolidado-notebooklm.m4a 20min56",
+        "roteiro-consolidado-ptbr.md",
+        "feed.xml 2 itens",
+        "mod-19 reescrito",
+        "SPEC-935-R684",
+        "caderno 947abff2 4 fontes PT"
+      ],
+      "score": 9.3,
+      "lessons": [
+        "Briefing NotebookLM sai em EN mesmo com fontes PT; audio segue fontes mas conferir ouvindo",
+        "gTTS pt-BR garante faixa principal em portugues",
+        "Feed exige length real por item"
+      ],
+      "timestamp": 1791229441.7977116,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R685-podcast-notebooklm-ptbr",
+      "objective": "Podcast NotebookLM em pt-BR com idioma forcado",
+      "changes": [
+        "audio ef134f66 pt-BR 20min13 39MB",
+        "feed ep2 pt-BR length real",
+        "mod-19 atualizado",
+        "SPEC-935-R684 adendo"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "nlm audio create tem --language BCP-47; pipeline nao expoe idioma",
+        "Aguardar unknown->completed com retries de 404 e normal"
+      ],
+      "timestamp": 1791230528.426731,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R686-podcast-por-modulo",
+      "objective": "Podcast por modulo pt-BR: 7 prontos, 2 gerando, 15 na fila por cota",
+      "changes": [
+        "7 m4a modulos ~5-7min",
+        "indice-modulos.md",
+        "mod-20-podcast-modulos.tex",
+        "SPEC-935-R686",
+        "caderno e05e32a6 9 fontes PT"
+      ],
+      "score": 8.8,
+      "lessons": [
+        "CLI duplica creates em timeout: conferir studio antes de refazer",
+        "Short consome ~4,5% da janela; 24 modulos exigem fila pos-reset",
+        "Paralelizar creates funciona mas enfileira no servidor"
+      ],
+      "timestamp": 1791234480.9635072,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R687-infografico-notebooklm",
+      "objective": "Infografico NotebookLM pt-BR capa/logo/paletas detalhado no atlas",
+      "changes": [
+        "infografico 02f525e5 PNG 1536x2752",
+        "fig-infografico-core.png no atlas",
+        "SPEC-935-R687"
+      ],
+      "score": 9.1,
+      "lessons": [
+        "Declarar microtextos trocados pelo gerador na legenda",
+        "Paleta RGB na fonte guia as cores do infografico"
+      ],
+      "timestamp": 1791236913.1978574,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R688-infografico-da-capa",
+      "objective": "Infografico a partir da capa-ecosistema.jpg oficial",
+      "changes": [
+        "PDF capa+legenda aceito 830f7c66",
+        "infografico 82a61857",
+        "figura do atlas trocada"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "NotebookLM rejeita imagem pura; legenda textual destrava o upload",
+        "Fonte visual guia o estilo do infografico"
+      ],
+      "timestamp": 1791237989.3391364,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R689",
+      "objective": "Gerar relato de experiência acadêmico (TDAH misto, 5 anos, brincar livre de vizinhança sob ótica humanista) como revisão integrativa ilustrada por vinheta, em LaTeX modular ABNT (abnTeX2/BibTeX), com artigo-gap norteador, autoras do modelo DOCX da disciplina, compilação em PDF e auditoria por scanners do Core.",
+      "changes": [
+        "especificação SDD do problema (pergunta PCC, objetivos, formato resumo simples/expandido)",
+        "busca de artigo-gap: Hood & Baumann 2024 (revisão sistemática), Damasceno et al. 2025, Kuo & Faber Taylor 2004, Taylor & Kuo 2011, Yang et al. 2019",
+        "migração estudo de caso -> revisão bibliográfica com vinheta ilustrativa (N=1 sem valor probatório)",
+        "estrutura LaTeX modular: main.tex + 10 módulos (preâmbulo, capa, resumo, intro, objetivos, metodologia, resultados, limitações, conclusão, referências) + referencias.bib",
+        "correções técnicas: ordem hyperref antes de abntex2cite (citações ?? resolvidas); abntex2-options.bib local; edition DSM '5. ed. rev.' sem duplicação; tipo TCC limpo",
+        "autoria verificada via Crossref (Damasceno; Mazzarino; Figueiredo, Aida — DOI 10.1590/2175-6236136168vs01) antes de gravar no .bib",
+        "incorporação do modelo DOCX da disciplina: 5 autoras + resumo rotulado (Introdução/Objetivos/Metodologia/Resultados e discussões/Conclusão)",
+        "refinamento pós-scanner: justificativa explícita do desenho hermenêutico + 5 critérios de invalidação (falsificabilidade)",
+        "medicamento registrado como 'não declarado' (sem presumir ausência); TCLE/assentimento marcados [A ANEXAR]"
+      ],
+      "score": 60.0,
+      "lessons": [
+        "Scanner de rigor calibrado para ensaios experimentais penaliza desenhos descritivos N=1: reprovação deve ser lida como pedido de critérios de invalidação, não como erro lógico (SRI 10->60 após declarar falsificabilidade)",
+        "abnTeX2 exige ordem hyperref ANTES de abntex2cite; sem isso todas as citações saem (??) mesmo com .aux correto",
+        "abntex2-alf.bst adiciona '. ed.' automaticamente quando edition inicia com dígito: usar grupo {5} para '5. ed. rev.'",
+        "Referências nunca entram no .bib sem metadados verificados em fonte primária (Crossref/SciELO/DOI)",
+        "0 falácias epistemológicas nas duas rodadas de scanner — anti-overclaim (não afirmar causalidade/eficácia) funciona como prática",
+        "Teto realista de SRI para relato de experiência N=1 é ~60 (moderate_rigor); nota final pertence à banca humana, não ao scanner"
+      ],
+      "timestamp": 1791247570.391207,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R691",
+      "objective": "Ciclo de melhoria R690 sobre o relato TDAH/brincar de vizinhança (R689): corrigir não-conformidade SDD (SPEC formal), ampliar corpus de 10 para 15 referências verificadas, explicitar referencial teórico, adicionar experimento controlado ao Quadro 1 e declarar conflitos/financiamento.",
+      "changes": [
+        "SPEC-935-R690 formal criada em specs/ (conformidade SDD restaurada — antes o artefato nasceu sem spec)",
+        "referencias.bib: +Bronfenbrenner 1996, +Polanczyk et al. 2007, +Faber Taylor & Kuo 2009, +AAP/Wolraich 2019, +Louv 2015 (3 DOIs novos verificados via Crossref antes de gravar)",
+        "Introdução: prevalência mundial (Polanczyk) + diretriz AAP 4-6 anos + parágrafo de referencial teórico (ART + bioecológico + ACP)",
+        "Eixo 1: incorporado experimento controlado intrasujeito N=17 (Faber Taylor & Kuo 2009) — única evidência experimental identificada",
+        "Quadro 1 renumerado com 6 linhas (inclusão do experimento)",
+        "Discussão: 'déficit de natureza' (Louv) como contraposição ao caso",
+        "Conclusão: 4 implicações práticas (registro de dose, verdes abertos, escola, uso dialógico) ancoradas em Bronfenbrenner",
+        "Resumo: nota de conflito de interesses (nada a declarar) e financiamento (nenhum) adicionada",
+        "Recompilação limpa: 8 páginas, 0 erros, 0 citações indefinidas, 15 referências na bibliografia"
+      ],
+      "score": 55.0,
+      "lessons": [
+        "Métricas de scanner são sensíveis ao recorte textual enviado: SRI oscilou 60->55 (scan) e 60->40 (audit) entre rodadas, embora o PDF real tenha GANHO conteúdo; usar como métrica estável falsificabilidade (75->100) e contagem de falácias (0 em todas as rodadas)",
+        "Falsificabilidade atinge 100/100 quando os critérios de invalidação são explícitos, numerados e operacionalizáveis (escala + prazo + condição de refutação)",
+        "Conceito teórico sem fonte (Bronfenbrenner implícito) é falha de rigor capturável em autorrevisão: toda lente teórica precisa de citação",
+        "Relato N=1 nunca satisfaz 'grupo de controle' do scanner — a resposta correta é justificar o desenho + apontar desenho futuro de medidas repetidas, não simular controle",
+        "SPEC formal deve nascer ANTES do artefato (R689 violou; R690 corrigiu) — reforço da regra SDD inviolável",
+        "Renomear chave de .bib por engano quebra citações silenciosamente — manter chave estável e conferir undefined=0 após qualquer edição de bibliografia"
+      ],
+      "timestamp": 1791273537.7463763,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R692",
+      "objective": "Ciclo R692: adequação do relato TDAH ao padrão ABNT atualizado, correção ortográfica integral e redução de artificialidade textual (paráfrase própria, estilo menos mecanizado), preservando rigor científico e declaração de IA.",
+      "changes": [
+        "ABNT atualizado: NBR 6022:2018, 6023:2018, 6028:2021 (resumo: 3a pessoa, voz ativa, parágrafo único rotulado), 10520:2023 (autor-data), 14724:2011 (margens/espacamento já aplicados)",
+        "Ortografia: todos os módulos .tex reescritos com acentuação integral (inputenc utf8); zero erros de compilação",
+        "Antiplágio: paráfrase própria verificada por n-gramas (4/5-gramas) contra as 3 fontes em português — 0 frases idênticas; sobreposição residual apenas em termos técnicos indecomponíveis ('transtorno de déficit de atenção')",
+        "Estilo: variação sintática, frases curtas/longas alternadas, voz ativa, eliminação de padrões triádicos mecânicos — pegada de IA reduzida sem alterar conteúdo",
+        "Declaração de IA mantida por integridade acadêmica (removê-la seria falsificação); nota de conflitos e financiamento preservada",
+        "Scanner final pós-reescrita: SRI 60, falsificabilidade 75, metodologia 50, 0 falácias — rigor preservado",
+        "PDF final: 9 páginas, 15 referências, 0 erros; novo hash registrado"
+      ],
+      "score": 60.0,
+      "lessons": [
+        "Antiplágio verificável por n-gramas contra fontes capturadas: evidência objetiva de paráfrase própria antes da submissão institucional",
+        "Termos técnicos indecomponíveis (nomes de transtornos, descritores) geram falsos positivos de similaridade — não são plágio e não devem ser parafraseados",
+        "Pedido de 'anti-IA' deve ser respondido com: reescrita estilística sim, remoção da declaração de uso de IA não — integridade acadêmica prevalece sobre não-detecção",
+        "Nenhuma ferramenta garante 'não detectável' por detector de IA; o caminho correto é revisão humana final + declaração transparente",
+        "Reescrita estilística não deve alterar números, DOIs, critérios de invalidação nem posições epistemológicas — conteúdo factual é invariante"
+      ],
+      "timestamp": 1791273920.3459592,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R693",
+      "objective": "Ciclo R693: correção de conformidade tipográfica ABNT — eliminar fontes menores que 12pt nos quadros, legendas e notas do relato TDAH (NBR 14724).",
+      "changes": [
+        "Ambiente 'quadro' no preâmbulo: removido \\small — conteúdo dos Quadros 1 e 2 agora em 12pt",
+        "captionsetup: removido font=small — legendas em 12pt",
+        "Fontes dos quadros ('Fonte: ...'): \\scriptsize -> texto normal 12pt",
+        "Nota de integridade no resumo: \\scriptsize -> texto normal 12pt",
+        "Único 'small' restante no código é \\smallskip (espaçamento vertical, não fonte)",
+        "Recompilação limpa: 12 páginas (tabelas maiores), 0 erros, 0 citações indefinidas; hash novo d9467ad6..."
+      ],
+      "score": null,
+      "lessons": [
+        "Ambientes customizados de tabela (newenvironment) que embutem \\small aplicam redução a TODAS as tabelas silenciosamente — auditar ambientes antes de auditar células",
+        "grep por comandos de fonte deve ignorar \\smallskip/\\medskip (espaçamento) para não gerar falso alarme",
+        "Conformidade tipográfica ABNT: corpo e tabelas em 12pt; só citações longas (>3 linhas, recuo 4cm) e notas de rodapé podem usar 10pt — e mesmo esses foram mantidos em 12pt aqui por solicitação do autor"
+      ],
+      "timestamp": 1791274879.382393,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R694",
+      "objective": "Ciclo R694: conformidade tipográfica ABNT — restaurar recuo de parágrafo (1,25cm) suprimido por pacotes e enquadrar todos os elementos textuais na mancha útil da página (16cm).",
+      "changes": [
+        "indentfirst + \\setlength{\\parindent}{1.25cm} reforçado no FIM do preâmbulo (pacote posterior havia sobrescrito o parindent definido no início)",
+        "String de busca removida de \\texttt (não quebrava linha) e reescrita em prosa — eliminado estouro na pág. 6",
+        "Quadro 2: colunas redistribuídas (3.4/4.4/4.4/2.2cm) + \\tabcolsep=4pt — 'Hiperatividade' (3.06cm em 12pt) não cabe em coluna de 2.2cm; eliminado overfull de 8.7pt",
+        "\\emergencystretch=3em global contra palavras longas",
+        "Medição objetiva pós-fix com pdftotext -bbox: 0 estouros de margem; 23 inícios de parágrafo com recuo 35.5pt (1,25cm); 0 overfull; 12 páginas"
+      ],
+      "score": null,
+      "lessons": [
+        "\\setlength{\\parindent} definido no INÍCIO do preâmbulo pode ser sobrescrito por pacotes carregados depois — repetir ajustes de layout no fim do preâmbulo",
+        "pdftotext -bbox permite AUDITORIA objetiva de tipografia ABNT: estouro de margem (xMax > 538.6pt) e recuo de parágrafo (xMin ≈ 120.5pt) são mensuráveis, não opinião",
+        "Palavra sem hífen mais larga que a coluna p{} gera Overfull hbox — medir a palavra em 12pt (letras × ~6.2pt) antes de fixar largura de coluna",
+        "\\texttt (monoespaçado) em string longa não quebra na margem — usar prosa ou quebra manual"
+      ],
+      "timestamp": 1791275785.976423,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R695",
+      "objective": "Ciclo R695: gerar versão DOCX formatada do relato TDAH a partir da fonte única LaTeX, com formatação ABNT fiel ao PDF (Times 12, 1,5, recuo 1,25cm, margens 3/2cm, quadros, citações autor-data e 15 referências).",
+      "changes": [
+        "gerar_docx.py: conversor LaTeX->DOCX com python-docx (95 parágrafos, 2 tabelas, 13 páginas)",
+        "Citações reconstruídas do main.aux (rótulos \\bibcite + \\bibciteYEAR) em formato ABNT autor-data",
+        "Parse fiel dos módulos: seções numeradas, subseções, listas, quadros com colunas do LaTeX, capa, resumo rotulado, nota de integridade",
+        "Referências (15) com espaçamento simples e linha em branco entre entradas (NBR 6023)",
+        "Página de número no cabeçalho da seção do corpo (campo PAGE), capa/resumo sem numeração",
+        "Validação por conversão LibreOffice->PDF e inspeção do XML: seções, quadros, referências e citações conferidos"
+      ],
+      "score": null,
+      "lessons": [
+        "abntex2cite grava no .aux o conector 'e' ('Hood e Baumann') tanto no rótulo EXPL quanto no principal — a renderização ';' acontece só no LaTeX; conversores precisam normalizar ' e ' -> '; ' manualmente",
+        "Rótulo \\bibcite grava ano SEM a letra ('2025') enquanto \\bibciteYEAR tem '2025a' — remover o ano do rótulo por regex próprio (\\d{4}[a-z]?) e reanexar o YEAR é a única forma de manter '2025a/2025b'",
+        "Regex para argumento de ambiente: '\\begin{quadro}{...}' casa o {quadro} primeiro — ancorar com \\begin\\{quadro\\}\\{(.*)\\}$ para pegar o caption",
+        "Regex de seção com [^}]* quebra em escapes com chaves ('\\c{c}') — usar (.*) greedy até o fim da linha",
+        "Validação de DOCX: reabrir o zip e inspecionar document.xml + conversão LibreOffice->PDF + pdftotext — três camadas de verificação independentes"
+      ],
+      "timestamp": 1791277450.941785,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R696",
+      "objective": "Ciclo R696: corrigir no DOCX os caracteres LaTeX crus e a formatação ABNT das referências, reportados pelo autor; corrigir também erros de português (propôe→propõe, indice→índice, fenómeno→fenômeno) na fonte LaTeX.",
+      "changes": [
+        "Regex de split de \\textbf com chaves balanceadas — antes parava no '}' interno de \\c{c}, corrompendo 'Introdução' em 'Introdu\\c{cão'",
+        "Comandos de controle LaTeX (\\vspace, \\thispagestyle, \\newpage, \\pagenumbering, \\setcounter) agora ignorados — eram escritos como texto",
+        "Bloco \\begin{center}...\\end{center} multilinha tratado: 'RESUMO' centralizado e em negrito, sem {\\bfseries} cru",
+        "Referências com runs: títulos de livros e nomes de periódicos em NEGRITO (NBR 6023) — 15/15 verificadas no XML",
+        "Headings com inline() — '--' de subtítulos convertidos em travessão '–'",
+        "Erros de português corrigidos na fonte: 'propôe'→'propõe' (introdução), 'indice'→'índice' (objetivos), 'fenómeno'→'fenômeno' (discussão e conclusão) — LaTeX e DOCX sincronizados",
+        "Validação: 0 barras invertidas em runs de texto; 0 comandos crus; 'Introdução' íntegra; negrito em 37 runs; PDF 12p + DOCX 13p regenerados"
+      ],
+      "score": null,
+      "lessons": [
+        "Split de texto inline por regex precisa de chaves balanceadas ((?:[^{}]|\\{[^{}]*\\})*) quando o conteúdo contém escapes com '}' (ex.: \\c{c})",
+        "Linhas de comando LaTeX órfãs (\\vspace, \\thispagestyle) caem no fluxo de parágrafo do parser — toda linha iniciada por '\\' deve ser classificada antes de virar texto",
+        "Validação do usuário final é insubstituível: a checagem por PDF convertido não pegou os comandos crus porque o LibreOffice os descartava — a inspeção deve ser feita no document.xml, não só no render",
+        "Erros de ortografia do tipo 'fenómeno' podem existir em múltiplos módulos — buscar por padrão em TODOS os arquivos, não corrigir só a primeira ocorrência",
+        "NBR 6023: destaque tipográfico (negrito) em título de livro e nome de periódico é obrigatório — converter requer runs separados no DOCX"
+      ],
+      "timestamp": 1791278159.8092346,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R697",
+      "objective": "Ciclo R697: gerar apresentação acadêmica MIRA (deck HTML de 14 slides em cards/seções navegáveis) sobre o relato TDAH + roteiro de defesa de 18 min + simulação de banca com 8 perguntas difíceis e respostas ancoradas exclusivamente no manuscrito.",
+      "changes": [
+        "Pipeline MIRA executado pelo orquestrador: mira-new (briefing) → mira-planner (14 slides, narrativa, timing) → mira-builder (deck HTML) → mira-validator (SMOKE_OK)",
+        "Deck offline (deck_tdah_mira.html, 19.5 KB): navegação por setas/espaço/Home/End, botões, barra de progresso, contador, tela cheia, animação de fade",
+        "Tema visual verde/ouro coerente com o conteúdo (natureza/restauração atencional); cards com as 6 âncoras e os 3 eixos",
+        "Roteiro de defesa (roteiro_defesa_banca.md): fala por slide com tempo (18 min) + checklist pré-defesa",
+        "Simulação de banca: 8 perguntas (controle, maturação, medicação, ACP×TCC, N=1, mensuração, prescrição, telas) com respostas ancoradas só no manuscrito",
+        "Validação: node smoke_dom_stub.js → SMOKE_OK (0 runtime errors, classe R580)"
+      ],
+      "score": null,
+      "lessons": [
+        "Hook js-smoke do Write roda ANTES da gravação (lê arquivo que ainda não existe) — criar diretório antes e, se persistir, gravar via filesystem MCP",
+        "Deck de defesa deve espelhar a calibração do manuscrito: slides com 'afirmamos/não afirmamos' preparam a aluna para a banca sem expô-la a overclaim",
+        "Simulação de banca com respostas citando a SEÇÃO do manuscrito (3.2, 5.2, 5.3) transforma a defesa em auditoria interna — mesmo padrão do módulo M7",
+        "Parser HTML caseiro acusa falsos positivos em tags self-closing (<br>, <meta>); a validação autoritativa é o smoke_dom_stub do ecossistema",
+        "MIRA no catálogo é pipeline conceitual (cards de agentes) sem template executável — o orquestrador executa o fluxo e entrega artefatos próprios"
+      ],
+      "timestamp": 1791279154.2967668,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R698",
+      "objective": "Ciclo R698: adicionar animações ilustrativas didáticas ao deck MIRA do relato TDAH, preservando o profissionalismo acadêmico e a validação fail-closed do ecossistema (smoke_dom_stub).",
+      "changes": [
+        "9 keyframes CSS novos: flutuar (folhas da capa), entrada (capa/encerramento), pulse (roteiro/checagens), desenhar (seta do trilho sala→rua), static (TV), pular (bonecos da rua), balancar (balança da discussão), ondular (ondas do encerramento)",
+        "Trilho animado na vinheta: TV com estática → seta desenhando → crianças pulando (didática da transição sala→rua)",
+        "Contadores animados nas evidências: 458→7, 452, 17, 421, 59.754 com easing e formatação pt-BR",
+        "Barras antes/depois animadas no Quadro 2 (4 domínios) com legenda explícita 'barras ilustrativas, não são medidas'",
+        "Balança animada (afirmamos × não afirmamos), ciclo ecológico criança-pares-verde com anel desenhando e nós pulsando, checks sequenciais na agenda",
+        "Relógio de tempo sugerido por slide no rodapé (⏱), sincronizado com o roteiro de 18 min",
+        "prefers-reduced-motion respeitado (acessibilidade) — animações desligam para usuários sensíveis",
+        "JS blindado para o stub de DOM: guardas de getAttribute/textContent e fallback de requestAnimationFrame (setTimeout → valor final)",
+        "Validação: smoke_dom_stub → SMOKE_OK (0 runtime errors, classe R580)"
+      ],
+      "score": null,
+      "lessons": [
+        "Stub de DOM do Core é mínimo: não implementa getAttribute nem requestAnimationFrame — JS de deck precisa de guardas defensivas (typeof check) e fallback sem animação",
+        "Hook js-smoke roda ANTES da gravação do Write/Edit (lê versão anterior) — correções negadas pelo hook devem ser aplicadas via filesystem MCP e validadas manualmente",
+        "Animações didáticas profissionais: duração ≤1.6s, easing suave, atraso escalonado (stagger 80-160ms), sem loop infinito chamativo — exceto decorativos discretos (folhas, ondas, TV)",
+        "Elemento ilustrativo que NÃO é dado (barras antes/depois) exige legenda explícita para não virar overclaim visual na banca",
+        "prefers-reduced-motion é obrigatório em decks acadêmicos — auditar antes de declarar pronto"
+      ],
+      "timestamp": 1791279718.5914829,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R699",
+      "objective": "Ciclo R699: corrigir confusão visual do gráfico antes/depois no slide 9 do deck MIRA — semântica de barras inconsistente (verde ora menor, ora maior) e rótulos desconectados.",
+      "changes": [
+        "Escala única de 'intensidade da dificuldade' (0-100): todas as barras verdes (depois) agora são menores que as vermelhas (antes) nos 4 domínios",
+        "Domínio 'Interação social' renomeado para 'Dificuldade de interação social' — métrica invertida para manter direção visual consistente (70→28)",
+        "Rótulos 'muito alto/moderado/baixo' removidos (pareciam desconectados) — substituídos por percentual fixo na ponta de cada barra (88→42, 92→46, 70→28, 85→40)",
+        "Descrições qualitativas movidas para baixo de cada barra, alinhadas após o rótulo Antes/Depois",
+        "Legenda de eixo única no topo: 'escala de 0 a 100 · ilustrativa, não é medida padronizada' + frase de leitura no rodapé: 'vermelha sempre maior que verde'",
+        "Trilho de fundo escuro para as barras (contraste e alinhamento visual)",
+        "Validação: smoke_dom_stub → SMOKE_OK; hash novo e0021e3b..."
+      ],
+      "score": null,
+      "lessons": [
+        "Gráfico de barras com métricas opostas no mesmo eixo (sintoma cai vs habilidade sobe) confunde — unificar para 'dificuldade' e inverter o indicador, mantendo direção visual única",
+        "Rótulos de intensidade qualitativos ('muito alto') à direita sem ancoragem visual parecem texto solto — usar percentual na ponta da barra e descrição embaixo",
+        "Toda ilustração quantitativa de dado não medido exige legenda dupla: escala única no topo + frase de leitura no rodapé"
+      ],
+      "timestamp": 1791280016.0959284,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R700",
+      "objective": "Ciclo R700: tornar visível a animação do trilho sala→rua no slide 3 do deck MIRA — antes os SVGs tinham 90px fixos e baixo contraste, sumindo num slide de tela cheia.",
+      "changes": [
+        "SVGs do trilho redesenhados e ampliados: TV 150x110 (antes 90x64), seta 130x110, cena da rua 190x110 com corpo+cabeça nos bonecos",
+        "Palco destacado: container .trilho-wrap com fundo translúcido, borda verde e cantos arredondados — a animação ganha moldura própria",
+        "Contraste reforçado: contorno da TV em verde #3f9d71 (antes cinza #9db8aa), traços da tela 3.4px (antes 1.6px), seta 5px dourada",
+        "Largura responsiva: width:min(100%,190px) com height:auto — ilustrações escalam no slide sem sumir",
+        "Textos dos estágios em <span> com fonte maior (clamp 12-16px) e centralizados em coluna flex",
+        "Validação: smoke_dom_stub → SMOKE_OK; hash a2a8a752..."
+      ],
+      "score": null,
+      "lessons": [
+        "SVG com width fixo em px não escala em deck fullscreen — usar width:min(100%,Xpx)+height:auto e viewBox como contrato",
+        "Ilustração animada precisa de palco próprio (fundo/borda) para competir com cards de texto — senão vira ruído visual",
+        "Contorno em cinza-médio sobre fundo verde-escuro tem contraste insuficiente — contornar elementos-chave com a cor de acento"
+      ],
+      "timestamp": 1791280269.9597733,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R701",
+      "objective": "Ciclo R701: converter o deck MIRA HTML em slides PPTX editáveis, preservando formatação (tema, cards, textos, gráfico de barras) e aproximando as animações com efeitos nativos do PowerPoint (Fade escalonado + transições).",
+      "changes": [
+        "gerar_pptx.py: conversor deck→PPTX 16:9 com python-pptx (fundo escuro, cards arredondados, paleta verde/ouro, Segoe UI)",
+        "14 slides com conteúdo idêntico ao HTML; Quadro 2 (barras) redesenhado como shapes retangulares proporcionais (88→42, 92→46, 70→28, 85→40) em vermelho/verde",
+        "Animações nativas via XML de timing: 72 efeitos de entrada Fade (presetID 10) escalonados 90-200ms + transição Fade em todos os 14 slides",
+        "Corrigido XMLSyntaxError de namespace (parse_xml exige xmlns:p declarado) e animações dos slides 1 e 14",
+        "Validação: 14/14 slides com timing+transição; 100% dos spids referenciam shapes reais; slide 9 com 40 shapes e 13 efeitos; conteúdo textual conferido",
+        "Limite declarado: contadores numéricos, barras crescendo e seta desenhando não têm equivalente nativo — viraram números finais e formas estáticas com fade",
+        "Limite de ambiente: LibreOffice 26.2 headless não importa NENHUM pptx (nem arquivo mínimo de teste) — verificação visual por conversão foi impossível; validação ficou programática"
+      ],
+      "score": null,
+      "lessons": [
+        "pptx.oxml.parse_xml exige xmlns:p declarado no fragmento — sem isso, lxml levanta XMLSyntaxError de prefixo indefinido",
+        "Efeitos de entrada exigem mainSeq com pars aninhados (indefinite → delay → clickEffect presetID 10) + spTgt com spid real; presetID 10 = Fade",
+        "Transição vai após p:clrMapOvr e antes do timing (ordem do schema CT_Slide)",
+        "PEP 668 bloqueia pip do sistema: usar venv isolado em /tmp para dependências de geração (python-pptx)",
+        "Quando o conversor visual do ambiente falha para um formato, validar programaticamente (reabrir o arquivo, checar referências internas, contar efeitos) e declarar o limite"
+      ],
+      "timestamp": 1791282434.8121622,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R702",
+      "objective": "Ciclo R702: granularizar o pipeline do relato TDAH em artefatos reutilizáveis PARA A ORQUESTRAÇÃO DO CORE — agentes no catálogo + Blackboard, MCP registrado, skill invocável e hook fail-closed.",
+      "changes": [
+        "5 agent cards em agents/catalog/ (tdah-gap-hunter, abnt-latex-modular, bibtex-crossref-auditor, docx-abnt-converter, mira-deck-academico) no formato frontmatter do Core",
+        "MCP integrations/artigo_academico_mcp.py com 4 ferramentas funcionais (auditar_referencia via Crossref, verificar_citacoes, pipeline_status, validar_deck) no padrão scanners_mcp_server (validate_arguments, CallToolResult fallback, stdio_server)",
+        "Skill .opencode/skills/artigo-academico-abnt/SKILL.md com fluxo M0-M6, bloqueadores e hooks associados",
+        "Hook .opencode/hooks/latex_cite_guard.sh (fail-closed, DENIED em citação sem entrada no .bib) — testado: ALLOW no artigo (15/15)",
+        "MCP registrado em integrations/opencode_cli.py → opencode.json: 243 agentes, 12 MCPs (artigo-academico-mcp incluído)",
+        "5 agentes registrados em runtime no Blackboard (mci_register_agent) — roteamento imediato",
+        "Testes: MCP verificar_citacoes (15/15, indefinidas=0), pipeline_status (19 artefatos), validar_deck (14 slides, SMOKE_OK); import sem SyntaxWarning"
+      ],
+      "score": null,
+      "lessons": [
+        "MCPs do Core não são autodescobertos — registrar manualmente em integrations/opencode_cli.py e regenerar opencode.json",
+        "Servidor MCP novo deve espelhar exatamente o esqueleto de referência (app=Server, TOOL_SCHEMAS, validate_arguments, CallToolResult fallback, main com stdio_server)",
+        "Hook fail-closed testa ANTES da gravação — correções negadas devem ir por outra ferramenta e validação manual",
+        "Docstrings com \\cite geram SyntaxWarning em Python 3.12+ — usar \\\\ em docstrings de MCPs",
+        "Granularização só vale para a orquestração se fechar as 4 camadas: catálogo (arquivo) + Blackboard (runtime) + MCP (ferramenta) + hook (guarda)"
+      ],
+      "timestamp": 1791360042.7041473,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R703",
+      "objective": "Ciclo R703 (Fase A): integrar o bundle Pesquisador Universal v4.1 ao pipeline do artigo (R702) — adotar 6 contratos JSON como validação da metade de evidência + 2 ferramentas MCP + upgrade do gap-hunter.",
+      "changes": [
+        "6 schemas copiados byte-idênticos para research/v41_contracts/ com PROVENANCE.md (origem, commit, hashes, nota anti-overclaim sobre o placar 96,7)",
+        "MCP artigo-academico-mcp: +registrar_triagem (triagem.jsonl conforme screening-decision; etapas title_abstract/full_text; decisões incluir/excluir/duvida) e +emitir_manifesto (MANIFESTO.json conforme release-manifest)",
+        "Testes reais: 2 decisões registradas (include/exclude) + manifesto com 19 artefatos e 15 refs; ambos conformes aos schemas (required presentes, decision_id no padrão SCR-HEX)",
+        "Card tdah-gap-hunter atualizado para triagem auditável por estudo via contratos",
+        "opencode.json regenerado (conteúdo do card sincronizado)"
+      ],
+      "score": null,
+      "lessons": [
+        "Composição, não substituição: v4.1 fortalece a metade de evidência do R702; a metade de produção (LaTeX/DOCX/deck) não tem contraparte e permanece",
+        "Placares de comparação do bundle (96,7 × 69,7) são autoavaliação heurística dos autores — citar como tal, nunca como benchmark externo",
+        "Não importar bundle inteiro: PR draft + CI não aprovada + escopo alheio (volumes de alfabetização, podcast NLM); adotar contratos pontuais com proveniência",
+        "Schemas sem comentários JSON: proveniência vai em PROVENANCE.md separado, preservando bytes e hashes verificáveis",
+        "Novos tools MCP não exigem regen de opencode.json (só servidores); mas cards editados sim — regenerar após qualquer card"
+      ],
+      "timestamp": 1791360721.8646474,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R704",
+      "objective": "Ciclo R704: buscar no GitHub MCPs e skills que melhorem orquestração, pesquisa científica e produção de manuscritos/LaTeX — curadoria com trust gate, teste ao vivo e integração dos aprovados.",
+      "changes": [
+        "Skill awesome-mcp-servers carregada como governança (referência-primeiro + trust gate: sem LICENSE=degraded, API key só com ordem explícita)",
+        "Pesquisa em 4 frentes: MCPs arXiv (8), MCPs LaTeX (8), skills acadêmicas (8), MCPs de orquestração (7+)",
+        "arxiv-mcp (blazickjp, Apache-2.0, PyPI, MCP Registry): 19 tools via stdio + busca real funcional; registrado como arxiv-mcp (uvx, sem auth)",
+        "latexmk-mcp (coolport, MIT v1.1.3, npm, CI): 11 tools via stdio incl. latexmk_list_citations; registrado como latexmk-mcp (npx, sem auth)",
+        "mcp-latex (marcelogdomingues): REPROVADO no gate — pacote sumiu do npm (404); adiado com motivo",
+        "Orquestradores externos (task-orchestrator, task-graph, TaskFlow): adiados — sobrepõem Blackboard/A2A do Core",
+        "Skills acadêmicas (Calix-L, Yila-AI, tahaturkistanli, bahayonghang): referência com receitas, sem vendored code",
+        "opencode.json: 243 agentes, 14 MCPs; skill de curadoria atualizada com tabela R704"
+      ],
+      "score": null,
+      "lessons": [
+        "Teste ao vivo via stdio (initialize + tools/list + tools/call) é o único gate que importa — README promete, protocolo prova",
+        "stdin EOF mata o servidor MCP antes da resposta lenta: manter stdin aberto (sleep) durante tools/call de rede",
+        "Pacote npm pode sumir mesmo com badge no README (mcp-latex 404) — verificar registry antes de documentar receita",
+        "MCPs de orquestração externa competem com o Blackboard em vez de compor — federar só o que preenche lacuna (arXiv, LaTeX), não o que duplica o Core",
+        "Skills de terceiros: federar por referência + receita (não vendoring) até necessidade comprovada com licença checada"
+      ],
+      "timestamp": 1791361280.8141599,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R705",
+      "objective": "Ciclo R705: federar o Claim-Strength Contract (Yila-AI) para endurecer o anti-overclaim do Core — contrato adaptado + guarda heurística + ferramenta MCP auditar_forca_alegacao + calibração bidirecional.",
+      "changes": [
+        "research/claim_strength/CONTRACT.md: adaptação própria em PT (escada, distinções, marcadores, regra de autorização, posição do relato TDAH) com crédito prescrito e nota de limite de licença (corpo do LICENSE ilegível por robots; confirmar por humano antes de redistribuir)",
+        "research/claim_strength/guard.py: triagem heurística PT/EN (causação L6, efeito L5, predição L4, absolutos) com mitigadores e exceções documentadas",
+        "MCP artigo-academico-mcp: +auditar_forca_alegacao (7 ferramentas no servidor)",
+        "Skill artigo-academico-abnt M5: verificação inclui o Contrato (nenhuma frase acima de 'é coerente com' sem evidência nova)",
+        "Calibração: artigo real 133 frases → 2 achados descartáveis em segundos (declaração de integridade + fragmento garfado do PDF); adversarial 3 frases → 6 achados (sensibilidade total)",
+        "opencode.json regenerado (skill sincronizada)"
+      ],
+      "score": 60.0,
+      "lessons": [
+        "Reuso com crédito prescrito + redação própria + nota de limite de licença é o caminho fail-closed quando o LICENSE não é legível por fetch",
+        "Guarda heurística calibra-se nos dois sentidos: sensibilidade no adversarial E especificidade no texto bem escrito — falsos positivos documentados valem mais que silêncio",
+        "Classes de falso positivo em PT acadêmico: frequências temporais ('todos os dias'), substantivos homógrafos de verbos ('melhora'), absolutos mitigados ('quase todos', 'não elimina'), declarações administrativas",
+        "Loop de absolutos deve respeitar mitigadores igual ao loop de níveis — senão 'quase todos' e 'Financiamento: nenhum' viram achados fantasmas",
+        "Guarda é triagem, não prova: saída 'sem achados' nunca equivale a aprovação científica — decisão final sempre humana"
+      ],
+      "timestamp": 1791361580.7652278,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R707",
+      "objective": "Ciclo R706: expandir o pipeline pontual do relato TDAH em motor de produção em escala (research/manuscript/) para qualquer artigo científico — SPEC, config validada, scaffold isolado, conversor DOCX genérico, helpers PPTX, gates, lote e testes herméticos.",
+      "changes": [
+        "SPEC-935-R706 com 8 critérios de aceitação (todos cumpridos)",
+        "research/manuscript/: config.py (5 tipos, validação fail-closed), scaffold.py (workspace isolado, sem sobrescrita sem force), gates.py (reusa MCP+guarda), pipeline.py (produzir/produzir_lote com isolamento de falhas)",
+        "texparse.py: parser compartilhado (escapes, runs, citações do .aux, blocos, tabular com colunas aninhadas, .bbl)",
+        "docx_builder.py genérico: refs do .bbl + tabelas do tabular — provado no artigo real (65 parágrafos, 2 tabelas, 15 refs)",
+        "pptx_theme.py: paleta + cartão + barra neutros de conteúdo, import guardado",
+        "tests/test_r706_manuscript_scale.py: 16/16 GREEN (RED→GREEN visível em 2 falhas: spec de coluna aninhada e zip comprimido)",
+        "Demo: scaffold + gates + lote de 2 artigos fictícios em /tmp; gate acusa citação indefinida (fail-closed funciona)",
+        "Skill M0 com modo lote; opencode.json regenerado"
+      ],
+      "score": null,
+      "lessons": [
+        "Regex de spec tabular {[^{}]*} quebra em colunas p{2cm} — usar padrão com chaves aninhadas",
+        "DOCX é zip comprimido: teste de conteúdo deve ler word/document.xml, nunca bytes crus",
+        "Motor não gera conteúdo científico — separa estrutura/validação (máquina) de texto (orquestrador); fronteira explícita evita overclaim de autoria",
+        "Lote com isolamento try/except por artigo: falha de um nunca derruba os demais; tabela-resumo é o contrato de saída",
+        "produzir() chama manifesto com subprocess git interno — testes herméticos exigem monkeypatch do runner, não do teste"
+      ],
+      "timestamp": 1791361991.041994,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R709",
+      "objective": "Ciclo R708: elo de descoberta científica auditável (research/discovery/) — desenho falsificável, inferência com incerteza medida, validação e relato calibrado + pacote de replicação, para elevar relevância real dos artigos (efeito quantificado, nunca 'prova').",
+      "changes": [
+        "SPEC-935-R708 com 7 ACs (todos cumpridos); estatística definida como corroboração, não prova",
+        "research/discovery/: design.py (PICO+H0/H1+falsificação+poder/amostra), analysis.py (descritiva, Welch, Pearson, Cohen, IC — sempre com n/p/IC/efeito), validate.py (Holm, Shapiro, suposições), report.py (seção com [RESULTADO]+limitações obrigatórias, pacote_replicacao com hash)",
+        "tests/test_r708: 11/11 GREEN (RED→GREEN: parêntese de Welch-Satterthwaite e minha expectativa errada de Holm — o código estava certo)",
+        "Demo sintética rotulada (seed 42, n=30): Welch p<0,0001 d=1,24; Pearson r=-0,46; Holm; seção com limitações — nenhum número apresentado como achado",
+        "Skill M3: resultados quantitativos via discovery quando houver CSV real; sem dados, protocolo"
+      ],
+      "score": null,
+      "lessons": [
+        "Implementação correta pega erro de expectativa do autor: Holm para [0.001,0.02,...] — meu teste estava errado, o código certo (0.02 > 0.05/3 para)",
+        "Regra de ouro do pacote: saída sempre com n + estatística + p + IC + efeito; p sozinho é proibido por construção",
+        "Reportar exige limitações (ValueError sem elas) — a API impõe honestidade em vez de pedi-la",
+        "Demo sintética é legítima se rotulada DEMONSTRAÇÃO em desenho, dados e seção — três camadas de marcação, não uma",
+        "Relevância de artigo = gap + poder adequado + correção + replicação + pré-registro (mci/preregistration_protocol já existe) — checklist, não inspiração"
+      ],
+      "timestamp": 1791362329.2402704,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R711",
+      "objective": "Ciclo Fase B: inferência causal (DID/IV/RDD), Bayesiana conjugada e modelos mistos leves com skill, 2 agentes, 4 ferramentas MCP, 1 plugin (skill) e 1 hook guarda-causal — tudo testado e registrado.",
+      "changes": [
+        "SPEC-935-R710 com 7 ACs (todos cumpridos); limites declarados (McCrary, Sargan, MCMC, staggered fora)",
+        "research/discovery/causal.py: DID + p por permutação; IV-2SLS manual + F com alerta F<10; RDD linear local + bandas h/2,2h + placebos",
+        "research/discovery/bayes.py: posterior Normal-Normal fechada + IC crível + P(θ>0) + sensibilidade a 2 priors, prior sempre registrado",
+        "research/discovery/mistos.py: ICC ANOVA + EP sanduíche CR0; fail-closed em grupo unitário",
+        "tests/test_r710_fase_b.py: 9/9 GREEN (RED→GREEN: KeyError→ValueError no did; expectativa Holm corrigida)",
+        "Skill inferencia-quantitativa-avancada + 2 cards (inferencia-causal-did-iv-rdd, modelagem-bayesiana-mista) no catálogo e no Blackboard",
+        "MCP artigo-academico-mcp: +estimar_did, +estimar_iv, +atualizar_bayes, +icc_cluster (CSV inline, teto 50k linhas) — 11 ferramentas, despacho real testado",
+        "Hook causal_claim_guard.sh: nega verbo causal sem desenho; calibrado em 3 cenários (TDAH ALLOW por 'experimento' real; adversarial DENIED; 'didáticos' não gera anistia falsa após fix Unicode)",
+        "opencode.json: 245 agentes, 14 MCPs; 36/36 testes verdes (R706+R708+R710)"
+      ],
+      "score": null,
+      "lessons": [
+        "Siglas em regex multilíngue exigem fronteira Unicode explícita ([^A-Za-zÀ-ÿ]) + case-sensitive separado — 'didáticos' vira falso 'DID' com [^a-z] sob -i",
+        "Hook fail-closed testa TDAH real (ALLOW correto), adversarial (DENIED) e armadilha Unicode — 3 cenários mínimos para qualquer guarda",
+        "MCP com CSV inline evita acoplamento a arquivos do repo e é testável por despacho real; teto de linhas é fail-closed contra abuso",
+        "Minha expectativa de Holm errada de novo seria repetida sem teste com valor calculado à mão (0.02 > 0.05/3) — teste com aritmética verificável, não intuição",
+        "Fase B fecha o ciclo R708: associação (Fase A) → causa sob desenho (B) → manuscrito calibrado (R706) → banca (MIRA)"
+      ],
+      "timestamp": 1791363007.6950583,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R712",
+      "objective": "R711 pesquisador polimata GitHub: allowlist auditada + roteiro clonagem com hashes",
+      "changes": [
+        "specs/SPEC-935-R711-pesquisador-polimata-github.md",
+        "integrations/github_polymath_labs.py",
+        "tests/test_r711_pesquisador_polimata_github.py"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Allowlist fechada fail-closed evita importacao inadvertida; manifesto sem rede ancora auditoria; licencas a confirmar bloqueiam federacao; recuperacao lexical != treinamento."
+      ],
+      "timestamp": 1791364591.0521612,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R713",
+      "objective": "R712 superficies polimata: MCP+3 agentes+skill+hooks+scanner",
+      "changes": [
+        "specs/SPEC-935-R712-polimata-superficies.md",
+        "integrations/polymath_labs_mcp.py",
+        "hooks/polymath_labs_guards.py",
+        "scanners/polymath_labs_scanner.py",
+        "agents/catalog/46_agente_pesquisador_polimata.md",
+        "agents/catalog/47_agente_laboratorio_reproduzivel.md",
+        "agents/catalog/48_agente_auditoria_reprodutibilidade.md",
+        ".opencode/skills/pesquisador-polimata-labs/SKILL.md",
+        "tests/test_r712_polimata_superficies.py"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "MCP fino sobre R711 sem rede; hooks deny vencem; scanner pronto exige 7 tipos+licencas ok+manifesto+HEAD+hash; skill sem promessa de aceite."
+      ],
+      "timestamp": 1791364896.9317005,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R714",
+      "objective": "R713 pinagem viva 90d + gate federacao sem rede no teste",
+      "changes": [
+        "specs/SPEC-935-R713-pinagem-viva-federacao.md",
+        "integrations/polymath_pinagem.py",
+        "tests/test_r713_pinagem_federacao.py",
+        "integrations/polymath_labs_mcp.py (pinar_lab/revalidar_federacao)",
+        ".opencode/skills/pesquisador-polimata-labs/SKILL.md",
+        "scanners/polymath_labs_scanner.py (+pin_fresco)"
+      ],
+      "score": 0.87,
+      "lessons": [
+        "Fetcher injetavel ancora TDD hermetico; fora-allowlist nunca chama rede; undeclared+repro incompleta bloqueia; viva exige consentimento e decisao humana."
+      ],
+      "timestamp": 1791366178.5735798,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R715",
+      "objective": "R714 executor vivo: 8 federaveis/13 bloqueados sem token, trilha auditada",
+      "changes": [
+        "specs/SPEC-935-R714-executor-vivo-pinagem.md",
+        "integrations/polymath_pinagem_viva.py",
+        "tests/test_r714_pinagem_viva.py",
+        "/tmp/polymath_vivo_real/federacao_gate.json"
+      ],
+      "score": 0.86,
+      "lessons": [
+        "Viva tolera 404/limite por lab; licenca API exige confirmacao manual; janela 90d bloqueia templates estáveis; sem token 8/21 federaveis; decisao humana preservada."
+      ],
+      "timestamp": 1791366633.8544233,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R716",
+      "objective": "R715 federacao por classes: 16 propostos/5 retidos com licencas vivas",
+      "changes": [
+        "specs/SPEC-935-R715-federacao-classes.md",
+        "integrations/polymath_federacao.py",
+        "tests/test_r715_federacao_classes.py",
+        "integrations/github_polymath_labs.py (ai-scientist custom)",
+        "/tmp/polymath_federacao/federacao_proposta.json"
+      ],
+      "score": 0.89,
+      "lessons": [
+        "Janela por classe recupera templates estaveis; LICENSE viva corrige API sem token; AI Scientist custom bloqueia sem juridico; CC-BY com idade estourada permanece retido."
+      ],
+      "timestamp": 1791368258.9350748,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R717",
+      "objective": "R716 intencoes sem auto-federar: 16 aguardando + 5 retidas",
+      "changes": [
+        "specs/SPEC-935-R716-intencoes-federacao.md",
+        "integrations/polymath_intencoes.py",
+        "tests/test_r716_intencoes.py",
+        "/tmp/polymath_intencoes/intencoes.json"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Proposto nunca vira federado; aprovada exige artefato local R621; retido nunca vira intencao; humano literal exigido."
+      ],
+      "timestamp": 1791368735.8774981,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R718",
+      "objective": "R717 lote piloto 3+1 em copia, original intacto",
+      "changes": [
+        "specs/SPEC-935-R717-lote-piloto.md",
+        "integrations/polymath_lote.py",
+        "tests/test_r717_lote_piloto.py",
+        "/tmp/polymath_intencoes_piloto/lote_piloto.json"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Piloto em copia preserva original; ja-decidida aborta lote; exemplo exige ratificacao antes de R621."
+      ],
+      "timestamp": 1791369032.8415675,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R719",
+      "objective": "R718 readiness piloto: 0 prontas, pendencias clone+override",
+      "changes": [
+        "specs/SPEC-935-R718-readiness.md",
+        "integrations/polymath_readiness.py",
+        "tests/test_r718_readiness.py",
+        "/tmp/polymath_intencoes_piloto/readiness.json"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Aprovada sem clone nunca e pronta; pin bloqueado exige override religado; diagnostico orienta proximo passo fisico."
+      ],
+      "timestamp": 1791371990.0864077,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R720",
+      "objective": "R719 aquisicao auditada 3 clones + readiness 2 prontas",
+      "changes": [
+        "specs/SPEC-935-R719-aquisicao.md",
+        "integrations/polymath_aquisicao.py",
+        "tests/test_r719_aquisicao.py",
+        "/tmp/polymath_clones/aquisicoes.jsonl"
+      ],
+      "score": 0.89,
+      "lessons": [
+        "Allowlist+aprovada antes de subprocesso; depth1 sem execucao; override supre licenca no readiness mas pin bloqueado exige re-pin ou aceite documentado."
+      ],
+      "timestamp": 1791374472.6964173,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R721",
+      "objective": "R720 inventario autonomo 2 prontas sem rede",
+      "changes": [
+        "specs/SPEC-935-R720-inventario-autonomo.md",
+        "integrations/polymath_inventario.py",
+        "tests/test_r720_inventario.py",
+        "/tmp/polymath_intencoes_piloto/relatorio_autonomo.json"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Local-first extrai valor sem decisao nova; marcos+hash orientam R621; sympy/12 intactos."
+      ],
+      "timestamp": 1791375347.2805283,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R722",
+      "objective": "R721 minuta R621 2 propostas sem federar",
+      "changes": [
+        "specs/SPEC-935-R721-minuta.md",
+        "integrations/polymath_minuta.py",
+        "tests/test_r721_minuta.py",
+        "/tmp/polymath_intencoes_piloto/minuta_r621.json"
+      ],
+      "score": 0.89,
+      "lessons": [
+        "Descricao do README com fallback R711; source_path legivel com hash; minuta nunca federa sem ratificacao."
+      ],
+      "timestamp": 1791380601.6463764,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R723",
+      "objective": "R722 pareceres 8 e 10 sem decidir",
+      "changes": [
+        "specs/SPEC-935-R722-parecer.md",
+        "integrations/polymath_parecer.py",
+        "tests/test_r722_parecer.py",
+        "/tmp/polymath_intencoes_piloto/pareceres.json"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Maturidade por marcos orienta ratificacao; pgmpy sem tests na raiz exige checagem; opiniao nunca decide."
+      ],
+      "timestamp": 1791387233.0387955,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R724",
+      "objective": "R723 dossie 7 artefatos com hashes para leitura unica",
+      "changes": [
+        "specs/SPEC-935-R723-dossie.md",
+        "integrations/polymath_dossie.py",
+        "tests/test_r723_dossie.py",
+        "/tmp/polymath_intencoes_piloto/dossie_final.json"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Dossie fecha ciclo autonomo sem decidir; hashes permitem rechecagem com sha256sum."
+      ],
+      "timestamp": 1791396311.9639335,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R725",
+      "objective": "R724 decisao titular + rede + federacao polimata 2 labs",
+      "changes": [
+        "specs/SPEC-935-R724-decisao-rede-federacao.md",
+        "integrations/polymath_federar.py",
+        "tests/test_r724_federar.py",
+        "workbench/rede_polimata/nodos.json",
+        "workbench/rede_polimata/federados.json"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Titular decide com ordem literal; rede propria sem harness; federado_no_escopo_polimata com cadeia; 14 seguem aguardando."
+      ],
+      "timestamp": 1791396867.110053,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R726",
+      "objective": "R725 decisao nominal das 14 restantes (2/14/0)",
+      "changes": [
+        "specs/SPEC-935-R725-decisao-14.md",
+        "/tmp/polymath_federacao_final/intencoes.json",
+        "/tmp/polymath_federacao_final/decisoes_humanas.jsonl (16 linhas)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Barra preservada: sem triade sem aprovacao; motivo individual por dias/janela/licenca/cadeia; rejeicao e aguardar cadeia, nao veto."
+      ],
+      "timestamp": 1791400365.86022,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R727",
+      "objective": "R726 cadeia lote2 dowhy+causalpy pronta para decidir",
+      "changes": [
+        "specs/SPEC-935-R726-cadeia-lote2.md",
+        "/tmp/polymath_lote2 (2 aprovadas, clones, readiness 2, minuta 2, pareceres 8/6)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Prioritarios com pin fresco viram cadeia em 1 turno; CausalPy sem tests na raiz exige checagem; lote2 isolado preserva final 2/14."
+      ],
+      "timestamp": 1791400512.2908661,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R728",
+      "objective": "R727 rede+federados 2->4 idempotente",
+      "changes": [
+        "specs/SPEC-935-R727-rede-4.md",
+        "integrations/polymath_federar.py (url)",
+        "integrations/polymath_minuta.py (url)",
+        "workbench/rede_polimata/nodos.json (4)",
+        "workbench/rede_polimata/federados.json (4)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Minuta com url elimina adivinhacao por slug; merge idempotente preserva historia; compat com minutas sem url."
+      ],
+      "timestamp": 1791400688.1266537,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R729",
+      "objective": "Dossie final + adendo rede 4",
+      "changes": [
+        "/tmp/polymath_dossie_final/dossie_final.json",
+        "/tmp/polymath_dossie_final/adendo_rede_4.json"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Dossie de 7 artefatos + adendo rede 4 fecha leitura unica; pendencias viram proximos lotes."
+      ],
+      "timestamp": 1791401504.4469519,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R730",
+      "objective": "R728 cadeia scir com nota GPL (clone 530M)",
+      "changes": [
+        "specs/SPEC-935-R728-cadeia-scir.md",
+        "/tmp/polymath_lote3_scir (1 aprovada, readiness 1, minuta 1, parecer 5 + GPL)"
+      ],
+      "score": 0.87,
+      "lessons": [
+        "GPL viva exige nota copyleft antes de federar; clone 530M pressiona disco — pesar depth/blobless no futuro."
+      ],
+      "timestamp": 1791401622.17689,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R731",
+      "objective": "R729 cadeia aweai matura 9 sem riscos",
+      "changes": [
+        "specs/SPEC-935-R729-cadeia-aweai.md",
+        "/tmp/polymath_lote4_aweai (1 aprovada, readiness 1, minuta 1, parecer 9)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "File-as-Bus converge com Blackboard; 1964 arq pedem inventario limitado; scir segue aguardando aceite GPL."
+      ],
+      "timestamp": 1791401992.7062962,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R732",
+      "objective": "R730 rede+federados 4->5 com aweai",
+      "changes": [
+        "specs/SPEC-935-R730-rede-5.md",
+        "workbench/rede_polimata/nodos.json (5)",
+        "workbench/rede_polimata/federados.json (5)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Cadeia limpa MIT estende sem friccao; scir segue aguardando aceite GPL explicito."
+      ],
+      "timestamp": 1791402181.0465515,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R733",
+      "objective": "R731 rede 5->6 com scir sob aceite GPL",
+      "changes": [
+        "specs/SPEC-935-R731-rede-6-scire.md",
+        "/tmp/polymath_lote3_scir/aceite_gpl.json",
+        "workbench/rede_polimata (6 nodos/federados)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Aceite literal de copyleft viabiliza referencia sem contaminacao; federado carrega nota_gpl."
+      ],
+      "timestamp": 1791402383.5287929,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R734",
+      "objective": "R732 cadeia z3 com override suprindo pin-licenca",
+      "changes": [
+        "specs/SPEC-935-R732-cadeia-z3.md",
+        "integrations/polymath_readiness.py (pin suprido)",
+        "/tmp/polymath_lote5_z3 (readiness 1, inv 2874arq, minuta 1, parecer 5)"
+      ],
+      "score": 0.89,
+      "lessons": [
+        "Bloqueio so-licenca + override auditado supre pin (regra R715); clone z3 47M portsivel; sem rebaixar barra."
+      ],
+      "timestamp": 1791417354.6187453,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R735",
+      "objective": "R733 cadeia evidence Apache via DESCRIPTION",
+      "changes": [
+        "specs/SPEC-935-R733-cadeia-evidence.md",
+        "/tmp/polymath_lote6_evidence (readiness 1, inv 315arq, minuta 1, parecer 7)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "DESCRIPTION e prova viva de Apache; R sem pyproject gera ressalva honesta de manifesto."
+      ],
+      "timestamp": 1791417439.0568428,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R736",
+      "objective": "R734 rede+federados 6->8 com z3+evidence autorizados",
+      "changes": [
+        "specs/SPEC-935-R734-rede-8.md",
+        "workbench/rede_polimata/nodos.json (8)",
+        "workbench/rede_polimata/federados.json (8)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Override com sha do clone supre pin-licenca; merge idempotente com autorizacao literal."
+      ],
+      "timestamp": 1791417771.2697127,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R737",
+      "objective": "R735 trAIce + repro_audit com janela por classe; auditoria fecha tipo",
+      "changes": [
+        "specs/SPEC-935-R735-cadeias-traice-repro.md",
+        "integrations/polymath_readiness.py (janelas)",
+        "/tmp/polymath_lote7_traice (parecer 4)",
+        "/tmp/polymath_lote8_repro (parecer 8 sem riscos)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Janela supre so-idade nunca licenca; repro_audit 21arq fecha auditoria; trAIce 6arq pede cobertura."
+      ],
+      "timestamp": 1791417899.2617855,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R738",
+      "objective": "R736 rede+federados 8->10 com traice+repro autorizados",
+      "changes": [
+        "specs/SPEC-935-R736-rede-10.md",
+        "workbench/rede_polimata (10/10)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Cadeia limpa estende sem friccao; auditoria fecha tipo na rede."
+      ],
+      "timestamp": 1791417993.7483325,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R739",
+      "objective": "R737 terminal dos 8: 4 cadeias MIT + 5 retidas explicadas",
+      "changes": [
+        "specs/SPEC-935-R737-restantes.md",
+        "/tmp/polymath_lote9_rest (4 aprovadas, readiness 4, minuta 4, pareceres 7/4/4/4)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Guarda recusou retidas corretamente (atomicidade); MIT confirmado em API+arquivo+sha; 21 labs com estado terminal."
+      ],
+      "timestamp": 1791418182.389206,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R740",
+      "objective": "R738 rede+federados 10->14 com 4 MIT autorizados",
+      "changes": [
+        "specs/SPEC-935-R738-rede-14.md",
+        "workbench/rede_polimata (14/14)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "MIT triplo-confirmado estende sem friccao; 14/21 federados, 7 terminais retidos."
+      ],
+      "timestamp": 1791418294.2521398,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R741",
+      "objective": "R739 rede+federados 14->16 com z3+evidence",
+      "changes": [
+        "specs/SPEC-935-R739-rede-16.md",
+        "workbench/rede_polimata (16/16)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Overrides com sha do clone sustentam extensao; 16/21 federados, 5 retidos terminais."
+      ],
+      "timestamp": 1791418357.7263176,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R742",
+      "objective": "R739 errata: idempotencia comprovada, premissa corrigida",
+      "changes": [
+        "specs/SPEC-935-R739-rede-16.md (errata)",
+        "workbench/rede_polimata (14/14 intacta, merge vazio registrado)"
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Verificar pertencimento antes de estender; merge vazio e prova, nao falha; errata preserva trilha, R741 superscriptada."
+      ],
+      "timestamp": 1791418406.0871062,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R743",
+      "objective": "R740 passos 1+2: rede 14->15 sympy + 15->16 reasonkit = 16",
+      "changes": [
+        "specs/SPEC-935-R740-rede-16-real.md",
+        "workbench/rede_polimata (16/16)",
+        "/tmp/polymath_lote10_reasonkit (parecer 9 sem riscos)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Override BSD fecha sympy; reasonkit Apache vivo + 751arq; 16/21 federados."
+      ],
+      "timestamp": 1791418511.0452063,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R744",
+      "objective": "R741 MCP registrado (15) + provas persistidas",
+      "changes": [
+        "integrations/opencode_cli.py (polymath-labs-mcp)",
+        "opencode.json (15 MCPs)",
+        "workbench/polymath/INDICE.json",
+        "tests/test_r741_core_polimata.py"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Gerador como fonte unica evita deriva manual; /tmp e volatil, repo e custodia."
+      ],
+      "timestamp": 1791418868.0709476,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R745",
+      "objective": "R742 painel 16 sincronizado, commit pendente",
+      "changes": [
+        "specs/SPEC-935-R742-dashboard.md",
+        "workbench/polymath/DASHBOARD.md",
+        "tests/test_r742_dashboard.py"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Painel gerado de JSONs, nunca manual; commit só com ordem explicita."
+      ],
+      "timestamp": 1791418971.416385,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R746",
+      "objective": "R743 producao por escopos: persistencia + CI + registro divulgado",
+      "changes": [
+        "ffe146e (gerador+hunk MCP, json, ci-escopos, spec)",
+        "/home/marceloclaro/polymath_clones (1GB, REMAP+sha)",
+        "triagem 123 alheias arquivada"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Hunk cirurgico arriscado em arquivo compartilhado: divulgar co-mingled no corpo; quarentena por escopo sem tocar em teste alheio; /tmp nunca e custodia."
+      ],
+      "timestamp": 1791449010.7892232,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R747",
+      "objective": "R744 cadeias duraveis: 16 lotes, 89 arquivos, sha conferidos",
+      "changes": [
+        "specs/SPEC-935-R744-custodia-cadeias.md",
+        "workbench/polymath/cadeias/",
+        "tests/test_r744_custodia.py"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Efemero espelhado com manifesto vira custodia; /tmp volta a ser rascunho."
+      ],
+      "timestamp": 1791449303.418841,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R748",
+      "objective": "R745 vigia: 15 ok, 1 aviso (research-engine 2d)",
+      "changes": [
+        "specs/SPEC-935-R745-vigia.md",
+        "integrations/polymath_vigia.py",
+        "tests/test_r745_vigia.py",
+        "/tmp/polymath_vigia/vigia.json"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Frescor sem alarme apodrece; aviso_7d antecipa re-pin; agora injetavel ancora teste."
+      ],
+      "timestamp": 1791449703.6168706,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R749",
+      "objective": "R746 rodada 1-5: re-pin, retidos, quarentena, dossie, cota",
+      "changes": [
+        "workbench/polymath/labs_pins.json (re-pin 8/13)",
+        "workbench/polymath/COTA.md",
+        "workbench/polymath/DASHBOARD.md (regen)",
+        "/tmp/polymath_repin/retidos_recheck.json"
+      ],
+      "score": 0.89,
+      "lessons": [
+        "Sem token: 1 flake tolerado com pin anterior; quarentena inalterada sem tocar alheio; scir 52% da cota."
+      ],
+      "timestamp": 1791450096.503762,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R750",
+      "objective": "Recuperar arestas degradadas sem tocar logica alheia",
+      "changes": [
+        ".venv: scihub-cli, nlm, reasonix, colab-mcp shim",
+        "library indexar (outdated 1->0, books 2->3)",
+        "r673/r674: 82E+2F zerados"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Maioria das quebras de borda era ambiente ausente, nao logica; tig/runai sao upstream irrecuperavel local; reindexar antes de declarar outdated."
+      ],
+      "timestamp": 1791451597.058386,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R751",
+      "objective": "Corrigir YAML dos 6 agentes rejeitados (3 meus + 3 mesma classe)",
+      "changes": [
+        "agents/catalog/46,47,48 + bibtex/inferencia/modelagem: aspas em examples",
+        "r608 242->248 verde; r618+r380 verdes em cadeia"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "? nao-escapado em lista inline quebra o bootstrap silencioso; auditar o proprio diff antes de culpar outras frentes."
+      ],
+      "timestamp": 1791453208.8636346,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R752",
+      "objective": "Integridade: bugs proprios + sincronias mecanicas (r608/r618/r442-5/r110/r448/r455/r52/r211-msg)",
+      "changes": [
+        "agents 46-48 + 3 mesma-classe: aspas YAML",
+        "doctor: teto 1.5s em versoes",
+        "README/MANUAL/ARCHITECTURE/installer 238->248, 11->15 MCPs",
+        "gen_mod10 regenerado (248)",
+        "r52 UCI: estados documentados",
+        "requirements-dev inclui notebook"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Falha de borda propria primeiro; gerador antes de mao; teste defasado sincroniza, logica alheia nao se reescreve."
+      ],
+      "timestamp": 1791455521.9813538,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R753",
+      "objective": "Integridade plena: 11F+80E zerados com bisturi; 28F+2E mapeados aos donos",
+      "changes": [
+        "6 YAML com aspas (r608 verde, 248/248)",
+        "doctor teto 1.5s (r110 <5s)",
+        "docs 248/15 em 5 arquivos (r448/r455)",
+        "gen_mod10 248 (r618)",
+        "r52 UCI, r211-msg, requirements+nlm (r673/674)"
+      ],
+      "score": 0.91,
+      "lessons": [
+        "Globais Sweep proibido em arquivo compartilhado; gerador antes de mao; contagem defasada sincroniza, logica alheia documenta-se."
+      ],
+      "timestamp": 1791457756.1064317,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

@@ -31,10 +31,10 @@ mode: subagent
 temperature: 0.1
 permission:
   task:
-    *: deny
+    "*": deny
     contextscout: allow
   bash:
-    *: deny
+    "*": deny
     docker build *: allow
     docker compose up *: allow
     docker compose down *: allow

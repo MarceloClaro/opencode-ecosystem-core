@@ -1,0 +1,26 @@
+{
+  "plugin_id": "wolfram",
+  "operation": "evaluate",
+  "host_tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+  "arguments": {
+    "code": "p={{{3,3},{0,5}},{{5,0},{1,1}}}; profiles=Tuples[Range[2],2];\nnash=Select[profiles,Function[s,And@@Table[p[[s[[1]],s[[2]],i]]>=Max[Table[Extract[p,Append[ReplacePart[s,i->a],i]],{a,2}]],{i,2}]]];\npareto=Select[profiles,Function[s,Not[AnyTrue[profiles,Function[t,And@@Thread[Extract[p,t]>=Extract[p,s]]&&Or@@Thread[Extract[p,t]>Extract[p,s]]]]]]];\nExportString[<|\"pure_nash\"->nash,\"pareto_profiles\"->pareto|>,\"JSON\"]",
+    "timeConstraint": 30
+  },
+  "intent": null,
+  "request_id": "7fd017ad79d64ea0976120b96ac66511",
+  "request_sha256": "fe922eab4143a814f459ab68ad5d07b614990a0b58bc7d89bb78e4cfb88d3788",
+  "status": "awaiting_host",
+  "executed": false,
+  "instruction": "O host autenticado chama host_tool com arguments e devolve um recibo vinculado. Não executar nomes como comandos shell.",
+  "metacognition": {
+    "observation_id": "1613ee75-eeb2-41bd-aa35-3c8f4c91fea9",
+    "persisted": true,
+    "scope_id": "aa47a17e38baaae564f6b1ae71b3d4cf6b10f8abfa3e75464771c9831305e364",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "awaiting_host"
+    },
+    "confidence_promoted": false
+  }
+}

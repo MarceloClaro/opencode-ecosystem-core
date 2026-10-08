@@ -1,0 +1,350 @@
+% ============================================================
+%  MÓDULO — História, Origem e Ciclos de Evolução
+% ============================================================
+\chapter{História, Origem e Ciclos de Evolução}
+
+\roteirodidatico
+{Uma funcionalidade atual pode ter vindo de uma decisão antiga, ter sido modificada ou estar apenas documentada. História técnica é reconstruir essa sequência, não presumir continuidade.}
+{\emph{Commit} registra uma mudança no Git; \emph{spec} descreve intenção e critérios; \emph{ciclo} registra uma etapa de evolução; \emph{proveniência} liga uma afirmação às suas fontes.}
+{Comece pelas datas e fontes primárias; relacione cada marco a arquivos e mudanças identificáveis; só então interprete como uma decisão influenciou a arquitetura atual.}
+{Uma sequência de versões não comprova causalidade nem sucesso. Para sustentar uma interpretação histórica, indique evidências, lacunas e explicações alternativas.}
+{Qual documento ou mudança verificável sustenta cada marco, e que parte da história permanece incerta?}
+
+\casoguiado{reconstituir uma funcionalidade}
+{Imagine que uma versão antiga acrescentou uma opção de configuração. A mensagem do commit informa o que mudou; a especificação pode explicar a necessidade; o código mostra a implementação presente; um teste pode indicar o comportamento coberto. Se esses registros não existirem ou não concordarem, descreva a lacuna. A cronologia ajuda a orientar a busca, mas não autoriza inventar a motivação que os registros não documentam.}
+
+\section{De onde veio o Core}
+
+\elemento{Origem: do OpenCode\_Ecosystem ao Core}{\metainfo{ID}{H-01} \hfill
+\metainfo{Camada}{0 — Fundação histórica} \hfill
+\metainfo{Proveniência}{\pth{CORRIGENDUM.md}}}
+
+\begin{conceito}
+Este ecossistema é o \textbf{Core} — a unidade de runtime, memória, qualidade e
+orquestração — nascido da unificação e porte do projeto original
+\textbf{MarceloClaro/OpenCode\_Ecosystem}. O acervo legado (\pth{specs/})
+preserva as especificações numeradas originais (SPEC-001 a SPEC-081+, incluindo o
+SPEC-038 do Trust Engine, os SPEC-022 a SPEC-025 da Token Economy e o SPEC-046 da
+integração Antigravity), garantindo rastreabilidade histórica das decisões de
+design.
+\end{conceito}
+
+\begin{descricao}
+Os commits mais antigos do repositório atual cuidam do \emph{provisionamento} do
+ambiente: detecção de Ubuntu no WSL (evitando \texttt{ERROR\_ALREADY\_EXISTS}),
+configuração de \texttt{sudoers} sem senha (instalação não-interativa), dependência
+\texttt{zstd} para o Ollama e correção do servidor MCP metacognitive-interconnect.
+Ou seja: a história começa com a \emph{infraestrutura funcionando} — e só depois
+com o código de negócio.
+\end{descricao}
+
+\begin{funcao}
+Explicar como decisões anteriores aparecem no repositório atual. Para cada
+componente, a relação com uma spec de origem deve ser confirmada nos arquivos; a
+numeração histórica, sozinha, não prova que houve porte completo. O
+\pth{CORRIGENDUM.md} registra alegações que precisaram ser corrigidas e delimita
+o que a evidência disponível permite afirmar.
+\end{funcao}
+
+\begin{niveis}
+\textbf{Intuição:} um laboratório de ``agentes'' que foi crescendo, cada melhoria
+guardando uma explicação escrita do motivo (a ``spec'').\\
+\textbf{Implementação:} migração história SPEC$\_{original} \to$ componentes do Core
+(\pth{economy/})
+com numeração de evolução continuada (R1--R46 $\to$ R47+).\\
+\textbf{Formalização:} engenharia de software dirigida a especificação (SPEC-driven) com
+cadeia de rastreabilidade origem$\to$implementação$\to$teste, mais autocorreção
+institucional de claims (CORRIGENDUM).
+\end{niveis}
+
+\section{As duas famílias de especificações}
+
+\begin{resultado}
+A pasta \pth{specs/} continha \textbf{371 arquivos Markdown} na conferência de
+29/09/2026. As famílias principais incluem:\par
+\smallskip
+
+{\footnotesize
+\begin{tabularx}{\textwidth}{lYl}
+\toprule
+Família & Papel & Exemplo \\
+\midrule
+\textbf{SPEC-001 a SPEC-029} & Especificações nativas do Core (SDD): MetaBus,
+Blackboard, Reflexion, Transformer, Orquestrador, Trust Engine, Token Economy,
+Scanners, MASWOS, Raciocínio, Ciclos, Integrações CLI, Mapa do Ecossistema &
+\pth{mci/metabus.py} \\
+\textbf{SPEC-935-R}\cod{*} & Série de evolução contínua do Core (285 arquivos) — regras de
+governança, pipeline científico, executores externos, otimizações & \cod{SPEC-935-R432},
+\cod{SPEC-935-R435} \\
+\textbf{Outras séries SPEC} & Projetos de conteúdo (livros, romances, PDFs, ilustrações)
+e integrações específicas & \cod{SPEC-935-R598},
+\cod{SPEC-935-R599} \\
+\bottomrule
+\end{tabularx}
+}
+
+\textbf{Fonte:} contagem de arquivos Markdown em \pth{specs/}, 29/09/2026.
+\end{resultado}
+
+\begin{aviso}
+Nem toda ``spec do acervo legado'' está materializada em código no Core atual —
+algumas são portadas em partes (migrations indicam explicitamente o que foi ou não
+carregado). Ler a spec não é prova de execução.
+\end{aviso}
+
+\clearpage
+\section{Ciclos de evolução: o "pulso" do ecossistema}
+
+\elemento{Ciclo de evolução (EvolutionRegistry)}{\metainfo{ID}{H-02} \hfill
+\metainfo{Camada}{5 — Evolução} \hfill \metainfo{Rota}{\pth{evolution/cycles.py}}}
+
+\begin{conceito}
+O arquivo \pth{evolution/cycles.json} continha \textbf{455 registros} na
+conferência de 29/09/2026. Um registro pode descrever uma mudança ou outra
+atividade evolutiva; para saber o que ocorreu, é preciso ler seu objetivo, as
+alterações e as evidências associadas. O modelo didático deste capítulo organiza
+uma mudança em seis etapas: identificar uma necessidade, localizar a solução,
+implementá-la, verificar o resultado, registrar a alteração e incorporar o
+aprendizado. É um roteiro para entender o processo; não significa que os 455
+registros tenham seguido exatamente as mesmas etapas.
+\end{conceito}
+
+\begin{metodo}
+\textbf{Pipeline de auto-evolução} (inspirado no motor \pth{autoevolve}):
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \textbf{SENSE} — identifica lacuna ou gargalo (ex.: um agente do catálogo
+        sem implementação robusta).
+  \item \textbf{DISCOVER} — localiza componente/skill catalógico candidato.
+  \item \textbf{INSTALL} — integra no \pth{evolution/} / no código do Core.
+  \item \textbf{VERIFY} — valida com os testes da família \pth{test_r*}.
+  \item \textbf{EVOLVE} — registra o ciclo via \pth{evolution_registry.record(...)}.
+  \item \textbf{LEARN} — a memória metacognitiva passa a enxergar a nova
+        capacidade.
+\end{enumerate}
+\end{metodo}
+
+\begin{flowch}[Modelo do ciclo de evolução]{fonte: \pth{evolution/} e motor \pth{autoevolve}; 3 fases por linha}
+\matrix[matrix of nodes,name=cy,row sep=4mm,column sep=4mm,nodes={fns},ampersand replacement=\&]{
+ |[fne]|SENSE \& |[fns]|DISCOVER \& |[fns]|INSTALL \\
+ |[fns]|LEARN \& |[fns]|EVOLVE \& |[fde]|VERIFY (testes) \\
+};
+\draw[seta] (cy-1-1)--(cy-1-2);
+\draw[seta] (cy-1-2)--(cy-1-3);
+\draw[seta] (cy-1-3)--(cy-2-3);
+\draw[seta] (cy-2-3)--(cy-2-2);
+\draw[seta] (cy-2-2)--(cy-2-1);
+\draw[seta,plumAccent,dashed] (cy-2-3.south) to[out=-90,in=-90,looseness=1.35]
+  node[below=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{falhou}
+  (cy-1-2.south);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como ler o desenho.} As setas ligam \emph{SENSE}, \emph{DISCOVER},
+\emph{INSTALL}, \emph{VERIFY}, \emph{EVOLVE} e \emph{LEARN}, nesta ordem.
+Assim, uma necessidade identificada leva à busca de uma solução; a solução é
+instalada, verificada e registrada; por fim, o aprendizado retorna ao sistema.
+A seta tracejada marcada ``falhou'' volta da verificação para a descoberta: um
+resultado reprovado exige revisar a solução antes de tentar novamente.
+\textbf{Justificativa.} A sequência separa a intenção da mudança, sua execução e
+a evidência de que o resultado atende ao critério. Essa separação favorece a
+reprodutibilidade porque permite a outra pessoa reconstruir o que foi alterado e
+qual evidência sustentou a conclusão. Peng discute a reprodutibilidade como um
+padrão mínimo para avaliar alegações científicas quando uma replicação
+independente completa não está disponível. A aplicação ao Core é uma analogia
+metodológica: o artigo não descreve o registro de ciclos deste repositório
+\citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{A sequência separa intenção, execução e verificação; sua relação com Peng é uma analogia de método. O artigo sustenta a reprodutibilidade como padrão mínimo para avaliar alegações, não uma regra específica de backup ou registro de software.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}.
+\end{descricao}
+
+\begin{funcao}
+Transformar ``mudança numérica de versão'' em \emph{memória documentada}: qualquer
+agente pode consultar \emph{o que} mudou, \emph{em qual spec} e \emph{com qual
+rastreio de teste}.
+\end{funcao}
+
+\begin{niveis}
+\textbf{Intuição:} um diário de bordo automático — toda melhoria tem página própria.\\
+\textbf{Implementação:} registro sequencial R47+, contagem total presente em
+\pth{evolution/cycles.json} (455); verificação por família de testes.\\
+\textbf{Formalização:} base de dados de traços de evolução (spec $\to$ código $\to$ teste),
+permitindo estudo longitudinal de como o ecossistema cresce e autocorrige.
+\end{niveis}
+
+\begin{limite}
+O registro documenta \emph{o que foi feito}, não \emph{se funcionou fora do
+repositório}. Verificação em contexto aberto (benchmark externo) é outra etapa,
+sujeita a anti-overclaim.
+\end{limite}
+
+\clearpage
+\section{Marcos históricos}
+
+\elemento{Linha do tempo resumida}{\metainfo{ID}{H-03} \hfill
+\metainfo{Camada}{0 — Timeline} \hfill
+\metainfo{Fonte}{git log (371 commits), \pth{CORRIGENDUM.md}}}
+
+\begin{resultado}
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lYl}
+\toprule
+Fase & Marcos & Evidência \\
+\midrule
+1. Fundação & Provisionamento WSL+Ollama; correções do MCP metacognitive;
+porta Trust Engine, Token Economy, Antigravity & commits iniciais; \pth{SPEC-001..015} \\
+2. Metacore & MetaBus, Blackboard A2A, Reflexion, Transformer, Orquestrador,
+Protocolo de Agentes & SPEC-001 a SPEC-006 \\
+3. Qualidade & Trust Engine, Token Economy, pipeline de Scanners, MASWOS
+acadêmico, Raciocínio, Ciclos & SPEC-007 a SPEC-012 \\
+4. Governança & SPEC-935-R110 (anti-overclaim); CORRIGENDUM; Scientific
+Governance Pipeline (OQS, VSEE, EGS); crítico honesto R142 & \pth{CORRIGENDUM.md},
+\pth{mci/metacognitive_evaluator.py} \\
+5. Catálogo e skills & 216 agentes; skills especializadas; migração R380
+(editores MASWOS); Reversa R471; Landscape R482/R521 & \pth{academic/maswos.py},
+\pth{reversa_universal/skill_dispatch.py} \\
+6. Executores externos & Goose (R598), Plandex (R599), Gemini CLI (R600),
+NotebookLM bridge (R601), Reasonix (R602), Haystack (R604), documentos+doctor
+(R603), MiroFish proxy (R605) & \pth{specs/SPEC-935-R59*}
+\\
+7. Otimização local & R607: perfil mínimo de contexto, \pth{num_ctx=24576},
+modelos locais afinados, rage medido & \pth{specs/SPEC-935-R607.md} \\
+\bottomrule
+\end{tabularx}
+}
+\end{resultado}
+
+\begin{processo}
+\textbf{Como a história é preservada:}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Specs nativas e série R* em \pth{specs/}.
+  \item Registro de ciclos em \pth{evolution/}; consulte o diagnóstico para a contagem atual.
+  \item Self-correção em \pth{CORRIGENDUM.md} (ex.: tabela 5 estrelas revisada como
+        inventário de recursos; ``Qualis A1'' reescrito como ``meta de rubrica'').
+  \item Mapa técnico: \pth{ARCHITECTURE.md}; a leitura guiada deste livro
+        acompanha o fluxo nos capítulos de arquitetura e orquestração.
+\end{enumerate}
+\end{processo}
+
+\begin{aviso}
+Datas exatas de cada marcos dependem do histórico de commits remoto; este manual
+registra \emph{ordem e provas locais}, não calendário completo de deploy.
+\end{aviso}
+
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) a série \pth{SPEC-935-R*} é um
+rastro de especificações ligado à evolução, separado do registro de ciclos;
+(2) ciclo de evolução
+SENSE/DISCOVER/INSTALL/VERIFY/EVOLVE/LEARN; (3) \pth{migrations/} sinaliza o
+que foi ou não portado.
+\textbf{Exercício sugerido:} escolha uma spec da série R*, leia o frontmatter e
+relacione os critérios de aceitação com uma \pth{BlackboardTask} de prova.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-01b-historia.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — História e evolução: do registro à interpretação}
+
+\elemento{Leitura guiada — História e evolução}{\metainfo{ID}{N-01b} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{do fato à explicação}}
+
+\begin{descricao}
+\textbf{O fenômeno.} Abra os \emph{commits mais antigos} deste repositório. O que
+se encontra não é uma ideia brilhante de arquitetura: são tarefas de
+\emph{provisionamento} --- detectar Ubuntu no WSL para evitar
+\cod{ERROR_ALREADY_EXISTS}, configurar \pth{sudoers} sem senha para instalação não
+interativa, instalar \pth{zstd} para o Ollama, consertar o servidor MCP
+\pth{metacognitive-interconnect}. Há um fato a explicar: \emph{a história do Core
+começa pela infraestrutura, não pelo código de negócio}. Por quê? Porque sem
+ambiente reprodutível nenhuma outra camada pode ser medida --- o mesmo motivo pelo
+qual um experimento de física só vale depois que o aparato é calibrado.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Spec} ($S$): documento que declara \emph{o que} deve existir e \emph{por quê}. Total atual: $S = 371$.
+  \item \textbf{Série de evolução} ($R$): sequência numerada $R47, R48, \dots$ que registra mudanças do Core; suas specs somam 285 arquivos da família \cod{SPEC-935-R}.
+  \item \textbf{Ciclo} ($C$): registro de uma mudança relevante (SENSE $\to$ LEARN); total $C = 455$.
+  \item \textbf{Fração de evolução} ($f$): quanto a série contínua representa do acervo.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} A rastreabilidade origem $\to$ implementação $\to$
+teste não é retórica; é uma cadeia que se pode \emph{contar}.
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item Para cada componente, a relação com uma spec de origem precisa ser conferida; a existência de uma spec, sozinha, não demonstra que o componente foi implementado.
+  \item Para não perder a origem, a numeração de evolução foi \emph{continuada}: $R1$--$R46$ (legado) $\to$ $R47+$ (Core).
+  \item Quando uma mudança não aponta para spec nem teste, parte da trilha de intenção e verificação fica ausente, o que torna a auditoria mais difícil.
+  \item Por isso, contagens de specs e de ciclos ajudam a descrever o acervo, mas não substituem a leitura das ligações entre os artefatos.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido (números do repositório).}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Fração da série contínua: $f = 285/371 \approx 0{,}768$ --- cerca de \textbf{77\%} dos arquivos Markdown de \pth{specs/} pertencem à família \cod{SPEC-935-R}.
+  \item Razão entre arquivos de especificação e registros de ciclo: $371/455 \approx 0{,}815$. Essa razão compara dois totais; não demonstra que cada ciclo criou uma spec nem que os conjuntos se correspondam um a um.
+\end{enumerate}
+\textbf{Leitura correta:} são 371 arquivos Markdown em \pth{specs/}, 285 deles
+com o prefixo \cod{SPEC-935-R}, e 455 registros em \pth{evolution/cycles.json}.
+Essas contagens são reprodutíveis, mas a auditoria do conteúdo exige ler as
+relações entre especificações, mudanças e testes.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Como interpretar a série temporal.} Em 29/09/2026, o arquivo
+\pth{evolution/cycles.json} continha 455 registros com carimbo temporal; o mais
+antigo era de 22/07/2026. A diferença entre essas datas é de 69 dias, portanto a
+razão aritmética é $455/69 \approx 6{,}6$ registros por dia. Esse valor descreve
+somente a distribuição dos registros no arquivo: não mede produtividade,
+frequência de mudanças independentes nem qualidade. Registros importados ou
+criados em lote alteram a média. Para reproduzir a contagem, leia a chave
+\cod{cycles} de \pth{evolution/cycles.json} e conte seus elementos; em seguida,
+examine as datas antes de interpretar qualquer taxa.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Contar specs \emph{não} prova que a spec foi
+executada: parte do acervo legado foi portada apenas em parte. A verificação
+\emph{de execução} é o teste (\pth{tests/test_r*.py}); a verificação \emph{de
+mérito} externo continua pendente (anti-overclaim).
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Se o acervo crescer para 400 specs mantendo a razão,
+quantas serão da família \cod{SPEC-935-R}? (2) Explique por que ``a história
+começa pela infraestrutura'' é uma afirmação verificável nos commits, e não uma
+opinião.
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — História e linhas do tempo}
+\elemento{ativ-01b}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-01b-historia.tex}}
+
+\begin{processo}
+GATILHO. consulta cronológica ("quando foi criado", "linha do tempo").
+ROTA. navegação temporal direta pelo capítulo.
+FUNÇÃO. situar cada componente do ecossistema na linha do tempo da IA e da engenharia de software.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. janelas temporais = 4 (pré-1980, 1980--2000, 2000--2020, 2020--hoje); cada janela mapeada a marcos verificáveis.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. o campo de agentes apresenta, no próprio roteiro de pesquisa, a organização histórica por conceitos e aplicações. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. linha do tempo é didática; datas de DOI/impressão podem diferir das datas de publicação on-line. A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação:} Um roteiro de pesquisa organiza relações entre problemas, mecanismos e aplicações; não funciona como catálogo definitivo de ferramentas nem como prova de que uma implementação particular é superior. Esta distinção orienta a leitura histórica do módulo: a literatura situa as escolhas arquiteturais, enquanto o texto explicita quais delas foram adotadas no Core e quais permanecem decisões locais \citref{JENNINGS, N. R.; SYCARA, K.; WOOLDRIDGE, M. A roadmap of agent research and development. \emph{Autonomous Agents and Multi-Agent Systems}, v.~1, n.~1, p.~7-38, 1998}{10.1023/A:1010090405266}{p.~7--38 (resumo, p.~7). é a moldura histórica e conceitual: o roteiro do campo identifica conceitos-chave e aplicações e como se relacionam — exatamente a função deste módulo para o ecossistema.}{It aims to identify key concepts and applications, and to indicate how they relate to one-another}{O objetivo é identificar conceitos-chave e aplicações e indicar como eles se relacionam entre si.}{JENNINGS, 1998, p.~7}

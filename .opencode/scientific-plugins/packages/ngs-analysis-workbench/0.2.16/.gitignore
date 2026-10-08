@@ -1,0 +1,12 @@
+node_modules/
+.storybook-home/
+storybook-static/
+mcp/mcp-app.html
+mcp/mcp-inline.html
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.tsbuildinfo
+
+# Keep recorded engine-native logs used by execution-observation golden tests.
+!tests/fixtures/execution_observation/snakemake/results/.snakemake/log/*.snakemake.log

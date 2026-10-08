@@ -1,3 +1,12 @@
+---
+name: deep-research
+description: >-
+  Pesquisa profunda multi-fontes (R102) com orquestração hierárquica e grafos de
+  evidência: varredura ampla (BFRS) + mergulho profundo (DFRS). Use para
+  revisões, perguntas que exigem agregação de múltiplas fontes e rastreio de
+  evidências. Não substitui validação humana nem garante completude do corpus.
+---
+
 # Deep-Research Skill
 
 **Pesquisa Profunda Multi-Fontes — R102 Deep Research Agent**

@@ -1,0 +1,51 @@
+{
+  "mcpServers": {
+    "ngs-app": {
+      "command": "./start_server",
+      "args": ["ngs_app_mcp"],
+      "cwd": "./mcp",
+      "startup_timeout_sec": 120,
+      "env": {
+        "PYTHONPATH": "."
+      },
+      "env_vars": [
+        "CODEX_HOME",
+        "NGS_ANALYSIS_WORKBENCH_STATE_DIR"
+      ],
+      "default_tools_approval_mode": "auto"
+    },
+    "ngs-analysis-workbench": {
+      "command": "./start_server",
+      "args": [],
+      "cwd": "./mcp",
+      "startup_timeout_sec": 120,
+      "env": {
+        "PYTHONPATH": "."
+      },
+      "env_vars": [
+        "CODEX_HOME",
+        "NGS_ANALYSIS_WORKBENCH_STATE_DIR"
+      ],
+      "default_tools_approval_mode": "auto",
+      "tools": {
+        "execute_plan": {
+          "approval_mode": "prompt"
+        }
+      }
+    },
+    "ngs-compute": {
+      "command": "./start_server",
+      "args": ["ngs_compute_mcp"],
+      "cwd": "./mcp",
+      "startup_timeout_sec": 120,
+      "env": {
+        "PYTHONPATH": "."
+      },
+      "env_vars": [
+        "CODEX_HOME",
+        "NGS_ANALYSIS_WORKBENCH_STATE_DIR"
+      ],
+      "default_tools_approval_mode": "auto"
+    }
+  }
+}

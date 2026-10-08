@@ -31,6 +31,21 @@ def run_scientific_governance_pipeline(
     if context is None:
         context = {}
 
+    # Ausência de executor não é execução de um experimento. O bloqueio antecede
+    # a geração de claims e a escrita de suposta evidência no EvidenceGraph.
+    if not callable(executor_fn):
+        return {
+            "problem_id": "unexecuted", "reason": "executor_missing",
+            "oqs": {"pass": False, "selected_question": problem_text, "scores": {"CS": 0.0}},
+            "scientific_claim": {}, "report_tex": "", "evidence_graph_id": None,
+            "vsee": {"chosen_path": "none", "policy_reason": "No executor provided",
+                     "result_data": {}, "executed": False},
+            "egs": {"decision": "abstain", "alignment_score": 0.0, "hard_block": False},
+            "pipeline_success": False, "status": "blocked",
+            "experiment_executed": False, "evidence_kind": "unexecuted",
+            "evidence_eligible": False, "external_validation": False, "version": "2.1.0",
+        }
+
     # 1. OQS — Optimal Question Scanner
     oqs_res = run_oqs_scanner(problem_text, context)
     selected_question = oqs_res["selected_question"]
@@ -71,6 +86,13 @@ def run_scientific_governance_pipeline(
         "vsee": vsee_res,
         "egs": egs_res,
         "pipeline_success": pipeline_success,
+        # Este pipeline valida os números informados em context; não calcula
+        # um experimento sobre dados brutos. O percurso executável é o R663.
+        "experiment_executed": False,
+        "executor_callable_supplied": True,
+        "evidence_kind": "reported_inputs_and_executor_output",
+        "evidence_eligible": False,
+        "external_validation": False,
         "status": (
             "blocked" if egs_res.get("decision") == "block"
             else "success" if pipeline_success

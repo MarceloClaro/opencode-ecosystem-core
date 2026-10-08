@@ -1,0 +1,33 @@
+============================================================
+OASIS Twitter Simulation
+Configuration file: /home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/mcp-mirofish/simulation_config.json
+Simulation ID: r667_local_probe
+Wait mode: Disabled
+============================================================
+
+Simulation parameters:
+  - Total simulation duration: 1hours
+  - Time per round: 60minutes
+  - Total rounds: 1
+  - Maximum rounds limit: 1
+  - Number of Agents: 2
+
+Initialize LLM model...
+LLM configuration: model=llama3.2:latest, base_url=http://127.0.0.1:42561/v1...
+Load Agent Profile...
+Create OASIS environment...
+db_path /home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/mcp-mirofish/twitter_simulation.db
+Environment initialization complete
+
+Execute initial events (1initial posts)...
+  Published 1 initial posts
+
+Start simulation loop...
+  [Day 1, 00:00] Round 1/1 (100.0%) - 2 agents active - elapsed: 82.9s
+
+Simulation loop completed!
+  - Total time: 82.9seconds
+  - Database: /home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/mcp-mirofish/twitter_simulation.db
+Environment closed
+============================================================
+Simulation process exited

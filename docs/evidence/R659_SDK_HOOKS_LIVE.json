@@ -1,0 +1,32 @@
+{
+  "spec_id": "SPEC-935-R659",
+  "success": true,
+  "evidence_kind": "composite_of_two_real_local_runs",
+  "model": "llama3.2:latest",
+  "allowed_success": true,
+  "denial_success": true,
+  "tool_execution": "native_in_process_not_MCP",
+  "external_audit": false,
+  "single_run": false,
+  "code_sha256": {
+    "integrations/opencode_agent_sdk.py": "c522d2b2baf74556ee9e032aaed429b89bd069cad574051d2aa6c6fbd3b64c63",
+    "hooks/engine.py": "9a24619b9c87ce281b02d2e5dee85ef5f504468bc9ef4a55f5384f1eb2ea019c",
+    "hooks/policy.py": "a6512cb8850ff114467af278fbf73706684706a3c358618ff09f90fc73467948",
+    "integrations/mcp_validation.py": "f4373a8dabc8c17722e07e994ab89bb963693ceddb1fc21b3c2857841ac91311"
+  },
+  "sources": [
+    {
+      "path": "docs/evidence/R659_SDK_HOOKS_LLAMA_PARTIAL.json",
+      "sha256": "07dfbab4b870f2d0652c5ec24d13e536f9a949d49de6537c3ec7f7db9ec16436"
+    },
+    {
+      "path": "docs/evidence/R659_SDK_HOOKS_LLAMA_DENY.json",
+      "sha256": "82bca5a72fc649ebebb02f4a7ebba5c4f4db1bcdb07255dc08a47f9f6a6fe81a"
+    }
+  ],
+  "limitations": [
+    "The allow run request capture used a mutable reference; responses, native execution and hook trace remain recorded.",
+    "The deny run used corrected request snapshot.",
+    "Qwen failed under memory pressure; its failure record is preserved separately."
+  ]
+}

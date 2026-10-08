@@ -1,0 +1,23 @@
+{
+  "plugin_id": "ngs-analysis-workbench",
+  "operation": "targets",
+  "host_tool": "mcp__ngs_compute__list_compute_targets",
+  "arguments": {},
+  "intent": null,
+  "request_id": "48ce12930ae8410babc86576b44c7182",
+  "request_sha256": "3c37d476378e6c617ddd978e4de1fe4fa3dc0fe8d89c3564860b5f251dfffddb",
+  "status": "awaiting_host",
+  "executed": false,
+  "instruction": "O host autenticado chama host_tool com arguments e devolve um recibo vinculado. Não executar nomes como comandos shell.",
+  "metacognition": {
+    "observation_id": "ec4b4064-ec22-44cd-b4c3-bc17124063d5",
+    "persisted": true,
+    "scope_id": "d8a0a9e425703df0831a49f5202e54f14eed6750c2a67438150a524ec9e083a3",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "awaiting_host"
+    },
+    "confidence_promoted": false
+  }
+}

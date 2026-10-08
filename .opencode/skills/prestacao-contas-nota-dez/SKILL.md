@@ -1,6 +1,6 @@
 ---
 name: prestacao-contas-nota-dez
-description: Auditoria e execução de resposta a diligências do Prêmio Escola Nota Dez (SEDUC/CE). Use para PDFs escaneados de diligências de prestação de contas (FECOP/Prêmio Escola Nota 10): extração OCR, parse de apontamentos, checklist item-a-item, score interno de cobertura, minuta de ofício-resposta e planilha de controle. NÃO é aprovação do órgão concedente; toda entrega exige revisão humana.
+description: "Auditoria e execução de resposta a diligências do Prêmio Escola Nota Dez (SEDUC/CE). Use para PDFs escaneados de diligências de prestação de contas (FECOP/Prêmio Escola Nota 10): extração OCR, parse de apontamentos, checklist item-a-item, score interno de cobertura, minuta de ofício-resposta e planilha de controle. NÃO é aprovação do órgão concedente; toda entrega exige revisão humana."
 disable-model-invocation: true
 ---
 

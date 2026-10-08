@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIRA Deck — Da Sala para a Rua: TDAH e Brincar Livre (Defesa de Banca)</title>
+<style>
+  :root{
+    --bg1:#0a1f16; --bg2:#123b2a; --card:#12241c; --card2:#172e24;
+    --verde:#6fe3a5; --verde2:#a8f0c8; --ouro:#f2c46d; --texto:#e9f5ee; --muted:#9db8aa;
+    --vermelho:#e07a5f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:radial-gradient(1200px 700px at 70% -10%, #1d4d38 0%, var(--bg1) 55%);
+    color:var(--texto); overflow:hidden; height:100vh;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none!important; transition:none!important}
+  }
+  #stage{height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3vh 5vw}
+  .slide{display:none; max-width:1200px; width:100%}
+  .slide.ativo{display:block}
+  h1{font-size:clamp(26px,4.6vw,54px); line-height:1.15; letter-spacing:.5px}
+  h2{font-size:clamp(20px,3vw,34px); color:var(--verde); margin-bottom:2.2vh}
+  .sub{color:var(--muted); font-size:clamp(12px,1.5vw,17px); margin-top:1.2vh}
+  .kicker{color:var(--ouro); text-transform:uppercase; letter-spacing:3px; font-size:clamp(10px,1.2vw,14px); margin-bottom:1.4vh}
+  p.lead{font-size:clamp(15px,2vw,22px); line-height:1.5; margin-top:1.6vh}
+  .grid{display:grid; gap:2vh; margin-top:3vh}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid rgba(111,227,165,.22);
+        border-radius:16px; padding:2.4vh 1.8vw; box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .card h3{color:var(--verde2); font-size:clamp(14px,1.7vw,19px); margin-bottom:1vh}
+  .card p{color:var(--texto); font-size:clamp(12px,1.35vw,15.5px); line-height:1.5}
+  .card .num{display:inline-block; background:var(--verde); color:#0a1f16; font-weight:800;
+             border-radius:9px; padding:.2vh .6vw; margin-bottom:1vh; font-size:clamp(11px,1.2vw,14px)}
+  .aviso{background:rgba(242,196,109,.12); border:1px solid rgba(242,196,109,.4); border-radius:12px;
+         padding:1.8vh 1.5vw; color:var(--ouro); font-size:clamp(12px,1.4vw,16px); line-height:1.5; margin-top:2.5vh}
+  ul.lista{margin-top:2vh; list-style:none}
+  ul.lista li{font-size:clamp(13px,1.6vw,18px); padding:1vh 0; border-bottom:1px dashed rgba(157,184,170,.25)}
+  ul.lista li b{color:var(--verde2)}
+  .capa{text-align:center}
+  .capa .autoras{margin-top:4vh; font-size:clamp(12px,1.5vw,16px); color:var(--muted); line-height:1.9}
+  .capa .inst{margin-top:2vh; font-size:clamp(11px,1.3vw,14px); color:var(--muted)}
+  .refs{font-size:clamp(11px,1.3vw,14.5px); color:var(--texto); line-height:1.8}
+  .refs b{color:var(--verde2)}
+  #hud{position:fixed; bottom:0; left:0; right:0; display:flex; align-items:center; gap:1.2vw;
+       padding:1.2vh 2vw; background:rgba(10,31,22,.85); backdrop-filter:blur(6px); z-index:20}
+  #barra{flex:1; height:4px; background:#1d4d38; border-radius:4px; overflow:hidden}
+  #barra div{height:100%; background:linear-gradient(90deg,var(--verde),var(--ouro)); width:0%; transition:width .3s}
+  #contador{color:var(--muted); font-size:13px; min-width:64px; text-align:right}
+  #relogio{color:var(--ouro); font-size:12px; min-width:130px; text-align:left}
+  button{background:none; border:1px solid rgba(111,227,165,.4); color:var(--verde); border-radius:10px;
+         padding:1vh 1.4vw; cursor:pointer; font-size:15px}
+  button:hover{background:rgba(111,227,165,.12)}
+  #full{position:fixed; top:1.2vh; right:1.4vw; z-index:9}
+
+  /* ============ ANIMACOES DIDATICAS ============ */
+  .seq{opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease}
+  .slide.play .seq{opacity:1; transform:none}
+  .slide.play .d1{transition-delay:.08s} .slide.play .d2{transition-delay:.16s}
+  .slide.play .d3{transition-delay:.24s} .slide.play .d4{transition-delay:.32s}
+  .slide.play .d5{transition-delay:.40s} .slide.play .d6{transition-delay:.48s}
+
+  /* capa: folhas flutuantes */
+  .folha{position:fixed; width:34px; opacity:.35; pointer-events:none; animation:flutuar 9s ease-in-out infinite}
+  .folha.f2{animation-duration:12s; animation-delay:2s}
+  .folha.f3{animation-duration:10s; animation-delay:4s}
+  @keyframes flutuar{0%{transform:translateY(8vh) rotate(0deg)}50%{transform:translateY(-4vh) rotate(12deg)}100%{transform:translateY(8vh) rotate(0deg)}}
+  .capa h1{animation:entrada .9s ease both}
+  .capa .lead{animation:entrada .9s .3s ease both}
+  .capa .autoras{animation:entrada .9s .6s ease both}
+  @keyframes entrada{from{opacity:0; transform:translateY(20px)}to{opacity:1; transform:none}}
+
+  /* roteiro: numeros pulsando */
+  .lista li b{display:inline-block}
+  .slide.play .lista li b{animation:pulse .8s ease}
+  .slide.play .lista li:nth-child(1) b{animation-delay:.1s} .slide.play .lista li:nth-child(2) b{animation-delay:.25s}
+  .slide.play .lista li:nth-child(3) b{animation-delay:.4s} .slide.play .lista li:nth-child(4) b{animation-delay:.55s}
+  .slide.play .lista li:nth-child(5) b{animation-delay:.7s} .slide.play .lista li:nth-child(6) b{animation-delay:.85s}
+  .slide.play .lista li:nth-child(7) b{animation-delay:1s}
+  @keyframes pulse{0%{transform:scale(1)}40%{transform:scale(1.35); color:var(--ouro)}100%{transform:scale(1)}}
+
+  /* vinheta: trilho sala -> rua (palco destacado, ilustracoes grandes) */
+  .trilho-wrap{display:flex; align-items:stretch; justify-content:center; gap:1.5vw;
+    background:rgba(13,32,24,.55); border:1px solid rgba(111,227,165,.18);
+    border-radius:18px; padding:2.2vh 2vw; margin-top:2.5vh}
+  .trilho-wrap .estagio{flex:1; max-width:340px; text-align:center; color:var(--muted);
+    font-size:clamp(12px,1.35vw,16px); display:flex; flex-direction:column; justify-content:center}
+  .trilho-wrap .estagio svg{display:block; margin:0 auto 1.2vh; width:min(100%,190px); height:auto}
+  .setinha{flex:0 0 auto; align-self:center; width:min(14vw,150px)}
+  .setinha svg{width:100%; height:auto}
+  .setinha .linha{stroke-dasharray:130; stroke-dashoffset:130}
+  .slide.play .setinha .linha{animation:desenhar 1s .4s ease forwards}
+  .slide.play .setinha .ponta{animation:aparecer .3s 1.3s ease forwards; opacity:0}
+  @keyframes desenhar{to{stroke-dashoffset:0}}
+  @keyframes aparecer{to{opacity:1}}
+  .tv-tela{animation:static 1.2s steps(2) infinite}
+  @keyframes static{0%{opacity:1}50%{opacity:.45}100%{opacity:1}}
+  .boneco{animation:pular 1s ease-in-out infinite}
+  .boneco.b2{animation-delay:.15s} .boneco.b3{animation-delay:.3s}
+  @keyframes pular{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* evidencias: contadores */
+  .count{font-weight:800; color:var(--ouro)}
+
+  /* caso: barras antes/depois — escala unica de dificuldade */
+  .linha{display:flex; align-items:center; gap:.7vw; margin-top:1.2vh}
+  .rot{width:56px; color:var(--muted); font-size:clamp(10px,1.1vw,13px); flex-shrink:0}
+  .trilho{flex:1; background:#0e1e17; border-radius:7px; height:12px; overflow:hidden}
+  .barra{height:100%; width:0%; border-radius:7px; transition:width 1.1s cubic-bezier(.2,.7,.3,1)}
+  .barra.antes{background:linear-gradient(90deg,#b3563f,var(--vermelho))}
+  .barra.depois{background:linear-gradient(90deg,#2f8f63,var(--verde))}
+  .pct{width:32px; text-align:right; color:var(--ouro); font-size:clamp(10px,1.1vw,13px); flex-shrink:0}
+  .desc{color:var(--muted); font-size:clamp(10px,1.1vw,12.5px); margin:.3vh 0 .2vh 63px; line-height:1.35}
+  .slide.play .barra{width:var(--w)}
+  .slide.play .barra.depois{transition-delay:.2s}
+
+  /* discussao: balanca */
+  .balanca{display:block; margin:0 auto 1vh; transform-origin:50% 90%}
+  .slide.play .balanca{animation:balancar 1.6s ease}
+  @keyframes balancar{0%{transform:rotate(0)}20%{transform:rotate(-7deg)}45%{transform:rotate(5deg)}70%{transform:rotate(-3deg)}100%{transform:rotate(0)}}
+
+  /* conclusao: ciclo ecologico */
+  .ciclo{display:block; margin:2vh auto 0}
+  .ciclo .anel{stroke-dasharray:340; stroke-dashoffset:340}
+  .slide.play .ciclo .anel{animation:desenhar 2s .3s ease forwards}
+  .ciclo .no{transform-box:fill-box; transform-origin:center}
+  .slide.play .ciclo .no1{animation:pulse 1.2s .8s ease}
+  .slide.play .ciclo .no2{animation:pulse 1.2s 1.3s ease}
+  .slide.play .ciclo .no3{animation:pulse 1.2s 1.8s ease}
+
+  /* agenda: checks sequenciais */
+  .check{display:inline-block; width:1.4em; color:var(--verde); opacity:0; transform:scale(.4); transition:.25s ease}
+  .slide.play .check{opacity:1; transform:scale(1)}
+  .slide.play li:nth-child(1) .check{transition-delay:.2s}
+  .slide.play li:nth-child(2) .check{transition-delay:.5s}
+  .slide.play li:nth-child(3) .check{transition-delay:.8s}
+  .slide.play li:nth-child(4) .check{transition-delay:1.1s}
+  .slide.play li:nth-child(5) .check{transition-delay:1.4s}
+
+  /* encerramento: ondas */
+  .ondas{display:block; margin:3vh auto 0; opacity:.5}
+  .ondas path{animation:ondular 6s linear infinite}
+  .ondas path.p2{animation-duration:9s; animation-delay:1s}
+  @keyframes ondular{0%{transform:translateX(0)}100%{transform:translateX(-60px)}}
+</style>
+</head>
+<body>
+
+<!-- folhas decorativas -->
+<svg class="folha" viewBox="0 0 40 40" style="left:6vw; top:10vh"><path d="M20 2 C30 8 34 18 28 26 C22 32 12 30 8 22 C5 15 11 6 20 2Z" fill="var(--verde)"/></svg>
+<svg class="folha f2" viewBox="0 0 40 40" style="right:8vw; top:16vh"><path d="M20 2 C30 8 34 18 28 26 C22 32 12 30 8 22 C5 15 11 6 20 2Z" fill="#3f9d71"/></svg>
+<svg class="folha f3" viewBox="0 0 40 40" style="right:20vw; top:6vh"><path d="M20 2 C30 8 34 18 28 26 C22 32 12 30 8 22 C5 15 11 6 20 2Z" fill="#2f8f63"/></svg>
+
+<button id="full" onclick="document.documentElement.requestFullscreen()">⛶ Tela cheia</button>
+
+<div id="stage">
+
+  <!-- 1 CAPA -->
+  <section class="slide ativo" data-time="0:30">
+    <div class="capa">
+      <div class="kicker">Defesa acadêmica · Relato de experiência clínica</div>
+      <h1>DA SALA PARA A RUA<br><span style="color:var(--verde)">Brincar livre na vizinhança e atenuação da intensidade de sintomas de TDAH em pré-escolar</span></h1>
+      <p class="lead" style="color:var(--muted)">Uma leitura humanista de um caso clínico à luz da literatura sobre natureza, pares e autorregulação</p>
+      <div class="autoras">Ana Gessyca de Sousa Fernandes · Isabelly Rosa Cavalcante · Nadielle Darc Batista Dias<br>
+      Winny Ketlyn Sabóia Teixeira · Marta Tainá Silva de Sousa</div>
+      <div class="inst">Discentes do curso de graduação em Psicologia · Orientadora: [A PREENCHER] · 2026</div>
+    </div>
+  </section>
+
+  <!-- 2 ROTEIRO -->
+  <section class="slide" data-time="0:30">
+    <div class="kicker">Roteiro</div>
+    <h2>O que vamos apresentar (18 min + arguição)</h2>
+    <ul class="lista">
+      <li><b>1.</b> O caso que disparou tudo — a vinheta clínica (2 min)</li>
+      <li><b>2.</b> Pergunta, lacuna e objetivos (2 min)</li>
+      <li><b>3.</b> Método: revisão integrativa, ética e critérios de invalidação (3 min)</li>
+      <li><b>4.</b> Evidências: seis âncoras em três eixos (4 min)</li>
+      <li><b>5.</b> O caso à luz da literatura — o que dá para afirmar (3 min)</li>
+      <li><b>6.</b> Limitações, agenda e implicações práticas (2 min)</li>
+      <li><b>7.</b> Conclusão e abertura para a banca (2 min)</li>
+    </ul>
+  </section>
+
+  <!-- 3 VINHETA -->
+  <section class="slide" data-time="2:00">
+    <div class="kicker">Ponto de partida</div>
+    <h2>Um caso que a escuta clínica não ignorou</h2>
+
+    <div class="trilho-wrap seq d2">
+      <div class="estagio">
+        <svg viewBox="0 0 150 110">
+          <rect x="10" y="16" width="130" height="80" rx="8" fill="#101f18" stroke="#3f9d71" stroke-width="3"/>
+          <rect class="tv-tela" x="22" y="28" width="106" height="56" rx="4" fill="#1d4d38"/>
+          <g stroke="#6fe3a5" stroke-width="3.4" stroke-linecap="round">
+            <line x1="32" y1="42" x2="90" y2="42"/>
+            <line x1="32" y1="56" x2="72" y2="56"/>
+            <line x1="32" y1="70" x2="104" y2="70"/>
+          </g>
+        </svg>
+        <span>TV sem conseguir parar</span>
+      </div>
+      <div class="setinha">
+        <svg viewBox="0 0 130 110">
+          <line class="linha" x1="8" y1="55" x2="102" y2="55" stroke="#f2c46d" stroke-width="5" stroke-linecap="round"/>
+          <polygon class="ponta" points="92,42 122,55 92,68" fill="#f2c46d"/>
+        </svg>
+      </div>
+      <div class="estagio">
+        <svg viewBox="0 0 190 110">
+          <circle cx="158" cy="24" r="14" fill="#f2c46d"/>
+          <rect x="0" y="88" width="190" height="12" rx="5" fill="#2f8f63"/>
+          <g class="boneco"><circle cx="42" cy="64" r="14" fill="#6fe3a5"/><rect x="36" y="76" width="13" height="16" rx="4" fill="#3f9d71"/></g>
+          <g class="boneco b2"><circle cx="96" cy="54" r="14" fill="#a8f0c8"/><rect x="90" y="66" width="13" height="16" rx="4" fill="#6fe3a5"/></g>
+          <g class="boneco b3"><circle cx="148" cy="64" r="14" fill="#6fe3a5"/><rect x="142" y="76" width="13" height="16" rx="4" fill="#3f9d71"/></g>
+        </svg>
+        <span>Brincar diário na vizinhança</span>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:2.5vh">
+      <div class="card seq d2">
+        <h3>Antes da mudança</h3>
+        <p>M., 5 anos, laudo de TDAH misto. Hiperatividade grave: <b>não conseguia permanecer nem diante da televisão</b>. Em sessão: trocas rápidas de brinquedos, fala acelerada, poucos pares.</p>
+      </div>
+      <div class="card seq d4">
+        <h3>Depois da mudança</h3>
+        <p>A família mudou de endereço. A criança passou a <b>brincar todos os dias na vizinhança</b> com crianças de idade próxima. Mãe e terapeuta passaram a notá-la <b>bem mais tranquila</b> — inclusive nas sessões.</p>
+      </div>
+    </div>
+    <div class="aviso seq d5">⚠ Ética: nome fictício (M.), anonimização completa, TCLE do responsável e assentimento lúdico [A ANEXAR]. Uso de medicação: <b>não declarado pela família</b> até o fechamento — registrado literalmente, sem presumir ausência.</div>
+  </section>
+
+  <!-- 4 PERGUNTA + LACUNA -->
+  <section class="slide" data-time="2:00">
+    <div class="kicker">Problema de pesquisa</div>
+    <h2 class="seq d1">O que a literatura já sabe sobre o que aconteceu com M.?</h2>
+    <p class="lead seq d2">O que a literatura nacional e internacional, de 2004 a 2026, descreve sobre a relação entre <b>brincar livre em espaços externos ou na vizinhança</b> e a atenuação da intensidade de sintomas de TDAH em pré-escolares — e como isso dialoga com a <b>clínica humanista</b>?</p>
+    <div class="grid g3">
+      <div class="card seq d3"><span class="num">Lacuna 1</span><h3>Faixa etária</h3><p>Quase todos os estudos cobrem escolares de 7–12 anos. Pouquíssimos com 5 anos.</p></div>
+      <div class="card seq d4"><span class="num">Lacuna 2</span><h3>Cenário</h3><p>Pesquisas usam parques e programas planejados; o brincar cotidiano de rua/vizinhança é raro na literatura.</p></div>
+      <div class="card seq d5"><span class="num">Lacuna 3</span><h3>Olhar</h3><p>Nenhum estudo identificado sob a ótica humanista brasileira (Abordagem Centrada na Pessoa).</p></div>
+    </div>
+  </section>
+
+  <!-- 5 OBJETIVOS -->
+  <section class="slide" data-time="1:30">
+    <div class="kicker">Objetivos</div>
+    <h2 class="seq d1">O que este trabalho se propõe</h2>
+    <div class="card seq d2" style="margin-top:2vh"><h3>Objetivo geral</h3>
+      <p>Sintetizar evidências e lacunas sobre ambiente, brincar social e TDAH pré-escolar, tornando inteligível a mudança observada no caso índice.</p></div>
+    <div class="grid g3">
+      <div class="card seq d3"><span class="num">a</span><h3>Verde e gravidade</h3><p>Mapear evidências sobre natureza, espaço verde e intensidade de sintomas de TDAH.</p></div>
+      <div class="card seq d4"><span class="num">b</span><h3>Pares e autorregulação</h3><p>Mapear evidências sobre brincar livre entre pares na faixa de 3 a 6 anos.</p></div>
+      <div class="card seq d5"><span class="num">c</span><h3>Clínica humanista</h3><p>Articular os fundamentos de Rogers e Axline que ajudam a explicar a tranquilização também em sessão.</p></div>
+    </div>
+  </section>
+
+  <!-- 6 METODO -->
+  <section class="slide" data-time="3:00">
+    <div class="kicker">Método</div>
+    <h2 class="seq d1">Revisão integrativa narrativa com vinheta clínica</h2>
+    <div class="grid g2">
+      <div class="card seq d2"><h3>Bases e período</h3><p>SciELO · BVS/PEPSIC · Portal CAPES · PubMed · PsycINFO — 2004 a 2026, em português, inglês e espanhol. Descritores DeCS/MeSH: TDAH; pré-escolar; brincar; meio ambiente; terapia centrada no cliente.</p></div>
+      <div class="card seq d3"><h3>Critérios</h3><p>Inclusão: 3–12 anos, laudo ou traços de TDAH, contexto externo/vizinhança/natureza, desfecho comportamental. Exclusão: só adultos, farmacologia sem ambiente, resumo sem texto completo, duplicatas.</p></div>
+      <div class="card seq d4"><h3>Desenho — com honestidade</h3><p>Estudo descritivo-hermenêutico de caso único: <b>gera hipóteses, não as confirma</b>. Por isso dispensa, deliberadamente, grupo de controle e isolamento de variáveis.</p></div>
+      <div class="card seq d5"><h3>Critérios de invalidação</h3><p>A hipótese do “tempo verde-social” cai se: (a) SNAP-IV piorar/estabilizar em 3 meses; (b) melhora persistir sem brincar; (c) surgir psicofármaco no período; (d) mãe e professora discordarem; (e) grupo-irmão sem exposição melhorar igual.</p></div>
+    </div>
+  </section>
+
+  <!-- 7 EVIDENCIAS -->
+  <section class="slide" data-time="4:00">
+    <div class="kicker">Evidências</div>
+    <h2 class="seq d1">Seis referências-âncora auditadas</h2>
+    <div class="grid g3">
+      <div class="card seq d1"><span class="num">1</span><h3>Hood &amp; Baumann (2024)</h3><p>Revisão sistemática: <span class="count" data-from="458" data-to="7">458</span> estudos → 7 incluídos. Verde denso e brincar em “árvores grandes e grama” ligam-se a menos sintomas, controlando renda e fatores pré-natais.</p></div>
+      <div class="card seq d2"><span class="num">2</span><h3>Kuo &amp; Faber Taylor (2004)</h3><p><span class="count" data-to="452">452</span> pais. A mesma atividade em verde alivia mais (p &lt; 0,001); em hiperativos, só o verde <b>aberto</b> funciona.</p></div>
+      <div class="card seq d3"><span class="num">3</span><h3>Faber Taylor &amp; Kuo (2009)</h3><p>Experimento controlado intrasujeito (<span class="count" data-to="17">17</span> crianças): atenção objetivamente melhor após caminhada em parque do que em percurso urbano.</p></div>
+      <div class="card seq d4"><span class="num">4</span><h3>Taylor &amp; Kuo (2011)</h3><p><span class="count" data-to="421">421</span> famílias. Brincar regular em verde = sintomas mais leves, em todos os sexos e rendas. Propõem “dose verde” regular.</p></div>
+      <div class="card seq d5"><span class="num">5</span><h3>Damasceno et al. (2025)</h3><p>Intervenção brasileira de 6 meses (GI × GC, SNAP-IV): o tipo de TDAH permanece, a intensidade recua de “demais” para “bastante/pouco”.</p></div>
+      <div class="card seq d6"><span class="num">6</span><h3>Yang et al. (2019)</h3><p><span class="count" data-to="59754">59.754</span> crianças, China. Cada +0,1 no índice de verde do entorno escolar = chance 13% menor de sintomas.</p></div>
+    </div>
+  </section>
+
+  <!-- 8 EIXOS -->
+  <section class="slide" data-time="1:30">
+    <div class="kicker">Síntese</div>
+    <h2 class="seq d1">Três eixos que conversam com o caso</h2>
+    <div class="grid g3">
+      <div class="card seq d2"><span class="num">Eixo 1</span><h3>Verde e restauração atencional</h3><p>A natureza captura a atenção sem esforço e descansa o sistema atencional sobrecarregado no TDAH (Teoria da Restauração da Atenção).</p></div>
+      <div class="card seq d3"><span class="num">Eixo 2</span><h3>Brincar entre pares como regulador</h3><p>Laboratório de convivência: pertencimento, frustração, espera, regras negociadas, corpo em movimento, menos telas.</p></div>
+      <div class="card seq d4"><span class="num">Eixo 3</span><h3>Clínica humanista como facilitador</h3><p>Relação viva, não técnica sobre a criança: acolhida na rua e na sessão, a criança integra em vez de só descarregar.</p></div>
+    </div>
+    <p class="lead seq d5" style="color:var(--verde2)">O padrão de M. replica Damasceno: <b>a intensidade diminui, o tipo permanece</b>. E inverte o “déficit de natureza” descrito por Louv (2015).</p>
+  </section>
+
+  <!-- 9 QUADRO 2 -->
+  <section class="slide" data-time="2:00">
+    <div class="kicker">Registro clínico-materno</div>
+    <h2 class="seq d1">M., 5 anos — intensidade da dificuldade por domínio</h2>
+    <p class="sub seq d2" style="margin-top:-1.5vh">Escala única de 0 a 100 · ilustrativa, não é medida padronizada · Fontes: prontuário e relato materno (2026)</p>
+    <div class="grid g2" style="margin-top:2vh">
+      <div class="card seq d2">
+        <h3>Atenção sustentada</h3>
+        <div class="linha"><span class="rot">Antes</span><div class="trilho"><div class="barra antes" style="--w:88%"></div></div><span class="pct">88</span></div>
+        <p class="desc">não permanecia diante da TV</p>
+        <div class="linha"><span class="rot">Depois</span><div class="trilho"><div class="barra depois" style="--w:42%"></div></div><span class="pct">42</span></div>
+        <p class="desc">mantém brincadeiras calmas por 10–15 min</p>
+      </div>
+      <div class="card seq d3">
+        <h3>Hiperatividade</h3>
+        <div class="linha"><span class="rot">Antes</span><div class="trilho"><div class="barra antes" style="--w:92%"></div></div><span class="pct">92</span></div>
+        <p class="desc">agitação contínua, “não para”</p>
+        <div class="linha"><span class="rot">Depois</span><div class="trilho"><div class="barra depois" style="--w:46%"></div></div><span class="pct">46</span></div>
+        <p class="desc">corre e brinca, mas volta à calma</p>
+      </div>
+      <div class="card seq d4">
+        <h3>Dificuldade de interação social</h3>
+        <div class="linha"><span class="rot">Antes</span><div class="trilho"><div class="barra antes" style="--w:70%"></div></div><span class="pct">70</span></div>
+        <p class="desc">poucos pares, brincar solitário</p>
+        <div class="linha"><span class="rot">Depois</span><div class="trilho"><div class="barra depois" style="--w:28%"></div></div><span class="pct">28</span></div>
+        <p class="desc">brinca todo dia, é chamada pelas colegas</p>
+      </div>
+      <div class="card seq d5">
+        <h3>Sessão terapêutica</h3>
+        <div class="linha"><span class="rot">Antes</span><div class="trilho"><div class="barra antes" style="--w:85%"></div></div><span class="pct">85</span></div>
+        <p class="desc">trocas rápidas de brinquedo, fala acelerada</p>
+        <div class="linha"><span class="rot">Depois</span><div class="trilho"><div class="barra depois" style="--w:40%"></div></div><span class="pct">40</span></div>
+        <p class="desc">permanece, espera o turno, pede com palavras</p>
+      </div>
+    </div>
+    <p class="sub seq d6" style="margin-top:2vh">Leitura: barra vermelha (antes) sempre maior que a verde (depois) — a dificuldade caiu nos quatro domínios. Valores ilustram o relato, não são escores.</p>
+  </section>
+
+  <!-- 10 DISCUSSAO -->
+  <section class="slide" data-time="3:00">
+    <div class="kicker">Discussão</div>
+    <h2 class="seq d1">O que dá para afirmar — e o que não dá</h2>
+    <div class="grid g2">
+      <div class="card seq d2">
+        <h3>Afirmamos</h3>
+        <svg class="balanca" width="70" height="54" viewBox="0 0 70 54">
+          <line x1="10" y1="8" x2="60" y2="8" stroke="#9db8aa" stroke-width="2"/>
+          <line x1="35" y1="8" x2="35" y2="20" stroke="#9db8aa" stroke-width="2"/>
+          <line x1="14" y1="20" x2="56" y2="20" stroke="#6fe3a5" stroke-width="2.4"/>
+          <path d="M14 20 L8 40 L22 40 Z" fill="#172e24" stroke="#6fe3a5" stroke-width="1.6"/>
+          <path d="M56 20 L48 46 L64 46 Z" fill="#172e24" stroke="#f2c46d" stroke-width="1.6"/>
+        </svg>
+        <p>O percurso de M. é <b>coerente</b> com a literatura (Damasceno; Kuo; Hood). A mudança de endereço não “tratou” a criança — <b>ampliou seu campo relacional</b>, liberando a tendência atualizante (Rogers, 2020).</p></div>
+      <div class="card seq d3">
+        <h3>Não afirmamos</h3>
+        <p><b>Nenhuma eficácia, causalidade ou remissão.</b> Sem SNAP-IV basal, sem dose medida de brincar/telas e sem dado farmacológico, concluímos apenas coerência teórica e agenda.</p></div>
+    </div>
+    <div class="aviso seq d4">Oito explicações alternativas consideradas: maturação (5,0–5,5 anos) · sono/rotina/escola · estresse familiar · aliança terapêutica · viés de expectativa materna · sazonalidade · redução de telas não mensurada · <b>medicação não declarada</b> (se houve início/ajuste/suspensão, a leitura ambiental perde sustentação).</div>
+  </section>
+
+  <!-- 11 CONCLUSAO -->
+  <section class="slide" data-time="1:30">
+    <div class="kicker">Conclusão</div>
+    <h2 class="seq d1">A ecologia do brincar entra na formulação clínica</h2>
+    <div style="display:grid; grid-template-columns:auto 1fr; gap:2vw; align-items:center; margin-top:1vh">
+      <svg class="ciclo" width="180" height="150" viewBox="0 0 180 150">
+        <circle class="anel" cx="90" cy="75" r="58" fill="none" stroke="#2f8f63" stroke-width="2"/>
+        <circle class="no no1" cx="90" cy="22" r="14" fill="#172e24" stroke="#6fe3a5" stroke-width="2"/>
+        <text x="90" y="27" text-anchor="middle" font-size="13" fill="#6fe3a5">👧</text>
+        <circle class="no no2" cx="141" cy="104" r="14" fill="#172e24" stroke="#a8f0c8" stroke-width="2"/>
+        <text x="141" y="109" text-anchor="middle" font-size="13" fill="#a8f0c8">👭</text>
+        <circle class="no no3" cx="39" cy="104" r="14" fill="#172e24" stroke="#f2c46d" stroke-width="2"/>
+        <text x="39" y="109" text-anchor="middle" font-size="13" fill="#f2c46d">🌳</text>
+        <text x="90" y="92" text-anchor="middle" font-size="12" fill="#9db8aa">onde · com quem ·</text>
+        <text x="90" y="106" text-anchor="middle" font-size="12" fill="#9db8aa">por quanto tempo</text>
+      </svg>
+      <div>
+        <p class="lead seq d2">Em pré-escolares com TDAH misto, a formulação deve incluir <b>onde, com quem e por quanto tempo</b> a criança brinca ao ar livre — ao lado de sintomas, família e escola (Bronfenbrenner, 1996).</p>
+        <div class="grid g2" style="margin-top:2vh">
+          <div class="card seq d3"><h3>4 implicações práticas</h3>
+            <ul class="lista" style="margin-top:0">
+              <li>Registrar a dose diária de brincar externo social</li>
+              <li>Priorizar verdes e abertos no predomínio hiperativo</li>
+              <li>Envolver a escola no mapeamento do recreio</li>
+              <li>Usar o registro como instrumento dialógico nas sessões</li>
+            </ul></div>
+          <div class="card seq d4"><h3>Contribuição</h3>
+            <p>Documentar, em português e sob ótica humanista, um fenômeno quase ausente da literatura: o <b>brincar de vizinhança não estruturado aos 5 anos</b> — com categorias replicáveis para outros clínicos.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 AGENDA -->
+  <section class="slide" data-time="1:30">
+    <div class="kicker">Próximos passos</div>
+    <h2 class="seq d1">Agenda de continuidade</h2>
+    <ul class="lista">
+      <li class="seq d2"><span class="check">✔</span> <b>1.</b> Aplicar SNAP-IV com pais e professores agora e em 3 meses (linha de base + seguimento)</li>
+      <li class="seq d3"><span class="check">✔</span> <b>2.</b> Diário de 2 semanas: hora de rua, com quem, onde, hora de tela, hora de dormir</li>
+      <li class="seq d4"><span class="check">✔</span> <b>3.</b> 8–12 sessões com protocolo axlineano registrado em vinhetas</li>
+      <li class="seq d5"><span class="check">✔</span> <b>4.</b> Entrevista semiestruturada com a mãe</li>
+      <li class="seq d6"><span class="check">✔</span> <b>5.</b> Submissão a Comitê de Ética em Pesquisa, se a pesquisa for institucional</li>
+    </ul>
+    <div class="aviso seq d6">Limitações assumidas: caso único · sem grupo controle · sem escala padronizada · dose não medida · medicação e sono sem informação · possível viés no relato materno.</div>
+  </section>
+
+  <!-- 13 REFERENCIAS -->
+  <section class="slide" data-time="0:30">
+    <div class="kicker">Fundamentação</div>
+    <h2 class="seq d1">Referências centrais (15 no manuscrito)</h2>
+    <div class="refs">
+      <p class="seq d2">1. <b>HOOD, M.; BAUMANN, O.</b> Could nature contribute to the management of ADHD in children? A systematic review. <b>Int. J. Environ. Res. Public Health</b>, v. 21, n. 6, p. 736, 2024.</p>
+      <p class="seq d3">2. <b>KUO, F. E.; FABER TAYLOR, A.</b> A potential natural treatment for attention-deficit/hyperactivity disorder. <b>Am. J. Public Health</b>, v. 94, n. 9, p. 1580-1586, 2004.</p>
+      <p class="seq d4">3. <b>FABER TAYLOR, A.; KUO, F. E.</b> Children with attention deficits concentrate better after walk in the park. <b>J. Atten. Disord.</b>, v. 12, n. 5, p. 402-409, 2009.</p>
+      <p class="seq d5">4. <b>DAMASCENO, M. M. S. et al.</b> Crianças com TDAH em contato com a natureza: transformações possíveis. <b>Educação &amp; Realidade</b>, v. 50, 2025.</p>
+      <p class="seq d6">5. <b>ROGERS, C. R.</b> <b>Terapia centrada no cliente.</b> São Paulo: Martins Fontes, 2020. · <b>AXLINE, V. M.</b> <b>Ludoterapia.</b> São Paulo: Summus, 1984. · <b>BRONFENBRENNER, U.</b> <b>A ecologia do desenvolvimento humano.</b> Porto Alegre: Artes Médicas, 1996.</p>
+    </div>
+  </section>
+
+  <!-- 14 FIM -->
+  <section class="slide" data-time="0:30">
+    <div class="capa">
+      <div class="kicker">Encerramento</div>
+      <h1 style="font-size:clamp(30px,5vw,64px); animation:entrada .9s ease both">Obrigada.<br><span style="color:var(--verde)">Estamos à disposição da banca.</span></h1>
+      <svg class="ondas" width="420" height="46" viewBox="0 0 420 46">
+        <path d="M0 30 Q 35 12 70 30 T 140 30 T 210 30 T 280 30 T 350 30 T 420 30" fill="none" stroke="#2f8f63" stroke-width="2.4"/>
+        <path class="p2" d="M0 38 Q 35 22 70 38 T 140 38 T 210 38 T 280 38 T 350 38 T 420 38" fill="none" stroke="#6fe3a5" stroke-width="2"/>
+      </svg>
+      <p class="lead" style="color:var(--muted); animation:entrada .9s .3s ease both">“O corpo que precisava interromper para existir passou a correr, negociar e descansar.”</p>
+      <div class="inst" style="margin-top:4vh">Relato de experiência — Clínica humanista · 2026</div>
+    </div>
+  </section>
+
+</div>
+
+<div id="hud">
+  <button id="btnPrev" type="button">◀ Anterior</button>
+  <button id="btnNext" type="button">Próxima ▶</button>
+  <div id="barra"><div id="fill"></div></div>
+  <span id="relogio">—</span>
+  <span id="contador">1 / 14</span>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var idx = 0;
+
+  function formatNum(n){
+    if (n >= 1000) { return Math.round(n).toLocaleString('pt-BR'); }
+    return n.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
+  }
+
+  var raf = null;
+  try {
+    raf = (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function')
+      ? function(cb){ window.requestAnimationFrame(cb); }
+      : (typeof requestAnimationFrame === 'function')
+        ? requestAnimationFrame
+        : (typeof setTimeout === 'function')
+          ? function(cb){ setTimeout(function(){ cb(Date.now()); }, 16); }
+          : null;
+  } catch (e) { raf = null; }
+
+  function attr(el, name, def){
+    var v = null;
+    if (el && typeof el.getAttribute === 'function') { v = el.getAttribute(name); }
+    return (v === null || v === undefined) ? def : v;
+  }
+
+  function animateCounters(slide){
+    var els = slide.querySelectorAll('.count');
+    Array.prototype.forEach.call(els, function(el){
+      var from = parseFloat(attr(el, 'data-from', '0'));
+      var to = parseFloat(attr(el, 'data-to', '0'));
+      var dur = 950;
+      var t0 = null;
+      function step(ts){
+        if (!t0) { t0 = ts; }
+        var p = Math.min((ts - t0) / dur, 1);
+        var eased = p === 1 ? 1 : Math.pow(p, 0.6);
+        var val = from + (to - from) * eased;
+        if (el && typeof el.textContent !== 'undefined') { el.textContent = formatNum(val); }
+        if (p < 1 && raf) { raf(step); }
+      }
+      if (raf) { raf(step); }
+      else if (el && typeof el.textContent !== 'undefined') { el.textContent = formatNum(to); }
+    });
+  }
+
+  function playIn(slide){
+    slide.classList.remove('play');
+    void slide.offsetWidth; // reflow p/ reiniciar transicoes
+    slide.classList.add('play');
+    animateCounters(slide);
+  }
+
+  function render(){
+    slides.forEach(function(s, i){
+      var ativo = (i === idx);
+      s.classList.toggle('ativo', ativo);
+      if (!ativo) { s.classList.remove('play'); }
+      else { playIn(s); }
+    });
+    document.getElementById('contador').textContent = (idx + 1) + ' / ' + slides.length;
+    document.getElementById('fill').style.width = ((idx + 1) / slides.length * 100) + '%';
+    var t = attr(slides[idx], 'data-time', '');
+    document.getElementById('relogio').textContent = t ? ('⏱ ' + t + ' sugeridos') : '—';
+  }
+
+  window.navegar = function(d){
+    idx = Math.min(Math.max(idx + d, 0), slides.length - 1);
+    render();
+  };
+  document.getElementById('btnPrev').addEventListener('click', function(){ navegar(-1); });
+  document.getElementById('btnNext').addEventListener('click', function(){ navegar(1); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') navegar(1);
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') navegar(-1);
+    else if (e.key === 'Home') { idx = 0; render(); }
+    else if (e.key === 'End') { idx = slides.length - 1; render(); }
+  });
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  min-width: 0;
+  min-height: 100%;
+  margin: 0;
+}
+body {
+  background: transparent;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+summary,
+a {
+  transition:
+    background-color var(--oai-duration-fast) var(--oai-ease-standard),
+    color var(--oai-duration-fast) var(--oai-ease-standard),
+    border-color var(--oai-duration-fast) var(--oai-ease-standard);
+}
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+a:focus-visible,
+[tabindex="0"]:focus-visible {
+  outline: 2px solid var(--ngs-focus-ring);
+  outline-offset: 2px;
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+h1,
+h2 {
+  font-size: var(--ngs-font-title);
+  font-weight: var(--ngs-weight-semibold);
+  line-height: var(--ngs-leading-tight);
+  letter-spacing: -0.02em;
+}
+h3,
+h4 {
+  font-size: var(--ngs-font-md);
+  font-weight: var(--ngs-weight-semibold);
+}
+code,
+pre {
+  font-family: var(--ngs-font-mono);
+}
+summary {
+  display: flex;
+  align-items: center;
+  gap: var(--oai-space-2);
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::marker {
+  content: "";
+}
+dialog {
+  transition:
+    opacity var(--oai-duration-standard) var(--oai-ease-enter),
+    transform var(--oai-duration-standard) var(--oai-ease-enter),
+    display var(--oai-duration-standard) allow-discrete,
+    overlay var(--oai-duration-standard) allow-discrete;
+}
+dialog::backdrop {
+  transition: background-color var(--oai-duration-standard)
+    var(--oai-ease-standard);
+}
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  dialog[open]::backdrop {
+    background-color: transparent;
+  }
+}
+details::details-content {
+  transition:
+    opacity var(--oai-duration-fast) var(--oai-ease-standard),
+    content-visibility var(--oai-duration-fast) allow-discrete;
+}
+details:not([open])::details-content {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+  dialog,
+  dialog::backdrop,
+  details::details-content {
+    transition: none;
+  }
+}
+
+.ngs-theme summary {
+  border-radius: var(--ngs-radius-sm);
+  cursor: pointer;
+}
+.ngs-theme summary:hover {
+  color: var(--ngs-text);
+  background: var(--ngs-surface-hover);
+}
+.ngs-theme a:hover {
+  text-decoration: underline;
+}

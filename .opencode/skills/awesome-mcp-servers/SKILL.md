@@ -23,6 +23,15 @@ spec: SPEC-935-R652-awesome-mcp-servers.md
 | `sequential-thinking` | `npx -y @modelcontextprotocol/server-sequential-thinking` | thought registrada |
 | `filesystem` | `npx .../server-filesystem <repo>` | allowlist confirmada |
 
+## Registrados em 2026-10-07 (R704, testados ao vivo)
+
+| MCP | Comando | Prova | Uso no Core |
+|---|---|---|---|
+| `arxiv-mcp` | `uvx arxiv-mcp-server` | 19 tools via stdio + busca real retornando papers | `tdah-gap-hunter`: `search_papers`, `export_citations` (BibTeX), `get_paper_latex_section` |
+| `latexmk-mcp` | `npx -y latexmk-mcp` | 11 tools via stdio | `abnt-latex-modular`: `latexmk_compile`, `latexmk_list_citations`, `latexmk_check` |
+
+Trust: `arxiv-mcp-server` Apache-2.0 + PyPI + MCP Registry, sem auth obrigatória (chave Semantic Scholar opcional); `latexmk-mcp` MIT v1.1.3 + npm + CI, sem auth.
+
 ## Receitas
 
 ```bash
@@ -41,3 +50,7 @@ npx -y @modelcontextprotocol/server-filesystem /caminho/escopo
 
 - `memory` (KG): sobrepõe MetaBus — SPEC própria futura.
 - `git`/`time`: bash cobre.
+- `mcp-latex` (marcelogdomingues): pacote sumiu do npm (404) — reavaliar se republicar; alternativa `latexmk-mcp` já cobre.
+- `san-rat/latex-mcp`: exige CLSI do Overleaf via Docker — pesado demais; adiado.
+- Orquestradores externos (`jpicklyk/task-orchestrator`, `Oortonaut/task-graph-mcp`, `ZhuchenZhong/TaskFlow`): sobrepõem Blackboard/A2A do Core — referência, sem instalar.
+- Skills acadêmicas (referência, sem vendored code): `Calix-L/awesome-latex-skills` (latex-rescue, paper-read), `Yila-AI/awesome-research-skills` (Claim-Strength Contract p/ anti-overclaim, research-presentation), `tahaturkistanli-ctrl/agent-research-skills` (literature-search: Semantic Scholar/arXiv/OpenAlex/Crossref), `bahayonghang/academic-writing-skills` (paper-audit, online_bib_verify sem API key). Instalar por skill conforme necessidade, com checagem de licença antes.

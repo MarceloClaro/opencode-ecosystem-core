@@ -1,0 +1,69 @@
+{
+  "runtime": "mirofish",
+  "status": "completed",
+  "external_process_executed": true,
+  "inference_executed": true,
+  "externally_validated": false,
+  "human_peer_review": false,
+  "scientific_claim_eligible": false,
+  "population": "synthetic_profiles",
+  "runtime_artifact_observed": true,
+  "process_returncode": 0,
+  "timeout": false,
+  "duration_seconds": 94.682,
+  "model_calls": 2,
+  "model_receipts": [
+    {
+      "request_sha256": "fddcdea1bc9b836786d46c0e74790d59906c018898e329a0c874e33895deb639",
+      "response_sha256": "63f1601b0403f51e4cfcfdd5b9b6caaae38a6208fa594699cbcf6ea37c702304",
+      "http_status": 200,
+      "generated_tokens": 50,
+      "generated": true,
+      "model_reported": "llama3.2:latest",
+      "usage": {
+        "prompt_tokens": 1059,
+        "completion_tokens": 50,
+        "total_tokens": 1109
+      },
+      "evidence_scope": "local_model_response"
+    },
+    {
+      "request_sha256": "5389e61b3cb60c03a28eeaedb23b95cc0f855001764018d65a1867f56ebb64de",
+      "response_sha256": "f835d3e9dda77e4202c38b6502cb0a9142c8c1004e410f30c8b9ffb5a49a73d3",
+      "http_status": 200,
+      "generated_tokens": 16,
+      "generated": true,
+      "model_reported": "llama3.2:latest",
+      "usage": {
+        "prompt_tokens": 1060,
+        "completion_tokens": 16,
+        "total_tokens": 1076
+      },
+      "evidence_scope": "local_model_response"
+    }
+  ],
+  "provenance": {
+    "repo": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL",
+    "python": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/.venv-externo/bin/python",
+    "entry": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/backend/scripts/run_twitter_simulation.py",
+    "origin": "https://github.com/MarceloClaro/MiroFish-Offline",
+    "commit": "313fe642853ff9fff05e3ecae2e439886c2d29f4",
+    "entry_sha256": "fbd9a18829ceed012f7e89b41e010f52f2c9d636d655b468458ee1276f0ba295",
+    "checkout_modified": true
+  },
+  "argv": [
+    "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/.venv-externo/bin/python",
+    "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/backend/scripts/run_twitter_simulation.py",
+    "--config",
+    "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/mcp-mirofish/simulation_config.json",
+    "--max-rounds",
+    "1",
+    "--no-wait"
+  ],
+  "output_dir": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/mcp-mirofish",
+  "generation_token_limit": 256,
+  "limits": [
+    "Inferência do modelo local executada não comprova validade científica.",
+    "Cenário de dois personagens sintéticos não representa uma população real."
+  ]
+}

@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="23" skipped="0" tests="23" time="0.485" timestamp="2026-10-04T13:36:58.903487-03:00" hostname="OPENCODE"><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change0]" time="0.021"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre0')
+change = {'runtime': 'bash'}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change1]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre1')
+change = {'command': ['rm', '-rf', '/']}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change2]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre2')
+change = {'env': {'API_KEY': 'x'}}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change3]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre3')
+change = {'base_url': 'https://example.org/v1'}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change4]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre4')
+change = {'base_url': 'http://user:password@localhost:11434/v1'}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change5]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre5')
+change = {'base_url': 'http://127.0.0.1:11434/v1?token=x'}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change6]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre6')
+change = {'prompt': ''}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change7]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre7')
+change = {'timeout_seconds': 601}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change8]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre8')
+change = {'timeout_seconds': True}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change9]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre9')
+change = {'model': '--execute'}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_invalid_configuration_precedes_effects[change10]" time="0.001"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_invalid_configuration_pre10')
+change = {'prompt': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}
+
+    @pytest.mark.parametrize("change", [
+        {"runtime": "bash"}, {"command": ["rm", "-rf", "/"]}, {"env": {"API_KEY": "x"}},
+        {"base_url": "https://example.org/v1"}, {"base_url": "http://user:password@localhost:11434/v1"},
+        {"base_url": "http://127.0.0.1:11434/v1?token=x"}, {"prompt": ""},
+        {"timeout_seconds": 601}, {"timeout_seconds": True}, {"model": "--execute"},
+        {"prompt": "x" * 12001},
+    ])
+    def test_invalid_configuration_precedes_effects(tmp_path, change):
+        with pytest.raises(ValueError):
+&gt;           api().validate_runtime_config(config(tmp_path, **change))
+            ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_configuration_is_copied_and_local" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_configuration_is_copied_a0')
+
+    def test_configuration_is_copied_and_local(tmp_path):
+        value = config(tmp_path)
+&gt;       result = api().validate_runtime_config(value)
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_process_exit_and_health_are_insufficient[0-receipts0-True-False]" time="0.003"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">returncode = 0, receipts = [], artifact = True, expected = False
+
+    @pytest.mark.parametrize("returncode, receipts, artifact, expected", [
+        (0, [], True, False), (1, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 0, "generated": False, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], False, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, True),
+    ])
+    def test_process_exit_and_health_are_insufficient(returncode, receipts, artifact, expected):
+&gt;       result = api().classify_execution(returncode, receipts, artifact)
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_process_exit_and_health_are_insufficient[1-receipts1-True-False]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">returncode = 1
+receipts = [{'generated_tokens': 5, 'generated': True, 'http_status': 200}]
+artifact = True, expected = False
+
+    @pytest.mark.parametrize("returncode, receipts, artifact, expected", [
+        (0, [], True, False), (1, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 0, "generated": False, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], False, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, True),
+    ])
+    def test_process_exit_and_health_are_insufficient(returncode, receipts, artifact, expected):
+&gt;       result = api().classify_execution(returncode, receipts, artifact)
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_process_exit_and_health_are_insufficient[0-receipts2-True-False]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">returncode = 0
+receipts = [{'generated_tokens': 0, 'generated': False, 'http_status': 200}]
+artifact = True, expected = False
+
+    @pytest.mark.parametrize("returncode, receipts, artifact, expected", [
+        (0, [], True, False), (1, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 0, "generated": False, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], False, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, True),
+    ])
+    def test_process_exit_and_health_are_insufficient(returncode, receipts, artifact, expected):
+&gt;       result = api().classify_execution(returncode, receipts, artifact)
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_process_exit_and_health_are_insufficient[0-receipts3-False-False]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">returncode = 0
+receipts = [{'generated_tokens': 5, 'generated': True, 'http_status': 200}]
+artifact = False, expected = False
+
+    @pytest.mark.parametrize("returncode, receipts, artifact, expected", [
+        (0, [], True, False), (1, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 0, "generated": False, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], False, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, True),
+    ])
+    def test_process_exit_and_health_are_insufficient(returncode, receipts, artifact, expected):
+&gt;       result = api().classify_execution(returncode, receipts, artifact)
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_process_exit_and_health_are_insufficient[0-receipts4-True-True]" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">returncode = 0
+receipts = [{'generated_tokens': 5, 'generated': True, 'http_status': 200}]
+artifact = True, expected = True
+
+    @pytest.mark.parametrize("returncode, receipts, artifact, expected", [
+        (0, [], True, False), (1, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 0, "generated": False, "http_status": 200}], True, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], False, False),
+        (0, [{"generated_tokens": 5, "generated": True, "http_status": 200}], True, True),
+    ])
+    def test_process_exit_and_health_are_insufficient(returncode, receipts, artifact, expected):
+&gt;       result = api().classify_execution(returncode, receipts, artifact)
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_missing_runtime_is_blocked_with_no_claim_of_inference" time="0.003"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_missing_runtime_is_blocke0')
+
+    def test_missing_runtime_is_blocked_with_no_claim_of_inference(tmp_path):
+&gt;       result = api().LiveScientificRuntime().run(config(tmp_path, runtime_dir=str(tmp_path / "missing")))
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_existing_output_is_never_overwritten" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_existing_output_is_never_0')
+
+    def test_existing_output_is_never_overwritten(tmp_path):
+        output = tmp_path / "result"
+        output.mkdir()
+        sentinel = output / "author.txt"
+        sentinel.write_text("preserve")
+&gt;       result = api().LiveScientificRuntime().run(config(tmp_path))
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_response_receipt_rejects_health_only_and_empty_generation" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">def test_response_receipt_rejects_health_only_and_empty_generation():
+&gt;       assert api().response_receipt({"status": "ok"}, b"{}", b"{}", 200)["generated"] is False
+               ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_response_receipt_has_hashes_but_no_credentials" time="0.003"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">def test_response_receipt_has_hashes_but_no_credentials():
+        body = json.dumps({"choices": [{"message": {"content": "Resposta"}}], "usage": {"completion_tokens": 3}}).encode()
+&gt;       receipt = api().response_receipt(json.loads(body), b"{\"model\":\"local\"}", body, 200)
+                  ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_foreign_checkout_not_executed" time="0.002"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_foreign_checkout_not_exec0')
+
+    def test_foreign_checkout_not_executed(tmp_path):
+        repo = tmp_path / "foreign"
+        repo.mkdir()
+        (repo / "hermes_cli").mkdir()
+        (repo / "hermes_cli/main.py").write_text("raise RuntimeError('must never execute')")
+&gt;       result = api().LiveScientificRuntime().run(config(tmp_path, runtime_dir=str(repo)))
+                 ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:90: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase><testcase classname="tests.test_r667_live_scientific_runtime" name="test_manifest_hash_detects_artifact_changes" time="0.003"><failure message="ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-230/test_manifest_hash_detects_art0')
+
+    def test_manifest_hash_detects_artifact_changes(tmp_path):
+        output = tmp_path / "result"
+        output.mkdir()
+        item = output / "result.txt"
+        item.write_text("original")
+&gt;       artifacts = api().artifact_manifest(output)
+                    ^^^^^
+
+tests/test_r667_live_scientific_runtime.py:100: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r667_live_scientific_runtime.py:11: in api
+    return importlib.import_module("integrations.live_scientific_runtime")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1406: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'integrations.live_scientific_runtime'
+import_ = &lt;function _gcd_import at 0x7f37e618be20&gt;
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'integrations.live_scientific_runtime'
+
+&lt;frozen importlib._bootstrap&gt;:1335: ModuleNotFoundError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,76 @@
+% ============================================================
+%  MODULO 00A — Prologo didatico: A Casa, os Viajantes e o Mapa
+%  SPEC R679 — enredo leigo-tecnico, quadriparticao F-S-T-R
+%  Citacoes com DOI ativo verificadas em 05/10/2026 via doi.org
+% ============================================================
+\chapter{Pr\'ologo Did\'atico: A Casa, os Viajantes e o Mapa}
+
+\roteirodidatico
+{Imagine uma casa onde moram muitos ajudantes: cada um sabe fazer uma coisa bem feita, mas ningu\'em sozinho d\'a conta de um pedido inteiro. Este pr\'ologo conta como Ana e Bruno entram nessa casa e aprendem a pedir, a conferir e a reconstruir.}
+{\emph{Funcional} diz o que a casa entrega vista de fora; \emph{estrutural} mostra quem mora onde e quem chama quem; \emph{te\'orica} explica por que esse jeito de organizar pode funcionar; \emph{reprodu\c{c}\~ao} ensina a refazer o caminho e a conferir cada passo.}
+{Acompanhe primeiro a hist\'oria; depois localize cada cena no c\'odigo indicado; por fim refa\c{c}a a verifica\c{c}\~ao proposta e anote o que n\~ao se pode concluir.}
+{A casa existe no reposit\'orio; o mapa did\'atico organiza a leitura; a efic\'acia de cada ajudante s\'o se avalia com teste e valida\c{c}\~ao externa. N\'umero de c\^omodos n\~ao prova qualidade do servi\c{c}o.}
+{Que cena deste pr\'ologo corresponde a que arquivo do Core, e que evid\^encia observ\'avel distingue inten\c{c}\~ao declarada de comportamento demonstrado?}
+
+\casoguiado{a primeira visita de Ana e Bruno}
+{Ana \'e professora em Crate\'us e quer um resumo fiel de um artigo para a aula. Bruno \'e desenvolvedor e quer automatizar a mesma tarefa com rastreio. O narrador, o Orquestrador MarceloClaro, recebe os dois na porta e prop\~oe a mesma regra para ambos: todo pedido entra por um s\'o balc\~ao, \'e dividido em tarefas, \'e encaminhado a quem declara capacidade, e s\'o sai como resposta depois de passar por um crit\'erio escrito. Ana aprende a desconfiar de resposta sem fonte; Bruno aprende a desconfiar de n\'umero sem comando que o recalcule.}
+
+\section{A casa vista da rua: leitura funcional}
+
+Ana n\~ao precisa saber programar para usar a casa. Ela entrega um pedido em portugu\^es, por exemplo resumir um texto, e recebe de volta um texto mais curto com as fontes indicadas. Se faltar a fonte, ela aprende neste livro a devolver a resposta e a pedir de novo. Essa exig\^encia simples, que parece apenas educa\c{c}\~ao, \'e na verdade o primeiro gate de qualidade do Core: sem crit\'erio escrito antes, n\~ao h\'a como aceitar depois.
+
+Bruno v\^e a mesma cena e pergunta o que h\'a por tr\'as do balc\~ao. O narrador responde com quatro palavras que organizam o livro inteiro: funcional, estrutural, te\'orica e reprodu\c{c}\~ao. A leitura funcional responde o que entra e o que sai. Ela n\~ao explica quem fez nem por que deu certo; apenas fixa o contrato. Todo cap\'itulo deste livro come\c{c}a aqui para que o leitor leigo nunca se perca, mesmo quando o detalhe t\'ecnico avan\c{c}a.
+
+A op\c{c}\~ao por come\c{c}ar pelo exemplo resolvido antes do formalismo n\~ao \'e improviso pedag\'ogico. A pesquisa sobre carga cognitiva mostra que resolver buscando fins com an\'alise de meios e fins consome capacidade que faria falta para formar esquemas, e que exemplos trabalhados reduzem essa busca.
+
+Essa orienta\c{c}\~ao did\'atica justifica o enredo deste livro: cada conceito aparece primeiro numa cena concreta de Ana e Bruno, depois em vocabul\'ario preciso, depois no mecanismo e s\'o ent\~ao na formaliza\c{c}\~ao \citref{SWELLER, J. Cognitive load during problem solving: effects on learning. Cognitive Science, v.~12, n.~2, p.~257-285, 1988}{10.1016/0364-0213(88)90023-7}{Justifica o metodo didatico deste livro: comecar por exemplo guiado e so entao formalizar, para nao sobrecarregar a memoria de trabalho do leitor iniciante.}{Considerable evidence indicates that domain specific knowledge in the form of schemas is the primary factor distinguishing experts from novices in problem-solving skill}{Ha evidencia consideravel de que o conhecimento especifico de dominio, na forma de esquemas, e o principal fator que distingue especialistas de novatos na habilidade de resolver problemas.}{SWELLER, 1988, p.~257-285}.
+
+\section{Quem mora onde: primeira leitura estrutural}
+
+Quando Ana entra, o narrador apresenta os moradores sem jarg\~ao. H\'a o Orquestrador, que atende no balc\~ao e nunca deixa dois balc\~oes atenderem ao mesmo tempo. H\'a os Agentes, cada um com uma plaquinha dizendo o que sabe tentar. H\'a o Quadro Negro, uma lousa onde o Orquestrador anota quem ficou com cada parte. H\'a a Mem\'oria, um caderno onde ficam guardados o que j\'a foi tentado e o que se aprendeu. H\'a as Especifica\c{c}\~oes e os Testes, dois fiscais que s\'o carimbam a sa\'ida se o prometido foi cumprido.
+
+Bruno traduz cada morador para um caminho de arquivo. O Orquestrador mora em \pth{marceloclaro/orchestrator.py}. Os Agentes est\~ao declarados em \pth{opencode.json} e descritos em \pth{agents/catalog/}. O Quadro Negro \'e o protocolo Blackboard A2A. A Mem\'oria \'e o MetaBus em \pth{mci/}. Os fiscais s\~ao \pth{specs/SPEC-935-R*.md} e \pth{tests/test_r*.py}. Essa tradu\c{c}\~ao \'e a leitura estrutural: ela liga cada personagem a um lugar observ\'avel no reposit\'orio, para que nenhuma afirma\c{c}\~ao do livro dependa apenas da hist\'oria.
+
+A ideia de dividir uma tarefa entre especialistas que se comunicam por uma lousa comum tem origem documentada na literatura de sistemas blackboard, onde fontes de conhecimento independentes cooperam pela estrutura do quadro.
+
+O vocabul\'ario quadro e fonte de conhecimento usado neste livro vem dessa tradi\c{c}\~ao, e \'e ele que permite distinguir o canal de comunica\c{c}\~ao do conte\'udo que por ele trafega \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. AI Magazine, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{Da proveniencia ao Quadro Negro A2A do Core: fontes de conhecimento independentes que cooperam por um quadro compartilhado.}{The first blackboard system was the HEARSAY-II speech understanding system that evolved between 1971 and 1976}{O primeiro sistema blackboard foi o sistema de compreensao de fala HEARSAY-II, que evoluiu entre 1971 e 1976.}{NII, 1986, p.~38-53}.
+
+Para que Ana n\~ao confunda ajudante com m\'agica, o livro fixa desde j\'a a defini\c{c}\~ao de agente que atravessa todos os cap\'itulos: componente reativo, proativo e social, cuja ativa\c{c}\~ao s\'o conta quando h\'a gatilho registrado, regra de roteamento e entrega confrontada com crit\'erio.
+
+Essa tr\'iade reatividade, proatividade e habilidade social \'e o lastro que separa um script de um agente, e ser\'a retomada em cada ficha do cat\'alogo \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. The Knowledge Engineering Review, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{Fundamenta quando um gatilho e de fato ativacao de agente neste livro: reatividade, proatividade e habilidade social convertidas em regras de roteamento.}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligencia artificial quanto na ciencia da computacao.}{WOOLDRIDGE; JENNINGS, 1995, p.~115-152}.
+
+\elemento{A Casa e seus moradores}{\metainfo{ID}{ENR-00A} \hfill \metainfo{Leitura}{funcional + estrutural} \hfill \metainfo{Rota}{AGENTS.md, opencode.json, mci/}}
+
+\begin{descricao}
+Ana usa a casa sem abrir o cap\^o: entrega pedido, recebe resposta com fonte, devolve sem fonte. Bruno abre o cap\^o: confere \pth{opencode.json} para contar agentes, abre \pth{marceloclaro/orchestrator.py} para ver o balc\~ao \'unico, abre \pth{mci/} para ver a mem\'oria. Os dois fazem a mesma pergunta por caminhos distintos: que evid\^encia sustenta esta resposta. O livro nunca permite que a hist\'oria substitua o arquivo.
+\end{descricao}
+
+\begin{funcao}
+Fixar o contrato did\'atico: todo cap\'itulo ter\'a cena, vocabul\'ario, mecanismo, evid\^encia e limite. O leigo pode parar na cena e no vocabul\'ario; o t\'ecnico deve seguir at\'e o arquivo e o comando.
+\end{funcao}
+
+\section{A f\'isica da casa: primeira leitura te\'orica}
+
+Na terceira noite, Ana pergunta por que anotar tanto. O narrador responde que gente esquece e tamb\'em se engana com confian\c{c}a. Por isso a casa mant\'em um caderno de metacogni\c{c}\~ao: n\~ao apenas o que foi feito, mas o que se pensou sobre o que foi feito. Essa distin\c{c}\~ao entre fazer e monitorar o fazer \'e antiga na psicologia do desenvolvimento e d\'a nome ao MetaBus do Core.
+
+A literatura fundadora descreve o monitoramento cognitivo como o conhecimento que a pessoa tem sobre seus pr\'oprios processos, e \'e essa defini\c{c}\~ao que este livro usa quando fala em mem\'oria metacognitiva persistida.
+
+Sem esse caderno, cada pedido come\c{c}aria do zero; com ele, o erro de ontem vira crit\'erio de amanh\~a \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. American Psychologist, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Sustenta o MetaBus como memoria metacognitiva: conhecimento e monitoramento sobre os proprios processos, nao apenas log de eventos.}{Cognitive monitoring refers to the knowledge one has about one's own cognitive processes}{Monitoramento cognitivo refere-se ao conhecimento que se tem sobre os proprios processos cognitivos.}{FLAVELL, 1979, p.~906-911}.
+
+Bruno pergunta ent\~ao por que tanta desconfian\c{c}a com n\'umeros bonitos. O narrador mostra o c\'alculo que ser\'a repetido no pr\'oximo cap\'itulo como vacina quantitativa. Suponha $N$ sa\'idas reunidas, cada uma correta com probabilidade $p$, com erros independentes. A probabilidade de todas estarem corretas \'e $p^{N}$. Logo a probabilidade de ao menos um erro \'e o complementar.
+
+\[ P(\mbox{ao menos um erro}) = 1 - p^{N}. \]
+
+Com $N=216$ e $p=0{,}99$, tem-se $\ln(0{,}99^{216}) = 216 \ln 0{,}99 \approx -2{,}17$, logo $0{,}99^{216} \approx 0{,}114$ e $P \approx 0{,}886$, cerca de 89 por cento. O n\'umero 216 ilustra a f\'ormula com o tamanho do cat\'alogo; n\~ao afirma que o Core agregue 216 respostas nem mede sua taxa de erro. A li\c{c}\~ao te\'orica \'e geral: agregar muitas sa\'idas sem gate cobra pre\c{c}o probabil\'istico, e gate com crit\'erio expl\'icito existe para tornar esse pre\c{c}o inspecion\'avel.
+
+\section{A planta para reconstruir: leitura de reprodu\c{c}\~ao}
+
+Na \'ultima cena do pr\'ologo, Ana e Bruno ganham a mesma planta. Ela tem doze passos, do clone ao PDF recompilado, cada um com comando, sa\'ida esperada e modo de conferir. A planta ser\'a executada no ep\'ilogo, mas seu princ\'ipio j\'a aparece aqui: pesquisa s\'o \'e ci\^encia quando outro consegue refazer o caminho com os mesmos materiais e comparar o resultado.
+
+Essa exig\^encia de transpar\'encia do fluxo, dos dados e do ambiente \'e o cora\c{c}\~ao da ci\^encia computacional reproduz\'ivel, e \'e ela que justifica que este livro trate comandos, vers\~oes e seeds como parte do texto, n\~ao como anexo.
+
+Reproduzir n\~ao \'e repetir por repetir: \'e permitir que o leitor troque uma pe\c{c}a e observe o efeito, mantendo o restante fixo \citref{PENG, R. D. Reproducible research in computational science. Science, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{Justifica tratar ambiente, codigo e dados como parte do relato cientifico e exigir planta de reproducao executavel neste livro.}{Reproducible research is the idea that the ultimate product of academic research is the paper along with the full computational environment}{Pesquisa reproduzivel e a ideia de que o produto final da pesquisa academica e o artigo junto com o ambiente computacional completo.}{PENG, 2011, p.~1226-1227}.
+
+\begin{aviso}
+Limite do pr\'ologo. A hist\'oria de Ana e Bruno \'e recurso did\'atico para ordenar a leitura; n\~ao constitui evid\^encia de efic\'acia de nenhum agente. Contagens citadas s\~ao fotografias do checkout e devem ser recalculadas. Tradu\c{c}\~oes de trechos s\~ao livres e n\~ao substituem o original.
+\end{aviso}

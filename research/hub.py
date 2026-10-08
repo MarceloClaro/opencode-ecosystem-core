@@ -188,11 +188,21 @@ class ResearchHub:
         if use_data_hub:
             try:
                 dk_result = self.data_hub.search(self.topic)
+                evidence_eligible = (dk_result.get("evidence_eligible") is True
+                                     and dk_result.get("status") == "online"
+                                     and not dk_result.get("synthetic", False))
+                collected = dk_result.get("results", [])
                 data_knowledge = {
                     "domain": dk_result.get("domain", "generico"),
                     "source": dk_result.get("source", "unknown"),
-                    "results": dk_result.get("results", []),
-                    "count": dk_result.get("count", 0),
+                    "status": dk_result.get("status", "unknown"),
+                    "evidence_kind": dk_result.get("evidence_kind", "unclassified"),
+                    "synthetic": dk_result.get("synthetic", False),
+                    "evidence_eligible": evidence_eligible,
+                    "provenance": dk_result.get("provenance", {}),
+                    "results": collected if evidence_eligible else [],
+                    "count": len(collected) if evidence_eligible else 0,
+                    "diagnostic_results": [] if evidence_eligible else collected,
                     "confidence": dk_result.get("confidence", 0.0),
                     "audit_id": dk_result.get("audit_id"),
                     "cross_validated": dk_result.get("cross_validated", False),

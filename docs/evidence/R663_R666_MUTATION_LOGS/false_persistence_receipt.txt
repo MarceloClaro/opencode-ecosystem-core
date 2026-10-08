@@ -1,0 +1,12 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_observation_cannot_return_persisted_receipt_after_write_failure _____
+tests/test_r666_knowledge_orchestration.py:87: in test_observation_cannot_return_persisted_receipt_after_write_failure
+    with pytest.raises(RuntimeError, match="persist"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE RuntimeError
+------------------------------ Captured log call -------------------------------
+ERROR    mci-metabus:metabus.py:88 Erro ao salvar memória: disk failure
+=========================== short test summary info ============================
+FAILED tests/test_r666_knowledge_orchestration.py::test_observation_cannot_return_persisted_receipt_after_write_failure
+1 failed in 0.34s

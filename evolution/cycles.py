@@ -34,6 +34,13 @@ STATE_PATH = os.environ.get(
     "EVOLUTION_STATE_PATH",
     os.path.join(EVOLUTION_DIR, "cycles.json"),
 )
+# R611: a sequência de round_id NÃO pode colidir com specs já existentes.
+# specs vive em <raiz>/specs (SPEC-935-R<id>-*.md); EVOLUTION_SPECS_PATH
+# permite isolar o teste sem tocar o repo real.
+SPECS_PATH = os.environ.get(
+    "EVOLUTION_SPECS_PATH",
+    os.path.join(os.path.dirname(EVOLUTION_DIR), "specs"),
+)
 
 
 @dataclass
@@ -77,8 +84,12 @@ def chain_state_merkle(prev_hex: str, state_bytes: bytes) -> str:
 class EvolutionRegistry:
     """Registro persistente de ciclos evolutivos do ecossistema."""
 
-    def __init__(self, state_path: str = STATE_PATH):
-        self.state_path = state_path
+    def __init__(self, state_path: str | None = None):
+        # R611: leitura reativa ao ambiente permite isolamento em teste sem
+        # tocar o cycles.json real (EVOLUTION_STATE_PATH).
+        self.state_path = state_path or os.environ.get(
+            "EVOLUTION_STATE_PATH", STATE_PATH,
+        )
         self.cycles: List[EvolutionCycle] = []
         self._total_score: float = 0.0
         self._scored_count: int = 0
@@ -139,6 +150,15 @@ class EvolutionRegistry:
         max_n = 46  # R1..R46 documentados no ecossistema original
         for c in self.cycles:
             m = re.match(r"R(\d+)", c.round_id)
+            if m:
+                max_n = max(max_n, int(m.group(1)))
+        # R611: specs/ também reserva numerais — scannear o diretório evita
+        # colidir com uma spec existente (bug observado: ciclo virou R607
+        # quando specs/SPEC-935-R607.md já existia).
+        specs_dir = os.environ.get("EVOLUTION_SPECS_PATH", SPECS_PATH)
+        spec_dir = glob.glob(os.path.join(specs_dir, "SPEC-935-R*.md"))
+        for path in spec_dir:
+            m = re.search(r"R(\d+)", os.path.basename(path))
             if m:
                 max_n = max(max_n, int(m.group(1)))
         return f"R{max_n + 1}"

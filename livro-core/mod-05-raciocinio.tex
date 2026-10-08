@@ -1,0 +1,407 @@
+% ============================================================
+%  MÓDULO 05 — Raciocínio: engines, transformer e modelos
+%  Parte IV do manual. Livre de laudas.
+% ============================================================
+\chapter{Raciocínio e Modelos}
+
+\roteirodidatico
+{Um resultado pode vir de uma regra programada, de um modelo estatístico ou de um serviço externo. Saber qual mecanismo participou ajuda a interpretar limites e evidências.}
+{\emph{Modelo} transforma entradas em saídas segundo parâmetros aprendidos; \emph{inferência} é o cálculo da saída; \emph{engine} é um componente que executa um método; \emph{provedor} hospeda ou disponibiliza o modelo.}
+{Parta da entrada e acompanhe o fluxo até a saída; identifique modelo, prompt, ferramentas chamadas e verificadores. Diferencie execução local de uma integração apenas configurada.}
+{Uma saída plausível não prova raciocínio válido. Examine pressupostos, incerteza, reprodutibilidade, verificadores independentes e quais partes foram realmente executadas.}
+{Que mecanismo gerou a conclusão, que premissas utilizou e qual teste poderia refutá-la?}
+
+\casoguiado{solver e premissas}
+{Suponha que as premissas sejam ``A implica B'' e ``A''. Um solver pode verificar que B decorre dessas premissas, dadas a codificação e a lógica escolhidas. Se a primeira premissa for falsa no caso real ou a tradução para a linguagem formal estiver errada, a derivação ainda pode ser válida e a conclusão aplicada continuar inadequada. A prova responde uma pergunta condicional: o que decorre das premissas?}
+
+\section{A função do raciocínio no Core}
+
+\elemento{Por que raciocínio formal, e não só ``modelo grande''}{\metainfo{ID}{R-00} \hfill \metainfo{Rota}{reasoning/}}
+
+\begin{descricao}
+O repositório inclui implementações de raciocínio simbólico e restrições
+(como Z3 e SymPy), mecanismos relacionais (como Kanren) e componentes
+probabilísticos ou heurísticos. Eles podem apoiar tarefas diferentes; sua
+presença no código não significa que participem de toda resposta. Um solver
+lógico verifica consequências de premissas formalizadas, mas não decide se as
+premissas descrevem corretamente o mundo. Um modelo bayesiano atualiza
+probabilidades dadas hipóteses, dados e pressupostos; não substitui a avaliação
+da qualidade das evidências. Contrafactuais dependem de um modelo causal
+adequado e de pressupostos explícitos.
+\end{descricao}
+
+\begin{funcao}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item oferecer métodos adequados a classes delimitadas de problemas;
+  \item tornar explícitos alguns pressupostos e condições verificáveis;
+  \item fornecer componentes que possam ser avaliados no fluxo científico.
+\end{itemize}
+\end{funcao}
+
+\clearpage
+\section{Engines simbólicas, probabilísticas e heurísticas}
+
+\elemento{Arquitetura de engines}{\metainfo{Rota}{reasoning/engines.py} \hfill \metainfo{Composição}{métodos distintos; consulte cada implementação}}
+
+\begin{resultado}
+O quadro a seguir resume famílias descritas no código; ele não afirma que todos
+os componentes sejam chamados pelo orquestrador nem que cada um forneça prova
+formal. A classificação depende do método implementado e da tarefa: \par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{YYl}
+\toprule
+Engine & Natureza & Exercício típico \\
+\midrule
+\cod{Z3Engine} & SMT/satisfatibilidade & provar que restrições são satisfazíveis \\
+\cod{SymPyEngine} & álgebra simbólica & derivar e reescrever expressões \\
+\cod{KanrenEngine} & lógica relacional & responder por regras e fatos \\
+\cod{CriticalEngine} & pensamento crítico & avaliar pressupostos e validade \\
+\cod{BayesianEngine} & probabilidade & atualizar crenças à luz de evidência \\
+\cod{CausalEngine} & inferência causal & estimar efeito de intervenções \\
+\cod{TemporalEngine} & lógica temporal & raciocinar sobre ordem e prazos \\
+\cod{FuzzyReasoningEngine} & lógica difusa & graduar pertinência (termos linguísticos) \\
+\cod{ChainOfThoughtEngine} & cadeia de raciocínio & decompor passo a passo \\
+\cod{AnalogicalEngine} & analogia & transferir estrutura entre domínios \\
+\cod{CounterfactualEngine} & contrafatual & explorar ``e se houvesse...'' \\
+\cod{QuantumReasoningEngine} & formalização quântica & superpor hipóteses e amplitudes \\
+\cod{MultiReasoningEngine} & composição & encadear os módulos anteriores \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+O \pth{MultiReasoningEngine} reúne as demais em um único dicionário de engines
+(\pth{reasoning/engines.py}) e permite composição: um problema clínico pode passar por
+Bayes (diagnóstico), Causal (exposição) e Counterfactual (e se o exame tivesse
+sido outro) em sequência governada.
+\end{metodo}
+
+\begin{flowch}[Exemplos de correspondência entre problema e método]{esquema conceitual; confirme as rotas implementadas}
+\matrix[matrix of nodes,name=re,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|problema chega \\[1mm]
+ |[fde]|exige prova lógica? \\[1mm]
+ |[fns]|Z3 / SymPy / Kanren \\[1mm]
+ |[fde]|exige crença + evidência? \\[1mm]
+ |[fns]|Bayes / Causal / Temporal \\[1mm]
+ |[fde]|exige cenário ou crítica? \\[1mm]
+ |[fns]|Counterfactual / Critical / Analogical \\[1mm]
+ |[fns]|resultado + evidência \\[2mm]
+};
+\draw[seta] (re-1-1)--(re-2-1);
+\draw[seta] (re-2-1)--(re-3-1);
+\draw[seta] (re-3-1)--(re-8-1);
+\draw[seta] (re-2-1)--(re-4-1);
+\draw[seta] (re-4-1)--(re-5-1);
+\draw[seta] (re-5-1)--(re-8-1);
+\draw[seta] (re-4-1)--(re-6-1);
+\draw[seta] (re-6-1)--(re-7-1);
+\draw[seta] (re-7-1)--(re-8-1);
+\draw[seta,plumAccent,dashed] (re-6-1.east) to[out=0,in=0,looseness=1.5]
+  node[right=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{fallback}
+  (re-8-1.east);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O fluxograma classifica o problema antes de escolher o motor: a seta de entrada é uma pergunta de natureza (é simbólico, é numérico, é textual, é criativo?) e não de ferramenta. O desenho tem cinco saídas e cada saída é um motor; a seta que desvia para \emph{fallback} é a única que admite falha, e ela é \textbf{nomeada} no desenho justamente para tornar a degradação visível.
+\textbf{Justificativa.} A classificação por natureza segue a tradição de Simon de que a escolha de procedimento é parte do próprio problema, não um detalhe de engenharia: o mesmo enunciado formulado como pergunta ou como equação requer procedimentos diferentes, e tratar a escolha como heurística é o que produz respostas plausíveis sem justificativa. O fluxograma transforma essa heurística em \textbf{regra declarativa}, que é testável \citref{SIMON, H. A. A behavioral model of rational choice. \emph{The Quarterly Journal of Economics}, v.~69, n.~1, p.~99-118, 1955}{10.2307/1884852}{A classificação por natureza segue a tradição de Simon de que a escolha de procedimento é parte do próprio problema, não um detalhe de engenharia: o mesmo enunciado formulado como pergunta ou como equação requer procedimentos diferentes, e tratar a escolha como heurística é o que produz respostas plausíveis sem justificativa. }{Broadly stated, the task is to replace the global rationality of economic man with a kind of rational behavior that is compatible with the access to information and the computational capacities that are actually possessed by organisms}{Em termos amplos, a tarefa é substituir a racionalidade global do homem econômico por um tipo de comportamento racional compatível com o acesso à informação e com as capacidades computacionais efetivamente possuídas pelos organismos.}{SIMON, 1955, p.~99--118}.\end{descricao}
+
+\begin{niveis}
+\textbf{Intuição:} um canivete de raciocínio: não se abre lata com tesoura; cada
+problema pede sua ferramenta.\\
+\textbf{Implementação:} 13 classes de engines (+ compositor); módulos de apoio:
+\pth{evaluator.py},
+\pth{reasoning/quantum.py}.\\
+\textbf{Formalização:} combina \emph{determinismo simbólico} com \emph{heurística
+cognitiva}, e a escolha do formalismo é parte do resultado — o raciocínio se
+torna um artefato auditável.
+\end{niveis}
+
+\clearpage
+\section{A malha Transformer do MetaBus}
+
+\elemento{De vetores a atenção — o pipeline textual metacognitivo}{\metainfo{Rota}{transformer/, SPEC-934}}
+
+\begin{descricao}
+A stack \pth{transformer/} (assumida do legado SPEC-934, MetaBus--Transformer)
+oferece um \emph{pipeline de semântica vetorial}: \pth{transformer/embedder.py} gera vetores;
+\pth{attention.py} pondera por
+relevância; \pth{memory.py} guarda estados
+de trabalho. O resultado é uma leitura de afinidade que alimenta o roteamento
+cognitivo.
+\end{descricao}
+
+\begin{metodo}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \textbf{Embedding}: fragmento de texto $\to$ vetor denso.
+  \item \textbf{Similaridade}: consulta vs. memória (co-seno ou análogo).
+  \item \textbf{Atenção}: pesos por tópico; estados mais ativados sobem ao
+        Global Workspace.
+  \item \textbf{Pipeline}: order invariante de aplicação das etapas.
+  \item \textbf{Memória}: retenção e esquecimento dos estados de trabalho.
+\end{enumerate}
+\end{metodo}
+
+\begin{flowch}[Pipeline Transformer do MetaBus]{vetor $\to$ proximidade $\to$ atenção}
+\matrix[matrix of nodes,name=trf,row sep=5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|texto de entrada \\[2mm]
+ |[fns]|embedder \\[2mm]
+ |[fns]|\nodep{semantic_matcher} \\[2mm]
+ |[fns]|attention \\[2mm]
+ |[fns]|pipeline + memory \\[2mm]
+ |[fns]|\nodep{roteamento/workspace} \\
+};
+\draw[seta] (trf-1-1)--(trf-2-1);
+\draw[seta] (trf-2-1)--(trf-3-1);
+\draw[seta] (trf-3-1)--(trf-4-1);
+\draw[seta] (trf-4-1)--(trf-5-1);
+\draw[seta] (trf-5-1)--(trf-6-1);
+\end{flowch}
+
+
+\textbf{Como funciona e por quê.} O desenho encadeia \emph{entrada} $\to$ \emph{análise} $\to$ \emph{MemBus} $\to$ \emph{resposta}, e o que o torna pipeline e não função única é que cada etapa \textbf{lê e escreve estado explícito}: a etapa seguinte não recebe argumentos, lê o que a anterior deixou. As setas são, portanto, \emph{pipes} de estado, e uma falha no meio deixa o estado parcial inspecionável.
+\textbf{Justificativa.} O ganho de explicitar o estado intermediário é o mesmo que a observabilidade exige de sistemas distribuídos: um resultado que não pode ser inspecionado no meio do caminho é um resultado que só se aceita ou se rejeita em bloco. A decomposição em etapas com estado legível é o que permite \textbf{auditar} uma resposta em vez de apenas recebê-la \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{O ganho de explicitar o estado intermediário é o mesmo que a observabilidade exige de sistemas distribuídos: um resultado que não pode ser inspecionado no meio do caminho é um resultado que só se aceita ou se rejeita em bloco. }{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~38--53}.\begin{limite}
+Os componentes da stack implementam o \emph{conceito} de atenção no MetaBus; não
+são um GPT treinado do zero. Sua força é a \emph{composição dentro do Core}, não a
+competição com modelos de fronteira.
+\end{limite}
+
+\clearpage
+\section{Modelos utilizados e seus impactos}
+
+\elemento{ModelRouter — o encaminhador de tarefa $\to$ modelo}{\metainfo{Rota}{provider + ModelRouter} \hfill \metainfo{Spec}{SPEC-935-R435, SPEC-935-R478}}
+
+\begin{descricao}
+O Core encaminha tarefas a modelos por \textbf{tipo de tarefa}: o
+\pth{marceloclaro/model_router.py} conhece os perfis \emph{coding}, \emph{reasoning},
+\emph{academic}, \emph{writing}, \emph{fast}, \emph{local} e \emph{math}, com
+\textit{fallback} transparente. Os provedores conhecidos pelo roteamento são
+\pth{litert-lm} e
+\pth{specs/SPEC-935-R435.md}.
+\end{descricao}
+
+\begin{resultado}
+Tabela dos provedores e das famílias que representam:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Provedor & Famílias típicas \\
+\midrule
+\pth{litert-lm} & on-device: Gemma 4 (E2B/E4B/12B) e Qwen3 (0.6B) via LiteRT-LM \\
+\pth{colibri} & OLMoE (1B/7B), MoE local \\
+\pth{ollama} & modelos locais via Ollama (configuração R607) \\
+\pth{opencode-zen} & curados Zen: GPT, Claude, Gemini, DeepSeek R2 \\
+\pth{opencode-go} & Go: Kimi, DeepSeek, GLM, Qwen, MiMo \\
+\pth{openai} & legado consorciado de provider (ex.: gpt-4o em agentes literários) \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{arquitetura}
+Prioridade de roteamento local (PAIR, \pth{SPEC-935-R478}):
+\cod{("local", "pair", "ollama", "openai")}, com
+\cod{fallback_used=True} quando um provedor está ausente. O PAIR (``Personal-AI-Router'')
+é opt-in: sem \pth{PAIR_BASE_URL} o provedor permanece inativo e a rota degrada
+sem exceção.
+\end{arquitetura}
+
+\begin{flowch}[Roteamento com fallback]{provedores em cascata}
+\matrix[matrix of nodes,name=mr,row sep=5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|tarefa + tipo (coding/academic/...) \\[2mm]
+ |[fns]|local pronto? \\[2mm]
+ |[fns]|\nodep{usar local (LiteRT/Colibri/Ollama)} \\[2mm]
+ |[fns]|senão: PAIR configurado? \\[2mm]
+ |[fns]|usar PAIR (NVIDIA) \\[2mm]
+ |[fns]|senão: API (zen/go/openai) \\[2mm]
+ |[fns]|fallback\_used = True \\[2mm]
+};
+\draw[seta] (mr-1-1)--(mr-2-1);
+\draw[seta] (mr-2-1)--(mr-3-1);
+\draw[seta] (mr-2-1)--(mr-4-1);
+\draw[seta] (mr-4-1)--(mr-5-1);
+\draw[seta] (mr-4-1)--(mr-6-1);
+\draw[seta] (mr-6-1)--(mr-7-1);
+\draw[seta] (mr-3-1)--(mr-7-1) node[midway,below,font=\tiny]{};
+\draw[seta] (mr-5-1)--(mr-7-1);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho tem uma cadeia de tentativas e o detalhe auditável é a última: quando todas as rotas falham, o sistema \textbf{declara} a falha em vez de devolver texto. A seta para \emph{declarar falha} é a que impede que um erro de infraestrutura apareça como resposta competente --- e é a seta mais importante do desenho, porque é a que quase nunca é implementada.
+\textbf{Justificativa.} O modo de falha mais estudado em raciocínio automatizado é o resultado silenciosamente errado: o modo de falha mais caro de um sistema autônomo não é a queda, é a resposta plausível e errada. Ioannidis estima que a maior parte das hipóteses publicadas em ciências empíricas não se sustenta --- o que, transposto para software, vira a regra de que \textbf{declarar a incerteza} é comportamento correto e não defeito \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{O modo de falha mais estudado em raciocínio automatizado é o resultado silenciosamente errado: o modo de falha mais caro de um sistema autônomo não é a queda, é a resposta plausível e errada. }{There is increasing concern that most current published research findings are false}{Há preocupação crescente de que a maioria dos resultados de pesquisa atualmente publicados seja falsa.}{IOANNIDIS, 2005, p.~e124}.\end{descricao}
+
+\elemento{Impactos da escolha de modelo}{\metainfo{ID}{R-09} \hfill \metainfo{Perfil}{SPEC-935-R607}}
+
+\begin{resultado}
+Quadro de impactos — distinguindo o que é \emph{medido} do que é \emph{depende do
+contexto}:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lYY}
+\toprule
+Dimensão & Local (LiteRT/Colibri/Ollama) & API (zen/go/openai) \\
+\midrule
+latência & menor por hop; sem rede & depende do provedor e da rede \\
+custo & sem custo por token & custo por token \\
+privacidade & dados permanecem na máquina & dados cruzam servidor \\
+soberania & independência de fornecedor & dependência contratual \\
+determinismo & repetível com seed & não garantido \\
+\textbf{uso energético} & consome CPU/GPU do operador & consumido pelo fornecedor \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+\textbf{Ajustes verificados (R607):} em operação local, o perfil mínimo adotado
+adicionou \pth{num_ctx=24576}
+e \pth{specs/SPEC-935-R607.md}. Medições registradas na spec distinguem o
+perfil completo (mais contexto, 21.136 tokens em janela observada e tempos de
+6--18 min) do perfil mínimo (2.051--6.712 tokens e 1m32--5m01): se interpretam
+dentro do repositório e da máquina do operador — não como benchmark universal.
+\end{metodo}
+
+\begin{aviso}
+Medições de \emph{tokenização}, \emph{velocidade} e \emph{temperatura} dependem de
+hardware, carga e versão. Este manual não publica taxa de tokens por segundo como
+promessa de desempenho; a métrica que fora divulgada foi revogada por não atender
+aos critérios de repetição (ver \pth{specs/SPEC-935-R607.md}).
+\end{aviso}
+
+\begin{limite}
+Modelos locais de menor porte (OLMoE 1B, Qwen3 0.6B) são adequados para
+\emph{assistência e composição}, não para raciocínio de fronteira. A escolha ``qual
+modelo para qual tarefa'' deve respeitar o tipo da tarefa (R-00) e o limite
+declarado do engine — modelo não substitui o gate SDD, e vice-versa.
+\end{limite}
+
+\clearpage
+\section{Executores externos e modelos de terceiros}
+
+\elemento{Delegar sem terceirizar a responsabilidade}{\metainfo{Rota}{skills gemini-cli, reasonix-cli, plandex-cli, goose-cli, haystack-rag}}
+
+\begin{descricao}
+Há ainda os \textbf{executores externos} orquestráveis como fornecedores de
+modelo/raciocínio: a CLI do \textbf{Gemini} (Google), o \textbf{Reasonix}
+(DeepSeek-Reasonix, MIT), o \textbf{Plandex} (MIT), o \textbf{Goose} (Apache-2.0) e
+o \textbf{Haystack} (Apache-2.0). Eles exigem autenticação própria
+(respectivamente \pth{DEEPSEEK_API_KEY}; os demais com seus
+fluxos) e seus resultados \emph{não passam a ser verificados por existir
+integração}.
+\end{descricao}
+
+\begin{aviso}
+A política permanece: o orquestrador controla o ciclo SDD/TDD, e resultado de
+executor externo só é aceito como {\emph{evidência}} após validação — a integração
+não é chancela de qualidade.
+\end{aviso}
+
+\section{Conclusão do módulo}
+
+\begin{resultado}
+O raciocínio do Core opera em três níveis: \emph{engines formais} (prova e lógica),
+\emph{pipeline semântico} (afinidade e atenção) e \emph{modelos} (geração e
+heurística), todos sob um roteador com fallback claro e documentos de impacto que
+separam observação local de afirmação universal.
+\end{resultado}
+
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) raciocínio como serviço separável
+(engines) e não amarra no chamador; (2) plano $\to$ execução $\to$ crítica
+(Reflexion, auto-correção); (3) otimização com orçamento explícito e
+anti-overclaim de velocidade.
+\textbf{Exercício sugerido:} desenhe o ciclo Reflexion de um agente que falha
+numa spec: o que ele lê, o que ele corrige e o que grava no MetaBus depois.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-05-raciocinio.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Raciocínio e modelos: distinguir geração e prova}
+
+\elemento{Leitura guiada — Raciocínio e modelos}{\metainfo{ID}{N-05} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{provar vs.\ gerar}}
+
+\begin{descricao}
+\textbf{O fenômeno.} Há duas maneiras de ``saber'' que o Core usa e que não devem
+ser confundidas. \emph{Provar} é decidir com garantia: dada a premissa, a conclusão
+é certa (motores formais). \emph{Gerar} é produzir a resposta mais plausível: útil,
+mas falível (modelos de linguagem). O bom projeto separa as duas e roteia cada
+tarefa para o instrumento certo --- usar um martelo para desparafusar é o pecado que
+este módulo evita.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Engine formal}: motor de prova/lógica; o catálogo reúne \textbf{13 engines}.
+  \item \textbf{Solvabilidade} ($\sigma$): fração de tarefas resolvidas com prova/modelo, $\sigma = $ (tarefas resolvidas) $/$ (tarefas totais).
+  \item \textbf{Speedup} ($A$): ganho por paralelismo, limitado pela Lei de Amdahl.
+  \item \textbf{Fração sequencial} ($s$): parte do trabalho que \emph{não} paraleliza, $0 \le s \le 1$.
+  \item \textbf{Fallback}: rota alternativa quando o instrumento principal não se aplica.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} A Lei de Amdahl, em quatro linhas.
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item Divida a tarefa: fração $1-s$ paralelizável, fração $s$ estritamente sequencial.
+  \item Com $N$ executores, o tempo cai para $s + (1-s)/N$.
+  \item Logo o ganho é \[ A(N) = \frac{1}{s + (1-s)/N}. \]
+  \item Quando $N \to \infty$, $A \to 1/s$: a parte sequencial \emph{manda}, mesmo com $N=13$ engines.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Seja $s = 0{,}2$ (20\% sequencial) e $N = 13$:
+\[ A(13) = \frac{1}{0{,}2 + \frac{0{,}8}{13}} = \frac{1}{0{,}2 + 0{,}0615}
+        = \frac{1}{0{,}2615} \approx 3{,}8, \]
+enquanto o teto assintótico é $1/0{,}2 = 5$. \textbf{Ordem de grandeza:} mesmo com
+infinitos motores, o ganho nunca passa de $5\times$; o gargalo não é o número de
+engines, é a fração sequencial.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} O roteador expõe $5$ motores de raciocínio (simbólico, algébrico, lógico, numérico e delegação externa), e o repositório integra $4$ executores externos, todos dependentes de credenciais. A ordem de grandeza que importa aqui é a assimetria de custo: um motor simbólico resolve uma equação em milissegundos, enquanto a mesma resposta por modelo de linguagem custa segundos e pode falhar em silêncio. Verificação: \cod{python3 -c "import json; print(len(json.load(open('opencode.json'))['agent']))"} confirma o tamanho do catálogo, mas o teste correto do raciocínio é o contraexemplo: uma prova que só passa com o modelo e falha com o solver é um palpite, não uma prova. É por isso que o critério de aceitação do capítulo exige o solver, e não o modelo.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Amdahl supõe fração sequencial \emph{constante} e carga
+perfeita. Na prática, coordenação e comunicação adicionam custo; o número $3{,}8$ é
+ilustração do \emph{limite}, não promessa de velocidade do Core.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Para $s=0{,}1$, qual o teto? (2) Por que ``provar'' e
+``gerar'' exigem roteiros diferentes no mesmo orquestrador?
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Raciocínio formal}
+\elemento{ativ-05r}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-05-raciocinio.tex}}
+
+\begin{processo}
+GATILHO. ``resolva'', ``prove'', ``modele''.
+ROTA. motores \pth{Z3}, \pth{SymPy}, \pth{Kanren} com roteamento automático.
+FUNÇÃO. obter prova/modelo/solução por métodos formais e simbólicos; quantificar solvabilidade.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. solvabilidade = tarefas com modelo/prova / tarefas totais; speedup teórico limitado pela fração sequencial (Lei de Amdahl).
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. a Lei de Amdahl explica por que paralelizar só parte do pipeline não acelera o todo — a fração sequencial manda. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. modelo formal válido não é prova de relevância empírica. A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação e cálculo:} A Lei de Amdahl estima o limite da aceleração quando parte do trabalho permanece sequencial: $S(N)=1/((1-p)+p/N)$, em que $p$ é a fração paralelizável e $N$ o número de processadores. Num exemplo hipotético com $p=0{,}8$ e $N=4$, $S(4)=1/(0{,}2+0{,}2)=2{,}5$; quadruplicar os processadores não quadruplica a velocidade. Com $N=8$, $S(8)=1/(0{,}2+0{,}1)\approx3{,}33$. A conta supõe carga fixa e custos de comunicação nulos: é um teto idealizado, não uma previsão de desempenho do Core \citref{AMDAHL, G. M. Validity of the single processor approach to achieving large scale computing capabilities. In: \emph{AFIPS Conference Proceedings}. v.~30, p.~483-485, 1967}{10.1145/1465482.1465560}{p.~483--485 (recorte do texto integral, p.~484). é o limite fundamental da aceleração: esforço em paralelismo sem ganho sequencial é desperdiçado — princípio que o roteamento de motores aplica ao escolher o motor mais adequado em vez de paralelizar tudo.}{The effort expended on achieving high parallel processing rates is wasted unless it is accompanied by achievements in sequential processing rates of very nearly the same magnitude}{O esforço despendido para alcançar altas taxas de processamento paralelo é desperdiçado a menos que seja acompanhado por conquistas em taxas de processamento sequencial de magnitude muito próxima.}{AMDAHL, 1967, p.~484}

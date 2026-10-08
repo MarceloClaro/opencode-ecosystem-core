@@ -1,0 +1,24 @@
+.positioner {
+  z-index: 70;
+}
+
+.popup {
+  max-width: var(--available-width);
+  padding: var(--oai-space-1) var(--oai-space-2);
+  border-radius: var(--ngs-radius-sm);
+  background: var(--color-background-inverse, var(--ngs-text));
+  color: var(--color-text-inverse, var(--ngs-surface-opaque));
+  box-shadow: var(--ngs-shadow-sm);
+  font: var(--ngs-weight-medium) var(--ngs-font-xs) / var(--ngs-leading)
+    var(--ngs-font-sans);
+  transition: opacity var(--oai-duration-fast) var(--oai-ease-standard);
+}
+
+.popup[data-starting-style],
+.popup[data-ending-style] {
+  opacity: 0;
+}
+
+.popup[data-instant] {
+  transition: none;
+}

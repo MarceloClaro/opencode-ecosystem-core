@@ -1,0 +1,112 @@
+{
+  "version": "1",
+  "pip_version": "26.1.2",
+  "install": [
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/f5/48/84b6dcba793178a44b9d99b4def6cd62f870dcfc5bb7b9153ac390135812/fastmcp-3.2.3-py3-none-any.whl",
+        "archive_info": {
+          "hashes": {
+            "sha256": "cc50af6eed1f62ed8b6ebf4987286d8d1d006f08d5bec739d5c7fb76160e0911"
+          },
+          "hash": "sha256=cc50af6eed1f62ed8b6ebf4987286d8d1d006f08d5bec739d5c7fb76160e0911"
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": true,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "fastmcp",
+        "version": "3.2.3",
+        "summary": "The fast, Pythonic way to build MCP servers and clients.",
+        "description": "<div align=\"center\">\n\n<!-- omit in toc -->\n\n<picture>\n  <source width=\"550\" media=\"(prefers-color-scheme: dark)\" srcset=\"https://raw.githubusercontent.com/PrefectHQ/fastmcp/main/docs/assets/brand/f-watercolor-waves-4-dark.png\">\n  <source width=\"550\" media=\"(prefers-color-scheme: light)\" srcset=\"https://raw.githubusercontent.com/PrefectHQ/fastmcp/main/docs/assets/brand/f-watercolor-waves-4.png\">\n  <img width=\"550\" alt=\"FastMCP Logo\" src=\"https://raw.githubusercontent.com/PrefectHQ/fastmcp/main/docs/assets/brand/f-watercolor-waves-2.png\">\n</picture>\n\n# FastMCP 🚀\n\n<strong>Move fast and make things.</strong>\n\n*Made with 💙 by [Prefect](https://www.prefect.io/)*\n\n[![Docs](https://img.shields.io/badge/docs-gofastmcp.com-blue)](https://gofastmcp.com)\n[![Discord](https://img.shields.io/badge/community-discord-5865F2?logo=discord&logoColor=white)](https://discord.gg/uu8dJCgttd)\n[![PyPI - Version](https://img.shields.io/pypi/v/fastmcp.svg)](https://pypi.org/project/fastmcp)\n[![Tests](https://github.com/PrefectHQ/fastmcp/actions/workflows/run-tests.yml/badge.svg)](https://github.com/PrefectHQ/fastmcp/actions/workflows/run-tests.yml)\n[![License](https://img.shields.io/github/license/PrefectHQ/fastmcp.svg)](https://github.com/PrefectHQ/fastmcp/blob/main/LICENSE)\n\n<a href=\"https://trendshift.io/repositories/13266\" target=\"_blank\"><img src=\"https://trendshift.io/api/badge/repositories/13266\" alt=\"prefecthq%2Ffastmcp | Trendshift\" style=\"width: 250px; height: 55px;\" width=\"250\" height=\"55\"/></a>\n</div>\n\n---\n\nThe [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) connects LLMs to tools and data. FastMCP gives you everything you need to go from prototype to production:\n\n```python\nfrom fastmcp import FastMCP\n\nmcp = FastMCP(\"Demo 🚀\")\n\n@mcp.tool\ndef add(a: int, b: int) -> int:\n    \"\"\"Add two numbers\"\"\"\n    return a + b\n\nif __name__ == \"__main__\":\n    mcp.run()\n```\n\n## Why FastMCP\n\nBuilding an effective MCP application is harder than it looks. FastMCP handles all of it. Declare a tool with a Python function, and the schema, validation, and documentation are generated automatically. Connect to a server with a URL, and transport negotiation, authentication, and protocol lifecycle are managed for you. You focus on your logic, and the MCP part just works: **with FastMCP, best practices are built in.**\n\n**That's why FastMCP is the standard framework for working with MCP.** FastMCP 1.0 was incorporated into the official MCP Python SDK in 2024. Today, the actively maintained standalone project is downloaded a million times a day, and some version of FastMCP powers 70% of MCP servers across all languages.\n\nFastMCP has three pillars:\n\n<table>\n<tr>\n<td align=\"center\" valign=\"top\" width=\"33%\">\n<a href=\"https://gofastmcp.com/servers/server\">\n<img src=\"https://raw.githubusercontent.com/PrefectHQ/fastmcp/main/docs/assets/images/servers-card.png\" alt=\"Servers\" />\n<br /><strong>Servers</strong>\n</a>\n<br />Expose tools, resources, and prompts to LLMs.\n</td>\n<td align=\"center\" valign=\"top\" width=\"33%\">\n<a href=\"https://gofastmcp.com/apps/overview\">\n<img src=\"https://raw.githubusercontent.com/PrefectHQ/fastmcp/main/docs/assets/images/apps-card.png\" alt=\"Apps\" />\n<br /><strong>Apps</strong>\n</a>\n<br />Give your tools interactive UIs rendered directly in the conversation.\n</td>\n<td align=\"center\" valign=\"top\" width=\"33%\">\n<a href=\"https://gofastmcp.com/clients/client\">\n<img src=\"https://raw.githubusercontent.com/PrefectHQ/fastmcp/main/docs/assets/images/clients-card.png\" alt=\"Clients\" />\n<br /><strong>Clients</strong>\n</a>\n<br />Connect to any MCP server — local or remote, programmatic or CLI.\n</td>\n</tr>\n</table>\n\n**[Servers](https://gofastmcp.com/servers/server)** wrap your Python functions into MCP-compliant tools, resources, and prompts. **[Clients](https://gofastmcp.com/clients/client)** connect to any server with full protocol support. And **[Apps](https://gofastmcp.com/apps/overview)** give your tools interactive UIs rendered directly in the conversation.\n\nReady to build? Start with the [installation guide](https://gofastmcp.com/getting-started/installation) or jump straight to the [quickstart](https://gofastmcp.com/getting-started/quickstart). When you're ready to deploy, [Prefect Horizon](https://www.prefect.io/horizon) offers free hosting for FastMCP users.\n\n## Installation\n\nWe recommend installing FastMCP with [uv](https://docs.astral.sh/uv/):\n\n```bash\nuv pip install fastmcp\n```\n\nFor full installation instructions, including verification and upgrading, see the [**Installation Guide**](https://gofastmcp.com/getting-started/installation).\n\n**Upgrading?** We have guides for:\n- [Upgrading from FastMCP v2](https://gofastmcp.com/getting-started/upgrading/from-fastmcp-2)\n- [Upgrading from the MCP Python SDK](https://gofastmcp.com/getting-started/upgrading/from-mcp-sdk)\n- [Upgrading from the low-level SDK](https://gofastmcp.com/getting-started/upgrading/from-low-level-sdk)\n\n## 📚 Documentation\n\nFastMCP's complete documentation is available at **[gofastmcp.com](https://gofastmcp.com)**, including detailed guides, API references, and advanced patterns.\n\nDocumentation is also available in [llms.txt format](https://llmstxt.org/), which is a simple markdown standard that LLMs can consume easily:\n\n- [`llms.txt`](https://gofastmcp.com/llms.txt) is essentially a sitemap, listing all the pages in the documentation.\n- [`llms-full.txt`](https://gofastmcp.com/llms-full.txt) contains the entire documentation. Note this may exceed the context window of your LLM.\n\n**Community:** Join our [Discord server](https://discord.gg/uu8dJCgttd) to connect with other FastMCP developers and share what you're building.\n\n## Contributing\n\nWe welcome contributions! See the [Contributing Guide](https://gofastmcp.com/development/contributing) for setup instructions, testing requirements, and PR guidelines.\n",
+        "description_content_type": "text/markdown",
+        "keywords": [
+          "agent",
+          "fastmcp",
+          "llm",
+          "mcp",
+          "mcp client",
+          "mcp server",
+          "model context protocol"
+        ],
+        "author": "Jeremiah Lowin",
+        "license_expression": "Apache-2.0",
+        "license_file": [
+          "LICENSE"
+        ],
+        "classifier": [
+          "Intended Audience :: Developers",
+          "License :: OSI Approved :: Apache Software License",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Topic :: Scientific/Engineering :: Artificial Intelligence",
+          "Typing :: Typed"
+        ],
+        "requires_dist": [
+          "authlib>=1.6.5",
+          "cyclopts>=4.0.0",
+          "exceptiongroup>=1.2.2",
+          "httpx<1.0,>=0.28.1",
+          "jsonref>=1.1.0",
+          "jsonschema-path>=0.3.4",
+          "mcp<2.0,>=1.24.0",
+          "openapi-pydantic>=0.5.1",
+          "opentelemetry-api>=1.20.0",
+          "packaging>=24.0",
+          "platformdirs>=4.0.0",
+          "py-key-value-aio[filetree,keyring,memory]<0.5.0,>=0.4.4",
+          "pydantic[email]>=2.11.7",
+          "pyperclip>=1.9.0",
+          "python-dotenv>=1.1.0",
+          "pyyaml<7.0,>=6.0",
+          "rich>=13.9.4",
+          "uncalled-for>=0.2.0",
+          "uvicorn>=0.35",
+          "watchfiles>=1.0.0",
+          "websockets>=15.0.1",
+          "anthropic>=0.48.0; extra == 'anthropic'",
+          "prefab-ui>=0.18.0; extra == 'apps'",
+          "azure-identity>=1.16.0; extra == 'azure'",
+          "pyjwt>=2.12.0; extra == 'azure'",
+          "pydantic-monty==0.0.9; extra == 'code-mode'",
+          "google-genai>=1.18.0; extra == 'gemini'",
+          "openai>=1.102.0; extra == 'openai'",
+          "fakeredis[lua]<2.35.0; extra == 'tasks'",
+          "pydocket>=0.18.0; extra == 'tasks'"
+        ],
+        "requires_python": ">=3.10",
+        "project_url": [
+          "Homepage, https://gofastmcp.com",
+          "Repository, https://github.com/PrefectHQ/fastmcp",
+          "Documentation, https://gofastmcp.com"
+        ],
+        "provides_extra": [
+          "anthropic",
+          "apps",
+          "azure",
+          "code-mode",
+          "gemini",
+          "openai",
+          "tasks"
+        ]
+      }
+    }
+  ],
+  "environment": {
+    "implementation_name": "cpython",
+    "implementation_version": "3.14.4",
+    "os_name": "posix",
+    "platform_machine": "x86_64",
+    "platform_release": "6.18.33.2-microsoft-standard-WSL2",
+    "platform_system": "Linux",
+    "platform_version": "#1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026",
+    "python_full_version": "3.14.4",
+    "platform_python_implementation": "CPython",
+    "python_version": "3.14",
+    "sys_platform": "linux"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "operation": "response",
+  "request_id": "48ce12930ae8410babc86576b44c7182",
+  "request_sha256": "3c37d476378e6c617ddd978e4de1fe4fa3dc0fe8d89c3564860b5f251dfffddb",
+  "host_tool": "mcp__ngs_compute__list_compute_targets",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"count\": 1,\n  \"targets\": [\n    {\n      \"target_id\": \"local\",\n      \"title\": \"This computer\",\n      \"provider\": \"ngs-analysis-workbench\",\n      \"controller_transport\": \"local_process\",\n      \"executor\": \"local_process\",\n      \"workspace_access\": \"local_filesystem\",\n      \"description\": \"Run the workflow controller as a process on this computer.\"\n    }\n  ]\n}"
+      }
+    ],
+    "structuredContent": {
+      "count": 1,
+      "targets": [
+        {
+          "target_id": "local",
+          "title": "This computer",
+          "provider": "ngs-analysis-workbench",
+          "controller_transport": "local_process",
+          "executor": "local_process",
+          "workspace_access": "local_filesystem",
+          "description": "Run the workflow controller as a process on this computer."
+        }
+      ]
+    },
+    "isError": false
+  },
+  "reported_by": "Codex desktop authenticated MCP host"
+}

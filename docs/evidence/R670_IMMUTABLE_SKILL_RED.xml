@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="16" time="0.313" timestamp="2026-10-04T16:51:06.713124-03:00" hostname="OPENCODE"><testcase classname="tests.test_r670_scientific_plugins" name="test_twelve_requested_plugins_without_execution_claim" time="0.004" /><testcase classname="tests.test_r670_scientific_plugins" name="test_import_preserves_files_and_policy" time="0.089" /><testcase classname="tests.test_r670_scientific_plugins" name="test_changed_import_refuses_skill" time="0.006" /><testcase classname="tests.test_r670_scientific_plugins" name="test_source_symlink_escape_refused" time="0.002" /><testcase classname="tests.test_r670_scientific_plugins" name="test_host_request_bound_to_known_tool_and_arguments" time="0.002" /><testcase classname="tests.test_r670_scientific_plugins" name="test_invalid_or_secret_request_has_no_side_effect[payload0]" time="0.001" /><testcase classname="tests.test_r670_scientific_plugins" name="test_invalid_or_secret_request_has_no_side_effect[payload1]" time="0.002" /><testcase classname="tests.test_r670_scientific_plugins" name="test_invalid_or_secret_request_has_no_side_effect[payload2]" time="0.001" /><testcase classname="tests.test_r670_scientific_plugins" name="test_receipt_identity_replay_and_failure" time="0.003" /><testcase classname="tests.test_r670_scientific_plugins" name="test_success_receipt_is_reported_not_independently_verified" time="0.003" /><testcase classname="tests.test_r670_scientific_plugins" name="test_scigrant_requires_writing_goal" time="0.002" /><testcase classname="tests.test_r670_scientific_plugins" name="test_paths_cannot_escape_ticket_or_skill_roots[../../secret]" time="0.001" /><testcase classname="tests.test_r670_scientific_plugins" name="test_paths_cannot_escape_ticket_or_skill_roots[x/y]" time="0.001" /><testcase classname="tests.test_r670_scientific_plugins" name="test_paths_cannot_escape_ticket_or_skill_roots[]" time="0.001" /><testcase classname="tests.test_r670_scientific_plugins" name="test_paths_cannot_escape_ticket_or_skill_roots[../]" time="0.001" /><testcase classname="tests.test_r670_scientific_plugins" name="test_local_python_skill_cannot_write_bytecode_into_imported_package" time="0.003"><failure message="AssertionError: assert '-B' in ['/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python', '/tmp/pytest-of-marceloclaro/pytest-245/test_local_python_skill_cannot0/skill/scripts/ncbi_entrez.py']">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-245/test_local_python_skill_cannot0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7c1c0b75f330&gt;
+
+    def test_local_python_skill_cannot_write_bytecode_into_imported_package(tmp_path, monkeypatch):
+        import subprocess
+        service = ScientificPluginService(tmp_path)
+        script = tmp_path / "skill/scripts/ncbi_entrez.py"
+        script.parent.mkdir(parents=True)
+        script.write_text("# trusted test fixture")
+        monkeypatch.setattr(service, "skill", lambda *args: {"instruction_root": str(script.parent.parent)})
+        def runner(argv, **kwargs):
+            assert "-B" in argv
+            assert kwargs["env"]["PYTHONDONTWRITEBYTECODE"] == "1"
+            return subprocess.CompletedProcess(argv, 0, '{"ok": true}', "")
+        monkeypatch.setattr(subprocess, "run", runner)
+&gt;       result = service.run_local("life-sciences-literature", "pubmed_search", {"term": "reproducibility"})
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r670_scientific_plugins.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/scientific_plugins.py:313: in run_local
+    run = subprocess.run(argv, input=stdin, capture_output=True, text=True, timeout=35,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+argv = ['/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python', '/tmp/pytest-of-marceloclaro/pytest-245/test_local_python_skill_cannot0/skill/scripts/ncbi_entrez.py']
+kwargs = {'input': '{"endpoint": "esearch", "params": {"db": "pubmed", "term": "reproducibility", "retmode": "json", "retmax": 5}, "max_items": 5, "timeout_sec": 20}', 'capture_output': True, 'text': True, 'timeout': 35, ...}
+
+    def runner(argv, **kwargs):
+&gt;       assert "-B" in argv
+E       AssertionError: assert '-B' in ['/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python', '/tmp/pytest-of-marceloclaro/pytest-245/test_local_python_skill_cannot0/skill/scripts/ncbi_entrez.py']
+
+tests/test_r670_scientific_plugins.py:133: AssertionError</failure></testcase></testsuite></testsuites>

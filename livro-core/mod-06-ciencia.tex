@@ -1,0 +1,424 @@
+% ============================================================
+%  MÓDULO 06 — Ciência: MASWOS, scanners, avaliação, benchmarks
+%  Parte V do manual. Livre de laudas.
+% ============================================================
+\chapter{Ciência: Escrita, Auditoria e Rigor}
+
+\roteirodidatico
+{Uma resposta científica precisa permitir que outra pessoa entenda a pergunta, examine as fontes e avalie como se chegou à conclusão. Este módulo percorre esse caminho.}
+{\emph{Evidência} é dado pertinente à pergunta; \emph{revisão} sintetiza estudos; \emph{RAG} recupera documentos para apoiar uma resposta; \emph{reprodutibilidade} permite refazer um procedimento com informação suficiente.}
+{Delimite a pergunta, registre a busca, avalie as fontes, extraia resultados, explicite síntese e incerteza e audite as afirmações contra a fonte original.}
+{Diferencie associação de causalidade, síntese de estudo primário e auditoria automatizada de revisão especializada. Citações rastreáveis não corrigem desenho ruim nem viés de seleção.}
+{Outra pessoa consegue reconstruir a busca e verificar que a fonte citada sustenta exatamente a afirmação?}
+
+\casoguiado{auditar uma afirmação}
+{A frase ``a intervenção reduziu o risco'' pede mais do que uma citação próxima. Localize a passagem original, identifique população, comparador, desfecho e desenho do estudo e confira se o texto afirma associação ou efeito causal. Se a fonte relata apenas associação, reescreva a frase nesse escopo. A rastreabilidade mostra de onde veio a afirmação; a avaliação metodológica determina o que é legítimo inferir.}
+
+\section{A missão científica do Core}
+
+\elemento{Ciência reprodutível como produto}{\metainfo{ID}{C-00} \hfill \metainfo{Rotas}{academic/, agentic\_science\_v2/, scientific\_lab/, research\_factory/}}
+
+\begin{descricao}
+O Core reúne componentes voltados à escrita orquestrada (MASWOS), pesquisa
+assistida, experimentação, avaliação, auditoria automatizada, benchmarks e
+simulação de cenários. Esses nomes descrevem módulos e fluxos propostos pelo
+repositório; cada capacidade precisa ser conferida em sua implementação e no
+ambiente usado. Uma auditoria automatizada pode localizar padrões definidos,
+mas não substitui avaliação especializada. Uma simulação explora consequências
+sob regras e dados de entrada; não é, por si só, observação empírica. Neste
+manual, uma conclusão científica deve mostrar a fonte, o método e o limite da
+inferência.
+\end{descricao}
+
+\clearpage
+\section{MASWOS: escrita científica multiagente}
+
+\elemento{Multi-Agent Scientific Writing Orchestration System}{\metainfo{Rota}{academic/maswos.py} \hfill \metainfo{Spec}{SPEC-010 no legado}}
+
+\begin{descricao}
+O \textbf{MASWOS} (\textit{Multi-Agent Scientific Writing Orchestration System})
+orquestra a produção de artigos com rigor: cada etapa do desenvolvimento do texto
+é executada por um agente especializado da família \cod{0X_agente_*},
+até \cod{46}. A constante
+\pth{academic/maswos.py}:\pth{MASWOS_STAGES} enumera a sequência (diagnóstico do escopo, busca e curadoria,
+evidências e citações, estrutura argumentativa, revisão de literatura, metodologia,
+estatística, visualização, resultados, discussão, conclusão, auditoria ABNT).
+\end{descricao}
+
+\begin{metodo}
+Pipeline típico:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \textbf{Diagnóstico de escopo} (01) delimita problema, objetivo e hipótese;
+  \item \textbf{Busca e curadoria} (02) consolida o corpus bibliográfico auditável;
+  \item \textbf{Evidências e citações} (03) ancora cada fonte em localização;
+  \item \textbf{Estrutura argumentativa} (04) desenha a espinha do artigo;
+  \item \textbf{Revisão de literatura} (05) e \textbf{metodologia} (06) constroem
+        o miolo;
+  \item \textbf{Estatística} (07) valida testes e limites inferenciais;
+  \item \textbf{Visualização} (08), \textbf{resultados} (09) e \textbf{discussão}
+        (10) materializam evidência e diálogo;
+  \item \textbf{Conclusão} (11) fecha sem introduzir novidade;
+  \item \textbf{Auditoria ABNT} (12) confere citação–nota–referência.
+\end{enumerate}
+\end{metodo}
+
+\begin{flowch}[Pipeline MASWOS]{da delimitação ao arquivo editorial}
+\matrix[matrix of nodes,name=mw,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|diagnóstico de escopo \\[2mm]
+ |[fns]|busca e curadoria \\[2mm]
+ |[fns]|evidências e citações \\[2mm]
+ |[fns]|estrutura argumentativa \\[2mm]
+ |[fns]|revisão de literatura \\[2mm]
+ |[fns]|metodologia + estatística \\[2mm]
+ |[fns]|resultados + discussão \\[2mm]
+ |[fns]|conclusão + auditoria ABNT \\[2mm]
+ |[fns]|QA (padrão MASWOS) \\ \\
+};
+\draw[seta] (mw-1-1)--(mw-2-1);
+\draw[seta] (mw-2-1)--(mw-3-1);
+\draw[seta] (mw-3-1)--(mw-4-1);
+\draw[seta] (mw-4-1)--(mw-5-1);
+\draw[seta] (mw-5-1)--(mw-6-1);
+\draw[seta] (mw-6-1)--(mw-7-1);
+\draw[seta] (mw-7-1)--(mw-8-1);
+\draw[seta] (mw-8-1)--(mw-9-1);
+\draw[seta,plumAccent,dashed] (mw-9-1.west) to[out=180,in=180,looseness=1.4]
+  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{reprova}
+  (mw-4-1.west);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} Os dezesseis estágios do MASWOS aparecem no desenho como \emph{cadeia com portões}, e a semântica da seta muda quando atravessa um portão: antes do portão é \emph{texto}, depois é \emph{evidência}. É essa mudança de tipo que o desenho precisa comunicar, porque um pipeline de estágios onde todos os nós são texto é apenas um índice remissivo.
+\textbf{Justificativa.} A exigência de relato completo e rastreável em revisões sistemáticas define o padrão técnico: cada afirmação precisa de um método declarado e de um rastro verificável até os dados. A corrente do portão é a tradução disso para escrita --- um estágio que não produz um item verificável não avançou, e o pipeline de texto sem portão é o que a comunidade acadêmica já pagou um preço alto em casos de fraude e retratação \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{A exigência de relato completo e rastreável em revisões sistemáticas define o padrão técnico: cada afirmação precisa de um método declarado e de um rastro verificável até os dados. }{reports of systematic reviews should be transparent and complete}{os relatos de revisões sistemáticas devem ser transparentes e completos.}{PAGE et al., 2021, p.~n160}.\end{descricao}
+
+\begin{niveis}
+\textbf{Intuição:} uma equipe de redatores trabalhando em esteira: cada especialista
+revisa a peça do anterior.\\
+\textbf{Implementação:} \pth{academic/maswos.py} mapeia etapas a agentes do catálogo; o
+orquestrador guia, não escreve sozinho.\\
+\textbf{Formalização:} \emph{orquestração por etapas com função argumentativa explícita} —
+cada seção precisa justificar sua existência; o fluxo é auditável por construir
+sobre o SDD/TDD da Parte III.
+\end{niveis}
+
+\begin{aviso}
+MASWOS organiza \emph{trabalho}, não garante \emph{publicação}: a qualidade passa
+por revisão por pares externa a este ecossistema.
+\end{aviso}
+
+\clearpage
+\section{Pesquisa aberta e reprodução}
+
+\elemento{Dados, experimentos e contexto reprodutível}{\metainfo{Rota}{agentic\_science\_v2/, scientific\_lab/, research\_factory/}}
+
+\begin{descricao}
+Ao lado da escrita, o Core mantém fábricas e laboratórios de pesquisa:
+\pth{agentic_science_v2/} estrutura investigação agentiva passo a passo;
+\pth{scientific_lab/} empacota experimentos;
+\pth{research_factory/} coordena fábrica de pesquisa — inclusive com o roteador
+PAIR (Parte IV) para inferência local.
+\end{descricao}
+
+\begin{arquitetura}
+Elementos de reprodutibilidade:
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item pré-registro experimental (\pth{prereg/});
+  \item validação estatística (\pth{stats/});
+  \item seleção de experimento (\pth{experiment/});
+  \item hipóteses geradas (\pth{hypotheses/});
+  \item grafo de evidências (\pth{mci/evidence_graph.py}) e
+        triangulação multidisciplinar;
+  \item laboratório de dados (Parte III: proveniência e engenharia de dados).
+\end{itemize}
+\end{arquitetura}
+
+\begin{limite}
+Ambientes de fábrica são \emph{re-executáveis na máquina do operador}; isso não
+implica replicação externa. O \pth{evaluation/honest_reviewer.py} da Parte IV
+continua sendo a via declarada para qualquer afirmação de validação externa.
+\end{limite}
+
+\clearpage
+\section{Os auditores (scanners)}
+
+\elemento{Oito scanners literários, scanners de pesquisa e rigor científico}{\metainfo{Rota}{scanners/pipeline.py} \hfill \metainfo{Entradas}{DiagnosticPipeline, SuperRigorPipeline}}
+
+\begin{descricao}
+A camada \pth{scanners/pipeline.py} oferece auditorias programáticas: a suíte literária
+(narrativa, personagem, estilo, símbolos, teoria, leitor, ética e inovação), a
+suíte de pesquisa literária (bibliografia, corpus comparativo, teoria e rigor) e o
+motor de rigor científico com índice de rigor (SRI) e o de excelência
+(\pth{super_rigor_audit} com escore EXS), além de verificação de integridade por
+\emph{árvore de Merkle}.
+\end{descricao}
+
+\begin{metodo}
+Pipeline de auditoria:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \textbf{Entrada}: texto plano/plano de pesquisa.
+  \item \textbf{Diagnóstico}: múltiplos scanners executam em paralelo
+        \pth{em espera}).
+  \item \textbf{Consolidação}: \pth{SuperRigorPipeline} agrega e pontua.
+  \item \textbf{Integridade}: \pth{merkle_integrity_check} verifica hashes do
+        código-fonte.
+  \item \textbf{Relatório}: escore SRI/EXS, falácias detectadas e recomendações.
+\end{enumerate}
+\end{metodo}
+
+\begin{flowch}[Auditoria por scanners]{paralelo de scanners, consolidação e escore}
+\matrix[matrix of nodes,name=sc,row sep=5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|texto (literário/científico) \\[2mm]
+ |[fns]|\nodep{scan narrativa/style/símbolos/ética} \\[2mm]
+ |[fns]|\nodep{scan bibliografia/teoria/rigor} \\[2mm]
+ |[fns]|consolida (super rigor) \\[2mm]
+ |[fns]|SRI / EXS + falácias \\[2mm]
+ |[fns]|relatório auditável \\ \\
+};
+\draw[seta] (sc-1-1)--(sc-2-1);
+\draw[seta] (sc-1-1)--(sc-3-1);
+\draw[seta] (sc-2-1)--(sc-4-1);
+\draw[seta] (sc-3-1)--(sc-4-1);
+\draw[seta] (sc-4-1)--(sc-5-1);
+\draw[seta] (sc-5-1)--(sc-6-1);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho mostra vários verificadores em paralelo alimentando um \emph{agregador}, e a seta do agregador para o veredito é uma \textbf{redução} de múltiplas dimensões a uma só. O detalhe do desenho é que existe uma seta que \textbf{não passa} pelo agregador: o bloqueio por erro duro, que interrompe antes da redução. Sem essa saída lateral, um erro fatal viraria apenas ``um escore mais baixo''.
+\textbf{Justificativa.} A metacognição inclui monitorar o próprio conhecimento, não só produzi-lo --- e monitorar exige distinguir \emph{o que eu sei} de \emph{o que eu acho que sei}. O agregador do desenho é a implementação dessa distinção quando aplicada a um texto: cada scanner é uma sondagem de uma dimensão específica, e a redução só é legítima porque as dimensões são independentes e declaradas \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{A metacognição inclui monitorar o próprio conhecimento, não só produzi-lo --- e monitorar exige distinguir \emph{o que eu sei} de \emph{o que eu acho que sei}. }{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição refere-se, entre outras coisas, ao monitoramento ativo e à consequente regulação e orquestração desses processos.}{FLAVELL, 1979, p.~906--911}.\end{descricao}
+
+\begin{aviso}
+Escolário SRI e EXS são \emph{heurísticos internos de auditoria}: nunca uma
+substituição da revisão por pares, nem fonte de ``Qualis A1''. São um carteiro que
+aponta falhas, não um tribunal que publica.
+\end{aviso}
+
+\clearpage
+\section{Avaliação honesta}
+
+\elemento{Honest Reviewer — escore de cobertura e inflação}{\metainfo{Rota}{evaluation/honest\_reviewer.py} \hfill \metainfo{Spec}{SPEC-935-R142 no legado}}
+
+\begin{descricao}
+\pth{evaluation/honest_reviewer.py} implementa a avaliação honesta: separa
+\emph{cobertura} (o que foi feito) de \emph{mérito} (o quanto isso vale), detecta
+\emph{inflação de alegações} (\pth{classify_claim}) e produz bandas de escore
+honestas (\pth{honest_score_band}). Recusa nota de topo sem validação externa.
+\end{descricao}
+
+\begin{metodo}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \pth{classify_claim()} rotula a natureza da afirmação.
+  \item \pth{detect_inflation()} localiza termos que
+        exigiriam chancela externa (``verificado'', ``Qualis A1'', ``super-humano'').
+  \item \pth{honest_score_band()} devolve uma faixa, não uma nota absoluta.
+  \item \pth{review()} emite o parecer final com limites explícitos.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+Consequência editorial: relatório de um agente pode receber \cod{A1} e,
+mesmo assim, \cod{verified} — o leitor enxerga a diferença entre
+``muito trabalho feito'' e ``resultado comprovado externamente''.
+\end{resultado}
+
+\clearpage
+\section{Benchmarks e o limite do repositório}
+
+\elemento{Fábrica de avaliações e a fronteira entre interno e externo}{\metainfo{Rota}{benchmarks/, evaluation/}}
+
+\begin{resultado}
+Harnesses verificados:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Arquivo & Função \\
+\midrule
+\pth{external_validation_harness} & via de declaração de validação externa \\
+\pth{internal_audit_harness} & auditoria interna do repositório \\
+\pth{agent_eval_harness} & avaliação de trajetórias de agentes \\
+\pth{plugin_vs_mcp_eval} & comparação de forma de integração \\
+\pth{standalone_readiness_eval} & prontidão standalone \\
+\pth{cohort_recaman} & coorte de séries (ex. Recamán) \\
+\pth{scientific_reasoning/} & suítes de raciocínio científico \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{aviso}
+Resultados de \pth{benchmarks/} valem \emph{para este repositório e este
+hardware}. Toda extrapolação (``mais rápido que...'', ``comparável a...'') exige o
+harness externo e repetição independente — sem o qual permanece observação local.
+\end{aviso}
+
+\clearpage
+\section{Simulação social e teoria dos jogos}
+
+\elemento{MiroFish e a opinião simulada}{\metainfo{Rota}{mirofish/, gametheory/, integrations/mirofish\_offline.py} \hfill \metainfo{Spec}{SPEC-015, SPEC-976}}
+
+\begin{descricao}
+O \textbf{MiroFish} (\pth{SPEC-015}) implementa enxame preditivo com vieses
+cíclicos e validação cruzada; o \textbf{MiroFish-Offline} (SPEC-976) agrega por
+\emph{composição} (nunca cópia) o serviço externo AGPL-3.0 que simula opinião
+pública (OASIS) e grafo de conhecimento. O driver
+\pth{integrations/mirofish_offline.py} é \emph{fail-closed}: sem serviço, saúde
+informa \emph{não disponível} e as chamadas falham — nunca simulam sucesso.
+\end{descricao}
+
+\begin{arquitetura}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Motor local determinístico (stdlib) para simulações de baixa escala;
+  \item driver HTTP para o backend AGPL (\pth{list_simulations()},
+         \pth{mci/egs/}), com fallback de diretório canônico;
+  \item \pth{pipeline/scientific_governance_pipeline.py} expõe a
+        saúde real do backend e contagens observadas;
+  \item \pth{gametheory/} adiciona lentes da Teoria dos Jogos (compromisso,
+        cooperação, previsão).
+\end{itemize}
+\end{arquitetura}
+
+\begin{limite}
+Simular opinião \emph{não} é medir opinião: resultados de MiroFish são produção
+sintética determinística para exploração de cenários, nunca pesquisa empírica com
+humanos nem leitura de reação real do público.
+\end{limite}
+
+\clearpage
+\section{Recuperação com rigor: RAG}
+
+\elemento{Recuperação estruturada com Haystack}{\metainfo{Rota}{integrations/haystack\_cli.py, rag/} \hfill \metainfo{Spec}{SPEC-935-R604}}
+
+\begin{descricao}
+Para recuperação de conhecimento, o Core integra o \textbf{Haystack}
+(deepset-ai/haystack, Apache-2.0) como componente orquestrável de RAG: um pipeline
+mínimo combina armazenamento de documentos, \emph{embedder} (SentenceTransformers)
+e \emph{retriever} — exposto por comandos de status e saúde
+(\pth{/haystack doctor}).
+\end{descricao}
+
+\begin{aviso}
+RAG \textbf{não gera conhecimento} por si: a qualidade da resposta depende das
+fontes indexadas e de quem chama o LLM. Sem provedor explícito, o Core não produz
+texto a partir de RAG — mantém o ciclo SDD/TDD como dono da qualidade.
+\end{aviso}
+
+\section{Conclusão do módulo}
+
+\begin{resultado}
+A parte científica do Core executa o que prega: escreve com esteira (MASWOS),
+audita com scanners, avalia com honestidade (honest reviewer), mede com harnesses
+(que sabem a diferença entre observação local e validação externa) e simula com
+disciplina (MiroFish). Cada um com limite declarado — é dessa cultura de
+\emph{fronteiras assumidas} que nasce o rigor que este manual documenta.
+\end{resultado}
+
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) pipelines científicos com
+pré-registro, evidência e replicação federada; (2) \pth{mci/metacognitive\_evaluator.py}
+classifica prontidão e nunca ``verificado'' sem validação externa;
+(3) CORRIGENDUM documenta alegações corrigidas.
+\textbf{Exercício sugerido:} pegue uma afirmação técnica que você acredita
+verdadeira e escreva qual evidência externa a tornaria verificada segundo o
+Core; depois aponte o que falta.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-06-ciencia.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Ciência e rigor: hipótese, evidência e alcance}
+
+\elemento{Leitura guiada — Ciência e rigor}{\metainfo{ID}{N-06} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{cobertura não é mérito}}
+
+\begin{descricao}
+\textbf{O fenômeno.} Dois relatórios podem ter a \emph{mesma nota de forma} e valor
+científico diferente. Um cumpriu a checklist inteira; outro cumpriu itens, mas falhou
+num ponto crítico. Se a nota olhasse só a contagem, diria que são iguais --- e
+erraria. Este módulo introduz a distinção que separa ``muito trabalho feito'' de
+``resultado comprovado'': \textbf{cobertura} (o que foi coberto) e \textbf{mérito}
+(o que foi provado).
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{SRI}: Índice de Rigor Científico, escala $0$--$100$.
+  \item \textbf{Checklist}: lista de itens de relato; alguns são \emph{críticos} (falam de falha estrutural).
+  \item \textbf{Cobertura} ($\kappa$): itens atendidos $/$ itens totais.
+  \item \textbf{Item crítico}: requisito cuja falha reprova o gate, independentemente de $\kappa$.
+  \item \textbf{Validado} (\cod{verified}): exige \emph{validação externa} explícita; nunca é atribuído pelo próprio repositório.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Por que a cobertura sozinha engana?
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item Some-se os itens atendidos e divida pelo total: $\kappa = $ atendidos $/$ total.
+  \item Verifique-se cada item \emph{crítico} separadamente.
+  \item Regra do gate: falha em item crítico $\Rightarrow$ \textbf{reprova}, ainda que $\kappa$ seja alto.
+  \item Só a validação externa promove o resultado a \cod{verified}.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Um relatório cumpre $18$ de $20$ itens, mas falha no
+único item crítico (ausência de dados primários):
+\[ \kappa = \frac{18}{20} = 0{,}90 \quad (90\%), \]
+ainda assim o gate reprova.
+Se tivesse cumprido o crítico e falhado dois itens menores, teria $\kappa = 0{,}90$
+\emph{e} aprovação. \textbf{Moraleja:} a mesma nota de forma, veredictos opostos ---
+o item crítico carrega a informação que a média apaga.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Como conferir a rubrica.} O SRI é apresentado neste projeto numa escala
+de 0 a 100. Para saber como uma lacuna afeta a nota, abra a regra de pontuação do
+scanner e compare dois textos controlados, alterando um item por vez. Um exemplo
+hipotético: se a rubrica descontar 20 pontos pela falta de um requisito crítico,
+essa ausência terá peso maior que um item não crítico com desconto de 2 pontos.
+Os valores precisam vir da rubrica executada; não se pode inferir uma distribuição
+de rigor nem um tempo de correção sem analisar resultados medidos. Mesmo uma nota
+reproduzível descreve a avaliação feita pela ferramenta, não a verdade da pesquisa.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} O SRI mede rigor de \emph{relato}, não verdade da
+afirmação. Nenhum valor de SRI, sozinho, autoriza dizer ``verificado'' ou ``Qualis
+A1''; isso permanece dependente de validação externa (R110/CORRIGENDUM).
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Dê um exemplo de item crítico e um de item menor. (2)
+Explique por que ``A1'' e \cod{verified} podem coexistir num relatório sem
+contradição.
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Ciência e MASWOS}
+\elemento{ativ-06c}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-06-ciencia.tex}}
+
+\begin{processo}
+GATILHO. ``pesquisa'', ``revisão sistemática'', ``artigo''.
+ROTA. 16 estágios MASWOS; gate: escaneadores + rubrica.
+FUNÇÃO. conduzir e auditar pesquisa com relato transparente e completo.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. SRI 0--100 (Índice de Rigor Científico) e cobertura de checklist item a item; falha em item crítico => falha do gate.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. relato transparente e completo permite ao leitor avaliar a confiança e a aplicabilidade dos achados — o mesmo requisito de qualquer revisão do ecossistema. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. relatar bem não torna o achado verdadeiro; mérito requer validação externa. A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação:} O relato transparente também precisa fechar suas contas. Se $N_i$ registros foram identificados, $N_d$ duplicatas removidas e $N_s$ submetidos à triagem, então $N_i=N_d+N_s$. Da triagem, $N_s=N_e+N_b$, em que $N_e$ são registros excluídos e $N_b$ relatórios buscados para leitura integral. Em seguida, $N_b=N_{nr}+N_f$, sendo $N_{nr}$ relatórios não recuperados e $N_f$ avaliados; por fim, $N_f=N_x+N_{inc}$, com $N_x$ excluídos após leitura integral e $N_{inc}$ relatórios incluídos. Estas igualdades expõem lacunas de contagem, mas não certificam a qualidade metodológica nem a verdade dos estudos incluídos \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{p.~n160 (resumo, p.~n160). é a norma de transparência de relato usada no Módulo 6: sem relato completo não há como julgar confiança e aplicabilidade — princípio estendido ao relato dos ciclos de evolução e das fichas.}{The methods and results of systematic reviews should be reported in sufficient detail to allow users to assess the trustworthiness and applicability of the review findings}{Os métodos e resultados de revisões sistemáticas devem ser relatados em detalhe suficiente para permitir aos usuários avaliar a confiabilidade e a aplicabilidade dos achados da revisão.}{PAGE et al., 2021, p.~n160}

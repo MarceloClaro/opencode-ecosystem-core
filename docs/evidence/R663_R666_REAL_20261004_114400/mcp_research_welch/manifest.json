@@ -1,0 +1,219 @@
+{
+  "analysis": {
+    "alpha": 0.05,
+    "alternative": "two-sided",
+    "assumptions": [
+      "Observações independentes; esta premissa não é confirmada pelo código.",
+      "A origem e a adequação da amostra dependem da proveniência informada.",
+      "Um único método é executado, sem busca por resultados significativos.",
+      "Os grupos são independentes; a inferência de Welch exige distribuição aproximadamente normal ou amostras adequadas e não implica equivalência de grupos não aleatorizados."
+    ],
+    "causal_inference": false,
+    "confidence_interval_95": [
+      -0.7951002289073511,
+      -0.6048997710926484
+    ],
+    "degrees_of_freedom": 89.04337511251656,
+    "descriptive": {
+      "Iris-versicolor": {
+        "max": 1.8,
+        "mean": 1.326,
+        "median": 1.3,
+        "min": 1.0,
+        "n": 50,
+        "standard_deviation": 0.19775268000454405
+      },
+      "Iris-virginica": {
+        "max": 2.5,
+        "mean": 2.026,
+        "median": 2.0,
+        "min": 1.4,
+        "n": 50,
+        "standard_deviation": 0.27465005563666733
+      }
+    },
+    "estimate": -0.6999999999999997,
+    "experiment_executed": true,
+    "group_sizes": {
+      "Iris-versicolor": 50,
+      "Iris-virginica": 50
+    },
+    "limitations": [
+      "A análise não estabelece causalidade.",
+      "A revisão computacional não substitui revisão humana por pares.",
+      "Não há certificação externa de originalidade ou generalização."
+    ],
+    "method": "welch_t",
+    "missing_values_policy": "reject",
+    "n": 100,
+    "null_hypothesis": "Diferença entre as médias populacionais igual a zero.",
+    "p_value": 2.111534400988574e-25,
+    "seed": 663,
+    "statistic": -14.625367047410148,
+    "variables": {
+      "group": "species",
+      "groups": [
+        "Iris-versicolor",
+        "Iris-virginica"
+      ],
+      "value": "petal_width"
+    }
+  },
+  "artifacts": {
+    "analysis": {
+      "bytes": 1769,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/analysis.json",
+      "sha256": "645a86d76e43fafd608a74c87bc388204c582db30111278948cac25e8dce2453"
+    },
+    "article": {
+      "bytes": 5349,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/article.md",
+      "sha256": "826c491e5feb21b6b2cd460fe4a103bb32df812d8c361c17ea75fe69e9e55b7b"
+    },
+    "computational_review": {
+      "bytes": 304,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/computational-review.json",
+      "sha256": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b"
+    },
+    "configuration": {
+      "bytes": 345,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/configuration.json",
+      "sha256": "ccd07c0fa21d7ce2ab6c4ba7aa7953944831e017fad936c40946d36bf7b212c7"
+    },
+    "dataset": {
+      "bytes": 3208,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/dataset.csv",
+      "sha256": "8e6de96d86fbfe22f4fd00bea58e5f159fcb222bfb22e2a52721b68c7a5bbc62"
+    },
+    "methods_code": {
+      "bytes": 8566,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/statistical_methods.py",
+      "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8"
+    },
+    "rag_corpus": {
+      "bytes": 797,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/rag-corpus.json",
+      "sha256": "4542ee9b3a80d1ac0a2e3e5ae5680e035ddce0f52f24a0a306225798c0d36084"
+    },
+    "rag_retrieval": {
+      "bytes": 824,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/rag-query.json",
+      "sha256": "f8b528669c66e62b31c949c906e8140cb299bf07aec54d7da8ade1f36b06309b"
+    },
+    "reference_source_1": {
+      "bytes": 540,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/reference-source-1.json",
+      "sha256": "f37e90518575531f60dffde437b78cf958a822851ed388ca0a8883dfa9366ab9"
+    },
+    "reference_source_2": {
+      "bytes": 549,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/reference-source-2.json",
+      "sha256": "48abda99220de311de7e589667910f99640cf9527ff1fb9441e6e150381a31e4"
+    },
+    "references": {
+      "bytes": 657,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/references.json",
+      "sha256": "a5d8b5d0486a968f138c417d8302678fb8bb5fc5e4ae4c19ac7f0884428c223c"
+    },
+    "reproduce_code": {
+      "bytes": 1110,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/reproduce.py",
+      "sha256": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575"
+    },
+    "reproduction": {
+      "bytes": 244,
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/mcp_research_welch/reproduction.json",
+      "sha256": "6eebacd6e12f4bab7dc227362547cd5fa9db1bad50dd745a78028fcd460ef4fc"
+    }
+  },
+  "computational_review": {
+    "causal_inference": false,
+    "external_validation": false,
+    "finite_numeric_output": true,
+    "human_peer_review": false,
+    "kind": "computational_review",
+    "passed": true,
+    "reproduction_matched": true,
+    "single_prespecified_method": true,
+    "source_authenticity_independently_validated": false
+  },
+  "evidence_kind": "executed_local_analysis",
+  "experiment_executed": true,
+  "external_validation": false,
+  "generated_at": "2026-10-04T14:44:28.736708+00:00",
+  "model_inference_executed": false,
+  "provenance": {
+    "dataset": {
+      "archive_sha256": "d11fe30213d36434a0879aab7cb00ce3c812eb7ba2495874438abff7b7b762e9",
+      "dataset_doi": "10.24432/C56C76",
+      "evidence_kind": "real_observations",
+      "license": "CC-BY-4.0",
+      "limitations": "Conjunto histórico; espécies têm origens distintas. Correlação agregada não prova causalidade.",
+      "member_sha256": "0fed2a99db77ec533a62dc66894d3ec6df3b58b6a8f3cf4a6b47e4086b7f97dc",
+      "original_path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R663_R666_REAL_20261004_114400/sources/iris-two-species.csv",
+      "parent_csv_sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+      "sha256": "8e6de96d86fbfe22f4fd00bea58e5f159fcb222bfb22e2a52721b68c7a5bbc62",
+      "snapshot_bytes": 3208,
+      "source_authenticity": "user_declared",
+      "source_url": "https://archive.ics.uci.edu/static/public/53/iris.zip",
+      "title": "Iris UCI — bezdekIris.data",
+      "transformation": "Subconjunto pré-especificado versicolor/virginica: 100 de 150 registros, valores preservados."
+    },
+    "references": [
+      {
+        "evidence_kind": "retrieved_http_metadata",
+        "retrieved_at": 1791125041.8008468,
+        "sha256": "f37e90518575531f60dffde437b78cf958a822851ed388ca0a8883dfa9366ab9",
+        "source_authenticity": "user_declared",
+        "source_mode": "provided_snapshot",
+        "source_url": "https://api.crossref.org/works/10.1111/j.1469-1809.1936.tb02137.x",
+        "status": "online"
+      },
+      {
+        "evidence_kind": "retrieved_http_metadata",
+        "retrieved_at": 1791125042.2289317,
+        "sha256": "48abda99220de311de7e589667910f99640cf9527ff1fb9441e6e150381a31e4",
+        "source_authenticity": "user_declared",
+        "source_mode": "provided_snapshot",
+        "source_url": "https://api.crossref.org/works/10.1111/1740-9713.01589",
+        "status": "online"
+      }
+    ]
+  },
+  "question": "Qual é a diferença observada de largura da pétala entre versicolor e virginica no Iris UCI?",
+  "rag": {
+    "abstained": false,
+    "evidence": [
+      {
+        "doc_id": "reference-2",
+        "evidence_scope": "bibliographic_metadata",
+        "lexical_score": 0.125,
+        "matched_terms": [
+          "iris",
+          "virginica"
+        ],
+        "sha256": "943c8d35e96b0da0984396d178a706944335be75cb57c80dcd959a964641d053",
+        "source": "https://doi.org/10.1111/1740-9713.01589",
+        "title": "The Iris Data Set: In Search of the Source of<i>Virginica</i>"
+      }
+    ],
+    "limitation": "A recuperação usa título/resumo; não demonstra leitura integral ou sustentação dos resultados.",
+    "method": "lexical_overlap",
+    "model_inference_executed": false,
+    "query": "Qual é a diferença observada de largura da pétala entre versicolor e virginica no Iris UCI?",
+    "retrieval_executed": true,
+    "scientific_claim_support": false
+  },
+  "reproduction": {
+    "analysis_sha256": "645a86d76e43fafd608a74c87bc388204c582db30111278948cac25e8dce2453",
+    "dataset_sha256": "8e6de96d86fbfe22f4fd00bea58e5f159fcb222bfb22e2a52721b68c7a5bbc62",
+    "exit_code": 0,
+    "matched": true,
+    "process_executed": true
+  },
+  "runtime": {
+    "python": "3.14.4",
+    "scipy": "1.18.0"
+  },
+  "status": "completed"
+}

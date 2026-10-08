@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="16" time="0.175" timestamp="2026-10-04T16:47:23.351248-03:00" hostname="OPENCODE"><testcase classname="tests.test_r668_dataset_cli" name="test_hf_download_pins_revision_and_hashes_actual_files" time="0.003" /><testcase classname="tests.test_r668_dataset_cli" name="test_invalid_download_blocks_before_cli[escape]" time="0.002" /><testcase classname="tests.test_r668_dataset_cli" name="test_invalid_download_blocks_before_cli[traversal]" time="0.001" /><testcase classname="tests.test_r668_dataset_cli" name="test_invalid_download_blocks_before_cli[shell]" time="0.001" /><testcase classname="tests.test_r668_dataset_cli" name="test_invalid_download_blocks_before_cli[provider]" time="0.001" /><testcase classname="tests.test_r668_dataset_cli" name="test_invalid_download_blocks_before_cli[size]" time="0.001" /><testcase classname="tests.test_r668_dataset_cli" name="test_invalid_download_blocks_before_cli[existing]" time="0.001" /><testcase classname="tests.test_r668_dataset_cli" name="test_preflight_size_limit_prevents_download" time="0.001" /><testcase classname="tests.test_r668_dataset_cli" name="test_cli_auth_failure_does_not_expose_token" time="0.001" /><testcase classname="tests.test_r668_dataset_cli" name="test_cli_success_without_file_is_not_download" time="0.002" /><testcase classname="tests.test_r668_dataset_cli" name="test_custom_dataset_retains_sources_and_prevents_group_leakage" time="0.004" /><testcase classname="tests.test_r668_dataset_cli" name="test_mirrors_are_deduplicated_and_splits_reproducible" time="0.006" /><testcase classname="tests.test_r668_dataset_cli" name="test_custom_rejects_modified_source" time="0.003" /><testcase classname="tests.test_r668_dataset_cli" name="test_custom_rejects_unknown_semantics" time="0.002" /><testcase classname="tests.test_r668_dataset_cli" name="test_versioned_kaggle_uses_bounded_archive_not_broken_file_endpoint[False]" time="0.002"><failure message="AssertionError: assert 'blocked' == 'completed'&#10;  &#10;  - completed&#10;  + blocked">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-242/test_versioned_kaggle_uses_bou0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7340c89bad00&gt;
+oversized = False
+
+    @pytest.mark.parametrize("oversized", [False, True])
+    def test_versioned_kaggle_uses_bounded_archive_not_broken_file_endpoint(tmp_path, monkeypatch, oversized):
+        calls = []
+        def runner(argv, **kwargs):
+            calls.append(argv)
+            stdout = ""
+            if argv[1:3] == ["datasets", "metadata"]:
+                folder = Path(argv[argv.index("--path") + 1])
+                (folder / "dataset-metadata.json").write_text(json.dumps({"licenses": [{"name": "CC0-1.0"}]}))
+            elif argv[1:3] == ["datasets", "files"]:
+                stdout = json.dumps([{"name": "Iris.csv", "size": len(CSV.encode())},
+                                     {"name": "other.csv", "size": 21_000_000 if oversized else 4}])
+            elif "--file" in argv:
+                return subprocess.CompletedProcess(argv, 1, "", "404 Not Found")
+            else:
+                folder = Path(argv[argv.index("--path") + 1])
+                with zipfile.ZipFile(folder / "iris.zip", "w") as archive:
+                    archive.writestr("Iris.csv", CSV)
+                    archive.writestr("other.csv", "a,b\n")
+            return subprocess.CompletedProcess(argv, 0, stdout, "")
+        integration = DatasetCliIntegration(root=tmp_path, runner=runner)
+        monkeypatch.setattr(integration, "_executable", lambda _provider: Path("/trusted/kaggle"))
+        result = integration.download(provider="kaggle", dataset_id="uciml/iris", revision="1",
+                                      filenames=["Iris.csv"], output_dir=str(tmp_path / "download"))
+        downloads = [argv for argv in calls if argv[1:3] == ["datasets", "download"]]
+        if oversized:
+            assert result["reason"] == "versioned_archive_preflight_exceeds_limit"
+            assert not downloads
+        else:
+&gt;           assert result["status"] == "completed"
+E           AssertionError: assert 'blocked' == 'completed'
+E             
+E             - completed
+E             + blocked
+
+tests/test_r668_dataset_cli.py:189: AssertionError</failure></testcase><testcase classname="tests.test_r668_dataset_cli" name="test_versioned_kaggle_uses_bounded_archive_not_broken_file_endpoint[True]" time="0.002"><failure message="AssertionError: assert 'cli_failed' == 'versioned_ar...exceeds_limit'&#10;  &#10;  - versioned_archive_preflight_exceeds_limit&#10;  + cli_failed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-242/test_versioned_kaggle_uses_bou1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7340c89baf10&gt;
+oversized = True
+
+    @pytest.mark.parametrize("oversized", [False, True])
+    def test_versioned_kaggle_uses_bounded_archive_not_broken_file_endpoint(tmp_path, monkeypatch, oversized):
+        calls = []
+        def runner(argv, **kwargs):
+            calls.append(argv)
+            stdout = ""
+            if argv[1:3] == ["datasets", "metadata"]:
+                folder = Path(argv[argv.index("--path") + 1])
+                (folder / "dataset-metadata.json").write_text(json.dumps({"licenses": [{"name": "CC0-1.0"}]}))
+            elif argv[1:3] == ["datasets", "files"]:
+                stdout = json.dumps([{"name": "Iris.csv", "size": len(CSV.encode())},
+                                     {"name": "other.csv", "size": 21_000_000 if oversized else 4}])
+            elif "--file" in argv:
+                return subprocess.CompletedProcess(argv, 1, "", "404 Not Found")
+            else:
+                folder = Path(argv[argv.index("--path") + 1])
+                with zipfile.ZipFile(folder / "iris.zip", "w") as archive:
+                    archive.writestr("Iris.csv", CSV)
+                    archive.writestr("other.csv", "a,b\n")
+            return subprocess.CompletedProcess(argv, 0, stdout, "")
+        integration = DatasetCliIntegration(root=tmp_path, runner=runner)
+        monkeypatch.setattr(integration, "_executable", lambda _provider: Path("/trusted/kaggle"))
+        result = integration.download(provider="kaggle", dataset_id="uciml/iris", revision="1",
+                                      filenames=["Iris.csv"], output_dir=str(tmp_path / "download"))
+        downloads = [argv for argv in calls if argv[1:3] == ["datasets", "download"]]
+        if oversized:
+&gt;           assert result["reason"] == "versioned_archive_preflight_exceeds_limit"
+E           AssertionError: assert 'cli_failed' == 'versioned_ar...exceeds_limit'
+E             
+E             - versioned_archive_preflight_exceeds_limit
+E             + cli_failed
+
+tests/test_r668_dataset_cli.py:186: AssertionError</failure></testcase></testsuite></testsuites>

@@ -116,6 +116,18 @@ class TestCatalogDescriptionBugFix:
 # ── 4. doctor(): check de CLIs externas ──────────────────────────────
 
 class TestDoctorExternalClis:
+    @pytest.fixture(autouse=True)
+    def isolated_cli_installations(self, monkeypatch, tmp_path):
+        import sys
+        from pathlib import Path
+        from marceloclaro import doctor as doctor_mod
+
+        monkeypatch.setattr(Path, "home", classmethod(lambda cls: tmp_path / "home"))
+        monkeypatch.setattr(sys, "executable", str(tmp_path / "venv" / "bin" / "python"))
+        for name in doctor_mod.EXTERNAL_CLIS:
+            key = "ANTIGRAVITY_BIN" if name == "agy" else f"{name.upper()}_BIN"
+            monkeypatch.delenv(key, raising=False)
+
     def test_check_external_clis_reports_warn_not_fail_when_missing(self, monkeypatch):
         from marceloclaro import doctor as doctor_mod
         monkeypatch.setattr(doctor_mod.shutil, "which", lambda name: None)

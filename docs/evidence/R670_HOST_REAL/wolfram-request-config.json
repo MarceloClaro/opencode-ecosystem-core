@@ -1,0 +1,9 @@
+{
+  "operation": "request",
+  "plugin_id": "wolfram",
+  "action": "evaluate",
+  "arguments": {
+    "code": "p={{{3,3},{0,5}},{{5,0},{1,1}}}; profiles=Tuples[Range[2],2];\nnash=Select[profiles,Function[s,And@@Table[p[[s[[1]],s[[2]],i]]>=Max[Table[Extract[p,Append[ReplacePart[s,i->a],i]],{a,2}]],{i,2}]]];\npareto=Select[profiles,Function[s,Not[AnyTrue[profiles,Function[t,And@@Thread[Extract[p,t]>=Extract[p,s]]&&Or@@Thread[Extract[p,t]>Extract[p,s]]]]]]];\nExportString[<|\"pure_nash\"->nash,\"pareto_profiles\"->pareto|>,\"JSON\"]",
+    "timeConstraint": 30
+  }
+}

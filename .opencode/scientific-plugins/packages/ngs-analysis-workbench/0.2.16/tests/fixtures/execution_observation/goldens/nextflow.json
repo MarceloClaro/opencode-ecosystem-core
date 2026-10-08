@@ -1,0 +1,150 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "1",
+      "attempt_number": null,
+      "completed_at": null,
+      "container": null,
+      "cpu": "106.8%",
+      "duration": "16.9s",
+      "exit_code": 0,
+      "native_id": "41710",
+      "peak_rss": "11.9 MB",
+      "peak_vmem": "17.6 MB",
+      "process": "NFCORE_DEMO:DEMO:COWPY",
+      "process_label": "COWPY",
+      "realtime": "61ms",
+      "sample_or_shard": null,
+      "started_at": null,
+      "state": "completed",
+      "submitted_at": "2026-08-07 18:07:41.705",
+      "task_hash": "da/fc9f54",
+      "task_id": "1",
+      "workdir": null
+    },
+    {
+      "attempt_id": "2",
+      "attempt_number": null,
+      "completed_at": null,
+      "container": null,
+      "cpu": "194.7%",
+      "duration": "48.9s",
+      "exit_code": 0,
+      "native_id": "41677",
+      "peak_rss": "1.2 GB",
+      "peak_vmem": "15.4 GB",
+      "process": "NFCORE_DEMO:DEMO:FASTQC",
+      "process_label": "FASTQC",
+      "realtime": "24.3s",
+      "sample_or_shard": "SRR8288062",
+      "started_at": null,
+      "state": "completed",
+      "submitted_at": "2026-08-07 18:07:40.962",
+      "task_hash": "2a/377136",
+      "task_id": "2",
+      "workdir": null
+    },
+    {
+      "attempt_id": "3",
+      "attempt_number": null,
+      "completed_at": null,
+      "container": null,
+      "cpu": "158.6%",
+      "duration": "36.3s",
+      "exit_code": 0,
+      "native_id": "42254",
+      "peak_rss": "921.4 MB",
+      "peak_vmem": "17.5 GB",
+      "process": "NFCORE_DEMO:DEMO:MULTIQC",
+      "process_label": "MULTIQC",
+      "realtime": "7.3s",
+      "sample_or_shard": "demo",
+      "started_at": null,
+      "state": "completed",
+      "submitted_at": "2026-08-07 18:08:30.888",
+      "task_hash": "38/7a3330",
+      "task_id": "3",
+      "workdir": null
+    }
+  ],
+  "attempts_truncated": false,
+  "count_unit": "task_attempts",
+  "counts": {
+    "aborted": 0,
+    "cached": 0,
+    "completed": 3,
+    "failed": 0,
+    "queued": 0,
+    "running": 0,
+    "total": 3,
+    "unknown": 0
+  },
+  "engine": "nextflow",
+  "evidence": {
+    "append_only": true,
+    "available": true,
+    "coverage": "flushed task attempts",
+    "ignored_record_count": 0,
+    "kind": "nextflow_trace",
+    "path": "workflow/trace.txt",
+    "reason": null,
+    "record_count": 3
+  },
+  "progress": {
+    "completed": 3,
+    "determinate": false,
+    "finished_attempts": 3,
+    "reason": "the trace contains observed attempts, not a planned task denominator",
+    "total": null
+  },
+  "schema_version": 1,
+  "structure": {
+    "kind": "discovered_processes",
+    "ordering": "first_terminal_observation",
+    "processes": [
+      {
+        "counts": {
+          "aborted": 0,
+          "cached": 0,
+          "completed": 1,
+          "failed": 0,
+          "queued": 0,
+          "running": 0,
+          "total": 1,
+          "unknown": 0
+        },
+        "label": "COWPY",
+        "name": "NFCORE_DEMO:DEMO:COWPY"
+      },
+      {
+        "counts": {
+          "aborted": 0,
+          "cached": 0,
+          "completed": 1,
+          "failed": 0,
+          "queued": 0,
+          "running": 0,
+          "total": 1,
+          "unknown": 0
+        },
+        "label": "FASTQC",
+        "name": "NFCORE_DEMO:DEMO:FASTQC"
+      },
+      {
+        "counts": {
+          "aborted": 0,
+          "cached": 0,
+          "completed": 1,
+          "failed": 0,
+          "queued": 0,
+          "running": 0,
+          "total": 1,
+          "unknown": 0
+        },
+        "label": "MULTIQC",
+        "name": "NFCORE_DEMO:DEMO:MULTIQC"
+      }
+    ],
+    "semantic_stages": false
+  }
+}

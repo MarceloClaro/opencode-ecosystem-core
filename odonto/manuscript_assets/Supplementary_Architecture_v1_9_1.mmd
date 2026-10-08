@@ -1,0 +1,424 @@
+flowchart TB
+
+INICIO([OdontoCA v1.9.1<br/>SDD 5.0 + TDD 5.0<br/>DADOS REAIS • ADAPTADORES UNIVERSAIS • QC • ANTI-LEAKAGE])
+
+subgraph GOV["CAMADA 0 — GOVERNANÇA, SDD 5.0 E TDD 5.0"]
+direction LR
+G1["46 requisitos SDD"]
+G2["58 testes TDD"]
+G3["UNIT"]
+G4["INTEGRATION"]
+G5["ACCEPTANCE"]
+G6["Rastreabilidade<br/>SDD → TDD"]
+G7["Seeds • Proveniência • Hashes • LGPD"]
+end
+
+INICIO --> G1 --> G2
+G2 --> G3
+G2 --> G4
+G2 --> G5
+G3 --> G6
+G4 --> G6
+G5 --> G6
+G6 --> G7
+
+subgraph DADOS["CAMADA 1 — FONTES DE DADOS REAIS"]
+direction LR
+D1["Table_S1.xlsx<br/>Single-tooth ECC"]
+D2["Qiita 14341<br/>BIOM + mapping"]
+D3["Zenodo 14827784<br/>fotografia intraoral"]
+D4["Children Caries Detection<br/>panorâmica pediátrica"]
+D5["Children's Dental Panoramic<br/>Zhang et al."]
+D6["Dental Anatomy YOLOv8"]
+D7["SegmentAnyTooth<br/>FDI opcional"]
+D8["REGRA<br/>sem métricas científicas sintéticas"]
+end
+
+G7 --> D1
+G7 --> D2
+G7 --> D3
+G7 --> D4
+G7 --> D5
+G7 --> D6
+G7 -.-> D7
+D1 -.-> D8
+D2 -.-> D8
+D3 -.-> D8
+D4 -.-> D8
+D5 -.-> D8
+D6 -.-> D8
+
+subgraph CLIN["CAMADA 2 — CLÍNICA LONGITUDINAL"]
+direction TB
+C1["Ler Table_S1<br/>schema externo preservado"]
+C2["Contrato de colunas<br/>sum_dmfs • sum_ns_dt • sum_s_dt"]
+C3["Excluir T5161"]
+C4["Organizar criança × dente × tempo"]
+C5["Reconstruir t → t+1"]
+C6{"Δ timepoint = 1?"}
+C7["Coorte onset<br/>estado inicial H"]
+C8["Target<br/>0=H→H • 1=H→C"]
+C9["Auditoria de reprodução<br/>2504→2284→1388→1160→997/84"]
+C10["Features clínico-espaciais"]
+C11["Autômato celular"]
+C12["Nested Group CV por criança"]
+C13["Modelo clínico-espacial"]
+end
+
+D1 --> C1 --> C2 --> C3 --> C4 --> C5 --> C6
+C6 -- Sim --> C7 --> C8 --> C9 --> C10 --> C11 --> C12 --> C13
+C6 -- Não --> CB["Excluir transição"]
+
+subgraph MIC["CAMADA 3 — MICROBIOMA"]
+direction TB
+M1["Inventariar Qiita/BIOM"]
+M2["Pareamento determinístico<br/>SampleID ↔ BIOM"]
+M3{"Pareamento único?"}
+M4["Matriz ASV real"]
+M5["Auditar library size"]
+M6{"Biblioteca > 0?"}
+M7["Alinhamento target × SampleID"]
+M8["Outer Group CV"]
+M9["Inner Group CV"]
+M10["Filtro ASV<br/>FIT apenas treino"]
+M11["Pseudocontagem + CLR"]
+M12["StandardScaler"]
+M13["PCA"]
+M14["Tuning nested"]
+M15["Modelo microbioma"]
+M16["Modelo combinado<br/>clínico + microbioma"]
+end
+
+D2 --> M1 --> M2 --> M3
+M3 -- Sim --> M4 --> M5 --> M6
+M3 -- Não --> MB["BLOCKED<br/>pareamento ambíguo"]
+M6 -- Sim --> M7 --> M8 --> M9 --> M10 --> M11 --> M12 --> M13 --> M14 --> M15
+M6 -- Não --> MZ["BLOCKED<br/>biblioteca zero"]
+C13 --> M16
+M15 --> M16
+
+subgraph INVENT["CAMADA 4 — INVENTÁRIO E DETECÇÃO AUTOMÁTICA DE ANOTAÇÕES"]
+direction TB
+I1["Extrair ZIP real"]
+I2["Inventariar arquivos<br/>imagens • TXT • JSON • XML • CSV • YAML"]
+I3{"Formato reconhecido?"}
+I4["YOLO YAML oficial"]
+I5["TXT YOLO por stem global"]
+I6["LabelMe JSON"]
+I7["COCO JSON"]
+I8["Pascal VOC XML"]
+I9["CSV bounding boxes"]
+I10["Máscaras → bbox YOLO"]
+I11["Converter para YOLO canônico"]
+I12["Registrar proveniência da conversão"]
+I13["Registrar falhas de parsing"]
+I14["Imagens sem ground truth<br/>→ inference_only"]
+end
+
+D3 --> I1
+D4 --> I1
+D5 --> I1
+D6 --> I1
+I1 --> I2 --> I3
+I3 --> I4
+I3 --> I5
+I3 --> I6
+I3 --> I7
+I3 --> I8
+I3 --> I9
+I3 --> I10
+I4 --> I11
+I5 --> I11
+I6 --> I11
+I7 --> I11
+I8 --> I11
+I9 --> I11
+I10 --> I11
+I11 --> I12 --> I13
+I11 --> I14
+
+subgraph SPLIT["CAMADA 5 — POLÍTICA DE SPLIT SEM LEAKAGE"]
+direction TB
+S1{"Split oficial do autor?"}
+S2["Preservar train/val/test"]
+S3{"patient_id confiável?"}
+S4["Group split por paciente"]
+S5["Criar apenas train + val"]
+S6["NÃO criar test artificial"]
+S7["Registrar nível de independência"]
+end
+
+I11 --> S1
+S1 -- Sim --> S2 --> S7
+S1 -- Não --> S3
+S3 -- Sim --> S4 --> S7
+S3 -- Não --> S5 --> S6 --> S7
+
+subgraph QC["CAMADA 6 — CONTROLE DE QUALIDADE VISUAL"]
+direction TB
+Q1["Resolução<br/>largura × altura"]
+Q2["Intensidade média"]
+Q3["Contraste"]
+Q4["Variância do Laplaciano"]
+Q5["Blur suspeito"]
+Q6["Subexposição"]
+Q7["Superexposição"]
+Q8["Baixo contraste"]
+Q9["Sem exclusão automática por padrão"]
+end
+
+S7 --> Q1 --> Q2 --> Q3 --> Q4 --> Q5
+Q4 --> Q6
+Q4 --> Q7
+Q4 --> Q8
+Q5 --> Q9
+Q6 --> Q9
+Q7 --> Q9
+Q8 --> Q9
+
+subgraph CURA["CAMADA 7 — CURADORIA ANTI-LEAKAGE"]
+direction TB
+V1["SHA-256 por imagem"]
+V2["Remover duplicatas exatas<br/>prioridade test > val > train"]
+V3["dHash + BK-tree<br/>near-duplicates reportados"]
+V4["Auditar classes e áreas bbox"]
+V5{"Desbalanceamento severo?"}
+V6["Reamostragem limitada<br/>somente train"]
+V7["val/test inalterados"]
+V8["Dataset tratado"]
+end
+
+Q9 --> V1 --> V2 --> V3 --> V4 --> V5
+V5 -- Sim --> V6 --> V7 --> V8
+V5 -- Não --> V7 --> V8
+
+subgraph DOM["CAMADA 8 — DOMÍNIOS VISUAIS SEPARADOS"]
+direction LR
+A1["Fotografia intraoral<br/>Zenodo<br/>imgsz 768"]
+A2["Panorâmica pediátrica — cárie<br/>imgsz 960"]
+A3["Panorâmica pediátrica — doenças<br/>imgsz 960"]
+A4["Anatomia dentária<br/>imgsz 768"]
+end
+
+V8 --> A1
+V8 --> A2
+V8 --> A3
+V8 --> A4
+
+subgraph TREINO["CAMADA 9 — TUNING E TREINO FINAL"]
+direction TB
+T1["Configuração-base segura"]
+T2["Configuração tratada"]
+T3["Treinos curtos"]
+T4["Comparar SOMENTE em val"]
+T5{"Selecionar melhor configuração"}
+T6["Treino final"]
+T7["Early stopping"]
+T8["Salvar best.pt"]
+T9["SHA-256 best.pt"]
+T10{"Test legítimo disponível?"}
+T11["Avaliar uma vez em test"]
+T12["Sem test legítimo:<br/>avaliar val e declarar limitação"]
+T13["Precision • Recall<br/>mAP50 • mAP50-95"]
+end
+
+A1 --> T1
+A1 --> T2
+A2 --> T1
+A2 --> T2
+A3 --> T1
+A3 --> T2
+A4 --> T1
+A4 --> T2
+T1 --> T3
+T2 --> T3
+T3 --> T4 --> T5 --> T6 --> T7 --> T8 --> T9 --> T10
+T10 -- Sim --> T11 --> T13
+T10 -- Não --> T12 --> T13
+
+subgraph FDI["CAMADA 10 — FDI E ODONTOGRAMA"]
+direction TB
+F1["SegmentAnyTooth"]
+F2["Máscara por dente"]
+F3["Numeração FDI"]
+F4["Detecção de cárie"]
+F5["IoU/overlap lesão × dente"]
+F6{"Associação não ambígua?"}
+F7["Probabilidade por dente"]
+F8["Odontograma automático"]
+F9["Revisão profissional"]
+end
+
+D7 --> F1 --> F2 --> F3
+T13 --> F4
+F3 --> F5
+F4 --> F5
+F5 --> F6
+F6 -- Sim --> F7 --> F8
+F6 -- Não --> F9
+
+subgraph FUSAO["CAMADA 11 — FUSÃO MULTIMODAL"]
+direction TB
+U1["Predição clínica"]
+U2["Predição microbioma"]
+U3["Predição visual por dente"]
+U4{"Mesma coorte?"}
+U5{"Mesmo patient_id?"}
+U6{"Mesmo visit_id?"}
+U7{"Mesmo tooth_fdi?"}
+U8["Fusão autorizada"]
+U9["Meta-modelo"]
+UB["BLOCKED<br/>cross-cohort/key mismatch"]
+end
+
+C13 --> U1
+M15 --> U2
+F7 --> U3
+U1 --> U4
+U2 --> U4
+U3 --> U4
+U4 -- Não --> UB
+U4 -- Sim --> U5
+U5 -- Não --> UB
+U5 -- Sim --> U6
+U6 -- Não --> UB
+U6 -- Sim --> U7
+U7 -- Não --> UB
+U7 -- Sim --> U8 --> U9
+
+subgraph VAL["CAMADA 12 — VALIDAÇÃO CIENTÍFICA"]
+direction LR
+R1["OOF"]
+R2["PR-AUC"]
+R3["ROC-AUC"]
+R4["Brier"]
+R5["Log Loss"]
+R6["Bootstrap por criança"]
+R7["Δ métricas"]
+R8["Below-chance audit"]
+R9["1-AUC<br/>diagnóstico apenas"]
+end
+
+C13 --> R1
+M15 --> R1
+M16 --> R1
+R1 --> R2
+R1 --> R3
+R1 --> R4
+R1 --> R5
+R1 --> R6 --> R7
+R1 --> R8 --> R9
+
+subgraph TDDRUN["CAMADA 13 — EXECUÇÃO TDD 5.0"]
+direction TB
+Z1["Executar 58 testes"]
+Z2["UNIT"]
+Z3["INTEGRATION"]
+Z4["ACCEPTANCE"]
+Z5["PASS / SKIP / FAIL"]
+Z6["Rastreabilidade SDD → TDD"]
+Z7{"Existe FAIL?"}
+Z8["Cobertura SDD = 100%"]
+ZB["PIPELINE BLOQUEADO"]
+end
+
+R9 --> Z1
+T13 --> Z1
+F8 --> Z1
+Z1 --> Z2
+Z1 --> Z3
+Z1 --> Z4
+Z2 --> Z5
+Z3 --> Z5
+Z4 --> Z5
+Z5 --> Z6 --> Z7
+Z7 -- Sim --> ZB
+Z7 -- Não --> Z8
+
+subgraph GATES["CAMADA 14 — CRITÉRIOS DE ACEITAÇÃO"]
+direction TB
+AC1["Contagens clínicas reproduzidas"]
+AC2["Leakage paciente = 0"]
+AC3["Qiita alinhado"]
+AC4["Nested preprocessing"]
+AC5["Formato visual reconhecido"]
+AC6["Ground truth suficiente"]
+AC7["Inference-only separado"]
+AC8["QC visual disponível"]
+AC9["Duplicatas cross-split = 0"]
+AC10["Tuning somente em val"]
+AC11["Rotas legadas removidas"]
+AC12["best.pt + SHA-256"]
+AC13["Métricas finitas"]
+AC14{"Todos aprovados?"}
+AP["APPROVED<br/>PIPELINE DE PESQUISA"]
+BL["BLOCKED<br/>corrigir e reexecutar"]
+NOTE["APPROVED ≠ validação clínica"]
+end
+
+Z8 --> AC1 --> AC2 --> AC3 --> AC4 --> AC5 --> AC6 --> AC7 --> AC8 --> AC9 --> AC10 --> AC11 --> AC12 --> AC13 --> AC14
+AC14 -- Sim --> AP --> NOTE
+AC14 -- Não --> BL
+
+subgraph OUT["CAMADA 15 — SAÍDAS REPRODUZÍVEIS"]
+direction LR
+O1["sdd_5_requisitos.csv"]
+O2["tdd_5_especificacoes.csv"]
+O3["tdd_5_resultados.csv"]
+O4["rastreabilidade_sdd_tdd.csv"]
+O5["inventarios de datasets"]
+O6["falhas_parsing_v1_9.csv"]
+O7["QC visual CSVs"]
+O8["predicoes OOF"]
+O9["metricas modelos"]
+O10["tuning_visual_validacao.csv"]
+O11["best.pt + hashes"]
+O12["manifesto"]
+O13["relatório de validação"]
+O14["FHIR RiskAssessment<br/>preliminary"]
+O15["ZIP final"]
+end
+
+AP --> O1
+AP --> O2
+AP --> O3
+AP --> O4
+AP --> O5
+AP --> O6
+AP --> O7
+AP --> O8
+AP --> O9
+AP --> O10
+AP --> O11
+AP --> O12
+AP --> O13
+AP --> O14
+AP --> O15
+
+O15 --> FIM([RESULTADOS PARA ARTIGO<br/>somente após execução real aprovada])
+
+classDef gov fill:#E8EAF6,stroke:#3949AB,stroke-width:2px,color:#111;
+classDef dados fill:#E8F5E9,stroke:#2E7D32,stroke-width:2px,color:#111;
+classDef clin fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#111;
+classDef mic fill:#F3E5F5,stroke:#6A1B9A,stroke-width:2px,color:#111;
+classDef visual fill:#FCE4EC,stroke:#C2185B,stroke-width:2px,color:#111;
+classDef treino fill:#FFF3E0,stroke:#EF6C00,stroke-width:2px,color:#111;
+classDef fusao fill:#E0F2F1,stroke:#00796B,stroke-width:2px,color:#111;
+classDef val fill:#FFF8E1,stroke:#F9A825,stroke-width:2px,color:#111;
+classDef tdd fill:#EDE7F6,stroke:#512DA8,stroke-width:2px,color:#111;
+classDef out fill:#E0F7FA,stroke:#00838F,stroke-width:2px,color:#111;
+classDef block fill:#FFEBEE,stroke:#C62828,stroke-width:3px,color:#B71C1C;
+classDef ok fill:#E8F5E9,stroke:#1B5E20,stroke-width:3px,color:#1B5E20;
+
+class G1,G2,G3,G4,G5,G6,G7 gov;
+class D1,D2,D3,D4,D5,D6,D7,D8 dados;
+class C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13 clin;
+class M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,M11,M12,M13,M14,M15,M16 mic;
+class I1,I2,I3,I4,I5,I6,I7,I8,I9,I10,I11,I12,I13,I14,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,V1,V2,V3,V4,V5,V6,V7,V8,A1,A2,A3,A4,F1,F2,F3,F4,F5,F6,F7,F8,F9 visual;
+class T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13 treino;
+class U1,U2,U3,U4,U5,U6,U7,U8,U9 fusao;
+class R1,R2,R3,R4,R5,R6,R7,R8,R9 val;
+class Z1,Z2,Z3,Z4,Z5,Z6,Z7,Z8 tdd;
+class O1,O2,O3,O4,O5,O6,O7,O8,O9,O10,O11,O12,O13,O14,O15 out;
+class MB,MZ,CB,UB,ZB,BL block;
+class AP,NOTE,FIM ok;

@@ -1,36 +1,40 @@
 ---
 id: gemini-notebooklm-bridge
 name: gemini-notebooklm-bridge
+description: >-
+  Integra CLI, MCP e skill oficiais do Gemini Notebook à orquestração MarceloClaro,
+  preservando schemas, perfis, estados operacionais e proveniência de artefatos.
 type: integration
-round: R601
-spec: SPEC-935-R601-gemini-notebooklm-bridge.md
-trust: 0.8
+round: R674
+spec: SPEC-935-R674-gemini-notebook-orchestration.md
+trust: 0.5
 ---
 
-# gemini-notebooklm-bridge — Ponte Gemini CLI ↔ Gemini Notebook (ex-NotebookLM)
+# gemini-notebooklm-bridge — Gemini Notebook no Core
 
-Habilita o Gemini CLI a operar o Gemini Notebook (notebooklm.google.com) como
-agente: notebooks, fontes (URL/PDF/texto/Drive), chats, export — usando cookies
-da sessão do navegador (APIs internas, NÃO oficiais).
+Atue pelo `MarceloClaroOrchestrator.gemini_notebook_action`, através do
+Blackboard/A2A e MetaBus. Não inicie executores paralelos por nome de agente.
+O repositório de referência é https://github.com/MarceloClaro/gemini-notebook-mcp-cli.
 
-## Estado (piloto)
+## Contrato operacional
 
-- `nlm` instalado no .venv; auth validada (`nlm login --check` → 222 notebooks).
-- MCP do Gemini configurado em `~/.gemini/settings.json` (comando absoluto).
-- Handshake MCP OK: `gemini-notebook-mcp v4.0.5`.
-- Faltante (operador): modelo do Gemini — API key, `gemini login` ou Gemma local.
+1. Consulte `operation=status` e `operation=catalog` para disponibilidade e schemas atuais.
+2. Leia `operation=skill` no contexto atual; preserve as referências e a política upstream.
+3. Use `operation=mcp`, `tool`, `arguments` ou `operation=cli`, `argv` iniciado por `nlm`.
+4. Prepare efeitos com `dry_run=true`; `confirm=true` representa autorização concreta,
+   incluindo suboperações de batch/pipeline. Login privado é feito no programa oficial.
+5. Preserve pending, partial e failed; downloads precisam de arquivos reais e hashes.
 
-## Operação
+## Capacidades e limites
 
-```bash
-nlm login --check                       # validar sessão (cookies)
-nlm notebook list                       # notebooks disponíveis
-nlm source add <notebook> --url "https://..."   # adicionar fonte
-gemini -p "resuma o notebook X" --skip-trust --approval-mode yolo   # via MCP
-```
+Notebooks, fontes, pesquisa/importação, chats síncronos e assíncronos,
+consultas entre notebooks, organização, notas, compartilhamento, Studio,
+downloads/exportação, uso, perfis e diagnóstico são derivados do catálogo
+instalado. MCP usa o perfil ativo upstream. Enterprise é experimental e
+depende da configuração/autorização do provedor; suporte de interface não
+comprova execução em uma conta Enterprise.
 
-## Limites
-
-- APIs internas não documentadas (podem quebrar); cookies expiram.
-- `trust: true` concedido ao server (imperativo do Gemini CLI).
-- Não substitui API oficial (inexistente); automação sujeita a termos/uso razoável.
+A CLI e o servidor MCP são oficiais do projeto citado, e usam APIs internas
+do serviço Google. Uma conexão operacional não valida cientificamente seu
+conteúdo. Registre somente estado e hashes no MetaBus, sem notas de confiança,
+cookies, textos privados ou alegações históricas de disponibilidade.

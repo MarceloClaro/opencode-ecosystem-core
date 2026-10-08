@@ -29,7 +29,7 @@ mode: subagent
 temperature: 0
 permission:
   bash:
-    *: deny
+    "*": deny
     bash .opencode/skills/task-management/router.sh complete*: allow
     bash .opencode/skills/task-management/router.sh status*: allow
   edit:

@@ -1,0 +1,616 @@
+% ============================================================
+%  MÓDULO 03 — Orquestração e Roteamento (expansão detalhada)
+%  Estrutura: camadas → etapas do orquestrador → roteamento →
+%  memória compartilhada → interface.
+% ============================================================
+\chapter{Orquestração e suas Camadas}
+
+\roteirodidatico
+{Se uma solicitação exige pesquisa, análise e revisão, alguém precisa dividir o trabalho e recompor os resultados. Essa coordenação é a função da orquestração.}
+{\emph{Roteamento} escolhe um caminho; \emph{capacidade} descreve tarefas que um agente pode tentar; \emph{pontuação} ordena candidatos; \emph{fallback} é a alternativa quando a rota preferida não serve.}
+{Acompanhe uma tarefa desde a entrada até a seleção do agente, a comunicação pelo quadro e a composição da resposta. Leia a regra de seleção antes de interpretar o escore.}
+{Uma pontuação ordena candidatos sob uma regra definida; não é probabilidade de acerto nem garantia de competência. Verifique pesos, critérios de desempate, falhas e caminho alternativo.}
+{Que entrada altera a escolha do agente e como você confirmaria, por um registro observável, que a rota selecionada foi executada?}
+
+\casoguiado{escolha entre dois perfis}
+{Considere dois perfis fictícios: um é descrito para localizar fontes e outro para resumir textos fornecidos. Um pedido que exige busca pode favorecer o primeiro; um pedido que já fornece os documentos pode favorecer o segundo. Essa decisão ilustra correspondência entre tarefa e descrição, não mede desempenho. Para avaliar a regra, registre entradas, candidatos, pontuações, decisão e resultado em vários casos rotulados previamente.}
+
+\section{Visão em camadas: como tudo interage}
+
+\elemento{Mapa de camadas do Core}{\metainfo{ID}{L-00} \hfill \metainfo{Organização}{mapa didático de responsabilidades; consulte o capítulo anterior}}
+
+\begin{descricao}
+Para entender a orquestração, primeiro separe as responsabilidades que o manual
+organiza em oito camadas lógicas. As camadas são um mapa de leitura, não uma regra
+que obrigue todo módulo a conversar apenas com o vizinho imediato. No código,
+algumas dependências atravessam camadas por interfaces, eventos ou memória
+compartilhada. Ao seguir um fluxo, confira cada caminho indicado na tabela e no
+repositório: o diagrama resume relações principais, não todas as chamadas possíveis.
+\end{descricao}
+
+\begin{resultado}
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lcY}
+\toprule
+Camada & Nome & O que habita \\
+\midrule
+7 & Aplicações & skills, MASWOS, nano-orquestração, MiroFish, pesquisa, livros \\
+6 & Integrações & servidores MCP (7), executores externos (Gemini, Reasonix, Plandex, Goose, Haystack), Reversa \\
+5 & Evolução e Registro & \pth{evolution/cycles.py} (459 ciclos no registro atual), specs série R*, CORRIGENDUM \\
+4 & Qualidade e Rigor & SDD/TDD (\pth{trust/}), scanners, benchmarks \\
+3 & Roteamento e Orquestração & \pth{marceloclaro/} (orquestrador, attention router), circuitos de atenção (layer 3 do mapa) \\
+2 & Memória e Metacognição & MetaBus, blackboard A2A, memória metacognitiva, EGS/OQS/VSEE (\pth{mci/}) \\
+1 & Interfaces & CLI, configuração de agentes e skills \\
+0 & Fundação & princípios (SDD/TDD, anti-overclaim), infraestrutura, modelo local \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\clearpage
+\begin{flowch}[Fluxograma completo da arquitetura]{camadas em sequência; retornos e integrações destacados nas laterais}
+\tikzset{
+  archLayer/.style={draw=plumAccent,rounded corners=2mm,fill=panel,
+    text=white,text width=6.7cm,align=left,font=\footnotesize,
+    inner xsep=6pt,inner ysep=4pt,line width=.65pt},
+  archPrimary/.style={archLayer,fill=plumDeep,draw=plumAccent,line width=1pt},
+  archQuality/.style={archLayer,fill=panelAlt,draw=gold},
+  archMemory/.style={archLayer,fill=panelAlt,draw=steel},
+  archFlow/.style={-Stealth,draw=white!75,line width=.9pt},
+  archEvent/.style={-Stealth,draw=plumAccent,line width=1pt},
+  archGate/.style={-Stealth,draw=gold,line width=1pt},
+  archReturn/.style={-Stealth,draw=steel,line width=1pt,dashed}
+}
+\matrix[matrix of nodes,name=cm,row sep=2.5mm,column sep=3mm,nodes={archLayer},ampersand replacement=\&]{
+ |[archLayer]|\textbf{7 — Aplicações}\quad skills, MASWOS, nano-orquestração, MiroFish, pesquisa científica e livros \\
+ |[archLayer]|\textbf{6 — Integrações}\quad 7 servidores MCP, executores externos (Gemini, Reasonix, Plandex, Goose e Haystack), Reversa \\
+|[archLayer]|\textbf{5 — Evolução e registro}\quad \texttt{evolution/cycles.py} (459 ciclos no registro atual), specs da série R* e CORRIGENDUM \\
+ |[archQuality]|\textbf{4 — Qualidade e rigor}\quad SDD/TDD (spec $\to$ código $\to$ teste), trust, scanners e benchmarks \\
+ |[archPrimary]|\textbf{3 — Roteamento e orquestração}\quad orquestrador (marceloclaro), attention router e circuitos de atenção \\
+ |[archMemory]|\textbf{2 — Memória e metacognição}\quad MetaBus, blackboard A2A e memória metacognitiva (MCI) \\
+ |[archLayer]|\textbf{1 — Interfaces}\quad CLI (\texttt{opencode.json}), compilação do catálogo e portas de entrada \\
+ |[archLayer]|\textbf{0 — Fundação}\quad princípios SDD/TDD e anti-overclaim, infraestrutura e modelo local (R435/R478/R607) \\
+};
+\draw[archFlow] (cm-1-1.south)--(cm-2-1.north);
+\draw[archFlow] (cm-2-1.south)--(cm-3-1.north);
+\draw[archFlow] (cm-3-1.south)--(cm-4-1.north);
+\draw[archFlow] (cm-4-1.south)--(cm-5-1.north);
+\draw[archFlow] (cm-5-1.south)--(cm-6-1.north);
+\draw[archFlow] (cm-6-1.south)--(cm-7-1.north);
+\draw[archFlow] (cm-7-1.south)--(cm-8-1.north);
+\draw[archEvent] (cm-5-1.west) to[out=180,in=180,looseness=1.25] (cm-6-1.west);
+\draw[archReturn] (cm-6-1.east) to[out=0,in=0,looseness=1.25] (cm-5-1.east);
+\draw[archGate] (cm-5-1.east) to[out=0,in=0,looseness=1.7] (cm-4-1.east);
+\draw[archEvent] (cm-5-1.west) to[out=180,in=180,looseness=1.8] (cm-3-1.west);
+\draw[archEvent,dashed] (cm-2-1.west) to[out=180,in=180,looseness=1.35] (cm-1-1.west);
+\draw[archReturn] (cm-8-1.east) to[out=0,in=0,looseness=1.5] (cm-6-1.east);
+\node[draw=plumAccent,fill=panelAlt,rounded corners=2mm,text=white,
+  text width=4.2cm,align=left,inner sep=5pt,font=\scriptsize,anchor=west,
+  right=7mm of cm-6-1]{
+  \textbf{Canais do sistema}\\[1mm]
+  \textcolor{plumAccent}{A2A}: delegação entre agentes\\
+  \textcolor{steel}{MetaBus}: memória compartilhada\\
+  \textcolor{gold}{SDD/TDD}: gate de qualidade\\
+  \textcolor{plumAccent}{MCP}: ferramentas e executores\\
+  \textcolor{steel}{Tracejado}: retorno ao runtime\\[1mm]
+  \textbf{Eventos}: \texttt{task.cfp}, \texttt{task.assigned}, \texttt{metacognition.reflected}\\
+  \textbf{MCP}: \texttt{mci\_post\_task}, \texttt{mci\_get\_memory}, \texttt{mci\_get\_blackboard\_state}};
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como ler o desenho.} As oito camadas aparecem da aplicação, no alto, até
+a fundação, embaixo. As setas brancas mostram a dependência principal do fluxo;
+as coloridas destacam canais laterais, como eventos, gates e retornos. Portanto,
+o desenho não afirma que toda requisição percorra oito etapas nem que todo retorno
+seja uma chamada direta: é preciso conferir a função e o caminho do código citado.
+\textbf{Justificativa.} Brooks argumenta que nenhuma mudança isolada de tecnologia
+ou gestão garante, por si só, uma melhora de uma ordem de grandeza em
+produtividade, confiabilidade e simplicidade. A aplicação ao Core é uma decisão
+de projeto: decompor responsabilidades pode tornar dependências mais legíveis,
+mas o número de camadas não prova que os contratos estejam corretos nem que o
+sistema seja mais confiável. Esses pontos dependem de implementação e evidência
+\citref{BROOKS, F. P. No silver bullet: essence and accidents of software engineering. \emph{Computer}, v.~20, n.~4, p.~10-19, 1987}{10.1109/MC.1987.1663532}{Brooks sustenta que nenhum avanço isolado garante, por si só, uma melhoria de ordem de grandeza em produtividade, confiabilidade e simplicidade. A organização em camadas é uma escolha de projeto deste manual; a citação não demonstra que oito camadas sejam superiores.}{There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity}{Não há um único desenvolvimento, seja em tecnologia ou técnica de gestão, que por si só prometa uma melhoria de uma ordem de magnitude em produtividade, confiabilidade e simplicidade dentro de uma década.}{BROOKS, 1987, p.~10--19}.
+\end{descricao}
+
+
+
+\begin{conceito}
+A camada 3 (orquestração) é a \emph{espinha dorsal}: ela conversa com a memória
+(2), cobra qualidade (4), registra evolução (5) e roteia trabalho para agentes —
+que vivem nas camadas superiores. Tudo isso sob as fundações (0).
+\end{conceito}
+
+\begin{niveis}
+\textbf{Intuição:} imagine setores de uma equipe: cada um tem uma responsabilidade,
+e alguns canais permitem encaminhar informação entre setores.\\
+\textbf{Implementação:} chamadas descem da interface para serviços de runtime;
+eventos e memória compartilhada permitem outras formas de troca entre componentes.\\
+\textbf{Formalização:} arquitetura em camadas com \emph{direção de dependência controlada} e
+acoplamento por \emph{publicação-assinatura} (tópicos \pth{task\_events}\allowbreak,
+\pth{metacognition.reflected}\allowbreak) — mitigando o acoplamento entre
+aplicações e infraestrutura.
+\end{niveis}
+
+\section{O orquestrador, etapa por etapa}
+
+\elemento{Etapa 1 — PERCEBE (percepção)}{\metainfo{ID}{O-1} \hfill \metainfo{Rota}{\pth{perceive(topic, limit)}}}
+
+\begin{descricao}
+O orquestrador \textbf{não parte do zero}: ele se inscreve em tópicos de entrada
+(\pth{mci_post_task} — chamadas por proposta de tarefa) e lê a memória global para
+entender o estado atual do ecossistema antes de decidir o que fazer.
+\end{descricao}
+
+\begin{processo}
+Detalhe do subfluxo (não é um passo único):
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Verifica tópicos pendentes (\pth{task.assigned}).
+  \item Carrega memória metacognitiva relevante ao tema (via MetaBus, camada 2).
+  \item Filtra por \texttt{topic} e \texttt{limit} (janela do contexto recebido).
+  \item Traduz a demanda em \emph{formulário de trabalho} para delegação.
+\end{enumerate}
+\end{processo}
+
+\begin{arquitetura}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Assinatura típica: \cod{delegate(description, required_capabilities)} — L211 do
+        \pth{marceloclaro/orchestrator.py}.
+  \item Consome: \pth{mci/mcp_server.py} (exposição).
+  \item Produz: contexto curado para a etapa seguinte.
+\end{itemize}
+\end{arquitetura}
+
+\begin{flowch}[Subfluxo PERCEBE]{os 4 momentos internos}
+\matrix[matrix of nodes,name=p1,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|verifica tópicos \\[2mm]
+ |[fns]|carrega memória \\[2mm]
+ |[fns]|filtra (topic, limit) \\[2mm]
+ |[fns]|formulário de trabalho \\ \\
+};
+\draw[seta] (p1-1-1)--(p1-2-1);
+\draw[seta] (p1-2-1)--(p1-3-1);
+\draw[seta] (p1-3-1)--(p1-4-1);
+\node[fn,anchor=west,right=10mm of p1-2-1,font=\tiny]{origem: task.cfp / MetaBus};
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O subfluxo tem quatro nós encadeados — verificar tópicos, carregar memória, filtrar, \emph{formulário de trabalho} — e a seta entre ``carregar'' e ``filtrar'' é a mais importante do desenho: filtrar \textbf{antes} de carregar evita pagar por contexto que não será usado. A ordem é anti-intuitiva para quem pensa em ``buscar tudo e depois escolher'', e é deliberada.
+\textbf{Justificativa.} A inversão (filtrar antes de carregar) é a consequência direta da racionalidade limitada de Simon: o sistema não pode manter tudo em contexto, então tem de \textbf{escolher} cedo. Um sistema que carrega tudo e filtra depois não economiza nada -- ele transfere o custo para o modelo, que é o componente mais caro e o mais frágil da pilha \citref{SIMON, H. A. A behavioral model of rational choice. \emph{The Quarterly Journal of Economics}, v.~69, n.~1, p.~99-118, 1955}{10.2307/1884852}{A inversão (filtrar antes de carregar) é a consequência direta da racionalidade limitada de Simon: o sistema não pode manter tudo em contexto, então tem de \textbf{escolher} cedo. }{Broadly stated, the task is to replace the global rationality of economic man with a kind of rational behavior that is compatible with the access to information and the computational capacities that are actually possessed by organisms}{Em termos amplos, a tarefa é substituir a racionalidade global do homem econômico por um tipo de comportamento racional compatível com o acesso à informação e com as capacidades computacionais efetivamente possuídas pelos organismos.}{SIMON, 1955, p.~99--118}.\end{descricao}
+
+\begin{resultado}
+Saída da etapa: um contexto enxuto e \emph{classificado} que alimentará o filtro
+de atenção — nada de ``trazer o mundo inteiro'' para a delegação.
+\end{resultado}
+
+\elemento{Etapa 2 — DELEGA (delegação com atenção)}{\metainfo{ID}{O-2} \hfill \metainfo{Rota}{\pth{mci/blackboard.py}}}
+
+\begin{descricao}
+Com o contexto percebido, o orquestrador \emph{roteia} a tarefa: o circuit de
+atenção filtra os nós (agentes) mais relevantes e a delegação é publicada no
+blackboard para voluntários declararem as capacidades necessárias.
+\end{descricao}
+
+\begin{processo}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Monta a descrição da tarefa, capacidades requeridas e contexto (dataclass
+         \pth{mci_post_task} — microtarefa).
+  \item Consulta o roteador de atenção (layer 3) para ranquear candidatos.
+  \item Publica no blackboard A2A (ferramenta MCP \pth{mci_post_task}).
+  \item Aplica gates de runtime: confiança mínima \pth{RUNTIME_MIN_TRUST=0.25} e
+        carga máxima \pth{RUNTIME_MAX_LOAD=1.0}.
+  \item Um agente voluntário aceita; o orquestrador registra a atribuição.
+\end{enumerate}
+\end{processo}
+
+\begin{arquitetura}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Chamada em \pth{marceloclaro/orchestrator.py} —
+        L222 do orquestrador.
+  \item Protocolo: blackboard A2A (\pth{SPEC-002}).
+  \item Filtro: \pth{AttentionRouter} compara a tarefa a cartões e capacidades disponíveis.
+  \item Estrutura: \pth{DelegationRecord} (dataclass de atribuição).
+\end{itemize}
+\end{arquitetura}
+
+\begin{flowch}[Subfluxo DELEGA]{filtro de atenção $\to$ blackboard $\to$ gates}
+\matrix[matrix of nodes,name=p2,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|atenção: ranqueia candidatos \\[2mm]
+ |[fns]|blackboard: mci\_post\_task \\[2mm]
+ |[fde]|confiança $\ge$ 0.25 e carga $\le$ 1.0? \\[2mm]
+ |[fns]|voluntário selecionado \\[2mm]
+ |[fns]|atribuição registrada \\ \\
+};
+\draw[seta] (p2-1-1)--(p2-2-1);
+\draw[seta] (p2-2-1)--(p2-3-1);
+\draw[seta] (p2-4-1)--(p2-5-1);
+\draw[seta] (p2-3-1)--(p2-4-1);
+\draw[seta,plumAccent,dashed] (p2-3-1.west) to[out=180,in=180,looseness=1.35]
+  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{recusado}
+  (p2-1-1.west);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho encadeia filtro de atenção $\to$ Blackboard $\to$ gates, e a seta para o quadro significa \textbf{publicação de CFP}, não ``chamada'': quem delega não escolhe o executor, publica a especificação e aguarda o voluntariat. O nó de gates é o ponto de estrangulamento: é ali que a delegação é \textbf{aceita ou recusada}, e a recusa é uma saída legítima do fluxo, não uma falha.
+\textbf{Justificativa.} Publicar no quadro em vez de chamar diretamente é a distinção que Nii introduziu entre o \textbf{modelo de quadro-negro} e a resolução por um único especialista: o quadro acumula contribuições de fontes independentes, enquanto a segunda abordagem depende de um único resolvedor. O preço é a latência; a vantagem é que nenhum agente se torna um caminho obrigatório, o que torna o sistema tolerante a falhas em vez de frágil \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{Publicar no quadro em vez de chamar diretamente é a distinção que Nii introduziu entre o \textbf{quadro} e o \textbf{quadro de idiom}: o quadro acumula conhecimento de fontes independentes enquanto o idiom depende de um único resolvedor. }{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~38--53}.\end{descricao}
+
+\begin{limite}
+Os gates (\pth{RUNTIME_MAX_LOAD}) são \emph{heurísticas
+determinísticas} de sanidade — não substituem a verificação de qualidade da etapa
+seguinte.
+\end{limite}
+
+\clearpage
+\elemento{Etapa 3 — EXECUTA (execução com verificação fechada)}{\metainfo{ID}{O-3} \hfill \metainfo{Rota}{gate SDD/TDD no \pth{sdd/tdd_runner.py}}}
+
+\begin{descricao}
+O agente voluntário executa a microtarefa. Mas o orquestrador \emph{não aceita
+qualquer resultado}: exige a \emph{tríade silenciosa} — spec verificada
+(\pth{tdd_runner.run_spec_test()}).
+\end{descricao}
+
+\begin{metodo}
+O gate é \textbf{fail-closed}: se a spec não bate ou o teste não passa, a tarefa
+não é encerrada como concluída — volta para revisão (etapa 4).
+\end{metodo}
+
+\begin{arquitetura}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Verificação: \pth{sdd/tdd_runner.py}.
+  \item Família de testes: \pth{tests/test_r*.py} (ex.: suítes R137/R211/R212,
+        39 testes verdes verificados em execução local).
+  \item Ponto de encerramento: \pth{marceloclaro/orchestrator.py} — L669 — decide
+        concluir ou devolver.
+\end{itemize}
+\end{arquitetura}
+
+\begin{flowch}[Subfluxo EXECUTA]{tríade silenciosa com gate fail-closed}
+\matrix[matrix of nodes,name=p3,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|agente entrega artefato \\[2mm]
+ |[fns]|\nodep{spec_verifier.verify()} \\[2mm]
+ |[fns]|\nodep{tdd_runner.run_spec_test()} \\[2mm]
+ |[fde]|verde + spec ok? \\[2mm]
+ |[fns]|\nodep{encerrar (report_completion)} \\ \\
+};
+\draw[seta] (p3-1-1)--(p3-2-1);
+\draw[seta] (p3-2-1)--(p3-3-1);
+\draw[seta] (p3-3-1)--(p3-4-1);
+\draw[seta] (p3-4-1)--(p3-5-1);
+\draw[seta,plumAccent,dashed] (p3-4-1.west) to[out=180,in=180,looseness=1.35]
+  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{não: devolve}
+  (p3-2-1.west);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} Os nós {\em especialistas} executam em paralelo e convergem num nó de síntese, e a seta de convergência é o ponto do desenho: o orquestrador \textbf{não executa}, ele sintetiza. A paralelização dos especialistas é estrutural -- cada um devolve um resultado tipado, e a síntese é um nó distinto porque é onde os resultados \textbf{podem discordar}.
+\textbf{Justificativa.} A paralelização só compensa se o gargalo for dominado por trabalho paralelo -- a lei de Amdahl. Como o gargalo do Core é a orquestração e a verificação, \textbf{não} paralelizar o raciocínio e paralelizar a execução é uma escolha economicamente defensável, e o desenho mostra por que: o nó de síntese é sequencial e explícito, não escondido dentro de um agente qualquer \citref{AMDAHL, G. M. Validity of the single processor approach to achieving large scale computing capabilities. In: \emph{AFIPS Conference Proceedings}. v.~30, p.~483-485, 1967}{10.1145/1465482.1465560}{A paralelização só compensa se o gargalo for dominado por trabalho paralelo -- a lei de Amdahl. }{The effort expended on achieving high parallel processing rates is wasted unless it is accompanied by achievements in sequential processing rates of very nearly the same magnitude}{O esforço despendido para alcançar altas taxas de processamento paralelo é desperdiçado a menos que seja acompanhado por conquistas em taxas de processamento sequencial de magnitude muito próxima.}{AMDAHL, 1967, p.~483--485}.\end{descricao}
+
+\begin{aviso}
+Página em verde de teste local demonstra \emph{comportamento esperado no
+repositório} — não é certificação externa nem prova de mérito (anti-overclaim).
+\end{aviso}
+
+\elemento{Etapa 4 — REFLETE (reflexão e registro)}{\metainfo{ID}{O-4} \hfill \metainfo{Rota}{\pth{evolution/cycles.py}}}
+
+\begin{descricao}
+Fechado o ciclo da tarefa, o orquestrador \emph{reflete}: analisa o que aconteceu,
+atualiza a memória metacognitiva e, se a mudança for relevante, registra um ciclo
+de evolução.
+\end{descricao}
+
+\begin{processo}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Sintetiza resultado e observações (Reflexion \pth{mci/reflexion.py}).
+  \item Decide: concluir? revisar? registrar ciclo?
+  \item Se relevante: \pth{evolution_registry.record(...)} (numeração R47+,
+total 459 registros no momento desta revisão).
+  \item Atualiza memória compartilhada (tópico \pth{meta_memory})
+        para que os próximos PERCEBE já cheguem ``educados''.
+\end{enumerate}
+\end{processo}
+
+\begin{arquitetura}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Reflexion middleware: \pth{mci/metacognitive_evaluator.py} (SPEC-003 no legado).
+  \item Registro de evolução: \pth{evolution/cycles.py}.
+  \item Feedback: tópico \pth{reflections} + blackboard.
+\end{itemize}
+\end{arquitetura}
+
+\begin{flowch}[Subfluxo REFLETE]{aprendizado volta para a percepção}
+\matrix[matrix of nodes,name=p4,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|sintetiza reflexão \\[2mm]
+ |[fde]|mudança relevante? \\[2mm]
+ |[fns]|record(evolution) \\[2mm]
+ |[fns]|publica no tópico reflexão \\[2mm]
+ |[fns]|memória atualizada \\ \\
+};
+\draw[seta] (p4-1-1)--(p4-2-1);
+\draw[seta] (p4-3-1)--(p4-4-1);
+\draw[seta] (p4-4-1)--(p4-5-1);
+\draw[seta] (p4-2-1)--(p4-3-1);
+\draw[seta,plumAccent,dashed] (p4-5-1.west) to[out=180,in=180,looseness=1.4]
+  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{realimenta PERCEBE}
+  (p4-1-1.west);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O ciclo fecha com \emph{feedback} $\to$ \emph{MetaBus} $\to$ \emph{trust}, e a seta para o \emph{trust} é uma \textbf{sanção} proporcional, não um rótulo: o resultado muda o escore do executor. É essa seta que transforma o Blackboard de registro em mecanismo de aprendizado; sem ela o MetaBus guardaria história, não aprendizado.
+\textbf{Justificativa.} Registrar é distinto de aprender. Nelson e Narens mostram que metamemória exige um critério \textbf{de identificação} do que merece ser retido: sem critério de esquecimento, o sistema acumula ruído e a memória degrada. O nó de \emph{trust} é esse critério -- o que falhou tem seu escore reduzido, e o que serve tem seu escore elevado, que é a mesma Mecânica de \textbf{esquece o que não serve} \citref{NELSON, T. O.; NARENS, L. Metamemory: a theoretical framework and new findings. In: BOWER, G. H. (org.). \emph{The Psychology of Learning and Motivation}. San Diego: Academic Press, v.~26, p.~125-173, 1990}{10.1016/S0079-7421(08)60053-5}{Registrar é distinto de aprender. }{This eventuated in the present theoretical framework that emphasizes the role of control and monitoring processes}{Isso resultou no presente arcabouço teórico que enfatiza o papel dos processos de controle e monitoramento.}{NELSON, 1990, p.~125--173}.\end{descricao}
+
+\begin{resultado}
+Efeito sistêmico: cada tarefa concluída deixa \emph{memória + registro}, então o
+próximo ciclo não refaz o mesmo trabalho — característica-chave do Core.
+\end{resultado}
+
+% ============================================================
+\clearpage
+\section{Roteamento de atenção}
+
+\elemento{Como o AttentionRouter ordena candidatos}{\metainfo{ID}{O-5} \hfill \metainfo{Camada}{3 — Roteamento} \hfill \metainfo{Rota}{\pth{transformer/attention.py}}}
+
+\begin{conceito}
+Roteamento é a escolha de um destino para uma tarefa. O
+\texttt{AttentionRouter} recebe a descrição, as capacidades exigidas e os
+cartões que a rota disponibiliza. Na rota de DAG, primeiro se excluem
+candidatos que não atendem às condições obrigatórias; depois, o roteador calcula
+sinais para comparar e ordenar os que restam.
+\end{conceito}
+
+\begin{metodo}
+O código avalia dimensões como compatibilidade semântica, correspondência de
+capacidades, confiança e carga. Os candidatos recebem componentes de pontuação
+e uma ordenação. A explicação da decisão pode mostrar quem foi excluído, quais
+regras atuaram e como a ordenação foi formada. Assim, é possível examinar uma
+decisão concreta em vez de inferir o algoritmo pelo nome “atenção”.
+\end{metodo}
+
+\begin{flowch}[Roteamento de candidatos]{condições obrigatórias $\to$ sinais $\to$ ordenação}
+\matrix[matrix of nodes,name=p5,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|Descrição e capacidades exigidas \\[2mm]
+ |[fns]|Cartões disponíveis nesta rota \\[2mm]
+ |[fde]|Condições obrigatórias satisfeitas? \\[2mm]
+ |[fns]|Comparação de sinais e ordenação \\[2mm]
+ |[fns]|Candidato selecionado ou tarefa bloqueada \\
+};
+\draw[seta] (p5-1-1)--(p5-2-1);
+\draw[seta] (p5-2-1)--(p5-3-1);
+\draw[seta] (p5-3-1)--(p5-4-1);
+\draw[seta] (p5-4-1)--(p5-5-1);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como ler a decisão.} Uma capacidade declarada ajuda a localizar um
+candidato; não é evidência de desempenho. Uma pontuação ordena candidatos
+elegíveis, mas não certifica quem recebeu a maior nota. Se ninguém satisfaz os
+requisitos, o mecanismo pode deixar a tarefa sem atribuição. A confiança usada
+nessa regra é um indicador interno, não uma probabilidade calibrada de acerto.
+\end{descricao}
+
+\begin{arquitetura}
+Elementos técnicos:
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \pth{AttentionRouter.route()} e \pth{AttentionRouter.explain()} em
+        \pth{transformer/attention.py}.
+  \item Na rota de DAG, \pth{dispatch_ready()} aplica gates de runtime e pede
+        a ordenação ao roteador.
+  \item A explicação da atribuição registra elegíveis, excluídos, sinais, pesos
+        e, quando concedido, o lease da tarefa.
+\end{itemize}
+\end{arquitetura}
+
+\begin{limite}
+O detalhe da rota importa: o Blackboard clássico faz correspondência por
+capacidades; o runtime de DAG aplica gates e chama o \texttt{AttentionRouter}.
+Não misture os dois procedimentos. Quando há uma especificação associada, a
+verificação SDD avalia a entrega depois da seleção; ela não prova que o
+roteamento escolheu o melhor agente possível.
+\end{limite}
+
+
+\section{Memória compartilhada: MetaBus e Blackboard}
+
+\elemento{MetaBus e Blackboard em operação}{\metainfo{ID}{O-6} \hfill \metainfo{Camada}{2 — Memória} \hfill \metainfo{Rota}{\pth{mci/metabus.py}}}
+
+\begin{descricao}
+A camada 2 materializa o \emph{Global Workspace}: o \textbf{Blackboard} guarda
+tarefas abertas e voluntários; o \textbf{MetaBus} guarda a memória metacognitiva
+(histórico de trabalho, confiança, reflexão). São canais diferentes: trabalho $\neq$
+memória.
+\end{descricao}
+
+\begin{resultado}
+Superfícies expostas via MCP (\pth{mci/mcp_server.py}):\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Ferramenta & Papel \\
+\midrule
+\pth{mci_register_agent} & agente declara suas capacidades (Agent Card A2A) \\
+\pth{mci_post_task} & orquestrador publica tarefa para voluntariado \\
+\pth{mci_get_memory} & recupera memória metacognitiva por tópico/limite \\
+\pth{mci_get_blackboard_state} & enxerga estado do quadro (tarefas/agentes) \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{flowch}[MetaBus e Blackboard no circuito]{diagrama unificado}
+\matrix[matrix of nodes,name=p6,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|ORQUESTRADOR \\[2mm]
+ |[fns]|Blackboard (tarefas) \& |[fns]|MetaBus (memória) \\[2mm]
+ |[fns]|agentes voluntários \\ \\ 
+};
+\draw[seta] (p6-1-1)--(p6-2-1);
+\draw[seta] (p6-2-1)--(p6-3-1);
+\draw[seta,bend right=55] (p6-3-1) to node[right,font=\tiny]{capacidades} (p6-2-2);
+\draw[seta,bend right=55] (p6-2-2) to node[left,font=\tiny]{memória global} (p6-1-1);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho põe MetaBus e Blackboard lado a lado, ligados por duas setas de sentido oposto: o quadro \textbf{publica} especificação e o MetaBus \textbf{devolve} lições. A assimetria é o ponto: a escrita é barata e imediata, a leitura é filtrada e cara. O quadro é o \emph{scratchpad} compartilhado; o MetaBus é a \emph{memória} de longo prazo com política de retenção.
+\textbf{Justificativa.} São dois repositórios distintos porque têm contratos distintos: o quadro responde \emph{o que está em jogo agora} e o MetaBus responde \emph{o que já foi aprendido}. Nii descreve a área de trabalho compartilhada como a hipótese central do modelo de quadro, e a separação entre área de trabalho e conhecimento consolidado é justamente o que evita que a tarefa em curso contamine o conhecimento estável \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{São dois repositórios distintos porque têm contratos distintos: o quadro responde \emph{o que está em jogo agora} e o MetaBus responde \emph{o que já foi aprendido}. }{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~38--53}.\end{descricao}
+
+\begin{limite}
+A memória é \emph{compartilhada por design}, mas não é um cache público
+incontrolado: toda escrita passa por agentes registrados; leitura por tópico com
+limite — preservando rastreio (SPEC-001/002).
+\end{limite}
+
+\clearpage
+\section{Ciclo completo e consequências}
+
+\elemento{Um ciclo end-to-end, do início ao fim}{\metainfo{ID}{O-7} \hfill \metainfo{Rota}{percebe $\to$ delega $\to$ executa $\to$ reflete}}
+
+\begin{processo}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \emph{Entrada} chega (via CLI, MCP, skill ou tópico).
+  \item \textbf{PERCEBE} carrega contexto e memória (L211).
+  \item \textbf{DELEGA} roteia por atenção e publica no blackboard (L222).
+  \item \textbf{EXECUTA} com tríade spec+teste; gate fail-closed.
+  \item \textbf{REFLETE} registra ciclo e memória (L669 + evolution).
+  \item \emph{Saída} entregue ao operador com rastro especificado.
+\end{enumerate}
+\end{processo}
+
+\begin{flowch}[Ciclo completo]{grande}
+\matrix[matrix of nodes,name=p7,row sep=6mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ \& |[fne]|INÍCIO \\[1mm]
+ |[fns]|PERCEBE \& |[fns]|DELEGA \& |[fns]|EXECUTA \\[1mm]
+ \& |[fns]|REFLETE \\[1mm]
+ \& |[fne]|FIM \\ \\
+};
+\draw[seta] (p7-2-1)--(p7-1-2);
+\draw[seta] (p7-1-2)--(p7-2-1);
+\draw[seta] (p7-2-1)--(p7-2-2);
+\draw[seta] (p7-2-2)--(p7-2-3);
+\draw[seta] (p7-2-3)--(p7-3-2);
+\draw[seta] (p7-3-2)--(p7-4-2);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} Este é o fluxograma que fecha o capítulo: os quatro subfluxos estão encadeados, e a seta final retorna a \emph{PERCEBE}. As quatro etapas contêm, respectivamente, $4 + 3 + 3 + 3$ nós. Essa \textbf{contagem} permite auditar se uma execução percorreu o caminho completo ou pulou uma etapa.
+\textbf{Justificativa.} O mapa de agent research de Jennings, Sycara e Wooldridge organiza o campo por \textbf{mecanismos}, não por ferramentas, e o ciclo do Core é justamente um mecanismo genérico: perceber, decidir por quem trabalhar, executar e revisar. A compilação de um ciclo desses num único diagrama é a forma de tornar o mecanismo reutilizável fora deste repositório -- que é o teste de \textbf{generalidade} de um mecanismo \citref{JENNINGS, N. R.; SYCARA, K.; WOOLDRIDGE, M. A roadmap of agent research and development. \emph{Autonomous Agents and Multi-Agent Systems}, v.~1, n.~1, p.~7-38, 1998}{10.1023/A:1010090405266}{O mapa de agent research de Jennings, Sycara e Wooldridge organiza o campo por \textbf{mecanismos}, não por ferramentas, e o ciclo do Core é justamente um mecanismo genérico: perceber, decidir por quem trabalhar, executar e revisar. }{It aims to identify key concepts and applications, and to indicate how they relate to one-another}{O objetivo é identificar conceitos-chave e aplicações e indicar como eles se relacionam entre si.}{JENNINGS, 1998, p.~7--38}.\end{descricao}
+
+\begin{resultado}
+De cada ciclo nasce um rastro mínimo: spec (se mudança), teste verde, ciclo
+registrado, memória atualizada. É esse rastro que permite auditoria e a
+auto-evolução medida em \pth{evolution/cycles.json}.
+\end{resultado}
+
+\begin{niveis}
+\textbf{Intuição:} quatro passadas: entender, escolher, fazer com prova, aprender.\\
+\textbf{Implementação:} quatro métodos nomeados com gates e tópicos; cada etapa tem
+arquitetura própria.\\
+\textbf{Formalização:} laço Perceive–Delegate–Execute–Reflect com \emph{sancionamento
+metacognitivo}: a reflexão posterior modula a confiança da próxima delegação —
+fechando o ciclo em nível 2 do raciocínio.
+\end{niveis}
+
+\begin{limite}
+Tudo que o orquestrador ``sabe'' vem das camadas 0-2 e dos subagentes: dados
+ausentes no catálogo ou na memória limitam qualquer etapa, e nenhum gate local cria
+validação externa.
+\end{limite}
+
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) as camadas 0 a 7 e a \emph{direção
+de dependência} controlada; (2) PERCEBE/REFLETE/DELEGA/VERIFICA/REGISTRA; (3) o
+orquestrador é dono do ciclo SDD/TDD, executores externos são orquestráveis.
+\textbf{Exercício sugerido:} para uma tarefa de 3 passos que você conhece,
+escreva quem percebe, quem reflete, quem executa e quem registra o ciclo.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-02-orquestracao.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Orquestração: seguir a tarefa sem confundir os mecanismos}
+
+\elemento{Leitura guiada — Orquestração}{\metainfo{ID}{N-02} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Rota}{da solicitação à evidência}}
+
+\begin{descricao}
+\textbf{A pergunta.} Como uma solicitação atravessa o Core? A resposta depende
+do comando e da rota. O comando \texttt{doctor}, por exemplo, verifica o ambiente
+diretamente; uma tarefa delegada pode envolver o orquestrador, agentes, memória
+e critérios de qualidade. Portanto, PERCEBE, DELEGA, EXECUTA e REFLETE são
+nomes didáticos para responsabilidades observáveis, não quatro etapas obrigatórias
+de toda operação.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Quatro termos úteis.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Elegibilidade}: satisfazer condições obrigatórias para poder
+        receber a tarefa.
+  \item \textbf{Ordenação}: organizar os candidatos elegíveis segundo sinais e
+        pesos internos.
+  \item \textbf{Atribuição}: registrar quem recebeu a tarefa ou a concessão
+        temporária de execução.
+  \item \textbf{Verificação}: comparar uma entrega a critérios e evidências
+        definidos para aquela tarefa.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Roteiro de leitura do código.} Comece na função da CLI ou na rotina que
+recebe o pedido. Siga os dados que ela envia, os eventos publicados, o método
+que escolhe uma rota e o lugar em que o resultado é verificado. Não pule do
+nome de um módulo para uma conclusão: confirme o caminho de chamada na versão
+atual do código.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Suponha que a tarefa tenha uma especificação com
+dois critérios executáveis. Se ambos passarem, a evidência permite afirmar que
+esses critérios passaram nessa execução. Se um falhar, a tarefa não deve ser
+descrita como aprovada por esse contrato. Se nenhum teste estiver associado,
+não se pode inventar uma aprovação: deve-se dizer que a evidência não foi
+produzida por essa rota.
+\end{resultado}
+
+\begin{aviso}
+Uma tarefa distribuída a um agente não percorre automaticamente todas as
+integrações do repositório. E a presença de um registro de reflexão não significa
+que a estratégia seguinte será melhor. Memória, métricas e pontuações são
+insumos internos; a qualidade precisa ser avaliada com critérios adequados ao
+resultado pretendido.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Compare o caminho de \texttt{doctor} com o de uma
+solicitação delegada. (2) Em cada caminho, identifique o primeiro ponto de
+entrada e a condição de conclusão. (3) Para um exemplo didático com $M=40$ candidatos e
+$k=5$ posições, calcule $M/k$. Trate o quociente como redução hipotética do
+conjunto a examinar, não como ganho de velocidade medido.
+\end{resultado}
+
+
+\section[Ativação e cálculo]{Ativação e cálculo — Orquestração}
+\elemento{ativ-02o}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-02-orquestracao.tex}}
+
+\begin{processo}
+GATILHO. tarefa multi-passo publicada no Blackboard.
+ROTA. \pth{marceloclaro/orchestrator.py}; rota (b) inline ou (c) voluntariado.
+FUNÇÃO. coordenar E1--E7 sem executar; escolher o executante com maior escore de ativação.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. $A(a) = |K \cap C_a|/|K \cup C_a|$ (Jaccard ponderado entre tokens do gatilho e capacidades declaradas); tie-break por prioridade de categoria.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. o modelo blackboard emprega quadros visíveis e especialistas que reagem a anúncios — a base do roteamento por oportunidade. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. escore alto mede casamento semântico, não qualidade da entrega; gate SDD/TDD permanece obrigatório. A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação:} No protocolo de rede por contratos, o anúncio separa a descrição da tarefa da identidade do executor: solucionadores capazes avaliam o pedido e apresentam propostas, e o gerente compara essas propostas antes de delegar. Em termos de decisão, escolhe-se $i^*=\mathrm{arg\,min}_{i\in C}K_i$ entre os candidatos $C$ que satisfazem os requisitos, sendo $K_i$ o custo declarado; um candidato fora de $C$ não se torna elegível apenas por oferecer menor custo. Assim, o conjunto comparado e o critério de escolha ficam explícitos, sem confundir licitação com validação da entrega \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{p.~1104--1113 (resumo, p.~1104). é o fundamento do voluntariado por anúncio/leilão usado na ETAPA 3: nós com tarefas anunciam, nós capazes avaliam e licitam, e o manager escolhe o mais adequado — análogo ao casamento de capacidades do Blackboard.}{The contract net protocol has been developed to specify problem-solving communication and control for nodes in a distributed problem solver}{O protocolo da rede de contratos foi desenvolvido para especificar comunicação e controle de resolução de problemas para nós em um solucionador distribuído de problemas.}{SMITH, 1980, p.~1104}

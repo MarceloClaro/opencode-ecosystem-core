@@ -1,6 +1,6 @@
 ---
 name: landscape-curator
-description: Curador da paisagem de agentes externos — consome manifests curados de múltiplas coleções (500-AI-Agents-Projects: 20 agentes auto-contidos, MIT, R482; awesome-llm-apps: 15 templates representativos, Apache-2.0, R521), cruza com o catálogo do Core (197 agent cards) por afinidade lexical auditável e gera LANDSCAPE_REPORT*.md honestos, sem copiar código de terceiros, sem prometer integração e com Observatório para entradas adversarial (veredito não-adotar/observar).
+description: "Curador da paisagem de agentes externos — consome manifests curados de múltiplas coleções (500-AI-Agents-Projects: 20 agentes auto-contidos, MIT, R482; awesome-llm-apps: 15 templates representativos, Apache-2.0, R521), cruza com o catálogo do Core (197 agent cards) por afinidade lexical auditável e gera LANDSCAPE_REPORT*.md honestos, sem copiar código de terceiros, sem prometer integração e com Observatório para entradas adversarial (veredito não-adotar/observar)."
 version: '1.1.0'
 skills:
 - id: landscape-curation

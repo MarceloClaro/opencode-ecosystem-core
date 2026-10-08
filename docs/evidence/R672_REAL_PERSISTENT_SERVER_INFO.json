@@ -1,0 +1,217 @@
+{
+  "status": "completed",
+  "transport_success": true,
+  "business_success": true,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"success\",\"version\":\"0.11.6\",\"latest_version\":null,\"update_available\":false,\"auth_status\":\"configured\",\"update_command\":\"uv tool upgrade notebooklm-mcp-cli\",\"pip_update_command\":\"pip install --upgrade notebooklm-mcp-cli\",\"mcp_capabilities\":{\"schema_version\":1,\"scope\":\"built_in_mcp_runtime\",\"source\":\"registered_tool_visibility\",\"registered_tool_count\":49,\"visible_tool_count\":49,\"hidden_tool_count\":0,\"groups\":{\"auth\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"refresh_auth\",\"save_auth_tokens\"],\"hidden_tools\":[],\"missing_tools\":[]},\"automation\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"batch\",\"pipeline\"],\"hidden_tools\":[],\"missing_tools\":[]},\"chat\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"chat_configure\",\"chat_export\",\"chat_get\",\"chat_list\",\"notebook_query\",\"notebook_query_start\",\"notebook_query_status\"],\"hidden_tools\":[],\"missing_tools\":[]},\"notebooks_manage\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"notebook_create\",\"notebook_delete\",\"notebook_rename\"],\"hidden_tools\":[],\"missing_tools\":[]},\"notebooks_read\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"notebook_describe\",\"notebook_get\",\"notebook_list\"],\"hidden_tools\":[],\"missing_tools\":[]},\"notes\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"note\"],\"hidden_tools\":[],\"missing_tools\":[]},\"organization\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"collection_create\",\"collection_delete\",\"collection_edit\",\"collection_list\",\"collection_set_emoji\",\"label\",\"tag\"],\"hidden_tools\":[],\"missing_tools\":[]},\"query_multi\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"cross_notebook_query\"],\"hidden_tools\":[],\"missing_tools\":[]},\"research\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"research_import\",\"research_start\",\"research_status\"],\"hidden_tools\":[],\"missing_tools\":[]},\"server\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"server_info\"],\"hidden_tools\":[],\"missing_tools\":[]},\"sharing\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"notebook_share_batch\",\"notebook_share_invite\",\"notebook_share_public\",\"notebook_share_status\"],\"hidden_tools\":[],\"missing_tools\":[]},\"sources_manage\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"source_add\",\"source_delete\",\"source_rename\",\"source_sync_drive\"],\"hidden_tools\":[],\"missing_tools\":[]},\"sources_read\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"source_describe\",\"source_get_content\",\"source_list_drive\"],\"hidden_tools\":[],\"missing_tools\":[]},\"studio\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"download_all_artifacts\",\"download_artifact\",\"export_artifact\",\"studio_create\",\"studio_delete\",\"studio_revise\",\"studio_status\"],\"hidden_tools\":[],\"missing_tools\":[]},\"usage\":{\"available\":true,\"partially_available\":false,\"visible_tools\":[\"usage_get\"],\"hidden_tools\":[],\"missing_tools\":[]}},\"ungrouped_tools\":[]},\"provider_capabilities\":{\"status\":\"not_probed\",\"reason\":\"server_info reports MCP runtime visibility only; account plan labels are not treated as provider capability evidence.\"}}"
+      }
+    ],
+    "structuredContent": {
+      "status": "success",
+      "version": "0.11.6",
+      "latest_version": null,
+      "update_available": false,
+      "auth_status": "configured",
+      "update_command": "uv tool upgrade notebooklm-mcp-cli",
+      "pip_update_command": "pip install --upgrade notebooklm-mcp-cli",
+      "mcp_capabilities": {
+        "schema_version": 1,
+        "scope": "built_in_mcp_runtime",
+        "source": "registered_tool_visibility",
+        "registered_tool_count": 49,
+        "visible_tool_count": 49,
+        "hidden_tool_count": 0,
+        "groups": {
+          "auth": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "refresh_auth",
+              "save_auth_tokens"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "automation": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "batch",
+              "pipeline"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "chat": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "chat_configure",
+              "chat_export",
+              "chat_get",
+              "chat_list",
+              "notebook_query",
+              "notebook_query_start",
+              "notebook_query_status"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "notebooks_manage": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "notebook_create",
+              "notebook_delete",
+              "notebook_rename"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "notebooks_read": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "notebook_describe",
+              "notebook_get",
+              "notebook_list"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "notes": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "note"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "organization": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "collection_create",
+              "collection_delete",
+              "collection_edit",
+              "collection_list",
+              "collection_set_emoji",
+              "label",
+              "tag"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "query_multi": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "cross_notebook_query"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "research": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "research_import",
+              "research_start",
+              "research_status"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "server": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "server_info"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "sharing": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "notebook_share_batch",
+              "notebook_share_invite",
+              "notebook_share_public",
+              "notebook_share_status"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "sources_manage": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "source_add",
+              "source_delete",
+              "source_rename",
+              "source_sync_drive"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "sources_read": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "source_describe",
+              "source_get_content",
+              "source_list_drive"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "studio": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "download_all_artifacts",
+              "download_artifact",
+              "export_artifact",
+              "studio_create",
+              "studio_delete",
+              "studio_revise",
+              "studio_status"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          },
+          "usage": {
+            "available": true,
+            "partially_available": false,
+            "visible_tools": [
+              "usage_get"
+            ],
+            "hidden_tools": [],
+            "missing_tools": []
+          }
+        },
+        "ungrouped_tools": []
+      },
+      "provider_capabilities": {
+        "status": "not_probed",
+        "reason": "server_info reports MCP runtime visibility only; account plan labels are not treated as provider capability evidence."
+      }
+    },
+    "isError": false
+  },
+  "tool": "server_info",
+  "process_executed": true,
+  "transport": "mcp_stdio",
+  "server": "gemini-notebook-mcp",
+  "server_version": "3.2.3",
+  "session_id": "8aec3e5680264150bd4ef22b2b58acb5",
+  "retention_idle_seconds": 3600.0,
+  "response_sha256": "b706adfef1a94b4df26e6e1972879cd7f9c73e62d9ec412c134b7f591619f489",
+  "persistent_session": true,
+  "session_fingerprint": "e18216c29fefe96de5247ab0e5967dcf2e547c9173ee3e037abae6916b18af87"
+}

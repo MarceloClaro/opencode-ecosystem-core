@@ -39,7 +39,7 @@ skills:
   tags: [processa, texto, chunks, aplica]
   examples: [Aplique processa texto chunks aplica neste contexto, Avalie usando processa texto chunks aplica]
 - id: use-construir-grafo-build
-  name: Use via: "construir grafo", "build graph", /graph-builder
+  name: "Use via: 'construir grafo', 'build graph', /graph-builder"
   description: >-
     Capacidade especializada em use via: "construir grafo", "build graph", /graph-builder
   tags: ["construir, grafo", "build, graph"]

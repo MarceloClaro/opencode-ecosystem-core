@@ -1,0 +1,149 @@
+{
+ "checks": [
+  {
+   "name": "Abstract <= 250 words",
+   "pass": false,
+   "detail": "275 words"
+  },
+  {
+   "name": "Keywords within 1-7",
+   "pass": true,
+   "detail": "6 keywords"
+  },
+  {
+   "name": "Citations numbered sequentially by first appearance",
+   "pass": true,
+   "detail": "order ok=True, 28 references"
+  },
+  {
+   "name": "Every reference carries a DOI",
+   "pass": true,
+   "detail": "28/28"
+  },
+  {
+   "name": "No unresolved placeholders in the manuscript",
+   "pass": false,
+   "detail": "4 found: ['AUTHOR TO SUPPLY']"
+  },
+  {
+   "name": "All seven MDPI declarations present",
+   "pass": true,
+   "detail": "IRB, consent, data, funding, COI, CRediT, acknowledgments"
+  },
+  {
+   "name": "Generative AI declaration present with author-responsibility clause",
+   "pass": true,
+   "detail": "GenAI declaration or author-responsibility clause absent"
+  },
+  {
+   "name": "Manuscript body carries no author-identifying language",
+   "pass": true,
+   "detail": "hits: []"
+  },
+  {
+   "name": "DOCX author metadata empty",
+   "pass": true,
+   "detail": "creator=''"
+  },
+  {
+   "name": "Figure_1_pipeline_v2_compact.png at least 300 DPI",
+   "pass": true,
+   "detail": "600 DPI"
+  },
+  {
+   "name": "Figure_2_discrimination_corrected_sklearn190.png at least 300 DPI",
+   "pass": true,
+   "detail": "600 DPI"
+  },
+  {
+   "name": "Figure_3_calibration_corrected_sklearn190.png at least 300 DPI",
+   "pass": true,
+   "detail": "600 DPI"
+  },
+  {
+   "name": "Figure 1 has a legend in the manuscript",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Figure 2 has a legend in the manuscript",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Figure 3 has a legend in the manuscript",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Generative AI use declared",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Figure 1 legend discloses AI assistance",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "TRIPOD+AI reporting statement present in Methods",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "TRIPOD+AI checklist supplied as Supplementary File S3",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Separate title page file exists",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Title page is not embedded in the manuscript",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Highlights count within 3-5",
+   "pass": true,
+   "detail": "5 points"
+  },
+  {
+   "name": "Highlight 1 within 85 characters",
+   "pass": true,
+   "detail": "79 characters"
+  },
+  {
+   "name": "Highlight 2 within 85 characters",
+   "pass": true,
+   "detail": "81 characters"
+  },
+  {
+   "name": "Highlight 3 within 85 characters",
+   "pass": true,
+   "detail": "75 characters"
+  },
+  {
+   "name": "Highlight 4 within 85 characters",
+   "pass": true,
+   "detail": "81 characters"
+  },
+  {
+   "name": "Highlight 5 within 85 characters",
+   "pass": true,
+   "detail": "82 characters"
+  },
+  {
+   "name": "Rendered length within the ~20 page guideline",
+   "pass": true,
+   "detail": "12 pages"
+  }
+ ],
+ "blocking_failures": [
+  "Abstract <= 250 words: 275 words",
+  "No unresolved placeholders in the manuscript: 4 found: ['AUTHOR TO SUPPLY']"
+ ],
+ "warnings": []
+}

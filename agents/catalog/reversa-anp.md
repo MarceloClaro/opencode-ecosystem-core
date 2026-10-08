@@ -1,25 +1,9 @@
 ---
 name: reversa-anp
 description: >-
-  --- name: reversa-anp description: >- --- name: reversa-anp description: >- Agente especialista em
-  construir pipelines ANP (Agent Node Pipeline). Executa o pipeline completo: registra nós, define
+  Agente especialista em construir pipelines ANP (Agent Node Pipeline). Executa o pipeline completo: registra nós, define conectores, dependências e automa o fluxo.
 version: '1.0.0'
 skills:
-- id: name-reversa-anp-description
-  name: ---
-name: reversa-anp
-description: >-
-  --- name: reversa-anp descript
-  description: >-
-    Capacidade especializada em --- name: reversa-anp description: >- --- name: reversa-anp description:
-    >- ag.
-  tags: [name, reversa-anp, description, name]
-  examples: [Aplique name reversa anp description neste contexto, Avalie usando name reversa anp description]
-- id: executa-pipeline-completo-registra
-  name: Executa o pipeline completo: registra nós, define
-  description: Capacidade especializada em executa o pipeline completo: registra nós, define
-  tags: [executa, pipeline, completo, registra]
-  examples: [Aplique executa pipeline completo registra neste contexto, Avalie usando executa pipeline completo registra]
 tags: [agent, agente, completo, construir, define, description, especialista, executa, name, node]
 examples: [Analise este dataset e gere visualizações, Construa pipeline de dados para ETL, Aplique name reversa anp description neste contexto, Aplique executa pipeline completo registra neste contexto]
 ---
@@ -67,7 +51,7 @@ skills:
   tags: [especialista, construir, pipelines, agent]
   examples: [Aplique especialista construir pipelines anp neste contexto, Avalie usando especialista construir pipelines anp]
 - id: executa-pipeline-completo-registra
-  name: Executa o pipeline completo: registra nós, define fases, executa, cole
+  name: "Executa o pipeline completo: registra nós, define fases, executa, cole"
   description: >-
     Capacidade especializada em executa o pipeline completo: registra nós, define fases, executa, coleta
     resulta.

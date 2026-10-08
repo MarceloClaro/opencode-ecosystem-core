@@ -1,0 +1,126 @@
+#!/bin/sh
+
+set -eu
+
+original_path=${PATH:-/usr/bin:/bin:/usr/sbin:/sbin}
+if [ -n "${HOME:-}" ]; then
+  PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/bin:$original_path
+else
+  PATH=$original_path
+fi
+PATH=$PATH:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin
+export PATH
+
+case $0 in
+  */*) script_dir=${0%/*} ;;
+  *) script_dir=. ;;
+esac
+script_dir=$(CDPATH= cd -- "$script_dir" && pwd)
+IFS= read -r plugin_venv_version < "$script_dir/PLUGIN_VENV_VERSION"
+
+if [ -n "${CODEX_HOME:-}" ]; then
+  codex_home=$CODEX_HOME
+elif [ -n "${HOME:-}" ]; then
+  codex_home=$HOME/.codex
+else
+  printf '%s\n' 'NGS Analysis Workbench requires CODEX_HOME or HOME to store its runtime environment.' >&2
+  exit 1
+fi
+
+venv=$codex_home/cache/ngs-analysis-workbench/venvs/$plugin_venv_version
+venv_python=$venv/bin/python
+ready=$venv/.ready
+
+unset VIRTUAL_ENV
+if [ ! -x "$venv_python" ] || [ ! -f "$ready" ]; then
+  install_lock=$venv.install-lock
+  mkdir -p "${venv%/*}"
+  attempts=0
+  until mkdir "$install_lock" 2>/dev/null; do
+    if [ -f "$install_lock/owner" ]; then
+      IFS= read -r owner < "$install_lock/owner" || owner=
+      if [ -n "$owner" ] && ! kill -0 "$owner" 2>/dev/null; then
+        installer=
+        if [ -f "$install_lock/installer" ]; then
+          IFS= read -r installer < "$install_lock/installer" || installer=
+        fi
+        if [ -z "$installer" ] || ! kill -0 "$installer" 2>/dev/null; then
+          rm -f "$install_lock/owner" "$install_lock/installer"
+          rmdir "$install_lock" 2>/dev/null || true
+          continue
+        fi
+      fi
+    elif [ "$attempts" -ge 2 ] && rmdir "$install_lock" 2>/dev/null; then
+      continue
+    fi
+    if [ "$attempts" -ge 110 ]; then
+      printf '%s\n' 'Timed out waiting for the shared NGS runtime installation.' >&2
+      exit 1
+    fi
+    attempts=$((attempts + 1))
+    sleep 1
+  done
+  printf '%s\n' "$$" > "$install_lock/owner"
+  release_install_lock() {
+    if [ -f "$install_lock/installer" ]; then
+      IFS= read -r installer < "$install_lock/installer" || installer=
+      if [ -n "$installer" ]; then
+        kill "$installer" 2>/dev/null || true
+        wait "$installer" 2>/dev/null || true
+      fi
+    fi
+    rm -f "$install_lock/owner" "$install_lock/installer"
+    rmdir "$install_lock" 2>/dev/null || true
+  }
+  install() {
+    "$@" &
+    installer=$!
+    printf '%s\n' "$installer" > "$install_lock/installer"
+    wait "$installer"
+    rm -f "$install_lock/installer"
+  }
+  trap release_install_lock EXIT
+  trap 'exit 129' HUP
+  trap 'exit 130' INT
+  trap 'exit 143' TERM
+  if [ ! -x "$venv_python" ] || [ ! -f "$ready" ]; then
+    codex_python=
+    previous_ifs=$IFS
+    IFS=:
+    for directory in $original_path; do
+      case "$directory" in
+        */dependencies/bin/override|*/dependencies/bin/fallback)
+          candidate=${directory%/bin/*}/python/bin/python3
+          if [ -x "$candidate" ]; then
+            codex_python=$candidate
+            break
+          fi
+          ;;
+      esac
+    done
+    IFS=$previous_ifs
+    if [ -z "$codex_python" ] && [ -n "${HOME:-}" ]; then
+      candidate=$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3
+      if [ -x "$candidate" ]; then
+        codex_python=$candidate
+      fi
+    fi
+    if [ -z "$codex_python" ] && command -v python3 >/dev/null 2>&1; then
+      codex_python=python3
+    fi
+    if [ -z "$codex_python" ]; then
+      printf '%s\n' \
+        'NGS Analysis Workbench requires bundled Codex Python or python3 on PATH.' >&2
+      exit 127
+    fi
+    install "$codex_python" -m venv --without-pip "$venv"
+    install "$codex_python" -m pip --python "$venv_python" \
+      install --requirement "$script_dir/requirements.txt" 1>&2
+    : > "$ready"
+  fi
+  release_install_lock
+  trap - EXIT HUP INT TERM
+fi
+
+cd "$script_dir"
+exec "$venv_python" -m "${1:-ngs_workbench_mcp}"

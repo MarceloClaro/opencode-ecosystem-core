@@ -17,9 +17,8 @@ Inspirado por:
 
 import math
 from typing import Dict, List, Tuple, Optional, Any, Callable
-from dataclasses import dataclass, field
-from itertools import combinations, product
-import json
+from dataclasses import dataclass
+from itertools import product
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -33,13 +32,16 @@ class NashSolver:
     - Estratégias puras (força bruta sobre o espaço de estratégia)
     - Dilema do Prisioneiro (2×2, análise completa)
     - Stag Hunt, Chicken, Battle of Sexes
-    - Detecção de Pareto-optimalidade
-    - Estratégias mistas via programação linear (2 jogadores)
+    - Fronteira de Pareto pelos payoffs declarados
+
+    Apenas estratégias puras: equilíbrios mistos não estão implementados.
+    A interpretação científica dos payoffs permanece responsabilidade do estudo.
     """
 
     @staticmethod
-    def pure_nash(payoff_tensors: List[List[List[float]]],
-                  strategy_names: Optional[List[List[str]]] = None) -> Dict[str, Any]:
+    def pure_nash(payoff_tensors: List[Any],
+                  strategy_names: Optional[List[List[str]]] = None,
+                  *, max_combinations: int = 4096) -> Dict[str, Any]:
         """Encontra equilíbrios de Nash puros para N jogadores.
 
         Args:
@@ -50,87 +52,88 @@ class NashSolver:
         Returns:
             Dict com equilibria, pareto_frontier, análise.
         """
+        if not isinstance(payoff_tensors, list) or not 1 <= len(payoff_tensors) <= 8:
+            raise ValueError("payoff_tensors exige de 1 a 8 jogadores")
+        if isinstance(max_combinations, bool) or not isinstance(max_combinations, int) or not 1 <= max_combinations <= 4096:
+            raise ValueError("max_combinations deve estar entre 1 e 4096")
         n_players = len(payoff_tensors)
-        n_strategies = [len(p) for p in payoff_tensors]
 
+        def tensor_shape(value: Any, depth: int = 0) -> Tuple[int, ...]:
+            if depth > n_players:
+                raise ValueError("tensor com eixos excedentes")
+            if isinstance(value, list):
+                if not value or depth == n_players:
+                    raise ValueError("tensor vazio ou com dimensão inválida")
+                shapes = {tensor_shape(child, depth + 1) for child in value}
+                if len(shapes) != 1:
+                    raise ValueError("tensor não retangular")
+                return (len(value),) + next(iter(shapes))
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise ValueError("payoffs devem ser números finitos")
+            return ()
+
+        shapes = [tensor_shape(tensor) for tensor in payoff_tensors]
+        if any(shape != shapes[0] for shape in shapes) or len(shapes[0]) != n_players:
+            raise ValueError("todos os jogadores exigem o mesmo tensor com um eixo por jogador")
+        n_strategies = list(shapes[0])
+        total_combinations = math.prod(n_strategies)
+        if total_combinations > max_combinations:
+            raise ValueError("espaço de estratégias excede max_combinations")
         if strategy_names is None:
             strategy_names = [[f"S{j+1}_{i+1}" for i in range(n)]
                               for j, n in enumerate(n_strategies)]
+        if (not isinstance(strategy_names, list) or len(strategy_names) != n_players
+                or any(not isinstance(names, list) or len(names) != n_strategies[p]
+                       or any(not isinstance(name, str) or not name.strip() for name in names)
+                       or len(set(names)) != len(names)
+                       for p, names in enumerate(strategy_names))):
+            raise ValueError("strategy_names incompatíveis com os eixos do tensor")
 
+        all_combos = list(product(*(range(n) for n in n_strategies)))
+        payoff_map: Dict[Tuple[int, ...], List[float]] = {}
+        for combo in all_combos:
+            payoffs = []
+            for tensor in payoff_tensors:
+                value = tensor
+                for index in combo:
+                    value = value[index]
+                payoffs.append(float(value))
+            payoff_map[combo] = payoffs
         equilibria = []
-        payoff_map = {}
-
-        # Força bruta sobre todas as combinações de estratégias
-        indices_ranges = [range(n) for n in n_strategies]
-        for combo in product(*indices_ranges):
-            # Verificar se é equilíbrio de Nash
+        for combo in all_combos:
             is_nash = True
             for player in range(n_players):
-                current_payoff = payoff_tensors[player]
-                # Payoff do jogador na combinação atual
-                idx = combo
-                for dim in range(n_players):
-                    if isinstance(current_payoff, list):
-                        current_payoff = current_payoff[idx[dim]]
-                player_payoff = current_payoff if not isinstance(current_payoff, list) else 0
-
-                # Verificar se há desvio lucrativo
-                for alt_strat in range(n_strategies[player]):
-                    if alt_strat == combo[player]:
-                        continue
-                    alt_combo = list(combo)
-                    alt_combo[player] = alt_strat
-
-                    alt_payoff = payoff_tensors[player]
-                    for dim in range(n_players):
-                        if isinstance(alt_payoff, list):
-                            alt_payoff = alt_payoff[alt_combo[dim]]
-                    alt_player_payoff = alt_payoff if not isinstance(alt_payoff, list) else 0
-
-                    if alt_player_payoff > player_payoff:
+                for alternate in range(n_strategies[player]):
+                    deviation = list(combo)
+                    deviation[player] = alternate
+                    if payoff_map[tuple(deviation)][player] > payoff_map[combo][player]:
                         is_nash = False
                         break
                 if not is_nash:
                     break
-
             if is_nash:
-                strat_names = [strategy_names[p][combo[p]] for p in range(n_players)]
-                equilibria.append({
-                    "strategies": strat_names,
-                    "indices": list(combo),
-                })
+                equilibria.append({"strategies": [strategy_names[p][combo[p]] for p in range(n_players)],
+                                   "indices": list(combo)})
 
-            # Armazenar payoffs
-            payoff_map[str(combo)] = [0.0] * n_players
-
-        # Análise de Pareto
         pareto_frontier = []
-        all_combos = list(product(*indices_ranges))
         for combo in all_combos:
-            dominated = False
-            for other in all_combos:
-                if combo == other:
-                    continue
-                # Verificar se 'other' domina 'combo'
-                better = False
-                worse = False
-                for p in range(n_players):
-                    # Simplificado — compara pelo índice
-                    if other[p] != combo[p]:
-                        pass  # Placeholder para implementação completa
-                if better and not worse:
-                    dominated = True
-                    break
+            current = payoff_map[combo]
+            dominated = any(
+                all(a >= b for a, b in zip(payoff_map[other], current))
+                and any(a > b for a, b in zip(payoff_map[other], current))
+                for other in all_combos if other != combo
+            )
             if not dominated:
-                strat_names = [strategy_names[p][combo[p]] for p in range(n_players)]
-                pareto_frontier.append(strat_names)
+                pareto_frontier.append([strategy_names[p][combo[p]] for p in range(n_players)])
 
         return {
             "n_players": n_players,
             "n_strategies": n_strategies,
             "nash_equilibria": equilibria,
             "pareto_frontier": pareto_frontier,
-            "total_combinations": math.prod(n_strategies),
+            "payoffs": {str(combo): payoffs for combo, payoffs in payoff_map.items()},
+            "total_combinations": total_combinations,
+            "strategy_scope": "pure_only",
             "is_prisoners_dilemma": NashSolver._is_pd_structure(payoff_tensors),
         }
 
@@ -138,6 +141,9 @@ class NashSolver:
     def prisoners_dilemma(t: float = 5, r: float = 3,
                           p: float = 1, s: float = 0) -> Dict[str, Any]:
         """Análise completa do Dilema do Prisioneiro. T > R > P > S"""
+        if (any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v)
+                for v in (t, r, p, s)) or not t > r > p > s):
+            raise ValueError("Dilema do Prisioneiro exige payoffs finitos T > R > P > S")
         p1 = [[r, s], [t, p]]  # Jogador 1: linhas
         p2 = [[r, t], [s, p]]  # Jogador 2: colunas
         strategies = [["Cooperar", "Trair"], ["Cooperar", "Trair"]]
@@ -165,15 +171,13 @@ class NashSolver:
     def _is_pd_structure(tensors: List) -> bool:
         """Detecta se a estrutura é de Dilema do Prisioneiro."""
         try:
-            if len(tensors) != 2 or len(tensors[0]) != 2 or len(tensors[1]) != 2:
+            if (len(tensors) != 2 or any(len(t) != 2 or any(len(row) != 2 for row in t)
+                                       for t in tensors)):
                 return False
-            cc = (tensors[0][0][0], tensors[1][0][0])
-            cd = (tensors[0][0][1], tensors[1][1][0])
-            dc = (tensors[0][1][0], tensors[1][0][1])
-            dd = (tensors[0][1][1], tensors[1][1][1])
-            p1_pd = cd[0] > cc[0] > dd[0] > cd[0]  # T > R > P > S
-            return True
-        except:
+            a, b = tensors
+            return (a[1][0] > a[0][0] > a[1][1] > a[0][1]
+                    and b[0][1] > b[0][0] > b[1][1] > b[1][0])
+        except (IndexError, TypeError):
             return False
 
 
@@ -408,7 +412,6 @@ class QualisA1Auditor:
         """Avalia um critério específico."""
         if criterion == "traceability":
             claims = content.get("claims", [])
-            sources = content.get("sources", [])
             if not claims:
                 return 0
             cited = sum(1 for c in claims if c.get("source"))

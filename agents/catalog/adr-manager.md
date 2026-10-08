@@ -32,7 +32,7 @@ mode: subagent
 temperature: 0.2
 permission:
   bash:
-    *: deny
+    "*": deny
     mkdir -p docs/adr*: allow
   edit:
     docs/adr/**/*.md: allow
@@ -41,7 +41,7 @@ permission:
     **/*.secret: deny
   task:
     contextscout: allow
-    *: deny
+    "*": deny
 ---
 
 # ADRManager

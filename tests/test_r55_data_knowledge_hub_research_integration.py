@@ -5,14 +5,10 @@ Testes TDD para SPEC-968: Integração do DataKnowledgeHub ao ResearchHub
 RED phase: testes falham antes da implementação.
 """
 
-import json
 import os
 import sys
 import tempfile
-from pathlib import Path
-from unittest.mock import MagicMock, patch, PropertyMock
-
-import pytest
+from unittest.mock import MagicMock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -124,6 +120,10 @@ class TestResearchHubRunWithData:
 
         mock_hub = MagicMock()
         mock_hub.search.return_value = {
+            "status": "online",
+            "evidence_kind": "retrieved_http_metadata",
+            "evidence_eligible": True,
+            "synthetic": False,
             "domain": "conhecimento",
             "source": "wikipedia",
             "results": [{"title": "ML", "snippet": "Machine learning é..."}],

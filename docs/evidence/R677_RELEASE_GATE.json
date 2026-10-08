@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "scope": "local_empty_library_request_release_gate",
+  "executed_at_utc": "2026-10-05T02:02:38.654809+00:00",
+  "recorded_cycle": "R677",
+  "unique_tests_passed": 200,
+  "red_failures_observed": 6,
+  "runs": [
+    {
+      "path": "docs/evidence/R677_GREEN.xml",
+      "tests": 128,
+      "sha256": "40246b4d9b5c7f2f249c59f37a29b7ef121303cc2359a221e7ef6f9aebc233df"
+    },
+    {
+      "path": "docs/evidence/R677_REGRESSION.xml",
+      "tests": 72,
+      "sha256": "2b8438ea9781262c2b0dec19538f388850f1ecf2ff24364c207f20ee47ba28dd"
+    }
+  ],
+  "artifact_hashes": {
+    "rag/book_library.py": "3f7b89ea87ba1cd60c288b65a33c41bf37ae4322e3acc89d2493be727a706deb",
+    "tests/test_r677_empty_library_request.py": "2660df2d5e5bfb449610c8dee186f87456c86db651868328d39c553a24f86dea",
+    "scripts/verify_empty_library_request.py": "02fb760aabff45f4628c9065a9ebc744cc0928c8f04631ac0ddc796a3a2926a8",
+    "specs/SPEC-935-R677-empty-library-request.md": "57d959955f43b081e11c0ee2eb07fd44c42c050ec883f879b9d6ae391b622687",
+    "docs/BIBLIOTECA_AI_R657.md": "33717e3ba27bbb29700d3e50f50b186022aa97496105719de66c5e0063b96420"
+  },
+  "fresh_mcp_invalid_inputs_rejected": 8,
+  "targeted_mutants_killed": 2,
+  "real_pdf_and_mcp_provenance_passed": true,
+  "model_inference_executed": false,
+  "training_executed": false,
+  "externally_validated": false,
+  "empty_attachment_origin": "undetermined"
+}

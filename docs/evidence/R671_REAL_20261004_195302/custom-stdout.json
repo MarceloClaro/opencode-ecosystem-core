@@ -1,0 +1,108 @@
+{
+  "status": "completed",
+  "name": "iris-core-personalizado",
+  "domain": "botanical_measurements",
+  "rows": 150,
+  "evidence_kind": "derived_real_observations",
+  "synthetic": false,
+  "license": "cc0-1.0",
+  "sources": [
+    {
+      "provider": "huggingface",
+      "dataset_id": "scikit-learn/iris",
+      "revision": "0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+      "source_url": "https://huggingface.co/datasets/scikit-learn/iris/tree/0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+      "license": "cc0-1.0",
+      "manifest_sha256": "670528373296e37652dd52f7505bc1dea4ef1745cf85f0fba5f2f122aa1277ef"
+    },
+    {
+      "provider": "kaggle",
+      "dataset_id": "uciml/iris",
+      "revision": "1",
+      "source_url": "https://www.kaggle.com/datasets/uciml/iris/versions/1",
+      "license": "cc0-1.0",
+      "manifest_sha256": "08d5b6cd0e46c7aa0da933cf72c4df59842866524d77af7eb7321da693b2e3c8"
+    }
+  ],
+  "schema": [
+    "observation_id",
+    "sepal_length_cm",
+    "sepal_width_cm",
+    "petal_length_cm",
+    "petal_width_cm",
+    "species"
+  ],
+  "units": {
+    "sepal_length_cm": "cm",
+    "sepal_width_cm": "cm",
+    "petal_length_cm": "cm",
+    "petal_width_cm": "cm"
+  },
+  "seed": 668,
+  "splits": {
+    "train": 106,
+    "validation": 22,
+    "test": 22
+  },
+  "split_integrity": {
+    "overlap_groups": 0,
+    "overlap_observation_ids": 0,
+    "assignment": "stratified_by_species_and_grouped_by_identical_measurements"
+  },
+  "mirrored_rows_merged": 150,
+  "artifacts": {
+    "dataset": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/custom/dataset.csv",
+      "sha256": "5086d25c78bc5f8bec406b2d477e8318f4be65a9a35adfd1a2cf657d5d3c8850",
+      "bytes": 4235
+    },
+    "train": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/custom/train.csv",
+      "sha256": "c4721d92b8547e369a18e23283d86ba9257c15f8d51b15655c1fdbd39ae8fa35",
+      "bytes": 3004
+    },
+    "validation": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/custom/validation.csv",
+      "sha256": "0c724a9ca190759758d039f45107b086348a2b337b1868385c7412f83c5e5aaa",
+      "bytes": 699
+    },
+    "test": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/custom/test.csv",
+      "sha256": "51cf8ce984d1b526fffc6f47df3e545e36f34b589ccb70f79a5e8d7295d49f49",
+      "bytes": 702
+    },
+    "lineage": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/custom/lineage.json",
+      "sha256": "776bbfab0f4393181511c0782807e0963e3e61d275e09b92526789d362ba7a75",
+      "bytes": 175308
+    },
+    "card": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/custom/README.md",
+      "sha256": "f43d85e92995a4827d8de6aba1482ae6d17138a27fdfa0d6fbefeb7c9a67a480",
+      "bytes": 836
+    }
+  },
+  "transformations": [
+    "rename_iris_columns_with_centimeter_units",
+    "normalize_species_labels",
+    "align_mirrors_by_original_id_and_reject_conflicts",
+    "preserve_duplicate_measurement_groups_in_same_split"
+  ],
+  "training_executed": false,
+  "upload_executed": false,
+  "external_validation": false,
+  "generated_at": "2026-10-04T19:53:18.042292+00:00",
+  "manifest_path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/custom/custom-manifest.json",
+  "manifest_sha256": "7a1cf2db32637766c95ddadb8cb837c9e5ddc472003a4a5dc9c0bf3555fa5bc1",
+  "metacognition": {
+    "observation_id": "b2cdbfbd-823f-4bfa-8a31-a1a225ca417c",
+    "persisted": true,
+    "scope_id": "696f26f45c55596dbb12360fc6430fcd45f6818f3febf2f5c6788e94f5c6daf3",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "completed"
+    },
+    "confidence_promoted": false
+  }
+}

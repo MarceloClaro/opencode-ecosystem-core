@@ -1,0 +1,29 @@
+{
+  "returncode": 0,
+  "tests": [
+    "tests/test_r100_mcp_security.py",
+    "tests/test_r118_mcp_initialize_handshake.py",
+    "tests/test_r229_mcp_expansion.py",
+    "tests/test_r232_mcp_server_hardening.py",
+    "tests/test_r471_reversa_skill_dispatch.py",
+    "tests/test_r608_catalog_bootstrap_frontmatter.py",
+    "tests/test_r621_harness_federation.py",
+    "tests/test_r640_autonomous.py",
+    "tests/test_r640_bridge_truthfulness.py",
+    "tests/test_r640_ecosystem_surface.py",
+    "tests/test_r640_harness_runtime.py",
+    "tests/test_r648_fed_extra_roots.py",
+    "tests/test_r649_opencode_agent_sdk.py",
+    "tests/test_r653_core_hooks.py",
+    "tests/test_r657_book_library.py",
+    "tests/test_r657_book_mcp.py",
+    "tests/test_r657_evidence_probe.py",
+    "tests/test_r657_library_surface.py",
+    "tests/test_r658_finetuning_data.py",
+    "tests/test_r94_mcp_server.py"
+  ],
+  "stdout": "........................................................................ [ 22%]\n........................................................................ [ 44%]\n........................................................................ [ 66%]\n........................................................................ [ 89%]\n...................................                                      [100%]\n323 passed in 103.54s (0:01:43)\n",
+  "stderr": "",
+  "success": true,
+  "evidence_kind": "local_regression_tests"
+}

@@ -35,6 +35,11 @@ from .artifact import (
     build_artifact,
     parse_frontmatter,
     parse_hook_manifest,
+    sha256_of,
+    slugify,
+    support_snapshot,
+    path_is_contained,
+    invocation_policy,
 )
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -68,6 +73,8 @@ _MAX_DEPTH = 8
 def _read_text(path: str, *, limit: int = 400_000) -> str:
     """Lê texto com teto de tamanho; arquivo ilegível devolve string vazia."""
 
+    if not path_is_contained(path, os.path.dirname(os.path.abspath(path))):
+        return ""
     try:
         with open(path, "r", encoding="utf-8", errors="replace") as handle:
             return handle.read(limit)
@@ -103,7 +110,7 @@ def _iter_files(
             d for d in dirnames
             if d not in _SKIP_DIRS
             and not d.startswith(".git")
-            and not os.path.join(dirpath, d) in pruned
+            and os.path.join(dirpath, d) not in pruned
         ]
         if dirpath.count(os.sep) - root_depth >= max_depth:
             dirnames[:] = []
@@ -276,6 +283,17 @@ class HarnessHarvester:
             # --- Codex (OpenAI) ---
             {"ecosystem": "codex", "root": os.path.join(self.home, ".codex"),
              "label": "codex:user", "origin": "user"},
+            {"ecosystem": "codex", "root": os.path.join(self.home, ".codex", "plugins", "cache"),
+             "label": "codex:plugin_cache", "origin": "third_party"},
+            {"ecosystem": "codex", "root": os.path.join(self.home, ".codex", "plugins", "marketplaces"),
+             "label": "codex:marketplace", "origin": "third_party"},
+            # Skills do Core participam do mesmo handoff de instruções.
+            {"ecosystem": "codex", "root": os.path.join(self.repo_root, ".opencode", "skills"),
+             "label": "codex:project_skills", "origin": "first_party"},
+            {"ecosystem": "codex", "root": os.path.join(self.repo_root, ".agents", "skills"),
+             "label": "codex:project_agents_skills", "origin": "first_party"},
+            {"ecosystem": "codex", "root": os.path.join(self.repo_root, ".codex", "skills"),
+             "label": "codex:project_codex_skills", "origin": "first_party"},
             # padrão AGENTS.md (Codex/agents) vendorizado no repositório
             {"ecosystem": "codex", "root": os.path.join(self.repo_root, "deepseek-harness"),
              "label": "codex:agents_standard", "origin": "third_party"},
@@ -292,6 +310,26 @@ class HarnessHarvester:
         front, body = parse_frontmatter(text)
         default_name = os.path.basename(os.path.dirname(path)) or os.path.basename(path).replace("SKILL.md", "").strip(".md")
         metadata = front.get("metadata") if isinstance(front.get("metadata"), dict) else {}
+        instruction_root = os.path.dirname(os.path.abspath(path))
+        supports, support_reasons = support_snapshot(instruction_root)
+        policy_path = os.path.join(instruction_root, "agents", "openai.yaml")
+        policy: Dict[str, Any] = {}
+        if os.path.isfile(policy_path) and path_is_contained(policy_path, instruction_root):
+            try:
+                import yaml
+                data = yaml.safe_load(_read_text(policy_path))
+                if not isinstance(data, dict) or not isinstance(data.get("policy", {}), dict):
+                    support_reasons.append("invalid_invocation_policy")
+                else:
+                    policy = data.get("policy", {})
+            except Exception:
+                support_reasons.append("invalid_invocation_policy")
+        merged_policy, policy_reasons = invocation_policy(front, policy)
+        support_reasons.extend(policy_reasons)
+        if not path_is_contained(path, instruction_root):
+            support_reasons.append("source_path_escape")
+        if os.path.getsize(path) > 128 * 1024:
+            support_reasons.append("skill_too_large")
         return build_artifact(
             ecosystem=ecosystem,
             kind="skill",
@@ -304,7 +342,15 @@ class HarnessHarvester:
             version=str(front.get("version") or ""),
             capabilities=front.get("capabilities") or front.get("allowed-tools") or (metadata or {}).get("capabilities"),
             tags=[*(metadata or {}).get("tags", []), *(front.get("tags") or [])],
-            metadata={"frontmatter_keys": sorted(str(k) for k in front)},
+            metadata={"frontmatter_keys": sorted(str(k) for k in front),
+                      "derived_source_artifact_id": front.get("x-source-artifact-id"),
+                      "instruction_root": instruction_root,
+                      "support_files": supports,
+                      "validation_reasons": support_reasons,
+                      "invocation_policy": merged_policy,
+                      "portable_frontmatter": {key: front[key] for key in
+                          ("disable-model-invocation", "user-invocable", "allowed-tools", "argument-hint", "context", "agent", "policy")
+                          if key in front}},
         )
 
     def _agent_from(self, path: str, *, ecosystem: str, origin: str, source_root: str) -> HarnessArtifact:
@@ -395,14 +441,45 @@ class HarnessHarvester:
             metadata={"heading": first_line[:200]},
         )
 
-    def _codex_plugin_from(self, path: str, *, source_root: str) -> HarnessArtifact:
+    def _codex_plugin_from(self, path: str, *, source_root: str, origin: str = "first_party") -> HarnessArtifact:
         text = _read_text(path)
         try:
             manifest = json.loads(text)
         except (ValueError, TypeError):
             manifest = {}
-        interface = manifest.get("interface") if isinstance(manifest.get("interface"), dict) else {}
-        prompts = interface.get("defaultPrompt") or []
+        if not isinstance(manifest, dict):
+            manifest = {}
+        extensions = manifest.get("extensions") if isinstance(manifest.get("extensions"), dict) else {}
+        openai_extension = extensions.get("com.openai") if isinstance(extensions.get("com.openai"), dict) else {}
+        portable_interface = openai_extension.get("interface") or extensions.get("com.openai.interface")
+        interface = (portable_interface if isinstance(portable_interface, dict) else
+                     manifest.get("interface") if isinstance(manifest.get("interface"), dict) else {})
+        prompts = interface.get("defaultPrompt", [])
+        portable = manifest.get("$schema") == "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
+        plugin_root = os.path.dirname(path) if portable else os.path.dirname(os.path.dirname(path))
+        skills_value = "./skills" if portable else manifest.get("skills")
+        plugin_files: List[Dict[str, Any]] = []
+        validation_reasons: List[str] = []
+        if isinstance(skills_value, str) and skills_value:
+            skills_root = os.path.join(plugin_root, skills_value)
+            if not path_is_contained(skills_root, plugin_root):
+                validation_reasons.append("plugin_skills_path_escape")
+            elif os.path.isdir(skills_root):
+                for directory, dirs, filenames in os.walk(skills_root, followlinks=False):
+                    for child in list(dirs):
+                        if os.path.islink(os.path.join(directory, child)):
+                            validation_reasons.append("support_path_escape")
+                            dirs.remove(child)
+                    dirs.sort()
+                    for filename in sorted(filenames):
+                        item_path = os.path.join(directory, filename)
+                        if not path_is_contained(item_path, plugin_root):
+                            validation_reasons.append("support_path_escape")
+                            continue
+                        from .artifact import _file_sha256
+                        plugin_files.append({"path": os.path.relpath(item_path, plugin_root).replace(os.sep, "/"),
+                                             "skill_relative_path": os.path.relpath(item_path, skills_root).replace(os.sep, "/"),
+                                             "sha256": _file_sha256(item_path)})
         return build_artifact(
             ecosystem="codex",
             kind="plugin",
@@ -412,16 +489,23 @@ class HarnessHarvester:
             source_path=path,
             body=text,
             source_root=source_root,
-            origin=_origin_for(path),
+            origin=_origin_for(path, default=origin),
             license_declared=str(manifest.get("license") or ""),
             version=str(manifest.get("version") or ""),
             capabilities=interface.get("capabilities") or ["skills"],
             tags=manifest.get("keywords"),
             metadata={
                 "developer_name": str(interface.get("developerName") or ""),
-                "default_prompts": [str(p) for p in prompts if isinstance(p, str)],
+                "default_prompts": prompts,
+                "portable_interface": interface,
                 "category": str(interface.get("category") or ""),
                 "skills_dir": str(manifest.get("skills") or ""),
+                "manifest_format": "agent_plugins_1_0" if portable else "codex_compatibility_overlay",
+                "declared_components": [key for key in ("mcpServers", "apps", "hooks", "agents", "commands") if key in manifest]
+                                       + (["mcp"] if os.path.isfile(os.path.join(plugin_root, "mcp.json")) else []),
+                "instruction_root": plugin_root,
+                "plugin_skill_files": plugin_files,
+                "validation_reasons": validation_reasons,
             },
         )
 
@@ -525,15 +609,25 @@ class HarnessHarvester:
             por que 138 caminhos renderam 69 artefatos.
             """
 
+            # Derivados emitidos já apontam ao artefato original: não reingerir
+            # o próprio destino como uma nova origem ou renomeá-lo em cascata.
+            if artifact.source_root == "codex:project_skills" and artifact.metadata.get("derived_source_artifact_id"):
+                return
             key = (artifact.ecosystem, artifact.kind, os.path.abspath(artifact.source_path))
             if key in by_path:
                 return
-            content_key = (artifact.ecosystem, artifact.kind, artifact.slug, artifact.content_sha256)
+            # Política e arquivos auxiliares também fazem parte da identidade.
+            support_identity = [{k: item[k] for k in ("path", "sha256")}
+                                for item in artifact.metadata.get("support_files", [])]
+            fingerprint = sha256_of(json.dumps({"source": artifact.source_file_sha256,
+                                               "policy": artifact.metadata.get("invocation_policy"),
+                                               "support": support_identity}, sort_keys=True))
+            content_key = (artifact.ecosystem, artifact.kind, artifact.origin, artifact.slug, fingerprint)
             existing = by_content.get(content_key)
             if existing is not None:
                 # Mantém o caminho mais curto como canônico (determinístico).
                 if len(artifact.source_path) < len(existing.source_path):
-                    existing_paths = [artifact.source_path, *existing.duplicate_paths]
+                    existing_paths = [existing.source_path, *existing.duplicate_paths]
                     by_path[key] = artifact
                     by_content[content_key] = replace(
                         artifact, duplicate_paths=sorted(set(existing_paths) - {artifact.source_path})
@@ -560,9 +654,27 @@ class HarnessHarvester:
             self._scan_root(root, ecosystem=ecosystem, origin=origin, label=label,
                             exclude_roots=all_roots, add=_add)
 
-        unique: Dict[str, HarnessArtifact] = {}
+        groups: Dict[str, List[HarnessArtifact]] = {}
         for artifact in by_content.values():
-            unique[artifact.artifact_id] = artifact
+            groups.setdefault(artifact.artifact_id, []).append(artifact)
+        unique: Dict[str, HarnessArtifact] = {}
+        for group in groups.values():
+            for artifact in group:
+                if len(group) > 1:
+                    fingerprint = sha256_of(json.dumps({"source": artifact.source_file_sha256,
+                                                       "policy": artifact.metadata.get("invocation_policy"),
+                                                       "support": artifact.metadata.get("support_files", [])}, sort_keys=True))[:16]
+                    artifact = replace(artifact, metadata={**artifact.metadata, "identity_suffix": fingerprint,
+                                       "emission_slug": f"{slugify(artifact.name)}-{fingerprint}"})
+                unique[artifact.artifact_id] = artifact
+        target_groups: Dict[Tuple[str, str], List[HarnessArtifact]] = {}
+        for artifact in unique.values():
+            target_groups.setdefault((artifact.kind, artifact.emission_slug), []).append(artifact)
+        for group in target_groups.values():
+            if len(group) > 1:
+                for artifact in group:
+                    target = f"{artifact.slug}-{artifact.ecosystem}-{artifact.origin}-{artifact.source_file_sha256[:12]}"
+                    unique[artifact.artifact_id] = replace(artifact, metadata={**artifact.metadata, "emission_slug": target})
         # A contagem de duplicatas vem de `duplicate_paths`, não de
         # `len(by_path) - len(unique)`: no ramo em que o canônico é preservado, o
         # caminho duplicado é registrado no artefato mas não entra em `by_path`,
@@ -639,9 +751,26 @@ class HarnessHarvester:
                 elif "agents" in parts:
                     add(self._agent_from(path, ecosystem=ecosystem, origin=origin, source_root=label))
             for path in files("SKILL.md"):
-                if agents_tree not in f"/{path.replace(os.sep, '/')}":
+                normalized = f"/{path.replace(os.sep, '/')}"
+                modern_user = label == "codex:user" and "/.codex/skills/" in normalized
+                modern_plugin = label in {"codex:plugin_cache", "codex:marketplace"}
+                explicit_extra = label not in {"codex:user", "codex:agents_standard", "codex:plugin_cache", "codex:marketplace"}
+                if agents_tree not in normalized and not (modern_user or modern_plugin or explicit_extra):
                     continue
                 add(self._skill_from(path, ecosystem=ecosystem, origin=origin, source_root=label))
+            for path in files("plugin.json"):
+                if os.path.basename(os.path.dirname(path)) == ".codex-plugin":
+                    add(self._codex_plugin_from(path, source_root=label, origin=origin))
+                elif label in {"codex:user", "codex:plugin_cache", "codex:marketplace"}:
+                    relative_parts = os.path.relpath(path, root).replace(os.sep, "/").split("/")
+                    if any(part in {"references", "examples", "templates", "tests", "docs", "fixtures", "samples"} for part in relative_parts[:-1]):
+                        continue
+                    try:
+                        manifest = json.loads(_read_text(path))
+                    except (ValueError, TypeError):
+                        continue
+                    if isinstance(manifest, dict) and manifest.get("$schema") == "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json" and isinstance(manifest.get("name"), str):
+                        add(self._codex_plugin_from(path, source_root=label, origin=origin))
             agents_md = os.path.join(root, "AGENTS.md")
             if os.path.isfile(agents_md):
                 add(self._spec_from(agents_md, ecosystem=ecosystem, origin=origin,

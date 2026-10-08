@@ -1,0 +1,569 @@
+{
+  "success": true,
+  "checks": {
+    "host_receipts": true,
+    "wolfram_game_computed": true,
+    "genomic_catalog_read": true,
+    "ngs_infrastructure_read": true,
+    "all_packages_imported": true,
+    "boltz_authenticated": true,
+    "boltz_installed": true,
+    "pubmed_executed": true,
+    "no_external_claim": true
+  },
+  "results": {
+    "wolfram": {
+      "external_validation": false,
+      "host_reported_execution": true,
+      "host_tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+      "local_connector_execution": false,
+      "plugin_id": "wolfram",
+      "reported_by": "Codex desktop authenticated MCP host",
+      "request_id": "7fd017ad79d64ea0976120b96ac66511",
+      "request_sha256": "fe922eab4143a814f459ab68ad5d07b614990a0b58bc7d89bb78e4cfb88d3788",
+      "response_sha256": "7627c1058a8b9665cb2e99e34a22d97fa48937c75be243341acbedc9ad557728",
+      "result": {
+        "content": [
+          {
+            "text": "Out[1]= \"{\\n\\t\\\"pure_nash\\\":[\\n\\t\\t[\\n\\t\\t\\t2,\\n\\t\\t\\t2\\n\\t\\t]\\n\\t],\\n\\t\\\"pareto_profiles\\\":[\\n\\t\\t[\\n\\t\\t\\t1,\\n\\t\\t\\t1\\n\\t\\t],\\n\\t\\t[\\n\\t\\t\\t1,\\n\\t\\t\\t2\\n\\t\\t],\\n\\t\\t[\\n\\t\\t\\t2,\\n\\t\\t\\t1\\n\\t\\t]\\n\\t]\\n}\"",
+            "type": "text"
+          }
+        ],
+        "isError": false
+      },
+      "source_authenticity": "host_reported",
+      "status": "completed"
+    },
+    "genomic": {
+      "external_validation": false,
+      "host_reported_execution": true,
+      "host_tool": "mcp__codex_apps__genomic_intelligence_list_models",
+      "local_connector_execution": false,
+      "plugin_id": "genomic-intelligence",
+      "reported_by": "Codex desktop authenticated MCP host",
+      "request_id": "05b5d2b656f743cc825a5cedcf21a0dc",
+      "request_sha256": "356f5e67a736de1d2595d92762e1b3e79822f306fe5e7a5cea338b2957f6ebf1",
+      "response_sha256": "1ff472ea6154ed3d79b69374cde5d04fb582f8a8a181df1fed28eb10448d6b4c",
+      "result": {
+        "content": [
+          {
+            "text": "{\n  \"task\": \"promoter\",\n  \"default_model\": \"g0-promoter-2000bp\",\n  \"models\": [\n    {\n      \"id\": \"g0-promoter-2000bp\",\n      \"name\": \"G0 Large Promoter (2000bp)\",\n      \"description\": \"G0 Large Promoter (2000bp)\",\n      \"is_default\": true,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"human\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"Human promoter sequences from EPDnew database\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-large-300bp\",\n      \"name\": \"G0 Large Promoter (300bp)\",\n      \"description\": \"G0 Large Promoter (300bp)\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 300,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"human\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"Human promoter sequences (300bp windows)\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-base-300bp\",\n      \"name\": \"G0 Base Promoter (300bp, fast)\",\n      \"description\": \"G0 Base Promoter (300bp, fast)\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 300,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"human\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"Human promoter sequences (300bp windows)\"\n      }\n    },\n    {\n      \"id\": \"dnabert-promoter-2000bp\",\n      \"name\": \"DNABERT Promoter (2000bp, 6-mer)\",\n      \"description\": \"DNABERT Promoter (2000bp, 6-mer)\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"k-mer\",\n        \"kmer_k\": 6,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"human\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"Human promoter sequences\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-drosophila\",\n      \"name\": \"G0 Drosophila Promoter\",\n      \"description\": \"G0 Drosophila Promoter\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"drosophila\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"D. melanogaster promoter sequences\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-yeast\",\n      \"name\": \"G0 Yeast Promoter\",\n      \"description\": \"G0 Yeast Promoter\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"yeast\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"S. cerevisiae promoter sequences\"\n      }\n    },\n    {\n      \"id\": \"g0-promoter-arabidopsis\",\n      \"name\": \"G0 Arabidopsis Promoter\",\n      \"description\": \"G0 Arabidopsis Promoter\",\n      \"is_default\": false,\n      \"bio_spec\": {\n        \"sequence_type\": \"DNA\",\n        \"tokenization\": \"BPE\",\n        \"kmer_k\": null,\n        \"max_tokens\": 512,\n        \"request_max_bp\": 500000,\n        \"context_window_bp\": 2000,\n        \"trained_window_bp\": null,\n        \"recommended_flank_bp\": null,\n        \"organism\": \"arabidopsis\",\n        \"capabilities\": [\n          \"classification\"\n        ],\n        \"output_formats\": [\n          \"probabilities\",\n          \"BED\",\n          \"bedgraph\"\n        ],\n        \"training_data\": \"A. thaliana promoter sequences\"\n      }\n    }\n  ]\n}",
+            "type": "text"
+          }
+        ],
+        "isError": false,
+        "structuredContent": {
+          "default_model": "g0-promoter-2000bp",
+          "models": [
+            {
+              "bio_spec": {
+                "capabilities": [
+                  "classification"
+                ],
+                "context_window_bp": 2000,
+                "kmer_k": null,
+                "max_tokens": 512,
+                "organism": "human",
+                "output_formats": [
+                  "probabilities",
+                  "BED",
+                  "bedgraph"
+                ],
+                "recommended_flank_bp": null,
+                "request_max_bp": 500000,
+                "sequence_type": "DNA",
+                "tokenization": "BPE",
+                "trained_window_bp": null,
+                "training_data": "Human promoter sequences from EPDnew database"
+              },
+              "description": "G0 Large Promoter (2000bp)",
+              "id": "g0-promoter-2000bp",
+              "is_default": true,
+              "name": "G0 Large Promoter (2000bp)"
+            },
+            {
+              "bio_spec": {
+                "capabilities": [
+                  "classification"
+                ],
+                "context_window_bp": 300,
+                "kmer_k": null,
+                "max_tokens": 512,
+                "organism": "human",
+                "output_formats": [
+                  "probabilities",
+                  "BED",
+                  "bedgraph"
+                ],
+                "recommended_flank_bp": null,
+                "request_max_bp": 500000,
+                "sequence_type": "DNA",
+                "tokenization": "BPE",
+                "trained_window_bp": null,
+                "training_data": "Human promoter sequences (300bp windows)"
+              },
+              "description": "G0 Large Promoter (300bp)",
+              "id": "g0-promoter-large-300bp",
+              "is_default": false,
+              "name": "G0 Large Promoter (300bp)"
+            },
+            {
+              "bio_spec": {
+                "capabilities": [
+                  "classification"
+                ],
+                "context_window_bp": 300,
+                "kmer_k": null,
+                "max_tokens": 512,
+                "organism": "human",
+                "output_formats": [
+                  "probabilities",
+                  "BED",
+                  "bedgraph"
+                ],
+                "recommended_flank_bp": null,
+                "request_max_bp": 500000,
+                "sequence_type": "DNA",
+                "tokenization": "BPE",
+                "trained_window_bp": null,
+                "training_data": "Human promoter sequences (300bp windows)"
+              },
+              "description": "G0 Base Promoter (300bp, fast)",
+              "id": "g0-promoter-base-300bp",
+              "is_default": false,
+              "name": "G0 Base Promoter (300bp, fast)"
+            },
+            {
+              "bio_spec": {
+                "capabilities": [
+                  "classification"
+                ],
+                "context_window_bp": 2000,
+                "kmer_k": 6,
+                "max_tokens": 512,
+                "organism": "human",
+                "output_formats": [
+                  "probabilities",
+                  "BED",
+                  "bedgraph"
+                ],
+                "recommended_flank_bp": null,
+                "request_max_bp": 500000,
+                "sequence_type": "DNA",
+                "tokenization": "k-mer",
+                "trained_window_bp": null,
+                "training_data": "Human promoter sequences"
+              },
+              "description": "DNABERT Promoter (2000bp, 6-mer)",
+              "id": "dnabert-promoter-2000bp",
+              "is_default": false,
+              "name": "DNABERT Promoter (2000bp, 6-mer)"
+            },
+            {
+              "bio_spec": {
+                "capabilities": [
+                  "classification"
+                ],
+                "context_window_bp": 2000,
+                "kmer_k": null,
+                "max_tokens": 512,
+                "organism": "drosophila",
+                "output_formats": [
+                  "probabilities",
+                  "BED",
+                  "bedgraph"
+                ],
+                "recommended_flank_bp": null,
+                "request_max_bp": 500000,
+                "sequence_type": "DNA",
+                "tokenization": "BPE",
+                "trained_window_bp": null,
+                "training_data": "D. melanogaster promoter sequences"
+              },
+              "description": "G0 Drosophila Promoter",
+              "id": "g0-promoter-drosophila",
+              "is_default": false,
+              "name": "G0 Drosophila Promoter"
+            },
+            {
+              "bio_spec": {
+                "capabilities": [
+                  "classification"
+                ],
+                "context_window_bp": 2000,
+                "kmer_k": null,
+                "max_tokens": 512,
+                "organism": "yeast",
+                "output_formats": [
+                  "probabilities",
+                  "BED",
+                  "bedgraph"
+                ],
+                "recommended_flank_bp": null,
+                "request_max_bp": 500000,
+                "sequence_type": "DNA",
+                "tokenization": "BPE",
+                "trained_window_bp": null,
+                "training_data": "S. cerevisiae promoter sequences"
+              },
+              "description": "G0 Yeast Promoter",
+              "id": "g0-promoter-yeast",
+              "is_default": false,
+              "name": "G0 Yeast Promoter"
+            },
+            {
+              "bio_spec": {
+                "capabilities": [
+                  "classification"
+                ],
+                "context_window_bp": 2000,
+                "kmer_k": null,
+                "max_tokens": 512,
+                "organism": "arabidopsis",
+                "output_formats": [
+                  "probabilities",
+                  "BED",
+                  "bedgraph"
+                ],
+                "recommended_flank_bp": null,
+                "request_max_bp": 500000,
+                "sequence_type": "DNA",
+                "tokenization": "BPE",
+                "trained_window_bp": null,
+                "training_data": "A. thaliana promoter sequences"
+              },
+              "description": "G0 Arabidopsis Promoter",
+              "id": "g0-promoter-arabidopsis",
+              "is_default": false,
+              "name": "G0 Arabidopsis Promoter"
+            }
+          ],
+          "task": "promoter"
+        }
+      },
+      "source_authenticity": "host_reported",
+      "status": "completed"
+    },
+    "ngs": {
+      "external_validation": false,
+      "host_reported_execution": true,
+      "host_tool": "mcp__ngs_compute__list_compute_targets",
+      "local_connector_execution": false,
+      "plugin_id": "ngs-analysis-workbench",
+      "reported_by": "Codex desktop authenticated MCP host",
+      "request_id": "48ce12930ae8410babc86576b44c7182",
+      "request_sha256": "3c37d476378e6c617ddd978e4de1fe4fa3dc0fe8d89c3564860b5f251dfffddb",
+      "response_sha256": "a84fc9030f8452ba2d0782e392f5587c611d946fdee8b6977e910a350db18b10",
+      "result": {
+        "content": [
+          {
+            "text": "{\n  \"count\": 1,\n  \"targets\": [\n    {\n      \"target_id\": \"local\",\n      \"title\": \"This computer\",\n      \"provider\": \"ngs-analysis-workbench\",\n      \"controller_transport\": \"local_process\",\n      \"executor\": \"local_process\",\n      \"workspace_access\": \"local_filesystem\",\n      \"description\": \"Run the workflow controller as a process on this computer.\"\n    }\n  ]\n}",
+            "type": "text"
+          }
+        ],
+        "isError": false,
+        "structuredContent": {
+          "count": 1,
+          "targets": [
+            {
+              "controller_transport": "local_process",
+              "description": "Run the workflow controller as a process on this computer.",
+              "executor": "local_process",
+              "provider": "ngs-analysis-workbench",
+              "target_id": "local",
+              "title": "This computer",
+              "workspace_access": "local_filesystem"
+            }
+          ]
+        }
+      },
+      "source_authenticity": "host_reported",
+      "status": "completed"
+    },
+    "registry": {
+      "status": "catalogued",
+      "plugins": [
+        {
+          "id": "genomic-intelligence",
+          "name": "Genomic Intelligence",
+          "version": "1.1.0",
+          "source_cache": "openai-curated-remote/app-6a73c480231c819181d7440a0e1499c9",
+          "instructions_installed": true,
+          "skills": [],
+          "host_operations": [
+            "list_models",
+            "fetch_sequence"
+          ],
+          "local_connector_execution": false,
+          "connector_scope": "authenticated_host"
+        },
+        {
+          "id": "wolfram",
+          "name": "Wolfram",
+          "version": "3.0.0",
+          "source_cache": "openai-curated-remote/app-69fe0bf66c8481919c513d799406436e",
+          "instructions_installed": true,
+          "skills": [],
+          "host_operations": [
+            "context",
+            "evaluate",
+            "query"
+          ],
+          "local_connector_execution": false,
+          "connector_scope": "authenticated_host"
+        },
+        {
+          "id": "boltz-api-cli",
+          "name": "Boltz",
+          "version": "0.1.1",
+          "source_cache": "openai-curated-remote/boltz-api-cli",
+          "instructions_installed": true,
+          "skills": [
+            "boltz-check-status",
+            "boltz-cli-setup",
+            "boltz-protein-design",
+            "boltz-protein-screen",
+            "boltz-small-molecule-adme",
+            "boltz-small-molecule-design",
+            "boltz-small-molecule-screen",
+            "boltz-structure-and-binding"
+          ],
+          "host_operations": [],
+          "local_connector_execution": false,
+          "connector_scope": "local_instructions_or_cli"
+        },
+        {
+          "id": "ngs-analysis-workbench",
+          "name": "NGS Analysis Workbench",
+          "version": "0.2.16",
+          "source_cache": "openai-curated-remote/ngs-analysis-workbench",
+          "instructions_installed": true,
+          "skills": [
+            "design-ngs-analysis",
+            "ngs-analysis-workbench",
+            "run-ngs-analysis",
+            "understand-ngs-data",
+            "understand-ngs-results"
+          ],
+          "host_operations": [
+            "targets"
+          ],
+          "local_connector_execution": false,
+          "connector_scope": "authenticated_host"
+        },
+        {
+          "id": "cowork-plugin-management",
+          "name": "cowork-plugin-management",
+          "version": "0.2.2",
+          "source_cache": "claude-cowork/cowork-plugin-management",
+          "instructions_installed": true,
+          "skills": [
+            "cowork-plugin-customizer",
+            "create-cowork-plugin"
+          ],
+          "host_operations": [],
+          "local_connector_execution": false,
+          "connector_scope": "local_instructions_or_cli"
+        },
+        {
+          "id": "data",
+          "name": "data",
+          "version": "1.1.0",
+          "source_cache": "claude-cowork/data",
+          "instructions_installed": true,
+          "skills": [
+            "analyze",
+            "build-dashboard",
+            "create-viz",
+            "data-context-extractor",
+            "data-visualization",
+            "explore-data",
+            "sql-queries",
+            "statistical-analysis",
+            "validate-data",
+            "write-query"
+          ],
+          "host_operations": [],
+          "local_connector_execution": false,
+          "connector_scope": "local_instructions_or_cli"
+        },
+        {
+          "id": "plugin-management",
+          "name": "Plugin Management",
+          "version": "0.1.0",
+          "source_cache": "openai-curated-remote/plugin-management",
+          "instructions_installed": true,
+          "skills": [
+            "plugin-management"
+          ],
+          "host_operations": [
+            "search",
+            "dependencies"
+          ],
+          "local_connector_execution": false,
+          "connector_scope": "authenticated_host"
+        },
+        {
+          "id": "academixpertplus-kariri",
+          "name": "AcademiXpertPlus KARIRI",
+          "version": "0.5.1+bundle.4c816d33a9b41bebd57e17594e90d987",
+          "source_cache": "created-by-me-remote/gpt-d8a67608fa47bd06edd9d64b5f46fa6d",
+          "instructions_installed": true,
+          "skills": [
+            "instructions"
+          ],
+          "host_operations": [],
+          "local_connector_execution": false,
+          "connector_scope": "local_instructions_or_cli"
+        },
+        {
+          "id": "scigrant",
+          "name": "SciGrant",
+          "version": "0.1.0",
+          "source_cache": "openai-curated-remote/app-6ab77d700b148191a79dc4d2df6babb6",
+          "instructions_installed": true,
+          "skills": [],
+          "host_operations": [
+            "workflow"
+          ],
+          "local_connector_execution": false,
+          "connector_scope": "authenticated_host"
+        },
+        {
+          "id": "life-sciences-literature",
+          "name": "Life Sciences Literature",
+          "version": "0.1.5",
+          "source_cache": "openai-curated-remote/life-sciences-literature",
+          "instructions_installed": true,
+          "skills": [
+            "biorxiv-skill",
+            "ncbi-entrez-skill",
+            "ncbi-pmc-skill"
+          ],
+          "host_operations": [],
+          "local_connector_execution": false,
+          "connector_scope": "local_instructions_or_cli"
+        },
+        {
+          "id": "plugin-creator",
+          "name": "Plugin Creator",
+          "version": "0.1.22",
+          "source_cache": "openai-curated-remote/plugin-creator",
+          "instructions_installed": true,
+          "skills": [
+            "create-plugin",
+            "prepare-plugin-submission",
+            "update-plugin"
+          ],
+          "host_operations": [
+            "metadata"
+          ],
+          "local_connector_execution": false,
+          "connector_scope": "authenticated_host"
+        },
+        {
+          "id": "anthropic-skills",
+          "name": "anthropic-skills",
+          "version": "1.0.0",
+          "source_cache": "claude-cowork/anthropic-skills",
+          "instructions_installed": true,
+          "skills": [
+            "algorithmic-art",
+            "canvas-design",
+            "consolidate-memory",
+            "criador-de-artigo",
+            "criador-de-artigo-v2",
+            "doc-coauthoring",
+            "docx",
+            "explain-usage",
+            "internal-comms",
+            "learn",
+            "mcp-builder",
+            "morning",
+            "pdf",
+            "pptx",
+            "schedule",
+            "setup-cowork",
+            "skill-creator",
+            "slack-gif-creator",
+            "web-artifacts-builder",
+            "xlsx"
+          ],
+          "host_operations": [],
+          "local_connector_execution": false,
+          "connector_scope": "local_instructions_or_cli"
+        }
+      ],
+      "executed": false,
+      "external_validation": false
+    },
+    "boltz_version": {
+      "status": "completed",
+      "plugin_id": "boltz-api-cli",
+      "operation": "version",
+      "executed": true,
+      "inference_executed": false,
+      "exit_code": 0,
+      "output": "boltz-api version 0.43.0\n",
+      "executable_sha256": "37085f5a0992becdb6d627f2873359936ae3ff4a0a0da5962459014455be57a1",
+      "external_validation": false,
+      "metacognition": {
+        "observation_id": "e75f0c1f-7757-4967-a97a-01926e195499",
+        "persisted": true,
+        "scope_id": "4c94f5a0629fafcb65e183ba855e268aa513512c0e4a5216036e4804d866a408",
+        "previous_observation_id": "3189284b-c2e1-4908-8910-71eb1aff0102",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false
+      }
+    },
+    "boltz_auth_status": {
+      "status": "completed",
+      "plugin_id": "boltz-api-cli",
+      "operation": "auth_status",
+      "executed": true,
+      "inference_executed": false,
+      "exit_code": 0,
+      "output": "payload omitido",
+      "executable_sha256": "37085f5a0992becdb6d627f2873359936ae3ff4a0a0da5962459014455be57a1",
+      "external_validation": false,
+      "metacognition": {
+        "observation_id": "c478c9c4-e08f-41d6-b091-37d648308762",
+        "persisted": true,
+        "scope_id": "4c94f5a0629fafcb65e183ba855e268aa513512c0e4a5216036e4804d866a408",
+        "previous_observation_id": "e75f0c1f-7757-4967-a97a-01926e195499",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false
+      }
+    },
+    "pubmed": {
+      "status": "completed",
+      "plugin_id": "life-sciences-literature",
+      "operation": "pubmed_search",
+      "executed": true,
+      "inference_executed": false,
+      "exit_code": 0,
+      "output": "{\"ok\": true, \"source\": \"ncbi-entrez\", \"endpoint\": \"esearch\", \"database\": \"pubmed\", \"record_path\": \"esearchresult.idlist\", \"raw_output_path\": null, \"warnings\": [], \"record_count_returned\": 5, \"record_count_available\": 5, \"truncated\": false, \"records\": [\"42829383\", \"42828772\", \"42828409\", \"42827656\", \"42827468\"], \"sources\": [{\"name\": \"NCBI Entrez\", \"url\": \"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=REDACTED&retmode=json&retmax=5\", \"retrieved_at\": \"2026-10-04T19:55:38.230018+00:00\", \"supports_claim\": true, \"kind\": \"evidence\", \"request_url\": \"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=REDACTED&retmode=json&retmax=5\", \"canonical_urls\": [\"https://pubmed.ncbi.nlm.nih.gov/42829383/\", \"https://pubmed.ncbi.nlm.nih.gov/42828772/\", \"https://pubmed.ncbi.nlm.nih.gov/42828409/\", \"https://pubmed.ncbi.nlm.nih.gov/42827656/\", \"https://pubmed.ncbi.nlm.nih.gov/42827468/\"]}]}",
+      "executable_sha256": "62ab008b58600ea7d79f305501012481b604648ce45c88e52d4e9f5265289f90",
+      "external_validation": false,
+      "metacognition": {
+        "observation_id": "a9e3c050-3d4b-4fae-afdf-c26116847cc7",
+        "persisted": true,
+        "scope_id": "0586f246961cde7e57b2379a0f0e61050eec7ff531e6fb17532b4ac69b284520",
+        "previous_observation_id": "cda1bbb6-9b2a-445b-95ea-91518f909bad",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false
+      }
+    }
+  },
+  "code_sha256": "dc9d2c98f2788cd4d8a3236b0b66f9b667a58857a68ddf7587bc469d48674a53",
+  "scope": "Actual host computation/catalog/infrastructure; local Boltz auth/version and PubMed search. No molecular prediction, NGS run or grant creation."
+}

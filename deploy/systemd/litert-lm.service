@@ -12,8 +12,8 @@ Restart=on-failure
 RestartSec=5s
 TimeoutStopSec=15s
 KillMode=control-group
-TasksMax=16
-MemoryMax=8G
+TasksMax=512
+MemoryMax=16G
 NoNewPrivileges=true
 PrivateTmp=true
 

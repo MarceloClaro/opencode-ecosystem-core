@@ -1,0 +1,64 @@
+:root {
+  --oai-duration-instant: 80ms;
+  --oai-duration-fast: 140ms;
+  --oai-duration-standard: 220ms;
+  --oai-duration-slow: 320ms;
+  --oai-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --oai-ease-enter: cubic-bezier(0, 0, 0, 1);
+  --oai-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --oai-ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-oai-motion] {
+  transition-duration: var(--oai-duration-standard);
+  transition-timing-function: var(--oai-ease-standard);
+  will-change: opacity, transform;
+}
+
+[data-oai-motion="fade"] {
+  transition-property: opacity;
+}
+
+[data-oai-motion="scale-fade"] {
+  transition-property: opacity, transform;
+}
+
+[data-oai-motion="slide-up"],
+[data-oai-motion="slide-down"] {
+  transition-property: opacity, transform;
+}
+
+[data-oai-motion][data-state="hidden"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-oai-motion="scale-fade"][data-state="hidden"] {
+  transform: scale(0.98);
+}
+
+[data-oai-motion="slide-up"][data-state="hidden"] {
+  transform: translateY(8px);
+}
+
+[data-oai-motion="slide-down"][data-state="hidden"] {
+  transform: translateY(-8px);
+}
+
+[data-oai-motion][data-state="visible"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --oai-duration-instant: 0ms;
+    --oai-duration-fast: 0ms;
+    --oai-duration-standard: 0ms;
+    --oai-duration-slow: 0ms;
+  }
+
+  [data-oai-motion] {
+    transform: none !important;
+  }
+}

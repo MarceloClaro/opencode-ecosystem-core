@@ -26,7 +26,7 @@ skills:
   tags: [super-habilidade]
   examples: [Aplique super habilidade v7 neste contexto, Avalie usando super habilidade v7]
 - id: pesquisa-quantica-end-to
-  name: 2: pesquisa quântica end-to-end com qiskit+pennylane, qml médico em ha
+  name: "2: pesquisa quântica end-to-end com qiskit+pennylane, qml médico em ha"
   description: >-
     Capacidade especializada em 2: pesquisa quântica end-to-end com qiskit+pennylane, qml médico em
     ham10000 (89

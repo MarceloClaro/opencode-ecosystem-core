@@ -29,7 +29,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from integrations.opencode_cli import build_config
+from integrations.opencode_cli import build_config  # noqa: E402 — bootstrap do caminho do projeto
 
 # Argumento substituído em $ARGUMENTS para comandos que exigem entrada não
 # trivial para produzir uma saída significativa (não apenas a mensagem de uso).
@@ -56,8 +56,33 @@ _ERROR_MARKERS = (
 )
 
 
+_PROMPT_TOOLS = {
+    "gemini-notebook": "ecosystem_gemini_notebook",
+    "runtime-cientifico": "ecosystem_scientific_runtime",
+    "datasets": "ecosystem_dataset_download",
+    "plugins-cientificos": "ecosystem_scientific_plugins",
+    "biblioteca": "ecosystem_library_search",
+    "ciencia": "ecosystem_knowledge_plan",
+    "ecosystem": "ecosystem_status",
+    "integracoes": "ecosystem_integration_status",
+}
+
+
 def _command_names():
-    return sorted(build_config()["command"].keys())
+    # OpenCode aceita templates de instrução. Eles são entregues ao agente;
+    # executá-los como texto shell é um erro deste teste, não da integração.
+    return sorted(set(build_config()["command"]) - set(_PROMPT_TOOLS))
+
+
+@pytest.mark.parametrize("name,tool_name", sorted(_PROMPT_TOOLS.items()))
+def test_prompt_commands_keep_orchestrator_and_available_tool(name, tool_name):
+    import asyncio
+    from integrations.ecosystem_mcp import mcp
+    command = build_config()["command"][name]
+    assert command["agent"] == "marceloclaro"
+    assert "$ARGUMENTS" in command["template"]
+    assert tool_name in command["template"]
+    assert tool_name in {tool.name for tool in asyncio.run(mcp.list_tools())}
 
 
 @pytest.mark.parametrize("name", _command_names())

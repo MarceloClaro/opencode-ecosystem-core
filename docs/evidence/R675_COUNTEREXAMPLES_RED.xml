@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="32" time="2.200" timestamp="2026-10-04T17:27:33.208400-03:00" hostname="OPENCODE"><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_core_venv_binary_is_resolved_without_path" time="0.003" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_explicit_empty_binary_disables_fallback" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload0]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload1]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload2]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload3]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload4]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload5]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload6]" time="0.001"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:27:33Z', operation='create_notebook', tar...='operacao create_notebook concluida', result_id='nb-1', artifact_path=None, artifact_sha256=None, artifact_bytes=None).success">payload = {'success': False, 'id': 'nb-1'}
+
+    @pytest.mark.parametrize("payload", [
+        {"status": "error", "id": "nb-1", "error": "auth failed"},
+        {"status": "failed", "id": "nb-1"},
+        {"status": "expired", "id": "nb-1"},
+        {"status": "partial", "id": "nb-1"},
+        {"data": {"status": "error", "id": "nb-1"}},
+        {"error": "business failure", "id": "nb-1"},
+        {"success": False, "id": "nb-1"},
+        {"ok": False, "id": "nb-1"},
+    ])
+    def test_business_failure_cannot_be_success_with_exit_zero(payload):
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: proc(payload))
+        receipt = executor.create_notebook("Título")
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:27:33Z', operation='create_notebook', tar...='operacao create_notebook concluida', result_id='nb-1', artifact_path=None, artifact_sha256=None, artifact_bytes=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:49: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload7]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:27:33Z', operation='create_notebook', tar...='operacao create_notebook concluida', result_id='nb-1', artifact_path=None, artifact_sha256=None, artifact_bytes=None).success">payload = {'ok': False, 'id': 'nb-1'}
+
+    @pytest.mark.parametrize("payload", [
+        {"status": "error", "id": "nb-1", "error": "auth failed"},
+        {"status": "failed", "id": "nb-1"},
+        {"status": "expired", "id": "nb-1"},
+        {"status": "partial", "id": "nb-1"},
+        {"data": {"status": "error", "id": "nb-1"}},
+        {"error": "business failure", "id": "nb-1"},
+        {"success": False, "id": "nb-1"},
+        {"ok": False, "id": "nb-1"},
+    ])
+    def test_business_failure_cannot_be_success_with_exit_zero(payload):
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: proc(payload))
+        receipt = executor.create_notebook("Título")
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:27:33Z', operation='create_notebook', tar...='operacao create_notebook concluida', result_id='nb-1', artifact_path=None, artifact_sha256=None, artifact_bytes=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:49: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_audio_creation_uses_artifact_id_instead_of_notebook_id" time="0.002"><failure message="AssertionError: assert 'nb-1' == 'art-1'&#10;  &#10;  - art-1&#10;  + nb-1">def test_audio_creation_uses_artifact_id_instead_of_notebook_id():
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k:
+                                     proc({"notebook_id": "nb-1", "artifact_id": "art-1"}))
+        receipt = executor.create_audio("nb-1")
+        assert receipt.success is True
+&gt;       assert receipt.result_id == "art-1"
+E       AssertionError: assert 'nb-1' == 'art-1'
+E         
+E         - art-1
+E         + nb-1
+
+tests/test_r675_notebook_podcast_truthfulness.py:58: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_requires_nonempty_real_file[None]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_requires_nonempty_real_file[]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_records_file_and_hash" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_rejects_preexisting_file_before_process" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[HTTP 401 Authentication failed token=SENSITIVE_TEST]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[403 Permission denied]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[Invalid option --profile]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[404 Notebook not found]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[Unknown server failure]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_artifact_propagation_retry_finishes_only_after_file" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs0]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs1]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs2]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs3]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs4]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs5]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs6]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs7]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_orchestrator_does_not_claim_success_without_download" time="2.007" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_orchestrator_does_not_select_unrelated_old_audio" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_podcast_observation_has_no_scientific_confidence" time="0.002" /></testsuite></testsuites>

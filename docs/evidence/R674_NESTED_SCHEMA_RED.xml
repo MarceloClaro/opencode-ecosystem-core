@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.175" timestamp="2026-10-04T17:54:18.158509-03:00" hostname="OPENCODE"><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_preflight_rejects_unknown_fields_inside_referenced_objects" time="0.004"><failure message="Failed: DID NOT RAISE ValueError">def test_preflight_rejects_unknown_fields_inside_referenced_objects():
+        schema = {"type": "object", "properties": {"item": {"$ref": "#/$defs/Entry"}},
+                  "$defs": {"Entry": {"type": "object", "properties": {"title": {"type": "string"}}}}}
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r674_gemini_notebook_orchestration.py:80: Failed</failure></testcase></testsuite></testsuites>

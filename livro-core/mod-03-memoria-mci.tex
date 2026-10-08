@@ -1,0 +1,341 @@
+% ======================================================================
+%  MÓDULO 3 — A Memória Metacognitiva: MetaBus, Blackboard e MCI
+% ======================================================================
+\thispagestyle{fancy}
+\chapter{A Memória Metacognitiva (MCI): MetaBus, Blackboard e Global Workspace}
+
+\roteirodidatico
+{Uma equipe precisa distinguir mensagens temporárias de anotações que serão úteis depois. Este capítulo acompanha como o Core representa memória e comunicação entre componentes.}
+{\emph{Evento} registra algo que ocorreu; \emph{assinante} recebe eventos de um tópico; \emph{Blackboard} é um quadro de coordenação; \emph{persistência} conserva dados além da execução corrente.}
+{Compare MetaBus e Blackboard pela finalidade, pelos dados e pelo ciclo de vida; acompanhe então publicação, leitura, persistência e avaliação de uma informação.}
+{Analise consistência, concorrência, retenção, privacidade e proveniência. Uma reflexão armazenada é um dado sobre uma execução, não uma demonstração independente de que a reflexão está correta.}
+{Quem escreveu a informação, quando, com que evidência foi conferida e por quanto tempo ela pode orientar decisões futuras?}
+
+\casoguiado{uma anotação reutilizada}
+{Um agente registra que uma fonte foi consultada e guarda a localização da passagem. Na execução seguinte, outro componente recupera a anotação. A persistência evita refazer parte do trabalho, mas a idade, a versão da fonte e o contexto continuam relevantes. Um uso seguro verifica se a anotação corresponde à pergunta atual e mantém a proveniência; a mera recuperação não transforma a anotação em evidência atualizada.}
+
+\begin{resultado}
+Este capítulo mostra \emph{onde} o conhecimento do ecossistema é guardado e
+\emph{como} os agentes se comunicam por um quadro-público. Ao final você saberá:
+(1) o que separa \textbf{MetaBus} (memória compartilhada) de \textbf{Blackboard}
+(quadro de tarefas por capacidades); (2) quais são as quatro superfícies MCP de
+comunicação; (3) por que a \emph{memória não é prova} e o que a avaliação
+metacognitiva exige para declarar qualquer coisa \emph{verificada}.
+\end{resultado}
+
+\section{A memória compartilhada: MetaBus}
+
+\begin{conceito}
+\emph{Metacognição operacional} é a capacidade do sistema de \emph{saber o que já
+sabe}: guardar reflexões, lições e confianças por domínio, e reutilizar esse
+conhecimento no próximo ciclo. No Core, isso é implementado por \pth{mci/metabus.py},
+que combina um barramento de eventos (publicar/subscrever) com uma memória
+persistente em \pth{shared\_memory.json}.
+\end{conceito}
+
+\par\smallskip
+A noção de \emph{metacognição} que fundamenta esta leitura não é invenção do
+Core: vem da psicologia do desenvolvimento e do conceito de
+\emph{monitoramento cognitivo} de John Flavell, para quem conhecimento
+metacognitivo é o conhecimento armazenado sobre si e os outros como agentes
+cognitivos, sobre tarefas e sobre estratégias. ``Saber o que já sabe'' é, aqui,
+a tradução operacional dessas crenças para um sistema de software — com a
+diferença crítica de que, no Core, esse conhecimento é \emph{persistido e
+revisado}, não apenas introspecção em tempo de execução \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{embasa a definição do que o MetaBus persiste como ``reflexão/lição/confiança'': sem esse lastro conceitual, o termo \emph{metacognição} usado nas fichas do ecossistema seria reivindicação sem fundamento}{Metacognitive knowledge is one's stored knowledge or beliefs about oneself and others as cognitive agents, about tasks, about actions or strategies, and about how all these interact to affect the outcomes of any sort of intellectual enterprise}{Conhecimento metacognitivo é o conhecimento ou as crenças armazenadas de alguém sobre si mesmo e sobre os outros como agentes cognitivos, sobre tarefas, sobre ações ou estratégias e sobre como tudo isso interage para afetar os resultados de qualquer empreendimento intelectual.}{FLAVELL, 1979, p.~906--911}.\elemento{MetaBus}{
+\metainfo{Código}{mci/metabus.py} \hfill \metainfo{Padrão}{Singleton} \hfill
+\metainfo{Registro}{specs/ (série SPEC-935-R*)}}
+
+\begin{funcao}
+O \textbf{MetaBus} é o \emph{barramento lógico} do ecossistema: entidades
+(agentes, orquestrador, validador) publicam eventos e assinam tópicos.
+Internamente usa \pth{_LogicalSubscription} — cada assinante carrega uma
+\textbf{identidade} e um \textbf{callback}. Nenhum agente precisa conhecer o
+endereço dos demais: a comunicação é por \emph{tópico}, como num corredor
+comum onde as portas têm etiquetas.
+\end{funcao}
+
+\elemento{MetacognitiveMemory}{
+\metainfo{Arquivo}{shared\_memory.json} \hfill \metainfo{API}{mci/metabus.py}
+\hfill \metainfo{Natureza}{persistente}}
+
+\begin{arquitetura}
+A memória expõe operações granulares e auditáveis:
+\begin{interpreta}
+\item[\cod{add_reflection(agent_id, task, reflection, score)}] grava uma
+\emph{reflexão} datada de um agente sobre uma tarefa.
+\item[\cod{extract_lessons(topic)}] extrai as lições acumuladas de um tópico.
+\item[\cod{search_memory(query, limit)}] busca memórias por texto.
+\item[\cod{get_recent_context(limit)}] devolve o contexto recente (janela
+metacognitiva para o orquestrador).
+\item[\cod{upsert_semantic_topic(topic, ...)}] mantém um tópico semântico.
+\item[\cod{update_domain_confidence(domain, score)}] e
+\cod{update_topic_confidence(topic, score)}] ajustam confiança — o numerador
+da \emph{economia} de atenção do sistema.
+\end{interpreta}
+\end{arquitetura}
+
+\begin{metodo}
+Fluxo canônico de uma reflexão:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+\item O agente conclui uma tarefa e \textbf{avalia} o próprio resultado.
+\item Grava \cod{add_reflection(...)} com a pontuação de autoconfiança.
+\item O orquestrador consulta \cod{extract_lessons(topic)} antes de reutilizar
+o mesmo agente para um problema similar.
+\item A confiança por domínio (\cod{update_domain_confidence}) pondera a
+\emph{chance} de escalar ou substituir o executor.
+\end{enumerate}
+\end{metodo}
+
+\section{O quadro de tarefas: Blackboard e o protocolo A2A}
+
+\begin{definicao}
+O \textbf{Blackboard} é o \emph{quadro-público} de trabalho do Core
+(\pth{mci/blackboard.py}). Nele o orquestrador \textbf{publica tarefas} com
+capacidades exigidas, e qualquer agente \textbf{se voluntaria} se tiver a
+capacidade declarada. É a materialização do protocolo \emph{Agent-to-Agent}
+(A2A) do ecossistema: ninguém espera ser chamado pelo nome — \emph{todo mundo
+olha o quadro e se apresenta}.
+\end{definicao}
+
+\par\smallskip
+A arquitetura de \emph{quadro-público} tampouco é novidade do Core: nasceu nos
+sistemas blackboard dos anos 1970, com o HEARSAY-II de compreensão de fala, e
+foi formalizada pela inteligência artificial como um modelo de resolução de
+problemas \emph{oportunista} (entradas reagem quando podem contribuir). O Core
+não ``inventa'' o padrão: o \emph{reconhece}, o implementa com capacidades
+declaradas e o blinda com a regra anti-overclaim — mas o vocabulário
+(quadro, entrada, fonte de conhecimento) e a justificativa de concorrência por
+atenção vêm da literatura fundadora \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{é a referência fundadora do padrão de sistemas blackboard que o Módulo 3 materializa em \pth{mci/blackboard.py}: estabelece a proveniência do vocabulário (blackboard, knowledge source, opportunistic reasoning) usado nas fichas do manual, impedindo ``reinvenção'' e fixando os limites do padrão}{The first blackboard system was the HEARSAY-II speech understanding system (Erman et al. 1980), which evolved between 1971 and 1976}{O primeiro sistema blackboard foi o sistema de compreensão de fala HEARSAY-II (Erman et al., 1980), que evoluiu entre 1971 e 1976.}{NII, 1986, p.~38--53}.\elemento{AgentCard}{
+\metainfo{Código}{mci/blackboard.py} \hfill \metainfo{Formato}{dict-editável}
+\hfill \metainfo{Papel}{carteira declarada}}
+
+\begin{descricao}
+O \pth{AgentCard} documenta \cod{agent_id}, \cod{name},
+\cod{description}, \cod{capabilities} (lista declarada de habilidades) e
+\cod{schema} (contrato dos argumentos que o agente aceita). Uma carteira é
+\textbf{auto-declarada}: ela diz o que o agente \emph{pretende} fazer, não o que
+cada tarefa provou. A prova vem do registro de eventos e da avaliação posterior.
+\end{descricao}
+
+\elemento{BlackboardTask}{
+\metainfo{Atributos}{task\_id, description, required\_capabilities, context}
+\hfill \metainfo{Estado}{postada $\to$ voluntariada $\to$ concluída}}
+
+\begin{funcao}
+Uma tarefa no quadro pode ser \textbf{emitida por qualquer agente}, não só pelo
+orquestrador: um validador com uma dúvida pode postar uma tarefa de
+\emph{verificação cruzada} e outro agente se voluntaria. O match
+(\cod{_match_task}) cruza \cod{required_capabilities} com as capacidades dos
+cards registrados.
+\end{funcao}
+
+\begin{processo}
+Ciclo completo de delegação por quadro:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+\item \textbf{Registro} — cada agente publica seu \pth{AgentCard}
+(\cod{mci_register_agent}).
+\item \textbf{Publicação} — alguém posta uma \pth{BlackboardTask} com as
+capacidades exigidas (\cod{mci_post_task}).
+\item \textbf{Match} — o Blackboard compara capacidades exigidas vs.\ cards.
+\item \textbf{Voluntariado} — para cada candidato, o \emph{fitness} pondera
+confiança ao vivo (\cod{_live_confidence}) e carga atual
+(\cod{_live_load}); o melhor candidato é acionado.
+\item \textbf{Conclusão} — o resultado volta ao quadro e a reflexão vai ao
+MetaBus (\cod{mci_get_memory} permite inspecionar o histórico).
+\end{enumerate}
+\end{processo}
+
+\begin{flowch}[Delegação por quadro (Blackboard)]{\pth{mci/blackboard.py}; evento \cod{task.completed}}
+\matrix[matrix of nodes,name=bb,row sep=5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|Publica \nodep{post_task} \& |[fns]|Match por \nodep{capabilities} \& |[fns]|Avalia \nodep{fitness} \\
+ |[fns]|Agente voluntário \& |[fde]|Fitness \& |[fns]|Reflexão no \nodep{MetaBus} \\
+};
+\draw[seta] (bb-1-1)--(bb-1-2);
+\draw[seta] (bb-1-2)--(bb-1-3);
+\draw[seta] (bb-1-3)--(bb-2-3);
+\draw[seta] (bb-2-3)--(bb-2-1);
+\draw[seta] (bb-2-1)--(bb-1-1);
+\draw[seta,plumAccent,dashed] (bb-1-2.north) to[out=90,in=90,looseness=1.6]
+  node[above=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{sem match}
+  (bb-1-1.north);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê.} O desenho mostra três papéis: \emph{controlador}, \emph{Blackboard} e \emph{solucionadores}. A seta do controlador para o quadro representa uma \emph{chamada para propostas (CFP)}; a seta de volta representa a \emph{proposta de um agente voluntário}. O ponto central é que o \emph{solucionador} \textbf{não fala diretamente com o controlador}, mas com o quadro. Essa comunicação indireta permite que um terceiro participe do processo sem integração prévia.
+\textbf{Justificativa.} O Contract Net Protocol fornece a gramática dessa conversa, formalizada por Smith: um gerente anuncia a tarefa, os solucionadores tomam conhecimento dela e apresentam propostas; então, o gerente aceita uma delas. A vantagem mensurável é a \textbf{escalabilidade}: o custo de adicionar um solver é a mensagem, não a integração -- que é exatamente a propriedade que o Blackboard herda e que a chamada direta de função não tem \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{O Contract Net Protocol fornece a gramática dessa conversa, formalizada por Smith: um gerente anuncia a tarefa, os solucionadores tomam conhecimento dela e apresentam propostas; então, o gerente aceita uma delas. }{The contract net protocol has been developed to specify problem-solving communication and control for nodes in a distributed problem solver}{O protocolo da rede de contratos foi desenvolvido para especificar comunicação e controle de resolução de problemas para nós em um solucionador distribuído de problemas.}{SMITH, 1980, p.~1104--1113}.\end{descricao}
+
+\begin{resultado}
+\emph{Fatos mensuráveis do ecossistema:} a superfície MCP
+\pth{metacognitive-interconnect} (\pth{mci/mcp_server.py}) expõe quatro
+ferramentas públicas — \cod{mci_register_agent}, \cod{mci_post_task},
+\cod{mci_get_memory} e \cod{mci_get_blackboard_state}. Em operação, o
+bootstrapper (\pth{mci/agent_registry_bootstrap.py}) lê definições do catálogo
+e publica cartões no quadro. Na fotografia de 29/09/2026,
+\texttt{agents/catalog/} continha 216 definições; os cinco arquivos de
+agentes essenciais em \texttt{agents/} são carregados por outra rotina. Esses
+números descrevem fontes distintas e não devem ser somados como se fossem
+necessariamente identificadores únicos em execução. O gate SPEC-935-R608
+registra regras de leitura e normalização dos cartões.
+\end{resultado}
+
+\section{Avaliação metacognitiva e a regra anti-overclaim}
+
+\begin{conceito}
+Avaliação metacognitiva (\pth{mci/metacognitive_evaluator.py}) transforma
+\emph{prontidão} (\cod{readiness_score}) em um \emph{tier}. A regra dura é: um
+tier que se auto-denomine \textbf{superhumano verificado} (\cod{metacognitive_superhuman_verified})
+só existe \emph{com validação externa explícita}. Sem ela, o avaliador
+classifica no máximo como \emph{pronto sob revisão} — e o caso
+\cod{no_verified_without_external} é um gate \textbf{fail-closed}.
+\end{conceito}
+
+\begin{aviso}
+Memória compartilhada, card registrado e teste verde \textbf{não são prova de
+qualidade externa}. Uma reflexão gravada no MetaBus registra \emph{o que o
+agente pensou}, não o que a comunidade científica confirmou. Declarar
+“verificado”, “superhumano” ou “Qualis A1” sem validação externa é
+\emph{overclaim} — proibido por política (ver CORRIGENDUM e Módulo 6).
+\end{aviso}
+
+\par\smallskip
+A regra anti-overclaim apóia-se em um dado empírico incômodo da literatura:
+para a maioria dos desenhos de estudo, uma alegação individual é
+\emph{mais provavelmente falsa do que verdadeira} — e a probabilidade de uma
+alegação ser verdadeira depende de poder estatístico, viés e da razão entre
+hipóteses verdadeiras e testadas em cada campo. Por isso o Core trata
+``verificado'' como termo de alto custo e exige validação externa explícita:
+não por ceticismo estético, mas por base de evidência \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{justifica o gate \cod{no_verified_without_external} do avaliador metacognitivo: a literatura mostra que testes internos e viés local tornam a alegação ``verificada'' sem validação externa improvável de ser verdadeira; o avaliador é a tradução pragmática dessa cautela em \emph{fail-closed}}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários de estudo, é mais provável que uma alegação de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, p.~e124}.\begin{limite}
+A memória metacognitiva é \emph{local ao Core} e \emph{revisível por lógica},
+não por peer review. Ela pode conter reflexões divergentes entre agentes; o
+valor está no \emph{embate documentado}, não no consenso. Não há ferramenta de
+esquecimento seletivo neste sub-sistema — confianças antigas só expiram por
+atualização de domínio explícita.
+\end{limite}
+
+\begin{niveis}
+\textbf{Intuição:} é um “caderno comum” onde os robôs anotam o que aprenderam e
+um “quadro de avisos” onde pedem ajuda pelas habilidades.\par\smallskip
+\textbf{Implementação:} MetaBus combina publicação e assinatura de eventos com
+armazenamento persistente; Blackboard organiza tarefas e contribuições segundo
+as regras descritas no código. A forma de seleção depende da implementação
+vigente e de seu estado.\par\smallskip
+\textbf{Relação com a teoria:} ``Global Workspace'' é usado aqui como lente
+comparativa para discutir acesso compartilhado e seleção de informação. Essa
+analogia não demonstra que o software implemente integralmente uma teoria
+cognitiva, nem que seus componentes possam ler ou refutar toda informação.
+Identifique o que cada mecanismo realmente expõe antes de atribuir essa
+propriedade ao sistema.
+\end{niveis}
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) MetaBus guarda reflexões e
+confianças; (2) Blackboard publica tarefas por capacidades e processa
+voluntariado com fitness; (3) as quatro ferramentas MCP são as portas de acesso;
+(4) memória $\neq$ prova, e o tier só é \emph{verificado} com validação externa.
+\textbf{Exercício sugerido:} abra \pth{mci/blackboard.py}, publique uma tarefa
+de exemplo com \cod{required_capabilities} e rastreie qual card atende;
+depois repita com uma exigência impossível e observe o caminho \emph{sem match}.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-03-memoria-mci.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Memória metacognitiva: contexto, registro e recuperação}
+
+\elemento{Leitura guiada — Memória metacognitiva}{\metainfo{ID}{N-03} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{duas memórias, um quadro}}
+
+\begin{descricao}
+\textbf{O fenômeno.} Um sistema que aprende precisa de dois tipos de lembrança, e
+confundi-los é erro de projeto. Ao terminar uma tarefa, o Core guarda duas coisas
+diferentes: \emph{o que aconteceu} (memória: reflexões, confiança) e \emph{o que
+precisa ser feito} (trabalho: tarefas abertas, voluntários). A primeira é o
+\textbf{MetaBus}; a segunda é o \textbf{Blackboard}. São canais separados ---
+trabalho $\neq$ memória ---, como o quadro-negro da sala (tarefa do dia) não é o
+diário do professor (histórico).
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{MetaBus}: memória metacognitiva; guarda reflexões e confiança por agente.
+  \item \textbf{Blackboard}: quadro A2A de tarefas por capacidades; publica tarefas e recebe voluntários.
+  \item \textbf{Ferramentas MCP}: 4 portas públicas --- \cod{mci_register_agent}, \cod{mci_post_task}, \cod{mci_get_memory}, \cod{mci_get_blackboard_state}.
+  \item \textbf{Escore de confiança} ($\tau_t$): valor interno atualizado a cada registro; o código combina 70\% do escore anterior com 30\% do novo score.
+  \item \textbf{Card}: ficha de capacidade de um agente; aqui $212$ cards.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Como o ledger atualiza o escore de confiança?
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item O ledger lê o escore atual $\tau_{t-1}$; se não houver valor salvo, começa em $0{,}5$.
+  \item Recebe o novo score $s_t$ e calcula $\tau_t = 0{,}7\tau_{t-1} + 0{,}3s_t$.
+  \item Assim, o valor recente altera o indicador, enquanto a influência do histórico diminui a cada atualização.
+  \item Lições com o mesmo tema são agrupadas no MetaBus, evitando duplicação de memória.
+  \item A leitura por tópico usa um limite (\pth{mci_get_memory}), então o orquestrador não ``traz o mundo inteiro''.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Começando pelo valor padrão $\tau_0=0{,}5$ e recebendo
+scores $s_1=0{,}9$, $s_2=0{,}7$ e $s_3=0{,}5$:
+\[\tau_1=0{,}7(0{,}5)+0{,}3(0{,}9)=0{,}62.\]
+\[\tau_2=0{,}7(0{,}62)+0{,}3(0{,}7)=0{,}644.\]
+\[\tau_3=0{,}7(0{,}644)+0{,}3(0{,}5)=0{,}6008\approx0{,}60.\]
+Se o gate configurado no Módulo 2 comparar o último valor com $0{,}25$, então
+$0{,}60>0{,}25$ passa esse critério numérico. Isso não certifica a resposta do
+agente: mostra apenas como o valor do ledger se relaciona ao limiar.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} O bootstraper registra os \textbf{212
+cards} no quadro; como há \textbf{216} entradas de agente, faltam $216 - 212 = 4$
+sem card declarado ($212/216 = 0{,}981$, isto é, $98{,}1\%$ cobertos).
+\emph{Verifique:} conte as entradas em \pth{opencode.json} e os arquivos em
+\pth{agents/catalog/}.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} \emph{Memória não é prova.} O ledger guarda um escore
+operacional, não uma probabilidade calibrada de acerto. Um valor alto não demonstra
+que o agente acertou no passado nem garante que esteja correto agora. O tier \cod{verified} só
+aparece com validação externa explícita (regra anti-overclaim do Módulo 3).
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Refaça a sequência com $s_1=s_2=s_3=1$ e calcule a
+distância entre $\tau_3$ e $1$. (2) Explique por que a regra dá mais influência
+ao histórico do que a uma única observação nova. (3) Por que separar ``tarefa''
+de ``memória'' evita misturar estado de execução e registro de contexto?
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Memória metacognitiva}
+\elemento{ativ-03m}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-03-memoria-mci.tex}}
+
+\begin{processo}
+GATILHO. consulta ao MetaBus/Global Workspace por lições e confiança.
+ROTA. MCP \pth{metacognitive-interconnect}; gate: memória auditável.
+FUNÇÃO. prover contexto e histórico de confiança para que a ativação não repita erros registrados.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. o ledger atualiza a confiança como $\tau_t=0{,}7\tau_{t-1}+0{,}3s_t$; lições com o mesmo tema são agrupadas no MetaBus.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. o arcabouço de metamemória de dois níveis — meta-nível que monitora e controla o objeto-nível — é o desenho do MetaBus sobre o estado do ecossistema. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. memória descreve o passado; não prediz o futuro (validação externa continua necessária). A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação:} A distinção entre objeto e meta-nível explica por que guardar eventos não basta para aprender. O nível-objeto registra o que ocorreu; o meta-nível compara o registro com o objetivo, decide se a estratégia deve mudar e acompanha o efeito do ajuste. Para cada ciclo, convém preservar o par $(e_t,a_t)$ — evidência observada e decisão tomada — e depois registrar o resultado $e_{t+1}$. Sem esse retorno, há memória de atividade, mas não evidência de que a regulação melhorou o processo \citref{NELSON, T. O.; NARENS, L. Metamemory: a theoretical framework and new findings. In: BOWER, G. H. (org.). \emph{The Psychology of Learning and Motivation}. San Diego: Academic Press, v.~26, p.~125-173, 1990}{10.1016/S0079-7421(08)60053-5}{p.~125--173 (resumo do capítulo, p.~125). é a base do desenho meta-nível/objeto-nível do MetaBus: o meta-nível adquire informação do objeto-nível (monitoramento) e o altera (controle) — exatamente o fluxo entre memória compartilhada e ativação dos agentes.}{This eventuated in the present theoretical framework that emphasizes the role of control and monitoring processes}{Isso resultou no presente arcabouço teórico que enfatiza o papel dos processos de controle e monitoramento.}{NELSON, 1990, p.~125}

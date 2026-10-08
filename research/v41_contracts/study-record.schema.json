@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/study-record.schema.json",
+  "title": "StudyRecord v1.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "study_id",
+    "project_id",
+    "canonical_title",
+    "identifiers",
+    "versions",
+    "sources",
+    "screening_status",
+    "integrity_status",
+    "included_in_synthesis",
+    "provenance_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "study_id": {
+      "type": "string",
+      "pattern": "^STUDY-[A-Z0-9]{6,20}$"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "canonical_title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "year": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "venue": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "identifiers": {
+      "type": "object",
+      "properties": {
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "openalex": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pmid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pmcid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "arxiv": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "versions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "version_id",
+          "kind",
+          "source"
+        ],
+        "properties": {
+          "version_id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "preprint",
+              "accepted_manuscript",
+              "version_of_record",
+              "repository_copy",
+              "unknown"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "doi": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "pdf_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "screening_status": {
+      "enum": [
+        "unscreened",
+        "candidate",
+        "include",
+        "exclude",
+        "conflict"
+      ]
+    },
+    "exclusion_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "integrity_status": {
+      "enum": [
+        "unchecked",
+        "clear",
+        "corrected",
+        "expression_of_concern",
+        "retracted",
+        "ambiguous"
+      ]
+    },
+    "included_in_synthesis": {
+      "type": "boolean"
+    },
+    "provenance_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "screening_status": {
+            "const": "exclude"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "exclusion_reason"
+        ],
+        "properties": {
+          "exclusion_reason": {
+            "type": "string",
+            "minLength": 3
+          },
+          "included_in_synthesis": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "integrity_status": {
+            "const": "retracted"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "included_in_synthesis": {
+            "const": false
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

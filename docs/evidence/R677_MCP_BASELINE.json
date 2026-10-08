@@ -1,0 +1,105 @@
+{
+  "scope": "fresh_actual_core_mcp_stdio_library_boundaries_before_R677",
+  "observed_at": "2026-10-05T01:57:23.546527+00:00",
+  "source_sha256_before": {
+    "integrations/ecosystem_mcp.py": "4539c2986b07bede5f5a70ef43ebaa819eb566e240661b7a0756e3266101f2d6",
+    "rag/book_library.py": "fdf3ba87e88d25f9601e9e84772b245a480a6ad64562bb49a971f3ef22fd1707",
+    "marceloclaro/orchestrator.py": "864d64ef716791364229862677fa9514f8484cd4d0967a276bd0f0ad46b54878"
+  },
+  "external_inference_executed": false,
+  "external_mutation_executed": false,
+  "stored_book_excerpts": false,
+  "cases": [
+    {
+      "case": "prompt_blank_both",
+      "expected": "rejected",
+      "rejected": true,
+      "error_type": "McpError",
+      "error": "Error rendering prompt ecosystem_book_review: 2 validation errors for ecosystem_book_review\ntask\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\ntopic\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short"
+    },
+    {
+      "case": "prompt_whitespace_both",
+      "expected": "rejected",
+      "rejected": true,
+      "error_type": "McpError",
+      "error": "Error rendering prompt ecosystem_book_review: task deve conter entre 1 e 2000 caracteres úteis."
+    },
+    {
+      "case": "prompt_missing_task",
+      "expected": "rejected",
+      "rejected": true,
+      "error_type": "McpError",
+      "error": "Missing required arguments: {'task'}"
+    },
+    {
+      "case": "prompt_missing_topic",
+      "expected": "rejected",
+      "rejected": true,
+      "error_type": "McpError",
+      "error": "Missing required arguments: {'topic'}"
+    },
+    {
+      "case": "prompt_missing_both",
+      "expected": "rejected",
+      "rejected": true,
+      "error_type": "McpError",
+      "error": "Missing required arguments: {'task', 'topic'}"
+    },
+    {
+      "case": "tool_blank_query",
+      "expected": "rejected",
+      "rejected": true,
+      "protocol_is_error": true,
+      "response_sha256": "094a9ba952441fbe53d092e3987501d94ba6ebb5031d4dc67a97a7d2eb81d9f2",
+      "error": "Error executing tool ecosystem_library_search: 1 validation error for ecosystem_library_searchArguments\nquery\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short"
+    },
+    {
+      "case": "tool_whitespace_query",
+      "expected": "rejected",
+      "rejected": true,
+      "protocol_is_error": true,
+      "response_sha256": "5e2568632cca6df698f49f45628097752e813cd1cd1de9b2d2676a2b10c0c595",
+      "error": "Error executing tool ecosystem_library_search: query deve conter entre 1 e 2000 caracteres úteis."
+    },
+    {
+      "case": "tool_missing_query",
+      "expected": "rejected",
+      "rejected": true,
+      "protocol_is_error": true,
+      "response_sha256": "17e7c08a5da1bea4a5b4982f588f59d3b3d26dbab1f11ddcc7d7eaf46b251cee",
+      "error": "Error executing tool ecosystem_library_search: 1 validation error for ecosystem_library_searchArguments\nquery\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing"
+    },
+    {
+      "case": "tool_valid_query",
+      "expected": "accepted_readonly",
+      "protocol_is_error": false,
+      "status": "ready",
+      "abstained": false,
+      "evidence_count": 2,
+      "method": "offline_lexical",
+      "response_sha256": "9259b8809ec71ed8845e614d964d817bb8728c562208e4e36c8e94ca223e92e4"
+    },
+    {
+      "case": "prompt_valid_request",
+      "expected": "accepted_readonly",
+      "message_count": 3,
+      "evidence_count": 5,
+      "abstained": false,
+      "bibliography_data_untrusted_marker": true,
+      "response_sha256": "474090d0a18adb92a1f9fa18be56cef06b805330b3d9c5e4a1744f270ba77ad0"
+    }
+  ],
+  "central_server": "ecosystem-network",
+  "prompt_required_arguments": [
+    "task",
+    "topic"
+  ],
+  "source_sha256_after": {
+    "integrations/ecosystem_mcp.py": "4539c2986b07bede5f5a70ef43ebaa819eb566e240661b7a0756e3266101f2d6",
+    "rag/book_library.py": "fdf3ba87e88d25f9601e9e84772b245a480a6ad64562bb49a971f3ef22fd1707",
+    "marceloclaro/orchestrator.py": "864d64ef716791364229862677fa9514f8484cd4d0967a276bd0f0ad46b54878"
+  },
+  "source_unchanged": true,
+  "all_invalid_requests_rejected": true,
+  "status": "passed"
+}

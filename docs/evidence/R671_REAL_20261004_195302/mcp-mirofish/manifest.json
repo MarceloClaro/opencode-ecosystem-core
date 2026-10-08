@@ -1,0 +1,185 @@
+{
+  "runtime": "mirofish",
+  "status": "completed",
+  "external_process_executed": true,
+  "inference_executed": true,
+  "externally_validated": false,
+  "human_peer_review": false,
+  "scientific_claim_eligible": false,
+  "population": "synthetic_profiles",
+  "runtime_artifact_observed": true,
+  "process_returncode": 0,
+  "timeout": false,
+  "duration_seconds": 26.682,
+  "model_calls": 2,
+  "model_receipts": [
+    {
+      "request_sha256": "fddcdea1bc9b836786d46c0e74790d59906c018898e329a0c874e33895deb639",
+      "response_sha256": "053c4bd848596011c564db0a3601d268743cfbf002f90893720b690df4494d8f",
+      "http_status": 200,
+      "generated_tokens": 12,
+      "generated": true,
+      "model_reported": "llama3.2:latest",
+      "usage": {
+        "prompt_tokens": 1059,
+        "completion_tokens": 12,
+        "total_tokens": 1071
+      },
+      "evidence_scope": "local_model_response"
+    },
+    {
+      "request_sha256": "5389e61b3cb60c03a28eeaedb23b95cc0f855001764018d65a1867f56ebb64de",
+      "response_sha256": "20b3dee7d9f9fd5c81d705cc9ed643ac802c463dc717c0ebfbcc5e437b21063c",
+      "http_status": 200,
+      "generated_tokens": 74,
+      "generated": true,
+      "model_reported": "llama3.2:latest",
+      "usage": {
+        "prompt_tokens": 1060,
+        "completion_tokens": 74,
+        "total_tokens": 1134
+      },
+      "evidence_scope": "local_model_response"
+    }
+  ],
+  "provenance": {
+    "repo": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL",
+    "python": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/.venv-externo/bin/python",
+    "entry": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/backend/scripts/run_twitter_simulation.py",
+    "origin": "https://github.com/MarceloClaro/MiroFish-Offline",
+    "commit": "313fe642853ff9fff05e3ecae2e439886c2d29f4",
+    "entry_sha256": "fbd9a18829ceed012f7e89b41e010f52f2c9d636d655b468458ee1276f0ba295",
+    "checkout_modified": true
+  },
+  "argv": [
+    "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/.venv-externo/bin/python",
+    "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/backend/scripts/run_twitter_simulation.py",
+    "--config",
+    "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/simulation_config.json",
+    "--max-rounds",
+    "1",
+    "--no-wait"
+  ],
+  "output_dir": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish",
+  "generation_token_limit": 256,
+  "limits": [
+    "Inferência do modelo local executada não comprova validade científica.",
+    "Cenário de dois personagens sintéticos não representa uma população real."
+  ],
+  "artifacts": {
+    "env_status.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/env_status.json",
+      "bytes": 70,
+      "sha256": "101841e50f6f601d16f6b43602b839aea612134ccd303c3a8ca75545114e744c",
+      "role": "runtime_artifact"
+    },
+    "execution.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/execution.json",
+      "bytes": 2642,
+      "sha256": "6f7db2f3a465af947d5b7a5026e633bbefdab2d3a96e9c0e3768762f75d3c1de",
+      "role": "runtime_artifact"
+    },
+    "log/oasis.env.log": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/log/oasis.env.log",
+      "bytes": 553,
+      "sha256": "af2abe6389ca1e91232b02b08e64f485fe5a34b644f479d9eeaf5cf026a1d003",
+      "role": "runtime_artifact"
+    },
+    "log/social.agent.log": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/log/social.agent.log",
+      "bytes": 2281,
+      "sha256": "d3a884b203edc16a763b654bb0fe7d428f638be909ab5ad87bacbfdc3fe26617",
+      "role": "runtime_artifact"
+    },
+    "log/social.rec.log": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/log/social.rec.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "runtime_artifact"
+    },
+    "log/social.twitter.log": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/log/social.twitter.log",
+      "bytes": 277,
+      "sha256": "a2da09ba42fad8fca3e4e0830ac92f32f1262b7fb26e350e5b452adb0e92bd73",
+      "role": "runtime_artifact"
+    },
+    "log/table.log": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/log/table.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "runtime_artifact"
+    },
+    "model_request_1.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/model_request_1.json",
+      "bytes": 4860,
+      "sha256": "fddcdea1bc9b836786d46c0e74790d59906c018898e329a0c874e33895deb639",
+      "role": "runtime_artifact"
+    },
+    "model_request_2.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/model_request_2.json",
+      "bytes": 4864,
+      "sha256": "5389e61b3cb60c03a28eeaedb23b95cc0f855001764018d65a1867f56ebb64de",
+      "role": "runtime_artifact"
+    },
+    "model_response_1.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/model_response_1.json",
+      "bytes": 416,
+      "sha256": "053c4bd848596011c564db0a3601d268743cfbf002f90893720b690df4494d8f",
+      "role": "runtime_artifact"
+    },
+    "model_response_2.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/model_response_2.json",
+      "bytes": 640,
+      "sha256": "20b3dee7d9f9fd5c81d705cc9ed643ac802c463dc717c0ebfbcc5e437b21063c",
+      "role": "runtime_artifact"
+    },
+    "models.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/models.json",
+      "bytes": 789,
+      "sha256": "dd515703acda8089b3f01df67cb7d0ddb40280f2e6e6b479eace86b85f359ee0",
+      "role": "runtime_artifact"
+    },
+    "oasis_summary.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/oasis_summary.json",
+      "bytes": 125,
+      "sha256": "d2f1d869e6bcac43fb8925bf29c9a976fb181db1ca39585caa8b1ad00e23315a",
+      "role": "runtime_artifact"
+    },
+    "prompt.txt": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/prompt.txt",
+      "bytes": 146,
+      "sha256": "6d55b5d9a41bc0db8956d87c5ce60dcebe31c108740386baddbc9d82f5047304",
+      "role": "runtime_artifact"
+    },
+    "simulation_config.json": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/simulation_config.json",
+      "bytes": 928,
+      "sha256": "1e607261f9a2046b846a9a27057ffabe983e037e5010743c141c6ec459dabb9a",
+      "role": "runtime_artifact"
+    },
+    "stderr.txt": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/stderr.txt",
+      "bytes": 283,
+      "sha256": "1f06b43f3a26d81ada65f54fc9e1855d3886f6288dfd316fa149aba78ef876b6",
+      "role": "runtime_artifact"
+    },
+    "stdout.txt": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/stdout.txt",
+      "bytes": 1282,
+      "sha256": "d855624e95a8792c176326fd31b2ba0508f3d790ec693c901791c526ddea6f3e",
+      "role": "runtime_artifact"
+    },
+    "twitter_profiles.csv": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/twitter_profiles.csv",
+      "bytes": 663,
+      "sha256": "39245b316d866c2ce26ae81ac1ef1c3319968b6e9947f9c2d04eceb6e99bedfe",
+      "role": "runtime_artifact"
+    },
+    "twitter_simulation.db": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/mcp-mirofish/twitter_simulation.db",
+      "bytes": 94208,
+      "sha256": "122250bc062d4f0f038eec351ddeaa6d10cfeb0341f3db47fdfe4480264332a8",
+      "role": "runtime_artifact"
+    }
+  }
+}

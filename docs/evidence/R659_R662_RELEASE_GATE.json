@@ -1,0 +1,221 @@
+{
+  "specs": [
+    "SPEC-935-R659",
+    "SPEC-935-R660",
+    "SPEC-935-R661",
+    "SPEC-935-R662"
+  ],
+  "timestamp_utc": "2026-10-04T13:22:19.058637+00:00",
+  "status": "PASS_LOCAL_SCOPE",
+  "external_audit": false,
+  "tests": {
+    "new_contracts": {
+      "R659": 39,
+      "R660": 73,
+      "R661": 33,
+      "R662": 17
+    },
+    "regression_count": 323,
+    "total": 485,
+    "scope": "selected integration contracts and regressions; not all repository tests"
+  },
+  "mutants_detected": 3,
+  "lint": {
+    "tool": "ruff",
+    "rules": [
+      "E4",
+      "E7",
+      "E9",
+      "F"
+    ],
+    "status": "passed"
+  },
+  "diff_check": "passed",
+  "real_execution": {
+    "MCP_stdio": "four servers; isolated state; invalid input rejection before effects",
+    "core_cli_mcp": "same orchestrator status, skill plan and artifact handoff",
+    "SDK_local_inference": "llama3.2:latest native sum42 and final response; independent real hook veto",
+    "skill_emission": "existing core-hooks artifact in temporary destination, no scripts executed"
+  },
+  "configuration": {
+    "agents": 227,
+    "mcp_servers": 11,
+    "commands": 24,
+    "ecosystem_tools": 9,
+    "reproduced": true
+  },
+  "evolution_cycles": [
+    "R659",
+    "R660",
+    "R661",
+    "R662"
+  ],
+  "doctor": {
+    "overall": "degraded",
+    "checks": [
+      {
+        "name": "specs_formais",
+        "status": "pass",
+        "detail": "145 especificações formais carregadas."
+      },
+      {
+        "name": "evolution_registry",
+        "status": "pass",
+        "detail": "487/487 ciclos carregados corretamente. | Custódia: 0.4% (2/487); recente R462+ 1.0% (2/209); âncoras merkle 2; rejeitados 1; legados 427"
+      },
+      {
+        "name": "loop_specs",
+        "status": "pass",
+        "detail": "2 loop spec(s) registrado(s), todos bem formados."
+      },
+      {
+        "name": "memoria_metacognitiva",
+        "status": "pass",
+        "detail": "MetaBus memory acessível; 170 entradas episódicas."
+      },
+      {
+        "name": "opencode_config",
+        "status": "pass",
+        "detail": "opencode.json válido com 227 agente(s) configurado(s)."
+      },
+      {
+        "name": "corrigendum",
+        "status": "pass",
+        "detail": "CORRIGENDUM.md presente (19372 bytes)."
+      },
+      {
+        "name": "external_clis",
+        "status": "warn",
+        "detail": "5/17 CLI(s) externa(s) ausente(s): scihub-cli -> pip install scihub-cli; runai -> curl -fsSL https://canirun.ai/runai/install.sh | bash; tig -> pip install tig-code; reasonix -> npm install -g reasonix; colab-mcp -> uvx colab-mcp --help"
+      },
+      {
+        "name": "llm_providers",
+        "status": "pass",
+        "detail": "Provedor(es) LLM disponível(is): Ollama local. Preferência: local → PAIR → Ollama → OpenAI."
+      },
+      {
+        "name": "litert_lm",
+        "status": "pass",
+        "detail": "ready: daemon HTTP local respondeu ao health check (pid=externo); readiness não valida geração de texto."
+      },
+      {
+        "name": "colibri",
+        "status": "pass",
+        "detail": "OLMoE OK (bin=/home/marceloclaro/opencode-ecosystem-core/colibri/c/olmoe, snap=/home/marceloclaro/models/olmoe_merged)"
+      },
+      {
+        "name": "runai",
+        "status": "warn",
+        "detail": "runai ausente e o pacote npm documentado pelo instalador respondeu 404; há inconsistência upstream em https://canirun.ai/runai/install.sh / @canirun/runai. Workaround suportado: clone https://github.com/midudev/canirun.ai e defina RUNAI_SOURCE_DIR para o checkout."
+      },
+      {
+        "name": "llm_reduction_metrics",
+        "status": "pass",
+        "detail": "Redução LLM ativa: 0 chamadas evitadas, 0 rotas processadas. Threshold: 0.85."
+      },
+      {
+        "name": "episteme_coverage",
+        "status": "pass",
+        "detail": "149/227 agentes com episteme (66%): 3 explícita(s), 146 inferida(s), 78 sem sinais."
+      },
+      {
+        "name": "apm_integration",
+        "status": "pass",
+        "detail": "Microsoft APM ativo (v1.0.0): 222 primitivas declaradas (com lockfile íntegro)."
+      },
+      {
+        "name": "free_model_amplification",
+        "status": "pass",
+        "detail": "Amplificação DeepSeek Harness ativa: RAG local Whoosh3 + Scaffold CoT para modelos free (Ox Alpha, DeepSeek Free)."
+      },
+      {
+        "name": "deepmind_superhuman_reasoning",
+        "status": "pass",
+        "detail": "DeepMind Superhuman Reasoning ativo: Aletheia scaffold + Verificador formal (SymPy ativo) + IMO Bench (9 problemas)."
+      },
+      {
+        "name": "opencode_deepthink_alphaproof",
+        "status": "pass",
+        "detail": "OpenCode AlphaProof & Deep Think ativos: Proof-tree search (1 nós) + Erdős/Hirzebruch Solver (Dim 2 OK)."
+      },
+      {
+        "name": "lean4_egraph_engine",
+        "status": "pass",
+        "detail": "Lean 4 & E-Graph ativos: Analisador Estático Lean 4 ativo (status: syntax_verified) + Equality Saturation (1 regras aplicadas)."
+      },
+      {
+        "name": "geometry_autoformalization_engine",
+        "status": "pass",
+        "detail": "AlphaGeometry & Auto-Formalizer ativos: Wu's Method (resíduo 0) + Lean 4 Autoformalize (status syntax_verified)."
+      },
+      {
+        "name": "clinical_game_theory_engine",
+        "status": "pass",
+        "detail": "Decisão Clínica por Teoria dos Jogos & Grafos ativa: 7 diretrizes verificadas + Minimax Regret ativo + Verificador Z3 (True)."
+      }
+    ],
+    "checks_total": 20,
+    "checks_passed": 18,
+    "checks_warned": 2,
+    "checks_failed": 0,
+    "duration_seconds": 8.47
+  },
+  "limitations": [
+    "No installation of exported plugins in external hosts was performed. Codex export is explicitly a compatibility overlay of skills/interface with omitted components reported.",
+    "Colibri inference endpoint remains untested for successful generation; unavailable provider returns errors correctly.",
+    "Qwen3:8b live attempt failed under memory pressure; original failure preserved.",
+    "The successful allow phase request trace used a mutable reference; actual HTTP responses/native execution/hook lifecycle were preserved; deny request snapshot was corrected.",
+    "colibri/ is ignored in the existing Git configuration; its modified adapter is included in hashes."
+  ],
+  "source_sha256": {
+    "colibri/colibri_mcp_server.py": "3ae5152873d5393ba4360c716d48b2c3429f22fc9121bcb7479e6da89719e6e1",
+    "docs/INTEGRACOES_R659_R662.md": "f285f130caca5cc1edc2e5551a84cbe357f13ee0c2a96b4ab5dc6b8f779b36ac",
+    "hooks/engine.py": "9a24619b9c87ce281b02d2e5dee85ef5f504468bc9ef4a55f5384f1eb2ea019c",
+    "hooks/policy.py": "a6512cb8850ff114467af278fbf73706684706a3c358618ff09f90fc73467948",
+    "integrations/ecosystem_mcp.py": "e4dd9043e03b19301a997612c8160f293eaf380c9552b2da8f92cf0553530e5e",
+    "integrations/harness_federation/artifact.py": "6225fcd1ebb9ed71b77bb942e14a2d533682d8d58ceb8975994be618ecb9724d",
+    "integrations/harness_federation/emit.py": "d54aeef0f2b85f9ac7e7f07b9391b7a9d3100bd8c22f7a1ae3bf64884b78a9bc",
+    "integrations/harness_federation/harvest.py": "3d68c07befd8c761d80e3eeefe7fed9e34d70b7374567ca2c3c03649ff385990",
+    "integrations/mcp_validation.py": "f4373a8dabc8c17722e07e994ab89bb963693ceddb1fc21b3c2857841ac91311",
+    "integrations/opencode_agent_sdk.py": "c522d2b2baf74556ee9e032aaed429b89bd069cad574051d2aa6c6fbd3b64c63",
+    "integrations/opencode_cli.py": "034b83a917330c09875adff273ddef11a5a51537486c0113cce338aa675a154a",
+    "marceloclaro/cli.py": "362bf65cb8c6b3aac72cb51caf58163ca54830a7bfa877bda71138db7fd50003",
+    "marceloclaro/integration_cli.py": "fe2a25ca320ca730746178aa201a6650e26846d27403adfac3353246e74ed98b",
+    "marceloclaro/integration_service.py": "72f98d1c7af57cad6f595c218a94a745af608409345516b3bba2e470610a81bc",
+    "marceloclaro/orchestrator.py": "08b091a44634504f046018653fc75996430f2f7398585e569061f21a3b0a289e",
+    "mci/mcp_server.py": "a124f6069fbc5b1818ba1689c419c076a47cd57f9fb0eab7dbea7c759f5cf112",
+    "opencode.json": "560be960a6071f6f9d0059309eab01a9c337d95f7721fdb4781135ed01f8238b",
+    "requirements.txt": "c7dd55b204fa735caca52b9e69d158c7fa2e7c4a9a6d1ad3bffd625f3620a560",
+    "reversa_universal/skill_dispatch.py": "11057755a8856ecd4fe648cbdce1df6451279bc6c8fc612e5718ba92ce2a54fb",
+    "scanners/scanners_mcp_server.py": "9387d4386afa861262a8f9730c3cf51c3aa4dcdbb3b6d2ce78b6ab75c055f1f8",
+    "specs/SPEC-935-R659-sdk-hooks-integration.md": "e421070b789c9e755b4eb0a0dd1ff40dacc9ed29891b72335f7d00cc425e0600",
+    "specs/SPEC-935-R660-mcp-schema-integration.md": "6192edbd3892d5401371084ae4c87732daa779d856aaf575a5549dea38d9d0ef",
+    "specs/SPEC-935-R661-artifact-federation-integration.md": "d3dc410987ee2dbd3739d08e33bfc979e0c6836c1c96f7b29c6fcbaca8068056",
+    "specs/SPEC-935-R662-integration-surfaces.md": "e057cba9e1659fb080db2db9736ef64615ef2e3869c3411bbcba7a5fe1397756",
+    "synthetic_university/mcp_security.py": "8044e29d6b0e192a1879f28129311c3d11f92457bb521e3f72b809e87c54b496",
+    "synthetic_university/mcp_server.py": "c3bd2fe6b4a7b5703c7d9ea2f140adc2a1b9588b40ea071ab230efa6a831ee49",
+    "tests/test_r659_sdk_hooks_contract.py": "afb96ab0e60767b6fccb40f7870d57034498f78efa4790006526edf24db720a8",
+    "tests/test_r660_mcp_validation.py": "7c12834d37c3237e48036291756a0da0895413aa1a5d2e2d76c642c9b5f030d6",
+    "tests/test_r661_artifact_integration.py": "652e09fec5d3072427bd0cdd14a9c14b9ab7bf56cf22f2dfb09612e899661288",
+    "tests/test_r662_integration_surface.py": "2ea05ac32ae6fbb7caa08563a51eb135c4b90f2f7401a804861e57ab7edb769a",
+    "transformer/harness_head.py": "527287275e4350cfbd463ad32a34dae587b08a164d42031451dd5d64fe8ea37a",
+    ".opencode/skills/core-hooks/SKILL.md": "d7154a684b1f3ec3fd80bae0c994ced709d1c44742191f6049bfbd4825e69eb2",
+    ".opencode/skills/opencode-agent-sdk/SKILL.md": "694501686a6a05a98eef3409112f147e91955e891619c8cf8bef48cbe76e820e",
+    "scripts/probe_sdk_hooks_live.py": "4d8e03ae2923aab8a30e58cf21bb7a79341ef994b1bffb257cb92890474b1fb0",
+    "scripts/probe_mcp_contracts.py": "c808835d4df74c5c414061ae47e48830787317ada1f5a09493fc6c35e4d69a59",
+    "scripts/probe_core_integrations.py": "8679eb843df0aeacb95ddafb9581f10cfccc59fce9bc606d50d2a6179e7d0582",
+    "scripts/probe_integration_mutations.py": "41effef40b3f70b59e0c218825cf570eaaa69e4bebb597ecc582bc3023502b47",
+    "tests/test_r608_catalog_bootstrap_frontmatter.py": "9586724ddfeace8195a84449310480360879bd6b8e937311868806cc4bee2eab",
+    "tests/test_r621_harness_federation.py": "435791f77bac45232c1a2598d4cdf8add1fc75c26f3f7c4ed620c87611b31a27",
+    "tests/test_r640_ecosystem_surface.py": "f8c1783220d1e8949bbdd10cc0b7e9a8f023fde2f3e6b4b709fe33ab241c5485"
+  },
+  "evidence_sha256": {
+    "docs/evidence/R659_R662_SDD_GATE.json": "0cff8e10bb6ec5cc4ffdd06ae1b698f828cd4ecd839020a954b025993a7a07c2",
+    "docs/evidence/R659_R662_REGRESSION.json": "8386a42cced8d1ed6ee55bdc8630eca823f908c386efa27666ab8617b401a437",
+    "docs/evidence/R659_R662_MUTATIONS.json": "18454791acaa00c6161718923dca48dd50d93ade2177b074c11a89cd490d849a",
+    "docs/evidence/R659_SDK_HOOKS_LIVE.json": "50a67afd2a26a5858a1089bf477e9dd23f2c3675cb79cbf2712c8d142a362e28",
+    "docs/evidence/R660_MCP_STDIO.json": "7d612c0420a625080508b5dbbf033e07977801b6dbfe3eb320e4f7b464cb693f",
+    "docs/evidence/R662_CORE_INTEGRATIONS_REAL.json": "701e618f3176dc8d1113b2626ce983a2f3c770f181ec3efda593b36f1857a31b",
+    "docs/evidence/R659_R662_DOCTOR.json": "f142b0374b069a1645a1186a72310553203eadce5d5ac9af803502bc75771c1d"
+  }
+}

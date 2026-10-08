@@ -1,0 +1,435 @@
+% ============================================================
+%  MÓDULO 13 — ATIVAÇÃO DE AGENTES E SUBAGENTES (minuciosa)
+%  Pipeline determinístico único + ativação por categoria.
+%  Teoria, função, cálculo e gates, com citações DOI verificadas
+%  (cronologia 1..7 confere com a biblioteca do Módulo 11).
+% ============================================================
+
+\chapter{Ativação de Agentes e Subagentes}
+\label{mod13}
+
+\roteirodidatico
+{Uma descrição de agente no catálogo não significa que ele tenha sido chamado. Este módulo distingue o registro disponível das etapas que conduzem uma solicitação a uma execução.}
+{\emph{Gatilho} inicia o fluxo; \emph{roteamento} escolhe a rota; \emph{permissão} autoriza uma operação; \emph{feedback} devolve resultado; \emph{registro} conserva o rastro.}
+{Acompanhe os sete estágios com uma tarefa de exemplo e identifique, em cada um, a entrada, a decisão, a saída e o ponto em que a execução pode parar.}
+{Modelos de pontuação e cálculos ilustrativos explicam regras, mas não são medidas empíricas de precisão sem uma amostra, referência de comparação e avaliação reportada.}
+{Que evidência distingue um agente apenas catalogado de um agente selecionado, chamado e concluído com sucesso?}
+
+\casoguiado{estados distintos de ativação}
+{Em uma sequência ilustrativa, a ficha existe no catálogo; a configuração a registra; o aplicativo a carrega; uma tarefa a seleciona; o executor retorna uma saída. Cada etapa precisa de uma evidência própria. Se só houver a ficha, a conclusão correta é ``documentado''. Se houver um log de chamada, pode-se dizer ``invocado naquela execução'', ainda sem afirmar que a resposta foi correta.}
+
+\begin{resultado}
+ESCOPO. Este módulo apresenta um modelo de referência para analisar possíveis
+rotas de ativação, desde um pedido até a execução e o registro. A sequência
+(1) gatilho, (2) roteamento, (3) correspondência de capacidades, (4) verificação
+de permissões, (5) execução, (6) retorno e (7) registro é uma decomposição
+didática: os caminhos reais podem variar entre aplicativo, configuração, skill,
+integração e ambiente. Não se deve presumir que todos os sete passos ocorram
+sempre nem que a seleção seja determinística. As seções distinguem o fluxo
+documentado das partes que precisam de confirmação operacional e dos exemplos
+matemáticos, que são ilustrativos até serem avaliados com execuções observadas.
+categoria.
+\end{resultado}
+
+% ============================================================
+\section{Sistema geral de ativação — o pipeline de 7 etapas}
+% ============================================================
+
+\begin{processo}
+ETAPA 1 — GATILHO. No modelo de análise deste capítulo, o gatilho é o evento que
+leva uma tarefa a ser considerada para execução: por exemplo, uma skill
+solicitada, um perfil nomeado, um comando ou uma tarefa publicada no Blackboard.
+O fluxo concreto pode iniciar de outra forma; identifique a interface e os dados
+de entrada no caso estudado antes de chamar o evento de gatilho.
+\end{processo}
+
+O gatilho só é legítimo se nomear o que deve ser feito; o vocabulário de
+cada card (descrição, skills, tags) foi construído para casar com esses
+gatilhos. Isso é deliberado: o conceito de agente neste ecossistema segue a
+tríade que Wooldridge e Jennings tornaram canônica — reatividade à mudança do
+ambiente, proatividade orientada a objetivos e habilidade social de
+interação \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{é o lastro teórico da especificação do gatilho: um agente só é um agente se é reativo, proativo e social — propriedades que o pipeline de ativação transforma em regras de roteamento (reagir à tarefa publicada, perseguir o objetivo declarado e interagir via Blackboard/MetaBus)}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligência artificial quanto na ciência da computação.}{WOOLDRIDGE; JENNINGS, 1995, p.~115--152}.\begin{processo}
+ETAPA 2 — ROTEAMENTO. O orquestrador decide o caminho de ativação em ordem de
+preferência rígida: (a) skill marcada como API-alvo da tarefa; (b) agente
+nomeado explicitamente (rota inline em \pth{opencode.json}); (c) subagente do
+catálogo cujas capacidades casem com o gatilho; (d) fallback: ``executante
+genérico'' sem especialização. A escolha (b) roda direto; a (c) entra no
+Blackboard para voluntariado.
+\end{processo}
+
+\begin{processo}
+ETAPA 3 — CASAMENTO DE CAPACIDADES. Para a rota (c), calcula-se o escore de
+ativação de cada card voluntário. Seja $K$ o conjunto de tokens-chave do
+gatilho (remoção de stopwords) e $C_a$ as capacidades declaradas do agente
+$a$; o escore é a interseção em união (Jaccard ponderado):
+$A(a) = |K \cap C_a| / |K \cup C_a|$, $0 \le A \le 1$. Empates são
+desfeitos por prioridade de categoria (curation \textgreater research
+\textgreater audit) e, em último caso, por ordem alfabética — nunca por
+aleatoriedade, para preservar a reprodutibilidade.
+\end{processo}
+
+\begin{processo}
+ETAPA 4 — GATE DE PERMISSÃO. Antes da execução, o card é validado pelo
+bootstraper (SPEC-935-R608: frontmatter tolerante, descrição não vazia,
+capacidades não vazias) e as permissões declaradas no card são aplicadas.
+Card ilegível não executa: erro visível, não silencioso (fail-closed).
+\end{processo}
+
+\begin{processo}
+ETAPA 5 — EXECUÇÃO. O agente recebe o gatilho + contexto do MetaBus e executa
+na rota escolhida (inline, skill, MCP). Se o agente estiver marcado com
+política de invocação implícita proibida, o orquestrador lê o
+\pth{SKILL.md} correspondente e executa suas instruções no contexto atual,
+sem re-disparo de habilidade.
+\end{processo}
+
+A distribuição da tarefa entre múltiplos especialistas voluntários — e não a
+execução por um único programa fixo — é o coração arquitetural do Core. A
+justificativa teórica vem da maturidade do campo de sistemas multiagente: a
+coordenação por delegação e o reuso de capacidades declaradas são os
+princípios que o roteiro de pesquisa do campo consolida, e é esse reuso que o
+Escore de Ativação mede \citref{JENNINGS, N. R.; SYCARA, K.; WOOLDRIDGE, M. A roadmap of agent research and development. \emph{Autonomous Agents and Multi-Agent Systems}, v.~1, n.~1, p.~7-38, 1998}{10.1023/A:1010090405266}{é a moldura em que o voluntariado por capacidades se apoia: o campo consolida que agentes autônomos são construídos em torno de capacidades reutilizáveis e interação estruturada — exatamente o que o casamento de capacidades e o MetaBus implementam}{It aims to identify key concepts and applications, and to indicate how they relate to one-another}{O objetivo é identificar conceitos-chave e aplicações e indicar como eles se relacionam entre si.}{JENNINGS, 1998, p.~7--38}.\begin{processo}
+ETAPA 6 — FEEDBACK. O resultado da execução volta ao orquestrador com o
+vínculo especificação-teste (gate SDD/TDD): se a tarefa alterou código ou
+manual, o ciclo de evolução é registrado com score e lições. O resultado não
+é ``verificado'' sem validação externa.
+\end{processo}
+
+\begin{processo}
+ETAPA 7 — REGISTRO. Cada ativação que mudou estado gera um ciclo em
+\pth{evolution/cycles.json} — objetivo, mudanças, score, lições e
+round\_id sem colisão com specs (SPEC-935-R611). Reprogramar a execução
+exige fonte de verdade: o mesmo gatilho + mesmo catálogo produz a mesma
+rotação (determinismo).
+\end{processo}
+
+O requisito de determinarismo — mesmo gatilho, mesmo catálogo, mesmo manual —
+é o padrão mínimo de reprodutibilidade para alegações computacionais. Como o
+manual é gerado a partir do catálogo, a reprodutibilidade da ativação é
+herdada pela reprodutibilidade da geração; quando a replicação integral é
+impossível, a reprodutibilidade serve como padrão mínimo de julgamento \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{ancora a política de determinismo do pipeline de ativação e do gerador do manual: reprodutibilidade é o padrão mínimo para julgar alegações computacionais quando a replicação completa não é viável — princípio que o livro aplica ao próprio livro}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}.\begin{arquitetura}
+FUNÇÕES ÚNICAS POR ETAPA. E1 gatilho: `parsea gatilho e publica tarefa` em
+\pth{mci/mcp_server.py} (mci\_post\_task). E2 roteamento: `decide caminho`
+em \pth{marceloclaro/orchestrator.py}. E3 casamento: `escore de ativação` em
+\pth{mci/blackboard.py} (matching de capacidades). E4 gate:
+`parse/card/permissão` em \pth{mci/agent_registry_bootstrap.py}. E5 execução:
+`executa skill/subagente` (rota MCP/inline). E6 feedback: `valida gate
+SDD/TDD`. E7 registro: `record()` em \pth{evolution/cycles.py}
+(round\_id único, R611).
+\end{arquitetura}
+
+\begin{aviso}
+AVISO/ANTI-OVERCLAIM. O pipeline descreve COMO a ativação acontece; descrever
+o mecanismo não garante a qualidade do resultado. Um agente bem ativado pode
+produzir má resposta; a diferença é auditável pela trilha E1--E7, não por
+afirmação. (R110.)
+\end{aviso}
+
+% ============================================================
+\section{Ativação por categoria — lote por categoria}
+% ============================================================
+
+\begin{descricao}
+ORGANIZAÇÃO. As seções a seguir aplicam o pipeline de 7 etapas a CADA
+categoria do catálogo (mod-10). Para cada categoria: gatilho típico, rota
+dominante, função do agente, cálculo específico, justificativa teórica,
+impactos e limites e aviso. As categorias são as 12+ do gerador
+\pth{gen\_mod10.py} — orquestração, acadêmica, pesquisa, auditoria, jurídica,
+dados, inferência, engenharia, testes, literária e cura (paisagem; mapeia o
+card do agente-alvo e recomenda capacidades, sem substituir o pipeline E1--E7),
+integração, MIRA, MASWOS e utilidade.
+\end{descricao}
+
+\subsection{Orquestração}
+\elemento{ativ-orquestracao}{\metainfo{Categoria}{orquestracao} \hfill \metainfo{Rota}{marceloclaro/orchestrator.py}}
+
+\begin{descricao}
+GATILHO. Qualquer pedido de múltiplos passos; rota (b) inline. FUNÇÃO:
+coordenar, não executar. CÁLCULO: também executa o E3 para escolher o
+subagente com maior escore $A(a)$; mantém a trilha E1--E7 como registro.
+JUSTIFICATIVA: reatividade/proatividade/socialidade (Wooldridge; Jennings
+1995) + oportunismo blackboard (Nii 1986). LIMITE: o orquestrador depende da
+qualidade dos cards — daí os gates R608/R609 que verificam a leitura e a
+normalização das fichas; um card legível ainda não comprova a capacidade de
+execução do agente.
+\end{descricao}
+
+\subsection{Acadêmica (artigos/TCC/dissertação)}
+\elemento{ativ-academica}{\metainfo{Categoria}{academic} \hfill \metainfo{Rota}{skills/pesquisa-artigo-qualis-a1}}
+
+\begin{descricao}
+GATILHO: ``artigo'', ``TCC'', ``dissertação'', ``banca''. ROTA: skill
+curada + subagentes 00--44. FUNÇÃO: cumprir o ciclo SDD/TDD editorial
+(escopo, busca, evidências, estrutura, revisão, QA). CÁLCULO: a cobertura de
+cada etapa é $1 - k/n$ (k critérios abertos em n criteriosos da rubrica
+MASWOS). JUSTIFICATIVA: validação externa como única fonte de mérito
+(Ioannidis 2005; R110). LIMITE: não promete aprovação nem Qualis.
+\end{descricao}
+
+\subsection{Pesquisa (literatura/evidências)}
+\elemento{ativ-pesquisa}{\metainfo{Categoria}{research} \hfill \metainfo{Rota}{skills/pesquisador-universal}}
+
+\begin{descricao}
+GATILHO: ``revisão sistemática'', ``buscar fontes'', ``meta-análise''.
+FUNÇÃO: busca e curadoria com download open access e verificação de fontes.
+CÁLCULO: grau de cobertura da living review = fontes verificadas por PMID/DOI
+dividido pelo total de candidatas. JUSTIFICATIVA: reprodutibilidade mínima
+(Peng 2011) aplicada a evidências. LIMITE: corpus é direcionado pela query;
+não substitui consenso de especialistas.
+\end{descricao}
+
+\subsection{Auditoria e qualidade}
+\elemento{ativ-auditoria}{\metainfo{Categoria}{audit} \hfill \metainfo{Rota}{agente auditor + honest-critic}}
+
+\begin{descricao}
+GATILHO: ``audite'', ``confere'', ``revisão de qualidade''. FUNÇÃO: separar
+cobertura de mérito; aplicar fail-closed. CÁLCULO: colunas da auditoria —
+alegação, evidência, validação; ausência de validação externa gera
+``inconclusivo/requer\_escalonamento''. JUSTIFICATIVA: provável falsidade de
+alegações não validadas (Ioannidis 2005). LIMITE: auditor não conhece o
+mundo real.
+\end{descricao}
+
+\subsection{Jurídica (auxjuris)}
+\elemento{ativ-juridica}{\metainfo{Categoria}{legal} \hfill \metainfo{Rota}{agents/auxjuris-*}}
+
+\begin{descricao}
+GATILHO: ``cláusula'', ``petição'', ``minuta de ofício'', ``jurisprudência''.
+ROTA: subagentes auxjuris (research, document\_summarizer, email\_drafter,
+legal\_assistant). FUNÇÃO: apoiar pesquisa/digestão documental e redação de
+minutas com revisão humana obrigatória. CÁLCULO: checklist de cobertura por
+apontamento; texto sem revisão humana é classificado `rascunho`. LIMITE: não
+emite parecer autônomo nem responde à diligência por conta própria.
+\end{descricao}
+
+\subsection{Dados e proveniência}
+\elemento{ativ-dados}{\metainfo{Categoria}{data} \hfill \metainfo{Rota}{skills/engenharia de dados + FAIR}}
+
+\begin{descricao}
+GATILHO: ``datasets'', ``proveniência'', ``coleta''. FUNÇÃO: garantir que
+todo dado tenha origem, versão, papel analítico e restrição documentados.
+CÁLCULO: cobertura FAIR por dataset = proporção dos princípios F/A/I/R
+atendidos com evidência. JUSTIFICATIVA: proveniência detalhada (Wilkinson
+2016, R1.2). LIMITE: dados coletados de API pública podem quebrar sem aviso.
+\end{descricao}
+
+\subsection{Inferência estatística e computacional}
+\elemento{ativ-inferencia}{\metainfo{Categoria}{inference} \hfill \metainfo{Rota}{agentes 20--28}}
+
+\begin{descricao}
+GATILHO: ``estatística'', ``modelagem'', ``ML'', ``benchmarking''.
+FUNÇÃO: adequação de testes, modelagem formal e robustez de resultados.
+CÁLCULO: baseline+ablação; generalização aferida por erro fora da amostra.
+JUSTIFICATIVA: não declarar efeito sem controle (Ioannidis 2005; Peng 2011).
+LIMITE: resultado estatístico é contingente ao desenho declarado.
+\end{descricao}
+
+\subsection{Engenharia e infraestrutura}
+\elemento{ativ-engenharia}{\metainfo{Categoria}{engineering} \hfill \metainfo{Rota}{skills/cloud-* + coder}}
+
+\begin{descricao}
+GATILHO: ``construa'', ``implemente'', ``infra'', ``cloud''. FUNÇÃO:
+codificar com protocolo SDD/TDD e operar componentes de infra.
+CÁLCULO: gate = testes verdes / specs com teste (R610). JUSTIFICATIVA:
+evidência executável antes de ``concluído'' (Ioannidis 2005). LIMITE:
+ambiente mínimo declarado; sem commitar sem autorização.
+\end{descricao}
+
+\subsection{Testes}
+\elemento{ativ-testes}{\metainfo{Categoria}{testing} \hfill \metainfo{Rota}{tests/test\_r*.py}}
+
+\begin{descricao}
+GATILHO: ``teste'', ``regressão'', ``pytest''. FUNÇÃO: RED-verde do ciclo
+SDD/TDD e garantia de não-regressão (ex.: motor R608/R611).
+CÁLCULO: cobertura de rotas = casos verdes / casos totais por família.
+JUSTIFICATIVA: reprodutibilidade (Peng 2011) e fail-closed (Ioannidis 2005).
+LIMITE: teste verde não generaliza para produção.
+\end{descricao}
+
+\subsection{Literária (projeto Molambudos)}
+\elemento{ativ-literaria}{\metainfo{Categoria}{literary} \hfill \metainfo{Rota}{agentes literary-*}}
+
+\begin{descricao}
+GATILHO: ``trecho'', ``personagem'', ``voz autoral''. FUNÇÃO: aplicar
+scanners literários e guardar voz/ética/tradução. CÁLCULO: score de
+consistência de voz por marcador presente versus esperado. JUSTIFICATIVA:
+curadoria auditável (Peng 2011); LIMITE: nenhum scanner aprova equivalência —
+toda aprovação é humana.
+\end{descricao}
+
+\subsection{Cura da paisagem de agentes}
+\elemento{ativ-curador}{\metainfo{Categoria}{curation-agent} \hfill \metainfo{Rota}{landscape-curator}}
+
+\begin{descricao}
+GATILHO: ``adicionar agente externo'', ``integrar nova coleção''. FUNÇÃO:
+inventariar pontos de entrada externos e recomendar formato/capabilities do
+card. CÁLCULO: paridade multilcoleção = cards próprios vs. manifests externos.
+JUSTIFICATIVA: proveniência (Wilkinson 2016). LIMITE: card gerado é
+candidato; ativação final exige o gate R608 (frontmatter válido).
+\end{descricao}
+
+\subsection{Integração (externos e MCP)}
+\elemento{ativ-integracao}{\metainfo{Categoria}{integration} \hfill \metainfo{Rota}{integrations/*}}
+
+\begin{descricao}
+GATILHO: ``executor externo'', ``MCP'', ``orquestrar CLI''. FUNÇÃO: compor
+CLIs externas (gemini, goose, plandex, reasonix, haystack) como executores
+tolerantes — ausência do binário gera warn, nunca crash. CÁLCULO: saúde =
+executores disponíveis / executores declarados. JUSTIFICATIVA: reuso de
+capacidades (Jennings, Sycara, Wooldridge 1998). LIMITE: resultado externo
+nunca é ``verificado'' sem validação do Core.
+\end{descricao}
+
+\subsection{MIRA (apresentações)}
+\elemento{ativ-mira}{\metainfo{Categoria}{mira-agent} \hfill \metainfo{Rota}{agentes mira-*}}
+
+\begin{descricao}
+GATILHO: ``deck'', ``apresentação'', ``visual''. FUNÇÃO: pipeline de slides
+(briefing, planejamento, animações, validação). CÁLCULO: conformidade de
+deck = critérios do mira-validator atendidos / total. JUSTIFICATIVA:
+determinismo de geração (Peng 2011). LIMITE: estética não mede eficácia de
+comunicação.
+\end{descricao}
+
+\subsection{MASWOS (padrão nota 10)}
+\elemento{ativ-maswos}{\metainfo{Categoria}{maswos-agent} \hfill \metainfo{Rota}{agentes 13--16, 44}}
+
+\begin{descricao}
+GATILHO: ``rubrica'', ``QA Qualis'', ``10/10''. FUNÇÃO: auditoria micro e
+macro contra o padrão MASWOS. CÁLCULO: nota de rubrica = pontos atendidos /
+pontos totais ponderados. JUSTIFICATIVA: separação cobertura/mérito
+(Ioannidis 2005; R110). LIMITE: rubrica interna não é aceitação editorial.
+\end{descricao}
+
+\subsection{Utilidade (busca, git, docs, revisão)}
+\elemento{ativ-utilidade}{\metainfo{Categoria}{utility} \hfill \metainfo{Rota}{git-manager, pypi-searcher, docs-writer, reviewer}}
+
+\begin{descricao}
+GATILHO: ``busque'', ``commite'', ``documente'', ``review''. FUNÇÃO:
+serviços de suporte determinísticos. CÁLCULO: cobertura por serviço =
+operações com rastro / operações totais. JUSTIFICATIVA: reprodutibilidade e
+rastro (Peng 2011; Wilkinson 2016). LIMITE: convenções do repo mandam
+(mensagem de commit, sem secret).
+\end{descricao}
+
+\begin{resultado}
+RESUMO DO LOTE. Todas as categorias do catálogo foram percorridas com a
+mesma chave de leitura (E1--E7 + função + cálculo + justificativa teórica +
+limite + aviso). As citações usam apenas os DOIs verificados e ativos da
+biblioteca do Módulo 11; nenhuma alegação de ``superioridade'' foi feita
+(R110).
+\end{resultado}
+
+% ============================================================
+\section{Como ativar na prática (exemplos executáveis)}
+% ============================================================
+
+\begin{metodo}
+EXEMPLO 1 — ORQUESTRAR EXPANSÃO. Gatilho: ``expanda o módulo X com citações''.
+E2 escolhe rota (b) orquestrador; E3 não se aplica a subagente nomeado; E4
+gate de card do orquestrador; E6 exige teste/spec para cada mudança; E7 grava
+ciclo com round\_id único (R611). O operador deve confirmar escopo antes de
+gerar conteúdo em massa (núcleo primeiro, lote por categoria, etc).
+\end{metodo}
+
+\begin{metodo}
+EXEMPLO 2 — ATIVAR AGENTE NOMEADO (``revisar com honest-critic''). E1 parsea
+o nome; E2 rota (b) inline; E4 permissão lida do card; E5 execução; E6 o
+resultado (parecer) alimenta o orquestrador; E7 registra se alterou manual.
+A invocação de skill-filha com invocação implícita proibida exige que o
+orquestrador leia o SKILL.md e execute no contexto — nunca re-disparo por
+nome.
+\end{metodo}
+
+\begin{metodo}
+EXEMPLO 3 — VOLUNTÁRIO (``preciso de um especialista em N''). E1 publica
+tarefa; E3 calcula $A(a)$ para todos os cards; E5 os k = melhores
+executam em paralelo; E6 combinados pelo orquestrador com nota de confiança do MetaBus;
+E7 ciclo. Sem voluntário com $A>0$, cai no fallback (d) e o orquestrador
+avisa o operador (transparência, não silêncio).
+\end{metodo}
+
+\begin{resultado}
+APLICAÇÃO A TODOS OS MÓDULOS. Todo módulo do manual (1--13) que mencione um
+agente/subagente herda este pipeline único: a ``ativação'' nunca é ambígua
+entre módulos — é sempre E1--E7. Nos módulos 1--9 a referência é implícita;
+a partir daqui (12--13) a referência é explícita e auditável contra a
+biblioteca de DOIs verificados.
+\end{resultado}
+
+% ----------------------------------------------------------------------
+%  N-13 — Leitura guiada do Módulo 13 (adicionada no ciclo R619)
+% ----------------------------------------------------------------------
+\section[Leitura guiada]{Leitura guiada — Módulo 13: ativar é percorrer sete etapas, não escolher um nome}
+
+\elemento{Leitura guiada — Ativação de agentes}{\metainfo{ID}{N-13} \hfill \metainfo{Ciclo}{R619} \hfill \metainfo{Estilo}{ativar é percorrer sete etapas, não escolher um nome}}
+
+
+\begin{descricao}
+\textbf{O fenômeno.} Um nome no catálogo pode ser confundido com um executor
+pronto para trabalhar. Na prática, há estados distintos: documentação presente,
+configuração gerada, perfil carregado, rota selecionada, chamada realizada e
+saída avaliada. O modelo de sete etapas abaixo serve para investigar esses
+estados. A ordem e a presença de cada operação devem ser confirmadas no caminho
+concreto da tarefa; este esquema não é uma garantia de que todo fluxo percorra
+as mesmas etapas.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}\par
+(1) \emph{Gatilho}: pedido ou evento que pode iniciar a seleção de um caminho; não basta, por si só, para autorizar qualquer operação.\par
+(2) \emph{Etapa}: uma das $7$ posições do pipeline (gatilho, roteamento, casamento, gate, execução, feedback, registro).\par
+(3) \emph{Rota}: caminho de ativação; existem $4$ alternativas em ordem de preferência rígida.\par
+(4) \emph{Ciclo de voluntariado}: publicar no Blackboard, aguardar candidatos e ponderar --- o custo da rota que passa pelo quadro.\par
+(5) \emph{Voluntário}: agente cujas capacidades casam com o gatilho e se candidatam à tarefa postada.
+\end{definicao}
+
+\begin{metodo}
+\textbf{Como analisar uma rota.} Para cada caminho encontrado no código,
+registre: (1) qual evento o inicia; (2) que regra escolhe o executor; (3) que
+permissões são consultadas; (4) que chamada efetivamente ocorre; (5) que saída
+fica registrada. Se as regras e entradas forem fixas e não houver estado externo
+variável, a decisão de roteamento pode ser determinística. Respostas de modelos,
+serviços de rede, concorrência e estado compartilhado podem tornar o resultado
+da execução não determinístico mesmo quando a seleção inicial se repete. Um
+fallback só pode ser descrito como comportamento do sistema quando sua condição
+e seu executor estiverem identificados na implementação.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo hipotético.} Suponha que, em um conjunto de tarefas, a rota
+que usa o quadro seja escolhida em $p=0{,}2$ dos casos. Se ela acrescentar em
+média $c=2$ operações observáveis em relação à rota direta, o custo médio
+adicional estimado é $p\,c = 0{,}2\times2=0{,}4$ operação por tarefa. O cálculo
+ilustra como estimar custo; os valores são pressupostos didáticos, não medições
+do Core. Para estimar custo real, defina o que conta como operação, registre uma
+amostra de execuções e reporte distribuição e falhas, não apenas a média.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Verificação.} A existência de uma etapa descrita no livro não demonstra
+que ela esteja implementada. Para conferi-la, localize o ponto de entrada, siga
+as chamadas e examine os testes ou registros aplicáveis. Um contador de
+marcadores editoriais mede presença de texto, não cobertura do código nem
+maturidade operacional.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Uma regra de roteamento simples pode facilitar
+auditoria e, ainda assim, selecionar um executor inadequado. Para comparar
+políticas de seleção seriam necessários casos representativos, uma referência
+de resposta, métricas definidas antes do ensaio e repetição sob condições
+controladas. Testes de código podem conferir regras implementadas; não demonstram
+que a política produz melhores respostas. Até que essa avaliação exista, trate
+qualquer vantagem de desempenho como hipótese.
+\end{aviso}
+
+\begin{aviso}
+\textbf{Exercícios.}\par
+(E1) Desenhe o caminho de uma tarefa que é ativada por um \emph{skill} (rota a) e identifique em qual etapa a especificação é rejeitada se o gatilho não disser o que deve ser feito.\par
+(E2) Simule: se $1$ em cada $2$ tarefas caísse na rota (c), qual seria o custo médio adicional por tarefa? E se o Blackboard nunca registrasse voluntários?\par
+(E3) Verifique se o seu repositório tem marcação duplicada \cod{ATIVACAO-R613} em algum módulo. Se tiver, o que isso diz sobre a idempotência do gerador?\par
+(E4) Liste as $4$ rotas e diga qual delas é acionada quando o usuário digita diretamente o nome de um agente. A ordem de preferência confirma sua resposta?
+\end{aviso}
+
+\noindent\textit{Interpretação:} No modelo Blackboard, fontes de conhecimento publicam contribuições em um espaço compartilhado, e um controlador decide qual contribuição altera o estado do problema. Isso separa três operações que uma chamada direta costuma esconder: tornar a tarefa observável, permitir que solucionadores capazes concorram e arbitrar a próxima ação. O exercício testa se o leitor identifica essas fronteiras; a resposta deve ser justificada pelo fluxo descrito no texto, e não apenas pela semelhança entre nomes de funções \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{p.~38-53 (p.~42-45, modelo do quadro e ciclo de voluntariado). é o lastro da rota (c): o Blackboard não é um espelho de mensagens, é uma área de trabalho comum onde solucionadores postam, competitorem e o controlador escolhe}{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~42--45}

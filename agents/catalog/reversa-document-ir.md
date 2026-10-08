@@ -1,32 +1,15 @@
 ---
-name: Agente Reversa: Document IR Report Pipeline
+name: "Agente Reversa: Document IR Report Pipeline"
 description: >-
-  --- name: Agente Reversa: Document IR Report Pipeline description: >- --- name: reversa-document-ir
-  description: >- Agente pipeline de documentacao estruturada. Inspirado pelo ReportEngine do Bett
+  Agente pipeline de documentação estruturada (IR Report), inspirado pelo ReportEngine do BettaFis.
 version: '1.0.0'
 skills:
-- id: name-agente-reversa-document
-  name: ---
-name: agente reversa: document ir report pipeline
-description: >-
-  description: >-
-    Capacidade especializada em --- name: agente reversa: document ir report pipeline description: >-
-    --- name.
-  tags: [name, agente, reversa, document]
-  examples: [Aplique name agente reversa document neste contexto, Avalie usando name agente reversa document]
-- id: inspirado-pelo-reportengine-bett
-  name: Inspirado
-  pelo reportengine do bett
-  description: Capacidade especializada em inspirado
-  pelo reportengine do bett
-  tags: [inspirado, pelo, reportengine, bett]
-  examples: [Aplique inspirado pelo reportengine bett neste contexto, Avalie usando inspirado pelo reportengine bett]
 tags: [agente, 'agente reversa: document ir report pipeline', bett, description, document, documentacao, estruturada, inspirado, name, pelo]
 examples: [Analise este dataset e gere visualizações, Construa pipeline de dados para ETL, Aplique name agente reversa document neste contexto, Aplique inspirado pelo reportengine bett neste contexto]
 ---
 
 ---
-name: Agente Reversa: Document IR Report Pipeline
+name: "Agente Reversa: Document IR Report Pipeline"
 description: >-
   --- name: reversa-document-ir description: >- Agente pipeline de documentacao estruturada. Inspirado
   pelo ReportEngine do BettaFish (666ghj/BettaFish) — ir/schema.py, core/stitcher.py, agent.py. E
@@ -84,7 +67,7 @@ skills:
   tags: [core/stitcher]
   examples: [Aplique py core stitcher neste contexto, Avalie usando py core stitcher]
 - id: executa-pipeline-estagios-template
-  name: Executa pipeline de 7 estagios: template, layout, budget, geracao, qc,
+  name: "Executa pipeline de 7 estagios: template, layout, budget, geracao, qc,"
   description: >-
     Capacidade especializada em executa pipeline de 7 estagios: template, layout, budget, geracao, qc,
     composica.
@@ -96,8 +79,8 @@ skills:
   tags: [suporta, tipos, bloco]
   examples: [Aplique suporta 16 tipos bloco neste contexto, Avalie usando suporta 16 tipos bloco]
 - id: use-document-ir-docir
-  name: Use via: /document-ir, /docir
-  description: Capacidade especializada em use via: /document-ir, /docir
+  name: "Use via: /document-ir, /docir"
+  description: "Capacidade especializada em use via: /document-ir, /docir"
   tags: [/document-ir, /docir]
   examples: [Aplique use document ir docir neste contexto, Avalie usando use document ir docir]
 tags: [/docir, /document-ir, agent, agente, bettafish, bloco, budget, composicao, core, core/stitcher]

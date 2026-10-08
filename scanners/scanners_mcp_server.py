@@ -21,20 +21,22 @@ import asyncio
 import logging
 from typing import Any, Mapping, Dict
 
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+from mcp.types import TextContent, Tool
+
 # Adiciona a raiz do projeto ao sys.path
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if REPO_ROOT not in sys.path:
     sys.path.insert(0, REPO_ROOT)
 
-from scanners.pipeline import super_rigor_pipeline
-from scanners.scientific_reasoning_scanner import scientific_reasoning_scanner
-from scanners.literary_scanners import run_literary_scanner_suite
-from scanners.literary_research_scanners import run_literary_research_scanner_suite
-from benchmarks.merkle_integrity_guard import merkle_integrity_guard
-
-from mcp.server import Server
-from mcp.server.stdio import stdio_server
-from mcp.types import TextContent, Tool
+# Imports locais após o bootstrap permitem executar este arquivo standalone.
+from scanners.pipeline import super_rigor_pipeline  # noqa: E402
+from scanners.scientific_reasoning_scanner import scientific_reasoning_scanner  # noqa: E402
+from scanners.literary_scanners import run_literary_scanner_suite  # noqa: E402
+from scanners.literary_research_scanners import run_literary_research_scanner_suite  # noqa: E402
+from benchmarks.merkle_integrity_guard import merkle_integrity_guard  # noqa: E402
+from integrations.mcp_validation import validate_arguments  # noqa: E402
 
 try:
     from mcp.types import CallToolResult
@@ -71,6 +73,26 @@ def _call_tool_result(data: dict) -> CallToolResult:
 
 app = Server("scanners-mcp")
 
+TOOL_SCHEMAS = {
+    "super_rigor_audit": {
+        "type": "object", "properties": {"text": {"type": "string"}},
+        "required": ["text"], "additionalProperties": False,
+    },
+    "scientific_reasoning_scan": {
+        "type": "object", "properties": {"text": {"type": "string"}},
+        "required": ["text"], "additionalProperties": False,
+    },
+    "merkle_integrity_check": {"type": "object", "properties": {}, "additionalProperties": False},
+    "literary_scanner_suite": {
+        "type": "object", "properties": {"text": {"type": "string"}, "metadata": {"type": "object"}},
+        "required": ["text"], "additionalProperties": False,
+    },
+    "literary_research_scanner_suite": {
+        "type": "object", "properties": {"text": {"type": "string"}, "metadata": {"type": "object"}},
+        "required": ["text"], "additionalProperties": False,
+    },
+}
+
 
 @app.list_tools()
 async def list_tools() -> list[Tool]:
@@ -78,62 +100,27 @@ async def list_tools() -> list[Tool]:
         Tool(
             name="super_rigor_audit",
             description="Executa auditoria completa através dos 8 scanners do ecossistema e calcula o Score de Excelência (EXS)",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "text": {
-                        "type": "string",
-                        "description": "Texto a ser auditado",
-                    },
-                },
-                "required": ["text"],
-            },
+            inputSchema=TOOL_SCHEMAS["super_rigor_audit"],
         ),
         Tool(
             name="scientific_reasoning_scan",
             description="Avalia o Índice de Rigor Científico (SRI 0-100) e detecta falácias epistemológicas no texto",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "text": {
-                        "type": "string",
-                        "description": "Texto científico a ser analisado",
-                    },
-                },
-                "required": ["text"],
-            },
+            inputSchema=TOOL_SCHEMAS["scientific_reasoning_scan"],
         ),
         Tool(
             name="merkle_integrity_check",
             description="Verifica a integridade criptográfica SHA-256 do código-fonte através da Árvore de Merkle",
-            inputSchema={
-                "type": "object",
-                "properties": {},
-            },
+            inputSchema=TOOL_SCHEMAS["merkle_integrity_check"],
         ),
         Tool(
             name="literary_scanner_suite",
             description="Executa 8 scanners literários: narrativa, personagem, estilo, símbolos, teoria, leitor, ética e inovação",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "text": {"type": "string", "description": "Texto literário a analisar"},
-                    "metadata": {"type": "object", "description": "Metadados opcionais"},
-                },
-                "required": ["text"],
-            },
+            inputSchema=TOOL_SCHEMAS["literary_scanner_suite"],
         ),
         Tool(
             name="literary_research_scanner_suite",
             description="Executa 4 scanners de pesquisa literária internacional: bibliografia, corpus comparativo, teoria e rigor",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "text": {"type": "string", "description": "Plano, ficha ou pesquisa literária a analisar"},
-                    "metadata": {"type": "object", "description": "Metadados opcionais"},
-                },
-                "required": ["text"],
-            },
+            inputSchema=TOOL_SCHEMAS["literary_research_scanner_suite"],
         ),
     ]
 
@@ -145,6 +132,9 @@ async def call_tool(name: str, arguments: dict) -> CallToolResult | list[TextCon
         return _mcp_error(f"Ferramenta desconhecida: {name}")
     if not isinstance(arguments, Mapping):
         return _mcp_error("Payload inválido: argumentos devem ser um objeto.")
+    validation = validate_arguments(name, dict(arguments), TOOL_SCHEMAS[name])
+    if not validation["valid"]:
+        return _mcp_error("Payload inválido: " + "; ".join(validation["errors"]))
 
     if name == "super_rigor_audit":
         text = arguments.get("text", "")
@@ -235,6 +225,11 @@ class ScannersMcpServer:
         }
 
     def call_tool(self, name: str, args: Dict[str, Any]) -> Dict[str, Any]:
+        if not isinstance(name, str) or name not in TOOL_SCHEMAS:
+            return {"ok": False, "error": f"Ferramenta desconhecida: {name}"}
+        validation = validate_arguments(name, args, TOOL_SCHEMAS[name])
+        if not validation["valid"]:
+            return {"ok": False, "error": "Payload inválido: " + "; ".join(validation["errors"])}
         if name == "super_rigor_audit":
             text = args.get("text", "")
             return {"ok": True, "result": super_rigor_pipeline.audit_production(text)}

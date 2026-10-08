@@ -1,0 +1,53 @@
+{
+  "runtime": "hermes",
+  "status": "blocked",
+  "external_process_executed": true,
+  "inference_executed": false,
+  "externally_validated": false,
+  "human_peer_review": false,
+  "scientific_claim_eligible": false,
+  "population": null,
+  "runtime_artifact_observed": false,
+  "process_returncode": 1,
+  "timeout": false,
+  "duration_seconds": 25.162,
+  "model_calls": 0,
+  "model_receipts": [],
+  "provenance": {
+    "repo": "/home/marceloclaro/projetos/hermes-agent-r667",
+    "python": "/home/marceloclaro/projetos/hermes-agent-r667/.venv/bin/python",
+    "entry": "/home/marceloclaro/projetos/hermes-agent-r667/hermes_cli/main.py",
+    "origin": "https://github.com/MarceloClaro/hermes-agent",
+    "commit": "956967fbdcd4cd75c6174f30b1a599c08eadd882",
+    "entry_sha256": "ed90dc5aa03baae3407606895b0313deb57e64662bada559a89d9a90965b5de3",
+    "checkout_modified": false
+  },
+  "argv": [
+    "/home/marceloclaro/projetos/hermes-agent-r667/.venv/bin/python",
+    "-m",
+    "hermes_cli.main",
+    "chat",
+    "--query-file",
+    "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R667_REAL_20261004_164214/hermes/prompt.txt",
+    "--oneshot",
+    "--quiet",
+    "--provider",
+    "custom",
+    "--model",
+    "llama3.2:latest",
+    "--max-turns",
+    "2",
+    "--run-budget",
+    "237",
+    "--ignore-rules",
+    "--in",
+    "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R667_REAL_20261004_164214/hermes"
+  ],
+  "output_dir": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R667_REAL_20261004_164214/hermes",
+  "generation_token_limit": 256,
+  "reason": "Runtime bloqueado: ValueError: Artefato excede o limite de 16 MiB.",
+  "limits": [
+    "Inferência do modelo local executada não comprova validade científica.",
+    "Cenário de dois personagens sintéticos não representa uma população real."
+  ]
+}

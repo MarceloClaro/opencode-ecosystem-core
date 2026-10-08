@@ -33,6 +33,16 @@ logger.setLevel(logging.WARNING)
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# Imports locais após o bootstrap permitem executar este arquivo standalone.
+from integrations.mcp_validation import validate_arguments  # noqa: E402
+from synthetic_university.mcp_security import (  # noqa: E402
+    MCPGuard,
+    AuditLogger,
+    ToolVetter,
+    RateLimiter,
+    MCP_ERROR_MARKER,
+)
+
 MCP_PROTOCOL_VERSION = "2024-11-05"
 MCP_SERVER_VERSION = "1.0.0"
 
@@ -140,6 +150,15 @@ class SimpleMCPServer:
                     "Os argumentos da ferramenta devem ser um objeto JSON.",
                     -32602,
                 )
+            info = self.tools.get(tool_name)
+            if info is None:
+                return self._error(f"Tool '{tool_name}' nao encontrada", -32602)
+            validation = validate_arguments(tool_name, tool_args, info["schema"])
+            if not validation["valid"]:
+                return self._error(
+                    "Argumentos inválidos: " + "; ".join(validation["errors"]),
+                    -32602, data={"validation_errors": validation["errors"]},
+                )
             try:
                 hash(caller)
             except TypeError:
@@ -176,13 +195,6 @@ class SimpleMCPServer:
                         -32602,
                         data=vetter_result,
                     )
-
-            info = self.tools.get(tool_name)
-            if info is None:
-                return self._error(
-                    f"Tool '{tool_name}' nao encontrada",
-                    -32602,
-                )
 
             try:
                 result = info["handler"](tool_args)
@@ -264,7 +276,7 @@ class SimpleMCPServer:
 
 def handle_generate(args: Dict[str, Any]) -> Dict[str, Any]:
     """Gera pares de teses — usa fallback direto (sem dependencia de faculty_map)."""
-    n_pairs = min(args.get("n_pairs", 5), 10)
+    n_pairs = min(int(args.get("n_pairs", 5)), 10)
 
     titles = [
         "Quantum Ethics: A Framework for Moral AI Systems",
@@ -311,7 +323,7 @@ def handle_evaluate(args: Dict[str, Any]) -> Dict[str, Any]:
     )
 
     feedback, source, elapsed = evaluator.generate(prof, thesis, "strong")
-    score = evaluator._parse_score(feedback) if hasattr(evaluator, '_parse_score') else 7
+    _ = evaluator._parse_score(feedback) if hasattr(evaluator, '_parse_score') else 7
 
     return {
         "success": True,
@@ -513,14 +525,6 @@ def handle_dashboard(args: Dict[str, Any]) -> Dict[str, Any]:
 # ============================================================
 
 # Security components (R100)
-from synthetic_university.mcp_security import (
-    MCPGuard,
-    AuditLogger,
-    ToolVetter,
-    RateLimiter,
-    MCP_ERROR_MARKER,
-)
-
 _security = {
     "guard": MCPGuard(),
     "audit": AuditLogger(),
@@ -536,7 +540,7 @@ server.register_tool(
     schema={
         "type": "object",
         "properties": {
-            "n_pairs": {"type": "integer", "default": 5, "description": "Numero de pares a gerar"}
+            "n_pairs": {"type": "integer", "minimum": 1, "maximum": 10, "default": 5, "description": "Numero de pares a gerar"}
         },
     },
     handler=handle_generate,
@@ -690,7 +694,7 @@ def handle_agentic_science(args: Dict[str, Any]) -> Dict[str, Any]:
     from agentic_science_v2.orchestrator import run_agentic_science_v2
     return run_agentic_science_v2(
         seed_domain=args.get("seed_domain"),
-        max_rounds=args.get("max_rounds", 3),
+        max_rounds=int(args.get("max_rounds", 3)),
     )
 
 server.register_tool(
@@ -727,8 +731,8 @@ def handle_deep_research(args: Dict[str, Any]) -> Dict[str, Any]:
     from agentic_science_v2.deep_research import run_deep_research
     return run_deep_research(
         question=args.get("question", ""),
-        max_rounds=args.get("max_rounds", 2),
-        max_depth=args.get("max_depth", 3),
+        max_rounds=int(args.get("max_rounds", 2)),
+        max_depth=int(args.get("max_depth", 3)),
     )
 
 server.register_tool(
@@ -927,5 +931,4 @@ server.register_tool(
 
 
 if __name__ == "__main__":
-    import sys
     server.run_stdio()

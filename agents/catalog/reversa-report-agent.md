@@ -41,7 +41,7 @@ skills:
   tags: [gera, relatórios, estruturados, seção]
   examples: [Aplique gera relatorios estruturados secao neste contexto, Avalie usando gera relatorios estruturados secao]
 - id: use-relatorio-report-react
-  name: Use via: "relatório", "report", "react", "reflexão", /report-agent
+  name: "Use via: 'relatório', 'report', 'react', 'reflexão', /report-agent"
   description: >-
     Capacidade especializada em use via: "relatório", "report", "react", "reflexão", /report-agent
   tags: ["relatório", "report", "react", "reflexão"]

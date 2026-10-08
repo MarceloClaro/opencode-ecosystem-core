@@ -46,7 +46,7 @@ skills:
   tags: [sqlite, persistência, busca, estrutural]
   examples: [Aplique usa sqlite persistencia busca neste contexto, Avalie usando usa sqlite persistencia busca]
 - id: use-grafo-graph-dependencias
-  name: Use via: "grafo", "graph", "dependências", "knowledge graph", /graphra
+  name: "Use via: 'grafo', 'graph', 'dependências', 'knowledge graph', /graphra"
   description: >-
     Capacidade especializada em use via: "grafo", "graph", "dependências", "knowledge graph", /graphrag
   tags: ["grafo", "graph", "dependências", "knowledge]

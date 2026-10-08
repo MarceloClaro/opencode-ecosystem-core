@@ -1,3 +1,12 @@
+---
+name: peer-review-v2
+description: >-
+  Revisão por pares com auditoria em grafo (R103), inspirada no REVIEWGROUNDER +
+  DeepReviewer 2.0: 4 especialistas, rubrica de 8 dimensões e ledger
+  claim–evidence–risk. Use para pré-revisão de manuscritos. Não é parecer
+  editorial nem garante aceitação.
+---
+
 # Peer-Review-V2 Skill
 
 **Revisão por Pares com Auditagem em Grafo — R103 Agentic Peer Review**

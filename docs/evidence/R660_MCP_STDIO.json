@@ -1,0 +1,325 @@
+{
+  "spec_id": "SPEC-935-R660",
+  "timestamp_utc": "2026-10-04T10:38:38.681026+00:00",
+  "evidence_type": "real_mcp_stdio_processes",
+  "mocked_handlers": false,
+  "runtime": {
+    "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+    "executable": "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python",
+    "mcp": "1.28.1",
+    "jsonschema": "4.26.0"
+  },
+  "source_sha256": {
+    "integrations/mcp_validation.py": "f4373a8dabc8c17722e07e994ab89bb963693ceddb1fc21b3c2857841ac91311",
+    "mci/mcp_server.py": "a124f6069fbc5b1818ba1689c419c076a47cd57f9fb0eab7dbea7c759f5cf112",
+    "mci/metabus.py": "f0d1d1f40b4b0e83a17a17661a97603cb7df9419bb373a47e2c0b610f7dd805c",
+    "mci/blackboard.py": "e3a0098221155262c404c039065091ae9a19d69f9fc1b8223726b7ed880c0dfd",
+    "synthetic_university/mcp_security.py": "8044e29d6b0e192a1879f28129311c3d11f92457bb521e3f72b809e87c54b496",
+    "synthetic_university/mcp_server.py": "c3bd2fe6b4a7b5703c7d9ea2f140adc2a1b9588b40ea071ab230efa6a831ee49",
+    "scanners/scanners_mcp_server.py": "9387d4386afa861262a8f9730c3cf51c3aa4dcdbb3b6d2ce78b6ab75c055f1f8",
+    "colibri/colibri_mcp_server.py": "3ae5152873d5393ba4360c716d48b2c3429f22fc9121bcb7479e6da89719e6e1",
+    "integrations/colibri_provider.py": "c6727c2c4ce24a6cf7a75107449de1c076a68efc2f62cf9b97632962c04e13ae",
+    "scripts/probe_mcp_contracts.py": "c808835d4df74c5c414061ae47e48830787317ada1f5a09493fc6c35e4d69a59"
+  },
+  "servers": {
+    "mci": {
+      "pass": true,
+      "server_info": {
+        "name": "metacognitive-interconnect",
+        "title": null,
+        "version": "1.0.0",
+        "websiteUrl": null,
+        "icons": null
+      },
+      "protocol_version": "2025-11-25",
+      "tool_names": [
+        "mci_register_agent",
+        "mci_post_task",
+        "mci_get_memory",
+        "mci_get_blackboard_state"
+      ],
+      "initial_state": {
+        "agents": [],
+        "tasks": {}
+      },
+      "negatives": [
+        {
+          "tool": "mci_register_agent",
+          "arguments": {
+            "agent_id": "invalid",
+            "name": "Invalid",
+            "capabilities": [
+              3
+            ]
+          },
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Argumentos inválidos: $.capabilities[0]: violação da regra type."
+              }
+            ],
+            "isError": true,
+            "error": {
+              "code": -32602,
+              "message": "Argumentos inválidos: $.capabilities[0]: violação da regra type."
+            }
+          }
+        },
+        {
+          "tool": "mci_post_task",
+          "arguments": {
+            "description": "Invalid task",
+            "required_capabilities": [
+              3
+            ]
+          },
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Argumentos inválidos: $.required_capabilities[0]: violação da regra type."
+              }
+            ],
+            "isError": true,
+            "error": {
+              "code": -32602,
+              "message": "Argumentos inválidos: $.required_capabilities[0]: violação da regra type."
+            }
+          }
+        },
+        {
+          "tool": "mci_get_memory",
+          "arguments": {
+            "limit": true
+          },
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Argumentos inválidos: $.limit: violação da regra type."
+              }
+            ],
+            "isError": true,
+            "error": {
+              "code": -32602,
+              "message": "Argumentos inválidos: $.limit: violação da regra type."
+            }
+          }
+        },
+        {
+          "tool": "mci_get_memory",
+          "arguments": {
+            "limit": 1001
+          },
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Argumentos inválidos: $.limit: violação da regra maximum."
+              }
+            ],
+            "isError": true,
+            "error": {
+              "code": -32602,
+              "message": "Argumentos inválidos: $.limit: violação da regra maximum."
+            }
+          }
+        }
+      ],
+      "state_after_negatives": {
+        "agents": [],
+        "tasks": {}
+      },
+      "event_hash_unchanged_after_negatives": true,
+      "final_state": {
+        "agents": [
+          {
+            "agent_id": "r660-probe",
+            "name": "R660 real stdio probe",
+            "description": "Local transport proof",
+            "capabilities": [
+              "contract_probe"
+            ],
+            "status": "available",
+            "confidence_score": 0.5,
+            "load": 0.0
+          }
+        ],
+        "tasks": {
+          "r660-stdio-task": "open"
+        }
+      },
+      "persisted_topics": [
+        "agent.register",
+        "task.post",
+        "task.cfp"
+      ],
+      "event_sha256": "1da46e16d6b90d36e0c599d57c591f27bb18f07a17a2751573b4fcea1d331785",
+      "memory_result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"episodic\": []\n}"
+          }
+        ],
+        "isError": false
+      },
+      "agent_execution_completed": false
+    },
+    "synthetic_university": {
+      "pass": true,
+      "server_info": {
+        "name": "synthetic-university",
+        "title": null,
+        "version": "1.0.0",
+        "websiteUrl": null,
+        "icons": null
+      },
+      "tool_names": [
+        "su_generate",
+        "su_evaluate",
+        "su_enrich",
+        "su_visual_abstract",
+        "su_peer_review",
+        "su_submission",
+        "su_novelty",
+        "su_novelty_v2",
+        "su_dashboard",
+        "su_agentic_science",
+        "su_deep_research",
+        "su_peer_review_v2",
+        "su_manuscript_revision",
+        "su_paper_composer"
+      ],
+      "negative": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Argumentos inválidos: $.n_pairs: violação da regra type."
+          }
+        ],
+        "isError": true,
+        "error": {
+          "code": -32602,
+          "message": "Argumentos inválidos: $.n_pairs: violação da regra type.",
+          "data": {
+            "validation_errors": [
+              "$.n_pairs: violação da regra type."
+            ]
+          }
+        }
+      },
+      "valid": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"theses\": [\n    {\n      \"thesis_id\": \"thesis_0\",\n      \"title\": \"Quantum Ethics: A Framework for Moral AI Systems\",\n      \"score\": 0.85\n    }\n  ],\n  \"count\": 1,\n  \"fallback\": true\n}"
+          }
+        ],
+        "isError": false
+      },
+      "generation_mode": "local_synthetic_fallback",
+      "llm_inference_completed": false
+    },
+    "scanners": {
+      "pass": true,
+      "server_info": {
+        "name": "scanners-mcp",
+        "title": null,
+        "version": "1.28.1",
+        "websiteUrl": null,
+        "icons": null
+      },
+      "tool_names": [
+        "super_rigor_audit",
+        "scientific_reasoning_scan",
+        "merkle_integrity_check",
+        "literary_scanner_suite",
+        "literary_research_scanner_suite"
+      ],
+      "negatives": [
+        {
+          "tool": "super_rigor_audit",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Input validation error: 'text' is a required property"
+              }
+            ],
+            "isError": true
+          }
+        },
+        {
+          "tool": "literary_scanner_suite",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Input validation error: [] is not of type 'object'"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ],
+      "event_hash_unchanged_after_negatives": true,
+      "valid": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": true,\n  \"result\": {\n    \"sri_score\": 20.0,\n    \"falsifiability_score\": 50.0,\n    \"methodology_score\": 0.0,\n    \"detected_fallacies\": [],\n    \"recommendations\": [\n      \"Inclua detalhes explícitos sobre grupo de controle, amostragem e isolamento de variáveis.\"\n    ],\n    \"status\": \"low_rigor\"\n  }\n}"
+          }
+        ],
+        "isError": false
+      },
+      "external_scientific_validation": false
+    },
+    "colibri": {
+      "pass": true,
+      "server_info": {
+        "name": "colibri-mcp",
+        "title": null,
+        "version": "1.28.1",
+        "websiteUrl": null,
+        "icons": null
+      },
+      "tool_names": [
+        "colibri_generate",
+        "colibri_status"
+      ],
+      "negative": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Input validation error: True is not of type 'integer'"
+          }
+        ],
+        "isError": true
+      },
+      "provider_unavailable_result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": false,\n  \"result\": {\n    \"success\": false,\n    \"error\": \"Servidor Colibri inacessível em http://127.0.0.1:56709/v1. Inicie o servidor via 'coli serve --port 56709'.\",\n    \"content\": \"\"\n  }\n}"
+          }
+        ],
+        "isError": true
+      },
+      "provider_probe": "real_connection_refused_reserved_local_port",
+      "engine_autostart": false,
+      "llm_inference_completed": false
+    }
+  },
+  "isolated_state": true,
+  "state_retained": false,
+  "global_timeout_seconds": 90,
+  "pass": true,
+  "stderr_hashes": {
+    "colibri.stderr": "1efb5b0a7243a72b4ec690b736bd6bccd1d4665ad6ca93622ef9875913e48d64",
+    "scanners.stderr": "d126d2a1c0a41a280c99ee356e5e93731090a334d6aa860011dbb91b7716c763",
+    "su.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mci.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

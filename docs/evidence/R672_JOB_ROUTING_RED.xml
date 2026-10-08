@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="17" time="7.914" timestamp="2026-10-04T17:52:59.926197-03:00" hostname="OPENCODE"><testcase classname="tests.test_r672_gemini_notebook_session" name="test_two_transport_instances_share_server_memory" time="0.274" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_different_python_processes_share_server_memory" time="0.731" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_broker_socket_and_metadata_are_private" time="0.314" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_session_directory_symlink_is_never_followed" time="0.006" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_socket_symlink_is_never_deleted_or_followed" time="0.007" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_broker_idle_shutdown_resets_volatile_jobs" time="0.753"><failure message="AssertionError: assert 'failed' == 'lost'&#10;  &#10;  - lost&#10;  + failed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x77b4b7533c50&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-301/test_broker_idle_shutdown_rese0/protocol.log'))
+
+    def test_broker_idle_shutdown_resets_volatile_jobs(transport):
+        client, _ = transport
+        client = GeminiNotebookTransport(client.repo_root,persistent=True,_session_idle_seconds=0.2)
+        try:
+            result = asyncio.run(client.call_mcp("notebook_query_start", {"query":"ephemeral"}))
+            assert result["status"] == "pending"
+            base = client.repo_root/".opencode/notebooklm/broker"
+            deadline = time.monotonic()+3
+            while list(base.glob("*.sock")) and time.monotonic()&lt;deadline:
+                time.sleep(0.03)
+            assert not list(base.glob("*.sock"))
+            result = asyncio.run(client.call_mcp("notebook_query_status", {"query_id":"job-1"}))
+&gt;           assert result["status"] == "lost"
+E           AssertionError: assert 'failed' == 'lost'
+E             
+E             - lost
+E             + failed
+
+tests/test_r672_gemini_notebook_session.py:121: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_session" name="test_broker_rejects_credential_environment_overrides" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_config_profile_change_updates_fingerprint_without_reading_contents" time="0.006" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_broker_rejects_public_socket_permissions" time="0.724" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_nonregular_metadata_file_is_rejected" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_timeout_reports_loss_of_volatile_jobs" time="0.455"><failure message="AssertionError: assert 'failed' == 'lost'&#10;  &#10;  - lost&#10;  + failed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x77b4b73754f0&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-301/test_timeout_reports_loss_of_v0/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x77b4b7793a10&gt;
+
+    def test_timeout_reports_loss_of_volatile_jobs(transport, monkeypatch):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE","sleep")
+        client = GeminiNotebookTransport(client.repo_root,persistent=True)
+        try:
+            assert asyncio.run(client.call_mcp("notebook_query_start",{"query":"volatile"}))["status"] == "pending"
+            result = asyncio.run(client.call_mcp("notebook_list",{},timeout_seconds=0.15))
+            assert result["status"] == "failed"
+            assert result["session_reset"] is True
+            assert result["volatile_jobs_lost"] is True
+            after_reset = asyncio.run(client.call_mcp("notebook_query_status",{"query_id":"job-1"}))
+&gt;           assert after_reset["status"] == "lost"
+E           AssertionError: assert 'failed' == 'lost'
+E             
+E             - lost
+E             + failed
+
+tests/test_r672_gemini_notebook_session.py:189: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_session" name="test_close_cleans_all_workspace_sessions_and_waits_for_sockets" time="0.520" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_stale_owned_socket_is_replaced_without_following_paths" time="0.354" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_queued_request_timeout_does_not_reset_active_job" time="1.261" /><testcase classname="tests.test_r672_gemini_notebook_session" name="test_job_status_uses_origin_session_across_different_client_environments" time="1.384"><failure message="AssertionError: assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x77b4b75e3af0&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-301/test_job_status_uses_origin_se0/protocol.log'))
+
+    def test_job_status_uses_origin_session_across_different_client_environments(transport):
+        client, log = transport
+        root = Path(__file__).resolve().parents[1]
+        code = "import asyncio,json,sys; from integrations.gemini_notebook_transport import GeminiNotebookTransport; t=GeminiNotebookTransport(sys.argv[1],persistent=True); r=asyncio.run(t.call_mcp(sys.argv[2],json.loads(sys.argv[3]))); print(json.dumps(r))"
+        start_environment = {**os.environ,"PATH":"/usr/bin","NOTEBOOKLM_HL":"pt-BR"}
+        status_environment = {**os.environ,"PATH":"/bin:/usr/local/bin","NOTEBOOKLM_HL":"en"}
+        try:
+            start = subprocess.run([sys.executable,"-c",code,str(client.repo_root),"notebook_query_start",json.dumps({"query":"not persisted question"})],capture_output=True,text=True,cwd=root,env=start_environment,timeout=20)
+            started = json.loads(start.stdout)
+            assert started["status"] == "pending"
+            check = subprocess.run([sys.executable,"-c",code,str(client.repo_root),"notebook_query_status",json.dumps({"query_id":"job-1"})],capture_output=True,text=True,cwd=root,env=status_environment,timeout=20)
+            checked = json.loads(check.stdout)
+&gt;           assert checked["status"] == "completed"
+E           AssertionError: assert 'failed' == 'completed'
+E             
+E             - completed
+E             + failed
+
+tests/test_r672_gemini_notebook_session.py:270: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_session" name="test_unknown_job_does_not_spawn_new_server" time="0.253"><failure message="AssertionError: assert 'failed' == 'lost'&#10;  &#10;  - lost&#10;  + failed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x77b4b73c1390&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-301/test_unknown_job_does_not_spaw0/protocol.log'))
+
+    def test_unknown_job_does_not_spawn_new_server(transport):
+        client, log = transport
+        client = GeminiNotebookTransport(client.repo_root,persistent=True)
+        result = asyncio.run(client.call_mcp("notebook_query_status",{"query_id":"unregistered-job"}))
+&gt;       assert result["status"] == "lost"
+E       AssertionError: assert 'failed' == 'lost'
+E         
+E         - lost
+E         + failed
+
+tests/test_r672_gemini_notebook_session.py:286: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_session" name="test_closed_job_reports_loss_without_restarting_server" time="0.573"><failure message="AssertionError: assert 'failed' == 'lost'&#10;  &#10;  - lost&#10;  + failed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x77b4b73c1630&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-301/test_closed_job_reports_loss_w0/protocol.log'))
+
+    def test_closed_job_reports_loss_without_restarting_server(transport):
+        client, log = transport
+        client = GeminiNotebookTransport(client.repo_root,persistent=True)
+        started = asyncio.run(client.call_mcp("notebook_query_start",{"query":"volatile"}))
+        assert started["status"] == "pending"
+        assert asyncio.run(client.close_persistent())["status"] == "completed"
+        before = log.read_text().splitlines().count("initialize")
+        checked = asyncio.run(client.call_mcp("notebook_query_status",{"query_id":"job-1"}))
+&gt;       assert checked["status"] == "lost"
+E       AssertionError: assert 'failed' == 'lost'
+E         
+E         - lost
+E         + failed
+
+tests/test_r672_gemini_notebook_session.py:300: AssertionError</failure></testcase></testsuite></testsuites>

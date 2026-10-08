@@ -11,17 +11,16 @@ SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 from __future__ import annotations
 
 import os
-import shutil
 import sys
-import json
 import logging
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if REPO_ROOT not in sys.path:
     sys.path.insert(0, REPO_ROOT)
 
 from agents.lazy_catalog import lazy_agent_catalog
+from integrations.harness_runtime import HarnessRuntime
 from sdd.spec_engine import spec_registry
 
 logger = logging.getLogger("cli-ecosystem-bridge")
@@ -34,78 +33,92 @@ class CliEcosystemBridge:
         self.repo_root = repo_root
 
     def discover_cli_capabilities(self) -> Dict[str, Any]:
-        """Detecta e inventaria os recursos disponíveis em cada ecossistema de CLI."""
+        """Inventaria binários e instruções sem confundir instalação e execução."""
         opencode_json = os.path.join(self.repo_root, "opencode.json")
         claude_md = os.path.join(self.repo_root, "CLAUDE.md")
         agents_md = os.path.join(self.repo_root, "AGENTS.md")
-
-        has_opencode = os.path.exists(opencode_json)
-        has_claude = os.path.exists(claude_md)
-        # AGENTS.md é documentação do OpenCode CLI (ver sua própria primeira
-        # linha), não um artefato do Antigravity CLI -- checar sua existência
-        # não diz nada sobre o Antigravity estar instalado. O sinal real é o
-        # binário ``agy`` (SPEC-935-R393).
-        has_antigravity = shutil.which("agy") is not None
+        codex_config = os.path.join(self.repo_root, ".codex", "config.toml")
+        executors = HarnessRuntime(self.repo_root).status()["executors"]
 
         agents_count = len(lazy_agent_catalog.list_agents())
         specs_count = len(spec_registry.specs)
 
+        def inventory(ecosystem: str, label: str, config_path: str, config_kind: str) -> Dict[str, Any]:
+            state = executors.get(ecosystem, {})
+            installed = bool(state.get("installed"))
+            return {
+                "active": installed,  # Campo legado: inventário de instalação.
+                "installed": installed,
+                "available": bool(state.get("available")),
+                "availability_scope": "external_read_only_executor",
+                "availability_reason": state.get("reason"),
+                "cli": state.get("cli", ecosystem),
+                "cli_path": state.get("path"),
+                "label": label,
+                "config_path": config_path,
+                "config_present": os.path.isfile(config_path),
+                "config_kind": config_kind,
+                "verification": "installation_only",
+                "execution_verified": False,
+            }
+
         return {
             "opencode_codex": {
-                "active": has_opencode,
-                "config_path": opencode_json,
+                **inventory("opencode", "OpenCode CLI (chave legada opencode_codex)", opencode_json, "runtime_configuration"),
                 "agents_count": agents_count,
             },
             "claude_code": {
-                "active": has_claude,
-                "config_path": claude_md,
-                "specs_integrated": specs_count,
+                **inventory("claude", "Claude Code CLI", claude_md, "repository_instructions"),
+                "specs_available": specs_count,
+                "specs_integrated": 0,  # Nenhuma exportação realizada por este inventário.
             },
             "antigravity_cli": {
-                "active": has_antigravity,
-                "config_path": agents_md,
-                "slash_commands": ["/goal", "/schedule", "/plan", "/grill-me", "/teamwork-preview", "/learn"],
+                **inventory("antigravity", "Antigravity CLI (agy)", agents_md, "repository_instructions"),
+            },
+            "codex_cli": {
+                **inventory("codex", "OpenAI Codex CLI", codex_config, "repository_configuration"),
+                "instructions_path": agents_md,
+                "instructions_present": os.path.isfile(agents_md),
             },
         }
 
     def export_agent_cards_to_claude(self) -> Dict[str, Any]:
-        """Exporta um resumo estruturado das cartas de agentes para compatibilidade com o Claude Code."""
+        """Produz um preview das cartas; não copia arquivos para o Claude Code."""
         agent_ids = lazy_agent_catalog.list_agents()
-        exported = []
-        for agent_id in agent_ids[:20]:  # Top 20 subagentes essenciais
-            exported.append({
+        preview = []
+        for agent_id in sorted(agent_ids)[:20]:
+            preview.append({
                 "name": agent_id,
                 "role": f"Subagente do ecossistema {agent_id}",
                 "mode": "subagent",
             })
         return {
-            "status": "synced_with_claude_code",
-            "total_exported": len(exported),
-            "agents_preview": exported[:5],
+            "status": "preview_only",
+            "executed": False,
+            "written_count": 0,
+            "total_exported": 0,
+            "preview_count": len(preview),
+            "agents_preview": preview,
         }
 
     def export_skills_to_antigravity(self) -> Dict[str, Any]:
-        """Sincroniza as habilidades e comandos do ecossistema com o formato de sidecars do Antigravity CLI."""
+        """Inventaria skills locais; não instala sidecars nem sincroniza a CLI."""
         skills_dir = os.path.join(self.repo_root, ".opencode", "skills")
-        has_skills_dir = os.path.exists(skills_dir)
+        has_skills_dir = os.path.isdir(skills_dir)
+        from pathlib import Path
+        skill_files = sorted(str(path.relative_to(skills_dir)) for path in Path(skills_dir).rglob("SKILL.md")) if has_skills_dir else []
 
         return {
-            "status": "synced_with_antigravity_cli",
-            "skills_dir": skills_dir if has_skills_dir else "default_skills",
-            "builtin_skill": "antigravity-guide",
-            "supported_sidecars": ["colibri-moe", "scanners-pipeline", "merkle-guard"],
+            "status": "inventory_only",
+            "executed": False,
+            "written_count": 0,
+            "skills_dir": skills_dir if has_skills_dir else None,
+            "inventory_count": len(skill_files),
+            "skills_preview": skill_files[:20],
         }
 
     def get_unified_status(self) -> Dict[str, Any]:
-        """Retorna o relatório consolidado de prontidão dos 3 ecossistemas CLI.
-
-        ``unified_status`` é computado a partir de ``discover_cli_capabilities()``
-        -- nunca uma string fixa reportada independentemente do que foi de
-        fato verificado (SPEC-935-R393). "fully_synchronized" só é honesto
-        quando os três binários/artefatos de configuração estão presentes;
-        caso contrário, reporta "partially_synchronized" e lista quais
-        ecossistemas estão ausentes.
-        """
+        """Relata instalação das quatro CLIs, sem afirmar execução ou sincronização."""
         caps = self.discover_cli_capabilities()
         claude_sync = self.export_agent_cards_to_claude()
         agy_sync = self.export_skills_to_antigravity()
@@ -113,8 +126,12 @@ class CliEcosystemBridge:
         missing = [name for name, info in caps.items() if not info["active"]]
 
         return {
-            "unified_status": "fully_synchronized" if not missing else "partially_synchronized",
+            "unified_status": "installed_unverified" if not missing else "partially_installed",
             "missing": missing,
+            "execution_verified": False,
+            "verification": "installation_only",
+            "network_mcp_path": os.path.join(self.repo_root, "integrations", "ecosystem_mcp.py"),
+            "network_mcp_present": os.path.isfile(os.path.join(self.repo_root, "integrations", "ecosystem_mcp.py")),
             "ecosystems": caps,
             "claude_integration": claude_sync,
             "antigravity_integration": agy_sync,

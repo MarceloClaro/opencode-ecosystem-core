@@ -33,7 +33,7 @@ mode: subagent
 temperature: 0.2
 permission:
   bash:
-    *: deny
+    "*": deny
     mkdir -p .tmp/architecture*: allow
     mkdir -p .tmp/tasks/*/module-briefs*: allow
   edit:
@@ -45,9 +45,9 @@ permission:
   task:
     contextscout: allow
     externalscout: allow
-    *: deny
+    "*": deny
   skill:
-    *: deny
+    "*": deny
 ---
 
 # ArchitectureAnalyzer

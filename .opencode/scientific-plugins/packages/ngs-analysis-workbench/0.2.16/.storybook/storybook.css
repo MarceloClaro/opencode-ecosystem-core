@@ -1,0 +1,130 @@
+html,
+body,
+#storybook-root {
+  min-height: 100%;
+}
+
+.ngs-storybook-shell {
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--color-background-primary);
+  color: #0d0d0d;
+  color-scheme: light;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-text-xs-size: 11px;
+  --font-text-sm-size: 12px;
+  --font-text-md-size: 14px;
+  --font-text-lg-size: 16px;
+  --font-heading-xs-size: 18px;
+  --font-heading-sm-size: 20px;
+  --font-heading-md-size: 24px;
+  --font-heading-lg-size: 28px;
+  --font-heading-xl-size: 36px;
+  --font-heading-2xl-size: 48px;
+  --font-heading-3xl-size: 72px;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f7f7f7;
+  --color-background-tertiary: #f2f2f2;
+  --color-border-secondary: rgb(0 0 0 / 10%);
+  --color-text-primary: #0d0d0d;
+  --color-text-secondary: rgb(0 0 0 / 60%);
+  --color-text-tertiary: rgb(0 0 0 / 38%);
+  --color-text-inverse: #ffffff;
+  --color-text-danger: #b42318;
+  --color-text-warning: #b45309;
+  --color-text-success: #15803d;
+  --border-radius-xs: 4px;
+  --border-radius-sm: 6px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 10px;
+  --border-radius-xl: 12px;
+  --border-radius-full: 9999px;
+  --border-width-regular: 1px;
+  --shadow-hairline: 0 0 0 0.5px rgb(0 0 0 / 10%);
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --shadow-md: 0 2px 4px -1px rgb(0 0 0 / 8%);
+  --shadow-lg: 0 4px 8px -2px rgb(0 0 0 / 10%);
+}
+
+.ngs-storybook-shell[data-story-theme="dark"] {
+  background: var(--color-background-primary);
+  color: #ececec;
+  color-scheme: dark;
+  --color-background-primary: #000000;
+  --color-background-secondary: #212121;
+  --color-background-tertiary: #2f2f2f;
+  --color-border-secondary: rgb(255 255 255 / 10%);
+  --color-text-primary: #ececec;
+  --color-text-secondary: rgb(255 255 255 / 70%);
+  --color-text-tertiary: rgb(255 255 255 / 58%);
+  --color-text-inverse: #0d0d0d;
+  --color-text-danger: #ff8583;
+  --color-text-warning: #f6b94f;
+  --color-text-success: #76d292;
+}
+
+.ngs-storybook-shell[data-host-display-mode="fullscreen"] {
+  padding: 0;
+}
+
+.ngs-storybook-stage {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 520px) {
+  .ngs-storybook-shell:not([data-host-display-mode="fullscreen"]) {
+    padding: 10px;
+  }
+}
+
+/* Exercise a host that sends only its light/dark preference, not style tokens. */
+.ngs-storybook-shell[data-host-theme^="fallback-"] {
+  --font-sans: initial;
+  --font-mono: initial;
+  --font-weight-normal: initial;
+  --font-weight-medium: initial;
+  --font-weight-semibold: initial;
+  --font-weight-bold: initial;
+  --font-text-xs-size: initial;
+  --font-text-sm-size: initial;
+  --font-text-md-size: initial;
+  --font-text-lg-size: initial;
+  --font-heading-xs-size: initial;
+  --font-heading-sm-size: initial;
+  --font-heading-md-size: initial;
+  --font-heading-lg-size: initial;
+  --font-heading-xl-size: initial;
+  --font-heading-2xl-size: initial;
+  --font-heading-3xl-size: initial;
+  --color-background-primary: initial;
+  --color-background-secondary: initial;
+  --color-background-tertiary: initial;
+  --color-border-secondary: initial;
+  --color-text-primary: initial;
+  --color-text-secondary: initial;
+  --color-text-tertiary: initial;
+  --color-text-inverse: initial;
+  --color-text-danger: initial;
+  --color-text-warning: initial;
+  --color-text-success: initial;
+  --border-radius-xs: initial;
+  --border-radius-sm: initial;
+  --border-radius-md: initial;
+  --border-radius-lg: initial;
+  --border-radius-xl: initial;
+  --border-radius-full: initial;
+  --border-width-regular: initial;
+  --shadow-hairline: initial;
+  --shadow-sm: initial;
+  --shadow-md: initial;
+  --shadow-lg: initial;
+  background: var(--ngs-surface);
+  color: var(--ngs-text);
+}

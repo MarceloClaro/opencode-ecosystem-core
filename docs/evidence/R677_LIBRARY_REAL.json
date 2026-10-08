@@ -1,0 +1,120 @@
+{
+  "status": "passed",
+  "executed_at_utc": "2026-10-05T01:58:54.018461+00:00",
+  "evidence_kind": "actual_local_pdf_and_mcp_protocol",
+  "model_inference_executed": false,
+  "training_executed": false,
+  "inventory": {
+    "status": "ready",
+    "indexed": true,
+    "books": 2,
+    "pages": 245,
+    "chunks": 498,
+    "inventory": [
+      {
+        "file": "2026-07-01 Engenharia de Software_260703_115226.pdf",
+        "title": "2026-07-01 Engenharia de Software_260703_115226",
+        "book_id": null,
+        "status": "empty",
+        "error": "PDF vazio, sem conteúdo para extrair.",
+        "size": 0,
+        "mtime_ns": 1791033980303150073,
+        "current": true
+      },
+      {
+        "file": "Fine-Tuning de LLMs na Prática.pdf",
+        "title": "Fine-Tuning de LLMs na Prática",
+        "book_id": "d57e541c0ecc532685eb986416e6c91f0655def1d36d13cc780b6d46223fce3d",
+        "status": "indexed",
+        "error": null,
+        "size": 10502130,
+        "mtime_ns": 1791033318615595572,
+        "current": true
+      },
+      {
+        "file": "MCP_Livro - Versão Final 2025-08-11 pdf.pdf",
+        "title": "MCP_Livro - Versão Final 2025-08-11 pdf",
+        "book_id": "1786c825b95fc8cb9273f0d90d499df54f01787ecf378c370d6828578a77fead",
+        "status": "indexed",
+        "error": null,
+        "size": 36139500,
+        "mtime_ns": 1791033086643752522,
+        "current": true
+      },
+      {
+        "file": "RAG Versão Final - branca.pdf",
+        "title": "RAG Versão Final - branca",
+        "book_id": null,
+        "status": "empty",
+        "error": "PDF vazio, sem conteúdo para extrair.",
+        "size": 0,
+        "mtime_ns": 1791033122103729319,
+        "current": true
+      },
+      {
+        "file": "laudo.pdf",
+        "title": "laudo",
+        "book_id": null,
+        "status": "excluded",
+        "error": "Laudo excluído da biblioteca técnica por padrão.",
+        "size": null,
+        "mtime_ns": null,
+        "current": true
+      }
+    ],
+    "outdated": [],
+    "source_dir": "/home/marceloclaro/opencode-ecosystem-core/biblioteca ai",
+    "index_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_cache/book_library.sqlite3",
+    "offline": true,
+    "source_kind": "local_technical_book",
+    "clinical_evidence": false,
+    "schema_version": 1,
+    "current_books": 2
+  },
+  "checks": {
+    "protocol_version": "2025-11-25",
+    "server": "ecosystem-network",
+    "tools": [
+      "ecosystem_artifact_handoff",
+      "ecosystem_dataset_custom",
+      "ecosystem_dataset_download",
+      "ecosystem_gemini_notebook",
+      "ecosystem_integration_status",
+      "ecosystem_knowledge_plan",
+      "ecosystem_library_search",
+      "ecosystem_route",
+      "ecosystem_run",
+      "ecosystem_scientific_plugins",
+      "ecosystem_scientific_run",
+      "ecosystem_scientific_runtime",
+      "ecosystem_skill_plan",
+      "ecosystem_status",
+      "ecosystem_workflow",
+      "ecosystem_workflow_status"
+    ],
+    "read_only_and_bounded_schema": true,
+    "catalog_and_page_template": true,
+    "actual_pdf_hash_and_page_read": true,
+    "unsupported_query_abstains": true,
+    "invalid_limits_rejected_over_protocol": true,
+    "review_prompt_returns_reference_data": true
+  },
+  "citations": [
+    {
+      "query": "ambiguidade autoexplicativos resources",
+      "file": "MCP_Livro - Versão Final 2025-08-11 pdf.pdf",
+      "page": 61,
+      "source_sha256": "1786c825b95fc8cb9273f0d90d499df54f01787ecf378c370d6828578a77fead",
+      "page_sha256": "f30f2d354dd7a0880982e5c62d0a68219973acdfcfa3e4492da4e9e5fd72485d",
+      "uri": "ecosystem://books/1786c825b95fc8cb9273f0d90d499df54f01787ecf378c370d6828578a77fead/pages/61"
+    },
+    {
+      "query": "independência documento inteiro split",
+      "file": "Fine-Tuning de LLMs na Prática.pdf",
+      "page": 45,
+      "source_sha256": "d57e541c0ecc532685eb986416e6c91f0655def1d36d13cc780b6d46223fce3d",
+      "page_sha256": "8f230fc26fcf14f7989838b743ec58e4c410f0ad93007503ad663176ecc7f899",
+      "uri": "ecosystem://books/d57e541c0ecc532685eb986416e6c91f0655def1d36d13cc780b6d46223fce3d/pages/45"
+    }
+  ]
+}

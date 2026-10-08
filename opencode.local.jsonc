@@ -1,0 +1,75 @@
+// Perfil MINIMO para usar a LLM local via Ollama neste host.
+//
+// POR QUE: o opencode.json gerado tem 216 agentes e o system prompt chega a
+// ~21k tokens. Neste CPU (i5-1035G1, 4c/8t, sem GPU), o prefill e ~17-28 tok/s:
+// 21k tokens => 6-18 min POR TURNO, com risco de timeout 500 (5 min) no
+// endpoint /v1 do ollama. Reduzindo os agentes, o prompt cai para ~2-7k tokens
+// e cada turno passa a ~1.5-5 min SEM erros 500.
+//
+// USO:
+//   OPENCODE_CONFIG=opencode.local.jsonc opencode
+//   OPENCODE_CONFIG=opencode.local.jsonc opencode run <prompt>
+//
+// Os modelos *-tuned sao Modelfiles com num_thread=4 e num_ctx=24576:
+//   ollama create gemma4:e2b-tuned -f - <<'EOF'
+//   FROM gemma4:e2b-it-qat
+//   PARAMETER num_thread 4
+//   PARAMETER num_ctx 24576
+//   EOF
+//   ollama create gemma4:e4b-tuned -f - <<'EOF'
+//   FROM gemma4:e4b-it-qat
+//   PARAMETER num_thread 4
+//   PARAMETER num_ctx 24576
+//   EOF
+//
+// Server: OLLAMA_KEEP_ALIVE=30m e OLLAMA_MAX_LOADED_MODELS=1
+// (drop-in /etc/systemd/system/ollama.service.d/10-perf.conf).
+//
+// Medicoes em specs/SPEC-935-R607.md. Alem dos agentes, listar aqui apenas o
+// minimo de skills/MCP que a tarefa exigir: o tamanho do prompt escala com o
+// que for declarado.
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama-local": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama local (GGUF multimodal, perfil minimo)",
+      "options": {
+        "apiKey": "sk-no-key-required",
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "gemma4:e2b-tuned": {
+          "name": "Gemma 4 2B Expert QAT (tuned, ~7.9 tok/s, recomendado)",
+          "limit": {"context": 24576, "output": 2048},
+          "modalities": {"input": ["text", "image"], "output": ["text"]},
+          "tool_call": true,
+          "attachment": true,
+          "options": {"reasoning_effort": "none"}
+        },
+        "gemma4:e4b-tuned": {
+          "name": "Gemma 4 4B Expert QAT (tuned, ~2.9 tok/s, mais qualidade)",
+          "limit": {"context": 24576, "output": 2048},
+          "modalities": {"input": ["text", "image"], "output": ["text"]},
+          "tool_call": true,
+          "attachment": true,
+          "options": {"reasoning_effort": "none"}
+        }
+      }
+    }
+  },
+  "model": "ollama-local/gemma4:e2b-tuned",
+  "agent": {
+    "build": {
+      "description": "Agente minimo de codigo para a LLM local",
+      "mode": "all",
+      "tools": {
+        "browser": false,
+        "http": false
+      }
+    }
+  },
+  "skills": {
+    "enabled": false
+  }
+}

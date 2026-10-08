@@ -1,0 +1,9 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_pareto_does_not_include_dominated_defection _______________
+tests/test_r665_evolutionary_sequencing.py:227: in test_pareto_does_not_include_dominated_defection
+    assert ["Trair", "Trair"] not in result["pareto_frontier"]
+E   AssertionError: assert ['Trair', 'Trair'] not in [['Cooperar', 'Cooperar'], ['Cooperar', 'Trair'], ['Trair', 'Cooperar'], ['Trair', 'Trair']]
+=========================== short test summary info ============================
+FAILED tests/test_r665_evolutionary_sequencing.py::test_pareto_does_not_include_dominated_defection
+1 failed in 0.33s

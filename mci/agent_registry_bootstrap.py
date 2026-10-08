@@ -95,11 +95,33 @@ def _extract_capabilities(meta: Dict[str, Any]) -> List[str]:
     return unique
 
 
+def _locate_frontmatter(content: str):
+    """Localiza o par de fences ``---`` que abre/fecha o frontmatter YAML.
+
+    Tolerância aos cards do catálogo que abrem com comentário HTML ou título
+    ``#`` antes do frontmatter: linhas anteriores ao primeiro fence são
+    ignoradas (BOM, vazias, comentário ``<!-- ... -->`` e cabeçalhos). Se não
+    houver par de fences válido, retorna ``(None, None)``.
+    """
+    lines = content.lstrip("\ufeff").splitlines()
+    start_idx: Optional[int] = None
+    for i, line in enumerate(lines):
+        if line.strip() == "---":
+            start_idx = i
+            break
+    if start_idx is None:
+        return (None, None)
+    for j in range(start_idx + 1, len(lines)):
+        if lines[j].strip() == "---":
+            return (start_idx, j)
+    return (None, None)
+
+
 def parse_agent_catalog_md(path: Path, content: Optional[str] = None) -> Optional[Dict[str, Any]]:
     """Extrai metadados de um arquivo do catálogo de agentes.
 
-    Retorna ``None`` para arquivos sem frontmatter YAML válido (são pulados).
-    O ``agent_id`` é o nome do arquivo sem extensão (slug estável).
+    Retorna ``None`` para arquivos sem frontmatter YAML ``---`` válido (são
+    pulados). O ``agent_id`` é o nome do arquivo sem extensão (slug estável).
     """
     if content is None:
         try:
@@ -107,20 +129,13 @@ def parse_agent_catalog_md(path: Path, content: Optional[str] = None) -> Optiona
         except (OSError, UnicodeDecodeError):
             return None
 
-    if not content.startswith("---"):
+    start_idx, end_idx = _locate_frontmatter(content)
+    if start_idx is None:
         return None
 
     lines = content.splitlines()
-    end_idx: Optional[int] = None
-    for i in range(1, len(lines)):
-        if lines[i].strip() == "---":
-            end_idx = i
-            break
-    if end_idx is None:
-        return None
-
     try:
-        meta = yaml.safe_load("\n".join(lines[1:end_idx])) or {}
+        meta = yaml.safe_load("\n".join(lines[start_idx + 1:end_idx])) or {}
     except yaml.YAMLError:
         return None
     if not isinstance(meta, dict):

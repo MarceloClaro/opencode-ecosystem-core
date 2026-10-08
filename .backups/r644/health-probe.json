@@ -1,0 +1,30 @@
+{
+  "kind": "real_executor_health_probe",
+  "verified_failure_cooldown_and_route": true,
+  "execution_success": false,
+  "execution_error": "O provedor recusou a execução por limite ou saldo da conta.",
+  "claude": {
+    "installed": true,
+    "available": true,
+    "eligible_for_auto": false,
+    "cli": "claude",
+    "path": "/home/marceloclaro/.local/bin/claude",
+    "execution_mode": "cli-read-only",
+    "verification": "execution_failed",
+    "health": {
+      "last_outcome": "failure",
+      "last_attempt_at": "2026-10-03T10:22:51.578623Z",
+      "last_success_at": null,
+      "last_failure_at": "2026-10-03T10:22:51.578623Z",
+      "duration_seconds": 3.5132776249997733,
+      "error_category": "account_limit",
+      "error": "O provedor recusou a execução por limite ou saldo da conta.",
+      "cooldown_until": "2026-10-03T10:24:51.578623Z",
+      "cooldown_remaining_seconds": 119.90898323059082,
+      "verification": "execution_failed",
+      "storage": "persistent"
+    },
+    "reason": "Executor em pausa automática temporária após falha observada."
+  },
+  "automatic_executor_after_observation": "codex"
+}

@@ -1,3 +1,13 @@
+---
+id: haystack-rag
+name: Haystack RAG Specialist
+description: >-
+  Integração do framework Haystack (deepset-ai/haystack, Apache-2.0) ao ecossistema: verificação de disponibilidade/versão (haystack-ai via PyPI), construção de pipeline RAG mínimo (InMemoryDocumentStore + SentenceTransformers Document/Text Embedder + InMemoryEmbeddingRetriever) e health check tolerante — sem exigir instalação para a suíte passar.
+version: '1.0.0'
+type: integration
+category: data
+---
+
 # Haystack RAG Specialist
 
 - **ID**: haystack-rag

@@ -23,6 +23,20 @@ import pytest
 
 
 @pytest.fixture(autouse=True)
+def _eligible_research_contract_fixture(monkeypatch):
+    """Fixture sintético do contrato para exercitar estágios posteriores.
+
+    Não é evidência científica. O bloqueio do motor demonstrativo real é testado
+    em R666; aqui isolamos os gates de revisão/composição e suas exceções.
+    """
+    from agentic_science_v2 import deep_research
+    monkeypatch.setattr(deep_research, "run_deep_research", lambda **kwargs: {
+        "status": "completed", "evidence_eligible": True, "experiment_executed": True,
+        "reports": [{"summary": "Conteúdo de teste de contrato, sem resultado científico.", "confidence": 0.7}],
+        "evidence_graph": {}, "plans": []})
+
+
+@pytest.fixture(autouse=True)
 def _isolate_metacognitive_memory():
     """Este modulo instancia orquestradores reais (nao mockados) que
     escrevem no singleton global mci.metabus.metabus.memory, persistido em

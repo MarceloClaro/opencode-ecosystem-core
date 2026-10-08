@@ -12,5 +12,6 @@ from .pdf2md import Pdf2Markdown
 from .fichamento import (CitationFormatter, CriticalAnalyzer,
                          CriticalAnalysis, FichamentoWriter)
 from .hub import ResearchHub
+from .provenance_pipeline import ScientificProvenancePipeline
 __all__ = ["MultiSearcher","PaperRecord","PaperDownloader","DownloadResult","Pdf2Markdown",
-           "CitationFormatter","CriticalAnalyzer","CriticalAnalysis","FichamentoWriter","ResearchHub"]
+           "CitationFormatter","CriticalAnalyzer","CriticalAnalysis","FichamentoWriter","ResearchHub", "ScientificProvenancePipeline"]

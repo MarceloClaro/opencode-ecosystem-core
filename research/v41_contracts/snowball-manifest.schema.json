@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/snowball-manifest.schema.json",
+  "title": "SnowballManifest v1.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "snowball_id",
+    "seed_study_ids",
+    "created_at",
+    "direction",
+    "candidates",
+    "errors",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "snowball_id": {
+      "type": "string",
+      "pattern": "^SNOW-[A-Fa-f0-9]{8,16}$"
+    },
+    "seed_study_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "direction": {
+      "enum": [
+        "backward",
+        "forward",
+        "both"
+      ]
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "openalex_id",
+          "direction",
+          "seed_study_id",
+          "title"
+        ],
+        "properties": {
+          "openalex_id": {
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "backward",
+              "forward"
+            ]
+          },
+          "seed_study_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "doi": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "year": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "cited_by_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

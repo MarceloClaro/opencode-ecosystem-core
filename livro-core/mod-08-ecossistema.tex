@@ -1,0 +1,584 @@
+% ============================================================
+%  MÓDULO 08 — O Ecossistema: configuração, agentes, skills,
+%  hooks, plugins, especificações e diagnóstico. Parte VII.
+% ============================================================
+\chapter{Como o Ecossistema Trabalha: Agentes, Instruções e Verificações}
+
+\roteirodidatico
+{Para realizar uma tarefa, o operador pode combinar uma ficha de agente, instruções reutilizáveis e verificações automáticas. O capítulo explica a diferença entre essas peças.}
+{\emph{Agente} descreve uma configuração de trabalho; \emph{skill} reúne instruções para um procedimento; \emph{plugin} adiciona integração; \emph{hook} reage a um evento; \emph{teste} verifica uma condição.}
+{Siga uma tarefa desde a configuração até a seleção de instruções, execução de ferramentas e verificação. Consulte os arquivos de origem e observe o que o runtime realmente carrega.}
+{A contagem de registros descreve o catálogo; não mede ativação, execução bem-sucedida ou qualidade. Examine também versão, permissões, chamadas observáveis e resultados.}
+{O que o ambiente carregou nesta execução, qual componente foi acionado e que evidência mostra o efeito do hook ou da verificação?}
+
+\casoguiado{perfil, instrução e verificação}
+{Um perfil descreve um papel; uma skill pode orientar como revisar um manuscrito; um hook pode reagir a uma ação; um teste pode conferir uma regra específica. Esses itens não são sinônimos e nenhum deles, isoladamente, prova a qualidade da revisão. Para reconstruir a execução, registre o perfil carregado, a instrução usada, a ação observada e o critério aplicado à saída.}
+
+\begin{descricao}
+\textbf{Descrição — o que faltava no livro.} Antes, o capítulo apresentava
+nomes como \emph{skill}, \emph{hook}, \emph{runtime}, \emph{MCP} e
+\emph{spec} sem explicar com clareza o que cada um significa nem como afeta o
+trabalho do operador. Também não separava com precisão um recurso documentado
+de um recurso configurado, disponível ou efetivamente testado. Esta revisão
+define esses termos, percorre o caminho da ficha até a execução, apresenta
+exemplos calculados e aponta limites encontrados no código.
+\end{descricao}
+
+\section{Configuração: das fichas ao aplicativo}
+
+\elemento{Do catálogo à configuração em uso}{\metainfo{Rota}{opencode.json, .opencode/} \hfill \metainfo{Fonte}{\nodep{integrations/opencode_cli.py}}}
+
+\begin{descricao}
+O \pth{opencode.json} é um arquivo de configuração: nele o aplicativo OpenCode
+encontra instruções, agentes, skills, conexões MCP e comandos que o projeto
+oferece. MCP (Model Context Protocol) é o protocolo que permite a um aplicativo
+solicitar ferramentas a um servidor separado. O arquivo é produzido por
+\pth{integrations/opencode_cli.py}, a rotina que lê fontes do projeto e escreve
+uma configuração para o aplicativo. Por isso, o catálogo e os documentos são as
+fontes de edição; o JSON é o resultado gerado.
+\end{descricao}
+
+\begin{conceito}
+Três palavras aparecem ao longo do capítulo. \textbf{CLI} é a interface de
+linha de comando: o operador digita um comando em um terminal. \textbf{JSON} é
+um formato de texto estruturado usado para guardar opções e listas de
+configuração. \textbf{Runtime} significa o programa em execução, com os recursos
+que conseguiu carregar naquela sessão. Assim, ``estar no JSON'' e ``estar
+disponível no runtime'' são situações diferentes.
+\end{conceito}
+
+\begin{resultado}
+Em palavras simples: \pth{instructions} aponta para regras de trabalho;
+\pth{agent} lista perfis disponíveis; \pth{skills} aponta para instruções
+reutilizáveis; \pth{mcp} descreve conexões com servidores de ferramentas;
+\pth{command} define comandos nomeados; e \pth{permission} define o que cada
+rota pode fazer. O diagnóstico local de 29/09/2026 encontrou 216 entradas de
+agente na configuração e 7 conexões MCP declaradas. Uma entrada declarada não
+garante que o agente ou servidor esteja instalado ou pronto para uso.
+\end{resultado}
+
+\begin{flowch}[Regeneração da configuração]{documentos $\to$ opencode.json}
+\matrix[matrix of nodes,name=cfg,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|AGENTS.md + catálogo + docs \\[2mm]
+ |[fns]|\nodep{integrations/opencode_cli.py} \\[2mm]
+ |[fns]|\nodep{compila (modos, permissões, MCP)} \\[2mm]
+ |[fns]|escreve opencode.json \\[2mm]
+ |[fns]|CLI carrega ecossistema \\ \\
+};
+\draw[seta] (cfg-1-1)--(cfg-2-1);
+\draw[seta] (cfg-2-1)--(cfg-3-1);
+\draw[seta] (cfg-3-1)--(cfg-4-1);
+\draw[seta] (cfg-4-1)--(cfg-5-1);
+\draw[seta,plumAccent,dashed] (cfg-5-1.west) to[out=180,in=180,looseness=1.4]
+  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{repete}
+  (cfg-1-1.west);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como ler o diagrama.} Uma ficha do catálogo é a descrição original; o
+compilador transforma essas descrições em JSON; o aplicativo lê o JSON durante
+sua inicialização. Chamamos o JSON de \emph{derivado} porque ele foi produzido a
+partir de outras fontes. Se alguém o editar diretamente, a próxima geração pode
+apagar a edição. A regra prática é alterar a ficha ou o documento de origem e
+depois regenerar o arquivo.
+
+\textbf{Por que essa regra existe.} Manter uma fonte principal evita que duas
+versões discordantes disputem qual delas vale. A ideia é parecida com guardar
+uma planilha de dados e gerar um gráfico a partir dela: se o gráfico estiver
+errado, corrige-se a planilha ou o procedimento que o produz. Os princípios
+FAIR são orientações para que dados sejam encontráveis, acessíveis,
+interoperáveis e reutilizáveis; também destacam a importância de identificar
+as fontes de informação \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{O princípio de encontrabilidade ajuda o leitor a localizar a fonte que deve ser reutilizada.}{Findability is the first step in the reuse of data}{A localização é o primeiro passo para reutilizar dados.}{WILKINSON et al., 2016, p.~160018}.
+\end{descricao}
+
+\begin{metodo}
+Para atualizar um agente: (1) edite sua ficha Markdown no catálogo; Markdown é
+um formato de texto simples com títulos e listas; (2) execute
+\pth{python3 -m integrations.opencode_cli} para gerar novamente a configuração;
+(3) rode \pth{python3 -m marceloclaro.cli doctor} para verificar se as partes
+principais do ambiente respondem. O diagnóstico identifica condições locais;
+ele não testa automaticamente toda resposta produzida por um agente.
+\end{metodo}
+
+\clearpage
+\section{Os agentes: da ficha à tarefa}
+
+\elemento{Do catálogo à execução de uma tarefa}{\metainfo{Fonte}{agents/catalog/} \hfill \metainfo{Configuração local}{216 entradas}}
+
+\begin{descricao}
+Um \emph{agente} é um perfil de trabalho para o modelo: combina instruções,
+identidade e capacidades para tratar certo tipo de pedido. A ficha original
+fica em \pth{agents/catalog/}. No início do arquivo há um bloco chamado
+\emph{frontmatter}: campos de metadados escritos entre delimitadores, como nome,
+descrição, versão, categoria e exemplos. Metadados são dados que descrevem
+outros dados; neste caso, explicam ao sistema para que serve o perfil.
+
+O compilador transforma fichas em entradas reconhecidas pelo OpenCode. O
+\emph{orquestrador} é o componente que coordena tarefas e escolhe caminhos de
+execução. Quando usa o Blackboard, publica uma tarefa no quadro compartilhado;
+agentes elegíveis podem se oferecer para realizá-la. Blackboard significa aqui
+um quadro de tarefas consultável pelos componentes, não uma lista de espera de
+pessoas. O diagnóstico de 29/09/2026 encontrou 216 entradas configuradas, mas
+esse número não prova que todas estejam instaladas, disponíveis ou capazes de
+concluir qualquer tarefa.
+\end{descricao}
+
+\begin{resultado}
+As fichas cobrem, entre outros, pesquisa, escrita científica, saúde, análise de
+código, produção editorial, apresentações e ferramentas externas. Por exemplo,
+uma ficha de revisão de código descreve que tipo de arquivo examina e que saída
+deve produzir. Essa descrição ajuda a localizar um perfil possível; a qualidade
+do trabalho ainda precisa ser avaliada pela tarefa e por seus critérios.
+\end{resultado}
+
+\begin{flowch}[Ciclo de vida do agente]{catálogo $\to$ registro $\to$ operação}
+\matrix[matrix of nodes,name=ag,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|ficha no catálogo \\[2mm]
+ |[fns]|compilador gera perfil para delegação \\[2mm]
+ |[fns]|configuração (modo e instruções) \\[2mm]
+ |[fns]|registro no quadro de tarefas \\[2mm]
+ |[fns]|voluntariado e execução \\[2mm]
+ |[fns]|reflexão e evolução \\ \\
+};
+\draw[seta] (ag-1-1)--(ag-2-1);
+\draw[seta] (ag-2-1)--(ag-3-1);
+\draw[seta] (ag-3-1)--(ag-4-1);
+\draw[seta] (ag-4-1)--(ag-5-1);
+\draw[seta] (ag-5-1)--(ag-6-1);
+\draw[seta,plumAccent,dashed] (ag-6-1.west) to[out=180,in=180,looseness=1.4]
+  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{atualiza}
+  (ag-1-1.west);
+\end{flowch}
+
+\begin{descricao}
+\textbf{O que acontece em cada etapa.} A ficha declara o propósito do agente;
+o compilador cria a entrada de configuração; o orquestrador ou o aplicativo
+seleciona uma rota; se houver uma tarefa publicada no Blackboard, um agente
+elegível pode aceitá-la; por fim, o resultado volta ao componente que solicitou
+o trabalho. Há duas situações que não devem ser confundidas: \emph{não
+selecionado} significa que outro candidato foi escolhido ou que faltou uma
+condição; \emph{reprovado} significa que o agente executou, mas o resultado não
+atendeu ao critério.
+
+\textbf{Por que mostrar falhas no diagrama.} Um fluxo que mostra apenas sucesso
+esconde o que o operador deve fazer quando o trabalho não é aceito ou falha. Na
+literatura, agentes são descritos por sua capacidade de reagir, agir em busca de
+objetivos e interagir com outros componentes. Aqui, reação significa responder
+a uma tarefa ou evento; objetivo significa perseguir o resultado pedido dentro
+das regras; interação significa devolver estado e resultado ao orquestrador.
+Esses conceitos ajudam a explicar o modelo, mas não certificam a qualidade de
+uma implementação específica \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{Os autores discutem agentes como tema importante da inteligência artificial e da ciência da computação.}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligência artificial quanto na ciência da computação.}{WOOLDRIDGE; JENNINGS, 1995, p.~115--152}.
+\end{descricao}
+
+\begin{niveis}
+\textbf{Intuição:} a ficha de um especialista explica que trabalho ele pode
+receber; a ficha, sozinha, não prova que ele esteja de plantão.\\
+\textbf{Implementação:} o compilador lê os metadados e gera a configuração.\\
+\textbf{Termos:} A2A significa comunicação entre agentes. Registro A2A é o
+cadastro de capacidades para que o roteador possa localizar candidatos; não é
+uma avaliação independente de competência.
+\end{niveis}
+
+\clearpage
+\section{Skills: instruções reutilizáveis}
+
+\elemento{Instruções reutilizáveis para tarefas específicas}{\metainfo{Fonte}{.opencode/skills/} \hfill \metainfo{Política}{varia por skill}}
+
+\begin{resultado}
+Uma \emph{skill} é um conjunto reutilizável de instruções, exemplos e, às vezes,
+programas auxiliares. Ela ensina um procedimento para um tipo de tarefa; não é
+por si só um modelo novo nem a garantia de que a tarefa será executada. Exemplos
+de funções presentes neste repositório:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Skill & Papel \\
+\midrule
+\pth{customize-opencode} & orienta a edição da configuração do aplicativo. \\
+\pth{deploy-estatico-github-pages} & descreve as etapas para publicar um site estático. \\
+\pth{gemini-cli} & explica como chamar o programa de linha de comando do Gemini sem interface gráfica. \\
+\pth{gemini-notebooklm-bridge} & orienta a comunicação entre o Gemini e o NotebookLM. \\
+\pth{goose-cli} & descreve como encaminhar tarefas ao programa Goose. \\
+\pth{haystack-rag} & orienta RAG (do inglês, geração aumentada por recuperação): busca trechos em documentos e acrescenta contexto a uma resposta. \\
+\pth{medico-virtual-supremo} & orienta apoio clínico sujeito a revisão humana. \\
+\pth{mirofish-offline} & descreve uma simulação social executada localmente. \\
+\pth{nano-orchestration} & divide a produção de manuscritos longos em etapas. \\
+\pth{pesquisa-artigo-qualis-a1} & orienta pesquisa e redação com critérios auditáveis; não promete classificação. \\
+\pth{pesquisador-universal-marcelo-claro} & descreve etapas de pesquisa reproduzíveis. \\
+\pth{plandex-cli} & orienta o planejamento de mudanças de código com Plandex. \\
+\pth{prestacao-contas-nota-dez} & orienta a conferência de diligências escolares. \\
+\pth{reasonix-cli} & descreve a chamada do programa Reasonix. \\
+\pth{smoke-test-dom-js} & orienta um teste rápido de JavaScript que usa elementos de página. \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{arquitetura}
+Cada skill costuma ter um arquivo \pth{SKILL.md}, o manual que explica quando e
+como seguir aquele procedimento. Algumas incluem também scripts ou código de
+apoio. A configuração pode exigir invocação explícita: isso significa que a
+skill só é usada quando o operador a pede ou quando o fluxo a seleciona de forma
+autorizada. Uma marca como \pth{disable-model-invocation: true} impede que o
+modelo a escolha por conta própria; o orquestrador ainda pode ler suas
+instruções conforme a política definida. Essa regra evita iniciar rotinas
+sensíveis sem que a rota prevista tenha sido escolhida.
+\end{arquitetura}
+
+\clearpage
+\section{Plugins}
+
+\elemento{Código que amplia o aplicativo OpenCode}{\metainfo{Fonte}{.opencode/plugins/}}
+
+\begin{resultado}
+Um \emph{plugin} é um complemento de código carregado pelo aplicativo para
+acrescentar comportamento. Diferentemente de uma skill, que explica um
+procedimento, o plugin pode executar funções em resposta a chamadas do
+aplicativo. Os plugins encontrados neste projeto são:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Plugin & Papel \\
+\midrule
+\pth{deploy-guards.ts} & verifica condições de publicação, como tamanho e disponibilidade das páginas. \\
+\pth{litert-lm-provider.ts} & adapta o serviço local LiteRT-LM para uma interface de provedor compatível. \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{limite}
+\textbf{Provider}, ou provedor, é o componente que conecta o aplicativo a um
+serviço de modelo. \textbf{Fallback} é uma alternativa usada quando o caminho
+preferido não está disponível. Neste projeto, a conexão que segue o formato de
+chamadas da interface OpenAI é descrita primeiro no \pth{opencode.json}; o plugin LiteRT-LM oferece um
+caminho complementar. Portanto, plugin, provider e skill ocupam papéis
+diferentes: código de extensão, conexão com modelo e instruções de tarefa.
+\end{limite}
+
+\clearpage
+\section{Hooks: as guardas de segurança}
+
+\elemento{Verificações automáticas ligadas a eventos}{\metainfo{Fonte}{.opencode/hooks/}}
+
+\begin{resultado}
+Um \emph{hook} é um programa executado quando acontece um evento definido, como
+antes de uma publicação. O evento aciona a verificação sem depender de alguém
+lembrar de seguir uma recomendação escrita. Guardas encontradas no diretório
+\pth{.opencode/hooks/}:\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Hook & Função \\
+\midrule
+\pth{budget\_guard.sh} & interrompe a rota quando o limite configurado de uso é excedido. \\
+\pth{credential\_guard.sh} & procura credenciais, como chaves de acesso, antes que sejam expostas. \\
+\pth{js\_smoke\_dom.sh} & faz uma verificação rápida de JavaScript que manipula elementos de uma página. \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+O teste rápido de página funciona assim:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item identifica alterações em JavaScript que procuram ou mudam elementos da página;
+  \item cria um \emph{stub}, isto é, um substituto pequeno que imita as funções necessárias do navegador;
+  \item executa o trecho de JavaScript com Node.js, um programa que executa JavaScript fora do navegador;
+  \item verifica se o seletor encontrou o elemento esperado. Se receber um valor vazio e o código tentar usá-lo, o erro é exibido;
+  \item registra falha para que a rotina de publicação não trate o teste como aprovado.
+\end{enumerate}
+\end{metodo}
+
+\begin{niveis}
+\textbf{Intuição:} um hook é como uma cancela automática: ela confere a condição
+no momento em que a passagem é solicitada.\\
+\textbf{Diferença para uma revisão manual:} o teste executado observa um
+comportamento simples; uma leitura do código apenas procura padrões escritos.
+Ambas são úteis, mas respondem a perguntas diferentes.\\
+\textbf{Limite:} passar nesse teste rápido não prova que o site inteiro funciona
+em todos os navegadores ou dispositivos.
+\end{niveis}
+
+\clearpage
+\section{O registro de especificações e a saúde do ecossistema}
+
+\elemento{Especificações, testes e diagnóstico do ambiente}{\metainfo{Fonte}{specs/, marceloclaro/cli.py}}
+
+\begin{resultado}
+Uma \emph{spec} (especificação) descreve o comportamento esperado de uma parte do
+sistema e os critérios que permitem avaliá-lo. O arquivo da spec registra a
+intenção; o teste executável verifica alguns desses critérios no código. Um
+\emph{ciclo de evolução} é outro tipo de registro: anota uma mudança e seu
+contexto. Uma spec não é uma execução, e um ciclo não é prova de que todos os
+testes passaram.
+
+Na verificação local de 29/09/2026, o comando \pth{doctor} carregou 136
+especificações formais e leu 457 ciclos de evolução. O registro passou a conter
+458 ciclos após a anotação editorial R632 e 459 após esta revisão R633. O total de arquivos em
+\pth{specs/} pode incluir documentos históricos e materiais auxiliares; por
+isso, não deve ser confundido com o número de specs formais carregadas.
+\end{resultado}
+
+\begin{funcao}
+O comando \pth{python3 -m marceloclaro.cli doctor} é um diagnóstico: verifica
+condições locais como leitura das specs, integridade do registro de evolução e
+disponibilidade de algumas integrações. No retrato de 29/09/2026, 18 das 20
+verificações passaram, duas emitiram avisos e nenhuma falhou. Um aviso indica
+algo ausente ou opcional que merece atenção; não equivale automaticamente a uma
+falha geral. Por exemplo, uma ferramenta externa pode não estar instalada.
+
+\emph{Memória metacognitiva} significa registros que o sistema guarda sobre seu
+próprio trabalho anterior, como reflexões ou avaliações. O \pth{helpdesk} é uma
+ajuda guiada; o \pth{menu} reúne opções da linha de comando. Esses comandos têm
+funções distintas: diagnóstico, orientação e navegação.
+\end{funcao}
+
+\begin{flowch}[Diagnóstico de saúde]{verificações locais antes do trabalho}
+\matrix[matrix of nodes,name=dg,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|doctor (diagnóstico local) \\[2mm]
+ |[fns]|especificações e histórico de mudanças \\[2mm]
+ |[fns]|memória de reflexões disponível \\[2mm]
+ |[fns]|servidores de ferramentas e modelos acessíveis \\[2mm]
+ |[fns]|ambiente saudável? \\[2mm]
+ |[fns]|prosseguir trabalho \\ \\
+};
+\draw[seta] (dg-1-1)--(dg-2-1);
+\draw[seta] (dg-2-1)--(dg-3-1);
+\draw[seta] (dg-3-1)--(dg-4-1);
+\draw[seta] (dg-4-1)--(dg-5-1);
+\draw[seta] (dg-5-1)--(dg-6-1);
+\draw[seta,plumAccent,dashed] (dg-5-1.west) to[out=180,in=180,looseness=1.4]
+  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{dor}
+  (dg-1-1.west);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como interpretar o resultado.} O diagnóstico percorre verificações e
+classifica cada uma como aprovada, falha ou aviso. Uma aprovação quer dizer que
+aquela verificação local passou naquele momento. Um aviso relata uma condição
+que não bloqueou o diagnóstico, como uma ferramenta opcional ausente. Uma falha
+indica que uma condição necessária não foi satisfeita. Essas categorias ajudam
+o operador a escolher o próximo passo; elas não avaliam, por si sós, se uma
+resposta de pesquisa ou um texto está correto.
+
+\textbf{Por que registrar incertezas.} Em psicologia, metacognição inclui
+monitorar e regular o próprio pensamento. Neste sistema, usamos a expressão de
+modo operacional: guardar sinais sobre verificações, execuções e limitações
+anteriores. Isso permite distinguir ``não está instalado'' de ``foi executado e
+falhou'', uma distinção necessária para agir sobre o diagnóstico \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Flavell descreve o monitoramento ativo e a regulação dos processos cognitivos como parte da metacognição.}{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição inclui o monitoramento ativo e a regulação dos processos cognitivos.}{FLAVELL, 1979, p.~906--911}.
+\end{descricao}
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} uma ficha descreve um agente; o
+compilador gera entradas de configuração; uma skill ensina um procedimento; um
+plugin amplia o aplicativo com código; um hook executa uma verificação quando
+ocorre um evento; uma spec registra comportamento esperado; e um teste verifica
+um critério observável. O diagnóstico mostra condições locais, não certifica
+toda a capacidade do ecossistema.
+
+\textbf{Exercício.} Imagine que você alterou uma ficha de agente. Explique com
+suas palavras: onde está a fonte original, qual comando atualiza a configuração,
+o que o diagnóstico consegue verificar e o que ainda exigiria executar uma
+tarefa real.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-08-ecossistema.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — O que o inventário mostra}
+
+\elemento{Leitura guiada — Declaração não é execução}{\metainfo{ID}{N-08} \hfill \metainfo{Estilo}{inventário e evidência}}
+
+\begin{descricao}
+\textbf{A pergunta.} Se a configuração lista 216 agentes, isso quer dizer que
+216 agentes estão prontos para trabalhar? Não necessariamente. O número conta
+entradas declaradas no arquivo de configuração. Para saber se um agente pode
+ser usado, é preciso verificar se sua ficha foi carregada, se as ferramentas
+necessárias existem e se a rota consegue executá-lo.
+
+\textbf{Uma descrição também importa.} A descrição é o resumo que informa ao
+roteador que tipos de tarefa combinam com um agente. Uma frase como ``ajuda com
+pesquisa'' pouco distingue um especialista em revisão bibliográfica de um
+especialista em estatística. Uma descrição mais útil especifica a entrada que o
+agente espera, o trabalho que realiza e o tipo de resultado que entrega. Isso
+melhora a informação disponível para escolher; não garante que a resposta será
+correta.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Quatro estados que não devem ser confundidos.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Documentado:} existe uma ficha de texto com nome e descrição.
+  \item \textbf{Configurado:} a ficha aparece no arquivo que o aplicativo lê.
+  \item \textbf{Disponível:} o processo atual consegue carregar o perfil e suas
+        dependências.
+  \item \textbf{Executado e avaliado:} uma tarefa foi realmente processada e
+        seu resultado foi comparado com critérios definidos.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Exemplo de cálculo.} Suponha, apenas para ilustrar a conta, que um
+catálogo tenha 20 fichas e que 18 delas apareçam na configuração. A cobertura
+de registro seria $18/20=0{,}90$, ou 90\%. Isso mede a correspondência entre
+fichas e configuração; não mede quantos agentes estão ativos nem se produzem
+bons resultados.
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item O numerador é o número de fichas que têm uma entrada correspondente.
+  \item O denominador é o total de fichas que se pretende comparar.
+  \item O quociente responde apenas à pergunta ``quantas estão registradas?''.
+  \item Para medir execução, seria necessário definir tarefas de avaliação,
+        executá-las e registrar quantos resultados satisfizeram seus critérios.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{O que sabemos no retrato local.} Em 29/09/2026, o diagnóstico contou 216
+entradas de agentes na configuração. Esse retrato não fornece, por si só, o
+número de agentes que passaram por uma tarefa de avaliação. Não se deve chamar
+essa contagem de ``216 agentes testados'' ou ``216 agentes prontos'': são
+afirmações diferentes e exigem evidências diferentes.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Como verificar.} Compare fichas do catálogo com entradas geradas na
+configuração e anote quais não têm correspondência. Depois escolha uma tarefa
+representativa, execute-a pela rota documentada e guarde entrada, saída e
+critério de avaliação. O primeiro passo confere registro; o segundo observa
+comportamento. Um não substitui o outro.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} A contagem não mede capacidade. Um agente pode estar
+descrito e configurado, mas não ser selecionado, não ter uma ferramenta
+necessária ou produzir uma resposta inadequada. Para falar em desempenho,
+informe qual tarefa foi executada, sob quais condições e com quais critérios.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Em suas palavras, qual a diferença entre um agente
+documentado, configurado e testado? (2) Se 18 de 20 fichas tiverem registro
+correspondente, calcule a cobertura. O que essa porcentagem ainda não permite
+concluir? (3) Dê um exemplo de uma descrição que ajude a escolher entre dois
+agentes parecidos.
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Economia interna]{Economia interna: caução, penalidade e preço}
+\elemento{Como são usados os termos econômicos}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-08-ecossistema.tex}}
+
+\begin{processo}
+\textbf{Token Economy} significa, neste projeto, um mecanismo interno de
+contabilização de unidades associado a tarefas. A palavra \emph{token} aqui não
+significa criptomoeda nem dinheiro real. O orquestrador pode consultar regras
+desse mecanismo durante determinadas rotas; a presença do código não quer dizer
+que toda chamada do sistema passe por ele.
+\end{processo}
+
+\begin{resultado}
+\begin{description}[leftmargin=2.6cm,style=nextline]
+  \item[Stake (caução)] unidades reservadas quando um agente aceita uma tarefa.
+        A reserva representa um compromisso interno; não é depósito financeiro.
+  \item[Slashing (desconto)] redução da reserva ou do saldo quando uma regra
+        definida registra uma falha. A regra precisa indicar o evento e o cálculo.
+  \item[Fee market (preço da tarefa)] regra que atribui custos internos segundo
+        fatores como prioridade. É uma forma de ordenar ou limitar recursos, não
+        um preço cobrado em moeda.
+  \item[Trust score (indicador de confiança)] medida interna usada em algumas
+        regras de encaminhamento. Um valor abaixo de 0,3 pode exigir supervisão
+        em rotas configuradas; esse número não é uma probabilidade estatística
+        de que o agente esteja certo.
+\end{description}
+\end{resultado}
+
+\begin{descricao}
+\textbf{Por que usar limites.} Uma fila pode priorizar pedidos urgentes, mas
+dispõe de tempo e capacidade finitos. Do mesmo modo, um agente escolhe entre as
+opções que conhece e pode executar dentro do prazo e das permissões recebidas.
+Em economia e ciência da decisão, esse quadro é chamado de \emph{racionalidade
+limitada}: não se supõe que o decisor conheça todas as alternativas nem possa
+calcular tudo. O histórico pode informar regras de encaminhamento, mas não
+transforma um indicador interno em prova de qualidade \citref{SIMON, H. A. A behavioral model of rational choice. \emph{The Quarterly Journal of Economics}, v.~69, n.~1, p.~99-118, 1955}{10.2307/1884852}{Simon propõe estudar escolhas compatíveis com a informação e a capacidade computacional realmente disponíveis ao decisor.}{Broadly stated, the task is to replace the global rationality of economic man with a kind of rational behavior that is compatible with the access to information and the computational capacities that are actually possessed by organisms}{Em termos amplos, a proposta é estudar um comportamento compatível com o acesso à informação e as capacidades computacionais realmente disponíveis.}{SIMON, 1955, p.~99}.
+\end{descricao}
+
+\begin{resultado}
+\textbf{Cálculo com os valores definidos no módulo.} O código declara saldo
+inicial de 100 unidades internas, caução mínima de 1 unidade, recompensa de
+20\% em caso de sucesso e desconto de 50\% da caução em caso de falha. Se uma
+caução de 2 unidades for registrada, o sucesso devolve $2+0{,}2\times2=2{,}4$
+unidades; a falha devolve $2\times(1-0{,}5)=1$ unidade. A conta explica a regra
+implementada na classe econômica; não transforma essas unidades em dinheiro.
+
+Para a taxa, a prioridade normal custa 1 unidade quando não há congestionamento;
+prioridade alta aplica multiplicador 2, portanto custa 2 unidades nessa mesma
+condição. Dez tarefas abertas acrescentam 10\%: a taxa normal passa a
+$1\times1\times1{,}1=1{,}1$ unidade. O número de tarefas abertas e o nível de
+prioridade entram na fórmula descrita em \pth{economy/token\_economy.py}.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite.} Essas unidades e regras organizam decisões internas do software.
+Elas não comprovam que a entrega seja verdadeira nem substituem revisão humana,
+testes adequados ou validação externa. Para dizer que um agente recebeu desconto,
+é necessário consultar a rota executada e o registro da tarefa correspondente.
+\end{aviso}
+
+\clearpage
+\begin{aviso}
+\textbf{Divergência encontrada na integração.} A classe
+\pth{TokenEconomy.commit} recebe o parâmetro \pth{stake}, mas a chamada atual do
+orquestrador usa \pth{amount=2.0}. Na versão inspecionada, Python rejeita essa
+chamada porque o nome não corresponde à assinatura; o bloco captura a exceção e
+segue adiante. A taxa pode já ter sido debitada pela instrução anterior, mas a
+caução não é registrada nem há estorno nesse bloco. Antes de afirmar que um
+desconto ocorreu, confira a assinatura e o registro da tarefa. A divergência está em
+\pth{marceloclaro/orchestrator.py} e \pth{economy/token\_economy.py}.
+\end{aviso}
+
+\noindent\textit{Exemplo.} Se uma rota admite apenas cinco candidatos por limite de tempo e permissões, ela pode comparar os cinco que passaram pelos filtros obrigatórios. Não deve afirmar que examinou todos os perfis do catálogo. Se nenhum dos cinco satisfaz os critérios, a resposta apropriada é registrar a insuficiência ou pedir decisão humana, em vez de escolher uma opção incompatível.
+
+\section[Glossário do capítulo]{Glossário para consultar durante a leitura}
+
+\begin{resultado}
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Termo & Significado neste capítulo \\
+\midrule
+Agente & Perfil de trabalho com instruções e capacidades declaradas. \\
+Blackboard & Quadro compartilhado em que componentes publicam e consultam tarefas. \\
+Cartão & Registro estruturado que anuncia a identidade e as capacidades de um agente. \\
+Catálogo & Conjunto de fichas originais que descrevem os perfis de agente. \\
+Compilador & Programa que lê as fichas e produz o arquivo de configuração. \\
+Configuração & Opções que informam ao aplicativo quais recursos estão declarados. \\
+Disponível & Recurso que o processo atual consegue carregar e usar. \\
+Frontmatter & Bloco no início da ficha que armazena campos como nome, versão e descrição. \\
+Metadados & Informações que descrevem outro registro, arquivo ou recurso. \\
+Orquestrador & Componente que coordena tarefas e escolhe ou acompanha uma rota. \\
+Especificação (spec) & Documento que registra um comportamento esperado e critérios para avaliá-lo. \\
+Execução & Trabalho que o programa realmente realizou em uma sessão. \\
+Histórico de evolução & Registros de mudanças, com identificadores e contexto. \\
+Evento & Ocorrência, como uma tarefa publicada, que pode acionar outro componente. \\
+Hook & Programa automático acionado por um evento definido. \\
+JSON & Formato de texto estruturado usado para representar dados e opções. \\
+MCP & Protocolo Model Context Protocol, pelo qual um aplicativo solicita ferramentas oferecidas por um servidor. \\
+MetaBus & Canal local que distribui mensagens e registros entre componentes. \\
+MCI & Memória metacognitiva e interconexão: registros sobre trabalho anterior e comunicação. \\
+Plugin & Complemento de código que amplia as funções reconhecidas pelo aplicativo. \\
+Provider & Componente que conecta o aplicativo a um serviço de modelo. \\
+Runtime & Programa enquanto está em execução, com os recursos que conseguiu carregar. \\
+Skill & Instruções reutilizáveis que explicam como conduzir um tipo de tarefa. \\
+Smoke test & Teste rápido que procura erros comuns em um caminho pequeno de execução. \\
+Stub & Substituto simples que imita parte de outro sistema para permitir um teste local. \\
+Teste & Execução de uma verificação que compara um resultado com uma condição esperada. \\
+Token Economy & Contabilidade interna de unidades associadas às tarefas do sistema. \\
+\bottomrule
+\end{tabularx}}
+\end{resultado}

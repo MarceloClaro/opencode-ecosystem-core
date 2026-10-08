@@ -1,0 +1,82 @@
+"""Local FASTQ QC workflow."""
+
+from pathlib import Path
+
+DOWNLOADS = {}
+
+
+def resolve_input(value):
+    if not value.startswith(("http://", "https://")):
+        return value
+    filename = Path(value).name
+    DOWNLOADS[filename] = value
+    return f".workflow-inputs/{filename}"
+
+
+SAMPLES = {
+    sample: {
+        key: resolve_input(value)
+        if key in {"r1", "r2"} and value
+        else value
+        for key, value in metadata.items()
+    }
+    for sample, metadata in config["samples"].items()
+}
+THREADS = int(config.get("threads", 4))
+TRIM_MODE = config.get("trim_mode", "none")
+TRIM_ENABLED = TRIM_MODE != "none"
+MULTIQC = config.get("commands", {}).get("multiqc", "multiqc")
+FASTQC = config.get("commands", {}).get("fastqc", "fastqc")
+FASTP = config.get("commands", {}).get("fastp", "fastp")
+CUTADAPT = config.get("commands", {}).get("cutadapt", "cutadapt")
+PAIRED = [sample for sample, meta in SAMPLES.items() if meta.get("r2")]
+SINGLE = [sample for sample, meta in SAMPLES.items() if not meta.get("r2")]
+
+def workflow_targets():
+    targets = ["multiqc/raw/multiqc_report.html"]
+    if TRIM_ENABLED:
+        targets.append("multiqc/trimmed/multiqc_report.html")
+    return targets
+
+
+rule all:
+    input:
+        workflow_targets()
+
+
+rule download_input:
+    output:
+        ".workflow-inputs/{filename}"
+    params:
+        url=lambda wildcards: DOWNLOADS[wildcards.filename]
+    shell:
+        "curl -fsSL {params.url:q} -o {output:q}"
+
+
+rule fastqc_raw:
+    input:
+        lambda wildcards: [SAMPLES[wildcards.sample]["r1"]] + ([SAMPLES[wildcards.sample]["r2"]] if SAMPLES[wildcards.sample].get("r2") else [])
+    output:
+        directory("fastqc/raw/{sample}")
+    threads: THREADS
+    conda:
+        "envs/fastq_qc.yaml"
+    shell:
+        "mkdir -p {output:q} && {FASTQC:q} -t {threads} -o {output:q} {input:q}"
+
+
+rule multiqc_raw:
+    input:
+        expand("fastqc/raw/{sample}", sample=SAMPLES.keys())
+    output:
+        "multiqc/raw/multiqc_report.html"
+    conda:
+        "envs/fastq_qc.yaml"
+    shell:
+        "mkdir -p multiqc/raw && "
+        "{MULTIQC:q} --force --cl-config 'no_version_check: true' --no-megaqc-upload "
+        "fastqc/raw -o multiqc/raw"
+
+
+include: "rules/trimmed_qc.smk"
+include: f"rules/{TRIM_MODE}.smk"

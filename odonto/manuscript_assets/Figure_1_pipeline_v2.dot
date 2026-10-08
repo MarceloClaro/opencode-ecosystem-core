@@ -1,0 +1,57 @@
+digraph OdontoCAResearchV2 {
+  graph [rankdir=TB, bgcolor="white", pad="0.18", nodesep="0.31", ranksep="0.43", splines=polyline,
+         fontname="DejaVu Sans", fontsize=12, labelloc=t,
+         label="OdontoCA | research workflow and evidence gates"];
+  node [shape=box, style="rounded,filled", color="#24618b", fillcolor="#edf5fb", penwidth=1.6,
+        fontname="DejaVu Sans", fontsize=9.5, margin="0.16,0.10"];
+  edge [color="#52758e", penwidth=1.3, arrowsize=0.65];
+
+  subgraph cluster_executed {
+    label="A  EXECUTED: SYNTHETIC CI_SMOKE";
+    color="#8dbad5"; bgcolor="#f7fbfe"; style="rounded"; fontcolor="#17445f";
+    s1 [label="Synthetic longitudinal tooth states\nand microbiome counts"];
+    s2 [label="Consecutive tooth transitions\nH → C target"];
+    s3 [label="CA rule + clinical + microbiome\n+ combined models"];
+    s4 [label="Child-grouped nested CV; out-of-fold\nmetrics and technical checks"];
+    s1 -> s2 -> s3 -> s4;
+  }
+  evidence [label="TECHNICAL EVIDENCE ONLY\nNo clinical performance claim", color="#23608a", fillcolor="#e0eef8", fontcolor="#17445f", penwidth=2];
+  s4 -> evidence;
+
+  subgraph cluster_real {
+    label="B  PROPOSED: REAL CLINICAL + MICROBIOME RESEARCH (NOT RUN)";
+    color="#d6b46b"; bgcolor="#fffcf5"; style="rounded,dashed"; fontcolor="#745111";
+    node [color="#a57821", fillcolor="#fff7e8", style="rounded,dashed,filled"];
+    r1 [label="Table S1 + Qiita/BIOM\nsource, license, version, checksum"];
+    r2 [label="Reproduce cohort and outcomes;\nexact SampleID and tooth-time alignment"];
+    r3 [label="Split by child; zero overlap;\nfit ASV/CLR/scaling/PCA only in train"];
+    r4 [label="Locked out-of-fold probabilities;\nPR-AUC, ROC-AUC, calibration, CI"];
+    r1 -> r2 -> r3 -> r4 [style=dashed, color="#a57821"];
+  }
+
+  subgraph cluster_visual {
+    label="C  PROPOSED: IMAGE RESEARCH (NOT RUN)";
+    color="#d6b46b"; bgcolor="#fffcf5"; style="rounded,dashed"; fontcolor="#745111";
+    node [color="#a57821", fillcolor="#fff7e8", style="rounded,dashed,filled"];
+    v1 [label="Verify datasets, annotations,\npatient IDs and reference standard"];
+    v2 [label="Patient-safe split; cross-split\nduplicate and image-quality audit"];
+    v3 [label="Validation-only tuning; held-out test;\nFDI mapping with clinician review"];
+    v1 -> v2 -> v3 [style=dashed, color="#a57821"];
+  }
+
+  match [shape=diamond, label="Same cohort and exact\npatient + visit + tooth?", color="#6e518a", fillcolor="#f2edfa", fontcolor="#38234d", penwidth=2];
+  separate [label="NO: report branches separately\nCross-cohort fusion blocked", color="#b53e34", fillcolor="#fcece9", fontcolor="#6e261f", penwidth=2];
+  fusion [label="YES: prespecified fusion in\npatient-grouped validation", color="#6e518a", fillcolor="#f2edfa", fontcolor="#38234d", penwidth=2];
+  external [label="Independent external/temporal validation\nand calibration before clinical claims", color="#a57821", fillcolor="#fff7e8", style="rounded,dashed,filled"];
+  report [label="MANUSCRIPT: label synthetic, internal and\nexternal results; disclose failed/skipped gates", color="#327453", fillcolor="#eaf6ed", fontcolor="#1e5038", penwidth=2];
+
+  evidence -> r1 [style=invis];
+  r4 -> match [style=dashed, color="#a57821"];
+  v3 -> match [style=dashed, color="#a57821"];
+  match -> separate [label="No", color="#b53e34", fontcolor="#b53e34"];
+  match -> fusion [label="Yes", color="#6e518a", fontcolor="#6e518a"];
+  fusion -> external [style=dashed, color="#a57821"];
+  r4 -> external [style=dashed, color="#a57821", constraint=false];
+  external -> report [style=dashed, color="#a57821"];
+  separate -> report [style=dashed, color="#a57821"];
+}

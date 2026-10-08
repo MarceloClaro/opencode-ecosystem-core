@@ -25,8 +25,10 @@ import logging
 import re
 import time
 import uuid
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Set
+from dataclasses import dataclass
+from typing import Any, Callable, Dict, List, Optional
+
+from integrations.mcp_validation import validate_arguments
 
 logger = logging.getLogger(__name__)
 
@@ -65,59 +67,7 @@ class MCPGuard:
         Returns:
             Dict com valid (bool), errors (list), tool, args.
         """
-        if not isinstance(args, dict):
-            return {
-                "valid": False,
-                "errors": ["Arguments must be a JSON object"],
-                "tool": tool_name,
-                "args": args,
-            }
-
-        if schema is None:
-            return {"valid": True, "errors": [], "tool": tool_name, "args": args}
-
-        errors = []
-
-        # Valida required
-        required = schema.get("required", [])
-        for field in required:
-            if field not in args or args[field] is None:
-                errors.append(f"Missing required field: '{field}'")
-
-        # Valida tipos das properties
-        properties = schema.get("properties", {})
-        for field, value in args.items():
-            if field not in properties and field not in required:
-                continue  # campos extras sao permitidos
-            prop_schema = properties.get(field, {})
-            expected_type = prop_schema.get("type")
-
-            if expected_type and value is not None:
-                type_ok = False
-                if expected_type == "string":
-                    type_ok = isinstance(value, str)
-                elif expected_type == "integer":
-                    type_ok = isinstance(value, int) and not isinstance(value, bool)
-                elif expected_type == "number":
-                    type_ok = isinstance(value, (int, float)) and not isinstance(value, bool)
-                elif expected_type == "boolean":
-                    type_ok = isinstance(value, bool)
-                elif expected_type == "array":
-                    type_ok = isinstance(value, list)
-                elif expected_type == "object":
-                    type_ok = isinstance(value, dict)
-
-                if not type_ok:
-                    errors.append(
-                        f"Field '{field}' expected {expected_type}, got {type(value).__name__}"
-                    )
-
-        return {
-            "valid": len(errors) == 0,
-            "errors": errors,
-            "tool": tool_name,
-            "args": args,
-        }
+        return validate_arguments(tool_name, args, schema)
 
     def wrap(
         self,

@@ -1,0 +1,331 @@
+{
+  "analysis_status": "EXPLORATORY_INTERNAL_VALIDATION_ONLY",
+  "source": {
+    "source_sha256": "b7819fee81efbe2e227b7700c3cd86ce8bc6f7fe6f49da6214f4107d099184fa",
+    "reproduced_eligible": 997,
+    "reproduced_events": 84,
+    "excluded_nonpositive_followup_interval": 1,
+    "excluded_events": 1
+  },
+  "runtime": {
+    "python": "3.14.4",
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0"
+  },
+  "analysis_rows": 996,
+  "analysis_events": 83,
+  "analysis_children": 81,
+  "event_children": 44,
+  "event_fraction": 0.08333333333333333,
+  "seed": 20260930,
+  "outer_folds": 5,
+  "inner_folds": 3,
+  "fold_log": [
+    {
+      "fold": 0,
+      "train_rows": 798,
+      "test_rows": 198,
+      "train_children": 65,
+      "test_children": 16,
+      "train_events": 67,
+      "test_events": 16,
+      "clinical_minimal_C": 10.0,
+      "clinical_minimal_calibration": {
+        "intercept_only": {
+          "intercept": -0.058600454059163413,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.4322894546849702,
+          "slope": 0.8031694503452778
+        }
+      },
+      "clinical_spatial_C": 1.0,
+      "clinical_spatial_calibration": {
+        "intercept_only": {
+          "intercept": -0.0652087820015862,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.4812848920758519,
+          "slope": 0.7727619323128184
+        }
+      }
+    },
+    {
+      "fold": 1,
+      "train_rows": 798,
+      "test_rows": 198,
+      "train_children": 65,
+      "test_children": 16,
+      "train_events": 66,
+      "test_events": 17,
+      "clinical_minimal_C": 0.01,
+      "clinical_minimal_calibration": {
+        "intercept_only": {
+          "intercept": -1.399352900731394,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.32506495974498617,
+          "slope": 2.127357414773723
+        }
+      },
+      "clinical_spatial_C": 0.1,
+      "clinical_spatial_calibration": {
+        "intercept_only": {
+          "intercept": -0.269239203305427,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.5538454039571081,
+          "slope": 0.8523332371755522
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "train_rows": 798,
+      "test_rows": 198,
+      "train_children": 64,
+      "test_children": 17,
+      "train_events": 67,
+      "test_events": 16,
+      "clinical_minimal_C": 10.0,
+      "clinical_minimal_calibration": {
+        "intercept_only": {
+          "intercept": 0.00035747459233818955,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.7776465242621667,
+          "slope": 0.6274775189251659
+        }
+      },
+      "clinical_spatial_C": 10.0,
+      "clinical_spatial_calibration": {
+        "intercept_only": {
+          "intercept": -0.0495767787907841,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.844611364394636,
+          "slope": 0.5735288472558753
+        }
+      }
+    },
+    {
+      "fold": 3,
+      "train_rows": 795,
+      "test_rows": 201,
+      "train_children": 65,
+      "test_children": 16,
+      "train_events": 65,
+      "test_events": 18,
+      "clinical_minimal_C": 10.0,
+      "clinical_minimal_calibration": {
+        "intercept_only": {
+          "intercept": -0.07803685105160622,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.7707709482221987,
+          "slope": 0.6623974976189455
+        }
+      },
+      "clinical_spatial_C": 1.0,
+      "clinical_spatial_calibration": {
+        "intercept_only": {
+          "intercept": -0.02551848113905313,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.2826984753006098,
+          "slope": 0.865355202498346
+        }
+      }
+    },
+    {
+      "fold": 4,
+      "train_rows": 795,
+      "test_rows": 201,
+      "train_children": 65,
+      "test_children": 16,
+      "train_events": 67,
+      "test_events": 16,
+      "clinical_minimal_C": 10.0,
+      "clinical_minimal_calibration": {
+        "intercept_only": {
+          "intercept": -0.13227493188327516,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.9092401357257559,
+          "slope": 0.5981947900922356
+        }
+      },
+      "clinical_spatial_C": 10.0,
+      "clinical_spatial_calibration": {
+        "intercept_only": {
+          "intercept": -0.08273927155778965,
+          "slope": 1.0
+        },
+        "intercept_and_slope": {
+          "intercept": -0.9086977845923943,
+          "slope": 0.5435807107049558
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "clinical_minimal": {
+      "uncalibrated": {
+        "pr_auc": 0.16645846749957754,
+        "roc_auc": 0.6864896607239473,
+        "brier": 0.08060447027632936,
+        "log_loss": 0.28836192038463965,
+        "mean_predicted": 0.11817149482821211,
+        "observed_fraction": 0.08333333333333333,
+        "calibration_in_the_large": -0.4458520781167661,
+        "calibration_slope": 0.5155711016857503,
+        "calibration_model_intercept": -1.2565839350503807
+      },
+      "intercept_only": {
+        "pr_auc": 0.1920764019360254,
+        "roc_auc": 0.7116021589094604,
+        "brier": 0.07615792412668579,
+        "log_loss": 0.27299111074832794,
+        "mean_predicted": 0.0818832311917251,
+        "observed_fraction": 0.08333333333333333,
+        "calibration_in_the_large": 0.02212000348306022,
+        "calibration_slope": 0.6126684415999484,
+        "calibration_model_intercept": -0.81849977649865
+      },
+      "intercept_and_slope": {
+        "pr_auc": 0.19195921063105723,
+        "roc_auc": 0.7153235065123584,
+        "brier": 0.07450806997038699,
+        "log_loss": 0.26802182741528163,
+        "mean_predicted": 0.08020570535406488,
+        "observed_fraction": 0.08333333333333333,
+        "calibration_in_the_large": 0.0454213200293863,
+        "calibration_slope": 0.8084537093596418,
+        "calibration_model_intercept": -0.38505706819808533
+      }
+    },
+    "clinical_spatial": {
+      "uncalibrated": {
+        "pr_auc": 0.17842150969165643,
+        "roc_auc": 0.7371501339421211,
+        "brier": 0.07536155084418078,
+        "log_loss": 0.2689900330348057,
+        "mean_predicted": 0.08783354719882358,
+        "observed_fraction": 0.08333333333333333,
+        "calibration_in_the_large": -0.06595548144273289,
+        "calibration_slope": 0.6046680441449976,
+        "calibration_model_intercept": -0.8379059217346557
+      },
+      "intercept_only": {
+        "pr_auc": 0.1765842792083812,
+        "roc_auc": 0.7381266577811796,
+        "brier": 0.07531706633855828,
+        "log_loss": 0.2690413790910633,
+        "mean_predicted": 0.08098571308713255,
+        "observed_fraction": 0.08333333333333333,
+        "calibration_in_the_large": 0.03577578435315328,
+        "calibration_slope": 0.6030535673481362,
+        "calibration_model_intercept": -0.7792950200747837
+      },
+      "intercept_and_slope": {
+        "pr_auc": 0.17593114484986508,
+        "roc_auc": 0.7387204898454717,
+        "brier": 0.07395124930102073,
+        "log_loss": 0.26381452096551133,
+        "mean_predicted": 0.08267815999644001,
+        "observed_fraction": 0.08333333333333333,
+        "calibration_in_the_large": 0.009345034943020905,
+        "calibration_slope": 0.8112093282314822,
+        "calibration_model_intercept": -0.3903755789454699
+      }
+    }
+  },
+  "prevalence_reference": {
+    "brier": 0.07639705616894175,
+    "log_loss": 0.2868896322615674
+  },
+  "calibration_minus_uncalibrated": {
+    "clinical_minimal": {
+      "intercept_only": {
+        "brier": {
+          "estimate": -0.004446546149643571,
+          "ci95": [
+            -0.009419130026612902,
+            0.0001963190696053865
+          ]
+        },
+        "log_loss": {
+          "estimate": -0.01537080963631171,
+          "ci95": [
+            -0.0338340384411141,
+            0.0018191608267374712
+          ]
+        }
+      },
+      "intercept_and_slope": {
+        "brier": {
+          "estimate": -0.0060964003059423705,
+          "ci95": [
+            -0.01172895892954388,
+            -0.0006720007787388494
+          ]
+        },
+        "log_loss": {
+          "estimate": -0.020340092969358015,
+          "ci95": [
+            -0.040579934439612955,
+            0.0002044871840021953
+          ]
+        }
+      }
+    },
+    "clinical_spatial": {
+      "intercept_only": {
+        "brier": {
+          "estimate": -4.4484505622499615e-05,
+          "ci95": [
+            -0.0006924971009843337,
+            0.0006667348936592917
+          ]
+        },
+        "log_loss": {
+          "estimate": 5.1346056257617345e-05,
+          "ci95": [
+            -0.0026377922105769837,
+            0.002952988483524524
+          ]
+        }
+      },
+      "intercept_and_slope": {
+        "brier": {
+          "estimate": -0.0014103015431600474,
+          "ci95": [
+            -0.0030819700456517054,
+            0.0003729648359956565
+          ]
+        },
+        "log_loss": {
+          "estimate": -0.005175512069294341,
+          "ci95": [
+            -0.013664682032413469,
+            0.0024404326166074532
+          ]
+        }
+      }
+    }
+  },
+  "bootstrap_requested": 1000,
+  "bootstrap_valid": 1000,
+  "scope_note": "Cross-fitted internal calibration within 81 children; no external validation or clinical use."
+}

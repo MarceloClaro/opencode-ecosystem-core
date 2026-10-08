@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "starter-plugin",
+  "version": "0.1.0",
+  "description": "A customizable private plugin for one focused workflow.",
+  "author": {
+    "name": "Plugin owner"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Starter Plugin",
+        "shortDescription": "A private plugin for your workflow",
+        "longDescription": "Provide focused guidance for a workflow defined by the plugin owner.",
+        "developerName": "Plugin owner",
+        "category": "Productivity",
+        "capabilities": ["Interactive"],
+        "defaultPrompt": [
+          "Help me get started with this workflow.",
+          "Walk me through an example.",
+          "Review my progress and suggest a next step."
+        ]
+      }
+    }
+  }
+}

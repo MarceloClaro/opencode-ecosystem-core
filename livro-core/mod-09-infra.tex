@@ -1,0 +1,264 @@
+% ============================================================
+%  MÓDULO — Infraestrutura, Serviços e Publicação
+%  Escrito na revisão R616 (substitui o stub "Em construção").
+% ============================================================
+\chapter{Infraestrutura, Serviços e Publicação}
+
+\roteirodidatico
+{Um programa depende do ambiente, dos serviços a que se conecta e de regras que controlam operações. Este capítulo mostra como reconhecer essas dependências na prática.}
+{\emph{Serviço} executa uma função acessível por interface; \emph{deploy} publica uma versão; \emph{sondagem} consulta um serviço; \emph{hook} intercepta um evento; \emph{perfil} seleciona dependências.}
+{Separe instalação local, serviço externo e publicação; em cada etapa confira configuração, versão, credenciais, resposta e registro associado.}
+{Uma checagem de saúde confirma uma resposta limitada naquele instante. Ela não certifica segurança, disponibilidade futura, integridade de ponta a ponta ou qualidade do produto.}
+{Que parte da cadeia foi efetivamente exercitada e quais riscos ou condições ficaram fora da verificação?}
+
+\casoguiado{da instalação à publicação}
+{Uma compilação local bem-sucedida mostra que o documento foi produzido naquele ambiente. Uma publicação exige passos adicionais: enviar o artefato, aguardar o serviço e consultar a URL resultante. Uma resposta HTTP confirma uma condição de acesso naquele instante; não prova que todos os leitores verão a versão correta nem que a publicação continuará disponível. Registre artefato, destino, horário e resposta observada.}
+
+\elemento{Infraestrutura do Core}{\metainfo{ID}{I-00} \hfill
+\metainfo{Camada}{8 — Infraestrutura} \hfill
+\metainfo{Rota}{\pth{integrations/}, \pth{.opencode/}}}
+
+\begin{descricao}
+Os módulos anteriores descrevem o \emph{pensar} do Core: orquestração, memória,
+qualidade, raciocínio, ciência. Este descreve o \emph{operar} --- o que existe
+\emph{fora} do código do orquestrador e o faz funcionar no mundo real: o ambiente,
+os serviços que ficam de pé, as guardas que interrompem operações perigosas e a
+cadeia que leva um artefato do repositório até um site publicado.
+\end{descricao}
+
+\begin{conceito}
+A infraestrutura organiza-se em três camadas, da mais estável para a mais externa:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \textbf{Ambiente} --- dependências por perfil e instalação reprodutível
+        (desenvolvida no Módulo de Instalação).
+  \item \textbf{Serviços} --- servidores MCP que expõem capacidades a qualquer
+        cliente compatível.
+  \item \textbf{Guardas e publicação} --- hooks que interrompem, plugins que
+        estendem e a cadeia de deploy com sondagem real.
+\end{enumerate}
+\end{conceito}
+
+\begin{funcao}
+Transformar ``funciona na minha máquina'' em ``funciona em qualquer máquina
+auditável'' --- a mesma regra do capítulo de instalação, agora aplicada a serviços
+e à publicação.
+\end{funcao}
+
+\begin{niveis}
+\textbf{Intuição:} a parte invisível que faz a peça acontecer --- tomada, motor e
+freio de mão.\\
+\textbf{Implementação:} venv por perfil, 7 servidores MCP, 4 hooks, 2 plugins e cadeia
+de deploy com sondagem HTTP real.\\
+\textbf{Formalização:} infraestrutura auditável, com proveniência por artefato e guardas
+que impõem política sem depender da disciplina do operador.
+\end{niveis}
+
+\section{O ambiente: perfis e instalação reproduzível}
+
+\begin{descricao}
+O \pth{Makefile} oferece perfis de dependência: \pth{make install} (ambiente
+virtual), \pth{make setup} (base), \pth{make setup-dev} (desenvolvimento) e
+\pth{make setup-science} (perfil científico). Perfis separados existem para que a
+dependência de uma tarefa científica não contamine o ambiente de operação --- o
+equivalente informacional de separar o reagente de teste do reagente em uso.
+\end{descricao}
+
+\begin{metodo}
+Ritual de entrada: (1) \pth{make install}; (2) \pth{make setup}; (3)
+\pth{python3 -m marceloclaro.cli doctor}; (4) só então operar. O \pth{doctor} é o
+exame de saúde do aparato: ambiente verde significa ``pronto para operar'', nunca
+``resultado verificado''.
+\end{metodo}
+
+\section{Serviços: os sete servidores MCP}
+
+\begin{resultado}
+Servidores MCP declarados em \pth{opencode.json} (chave \pth{mcp}):
+\par\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Servidor & Papel \\
+\midrule
+\pth{metacognitive-interconnect} & Blackboard, MetaBus e registro de agentes \\
+\pth{litert-lm} & modelos on-device (Gemma 4 / Qwen3) via LiteRT-LM \\
+\pth{antigravity-bridge} & delegação a agentes externos, busca e leitura de URL \\
+\pth{scanners-mcp} & auditoria (rigor científico, literário, integridade) \\
+\pth{pypi-search} & busca e avaliação de pacotes Python \\
+\pth{colibri-mcp} & geração local com o motor Colibri \\
+\pth{web-deploy-mcp} & sondagem de URLs, feeds e orçamento de peso \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{metodo}
+Política de invocação: um servidor ausente \emph{não} derruba o Core. As skills
+que dependem de executor externo validam presença e versão antes do uso e degradam
+para um aviso explícito --- a invocação tolerante descrita no Módulo de Integrações.
+\end{metodo}
+
+\begin{aviso}
+Disponibilidade declarada $\neq$ disponibilidade real: um servidor configurado pode
+estar sem credencial ou sem binário. A verificação antes do uso é obrigatória.
+\end{aviso}
+
+\section{Guardas: hooks e plugins}
+
+\begin{resultado}
+Hooks em \pth{.opencode/hooks/} e plugins em \pth{.opencode/plugins/}:
+\par\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Componente & Função \\
+\midrule
+\pth{budget_guard.sh} & interrompe a operação quando o orçamento de tokens é excedido \\
+\pth{credential_guard.sh} & bloqueia operação sem credencial configurada \\
+\pth{js_smoke_dom.sh} (+ \cod{smoke_dom_stub.js}) & executa o JavaScript de renderização em Node antes de declarar deploy pronto \\
+\pth{deploy-guards.ts} (plugin) & guardas de deploy: peso, remoção (404) e integridade do feed \\
+\pth{litert-lm-provider.ts} (plugin) & registra o provedor LiteRT-LM no cliente \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\begin{conceito}
+Um hook é uma \textbf{política executada antes do ato}. Sua vantagem sobre a
+documentação é simples e mensurável: a documentação depende de o operador lembrar;
+o hook não depende.
+\end{conceito}
+
+\section{Publicação com rastro: a cadeia de deploy}
+
+\begin{descricao}
+Publicar é a operação em que a maioria dos erros é \emph{invisível}: o comando
+``passa'' e o site está quebrado. Por isso a cadeia de deploy do Core não aceita
+``publicado'' como prova --- ela \emph{sonda}.
+\end{descricao}
+
+\begin{metodo}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \textbf{Status do build} --- consulta à API do GitHub Pages
+        (\pth{web_deploy_pages_status}).
+  \item \textbf{Sondagem} --- requisição \emph{GET} com \emph{Range} em cada URL,
+        buscando um marcador de conteúdo (\pth{web_deploy_probe_url}).
+  \item \textbf{Verificação de remoção} --- URLs retiradas devem responder 404
+        (\pth{web_deploy_assert_gone}); qualquer status diferente de 404 é falha.
+  \item \textbf{Orçamento de peso} --- limite de peso do diretório e de arquivo
+        (\pth{web_deploy_site_weight}).
+  \item \textbf{Feed} --- validação de RSS/Atom, com conferência do enclosure
+        (\pth{web_deploy_validate_feed}).
+\end{enumerate}
+\end{metodo}
+
+\begin{aviso}
+\textbf{Lição de infraestrutura (R580, reafirmada em R616).} A sondagem usa
+\emph{GET} com \cod{Range} e \emph{nunca} \cod{HEAD}: o GitHub Pages responde de
+modo inconsistente a \cod{HEAD} para arquivos binários, produzindo falso 404.
+Da mesma natureza é o smoke test de JavaScript com stub de DOM: \cod{node --check}
+valida sintaxe e \emph{não} executa o DOM, de modo que erros de renderização só
+aparecem em tempo de execução.
+\end{aviso}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-09-infra.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Infraestrutura}
+\elemento{ativ-09i}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-09-infra.tex}}
+
+\begin{processo}
+GATILHO. \pth{doctor}, serviços MCP, integrações de dados.
+ROTA. serviços determinísticos; gate: rastro e proveniência por operação.
+FUNÇÃO. executar serviços de suporte com rastro completo e disponibilidade mensurável.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. disponibilidade = operações com rastro / operações totais; proveniência = metadados de origem/versão por artefato.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. a proveniência detalhada e o rastro por operação são o que torna a infraestrutura auditável. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. rastro documenta, não garante correção do mundo externo. A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação:} Os princípios FAIR transformam a proveniência em requisito operacional: o artefato deve ser localizável, acessível sob condições declaradas, interoperável e reutilizável. Como diagnóstico interno — não como certificação FAIR — pode-se medir $C_m=n_p/n_r$, em que $n_p$ é o número de campos obrigatórios preenchidos e $n_r$ o total requerido. $C_m=1$ indica completude do esquema adotado, não correção do conteúdo; esta ainda depende da conferência da fonte e da validação do resultado \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{p.~160018 (resumo, p.~160018). é o padrão de auditabilidade dos serviços de infraestrutura: todo dado usado pelo Core deve ser localizável, acessível, interoperável e reutilizável — o que o rastro de operações materializa.}{Good data management is not a goal in itself, but is the key conduit leading to knowledge discovery and innovation}{O bom gerenciamento de dados não é um fim em si mesmo, mas o principal canal que conduz à descoberta de conhecimento e à inovação.}{WILKINSON et al., 2016, p.~160018}\section[Leitura guiada]{Leitura guiada — Infraestrutura: recursos e restrições}
+
+\elemento{Leitura guiada — Infraestrutura}{\metainfo{ID}{N-09} \hfill \metainfo{Ciclo}{R616} \hfill \metainfo{Estilo}{medir o que existe fora do código}}
+
+\begin{descricao}
+\textbf{O fenômeno.} Escreva no papel a frase que todo desenvolvedor já disse:
+``na minha máquina funciona''. Ela é a antítese da reprodutibilidade. Este
+capítulo trata do oposto: tornar \emph{verificável} aquilo que vive fora do
+próprio código --- serviços, guardas e publicação.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Disponibilidade} ($d$): operações com rastro $/$ operações totais.
+  \item \textbf{Proveniência} ($p$): metadados de origem e versão por artefato.
+  \item \textbf{Orçamento de peso} ($w$): limite de peso do diretório ($1\,000$ MB) e de arquivo ($25$ MB).
+  \item \textbf{Marcador de conteúdo} ($m$): trecho esperado na resposta HTTP, que distingue ``200 com a página'' de ``200 com a página de erro''.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Por que sondar em vez de acreditar no comando de
+publicação?
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item ``Publicado'' é uma afirmação do cliente; a prova é a resposta do servidor.
+  \item Um \cod{HEAD} devolve só cabeçalho e, no GitHub Pages, mente para binários --- falso 404.
+  \item Um \cod{GET} com \cod{Range} lê de fato o início do arquivo e custa cerca de 1 KB.
+  \item Comparar o corpo com o marcador $m$ separa página servida de página de erro.
+  \item A remoção de um artefato só está concluída quando a URL responde 404; status outro que 404 é falha por definição do gate.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido (guarda de peso).} Considere um pacote de publicação com
+$68$ arquivos, $1\,240$ MB no total e um único arquivo de áudio de $1\,180$ MB:
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Guarda de total: $1\,240 > 1\,000$ MB $\Rightarrow$ \textbf{denegado} (limite de diretório).
+  \item Guarda de arquivo: $1\,180 > 25$ MB $\Rightarrow$ \textbf{denegado} (limite de arquivo).
+  \item Correção: dividir ou reprocessar o áudio. A segunda falha é a mais dura, porque obriga a mudar a arquitetura do feed, e não apenas um parâmetro de build.
+\end{enumerate}
+\textbf{Ordem de grandeza:} as guardas atuam em duas escalas --- megabytes
+(site) e bytes (conteúdo) --- enquanto a sonda \cod{GET}+\cod{Range} custa
+$\approx 1$ KB por URL, cerca de mil vezes menos que um download integral.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} A publicação tem um orçamento explícito: o limite padrão é $1000$ MB por diretório e $25$ MB por arquivo, o que é da ordem de grandeza de um repositório de sites estáticos --- mas o orçamento é a \emph{folga}, não o consumo medido. Verificação: \cod{python3 -c "import pathlib; print(sum(f.stat().st_size for f in pathlib.Path('.').rglob('*') if f.is_file())/1e6)"} em MB. O ponto didático é a proporção: entre o orçamento e o consumo há uma razão de folga típica de $1{:}10$ a $1{:}100$, e é essa folga que permite publicar sem reescrever. Um sistema que consome mais de metade do orçamento deixa de ser publicável com segurança --- e o PDF do próprio livro, com suas centenas de páginas, é o exemplo do artefato que mais pesa e o menos se beneficia de ser comprimido.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Os valores de $1\,240$ MB e $1\,180$ MB são
+\emph{ilustrativos}. O gate verifica presença, marcador e peso; ele não verifica
+se o conteúdo publicado está \emph{correto} editorialmente.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Por que \cod{HEAD} é proibido na sondagem? (2) Um
+arquivo de $24$ MB passa na guarda de arquivo: passa na de total? (3) Que
+evidência extra um feed RSS precisaria para ser considerado íntegro?
+\end{resultado}
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) infraestrutura é o ``operar'', distinto
+do ``pensar''; (2) perfis de dependência separam ambientes; (3) 7 servidores MCP,
+4 hooks e 2 plugins formam a camada executável; (4) publicar exige sondagem
+(\cod{GET}+\cod{Range}), nunca \cod{HEAD}; (5) removido só está removido quando
+a URL responde 404. \textbf{Exercício sugerido:} rode o \pth{doctor}, anote as
+verificações e escolha uma delas para reproduzir manualmente (por exemplo, contar
+os agentes registrados no Blackboard).
+\end{resultado}

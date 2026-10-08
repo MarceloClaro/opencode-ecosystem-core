@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "mutants": [
+    {
+      "id": "health_as_inference",
+      "module": "integrations.live_scientific_runtime",
+      "class": null,
+      "method": "classify_execution",
+      "old": "returncode == 0 and generated and artifact",
+      "new": "returncode == 0 and artifact",
+      "test": "tests/test_r667_live_scientific_runtime.py::test_process_exit_and_health_are_insufficient",
+      "exit_code": 1,
+      "detected": true,
+      "log": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R667_R671_MUTATION_LOGS/health_as_inference.txt",
+      "log_sha256": "ca62d98dbae8eb8a1ded3bd9fb4a5e92fac0ab20a8e97b08e277e8420539301b"
+    },
+    {
+      "id": "altered_source_as_original",
+      "module": "integrations.dataset_cli",
+      "class": "DatasetCliIntegration",
+      "method": "build_custom",
+      "old": "if _digest(raw) != original[\"sha256\"]:",
+      "new": "if False:",
+      "test": "tests/test_r668_dataset_cli.py::test_custom_rejects_modified_source",
+      "exit_code": 1,
+      "detected": true,
+      "log": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R667_R671_MUTATION_LOGS/altered_source_as_original.txt",
+      "log_sha256": "d224271d98ed3ffe7c3fb4bfb00ae2b8b7ea1821400b204746df679aa6213654"
+    },
+    {
+      "id": "foreign_tool_receipt",
+      "module": "integrations.scientific_plugins",
+      "class": "ScientificPluginService",
+      "method": "accept_host_response",
+      "old": "host_tool != request[\"host_tool\"]",
+      "new": "False",
+      "test": "tests/test_r670_scientific_plugins.py::test_receipt_identity_replay_and_failure",
+      "exit_code": 1,
+      "detected": true,
+      "log": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R667_R671_MUTATION_LOGS/foreign_tool_receipt.txt",
+      "log_sha256": "9c1c0e626a353ad95421d935cc702cb485fd52399a6fe505ec088b4f543b5582"
+    },
+    {
+      "id": "mutable_plugin_bytecode",
+      "module": "integrations.scientific_plugins",
+      "class": "ScientificPluginService",
+      "method": "run_local",
+      "old": "[sys.executable, \"-B\", str(executable)]",
+      "new": "[sys.executable, str(executable)]",
+      "test": "tests/test_r670_scientific_plugins.py::test_local_python_skill_cannot_write_bytecode_into_imported_package",
+      "exit_code": 1,
+      "detected": true,
+      "log": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R667_R671_MUTATION_LOGS/mutable_plugin_bytecode.txt",
+      "log_sha256": "7d038416b32478ddbc938a1427840dda0fecb88bfecec3f366883c0b111aaee9"
+    }
+  ],
+  "external_validation": false,
+  "scope": "Isolated counterexamples; actual external runs are separate."
+}

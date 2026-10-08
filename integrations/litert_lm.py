@@ -46,6 +46,14 @@ from integrations.litert_lm_provider import (
 
 logger = logging.getLogger("litert-lm-provider")
 
+# R622: política de contexto declarada pelo catálogo canônico (R211 = 20_480),
+# derivada das próprias fontes para não poder divergir delas. Substitui o
+# literal legado de 32_768, que era uma terceira cifra conflitante na saída.
+CONTRACTED_CONTEXT_TOKENS = min(
+    (meta["context"] for meta in CANONICAL_MODELS.values() if "context" in meta),
+    default=0,
+)
+
 # ── Constantes ──────────────────────────────────────────────────────────────
 
 PROVIDER_ID = "litert-lm"
@@ -328,6 +336,18 @@ MODELS: Dict[str, Dict[str, Any]] = {
 # catálogo diretamente, mas expõe os quatro IDs anunciados como catálogo
 # operacional. A metadata legada é mesclada somente para que filtros do router
 # (por exemplo, ``require_thinking``) continuem informativos.
+#
+# R622: a travessia por alias ficou restrita a *dicas de roteamento*. Dois campos
+# foram deliberadamente removidos da lista:
+#
+#   * ``family`` — atributo de identidade do modelo físico. O alias
+#     ``gemma-3-1B-it → litert-community/Qwen3-0.6B`` fazia o ``setdefault``
+#     declarar um modelo Qwen como família "google" (A3). A família é declarada
+#     no catálogo canônico, que passa a ser autossuficiente.
+#   * ``context_window`` — nome de campo legado. O catálogo canônico publica
+#     ``context`` (o campo que R211 contratou em 20_480); copiar o
+#     ``context_window`` legado produzia dois campos conflitantes na mesma
+#     entrada (A2), sem carregar nenhuma informação nova.
 LEGACY_MODELS = MODELS
 _CANONICAL_COMPAT_MODELS: Dict[str, Dict[str, Any]] = {
     model_id: dict(metadata)
@@ -339,10 +359,8 @@ for _legacy_id, _canonical_id in MODEL_ALIASES.items():
         continue
     _canonical_metadata = _CANONICAL_COMPAT_MODELS[_canonical_id]
     for _field_name in (
-        "family",
         "strengths",
         "thinking",
-        "context_window",
         "free",
     ):
         if _field_name not in _legacy_metadata:
@@ -496,9 +514,15 @@ class LiteRTLMProvider:
                     "model_id": mid,
                     "name": local_meta.get("name", mid),
                     "provider": PROVIDER_ID,
+                    # `"unknown"` é sentinela honesto para um modelo servido que
+                    # não consta no catálogo: melhor declarado desconhecido do
+                    # que atribuído à família do modelo errado (R622/A3).
                     "family": local_meta.get("family", "unknown"),
                     "strengths": local_meta.get("strengths", ["general"]),
-                    "context_window": local_meta.get("context_window", 32_768),
+                    "context_window": local_meta.get(
+                        "context_window",
+                        local_meta.get("context", CONTRACTED_CONTEXT_TOKENS),
+                    ),
                     "thinking": local_meta.get("thinking", False),
                     "tier": local_meta.get("tier", "standard"),
                     "free": True,

@@ -1,0 +1,91 @@
+% ======================================================================
+%  OPENCODE ECOSYSTEM CORE — Manual Técnico-Dev-Científico (Livro A4)
+%  Compilação única: pdflatex main.tex  (ou: latexmk -pdf main.tex)
+%  Módulos LaTeX: mod-01 ... mod-11 + apendices
+% ======================================================================
+\documentclass[10pt,a4paper,oneside,openany]{book}
+
+\input{macros}
+
+\hypersetup{
+  pdftitle={OpenCode Ecosystem Core — Raio-X Técnico-Dev-Científico do Ecossistema},
+  pdfauthor={Comunidade OpenCode Ecosystem Core -- Coordenado por MarceloClaro Orchestrator},
+  pdfsubject={Manual técnico-científico em módulos LaTeX, raio-x completo do Core},
+  colorlinks=true, linkcolor=steel, urlcolor=steel, citecolor=steel,
+  breaklinks=true, unicode=false,
+}
+
+\begin{document}
+\pagecolor{ink}
+\color{textmain}
+
+% =========================== FRONT MATTER =============================
+\frontmatter
+\input{mod-00-capa}
+\input{mod-00a-enredo-prefacio}
+\input{mod-00b-jornada-leitor}
+\input{mod-18-nivel0-universal}
+\input{mod-01-fundacoes}
+\input{mod-01b-historia}
+\input{mod-01c-instalacao}
+
+% =========================== MAIN MATTER ==============================
+\mainmatter
+
+\part{Arquitetura Integral — Como o Core se Organiza}
+\input{mod-01d-arquitetura}
+
+\part{Orquestração e Roteamento}
+\input{mod-02-orquestracao}
+
+\part{Memória, Metacognição e Interconexão (MCI)}
+\input{mod-03-memoria-mci}
+
+\part{Qualidade, Especificação e Rigor (SDD/TDD)}
+\input{mod-04-qualidade-sdd}
+
+\part{Raciocínio, Prova e Otimização}
+\input{mod-05-raciocinio}
+
+\part{Estratégia Científica e Pesquisa}
+\input{mod-06-ciencia}
+
+\part{Integrações, Executores Externos e MCP}
+\input{mod-07-integracoes}
+
+\part{Agentes, Instruções e Verificação}
+\input{mod-08-ecossistema}
+
+\part{Problema Resolvido e Arquitetura Comparada}
+\input{mod-09a-comparada}
+
+\part{Infraestrutura, Segurança e Limitações}
+\input{mod-09-infra}
+
+\part{Catálogo Completo — Agentes e Subagentes (gerado)}
+\input{mod-10-catalogo}
+
+\part{Fichas Núcleo Expandidas (curadoria com citações)}
+\input{mod-12-fichas-nucleo}
+
+\part{Ativação de Agentes e Subagentes}
+\input{mod-13-ativacao-agentes}
+\input{mod-14-lote-categorias}
+
+\part{Atlas Visual — Mapas por Elemento e Arquitetura}
+\input{mod-16-mapas-fluxogramas}
+\input{mod-17-e1e7-para-leigos}
+
+\part{Podcast Para Leigos}
+\input{mod-19-podcast}
+\input{mod-20-podcast-modulos}
+
+\part{Epílogo Operacional — Reprodução Guiada}
+\input{mod-15-epilogo-reproducao}
+
+% =========================== BACK MATTER ==============================
+\appendix
+\part{Apêndices e Índices}
+\input{mod-11-apendices}
+
+\end{document}

@@ -1,0 +1,162 @@
+{
+  "spec_id": "SPEC-935-R659",
+  "ts": "2026-10-04T10:21:03.571541+00:00",
+  "started_at": "2026-10-04T10:14:56.344414+00:00",
+  "elapsed_seconds": 367.227,
+  "evidence_kind": "real_local_http_inference_and_native_tool",
+  "success": false,
+  "transport": "HTTP OpenAI-compatible",
+  "tool_execution": "native_in_process_not_MCP",
+  "allowed_success": false,
+  "denial_success": false,
+  "model": "qwen3:8b",
+  "base_url": "http://localhost:11434/v1",
+  "prompt": "Use obrigatoriamente a ferramenta somar_inteiros para somar 13 e 29. Após obter o resultado, responda em português com o valor retornado.",
+  "executions": [],
+  "events": [
+    {
+      "type": "error",
+      "error": "resposta inválida do provedor"
+    }
+  ],
+  "denial_events": [
+    {
+      "type": "error",
+      "error": "resposta inválida do provedor"
+    }
+  ],
+  "trace": [
+    {
+      "kind": "hook",
+      "phase": "allow",
+      "event": "SessionStart",
+      "tool": "",
+      "tool_call_id": null,
+      "finish": null
+    },
+    {
+      "kind": "real_http",
+      "phase": "allow",
+      "elapsed_seconds": 185.152,
+      "method": "POST",
+      "url": "http://localhost:11434/v1/chat/completions",
+      "request": {
+        "model": "qwen3:8b",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Você é um assistente local. Para esta tarefa, chame a ferramenta disponibilizada antes de responder; não calcule sem consultar a ferramenta."
+          },
+          {
+            "role": "user",
+            "content": "Use obrigatoriamente a ferramenta somar_inteiros para somar 13 e 29. Após obter o resultado, responda em português com o valor retornado."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "somar_inteiros",
+              "description": "Soma dois inteiros e retorna o resultado exato.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "integer"
+                  },
+                  "b": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "a",
+                  "b"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto"
+      },
+      "response": null
+    },
+    {
+      "kind": "hook",
+      "phase": "allow",
+      "event": "SessionEnd",
+      "tool": "",
+      "tool_call_id": null,
+      "finish": "error"
+    },
+    {
+      "kind": "hook",
+      "phase": "deny",
+      "event": "SessionStart",
+      "tool": "",
+      "tool_call_id": null,
+      "finish": null
+    },
+    {
+      "kind": "real_http",
+      "phase": "deny",
+      "elapsed_seconds": 180.112,
+      "method": "POST",
+      "url": "http://localhost:11434/v1/chat/completions",
+      "request": {
+        "model": "qwen3:8b",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Você é um assistente local. Para esta tarefa, chame a ferramenta disponibilizada antes de responder; não calcule sem consultar a ferramenta."
+          },
+          {
+            "role": "user",
+            "content": "Use obrigatoriamente a ferramenta somar_inteiros para somar 13 e 29. Após obter o resultado, responda em português com o valor retornado."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "somar_inteiros",
+              "description": "Soma dois inteiros e retorna o resultado exato.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "integer"
+                  },
+                  "b": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "a",
+                  "b"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto"
+      },
+      "response": null
+    },
+    {
+      "kind": "hook",
+      "phase": "deny",
+      "event": "SessionEnd",
+      "tool": "",
+      "tool_call_id": null,
+      "finish": "error"
+    }
+  ],
+  "code_sha256": {
+    "integrations/opencode_agent_sdk.py": "cfa0c65b3ccab7f1a60760d34c76a5a78d41c72ac75e20b484df92134b7c7c6c",
+    "hooks/engine.py": "9a24619b9c87ce281b02d2e5dee85ef5f504468bc9ef4a55f5384f1eb2ea019c",
+    "hooks/policy.py": "a6512cb8850ff114467af278fbf73706684706a3c358618ff09f90fc73467948",
+    "integrations/mcp_validation.py": "f4373a8dabc8c17722e07e994ab89bb963693ceddb1fc21b3c2857841ac91311"
+  }
+}

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="4" failures="6" skipped="0" tests="10" time="4.276" timestamp="2026-10-04T22:38:08.083909-03:00" hostname="OPENCODE"><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_specialist_has_loadable_contract_and_current_methods[gemini-notebook-audit-tags0]" time="0.003"><failure message="AssertionError: assert False&#10; +  where False = is_file()&#10; +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/agents/catalog/gemini-notebook-audit.md').is_file">slug = 'gemini-notebook-audit'
+tags = ['gemini_notebook_audit', 'notebook_evidence_integrity']
+
+    @pytest.mark.parametrize("slug,tags", ROLES.items())
+    def test_specialist_has_loadable_contract_and_current_methods(slug, tags):
+        path = ROOT / "agents/catalog" / (slug + ".md")
+&gt;       assert path.is_file()
+E       AssertionError: assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/agents/catalog/gemini-notebook-audit.md').is_file
+
+tests/test_r676_gemini_notebook_specialists.py:23: AssertionError</failure></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_specialist_has_loadable_contract_and_current_methods[gemini-notebook-upstream-tags1]" time="0.003"><failure message="AssertionError: assert False&#10; +  where False = is_file()&#10; +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/agents/catalog/gemini-notebook-upstream.md').is_file">slug = 'gemini-notebook-upstream'
+tags = ['gemini_notebook_upstream', 'upstream_source_provenance']
+
+    @pytest.mark.parametrize("slug,tags", ROLES.items())
+    def test_specialist_has_loadable_contract_and_current_methods(slug, tags):
+        path = ROOT / "agents/catalog" / (slug + ".md")
+&gt;       assert path.is_file()
+E       AssertionError: assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/agents/catalog/gemini-notebook-upstream.md').is_file
+
+tests/test_r676_gemini_notebook_specialists.py:23: AssertionError</failure></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_specialist_has_loadable_contract_and_current_methods[gemini-notebook-transport-tags2]" time="0.002"><failure message="AssertionError: assert False&#10; +  where False = is_file()&#10; +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/agents/catalog/gemini-notebook-transport.md').is_file">slug = 'gemini-notebook-transport'
+tags = ['gemini_notebook_transport', 'notebook_protocol_transport']
+
+    @pytest.mark.parametrize("slug,tags", ROLES.items())
+    def test_specialist_has_loadable_contract_and_current_methods(slug, tags):
+        path = ROOT / "agents/catalog" / (slug + ".md")
+&gt;       assert path.is_file()
+E       AssertionError: assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/agents/catalog/gemini-notebook-transport.md').is_file
+
+tests/test_r676_gemini_notebook_specialists.py:23: AssertionError</failure></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_compilation_has_explicit_permissions_and_primary_route[gemini-notebook-audit]" time="0.569"><failure message="KeyError: 'gemini-notebook-audit'">slug = 'gemini-notebook-audit'
+
+    @pytest.mark.parametrize("slug", ROLES)
+    def test_compilation_has_explicit_permissions_and_primary_route(slug):
+&gt;       card = _catalog_agents()[slug]
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'gemini-notebook-audit'
+
+tests/test_r676_gemini_notebook_specialists.py:40: KeyError</failure></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_compilation_has_explicit_permissions_and_primary_route[gemini-notebook-upstream]" time="0.588"><failure message="KeyError: 'gemini-notebook-upstream'">slug = 'gemini-notebook-upstream'
+
+    @pytest.mark.parametrize("slug", ROLES)
+    def test_compilation_has_explicit_permissions_and_primary_route(slug):
+&gt;       card = _catalog_agents()[slug]
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'gemini-notebook-upstream'
+
+tests/test_r676_gemini_notebook_specialists.py:40: KeyError</failure></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_compilation_has_explicit_permissions_and_primary_route[gemini-notebook-transport]" time="0.547"><failure message="KeyError: 'gemini-notebook-transport'">slug = 'gemini-notebook-transport'
+
+    @pytest.mark.parametrize("slug", ROLES)
+    def test_compilation_has_explicit_permissions_and_primary_route(slug):
+&gt;       card = _catalog_agents()[slug]
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'gemini-notebook-transport'
+
+tests/test_r676_gemini_notebook_specialists.py:40: KeyError</failure></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_actual_a2a_registration_and_missing_capability" time="0.043"><error message="failed on setup with &quot;AssertionError: Perfil operacional ausente: gemini-notebook-audit&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x72e50f5e6520&gt;, _basetemp=PosixPath('/tmp/pytest-of-marceloclaro/pytest-307'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def central_probe(tmp_path_factory):
+        # Reutiliza o ensaio A2A isolado R669, com os três novos papéis como entrada.
+        spec = importlib.util.spec_from_file_location("_r676_a2a_probe", ROOT / "tests/test_r669_requested_agents.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.ROLES = ROLES
+&gt;       return module.central_probe.__wrapped__(tmp_path_factory)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r676_gemini_notebook_specialists.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r669_requested_agents.py:100: in central_probe
+    shutil.copy2(card_path(slug), catalog / f"{slug}.md")
+                 ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+slug = 'gemini-notebook-audit'
+
+    def card_path(slug):
+        path = ROOT / "agents/catalog" / f"{slug}.md"
+&gt;       assert path.is_file(), f"Perfil operacional ausente: {slug}"
+               ^^^^^^^^^^^^^^
+E       AssertionError: Perfil operacional ausente: gemini-notebook-audit
+
+tests/test_r669_requested_agents.py:34: AssertionError</error></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_only_central_orchestrator_assigns_without_fake_completion[gemini-notebook-audit]" time="0.001"><error message="failed on setup with &quot;AssertionError: Perfil operacional ausente: gemini-notebook-audit&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x72e50f5e6520&gt;, _basetemp=PosixPath('/tmp/pytest-of-marceloclaro/pytest-307'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def central_probe(tmp_path_factory):
+        # Reutiliza o ensaio A2A isolado R669, com os três novos papéis como entrada.
+        spec = importlib.util.spec_from_file_location("_r676_a2a_probe", ROOT / "tests/test_r669_requested_agents.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.ROLES = ROLES
+&gt;       return module.central_probe.__wrapped__(tmp_path_factory)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r676_gemini_notebook_specialists.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r669_requested_agents.py:100: in central_probe
+    shutil.copy2(card_path(slug), catalog / f"{slug}.md")
+                 ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+slug = 'gemini-notebook-audit'
+
+    def card_path(slug):
+        path = ROOT / "agents/catalog" / f"{slug}.md"
+&gt;       assert path.is_file(), f"Perfil operacional ausente: {slug}"
+               ^^^^^^^^^^^^^^
+E       AssertionError: Perfil operacional ausente: gemini-notebook-audit
+
+tests/test_r669_requested_agents.py:34: AssertionError</error></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_only_central_orchestrator_assigns_without_fake_completion[gemini-notebook-upstream]" time="0.001"><error message="failed on setup with &quot;AssertionError: Perfil operacional ausente: gemini-notebook-audit&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x72e50f5e6520&gt;, _basetemp=PosixPath('/tmp/pytest-of-marceloclaro/pytest-307'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def central_probe(tmp_path_factory):
+        # Reutiliza o ensaio A2A isolado R669, com os três novos papéis como entrada.
+        spec = importlib.util.spec_from_file_location("_r676_a2a_probe", ROOT / "tests/test_r669_requested_agents.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.ROLES = ROLES
+&gt;       return module.central_probe.__wrapped__(tmp_path_factory)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r676_gemini_notebook_specialists.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r669_requested_agents.py:100: in central_probe
+    shutil.copy2(card_path(slug), catalog / f"{slug}.md")
+                 ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+slug = 'gemini-notebook-audit'
+
+    def card_path(slug):
+        path = ROOT / "agents/catalog" / f"{slug}.md"
+&gt;       assert path.is_file(), f"Perfil operacional ausente: {slug}"
+               ^^^^^^^^^^^^^^
+E       AssertionError: Perfil operacional ausente: gemini-notebook-audit
+
+tests/test_r669_requested_agents.py:34: AssertionError</error></testcase><testcase classname="tests.test_r676_gemini_notebook_specialists" name="test_only_central_orchestrator_assigns_without_fake_completion[gemini-notebook-transport]" time="0.001"><error message="failed on setup with &quot;AssertionError: Perfil operacional ausente: gemini-notebook-audit&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x72e50f5e6520&gt;, _basetemp=PosixPath('/tmp/pytest-of-marceloclaro/pytest-307'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def central_probe(tmp_path_factory):
+        # Reutiliza o ensaio A2A isolado R669, com os três novos papéis como entrada.
+        spec = importlib.util.spec_from_file_location("_r676_a2a_probe", ROOT / "tests/test_r669_requested_agents.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.ROLES = ROLES
+&gt;       return module.central_probe.__wrapped__(tmp_path_factory)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r676_gemini_notebook_specialists.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_r669_requested_agents.py:100: in central_probe
+    shutil.copy2(card_path(slug), catalog / f"{slug}.md")
+                 ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+slug = 'gemini-notebook-audit'
+
+    def card_path(slug):
+        path = ROOT / "agents/catalog" / f"{slug}.md"
+&gt;       assert path.is_file(), f"Perfil operacional ausente: {slug}"
+               ^^^^^^^^^^^^^^
+E       AssertionError: Perfil operacional ausente: gemini-notebook-audit
+
+tests/test_r669_requested_agents.py:34: AssertionError</error></testcase></testsuite></testsuites>

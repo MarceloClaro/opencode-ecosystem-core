@@ -1,0 +1,6 @@
+/* Inline MCP apps must shrink when a disclosure collapses. */
+html,
+body,
+#root {
+  min-height: 0;
+}

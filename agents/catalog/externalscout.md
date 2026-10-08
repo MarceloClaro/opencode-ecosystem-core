@@ -41,14 +41,14 @@ permission:
     .opencode/skills/context7/**: allow
     .tmp/external-context/**: allow
   bash:
-    *: deny
+    "*": deny
     curl -s https://context7.com/*: allow
     jq *: allow
   skill:
-    *: deny
+    "*": deny
     *context7*: allow
   task:
-    *: deny
+    "*": deny
 ---
 
 # ExternalScout

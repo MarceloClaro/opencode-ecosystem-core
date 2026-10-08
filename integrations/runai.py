@@ -669,7 +669,14 @@ class RunAIProvisioner:
             }
 
     def list_models(self) -> List[Dict[str, Any]]:
-        return [dict({"id": model_id}, **meta) for model_id, meta in MODELS.items()]
+        # R622: `id` é o nome histórico deste provider (consumido por
+        # `model_info()`, `health_check()` e clientes externos) e permanece por
+        # retrocompatibilidade; `model_id` é a chave canônica do ecossistema e
+        # era o que faltava, quebrando qualquer consumidor que padronizasse.
+        return [
+            dict({"id": model_id, "model_id": model_id}, **meta)
+            for model_id, meta in MODELS.items()
+        ]
 
     def model_info(self, model_id: str) -> Dict[str, Any]:
         resolved = self.resolve_model_id(model_id)

@@ -1,0 +1,318 @@
+% ============================================================
+%  MÓDULO 14 — EXPANSÃO POR LOTE: FICHAS DAS DEMAIS CATEGORIAS
+%  Lote por categoria (R613): 13 fichas condensadas no padrão de
+%  dimensões dos Módulos 12-13, cada uma com função, método, cálculo,
+%  limitação e citação DOI verificada com página.
+% ============================================================
+
+\chapter{Expansão por Lote — Fichas das Demais Categorias}
+\label{mod14}
+
+\roteirodidatico
+{As categorias agrupam agentes por área de trabalho. O objetivo aqui é aprender a interpretar uma ficha sem confundir o nome da especialidade com validação de competência.}
+{\emph{Categoria} organiza registros; \emph{capacidade declarada} descreve uma tarefa pretendida; \emph{critério} especifica uma condição de avaliação; \emph{validação} compara a saída com evidência adequada.}
+{Em cada área, identifique a tarefa, as instruções, o cálculo ou método, as fontes e o limite. Depois procure uma saída observável que permita avaliar o resultado.}
+{Rubricas e fórmulas só são informativas com variáveis definidas, dados rastreáveis, método reprodutível e tratamento de casos ausentes. Elas não equivalem a certificação profissional.}
+{O que essa ficha permite que o leitor faça, e que conclusão sobre qualidade ainda exigiria teste independente?}
+
+\casoguiado{agente de apoio jurídico}
+{Uma ficha pode orientar a busca de cláusulas e a organização de perguntas para revisão. Isso descreve uma tarefa auxiliar; não demonstra que o perfil interprete corretamente qualquer legislação ou substitua um profissional. Para avaliar sua utilidade, delimite jurisdição, data das fontes, tipos de documento, critérios de acerto e casos em que deve encaminhar a revisão a uma pessoa.}
+
+\begin{resultado}
+ESCOPO. Este módulo expande, em lote por categoria, as 13 categorias que não
+fazem parte do núcleo (expandido no Módulo 12: orquestração, blackboard/MCI,
+spec-engine, auditoria, evolução, reprodução). Cada ficha segue o mesmo padrão
+de leitura dos Módulos 12-13: conceito e função, método e cálculo, limite e
+anti-overclaim, e uma citação âncora verificada (biblioteca do Módulo 11) com
+recorte original, tradução e página.
+\end{resultado}
+
+% ------------------------------------------------------------------
+\section{Acadêmica (artigos, TCC, dissertações)}
+\elemento{ficha-academic}{\metainfo{Categoria}{academic} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação acadêmica converte o tema do usuário em problema
+de pesquisa delimitado e auditável, conduzindo o ciclo editorial (escopo, busca,
+evidências, estrutura, revisão, QA) com o padrão MASWOS como rubrica. O agente é
+reativo ao pedido, proativo em perseguir o objetivo declarado e social ao
+interagir pelo Blackboard — as três propriedades da tríade de agentes.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7: gatilho textual, skill
+\pth{pesquisa-artigo-qualis-a1}, subagentes 00--44. Cobertura de cada etapa:
+$C = 1 - k/n$, com $k$ critérios abertos em $n$ critérios da rubrica; a
+entrega só avança quando $C = 1$ e o teste de consistência passa.
+\end{metodo}
+\begin{aviso}
+LIMITE. Rubrica interna não é aceitação editorial; não prometer nota, Qualis
+nem aceite (R110).
+\end{aviso}
+\noindent\textit{Interpretação:} Uma rubrica de mérito organiza evidências e limites para tornar a avaliação examinável; não converte uma pontuação interna em parecer editorial. Cada critério precisa indicar o que conta como evidência, qual escala será aplicada e como casos ausentes serão tratados. Mesmo que todos os itens recebam pontuação máxima, a soma descreve aderência ao protocolo definido, não a probabilidade de aceitação nem a validade externa do achado \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{p.~e124 (resumo, p.~e124). é a justificativa do gate de validação externa da ativação acadêmica: sem controle de desenho e relato, a maioria dos achados publicados é falsa — o que a rubrica MASWOS e o QA auditam item a item}{There is increasing concern that most current published research findings are false}{Há preocupação crescente de que a maioria dos resultados de pesquisa atualmente publicados seja falsa.}{IOANNIDIS, 2005, p.~e124} % ------------------------------------------------------------------
+\section{Pesquisa (revisões e evidências)}
+\elemento{ficha-research}{\metainfo{Categoria}{research} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação de pesquisa opera revisão sistemática, living
+review, Evidence Graph e meta-análise com busca aberta e auditável; a função é
+transformar uma questão em um corpo de evidências localizadas e com limites de
+uso declarados.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7: gatilho de revisão, skill
+\pth{pesquisador-universal}. Cobertura da revisão = fontes verificadas por
+PMID/DOI sobre o total de candidatas; cada fonte entra com papel
+argumentativo explícito.
+\end{metodo}
+\begin{aviso}
+LIMITE. Corpus é dirigido pela query; revisão não substitui consenso de
+especialistas nem avaliação por pares.
+\end{aviso}
+\noindent\textit{Interpretação:} Uma revisão precisa permitir reconstruir a trilha de busca: bases consultadas, data, expressão, critérios de inclusão e exclusão e contagem em cada etapa. As igualdades entre identificados, duplicatas, registros triados, textos avaliados e estudos incluídos funcionam como controles de consistência do fluxo. Elas tornam o processo auditável, mas relato completo não substitui avaliação da qualidade dos estudos nem transforma uma busca dirigida por consulta em consenso da área \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{p.~n160 (resumo, p.~n160). é a justificativa da exigência de relato transparente e completo em toda revisão gerada pelo ecossistema: sem relato detalhado não é possível avaliar confiança e aplicabilidade dos achados}{The methods and results of systematic reviews should be reported in sufficient detail to allow users to assess the trustworthiness and applicability of the review findings}{Os métodos e resultados de revisões sistemáticas devem ser relatados em detalhe suficiente para permitir aos usuários avaliar a confiabilidade e a aplicabilidade dos achados da revisão.}{PAGE et al., 2021, p.~n160} % ------------------------------------------------------------------
+\section{Jurídica (auxjuris)}
+\elemento{ficha-legal}{\metainfo{Categoria}{legal} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação jurídica apoia pesquisa de jurisprudência,
+digestão documental e minutas (auxjuris research/summarizer/email/assistant) com
+revisão humana obrigatória; a função é reduzir custo de busca e aumentar a
+cobertura de apontamentos sem substituir o julgamento profissional.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7: gatilho de cláusula/minuta, rota auxjuris.
+Cobertura por apontamento = itens respondidos sobre itens da diligência; texto
+sem revisão humana recebe rótulo `rascunho` (fail-closed).
+\end{metodo}
+\begin{aviso}
+LIMITE. Não emite parecer autônomo; reagir a diligência exige humano (ver
+skill prestacao-contas-nota-dez).
+\end{aviso}
+\noindent\textit{Interpretação:} O papel de apoio decorre de uma restrição prática: o agente pode organizar documentos, localizar regras e resumir alternativas, mas não dispõe de todo o contexto factual nem da autoridade para decidir pelo interessado. A busca automatizada opera sobre opções factíveis $A_B$, limitadas por tempo, dados e permissões; a pessoa responsável avalia a opção à luz dos fatos que não estão codificados. Reduzir o custo de acesso à informação não equivale a transferir o julgamento jurídico \citref{SIMON, H. A. A behavioral model of rational choice. \emph{The Quarterly Journal of Economics}, v.~69, n.~1, p.~99-118, 1955}{10.2307/1884852}{p.~99--118 (trecho do texto integral, p.~99). é a justificativa do papel de apoio: a análise jurídica real opera com informação e computação limitadas — o agente organiza o acesso à informação, e o humano decide com o julgamento que o ambiente exige}{Broadly stated, the task is to replace the global rationality of economic man with a kind of rational behavior that is compatible with the access to information and the computational capacities that are actually possessed by organisms}{Em termos amplos, a tarefa é substituir a racionalidade global do homem econômico por um tipo de comportamento racional compatível com o acesso à informação e com as capacidades computacionais efetivamente possuídas pelos organismos.}{SIMON, 1955, p.~99} % ------------------------------------------------------------------
+\section{Dados e proveniência}
+\elemento{ficha-data}{\metainfo{Categoria}{data} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação de dados garante que todo dado usado pelo
+ecossistema tenha origem, versão, papel analítico e restrição de uso
+documentalmente fechados; a função é impedir que datasets sem proveniência
+entrem em análises.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7: gatilho de dataset/coleta; cobertura FAIR por
+dataset = princípios F/A/I/R atendidos com evidência sobre o total; provenance
+com esquema fechado por dataset.
+\end{metodo}
+\begin{aviso}
+LIMITE. Coleta de API pública pode quebrar sem aviso; versionar
+deterministicamente cada captura.
+\end{aviso}
+\noindent\textit{Interpretação:} Findable e Accessible são condições anteriores à análise: se um arquivo não pode ser localizado ou recuperado, interoperabilidade e reúso não chegam a ser exercitados. A descrição deve conservar identificador, origem, data de captura, esquema e condições de acesso; formatos e vocabulários explícitos permitem combinar fontes sem presumir que colunas homônimas tenham o mesmo significado. O esquema fechado reduz ambiguidades, mas também deve registrar ausências e mudanças de versão \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{p.~160018 (resumo, p.~160018). é a justificativa do esquema fechado de dados: a localização é o primeiro passo da reutilização — sem Findable/Accessible não há análise auditável}{Findability is the first step in the reuse of data}{A localização (encontrabilidade) é o primeiro passo para a reutilização dos dados.}{WILKINSON et al., 2016, p.~160018} % ------------------------------------------------------------------
+\section{Inferência (estatística e modelagem)}
+\elemento{ficha-inference}{\metainfo{Categoria}{inference} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação de inferência valida adequação de testes, modela
+formalmente e audita robustez (agentes 20--28); a função é separar padrão de
+ruído com desenho declarado.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; desenho, baseline, ablação, seeds fixas;
+generalização aferida por erro fora da amostra; nenhum efeito é reportado sem
+controle.
+\end{metodo}
+\begin{aviso}
+LIMITE. Resultado é contingente ao desenho declarado; não generaliza para
+população sem validação externa.
+\end{aviso}
+\noindent\textit{Interpretação:} O nível do conhecimento descreve o agente por suas metas, pelo que sabe e pelas ações que considera adequadas, em vez de reduzi-lo à sequência de instruções que executa. Para um objetivo $g$, a escolha pode ser representada por $a^*\in\mathrm{arg\,max}_{a\in A_f}U(a\mid g,b)$, em que $b$ é o estado de conhecimento e $A_f$ contém apenas ações permitidas e executáveis. A expressão explicita pressupostos; não afirma que o sistema conhece perfeitamente a utilidade nem elimina a verificação da ação escolhida \citref{NEWELL, A. The knowledge level. \emph{Artificial Intelligence}, v.~18, n.~1, p.~87-127, 1982}{10.1016/0004-3702(82)90012-1}{p.~87--127 (resumo, p.~87). é a justificativa do desenho do agente de inferência: acima do nível simbólico existe o nível do conhecimento, em que o agente age segundo o princípio da racionalidade — o que os agentes 20--28 materializam ao escolher ações de análise orientadas a objetivos}{there is another computer system level immediately above the symbol (or program) level and knowledge itself is the processing medium at this level and the principle of rationality plays a central role}{há outro nível de sistema de computador imediatamente acima do nível simbólico (ou de programa), e o próprio conhecimento é o meio de processamento nesse nível, e o princípio da racionalidade desempenha um papel central.}{NEWELL, 1982, p.~87} % ------------------------------------------------------------------
+\section{Engenharia (implementação e infra)}
+\elemento{ficha-engineering}{\metainfo{Categoria}{engineering} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação de engenharia implementa com protocolo SDD/TDD e
+opera infraestrutura; a função é transformar especificação em código com
+evidência executável antes do rótulo `concluído`.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; gate = testes verdes e specs com teste
+(R610); ambiente declarado; sem commit sem autorização.
+\end{metodo}
+\begin{aviso}
+LIMITE. Disciplina de processo não elimina complexidade acidental; nenhuma
+ferramenta isolada promete ordem de magnitude.
+\end{aviso}
+\noindent\textit{Interpretação:} A disciplina incremental contém o risco de mudança em unidades que podem ser inspecionadas: especifica-se um comportamento, registra-se uma verificação e só então se amplia o escopo. O ganho esperado está em localizar mais cedo a divergência entre requisito e implementação; disso não se infere que toda falha será detectada nem que a complexidade do domínio desaparecerá. Cada etapa deve indicar qual comportamento foi coberto e quais casos continuam fora do teste \citref{BROOKS, F. P. No silver bullet: essence and accidents of software engineering. \emph{Computer}, v.~20, n.~4, p.~10-19, 1987}{10.1109/MC.1987.1663532}{p.~10--19 (trecho inicial, p.~11). é a justificativa do protocolo SDD/TDD: ganho real vem de disciplina acumulada, não de ferramenta única; o Core exige spec+teste a cada etapa, não bala de prata}{There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity}{Não há um único desenvolvimento, seja em tecnologia ou técnica de gestão, que por si só prometa uma melhoria de uma ordem de magnitude em produtividade, confiabilidade e simplicidade dentro de uma década.}{BROOKS, 1987, p.~11} % ------------------------------------------------------------------
+\section{Testes (regressão e RED--GREEN--REFACTOR)}
+\elemento{ficha-testing}{\metainfo{Categoria}{testing} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação de testes garante a não-regressão do ciclo
+SDD/TDD e a reprodutibilidade do motor (famílias R462/R488/R581/R611); a função
+é dar evidência executável a cada mudança.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; cobertura de rotas = casos verdes sobre o
+total por família; testes primeiro (RED), implementação (GREEN), refatoração só
+com verde.
+\end{metodo}
+\begin{aviso}
+LIMITE. Teste verde não generaliza para produção; cobre o que o teste declara.
+\end{aviso}
+\noindent\textit{Interpretação:} Um teste de regressão é reproduzível quando explicita entrada, ambiente, versão, comando e resultado esperado. Para um conjunto declarado de $n$ casos, a cobertura simples $C_t=n_{pass}/n$ informa quantos passaram naquela execução; não demonstra que os casos representam toda a produção. Por isso, cada teste precisa estar ligado a uma especificação e preservar a saída do processo: outra pessoa pode repetir o procedimento e reconhecer o limite do que foi verificado \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{p.~1226--1227 (resumo, p.~1226). é a justificativa de cada suíte de regressão: testes são o padrão mínimo para julgar mudanças computacionais quando a replicação completa de uma edição não é viável — exatamente o papel dos testes de motor}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226} % ------------------------------------------------------------------
+\section{Literária (projeto Molambudos)}
+\elemento{ficha-literary}{\metainfo{Categoria}{literary} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação literária submete trechos, vozes e traduções a
+scanners (narrativa, personagem, estilo, símbolos, ética) e a guardas de voz
+autoral; a função é manter consistência estilística e ética de representação.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; score de consistência de voz = marcadores
+presentes sobre esperados; nenhum scanner aprova equivalência de tradução —
+toda aprovação é humana.
+\end{metodo}
+\begin{aviso}
+LIMITE. Estética não equivale a verdade histórica; representação exige
+revisão ética contínua.
+\end{aviso}
+\noindent\textit{Interpretação:} Na leitura de materiais culturais, monitorar a compreensão ajuda a perceber quando uma tradução obscurece o sentido ou quando uma descrição introduz inferência sem apoio no texto. A revisão separa o que a fonte diz, a interpretação proposta e o que permanece incerto. Essa distinção orienta a revisão humana e evita confundir consistência estilística com confirmação histórica \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{p.~906--911 (resumo, p.~906). é a justificativa dos guardas de voz: o monitoramento ativo e a regulação dos processos cognitivos — aqui aplicados à percepção do leitor e à consistência autoral}{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição refere-se, entre outras coisas, ao monitoramento ativo e à consequente regulação e orquestração desses processos.}{FLAVELL, 1979, p.~906} % ------------------------------------------------------------------
+\section{Cura da paisagem de agentes}
+\elemento{ficha-curation-agent}{\metainfo{Categoria}{curation-agent} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação de curadoria inventaria agentes externos e
+recomenda o formato e as capacidades declaradas do card a ser registrado; a
+função é manter a paisagem de agentes encontável e interoperável.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; paridade multicolleção = cards próprios sobre
+manifests externos; o card candidato só ativa após o gate R608 (frontmatter
+válido com descrição não vazia).
+\end{metodo}
+\begin{aviso}
+LIMITE. O card gerado é candidato; curadoria não substitui a permissão do
+gate de registro.
+\end{aviso}
+\noindent\textit{Interpretação:} Um cartão de agente só participa do casamento de capacidades se nome, descrição e capacidades estiverem definidos de forma comparável. Como controle editorial interno, pode-se calcular $C_f=n_f/n_r$, em que $n_f$ é o número de campos obrigatórios preenchidos e $n_r$ o total requerido; valores abaixo de $1$ indicam incompletude, enquanto $C_f=1$ atesta apenas preenchimento. A curadoria ainda precisa conferir evidências para as capacidades declaradas e a autorização para registrar o agente \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{p.~160018 (resumo, p.~160018). é a justificativa do formato de card: cada agente do catálogo deve ser encontrável (nome, descrição, capacidades) para ser reutilizável pelo casamento de capacidades do Blackboard}{Good data management is not a goal in itself, but is the key conduit leading to knowledge discovery and innovation}{O bom gerenciamento de dados não é um fim em si mesmo, mas o principal canal que conduz à descoberta de conhecimento e à inovação.}{WILKINSON et al., 2016, p.~160018} % ------------------------------------------------------------------
+\section{Integração (externos e MCP)}
+\elemento{ficha-integration}{\metainfo{Categoria}{integration} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação de integração compõe CLIs externas (gemini,
+goose, plandex, reasonix, haystack) como executores tolerantes; a função é
+orquestrar executores sem acoplar o Core a um único provedor.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; saúde = executores disponíveis sobre
+declarados; ausência do binário gera warn, nunca crash; resultado externo passa
+pelo gate do Core antes de qualquer rótulo.
+\end{metodo}
+\begin{aviso}
+LIMITE. Executor externo nunca é verificado sem validação interna (R110);
+APIs não oficiais podem quebrar sem aviso.
+\end{aviso}
+\noindent\textit{Interpretação:} Uma bridge compatível com o Contract Net anuncia tarefa com requisitos verificáveis, recolhe propostas de executores elegíveis e registra o contrato aceito. Se $C$ é o conjunto dos executores que atendem aos requisitos, a seleção pode minimizar um custo declarado $K_i$ apenas dentro de $C$; preço ou latência baixos não compensam ausência de capacidade. Após a execução, o resultado passa por validação independente do ato de delegar, preservando a distinção entre contrato cumprido e resposta correta \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{p.~1104--1113 (resumo, p.~1104). é a justificativa das bridges: anunciar a tarefa, receber licitações e firmar contrato com o executor capaz — o mesmo padrão de gerência/contratante que \pth{integrations/*} implementa para os CLIs externos}{The contract net protocol has been developed to specify problem-solving communication and control for nodes in a distributed problem solver}{O protocolo da rede de contratos foi desenvolvido para especificar comunicação e controle de resolução de problemas para nós em um solucionador distribuído de problemas.}{SMITH, 1980, p.~1104} % ------------------------------------------------------------------
+\section{MIRA (apresentações)}
+\elemento{ficha-mira-agent}{\metainfo{Categoria}{mira-agent} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação MIRA conduz o pipeline de apresentações
+(briefing, planejamento, animações, validação); a função é gerar decks
+navegáveis e auditáveis a partir de fontes.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; conformidade = critérios do
+\pth{mira-validator} atendidos sobre o total; velocidade de geração limitada
+pela fração sequencial do pipeline (Lei de Amdahl aplicada a renderização).
+\end{metodo}
+\begin{aviso}
+LIMITE. Estética não mede eficácia de comunicação; animação não é evidência.
+\end{aviso}
+\noindent\textit{Interpretação e cálculo:} Se, em uma estimativa hipotética, $80\%$ do trabalho de geração puder ser paralelizado e quatro trabalhadores forem usados, a Lei de Amdahl dá $S(4)=1/(0{,}2+0{,}8/4)=2{,}5$. Com oito trabalhadores, $S(8)=1/(0{,}2+0{,}8/8)\approx3{,}33$, antes de incluir comunicação e sincronização. Aumentar renderizadores reduz esse trecho do tempo, mas não acelera planejamento, revisão ou aprovação; os valores ilustram a conta e não medem este pipeline \citref{AMDAHL, G. M. Validity of the single processor approach to achieving large scale computing capabilities. In: \emph{AFIPS Conference Proceedings}. v.~30, p.~483-485, 1967}{10.1145/1465482.1465560}{p.~483--485 (recorte do texto integral, p.~484). é a justificativa do dimensionamento do pipeline de slides: acelerar apenas a renderização paralela, sem reduzir a fração sequencial (planejamento e validação), desperdiça esforço}{The effort expended on achieving high parallel processing rates is wasted unless it is accompanied by achievements in sequential processing rates of very nearly the same magnitude}{O esforço despendido para alcançar altas taxas de processamento paralelo é desperdiçado a menos que seja acompanhado por conquistas em taxas de processamento sequencial de magnitude muito próxima.}{AMDAHL, 1967, p.~484} % ------------------------------------------------------------------
+\section{MASWOS (padrão nota 10)}
+\elemento{ficha-maswos-agent}{\metainfo{Categoria}{maswos-agent} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação MASWOS audita micro e macro texto contra a
+rubrica 10/10; a função é separar cobertura de processo de mérito de qualidade,
+com gate fail-closed por critério.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; nota de rubrica = pontos atendidos sobre
+pontos ponderados; qualquer critério reprovado bloqueia o avanço; revisão
+por agente distinto do gerador (anti-overclaim R110).
+\end{metodo}
+\begin{aviso}
+LIMITE. Rubrica interna não é banca externa nem aceitação editorial.
+\end{aviso}
+\noindent\textit{Interpretação:} O gate fail-closed trata a ausência de evidência como motivo para não avançar, mas sua reprovação não é uma estimativa estatística de falsidade. Uma rubrica interna detecta inconsistências segundo critérios predefinidos; revisão externa, replicação e avaliação editorial respondem a perguntas diferentes. Essa separação evita aceitar uma alegação só porque um teste local passou e também evita declarar falsa toda alegação ainda não verificada externamente \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{p.~e124 (resumo, p.~e124). é a justificativa do gate fail-closed: sem controle de viés, a maioria dos achados é falsa; a rubrica MASWOS aplica o mesmo princípio — reprovação explícita ante de aprovação implícita}{There is increasing concern that most current published research findings are false}{Há preocupação crescente de que a maioria dos resultados de pesquisa atualmente publicados seja falsa.}{IOANNIDIS, 2005, p.~e124} % ------------------------------------------------------------------
+\section{Utilidade (busca, git, docs, revisão)}
+\elemento{ficha-utility}{\metainfo{Categoria}{utility} \hfill \metainfo{Ciclo}{R613}}
+\begin{descricao}
+CONCEITO e FUNÇÃO. A ativação de utilidade oferece serviços determinísticos de
+suporte: busca (pypi-searcher), git (git-manager), documentação
+(docs-writer) e revisão (reviewer); a função é dar rastro e convenção a
+operações de rotina.
+\end{descricao}
+\begin{metodo}
+MÉTODO e CÁLCULO. Caminho E1--E7; cobertura por serviço = operações com rastro
+sobre o total; convenções do repositório (mensagem de commit, secretos,
+idioma) têm precedência sobre defaults do agente.
+\end{metodo}
+\begin{aviso}
+LIMITE. Utilidade segue convenção, não cria política; revisão de serviço não é
+auditoria de mérito.
+\end{aviso}
+\noindent\textit{Interpretação:} Monitorar operações exige comparar estado esperado e observado, registrar a discrepância e indicar a ação tomada. Pode-se representar o desvio por $\Delta_t=x_t^{obs}-x_t^{esp}$; a métrica só é interpretável se unidade, período e regra de alerta forem definidos antes da leitura. O rastro permite localizar uma falha e revisar o procedimento, mas não comprova por si só que a política aplicada era adequada ao objetivo \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{p.~906--911 (resumo, p.~906). é a justificativa do rastro das operações de utilidade: monitorar ativamente cada operação de rotina permite regular o processo antes que o erro se propague — o mesmo monitoramento que define a metacognição}{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição refere-se, entre outras coisas, ao monitoramento ativo e à consequente regulação e orquestração desses processos.}{FLAVELL, 1979, p.~906} \begin{resultado}
+FECHO DO LOTE. As 13 categorias remanescentes foram percorridas com o mesmo
+padrão (conceito e função; método e cálculo; limite e anti-overclaim; citação
+âncora com recorte, tradução e página). Junto com os Módulos 12-13, o leitor
+tem agora: 6 fichas de núcleo (Módulo 12), o pipeline de ativação E1--E7 e a
+ativação por categoria (Módulo 13) e o lote completo das demais categorias
+(Módulo 14). As citações usam somente DOIs verificados e ativos da biblioteca
+do Módulo 11; nenhuma alegação de superioridade foi feita (R110).
+\end{resultado}
+
+% ----------------------------------------------------------------------
+%  N-14 — Leitura guiada do Módulo 14 (adicionada no ciclo R619)
+% ----------------------------------------------------------------------
+\section[Leitura guiada]{Leitura guiada — Módulo 14: enumerar ou resumir, a economia da representação}
+
+\elemento{Leitura guiada — Lote por categoria}{\metainfo{ID}{N-14} \hfill \metainfo{Ciclo}{R619} \hfill \metainfo{Estilo}{enumerar e resumir são formatos de grandezas diferentes}}
+
+
+\begin{descricao}
+\textbf{O fenômeno.} Um catálogo de $216$ agentes não é lido do começo ao fim --- ninguém faz isso. Uma síntese por categoria é lida, mas esconde o detalhe. Os dois formatos parecem servir ao mesmo propósito e, na verdade, resolvem problemas diferentes: um responde \emph{que existe?}, o outro responde \emph{o que é, em geral?}. O fenômeno a explicar é por que comprimir não é perder, desde que a compressão seja medida e o original permaneça acessível.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}\par
+(1) \emph{Ficha enumerada}: registro de uma linha por agente no Capítulo 10 --- formato exaustivo.\par
+(2) \emph{Ficha condensada}: registro por categoria, com função, método, cálculo e limitação --- formato resumido.\par
+(3) \emph{Coverage de condensação}: razão entre fichas condensadas e agentes do runtime.\par
+(4) \emph{Densidade de página}: páginas por ficha em cada formato.\par
+(5) \emph{Razão de compressão}: quão mais texto por item o formato condensado economiza.
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Por que $6\%$ de cobertura não é $6\%$ de informação?\par
+(1) As $13$ fichas condensadas descrevem $13$ categorias, cada uma com agentes múltiplos --- mas cada agente dentro de uma categoria é substituído por um representante. O leitor vê a estrutura, não a exhaustividade.\par
+(2) Logo, a cobertura de $6{,}0\%$ mede \emph{fichas}, não agentes nem capacidades. Uma categoria com $54$ agentes (a maior) e outra com $1$ ocupam a mesma fração de uma ficha condensada cada --- a representação é \emph{não uniforme} por natureza.\par
+(3) Isso não é defeito: é a função do formato. Quem precisa saber se existe um agente específico vai ao Capítulo 10; quem precisa entender \emph{como} se trabalha com uma categoria vem aqui. Os dois públicos são diferentes.\par
+(4) A armadilha metodológica: usar a densidade do formato condensado (\emph{poucas} páginas, alta informação por página) para concluir que a \emph{totalidade} do catálogo é pequena. A densidade de um resumo não mede o tamanho do que ele resume.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Estado medido em 29/09/2026, com $N = 216$ agentes no \pth{opencode.json}.\par
+(1) Cobertura de condensação: $\frac{13}{216} \approx 6{,}0\%$ dos agentes têm uma ficha condensada de categoria.\par
+(2) Densidade de página no formato enumerado: o Capítulo 10 ocupa $61$ páginas para $216$ fichas, ou seja $\frac{61}{216} \approx 0{,}28$ página por agente.\par
+(3) Densidade de página no formato condensado: este capítulo ocupava $10$ páginas (medido \emph{antes} desta seção, que por isso mesmo acrescenta páginas) para $13$ fichas, ou $\frac{10}{13} \approx 0{,}77$ página por ficha --- cerca de $2{,}7\times$ a densidade do formato enumerado.\par
+(4) A leitura correta do par (2) e (3): a ficha condensada é cerca de três vezes mais informativa por página que a enumerada, mas cobre $17\times$ menos itens. Informação por página e cobertura por página são grandezas diferentes e não se substituem --- concluir que $6\%$ dos agentes são ``pequenos demais para descrever'' seria erro de leitura.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Verificação mecânica da cobertura: \cod{grep -c \string\char123 ficha- mod-14-lote-categorias.tex} deve devolver $13$, e \cod{grep -c \string\char123 ficha- mod-10-catalogo.tex} deve devolver $216$. Se os dois números divergirem do esperado, ou um formato for regenerado sem o outro, a paridade está quebrada --- e a paridade entre o enumerado e o condensado é a invariante que garante que nenhum agente foi esquecido na compressão. Verificação de balanço: $13$ fichas condensadas \emph{+} $216$ fichas enumeradas não devem ser somadas --- elas descrevem conjuntos sobrepostos, e a soma seria a mesma inflação de R618 que o Capítulo 10 agora ensina a evitar.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} A condensação é legítima enquanto a taxonomia for estável e a representatividade for verificável. Ela quebra em dois casos: (1) quando uma categoria mistura agentes com capacidades heterogêneas, a ficha condensada vira uma média que não descreve nenhum membro --- por isso o representante escolhido importa mais que a média; (2) quando o runtime cresce e uma categoria ultrapassa a capacidade de um parágrafo, a condensação começa a omitir e o leitor perde a informação sem perceber. A salvaguarda é mecânica: a razão de compressão é medida a cada ciclo ($17\times$ em 2026), e um salto para a ordem de $100\times$ é o sinal de que o formato condensado deixou de ser honesto. Limite equivalente: a existência de uma ficha condensada \emph{não} atesta que o agente funciona --- a cobertura documental de 100\% do Capítulo 10 e a cobertura funcional são grandezas distintas, e só a segunda exige execução.
+\end{aviso}
+
+\begin{aviso}
+\textbf{Exercícios.}\par
+(E1) Calcule a cobertura de condensação depois de uma atualização que crie $10$ agentes novos, todos na maior categoria. A variação percentual é significativa?\par
+(E2) Escolha duas categorias de tamanhos muito diferentes (por exemplo, a maior e uma com poucos agentes) e calcule a densidade de página de suas fichas condensadas. A diferença é de ordem de grandeza?\par
+(E3) Some $216 + 13$ e explique, com o vocabulário do Capítulo 10, por que esse total é um erro de reconciliação. Qual é a operação correta entre os dois conjuntos?\par
+(E4) Proponha um critério objetivo para escolher o agente representante de uma categoria. Ele é verificável apenas por inspeção ou também por teste automático?
+\end{aviso}
+
+\noindent\textit{Interpretação:} A identificabilidade do registro permite tornar a reconciliação reproduzível. Se o runtime contém $N_r$ agentes e o catálogo descreve $N_c$, a conferência deve explicar tanto os elementos de $R\setminus C$ quanto os de $C\setminus R$; comparar apenas os totais não basta, pois conjuntos diferentes podem ter o mesmo tamanho. A questão seguinte solicita uma regra objetiva de seleção, verificável por inspeção dos campos e por um caso de entrada conhecido \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{p.~160018 (tabela 1, princípio F2). ancora a exigência de que um registro seja descritivo e identificável, e portanto legível por máquina: é o que permite reconciliar automaticamente as $216$ entradas do runtime com as fichas do catálogo em vez de conferir uma a uma}{R1.2. (meta)data are associated with detailed provenance}{R1.2. (meta)dados são associados a proveniência detalhada.}{WILKINSON et al., 2016, p.~160018}

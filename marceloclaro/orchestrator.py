@@ -22,7 +22,7 @@ import uuid
 import time
 import logging
 from dataclasses import dataclass
-from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 import os
 import sys
@@ -54,7 +54,6 @@ from reasoning.production_scaffolds import audit_scientific_manuscript
 from agentic_science_v2.paper_composer import compose_paper as compose_paper_core
 from evolution import evolution_registry
 from evolution.audit_gate import EvolutionAuditGate
-from evolution.cycles import EvolutionCycle as _EvolutionCycle
 from integrations.antigravity import antigravity_bridge
 from marceloclaro.catalog_loader import register_catalog_agents
 
@@ -129,6 +128,9 @@ class MarceloClaroOrchestrator:
 
         # MiroFish (enxame preditivo) — carregamento tardio
         self._swarm_validator = None
+
+        # Federação de artefatos multi-harness (SPEC-935-R621) — carregamento tardio
+        self._harness_registry = None
 
         # Camada Transformer (inspiração: Vaswani 2017, Perceiver, HTM, Aletheia)
         self.attention_router = AttentionRouter()
@@ -1304,6 +1306,45 @@ class MarceloClaroOrchestrator:
     # BUSCAS UNIFICADAS + RAG APRIMORADO + REFERÊNCIAS ABNT (SPEC-935-R436)
     # ------------------------------------------------------------------
     @property
+    def book_library(self):
+        """Biblioteca técnica local; carregamento não inicia ingestão nem modelos."""
+        if getattr(self, "_book_library", None) is None:
+            from rag.book_library import LocalBookLibrary
+
+            self._book_library = LocalBookLibrary()
+        return self._book_library
+
+    def library_status(self) -> Dict[str, Any]:
+        """Consulta inventário e atualidade das fontes sem alterar o índice."""
+        return self.book_library.status()
+
+    def library_index(self) -> Dict[str, Any]:
+        """Atualiza explicitamente o índice da biblioteca PDF local."""
+        return self.book_library.index()
+
+    def library_query(self, query: str, top_k: int = 5) -> Dict[str, Any]:
+        """Recupera trechos citáveis; ausência de suporte resulta em abstenção."""
+        return self.book_library.query(query, top_k=top_k)
+
+    def library_page(self, book_id: str, page: int) -> Dict[str, Any]:
+        """Lê página identificada por hash; não aceita caminhos do cliente."""
+        return self.book_library.read_page(book_id, page)
+
+    def finetuning_prepare_data(self, records: List[Dict[str, Any]],
+                               seed: int = 42) -> Dict[str, Any]:
+        """Valida e separa dados por grupo antes de qualquer treinamento."""
+        from integrations.finetuning_data import validate_and_split
+
+        return validate_and_split(records, seed=seed)
+
+    def finetuning_evaluate(self, baseline: Dict[str, Any], candidate: Dict[str, Any],
+                           min_improvement: float = 0.0) -> Dict[str, Any]:
+        """Compara medições informadas no mesmo conjunto; não executa modelos."""
+        from integrations.finetuning_data import evaluation_gate
+
+        return evaluation_gate(baseline, candidate, min_improvement=min_improvement)
+
+    @property
     def search_rag(self):
         if getattr(self, "_search_rag", None) is not None:
             return self._search_rag
@@ -1536,6 +1577,98 @@ class MarceloClaroOrchestrator:
         return self.attention_router.explain(description, required_capabilities or [], cards)
 
     # ------------------------------------------------------------------
+    # FEDERAÇÃO DE ARTEFATOS MULTI-HARNESS (SPEC-935-R621)
+    # ------------------------------------------------------------------
+    def harness_federation(self, *, repo_root: Optional[str] = None, refresh: bool = False):
+        """
+        Registro preguiçoso dos artefatos de Claude, Codex, Antigravity e ChatGPT.
+
+        A construção é diferida de propósito: a harvester faz varredura de disco
+        e, em uma máquina sem nenhum desses harnesses, custaria tempo de start
+        para devolver uma lista vazia. O import também é local para que o
+        carregamento do orquestrador não dependa do PyYAML estar presente.
+        """
+
+        if self._harness_registry is None or refresh or repo_root:
+            from transformer.harness_head import HarnessRegistry
+            from integrations.harness_federation.harvest import REPO_ROOT
+
+            self._harness_registry = HarnessRegistry(repo_root=repo_root or REPO_ROOT)
+        return self._harness_registry
+
+    @property
+    def integration_service(self):
+        """Contratos de agentes, hooks, MCPs e artefatos, sem iniciar executores."""
+        if getattr(self, "_integration_service", None) is None:
+            from marceloclaro.integration_service import CoreIntegrationService
+            from integrations.harness_federation.harvest import REPO_ROOT
+            self._integration_service = CoreIntegrationService(
+                REPO_ROOT, registry=self.harness_federation())
+        return self._integration_service
+
+    def integration_status(self) -> Dict[str, Any]:
+        return self.integration_service.status()
+
+    def integration_handoff(self, artifact_id: str) -> Dict[str, Any]:
+        return self.integration_service.handoff(artifact_id)
+
+    def integration_skill_plan(self, skill_name: str) -> Dict[str, Any]:
+        return self.integration_service.skill_plan(skill_name)
+
+    def route_to_harness(
+        self,
+        description: str,
+        required_capabilities: Optional[List[str]] = None,
+        *,
+        top_k: int = 5,
+        repo_root: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """
+        Roteia uma tarefa para o artefato de harness mais adequado (R621).
+
+        Devolve o relatório auditável da cabeça ``harness`` (score por cabeça,
+        pesos, motivo), nunca apenas o nome do vencedor. ``ecosystems_present``
+        e ``counted_agents`` tornam explícito que o roteamento ordena artefatos
+        federados e não os agentes do catálogo — são conjuntos disjuntos.
+        """
+
+        registry = self.harness_federation(repo_root=repo_root)
+        cards = registry.cards()
+        report = registry.route(description, list(required_capabilities or []))
+        inventory = registry.inventory()
+        report.update({
+            "top_k": top_k,
+            "ranking": report["ranking"][:max(1, top_k)],
+            "counted_agents": len(cards),
+            "ecosystems_present": list(inventory.get("ecosystems_present", [])),
+            "ecosystems_missing": list(inventory.get("ecosystems_missing", [])),
+        })
+        return report
+
+    def emit_harness_artifacts(
+        self,
+        *,
+        kinds: Optional[Sequence[str]] = None,
+        dry_run: bool = True,
+        require_license: bool = False,
+        repo_root: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """
+        Portabilidade dos artefatos federados para ``.opencode/`` (R621).
+
+        ``dry_run=True`` é o padrão deliberado: portar artefato de terceiro é
+        uma escrita em massa no repositório e não deve acontecer por efeito
+        colateral de uma chamada de roteamento.
+        """
+
+        registry = self.harness_federation(repo_root=repo_root)
+        artifacts = registry.artifacts()
+        if kinds:
+            wanted = set(kinds)
+            artifacts = [a for a in artifacts if a.kind in wanted]
+        return registry.emitter(dry_run=dry_run).emit_all(artifacts, require_license=require_license)
+
+    # ------------------------------------------------------------------
     # CAMADA SDD/TDD (Specification-Driven + Test-Driven Development)
     # ------------------------------------------------------------------
     def delegate_with_spec(self, description: str,
@@ -1622,11 +1755,179 @@ class MarceloClaroOrchestrator:
     # ------------------------------------------------------------------
     # SUBSISTEMAS AVANÇADOS (portados do OpenCode_Ecosystem original)
     # ------------------------------------------------------------------
+    def _record_knowledge_outcome(self, topic: str, context: str,
+                                  observation: Dict[str, Any]) -> Dict[str, Any]:
+        """Persiste conhecimento delimitado, sem atribuir nota científica ao agente."""
+        import hashlib
+        import json
+        scope = {"topic": topic, "context": context, "targets": observation.get("target_state"),
+                 "method": observation.get("method"),
+                 "dataset_sha256": observation.get("dataset_provenance", {}).get("sha256")}
+        scope_id = hashlib.sha256(json.dumps(scope, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+        semantic_topic = f"{topic}.{scope_id}"
+        previous = dict(metabus.memory.semantic.get(semantic_topic, {}).get("metadata", {}))
+        observation = {**observation, "scope_id": scope_id,
+                       "previous_observation_id": previous.get("last_observation_id")}
+        observation_id = metabus.memory.record_observation(self.id, context[:2000], observation)
+        metabus.memory.upsert_semantic_topic(
+            semantic_topic, metadata={"last_observation_id": observation_id,
+                             "last_status": observation.get("status"),
+                             "last_report_sha256": observation.get("report_sha256"),
+                             "observations_count": previous.get("observations_count", 0) + 1,
+                             "externally_validated": False}, strict=True)
+        metabus.publish(topic + ".observed", {**observation, "observation_id": observation_id},
+                        source_agent=self.id)
+        return {"observation_id": observation_id, "persisted": True, "scope_id": scope_id,
+                "previous_observation_id": previous.get("last_observation_id"),
+                "state_transition": {"from": previous.get("last_status"), "to": observation.get("status")}}
+
+    def knowledge_evolution_plan(self, **config: Any) -> Dict[str, Any]:
+        """Potenciais → composição → dependências → roadmap, sob coordenação central."""
+        from marceloclaro.knowledge_evolution import KnowledgeEvolutionService
+        report = KnowledgeEvolutionService().plan(**config)
+        observation = {"status": report["status"], "executed": False,
+                       "report_sha256": report["report_sha256"],
+                       "target_state": report["target_state"],
+                       "evolution_gap": report["evolution_gap"],
+                       "observed_capabilities": report["observed_capabilities"],
+                       "score_kind": "heuristic", "externally_validated": False}
+        report["metacognition"] = {
+            **self._record_knowledge_outcome("knowledge.evolution", report["problem"], observation),
+            "confidence_promoted": False, "execution_promoted": False}
+        return report
+
+    def scientific_reproducible_run(self, **config: Any) -> Dict[str, Any]:
+        """Executa o percurso R663 preservando bloqueios e evidência computacional."""
+        from marceloclaro.knowledge_evolution import validate_science_config
+        from research.provenance_pipeline import ScientificProvenancePipeline
+        config = validate_science_config(config)
+        report = ScientificProvenancePipeline().run(**config)
+        dataset = report.get("provenance", {}).get("dataset", {})
+        observation = {"status": report.get("status"), "reason": report.get("reason"),
+                       "executed": report.get("experiment_executed") is True,
+                       "method": config["method"],
+                       "dataset_provenance": {key: dataset.get(key) for key in ("title", "source_url", "sha256", "evidence_kind")},
+                       "reproduction": report.get("reproduction", {}),
+                       "computational_review": report.get("computational_review", {}),
+                       "artifacts": report.get("artifacts", {}),
+                       "externally_validated": False,
+                       "scope": "Uma análise específica; não comprova competência universal."}
+        # Evidências de cada etapa ficam no manifesto; a memória mantém o recibo.
+        report["metacognition"] = {
+            **self._record_knowledge_outcome("science.reproducible", config["question"], observation),
+            "confidence_promoted": False, "externally_validated": False}
+        return report
+
+    def scientific_runtime_run(self, **config: Any) -> Dict[str, Any]:
+        """R671: processo externo e inferência local auditada de Hermes/MiroFish."""
+        from marceloclaro.runtime_actions import validate_action
+        from integrations.live_scientific_runtime import LiveScientificRuntime
+        config = validate_action("runtime", config)
+        report = LiveScientificRuntime().run(config)
+        observation = {"status": report["status"], "method": f"runtime:{config['runtime']}:{config['model']}",
+                       "external_process_executed": report.get("external_process_executed", False),
+                       "inference_executed": report.get("inference_executed", False),
+                       "model_calls": report.get("model_calls", 0), "artifacts": report.get("artifacts", {}),
+                       "externally_validated": False}
+        report["metacognition"] = {**self._record_knowledge_outcome("science.runtime", config["prompt"], observation),
+                                   "confidence_promoted": False}
+        return report
+
+    def scientific_dataset_download(self, **config: Any) -> Dict[str, Any]:
+        from pathlib import Path
+        from marceloclaro.runtime_actions import validate_action
+        from integrations.dataset_cli import DatasetCliIntegration
+        config = validate_action("dataset", config)
+        report = DatasetCliIntegration(root=Path(__file__).resolve().parents[1]).download(**config)
+        observation = {"status": report["status"], "method": "dataset_download",
+                       "executed": report.get("download_executed", False),
+                       "dataset_provenance": {"sha256": report.get("manifest_sha256")},
+                       "manifest_path": report.get("manifest_path"), "externally_validated": False}
+        report["metacognition"] = {**self._record_knowledge_outcome("science.dataset", config["provider"] + ":" + config["dataset_id"], observation),
+                                   "confidence_promoted": False}
+        return report
+
+    def scientific_dataset_custom(self, **config: Any) -> Dict[str, Any]:
+        from pathlib import Path
+        from marceloclaro.runtime_actions import validate_action
+        from integrations.dataset_cli import DatasetCliIntegration
+        config = validate_action("personalizar", config)
+        report = DatasetCliIntegration(root=Path(__file__).resolve().parents[1]).build_custom(**config)
+        observation = {"status": report["status"], "method": "dataset_composition",
+                       "rows": report.get("rows"), "manifest_path": report.get("manifest_path"),
+                       "dataset_provenance": {"sha256": report.get("manifest_sha256")},
+                       "externally_validated": False}
+        report["metacognition"] = {**self._record_knowledge_outcome("science.dataset.custom", config.get("name", "iris-core-personalizado"), observation),
+                                   "confidence_promoted": False}
+        return report
+
+    def scientific_plugin_action(self, operation: str, **config: Any) -> Dict[str, Any]:
+        import os
+        from pathlib import Path
+        from marceloclaro.runtime_actions import validate_action
+        from integrations.scientific_plugins import ScientificPluginService
+        config = validate_action("plugins", {"operation": operation, **config})
+        config.pop("operation")
+        service = ScientificPluginService(Path(__file__).resolve().parents[1])
+        if operation == "status":
+            return service.status()
+        if operation == "sync":
+            default_cache = "/mnt/c/Users/marce/.codex/plugins/cache" if os.name != "nt" else str(Path.home() / ".codex/plugins/cache")
+            report = service.sync(cache_root=config.pop("cache_root", os.environ.get("OPENCODE_PLUGIN_CACHE", default_cache)), **config)
+        elif operation == "skill":
+            return service.skill(**config)
+        elif operation == "request":
+            report = service.request(config["plugin_id"], config["action"], config["arguments"], intent=config.get("intent"))
+        elif operation == "result":
+            return service.result(**config)
+        elif operation == "response":
+            report = service.accept_host_response(**config)
+        else:
+            report = service.run_local(config["plugin_id"], config["action"], config.get("arguments"))
+        observation = {"status": report["status"], "method": "plugin:" + operation,
+                       "plugin_id": report.get("plugin_id", config.get("plugin_id")),
+                       "request_id": report.get("request_id"), "response_sha256": report.get("response_sha256"),
+                       "executed": report.get("executed", False),
+                       "host_reported_execution": report.get("host_reported_execution", False),
+                       "externally_validated": False}
+        report["metacognition"] = {**self._record_knowledge_outcome("science.plugin", str(observation["plugin_id"] or "selected_plugins"), observation),
+                                   "confidence_promoted": False}
+        return report
+
+    def gemini_notebook_action(self, operation: str, **config: Any) -> Dict[str, Any]:
+        """R674: suporte oficial CLI/MCP/skill com recibos operacionais limitados."""
+        import hashlib
+        import json
+        from pathlib import Path
+        from integrations.gemini_notebook import GeminiNotebookService, validate_notebook_config
+        request = validate_notebook_config({"operation": operation, **config})
+        report = GeminiNotebookService(Path(__file__).resolve().parents[1]).run(**request)
+        report["request_sha256"] = hashlib.sha256(json.dumps(
+            request, sort_keys=True, ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+        identity = config.get("tool", ":".join(report.get("command_path", [])) or operation)
+        target_hash = hashlib.sha256(json.dumps(
+            config.get("arguments", config.get("argv", {})), sort_keys=True,
+            ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+        observation = {"status": report.get("status"), "method": "gemini-notebook:" + operation,
+                       "operation": operation, "tool": config.get("tool"),
+                       "effect": report.get("effect"), "process_executed": report.get("process_executed", False),
+                       "response_sha256": report.get("response_sha256", report.get("stdout_sha256")),
+                       "request_sha256": report["request_sha256"],
+                       "catalog_sha256": report.get("catalog_sha256"),
+                       "skill_sha256": report.get("skill_sha256"),
+                       "artifact_sha256": [item.get("sha256") for item in report.get("artifacts", [])],
+                       "externally_validated": False}
+        report["metacognition"] = {
+            **self._record_knowledge_outcome("science.gemini-notebook", str(identity) + ":" + target_hash, observation),
+            "confidence_promoted": False, "externally_validated": False}
+        return report
+
     def diagnose(self, corpus: str, domain: str = "",
                  goals: Optional[List[Dict[str, Any]]] = None,
                  deep: bool = False,
                  include_legal_impact: bool = False,
-                 legal_params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+                 legal_params: Optional[Dict[str, Any]] = None,
+                 knowledge_config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Pipeline de diagnóstico com os scanners (noológico, teleológico,
         evolutivo, potentiality, social impact, reversa e opcionalmente legal impact).
 
@@ -1635,6 +1936,9 @@ class MarceloClaroOrchestrator:
         sequenciamento), priorização epistemológica (erro → ausência →
         oportunidade) e gerador de sucessores plausíveis (DNA estrutural).
         Registra o resultado na memória metacognitiva."""
+        if knowledge_config is not None:
+            from marceloclaro.knowledge_evolution import validate_plan_config
+            knowledge_config = validate_plan_config(knowledge_config)
         report = diagnostic_pipeline.run(
             corpus,
             domain=domain,
@@ -1643,6 +1947,8 @@ class MarceloClaroOrchestrator:
             include_legal_impact=include_legal_impact,
             legal_params=legal_params,
         )
+        if knowledge_config is not None:
+            report["knowledge_evolution"] = self.knowledge_evolution_plan(**knowledge_config)
         if include_legal_impact and "legal_impact" in report:
             params = legal_params or {}
             domain_id = params.get("domain_id", "general")
@@ -1827,19 +2133,15 @@ class MarceloClaroOrchestrator:
                 evidence_count=evidence_count,
                 abstained=abstained,
             ))
-            metabus.memory.add_reflection(
-                agent_id=self.id,
-                task_context=f"{stage}: {seed_domain[:80]}",
-                reflection=reflection,
-                score=after,
-            )
+            metabus.memory.record_observation(
+                self.id, f"{stage}: {seed_domain[:80]}",
+                {"outcome": outcome, "reflection": reflection,
+                 "confidence_proxy": after, "score_kind": "internal_heuristic",
+                 "externally_validated": False})
             metabus.publish_subsystem_event(
                 "scientific_pipeline", f"{stage}.completed",
                 {"outcome": outcome, "confidence": after},
                 source_agent=self.id,
-            )
-            self.trust.learn(
-                f"scientific_pipeline:{stage}", success=(outcome == "success"),
             )
 
         try:
@@ -1890,7 +2192,10 @@ class MarceloClaroOrchestrator:
             timeline["r102"] = round(time.time() - t1, 1)
             stages["r102"] = r102
             r102_reports = r102.get("reports", [])
-            r102_failed = r102.get("status") == "error"
+            r102_ineligible = (r102.get("status") in {"error", "blocked", "simulation", "demonstration", "offline"}
+                               or r102.get("evidence_eligible") is not True
+                               or r102.get("experiment_executed") is not True)
+            r102_failed = r102.get("status") == "error" or r102_ineligible
             r102_confidence = 0.0 if r102_failed else (
                 float(r102_reports[-1].get("confidence", 0.5))
                 if r102_reports else 0.5
@@ -1905,6 +2210,19 @@ class MarceloClaroOrchestrator:
                 evidence_count=len(r102_reports),
                 error_type="pipeline_error" if r102_failed else None,
             )
+
+            if r102_ineligible:
+                reason = "Deep Research sem evidência elegível de execução. Use scientific_reproducible_run com fontes e dados reais."
+                gate_decision = {"passed": False, "reason": reason,
+                                 "evidence_eligible": False, "experiment_executed": False}
+                metabus.publish_subsystem_event("scientific_pipeline", "gate.blocked",
+                                                gate_decision, source_agent=self.id)
+                timeline["total"] = round(time.time() - start, 1)
+                return {"status": "blocked", "reason": reason, "seed_domain": seed_domain,
+                        "venue": venue, "timeline": timeline, "stages": stages,
+                        "gate_decision": gate_decision, "calibrated_confidences": calibrated_confidences,
+                        "metacognitive_report": MetacognitiveEvaluator().evaluate(traces),
+                        "evidence_eligible": False, "experiment_executed": False}
 
             # R103 — Peer Review
             t2 = time.time()
@@ -2834,7 +3152,7 @@ class MarceloClaroOrchestrator:
         baixar para ``<folder>/audio/``.
 
         ``executor`` é injetável para testes herméticos; em produção usa o
-        executor real (binário `nlm` do PATH/NLM_BIN).
+        executor real (binário `nlm` da .venv do Core, PATH ou NLM_BIN).
         """
         from pathlib import Path as _P
 
@@ -2842,7 +3160,7 @@ class MarceloClaroOrchestrator:
             ALLOWED_AUDIO_FORMATS,
             ALLOWED_LENGTHS,
             NlmPodcastExecutor,
-            NlmPodcastReceipt,
+            _artifact_proof,
         )
 
         steps: List[Any] = []
@@ -2892,46 +3210,76 @@ class MarceloClaroOrchestrator:
 
         audio_dir = folder / "audio"
         audio_dir.mkdir(parents=True, exist_ok=True)
+        previous_audio = {path.resolve() for path in audio_dir.iterdir() if path.is_file()}
         step = exec_.download_audio(notebook_id, artifact_id, str(audio_dir))
         steps.append(_step_dict(step))
         if not step.success:
             return self._podcast_fail("download_audio", steps, step, notebook_id)
 
-        audio_file = _find_audio(audio_dir)
+        # O recibo desta chamada identifica o arquivo; não selecionar áudio
+        # preexistente da pasta apenas por sua extensão.
+        audio_path = getattr(step, "artifact_path", None)
+        candidate = _P(audio_path) if isinstance(audio_path, str) and audio_path else None
+        proof = None
+        if (candidate is not None and candidate.resolve().is_relative_to(audio_dir.resolve())
+                and candidate.resolve() not in previous_audio):
+            proof = _artifact_proof(candidate)
+        if proof is None:
+            return self._podcast_fail("download_audio", steps, step, notebook_id,
+                                      reason="download sem arquivo atual regular nao vazio")
+        audio_file, audio_sha256, audio_bytes = proof
+        receipt_hash = getattr(step, "artifact_sha256", None)
+        if receipt_hash is not None and receipt_hash != audio_sha256:
+            return self._podcast_fail("download_audio", steps, step, notebook_id,
+                                      reason="hash do audio difere do recibo de download")
         report = {
             "ok": True,
+            "status": "completed",
             "steps": steps,
             "notebook_id": notebook_id,
             "artifact_id": artifact_id,
             "audio": audio_file,
+            "audio_sha256": audio_sha256,
+            "audio_bytes": audio_bytes,
+            "externally_validated": False,
             "nota": (
                 "Artefato de difusão editorial (SPEC-972); sem validação "
                 "científica do conteúdo gerado."
             ),
         }
+        observation = {"status": "completed", "method": "notebook_podcast",
+                       "notebook_id": notebook_id, "artifact_id": artifact_id,
+                       "audio_sha256": audio_sha256, "audio_bytes": audio_bytes,
+                       "externally_validated": False}
         try:
-            metabus.memory.add_reflection(
-                agent_id=self.id,
-                task_context=f"podcast de {folder.name[:60]}",
-                reflection=(
-                    f"Podcast gerado via nlm: notebook={notebook_id}, "
-                    f"audio={audio_file or 'pendente'}."
-                ),
-                score=0.9 if audio_file else 0.6,
-            )
+            report["metacognition"] = {
+                **self._record_knowledge_outcome("science.notebook.podcast", notebook_id, observation),
+                "confidence_promoted": False}
         except Exception:
-            pass
+            report["metacognition"] = {"persisted": False, "confidence_promoted": False}
         return report
 
     def _podcast_fail(self, etapa: str, steps: List[Any], step: Any,
-                      notebook_id: str = "") -> Dict[str, Any]:
-        return {
+                      notebook_id: str = "", reason: Optional[str] = None) -> Dict[str, Any]:
+        report = {
             "ok": False,
+            "status": "failed",
             "etapa": etapa,
-            "error": step.reason,
+            "error": reason or step.reason,
             "steps": steps,
             "notebook_id": notebook_id or None,
+            "externally_validated": False,
         }
+        observation = {"status": "failed", "method": "notebook_podcast",
+                       "stage": etapa, "notebook_id": notebook_id or None,
+                       "externally_validated": False}
+        try:
+            report["metacognition"] = {
+                **self._record_knowledge_outcome("science.notebook.podcast", notebook_id or etapa, observation),
+                "confidence_promoted": False}
+        except Exception:
+            report["metacognition"] = {"persisted": False, "confidence_promoted": False}
+        return report
 
     def register_mira_agent(self) -> str:
         """Registra de forma idempotente o executor MIRA no Blackboard."""

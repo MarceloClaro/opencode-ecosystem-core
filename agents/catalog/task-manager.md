@@ -32,7 +32,7 @@ mode: subagent
 temperature: 0.1
 permission:
   bash:
-    *: deny
+    "*": deny
     npx ts-node*task-cli*: allow
     mkdir -p .tmp/tasks*: allow
     mv .tmp/tasks*: allow
@@ -45,9 +45,9 @@ permission:
   task:
     contextscout: allow
     externalscout: allow
-    *: deny
+    "*": deny
   skill:
-    *: deny
+    "*": deny
     task-management: allow
 ---
 

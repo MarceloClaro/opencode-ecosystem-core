@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="28" skipped="0" tests="29" time="3.511" timestamp="2026-10-04T17:22:50.068564-03:00" hostname="OPENCODE"><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_core_venv_binary_is_resolved_without_path" time="0.793"><failure message="AssertionError: assert None == '/tmp/pytest-of-marceloclaro/pytest-260/test_core_venv_binary_is_resol0/.venv/bin/nlm'&#10; +  where None = &lt;agent_runners.nlm_executor.NlmPodcastExecutor object at 0x719985aeecf0&gt;.bin_path&#10; +  and   '/tmp/pytest-of-marceloclaro/pytest-260/test_core_venv_binary_is_resol0/.venv/bin/nlm' = str(PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_core_venv_binary_is_resol0/.venv/bin/nlm'))">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x719985b0a2c0&gt;
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_core_venv_binary_is_resol0')
+
+    def test_core_venv_binary_is_resolved_without_path(monkeypatch, tmp_path):
+        binary = tmp_path / ".venv/bin/nlm"
+        binary.parent.mkdir(parents=True)
+        binary.write_text("#!/bin/sh\n")
+        binary.chmod(0o755)
+        monkeypatch.setattr(module, "_REPO_ROOT", tmp_path, raising=False)
+        monkeypatch.setattr(module.shutil, "which", lambda name: None)
+        executor = NlmPodcastExecutor(env={})
+&gt;       assert executor.bin_path == str(binary)
+E       AssertionError: assert None == '/tmp/pytest-of-marceloclaro/pytest-260/test_core_venv_binary_is_resol0/.venv/bin/nlm'
+E        +  where None = &lt;agent_runners.nlm_executor.NlmPodcastExecutor object at 0x719985aeecf0&gt;.bin_path
+E        +  and   '/tmp/pytest-of-marceloclaro/pytest-260/test_core_venv_binary_is_resol0/.venv/bin/nlm' = str(PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_core_venv_binary_is_resol0/.venv/bin/nlm'))
+
+tests/test_r675_notebook_podcast_truthfulness.py:28: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_explicit_empty_binary_disables_fallback" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = available()&#10; +    where available = &lt;agent_runners.nlm_executor.NlmPodcastExecutor object at 0x719985af7390&gt;.available&#10; +      where &lt;agent_runners.nlm_executor.NlmPodcastExecutor object at 0x719985af7390&gt; = NlmPodcastExecutor(bin_path='', env={})">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x719985b09cd0&gt;
+
+    def test_explicit_empty_binary_disables_fallback(monkeypatch):
+        monkeypatch.setattr(module.shutil, "which", lambda name: "/usr/bin/nlm")
+&gt;       assert NlmPodcastExecutor(bin_path="", env={}).available() is False
+E       AssertionError: assert True is False
+E        +  where True = available()
+E        +    where available = &lt;agent_runners.nlm_executor.NlmPodcastExecutor object at 0x719985af7390&gt;.available
+E        +      where &lt;agent_runners.nlm_executor.NlmPodcastExecutor object at 0x719985af7390&gt; = NlmPodcastExecutor(bin_path='', env={})
+
+tests/test_r675_notebook_podcast_truthfulness.py:33: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload0]" time="0.001"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success">payload = {'status': 'error', 'id': 'nb-1', 'error': 'auth failed'}
+
+    @pytest.mark.parametrize("payload", [
+        {"status": "error", "id": "nb-1", "error": "auth failed"},
+        {"status": "failed", "id": "nb-1"},
+        {"status": "expired", "id": "nb-1"},
+        {"status": "partial", "id": "nb-1"},
+        {"data": {"status": "error", "id": "nb-1"}},
+        {"error": "business failure", "id": "nb-1"},
+    ])
+    def test_business_failure_cannot_be_success_with_exit_zero(payload):
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: proc(payload))
+        receipt = executor.create_notebook("Título")
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:47: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload1]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success">payload = {'status': 'failed', 'id': 'nb-1'}
+
+    @pytest.mark.parametrize("payload", [
+        {"status": "error", "id": "nb-1", "error": "auth failed"},
+        {"status": "failed", "id": "nb-1"},
+        {"status": "expired", "id": "nb-1"},
+        {"status": "partial", "id": "nb-1"},
+        {"data": {"status": "error", "id": "nb-1"}},
+        {"error": "business failure", "id": "nb-1"},
+    ])
+    def test_business_failure_cannot_be_success_with_exit_zero(payload):
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: proc(payload))
+        receipt = executor.create_notebook("Título")
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:47: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload2]" time="0.001"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success">payload = {'status': 'expired', 'id': 'nb-1'}
+
+    @pytest.mark.parametrize("payload", [
+        {"status": "error", "id": "nb-1", "error": "auth failed"},
+        {"status": "failed", "id": "nb-1"},
+        {"status": "expired", "id": "nb-1"},
+        {"status": "partial", "id": "nb-1"},
+        {"data": {"status": "error", "id": "nb-1"}},
+        {"error": "business failure", "id": "nb-1"},
+    ])
+    def test_business_failure_cannot_be_success_with_exit_zero(payload):
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: proc(payload))
+        receipt = executor.create_notebook("Título")
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:47: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload3]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success">payload = {'status': 'partial', 'id': 'nb-1'}
+
+    @pytest.mark.parametrize("payload", [
+        {"status": "error", "id": "nb-1", "error": "auth failed"},
+        {"status": "failed", "id": "nb-1"},
+        {"status": "expired", "id": "nb-1"},
+        {"status": "partial", "id": "nb-1"},
+        {"data": {"status": "error", "id": "nb-1"}},
+        {"error": "business failure", "id": "nb-1"},
+    ])
+    def test_business_failure_cannot_be_success_with_exit_zero(payload):
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: proc(payload))
+        receipt = executor.create_notebook("Título")
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:47: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload4]" time="0.001"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success">payload = {'data': {'status': 'error', 'id': 'nb-1'}}
+
+    @pytest.mark.parametrize("payload", [
+        {"status": "error", "id": "nb-1", "error": "auth failed"},
+        {"status": "failed", "id": "nb-1"},
+        {"status": "expired", "id": "nb-1"},
+        {"status": "partial", "id": "nb-1"},
+        {"data": {"status": "error", "id": "nb-1"}},
+        {"error": "business failure", "id": "nb-1"},
+    ])
+    def test_business_failure_cannot_be_success_with_exit_zero(payload):
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: proc(payload))
+        receipt = executor.create_notebook("Título")
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:47: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload5]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success">payload = {'error': 'business failure', 'id': 'nb-1'}
+
+    @pytest.mark.parametrize("payload", [
+        {"status": "error", "id": "nb-1", "error": "auth failed"},
+        {"status": "failed", "id": "nb-1"},
+        {"status": "expired", "id": "nb-1"},
+        {"status": "partial", "id": "nb-1"},
+        {"data": {"status": "error", "id": "nb-1"}},
+        {"error": "business failure", "id": "nb-1"},
+    ])
+    def test_business_failure_cannot_be_success_with_exit_zero(payload):
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: proc(payload))
+        receipt = executor.create_notebook("Título")
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='create_notebook', tar...ake/nlm', exit_code=0, success=True, reason='operacao create_notebook concluida', result_id='nb-1', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:47: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_requires_nonempty_real_file[None]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_download_requires_nonempt0')
+content = None
+
+    @pytest.mark.parametrize("content", [None, b""])
+    def test_download_requires_nonempty_real_file(tmp_path, content):
+        def runner(cmd, **kwargs):
+            if content is not None:
+                Path(cmd[-1]).write_bytes(content)
+            return proc({"status": "success"})
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=runner)
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=1)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:59: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_requires_nonempty_real_file[]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_download_requires_nonempt1')
+content = b''
+
+    @pytest.mark.parametrize("content", [None, b""])
+    def test_download_requires_nonempty_real_file(tmp_path, content):
+        def runner(cmd, **kwargs):
+            if content is not None:
+                Path(cmd[-1]).write_bytes(content)
+            return proc({"status": "success"})
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=runner)
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=1)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:59: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_records_file_and_hash" time="0.002"><failure message="AssertionError: assert None == '/tmp/pytest-of-marceloclaro/pytest-260/test_download_records_file_and0/podcast_nb.m4a'&#10; +  where None = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).artifact_path&#10; +  and   '/tmp/pytest-of-marceloclaro/pytest-260/test_download_records_file_and0/podcast_nb.m4a' = str((PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_download_records_file_and0') / 'podcast_nb.m4a'))">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_download_records_file_and0')
+
+    def test_download_records_file_and_hash(tmp_path):
+        payload = b"actual downloaded audio bytes"
+        def runner(cmd, **kwargs):
+            Path(cmd[-1]).write_bytes(payload)
+            return proc({"status": "success"})
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=runner)
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=1)
+        assert receipt.success is True
+&gt;       assert receipt.artifact_path == str(tmp_path / "podcast_nb.m4a")
+E       AssertionError: assert None == '/tmp/pytest-of-marceloclaro/pytest-260/test_download_records_file_and0/podcast_nb.m4a'
+E        +  where None = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).artifact_path
+E        +  and   '/tmp/pytest-of-marceloclaro/pytest-260/test_download_records_file_and0/podcast_nb.m4a' = str((PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_download_records_file_and0') / 'podcast_nb.m4a'))
+
+tests/test_r675_notebook_podcast_truthfulness.py:70: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_rejects_preexisting_file_before_process" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_download_rejects_preexist0')
+
+    def test_download_rejects_preexisting_file_before_process(tmp_path):
+        target = tmp_path / "podcast_nb.m4a"
+        target.write_bytes(b"previous unrelated audio")
+        calls = []
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=1)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:81: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[HTTP 401 Authentication failed token=SENSITIVE_TEST]" time="0.002"><failure message="AssertionError: assert 4 == 1&#10; +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x719985a58710&gt;
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_permanent_or_unclassified0')
+stderr = b'HTTP 401 Authentication failed token=SENSITIVE_TEST'
+
+    @pytest.mark.parametrize("stderr", [
+        b"HTTP 401 Authentication failed token=SENSITIVE_TEST",
+        b"403 Permission denied",
+        b"Invalid option --profile",
+        b"404 Notebook not found",
+        b"Unknown server failure",
+    ])
+    def test_permanent_or_unclassified_failure_is_not_retried(monkeypatch, tmp_path, stderr):
+        calls = []
+        monkeypatch.setattr(module.time, "sleep", lambda value: None)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm",
+                                     runner=lambda *a, **k: calls.append(a) or proc(code=1, stderr=stderr))
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=4, wait=0)
+        assert receipt.success is False
+&gt;       assert len(calls) == 1
+E       AssertionError: assert 4 == 1
+E        +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])
+
+tests/test_r675_notebook_podcast_truthfulness.py:99: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[403 Permission denied]" time="0.001"><failure message="AssertionError: assert 4 == 1&#10; +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x719985a587d0&gt;
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_permanent_or_unclassified1')
+stderr = b'403 Permission denied'
+
+    @pytest.mark.parametrize("stderr", [
+        b"HTTP 401 Authentication failed token=SENSITIVE_TEST",
+        b"403 Permission denied",
+        b"Invalid option --profile",
+        b"404 Notebook not found",
+        b"Unknown server failure",
+    ])
+    def test_permanent_or_unclassified_failure_is_not_retried(monkeypatch, tmp_path, stderr):
+        calls = []
+        monkeypatch.setattr(module.time, "sleep", lambda value: None)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm",
+                                     runner=lambda *a, **k: calls.append(a) or proc(code=1, stderr=stderr))
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=4, wait=0)
+        assert receipt.success is False
+&gt;       assert len(calls) == 1
+E       AssertionError: assert 4 == 1
+E        +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])
+
+tests/test_r675_notebook_podcast_truthfulness.py:99: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[Invalid option --profile]" time="0.002"><failure message="AssertionError: assert 4 == 1&#10; +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7199859112e0&gt;
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_permanent_or_unclassified2')
+stderr = b'Invalid option --profile'
+
+    @pytest.mark.parametrize("stderr", [
+        b"HTTP 401 Authentication failed token=SENSITIVE_TEST",
+        b"403 Permission denied",
+        b"Invalid option --profile",
+        b"404 Notebook not found",
+        b"Unknown server failure",
+    ])
+    def test_permanent_or_unclassified_failure_is_not_retried(monkeypatch, tmp_path, stderr):
+        calls = []
+        monkeypatch.setattr(module.time, "sleep", lambda value: None)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm",
+                                     runner=lambda *a, **k: calls.append(a) or proc(code=1, stderr=stderr))
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=4, wait=0)
+        assert receipt.success is False
+&gt;       assert len(calls) == 1
+E       AssertionError: assert 4 == 1
+E        +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])
+
+tests/test_r675_notebook_podcast_truthfulness.py:99: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[404 Notebook not found]" time="0.001"><failure message="AssertionError: assert 4 == 1&#10; +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7199859110d0&gt;
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_permanent_or_unclassified3')
+stderr = b'404 Notebook not found'
+
+    @pytest.mark.parametrize("stderr", [
+        b"HTTP 401 Authentication failed token=SENSITIVE_TEST",
+        b"403 Permission denied",
+        b"Invalid option --profile",
+        b"404 Notebook not found",
+        b"Unknown server failure",
+    ])
+    def test_permanent_or_unclassified_failure_is_not_retried(monkeypatch, tmp_path, stderr):
+        calls = []
+        monkeypatch.setattr(module.time, "sleep", lambda value: None)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm",
+                                     runner=lambda *a, **k: calls.append(a) or proc(code=1, stderr=stderr))
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=4, wait=0)
+        assert receipt.success is False
+&gt;       assert len(calls) == 1
+E       AssertionError: assert 4 == 1
+E        +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])
+
+tests/test_r675_notebook_podcast_truthfulness.py:99: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[Unknown server failure]" time="0.001"><failure message="AssertionError: assert 4 == 1&#10; +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x719985900370&gt;
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_permanent_or_unclassified4')
+stderr = b'Unknown server failure'
+
+    @pytest.mark.parametrize("stderr", [
+        b"HTTP 401 Authentication failed token=SENSITIVE_TEST",
+        b"403 Permission denied",
+        b"Invalid option --profile",
+        b"404 Notebook not found",
+        b"Unknown server failure",
+    ])
+    def test_permanent_or_unclassified_failure_is_not_retried(monkeypatch, tmp_path, stderr):
+        calls = []
+        monkeypatch.setattr(module.time, "sleep", lambda value: None)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm",
+                                     runner=lambda *a, **k: calls.append(a) or proc(code=1, stderr=stderr))
+        receipt = executor.download_audio("nb", "art", str(tmp_path), retries=4, wait=0)
+        assert receipt.success is False
+&gt;       assert len(calls) == 1
+E       AssertionError: assert 4 == 1
+E        +  where 4 = len([(['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'a...lm', 'download', 'audio', 'nb', '--id', 'art', ...],), (['/fake/nlm', 'download', 'audio', 'nb', '--id', 'art', ...],)])
+
+tests/test_r675_notebook_podcast_truthfulness.py:99: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_artifact_propagation_retry_finishes_only_after_file" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs0]" time="0.001"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_bad_download_parameters_r0')
+kwargs = {'retries': 0}
+
+    @pytest.mark.parametrize("kwargs", [
+        {"retries": 0}, {"retries": True}, {"retries": 1000},
+        {"wait": float("nan")}, {"wait": -1}, {"filename": "../escape.m4a"},
+        {"artifact_id": ""}, {"timeout": 0},
+    ])
+    def test_bad_download_parameters_rejected_before_process(tmp_path, kwargs):
+        calls = []
+        options = {"notebook_id": "nb", "artifact_id": "art", "output_dir": str(tmp_path), "retries": 1}
+        options.update(kwargs)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio(**options)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:128: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs1]" time="0.001"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_bad_download_parameters_r1')
+kwargs = {'retries': True}
+
+    @pytest.mark.parametrize("kwargs", [
+        {"retries": 0}, {"retries": True}, {"retries": 1000},
+        {"wait": float("nan")}, {"wait": -1}, {"filename": "../escape.m4a"},
+        {"artifact_id": ""}, {"timeout": 0},
+    ])
+    def test_bad_download_parameters_rejected_before_process(tmp_path, kwargs):
+        calls = []
+        options = {"notebook_id": "nb", "artifact_id": "art", "output_dir": str(tmp_path), "retries": 1}
+        options.update(kwargs)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio(**options)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:128: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs2]" time="0.001"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_bad_download_parameters_r2')
+kwargs = {'retries': 1000}
+
+    @pytest.mark.parametrize("kwargs", [
+        {"retries": 0}, {"retries": True}, {"retries": 1000},
+        {"wait": float("nan")}, {"wait": -1}, {"filename": "../escape.m4a"},
+        {"artifact_id": ""}, {"timeout": 0},
+    ])
+    def test_bad_download_parameters_rejected_before_process(tmp_path, kwargs):
+        calls = []
+        options = {"notebook_id": "nb", "artifact_id": "art", "output_dir": str(tmp_path), "retries": 1}
+        options.update(kwargs)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio(**options)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:128: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs3]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_bad_download_parameters_r3')
+kwargs = {'wait': nan}
+
+    @pytest.mark.parametrize("kwargs", [
+        {"retries": 0}, {"retries": True}, {"retries": 1000},
+        {"wait": float("nan")}, {"wait": -1}, {"filename": "../escape.m4a"},
+        {"artifact_id": ""}, {"timeout": 0},
+    ])
+    def test_bad_download_parameters_rejected_before_process(tmp_path, kwargs):
+        calls = []
+        options = {"notebook_id": "nb", "artifact_id": "art", "output_dir": str(tmp_path), "retries": 1}
+        options.update(kwargs)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio(**options)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:128: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs4]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_bad_download_parameters_r4')
+kwargs = {'wait': -1}
+
+    @pytest.mark.parametrize("kwargs", [
+        {"retries": 0}, {"retries": True}, {"retries": 1000},
+        {"wait": float("nan")}, {"wait": -1}, {"filename": "../escape.m4a"},
+        {"artifact_id": ""}, {"timeout": 0},
+    ])
+    def test_bad_download_parameters_rejected_before_process(tmp_path, kwargs):
+        calls = []
+        options = {"notebook_id": "nb", "artifact_id": "art", "output_dir": str(tmp_path), "retries": 1}
+        options.update(kwargs)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio(**options)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:128: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs5]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_bad_download_parameters_r5')
+kwargs = {'filename': '../escape.m4a'}
+
+    @pytest.mark.parametrize("kwargs", [
+        {"retries": 0}, {"retries": True}, {"retries": 1000},
+        {"wait": float("nan")}, {"wait": -1}, {"filename": "../escape.m4a"},
+        {"artifact_id": ""}, {"timeout": 0},
+    ])
+    def test_bad_download_parameters_rejected_before_process(tmp_path, kwargs):
+        calls = []
+        options = {"notebook_id": "nb", "artifact_id": "art", "output_dir": str(tmp_path), "retries": 1}
+        options.update(kwargs)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio(**options)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:128: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs6]" time="0.001"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_bad_download_parameters_r6')
+kwargs = {'artifact_id': ''}
+
+    @pytest.mark.parametrize("kwargs", [
+        {"retries": 0}, {"retries": True}, {"retries": 1000},
+        {"wait": float("nan")}, {"wait": -1}, {"filename": "../escape.m4a"},
+        {"artifact_id": ""}, {"timeout": 0},
+    ])
+    def test_bad_download_parameters_rejected_before_process(tmp_path, kwargs):
+        calls = []
+        options = {"notebook_id": "nb", "artifact_id": "art", "output_dir": str(tmp_path), "retries": 1}
+        options.update(kwargs)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio(**options)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:128: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs7]" time="0.002"><failure message="AssertionError: assert True is False&#10; +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_bad_download_parameters_r7')
+kwargs = {'timeout': 0}
+
+    @pytest.mark.parametrize("kwargs", [
+        {"retries": 0}, {"retries": True}, {"retries": 1000},
+        {"wait": float("nan")}, {"wait": -1}, {"filename": "../escape.m4a"},
+        {"artifact_id": ""}, {"timeout": 0},
+    ])
+    def test_bad_download_parameters_rejected_before_process(tmp_path, kwargs):
+        calls = []
+        options = {"notebook_id": "nb", "artifact_id": "art", "output_dir": str(tmp_path), "retries": 1}
+        options.update(kwargs)
+        executor = NlmPodcastExecutor(bin_path="/fake/nlm", runner=lambda *a, **k: calls.append(a) or proc())
+        receipt = executor.download_audio(**options)
+&gt;       assert receipt.success is False
+E       AssertionError: assert True is False
+E        +  where True = NlmPodcastReceipt(orchestrator='marceloclaro', invoked_at_utc='2026-10-04T20:22:51Z', operation='download_audio', targ.../fake/nlm', exit_code=0, success=True, reason='operacao download_audio concluida', result_id='nb:', artifact_path=None).success
+
+tests/test_r675_notebook_podcast_truthfulness.py:128: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_orchestrator_does_not_claim_success_without_download" time="2.299"><failure message="assert True is False">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_orchestrator_does_not_cla0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x719985a729e0&gt;
+
+    def test_orchestrator_does_not_claim_success_without_download(tmp_path, monkeypatch):
+        orchestrator, folder, observations = orchestrator_and_folder(tmp_path, monkeypatch)
+        report = orchestrator.podcast(str(folder), executor=PipelineExecutor(create_file=False))
+&gt;       assert report["ok"] is False
+E       assert True is False
+
+tests/test_r675_notebook_podcast_truthfulness.py:167: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_orchestrator_does_not_select_unrelated_old_audio" time="0.002"><failure message="assert True is False">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_orchestrator_does_not_sel0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x71994e831b00&gt;
+
+    def test_orchestrator_does_not_select_unrelated_old_audio(tmp_path, monkeypatch):
+        orchestrator, folder, observations = orchestrator_and_folder(tmp_path, monkeypatch)
+        (folder / "audio").mkdir()
+        (folder / "audio/old.m4a").write_bytes(b"old audio")
+        report = orchestrator.podcast(str(folder), executor=PipelineExecutor(create_file=False, artifact_path=False))
+&gt;       assert report["ok"] is False
+E       assert True is False
+
+tests/test_r675_notebook_podcast_truthfulness.py:177: AssertionError</failure></testcase><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_podcast_observation_has_no_scientific_confidence" time="0.002"><failure message="KeyError: 'audio_sha256'">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-260/test_podcast_observation_has_n0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x71994e831a90&gt;
+
+    def test_podcast_observation_has_no_scientific_confidence(tmp_path, monkeypatch):
+        import marceloclaro.orchestrator as module
+        orchestrator, folder, observations = orchestrator_and_folder(tmp_path, monkeypatch)
+        monkeypatch.setattr(module.metabus.memory, "add_reflection",
+                            lambda *a, **k: pytest.fail("score/reflexão não comprova operação"))
+        report = orchestrator.podcast(str(folder), executor=PipelineExecutor())
+        assert report["ok"] is True
+&gt;       assert report["audio_sha256"] == hashlib.sha256(b"audio from this invocation").hexdigest()
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'audio_sha256'
+
+tests/test_r675_notebook_podcast_truthfulness.py:187: KeyError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,81 @@
+{
+  "runtime": "hermes",
+  "status": "completed",
+  "external_process_executed": true,
+  "inference_executed": true,
+  "externally_validated": false,
+  "human_peer_review": false,
+  "scientific_claim_eligible": false,
+  "population": null,
+  "runtime_artifact_observed": true,
+  "process_returncode": 0,
+  "timeout": false,
+  "duration_seconds": 43.6,
+  "model_calls": 2,
+  "model_receipts": [
+    {
+      "request_sha256": "3bb488e86e3b77e165270f7a440617ac09fde2d874c1592a50c0ef34f81425b1",
+      "response_sha256": "ff07d5f84c7385e827c67d628d8967843790cf3abc1d4637adb2a07d94a7968b",
+      "http_status": 200,
+      "generated_tokens": 22,
+      "generated": true,
+      "model_reported": "llama3.2:latest",
+      "usage": {
+        "prompt_tokens": 281,
+        "completion_tokens": 22,
+        "total_tokens": 303
+      },
+      "evidence_scope": "local_model_response"
+    },
+    {
+      "request_sha256": "da3e19d574d77ff1087e74d31121a3f3b5f32a95ce6bdf45be3d806823a86ac4",
+      "response_sha256": "6e0e268a48da6ec7f29d08449b98b400add67922f369df69d99d5b122c414172",
+      "http_status": 200,
+      "generated_tokens": 137,
+      "generated": true,
+      "model_reported": "llama3.2:latest",
+      "usage": {
+        "prompt_tokens": 840,
+        "completion_tokens": 137,
+        "total_tokens": 977
+      },
+      "evidence_scope": "local_model_response"
+    }
+  ],
+  "provenance": {
+    "repo": "/home/marceloclaro/projetos/hermes-agent-r667",
+    "python": "/home/marceloclaro/projetos/hermes-agent-r667/.venv/bin/python",
+    "entry": "/home/marceloclaro/projetos/hermes-agent-r667/hermes_cli/main.py",
+    "origin": "https://github.com/MarceloClaro/hermes-agent",
+    "commit": "956967fbdcd4cd75c6174f30b1a599c08eadd882",
+    "entry_sha256": "ed90dc5aa03baae3407606895b0313deb57e64662bada559a89d9a90965b5de3",
+    "checkout_modified": false
+  },
+  "argv": [
+    "/home/marceloclaro/projetos/hermes-agent-r667/.venv/bin/python",
+    "-m",
+    "hermes_cli.main",
+    "chat",
+    "--query-file",
+    "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/cli-hermes/prompt.txt",
+    "--oneshot",
+    "--quiet",
+    "--provider",
+    "custom",
+    "--model",
+    "llama3.2:latest",
+    "--max-turns",
+    "2",
+    "--run-budget",
+    "177",
+    "--ignore-rules",
+    "--in",
+    "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/cli-hermes"
+  ],
+  "output_dir": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/cli-hermes",
+  "generation_token_limit": 256,
+  "limits": [
+    "Inferência do modelo local executada não comprova validade científica.",
+    "Cenário de dois personagens sintéticos não representa uma população real."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "fallback_order": [
+    "canonical_record_url",
+    "sanitized_request_url",
+    "authoritative_homepage_without_linking_the_identifier"
+  ],
+  "skills": {
+    "biorxiv-skill": {
+      "source_name": "bioRxiv and medRxiv",
+      "homepage_url": "https://www.biorxiv.org/",
+      "record_url_templates": [
+        {
+          "identifier_type": "DOI",
+          "identifier_fields": [
+            "doi",
+            "preprint_doi",
+            "biorxiv_doi",
+            "published_doi",
+            "published",
+            "published_doi_url"
+          ],
+          "template": "https://doi.org/{id}"
+        }
+      ]
+    },
+    "ncbi-entrez-skill": {
+      "source_name": "NCBI Entrez",
+      "homepage_url": "https://www.ncbi.nlm.nih.gov/",
+      "record_url_templates": [
+        {
+          "identifier_type": "PMID",
+          "identifier_fields": ["pmid", "pubmed_id", "pubmedId"],
+          "database": "pubmed",
+          "template": "https://pubmed.ncbi.nlm.nih.gov/{id}/"
+        },
+        {
+          "identifier_type": "DOI",
+          "identifier_fields": ["doi", "article_doi"],
+          "template": "https://doi.org/{id}"
+        }
+      ]
+    },
+    "ncbi-pmc-skill": {
+      "source_name": "PubMed Central",
+      "homepage_url": "https://pmc.ncbi.nlm.nih.gov/",
+      "record_url_templates": [
+        {
+          "identifier_type": "PMCID",
+          "identifier_fields": ["pmcid", "pmc_id", "pmcId"],
+          "template": "https://pmc.ncbi.nlm.nih.gov/articles/{id}/"
+        },
+        {
+          "identifier_type": "DOI",
+          "identifier_fields": ["doi", "article_doi"],
+          "template": "https://doi.org/{id}"
+        },
+        {
+          "identifier_type": "PMID",
+          "identifier_fields": ["pmid", "pubmed_id"],
+          "template": "https://pubmed.ncbi.nlm.nih.gov/{id}/"
+        }
+      ]
+    }
+  }
+}

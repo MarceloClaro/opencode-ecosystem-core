@@ -1,0 +1,30 @@
+{
+  "samples": {
+    "sample": {
+      "original_sample": "Sample_X",
+      "barcode_fastq": "https://raw.githubusercontent.com/nf-core/test-datasets/d934d6e8367fe2626184496b1889671cf2b02dab/testdata/cellranger/Sample_X_S1_L001_R1_001.fastq.gz",
+      "cdna_fastq": "https://raw.githubusercontent.com/nf-core/test-datasets/d934d6e8367fe2626184496b1889671cf2b02dab/testdata/cellranger/Sample_X_S1_L001_R2_001.fastq.gz"
+    }
+  },
+  "threads": 4,
+  "execution": {
+    "star_image": "josousa/star@sha256:2683d370b9c91a2e497d776d9b0dff2ddcc01dfec5029103ffa66b2a8da7b0c2"
+  },
+  "references": {
+    "genome_fasta": "https://raw.githubusercontent.com/nf-core/test-datasets/d934d6e8367fe2626184496b1889671cf2b02dab/reference/GRCm38.p6.genome.chr19.fa",
+    "annotation_gtf": "https://raw.githubusercontent.com/nf-core/test-datasets/d934d6e8367fe2626184496b1889671cf2b02dab/reference/gencode.vM19.annotation.chr19.gtf",
+    "cb_whitelist": "https://raw.githubusercontent.com/nf-core/test-datasets/d934d6e8367fe2626184496b1889671cf2b02dab/reference/kallisto/10xv2_whitelist.txt"
+  },
+  "chemistry": {
+    "name": "10x_v2",
+    "cb_start": 1,
+    "cb_len": 16,
+    "umi_start": 17,
+    "umi_len": 10,
+    "sjdb_overhang": 99,
+    "genome_sa_index_nbases": 11,
+    "solo_type": "CB_UMI_Simple",
+    "solo_cell_filter": "CellRanger2.2 3000 0.99 10",
+    "features_mode": "Gene"
+  }
+}

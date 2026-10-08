@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="14" time="3.775" timestamp="2026-10-04T22:57:48.644836-03:00" hostname="OPENCODE"><testcase classname="tests.test_r677_empty_library_request" name="test_empty_query_abstains_before_any_index_or_source_access[]" time="0.003"><failure message="Failed: Inventário/PDF acessado">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-313/test_empty_query_abstains_befo0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7ce677395350&gt;
+query = ''
+
+    @pytest.mark.parametrize("query", ["", " ", "\t\r\n", "\u00a0\u2003"])
+    def test_empty_query_abstains_before_any_index_or_source_access(tmp_path, monkeypatch, query):
+        library = LocalBookLibrary(tmp_path / "missing-books", tmp_path / "missing.sqlite3")
+        monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Inventário/PDF acessado"))
+&gt;       result = library.query(query)
+                 ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r677_empty_library_request.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+rag/book_library.py:299: in query
+    status, fresh = self._snapshot()
+                    ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Inventário/PDF acessado"))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Inventário/PDF acessado
+
+tests/test_r677_empty_library_request.py:15: Failed</failure></testcase><testcase classname="tests.test_r677_empty_library_request" name="test_empty_query_abstains_before_any_index_or_source_access[ ]" time="0.003"><failure message="Failed: Inventário/PDF acessado">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-313/test_empty_query_abstains_befo1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7ce677394d60&gt;
+query = ' '
+
+    @pytest.mark.parametrize("query", ["", " ", "\t\r\n", "\u00a0\u2003"])
+    def test_empty_query_abstains_before_any_index_or_source_access(tmp_path, monkeypatch, query):
+        library = LocalBookLibrary(tmp_path / "missing-books", tmp_path / "missing.sqlite3")
+        monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Inventário/PDF acessado"))
+&gt;       result = library.query(query)
+                 ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r677_empty_library_request.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+rag/book_library.py:299: in query
+    status, fresh = self._snapshot()
+                    ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Inventário/PDF acessado"))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Inventário/PDF acessado
+
+tests/test_r677_empty_library_request.py:15: Failed</failure></testcase><testcase classname="tests.test_r677_empty_library_request" name="test_empty_query_abstains_before_any_index_or_source_access[\t\r\n]" time="0.002"><failure message="Failed: Inventário/PDF acessado">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-313/test_empty_query_abstains_befo2')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7ce677399490&gt;
+query = '\t\r\n'
+
+    @pytest.mark.parametrize("query", ["", " ", "\t\r\n", "\u00a0\u2003"])
+    def test_empty_query_abstains_before_any_index_or_source_access(tmp_path, monkeypatch, query):
+        library = LocalBookLibrary(tmp_path / "missing-books", tmp_path / "missing.sqlite3")
+        monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Inventário/PDF acessado"))
+&gt;       result = library.query(query)
+                 ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r677_empty_library_request.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+rag/book_library.py:299: in query
+    status, fresh = self._snapshot()
+                    ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Inventário/PDF acessado"))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Inventário/PDF acessado
+
+tests/test_r677_empty_library_request.py:15: Failed</failure></testcase><testcase classname="tests.test_r677_empty_library_request" name="test_empty_query_abstains_before_any_index_or_source_access[\xa0\u2003]" time="0.002"><failure message="Failed: Inventário/PDF acessado">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-313/test_empty_query_abstains_befo3')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7ce677521040&gt;
+query = '\xa0\u2003'
+
+    @pytest.mark.parametrize("query", ["", " ", "\t\r\n", "\u00a0\u2003"])
+    def test_empty_query_abstains_before_any_index_or_source_access(tmp_path, monkeypatch, query):
+        library = LocalBookLibrary(tmp_path / "missing-books", tmp_path / "missing.sqlite3")
+        monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Inventário/PDF acessado"))
+&gt;       result = library.query(query)
+                 ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r677_empty_library_request.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+rag/book_library.py:299: in query
+    status, fresh = self._snapshot()
+                    ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Inventário/PDF acessado"))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Inventário/PDF acessado
+
+tests/test_r677_empty_library_request.py:15: Failed</failure></testcase><testcase classname="tests.test_r677_empty_library_request" name="test_orchestrator_exposes_same_empty_request_gate_without_an_executor" time="2.739"><failure message="Failed: Recuperação acionada">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-313/test_orchestrator_exposes_same0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7ce677521480&gt;
+
+    def test_orchestrator_exposes_same_empty_request_gate_without_an_executor(tmp_path, monkeypatch):
+        from marceloclaro.orchestrator import MarceloClaroOrchestrator
+    
+        orch = MarceloClaroOrchestrator.__new__(MarceloClaroOrchestrator)
+        orch._book_library = LocalBookLibrary(tmp_path / "books", tmp_path / "index.sqlite3")
+        monkeypatch.setattr(orch._book_library, "_snapshot", lambda: pytest.fail("Recuperação acionada"))
+&gt;       result = orch.library_query("")
+                 ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r677_empty_library_request.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+marceloclaro/orchestrator.py:1327: in library_query
+    return self.book_library.query(query, top_k=top_k)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+rag/book_library.py:299: in query
+    status, fresh = self._snapshot()
+                    ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   monkeypatch.setattr(orch._book_library, "_snapshot", lambda: pytest.fail("Recuperação acionada"))
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Recuperação acionada
+
+tests/test_r677_empty_library_request.py:34: Failed</failure></testcase><testcase classname="tests.test_r677_empty_library_request" name="test_term_limit_is_rejected_before_source_access" time="0.003"><failure message="Failed: Fontes acessadas antes da validação">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-313/test_term_limit_is_rejected_be0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7ce64046b350&gt;
+
+    def test_term_limit_is_rejected_before_source_access(tmp_path, monkeypatch):
+        library = LocalBookLibrary(tmp_path / "books", tmp_path / "index.sqlite3")
+        monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Fontes acessadas antes da validação"))
+        with pytest.raises(ValueError, match="32"):
+&gt;           library.query(" ".join(f"term{index}" for index in range(33)))
+
+tests/test_r677_empty_library_request.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+rag/book_library.py:299: in query
+    status, fresh = self._snapshot()
+                    ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   monkeypatch.setattr(library, "_snapshot", lambda: pytest.fail("Fontes acessadas antes da validação"))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Fontes acessadas antes da validação
+
+tests/test_r677_empty_library_request.py:42: Failed</failure></testcase><testcase classname="tests.test_r677_empty_library_request" name="test_valid_query_without_support_preserves_actual_index_state" time="0.002" /><testcase classname="tests.test_r677_empty_library_request" name="test_current_mcp_prompt_rejects_empty_input_before_orchestrator_construction[-]" time="0.551" /><testcase classname="tests.test_r677_empty_library_request" name="test_current_mcp_prompt_rejects_empty_input_before_orchestrator_construction[ -MCP]" time="0.005" /><testcase classname="tests.test_r677_empty_library_request" name="test_current_mcp_prompt_rejects_empty_input_before_orchestrator_construction[Revisar-\t]" time="0.004" /><testcase classname="tests.test_r677_empty_library_request" name="test_current_mcp_search_rejects_empty_query_before_construction[]" time="0.002" /><testcase classname="tests.test_r677_empty_library_request" name="test_current_mcp_search_rejects_empty_query_before_construction[ \t]" time="0.002" /><testcase classname="tests.test_r677_empty_library_request" name="test_cli_rejects_empty_query_without_constructing_orchestrator[]" time="0.005" /><testcase classname="tests.test_r677_empty_library_request" name="test_cli_rejects_empty_query_without_constructing_orchestrator[ \t]" time="0.004" /></testsuite></testsuites>

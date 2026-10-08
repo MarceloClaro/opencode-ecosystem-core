@@ -1,0 +1,1815 @@
+{
+  "schema_version": 1,
+  "source": "installed official server public tool metadata; no execution of tool",
+  "tool_count": 49,
+  "tools": [
+    {
+      "name": "refresh_auth",
+      "description": "Reload auth tokens from disk or run headless re-authentication.\n\nCall this after running `nlm login` to pick up new tokens,\nor to attempt automatic re-authentication if Chrome profile has saved login.\n\nReturns status indicating if tokens were refreshed successfully.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "save_auth_tokens",
+      "description": "Save NotebookLM cookies (FALLBACK method - try `nlm login` first!).\n\nIMPORTANT FOR AI ASSISTANTS:\n- First, run `nlm login` via Bash/terminal (automated, preferred)\n- Only use this tool if the automated CLI fails\n\nArgs:\n    cookies: Cookie header from Chrome DevTools (only needed if CLI fails)\n    csrf_token: Deprecated - auto-extracted\n    session_id: Deprecated - auto-extracted\n    request_body: Optional - contains CSRF if extracting manually\n    request_url: Optional - contains session ID if extracting manually",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "cookies": {
+            "type": "string"
+          },
+          "csrf_token": {
+            "default": "",
+            "type": "string"
+          },
+          "session_id": {
+            "default": "",
+            "type": "string"
+          },
+          "request_body": {
+            "default": "",
+            "type": "string"
+          },
+          "request_url": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cookies"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "batch",
+      "description": "Perform batch operations across multiple notebooks.\n\nActions:\n- query: Query multiple notebooks with the same question\n- add_source: Add the same source URL to multiple notebooks\n- create: Create multiple notebooks at once\n- delete: Delete multiple notebooks (IRREVERSIBLE, requires confirm=True)\n- studio: Generate studio artifacts across multiple notebooks\n\nArgs:\n    action: Operation to perform (query, add_source, create, delete, studio)\n    query: Question to ask (for action=query)\n    source_url: URL to add (for action=add_source)\n    titles: Comma-separated notebook titles (for action=create)\n    artifact_type: Artifact type (for action=studio): audio, video, report, etc.\n    notebook_names: Comma-separated notebook names or IDs\n    tags: Comma-separated tags to select notebooks\n    all: Apply to ALL notebooks\n    confirm: Must be True for delete action",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "titles": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "artifact_type": {
+            "default": "audio",
+            "type": "string"
+          },
+          "notebook_names": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "all": {
+            "default": false,
+            "type": "boolean"
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "action"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_query",
+      "description": "Ask AI about EXISTING sources already in notebook. NOT for finding new sources.\n\nUse research_start instead for: deep research, web search, find new sources, Drive search.\n\nArgs:\n    notebook_id: Notebook UUID\n    query: Question to ask\n    source_ids: Source IDs to query (default: all)\n    conversation_id: For follow-up questions\n    timeout: Wall-clock query budget in seconds (default: from env NOTEBOOKLM_QUERY_TIMEOUT or 120.0; source-heavy notebooks may need 180+)\n    new_conversation: Start a fresh conversation when conversation_id is omitted",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "source_ids": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "conversation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "timeout": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "new_conversation": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "query"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "chat_configure",
+      "description": "Configure notebook chat settings.\n\nArgs:\n    notebook_id: Notebook UUID\n    goal: default|learning_guide|custom\n    custom_prompt: Required when goal=custom (max 10000 chars)\n    response_length: default|longer|shorter",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "goal": {
+            "default": "default",
+            "type": "string"
+          },
+          "custom_prompt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "response_length": {
+            "default": "default",
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_query_start",
+      "description": "Start a notebook query asynchronously for source-heavy notebooks or long questions.\n\nUse this instead of notebook_query when the response may take longer than the\ndefault 120-second budget. A timeout around 180 seconds is a useful starting\npoint for source-heavy notebooks. Returns immediately with a query_id. Poll\nnotebook_query_status with the query_id to get the result.\n\nWorkflow: notebook_query_start -> poll notebook_query_status until completed.\n\nArgs:\n    notebook_id: Notebook UUID\n    query: Question to ask\n    source_ids: Source IDs to query (default: all)\n    conversation_id: For follow-up questions\n    timeout: Wall-clock query budget in seconds (default: from env NOTEBOOKLM_QUERY_TIMEOUT or 120.0; source-heavy notebooks may need 180+)\n    new_conversation: Start a fresh conversation when conversation_id is omitted",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "source_ids": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "conversation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "timeout": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "new_conversation": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "query"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_query_status",
+      "description": "Check the status of an async notebook query started with notebook_query_start.\n\nReturns the query result when completed, or current status if still in progress.\nPoll this tool every few seconds until status is 'completed' or 'error'.\n\nArgs:\n    query_id: The query ID returned by notebook_query_start",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "chat_list",
+      "description": "List chat sessions for a notebook.\n\nArgs:\n    notebook_id: Notebook ID or title alias\n    limit: Max chat sessions to return (default: 20)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "limit": {
+            "default": 20,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "chat_get",
+      "description": "Get full transcript of a specific chat session.\n\nArgs:\n    notebook_id: Notebook ID or title alias\n    conversation_id: Optional conversation ID (defaults to latest active session)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "conversation_id": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "chat_export",
+      "description": "Export a chat transcript to Markdown or JSON.\n\nArgs:\n    notebook_id: Notebook ID or title alias\n    conversation_id: Optional conversation ID\n    format: Export format: 'md' or 'json' (default: 'md')",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "conversation_id": {
+            "default": "",
+            "type": "string"
+          },
+          "format": {
+            "default": "md",
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "collection_list",
+      "description": "List all native collections.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "collection_create",
+      "description": "Create a new collection.\n\nArgs:\n    name: Name of the collection\n    notebook_ids: List of notebook UUIDs to include in the collection (optional)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "notebook_ids": {
+            "default": null,
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "collection_edit",
+      "description": "Edit an existing collection's name and/or list of notebooks.\n\nArgs:\n    collection_id: UUID of the collection\n    name: New name for the collection (optional)\n    notebook_ids: New complete list of notebook UUIDs to include (optional)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "collection_id": {
+            "type": "string"
+          },
+          "name": {
+            "default": null,
+            "type": "string"
+          },
+          "notebook_ids": {
+            "default": null,
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "collection_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "collection_set_emoji",
+      "description": "Set or clear the emoji marker on a collection.\n\nArgs:\n    collection_id: UUID of the collection\n    emoji: Emoji character (use empty string \"\" to clear)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "collection_id": {
+            "type": "string"
+          },
+          "emoji": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "collection_id",
+          "emoji"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "collection_delete",
+      "description": "Delete a collection permanently. Notebooks inside the collection are NOT deleted.\n\nArgs:\n    collection_id: UUID of the collection\n    confirm: Must be True after user approval",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "collection_id": {
+            "type": "string"
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "collection_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "cross_notebook_query",
+      "description": "Query multiple notebooks and get aggregated answers with per-notebook citations.\n\nSpecify notebooks by name, by tags, or use all=True for all notebooks.\n\nArgs:\n    query: Question to ask across notebooks\n    notebook_names: Comma-separated notebook names or IDs (e.g. \"AI Research, Dev Tools\")\n    tags: Comma-separated tags to select notebooks (e.g. \"ai,mcp\")\n    all: Query ALL notebooks (use with caution — rate limits apply)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "notebook_names": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "all": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "download_artifact",
+      "description": "Download any NotebookLM artifact to a file.\n\nUnified download tool replacing 9 separate download tools.\nSupports all artifact types: audio, video, report, mind_map, slide_deck,\ninfographic, data_table, file, quiz, flashcards.\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_type: Type of artifact to download:\n        - audio: Audio Overview (MP4/MP3)\n        - video: Video Overview (MP4)\n        - report: Report (Markdown)\n        - mind_map: Mind Map (JSON)\n        - slide_deck: Slide Deck (PDF or PPTX)\n        - infographic: Infographic (PNG)\n        - data_table: Data Table (CSV)\n        - data_table_xlsx: Data Table Excel export (XLSX)\n        - file: Generic Studio file export\n        - quiz: Quiz (json|markdown|html)\n        - flashcards: Flashcards (json|markdown|html)\n    output_path: Where to save the file, relative to the download\n        directory (e.g. \"podcast.m4a\" or \"My Notebook/report.md\").\n        Downloads are confined to that directory; a path outside it is\n        refused. It defaults to ~/Downloads/gemini-notebook and the\n        operator can move it with NOTEBOOKLM_DOWNLOAD_DIR. The saved\n        absolute path comes back in the result.\n    artifact_id: Optional specific artifact ID (uses latest if not provided)\n    output_format: For quiz/flashcards only: json|markdown|html (default: json)\n    slide_deck_format: For slide_deck only: pdf (default) or pptx\n    wait: Poll while the artifact download is still propagating\n    wait_timeout: Maximum seconds to wait when ``wait`` is enabled\n    poll_interval: Seconds between readiness checks\n\nReturns:\n    dict with status and saved file path\n\nExample:\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"audio\", output_path=\"podcast.m4a\")\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"quiz\", output_path=\"quiz.html\", output_format=\"html\")\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"slide_deck\", output_path=\"slides.pptx\", slide_deck_format=\"pptx\")",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "artifact_type": {
+            "type": "string"
+          },
+          "output_path": {
+            "type": "string"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "output_format": {
+            "default": "json",
+            "type": "string"
+          },
+          "slide_deck_format": {
+            "default": "pdf",
+            "type": "string"
+          },
+          "wait": {
+            "default": false,
+            "type": "boolean"
+          },
+          "wait_timeout": {
+            "default": 180.0,
+            "type": "number"
+          },
+          "poll_interval": {
+            "default": 5.0,
+            "type": "number"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "artifact_type",
+          "output_path"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "download_all_artifacts",
+      "description": "Download all completed studio artifacts of one notebook — or every notebook.\n\nCreates a subdirectory of output_dir named after each notebook title and\nsaves every completed artifact there, named after its title with the\ntype's default extension (report → .md, mind_map → .json, video → .mp4,\nslide_deck → .pdf/.pptx, ...). Artifacts that are still generating or\nfailed are skipped and listed in the result. A failure on one artifact\n(or one notebook in a sweep) does not stop the others.\n\nArgs:\n    notebook_id: Notebook UUID (omit when all_notebooks=True)\n    output_dir: Base directory for the per-notebook folders, relative to\n        the download directory (default: the download directory itself).\n        Paths outside it are refused; see download_artifact.\n    artifact_types: Restrict to these types, e.g. [\"video\", \"slide_deck\",\n        \"mind_map\", \"report\"]. Default: all types.\n    output_format: For quiz/flashcards only: json|markdown|html\n    slide_deck_format: For slide decks only: pdf (default) or pptx\n    all_notebooks: Sweep every notebook in the account instead of one\n    skip_existing: Skip artifacts whose target file already exists —\n        makes repeated runs incremental\n\nReturns:\n    dict with status, output_dir, and per-artifact items (single notebook)\n    or per-notebook outcomes (sweep), plus downloaded/failed counts\n\nExample:\n    download_all_artifacts(notebook_id=\"abc123\", output_dir=\"exports\")\n    download_all_artifacts(all_notebooks=True, output_dir=\"exports\", skip_existing=True)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "output_dir": {
+            "default": ".",
+            "type": "string"
+          },
+          "artifact_types": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "output_format": {
+            "default": "json",
+            "type": "string"
+          },
+          "slide_deck_format": {
+            "default": "pdf",
+            "type": "string"
+          },
+          "all_notebooks": {
+            "default": false,
+            "type": "boolean"
+          },
+          "skip_existing": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "export_artifact",
+      "description": "Export a NotebookLM artifact to Google Docs or Sheets.\n\nSupports:\n- Data Tables → Google Sheets\n- Reports (Briefing Doc, Study Guide, Blog Post) → Google Docs\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_id: Artifact UUID to export\n    export_type: \"docs\" or \"sheets\"\n    title: Title for exported document (optional)\n\nReturns: URL to the created Google Doc/Sheet",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "artifact_id": {
+            "type": "string"
+          },
+          "export_type": {
+            "type": "string"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "notebook_id",
+          "artifact_id",
+          "export_type"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "label",
+      "description": "Manage source labels in a notebook. Unified tool for all label operations.\n\nLabels let you organize sources into thematic categories. Requires 5+ sources\nfor auto-labeling. Sources can belong to multiple labels simultaneously.\n\nSupports: auto, list, reorganize, create, rename, set_emoji, move_source, delete\n\nArgs:\n    notebook_id: Notebook UUID\n    action: Operation to perform:\n        - auto: AI auto-labels all sources into thematic categories\n        - list: List current labels (triggers AI if none exist)\n        - reorganize: Force AI re-categorization (requires confirm=True unless unlabeled_only=True)\n        - create: Create a new empty label (requires name)\n        - rename: Rename a label (requires label_id, name)\n        - set_emoji: Set or clear emoji on a label (requires label_id, emoji)\n        - move_source: Assign a source to a label (requires label_id, source_id)\n        - delete: Delete label(s) permanently (requires label_id or label_ids, confirm=True)\n    label_id: Label UUID (required for rename, set_emoji, move_source, delete)\n    label_ids: List of label UUIDs for batch delete (alternative to label_id)\n    name: Label display name (required for create and rename)\n    emoji: Emoji character for set_emoji (e.g. \"📊\"), or \"\" to clear\n    source_id: Source UUID to assign (required for move_source)\n    unlabeled_only: For reorganize: if True, only label sources not yet in any label.\n        If False (default), replaces ALL existing labels from scratch (requires confirm=True).\n    confirm: Must be True for delete action and for reorganize with unlabeled_only=False\n\nReturns:\n    Action-specific response with status\n\nExample:\n    label(notebook_id=\"abc\", action=\"auto\")\n    label(notebook_id=\"abc\", action=\"list\")\n    label(notebook_id=\"abc\", action=\"reorganize\", confirm=True)\n    label(notebook_id=\"abc\", action=\"reorganize\", unlabeled_only=True)\n    label(notebook_id=\"abc\", action=\"create\", name=\"Research\", emoji=\"📚\")\n    label(notebook_id=\"abc\", action=\"rename\", label_id=\"xyz\", name=\"Better Name\")\n    label(notebook_id=\"abc\", action=\"set_emoji\", label_id=\"xyz\", emoji=\"🎯\")\n    label(notebook_id=\"abc\", action=\"move_source\", label_id=\"xyz\", source_id=\"src-id\")\n    label(notebook_id=\"abc\", action=\"delete\", label_id=\"xyz\", confirm=True)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "label_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "label_ids": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "unlabeled_only": {
+            "default": false,
+            "type": "boolean"
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "action"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_list",
+      "description": "List all notebooks.\n\nArgs:\n    max_results: Maximum number of notebooks to return (default: 100)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "max_results": {
+            "default": 100,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_get",
+      "description": "Get notebook details with sources.\n\nArgs:\n    notebook_id: Notebook UUID",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_describe",
+      "description": "Get AI-generated notebook summary with suggested topics.\n\nArgs:\n    notebook_id: Notebook UUID\n\nReturns: summary (markdown), suggested_topics list",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_create",
+      "description": "Create a new notebook.\n\nArgs:\n    title: Optional title for the notebook",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_rename",
+      "description": "Rename a notebook.\n\nArgs:\n    notebook_id: Notebook UUID\n    new_title: New title",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "new_title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "new_title"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_delete",
+      "description": "Delete notebook permanently. IRREVERSIBLE. Requires confirm=True.\n\nArgs:\n    notebook_id: Notebook UUID\n    confirm: Must be True after user approval",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "note",
+      "description": "Manage notes in a notebook. Unified tool for all note operations.\n\nSupports: create, list, update, delete\n\nArgs:\n    notebook_id: Notebook UUID\n    action: Operation to perform:\n        - create: Create a new note\n        - list: List all notes in notebook\n        - update: Update an existing note\n        - delete: Delete a note permanently (requires confirm=True)\n    note_id: Note UUID (required for update/delete)\n    content: Note content (required for create, optional for update)\n    title: Note title (optional for create/update)\n    confirm: Must be True for delete action\n\nReturns:\n    Action-specific response with status\n\nExample:\n    note(notebook_id=\"abc\", action=\"list\")\n    note(notebook_id=\"abc\", action=\"create\", content=\"My note\", title=\"Title\")\n    note(notebook_id=\"abc\", action=\"update\", note_id=\"xyz\", content=\"Updated\")\n    note(notebook_id=\"abc\", action=\"delete\", note_id=\"xyz\", confirm=True)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "note_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "action"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "pipeline",
+      "description": "Manage and execute multi-step notebook pipelines.\n\nActions:\n- run: Execute a pipeline on a notebook\n- list: List all available pipelines (builtin and user-defined)\n\nArgs:\n    action: Operation to perform (run, list)\n    notebook_id: Target notebook UUID (required for action=run)\n    pipeline_name: Pipeline name (required for action=run, e.g. \"ingest-and-podcast\")\n    input_url: URL variable for pipelines that need it (replaces $INPUT_URL)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "notebook_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "pipeline_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "input_url": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "action"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "research_start",
+      "description": "Deep research / fast research: Search web or Google Drive to FIND NEW sources.\n\nUse this for: \"deep research on X\", \"find sources about Y\", \"search web for Z\", \"search Drive\".\nWorkflow: research_start -> poll research_status -> research_import.\n\nArgs:\n    query: What to search for (e.g. \"quantum computing advances\")\n    source: web|drive (where to search)\n    mode: fast (~30s, ~10 sources) | deep (~5min, ~40 sources, web only)\n    notebook_id: Existing notebook (creates new if not provided)\n    title: Title for new notebook",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "source": {
+            "default": "web",
+            "type": "string"
+          },
+          "mode": {
+            "default": "fast",
+            "type": "string"
+          },
+          "notebook_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "research_status",
+      "description": "Poll research progress. Blocks until complete or timeout.\n\nArgs:\n    notebook_id: Notebook UUID\n    poll_interval: Seconds between polls (default: 30)\n    max_wait: Max seconds to wait (default: 900, 0=single poll)\n    compact: If True (default), truncate report and limit sources shown to save tokens.\n            Use compact=False to get full details.\n    task_id: Optional Task ID to poll for a specific research task.\n    query: Optional query text for fallback matching when task_id changes (deep research).\n        Contributed by @saitrogen (PR #15).\n    auto_import: If True, automatically import sources when research completes.\n                If False (default), returns next_action hint to call research_import manually.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "poll_interval": {
+            "default": 30,
+            "type": "integer"
+          },
+          "max_wait": {
+            "default": 900,
+            "type": "integer"
+          },
+          "compact": {
+            "default": true,
+            "type": "boolean"
+          },
+          "task_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "auto_import": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "research_import",
+      "description": "Import discovered sources into notebook.\n\nCall after research_status shows status=\"completed\".\n\nArgs:\n    notebook_id: Notebook UUID\n    task_id: Research task ID\n    source_indices: Source indices to import (default: all)\n    timeout: Import timeout in seconds (default: 300, increase for large notebooks)\n    cited_only: Import only sources cited by the research report.\n        Overrides source_indices when enabled.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "task_id": {
+            "type": "string"
+          },
+          "source_indices": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "timeout": {
+            "default": 300.0,
+            "type": "number"
+          },
+          "cited_only": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "task_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "server_info",
+      "description": "Get version, auth status, and conservative MCP capability visibility.\n\nAI assistants: If update_available is True, inform the user that a new\nversion is available and suggest updating with the provided command.\n\nauth_status is the result of an AuthHealthChecker probe. The checker\nruns a multi-probe strategy (homepage fetch + API fallback) with\n30-second TTL caching and mtime-based bypass on auth-file changes.\nThe reported value may therefore be up to 30 seconds old, and an\nexternal `nlm login` is picked up within one check cycle without\nwaiting for the TTL to expire.\n\nauth_status meanings:\n- \"configured\"     — homepage (or API fallback) check passed; credentials\n                     are good. Cached credentials may be reported as\n                     configured for up to 30 seconds.\n- \"not_configured\" — no credentials are stored (first-time setup).\n- \"stale\"          — credentials are known-bad (expired or past the\n                     7-day heuristic). Operations will fail; ask the\n                     user to run `nlm login` to refresh.\n- \"unverified\"     — the check could not be completed (network error,\n                     timeout, non-200 response). Cached credentials may\n                     still work for actual API calls, so do not assume\n                     the user needs to re-auth.\n- \"error\"          — unexpected exception inside the check itself.\n\nReturns:\n    dict with version info:\n    - version: Current installed version\n    - latest_version: Latest version on PyPI (or None if check failed)\n    - update_available: True if a newer version is available\n    - auth_status: configured | stale | unverified | not_configured | error\n    - update_command: Command to run to update\n    - mcp_capabilities: Built-in tool groups visible in this server process\n    - provider_capabilities: Explicitly unprobed provider/account capabilities",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_share_status",
+      "description": "Get current sharing settings and collaborators.\n\nArgs:\n    notebook_id: Notebook UUID\n\nReturns: is_public, access_level, collaborators list, and public_link if public",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_share_public",
+      "description": "Enable or disable public link access.\n\nArgs:\n    notebook_id: Notebook UUID\n    is_public: True to enable public link, False to disable (default: True)\n\nReturns: public_link if enabled, None if disabled",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "is_public": {
+            "default": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_share_invite",
+      "description": "Invite a collaborator by email.\n\nArgs:\n    notebook_id: Notebook UUID\n    email: Email address to invite\n    role: \"viewer\" or \"editor\" (default: viewer)\n\nReturns: success status",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "default": "viewer",
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "email"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "notebook_share_batch",
+      "description": "Invite multiple collaborators in a single request.\n\nArgs:\n    notebook_id: Notebook UUID\n    recipients: List of dicts, each with 'email' (str) and optional 'role' (str).\n                Role defaults to 'viewer'. Example: [{\"email\": \"a@b.com\", \"role\": \"editor\"}]\n    confirm: Must be True after user approval\n\nReturns: invited_count, recipients list, and message",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "recipients": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "recipients"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "tag",
+      "description": "Manage notebook tags and find relevant notebooks by tag matching.\n\nActions:\n- add: Add tags to a notebook for smart selection\n- remove: Remove tags from a notebook\n- list: List all tagged notebooks with their tags\n- select: Find notebooks relevant to a query using tag matching\n\nArgs:\n    action: Operation to perform (add, remove, list, select)\n    notebook_id: Notebook UUID (required for add, remove)\n    tags: Comma-separated tags (required for add, remove; e.g. \"ai,research,llm\")\n    notebook_title: Optional display title (for add)\n    query: Search query (required for select; e.g. \"ai mcp\" or \"ai,mcp\")",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "notebook_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "notebook_title": {
+            "default": "",
+            "type": "string"
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "action"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "source_add",
+      "description": "Add a source to a notebook. Unified tool for all source types.\n\nSupports: url, text, drive, file\n\nArgs:\n    notebook_id: Notebook UUID\n    source_type: Type of source to add:\n        - url: Web page or YouTube URL\n        - text: Pasted text content\n        - drive: Google Drive document\n        - file: Local file upload. The canonical local-admission contract has\n            43 case-insensitive extensions. Admission does not guarantee provider\n            processing success for an individual file.\n            OFFICIAL_FILE_EXTENSIONS: .pdf, .txt, .md, .docx, .csv, .pptx, .epub, .avif, .bmp, .gif, .heic, .heif, .ico, .jp2, .jpe, .jpeg, .jpg, .png, .tif, .tiff, .webp, .3g2, .3gp, .aac, .aif, .aifc, .aiff, .amr, .au, .avi, .cda, .m4a, .mid, .mp3, .mp4, .mpeg, .ogg, .opus, .ra, .ram, .snd, .wav, .wma\n            Image-bearing sources may feed Studio video generation's visual-crop\n            pipeline; charts, photos, and diagrams may be extracted as on-screen aids.\n    url: URL to add (for source_type=url)\n    urls: List of URLs to add in bulk (for source_type=url, alternative to url)\n    text: Text content to add (for source_type=text)\n    title: Display title (for text sources)\n    file_path: Local file path on the machine running the MCP server\n        (for source_type=file). A path on a different client/agent host\n        is not accessible to the server.\n    document_id: Google Drive document ID (for source_type=drive)\n    doc_type: Drive doc type: doc|slides|sheets|pdf (for source_type=drive)\n    wait: If True, wait for source processing to complete before returning\n    wait_timeout: Max seconds to wait if wait=True (default 120)\n\nExample:\n    source_add(notebook_id=\"abc\", source_type=\"url\", url=\"https://example.com\")\n    source_add(notebook_id=\"abc\", source_type=\"url\", urls=[\"https://a.com\", \"https://b.com\"])\n    source_add(notebook_id=\"abc\", source_type=\"url\", url=\"https://example.com\", wait=True)\n    source_add(notebook_id=\"abc\", source_type=\"file\", file_path=\"/path/to/doc.pdf\", wait=True)\n    source_add(notebook_id=\"abc\", source_type=\"file\", file_path=\"/path/to/screenshot.png\", wait=True)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "source_type": {
+            "type": "string"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "urls": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "file_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "document_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "doc_type": {
+            "default": "doc",
+            "type": "string"
+          },
+          "wait": {
+            "default": false,
+            "type": "boolean"
+          },
+          "wait_timeout": {
+            "default": 120.0,
+            "type": "number"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "source_type"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "source_list_drive",
+      "description": "List sources with types and Drive freshness status.\n\nUse before source_sync_drive to identify stale sources.\n\nArgs:\n    notebook_id: Notebook UUID\n    skip_freshness: If True, skip per-source freshness checks for faster listing",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "skip_freshness": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "source_sync_drive",
+      "description": "Sync Drive sources with latest content. Requires confirm=True.\n\nCall source_list_drive first to identify stale sources.\n\nArgs:\n    source_ids: Source UUIDs to sync\n    confirm: Must be True after user approval",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "source_ids": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            ]
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "source_ids"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "source_rename",
+      "description": "Rename a source in a notebook.\n\nArgs:\n    notebook_id: Notebook UUID containing the source\n    source_id: Source UUID to rename\n    new_title: New display title for the source",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "new_title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "source_id",
+          "new_title"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "source_delete",
+      "description": "Delete source(s) permanently. IRREVERSIBLE. Requires confirm=True.\n\nArgs:\n    source_id: Source UUID to delete (single)\n    source_ids: List of source UUIDs to delete (bulk, alternative to source_id)\n    confirm: Must be True after user approval",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "source_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "source_ids": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "source_describe",
+      "description": "Get AI-generated source summary with keyword chips.\n\nArgs:\n    source_id: Source UUID\n\nReturns: summary (markdown with **bold** keywords), keywords list",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "source_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "source_get_content",
+      "description": "Get raw text content of a source (no AI processing).\n\nReturns the original indexed text from PDFs, web pages, pasted text,\nor YouTube transcripts. Much faster than notebook_query for content export.\n\nArgs:\n    source_id: Source UUID\n    wait: Poll until indexed content is available\n    wait_timeout: Maximum seconds to wait when ``wait`` is enabled\n    poll_interval: Seconds between readiness checks\n\nReturns: content (str), title (str), source_type (str), char_count (int)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "wait": {
+            "default": false,
+            "type": "boolean"
+          },
+          "wait_timeout": {
+            "default": 120.0,
+            "type": "number"
+          },
+          "poll_interval": {
+            "default": 3.0,
+            "type": "number"
+          }
+        },
+        "required": [
+          "source_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "studio_create",
+      "description": "Create any NotebookLM studio artifact. Unified creation tool.\n\nSupports: audio, video, infographic, slide_deck, report, flashcards, quiz, data_table, mind_map\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_type: Type of artifact to create:\n        - audio: Audio Overview (podcast)\n        - video: Video Overview\n        - infographic: Visual infographic\n        - slide_deck: Presentation slides (PDF)\n        - report: Text report (Briefing Doc, Study Guide, etc.)\n        - flashcards: Study flashcards\n        - quiz: Multiple choice quiz\n        - data_table: Structured data table\n        - mind_map: Visual mind map\n    source_ids: Source IDs to use (default: all sources)\n    confirm: Must be True after user approval\n\n    Type-specific options:\n    - audio: audio_format (deep_dive|brief|critique|debate), audio_length (short|default|long)\n    - video: video_format (explainer|brief|cinematic|short), visual_style (auto_select|custom|classic|whiteboard|kawaii|anime|watercolor|retro_print|heritage|paper_craft; not for cinematic/short), video_style_prompt\n    - infographic: orientation (landscape|portrait|square), detail_level (concise|standard|detailed), infographic_style (auto_select|sketch_note|professional|bento_grid|editorial|instructional|bricks|clay|anime|kawaii|scientific)\n    - slide_deck: slide_format (detailed_deck|presenter_slides), slide_length (short|default)\n    - report: report_format (Briefing Doc|Study Guide|Blog Post|Create Your Own), custom_prompt\n    - flashcards: difficulty (easy|medium|hard)\n    - quiz: question_count (int), difficulty (easy|medium|hard)\n    - data_table: description (required)\n    - mind_map: title\n\n    Common options:\n    - language: BCP-47 code (en, es, fr, de, ja). Defaults to NOTEBOOKLM_HL env var or 'en'\n    - focus_prompt: Optional focus text\n\nExample:\n    studio_create(notebook_id=\"abc\", artifact_type=\"audio\", confirm=True)\n    studio_create(notebook_id=\"abc\", artifact_type=\"quiz\", question_count=5, confirm=True)",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "artifact_type": {
+            "type": "string"
+          },
+          "source_ids": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          },
+          "audio_format": {
+            "default": "deep_dive",
+            "type": "string"
+          },
+          "audio_length": {
+            "default": "default",
+            "type": "string"
+          },
+          "video_format": {
+            "default": "explainer",
+            "type": "string"
+          },
+          "visual_style": {
+            "default": "auto_select",
+            "type": "string"
+          },
+          "video_style_prompt": {
+            "default": "",
+            "type": "string"
+          },
+          "orientation": {
+            "default": "landscape",
+            "type": "string"
+          },
+          "detail_level": {
+            "default": "standard",
+            "type": "string"
+          },
+          "infographic_style": {
+            "default": "auto_select",
+            "type": "string"
+          },
+          "slide_format": {
+            "default": "detailed_deck",
+            "type": "string"
+          },
+          "slide_length": {
+            "default": "default",
+            "type": "string"
+          },
+          "report_format": {
+            "default": "Briefing Doc",
+            "type": "string"
+          },
+          "custom_prompt": {
+            "default": "",
+            "type": "string"
+          },
+          "question_count": {
+            "default": 2,
+            "type": "integer"
+          },
+          "difficulty": {
+            "default": "medium",
+            "type": "string"
+          },
+          "language": {
+            "default": "",
+            "type": "string"
+          },
+          "focus_prompt": {
+            "default": "",
+            "type": "string"
+          },
+          "title": {
+            "default": "Mind Map",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "artifact_type"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "studio_status",
+      "description": "Check studio content generation status and get URLs, or rename an artifact.\n\nArgs:\n    notebook_id: Notebook UUID\n    action: Action to perform:\n        - status (default): List all artifacts with their status and URLs\n        - rename: Rename an artifact (requires artifact_id and new_title)\n        - list_types: List all supported artifact types with their options\n    artifact_id: For status, return only this artifact. Required for action=\"rename\".\n    new_title: Required for action=\"rename\" - the new title for the artifact\n    include_details: Include prompts, source IDs, report content, and media details\n    limit: Maximum artifacts to return for status (1-100, default 20)\n    offset: Number of artifacts to skip for status pagination\n\nReturns:\n    Dictionary with status and results.\n    For action=\"status\":\n        - status: \"success\"\n        - artifacts: Lean page of artifacts, each containing:\n            - artifact_id: UUID\n            - title: Artifact title\n            - type: audio, video, report, etc.\n            - status: completed, in_progress, failed\n            - created_at: Creation timestamp\n            - error_reason: Failure guidance when status is failed\n          With include_details=True, artifacts also include prompts, source IDs,\n          report content, media URLs, and other rich fields.\n        - summary: Counts of total, completed, in_progress\n        - pagination: returned, offset, limit, and has_more",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "action": {
+            "default": "status",
+            "type": "string"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "new_title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "include_details": {
+            "default": false,
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 20,
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "notebook_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "studio_delete",
+      "description": "Delete studio artifact. IRREVERSIBLE. Requires confirm=True.\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_id: Artifact UUID (from studio_status)\n    confirm: Must be True after user approval",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "artifact_id": {
+            "type": "string"
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "artifact_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "studio_revise",
+      "description": "Revise individual slides in an existing slide deck. Creates a NEW artifact.\n\nOnly slide decks support revision. The original artifact is not modified.\nPoll studio_status after calling to check when the new deck is ready.\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_id: UUID of the existing slide deck to revise (from studio_status)\n    slide_instructions: List of revision instructions, each with:\n        - slide: Slide number (1-based, slide 1 = first slide)\n        - instruction: Text describing the desired change\n        Example: [{\"slide\": 1, \"instruction\": \"Make the title larger\"}]\n    confirm: Must be True after user approval\n\nExample:\n    studio_revise(\n        notebook_id=\"abc\",\n        artifact_id=\"xyz\",\n        slide_instructions=[\n            {\"slide\": 1, \"instruction\": \"Make the title larger\"},\n            {\"slide\": 3, \"instruction\": \"Remove the image\"}\n        ],\n        confirm=True\n    )",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "notebook_id": {
+            "type": "string"
+          },
+          "artifact_id": {
+            "type": "string"
+          },
+          "slide_instructions": {
+            "items": {
+              "description": "Instruction for revising a single slide.",
+              "properties": {
+                "slide": {
+                  "type": "integer"
+                },
+                "instruction": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "slide",
+                "instruction"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "confirm": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notebook_id",
+          "artifact_id",
+          "slide_instructions"
+        ],
+        "type": "object"
+      },
+      "annotations": {}
+    },
+    {
+      "name": "usage_get",
+      "description": "Show how much of the plan's usage allowance is left, and when it resets.\n\nGemini Notebook meters usage as compute against two windows at once: a short\nrolling window and a weekly one. Both are reported, each with the percentage\nused, the percentage remaining and the reset time in UTC.\n\nArgs:\n    profile: Saved account profile, e.g. \"work\" or \"personal\". Overrides\n        environment cookies for this call without switching the default\n        account. Omit to use the MCP server's current authentication.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {}
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Genomic Intelligence"
+  },
+  "description": "Run six DNA sequence-analysis tasks over the hosted Genomic Intelligence API: promoter region prediction, splice donor/acceptor sites, enhancer activity, chromatin state, sequence-to-expression, and de-novo gene annotation, plus a composite find-genes-then-predict-expression workflow. Give it a gene symbol, a genomic region, or a FASTA; it resolves the sequence from Ensembl and returns structured predictions. No local GPU, model weights, or API key required. For research use, not clinical or diagnostic decisions.",
+  "interface": {
+    "capabilities": [],
+    "category": "Scientific Research",
+    "defaultPrompt": [
+      "Predict the expression of HBB in K562 cells",
+      "Find promoter and splice sites in TP53",
+      "Annotate genes in chr8:127,680,000-127,800,000"
+    ],
+    "developerName": "Genomic Intelligence",
+    "displayName": "Genomic Intelligence",
+    "longDescription": "Run six DNA sequence-analysis tasks over the hosted Genomic Intelligence API: promoter region prediction, splice donor/acceptor sites, enhancer activity, chromatin state, sequence-to-expression, and de-novo gene annotation, plus a composite find-genes-then-predict-expression workflow. Give it a gene symbol, a genomic region, or a FASTA; it resolves the sequence from Ensembl and returns structured predictions. No local GPU, model weights, or API key required. For research use, not clinical or diagnostic decisions.",
+    "privacyPolicyURL": "https://genomicintelligence.ai/privacy",
+    "shortDescription": "DNA sequence analysis with AI",
+    "supportURL": "https://genomicintelligence.ai/contact",
+    "termsOfServiceURL": "https://genomicintelligence.ai/terms",
+    "websiteURL": "https://genomicintelligence.ai"
+  },
+  "name": "app-6a73c480231c819181d7440a0e1499c9",
+  "version": "1.1.0"
+}

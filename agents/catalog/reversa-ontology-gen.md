@@ -39,7 +39,7 @@ skills:
   tags: [gera, tipos, entidades, relacionamentos]
   examples: [Aplique gera tipos entidades relacionamentos neste contexto, Avalie usando gera tipos entidades relacionamentos]
 - id: use-ontologia-ontology-tipos
-  name: Use via: "ontologia", "ontology", "tipos", /ontology-gen
+  name: "Use via: 'ontologia', 'ontology', 'tipos', /ontology-gen"
   description: >-
     Capacidade especializada em use via: "ontologia", "ontology", "tipos", /ontology-gen
   tags: ["ontologia", "ontology", "tipos", /ontology-gen]

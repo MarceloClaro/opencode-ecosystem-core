@@ -1,0 +1,177 @@
+.root {
+  container: ngs-history / inline-size;
+  min-width: 0;
+}
+
+.runButton {
+  appearance: none;
+  color: inherit;
+  background: var(--ngs-surface);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.runButton:hover:not(:disabled) {
+  background: var(--ngs-surface-hover);
+}
+
+.runButton:disabled {
+  cursor: default;
+}
+
+.runButton:focus-visible {
+  outline: 2px solid var(--ngs-focus-ring);
+  outline-offset: 2px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--ngs-border);
+  list-style: none;
+}
+
+.row {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  gap: var(--oai-space-3);
+  padding: var(--oai-space-2) var(--oai-space-2);
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-top: 1px solid var(--ngs-border);
+  grid-template-areas: "status identity trace binding time";
+  grid-template-columns: 110px minmax(0, 1fr) 124px 86px 130px;
+}
+
+.status {
+  grid-area: status;
+}
+
+.historyIdentity {
+  display: grid;
+  min-width: 0;
+  gap: var(--oai-space-1);
+}
+
+.historyIdentity {
+  grid-area: identity;
+}
+
+.historyIdentity strong {
+  overflow: hidden;
+  font-size: var(--ngs-font-md);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.historySummary {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-xs);
+  text-overflow: clip;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.historyIdentity code {
+  overflow: hidden;
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trace {
+  display: grid;
+  min-width: 110px;
+  gap: var(--oai-space-1);
+  grid-area: trace;
+  justify-items: end;
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-xs);
+  white-space: nowrap;
+}
+
+.traceMarks {
+  display: flex;
+  gap: var(--oai-space-1);
+}
+
+.traceMarks i {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: var(--ngs-radius-pill);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  font-size: var(--ngs-font-xs);
+  font-style: normal;
+  font-weight: var(--ngs-weight-semibold);
+}
+
+.traceMarks i[data-tone="success"] {
+  color: var(--ngs-success-text);
+}
+.traceMarks i[data-tone="warning"] {
+  color: var(--ngs-warning-text);
+}
+.traceMarks i[data-tone="danger"] {
+  color: var(--ngs-danger);
+}
+.traceMarks i[data-tone="info"] {
+  color: var(--ngs-accent);
+}
+.traceMarks i[data-tone="neutral"] {
+  color: var(--ngs-text-muted);
+}
+
+.binding {
+  grid-area: binding;
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.row time {
+  grid-area: time;
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-xs);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.empty {
+  margin-top: var(--oai-space-4);
+  padding: var(--oai-space-6);
+  border-radius: var(--ngs-radius-md);
+  background: color-mix(in srgb, var(--ngs-text-muted) 5%, transparent);
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-sm);
+  text-align: center;
+}
+
+@container ngs-history (max-width: 900px) {
+  .row {
+    grid-template-areas:
+      "status time"
+      "identity identity"
+      "trace binding";
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .binding {
+    justify-self: end;
+  }
+
+  .trace {
+    justify-items: start;
+  }
+
+  .row time {
+    text-align: right;
+  }
+}

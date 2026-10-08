@@ -1,0 +1,208 @@
+{
+  "scope": "actual_read_only_central_probes",
+  "versions": {
+    "notebooklm-mcp-cli": "0.11.6",
+    "fastmcp": "3.2.3",
+    "mcp": "1.28.1"
+  },
+  "remote_generation_executed": false,
+  "remote_mutation_executed": false,
+  "externally_scientifically_validated": false,
+  "receipts": [
+    {
+      "operation": "status",
+      "tool": null,
+      "command": [],
+      "status": "completed",
+      "process_executed": false,
+      "hash": null,
+      "metacognition": {
+        "observation_id": "46dc4092-6d54-473f-9a27-9ba6f96ee321",
+        "persisted": true,
+        "scope_id": "dea5580c8b7f632e2543ebbf0e30a89c2a23cae294cab26750a9e1fdb1e9b0c8",
+        "previous_observation_id": "760804fb-c808-40d2-9458-8b68e3cebb33",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false,
+        "externally_validated": false
+      },
+      "request_sha256": "6b90bcfa834bad9504754f9aac0585a3bb9c828d0c5203c42cfc782db62f0a0c",
+      "session_id": null,
+      "persistent_session": false,
+      "reason": null,
+      "mcp_tool_count": null,
+      "cli_entry_count": null
+    },
+    {
+      "operation": "catalog",
+      "tool": null,
+      "command": [],
+      "status": "completed",
+      "process_executed": true,
+      "hash": "a6738dcbaa9743ba81c0287de9d4aaefe2d9916d58f715889b3429e20c0a7d49",
+      "metacognition": {
+        "observation_id": "0a3034c7-7e21-4164-82f8-df59b79a1947",
+        "persisted": true,
+        "scope_id": "b9f7ba49224610d88379e9ba5c1253ebf7667f874de45cde4726ad1018a5d533",
+        "previous_observation_id": "27b8bae5-393c-492e-9566-32fd3084db62",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false,
+        "externally_validated": false
+      },
+      "request_sha256": "7054d357a48f0a3f2915a0cf27c8b18b21a61ce1a27d7846a3eacd3c9120410a",
+      "session_id": "9ee802f24e7a44d3af2cde7b99614c44",
+      "persistent_session": true,
+      "reason": null,
+      "mcp_tool_count": 49,
+      "cli_entry_count": 155
+    },
+    {
+      "operation": "skill",
+      "tool": null,
+      "command": [],
+      "status": "prepared",
+      "process_executed": false,
+      "hash": "d0d818bb447226c04f5f093f66bbea2a06ce692d5fd53d3ac1ec58adf2fbab1f",
+      "metacognition": {
+        "observation_id": "af36fd24-7361-48e9-af0a-00d417fe0762",
+        "persisted": true,
+        "scope_id": "c8c3bce9e2668d4efc694fd2ba2ab31e6fa4d09131925aa0736b905708b79e4d",
+        "previous_observation_id": "730f8e1a-988e-4d3a-8d62-c3e9eb67f72c",
+        "state_transition": {
+          "from": "prepared",
+          "to": "prepared"
+        },
+        "confidence_promoted": false,
+        "externally_validated": false
+      },
+      "request_sha256": "79774d9bfdbdb2c9cd72e6d9ad7169ea370d16aae15e19109f8a460c4c713211",
+      "session_id": null,
+      "persistent_session": false,
+      "reason": null,
+      "mcp_tool_count": null,
+      "cli_entry_count": null
+    },
+    {
+      "operation": "cli",
+      "tool": null,
+      "command": [
+        "nlm",
+        "login",
+        "--check"
+      ],
+      "status": "completed",
+      "process_executed": true,
+      "hash": "12b0f675c29c32c6adeb63e3741b6c5a56820a952bb9e0851383a71bf3a98145",
+      "metacognition": {
+        "observation_id": "b919a123-e483-483c-89f8-15b63cf8a4e7",
+        "persisted": true,
+        "scope_id": "1ca1dffa8a472d24b14497124c447434c727a77f604126b4d4dd106d8a51d5fa",
+        "previous_observation_id": "6dc5603b-b38e-4538-9c03-78482d3768b7",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false,
+        "externally_validated": false
+      },
+      "request_sha256": "8908cfcf3ad861f0203367a8aec060ab4547383a6f14e406230971b2b7bac619",
+      "session_id": null,
+      "persistent_session": false,
+      "reason": null,
+      "mcp_tool_count": null,
+      "cli_entry_count": null,
+      "authentication_valid": true
+    },
+    {
+      "operation": "cli",
+      "tool": null,
+      "command": [
+        "nlm",
+        "notebook",
+        "list",
+        "--json"
+      ],
+      "status": "completed",
+      "process_executed": true,
+      "hash": "15678cef8075ef6d652fc0b46fd6d54e586a2e0f0450b13a3e192ee2ab0404d0",
+      "metacognition": {
+        "observation_id": "9d96307f-7342-4bcd-8cea-32a297b63b08",
+        "persisted": true,
+        "scope_id": "f080cb35be5378277d0bb8019cb99a202af46c8b05c0aa77fe2c487ccc5be885",
+        "previous_observation_id": "85ff6cf8-7f5a-49c8-8951-f080acdc68e9",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false,
+        "externally_validated": false
+      },
+      "request_sha256": "d866e96dc23387af2cf5b88174373735921885edfd5263772dcc74972cddd8d7",
+      "session_id": null,
+      "persistent_session": false,
+      "reason": null,
+      "mcp_tool_count": null,
+      "cli_entry_count": null,
+      "notebook_count": 225
+    },
+    {
+      "operation": "mcp",
+      "tool": "server_info",
+      "command": [],
+      "status": "completed",
+      "process_executed": true,
+      "hash": "9454a3b3424ff7f1d3de15934acfe53dc5889c4ee3ee1ff2fa8a6ec2b8d98c98",
+      "metacognition": {
+        "observation_id": "91691da6-6382-4f64-a44a-4009810118fe",
+        "persisted": true,
+        "scope_id": "a8d2c5d3657be44af8e73c32adce3656057970a266a5cbcd1afafb8a6ade9198",
+        "previous_observation_id": "c4d55670-3412-49d1-8c20-1f86525ea707",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false,
+        "externally_validated": false
+      },
+      "request_sha256": "4f3128354d912bb83509bc10e2dd7ee73b0ce0cad3c8b1c26daf4e5238cdd60d",
+      "session_id": "9ee802f24e7a44d3af2cde7b99614c44",
+      "persistent_session": true,
+      "reason": null,
+      "mcp_tool_count": null,
+      "cli_entry_count": null
+    },
+    {
+      "operation": "mcp",
+      "tool": "notebook_list",
+      "command": [],
+      "status": "completed",
+      "process_executed": true,
+      "hash": "266dab8db00ed318c90b3e64790a2292623be1627289b6e7d9e473a0a6870205",
+      "metacognition": {
+        "observation_id": "67d2b11d-8ce5-43de-9ef9-eb2c75dec5af",
+        "persisted": true,
+        "scope_id": "38ccd92aac1596e0cf2687ada6cd9100dcc230a365ce458c49bf5f2444691bc8",
+        "previous_observation_id": "ffc64803-bc07-4026-b54d-aabe7560e7b1",
+        "state_transition": {
+          "from": "completed",
+          "to": "completed"
+        },
+        "confidence_promoted": false,
+        "externally_validated": false
+      },
+      "request_sha256": "b9e17ffb314e3fbc24f40c385e1ad7ce7efe75ea528b01a50f2456b110a0d72c",
+      "session_id": "9ee802f24e7a44d3af2cde7b99614c44",
+      "persistent_session": true,
+      "reason": null,
+      "mcp_tool_count": null,
+      "cli_entry_count": null,
+      "notebook_count": 225
+    }
+  ],
+  "confidence_ledger_unchanged": true
+}

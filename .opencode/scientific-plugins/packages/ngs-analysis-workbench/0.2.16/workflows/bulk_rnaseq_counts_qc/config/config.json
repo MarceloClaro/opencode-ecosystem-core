@@ -1,0 +1,25 @@
+{
+  "samples": {
+    "WT_REP1": {
+      "r1": "https://raw.githubusercontent.com/nf-core/test-datasets/626c8fab639062eade4b10747e919341cbf9b41a/testdata/GSE110004/SRR6357070_1.fastq.gz",
+      "r2": "https://raw.githubusercontent.com/nf-core/test-datasets/626c8fab639062eade4b10747e919341cbf9b41a/testdata/GSE110004/SRR6357070_2.fastq.gz",
+      "strandedness": "auto",
+      "salmon_libtype": "A"
+    },
+    "WT_REP2": {
+      "r1": "https://raw.githubusercontent.com/nf-core/test-datasets/626c8fab639062eade4b10747e919341cbf9b41a/testdata/GSE110004/SRR6357072_1.fastq.gz",
+      "r2": "https://raw.githubusercontent.com/nf-core/test-datasets/626c8fab639062eade4b10747e919341cbf9b41a/testdata/GSE110004/SRR6357072_2.fastq.gz",
+      "strandedness": "reverse",
+      "salmon_libtype": "ISR"
+    }
+  },
+  "references": {
+    "genome_fasta": "https://raw.githubusercontent.com/nf-core/test-datasets/626c8fab639062eade4b10747e919341cbf9b41a/reference/genome.fasta",
+    "annotation_gtf": "https://raw.githubusercontent.com/nf-core/test-datasets/626c8fab639062eade4b10747e919341cbf9b41a/reference/genes.gtf",
+    "transcriptome_fasta": "https://raw.githubusercontent.com/nf-core/test-datasets/626c8fab639062eade4b10747e919341cbf9b41a/reference/transcriptome.fasta"
+  },
+  "salmon": {
+    "kmer": 31
+  },
+  "threads": 4
+}

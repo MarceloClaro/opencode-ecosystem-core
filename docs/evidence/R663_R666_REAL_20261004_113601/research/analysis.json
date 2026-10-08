@@ -1,0 +1,57 @@
+{
+  "alpha": 0.05,
+  "alternative": "two-sided",
+  "assumptions": [
+    "Observações independentes; esta premissa não é confirmada pelo código.",
+    "A origem e a adequação da amostra dependem da proveniência informada.",
+    "Um único método é executado, sem busca por resultados significativos.",
+    "O p-valor paramétrico e o intervalo de Fisher pressupõem distribuição bivariada adequada; o teste de permutação pressupõe permutabilidade sob a hipótese nula."
+  ],
+  "causal_inference": false,
+  "confidence_interval_95": [
+    0.9490524593111144,
+    0.9729853173787971
+  ],
+  "descriptive": {
+    "petal_length": {
+      "max": 6.9,
+      "mean": 3.758,
+      "median": 4.35,
+      "min": 1.0,
+      "n": 150,
+      "standard_deviation": 1.7652982332594664
+    },
+    "petal_width": {
+      "max": 2.5,
+      "mean": 1.1993333333333334,
+      "median": 1.3,
+      "min": 0.1,
+      "n": 150,
+      "standard_deviation": 0.7622376689603466
+    }
+  },
+  "estimate": 0.9628654314027961,
+  "experiment_executed": true,
+  "limitations": [
+    "A análise não estabelece causalidade.",
+    "A revisão computacional não substitui revisão humana por pares.",
+    "Não há certificação externa de originalidade ou generalização."
+  ],
+  "method": "pearson",
+  "missing_values_policy": "reject",
+  "n": 150,
+  "null_hypothesis": "Correlação linear populacional igual a zero.",
+  "p_value": 4.675003907328585e-86,
+  "permutation": {
+    "extreme": 0,
+    "p_value": 0.001,
+    "replicates": 999,
+    "seed": 663
+  },
+  "seed": 663,
+  "statistic": 0.9628654314027961,
+  "variables": {
+    "x": "petal_length",
+    "y": "petal_width"
+  }
+}

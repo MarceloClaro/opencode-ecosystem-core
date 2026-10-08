@@ -1,0 +1,257 @@
+.shell {
+  --ngs-header-height: 48px;
+  --ngs-context-height: 44px;
+  --ngs-inspector-width: 376px;
+  width: 100%;
+  min-width: 0;
+  background: var(--ngs-surface);
+  container: ngs-workbench / inline-size;
+}
+.shell[data-display-mode="fullscreen"] {
+  display: flex;
+  height: 100dvh;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: grid;
+  flex: none;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--oai-space-4);
+  min-height: var(--ngs-header-height);
+  padding: var(--oai-space-2) var(--oai-space-4);
+  border-bottom: 1px solid var(--ngs-border);
+  background: var(--ngs-surface-opaque);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--oai-space-2);
+  min-width: 0;
+}
+.brand h1 {
+  font-size: var(--ngs-font-md);
+  line-height: var(--ngs-leading);
+  letter-spacing: normal;
+}
+.brandMark {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex: none;
+}
+.brandShort {
+  display: none;
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--oai-space-1);
+}
+.navigation button {
+  min-height: var(--ngs-control-height);
+  padding: var(--oai-space-1) var(--oai-space-3);
+  border: 0;
+  border-radius: var(--ngs-radius-sm);
+  color: var(--ngs-text-muted);
+  background: transparent;
+  font-size: var(--ngs-font-sm);
+  font-weight: var(--ngs-weight-medium);
+  cursor: pointer;
+}
+.navigation button:hover {
+  background: var(--ngs-surface-hover);
+  color: var(--ngs-text);
+}
+.navigation button[aria-current="page"] {
+  background: var(--ngs-surface-raised);
+  color: var(--ngs-text);
+}
+.overview {
+  width: min(100%, 1080px);
+  margin-inline: auto;
+  padding: var(--oai-space-6);
+}
+.workflowPage {
+  min-width: 0;
+}
+.pipelineIntro {
+  margin-bottom: var(--oai-space-6);
+}
+.shell[data-display-mode="fullscreen"] .overview {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.runDetail {
+  width: 100%;
+  min-width: 0;
+}
+.detailHeader {
+  position: sticky;
+  top: var(--ngs-header-height);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--ngs-context-height);
+  gap: var(--oai-space-4);
+  padding: var(--oai-space-1) var(--oai-space-6);
+  border-bottom: 1px solid var(--ngs-border);
+  background: var(--ngs-surface-opaque);
+  color: var(--ngs-text-muted);
+  font-size: var(--ngs-font-sm);
+}
+.detailBreadcrumb {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--oai-space-2);
+}
+.detailBreadcrumb button {
+  min-height: var(--ngs-control-height);
+  padding: var(--oai-space-1);
+  border: 0;
+  border-radius: var(--ngs-radius-sm);
+  color: inherit;
+  background: transparent;
+  font-weight: var(--ngs-weight-medium);
+  cursor: pointer;
+}
+.detailBreadcrumb button:hover {
+  background: var(--ngs-surface-hover);
+  color: var(--ngs-text);
+}
+.detailBreadcrumb > span:last-child {
+  overflow: hidden;
+  color: var(--ngs-text);
+  font-weight: var(--ngs-weight-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.runDetailLayout {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) 0px;
+  gap: 0;
+  align-items: start;
+  transition: grid-template-columns var(--oai-duration-standard)
+    var(--oai-ease-standard);
+}
+.runDetailLayout[data-history-open="true"]:not(
+    [data-compact-inspector="true"]
+  ) {
+  grid-template-columns: minmax(0, 1fr) var(--ngs-inspector-width);
+}
+.analysisColumn {
+  min-width: 0;
+}
+.analysisPane {
+  min-width: 0;
+  padding: var(--oai-space-6) var(--oai-space-8) var(--oai-space-10);
+  container: ngs-analysis / inline-size;
+}
+.analysisContent {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+.shell[data-display-mode="fullscreen"] .runDetail {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.shell[data-display-mode="fullscreen"] .detailHeader {
+  /* Only the panes scroll here; a sticky offset would overlap their content. */
+  position: relative;
+  top: auto;
+  flex: none;
+}
+.shell[data-display-mode="fullscreen"] .runDetailLayout {
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+  overflow: hidden;
+}
+.shell[data-display-mode="fullscreen"] .analysisColumn {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+}
+.shell[data-display-mode="fullscreen"] .analysisPane {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+.analysisState {
+  min-width: 0;
+  padding: 0 0 var(--oai-space-4);
+}
+.analysisState h2 {
+  font-size: var(--ngs-font-title);
+}
+.errorBanner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--oai-space-3);
+  flex: none;
+  margin: var(--oai-space-3) var(--oai-space-6);
+  padding: var(--oai-space-3);
+  border: 1px solid var(--ngs-danger);
+  border-radius: var(--ngs-radius-md);
+  background: var(--ngs-danger-surface);
+  color: var(--ngs-danger);
+}
+.errorBanner pre {
+  min-width: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+  font-size: var(--ngs-font-sm);
+}
+@container ngs-workbench (max-width: 640px) {
+  .header {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--oai-space-3);
+  }
+  .navigation {
+    justify-content: flex-end;
+  }
+  .navigation button {
+    padding-inline: var(--oai-space-2);
+  }
+  .brandFull {
+    display: none;
+  }
+  .brandShort {
+    display: inline;
+  }
+  .overview {
+    padding: var(--oai-space-5) var(--oai-space-4) var(--oai-space-6);
+  }
+  .analysisPane {
+    padding: var(--oai-space-5) var(--oai-space-4) var(--oai-space-6);
+  }
+  .detailHeader {
+    gap: var(--oai-space-2);
+    padding-inline: var(--oai-space-4);
+  }
+  .errorBanner {
+    margin-inline: var(--oai-space-4);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .runDetailLayout {
+    transition: none;
+  }
+}

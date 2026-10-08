@@ -1,0 +1,12 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________________ test_custom_rejects_modified_source ______________________
+tests/test_r668_dataset_cli.py:149: in test_custom_rejects_modified_source
+    assert result["status"] == "blocked"
+E   AssertionError: assert 'completed' == 'blocked'
+E     
+E     - blocked
+E     + completed
+=========================== short test summary info ============================
+FAILED tests/test_r668_dataset_cli.py::test_custom_rejects_modified_source - ...
+1 failed in 0.30s

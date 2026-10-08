@@ -322,6 +322,41 @@ subconjunto core (Flask, openai, zep-cloud, pydantic, PyMuPDF). Para simulação
 **determinística local** use `orch.mirofish_simulate(...)` /
 `orch.banca_simulate(...)` — caminho principal do Core.
 
+### LLM do OpenCode via proxy (SPEC-935-R605, 2026-09-26 — validado em runtime)
+
+O backend externo pode operar **simulação OASIS completa e funcional** (ações
+reais dos agentes) usando as LLMs do OpenCode em vez de Gemini/quota:
+
+1. `opencode_proxy.py` (no repo AGPL, porta 8088, unit `opencode-proxy`) expõe
+   `/v1/chat/completions` OpenAI-compatível → executa `opencode run --format json`
+   com o modelo **`opencode/big-pickle`** (gratuito, ~2–8s, autenticado via
+   auth.json local).
+2. Proxy implementa **tool-calling**: camel-ai envia `tools` e exige
+   `message.tool_calls` na resposta; o proxy instrui o LLM a responder JSON
+   `{"name","arguments"}` e devolve no formato OpenAI.
+3. MiroFish `.env`: `LLM_BASE_URL=http://127.0.0.1:8088/v1`,
+   `LLM_MODEL_NAME=opencode/big-pickle`.
+4. Resultado real observado (R605): simulação 24 rounds, 10 agentes odontológicos,
+   **68 ações** (CREATE_POST, QUOTE_POST, CREATE_COMMENT, LIKE_POST...) com
+   conteúdo textual original gerado pelo LLM.
+
+Fluxo recomendado para demo ponta-a-ponta:
+
+```bash
+# 1. proxy no ar
+systemctl --user status opencode-proxy
+# 2. backend no ar (unit mirofish-backend)
+curl -s http://127.0.0.1:5001/health
+# 3. criar/preparar simulação e start
+# 4. consultar run-status (actions crescem) e gerar relatório
+curl -s -X POST http://127.0.0.1:5001/api/report/generate \
+  -H "Content-Type: application/json" \
+  -d '{"simulation_id":"sim_XXX"}'
+```
+
+> Shield de licença: o proxy vive no repo AGPL; o Core apenas o compõe por HTTP
+> via `integrations.mirofish_offline.py` (nenhum código AGPL copiado).
+
 ## Verificação
 
 - Testes: `python3 -m pytest tests/test_r583_mirofish_offline.py -q`

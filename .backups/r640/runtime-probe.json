@@ -1,0 +1,32 @@
+{
+  "kind": "real_cli_probe",
+  "results": [
+    {
+      "executor": "claude",
+      "success": false,
+      "output": "",
+      "error": "A CLI encerrou com código 1. Consulte o diagnóstico do executor.",
+      "ecosystem": "claude",
+      "execution_mode": "cli-read-only",
+      "returncode": 1
+    },
+    {
+      "executor": "antigravity",
+      "success": false,
+      "output": "",
+      "error": "A CLI não entregou conteúdo final verificável.",
+      "ecosystem": "antigravity",
+      "execution_mode": "cli-read-only",
+      "returncode": 0
+    },
+    {
+      "executor": "codex",
+      "success": true,
+      "output": "REDE_R640_EXECUCAO_REAL",
+      "error": "",
+      "ecosystem": "codex",
+      "execution_mode": "cli-read-only-windows-interop",
+      "returncode": 0
+    }
+  ]
+}

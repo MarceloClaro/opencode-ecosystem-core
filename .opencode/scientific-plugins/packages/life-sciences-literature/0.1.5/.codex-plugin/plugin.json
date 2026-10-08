@@ -1,0 +1,45 @@
+{
+  "name": "life-sciences-literature",
+  "version": "0.1.5",
+  "description": "Biomedical literature discovery across PubMed, PMC Open Access, bioRxiv, and medRxiv.",
+  "author": {
+    "name": "OpenAI"
+  },
+  "homepage": "https://github.com/openai/openai/tree/master/chatgpt/oai-maintained-plugins/plugins/life-sciences-literature",
+  "repository": "https://github.com/openai/openai/tree/master/chatgpt/oai-maintained-plugins/plugins/life-sciences-literature",
+  "license": "Proprietary",
+  "keywords": [
+    "life-science",
+    "literature",
+    "pubmed",
+    "pmc",
+    "biorxiv",
+    "medrxiv",
+    "preprints"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Life Sciences Literature",
+    "shortDescription": "Find biomedical papers, preprints, and open-access full text",
+    "longDescription": "Helps you discover and summarize biomedical literature using PubMed publication records, PMC Open Access availability, and bioRxiv or medRxiv preprints. Use it for focused searches, citation metadata, publication linkage, and source-backed comparisons between preprints and published articles.",
+    "developerName": "OpenAI",
+    "category": "Scientific Research",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://openai.com/",
+    "privacyPolicyURL": "https://openai.com/policies/row-privacy-policy/",
+    "termsOfServiceURL": "https://openai.com/policies/row-terms-of-use/",
+    "defaultPrompt": [
+      "Find recent papers and preprints about TREM2 in microglia.",
+      "Check whether this PMID has open-access full text in PMC: ",
+      "Compare the published and preprint records for this DOI: "
+    ],
+    "brandColor": "#7C3AED",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/icon.svg",
+    "screenshots": []
+  }
+}

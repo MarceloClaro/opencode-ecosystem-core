@@ -1,0 +1,83 @@
+flowchart TB
+  %% OdontoCA research architecture v2. Evidence status checked against the saved v1.3.2 CI_SMOKE notebook.
+  %% Solid blue = executed synthetic integration; dashed amber = protocol, not executed.
+  %% Gates never convert synthetic or cross-cohort results into clinical evidence.
+
+  START([OdontoCA: research protocol and evidence ledger])
+  START --> PROFILE{Execution profile and data provenance?}
+
+  subgraph SYN["A. EXECUTED IN SAVED NOTEBOOK — CI_SMOKE ONLY"]
+    direction TB
+    S1["Synthetic children, visits, tooth states and ASV counts"]
+    S2["Tooth-level consecutive transitions<br/>target: 1 = H to C, 0 = H to H"]
+    S3["CA rule; clinical; microbiome; combined predictors"]
+    S4["Child-grouped nested cross-validation<br/>train-only preprocessing inside folds"]
+    S5["Out-of-fold PR-AUC, ROC-AUC, Brier and log loss<br/>cluster bootstrap and below-chance audit"]
+    S6["Technical integration evidence only<br/>no estimate of clinical performance"]
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6
+  end
+  PROFILE -- CI_SMOKE --> S1
+
+  subgraph REAL["B. REAL CLINICAL + MICROBIOME RESEARCH — NOT RUN IN SAVED NOTEBOOK"]
+    direction TB
+    C1["Clinical source: Table_S1<br/>consent, license, version and checksum"]
+    C2["Reproduce published cohort counts;<br/>exclude invalid records and nonconsecutive visits"]
+    C3["Freeze outcome H to C and predictor timepoint;<br/>audit patient, visit and tooth identity"]
+    M1["Qiita/BIOM source: version, mapping and checksum"]
+    M2["Exact one-to-one SampleID match;<br/>reject ambiguity, duplicates and zero libraries"]
+    R0{"Real-data contracts pass?"}
+    R1["Split by child BEFORE model fitting<br/>and verify zero group overlap"]
+    R2["Within each training fold only:<br/>ASV selection, CLR, scaling, PCA, tuning"]
+    R3["Locked out-of-fold probabilities for<br/>CA, clinical, microbiome and combined models"]
+    R4["Report event counts, PR baseline, PR-AUC,<br/>ROC-AUC, calibration curves, Brier, log loss and child bootstrap CI"]
+    R5["Audit model orientation and below-chance results;<br/>do not invert AUC after seeing outcomes"]
+    C1 --> C2 --> C3 --> R0
+    M1 --> M2 --> R0
+    R0 -- yes --> R1 --> R2 --> R3 --> R4 --> R5
+    R0 -- no --> BLOCK1["BLOCK: correct provenance, cohort or sample alignment"]
+  end
+  PROFILE -. REPRO_DATASET / MICROBIOME_RESEARCH .-> C1
+  PROFILE -. MICROBIOME_RESEARCH .-> M1
+
+  subgraph IMG["C. VISUAL RESEARCH BRANCH — NOT RUN IN SAVED NOTEBOOK"]
+    direction TB
+    V1["Image datasets: provenance, license, modality,<br/>reference standard and patient identifiers"]
+    V2["Parse annotation formats; separate labeled<br/>images from inference-only images"]
+    V3["Preserve official held-out test or group by patient;<br/>exact and near-duplicate cross-split audit"]
+    V4["Image quality review; train-only augmentation;<br/>visual tuning on validation data only"]
+    V5["One held-out test evaluation per visual domain;<br/>precision, recall, mAP and uncertainty"]
+    V6["Tooth localization / FDI and clinician review<br/>only if segmentation and labels are validated"]
+    V1 --> V2 --> V3 --> V4 --> V5 --> V6
+  end
+  PROFILE -. IMAGE_DATASET_AUDIT / FULL_RESEARCH .-> V1
+
+  subgraph GATES["D. FUSION, VALIDATION AND REPORTING GATES — PROPOSED"]
+    direction TB
+    F1{"Same consented cohort and exact<br/>patient_id + visit_id + tooth_fdi?"}
+    F2["Only then evaluate prespecified multimodal fusion<br/>within the same grouped train/test structure"]
+    F3["If cross-cohort or unmatched: report separate<br/>clinical and visual analyses; no patient-level fusion"]
+    E1["Independent external or temporal cohort;<br/>locked model and prospective evaluation plan"]
+    E2{"Evidence audit: meaningful TDD, no required SKIP,<br/>no leakage, finite metrics, calibrated predictions?"}
+    E3["Research manuscript: label each profile and dataset;<br/>separate synthetic, internal and external results"]
+    E4["Clinical use gate: ethics, external validation,<br/>bias, safety and regulatory review"]
+    F1 -- yes --> F2 --> E1
+    F1 -- no --> F3 --> E3
+    E1 --> E2
+    E2 -- pass --> E3 --> E4
+    E2 -- fail --> BLOCK2["BLOCK: repair, rerun and disclose failure"]
+  end
+  R5 -. real predictions .-> F1
+  V6 -. matched visual predictions only .-> F1
+  R5 -. no visual fusion .-> E1
+  S6 --> SYN_ONLY([Synthetic results remain labeled technical evidence])
+
+  classDef done fill:#e8f3fb,stroke:#23608a,stroke-width:2px,color:#102a3a;
+  classDef planned fill:#fff7e5,stroke:#a26a15,stroke-width:2px,stroke-dasharray:6 4,color:#3c2b10;
+  classDef gate fill:#f0eafb,stroke:#69468c,stroke-width:2px,color:#241b33;
+  classDef blocked fill:#fce9e8,stroke:#b6362c,stroke-width:2px,color:#541b17;
+  classDef note fill:#e9f5ee,stroke:#327453,stroke-width:2px,color:#173a29;
+  class S1,S2,S3,S4,S5,S6 done;
+  class C1,C2,C3,M1,M2,R1,R2,R3,R4,R5,V1,V2,V3,V4,V5,V6,F2,F3,E1,E3,E4 planned;
+  class PROFILE,R0,F1,E2 gate;
+  class BLOCK1,BLOCK2 blocked;
+  class START,SYN_ONLY note;

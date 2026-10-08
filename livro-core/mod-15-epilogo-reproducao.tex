@@ -1,0 +1,109 @@
+% ============================================================
+%  MODULO 15 — Epilogo operacional: Reproduza o Core em 12 passos
+%  SPEC R679 — planta executavel, calculos C1-C4 fechados
+% ============================================================
+\chapter{Ep\'ilogo Operacional: Reproduza o Core em Doze Passos}
+
+\roteirodidatico
+{Ana quer ter certeza de que o que leu continua valendo amanh\~a; Bruno quer provar que consegue reconstruir tudo em outra m\'aquina. Este ep\'ilogo \'e a planta que os dois executam juntos, cada passo com comando, sa\'ida esperada e modo de conferir.}
+{\emph{Proveni\^encia} diz quem gerou, de que vers\~ao e com que comando; \emph{fotografia} \'e contagem datada do checkout; \emph{gate} \'e teste booleano que reprova na d\'uvida; \emph{hash} \'e impress\~ao digital do arquivo.}
+{Execute na ordem, anote a sa\'ida real ao lado da esperada e pare no primeiro desvio para diagnosticar antes de seguir.}
+{Reproduzir prova que o caminho \'e percorr\'ivel, n\~ao que toda resposta do sistema \'e correta. N\'umero de teste verde n\~ao \'e medida de verdade geral.}
+{Que passo desta planta voc\^e consegue executar agora, com que evid\^encia, e qual depend\^encia externa ainda pode impedi-lo?}
+
+\casoguiado{Bruno reconstr\'oi, Ana confere}
+{Bruno clona o reposit\'orio, cria o ambiente virtual e roda o diagn\'ostico. Ana anota num caderno: quantos agentes o arquivo declara, quantas specs carregaram, quantos testes passaram. Quando o PDF recompila, os dois comparam o n\'umero de p\'aginas e o sum\'ario com a edi\c{c}\~ao que leram. Se algum n\'umero divergir, n\~ao concluem que o livro mentiu: concluem que o checkout mudou e registram a nova fotografia com data.}
+
+\section{Planta de doze passos com confer\^encia}
+
+A planta trata o ambiente, o c\'odigo e os dados como parte do relato, n\~ao como anexo. Essa exig\^encia vem da ci\^encia computacional reproduz\'ivel, que pede o artigo acompanhado do ambiente completo.
+
+Sem o ambiente, o artigo descreve inten\c{c}\~ao; com ele, outro pesquisador pode percorrer o mesmo caminho e comparar resultados \citref{PENG, R. D. Reproducible research in computational science. Science, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{Exige que este epilogo entregue comandos e versoes como parte do texto cientifico, nao como anexo opcional.}{Reproducible research is the idea that the ultimate product of academic research is the paper along with the full computational environment}{Pesquisa reproduzivel e a ideia de que o produto final da pesquisa academica e o artigo junto com o ambiente computacional completo.}{PENG, 2011, p.~1226-1227}.
+
+Cada entrega desta planta carrega proveni\^encia para ser encontrada, acessada e reutilizada por pessoas e m\'aquinas, segundo os princ\'ipios de dados justos.
+
+A infraestrutura de reutiliza\c{c}\~ao \'e a condi\c{c}\~ao para que a reprodu\c{c}\~ao de hoje sirva \`a auditoria de amanh\~a \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{Fundamenta a exigencia de proveniencia por observacao em cada passo da planta: identificador, descricao e registro.}{There is an urgent need to improve the infrastructure supporting the reuse of scholarly data}{Ha uma necessidade urgente de melhorar a infraestrutura que sustenta a reutilizacao de dados academicos.}{WILKINSON et al., 2016, 160018}.
+
+\elemento{Planta em doze passos}{\metainfo{ID}{REP-12} \hfill \metainfo{Tempo}{cerca de uma tarde} \hfill \metainfo{Gate}{parar no primeiro desvio}}
+
+\begin{descricao}
+Passos 1 a 4 preparam o terreno. Passo 1: clone ou atualize o reposit\'orio e anote o hash do commit. Passo 2: crie o ambiente virtual Python 3 e ative-o. Passo 3: instale com \pth{make install} e \pth{make setup}, depois \pth{make setup-dev} ou \pth{make setup-science} se precisar. Passo 4: rode \pth{python3 -m marceloclaro.cli doctor} e guarde as 20 linhas de veredito. Esperado: specs formais carregadas, registro de evolu\c{c}\~ao \'integro, mem\'oria acess\'ivel. Se faltar CLI externa, o diagn\'ostico avisa em amarelo; anote como depend\^encia opcional ausente, n\~ao como falha total.
+\end{descricao}
+
+\begin{descricao}
+Passos 5 a 8 conferem o invent\'ario. Passo 5: conte agentes em \pth{opencode.json}, chave \pth{agent}; confira o total com o M\'odulo 10. Passo 6: conte arquivos \pth{specs/SPEC-935-R*.md} e compare com o n\'umero que o \pth{doctor} diz ter carregado; escopos distintos explicam diferen\c{c}as. Passo 7: conte arquivos e linhas em \pth{mci/} e anote como fotografia datada. Passo 8: rode a su\'ite m\'inima de testes do n\'ucleo e anote verdes e vermelhos. Nenhuma dessas contagens mede qualidade; todas medem presen\c{c}a naquela vers\~ao.
+\end{descricao}
+
+\begin{descricao}
+Passos 9 a 12 fecham o ciclo. Passo 9: execute uma tarefa de brinquedo pelo Orquestrador e guarde Blackboard, escore e gate. Passo 10: confira cada DOI deste livro abrindo \pth{https://doi.org/} mais o sufixo; DOI que n\~ao resolve n\~ao entra na pr\'oxima edi\c{c}\~ao. Passo 11: recompile com \pth{pdflatex main.tex} dentro de \pth{livro-core/} e rode \pth{python3 check.py}; esperado \pth{ok} e \pth{main.pdf} regenerado. Passo 12: registre ciclo de evolu\c{c}\~ao e li\c{c}\~ao no MetaBus com data, hash e o que mudou. Sem passo 12, a reprodu\c{c}\~ao serviu s\'o a voc\^e; com ele, serve ao pr\'oximo leitor.
+\end{descricao}
+
+\begin{funcao}
+Transformar leitores em replicadores: cada passo deixa rastro que outro pode seguir, comparar e contestar, sem depender da m\'aquina do autor.
+\end{funcao}
+
+\section{Quatro c\'alculos fechados para levar no bolso}
+
+Primeiro c\'alculo, risco de agregar sem gate. Com $N=216$ e $p=0{,}99$, $P=1-0{,}99^{216}\approx 0{,}886$. Variante com $p=0{,}999$: $\ln(0{,}999^{216})=216\ln 0{,}999\approx 216\times(-0{,}0010005)\approx -0{,}216$, logo $0{,}999^{216}\approx e^{-0{,}216}\approx 0{,}806$ e $P\approx 0{,}194$, cerca de 19 por cento. Melhorar cada pe\c{c}a de 99 para 99,9 por cento derruba o risco de 89 para 19 por cento, mas n\~ao o zera. A hip\'otese de independ\^encia segue fr\'agil: erros correlacionados quebram a f\'ormula para cima.
+
+Segundo c\'alculo, aten\c{c}\~ao de brinquedo, j\'a resolvido na jornada: com $QK^{T}=[[4,0],[0,4]]$ e $d_{k}=4$, softmax d\'a $[0{,}88,0{,}12]$ e $[0{,}12,0{,}88]$. A li\c{c}\~ao permanece: peso concentra onde o escore destaca, e escore empatado divide.
+
+Terceiro c\'alculo, valor preditivo positivo. Com $R=0{,}1$, poder $0{,}8$ e $\alpha=0{,}05$, $\mathrm{PPV}\approx 0{,}615$. Com campo f\'acil $R=1$, $\mathrm{PPV}=0{,}8/(0{,}8+0{,}05)\approx 0{,}941$. O mesmo teste verde vale 62 por cento num campo e 94 por cento noutro. A taxa-base manda tanto quanto o teste.
+
+Essa depend\^encia da taxa-base e do vi\'es \'e a raz\~ao formal do anti-overclaim deste livro: sem relatar poder, vi\'es e campo, signific\^ancia n\~ao sustenta proclama\c{c}\~ao.
+
+Para muitos desenhos e campos, a alega\c{c}\~ao tem mais chance de ser falsa do que verdadeira, e \'e por isso que cada ficha termina com limites \citref{IOANNIDIS, J. P. A. Why most published research findings are false. PLoS Medicine, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{Fecha os tres calculos com a formula do PPV: taxa-base, poder e vies decidem o que um teste verde permite concluir.}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulacoes mostram que, para a maioria dos desenhos e cenarios de estudo, e mais provavel que uma alegacao de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, e124}.
+
+Quarto c\'alculo, invent\'ario reproduz\'ivel. Rode no raiz do reposit\'orio o trio: contagem de agentes por chave \pth{agent} em \pth{opencode.json}, contagem de \pth{specs/SPEC-935-R*.md} e contagem de arquivos em \pth{mci/}. Anote os tr\^es n\'umeros com data e hash do commit. Repita ap\'os cada \pth{git pull}. Se o \pth{doctor} disser 160 specs carregadas e a pasta tiver 321 arquivos, n\~ao h\'a contradi\c{c}\~ao: um conta registros reconhecidos, outro conta arquivos presentes. A disciplina de passos curtos e uniformes \'e o que torna essas contagens confi\'aveis como rotina.
+
+Ciclos curtos intercalados com testes mant\^em o foco e permitem localizar a diverg\^encia no passo em que ela nasceu, em vez de ca\c{c}\'a-la no fim \citref{FUCCI, D. et al. A dissection of the test-driven development process: does it really matter to test-first or to test-last? IEEE Transactions on Software Engineering, v.~43, n.~7, p.~597-614, 2017}{10.1109/TSE.2016.2616877}{Justifica o quarto calculo como rotina curta e uniforme: conferir inventario a cada mudanca em vez de auditar tudo no fim.}{Test-driven development is a technique that repeats short coding cycles interleaved with testing}{Desenvolvimento orientado a testes e uma tecnica que repete ciclos curtos de codificacao intercalados com testes.}{FUCCI et al., 2017, p.~597-614}.
+
+\section{Despedida de Ana e Bruno}
+
+Ana fecha o caderno e diz que agora sabe pedir sem ser enganada: com fonte, com limite e com direito a devolver. Bruno fecha o terminal e diz que agora sabe entregar sem enganar: com spec, com teste e com proveni\^encia. O narrador despede-se com a mesma frase que abriu o pr\'ologo: neste livro, hist\'oria alguma substitui arquivo, e arquivo algum dispensa verifica\c{c}\~ao. O pr\'oximo leitor que refizer os doze passos e recalcular os quatro c\'alculos ser\'a o pr\'oximo autor da pr\'oxima fotografia datada.
+
+\begin{aviso}
+Limite do ep\'ilogo. A planta foi testada neste checkout em 05/10/2026; depend\^encias externas, credenciais de provedores e modelos locais podem mudar o resultado em outra m\'aquina. Guardar sa\'idas reais ao lado das esperadas \'e parte da reprodu\c{c}\~ao, n\~ao ap\^endice.
+\end{aviso}
+
+\section{Refer\^encias did\'aticas desta jornada com acesso em 05 out.~2026}
+
+\begin{referencia}
+\textbf{SWELLER, J.} Cognitive load during problem solving: effects on learning. \emph{Cognitive Science}, v.~12, n.~2, p.~257-285, 1988. DOI: \href{https://doi.org/10.1016/0364-0213(88)90023-7}{10.1016/0364-0213(88)90023-7}. Uso: metodo didatico do livro, exemplos antes do formalismo.
+\end{referencia}
+
+\begin{referencia}
+\textbf{FLAVELL, J. H.} Metacognition and cognitive monitoring. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979. DOI: \href{https://doi.org/10.1037/0003-066X.34.10.906}{10.1037/0003-066X.34.10.906}. Uso: MetaBus como monitoramento cognitivo.
+\end{referencia}
+
+\begin{referencia}
+\textbf{NII, H. P.} Blackboard systems. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986. DOI: \href{https://doi.org/10.1609/aimag.v7i2.537}{10.1609/aimag.v7i2.537}. Uso: Quadro Negro A2A.
+\end{referencia}
+
+\begin{referencia}
+\textbf{WOOLDRIDGE, M.; JENNINGS, N. R.} Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995. DOI: \href{https://doi.org/10.1017/S0269888900008122}{10.1017/S0269888900008122}. Uso: definicao de agente.
+\end{referencia}
+
+\begin{referencia}
+\textbf{VASWANI, A. et al.} Attention is all you need. \emph{Advances in Neural Information Processing Systems}, v.~30, p.~5998-6008, 2017. DOI: \href{https://doi.org/10.48550/arXiv.1706.03762}{10.48550/arXiv.1706.03762}. Uso: roteamento por atencao.
+\end{referencia}
+
+\begin{referencia}
+\textbf{IOANNIDIS, J. P. A.} Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005. DOI: \href{https://doi.org/10.1371/journal.pmed.0020124}{10.1371/journal.pmed.0020124}. Uso: PPV e anti-overclaim.
+\end{referencia}
+
+\begin{referencia}
+\textbf{WILKINSON, M. D. et al.} The FAIR Guiding Principles. \emph{Scientific Data}, v.~3, 160018, 2016. DOI: \href{https://doi.org/10.1038/sdata.2016.18}{10.1038/sdata.2016.18}. Uso: proveniencia e reuso.
+\end{referencia}
+
+\begin{referencia}
+\textbf{PENG, R. D.} Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011. DOI: \href{https://doi.org/10.1126/science.1213847}{10.1126/science.1213847}. Uso: planta executavel.
+\end{referencia}
+
+\begin{referencia}
+\textbf{FUCCI, D. et al.} A dissection of the TDD process. \emph{IEEE Transactions on Software Engineering}, v.~43, n.~7, p.~597-614, 2017. DOI: \href{https://doi.org/10.1109/TSE.2016.2616877}{10.1109/TSE.2016.2616877}. Uso: granularidade e uniformidade.
+\end{referencia}
+
+\begin{referencia}
+\textbf{RAFIQUE, Y.; MISIC, V. B.} The effects of TDD: a meta-analysis. \emph{IEEE Transactions on Software Engineering}, v.~39, n.~6, p.~835-856, 2013. DOI: \href{https://doi.org/10.1109/TSE.2012.28}{10.1109/TSE.2012.28}. Uso: limite do que TDD promete.
+\end{referencia}

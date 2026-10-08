@@ -32,17 +32,17 @@ mode: subagent
 temperature: 0.1
 permission:
   read:
-    *: allow
+    "*": allow
   grep:
-    *: allow
+    "*": allow
   glob:
-    *: allow
+    "*": allow
   bash:
     find .opencode/context*: allow
     ls -la .opencode/context*: allow
     mkdir -p .opencode/context*: allow
     mv .opencode/context*: allow
-    *: deny
+    "*": deny
   edit:
     .opencode/context/**/*.md: allow
     .opencode/context/**/*.json: allow
@@ -56,7 +56,7 @@ permission:
     **/*.key: deny
     **/*.secret: deny
   task:
-    *: deny
+    "*": deny
     contextscout: allow
 ---
 

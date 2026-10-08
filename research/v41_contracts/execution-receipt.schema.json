@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manus.local/pesquisa-artigo-qualis-a1/execution-receipt.schema.json",
+  "title": "ScientificExecutionReceipt v1.0",
+  "type": "object",
+  "required": [
+    "schema_version", "receipt_id", "project_id", "executed_at", "executor",
+    "action", "environment", "inputs", "outputs", "exit_code", "status",
+    "scientific_scope", "limitations"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "receipt_id": {"type": "string", "pattern": "^EXR-[0-9]{3,}$"},
+    "project_id": {"type": "string", "minLength": 3},
+    "binding_id": {"type": ["string", "null"], "pattern": "^OCB-[0-9]{3,}$"},
+    "executed_at": {"type": "string", "format": "date-time"},
+    "executor": {"type": "string", "minLength": 2},
+    "action": {"type": "string", "minLength": 1},
+    "command": {"type": ["string", "null"]},
+    "test_targets": {"type": "array", "items": {"type": "string"}, "default": []},
+    "environment": {
+      "type": "object",
+      "required": ["platform", "python", "source_commit"],
+      "properties": {
+        "platform": {"type": "string", "minLength": 1},
+        "python": {"type": "string", "minLength": 1},
+        "source_commit": {"type": ["string", "null"], "pattern": "^[a-f0-9]{40}$"},
+        "lockfile_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "container_image": {"type": ["string", "null"]},
+        "hardware": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "sha256"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+          "version": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "sha256"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "exit_code": {"type": "integer"},
+    "test_summary": {
+      "type": ["object", "null"],
+      "properties": {
+        "collected": {"type": "integer", "minimum": 0},
+        "passed": {"type": "integer", "minimum": 0},
+        "failed": {"type": "integer", "minimum": 0},
+        "skipped": {"type": "integer", "minimum": 0},
+        "errors": {"type": "integer", "minimum": 0}
+      },
+      "required": ["collected", "passed", "failed", "skipped", "errors"],
+      "additionalProperties": false
+    },
+    "status": {"enum": ["passed", "failed", "partial", "not_executed"]},
+    "scientific_scope": {"type": "string", "minLength": 5},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "supports_claim_ids": {"type": "array", "items": {"type": "string"}, "default": []},
+    "artifact_ids": {"type": "array", "items": {"type": "string"}, "default": []},
+    "extensions": {"type": "object", "additionalProperties": true}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "passed"}}},
+      "then": {"properties": {"exit_code": {"const": 0}}}
+    },
+    {
+      "if": {"properties": {"status": {"const": "not_executed"}}},
+      "then": {"properties": {"supports_claim_ids": {"maxItems": 0}}}
+    }
+  ],
+  "additionalProperties": false
+}

@@ -1,3 +1,12 @@
+---
+name: evo-science
+description: >-
+  Ciclo evolutivo de descoberta científica (R101) inspirado no EvoSci: população
+  de hipóteses com seleção, crossover, mutação e herança (Mentor → Researcher →
+  Reviewer → Evolution). Use para explorar hipóteses concorrentes com registro
+  de linhagem. Não promete descoberta validada nem substitui revisão por pares.
+---
+
 # Evo-Science Skill
 
 **Ciclo Evolutivo de Descoberta Científica — R101 Agentic Science V2**

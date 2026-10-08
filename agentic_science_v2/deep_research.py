@@ -23,13 +23,11 @@ import random
 import time
 import uuid
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from agentic_science_v2.evidence_graph import (
     EvidenceGraph,
     Entity,
-    Relation,
-    Evidence,
 )
 
 logger = logging.getLogger(__name__)
@@ -78,6 +76,9 @@ class ResearchReport:
             "id": self.id,
             "question": self.question,
             "summary": self.summary[:500],
+            "evidence_kind": "simulation",
+            "evidence_eligible": False,
+            "experiment_executed": False,
             "sections": self.sections,
             "citations_count": len(self.citations),
             "evidence_graph": self.evidence_graph_summary,
@@ -154,7 +155,8 @@ class KnowledgeBaseRegistry:
         elif source_id == "pathway":
             results = []
 
-        return results
+        return [dict(item, synthetic=True, evidence_kind="simulation", evidence_eligible=False)
+                for item in results]
 
 
 # ============================================================
@@ -295,7 +297,7 @@ class DFRSAgent:
                         name=res["entity"],
                         entity_type=res.get("type", "concept"),
                         description=res.get("description", ""),
-                        source=f"dfrs:pubmed",
+                        source="dfrs:pubmed",
                         source_type="literature",
                     )
                     findings["entities_found"] += 1
@@ -379,8 +381,13 @@ class ExecutionSandbox:
 
         # Simular execucao
         result = {
-            "success": True,
-            "output": f"Executed: {code[:100]}...",
+            "success": False,
+            "status": "simulation",
+            "executed": False,
+            "evidence_kind": "simulation",
+            "evidence_eligible": False,
+            "simulation_completed": True,
+            "output": f"Simulated execution only: {code[:100]}...",
             "tables": [],
             "plots": [],
         }
@@ -413,7 +420,10 @@ class ExecutionSandbox:
                 {"id": f"result_{i}", "value": random.random()}
                 for i in range(3)
             ],
-            "status": "success",
+            "status": "simulation",
+            "executed": False,
+            "evidence_kind": "simulation",
+            "evidence_eligible": False,
         }
         self.cache[cache_key] = result
         self.execution_log.append({
@@ -435,9 +445,12 @@ class ExecutionSandbox:
             # Simular validacao
             validated.append({
                 "statement": stmt.get("text", ""),
-                "confidence": random.uniform(0.5, 0.95),
+                "confidence": 0.0,
+                "simulation_score": random.uniform(0.5, 0.95),
                 "supporting_sources": stmt.get("sources", []),
-                "verified": random.random() > 0.2,
+                "verified": False,
+                "evidence_kind": "simulation",
+                "evidence_eligible": False,
             })
         return validated
 
@@ -693,6 +706,11 @@ class OrchestratorAgent:
     def to_dict(self) -> Dict[str, Any]:
         """Exporta estado completo."""
         return {
+            "status": "simulation",
+            "evidence_kind": "simulation",
+            "evidence_eligible": False,
+            "experiment_executed": False,
+            "external_validation": False,
             "summary": self.summary(),
             "plans": [p.to_dict() for p in self.plans],
             "reports": [r.to_dict() for r in self.reports],

@@ -37,7 +37,7 @@ skills:
   tags: [cada, agente, analisa, independentemente]
   examples: [Aplique cada agente analisa independentemente neste contexto, Avalie usando cada agente analisa independentemente]
 - id: use-swarm-review-revisao
-  name: Use via: "swarm review", "revisão em enxame", ou ativado pelo comando
+  name: "Use via: 'swarm review', 'revisão em enxame', ou ativado pelo comando"
   description: >-
     Capacidade especializada em use via: "swarm review", "revisão em enxame", ou ativado pelo comando
     /swarm-rev.

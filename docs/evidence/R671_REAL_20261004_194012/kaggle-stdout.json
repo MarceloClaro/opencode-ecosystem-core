@@ -1,0 +1,66 @@
+{
+  "status": "blocked",
+  "reason": "cli_failed",
+  "download_executed": false,
+  "provider": "kaggle",
+  "commands": [
+    {
+      "argv": [
+        "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/kaggle",
+        "datasets",
+        "metadata",
+        "uciml/iris",
+        "--path",
+        "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/kaggle/metadata"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "20ce9ddcec11590e7a821ba808d6483b6af00a421bbae9154ad9040e2ffef895",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/kaggle",
+        "datasets",
+        "files",
+        "uciml/iris/1",
+        "--format",
+        "json",
+        "--page-size",
+        "200"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "0cc64f00be3c8064810648faf2bf8ca9ecb9960414e532a95618cd81b8fb284b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/kaggle",
+        "datasets",
+        "download",
+        "uciml/iris/1",
+        "--file",
+        "Iris.csv",
+        "--path",
+        "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_194012/kaggle/data",
+        "--quiet",
+        "--force"
+      ],
+      "exit_code": 1,
+      "stdout_sha256": "8e049381411c5669bc0cd628e4ee9ef13dc5670ca36f38d552fa704772584c1f",
+      "stderr_sha256": "9c22a0d0f05e1f475fea922cc67d4a40f14013ee9fe105a73eae8618da3e9f87"
+    }
+  ],
+  "training_executed": false,
+  "upload_executed": false,
+  "metacognition": {
+    "observation_id": "51ac0d3e-68e8-4126-b033-a53a7f48bffe",
+    "persisted": true,
+    "scope_id": "b6c3ae170a5ba061cd7f877b1984f9c0376c2fc6753780d9e1daf66986360fa2",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "blocked"
+    },
+    "confidence_promoted": false
+  }
+}

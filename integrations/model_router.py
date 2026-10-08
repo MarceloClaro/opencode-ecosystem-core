@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, List, Mapping, Optional, Any, Tuple
 
 logger = logging.getLogger("model-router")
 
@@ -96,6 +96,123 @@ def _get_colibri():
         return colibri_provider, COLI_MODELS
     except ImportError:
         return None, {}
+
+
+# ── R622: contrato canônico de metadados do catálogo ─────────────────────────
+#
+# Cada fachada de provider anuncia o schema que lhe basta, e ``list_all_models``
+# concatenava esses dicionários cru. O consumidor acabava convivendo com
+# ``id``/``model_id``, ``context``/``context_window`` conflitantes, ``family``
+# herdada do alias errado e ``free`` ausente. As duas funções abaixo reconciliam
+# a fronteira; a política de gratuidade é DECLARADA, nunca inferida de preço.
+
+FREE_DEFAULTS: Dict[str, bool] = {
+    # On-device, CPU, sem billing: roda na máquina do operador.
+    "litert-lm": True,
+    # Binário/daemon local provisionado pelo próprio operador.
+    "runai": True,
+    # BYO-key: o consumo de token é metered pela OpenAI.
+    "openai": False,
+    # Plano/assinatura OpenCode Go.
+    "opencode-go": False,
+    # Catálogo curado R499 é gratuito, mas o provedor tem plano — default pessimista.
+    "opencode": False,
+    # Curadoria mista (R499): o default é pessimista, modelos free declaram
+    # ``free: True`` explicitamente na origem e não dependem daqui.
+    "opencode-zen": False,
+}
+
+# Política de contexto para providers que não publicam janela. É um PISO
+# declarado, não uma medição: por isso o valor injetado sempre carrega
+# ``context_unknown`` em ``contract_errors``, para que o consumidor distinga
+# "o provider disse 4096" de "a política do Core supre 4096 porque o provider
+# calou". O piso é deliberadamente conservador — um chamador que confie nele
+# nunca estoura o limite real do modelo.
+CONTEXT_DEFAULTS: Dict[str, int] = {
+    # Catálogo local curado de 2B-4B, servido por daemon próprio. O runai não
+    # publica limite e não está instalado no ambiente, portanto não há como
+    # medir: adota-se o menor piso que ainda serve a uma instrução longa, e o
+    # valor real deve ser lido do modelo servido antes de qualquer afirmação
+    # sobre a capacidade do modelo.
+    "runai": 4_096,
+}
+
+# Campo de contexto contradictado por R211: o catálogo canônico LiteRT publica
+# ``context`` e o contrato de testes exige 20_480 nesse campo. Portanto, num
+# conflito entre os dois nomes, ``context`` prevalece.
+_CONTEXT_CANONICAL_KEY = "context_window"
+_CONTEXT_CONTRACTED_KEY = "context"
+
+
+def normalize_model_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
+    """Reconcilia uma entrada de catálogo para o contrato canônico (R622).
+
+    A função é pura: devolve um dicionário novo e não toca em ``entry``.
+
+    Contrato de saída garantido:
+      * ``model_id`` — identidade canônica, nunca vazia quando a entrada a traz
+        (ou a traz sob ``id``);
+      * ``context_window`` — inteiro único e positivo, sem ``context`` residual;
+        quando a origem cala, o valor vem de ``CONTEXT_DEFAULTS`` e a entrada
+        é marcada ``context_unknown``;
+      * ``free`` — booleano, sempre presente;
+      * ``contract_errors`` — lista de violações *reconciliadas*, para que o
+        consumidor possa auditar o que foi corrigido em vez de herdá-lo calado.
+
+    Metadados específicos de provider (``size_gb``, ``backend``, ``score``,
+    ``source``, ``accessible``, ``task_types``…) atravessam intactos: a
+    reconciliação é aditiva, nunca destrutiva.
+    """
+    normalized: Dict[str, Any] = dict(entry)
+    contract_errors: List[str] = list(normalized.pop("contract_errors", []) or [])
+
+    # 1. Identidade — `model_id` é a chave canônica; `id` sobrevive apenas
+    #    quando concorda, porque é o nome histórico de `runai`.
+    model_id = normalized.get("model_id")
+    legacy_id = normalized.get("id")
+    if not model_id:
+        model_id = legacy_id
+    if model_id:
+        normalized["model_id"] = model_id
+    if legacy_id and model_id and legacy_id != model_id:
+        contract_errors.append("identity_mismatch")
+
+    # 2. Contexto — uma única fonte de verdade, sem renomear o campo que R211
+    #    contratou. Em conflito, o campo contratado prevalece.
+    context = normalized.get(_CONTEXT_CONTRACTED_KEY)
+    context_window = normalized.get(_CONTEXT_CANONICAL_KEY)
+    if context is not None and context_window is not None and context != context_window:
+        contract_errors.append("context_conflict")
+        resolved = context
+    elif context_window is not None:
+        resolved = context_window
+    else:
+        resolved = context
+    normalized.pop(_CONTEXT_CONTRACTED_KEY, None)
+    if resolved is None:
+        # A origem não publica janela. Supre-se o piso declarado e marca-se a
+        # entrada, em vez de deixar a chave ausente (que quebrava o consumidor)
+        # ou inventar um número em silêncio (que mentiria sobre o modelo).
+        resolved = CONTEXT_DEFAULTS.get(normalized.get("provider"))
+        if resolved is not None:
+            contract_errors.append("context_unknown")
+    if resolved is not None:
+        normalized[_CONTEXT_CANONICAL_KEY] = resolved
+
+    # 3. `family` é atributo de identidade do modelo físico. Se a origem não a
+    #    declara, ela permanece ausente — esta função não a inventa.
+    #
+    # 4. Gratuidade — política explícita, com default pessimista e sinalizado.
+    if not isinstance(normalized.get("free"), bool):
+        provider = normalized.get("provider")
+        if provider in FREE_DEFAULTS:
+            normalized["free"] = FREE_DEFAULTS[provider]
+        else:
+            normalized["free"] = False
+            contract_errors.append("free_unknown")
+
+    normalized["contract_errors"] = contract_errors
+    return normalized
 
 
 # ── Perfis de modelo por tipo de tarefa ──────────────────────────────────────
@@ -535,7 +652,12 @@ class ModelRouter:
         )
 
     def list_all_models(self) -> List[Dict[str, Any]]:
-        """Lista todos os modelos de todos os providers (inclui catálogo free R500)."""
+        """Lista todos os modelos de todos os providers (inclui catálogo free R500).
+
+        R622: as fontes são agregadas na ordem de dependência e reconciliadas
+        para o contrato canônico antes de voltarem ao consumidor. Nenhum
+        chamador precisa conhecer o schema da fachada de origem.
+        """
         models = []
         if self._go_provider:
             models.extend(self._go_provider.list_models())
@@ -550,7 +672,7 @@ class ModelRouter:
         # R500: catálogo free curado (benchmark R499) — inclui big-pickle
         from integrations.free_model_catalog import list_free_models
         models.extend(list_free_models())
-        return models
+        return [normalize_model_entry(entry) for entry in models]
 
     def list_profiles(self) -> List[Dict[str, Any]]:
         """Lista os perfis de roteamento configurados."""

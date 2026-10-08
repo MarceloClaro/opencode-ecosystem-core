@@ -1,0 +1,345 @@
+% ============================================================
+%  MÓDULO — Instalação, Uso e Operação do Core
+% ============================================================
+\chapter{Instalação, Uso e Operação}
+
+\roteirodidatico
+{Instalar significa preparar o ambiente para executar o programa. Um comando que termina sem erro é um primeiro sinal, mas ainda não demonstra que serviços, credenciais e modelos necessários estão disponíveis.}
+{\emph{Dependência} é um programa ou pacote exigido; \emph{ambiente virtual} isola pacotes Python; \emph{provedor} entrega inferência de modelo; \emph{diagnóstico} verifica condições locais.}
+{Siga a instalação por etapas, confira a saída de cada comando e diferencie componentes obrigatórios dos opcionais. Use o diagnóstico para identificar qual dependência está faltando.}
+{Reprodutibilidade requer registrar sistema, versões, perfil instalado, configuração e provedores habilitados; “instalado” não significa “conectado” nem “validado”.}
+{Que pré-requisito foi satisfeito, por qual evidência local, e qual dependência externa ainda pode impedir a tarefa?}
+
+\casoguiado{o diagnóstico responde parcialmente}
+{Se o diagnóstico informa que as especificações carregaram, mas uma credencial de provedor não foi encontrada, as duas observações devem permanecer distintas: o mecanismo de leitura está disponível; a inferência que depende daquela credencial talvez não esteja. O passo seguinte é verificar a configuração e repetir apenas a checagem pertinente. Não se conclui que todo o ambiente está quebrado nem que o sistema está plenamente operacional.}
+
+\section{O que você precisa}
+
+\elemento{Ambiente mínimo}{\metainfo{ID}{U-01} \hfill
+\metainfo{Rota}{\pth{requirements*.txt}}}
+
+\begin{descricao}
+Para operar o Core você precisa de: Python 3 (ambiente virtual recomendado),
+ferramentas de linha de comando do sistema (git, conforme o caso), e, se quiser
+inferência local, o servidor \textbf{Ollama} com modelos (veja operação local
+adiante). Modelos da nuvem (OpenCode Zen, OpenAI, etc.) exigem credenciais
+próprias.
+\end{descricao}
+
+\begin{metodo}
+\textbf{Passo a passo de instalação:}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Clone/atualize o repositório e crie o venv:
+  \begin{itemize}[leftmargin=1.3em,itemsep=0pt]
+    \item \texttt{make\ install}
+  \end{itemize}
+  \item Instale as dependências base e (opcional) as de desenvolvimento/ciência:
+  \begin{itemize}[leftmargin=1.3em,itemsep=0pt]
+    \item \texttt{make\ setup}
+    \item \texttt{make\ setup-dev} (desenvolvedores)
+    \item \texttt{make\ setup-science} (científico)
+  \end{itemize}
+  \item Valide a saúde do ambiente (regra do \pth{AGENTS.md}):
+  \begin{itemize}[leftmargin=1.3em,itemsep=0pt]
+    \item \texttt{python3\ -m\ marceloclaro.cli\ doctor}
+  \end{itemize}
+  \item Se houver um instalador específico da plataforma, siga as instruções
+        correspondentes em \pth{common/} e consulte \pth{specs/} quando precisar
+        da especificação.
+\end{enumerate}
+\end{metodo}
+
+\begin{funcao}
+Garantir que o Core consiga: carregar specs, ler o registro de evolução,
+acessar a memória metacognitiva e despachar agentes — exatamente o que o
+\texttt{doctor} confere.
+\end{funcao}
+
+\begin{niveis}
+\textbf{Intuição:} como instalar um ``programa com muitos ajudantes'' — uma pasta com
+regras e um comando de cheque médico (\texttt{doctor}).\\
+\textbf{Implementação:} venv isolado + requirements por perfil (base/dev/scientific),
+instaladores por SO e unit para systemd.\\
+\textbf{Formalização:} o \texttt{doctor} é um oráculo de health-checks (20 checks na última
+configuração registrada) ligando specs $\leftrightarrow$ código $\leftrightarrow$
+memória; é a primeira etapa do protocolo de auditoria.
+\end{niveis}
+
+\clearpage
+\section{Como usar no dia a dia}
+
+\elemento{Comandos principais}{\metainfo{ID}{U-02} \hfill
+\metainfo{Rota}{\pth{MANUAL.md}}}
+
+\begin{funcao}
+Operar o ecossistema sem editar arquivos de configuração manualmente.
+\end{funcao}
+
+\begin{processo}
+\textbf{Menu de operação} (visão consolidada do \pth{CLI}):
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \texttt{python3\ -m\ marceloclaro.cli\ menu} — menu principal.
+  \item \texttt{python3\ -m\ marceloclaro.cli\ doctor} — diagnóstico de saúde (rode
+        \emph{antes} de qualquer edição).
+  \item \texttt{python3\ -m\ marceloclaro.cli\ helpdesk} — ajuda guiada em linguagem
+        simples.
+  \item \pth{opencode.json},
+        catálogo de agentes e comandos customizados (após editar cards em
+         \pth{skills/}).
+  \item Skills instaladas em \pth{.opencode/skills/} — pesquisa científica,
+        médico virtual supremo, nano-orquestração, deploy GitHub Pages, MiroFish,
+        prestação de contas, entre outras.
+\end{enumerate}
+\end{processo}
+
+\begin{metodo}
+\textbf{Fluxo recomendado para uma tarefa:}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item \texttt{python3\ -m\ marceloclaro.cli\ doctor} para conferir saúde.
+  \item Invocar o orquestrador primário \pth{marceloclaro} (ponto de entrada único
+        para tarefas multipasso).
+  \item O orquestrador percebe, delega pelo blackboard e exige spec+testes.
+  \item Ao terminar, confira o registro de evolução (\pth{evolution/}).
+\end{enumerate}
+\end{metodo}
+
+\begin{limite}
+Permissões padrão do Core: \texttt{edit: ask} e \texttt{bash: ask} — o operador
+aprova cada ação; não há execução silenciosa.
+\end{limite}
+
+\section{Operação com modelos locais (Ollama)}
+
+\elemento{Perfil otimizado de inferência local (SPEC-935-R607)}{\metainfo{ID}{U-03} \hfill
+\metainfo{Rota}{\pth{specs/SPEC-935-R607.md}}}
+
+\begin{descricao}
+O Core pode rodar com modelos locais via Ollama. A otimização R607 mediu o custo de
+contexto e definiu um \emph{perfil mínimo} de configuração, mais veloz, para uso
+local.
+\end{descricao}
+
+\begin{resultado}
+\textbf{Medições verificadas (R607, no host de teste):}\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{Xcc}
+\toprule
+Configuração & Tamanho do prompt & Tempo por turno \\
+\midrule
+Perfil completo (catálogo inteiro) & $\approx$ 21.136 tokens & 6 a 18 min (timeouts de 500) \\
+Perfil mínimo local & 2.051 a 6.712 tokens & 1 min 32 s a 5 min 01 s \\
+\bottomrule
+\end{tabularx}\par}
+\textbf{Ajustes-chave:} \pth{num_ctx=24576} nos modelos
+afinados \pth{gemma4:e4b-tuned}; no systemd,
+\pth{OLLAMA_MAX_LOADED_MODELS=1}. O valor
+``16,20~tok/s'' de uma medição anterior foi \textbf{revogado} (artefato de
+medição) — ele não deve ser citado como ganho.
+\end{resultado}
+
+\begin{metodo}
+\textbf{Usar o perfil local:}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Use o arquivo \pth{opencode.json} (perfil mínimo):
+         \pth{model: local/on-device}
+  \item Importe os modelos afinados no Ollama antes de executar.
+  \item Para a versão de nuvem/catálogo completo, use a configuração padrão
+         \pth{opencode.json} (216 agentes, 7 MCPs).
+\end{enumerate}
+\end{metodo}
+
+\begin{aviso}
+Todos os modelos locais empataram no ``tier difícil'' (7/11 em 11 perguntas) e o
+modelo \pth{Qwen3-0.6B} marcou 8/11 — diferença \textbf{não significativa} com
+$n=11$. Não declarar o modelo local ``igual'' ou ``superior'' a bigger models: é
+desempenho computacionalmente paralelo, sem significância estatística.
+\end{aviso}
+
+\begin{niveis}
+\textbf{Intuição:} o ecossistema pode rodar ``na sua máquina'' — e um ajuste fino
+deixou a conversa muito mais rápida.\\
+\textbf{Implementação:} escolha de janela de contexto menor + \pth{num_ctx} limita o
+bloqueio do servidor; keep-alive e limite de modelos evitam recarregas.\\
+\textbf{Formalização:} nuance entre \emph{custo de contexto} e \emph{custo de inferência}:
+a otimização é de decodificação sob restrição de memória, com hipótese de
+equivalência não comprovada para a variedade de tarefas (amostra $n=11$).
+\end{niveis}
+
+\clearpage
+\section{Executores externos e credenciais}
+
+\elemento{CLIs externas opcionais}{\metainfo{ID}{U-04} \hfill
+\metainfo{Rota}{\pth{specs/SPEC-935-R607.md}}}
+
+\begin{descricao}
+O Core pode delegar tarefas a executores externos (em vez de ``reconstruir''
+capacidades). A invocação é tolerante: se a CLI não existe, avisa e segue.
+\end{descricao}
+
+\begin{resultado}
+Invocáveis por skill própria (cada uma com seu grelhado de credenciais):\par
+\smallskip
+{\footnotesize
+\begin{tabularx}{\textwidth}{lYl}
+\toprule
+Executor & Spec & Credencial exigida \\
+\midrule
+\pth{GEMINI_API_KEY} ou Vertex \\
+\pth{DEEPSEEK_API_KEY}) \\
+\pth{goose} & SPEC-935-R598 & conta/config da CLI Goose \\
+\pth{seed-data} & SPEC-935-R599 & chave de provedor (ex.: OpenRouter) \\
+\pth{haystack} & SPEC-935-R604 & depende do pipeline montado \\
+NotebookLM bridge & SPEC-935-R601 & sessão \texttt{nlm\ login\ --check} + modelo Gemini \\
+MiroFish proxy & SPEC-935-R605 & serviço MiroFish \\
+\bottomrule
+\end{tabularx}
+}
+
+\textbf{Nota:} execução com chave exige instrução explícita do operador; o Core nunca
+instala esses executores por conta própria (apenas orienta).
+\end{resultado}
+
+\begin{limite}
+Esses executores são \emph{fontes de opinião}, não o \emph{motor de qualidade} do
+Core: o orquestrador permanece dono do ciclo SDD/TDD e qualquer saída externa só é
+declarada válida após validação local (anti-overclaim R110).
+\end{limite}
+
+\begin{aviso}
+Existe skill que usa \emph{APIs internas não documentadas} (bridge NotebookLM via
+cookies do navegador): \textbf{pode quebrar sem aviso}. Use com clareza de risco.
+\end{aviso}
+
+\section{Verificação após mudanças}
+
+\elemento{Ritual de conclusão de mudança}{\metainfo{ID}{U-05} \hfill
+\metainfo{Camada}{5 — Governança local}}
+
+\begin{processo}
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+  \item Rode \texttt{python3\ -m\ marceloclaro.cli\ doctor} (ambiente saudável).
+  \item Para funcionalidade nova: escreva o spec em \pth{specs/SPEC-935-R*.md} e
+        os testes \pth{tests/test_r*.py}.
+  \item Valide a suíte de testes da família relevante.
+  \item Registre o ciclo: \pth{evolution_registry.record(...)}.
+  \item Se editou cards de agentes: regenere \pth{opencode.json} com
+        \texttt{python3\ -m\ integrations.opencode\_cli}.
+\end{enumerate}
+\end{processo}
+
+\begin{descricao}
+Este manual é a fonte didática de como operar o Core; o \pth{MANUAL.md} traz a
+versão concisa executável e o \pth{ARCHITECTURE.md} o detalhe técnico.
+\end{descricao}
+
+
+\section{Resumo e exercícios}
+
+\begin{resultado}
+\textbf{O que você deve ter aprendido:} (1) instalar é criar um ambiente
+reprodutível, não só baixar dependências; (2) o \pth{doctor} é o exame de
+saúde antes de operar; (3) perfis Lean/Full/Premium são sobre memória e
+soberania local.
+\textbf{Exercício sugerido:} rode \texttt{python3\ -m\ marceloclaro.cli\ doctor} do
+seu terminal e anote cada coluna do resultado — o que cada um verifica.
+\end{resultado}
+
+% ============================================================
+
+%  Gerado por gen_mod14_ativacao.py (R613) — seção de ativação e cálculo
+%  para o módulo mod-01c-instalacao.tex. Edições manuais são preservadas nas próximas
+%  execuções (marcador impede reescrita).
+% ============================================================
+
+\section[Leitura guiada]{Leitura guiada — Instalação e ambiente: preparar, executar e conferir}
+
+\elemento{Leitura guiada — Instalação e ambiente}{\metainfo{ID}{N-01c} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{calibrar antes de medir}}
+
+\begin{descricao}
+\textbf{A pergunta.} Como outra pessoa pode reconstruir o ambiente em que um
+resultado foi produzido? Fixar arquivos de dependência ajuda, mas não basta:
+versões do sistema, serviços externos, credenciais e fontes de aleatoriedade
+também podem alterar uma execução. O comando
+\texttt{python3\ -m\ marceloclaro.cli\ doctor} verifica um conjunto definido de
+condições locais e informa quais passaram, falharam ou geraram avisos. É uma
+primeira inspeção do ambiente; não garante que toda tarefa funcione nem que uma
+saída possa ser reproduzida bit a bit.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item \textbf{Reprodutibilidade}: registrar insumos, versões, procedimento e condições para que outra execução possa ser reconstruída e comparada. Saídas idênticas dependem também de determinismo.
+  \item \textbf{Perfil de dependências}: conjuntos base, de desenvolvimento e científico (evita instalar o que não se usa).
+  \item \textbf{Diagnóstico de saúde} ($h$): conjunto de verificações locais; nesta configuração, o \pth{doctor} reporta 20 checks e separa aprovações de avisos e falhas.
+  \item \textbf{Custo de detecção} ($C_d$): esforço para \emph{descobrir} um defeito, que cresce quanto mais tarde ele é achado.
+\end{itemize}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Por que verificar \emph{antes} de operar?
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+  \item Um diagnóstico inicial pode revelar dependências ausentes antes que elas interrompam uma tarefa.
+  \item Se a falha aparecer durante a execução, será necessário identificar quais etapas foram afetadas e, possivelmente, repeti-las.
+  \item O custo depende do tipo de falha, do estágio em que foi descoberta e do trabalho já realizado; este repositório não mede uma razão universal de custo.
+  \item Portanto, rode o \pth{doctor} quando o procedimento do projeto o exigir e interprete cada aviso conforme a tarefa que pretende executar.
+\end{enumerate}
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Na execução usada para esta revisão, o campo
+\texttt{duration\_seconds} do diagnóstico reportou $3{,}39$ segundos. Se o mesmo
+comando fosse executado antes de $12$ tarefas, a divisão simples daria
+$3{,}39/12 \approx 0{,}28$ segundo de diagnóstico por tarefa. Esse cálculo só
+distribui o tempo observado: não prova que todas as tarefas precisam de uma
+verificação nova nem que o tempo será igual em outra máquina. \emph{Confira no seu
+ambiente:} rode \texttt{python3\ -m\ marceloclaro.cli\ doctor} e use o valor de
+\texttt{duration\_seconds} retornado naquela execução.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Sequência de conferência.} Para mudanças sujeitas ao fluxo SDD/TDD deste
+repositório, consulte o diagnóstico, a especificação aplicável, os testes e o
+registro de evolução; regenere \pth{opencode.json} apenas quando a alteração
+envolver os catálogos que o produzem. A ordem exata depende da tarefa. Para
+reproduzir o inventário de checks, leia a seção \emph{checks} da saída do
+\pth{doctor}; a duração, por si só, não informa quantos checks passaram.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} O \pth{doctor} testa \emph{o ambiente}, não o
+\emph{mérito} das tarefas. Ambiente verde significa ``pronto para operar'', nunca
+``resultado verificado''.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Descreva o que muda entre os perfis base, dev e
+científico. (2) Por que toda referência deste livro exige ``data de acesso''
+(Módulo 11)?
+\end{resultado}
+
+% ATIVACAO-R613
+\section[Ativação e cálculo]{Ativação e cálculo — Instalação e ambiente}
+\elemento{ativ-01c}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-01c-instalacao.tex}}
+
+\begin{processo}
+GATILHO. ``instalar'', ``ambiente mínimo'', ``doctor''.
+ROTA. linha de comando; gate: \texttt{python3\ -m\ marceloclaro.cli\ doctor} com checks\_failed = 0.
+FUNÇÃO. garantir ambiente reprodutível antes de qualquer ativação de agente ou skill.
+\end{processo}
+
+\begin{resultado}
+CÁLCULO. saúde do ambiente = 1 se checks\_failed = 0, senão 0; o manual não segue com 0.
+\end{resultado}
+
+\begin{descricao}
+JUSTIFICATIVA TEÓRICA. alegações computacionais exigem padrão mínimo de reprodução do ambiente. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+\end{descricao}
+
+\begin{aviso}
+LIMITE E ANTI-OVERCLAIM. ambiente verde não implica qualidade de resultado — apenas reprodutibilidade do processo. A verificação atesta a existência e a
+localização da fonte (R110), não o mérito da afirmação.
+\end{aviso}
+
+\noindent\textit{Interpretação:} A instalação reproduzível depende de condições conjuntas: instruções executáveis, versões identificadas, entradas conhecidas e resultado observável. Como verificação didática, escrevemos $R=I\cdot V\cdot D\cdot S$, em que cada indicador vale $1$ quando a condição foi registrada e conferida, e $0$ caso contrário. Se uma versão não é fixada, por exemplo, $V=0$ e o produto é zero; isso não prova que o programa falhará, mas mostra que a execução ainda não pode ser repetida sob as mesmas premissas \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{p.~1226--1227 (resumo, p.~1226). ancora o gate de instalação: reprodutibilidade é o padrão mínimo para julgar alegações quando a replicação integral não é possível — o que o doctor verifica antes de todo pipeline.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226}

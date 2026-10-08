@@ -1,0 +1,150 @@
+@import "../design-system/tokens.css";
+@import "../design-system/motion.css";
+
+:root {
+  color-scheme: light dark;
+  background: transparent;
+}
+
+/* Resolve aliases where host values are supplied, including nested previews. */
+:root,
+.ngs-theme {
+  --ngs-font-sans: var(
+    --font-sans,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif
+  );
+  --ngs-font-mono: var(--font-mono, var(--oai-font-mono));
+  --ngs-font-xs: var(--font-text-sm-size, var(--oai-font-size-xs));
+  --ngs-font-sm: var(--font-text-md-size, var(--oai-font-size-sm));
+  --ngs-font-md: var(--font-text-md-size, var(--oai-font-size-md));
+  --ngs-font-lg: var(--font-text-lg-size, var(--oai-font-size-lg));
+  --ngs-font-title: var(--font-heading-sm-size, var(--oai-font-size-xl));
+  --ngs-font-report-title: var(--font-heading-md-size, 24px);
+  --ngs-leading-report-title: var(
+    --font-heading-md-line-height,
+    var(--oai-line-height-tight)
+  );
+  --ngs-leading: var(
+    --font-text-md-line-height,
+    var(--oai-line-height-default)
+  );
+  --ngs-leading-tight: var(
+    --font-heading-sm-line-height,
+    var(--oai-line-height-tight)
+  );
+  --ngs-weight-normal: var(--font-weight-normal, 400);
+  --ngs-weight-medium: var(--font-weight-medium, 500);
+  --ngs-weight-semibold: var(--font-weight-semibold, 600);
+  /* Product-specific shape direction; host colors and typography still apply. */
+  --ngs-radius-sm: 12px;
+  --ngs-radius-md: 16px;
+  --ngs-radius-lg: 20px;
+  --ngs-radius-pill: var(--border-radius-full, var(--oai-radius-pill));
+  --ngs-control-height: 32px;
+  --ngs-control-padding: 10px;
+  --ngs-border-width: var(--border-width-regular, 1px);
+  --ngs-surface: var(--color-background-primary, light-dark(#fff, #212121));
+  /* Floating and sticky surfaces must occlude the content behind them. */
+  --ngs-surface-opaque: rgb(from var(--ngs-surface) r g b / 1);
+  --ngs-surface-raised: var(
+    --color-background-secondary,
+    light-dark(#f0f0f0, #292929)
+  );
+  --ngs-surface-tertiary: var(
+    --color-background-tertiary,
+    light-dark(#e5e5e5, #000)
+  );
+  --ngs-surface-hover: color-mix(
+    in srgb,
+    var(--ngs-text) 5%,
+    var(--ngs-surface)
+  );
+  --ngs-text: var(--color-text-primary, light-dark(#171717, #fff));
+  --ngs-text-muted: var(--color-text-secondary, light-dark(#626262, #afafaf));
+  --ngs-text-tertiary: var(--color-text-tertiary, var(--ngs-text-muted));
+  --ngs-text-disabled: var(--color-text-disabled, light-dark(#a1a1a1, #afafaf));
+  --ngs-border: var(--color-border-secondary, light-dark(#d2d2d2, #ffffff24));
+  --ngs-border-strong: var(--color-border-primary, light-dark(#aaa, #ffffff3d));
+  --ngs-accent: var(--ngs-text);
+  --ngs-accent-strong: color-mix(
+    in srgb,
+    var(--ngs-accent) 88%,
+    var(--ngs-surface)
+  );
+  /* Host inverse tokens may be translucent surfaces; control text must stay opaque. */
+  --ngs-accent-contrast: rgb(
+    from var(--color-text-inverse, light-dark(#fff, #212121)) r g b / 1
+  );
+  --ngs-danger: var(--color-text-danger, light-dark(#c52c2c, #ff6764));
+  --ngs-warning: var(--color-text-warning, light-dark(#b45309, #ff8549));
+  --ngs-success: var(--color-text-success, light-dark(#15803d, #40c977));
+  /* Strengthen semantic text on light surfaces without altering host color tokens. */
+  --ngs-success-text: light-dark(
+    color-mix(in srgb, var(--ngs-success) 78%, var(--ngs-text)),
+    var(--ngs-success)
+  );
+  --ngs-warning-text: light-dark(
+    color-mix(in srgb, var(--ngs-warning) 78%, var(--ngs-text)),
+    var(--ngs-warning)
+  );
+  --ngs-danger-surface: var(
+    --color-background-danger,
+    color-mix(in srgb, var(--ngs-danger) 8%, var(--ngs-surface))
+  );
+  --ngs-warning-surface: var(
+    --color-background-warning,
+    color-mix(in srgb, var(--ngs-warning) 8%, var(--ngs-surface))
+  );
+  --ngs-success-surface: var(
+    --color-background-success,
+    color-mix(in srgb, var(--ngs-success) 8%, var(--ngs-surface))
+  );
+  --ngs-danger-contrast: var(--ngs-accent-contrast);
+  --ngs-warning-contrast: var(--ngs-accent-contrast);
+  --ngs-success-contrast: var(--ngs-accent-contrast);
+  --ngs-focus-ring: var(--color-ring-primary, var(--ngs-accent));
+  --ngs-shadow-sm: var(--shadow-sm, var(--oai-shadow-sm));
+  --ngs-shadow-dialog: var(--shadow-lg, var(--oai-shadow-md));
+  --ngs-backdrop: light-dark(rgb(0 0 0 / 24%), rgb(0 0 0 / 48%));
+  color: var(--ngs-text);
+  font-family: var(--ngs-font-sans);
+  font-size: var(--ngs-font-md);
+  font-weight: var(--ngs-weight-normal);
+  line-height: var(--ngs-leading);
+}
+
+.oai-icon {
+  display: inline-block;
+  flex: none;
+  width: var(--oai-icon-size, 18px);
+  height: var(--oai-icon-size, 18px);
+  background-color: currentColor;
+  mask: var(--oai-icon-source) center / contain no-repeat;
+  -webkit-mask: var(--oai-icon-source) center / contain no-repeat;
+  vertical-align: middle;
+}
+.ngs-spin {
+  animation: ngs-spin 1s linear infinite;
+}
+@keyframes ngs-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ngs-disclosure-chevron {
+  transition: transform var(--oai-duration-fast) var(--oai-ease-standard);
+}
+summary[data-chevron-position="end"] > .ngs-disclosure-chevron {
+  margin-inline-start: auto;
+}
+details[open] > summary > .ngs-disclosure-chevron {
+  transform: rotate(90deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ngs-spin {
+    animation: none;
+  }
+}

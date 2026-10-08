@@ -156,17 +156,19 @@ class TestInvocacao:
         assert "--profile" not in cmd
         assert "-d" not in cmd
 
-    def test_download_audio_com_retry_ate_sucesso(self):
+    def test_download_audio_com_retry_ate_sucesso(self, tmp_path):
         calls = []
 
         def runner_flaky(cmd, **kwargs):
             calls.append(cmd)
             if len(calls) < 3:
                 return _FakeProc(returncode=1, stderr=b"404 artifact not ready")
+            # R675: transporte concluído exige o artefato materializado.
+            pathlib.Path(cmd[-1]).write_bytes(b"downloaded audio fixture")
             return _FakeProc(returncode=0, stdout=b"downloaded")
 
         ex = _make_executor(runner=runner_flaky)
-        r = ex.download_audio("abc-123", "art-1", "/tmp/out", filename="pod.m4a",
+        r = ex.download_audio("abc-123", "art-1", str(tmp_path), filename="pod.m4a",
                               retries=4, wait=0.01)
         assert r.success is True
         assert len(calls) == 3  # 2 falhas + 1 sucesso
@@ -177,7 +179,7 @@ class TestInvocacao:
 
         def runner_sempre_falha(cmd, **kwargs):
             calls.append(cmd)
-            return _FakeProc(returncode=1, stderr=b"404")
+            return _FakeProc(returncode=1, stderr=b"404 artifact not ready")
 
         ex = _make_executor(runner=runner_sempre_falha)
         r = ex.download_audio("abc-123", "art-1", "/tmp/out", filename="pod.m4a",

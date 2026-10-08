@@ -7,12 +7,9 @@ SDD First → TDD → Implementation.
 Cobre: EvidenceGraph, BFRS Agent, DFRS Agent, Orchestrator, Sandbox.
 """
 
-import pytest
-
 from agentic_science_v2.evidence_graph import (
     EvidenceGraph,
-    Entity, Relation, Evidence,
-    ENTITY_TYPES, RELATION_TYPES,
+    Entity, Relation,
 )
 from agentic_science_v2.deep_research import (
     BFRSAgent, DFRSAgent, OrchestratorAgent,
@@ -196,7 +193,7 @@ class TestBFRSAgent:
         graph = EvidenceGraph()
         kb = KnowledgeBaseRegistry()
         bfrs = BFRSAgent(graph, kb, max_breadth=1)
-        discoveries = bfrs.explore(
+        bfrs.explore(
             ["BRAF", "EGFR", "ALK"], max_sources=1
         )
         # So 1 entidade semente processada
@@ -255,13 +252,16 @@ class TestExecutionSandbox:
     def test_execute_code(self):
         sandbox = ExecutionSandbox()
         result = sandbox.execute("print('hello')")
-        assert result["success"] is True
+        assert result["success"] is False
+        assert result["executed"] is False
+        assert result["simulation_completed"] is True
         assert "output" in result
 
     def test_query_api(self):
         sandbox = ExecutionSandbox()
         result = sandbox.query_api("pubmed", {"query": "BRAF"})
-        assert result["status"] == "success"
+        assert result["status"] == "simulation"
+        assert result["evidence_eligible"] is False
         assert len(result["results"]) > 0
 
     def test_query_api_cache(self):

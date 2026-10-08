@@ -1,0 +1,165 @@
+{
+  "lastUpdated": 1786580619326,
+  "skills": [
+    {
+      "skillId": "morning",
+      "name": "morning",
+      "description": "Render the user's morning brief as a styled HTML artifact, or set it up as a recurring weekday task. Use only when the user explicitly asks to run, see, or set up their morning brief, or if they invoke /morning by name. A question about their day, schedule, or calendar is not by itself a request for the brief; answer it directly instead.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:16.310457Z",
+      "enabled": true
+    },
+    {
+      "skillId": "learn",
+      "name": "learn",
+      "description": "Use this skill when the user wants intellectual understanding — learning how or why something works, not getting a task done or soliciting Claude's judgment.\n\nTrigger for:\n- Explicit learning requests: teach, explain, ELI5, walk me through, quiz me, flashcards, \"I'm rusty on\"; definitions (\"what is X\")\n- Terse concept names implying \"help me understand this\": \"Galois theory,\" \"transformers, from scratch\"\n- Confusion signals: \"won't stick,\" \"keep mixing these up,\" \"not getting it\"\n- Learning-path questions: prerequisites, sequencing, what to study before X\n- Conceptual questions about mechanisms, causes, or dynamics\n\nDon't trigger for:\n- Tasks: coding, writing, calculation, translation, factual lookup, news updates\n- Personal troubleshooting; resource/textbook recommendations\n- Claude's evaluative verdict: opinion prompts (\"do you think X\", \"settle this\", \"honest take\", \"is X dead / still taken seriously\") and interpretive takes (\"was X really as harsh as people say\")\n",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:16.037177Z",
+      "enabled": true
+    },
+    {
+      "skillId": "skill_01Y1NEocrhB3DHW2dP3adhKK",
+      "name": "criador-de-artigo-v2",
+      "description": "Use este skill SEMPRE que o usuário pedir para criar, redigir, elaborar, desenvolver ou estruturar qualquer artigo científico, paper acadêmico, manuscrito para periódico, trabalho de pesquisa, monografia científica, ensaio acadêmico, revisão de literatura, relato de experiência científica, ou qualquer produção textual que exija normas ABNT, APA, Vancouver, IMRAD, revisão por pares (peer review), ou submissão a periódico Qualis. Também acione para: \"escrever abstract\", \"estruturar introdução acadêmica\", \"redigir metodologia científica\", \"organizar referências ABNT\", \"artigo para Qualis A1/A2/B1\", \"paper para publicação\", \"manuscrito científico completo\", \"artigo de psicologia\", \"artigo de direito\", \"artigo de matemática aplicada\", \"artigo de educação\". Este skill produz artigos COMPLETOS com MÍNIMO DE 110 PÁGINAS, minuciosos, com tom autodidático, sequência lógica e coesa, pontuação 10/10 em bancas brasileiras e internacionais Qualis A1.",
+      "creatorType": "user",
+      "updatedAt": "2026-03-19T08:25:46.162403Z",
+      "enabled": true
+    },
+    {
+      "skillId": "skill_01XxB2W6UgnrLEAMGyebFmQa",
+      "name": "criador-de-artigo",
+      "description": "Use este skill SEMPRE que o usuário pedir para criar, redigir, elaborar ou estruturar qualquer artigo científico, paper acadêmico, manuscrito para periódico, trabalho de pesquisa, monografia, revisão de literatura, ou produção textual que exija normas ABNT, APA, Vancouver, IMRAD, ou submissão a periódico Qualis. Também acione para: \"escrever abstract\", \"estruturar introdução acadêmica\", \"redigir metodologia científica\", \"organizar referências ABNT\", \"artigo para Qualis A1/A2/B1\", \"paper para publicação\", \"manuscrito científico completo\", \"artigo de psicologia\", \"artigo de direito\", \"artigo de educação\". Produz artigos COMPLETOS com MÍNIMO DE 100 PÁGINAS, pontuação 10/10 Qualis A1. INCLUI busca obrigatória em Sucupira, SciELO, CAPES, Scopus, WoS, PubMed, Google Scholar; varredura de PDFs página por página; citações cirúrgicas com autor+ano+página exata; notas de rodapé justificando cada citação; referências ABNT com DOI, link e data para auditoria.",
+      "creatorType": "user",
+      "updatedAt": "2026-03-16T22:50:35.328367Z",
+      "enabled": true
+    },
+    {
+      "skillId": "doc-coauthoring",
+      "name": "doc-coauthoring",
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:15.813890Z",
+      "enabled": true
+    },
+    {
+      "skillId": "web-artifacts-builder",
+      "name": "web-artifacts-builder",
+      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:15.944682Z",
+      "enabled": true
+    },
+    {
+      "skillId": "skill-creator",
+      "name": "skill-creator",
+      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:15.868490Z",
+      "enabled": true
+    },
+    {
+      "skillId": "mcp-builder",
+      "name": "mcp-builder",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:15.989409Z",
+      "enabled": true
+    },
+    {
+      "skillId": "internal-comms",
+      "name": "internal-comms",
+      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:15.977841Z",
+      "enabled": true
+    },
+    {
+      "skillId": "canvas-design",
+      "name": "canvas-design",
+      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:15.967657Z",
+      "enabled": true
+    },
+    {
+      "skillId": "slack-gif-creator",
+      "name": "slack-gif-creator",
+      "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.\"",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:16.007285Z",
+      "enabled": true
+    },
+    {
+      "skillId": "algorithmic-art",
+      "name": "algorithmic-art",
+      "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-12T13:56:15.902083Z",
+      "enabled": true
+    },
+    {
+      "skillId": "xlsx",
+      "name": "xlsx",
+      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-03T21:01:25.792740Z",
+      "enabled": true
+    },
+    {
+      "skillId": "pptx",
+      "name": "pptx",
+      "description": "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-03T21:01:25.771949Z",
+      "enabled": true
+    },
+    {
+      "skillId": "pdf",
+      "name": "pdf",
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-07-10T19:23:15.432550Z",
+      "enabled": true
+    },
+    {
+      "skillId": "docx",
+      "name": "docx",
+      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+      "creatorType": "anthropic",
+      "updatedAt": "2026-08-03T21:01:25.747439Z",
+      "enabled": true
+    },
+    {
+      "skillId": "schedule",
+      "name": "schedule",
+      "description": "Create or update a scheduled task that runs automatically. Use when the user says things like \"every day\", \"each morning\", \"remind me in an hour\", \"run this at noon\", or wants to reschedule an existing task.",
+      "creatorType": "anthropic",
+      "updatedAt": null,
+      "enabled": true
+    },
+    {
+      "skillId": "setup-cowork",
+      "name": "setup-cowork",
+      "description": "Guided Cowork setup — install role-matched plugins, connect your tools, try a skill.",
+      "creatorType": "anthropic",
+      "updatedAt": null,
+      "enabled": true
+    },
+    {
+      "skillId": "consolidate-memory",
+      "name": "consolidate-memory",
+      "description": "Reflective pass over your memory files — merge duplicates, fix stale facts, prune the index.",
+      "creatorType": "anthropic",
+      "updatedAt": null,
+      "enabled": true
+    },
+    {
+      "skillId": "explain-usage",
+      "name": "explain-usage",
+      "description": "Explain where this session's tokens went, with one simple chart in plain language. Use when the user says things like \"explain my usage\", \"where did my tokens go\", or asks for a usage breakdown.",
+      "creatorType": "anthropic",
+      "updatedAt": null,
+      "enabled": true
+    }
+  ]
+}

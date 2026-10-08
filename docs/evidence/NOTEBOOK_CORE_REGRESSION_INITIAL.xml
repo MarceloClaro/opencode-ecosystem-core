@@ -1,0 +1,1019 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="27" skipped="0" tests="359" time="67.533" timestamp="2026-10-04T17:34:55.504530-03:00" hostname="OPENCODE"><testcase classname="tests.test_r548_notebooklm_cli.TestNlmRegisteredInExternalClis" name="test_nlm_registered_in_external_clis" time="0.003" /><testcase classname="tests.test_r548_notebooklm_cli.TestNlmRegisteredInExternalClis" name="test_nlm_install_command_is_pip" time="0.001" /><testcase classname="tests.test_r548_notebooklm_cli.TestNlmRegisteredInExternalClis" name="test_nlm_upstream_is_mit_and_not_core" time="0.001" /><testcase classname="tests.test_r548_notebooklm_cli.TestCheckExternalClisNlm" name="test_check_external_clis_warns_when_nlm_missing" time="0.003" /><testcase classname="tests.test_r548_notebooklm_cli.TestCheckExternalClisNlm" name="test_check_external_clis_passes_when_nlm_present" time="0.111" /><testcase classname="tests.test_r548_notebooklm_cli.TestCheckExternalClisNlm" name="test_check_external_clis_missing_only_nlm" time="0.082" /><testcase classname="tests.test_r548_notebooklm_cli.TestHelpdeskWithNlm" name="test_helpdesk_guidance_references_nlm_when_missing" time="0.003" /><testcase classname="tests.test_r549_nlm_podcast.TestSurface" name="test_allowed_operations_contemplam_pipeline_audio" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestSurface" name="test_allowed_formats_e_lengths" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestSurface" name="test_available_sem_binario" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestSurface" name="test_available_com_binario" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestSurface" name="test_status_eh_auditavel" time="0.002" /><testcase classname="tests.test_r549_nlm_podcast.TestFailClosed" name="test_binario_ausente_nego" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestFailClosed" name="test_notebook_fora_da_allowlist_nego" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestFailClosed" name="test_notebook_id_vazio_nego" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestFailClosed" name="test_operacao_desconhecida_nego" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestFailClosed" name="test_sem_invocacao_em_fail_closed" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestInvocacao" name="test_create_notebook_comando_exato" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestInvocacao" name="test_add_source_text_comando_exato" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestInvocacao" name="test_create_audio_comando_exato" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestInvocacao" name="test_download_audio_comando_exato" time="0.002" /><testcase classname="tests.test_r549_nlm_podcast.TestInvocacao" name="test_download_audio_nao_usa_profile" time="0.002" /><testcase classname="tests.test_r549_nlm_podcast.TestInvocacao" name="test_download_audio_com_retry_ate_sucesso" time="0.022" /><testcase classname="tests.test_r549_nlm_podcast.TestInvocacao" name="test_download_audio_esgota_retries" time="0.012" /><testcase classname="tests.test_r549_nlm_podcast.TestParseESucesso" name="test_create_notebook_parseia_id" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestParseESucesso" name="test_create_audio_parseia_artifact_id" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestParseESucesso" name="test_erro_exit_nao_zero" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestParseESucesso" name="test_timeout_e_excecao_controlados" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestReceipt" name="test_recibo_campos_core" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestReceipt" name="test_anti_overclaim_recibo_nao_declara_merito" time="0.002" /><testcase classname="tests.test_r549_nlm_podcast.TestReceipt" name="test_receipt_dataclass_dict" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestOrchestratorPodcast" name="test_podcast_sucesso_com_executor_fake" time="0.538" /><testcase classname="tests.test_r549_nlm_podcast.TestOrchestratorPodcast" name="test_podcast_executor_indisponivel" time="0.440" /><testcase classname="tests.test_r549_nlm_podcast.TestOrchestratorPodcast" name="test_podcast_sem_manuscrito_nao_cria_fonte" time="0.427" /><testcase classname="tests.test_r549_nlm_podcast.TestCliPodcast" name="test_podcast_sem_pasta_imprime_uso_e_sai" time="0.476" /><testcase classname="tests.test_r549_nlm_podcast.TestCliPodcast" name="test_podcast_chama_orchestrator_e_imprime_json" time="0.418" /><testcase classname="tests.test_r549_nlm_podcast.TestHigieneEstatica" name="test_fonte_proibe_shell_true_e_segredos" time="0.001" /><testcase classname="tests.test_r549_nlm_podcast.TestHigieneEstatica" name="test_docstring_declara_uso_operador" time="0.002" /><testcase classname="tests.test_r550_chapter_segmentation" name="test_r550_segmenta_manuscrito_real" time="0.007" /><testcase classname="tests.test_r550_chapter_segmentation" name="test_r550_gera_um_job_por_capitulo" time="0.006" /><testcase classname="tests.test_r550_chapter_segmentation" name="test_r550_episodios_mantem_tamanho_uniforme" time="0.006" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_available_sem_binario" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_available_com_binario" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_version_com_rotulo" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_version_sem_binario" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_run_monta_comando" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_run_minimo" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_run_erro_nao_lanca" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_run_sem_binario" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_doctor_pass_quando_instalado" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_doctor_warn_quando_ausente" time="0.003" /><testcase classname="tests.test_r600_gemini_cli" name="test_install_instrucoes_contem_npm" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_main_help" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_main_status" time="0.002" /><testcase classname="tests.test_r600_gemini_cli" name="test_main_run_sem_prompt" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_main_run_com_flags" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_main_doctor_pass" time="0.002" /><testcase classname="tests.test_r600_gemini_cli" name="test_main_comando_desconhecido" time="0.001" /><testcase classname="tests.test_r600_gemini_cli" name="test_gemini_run_output_stream_json" time="0.001" /><testcase classname="tests.test_r640_ecosystem_surface" name="test_orchestrator_is_default_and_network_is_connected" time="0.509" /><testcase classname="tests.test_r640_ecosystem_surface" name="test_mcp_lists_real_network_tools" time="0.368" /><testcase classname="tests.test_r640_ecosystem_surface" name="test_mcp_preserves_blocked_result_and_bounds" time="0.003" /><testcase classname="tests.test_r640_ecosystem_surface" name="test_cli_status_exposes_executor_state" time="0.003" /><testcase classname="tests.test_r640_ecosystem_surface" name="test_cli_run_returns_nonzero_when_blocked" time="0.002" /><testcase classname="tests.test_r640_ecosystem_surface" name="test_cli_routes_whole_description_without_flags" time="0.002" /><testcase classname="tests.test_r644_network_surface" name="test_automatic_route_skips_executor_in_cooldown" time="0.001" /><testcase classname="tests.test_r644_network_surface" name="test_explicit_executor_can_retry_during_cooldown" time="0.001" /><testcase classname="tests.test_r644_network_surface" name="test_status_distinguishes_installed_and_automatic" time="0.001" /><testcase classname="tests.test_r644_network_surface" name="test_mcp_exposes_workflows_and_passes_resume_flags" time="0.004" /><testcase classname="tests.test_r644_network_surface" name="test_mcp_status_never_executes_workflow" time="0.003" /><testcase classname="tests.test_r644_network_surface" name="test_busy_network_rejects_workflow_before_any_child" time="0.003" /><testcase classname="tests.test_r644_network_surface" name="test_cli_workflow_reads_definition_and_resume_flags" time="0.002" /><testcase classname="tests.test_r644_network_surface" name="test_cli_bad_file_is_explicit_without_creating_coordinator" time="0.002" /><testcase classname="tests.test_r644_network_surface" name="test_cli_checkpoint_query_is_read_only" time="0.002" /><testcase classname="tests.test_r644_network_surface" name="test_cli_workflow_never_ignores_executor_or_capability_selection[option0]" time="0.002" /><testcase classname="tests.test_r644_network_surface" name="test_cli_workflow_never_ignores_executor_or_capability_selection[option1]" time="0.002" /><testcase classname="tests.test_r669_requested_agents" name="test_each_requested_card_loads_with_capability_contract[scientific-capabilities-audit]" time="0.005" /><testcase classname="tests.test_r669_requested_agents" name="test_each_requested_card_loads_with_capability_contract[simulation-game-audit]" time="0.008" /><testcase classname="tests.test_r669_requested_agents" name="test_each_requested_card_loads_with_capability_contract[book-mcp]" time="0.005" /><testcase classname="tests.test_r669_requested_agents" name="test_each_requested_card_loads_with_capability_contract[book-finetuning]" time="0.006" /><testcase classname="tests.test_r669_requested_agents" name="test_each_requested_card_loads_with_capability_contract[library-architecture]" time="0.005" /><testcase classname="tests.test_r669_requested_agents" name="test_each_requested_card_loads_with_capability_contract[hooks-integration]" time="0.006" /><testcase classname="tests.test_r669_requested_agents" name="test_each_requested_card_loads_with_capability_contract[mcp-cli-integration]" time="0.006" /><testcase classname="tests.test_r669_requested_agents" name="test_each_requested_card_loads_with_capability_contract[live-mirofish-hermes]" time="0.005" /><testcase classname="tests.test_r669_requested_agents" name="test_compiled_permissions_and_prompt_reference_are_operational[scientific-capabilities-audit]" time="0.468" /><testcase classname="tests.test_r669_requested_agents" name="test_compiled_permissions_and_prompt_reference_are_operational[simulation-game-audit]" time="0.484" /><testcase classname="tests.test_r669_requested_agents" name="test_compiled_permissions_and_prompt_reference_are_operational[book-mcp]" time="0.461" /><testcase classname="tests.test_r669_requested_agents" name="test_compiled_permissions_and_prompt_reference_are_operational[book-finetuning]" time="0.462" /><testcase classname="tests.test_r669_requested_agents" name="test_compiled_permissions_and_prompt_reference_are_operational[library-architecture]" time="0.454" /><testcase classname="tests.test_r669_requested_agents" name="test_compiled_permissions_and_prompt_reference_are_operational[hooks-integration]" time="0.581" /><testcase classname="tests.test_r669_requested_agents" name="test_compiled_permissions_and_prompt_reference_are_operational[mcp-cli-integration]" time="0.611" /><testcase classname="tests.test_r669_requested_agents" name="test_compiled_permissions_and_prompt_reference_are_operational[live-mirofish-hermes]" time="0.637" /><testcase classname="tests.test_r669_requested_agents" name="test_method_guidance_resolves_to_existing_core_interfaces[scientific-capabilities-audit]" time="0.112" /><testcase classname="tests.test_r669_requested_agents" name="test_method_guidance_resolves_to_existing_core_interfaces[simulation-game-audit]" time="0.037" /><testcase classname="tests.test_r669_requested_agents" name="test_method_guidance_resolves_to_existing_core_interfaces[book-mcp]" time="0.051" /><testcase classname="tests.test_r669_requested_agents" name="test_method_guidance_resolves_to_existing_core_interfaces[book-finetuning]" time="0.057" /><testcase classname="tests.test_r669_requested_agents" name="test_method_guidance_resolves_to_existing_core_interfaces[library-architecture]" time="0.058" /><testcase classname="tests.test_r669_requested_agents" name="test_method_guidance_resolves_to_existing_core_interfaces[hooks-integration]" time="0.045" /><testcase classname="tests.test_r669_requested_agents" name="test_method_guidance_resolves_to_existing_core_interfaces[mcp-cli-integration]" time="0.042" /><testcase classname="tests.test_r669_requested_agents" name="test_method_guidance_resolves_to_existing_core_interfaces[live-mirofish-hermes]" time="0.064" /><testcase classname="tests.test_r669_requested_agents" name="test_auto_load_registers_actual_catalog_and_bootstrap_agrees" time="3.129" /><testcase classname="tests.test_r669_requested_agents" name="test_central_capability_routing_assigns_without_completing[scientific-capabilities-audit]" time="0.001" /><testcase classname="tests.test_r669_requested_agents" name="test_central_capability_routing_assigns_without_completing[simulation-game-audit]" time="0.001" /><testcase classname="tests.test_r669_requested_agents" name="test_central_capability_routing_assigns_without_completing[book-mcp]" time="0.002" /><testcase classname="tests.test_r669_requested_agents" name="test_central_capability_routing_assigns_without_completing[book-finetuning]" time="0.001" /><testcase classname="tests.test_r669_requested_agents" name="test_central_capability_routing_assigns_without_completing[library-architecture]" time="0.002" /><testcase classname="tests.test_r669_requested_agents" name="test_central_capability_routing_assigns_without_completing[hooks-integration]" time="0.002" /><testcase classname="tests.test_r669_requested_agents" name="test_central_capability_routing_assigns_without_completing[mcp-cli-integration]" time="0.001" /><testcase classname="tests.test_r669_requested_agents" name="test_central_capability_routing_assigns_without_completing[live-mirofish-hermes]" time="0.001" /><testcase classname="tests.test_r669_requested_agents" name="test_all_of_requires_missing_capability_and_preserves_unassigned" time="0.001" /><testcase classname="tests.test_r669_requested_agents" name="test_profile_method_paths_execute_scoped_local_checks" time="0.001" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_invalid_configuration_rejected_before_effects[runtime-config0]" time="0.003" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_invalid_configuration_rejected_before_effects[dataset-config1]" time="0.010" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_invalid_configuration_rejected_before_effects[personalizar-config2]" time="0.002" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_invalid_configuration_rejected_before_effects[plugins-config3]" time="0.002" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_invalid_configuration_rejected_before_effects[plugins-config4]" time="0.001" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_cli_delegates_to_same_central_method[runtime-scientific_runtime_run-config0]" time="0.005" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_cli_delegates_to_same_central_method[dataset-scientific_dataset_download-config1]" time="0.003" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_cli_delegates_to_same_central_method[personalizar-scientific_dataset_custom-config2]" time="0.006" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_cli_delegates_to_same_central_method[plugins-scientific_plugin_action-config3]" time="0.003" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_new_mcp_tools_reject_invalid_input_before_orchestrator[ecosystem_scientific_runtime]" time="0.002" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_new_mcp_tools_reject_invalid_input_before_orchestrator[ecosystem_dataset_download]" time="0.002" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_new_mcp_tools_reject_invalid_input_before_orchestrator[ecosystem_dataset_custom]" time="0.002" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_new_mcp_tools_reject_invalid_input_before_orchestrator[ecosystem_scientific_plugins]" time="0.002" /><testcase classname="tests.test_r671_runtime_surfaces" name="test_central_runtime_records_observation_without_promoting_confidence" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_resolves_virtual_environment_outside_path" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_explicit_nlm_bin_is_resolved" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unrelated_binary_is_not_executable" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_missing_server_is_blocked_without_process" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_discovery_uses_handshake_and_preserves_schemas" time="0.028" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_all_49_public_schemas_are_valid_and_preserved_without_redaction" time="0.166"><failure message="AssertionError: assert ['save_auth_tokens'] == []&#10;  &#10;  Left contains one more item: 'save_auth_tokens'&#10;  Use -v to get more diff">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7aa46502d7f0&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_all_49_public_schemas_are0/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa465113070&gt;
+
+    def test_all_49_public_schemas_are_valid_and_preserved_without_redaction(transport, monkeypatch):
+        client, _ = transport
+        catalog = Path(__file__).resolve().parents[1] / "docs/evidence/R672_PUBLIC_MCP_CATALOG.json"
+        monkeypatch.setenv("R672_FIXTURE_SCHEMA", "public_catalog")
+        monkeypatch.setenv("R672_PUBLIC_CATALOG", str(catalog))
+        expected = json.loads(catalog.read_text())["tools"]
+        assert len(expected) == 49
+        discovery = asyncio.run(client.discover_mcp())
+        assert discovery["status"] == "completed"
+        invalid = []
+        for tool in discovery["tools"]:
+            try:
+                jsonschema.validators.validator_for(tool["inputSchema"]).check_schema(tool["inputSchema"])
+            except jsonschema.SchemaError:
+                invalid.append(tool["name"])
+&gt;       assert invalid == []
+E       AssertionError: assert ['save_auth_tokens'] == []
+E         
+E         Left contains one more item: 'save_auth_tokens'
+E         Use -v to get more diff
+
+tests/test_r672_gemini_notebook_transport.py:135: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_calls_discovered_tool_after_validating_schema" time="0.040" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments0]" time="0.045" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments1]" time="0.034" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments2]" time="0.035" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments3]" time="0.035" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_invalid_schema_never_calls_tool[arguments4]" time="0.036" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unknown_operation_never_calls_tool" time="0.028" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_external_schema_references_are_blocked_without_fetching" time="0.029" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_local_schema_references_validate_nested_unknown_fields" time="0.063" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unbounded_or_nonobject_arguments_do_not_start_process[arguments0]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unbounded_or_nonobject_arguments_do_not_start_process[arguments1]" time="0.003" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_unbounded_or_nonobject_arguments_do_not_start_process[arguments2]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload0]" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload1]" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload2]" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload3]" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_business_failures_are_not_completed[payload4]" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_successful_plain_text_is_not_fabricated_business_confirmation" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_async_business_states_are_preserved[pending]" time="0.002"><failure message="AssertionError: assert 'completed' == 'pending'&#10;  &#10;  - pending&#10;  + completed">state = 'pending'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_async_business_states_are_preserved(state):
+        payload = {"isError":False,"content":[{"type":"text","text":json.dumps({"status":state,"job_id":"hermetic"})}]}
+        result = classify_tool_result(payload)
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'pending'
+E         
+E         - pending
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:212: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_async_business_states_are_preserved[running]" time="0.002"><failure message="AssertionError: assert 'completed' == 'running'&#10;  &#10;  - running&#10;  + completed">state = 'running'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_async_business_states_are_preserved(state):
+        payload = {"isError":False,"content":[{"type":"text","text":json.dumps({"status":state,"job_id":"hermetic"})}]}
+        result = classify_tool_result(payload)
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'running'
+E         
+E         - running
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:212: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_async_business_states_are_preserved[generating]" time="0.002"><failure message="AssertionError: assert 'completed' == 'generating'&#10;  &#10;  - generating&#10;  + completed">state = 'generating'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_async_business_states_are_preserved(state):
+        payload = {"isError":False,"content":[{"type":"text","text":json.dumps({"status":state,"job_id":"hermetic"})}]}
+        result = classify_tool_result(payload)
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'generating'
+E         
+E         - generating
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:212: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_async_business_states_are_preserved[partial]" time="0.002"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">state = 'partial'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_async_business_states_are_preserved(state):
+        payload = {"isError":False,"content":[{"type":"text","text":json.dumps({"status":state,"job_id":"hermetic"})}]}
+        result = classify_tool_result(payload)
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:212: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts0-partial]" time="0.002"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">counts = {'failed': 1, 'succeeded': 2, 'total_steps': 3}, expected = 'partial'
+
+    @pytest.mark.parametrize("counts, expected", [
+        ({"failed":1,"succeeded":2,"total_steps":3},"partial"),
+        ({"succeeded":2,"total_steps":3},"partial"),
+        ({"failed":3,"succeeded":0,"total_steps":3},"failed"),
+        ({"succeeded":0,"total_steps":3},"pending"),
+        ({"succeeded":3,"total_steps":3},"completed"),
+    ])
+    def test_nested_batch_counts_override_outer_success(counts, expected):
+        result = classify_tool_result({"isError":False,"structuredContent":{"status":"success", "summary":counts}})
+&gt;       assert result["status"] == expected
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:225: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts1-partial]" time="0.002"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">counts = {'succeeded': 2, 'total_steps': 3}, expected = 'partial'
+
+    @pytest.mark.parametrize("counts, expected", [
+        ({"failed":1,"succeeded":2,"total_steps":3},"partial"),
+        ({"succeeded":2,"total_steps":3},"partial"),
+        ({"failed":3,"succeeded":0,"total_steps":3},"failed"),
+        ({"succeeded":0,"total_steps":3},"pending"),
+        ({"succeeded":3,"total_steps":3},"completed"),
+    ])
+    def test_nested_batch_counts_override_outer_success(counts, expected):
+        result = classify_tool_result({"isError":False,"structuredContent":{"status":"success", "summary":counts}})
+&gt;       assert result["status"] == expected
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:225: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts2-failed]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts3-pending]" time="0.002"><failure message="AssertionError: assert 'failed' == 'pending'&#10;  &#10;  - pending&#10;  + failed">counts = {'succeeded': 0, 'total_steps': 3}, expected = 'pending'
+
+    @pytest.mark.parametrize("counts, expected", [
+        ({"failed":1,"succeeded":2,"total_steps":3},"partial"),
+        ({"succeeded":2,"total_steps":3},"partial"),
+        ({"failed":3,"succeeded":0,"total_steps":3},"failed"),
+        ({"succeeded":0,"total_steps":3},"pending"),
+        ({"succeeded":3,"total_steps":3},"completed"),
+    ])
+    def test_nested_batch_counts_override_outer_success(counts, expected):
+        result = classify_tool_result({"isError":False,"structuredContent":{"status":"success", "summary":counts}})
+&gt;       assert result["status"] == expected
+E       AssertionError: assert 'failed' == 'pending'
+E         
+E         - pending
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:225: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_nested_batch_counts_override_outer_success[counts4-completed]" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_async_states_survive_transport[pending]" time="0.033"><failure message="AssertionError: assert 'completed' == 'pending'&#10;  &#10;  - pending&#10;  + completed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7aa4650745d0&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_mcp_async_states_survive_0/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa46504d160&gt;
+state = 'pending'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_mcp_async_states_survive_transport(transport, monkeypatch, state):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE", state)
+        result = asyncio.run(client.call_mcp("notebook_list", {}))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'pending'
+E         
+E         - pending
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:234: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_async_states_survive_transport[running]" time="0.037"><failure message="AssertionError: assert 'completed' == 'running'&#10;  &#10;  - running&#10;  + completed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7aa46503ce10&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_mcp_async_states_survive_1/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa46504fb60&gt;
+state = 'running'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_mcp_async_states_survive_transport(transport, monkeypatch, state):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE", state)
+        result = asyncio.run(client.call_mcp("notebook_list", {}))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'running'
+E         
+E         - running
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:234: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_async_states_survive_transport[generating]" time="0.036"><failure message="AssertionError: assert 'completed' == 'generating'&#10;  &#10;  - generating&#10;  + completed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7aa46503d590&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_mcp_async_states_survive_2/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa46504ec10&gt;
+state = 'generating'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_mcp_async_states_survive_transport(transport, monkeypatch, state):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE", state)
+        result = asyncio.run(client.call_mcp("notebook_list", {}))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'generating'
+E         
+E         - generating
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:234: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_async_states_survive_transport[partial]" time="0.037"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">transport = (&lt;integrations.gemini_notebook_transport.GeminiNotebookTransport object at 0x7aa46506d7f0&gt;, PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_mcp_async_states_survive_3/protocol.log'))
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa46504ee40&gt;
+state = 'partial'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_mcp_async_states_survive_transport(transport, monkeypatch, state):
+        client, _ = transport
+        monkeypatch.setenv("R672_FIXTURE_MODE", state)
+        result = asyncio.run(client.call_mcp("notebook_list", {}))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:234: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_async_states_survive_exit_zero[pending]" time="0.034"><failure message="AssertionError: assert 'completed' == 'pending'&#10;  &#10;  - pending&#10;  + completed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_cli_async_states_survive_0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa46504faf0&gt;
+state = 'pending'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_cli_async_states_survive_exit_zero(tmp_path, monkeypatch, state):
+        exe = tmp_path / "nlm-state"
+        exe.write_text("#!"+sys.executable+"\nprint("+repr(json.dumps({"status":state,"job_id":"hermetic"}))+ ")\n")
+        exe.chmod(0o755)
+        monkeypatch.setenv("NLM_BIN", str(exe))
+        result = asyncio.run(GeminiNotebookTransport(tmp_path).run_cli(["nlm", "notebook", "query"]))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'pending'
+E         
+E         - pending
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:246: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_async_states_survive_exit_zero[running]" time="0.033"><failure message="AssertionError: assert 'completed' == 'running'&#10;  &#10;  - running&#10;  + completed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_cli_async_states_survive_1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa46504f930&gt;
+state = 'running'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_cli_async_states_survive_exit_zero(tmp_path, monkeypatch, state):
+        exe = tmp_path / "nlm-state"
+        exe.write_text("#!"+sys.executable+"\nprint("+repr(json.dumps({"status":state,"job_id":"hermetic"}))+ ")\n")
+        exe.chmod(0o755)
+        monkeypatch.setenv("NLM_BIN", str(exe))
+        result = asyncio.run(GeminiNotebookTransport(tmp_path).run_cli(["nlm", "notebook", "query"]))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'running'
+E         
+E         - running
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:246: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_async_states_survive_exit_zero[generating]" time="0.033"><failure message="AssertionError: assert 'completed' == 'generating'&#10;  &#10;  - generating&#10;  + completed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_cli_async_states_survive_2')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa4647719b0&gt;
+state = 'generating'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_cli_async_states_survive_exit_zero(tmp_path, monkeypatch, state):
+        exe = tmp_path / "nlm-state"
+        exe.write_text("#!"+sys.executable+"\nprint("+repr(json.dumps({"status":state,"job_id":"hermetic"}))+ ")\n")
+        exe.chmod(0o755)
+        monkeypatch.setenv("NLM_BIN", str(exe))
+        result = asyncio.run(GeminiNotebookTransport(tmp_path).run_cli(["nlm", "notebook", "query"]))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'completed' == 'generating'
+E         
+E         - generating
+E         + completed
+
+tests/test_r672_gemini_notebook_transport.py:246: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_async_states_survive_exit_zero[partial]" time="0.035"><failure message="AssertionError: assert 'failed' == 'partial'&#10;  &#10;  - partial&#10;  + failed">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-278/test_cli_async_states_survive_3')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7aa464770280&gt;
+state = 'partial'
+
+    @pytest.mark.parametrize("state", ["pending","running","generating","partial"])
+    def test_cli_async_states_survive_exit_zero(tmp_path, monkeypatch, state):
+        exe = tmp_path / "nlm-state"
+        exe.write_text("#!"+sys.executable+"\nprint("+repr(json.dumps({"status":state,"job_id":"hermetic"}))+ ")\n")
+        exe.chmod(0o755)
+        monkeypatch.setenv("NLM_BIN", str(exe))
+        result = asyncio.run(GeminiNotebookTransport(tmp_path).run_cli(["nlm", "notebook", "query"]))
+&gt;       assert result["status"] == state
+E       AssertionError: assert 'failed' == 'partial'
+E         
+E         - partial
+E         + failed
+
+tests/test_r672_gemini_notebook_transport.py:246: AssertionError</failure></testcase><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_tool_result_error_is_preserved_as_failure" time="0.036" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_timeout_ends_child_process" time="0.154" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_output_limits_end_process[oversize]" time="0.039" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_output_limits_end_process[oversize_stderr]" time="0.036" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_sanitizes_credentials_recursively_and_in_text" time="0.001" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_internal_environment_overrides_preserve_other_environment" time="0.032" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_mcp_forces_stdio_and_disables_debug_environment" time="0.036" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_uses_argument_vector_and_noninteractive_input" time="0.032" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_exit_zero_json_error_is_failure" time="0.035" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_rejects_wrong_binary_or_unbounded_arguments[argv0]" time="0.003" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_rejects_wrong_binary_or_unbounded_arguments[argv1]" time="0.002" /><testcase classname="tests.test_r672_gemini_notebook_transport" name="test_cli_rejects_wrong_binary_or_unbounded_arguments[argv2]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_catalog_has_exactly_49_tools" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_list-args0-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_describe-args1-inference]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_query-args2-inference]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_query_status-args3-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[source_describe-args4-inference]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[source_get_content-args5-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[note-args6-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[note-args7-write]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[note-args8-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[label-args9-write]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[label-args10-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[label-args11-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[tag-args12-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[tag-args13-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[research_status-args14-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[research_status-args15-write]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[studio_status-args16-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[studio_status-args17-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[studio_status-args18-write]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[batch-args19-inference]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[batch-args20-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[batch-args21-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[pipeline-args22-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[pipeline-args23-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[pipeline-args24-inference]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[pipeline-args25-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[download_artifact-args26-download]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[export_artifact-args27-publish]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_share_public-args28-publish]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_share_public-args29-write]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[collection_delete-args30-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[save_auth_tokens-args31-auth_private]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[refresh_auth-args32-auth_private]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[shell-args0]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[note-args1]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[label-args2]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[studio_status-args3]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[batch-args4]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[pipeline-args5]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[research_status-args6]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_real_inventory_covers_leaf_and_group_callbacks" time="0.462" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv0-path0-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv1-path1-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv2-path2-inference]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv3-path3-destructive]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv4-path4-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv5-path5-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv6-path6-destructive]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv7-path7-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv8-path8-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv9-path9-auth_private]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv10-path10-publish]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv11-path11-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv12-path12-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv13-path13-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv0]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv1]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv2]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv3]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv4]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv5]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv6]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv7]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv8]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_multiple_source_options_remain_literal_and_valid" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[source_add-args0]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[studio_create-args1]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[download_artifact-args2]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[export_artifact-args3]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[research_start-args4]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_policy_never_mutates_inventory" time="0.006" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_all_155_commands_have_a_policy_without_callback_execution" time="0.017" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_real_inventory_does_not_read_profiles_or_connect_to_network" time="0.402" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv0-path0-read]" time="0.002"><failure message="ValueError: Opção desconhecida: --check.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'login', '--check'], path = ['login'], effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    path += (argv[index],)
+         ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'login', '--check']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+            limit = param.get(key)
+            if limit is not None and predicate(converted, limit):
+                raise ValueError(f"{param['name']} fora do intervalo permitido.")
+        return converted
+    
+    
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+&gt;               if opt not in options:
+                    ^^^^^^^^^^^^^^^^^^^
+E               ValueError: Opção desconhecida: --check.
+
+integrations/gemini_notebook_catalog.py:267: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv1-path1-read]" time="0.002"><failure message="ValueError: Opção desconhecida: --json.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'notebook', 'list', '--json'], path = ['notebook', 'list']
+effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    path += (argv[index],)
+         ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'notebook', 'list', '--json']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+            limit = param.get(key)
+            if limit is not None and predicate(converted, limit):
+                raise ValueError(f"{param['name']} fora do intervalo permitido.")
+        return converted
+    
+    
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+&gt;               if opt not in options:
+                    ^^^^^^^^^^^^^^^^^^^
+E               ValueError: Opção desconhecida: --json.
+
+integrations/gemini_notebook_catalog.py:267: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv2-path2-read]" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'doctor'], path = ['doctor'], effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    path += (argv[index],)
+         ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'doctor']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+            limit = param.get(key)
+            if limit is not None and predicate(converted, limit):
+                raise ValueError(f"{param['name']} fora do intervalo permitido.")
+        return converted
+    
+    
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+&gt;               items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv3-path3-read]" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', '--help'], path = [], effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    path += (argv[index],)
+         ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', '--help']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = True
+
+            limit = param.get(key)
+            if limit is not None and predicate(converted, limit):
+                raise ValueError(f"{param['name']} fora do intervalo permitido.")
+        return converted
+    
+    
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+&gt;               items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv4-path4-read]" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm'], path = [], effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    path += (argv[index],)
+         ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+            limit = param.get(key)
+            if limit is not None and predicate(converted, limit):
+                raise ValueError(f"{param['name']} fora do intervalo permitido.")
+        return converted
+    
+    
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+&gt;               items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv0]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv1]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv2]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv3]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv4]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_help_for_interactive_commands_remains_noninteractive[argv0]" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'chat', 'start', '--help']
+
+    @pytest.mark.parametrize("argv", [["nlm", "chat", "start", "--help"], ["nlm", "login", "--help"]])
+    def test_help_for_interactive_commands_remains_noninteractive(real_catalog, argv):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    path += (argv[index],)
+         ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'chat', 'start', '--help']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = True
+
+            limit = param.get(key)
+            if limit is not None and predicate(converted, limit):
+                raise ValueError(f"{param['name']} fora do intervalo permitido.")
+        return converted
+    
+    
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+&gt;               items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_help_for_interactive_commands_remains_noninteractive[argv1]" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'login', '--help']
+
+    @pytest.mark.parametrize("argv", [["nlm", "chat", "start", "--help"], ["nlm", "login", "--help"]])
+    def test_help_for_interactive_commands_remains_noninteractive(real_catalog, argv):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    path += (argv[index],)
+         ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'login', '--help']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = True
+
+            limit = param.get(key)
+            if limit is not None and predicate(converted, limit):
+                raise ValueError(f"{param['name']} fora do intervalo permitido.")
+        return converted
+    
+    
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+&gt;               items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_unknown_composed_operation_fields_cannot_hide_effects[batch-args0]" time="0.002"><failure message="Failed: DID NOT RAISE ValueError">name = 'batch', args = {'action': 'query', 'unknown_field': True}
+
+    @pytest.mark.parametrize("name,args", [
+        ("batch", {"action": "query", "unknown_field": True}),
+        ("pipeline", {"action": "run", "unknown_field": True}),
+        ("batch", {"action": "studio", "artifact_type": "shell"}),
+    ])
+    def test_unknown_composed_operation_fields_cannot_hide_effects(name, args):
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r673_gemini_notebook_catalog.py:224: Failed</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_unknown_composed_operation_fields_cannot_hide_effects[pipeline-args1]" time="0.002"><failure message="Failed: DID NOT RAISE ValueError">name = 'pipeline', args = {'action': 'run', 'unknown_field': True}
+
+    @pytest.mark.parametrize("name,args", [
+        ("batch", {"action": "query", "unknown_field": True}),
+        ("pipeline", {"action": "run", "unknown_field": True}),
+        ("batch", {"action": "studio", "artifact_type": "shell"}),
+    ])
+    def test_unknown_composed_operation_fields_cannot_hide_effects(name, args):
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r673_gemini_notebook_catalog.py:224: Failed</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_unknown_composed_operation_fields_cannot_hide_effects[batch-args2]" time="0.002"><failure message="Failed: DID NOT RAISE ValueError">name = 'batch', args = {'action': 'studio', 'artifact_type': 'shell'}
+
+    @pytest.mark.parametrize("name,args", [
+        ("batch", {"action": "query", "unknown_field": True}),
+        ("pipeline", {"action": "run", "unknown_field": True}),
+        ("batch", {"action": "studio", "artifact_type": "shell"}),
+    ])
+    def test_unknown_composed_operation_fields_cannot_hide_effects(name, args):
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r673_gemini_notebook_catalog.py:224: Failed</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_skill_destination_metadata_covers_twelve_original_targets" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_profiles_and_short_download_directory_are_preserved_as_metadata" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+
+    def test_profiles_and_short_download_directory_are_preserved_as_metadata(real_catalog):
+&gt;       profile = classify_cli_argv(["nlm", "login", "profile", "list"], real_catalog)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:234: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    path += (argv[index],)
+         ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'login', 'profile', 'list']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+            limit = param.get(key)
+            if limit is not None and predicate(converted, limit):
+                raise ValueError(f"{param['name']} fora do intervalo permitido.")
+        return converted
+    
+    
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+&gt;               items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config0]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config1]" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config2]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config3]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config4]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config5]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config6]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config7]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config8]" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config9]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config10]" time="0.001" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config11]" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config12]" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_invalid_requests_rejected_before_side_effects[config13]" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_read_uses_actual_schema_and_official_transport" time="0.003" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_unknown_argument_not_sent_upstream" time="0.003" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_disabled_tool_not_sent" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_hidden_batch_studio_requires_confirmation" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_dry_run_never_calls_tool_even_when_confirmed" time="0.003" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_private_auth_not_captured" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_download_cannot_escape_workspace" time="0.004" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_success_without_download_is_failure" time="0.003" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_download_requires_nonempty_file_and_reports_hash" time="0.003" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_existing_download_cannot_satisfy_new_execution" time="0.003" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_central_method_records_only_operational_receipt" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_mcp_rejects_input_before_constructing_orchestrator" time="0.002" /><testcase classname="tests.test_r674_gemini_notebook_orchestration" name="test_science_cli_routes_notebook" time="0.003" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_core_venv_binary_is_resolved_without_path" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_explicit_empty_binary_disables_fallback" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload0]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload1]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload2]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload3]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload4]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload5]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload6]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_business_failure_cannot_be_success_with_exit_zero[payload7]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_audio_creation_uses_artifact_id_instead_of_notebook_id" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_requires_nonempty_real_file[None]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_requires_nonempty_real_file[]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_records_file_and_hash" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_download_rejects_preexisting_file_before_process" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[HTTP 401 Authentication failed token=SENSITIVE_TEST]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[403 Permission denied]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[Invalid option --profile]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[404 Notebook not found]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_permanent_or_unclassified_failure_is_not_retried[Unknown server failure]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_artifact_propagation_retry_finishes_only_after_file" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs0]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs1]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs2]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs3]" time="0.001" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs4]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs5]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs6]" time="0.003" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_bad_download_parameters_rejected_before_process[kwargs7]" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_orchestrator_does_not_claim_success_without_download" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_orchestrator_does_not_select_unrelated_old_audio" time="0.002" /><testcase classname="tests.test_r675_notebook_podcast_truthfulness" name="test_podcast_observation_has_no_scientific_confidence" time="0.002" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_prompt_commands_keep_orchestrator_and_available_tool[biblioteca-ecosystem_library_search]" time="0.544" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_prompt_commands_keep_orchestrator_and_available_tool[ciencia-ecosystem_knowledge_plan]" time="0.540" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_prompt_commands_keep_orchestrator_and_available_tool[datasets-ecosystem_dataset_download]" time="0.562" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_prompt_commands_keep_orchestrator_and_available_tool[ecosystem-ecosystem_status]" time="0.609" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_prompt_commands_keep_orchestrator_and_available_tool[gemini-notebook-ecosystem_gemini_notebook]" time="0.863" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_prompt_commands_keep_orchestrator_and_available_tool[integracoes-ecosystem_integration_status]" time="0.740" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_prompt_commands_keep_orchestrator_and_available_tool[plugins-cientificos-ecosystem_scientific_plugins]" time="0.674" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_prompt_commands_keep_orchestrator_and_available_tool[runtime-cientifico-ecosystem_scientific_runtime]" time="0.548" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[agy]" time="0.661" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[claude-sdk]" time="0.655" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[colab]" time="0.633" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[colab-mcp]" time="0.650" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[diagnose]" time="11.856" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[economy]" time="0.983" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[efficiency]" time="1.008" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[gemini]" time="0.870" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[goose]" time="0.693" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[kaggle]" time="0.658" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[maswos]" time="0.643" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[minizinc]" time="0.629" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[models]" time="0.703" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[opencode-sdk]" time="0.699" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[plandex]" time="0.660" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[pypi]" time="2.736" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[reason]" time="2.118" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[reasonix]" time="1.048" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[route]" time="0.804" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[sdd]" time="0.943" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_command_executes_without_hidden_python_error[tdd]" time="1.862" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_diagnose_reversa_section_has_no_error_key" time="12.252" /><testcase classname="tests.test_r394_opencode_cli_commands_real_execution" name="test_pypi_empty_argument_prints_usage_instead_of_broken_wildcard_search" time="0.897" /></testsuite></testsuites>

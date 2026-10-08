@@ -103,3 +103,9 @@ with Google Colab"* (layout `src/`, `tests/`, `pyproject.toml`).
   binário `colab-mcp` no PATH.
 - Sem auto-instalação e sem auto-auth: instrução oficial + consentimento.
 - Aviso explícito Windows não suportado (interop `codex` roda no lado Linux).
+
+## Adendo R651 — execução real via protocolo
+
+`colab exec` remoto provado (42 em CPU); `list_tools_via_server()` +
+`materialize_qcaf()` provados contra o servidor (`open_colab_browser_connection`
+exige aba do navegador do operador — bloqueador documentado).

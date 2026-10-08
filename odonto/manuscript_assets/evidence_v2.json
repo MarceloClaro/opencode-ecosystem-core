@@ -1,0 +1,194 @@
+{
+  "source_notebook": "OdontoCA_v1_3_2_FULL_RESEARCH_COM_IMAGEM_FLUXOGRAMA_EXECUTED (3).ipynb",
+  "source_notebook_sha256": "b0bc028dffd4b60164b1428f79126988607e5e2f28bc97ef736ce4168fa63eac",
+  "runtime": {
+    "python": "3.14.4",
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0"
+  },
+  "clinical_reproduction": {
+    "status": "REPRODUCED_COUNTS_ONLY",
+    "source_url": "https://raw.githubusercontent.com/HuangShiLab/Single-tooth-ECC/e5868fe5664460c7aac1c5b6d7980776ad26b29c/Figures_and_Tables_in_Manuscript/Table_S1.xlsx",
+    "source_commit": "e5868fe5664460c7aac1c5b6d7980776ad26b29c",
+    "sha256": "b7819fee81efbe2e227b7700c3cd86ce8bc6f7fe6f49da6214f4107d099184fa",
+    "sheet": "all_metadata",
+    "expected": {
+      "metadata_rows": 2504,
+      "children": 89,
+      "composite_T5161": 220,
+      "single_tooth_rows": 2284,
+      "all_observed_transitions": 1388,
+      "one_step_transitions": 1160,
+      "H_to_H": 913,
+      "H_to_C": 84,
+      "C_to_C": 163,
+      "C_to_H": 0,
+      "onset_rows": 997
+    },
+    "observed": {
+      "metadata_rows": 2504,
+      "children": 89,
+      "composite_T5161": 220,
+      "single_tooth_rows": 2284,
+      "all_observed_transitions": 1388,
+      "one_step_transitions": 1160,
+      "H_to_H": 913,
+      "H_to_C": 84,
+      "C_to_C": 163,
+      "C_to_H": 0,
+      "onset_rows": 997
+    },
+    "checks": {
+      "metadata_rows": true,
+      "children": true,
+      "composite_T5161": true,
+      "single_tooth_rows": true,
+      "all_observed_transitions": true,
+      "one_step_transitions": true,
+      "H_to_H": true,
+      "H_to_C": true,
+      "C_to_C": true,
+      "C_to_H": true,
+      "onset_rows": true
+    },
+    "onset_children": 81,
+    "event_children": 44,
+    "onset_event_fraction": 0.08425275827482448,
+    "scope_note": "No predictive model was fitted to these real clinical records."
+  },
+  "synthetic_reproduction": {
+    "status": "RERUN_SYNTHETIC_CI_SMOKE",
+    "seed": 20260906,
+    "n_children": 36,
+    "n_transitions": 686,
+    "n_events": 54,
+    "event_fraction": 0.07871720116618076,
+    "outer_folds": 3,
+    "child_disjoint_outer_folds": true,
+    "bootstrap_requested": 1000,
+    "bootstrap_valid": 1000,
+    "metrics": {
+      "clinical": {
+        "pr_auc": 0.11187091559978003,
+        "roc_auc": 0.624018401312705,
+        "brier": 0.07210131708143833,
+        "log_loss": 0.2710536596908069,
+        "mean_predicted": 0.07885870076485262,
+        "observed_fraction": 0.07871720116618076,
+        "calibration_in_the_large": -0.0020104589749328026,
+        "calibration_slope": 0.618414995605538,
+        "calibration_model_intercept": -0.8946037062117493,
+        "pr_auc_ci95": [
+          0.08185190396711808,
+          0.17097325140564165
+        ],
+        "roc_auc_ci95": [
+          0.5475029508010345,
+          0.7035481910407397
+        ],
+        "brier_ci95": [
+          0.05109281293384221,
+          0.09259415233058849
+        ]
+      },
+      "micro": {
+        "pr_auc": 0.06718485886534928,
+        "roc_auc": 0.43061415846225976,
+        "brier": 0.0768562003396536,
+        "log_loss": 0.30090522277810067,
+        "mean_predicted": 0.08202239890379212,
+        "observed_fraction": 0.07871720116618076,
+        "calibration_in_the_large": -0.04627001345590796,
+        "calibration_slope": -0.31488135203236284,
+        "calibration_model_intercept": -3.2927918824738387,
+        "pr_auc_ci95": [
+          0.04498619457142369,
+          0.09804749447231695
+        ],
+        "roc_auc_ci95": [
+          0.33867992006070335,
+          0.5100866448504158
+        ],
+        "brier_ci95": [
+          0.05606224998495679,
+          0.0979180651488941
+        ]
+      },
+      "combined": {
+        "pr_auc": 0.08658508345738467,
+        "roc_auc": 0.5392346460384435,
+        "brier": 0.07848887947185638,
+        "log_loss": 0.3030055136500268,
+        "mean_predicted": 0.13576104882125076,
+        "observed_fraction": 0.07871720116618076,
+        "calibration_in_the_large": -0.6248513571353732,
+        "calibration_slope": 0.14526455617218975,
+        "calibration_model_intercept": -2.167574895981569,
+        "pr_auc_ci95": [
+          0.05897644158219388,
+          0.14272495824173415
+        ],
+        "roc_auc_ci95": [
+          0.44302358038578515,
+          0.6335494944890758
+        ],
+        "brier_ci95": [
+          0.06028387290756565,
+          0.09686288282607314
+        ]
+      },
+      "ca_rule": {
+        "pr_auc": 0.09508249944104968,
+        "roc_auc": 0.5564345991561181,
+        "brier": 0.0720321354912741,
+        "log_loss": 0.27218167619854267,
+        "mean_predicted": 0.07872196255108052,
+        "observed_fraction": 0.07871720116618076,
+        "calibration_in_the_large": -6.605184828052962e-05,
+        "calibration_slope": 0.7653184196191718,
+        "calibration_model_intercept": -0.5640571600978654,
+        "pr_auc_ci95": [
+          0.06461065279369001,
+          0.1502966376376354
+        ],
+        "roc_auc_ci95": [
+          0.4734986849112777,
+          0.6342477877464798
+        ],
+        "brier_ci95": [
+          0.05167370980419983,
+          0.09172806685083748
+        ]
+      }
+    },
+    "combined_minus_clinical": {
+      "pr_auc": {
+        "estimate": -0.025285832142395367,
+        "ci95": [
+          -0.06133313151340363,
+          0.011412285390180242
+        ]
+      },
+      "roc_auc": {
+        "estimate": -0.08478375527426152,
+        "ci95": [
+          -0.1869119394470297,
+          0.0019793526632687626
+        ]
+      },
+      "brier": {
+        "estimate": 0.006387562390418058,
+        "ci95": [
+          0.002699572689057347,
+          0.009966367043837732
+        ]
+      }
+    },
+    "scope_note": "All predictive metrics and intervals are synthetic only; bootstrap intervals condition on the simulated records and fitted out-of-fold predictions."
+  },
+  "real_microbiome_status": "NOT_RUN",
+  "image_model_status": "NOT_RUN",
+  "external_validation_status": "NOT_PERFORMED"
+}

@@ -7,6 +7,9 @@ Menu interativo de terminal para operar o ecossistema.
 Uso:
     python3 -m marceloclaro.cli          # menu interativo
     python3 -m marceloclaro.cli doctor    # diagnóstico estrutural em JSON
+    python3 -m marceloclaro.cli biblioteca buscar "split por grupo"
+    python3 -m marceloclaro.cli fine-dados validar dados.json
+    python3 -m marceloclaro.cli integracoes status
     python3 -m marceloclaro.cli status   # comando direto
     python3 -m marceloclaro.cli pesquisa "tema"  # pesquisa acadêmica
     python3 -m marceloclaro.cli apresentacao pasta  # deck MIRA
@@ -66,6 +69,9 @@ Comandos diretos:
     python3 -m marceloclaro.cli status
     python3 -m marceloclaro.cli agents
     python3 -m marceloclaro.cli doctor
+    python3 -m marceloclaro.cli integracoes status
+    python3 -m marceloclaro.cli integracoes skill <nome>
+    python3 -m marceloclaro.cli integracoes handoff <artifact_id>
     python3 -m marceloclaro.cli helpdesk
     python3 -m marceloclaro.cli pesquisa "tema" [--max-papers N] [--platforms a,b] [--no-download]
     python3 -m marceloclaro.cli pesquisa-full "tema" [--question '...'] [--per-source N] [--max-pdfs N]
@@ -211,6 +217,136 @@ def _cmd_reverse_scan(argv):
     return 0
 
 
+def _cmd_harness(argv):
+    """
+    `marceloclaro harness {inventory|route|emit}` — Federação de artefatos
+    multi-harness (SPEC-935-R621).
+
+    Fica antes da construção do orquestrador porque nenhum dos três
+    subcomandos precisa do catálogo de agentes: carregar 200+ registros para
+    então varrer o disco seria custo puro.
+    """
+
+    from transformer.harness_head import HarnessRegistry
+
+    subcmd = argv[0] if argv else "inventory"
+    flags = argv[1:]
+    dry_run = "--execute" not in flags
+    require_license = "--require-license" in flags
+    top_k = 5
+    for idx, arg in enumerate(flags):
+        if arg == "--top" and idx + 1 < len(flags):
+            top_k = int(flags[idx + 1])
+
+    registry = HarnessRegistry()
+
+    if subcmd == "inventory":
+        report = registry.inventory()
+        report["counted_agents"] = len(registry.cards())
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+        # O código de saída julga a cobertura de *ecossistemas*, não de raízes:
+        # `~/.codex` ausente é normal em uma máquina que usa Codex só via
+        # repositório, e reprovar o comando por isso seria ruído.
+        return 0 if not report.get("ecosystems_missing") else 1
+
+    if subcmd == "route":
+        if len(argv) < 2:
+            print("Uso: marceloclaro harness route <descricao> [--top N]")
+            return 1
+        # A descrição é o primeiro argumento posicional; o resto da linha é
+        # inteiro Flags. Juntar tudo (o que uma versão anterior fazia) engolia
+        # o próprio valor de `--top` na busca e poluía o cosseno léxico.
+        skip_next = False
+        words = []
+        for arg in argv[1:]:
+            if skip_next:
+                skip_next = False
+                continue
+            if arg == "--top":
+                skip_next = True
+                continue
+            if arg.startswith("--"):
+                continue
+            words.append(arg)
+        description = " ".join(words)
+        report = registry.route(description, [])
+        report["ranking"] = report["ranking"][:max(1, top_k)]
+        report["counted_agents"] = len(registry.cards())
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+        return 0 if report["ranking"] else 1
+
+    if subcmd == "emit":
+        kinds = None
+        if "--kinds" in flags:
+            idx = flags.index("--kinds")
+            if idx + 1 < len(flags):
+                kinds = tuple(k.strip() for k in flags[idx + 1].split(",") if k.strip())
+        artifacts = registry.artifacts()
+        if kinds:
+            wanted = set(kinds)
+            artifacts = [a for a in artifacts if a.kind in wanted]
+        report = registry.emitter(dry_run=dry_run).emit_all(
+            artifacts, require_license=require_license)
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+        if dry_run:
+            print("\n(dry-run: nenhuma escrita realizada; use --execute para gravar)")
+        return 0 if report["refused"] == 0 and report["skipped"] == 0 else 1
+
+    print(f"Subcomando harness desconhecido: '{subcmd}'. Opções: inventory, route, emit.")
+    return 1
+
+
+def _cmd_network(argv):
+    """Superfície local da mesma rede que o MCP expõe ao OpenCode."""
+    import argparse
+    from integrations.ecosystem_mcp import get_coordinator, get_workflow_coordinator
+
+    parser = argparse.ArgumentParser(prog="marceloclaro network")
+    parser.add_argument("action", choices=("status", "route", "run", "workflow", "workflow-status"))
+    parser.add_argument("task", nargs="*")
+    parser.add_argument("--ecosystem", choices=("claude", "antigravity", "codex", "chatgpt"))
+    parser.add_argument("--capabilities", default="")
+    parser.add_argument("--max-steps", type=int)
+    parser.add_argument("--timeout", type=float)
+    parser.add_argument("--workflow-id")
+    parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--retry-failed", action="store_true")
+    args = parser.parse_args(argv or ["status"])
+    task = " ".join(args.task).strip()
+    if args.action != "status" and not task:
+        parser.error("informe a tarefa, o arquivo de etapas ou o identificador do workflow")
+    if (args.resume or args.retry_failed or args.workflow_id) and args.action != "workflow":
+        parser.error("as opções de retomada pertencem à ação workflow")
+    if args.action in {"workflow", "workflow-status"} and (args.ecosystem is not None or args.capabilities):
+        parser.error("informe ecosystem e required_capabilities em cada etapa do arquivo de workflow")
+    required = [part.strip() for part in args.capabilities.split(",") if part.strip()]
+    try:
+        if args.action == "workflow":
+            from pathlib import Path
+            definition = json.loads(Path(task).read_text(encoding="utf-8"))
+            nodes = definition.get("nodes") if isinstance(definition, dict) else definition
+            report = get_workflow_coordinator().run(
+                nodes, max_steps=args.max_steps if args.max_steps is not None else 6,
+                timeout=args.timeout if args.timeout is not None else 180,
+                workflow_id=args.workflow_id, resume=args.resume, retry_failed=args.retry_failed)
+        elif args.action == "workflow-status":
+            report = get_workflow_coordinator().status(task)
+        elif args.action == "status":
+            report = get_coordinator().status()
+        elif args.action == "route":
+            report = get_coordinator().route(task, required, args.ecosystem)
+        else:
+            report = get_coordinator().run(task, required,
+                args.max_steps if args.max_steps is not None else 3,
+                args.timeout if args.timeout is not None else 120, args.ecosystem)
+    except (ValueError, OSError) as exc:
+        print(json.dumps({"success": False, "status": "invalid", "error": str(exc)},
+                         ensure_ascii=False, indent=2))
+        return 2
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+    return 1 if report.get("success") is False or report.get("status") in {"blocked", "failed", "exhausted"} else 0
+
+
 def main() -> int:
     # Modo comando direto
     if len(sys.argv) > 1:
@@ -237,7 +373,7 @@ def main() -> int:
                 print(f"APM inicializado: {pm.manifest_path.name} e {pm.lock_path.name}")
                 print(f"Total de primitivas: {sum(len(v) for v in manifest.primitives.values())}")
             elif subcmd == "install":
-                lock = pm.install()
+                pm.install()
                 print(f"APM dependências verificadas e lockfile atualizado: {pm.lock_path.name}")
             elif subcmd == "compile":
                 target = sys.argv[3] if len(sys.argv) > 3 else "all"
@@ -270,6 +406,35 @@ def main() -> int:
             report = register_catalog_agents()
             print(json.dumps(report, indent=2, ensure_ascii=False))
             return 0
+
+        if cmd in ("ciencia", "science"):
+            from marceloclaro.science_cli import run_science_cli
+            return run_science_cli(sys.argv[2:])
+
+        if cmd in ("notebook", "gemini-notebook"):
+            from marceloclaro.science_cli import run_science_cli
+            return run_science_cli(["notebook", *sys.argv[2:]])
+
+        if cmd in ("integracoes", "integrations"):
+            from marceloclaro.integration_cli import run_integration_cli
+
+            return run_integration_cli(sys.argv[2:])
+
+        if cmd == "biblioteca":
+            from marceloclaro.library_cli import run_library_cli
+
+            return run_library_cli(sys.argv[2:])
+
+        if cmd == "fine-dados":
+            from marceloclaro.library_cli import run_finetuning_cli
+
+            return run_finetuning_cli(sys.argv[2:])
+
+        if cmd == "harness":
+            return _cmd_harness(sys.argv[2:])
+
+        if cmd in ("network", "rede"):
+            return _cmd_network(sys.argv[2:])
 
         orchestrator = MarceloClaroOrchestrator()
         if cmd == "status":
@@ -341,7 +506,7 @@ def main() -> int:
                 print("Gera um podcast (áudio m4a) do manuscrito.md da pasta via "
                       "Gemini Notebook (nlm). Fase 1 SPEC-972: uso explícito do operador.")
                 raise SystemExit(1)
-            kwargs: Dict[str, object] = {}
+            kwargs: dict[str, object] = {}
             idx = 3
             while idx < len(sys.argv):
                 if sys.argv[idx] == "--title" and idx + 1 < len(sys.argv):

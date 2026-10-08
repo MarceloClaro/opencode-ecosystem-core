@@ -12,17 +12,19 @@ import sys
 import json
 import asyncio
 import logging
-from typing import Dict, Any, List
+import os
+from typing import Dict, Any
 
 logger = logging.getLogger("mci-mcp-server")
 logger.setLevel(logging.WARNING)
 
 # Adiciona o root do projeto ao path para imports relativos funcionarem se rodado standalone
-import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from mci.metabus import metabus
-from mci.blackboard import blackboard
+# Imports locais após o bootstrap permitem executar este arquivo standalone.
+from mci.metabus import metabus  # noqa: E402
+from mci.blackboard import blackboard  # noqa: E402
+from integrations.mcp_validation import validate_arguments  # noqa: E402
 
 # Simula a estrutura do MCP SDK (assumindo que será rodado no contexto do ecossistema)
 MCP_PROTOCOL_VERSION = "2024-11-05"
@@ -120,6 +122,9 @@ class SimpleMCPServer:
             info = self.tools.get(tool_name)
             if info is None:
                 return self._error("Tool não encontrada", -32602)
+            validation = validate_arguments(tool_name, tool_args, info["schema"])
+            if not validation["valid"]:
+                return self._error("Argumentos inválidos: " + "; ".join(validation["errors"]), -32602)
 
             try:
                 # Executa de forma síncrona para simplificar; handlers assíncronos
@@ -243,7 +248,7 @@ def mci_post_task(args: Dict[str, Any]) -> Dict[str, Any]:
 
 def mci_get_memory(args: Dict[str, Any]) -> Dict[str, Any]:
     """Recupera contexto da memória metacognitiva compartilhada."""
-    limit = args.get("limit", 5)
+    limit = int(args.get("limit", 5))
     topic = args.get("topic")
     
     res = {"episodic": metabus.memory.get_recent_context(limit)}
@@ -266,12 +271,14 @@ mci_server.register_tool(
     schema={
         "type": "object",
         "properties": {
-            "agent_id": {"type": "string"},
-            "name": {"type": "string"},
+            "agent_id": {"type": "string", "minLength": 1},
+            "name": {"type": "string", "minLength": 1},
             "description": {"type": "string"},
-            "capabilities": {"type": "array", "items": {"type": "string"}}
+            "schema": {"type": "object", "description": "Schema opcional de entrada do Agent Card"},
+            "capabilities": {"type": "array", "items": {"type": "string", "minLength": 1}}
         },
-        "required": ["agent_id", "name", "capabilities"]
+        "required": ["agent_id", "name", "capabilities"],
+        "additionalProperties": False,
     },
     handler=mci_register_agent
 )
@@ -282,12 +289,13 @@ mci_server.register_tool(
     schema={
         "type": "object",
         "properties": {
-            "task_id": {"type": "string"},
-            "description": {"type": "string"},
-            "required_capabilities": {"type": "array", "items": {"type": "string"}},
+            "task_id": {"type": "string", "minLength": 1},
+            "description": {"type": "string", "minLength": 1},
+            "required_capabilities": {"type": "array", "items": {"type": "string", "minLength": 1}},
             "context": {"type": "object"}
         },
-        "required": ["description"]
+        "required": ["description"],
+        "additionalProperties": False,
     },
     handler=mci_post_task
 )
@@ -298,9 +306,10 @@ mci_server.register_tool(
     schema={
         "type": "object",
         "properties": {
-            "limit": {"type": "integer"},
+            "limit": {"type": "integer", "minimum": 1, "maximum": 1000},
             "topic": {"type": "string"}
-        }
+        },
+        "additionalProperties": False,
     },
     handler=mci_get_memory
 )
@@ -308,7 +317,7 @@ mci_server.register_tool(
 mci_server.register_tool(
     name="mci_get_blackboard_state",
     description="Obtém o estado atual dos agentes e tarefas no Blackboard.",
-    schema={"type": "object", "properties": {}},
+    schema={"type": "object", "properties": {}, "additionalProperties": False},
     handler=mci_get_blackboard_state
 )
 

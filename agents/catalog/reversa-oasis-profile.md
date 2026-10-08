@@ -48,7 +48,7 @@ skills:
   tags: [gera, bio, persona, interesses]
   examples: [Aplique gera bio persona interesses neste contexto, Avalie usando gera bio persona interesses]
 - id: use-perfil-persona-profile
-  name: Use via: "perfil", "persona", "profile", "oasis", /oasis-profile
+  name: "Use via: 'perfil', 'persona', 'profile', 'oasis', /oasis-profile"
   description: >-
     Capacidade especializada em use via: "perfil", "persona", "profile", "oasis", /oasis-profile
   tags: ["perfil", "persona", "profile", "oasis"]

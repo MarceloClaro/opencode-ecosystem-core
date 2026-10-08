@@ -40,7 +40,7 @@ permission:
     cargo test *: allow
     rm -rf *: ask
     sudo *: deny
-    *: deny
+    "*": deny
   edit:
     **/*.env*: deny
     **/*.key: deny

@@ -1,0 +1,95 @@
+{
+  "status": "completed",
+  "evidence_kind": "actual_cli_dataset_download",
+  "download_executed": true,
+  "provider": "huggingface",
+  "dataset_id": "scikit-learn/iris",
+  "revision": "0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+  "version_pinned": true,
+  "license": "cc0-1.0",
+  "source_url": "https://huggingface.co/datasets/scikit-learn/iris/tree/0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+  "files": [
+    {
+      "name": "Iris.csv",
+      "path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/hf/data/Iris.csv",
+      "bytes": 5107,
+      "sha256": "600ac44f23c2e6e0ae37daac8ceb2baba4df963efa580eb31b3b576b28e34c55",
+      "source_url": "https://huggingface.co/datasets/scikit-learn/iris/tree/0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+      "revision": "0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+      "license": "cc0-1.0"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/hf",
+        "datasets",
+        "info",
+        "scikit-learn/iris",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "890f2717f31a480f29dbe77e17fb7710f5f2631095cb36e8f0f74a252a6d96ce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/hf",
+        "datasets",
+        "ls",
+        "scikit-learn/iris",
+        "-R",
+        "--revision",
+        "0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "5dcb07fd8539596ce2c22640c077d04d2a22b562614e6c99c6e86f15c16429a2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/hf",
+        "download",
+        "scikit-learn/iris",
+        "Iris.csv",
+        "--repo-type",
+        "dataset",
+        "--revision",
+        "0bda0ce801be0fa2f464ff845a9d5ceae99aad7d",
+        "--local-dir",
+        "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/hf/data",
+        "--max-workers",
+        "1",
+        "--force-download"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "1db6d960bc588e2b4c1f8ca7133ddcedda59c8591416d4a3c71076c93aae7f74",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "metadata_sha256": "9948152dfa86422651d3f6dd6f60f4ac1fcc930f8fdd04f4db28c659da067a56",
+  "metadata_path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/hf/metadata/source-info.json",
+  "generated_at": "2026-10-04T19:53:07.855636+00:00",
+  "limitations": [
+    "A licença é declarada nos metadados da plataforma; metadados Kaggle descrevem a licença corrente.",
+    "O download e os hashes não são certificação independente da autenticidade da coleta original."
+  ],
+  "training_executed": false,
+  "upload_executed": false,
+  "manifest_path": "/home/marceloclaro/opencode-ecosystem-core/docs/evidence/R671_REAL_20261004_195302/hf/download-manifest.json",
+  "manifest_sha256": "670528373296e37652dd52f7505bc1dea4ef1745cf85f0fba5f2f122aa1277ef",
+  "metacognition": {
+    "observation_id": "e3165565-7c81-49b9-bac7-95ec050fad27",
+    "persisted": true,
+    "scope_id": "09332f688b1d5011202467535280459022ce7c3ae77de994935c8258e11de493",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "completed"
+    },
+    "confidence_promoted": false
+  }
+}

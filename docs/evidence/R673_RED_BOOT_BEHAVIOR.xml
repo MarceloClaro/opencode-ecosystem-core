@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="11" skipped="0" tests="91" time="1.329" timestamp="2026-10-04T17:34:39.864081-03:00" hostname="OPENCODE"><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_catalog_has_exactly_49_tools" time="0.003" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_list-args0-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_describe-args1-inference]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_query-args2-inference]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_query_status-args3-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[source_describe-args4-inference]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[source_get_content-args5-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[note-args6-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[note-args7-write]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[note-args8-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[label-args9-write]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[label-args10-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[label-args11-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[tag-args12-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[tag-args13-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[research_status-args14-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[research_status-args15-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[studio_status-args16-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[studio_status-args17-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[studio_status-args18-write]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[batch-args19-inference]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[batch-args20-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[batch-args21-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[pipeline-args22-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[pipeline-args23-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[pipeline-args24-inference]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[pipeline-args25-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[download_artifact-args26-download]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[export_artifact-args27-publish]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_share_public-args28-publish]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[notebook_share_public-args29-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[collection_delete-args30-destructive]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[save_auth_tokens-args31-auth_private]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_effects[refresh_auth-args32-auth_private]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[shell-args0]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[note-args1]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[label-args2]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[studio_status-args3]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[batch-args4]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[pipeline-args5]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_or_ambiguous_effect_is_rejected[research_status-args6]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_real_inventory_covers_leaf_and_group_callbacks" time="0.422" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv0-path0-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv1-path1-read]" time="0.003" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv2-path2-inference]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv3-path3-destructive]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv4-path4-write]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv5-path5-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv6-path6-destructive]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv7-path7-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv8-path8-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv9-path9-auth_private]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv10-path10-publish]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv11-path11-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv12-path12-read]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_effects_and_shapes[argv13-path13-read]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv0]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv1]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv2]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv3]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv4]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv5]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv6]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv7]" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_rejects_unknown_flags_shell_and_private_auth[argv8]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_multiple_source_options_remain_literal_and_valid" time="0.002" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[source_add-args0]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[studio_create-args1]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[download_artifact-args2]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[export_artifact-args3]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_mcp_unknown_subtypes_are_rejected[research_start-args4]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_cli_policy_never_mutates_inventory" time="0.006" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_all_155_commands_have_a_policy_without_callback_execution" time="0.014" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_real_inventory_does_not_read_profiles_or_connect_to_network" time="0.389" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv0-path0-read]" time="0.002"><failure message="ValueError: Opção desconhecida: --check.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'login', '--check'], path = ['login'], effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    params = _parse_params(argv[index:], entries[path]["params"], help_only=help_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'login', '--check']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+&gt;                   raise ValueError(f"Opção desconhecida: {opt}.")
+E                   ValueError: Opção desconhecida: --check.
+
+integrations/gemini_notebook_catalog.py:267: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv1-path1-read]" time="0.002"><failure message="ValueError: Opção desconhecida: --json.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'notebook', 'list', '--json'], path = ['notebook', 'list']
+effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    params = _parse_params(argv[index:], entries[path]["params"], help_only=help_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'notebook', 'list', '--json']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+&gt;                   raise ValueError(f"Opção desconhecida: {opt}.")
+E                   ValueError: Opção desconhecida: --json.
+
+integrations/gemini_notebook_catalog.py:267: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv2-path2-read]" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'doctor'], path = ['doctor'], effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    params = _parse_params(argv[index:], entries[path]["params"], help_only=help_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'doctor']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+                items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+                values[param["name"]] = items[0] if count == 1 else items
+                cursor += count
+            elif param.get("required") and not help_only:
+                raise ValueError(f"Argumento ausente: {param['name']}.")
+        if cursor != len(position_tokens):
+&gt;           raise ValueError("Argumentos posicionais excedentes.")
+E           ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv3-path3-read]" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', '--help'], path = [], effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    params = _parse_params(argv[index:], entries[path]["params"], help_only=help_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', '--help']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = True
+
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+                items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+                values[param["name"]] = items[0] if count == 1 else items
+                cursor += count
+            elif param.get("required") and not help_only:
+                raise ValueError(f"Argumento ausente: {param['name']}.")
+        if cursor != len(position_tokens):
+&gt;           raise ValueError("Argumentos posicionais excedentes.")
+E           ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_fixed_nlm_executable_prefix_is_supported[argv4-path4-read]" time="0.002"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm'], path = [], effect = 'read'
+
+    @pytest.mark.parametrize("argv,path,effect", [
+        (["nlm", "login", "--check"], ["login"], "read"),
+        (["nlm", "notebook", "list", "--json"], ["notebook", "list"], "read"),
+        (["nlm", "doctor"], ["doctor"], "read"),
+        (["nlm", "--help"], [], "read"),
+        (["nlm"], [], "read"),
+    ])
+    def test_fixed_nlm_executable_prefix_is_supported(real_catalog, argv, path, effect):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    params = _parse_params(argv[index:], entries[path]["params"], help_only=help_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+                items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+                values[param["name"]] = items[0] if count == 1 else items
+                cursor += count
+            elif param.get("required") and not help_only:
+                raise ValueError(f"Argumento ausente: {param['name']}.")
+        if cursor != len(position_tokens):
+&gt;           raise ValueError("Argumentos posicionais excedentes.")
+E           ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv0]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv1]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv2]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv3]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_server_and_arbitrary_boot_commands_cannot_be_captured[argv4]" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_help_for_interactive_commands_remains_noninteractive[argv0]" time="0.001"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'chat', 'start', '--help']
+
+    @pytest.mark.parametrize("argv", [["nlm", "chat", "start", "--help"], ["nlm", "login", "--help"]])
+    def test_help_for_interactive_commands_remains_noninteractive(real_catalog, argv):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    params = _parse_params(argv[index:], entries[path]["params"], help_only=help_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'chat', 'start', '--help']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = True
+
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+                items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+                values[param["name"]] = items[0] if count == 1 else items
+                cursor += count
+            elif param.get("required") and not help_only:
+                raise ValueError(f"Argumento ausente: {param['name']}.")
+        if cursor != len(position_tokens):
+&gt;           raise ValueError("Argumentos posicionais excedentes.")
+E           ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_help_for_interactive_commands_remains_noninteractive[argv1]" time="0.001"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+argv = ['nlm', 'login', '--help']
+
+    @pytest.mark.parametrize("argv", [["nlm", "chat", "start", "--help"], ["nlm", "login", "--help"]])
+    def test_help_for_interactive_commands_remains_noninteractive(real_catalog, argv):
+&gt;       operation = classify_cli_argv(argv, real_catalog)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    params = _parse_params(argv[index:], entries[path]["params"], help_only=help_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'login', '--help']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = True
+
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+                items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+                values[param["name"]] = items[0] if count == 1 else items
+                cursor += count
+            elif param.get("required") and not help_only:
+                raise ValueError(f"Argumento ausente: {param['name']}.")
+        if cursor != len(position_tokens):
+&gt;           raise ValueError("Argumentos posicionais excedentes.")
+E           ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_unknown_composed_operation_fields_cannot_hide_effects[batch-args0]" time="0.001"><failure message="Failed: DID NOT RAISE ValueError">name = 'batch', args = {'action': 'query', 'unknown_field': True}
+
+    @pytest.mark.parametrize("name,args", [
+        ("batch", {"action": "query", "unknown_field": True}),
+        ("pipeline", {"action": "run", "unknown_field": True}),
+        ("batch", {"action": "studio", "artifact_type": "shell"}),
+    ])
+    def test_unknown_composed_operation_fields_cannot_hide_effects(name, args):
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r673_gemini_notebook_catalog.py:224: Failed</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_unknown_composed_operation_fields_cannot_hide_effects[pipeline-args1]" time="0.001"><failure message="Failed: DID NOT RAISE ValueError">name = 'pipeline', args = {'action': 'run', 'unknown_field': True}
+
+    @pytest.mark.parametrize("name,args", [
+        ("batch", {"action": "query", "unknown_field": True}),
+        ("pipeline", {"action": "run", "unknown_field": True}),
+        ("batch", {"action": "studio", "artifact_type": "shell"}),
+    ])
+    def test_unknown_composed_operation_fields_cannot_hide_effects(name, args):
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r673_gemini_notebook_catalog.py:224: Failed</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_unknown_composed_operation_fields_cannot_hide_effects[batch-args2]" time="0.002"><failure message="Failed: DID NOT RAISE ValueError">name = 'batch', args = {'action': 'studio', 'artifact_type': 'shell'}
+
+    @pytest.mark.parametrize("name,args", [
+        ("batch", {"action": "query", "unknown_field": True}),
+        ("pipeline", {"action": "run", "unknown_field": True}),
+        ("batch", {"action": "studio", "artifact_type": "shell"}),
+    ])
+    def test_unknown_composed_operation_fields_cannot_hide_effects(name, args):
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r673_gemini_notebook_catalog.py:224: Failed</failure></testcase><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_skill_destination_metadata_covers_twelve_original_targets" time="0.001" /><testcase classname="tests.test_r673_gemini_notebook_catalog" name="test_profiles_and_short_download_directory_are_preserved_as_metadata" time="0.001"><failure message="ValueError: Argumentos posicionais excedentes.">real_catalog = [{'path': [], 'help': 'NotebookLM Tools - Unified CLI for Google NotebookLM', 'params': [{'name': 'version', 'opts': [...ew_name', 'opts': ['new_name'], 'secondary_opts': [], 'type': 'STRING', ...}], 'callback': 'profile_rename', ...}, ...]
+
+    def test_profiles_and_short_download_directory_are_preserved_as_metadata(real_catalog):
+&gt;       profile = classify_cli_argv(["nlm", "login", "profile", "list"], real_catalog)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r673_gemini_notebook_catalog.py:234: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/gemini_notebook_catalog.py:448: in classify_cli_argv
+    params = _parse_params(argv[index:], entries[path]["params"], help_only=help_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tokens = ['nlm', 'login', 'profile', 'list']
+params = [{'name': 'version', 'opts': ['--version', '-v'], 'secondary_opts': [], 'type': 'BOOL', ...}, {'name': 'ai', 'opts': [...': 'BOOL', ...}, {'name': 'show_completion', 'opts': ['--show-completion'], 'secondary_opts': [], 'type': 'BOOL', ...}]
+help_only = False
+
+    def _parse_params(tokens: list[str], params: list[dict[str, Any]], *, help_only: bool = False) -&gt; dict[str, Any]:
+        options = {}
+        positional = []
+        values = {}
+        for param in params:
+            if param.get("argument"):
+                positional.append(param)
+            else:
+                for opt in param.get("opts", []):
+                    options[opt] = (param, True)
+                for opt in param.get("secondary_opts", []):
+                    options[opt] = (param, False)
+            values[param["name"]] = deepcopy(param.get("default"))
+        position_tokens = []
+        seen = set()
+        index = 0
+        positional_only = False
+        while index &lt; len(tokens):
+            token = tokens[index]
+            if token == "--help":
+                index += 1
+                continue
+            if token == "--" and not positional_only:
+                positional_only = True
+                index += 1
+                continue
+            if token.startswith("-") and not positional_only:
+                opt, separator, inline = token.partition("=")
+                if opt not in options:
+                    # Negative numbers are legal positional values for numeric parameters.
+                    if re.fullmatch(r"-\d+(?:\.\d+)?", token):
+                        position_tokens.append(token)
+                        index += 1
+                        continue
+                    raise ValueError(f"Opção desconhecida: {opt}.")
+                param, flag_value = options[opt]
+                name = param["name"]
+                if name in seen and not param.get("multiple"):
+                    raise ValueError(f"Opção repetida: {opt}.")
+                seen.add(name)
+                if param.get("is_flag"):
+                    if separator:
+                        raise ValueError(f"Flag não aceita valor: {opt}.")
+                    value = flag_value
+                else:
+                    if separator:
+                        value = inline
+                    else:
+                        index += 1
+                        if index &gt;= len(tokens) or tokens[index].startswith("--"):
+                            raise ValueError(f"Valor ausente para {opt}.")
+                        value = tokens[index]
+                    value = _convert(value, param)
+                if param.get("multiple"):
+                    if name not in values or values[name] is None or name not in seen or not isinstance(values[name], list):
+                        values[name] = []
+                    values[name].append(value)
+                else:
+                    values[name] = value
+            else:
+                position_tokens.append(token)
+            index += 1
+        cursor = 0
+        for param in positional:
+            count = param.get("nargs", 1)
+            if count == -1:
+                values[param["name"]] = [_convert(v, param) for v in position_tokens[cursor:]]
+                cursor = len(position_tokens)
+            elif cursor + count &lt;= len(position_tokens):
+                items = [_convert(v, param) for v in position_tokens[cursor:cursor + count]]
+                values[param["name"]] = items[0] if count == 1 else items
+                cursor += count
+            elif param.get("required") and not help_only:
+                raise ValueError(f"Argumento ausente: {param['name']}.")
+        if cursor != len(position_tokens):
+&gt;           raise ValueError("Argumentos posicionais excedentes.")
+E           ValueError: Argumentos posicionais excedentes.
+
+integrations/gemini_notebook_catalog.py:308: ValueError</failure></testcase></testsuite></testsuites>

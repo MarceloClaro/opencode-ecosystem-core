@@ -39,8 +39,8 @@ skills:
   tags: [lista, entidades, filtra, tipo]
   examples: [Aplique lista entidades filtra tipo neste contexto, Avalie usando lista entidades filtra tipo]
 - id: use-entidade-entity-ner
-  name: Use via: "entidade", "entity", "ner", /entity-ner
-  description: Capacidade especializada em use via: "entidade", "entity", "ner", /entity-ner
+  name: "Use via: 'entidade', 'entity', 'ner', /entity-ner"
+  description: "Capacidade especializada em use via: 'entidade', 'entity', 'ner', /entity-ner"
   tags: ["entidade", "entity", "ner", /entity-ner]
   examples: [Aplique use entidade entity ner neste contexto, Avalie usando use entidade entity ner]
 tags: ["entidade", "entity", "ner", /entity-ner, agente, arestas, completo, conhecimento, contexto, entidade]

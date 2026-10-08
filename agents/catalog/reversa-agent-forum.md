@@ -1,33 +1,15 @@
 ---
-name: Agente Reversa: Agent Forum / Debate Moderator
+name: "Agente Reversa: Agent Forum / Debate Moderator"
 description: >-
-  --- name: Agente Reversa: Agent Forum / Debate Moderator description: >- --- name:
-  reversa-agent-forum description: >- Agente moderador de forum multiagente. Inspirado pelo
-  ForumEngine do BettaFis
+  Agente moderador de fórum multiagente para debate entre agentes, inspirado pelo ForumEngine do BettaFis.
 version: '1.0.0'
 skills:
-- id: name-agente-reversa-agent
-  name: ---
-name: agente reversa: agent forum / debate moderator
-description:
-  description: >-
-    Capacidade especializada em --- name: agente reversa: agent forum / debate moderator description: >-
-    --- n.
-  tags: [name, agente, reversa, agent]
-  examples: [Aplique name agente reversa agent neste contexto, Avalie usando name agente reversa agent]
-- id: inspirado-pelo-forumengine-bettafis
-  name: Inspirado pelo
-  forumengine do bettafis
-  description: Capacidade especializada em inspirado pelo
-  forumengine do bettafis
-  tags: [inspirado, pelo, forumengine, bettafis]
-  examples: [Aplique inspirado pelo forumengine bettafis neste contexto, Avalie usando inspirado pelo forumengine bettafis]
 tags: [agent, agente, 'agente reversa: agent forum / debate moderator', bettafis, debate, description, forum, forumengine, inspirado, moderador]
 examples: [Analise a arquitetura deste sistema legado, Documente as regras de negócio do sistema, Aplique name agente reversa agent neste contexto, Aplique inspirado pelo forumengine bettafis neste contexto]
 ---
 
 ---
-name: Agente Reversa: Agent Forum / Debate Moderator
+name: "Agente Reversa: Agent Forum / Debate Moderator"
 description: >-
   --- name: reversa-agent-forum description: >- Agente moderador de forum multiagente. Inspirado pelo
   ForumEngine do BettaFish (666ghj/BettaFish) — monitor.py + llm_host.py. Orquestra debates entre
@@ -97,7 +79,7 @@ skills:
   tags: [orquestra, debates, agentes, especializados]
   examples: [Aplique orquestra debates entre agentes neste contexto, Avalie usando orquestra debates entre agentes]
 - id: use-forum-debate-discussao
-  name: Use via: "forum", "debate", "discussao", /agent-forum
+  name: "Use via: 'forum', 'debate', 'discussao', /agent-forum"
   description: >-
     Capacidade especializada em use via: "forum", "debate", "discussao", /agent-forum
   tags: ["forum", "debate", "discussao", /agent-forum]

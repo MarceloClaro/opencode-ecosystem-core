@@ -14,6 +14,34 @@ Todas as tarefas passam por você. Seu ciclo operacional é: **Perceber → Espe
 
 ## Ferramentas do ecossistema
 
+O MCP `ecosystem-network` conecta este agente ao orquestrador Python real.
+Para tarefas que exigem coordenação, consulte `ecosystem_status` e
+`ecosystem_route` e use `ecosystem_run` para delegação de análise ou geração
+de texto a Claude, Antigravity ou Codex, com limites de tempo e passos.
+O resultado inclui executor, tarefa no Blackboard, revisões e conclusão.
+Para uma tarefa com análise e revisão independente, use `ecosystem_workflow`
+com etapas que indiquem `id`, `task`, `dependencies` e `required_capabilities`.
+Escolha capacidades distintas para a análise e a revisão. A entrega da etapa
+anterior é transferida à seguinte, com sua origem. No modo automático reserve
+`per_node_max_steps=2` para permitir uma alternativa após falha de executor.
+Guarde o `workflow_id`; `ecosystem_workflow_status` consulta o progresso sem
+execução. Para retomar, envie a mesma definição com `resume=true`; etapas
+concluídas são reutilizadas. Uma etapa interrompida tem resultado incerto:
+só a repita quando a solicitação do usuário autorizar, com `retry_failed=true`.
+As etapas executam sequencialmente sob orçamento global. O status distingue
+instalação, execução observada e pausa temporária por falhas de serviço;
+prefira os executores elegíveis para seleção automática.
+Use as ferramentas nativas de edição e testes quando precisar implementar
+as mudanças autorizadas pelo usuário a partir dessa análise.
+
+Se um executor falhar ou estiver ausente, informe a falha e prossiga com os
+recursos disponíveis. Nunca apresente artefato descoberto, tarefa enfileirada
+ou prompt para copiar como execução concluída. Os artefatos importados são
+instruções; seus hooks e scripts não são executados por esta ponte. Para o
+executor OpenAI, selecione `codex`; o aplicativo ChatGPT não é controlado.
+A camada Transformer usa atenção auditável para roteamento de agentes;
+não é uma rede neural treinada. As notas de revisão são heurísticas internas.
+
 | Comando | Função |
 |---|---|
 | `/diagnose <arquivo>` | Pipeline de 5 scanners (noológico, teleológico, evolutivo, potentiality, social) |

@@ -1,0 +1,167 @@
+{
+  "spec_id": "SPEC-935-R662",
+  "ts": "2026-10-04T13:17:14.555458+00:00",
+  "evidence_kind": "real_local_cli_stdio_and_disk_artifacts",
+  "skill_scripts_executed": false,
+  "llm_inference": false,
+  "code_sha256": {
+    "marceloclaro/integration_service.py": "72f98d1c7af57cad6f595c218a94a745af608409345516b3bba2e470610a81bc",
+    "marceloclaro/integration_cli.py": "fe2a25ca320ca730746178aa201a6650e26846d27403adfac3353246e74ed98b",
+    "marceloclaro/orchestrator.py": "08b091a44634504f046018653fc75996430f2f7398585e569061f21a3b0a289e",
+    "integrations/ecosystem_mcp.py": "e4dd9043e03b19301a997612c8160f293eaf380c9552b2da8f92cf0553530e5e",
+    "integrations/opencode_cli.py": "034b83a917330c09875adff273ddef11a5a51537486c0113cce338aa675a154a",
+    "opencode.json": "560be960a6071f6f9d0059309eab01a9c337d95f7721fdb4781135ed01f8238b"
+  },
+  "configuration_reproduced": true,
+  "disk_pipeline": {
+    "artifact_id": "codex:skill:first_party:core-hooks",
+    "source_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/skills/core-hooks/SKILL.md",
+    "source_file_sha256": "d7154a684b1f3ec3fd80bae0c994ced709d1c44742191f6049bfbd4825e69eb2",
+    "emitted_file_sha256": "88ab28e05c3dd11ac1bbc61ad6c6c0528f7482632cee12f4b83b8fa775fd4b2c",
+    "execution_mode": "read-and-execute",
+    "support_file_count": 0,
+    "emitted": true,
+    "installed_in_host": false,
+    "executed": false,
+    "temporary_destination_removed": true
+  },
+  "cli_status": {
+    "spec_id": "SPEC-935-R662",
+    "orchestrator": "marceloclaro",
+    "status": "config_checked",
+    "executed": false,
+    "execution_verified": false,
+    "components": {
+      "agents": {
+        "configured_count": 227,
+        "primary": "marceloclaro"
+      },
+      "hooks": {
+        "events": [
+          "PreToolUse",
+          "PostToolUse",
+          "SessionStart",
+          "SessionEnd"
+        ],
+        "verification": "contract_only"
+      },
+      "mcp": {
+        "configured_count": 11,
+        "entries": [
+          {
+            "name": "ecosystem-network",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "litert-lm",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "metacognitive-interconnect",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "antigravity-bridge",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "pypi-search",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "colibri-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "scanners-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "web-deploy-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "fetch",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "sequential-thinking",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "filesystem",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          }
+        ]
+      },
+      "cli": {
+        "command_count": 24,
+        "verification": "configuration_only"
+      },
+      "plugins": {
+        "count": 3,
+        "verification": "discovery_only"
+      },
+      "skills": {
+        "count": 226,
+        "verification": "discovery_only"
+      }
+    },
+    "issues": [],
+    "ecosystems_present": [
+      "antigravity",
+      "chatgpt",
+      "claude",
+      "codex"
+    ],
+    "ecosystems_missing": []
+  },
+  "mcp_stdio": {
+    "tools": [
+      "ecosystem_artifact_handoff",
+      "ecosystem_integration_status",
+      "ecosystem_library_search",
+      "ecosystem_route",
+      "ecosystem_run",
+      "ecosystem_skill_plan",
+      "ecosystem_status",
+      "ecosystem_workflow",
+      "ecosystem_workflow_status"
+    ],
+    "read_only_annotations": {
+      "ecosystem_integration_status": true,
+      "ecosystem_artifact_handoff": true,
+      "ecosystem_skill_plan": true
+    },
+    "status_matches_cli": true,
+    "skill_matches_cli": true,
+    "skill_file_sha256": "d7154a684b1f3ec3fd80bae0c994ced709d1c44742191f6049bfbd4825e69eb2",
+    "handoff_status": "ready",
+    "invalid_path_rejected": true,
+    "library_status": "ready",
+    "orchestrator": "marceloclaro"
+  },
+  "success": true
+}

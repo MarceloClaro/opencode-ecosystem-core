@@ -1,0 +1,182 @@
+{
+  "evidence_kind": "sealed_local_test_execution_not_external_audit",
+  "success": true,
+  "results": [
+    {
+      "spec_id": "SPEC-935-R659",
+      "verified": true,
+      "status": "green",
+      "criteria_results": [
+        {
+          "criterion_id": "R659-HOOKS",
+          "description": "Matchers, assinaturas e lifecycle têm efeitos observáveis e únicos.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R659-TOOLS",
+          "description": "Argumentos inválidos não executam handlers; histórico é válido.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R659-ERRORS",
+          "description": "Erros e orçamento terminam explicitamente, preservando compatibilidade.",
+          "passed": true
+        }
+      ],
+      "passed_count": 3,
+      "total_count": 3,
+      "runtime_evidence_required": true,
+      "runtime_evidence_valid": true,
+      "evidence_contract_mode": "legacy",
+      "evidence_contract_valid": false,
+      "evidence_contract_error": null,
+      "evidence_contract_sha256": null,
+      "criterion_runtime_records_required": false,
+      "trusted_test_evidence": {
+        "spec_id": "SPEC-935-R659",
+        "test_file": "tests/test_r659_sdk_hooks_contract.py",
+        "executed": true,
+        "passed": true,
+        "returncode": 0,
+        "summary": "39 passed in 2.60s",
+        "error": null,
+        "scope": "local_runtime",
+        "external_validation": false,
+        "contract_sha256": null,
+        "criterion_records": []
+      }
+    },
+    {
+      "spec_id": "SPEC-935-R660",
+      "verified": true,
+      "status": "green",
+      "criteria_results": [
+        {
+          "criterion_id": "R660-SCHEMA",
+          "description": "Validação completa aceita entradas válidas e recusa incompatíveis.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R660-EFFECTS",
+          "description": "Chamadas inválidas não invocam handlers nos servidores.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R660-OFFLINE",
+          "description": "Schema inválido/remoto e número não finito falham sem rede.",
+          "passed": true
+        }
+      ],
+      "passed_count": 3,
+      "total_count": 3,
+      "runtime_evidence_required": true,
+      "runtime_evidence_valid": true,
+      "evidence_contract_mode": "legacy",
+      "evidence_contract_valid": false,
+      "evidence_contract_error": null,
+      "evidence_contract_sha256": null,
+      "criterion_runtime_records_required": false,
+      "trusted_test_evidence": {
+        "spec_id": "SPEC-935-R660",
+        "test_file": "tests/test_r660_mcp_validation.py",
+        "executed": true,
+        "passed": true,
+        "returncode": 0,
+        "summary": "73 passed in 2.91s",
+        "error": null,
+        "scope": "local_runtime",
+        "external_validation": false,
+        "contract_sha256": null,
+        "criterion_records": []
+      }
+    },
+    {
+      "spec_id": "SPEC-935-R661",
+      "verified": true,
+      "status": "green",
+      "criteria_results": [
+        {
+          "criterion_id": "R661-DISCOVERY",
+          "description": "Raízes modernas e nomes iguais não perdem artefatos.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R661-POLICY",
+          "description": "Emissão e dispatcher mantêm políticas de invocação.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R661-PROVENANCE",
+          "description": "Referências e hashes pertencem à fonte atual e contida.",
+          "passed": true
+        }
+      ],
+      "passed_count": 3,
+      "total_count": 3,
+      "runtime_evidence_required": true,
+      "runtime_evidence_valid": true,
+      "evidence_contract_mode": "legacy",
+      "evidence_contract_valid": false,
+      "evidence_contract_error": null,
+      "evidence_contract_sha256": null,
+      "criterion_runtime_records_required": false,
+      "trusted_test_evidence": {
+        "spec_id": "SPEC-935-R661",
+        "test_file": "tests/test_r661_artifact_integration.py",
+        "executed": true,
+        "passed": true,
+        "returncode": 0,
+        "summary": "33 passed in 1.20s",
+        "error": null,
+        "scope": "local_runtime",
+        "external_validation": false,
+        "contract_sha256": null,
+        "criterion_records": []
+      }
+    },
+    {
+      "spec_id": "SPEC-935-R662",
+      "verified": true,
+      "status": "green",
+      "criteria_results": [
+        {
+          "criterion_id": "R662-CONTRACT",
+          "description": "Diagnóstico encontra inconsistências acionáveis e conta fontes reais.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R662-HANDOFF",
+          "description": "Handoff preserva políticas, fonte e limites sem executar código.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R662-SURFACES",
+          "description": "CLI e MCP encaminham os mesmos contratos pelo orquestrador.",
+          "passed": true
+        }
+      ],
+      "passed_count": 3,
+      "total_count": 3,
+      "runtime_evidence_required": true,
+      "runtime_evidence_valid": true,
+      "evidence_contract_mode": "legacy",
+      "evidence_contract_valid": false,
+      "evidence_contract_error": null,
+      "evidence_contract_sha256": null,
+      "criterion_runtime_records_required": false,
+      "trusted_test_evidence": {
+        "spec_id": "SPEC-935-R662",
+        "test_file": "tests/test_r662_integration_surface.py",
+        "executed": true,
+        "passed": true,
+        "returncode": 0,
+        "summary": "17 passed in 9.39s",
+        "error": null,
+        "scope": "local_runtime",
+        "external_validation": false,
+        "contract_sha256": null,
+        "criterion_records": []
+      }
+    }
+  ]
+}

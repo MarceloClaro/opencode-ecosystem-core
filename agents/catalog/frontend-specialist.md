@@ -30,7 +30,7 @@ mode: subagent
 temperature: 0.2
 permission:
   task:
-    *: deny
+    "*": deny
     contextscout: allow
     externalscout: allow
   write:

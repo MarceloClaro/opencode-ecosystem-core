@@ -1,0 +1,18 @@
+F.F..                                                                    [100%]
+=================================== FAILURES ===================================
+____ test_process_exit_and_health_are_insufficient[0-receipts0-True-False] _____
+tests/test_r667_live_scientific_runtime.py:50: in test_process_exit_and_health_are_insufficient
+    assert (result["status"] == "completed") is expected
+E   AssertionError: assert ('completed' == 'completed'
+E     
+E       completed) is False
+____ test_process_exit_and_health_are_insufficient[0-receipts2-True-False] _____
+tests/test_r667_live_scientific_runtime.py:50: in test_process_exit_and_health_are_insufficient
+    assert (result["status"] == "completed") is expected
+E   AssertionError: assert ('completed' == 'completed'
+E     
+E       completed) is False
+=========================== short test summary info ============================
+FAILED tests/test_r667_live_scientific_runtime.py::test_process_exit_and_health_are_insufficient[0-receipts0-True-False]
+FAILED tests/test_r667_live_scientific_runtime.py::test_process_exit_and_health_are_insufficient[0-receipts2-True-False]
+2 failed, 3 passed in 0.28s

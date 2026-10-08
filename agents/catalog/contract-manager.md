@@ -32,7 +32,7 @@ mode: subagent
 temperature: 0.1
 permission:
   bash:
-    *: deny
+    "*": deny
     mkdir -p .tmp/contracts*: allow
   edit:
     **/*.env*: deny
@@ -43,9 +43,9 @@ permission:
   task:
     contextscout: allow
     externalscout: allow
-    *: deny
+    "*": deny
   skill:
-    *: deny
+    "*": deny
 ---
 
 <context>

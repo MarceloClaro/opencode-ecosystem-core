@@ -16,6 +16,16 @@ from pathlib import Path
 
 import pytest
 
+
+@pytest.fixture(autouse=True)
+def _eligible_research_contract_fixture(monkeypatch):
+    """Exercita auditoria editorial com fixture; não comprova pesquisa executada."""
+    from agentic_science_v2 import deep_research
+    monkeypatch.setattr(deep_research, "run_deep_research", lambda **kwargs: {
+        "status": "completed", "evidence_eligible": True, "experiment_executed": True,
+        "reports": [{"summary": "Conteúdo sintético para testar o contrato editorial.", "confidence": 0.7}],
+        "evidence_graph": {}, "plans": []})
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 

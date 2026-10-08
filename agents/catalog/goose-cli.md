@@ -1,5 +1,7 @@
 ---
 name: goose-cli
+description: >-
+  Você é o agente proxy do **Goose**, agente de IA nativo open source da Agentic
 ---
 
 # Goose CLI — Agente de IA Generalista (AAIF/Linux Foundation)

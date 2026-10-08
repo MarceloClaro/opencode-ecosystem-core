@@ -13,6 +13,7 @@ multiagente, com inspiração direta nos repositórios:
 | Token embedding        | TaskEmbedder                         |
 | Positional encoding    | Índice/prioridade da tarefa          |
 | Multi-Head Attention   | AttentionRouter (4 cabeças)          |
+| Cabeça cross-harness   | HarnessAttentionHead (5ª cabeça)     |
 | Feed-Forward + resíduo | TransformerPipeline (gerar/revisar)  |
 | Output head            | GradingHead (escala 0-7)             |
 | KV-cache hierárquico   | HierarchicalMemory (HTM)             |
@@ -22,12 +23,21 @@ from .embedder import TaskEmbedder, D_MODEL
 from .attention import AttentionRouter
 from .pipeline import TransformerPipeline, GradingHead, MAX_SCORE
 from .memory import HierarchicalMemory
+from .harness_head import (
+    DEFAULT_HEAD_WEIGHTS,
+    HarnessAttentionHead,
+    HarnessRegistry,
+    attach_to_router,
+    license_score,
+)
 
 __all__ = [
     "TaskEmbedder", "D_MODEL",
     "AttentionRouter",
     "TransformerPipeline", "GradingHead", "MAX_SCORE",
     "HierarchicalMemory",
+    "HarnessAttentionHead", "HarnessRegistry", "attach_to_router",
+    "DEFAULT_HEAD_WEIGHTS", "license_score",
 ]
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"

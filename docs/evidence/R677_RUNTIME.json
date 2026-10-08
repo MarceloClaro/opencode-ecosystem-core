@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "executed_at_utc": "2026-10-05T02:01:35.284143+00:00",
+  "source_sha256": "3f7b89ea87ba1cd60c288b65a33c41bf37ae4322e3acc89d2493be727a706deb",
+  "source_unchanged": true,
+  "empty_query_actual_python_result": {
+    "query": "",
+    "status": "invalid_request",
+    "reason_code": "empty_query",
+    "abstained": true,
+    "evidence": [],
+    "evidence_count": 0,
+    "source_kind": "local_technical_book",
+    "clinical_evidence": false,
+    "method": "offline_lexical",
+    "retrieval_executed": false,
+    "model_inference_executed": false,
+    "training_executed": false,
+    "reason": "Consulta vazia; informe uma consulta não vazia para buscar suporte bibliográfico."
+  },
+  "fresh_actual_mcp": {
+    "server": "ecosystem-network",
+    "protocol_version": "2025-11-25",
+    "cases": [
+      {
+        "case": "prompt_blank",
+        "rejected": true
+      },
+      {
+        "case": "prompt_whitespace",
+        "rejected": true
+      },
+      {
+        "case": "prompt_missing_task",
+        "rejected": true
+      },
+      {
+        "case": "prompt_missing_topic",
+        "rejected": true
+      },
+      {
+        "case": "prompt_missing_both",
+        "rejected": true
+      },
+      {
+        "case": "search_blank",
+        "rejected": true
+      },
+      {
+        "case": "search_whitespace",
+        "rejected": true
+      },
+      {
+        "case": "search_missing",
+        "rejected": true
+      }
+    ]
+  },
+  "mutants": [
+    {
+      "name": "removed_empty_guard",
+      "killed": true,
+      "reason": "Consulta vazia tentou acessar inventário/fontes.",
+      "evidence_kind": "synthetic_in_memory_mutation"
+    },
+    {
+      "name": "empty_request_marked_ready",
+      "killed": true,
+      "reason": "Consulta vazia apresentada como válida.",
+      "evidence_kind": "synthetic_in_memory_mutation"
+    }
+  ],
+  "model_inference_executed": false,
+  "training_executed": false,
+  "externally_validated": false
+}

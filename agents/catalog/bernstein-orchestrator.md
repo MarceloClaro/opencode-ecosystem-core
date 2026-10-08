@@ -1,5 +1,7 @@
 ---
 name: bernstein-orchestrator
+description: >-
+  Bernstein é o maestro do ecossistema OpenCode. Ele orquestra agentes CLI coding (Claude, Codex, Gemini, Qwen) em pipelines multi-agente com:
 ---
 
 # Bernstein — Orquestrador Multi-Agente para OpenCode

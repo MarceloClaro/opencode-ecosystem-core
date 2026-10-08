@@ -1,0 +1,147 @@
+% ============================================================
+%  MODULO 17 — E1-E7 para leigos: cada paragrafo expandido
+%  SPEC R681 — CONTINUAR com NotebookLM (notebook ba4adef8...)
+%  NotebookLM: notebook criado, 1 nota, 3 fontes; query confirmou
+%  que fontes nao cobrem E1-E7 (resposta honesta registrada).
+%  Correcao R681: DOI Nii 10.1609/aimag.v7i2.537 (era .538).
+% ============================================================
+\chapter{E1 a E7 Para Leigos: O Pedido Andando Pela Casa}
+
+\roteirodidatico
+{Este capitulo pega o paragrafo tecnico mais dificil do livro, o bloco de ativacao E1 a E7, e o conta como quem acompanha uma encomenda: quem recebe, quem decide, quem faz, quem confere e quem entrega.}
+{\emph{Gatilho} e o pedido escrito; \emph{capacidade} e o que cada ajudante declara saber tentar; \emph{escore} e a nota de casamento entre pedido e ajudante; \emph{gate} e o fiscal que devolve sem nota suficiente.}
+{Leia cada E em cinco linhas: Ana ve, Bruno faz, analogia, exemplo e armadilha. So avance quando souber dizer o que confere aquele E.}
+{Escore alto e casamento de palavras, nao garantia de acerto. Fiscal reprovando nao e falha do livro: e o livro funcionando.}
+{Que papel voce faria nesta casa hoje: quem pede, quem escolhe, quem faz ou quem confere?}
+
+\casoguiado{a encomenda de Ana}
+{Ana pede: resuma este artigo em dez linhas sem inventar dados, cada frase com fonte. O pedido entra na portaria, passa pela lousa, chega a quem resume, volta ao fiscal e sai como texto com fontes. Bruno registra cada passagem com hora e responsavel. Se o fiscal devolver, ninguem finge que entregou: anota-se o motivo e tenta-se de novo.}
+
+\section{O mapa de uma pagina antes dos detalhes}
+
+\begin{flowch}[E1-E7 em linguagem da casa]{fonte: mod-02, mod-13 e notebook NotebookLM ba4adef8}
+\matrix[matrix of nodes,name=e17,row sep=2.2mm,column sep=2.5mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|E1 Portaria: pedido escrito \\
+ |[fn]|E2 Plaquinhas: quem sabe o que \\
+ |[fn]|E3 Comparacao: nota de casamento \\
+ |[fn]|E4 Lousa: nome de quem faz \\
+ |[fn]|E5 Oficina: fazer com ferramenta \\
+ |[fde]|E6 Fiscal: passou no criterio \\
+ |[fne]|E7 Entrega: resposta com fonte \\
+};
+\draw[seta] (e17-1-1.south)--(e17-2-1.north);
+\draw[seta] (e17-2-1.south)--(e17-3-1.north);
+\draw[seta] (e17-3-1.south)--(e17-4-1.north);
+\draw[seta] (e17-4-1.south)--(e17-5-1.north);
+\draw[seta] (e17-5-1.south)--(e17-6-1.north);
+\draw[seta] (e17-6-1.south)--(e17-7-1.north);
+\end{flowch}
+
+\begin{descricao}
+Guarde este desenho. Cada secao a seguir e um zoom em uma caixa. A seta so anda para frente quando ha registro; volta quando o fiscal manda refazer.
+\end{descricao}
+
+\section{E1 -- Gatilho: o pedido precisa estar escrito}
+
+\elemento{E1 Gatilho para leigos}{\metainfo{ID}{E1-LEIGO} \hfill \metainfo{Tecnico}{publica tarefa no Quadro} \hfill \metainfo{Rota}{\pth{mci/blackboard.py}}}
+
+\begin{descricao}
+Para Ana: gatilho e o bilhete que ela deixa na portaria. Se o bilhete diz so me ajuda aqui, ninguem sabe o que fazer e o pedido volta. Se diz resuma este artigo em dez linhas com fonte por frase, a casa consegue andar. Para Bruno: E1 transforma texto em tarefa com entrada, criterio e saida esperada, e publica no Quadro Negro. Analogia: e como pedir exame no posto com guia preenchida, nao so dizendo estou mal. Exemplo: tarefa de resumo com dois criterios executaveis, cada frase aponta um trecho. Armadilha: achar que falar com o balcao ja e ativar agente; sem bilhete registrado, nao houve ativacao.
+\end{descricao}
+
+\begin{funcao}
+Separar vontade de tarefa: so conta como E1 o que ficou escrito, datado e publicado para outros verem.
+\end{funcao}
+
+\section{E2 -- Capacidade: quem declara saber o que}
+
+\elemento{E2 Capacidade para leigos}{\metainfo{ID}{E2-LEIGO} \hfill \metainfo{Tecnico}{cartao de agente em \pth{opencode.json}}}
+
+\begin{descricao}
+Para Ana: cada ajudante tem uma plaquinha na porta, por exemplo sei buscar fontes ou sei resumir texto dado. Plaquinha nao e diploma: e promessa de tentar. Para Bruno: capacidade e lista declarada em \pth{agents/catalog/} e \pth{opencode.json}, usada para filtrar elegiveis antes de dar nota. Analogia: quadro de plantao no hospital, cada nome com especialidade do dia. Exemplo: pedido com busca exige plaquinha de busca; pedido com documentos prontos pede plaquinha de resumo. Armadilha: confundir plaquinha bonita com prova de qualidade; E2 localiza, nao avalia.
+\end{descricao}
+
+\begin{funcao}
+Evitar chamar quem nem se propos ao servico: sem casamento de capacidade, nem entra na comparacao.
+\end{funcao}
+
+\section{E3 -- Roteamento: dar nota de casamento sem prometer acerto}
+
+\elemento{E3 Roteamento para leigos}{\metainfo{ID}{E3-LEIGO} \hfill \metainfo{Tecnico}{Jaccard e atencao}}
+
+\begin{descricao}
+Para Ana: a casa compara as palavras do bilhete com as plaquinhas e da uma nota de parecido. Nota alta quer dizer as palavras combinam, nao que o servico sera otimo. Para Bruno: duas contas aparecem aqui. A simples e Jaccard: entre palavras do pedido $K$ e capacidades $C_{a}$, $A(a) = |K \cap C_{a}|/|K \cup C_{a}|$, com desempate por prioridade de categoria. A fina e atencao ponderada por consulta, chave e historico. Analogia: escolher chave pelo formato da fechadura, sem garantir que abre de primeira.
+\end{descricao}
+
+\begin{resultado}
+Exemplo com conta. Pedido com palavras resuma, artigo, fonte: $K$ tem 3 itens. Ajudante A declara resuma, texto, fonte: intersecao 2, uniao 4, $A=2/4=0{,}50$. Ajudante B declara busca, artigo, fonte: intersecao 2, uniao 4, $A=0{,}50$. Empate tecnico: decide a prioridade de categoria. Se ninguem passa do minimo, a tarefa fica sem dono e isso e saida legitima, nao erro escondido.
+\end{resultado}
+
+\begin{limite}
+Nota ordena candidatos elegiveis; nao mede qualidade da entrega nem probabilidade de acerto. O fiscal E6 continua obrigatorio.
+\end{limite}
+
+\section{E4 -- Delegacao: escrever na lousa quem faz o que}
+
+\elemento{E4 Delegacao para leigos}{\metainfo{ID}{E4-LEIGO} \hfill \metainfo{Tecnico}{voluntariado e registro}}
+
+\begin{descricao}
+Para Ana: depois da nota, o nome do escolhido vai para a lousa grande com a tarefa ao lado, para todos verem e ninguem fazer duplicado. Ha dois jeitos: chamar direto quem e obvio ou anunciar e esperar voluntario com plaquinha compativel. Para Bruno: publicacao de proposta e aceite com registro de atribuicao, trilha auditavel E1 a E7. Analogia: escala de plantao assinada, nao recado de corredor. Exemplo: resumo com busca vai para o buscador primeiro, depois para o resumidor, cada passagem anotada. Armadilha: achar que delegar e executar; E4 so distribui, quem faz e E5.
+\end{descricao}
+
+\begin{funcao}
+Tornar a escolha visivel e cobravel: sem nome na lousa, ninguem e dono e ninguem responde.
+\end{funcao}
+
+\section{E5 -- Execucao: fazer com ferramenta e deixar rastro}
+
+\elemento{E5 Execucao para leigos}{\metainfo{ID}{E5-LEIGO} \hfill \metainfo{Tecnico}{agente mais ferramenta MCP}}
+
+\begin{descricao}
+Para Ana: o escolhido faz o servico usando as ferramentas certas, por exemplo abrir o artigo e copiar trechos antes de resumir, sem inventar. Para Bruno: agente executa microtarefa via ferramentas MCP e devolve artefato tipado com logs. Analogia: cozinheiro com receita e ingredientes na bancada, nao de memoria. Exemplo: resumo onde cada frase traz o numero do paragrafo de origem. Armadilha: aceitar texto bonito sem rastro de ferramenta; beleza nao e evidencia.
+\end{descricao}
+
+\begin{funcao}
+Produzir entrega confrontavel: artefato mais rastro que permita ao fiscal E6 repetir a conferencia.
+\end{funcao}
+
+\section{E6 -- Gate: o fiscal que devolve sem pena}
+
+\elemento{E6 Gate para leigos}{\metainfo{ID}{E6-LEIGO} \hfill \metainfo{Tecnico}{fail-closed em \pth{sdd/tdd_runner.py}}}
+
+\begin{descricao}
+Para Ana: o fiscal compara a entrega com o bilhete. Faltou fonte, passou de dez linhas ou inventou dado, volta com motivo escrito. Para Bruno: verificacao de especificacao e teste verde; reprovou, nao encerra como concluida e volta para revisao. Analogia: prova com gabarito: nao passou, refaz, sem jeitinho. Exemplo: dois criterios, um falhou, tarefa nao e aprovada por esse contrato e nao se inventa aprovacao. Armadilha: trocar fiscal por torcida; teste verde fora do criterio nao abre gate.
+\end{descricao}
+
+\begin{funcao}
+Proteger o leitor do acaso: na duvida, reprovar e registrar e melhor que entregar duvidoso como certo.
+\end{funcao}
+
+\section{E7 -- Entrega: resposta com fonte e dono}
+
+\elemento{E7 Entrega para leigos}{\metainfo{ID}{E7-LEIGO} \hfill \metainfo{Tecnico}{conclusao com proveniencia}}
+
+\begin{descricao}
+Para Ana: so agora o resumo chega as maos dela, com fontes, limites e nome de quem fez e quem conferiu. Ela pode usar na aula e citar sem medo. Para Bruno: encerramento com relatorio de conclusao, memoria atualizada e ciclo registrado quando relevante. Analogia: encomenda com nota fiscal e remetente, nao pacote anonimo. Exemplo: dez linhas, cada uma com trecho de origem, mais nota do que nao foi encontrado. Armadilha: guardar a entrega so na memoria; sem registro, a proxima tarefa comeca do zero.
+\end{descricao}
+
+\begin{funcao}
+Fechar com responsabilidade: quem recebe sabe o que usar, o que nao usar e a quem perguntar.
+\end{funcao}
+
+\begin{flowch}[Conta de Jaccard em um olhar]{fonte: ativ-02o e secao E3 acima}
+\matrix[matrix of nodes,name=jac,row sep=3mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|Palavras do pedido K \& |[fn]|Plaquinha do agente \\
+ |[fn]|Intersecao: o que combina \& |[fn]|Uniao: tudo que apareceu \\
+ |[fde]|Nota A igual combina sobre total \& |[fne]|Empate decide categoria \\
+};
+\draw[seta] (jac-1-1)--(jac-1-2);
+\draw[seta] (jac-1-2.south)--(jac-2-2.north);
+\draw[seta] (jac-2-1)--(jac-2-2);
+\draw[seta] (jac-2-2.south)--(jac-3-1.north);
+\draw[seta] (jac-3-1)--(jac-3-2);
+\end{flowch}
+
+\begin{aviso}
+Limite do capitulo. E1 a E7 e pipeline explicativo, nao promessa de desempenho. Escore mede casamento semantico; gate mede conformidade com criterio; nenhum dos dois mede verdade geral. NotebookLM ajudou a organizar o roteiro leigo e a conferir fontes; a conta e a conferencia final sao locais e repetiveis.
+\end{aviso}

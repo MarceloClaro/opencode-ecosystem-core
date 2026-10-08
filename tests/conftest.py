@@ -38,7 +38,15 @@ import sys
 import tempfile
 from pathlib import Path
 
+import pytest
+
 os.environ["MCI_STATE_DIR"] = tempfile.mkdtemp(prefix="mci_test_state_")
+
+
+@pytest.fixture(autouse=True)
+def isolate_harness_health_state(tmp_path, monkeypatch):
+    """Uma observação simulada nunca deve contaminar estado de produção."""
+    monkeypatch.setenv("HARNESS_HEALTH_PATH", str(tmp_path / "harness_health.sqlite3"))
 
 # O Mutmut executa pytest dentro de ``mutants/``, mas o processo que iniciou
 # a ferramenta também mantém o checkout original em ``sys.path``. Sem esta

@@ -1,0 +1,49 @@
+{
+  "spec": "SPEC-935-R675",
+  "recorded_at_utc": "2026-10-04T20:29:14.481417+00:00",
+  "status": "local_green",
+  "new_tests": 32,
+  "regression_tests": 34,
+  "total_passed": 66,
+  "external_generation_executed": false,
+  "external_scientific_validation": false,
+  "executor_status": {
+    "name": "nlm",
+    "available": true,
+    "bin_path": "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/nlm",
+    "profile": "default",
+    "operations": [
+      "add_source_text",
+      "create_audio",
+      "create_notebook",
+      "download_audio"
+    ],
+    "formats": [
+      "brief",
+      "critique",
+      "debate",
+      "deep_dive"
+    ],
+    "lengths": [
+      "default",
+      "long",
+      "short"
+    ],
+    "note": "integracao por invocacao externa (opt-in do operador); upstream usa APIs internas nao documentadas do Gemini Notebook"
+  },
+  "source_sha256": {
+    "agent_runners/nlm_executor.py": "d07750e3832f97a9f9e354484b0655438c7a21a0be1e254ee0874ae778ab8a14",
+    "tests/test_r675_notebook_podcast_truthfulness.py": "3deaf514161c476e2f925096bdc3c9326866662fe5f6af4bb27ba94c651766ee",
+    "tests/test_r549_nlm_podcast.py": "aa31dd61f1cef4ec36f2681d0dc39f7af2ef0357a89e0c0f50d27b1973acb0da",
+    "specs/SPEC-935-R675-notebook-podcast-truthfulness.md": "8752b15479548e286d654d11d30ceebdc1eaed5062841d4738f957b96faa54dd"
+  },
+  "orchestrator_method_sha256": {
+    "podcast": "c5b53584e692088c72bc3cb795373bb60928af79a43900c750a503a79852bb32",
+    "_podcast_fail": "ce2f935474208573eabfeec1b279a02ed12197cecaad93326490c15b13c808d1"
+  },
+  "evidence": {
+    "red": "docs/evidence/R675_RED.xml",
+    "counterexamples_red": "docs/evidence/R675_COUNTEREXAMPLES_RED.xml",
+    "green": "docs/evidence/R675_GREEN.xml"
+  }
+}

@@ -1,0 +1,138 @@
+"""Plugin-owned local scRNA FASTQ-to-count workflow."""
+
+from pathlib import Path
+
+DOWNLOADS = {}
+
+
+def resolve_input(value):
+    if not value.startswith(("http://", "https://")):
+        return value
+    filename = Path(value).name
+    DOWNLOADS[filename] = value
+    return f".workflow-inputs/{filename}"
+
+
+SAMPLES = {
+    sample: {
+        key: resolve_input(value)
+        if key in {"barcode_fastq", "cdna_fastq"} and value
+        else value
+        for key, value in metadata.items()
+    }
+    for sample, metadata in config["samples"].items()
+}
+REFS = {
+    key: resolve_input(value)
+    if key in {"genome_fasta", "annotation_gtf", "cb_whitelist"} and value
+    else value
+    for key, value in config["references"].items()
+}
+CHEM = config["chemistry"]
+THREADS = config["threads"]
+STAR_IMAGE = config.get("execution", {}).get("star_image")
+STAR_CONTAINER = f"docker://{STAR_IMAGE}" if STAR_IMAGE else None
+FEATURES_MODE = CHEM["features_mode"]
+CELL_FILTER = CHEM["solo_cell_filter"]
+FILTERED_OUTPUTS = (
+    {
+        "filtered_matrix": f"counts/{{sample}}/Solo.out/{FEATURES_MODE}/filtered/matrix.mtx",
+        "filtered_barcodes": f"counts/{{sample}}/Solo.out/{FEATURES_MODE}/filtered/barcodes.tsv",
+        "filtered_features": f"counts/{{sample}}/Solo.out/{FEATURES_MODE}/filtered/features.tsv",
+    }
+    if CELL_FILTER.strip().lower() != "none"
+    else {}
+)
+
+
+def count_targets():
+    targets = ["references/star_index"]
+    for sample in SAMPLES:
+        base = f"counts/{sample}/Solo.out/{FEATURES_MODE}/raw"
+        targets.extend(
+            [
+                f"{base}/matrix.mtx",
+                f"{base}/barcodes.tsv",
+                f"{base}/features.tsv",
+                f"counts/{sample}/Log.final.out",
+            ]
+        )
+        targets.extend(output.format(sample=sample) for output in FILTERED_OUTPUTS.values())
+    return targets
+
+
+rule all:
+    input:
+        count_targets()
+
+
+rule download_input:
+    output:
+        ".workflow-inputs/{filename}"
+    params:
+        url=lambda wildcards: DOWNLOADS[wildcards.filename]
+    shell:
+        "curl -fsSL {params.url:q} -o {output:q}"
+
+
+rule starsolo_index:
+    input:
+        fasta=lambda wildcards: REFS["genome_fasta"],
+        gtf=lambda wildcards: REFS["annotation_gtf"],
+    output:
+        directory("references/star_index")
+    threads: THREADS
+    params:
+        sjdb_overhang=lambda wildcards: CHEM["sjdb_overhang"],
+        genome_sa_index_nbases=lambda wildcards: CHEM["genome_sa_index_nbases"],
+    conda:
+        "envs/star.yaml"
+    container:
+        STAR_CONTAINER
+    shell:
+        "mkdir -p {output:q} && "
+        "genome_dir=\"$(realpath {output:q})\"; "
+        "STAR --runThreadN {threads} --runMode genomeGenerate "
+        "--genomeDir \"$genome_dir\" --genomeFastaFiles {input.fasta:q} "
+        "--sjdbGTFfile {input.gtf:q} --sjdbOverhang {params.sjdb_overhang} "
+        "--genomeSAindexNbases {params.genome_sa_index_nbases}"
+
+
+rule starsolo_count:
+    input:
+        index="references/star_index",
+        whitelist=lambda wildcards: REFS["cb_whitelist"],
+        barcode_fastq=lambda wildcards: SAMPLES[wildcards.sample]["barcode_fastq"],
+        cdna_fastq=lambda wildcards: SAMPLES[wildcards.sample]["cdna_fastq"],
+    output:
+        matrix=f"counts/{{sample}}/Solo.out/{FEATURES_MODE}/raw/matrix.mtx",
+        barcodes=f"counts/{{sample}}/Solo.out/{FEATURES_MODE}/raw/barcodes.tsv",
+        features=f"counts/{{sample}}/Solo.out/{FEATURES_MODE}/raw/features.tsv",
+        log="counts/{sample}/Log.final.out",
+        **FILTERED_OUTPUTS,
+    threads: THREADS
+    params:
+        cb_start=lambda wildcards: CHEM["cb_start"],
+        cb_len=lambda wildcards: CHEM["cb_len"],
+        umi_start=lambda wildcards: CHEM["umi_start"],
+        umi_len=lambda wildcards: CHEM["umi_len"],
+        solo_type=lambda wildcards: CHEM["solo_type"],
+        solo_cell_filter=lambda wildcards: CELL_FILTER.split(),
+        features_mode=lambda wildcards: FEATURES_MODE,
+        outdir=lambda wildcards: f"counts/{wildcards.sample}",
+    conda:
+        "envs/star.yaml"
+    container:
+        STAR_CONTAINER
+    shell:
+        "mkdir -p {params.outdir:q} && "
+        "genome_dir=\"$(realpath {input.index:q})\"; "
+        "STAR --genomeDir \"$genome_dir\" --runThreadN {threads} "
+        "--readFilesIn {input.cdna_fastq:q} {input.barcode_fastq:q} "
+        "--readFilesCommand 'gzip -cdf' "
+        "--outFileNamePrefix {params.outdir:q}/ "
+        "--soloType {params.solo_type:q} --soloCBwhitelist {input.whitelist:q} "
+        "--soloCBstart {params.cb_start} --soloCBlen {params.cb_len} "
+        "--soloUMIstart {params.umi_start} --soloUMIlen {params.umi_len} "
+        "--soloBarcodeReadLength 0 --soloFeatures {params.features_mode:q} "
+        "--soloCellFilter {params.solo_cell_filter:q} --outSAMtype None"

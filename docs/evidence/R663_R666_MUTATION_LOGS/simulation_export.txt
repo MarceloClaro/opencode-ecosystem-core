@@ -1,0 +1,34 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+______ test_simulated_deep_research_never_reaches_review_or_export[True] _______
+tests/test_r666_knowledge_orchestration.py:200: in test_simulated_deep_research_never_reaches_review_or_export
+    result = orch.scientific_discovery_pipeline("biologia", max_rounds=1, strict_gates=strict)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+marceloclaro/orchestrator.py:152: in scientific_discovery_pipeline
+    ???
+tests/test_r666_knowledge_orchestration.py:198: in <lambda>
+    monkeypatch.setattr(review_agent.OrchestratorReviewer, "review", lambda *a, **kw: pytest.fail("review of simulation"))
+                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: review of simulation
+------------------------------ Captured log call -------------------------------
+INFO     mci-metabus:metabus.py:277 Subscribed to topic: task.cfp
+INFO     mci-metabus:metabus.py:277 Subscribed to topic: task.assigned
+INFO     mci-metabus:metabus.py:277 Subscribed to topic: metacognition.reflected
+______ test_simulated_deep_research_never_reaches_review_or_export[False] ______
+tests/test_r666_knowledge_orchestration.py:200: in test_simulated_deep_research_never_reaches_review_or_export
+    result = orch.scientific_discovery_pipeline("biologia", max_rounds=1, strict_gates=strict)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+marceloclaro/orchestrator.py:152: in scientific_discovery_pipeline
+    ???
+tests/test_r666_knowledge_orchestration.py:198: in <lambda>
+    monkeypatch.setattr(review_agent.OrchestratorReviewer, "review", lambda *a, **kw: pytest.fail("review of simulation"))
+                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: review of simulation
+------------------------------ Captured log call -------------------------------
+INFO     mci-metabus:metabus.py:277 Subscribed to topic: task.cfp
+INFO     mci-metabus:metabus.py:277 Subscribed to topic: task.assigned
+INFO     mci-metabus:metabus.py:277 Subscribed to topic: metacognition.reflected
+=========================== short test summary info ============================
+FAILED tests/test_r666_knowledge_orchestration.py::test_simulated_deep_research_never_reaches_review_or_export[True]
+FAILED tests/test_r666_knowledge_orchestration.py::test_simulated_deep_research_never_reaches_review_or_export[False]
+2 failed in 0.90s

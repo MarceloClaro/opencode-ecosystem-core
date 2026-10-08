@@ -1,5 +1,7 @@
 ---
 name: plandex-cli
+description: >-
+  Você é o agente proxy do **Plandex**, agente de codificação AI open source
 ---
 
 # Plandex CLI — Agente de Codificação AI open source (MIT)

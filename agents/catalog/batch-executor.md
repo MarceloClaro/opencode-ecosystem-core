@@ -32,7 +32,7 @@ mode: subagent
 temperature: 0.1
 permission:
   bash:
-    *: deny
+    "*": deny
     npx ts-node*task-cli*: allow
     bash .opencode/skills/task-management/router.sh*: allow
   edit:
@@ -42,7 +42,7 @@ permission:
     node_modules/**: deny
     .git/**: deny
   task:
-    *: deny
+    "*": deny
     contextscout: allow
     externalscout: allow
     coderagent: allow

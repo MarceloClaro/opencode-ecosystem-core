@@ -222,11 +222,24 @@ def _models_endpoint(base_url: Optional[str], port: int) -> str:
     return f"{_local_base_url(_configured_host(), port)}/models"
 
 # ── Catálogo de modelos locais curado ──────────────────────────────────────
+#
+# R622: este catálogo é a fonte única da verdade e precisa ser AUTOSSUFICIENTE.
+# `family` (atributo de identidade do modelo físico) e `free` são declarados
+# aqui; a fachada legada `integrations.litert_lm` não pode mais injetá-los por
+# alias — o alias `gemma-3-1B-it` apontava para o Qwen3-0.6B e contaminava a
+# família dele com "google".
+#
+# `context` NÃO é renomeado para `context_window`: o contrato R211 exige
+# `context == 20_480` neste campo, concordante com `opencode.json`, o plugin
+# TypeScript e o runtime. A reconciliação para `context_window` acontece na
+# fronteira de agregação (`model_router.normalize_model_entry`).
 
 MODELS: Dict[str, Dict[str, Any]] = {
     "litert-community/gemma-4-E2B-it-litert-lm": {
         "name": "Gemma 4 E2B (2B)",
         "provider": PROVIDER_ID,
+        "family": "google",
+        "free": True,
         "description": "Gemma 4 2B parâmetros, instrução-tuned, MTP",
         "size_gb": 2.4,
         "backend": "cpu",
@@ -237,6 +250,8 @@ MODELS: Dict[str, Dict[str, Any]] = {
     "litert-community/gemma-4-E4B-it-litert-lm": {
         "name": "Gemma 4 E4B (4B)",
         "provider": PROVIDER_ID,
+        "family": "google",
+        "free": True,
         "description": "Gemma 4 4B parâmetros, instrução-tuned",
         "size_gb": 3.4,
         "backend": "cpu",
@@ -247,6 +262,8 @@ MODELS: Dict[str, Dict[str, Any]] = {
     "litert-community/gemma-4-12B-it-litert-lm": {
         "name": "Gemma 4 12B IT",
         "provider": PROVIDER_ID,
+        "family": "google",
+        "free": True,
         "description": "Gemma 4 12B parâmetros, instrução-tuned",
         "size_gb": 6.1,
         "backend": "cpu",
@@ -257,6 +274,8 @@ MODELS: Dict[str, Dict[str, Any]] = {
     "litert-community/Qwen3-0.6B": {
         "name": "Qwen3 0.6B",
         "provider": PROVIDER_ID,
+        "family": "qwen",
+        "free": True,
         "description": "Qwen3 0.6B parâmetros — modelo leve para testes",
         "size_gb": 0.58,
         "backend": "cpu",

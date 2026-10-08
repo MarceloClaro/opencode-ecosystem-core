@@ -1,0 +1,22 @@
+{
+  "scope": "three_targeted_in_memory_contract_mutants",
+  "source_sha256": "72af1942f1943dc81751d8d07f7d68b7c39603cef490a1e009c1d36cb7be312a",
+  "mutants": [
+    {
+      "mutant": "confirmation_removed",
+      "killed": true,
+      "mutant_sha256": "d2a964e23159e611257c273f7957646f67030c76c38cd71c0be2514c14515693"
+    },
+    {
+      "mutant": "unknown_arguments_accepted",
+      "killed": true,
+      "mutant_sha256": "ba3c8412af576b3f79f95b70fcbb2a41864f2c72d40425c08a9dbe44647b8f69"
+    },
+    {
+      "mutant": "business_failure_promoted",
+      "killed": true,
+      "mutant_sha256": "eb2a5755515ef4518b419f6dfdb00c152abc39bb367bbe5d52610d24cfac4291"
+    }
+  ],
+  "passed": true
+}

@@ -32,7 +32,7 @@ mode: subagent
 temperature: 0.1
 permission:
   bash:
-    *: deny
+    "*": deny
   edit:
     **/*.env*: deny
     **/*.key: deny
@@ -42,9 +42,9 @@ permission:
   task:
     contextscout: allow
     externalscout: allow
-    *: deny
+    "*": deny
   skill:
-    *: deny
+    "*": deny
 ---
 
 # StoryMapper

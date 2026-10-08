@@ -1,0 +1,71 @@
+flowchart TB
+  %% OdontoCA evidence-aware architecture, updated after independent public-cohort analysis.
+  %% Solid blue = executed. Dashed amber = not executed. Purple = decision gate.
+
+  START([OdontoCA research protocol]) --> PROVENANCE{Source, version,<br/>checksum and consent recorded?}
+
+  subgraph SYN["A. SYNTHETIC TECHNICAL PATH — EXECUTED"]
+    direction TB
+    S1["36 simulated children, three visits,<br/>synthetic tooth states and 24 ASVs"]
+    S2["Consecutive healthy-to-next-visit transitions<br/>686 records, 54 synthetic events"]
+    S3["CA rule plus clinical, microbiome and combined models<br/>three outer, two inner child-grouped folds"]
+    S4["Out-of-fold technical metrics and tests<br/>archived/rerun discrepancy disclosed"]
+    S1 --> S2 --> S3 --> S4
+  end
+  PROVENANCE -- CI_SMOKE --> S1
+
+  subgraph CLIN["B. PUBLIC CLINICAL COHORT — EXECUTED SEPARATELY"]
+    direction TB
+    C1["Authors' Table S1 at pinned Git commit<br/>file SHA-256 checked"]
+    C2["Reproduce all 11 cohort counts:<br/>2,504 records, 89 children, 997 H-onset transitions"]
+    C3["Exclude one zero-month interval:<br/>996 transitions, 83 events, 81 children"]
+    C4["Freeze t predictors and H-to-C target;<br/>exclude HostGroup, future status and time to decay"]
+    C5["Prespecified minimal and spatial logistic models;<br/>corrected five outer, three inner child-grouped folds"]
+    C6["Inner cross-fitted probabilities on outer-training children;<br/>fit intercept-only and intercept-plus-slope maps"]
+    C7["Apply maps to held-out outer children;<br/>OOF AP, ROC-AUC, Brier, log loss and child bootstrap"]
+    C8["Exploratory internal prediction only;<br/>spatial advantage uncertain, calibration imperfect"]
+    C1 --> C2 --> C3 --> C4 --> C5 --> C6 --> C7 --> C8
+  end
+  PROVENANCE -- pinned public cohort --> C1
+
+  subgraph MICRO["C. REAL MICROBIOME EXTENSION — NOT EXECUTED"]
+    direction TB
+    M1["Qiita/BIOM source version, mapping and checksum"]
+    M2["Exact one-to-one clinical SampleID match;<br/>reject ambiguity, duplicates and zero libraries"]
+    M3["Inside training folds only:<br/>ASV selection, CLR, scaling, PCA and tuning"]
+    M4["Compare clinical versus matched microbiome addition<br/>with child-grouped validation and calibration"]
+    M1 --> M2 --> M3 --> M4
+  end
+
+  subgraph IMG["D. DENTAL IMAGE EXTENSION — NOT EXECUTED"]
+    direction TB
+    I1["Licensed images, labels, reference standard<br/>and patient identifiers"]
+    I2["Annotation conversion, image quality review,<br/>patient split and cross-split duplicate audit"]
+    I3["Train-only augmentation and tuning;<br/>held-out domain-specific evaluation"]
+    I4["Tooth localization and FDI mapping<br/>with clinician review"]
+    I1 --> I2 --> I3 --> I4
+  end
+
+  C8 --> NEXT{More evidence sought?}
+  NEXT -. microbiome .-> M1
+  NEXT -. images .-> I1
+  C8 --> EXTERNAL["Lock model and features, define fixed horizon,<br/>validate in independent clinic or later period"]
+  M4 -. matched real results .-> FUSE{Same cohort and exact<br/>patient + visit + tooth?}
+  I4 -. matched real results .-> FUSE
+  FUSE -- yes --> MULTI["Prespecified patient-linked fusion<br/>within grouped validation"] --> EXTERNAL
+  FUSE -- no --> SEPARATE["Block cross-cohort fusion;<br/>report analyses separately"]
+  EXTERNAL --> FINAL{External discrimination, calibration,<br/>utility, safety and ethics acceptable?}
+  FINAL -- no --> REVISE["Revise and revalidate; disclose failures"]
+  FINAL -- yes --> RESEARCH["Clinical evaluation protocol<br/>and regulatory assessment"]
+  S4 --> SYN_ONLY([Synthetic estimates remain technical evidence])
+
+  classDef executed fill:#e8f3fb,stroke:#23618a,stroke-width:2px,color:#173e57;
+  classDef planned fill:#fff8e9,stroke:#a77920,stroke-width:2px,stroke-dasharray:6 4,color:#6b4b13;
+  classDef gate fill:#f2edf9,stroke:#775497,stroke-width:2px,color:#443056;
+  classDef blocked fill:#fbece9,stroke:#b23e34,stroke-width:2px,color:#742921;
+  classDef note fill:#e8f5ec,stroke:#327354,stroke-width:2px,color:#25533d;
+  class S1,S2,S3,S4,C1,C2,C3,C4,C5,C6,C7,C8 executed;
+  class M1,M2,M3,M4,I1,I2,I3,I4,MULTI,EXTERNAL,RESEARCH planned;
+  class PROVENANCE,NEXT,FUSE,FINAL gate;
+  class SEPARATE,REVISE blocked;
+  class START,SYN_ONLY note;

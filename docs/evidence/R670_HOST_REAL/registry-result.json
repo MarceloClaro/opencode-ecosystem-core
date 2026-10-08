@@ -1,0 +1,217 @@
+{
+  "status": "catalogued",
+  "plugins": [
+    {
+      "id": "genomic-intelligence",
+      "name": "Genomic Intelligence",
+      "version": "1.1.0",
+      "source_cache": "openai-curated-remote/app-6a73c480231c819181d7440a0e1499c9",
+      "instructions_installed": true,
+      "skills": [],
+      "host_operations": [
+        "list_models",
+        "fetch_sequence"
+      ],
+      "local_connector_execution": false,
+      "connector_scope": "authenticated_host"
+    },
+    {
+      "id": "wolfram",
+      "name": "Wolfram",
+      "version": "3.0.0",
+      "source_cache": "openai-curated-remote/app-69fe0bf66c8481919c513d799406436e",
+      "instructions_installed": true,
+      "skills": [],
+      "host_operations": [
+        "context",
+        "evaluate",
+        "query"
+      ],
+      "local_connector_execution": false,
+      "connector_scope": "authenticated_host"
+    },
+    {
+      "id": "boltz-api-cli",
+      "name": "Boltz",
+      "version": "0.1.1",
+      "source_cache": "openai-curated-remote/boltz-api-cli",
+      "instructions_installed": true,
+      "skills": [
+        "boltz-check-status",
+        "boltz-cli-setup",
+        "boltz-protein-design",
+        "boltz-protein-screen",
+        "boltz-small-molecule-adme",
+        "boltz-small-molecule-design",
+        "boltz-small-molecule-screen",
+        "boltz-structure-and-binding"
+      ],
+      "host_operations": [],
+      "local_connector_execution": false,
+      "connector_scope": "local_instructions_or_cli"
+    },
+    {
+      "id": "ngs-analysis-workbench",
+      "name": "NGS Analysis Workbench",
+      "version": "0.2.16",
+      "source_cache": "openai-curated-remote/ngs-analysis-workbench",
+      "instructions_installed": true,
+      "skills": [
+        "design-ngs-analysis",
+        "ngs-analysis-workbench",
+        "run-ngs-analysis",
+        "understand-ngs-data",
+        "understand-ngs-results"
+      ],
+      "host_operations": [
+        "targets"
+      ],
+      "local_connector_execution": false,
+      "connector_scope": "authenticated_host"
+    },
+    {
+      "id": "cowork-plugin-management",
+      "name": "cowork-plugin-management",
+      "version": "0.2.2",
+      "source_cache": "claude-cowork/cowork-plugin-management",
+      "instructions_installed": true,
+      "skills": [
+        "cowork-plugin-customizer",
+        "create-cowork-plugin"
+      ],
+      "host_operations": [],
+      "local_connector_execution": false,
+      "connector_scope": "local_instructions_or_cli"
+    },
+    {
+      "id": "data",
+      "name": "data",
+      "version": "1.1.0",
+      "source_cache": "claude-cowork/data",
+      "instructions_installed": true,
+      "skills": [
+        "analyze",
+        "build-dashboard",
+        "create-viz",
+        "data-context-extractor",
+        "data-visualization",
+        "explore-data",
+        "sql-queries",
+        "statistical-analysis",
+        "validate-data",
+        "write-query"
+      ],
+      "host_operations": [],
+      "local_connector_execution": false,
+      "connector_scope": "local_instructions_or_cli"
+    },
+    {
+      "id": "plugin-management",
+      "name": "Plugin Management",
+      "version": "0.1.0",
+      "source_cache": "openai-curated-remote/plugin-management",
+      "instructions_installed": true,
+      "skills": [
+        "plugin-management"
+      ],
+      "host_operations": [
+        "search",
+        "dependencies"
+      ],
+      "local_connector_execution": false,
+      "connector_scope": "authenticated_host"
+    },
+    {
+      "id": "academixpertplus-kariri",
+      "name": "AcademiXpertPlus KARIRI",
+      "version": "0.5.1+bundle.4c816d33a9b41bebd57e17594e90d987",
+      "source_cache": "created-by-me-remote/gpt-d8a67608fa47bd06edd9d64b5f46fa6d",
+      "instructions_installed": true,
+      "skills": [
+        "instructions"
+      ],
+      "host_operations": [],
+      "local_connector_execution": false,
+      "connector_scope": "local_instructions_or_cli"
+    },
+    {
+      "id": "scigrant",
+      "name": "SciGrant",
+      "version": "0.1.0",
+      "source_cache": "openai-curated-remote/app-6ab77d700b148191a79dc4d2df6babb6",
+      "instructions_installed": true,
+      "skills": [],
+      "host_operations": [
+        "workflow"
+      ],
+      "local_connector_execution": false,
+      "connector_scope": "authenticated_host"
+    },
+    {
+      "id": "life-sciences-literature",
+      "name": "Life Sciences Literature",
+      "version": "0.1.5",
+      "source_cache": "openai-curated-remote/life-sciences-literature",
+      "instructions_installed": true,
+      "skills": [
+        "biorxiv-skill",
+        "ncbi-entrez-skill",
+        "ncbi-pmc-skill"
+      ],
+      "host_operations": [],
+      "local_connector_execution": false,
+      "connector_scope": "local_instructions_or_cli"
+    },
+    {
+      "id": "plugin-creator",
+      "name": "Plugin Creator",
+      "version": "0.1.22",
+      "source_cache": "openai-curated-remote/plugin-creator",
+      "instructions_installed": true,
+      "skills": [
+        "create-plugin",
+        "prepare-plugin-submission",
+        "update-plugin"
+      ],
+      "host_operations": [
+        "metadata"
+      ],
+      "local_connector_execution": false,
+      "connector_scope": "authenticated_host"
+    },
+    {
+      "id": "anthropic-skills",
+      "name": "anthropic-skills",
+      "version": "1.0.0",
+      "source_cache": "claude-cowork/anthropic-skills",
+      "instructions_installed": true,
+      "skills": [
+        "algorithmic-art",
+        "canvas-design",
+        "consolidate-memory",
+        "criador-de-artigo",
+        "criador-de-artigo-v2",
+        "doc-coauthoring",
+        "docx",
+        "explain-usage",
+        "internal-comms",
+        "learn",
+        "mcp-builder",
+        "morning",
+        "pdf",
+        "pptx",
+        "schedule",
+        "setup-cowork",
+        "skill-creator",
+        "slack-gif-creator",
+        "web-artifacts-builder",
+        "xlsx"
+      ],
+      "host_operations": [],
+      "local_connector_execution": false,
+      "connector_scope": "local_instructions_or_cli"
+    }
+  ],
+  "executed": false,
+  "external_validation": false
+}

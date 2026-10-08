@@ -1,0 +1,22 @@
+{
+  "status": "completed",
+  "plugin_id": "life-sciences-literature",
+  "operation": "pubmed_search",
+  "executed": true,
+  "inference_executed": false,
+  "exit_code": 0,
+  "output": "{\"ok\": true, \"source\": \"ncbi-entrez\", \"endpoint\": \"esearch\", \"database\": \"pubmed\", \"record_path\": \"esearchresult.idlist\", \"raw_output_path\": null, \"warnings\": [], \"record_count_returned\": 5, \"record_count_available\": 5, \"truncated\": false, \"records\": [\"42649659\", \"42469356\", \"42401399\", \"42239222\", \"42215455\"], \"sources\": [{\"name\": \"NCBI Entrez\", \"url\": \"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=REDACTED&retmode=json&retmax=5\", \"retrieved_at\": \"2026-10-04T19:41:38.079131+00:00\", \"supports_claim\": true, \"kind\": \"evidence\", \"request_url\": \"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=REDACTED&retmode=json&retmax=5\", \"canonical_urls\": [\"https://pubmed.ncbi.nlm.nih.gov/42649659/\", \"https://pubmed.ncbi.nlm.nih.gov/42469356/\", \"https://pubmed.ncbi.nlm.nih.gov/42401399/\", \"https://pubmed.ncbi.nlm.nih.gov/42239222/\", \"https://pubmed.ncbi.nlm.nih.gov/42215455/\"]}]}",
+  "executable_sha256": "62ab008b58600ea7d79f305501012481b604648ce45c88e52d4e9f5265289f90",
+  "external_validation": false,
+  "metacognition": {
+    "observation_id": "773133c7-7635-495a-860c-3dd619c00f30",
+    "persisted": true,
+    "scope_id": "0586f246961cde7e57b2379a0f0e61050eec7ff531e6fb17532b4ac69b284520",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "completed"
+    },
+    "confidence_promoted": false
+  }
+}

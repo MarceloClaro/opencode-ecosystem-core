@@ -1,0 +1,58 @@
+{
+  "evidence_kind": "synthetic_data_cli_execution",
+  "training_executed": false,
+  "model_inference_executed": false,
+  "checks": {
+    "data": {
+      "exit_code": 0,
+      "result": {
+        "status": "accepted",
+        "diagnostics": [],
+        "manifest": {
+          "seed": 42,
+          "dataset_sha256": "5f15dff73e73e476715f0e878d999122990e48cf515a4cb2afae129f57b42ebc",
+          "split_sha256": {
+            "train": "424efa4a5030dfae4463669ab929d5c9e985c31598225429a19420f7e3e0abe7",
+            "validation": "845faebb803b89f6744af3130036174279325e04ce9a1e4fb9acb13ef986e055",
+            "test": "9bc9f08a1bee6cae7bb63051b2ff05d0a181b45e3c8d9e2e309f71cd972c6348"
+          },
+          "input_count": 4,
+          "deduplicated_count": 0,
+          "record_counts": {
+            "train": 2,
+            "validation": 1,
+            "test": 1
+          },
+          "group_counts": {
+            "train": 2,
+            "validation": 1,
+            "test": 1
+          },
+          "source_group_count": 4,
+          "effective_group_count": 4,
+          "split_effective_group_counts": {
+            "train": 2,
+            "validation": 1,
+            "test": 1
+          },
+          "normalization": "NFKC+whitespace",
+          "semantic_deduplication": false
+        }
+      }
+    },
+    "evaluation": {
+      "exit_code": 0,
+      "result": {
+        "status": "accepted",
+        "diagnostics": [],
+        "verification_scope": "reported_results_only",
+        "dataset_sha256": "9bc9f08a1bee6cae7bb63051b2ff05d0a181b45e3c8d9e2e309f71cd972c6348",
+        "sample_count": 1,
+        "baseline_value": 0.5,
+        "candidate_value": 0.6,
+        "improvement": 0.09999999999999998,
+        "min_improvement": 0.1
+      }
+    }
+  }
+}

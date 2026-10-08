@@ -1,0 +1,129 @@
+{
+  "model_name": "OdontoCA clinical risk model (per-tooth, next recorded visit)",
+  "primary_model": "clinical_minimal",
+  "secondary_exploratory_model": "clinical_spatial",
+  "cohort": {
+    "rows": 996,
+    "events": 83,
+    "children": 81
+  },
+  "event_prevalence": 0.083333,
+  "outcome": "progression_event: H->C at the next recorded consecutive visit (2-5 months)",
+  "source_data": {
+    "source_sha256": "b7819fee81efbe2e227b7700c3cd86ce8bc6f7fe6f49da6214f4107d099184fa",
+    "reproduced_eligible": 997,
+    "reproduced_events": 84,
+    "excluded_nonpositive_followup_interval": 1,
+    "excluded_events": 1
+  },
+  "seed": 20260930,
+  "versions": {
+    "python": "3.14.4",
+    "scikit_learn": "1.9.0",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "pandas": "3.0.3"
+  },
+  "models": {
+    "clinical_minimal": {
+      "selected_C": 10.0,
+      "cv_mean_average_precision_by_C": {
+        "0.01": 0.23320607957644396,
+        "0.1": 0.2524308604368678,
+        "1.0": 0.28003225995828945,
+        "10.0": 0.28052561673453213
+      },
+      "features": [
+        "tooth_position",
+        "age_months_t",
+        "host_dmfs_t",
+        "neighbor_caries_count"
+      ],
+      "recalibration_intercept_and_slope": {
+        "intercept": -0.7215893474684797,
+        "slope": 0.67517253953638
+      },
+      "apparent_metrics_OPTIMISTIC": {
+        "average_precision": 0.28174,
+        "roc_auc": 0.815312,
+        "brier": 0.069081,
+        "log_loss": 0.240016
+      },
+      "cross_fitted_uncalibrated_metrics": {
+        "average_precision": 0.214507,
+        "roc_auc": 0.753355,
+        "brier": 0.074883,
+        "log_loss": 0.264141
+      },
+      "cross_fitted_recalibrated_metrics": {
+        "average_precision": 0.214507,
+        "roc_auc": 0.753355,
+        "brier": 0.072722,
+        "log_loss": 0.259086
+      }
+    },
+    "clinical_spatial": {
+      "selected_C": 0.1,
+      "cv_mean_average_precision_by_C": {
+        "0.01": 0.23177739051784002,
+        "0.1": 0.26318032405653036,
+        "1.0": 0.24398782176027703,
+        "10.0": 0.22736298311012693
+      },
+      "features": [
+        "tooth_position",
+        "niche_icm",
+        "niche_ul",
+        "niche_lr",
+        "niche_ap",
+        "host_status_t",
+        "age_months_t",
+        "host_dmfs_t",
+        "neighbor_caries_count",
+        "spatial_weighted_dmfs_t",
+        "sum_dmfs_t",
+        "sum_ns_dt_t",
+        "sum_s_dt_t"
+      ],
+      "recalibration_intercept_and_slope": {
+        "intercept": -0.23447118255796728,
+        "slope": 0.9641802504295777
+      },
+      "apparent_metrics_OPTIMISTIC": {
+        "average_precision": 0.290218,
+        "roc_auc": 0.820115,
+        "brier": 0.067684,
+        "log_loss": 0.239148
+      },
+      "cross_fitted_uncalibrated_metrics": {
+        "average_precision": 0.202417,
+        "roc_auc": 0.758594,
+        "brier": 0.073499,
+        "log_loss": 0.260687
+      },
+      "cross_fitted_recalibrated_metrics": {
+        "average_precision": 0.202417,
+        "roc_auc": 0.758594,
+        "brier": 0.073168,
+        "log_loss": 0.259673
+      }
+    }
+  },
+  "interpretation_warning": "Apparent metrics are resubstitution and therefore optimistic. Cross-fitted metrics reuse the same 81 children as development. NEITHER is external validation. Clinical utility remains undetermined until an independent external cohort is scored with this locked artifact.",
+  "hyperparameter_selection_disclosure": "C was selected ONCE on the full cohort by grouped CV average precision (chosen C = 10.0). The manuscript instead chose C inside each outer fold and therefore reports a stricter, non-inflated internal estimate. The cross-fitted AUC/AP in this card are consequently optimistic relative to the manuscript (0.753 vs 0.686 for the primary model). For performance reporting, cite the manuscript's fold-wise estimates, not this card.",
+  "performance_to_report": "Manuscript pooled out-of-fold estimate for clinical_minimal: AUROC 0.686 (95% CI 0.618-0.754), average precision 0.166 (95% CI 0.120-0.246), Brier 0.0806 uncalibrated / 0.0745 after intercept-and-slope recalibration.",
+  "intended_use": "Research use only. Not for clinical decision-making. Not a medical device. No decision threshold was pre-specified; the model must not be used to trigger treatment.",
+  "known_limitations": [
+    "No external or temporal validation.",
+    "No independent outcome adjudication.",
+    "Only 83 outcome events; 20% events-per-parameter rule not assessable.",
+    "Prediction horizon is the next recorded visit (2-5 months), not a fixed time.",
+    "No fairness or subgroup performance analysis.",
+    "No net-benefit / decision-curve analysis."
+  ],
+  "artifact": {
+    "path": "odontoca_clinical_model.joblib",
+    "sha256": "ad32c8836f4d1394448d1d30fc9c0c5f0cc101659b5f7d27ca02a24415197772",
+    "size_bytes": 9893
+  }
+}
