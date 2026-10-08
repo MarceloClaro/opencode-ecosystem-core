@@ -4,6 +4,19 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [Não lançado] - 2026-10-07
+
+### Adicionado
+- **Pesquisador polímata com rede de 16 laboratórios auditados (SPEC-935-R711–R742)**: curadoria allowlist de 21 repositórios por tipo de raciocínio, pinagem viva com hashes, federação por classes de frescor, intenções com decisão humana nominal, readiness, inventário, minuta, pareceres, vigia de frescor e dossiê — `integrations/polymath_*`, 3 agentes de catálogo (46–48), skill `pesquisador-polimata-labs`, MCP `polymath-labs-mcp` (8 ferramentas, 15 MCPs no `opencode.json`), rede em `workbench/rede_polimata` (16 federados no escopo polímata, fora do harness R621).
+- **CI segregado por escopos** (`.github/workflows/ci-escopos.yml`): gates verdes obrigatórios (polímata, núcleo científico, config) e quarentena informativa das frentes com donos.
+- **Custódia durável**: clones em `/home/marceloclaro/polymath_clones` (REMAP + shas) e cadeias em `workbench/polymath/cadeias` com manifesto.
+
+### Corrigido
+- Catálogo 242→248/248 (`?` em YAML inline de 6 agentes); contrato de 5s do `doctor` (teto no enriquecimento de versões); docs sincronizados (248 agentes, 15 MCPs); capítulo do catálogo regenerado (`gen_mod10.py`); `nlm` pinado em `requirements-dev.txt`; biblioteca reindexada.
+
+### Documentado
+- `README.md`, `MANUAL.md`, `ARCHITECTURE.md` e installers com contagens operacionais de 2026-10-07 e seção de integridade operacional.
+
 ## [3.9.0] - 2026-08-23
 
 ### Adicionado
