@@ -20,6 +20,10 @@ python3 -m marceloclaro.cli doctor
 python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); print({'mcps': len(c.get('mcp', {})), 'agentes': len(c.get('agent', {}))})"
 ```
 
+A configuração operacional consultada em **2026-10-07** declara **248 agentes**
+e **15 MCPs**, incluindo `ecosystem-network` e `polymath-labs-mcp`. O diagnóstico mantém **20 checks**.
+A contagem de 2026-09-26 acima é um registro histórico.
+
 Specs, ciclos, testes e cobertura mudam com o checkout. Consulte,
 respectivamente, `specs/`, `evolution/cycles.json`, `tests/` e a configuração
 de CI em vez de tratar números de documentos antigos como estado atual.
@@ -32,8 +36,8 @@ graph TD
     CLI --> Orquestrador[MarceloClaroOrchestrator]
     Orquestrador --> SDD[SpecRegistry e SpecVerifier]
     Orquestrador --> MCI[MetaBus e Blackboard]
-    Orquestrador --> MCP[7 MCPs configurados]
-    Orquestrador --> Agentes[215 agentes configurados]
+    Orquestrador --> MCP[15 MCPs configurados]
+    Orquestrador --> Agentes[248 agentes configurados]
     Orquestrador --> MIRA[mira-presenter]
 ```
 
@@ -52,8 +56,8 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[7 MCPs configurados]
-    Orq2 --> Agents2[215 agentes configurados]
+    Orq2 --> MCP2[15 MCPs configurados]
+    Orq2 --> Agents2[248 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
@@ -71,7 +75,7 @@ flowchart TB
 
 ## Servidores MCP Interoperáveis
 
-Os **7 MCPs** configurados em `opencode.json` são:
+Os **11 MCPs** configurados em `opencode.json` são:
 
 1. `litert-lm`;
 2. `metacognitive-interconnect`;
@@ -79,7 +83,28 @@ Os **7 MCPs** configurados em `opencode.json` são:
 4. `pypi-search`;
 5. `colibri-mcp`;
 6. `scanners-mcp`;
-7. `web-deploy-mcp`.
+7. `web-deploy-mcp`;
+8. `ecosystem-network`;
+9. `fetch`;
+10. `sequential-thinking`;
+11. `filesystem`.
+
+O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento
+Transformer inspirado em atenção e a memória MetaBus/Blackboard aos executores
+de análise e leitura Claude, Antigravity e Codex disponíveis no ambiente. A
+coordenação tem limites de passos e tempo, não executa hooks importados e
+exige a conclusão para reportar sucesso. O identificador `chatgpt` não controla
+o aplicativo ChatGPT; o uso da CLI Codex requer selecionar `codex`
+explicitamente. Disponibilidade e autenticação são verificações locais.
+
+Na R644, `ecosystem_workflow` executa um DAG validado de até oito nós sobre
+`AutonomousCoordinator`, sob um orçamento global de passos e prazo por
+invocação. A execução é sequencial para preservar o Blackboard compartilhado.
+`WorkflowStore` publica checkpoints atômicos e aplica exclusão entre processos
+por ID; retomada confere a definição e conserva os nós concluídos. Resultado
+incerto de execução interrompida exige repetição explícita. A saúde dos CLIs
+usa metadados sanitizados em SQLite e pausa automática de 120 segundos.
+`ecosystem_workflow_status` consulta o registro sem repetir execuções.
 
 A presença dessas entradas de configuração não implica disponibilidade de toda
 dependência externa em cada máquina. O `doctor` expõe a situação encontrada
@@ -87,7 +112,7 @@ localmente entre os seus 20 checks.
 
 ## Agentes e orquestração
 
-O arquivo `opencode.json` é a fonte da contagem de **215 agentes** configurados
+O arquivo `opencode.json` é a fonte da contagem de **238 agentes** configurados
 para a integração OpenCode. O Blackboard pode apresentar registros em momentos
 diferentes do processo de inicialização; por isso, não se deve misturar uma
 contagem de runtime com a contagem declarada no arquivo de configuração.
@@ -145,6 +170,24 @@ O subsistema de apresentações inclui:
 `SPEC-935-R126` registra o agente delegável e `SPEC-935-R127` registra a
 documentação em dupla leitura. A interface de uso é documentada no manual;
 a arquitetura aponta os arquivos e as responsabilidades.
+
+## Biblioteca técnica local e dados para fine-tuning (R657/R658)
+
+`rag/book_library.py::LocalBookLibrary` extrai PDFs por página física e mantém
+fontes, páginas, trechos e termos em SQLite local. Indexação explícita usa
+transação; leitura verifica os hashes atuais e bloqueia fontes alteradas.
+Os métodos `library_*` do `MarceloClaroOrchestrator` centralizam a interface.
+`integrations/ecosystem_mcp.py` publica catálogo e páginas como resources,
+busca como tool somente leitura e um prompt de revisão com referências.
+
+`integrations/finetuning_data.py` valida pares, deduplica e conecta fontes
+que compartilham conteúdo antes de dividir grupos inteiros entre conjuntos.
+Seu gate de avaliação confere identidade do conjunto, protocolo e limiar de
+melhora sobre números informados; não executa modelos. A CLI está em
+`marceloclaro/library_cli.py`, com saída de dados limitada ao manifesto.
+
+Os contratos, limites e provas locais estão em
+[docs/BIBLIOTECA_AI_R657.md](docs/BIBLIOTECA_AI_R657.md).
 
 ## Integridade e procedência
 

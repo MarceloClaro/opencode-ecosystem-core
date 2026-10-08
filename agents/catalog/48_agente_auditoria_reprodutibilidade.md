@@ -7,19 +7,19 @@ skills:
   name: Auditoria estática de reprodutibilidade
   description: Confere seeds, hiperparâmetros, splits, dependências pinadas e proveniência via padrão repro_audit
   tags: [repro-audit, seeds, dependencias]
-  examples: [Audite este paper e repo, Faltam seeds?]
+  examples: ["Audite este paper e repo", "Faltam seeds?"]
 - id: bloqueadores-reais
   name: Bloqueadores reais de reprodução
   description: Cruza issues reais do GitHub no padrão ReproRepo para localizar região semântica da falha
   tags: [reprorepo, issues, bloqueador]
-  examples: [Quais bloqueadores reais?, Localize a falha de reprodução]
+  examples: ["Quais bloqueadores reais?", "Localize a falha de reprodução"]
 - id: relato-transparente-ia
   name: Relato transparente de IA em síntese
   description: Aplica checklist PRISMA-trAIce para declarar modelo, prompt, supervisão humana e divergências
   tags: [prisma-traice, transparencia, sintese]
   examples: [Declare o uso de IA nesta revisão, Aplique o checklist trAIce]
 tags: [auditoria, reprodutibilidade, R711, R712, mira-agent]
-examples: [Este artigo é reproduzível?, Emita o relatório de auditoria]
+examples: ["Este artigo é reproduzível?", "Emita o relatório de auditoria"]
 type: mira-agent
 category: research
 ---

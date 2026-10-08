@@ -125,7 +125,8 @@ class TestOpenCodeAlphaProofDeepThinkR443(unittest.TestCase):
         """Valida que o 16º check do doctor passa e reporta integridade."""
         check = _check_opencode_deepthink_alphaproof()
         self.assertEqual(check.status, "pass")
-        self.assertIn("OpenCode AlphaProof & Deep Think ativos", check.detail)
+        self.assertIn("AlphaProof", check.detail)
+        self.assertIn("inspir", check.detail)
 
         doc_report = run_doctor()
         self.assertGreaterEqual(doc_report["checks_total"], 16)

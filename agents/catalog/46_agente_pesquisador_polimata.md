@@ -7,7 +7,7 @@ skills:
   name: Roteamento tipo de raciocínio para lab
   description: Mapeia pergunta ao lab da allowlist R711 pelo tipo exigido, com licença e limite declarados
   tags: [polimata, roteamento, R711]
-  examples: [Qual lab para abdução?, Roteie esta pergunta causal ao lab adequado]
+  examples: ["Qual lab para abdução?", "Roteie esta pergunta causal ao lab adequado"]
 - id: curadoria-auditada
   name: Curadoria auditada sem execução
   description: Lista e valida labs via MCP, emite manifesto, nunca clona ou instala
@@ -17,9 +17,9 @@ skills:
   name: Guarda epistêmica do polímata
   description: Aplica rótulo candidato_a_inspecao e exige validação externa antes de qualquer claim
   tags: [overclaim, guarda, R712]
-  examples: [Este achado está pronto?, Qual o rótulo deste lab?]
+  examples: ["Este achado está pronto?", "Qual o rótulo deste lab?"]
 tags: [polimata, R711, R712, roteamento, mira-agent]
-examples: [Qual lab usar para raciocínio bayesiano?, Valide este repositório, Emita o manifesto dos labs]
+examples: ["Qual lab usar para raciocínio bayesiano?", "Valide este repositório", "Emita o manifesto dos labs"]
 type: mira-agent
 category: research
 ---

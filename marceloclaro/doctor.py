@@ -22,8 +22,10 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import sys
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 # Marcador para saber se o módulo de métricas está disponível
@@ -243,6 +245,25 @@ def _check_corrigendum() -> DoctorCheck:
     return DoctorCheck("corrigendum", "pass", f"CORRIGENDUM.md presente ({size} bytes).")
 
 
+def _resolve_external_cli(name: str) -> Optional[str]:
+    """Detecta instalação física, inclusive fora do PATH de um shell de login.
+
+    Compartilha resolução de overrides e pastas do usuário com os executores.
+    A pasta do Python atual cobre ferramentas instaladas na venv do projeto.
+    Nenhuma CLI é executada e a detecção não confirma autenticação/inferência.
+    """
+    from integrations.harness_runtime import HarnessRuntime
+
+    runtime = HarnessRuntime(REPO_ROOT)
+    found = runtime.resolve_cli_path(name)
+    override_name = "ANTIGRAVITY_BIN" if name == "agy" else f"{name.upper()}_BIN"
+    if found or os.environ.get(override_name):
+        # Um override inválido permanece explícito; não substituir a escolha.
+        return found
+    candidate = Path(sys.executable).parent / (f"{name}.exe" if os.name == "nt" else name)
+    return str(candidate) if runtime._is_executable(candidate) else None
+
+
 def _npm_global_version(bin_name: str, package: str) -> Optional[str]:
     """Versão de um pacote npm global via package.json local (milissegundos).
 
@@ -253,7 +274,7 @@ def _npm_global_version(bin_name: str, package: str) -> Optional[str]:
     """
     import json
 
-    exe = shutil.which(bin_name)
+    exe = _resolve_external_cli(bin_name)
     if not exe:
         return None
     try:
@@ -277,7 +298,8 @@ def _npm_global_version(bin_name: str, package: str) -> Optional[str]:
 
 def _check_external_clis() -> DoctorCheck:
     """Verifica se as CLIs externas de primeira classe (OpenCode, Antigravity,
-    Claude Code, Ollama, GitHub Copilot, etc.) estão instaladas e no PATH. São
+    Claude Code, Ollama, GitHub Copilot, etc.) têm instalação executável no
+    PATH, em pastas do usuário ou na venv do Python atual. São
     opcionais para o funcionamento do ecossistema em Python puro, por isso
     o resultado é sempre ``warn`` (nunca ``fail``) quando alguma está
     ausente — cada ferramenta é usada em fluxos diferentes (OpenCode CLI
@@ -289,6 +311,10 @@ def _check_external_clis() -> DoctorCheck:
     open-access direto — ver `research/downloader.py`)."""
     missing = {}
     versions: Dict[str, str] = {}
+    # R110-perf: teto no enriquecimento de versões — cada CLI instalada
+    # adicionava um subprocess ao doctor; sem teto, instalar CLIs quebrava
+    # o contrato < 5s. Versão omitida é só detalhe ausente, nunca falha.
+    _t0 = time.monotonic()
     for name, cmd in EXTERNAL_CLIS.items():
         if name == "runai":
             try:
@@ -299,12 +325,14 @@ def _check_external_clis() -> DoctorCheck:
                 pass
             missing[name] = cmd
             continue
-        if shutil.which(name) is None:
+        if _resolve_external_cli(name) is None:
             missing[name] = cmd
             continue
         # SPEC-935-R598/R599: para integrações com runner próprio, enriquecer
         # o detail com a versão semântica detectada (sedas instaladas).
         if name in ("goose", "gemini", "plandex", "reasonix", "colab", "colab-mcp", "minizinc", "kaggle", "agy"):
+            if time.monotonic() - _t0 > 1.5:
+                continue
             try:
                 module_name = {"goose": "goose_cli", "gemini": "gemini_cli", "plandex": "plandex_cli", "reasonix": "reasonix_cli", "colab": "colab_cli", "colab-mcp": "colab_mcp", "minizinc": "minizinc_mcp", "kaggle": "kaggle_cli", "agy": "antigravity_cli"}[name]
                 func_name = {"goose": "goose_version", "gemini": "gemini_version", "plandex": "plandex_version", "reasonix": "reasonix_version", "colab": "colab_version", "colab-mcp": "mcp_version", "minizinc": "minizinc_version", "kaggle": "kaggle_version", "agy": "agy_version"}[name]
@@ -333,7 +361,8 @@ def _check_external_clis() -> DoctorCheck:
         return DoctorCheck(
             "external_clis", "pass",
             f"Todas as {len(EXTERNAL_CLIS)} CLIs externas instaladas: "
-            f"{', '.join(EXTERNAL_CLIS)}{suffix}.",
+            f"{', '.join(EXTERNAL_CLIS)}{suffix}. "
+            "Autenticação e inferência não verificadas por este diagnóstico.",
         )
     suggestions = "; ".join(f"{name} -> {cmd}" for name, cmd in missing.items())
     return DoctorCheck(
@@ -602,7 +631,7 @@ def _check_free_model_amplification() -> DoctorCheck:
     try:
         from integrations.deepseek_harness.free_model_amplifier import get_free_model_amplifier
         amp = get_free_model_amplifier()
-        stats = amp.get_stats()
+        amp.get_stats()
         return DoctorCheck(
             "free_model_amplification", "pass",
             "Amplificação DeepSeek Harness ativa: RAG local Whoosh3 + Scaffold CoT para modelos free (Ox Alpha, DeepSeek Free)."
@@ -620,12 +649,12 @@ def _check_deepmind_superhuman_reasoning() -> DoctorCheck:
             IMOBenchmarkHarness,
         )
         verifier = FormalProofVerifier()
-        engine = AletheiaHypothesisEngine(verifier=verifier)
+        AletheiaHypothesisEngine(verifier=verifier)
         harness = IMOBenchmarkHarness(verifier=verifier)
         sympy_str = "SymPy ativo" if verifier.has_sympy else "SymPy fallback"
         return DoctorCheck(
             "deepmind_superhuman_reasoning", "pass",
-            f"DeepMind Superhuman Reasoning ativo: Aletheia scaffold + Verificador formal ({sympy_str}) + IMO Bench ({len(harness.sample_dataset)} problemas)."
+            f"Componentes locais inspirados na DeepMind: Aletheia scaffold + verificador ({sympy_str}) + amostra IMO ({len(harness.sample_dataset)} problemas). Disponibilidade não comprova desempenho equivalente."
         )
     except Exception as exc:
         return DoctorCheck("deepmind_superhuman_reasoning", "warn", f"DeepMind reasoning indisponível: {exc}")
@@ -641,8 +670,8 @@ def _check_opencode_deepthink_alphaproof() -> DoctorCheck:
             HirzebruchEigenweightCalculator,
         )
         prover = OpenCodeAlphaProof()
-        deep_think = OpenCodeDeepThink(alphaproof=prover)
-        erdos = ErdosSeriesAnalyzer()
+        OpenCodeDeepThink(alphaproof=prover)
+        ErdosSeriesAnalyzer()
         hirz = HirzebruchEigenweightCalculator()
 
         # Prova rápida de integridade
@@ -650,7 +679,7 @@ def _check_opencode_deepthink_alphaproof() -> DoctorCheck:
         hirz_res = hirz.compute_eigenweights(dim=2, rank=1)
         return DoctorCheck(
             "opencode_deepthink_alphaproof", "pass",
-            f"OpenCode AlphaProof & Deep Think ativos: Proof-tree search ({quick_search['nodes_expanded']} nós) + Erdős/Hirzebruch Solver (Dim {hirz_res.variety_dim} OK)."
+            f"Rotinas locais inspiradas em AlphaProof/Deep Think: busca ({quick_search['nodes_expanded']} nós) + exemplo Erdős/Hirzebruch (dimensão {hirz_res.variety_dim}). Checagem interna delimitada."
         )
     except Exception as exc:
         return DoctorCheck("opencode_deepthink_alphaproof", "warn", f"OpenCode AlphaProof/DeepThink indisponível: {exc}")
@@ -694,7 +723,7 @@ def _check_geometry_autoformalization_engine() -> DoctorCheck:
 
         return DoctorCheck(
             "geometry_autoformalization_engine", "pass",
-            f"AlphaGeometry & Auto-Formalizer ativos: Wu's Method (resíduo {geom_res.polynomial_residue}) + Lean 4 Autoformalize (status {form_res['verification_status']})."
+            f"Rotinas geométricas locais: método de Wu (resíduo {geom_res.polynomial_residue}) + autoformalização (status {form_res['verification_status']}). Sintaxe não equivale a prova formal."
         )
     except Exception as exc:
         return DoctorCheck("geometry_autoformalization_engine", "warn", f"AlphaGeometry / Auto-Formalizer indisponível: {exc}")
@@ -722,7 +751,8 @@ def _check_clinical_game_theory_engine() -> DoctorCheck:
 
         return DoctorCheck(
             "clinical_game_theory_engine", "pass",
-            f"Decisão Clínica por Teoria dos Jogos & Grafos ativa: {len(ev_lib.evidence_database)} diretrizes verificadas + Minimax Regret ativo + Verificador Z3 ({verifier.z3_active})."
+            f"Motor matemático de apoio: {len(ev_lib.evidence_database)} diretrizes declaradas + "
+            f"Minimax Regret {'disponível' if has_minimax else 'não confirmado'} + Z3 ({verifier.z3_active}). Sem validação clínica externa neste diagnóstico."
         )
     except Exception as exc:
         return DoctorCheck("clinical_game_theory_engine", "warn", f"Motor clínico indisponível: {exc}")

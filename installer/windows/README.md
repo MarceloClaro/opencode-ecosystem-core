@@ -175,6 +175,13 @@ e `opencode.json` declarava **7 MCPs** e **215 agentes**. São
 contagens estruturais locais, não resultados de cobertura, testes ou validação
 externa.
 
+A configuração operacional consultada em **2026-10-07** declara **248 agentes**
+e **15 MCPs**, com **20 checks** no diagnóstico, incluindo
+`ecosystem-network`. O servidor coordena análise e leitura com limites de
+passos e tempo; sua presença não comprova instalação, autenticação ou execução
+dos executores no WSL. Consulte [o manual](../../MANUAL.md) para os comandos
+de diagnóstico e os limites da integração.
+
 ## Limites do cache NPM e da automação de shell
 
 Para pacotes NPM, o SHA-256 informado cobre o tarball principal. `npm --offline`

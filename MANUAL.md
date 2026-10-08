@@ -22,6 +22,24 @@ O diagnóstico pode retornar avisos ou falhas conforme as dependências locais.
 Não use esta contagem como indicador de cobertura, qualidade ou validação
 externa.
 
+A configuração operacional consultada em **2026-10-07** declara **248 agentes**
+e **15 MCPs**, com **20 checks** no diagnóstico. O servidor
+`ecosystem-network` liga o orquestrador, seu roteamento Transformer inspirado
+em atenção e a memória MetaBus/Blackboard aos executores de análise e leitura
+Claude, Antigravity e Codex disponíveis no ambiente. A execução limita passos
+e tempo e reporta sucesso após conclusão; confira instalação e autenticação
+locais. O identificador `chatgpt` não controla o aplicativo ChatGPT; selecione
+`codex` explicitamente para usar sua CLI.
+
+Para coordenar análise e revisão, peça no OpenCode: `/ecosystem analise esta
+tarefa e depois peça revisão a outro especialista: ...`. A rede salva as
+etapas e informa um identificador para consultar e retomar o trabalho. Veja o
+[guia de execução em etapas](docs/WORKFLOWS_R644.md).
+
+Para execução externa de Hermes/MiroFish, download de datasets e plugins,
+consulte o [guia das integrações científicas](docs/INTEGRACOES_CIENTIFICAS_R667_R671.md).
+No OpenCode, use `/runtime-cientifico`, `/datasets` e `/plugins-cientificos`.
+
 ## Como começar
 
 ```bash
@@ -80,6 +98,8 @@ python3 -m marceloclaro.cli geometry midpoint_theorem
 python3 -m marceloclaro.cli autoformalize "para todo x real, x + 0 = x"
 python3 -m marceloclaro.cli shortcuts
 python3 -m marceloclaro.cli clinical "queixa" --mode professional_cds
+python3 -m marceloclaro.cli network status
+python3 -m marceloclaro.cli network route "revisar o projeto" --ecosystem claude
 ```
 
 | Comando canônico | Aliases tratados pelo CLI | Observação |
@@ -133,6 +153,40 @@ python3 -m marceloclaro.cli apresentacao caminho/da/producao
 O pipeline MIRA percorre `extract`, `plan`, `copywrite`, `build`, `animate` e
 `validate`. A etapa final registra conformidade do artefato segundo regras
 internas; não avalia externamente o mérito científico do manuscrito.
+
+## Usar os livros da biblioteca de IA
+
+Os livros técnicos locais podem ser consultados pelo orquestrador, com arquivo,
+página física e hash da fonte em cada resultado:
+
+No OpenCode, use `/biblioteca tema da consulta`.
+
+```bash
+.venv/bin/python -m marceloclaro.cli biblioteca indexar
+.venv/bin/python -m marceloclaro.cli biblioteca buscar "independência documento inteiro split" --top-k 3
+```
+
+O índice é local. Após substituir ou acrescentar um PDF, execute `indexar`
+novamente. Fontes alteradas não fornecem trechos como se ainda estivessem
+atuais. A interface MCP oferece catálogo, páginas, busca e prompt de revisão.
+
+Para validar dados antes de fine-tuning, use `fine-dados validar dados.json`.
+Esse comando confere pares e separação por fonte; ele não inicia treinamento.
+Consulte os formatos, os livros usados e a evidência em
+[Biblioteca de IA R657/R658](docs/BIBLIOTECA_AI_R657.md).
+
+## Usar Gemini Notebook na orquestração
+
+No OpenCode, use `/gemini-notebook tarefa`. O orquestrador consulta o catálogo
+oficial instalado e coordena CLI, MCP e leitura da skill. Para inspecionar
+esse catálogo pela CLI:
+
+```bash
+.venv/bin/python -m marceloclaro.cli notebook --config exemplos/notebook/catalog.json
+```
+
+Consulte [Gemini Notebook no Core](docs/GEMINI_NOTEBOOK_CORE.md) para login,
+perfis, efeitos que precisam de confirmação, downloads e limites das provas.
 
 ## Limites e solução de problemas
 

@@ -286,7 +286,11 @@ class TestDatasetDataSource:
         dds = DatasetDataSource()
         result = dds.search("iris", source="uci")
         assert result["source"] == "uci"
-        assert result["status"] in ("online", "offline")
+        # Endpoint legado datasets.php morto no upstream: fonte inalcançável
+        # declara 'unavailable' com evidence_eligible False (nunca elegível).
+        assert result["status"] in ("online", "offline", "demonstration", "unavailable")
+        if result["status"] != "online":
+            assert result["evidence_eligible"] is False
 
     def test_dataset_search_figshare(self):
         """DatasetDataSource busca Figshare."""

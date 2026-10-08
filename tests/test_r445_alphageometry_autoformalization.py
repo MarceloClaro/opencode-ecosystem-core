@@ -147,7 +147,8 @@ theorem sample_sum (x : Real) : x + 0 = x := by
         """Valida o check de geometria sem acoplar ao total evolutivo do doctor."""
         check = _check_geometry_autoformalization_engine()
         self.assertEqual(check.status, "pass")
-        self.assertIn("AlphaGeometry & Auto-Formalizer ativos", check.detail)
+        self.assertIn("Wu", check.detail)
+        self.assertIn("prova formal", check.detail)
 
         doc_report = run_doctor()
         check_names = [item["name"] for item in doc_report["checks"]]

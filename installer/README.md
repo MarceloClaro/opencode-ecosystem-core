@@ -79,6 +79,12 @@ No estado estrutural documentado em **2026-09-26**, esse diagnóstico tinha
 Esses números devem ser reavaliados no checkout instalado e não representam
 resultado de testes, cobertura ou validação externa.
 
+A configuração operacional consultada em **2026-10-07** declara **248 agentes**
+e **15 MCPs**, com **20 checks** no diagnóstico, incluindo
+`ecosystem-network` para coordenar análise e leitura por executores externos
+com limites de passos e tempo. Sua presença não comprova instalação,
+autenticação ou execução dos executores; consulte [o manual](../MANUAL.md).
+
 ```bash
 python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); print({'mcps': len(c.get('mcp', {})), 'agentes': len(c.get('agent', {}))})"
 ```

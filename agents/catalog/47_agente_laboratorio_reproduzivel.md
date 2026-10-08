@@ -12,7 +12,7 @@ skills:
   name: Versão e contêineres do laboratório
   description: Prescreve Git + GitHub Packages + Dockerfile para ambiente reproduzível, sem executar build
   tags: [versao, docker, conteiner]
-  examples: [Prescreva o contêiner deste laboratório, Qual a trilha de auditoria?]
+  examples: ["Prescreva o contêiner deste laboratório", "Qual a trilha de auditoria?"]
 - id: trilha-auditoria
   name: Trilha quem fez o quê e quando
   description: Exige commit-hash, manifesto e hash de artefatos para cada entrega

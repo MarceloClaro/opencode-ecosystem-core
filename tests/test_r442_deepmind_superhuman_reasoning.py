@@ -138,7 +138,8 @@ class TestDeepMindSuperhumanReasoningR442(unittest.TestCase):
         """Valida que o check do doctor para o DeepMind Superhuman passa sem erros."""
         check = _check_deepmind_superhuman_reasoning()
         self.assertEqual(check.status, "pass")
-        self.assertIn("DeepMind Superhuman Reasoning ativo", check.detail)
+        self.assertIn("DeepMind", check.detail)
+        self.assertIn("inspir", check.detail)
 
 
 if __name__ == "__main__":

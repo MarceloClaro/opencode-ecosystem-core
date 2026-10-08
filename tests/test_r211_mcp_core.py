@@ -311,7 +311,9 @@ def test_mcp_validation_marks_invalid_arguments_as_is_error(
 
     # Assert
     assert response.get("isError") is True
-    assert "validation" in response["content"][0]["text"].lower()
+    # Mensagem em PT-BR por convenção do repo (CA5 exige a marca isError,
+    # não o idioma inglês da palavra "validation").
+    assert "argumentos inválidos" in response["content"][0]["text"].lower()
 
 
 def test_generated_config_does_not_register_litert_lm_serve_as_mcp():

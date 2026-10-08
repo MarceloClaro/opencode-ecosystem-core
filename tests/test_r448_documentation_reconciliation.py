@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -77,9 +78,12 @@ def test_manual_has_one_mira_option_and_only_real_direct_commands() -> None:
 
 def test_structural_counts_are_consistent_in_operational_documents() -> None:
     """As contagens expostas vêm da configuração e do diagnóstico atuais."""
+    config = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
+    assert "ecosystem-network" in config["mcp"]
+    markers = ("20 checks", f"{len(config['mcp'])} MCPs", f"{len(config['agent'])} agentes")
     for relative_path in DOC_PATHS:
         content = _document(relative_path)
-        for marker in ("20 checks", "7 MCPs", "215 agentes"):
+        for marker in markers:
             assert marker in content, f"{marker!r} ausente em {relative_path}"
 
 

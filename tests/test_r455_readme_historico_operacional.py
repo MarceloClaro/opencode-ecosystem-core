@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
 README = (ROOT / "README.md").read_text(encoding="utf-8")
 ARCH = (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8")
+CONFIG = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
 
 
 def _section(text: str, heading: str, next_heading: str | None = None) -> str:
@@ -59,8 +61,8 @@ def test_current_diagram_matches_runtime_components() -> None:
         "TDDRunner",
         "MetaBus",
         "Blackboard",
-        "7 MCPs configurados",
-        "215 agentes configurados",
+        f"{len(CONFIG['mcp'])} MCPs configurados",
+        f"{len(CONFIG['agent'])} agentes configurados",
         "mira-presenter",
     ):
         assert marker in current, marker

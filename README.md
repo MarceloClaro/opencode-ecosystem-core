@@ -13,10 +13,10 @@
 [![GitHub Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=for-the-badge&logo=github&logoColor=white&color=181717)](https://github.com/MarceloClaro/opencode-ecosystem-core)
 [![License MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3b82f6?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![MCP Servers](https://img.shields.io/badge/MCP%20Servers-7-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
+[![MCP Servers](https://img.shields.io/badge/MCP%20Servers-11-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
 [![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
 
-**215 agentes** · **157 auto‑registrados no Blackboard (R596)** · **7 MCP servers** · **426+ ciclos de evolução** · **53 lições semânticas** · **7+ skills**
+**248 agentes** · **157 auto‑registrados no Blackboard (registro histórico R596)** · **15 MCPs configurados** · **426+ ciclos de evolução** · **53 lições semânticas** · **7+ skills**
 
 ---
 
@@ -42,7 +42,19 @@
 
 ## Visão geral
 
-O **OpenCode Ecosystem Core** é um ecossistema de orquestração multi‑agente onde o orquestrador primário `marceloclaro` coordena **215 agentes especialistas** via **Blackboard (protocolo A2A)** com **memória metacognitiva compartilhada (MetaBus)**, **gates SDD/TDD estritos**, **economia de tokens** (stake/slashing · Trust Engine) e **7 MCP servers**.
+O **OpenCode Ecosystem Core** é um ecossistema de orquestração multi‑agente onde o orquestrador primário `marceloclaro` coordena **248 agentes configurados** via **Blackboard (protocolo A2A)** com **memória metacognitiva compartilhada (MetaBus)**, **gates SDD/TDD estritos**, **economia de tokens** (stake/slashing · Trust Engine) e **15 MCPs configurados**.
+
+Na consulta de **2026-10-04**, o diagnóstico manteve **20 checks**. As evoluções
+R657/R658 acrescentam [consulta aos livros locais e integridade de dados para
+fine-tuning](docs/BIBLIOTECA_AI_R657.md). No OpenCode, use `/biblioteca tema`.
+
+O [Gemini Notebook na orquestração central](docs/GEMINI_NOTEBOOK_CORE.md)
+integra o catálogo CLI/MCP, a skill oficial e recibos operacionais. No OpenCode,
+use `/gemini-notebook`; pela CLI, `notebook --config ARQUIVO`.
+
+R667–R671 acrescentam [Hermes/MiroFish externos, datasets por CLI e plugins
+científicos](docs/INTEGRACOES_CIENTIFICAS_R667_R671.md), com provas reais e
+[oito novos perfis](docs/AGENTES_R669.md), incluindo Live mirofish hermes.
 
 Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC-*.md`) **e só é concluída com testes verdes e prova física** — jamais "parece que funciona".
 
@@ -202,10 +214,24 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[7 MCPs configurados]
-    Orq2 --> Agents2[215 agentes configurados]
+    Orq2 --> MCP2[15 MCPs configurados]
+    Orq2 --> Agents2[248 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
 ```
+
+Na R640, o oitavo MCP, `ecosystem-network`, conecta o orquestrador e seu
+roteamento Transformer por atenção aos executores de análise e leitura Claude,
+Antigravity e Codex disponíveis no ambiente, com registros no Blackboard e na
+memória MetaBus. A coordenação limita passos e tempo e exige a conclusão para
+reportar sucesso; instalação e autenticação devem ser conferidas localmente.
+Transformer descreve roteamento multiagente inspirado em atenção. O
+identificador `chatgpt` não controla o aplicativo ChatGPT; selecione `codex`
+explicitamente para usar sua CLI.
+
+A R644 acrescenta workflows com dependências, análise seguida de revisão por
+outro especialista e checkpoints para retomada. A seleção automática consulta
+a saúde persistida dos executores e pausa serviços que falharam recentemente.
+Veja o [guia de execução em etapas](docs/WORKFLOWS_R644.md).
 
 ### Fluxos multiárea do checkout atual
 
@@ -412,6 +438,14 @@ Links: [GitHub](https://github.com/MarceloClaro/opencode-ecosystem-core) ·
 ### Licença
 
 Distribuído sob a [licença MIT](LICENSE).
+
+### Integridade operacional (2026-10-07)
+
+Escopos verdes com gate: polímata, núcleo científico e config reproduzível;
+`doctor` com 18 checks sem falha e 2 avisos de dependência externa. Frentes de
+livro, notebook avançado e benchmarks numéricos seguem em quarentena informativa
+no CI por escopos, com donos e causas mapeados. Métricas internas não implicam
+validação externa.
 
 ---
 
