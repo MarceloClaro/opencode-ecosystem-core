@@ -1,0 +1,117 @@
+{
+  "spec_id": "SPEC-935-R713",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-07T09:49:58.973478+00:00",
+  "janela_dias": 90,
+  "total": 21,
+  "federaveis": 8,
+  "bloqueados": 13,
+  "decisoes": [
+    {
+      "url": "https://github.com/z3prover/z3",
+      "federavel": false,
+      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+    },
+    {
+      "url": "https://github.com/sympy/sympy",
+      "federavel": false,
+      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+    },
+    {
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "federavel": true,
+      "motivo": "ok"
+    },
+    {
+      "url": "https://github.com/internscience/scireason",
+      "federavel": false,
+      "motivo": "desatualizado: 285d desde push, janela 90d."
+    },
+    {
+      "url": "https://github.com/idiap/scir",
+      "federavel": true,
+      "motivo": "ok"
+    },
+    {
+      "url": "https://github.com/irving-feng/cot-evo",
+      "federavel": false,
+      "motivo": "desatualizado: 237d desde push, janela 90d."
+    },
+    {
+      "url": "https://github.com/kmineshima/abduction-syllogism-llm",
+      "federavel": false,
+      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+    },
+    {
+      "url": "https://github.com/aswinesag/research-reasoning-engine",
+      "federavel": true,
+      "motivo": "ok"
+    },
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "federavel": true,
+      "motivo": "ok"
+    },
+    {
+      "url": "https://github.com/py-why/dowhy",
+      "federavel": true,
+      "motivo": "ok"
+    },
+    {
+      "url": "https://github.com/pymc-labs/causalpy",
+      "federavel": true,
+      "motivo": "ok"
+    },
+    {
+      "url": "https://github.com/mckinsey/causalnex",
+      "federavel": false,
+      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "federavel": true,
+      "motivo": "ok"
+    },
+    {
+      "url": "https://github.com/cqh4046/prisma-traice",
+      "federavel": false,
+      "motivo": "desatualizado: 300d desde push, janela 90d."
+    },
+    {
+      "url": "https://github.com/ohdsi/evidencesynthesis",
+      "federavel": false,
+      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+    },
+    {
+      "url": "https://github.com/sakanaai/ai-scientist",
+      "federavel": false,
+      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+    },
+    {
+      "url": "https://github.com/aweai-team/aiscientist",
+      "federavel": true,
+      "motivo": "ok"
+    },
+    {
+      "url": "https://github.com/samuelschmidgall/agentlaboratory",
+      "federavel": false,
+      "motivo": "desatualizado: 412d desde push, janela 90d."
+    },
+    {
+      "url": "https://github.com/rasilab/github_demo",
+      "federavel": false,
+      "motivo": "desatualizado: 778d desde push, janela 90d."
+    },
+    {
+      "url": "https://github.com/rasilab/github_template",
+      "federavel": false,
+      "motivo": "desatualizado: 682d desde push, janela 90d."
+    },
+    {
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "federavel": false,
+      "motivo": "desatualizado: 298d desde push, janela 90d."
+    }
+  ],
+  "nota": "Gate de federação; decisão humana exigida. Nenhum lab atestado como final."
+}
