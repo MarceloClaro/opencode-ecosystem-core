@@ -1,21 +1,21 @@
 {
   "spec_id": "SPEC-935-R713",
   "gerador": "marceloclaro",
-  "gerado_em": "2026-10-08T08:57:02.332822+00:00",
+  "gerado_em": "2026-10-07T09:48:32.876234+00:00",
   "janela_dias": 90,
   "total": 21,
-  "federaveis": 8,
-  "bloqueados": 13,
+  "federaveis": 21,
+  "bloqueados": 0,
   "decisoes": [
     {
       "url": "https://github.com/z3prover/z3",
-      "federavel": false,
-      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/sympy/sympy",
-      "federavel": false,
-      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/reasonkit/reasonkit-core",
@@ -24,8 +24,8 @@
     },
     {
       "url": "https://github.com/internscience/scireason",
-      "federavel": false,
-      "motivo": "desatualizado: 285d desde push, janela 90d."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/idiap/scir",
@@ -34,13 +34,13 @@
     },
     {
       "url": "https://github.com/irving-feng/cot-evo",
-      "federavel": false,
-      "motivo": "desatualizado: 238d desde push, janela 90d."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/kmineshima/abduction-syllogism-llm",
-      "federavel": false,
-      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/aswinesag/research-reasoning-engine",
@@ -64,8 +64,8 @@
     },
     {
       "url": "https://github.com/mckinsey/causalnex",
-      "federavel": false,
-      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/proportione/prisma",
@@ -74,18 +74,18 @@
     },
     {
       "url": "https://github.com/cqh4046/prisma-traice",
-      "federavel": false,
-      "motivo": "desatualizado: 300d desde push, janela 90d."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/ohdsi/evidencesynthesis",
-      "federavel": false,
-      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/sakanaai/ai-scientist",
-      "federavel": false,
-      "motivo": "licença viva não confirmada (license_undeclared bloqueia federação)."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/aweai-team/aiscientist",
@@ -94,24 +94,24 @@
     },
     {
       "url": "https://github.com/samuelschmidgall/agentlaboratory",
-      "federavel": false,
-      "motivo": "desatualizado: 413d desde push, janela 90d."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/rasilab/github_demo",
-      "federavel": false,
-      "motivo": "desatualizado: 779d desde push, janela 90d."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/rasilab/github_template",
-      "federavel": false,
-      "motivo": "desatualizado: 683d desde push, janela 90d."
+      "federavel": true,
+      "motivo": "ok"
     },
     {
       "url": "https://github.com/aqibrahimbt/repro_audit",
-      "federavel": false,
-      "motivo": "desatualizado: 299d desde push, janela 90d."
+      "federavel": true,
+      "motivo": "ok"
     }
   ],
-  "nota": "Re-pin R746 sem token; sympy reaproveitado de R714."
+  "nota": "Gate de federação; decisão humana exigida. Nenhum lab atestado como final."
 }

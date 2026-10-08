@@ -1,0 +1,568 @@
+{
+  "spec_id": "SPEC-935-R720",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-08T00:09:11.475915+00:00",
+  "prontas": 4,
+  "nao_prontos": 12,
+  "itens": [
+    {
+      "url": "https://github.com/aswinesag/research-reasoning-engine",
+      "classe": "ativo",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 142,
+        "total_bytes": 5829788,
+        "top10": [
+          {
+            "path": "data/index/faiss.index",
+            "bytes": 3115053
+          },
+          {
+            "path": "data/index/metadata.json",
+            "bytes": 1844813
+          },
+          {
+            "path": "research-reasoning-engine/package-lock.json",
+            "bytes": 521097
+          },
+          {
+            "path": "poetry.lock",
+            "bytes": 178812
+          },
+          {
+            "path": "research-reasoning-engine/app/favicon.ico",
+            "bytes": 25931
+          },
+          {
+            "path": "src/hypothesis_agent/reasoning/generate.py",
+            "bytes": 8068
+          },
+          {
+            "path": "src/hypothesis_agent/app/services/analysis_service.py",
+            "bytes": 6691
+          },
+          {
+            "path": "research-reasoning-engine/components/landing/landing-page.tsx",
+            "bytes": 5766
+          },
+          {
+            "path": "research-reasoning-engine/lib/mock-data.ts",
+            "bytes": 5534
+          },
+          {
+            "path": "research-reasoning-engine/app/globals.css",
+            "bytes": 4753
+          }
+        ],
+        "extensoes": {
+          ".dockerignore": 1,
+          ".gitignore": 2,
+          "(sem ext)": 1,
+          ".md": 3,
+          ".lock": 1,
+          ".toml": 1,
+          ".txt": 1,
+          ".py": 73,
+          ".index": 1,
+          ".json": 6,
+          ".faiss": 1,
+          ".mjs": 3,
+          ".ts": 10,
+          ".ico": 1,
+          ".css": 1,
+          ".tsx": 36
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 4479,
+            "sha256": "4fa59e2cc83c0fb559fb6a16fbcf10d432e53ff792f514942f51f237fe0aa7c9"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": true,
+            "bytes": 1068,
+            "sha256": "aa5da567d42564e5301f8b1a46372a37b80f8ce2d171fe66e7d7c3a151639310"
+          },
+          "pyproject.toml": {
+            "presente": true,
+            "bytes": 935,
+            "sha256": "f74a8e8144a3fa094982843a485e09982025a84f77f3243f4865f3e829d44ec3"
+          },
+          "setup.py": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "tests/": {
+            "presente": true
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": false
+          },
+          "examples/": {
+            "presente": false
+          }
+        },
+        "head": "ref: refs/heads/main"
+      },
+      "rotulo": "candidato_a_inspecao"
+    },
+    {
+      "url": "https://github.com/samuelschmidgall/agentlaboratory",
+      "classe": "laboratorio-estavel",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 35,
+        "total_bytes": 1697843,
+        "top10": [
+          {
+            "path": "media/AgentLab.png",
+            "bytes": 489404
+          },
+          {
+            "path": "media/AgentLabWF.png",
+            "bytes": 342392
+          },
+          {
+            "path": "media/agentrxiv.png",
+            "bytes": 306621
+          },
+          {
+            "path": "media/AgentLabLogo.png",
+            "bytes": 126415
+          },
+          {
+            "path": "agents.py",
+            "bytes": 52333
+          },
+          {
+            "path": "ai_lab_repo.py",
+            "bytes": 45580
+          },
+          {
+            "path": "papersolver.py",
+            "bytes": 33486
+          },
+          {
+            "path": "mlesolver.py",
+            "bytes": 33070
+          },
+          {
+            "path": "readme/README-bengali.md",
+            "bytes": 18232
+          },
+          {
+            "path": "readme/README-hindi.md",
+            "bytes": 17806
+          }
+        ],
+        "extensoes": {
+          ".gitignore": 1,
+          "(sem ext)": 1,
+          ".md": 17,
+          ".py": 9,
+          ".txt": 1,
+          ".yaml": 2,
+          ".png": 4
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 10123,
+            "sha256": "8e1d25ccec75959f18d9326656cba4cf041b7e45eb06a2c0d8999ef516a2edeb"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": true,
+            "bytes": 1073,
+            "sha256": "bf38a159d01e82d58f986c2d6dd06e03ba0b9cd59a6d286dd94109aac358e583"
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.py": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "tests/": {
+            "presente": false
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": false
+          },
+          "examples/": {
+            "presente": false
+          }
+        },
+        "head": "ref: refs/heads/main"
+      },
+      "rotulo": "candidato_a_inspecao"
+    },
+    {
+      "url": "https://github.com/rasilab/github_demo",
+      "classe": "laboratorio-estavel",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 163,
+        "total_bytes": 64391181,
+        "top10": [
+          {
+            "path": "experiments/kchen/img/IMG_9460.jpg",
+            "bytes": 2319905
+          },
+          {
+            "path": "experiments/kchen/img/20220924_exp66_4cyc_r2_pcr_redo.jpg",
+            "bytes": 2227275
+          },
+          {
+            "path": "experiments/kchen/img/20220924_exp66_r2_pcr_redo.jpg",
+            "bytes": 2226558
+          },
+          {
+            "path": "experiments/kchen/img/IMG_9232.jpg",
+            "bytes": 2218309
+          },
+          {
+            "path": "experiments/kchen/img/IMG_9260.jpg",
+            "bytes": 2149456
+          },
+          {
+            "path": "experiments/kchen/img/IMG_9241.jpg",
+            "bytes": 2099912
+          },
+          {
+            "path": "experiments/kchen/img/IMG_9168.jpg",
+            "bytes": 2019481
+          },
+          {
+            "path": "experiments/kchen/img/IMG_9216.jpg",
+            "bytes": 1976006
+          },
+          {
+            "path": "experiments/kchen/img/IMG_9242.jpg",
+            "bytes": 1841272
+          },
+          {
+            "path": "manuscripts/maria/github_workflow/maintext.pdf",
+            "bytes": 1698218
+          }
+        ],
+        "extensoes": {
+          "(sem ext)": 1,
+          ".md": 15,
+          ".csv": 3,
+          ".pdf": 16,
+          ".yaml": 2,
+          ".ipynb": 4,
+          ".smk": 1,
+          ".sh": 3,
+          ".jpg": 20,
+          ".png": 11,
+          ".json": 2,
+          ".csl": 1,
+          ".py": 1,
+          ".tex": 1,
+          ".svg": 81,
+          ".css": 1
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 5813,
+            "sha256": "84d068f1849d1cea3703bf8fa04cc518d44658ccaf898e24454671bbacb5fdfb"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": true,
+            "bytes": 1072,
+            "sha256": "e96db554c2b8b987a8b4738561f7c7dcdd2a31cd4f95f04dec15a4b0f3cbd63b"
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.py": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "tests/": {
+            "presente": false
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": false
+          },
+          "examples/": {
+            "presente": false
+          }
+        },
+        "head": "ref: refs/heads/main"
+      },
+      "rotulo": "candidato_a_inspecao"
+    },
+    {
+      "url": "https://github.com/rasilab/github_template",
+      "classe": "laboratorio-estavel",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 22,
+        "total_bytes": 528834,
+        "top10": [
+          {
+            "path": "experiments/lab_member/img/YYYY-MM-DD_ISSUENUMBER_example_image.jpg",
+            "bytes": 288260
+          },
+          {
+            "path": "presentations/lab_member/YYYY-MM-DD_description/svg/central_dogma.svg",
+            "bytes": 179268
+          },
+          {
+            "path": "analysis/lab_member/analysis_type/ISSUENUMBER_analysis_short_desc/scripts/test_R.ipynb",
+            "bytes": 19305
+          },
+          {
+            "path": "analysis/lab_member/analysis_type/ISSUENUMBER_analysis_short_desc/scripts/test_python.ipynb",
+            "bytes": 9380
+          },
+          {
+            "path": "README.md",
+            "bytes": 7532
+          },
+          {
+            "path": "presentations/lab_member/YYYY-MM-DD_description/white.css",
+            "bytes": 6808
+          },
+          {
+            "path": ".github/ISSUE_TEMPLATE/experiment_cloning.md",
+            "bytes": 4692
+          },
+          {
+            "path": ".github/ISSUE_TEMPLATE/experiment.md",
+            "bytes": 3103
+          },
+          {
+            "path": ".github/ISSUE_TEMPLATE/analysis.md",
+            "bytes": 2299
+          },
+          {
+            "path": "manuscripts/short_manuscript_description/svg/orcid.logo.icon.svg",
+            "bytes": 2016
+          }
+        ],
+        "extensoes": {
+          ".gitignore": 1,
+          "(sem ext)": 2,
+          ".md": 10,
+          ".csv": 1,
+          ".ipynb": 2,
+          ".jpg": 1,
+          ".json": 1,
+          ".sh": 1,
+          ".svg": 2,
+          ".css": 1
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 7532,
+            "sha256": "5c0392fa76cfe05fe7b9fc920ff376fe92615e954e42efb791188e00514349d9"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": true,
+            "bytes": 1072,
+            "sha256": "e96db554c2b8b987a8b4738561f7c7dcdd2a31cd4f95f04dec15a4b0f3cbd63b"
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.py": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "tests/": {
+            "presente": false
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": false
+          },
+          "examples/": {
+            "presente": false
+          }
+        },
+        "head": "ref: refs/heads/main"
+      },
+      "rotulo": "candidato_a_inspecao"
+    }
+  ],
+  "nao_prontos_detalhe": [
+    {
+      "url": "https://github.com/z3prover/z3",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/sympy/sympy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/idiap/scir",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/py-why/dowhy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pymc-labs/causalpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/cqh4046/prisma-traice",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/ohdsi/evidencesynthesis",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aweai-team/aiscientist",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "pendencias": []
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "exige_validacao_externa": true,
+  "nota": "Inventário para análise R621; nada federado.",
+  "sha256_relatorio": "e80b71f64def40543b70e5d7579d8eab2fd11757bccb1da160463aee1cc6b430"
+}

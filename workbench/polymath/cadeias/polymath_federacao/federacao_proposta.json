@@ -1,0 +1,169 @@
+{
+  "spec_id": "SPEC-935-R715",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-07T10:15:15.083147+00:00",
+  "classes": {
+    "ativo": {
+      "dias": 90
+    },
+    "formal-estavel": {
+      "dias": 730
+    },
+    "sintese-referencia": {
+      "dias": 730
+    },
+    "laboratorio-estavel": {
+      "dias": 1095
+    }
+  },
+  "total": 21,
+  "propostos": 16,
+  "retidos": 5,
+  "decisoes": [
+    {
+      "url": "https://github.com/z3prover/z3",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (0d ≤ 730d); licença MIT via override https://raw.githubusercontent.com/Z3Prover/z3/master/LICENSE.txt",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/sympy/sympy",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (2d ≤ 730d); licença BSD-3-Clause (SymPy) via override https://raw.githubusercontent.com/sympy/sympy/master/LICENSE",
+      "licenca": "BSD-3-Clause (SymPy)"
+    },
+    {
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (8d ≤ 730d)",
+      "licenca": "Apache-2.0"
+    },
+    {
+      "url": "https://github.com/internscience/scireason",
+      "classe": "ativo",
+      "decisao": "retido",
+      "motivo": "desatualizado na classe ativo: 285d > 90d."
+    },
+    {
+      "url": "https://github.com/idiap/scir",
+      "classe": "ativo",
+      "decisao": "proposto",
+      "motivo": "dentro da janela ativo (12d ≤ 90d)",
+      "licenca": "GPL-3.0"
+    },
+    {
+      "url": "https://github.com/irving-feng/cot-evo",
+      "classe": "ativo",
+      "decisao": "retido",
+      "motivo": "desatualizado na classe ativo: 237d > 90d."
+    },
+    {
+      "url": "https://github.com/kmineshima/abduction-syllogism-llm",
+      "classe": "ativo",
+      "decisao": "retido",
+      "motivo": "desatualizado na classe ativo: 521d > 90d."
+    },
+    {
+      "url": "https://github.com/aswinesag/research-reasoning-engine",
+      "classe": "ativo",
+      "decisao": "proposto",
+      "motivo": "dentro da janela ativo (87d ≤ 90d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "classe": "ativo",
+      "decisao": "proposto",
+      "motivo": "dentro da janela ativo (1d ≤ 90d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/py-why/dowhy",
+      "classe": "ativo",
+      "decisao": "proposto",
+      "motivo": "dentro da janela ativo (0d ≤ 90d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/pymc-labs/causalpy",
+      "classe": "ativo",
+      "decisao": "proposto",
+      "motivo": "dentro da janela ativo (0d ≤ 90d)",
+      "licenca": "Apache-2.0"
+    },
+    {
+      "url": "https://github.com/mckinsey/causalnex",
+      "classe": "ativo",
+      "decisao": "retido",
+      "motivo": "licença viva não confirmada e sem override auditado."
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "classe": "sintese-referencia",
+      "decisao": "proposto",
+      "motivo": "dentro da janela sintese-referencia (58d ≤ 730d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/cqh4046/prisma-traice",
+      "classe": "sintese-referencia",
+      "decisao": "proposto",
+      "motivo": "dentro da janela sintese-referencia (300d ≤ 730d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/ohdsi/evidencesynthesis",
+      "classe": "sintese-referencia",
+      "decisao": "proposto",
+      "motivo": "dentro da janela sintese-referencia (197d ≤ 730d); licença Apache-2.0 via override https://raw.githubusercontent.com/OHDSI/EvidenceSynthesis/master/DESCRIPTION",
+      "licenca": "Apache-2.0"
+    },
+    {
+      "url": "https://github.com/sakanaai/ai-scientist",
+      "classe": "sintese-referencia",
+      "decisao": "retido",
+      "motivo": "licença viva não confirmada e sem override auditado."
+    },
+    {
+      "url": "https://github.com/aweai-team/aiscientist",
+      "classe": "sintese-referencia",
+      "decisao": "proposto",
+      "motivo": "dentro da janela sintese-referencia (77d ≤ 730d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/samuelschmidgall/agentlaboratory",
+      "classe": "laboratorio-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela laboratorio-estavel (412d ≤ 1095d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/rasilab/github_demo",
+      "classe": "laboratorio-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela laboratorio-estavel (778d ≤ 1095d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/rasilab/github_template",
+      "classe": "laboratorio-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela laboratorio-estavel (682d ≤ 1095d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "classe": "laboratorio-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela laboratorio-estavel (298d ≤ 1095d)",
+      "licenca": "MIT"
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "exige_validacao_externa": true,
+  "nota": "Proposta para decisão humana; nada federado automaticamente."
+}

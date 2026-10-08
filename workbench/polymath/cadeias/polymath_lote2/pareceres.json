@@ -1,0 +1,42 @@
+{
+  "spec_id": "SPEC-935-R722",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-07T19:14:52.067201+00:00",
+  "total": 2,
+  "pareceres": [
+    {
+      "url": "https://github.com/py-why/dowhy",
+      "maturidade": 8,
+      "licenca": "MIT",
+      "capacidades": [
+        "causal"
+      ],
+      "riscos": [],
+      "pendencias_ratificacao": [],
+      "recomendacao_tecnica": "ratificar_com_ressalvas",
+      "opiniao_tecnica": true,
+      "ratificacao_titular_pendente": true,
+      "readme_chars": 16851
+    },
+    {
+      "url": "https://github.com/pymc-labs/CausalPy",
+      "maturidade": 6,
+      "licenca": "Apache-2.0",
+      "capacidades": [
+        "causal"
+      ],
+      "riscos": [
+        "sem diretório tests"
+      ],
+      "pendencias_ratificacao": [
+        "avaliar cobertura fora do gate antes de federar"
+      ],
+      "recomendacao_tecnica": "ratificar_com_ressalvas",
+      "opiniao_tecnica": true,
+      "ratificacao_titular_pendente": true,
+      "readme_chars": 11249
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "nota": "Opiniões para ratificação; nada decidido."
+}

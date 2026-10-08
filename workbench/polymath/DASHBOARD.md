@@ -1,9 +1,9 @@
 # Painel da rede polímata
 
-_Gerado em 2026-10-08T00:22:26.827705+00:00 · SPEC-935-R742 · 16 federados no escopo polímata (não harness R621)._
+_Regenerado em 2026-10-08T09:01:06.959444+00:00 · R746 · 16 federados (escopo polímata)._
 
 ## Totais
-- Nodos: 16 · Federados: 16 · Retidos terminais: 5 · Pareceres coletados: 16
+- Nodos: 16 · Federados: 16 · Retidos: 5 · Vigia: 15 ok, 1 aviso, 0 vencidos
 
 | Lab | Classe | Licença | Parecer | Nota |
 | polymath:lab:aqibrahimbt-repro-audit | laboratorio-estavel | MIT | 8 ratificar_com_ressalvas |  |
@@ -31,7 +31,4 @@ _Gerado em 2026-10-08T00:22:26.827705+00:00 · SPEC-935-R742 · 16 federados no 
 - https://github.com/sakanaai/ai-scientist — licença viva não confirmada e sem override auditado.
 
 ## Custódia
-- Rede canônica: workbench/rede_polimata (nodos+federados).
-- Provas: workbench/polymath/INDICE.json.
-- Cadeias: /tmp/polymath_lote* (efêmeras; minuta/parecer copiados sob demanda).
-- Commit: pendente de ordem explícita.
+- Rede: workbench/rede_polimata · Provas: workbench/polymath/INDICE.json · Cadeias: workbench/polymath/cadeias · Clones: /home/marceloclaro/polymath_clones (REMAP) · Commit: pendente de ordem explícita.

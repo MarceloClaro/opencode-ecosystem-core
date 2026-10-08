@@ -1,0 +1,474 @@
+{
+  "spec_id": "SPEC-935-R720",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-08T00:14:31.714485+00:00",
+  "prontas": 3,
+  "nao_prontos": 13,
+  "itens": [
+    {
+      "url": "https://github.com/sympy/sympy",
+      "classe": "formal-estavel",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 2093,
+        "total_bytes": 33897177,
+        "top10": [
+          {
+            "path": "sympy/polys/benchmarks/bench_solvers.py",
+            "bytes": 446813
+          },
+          {
+            "path": "sympy/physics/quantum/tests/test_spin.py",
+            "bytes": 345733
+          },
+          {
+            "path": "doc/src/pics/ipythonqtconsole.png",
+            "bytes": 244487
+          },
+          {
+            "path": "sympy/physics/control/lti.py",
+            "bytes": 236815
+          },
+          {
+            "path": "sympy/physics/control/tests/test_lti.py",
+            "bytes": 225337
+          },
+          {
+            "path": "sympy/polys/polytools.py",
+            "bytes": 225292
+          },
+          {
+            "path": "sympy/printing/pretty/tests/test_pretty.py",
+            "bytes": 197313
+          },
+          {
+            "path": "sympy/combinatorics/perm_groups.py",
+            "bytes": 189214
+          },
+          {
+            "path": "sympy/core/tests/test_args.py",
+            "bytes": 186573
+          },
+          {
+            "path": "sympy/matrices/matrixbase.py",
+            "bytes": 182764
+          }
+        ],
+        "extensoes": {
+          ".editorconfig": 1,
+          ".gitattributes": 1,
+          ".gitignore": 2,
+          ".mailmap": 1,
+          ".md": 33,
+          "(sem ext)": 13,
+          ".cff": 1,
+          ".in": 1,
+          ".json": 4,
+          ".svg": 50,
+          ".yml": 10,
+          ".py": 1608,
+          ".toml": 1,
+          ".txt": 5,
+          ".rst": 309,
+          ".sh": 3,
+          ".github/codeowners": 1,
+          ".scm": 1,
+          ".htmldoc": 1,
+          ".conf": 1,
+          ".bat": 1,
+          ".tex": 3,
+          ".1": 1,
+          ".xml": 1,
+          ".css": 1,
+          ".png": 13,
+          ".html": 1,
+          ".typed": 1,
+          ".g4": 2,
+          ".al": 16,
+          ".lark": 3,
+          ".xsl": 3
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 11196,
+            "sha256": "4ee5f3d8056a938517d270a157540e32db6766f9e6e4a449320cf78db8b601c9"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": true,
+            "bytes": 7885,
+            "sha256": "07a5e9819f727b4986ad2829c7a29a6320d42575f720eb24d71b7fef573a0286"
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": true,
+            "bytes": 4790,
+            "sha256": "fa3cd0c7778aa138ec80f730cbb56250f8f3296981806ec917e079d3ec8c1fb9"
+          },
+          "setup.py": {
+            "presente": true,
+            "bytes": 11714,
+            "sha256": "d133ed58d9fbf2cf5a26fc0c19edbfea7f3cc17659e0bc28c1ea7af7a0c982b2"
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": true,
+            "bytes": 3221,
+            "sha256": "6cc0676763025ed1eff5988c470ac1b10600284a03c9abe023b150dc74ac2eb1"
+          },
+          "tests/": {
+            "presente": false
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": false
+          },
+          "examples/": {
+            "presente": false
+          }
+        },
+        "head": "ref: refs/heads/master"
+      },
+      "rotulo": "candidato_a_inspecao"
+    },
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "classe": "ativo",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 861,
+        "total_bytes": 13454016,
+        "top10": [
+          {
+            "path": "pgmpy/tests/test_estimators/testdata/adult.csv",
+            "bytes": 2185092
+          },
+          {
+            "path": ".test_durations",
+            "bytes": 870947
+          },
+          {
+            "path": "pgmpy/tests/test_factors/test_continuous/gbn_values_1.csv",
+            "bytes": 759008
+          },
+          {
+            "path": "examples/Creating_Linear_BN.ipynb",
+            "bytes": 464711
+          },
+          {
+            "path": "logo/logo_variant2.jpg",
+            "bytes": 384617
+          },
+          {
+            "path": "pgmpy/utils/example_models/barley.bif.gz",
+            "bytes": 378305
+          },
+          {
+            "path": "logo/logo_variant1.jpg",
+            "bytes": 323291
+          },
+          {
+            "path": "pgmpy/utils/example_models/diabetes.bif.gz",
+            "bytes": 259215
+          },
+          {
+            "path": "pgmpy/tests/test_readwrite/testdata/water.bif",
+            "bytes": 237482
+          },
+          {
+            "path": "docs/_static/images/logo.png",
+            "bytes": 231179
+          }
+        ],
+        "extensoes": {
+          ".yml": 12,
+          ".gitignore": 1,
+          ".yaml": 1,
+          ".test_durations": 1,
+          ".md": 23,
+          ".cff": 1,
+          "(sem ext)": 2,
+          ".json": 8,
+          ".toml": 1,
+          ".py": 668,
+          ".r": 1,
+          ".rst": 32,
+          ".ico": 1,
+          ".bib": 1,
+          ".txt": 28,
+          ".css": 1,
+          ".png": 11,
+          ".html": 4,
+          ".ipynb": 19,
+          ".csv": 10,
+          ".jpg": 3,
+          ".gz": 29,
+          ".uai": 2,
+          ".bif": 1
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 10043,
+            "sha256": "97f0339e5bc7ccd150c54d3a01cb4de4aadf9c4cb70a0b33bffb5eeeccac8863"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": true,
+            "bytes": 1083,
+            "sha256": "89171dcc8977530b0c101fbbb1c1d34caee998fc7def9eded629753cd2616a15"
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": true,
+            "bytes": 5449,
+            "sha256": "b18437221e15fb0c8f473555f853de9f8684b3234b0572664f5ea15d0d3580a3"
+          },
+          "setup.py": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": true,
+            "bytes": 602,
+            "sha256": "8b6dba3880cd2e5f28445ac2925622c9143e82cdd5d4b55c8b7eb16f61643b59"
+          },
+          "tests/": {
+            "presente": false
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": true
+          },
+          "examples/": {
+            "presente": true
+          }
+        },
+        "head": "ref: refs/heads/dev"
+      },
+      "rotulo": "candidato_a_inspecao"
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "classe": "sintese-referencia",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 50,
+        "total_bytes": 122729,
+        "top10": [
+          {
+            "path": "src/prisma/cli.py",
+            "bytes": 9132
+          },
+          {
+            "path": "src/prisma/screening/engine.py",
+            "bytes": 6321
+          },
+          {
+            "path": "src/prisma/ingest/dedup.py",
+            "bytes": 6280
+          },
+          {
+            "path": "src/prisma/stats/correlations.py",
+            "bytes": 6086
+          },
+          {
+            "path": "src/prisma/quality/mmat.py",
+            "bytes": 5766
+          },
+          {
+            "path": "src/prisma/reporting/prisma_flow.py",
+            "bytes": 5624
+          },
+          {
+            "path": "README.md",
+            "bytes": 5448
+          },
+          {
+            "path": "streamlit_app/pages/1_Screening.py",
+            "bytes": 5143
+          },
+          {
+            "path": "streamlit_app/pages/4_Bibliometrics.py",
+            "bytes": 4984
+          },
+          {
+            "path": "streamlit_app/Home.py",
+            "bytes": 3803
+          }
+        ],
+        "extensoes": {
+          ".gitignore": 1,
+          ".md": 5,
+          ".cff": 1,
+          "(sem ext)": 1,
+          ".toml": 2,
+          ".yml": 1,
+          ".yaml": 2,
+          ".json": 1,
+          ".py": 36
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 5448,
+            "sha256": "ba518c0f7319f9ea2c28a494af0cc10a544150256281764106ee9ab8c1e56baa"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": true,
+            "bytes": 1073,
+            "sha256": "9f67f625af52055a22231bff2873fe22246b2207ab384f86dded94585087c3da"
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": true,
+            "bytes": 2700,
+            "sha256": "c4ad6f619a1138ac8f9de1726c01c232b1e6499fe603984547885e79c39a7648"
+          },
+          "setup.py": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": true,
+            "bytes": 1358,
+            "sha256": "bdb7387d0f80fc106cdbe17bcbf39000b0cb3dde4c2844b3b777a9ab88c27e09"
+          },
+          "tests/": {
+            "presente": true
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": true
+          },
+          "examples/": {
+            "presente": true
+          }
+        },
+        "head": "ref: refs/heads/main"
+      },
+      "rotulo": "candidato_a_inspecao"
+    }
+  ],
+  "nao_prontos_detalhe": [
+    {
+      "url": "https://github.com/z3prover/z3",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/idiap/scir",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aswinesag/research-reasoning-engine",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/py-why/dowhy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pymc-labs/causalpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/cqh4046/prisma-traice",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/ohdsi/evidencesynthesis",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aweai-team/aiscientist",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/samuelschmidgall/agentlaboratory",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/rasilab/github_demo",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/rasilab/github_template",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "pendencias": []
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "exige_validacao_externa": true,
+  "nota": "Inventário para análise R621; nada federado.",
+  "sha256_relatorio": "e8ccb71e0eae9c50669ac375bb0eef02071f2ed02a0d5c7a531bfbc85f69b909"
+}

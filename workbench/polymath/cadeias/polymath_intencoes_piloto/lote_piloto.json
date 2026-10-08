@@ -1,0 +1,32 @@
+{
+  "spec_id": "SPEC-935-R717",
+  "gerador": "marceloclaro",
+  "quando": "2026-10-07T10:29:53.109624+00:00",
+  "responsavel": "marceloclaro-operador-piloto",
+  "piloto": true,
+  "ratificacao_titular_pendente": true,
+  "aplicadas": [
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "status": "aprovada",
+      "motivo": "núcleo causal fresco MIT, 1d, base DID/IV da Fase B"
+    },
+    {
+      "url": "https://github.com/sympy/sympy",
+      "status": "aprovada",
+      "motivo": "formal BSD com override LICENSE viva sha 07a5e9819f72"
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "status": "aprovada",
+      "motivo": "síntese PRISMA fresca MIT 58d, trilha auditável"
+    },
+    {
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "status": "rejeitada",
+      "motivo": "licença a confirmar e origem menos auditada; aguardar confirmação"
+    }
+  ],
+  "total": 4,
+  "nota": "Exemplo ratificável; nada federado. Aprovação definitiva exige ratificação por lab."
+}

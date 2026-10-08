@@ -1,0 +1,198 @@
+{
+  "spec_id": "SPEC-935-R720",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-08T00:04:42.764775+00:00",
+  "prontas": 1,
+  "nao_prontos": 15,
+  "itens": [
+    {
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "classe": "laboratorio-estavel",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 21,
+        "total_bytes": 57907,
+        "top10": [
+          {
+            "path": "repro_audit/repo_ingest.py",
+            "bytes": 18666
+          },
+          {
+            "path": "repro_audit/rules.py",
+            "bytes": 12893
+          },
+          {
+            "path": "repro_audit/paper_ingest.py",
+            "bytes": 4688
+          },
+          {
+            "path": "repro_audit/reporting.py",
+            "bytes": 3763
+          },
+          {
+            "path": "tests/verify_impl.py",
+            "bytes": 3551
+          },
+          {
+            "path": "README.md",
+            "bytes": 3272
+          },
+          {
+            "path": "repro_audit/cli.py",
+            "bytes": 2660
+          },
+          {
+            "path": "repro_audit/core.py",
+            "bytes": 2236
+          },
+          {
+            "path": "setup.py",
+            "bytes": 1312
+          },
+          {
+            "path": "LICENSE",
+            "bytes": 1076
+          }
+        ],
+        "extensoes": {
+          ".gitignore": 1,
+          "(sem ext)": 1,
+          ".in": 1,
+          ".md": 2,
+          ".yml": 2,
+          ".toml": 1,
+          ".py": 11,
+          ".tex": 1,
+          ".txt": 1
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 3272,
+            "sha256": "d5d862e302385557d5102494d118f1d9bc971c419bec094a9b53b2a47df28e73"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": true,
+            "bytes": 1076,
+            "sha256": "65d210d3a185ebe823b9b5999431180be2afef533c1200e4b5dddfe74929f6a9"
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": true,
+            "bytes": 95,
+            "sha256": "561268df692a835de0f37b067db4a9dcf7d04c6b35395fac6b3db135ceec1590"
+          },
+          "setup.py": {
+            "presente": true,
+            "bytes": 1312,
+            "sha256": "4db3fc83bf536f5b0af1213fe3f89c9abfdea9d24ad54bf25f0a7b3adbae5cbd"
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "tests/": {
+            "presente": true
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": false
+          },
+          "examples/": {
+            "presente": true
+          }
+        },
+        "head": "ref: refs/heads/main"
+      },
+      "rotulo": "candidato_a_inspecao"
+    }
+  ],
+  "nao_prontos_detalhe": [
+    {
+      "url": "https://github.com/z3prover/z3",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/sympy/sympy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/idiap/scir",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aswinesag/research-reasoning-engine",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/py-why/dowhy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pymc-labs/causalpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/cqh4046/prisma-traice",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/ohdsi/evidencesynthesis",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aweai-team/aiscientist",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/samuelschmidgall/agentlaboratory",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/rasilab/github_demo",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/rasilab/github_template",
+      "pendencias": []
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "exige_validacao_externa": true,
+  "nota": "Inventário para análise R621; nada federado.",
+  "sha256_relatorio": "0d176a91482dc7e7a1d96ea879c0c8316c851a3eb9a4fab40230ca464869ffb3"
+}

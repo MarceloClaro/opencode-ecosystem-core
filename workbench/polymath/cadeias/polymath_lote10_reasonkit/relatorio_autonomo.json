@@ -1,0 +1,214 @@
+{
+  "spec_id": "SPEC-935-R720",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-08T00:14:53.610325+00:00",
+  "prontas": 1,
+  "nao_prontos": 15,
+  "itens": [
+    {
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "classe": "formal-estavel",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 751,
+        "total_bytes": 8383219,
+        "top10": [
+          {
+            "path": "Cargo.lock",
+            "bytes": 176166
+          },
+          {
+            "path": "src/thinktool/executor.rs",
+            "bytes": 114799
+          },
+          {
+            "path": "src/thinktool/llm.rs",
+            "bytes": 100780
+          },
+          {
+            "path": "src/thinktool/tests.rs",
+            "bytes": 90197
+          },
+          {
+            "path": "src/thinktool/validation.rs",
+            "bytes": 85533
+          },
+          {
+            "path": "protocols/VERBOSE_THINKING_PATTERNS.md",
+            "bytes": 81822
+          },
+          {
+            "path": "tests/mcp_testing_strategy.rs",
+            "bytes": 81004
+          },
+          {
+            "path": "src/code_intelligence/parser.rs",
+            "bytes": 79537
+          },
+          {
+            "path": "tests/trait_integration.rs",
+            "bytes": 78025
+          },
+          {
+            "path": "src/thinktool/modules/laserlogic.rs",
+            "bytes": 67332
+          }
+        ],
+        "extensoes": {
+          ".dockerignore": 1,
+          ".gitattributes": 1,
+          ".gitignore": 1,
+          ".md": 144,
+          ".lock": 1,
+          ".toml": 8,
+          "(sem ext)": 5,
+          ".json": 22,
+          ".yaml": 8,
+          ".github/codeowners": 1,
+          ".yml": 13,
+          ".rs": 249,
+          ".py": 6,
+          ".png": 141,
+          ".svg": 108,
+          ".gitkeep": 1,
+          ".jsonl": 1,
+          ".disabled": 4,
+          ".sh": 27,
+          ".service": 2,
+          ".timer": 2,
+          ".zsh": 2,
+          ".wasm": 1,
+          ".rs_snippet_temp": 1,
+          ".proptest-regressions": 1
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 24703,
+            "sha256": "d260cbbed2aa2d3ea79bc21a25420b6e45e3c801e3727ba31c4cad6bb7d26032"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": true,
+            "bytes": 11344,
+            "sha256": "932723eeee1c2a8afdd0e333f974502b60b2f6c6e6b5b6aa65ce337ec25c5ceb"
+          },
+          "LICENSE.txt": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": true,
+            "bytes": 3384,
+            "sha256": "bed138d3e85508d2d64161ca96397027576d57b244bfbb38f8152503473fc252"
+          },
+          "setup.py": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "tests/": {
+            "presente": true
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": true
+          },
+          "examples/": {
+            "presente": true
+          }
+        },
+        "head": "ref: refs/heads/main"
+      },
+      "rotulo": "candidato_a_inspecao"
+    }
+  ],
+  "nao_prontos_detalhe": [
+    {
+      "url": "https://github.com/z3prover/z3",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/sympy/sympy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/idiap/scir",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aswinesag/research-reasoning-engine",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/py-why/dowhy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pymc-labs/causalpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/cqh4046/prisma-traice",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/ohdsi/evidencesynthesis",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aweai-team/aiscientist",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/samuelschmidgall/agentlaboratory",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/rasilab/github_demo",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/rasilab/github_template",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "pendencias": []
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "exige_validacao_externa": true,
+  "nota": "Inventário para análise R621; nada federado.",
+  "sha256_relatorio": "de20c7fa3a7e6bc759dcfc9fb2cb7a4671a61ad4aac114ff044a3e87b0295f6b"
+}

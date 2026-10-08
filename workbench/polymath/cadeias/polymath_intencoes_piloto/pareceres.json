@@ -1,0 +1,61 @@
+{
+  "spec_id": "SPEC-935-R722",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-08T00:14:31.717339+00:00",
+  "total": 3,
+  "pareceres": [
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "maturidade": 8,
+      "licenca": "MIT",
+      "capacidades": [
+        "causal"
+      ],
+      "riscos": [
+        "sem diretório tests"
+      ],
+      "pendencias_ratificacao": [
+        "avaliar cobertura fora do gate antes de federar"
+      ],
+      "recomendacao_tecnica": "ratificar_com_ressalvas",
+      "opiniao_tecnica": true,
+      "ratificacao_titular_pendente": true,
+      "readme_chars": 10039
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "maturidade": 10,
+      "licenca": "MIT",
+      "capacidades": [
+        "sintese"
+      ],
+      "riscos": [],
+      "pendencias_ratificacao": [],
+      "recomendacao_tecnica": "ratificar_com_ressalvas",
+      "opiniao_tecnica": true,
+      "ratificacao_titular_pendente": true,
+      "readme_chars": 5426
+    },
+    {
+      "url": "https://github.com/sympy/sympy",
+      "maturidade": 6,
+      "licenca": "BSD-3-Clause (SymPy)",
+      "capacidades": [
+        "dedutivo",
+        "simbolico"
+      ],
+      "riscos": [
+        "sem diretório tests"
+      ],
+      "pendencias_ratificacao": [
+        "avaliar cobertura fora do gate antes de federar"
+      ],
+      "recomendacao_tecnica": "ratificar_com_ressalvas",
+      "opiniao_tecnica": true,
+      "ratificacao_titular_pendente": true,
+      "readme_chars": 11183
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "nota": "Opiniões para ratificação; nada decidido."
+}

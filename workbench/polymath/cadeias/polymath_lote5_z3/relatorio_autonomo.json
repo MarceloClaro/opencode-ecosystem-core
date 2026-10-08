@@ -1,0 +1,246 @@
+{
+  "spec_id": "SPEC-935-R720",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-07T23:55:28.625375+00:00",
+  "prontas": 1,
+  "nao_prontos": 15,
+  "itens": [
+    {
+      "url": "https://github.com/z3prover/z3",
+      "classe": "formal-estavel",
+      "pronto_para_analise_R621": true,
+      "inventario": {
+        "total_arquivos": 2874,
+        "total_bytes": 33848796,
+        "top10": [
+          {
+            "path": "src/api/python/z3/z3.py",
+            "bytes": 367907
+          },
+          {
+            "path": "examples/userPropagator/example.pdf",
+            "bytes": 341835
+          },
+          {
+            "path": "src/math/polynomial/polynomial.cpp",
+            "bytes": 325398
+          },
+          {
+            "path": "src/api/z3_api.h",
+            "bytes": 278249
+          },
+          {
+            "path": "src/api/js/package-lock.json",
+            "bytes": 258364
+          },
+          {
+            "path": "src/math/realclosure/realclosure.cpp",
+            "bytes": 253858
+          },
+          {
+            "path": "src/api/c++/z3++.h",
+            "bytes": 220909
+          },
+          {
+            "path": "src/api/dotnet/Context.cs",
+            "bytes": 201513
+          },
+          {
+            "path": "src/smt/smt_context.cpp",
+            "bytes": 201352
+          },
+          {
+            "path": "src/nlsat/nlsat_solver.cpp",
+            "bytes": 197245
+          }
+        ],
+        "extensoes": {
+          ".bazelrc": 1,
+          ".clang-format": 3,
+          ".dockerignore": 1,
+          ".gitattributes": 1,
+          ".gitignore": 5,
+          ".bazel": 2,
+          ".txt": 106,
+          ".md": 70,
+          ".in": 17,
+          ".jpeg": 1,
+          ".yml": 50,
+          ".json": 11,
+          ".sh": 4,
+          ".py": 79,
+          ".sql": 1,
+          ".yaml": 1,
+          ".cmake": 11,
+          ".cpp": 1057,
+          ".c": 4,
+          ".ql": 1,
+          "(sem ext)": 18,
+          ".vcxproj": 1,
+          ".filters": 1,
+          ".dox": 1,
+          ".dockerfile": 1,
+          ".smt2": 10,
+          ".cs": 81,
+          ".csproj": 1,
+          ".go": 23,
+          ".mod": 2,
+          ".java": 83,
+          ".smt": 2,
+          ".ml": 2,
+          ".htm": 4,
+          ".html": 1,
+          ".png": 2,
+          ".ipynb": 3,
+          ".h": 1101,
+          ".pdf": 1,
+          ".fst": 24,
+          ".lean": 2,
+          ".toml": 2,
+          ".bz2": 1,
+          ".jpg": 1,
+          ".snk": 2,
+          ".cmd": 2,
+          ".js": 3,
+          ".hpp": 35,
+          ".props": 1,
+          ".targets": 1,
+          ".nvmrc": 1,
+          ".ts": 28,
+          ".mli": 1,
+          ".pre": 2,
+          ".d": 1,
+          ".disabled": 2,
+          ".def": 1
+        },
+        "marcos": {
+          "README.md": {
+            "presente": true,
+            "bytes": 14854,
+            "sha256": "eb381a9b0c85695c588c59672747c93bc80c7efd9f2597584a7f03e0f2f90e24"
+          },
+          "README.rst": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "LICENSE.txt": {
+            "presente": true,
+            "bytes": 1096,
+            "sha256": "e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"
+          },
+          "LICENSE.md": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "pyproject.toml": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.py": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "setup.cfg": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "CITATION.cff": {
+            "presente": false,
+            "bytes": 0,
+            "sha256": null
+          },
+          "tests/": {
+            "presente": false
+          },
+          "test/": {
+            "presente": false
+          },
+          "docs/": {
+            "presente": false
+          },
+          "examples/": {
+            "presente": true
+          }
+        },
+        "head": "ref: refs/heads/master"
+      },
+      "rotulo": "candidato_a_inspecao"
+    }
+  ],
+  "nao_prontos_detalhe": [
+    {
+      "url": "https://github.com/sympy/sympy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/idiap/scir",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aswinesag/research-reasoning-engine",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pgmpy/pgmpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/py-why/dowhy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/pymc-labs/causalpy",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/proportione/prisma",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/cqh4046/prisma-traice",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/ohdsi/evidencesynthesis",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aweai-team/aiscientist",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/samuelschmidgall/agentlaboratory",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/rasilab/github_demo",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/rasilab/github_template",
+      "pendencias": []
+    },
+    {
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "pendencias": []
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "exige_validacao_externa": true,
+  "nota": "Inventário para análise R621; nada federado.",
+  "sha256_relatorio": "703e1ff87eb2ab0ab1e99da663792d1f22dd68bb38284404c184a7881e06fb75"
+}

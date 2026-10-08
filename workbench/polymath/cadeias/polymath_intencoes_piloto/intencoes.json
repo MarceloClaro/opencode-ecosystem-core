@@ -1,0 +1,221 @@
+{
+  "spec_id": "SPEC-935-R716",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-07T10:24:49.331665+00:00",
+  "origem_proposta": "/tmp/polymath_federacao/federacao_proposta.json",
+  "total": 16,
+  "intencoes": [
+    {
+      "intencao_id": "INT-2C89DDEC",
+      "url": "https://github.com/z3prover/z3",
+      "classe": "formal-estavel",
+      "motivo_proposta": "dentro da janela formal-estavel (0d ≤ 730d); licença MIT via override https://raw.githubusercontent.com/Z3Prover/z3/master/LICENSE.txt",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331386+00:00"
+    },
+    {
+      "intencao_id": "INT-98CEA035",
+      "url": "https://github.com/sympy/sympy",
+      "classe": "formal-estavel",
+      "motivo_proposta": "dentro da janela formal-estavel (2d ≤ 730d); licença BSD-3-Clause (SymPy) via override https://raw.githubusercontent.com/sympy/sympy/master/LICENSE",
+      "licenca": "BSD-3-Clause (SymPy)",
+      "status": "aprovada",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331468+00:00",
+      "decidida_por": "marceloclaro-operador-piloto",
+      "decidida_em": "2026-10-07T10:29:53.103777+00:00",
+      "motivo_decisao": "formal BSD com override LICENSE viva sha 07a5e9819f72"
+    },
+    {
+      "intencao_id": "INT-7AEC1B63",
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "classe": "formal-estavel",
+      "motivo_proposta": "dentro da janela formal-estavel (8d ≤ 730d)",
+      "licenca": "Apache-2.0",
+      "status": "rejeitada",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331484+00:00",
+      "decidida_por": "marceloclaro-operador-piloto",
+      "decidida_em": "2026-10-07T10:29:53.108214+00:00",
+      "motivo_decisao": "licença a confirmar e origem menos auditada; aguardar confirmação"
+    },
+    {
+      "intencao_id": "INT-406355CF",
+      "url": "https://github.com/idiap/scir",
+      "classe": "ativo",
+      "motivo_proposta": "dentro da janela ativo (12d ≤ 90d)",
+      "licenca": "GPL-3.0",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331496+00:00"
+    },
+    {
+      "intencao_id": "INT-166EA8C3",
+      "url": "https://github.com/aswinesag/research-reasoning-engine",
+      "classe": "ativo",
+      "motivo_proposta": "dentro da janela ativo (87d ≤ 90d)",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331507+00:00"
+    },
+    {
+      "intencao_id": "INT-E658730E",
+      "url": "https://github.com/pgmpy/pgmpy",
+      "classe": "ativo",
+      "motivo_proposta": "dentro da janela ativo (1d ≤ 90d)",
+      "licenca": "MIT",
+      "status": "aprovada",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331515+00:00",
+      "decidida_por": "marceloclaro-operador-piloto",
+      "decidida_em": "2026-10-07T10:29:53.102300+00:00",
+      "motivo_decisao": "núcleo causal fresco MIT, 1d, base DID/IV da Fase B"
+    },
+    {
+      "intencao_id": "INT-7BEF5DEE",
+      "url": "https://github.com/py-why/dowhy",
+      "classe": "ativo",
+      "motivo_proposta": "dentro da janela ativo (0d ≤ 90d)",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331522+00:00"
+    },
+    {
+      "intencao_id": "INT-5EA9BA9E",
+      "url": "https://github.com/pymc-labs/causalpy",
+      "classe": "ativo",
+      "motivo_proposta": "dentro da janela ativo (0d ≤ 90d)",
+      "licenca": "Apache-2.0",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331528+00:00"
+    },
+    {
+      "intencao_id": "INT-78BBDDDC",
+      "url": "https://github.com/proportione/prisma",
+      "classe": "sintese-referencia",
+      "motivo_proposta": "dentro da janela sintese-referencia (58d ≤ 730d)",
+      "licenca": "MIT",
+      "status": "aprovada",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331535+00:00",
+      "decidida_por": "marceloclaro-operador-piloto",
+      "decidida_em": "2026-10-07T10:29:53.105024+00:00",
+      "motivo_decisao": "síntese PRISMA fresca MIT 58d, trilha auditável"
+    },
+    {
+      "intencao_id": "INT-72AF54EC",
+      "url": "https://github.com/cqh4046/prisma-traice",
+      "classe": "sintese-referencia",
+      "motivo_proposta": "dentro da janela sintese-referencia (300d ≤ 730d)",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331543+00:00"
+    },
+    {
+      "intencao_id": "INT-D02DE734",
+      "url": "https://github.com/ohdsi/evidencesynthesis",
+      "classe": "sintese-referencia",
+      "motivo_proposta": "dentro da janela sintese-referencia (197d ≤ 730d); licença Apache-2.0 via override https://raw.githubusercontent.com/OHDSI/EvidenceSynthesis/master/DESCRIPTION",
+      "licenca": "Apache-2.0",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331550+00:00"
+    },
+    {
+      "intencao_id": "INT-043AED0F",
+      "url": "https://github.com/aweai-team/aiscientist",
+      "classe": "sintese-referencia",
+      "motivo_proposta": "dentro da janela sintese-referencia (77d ≤ 730d)",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331558+00:00"
+    },
+    {
+      "intencao_id": "INT-493FCB40",
+      "url": "https://github.com/samuelschmidgall/agentlaboratory",
+      "classe": "laboratorio-estavel",
+      "motivo_proposta": "dentro da janela laboratorio-estavel (412d ≤ 1095d)",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331572+00:00"
+    },
+    {
+      "intencao_id": "INT-D2A1378B",
+      "url": "https://github.com/rasilab/github_demo",
+      "classe": "laboratorio-estavel",
+      "motivo_proposta": "dentro da janela laboratorio-estavel (778d ≤ 1095d)",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331630+00:00"
+    },
+    {
+      "intencao_id": "INT-C14260C8",
+      "url": "https://github.com/rasilab/github_template",
+      "classe": "laboratorio-estavel",
+      "motivo_proposta": "dentro da janela laboratorio-estavel (682d ≤ 1095d)",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331644+00:00"
+    },
+    {
+      "intencao_id": "INT-E9BE5C6F",
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "classe": "laboratorio-estavel",
+      "motivo_proposta": "dentro da janela laboratorio-estavel (298d ≤ 1095d)",
+      "licenca": "MIT",
+      "status": "aguardando_humano",
+      "pronta_para_federacao": false,
+      "exige_artefato_local": true,
+      "importada_em": "2026-10-07T10:24:49.331652+00:00"
+    }
+  ],
+  "retidas_informativas": [
+    {
+      "url": "https://github.com/internscience/scireason",
+      "motivo": "desatualizado na classe ativo: 285d > 90d."
+    },
+    {
+      "url": "https://github.com/irving-feng/cot-evo",
+      "motivo": "desatualizado na classe ativo: 237d > 90d."
+    },
+    {
+      "url": "https://github.com/kmineshima/abduction-syllogism-llm",
+      "motivo": "desatualizado na classe ativo: 521d > 90d."
+    },
+    {
+      "url": "https://github.com/mckinsey/causalnex",
+      "motivo": "licença viva não confirmada e sem override auditado."
+    },
+    {
+      "url": "https://github.com/sakanaai/ai-scientist",
+      "motivo": "licença viva não confirmada e sem override auditado."
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "exige_validacao_externa": true
+}
