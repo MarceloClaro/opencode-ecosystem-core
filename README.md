@@ -13,7 +13,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=for-the-badge&logo=github&logoColor=white&color=181717)](https://github.com/MarceloClaro/opencode-ecosystem-core)
 [![License MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3b82f6?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![MCP Servers](https://img.shields.io/badge/MCP%20Servers-11-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
+[![MCP Servers](https://img.shields.io/badge/MCP%20Servers-15-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
 [![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
 
 **248 agentes** · **157 auto‑registrados no Blackboard (registro histórico R596)** · **15 MCPs configurados** · **426+ ciclos de evolução** · **53 lições semânticas** · **7+ skills**
@@ -244,8 +244,8 @@ Nada federado atesta qualidade; todo federado exige supervisão.
 ### Mapa dinâmico regenerável
 
 Além do snapshot histórico acima, o inventário vivo do checkout é gerado por
-`marceloclaro/ecosystem_map.py` (1402 nodos, 2217 vetores, incluindo o programa
-polímata) em `maps/ecosystem_map_2026-07-06.json` e
+`marceloclaro/ecosystem_map.py` (1402 nodos, 2217 vetores, 30 referências
+polímatas) em `maps/ecosystem_map_2026-07-06.json` e
 `MAPA_ECOSSISTEMA_COMPLETO_2026-07-06.md`. Regenere após mudanças com
 `python3 -c "from marceloclaro.ecosystem_map import save_ecosystem_map_artifacts; save_ecosystem_map_artifacts()"`.
 O CI segrega escopos com gates verdes obrigatórios (polímata, núcleo
