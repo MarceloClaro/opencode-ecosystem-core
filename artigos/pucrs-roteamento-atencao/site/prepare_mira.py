@@ -1,4 +1,4 @@
-"""Executa o MIRA pelo orquestrador e adapta o deck ao site R782."""
+"""Executa o MIRA pelo orquestrador e adapta o deck ao site R783."""
 from pathlib import Path
 import hashlib
 import json
@@ -19,6 +19,10 @@ def main():
     original = deck.read_text(encoding="utf-8")
     result["sha256_deck_original"] = hashlib.sha256(deck.read_bytes()).hexdigest()
     subtitles = {
+        'O projeto por trás da pesquisa': 'OpenCode Ecosystem Core',
+        'O caminho de uma tarefa': 'Pedido, coordenação e encaminhamento',
+        'Escolher e concluir são etapas diferentes': 'Execução depende do ambiente',
+        'MIRA apresenta as ideias': 'Comunicação visual do trabalho',
         'Uma escolha explicável': 'O problema do roteamento',
         'Uma equipe para entender': 'Analogia de programas especializados',
         'Quatro perguntas, uma nota': 'Critérios definidos no modelo',

@@ -1,5 +1,21 @@
 # Roteamento inspirado em atenção
 
+## O projeto por trás da pesquisa
+
+O OpenCode Ecosystem Core reúne agentes de software, ferramentas, memória e registros. Pense em uma oficina: programas diferentes têm papéis especializados, e um coordenador organiza o trabalho. A pesquisa examina uma peça desse conjunto: o roteador.
+
+## O caminho de uma tarefa
+
+A pessoa informa um pedido. O coordenador recupera contexto e organiza seu encaminhamento. Nos fluxos que usam o roteador estudado, ele compara candidatos aptos e disponíveis.
+
+## Escolher e concluir são etapas diferentes
+
+Com um programa ou uma ferramenta preparada e disponível, uma tarefa pode ser realizada. O estado e os resultados são registrados para conferência. A ilustração no site representa esse caminho; não executa agentes nem comprova o funcionamento do ecossistema completo.
+
+## MIRA apresenta as ideias
+
+O MIRA recebe um manuscrito e gera uma apresentação com roteiro, texto e animação. O coordenador pode encaminhar essa tarefa diretamente ao MIRA. Sua conformidade interna confere o artefato visual; a avaliação científica do trabalho é uma questão própria.
+
 ## Uma escolha explicável
 
 Um agente é um programa especializado. Roteamento é encaminhar um pedido a um desses programas. Quando vários podem ajudar, como escolher? O estudo combina critérios definidos previamente; seus pesos não foram aprendidos.

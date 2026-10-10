@@ -1,5 +1,6 @@
 import { rankCandidates } from './router.mjs';
 import { MISSIONS, QUESTIONS, evaluateMission, gradeAnswer } from './learning.mjs';
+import { createTourState, transitionTour, getTourView } from './ecosystem.mjs';
 
 const $ = (selector) => document.querySelector(selector);
 const format = (value, digits = 2) => value.toLocaleString('pt-BR', { minimumFractionDigits: digits, maximumFractionDigits: digits });
@@ -219,6 +220,46 @@ $('#quiz-restart').addEventListener('click', () => {
   renderQuestion(true);
 });
 renderQuestion();
+
+let ecosystemState = createTourState();
+function renderEcosystem(focus = false) {
+  const view = getTourView(ecosystemState);
+  const container = $('#ecosystem-tour');
+  container.dataset.step = String(ecosystemState.step);
+  container.dataset.scope = ecosystemState.scope;
+  container.style.setProperty('--tour-progress', `${ecosystemState.step / 3 * 100}%`);
+  $('#eco-step-count').textContent = `ETAPA ${ecosystemState.step + 1} DE 4`;
+  $('#eco-step-title').textContent = view.step.title;
+  $('#eco-step-text').textContent = view.step.text;
+  $('#eco-step-takeaway').textContent = view.step.takeaway;
+  $('#eco-prev').disabled = !view.canPrevious;
+  $('#eco-next').disabled = !view.canNext;
+  $('#eco-research-link').hidden = !view.isResearchStep;
+  $('#eco-scope-tag').textContent = view.scope.tag;
+  $('#eco-scope-title').textContent = view.scope.title;
+  $('#eco-scope-text').textContent = view.scope.text;
+  $('#eco-mira-path').hidden = ecosystemState.scope !== 'mira';
+  document.querySelectorAll('[data-eco-stage]').forEach((button) => button.setAttribute('aria-pressed', String(Number(button.dataset.ecoStage) === ecosystemState.step)));
+  document.querySelectorAll('[data-eco-scope]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.ecoScope === ecosystemState.scope)));
+  document.querySelectorAll('[data-eco-resource]').forEach((link) => { link.hidden = link.dataset.ecoResource !== ecosystemState.scope; });
+  if (focus) { $('#eco-step-title').setAttribute('tabindex', '-1'); $('#eco-step-title').focus({ preventScroll: true }); }
+}
+function moveEcosystem(action, focus = false) { ecosystemState = transitionTour(ecosystemState, action); renderEcosystem(focus); }
+document.querySelectorAll('[data-eco-stage]').forEach((button) => button.addEventListener('click', () => moveEcosystem({ type: 'step', value: Number(button.dataset.ecoStage) })));
+document.querySelectorAll('[data-eco-scope]').forEach((button) => button.addEventListener('click', () => moveEcosystem({ type: 'scope', value: button.dataset.ecoScope })));
+$('#eco-prev').addEventListener('click', () => moveEcosystem({ type: 'previous' }, true));
+$('#eco-next').addEventListener('click', () => moveEcosystem({ type: 'next' }, true));
+$('#eco-restart').addEventListener('click', () => moveEcosystem({ type: 'restart' }, true));
+for (const selector of ['[data-eco-stage]', '[data-eco-scope]']) {
+  const buttons = [...document.querySelectorAll(selector)];
+  buttons.forEach((button, index) => button.addEventListener('keydown', (event) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key) || event.altKey || event.ctrlKey || event.metaKey) return;
+    event.preventDefault(); event.stopPropagation();
+    const target = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : Math.max(0, Math.min(buttons.length - 1, index + (event.key === 'ArrowRight' ? 1 : -1)));
+    buttons[target].focus(); buttons[target].click();
+  }));
+}
+renderEcosystem();
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let paused = reducedMotion.matches;

@@ -1,12 +1,13 @@
 # Site da dissertação — MIRA
 
-Apresentação editorial e didática da dissertação revista de Marcelo Claro Laranjeira. Interface em português para leitores sem conhecimento prévio de inteligência artificial, com analogia em quatro etapas, laboratório com três desafios, questionário com feedback, ilustração SVG animada e navegação de apresentação.
+Apresentação editorial e didática da dissertação revista de Marcelo Claro Laranjeira. Interface em português para leitores sem conhecimento prévio de inteligência artificial, com apresentação interativa do OpenCode Ecosystem Core, analogia em quatro etapas, laboratório com três desafios, questionário com feedback, ilustração animada e navegação de apresentação.
 
 **Site publicado:** https://marceloclaro.github.io/opencode-ecosystem-core/
 
 ## Uso
 
-- Comece por **Entenda**: avance pelas quatro etapas da analogia e acompanhe a equipe ilustrativa.
+- Explore **O ecossistema**: siga pedido, coordenação, roteador e execução/registro; alterne as perspectivas do projeto, da pesquisa e do MIRA. Setas esquerda/direita e Home/End funcionam dentro dos grupos de etapas e perspectivas.
+- Continue por **Entenda**: avance pelas quatro etapas da analogia e acompanhe a equipe ilustrativa.
 - No laboratório, conclua três desafios, peça uma pista se necessário e acompanhe suas descobertas. Depois, responda três perguntas com feedback e novas tentativas. O progresso fica apenas na memória da página durante a visita.
 - Explore os cenários e os controles de confiança e carga. Ana e Cid partem do exemplo publicado; contexto, Bia e alterações nos controles são didáticos.
 - Use **Apresentar** para a navegação guiada. Setas esquerda/direita e Page Up/Page Down mudam de seção; Home/End vão ao início/fim; Esc retorna ao site. As setas dos controles deslizantes continuam alterando seus valores.
@@ -31,7 +32,7 @@ No diretório raiz:
 
 ```bash
 python3 -m http.server 8765 --directory artigos/pucrs-roteamento-atencao/site
-python3 -m pytest -q tests/test_r781_site_mira.py tests/test_r782_aprendizagem_site.py
+python3 -m pytest -q tests/test_r781_site_mira.py tests/test_r782_aprendizagem_site.py tests/test_r783_ecossistema_site.py
 ```
 
 Abra `http://localhost:8765`. Não é necessário instalar bibliotecas de interface nem executar uma compilação. O cálculo está em `router.mjs`, e as regras das atividades em `learning.mjs`; o Node.js é necessário apenas para os testes funcionais.
@@ -56,6 +57,8 @@ Os resultados são históricos, internos e sintéticos. O laboratório não exec
 
 O código do site reside na branch `main`. Os arquivos estáticos são publicados na branch `codex/gh-pages`, com `.nojekyll`; o GitHub Pages aponta para a raiz dessa branch. Esse fluxo utiliza a [API oficial de GitHub Pages](https://docs.github.com/en/rest/pages/pages). A publicação deve conservar outras pastas e configurações caso uma hospedagem prévia seja encontrada.
 
-As especificações são `SPEC-935-R781` e `SPEC-935-R782`; os testes exercitam comportamento do cálculo e casos-limite. A conferência de interface é registrada em `qa.json`. A aprovação do inspetor MIRA e os testes locais não representam validação científica externa.
+As especificações são `SPEC-935-R781`, `SPEC-935-R782` e `SPEC-935-R783`; os testes exercitam comportamento do cálculo e casos-limite. A conferência de interface é registrada em `qa.json`. A aprovação do inspetor MIRA e os testes locais não representam validação científica externa.
 
 A revisão didática preserva os números e a fonte científica. Carga alta e indisponibilidade têm comportamentos diferentes; os pesos não são chances de sucesso nem frações da tarefa. A eficácia educacional desta interface ainda não foi medida.
+
+A seção do ecossistema usa `ecosystem.mjs` para o percurso ilustrativo, sem acionar executores. Seu conteúdo deriva de `ARCHITECTURE.md`, `MANUAL.md` e do escopo da dissertação. O MIRA é mostrado como recurso de comunicação, podendo receber encaminhamento direto do coordenador. Nem todo fluxo utiliza o roteador estudado.

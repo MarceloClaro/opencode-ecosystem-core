@@ -98,5 +98,47 @@
     "mira_task_id": "task-601b4d9a",
     "evolucao_round_id": "R782",
     "publicacao_destino": "https://marceloclaro.github.io/opencode-ecosystem-core/"
+  },
+  "revisao_r783": {
+    "data": "2026-10-10",
+    "escopo": "Conferência interna do percurso ilustrativo e da interface. Sem execução de agentes pelo navegador, novo experimento científico ou medição de aprendizagem.",
+    "testes": {
+      "arquivos": [
+        "tests/test_r781_site_mira.py",
+        "tests/test_r782_aprendizagem_site.py",
+        "tests/test_r783_ecossistema_site.py"
+      ],
+      "red": "30 falhas antes da implementação do módulo do percurso.",
+      "green": "79 aprovados: 20 do roteador, 29 das atividades e 30 do percurso."
+    },
+    "navegador": {
+      "desktop": [
+        1280,
+        720
+      ],
+      "celular": [
+        390,
+        844
+      ],
+      "rolagem_horizontal": false,
+      "conferidos": [
+        "Quatro etapas, limites de navegação e reinício com foco no título",
+        "Perspectivas de projeto, pesquisa e MIRA independentes da etapa",
+        "Setas e End nos grupos sem alterar o slide de apresentação",
+        "Pausa global suspende a animação do percurso",
+        "Nova seção na apresentação de nove seções",
+        "Link da peça estudada abre laboratório na seção 5 de 9",
+        "Slider por teclado altera escolha para Cid sem mudar o slide",
+        "Quiz mantém feedback correto e libera avanço",
+        "Layout móvel com quatro cartões e três perspectivas",
+        "Deck MIRA de 17 slides com os novos papéis e limites",
+        "Pausa no deck MIRA"
+      ],
+      "console_avisos_erros_observados": []
+    },
+    "revisao_estatica": "Navegação, estados, foco, aria-live e regras de movimento reduzido revisados; linguagem técnica de executor simplificada.",
+    "mira_task_id": "task-b3f4e5a1",
+    "evolucao_round_id": "R783",
+    "publicacao_destino": "https://marceloclaro.github.io/opencode-ecosystem-core/"
   }
 }

@@ -10,6 +10,10 @@ integridade de recursos). Consertar a peça, não a fábrica.
 - ✅ **Regra Zero: entrada** — coreografia de entrada presente
 - ✅ **Regra Zero: loop perpétuo** — loop infinite presente
 - ✅ **Título ≤6 palavras: Roteamento inspirado em aten** — 4 palavra(s)
+- ✅ **Título ≤6 palavras: O projeto por trás da pesqui** — 6 palavra(s)
+- ✅ **Título ≤6 palavras: O caminho de uma tarefa** — 5 palavra(s)
+- ✅ **Título ≤6 palavras: Escolher e concluir são etap** — 6 palavra(s)
+- ✅ **Título ≤6 palavras: MIRA apresenta as ideias** — 4 palavra(s)
 - ✅ **Título ≤6 palavras: Uma escolha explicável** — 3 palavra(s)
 - ✅ **Título ≤6 palavras: Uma equipe para entender** — 4 palavra(s)
 - ✅ **Título ≤6 palavras: Filtrar antes de comparar** — 4 palavra(s)
