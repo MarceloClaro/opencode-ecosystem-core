@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roteamento inspirado em atenção — Apresentação MIRA</title>
+<style>
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#8b949e; --line:#30363d; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+         min-height:100vh; overflow:hidden; }
+  .deck { position:relative; width:100vw; height:100vh; }
+  .slide { position:absolute; inset:0; display:none; align-items:center;
+           justify-content:center; padding:5vh 6vw; }
+  .slide.active { display:flex; }
+  .glass-card { width:min(1120px, 92vw); max-height:86vh; overflow:auto;
+                background:rgba(255,255,255,0.05); border:1px solid var(--line);
+                border-radius:22px; padding:38px 46px;
+                backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+                box-shadow: 0 18px 60px rgba(0,0,0,0.45); }
+  .glass-card h1 { margin:0 0 10px; font-size:clamp(26px,4vw,44px); line-height:1.1; }
+  .glass-card .sub { margin:0 0 22px; color:var(--muted); font-size:clamp(15px,1.7vw,20px); }
+  .accent { height:6px; width:120px; border-radius:6px;
+            background:linear-gradient(90deg,#58a6ff,#3fb950,#d29922); margin:0 0 20px; }
+  .anim-stage { width:100%; height:auto; max-height:52vh; border-radius:14px;
+                background:rgba(0,0,0,0.25); }
+  blockquote { margin:0; font-size:clamp(22px,3vw,34px); line-height:1.35;
+               border-left:5px solid #58a6ff; padding-left:22px; }
+  pre { background:rgba(0,0,0,0.4); border:1px solid var(--line); border-radius:12px;
+        padding:20px 22px; overflow:auto; font-size:clamp(14px,1.6vw,18px);
+        font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+          gap:16px; }
+  .grid .cell { background:rgba(255,255,255,0.04); border:1px solid var(--line);
+                border-radius:14px; padding:18px 20px; font-size:clamp(15px,1.7vw,19px); }
+  .cover h1 { font-size:clamp(34px,6vw,68px); }
+  nav { position:fixed; bottom:22px; right:26px; display:flex; gap:10px; z-index:10; }
+  nav button { background:rgba(33,38,45,0.8); color:var(--fg); border:1px solid var(--line);
+               border-radius:10px; padding:10px 16px; cursor:pointer; font-size:16px;
+               backdrop-filter: blur(6px); }
+  nav button:hover { border-color:#58a6ff; }
+  .counter { position:fixed; bottom:30px; left:26px; color:var(--muted);
+             font-size:14px; z-index:10; }
+</style>
+
+<style id="mira-anim">
+  .slide.active .glass-card { animation: cardEnter 0.7s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes cardEnter {
+    from { opacity: 0; transform: translateY(34px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .accent { animation: accentFlow 4s ease-in-out infinite;
+            background-size: 200% 100%; }
+  @keyframes accentFlow {
+    0%,100% { background-position: 0% 50%; transform: scaleX(1); }
+    50%     { background-position: 100% 50%; transform: scaleX(1.25); }
+  }
+  .glass-card { animation: cardBreathe 7s ease-in-out infinite; }
+  @keyframes cardBreathe {
+    0%,100% { box-shadow: 0 18px 60px rgba(0,0,0,0.45); }
+    50%     { box-shadow: 0 24px 80px rgba(88,166,255,0.22); }
+  }
+</style>
+<style id="site-accessibility">
+    :root{--bg:#f5f6f0;--fg:#17291c;--muted:#536451;--line:#d7decd}
+    .glass-card{background:rgba(255,255,255,.7);box-shadow:0 16px 60px #35563815;border-radius:10px}
+    .glass-card h1{font-family:Georgia,serif;font-weight:400;letter-spacing:-.035em;color:#355638}
+    .accent{background:linear-gradient(90deg,#355638,#97ac73,#cfe598)}
+    .grid .cell{background:#e9eee2;border-radius:6px}
+    .anim-stage{background:#e4eadc}
+    nav button{background:#355638;color:white;border-color:#355638;border-radius:5px}
+    .site-tools{position:fixed;top:16px;left:26px;right:26px;display:flex;justify-content:space-between;z-index:12;font-size:12px}
+    .site-tools button,.site-tools a{padding:7px 12px;border:1px solid #aebf9f;border-radius:5px;background:#f5f6f0;color:#355638;text-decoration:none}
+    :focus-visible{outline:3px solid #648348;outline-offset:4px}
+    body.paused *,body.paused *::before{animation-play-state:paused!important}
+    @media(max-width:600px){.glass-card{padding:25px 22px;max-height:77vh}.slide{padding:9vh 6vw}.site-tools{left:20px;right:20px;font-size:10px}nav{right:20px}nav button{font-size:12px}.counter{left:20px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+    </style></head>
+<body>
+<div class="deck" id="deck">
+<section class="slide active" data-kind="cover" data-index="0"><div class="glass-card cover"><div class="accent"></div><h1>Roteamento inspirado em atenção</h1><p class="sub">Roteamento inspirado em atenção</p></div></section>
+<section class="slide" data-kind="grid" data-index="1"><div class="glass-card "><div class="accent"></div><h1>Uma escolha explicável</h1><p class="sub">O problema do roteamento</p><div class="grid"><div class="cell">Entre agentes diferentes, uma tarefa precisa encontrar candidatos capazes e disponíveis.</div><div class="cell">O trabalho estuda uma heurística auditável, com critérios e pesos fixos.</div><div class="cell">Não houve aprendizagem desses pesos.</div></div></div></section>
+<section class="slide" data-kind="grid" data-index="2"><div class="glass-card "><div class="accent"></div><h1>Filtrar antes de comparar</h1><p class="sub">Critérios de elegibilidade</p><div class="grid"><div class="cell">A disponibilidade é obrigatória.</div><div class="cell">Todas as capacidades requeridas devem estar presentes.</div><div class="cell">Identificadores inválidos e duplicados ficam fora.</div><div class="cell">Um candidato excluído não participa da normalização.</div></div></div></section>
+<section class="slide" data-kind="grid" data-index="3"><div class="glass-card "><div class="accent"></div><h1>Quatro critérios se combinam</h1><p class="sub">Combinação com pesos fixos</p><div class="grid"><div class="cell">O pipeline combina semântica, cobertura, confiança e carga livre.</div><div class="cell">Os coeficientes são fixos: 0,30; 0,35; 0,25; 0,10.</div><div class="cell">Entre os candidatos elegíveis, a cobertura é sempre completa.</div></div></div></section>
+<section class="slide" data-kind="grid" data-index="4"><div class="glass-card "><div class="accent"></div><h1>Pesos que somam um</h1><p class="sub">Normalização das utilidades</p><div class="grid"><div class="cell">O softmax transforma utilidades em pesos normalizados.</div><div class="cell">A subtração do maior escore evita exponenciais positivas grandes.</div><div class="cell">Normalização não é calibração probabilística.</div></div></div></section>
+<section class="slide" data-kind="grid" data-index="5"><div class="glass-card "><div class="accent"></div><h1>Ana e Cid</h1><p class="sub">Exemplo registrado no trabalho</p><div class="grid"><div class="cell">Ana: semântica 0,8417; confiança 0,9; carga livre 0,9.</div><div class="cell">Cid: semântica 0,7703; confiança 0,7; carga livre 0,6.</div><div class="cell">Utilidades: aproximadamente 0,9175 e 0,8161.</div><div class="cell">Pesos: aproximadamente 0,5253 e 0,4747.</div></div></div></section>
+<section class="slide" data-kind="grid" data-index="6"><div class="glass-card "><div class="accent"></div><h1>Evidência em dois planos</h1><p class="sub">Formalização e bancada interna</p><div class="grid"><div class="cell">Onze propriedades documentadas em Lean 4 sobre aritmética real exata.</div><div class="cell">Bancada interna sintética: 200 decisões em cinco piscinas.</div><div class="cell">Arrependimento médio do roteamento: 0,0421.</div><div class="cell">Comparadores simples: aleatório 0,1882; menor carga 0,2167; maior cobertura 0,2118.</div></div></div></section>
+<section class="slide" data-kind="grid" data-index="7"><div class="glass-card "><div class="accent"></div><h1>O alcance dos resultados</h1><p class="sub">Limitações da evidência</p><div class="grid"><div class="cell">As margens são exploratórias e ignoram o agrupamento por piscina.</div><div class="cell">A confiança foi construída como proxy informativa da qualidade latente.</div><div class="cell">Os lemas sobre reais não certificam integralmente Python nem IEEE-754.</div></div></div></section>
+<section class="slide" data-kind="grid" data-index="8"><div class="glass-card "><div class="accent"></div><h1>Continuidade da pesquisa</h1><p class="sub">Próximas perguntas científicas</p><div class="grid"><div class="cell">Certificação do cálculo em ponto flutuante.</div><div class="cell">Análise estatística com agrupamento.</div><div class="cell">Comparação externa e reprodução independente.</div><div class="cell">Conferência institucional da minuta antes da submissão.</div></div></div></section>
+<section class="slide" data-kind="grid" data-index="9"><div class="glass-card "><div class="accent"></div><h1>Fonte da apresentação</h1><p class="sub">Versão editorial e autoria</p><div class="grid"><div class="cell">Conteúdo editorial derivado de dissertacao-abnt.tex, versão revista de 10 de outubro de 2026.</div><div class="cell">Autor: Marcelo Claro Laranjeira.</div><div class="cell">Esta apresentação não é uma nova execução experimental.</div></div></div></section>
+<section class="slide" data-kind="closing" data-index="10"><div class="glass-card "><div class="accent"></div><h1>Obrigado</h1><p class="sub">Roteamento inspirado em atenção</p></div></section>
+</div>
+<div class="counter" id="counter"></div>
+<nav>
+  <button type="button" onclick="miraGo(-1)" aria-label="Anterior">‹ Anterior</button>
+  <button type="button" onclick="miraGo(1)" aria-label="Próximo">Próximo ›</button>
+</nav>
+<script>
+  var miraIdx = 0;
+  var miraSlides = document.querySelectorAll('.slide');
+  function miraShow(n) {
+    miraIdx = Math.max(0, Math.min(miraSlides.length - 1, n));
+    miraSlides.forEach(function(s, i) { s.classList.toggle('active', i === miraIdx); });
+    var c = document.getElementById('counter');
+    if (c) c.textContent = (miraIdx + 1) + ' / ' + miraSlides.length;
+  }
+  function miraGo(d) { miraShow(miraIdx + d); }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') miraGo(1);
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') miraGo(-1);
+    else if (e.key === 'Home') miraShow(0);
+    else if (e.key === 'End') miraShow(miraSlides.length - 1);
+  });
+  miraShow(0);
+</script>
+<div class="site-tools"><a href="../../index.html">← Voltar ao site</a><button id="deck-motion" aria-pressed="false">Pausar movimento</button></div>
+    <script>
+    const motionButton=document.getElementById('deck-motion');
+    function pauseDeck(value){document.body.classList.toggle('paused',value);motionButton.setAttribute('aria-pressed',String(value));motionButton.textContent=value?'Retomar movimento':'Pausar movimento'}
+    pauseDeck(matchMedia('(prefers-reduced-motion: reduce)').matches);
+    motionButton.addEventListener('click',()=>pauseDeck(!document.body.classList.contains('paused')));
+    document.querySelector('nav').setAttribute('aria-label','Navegação dos slides');
+    document.querySelectorAll('svg').forEach(svg=>{svg.setAttribute('role','img');svg.setAttribute('aria-label','Metáfora visual animada do conceito apresentado no título do slide')});
+    </script></body>
+</html>
