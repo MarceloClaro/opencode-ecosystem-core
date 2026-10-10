@@ -159,22 +159,34 @@
         1280,
         720
       ],
-      "conferidos": [
-        "Sem reprodução automática e preload none",
-        "Reprodução real: duração 1355,766712s, readyState4, tempo avançando",
-        "Pausa desliga ilustração",
-        "Seleção de velocidade 1,5× e silenciamento",
-        "Reflexão de pesos e explicação opcional"
+      "celular": [
+        390,
+        844
       ],
-      "pendentes": [
-        "Busca no servidor de publicação",
-        "Apresentação e teclado",
-        "Layout celular",
-        "Conferência final pública"
-      ]
+      "rolagem_horizontal": false,
+      "conferidos": [
+        "Sem reprodução automática, preload none e controles de busca desativados antes de metadados",
+        "Reprodução real no GitHub Pages: readyState4, duração1355,766712s, tempo avançando e seekable completo",
+        "Avançar15s mudou19,325757 para34,325756s; retornar15s; barra End chegou à duração",
+        "Velocidade1,5× e silenciamento",
+        "Animação acompanha playing; pausa global suspende animação durante reprodução",
+        "Três reflexões; explicação opcional; End muda reflexão sem mudar seção7/10",
+        "Teclado da posição não muda seção; mudar para8/10 pausa o áudio",
+        "Pergunta anterior mantém feedback e libera avanço; Escape retorna com foco em Apresentar",
+        "Layout celular sem rolagem horizontal; apresentação móvel mostra apenas a seção atual",
+        "Falha503 induzida somente no servidor de conferência: mensagem acessível, botão liberado e segunda tentativa reproduziu o áudio real"
+      ],
+      "console_avisos_erros_observados": []
     },
     "revisao_editorial": "Disponibilidade diferenciada da carga; uso condicional da tarefa ilustrativa; fontes públicas sem cookies, URLs assinadas ou recibos internos.",
     "evolucao_round_id": "R784",
-    "publicacao_destino": "https://marceloclaro.github.io/opencode-ecosystem-core/"
+    "publicacao_destino": "https://marceloclaro.github.io/opencode-ecosystem-core/",
+    "publicacao_http": {
+      "audio_sha256_confere": true,
+      "range_status": 206,
+      "trecho_bytes": 1024,
+      "trecho_confere": true
+    },
+    "revisao_estatica": "Controles nativos preservados sem JavaScript; eventos de erro de source/audio tratados; nova tentativa reinicia a mídia; movimento reduzido revisado."
   }
 }
