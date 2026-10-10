@@ -1,4 +1,4 @@
-"""Executa o MIRA pelo orquestrador e adapta o deck ao site R781."""
+"""Executa o MIRA pelo orquestrador e adapta o deck ao site R782."""
 from pathlib import Path
 import hashlib
 import json
@@ -20,6 +20,12 @@ def main():
     result["sha256_deck_original"] = hashlib.sha256(deck.read_bytes()).hexdigest()
     subtitles = {
         'Uma escolha explicável': 'O problema do roteamento',
+        'Uma equipe para entender': 'Analogia de programas especializados',
+        'Quatro perguntas, uma nota': 'Critérios definidos no modelo',
+        'Imagine cem fichas': 'Pesos da comparação, não probabilidades',
+        'Ana e Cid no exemplo': 'Números registrados no trabalho',
+        'Experimente e explique': 'Desafios e perguntas no site',
+        'Regras e testes': 'Fórmulas e situações simuladas',
         'Filtrar antes de comparar': 'Critérios de elegibilidade',
         'Quatro critérios se combinam': 'Combinação com pesos fixos',
         'Pesos que somam um': 'Normalização das utilidades',
