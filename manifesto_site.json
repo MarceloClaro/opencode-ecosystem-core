@@ -1,5 +1,5 @@
 {
-  "versao": 3,
+  "versao": 4,
   "data": "2026-10-10",
   "origem_cientifica_commit": "ea00de87b6b8e1e481ddcaaa9b6bc89ea0ebdb5b",
   "mira_task_id": "task-b3f4e5a1",
@@ -8,18 +8,23 @@
   "arquivos": [
     {
       "arquivo": "README.md",
-      "bytes": 5599,
-      "sha256": "e2408d7abb60b43e7a50affa7a496b03e6a95c7ad7f5309cd8a04651841b1620"
+      "bytes": 7415,
+      "sha256": "3702f037b933d9d10b95e7296eb3f1801687aed46dd00d201a97a8dafa519273"
     },
     {
       "arquivo": "app.mjs",
-      "bytes": 20652,
-      "sha256": "2ca0c1b6b18820373cd759f20d7c1cf46435f3fcbe2c6adc8f812b53c9472c4f"
+      "bytes": 26944,
+      "sha256": "294f0d7e451309cbf5824819e5cb79bef8cd79f2bfcdeca3b7d8d39ee0c0a8cc"
     },
     {
       "arquivo": "assets/favicon.svg",
       "bytes": 228,
       "sha256": "557bcbce8f339c6f75c08f88ef92c6b25c9efb4f68a5915bccae1e4b8a331227"
+    },
+    {
+      "arquivo": "assets/podcast-uma-escolha-explicavel.m4a",
+      "bytes": 43619097,
+      "sha256": "7c139eca8b2b330e155d861d7da3f0c4ea4bcf2f5c480a770bc360a96e819d68"
     },
     {
       "arquivo": "ecosystem.mjs",
@@ -28,8 +33,8 @@
     },
     {
       "arquivo": "index.html",
-      "bytes": 32683,
-      "sha256": "6a452108d233d5275dd6f81683cc906e4f4a348a6c87fa16355f840402c04df1"
+      "bytes": 39305,
+      "sha256": "59f5e1647e0b9ed1986cb51d0d426a3111006ae29ec4547bd48852bc2c4d93a2"
     },
     {
       "arquivo": "learning.mjs",
@@ -57,14 +62,34 @@
       "sha256": "99ec16ecb0e4ec1188af199a12ef9e155cd121f34879b7fc3ad86afc1fa4e69a"
     },
     {
+      "arquivo": "podcast/fonte-editorial.md",
+      "bytes": 4615,
+      "sha256": "7f3d36277d46784cc936689387818b74ffbbd7e80072d10a634d45682b9cecb4"
+    },
+    {
+      "arquivo": "podcast/guia-leitura.md",
+      "bytes": 2476,
+      "sha256": "204aa1347ad7e24ba3a0499d2d1673d80e9d84cebada6f83ec89e02dd65705bf"
+    },
+    {
+      "arquivo": "podcast/proveniencia.json",
+      "bytes": 1483,
+      "sha256": "23dd37ab7c66a51d594817a08635228831ae7397e40f99ed5d6d6d90013cdc65"
+    },
+    {
+      "arquivo": "podcast.mjs",
+      "bytes": 2797,
+      "sha256": "9e93f3e64b1e5b88b336d7e3fd9cfa6d200c499c2d27c034f2e9c865e197ab7d"
+    },
+    {
       "arquivo": "prepare_mira.py",
       "bytes": 5432,
       "sha256": "85b5ec7f235bdc2b72f7b21b18022d6b4cf61064183cfd862fb8fd1d0ffe400a"
     },
     {
       "arquivo": "qa.json",
-      "bytes": 5054,
-      "sha256": "5d866ff3588b4dbabb06bf822ae603289372d274ecd17eab6d065598edd15a77"
+      "bytes": 6472,
+      "sha256": "c0529b60a0e59bb77ddcd250aecd036ab9a5c14297f497d11de9e516602cb65d"
     },
     {
       "arquivo": "router.mjs",
@@ -73,10 +98,12 @@
     },
     {
       "arquivo": "styles.css",
-      "bytes": 42098,
-      "sha256": "9bdf6ffa954123c09cd88dfe56d21dd2afa17fa5c4fc62c1e59945053a0ee74f"
+      "bytes": 49157,
+      "sha256": "6e299e051a0f8102a3237a324105e6502d87b15e0fb9168b94cee9cc2cab4b34"
     }
   ],
   "revisao_didatica": "SPEC-935-R782",
-  "revisao_ecossistema": "SPEC-935-R783"
+  "revisao_ecossistema": "SPEC-935-R783",
+  "revisao": "R784",
+  "podcast_artefato_id": "2a844a9d-fee5-432f-a680-dcf9cd4a62d2"
 }

@@ -140,5 +140,41 @@
     "mira_task_id": "task-b3f4e5a1",
     "evolucao_round_id": "R783",
     "publicacao_destino": "https://marceloclaro.github.io/opencode-ecosystem-core/"
+  },
+  "revisao_r784": {
+    "data": "2026-10-10",
+    "escopo": "Player real e reflexões editoriais. Conferência funcional interna, sem novo experimento científico ou avaliação da eficácia de aprendizagem.",
+    "testes": {
+      "arquivos": [
+        "tests/test_r781_site_mira.py",
+        "tests/test_r782_aprendizagem_site.py",
+        "tests/test_r783_ecossistema_site.py",
+        "tests/test_r784_podcast_site.py"
+      ],
+      "red": "37 falhas antes do módulo de mídia.",
+      "green": "116 aprovados: 37 novos e 79 regressões."
+    },
+    "navegador": {
+      "desktop": [
+        1280,
+        720
+      ],
+      "conferidos": [
+        "Sem reprodução automática e preload none",
+        "Reprodução real: duração 1355,766712s, readyState4, tempo avançando",
+        "Pausa desliga ilustração",
+        "Seleção de velocidade 1,5× e silenciamento",
+        "Reflexão de pesos e explicação opcional"
+      ],
+      "pendentes": [
+        "Busca no servidor de publicação",
+        "Apresentação e teclado",
+        "Layout celular",
+        "Conferência final pública"
+      ]
+    },
+    "revisao_editorial": "Disponibilidade diferenciada da carga; uso condicional da tarefa ilustrativa; fontes públicas sem cookies, URLs assinadas ou recibos internos.",
+    "evolucao_round_id": "R784",
+    "publicacao_destino": "https://marceloclaro.github.io/opencode-ecosystem-core/"
   }
 }

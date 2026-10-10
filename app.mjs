@@ -1,6 +1,7 @@
 import { rankCandidates } from './router.mjs';
 import { MISSIONS, QUESTIONS, evaluateMission, gradeAnswer } from './learning.mjs';
 import { createTourState, transitionTour, getTourView } from './ecosystem.mjs';
+import { formatTime, seekPosition, progressPercent, REFLECTIONS } from './podcast.mjs?v=20261010-r784';
 
 const $ = (selector) => document.querySelector(selector);
 const format = (value, digits = 2) => value.toLocaleString('pt-BR', { minimumFractionDigits: digits, maximumFractionDigits: digits });
@@ -261,6 +262,115 @@ for (const selector of ['[data-eco-stage]', '[data-eco-scope]']) {
 }
 renderEcosystem();
 
+const audio = $('#podcast-audio');
+const player = $('#podcast-player');
+let playPending = false;
+function audioDuration() { return Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 0; }
+function updateAudioPosition() {
+  const duration = audioDuration();
+  const current = seekPosition(audio.currentTime, 0, duration);
+  $('#podcast-position').value = progressPercent(current, duration);
+  $('#podcast-position').setAttribute('aria-valuetext', `${formatTime(current)} de ${formatTime(Math.ceil(duration || 1355.766712))}`);
+  $('#podcast-position').disabled = !duration;
+  $('#podcast-back').disabled = !duration;
+  $('#podcast-forward').disabled = !duration;
+  $('#podcast-elapsed').textContent = formatTime(current);
+  $('#podcast-remaining').textContent = `${formatTime(Math.ceil((duration || 1355.766712) - current))} restantes`;
+}
+function updateAudioState() {
+  const active = !audio.paused && !audio.ended;
+  $('#podcast-play-label').textContent = playPending ? 'Carregando…' : active ? 'Pausar' : audio.ended ? 'Ouvir novamente' : 'Ouvir podcast';
+  $('#podcast-play-icon').textContent = active ? 'Ⅱ' : '▶';
+  $('#podcast-play').disabled = playPending;
+  if (!active) player.classList.remove('playing');
+}
+$('#podcast-play').addEventListener('click', async () => {
+  if (!audio.paused && !audio.ended) { audio.pause(); return; }
+  playPending = true; updateAudioState();
+  $('#podcast-status').textContent = 'Carregando o áudio…';
+  try {
+    if (audio.ended) audio.currentTime = 0;
+    await audio.play();
+  } catch (error) {
+    if (error.name !== 'AbortError') $('#podcast-status').textContent = 'Não foi possível reproduzir. Tente novamente ou use Baixar áudio.';
+  } finally { playPending = false; updateAudioState(); }
+});
+for (const [id, delta] of [['podcast-back', -15], ['podcast-forward', 15]]) {
+  $(`#${id}`).addEventListener('click', () => {
+    if (audioDuration()) { audio.currentTime = seekPosition(audio.currentTime, delta, audioDuration()); updateAudioPosition(); }
+  });
+}
+$('#podcast-position').addEventListener('input', (event) => {
+  if (audioDuration()) { audio.currentTime = seekPosition(0, Number(event.target.value) / 100 * audioDuration(), audioDuration()); updateAudioPosition(); }
+});
+$('#podcast-speed').addEventListener('change', (event) => {
+  audio.playbackRate = Number(event.target.value);
+  $('#podcast-status').textContent = `Velocidade: ${event.target.selectedOptions[0].textContent}.`;
+});
+$('#podcast-mute').addEventListener('click', () => { audio.muted = !audio.muted; });
+audio.addEventListener('volumechange', () => {
+  $('#podcast-mute').setAttribute('aria-pressed', String(audio.muted));
+  $('#podcast-mute').textContent = audio.muted ? 'Ativar som' : 'Silenciar';
+});
+for (const name of ['loadedmetadata', 'durationchange', 'timeupdate', 'seeked']) audio.addEventListener(name, updateAudioPosition);
+audio.addEventListener('playing', () => {
+  playPending = false; player.classList.add('playing'); updateAudioState();
+  $('#podcast-status').textContent = 'Reproduzindo. Pause para refletir ou continue ouvindo.';
+});
+audio.addEventListener('pause', () => {
+  playPending = false; updateAudioState();
+  if (!audio.ended) $('#podcast-status').textContent = 'Pausado. Retome quando quiser.';
+});
+audio.addEventListener('ended', () => {
+  player.classList.remove('playing'); updateAudioState(); updateAudioPosition();
+  $('#podcast-status').textContent = 'Conversa concluída. Retome uma ideia ou confira seu entendimento.';
+});
+for (const name of ['waiting', 'seeking']) audio.addEventListener(name, () => {
+  player.classList.remove('playing');
+  if (!audio.paused) $('#podcast-status').textContent = 'Carregando este trecho…';
+});
+audio.addEventListener('error', () => {
+  playPending = false; player.classList.remove('playing'); updateAudioState();
+  $('#podcast-status').textContent = 'O áudio não está disponível neste momento. Tente novamente ou use Baixar áudio.';
+});
+// Só substituir os controles nativos após instalar todos os eventos.
+$('#podcast-controls').hidden = false;
+audio.controls = false;
+audio.hidden = true;
+updateAudioPosition(); updateAudioState();
+let reflectionIndex = 0;
+function showReflection(index) {
+  reflectionIndex = index;
+  const idea = REFLECTIONS[index];
+  $('#podcast-reflection-count').textContent = `IDEIA ${index + 1} DE ${REFLECTIONS.length}`;
+  $('#podcast-reflection-question').textContent = idea.prompt;
+  $('#podcast-answer').textContent = idea.answer;
+  $('#podcast-answer').hidden = true;
+  $('#podcast-answer-toggle').setAttribute('aria-expanded', 'false');
+  $('#podcast-answer-toggle').textContent = 'Mostrar explicação +';
+  $('#podcast-reflection-link').href = idea.href;
+  $('#podcast-reflection-link').textContent = `${idea.linkLabel} →`;
+  document.querySelectorAll('[data-reflection]').forEach((button) => button.setAttribute('aria-pressed', String(Number(button.dataset.reflection) === index)));
+}
+const reflectionButtons = [...document.querySelectorAll('[data-reflection]')];
+reflectionButtons.forEach((button, index) => {
+  button.addEventListener('click', () => showReflection(index));
+  button.addEventListener('keydown', (event) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key) || event.altKey || event.ctrlKey || event.metaKey) return;
+    event.preventDefault(); event.stopPropagation();
+    const target = event.key === 'Home' ? 0 : event.key === 'End' ? reflectionButtons.length - 1 : Math.max(0, Math.min(reflectionButtons.length - 1, index + (event.key === 'ArrowRight' ? 1 : -1)));
+    reflectionButtons[target].focus(); reflectionButtons[target].click();
+  });
+});
+$('#podcast-answer-toggle').addEventListener('click', () => {
+  const open = $('#podcast-answer').hidden;
+  $('#podcast-answer').hidden = !open;
+  $('#podcast-answer-toggle').setAttribute('aria-expanded', String(open));
+  $('#podcast-answer-toggle').textContent = open ? 'Ocultar explicação −' : 'Mostrar explicação +';
+});
+$('#podcast-reflection-ui').hidden = false;
+showReflection(reflectionIndex);
+
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let paused = reducedMotion.matches;
 function updateMotion() {
@@ -279,6 +389,7 @@ let currentSlide = 0;
 let previousScroll = 0;
 function showSlide(index, focus = true) {
   currentSlide = Math.max(0, Math.min(slides.length - 1, index));
+  if (slides[currentSlide].id !== 'podcast' && !audio.paused) audio.pause();
   slides.forEach((slide, i) => slide.classList.toggle('current-slide', i === currentSlide));
   $('#slide-count').textContent = `${currentSlide + 1} / ${slides.length}`;
   $('#slide-title').textContent = slides[currentSlide].dataset.title;
@@ -313,7 +424,7 @@ $('#slide-next').addEventListener('click', () => showSlide(currentSlide + 1));
 document.addEventListener('keydown', (event) => {
   if (!presenting) return;
   if (event.key === 'Escape') { event.preventDefault(); closePresentation(); return; }
-  if (event.target.closest('input,textarea,select,summary') || event.altKey || event.ctrlKey || event.metaKey) return;
+  if (event.target.closest('input,textarea,select,summary,#podcast-player,#podcast-reflection-ui') || event.altKey || event.ctrlKey || event.metaKey) return;
   if (event.key === 'ArrowRight' || event.key === 'PageDown') { event.preventDefault(); showSlide(currentSlide + 1); }
   if (event.key === 'ArrowLeft' || event.key === 'PageUp') { event.preventDefault(); showSlide(currentSlide - 1); }
   if (event.key === 'Home') { event.preventDefault(); showSlide(0); }
