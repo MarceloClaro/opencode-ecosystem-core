@@ -1,20 +1,20 @@
 {
-  "versao": 1,
+  "versao": 2,
   "data": "2026-10-10",
   "origem_cientifica_commit": "ea00de87b6b8e1e481ddcaaa9b6bc89ea0ebdb5b",
-  "mira_task_id": "task-aae73499",
+  "mira_task_id": "task-601b4d9a",
   "algoritmo": "SHA-256",
   "escopo": "Fontes e artefatos do site; este manifesto exclui a si proprio. O gerador Python reside na branch main e nao e necessario para a interface publica.",
   "arquivos": [
     {
       "arquivo": "README.md",
-      "bytes": 4166,
-      "sha256": "6b626afb84aa259562e0689c21e109ac867edeb795c91042c0e1ae3e95106f73"
+      "bytes": 4926,
+      "sha256": "246703f918f1667a43a55b70c58dfa12ee2c545778f8b5668c73810c391e480b"
     },
     {
       "arquivo": "app.mjs",
-      "bytes": 8762,
-      "sha256": "85cacec79026094b626cec99f62bcc0440e3c81e58b6a4ddb612cc47d6b060d8"
+      "bytes": 17581,
+      "sha256": "98b30bc7d4747e01c53b86a98c1fa32974742d44dbc58c521ee951f58e09725b"
     },
     {
       "arquivo": "assets/favicon.svg",
@@ -23,38 +23,43 @@
     },
     {
       "arquivo": "index.html",
-      "bytes": 19213,
-      "sha256": "e2c69d54eb5e79a60d2e4e4a01f497ab45326f595674d4f8a5a2183722887248"
+      "bytes": 27316,
+      "sha256": "5aadea709620c97c76afe8cc83fe87ab6906d9d7806f36c02a38054ea13f71e2"
+    },
+    {
+      "arquivo": "learning.mjs",
+      "bytes": 6612,
+      "sha256": "ec008defb33db265554bf0ce4086ccd1afdca7e5bf56c8f75f4e4e87d6436450"
     },
     {
       "arquivo": "mira/apresentacao/CONFORMIDADE.md",
-      "bytes": 1365,
-      "sha256": "679807aa86dc79efa3b2263a7aee1e4fcf340292ef2f1ec2beca45f02dc83b78"
+      "bytes": 1511,
+      "sha256": "8686777620941a416a0394ebeb1c120b1307a13ae483488c01540b716a9f99b0"
     },
     {
       "arquivo": "mira/apresentacao/deck.html",
-      "bytes": 11727,
-      "sha256": "7d8d69a1b1eefd0f8df2715ee88d4aca870c99fafcacfd902197f6abf2984818"
+      "bytes": 13811,
+      "sha256": "0cb8764227a19ca6068b4931de32c50d017adf2a4ffce8c09dbdcdf14e8f5bfe"
     },
     {
       "arquivo": "mira/execucao.json",
       "bytes": 555,
-      "sha256": "12e6f50cea7841d24aa4fa96a8fcc6ae8e9299274c797a3be74a510da6517b0c"
+      "sha256": "e68b0bea34798ac3bd2f1281dd1a94d0a540cf85918eab058b74a06ddd1dbcce"
     },
     {
       "arquivo": "mira/manuscrito.md",
-      "bytes": 2205,
-      "sha256": "c9444209f18f5e088f5d14bc5ee274be46494eb6e85c04045845073ad845f1e9"
+      "bytes": 3082,
+      "sha256": "e01f1fd1c5a9771ddc97288cefe9a5df0f3ea3a46455a98432117e51544c23c1"
     },
     {
       "arquivo": "prepare_mira.py",
-      "bytes": 4703,
-      "sha256": "bc8630f7276721daa0318392414a03a1bcd2628ab9ee5402540da354c6b23fe9"
+      "bytes": 5125,
+      "sha256": "11bdb4ac49fdfcbcaa168948b5a16b1e5d295d4ed603b9d204009353579f637d"
     },
     {
       "arquivo": "qa.json",
-      "bytes": 1464,
-      "sha256": "bffe979c3a1453c1f5610d94bed3c71f2eb36b8c35c278e521b80f65da203216"
+      "bytes": 3226,
+      "sha256": "516db82daff2a12d1cf6154841e45a31c15cd0bd676f6d9a0f9ab1ec13abc6ac"
     },
     {
       "arquivo": "router.mjs",
@@ -63,8 +68,9 @@
     },
     {
       "arquivo": "styles.css",
-      "bytes": 24545,
-      "sha256": "985cc9b645a9870670f847a95a7980b23a43a58eb8319e0745c679f7d3eced5a"
+      "bytes": 34619,
+      "sha256": "f1fe3986d813bc8cd09d65b8b1fadf7a870f32f646733787ae3831b75d796e9a"
     }
-  ]
+  ],
+  "revisao_didatica": "SPEC-935-R782"
 }

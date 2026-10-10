@@ -2,48 +2,56 @@
 
 ## Uma escolha explicável
 
-Entre agentes diferentes, uma tarefa precisa encontrar candidatos capazes e disponíveis. O trabalho estuda uma heurística auditável, com critérios e pesos fixos. Não houve aprendizagem desses pesos.
+Um agente é um programa especializado. Roteamento é encaminhar um pedido a um desses programas. Quando vários podem ajudar, como escolher? O estudo combina critérios definidos previamente; seus pesos não foram aprendidos.
+
+## Uma equipe para entender
+
+Imagine um pedido de pesquisa e resumo. Ana e Cid têm as capacidades e estão disponíveis. Bia é uma personagem didática indisponível para novas tarefas. Os nomes ilustram programas; nenhum deles é executado nesta apresentação.
 
 ## Filtrar antes de comparar
 
-- A disponibilidade é obrigatória.
-- Todas as capacidades requeridas devem estar presentes.
+- Só participa quem está disponível e tem todas as capacidades exigidas.
 - Identificadores inválidos e duplicados ficam fora.
-- Um candidato excluído não participa da normalização.
+- Muita carga reduz a nota, mas não exclui por si só.
+- Indisponibilidade exclui antes de comparar.
 
-## Quatro critérios se combinam
+## Quatro perguntas, uma nota
 
-O pipeline combina semântica, cobertura, confiança e carga livre. Os coeficientes são fixos: 0,30; 0,35; 0,25; 0,10. Entre os candidatos elegíveis, a cobertura é sempre completa.
+Quanto combina com o pedido? Tem as capacidades? Qual a nota de confiança? Quanto está livre? Os coeficientes são fixos: 0,30; 0,35; 0,25; 0,10. Entre participantes aptos, a cobertura é completa.
 
-## Pesos que somam um
+## Imagine cem fichas
 
-O softmax transforma utilidades em pesos normalizados. A subtração do maior escore evita exponenciais positivas grandes. Normalização não é calibração probabilística.
+O softmax transforma as notas em pesos que somam 1. Imagine repartir 100 fichas: cerca de 53 para Ana e 47 para Cid. Fichas são parcelas da comparação, não chances de sucesso nem partes da tarefa. A tarefa seria encaminhada apenas ao primeiro colocado.
 
-## Ana e Cid
+## Ana e Cid no exemplo
 
-- Ana: semântica 0,8417; confiança 0,9; carga livre 0,9.
-- Cid: semântica 0,7703; confiança 0,7; carga livre 0,6.
-- Utilidades: aproximadamente 0,9175 e 0,8161.
+- Ana: combinação com o pedido 0,8417; confiança 0,9; carga livre 0,9.
+- Cid: combinação com o pedido 0,7703; confiança 0,7; carga livre 0,6.
+- Notas combinadas: aproximadamente 0,9175 e 0,8161.
 - Pesos: aproximadamente 0,5253 e 0,4747.
 
-## Evidência em dois planos
+## Experimente e explique
 
-- Onze propriedades documentadas em Lean 4 sobre aritmética real exata.
-- Bancada interna sintética: 200 decisões em cinco piscinas.
-- Arrependimento médio do roteamento: 0,0421.
+O site propõe três desafios: fazer Cid ficar em primeiro mantendo Ana disponível; deixar só Cid disponível; e observar a ausência de escolha quando ninguém pode atender. Perguntas com feedback retomam disponibilidade, significado dos pesos e alcance das provas.
+
+## Regras e testes
+
+- Onze propriedades documentadas em Lean 4 sobre números reais exatos.
+- Teste interno com 200 decisões simuladas em cinco grupos de candidatos.
+- Distância média da melhor nota de referência: 0,0421.
 - Comparadores simples: aleatório 0,1882; menor carga 0,2167; maior cobertura 0,2118.
 
 ## O alcance dos resultados
 
-As margens são exploratórias e ignoram o agrupamento por piscina. A confiança foi construída como proxy informativa da qualidade latente. Os lemas sobre reais não certificam integralmente Python nem IEEE-754. A revisão editorial não reexecutou a bateria científica.
+As margens são exploratórias e ignoram o agrupamento por grupo de candidatos. A confiança foi criada pelo simulador como sinal da qualidade atribuída aos candidatos. As provas matemáticas não certificam toda execução do programa ou dos agentes. A revisão editorial não repetiu os experimentos científicos.
 
 ## Continuidade da pesquisa
 
-- Certificação do cálculo em ponto flutuante.
-- Análise estatística com agrupamento.
-- Comparação externa e reprodução independente.
-- Conferência institucional da minuta antes da submissão.
+- Estudar o arredondamento do cálculo no computador.
+- Analisar decisões considerando seu agrupamento.
+- Comparar com dados externos e reprodução independente.
+- Conferir a minuta com o modelo institucional antes da submissão.
 
 ## Fonte da apresentação
 
-Conteúdo editorial derivado de dissertacao-abnt.tex, versão revista de 10 de outubro de 2026. Autor: Marcelo Claro Laranjeira. Esta apresentação não é uma nova execução experimental.
+Conteúdo editorial derivado de dissertacao-abnt.tex, versão revista de 10 de outubro de 2026. Autor: Marcelo Claro Laranjeira. As interações são didáticas; não constituem novos experimentos nem avaliação de aprendizagem.

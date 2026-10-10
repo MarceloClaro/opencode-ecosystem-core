@@ -5,17 +5,98 @@
     "arquivo": "tests/test_r781_site_mira.py",
     "red": "20 falhas antes da implementacao do modulo",
     "green": "20 aprovados",
-    "casos": ["exemplo Ana/Cid", "mascara de elegibilidade", "IDs duplicados", "IDs invalidos", "conjunto vazio", "candidato unico", "empate lexical", "soma dos pesos", "softmax estavel", "numeros nao finitos e clamp"]
+    "casos": [
+      "exemplo Ana/Cid",
+      "mascara de elegibilidade",
+      "IDs duplicados",
+      "IDs invalidos",
+      "conjunto vazio",
+      "candidato unico",
+      "empate lexical",
+      "soma dos pesos",
+      "softmax estavel",
+      "numeros nao finitos e clamp"
+    ]
   },
   "navegador": {
     "preview": "http://localhost:8765",
-    "desktop": {"largura": 1440, "altura": 1000, "rolagem_horizontal": false},
-    "celular": {"largura": 390, "altura": 844, "rolagem_horizontal": false},
-    "interacoes_conferidas": ["Ana inicial com 52,53%", "carga altera utilidade e pesos", "confianca zero altera escolha para Cid", "Ana indisponivel deixa Cid com peso 1", "sem candidatos retorna nenhuma escolha e soma zero", "incluir Bia resulta em 3 elegiveis e soma 1", "modo de apresentacao", "navegacao por botao e seta direita", "Escape retorna ao site", "pausa altera animation-play-state para paused", "expansao dos detalhes do calculo"],
+    "desktop": {
+      "largura": 1440,
+      "altura": 1000,
+      "rolagem_horizontal": false
+    },
+    "celular": {
+      "largura": 390,
+      "altura": 844,
+      "rolagem_horizontal": false
+    },
+    "interacoes_conferidas": [
+      "Ana inicial com 52,53%",
+      "carga altera utilidade e pesos",
+      "confianca zero altera escolha para Cid",
+      "Ana indisponivel deixa Cid com peso 1",
+      "sem candidatos retorna nenhuma escolha e soma zero",
+      "incluir Bia resulta em 3 elegiveis e soma 1",
+      "modo de apresentacao",
+      "navegacao por botao e seta direita",
+      "Escape retorna ao site",
+      "pausa altera animation-play-state para paused",
+      "expansao dos detalhes do calculo"
+    ],
     "avisos_ou_erros_console_observados": []
   },
   "editorial": {
     "comparacao_com_fonte": true,
-    "correcoes": ["definicao de arrependimento como diferenca de utilidade do oraculo", "subtitulos especificos no deck", "Bia identificada como candidata didatica indisponivel"]
+    "correcoes": [
+      "definicao de arrependimento como diferenca de utilidade do oraculo",
+      "subtitulos especificos no deck",
+      "Bia identificada como candidata didatica indisponivel"
+    ]
+  },
+  "revisao_r782": {
+    "data": "2026-10-10",
+    "escopo": "Conferência interna da interface didática. Sem novo experimento científico ou medição de aprendizagem.",
+    "testes": {
+      "arquivos": [
+        "tests/test_r781_site_mira.py",
+        "tests/test_r782_aprendizagem_site.py"
+      ],
+      "red": "28 falhas antes da implementação; duas falhas adicionais no ajuste de indisponibilidade/carga.",
+      "green": "49 aprovados: 20 do roteador e 29 das atividades."
+    },
+    "navegador": {
+      "desktop": [
+        [
+          1440,
+          1000
+        ],
+        [
+          1280,
+          720
+        ]
+      ],
+      "celular": [
+        390,
+        844
+      ],
+      "rolagem_horizontal": false,
+      "conferidos": [
+        "Quatro etapas e atualização dos cartões/fichas",
+        "Pista opcional",
+        "Três desafios concluídos a partir do resultado real",
+        "Reinício dos desafios e progresso zero",
+        "Feedback incorreto impede avanço; nova tentativa correta libera avanço",
+        "Três perguntas, conclusão e reinício",
+        "Sliders por teclado alteram valores sem mudar o slide",
+        "Novas seções incluídas na apresentação de oito seções",
+        "Escape retorna ao site",
+        "Pausa da animação",
+        "Deck MIRA atualizado e navegável"
+      ],
+      "console_avisos_erros_observados": []
+    },
+    "mira_task_id": "task-601b4d9a",
+    "evolucao_round_id": "R782",
+    "publicacao_destino": "https://marceloclaro.github.io/opencode-ecosystem-core/"
   }
 }
