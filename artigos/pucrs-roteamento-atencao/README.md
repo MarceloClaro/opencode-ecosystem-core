@@ -8,6 +8,7 @@ Esta pasta disponibiliza a dissertação revista, com 97 páginas, e sua fonte L
 
 ## Documentos
 
+- [Site interativo da pesquisa](https://marceloclaro.github.io/opencode-ecosystem-core/) e [código do site MIRA](site/).
 - [Dissertação em PDF](output/pdf/dissertacao-abnt.pdf).
 - [Fonte LaTeX consolidada](dissertacao-abnt.tex).
 - [Relatório da revisão e pendências](revisao-abnt/relatorio_revisao_abnt.md).

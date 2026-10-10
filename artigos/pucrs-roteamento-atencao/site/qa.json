@@ -1,0 +1,21 @@
+{
+  "data": "2026-10-10",
+  "escopo": "Verificacao interna da interface e do calculo didatico; sem reexecucao da bateria cientifica.",
+  "testes_funcionais": {
+    "arquivo": "tests/test_r781_site_mira.py",
+    "red": "20 falhas antes da implementacao do modulo",
+    "green": "20 aprovados",
+    "casos": ["exemplo Ana/Cid", "mascara de elegibilidade", "IDs duplicados", "IDs invalidos", "conjunto vazio", "candidato unico", "empate lexical", "soma dos pesos", "softmax estavel", "numeros nao finitos e clamp"]
+  },
+  "navegador": {
+    "preview": "http://localhost:8765",
+    "desktop": {"largura": 1440, "altura": 1000, "rolagem_horizontal": false},
+    "celular": {"largura": 390, "altura": 844, "rolagem_horizontal": false},
+    "interacoes_conferidas": ["Ana inicial com 52,53%", "carga altera utilidade e pesos", "confianca zero altera escolha para Cid", "Ana indisponivel deixa Cid com peso 1", "sem candidatos retorna nenhuma escolha e soma zero", "incluir Bia resulta em 3 elegiveis e soma 1", "modo de apresentacao", "navegacao por botao e seta direita", "Escape retorna ao site", "pausa altera animation-play-state para paused", "expansao dos detalhes do calculo"],
+    "avisos_ou_erros_console_observados": []
+  },
+  "editorial": {
+    "comparacao_com_fonte": true,
+    "correcoes": ["definicao de arrependimento como diferenca de utilidade do oraculo", "subtitulos especificos no deck", "Bia identificada como candidata didatica indisponivel"]
+  }
+}
