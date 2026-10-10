@@ -32,7 +32,7 @@ No diretório raiz:
 
 ```bash
 python3 -m http.server 8765 --directory artigos/pucrs-roteamento-atencao/site
-python3 -m pytest -q tests/test_r781_site_mira.py tests/test_r782_aprendizagem_site.py tests/test_r783_ecossistema_site.py
+python3 -m pytest -q tests/test_r781_site_mira.py tests/test_r782_aprendizagem_site.py tests/test_r783_ecossistema_site.py tests/test_r784_podcast_site.py
 ```
 
 Abra `http://localhost:8765`. Não é necessário instalar bibliotecas de interface nem executar uma compilação. O cálculo está em `router.mjs`, e as regras das atividades em `learning.mjs`; o Node.js é necessário apenas para os testes funcionais.
@@ -57,8 +57,20 @@ Os resultados são históricos, internos e sintéticos. O laboratório não exec
 
 O código do site reside na branch `main`. Os arquivos estáticos são publicados na branch `codex/gh-pages`, com `.nojekyll`; o GitHub Pages aponta para a raiz dessa branch. Esse fluxo utiliza a [API oficial de GitHub Pages](https://docs.github.com/en/rest/pages/pages). A publicação deve conservar outras pastas e configurações caso uma hospedagem prévia seja encontrada.
 
-As especificações são `SPEC-935-R781`, `SPEC-935-R782` e `SPEC-935-R783`; os testes exercitam comportamento do cálculo e casos-limite. A conferência de interface é registrada em `qa.json`. A aprovação do inspetor MIRA e os testes locais não representam validação científica externa.
+As especificações são `SPEC-935-R781`, `SPEC-935-R782` `SPEC-935-R783` e `SPEC-935-R784`; os testes exercitam comportamento do cálculo e casos-limite. A conferência de interface é registrada em `qa.json`. A aprovação do inspetor MIRA e os testes locais não representam validação científica externa.
 
 A revisão didática preserva os números e a fonte científica. Carga alta e indisponibilidade têm comportamentos diferentes; os pesos não são chances de sucesso nem frações da tarefa. A eficácia educacional desta interface ainda não foi medida.
 
 A seção do ecossistema usa `ecosystem.mjs` para o percurso ilustrativo, sem acionar executores. Seu conteúdo deriva de `ARCHITECTURE.md`, `MANUAL.md` e do escopo da dissertação. O MIRA é mostrado como recurso de comunicação, podendo receber encaminhamento direto do coordenador. Nem todo fluxo utiliza o roteador estudado.
+
+## Podcast integrado
+
+A seção **Ouça** usa o áudio real gerado pelo NotebookLM via `MarceloClaroOrchestrator.gemini_notebook_action`, com base na dissertação e em `podcast/fonte-editorial.md`. A duração efetiva é 1355,766712 segundos (22 min 36 s). O arquivo final M4A foi remultiplexado por cópia do fluxo AAC, sem recodificação, para indexar duração e navegação. `podcast/proveniencia.json` contém somente parâmetros, fontes, identificadores e hashes públicos. Recibos internos e credenciais não integram o site.
+
+O áudio começa apenas por ação da pessoa. O player oferece reprodução/pausa, busca, ±15 segundos, velocidade e silenciamento. O elemento nativo permanece disponível quando JavaScript não é executado; o download é uma alternativa independente. A animação decorativa acompanha o estado real de reprodução, sem representar análise da onda sonora, e respeita a pausa global e movimento reduzido.
+
+As três reflexões podem ser exploradas a qualquer momento e levam às atividades existentes. O guia é um resumo editorial das fontes, não uma transcrição literal ou uma lista de capítulos sincronizados. O áudio é divulgação gerada por IA, não um novo resultado científico. Não foi medida a eficácia educacional dessas atividades.
+
+No modo de apresentação, controles do player e da reflexão mantêm seus próprios atalhos. Mudar para outra seção pausa o áudio para evitar reprodução oculta. A apresentação principal passa a ter dez seções; o deck MIRA complementar foi preservado.
+
+Para testar navegação de mídia na prévia, use um servidor HTTP que implemente `Range`/resposta `206`. O servidor simples de Python basta para o texto e reprodução inicial, mas pode limitar a busca no áudio.
