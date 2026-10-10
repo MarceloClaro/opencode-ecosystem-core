@@ -1,6 +1,6 @@
 # SPEC-935-R784 — Podcast integrado à apresentação da pesquisa
 
-Status: em implementação
+Status: implementada, com conferência funcional interna
 Data: 2026-10-10
 
 ## Objetivo
@@ -25,4 +25,4 @@ O podcast é divulgação gerada por IA com base nas fontes anexadas. Não const
 site/podcast.mjs exporta formatTime(seconds), seekPosition(current, delta, duration), progressPercent(current, duration), REFLECTIONS. Tempos inválidos retornam 0/00:00; valores negativos saturam em zero; busca satura na duração válida. REFLECTIONS contém três objetos com id, title, prompt, answer, href, linkLabel (strings) e destinos #ecossistema, #laboratorio e #evidencias.
 
 ## Evidência
-Pendente de execução nesta revisão.
+TDD:37 falhas antes do módulo e116 testes aprovados (37 novos +79 regressões). Reprodução, busca, velocidade, silenciamento, reflexões, pausa de movimento, teclado e apresentação conferidos no navegador. Layout390×844 sem transbordamento horizontal e apenas a seção atual visível na apresentação. Falha503 induzida no servidor de prévia confirmou feedback e recuperação por nova tentativa. Áudio público completo com hash correto e respostaHTTP206 com trecho correspondente. Detalhes em site/qa.json e manifesto_site.json. Sem validação científica externa.

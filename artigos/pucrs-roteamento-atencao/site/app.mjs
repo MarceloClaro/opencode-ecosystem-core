@@ -1,7 +1,7 @@
 import { rankCandidates } from './router.mjs';
 import { MISSIONS, QUESTIONS, evaluateMission, gradeAnswer } from './learning.mjs';
 import { createTourState, transitionTour, getTourView } from './ecosystem.mjs';
-import { formatTime, seekPosition, progressPercent, REFLECTIONS } from './podcast.mjs?v=20261010-r784';
+import { formatTime, seekPosition, progressPercent, REFLECTIONS } from './podcast.mjs?v=20261010-r784b';
 
 const $ = (selector) => document.querySelector(selector);
 const format = (value, digits = 2) => value.toLocaleString('pt-BR', { minimumFractionDigits: digits, maximumFractionDigits: digits });
@@ -265,6 +265,8 @@ renderEcosystem();
 const audio = $('#podcast-audio');
 const player = $('#podcast-player');
 let playPending = false;
+let audioFailed = false;
+let playAttempt = 0;
 function audioDuration() { return Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 0; }
 function updateAudioPosition() {
   const duration = audioDuration();
@@ -278,22 +280,24 @@ function updateAudioPosition() {
   $('#podcast-remaining').textContent = `${formatTime(Math.ceil((duration || 1355.766712) - current))} restantes`;
 }
 function updateAudioState() {
-  const active = !audio.paused && !audio.ended;
+  const active = !audioFailed && !audio.paused && !audio.ended;
   $('#podcast-play-label').textContent = playPending ? 'Carregando…' : active ? 'Pausar' : audio.ended ? 'Ouvir novamente' : 'Ouvir podcast';
   $('#podcast-play-icon').textContent = active ? 'Ⅱ' : '▶';
   $('#podcast-play').disabled = playPending;
   if (!active) player.classList.remove('playing');
 }
 $('#podcast-play').addEventListener('click', async () => {
-  if (!audio.paused && !audio.ended) { audio.pause(); return; }
+  if (!audioFailed && !audio.paused && !audio.ended) { audio.pause(); return; }
+  const attempt = ++playAttempt;
   playPending = true; updateAudioState();
   $('#podcast-status').textContent = 'Carregando o áudio…';
   try {
+    if (audioFailed || audio.error) { audioFailed = false; audio.load(); }
     if (audio.ended) audio.currentTime = 0;
     await audio.play();
   } catch (error) {
-    if (error.name !== 'AbortError') $('#podcast-status').textContent = 'Não foi possível reproduzir. Tente novamente ou use Baixar áudio.';
-  } finally { playPending = false; updateAudioState(); }
+    if (attempt === playAttempt && error.name !== 'AbortError') reportAudioError();
+  } finally { if (attempt === playAttempt) { playPending = false; updateAudioState(); } }
 });
 for (const [id, delta] of [['podcast-back', -15], ['podcast-forward', 15]]) {
   $(`#${id}`).addEventListener('click', () => {
@@ -319,7 +323,7 @@ audio.addEventListener('playing', () => {
 });
 audio.addEventListener('pause', () => {
   playPending = false; updateAudioState();
-  if (!audio.ended) $('#podcast-status').textContent = 'Pausado. Retome quando quiser.';
+  if (!audio.ended && !audioFailed) $('#podcast-status').textContent = 'Pausado. Retome quando quiser.';
 });
 audio.addEventListener('ended', () => {
   player.classList.remove('playing'); updateAudioState(); updateAudioPosition();
@@ -329,10 +333,15 @@ for (const name of ['waiting', 'seeking']) audio.addEventListener(name, () => {
   player.classList.remove('playing');
   if (!audio.paused) $('#podcast-status').textContent = 'Carregando este trecho…';
 });
-audio.addEventListener('error', () => {
-  playPending = false; player.classList.remove('playing'); updateAudioState();
+function reportAudioError() {
+  audioFailed = true; playPending = false;
+  audio.pause();
+  player.classList.remove('playing'); updateAudioState();
   $('#podcast-status').textContent = 'O áudio não está disponível neste momento. Tente novamente ou use Baixar áudio.';
-});
+}
+audio.addEventListener('error', reportAudioError);
+// Falhas de <source> não propagam o evento de erro ao elemento <audio>.
+audio.querySelector('source')?.addEventListener('error', reportAudioError);
 // Só substituir os controles nativos após instalar todos os eventos.
 $('#podcast-controls').hidden = false;
 audio.controls = false;
