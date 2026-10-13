@@ -6,13 +6,15 @@
 
 # 🧠 OpenCode Ecosystem Core
 
-### Ecossistema de Orquestração Multi‑Agente para Pesquisa Científica, Automação e Metacognição
+### Agentes, memória, engenharia reversa e pesquisa com contratos de evidência
 
-Rede de memória no terminal: `python -m webapp.memory_network_visualizer`.
-A mesma projeção está na aba **Rede de memória** do painel Streamlit;
-[uso e limites da visualização](docs/REDE_MEMORIA_CORE.md).
+Coordenação pelo primário **marceloclaro**, via Blackboard e MetaBus, com
+especificações, gates de entrega e rastreabilidade local.
 
-**Transformando dados em conhecimento, e conhecimento em ferramentas para a educação e a ciência aberta.**
+[Primeiros passos](#início-rápido-local) ·
+[Arquitetura completa R879](#arquitetura-completa-e-fluxogramas-atuais) ·
+[Assistente REA](#engenharia-reversa-local-rea) ·
+[Prontidão e evidências](docs/PRONTIDAO_LOCAL_CORE_R868.md)
 
 [![GitHub Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=for-the-badge&logo=github&logoColor=white&color=181717)](https://github.com/MarceloClaro/opencode-ecosystem-core)
 [![License MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
@@ -28,8 +30,10 @@ Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrut
 Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
 <!-- core-state:end -->
 
-Registro histórico R596: **157 auto‑registrados no Blackboard** naquela revisão.
-A contagem desse registro não representa o catálogo corrente.
+A revisão publicada nesta etapa está na branch
+[`codex/core-prontidao-rea`](https://github.com/MarceloClaro/opencode-ecosystem-core/tree/codex/core-prontidao-rea).
+As contagens acima descrevem configuração; o estado de cada executor depende
+do ambiente e da operação solicitada.
 
 ---
 
@@ -42,6 +46,9 @@ A contagem desse registro não representa o catálogo corrente.
 - [Início rápido local](#início-rápido-local)
 - [Instalação segura e procedência](#instalação-segura-e-procedência)
 - [Uso básico](#uso-básico)
+- [Engenharia reversa local REA](#engenharia-reversa-local-rea)
+- [Memória no terminal e painel](#memória-no-terminal-e-painel)
+- [Arquitetura completa e fluxogramas atuais](#arquitetura-completa-e-fluxogramas-atuais)
 - [Arquitetura resumida](#arquitetura-resumida)
   - [Mapa da Arquitetura Completa (v3.9.0)](#mapa-da-arquitetura-completa-v390)
   - [Diagrama Operacional Atual](#diagrama-operacional-atual)
@@ -55,79 +62,93 @@ A contagem desse registro não representa o catálogo corrente.
 
 ## Visão geral
 
-O **OpenCode Ecosystem Core** é um ecossistema de orquestração multi‑agente onde o orquestrador primário `marceloclaro` coordena o catálogo configurado via **Blackboard (protocolo A2A)** com **memória metacognitiva compartilhada (MetaBus)**, **gates SDD/TDD estritos**, **economia de tokens** (stake/slashing · Trust Engine) e os **servidores MCP configurados**. O inventário corrente acima é derivado das fontes locais.
+O **OpenCode Ecosystem Core** reúne interfaces CLI, OpenCode, MCP e Streamlit
+para coordenação de agentes, consulta de memória, pesquisa e inspeção de
+artefatos. O primário `marceloclaro` publica tarefas no **Blackboard (A2A)**,
+compartilha contexto pelo **MetaBus** e aplica contratos de entrega **SDD/TDD**.
+O roteamento usa componentes inspirados em atenção, com orçamento, prazo,
+cancelamento e estado persistido dos executores.
 
-O diagnóstico é estrutural por padrão; sua quantidade de checks consta no
-inventário acima. As evoluções R657/R658 acrescentam [consulta aos livros locais e integridade de dados para
-fine-tuning](docs/BIBLIOTECA_AI_R657.md). No OpenCode, use `/biblioteca tema`.
+As implementações recentes incluem o primário compartilhado entre as
+superfícies MCP, o transporte de prompts pela entrada padrão dos CLIs,
+workflows com checkpoints, custódia local RED/GREEN, visualização de memória,
+raciocínio por gramáticas restritas e o assistente REA com recibos por hash.
+O [guia de arquitetura R879](docs/ARQUITETURA_COMPLETA_CORE_R879.md) documenta
+as relações, os caminhos de falha e as fronteiras externas.
 
-O [Gemini Notebook na orquestração central](docs/GEMINI_NOTEBOOK_CORE.md)
-integra o catálogo CLI/MCP, a skill oficial e recibos operacionais. No OpenCode,
-use `/gemini-notebook`; pela CLI, `notebook --config ARQUIVO`.
+Instalação, configuração, autenticação, inferência e análise aceita são estados
+distintos. O [relatório de prontidão](docs/PRONTIDAO_LOCAL_CORE_R868.md) registra
+os caminhos demonstrados: inspeção REA direta controlada e uma tarefa textual
+coordenada pelo Codex. A análise REA autônoma conduzida pelo LLM local permanece
+sem entrega aceita nas tentativas registradas. A revisão humana continua
+necessária para conclusões científicas, editoriais e de domínio.
 
-R667–R671 acrescentam [Hermes/MiroFish externos, datasets por CLI e plugins
-científicos](docs/INTEGRACOES_CIENTIFICAS_R667_R671.md), com provas reais e
-[oito novos perfis](docs/AGENTES_R669.md), incluindo Live mirofish hermes.
+A biblioteca local, o Gemini Notebook e os plugins científicos têm seus próprios
+contratos: [biblioteca R657](docs/BIBLIOTECA_AI_R657.md),
+[Gemini Notebook](docs/GEMINI_NOTEBOOK_CORE.md) e
+[integrações científicas](docs/INTEGRACOES_CIENTIFICAS_R667_R671.md).
+O [navegador coordenado](docs/NAVEGADOR_REAL.md) utiliza ações explícitas e
+origens permitidas; cliques e preenchimentos podem produzir efeitos no site.
 
-R808 integra [REA à orquestração central](docs/REA.md): `/rea` usa o gateway
-`ecosystem_rea`, com evidência completa por hash e memória metacognitiva. A
-[revisão do ecossistema](docs/REVISAO_ECOSSISTEMA_R808.md) registra provas e limites.
-
-O [assistente REA local](docs/ASSISTENTE_REA_LOCAL.md) acrescenta inspeção em
-namespace de rede privado, explicação em português, recibos por hash e um site
-de instruções. Utilize `rea setup`, `rea inspect CAMINHO --format text` e
-`rea agent --check` pela CLI do primário. O perfil de conversa exige modelo em
-endpoint local; configuração não comprova inferência. `rea layers` mostra a
-prontidão das camadas, sem alegar que todas foram executadas.
-
-O [navegador coordenado](docs/NAVEGADOR_REAL.md) recebe ações explícitas por
-`marceloclaro.cli browser` ou `ecosystem_browser`, no gateway existente.
-Leitura e snapshot observam a página; preenchimento e clique podem produzir
-efeitos no site. Declare o efeito pretendido e as origens permitidas. A sessão
-isolada não herda logins do Chrome, e uma prova local não assegura acesso ou
-êxito em qualquer site.
-
-Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC-*.md`) **e só é concluída com testes verdes e prova física** — jamais "parece que funciona".
+Regra de entrega: especificar antes de implementar, executar os testes
+registrados e conservar a evidência e os limites do resultado.
 
 ## Capacidades principais
 
-| Área | O que entrega |
-|---|---|
-| 🔬 **Pesquisa open science** | OpenAlex, Crossref, EuropePMC e arXiv (`open_science_only`), failover auditável e recibos |
-| 🏭 **Fábrica de pesquisa** | `research_factory/`: pesquisar → revisar → analisar → agendar, com Reflexion |
-| 🧮 **Raciocínio formal** | Z3, SymPy, Kanren, verificadores Lean 4 / E‑Graph / AlphaGeometry |
-| 🎓 **Pipeline acadêmico** | Dissertações/artigos com rigor MASWOS, banca emulada (Reviewers 1–3), ABNT |
-| 📽️ **MIRA** | Apresentações e slides com animação, QR codes e validação de terços |
-| 🗣️ **Simulação social** | MiroFish‑Offline no Core: perfis determinísticos, rounds de opinião, sentimento e banca editorial — anti‑overclaim R110 |
-| ⚖️🩺 **Jurídico & Clínico** | Apoio computacional auditável em domínios sensíveis; Médico Virtual Supremo v3.0 com `audit.status` fail‑closed e revisão humana obrigatória |
-| 📚 **Produção editorial** | Trilogia de alfabetização (5 volumes + VolumeProfissional + CadernoMotor, R200‑R211) com fontes licenciadas e rastreio integrado de progressão |
-| 🏆 **Estudo de raciocínio** | Benchmark pareado IMO 9×3 (R500‑R506), réplicas auditáveis e artigos ABNT/arXiv/arXiv‑PT |
-| 📁 **Evidência de pesquisa** | Pesquisa real R522 (IA Generativa no Direito): manuscritos v20→v49, execução (OpenAlex + PDFs) e pacote de depósito OSF/Zenodo |
-| 🌐 **Deploy estático** | GitHub Pages com verificação física (GET+Range, 404 real, marcador de conteúdo) |
-| 🕸️ **Blackboard A2A** | Carrega Agent Cards do catálogo para matching de capacidades, CFP e roteamento. R596 registrou 157 cards como medição histórica; consulte o runtime para uma nova contagem. |
+| Área | Implementação e caminho de uso | Condição ou limite |
+|---|---|---|
+| Orquestração | `MarceloClaroOrchestrator`, Blackboard, MetaBus e `ecosystem-network` | CLI instalada não comprova autenticação ou execução |
+| Workflows | DAG com dependências, checkpoints e retomada | Execução sequencial; repetição de etapas falhas é explícita |
+| SDD/TDD | SpecRegistry, SpecVerifier, TDDRunner e histórico RED/GREEN autenticado | Critérios textuais e entrega de software possuem contratos distintos |
+| REA | Inspeção direta, explicação por recibo, camadas e MCP local | Formato, engine, licença e isolamento precisam ser conferidos |
+| Memória observável | Terminal animado e aba **Rede de memória** | Projeta registros existentes; não mostra a atenção interna do LLM |
+| Conhecimento e RAG | Busca científica, recuperação, referências e EvidenceGraph | Cobertura lexical e grafo não comprovam qualidade da resposta |
+| Raciocínio | Gramáticas restritas, SymPy, Z3 e integrações formais opcionais | Entrada recusada ou engine indisponível gera resultado tipado ou fallback |
+| Pesquisa e ciência | Fábrica de pesquisa, pipeline acadêmico e análise reproduzível | Proveniência, reexecução e revisão externa são verificações distintas |
+| Apresentações | MIRA, slides e artefatos visuais | Conformidade interna não avalia mérito científico |
+| Domínios jurídico e clínico | Integrações e contratos específicos | Apoio computacional com revisão humana; sem validação geral de uso |
+| Governança e evolução | TrustEngine, economia de tokens, federação e EvolutionRegistry | Registrar um ciclo não equivale a auditá-lo externamente |
 
 ---
 
 ## Início rápido local
 
+Para obter a revisão publicada nesta etapa, selecione a branch explicitamente.
+Python é necessário para o Core; a CI declara versões 3.10–3.14 e a verificação
+local documentada utilizou Python 3.14. Modelos, CLIs e engines externos exigem
+configuração própria.
+
 ```bash
-git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git
+git clone --branch codex/core-prontidao-rea https://github.com/MarceloClaro/opencode-ecosystem-core.git
 cd opencode-ecosystem-core
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 
-# 1. Saúde do ambiente (specs, registro, memória)
 .venv/bin/python -m marceloclaro.cli doctor
-
-# 2. Ajuda guiada
 .venv/bin/python -m marceloclaro.cli helpdesk
-
-# 3. Pesquisa científica
-.venv/bin/python -m marceloclaro.cli pesquisa "seu tema"
-
-# 4. Eficiência por operação (mediana/p90 dos guards e tools MCP)
-.venv/bin/python -m integrations.op_timing report      # ou /efficiency
 ```
+
+O `doctor` informa a sanidade estrutural e as dependências encontradas.
+Avisos de componentes opcionais devem ser interpretados por operação;
+inferência e autenticação requerem sondagem própria.
+
+Para utilizar as ferramentas TypeScript do OpenCode, use **Node 22** e o lockfile:
+
+```bash
+cd .opencode
+npm ci
+npm run typecheck
+cd ..
+```
+
+A configuração é compilada por
+`.venv/bin/python -m integrations.opencode_cli`; confira sua reprodução com
+`.venv/bin/python -m integrations.opencode_cli --check`.
+Perfis locais, memória de execução e evidências de alvos são arquivos privados
+e não são versionados; consulte [fontes reproduzíveis](docs/REPOSITORIO_REPRODUZIVEL.md).
+
+Para uma release formal, siga os controles de versão imutável e procedência da
+seção seguinte. O checkout de uma branch não constitui uma release com tag.
 
 ---
 
@@ -136,8 +157,9 @@ python3 -m venv .venv
 > Instalação **local e revisável** — nada é executado por pipe de rede. A
 > procedência combina versão imutável, commit Git e SHA-256 conferível.
 
-Obtenha de um manifesto de versão revisado (independente do canal de download)
-os valores a seguir, sem rótulos móveis:
+Os controles abaixo se aplicam a uma **release formal com tag e manifesto
+publicado**. Obtenha de um manifesto de versão revisado, independente do canal
+de download, os valores a seguir, sem rótulos móveis:
 
 | Dado | Formato exigido |
 |---|---|
@@ -181,18 +203,91 @@ Detalhes, requisitos e solução de problemas: [installer/README.md](installer/R
 
 ## Uso básico
 
-| Comando | O que faz |
+Execute os comandos na raiz, com o interpretador do ambiente do projeto.
+
+| Comando | Finalidade |
 |---|---|
 | `.venv/bin/python -m marceloclaro.cli` | Menu interativo principal |
-| `.venv/bin/python -m marceloclaro.cli doctor` | Diagnóstico estrutural; quantidade de checks no inventário acima |
+| `.venv/bin/python -m marceloclaro.cli doctor` | Diagnóstico estrutural |
+| `.venv/bin/python -m marceloclaro.cli doctor --live` | Sondas explícitas de HTTP, CLIs e exemplos internos |
+| `.venv/bin/python -m marceloclaro.cli network status` | Estado e última execução observada dos executores |
 | `.venv/bin/python -m marceloclaro.cli helpdesk` | Ajuda guiada |
-| `.venv/bin/python -m marceloclaro.cli pesquisa "tema"` | Pesquisa científica |
-| `.venv/bin/python -m marceloclaro.cli agent-register` | Auto‑registro dos agentes no Blackboard (A2A) |
-| `.venv/bin/python -m integrations.op_timing report` | Eficiência por operação |
-| `.venv/bin/python -m integrations.opencode_cli --check` | Consistência da configuração |
+| `.venv/bin/python -m marceloclaro.cli pesquisa "tema"` | Pesquisa científica conforme provedores disponíveis |
+| `.venv/bin/python -m marceloclaro.cli agent-register` | Registro dos agentes no Blackboard |
+| `.venv/bin/python -m integrations.op_timing report` | Tempos locais por operação |
+| `.venv/bin/python -m integrations.opencode_cli --check` | Consistência da configuração gerada |
 
-Manual completo em linguagem simples: [MANUAL.md](MANUAL.md) · Guia do agente:
-[CLAUDE.md](CLAUDE.md) · Primeiros passos: [quickstart.md](quickstart.md).
+Com o OpenCode CLI instalado e acessível, abra a raiz com `opencode`.
+A configuração seleciona `marceloclaro` como primário e oferece comandos como
+`/ecosystem`, `/rea` e `/biblioteca`. Instalação e modelo disponível devem ser
+conferidos antes de iniciar uma conversa.
+
+Tarefas coordenadas passam pelo primário. Informe uma especificação válida e
+respeite o contrato da superfície utilizada. O
+[guia de workflows](docs/WORKFLOWS_R644.md) explica orçamento, checkpoints e
+retomada. Autenticação e saldo de Claude, Codex ou Antigravity dependem do
+ambiente; o identificador `chatgpt` não controla o aplicativo ChatGPT.
+
+Manual: [MANUAL.md](MANUAL.md) · Guia do agente: [CLAUDE.md](CLAUDE.md) ·
+Primeiros passos: [quickstart.md](quickstart.md).
+
+## Engenharia reversa local REA
+
+O [assistente REA local](docs/ASSISTENTE_REA_LOCAL.md) permite inspecionar um
+artefato e explicar achados estáticos com fontes, digests e limitações.
+Configure o runtime e os engines indicados no guia antes de analisar um alvo.
+
+```bash
+.venv/bin/python -m marceloclaro.cli rea layers
+.venv/bin/python -m marceloclaro.cli rea inspect CAMINHO --kind auto --format text
+.venv/bin/python -m marceloclaro.cli rea explain RECIBO --format text
+```
+
+Substitua `CAMINHO` e `RECIBO` por arquivos locais. A operação direta `inspect`
+aplica namespaces de rede e PID ao worker analítico em Linux/WSL e recusa a
+execução quando o isolamento exigido está indisponível. A aplicação alvo não
+é executada. Isso não constitui uma sandbox universal de arquivos.
+
+Para configurar o perfil do agente, escolha um modelo já instalado e servido
+no endpoint local. O exemplo abaixo exige `llama3.2:latest` disponível no Ollama:
+
+```bash
+.venv/bin/python -m marceloclaro.cli rea setup --model llama3.2:latest --model-endpoint http://127.0.0.1:11434/v1
+.venv/bin/python -m marceloclaro.cli rea agent --check
+.venv/bin/python -m marceloclaro.cli rea site --port 8767
+```
+
+`agent --check` verifica configuração; não executa inferência. O cliente possui
+supervisão de processos e conserva a rede do host para acessar o modelo. Seu
+isolamento é diferente do worker analítico. O fluxo por prompt exige ferramenta
+concluída e recibo íntegro antes de publicar uma análise; texto livre não é achado.
+O modo interativo é exploratório e seu encerramento não comprova análise aceita.
+
+São **18 camadas declaradas**, com **11 percursos de inspeção pela ponte Core**
+no snapshot documentado. `analyze_binary` utiliza Ghidra; IDA, Hopper, JEB e
+outras superfícies dependem de runtimes, configuração e licenças próprias.
+A ponte legada `rea layer` não herda automaticamente o isolamento de `inspect`.
+Veja [camadas e contratos](docs/REA.md) e o
+[fluxograma REA](docs/architecture/flows/05-rea-provedores.svg).
+
+## Memória no terminal e painel
+
+```bash
+.venv/bin/python -m webapp.memory_network_visualizer
+.venv/bin/python -m webapp.memory_network_visualizer --once --json
+```
+
+A animação projeta consultas, agentes, memória, contexto, evidências e respostas
+registrados no MetaBus, Blackboard e grafos. Disponibilidade de um agente não
+significa atividade; `--demo` identifica dados fictícios. O visualizador não
+inicia inferência. Consulte [origem dos dados e limites](docs/REDE_MEMORIA_CORE.md).
+
+Para a aba **Rede de memória** no Streamlit:
+
+```bash
+.venv/bin/python -m pip install -r requirements-webapp.txt
+.venv/bin/python -m streamlit run webapp/app.py --server.address 127.0.0.1
+```
 
 ---
 
@@ -202,6 +297,40 @@ Esta seção dá uma **visão resumida** do ecossistema: primeiro um **snapshot
 histórico** (para preservar a documentação legada) e depois o **diagrama
 operacional atual** do runtime observável no checkout. O snapshot histórico é
 exatamente isso — um snapshot documental, **não é um inventário do checkout**.
+
+### Arquitetura completa e fluxogramas atuais
+
+[![Visão operacional do Core](docs/architecture/curated-overview.svg)](docs/ARQUITETURA_COMPLETA_CORE_R879.md)
+
+A edição **R879** descreve o snapshot de implementação `6380cfa`:
+**677 módulos Python próprios**, **935 pares de dependência**, **1.051
+importações internas declaradas**, **6.432 símbolos**, **9.672 arquivos
+classificados** e **13 fluxogramas com 78 âncoras de código**.
+
+| Artefato | Uso |
+|---|---|
+| [Mapa navegável](docs/architecture_map.html) | Busca por módulo/símbolo, zoom, fontes e visão por fluxo; abre localmente sem CDN |
+| [Guia minucioso](docs/ARQUITETURA_COMPLETA_CORE_R879.md) | Contratos, decisões, fronteiras e instruções de reprodução |
+| [Grafo completo SVG](docs/architecture/dependencies.svg) | Todos os módulos incluídos e seus pares internos; imagem vetorial para ampliar |
+| [Fonte DOT](docs/architecture/dependencies.dot) | Grafo editável por ferramentas Graphviz |
+| [Inventário JSON](docs/architecture/architecture-inventory.json) | Arquivos classificados, hashes, símbolos e imports |
+| [Catálogo dos fluxos](docs/architecture/flows.json) | Orquestração, workflows, SDD/TDD, REA, memória, RAG, raciocínio, diagnóstico, ciência e entrega |
+| [Recibo R879](docs/architecture/verification-local-r879.json) | Renderização, testes e navegação observados naquela edição |
+| [Revisão documental R880](docs/evidencias-readme-r880.json) | README atualizado e correção de nomenclatura MIRA na página do mapa |
+
+As arestas AST são dependências declaradas, não rastreamento de execução.
+Testes, templates, vendor, documentos e evidências históricas possuem categorias
+próprias. A extração usa blobs Git e não executa o código inventariado.
+
+Para abrir a página por HTTP local, opcionalmente:
+
+```bash
+.venv/bin/python -m http.server 8771 --bind 127.0.0.1 --directory docs
+```
+
+Acesse `http://127.0.0.1:8771/architecture_map.html`. A página também funciona
+como arquivo local. Os [mapas R433–R438](docs/MAPA_ARQUITETURA_R433_R438.md)
+permanecem como registro histórico.
 
 ### Mapa da Arquitetura Completa (v3.9.0)
 
@@ -278,14 +407,17 @@ Nada federado atesta qualidade; todo federado exige supervisão.
 
 ### Mapa dinâmico regenerável
 
-Além do snapshot histórico acima, o inventário vivo do checkout é gerado por
-`marceloclaro/ecosystem_map.py` (1402 nodos, 2217 vetores, 30 referências
-polímatas) em `maps/ecosystem_map_2026-07-06.json` e
-`MAPA_ECOSSISTEMA_COMPLETO_2026-07-06.md`. Regenere após mudanças com
-`python3 -c "from marceloclaro.ecosystem_map import save_ecosystem_map_artifacts; save_ecosystem_map_artifacts()"`.
-O CI segrega escopos com gates verdes obrigatórios (polímata, núcleo
-científico, config) em `.github/workflows/ci-escopos.yml`, com quarentena
-informativa das frentes com donos.
+`marceloclaro/ecosystem_map.py` também gera um inventário de componentes. Os
+arquivos `maps/ecosystem_map_2026-07-06.json` e
+`MAPA_ECOSSISTEMA_COMPLETO_2026-07-06.md` são fotografias históricas de julho;
+suas contagens não representam a edição R879. Para uma nova coleta, execute:
+
+```bash
+.venv/bin/python -c "from marceloclaro.ecosystem_map import save_ecosystem_map_artifacts; save_ecosystem_map_artifacts()"
+```
+
+Essa coleta possui escopo diferente do extrator Git/AST R879. Consulte o
+manifesto de cada resultado antes de comparar suas contagens.
 
 ### Fluxos multiárea do checkout atual
 
@@ -299,6 +431,9 @@ informativa das frentes com donos.
 | Universidade Sintética | `synthetic_university/core.py`, `combinatorial_engine.py`, `evolutionary_memory.py`, `mcp_server.py`, `api_gateway.py` |
 | Runtime local | `integrations/litert_lm.py`, `litert_lm_provider.py`, `litert_lm_supervisor.py`, `integrations/colibri_provider.py` (LiteRT‑LM on‑device e Colibri / OLMoE) |
 | Integridade e quality gates | `benchmarks/merkle_integrity_guard.py` (`MerkleIntegrityGuard`), `scripts/quality_report.py`, `installer/`, `benchmarks/scientific_reasoning/` |
+
+Visão conceitual de áreas: as setas abaixo não comprovam um pipeline
+sequencial executado entre esses domínios.
 
 ```mermaid
 flowchart TB
@@ -380,9 +515,9 @@ flowchart LR
 
 - **SDD**: nenhuma entrega sem `specs/SPEC-*.md` com critérios de aceitação.
 - **TDD**: testes primeiro (RED), implementação (GREEN), refatoração só com verde.
-- **Gates**: `SpecVerifier` + Trust Engine; entrega reprovada gera slashing de stake.
-- **Reflexion**: cada falha vira reflexão registrada **e lição semântica** no MetaBus.
-- **Evolução**: cada ciclo relevante é ancorado no `EvolutionRegistry` (ada de custódia, hash e cadeia HMAC).
+- **Gates**: `SpecVerifier` aplica o contrato; o primário integra confiança e economia conforme o resultado e a política.
+- **Reflexion**: eventos e reflexões registrados no MetaBus sustentam a revisão dos resultados.
+- **Evolução**: `EvolutionRegistry` conserva os ciclos; registro, hashes e auditoria externa são operações distintas.
 
 ---
 
@@ -404,26 +539,45 @@ flowchart LR
 
 ### Validação observada
 
-> Os números abaixo são **fotografia da execução local** (SPEC-935-R448 e
-> sucessoras) e **não constituem certificação externa**. Eles descrevem o que
-> foi observado **na sua máquina** usando este checkout e o que ficou
-> **disponíveis na sua máquina.** Uma nova revisão deve executar seus próprios
-> gates. **O git não transforma as fontes encontradas em evidência já revisada.**
+Os resultados abaixo são fotografias de **execução local**, com escopos
+identificados. Eles não constituem **certificação externa** nem comprovam
+execução de todas as integrações disponíveis na sua máquina.
 
-- Contratos documentais: `tests/test_r448_documentation_reconciliation.py`,
-  `tests/test_r449_readme_release.py`, `tests/test_r455_readme_historico_operacional.py`.
-- Recibo de validação local registrado em [VALIDATION_R448.md](VALIDATION_R448.md),
-  incluindo **quatro subtestes aprovados.** e o gate **SPEC-935-R448**.
-- Registro histórico do baseline R448 (Linux WSL2, Python 3.14.4):
-  `doctor` **18/20 checks** (0 falhas, 2 avisos de executores opcionais) e
-  suíte **4.539 passed, 67 skipped**.
-- Dependências de desenvolvimento: `.venv/bin/python -m pip install -r requirements-dev.txt`.
+| Registro | Resultado observado | Alcance |
+|---|---|---|
+| [Core R868/R869](docs/evidencias-r868/verificacao-final.json) | 7.204 casos físicos aprovados, 65 skips, zero falhas/erros | Suíte integral daquela revisão; 34 subtestes agregados separados das aprovações físicas |
+| [Arquitetura R879](docs/architecture/verification-local-r879.json) | 58 testes na invocação final, 13 renders Mermaid e 78 âncoras conferidas | Gerador, página, documentação e verificação de segredos; não repete a suíte integral |
+| [Orquestração real](docs/evidencias-r868/verificacao-final.json) | Codex retornou `15` para `8 + 7` em 9,303 s | Uma tarefa textual somente com leitura, sem alvo REA |
+| [Inspeção REA direta](docs/evidencias-r868/analise-direta-controlada.json) | HTML controlado de 115 bytes, dois achados, alvo intocado | Caminho direto local; não comprova todos os formatos ou engines |
+
+A análise REA autônoma pelo LLM local permanece sem entrega aceita nos registros.
+O lint global possui pendências. A CI remota não foi executada nesses recibos;
+o workflow principal atual acompanha push em `main`, `master` e `develop`,
+além do seu evento de pull request. Um push na branch `codex/*` não prova CI verde.
+
+**Histórico R448:** [VALIDATION_R448.md](VALIDATION_R448.md) conserva o gate
+**SPEC-935-R448**, em Linux WSL2/Python 3.14.4: `doctor` **18/20 checks**,
+**4.539 passed**, **67 skipped** e **quatro subtestes aprovados.** Esses números
+pertencem ao baseline histórico. O git não transforma as fontes encontradas em
+evidência já revisada.
+
+Para uma nova conferência, use o ambiente do projeto e registre seu próprio
+resultado. A suíte integral inclui integrações e componentes opcionais:
 
 ```bash
 .venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python -m pytest tests/ -q --tb=short --timeout=120
 .venv/bin/python -m marceloclaro.cli doctor
 ```
+
+A CI salva JUnit e o relatório reutiliza o XML, sem repetir a suíte:
+
+```bash
+.venv/bin/python scripts/quality_report.py --junit CAMINHO_DO_JUNIT
+```
+
+Quick e baterias somente com skips recebem `NOT_RUN`. Pontuação heurística,
+contagem de módulos e cobertura de autodescoberta não medem mérito externo.
 
 ### Contribuindo
 
@@ -458,6 +612,10 @@ Advisories** e **não abra issue pública** para vulnerabilidades.
 | [QUICKSTART.md](quickstart.md) | Iniciantes | Primeiros passos rápidos |
 | [MANUAL.md](MANUAL.md) | Todos | Uso completo da CLI, linguagem simples |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Desenvolvedores | Arquitetura técnica, camadas, fluxos |
+| [Arquitetura R879](docs/ARQUITETURA_COMPLETA_CORE_R879.md) | Operadores e desenvolvedores | Mapa completo, dependências, fluxogramas e fronteiras |
+| [Prontidão local](docs/PRONTIDAO_LOCAL_CORE_R868.md) | Operadores | Resultados executados e limitações por operação |
+| [Assistente REA](docs/ASSISTENTE_REA_LOCAL.md) | Operadores | Setup, engines, inspeção, MCP e limites de isolamento |
+| [Rede de memória](docs/REDE_MEMORIA_CORE.md) | Operadores | Terminal, painel e origem dos dados visualizados |
 | [CLAUDE.md](CLAUDE.md) | Agentes | Manual de operação para agentes |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Contribuidores | Como participar (spec → testes → PR) |
 | [SECURITY.md](SECURITY.md) | Segurança | Vulnerabilidades e política |
@@ -493,13 +651,17 @@ Links: [GitHub](https://github.com/MarceloClaro/opencode-ecosystem-core) ·
 
 Distribuído sob a [licença MIT](LICENSE).
 
-### Integridade operacional (2026-10-11)
+### Integridade operacional
 
-Escopos verdes com gate: polímata, núcleo científico e config reproduzível;
-`doctor` com 18 checks sem falha e 2 avisos de dependência externa. Frentes de
-livro, notebook avançado e benchmarks numéricos seguem em quarentena informativa
-no CI por escopos, com donos e causas mapeados. Métricas internas não implicam
-validação externa.
+O diagnóstico estrutural R868 registrou 22 checks aprovados, com alcance
+`installation_only`. Autenticação, inferência e execução de cada operação
+exigem seus próprios recibos. Configuração, memória privada, evidências de
+alvos e resultados locais completos ficam fora do Git conforme
+[as regras de reprodução](docs/REPOSITORIO_REPRODUZIVEL.md).
+
+A licença MIT do Core não atribui automaticamente licença a modelos,
+ferramentas comerciais ou artefatos federados. Consulte a procedência de cada
+componente. Métricas internas não implicam validação externa.
 
 ---
 
@@ -515,16 +677,3 @@ validação externa.
 **[⬆ voltar ao topo](#-opencode-ecosystem-core)**
 
 </div>
-
-## Arquitetura completa e fluxogramas atuais
-
-Explore o [mapa navegável R879](docs/architecture_map.html), com busca por módulo
-e símbolo, zoom, 13 fluxogramas e inventário completo do snapshot Git do Core.
-O [guia minucioso](docs/ARQUITETURA_COMPLETA_CORE_R879.md) registra fontes,
-fronteiras e instruções de reprodução. Estão disponíveis
-[SVG completo](docs/architecture/dependencies.svg),
-[fonte DOT](docs/architecture/dependencies.dot) e
-[inventário JSON](docs/architecture/architecture-inventory.json).
-As arestas AST representam imports declarados; os fluxos de CLI/MCP e seus
-gates possuem documentação própria. Contagens estáticas não medem qualidade
-em execução. O mapa R433–R438 continua disponível como registro histórico.

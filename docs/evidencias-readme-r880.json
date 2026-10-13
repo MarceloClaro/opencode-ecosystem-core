@@ -1,0 +1,37 @@
+{
+  "scope": "README update and visible MIRA catalog-agent caption in architecture page; documentation only",
+  "generated_at_utc": "2026-10-13T22:52:21.656762+00:00",
+  "base_documentation_commit": "28befdf5bc7794e82bf1c4c7402730424ecc20a2",
+  "architecture_code_snapshot": "6380cfaff4aac0dd940d42011826bb21126e5635",
+  "verification": {
+    "document_contracts_passed": 57,
+    "failed": 0,
+    "mermaid_charts_rendered": 6,
+    "renderer": "@mermaid-js/mermaid-cli 12.0.0",
+    "generated_configuration_blocks": "matching",
+    "local_links_missing": [],
+    "final_invocation_passed": 58,
+    "index_secret_scan": "passed"
+  },
+  "corrections": [
+    "README selects the published branch explicitly",
+    "release tag requirements separated from branch checkout",
+    "R869 full-suite evidence separated from R879 map checks",
+    "REA worker, client and legacy-layer isolation distinguished",
+    "old July map labelled historical",
+    "MIRA_AGENT_ID mira-presenter visibly named in generated architecture page"
+  ],
+  "artifact_sha256": {
+    "README.md": "0b160a603b316122ceeb7f082191cf1dbccfcae0bd8a1cb46f041ac94638fb01",
+    "docs/architecture_map.html": "5b53b42cf5ff64697b11ebfd6ea15fa47c786b90829ebbc859a0a6970c7b1bac",
+    "docs/architecture/viewer-template.html": "b98f67020523b78cbf2d444999b01207eedc25a03e69c201e2ac548ef04d7557"
+  },
+  "historical_receipts_rewritten": false,
+  "full_core_suite_rerun": false,
+  "new_inference_performed": false,
+  "externally_validated": false,
+  "limits": [
+    "Prior R879 receipt retains the hashes of its original artifact; current page hash is recorded here.",
+    "Local documentation checks do not establish external quality or successful inference."
+  ]
+}
